@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:block/fence_post",
+  "textures": {
+    "texture": "wizards_reborn:block/arcane_wood_planks"
+  }
+}

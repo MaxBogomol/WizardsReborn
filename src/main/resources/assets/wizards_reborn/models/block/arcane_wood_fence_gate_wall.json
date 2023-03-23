@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:block/template_fence_gate_wall",
+  "textures": {
+    "texture": "wizards_reborn:block/arcane_wood_planks"
+  }
+}

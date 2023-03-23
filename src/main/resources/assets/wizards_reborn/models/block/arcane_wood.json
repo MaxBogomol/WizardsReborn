@@ -1,0 +1,7 @@
+{
+  "parent": "minecraft:block/cube_column",
+  "textures": {
+    "end": "wizards_reborn:block/arcane_wood_log",
+    "side": "wizards_reborn:block/arcane_wood_log"
+  }
+}

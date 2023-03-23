@@ -1,0 +1,13 @@
+{
+  "variants": {
+    "type=bottom": {
+      "model": "wizards_reborn:block/arcane_wood_slab"
+    },
+    "type=double": {
+      "model": "wizards_reborn:block/arcane_wood_planks"
+    },
+    "type=top": {
+      "model": "wizards_reborn:block/arcane_wood_slab"
+    }
+  }
+}

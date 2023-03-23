@@ -1,0 +1,6 @@
+{
+  "parent": "wizards_reborn:item/handheld_large",
+  "textures": {
+    "layer0": "wizards_reborn:item/arcane_gold_scythe_in_hand"
+  }
+}

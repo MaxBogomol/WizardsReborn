@@ -1,0 +1,148 @@
+{
+  "variants": {
+    "variant=0": [
+      {
+        "model": "wizards_reborn:block/arcane_wood_leaves_0",
+        "weight": 3
+      },
+      {
+        "model": "wizards_reborn:block/arcane_wood_leaves_1"
+      }
+    ],
+    "variant=1": [
+      {
+        "model": "wizards_reborn:block/arcane_wood_leaves_1",
+        "weight": 3
+      },
+      {
+        "model": "wizards_reborn:block/arcane_wood_leaves_2"
+      }
+    ],
+    "variant=2": [
+      {
+        "model": "wizards_reborn:block/arcane_wood_leaves_2",
+        "weight": 3
+      },
+      {
+        "model": "wizards_reborn:block/arcane_wood_leaves_3"
+      }
+    ],
+    "variant=3": [
+      {
+        "model": "wizards_reborn:block/arcane_wood_leaves_3",
+        "weight": 3
+      },
+      {
+        "model": "wizards_reborn:block/arcane_wood_leaves_4"
+      }
+    ],
+    "variant=4": [
+      {
+        "model": "wizards_reborn:block/arcane_wood_leaves_4",
+        "weight": 3
+      },
+      {
+        "model": "wizards_reborn:block/arcane_wood_leaves_5"
+      }
+    ],
+    "variant=5": [
+      {
+        "model": "wizards_reborn:block/arcane_wood_leaves_5",
+        "weight": 3
+      },
+      {
+        "model": "wizards_reborn:block/arcane_wood_leaves_6"
+      }
+    ],
+    "variant=6": [
+      {
+        "model": "wizards_reborn:block/arcane_wood_leaves_6",
+        "weight": 3
+      },
+      {
+        "model": "wizards_reborn:block/arcane_wood_leaves_7"
+      }
+    ],
+    "variant=7": [
+      {
+        "model": "wizards_reborn:block/arcane_wood_leaves_7",
+        "weight": 3
+      },
+      {
+        "model": "wizards_reborn:block/arcane_wood_leaves_8"
+      }
+    ],
+    "variant=8": [
+      {
+        "model": "wizards_reborn:block/arcane_wood_leaves_8",
+        "weight": 3
+      },
+      {
+        "model": "wizards_reborn:block/arcane_wood_leaves_9"
+      }
+    ],
+    "variant=9": [
+      {
+        "model": "wizards_reborn:block/arcane_wood_leaves_9",
+        "weight": 3
+      },
+      {
+        "model": "wizards_reborn:block/arcane_wood_leaves_10"
+      }
+    ],
+    "variant=10": [
+      {
+        "model": "wizards_reborn:block/arcane_wood_leaves_10",
+        "weight": 3
+      },
+      {
+        "model": "wizards_reborn:block/arcane_wood_leaves_11"
+      }
+    ],
+    "variant=11": [
+      {
+        "model": "wizards_reborn:block/arcane_wood_leaves_11",
+        "weight": 3
+      },
+      {
+        "model": "wizards_reborn:block/arcane_wood_leaves_12"
+      }
+    ],
+    "variant=12": [
+      {
+        "model": "wizards_reborn:block/arcane_wood_leaves_12",
+        "weight": 3
+      },
+      {
+        "model": "wizards_reborn:block/arcane_wood_leaves_13"
+      }
+    ],
+    "variant=13": [
+      {
+        "model": "wizards_reborn:block/arcane_wood_leaves_13",
+        "weight": 3
+      },
+      {
+        "model": "wizards_reborn:block/arcane_wood_leaves_14"
+      }
+    ],
+    "variant=14": [
+      {
+        "model": "wizards_reborn:block/arcane_wood_leaves_14",
+        "weight": 3
+      },
+      {
+        "model": "wizards_reborn:block/arcane_wood_leaves_15"
+      }
+    ],
+    "variant=15": [
+      {
+        "model": "wizards_reborn:block/arcane_wood_leaves_15",
+        "weight": 3
+      },
+      {
+        "model": "wizards_reborn:block/arcane_wood_leaves_0"
+      }
+    ]
+  }
+}

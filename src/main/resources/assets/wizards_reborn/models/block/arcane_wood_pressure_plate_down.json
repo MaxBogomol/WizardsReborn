@@ -1,0 +1,6 @@
+{
+  "parent": "block/pressure_plate_down",
+  "textures": {
+    "texture": "wizards_reborn:block/arcane_wood_planks"
+  }
+}

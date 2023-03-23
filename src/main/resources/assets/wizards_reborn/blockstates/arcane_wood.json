@@ -1,0 +1,16 @@
+{
+  "variants": {
+    "axis=x": {
+      "model": "wizards_reborn:block/arcane_wood",
+      "x": 90,
+      "y": 90
+    },
+    "axis=y": {
+      "model": "wizards_reborn:block/arcane_wood"
+    },
+    "axis=z": {
+      "model": "wizards_reborn:block/arcane_wood",
+      "x": 90
+    }
+  }
+}
