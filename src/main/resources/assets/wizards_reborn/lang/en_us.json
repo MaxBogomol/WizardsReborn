@@ -11,6 +11,7 @@
   "item.wizards_reborn.arcane_gold_hoe": "Arcane Gold Hoe",
   "item.wizards_reborn.arcane_gold_scythe": "Arcane Gold Scythe",
   "item.wizards_reborn.arcanum": "Arcanum",
+  "item.wizards_reborn.arcanum_dust": "Arcanum Dust",
   "block.wizards_reborn.arcanum_block": "Arcanum Block",
   "block.wizards_reborn.arcanum_ore": "Arcanum Ore",
 
@@ -29,5 +30,19 @@
   "block.wizards_reborn.arcane_wood_button": "Arcane Wood Button",
   "block.wizards_reborn.arcane_wood_sign": "Arcane Wood Sign",
   "block.wizards_reborn.arcane_wood_wall_sign": "Arcane Wood Wall Sign",
-  "item.wizards_reborn.arcane_wood_boat": "Arcane Wood Boat"
+  "item.wizards_reborn.arcane_wood_boat": "Arcane Wood Boat",
+
+  "item.wizards_reborn.arcane_wand": "Arcane Wand",
+
+  "item.wizards_reborn.earth_crystal": "Earth Crystal",
+  "item.wizards_reborn.water_crystal": "Water Crystal",
+  "item.wizards_reborn.air_crystal": "Air Crystal",
+  "item.wizards_reborn.fire_crystal": "Fire Crystal",
+  "item.wizards_reborn.void_crystal": "Void Crystal",
+
+  "item.wizards_reborn.faceted_earth_crystal": "Faceted Earth Crystal",
+  "item.wizards_reborn.faceted_water_crystal": "Faceted Water Crystal",
+  "item.wizards_reborn.faceted_air_crystal": "Faceted Air Crystal",
+  "item.wizards_reborn.faceted_fire_crystal": "Faceted Fire Crystal",
+  "item.wizards_reborn.faceted_void_crystal": "Faceted Void Crystal"
 }
