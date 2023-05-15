@@ -1,4 +1,4 @@
-package mod.maxbogomol.wizards_reborn.common.item;
+package mod.maxbogomol.wizards_reborn.common.item.equipment;
 
 import mod.maxbogomol.wizards_reborn.WizardsReborn;
 import net.minecraft.item.IItemTier;

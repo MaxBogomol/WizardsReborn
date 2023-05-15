@@ -6,10 +6,13 @@ import mod.maxbogomol.wizards_reborn.client.render.model.item.*;
 import mod.maxbogomol.wizards_reborn.common.block.ArcaneWoodStandingSignBlock;
 import mod.maxbogomol.wizards_reborn.common.block.ArcaneWoodWallSignBlock;
 import mod.maxbogomol.wizards_reborn.common.entity.CustomBoatEntity;
-import mod.maxbogomol.wizards_reborn.common.item.ArcaneGoldTier;
+import mod.maxbogomol.wizards_reborn.common.item.CrystalItem;
+import mod.maxbogomol.wizards_reborn.common.item.equipment.ArcaneGoldTier;
 import mod.maxbogomol.wizards_reborn.common.item.CustomBoatItem;
+import mod.maxbogomol.wizards_reborn.common.item.equipment.ArcaneWandItem;
+import mod.maxbogomol.wizards_reborn.common.network.PacketHandler;
 import mod.maxbogomol.wizards_reborn.common.tileentity.ArcaneWoodSignTileEntity;
-import mod.maxbogomol.wizards_reborn.itemgroup.WizardsRebornItemGroup;
+import mod.maxbogomol.wizards_reborn.common.itemgroup.WizardsRebornItemGroup;
 import net.minecraft.block.*;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.Atlases;
@@ -19,6 +22,8 @@ import net.minecraft.client.renderer.model.IBakedModel;
 import net.minecraft.client.renderer.model.ModelManager;
 import net.minecraft.client.renderer.model.ModelResourceLocation;
 import net.minecraft.client.renderer.tileentity.SignTileEntityRenderer;
+import net.minecraft.client.settings.KeyBinding;
+import net.minecraft.client.util.InputMappings;
 import net.minecraft.entity.EntityClassification;
 import net.minecraft.entity.EntityType;
 import net.minecraft.item.*;
@@ -27,6 +32,7 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.client.event.ModelBakeEvent;
 import net.minecraftforge.client.event.ModelRegistryEvent;
 import net.minecraftforge.client.model.ModelLoader;
+import net.minecraftforge.client.settings.KeyConflictContext;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.eventbus.api.IEventBus;
@@ -46,6 +52,7 @@ import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.lwjgl.glfw.GLFW;
 import top.theillusivec4.curios.api.CuriosApi;
 import top.theillusivec4.curios.api.SlotTypeMessage;
 import top.theillusivec4.curios.api.SlotTypePreset;
@@ -124,43 +131,46 @@ public class WizardsReborn
     public static final RegistryObject<Item> ARCANE_WOOD_SIGN_ITEM = ITEMS.register("arcane_wood_sign", () -> new SignItem(new Item.Properties().maxStackSize(16).group(WIZARDS_REBORN_GROUP),ARCANE_WOOD_SIGN.get(), ARCANE_WOOD_WALL_SIGN.get()));
     public static final RegistryObject<Item> ARCANE_WOOD_BOAT_ITEM = ITEMS.register("arcane_wood_boat", () -> new CustomBoatItem(new Item.Properties().maxStackSize(1).group(WIZARDS_REBORN_GROUP), "arcane_wood"));
 
-    public static final RegistryObject<Item> ARCANE_WAND = ITEMS.register("arcane_wand", () -> new Item(new Item.Properties().group(WIZARDS_REBORN_GROUP)));
+    public static final RegistryObject<Item> ARCANE_WAND = ITEMS.register("arcane_wand", () -> new ArcaneWandItem(new Item.Properties().group(WIZARDS_REBORN_GROUP)));
 
-    public static final RegistryObject<Item> EARTH_CRYSTAL = ITEMS.register("earth_crystal", () -> new Item(new Item.Properties().group(WIZARDS_REBORN_GROUP)));
-    public static final RegistryObject<Item> WATER_CRYSTAL = ITEMS.register("water_crystal", () -> new Item(new Item.Properties().group(WIZARDS_REBORN_GROUP)));
-    public static final RegistryObject<Item> AIR_CRYSTAL = ITEMS.register("air_crystal", () -> new Item(new Item.Properties().group(WIZARDS_REBORN_GROUP)));
-    public static final RegistryObject<Item> FIRE_CRYSTAL = ITEMS.register("fire_crystal", () -> new Item(new Item.Properties().group(WIZARDS_REBORN_GROUP)));
-    public static final RegistryObject<Item> VOID_CRYSTAL = ITEMS.register("void_crystal", () -> new Item(new Item.Properties().group(WIZARDS_REBORN_GROUP)));
+    public static final RegistryObject<Item> EARTH_CRYSTAL = ITEMS.register("earth_crystal", () -> new CrystalItem(new Item.Properties().group(WIZARDS_REBORN_GROUP)));
+    public static final RegistryObject<Item> WATER_CRYSTAL = ITEMS.register("water_crystal", () -> new CrystalItem(new Item.Properties().group(WIZARDS_REBORN_GROUP)));
+    public static final RegistryObject<Item> AIR_CRYSTAL = ITEMS.register("air_crystal", () -> new CrystalItem(new Item.Properties().group(WIZARDS_REBORN_GROUP)));
+    public static final RegistryObject<Item> FIRE_CRYSTAL = ITEMS.register("fire_crystal", () -> new CrystalItem(new Item.Properties().group(WIZARDS_REBORN_GROUP)));
+    public static final RegistryObject<Item> VOID_CRYSTAL = ITEMS.register("void_crystal", () -> new CrystalItem(new Item.Properties().group(WIZARDS_REBORN_GROUP)));
 
-    public static final RegistryObject<Item> FACETED_EARTH_CRYSTAL = ITEMS.register("faceted_earth_crystal", () -> new Item(new Item.Properties().group(WIZARDS_REBORN_GROUP)));
-    public static final RegistryObject<Item> FACETED_WATER_CRYSTAL = ITEMS.register("faceted_water_crystal", () -> new Item(new Item.Properties().group(WIZARDS_REBORN_GROUP)));
-    public static final RegistryObject<Item> FACETED_AIR_CRYSTAL = ITEMS.register("faceted_air_crystal", () -> new Item(new Item.Properties().group(WIZARDS_REBORN_GROUP)));
-    public static final RegistryObject<Item> FACETED_FIRE_CRYSTAL = ITEMS.register("faceted_fire_crystal", () -> new Item(new Item.Properties().group(WIZARDS_REBORN_GROUP)));
-    public static final RegistryObject<Item> FACETED_VOID_CRYSTAL = ITEMS.register("faceted_void_crystal", () -> new Item(new Item.Properties().group(WIZARDS_REBORN_GROUP)));
+    public static final RegistryObject<Item> FACETED_EARTH_CRYSTAL = ITEMS.register("faceted_earth_crystal", () -> new CrystalItem(new Item.Properties().group(WIZARDS_REBORN_GROUP)));
+    public static final RegistryObject<Item> FACETED_WATER_CRYSTAL = ITEMS.register("faceted_water_crystal", () -> new CrystalItem(new Item.Properties().group(WIZARDS_REBORN_GROUP)));
+    public static final RegistryObject<Item> FACETED_AIR_CRYSTAL = ITEMS.register("faceted_air_crystal", () -> new CrystalItem(new Item.Properties().group(WIZARDS_REBORN_GROUP)));
+    public static final RegistryObject<Item> FACETED_FIRE_CRYSTAL = ITEMS.register("faceted_fire_crystal", () -> new CrystalItem(new Item.Properties().group(WIZARDS_REBORN_GROUP)));
+    public static final RegistryObject<Item> FACETED_VOID_CRYSTAL = ITEMS.register("faceted_void_crystal", () -> new CrystalItem(new Item.Properties().group(WIZARDS_REBORN_GROUP)));
 
-    public static final RegistryObject<Item> ADVANCED_EARTH_CRYSTAL = ITEMS.register("advanced_earth_crystal", () -> new Item(new Item.Properties().group(WIZARDS_REBORN_GROUP)));
-    public static final RegistryObject<Item> ADVANCED_WATER_CRYSTAL = ITEMS.register("advanced_water_crystal", () -> new Item(new Item.Properties().group(WIZARDS_REBORN_GROUP)));
-    public static final RegistryObject<Item> ADVANCED_AIR_CRYSTAL = ITEMS.register("advanced_air_crystal", () -> new Item(new Item.Properties().group(WIZARDS_REBORN_GROUP)));
-    public static final RegistryObject<Item> ADVANCED_FIRE_CRYSTAL = ITEMS.register("advanced_fire_crystal", () -> new Item(new Item.Properties().group(WIZARDS_REBORN_GROUP)));
-    public static final RegistryObject<Item> ADVANCED_VOID_CRYSTAL = ITEMS.register("advanced_void_crystal", () -> new Item(new Item.Properties().group(WIZARDS_REBORN_GROUP)));
+    public static final RegistryObject<Item> ADVANCED_EARTH_CRYSTAL = ITEMS.register("advanced_earth_crystal", () -> new CrystalItem(new Item.Properties().group(WIZARDS_REBORN_GROUP)));
+    public static final RegistryObject<Item> ADVANCED_WATER_CRYSTAL = ITEMS.register("advanced_water_crystal", () -> new CrystalItem(new Item.Properties().group(WIZARDS_REBORN_GROUP)));
+    public static final RegistryObject<Item> ADVANCED_AIR_CRYSTAL = ITEMS.register("advanced_air_crystal", () -> new CrystalItem(new Item.Properties().group(WIZARDS_REBORN_GROUP)));
+    public static final RegistryObject<Item> ADVANCED_FIRE_CRYSTAL = ITEMS.register("advanced_fire_crystal", () -> new CrystalItem(new Item.Properties().group(WIZARDS_REBORN_GROUP)));
+    public static final RegistryObject<Item> ADVANCED_VOID_CRYSTAL = ITEMS.register("advanced_void_crystal", () -> new CrystalItem(new Item.Properties().group(WIZARDS_REBORN_GROUP)));
 
-    public static final RegistryObject<Item> MASTERFUL_EARTH_CRYSTAL = ITEMS.register("masterful_earth_crystal", () -> new Item(new Item.Properties().group(WIZARDS_REBORN_GROUP)));
-    public static final RegistryObject<Item> MASTERFUL_WATER_CRYSTAL = ITEMS.register("masterful_water_crystal", () -> new Item(new Item.Properties().group(WIZARDS_REBORN_GROUP)));
-    public static final RegistryObject<Item> MASTERFUL_AIR_CRYSTAL = ITEMS.register("masterful_air_crystal", () -> new Item(new Item.Properties().group(WIZARDS_REBORN_GROUP)));
-    public static final RegistryObject<Item> MASTERFUL_FIRE_CRYSTAL = ITEMS.register("masterful_fire_crystal", () -> new Item(new Item.Properties().group(WIZARDS_REBORN_GROUP)));
-    public static final RegistryObject<Item> MASTERFUL_VOID_CRYSTAL = ITEMS.register("masterful_void_crystal", () -> new Item(new Item.Properties().group(WIZARDS_REBORN_GROUP)));
+    public static final RegistryObject<Item> MASTERFUL_EARTH_CRYSTAL = ITEMS.register("masterful_earth_crystal", () -> new CrystalItem(new Item.Properties().group(WIZARDS_REBORN_GROUP)));
+    public static final RegistryObject<Item> MASTERFUL_WATER_CRYSTAL = ITEMS.register("masterful_water_crystal", () -> new CrystalItem(new Item.Properties().group(WIZARDS_REBORN_GROUP)));
+    public static final RegistryObject<Item> MASTERFUL_AIR_CRYSTAL = ITEMS.register("masterful_air_crystal", () -> new CrystalItem(new Item.Properties().group(WIZARDS_REBORN_GROUP)));
+    public static final RegistryObject<Item> MASTERFUL_FIRE_CRYSTAL = ITEMS.register("masterful_fire_crystal", () -> new CrystalItem(new Item.Properties().group(WIZARDS_REBORN_GROUP)));
+    public static final RegistryObject<Item> MASTERFUL_VOID_CRYSTAL = ITEMS.register("masterful_void_crystal", () -> new CrystalItem(new Item.Properties().group(WIZARDS_REBORN_GROUP)));
 
-    public static final RegistryObject<Item> PURE_EARTH_CRYSTAL = ITEMS.register("pure_earth_crystal", () -> new Item(new Item.Properties().group(WIZARDS_REBORN_GROUP)));
-    public static final RegistryObject<Item> PURE_WATER_CRYSTAL = ITEMS.register("pure_water_crystal", () -> new Item(new Item.Properties().group(WIZARDS_REBORN_GROUP)));
-    public static final RegistryObject<Item> PURE_AIR_CRYSTAL = ITEMS.register("pure_air_crystal", () -> new Item(new Item.Properties().group(WIZARDS_REBORN_GROUP)));
-    public static final RegistryObject<Item> PURE_FIRE_CRYSTAL = ITEMS.register("pure_fire_crystal", () -> new Item(new Item.Properties().group(WIZARDS_REBORN_GROUP)));
-    public static final RegistryObject<Item> PURE_VOID_CRYSTAL = ITEMS.register("pure_void_crystal", () -> new Item(new Item.Properties().group(WIZARDS_REBORN_GROUP)));
+    public static final RegistryObject<Item> PURE_EARTH_CRYSTAL = ITEMS.register("pure_earth_crystal", () -> new CrystalItem(new Item.Properties().group(WIZARDS_REBORN_GROUP)));
+    public static final RegistryObject<Item> PURE_WATER_CRYSTAL = ITEMS.register("pure_water_crystal", () -> new CrystalItem(new Item.Properties().group(WIZARDS_REBORN_GROUP)));
+    public static final RegistryObject<Item> PURE_AIR_CRYSTAL = ITEMS.register("pure_air_crystal", () -> new CrystalItem(new Item.Properties().group(WIZARDS_REBORN_GROUP)));
+    public static final RegistryObject<Item> PURE_FIRE_CRYSTAL = ITEMS.register("pure_fire_crystal", () -> new CrystalItem(new Item.Properties().group(WIZARDS_REBORN_GROUP)));
+    public static final RegistryObject<Item> PURE_VOID_CRYSTAL = ITEMS.register("pure_void_crystal", () -> new CrystalItem(new Item.Properties().group(WIZARDS_REBORN_GROUP)));
 
     //TILE_ENTITIES
     public static final RegistryObject<TileEntityType<ArcaneWoodSignTileEntity>> ARCANE_WOOD_SIGN_TILE_ENTITY = TILE_ENTITIES.register("arcane_wood_sign", () -> TileEntityType.Builder.create(ArcaneWoodSignTileEntity::new, ARCANE_WOOD_SIGN.get(), ARCANE_WOOD_WALL_SIGN.get()).build(null));
 
     //ENTITIES
     public static final RegistryObject<EntityType<CustomBoatEntity>> ARCANE_WOOD_BOAT = ENTITIES.register("arcane_wood_boat", () -> EntityType.Builder.<CustomBoatEntity>create(CustomBoatEntity::new, EntityClassification.MISC).size(1.375f, 0.5625f).build(new ResourceLocation(MOD_ID, "arcane_wood_boat").toString()));
+
+    private static final String CATEGORY_KEY = "key.category."+MOD_ID+".general";
+    public static final KeyBinding OPEN_WAND_SELECTION_KEY = new KeyBinding("key."+MOD_ID+".selection_hud", KeyConflictContext.IN_GAME, InputMappings.Type.KEYSYM, GLFW.GLFW_KEY_V, CATEGORY_KEY);
 
     public WizardsReborn() {
         InterModComms.sendTo(CuriosApi.MODID, SlotTypeMessage.REGISTER_TYPE,
@@ -195,6 +205,8 @@ public class WizardsReborn
 
     private void setup(final FMLCommonSetupEvent event)
     {
+        PacketHandler.init();
+
         event.enqueueWork(() -> {
             AxeItem.BLOCK_STRIPPING_MAP = new ImmutableMap.Builder<Block, Block>().putAll(AxeItem.BLOCK_STRIPPING_MAP)
                     .put(ARCANE_WOOD_LOG.get(), STRIPPED_ARCANE_WOOD_LOG.get())
@@ -203,9 +215,7 @@ public class WizardsReborn
     }
 
     private void clientSetup(final FMLClientSetupEvent event) {
-        event.enqueueWork(() -> {
-            setupWandCrystalsModels();
-        });
+
     }
 
     private void enqueueIMC(final InterModEnqueueEvent event)
@@ -307,6 +317,10 @@ public class WizardsReborn
             event.getModelRegistry().put(wandResourceLocation, customModel);
 
             Item2DRenderer.onModelBakeEvent(event);
+        }
+        @SubscribeEvent
+        public static void registerKeyBindings(final FMLClientSetupEvent event) {
+            ClientRegistry.registerKeyBinding(OPEN_WAND_SELECTION_KEY);
         }
     }
 }

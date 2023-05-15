@@ -1,0 +1,62 @@
+package mod.maxbogomol.wizards_reborn.common.item.equipment;
+
+import mod.maxbogomol.wizards_reborn.common.item.ItemBackedInventory;
+import net.minecraft.entity.Entity;
+import net.minecraft.inventory.Inventory;
+import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.CompoundNBT;
+import net.minecraft.util.Direction;
+import net.minecraft.world.World;
+import net.minecraftforge.common.capabilities.Capability;
+import net.minecraftforge.common.capabilities.ICapabilityProvider;
+import net.minecraftforge.common.util.LazyOptional;
+import net.minecraftforge.items.CapabilityItemHandler;
+import net.minecraftforge.items.IItemHandler;
+import net.minecraftforge.items.wrapper.InvWrapper;
+
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
+
+public class ArcaneWandItem extends Item {
+    public ArcaneWandItem(Properties properties) {
+        super(properties);
+    }
+
+    public static Inventory getInventory(ItemStack stack) {
+        return new ItemBackedInventory(stack, 1);
+    }
+
+    @Nonnull
+    @Override
+    public ICapabilityProvider initCapabilities(ItemStack stack, CompoundNBT oldCapNbt) {
+        return new InvProvider(stack);
+    }
+
+    private static class InvProvider implements ICapabilityProvider {
+        private final LazyOptional<IItemHandler> opt;
+
+        public InvProvider(ItemStack stack) {
+            opt = LazyOptional.of(() -> new InvWrapper(getInventory(stack)));
+        }
+
+        @Nonnull
+        @Override
+        public <T> LazyOptional<T> getCapability(@Nonnull Capability<T> capability, @Nullable Direction facing) {
+            return CapabilityItemHandler.ITEM_HANDLER_CAPABILITY.orEmpty(capability, opt);
+        }
+    }
+
+    @Override
+    public void inventoryTick(ItemStack stack, World world, Entity entity, int slot, boolean isSelected) {
+        if (!world.isRemote()) {
+            CompoundNBT nbt = stack.getTag();
+            if (nbt == null) {
+                nbt = new CompoundNBT();
+                nbt.putBoolean("crystal", false);
+                Inventory item = getInventory(stack);
+                stack.setTag(nbt);
+            }
+        }
+    }
+}
