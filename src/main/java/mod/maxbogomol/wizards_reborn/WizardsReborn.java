@@ -2,7 +2,7 @@ package mod.maxbogomol.wizards_reborn;
 
 import com.google.common.collect.ImmutableMap;
 import mod.maxbogomol.wizards_reborn.client.render.model.entity.ArcaneWoodBoatModel;
-import mod.maxbogomol.wizards_reborn.client.render.model.item.Item2DRenderer;
+import mod.maxbogomol.wizards_reborn.client.render.model.item.*;
 import mod.maxbogomol.wizards_reborn.common.block.ArcaneWoodStandingSignBlock;
 import mod.maxbogomol.wizards_reborn.common.block.ArcaneWoodWallSignBlock;
 import mod.maxbogomol.wizards_reborn.common.entity.CustomBoatEntity;
@@ -11,9 +11,12 @@ import mod.maxbogomol.wizards_reborn.common.item.CustomBoatItem;
 import mod.maxbogomol.wizards_reborn.common.tileentity.ArcaneWoodSignTileEntity;
 import mod.maxbogomol.wizards_reborn.itemgroup.WizardsRebornItemGroup;
 import net.minecraft.block.*;
+import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.Atlases;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.RenderTypeLookup;
+import net.minecraft.client.renderer.model.IBakedModel;
+import net.minecraft.client.renderer.model.ModelManager;
 import net.minecraft.client.renderer.model.ModelResourceLocation;
 import net.minecraft.client.renderer.tileentity.SignTileEntityRenderer;
 import net.minecraft.entity.EntityClassification;
@@ -180,9 +183,12 @@ public class WizardsReborn
         TILE_ENTITIES.register(eventBus);
         ENTITIES.register(eventBus);
 
-        FMLJavaModLoadingContext.get().getModEventBus().addListener(this::setup);
-        FMLJavaModLoadingContext.get().getModEventBus().addListener(this::enqueueIMC);
-        FMLJavaModLoadingContext.get().getModEventBus().addListener(this::processIMC);
+        setupWandCrystalsModels();
+
+        eventBus.addListener(this::setup);
+        eventBus.addListener(this::clientSetup);
+        eventBus.addListener(this::enqueueIMC);
+        eventBus.addListener(this::processIMC);
 
         MinecraftForge.EVENT_BUS.register(this);
     }
@@ -193,6 +199,12 @@ public class WizardsReborn
             AxeItem.BLOCK_STRIPPING_MAP = new ImmutableMap.Builder<Block, Block>().putAll(AxeItem.BLOCK_STRIPPING_MAP)
                     .put(ARCANE_WOOD_LOG.get(), STRIPPED_ARCANE_WOOD_LOG.get())
                     .put(ARCANE_WOOD.get(), STRIPPED_ARCANE_WOOD.get()).build();
+        });
+    }
+
+    private void clientSetup(final FMLClientSetupEvent event) {
+        event.enqueueWork(() -> {
+            setupWandCrystalsModels();
         });
     }
 
@@ -214,6 +226,38 @@ public class WizardsReborn
     public void onServerStarting(FMLServerStartingEvent event) {
         // do something when the server starts
         LOGGER.info("HELLO from server starting");
+    }
+
+    public static void setupWandCrystalsModels() {
+        WandCrystalsModels.addCrystal(MOD_ID+":earth_crystal");
+        WandCrystalsModels.addCrystal(MOD_ID+":water_crystal");
+        WandCrystalsModels.addCrystal(MOD_ID+":air_crystal");
+        WandCrystalsModels.addCrystal(MOD_ID+":fire_crystal");
+        WandCrystalsModels.addCrystal(MOD_ID+":void_crystal");
+
+        WandCrystalsModels.addCrystal(MOD_ID+":faceted_earth_crystal");
+        WandCrystalsModels.addCrystal(MOD_ID+":faceted_water_crystal");
+        WandCrystalsModels.addCrystal(MOD_ID+":faceted_air_crystal");
+        WandCrystalsModels.addCrystal(MOD_ID+":faceted_fire_crystal");
+        WandCrystalsModels.addCrystal(MOD_ID+":faceted_void_crystal");
+
+        WandCrystalsModels.addCrystal(MOD_ID+":advanced_earth_crystal");
+        WandCrystalsModels.addCrystal(MOD_ID+":advanced_water_crystal");
+        WandCrystalsModels.addCrystal(MOD_ID+":advanced_air_crystal");
+        WandCrystalsModels.addCrystal(MOD_ID+":advanced_fire_crystal");
+        WandCrystalsModels.addCrystal(MOD_ID+":advanced_void_crystal");
+
+        WandCrystalsModels.addCrystal(MOD_ID+":masterful_earth_crystal");
+        WandCrystalsModels.addCrystal(MOD_ID+":masterful_water_crystal");
+        WandCrystalsModels.addCrystal(MOD_ID+":masterful_air_crystal");
+        WandCrystalsModels.addCrystal(MOD_ID+":masterful_fire_crystal");
+        WandCrystalsModels.addCrystal(MOD_ID+":masterful_void_crystal");
+
+        WandCrystalsModels.addCrystal(MOD_ID+":pure_earth_crystal");
+        WandCrystalsModels.addCrystal(MOD_ID+":pure_water_crystal");
+        WandCrystalsModels.addCrystal(MOD_ID+":pure_air_crystal");
+        WandCrystalsModels.addCrystal(MOD_ID+":pure_fire_crystal");
+        WandCrystalsModels.addCrystal(MOD_ID+":pure_void_crystal");
     }
 
     // You can use EventBusSubscriber to automatically subscribe events on the contained class (this is subscribing to the MOD
@@ -239,6 +283,9 @@ public class WizardsReborn
 
         @SubscribeEvent
         public static void onModelRegistryEvent(ModelRegistryEvent event) {
+            for (String crystal : WandCrystalsModels.getCrystals()) {
+                ModelLoader.addSpecialModel(WandCrystalsModels.getModelLocationCrystal(crystal));
+            }
             for (String item : Item2DRenderer.HAND_MODEL_ITEMS) {
                 ModelLoader.addSpecialModel(new ModelResourceLocation(MOD_ID+":" + item + "_in_hand", "inventory"));
             }
@@ -246,6 +293,19 @@ public class WizardsReborn
         @SubscribeEvent
         public static void onModelBakeEvent(ModelBakeEvent event)
         {
+            ResourceLocation wandResourceLocation =  new ModelResourceLocation("wizards_reborn:arcane_wand", "inventory");
+            ModelManager manager = Minecraft.getInstance().getModelManager();
+            IBakedModel existingModel = manager.getModel(wandResourceLocation);
+
+            for (String crystal : WandCrystalsModels.getCrystals()) {
+                IBakedModel model = manager.getModel(WandCrystalsModels.getModelLocationCrystal(crystal));
+                WandCrystalsModels.addModelCrystals(crystal, model);
+                model = new CustomFinalisedModel(existingModel, WandCrystalsModels.getModelCrystals(crystal));
+                WandCrystalsModels.addModel(crystal, model);
+            }
+            CustomModel customModel = new CustomModel(existingModel, new WandModelOverrideList());
+            event.getModelRegistry().put(wandResourceLocation, customModel);
+
             Item2DRenderer.onModelBakeEvent(event);
         }
     }
