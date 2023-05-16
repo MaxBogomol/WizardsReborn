@@ -1,0 +1,60 @@
+{
+	"credit": "Made with Blockbench",
+	"parent": "minecraft:block/block",
+	"textures": {
+		"0": "wizards_reborn:block/arcane_pedestal_mid",
+		"1": "wizards_reborn:block/arcane_pedestal_bottom",
+		"2": "wizards_reborn:block/arcane_pedestal_top",
+		"particle": "wizards_reborn:block/arcane_wood_planks"
+	},
+	"elements": [
+		{
+			"from": [2, 0, 2],
+			"to": [14, 2, 14],
+			"faces": {
+				"north": {"uv": [0, 9, 12, 11], "texture": "#0"},
+				"east": {"uv": [0, 9, 12, 11], "texture": "#0"},
+				"south": {"uv": [0, 9, 12, 11], "texture": "#0"},
+				"west": {"uv": [0, 9, 12, 11], "texture": "#0"},
+				"up": {"uv": [0, 0, 12, 12], "texture": "#2"},
+				"down": {"uv": [0, 0, 12, 12], "texture": "#1"}
+			}
+		},
+		{
+			"from": [4, 2, 4],
+			"to": [12, 11, 12],
+			"faces": {
+				"north": {"uv": [0, 0, 8, 9], "texture": "#0"},
+				"east": {"uv": [0, 0, 8, 9], "texture": "#0"},
+				"south": {"uv": [0, 0, 8, 9], "texture": "#0"},
+				"west": {"uv": [0, 0, 8, 9], "texture": "#0"},
+				"up": {"uv": [8, 0, 16, 8], "texture": "#0"},
+				"down": {"uv": [8, 0, 16, 8], "texture": "#0"}
+			}
+		},
+		{
+			"from": [2, 11, 2],
+			"to": [14, 13, 14],
+			"faces": {
+				"north": {"uv": [0, 9, 12, 11], "texture": "#0"},
+				"east": {"uv": [0, 9, 12, 11], "texture": "#0"},
+				"south": {"uv": [0, 9, 12, 11], "texture": "#0"},
+				"west": {"uv": [0, 9, 12, 11], "texture": "#0"},
+				"up": {"uv": [0, 0, 12, 12], "texture": "#2"},
+				"down": {"uv": [0, 0, 12, 12], "texture": "#1"}
+			}
+		},
+		{
+			"from": [5, 13, 5],
+			"to": [11, 14, 11],
+			"faces": {
+				"north": {"uv": [3, 9, 9, 10], "texture": "#0"},
+				"east": {"uv": [3, 9, 9, 10], "texture": "#0"},
+				"south": {"uv": [3, 9, 9, 10], "texture": "#0"},
+				"west": {"uv": [3, 9, 9, 10], "texture": "#0"},
+				"up": {"uv": [3, 3, 9, 9], "texture": "#2"},
+				"down": {"uv": [3, 3, 9, 9], "texture": "#1"}
+			}
+		}
+	]
+}

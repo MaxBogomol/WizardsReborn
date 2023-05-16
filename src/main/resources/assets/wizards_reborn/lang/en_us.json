@@ -62,5 +62,7 @@
   "item.wizards_reborn.pure_water_crystal": "Pure Water Crystal",
   "item.wizards_reborn.pure_air_crystal": "Pure Air Crystal",
   "item.wizards_reborn.pure_fire_crystal": "Pure Fire Crystal",
-  "item.wizards_reborn.pure_void_crystal": "Pure Void Crystal"
+  "item.wizards_reborn.pure_void_crystal": "Pure Void Crystal",
+
+  "block.wizards_reborn.arcane_pedestal": "Arcane Pedestal"
 }
