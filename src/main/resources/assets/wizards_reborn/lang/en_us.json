@@ -66,5 +66,7 @@
   "item.wizards_reborn.pure_fire_crystal": "Pure Fire Crystal",
   "item.wizards_reborn.pure_void_crystal": "Pure Void Crystal",
 
-  "block.wizards_reborn.arcane_pedestal": "Arcane Pedestal"
+  "block.wizards_reborn.arcane_pedestal": "Arcane Pedestal",
+
+  "gui.wizards_reborn.category.arcanum_dust_transmutation": "Arcanum Dust Transmutation"
 }

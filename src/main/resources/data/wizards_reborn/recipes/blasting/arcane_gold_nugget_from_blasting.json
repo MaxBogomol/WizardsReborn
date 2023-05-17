@@ -1,0 +1,23 @@
+{
+  "type": "minecraft:blasting",
+  "ingredient": [
+    {
+      "item": "wizards_artifacts:arcane_gold_pickaxe"
+    },
+    {
+      "item": "wizards_artifacts:arcane_gold_shovel"
+    },
+    {
+      "item": "wizards_artifacts:arcane_gold_axe"
+    },
+    {
+      "item": "wizards_artifacts:arcane_gold_hoe"
+    },
+    {
+      "item": "wizards_artifacts:arcane_gold_sword"
+    }
+  ],
+  "result": "wizards_artifacts:arcane_gold_nugget",
+  "experience": 0.1,
+  "cookingtime": 100
+}
