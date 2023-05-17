@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:block/cube_all",
+  "textures": {
+    "all": "wizards_reborn:block/nether_arcane_gold_ore"
+  }
+}

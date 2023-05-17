@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "XX",
+    " #",
+    " #"
+  ],
+  "key": {
+    "#": {
+      "item": "wizards_reborn:arcane_wood_branch"
+    },
+    "X": {
+      "item": "wizards_reborn:arcane_gold_ingot"
+    }
+  },
+  "result": {
+    "item": "wizards_reborn:arcane_gold_hoe"
+  }
+}

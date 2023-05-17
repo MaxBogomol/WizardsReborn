@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "group": "wooden_button",
+  "ingredients": [
+    {
+      "item": "wizards_reborn:arcane_wood_planks"
+    }
+  ],
+  "result": {
+    "item": "wizards_reborn:arcane_wood_button"
+  }
+}

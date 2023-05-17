@@ -1,0 +1,9 @@
+{
+  "replace": false,
+  "values": [
+    "minecraft:arcane_wood_log",
+    "minecraft:arcane_wood",
+    "minecraft:stripped_arcane_wood_log",
+    "minecraft:stripped_arcane_wood"
+  ]
+}

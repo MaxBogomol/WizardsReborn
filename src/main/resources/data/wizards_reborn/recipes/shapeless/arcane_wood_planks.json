@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "group": "planks",
+  "ingredients": [
+    {
+      "tag": "wizards_reborn:arcane_wood_logs"
+    }
+  ],
+  "result": {
+    "item": "wizards_reborn:arcane_wood_planks",
+    "count": 4
+  }
+}
