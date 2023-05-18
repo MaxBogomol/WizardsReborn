@@ -1,0 +1,11 @@
+{
+	"parent": "wizards_reborn:block/crystals/crystal_growth_5",
+	"textures": {
+		"0": "wizards_reborn:block/crystals/fire_crystal_1",
+		"1": "wizards_reborn:block/crystals/fire_crystal_2",
+		"2": "wizards_reborn:block/crystals/fire_crystal_3",
+		"3": "wizards_reborn:block/crystals/fire_crystal_4",
+		"4": "wizards_reborn:block/crystals/fire_crystal_5",
+		"particle": "wizards_reborn:block/crystals/fire_crystal_5"
+	}
+}

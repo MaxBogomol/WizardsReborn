@@ -1,0 +1,18 @@
+{
+	"credit": "Made with Blockbench",
+	"parent": "minecraft:block/block",
+	"elements": [
+		{
+			"from": [5, 0.001, 5],
+			"to": [11, 9.001, 11],
+			"faces": {
+				"north": {"uv": [6, 0, 12, 9], "texture": "#4"},
+				"east": {"uv": [6, 0, 12, 9], "texture": "#4"},
+				"south": {"uv": [6, 0, 12, 9], "texture": "#4"},
+				"west": {"uv": [6, 0, 12, 9], "texture": "#4"},
+				"up": {"uv": [0, 0, 6, 6], "texture": "#4"},
+				"down": {"uv": [0, 6, 6, 12], "texture": "#4"}
+			}
+		}
+	]
+}

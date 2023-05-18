@@ -1,0 +1,11 @@
+{
+	"parent": "wizards_reborn:block/crystals/faceted_crystal",
+	"textures": {
+		"0": "wizards_reborn:block/crystals/void_crystal_1",
+		"1": "wizards_reborn:block/crystals/void_crystal_2",
+		"2": "wizards_reborn:block/crystals/void_crystal_3",
+		"3": "wizards_reborn:block/crystals/void_crystal_4",
+		"4": "wizards_reborn:block/crystals/void_crystal_5",
+		"particle": "wizards_reborn:block/crystals/void_crystal_5"
+	}
+}
