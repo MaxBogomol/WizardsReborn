@@ -6,8 +6,13 @@ import mod.maxbogomol.wizards_reborn.WizardsReborn;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.RenderState;
 import net.minecraft.client.renderer.RenderType;
+import net.minecraft.client.renderer.entity.EntityRenderer;
+import net.minecraft.client.renderer.entity.LivingRenderer;
+import net.minecraft.client.renderer.entity.model.BipedModel;
+import net.minecraft.client.renderer.entity.model.EntityModel;
 import net.minecraft.client.renderer.texture.AtlasTexture;
 import net.minecraft.client.renderer.vertex.DefaultVertexFormats;
+import net.minecraft.entity.LivingEntity;
 import net.minecraft.item.ItemStack;
 import org.lwjgl.opengl.GL11;
 
@@ -51,5 +56,19 @@ public class RenderUtils {
         RenderSystem.translatef((float)-(x+(xSize/2)), (float)-(y+(ySize/2)), 0.0F);
         mc.getItemRenderer().renderItemAndEffectIntoGUI(mc.player, stack, x, y);
         RenderSystem.popMatrix();
+    }
+
+    public static float followBodyRotation(LivingEntity living) {
+        float rotate = 0;
+        EntityRenderer<? super LivingEntity> render = Minecraft.getInstance().getRenderManager().getRenderer(living);
+        if(render instanceof LivingRenderer) {
+            LivingRenderer<LivingEntity, EntityModel<LivingEntity>> livingRenderer = (LivingRenderer<LivingEntity, EntityModel<LivingEntity>>) render;
+            EntityModel<LivingEntity> entityModel = livingRenderer.getEntityModel();
+            if (entityModel instanceof BipedModel) {
+                BipedModel<LivingEntity> bipedModel = (BipedModel<LivingEntity>) entityModel;
+                rotate = bipedModel.bipedBody.rotateAngleY;
+            }
+        }
+        return rotate;
     }
 }

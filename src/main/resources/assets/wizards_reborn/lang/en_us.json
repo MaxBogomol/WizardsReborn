@@ -86,5 +86,9 @@
 
   "block.wizards_reborn.arcane_pedestal": "Arcane Pedestal",
 
-  "gui.wizards_reborn.category.arcanum_dust_transmutation": "Arcanum Dust Transmutation"
+  "gui.wizards_reborn.category.arcanum_dust_transmutation": "Arcanum Dust Transmutation",
+
+  "item.wizards_reborn.arcanum_amulet": "Arcanum Amulet",
+  "item.wizards_reborn.arcanum_ring": "Arcanum Ring",
+  "item.wizards_reborn.leather_belt": "Leather Belt"
 }

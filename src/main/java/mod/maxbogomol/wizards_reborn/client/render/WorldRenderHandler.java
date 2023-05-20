@@ -1,6 +1,7 @@
 package mod.maxbogomol.wizards_reborn.client.render;
 
 import com.mojang.blaze3d.systems.RenderSystem;
+import mod.maxbogomol.wizards_reborn.client.config.ClientConfig;
 import net.minecraft.client.renderer.BufferBuilder;
 import net.minecraft.client.renderer.IRenderTypeBuffer;
 import net.minecraft.client.renderer.RenderType;
@@ -12,12 +13,12 @@ import java.util.Map;
 public class WorldRenderHandler {
 
     public static void onRenderWorldLast(RenderWorldLastEvent event) {
-        RenderSystem.pushMatrix();
-        RenderSystem.multMatrix(event.getMatrixStack().getLast().getMatrix());
-        getDelayedRender().finish(RenderUtils.GLOWING_PARTICLE);
-        RenderSystem.popMatrix();
-
-        //getDelayedRender().finish(RenderUtils.GLOWING_SPRITE);
+        if (ClientConfig.BETTER_LAYERING.get()) {
+            RenderSystem.pushMatrix();
+            RenderSystem.multMatrix(event.getMatrixStack().getLast().getMatrix());
+            getDelayedRender().finish(RenderUtils.GLOWING_PARTICLE);
+            RenderSystem.popMatrix();
+        }
     }
 
     static IRenderTypeBuffer.Impl DELAYED_RENDER = null;

@@ -26,7 +26,7 @@ import java.util.StringJoiner;
 public class ArcanumDustTransmutationRecipeManager implements IRecipeManager, IRecipeHandler<ArcanumDustTransmutationRecipe> {
 
     @ZenCodeType.Method
-    public void addRecipe(String name, IIngredient input, IItemStack output, @ZenCodeType.OptionalBoolean(true) boolean placeBlock, @ZenCodeType.Optional IItemStack display) {
+    public void addRecipe(String name, IItemStack output, IIngredient input, @ZenCodeType.OptionalBoolean(true) boolean placeBlock, @ZenCodeType.Optional IItemStack display) {
         name = fixRecipeName(name);
         ResourceLocation resourceLocation = new ResourceLocation("crafttweaker", name);
 
