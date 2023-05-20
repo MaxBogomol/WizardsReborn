@@ -36,6 +36,24 @@
 
   "item.wizards_reborn.arcane_wand": "Arcane Wand",
 
+  "block.wizards_reborn.earth_crystal_seed": "Earth Crystal Seed",
+  "block.wizards_reborn.water_crystal_seed": "Water Crystal Seed",
+  "block.wizards_reborn.air_crystal_seed": "Air Crystal Seed",
+  "block.wizards_reborn.fire_crystal_seed": "Fire Crystal Seed",
+  "block.wizards_reborn.void_crystal_seed": "Void Crystal Seed",
+
+  "block.wizards_reborn.earth_crystal_growth": "Earth Crystal Growth",
+  "block.wizards_reborn.water_crystal_growth": "Water Crystal Growth",
+  "block.wizards_reborn.air_crystal_growth": "Air Crystal Growth",
+  "block.wizards_reborn.fire_crystal_growth": "Fire Crystal Growth",
+  "block.wizards_reborn.void_crystal_growth": "Void Crystal Growth",
+
+  "item.wizards_reborn.fractured_earth_crystal": "Fractured Earth Crystal",
+  "item.wizards_reborn.fractured_water_crystal": "Fractured Water Crystal",
+  "item.wizards_reborn.fractured_air_crystal": "Fractured Air Crystal",
+  "item.wizards_reborn.fractured_fire_crystal": "Fractured Fire Crystal",
+  "item.wizards_reborn.fractured_void_crystal": "Fractured Void Crystal",
+
   "block.wizards_reborn.earth_crystal": "Earth Crystal",
   "block.wizards_reborn.water_crystal": "Water Crystal",
   "block.wizards_reborn.air_crystal": "Air Crystal",

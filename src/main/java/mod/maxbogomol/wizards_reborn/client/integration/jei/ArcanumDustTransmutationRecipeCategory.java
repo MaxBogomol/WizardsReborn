@@ -22,10 +22,12 @@ public class ArcanumDustTransmutationRecipeCategory implements IRecipeCategory<A
     public final static ResourceLocation TEXTURE = new ResourceLocation(WizardsReborn.MOD_ID, "textures/gui/jei/arcanum_dust_transmutation.png");
 
     private final IDrawable background;
+    private final IDrawable display;
     private final IDrawable icon;
 
     public ArcanumDustTransmutationRecipeCategory(IGuiHelper helper) {
         background = helper.createDrawable(TEXTURE, 0, 0, 118, 48);
+        display = helper.createDrawable(TEXTURE, 0, 48, 118, 96);
         icon = helper.createDrawableIngredient(new ItemStack(WizardsReborn.ARCANUM_DUST.get()));
     }
 
@@ -61,20 +63,26 @@ public class ArcanumDustTransmutationRecipeCategory implements IRecipeCategory<A
         builder.add(Arrays.asList(recipe.getIngredientRecipe().getMatchingStacks()));
         ingredients.setInputLists(VanillaTypes.ITEM, builder.build());
         ingredients.setOutput(VanillaTypes.ITEM, recipe.getRecipeOutput());
+
+        if (recipe.getDisplay() != ItemStack.EMPTY) {
+            ingredients.setOutput(VanillaTypes.ITEM, recipe.getDisplay());
+        }
     }
 
     @Override
     public void setRecipe(IRecipeLayout recipeLayout, ArcanumDustTransmutationRecipe recipe, IIngredients ingredients) {
-        recipeLayout.getItemStacks().init(0, true, -2, 14);
+        recipeLayout.getItemStacks().init(0, true, 0, 14);
         recipeLayout.getItemStacks().init(1, true, 50, 14);
 
-        recipeLayout.getItemStacks().init(2, false, 102, 14);
+        recipeLayout.getItemStacks().init(2, false, 100, 14);
 
         recipeLayout.getItemStacks().set(ingredients);
     }
 
     @Override
     public void draw(ArcanumDustTransmutationRecipe recipe, MatrixStack matrixStack, double mouseX, double mouseY) {
-
+        if (recipe.getDisplay() != ItemStack.EMPTY) {
+            display.draw(matrixStack, 0, 0);
+        }
     }
 }

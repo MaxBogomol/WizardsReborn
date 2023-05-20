@@ -14,7 +14,6 @@ import net.minecraft.util.ActionResult;
 import net.minecraft.util.ActionResultType;
 import net.minecraft.util.Hand;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.vector.Vector3d;
 import net.minecraft.world.World;
 
@@ -50,7 +49,7 @@ public class ArcanumDustItem extends Item {
         AtomicReference<ItemStack> item = new AtomicReference<>(new ItemStack(null));
 
         recipe.ifPresent(iRecipe -> {
-            place_block.set(iRecipe.getRecipePlaceBlock());
+            place_block.set(iRecipe.getPlaceBlock());
             item.set(iRecipe.getRecipeOutput().copy());
         });
 

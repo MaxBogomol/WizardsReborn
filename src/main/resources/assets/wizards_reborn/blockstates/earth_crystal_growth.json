@@ -1,0 +1,19 @@
+{
+  "variants": {
+    "age=0": {
+      "model": "wizards_reborn:block/crystals/earth_crystal_growth_1"
+    },
+    "age=1": {
+      "model": "wizards_reborn:block/crystals/earth_crystal_growth_2"
+    },
+    "age=2": {
+      "model": "wizards_reborn:block/crystals/earth_crystal_growth_3"
+    },
+    "age=3": {
+      "model": "wizards_reborn:block/crystals/earth_crystal_growth_4"
+    },
+    "age=4": {
+      "model": "wizards_reborn:block/crystals/earth_crystal_growth_5"
+    }
+  }
+}

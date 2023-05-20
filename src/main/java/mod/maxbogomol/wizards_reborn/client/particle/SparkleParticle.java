@@ -1,6 +1,7 @@
 package mod.maxbogomol.wizards_reborn.client.particle;
 
 import com.mojang.blaze3d.vertex.IVertexBuilder;
+import mod.maxbogomol.wizards_reborn.client.config.ClientConfig;
 import mod.maxbogomol.wizards_reborn.client.render.RenderUtils;
 import mod.maxbogomol.wizards_reborn.client.render.WorldRenderHandler;
 import net.minecraft.client.renderer.ActiveRenderInfo;
@@ -18,6 +19,6 @@ public class SparkleParticle extends GenericParticle {
 
     @Override
     public void renderParticle(IVertexBuilder b, ActiveRenderInfo info, float pticks) {
-        super.renderParticle(true ? WorldRenderHandler.getDelayedRender().getBuffer(RenderUtils.GLOWING_PARTICLE) : b, info, pticks);
+        super.renderParticle(ClientConfig.BETTER_LAYERING.get() ? WorldRenderHandler.getDelayedRender().getBuffer(RenderUtils.GLOWING_PARTICLE) : b, info, pticks);
     }
 }

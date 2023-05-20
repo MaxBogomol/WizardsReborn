@@ -9,7 +9,7 @@ public class CrystalTileEntity extends TileEntity {
         super(tileEntityTypeIn);
     }
 
-    //public CrystalTileEntity() {
-    //    this(WizardsReborn.CRYSTAL_TILE_ENTITY.get());
-    //}
+    public CrystalTileEntity() {
+        this(WizardsReborn.CRYSTAL_TILE_ENTITY.get());
+    }
 }

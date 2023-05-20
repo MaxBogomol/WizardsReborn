@@ -1,0 +1,7 @@
+{
+	"parent": "wizards_reborn:block/crystals/crystal_seed",
+	"textures": {
+		"0": "wizards_reborn:block/crystals/void_crystal_seed",
+		"particle": "wizards_reborn:block/crystals/void_crystal_5"
+	}
+}

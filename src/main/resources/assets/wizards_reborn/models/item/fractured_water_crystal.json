@@ -1,0 +1,6 @@
+{
+  "parent": "item/generated",
+  "textures": {
+    "layer0": "wizards_reborn:item/fractured_water_crystal"
+  }
+}

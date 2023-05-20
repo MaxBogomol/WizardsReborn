@@ -1,0 +1,12 @@
+{
+  "type": "wizards_reborn:arcanum_dust_transmutation",
+  "from": {
+    "item": "wizards_reborn:void_crystal_seed"
+  },
+  "to": {
+    "item": "wizards_reborn:void_crystal_growth"
+  },
+  "display": {
+    "item": "wizards_reborn:void_crystal"
+  }
+}

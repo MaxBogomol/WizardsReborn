@@ -20,12 +20,14 @@ public class ArcanumDustTransmutationRecipe implements IRecipe<IInventory>  {
     private final ResourceLocation id;
     private final Ingredient recipeItem;
     private final ItemStack output;
+    private final ItemStack display;
     private boolean place_block;
 
-    public ArcanumDustTransmutationRecipe(ResourceLocation id, Ingredient recipeItem, ItemStack output, boolean place_block) {
+    public ArcanumDustTransmutationRecipe(ResourceLocation id, Ingredient recipeItem, ItemStack output, ItemStack display, boolean place_block) {
         this.id = id;
         this.recipeItem = recipeItem;
         this.output = output;
+        this.display = display;
         this.place_block = place_block;
     }
 
@@ -43,8 +45,12 @@ public class ArcanumDustTransmutationRecipe implements IRecipe<IInventory>  {
         return recipeItem;
     }
 
-    public boolean getRecipePlaceBlock() {
+    public boolean getPlaceBlock() {
         return place_block;
+    }
+
+    public ItemStack getDisplay() {
+        return display;
     }
 
     public ItemStack getIcon() {
@@ -95,9 +101,16 @@ public class ArcanumDustTransmutationRecipe implements IRecipe<IInventory>  {
         public ArcanumDustTransmutationRecipe read(ResourceLocation recipeId, JsonObject json) {
             Ingredient input = Ingredient.deserialize(JSONUtils.getJsonObject(json, "from"));
             ItemStack output = ShapedRecipe.deserializeItem(JSONUtils.getJsonObject(json, "to"));
-            boolean place_block = JSONUtils.getBoolean(json, "place_block");
+            ItemStack display = ItemStack.EMPTY;
+            boolean place_block = true;
+            if (JSONUtils.hasField(json, "display")) {
+                display = ShapedRecipe.deserializeItem(JSONUtils.getJsonObject(json, "display"));
+            }
+            if (JSONUtils.hasField(json, "place_block")) {
+                place_block = JSONUtils.getBoolean(json, "place_block");
+            }
 
-            return new ArcanumDustTransmutationRecipe(recipeId, input, output, place_block);
+            return new ArcanumDustTransmutationRecipe(recipeId, input, output, display, place_block);
         }
 
         @Nullable
@@ -105,16 +118,18 @@ public class ArcanumDustTransmutationRecipe implements IRecipe<IInventory>  {
         public ArcanumDustTransmutationRecipe read(ResourceLocation recipeId, PacketBuffer buffer) {
             Ingredient input = Ingredient.read(buffer);
             ItemStack output = buffer.readItemStack();
+            ItemStack display = buffer.readItemStack();
             boolean place_block = buffer.readBoolean();
 
-            return new ArcanumDustTransmutationRecipe(recipeId, input, output, place_block);
+            return new ArcanumDustTransmutationRecipe(recipeId, input, output, display, place_block);
         }
 
         @Override
         public void write(PacketBuffer buffer, ArcanumDustTransmutationRecipe recipe) {
             recipe.getIngredientRecipe().write(buffer);
             buffer.writeItemStack(recipe.getRecipeOutput(), false);
-            buffer.writeBoolean(recipe.getRecipePlaceBlock());
+            buffer.writeItemStack(recipe.getDisplay(), false);
+            buffer.writeBoolean(recipe.getPlaceBlock());
         }
     }
 }

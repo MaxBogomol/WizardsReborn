@@ -1,0 +1,9 @@
+{
+  "replace": false,
+  "values": [
+    "wizards_reborn:arcane_wood_log",
+    "wizards_reborn:arcane_wood",
+    "wizards_reborn:stripped_arcane_wood_log",
+    "wizards_reborn:stripped_arcane_wood"
+  ]
+}

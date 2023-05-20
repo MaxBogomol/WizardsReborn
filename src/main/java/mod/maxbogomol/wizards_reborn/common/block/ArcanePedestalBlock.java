@@ -29,17 +29,18 @@ import net.minecraft.world.World;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
+import java.util.stream.Stream;
+
 import static net.minecraft.state.properties.BlockStateProperties.WATERLOGGED;
 
 public class ArcanePedestalBlock extends Block implements ITileEntityProvider, IWaterLoggable  {
 
-    private static final VoxelShape TOP_1 = Block.makeCuboidShape(5, 13, 5, 11, 14, 11);
-    private static final VoxelShape TOP_2 = Block.makeCuboidShape(2, 11, 2, 14, 13, 14);
-    private static final VoxelShape MID = Block.makeCuboidShape(4, 2, 4, 12, 11, 12);
-    private static final VoxelShape BOTTOM = Block.makeCuboidShape(2, 0, 2, 14, 2, 14);
-    private static final VoxelShape TOP_SHAPE = VoxelShapes.combineAndSimplify(TOP_1, TOP_2, IBooleanFunction.OR);
-    private static final VoxelShape BOTTOM_SHAPE = VoxelShapes.combineAndSimplify(MID, BOTTOM, IBooleanFunction.OR);
-    private static final VoxelShape SHAPE = VoxelShapes.combineAndSimplify(TOP_SHAPE, BOTTOM_SHAPE, IBooleanFunction.OR);
+    private static final VoxelShape SHAPE = Stream.of(
+            Block.makeCuboidShape(5, 13, 5, 11, 14, 11),
+            Block.makeCuboidShape(2, 11, 2, 14, 13, 14),
+            Block.makeCuboidShape(4, 2, 4, 12, 11, 12),
+            Block.makeCuboidShape(2, 0, 2, 14, 2, 14)
+    ).reduce((v1, v2) -> VoxelShapes.combineAndSimplify(v1, v2, IBooleanFunction.OR)).get();
 
     public ArcanePedestalBlock(Properties properties) {
         super(properties);

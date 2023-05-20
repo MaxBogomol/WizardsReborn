@@ -5,6 +5,5 @@
   },
   "to": {
     "item": "wizards_reborn:arcane_gold_ore"
-  },
-  "place_block": true
+  }
 }

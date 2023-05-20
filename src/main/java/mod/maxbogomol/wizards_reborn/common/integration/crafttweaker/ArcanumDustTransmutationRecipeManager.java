@@ -12,6 +12,7 @@ import com.blamejared.crafttweaker.impl.item.MCItemStackMutable;
 import com.blamejared.crafttweaker_annotations.annotations.Document;
 import mod.maxbogomol.wizards_reborn.WizardsReborn;
 import mod.maxbogomol.wizards_reborn.common.data.recipes.ArcanumDustTransmutationRecipe;
+import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.IRecipeType;
 import net.minecraft.util.ResourceLocation;
 import org.openzen.zencode.java.ZenCodeType;
@@ -25,12 +26,18 @@ import java.util.StringJoiner;
 public class ArcanumDustTransmutationRecipeManager implements IRecipeManager, IRecipeHandler<ArcanumDustTransmutationRecipe> {
 
     @ZenCodeType.Method
-    public void addRecipe(String name, IIngredient input, IItemStack output, boolean place_block) {
+    public void addRecipe(String name, IIngredient input, IItemStack output, @ZenCodeType.OptionalBoolean(true) boolean placeBlock, @ZenCodeType.Optional IItemStack display) {
         name = fixRecipeName(name);
         ResourceLocation resourceLocation = new ResourceLocation("crafttweaker", name);
 
+        ItemStack displayR = ItemStack.EMPTY;
+
+        if (display != null) {
+            displayR = display.getImmutableInternal();
+        }
+
         CraftTweakerAPI.apply(new ActionAddRecipe(this,
-                new ArcanumDustTransmutationRecipe(resourceLocation, input.asVanillaIngredient(), output.getImmutableInternal(), place_block), ""));
+                new ArcanumDustTransmutationRecipe(resourceLocation, input.asVanillaIngredient(), output.getImmutableInternal(), displayR, placeBlock), ""));
     }
 
     @Override
@@ -45,7 +52,8 @@ public class ArcanumDustTransmutationRecipeManager implements IRecipeManager, IR
         s.add(StringUtils.quoteAndEscape(recipe.getId()));
         s.add(IIngredient.fromIngredient(recipe.getIngredientRecipe()).getCommandString());
         s.add(new MCItemStackMutable(recipe.getRecipeOutput()).getCommandString());
-        s.add(String.valueOf(recipe.getRecipePlaceBlock()));
+        s.add(recipe.getDisplay() != ItemStack.EMPTY ? new MCItemStackMutable(recipe.getDisplay()).getCommandString() : null);
+        s.add(String.valueOf(recipe.getPlaceBlock()));
         return s.toString();
     }
 }

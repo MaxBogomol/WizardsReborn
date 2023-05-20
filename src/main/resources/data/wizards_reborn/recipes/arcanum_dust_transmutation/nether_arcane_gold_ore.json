@@ -5,6 +5,5 @@
   },
   "to": {
     "item": "wizards_reborn:nether_arcane_gold_ore"
-  },
-  "place_block": true
+  }
 }
