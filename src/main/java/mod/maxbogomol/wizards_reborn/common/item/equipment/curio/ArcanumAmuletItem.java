@@ -5,6 +5,7 @@ import com.google.common.collect.Multimap;
 import com.mojang.blaze3d.matrix.MatrixStack;
 import com.mojang.blaze3d.vertex.IVertexBuilder;
 import mod.maxbogomol.wizards_reborn.WizardsReborn;
+import mod.maxbogomol.wizards_reborn.api.wissen.IWissenItem;
 import mod.maxbogomol.wizards_reborn.client.render.RenderUtils;
 import mod.maxbogomol.wizards_reborn.client.render.model.curio.AmuletModel;
 import net.minecraft.client.renderer.IRenderTypeBuffer;
@@ -17,6 +18,7 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.SoundEvents;
+import net.minecraft.util.math.vector.Vector3d;
 import top.theillusivec4.curios.api.SlotContext;
 import top.theillusivec4.curios.api.type.capability.ICurio;
 import top.theillusivec4.curios.api.type.capability.ICurioItem;
@@ -24,7 +26,7 @@ import top.theillusivec4.curios.api.type.capability.ICurioItem;
 import javax.annotation.Nonnull;
 import java.util.UUID;
 
-public class ArcanumAmuletItem extends Item implements ICurioItem {
+public class ArcanumAmuletItem extends Item implements ICurioItem, IWissenItem {
 
     private static final ResourceLocation AMULET_TEXTURE = new ResourceLocation(WizardsReborn.MOD_ID,"textures/entity/curio/arcanum_amulet.png");
 
@@ -64,7 +66,8 @@ public class ArcanumAmuletItem extends Item implements ICurioItem {
         ICurio.RenderHelper.rotateIfSneaking(matrixStack, living);
 
         AmuletModel<?> model = new AmuletModel<>();
-        model.model.rotateAngleY= RenderUtils.followBodyRotation(living);
+        Vector3d rotate = RenderUtils.followBodyRotation(living);
+        model.model.rotateAngleY = (float) rotate.getY();
 
         IVertexBuilder vertexBuilder = ItemRenderer
                 .getBuffer(renderTypeBuffer, model.getRenderType(AMULET_TEXTURE), false,
@@ -72,5 +75,10 @@ public class ArcanumAmuletItem extends Item implements ICurioItem {
         model
                 .render(matrixStack, vertexBuilder, light, OverlayTexture.NO_OVERLAY, 1.0F, 1.0F, 1.0F,
                         1.0F);
+    }
+
+    @Override
+    public int getMaxWissen() {
+        return 0;
     }
 }

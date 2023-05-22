@@ -1,0 +1,7 @@
+{
+  "type": "wizards_reborn:wissen_altar",
+  "ingredient": {
+    "item": "wizards_reborn:arcanum"
+  },
+  "wissen": 1000
+}

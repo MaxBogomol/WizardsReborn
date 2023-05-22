@@ -3,7 +3,7 @@ package mod.maxbogomol.wizards_reborn.client.event;
 import mod.maxbogomol.wizards_reborn.WizardsReborn;
 import mod.maxbogomol.wizards_reborn.client.render.gui.CrystalChooseScreen;
 import mod.maxbogomol.wizards_reborn.common.item.equipment.ArcaneWandItem;
-import mod.maxbogomol.wizards_reborn.common.network.PacketDeleteCrystal;
+import mod.maxbogomol.wizards_reborn.common.network.DeleteCrystalPacket;
 import mod.maxbogomol.wizards_reborn.common.network.PacketHandler;
 import net.minecraft.client.Minecraft;
 import net.minecraft.entity.player.PlayerEntity;
@@ -43,7 +43,7 @@ public class KeyBindHandler {
             if (open && !player.isSneaking()) {
                 Minecraft.getInstance().displayGuiScreen(new CrystalChooseScreen(new StringTextComponent("")));
             } else if (open && player.isSneaking()) {
-                PacketHandler.sendToServer(new PacketDeleteCrystal(hand));
+                PacketHandler.sendToServer(new DeleteCrystalPacket(hand));
             }
         }
     }

@@ -34,8 +34,16 @@ import static net.minecraft.state.properties.BlockStateProperties.WATERLOGGED;
 
 public class CrystalBlock extends Block implements ITileEntityProvider, IWaterLoggable {
 
+    public enum Polishing {
+        CRYSTAL,
+        FACETED,
+        ADVANCED,
+        MASTERFUL,
+        PURE;
+    }
+
     protected static final Random random = new Random();
-    public String polishing;
+    public Polishing polishing;
 
     private static final VoxelShape FACETED_SHAPE = Block.makeCuboidShape(5, 0, 5, 11, 9, 11);
     private static final VoxelShape SHAPE = Stream.of(
@@ -46,7 +54,7 @@ public class CrystalBlock extends Block implements ITileEntityProvider, IWaterLo
             Block.makeCuboidShape(4, 0, 9, 7, 3, 12)
             ).reduce((v1, v2) -> VoxelShapes.combineAndSimplify(v1, v2, IBooleanFunction.OR)).get();
 
-    public CrystalBlock(String polishing, Properties properties) {
+    public CrystalBlock(Polishing polishing, Properties properties) {
         super(properties);
         this.polishing = polishing;
         setDefaultState(getDefaultState().with(WATERLOGGED, false));
@@ -55,7 +63,7 @@ public class CrystalBlock extends Block implements ITileEntityProvider, IWaterLo
     @Nonnull
     @Override
     public VoxelShape getShape(BlockState state, IBlockReader world, BlockPos pos, ISelectionContext ctx) {
-        if (polishing == "crystal") {
+        if (polishing == Polishing.CRYSTAL) {
             return SHAPE;
         }
 
@@ -121,16 +129,16 @@ public class CrystalBlock extends Block implements ITileEntityProvider, IWaterLo
 
     @OnlyIn(Dist.CLIENT)
     public void animateTick(BlockState state, World world, BlockPos pos, Random rand) {
-        if ((polishing == "advanced") || (polishing == "masterful") || (polishing == "pure")) {
+        if ((polishing == Polishing.ADVANCED) || (polishing == Polishing.MASTERFUL) || (polishing == Polishing.PURE)) {
             Vector3d color = new Vector3d(0f, 0f, 0f);
 
-            if (polishing == "advanced") {
+            if (polishing == Polishing.ADVANCED) {
                 color = new Vector3d(1f, 0.933f, 0.631f);
             }
-            if (polishing == "masterful") {
+            if (polishing == Polishing.MASTERFUL) {
                 color = new Vector3d(0.866f, 0.996f, 0.635f);
             }
-            if (polishing == "pure") {
+            if (polishing == Polishing.PURE) {
                 color = new Vector3d(0.784f, 1f, 0.960f);
             }
 

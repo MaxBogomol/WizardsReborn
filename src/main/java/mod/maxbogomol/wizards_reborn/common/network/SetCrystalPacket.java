@@ -1,6 +1,5 @@
 package mod.maxbogomol.wizards_reborn.common.network;
 
-import mod.maxbogomol.wizards_reborn.WizardsReborn;
 import mod.maxbogomol.wizards_reborn.common.item.equipment.ArcaneWandItem;
 import net.minecraft.entity.player.ServerPlayerEntity;
 import net.minecraft.inventory.Inventory;
@@ -13,16 +12,17 @@ import net.minecraftforge.fml.network.NetworkEvent;
 import java.util.List;
 import java.util.function.Supplier;
 
-public class PacketSetCrystal {
+public class SetCrystalPacket {
     private static boolean hand;
     private static ItemStack crystal;
 
-    public PacketSetCrystal(boolean hand, ItemStack crystal) {
+    public SetCrystalPacket(boolean hand, ItemStack crystal) {
         this.hand = hand;
         this.crystal = crystal;
     }
-    public static PacketSetCrystal decode(PacketBuffer buf) {
-        return new PacketSetCrystal(buf.readBoolean(),buf.readItemStack());
+
+    public static SetCrystalPacket decode(PacketBuffer buf) {
+        return new SetCrystalPacket(buf.readBoolean(), buf.readItemStack());
     }
 
     public void encode(PacketBuffer buf) {
@@ -30,7 +30,7 @@ public class PacketSetCrystal {
         buf.writeItemStack(crystal);
     }
 
-    public static void handle(PacketSetCrystal msg, Supplier<NetworkEvent.Context> ctx) {
+    public static void handle(SetCrystalPacket msg, Supplier<NetworkEvent.Context> ctx) {
         if (ctx.get().getDirection().getReceptionSide().isServer()) {
             ctx.get().enqueueWork(() -> {
                 ServerPlayerEntity player = ctx.get().getSender();

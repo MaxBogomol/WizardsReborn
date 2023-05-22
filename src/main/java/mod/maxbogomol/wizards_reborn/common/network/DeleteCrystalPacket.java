@@ -11,22 +11,22 @@ import net.minecraftforge.fml.network.NetworkEvent;
 
 import java.util.function.Supplier;
 
-public class PacketDeleteCrystal {
+public class DeleteCrystalPacket {
     private static boolean hand;
 
-    public PacketDeleteCrystal(boolean hand) {
+    public DeleteCrystalPacket(boolean hand) {
         this.hand = hand;
     }
 
-    public static PacketDeleteCrystal decode(PacketBuffer buf) {
-        return new PacketDeleteCrystal(buf.readBoolean());
+    public static DeleteCrystalPacket decode(PacketBuffer buf) {
+        return new DeleteCrystalPacket(buf.readBoolean());
     }
 
     public void encode(PacketBuffer buf) {
         buf.writeBoolean(hand);
     }
 
-    public static void handle(PacketDeleteCrystal msg, Supplier<NetworkEvent.Context> ctx) {
+    public static void handle(DeleteCrystalPacket msg, Supplier<NetworkEvent.Context> ctx) {
         if (ctx.get().getDirection().getReceptionSide().isServer()) {
             ctx.get().enqueueWork(() -> {
                 ServerPlayerEntity player = ctx.get().getSender();

@@ -2,6 +2,7 @@ package mod.maxbogomol.wizards_reborn.common.item.equipment.curio;
 
 import com.google.common.collect.LinkedHashMultimap;
 import com.google.common.collect.Multimap;
+import mod.maxbogomol.wizards_reborn.api.wissen.IWissenItem;
 import net.minecraft.entity.ai.attributes.Attribute;
 import net.minecraft.entity.ai.attributes.AttributeModifier;
 import net.minecraft.entity.ai.attributes.Attributes;
@@ -15,7 +16,7 @@ import top.theillusivec4.curios.api.type.capability.ICurioItem;
 import javax.annotation.Nonnull;
 import java.util.UUID;
 
-public class ArcanumRingItem extends Item implements ICurioItem {
+public class ArcanumRingItem extends Item implements ICurioItem, IWissenItem {
 
     public ArcanumRingItem(Item.Properties properties) {
         super(properties);
@@ -38,5 +39,10 @@ public class ArcanumRingItem extends Item implements ICurioItem {
         Multimap<Attribute, AttributeModifier> atts = LinkedHashMultimap.create();
         atts.put(Attributes.ARMOR_TOUGHNESS, new AttributeModifier(uuid, "bonus", 1, AttributeModifier.Operation.ADDITION));
         return atts;
+    }
+
+    @Override
+    public int getMaxWissen() {
+        return 0;
     }
 }

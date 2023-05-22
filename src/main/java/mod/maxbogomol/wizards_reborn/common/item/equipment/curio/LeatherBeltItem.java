@@ -18,6 +18,7 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.SoundEvents;
+import net.minecraft.util.math.vector.Vector3d;
 import top.theillusivec4.curios.api.SlotContext;
 import top.theillusivec4.curios.api.type.capability.ICurio;
 import top.theillusivec4.curios.api.type.capability.ICurioItem;
@@ -66,7 +67,8 @@ public class LeatherBeltItem extends Item implements ICurioItem {
         ICurio.RenderHelper.rotateIfSneaking(matrixStack, living);
 
         BeltModel<?> model = new BeltModel<>();
-        model.model.rotateAngleY= RenderUtils.followBodyRotation(living);
+        Vector3d rotate = RenderUtils.followBodyRotation(living);
+        model.model.rotateAngleY = (float) rotate.getY();
 
         IVertexBuilder vertexBuilder = ItemRenderer
                 .getBuffer(renderTypeBuffer, model.getRenderType(BELT_TEXTURE), false,

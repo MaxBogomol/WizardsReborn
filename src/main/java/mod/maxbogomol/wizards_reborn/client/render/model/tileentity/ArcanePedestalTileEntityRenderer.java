@@ -19,7 +19,6 @@ public class ArcanePedestalTileEntityRenderer extends TileEntityRenderer<ArcaneP
 
     @Override
     public void render(ArcanePedestalTileEntity pedestal, float partialTicks, MatrixStack ms, IRenderTypeBuffer buffers, int light, int overlay) {
-
         double ticks = (ClientTickHandler.ticksInGame + partialTicks) * 2;
         double ticksUp = (ClientTickHandler.ticksInGame + partialTicks) * 4;
         ticksUp = (ticksUp) % 360;

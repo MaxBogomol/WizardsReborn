@@ -5,7 +5,7 @@ import mod.maxbogomol.wizards_reborn.client.render.RenderUtils;
 import mod.maxbogomol.wizards_reborn.common.item.CrystalItem;
 import mod.maxbogomol.wizards_reborn.common.item.equipment.ArcaneWandItem;
 import mod.maxbogomol.wizards_reborn.common.network.PacketHandler;
-import mod.maxbogomol.wizards_reborn.common.network.PacketSetCrystal;
+import mod.maxbogomol.wizards_reborn.common.network.SetCrystalPacket;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.screen.Screen;
 import net.minecraft.entity.player.PlayerEntity;
@@ -41,10 +41,10 @@ public class CrystalChooseScreen extends Screen {
 
         if ((getPlayerCrystals().size() > 0) && (selectedItem != null)) {
             if (!main.isEmpty() && main.getItem() instanceof ArcaneWandItem) {
-                PacketHandler.sendToServer(new PacketSetCrystal(true, selectedItem));
+                PacketHandler.sendToServer(new SetCrystalPacket(true, selectedItem));
             } else {
                 if (!offhand.isEmpty() && offhand.getItem() instanceof ArcaneWandItem) {
-                    PacketHandler.sendToServer(new PacketSetCrystal(false, selectedItem));
+                    PacketHandler.sendToServer(new SetCrystalPacket(false, selectedItem));
                 }
             }
         }

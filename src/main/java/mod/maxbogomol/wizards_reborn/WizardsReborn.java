@@ -10,24 +10,25 @@ import mod.maxbogomol.wizards_reborn.client.render.model.entity.ArcaneWoodBoatMo
 import mod.maxbogomol.wizards_reborn.client.render.model.item.*;
 import mod.maxbogomol.wizards_reborn.client.render.model.tileentity.ArcanePedestalTileEntityRenderer;
 import mod.maxbogomol.wizards_reborn.client.render.model.tileentity.CrystalTileEntityRenderer;
+import mod.maxbogomol.wizards_reborn.client.render.model.tileentity.WissenAltarTileEntityRenderer;
+import mod.maxbogomol.wizards_reborn.client.render.model.tileentity.WissenTranslatorTileEntityRenderer;
 import mod.maxbogomol.wizards_reborn.common.block.*;
 import mod.maxbogomol.wizards_reborn.common.config.Config;
 import mod.maxbogomol.wizards_reborn.common.data.recipes.ArcanumDustTransmutationRecipe;
+import mod.maxbogomol.wizards_reborn.common.data.recipes.WissenAltarRecipe;
 import mod.maxbogomol.wizards_reborn.common.entity.CustomBoatEntity;
 import mod.maxbogomol.wizards_reborn.common.item.ArcanumDustItem;
 import mod.maxbogomol.wizards_reborn.common.item.CrystalItem;
 import mod.maxbogomol.wizards_reborn.common.item.equipment.ArcaneGoldTier;
 import mod.maxbogomol.wizards_reborn.common.item.CustomBoatItem;
 import mod.maxbogomol.wizards_reborn.common.item.equipment.ArcaneWandItem;
+import mod.maxbogomol.wizards_reborn.common.item.equipment.WissenWandItem;
 import mod.maxbogomol.wizards_reborn.common.item.equipment.curio.ArcanumAmuletItem;
 import mod.maxbogomol.wizards_reborn.common.item.equipment.curio.ArcanumRingItem;
 import mod.maxbogomol.wizards_reborn.common.item.equipment.curio.LeatherBeltItem;
 import mod.maxbogomol.wizards_reborn.common.network.PacketHandler;
-import mod.maxbogomol.wizards_reborn.common.tileentity.ArcanePedestalTileEntity;
-import mod.maxbogomol.wizards_reborn.common.tileentity.ArcaneWoodSignTileEntity;
+import mod.maxbogomol.wizards_reborn.common.tileentity.*;
 import mod.maxbogomol.wizards_reborn.common.itemgroup.WizardsRebornItemGroup;
-import mod.maxbogomol.wizards_reborn.common.tileentity.CrystalGrowthTileEntity;
-import mod.maxbogomol.wizards_reborn.common.tileentity.CrystalTileEntity;
 import mod.maxbogomol.wizards_reborn.common.world.WorldGen;
 import net.minecraft.block.*;
 import net.minecraft.client.Minecraft;
@@ -137,37 +138,39 @@ public class WizardsReborn
     public static final RegistryObject<Block> FIRE_CRYSTAL_GROWTH = BLOCKS.register("fire_crystal_growth", () -> new CrystalGrowthBlock(AbstractBlock.Properties.from(Blocks.GLASS)));
     public static final RegistryObject<Block> VOID_CRYSTAL_GROWTH = BLOCKS.register("void_crystal_growth", () -> new CrystalGrowthBlock(AbstractBlock.Properties.from(Blocks.GLASS)));
 
-    public static final RegistryObject<Block> EARTH_CRYSTAL_BLOCK = BLOCKS.register("earth_crystal", () -> new CrystalBlock("crystal", AbstractBlock.Properties.from(Blocks.GLASS)));
-    public static final RegistryObject<Block> WATER_CRYSTAL_BLOCK = BLOCKS.register("water_crystal", () -> new CrystalBlock("crystal", AbstractBlock.Properties.from(Blocks.GLASS)));
-    public static final RegistryObject<Block> AIR_CRYSTAL_BLOCK = BLOCKS.register("air_crystal", () -> new CrystalBlock("crystal", AbstractBlock.Properties.from(Blocks.GLASS)));
-    public static final RegistryObject<Block> FIRE_CRYSTAL_BLOCK = BLOCKS.register("fire_crystal", () -> new CrystalBlock("crystal", AbstractBlock.Properties.from(Blocks.GLASS)));
-    public static final RegistryObject<Block> VOID_CRYSTAL_BLOCK = BLOCKS.register("void_crystal", () -> new CrystalBlock("crystal", AbstractBlock.Properties.from(Blocks.GLASS)));
+    public static final RegistryObject<Block> EARTH_CRYSTAL_BLOCK = BLOCKS.register("earth_crystal", () -> new CrystalBlock(CrystalBlock.Polishing.CRYSTAL, AbstractBlock.Properties.from(Blocks.GLASS)));
+    public static final RegistryObject<Block> WATER_CRYSTAL_BLOCK = BLOCKS.register("water_crystal", () -> new CrystalBlock(CrystalBlock.Polishing.CRYSTAL, AbstractBlock.Properties.from(Blocks.GLASS)));
+    public static final RegistryObject<Block> AIR_CRYSTAL_BLOCK = BLOCKS.register("air_crystal", () -> new CrystalBlock(CrystalBlock.Polishing.CRYSTAL, AbstractBlock.Properties.from(Blocks.GLASS)));
+    public static final RegistryObject<Block> FIRE_CRYSTAL_BLOCK = BLOCKS.register("fire_crystal", () -> new CrystalBlock(CrystalBlock.Polishing.CRYSTAL, AbstractBlock.Properties.from(Blocks.GLASS)));
+    public static final RegistryObject<Block> VOID_CRYSTAL_BLOCK = BLOCKS.register("void_crystal", () -> new CrystalBlock(CrystalBlock.Polishing.CRYSTAL, AbstractBlock.Properties.from(Blocks.GLASS)));
 
-    public static final RegistryObject<Block> FACETED_EARTH_CRYSTAL_BLOCK = BLOCKS.register("faceted_earth_crystal", () -> new CrystalBlock("faceted", AbstractBlock.Properties.from(Blocks.GLASS)));
-    public static final RegistryObject<Block> FACETED_WATER_CRYSTAL_BLOCK = BLOCKS.register("faceted_water_crystal", () -> new CrystalBlock("faceted", AbstractBlock.Properties.from(Blocks.GLASS)));
-    public static final RegistryObject<Block> FACETED_AIR_CRYSTAL_BLOCK = BLOCKS.register("faceted_air_crystal", () -> new CrystalBlock("faceted", AbstractBlock.Properties.from(Blocks.GLASS)));
-    public static final RegistryObject<Block> FACETED_FIRE_CRYSTAL_BLOCK = BLOCKS.register("faceted_fire_crystal", () -> new CrystalBlock("faceted", AbstractBlock.Properties.from(Blocks.GLASS)));
-    public static final RegistryObject<Block> FACETED_VOID_CRYSTAL_BLOCK = BLOCKS.register("faceted_void_crystal", () -> new CrystalBlock("faceted", AbstractBlock.Properties.from(Blocks.GLASS)));
+    public static final RegistryObject<Block> FACETED_EARTH_CRYSTAL_BLOCK = BLOCKS.register("faceted_earth_crystal", () -> new CrystalBlock(CrystalBlock.Polishing.FACETED, AbstractBlock.Properties.from(Blocks.GLASS)));
+    public static final RegistryObject<Block> FACETED_WATER_CRYSTAL_BLOCK = BLOCKS.register("faceted_water_crystal", () -> new CrystalBlock(CrystalBlock.Polishing.FACETED, AbstractBlock.Properties.from(Blocks.GLASS)));
+    public static final RegistryObject<Block> FACETED_AIR_CRYSTAL_BLOCK = BLOCKS.register("faceted_air_crystal", () -> new CrystalBlock(CrystalBlock.Polishing.FACETED, AbstractBlock.Properties.from(Blocks.GLASS)));
+    public static final RegistryObject<Block> FACETED_FIRE_CRYSTAL_BLOCK = BLOCKS.register("faceted_fire_crystal", () -> new CrystalBlock(CrystalBlock.Polishing.FACETED, AbstractBlock.Properties.from(Blocks.GLASS)));
+    public static final RegistryObject<Block> FACETED_VOID_CRYSTAL_BLOCK = BLOCKS.register("faceted_void_crystal", () -> new CrystalBlock(CrystalBlock.Polishing.FACETED, AbstractBlock.Properties.from(Blocks.GLASS)));
 
-    public static final RegistryObject<Block> ADVANCED_EARTH_CRYSTAL_BLOCK = BLOCKS.register("advanced_earth_crystal", () -> new CrystalBlock("advanced", AbstractBlock.Properties.from(Blocks.GLASS)));
-    public static final RegistryObject<Block> ADVANCED_WATER_CRYSTAL_BLOCK = BLOCKS.register("advanced_water_crystal", () -> new CrystalBlock("advanced", AbstractBlock.Properties.from(Blocks.GLASS)));
-    public static final RegistryObject<Block> ADVANCED_AIR_CRYSTAL_BLOCK = BLOCKS.register("advanced_air_crystal", () -> new CrystalBlock("advanced", AbstractBlock.Properties.from(Blocks.GLASS)));
-    public static final RegistryObject<Block> ADVANCED_FIRE_CRYSTAL_BLOCK = BLOCKS.register("advanced_fire_crystal", () -> new CrystalBlock("advanced", AbstractBlock.Properties.from(Blocks.GLASS)));
-    public static final RegistryObject<Block> ADVANCED_VOID_CRYSTAL_BLOCK = BLOCKS.register("advanced_void_crystal", () -> new CrystalBlock("advanced", AbstractBlock.Properties.from(Blocks.GLASS)));
+    public static final RegistryObject<Block> ADVANCED_EARTH_CRYSTAL_BLOCK = BLOCKS.register("advanced_earth_crystal", () -> new CrystalBlock(CrystalBlock.Polishing.ADVANCED, AbstractBlock.Properties.from(Blocks.GLASS)));
+    public static final RegistryObject<Block> ADVANCED_WATER_CRYSTAL_BLOCK = BLOCKS.register("advanced_water_crystal", () -> new CrystalBlock(CrystalBlock.Polishing.ADVANCED, AbstractBlock.Properties.from(Blocks.GLASS)));
+    public static final RegistryObject<Block> ADVANCED_AIR_CRYSTAL_BLOCK = BLOCKS.register("advanced_air_crystal", () -> new CrystalBlock(CrystalBlock.Polishing.ADVANCED, AbstractBlock.Properties.from(Blocks.GLASS)));
+    public static final RegistryObject<Block> ADVANCED_FIRE_CRYSTAL_BLOCK = BLOCKS.register("advanced_fire_crystal", () -> new CrystalBlock(CrystalBlock.Polishing.ADVANCED, AbstractBlock.Properties.from(Blocks.GLASS)));
+    public static final RegistryObject<Block> ADVANCED_VOID_CRYSTAL_BLOCK = BLOCKS.register("advanced_void_crystal", () -> new CrystalBlock(CrystalBlock.Polishing.ADVANCED, AbstractBlock.Properties.from(Blocks.GLASS)));
 
-    public static final RegistryObject<Block> MASTERFUL_EARTH_CRYSTAL_BLOCK = BLOCKS.register("masterful_earth_crystal", () -> new CrystalBlock("masterful", AbstractBlock.Properties.from(Blocks.GLASS)));
-    public static final RegistryObject<Block> MASTERFUL_WATER_CRYSTAL_BLOCK = BLOCKS.register("masterful_water_crystal", () -> new CrystalBlock("masterful", AbstractBlock.Properties.from(Blocks.GLASS)));
-    public static final RegistryObject<Block> MASTERFUL_AIR_CRYSTAL_BLOCK = BLOCKS.register("masterful_air_crystal", () -> new CrystalBlock("masterful", AbstractBlock.Properties.from(Blocks.GLASS)));
-    public static final RegistryObject<Block> MASTERFUL_FIRE_CRYSTAL_BLOCK = BLOCKS.register("masterful_fire_crystal", () -> new CrystalBlock("masterful", AbstractBlock.Properties.from(Blocks.GLASS)));
-    public static final RegistryObject<Block> MASTERFUL_VOID_CRYSTAL_BLOCK = BLOCKS.register("masterful_void_crystal", () -> new CrystalBlock("masterful", AbstractBlock.Properties.from(Blocks.GLASS)));
+    public static final RegistryObject<Block> MASTERFUL_EARTH_CRYSTAL_BLOCK = BLOCKS.register("masterful_earth_crystal", () -> new CrystalBlock(CrystalBlock.Polishing.MASTERFUL, AbstractBlock.Properties.from(Blocks.GLASS)));
+    public static final RegistryObject<Block> MASTERFUL_WATER_CRYSTAL_BLOCK = BLOCKS.register("masterful_water_crystal", () -> new CrystalBlock(CrystalBlock.Polishing.MASTERFUL, AbstractBlock.Properties.from(Blocks.GLASS)));
+    public static final RegistryObject<Block> MASTERFUL_AIR_CRYSTAL_BLOCK = BLOCKS.register("masterful_air_crystal", () -> new CrystalBlock(CrystalBlock.Polishing.MASTERFUL, AbstractBlock.Properties.from(Blocks.GLASS)));
+    public static final RegistryObject<Block> MASTERFUL_FIRE_CRYSTAL_BLOCK = BLOCKS.register("masterful_fire_crystal", () -> new CrystalBlock(CrystalBlock.Polishing.MASTERFUL, AbstractBlock.Properties.from(Blocks.GLASS)));
+    public static final RegistryObject<Block> MASTERFUL_VOID_CRYSTAL_BLOCK = BLOCKS.register("masterful_void_crystal", () -> new CrystalBlock(CrystalBlock.Polishing.MASTERFUL, AbstractBlock.Properties.from(Blocks.GLASS)));
 
-    public static final RegistryObject<Block> PURE_EARTH_CRYSTAL_BLOCK = BLOCKS.register("pure_earth_crystal", () -> new CrystalBlock("pure", AbstractBlock.Properties.from(Blocks.GLASS)));
-    public static final RegistryObject<Block> PURE_WATER_CRYSTAL_BLOCK = BLOCKS.register("pure_water_crystal", () -> new CrystalBlock("pure", AbstractBlock.Properties.from(Blocks.GLASS)));
-    public static final RegistryObject<Block> PURE_AIR_CRYSTAL_BLOCK = BLOCKS.register("pure_air_crystal", () -> new CrystalBlock("pure", AbstractBlock.Properties.from(Blocks.GLASS)));
-    public static final RegistryObject<Block> PURE_FIRE_CRYSTAL_BLOCK = BLOCKS.register("pure_fire_crystal", () -> new CrystalBlock("pure", AbstractBlock.Properties.from(Blocks.GLASS)));
-    public static final RegistryObject<Block> PURE_VOID_CRYSTAL_BLOCK = BLOCKS.register("pure_void_crystal", () -> new CrystalBlock("pure", AbstractBlock.Properties.from(Blocks.GLASS)));
+    public static final RegistryObject<Block> PURE_EARTH_CRYSTAL_BLOCK = BLOCKS.register("pure_earth_crystal", () -> new CrystalBlock(CrystalBlock.Polishing.PURE, AbstractBlock.Properties.from(Blocks.GLASS)));
+    public static final RegistryObject<Block> PURE_WATER_CRYSTAL_BLOCK = BLOCKS.register("pure_water_crystal", () -> new CrystalBlock(CrystalBlock.Polishing.PURE, AbstractBlock.Properties.from(Blocks.GLASS)));
+    public static final RegistryObject<Block> PURE_AIR_CRYSTAL_BLOCK = BLOCKS.register("pure_air_crystal", () -> new CrystalBlock(CrystalBlock.Polishing.PURE, AbstractBlock.Properties.from(Blocks.GLASS)));
+    public static final RegistryObject<Block> PURE_FIRE_CRYSTAL_BLOCK = BLOCKS.register("pure_fire_crystal", () -> new CrystalBlock(CrystalBlock.Polishing.PURE, AbstractBlock.Properties.from(Blocks.GLASS)));
+    public static final RegistryObject<Block> PURE_VOID_CRYSTAL_BLOCK = BLOCKS.register("pure_void_crystal", () -> new CrystalBlock(CrystalBlock.Polishing.PURE, AbstractBlock.Properties.from(Blocks.GLASS)));
 
     public static final RegistryObject<Block> ARCANE_PEDESTAL = BLOCKS.register("arcane_pedestal", () -> new ArcanePedestalBlock(AbstractBlock.Properties.from(Blocks.OAK_PLANKS)));
+    public static final RegistryObject<Block> WISSEN_ALTAR = BLOCKS.register("wissen_altar", () -> new WissenAltarBlock(AbstractBlock.Properties.from(Blocks.OAK_PLANKS)));
+    public static final RegistryObject<Block> WISSEN_TRANSLATOR = BLOCKS.register("wissen_translator", () -> new WissenTranslatorBlock(AbstractBlock.Properties.from(Blocks.OAK_PLANKS)));
 
     //ITEMS
     public static final RegistryObject<Item> ARCANE_GOLD_INGOT = ITEMS.register("arcane_gold_ingot", () -> new Item(new Item.Properties().group(WIZARDS_REBORN_GROUP)));
@@ -206,6 +209,7 @@ public class WizardsReborn
     public static final RegistryObject<Item> ARCANE_WOOD_BRANCH = ITEMS.register("arcane_wood_branch", () -> new Item(new Item.Properties().group(WIZARDS_REBORN_GROUP)));
 
     public static final RegistryObject<Item> ARCANE_WAND = ITEMS.register("arcane_wand", () -> new ArcaneWandItem(new Item.Properties().maxStackSize(1).group(WIZARDS_REBORN_GROUP)));
+    public static final RegistryObject<Item> WISSEN_WAND = ITEMS.register("wissen_wand", () -> new WissenWandItem(new Item.Properties().maxStackSize(1).group(WIZARDS_REBORN_GROUP)));
 
     public static final RegistryObject<Item> EARTH_CRYSTAL_SEED = ITEMS.register("earth_crystal_seed", () -> new BlockItem(EARTH_CRYSTAL_SEED_BLOCK.get(), new Item.Properties().maxStackSize(1).group(WIZARDS_REBORN_GROUP)));
     public static final RegistryObject<Item> WATER_CRYSTAL_SEED = ITEMS.register("water_crystal_seed", () -> new BlockItem(WATER_CRYSTAL_SEED_BLOCK.get(), new Item.Properties().maxStackSize(1).group(WIZARDS_REBORN_GROUP)));
@@ -256,6 +260,8 @@ public class WizardsReborn
     public static final RegistryObject<Item> PURE_VOID_CRYSTAL = ITEMS.register("pure_void_crystal", () -> new CrystalItem(PURE_VOID_CRYSTAL_BLOCK.get(), new Item.Properties().maxStackSize(1).group(WIZARDS_REBORN_GROUP)));
 
     public static final RegistryObject<Item> ARCANE_PEDESTAL_ITEM = ITEMS.register("arcane_pedestal", () -> new BlockItem(ARCANE_PEDESTAL.get(), new Item.Properties().group(WIZARDS_REBORN_GROUP)));
+    public static final RegistryObject<Item> WISSEN_ALTAR_ITEM = ITEMS.register("wissen_altar", () -> new BlockItem(WISSEN_ALTAR.get(), new Item.Properties().group(WIZARDS_REBORN_GROUP)));
+    public static final RegistryObject<Item> WISSEN_TRANSLATOR_ITEM = ITEMS.register("wissen_translator", () -> new BlockItem(WISSEN_TRANSLATOR.get(), new Item.Properties().group(WIZARDS_REBORN_GROUP)));
 
     public static final RegistryObject<Item> ARCANUM_AMILET = ITEMS.register("arcanum_amulet", () -> new ArcanumAmuletItem(new Item.Properties().maxStackSize(1).group(WIZARDS_REBORN_GROUP)));
     public static final RegistryObject<Item> ARCANUM_RING = ITEMS.register("arcanum_ring", () -> new ArcanumRingItem(new Item.Properties().maxStackSize(1).group(WIZARDS_REBORN_GROUP)));
@@ -276,6 +282,8 @@ public class WizardsReborn
             ).build(null));
 
     public static RegistryObject<TileEntityType<ArcanePedestalTileEntity>> ARCANE_PEDESTAL_TILE_ENTITY = TILE_ENTITIES.register("arcane_pedestal", () -> TileEntityType.Builder.create(ArcanePedestalTileEntity::new, ARCANE_PEDESTAL.get()).build(null));
+    public static RegistryObject<TileEntityType<WissenAltarTileEntity>> WISSEN_ALTAR_TILE_ENTITY = TILE_ENTITIES.register("wissen_altar", () -> TileEntityType.Builder.create(WissenAltarTileEntity::new, WISSEN_ALTAR.get()).build(null));
+    public static RegistryObject<TileEntityType<WissenTranslatorTileEntity>> WISSEN_TRANSLATOR_TILE_ENTITY = TILE_ENTITIES.register("wissen_translator", () -> TileEntityType.Builder.create(WissenTranslatorTileEntity::new, WISSEN_TRANSLATOR.get()).build(null));
 
     //ENTITIES
     public static final RegistryObject<EntityType<CustomBoatEntity>> ARCANE_WOOD_BOAT = ENTITIES.register("arcane_wood_boat", () -> EntityType.Builder.<CustomBoatEntity>create(CustomBoatEntity::new, EntityClassification.MISC).size(1.375f, 0.5625f).build(new ResourceLocation(MOD_ID, "arcane_wood_boat").toString()));
@@ -290,6 +298,9 @@ public class WizardsReborn
     //RECIPES
     public static final RegistryObject<ArcanumDustTransmutationRecipe.Serializer> ARCANUM_DUST_TRANSMUTATION_SERIALIZER = RECIPES.register("arcanum_dust_transmutation", ArcanumDustTransmutationRecipe.Serializer::new);
     public static IRecipeType<ArcanumDustTransmutationRecipe> ARCANUM_DUST_TRANSMUTATION_RECIPE = new ArcanumDustTransmutationRecipe.ArcanumDustTransmutationRecipeType();
+
+    public static final RegistryObject<WissenAltarRecipe.Serializer> WISSEN_ALTAR_SERIALIZER = RECIPES.register("wissen_altar", WissenAltarRecipe.Serializer::new);
+    public static IRecipeType<WissenAltarRecipe> WISSEN_ALTAR_RECIPE = new WissenAltarRecipe.WissenAltarRecipeType();
 
     public WizardsReborn() {
         InterModComms.sendTo(CuriosApi.MODID, SlotTypeMessage.REGISTER_TYPE,
@@ -315,6 +326,7 @@ public class WizardsReborn
         RECIPES.register(eventBus);
 
         Registry.register(Registry.RECIPE_TYPE, ArcanumDustTransmutationRecipe.TYPE_ID, ARCANUM_DUST_TRANSMUTATION_RECIPE);
+        Registry.register(Registry.RECIPE_TYPE, WissenAltarRecipe.TYPE_ID, WISSEN_ALTAR_RECIPE);
 
         setupWandCrystalsModels();
 
@@ -326,6 +338,7 @@ public class WizardsReborn
         forgeBus.register(new WorldGen());
         forgeBus.addListener(ClientTickHandler::clientTickEnd);
         forgeBus.addListener(WorldRenderHandler::onRenderWorldLast);
+        forgeBus.addListener(WorldRenderHandler::onDrawBlockHighlight);
 
         eventBus.addListener(this::setup);
         eventBus.addListener(this::clientSetup);
@@ -421,6 +434,8 @@ public class WizardsReborn
 
             ClientRegistry.bindTileEntityRenderer(ARCANE_WOOD_SIGN_TILE_ENTITY.get(), SignTileEntityRenderer::new);
             ClientRegistry.bindTileEntityRenderer(ARCANE_PEDESTAL_TILE_ENTITY.get(), ArcanePedestalTileEntityRenderer::new);
+            ClientRegistry.bindTileEntityRenderer(WISSEN_ALTAR_TILE_ENTITY.get(), WissenAltarTileEntityRenderer::new);
+            ClientRegistry.bindTileEntityRenderer(WISSEN_TRANSLATOR_TILE_ENTITY.get(), WissenTranslatorTileEntityRenderer::new);
             ClientRegistry.bindTileEntityRenderer(CRYSTAL_TILE_ENTITY.get(), CrystalTileEntityRenderer::new);
 
             RenderingRegistry.registerEntityRenderingHandler(ARCANE_WOOD_BOAT.get(), ArcaneWoodBoatModel::new);

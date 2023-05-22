@@ -35,6 +35,7 @@
   "item.wizards_reborn.arcane_wood_branch": "Arcane Wood Branch",
 
   "item.wizards_reborn.arcane_wand": "Arcane Wand",
+  "item.wizards_reborn.wissen_wand": "Wissen Wand",
 
   "block.wizards_reborn.earth_crystal_seed": "Earth Crystal Seed",
   "block.wizards_reborn.water_crystal_seed": "Water Crystal Seed",
@@ -85,6 +86,8 @@
   "block.wizards_reborn.pure_void_crystal": "Pure Void Crystal",
 
   "block.wizards_reborn.arcane_pedestal": "Arcane Pedestal",
+  "block.wizards_reborn.wissen_altar": "Wissen Altar",
+  "block.wizards_reborn.wissen_translator": "Wissen Translator",
 
   "gui.wizards_reborn.category.arcanum_dust_transmutation": "Arcanum Dust Transmutation",
 

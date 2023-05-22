@@ -24,8 +24,12 @@ public final class PacketHandler {
 
     public static void init() {
         int id = 0;
-        HANDLER.registerMessage(id++, PacketSetCrystal.class, PacketSetCrystal::encode, PacketSetCrystal::decode, PacketSetCrystal::handle);
-        HANDLER.registerMessage(id++, PacketDeleteCrystal.class, PacketDeleteCrystal::encode, PacketDeleteCrystal::decode, PacketDeleteCrystal::handle);
+        HANDLER.registerMessage(id++, SetCrystalPacket.class, SetCrystalPacket::encode, SetCrystalPacket::decode, SetCrystalPacket::handle);
+        HANDLER.registerMessage(id++, DeleteCrystalPacket.class, DeleteCrystalPacket::encode, DeleteCrystalPacket::decode, DeleteCrystalPacket::handle);
+        HANDLER.registerMessage(id++, WissenAltarBurstEffectPacket.class, WissenAltarBurstEffectPacket::encode, WissenAltarBurstEffectPacket::decode, WissenAltarBurstEffectPacket::handle);
+        HANDLER.registerMessage(id++, WissenTranslatorBurstEffectPacket.class, WissenTranslatorBurstEffectPacket::encode, WissenTranslatorBurstEffectPacket::decode, WissenTranslatorBurstEffectPacket::handle);
+        HANDLER.registerMessage(id++, WissenTranslatorSendEffectPacket.class, WissenTranslatorSendEffectPacket::encode, WissenTranslatorSendEffectPacket::decode, WissenTranslatorSendEffectPacket::handle);
+        HANDLER.registerMessage(id++, WissenSendEffectPacket.class, WissenSendEffectPacket::encode, WissenSendEffectPacket::decode, WissenSendEffectPacket::handle);
     }
 
     public static void sendToNearby(World world, BlockPos pos, Object toSend) {
@@ -50,6 +54,10 @@ public final class PacketHandler {
         if (playerMP.server.isDedicatedServer() || !playerMP.getGameProfile().getName().equals(playerMP.server.getServerOwner())) {
             sendTo(playerMP, toSend);
         }
+    }
+
+    public static void sendToTracking(World world, BlockPos pos, Object msg) {
+        HANDLER.send(PacketDistributor.TRACKING_CHUNK.with(() -> world.getChunkAt(pos)), msg);
     }
 
     public static void sendToServer(Object msg) {

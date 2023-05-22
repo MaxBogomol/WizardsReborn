@@ -1,5 +1,6 @@
 package mod.maxbogomol.wizards_reborn.common.item.equipment;
 
+import mod.maxbogomol.wizards_reborn.api.wissen.IWissenItem;
 import mod.maxbogomol.wizards_reborn.common.item.ItemBackedInventory;
 import net.minecraft.entity.Entity;
 import net.minecraft.inventory.Inventory;
@@ -18,7 +19,7 @@ import net.minecraftforge.items.wrapper.InvWrapper;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
-public class ArcaneWandItem extends Item {
+public class ArcaneWandItem extends Item implements IWissenItem {
     public ArcaneWandItem(Properties properties) {
         super(properties);
     }
@@ -58,5 +59,10 @@ public class ArcaneWandItem extends Item {
                 stack.setTag(nbt);
             }
         }
+    }
+
+    @Override
+    public int getMaxWissen() {
+        return 0;
     }
 }
