@@ -2,6 +2,7 @@ package mod.maxbogomol.wizards_reborn;
 
 import com.google.common.collect.ImmutableMap;
 import mod.maxbogomol.wizards_reborn.client.config.ClientConfig;
+import mod.maxbogomol.wizards_reborn.client.event.ClientWorldEvent;
 import mod.maxbogomol.wizards_reborn.client.event.ClientTickHandler;
 import mod.maxbogomol.wizards_reborn.client.particle.SparkleParticleType;
 import mod.maxbogomol.wizards_reborn.client.particle.WispParticleType;
@@ -338,6 +339,7 @@ public class WizardsReborn
         forgeBus.register(new WorldGen());
         forgeBus.addListener(ClientTickHandler::clientTickEnd);
         forgeBus.addListener(WorldRenderHandler::onRenderWorldLast);
+        forgeBus.addListener(ClientWorldEvent::onTick);
         forgeBus.addListener(WorldRenderHandler::onDrawBlockHighlight);
 
         eventBus.addListener(this::setup);

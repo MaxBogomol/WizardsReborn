@@ -64,10 +64,10 @@ public class WorldRenderHandler {
         ItemStack stack = main;
 
         if (!main.isEmpty() && main.getItem() instanceof WissenWandItem) {
-            renderWand=true;
+            renderWand = true;
         } else {
             if (!offhand.isEmpty() && offhand.getItem() instanceof WissenWandItem) {
-                renderWand=true;
+                renderWand = true;
                 stack = offhand;
             }
         }
@@ -77,6 +77,8 @@ public class WorldRenderHandler {
             nbt = new CompoundNBT();
             stack.setTag(nbt);
         }
+
+        renderWand = false;
 
         if (renderWand) {
             if (nbt.getBoolean("block")) {

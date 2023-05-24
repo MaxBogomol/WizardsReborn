@@ -32,39 +32,51 @@ import static net.minecraft.state.properties.BlockStateProperties.WATERLOGGED;
 public class WissenTranslatorBlock extends HorizontalFaceBlock implements ITileEntityProvider, IWaterLoggable  {
 
     private static final VoxelShape SHAPE_D = Stream.of(
-            Block.makeCuboidShape(6.5, 2, 6.5, 9.5, 6, 9.5),
+            Block.makeCuboidShape(5, 0, 5, 11, 1, 11),
             Block.makeCuboidShape(6, 1, 6, 10, 2, 10),
-            Block.makeCuboidShape(5, 0, 5, 11, 1, 11)
+            Block.makeCuboidShape(7, 2, 7, 9, 5, 9),
+            Block.makeCuboidShape(6, 5, 6, 10, 6, 10),
+            Block.makeCuboidShape(7, 6, 7, 9, 7, 9)
     ).reduce((v1, v2) -> VoxelShapes.combineAndSimplify(v1, v2, IBooleanFunction.OR)).get();
 
     private static final VoxelShape SHAPE_T = Stream.of(
-            Block.makeCuboidShape(6.5, 10, 6.5, 9.5, 14, 9.5),
+            Block.makeCuboidShape(5, 15, 5, 11, 16, 11),
             Block.makeCuboidShape(6, 14, 6, 10, 15, 10),
-            Block.makeCuboidShape(5, 15, 5, 11, 16, 11)
+            Block.makeCuboidShape(7, 11, 7, 9, 14, 9),
+            Block.makeCuboidShape(6, 10, 6, 10, 11, 10),
+            Block.makeCuboidShape(7, 9, 7, 9, 10, 9)
     ).reduce((v1, v2) -> VoxelShapes.combineAndSimplify(v1, v2, IBooleanFunction.OR)).get();
 
     private static final VoxelShape SHAPE_N = Stream.of(
-            Block.makeCuboidShape(6.5, 6.5, 10, 9.5, 9.5, 14),
+            Block.makeCuboidShape(5, 5, 15, 11, 11, 16),
             Block.makeCuboidShape(6, 6, 14, 10, 10, 15),
-            Block.makeCuboidShape(5, 5, 15, 11, 11, 16)
+            Block.makeCuboidShape(7, 7, 11, 9, 9, 14),
+            Block.makeCuboidShape(6, 6, 10, 10, 10, 11),
+            Block.makeCuboidShape(7, 7, 9, 9, 9, 10)
     ).reduce((v1, v2) -> VoxelShapes.combineAndSimplify(v1, v2, IBooleanFunction.OR)).get();
 
     private static final VoxelShape SHAPE_S = Stream.of(
-            Block.makeCuboidShape(6.5, 6.5, 2, 9.5, 9.5, 6),
+            Block.makeCuboidShape(5, 5, 0, 11, 11, 1),
             Block.makeCuboidShape(6, 6, 1, 10, 10, 2),
-            Block.makeCuboidShape(5, 5, 0, 11, 11, 1)
+            Block.makeCuboidShape(7, 7, 2, 9, 9, 5),
+            Block.makeCuboidShape(6, 6, 5, 10, 10, 6),
+            Block.makeCuboidShape(7, 7, 6, 9, 9, 7)
     ).reduce((v1, v2) -> VoxelShapes.combineAndSimplify(v1, v2, IBooleanFunction.OR)).get();
 
     private static final VoxelShape SHAPE_W = Stream.of(
-            Block.makeCuboidShape(10, 6.5, 6.5, 14, 9.5, 9.5),
+            Block.makeCuboidShape(15, 5, 5, 16, 11, 11),
             Block.makeCuboidShape(14, 6, 6, 15, 10, 10),
-            Block.makeCuboidShape(15, 5, 5, 16, 11, 11)
+            Block.makeCuboidShape(11, 7, 7, 14, 9, 9),
+            Block.makeCuboidShape(10, 6, 6, 11, 10, 10),
+            Block.makeCuboidShape(9, 7, 7, 10, 9, 9)
     ).reduce((v1, v2) -> VoxelShapes.combineAndSimplify(v1, v2, IBooleanFunction.OR)).get();
 
     private static final VoxelShape SHAPE_E = Stream.of(
-            Block.makeCuboidShape(2, 6.5, 6.5, 6, 9.5, 9.5),
+            Block.makeCuboidShape(0, 5, 5, 1, 11, 11),
             Block.makeCuboidShape(1, 6, 6, 2, 10, 10),
-            Block.makeCuboidShape(0, 5, 5, 1, 11, 11)
+            Block.makeCuboidShape(2, 7, 7, 5, 9, 9),
+            Block.makeCuboidShape(5, 6, 6, 6, 10, 10),
+            Block.makeCuboidShape(6, 7, 7, 7, 9, 9)
     ).reduce((v1, v2) -> VoxelShapes.combineAndSimplify(v1, v2, IBooleanFunction.OR)).get();
 
     public WissenTranslatorBlock(Properties properties) {

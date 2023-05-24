@@ -12,19 +12,26 @@ import java.util.Random;
 import java.util.function.Supplier;
 
 public class WissenTranslatorBurstEffectPacket {
-    private static BlockPos pos;
+    private static float posX;
+    private static float posY;
+    private static float posZ;
+
     private static Random random = new Random();
 
-    public WissenTranslatorBurstEffectPacket(BlockPos pos) {
-        this.pos = pos;
+    public WissenTranslatorBurstEffectPacket(float posX, float posY, float posZ) {
+        this.posX = posX;
+        this.posY = posY;
+        this.posZ = posZ;
     }
 
     public static WissenTranslatorBurstEffectPacket decode(PacketBuffer buf) {
-        return new WissenTranslatorBurstEffectPacket(buf.readBlockPos());
+        return new WissenTranslatorBurstEffectPacket(buf.readFloat(), buf.readFloat(), buf.readFloat());
     }
 
     public void encode(PacketBuffer buf) {
-        buf.writeBlockPos(pos);
+        buf.writeFloat(posX);
+        buf.writeFloat(posY);
+        buf.writeFloat(posZ);
     }
 
     public static void handle(WissenTranslatorBurstEffectPacket msg, Supplier<NetworkEvent.Context> ctx) {
@@ -38,14 +45,14 @@ public class WissenTranslatorBurstEffectPacket {
                             .setAlpha(0.125f, 0).setScale(0.2f, 0)
                             .setColor(0.466f, 0.643f, 0.815f, 0.466f, 0.643f, 0.815f)
                             .setLifetime(20)
-                            .spawn(world, pos.getX() + 0.5F, pos.getY() + 0.5F, pos.getZ() + 0.5F);
+                            .spawn(world, posX, posY, posZ);
                     Particles.create(WizardsReborn.SPARKLE_PARTICLE)
                             .addVelocity(((random.nextDouble() - 0.5D) / 20), ((random.nextDouble() - 0.5D) / 20), ((random.nextDouble() - 0.5D) / 20))
                             .setAlpha(0.25f, 0).setScale(0.075f, 0)
                             .setColor(0.466f, 0.643f, 0.815f, 0.466f, 0.643f, 0.815f)
                             .setLifetime(30)
                             .setSpin((0.5f * (float) ((random.nextDouble() - 0.5D) * 2)))
-                            .spawn(world, pos.getX() + 0.5F, pos.getY() + 0.5F, pos.getZ() + 0.5F);
+                            .spawn(world, posX, posY, posZ);
                 }
             });
         }

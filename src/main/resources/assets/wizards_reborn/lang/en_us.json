@@ -93,5 +93,9 @@
 
   "item.wizards_reborn.arcanum_amulet": "Arcanum Amulet",
   "item.wizards_reborn.arcanum_ring": "Arcanum Ring",
-  "item.wizards_reborn.leather_belt": "Leather Belt"
+  "item.wizards_reborn.leather_belt": "Leather Belt",
+
+  "lore.wizards_reborn.wissen_wand_mode.receive_connect": "Receive Connect Mode",
+  "lore.wizards_reborn.wissen_wand_mode.send_connect": "Send Connect Mode",
+  "lore.wizards_reborn.wissen_wand_mode.reload": "Reload Mode"
 }

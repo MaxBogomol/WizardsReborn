@@ -31,12 +31,14 @@ public class WissenTranslatorTileEntityRenderer extends TileEntityRenderer<Wisse
         boolean renderWand = false;
 
         if (!main.isEmpty() && main.getItem() instanceof WissenWandItem) {
-            renderWand=true;
+            renderWand = true;
         } else {
             if (!offhand.isEmpty() && offhand.getItem() instanceof WissenWandItem) {
-                renderWand=true;
+                renderWand = true;
             }
         }
+
+        renderWand = false;
 
         if (renderWand) {
             if (translator.isToBlock) {

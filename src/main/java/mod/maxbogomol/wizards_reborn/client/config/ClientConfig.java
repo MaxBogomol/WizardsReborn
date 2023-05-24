@@ -4,6 +4,7 @@ import net.minecraftforge.common.ForgeConfigSpec;
 import org.apache.commons.lang3.tuple.Pair;
 
 public class ClientConfig {
+    public static ForgeConfigSpec.ConfigValue<Integer> TEST;
     public static ForgeConfigSpec.ConfigValue<Boolean> BETTER_LAYERING;
 
     public ClientConfig(ForgeConfigSpec.Builder builder) {
@@ -13,6 +14,9 @@ public class ClientConfig {
                 .comment("NOTE: Does NOT work with fabulous graphics mode.")
                 .define("betterLayering", true);
         builder.pop();
+
+        TEST = builder.comment("Maximum Y value for arcanum ore veins")
+                .defineInRange("arcanumOreMaxY", 4, 1, 10);
     }
 
     public static final ClientConfig INSTANCE;

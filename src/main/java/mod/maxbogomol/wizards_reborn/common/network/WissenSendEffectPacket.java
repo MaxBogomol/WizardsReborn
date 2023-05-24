@@ -5,30 +5,44 @@ import mod.maxbogomol.wizards_reborn.client.particle.Particles;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.world.ClientWorld;
 import net.minecraft.network.PacketBuffer;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.vector.Vector3d;
 import net.minecraftforge.fml.network.NetworkEvent;
 
 import java.util.Random;
 import java.util.function.Supplier;
 
 public class WissenSendEffectPacket {
-    private static BlockPos posFrom;
-    private static BlockPos posTo;
+    private static float posFromX;
+    private static float posFromY;
+    private static float posFromZ;
+
+    private static float posToX;
+    private static float posToY;
+    private static float posToZ;
+
     private static Random random = new Random();
 
-    public WissenSendEffectPacket(BlockPos posFrom, BlockPos posTo) {
-        this.posFrom = posFrom;
-        this.posTo = posTo;
+    public WissenSendEffectPacket(float posFromX, float posFromY, float posFromZ, float posToX, float posToY, float posToZ) {
+        this.posFromX = posFromX;
+        this.posFromY = posFromY;
+        this.posFromZ = posFromZ;
+
+        this.posToX = posToX;
+        this.posToY = posToY;
+        this.posToZ = posToZ;
     }
 
     public static WissenSendEffectPacket decode(PacketBuffer buf) {
-        return new WissenSendEffectPacket(buf.readBlockPos(), buf.readBlockPos());
+        return new WissenSendEffectPacket(buf.readFloat(), buf.readFloat(), buf.readFloat(), buf.readFloat(), buf.readFloat(), buf.readFloat());
     }
 
     public void encode(PacketBuffer buf) {
-        buf.writeBlockPos(posFrom);
-        buf.writeBlockPos(posTo);
+        buf.writeFloat(posFromX);
+        buf.writeFloat(posFromY);
+        buf.writeFloat(posFromZ);
+
+        buf.writeFloat(posToX);
+        buf.writeFloat(posToY);
+        buf.writeFloat(posToZ);
     }
 
     public static void handle(WissenSendEffectPacket msg, Supplier<NetworkEvent.Context> ctx) {
@@ -36,46 +50,30 @@ public class WissenSendEffectPacket {
             ctx.get().enqueueWork(() -> {
                 ClientWorld world = Minecraft.getInstance().world;
 
-                int particlePerBlock = 10;
-                double distance = Math.sqrt((posTo.getX() - posFrom.getX()) * (posTo.getX() - posFrom.getX()) + (posTo.getY() - posFrom.getY()) * (posTo.getY() - posFrom.getY()) + (posTo.getZ() - posFrom.getZ()) * (posTo.getZ() - posFrom.getZ()));
-                int blocks = (int) Math.floor(distance);
+                int particlePerBlock = 4;
 
-                double dX = posFrom.getX() - posTo.getX();
-                double dY = posFrom.getY() - posTo.getY();
-                double dZ = posFrom.getZ() - posTo.getZ();
+                double dX = posFromX - posToX;
+                double dY = posFromY - posToY;
+                double dZ = posFromZ - posToZ;
 
-                double yaw = Math.atan2(dZ, dX);
-                double pitch = Math.atan2(Math.sqrt(dZ * dZ + dX * dX), dY) + Math.PI;
+                float x = (float) (dX / (particlePerBlock));
+                float y = (float) (dY / (particlePerBlock));
+                float z = (float) (dZ / (particlePerBlock));
 
-                double X = Math.sin(pitch) * Math.cos(yaw) * 0.1f;
-                double Y = Math.sin(pitch) * Math.sin(yaw) * 0.1f;
-                double Z = Math.cos(pitch) * 0.1f;
-
-                float x = (float) (dX / (particlePerBlock * blocks));
-                float y = (float) (dY / (particlePerBlock * blocks));
-                float z = (float) (dZ / (particlePerBlock * blocks));
-
-                Vector3d vector = new Vector3d(X, Z, Y);
-
-                blocks = blocks - 1;
-                if (blocks <= 0) {
-                    blocks = 1;
-                }
-
-                for (int i = 0; i < particlePerBlock * blocks; i++) {
+                for (int i = 0; i < particlePerBlock; i++) {
                     Particles.create(WizardsReborn.WISP_PARTICLE)
-                            .addVelocity(((random.nextDouble() - 0.5D) / 50) + vector.getX(), ((random.nextDouble() - 0.5D) / 50)  + vector.getY(), ((random.nextDouble() - 0.5D) / 50)  + vector.getZ())
-                            .setAlpha(0.3f, 0).setScale(0.25f, 0)
+                            .addVelocity(((random.nextDouble() - 0.5D) / 50), ((random.nextDouble() - 0.5D) / 50), ((random.nextDouble() - 0.5D) / 50))
+                            .setAlpha(0.3f, 0).setScale(0.15f, 0)
                             .setColor(0.466f, 0.643f, 0.815f, 0.466f, 0.643f, 0.815f)
                             .setLifetime(20)
-                            .spawn(world, posFrom.getX() + 0.5F - (x * i), posFrom.getY() + 0.5F - (y * i), posFrom.getZ() + 0.5F - (z * i));
+                            .spawn(world, posFromX - (x * i), posFromY - (y * i), posFromZ - (z * i));
                     Particles.create(WizardsReborn.SPARKLE_PARTICLE)
-                            .addVelocity(((random.nextDouble() - 0.5D) / 50) + vector.getX(), ((random.nextDouble() - 0.5D) / 50)  + vector.getY(), ((random.nextDouble() - 0.5D) / 50)  + vector.getZ())
-                            .setAlpha(0.25f, 0).setScale(0.3f, 0)
+                            .addVelocity(((random.nextDouble() - 0.5D) / 50), ((random.nextDouble() - 0.5D) / 50), ((random.nextDouble() - 0.5D) / 50))
+                            .setAlpha(0.25f, 0).setScale(0.2f, 0)
                             .setColor(0.466f, 0.643f, 0.815f, 0.466f, 0.643f, 0.815f)
                             .setLifetime(30)
                             .setSpin((0.5f * (float) ((random.nextDouble() - 0.5D) * 2)))
-                            .spawn(world, posFrom.getX() + 0.5F - (x * i), posFrom.getY() + 0.5F - (y * i), posFrom.getZ() + 0.5F - (z * i));
+                            .spawn(world, posFromX - (x * i), posFromY - (y * i), posFromX - (z * i));
                 }
             });
         }

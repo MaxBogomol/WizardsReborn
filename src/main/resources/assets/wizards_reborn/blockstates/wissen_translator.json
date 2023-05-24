@@ -1,7 +1,16 @@
 {
   "variants": {
-    "": {
-      "model": "wizards_reborn:block/crystals/earth_crystal_growth_1"
-    }
+    "face=floor,facing=east":  { "model": "wizards_reborn:block/wissen_translator" },
+    "face=floor,facing=west":  { "model": "wizards_reborn:block/wissen_translator" },
+    "face=floor,facing=south": { "model": "wizards_reborn:block/wissen_translator" },
+    "face=floor,facing=north": { "model": "wizards_reborn:block/wissen_translator" },
+    "face=wall,facing=east":  { "model": "wizards_reborn:block/wissen_translator", "x": 90, "y": 90 },
+    "face=wall,facing=west":  { "model": "wizards_reborn:block/wissen_translator", "x": 90, "y": 270 },
+    "face=wall,facing=south": { "model": "wizards_reborn:block/wissen_translator", "x": 90, "y": 180 },
+    "face=wall,facing=north": { "model": "wizards_reborn:block/wissen_translator", "x": 90 },
+    "face=ceiling,facing=east":  { "model": "wizards_reborn:block/wissen_translator", "x": 180 },
+    "face=ceiling,facing=west":  { "model": "wizards_reborn:block/wissen_translator", "x": 180 },
+    "face=ceiling,facing=south": { "model": "wizards_reborn:block/wissen_translator", "x": 180 },
+    "face=ceiling,facing=north": { "model": "wizards_reborn:block/wissen_translator", "x": 180 }
   }
 }
