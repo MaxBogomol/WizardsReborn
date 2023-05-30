@@ -80,7 +80,6 @@ public class WissenTranslatorTileEntity extends TileEntity implements ITickableT
 
                         if ((getWissenPerReceive() - removeRemain - addRemain) > 0) {
                             removeWissen(getWissenPerReceive() - removeRemain - addRemain);
-                            //wissenTileEntity.addWissen(getWissenPerReceive() - removeRemain - addRemain);
                             addWissenRay(getPos(), new BlockPos(blockToX, blockToY, blockToZ), getWissenPerReceive() - removeRemain - addRemain);
 
                             setCooldown = true;
@@ -99,12 +98,10 @@ public class WissenTranslatorTileEntity extends TileEntity implements ITickableT
                 if (cooldown <= 0) {
                     if (tileentity instanceof IWissenTileEntity) {
                         IWissenTileEntity wissenTileEntity = (IWissenTileEntity) tileentity;
-
                         int addRemain = WissenUtils.getAddWissenRemain(getWissen(), getWissenPerReceive(), getMaxWissen());
                         int removeRemain = WissenUtils.getRemoveWissenRemain(wissenTileEntity.getWissen(), getWissenPerReceive() - addRemain);
 
                         if ((getWissenPerReceive() - removeRemain - addRemain) > 0) {
-                            //addWissen(getWissenPerReceive() - removeRemain - addRemain);
                             wissenTileEntity.removeWissen(getWissenPerReceive() - removeRemain - addRemain);
                             addWissenRay(new BlockPos(blockFromX, blockFromY, blockFromZ), getPos(), getWissenPerReceive() - removeRemain - addRemain);
 
@@ -119,7 +116,9 @@ public class WissenTranslatorTileEntity extends TileEntity implements ITickableT
                 }
             }
 
-            updateWissenRays();
+            if (wissenRaysCount > 0) {
+                updateWissenRays();
+            }
 
             if (setCooldown) {
                 cooldown = getSendWissenCooldown();
@@ -219,6 +218,7 @@ public class WissenTranslatorTileEntity extends TileEntity implements ITickableT
 
         wissenRays = tag.getCompound("wissenRays");
         wissenRaysCount = tag.getInt("wissenRaysCount");
+
         super.read(state, tag);
     }
 
@@ -242,12 +242,12 @@ public class WissenTranslatorTileEntity extends TileEntity implements ITickableT
 
     @Override
     public boolean canSendWissen() {
-        return true;
+        return ((cooldown <= 0) && (getWissen() < getMaxWissen()));
     }
 
     @Override
     public boolean canReceiveWissen() {
-        return true;
+        return ((cooldown <= 0) && (getWissen() > 0));
     }
 
     @Override
@@ -418,7 +418,7 @@ public class WissenTranslatorTileEntity extends TileEntity implements ITickableT
         int preWissenRaysCount = wissenRaysCount;
         ArrayList<Integer> deleteRays = new ArrayList<Integer>();
 
-        for (int i = 0; i <= wissenRaysCount; i++) {
+        for (int i = 0; i < wissenRaysCount; i++) {
             CompoundNBT tag = wissenRays.getCompound(String.valueOf(i));
 
             int blockFromX = tag.getInt("blockFromX");
@@ -440,7 +440,7 @@ public class WissenTranslatorTileEntity extends TileEntity implements ITickableT
             PacketHandler.sendToTracking(world, getPos(), new WissenSendEffectPacket(blockX, blockY, blockZ, X, Y, Z));
 
             if ((blockFromX != Math.floor(blockX)) || (blockFromY != Math.floor(blockY)) || (blockFromZ != Math.floor(blockZ))) {
-                TileEntity tileentity = world.getTileEntity(new BlockPos(X, Y, Z));
+                TileEntity tileentity = world.getTileEntity(new BlockPos(blockX, blockY, blockZ));
                 if (tileentity instanceof IWissenTileEntity) {
                     if ((blockX % 1F > 0.25F && blockX % 1F <= 0.75F) && (blockY % 1F > 0.25F && blockY % 1F <= 0.75F) && (blockZ % 1F > 0.25F && blockZ % 1F <= 0.75F)) {
                         IWissenTileEntity wissenTileEntity = (IWissenTileEntity) tileentity;
@@ -462,7 +462,7 @@ public class WissenTranslatorTileEntity extends TileEntity implements ITickableT
             deleteWissenRay(deleteRays);
         }
 
-        if (preWissenRaysCount > 0) {
+        if (preWissenRaysCount > wissenRaysCount) {
             PacketUtils.SUpdateTileEntityPacket(this);
         }
     }

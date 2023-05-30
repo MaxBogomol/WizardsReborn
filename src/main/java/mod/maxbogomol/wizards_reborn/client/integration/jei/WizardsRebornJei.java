@@ -9,6 +9,7 @@ import mezz.jei.api.registration.IRecipeRegistration;
 import mod.maxbogomol.wizards_reborn.WizardsReborn;
 import mod.maxbogomol.wizards_reborn.common.data.recipes.ArcanumDustTransmutationRecipe;
 import mod.maxbogomol.wizards_reborn.common.data.recipes.WissenAltarRecipe;
+import mod.maxbogomol.wizards_reborn.common.data.recipes.WissenCrystallizerRecipe;
 import net.minecraft.block.Blocks;
 import net.minecraft.client.Minecraft;
 import net.minecraft.item.ItemStack;
@@ -31,6 +32,8 @@ public class WizardsRebornJei implements IModPlugin {
                 new ArcanumDustTransmutationRecipeCategory(registration.getJeiHelpers().getGuiHelper()));
         registration.addRecipeCategories(
                 new WissenAltarRecipeCategory(registration.getJeiHelpers().getGuiHelper()));
+        registration.addRecipeCategories(
+                new WissenCrystallizerRecipeCategory(registration.getJeiHelpers().getGuiHelper()));
     }
 
     @Override
@@ -42,11 +45,15 @@ public class WizardsRebornJei implements IModPlugin {
         registration.addRecipes(rm.getRecipesForType(WizardsReborn.WISSEN_ALTAR_RECIPE).stream()
                         .filter(r -> r instanceof WissenAltarRecipe).collect(Collectors.toList()),
                 WissenAltarRecipeCategory.UID);
+        registration.addRecipes(rm.getRecipesForType(WizardsReborn.WISSEN_CRYSTALLIZER_RECIPE).stream()
+                        .filter(r -> r instanceof WissenCrystallizerRecipe).collect(Collectors.toList()),
+                WissenCrystallizerRecipeCategory.UID);
     }
 
     @Override
     public void registerRecipeCatalysts(IRecipeCatalystRegistration registration) {
         registration.addRecipeCatalyst(new ItemStack(WizardsReborn.ARCANUM_DUST.get()), ArcanumDustTransmutationRecipeCategory.UID);
         registration.addRecipeCatalyst(new ItemStack(WizardsReborn.WISSEN_ALTAR_ITEM.get()), WissenAltarRecipeCategory.UID);
+        registration.addRecipeCatalyst(new ItemStack(WizardsReborn.WISSEN_CRYSTALLIZER_ITEM.get()), WissenCrystallizerRecipeCategory.UID);
     }
 }

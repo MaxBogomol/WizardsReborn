@@ -1,11 +1,12 @@
 {
 	"credit": "Made with Blockbench",
+	"parent": "minecraft:block/block",
 	"textures": {
-		"0": "wizards_reborn:block/1",
-		"1": "wizards_reborn:block/2",
-		"2": "wizards_reborn:block/3",
-		"3": "wizards_reborn:block/4",
-		"particle": "wizards_reborn:block/1"
+		"0": "wizards_reborn:block/wissen_crystallizer_bottom",
+		"1": "wizards_reborn:block/wissen_crystallizer_top",
+		"2": "wizards_reborn:block/wissen_crystallizer_mid",
+		"3": "wizards_reborn:block/wissen_crystallizer_spiers",
+		"particle": "wizards_reborn:block/arcane_wood_planks"
 	},
 	"elements": [
 		{

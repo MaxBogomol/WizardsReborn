@@ -44,19 +44,11 @@ public class ClientWorldEvent {
             CompoundNBT nbt = stack.getTag();
             if (nbt == null) {
                 nbt = new CompoundNBT();
-                stack.setTag(nbt);
             }
 
-            if (!nbt.contains("block")) {
-                nbt.putBoolean("block", false);
-            }
-            if (!nbt.contains("mode")) {
-                nbt.putInt("mode", 0);
-            }
-
-            if (renderWand) {
+            if (nbt.contains("block") && nbt.contains("mode") && renderWand) {
                 if (nbt.getBoolean("block")) {
-                    if (nbt.getInt("mode") != 2) {
+                    if (nbt.getInt("mode") == 1 || nbt.getInt("mode") == 2) {
                         BlockPos blockPos = new BlockPos(nbt.getInt("blockX"), nbt.getInt("blockY"), nbt.getInt("blockZ"));
 
                         if (player.world.getTileEntity(blockPos) instanceof IWissenTileEntity) {

@@ -1,0 +1,25 @@
+{
+  "type": "wizards_reborn:wissen_crystallizer",
+  "output": {
+    "item": "wizards_reborn:air_crystal_seed",
+    "count": 1
+  },
+  "wissen": 500,
+  "ingredients": [
+    {
+      "item": "wizards_reborn:arcanum"
+    },
+    {
+      "item": "wizards_reborn:arcanum_dust"
+    },
+    {
+      "item": "wizards_reborn:arcanum_dust"
+    },
+    {
+      "item": "wizards_reborn:arcanum_dust"
+    },
+    {
+      "item": "wizards_reborn:arcanum_dust"
+    }
+  ]
+}

@@ -27,7 +27,7 @@ public class WissenAltarRecipeCategory implements IRecipeCategory<WissenAltarRec
 
     public WissenAltarRecipeCategory(IGuiHelper helper) {
         background = helper.createDrawable(TEXTURE, 0, 0, 48, 48);
-        icon = helper.createDrawableIngredient(new ItemStack(WizardsReborn.WISSEN_ALTAR.get()));
+        icon = helper.createDrawableIngredient(new ItemStack(WizardsReborn.WISSEN_ALTAR_ITEM.get()));
     }
 
     @Override
@@ -75,6 +75,6 @@ public class WissenAltarRecipeCategory implements IRecipeCategory<WissenAltarRec
         String text_wissen = Integer.toString(recipe.getRecipeWissen());
         int stringWidth = font_renderer.getStringWidth(text_wissen);
 
-        font_renderer.drawStringWithShadow(matrixStack, text_wissen, 33-(stringWidth/2)-font_renderer.FONT_HEIGHT, 38, 0xffffff);
+        font_renderer.drawStringWithShadow(matrixStack, text_wissen, 15 - (stringWidth/2) + font_renderer.FONT_HEIGHT, 38, 0xffffff);
     }
 }
