@@ -1,0 +1,27 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "group": "wooden_fence",
+  "pattern": [
+    " W ",
+    "G#G",
+    "S#S"
+  ],
+  "key": {
+    "#": {
+      "item": "wizards_reborn:arcane_wood_planks"
+    },
+    "S": {
+      "item": "wizards_reborn:arcane_wood_slab"
+    },
+    "W": {
+      "item": "wizards_reborn:arcane_gold_ingot"
+    },
+    "G": {
+      "item": "wizards_reborn:arcane_gold_nugget"
+    }
+  },
+  "result": {
+    "item": "wizards_reborn:wissen_translator",
+    "count": 2
+  }
+}

@@ -18,6 +18,7 @@ import net.minecraft.tileentity.ITickableTileEntity;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.tileentity.TileEntityType;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.MathHelper;
 
 import java.awt.*;
 import java.util.ArrayList;
@@ -230,6 +231,10 @@ public class WissenTranslatorTileEntity extends TileEntity implements ITickableT
         return 0.1f;
     }
 
+    public int getRayMitting() {
+        return 100;
+    }
+
     @Override
     public int getWissen() {
         return wissen;
@@ -394,6 +399,7 @@ public class WissenTranslatorTileEntity extends TileEntity implements ITickableT
         tag.putFloat("velocityZ", (float) -Z);
 
         tag.putInt("wissen", wissenCount);
+        tag.putInt("mitting", 0);
 
         wissenRaysCount = wissenRaysCount + 1;
         wissenRays.put(String.valueOf(wissenRaysCount - 1), tag);
@@ -439,10 +445,15 @@ public class WissenTranslatorTileEntity extends TileEntity implements ITickableT
 
             PacketHandler.sendToTracking(world, getPos(), new WissenSendEffectPacket(blockX, blockY, blockZ, X, Y, Z));
 
-            if ((blockFromX != Math.floor(blockX)) || (blockFromY != Math.floor(blockY)) || (blockFromZ != Math.floor(blockZ))) {
+            if (tag.getInt("wissen") <= 0) {
+                PacketHandler.sendToTracking(world, getPos(), new WissenTranslatorBurstEffectPacket(X, Y, Z));
+                deleteRays.add(i);
+            } else if ((blockFromX != MathHelper.floor(blockX)) || blockFromY != MathHelper.floor(blockY) || (blockFromZ != MathHelper.floor(blockZ))) {
                 TileEntity tileentity = world.getTileEntity(new BlockPos(blockX, blockY, blockZ));
                 if (tileentity instanceof IWissenTileEntity) {
-                    if ((blockX % 1F > 0.25F && blockX % 1F <= 0.75F) && (blockY % 1F > 0.25F && blockY % 1F <= 0.75F) && (blockZ % 1F > 0.25F && blockZ % 1F <= 0.75F)) {
+                    if ((Math.abs(blockX) % 1F > 0.25F && Math.abs(blockX) % 1F <= 0.75F) &&
+                            (Math.abs(blockY) % 1F > 0.25F && Math.abs(blockY) % 1F <= 0.75F) &&
+                            (Math.abs(blockZ) % 1F > 0.25F && Math.abs(blockZ) % 1F <= 0.75F)) {
                         IWissenTileEntity wissenTileEntity = (IWissenTileEntity) tileentity;
 
                         int addRemain = WissenUtils.getAddWissenRemain(wissenTileEntity.getWissen(), tag.getInt("wissen"), wissenTileEntity.getMaxWissen());
@@ -454,6 +465,16 @@ public class WissenTranslatorTileEntity extends TileEntity implements ITickableT
 
                         deleteRays.add(i);
                     }
+                } else {
+                    BlockPos blockpos = new BlockPos(blockX, blockY, blockZ);
+                    if (world.getBlockState(blockpos).hasOpaqueCollisionShape(world, blockpos)) {
+                        tag.putInt("wissen", tag.getInt("wissen") - 1);
+                    }
+
+                    if (tag.getInt("mitting") >= getRayMitting()) {
+                        tag.putInt("wissen", tag.getInt("wissen") - 1);
+                    }
+                    tag.putInt("mitting", tag.getInt("mitting") + 1);
                 }
             }
         }

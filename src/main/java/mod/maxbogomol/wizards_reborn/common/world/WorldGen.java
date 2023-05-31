@@ -12,7 +12,9 @@ import net.minecraft.world.gen.feature.structure.IStructurePieceType;
 import net.minecraft.world.gen.feature.structure.Structure;
 import net.minecraft.world.gen.feature.template.RuleTest;
 import net.minecraft.world.gen.feature.template.TagMatchRuleTest;
+import net.minecraft.world.gen.foliageplacer.DarkOakFoliagePlacer;
 import net.minecraft.world.gen.foliageplacer.FancyFoliagePlacer;
+import net.minecraft.world.gen.trunkplacer.DarkOakTrunkPlacer;
 import net.minecraft.world.gen.trunkplacer.FancyTrunkPlacer;
 import net.minecraftforge.common.Tags;
 import net.minecraftforge.event.world.BiomeLoadingEvent;
@@ -27,7 +29,7 @@ public class WorldGen {
     static ConfiguredFeature<?, ?> ARCANUM_ORE_GEN;
     static RuleTest IN_STONE = new TagMatchRuleTest(Tags.Blocks.STONE);
 
-    public static ConfiguredFeature<BaseTreeFeatureConfig, ?> ARCANE_WOOD_TREE;
+    public static ConfiguredFeature<BaseTreeFeatureConfig, ?> ARCANE_WOOD_TREE, FANCY_ARCANE_WOOD_TREE;
 
     static IStructurePieceType register(IStructurePieceType type, String name) {
         net.minecraft.util.registry.Registry.register(net.minecraft.util.registry.Registry.STRUCTURE_PIECE, new ResourceLocation(WizardsReborn.MOD_ID, name), type);
@@ -62,7 +64,14 @@ public class WorldGen {
                 new SimpleBlockStateProvider(WizardsReborn.ARCANE_WOOD_LEAVES.get().getDefaultState()),
                 new FancyFoliagePlacer(FeatureSpread.create(2), FeatureSpread.create(4), 4),
                 new FancyTrunkPlacer(6, 9, 1),
-                new TwoLayerFeature(2, 0, 2))).setMaxWaterDepth(Integer.MAX_VALUE).setHeightmap(Heightmap.Type.MOTION_BLOCKING).setIgnoreVines().build()));;
+                new TwoLayerFeature(2, 0, 2))).setMaxWaterDepth(Integer.MAX_VALUE).setHeightmap(Heightmap.Type.MOTION_BLOCKING).setIgnoreVines().build()));
+
+        FANCY_ARCANE_WOOD_TREE = register("fancy_arcane_wood", Feature.TREE.withConfiguration((new BaseTreeFeatureConfig.Builder(
+                new SimpleBlockStateProvider(WizardsReborn.ARCANE_WOOD_LOG.get().getDefaultState()),
+                new SimpleBlockStateProvider(WizardsReborn.ARCANE_WOOD_LEAVES.get().getDefaultState()),
+                new DarkOakFoliagePlacer(FeatureSpread.create(0), FeatureSpread.create(0)),
+                new DarkOakTrunkPlacer(5, 7, 1),
+                new TwoLayerFeature(2, 0, 2))).setMaxWaterDepth(Integer.MAX_VALUE).setHeightmap(Heightmap.Type.MOTION_BLOCKING).setIgnoreVines().build()));
     }
 
     @SubscribeEvent

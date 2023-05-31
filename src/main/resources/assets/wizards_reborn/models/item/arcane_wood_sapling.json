@@ -1,6 +1,6 @@
 {
   "parent": "item/generated",
   "textures": {
-    "layer0": "wizards_reborn:item/arcane_wood_sapling"
+    "layer0": "wizards_reborn:block/arcane_wood_sapling"
   }
 }

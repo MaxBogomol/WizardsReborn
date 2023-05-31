@@ -3,10 +3,13 @@
   "ingredients": [
     {
       "item": "wizards_reborn:arcanum"
+    },
+    {
+      "item": "minecraft:redstone"
     }
   ],
   "result": {
     "item": "wizards_reborn:arcanum_dust",
-    "count": 2
+    "count": 3
   }
 }

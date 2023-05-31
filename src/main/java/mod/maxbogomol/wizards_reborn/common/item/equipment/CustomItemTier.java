@@ -7,9 +7,9 @@ import net.minecraft.util.LazyValue;
 
 import java.util.function.Supplier;
 
-public enum ArcaneGoldTier implements IItemTier {
+public enum CustomItemTier implements IItemTier {
 
-    ARCANE_GOLD(3, 350, 4f, 2f, 10,() -> Ingredient.fromItems(WizardsReborn.ARCANE_GOLD_INGOT.get()));
+    ARCANE_GOLD(3, 350, 8f, 2f, 20, () -> Ingredient.fromItems(WizardsReborn.ARCANE_GOLD_INGOT.get()));
 
     private final int harvestLevel;
     private final int maxUses;
@@ -18,7 +18,7 @@ public enum ArcaneGoldTier implements IItemTier {
     private final int enchantability;
     private final LazyValue<Ingredient> repairMaterial;
 
-    ArcaneGoldTier(int harvestLevel, int maxUses, float efficiency,
+    CustomItemTier(int harvestLevel, int maxUses, float efficiency,
                    float attackDamage, int enchantability, Supplier<Ingredient> repairMaterial) {
         this.harvestLevel = harvestLevel;
         this.maxUses = maxUses;
