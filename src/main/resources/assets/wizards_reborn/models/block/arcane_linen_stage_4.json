@@ -1,0 +1,6 @@
+{
+	"parent": "minecraft:block/crop",
+	"textures": {
+		"crop": "wizards_reborn:block/arcane_linen_stage_4"
+	}
+}

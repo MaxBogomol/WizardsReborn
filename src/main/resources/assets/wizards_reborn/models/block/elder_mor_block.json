@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:block/template_single_face",
+  "textures": {
+    "texture": "wizards_reborn:block/elder_mor_block"
+  }
+}

@@ -1,0 +1,7 @@
+{
+  "parent": "minecraft:block/template_single_face",
+  "ambientocclusion": false,
+  "textures": {
+    "texture": "wizards_reborn:block/mor_block_inside"
+  }
+}

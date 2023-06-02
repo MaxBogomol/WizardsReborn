@@ -1,0 +1,7 @@
+{
+	"parent": "wizards_reborn:block/crop_large",
+	"textures": {
+		"crop_bottom": "wizards_reborn:block/arcane_linen_stage_7_bottom",
+		"crop_top": "wizards_reborn:block/arcane_linen_stage_7_top"
+	}
+}

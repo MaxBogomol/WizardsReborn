@@ -37,6 +37,17 @@
   "block.wizards_reborn.arcane_wood_sapling": "Arcane Wood Sapling",
   "block.wizards_reborn.potted_arcane_wood_sapling": "Potted Arcane Wood Sapling",
 
+  "block.wizards_reborn.arcane_linen": "Arcane Linen Seeds",
+  "item.wizards_reborn.arcane_linen": "Arcane Linen",
+  "block.wizards_reborn.arcane_linen_hay": "Arcane Linen Hay",
+
+  "block.wizards_reborn.mor": "Mor",
+  "block.wizards_reborn.potted_mor": "Potted Mor",
+  "block.wizards_reborn.mor_block": "Mor Block",
+  "block.wizards_reborn.elder_mor": "Elder Mor",
+  "block.wizards_reborn.potted_elder_mor": "Potted Elder Mor",
+  "block.wizards_reborn.elder_mor_block": "Elder Mor Block",
+
   "item.wizards_reborn.arcane_wand": "Arcane Wand",
   "item.wizards_reborn.wissen_wand": "Wissen Wand",
 
@@ -92,6 +103,7 @@
   "block.wizards_reborn.wissen_altar": "Wissen Altar",
   "block.wizards_reborn.wissen_translator": "Wissen Translator",
   "block.wizards_reborn.wissen_crystallizer": "Wissen Crystallizer",
+  "block.wizards_reborn.arcane_workbench": "Arcane Workbench",
 
   "gui.wizards_reborn.category.arcanum_dust_transmutation": "Arcanum Dust Transmutation",
 

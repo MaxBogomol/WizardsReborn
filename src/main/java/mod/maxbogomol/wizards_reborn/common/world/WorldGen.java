@@ -2,6 +2,8 @@ package mod.maxbogomol.wizards_reborn.common.world;
 
 import mod.maxbogomol.wizards_reborn.WizardsReborn;
 import mod.maxbogomol.wizards_reborn.common.config.Config;
+import net.minecraft.block.Blocks;
+import net.minecraft.block.HugeMushroomBlock;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.registry.WorldGenRegistries;
 import net.minecraft.world.gen.GenerationStage;
@@ -30,6 +32,7 @@ public class WorldGen {
     static RuleTest IN_STONE = new TagMatchRuleTest(Tags.Blocks.STONE);
 
     public static ConfiguredFeature<BaseTreeFeatureConfig, ?> ARCANE_WOOD_TREE, FANCY_ARCANE_WOOD_TREE;
+    public static ConfiguredFeature<?, ?> TALL_MOR, TALL_ELDER_MOR, HUGE_MOR, HUGE_ELDER_MOR;
 
     static IStructurePieceType register(IStructurePieceType type, String name) {
         net.minecraft.util.registry.Registry.register(net.minecraft.util.registry.Registry.STRUCTURE_PIECE, new ResourceLocation(WizardsReborn.MOD_ID, name), type);
@@ -72,6 +75,22 @@ public class WorldGen {
                 new DarkOakFoliagePlacer(FeatureSpread.create(0), FeatureSpread.create(0)),
                 new DarkOakTrunkPlacer(5, 7, 1),
                 new TwoLayerFeature(2, 0, 2))).setMaxWaterDepth(Integer.MAX_VALUE).setHeightmap(Heightmap.Type.MOTION_BLOCKING).setIgnoreVines().build()));
+
+        TALL_MOR = register("huge_mor", Feature.HUGE_RED_MUSHROOM.withConfiguration(new BigMushroomFeatureConfig(
+                new SimpleBlockStateProvider(WizardsReborn.MOR_BLOCK.get().getDefaultState().with(HugeMushroomBlock.DOWN, Boolean.valueOf(false))),
+                new SimpleBlockStateProvider(Blocks.MUSHROOM_STEM.getDefaultState().with(HugeMushroomBlock.UP, Boolean.valueOf(false)).with(HugeMushroomBlock.DOWN, Boolean.valueOf(false))), 1)));
+
+        TALL_ELDER_MOR = register("huge_elder_mor", Feature.HUGE_RED_MUSHROOM.withConfiguration(new BigMushroomFeatureConfig(
+                new SimpleBlockStateProvider(WizardsReborn.ELDER_MOR_BLOCK.get().getDefaultState().with(HugeMushroomBlock.DOWN, Boolean.valueOf(false))),
+                new SimpleBlockStateProvider(Blocks.MUSHROOM_STEM.getDefaultState().with(HugeMushroomBlock.UP, Boolean.valueOf(false)).with(HugeMushroomBlock.DOWN, Boolean.valueOf(false))), 1)));
+
+        HUGE_MOR = register("huge_mor", Feature.HUGE_RED_MUSHROOM.withConfiguration(new BigMushroomFeatureConfig(
+                new SimpleBlockStateProvider(WizardsReborn.MOR_BLOCK.get().getDefaultState().with(HugeMushroomBlock.DOWN, Boolean.valueOf(false))),
+                new SimpleBlockStateProvider(Blocks.MUSHROOM_STEM.getDefaultState().with(HugeMushroomBlock.UP, Boolean.valueOf(false)).with(HugeMushroomBlock.DOWN, Boolean.valueOf(false))), 2)));
+
+        HUGE_ELDER_MOR = register("huge_elder_mor", Feature.HUGE_RED_MUSHROOM.withConfiguration(new BigMushroomFeatureConfig(
+                new SimpleBlockStateProvider(WizardsReborn.ELDER_MOR_BLOCK.get().getDefaultState().with(HugeMushroomBlock.DOWN, Boolean.valueOf(false))),
+                new SimpleBlockStateProvider(Blocks.MUSHROOM_STEM.getDefaultState().with(HugeMushroomBlock.UP, Boolean.valueOf(false)).with(HugeMushroomBlock.DOWN, Boolean.valueOf(false))), 2)));
     }
 
     @SubscribeEvent
