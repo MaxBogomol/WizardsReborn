@@ -4,6 +4,8 @@ import com.google.common.collect.ImmutableMap;
 import mod.maxbogomol.wizards_reborn.client.config.ClientConfig;
 import mod.maxbogomol.wizards_reborn.client.event.ClientWorldEvent;
 import mod.maxbogomol.wizards_reborn.client.event.ClientTickHandler;
+import mod.maxbogomol.wizards_reborn.client.gui.container.ArcaneWorkbenchContainer;
+import mod.maxbogomol.wizards_reborn.client.gui.screen.ArcaneWorkbenchScreen;
 import mod.maxbogomol.wizards_reborn.client.particle.KarmaParticleType;
 import mod.maxbogomol.wizards_reborn.client.particle.SparkleParticleType;
 import mod.maxbogomol.wizards_reborn.client.particle.WispParticleType;
@@ -13,6 +15,7 @@ import mod.maxbogomol.wizards_reborn.client.render.model.item.*;
 import mod.maxbogomol.wizards_reborn.client.render.model.tileentity.*;
 import mod.maxbogomol.wizards_reborn.common.block.*;
 import mod.maxbogomol.wizards_reborn.common.block.flammable.*;
+import mod.maxbogomol.wizards_reborn.common.data.recipes.ArcaneWorkbenchRecipe;
 import mod.maxbogomol.wizards_reborn.common.world.tree.ArcaneWoodTree;
 import mod.maxbogomol.wizards_reborn.common.config.Config;
 import mod.maxbogomol.wizards_reborn.common.data.recipes.ArcanumDustTransmutationRecipe;
@@ -35,6 +38,7 @@ import mod.maxbogomol.wizards_reborn.common.world.WorldGen;
 import net.minecraft.block.*;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.gui.ScreenManager;
 import net.minecraft.client.renderer.Atlases;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.RenderTypeLookup;
@@ -46,13 +50,16 @@ import net.minecraft.client.settings.KeyBinding;
 import net.minecraft.client.util.InputMappings;
 import net.minecraft.entity.EntityClassification;
 import net.minecraft.entity.EntityType;
+import net.minecraft.inventory.container.ContainerType;
 import net.minecraft.item.*;
 import net.minecraft.item.crafting.IRecipeSerializer;
 import net.minecraft.item.crafting.IRecipeType;
 import net.minecraft.particles.ParticleType;
 import net.minecraft.tileentity.TileEntityType;
 import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.registry.Registry;
+import net.minecraft.world.World;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.client.event.ModelBakeEvent;
@@ -62,6 +69,7 @@ import net.minecraftforge.client.model.ModelLoader;
 import net.minecraftforge.client.settings.KeyConflictContext;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.ToolType;
+import net.minecraftforge.common.extensions.IForgeContainerType;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
@@ -104,6 +112,7 @@ public class WizardsReborn
     public static final DeferredRegister<EntityType<?>> ENTITIES = DeferredRegister.create(ForgeRegistries.ENTITIES, MOD_ID);
     public static final DeferredRegister<ParticleType<?>> PARTICLES = DeferredRegister.create(ForgeRegistries.PARTICLE_TYPES, MOD_ID);
     public static final DeferredRegister<IRecipeSerializer<?>> RECIPES = DeferredRegister.create(ForgeRegistries.RECIPE_SERIALIZERS, MOD_ID);
+    public static final DeferredRegister<ContainerType<?>> CONTAINERS = DeferredRegister.create(ForgeRegistries.CONTAINERS, MOD_ID);
 
     public static final WoodType ARCANE_WOOD_TYPE = WoodType.create(new ResourceLocation(MOD_ID, "arcane_wood").toString());
 
@@ -189,7 +198,7 @@ public class WizardsReborn
     public static final RegistryObject<Block> WISSEN_ALTAR = BLOCKS.register("wissen_altar", () -> new WissenAltarBlock(AbstractBlock.Properties.from(Blocks.OAK_PLANKS)));
     public static final RegistryObject<Block> WISSEN_TRANSLATOR = BLOCKS.register("wissen_translator", () -> new WissenTranslatorBlock(AbstractBlock.Properties.from(Blocks.OAK_PLANKS)));
     public static final RegistryObject<Block> WISSEN_CRYSTALLIZER = BLOCKS.register("wissen_crystallizer", () -> new WissenCrystallizerBlock(AbstractBlock.Properties.from(Blocks.OAK_PLANKS)));
-    public static final RegistryObject<Block> ARCANE_WORKBENCH = BLOCKS.register("arcane_workbench", () -> new WissenCrystallizerBlock(AbstractBlock.Properties.from(Blocks.OAK_PLANKS)));
+    public static final RegistryObject<Block> ARCANE_WORKBENCH = BLOCKS.register("arcane_workbench", () -> new ArcaneWorkbenchBlock(AbstractBlock.Properties.from(Blocks.OAK_PLANKS)));
 
     //ITEMS
     public static final RegistryObject<Item> ARCANE_GOLD_INGOT = ITEMS.register("arcane_gold_ingot", () -> new Item(new Item.Properties().group(WIZARDS_REBORN_GROUP)));
@@ -317,6 +326,7 @@ public class WizardsReborn
     public static RegistryObject<TileEntityType<WissenAltarTileEntity>> WISSEN_ALTAR_TILE_ENTITY = TILE_ENTITIES.register("wissen_altar", () -> TileEntityType.Builder.create(WissenAltarTileEntity::new, WISSEN_ALTAR.get()).build(null));
     public static RegistryObject<TileEntityType<WissenTranslatorTileEntity>> WISSEN_TRANSLATOR_TILE_ENTITY = TILE_ENTITIES.register("wissen_translator", () -> TileEntityType.Builder.create(WissenTranslatorTileEntity::new, WISSEN_TRANSLATOR.get()).build(null));
     public static RegistryObject<TileEntityType<WissenCrystallizerTileEntity>> WISSEN_CRYSTALLIZER_TILE_ENTITY = TILE_ENTITIES.register("wissen_crystallizer", () -> TileEntityType.Builder.create(WissenCrystallizerTileEntity::new, WISSEN_CRYSTALLIZER.get()).build(null));
+    public static RegistryObject<TileEntityType<ArcaneWorkbenchTileEntity>> ARCANE_WORKBENCH_TILE_ENTITY = TILE_ENTITIES.register("arcane_workbench", () -> TileEntityType.Builder.create(ArcaneWorkbenchTileEntity::new, ARCANE_WORKBENCH.get()).build(null));
 
     //ENTITIES
     public static final RegistryObject<EntityType<CustomBoatEntity>> ARCANE_WOOD_BOAT = ENTITIES.register("arcane_wood_boat", () -> EntityType.Builder.<CustomBoatEntity>create(CustomBoatEntity::new, EntityClassification.MISC).size(1.375f, 0.5625f).build(new ResourceLocation(MOD_ID, "arcane_wood_boat").toString()));
@@ -338,6 +348,18 @@ public class WizardsReborn
 
     public static final RegistryObject<WissenCrystallizerRecipe.Serializer> WISSEN_CRYSTALLIZER_SERIALIZER = RECIPES.register("wissen_crystallizer", WissenCrystallizerRecipe.Serializer::new);
     public static IRecipeType<WissenCrystallizerRecipe> WISSEN_CRYSTALLIZER_RECIPE = new WissenCrystallizerRecipe.WissenCrystallizerRecipeType();
+
+    public static final RegistryObject<ArcaneWorkbenchRecipe.Serializer> ARCANE_WORKBENCH_SERIALIZER = RECIPES.register("arcane_workbench", ArcaneWorkbenchRecipe.Serializer::new);
+    public static IRecipeType<ArcaneWorkbenchRecipe> ARCANE_WORKBENCH_RECIPE = new ArcaneWorkbenchRecipe.ArcaneWorkbenchRecipeType();
+
+    //CONTAINERS
+    public static final RegistryObject<ContainerType<ArcaneWorkbenchContainer>> ARCANE_WORKBENCH_CONTAINER
+            = CONTAINERS.register("arcane_workbench_container",
+            () -> IForgeContainerType.create(((windowId, inv, data) -> {
+                BlockPos pos = data.readBlockPos();
+                World world = inv.player.getEntityWorld();
+                return new ArcaneWorkbenchContainer(windowId, world, pos, inv, inv.player);
+            })));
 
     public WizardsReborn() {
         InterModComms.sendTo(CuriosApi.MODID, SlotTypeMessage.REGISTER_TYPE,
@@ -361,12 +383,14 @@ public class WizardsReborn
         ENTITIES.register(eventBus);
         PARTICLES.register(eventBus);
         RECIPES.register(eventBus);
+        CONTAINERS.register(eventBus);
 
         FireBlock fireblock = (FireBlock)Blocks.FIRE;
 
         Registry.register(Registry.RECIPE_TYPE, ArcanumDustTransmutationRecipe.TYPE_ID, ARCANUM_DUST_TRANSMUTATION_RECIPE);
         Registry.register(Registry.RECIPE_TYPE, WissenAltarRecipe.TYPE_ID, WISSEN_ALTAR_RECIPE);
         Registry.register(Registry.RECIPE_TYPE, WissenCrystallizerRecipe.TYPE_ID, WISSEN_CRYSTALLIZER_RECIPE);
+        Registry.register(Registry.RECIPE_TYPE, ArcaneWorkbenchRecipe.TYPE_ID, ARCANE_WORKBENCH_RECIPE);
 
         setupWandCrystalsModels();
 
@@ -401,7 +425,11 @@ public class WizardsReborn
     }
 
     private void clientSetup(final FMLClientSetupEvent event) {
-
+        event.enqueueWork(() -> {
+            System.out.println("CLIENT SETUP");
+            ScreenManager.registerFactory(ARCANE_WORKBENCH_CONTAINER.get(),
+                    ArcaneWorkbenchScreen::new);
+        });
     }
 
     private void enqueueIMC(final InterModEnqueueEvent event)
@@ -485,6 +513,8 @@ public class WizardsReborn
             ClientRegistry.bindTileEntityRenderer(WISSEN_ALTAR_TILE_ENTITY.get(), WissenAltarTileEntityRenderer::new);
             ClientRegistry.bindTileEntityRenderer(WISSEN_TRANSLATOR_TILE_ENTITY.get(), WissenTranslatorTileEntityRenderer::new);
             ClientRegistry.bindTileEntityRenderer(WISSEN_CRYSTALLIZER_TILE_ENTITY.get(), WissenCrystallizerTileEntityRenderer::new);
+            ClientRegistry.bindTileEntityRenderer(ARCANE_WORKBENCH_TILE_ENTITY.get(), ArcaneWorkbenchTileEntityRenderer::new);
+
             ClientRegistry.bindTileEntityRenderer(CRYSTAL_TILE_ENTITY.get(), CrystalTileEntityRenderer::new);
 
             RenderingRegistry.registerEntityRenderingHandler(ARCANE_WOOD_BOAT.get(), ArcaneWoodBoatModel::new);

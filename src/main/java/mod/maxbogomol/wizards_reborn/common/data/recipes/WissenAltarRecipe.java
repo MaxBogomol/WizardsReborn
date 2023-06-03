@@ -49,7 +49,7 @@ public class WissenAltarRecipe implements IRecipe<IInventory> {
     }
 
     public ItemStack getIcon() {
-        return new ItemStack(WizardsReborn.WISSEN_ALTAR.get());
+        return new ItemStack(WizardsReborn.WISSEN_ALTAR_ITEM.get());
     }
 
     @Override

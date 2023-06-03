@@ -1,32 +1,42 @@
 package mod.maxbogomol.wizards_reborn.common.tileentity;
 
-import mezz.jei.api.constants.VanillaTypes;
 import mod.maxbogomol.wizards_reborn.WizardsReborn;
 import mod.maxbogomol.wizards_reborn.api.wissen.IWissenTileEntity;
 import mod.maxbogomol.wizards_reborn.api.wissen.IWissenWandFunctionalTileEntity;
 import mod.maxbogomol.wizards_reborn.api.wissen.WissenUtils;
-import mod.maxbogomol.wizards_reborn.client.event.ClientTickHandler;
 import mod.maxbogomol.wizards_reborn.client.particle.Particles;
-import mod.maxbogomol.wizards_reborn.common.data.recipes.WissenCrystallizerRecipe;
+import mod.maxbogomol.wizards_reborn.common.data.recipes.ArcaneWorkbenchRecipe;
+import mod.maxbogomol.wizards_reborn.common.network.ArcaneWorkbenchBurstEffectPacket;
 import mod.maxbogomol.wizards_reborn.common.network.PacketHandler;
 import mod.maxbogomol.wizards_reborn.common.network.PacketUtils;
-import mod.maxbogomol.wizards_reborn.common.network.WissenCrystallizerBurstEffectPacket;
 import net.minecraft.block.BlockState;
 import net.minecraft.inventory.Inventory;
 import net.minecraft.item.ItemStack;
-import net.minecraft.item.Items;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.network.NetworkManager;
 import net.minecraft.network.play.server.SUpdateTileEntityPacket;
-import net.minecraft.particles.ItemParticleData;
-import net.minecraft.particles.ParticleTypes;
 import net.minecraft.tileentity.ITickableTileEntity;
+import net.minecraft.tileentity.TileEntity;
 import net.minecraft.tileentity.TileEntityType;
+import net.minecraft.util.Direction;
+import net.minecraftforge.common.capabilities.Capability;
+import net.minecraftforge.common.util.LazyOptional;
+import net.minecraftforge.items.CapabilityItemHandler;
+import net.minecraftforge.items.IItemHandler;
+import net.minecraftforge.items.ItemHandlerHelper;
+import net.minecraftforge.items.ItemStackHandler;
 
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
+import java.awt.*;
 import java.util.Optional;
 import java.util.Random;
 
-public class WissenCrystallizerTileEntity extends TileSimpleInventory implements ITickableTileEntity, IWissenTileEntity, IWissenWandFunctionalTileEntity {
+import static net.minecraft.state.properties.BlockStateProperties.HORIZONTAL_FACING;
+
+public class ArcaneWorkbenchTileEntity extends TileEntity implements ITickableTileEntity, IWissenTileEntity, IWissenWandFunctionalTileEntity {
+    public final ItemStackHandler itemHandler = createHandler();
+    public final LazyOptional<IItemHandler> handler = LazyOptional.of(() -> itemHandler);
 
     public int wissenInCraft= 0;
     public int wissenIsCraft = 0;
@@ -36,57 +46,64 @@ public class WissenCrystallizerTileEntity extends TileSimpleInventory implements
 
     public Random random = new Random();
 
-    public WissenCrystallizerTileEntity(TileEntityType<?> tileEntityTypeIn) {
+    public ArcaneWorkbenchTileEntity(TileEntityType<?> tileEntityTypeIn) {
         super(tileEntityTypeIn);
     }
 
-    public WissenCrystallizerTileEntity() {
-        this(WizardsReborn.WISSEN_CRYSTALLIZER_TILE_ENTITY.get());
+    public ArcaneWorkbenchTileEntity() {
+        this(WizardsReborn.ARCANE_WORKBENCH_TILE_ENTITY.get());
     }
 
     @Override
     public void tick() {
         if (!world.isRemote()) {
-            Optional<WissenCrystallizerRecipe> recipe = world.getRecipeManager().getRecipe(WizardsReborn.WISSEN_CRYSTALLIZER_RECIPE, getItemHandler(), world);
-            wissenInCraft =  recipe.map(WissenCrystallizerRecipe::getRecipeWissen).orElse(0);
+            Inventory inv = new Inventory(itemHandler.getSlots());
+            for (int i = 0; i < itemHandler.getSlots(); i++) {
+                inv.setInventorySlotContents(i, itemHandler.getStackInSlot(i));
+            }
+
+            Optional<ArcaneWorkbenchRecipe> recipe = world.getRecipeManager().getRecipe(WizardsReborn.ARCANE_WORKBENCH_RECIPE, inv, world);
+            wissenInCraft =  recipe.map(ArcaneWorkbenchRecipe::getRecipeWissen).orElse(0);
 
             if (wissenInCraft <= 0) {
                 wissenIsCraft = 0;
                 startCraft = false;
             }
-            
+
             if ((wissenInCraft > 0) && (wissen > 0) && (startCraft)) {
-                int addRemainCraft = WissenUtils.getAddWissenRemain(wissenIsCraft, getWissenPerTick(), wissenInCraft);
-                int removeRemain = WissenUtils.getRemoveWissenRemain(getWissen(), getWissenPerTick() - addRemainCraft);
+                ItemStack output = recipe.get().getRecipeOutput();
 
-                wissenIsCraft = wissenIsCraft + (getWissenPerTick() - addRemainCraft - removeRemain);
-                removeWissen(getWissenPerTick() - addRemainCraft - removeRemain);
+                if (isCanCraft(inv, output)) {
+                    int addRemainCraft = WissenUtils.getAddWissenRemain(wissenIsCraft, getWissenPerTick(), wissenInCraft);
+                    int removeRemain = WissenUtils.getRemoveWissenRemain(getWissen(), getWissenPerTick() - addRemainCraft);
 
-                PacketUtils.SUpdateTileEntityPacket(this);
+                    wissenIsCraft = wissenIsCraft + (getWissenPerTick() - addRemainCraft - removeRemain);
+                    removeWissen(getWissenPerTick() - addRemainCraft - removeRemain);
+
+                    PacketUtils.SUpdateTileEntityPacket(this);
+                }
             }
 
             if (wissenInCraft > 0 && startCraft) {
                 if (wissenInCraft <= wissenIsCraft) {
-                    getItemHandler().removeStackFromSlot(2);
-                    wissenInCraft = 0;
-                    wissenIsCraft = 0;
-                    startCraft = false;
+                    ItemStack output = recipe.get().getRecipeOutput().copy();
 
-                    for (int i = 0; i < getItemHandler().getSizeInventory(); i++) {
-                        getItemHandler().removeStackFromSlot(i);
+                    if (isCanCraft(inv, output)) {
+                        wissenInCraft = 0;
+                        wissenIsCraft = 0;
+                        startCraft = false;
+
+                        output.setCount(itemHandler.getStackInSlot(13).getCount() + output.getCount());
+
+                        itemHandler.setStackInSlot(13, output);
+
+                        for (int i = 0; i < 13; i++) {
+                            itemHandler.extractItem(i, 1, false);
+                        }
+
+                        PacketHandler.sendToTracking(world, getPos(), new ArcaneWorkbenchBurstEffectPacket(getPos()));
+                        PacketUtils.SUpdateTileEntityPacket(this);
                     }
-
-                    int count = recipe.get().getRecipeOutput().getCount();
-                    if (count > getItemHandler().getSizeInventory()) {
-                        count = getItemHandler().getSizeInventory();
-                    }
-
-                    for (int i = 0; i < count; i++) {
-                        getItemHandler().setInventorySlotContents(i, recipe.get().getRecipeOutput());
-                    }
-
-                    PacketHandler.sendToTracking(world, getPos(), new WissenCrystallizerBurstEffectPacket(getPos()));
-                    PacketUtils.SUpdateTileEntityPacket(this);
                 }
             }
         }
@@ -99,7 +116,7 @@ public class WissenCrystallizerTileEntity extends TileSimpleInventory implements
                             .setAlpha(0.25f, 0).setScale(0.3f * getStage(), 0)
                             .setColor(0.466f, 0.643f, 0.815f, 0.466f, 0.643f, 0.815f)
                             .setLifetime(20)
-                            .spawn(world, pos.getX() + 0.5F, pos.getY() + 1.125F, pos.getZ() + 0.5F);
+                            .spawn(world, pos.getX() + 0.5F, pos.getY() + 1.5F, pos.getZ() + 0.5F);
                 }
                 if (random.nextFloat() < 0.1) {
                     Particles.create(WizardsReborn.SPARKLE_PARTICLE)
@@ -108,7 +125,7 @@ public class WissenCrystallizerTileEntity extends TileSimpleInventory implements
                             .setColor(0.466f, 0.643f, 0.815f, 0.466f, 0.643f, 0.815f)
                             .setLifetime(30)
                             .setSpin((0.5f * (float) ((random.nextDouble() - 0.5D) * 2)))
-                            .spawn(world, pos.getX() + 0.5F, pos.getY() + 1.125F, pos.getZ() + 0.5F);
+                            .spawn(world, pos.getX() + 0.5F, pos.getY() + 1.5F, pos.getZ() + 0.5F);
                 }
             }
 
@@ -120,29 +137,60 @@ public class WissenCrystallizerTileEntity extends TileSimpleInventory implements
                             .setColor(0.466f, 0.643f, 0.815f, 0.466f, 0.643f, 0.815f)
                             .setLifetime(30)
                             .setSpin((0.5f * (float) ((random.nextDouble() - 0.5D) * 2)))
-                            .spawn(world, pos.getX() + 0.5F, pos.getY() + 1.125F, pos.getZ() + 0.5F);
+                            .spawn(world, pos.getX() + 0.5F, pos.getY() + 1.5F, pos.getZ() + 0.5F);
                 }
 
                 if (random.nextFloat() < 0.3) {
+                    double X = ((random.nextDouble() - 0.5D) * 0.5);
+                    double Z = ((random.nextDouble() - 0.5D) * 0.5);
                     Particles.create(WizardsReborn.KARMA_PARTICLE)
-                            .addVelocity(((random.nextDouble() - 0.5D) / 35), ((random.nextDouble() - 0.5D) / 35), ((random.nextDouble() - 0.5D) / 35))
+                            .addVelocity(-(X / 100), (random.nextDouble() / 20), -(Z / 100))
                             .setAlpha(0.5f, 0).setScale(0.1f, 0.025f)
                             .setColor(0.733f, 0.564f, 0.937f, 0.733f, 0.564f, 0.937f)
-                            .setLifetime(10)
-                            .spawn(world, pos.getX() + 0.5F + ((random.nextDouble() - 0.5D) * 0.5), pos.getY() + 1.125F + ((random.nextDouble() - 0.5D) * 0.5), pos.getZ() + 0.5F + ((random.nextDouble() - 0.5D) * 0.5));
+                            .setLifetime(15)
+                            .spawn(world, pos.getX() + 0.5F + X, pos.getY() + 1F, pos.getZ() + 0.5F + Z);
                 }
             }
         }
     }
 
-    @Override
-    protected Inventory createItemHandler() {
-        return new Inventory(11) {
+    private ItemStackHandler createHandler() {
+        return new ItemStackHandler(14) {
             @Override
-            public int getInventoryStackLimit() {
-                return 1;
+            protected void onContentsChanged(int slot) {
+                markDirty();
+            }
+
+            @Override
+            public boolean isItemValid(int slot, @Nonnull ItemStack stack) {
+                return true;
+            }
+
+            @Override
+            public int getSlotLimit(int slot) {
+                return 64;
+            }
+
+            @Nonnull
+            @Override
+            public ItemStack insertItem(int slot, @Nonnull ItemStack stack, boolean simulate) {
+                if(!isItemValid(slot, stack)) {
+                    return stack;
+                }
+
+                return super.insertItem(slot, stack, simulate);
             }
         };
+    }
+
+    @Nonnull
+    @Override
+    public <T> LazyOptional<T> getCapability(@Nonnull Capability<T> cap, @Nullable Direction side) {
+        if(cap == CapabilityItemHandler.ITEM_HANDLER_CAPABILITY) {
+            return handler.cast();
+        }
+
+        return super.getCapability(cap, side);
     }
 
     @Override
@@ -164,13 +212,42 @@ public class WissenCrystallizerTileEntity extends TileSimpleInventory implements
         return this.write(new CompoundNBT());
     }
 
+    public float getBlockRotate() {
+        switch (this.getBlockState().get(HORIZONTAL_FACING)) {
+            case NORTH:
+                return 0F;
+            case SOUTH:
+                return 180F;
+            case WEST:
+                return 90F;
+            case EAST:
+                return 270F;
+            default:
+                return 0F;
+        }
+    }
+
     public float getStage() {
         return ((float) getWissen() / (float) getMaxWissen());
+    }
+
+    public boolean isCanCraft(Inventory inv, ItemStack output) {
+        if (inv.getStackInSlot(13).isEmpty()) {
+            return true;
+        }
+
+        if ((ItemHandlerHelper.canItemStacksStack(output, inv.getStackInSlot(13))) && (inv.getStackInSlot(13).getCount() + output.getCount() <= output.getMaxStackSize())) {
+            return true;
+        }
+
+        return false;
     }
 
     @Override
     public CompoundNBT write(CompoundNBT tag) {
         super.write(tag);
+        tag.put("inv", itemHandler.serializeNBT());
+
         tag.putInt("wissenInCraft", wissenInCraft);
         tag.putInt("wissenIsCraft", wissenIsCraft);
         tag.putBoolean("startCraft", startCraft);
@@ -182,6 +259,8 @@ public class WissenCrystallizerTileEntity extends TileSimpleInventory implements
     @Override
     public void read(BlockState state, CompoundNBT tag) {
         super.read(state, tag);
+        itemHandler.deserializeNBT(tag.getCompound("inv"));
+
         wissenInCraft = tag.getInt("wissenInCraft");
         wissenIsCraft = tag.getInt("wissenIsCraft");
         startCraft = tag.getBoolean("startCraft");
@@ -252,20 +331,6 @@ public class WissenCrystallizerTileEntity extends TileSimpleInventory implements
 
     public int getWissenPerTick() {
         return 10;
-    }
-
-    public int getInventorySize() {
-        int size = 0;
-
-        for (int i = 0; i < getItemHandler().getSizeInventory(); i++) {
-            if (!getItemHandler().getStackInSlot(i).isEmpty()) {
-                size++;
-            } else {
-                break;
-            }
-        }
-
-        return size;
     }
 
     @Override

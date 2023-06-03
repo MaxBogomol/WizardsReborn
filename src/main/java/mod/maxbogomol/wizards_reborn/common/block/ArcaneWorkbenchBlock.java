@@ -1,19 +1,22 @@
 package mod.maxbogomol.wizards_reborn.common.block;
 
+import mod.maxbogomol.wizards_reborn.client.gui.container.ArcaneWorkbenchContainer;
 import mod.maxbogomol.wizards_reborn.common.item.equipment.WissenWandItem;
-import mod.maxbogomol.wizards_reborn.common.tileentity.WissenCrystallizerTileEntity;
-import mod.maxbogomol.wizards_reborn.common.tileentity.TileSimpleInventory;
-import net.minecraft.block.Block;
-import net.minecraft.block.BlockState;
-import net.minecraft.block.ITileEntityProvider;
-import net.minecraft.block.IWaterLoggable;
+import mod.maxbogomol.wizards_reborn.common.tileentity.ArcaneWorkbenchTileEntity;
+import net.minecraft.block.*;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.entity.player.PlayerInventory;
+import net.minecraft.entity.player.ServerPlayerEntity;
 import net.minecraft.fluid.FluidState;
 import net.minecraft.fluid.Fluids;
+import net.minecraft.inventory.Inventory;
+import net.minecraft.inventory.container.Container;
+import net.minecraft.inventory.container.INamedContainerProvider;
 import net.minecraft.item.BlockItemUseContext;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.state.StateContainer;
+import net.minecraft.stats.Stats;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.ActionResultType;
 import net.minecraft.util.Direction;
@@ -24,9 +27,12 @@ import net.minecraft.util.math.shapes.IBooleanFunction;
 import net.minecraft.util.math.shapes.ISelectionContext;
 import net.minecraft.util.math.shapes.VoxelShape;
 import net.minecraft.util.math.shapes.VoxelShapes;
+import net.minecraft.util.text.ITextComponent;
+import net.minecraft.util.text.TranslationTextComponent;
 import net.minecraft.world.IBlockReader;
 import net.minecraft.world.IWorld;
 import net.minecraft.world.World;
+import net.minecraftforge.fml.network.NetworkHooks;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
@@ -34,21 +40,19 @@ import java.util.stream.Stream;
 
 import static net.minecraft.state.properties.BlockStateProperties.WATERLOGGED;
 
-public class WissenCrystallizerBlock extends Block implements ITileEntityProvider, IWaterLoggable {
+public class ArcaneWorkbenchBlock extends HorizontalBlock implements ITileEntityProvider, IWaterLoggable  {
 
     private static final VoxelShape SHAPE = Stream.of(
-            Block.makeCuboidShape(5, 0, 5, 11, 2, 11),
-            Block.makeCuboidShape(6, 2, 6, 10, 8, 10),
-            Block.makeCuboidShape(4, 8, 4, 12, 10, 12),
-            Block.makeCuboidShape(2, 10, 2, 14, 12, 14),
-            Block.makeCuboidShape(6, 12, 6, 10, 15, 10),
-            Block.makeCuboidShape(2, 12, 2, 5, 14, 5),
-            Block.makeCuboidShape(11, 12, 2, 14, 14, 5),
-            Block.makeCuboidShape(11, 12, 11, 14, 14, 14),
-            Block.makeCuboidShape(2, 12, 11, 5, 14, 14)
+            Block.makeCuboidShape(0, 0, 0, 16, 4, 16),
+            Block.makeCuboidShape(4, 4, 4, 12, 11, 12),
+            Block.makeCuboidShape(0, 11, 0, 16, 16, 16),
+            Block.makeCuboidShape(0, 9, 0, 4, 11, 4),
+            Block.makeCuboidShape(12, 9, 0, 16, 11, 4),
+            Block.makeCuboidShape(12, 9, 12, 16, 11, 16),
+            Block.makeCuboidShape(0, 9, 12, 4, 11, 16)
     ).reduce((v1, v2) -> VoxelShapes.combineAndSimplify(v1, v2, IBooleanFunction.OR)).get();
 
-    public WissenCrystallizerBlock(Properties properties) {
+    public ArcaneWorkbenchBlock(Properties properties) {
         super(properties);
         setDefaultState(getDefaultState().with(WATERLOGGED, false));
     }
@@ -61,6 +65,7 @@ public class WissenCrystallizerBlock extends Block implements ITileEntityProvide
 
     @Override
     protected void fillStateContainer(StateContainer.Builder<Block, BlockState> builder) {
+        builder.add(HORIZONTAL_FACING);
         builder.add(WATERLOGGED);
     }
 
@@ -68,21 +73,26 @@ public class WissenCrystallizerBlock extends Block implements ITileEntityProvide
     @Override
     public BlockState getStateForPlacement(BlockItemUseContext context) {
         FluidState fluidState = context.getWorld().getFluidState(context.getPos());
-        return this.getDefaultState().with(WATERLOGGED, fluidState.getFluid() == Fluids.WATER);
+        return this.getDefaultState().with(HORIZONTAL_FACING, context.getPlacementHorizontalFacing().getOpposite()).with(WATERLOGGED, fluidState.getFluid() == Fluids.WATER);
     }
 
     @Nonnull
     @Override
     public TileEntity createNewTileEntity(@Nonnull IBlockReader world) {
-        return new WissenCrystallizerTileEntity();
+        return new ArcaneWorkbenchTileEntity();
     }
 
     @Override
     public void onReplaced(@Nonnull BlockState state, @Nonnull World world, @Nonnull BlockPos pos, @Nonnull BlockState newState, boolean isMoving) {
         if (state.getBlock() != newState.getBlock()) {
             TileEntity tile = world.getTileEntity(pos);
-            if (tile instanceof TileSimpleInventory) {
-                net.minecraft.inventory.InventoryHelper.dropInventoryItems(world, pos, ((TileSimpleInventory) tile).getItemHandler());
+            if (tile instanceof ArcaneWorkbenchTileEntity) {
+                ArcaneWorkbenchTileEntity workbench = (ArcaneWorkbenchTileEntity) tile;
+                Inventory inv = new Inventory(workbench.itemHandler.getSlots());
+                for (int i = 0; i < workbench.itemHandler.getSlots(); i++) {
+                    inv.setInventorySlotContents(i, workbench.itemHandler.getStackInSlot(i));
+                }
+                net.minecraft.inventory.InventoryHelper.dropInventoryItems(world, pos, inv);
             }
             super.onReplaced(state, world, pos, newState, isMoving);
         }
@@ -90,59 +100,56 @@ public class WissenCrystallizerBlock extends Block implements ITileEntityProvide
 
     @Override
     public ActionResultType onBlockActivated(BlockState state, World world, BlockPos pos, PlayerEntity player, Hand hand, BlockRayTraceResult hit) {
-        WissenCrystallizerTileEntity tile = (WissenCrystallizerTileEntity) world.getTileEntity(pos);
-        ItemStack stack = player.getHeldItem(hand).copy();
-
-        int invSize = tile.getInventorySize();
-        boolean isWand = false;
-
-        if (stack.getItem() instanceof WissenWandItem) {
-            CompoundNBT nbt = stack.getTag();
-            if (nbt == null) {
-                nbt = new CompoundNBT();
-                stack.setTag(nbt);
-            }
-
-            if (!nbt.contains("block")) {
-                nbt.putBoolean("block", false);
-            }
-            if (!nbt.contains("mode")) {
-                nbt.putInt("mode", 0);
-            }
-
-            if (nbt.getInt("mode") != 4) {
-                isWand = true;
-            }
-        }
-
-        if (!player.isSneaking()) {
-            if (invSize < 11 && !isWand) {
-                int slot = invSize;
-                if ((!stack.isEmpty()) && (tile.getItemHandler().getStackInSlot(slot).isEmpty())) {
-                    if (stack.getCount() > 1) {
-                        player.getHeldItemMainhand().setCount(stack.getCount() - 1);
-                        stack.setCount(1);
-                        tile.getItemHandler().setInventorySlotContents(slot, stack);
-                        return ActionResultType.SUCCESS;
-                    } else {
-                        tile.getItemHandler().setInventorySlotContents(slot, stack);
-                        player.inventory.deleteStack(player.getHeldItem(hand));
-                        return ActionResultType.SUCCESS;
-                    }
-                }
-            }
+        if (world.isRemote) {
+            return ActionResultType.SUCCESS;
         } else {
-            if (invSize > 0) {
-                int slot = invSize - 1;
-                if (!tile.getItemHandler().getStackInSlot(slot).isEmpty()) {
-                    player.inventory.addItemStackToInventory(tile.getItemHandler().getStackInSlot(slot).copy());
-                    tile.getItemHandler().removeStackFromSlot(slot);
-                    return ActionResultType.SUCCESS;
+            ItemStack stack = player.getHeldItem(hand).copy();
+            boolean isWand = false;
+
+            if (stack.getItem() instanceof WissenWandItem) {
+                CompoundNBT nbt = stack.getTag();
+                if (nbt == null) {
+                    nbt = new CompoundNBT();
+                    stack.setTag(nbt);
                 }
+
+                if (!nbt.contains("block")) {
+                    nbt.putBoolean("block", false);
+                }
+                if (!nbt.contains("mode")) {
+                    nbt.putInt("mode", 0);
+                }
+
+                if (nbt.getInt("mode") != 4) {
+                    isWand = true;
+                }
+            }
+
+            if (!isWand) {
+                TileEntity tileEntity = world.getTileEntity(pos);
+
+                INamedContainerProvider containerProvider = createContainerProvider(world, pos);
+                NetworkHooks.openGui(((ServerPlayerEntity) player), containerProvider, tileEntity.getPos());
+                return ActionResultType.CONSUME;
             }
         }
 
         return ActionResultType.PASS;
+    }
+
+    private INamedContainerProvider createContainerProvider(World worldIn, BlockPos pos) {
+        return new INamedContainerProvider() {
+            @Override
+            public ITextComponent getDisplayName() {
+                return new TranslationTextComponent("");
+            }
+
+            @Nullable
+            @Override
+            public Container createMenu(int i, PlayerInventory playerInventory, PlayerEntity playerEntity) {
+                return new ArcaneWorkbenchContainer(i, worldIn, pos, playerInventory, playerEntity);
+            }
+        };
     }
 
     @Override

@@ -3,7 +3,7 @@ package mod.maxbogomol.wizards_reborn.common.data.recipes;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
-import it.unimi.dsi.fastutil.ints.IntSet;
+import com.google.gson.JsonSyntaxException;
 import mod.maxbogomol.wizards_reborn.WizardsReborn;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
@@ -19,17 +19,19 @@ import net.minecraftforge.registries.ForgeRegistryEntry;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
-public class WissenCrystallizerRecipe implements IRecipe<IInventory> {
+public class ArcaneWorkbenchRecipe implements IRecipe<IInventory> {
 
-    public static ResourceLocation TYPE_ID = new ResourceLocation(WizardsReborn.MOD_ID, "wissen_crystallizer");
+    public static ResourceLocation TYPE_ID = new ResourceLocation(WizardsReborn.MOD_ID, "arcane_workbench");
     private final ResourceLocation id;
     private final ItemStack output;
     private final NonNullList<Ingredient> inputs;
     private int wissen;
 
-    public WissenCrystallizerRecipe(ResourceLocation id, ItemStack output, int wissen, Ingredient... inputs) {
+    public ArcaneWorkbenchRecipe(ResourceLocation id, ItemStack output, int wissen, Ingredient... inputs) {
         this.id = id;
         this.output = output;
         this.inputs = NonNullList.from(Ingredient.EMPTY, inputs);
@@ -42,41 +44,14 @@ public class WissenCrystallizerRecipe implements IRecipe<IInventory> {
     }
 
     public static boolean matches(List<Ingredient> inputs, IInventory inv) {
-        List<Ingredient> ingredientsMissing = new ArrayList<>(inputs);
-
-        for (int i = 0; i < inv.getSizeInventory(); i++) {
-            ItemStack input = inv.getStackInSlot(i);
-            if (input.isEmpty()) {
-                break;
-            }
-
-            int stackIndex = -1;
-
-            for (int j = 0; j < ingredientsMissing.size(); j++) {
-                Ingredient ingr = ingredientsMissing.get(j);
-                if (ingr.test(input)) {
-                    stackIndex = j;
-                    break;
-                }
-            }
-
-            if (stackIndex != -1) {
-                ingredientsMissing.remove(stackIndex);
-            } else {
-                return false;
+        boolean craft = true;
+        for (int i = 0; i < 13; i += 1) {
+            if (!inputs.get(i).test(inv.getStackInSlot(i))) {
+                craft = false;
             }
         }
 
-        ItemStack stack = inv.getStackInSlot(0);
-        if (stack.isEmpty()) {
-            return false;
-        }
-        Ingredient ingr = inputs.get(0);
-        if (!ingr.test(stack)) {
-            return false;
-        }
-
-        return ingredientsMissing.isEmpty();
+        return craft;
     }
 
     @Override
@@ -95,7 +70,7 @@ public class WissenCrystallizerRecipe implements IRecipe<IInventory> {
     }
 
     public ItemStack getIcon() {
-        return new ItemStack(WizardsReborn.WISSEN_CRYSTALLIZER_ITEM.get());
+        return new ItemStack(WizardsReborn.ARCANE_WORKBENCH_ITEM.get());
     }
 
     @Override
@@ -105,46 +80,70 @@ public class WissenCrystallizerRecipe implements IRecipe<IInventory> {
 
     @Override
     public IRecipeSerializer<?> getSerializer() {
-        return WizardsReborn.WISSEN_CRYSTALLIZER_SERIALIZER.get();
+        return WizardsReborn.ARCANE_WORKBENCH_SERIALIZER.get();
     }
 
-    public static class WissenCrystallizerRecipeType implements IRecipeType<WissenCrystallizerRecipe> {
+    public static class ArcaneWorkbenchRecipeType implements IRecipeType<ArcaneWorkbenchRecipe> {
         @Override
         public String toString() {
-            return WissenCrystallizerRecipe.TYPE_ID.toString();
+            return ArcaneWorkbenchRecipe.TYPE_ID.toString();
         }
     }
 
     public static class Serializer extends ForgeRegistryEntry<IRecipeSerializer<?>>
-            implements IRecipeSerializer<WissenCrystallizerRecipe> {
+            implements IRecipeSerializer<ArcaneWorkbenchRecipe> {
 
         @Override
-        public WissenCrystallizerRecipe read(ResourceLocation recipeId, JsonObject json) {
-            ItemStack output = ShapedRecipe.deserializeItem(JSONUtils.getJsonObject(json, "output"));
-            int wissen = JSONUtils.getInt(json, "wissen");
-            JsonArray ingrs = JSONUtils.getJsonArray(json, "ingredients");
-            List<Ingredient> inputs = new ArrayList<>();
-            for (JsonElement e : ingrs) {
-                inputs.add(Ingredient.deserialize(e));
+        public ArcaneWorkbenchRecipe read(ResourceLocation recipeId, JsonObject json) {
+            NonNullList<Ingredient> inputs = NonNullList.withSize(13, Ingredient.EMPTY);
+
+            Map<String, Ingredient> keys = new HashMap<String, Ingredient>();
+            for(Map.Entry<String, JsonElement> entry : JSONUtils.getJsonObject(json, "key").entrySet()) {
+                if (entry.getKey().length() != 1) {
+                    throw new JsonSyntaxException("Invalid key entry: '" + (String) entry.getKey() + "' is an invalid symbol (must be 1 character only).");
+                }
+
+                if (" ".equals(entry.getKey())) {
+                    throw new JsonSyntaxException("Invalid key entry: ' ' is a reserved symbol.");
+                }
+
+                keys.put(entry.getKey(), Ingredient.deserialize(entry.getValue()));
             }
 
-            return new WissenCrystallizerRecipe(recipeId, output, wissen, inputs.toArray(new Ingredient[0]));
+            int index=0;
+            JsonArray pattern = JSONUtils.getJsonArray(json, "pattern");
+            for (int i = 0; i < pattern.size(); i++) {
+                String str = pattern.get(i).getAsString();
+                for (int ii = 0; ii < str.length(); ii++) {
+                    if (keys.containsKey(str.substring(ii,ii+1))) {
+                        inputs.set(index, keys.get(str.substring(ii, ii + 1)));
+                    } else {
+                        inputs.set(index, Ingredient.EMPTY);
+                    }
+                    index++;
+                }
+            }
+
+            ItemStack output = ShapedRecipe.deserializeItem(JSONUtils.getJsonObject(json, "output"));
+            int wissen = JSONUtils.getInt(json, "wissen");
+
+            return new ArcaneWorkbenchRecipe(recipeId, output, wissen, inputs.toArray(new Ingredient[0]));
         }
 
         @Nullable
         @Override
-        public WissenCrystallizerRecipe read(ResourceLocation recipeId, PacketBuffer buffer) {
+        public ArcaneWorkbenchRecipe read(ResourceLocation recipeId, PacketBuffer buffer) {
             Ingredient[] inputs = new Ingredient[buffer.readVarInt()];
             for (int i = 0; i < inputs.length; i++) {
                 inputs[i] = Ingredient.read(buffer);
             }
             ItemStack output = buffer.readItemStack();
             int wissen = buffer.readInt();
-            return new WissenCrystallizerRecipe(recipeId, output, wissen, inputs);
+            return new ArcaneWorkbenchRecipe(recipeId, output, wissen, inputs);
         }
 
         @Override
-        public void write(PacketBuffer buffer, WissenCrystallizerRecipe recipe) {
+        public void write(PacketBuffer buffer, ArcaneWorkbenchRecipe recipe) {
             buffer.writeVarInt(recipe.getIngredients().size());
             for (Ingredient input : recipe.getIngredients()) {
                 input.write(buffer);

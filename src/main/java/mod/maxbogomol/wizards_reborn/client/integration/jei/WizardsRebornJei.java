@@ -7,6 +7,7 @@ import mezz.jei.api.registration.IRecipeCatalystRegistration;
 import mezz.jei.api.registration.IRecipeCategoryRegistration;
 import mezz.jei.api.registration.IRecipeRegistration;
 import mod.maxbogomol.wizards_reborn.WizardsReborn;
+import mod.maxbogomol.wizards_reborn.common.data.recipes.ArcaneWorkbenchRecipe;
 import mod.maxbogomol.wizards_reborn.common.data.recipes.ArcanumDustTransmutationRecipe;
 import mod.maxbogomol.wizards_reborn.common.data.recipes.WissenAltarRecipe;
 import mod.maxbogomol.wizards_reborn.common.data.recipes.WissenCrystallizerRecipe;
@@ -34,6 +35,8 @@ public class WizardsRebornJei implements IModPlugin {
                 new WissenAltarRecipeCategory(registration.getJeiHelpers().getGuiHelper()));
         registration.addRecipeCategories(
                 new WissenCrystallizerRecipeCategory(registration.getJeiHelpers().getGuiHelper()));
+        registration.addRecipeCategories(
+                new ArcaneWorkbenchRecipeCategory(registration.getJeiHelpers().getGuiHelper()));
     }
 
     @Override
@@ -48,6 +51,9 @@ public class WizardsRebornJei implements IModPlugin {
         registration.addRecipes(rm.getRecipesForType(WizardsReborn.WISSEN_CRYSTALLIZER_RECIPE).stream()
                         .filter(r -> r instanceof WissenCrystallizerRecipe).collect(Collectors.toList()),
                 WissenCrystallizerRecipeCategory.UID);
+        registration.addRecipes(rm.getRecipesForType(WizardsReborn.ARCANE_WORKBENCH_RECIPE).stream()
+                        .filter(r -> r instanceof ArcaneWorkbenchRecipe).collect(Collectors.toList()),
+                ArcaneWorkbenchRecipeCategory.UID);
     }
 
     @Override
