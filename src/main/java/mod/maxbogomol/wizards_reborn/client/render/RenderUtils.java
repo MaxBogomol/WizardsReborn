@@ -55,6 +55,19 @@ public class RenderUtils {
                         .texture(new RenderState.TextureState(AtlasTexture.LOCATION_PARTICLES_TEXTURE, false, false))
                 .build(false));
 
+    public static RenderType DELAYED_PARTICLE = RenderType.makeType(
+            WizardsReborn.MOD_ID + ":delayed_particle",
+        DefaultVertexFormats.PARTICLE_POSITION_TEX_COLOR_LMAP,
+        GL11.GL_QUADS, 256,
+                RenderType.State.getBuilder()
+                .shadeModel(new RenderState.ShadeModelState(true))
+                .writeMask(new RenderState.WriteMaskState(true, false))
+                .lightmap(new RenderState.LightmapState(false))
+                .diffuseLighting(new RenderState.DiffuseLightingState(false))
+                .transparency(NORMAL_TRANSPARENCY)
+                .texture(new RenderState.TextureState(AtlasTexture.LOCATION_PARTICLES_TEXTURE, false, false))
+                .build(false));
+
     public static void renderItemModelInGui(ItemStack stack, int x, int y, int xSize, int ySize, int zSize) {
         Minecraft mc = Minecraft.getInstance();
 

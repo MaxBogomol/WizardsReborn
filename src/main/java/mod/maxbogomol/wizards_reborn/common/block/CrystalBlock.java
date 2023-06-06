@@ -39,10 +39,9 @@ public class CrystalBlock extends Block implements ITileEntityProvider, IWaterLo
         FACETED,
         ADVANCED,
         MASTERFUL,
-        PURE;
+        PURE
     }
 
-    protected static final Random random = new Random();
     public Polishing polishing;
 
     private static final VoxelShape FACETED_SHAPE = Block.makeCuboidShape(5, 0, 5, 11, 9, 11);
@@ -128,7 +127,7 @@ public class CrystalBlock extends Block implements ITileEntityProvider, IWaterLo
     }
 
     @OnlyIn(Dist.CLIENT)
-    public void animateTick(BlockState state, World world, BlockPos pos, Random rand) {
+    public void animateTick(BlockState state, World world, BlockPos pos, Random random) {
         if ((polishing == Polishing.ADVANCED) || (polishing == Polishing.MASTERFUL) || (polishing == Polishing.PURE)) {
             Vector3d color = new Vector3d(0f, 0f, 0f);
 

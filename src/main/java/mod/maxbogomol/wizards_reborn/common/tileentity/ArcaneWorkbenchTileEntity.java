@@ -330,7 +330,7 @@ public class ArcaneWorkbenchTileEntity extends TileEntity implements ITickableTi
     }
 
     public int getWissenPerTick() {
-        return 10;
+        return 15;
     }
 
     @Override
