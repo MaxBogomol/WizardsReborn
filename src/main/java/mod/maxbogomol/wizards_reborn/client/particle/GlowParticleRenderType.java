@@ -1,7 +1,7 @@
 package mod.maxbogomol.wizards_reborn.client.particle;
 
 import com.mojang.blaze3d.systems.RenderSystem;
-import mod.maxbogomol.wizards_reborn.client.render.RenderUtils;
+import mod.maxbogomol.wizards_reborn.utils.RenderUtils;
 import mod.maxbogomol.wizards_reborn.client.render.WorldRenderHandler;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.particle.IParticleRenderType;

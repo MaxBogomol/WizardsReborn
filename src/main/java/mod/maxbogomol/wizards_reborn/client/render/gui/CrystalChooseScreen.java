@@ -1,7 +1,7 @@
 package mod.maxbogomol.wizards_reborn.client.render.gui;
 
 import com.mojang.blaze3d.matrix.MatrixStack;
-import mod.maxbogomol.wizards_reborn.client.render.RenderUtils;
+import mod.maxbogomol.wizards_reborn.utils.RenderUtils;
 import mod.maxbogomol.wizards_reborn.common.item.CrystalItem;
 import mod.maxbogomol.wizards_reborn.common.item.equipment.ArcaneWandItem;
 import mod.maxbogomol.wizards_reborn.common.network.PacketHandler;

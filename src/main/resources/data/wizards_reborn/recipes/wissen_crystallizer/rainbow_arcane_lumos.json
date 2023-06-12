@@ -1,0 +1,34 @@
+{
+  "type": "wizards_reborn:wissen_crystallizer",
+  "output": {
+    "item": "wizards_reborn:rainbow_arcane_lumos",
+    "count": 8
+  },
+  "wissen": 100,
+  "ingredients": [
+    {
+      "item": "wizards_reborn:white_arcane_lumos"
+    },
+    {
+      "item": "wizards_reborn:red_arcane_lumos"
+    },
+    {
+      "item": "wizards_reborn:orange_arcane_lumos"
+    },
+    {
+      "item": "wizards_reborn:yellow_arcane_lumos"
+    },
+    {
+      "item": "wizards_reborn:lime_arcane_lumos"
+    },
+    {
+      "item": "wizards_reborn:light_blue_arcane_lumos"
+    },
+    {
+      "item": "wizards_reborn:blue_arcane_lumos"
+    },
+    {
+      "item": "wizards_reborn:purple_arcane_lumos"
+    }
+  ]
+}

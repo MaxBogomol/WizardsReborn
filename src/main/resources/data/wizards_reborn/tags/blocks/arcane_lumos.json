@@ -1,0 +1,23 @@
+{
+  "replace": false,
+  "values": [
+    "wizards_reborn:white_arcane_lumos",
+    "wizards_reborn:orange_arcane_lumos",
+    "wizards_reborn:magenta_arcane_lumos",
+    "wizards_reborn:light_blue_arcane_lumos",
+    "wizards_reborn:yellow_arcane_lumos",
+    "wizards_reborn:lime_arcane_lumos",
+    "wizards_reborn:pink_arcane_lumos",
+    "wizards_reborn:gray_arcane_lumos",
+    "wizards_reborn:light_gray_arcane_lumos",
+    "wizards_reborn:cyan_arcane_lumos",
+    "wizards_reborn:purple_arcane_lumos",
+    "wizards_reborn:blue_arcane_lumos",
+    "wizards_reborn:brown_arcane_lumos",
+    "wizards_reborn:green_arcane_lumos",
+    "wizards_reborn:red_arcane_lumos",
+    "wizards_reborn:black_arcane_lumos",
+    "wizards_reborn:rainbow_arcane_lumos",
+    "wizards_reborn:cosmic_arcane_lumos"
+  ]
+}

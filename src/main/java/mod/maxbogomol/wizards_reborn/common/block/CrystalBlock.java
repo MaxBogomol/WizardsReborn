@@ -1,10 +1,13 @@
 package mod.maxbogomol.wizards_reborn.common.block;
 
 import mod.maxbogomol.wizards_reborn.WizardsReborn;
+import mod.maxbogomol.wizards_reborn.api.crystal.CrystalType;
+import mod.maxbogomol.wizards_reborn.api.crystal.PolishingType;
 import mod.maxbogomol.wizards_reborn.client.particle.Particles;
 import mod.maxbogomol.wizards_reborn.common.tileentity.CrystalTileEntity;
 import net.minecraft.block.*;
 import net.minecraft.block.material.PushReaction;
+import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.fluid.FluidState;
 import net.minecraft.fluid.Fluids;
 import net.minecraft.item.BlockItemUseContext;
@@ -16,7 +19,6 @@ import net.minecraft.util.math.shapes.IBooleanFunction;
 import net.minecraft.util.math.shapes.ISelectionContext;
 import net.minecraft.util.math.shapes.VoxelShape;
 import net.minecraft.util.math.shapes.VoxelShapes;
-import net.minecraft.util.math.vector.Vector3d;
 import net.minecraft.world.IBlockReader;
 import net.minecraft.world.IWorld;
 import net.minecraft.world.IWorldReader;
@@ -27,6 +29,7 @@ import net.minecraftforge.api.distmarker.OnlyIn;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
+import java.awt.*;
 import java.util.Random;
 import java.util.stream.Stream;
 
@@ -34,15 +37,8 @@ import static net.minecraft.state.properties.BlockStateProperties.WATERLOGGED;
 
 public class CrystalBlock extends Block implements ITileEntityProvider, IWaterLoggable {
 
-    public enum Polishing {
-        CRYSTAL,
-        FACETED,
-        ADVANCED,
-        MASTERFUL,
-        PURE
-    }
-
-    public Polishing polishing;
+    public PolishingType polishing;
+    public CrystalType type;
 
     private static final VoxelShape FACETED_SHAPE = Block.makeCuboidShape(5, 0, 5, 11, 9, 11);
     private static final VoxelShape SHAPE = Stream.of(
@@ -53,8 +49,9 @@ public class CrystalBlock extends Block implements ITileEntityProvider, IWaterLo
             Block.makeCuboidShape(4, 0, 9, 7, 3, 12)
             ).reduce((v1, v2) -> VoxelShapes.combineAndSimplify(v1, v2, IBooleanFunction.OR)).get();
 
-    public CrystalBlock(Polishing polishing, Properties properties) {
+    public CrystalBlock(CrystalType type, PolishingType polishing, Properties properties) {
         super(properties);
+        this.type = type;
         this.polishing = polishing;
         setDefaultState(getDefaultState().with(WATERLOGGED, false));
     }
@@ -62,7 +59,7 @@ public class CrystalBlock extends Block implements ITileEntityProvider, IWaterLo
     @Nonnull
     @Override
     public VoxelShape getShape(BlockState state, IBlockReader world, BlockPos pos, ISelectionContext ctx) {
-        if (polishing == Polishing.CRYSTAL) {
+        if (polishing == WizardsReborn.CRYSTAL_POLISHING_TYPE) {
             return SHAPE;
         }
 
@@ -128,26 +125,43 @@ public class CrystalBlock extends Block implements ITileEntityProvider, IWaterLo
 
     @OnlyIn(Dist.CLIENT)
     public void animateTick(BlockState state, World world, BlockPos pos, Random random) {
-        if ((polishing == Polishing.ADVANCED) || (polishing == Polishing.MASTERFUL) || (polishing == Polishing.PURE)) {
-            Vector3d color = new Vector3d(0f, 0f, 0f);
-
-            if (polishing == Polishing.ADVANCED) {
-                color = new Vector3d(1f, 0.933f, 0.631f);
-            }
-            if (polishing == Polishing.MASTERFUL) {
-                color = new Vector3d(0.866f, 0.996f, 0.635f);
-            }
-            if (polishing == Polishing.PURE) {
-                color = new Vector3d(0.784f, 1f, 0.960f);
-            }
+        if (polishing.hasParticle()) {
+            Color color = polishing.getColor();
+            float r = color.getRed() / 255f;
+            float g = color.getGreen() / 255f;
+            float b = color.getBlue() / 255f;
 
             Particles.create(WizardsReborn.SPARKLE_PARTICLE)
                     .addVelocity(((random.nextDouble() - 0.5D) / 30), ((random.nextDouble() - 0.5D) / 30), ((random.nextDouble() - 0.5D) / 30))
                     .setAlpha(0.5f, 0).setScale(0.1f, 0)
-                    .setColor((float) color.x, (float) color.y, (float) color.z, (float) color.x, (float) color.y, (float) color.z)
+                    .setColor(r, g, b)
                     .setLifetime(30)
                     .setSpin((0.5f * (float) ((random.nextDouble() - 0.5D) * 2)))
                     .spawn(world, pos.getX() + 0.5F + ((random.nextDouble() - 0.5D) * 0.5), pos.getY() + 0.5F + ((random.nextDouble() - 0.5D) * 0.5), pos.getZ() + 0.5F + ((random.nextDouble() - 0.5D) * 0.5));
         }
+    }
+
+    @Override
+    public void onBlockHarvested(World world, BlockPos pos, BlockState state, PlayerEntity player) {
+        if (world.isRemote()) {
+            if (!player.isCreative()) {
+                Color color = type.getColor();
+                float r = color.getRed() / 255f;
+                float g = color.getGreen() / 255f;
+                float b = color.getBlue() / 255f;
+
+                for (int i = 0; i < 25; i++) {
+                    Particles.create(WizardsReborn.SPARKLE_PARTICLE)
+                            .addVelocity(((RANDOM.nextDouble() - 0.5D) / 15), ((RANDOM.nextDouble() - 0.5D) / 15), ((RANDOM.nextDouble() - 0.5D) / 15))
+                            .setAlpha(0.25f, 0).setScale(0.35f, 0)
+                            .setColor(r, g, b)
+                            .setLifetime(30)
+                            .setSpin((0.5f * (float) ((RANDOM.nextDouble() - 0.5D) * 2)))
+                            .spawn(world, pos.getX() + 0.5F + ((RANDOM.nextDouble() - 0.5D) * 0.5), pos.getY() + 0.5F + ((RANDOM.nextDouble() - 0.5D) * 0.5), pos.getZ() + 0.5F + ((RANDOM.nextDouble() - 0.5D) * 0.5));
+                }
+            }
+        }
+
+        super.onBlockHarvested(world, pos, state, player);
     }
 }

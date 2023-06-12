@@ -7,6 +7,10 @@ import net.minecraft.block.BlockState;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.api.distmarker.OnlyIn;
+
+import java.util.Random;
 
 public class ArcaneWoodLeavesBlock extends FlammableLeavesBlock {
 
@@ -37,5 +41,18 @@ public class ArcaneWoodLeavesBlock extends FlammableLeavesBlock {
         }
 
         super.onBlockHarvested(world, pos, state, player);
+    }
+
+    @OnlyIn(Dist.CLIENT)
+    public void animateTick(BlockState state, World world, BlockPos pos, Random random) {
+        if (random.nextFloat() < 0.01) {
+            Particles.create(WizardsReborn.ARCANE_WOOD_LEAF_PARTICLE)
+                    .addVelocity(((random.nextDouble() - 0.5D) / 12), ((random.nextDouble() - 1D) / 4), ((random.nextDouble() - 0.5D) / 12))
+                    .setAlpha(1f, 1f).setScale(0.25f, 0f)
+                    .setColor(1f, 1f, 1f)
+                    .setLifetime(150)
+                    .setSpin((0.1f * ((random.nextFloat() - 0.5f) * 2)))
+                    .spawn(world, pos.getX() + 0.5F + (random.nextFloat() - 0.5f), pos.getY() + 0.5F + (random.nextFloat() - 0.5f), pos.getZ() + 0.5F + (random.nextFloat() - 0.5f));
+        }
     }
 }

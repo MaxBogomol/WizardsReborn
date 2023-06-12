@@ -1,0 +1,19 @@
+{
+  "type": "wizards_reborn:wissen_crystallizer",
+  "output": {
+    "item": "wizards_reborn:white_arcane_lumos",
+    "count": 1
+  },
+  "wissen": 100,
+  "ingredients": [
+    {
+      "item": "wizards_reborn:arcanum"
+    },
+    {
+      "item": "minecraft:glowstone_dust"
+    },
+    {
+      "item": "minecraft:glowstone_dust"
+    }
+  ]
+}

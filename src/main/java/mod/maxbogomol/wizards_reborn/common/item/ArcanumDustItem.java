@@ -83,7 +83,7 @@ public class ArcanumDustItem extends Item {
                 }
 
                 if (world.isRemote()) {
-                    Vector3d pos = player.getPositionVec().add(player.getLookVec().scale(0.5)).add(0.5 * Math.sin(Math.toRadians(0 - player.rotationYawHead)), player.getHeight() * 2 / 3, 0.5 * Math.cos(Math.toRadians(0 - player.rotationYawHead)));
+                    Vector3d pos = player.getEyePosition(0);
                     Vector3d vel = player.getEyePosition(0).add(player.getLookVec().scale(40)).subtract(pos).scale(1.0 / 20).normalize().scale(0.2f);
 
                     for (int i = 0; i < 20; i++) {

@@ -1,0 +1,8 @@
+{
+  "replace": false,
+  "values": [
+    "#wizards_reborn:dyeable_arcane_lumos",
+    "wizards_reborn:rainbow_arcane_lumos",
+    "wizards_reborn:cosmic_arcane_lumos"
+  ]
+}

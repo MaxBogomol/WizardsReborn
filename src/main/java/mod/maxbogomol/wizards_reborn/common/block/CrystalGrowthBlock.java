@@ -1,8 +1,12 @@
 package mod.maxbogomol.wizards_reborn.common.block;
 
+import mod.maxbogomol.wizards_reborn.WizardsReborn;
+import mod.maxbogomol.wizards_reborn.api.crystal.CrystalType;
+import mod.maxbogomol.wizards_reborn.client.particle.Particles;
 import mod.maxbogomol.wizards_reborn.common.tileentity.CrystalGrowthTileEntity;
 import net.minecraft.block.*;
 import net.minecraft.block.material.PushReaction;
+import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.fluid.FluidState;
 import net.minecraft.fluid.Fluids;
 import net.minecraft.item.BlockItemUseContext;
@@ -25,12 +29,15 @@ import net.minecraft.world.server.ServerWorld;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
+import java.awt.*;
 import java.util.Random;
 import java.util.stream.Stream;
 
 import static net.minecraft.state.properties.BlockStateProperties.WATERLOGGED;
 
 public class CrystalGrowthBlock extends Block implements ITileEntityProvider, IWaterLoggable {
+
+    public CrystalType type;
 
     public static final IntegerProperty AGE =  IntegerProperty.create("age", 0, 4);
 
@@ -60,8 +67,9 @@ public class CrystalGrowthBlock extends Block implements ITileEntityProvider, IW
 
     private static final VoxelShape[] SHAPE_BY_AGE = new VoxelShape[]{SHAPE_1, SHAPE_2, SHAPE_3, SHAPE_4, SHAPE_5};
 
-    public CrystalGrowthBlock(Properties properties) {
+    public CrystalGrowthBlock(CrystalType type, Properties properties) {
         super(properties);
+        this.type = type;
         setDefaultState(getDefaultState().with(WATERLOGGED, false));
     }
 
@@ -179,5 +187,29 @@ public class CrystalGrowthBlock extends Block implements ITileEntityProvider, IW
 
     protected static float getGrowthChance(Block blockIn, IBlockReader worldIn, BlockPos pos) {
         return 5f;
+    }
+
+    @Override
+    public void onBlockHarvested(World world, BlockPos pos, BlockState state, PlayerEntity player) {
+        if (world.isRemote()) {
+            if (!player.isCreative()) {
+                Color color = type.getColor();
+                float r = color.getRed() / 255f;
+                float g = color.getGreen() / 255f;
+                float b = color.getBlue() / 255f;
+
+                for (int i = 0; i < (5 * (getAge(state) + 1)); i++) {
+                    Particles.create(WizardsReborn.SPARKLE_PARTICLE)
+                            .addVelocity(((RANDOM.nextDouble() - 0.5D) / 15), ((RANDOM.nextDouble() - 0.5D) / 15), ((RANDOM.nextDouble() - 0.5D) / 15))
+                            .setAlpha(0.25f, 0).setScale(0.35f, 0)
+                            .setColor(r, g, b)
+                            .setLifetime(30)
+                            .setSpin((0.5f * (float) ((RANDOM.nextDouble() - 0.5D) * 2)))
+                            .spawn(world, pos.getX() + 0.5F + ((RANDOM.nextDouble() - 0.5D) * 0.5), pos.getY() + 0.5F + ((RANDOM.nextDouble() - 0.5D) * 0.5), pos.getZ() + 0.5F + ((RANDOM.nextDouble() - 0.5D) * 0.5));
+                }
+            }
+        }
+
+        super.onBlockHarvested(world, pos, state, player);
     }
 }

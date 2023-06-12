@@ -1,0 +1,15 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "tag": "wizards_reborn:dyeable_arcane_lumos"
+    },
+    {
+      "item": "minecraft:orange_dye"
+    }
+  ],
+  "result": {
+    "item": "wizards_reborn:orange_arcane_lumos",
+    "count": 1
+  }
+}

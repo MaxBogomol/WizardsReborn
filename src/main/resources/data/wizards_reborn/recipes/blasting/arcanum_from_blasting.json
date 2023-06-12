@@ -1,0 +1,9 @@
+{
+  "type": "minecraft:blasting",
+  "ingredient": {
+    "item": "wizards_reborn:arcanum_ore"
+  },
+  "result": "wizards_reborn:arcanum",
+  "experience": 1.0,
+  "cookingtime": 100
+}

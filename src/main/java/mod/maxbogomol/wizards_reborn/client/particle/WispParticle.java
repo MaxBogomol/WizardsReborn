@@ -2,7 +2,7 @@ package mod.maxbogomol.wizards_reborn.client.particle;
 
 import com.mojang.blaze3d.vertex.IVertexBuilder;
 import mod.maxbogomol.wizards_reborn.client.config.ClientConfig;
-import mod.maxbogomol.wizards_reborn.client.render.RenderUtils;
+import mod.maxbogomol.wizards_reborn.utils.RenderUtils;
 import mod.maxbogomol.wizards_reborn.client.render.WorldRenderHandler;
 import net.minecraft.client.renderer.ActiveRenderInfo;
 import net.minecraft.client.world.ClientWorld;

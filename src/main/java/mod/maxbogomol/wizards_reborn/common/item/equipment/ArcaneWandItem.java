@@ -2,12 +2,17 @@ package mod.maxbogomol.wizards_reborn.common.item.equipment;
 
 import mod.maxbogomol.wizards_reborn.api.wissen.IWissenItem;
 import mod.maxbogomol.wizards_reborn.common.item.ItemBackedInventory;
+import mod.maxbogomol.wizards_reborn.common.spell.EarthProjectileSpell;
 import net.minecraft.entity.Entity;
+import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.inventory.Inventory;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.CompoundNBT;
+import net.minecraft.util.ActionResult;
+import net.minecraft.util.ActionResultType;
 import net.minecraft.util.Direction;
+import net.minecraft.util.Hand;
 import net.minecraft.world.World;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.capabilities.ICapabilityProvider;
@@ -64,5 +69,25 @@ public class ArcaneWandItem extends Item implements IWissenItem {
     @Override
     public int getMaxWissen() {
         return 0;
+    }
+
+    @Override
+    public boolean shouldCauseReequipAnimation(ItemStack oldStack, ItemStack newStack, boolean slotChanged) {
+        if (!slotChanged) {
+            return false;
+        }
+        return super.shouldCauseReequipAnimation(oldStack, newStack, slotChanged);
+    }
+
+    @Override
+    public ActionResult<ItemStack> onItemRightClick(World world, PlayerEntity player, Hand hand) {
+        ItemStack stack = player.getHeldItem(hand);
+
+        if (!world.isRemote) {
+            EarthProjectileSpell spell = new EarthProjectileSpell("id");
+            spell.spawnSpellStandart(world, player);
+        }
+
+        return new ActionResult<ItemStack>(ActionResultType.SUCCESS, stack);
     }
 }
