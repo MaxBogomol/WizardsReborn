@@ -5,9 +5,7 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.ActionResult;
-import net.minecraft.util.ActionResultType;
-import net.minecraft.util.Hand;
+import net.minecraft.util.*;
 import net.minecraft.world.World;
 
 public class ArcanemiconItem extends Item {
@@ -20,6 +18,7 @@ public class ArcanemiconItem extends Item {
         ItemStack stack = player.getHeldItem(hand);
 
         if (world.isRemote) {
+            Minecraft.getInstance().player.playSound(SoundEvents.ITEM_BOOK_PAGE_TURN, SoundCategory.NEUTRAL, 1.0f, 1.0f);
             Minecraft.getInstance().displayGuiScreen(new ArcanemiconGui());
         }
 

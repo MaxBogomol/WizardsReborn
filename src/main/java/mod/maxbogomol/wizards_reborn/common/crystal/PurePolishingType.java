@@ -14,6 +14,6 @@ public class PurePolishingType extends PolishingType {
     }
 
     public Color getColor() {
-        return new Color(200, 255, 245);
+        return new Color(147, 208, 212);
     }
 }

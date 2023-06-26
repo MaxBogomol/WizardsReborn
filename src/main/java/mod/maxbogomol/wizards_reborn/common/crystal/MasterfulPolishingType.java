@@ -14,6 +14,6 @@ public class MasterfulPolishingType extends PolishingType {
     }
 
     public Color getColor() {
-        return new Color(221, 254, 162);
+        return new Color(178, 227, 148);
     }
 }

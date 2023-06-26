@@ -14,6 +14,6 @@ public class AdvancedPolishingType extends PolishingType {
     }
 
     public Color getColor() {
-        return new Color(255, 238, 161);
+        return new Color(222, 202, 136);
     }
 }

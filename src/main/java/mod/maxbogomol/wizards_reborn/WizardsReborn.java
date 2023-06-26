@@ -1,44 +1,54 @@
 package mod.maxbogomol.wizards_reborn;
 
 import com.google.common.collect.ImmutableMap;
-import mod.maxbogomol.wizards_reborn.api.crystal.*;
+import mod.maxbogomol.wizards_reborn.api.crystal.CrystalType;
+import mod.maxbogomol.wizards_reborn.api.crystal.PolishingType;
+import mod.maxbogomol.wizards_reborn.api.monogram.Monogram;
+import mod.maxbogomol.wizards_reborn.api.monogram.MonogramRecipe;
+import mod.maxbogomol.wizards_reborn.api.monogram.Monograms;
+import mod.maxbogomol.wizards_reborn.api.spell.Spell;
+import mod.maxbogomol.wizards_reborn.api.spell.Spells;
 import mod.maxbogomol.wizards_reborn.client.arcanemicon.ArcanemiconChapters;
 import mod.maxbogomol.wizards_reborn.client.config.ClientConfig;
-import mod.maxbogomol.wizards_reborn.client.event.ClientWorldEvent;
 import mod.maxbogomol.wizards_reborn.client.event.ClientTickHandler;
+import mod.maxbogomol.wizards_reborn.client.event.ClientWorldEvent;
 import mod.maxbogomol.wizards_reborn.client.gui.container.ArcaneWorkbenchContainer;
 import mod.maxbogomol.wizards_reborn.client.gui.screen.ArcaneWorkbenchScreen;
-import mod.maxbogomol.wizards_reborn.client.particle.*;
+import mod.maxbogomol.wizards_reborn.client.particle.ArcaneWoodLeafParticleType;
+import mod.maxbogomol.wizards_reborn.client.particle.KarmaParticleType;
+import mod.maxbogomol.wizards_reborn.client.particle.SparkleParticleType;
+import mod.maxbogomol.wizards_reborn.client.particle.WispParticleType;
 import mod.maxbogomol.wizards_reborn.client.render.WorldRenderHandler;
-import mod.maxbogomol.wizards_reborn.client.render.model.entity.ArcaneWoodBoatModel;
-import mod.maxbogomol.wizards_reborn.client.render.model.entity.EmptyRenderer;
-import mod.maxbogomol.wizards_reborn.client.render.model.item.*;
-import mod.maxbogomol.wizards_reborn.client.render.model.tileentity.*;
+import mod.maxbogomol.wizards_reborn.client.render.entity.ArcaneWoodBoatModel;
+import mod.maxbogomol.wizards_reborn.client.render.entity.EmptyRenderer;
+import mod.maxbogomol.wizards_reborn.client.render.item.*;
+import mod.maxbogomol.wizards_reborn.client.render.tileentity.*;
 import mod.maxbogomol.wizards_reborn.common.block.*;
 import mod.maxbogomol.wizards_reborn.common.block.flammable.*;
+import mod.maxbogomol.wizards_reborn.common.config.Config;
 import mod.maxbogomol.wizards_reborn.common.crystal.*;
 import mod.maxbogomol.wizards_reborn.common.data.recipes.ArcaneWorkbenchRecipe;
-import mod.maxbogomol.wizards_reborn.common.entity.SpellProjectileEntity;
-import mod.maxbogomol.wizards_reborn.common.item.ArcanemiconItem;
-import mod.maxbogomol.wizards_reborn.common.world.tree.ArcaneWoodTree;
-import mod.maxbogomol.wizards_reborn.common.config.Config;
 import mod.maxbogomol.wizards_reborn.common.data.recipes.ArcanumDustTransmutationRecipe;
 import mod.maxbogomol.wizards_reborn.common.data.recipes.WissenAltarRecipe;
 import mod.maxbogomol.wizards_reborn.common.data.recipes.WissenCrystallizerRecipe;
 import mod.maxbogomol.wizards_reborn.common.entity.CustomBoatEntity;
+import mod.maxbogomol.wizards_reborn.common.entity.SpellProjectileEntity;
+import mod.maxbogomol.wizards_reborn.common.item.ArcanemiconItem;
 import mod.maxbogomol.wizards_reborn.common.item.ArcanumDustItem;
 import mod.maxbogomol.wizards_reborn.common.item.CrystalItem;
-import mod.maxbogomol.wizards_reborn.common.item.equipment.CustomItemTier;
 import mod.maxbogomol.wizards_reborn.common.item.CustomBoatItem;
 import mod.maxbogomol.wizards_reborn.common.item.equipment.ArcaneWandItem;
+import mod.maxbogomol.wizards_reborn.common.item.equipment.CustomItemTier;
 import mod.maxbogomol.wizards_reborn.common.item.equipment.WissenWandItem;
 import mod.maxbogomol.wizards_reborn.common.item.equipment.curio.ArcanumAmuletItem;
 import mod.maxbogomol.wizards_reborn.common.item.equipment.curio.ArcanumRingItem;
 import mod.maxbogomol.wizards_reborn.common.item.equipment.curio.LeatherBeltItem;
-import mod.maxbogomol.wizards_reborn.common.network.PacketHandler;
-import mod.maxbogomol.wizards_reborn.common.tileentity.*;
 import mod.maxbogomol.wizards_reborn.common.itemgroup.WizardsRebornItemGroup;
+import mod.maxbogomol.wizards_reborn.common.network.PacketHandler;
+import mod.maxbogomol.wizards_reborn.common.spell.*;
+import mod.maxbogomol.wizards_reborn.common.tileentity.*;
 import mod.maxbogomol.wizards_reborn.common.world.WorldGen;
+import mod.maxbogomol.wizards_reborn.common.world.tree.ArcaneWoodTree;
 import net.minecraft.block.*;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.Minecraft;
@@ -120,17 +130,48 @@ public class WizardsReborn
 
     public static final WoodType ARCANE_WOOD_TYPE = WoodType.create(new ResourceLocation(MOD_ID, "arcane_wood").toString());
 
+    //POLISHING_TYPES
     public static final PolishingType CRYSTAL_POLISHING_TYPE  = new CrystalPolishingType();
     public static final PolishingType FACETED_POLISHING_TYPE  = new FacetedPolishingType();
     public static final PolishingType ADVANCED_POLISHING_TYPE  = new AdvancedPolishingType();
     public static final PolishingType MASTERFUL_POLISHING_TYPE  = new MasterfulPolishingType();
     public static final PolishingType PURE_POLISHING_TYPE  = new PurePolishingType();
 
+    //CRYSTAL_TYPES
     public static final CrystalType EARTH_CRYSTAL_TYPE  = new EarthCrystalType();
     public static final CrystalType WATER_CRYSTAL_TYPE  = new WaterCrystalType();
     public static final CrystalType AIR_CRYSTAL_TYPE  = new AirCrystalType();
     public static final CrystalType FIRE_CRYSTAL_TYPE  = new FireCrystalType();
     public static final CrystalType VOID_CRYSTAL_TYPE  = new VoidCrystalType();
+
+    //MONOGRAMS
+    public static Monogram TEST1_MONOGRAM = new Monogram(MOD_ID+":test1");
+    public static Monogram TEST2_MONOGRAM = new Monogram(MOD_ID+":test2");
+    public static Monogram TEST3_MONOGRAM = new Monogram(MOD_ID+":test3");
+    public static Monogram TEST4_MONOGRAM = new Monogram(MOD_ID+":test4");
+    public static Monogram TEST5_MONOGRAM = new Monogram(MOD_ID+":test5");
+    public static Monogram TEST6_MONOGRAM = new Monogram(MOD_ID+":test6");
+    public static Monogram TEST7_MONOGRAM = new Monogram(MOD_ID+":test7");
+    public static Monogram TEST8_MONOGRAM = new Monogram(MOD_ID+":test8");
+    public static Monogram TEST9_MONOGRAM = new Monogram(MOD_ID+":test9");
+    public static Monogram TEST10_MONOGRAM = new Monogram(MOD_ID+":test10");
+    public static Monogram TEST11_MONOGRAM = new Monogram(MOD_ID+":test11");
+    public static Monogram TEST12_MONOGRAM = new Monogram(MOD_ID+":test12");
+    public static Monogram TEST13_MONOGRAM = new Monogram(MOD_ID+":test13");
+    public static Monogram TEST14_MONOGRAM = new Monogram(MOD_ID+":test14");
+    public static Monogram TEST15_MONOGRAM = new Monogram(MOD_ID+":test15");
+    public static Monogram TEST16_MONOGRAM = new Monogram(MOD_ID+":test16");
+    public static Monogram TEST17_MONOGRAM = new Monogram(MOD_ID+":test17");
+    public static Monogram TEST18_MONOGRAM = new Monogram(MOD_ID+":test18");
+    public static Monogram TEST19_MONOGRAM = new Monogram(MOD_ID+":test19");
+    public static Monogram TEST20_MONOGRAM = new Monogram(MOD_ID+":test20");
+
+    //SPELLS
+    public static Spell EARTH_PROJECTILE_SPELL = new EarthProjectileSpell(MOD_ID+":earth_projectile");
+    public static Spell WATER_PROJECTILE_SPELL = new WaterProjectileSpell(MOD_ID+":water_projectile");
+    public static Spell AIR_PROJECTILE_SPELL = new AirProjectileSpell(MOD_ID+":air_projectile");
+    public static Spell FIRE_PROJECTILE_SPELL = new FireProjectileSpell(MOD_ID+":fire_projectile");
+    public static Spell VOID_PROJECTILE_SPELL = new VoidProjectileSpell(MOD_ID+":void_projectile");
 
     //BLOCKS
     public static final RegistryObject<Block> ARCANE_GOLD_BLOCK = BLOCKS.register("arcane_gold_block", () -> new Block(AbstractBlock.Properties.from(Blocks.GOLD_BLOCK)));
@@ -358,7 +399,7 @@ public class WizardsReborn
     public static final RegistryObject<Item> RAINBOW_ARCANE_LUMOS_ITEM = ITEMS.register("rainbow_arcane_lumos", () -> new BlockItem(RAINBOW_ARCANE_LUMOS.get(), new Item.Properties().group(WIZARDS_REBORN_GROUP)));
     public static final RegistryObject<Item> COSMIC_ARCANE_LUMOS_ITEM = ITEMS.register("cosmic_arcane_lumos", () -> new BlockItem(COSMIC_ARCANE_LUMOS.get(), new Item.Properties().group(WIZARDS_REBORN_GROUP)));
 
-    public static final RegistryObject<Item> ARCANUM_AMILET = ITEMS.register("arcanum_amulet", () -> new ArcanumAmuletItem(new Item.Properties().maxStackSize(1).group(WIZARDS_REBORN_GROUP)));
+    public static final RegistryObject<Item> ARCANUM_AMULET = ITEMS.register("arcanum_amulet", () -> new ArcanumAmuletItem(new Item.Properties().maxStackSize(1).group(WIZARDS_REBORN_GROUP)));
     public static final RegistryObject<Item> ARCANUM_RING = ITEMS.register("arcanum_ring", () -> new ArcanumRingItem(new Item.Properties().maxStackSize(1).group(WIZARDS_REBORN_GROUP)));
     public static final RegistryObject<Item> LEATHER_BELT = ITEMS.register("leather_belt", () -> new LeatherBeltItem(new Item.Properties().maxStackSize(1).group(WIZARDS_REBORN_GROUP)));
 
@@ -430,7 +471,7 @@ public class WizardsReborn
                 () -> SlotTypePreset.NECKLACE.getMessageBuilder().build());
         InterModComms.sendTo(CuriosApi.MODID, SlotTypeMessage.REGISTER_TYPE,
                 () -> SlotTypePreset.HEAD.getMessageBuilder().build());
-        InterModComms.sendTo(CuriosApi.MODID ,SlotTypeMessage.REGISTER_TYPE,
+        InterModComms.sendTo(CuriosApi.MODID, SlotTypeMessage.REGISTER_TYPE,
                 () -> SlotTypePreset.RING.getMessageBuilder().size(2).build());
 
         IEventBus eventBus = FMLJavaModLoadingContext.get().getModEventBus();
@@ -448,6 +489,8 @@ public class WizardsReborn
         Registry.register(Registry.RECIPE_TYPE, WissenCrystallizerRecipe.TYPE_ID, WISSEN_CRYSTALLIZER_RECIPE);
         Registry.register(Registry.RECIPE_TYPE, ArcaneWorkbenchRecipe.TYPE_ID, ARCANE_WORKBENCH_RECIPE);
 
+        setupMonograms();
+        setupSpells();
         setupWandCrystalsModels();
 
         IEventBus forgeBus = MinecraftForge.EVENT_BUS;
@@ -506,6 +549,54 @@ public class WizardsReborn
     public void onServerStarting(FMLServerStartingEvent event) {
         // do something when the server starts
         LOGGER.info("HELLO from server starting");
+    }
+
+    public static void setupMonograms() {
+        Monograms.register(TEST1_MONOGRAM);
+        Monograms.register(TEST2_MONOGRAM);
+        Monograms.register(TEST3_MONOGRAM);
+        Monograms.register(TEST4_MONOGRAM);
+        Monograms.register(TEST5_MONOGRAM);
+        Monograms.register(TEST6_MONOGRAM);
+        Monograms.register(TEST7_MONOGRAM);
+        Monograms.register(TEST8_MONOGRAM);
+        Monograms.register(TEST9_MONOGRAM);
+        Monograms.register(TEST10_MONOGRAM);
+        Monograms.register(TEST11_MONOGRAM);
+        Monograms.register(TEST12_MONOGRAM);
+        Monograms.register(TEST13_MONOGRAM);
+        Monograms.register(TEST14_MONOGRAM);
+        Monograms.register(TEST15_MONOGRAM);
+        Monograms.register(TEST16_MONOGRAM);
+        Monograms.register(TEST17_MONOGRAM);
+        Monograms.register(TEST18_MONOGRAM);
+        Monograms.register(TEST19_MONOGRAM);
+        Monograms.register(TEST20_MONOGRAM);
+
+        Monograms.addRecipe(new MonogramRecipe(TEST5_MONOGRAM, TEST1_MONOGRAM, TEST2_MONOGRAM));
+        Monograms.addRecipe(new MonogramRecipe(TEST6_MONOGRAM, TEST1_MONOGRAM, TEST3_MONOGRAM));
+        Monograms.addRecipe(new MonogramRecipe(TEST7_MONOGRAM, TEST4_MONOGRAM, TEST2_MONOGRAM));
+        Monograms.addRecipe(new MonogramRecipe(TEST8_MONOGRAM, TEST4_MONOGRAM, TEST1_MONOGRAM));
+        Monograms.addRecipe(new MonogramRecipe(TEST9_MONOGRAM, TEST3_MONOGRAM, TEST4_MONOGRAM));
+        Monograms.addRecipe(new MonogramRecipe(TEST10_MONOGRAM, TEST3_MONOGRAM, TEST2_MONOGRAM));
+        Monograms.addRecipe(new MonogramRecipe(TEST11_MONOGRAM, TEST6_MONOGRAM, TEST9_MONOGRAM));
+        Monograms.addRecipe(new MonogramRecipe(TEST12_MONOGRAM, TEST6_MONOGRAM, TEST4_MONOGRAM));
+        Monograms.addRecipe(new MonogramRecipe(TEST13_MONOGRAM, TEST10_MONOGRAM, TEST4_MONOGRAM));
+        Monograms.addRecipe(new MonogramRecipe(TEST14_MONOGRAM, TEST2_MONOGRAM, TEST4_MONOGRAM));
+        Monograms.addRecipe(new MonogramRecipe(TEST15_MONOGRAM, TEST9_MONOGRAM, TEST7_MONOGRAM));
+        Monograms.addRecipe(new MonogramRecipe(TEST16_MONOGRAM, TEST2_MONOGRAM, TEST8_MONOGRAM));
+        Monograms.addRecipe(new MonogramRecipe(TEST17_MONOGRAM, TEST10_MONOGRAM, TEST5_MONOGRAM));
+        Monograms.addRecipe(new MonogramRecipe(TEST18_MONOGRAM, TEST2_MONOGRAM, TEST7_MONOGRAM));
+        Monograms.addRecipe(new MonogramRecipe(TEST19_MONOGRAM, TEST3_MONOGRAM, TEST8_MONOGRAM));
+        Monograms.addRecipe(new MonogramRecipe(TEST20_MONOGRAM, TEST7_MONOGRAM, TEST6_MONOGRAM));
+    }
+
+    public static void setupSpells() {
+        Spells.register(EARTH_PROJECTILE_SPELL);
+        Spells.register(WATER_PROJECTILE_SPELL);
+        Spells.register(AIR_PROJECTILE_SPELL);
+        Spells.register(FIRE_PROJECTILE_SPELL);
+        Spells.register(VOID_PROJECTILE_SPELL);
     }
 
     public static void setupWandCrystalsModels() {

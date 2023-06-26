@@ -1,8 +1,10 @@
 package mod.maxbogomol.wizards_reborn.common.item.equipment;
 
+import mod.maxbogomol.wizards_reborn.WizardsReborn;
+import mod.maxbogomol.wizards_reborn.api.spell.Spell;
+import mod.maxbogomol.wizards_reborn.api.spell.Spells;
 import mod.maxbogomol.wizards_reborn.api.wissen.IWissenItem;
 import mod.maxbogomol.wizards_reborn.common.item.ItemBackedInventory;
-import mod.maxbogomol.wizards_reborn.common.spell.EarthProjectileSpell;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.inventory.Inventory;
@@ -60,6 +62,7 @@ public class ArcaneWandItem extends Item implements IWissenItem {
             if (nbt == null) {
                 nbt = new CompoundNBT();
                 nbt.putBoolean("crystal", false);
+                nbt.putString("spell", "");
                 Inventory item = getInventory(stack);
                 stack.setTag(nbt);
             }
@@ -84,8 +87,11 @@ public class ArcaneWandItem extends Item implements IWissenItem {
         ItemStack stack = player.getHeldItem(hand);
 
         if (!world.isRemote) {
-            EarthProjectileSpell spell = new EarthProjectileSpell("id");
-            spell.spawnSpellStandart(world, player);
+            CompoundNBT nbt = stack.getTag();
+            if (nbt.getBoolean("crystal")) {
+                Spell spell = Spells.getSpell(nbt.getString("spell"));
+                spell.spawnSpellStandart(world, player);
+            }
         }
 
         return new ActionResult<ItemStack>(ActionResultType.SUCCESS, stack);

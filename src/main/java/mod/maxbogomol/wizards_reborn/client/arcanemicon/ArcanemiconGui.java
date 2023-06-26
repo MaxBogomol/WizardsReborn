@@ -88,7 +88,7 @@ public class ArcanemiconGui extends Screen {
                 int x = guiLeft + 11, y = guiTop + 151;
                 if (mouseX >= x && mouseY >= y && mouseX <= x + 32 && mouseY <= y + 16) {
                     currentPage -= 2;
-                    Minecraft.getInstance().player.playSound(SoundEvents.UI_BUTTON_CLICK, SoundCategory.NEUTRAL, 1.0f, 1.0f);
+                    Minecraft.getInstance().player.playSound(SoundEvents.ITEM_BOOK_PAGE_TURN, SoundCategory.NEUTRAL, 1.0f, 1.0f);
                     return true;
                 }
             }
@@ -96,7 +96,7 @@ public class ArcanemiconGui extends Screen {
                 int x = guiLeft + 269, y = guiTop + 151;
                 if (mouseX >= x && mouseY >= y && mouseX <= x + 32 && mouseY <= y + 16) {
                     currentPage += 2;
-                    Minecraft.getInstance().player.playSound(SoundEvents.UI_BUTTON_CLICK, SoundCategory.NEUTRAL, 1.0f, 1.0f);
+                    Minecraft.getInstance().player.playSound(SoundEvents.ITEM_BOOK_PAGE_TURN, SoundCategory.NEUTRAL, 1.0f, 1.0f);
                     return true;
                 }
             }

@@ -2,15 +2,18 @@ package mod.maxbogomol.wizards_reborn.common.entity;
 
 import mod.maxbogomol.wizards_reborn.WizardsReborn;
 import mod.maxbogomol.wizards_reborn.api.spell.Spell;
+import mod.maxbogomol.wizards_reborn.api.spell.Spells;
 import mod.maxbogomol.wizards_reborn.client.particle.Particles;
 import mod.maxbogomol.wizards_reborn.common.network.PacketHandler;
 import mod.maxbogomol.wizards_reborn.common.network.SpellBurstEffectPacket;
-import mod.maxbogomol.wizards_reborn.common.spell.EarthProjectileSpell;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.projectile.ProjectileHelper;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.network.IPacket;
+import net.minecraft.network.datasync.DataParameter;
+import net.minecraft.network.datasync.DataSerializers;
+import net.minecraft.network.datasync.EntityDataManager;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.EntityRayTraceResult;
 import net.minecraft.util.math.MathHelper;
@@ -20,11 +23,12 @@ import net.minecraft.world.World;
 import net.minecraftforge.fml.network.NetworkHooks;
 
 import java.awt.*;
+import java.util.Optional;
 import java.util.UUID;
 
 public class SpellProjectileEntity extends Entity {
-    UUID casterId = null;
-    String spellId = null;
+    private static final DataParameter<Optional<UUID>> casterId = EntityDataManager.createKey(SpellProjectileEntity.class, DataSerializers.OPTIONAL_UNIQUE_ID);
+    private static final DataParameter<String> spellId = EntityDataManager.createKey(SpellProjectileEntity.class, DataSerializers.STRING);
 
     public SpellProjectileEntity(EntityType<?> entityTypeIn, World worldIn) {
         super(entityTypeIn, worldIn);
@@ -33,8 +37,8 @@ public class SpellProjectileEntity extends Entity {
     public Entity shoot(double x, double y, double z, double vx, double vy, double vz, UUID caster, String spell) {
         setPosition(x, y, z);
         setMotion(vx, vy, vz);
-        casterId = caster;
-        spellId = spell;
+        getDataManager().set(casterId, Optional.of(caster));
+        getDataManager().set(spellId, spell);
         velocityChanged = true;
         return this;
     }
@@ -47,7 +51,7 @@ public class SpellProjectileEntity extends Entity {
         super.tick();
 
         if (!world.isRemote) {
-            RayTraceResult ray = ProjectileHelper.func_234618_a_(this, (e) -> !e.isSpectator() && e.canBeCollidedWith() && !e.getUniqueID().equals(casterId));
+            RayTraceResult ray = ProjectileHelper.func_234618_a_(this, (e) -> !e.isSpectator() && e.canBeCollidedWith() && !e.getUniqueID().equals(getDataManager().get(casterId)));
             if (ray.getType() == RayTraceResult.Type.ENTITY) {
                 onImpact(ray, ((EntityRayTraceResult)ray).getEntity());
             }
@@ -83,19 +87,20 @@ public class SpellProjectileEntity extends Entity {
 
     @Override
     protected void registerData() {
-        //
+        this.getDataManager().register(spellId,"");
+        getDataManager().register(casterId, Optional.empty());
     }
 
     @Override
     protected void readAdditional(CompoundNBT compound) {
-        casterId = compound.contains("caster") ? compound.getUniqueId("caster") : null;
-        spellId = compound.contains("spell") ? compound.getString("spell") : null;
+        compound.putUniqueId("caster", getDataManager().get(casterId).get());
+        compound.putString("spelll", getDataManager().get(spellId));
     }
 
     @Override
     protected void writeAdditional(CompoundNBT compound) {
-        if (casterId != null) compound.putUniqueId("caster", casterId);
-        if (spellId != null) compound.putString("spell", spellId);
+        getDataManager().set(casterId, Optional.of(compound.getUniqueId("caster")));
+        getDataManager().set(spellId, compound.getString("spelll"));
     }
 
     @Override
@@ -104,7 +109,7 @@ public class SpellProjectileEntity extends Entity {
     }
 
     public Spell getSpell() {
-        return new EarthProjectileSpell("id");
+        return Spells.getSpell(getDataManager().get(spellId));
     }
 
     public void rayEffect() {
@@ -125,7 +130,7 @@ public class SpellProjectileEntity extends Entity {
 
             Particles.create(WizardsReborn.WISP_PARTICLE)
                     .addVelocity(-norm.x + ((rand.nextDouble() - 0.5D) / 500), -norm.y + ((rand.nextDouble() - 0.5D) / 500), -norm.z + ((rand.nextDouble() - 0.5D) / 500))
-                    .setAlpha(0.3f, 0).setScale(0.15f, 0)
+                    .setAlpha(0.2f, 0).setScale(0.15f, 0)
                     .setColor(r, g, b)
                     .setLifetime(20)
                     .spawn(world, lerpX, lerpY, lerpZ);
