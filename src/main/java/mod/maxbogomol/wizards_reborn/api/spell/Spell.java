@@ -82,7 +82,7 @@ public class Spell {
         Vector3d pos = player.getEyePosition(0);
         Vector3d vel = player.getEyePosition(0).add(player.getLookVec().scale(40)).subtract(pos).scale(1.0 / 30);
         world.addEntity(new SpellProjectileEntity(WizardsReborn.SPELL_PROJECTILE.get(), world).shoot(
-                pos.x, pos.y, pos.z, vel.x, vel.y, vel.z, player.getUniqueID(), this.getId()
+                pos.x, pos.y - 0.2f, pos.z, vel.x, vel.y, vel.z, player.getUniqueID(), this.getId()
         ));
     }
 }

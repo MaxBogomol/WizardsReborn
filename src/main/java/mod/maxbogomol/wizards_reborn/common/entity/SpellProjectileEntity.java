@@ -1,11 +1,10 @@
 package mod.maxbogomol.wizards_reborn.common.entity;
 
-import mod.maxbogomol.wizards_reborn.WizardsReborn;
 import mod.maxbogomol.wizards_reborn.api.spell.Spell;
 import mod.maxbogomol.wizards_reborn.api.spell.Spells;
-import mod.maxbogomol.wizards_reborn.client.particle.Particles;
 import mod.maxbogomol.wizards_reborn.common.network.PacketHandler;
 import mod.maxbogomol.wizards_reborn.common.network.SpellBurstEffectPacket;
+import mod.maxbogomol.wizards_reborn.common.network.SpellProjectileRayEffectPacket;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.projectile.ProjectileHelper;
@@ -50,6 +49,12 @@ public class SpellProjectileEntity extends Entity {
 
         super.tick();
 
+        Vector3d pos = getPositionVec();
+        prevPosX = pos.x;
+        prevPosY = pos.y;
+        prevPosZ = pos.z;
+        setPosition(pos.x + motion.x, pos.y + motion.y, pos.z + motion.z);
+
         if (!world.isRemote) {
             RayTraceResult ray = ProjectileHelper.func_234618_a_(this, (e) -> !e.isSpectator() && e.canBeCollidedWith() && !e.getUniqueID().equals(getDataManager().get(casterId)));
             if (ray.getType() == RayTraceResult.Type.ENTITY) {
@@ -58,31 +63,19 @@ public class SpellProjectileEntity extends Entity {
             else if (ray.getType() == RayTraceResult.Type.BLOCK) {
                 onImpact(ray);
             }
-        }
-
-        Vector3d pos = getPositionVec();
-        prevPosX = pos.x;
-        prevPosY = pos.y;
-        prevPosZ = pos.z;
-        setPosition(pos.x + motion.x, pos.y + motion.y, pos.z + motion.z);
-
-        if (world.isRemote) {
             rayEffect();
         }
     }
 
     protected void onImpact(RayTraceResult ray, Entity target) {
         setDead();
-        if (!world.isRemote) {
-            burstEffect();
-        }
+        burstEffect();
     }
 
     protected void onImpact(RayTraceResult ray) {
         setDead();
-        if (!world.isRemote) {
-            burstEffect();
-        }
+        setPosition(ray.getHitVec().x, ray.getHitVec().y, ray.getHitVec().z);
+        burstEffect();
     }
 
     @Override
@@ -123,27 +116,7 @@ public class SpellProjectileEntity extends Entity {
         float g = color.getGreen() / 255f;
         float b = color.getBlue() / 255f;
 
-        for (int i = 0; i < 10; i ++) {
-            double lerpX = MathHelper.lerp(i / 10.0f, prevPosX, pos.x);
-            double lerpY = MathHelper.lerp(i / 10.0f, prevPosY, pos.y);
-            double lerpZ = MathHelper.lerp(i / 10.0f, prevPosZ, pos.z);
-
-            Particles.create(WizardsReborn.WISP_PARTICLE)
-                    .addVelocity(-norm.x + ((rand.nextDouble() - 0.5D) / 500), -norm.y + ((rand.nextDouble() - 0.5D) / 500), -norm.z + ((rand.nextDouble() - 0.5D) / 500))
-                    .setAlpha(0.2f, 0).setScale(0.15f, 0)
-                    .setColor(r, g, b)
-                    .setLifetime(20)
-                    .spawn(world, lerpX, lerpY, lerpZ);
-
-            if (rand.nextFloat() < 0.1f) {
-                Particles.create(WizardsReborn.SPARKLE_PARTICLE)
-                        .addVelocity(-norm.x + ((rand.nextDouble() - 0.5D) / 250), -norm.y + ((rand.nextDouble() - 0.5D) / 250), -norm.z + ((rand.nextDouble() - 0.5D) / 250))
-                        .setAlpha(0.125f, 0).setScale(0.2f, 0)
-                        .setColor(r, g, b)
-                        .setLifetime(30)
-                        .spawn(world, lerpX, lerpY, lerpZ);
-            }
-        }
+        PacketHandler.sendToTracking(world, new BlockPos(getPositionVec()), new SpellProjectileRayEffectPacket((float) prevPosX, (float) prevPosY + 0.2f, (float) prevPosZ, (float) pos.x, (float) pos.y + 0.2f, (float) pos.z, (float) norm.x, (float) norm.y, (float) norm.z, r, g, b));
     }
 
     public void burstEffect() {
@@ -155,6 +128,6 @@ public class SpellProjectileEntity extends Entity {
         float g = color.getGreen() / 255f;
         float b = color.getBlue() / 255f;
 
-        PacketHandler.sendToTracking(world, new BlockPos(pos), new SpellBurstEffectPacket((float) pos.x, (float) pos.y, (float) pos.z, r, g, b));
+        PacketHandler.sendToTracking(world, new BlockPos(pos), new SpellBurstEffectPacket((float) pos.x, (float) pos.y + 0.2f, (float) pos.z, r, g, b));
     }
 }
