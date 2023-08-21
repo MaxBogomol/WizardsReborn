@@ -2,7 +2,7 @@ package mod.maxbogomol.wizards_reborn.common.block;
 
 import mod.maxbogomol.wizards_reborn.WizardsReborn;
 import mod.maxbogomol.wizards_reborn.api.wissen.IWissenItem;
-import mod.maxbogomol.wizards_reborn.common.data.recipes.WissenAltarRecipe;
+import mod.maxbogomol.wizards_reborn.common.recipe.WissenAltarRecipe;
 import mod.maxbogomol.wizards_reborn.common.tileentity.TileSimpleInventory;
 import mod.maxbogomol.wizards_reborn.common.tileentity.WissenAltarTileEntity;
 import net.minecraft.block.*;
@@ -10,6 +10,7 @@ import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.fluid.FluidState;
 import net.minecraft.fluid.Fluids;
 import net.minecraft.inventory.Inventory;
+import net.minecraft.inventory.InventoryHelper;
 import net.minecraft.item.BlockItemUseContext;
 import net.minecraft.item.ItemStack;
 import net.minecraft.state.StateContainer;
@@ -82,7 +83,7 @@ public class WissenAltarBlock extends HorizontalBlock implements ITileEntityProv
             TileEntity tile = world.getTileEntity(pos);
             if (tile instanceof TileSimpleInventory) {
                 ((TileSimpleInventory) tile).getItemHandler().removeStackFromSlot(2);
-                net.minecraft.inventory.InventoryHelper.dropInventoryItems(world, pos, ((TileSimpleInventory) tile).getItemHandler());
+                InventoryHelper.dropInventoryItems(world, pos, ((TileSimpleInventory) tile).getItemHandler());
             }
             super.onReplaced(state, world, pos, newState, isMoving);
         }

@@ -1,9 +1,11 @@
 package mod.maxbogomol.wizards_reborn.common.item.equipment;
 
 import mod.maxbogomol.wizards_reborn.WizardsReborn;
+import mod.maxbogomol.wizards_reborn.api.knowledge.KnowledgeUtils;
 import mod.maxbogomol.wizards_reborn.api.spell.Spell;
 import mod.maxbogomol.wizards_reborn.api.spell.Spells;
 import mod.maxbogomol.wizards_reborn.api.wissen.IWissenItem;
+import mod.maxbogomol.wizards_reborn.api.wissen.WissenItemUtils;
 import mod.maxbogomol.wizards_reborn.common.item.ItemBackedInventory;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.PlayerEntity;
@@ -66,12 +68,14 @@ public class ArcaneWandItem extends Item implements IWissenItem {
                 Inventory item = getInventory(stack);
                 stack.setTag(nbt);
             }
+
+            WissenItemUtils.existWissen(stack);
         }
     }
 
     @Override
     public int getMaxWissen() {
-        return 0;
+        return 10000;
     }
 
     @Override
@@ -85,6 +89,7 @@ public class ArcaneWandItem extends Item implements IWissenItem {
     @Override
     public ActionResult<ItemStack> onItemRightClick(World world, PlayerEntity player, Hand hand) {
         ItemStack stack = player.getHeldItem(hand);
+        KnowledgeUtils.removeAllKnowledge(player);
 
         if (!world.isRemote) {
             CompoundNBT nbt = stack.getTag();

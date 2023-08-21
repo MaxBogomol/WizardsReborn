@@ -1,15 +1,19 @@
 package mod.maxbogomol.wizards_reborn.common.tileentity;
 
 import mod.maxbogomol.wizards_reborn.WizardsReborn;
+import mod.maxbogomol.wizards_reborn.api.wissen.IWissenItem;
 import mod.maxbogomol.wizards_reborn.api.wissen.IWissenTileEntity;
+import mod.maxbogomol.wizards_reborn.api.wissen.WissenItemUtils;
 import mod.maxbogomol.wizards_reborn.api.wissen.WissenUtils;
 import mod.maxbogomol.wizards_reborn.client.particle.Particles;
-import mod.maxbogomol.wizards_reborn.common.data.recipes.WissenAltarRecipe;
+import mod.maxbogomol.wizards_reborn.common.network.WissenAltarSendEffectPacket;
+import mod.maxbogomol.wizards_reborn.common.recipe.WissenAltarRecipe;
 import mod.maxbogomol.wizards_reborn.common.network.PacketHandler;
 import mod.maxbogomol.wizards_reborn.utils.PacketUtils;
 import mod.maxbogomol.wizards_reborn.common.network.WissenAltarBurstEffectPacket;
 import net.minecraft.block.BlockState;
 import net.minecraft.inventory.Inventory;
+import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.network.NetworkManager;
 import net.minecraft.network.play.server.SUpdateTileEntityPacket;
@@ -78,6 +82,26 @@ public class WissenAltarTileEntity extends TileSimpleInventory implements ITicka
                     PacketUtils.SUpdateTileEntityPacket(this);
                 }
             }
+
+            if (wissen > 0) {
+                if (!getItemHandler().getStackInSlot(0).isEmpty()) {
+                    ItemStack stack = getItemHandler().getStackInSlot(0);
+                    if (stack.getItem() instanceof IWissenItem) {
+                        IWissenItem item = (IWissenItem) stack.getItem();
+                        int wissen_remain = WissenUtils.getRemoveWissenRemain(wissen, 100);
+                        wissen_remain = 100 - wissen_remain;
+                        int item_wissen_remain = WissenItemUtils.getAddWissenRemain(stack, wissen_remain, item.getMaxWissen());
+                        wissen_remain = wissen_remain - item_wissen_remain;
+                        if (wissen_remain > 0) {
+                            WissenItemUtils.addWissen(stack, wissen_remain, item.getMaxWissen());
+                            wissen = wissen - wissen_remain;
+                            if (random.nextFloat() < 0.5) {
+                                PacketHandler.sendToTracking(world, getPos(), new WissenAltarSendEffectPacket(getPos()));
+                            }
+                        }
+                    }
+                }
+            }
         }
 
         if (world.isRemote()) {
@@ -86,7 +110,7 @@ public class WissenAltarTileEntity extends TileSimpleInventory implements ITicka
                     Particles.create(WizardsReborn.WISP_PARTICLE)
                             .addVelocity(((random.nextDouble() - 0.5D) / 30) * getStage(), ((random.nextDouble() - 0.5D) / 30) * getStage(), ((random.nextDouble() - 0.5D) / 30) * getStage())
                             .setAlpha(0.25f, 0).setScale(0.3f * getStage(), 0)
-                            .setColor(0.466f, 0.643f, 0.815f, 0.466f, 0.643f, 0.815f)
+                            .setColor(0.466f, 0.643f, 0.815f)
                             .setLifetime(20)
                             .spawn(world, pos.getX() + 0.5F, pos.getY() + 1.3125F, pos.getZ() + 0.5F);
                 }
@@ -94,7 +118,7 @@ public class WissenAltarTileEntity extends TileSimpleInventory implements ITicka
                     Particles.create(WizardsReborn.SPARKLE_PARTICLE)
                             .addVelocity(((random.nextDouble() - 0.5D) / 30) * getStage(), ((random.nextDouble() - 0.5D) / 30) * getStage(), ((random.nextDouble() - 0.5D) / 30) * getStage())
                             .setAlpha(0.25f, 0).setScale(0.1f * getStage(), 0)
-                            .setColor(0.466f, 0.643f, 0.815f, 0.466f, 0.643f, 0.815f)
+                            .setColor(0.466f, 0.643f, 0.815f)
                             .setLifetime(30)
                             .setSpin((0.5f * (float) ((random.nextDouble() - 0.5D) * 2)))
                             .spawn(world, pos.getX() + 0.5F, pos.getY() + 1.3125F, pos.getZ() + 0.5F);
@@ -106,7 +130,7 @@ public class WissenAltarTileEntity extends TileSimpleInventory implements ITicka
                     Particles.create(WizardsReborn.SPARKLE_PARTICLE)
                             .addVelocity(((random.nextDouble() - 0.5D) / 20), ((random.nextDouble() - 0.5D) / 20), ((random.nextDouble() - 0.5D) / 20))
                             .setAlpha(0.25f, 0).setScale(0.1f * getStage(), 0)
-                            .setColor(0.466f, 0.643f, 0.815f, 0.466f, 0.643f, 0.815f)
+                            .setColor(0.466f, 0.643f, 0.815f)
                             .setLifetime(30)
                             .setSpin((0.5f * (float) ((random.nextDouble() - 0.5D) * 2)))
                             .spawn(world, pos.getX() + 0.5F, pos.getY() + 1.3125F, pos.getZ() + 0.5F);

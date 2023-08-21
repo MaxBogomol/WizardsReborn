@@ -147,7 +147,7 @@ public class ArcaneLumosBlock extends Block {
             case BLACK:
                 return getDyeColor(DyeColor.BLACK);
             case RAINBOW:
-                return getRainbowColor();
+                return new Color(RANDOM.nextFloat(), RANDOM.nextFloat(), RANDOM.nextFloat());
             case COSMIC:
                 return new Color(254, 181, 178);
         }
@@ -157,64 +157,5 @@ public class ArcaneLumosBlock extends Block {
 
     public Color getDyeColor(DyeColor color) {
         return new Color(color.getColorValue());
-    }
-
-    public Color getRainbowColor() {
-        float i = 1f / 6f;
-        float tick = (float) Math.sin(Math.toRadians(ClientTickHandler.rainbowTicks * 0.4 % 360));
-        if (tick < 0) {
-            tick = 1f + tick;
-        }
-
-        Color color = new Color(255, 255, 255);
-
-        if (tick <= i * 1) {
-            color = getRainbowBetweenColor(getDyeColor(DyeColor.RED), getDyeColor(DyeColor.ORANGE), tick, i);
-        }
-        if (tick > i * 1 && tick <= i * 2) {
-            color = getRainbowBetweenColor(getDyeColor(DyeColor.ORANGE), getDyeColor(DyeColor.YELLOW), tick, i * 2);
-        }
-        if (tick > i * 2 && tick <= i * 3) {
-            color = getRainbowBetweenColor(getDyeColor(DyeColor.YELLOW), getDyeColor(DyeColor.LIME), tick, i * 3);
-        }
-        if (tick > i * 3 && tick <= i * 4) {
-            color = getRainbowBetweenColor(getDyeColor(DyeColor.LIME), getDyeColor(DyeColor.LIGHT_BLUE), tick, i * 4);
-        }
-        if (tick > i * 4 && tick <= i * 5) {
-            color = getRainbowBetweenColor(getDyeColor(DyeColor.LIGHT_BLUE), getDyeColor(DyeColor.BLUE), tick, i * 5);
-        }
-        if (tick > i * 5 && tick <= i * 6) {
-            color = getRainbowBetweenColor(getDyeColor(DyeColor.BLUE), getDyeColor(DyeColor.PURPLE), tick, i * 6);
-        }
-
-        return color;
-    }
-
-    public Color getRainbowBetweenColor(Color color1, Color color2, float tick, float maxTick) {
-        int R = (int) (color1.getRed() + ((color2.getRed() - color1.getRed()) * (tick / maxTick)));
-        int G = (int) (color1.getGreen() + ((color2.getGreen() - color1.getGreen()) * (tick / maxTick)));
-        int B = (int) (color1.getBlue() + ((color2.getBlue() - color1.getBlue()) * (tick / maxTick)));
-
-        if (R < 0) {
-            R = 255 + R;
-        }
-        if (G < 0) {
-            G = 255 + R;
-        }
-        if (B < 0) {
-            B = 255 + R;
-        }
-
-        if (R > 255) {
-            R = R - 255;
-        }
-        if (G > 255) {
-            G = G - 255;
-        }
-        if (B > 255) {
-            B = B - 255;
-        }
-
-        return new Color(R, G, B);
     }
 }

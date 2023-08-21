@@ -5,7 +5,7 @@ import mod.maxbogomol.wizards_reborn.api.wissen.IWissenTileEntity;
 import mod.maxbogomol.wizards_reborn.api.wissen.IWissenWandFunctionalTileEntity;
 import mod.maxbogomol.wizards_reborn.api.wissen.WissenUtils;
 import mod.maxbogomol.wizards_reborn.client.particle.Particles;
-import mod.maxbogomol.wizards_reborn.common.data.recipes.ArcaneWorkbenchRecipe;
+import mod.maxbogomol.wizards_reborn.common.recipe.ArcaneWorkbenchRecipe;
 import mod.maxbogomol.wizards_reborn.common.network.ArcaneWorkbenchBurstEffectPacket;
 import mod.maxbogomol.wizards_reborn.common.network.PacketHandler;
 import mod.maxbogomol.wizards_reborn.utils.PacketUtils;
@@ -113,7 +113,7 @@ public class ArcaneWorkbenchTileEntity extends TileEntity implements ITickableTi
                     Particles.create(WizardsReborn.WISP_PARTICLE)
                             .addVelocity(((random.nextDouble() - 0.5D) / 30) * getStage(), ((random.nextDouble() - 0.5D) / 30) * getStage(), ((random.nextDouble() - 0.5D) / 30) * getStage())
                             .setAlpha(0.25f, 0).setScale(0.3f * getStage(), 0)
-                            .setColor(0.466f, 0.643f, 0.815f, 0.466f, 0.643f, 0.815f)
+                            .setColor(0.466f, 0.643f, 0.815f)
                             .setLifetime(20)
                             .spawn(world, pos.getX() + 0.5F, pos.getY() + 1.5F, pos.getZ() + 0.5F);
                 }
@@ -121,7 +121,7 @@ public class ArcaneWorkbenchTileEntity extends TileEntity implements ITickableTi
                     Particles.create(WizardsReborn.SPARKLE_PARTICLE)
                             .addVelocity(((random.nextDouble() - 0.5D) / 30) * getStage(), ((random.nextDouble() - 0.5D) / 30) * getStage(), ((random.nextDouble() - 0.5D) / 30) * getStage())
                             .setAlpha(0.25f, 0).setScale(0.1f * getStage(), 0)
-                            .setColor(0.466f, 0.643f, 0.815f, 0.466f, 0.643f, 0.815f)
+                            .setColor(0.466f, 0.643f, 0.815f)
                             .setLifetime(30)
                             .setSpin((0.5f * (float) ((random.nextDouble() - 0.5D) * 2)))
                             .spawn(world, pos.getX() + 0.5F, pos.getY() + 1.5F, pos.getZ() + 0.5F);
@@ -133,19 +133,27 @@ public class ArcaneWorkbenchTileEntity extends TileEntity implements ITickableTi
                     Particles.create(WizardsReborn.SPARKLE_PARTICLE)
                             .addVelocity(((random.nextDouble() - 0.5D) / 20), ((random.nextDouble() - 0.5D) / 20), ((random.nextDouble() - 0.5D) / 20))
                             .setAlpha(0.25f, 0).setScale(0.1f * getStage(), 0)
-                            .setColor(0.466f, 0.643f, 0.815f, 0.466f, 0.643f, 0.815f)
+                            .setColor(0.466f, 0.643f, 0.815f)
                             .setLifetime(30)
                             .setSpin((0.5f * (float) ((random.nextDouble() - 0.5D) * 2)))
                             .spawn(world, pos.getX() + 0.5F, pos.getY() + 1.5F, pos.getZ() + 0.5F);
                 }
-
+                if (random.nextFloat() < 0.1) {
+                    Particles.create(WizardsReborn.SPARKLE_PARTICLE)
+                            .addVelocity(((random.nextDouble() - 0.5D) / 40), ((random.nextDouble() - 0.5D) / 40), ((random.nextDouble() - 0.5D) / 40))
+                            .setAlpha(0.75f, 0).setScale(0.1f * getStage(), 0)
+                            .setColor(random.nextFloat(), random.nextFloat(), random.nextFloat())
+                            .setLifetime(65)
+                            .setSpin((0.1f * (float) ((random.nextDouble() - 0.5D) * 2)))
+                            .spawn(world, pos.getX() + 0.5F, pos.getY() + 1.5F, pos.getZ() + 0.5F);
+                }
                 if (random.nextFloat() < 0.3) {
                     double X = ((random.nextDouble() - 0.5D) * 0.5);
                     double Z = ((random.nextDouble() - 0.5D) * 0.5);
                     Particles.create(WizardsReborn.KARMA_PARTICLE)
                             .addVelocity(-(X / 100), (random.nextDouble() / 20), -(Z / 100))
                             .setAlpha(0.5f, 0).setScale(0.1f, 0.025f)
-                            .setColor(0.733f, 0.564f, 0.937f, 0.733f, 0.564f, 0.937f)
+                            .setColor(0.733f, 0.564f, 0.937f)
                             .setLifetime(15)
                             .spawn(world, pos.getX() + 0.5F + X, pos.getY() + 1F, pos.getZ() + 0.5F + Z);
                 }

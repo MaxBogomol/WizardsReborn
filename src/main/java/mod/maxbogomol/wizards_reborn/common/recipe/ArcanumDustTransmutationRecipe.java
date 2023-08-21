@@ -1,4 +1,4 @@
-package mod.maxbogomol.wizards_reborn.common.data.recipes;
+package mod.maxbogomol.wizards_reborn.common.recipe;
 
 import com.google.gson.JsonObject;
 import mod.maxbogomol.wizards_reborn.WizardsReborn;

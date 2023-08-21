@@ -1,9 +1,8 @@
-package mod.maxbogomol.wizards_reborn.common.data.recipes;
+package mod.maxbogomol.wizards_reborn.common.recipe;
 
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
-import it.unimi.dsi.fastutil.ints.IntSet;
 import mod.maxbogomol.wizards_reborn.WizardsReborn;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;

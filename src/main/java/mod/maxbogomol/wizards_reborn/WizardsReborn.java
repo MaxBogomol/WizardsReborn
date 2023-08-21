@@ -12,6 +12,8 @@ import mod.maxbogomol.wizards_reborn.client.arcanemicon.ArcanemiconChapters;
 import mod.maxbogomol.wizards_reborn.client.config.ClientConfig;
 import mod.maxbogomol.wizards_reborn.client.event.ClientTickHandler;
 import mod.maxbogomol.wizards_reborn.client.event.ClientWorldEvent;
+import mod.maxbogomol.wizards_reborn.client.gui.HUDEventHandler;
+import mod.maxbogomol.wizards_reborn.client.gui.TooltipEventHandler;
 import mod.maxbogomol.wizards_reborn.client.gui.container.ArcaneWorkbenchContainer;
 import mod.maxbogomol.wizards_reborn.client.gui.screen.ArcaneWorkbenchScreen;
 import mod.maxbogomol.wizards_reborn.client.particle.ArcaneWoodLeafParticleType;
@@ -25,14 +27,14 @@ import mod.maxbogomol.wizards_reborn.client.render.item.*;
 import mod.maxbogomol.wizards_reborn.client.render.tileentity.*;
 import mod.maxbogomol.wizards_reborn.common.block.*;
 import mod.maxbogomol.wizards_reborn.common.block.flammable.*;
+import mod.maxbogomol.wizards_reborn.common.capability.IKnowledge;
+import mod.maxbogomol.wizards_reborn.common.capability.KnowledgeStorage;
+import mod.maxbogomol.wizards_reborn.common.capability.KnowledgeImpl;
 import mod.maxbogomol.wizards_reborn.common.config.Config;
 import mod.maxbogomol.wizards_reborn.common.crystal.*;
-import mod.maxbogomol.wizards_reborn.common.data.recipes.ArcaneWorkbenchRecipe;
-import mod.maxbogomol.wizards_reborn.common.data.recipes.ArcanumDustTransmutationRecipe;
-import mod.maxbogomol.wizards_reborn.common.data.recipes.WissenAltarRecipe;
-import mod.maxbogomol.wizards_reborn.common.data.recipes.WissenCrystallizerRecipe;
 import mod.maxbogomol.wizards_reborn.common.entity.CustomBoatEntity;
 import mod.maxbogomol.wizards_reborn.common.entity.SpellProjectileEntity;
+import mod.maxbogomol.wizards_reborn.common.event.Events;
 import mod.maxbogomol.wizards_reborn.common.item.ArcanemiconItem;
 import mod.maxbogomol.wizards_reborn.common.item.ArcanumDustItem;
 import mod.maxbogomol.wizards_reborn.common.item.CrystalItem;
@@ -44,7 +46,13 @@ import mod.maxbogomol.wizards_reborn.common.item.equipment.curio.ArcanumAmuletIt
 import mod.maxbogomol.wizards_reborn.common.item.equipment.curio.ArcanumRingItem;
 import mod.maxbogomol.wizards_reborn.common.item.equipment.curio.LeatherBeltItem;
 import mod.maxbogomol.wizards_reborn.common.itemgroup.WizardsRebornItemGroup;
+import mod.maxbogomol.wizards_reborn.common.knowledge.ItemKnowledge;
+import mod.maxbogomol.wizards_reborn.common.knowledge.RegisterKnowledges;
 import mod.maxbogomol.wizards_reborn.common.network.PacketHandler;
+import mod.maxbogomol.wizards_reborn.common.recipe.ArcaneWorkbenchRecipe;
+import mod.maxbogomol.wizards_reborn.common.recipe.ArcanumDustTransmutationRecipe;
+import mod.maxbogomol.wizards_reborn.common.recipe.WissenAltarRecipe;
+import mod.maxbogomol.wizards_reborn.common.recipe.WissenCrystallizerRecipe;
 import mod.maxbogomol.wizards_reborn.common.spell.*;
 import mod.maxbogomol.wizards_reborn.common.tileentity.*;
 import mod.maxbogomol.wizards_reborn.common.world.WorldGen;
@@ -83,6 +91,7 @@ import net.minecraftforge.client.model.ModelLoader;
 import net.minecraftforge.client.settings.KeyConflictContext;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.ToolType;
+import net.minecraftforge.common.capabilities.CapabilityManager;
 import net.minecraftforge.common.extensions.IForgeContainerType;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.eventbus.api.IEventBus;
@@ -502,6 +511,8 @@ public class WizardsReborn
         forgeBus.addListener(ClientTickHandler::clientTickEnd);
         forgeBus.addListener(WorldRenderHandler::onRenderWorldLast);
         forgeBus.addListener(ClientWorldEvent::onTick);
+        forgeBus.addListener(HUDEventHandler::onDrawScreenPost);
+        forgeBus.addListener(TooltipEventHandler::onPostTooltipEvent);
 
         eventBus.addListener(this::setup);
         eventBus.addListener(this::clientSetup);
@@ -509,6 +520,7 @@ public class WizardsReborn
         eventBus.addListener(this::processIMC);
 
         MinecraftForge.EVENT_BUS.register(this);
+        MinecraftForge.EVENT_BUS.register(new Events());
     }
 
     private void setup(final FMLCommonSetupEvent event)
@@ -516,12 +528,15 @@ public class WizardsReborn
         PacketHandler.init();
         WorldGen.init();
         ArcanemiconChapters.init();
+        RegisterKnowledges.setupKnowledges();
 
         event.enqueueWork(() -> {
             AxeItem.BLOCK_STRIPPING_MAP = new ImmutableMap.Builder<Block, Block>().putAll(AxeItem.BLOCK_STRIPPING_MAP)
                     .put(ARCANE_WOOD_LOG.get(), STRIPPED_ARCANE_WOOD_LOG.get())
                     .put(ARCANE_WOOD.get(), STRIPPED_ARCANE_WOOD.get()).build();
         });
+
+        CapabilityManager.INSTANCE.register(IKnowledge.class, new KnowledgeStorage(), KnowledgeImpl::new);
     }
 
     private void clientSetup(final FMLClientSetupEvent event) {

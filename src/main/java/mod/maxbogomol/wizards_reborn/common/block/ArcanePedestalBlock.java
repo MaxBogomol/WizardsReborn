@@ -9,6 +9,7 @@ import net.minecraft.block.IWaterLoggable;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.fluid.FluidState;
 import net.minecraft.fluid.Fluids;
+import net.minecraft.inventory.InventoryHelper;
 import net.minecraft.item.BlockItemUseContext;
 import net.minecraft.item.ItemStack;
 import net.minecraft.state.StateContainer;
@@ -76,7 +77,7 @@ public class ArcanePedestalBlock extends Block implements ITileEntityProvider, I
         if (state.getBlock() != newState.getBlock()) {
             TileEntity tile = world.getTileEntity(pos);
             if (tile instanceof TileSimpleInventory) {
-                net.minecraft.inventory.InventoryHelper.dropInventoryItems(world, pos, ((TileSimpleInventory) tile).getItemHandler());
+                InventoryHelper.dropInventoryItems(world, pos, ((TileSimpleInventory) tile).getItemHandler());
             }
             super.onReplaced(state, world, pos, newState, isMoving);
         }

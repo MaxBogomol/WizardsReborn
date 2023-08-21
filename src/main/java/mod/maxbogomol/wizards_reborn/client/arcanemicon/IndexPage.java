@@ -41,8 +41,14 @@ public class IndexPage extends Page {
         }
 
         for (int i = 0; i < entries.length; i ++) {
-            Minecraft.getInstance().getItemRenderer().renderItemAndEffectIntoGUI(entries[i].icon, x + 3, y + 8 + i * 20);
-            drawText(gui, mStack, I18n.format(entries[i].chapter.titleKey), x + 24, y + 20 + i * 20 - Minecraft.getInstance().fontRenderer.FONT_HEIGHT);
+            if (entries[i].isUnlocked()) {
+                Minecraft.getInstance().getItemRenderer().renderItemAndEffectIntoGUI(entries[i].icon, x + 3, y + 8 + i * 20);
+                drawText(gui, mStack, I18n.format(entries[i].chapter.titleKey), x + 24, y + 20 + i * 20 - Minecraft.getInstance().fontRenderer.FONT_HEIGHT);
+            } else {
+                Minecraft.getInstance().getTextureManager().bindTexture(new ResourceLocation(WizardsReborn.MOD_ID, "textures/gui/arcanemicon_unknown.png"));
+                gui.blit(mStack, x + 3, y + 8 + i * 20, 0, 0, 16, 16, 16, 16);
+                drawText(gui, mStack, I18n.format("wizards_reborn.arcanemicon.unknown"), x + 24, y + 20 + i * 20 - Minecraft.getInstance().fontRenderer.FONT_HEIGHT);
+            }
         }
     }
 }

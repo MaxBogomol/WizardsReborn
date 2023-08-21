@@ -69,4 +69,11 @@ public class WissenItemUtils {
         CompoundNBT nbt = stack.getTag();
         return (0 <= nbt.getInt("wissen") - wissen);
     }
+
+    public static void existWissen(ItemStack stack) {
+        CompoundNBT nbt = stack.getOrCreateTag();
+        if (!nbt.contains("wissen")) {
+            nbt.putInt("wissen", 0);
+        }
+    }
 }

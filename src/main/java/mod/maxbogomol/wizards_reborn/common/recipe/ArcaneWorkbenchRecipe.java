@@ -1,4 +1,4 @@
-package mod.maxbogomol.wizards_reborn.common.data.recipes;
+package mod.maxbogomol.wizards_reborn.common.recipe;
 
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
@@ -18,7 +18,6 @@ import net.minecraftforge.registries.ForgeRegistryEntry;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;

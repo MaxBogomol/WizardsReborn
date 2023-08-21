@@ -5,7 +5,7 @@ import mod.maxbogomol.wizards_reborn.api.wissen.IWissenTileEntity;
 import mod.maxbogomol.wizards_reborn.api.wissen.IWissenWandFunctionalTileEntity;
 import mod.maxbogomol.wizards_reborn.api.wissen.WissenUtils;
 import mod.maxbogomol.wizards_reborn.client.particle.Particles;
-import mod.maxbogomol.wizards_reborn.common.data.recipes.WissenCrystallizerRecipe;
+import mod.maxbogomol.wizards_reborn.common.recipe.WissenCrystallizerRecipe;
 import mod.maxbogomol.wizards_reborn.common.network.PacketHandler;
 import mod.maxbogomol.wizards_reborn.utils.PacketUtils;
 import mod.maxbogomol.wizards_reborn.common.network.WissenCrystallizerBurstEffectPacket;
@@ -99,7 +99,7 @@ public class WissenCrystallizerTileEntity extends TileSimpleInventory implements
                     Particles.create(WizardsReborn.SPARKLE_PARTICLE)
                             .addVelocity(((random.nextDouble() - 0.5D) / 30) * getStage(), ((random.nextDouble() - 0.5D) / 30) * getStage(), ((random.nextDouble() - 0.5D) / 30) * getStage())
                             .setAlpha(0.25f, 0).setScale(0.1f * getStage(), 0)
-                            .setColor(0.466f, 0.643f, 0.815f, 0.466f, 0.643f, 0.815f)
+                            .setColor(0.466f, 0.643f, 0.815f)
                             .setLifetime(30)
                             .setSpin((0.5f * (float) ((random.nextDouble() - 0.5D) * 2)))
                             .spawn(world, pos.getX() + 0.5F, pos.getY() + 1.125F, pos.getZ() + 0.5F);
@@ -111,17 +111,25 @@ public class WissenCrystallizerTileEntity extends TileSimpleInventory implements
                     Particles.create(WizardsReborn.SPARKLE_PARTICLE)
                             .addVelocity(((random.nextDouble() - 0.5D) / 20), ((random.nextDouble() - 0.5D) / 20), ((random.nextDouble() - 0.5D) / 20))
                             .setAlpha(0.25f, 0).setScale(0.1f * getStage(), 0)
-                            .setColor(0.466f, 0.643f, 0.815f, 0.466f, 0.643f, 0.815f)
+                            .setColor(0.466f, 0.643f, 0.815f)
                             .setLifetime(30)
                             .setSpin((0.5f * (float) ((random.nextDouble() - 0.5D) * 2)))
                             .spawn(world, pos.getX() + 0.5F, pos.getY() + 1.125F, pos.getZ() + 0.5F);
                 }
-
+                if (random.nextFloat() < 0.1) {
+                    Particles.create(WizardsReborn.SPARKLE_PARTICLE)
+                            .addVelocity(((random.nextDouble() - 0.5D) / 40), ((random.nextDouble() - 0.5D) / 40), ((random.nextDouble() - 0.5D) / 40))
+                            .setAlpha(0.75f, 0).setScale(0.05f * getStage(), 0)
+                            .setColor(random.nextFloat(), random.nextFloat(), random.nextFloat())
+                            .setLifetime(65)
+                            .setSpin((0.1f * (float) ((random.nextDouble() - 0.5D) * 2)))
+                            .spawn(world, pos.getX() + 0.5F, pos.getY() + 1.125F, pos.getZ() + 0.5F);
+                }
                 if (random.nextFloat() < 0.3) {
                     Particles.create(WizardsReborn.KARMA_PARTICLE)
                             .addVelocity(((random.nextDouble() - 0.5D) / 35), ((random.nextDouble() - 0.5D) / 35), ((random.nextDouble() - 0.5D) / 35))
                             .setAlpha(0.5f, 0).setScale(0.1f, 0.025f)
-                            .setColor(0.733f, 0.564f, 0.937f, 0.733f, 0.564f, 0.937f)
+                            .setColor(0.733f, 0.564f, 0.937f)
                             .setLifetime(10)
                             .spawn(world, pos.getX() + 0.5F + ((random.nextDouble() - 0.5D) * 0.5), pos.getY() + 1.125F + ((random.nextDouble() - 0.5D) * 0.5), pos.getZ() + 0.5F + ((random.nextDouble() - 0.5D) * 0.5));
                 }

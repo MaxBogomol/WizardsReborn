@@ -3,12 +3,15 @@ package mod.maxbogomol.wizards_reborn.common.item.equipment.curio;
 import com.google.common.collect.LinkedHashMultimap;
 import com.google.common.collect.Multimap;
 import mod.maxbogomol.wizards_reborn.api.wissen.IWissenItem;
+import mod.maxbogomol.wizards_reborn.api.wissen.WissenItemUtils;
+import net.minecraft.entity.Entity;
 import net.minecraft.entity.ai.attributes.Attribute;
 import net.minecraft.entity.ai.attributes.AttributeModifier;
 import net.minecraft.entity.ai.attributes.Attributes;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.SoundEvents;
+import net.minecraft.world.World;
 import top.theillusivec4.curios.api.SlotContext;
 import top.theillusivec4.curios.api.type.capability.ICurio;
 import top.theillusivec4.curios.api.type.capability.ICurioItem;
@@ -43,6 +46,13 @@ public class ArcanumRingItem extends Item implements ICurioItem, IWissenItem {
 
     @Override
     public int getMaxWissen() {
-        return 0;
+        return 1000;
+    }
+
+    @Override
+    public void inventoryTick(ItemStack stack, World world, Entity entity, int slot, boolean isSelected) {
+        if (!world.isRemote()) {
+            WissenItemUtils.existWissen(stack);
+        }
     }
 }

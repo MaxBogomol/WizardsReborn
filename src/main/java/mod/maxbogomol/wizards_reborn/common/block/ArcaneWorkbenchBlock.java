@@ -10,6 +10,7 @@ import net.minecraft.entity.player.ServerPlayerEntity;
 import net.minecraft.fluid.FluidState;
 import net.minecraft.fluid.Fluids;
 import net.minecraft.inventory.Inventory;
+import net.minecraft.inventory.InventoryHelper;
 import net.minecraft.inventory.container.Container;
 import net.minecraft.inventory.container.INamedContainerProvider;
 import net.minecraft.item.BlockItemUseContext;
@@ -92,7 +93,7 @@ public class ArcaneWorkbenchBlock extends HorizontalBlock implements ITileEntity
                 for (int i = 0; i < workbench.itemHandler.getSlots(); i++) {
                     inv.setInventorySlotContents(i, workbench.itemHandler.getStackInSlot(i));
                 }
-                net.minecraft.inventory.InventoryHelper.dropInventoryItems(world, pos, inv);
+                InventoryHelper.dropInventoryItems(world, pos, inv);
             }
             super.onReplaced(state, world, pos, newState, isMoving);
         }

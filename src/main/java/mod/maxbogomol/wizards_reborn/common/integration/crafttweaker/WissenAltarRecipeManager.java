@@ -9,7 +9,7 @@ import com.blamejared.crafttweaker.api.util.StringUtils;
 import com.blamejared.crafttweaker.impl.actions.recipes.ActionAddRecipe;
 import com.blamejared.crafttweaker_annotations.annotations.Document;
 import mod.maxbogomol.wizards_reborn.WizardsReborn;
-import mod.maxbogomol.wizards_reborn.common.data.recipes.WissenAltarRecipe;
+import mod.maxbogomol.wizards_reborn.common.recipe.WissenAltarRecipe;
 import net.minecraft.item.crafting.IRecipeType;
 import net.minecraft.util.ResourceLocation;
 import org.openzen.zencode.java.ZenCodeType;

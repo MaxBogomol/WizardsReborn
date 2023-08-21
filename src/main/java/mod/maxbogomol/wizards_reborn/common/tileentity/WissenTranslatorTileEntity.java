@@ -134,7 +134,7 @@ public class WissenTranslatorTileEntity extends TileEntity implements ITickableT
                     Particles.create(WizardsReborn.WISP_PARTICLE)
                             .addVelocity(((random.nextDouble() - 0.5D) / 30) * getStage(), ((random.nextDouble() - 0.5D) / 30) * getStage(), ((random.nextDouble() - 0.5D) / 30) * getStage())
                             .setAlpha(0.25f, 0).setScale(0.2f * getStage(), 0)
-                            .setColor(0.466f, 0.643f, 0.815f, 0.466f, 0.643f, 0.815f)
+                            .setColor(0.466f, 0.643f, 0.815f)
                             .setLifetime(20)
                             .spawn(world, pos.getX() + 0.5F, pos.getY() + 0.5F, pos.getZ() + 0.5F);
                 }
@@ -142,7 +142,7 @@ public class WissenTranslatorTileEntity extends TileEntity implements ITickableT
                     Particles.create(WizardsReborn.SPARKLE_PARTICLE)
                             .addVelocity(((random.nextDouble() - 0.5D) / 30) * getStage(), ((random.nextDouble() - 0.5D) / 30) * getStage(), ((random.nextDouble() - 0.5D) / 30) * getStage())
                             .setAlpha(0.25f, 0).setScale(0.075f * getStage(), 0)
-                            .setColor(0.466f, 0.643f, 0.815f, 0.466f, 0.643f, 0.815f)
+                            .setColor(0.466f, 0.643f, 0.815f)
                             .setLifetime(30)
                             .setSpin((0.5f * (float) ((random.nextDouble() - 0.5D) * 2)))
                             .spawn(world, pos.getX() + 0.5F, pos.getY() + 0.5F, pos.getZ() + 0.5F);
@@ -337,7 +337,7 @@ public class WissenTranslatorTileEntity extends TileEntity implements ITickableT
             Particles.create(WizardsReborn.SPARKLE_PARTICLE)
                     .addVelocity(((random.nextDouble() - 0.5D) / 100), ((random.nextDouble() - 0.5D) / 100), ((random.nextDouble() - 0.5D) / 100))
                     .setAlpha(0.25f, 0f).setScale(0.1f, 0f)
-                    .setColor(colorR, colorG, colorB, colorR, colorG, colorB)
+                    .setColor(colorR, colorG, colorB)
                     .setLifetime(5)
                     .setSpin((0.1f * (float) ((random.nextDouble() - 0.5D) * 2)))
                     .spawn(world, pos.getX() + 0.5F + (random.nextDouble() - 0.5D), pos.getY() + 0.5F + (random.nextDouble() - 0.5D), pos.getZ() + 0.5F + (random.nextDouble() - 0.5D));
@@ -366,7 +366,7 @@ public class WissenTranslatorTileEntity extends TileEntity implements ITickableT
             Particles.create(WizardsReborn.SPARKLE_PARTICLE)
                     .addVelocity(((random.nextDouble() - 0.5D) / 100), ((random.nextDouble() - 0.5D) / 100), ((random.nextDouble() - 0.5D) / 100))
                     .setAlpha(0.25f, 0f).setScale(0.05f, 0f)
-                    .setColor(colorR, colorG, colorB, colorR, colorG, colorB)
+                    .setColor(colorR, colorG, colorB)
                     .setLifetime(3)
                     .setSpin((0.1f * (float) ((random.nextDouble() - 0.5D) * 2)))
                     .spawn(world, posFrom.getX() + 0.5F - (x * i), posFrom.getY() + 0.5F - (y * i), posFrom.getZ() + 0.5F - (z * i));

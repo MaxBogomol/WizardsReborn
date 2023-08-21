@@ -2,6 +2,7 @@ package mod.maxbogomol.wizards_reborn.client.arcanemicon;
 
 import mod.maxbogomol.wizards_reborn.WizardsReborn;
 import mod.maxbogomol.wizards_reborn.common.item.equipment.ArcaneWandItem;
+import mod.maxbogomol.wizards_reborn.common.knowledge.RegisterKnowledges;
 import net.minecraft.inventory.Inventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
@@ -340,18 +341,18 @@ public class ArcanemiconChapters {
                 "wizards_reborn.arcanemicon.chapter.arcane_nature_index",
                 new TitledIndexPage("wizards_reborn.arcanemicon.page.arcane_nature_index",
                         new IndexEntry(ARCANUM, new ItemStack(WizardsReborn.ARCANUM.get())),
-                        new IndexEntry(ARCANUM_DUST_TRANSMUTATION, new ItemStack(WizardsReborn.ARCANUM_DUST.get())),
-                        new IndexEntry(ARCANE_WOOD, new ItemStack(WizardsReborn.ARCANE_WOOD_PLANKS_ITEM.get())),
-                        new IndexEntry(ARCANE_GOLD, new ItemStack(WizardsReborn.ARCANE_GOLD_INGOT.get())),
-                        new IndexEntry(WISSEN, new ItemStack(WizardsReborn.WISSEN_WAND.get())),
-                        new IndexEntry(WISSEN_TRANSLATOR, new ItemStack(WizardsReborn.WISSEN_TRANSLATOR_ITEM.get()))
+                        new IndexEntry(ARCANUM_DUST_TRANSMUTATION, new ItemStack(WizardsReborn.ARCANUM_DUST.get()), RegisterKnowledges.ARCANUM_DUST_KNOWLEDGE),
+                        new IndexEntry(ARCANE_WOOD, new ItemStack(WizardsReborn.ARCANE_WOOD_PLANKS_ITEM.get()), RegisterKnowledges.ARCANUM_DUST_KNOWLEDGE),
+                        new IndexEntry(ARCANE_GOLD, new ItemStack(WizardsReborn.ARCANE_GOLD_INGOT.get()), RegisterKnowledges.ARCANUM_DUST_KNOWLEDGE),
+                        new IndexEntry(WISSEN, new ItemStack(WizardsReborn.WISSEN_WAND.get()), RegisterKnowledges.ARCANUM_DUST_KNOWLEDGE),
+                        new IndexEntry(WISSEN_TRANSLATOR, new ItemStack(WizardsReborn.WISSEN_TRANSLATOR_ITEM.get()), RegisterKnowledges.ARCANE_GOLD_KNOWLEDGE)
                 ),
                 new IndexPage(
-                        new IndexEntry(ARCANE_PEDESTAL, new ItemStack(WizardsReborn.ARCANE_PEDESTAL_ITEM.get())),
-                        new IndexEntry(WISSEN_ALTAR, new ItemStack(WizardsReborn.WISSEN_ALTAR_ITEM.get())),
-                        new IndexEntry(WISSEN_CRYSTALLIZER, new ItemStack(WizardsReborn.WISSEN_CRYSTALLIZER_ITEM.get())),
-                        new IndexEntry(ARCANE_WORKBENCH, new ItemStack(WizardsReborn.ARCANE_WORKBENCH_ITEM.get())),
-                        new IndexEntry(ARCANE_LUMOS, new ItemStack(WizardsReborn.WHITE_ARCANE_LUMOS_ITEM.get()))
+                        new IndexEntry(ARCANE_PEDESTAL, new ItemStack(WizardsReborn.ARCANE_PEDESTAL_ITEM.get()), RegisterKnowledges.ARCANE_WOOD_KNOWLEDGE),
+                        new IndexEntry(WISSEN_ALTAR, new ItemStack(WizardsReborn.WISSEN_ALTAR_ITEM.get()), RegisterKnowledges.ARCANE_GOLD_KNOWLEDGE),
+                        new IndexEntry(WISSEN_CRYSTALLIZER, new ItemStack(WizardsReborn.WISSEN_CRYSTALLIZER_ITEM.get()), RegisterKnowledges.ARCANE_GOLD_KNOWLEDGE),
+                        new IndexEntry(ARCANE_WORKBENCH, new ItemStack(WizardsReborn.ARCANE_WORKBENCH_ITEM.get()), RegisterKnowledges.ARCANE_GOLD_KNOWLEDGE),
+                        new IndexEntry(ARCANE_LUMOS, new ItemStack(WizardsReborn.WHITE_ARCANE_LUMOS_ITEM.get()), RegisterKnowledges.WISSEN_CRYSTALLIZER)
                 )
         );
 
@@ -543,18 +544,18 @@ public class ArcanemiconChapters {
                         new MonogramIndexEntry(TEST9_MONOGRAM, WizardsReborn.TEST9_MONOGRAM),
                         new MonogramIndexEntry(TEST10_MONOGRAM, WizardsReborn.TEST10_MONOGRAM),
                         new MonogramIndexEntry(TEST11_MONOGRAM, WizardsReborn.TEST11_MONOGRAM),
-                        new MonogramIndexEntry(TEST12_MONOGRAM, WizardsReborn.TEST12_MONOGRAM),
-                        new MonogramIndexEntry(TEST13_MONOGRAM, WizardsReborn.TEST13_MONOGRAM)
+                        new MonogramIndexEntry(TEST12_MONOGRAM, WizardsReborn.TEST12_MONOGRAM)
                 ),
                 new MonogramIndexPage(
+                        new MonogramIndexEntry(TEST13_MONOGRAM, WizardsReborn.TEST13_MONOGRAM),
                         new MonogramIndexEntry(TEST14_MONOGRAM, WizardsReborn.TEST14_MONOGRAM),
                         new MonogramIndexEntry(TEST15_MONOGRAM, WizardsReborn.TEST15_MONOGRAM),
                         new MonogramIndexEntry(TEST16_MONOGRAM, WizardsReborn.TEST16_MONOGRAM),
                         new MonogramIndexEntry(TEST17_MONOGRAM, WizardsReborn.TEST17_MONOGRAM),
-                        new MonogramIndexEntry(TEST18_MONOGRAM, WizardsReborn.TEST18_MONOGRAM),
-                        new MonogramIndexEntry(TEST19_MONOGRAM, WizardsReborn.TEST19_MONOGRAM)
+                        new MonogramIndexEntry(TEST18_MONOGRAM, WizardsReborn.TEST18_MONOGRAM)
                 ),
                 new MonogramIndexPage(
+                        new MonogramIndexEntry(TEST19_MONOGRAM, WizardsReborn.TEST19_MONOGRAM),
                         new MonogramIndexEntry(TEST20_MONOGRAM, WizardsReborn.TEST20_MONOGRAM)
                 )
         );

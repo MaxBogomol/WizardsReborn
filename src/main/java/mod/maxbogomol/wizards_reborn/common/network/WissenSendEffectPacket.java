@@ -64,14 +64,14 @@ public class WissenSendEffectPacket {
                     Particles.create(WizardsReborn.WISP_PARTICLE)
                             .addVelocity(((random.nextDouble() - 0.5D) / 50), ((random.nextDouble() - 0.5D) / 50), ((random.nextDouble() - 0.5D) / 50))
                             .setAlpha(0.3f, 0).setScale(0.15f, 0)
-                            .setColor(0.466f, 0.643f, 0.815f, 0.466f, 0.643f, 0.815f)
+                            .setColor(0.466f, 0.643f, 0.815f)
                             .setLifetime(20)
                             .spawn(world, posFromX - (x * i), posFromY - (y * i), posFromZ - (z * i));
                     if (random.nextFloat() < 0.1) {
                         Particles.create(WizardsReborn.SPARKLE_PARTICLE)
                                 .addVelocity(((random.nextDouble() - 0.5D) / 25), ((random.nextDouble() - 0.5D) / 25), ((random.nextDouble() - 0.5D) / 25))
                                 .setAlpha(0.125f, 0).setScale(0.2f, 0)
-                                .setColor(0.466f, 0.643f, 0.815f, 0.466f, 0.643f, 0.815f)
+                                .setColor(0.466f, 0.643f, 0.815f)
                                 .setLifetime(30)
                                 .setSpin((0.5f * (float) ((random.nextDouble() - 0.5D) * 2)))
                                 .spawn(world, posFromX - (x * i), posFromY - (y * i), posFromZ - (z * i));
