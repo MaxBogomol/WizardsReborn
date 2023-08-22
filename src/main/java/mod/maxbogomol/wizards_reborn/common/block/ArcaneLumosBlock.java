@@ -3,16 +3,17 @@ package mod.maxbogomol.wizards_reborn.common.block;
 import mod.maxbogomol.wizards_reborn.WizardsReborn;
 import mod.maxbogomol.wizards_reborn.client.event.ClientTickHandler;
 import mod.maxbogomol.wizards_reborn.client.particle.Particles;
-import net.minecraft.block.Block;
-import net.minecraft.block.BlockState;
-import net.minecraft.client.particle.ParticleManager;
-import net.minecraft.item.DyeColor;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.RayTraceResult;
-import net.minecraft.util.math.shapes.ISelectionContext;
-import net.minecraft.util.math.shapes.VoxelShape;
-import net.minecraft.world.IBlockReader;
-import net.minecraft.world.World;
+import net.minecraft.util.RandomSource;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.client.particle.ParticleEngine;
+import net.minecraft.world.item.DyeColor;
+import net.minecraft.core.BlockPos;
+import net.minecraft.world.phys.HitResult;
+import net.minecraft.world.phys.shapes.CollisionContext;
+import net.minecraft.world.phys.shapes.VoxelShape;
+import net.minecraft.world.level.BlockGetter;
+import net.minecraft.world.level.Level;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 
@@ -20,8 +21,11 @@ import javax.annotation.Nonnull;
 import java.awt.*;
 import java.util.Random;
 
+import net.minecraft.world.level.block.state.BlockBehaviour.Properties;
+
 public class ArcaneLumosBlock extends Block {
-    private static final VoxelShape SHAPE = Block.makeCuboidShape(6, 6, 6, 10, 10, 10);
+    private static final VoxelShape SHAPE = Block.box(6, 6, 6, 10, 10, 10);
+    private static Random random = new Random();
 
     public enum Colors {
         WHITE,
@@ -53,12 +57,12 @@ public class ArcaneLumosBlock extends Block {
 
     @Nonnull
     @Override
-    public VoxelShape getShape(BlockState state, IBlockReader world, BlockPos pos, ISelectionContext ctx) {
+    public VoxelShape getShape(BlockState state, BlockGetter world, BlockPos pos, CollisionContext ctx) {
         return SHAPE;
     }
 
     @OnlyIn(Dist.CLIENT)
-    public void animateTick(BlockState state, World world, BlockPos pos, Random random) {
+    public void animateTick(BlockState state, Level world, BlockPos pos, RandomSource random) {
         Color color = getColor(this.color);
         float r = color.getRed() / 255f;
         float g = color.getGreen() / 255f;
@@ -99,18 +103,18 @@ public class ArcaneLumosBlock extends Block {
             }
         }
     }
-
+    /*
     @Override
     @OnlyIn(Dist.CLIENT)
-    public boolean addDestroyEffects(BlockState state, World world, BlockPos pos, ParticleManager manager) {
+    public boolean addDestroyEffects(BlockState state, Level world, BlockPos pos, ParticleEngine manager) {
         return true;
     }
 
     @Override
     @OnlyIn(Dist.CLIENT)
-    public boolean addHitEffects(BlockState state, World worldObj, RayTraceResult target, ParticleManager manager) {
+    public boolean addHitEffects(BlockState state, Level worldObj, HitResult target, ParticleEngine manager) {
         return true;
-    }
+    }*/
 
     public Color getColor(Colors color) {
         switch (color) {
@@ -147,7 +151,7 @@ public class ArcaneLumosBlock extends Block {
             case BLACK:
                 return getDyeColor(DyeColor.BLACK);
             case RAINBOW:
-                return new Color(RANDOM.nextFloat(), RANDOM.nextFloat(), RANDOM.nextFloat());
+                return new Color(random.nextFloat(), random.nextFloat(), random.nextFloat());
             case COSMIC:
                 return new Color(254, 181, 178);
         }
@@ -156,6 +160,6 @@ public class ArcaneLumosBlock extends Block {
     }
 
     public Color getDyeColor(DyeColor color) {
-        return new Color(color.getColorValue());
+        return new Color(color.getMapColor().col);
     }
 }

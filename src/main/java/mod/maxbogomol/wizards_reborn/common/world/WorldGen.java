@@ -2,101 +2,130 @@ package mod.maxbogomol.wizards_reborn.common.world;
 
 import mod.maxbogomol.wizards_reborn.WizardsReborn;
 import mod.maxbogomol.wizards_reborn.common.config.Config;
-import net.minecraft.block.Blocks;
-import net.minecraft.block.HugeMushroomBlock;
-import net.minecraft.util.ResourceLocation;
-import net.minecraft.util.registry.WorldGenRegistries;
-import net.minecraft.world.gen.GenerationStage;
-import net.minecraft.world.gen.Heightmap;
-import net.minecraft.world.gen.blockstateprovider.SimpleBlockStateProvider;
-import net.minecraft.world.gen.feature.*;
-import net.minecraft.world.gen.feature.structure.IStructurePieceType;
-import net.minecraft.world.gen.feature.structure.Structure;
-import net.minecraft.world.gen.feature.template.RuleTest;
-import net.minecraft.world.gen.feature.template.TagMatchRuleTest;
-import net.minecraft.world.gen.foliageplacer.DarkOakFoliagePlacer;
-import net.minecraft.world.gen.foliageplacer.FancyFoliagePlacer;
-import net.minecraft.world.gen.trunkplacer.DarkOakTrunkPlacer;
-import net.minecraft.world.gen.trunkplacer.FancyTrunkPlacer;
+import net.minecraft.core.Holder;
+import net.minecraft.data.worldgen.features.FeatureUtils;
+import net.minecraft.data.worldgen.features.OreFeatures;
+import net.minecraft.data.worldgen.placement.PlacementUtils;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.level.levelgen.GenerationStep;
+import net.minecraft.world.level.levelgen.VerticalAnchor;
+import net.minecraft.world.level.levelgen.feature.ConfiguredFeature;
+import net.minecraft.world.level.levelgen.feature.Feature;
+import net.minecraft.world.level.levelgen.feature.configurations.FeatureConfiguration;
+import net.minecraft.world.level.levelgen.feature.configurations.OreConfiguration;
+import net.minecraft.world.level.levelgen.feature.configurations.TreeConfiguration;
+import net.minecraft.world.level.levelgen.placement.*;
+import net.minecraft.world.level.levelgen.structure.pieces.StructurePieceType;
+import net.minecraft.world.level.levelgen.structure.templatesystem.RuleTest;
+import net.minecraft.world.level.levelgen.structure.templatesystem.TagMatchTest;
 import net.minecraftforge.common.Tags;
-import net.minecraftforge.event.world.BiomeLoadingEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class WorldGen {
+    /*
+    static List<Holder<PlacedFeature>> ORES = new ArrayList<>();
+    static Holder<PlacedFeature> ARCANUM_ORE_GEN;
+    static RuleTest IN_STONE = new TagMatchTest(Tags.Blocks.STONE);
 
-    static List<ConfiguredFeature<?, ?>> ORES = new ArrayList<>();
-    static ConfiguredFeature<?, ?> ARCANUM_ORE_GEN;
-    static RuleTest IN_STONE = new TagMatchRuleTest(Tags.Blocks.STONE);
-
-    public static ConfiguredFeature<BaseTreeFeatureConfig, ?> ARCANE_WOOD_TREE, FANCY_ARCANE_WOOD_TREE;
+    public static ConfiguredFeature<TreeConfiguration, ?> ARCANE_WOOD_TREE, FANCY_ARCANE_WOOD_TREE;
     public static ConfiguredFeature<?, ?> TALL_MOR, TALL_ELDER_MOR, HUGE_MOR, HUGE_ELDER_MOR;
 
-    static IStructurePieceType register(IStructurePieceType type, String name) {
-        net.minecraft.util.registry.Registry.register(net.minecraft.util.registry.Registry.STRUCTURE_PIECE, new ResourceLocation(WizardsReborn.MOD_ID, name), type);
+    static StructurePieceType register(StructurePieceType type, String name) {
+        net.minecraft.core.Registry.register(net.minecraft.core.Registry.STRUCTURE_PIECE, new ResourceLocation(WizardsReborn.MOD_ID, name), type);
         return type;
     }
 
-    static <C extends IFeatureConfig, F extends Feature<C>> ConfiguredFeature<C, F> register(ConfiguredFeature<C, F> feature, String name) {
-        WorldGenRegistries.register(WorldGenRegistries.CONFIGURED_FEATURE, new ResourceLocation(WizardsReborn.MOD_ID, name), feature);
+    static <C extends FeatureConfiguration, F extends Feature<C>> ConfiguredFeature<C, F> register(ConfiguredFeature<C, F> feature, String name) {
+        BuiltinRegistries.register(BuiltinRegistries.CONFIGURED_FEATURE, new ResourceLocation(WizardsReborn.MOD_ID, name), feature);
         return feature;
     }
 
-    static <C extends IFeatureConfig, S extends Structure<C>> StructureFeature<C, S> register(StructureFeature<C, S> feature, String name) {
-        WorldGenRegistries.register(WorldGenRegistries.CONFIGURED_STRUCTURE_FEATURE, new ResourceLocation(WizardsReborn.MOD_ID, name), feature);
+    static <C extends FeatureConfiguration, S extends StructureFeature<C>> ConfiguredStructureFeature<C, S> register(ConfiguredStructureFeature<C, S> feature, String name) {
+        BuiltinRegistries.register(BuiltinRegistries.CONFIGURED_STRUCTURE_FEATURE, new ResourceLocation(WizardsReborn.MOD_ID, name), feature);
         return feature;
     }
 
-    private static <FC extends IFeatureConfig> ConfiguredFeature<FC, ?> register(String key, ConfiguredFeature<FC, ?> configuredFeature) {
-        return WorldGenRegistries.register(WorldGenRegistries.CONFIGURED_FEATURE, key, configuredFeature);
+    public static List<PlacementModifier> orePlacement(PlacementModifier p_195347_, PlacementModifier p_195348_) {
+        return List.of(p_195347_, InSquarePlacement.spread(), p_195348_, BiomeFilter.biome());
+    }
+
+    public static List<PlacementModifier> commonOrePlacement(int p_195344_, PlacementModifier p_195345_) {
+        return orePlacement(CountPlacement.of(p_195344_), p_195345_);
+    }
+
+    public static List<PlacementModifier> rareOrePlacement(int p_195350_, PlacementModifier p_195351_) {
+        return orePlacement(RarityFilter.onAverageOnceEvery(p_195350_), p_195351_);
     }
 
     public static void init() {
-        ARCANUM_ORE_GEN = register(Feature.ORE.withConfiguration(new OreFeatureConfig(IN_STONE,
-                        WizardsReborn.ARCANUM_ORE.get().getDefaultState(), Config.ARCANUM_VEIN_SIZE.get()))
-                .square()
+        /*RCANUM_ORE_GEN = register(Feature.ORE.configuredCodec(new OreConfiguration(IN_STONE,
+                        WizardsReborn.ARCANUM_ORE.get().defaultBlockState(), Config.ARCANUM_VEIN_SIZE.get()))
+                .squared()
                 .count(Config.ARCANUM_VEIN_COUNT.get())
-                .range(Config.ARCANUM_MAX_Y.get()
+                .rangeUniform(VerticalAnchor.bottom(), VerticalAnchor.absolute(Config.ARCANUM_MAX_Y.get())
                 ), "arcanum_ore");
+;
+        ConfiguredFeature<?, ?> ARCANUM_ORE = register(Feature.ORE.configuredCodec(new OreConfiguration(IN_STONE, WizardsReborn.ARCANUM_ORE.get().defaultBlockState(), Config.ARCANUM_VEIN_SIZE.get())), "arcanum_ore");
+        ARCANUM_ORE_GEN = PlacementUtils.register("arcanum_ore", ARCANUM_ORE.(
+    		InSquarePlacement.spread(), BiomeFilter.biome(), CountPlacement.of(Config.LEAD_VEIN_COUNT.get()),
+    		HeightRangePlacement.uniform(VerticalAnchor.absolute(Math.max(0, Config.LEAD_MIN_Y.get())), VerticalAnchor.absolute(Config.LEAD_MAX_Y.get()))
+		));*/
+
+/*
+        List<OreConfiguration.TargetBlockState> OVERWORLD_ARCANUM_ORE = List.of(
+                OreConfiguration.target(OreFeatures.STONE_ORE_REPLACEABLES, WizardsReborn.ARCANUM_ORE.get().defaultBlockState()));
+
+        Holder<ConfiguredFeature<OreConfiguration, ?>> ARCANUM_ORE = FeatureUtils.register("arcanum_ore",
+                Feature.ORE, new OreConfiguration(OVERWORLD_ARCANUM_ORE, Config.ARCANUM_VEIN_SIZE.get()));
+
+        ARCANUM_ORE_GEN = PlacementUtils.register("arcanum_ore_gen",
+                ARCANUM_ORE, commonOrePlacement(
+                        Config.ARCANUM_VEIN_COUNT.get(),
+                        HeightRangePlacement.triangle(VerticalAnchor.aboveBottom(-80), VerticalAnchor.aboveBottom(80))));
         if (Config.ARCANUM_ENABLED.get()) ORES.add(ARCANUM_ORE_GEN);
 
-        ARCANE_WOOD_TREE = register("arcane_wood", Feature.TREE.withConfiguration((new BaseTreeFeatureConfig.Builder(
-                new SimpleBlockStateProvider(WizardsReborn.ARCANE_WOOD_LOG.get().getDefaultState()),
-                new SimpleBlockStateProvider(WizardsReborn.ARCANE_WOOD_LEAVES.get().getDefaultState()),
-                new FancyFoliagePlacer(FeatureSpread.create(2), FeatureSpread.create(4), 4),
+        /*
+        ARCANE_WOOD_TREE = register("arcane_wood", Feature.TREE.configuredCodec((new TreeConfiguration.TreeConfigurationBuilder(
+                        new SimpleStateProvider(WizardsReborn.ARCANE_WOOD_LOG.get().defaultBlockState()),
                 new FancyTrunkPlacer(6, 9, 1),
-                new TwoLayerFeature(2, 0, 2))).setMaxWaterDepth(Integer.MAX_VALUE).setHeightmap(Heightmap.Type.MOTION_BLOCKING).setIgnoreVines().build()));
+                new SimpleStateProvider(WizardsReborn.ARCANE_WOOD_LEAVES.get().defaultBlockState()),
+                new SimpleStateProvider(WizardsReborn.ARCANE_WOOD_SAPLING.get().defaultBlockState()),
+                new FancyFoliagePlacer(ConstantInt.of(2), ConstantInt.of(4), 4),
+                new TwoLayersFeatureSize(2, 0, 2))).ignoreVines().build()));
 
-        FANCY_ARCANE_WOOD_TREE = register("fancy_arcane_wood", Feature.TREE.withConfiguration((new BaseTreeFeatureConfig.Builder(
-                new SimpleBlockStateProvider(WizardsReborn.ARCANE_WOOD_LOG.get().getDefaultState()),
-                new SimpleBlockStateProvider(WizardsReborn.ARCANE_WOOD_LEAVES.get().getDefaultState()),
-                new DarkOakFoliagePlacer(FeatureSpread.create(0), FeatureSpread.create(0)),
+        FANCY_ARCANE_WOOD_TREE = register("fancy_arcane_wood", Feature.TREE.configuredCodec((new TreeConfiguration.TreeConfigurationBuilder(
+                        new SimpleStateProvider(WizardsReborn.ARCANE_WOOD_LOG.get().defaultBlockState()),
                 new DarkOakTrunkPlacer(5, 7, 1),
-                new TwoLayerFeature(2, 0, 2))).setMaxWaterDepth(Integer.MAX_VALUE).setHeightmap(Heightmap.Type.MOTION_BLOCKING).setIgnoreVines().build()));
+                new SimpleStateProvider(WizardsReborn.ARCANE_WOOD_LEAVES.get().defaultBlockState()),
+                new SimpleStateProvider(WizardsReborn.ARCANE_WOOD_SAPLING.get().defaultBlockState()),
+                new DarkOakFoliagePlacer(ConstantInt.of(0), ConstantInt.of(0)),
+                new TwoLayersFeatureSize(2, 0, 2))).ignoreVines().build()));
 
-        TALL_MOR = register("huge_mor", Feature.HUGE_RED_MUSHROOM.withConfiguration(new BigMushroomFeatureConfig(
-                new SimpleBlockStateProvider(WizardsReborn.MOR_BLOCK.get().getDefaultState().with(HugeMushroomBlock.DOWN, Boolean.valueOf(false))),
-                new SimpleBlockStateProvider(Blocks.MUSHROOM_STEM.getDefaultState().with(HugeMushroomBlock.UP, Boolean.valueOf(false)).with(HugeMushroomBlock.DOWN, Boolean.valueOf(false))), 1)));
+        TALL_MOR = register("huge_mor", Feature.HUGE_RED_MUSHROOM.configuredCodec(new HugeMushroomFeatureConfiguration(
+                new SimpleStateProvider(WizardsReborn.MOR_BLOCK.get().defaultBlockState().setValue(HugeMushroomBlock.DOWN, Boolean.valueOf(false))),
+                new SimpleStateProvider(Blocks.MUSHROOM_STEM.defaultBlockState().setValue(HugeMushroomBlock.UP, Boolean.valueOf(false)).setValue(HugeMushroomBlock.DOWN, Boolean.valueOf(false))), 1)));
 
-        TALL_ELDER_MOR = register("huge_elder_mor", Feature.HUGE_RED_MUSHROOM.withConfiguration(new BigMushroomFeatureConfig(
-                new SimpleBlockStateProvider(WizardsReborn.ELDER_MOR_BLOCK.get().getDefaultState().with(HugeMushroomBlock.DOWN, Boolean.valueOf(false))),
-                new SimpleBlockStateProvider(Blocks.MUSHROOM_STEM.getDefaultState().with(HugeMushroomBlock.UP, Boolean.valueOf(false)).with(HugeMushroomBlock.DOWN, Boolean.valueOf(false))), 1)));
+        TALL_ELDER_MOR = register("huge_elder_mor", Feature.HUGE_RED_MUSHROOM.configuredCodec(new HugeMushroomFeatureConfiguration(
+                new SimpleStateProvider(WizardsReborn.ELDER_MOR_BLOCK.get().defaultBlockState().setValue(HugeMushroomBlock.DOWN, Boolean.valueOf(false))),
+                new SimpleStateProvider(Blocks.MUSHROOM_STEM.defaultBlockState().setValue(HugeMushroomBlock.UP, Boolean.valueOf(false)).setValue(HugeMushroomBlock.DOWN, Boolean.valueOf(false))), 1)));
 
-        HUGE_MOR = register("huge_mor", Feature.HUGE_RED_MUSHROOM.withConfiguration(new BigMushroomFeatureConfig(
-                new SimpleBlockStateProvider(WizardsReborn.MOR_BLOCK.get().getDefaultState().with(HugeMushroomBlock.DOWN, Boolean.valueOf(false))),
-                new SimpleBlockStateProvider(Blocks.MUSHROOM_STEM.getDefaultState().with(HugeMushroomBlock.UP, Boolean.valueOf(false)).with(HugeMushroomBlock.DOWN, Boolean.valueOf(false))), 2)));
+        HUGE_MOR = register("huge_mor", Feature.HUGE_RED_MUSHROOM.configuredCodec(new HugeMushroomFeatureConfiguration(
+                new SimpleStateProvider(WizardsReborn.MOR_BLOCK.get().defaultBlockState().setValue(HugeMushroomBlock.DOWN, Boolean.valueOf(false))),
+                new SimpleStateProvider(Blocks.MUSHROOM_STEM.defaultBlockState().setValue(HugeMushroomBlock.UP, Boolean.valueOf(false)).setValue(HugeMushroomBlock.DOWN, Boolean.valueOf(false))), 2)));
 
-        HUGE_ELDER_MOR = register("huge_elder_mor", Feature.HUGE_RED_MUSHROOM.withConfiguration(new BigMushroomFeatureConfig(
-                new SimpleBlockStateProvider(WizardsReborn.ELDER_MOR_BLOCK.get().getDefaultState().with(HugeMushroomBlock.DOWN, Boolean.valueOf(false))),
-                new SimpleBlockStateProvider(Blocks.MUSHROOM_STEM.getDefaultState().with(HugeMushroomBlock.UP, Boolean.valueOf(false)).with(HugeMushroomBlock.DOWN, Boolean.valueOf(false))), 2)));
+        HUGE_ELDER_MOR = register("huge_elder_mor", Feature.HUGE_RED_MUSHROOM.configuredCodec(new HugeMushroomFeatureConfiguration(
+                new SimpleStateProvider(WizardsReborn.ELDER_MOR_BLOCK.get().defaultBlockState().setValue(HugeMushroomBlock.DOWN, Boolean.valueOf(false))),
+                new SimpleStateProvider(Blocks.MUSHROOM_STEM.defaultBlockState().setValue(HugeMushroomBlock.UP, Boolean.valueOf(false)).setValue(HugeMushroomBlock.DOWN, Boolean.valueOf(false))), 2)));
     }
 
     @SubscribeEvent
     public void onBiomeLoad(BiomeLoadingEvent event) {
-        for (ConfiguredFeature<?, ?> feature : ORES) {
-            event.getGeneration().withFeature(GenerationStage.Decoration.UNDERGROUND_ORES, feature);
+        for (Holder<PlacedFeature> feature : ORES) {
+            List<Holder<PlacedFeature>> base = event.getGeneration().getFeatures(GenerationStep.Decoration.UNDERGROUND_ORES);
+            base.add(feature);
         }
-    }
+    }*/
 }

@@ -2,23 +2,14 @@ package mod.maxbogomol.wizards_reborn.common.item.equipment.curio;
 
 import com.google.common.collect.LinkedHashMultimap;
 import com.google.common.collect.Multimap;
-import com.mojang.blaze3d.matrix.MatrixStack;
-import com.mojang.blaze3d.vertex.IVertexBuilder;
 import mod.maxbogomol.wizards_reborn.WizardsReborn;
-import mod.maxbogomol.wizards_reborn.utils.RenderUtils;
-import mod.maxbogomol.wizards_reborn.client.render.curio.BeltModel;
-import net.minecraft.client.renderer.IRenderTypeBuffer;
-import net.minecraft.client.renderer.ItemRenderer;
-import net.minecraft.client.renderer.texture.OverlayTexture;
-import net.minecraft.entity.LivingEntity;
-import net.minecraft.entity.ai.attributes.Attribute;
-import net.minecraft.entity.ai.attributes.AttributeModifier;
-import net.minecraft.entity.ai.attributes.Attributes;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
-import net.minecraft.util.ResourceLocation;
-import net.minecraft.util.SoundEvents;
-import net.minecraft.util.math.vector.Vector3d;
+import net.minecraft.world.entity.ai.attributes.Attribute;
+import net.minecraft.world.entity.ai.attributes.AttributeModifier;
+import net.minecraft.world.entity.ai.attributes.Attributes;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.sounds.SoundEvents;
 import top.theillusivec4.curios.api.SlotContext;
 import top.theillusivec4.curios.api.type.capability.ICurio;
 import top.theillusivec4.curios.api.type.capability.ICurioItem;
@@ -37,7 +28,7 @@ public class LeatherBeltItem extends Item implements ICurioItem {
     @Nonnull
     @Override
     public ICurio.SoundInfo getEquipSound(SlotContext slotContext, ItemStack stack) {
-        return new ICurio.SoundInfo(SoundEvents.ITEM_ARMOR_EQUIP_LEATHER, 1.0f, 1.0f);
+        return new ICurio.SoundInfo(SoundEvents.ARMOR_EQUIP_LEATHER, 1.0f, 1.0f);
     }
 
     @Override
@@ -52,29 +43,29 @@ public class LeatherBeltItem extends Item implements ICurioItem {
         atts.put(Attributes.KNOCKBACK_RESISTANCE, new AttributeModifier(uuid, "bonus", 1, AttributeModifier.Operation.ADDITION));
         return atts;
     }
-
+/*
     @Override
     public boolean canRender(String identifier, int index, LivingEntity living, ItemStack stack) {
         return true;
     }
 
     @Override
-    public void render(String identifier, int index, MatrixStack matrixStack,
-                       IRenderTypeBuffer renderTypeBuffer, int light, LivingEntity living,
+    public void render(String identifier, int index, PoseStack matrixStack,
+                       MultiBufferSource renderTypeBuffer, int light, LivingEntity living,
                        float limbSwing, float limbSwingAmount, float partialTicks, float ageInTicks,
                        float netHeadYaw, float headPitch, ItemStack stack) {
         ICurio.RenderHelper.translateIfSneaking(matrixStack, living);
         ICurio.RenderHelper.rotateIfSneaking(matrixStack, living);
 
         BeltModel<?> model = new BeltModel<>();
-        Vector3d rotate = RenderUtils.followBodyRotation(living);
-        model.model.rotateAngleY = (float) rotate.getY();
+        Vec3 rotate = RenderUtils.followBodyRotation(living);
+        model.model.yRot = (float) rotate.y();
 
-        IVertexBuilder vertexBuilder = ItemRenderer
-                .getBuffer(renderTypeBuffer, model.getRenderType(BELT_TEXTURE), false,
+        VertexConsumer vertexBuilder = ItemRenderer
+                .getFoilBuffer(renderTypeBuffer, model.renderType(BELT_TEXTURE), false,
                         false);
         model
-                .render(matrixStack, vertexBuilder, light, OverlayTexture.NO_OVERLAY, 1.0F, 1.0F, 1.0F,
+                .renderToBuffer(matrixStack, vertexBuilder, light, OverlayTexture.NO_OVERLAY, 1.0F, 1.0F, 1.0F,
                         1.0F);
-    }
+    }*/
 }

@@ -1,22 +1,22 @@
 package mod.maxbogomol.wizards_reborn.client.render.item;
 
-import net.minecraft.client.renderer.model.IBakedModel;
-import net.minecraft.util.ResourceLocation;
+import net.minecraft.client.resources.model.BakedModel;
+import net.minecraft.resources.ResourceLocation;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
 public class WandCrystalsModels {
-    public static Map<String, IBakedModel> modelsCrystals = new HashMap<String, IBakedModel>();
-    public static Map<String, IBakedModel> models = new HashMap<String, IBakedModel>();
+    public static Map<String, BakedModel> modelsCrystals = new HashMap<String, BakedModel>();
+    public static Map<String, BakedModel> models = new HashMap<String, BakedModel>();
     public static ArrayList<String> crystals = new ArrayList<String>();
 
-    public static void addModelCrystals(String id, IBakedModel model) {
+    public static void addModelCrystals(String id, BakedModel model) {
         modelsCrystals.put(id, model);
     }
 
-    public static void addModel(String id, IBakedModel model) {
+    public static void addModel(String id, BakedModel model) {
         models.put(id, model);
     }
 
@@ -24,11 +24,11 @@ public class WandCrystalsModels {
         crystals.add(id);
     }
 
-    public static Map<String, IBakedModel> getModelsCrystals() {
+    public static Map<String, BakedModel> getModelsCrystals() {
         return modelsCrystals;
     }
 
-    public static Map<String, IBakedModel> getModels() {
+    public static Map<String, BakedModel> getModels() {
         return models;
     }
 
@@ -36,11 +36,11 @@ public class WandCrystalsModels {
         return crystals;
     }
 
-    public static IBakedModel getModelCrystals(String id) {
+    public static BakedModel getModelCrystals(String id) {
         return modelsCrystals.get(id);
     }
 
-    public static IBakedModel getModel(String id) {
+    public static BakedModel getModel(String id) {
         return models.get(id);
     }
 

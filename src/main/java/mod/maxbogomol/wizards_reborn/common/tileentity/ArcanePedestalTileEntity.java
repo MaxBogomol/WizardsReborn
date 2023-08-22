@@ -1,47 +1,48 @@
 package mod.maxbogomol.wizards_reborn.common.tileentity;
 
 import mod.maxbogomol.wizards_reborn.WizardsReborn;
-import net.minecraft.inventory.Inventory;
-import net.minecraft.nbt.CompoundNBT;
-import net.minecraft.network.NetworkManager;
-import net.minecraft.network.play.server.SUpdateTileEntityPacket;
-import net.minecraft.tileentity.TileEntityType;
+import net.minecraft.core.BlockPos;
+import net.minecraft.world.SimpleContainer;
+import net.minecraft.nbt.CompoundTag;
+import net.minecraft.network.Connection;
+import net.minecraft.network.protocol.game.ClientboundBlockEntityDataPacket;
+import net.minecraft.world.level.block.entity.BlockEntityType;
+import net.minecraft.world.level.block.state.BlockState;
 
 public class ArcanePedestalTileEntity extends TileSimpleInventory {
-    public ArcanePedestalTileEntity(TileEntityType<?> tileEntityTypeIn) {
-        super(tileEntityTypeIn);
+    public ArcanePedestalTileEntity(BlockEntityType<?> type, BlockPos pos, BlockState state) {
+        super(type, pos, state);
     }
 
-    public ArcanePedestalTileEntity() {
-        this(WizardsReborn.ARCANE_PEDESTAL_TILE_ENTITY.get());
+    public ArcanePedestalTileEntity(BlockPos pos, BlockState state) {
+        this(WizardsReborn.ARCANE_PEDESTAL_TILE_ENTITY.get(), pos, state);
     }
 
     @Override
-    protected Inventory createItemHandler() {
-        return new Inventory(1) {
+    protected SimpleContainer createItemHandler() {
+        return new SimpleContainer(1) {
             @Override
-            public int getInventoryStackLimit() {
+            public int getMaxStackSize() {
                 return 1;
             }
         };
     }
 
-    @Override
-    public final SUpdateTileEntityPacket getUpdatePacket() {
-        CompoundNBT tag = new CompoundNBT();
-        write(tag);
-        return new SUpdateTileEntityPacket(pos, -999, tag);
-    }
+    //@Override
+    //public final ClientboundBlockEntityDataPacket getUpdatePacket() {
+    //    CompoundTag tag = new CompoundTag();
+    //    return new ClientboundBlockEntityDataPacket(worldPosition, -999, tag);
+    //}
 
     @Override
-    public void onDataPacket(NetworkManager net, SUpdateTileEntityPacket packet) {
+    public void onDataPacket(Connection net, ClientboundBlockEntityDataPacket packet) {
         super.onDataPacket(net, packet);
-        read(this.getBlockState(),packet.getNbtCompound());
+        load(packet.getTag());
     }
 
-    @Override
-    public CompoundNBT getUpdateTag()
-    {
-        return this.write(new CompoundNBT());
-    }
+    //@Override
+    //public CompoundTag getUpdateTag()
+    //{
+    //    return this.save(new CompoundTag());
+    //}
 }

@@ -1,21 +1,19 @@
 package mod.maxbogomol.wizards_reborn.client.render.tileentity;
 
-import com.mojang.blaze3d.matrix.MatrixStack;
+import com.mojang.blaze3d.vertex.PoseStack;
 import mod.maxbogomol.wizards_reborn.common.tileentity.WissenTranslatorTileEntity;
-import net.minecraft.client.renderer.IRenderTypeBuffer;
-import net.minecraft.client.renderer.tileentity.TileEntityRenderer;
-import net.minecraft.client.renderer.tileentity.TileEntityRendererDispatcher;
+import net.minecraft.client.renderer.MultiBufferSource;
+import net.minecraft.client.renderer.blockentity.BlockEntityRenderer;
+import net.minecraft.client.renderer.blockentity.BlockEntityRenderDispatcher;
 
 import java.awt.*;
 
-public class WissenTranslatorTileEntityRenderer extends TileEntityRenderer<WissenTranslatorTileEntity> {
+public class WissenTranslatorTileEntityRenderer implements BlockEntityRenderer<WissenTranslatorTileEntity> {
 
-    public WissenTranslatorTileEntityRenderer(TileEntityRendererDispatcher manager) {
-        super(manager);
-    }
+    public WissenTranslatorTileEntityRenderer() {}
 
     @Override
-    public void render(WissenTranslatorTileEntity translator, float partialTicks, MatrixStack ms, IRenderTypeBuffer buffers, int light, int overlay) {
+    public void render(WissenTranslatorTileEntity translator, float partialTicks, PoseStack ms, MultiBufferSource buffers, int light, int overlay) {
 
     }
 }

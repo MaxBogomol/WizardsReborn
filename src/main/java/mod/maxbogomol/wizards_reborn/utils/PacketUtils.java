@@ -1,22 +1,22 @@
 package mod.maxbogomol.wizards_reborn.utils;
 
-import net.minecraft.network.play.server.SUpdateTileEntityPacket;
-import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.ChunkPos;
-import net.minecraft.world.server.ServerChunkProvider;
-import net.minecraft.world.server.ServerWorld;
+import net.minecraft.network.protocol.game.ClientboundBlockEntityDataPacket;
+import net.minecraft.world.level.block.entity.BlockEntity;
+import net.minecraft.core.BlockPos;
+import net.minecraft.world.level.ChunkPos;
+import net.minecraft.server.level.ServerChunkCache;
+import net.minecraft.server.level.ServerLevel;
 
 public class PacketUtils {
-    public static void SUpdateTileEntityPacket(TileEntity tile) {
-        if (tile.getWorld() instanceof ServerWorld) {
-            SUpdateTileEntityPacket packet = tile.getUpdatePacket();
+    public static void SUpdateTileEntityPacket(BlockEntity tile) {
+        //if (tile.getLevel() instanceof ServerLevel) {
+            /*ClientboundBlockEntityDataPacket packet = tile.getUpdatePacket();
             if (packet != null) {
-                BlockPos poss = tile.getPos();
-                ((ServerChunkProvider) tile.getWorld().getChunkProvider()).chunkManager
-                        .getTrackingPlayers(new ChunkPos(poss), false)
-                        .forEach(e -> e.connection.sendPacket(packet));
-            }
-        }
+                BlockPos poss = tile.getBlockPos();
+                ((ServerChunkCache) tile.getLevel().getChunkSource()).chunkMap
+                        .getPlayers(new ChunkPos(poss), false)
+                        .forEach(e -> e.connection.send(packet));
+            }*/
+        //}
     }
 }

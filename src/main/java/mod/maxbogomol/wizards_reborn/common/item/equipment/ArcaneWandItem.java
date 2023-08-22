@@ -7,39 +7,39 @@ import mod.maxbogomol.wizards_reborn.api.spell.Spells;
 import mod.maxbogomol.wizards_reborn.api.wissen.IWissenItem;
 import mod.maxbogomol.wizards_reborn.api.wissen.WissenItemUtils;
 import mod.maxbogomol.wizards_reborn.common.item.ItemBackedInventory;
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.inventory.Inventory;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.CompoundNBT;
-import net.minecraft.util.ActionResult;
-import net.minecraft.util.ActionResultType;
-import net.minecraft.util.Direction;
-import net.minecraft.util.Hand;
-import net.minecraft.world.World;
+import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.SimpleContainer;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.nbt.CompoundTag;
+import net.minecraft.world.InteractionResultHolder;
+import net.minecraft.world.InteractionResult;
+import net.minecraft.core.Direction;
+import net.minecraft.world.InteractionHand;
+import net.minecraft.world.level.Level;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.capabilities.ICapabilityProvider;
 import net.minecraftforge.common.util.LazyOptional;
-import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.IItemHandler;
 import net.minecraftforge.items.wrapper.InvWrapper;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
+
 public class ArcaneWandItem extends Item implements IWissenItem {
     public ArcaneWandItem(Properties properties) {
         super(properties);
     }
 
-    public static Inventory getInventory(ItemStack stack) {
+    public static SimpleContainer getInventory(ItemStack stack) {
         return new ItemBackedInventory(stack, 1);
     }
 
-    @Nonnull
+    /*@Nonnull
     @Override
-    public ICapabilityProvider initCapabilities(ItemStack stack, CompoundNBT oldCapNbt) {
+    public ICapabilityProvider initCapabilities(ItemStack stack, CompoundTag oldCapNbt) {
         return new InvProvider(stack);
     }
 
@@ -55,17 +55,17 @@ public class ArcaneWandItem extends Item implements IWissenItem {
         public <T> LazyOptional<T> getCapability(@Nonnull Capability<T> capability, @Nullable Direction facing) {
             return CapabilityItemHandler.ITEM_HANDLER_CAPABILITY.orEmpty(capability, opt);
         }
-    }
+    }*/
 
     @Override
-    public void inventoryTick(ItemStack stack, World world, Entity entity, int slot, boolean isSelected) {
-        if (!world.isRemote()) {
-            CompoundNBT nbt = stack.getTag();
+    public void inventoryTick(ItemStack stack, Level world, Entity entity, int slot, boolean isSelected) {
+        if (!world.isClientSide()) {
+            CompoundTag nbt = stack.getTag();
             if (nbt == null) {
-                nbt = new CompoundNBT();
+                nbt = new CompoundTag();
                 nbt.putBoolean("crystal", false);
                 nbt.putString("spell", "");
-                Inventory item = getInventory(stack);
+                SimpleContainer item = getInventory(stack);
                 stack.setTag(nbt);
             }
 
@@ -87,18 +87,18 @@ public class ArcaneWandItem extends Item implements IWissenItem {
     }
 
     @Override
-    public ActionResult<ItemStack> onItemRightClick(World world, PlayerEntity player, Hand hand) {
-        ItemStack stack = player.getHeldItem(hand);
-        KnowledgeUtils.removeAllKnowledge(player);
+    public InteractionResultHolder<ItemStack> use(Level world, Player player, InteractionHand hand) {
+        ItemStack stack = player.getItemInHand(hand);
+        //KnowledgeUtils.removeAllKnowledge(player);
 
-        if (!world.isRemote) {
-            CompoundNBT nbt = stack.getTag();
+        if (!world.isClientSide) {
+            CompoundTag nbt = stack.getTag();
             if (nbt.getBoolean("crystal")) {
                 Spell spell = Spells.getSpell(nbt.getString("spell"));
                 spell.spawnSpellStandart(world, player);
             }
         }
 
-        return new ActionResult<ItemStack>(ActionResultType.SUCCESS, stack);
+        return new InteractionResultHolder<ItemStack>(InteractionResult.SUCCESS, stack);
     }
 }

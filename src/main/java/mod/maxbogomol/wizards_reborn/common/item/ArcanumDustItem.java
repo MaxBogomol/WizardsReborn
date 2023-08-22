@@ -2,55 +2,57 @@ package mod.maxbogomol.wizards_reborn.common.item;
 
 import mod.maxbogomol.wizards_reborn.WizardsReborn;
 import mod.maxbogomol.wizards_reborn.client.particle.Particles;
-import mod.maxbogomol.wizards_reborn.common.recipe.ArcanumDustTransmutationRecipe;
-import net.minecraft.entity.item.ItemEntity;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.inventory.Inventory;
-import net.minecraft.item.BlockItem;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
-import net.minecraft.item.ItemUseContext;
-import net.minecraft.util.ActionResult;
-import net.minecraft.util.ActionResultType;
-import net.minecraft.util.Hand;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.vector.Vector3d;
-import net.minecraft.world.World;
+import net.minecraft.world.entity.item.ItemEntity;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.SimpleContainer;
+import net.minecraft.world.item.BlockItem;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.context.UseOnContext;
+import net.minecraft.world.InteractionResultHolder;
+import net.minecraft.world.InteractionResult;
+import net.minecraft.world.InteractionHand;
+import net.minecraft.core.BlockPos;
+import net.minecraft.world.phys.Vec3;
+import net.minecraft.world.level.Level;
 
 import java.util.Optional;
+import java.util.Random;
 import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.concurrent.atomic.AtomicReference;
 
 public class ArcanumDustItem extends Item {
+    private static Random random = new Random();
+
     public ArcanumDustItem(Properties properties) {
         super(properties);
     }
 
     @Override
-    public ActionResult<ItemStack> onItemRightClick(World world, PlayerEntity player, Hand hand) {
-        ItemStack stack = player.getHeldItem(hand);
+    public InteractionResultHolder<ItemStack> use(Level world, Player player, InteractionHand hand) {
+        ItemStack stack = player.getItemInHand(hand);
 
-        return new ActionResult<ItemStack>(ActionResultType.SUCCESS, stack);
+        return new InteractionResultHolder<ItemStack>(InteractionResult.SUCCESS, stack);
     }
 
     @Override
-    public ActionResultType onItemUseFirst(ItemStack stack, ItemUseContext context) {
-        PlayerEntity player = context.getPlayer();
-        World world = context.getWorld();
-        BlockPos blockpos = context.getPos();
+    public InteractionResult onItemUseFirst(ItemStack stack, UseOnContext context) {
+        Player player = context.getPlayer();
+        Level world = context.getLevel();
+        BlockPos blockpos = context.getClickedPos();
 
-        Inventory inv = new Inventory(1);
-        inv.setInventorySlotContents(0, world.getBlockState(blockpos).getBlock().asItem().getDefaultInstance());
-
+        SimpleContainer inv = new SimpleContainer(1);
+        inv.setItem(0, world.getBlockState(blockpos).getBlock().asItem().getDefaultInstance());
+        /*
         Optional<ArcanumDustTransmutationRecipe> recipe = world.getRecipeManager()
-                .getRecipe(WizardsReborn.ARCANUM_DUST_TRANSMUTATION_RECIPE, inv, world);
+                .getRecipeFor(WizardsReborn.ARCANUM_DUST_TRANSMUTATION_RECIPE, inv, world);
 
         AtomicBoolean place_block = new AtomicBoolean(true);
-        AtomicReference<ItemStack> item = new AtomicReference<>(new ItemStack(null));
+        AtomicReference<ItemStack> item = new AtomicReference<>(ItemStack.EMPTY);
 
         recipe.ifPresent(iRecipe -> {
             place_block.set(iRecipe.getPlaceBlock());
-            item.set(iRecipe.getRecipeOutput().copy());
+            item.set(iRecipe.getResultItem().copy());
         });
 
         boolean craft = false;
@@ -60,18 +62,18 @@ public class ArcanumDustItem extends Item {
                 BlockItem blockitem = (BlockItem) item.get().getItem();
                 world.destroyBlock(blockpos, false);
                 if (place_block.get()) {
-                    world.setBlockState(blockpos, blockitem.getBlock().getDefaultState());
+                    world.setBlockAndUpdate(blockpos, blockitem.getBlock().defaultBlockState());
                 } else {
-                    if (!world.isRemote()) {
-                        world.addEntity(new ItemEntity(world, blockpos.getX() + 0.5F, blockpos.getY() + 0.5F, blockpos.getZ() + 0.5F, item.get()));
+                    if (!world.isClientSide()) {
+                        world.addFreshEntity(new ItemEntity(world, blockpos.getX() + 0.5F, blockpos.getY() + 0.5F, blockpos.getZ() + 0.5F, item.get()));
                     }
                 }
 
                 craft = true;
             } else {
                 world.destroyBlock(blockpos, false);
-                if (!world.isRemote()) {
-                    world.addEntity(new ItemEntity(world, blockpos.getX() + 0.5F, blockpos.getY() + 0.5F, blockpos.getZ() + 0.5F, item.get()));
+                if (!world.isClientSide()) {
+                    world.addFreshEntity(new ItemEntity(world, blockpos.getX() + 0.5F, blockpos.getY() + 0.5F, blockpos.getZ() + 0.5F, item.get()));
                 }
 
                 craft = true;
@@ -82,9 +84,9 @@ public class ArcanumDustItem extends Item {
                     stack.setCount(stack.getCount()-1);
                 }
 
-                if (world.isRemote()) {
-                    Vector3d pos = player.getEyePosition(0);
-                    Vector3d vel = player.getEyePosition(0).add(player.getLookVec().scale(40)).subtract(pos).scale(1.0 / 20).normalize().scale(0.2f);
+                if (world.isClientSide()) {
+                    Vec3 pos = player.getEyePosition(0);
+                    Vec3 vel = player.getEyePosition(0).add(player.getLookAngle().scale(40)).subtract(pos).scale(1.0 / 20).normalize().scale(0.2f);
 
                     for (int i = 0; i < 20; i++) {
                         Particles.create(WizardsReborn.WISP_PARTICLE)
@@ -113,7 +115,7 @@ public class ArcanumDustItem extends Item {
                     }
                 }
             }
-        }
+        }*/
 
         return super.onItemUseFirst(stack, context);
     }

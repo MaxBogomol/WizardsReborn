@@ -3,15 +3,15 @@ package mod.maxbogomol.wizards_reborn.api.spell;
 import mod.maxbogomol.wizards_reborn.WizardsReborn;
 import mod.maxbogomol.wizards_reborn.api.crystal.CrystalType;
 import mod.maxbogomol.wizards_reborn.common.entity.SpellProjectileEntity;
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.item.ItemStack;
-import net.minecraft.item.ItemUseContext;
-import net.minecraft.util.Hand;
-import net.minecraft.util.ResourceLocation;
-import net.minecraft.util.math.RayTraceResult;
-import net.minecraft.util.math.vector.Vector3d;
-import net.minecraft.world.World;
+import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.context.UseOnContext;
+import net.minecraft.world.InteractionHand;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.phys.HitResult;
+import net.minecraft.world.phys.Vec3;
+import net.minecraft.world.level.Level;
 
 import java.awt.*;
 import java.util.ArrayList;
@@ -62,27 +62,27 @@ public class Spell {
         return crystalTypes;
     }
 
-    public void useSpell(World world, PlayerEntity player, Hand hand) {
+    public void useSpell(Level world, Player player, InteractionHand hand) {
 
     }
 
-    public void onWandUseFirst(ItemStack stack, ItemUseContext context) {
+    public void onWandUseFirst(ItemStack stack, UseOnContext context) {
 
     }
 
-    public void onImpact(RayTraceResult ray, World world, SpellProjectileEntity projectile, PlayerEntity player, Entity target) {
+    public void onImpact(HitResult ray, Level world, SpellProjectileEntity projectile, Player player, Entity target) {
 
     }
 
-    public void onImpact(RayTraceResult ray, World world, SpellProjectileEntity projectile, PlayerEntity player) {
+    public void onImpact(HitResult ray, Level world, SpellProjectileEntity projectile, Player player) {
 
     }
 
-    public void spawnSpellStandart(World world, PlayerEntity player) {
-        Vector3d pos = player.getEyePosition(0);
-        Vector3d vel = player.getEyePosition(0).add(player.getLookVec().scale(40)).subtract(pos).scale(1.0 / 30);
-        world.addEntity(new SpellProjectileEntity(WizardsReborn.SPELL_PROJECTILE.get(), world).shoot(
-                pos.x, pos.y - 0.2f, pos.z, vel.x, vel.y, vel.z, player.getUniqueID(), this.getId()
+    public void spawnSpellStandart(Level world, Player player) {
+        Vec3 pos = player.getEyePosition(0);
+        Vec3 vel = player.getEyePosition(0).add(player.getLookAngle().scale(40)).subtract(pos).scale(1.0 / 30);
+        world.addFreshEntity(new SpellProjectileEntity(WizardsReborn.SPELL_PROJECTILE.get(), world).shoot(
+                pos.x, pos.y - 0.2f, pos.z, vel.x, vel.y, vel.z, player.getUUID(), this.getId()
         ));
     }
 }

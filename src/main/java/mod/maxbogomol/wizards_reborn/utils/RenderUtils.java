@@ -1,35 +1,38 @@
 package mod.maxbogomol.wizards_reborn.utils;
 
-import com.mojang.blaze3d.matrix.MatrixStack;
+import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.platform.GlStateManager;
 import com.mojang.blaze3d.systems.RenderSystem;
-import com.mojang.blaze3d.vertex.IVertexBuilder;
+import com.mojang.blaze3d.vertex.VertexConsumer;
+import com.mojang.blaze3d.vertex.VertexFormat;
+import com.mojang.math.Axis;
 import mod.maxbogomol.wizards_reborn.WizardsReborn;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.*;
 import net.minecraft.client.renderer.entity.EntityRenderer;
-import net.minecraft.client.renderer.entity.LivingRenderer;
-import net.minecraft.client.renderer.entity.model.BipedModel;
-import net.minecraft.client.renderer.entity.model.EntityModel;
-import net.minecraft.client.renderer.model.IBakedModel;
-import net.minecraft.client.renderer.model.ItemCameraTransforms;
-import net.minecraft.client.renderer.texture.AtlasTexture;
+import net.minecraft.client.renderer.entity.LivingEntityRenderer;
+import net.minecraft.client.model.HumanoidModel;
+import net.minecraft.client.model.EntityModel;
+import net.minecraft.client.resources.model.BakedModel;
+import net.minecraft.client.renderer.block.model.ItemTransforms;
+import net.minecraft.client.renderer.texture.TextureAtlas;
 import net.minecraft.client.renderer.texture.OverlayTexture;
-import net.minecraft.client.renderer.vertex.DefaultVertexFormats;
-import net.minecraft.entity.LivingEntity;
-import net.minecraft.item.ItemStack;
-import net.minecraft.util.math.shapes.VoxelShape;
-import net.minecraft.util.math.vector.Matrix4f;
-import net.minecraft.util.math.vector.Vector3d;
-import net.minecraft.util.math.vector.Vector3f;
-import net.minecraft.world.World;
-import org.lwjgl.opengl.GL11;
+import com.mojang.blaze3d.vertex.DefaultVertexFormat;
+import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.item.ItemDisplayContext;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.phys.shapes.VoxelShape;
+import net.minecraft.world.phys.Vec3;
+import net.minecraft.world.level.Level;
 
 import java.awt.*;
 
+import com.mojang.blaze3d.platform.Lighting;
+import org.joml.Matrix4f;
+
 public class RenderUtils {
 
-    public static final RenderState.TransparencyState ADDITIVE_TRANSPARENCY = new RenderState.TransparencyState("lightning_transparency", () -> {
+    public static final RenderStateShard.TransparencyStateShard ADDITIVE_TRANSPARENCY = new RenderStateShard.TransparencyStateShard("lightning_transparency", () -> {
         RenderSystem.enableBlend();
         RenderSystem.blendFunc(GlStateManager.SourceFactor.SRC_ALPHA, GlStateManager.DestFactor.ONE);
     }, () -> {
@@ -37,7 +40,7 @@ public class RenderUtils {
         RenderSystem.defaultBlendFunc();
     });
 
-    public static final RenderState.TransparencyState NORMAL_TRANSPARENCY = new RenderState.TransparencyState("lightning_transparency", () -> {
+    public static final RenderStateShard.TransparencyStateShard NORMAL_TRANSPARENCY = new RenderStateShard.TransparencyStateShard("lightning_transparency", () -> {
         RenderSystem.enableBlend();
         RenderSystem.blendFunc(GlStateManager.SourceFactor.SRC_ALPHA, GlStateManager.DestFactor.ONE_MINUS_SRC_ALPHA);
     }, () -> {
@@ -45,118 +48,112 @@ public class RenderUtils {
         RenderSystem.defaultBlendFunc();
     });
 
-    public static RenderType GLOWING_PARTICLE = RenderType.makeType(
-        WizardsReborn.MOD_ID + ":glowing_particle",
-        DefaultVertexFormats.PARTICLE_POSITION_TEX_COLOR_LMAP,
-        GL11.GL_QUADS, 256,
-                RenderType.State.getBuilder()
-                .shadeModel(new RenderState.ShadeModelState(true))
-                .writeMask(new RenderState.WriteMaskState(true, false))
-                .lightmap(new RenderState.LightmapState(false))
-                .diffuseLighting(new RenderState.DiffuseLightingState(false))
-                .transparency(ADDITIVE_TRANSPARENCY)
-                        .texture(new RenderState.TextureState(AtlasTexture.LOCATION_PARTICLES_TEXTURE, false, false))
-                .build(false));
+    public static RenderType GLOWING_PARTICLE = RenderType.create(
+            WizardsReborn.MOD_ID + ":glowing_particle",
+            DefaultVertexFormat.PARTICLE,
+            VertexFormat.Mode.QUADS, 256, true, false,
+                    RenderType.CompositeState.builder()
+                    .setWriteMaskState(new RenderStateShard.WriteMaskStateShard(true, false))
+                    .setLightmapState(new RenderStateShard.LightmapStateShard(false))
+                    .setTransparencyState(ADDITIVE_TRANSPARENCY)
+                    .setTextureState(new RenderStateShard.TextureStateShard(TextureAtlas.LOCATION_PARTICLES, false, false))
+                    .setShaderState(new RenderStateShard.ShaderStateShard(WizardsReborn::getGlowingParticleShader))
+                    .createCompositeState(false));
 
-    public static RenderType DELAYED_PARTICLE = RenderType.makeType(
+    public static RenderType DELAYED_PARTICLE = RenderType.create(
             WizardsReborn.MOD_ID + ":delayed_particle",
-        DefaultVertexFormats.PARTICLE_POSITION_TEX_COLOR_LMAP,
-        GL11.GL_QUADS, 256,
-                RenderType.State.getBuilder()
-                .shadeModel(new RenderState.ShadeModelState(true))
-                .writeMask(new RenderState.WriteMaskState(true, false))
-                .lightmap(new RenderState.LightmapState(false))
-                .diffuseLighting(new RenderState.DiffuseLightingState(false))
-                .transparency(NORMAL_TRANSPARENCY)
-                .texture(new RenderState.TextureState(AtlasTexture.LOCATION_PARTICLES_TEXTURE, false, false))
-                .build(false));
+            DefaultVertexFormat.PARTICLE,
+            VertexFormat.Mode.QUADS, 256, true, false,
+            RenderType.CompositeState.builder()
+                    .setWriteMaskState(new RenderStateShard.WriteMaskStateShard(true, false))
+                    .setTransparencyState(NORMAL_TRANSPARENCY)
+                    .setTextureState(new RenderStateShard.TextureStateShard(TextureAtlas.LOCATION_PARTICLES, false, false))
+                    .setShaderState(new RenderStateShard.ShaderStateShard(WizardsReborn::getSpriteParticleShader))
+                    .createCompositeState(false));
 
     public static void renderItemModelInGui(ItemStack stack, int x, int y, int xSize, int ySize, int zSize) {
         Minecraft mc = Minecraft.getInstance();
 
-        RenderSystem.pushMatrix();
-        RenderSystem.translatef((float)x+(xSize/2), (float)y+(ySize/2), 10.0F);
-        RenderSystem.scalef((float)xSize/16, (float)ySize/16, (float)zSize/16);
-        RenderSystem.translatef((float)-(x+(xSize/2)), (float)-(y+(ySize/2)), 0.0F);
-        mc.getItemRenderer().renderItemAndEffectIntoGUI(mc.player, stack, x, y);
-        RenderSystem.popMatrix();
+        RenderSystem.getModelViewStack().popPose();
+        RenderSystem.getModelViewStack().translate((float)x+(xSize/2), (float)y+(ySize/2), 10.0F);
+        RenderSystem.getModelViewStack().scale((float)xSize/16, (float)ySize/16, (float)zSize/16);
+        RenderSystem.getModelViewStack().translate((float)-(x+(xSize/2)), (float)-(y+(ySize/2)), 0.0F);
+        //mc.getItemRenderer().renderAndDecorateItem(RenderSystem.getModelViewStack(), stack, x, y);
+        RenderSystem.getModelViewStack().popPose();
     }
 
-    public static Vector3d followBodyRotation(LivingEntity living) {
-        Vector3d rotate = new Vector3d(0, 0, 0);
-        EntityRenderer<? super LivingEntity> render = Minecraft.getInstance().getRenderManager().getRenderer(living);
-        if(render instanceof LivingRenderer) {
-            LivingRenderer<LivingEntity, EntityModel<LivingEntity>> livingRenderer = (LivingRenderer<LivingEntity, EntityModel<LivingEntity>>) render;
-            EntityModel<LivingEntity> entityModel = livingRenderer.getEntityModel();
-            if (entityModel instanceof BipedModel) {
-                BipedModel<LivingEntity> bipedModel = (BipedModel<LivingEntity>) entityModel;
-                rotate = new Vector3d(bipedModel.bipedBody.rotateAngleX, bipedModel.bipedBody.rotateAngleY, bipedModel.bipedBody.rotateAngleZ);;
+    public static Vec3 followBodyRotation(LivingEntity living) {
+        Vec3 rotate = new Vec3(0, 0, 0);
+        EntityRenderer<? super LivingEntity> render = Minecraft.getInstance().getEntityRenderDispatcher().getRenderer(living);
+        if(render instanceof LivingEntityRenderer) {
+            LivingEntityRenderer<LivingEntity, EntityModel<LivingEntity>> livingRenderer = (LivingEntityRenderer<LivingEntity, EntityModel<LivingEntity>>) render;
+            EntityModel<LivingEntity> entityModel = livingRenderer.getModel();
+            if (entityModel instanceof HumanoidModel) {
+                HumanoidModel<LivingEntity> bipedModel = (HumanoidModel<LivingEntity>) entityModel;
+                rotate = new Vec3(bipedModel.body.xRot, bipedModel.body.yRot, bipedModel.body.zRot);;
             }
         }
         return rotate;
     }
 
-    public static void renderBoxBlockOutline(MatrixStack matrixStack, IRenderTypeBuffer bufferIn, VoxelShape voxelShape, double originX, double originY, double originZ, Color color) {
-        IVertexBuilder builder = bufferIn.getBuffer(RenderType.getLines());
-        Matrix4f matrix4f = matrixStack.getLast().getMatrix();
+    public static void renderBoxBlockOutline(PoseStack matrixStack, MultiBufferSource bufferIn, VoxelShape voxelShape, double originX, double originY, double originZ, Color color) {
+        VertexConsumer builder = bufferIn.getBuffer(RenderType.lines());
+        Matrix4f matrix4f = matrixStack.last().pose();
 
         int red = color.getRed();
         int green = color.getGreen();
         int blue = color.getBlue();
         int alpha = color.getAlpha();
 
-        voxelShape.forEachEdge((x0, y0, z0, x1, y1, z1) -> {
-            builder.pos(matrix4f, (float)(x0 + originX), (float)(y0 + originY), (float)(z0 + originZ)).color(red, green, blue, alpha).endVertex();
-            builder.pos(matrix4f, (float)(x1 + originX), (float)(y1 + originY), (float)(z1 + originZ)).color(red, green, blue, alpha).endVertex();
+        voxelShape.forAllEdges((x0, y0, z0, x1, y1, z1) -> {
+            builder.vertex(matrix4f, (float)(x0 + originX), (float)(y0 + originY), (float)(z0 + originZ)).color(red, green, blue, alpha).endVertex();
+            builder.vertex(matrix4f, (float)(x1 + originX), (float)(y1 + originY), (float)(z1 + originZ)).color(red, green, blue, alpha).endVertex();
         });
     }
 
-    public static void renderLine(MatrixStack matrixStack, IRenderTypeBuffer bufferIn, double x1, double y1, double z1, double x2, double y2, double z2, Color color) {
-        IVertexBuilder builder = bufferIn.getBuffer(RenderType.getLines());
-        Matrix4f matrix4f = matrixStack.getLast().getMatrix();
+    public static void renderLine(PoseStack matrixStack, MultiBufferSource bufferIn, double x1, double y1, double z1, double x2, double y2, double z2, Color color) {
+        VertexConsumer builder = bufferIn.getBuffer(RenderType.lines());
+        Matrix4f matrix4f = matrixStack.last().pose();
 
         int red = color.getRed();
         int green = color.getGreen();
         int blue = color.getBlue();
         int alpha = color.getAlpha();
 
-        builder.pos(matrix4f, (float) (x1), (float) (y1), (float) (z1)).color(red, green, blue, alpha).endVertex();
-        builder.pos(matrix4f, (float) (x2), (float) (y2), (float) (z2)).color(red, green, blue, alpha).endVertex();
+        builder.vertex(matrix4f, (float) (x1), (float) (y1), (float) (z1)).color(red, green, blue, alpha).endVertex();
+        builder.vertex(matrix4f, (float) (x2), (float) (y2), (float) (z2)).color(red, green, blue, alpha).endVertex();
     }
 
     public static void renderFloatingItemModelIntoGUI(ItemStack stack, int x, int y, float ticks, float ticksUp) {
-        IBakedModel bakedmodel = Minecraft.getInstance().getItemRenderer().getItemModelWithOverrides(stack, (World)null, (LivingEntity)null);
+        BakedModel bakedmodel = Minecraft.getInstance().getItemRenderer().getModel(stack, (Level)null, (LivingEntity)null, 0);
 
-        Minecraft.getInstance().getItemRenderer().zLevel += 50.0F;
+        //Minecraft.getInstance().getItemRenderer().blitOffset += 50.0F;
 
-        RenderSystem.pushMatrix();
-        Minecraft.getInstance().getTextureManager().bindTexture(AtlasTexture.LOCATION_BLOCKS_TEXTURE);
-        Minecraft.getInstance().getTextureManager().getTexture(AtlasTexture.LOCATION_BLOCKS_TEXTURE).setBlurMipmapDirect(false, false);
-        RenderSystem.enableRescaleNormal();
-        RenderSystem.enableAlphaTest();
-        RenderSystem.defaultAlphaFunc();
+        Minecraft.getInstance().getTextureManager().getTexture(TextureAtlas.LOCATION_BLOCKS).setFilter(false, false);
+        RenderSystem.setShaderTexture(0, TextureAtlas.LOCATION_BLOCKS);
         RenderSystem.enableBlend();
         RenderSystem.blendFunc(GlStateManager.SourceFactor.SRC_ALPHA, GlStateManager.DestFactor.ONE_MINUS_SRC_ALPHA);
-        RenderSystem.color4f(1.0F, 1.0F, 1.0F, 1.0F);
-        RenderSystem.translatef((float)x, (float)y, 100.0F + Minecraft.getInstance().getItemRenderer().zLevel);
-        RenderSystem.translatef(8.0F, 8.0F, 0.0F);
-        RenderSystem.scalef(1.0F, -1.0F, 1.0F);
-        RenderSystem.scalef(16.0F, 16.0F, 16.0F);
-        RenderSystem.rotatef(ticks, 0f,1f, 0f);
-        RenderSystem.translatef(0F, (float) (Math.sin(Math.toRadians(ticksUp)) * 0.03125F), 0F);
-        MatrixStack matrixstack = new MatrixStack();
-        IRenderTypeBuffer.Impl irendertypebuffer$impl = Minecraft.getInstance().getRenderTypeBuffers().getBufferSource();
-        RenderHelper.setupGuiFlatDiffuseLighting();
+        RenderSystem.setShaderColor(1.0F, 1.0F, 1.0F, 1.0F);
+        PoseStack posestack = RenderSystem.getModelViewStack();
+        posestack.pushPose();
+        posestack.translate(x, y, (100.0F));
+        posestack.translate(8.0D, 8.0D, 0.0D);
+        posestack.scale(1.0F, -1.0F, 1.0F);
+        posestack.scale(16.0F, 16.0F, 16.0F);
+        RenderSystem.getModelViewStack().mulPose(Axis.YP.rotationDegrees(ticks));
+        RenderSystem.applyModelViewMatrix();
+        PoseStack posestack1 = new PoseStack();
+        MultiBufferSource.BufferSource multibuffersource$buffersource = Minecraft.getInstance().renderBuffers().bufferSource();
+        Lighting.setupForFlatItems();
 
-        Minecraft.getInstance().getItemRenderer().renderItem(stack, ItemCameraTransforms.TransformType.GUI, false, matrixstack, irendertypebuffer$impl, 15728880, OverlayTexture.NO_OVERLAY, bakedmodel);
-        irendertypebuffer$impl.finish();
+        Minecraft.getInstance().getItemRenderer().render(stack, ItemDisplayContext.GUI, false, posestack1, multibuffersource$buffersource, 15728880, OverlayTexture.NO_OVERLAY, bakedmodel);
+        multibuffersource$buffersource.endBatch();
         RenderSystem.enableDepthTest();
-        RenderHelper.setupGui3DDiffuseLighting();
+        Lighting.setupFor3DItems();
 
-        RenderSystem.disableAlphaTest();
-        RenderSystem.disableRescaleNormal();
-        RenderSystem.popMatrix();
+        posestack.popPose();
+        RenderSystem.applyModelViewMatrix();
 
-        Minecraft.getInstance().getItemRenderer().zLevel -= 50.0F;
+        //Minecraft.getInstance().getItemRenderer(). -= 50.0F;
     }
 }

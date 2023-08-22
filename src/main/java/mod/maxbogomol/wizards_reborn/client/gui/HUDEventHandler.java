@@ -1,34 +1,33 @@
 package mod.maxbogomol.wizards_reborn.client.gui;
 
-import com.mojang.blaze3d.matrix.MatrixStack;
+import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.systems.RenderSystem;
 import mod.maxbogomol.wizards_reborn.WizardsReborn;
 import mod.maxbogomol.wizards_reborn.api.wissen.IWissenTileEntity;
 import mod.maxbogomol.wizards_reborn.common.item.equipment.WissenWandItem;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.gui.AbstractGui;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.item.ItemStack;
-import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.ResourceLocation;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.BlockRayTraceResult;
-import net.minecraft.util.math.RayTraceResult;
-import net.minecraftforge.client.event.RenderGameOverlayEvent;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.block.entity.BlockEntity;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.core.BlockPos;
+import net.minecraft.world.phys.BlockHitResult;
+import net.minecraft.world.phys.HitResult;
+import net.minecraftforge.client.event.RenderGuiOverlayEvent;
 import org.lwjgl.opengl.GL11;
 
 public class HUDEventHandler {
     private HUDEventHandler() {}
 
-    public static void onDrawScreenPost(RenderGameOverlayEvent.Post event) {
+    public static void onDrawScreenPost(RenderGuiOverlayEvent.Pre event) {
         Minecraft mc = Minecraft.getInstance();
-        ItemStack main = mc.player.getHeldItemMainhand();
-        ItemStack offhand = mc.player.getHeldItemOffhand();
-        MatrixStack ms = event.getMatrixStack();
+        ItemStack main = mc.player.getMainHandItem();
+        ItemStack offhand = mc.player.getOffhandItem();
+        PoseStack ms = event.getGuiGraphics().pose();
 
-        if (event.getType() == RenderGameOverlayEvent.ElementType.ALL) {
+        //if (event.getOverlay() == RenderGuiOverlayEvent.ElementType.ALL) {
 
-            PlayerEntity player = mc.player;
+            Player player = mc.player;
             boolean renderWissenWand = false;
 
             RenderSystem.enableBlend();
@@ -43,24 +42,24 @@ public class HUDEventHandler {
             }
             if (renderWissenWand) {
                 if (!player.isSpectator()) {
-                    RayTraceResult pos = mc.objectMouseOver;
+                    HitResult pos = mc.hitResult;
                     if (pos != null) {
-                        BlockPos bpos = pos.getType() == RayTraceResult.Type.BLOCK ? ((BlockRayTraceResult) pos).getPos() : null;
-                        TileEntity tileentity = bpos != null ? mc.world.getTileEntity(bpos) : null;
+                        BlockPos bpos = pos.getType() == HitResult.Type.BLOCK ? ((BlockHitResult) pos).getBlockPos() : null;
+                        BlockEntity tileentity = bpos != null ? mc.level.getBlockEntity(bpos) : null;
 
                         if (tileentity != null) {
                             if (tileentity instanceof IWissenTileEntity) {
                                 IWissenTileEntity wissentile = (IWissenTileEntity) tileentity;
 
-                                int x = mc.getMainWindow().getScaledWidth() / 2 - (48 / 2);
-                                int y = mc.getMainWindow().getScaledHeight() / 2 + 32 - 10;
+                                int x = mc.getWindow().getGuiScaledWidth() / 2 - (48 / 2);
+                                int y = mc.getWindow().getGuiScaledHeight() / 2 + 32 - 10;
 
-                                mc.textureManager.bindTexture(new ResourceLocation(WizardsReborn.MOD_ID + ":textures/gui/wissen_frame.png"));
-                                AbstractGui.blit(ms, x, y, 0, 0, 48, 10, 64, 64);
+                                RenderSystem.setShaderTexture(0, new ResourceLocation(WizardsReborn.MOD_ID + ":textures/gui/wissen_frame.png"));
+                                //event.getGuiGraphics().blit(ms, x, y, 0, 0, 48, 10, 64, 64);
                                 int width_wissen = 32;
                                 width_wissen /= (double) wissentile.getMaxWissen() / (double) wissentile.getWissen();
-                                mc.textureManager.bindTexture(new ResourceLocation(WizardsReborn.MOD_ID + ":textures/gui/wissen_frame.png"));
-                                AbstractGui.blit(ms, x + 8, y + 1, 0, 10, width_wissen, 8, 64, 64);
+                                RenderSystem.setShaderTexture(0, new ResourceLocation(WizardsReborn.MOD_ID + ":textures/gui/wissen_frame.png"));
+                                //event.getGuiGraphics().blit(ms, x + 8, y + 1, 0, 10, width_wissen, 8, 64, 64);
                             }
                         }
                     }
@@ -68,7 +67,7 @@ public class HUDEventHandler {
             }
 
             RenderSystem.disableBlend();
-            RenderSystem.color4f(1F, 1F, 1F, 1F);
-        }
+            RenderSystem.setShaderColor(1F, 1F, 1F, 1F);
+        //}
     }
 }

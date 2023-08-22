@@ -1,16 +1,16 @@
 package mod.maxbogomol.wizards_reborn.common.network;
 
 import mod.maxbogomol.wizards_reborn.common.item.equipment.ArcaneWandItem;
-import net.minecraft.entity.player.ServerPlayerEntity;
-import net.minecraft.inventory.Inventory;
-import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.CompoundNBT;
-import net.minecraft.network.PacketBuffer;
-import net.minecraft.util.Hand;
-import net.minecraftforge.fml.network.NetworkEvent;
+import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.world.SimpleContainer;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.nbt.CompoundTag;
+import net.minecraft.network.FriendlyByteBuf;
+import net.minecraft.world.InteractionHand;
+import net.minecraftforge.network.NetworkEvent;
 
 import java.util.List;
-import java.util.function.Supplier;
+import java.util.function.Supplier;;
 
 public class SetCrystalPacket {
     private static boolean hand;
@@ -21,43 +21,43 @@ public class SetCrystalPacket {
         this.crystal = crystal;
     }
 
-    public static SetCrystalPacket decode(PacketBuffer buf) {
-        return new SetCrystalPacket(buf.readBoolean(), buf.readItemStack());
+    public static SetCrystalPacket decode(FriendlyByteBuf buf) {
+        return new SetCrystalPacket(buf.readBoolean(), buf.readItem());
     }
 
-    public void encode(PacketBuffer buf) {
+    public void encode(FriendlyByteBuf buf) {
         buf.writeBoolean(hand);
-        buf.writeItemStack(crystal);
+        buf.writeItem(crystal);
     }
 
     public static void handle(SetCrystalPacket msg, Supplier<NetworkEvent.Context> ctx) {
         if (ctx.get().getDirection().getReceptionSide().isServer()) {
             ctx.get().enqueueWork(() -> {
-                ServerPlayerEntity player = ctx.get().getSender();
+                ServerPlayer player = ctx.get().getSender();
 
-                ItemStack stack = player.getHeldItem(Hand.MAIN_HAND);
+                ItemStack stack = player.getItemInHand(InteractionHand.MAIN_HAND);
                 if (!hand) {
-                    stack = player.getHeldItem(Hand.OFF_HAND);
+                    stack = player.getItemInHand(InteractionHand.OFF_HAND);
                 } else {
-                    player.setActiveHand(Hand.MAIN_HAND);
+                    player.startUsingItem(InteractionHand.MAIN_HAND);
                 }
 
-                Inventory stack_inv = ArcaneWandItem.getInventory(stack);
-                CompoundNBT nbt = stack.getTag();
+                SimpleContainer stack_inv = ArcaneWandItem.getInventory(stack);
+                CompoundTag nbt = stack.getTag();
 
-                List<ItemStack> items = player.container.getInventory();
+                List<ItemStack> items = player.inventoryMenu.getItems();
                 for (ItemStack item : items) {
-                    if (item.isItemEqual(crystal)) {
-                        if (item.getOrCreateTag().toString().equals(crystal.getOrCreateTag().toString())) {
-                            player.inventory.deleteStack(item);
-                            if (nbt.getBoolean("crystal")) {
-                                player.inventory.addItemStackToInventory(stack_inv.getStackInSlot(0));
-                            }
-                            stack_inv.setInventorySlotContents(0, crystal);
-                            nbt.putBoolean("crystal", true);
-                            break;
-                        }
-                    }
+                    //if (item.sameItem(crystal)) {
+                    //    if (item.getOrCreateTag().toString().equals(crystal.getOrCreateTag().toString())) {
+                    //        player.getInventory().removeItem(item);
+                    //        if (nbt.getBoolean("crystal")) {
+                    //            player.getInventory().add(stack_inv.getItem(0));
+                    //        }
+                    //        stack_inv.setItem(0, crystal);
+                     //       nbt.putBoolean("crystal", true);
+                    //        break;
+                    //    }
+                    //}
                 }
             });
         }

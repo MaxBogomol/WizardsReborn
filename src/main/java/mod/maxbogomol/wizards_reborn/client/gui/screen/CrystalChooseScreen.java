@@ -1,6 +1,6 @@
 package mod.maxbogomol.wizards_reborn.client.gui.screen;
 
-import com.mojang.blaze3d.matrix.MatrixStack;
+import com.mojang.blaze3d.vertex.PoseStack;
 import mod.maxbogomol.wizards_reborn.api.spell.Spell;
 import mod.maxbogomol.wizards_reborn.api.spell.Spells;
 import mod.maxbogomol.wizards_reborn.common.network.SetSpellPacket;
@@ -10,17 +10,17 @@ import mod.maxbogomol.wizards_reborn.common.item.equipment.ArcaneWandItem;
 import mod.maxbogomol.wizards_reborn.common.network.PacketHandler;
 import mod.maxbogomol.wizards_reborn.common.network.SetCrystalPacket;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.gui.AbstractGui;
-import net.minecraft.client.gui.screen.Screen;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.item.ItemStack;
-import net.minecraft.util.text.ITextComponent;
+import net.minecraft.client.gui.GuiGraphics;
+import net.minecraft.client.gui.screens.Screen;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.network.chat.Component;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class CrystalChooseScreen extends Screen {
-    public CrystalChooseScreen(ITextComponent titleIn) {
+    public CrystalChooseScreen(Component titleIn) {
         super(titleIn);
     }
 
@@ -50,9 +50,9 @@ public class CrystalChooseScreen extends Screen {
 
     @Override
     public boolean mouseClicked(double p_mouseClicked_1_, double p_mouseClicked_3_, int p_mouseClicked_5_) {
-        PlayerEntity player = minecraft.player;
-        ItemStack main = player.getHeldItemMainhand();
-        ItemStack offhand = player.getHeldItemOffhand();
+        Player player = minecraft.player;
+        ItemStack main = player.getMainHandItem();
+        ItemStack offhand = player.getOffhandItem();
 
         if (mode == Mode.CRYSTAL) {
             hover = false;
@@ -96,16 +96,16 @@ public class CrystalChooseScreen extends Screen {
     }
 
     @Override
-    public void render(MatrixStack matrixStack, int mouseX, int mouseY, float partialTicks) {
-        super.render(matrixStack, mouseX, mouseY, partialTicks);
+    public void render(GuiGraphics gui, int mouseX, int mouseY, float partialTicks) {
+        super.render(gui, mouseX, mouseY, partialTicks);
 
-        if (hover && hoveramount < 1) hoveramount += Minecraft.getInstance().getRenderPartialTicks() / 10;
-        else if (!hover && hoveramount > 0) hoveramount -= Minecraft.getInstance().getRenderPartialTicks() / 5;
+        if (hover && hoveramount < 1) hoveramount += Minecraft.getInstance().getFrameTime() / 10;
+        else if (!hover && hoveramount > 0) hoveramount -= Minecraft.getInstance().getFrameTime() / 5;
         if (hoveramount > 1) {
             hoveramount = 1;
         }
         if (!hover && hoveramount <= 0) {
-            minecraft.player.closeScreen();
+            minecraft.player.closeContainer();
         }
 
         this.mouseX = mouseX;
@@ -152,8 +152,7 @@ public class CrystalChooseScreen extends Screen {
                 int X = (int) (Math.cos(dst) * (100 * Math.sin(Math.toRadians(90 * hoveramount))));
                 int Y = (int) (Math.sin(dst) * (100 * Math.sin(Math.toRadians(90 * hoveramount))));
 
-                Minecraft.getInstance().getTextureManager().bindTexture(spell.getIcon());
-                AbstractGui.blit(matrixStack, x + X - 16, y + Y - 16, 0, 0, 32, 32, 32, 32);
+                gui.blit(spell.getIcon(), x + X - 16, y + Y - 16, 0, 0, 32, 32, 32, 32);
 
                 i = i + 1F;
             }
@@ -162,8 +161,8 @@ public class CrystalChooseScreen extends Screen {
 
     public List<ItemStack> getPlayerCrystals() {
         Minecraft mc = Minecraft.getInstance();
-        PlayerEntity player = mc.player;
-        List<ItemStack> items = player.container.getInventory();
+        Player player = mc.player;
+        List<ItemStack> items = player.inventoryMenu.getItems();
 
         ArrayList<ItemStack> crystals = new ArrayList<ItemStack>();
 

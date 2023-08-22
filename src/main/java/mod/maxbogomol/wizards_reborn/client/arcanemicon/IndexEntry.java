@@ -3,7 +3,7 @@ package mod.maxbogomol.wizards_reborn.client.arcanemicon;
 import mod.maxbogomol.wizards_reborn.api.knowledge.Knowledge;
 import mod.maxbogomol.wizards_reborn.api.knowledge.KnowledgeUtils;
 import net.minecraft.client.Minecraft;
-import net.minecraft.item.ItemStack;
+import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 
@@ -28,7 +28,8 @@ public class IndexEntry {
         if (knowledge == null) {
             return true;
         } else {
-            return (KnowledgeUtils.isKnowledge(Minecraft.getInstance().player, knowledge));
+            //return (KnowledgeUtils.isKnowledge(Minecraft.getInstance().player, knowledge));
+            return true;
         }
     }
 }

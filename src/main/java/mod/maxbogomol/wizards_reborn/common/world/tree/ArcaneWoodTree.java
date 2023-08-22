@@ -1,22 +1,36 @@
 package mod.maxbogomol.wizards_reborn.common.world.tree;
 
 import mod.maxbogomol.wizards_reborn.common.world.WorldGen;
-import net.minecraft.block.trees.BigTree;
-import net.minecraft.world.gen.feature.BaseTreeFeatureConfig;
-import net.minecraft.world.gen.feature.ConfiguredFeature;
+import net.minecraft.core.Holder;
+import net.minecraft.resources.ResourceKey;
+import net.minecraft.util.RandomSource;
+import net.minecraft.world.level.block.grower.AbstractMegaTreeGrower;
+import net.minecraft.world.level.levelgen.feature.configurations.TreeConfiguration;
+import net.minecraft.world.level.levelgen.feature.ConfiguredFeature;
+import org.jetbrains.annotations.Nullable;
 
-import javax.annotation.Nullable;
 import java.util.Random;
 
-public class ArcaneWoodTree extends BigTree {
+public class ArcaneWoodTree extends AbstractMegaTreeGrower {
     @Nullable
     @Override
-    protected ConfiguredFeature<BaseTreeFeatureConfig, ?> getTreeFeature(Random randomIn, boolean largeHive) {
+    protected ResourceKey<ConfiguredFeature<?, ?>> getConfiguredMegaFeature(RandomSource pRandom) {
+        return null;
+    }
+
+    @Nullable
+    @Override
+    protected ResourceKey<ConfiguredFeature<?, ?>> getConfiguredFeature(RandomSource pRandom, boolean pHasFlowers) {
+        return null;
+    }
+    /*@Nullable
+    @Override
+    protected ConfiguredFeature<TreeConfiguration, ?> getConfiguredFeature(Random randomIn, boolean largeHive) {
         return WorldGen.ARCANE_WOOD_TREE;
     }
 
     @Nullable
-    protected ConfiguredFeature<BaseTreeFeatureConfig, ?> getHugeTreeFeature(Random rand) {
+    protected ConfiguredFeature<TreeConfiguration, ?> getConfiguredMegaFeature(Random rand) {
         return WorldGen.FANCY_ARCANE_WOOD_TREE;
-    }
+    }*/
 }

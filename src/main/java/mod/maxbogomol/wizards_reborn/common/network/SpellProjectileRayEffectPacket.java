@@ -3,15 +3,14 @@ package mod.maxbogomol.wizards_reborn.common.network;
 import mod.maxbogomol.wizards_reborn.WizardsReborn;
 import mod.maxbogomol.wizards_reborn.client.particle.Particles;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.world.ClientWorld;
-import net.minecraft.network.PacketBuffer;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.MathHelper;
-import net.minecraft.util.math.vector.Vector3d;
-import net.minecraftforge.fml.network.NetworkEvent;
+import net.minecraft.client.multiplayer.ClientLevel;
+import net.minecraft.network.FriendlyByteBuf;
+import net.minecraft.util.Mth;
+import net.minecraft.world.phys.Vec3;
+import net.minecraftforge.network.NetworkEvent;
 
 import java.util.Random;
-import java.util.function.Supplier;
+import java.util.function.Supplier;;
 
 public class SpellProjectileRayEffectPacket {
     private static float posFromX;
@@ -50,11 +49,11 @@ public class SpellProjectileRayEffectPacket {
         this.b = b;
     }
 
-    public static SpellProjectileRayEffectPacket decode(PacketBuffer buf) {
+    public static SpellProjectileRayEffectPacket decode(FriendlyByteBuf buf) {
         return new SpellProjectileRayEffectPacket(buf.readFloat(), buf.readFloat(), buf.readFloat(), buf.readFloat(), buf.readFloat(), buf.readFloat(), buf.readFloat(), buf.readFloat(), buf.readFloat(), buf.readFloat(), buf.readFloat(), buf.readFloat());
     }
 
-    public void encode(PacketBuffer buf) {
+    public void encode(FriendlyByteBuf buf) {
         buf.writeFloat(posFromX);
         buf.writeFloat(posFromY);
         buf.writeFloat(posFromZ);
@@ -75,15 +74,15 @@ public class SpellProjectileRayEffectPacket {
     public static void handle(SpellProjectileRayEffectPacket msg, Supplier<NetworkEvent.Context> ctx) {
         if (ctx.get().getDirection().getReceptionSide().isClient()) {
             ctx.get().enqueueWork(() -> {
-                ClientWorld world = Minecraft.getInstance().world;
+                ClientLevel world = Minecraft.getInstance().level;
 
-                Vector3d pos = new Vector3d(posToX, posToY, posToZ);
-                Vector3d norm = new Vector3d(motionX, motionY, motionZ).normalize().scale(0.025f);
+                Vec3 pos = new Vec3(posToX, posToY, posToZ);
+                Vec3 norm = new Vec3(motionX, motionY, motionZ).normalize().scale(0.025f);
 
                 for (int i = 0; i < 10; i ++) {
-                    double lerpX = MathHelper.lerp(i / 10.0f, posFromX, pos.x);
-                    double lerpY = MathHelper.lerp(i / 10.0f, posFromY, pos.y);
-                    double lerpZ = MathHelper.lerp(i / 10.0f, posFromZ, pos.z);
+                    double lerpX = Mth.lerp(i / 10.0f, posFromX, pos.x);
+                    double lerpY = Mth.lerp(i / 10.0f, posFromY, pos.y);
+                    double lerpZ = Mth.lerp(i / 10.0f, posFromZ, pos.z);
 
                     Particles.create(WizardsReborn.WISP_PARTICLE)
                             .addVelocity(-norm.x + ((random.nextDouble() - 0.5D) / 500), -norm.y + ((random.nextDouble() - 0.5D) / 500), -norm.z + ((random.nextDouble() - 0.5D) / 500))

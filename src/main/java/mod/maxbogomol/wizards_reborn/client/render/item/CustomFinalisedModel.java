@@ -1,39 +1,41 @@
 package mod.maxbogomol.wizards_reborn.client.render.item;
 
-import net.minecraft.block.BlockState;
-import net.minecraft.client.renderer.model.BakedQuad;
-import net.minecraft.client.renderer.model.IBakedModel;
-import net.minecraft.client.renderer.model.ItemCameraTransforms;
-import net.minecraft.client.renderer.model.ItemOverrideList;
+import net.minecraft.util.RandomSource;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.client.renderer.block.model.BakedQuad;
+import net.minecraft.client.resources.model.BakedModel;
+import net.minecraft.client.renderer.block.model.ItemTransforms;
+import net.minecraft.client.renderer.block.model.ItemOverrides;
 import net.minecraft.client.renderer.texture.TextureAtlasSprite;
-import net.minecraft.util.Direction;
+import net.minecraft.core.Direction;
 
 import javax.annotation.Nullable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
-public class CustomFinalisedModel implements IBakedModel {
+public class CustomFinalisedModel implements BakedModel {
 
-    public CustomFinalisedModel(IBakedModel i_parentModel, IBakedModel i_subModel)
+    public CustomFinalisedModel(BakedModel i_parentModel, BakedModel i_subModel)
     {
         parentModel = i_parentModel;
         subModel = i_subModel;
     }
+
     @Override
-    public List<BakedQuad> getQuads(@Nullable BlockState state, @Nullable Direction side, Random rand) {
-        if (side != null) {
-            return parentModel.getQuads(state, side, rand);
+    public List<BakedQuad> getQuads(BlockState pState, Direction pDirection, RandomSource pRandom) {
+        if (pDirection != null) {
+            return parentModel.getQuads(pState, pDirection, pRandom);
         }
 
-        List<BakedQuad> combinedQuadsList = new ArrayList(parentModel.getQuads(state, side, rand));
-        combinedQuadsList.addAll(subModel.getQuads(state, side, rand));
+        List<BakedQuad> combinedQuadsList = new ArrayList(parentModel.getQuads(pState, pDirection, pRandom));
+        combinedQuadsList.addAll(subModel.getQuads(pState, pDirection, pRandom));
         return combinedQuadsList;
     }
 
     @Override
-    public boolean isAmbientOcclusion() {
-        return parentModel.isAmbientOcclusion();
+    public boolean useAmbientOcclusion() {
+        return parentModel.useAmbientOcclusion();
     }
 
     @Override
@@ -42,29 +44,29 @@ public class CustomFinalisedModel implements IBakedModel {
     }
 
     @Override
-    public boolean isSideLit() {
+    public boolean usesBlockLight() {
         return false;
     }
 
     @Override
-    public boolean isBuiltInRenderer() {
-        return parentModel.isBuiltInRenderer();
+    public boolean isCustomRenderer() {
+        return parentModel.isCustomRenderer();
     }
 
     @Override
-    public TextureAtlasSprite getParticleTexture() {
-        return parentModel.getParticleTexture();
+    public TextureAtlasSprite getParticleIcon() {
+        return parentModel.getParticleIcon();
     }
 
     @Override
-    public ItemCameraTransforms getItemCameraTransforms() {
-        return parentModel.getItemCameraTransforms();
+    public ItemTransforms getTransforms() {
+        return parentModel.getTransforms();
     }
 
     @Override
-    public ItemOverrideList getOverrides() {
+    public ItemOverrides getOverrides() {
         throw new UnsupportedOperationException("The finalised model does not have an override list.");
     }
-    private IBakedModel parentModel;
-    private IBakedModel subModel;
+    private BakedModel parentModel;
+    private BakedModel subModel;
 }

@@ -1,12 +1,14 @@
 package mod.maxbogomol.wizards_reborn.client.arcanemicon;
 
 import com.google.common.collect.Lists;
-import com.mojang.blaze3d.matrix.MatrixStack;
+import com.mojang.blaze3d.systems.RenderSystem;
+import com.mojang.blaze3d.vertex.PoseStack;
 import mod.maxbogomol.wizards_reborn.WizardsReborn;
 import mod.maxbogomol.wizards_reborn.api.spell.Spell;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.resources.I18n;
-import net.minecraft.util.ResourceLocation;
+import net.minecraft.client.gui.GuiGraphics;
+import net.minecraft.client.resources.language.I18n;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 
@@ -25,18 +27,16 @@ public class SpellPage extends Page {
 
     @Override
     @OnlyIn(Dist.CLIENT)
-    public void render(ArcanemiconGui gui, MatrixStack mStack, int x, int y, int mouseX, int mouseY) {
-        drawWrappingText(gui, mStack, I18n.format(text), x + 4, y + 4, 124);
+    public void render(ArcanemiconGui book, GuiGraphics gui, int x, int y, int mouseX, int mouseY) {
+        drawWrappingText(book, gui, I18n.get(text), x + 4, y + 4, 124);
 
-        Minecraft.getInstance().getTextureManager().bindTexture(spell.getIcon());
-        gui.blit(mStack, x + 56, y + 133, 0, 0, 16, 16, 16, 16);
+        gui.blit(spell.getIcon(), x + 56, y + 133, 0, 0, 16, 16, 16, 16);
         for (int i = 0; i < spell.getCrystalTypes().size(); i ++) {
             int w = 0;
             if (i >= 4) {
                 w = 78;
             }
-            Minecraft.getInstance().getTextureManager().bindTexture(spell.getCrystalTypes().get(i).getIcon());
-            gui.blit(mStack, x + 3, y + 130 + (i * 9) + w, 0, 0, 8, 8, 8, 8);
+            gui.blit(spell.getCrystalTypes().get(i).getIcon(), x + 3, y + 130 + (i * 9) + w, 0, 0, 8, 8, 8, 8);
         }
     }
 }

@@ -1,10 +1,11 @@
 package mod.maxbogomol.wizards_reborn.client.arcanemicon;
 
-import com.mojang.blaze3d.matrix.MatrixStack;
+import com.mojang.blaze3d.vertex.PoseStack;
 import mod.maxbogomol.wizards_reborn.client.event.ClientTickHandler;
 import mod.maxbogomol.wizards_reborn.utils.RenderUtils;
 import net.minecraft.client.Minecraft;
-import net.minecraft.item.ItemStack;
+import net.minecraft.client.gui.GuiGraphics;
+import net.minecraft.world.item.ItemStack;
 
 public class BlockEntry {
     public ItemStack block;
@@ -25,10 +26,10 @@ public class BlockEntry {
         this.item = ItemStack.EMPTY;
     }
 
-    public void render(MatrixStack matrixStack, int x, int y, int mouseX, int mouseY) {
-        Minecraft.getInstance().getItemRenderer().renderItemAndEffectIntoGUI(block, x, y);
+    public void render(GuiGraphics gui, int x, int y, int mouseX, int mouseY) {
+        gui.renderItemDecorations(Minecraft.getInstance().font, block, x, y, null);
 
-        float partialTicks = Minecraft.getInstance().getRenderPartialTicks();
+        float partialTicks = Minecraft.getInstance().getFrameTime();
         double ticks = (ClientTickHandler.ticksInGame + partialTicks) * 2;
         double ticksUp = (ClientTickHandler.ticksInGame + partialTicks) * 4;
         ticksUp = (ticksUp) % 360;
@@ -36,7 +37,7 @@ public class BlockEntry {
         RenderUtils.renderFloatingItemModelIntoGUI(item, x, y - 12, (float) ticks, (float) ticksUp);
     }
 
-    public void drawTooltip(ArcanemiconGui gui, MatrixStack mStack, int x, int y, int mouseX, int mouseY) {
+    public void drawTooltip(ArcanemiconGui gui, int x, int y, int mouseX, int mouseY) {
         boolean hover = mouseX >= x && mouseY >= y && mouseX <= x + 16 && mouseY <= y + 16;
         if (hover) gui.currentItem = block;
 

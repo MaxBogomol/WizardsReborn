@@ -1,34 +1,39 @@
 package mod.maxbogomol.wizards_reborn.client.render.item;
 
-import net.minecraft.block.BlockState;
-import net.minecraft.client.renderer.model.*;
+import net.minecraft.util.RandomSource;
+import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.client.renderer.texture.TextureAtlasSprite;
-import net.minecraft.util.Direction;
+import net.minecraft.core.Direction;
 
 import javax.annotation.Nullable;
 import java.util.List;
 import java.util.Random;
 
-public class CustomModel implements IBakedModel {
-    public CustomModel(IBakedModel i_baseModel, CustomModelOverrideList i_itemOverrideList)
+import net.minecraft.client.renderer.block.model.BakedQuad;
+import net.minecraft.client.renderer.block.model.ItemOverrides;
+import net.minecraft.client.renderer.block.model.ItemTransforms;
+import net.minecraft.client.resources.model.BakedModel;
+
+public class CustomModel implements BakedModel {
+    public CustomModel(BakedModel i_baseModel, CustomModelOverrideList i_itemOverrideList)
     {
         baseModel = i_baseModel;
         itemOverrideList = i_itemOverrideList;
     }
 
     @Override
-    public List<BakedQuad> getQuads(@Nullable BlockState state, @Nullable Direction side, Random rand) {
-        return baseModel.getQuads(state, side, rand);
-    }
-
-    @Override
-    public ItemOverrideList getOverrides() {
+    public ItemOverrides getOverrides() {
         return itemOverrideList;
     }
 
     @Override
-    public boolean isAmbientOcclusion() {
-        return baseModel.isAmbientOcclusion();
+    public List<BakedQuad> getQuads(BlockState pState, Direction pDirection, RandomSource pRandom) {
+        return baseModel.getQuads(pState, pDirection, pRandom);
+    }
+
+    @Override
+    public boolean useAmbientOcclusion() {
+        return baseModel.useAmbientOcclusion();
     }
 
     @Override
@@ -37,26 +42,26 @@ public class CustomModel implements IBakedModel {
     }
 
     @Override
-    public boolean isSideLit() {
-        return baseModel.isSideLit();
+    public boolean usesBlockLight() {
+        return baseModel.usesBlockLight();
     }
 
     @Override
-    public boolean isBuiltInRenderer() {
-        return baseModel.isBuiltInRenderer();
+    public boolean isCustomRenderer() {
+        return baseModel.isCustomRenderer();
     }
 
     @Override
-    public TextureAtlasSprite getParticleTexture() {
-        return baseModel.getParticleTexture();
+    public TextureAtlasSprite getParticleIcon() {
+        return baseModel.getParticleIcon();
     }
 
     @Override
-    public ItemCameraTransforms getItemCameraTransforms() {
-        return baseModel.getItemCameraTransforms();
+    public ItemTransforms getTransforms() {
+        return baseModel.getTransforms();
     }
 
-    private IBakedModel baseModel;
+    private BakedModel baseModel;
     private CustomModelOverrideList itemOverrideList;
 
 }

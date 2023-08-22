@@ -1,12 +1,14 @@
 package mod.maxbogomol.wizards_reborn.client.arcanemicon;
 
-import com.mojang.blaze3d.matrix.MatrixStack;
+import com.mojang.blaze3d.systems.RenderSystem;
+import com.mojang.blaze3d.vertex.PoseStack;
 import mod.maxbogomol.wizards_reborn.WizardsReborn;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.resources.I18n;
-import net.minecraft.util.ResourceLocation;
-import net.minecraft.util.SoundCategory;
-import net.minecraft.util.SoundEvents;
+import net.minecraft.client.gui.GuiGraphics;
+import net.minecraft.client.resources.language.I18n;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.sounds.SoundSource;
+import net.minecraft.sounds.SoundEvents;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 
@@ -25,7 +27,7 @@ public class IndexPage extends Page {
         for (int i = 0; i < entries.length; i ++) if (entries[i].isUnlocked()) {
             if (mouseX >= x + 2 && mouseX <= x + 124 && mouseY >= y + 8 + i * 20 && mouseY <= y + 26 + i * 20) {
                 gui.changeChapter(entries[i].chapter);
-                Minecraft.getInstance().player.playSound(SoundEvents.ITEM_BOOK_PAGE_TURN, SoundCategory.NEUTRAL, 1.0f, 1.0f);
+                Minecraft.getInstance().player.playNotifySound(SoundEvents.BOOK_PAGE_TURN, SoundSource.NEUTRAL, 1.0f, 1.0f);
                 return true;
             }
         }
@@ -34,20 +36,18 @@ public class IndexPage extends Page {
 
     @Override
     @OnlyIn(Dist.CLIENT)
-    public void render(ArcanemiconGui gui, MatrixStack mStack, int x, int y, int mouseX, int mouseY) {
-        Minecraft.getInstance().getTextureManager().bindTexture(BACKGROUND);
+    public void render(ArcanemiconGui book, GuiGraphics gui, int x, int y, int mouseX, int mouseY) {
         for (int i = 0; i < entries.length; i ++) {
-            gui.blit(mStack, x, y + 7 + (i * 20), 128, 20, 128, 18);
+            gui.blit(BACKGROUND, x, y + 7 + (i * 20), 128, 20, 128, 18);
         }
 
         for (int i = 0; i < entries.length; i ++) {
             if (entries[i].isUnlocked()) {
-                Minecraft.getInstance().getItemRenderer().renderItemAndEffectIntoGUI(entries[i].icon, x + 3, y + 8 + i * 20);
-                drawText(gui, mStack, I18n.format(entries[i].chapter.titleKey), x + 24, y + 20 + i * 20 - Minecraft.getInstance().fontRenderer.FONT_HEIGHT);
+                gui.renderItemDecorations(Minecraft.getInstance().font, entries[i].icon,x + 3, y + 8 + i * 20, null);
+                drawText(book, gui, I18n.get(entries[i].chapter.titleKey), x + 24, y + 20 + i * 20 - Minecraft.getInstance().font.lineHeight);
             } else {
-                Minecraft.getInstance().getTextureManager().bindTexture(new ResourceLocation(WizardsReborn.MOD_ID, "textures/gui/arcanemicon_unknown.png"));
-                gui.blit(mStack, x + 3, y + 8 + i * 20, 0, 0, 16, 16, 16, 16);
-                drawText(gui, mStack, I18n.format("wizards_reborn.arcanemicon.unknown"), x + 24, y + 20 + i * 20 - Minecraft.getInstance().fontRenderer.FONT_HEIGHT);
+                gui.blit(new ResourceLocation(WizardsReborn.MOD_ID, "textures/gui/arcanemicon_unknown.png"), x + 3, y + 8 + i * 20, 0, 0, 16, 16, 16, 16);
+                drawText(book, gui, I18n.get("wizards_reborn.arcanemicon.unknown"), x + 24, y + 20 + i * 20 - Minecraft.getInstance().font.lineHeight);
             }
         }
     }

@@ -6,9 +6,9 @@ import mod.maxbogomol.wizards_reborn.common.item.equipment.ArcaneWandItem;
 import mod.maxbogomol.wizards_reborn.common.network.DeleteCrystalPacket;
 import mod.maxbogomol.wizards_reborn.common.network.PacketHandler;
 import net.minecraft.client.Minecraft;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.item.ItemStack;
-import net.minecraft.util.text.StringTextComponent;
+import net.minecraft.network.chat.Component;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.client.event.InputEvent;
@@ -22,12 +22,12 @@ public class KeyBindHandler {
     private KeyBindHandler() {}
 
     @SubscribeEvent
-    public static void onKeyPress (InputEvent.KeyInputEvent event) {
-        if (WizardsReborn.OPEN_WAND_SELECTION_KEY.isKeyDown()) {
+    public static void onKeyPress (InputEvent.InteractionKeyMappingTriggered event) {
+        if (WizardsReborn.OPEN_WAND_SELECTION_KEY.isDown()) {
             Minecraft mc = Minecraft.getInstance();
-            PlayerEntity player = mc.player;
-            ItemStack main = mc.player.getHeldItemMainhand();
-            ItemStack offhand = mc.player.getHeldItemOffhand();
+            Player player = mc.player;
+            ItemStack main = mc.player.getMainHandItem();
+            ItemStack offhand = mc.player.getOffhandItem();
             boolean open = false;
             boolean hand = true;
 
@@ -40,9 +40,9 @@ public class KeyBindHandler {
                 }
             }
 
-            if (open && !player.isSneaking()) {
-                Minecraft.getInstance().displayGuiScreen(new CrystalChooseScreen(new StringTextComponent("")));
-            } else if (open && player.isSneaking()) {
+            if (open && !player.isShiftKeyDown()) {
+                Minecraft.getInstance().setScreen(new CrystalChooseScreen(Component.empty()));
+            } else if (open && player.isShiftKeyDown()) {
                 PacketHandler.sendToServer(new DeleteCrystalPacket(hand));
             }
         }

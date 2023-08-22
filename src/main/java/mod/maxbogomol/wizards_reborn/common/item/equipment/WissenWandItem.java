@@ -4,26 +4,26 @@ import mod.maxbogomol.wizards_reborn.api.wissen.IWissenTileEntity;
 import mod.maxbogomol.wizards_reborn.api.wissen.IWissenWandFunctionalTileEntity;
 import mod.maxbogomol.wizards_reborn.utils.PacketUtils;
 import mod.maxbogomol.wizards_reborn.common.tileentity.WissenTranslatorTileEntity;
-import net.minecraft.client.util.ITooltipFlag;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
-import net.minecraft.item.ItemUseContext;
-import net.minecraft.nbt.CompoundNBT;
-import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.ActionResult;
-import net.minecraft.util.ActionResultType;
-import net.minecraft.util.Hand;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.text.ITextComponent;
-import net.minecraft.util.text.StringTextComponent;
-import net.minecraft.util.text.TextFormatting;
-import net.minecraft.util.text.TranslationTextComponent;
-import net.minecraft.world.World;
+import net.minecraft.world.item.TooltipFlag;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.context.UseOnContext;
+import net.minecraft.nbt.CompoundTag;
+import net.minecraft.world.level.block.entity.BlockEntity;
+import net.minecraft.world.InteractionResultHolder;
+import net.minecraft.world.InteractionResult;
+import net.minecraft.world.InteractionHand;
+import net.minecraft.core.BlockPos;
+import net.minecraft.network.chat.Component;
+import net.minecraft.ChatFormatting;
+import net.minecraft.world.level.Level;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 
 import java.util.List;
+
+import net.minecraft.world.item.Item.Properties;
 
 public class WissenWandItem extends Item {
     public WissenWandItem(Properties properties) {
@@ -39,13 +39,13 @@ public class WissenWandItem extends Item {
     }
 
     @Override
-    public ActionResult<ItemStack> onItemRightClick(World world, PlayerEntity player, Hand hand) {
-        ItemStack stack = player.getHeldItem(hand);
+    public InteractionResultHolder<ItemStack> use(Level world, Player player, InteractionHand hand) {
+        ItemStack stack = player.getItemInHand(hand);
 
-        if (player.isSneaking()) {
-            CompoundNBT nbt = stack.getTag();
+        if (player.isShiftKeyDown()) {
+            CompoundTag nbt = stack.getTag();
             if (nbt==null) {
-                nbt = new CompoundNBT();
+                nbt = new CompoundTag();
                 stack.setTag(nbt);
             }
 
@@ -61,21 +61,21 @@ public class WissenWandItem extends Item {
             }
 
             stack.setTag(nbt);
-            player.sendStatusMessage(getModeTranslate(stack), true);
+            player.displayClientMessage(getModeTranslate(stack), true);
         }
 
-        return new ActionResult<ItemStack>(ActionResultType.SUCCESS, stack);
+        return new InteractionResultHolder<ItemStack>(InteractionResult.SUCCESS, stack);
     }
 
     @Override
-    public ActionResultType onItemUseFirst(ItemStack stack, ItemUseContext context) {
-        World world = context.getWorld();
+    public InteractionResult onItemUseFirst(ItemStack stack, UseOnContext context) {
+        Level world = context.getLevel();
 
-        if(!world.isRemote) {
-            TileEntity tileentity = world.getTileEntity(context.getPos());
-            CompoundNBT nbt = stack.getTag();
+        if(!world.isClientSide) {
+            BlockEntity tileentity = world.getBlockEntity(context.getClickedPos());
+            CompoundTag nbt = stack.getTag();
             if (nbt == null) {
-                nbt = new CompoundNBT();
+                nbt = new CompoundTag();
                 stack.setTag(nbt);
             }
 
@@ -92,22 +92,22 @@ public class WissenWandItem extends Item {
 
                     if (!nbt.getBoolean("block")) {
                         if (((nbt.getInt("mode") == 1) && wissenTile.canConnectReceiveWissen()) || ((nbt.getInt("mode") == 2) && wissenTile.canConnectSendWissen())) {
-                            nbt.putInt("blockX", context.getPos().getX());
-                            nbt.putInt("blockY", context.getPos().getY());
-                            nbt.putInt("blockZ", context.getPos().getZ());
+                            nbt.putInt("blockX", context.getClickedPos().getX());
+                            nbt.putInt("blockY", context.getClickedPos().getY());
+                            nbt.putInt("blockZ", context.getClickedPos().getZ());
                             nbt.putBoolean("block", true);
                         }
                     } else {
                         if (tileentity instanceof WissenTranslatorTileEntity) {
                             WissenTranslatorTileEntity translator = (WissenTranslatorTileEntity) tileentity;
                             BlockPos blockPos = new BlockPos(nbt.getInt("blockX"), nbt.getInt("blockY"), nbt.getInt("blockZ"));
-                            TileEntity oldTileentity = world.getTileEntity(blockPos);
+                            BlockEntity oldTileentity = world.getBlockEntity(blockPos);
 
-                            if (!context.getPlayer().isSneaking()) {
+                            if (!context.getPlayer().isShiftKeyDown()) {
                                 if (nbt.getInt("mode") == 1) {
                                     if (oldTileentity instanceof IWissenTileEntity) {
                                         IWissenTileEntity wissenTileentity = (IWissenTileEntity) oldTileentity;
-                                        if ((!translator.isSameFromAndTo(translator.getPos(), blockPos)) && (wissenTileentity.canConnectReceiveWissen())) {
+                                        if ((!translator.isSameFromAndTo(translator.getBlockPos(), blockPos)) && (wissenTileentity.canConnectReceiveWissen())) {
                                             translator.blockFromX = nbt.getInt("blockX");
                                             translator.blockFromY = nbt.getInt("blockY");
                                             translator.blockFromZ = nbt.getInt("blockZ");
@@ -119,7 +119,7 @@ public class WissenWandItem extends Item {
                                 } else if (nbt.getInt("mode") == 2) {
                                     if (oldTileentity instanceof IWissenTileEntity) {
                                         IWissenTileEntity wissenTileentity = (IWissenTileEntity) oldTileentity;
-                                        if ((!translator.isSameFromAndTo(translator.getPos(), blockPos)) && (wissenTileentity.canConnectSendWissen())) {
+                                        if ((!translator.isSameFromAndTo(translator.getBlockPos(), blockPos)) && (wissenTileentity.canConnectSendWissen())) {
                                             translator.blockToX = nbt.getInt("blockX");
                                             translator.blockToY = nbt.getInt("blockY");
                                             translator.blockToZ = nbt.getInt("blockZ");
@@ -157,18 +157,18 @@ public class WissenWandItem extends Item {
 
     @OnlyIn(Dist.CLIENT)
     @Override
-    public void addInformation(ItemStack stack, World world, List<ITextComponent> list, ITooltipFlag flags) {
-        list.add(new TranslationTextComponent(getModeString(stack)).mergeStyle(getModeColor(stack)));
+    public void appendHoverText(ItemStack stack, Level world, List<Component> list, TooltipFlag flags) {
+        list.add(Component.translatable(getModeString(stack)).withStyle(getModeColor(stack)));
     }
 
     @Override
-    public ITextComponent getHighlightTip(ItemStack stack, ITextComponent displayName) {
-        ITextComponent mode = getModeTranslate(stack);
-        return displayName.deepCopy().appendSibling(mode);
+    public Component getHighlightTip(ItemStack stack, Component displayName) {
+        Component mode = getModeTranslate(stack);
+        return displayName.copy().append(mode);
     }
 
     public static String getModeString(ItemStack stack) {
-        CompoundNBT nbt = stack.getTag();
+        CompoundTag nbt = stack.getTag();
         if (nbt != null) {
             if (nbt.contains("mode")) {
                 switch (nbt.getInt("mode")) {
@@ -189,32 +189,32 @@ public class WissenWandItem extends Item {
         return "lore.wizards_reborn.wissen_wand_mode.functional";
     }
 
-    public static TextFormatting getModeColor(ItemStack stack) {
-        CompoundNBT nbt = stack.getTag();
+    public static ChatFormatting getModeColor(ItemStack stack) {
+        CompoundTag nbt = stack.getTag();
         if (nbt != null) {
             if (nbt.contains("mode")) {
                 switch (nbt.getInt("mode")) {
                     case 0:
-                        return TextFormatting.DARK_AQUA;
+                        return ChatFormatting.DARK_AQUA;
                     case 1:
-                        return TextFormatting.GREEN;
+                        return ChatFormatting.GREEN;
                     case 2:
-                        return TextFormatting.AQUA;
+                        return ChatFormatting.AQUA;
                     case 3:
-                        return TextFormatting.YELLOW;
+                        return ChatFormatting.YELLOW;
                     case 4:
-                        return TextFormatting.GRAY;
+                        return ChatFormatting.GRAY;
                 }
             }
         }
 
-        return TextFormatting.DARK_AQUA;
+        return ChatFormatting.DARK_AQUA;
     }
 
-    public static ITextComponent getModeTranslate(ItemStack stack) {
-        ITextComponent mode = new StringTextComponent(" (")
-                .appendSibling(new TranslationTextComponent(getModeString(stack)).mergeStyle(getModeColor(stack)))
-                .appendString(")");
+    public static Component getModeTranslate(ItemStack stack) {
+        Component mode = Component.literal(" (")
+                .append(Component.translatable(getModeString(stack)).withStyle(getModeColor(stack)))
+                .append(")");
         return mode;
     }
 }

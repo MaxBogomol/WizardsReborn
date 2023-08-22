@@ -1,15 +1,17 @@
 package mod.maxbogomol.wizards_reborn.common.tileentity;
 
 import mod.maxbogomol.wizards_reborn.WizardsReborn;
-import net.minecraft.tileentity.TileEntity;
-import net.minecraft.tileentity.TileEntityType;
+import net.minecraft.core.BlockPos;
+import net.minecraft.world.level.block.entity.BlockEntity;
+import net.minecraft.world.level.block.entity.BlockEntityType;
+import net.minecraft.world.level.block.state.BlockState;
 
-public class CrystalTileEntity extends TileEntity {
-    public CrystalTileEntity(TileEntityType<?> tileEntityTypeIn) {
-        super(tileEntityTypeIn);
+public class CrystalTileEntity extends BlockEntity {
+    public CrystalTileEntity(BlockEntityType<?> type, BlockPos pos, BlockState state) {
+        super(type, pos, state);
     }
 
-    public CrystalTileEntity() {
-        this(WizardsReborn.CRYSTAL_TILE_ENTITY.get());
+    public CrystalTileEntity(BlockPos pos, BlockState state) {
+        this(WizardsReborn.CRYSTAL_TILE_ENTITY.get(), pos, state);
     }
 }

@@ -1,7 +1,5 @@
 package mod.maxbogomol.wizards_reborn.api.monogram;
 
-import net.minecraft.util.NonNullList;
-
 import javax.annotation.Nonnull;
 import java.util.ArrayList;
 import java.util.HashMap;

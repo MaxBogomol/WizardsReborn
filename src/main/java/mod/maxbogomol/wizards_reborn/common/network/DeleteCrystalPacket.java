@@ -1,15 +1,15 @@
 package mod.maxbogomol.wizards_reborn.common.network;
 
 import mod.maxbogomol.wizards_reborn.common.item.equipment.ArcaneWandItem;
-import net.minecraft.entity.player.ServerPlayerEntity;
-import net.minecraft.inventory.Inventory;
-import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.CompoundNBT;
-import net.minecraft.network.PacketBuffer;
-import net.minecraft.util.Hand;
-import net.minecraftforge.fml.network.NetworkEvent;
+import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.world.SimpleContainer;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.nbt.CompoundTag;
+import net.minecraft.network.FriendlyByteBuf;
+import net.minecraft.world.InteractionHand;
+import net.minecraftforge.network.NetworkEvent;
 
-import java.util.function.Supplier;
+import java.util.function.Supplier;;
 
 public class DeleteCrystalPacket {
     private static boolean hand;
@@ -18,30 +18,30 @@ public class DeleteCrystalPacket {
         this.hand = hand;
     }
 
-    public static DeleteCrystalPacket decode(PacketBuffer buf) {
+    public static DeleteCrystalPacket decode(FriendlyByteBuf buf) {
         return new DeleteCrystalPacket(buf.readBoolean());
     }
 
-    public void encode(PacketBuffer buf) {
+    public void encode(FriendlyByteBuf buf) {
         buf.writeBoolean(hand);
     }
 
     public static void handle(DeleteCrystalPacket msg, Supplier<NetworkEvent.Context> ctx) {
         if (ctx.get().getDirection().getReceptionSide().isServer()) {
             ctx.get().enqueueWork(() -> {
-                ServerPlayerEntity player = ctx.get().getSender();
+                ServerPlayer player = ctx.get().getSender();
 
-                ItemStack stack = player.getHeldItem(Hand.MAIN_HAND);
+                ItemStack stack = player.getItemInHand(InteractionHand.MAIN_HAND);
                 if (!hand) {
-                    stack = player.getHeldItem(Hand.OFF_HAND);
+                    stack = player.getItemInHand(InteractionHand.OFF_HAND);
                 }
 
-                Inventory stack_inv = ArcaneWandItem.getInventory(stack);
-                CompoundNBT nbt = stack.getTag();
+                SimpleContainer stack_inv = ArcaneWandItem.getInventory(stack);
+                CompoundTag nbt = stack.getTag();
 
-                player.inventory.addItemStackToInventory(stack_inv.getStackInSlot(0));
+                player.getInventory().add(stack_inv.getItem(0));
 
-                stack_inv.clear();
+                stack_inv.clearContent();
                 nbt.putBoolean("crystal", false);
             });
         }

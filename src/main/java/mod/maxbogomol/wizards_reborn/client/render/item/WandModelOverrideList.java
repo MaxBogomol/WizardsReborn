@@ -1,12 +1,12 @@
 package mod.maxbogomol.wizards_reborn.client.render.item;
 
 import mod.maxbogomol.wizards_reborn.common.item.equipment.ArcaneWandItem;
-import net.minecraft.client.renderer.model.IBakedModel;
-import net.minecraft.client.world.ClientWorld;
-import net.minecraft.entity.LivingEntity;
-import net.minecraft.inventory.Inventory;
-import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.CompoundNBT;
+import net.minecraft.client.resources.model.BakedModel;
+import net.minecraft.client.multiplayer.ClientLevel;
+import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.SimpleContainer;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.nbt.CompoundTag;
 
 import javax.annotation.Nullable;
 
@@ -18,14 +18,14 @@ public class WandModelOverrideList extends CustomModelOverrideList {
     }
 
     @Override
-    public IBakedModel getOverrideModel(IBakedModel originalModel, ItemStack stack, @Nullable ClientWorld world, @Nullable LivingEntity entity)
+    public BakedModel resolve(BakedModel originalModel, ItemStack stack, @Nullable ClientLevel world, @Nullable LivingEntity entity, int pSeed)
     {
-        CompoundNBT nbt = stack.getTag();
+        CompoundTag nbt = stack.getTag();
         if (nbt != null) {
             if (nbt.getBoolean("crystal")) {
-                Inventory stack_inv = ArcaneWandItem.getInventory(stack);
+                SimpleContainer stack_inv = ArcaneWandItem.getInventory(stack);
 
-                return WandCrystalsModels.getModel(stack_inv.getStackInSlot(0).getItem().getRegistryName().toString());
+                return WandCrystalsModels.getModel(stack_inv.getItem(0).getItem().getDescriptionId().toString());
             }
         }
         return originalModel;

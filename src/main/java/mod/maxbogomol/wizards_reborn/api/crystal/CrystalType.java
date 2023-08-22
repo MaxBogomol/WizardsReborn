@@ -1,7 +1,7 @@
 package mod.maxbogomol.wizards_reborn.api.crystal;
 
 import mod.maxbogomol.wizards_reborn.WizardsReborn;
-import net.minecraft.util.ResourceLocation;
+import net.minecraft.resources.ResourceLocation;
 
 import java.awt.*;
 

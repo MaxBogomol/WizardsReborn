@@ -1,9 +1,10 @@
 package mod.maxbogomol.wizards_reborn.client.arcanemicon;
 
-import com.mojang.blaze3d.matrix.MatrixStack;
+import com.mojang.blaze3d.vertex.PoseStack;
 import mod.maxbogomol.wizards_reborn.WizardsReborn;
-import net.minecraft.item.ItemStack;
-import net.minecraft.util.ResourceLocation;
+import net.minecraft.client.gui.GuiGraphics;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 
@@ -20,8 +21,8 @@ public class SmeltingPage extends Page {
 
     @Override
     @OnlyIn(Dist.CLIENT)
-    public void render(ArcanemiconGui gui, MatrixStack mStack, int x, int y, int mouseX, int mouseY) {
-        drawItem(gui, mStack, input,x + 56, y + 18, mouseX, mouseY);
-        drawItem(gui, mStack, result,x + 56, y + 123, mouseX, mouseY);
+    public void render(ArcanemiconGui book, GuiGraphics gui, int x, int y, int mouseX, int mouseY) {
+        drawItem(book, gui, input,x + 56, y + 18, mouseX, mouseY);
+        drawItem(book, gui, result,x + 56, y + 123, mouseX, mouseY);
     }
 }

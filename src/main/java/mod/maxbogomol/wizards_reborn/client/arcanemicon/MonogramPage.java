@@ -1,11 +1,13 @@
 package mod.maxbogomol.wizards_reborn.client.arcanemicon;
 
-import com.mojang.blaze3d.matrix.MatrixStack;
+import com.mojang.blaze3d.systems.RenderSystem;
+import com.mojang.blaze3d.vertex.PoseStack;
 import mod.maxbogomol.wizards_reborn.WizardsReborn;
 import mod.maxbogomol.wizards_reborn.api.monogram.Monogram;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.resources.I18n;
-import net.minecraft.util.ResourceLocation;
+import net.minecraft.client.gui.GuiGraphics;
+import net.minecraft.client.resources.language.I18n;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 
@@ -22,12 +24,11 @@ public class MonogramPage extends Page {
 
     @Override
     @OnlyIn(Dist.CLIENT)
-    public void render(ArcanemiconGui gui, MatrixStack mStack, int x, int y, int mouseX, int mouseY) {
-        drawWrappingText(gui, mStack, I18n.format(text), x + 4, y + 4, 124);
+    public void render(ArcanemiconGui book, GuiGraphics gui, int x, int y, int mouseX, int mouseY) {
+        drawWrappingText(book, gui, I18n.get(text), x + 4, y + 4, 124);
 
-        Minecraft.getInstance().getTextureManager().bindTexture(BACKGROUND);
-        gui.blit(mStack, x + 49, y + 126, 128, 20, 30, 30);
+        gui.blit(BACKGROUND, x + 49, y + 126, 128, 20, 30, 30);
 
-        monogram.renderArcanemiconIcon(gui, mStack, x + 56, y + 133);
+        monogram.renderArcanemiconIcon(book, gui, x + 56, y + 133);
     }
 }

@@ -1,17 +1,17 @@
 package mod.maxbogomol.wizards_reborn.common.network;
 
 import mod.maxbogomol.wizards_reborn.WizardsReborn;
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.player.ServerPlayerEntity;
-import net.minecraft.util.ResourceLocation;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.ChunkPos;
-import net.minecraft.world.World;
-import net.minecraft.world.server.ServerWorld;
-import net.minecraftforge.fml.network.NetworkDirection;
-import net.minecraftforge.fml.network.NetworkRegistry;
-import net.minecraftforge.fml.network.PacketDistributor;
-import net.minecraftforge.fml.network.simple.SimpleChannel;
+import net.minecraft.world.entity.Entity;
+import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.core.BlockPos;
+import net.minecraft.world.level.ChunkPos;
+import net.minecraft.world.level.Level;
+import net.minecraft.server.level.ServerLevel;
+import net.minecraftforge.network.NetworkDirection;
+import net.minecraftforge.network.NetworkRegistry;
+import net.minecraftforge.network.PacketDistributor;
+import net.minecraftforge.network.simple.SimpleChannel;
 
 public final class PacketHandler {
     private static final String PROTOCOL = "10";
@@ -44,31 +44,25 @@ public final class PacketHandler {
         HANDLER.registerMessage(id++, SpellProjectileRayEffectPacket.class, SpellProjectileRayEffectPacket::encode, SpellProjectileRayEffectPacket::decode, SpellProjectileRayEffectPacket::handle);
     }
 
-    public static void sendToNearby(World world, BlockPos pos, Object toSend) {
-        if (world instanceof ServerWorld) {
-            ServerWorld ws = (ServerWorld) world;
-
-            ws.getChunkProvider().chunkManager.getTrackingPlayers(new ChunkPos(pos), false)
-                    .filter(p -> p.getDistanceSq(pos.getX(), pos.getY(), pos.getZ()) < 64 * 64)
-                    .forEach(p -> HANDLER.send(PacketDistributor.PLAYER.with(() -> p), toSend));
-        }
+    public static void sendToNearby(Level world, BlockPos pos, Object toSend) {
+        sendToNearby(world, pos, toSend);
     }
 
-    public static void sendToNearby(World world, Entity e, Object toSend) {
-        sendToNearby(world, e.getPosition(), toSend);
+    public static void sendToNearby(Level world, Entity e, Object toSend) {
+        sendToNearby(world, e.blockPosition(), toSend);
     }
 
-    public static void sendTo(ServerPlayerEntity playerMP, Object toSend) {
-        HANDLER.sendTo(toSend, playerMP.connection.getNetworkManager(), NetworkDirection.PLAY_TO_CLIENT);
+    public static void sendTo(ServerPlayer playerMP, Object toSend) {
+        //HANDLER.sendTo(toSend, playerMP.connection.getConnection(), NetworkDirection.PLAY_TO_CLIENT);
     }
 
-    public static void sendNonLocal(ServerPlayerEntity playerMP, Object toSend) {
-        if (playerMP.server.isDedicatedServer() || !playerMP.getGameProfile().getName().equals(playerMP.server.getServerOwner())) {
+    public static void sendNonLocal(ServerPlayer playerMP, Object toSend) {
+        if (playerMP.server.isDedicatedServer() || !playerMP.getGameProfile().getName().equals(playerMP.server.getLocalIp())) {
             sendTo(playerMP, toSend);
         }
     }
 
-    public static void sendToTracking(World world, BlockPos pos, Object msg) {
+    public static void sendToTracking(Level world, BlockPos pos, Object msg) {
         HANDLER.send(PacketDistributor.TRACKING_CHUNK.with(() -> world.getChunkAt(pos)), msg);
     }
 

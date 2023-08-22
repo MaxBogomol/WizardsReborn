@@ -3,104 +3,97 @@ package mod.maxbogomol.wizards_reborn.common.block;
 import mod.maxbogomol.wizards_reborn.common.item.equipment.WissenWandItem;
 import mod.maxbogomol.wizards_reborn.common.tileentity.WissenCrystallizerTileEntity;
 import mod.maxbogomol.wizards_reborn.common.tileentity.TileSimpleInventory;
-import net.minecraft.block.Block;
-import net.minecraft.block.BlockState;
-import net.minecraft.block.ITileEntityProvider;
-import net.minecraft.block.IWaterLoggable;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.fluid.FluidState;
-import net.minecraft.fluid.Fluids;
-import net.minecraft.inventory.InventoryHelper;
-import net.minecraft.item.BlockItemUseContext;
-import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.CompoundNBT;
-import net.minecraft.state.StateContainer;
-import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.ActionResultType;
-import net.minecraft.util.Direction;
-import net.minecraft.util.Hand;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.BlockRayTraceResult;
-import net.minecraft.util.math.shapes.IBooleanFunction;
-import net.minecraft.util.math.shapes.ISelectionContext;
-import net.minecraft.util.math.shapes.VoxelShape;
-import net.minecraft.util.math.shapes.VoxelShapes;
-import net.minecraft.world.IBlockReader;
-import net.minecraft.world.IWorld;
-import net.minecraft.world.World;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.block.EntityBlock;
+import net.minecraft.world.level.block.SimpleWaterloggedBlock;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.level.block.state.properties.BlockStateProperties;
+import net.minecraft.world.level.material.FluidState;
+import net.minecraft.world.level.material.Fluids;
+import net.minecraft.world.Containers;
+import net.minecraft.world.item.context.BlockPlaceContext;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.nbt.CompoundTag;
+import net.minecraft.world.level.block.state.StateDefinition;
+import net.minecraft.world.level.block.entity.BlockEntity;
+import net.minecraft.world.InteractionResult;
+import net.minecraft.core.Direction;
+import net.minecraft.world.InteractionHand;
+import net.minecraft.core.BlockPos;
+import net.minecraft.world.phys.BlockHitResult;
+import net.minecraft.world.phys.shapes.BooleanOp;
+import net.minecraft.world.phys.shapes.CollisionContext;
+import net.minecraft.world.phys.shapes.VoxelShape;
+import net.minecraft.world.phys.shapes.Shapes;
+import net.minecraft.world.level.BlockGetter;
+import net.minecraft.world.level.LevelAccessor;
+import net.minecraft.world.level.Level;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import java.util.stream.Stream;
 
-import static net.minecraft.state.properties.BlockStateProperties.WATERLOGGED;
-
-public class WissenCrystallizerBlock extends Block implements ITileEntityProvider, IWaterLoggable {
+public class WissenCrystallizerBlock extends Block implements EntityBlock, SimpleWaterloggedBlock {
 
     private static final VoxelShape SHAPE = Stream.of(
-            Block.makeCuboidShape(5, 0, 5, 11, 2, 11),
-            Block.makeCuboidShape(6, 2, 6, 10, 8, 10),
-            Block.makeCuboidShape(4, 8, 4, 12, 10, 12),
-            Block.makeCuboidShape(2, 10, 2, 14, 12, 14),
-            Block.makeCuboidShape(6, 12, 6, 10, 15, 10),
-            Block.makeCuboidShape(2, 12, 2, 5, 14, 5),
-            Block.makeCuboidShape(11, 12, 2, 14, 14, 5),
-            Block.makeCuboidShape(11, 12, 11, 14, 14, 14),
-            Block.makeCuboidShape(2, 12, 11, 5, 14, 14)
-    ).reduce((v1, v2) -> VoxelShapes.combineAndSimplify(v1, v2, IBooleanFunction.OR)).get();
+            Block.box(5, 0, 5, 11, 2, 11),
+            Block.box(6, 2, 6, 10, 8, 10),
+            Block.box(4, 8, 4, 12, 10, 12),
+            Block.box(2, 10, 2, 14, 12, 14),
+            Block.box(6, 12, 6, 10, 15, 10),
+            Block.box(2, 12, 2, 5, 14, 5),
+            Block.box(11, 12, 2, 14, 14, 5),
+            Block.box(11, 12, 11, 14, 14, 14),
+            Block.box(2, 12, 11, 5, 14, 14)
+    ).reduce((v1, v2) -> Shapes.join(v1, v2, BooleanOp.OR)).get();
 
     public WissenCrystallizerBlock(Properties properties) {
         super(properties);
-        setDefaultState(getDefaultState().with(WATERLOGGED, false));
+        registerDefaultState(defaultBlockState().setValue(BlockStateProperties.WATERLOGGED, false));
     }
 
     @Nonnull
     @Override
-    public VoxelShape getShape(BlockState state, IBlockReader world, BlockPos pos, ISelectionContext ctx) {
+    public VoxelShape getShape(BlockState state, BlockGetter world, BlockPos pos, CollisionContext ctx) {
         return SHAPE;
     }
 
     @Override
-    protected void fillStateContainer(StateContainer.Builder<Block, BlockState> builder) {
-        builder.add(WATERLOGGED);
+    protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {
+        builder.add(BlockStateProperties.WATERLOGGED);
     }
 
     @Nullable
     @Override
-    public BlockState getStateForPlacement(BlockItemUseContext context) {
-        FluidState fluidState = context.getWorld().getFluidState(context.getPos());
-        return this.getDefaultState().with(WATERLOGGED, fluidState.getFluid() == Fluids.WATER);
-    }
-
-    @Nonnull
-    @Override
-    public TileEntity createNewTileEntity(@Nonnull IBlockReader world) {
-        return new WissenCrystallizerTileEntity();
+    public BlockState getStateForPlacement(BlockPlaceContext context) {
+        FluidState fluidState = context.getLevel().getFluidState(context.getClickedPos());
+        return this.defaultBlockState().setValue(BlockStateProperties.WATERLOGGED, fluidState.getType() == Fluids.WATER);
     }
 
     @Override
-    public void onReplaced(@Nonnull BlockState state, @Nonnull World world, @Nonnull BlockPos pos, @Nonnull BlockState newState, boolean isMoving) {
+    public void onRemove(@Nonnull BlockState state, @Nonnull Level world, @Nonnull BlockPos pos, @Nonnull BlockState newState, boolean isMoving) {
         if (state.getBlock() != newState.getBlock()) {
-            TileEntity tile = world.getTileEntity(pos);
+            BlockEntity tile = world.getBlockEntity(pos);
             if (tile instanceof TileSimpleInventory) {
-                InventoryHelper.dropInventoryItems(world, pos, ((TileSimpleInventory) tile).getItemHandler());
+                Containers.dropContents(world, pos, ((TileSimpleInventory) tile).getItemHandler());
             }
-            super.onReplaced(state, world, pos, newState, isMoving);
+            super.onRemove(state, world, pos, newState, isMoving);
         }
     }
 
     @Override
-    public ActionResultType onBlockActivated(BlockState state, World world, BlockPos pos, PlayerEntity player, Hand hand, BlockRayTraceResult hit) {
-        WissenCrystallizerTileEntity tile = (WissenCrystallizerTileEntity) world.getTileEntity(pos);
-        ItemStack stack = player.getHeldItem(hand).copy();
+    public InteractionResult use(BlockState state, Level world, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hit) {
+        WissenCrystallizerTileEntity tile = (WissenCrystallizerTileEntity) world.getBlockEntity(pos);
+        ItemStack stack = player.getItemInHand(hand).copy();
 
         int invSize = tile.getInventorySize();
         boolean isWand = false;
 
         if (stack.getItem() instanceof WissenWandItem) {
-            CompoundNBT nbt = stack.getTag();
+            CompoundTag nbt = stack.getTag();
             if (nbt == null) {
-                nbt = new CompoundNBT();
+                nbt = new CompoundTag();
                 stack.setTag(nbt);
             }
 
@@ -116,59 +109,60 @@ public class WissenCrystallizerBlock extends Block implements ITileEntityProvide
             }
         }
 
-        if (!player.isSneaking()) {
+        if (!player.isShiftKeyDown()) {
             if (invSize < 11 && !isWand) {
                 int slot = invSize;
-                if ((!stack.isEmpty()) && (tile.getItemHandler().getStackInSlot(slot).isEmpty())) {
+                if ((!stack.isEmpty()) && (tile.getItemHandler().getItem(slot).isEmpty())) {
                     if (stack.getCount() > 1) {
-                        player.getHeldItemMainhand().setCount(stack.getCount() - 1);
+                        player.getMainHandItem().setCount(stack.getCount() - 1);
                         stack.setCount(1);
-                        tile.getItemHandler().setInventorySlotContents(slot, stack);
-                        return ActionResultType.SUCCESS;
+                        tile.getItemHandler().setItem(slot, stack);
+                        return InteractionResult.SUCCESS;
                     } else {
-                        tile.getItemHandler().setInventorySlotContents(slot, stack);
-                        player.inventory.deleteStack(player.getHeldItem(hand));
-                        return ActionResultType.SUCCESS;
+                        tile.getItemHandler().setItem(slot, stack);
+                        player.getInventory().removeItem(player.getItemInHand(hand));
+                        return InteractionResult.SUCCESS;
                     }
                 }
             }
         } else {
             if (invSize > 0) {
                 int slot = invSize - 1;
-                if (!tile.getItemHandler().getStackInSlot(slot).isEmpty()) {
-                    player.inventory.addItemStackToInventory(tile.getItemHandler().getStackInSlot(slot).copy());
-                    tile.getItemHandler().removeStackFromSlot(slot);
-                    return ActionResultType.SUCCESS;
+                if (!tile.getItemHandler().getItem(slot).isEmpty()) {
+                    player.getInventory().add(tile.getItemHandler().getItem(slot).copy());
+                    tile.getItemHandler().removeItemNoUpdate(slot);
+                    return InteractionResult.SUCCESS;
                 }
             }
         }
 
-        return ActionResultType.PASS;
+        return InteractionResult.PASS;
     }
 
     @Override
     public FluidState getFluidState(BlockState state) {
-        return state.get(WATERLOGGED) ? Fluids.WATER.getStillFluidState(false) : Fluids.EMPTY.getDefaultState();
+        return state.getValue(BlockStateProperties.WATERLOGGED) ? Fluids.WATER.getSource(false) : Fluids.EMPTY.defaultFluidState();
     }
 
     @Override
-    public BlockState updatePostPlacement(BlockState stateIn, Direction side, BlockState facingState, IWorld worldIn, BlockPos currentPos, BlockPos facingPos) {
-        if (stateIn.get(WATERLOGGED)) {
-            worldIn.getPendingFluidTicks().scheduleTick(currentPos, Fluids.WATER, Fluids.WATER.getTickRate(worldIn));
+    public BlockState updateShape(BlockState pState, Direction pDirection, BlockState pNeighborState, LevelAccessor pLevel, BlockPos pCurrentPos, BlockPos pNeighborPos) {
+        if (pState.getValue(BlockStateProperties.WATERLOGGED)) {
+            pLevel.scheduleTick(pCurrentPos, Fluids.WATER, Fluids.WATER.getTickDelay(pLevel));
         }
 
-        return stateIn;
+        return super.updateShape(pState, pDirection, pNeighborState, pLevel, pCurrentPos, pNeighborPos);
     }
 
     @Override
-    public boolean eventReceived(BlockState state, World world, BlockPos pos, int id, int param) {
-        super.eventReceived(state, world, pos, id, param);
-        TileEntity tileentity = world.getTileEntity(pos);
-        return tileentity != null && tileentity.receiveClientEvent(id, param);
+    public boolean triggerEvent(BlockState state, Level world, BlockPos pos, int id, int param) {
+        super.triggerEvent(state, world, pos, id, param);
+        BlockEntity tileentity = world.getBlockEntity(pos);
+        return tileentity != null && tileentity.triggerEvent(id, param);
     }
 
+    @Nullable
     @Override
-    public boolean hasTileEntity(BlockState state) {
-        return true;
+    public BlockEntity newBlockEntity(BlockPos pPos, BlockState pState) {
+        return new WissenCrystallizerTileEntity(pPos, pState);
     }
 }

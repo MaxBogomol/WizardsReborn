@@ -5,11 +5,11 @@ import mod.maxbogomol.wizards_reborn.api.wissen.IWissenTileEntity;
 import mod.maxbogomol.wizards_reborn.client.particle.Particles;
 import mod.maxbogomol.wizards_reborn.common.item.equipment.WissenWandItem;
 import net.minecraft.client.Minecraft;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.CompoundNBT;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.World;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.nbt.CompoundTag;
+import net.minecraft.core.BlockPos;
+import net.minecraft.world.level.Level;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.event.TickEvent;
@@ -22,13 +22,13 @@ public class ClientWorldEvent {
     private static Random random = new Random();
 
     @OnlyIn(Dist.CLIENT)
-    public static void onTick(TickEvent.WorldTickEvent event) {
+    public static void onTick(TickEvent.LevelTickEvent event) {
         Minecraft mc = Minecraft.getInstance();
 
-        PlayerEntity player = mc.player;
+        Player player = mc.player;
         if (player != null) {
-            ItemStack main = player.getHeldItemMainhand();
-            ItemStack offhand = player.getHeldItemOffhand();
+            ItemStack main = player.getMainHandItem();
+            ItemStack offhand = player.getOffhandItem();
             boolean renderWand = false;
             ItemStack stack = main;
 
@@ -41,9 +41,9 @@ public class ClientWorldEvent {
                 }
             }
 
-            CompoundNBT nbt = stack.getTag();
+            CompoundTag nbt = stack.getTag();
             if (nbt == null) {
-                nbt = new CompoundNBT();
+                nbt = new CompoundTag();
             }
 
             if (nbt.contains("block") && nbt.contains("mode") && renderWand) {
@@ -51,8 +51,8 @@ public class ClientWorldEvent {
                     if (nbt.getInt("mode") == 1 || nbt.getInt("mode") == 2) {
                         BlockPos blockPos = new BlockPos(nbt.getInt("blockX"), nbt.getInt("blockY"), nbt.getInt("blockZ"));
 
-                        if (player.world.getTileEntity(blockPos) instanceof IWissenTileEntity) {
-                            connectBlockEffect(blockPos, player.world, new Color(255, 255, 255));
+                        if (player.level().getBlockEntity(blockPos) instanceof IWissenTileEntity) {
+                            connectBlockEffect(blockPos, player.level(), new Color(255, 255, 255));
                         }
                     }
                 }
@@ -60,7 +60,7 @@ public class ClientWorldEvent {
         }
     }
 
-    public static void connectBlockEffect(BlockPos pos, World world, Color color) {
+    public static void connectBlockEffect(BlockPos pos, Level world, Color color) {
         float colorR = (color.getRed() / 255f);
         float colorG = (color.getGreen() / 255f);
         float colorB = (color.getBlue() / 255f);

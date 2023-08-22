@@ -1,12 +1,12 @@
 package mod.maxbogomol.wizards_reborn.common.item;
 
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.inventory.Inventory;
-import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.CompoundNBT;
-import net.minecraft.nbt.ListNBT;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.SimpleContainer;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.nbt.CompoundTag;
+import net.minecraft.nbt.ListTag;
 
-public class ItemBackedInventory extends Inventory {
+public class ItemBackedInventory extends SimpleContainer {
     private static final String TAG_ITEMS = "Items";
     private final ItemStack stack;
 
@@ -14,8 +14,8 @@ public class ItemBackedInventory extends Inventory {
         super(expectedSize);
         this.stack = stack;
 
-        CompoundNBT nbt = stack.getTag();
-        ListNBT lst = new ListNBT();
+        CompoundTag nbt = stack.getTag();
+        ListTag lst = new ListTag();
         if (nbt!=null) {
             if (nbt.contains(TAG_ITEMS)) {
                 lst = nbt.getList(TAG_ITEMS, 10);
@@ -23,23 +23,23 @@ public class ItemBackedInventory extends Inventory {
         }
         int i = 0;
         for (; i < expectedSize && i < lst.size(); i++) {
-            setInventorySlotContents(i, ItemStack.read(lst.getCompound(i)));
+            setItem(i, ItemStack.of(lst.getCompound(i)));
         }
     }
 
     @Override
-    public boolean isUsableByPlayer(PlayerEntity player) {
+    public boolean stillValid(Player player) {
         return !stack.isEmpty();
     }
 
     @Override
-    public void markDirty() {
-        super.markDirty();
-        ListNBT list = new ListNBT();
-        for (int i = 0; i < getSizeInventory(); i++) {
-            list.add(getStackInSlot(i).write(new CompoundNBT()));
+    public void setChanged() {
+        super.setChanged();
+        ListTag list = new ListTag();
+        for (int i = 0; i < getContainerSize(); i++) {
+            list.add(getItem(i).save(new CompoundTag()));
         }
-        CompoundNBT nbt = stack.getTag();
+        CompoundTag nbt = stack.getTag();
         nbt.put(TAG_ITEMS,list);
     }
 }

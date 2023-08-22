@@ -3,13 +3,13 @@ package mod.maxbogomol.wizards_reborn.common.network;
 import mod.maxbogomol.wizards_reborn.WizardsReborn;
 import mod.maxbogomol.wizards_reborn.client.particle.Particles;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.world.ClientWorld;
-import net.minecraft.network.PacketBuffer;
-import net.minecraft.util.math.BlockPos;
-import net.minecraftforge.fml.network.NetworkEvent;
+import net.minecraft.client.multiplayer.ClientLevel;
+import net.minecraft.network.FriendlyByteBuf;
+import net.minecraft.core.BlockPos;
+import net.minecraftforge.network.NetworkEvent;
 
 import java.util.Random;
-import java.util.function.Supplier;
+import java.util.function.Supplier;;
 
 public class WissenTranslatorSendEffectPacket {
     private static BlockPos pos;
@@ -19,18 +19,18 @@ public class WissenTranslatorSendEffectPacket {
         this.pos = pos;
     }
 
-    public static WissenTranslatorSendEffectPacket decode(PacketBuffer buf) {
+    public static WissenTranslatorSendEffectPacket decode(FriendlyByteBuf buf) {
         return new WissenTranslatorSendEffectPacket(buf.readBlockPos());
     }
 
-    public void encode(PacketBuffer buf) {
+    public void encode(FriendlyByteBuf buf) {
         buf.writeBlockPos(pos);
     }
 
     public static void handle(WissenTranslatorSendEffectPacket msg, Supplier<NetworkEvent.Context> ctx) {
         if (ctx.get().getDirection().getReceptionSide().isClient()) {
             ctx.get().enqueueWork(() -> {
-                ClientWorld world = Minecraft.getInstance().world;
+                ClientLevel world = Minecraft.getInstance().level;
 
                 for (int i = 0; i < 15; i++) {
                     Particles.create(WizardsReborn.SPARKLE_PARTICLE)

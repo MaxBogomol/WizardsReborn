@@ -3,12 +3,12 @@ package mod.maxbogomol.wizards_reborn.common.network;
 import mod.maxbogomol.wizards_reborn.WizardsReborn;
 import mod.maxbogomol.wizards_reborn.client.particle.Particles;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.world.ClientWorld;
-import net.minecraft.network.PacketBuffer;
-import net.minecraftforge.fml.network.NetworkEvent;
+import net.minecraft.client.multiplayer.ClientLevel;
+import net.minecraft.network.FriendlyByteBuf;
+import net.minecraftforge.network.NetworkEvent;
 
 import java.util.Random;
-import java.util.function.Supplier;
+import java.util.function.Supplier;;
 
 public class WissenSendEffectPacket {
     private static float posFromX;
@@ -31,11 +31,11 @@ public class WissenSendEffectPacket {
         this.posToZ = posToZ;
     }
 
-    public static WissenSendEffectPacket decode(PacketBuffer buf) {
+    public static WissenSendEffectPacket decode(FriendlyByteBuf buf) {
         return new WissenSendEffectPacket(buf.readFloat(), buf.readFloat(), buf.readFloat(), buf.readFloat(), buf.readFloat(), buf.readFloat());
     }
 
-    public void encode(PacketBuffer buf) {
+    public void encode(FriendlyByteBuf buf) {
         buf.writeFloat(posFromX);
         buf.writeFloat(posFromY);
         buf.writeFloat(posFromZ);
@@ -48,7 +48,7 @@ public class WissenSendEffectPacket {
     public static void handle(WissenSendEffectPacket msg, Supplier<NetworkEvent.Context> ctx) {
         if (ctx.get().getDirection().getReceptionSide().isClient()) {
             ctx.get().enqueueWork(() -> {
-                ClientWorld world = Minecraft.getInstance().world;
+                ClientLevel world = Minecraft.getInstance().level;
 
                 int particlePerBlock = 4;
 

@@ -8,24 +8,25 @@ import mod.maxbogomol.wizards_reborn.client.particle.Particles;
 import mod.maxbogomol.wizards_reborn.common.item.equipment.WissenWandItem;
 import mod.maxbogomol.wizards_reborn.common.network.*;
 import mod.maxbogomol.wizards_reborn.utils.PacketUtils;
-import net.minecraft.block.BlockState;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.entity.BlockEntityTicker;
+import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.client.Minecraft;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.CompoundNBT;
-import net.minecraft.network.NetworkManager;
-import net.minecraft.network.play.server.SUpdateTileEntityPacket;
-import net.minecraft.tileentity.ITickableTileEntity;
-import net.minecraft.tileentity.TileEntity;
-import net.minecraft.tileentity.TileEntityType;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.MathHelper;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.nbt.CompoundTag;
+import net.minecraft.network.Connection;
+import net.minecraft.network.protocol.game.ClientboundBlockEntityDataPacket;
+import net.minecraft.world.level.block.entity.BlockEntity;
+import net.minecraft.world.level.block.entity.BlockEntityType;
+import net.minecraft.core.BlockPos;
+import net.minecraft.util.Mth;
 
 import java.awt.*;
 import java.util.ArrayList;
 import java.util.Random;
 
-public class WissenTranslatorTileEntity extends TileEntity implements ITickableTileEntity, IWissenTileEntity {
+public class WissenTranslatorTileEntity extends BlockEntity implements BlockEntityTicker, IWissenTileEntity {
 
     public int blockFromX = 0;
     public int blockFromY = 0;
@@ -40,22 +41,22 @@ public class WissenTranslatorTileEntity extends TileEntity implements ITickableT
     public int wissen = 0;
     public int cooldown = 0;
 
-    public CompoundNBT wissenRays = new CompoundNBT();
+    public CompoundTag wissenRays = new CompoundTag();
     public int wissenRaysCount = 0;
 
     public Random random = new Random();
 
-    public WissenTranslatorTileEntity(TileEntityType<?> tileEntityTypeIn) {
-        super(tileEntityTypeIn);
+    public WissenTranslatorTileEntity(BlockEntityType<?> type, BlockPos pos, BlockState state) {
+        super(type, pos, state);
     }
 
-    public WissenTranslatorTileEntity() {
-        this(WizardsReborn.WISSEN_TRANSLATOR_TILE_ENTITY.get());
+    public WissenTranslatorTileEntity(BlockPos pos, BlockState state) {
+        this(WizardsReborn.WISSEN_TRANSLATOR_TILE_ENTITY.get(), pos, state);
     }
 
     @Override
-    public void tick() {
-        if (!world.isRemote()) {
+    public void tick(Level pLevel, BlockPos pPos, BlockState pState, BlockEntity pBlockEntity) {
+        if (!level.isClientSide()) {
             if (cooldown > 0) {
                 cooldown = cooldown - 1;
                 PacketUtils.SUpdateTileEntityPacket(this);
@@ -73,7 +74,7 @@ public class WissenTranslatorTileEntity extends TileEntity implements ITickableT
 
             if (isToBlock) {
                 if (cooldown <= 0) {
-                    TileEntity tileentity = world.getTileEntity(new BlockPos(blockToX, blockToY, blockToZ));
+                    BlockEntity tileentity = level.getBlockEntity(new BlockPos(blockToX, blockToY, blockToZ));
                     if (tileentity instanceof IWissenTileEntity) {
                         IWissenTileEntity wissenTileEntity = (IWissenTileEntity) tileentity;
 
@@ -82,11 +83,11 @@ public class WissenTranslatorTileEntity extends TileEntity implements ITickableT
 
                         if ((getWissenPerReceive() - removeRemain - addRemain) > 0) {
                             removeWissen(getWissenPerReceive() - removeRemain - addRemain);
-                            addWissenRay(getPos(), new BlockPos(blockToX, blockToY, blockToZ), getWissenPerReceive() - removeRemain - addRemain);
+                            addWissenRay(getBlockPos(), new BlockPos(blockToX, blockToY, blockToZ), getWissenPerReceive() - removeRemain - addRemain);
 
                             setCooldown = true;
 
-                            PacketHandler.sendToTracking(world, getPos(), new WissenTranslatorBurstEffectPacket(getPos().getX() + 0.5f, getPos().getY() + 0.5f, getPos().getZ() + 0.5f));
+                            PacketHandler.sendToTracking(level, getBlockPos(), new WissenTranslatorBurstEffectPacket(getBlockPos().getX() + 0.5f, getBlockPos().getY() + 0.5f, getBlockPos().getZ() + 0.5f));
                         }
                     } else {
                         isToBlock = false;
@@ -96,7 +97,7 @@ public class WissenTranslatorTileEntity extends TileEntity implements ITickableT
             }
 
             if (isFromBlock) {
-                TileEntity tileentity = world.getTileEntity(new BlockPos(blockFromX, blockFromY, blockFromZ));
+                BlockEntity tileentity = level.getBlockEntity(new BlockPos(blockFromX, blockFromY, blockFromZ));
                 if (cooldown <= 0) {
                     if (tileentity instanceof IWissenTileEntity) {
                         IWissenTileEntity wissenTileEntity = (IWissenTileEntity) tileentity;
@@ -105,7 +106,7 @@ public class WissenTranslatorTileEntity extends TileEntity implements ITickableT
 
                         if ((getWissenPerReceive() - removeRemain - addRemain) > 0) {
                             wissenTileEntity.removeWissen(getWissenPerReceive() - removeRemain - addRemain);
-                            addWissenRay(new BlockPos(blockFromX, blockFromY, blockFromZ), getPos(), getWissenPerReceive() - removeRemain - addRemain);
+                            addWissenRay(new BlockPos(blockFromX, blockFromY, blockFromZ), getBlockPos(), getWissenPerReceive() - removeRemain - addRemain);
 
                             setCooldown = true;
 
@@ -128,7 +129,7 @@ public class WissenTranslatorTileEntity extends TileEntity implements ITickableT
             }
         }
 
-        if (world.isRemote()) {
+        if (level.isClientSide()) {
             if (getWissen() > 0) {
                 if (random.nextFloat() < 0.5) {
                     Particles.create(WizardsReborn.WISP_PARTICLE)
@@ -136,7 +137,7 @@ public class WissenTranslatorTileEntity extends TileEntity implements ITickableT
                             .setAlpha(0.25f, 0).setScale(0.2f * getStage(), 0)
                             .setColor(0.466f, 0.643f, 0.815f)
                             .setLifetime(20)
-                            .spawn(world, pos.getX() + 0.5F, pos.getY() + 0.5F, pos.getZ() + 0.5F);
+                            .spawn(level, worldPosition.getX() + 0.5F, worldPosition.getY() + 0.5F, worldPosition.getZ() + 0.5F);
                 }
                 if (random.nextFloat() < 0.1) {
                     Particles.create(WizardsReborn.SPARKLE_PARTICLE)
@@ -145,31 +146,31 @@ public class WissenTranslatorTileEntity extends TileEntity implements ITickableT
                             .setColor(0.466f, 0.643f, 0.815f)
                             .setLifetime(30)
                             .setSpin((0.5f * (float) ((random.nextDouble() - 0.5D) * 2)))
-                            .spawn(world, pos.getX() + 0.5F, pos.getY() + 0.5F, pos.getZ() + 0.5F);
+                            .spawn(level, worldPosition.getX() + 0.5F, worldPosition.getY() + 0.5F, worldPosition.getZ() + 0.5F);
                 }
             }
             wissenWandEffect();
         }
     }
 
-    @Override
-    public final SUpdateTileEntityPacket getUpdatePacket() {
-        CompoundNBT tag = new CompoundNBT();
-        write(tag);
-        return new SUpdateTileEntityPacket(pos, -999, tag);
-    }
+    /*@Override
+    public final ClientboundBlockEntityDataPacket getUpdatePacket() {
+        CompoundTag tag = new CompoundTag();
+        save(tag);
+        return new ClientboundBlockEntityDataPacket(worldPosition, -999, tag);
+    }*/
 
     @Override
-    public void onDataPacket(NetworkManager net, SUpdateTileEntityPacket packet) {
+    public void onDataPacket(Connection net, ClientboundBlockEntityDataPacket packet) {
         super.onDataPacket(net, packet);
-        read(this.getBlockState(),packet.getNbtCompound());
+        load(packet.getTag());
     }
 
-    @Override
-    public CompoundNBT getUpdateTag()
+    /*@Override
+    public CompoundTag getUpdateTag()
     {
-        return this.write(new CompoundNBT());
-    }
+        return this.save(new CompoundTag());
+    }*/
 
     public boolean isSameFromAndTo() {
         return ((blockFromX == blockToX) && (blockFromY == blockToY) && (blockFromZ == blockToZ));
@@ -179,9 +180,9 @@ public class WissenTranslatorTileEntity extends TileEntity implements ITickableT
         return ((posFrom.getX() == posTo.getX()) && (posFrom.getY() == posTo.getY()) && (posFrom.getZ() == posTo.getZ()));
     }
 
-    @Override
-    public CompoundNBT write(CompoundNBT tag) {
-        super.write(tag);
+    /*@Override
+    public CompoundTag save(CompoundTag tag) {
+        super.save(tag);
         tag.putInt("blockFromX", blockFromX);
         tag.putInt("blockFromY", blockFromY);
         tag.putInt("blockFromZ", blockFromZ);
@@ -198,13 +199,13 @@ public class WissenTranslatorTileEntity extends TileEntity implements ITickableT
         tag.put("wissenRays", wissenRays);
         tag.putInt("wissenRaysCount", wissenRaysCount);
 
-        CompoundNBT ret = super.write(tag);
+        CompoundTag ret = super.save(tag);
         return ret;
-    }
+    }*/
 
     @Override
-    public void read(BlockState state, CompoundNBT tag) {
-        super.read(state, tag);
+    public void load(CompoundTag tag) {
+        super.load(tag);
         blockFromX = tag.getInt("blockFromX");
         blockFromY = tag.getInt("blockFromY");
         blockFromZ = tag.getInt("blockFromZ");
@@ -221,7 +222,7 @@ public class WissenTranslatorTileEntity extends TileEntity implements ITickableT
         wissenRays = tag.getCompound("wissenRays");
         wissenRaysCount = tag.getInt("wissenRaysCount");
 
-        super.read(state, tag);
+        super.load(tag);
     }
 
     public float getStage() {
@@ -300,9 +301,9 @@ public class WissenTranslatorTileEntity extends TileEntity implements ITickableT
     public void wissenWandEffect() {
         Minecraft mc = Minecraft.getInstance();
 
-        PlayerEntity player = mc.player;
-        ItemStack main = player.getHeldItemMainhand();
-        ItemStack offhand = player.getHeldItemOffhand();
+        Player player = mc.player;
+        ItemStack main = player.getMainHandItem();
+        ItemStack offhand = player.getOffhandItem();
         boolean renderWand = false;
 
         if (!main.isEmpty() && main.getItem() instanceof WissenWandItem) {
@@ -315,12 +316,12 @@ public class WissenTranslatorTileEntity extends TileEntity implements ITickableT
 
         if (renderWand) {
             if (isToBlock) {
-                connectEffect(getPos(), new BlockPos(blockToX, blockToY, blockToZ), new Color(118, 184, 214));
+                connectEffect(getBlockPos(), new BlockPos(blockToX, blockToY, blockToZ), new Color(118, 184, 214));
                 connectBlockEffect(new BlockPos(blockToX, blockToY, blockToZ), new Color(118, 184, 214));
             }
 
             if (isFromBlock) {
-                connectEffect(new BlockPos(blockFromX, blockFromY, blockFromZ), getPos(), new Color(165, 223, 108));
+                connectEffect(new BlockPos(blockFromX, blockFromY, blockFromZ), getBlockPos(), new Color(165, 223, 108));
                 connectBlockEffect(new BlockPos(blockFromX, blockFromY, blockFromZ), new Color(165, 223, 108));
             }
         }
@@ -340,7 +341,7 @@ public class WissenTranslatorTileEntity extends TileEntity implements ITickableT
                     .setColor(colorR, colorG, colorB)
                     .setLifetime(5)
                     .setSpin((0.1f * (float) ((random.nextDouble() - 0.5D) * 2)))
-                    .spawn(world, pos.getX() + 0.5F + (random.nextDouble() - 0.5D), pos.getY() + 0.5F + (random.nextDouble() - 0.5D), pos.getZ() + 0.5F + (random.nextDouble() - 0.5D));
+                    .spawn(level, pos.getX() + 0.5F + (random.nextDouble() - 0.5D), pos.getY() + 0.5F + (random.nextDouble() - 0.5D), pos.getZ() + 0.5F + (random.nextDouble() - 0.5D));
         }
     }
 
@@ -369,12 +370,12 @@ public class WissenTranslatorTileEntity extends TileEntity implements ITickableT
                     .setColor(colorR, colorG, colorB)
                     .setLifetime(3)
                     .setSpin((0.1f * (float) ((random.nextDouble() - 0.5D) * 2)))
-                    .spawn(world, posFrom.getX() + 0.5F - (x * i), posFrom.getY() + 0.5F - (y * i), posFrom.getZ() + 0.5F - (z * i));
+                    .spawn(level, posFrom.getX() + 0.5F - (x * i), posFrom.getY() + 0.5F - (y * i), posFrom.getZ() + 0.5F - (z * i));
         }
     }
 
     public void addWissenRay(BlockPos posFrom, BlockPos posTo, int wissenCount) {
-        CompoundNBT tag = new CompoundNBT();
+        CompoundTag tag = new CompoundTag();
 
         double dX = posTo.getX() - posFrom.getX();
         double dY = posTo.getY() - posFrom.getY();
@@ -407,7 +408,7 @@ public class WissenTranslatorTileEntity extends TileEntity implements ITickableT
     }
 
     public void deleteWissenRay(ArrayList<Integer> indexs) {
-        CompoundNBT tag = new CompoundNBT();
+        CompoundTag tag = new CompoundTag();
 
         int ii = 0;
 
@@ -426,7 +427,7 @@ public class WissenTranslatorTileEntity extends TileEntity implements ITickableT
         ArrayList<Integer> deleteRays = new ArrayList<Integer>();
 
         for (int i = 0; i < wissenRaysCount; i++) {
-            CompoundNBT tag = wissenRays.getCompound(String.valueOf(i));
+            CompoundTag tag = wissenRays.getCompound(String.valueOf(i));
 
             int blockFromX = tag.getInt("blockFromX");
             int blockFromY = tag.getInt("blockFromY");
@@ -444,13 +445,13 @@ public class WissenTranslatorTileEntity extends TileEntity implements ITickableT
             tag.putFloat("blockY", Y);
             tag.putFloat("blockZ", Z);
 
-            PacketHandler.sendToTracking(world, getPos(), new WissenSendEffectPacket(blockX, blockY, blockZ, X, Y, Z));
+            PacketHandler.sendToTracking(level, getBlockPos(), new WissenSendEffectPacket(blockX, blockY, blockZ, X, Y, Z));
 
             if (tag.getInt("wissen") <= 0) {
-                PacketHandler.sendToTracking(world, getPos(), new WissenTranslatorBurstEffectPacket(X, Y, Z));
+                PacketHandler.sendToTracking(level, getBlockPos(), new WissenTranslatorBurstEffectPacket(X, Y, Z));
                 deleteRays.add(i);
-            } else if ((blockFromX != MathHelper.floor(blockX)) || blockFromY != MathHelper.floor(blockY) || (blockFromZ != MathHelper.floor(blockZ))) {
-                TileEntity tileentity = world.getTileEntity(new BlockPos(blockX, blockY, blockZ));
+            } else if ((blockFromX != Mth.floor(blockX)) || blockFromY != Mth.floor(blockY) || (blockFromZ != Mth.floor(blockZ))) {
+                BlockEntity tileentity = level.getBlockEntity(new BlockPos((int) blockX, (int) blockY, (int) blockZ));
                 if (tileentity instanceof IWissenTileEntity) {
                     if ((Math.abs(blockX) % 1F > 0.25F && Math.abs(blockX) % 1F <= 0.75F) &&
                             (Math.abs(blockY) % 1F > 0.25F && Math.abs(blockY) % 1F <= 0.75F) &&
@@ -461,14 +462,14 @@ public class WissenTranslatorTileEntity extends TileEntity implements ITickableT
                         wissenTileEntity.addWissen(tag.getInt("wissen") - addRemain);
                         PacketUtils.SUpdateTileEntityPacket(tileentity);
 
-                        PacketHandler.sendToTracking(world, getPos(), new WissenTranslatorBurstEffectPacket(X, Y, Z));
-                        PacketHandler.sendToTracking(world, getPos(), new WissenTranslatorSendEffectPacket(new BlockPos(X, Y, Z)));
+                        PacketHandler.sendToTracking(level, getBlockPos(), new WissenTranslatorBurstEffectPacket(X, Y, Z));
+                        PacketHandler.sendToTracking(level, getBlockPos(), new WissenTranslatorSendEffectPacket(new BlockPos((int) X, (int) Y, (int) Z)));
 
                         deleteRays.add(i);
                     }
                 } else {
-                    BlockPos blockpos = new BlockPos(blockX, blockY, blockZ);
-                    if (world.getBlockState(blockpos).hasOpaqueCollisionShape(world, blockpos)) {
+                    BlockPos blockpos = new BlockPos((int) blockX, (int) blockY, (int) blockZ);
+                    if (level.getBlockState(blockpos).isCollisionShapeFullBlock(level, blockpos)) {
                         tag.putInt("wissen", tag.getInt("wissen") - 1);
                     }
 

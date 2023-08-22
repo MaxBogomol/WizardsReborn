@@ -1,29 +1,44 @@
 package mod.maxbogomol.wizards_reborn.client.gui.container;
 
 import mod.maxbogomol.wizards_reborn.WizardsReborn;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.entity.player.PlayerInventory;
-import net.minecraft.inventory.container.Container;
-import net.minecraft.inventory.container.Slot;
-import net.minecraft.item.ItemStack;
-import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.IWorldPosCallable;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.World;
-import net.minecraftforge.items.CapabilityItemHandler;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.entity.player.Inventory;
+import net.minecraft.world.inventory.AbstractContainerMenu;
+import net.minecraft.world.inventory.MenuType;
+import net.minecraft.world.inventory.Slot;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.block.entity.BlockEntity;
+import net.minecraft.world.inventory.ContainerLevelAccess;
+import net.minecraft.core.BlockPos;
+import net.minecraft.world.level.Level;
 import net.minecraftforge.items.IItemHandler;
 import net.minecraftforge.items.SlotItemHandler;
 import net.minecraftforge.items.wrapper.InvWrapper;
+import org.jetbrains.annotations.Nullable;
 
-public class ArcaneWorkbenchContainer extends Container {
-    private final TileEntity tileEntity;
-    private final PlayerEntity playerEntity;
-    private final IItemHandler playerInventory;
+public class ArcaneWorkbenchContainer extends AbstractContainerMenu {
+    //private final BlockEntity tileEntity;
+    //private final Player playerEntity;
+    //private final IItemHandler playerInventory;
 
-    public ArcaneWorkbenchContainer(int windowId, World world, BlockPos pos,
-                                    PlayerInventory playerInventory, PlayerEntity player) {
+    protected ArcaneWorkbenchContainer(@Nullable MenuType<?> pMenuType, int pContainerId) {
+        super(pMenuType, pContainerId);
+    }
+
+    @Override
+    public ItemStack quickMoveStack(Player pPlayer, int pIndex) {
+        return null;
+    }
+
+    @Override
+    public boolean stillValid(Player pPlayer) {
+        return false;
+    }
+
+    /*public ArcaneWorkbenchContainer(int windowId, Level world, BlockPos pos,
+                                    Inventory playerInventory, Player player) {
         super(WizardsReborn.ARCANE_WORKBENCH_CONTAINER.get(), windowId);
-        this.tileEntity = world.getTileEntity(pos);
+        this.tileEntity = world.getBlockEntity(pos);
         playerEntity = player;
         this.playerInventory = new InvWrapper(playerInventory);
         this.layoutPlayerInventorySlots(8, 86 + 33);
@@ -48,11 +63,11 @@ public class ArcaneWorkbenchContainer extends Container {
                 addSlot(new ResultSlot(h, 13, 146, 48));
             });
         }
-    }
+    }*/
 
-    @Override
-    public boolean canInteractWith(PlayerEntity playerIn) {
-        return isWithinUsableDistance(IWorldPosCallable.of(tileEntity.getWorld(), tileEntity.getPos()),
+    /*@Override
+    public boolean stillValid(Player playerIn) {
+        return stillValid(ContainerLevelAccess.create(tileEntity.getLevel(), tileEntity.getBlockPos()),
                 playerIn, WizardsReborn.ARCANE_WORKBENCH.get());
     }
 
@@ -94,19 +109,19 @@ public class ArcaneWorkbenchContainer extends Container {
     private static final int TE_INVENTORY_SLOT_COUNT = 14;
 
     @Override
-    public ItemStack transferStackInSlot(PlayerEntity playerIn, int index) {
-        Slot sourceSlot = inventorySlots.get(index);
-        if (sourceSlot == null || !sourceSlot.getHasStack()) return ItemStack.EMPTY;
-        ItemStack sourceStack = sourceSlot.getStack();
+    public ItemStack quickMoveStack(Player playerIn, int index) {
+        Slot sourceSlot = slots.get(index);
+        if (sourceSlot == null || !sourceSlot.hasItem()) return ItemStack.EMPTY;
+        ItemStack sourceStack = sourceSlot.getItem();
         ItemStack copyOfSourceStack = sourceStack.copy();
 
         if (index < VANILLA_FIRST_SLOT_INDEX + VANILLA_SLOT_COUNT) {
-            if (!mergeItemStack(sourceStack, TE_INVENTORY_FIRST_SLOT_INDEX, TE_INVENTORY_FIRST_SLOT_INDEX
+            if (!moveItemStackTo(sourceStack, TE_INVENTORY_FIRST_SLOT_INDEX, TE_INVENTORY_FIRST_SLOT_INDEX
                     + TE_INVENTORY_SLOT_COUNT, false)) {
                 return ItemStack.EMPTY;
             }
         } else if (index < TE_INVENTORY_FIRST_SLOT_INDEX + TE_INVENTORY_SLOT_COUNT) {
-            if (!mergeItemStack(sourceStack, VANILLA_FIRST_SLOT_INDEX, VANILLA_FIRST_SLOT_INDEX + VANILLA_SLOT_COUNT, false)) {
+            if (!moveItemStackTo(sourceStack, VANILLA_FIRST_SLOT_INDEX, VANILLA_FIRST_SLOT_INDEX + VANILLA_SLOT_COUNT, false)) {
                 return ItemStack.EMPTY;
             }
         } else {
@@ -114,11 +129,11 @@ public class ArcaneWorkbenchContainer extends Container {
             return ItemStack.EMPTY;
         }
         if (sourceStack.getCount() == 0) {
-            sourceSlot.putStack(ItemStack.EMPTY);
+            sourceSlot.set(ItemStack.EMPTY);
         } else {
-            sourceSlot.onSlotChanged();
+            sourceSlot.setChanged();
         }
         sourceSlot.onTake(playerEntity, sourceStack);
         return copyOfSourceStack;
-    }
+    }*/
 }

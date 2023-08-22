@@ -3,10 +3,10 @@ package mod.maxbogomol.wizards_reborn.client.arcanemicon;
 import mod.maxbogomol.wizards_reborn.WizardsReborn;
 import mod.maxbogomol.wizards_reborn.common.item.equipment.ArcaneWandItem;
 import mod.maxbogomol.wizards_reborn.common.knowledge.RegisterKnowledges;
-import net.minecraft.inventory.Inventory;
-import net.minecraft.item.ItemStack;
-import net.minecraft.item.Items;
-import net.minecraft.nbt.CompoundNBT;
+import net.minecraft.world.SimpleContainer;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
+import net.minecraft.nbt.CompoundTag;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -48,6 +48,13 @@ public class ArcanemiconChapters {
         ARCANE_WOOD = new Chapter(
                 "wizards_reborn.arcanemicon.chapter.arcane_wood",
                 new TitledBlockPage("wizards_reborn.arcanemicon.page.arcane_wood_sapling",
+                        new BlockEntry(new ItemStack(WizardsReborn.ARCANE_PEDESTAL_ITEM.get()), new ItemStack(WizardsReborn.ARCANE_WOOD_SAPLING_ITEM.get())))
+        );
+
+        /*
+        ARCANE_WOOD = new Chapter(
+                "wizards_reborn.arcanemicon.chapter.arcane_wood",
+                new TitledBlockPage("wizards_reborn.arcanemicon.page.arcane_wood_sapling",
                         new BlockEntry(new ItemStack(WizardsReborn.ARCANE_PEDESTAL_ITEM.get()), new ItemStack(WizardsReborn.ARCANE_WOOD_SAPLING_ITEM.get()))
                 ),
                 new ArcanumDustTransmutationPage(new ItemStack(WizardsReborn.ARCANE_WOOD_SAPLING_ITEM.get()), new ItemStack(Items.OAK_SAPLING)),
@@ -61,11 +68,11 @@ public class ArcanemiconChapters {
                         new BlockEntry(new ItemStack(WizardsReborn.ARCANE_WOOD_SLAB_ITEM.get())),
                         new BlockEntry(new ItemStack(WizardsReborn.ARCANE_WOOD_FENCE_ITEM.get())),
                         new BlockEntry(new ItemStack(WizardsReborn.ARCANE_WOOD_FENCE_GATE_ITEM.get())),
-                        new BlockEntry(new ItemStack(WizardsReborn.ARCANE_WOOD_DOOR_ITEM.get())),
-                        new BlockEntry(new ItemStack(WizardsReborn.ARCANE_WOOD_TRAPDOOR_ITEM.get())),
-                        new BlockEntry(new ItemStack(WizardsReborn.ARCANE_WOOD_PRESSURE_PLATE_ITEM.get())),
-                        new BlockEntry(new ItemStack(WizardsReborn.ARCANE_WOOD_BUTTON_ITEM.get())),
-                        new BlockEntry(new ItemStack(WizardsReborn.ARCANE_WOOD_SIGN_ITEM.get())),
+                        //new BlockEntry(new ItemStack(WizardsReborn.ARCANE_WOOD_DOOR_ITEM.get())),
+                        //new BlockEntry(new ItemStack(WizardsReborn.ARCANE_WOOD_TRAPDOOR_ITEM.get())),
+                        //new BlockEntry(new ItemStack(WizardsReborn.ARCANE_WOOD_PRESSURE_PLATE_ITEM.get())),
+                        //new BlockEntry(new ItemStack(WizardsReborn.ARCANE_WOOD_BUTTON_ITEM.get())),
+                        //new BlockEntry(new ItemStack(WizardsReborn.ARCANE_WOOD_SIGN_ITEM.get())),
                         new BlockEntry(new ItemStack(WizardsReborn.ARCANE_WOOD_BOAT_ITEM.get())),
                         new BlockEntry(new ItemStack(WizardsReborn.ARCANE_WOOD_BRANCH.get()))
                 ),
@@ -120,7 +127,7 @@ public class ArcanemiconChapters {
                         new ItemStack(WizardsReborn.ARCANE_WOOD_LOG_ITEM.get()), ItemStack.EMPTY, ItemStack.EMPTY,
                         new ItemStack(WizardsReborn.ARCANE_WOOD_LOG_ITEM.get())
                 )
-        );
+        );*/
 
         ARCANE_GOLD = new Chapter(
                 "wizards_reborn.arcanemicon.chapter.arcane_gold",
@@ -590,9 +597,9 @@ public class ArcanemiconChapters {
         );
 
         ItemStack wandItem = new ItemStack(WizardsReborn.ARCANE_WAND.get());
-        Inventory wandItemInv = ArcaneWandItem.getInventory(wandItem);
-        CompoundNBT nbt = wandItem.getOrCreateTag();
-        wandItemInv.setInventorySlotContents(0, new ItemStack(WizardsReborn.EARTH_CRYSTAL.get()));
+        SimpleContainer wandItemInv = ArcaneWandItem.getInventory(wandItem);
+        CompoundTag nbt = wandItem.getOrCreateTag();
+        wandItemInv.setItem(0, new ItemStack(WizardsReborn.EARTH_CRYSTAL.get()));
         nbt.putBoolean("crystal", true);
         wandItem.setTag(nbt);
 
@@ -610,7 +617,7 @@ public class ArcanemiconChapters {
 
         ALCHEMY = new Category(
                 "alchemy",
-                new ItemStack(WizardsReborn.ELDER_MOR_ITEM.get()),
+                new ItemStack(WizardsReborn.FACETED_EARTH_CRYSTAL.get()),
                 ALCHEMY_INDEX
         );
 

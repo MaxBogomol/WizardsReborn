@@ -5,110 +5,109 @@ import mod.maxbogomol.wizards_reborn.api.spell.Spells;
 import mod.maxbogomol.wizards_reborn.common.network.PacketHandler;
 import mod.maxbogomol.wizards_reborn.common.network.SpellBurstEffectPacket;
 import mod.maxbogomol.wizards_reborn.common.network.SpellProjectileRayEffectPacket;
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityType;
-import net.minecraft.entity.projectile.ProjectileHelper;
-import net.minecraft.nbt.CompoundNBT;
-import net.minecraft.network.IPacket;
-import net.minecraft.network.datasync.DataParameter;
-import net.minecraft.network.datasync.DataSerializers;
-import net.minecraft.network.datasync.EntityDataManager;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.EntityRayTraceResult;
-import net.minecraft.util.math.MathHelper;
-import net.minecraft.util.math.RayTraceResult;
-import net.minecraft.util.math.vector.Vector3d;
-import net.minecraft.world.World;
-import net.minecraftforge.fml.network.NetworkHooks;
+import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.projectile.ProjectileUtil;
+import net.minecraft.nbt.CompoundTag;
+import net.minecraft.network.protocol.Packet;
+import net.minecraft.network.syncher.EntityDataAccessor;
+import net.minecraft.network.syncher.EntityDataSerializers;
+import net.minecraft.network.syncher.SynchedEntityData;
+import net.minecraft.core.BlockPos;
+import net.minecraft.world.phys.EntityHitResult;
+import net.minecraft.world.phys.HitResult;
+import net.minecraft.world.phys.Vec3;
+import net.minecraft.world.level.Level;
+import net.minecraftforge.network.NetworkHooks;
 
 import java.awt.*;
 import java.util.Optional;
 import java.util.UUID;
 
 public class SpellProjectileEntity extends Entity {
-    private static final DataParameter<Optional<UUID>> casterId = EntityDataManager.createKey(SpellProjectileEntity.class, DataSerializers.OPTIONAL_UNIQUE_ID);
-    private static final DataParameter<String> spellId = EntityDataManager.createKey(SpellProjectileEntity.class, DataSerializers.STRING);
+    private static final EntityDataAccessor<Optional<UUID>> casterId = SynchedEntityData.defineId(SpellProjectileEntity.class, EntityDataSerializers.OPTIONAL_UUID);
+    private static final EntityDataAccessor<String> spellId = SynchedEntityData.defineId(SpellProjectileEntity.class, EntityDataSerializers.STRING);
 
-    public SpellProjectileEntity(EntityType<?> entityTypeIn, World worldIn) {
+    public SpellProjectileEntity(EntityType<?> entityTypeIn, Level worldIn) {
         super(entityTypeIn, worldIn);
     }
 
     public Entity shoot(double x, double y, double z, double vx, double vy, double vz, UUID caster, String spell) {
-        setPosition(x, y, z);
-        setMotion(vx, vy, vz);
-        getDataManager().set(casterId, Optional.of(caster));
-        getDataManager().set(spellId, spell);
-        velocityChanged = true;
+        setPos(x, y, z);
+        setDeltaMovement(vx, vy, vz);
+        getEntityData().set(casterId, Optional.of(caster));
+        getEntityData().set(spellId, spell);
+        hurtMarked = true;
         return this;
     }
 
     @Override
     public void tick() {
-        Vector3d motion = getMotion();
-        setMotion(motion.x * 0.96, (motion.y > 0 ? motion.y * 0.96 : motion.y) - 0.03f, motion.z * 0.96);
+        Vec3 motion = getDeltaMovement();
+        setDeltaMovement(motion.x * 0.96, (motion.y > 0 ? motion.y * 0.96 : motion.y) - 0.03f, motion.z * 0.96);
 
         super.tick();
 
-        Vector3d pos = getPositionVec();
-        prevPosX = pos.x;
-        prevPosY = pos.y;
-        prevPosZ = pos.z;
-        setPosition(pos.x + motion.x, pos.y + motion.y, pos.z + motion.z);
+        Vec3 pos = position();
+        xo = pos.x;
+        yo = pos.y;
+        zo = pos.z;
+        setPos(pos.x + motion.x, pos.y + motion.y, pos.z + motion.z);
 
-        if (!world.isRemote) {
-            RayTraceResult ray = ProjectileHelper.func_234618_a_(this, (e) -> !e.isSpectator() && e.canBeCollidedWith() && !e.getUniqueID().equals(getDataManager().get(casterId)));
-            if (ray.getType() == RayTraceResult.Type.ENTITY) {
-                onImpact(ray, ((EntityRayTraceResult)ray).getEntity());
-            }
-            else if (ray.getType() == RayTraceResult.Type.BLOCK) {
-                onImpact(ray);
-            }
+        if (!level().isClientSide) {
+            //HitResult ray = ProjectileUtil.getHitResult(this, (e) -> !e.isSpectator() && e.isPickable() && !e.getUUID().equals(getEntityData().get(casterId)));
+            //if (ray.getType() == HitResult.Type.ENTITY) {
+            //    onImpact(ray, ((EntityHitResult)ray).getEntity());
+            //}
+            //else if (ray.getType() == HitResult.Type.BLOCK) {
+            //    onImpact(ray);
+            //}
             rayEffect();
         }
     }
 
-    protected void onImpact(RayTraceResult ray, Entity target) {
-        setDead();
+    protected void onImpact(HitResult ray, Entity target) {
+        removeAfterChangingDimensions();
         burstEffect();
     }
 
-    protected void onImpact(RayTraceResult ray) {
-        setDead();
-        setPosition(ray.getHitVec().x, ray.getHitVec().y, ray.getHitVec().z);
+    protected void onImpact(HitResult ray) {
+        removeAfterChangingDimensions();
+        setPos(ray.getLocation().x, ray.getLocation().y, ray.getLocation().z);
         burstEffect();
     }
 
     @Override
-    protected void registerData() {
-        this.getDataManager().register(spellId,"");
-        getDataManager().register(casterId, Optional.empty());
+    protected void defineSynchedData() {
+        this.getEntityData().define(spellId,"");
+        getEntityData().define(casterId, Optional.empty());
     }
 
     @Override
-    protected void readAdditional(CompoundNBT compound) {
-        compound.putUniqueId("caster", getDataManager().get(casterId).get());
-        compound.putString("spelll", getDataManager().get(spellId));
+    protected void readAdditionalSaveData(CompoundTag compound) {
+        compound.putUUID("caster", getEntityData().get(casterId).get());
+        compound.putString("spelll", getEntityData().get(spellId));
     }
 
     @Override
-    protected void writeAdditional(CompoundNBT compound) {
-        getDataManager().set(casterId, Optional.of(compound.getUniqueId("caster")));
-        getDataManager().set(spellId, compound.getString("spelll"));
+    protected void addAdditionalSaveData(CompoundTag compound) {
+        getEntityData().set(casterId, Optional.of(compound.getUUID("caster")));
+        getEntityData().set(spellId, compound.getString("spelll"));
     }
 
-    @Override
-    public IPacket<?> createSpawnPacket() {
+    /*@Override
+    public Packet<?> getAddEntityPacket() {
         return NetworkHooks.getEntitySpawningPacket(this);
-    }
+    }*/
 
     public Spell getSpell() {
-        return Spells.getSpell(getDataManager().get(spellId));
+        return Spells.getSpell(getEntityData().get(spellId));
     }
 
     public void rayEffect() {
-        Vector3d motion = getMotion();
-        Vector3d pos = getPositionVec();
-        Vector3d norm = motion.normalize().scale(0.025f);
+        Vec3 motion = getDeltaMovement();
+        Vec3 pos = position();
+        Vec3 norm = motion.normalize().scale(0.025f);
 
         Spell spell = getSpell();
         Color color = spell.getColor();
@@ -116,11 +115,11 @@ public class SpellProjectileEntity extends Entity {
         float g = color.getGreen() / 255f;
         float b = color.getBlue() / 255f;
 
-        PacketHandler.sendToTracking(world, new BlockPos(getPositionVec()), new SpellProjectileRayEffectPacket((float) prevPosX, (float) prevPosY + 0.2f, (float) prevPosZ, (float) pos.x, (float) pos.y + 0.2f, (float) pos.z, (float) norm.x, (float) norm.y, (float) norm.z, r, g, b));
+        PacketHandler.sendToTracking(level(), new BlockPos((int) pos.x, (int) pos.y, (int) pos.z), new SpellProjectileRayEffectPacket((float) xo, (float) yo + 0.2f, (float) zo, (float) pos.x, (float) pos.y + 0.2f, (float) pos.z, (float) norm.x, (float) norm.y, (float) norm.z, r, g, b));
     }
 
     public void burstEffect() {
-        Vector3d pos = getPositionVec();
+        Vec3 pos = position();
 
         Spell spell = getSpell();
         Color color = spell.getColor();
@@ -128,6 +127,6 @@ public class SpellProjectileEntity extends Entity {
         float g = color.getGreen() / 255f;
         float b = color.getBlue() / 255f;
 
-        PacketHandler.sendToTracking(world, new BlockPos(pos), new SpellBurstEffectPacket((float) pos.x, (float) pos.y + 0.2f, (float) pos.z, r, g, b));
+        PacketHandler.sendToTracking(level(), new BlockPos((int) pos.x, (int) pos.y, (int) pos.z), new SpellBurstEffectPacket((float) pos.x, (float) pos.y + 0.2f, (float) pos.z, r, g, b));
     }
 }

@@ -1,87 +1,88 @@
 package mod.maxbogomol.wizards_reborn.common.entity;
 
 import mod.maxbogomol.wizards_reborn.WizardsReborn;
-import net.minecraft.entity.EntityType;
-import net.minecraft.entity.item.BoatEntity;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.CompoundNBT;
-import net.minecraft.network.IPacket;
-import net.minecraft.network.datasync.DataParameter;
-import net.minecraft.network.datasync.DataSerializers;
-import net.minecraft.network.datasync.EntityDataManager;
-import net.minecraft.util.ResourceLocation;
-import net.minecraft.util.math.RayTraceResult;
-import net.minecraft.util.math.vector.Vector3d;
-import net.minecraft.world.World;
-import net.minecraftforge.fml.network.NetworkHooks;
+import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.vehicle.Boat;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.nbt.CompoundTag;
+import net.minecraft.network.protocol.Packet;
+import net.minecraft.network.syncher.EntityDataAccessor;
+import net.minecraft.network.syncher.EntityDataSerializers;
+import net.minecraft.network.syncher.SynchedEntityData;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.phys.HitResult;
+import net.minecraft.world.phys.Vec3;
+import net.minecraft.world.level.Level;
+import net.minecraftforge.network.NetworkHooks;
 import net.minecraftforge.registries.ForgeRegistries;
 
 import javax.annotation.Nonnull;
 
-public class CustomBoatEntity extends BoatEntity {
-    private static final DataParameter<String> WOOD_TYPE
-            = EntityDataManager.createKey(CustomBoatEntity.class, DataSerializers.STRING);
+public class CustomBoatEntity extends Boat {
+    private static final EntityDataAccessor<String> WOOD_TYPE
+            = SynchedEntityData.defineId(CustomBoatEntity.class, EntityDataSerializers.STRING);
 
-    public CustomBoatEntity(EntityType<? extends BoatEntity> type, World world) {
+    public CustomBoatEntity(EntityType<? extends Boat> type, Level world) {
         super(type, world);
-        this.preventEntitySpawning = true;
+        this.blocksBuilding = true;
     }
 
-    public CustomBoatEntity(World worldIn, double x, double y, double z) {
+    public CustomBoatEntity(Level worldIn, double x, double y, double z) {
         this(WizardsReborn.ARCANE_WOOD_BOAT.get(), worldIn);
-        this.setPosition(x, y, z);
-        this.setMotion(Vector3d.ZERO);
-        this.prevPosX = x;
-        this.prevPosY = y;
-        this.prevPosZ = z;
+        this.setPos(x, y, z);
+        this.setDeltaMovement(Vec3.ZERO);
+        this.xo = x;
+        this.yo = y;
+        this.zo = z;
     }
 
     @Override
-    protected void registerData() {
-        super.registerData();
-        this.dataManager.register(WOOD_TYPE, "arcane_wood");
+    protected void defineSynchedData() {
+        super.defineSynchedData();
+        this.entityData.define(WOOD_TYPE, "arcane_wood");
     }
 
     @Override
-    protected void readAdditional(CompoundNBT compound) {
-        super.readAdditional(compound);
+    protected void readAdditionalSaveData(CompoundTag compound) {
+        super.readAdditionalSaveData(compound);
         compound.putString("Type", this.getWoodType());
     }
 
     @Override
-    protected void writeAdditional(CompoundNBT compound) {
-        super.writeAdditional(compound);
+    protected void addAdditionalSaveData(CompoundTag compound) {
+        super.addAdditionalSaveData(compound);
         compound.putString("Type", this.getWoodType());
     }
 
     public String getWoodType() {
-        return this.dataManager.get(WOOD_TYPE);
+        return this.entityData.get(WOOD_TYPE);
     }
 
     public void setWoodType(String wood) {
-        this.dataManager.set(WOOD_TYPE, wood);
+        this.entityData.set(WOOD_TYPE, wood);
     }
 
     @Override
-    public Item getItemBoat() {
-        switch (this.getWoodType()) {
+    public Item getDropItem() {
+        /*switch (this.getWoodType()) {
             case "arcane_wood":
                 return WizardsReborn.ARCANE_WOOD_BOAT_ITEM.get();
             default:
                 return WizardsReborn.ARCANE_WOOD_BOAT_ITEM.get();
-        }
+        }*/
+        return WizardsReborn.ARCANE_WOOD_SAPLING_ITEM.get();
     }
 
     @Override
-    public ItemStack getPickedResult(RayTraceResult target) {
+    public ItemStack getPickedResult(HitResult target) {
         return new ItemStack(ForgeRegistries.ITEMS.getValue(
                 new ResourceLocation(WizardsReborn.MOD_ID, this.getWoodType() + "_boat")));
     }
 
-    @Nonnull
+    /*@Nonnull
     @Override
-    public IPacket<?> createSpawnPacket() {
+    public Packet<?> getAddEntityPacket() {
         return NetworkHooks.getEntitySpawningPacket(this);
-    }
+    }*/
 }

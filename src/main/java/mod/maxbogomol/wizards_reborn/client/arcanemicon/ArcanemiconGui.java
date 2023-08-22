@@ -1,14 +1,17 @@
 package mod.maxbogomol.wizards_reborn.client.arcanemicon;
 
-import com.mojang.blaze3d.matrix.MatrixStack;
+import com.mojang.blaze3d.systems.RenderSystem;
+import com.mojang.blaze3d.vertex.PoseStack;
 import mod.maxbogomol.wizards_reborn.WizardsReborn;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.gui.screen.Screen;
-import net.minecraft.item.ItemStack;
-import net.minecraft.util.ResourceLocation;
-import net.minecraft.util.SoundCategory;
-import net.minecraft.util.SoundEvents;
-import net.minecraft.util.text.TranslationTextComponent;
+import net.minecraft.client.gui.GuiGraphics;
+import net.minecraft.client.gui.screens.Screen;
+import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.MutableComponent;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.sounds.SoundSource;
+import net.minecraft.sounds.SoundEvents;
 import org.lwjgl.glfw.GLFW;
 
 public class ArcanemiconGui extends Screen {
@@ -21,7 +24,7 @@ public class ArcanemiconGui extends Screen {
     public ItemStack currentItem;
 
     public ArcanemiconGui() {
-        super(new TranslationTextComponent("gui.wizards_reborn.arcanemicon.title"));
+        super(Component.translatable("gui.wizards_reborn.arcanemicon.title"));
         currentChapter = ArcanemiconChapters.ARCANE_NATURE_INDEX;
     }
 
@@ -31,64 +34,62 @@ public class ArcanemiconGui extends Screen {
     }
 
     @Override
-    public void render(MatrixStack matrixStack, int mouseX, int mouseY, float partialTicks) {
-        renderBackground(matrixStack);
+    public void render(GuiGraphics gui, int mouseX, int mouseY, float partialTicks) {
+        renderBackground(gui);
         Minecraft mc = Minecraft.getInstance();
-        mc.getTextureManager().bindTexture(BACKGROUND);
+        RenderSystem.setShaderTexture(0, BACKGROUND);
 
         currentItem = ItemStack.EMPTY;
 
-        this.width = mc.getMainWindow().getScaledWidth();
-        this.height = mc.getMainWindow().getScaledHeight();
+        this.width = mc.getWindow().getGuiScaledWidth();
+        this.height = mc.getWindow().getGuiScaledHeight();
         int guiLeft = (width - xSize) / 2, guiTop = (height - ySize) / 2;
-        blit(matrixStack, guiLeft, guiTop, 0, 180, xSize, ySize, 512, 512);
+        gui.blit(BACKGROUND, guiLeft, guiTop, 0, 180, xSize, ySize, 512, 512);
 
         for (int i = 0; i < ArcanemiconChapters.categories.size(); i ++) {
             int y = guiTop + 12 + (i % 8) * 20;
-            ArcanemiconChapters.categories.get(i).draw(this, matrixStack, guiLeft + (i >= 8 ? 301 : 10), y, i >= 8, mouseX, mouseY);
+            ArcanemiconChapters.categories.get(i).draw(this, gui, guiLeft + (i >= 8 ? 301 : 10), y, i >= 8, mouseX, mouseY);
         }
 
-        mc.getTextureManager().bindTexture(BACKGROUND);
-        blit(matrixStack, guiLeft, guiTop, 0, 0, xSize, ySize, 512, 512);
+        gui.blit(BACKGROUND, guiLeft, guiTop, 0, 0, xSize, ySize, 512, 512);
         Page left = currentChapter.getPage(currentPage), right = currentChapter.getPage(currentPage + 1);
-        if (left != null) left.fullRender(this, matrixStack, guiLeft + 10, guiTop + 8, mouseX, mouseY);
-        if (right != null) right.fullRender(this, matrixStack, guiLeft + 174, guiTop + 8, mouseX, mouseY);
+        if (left != null) left.fullRender(this, gui, guiLeft + 10, guiTop + 8, mouseX, mouseY);
+        if (right != null) right.fullRender(this, gui, guiLeft + 174, guiTop + 8, mouseX, mouseY);
 
-        mc.getTextureManager().bindTexture(BACKGROUND);
         if (currentPage > 0) {
             int x = 11, y = 151;
             int v = 0;
             if (mouseX >= guiLeft + x && mouseY >= guiTop + y && mouseX <= guiLeft + x + 32 && mouseY <= guiTop + y + 16) v += 16;
-            blit(matrixStack, guiLeft + x, guiTop + y, 351, v, 32, 16, 512, 512);
+            gui.blit(BACKGROUND, guiLeft + x, guiTop + y, 351, v, 32, 16, 512, 512);
         }
         if (currentPage + 2 < currentChapter.size()) {
             int x = 269, y = 151;
             int v = 0;
             if (mouseX >= guiLeft + x && mouseY >= guiTop + y && mouseX <= guiLeft + x + 32 && mouseY <= guiTop + y + 16) v += 16;
-            blit(matrixStack, guiLeft + x, guiTop + y, 383, v, 32, 16, 512, 512);
+            gui.blit(BACKGROUND, guiLeft + x, guiTop + y, 383, v, 32, 16, 512, 512);
         }
 
         for (int i = 0; i < ArcanemiconChapters.categories.size(); i ++) {
             int y = guiTop + 12 + (i % 8) * 20;
-            ArcanemiconChapters.categories.get(i).drawTooltip(this, matrixStack, guiLeft + (i >= 8 ? 301 : 10), y, i >= 8, mouseX, mouseY);
+            ArcanemiconChapters.categories.get(i).drawTooltip(this, gui, guiLeft + (i >= 8 ? 301 : 10), y, i >= 8, mouseX, mouseY);
         }
 
-        renderTooltip(matrixStack, currentItem, mouseX, mouseY);
+        renderTooltip(gui, currentItem, mouseX, mouseY);
     }
 
     @Override
     public boolean mouseClicked(double mouseX, double mouseY, int button) {
         if (button == GLFW.GLFW_MOUSE_BUTTON_LEFT) {
             Minecraft mc = Minecraft.getInstance();
-            this.width = mc.getMainWindow().getScaledWidth();
-            this.height = mc.getMainWindow().getScaledHeight();
+            this.width = mc.getWindow().getGuiScaledWidth();
+            this.height = mc.getWindow().getGuiScaledHeight();
             int guiLeft = (width - xSize) / 2, guiTop = (height - ySize) / 2;
 
             if (currentPage > 0) {
                 int x = guiLeft + 11, y = guiTop + 151;
                 if (mouseX >= x && mouseY >= y && mouseX <= x + 32 && mouseY <= y + 16) {
                     currentPage -= 2;
-                    Minecraft.getInstance().player.playSound(SoundEvents.ITEM_BOOK_PAGE_TURN, SoundCategory.NEUTRAL, 1.0f, 1.0f);
+                    Minecraft.getInstance().player.playNotifySound(SoundEvents.BOOK_PAGE_TURN, SoundSource.NEUTRAL, 1.0f, 1.0f);
                     return true;
                 }
             }
@@ -96,7 +97,7 @@ public class ArcanemiconGui extends Screen {
                 int x = guiLeft + 269, y = guiTop + 151;
                 if (mouseX >= x && mouseY >= y && mouseX <= x + 32 && mouseY <= y + 16) {
                     currentPage += 2;
-                    Minecraft.getInstance().player.playSound(SoundEvents.ITEM_BOOK_PAGE_TURN, SoundCategory.NEUTRAL, 1.0f, 1.0f);
+                    Minecraft.getInstance().player.playNotifySound(SoundEvents.BOOK_PAGE_TURN, SoundSource.NEUTRAL, 1.0f, 1.0f);
                     return true;
                 }
             }
@@ -113,9 +114,12 @@ public class ArcanemiconGui extends Screen {
         return false;
     }
 
-    @Override
-    public void renderTooltip(MatrixStack mStack, ItemStack stack, int x, int y) {
-        if (!stack.isEmpty()) super.renderTooltip(mStack, stack, x, y);
+    public void renderTooltip(GuiGraphics gui, ItemStack stack, int x, int y) {
+        if (!stack.isEmpty()) gui.renderTooltip(Minecraft.getInstance().font, stack, x, y);
+    }
+
+    public void renderTooltip(GuiGraphics gui, MutableComponent component, int x, int y) {
+        gui.renderTooltip(Minecraft.getInstance().font, component, x, y);
     }
 
     @Override
