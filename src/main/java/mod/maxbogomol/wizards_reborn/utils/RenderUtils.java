@@ -29,8 +29,11 @@ import java.awt.*;
 
 import com.mojang.blaze3d.platform.Lighting;
 import org.joml.Matrix4f;
+import org.joml.Vector3f;
 
 public class RenderUtils {
+
+    public static float blitOffset = 0;
 
     public static final RenderStateShard.TransparencyStateShard ADDITIVE_TRANSPARENCY = new RenderStateShard.TransparencyStateShard("lightning_transparency", () -> {
         RenderSystem.enableBlend();
@@ -127,33 +130,39 @@ public class RenderUtils {
     public static void renderFloatingItemModelIntoGUI(ItemStack stack, int x, int y, float ticks, float ticksUp) {
         BakedModel bakedmodel = Minecraft.getInstance().getItemRenderer().getModel(stack, (Level)null, (LivingEntity)null, 0);
 
-        //Minecraft.getInstance().getItemRenderer().blitOffset += 50.0F;
+        blitOffset += 50.0F;
 
         Minecraft.getInstance().getTextureManager().getTexture(TextureAtlas.LOCATION_BLOCKS).setFilter(false, false);
         RenderSystem.setShaderTexture(0, TextureAtlas.LOCATION_BLOCKS);
         RenderSystem.enableBlend();
-        RenderSystem.blendFunc(GlStateManager.SourceFactor.SRC_ALPHA, GlStateManager.DestFactor.ONE_MINUS_SRC_ALPHA);
+        RenderSystem.blendFunc(GlStateManager.SourceFactor.SRC_ALPHA, GlStateManager.DestFactor.ONE);
         RenderSystem.setShaderColor(1.0F, 1.0F, 1.0F, 1.0F);
         PoseStack posestack = RenderSystem.getModelViewStack();
         posestack.pushPose();
-        posestack.translate(x, y, (100.0F));
+        posestack.translate(x, y, (100.0F + blitOffset));
         posestack.translate(8.0D, 8.0D, 0.0D);
         posestack.scale(1.0F, -1.0F, 1.0F);
         posestack.scale(16.0F, 16.0F, 16.0F);
         RenderSystem.getModelViewStack().mulPose(Axis.YP.rotationDegrees(ticks));
+        posestack.translate(0.0D, Math.sin(Math.toRadians(ticksUp)) * 0.03125F, 0.0D);
         RenderSystem.applyModelViewMatrix();
         PoseStack posestack1 = new PoseStack();
         MultiBufferSource.BufferSource multibuffersource$buffersource = Minecraft.getInstance().renderBuffers().bufferSource();
-        Lighting.setupForFlatItems();
+        boolean flag = !bakedmodel.usesBlockLight();
+        if (flag) {
+            Lighting.setupForFlatItems();
+        }
 
         Minecraft.getInstance().getItemRenderer().render(stack, ItemDisplayContext.GUI, false, posestack1, multibuffersource$buffersource, 15728880, OverlayTexture.NO_OVERLAY, bakedmodel);
         multibuffersource$buffersource.endBatch();
         RenderSystem.enableDepthTest();
-        Lighting.setupFor3DItems();
+        if (flag) {
+            Lighting.setupFor3DItems();
+        }
 
         posestack.popPose();
         RenderSystem.applyModelViewMatrix();
 
-        //Minecraft.getInstance().getItemRenderer(). -= 50.0F;
+        blitOffset -= 50.0F;
     }
 }

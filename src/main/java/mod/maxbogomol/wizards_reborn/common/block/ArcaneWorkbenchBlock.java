@@ -3,10 +3,13 @@ package mod.maxbogomol.wizards_reborn.common.block;
 import mod.maxbogomol.wizards_reborn.client.gui.container.ArcaneWorkbenchContainer;
 import mod.maxbogomol.wizards_reborn.common.item.equipment.WissenWandItem;
 import mod.maxbogomol.wizards_reborn.common.tileentity.ArcaneWorkbenchTileEntity;
+import mod.maxbogomol.wizards_reborn.common.tileentity.TickableBlockEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.entity.BlockEntityTicker;
+import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.material.FluidState;
 import net.minecraft.world.level.material.Fluids;
@@ -42,6 +45,7 @@ import net.minecraft.world.level.block.HorizontalDirectionalBlock;
 import net.minecraft.world.level.block.SimpleWaterloggedBlock;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraftforge.network.NetworkHooks;
+import org.jetbrains.annotations.NotNull;
 
 public class ArcaneWorkbenchBlock extends HorizontalDirectionalBlock implements EntityBlock, SimpleWaterloggedBlock  {
 
@@ -126,7 +130,7 @@ public class ArcaneWorkbenchBlock extends HorizontalDirectionalBlock implements 
                 BlockEntity tileEntity = world.getBlockEntity(pos);
 
                 //MenuProvider containerProvider = createContainerProvider(world, pos);
-                //NetworkHooks.openGui(((ServerPlayer) player), containerProvider, tileEntity.getBlockPos());
+                //NetworkHooks.openScreen(((ServerPlayer) player), containerProvider, tileEntity.getBlockPos());
                 return InteractionResult.CONSUME;
             }
         }
@@ -138,7 +142,7 @@ public class ArcaneWorkbenchBlock extends HorizontalDirectionalBlock implements 
         return new MenuProvider() {
             @Override
             public Component getDisplayName() {
-                return new TranslatableComponent(null);
+                return Component.translatable(null);
             }
 
             @Nullable
@@ -174,5 +178,11 @@ public class ArcaneWorkbenchBlock extends HorizontalDirectionalBlock implements 
     @Override
     public BlockEntity newBlockEntity(BlockPos pPos, BlockState pState) {
         return new ArcaneWorkbenchTileEntity(pPos, pState);
+    }
+
+    @Nullable
+    @Override
+    public <T extends BlockEntity> BlockEntityTicker<T> getTicker(@NotNull Level level, @NotNull BlockState state, @NotNull BlockEntityType<T> type) {
+        return TickableBlockEntity.getTickerHelper();
     }
 }

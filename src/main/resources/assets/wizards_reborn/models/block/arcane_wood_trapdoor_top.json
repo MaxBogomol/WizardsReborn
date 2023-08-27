@@ -1,5 +1,6 @@
 {
   "parent": "minecraft:block/template_trapdoor_top",
+  "render_type": "minecraft:cutout",
   "textures": {
     "texture": "wizards_reborn:block/arcane_wood_trapdoor"
   }

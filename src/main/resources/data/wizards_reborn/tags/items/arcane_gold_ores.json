@@ -2,6 +2,7 @@
   "replace": false,
   "values": [
     "wizards_reborn:arcane_gold_ore",
+    "wizards_reborn:deepslate_arcane_gold_ore",
     "wizards_reborn:nether_arcane_gold_ore"
   ]
 }

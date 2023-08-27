@@ -105,16 +105,16 @@ dependencies {
     compileOnly fg.deobf("top.theillusivec4.curios:curios-forge:5.2.0-beta.3+1.20.1:api")
     runtimeOnly fg.deobf("top.theillusivec4.curios:curios-forge:5.2.0-beta.3+1.20.1")
 
-    //compileOnly fg.deobf("top.theillusivec4.caelus:caelus-forge:1.17.1-3.0.0.2:api")
-    //runtimeOnly fg.deobf("top.theillusivec4.caelus:caelus-forge:1.17.1-3.0.0.2")
+    compileOnly fg.deobf("top.theillusivec4.caelus:caelus-forge:3.1.0+1.20:api")
+    runtimeOnly fg.deobf("top.theillusivec4.caelus:caelus-forge:3.1.0+1.20")
 
-    //compileOnly fg.deobf("mezz.jei:jei-1.19.3-common-api:12.3.0.21")
-    //runtimeOnly fg.deobf("mezz.jei:jei-1.19.3-forge:12.3.0.21")
+    compileOnly fg.deobf("mezz.jei:jei-1.20.1-common-api:15.0.0.14")
+    runtimeOnly fg.deobf("mezz.jei:jei-1.20.1-forge:15.0.0.14")
 
-    //compileOnly fg.deobf("com.blamejared.crafttweaker:CraftTweaker-1.17.1-8.0.0")
-    //runtimeOnly fg.deobf("com.blamejared.crafttweaker:CraftTweaker-1.17.1-8.0.0")
+    compileOnly fg.deobf("com.blamejared.crafttweaker:CraftTweaker-forge-1.20.1:14.0.13")
+    runtimeOnly fg.deobf("com.blamejared.crafttweaker:CraftTweaker-forge-1.20.1:14.0.13")
 
-    //implementation fg.deobf('team.chisel.ctm:CTM:MC1.16.1-1.1.2.6')
+    implementation fg.deobf('team.chisel.ctm:CTM:1.20.1-1.1.8+4')
     //implementation fg.deobf('curse.maven:project-457570:3537611')
 }
 

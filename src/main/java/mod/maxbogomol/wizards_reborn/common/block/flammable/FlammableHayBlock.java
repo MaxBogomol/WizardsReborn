@@ -35,7 +35,7 @@ public class FlammableHayBlock extends RotatedPillarBlock {
         return fireSpeed;
     }
 
-    public void fallOn(Level worldIn, BlockPos pos, Entity entityIn, float fallDistance) {
-        //entityIn.causeFallDamage(fallDistance, 0.2F);
+    public void fallOn(Level worldIn, BlockState state, BlockPos pos, Entity entityIn, float fallDistance) {
+        entityIn.causeFallDamage(fallDistance, 0.2F, worldIn.damageSources().fall());
     }
 }

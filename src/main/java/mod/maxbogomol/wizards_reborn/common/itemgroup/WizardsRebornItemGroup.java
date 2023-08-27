@@ -28,9 +28,12 @@ public class WizardsRebornItemGroup {
         if (event.getTabKey() == WizardsRebornItemGroup.WIZARDS_REBORN_GROUP.getKey()) {
             event.accept(WizardsReborn.ARCANE_GOLD_INGOT);
             event.accept(WizardsReborn.ARCANE_GOLD_NUGGET);
+            event.accept(WizardsReborn.RAW_ARCANE_GOLD);
             event.accept(WizardsReborn.ARCANE_GOLD_BLOCK_ITEM);
             event.accept(WizardsReborn.ARCANE_GOLD_ORE_ITEM);
+            event.accept(WizardsReborn.DEEPSLATE_ARCANE_GOLD_ORE_ITEM);
             event.accept(WizardsReborn.NETHER_ARCANE_GOLD_ORE_ITEM);
+            event.accept(WizardsReborn.RAW_ARCANE_GOLD_BLOCK_ITEM);
 
             event.accept(WizardsReborn.ARCANE_GOLD_SWORD);
             event.accept(WizardsReborn.ARCANE_GOLD_PICKAXE);
@@ -43,6 +46,7 @@ public class WizardsRebornItemGroup {
             event.accept(WizardsReborn.ARCANUM_DUST);
             event.accept(WizardsReborn.ARCANUM_BLOCK_ITEM);
             event.accept(WizardsReborn.ARCANUM_ORE_ITEM);
+            event.accept(WizardsReborn.DEEPSLATE_ARCANUM_ORE_ITEM);
 
             event.accept(WizardsReborn.ARCANE_WOOD_LOG_ITEM);
             event.accept(WizardsReborn.ARCANE_WOOD_ITEM);
@@ -52,13 +56,15 @@ public class WizardsRebornItemGroup {
             event.accept(WizardsReborn.ARCANE_WOOD_STAIRS_ITEM);
             event.accept(WizardsReborn.ARCANE_WOOD_SLAB_ITEM);
             event.accept(WizardsReborn.ARCANE_WOOD_FENCE_ITEM);
-            //event.accept(WizardsReborn.ARCANE_WOOD_FENCE_GATE_ITEM);
-            //event.accept(WizardsReborn.ARCANE_WOOD_DOOR_ITEM);
-            //event.accept(WizardsReborn.ARCANE_WOOD_TRAPDOOR_ITEM);
-            //event.accept(WizardsReborn.ARCANE_WOOD_PRESSURE_PLATE_ITEM);
-            //event.accept(WizardsReborn.ARCANE_WOOD_BUTTON_ITEM);
-            //event.accept(WizardsReborn.ARCANE_WOOD_SIGN_ITEM);
-            //event.accept(WizardsReborn.ARCANE_WOOD_BOAT_ITEM);
+            event.accept(WizardsReborn.ARCANE_WOOD_FENCE_GATE_ITEM);
+            event.accept(WizardsReborn.ARCANE_WOOD_DOOR_ITEM);
+            event.accept(WizardsReborn.ARCANE_WOOD_TRAPDOOR_ITEM);
+            event.accept(WizardsReborn.ARCANE_WOOD_PRESSURE_PLATE_ITEM);
+            event.accept(WizardsReborn.ARCANE_WOOD_BUTTON_ITEM);
+            event.accept(WizardsReborn.ARCANE_WOOD_SIGN_ITEM);
+            event.accept(WizardsReborn.ARCANE_WOOD_HANGING_SIGN_ITEM);
+            event.accept(WizardsReborn.ARCANE_WOOD_BOAT_ITEM);
+            event.accept(WizardsReborn.ARCANE_WOOD_CHEST_BOAT_ITEM);
             event.accept(WizardsReborn.ARCANE_WOOD_BRANCH);
             event.accept(WizardsReborn.ARCANE_WOOD_LEAVES_ITEM);
             event.accept(WizardsReborn.ARCANE_WOOD_SAPLING_ITEM);
@@ -81,17 +87,17 @@ public class WizardsRebornItemGroup {
             event.accept(WizardsReborn.FIRE_CRYSTAL_SEED);
             event.accept(WizardsReborn.VOID_CRYSTAL_SEED);
 
-            event.accept(WizardsReborn.EARTH_CRYSTAL);
-            event.accept(WizardsReborn.WATER_CRYSTAL);
-            event.accept(WizardsReborn.AIR_CRYSTAL);
-            event.accept(WizardsReborn.FIRE_CRYSTAL);
-            event.accept(WizardsReborn.VOID_CRYSTAL);
-
             event.accept(WizardsReborn.FRACTURED_EARTH_CRYSTAL);
             event.accept(WizardsReborn.FRACTURED_WATER_CRYSTAL);
             event.accept(WizardsReborn.FRACTURED_AIR_CRYSTAL);
             event.accept(WizardsReborn.FRACTURED_FIRE_CRYSTAL);
             event.accept(WizardsReborn.FRACTURED_VOID_CRYSTAL);
+
+            event.accept(WizardsReborn.EARTH_CRYSTAL);
+            event.accept(WizardsReborn.WATER_CRYSTAL);
+            event.accept(WizardsReborn.AIR_CRYSTAL);
+            event.accept(WizardsReborn.FIRE_CRYSTAL);
+            event.accept(WizardsReborn.VOID_CRYSTAL);
 
             event.accept(WizardsReborn.EARTH_CRYSTAL_SEED);
             event.accept(WizardsReborn.WATER_CRYSTAL_SEED);

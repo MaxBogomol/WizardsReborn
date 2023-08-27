@@ -2,6 +2,8 @@ package mod.maxbogomol.wizards_reborn.common.item;
 
 import mod.maxbogomol.wizards_reborn.WizardsReborn;
 import mod.maxbogomol.wizards_reborn.client.particle.Particles;
+import mod.maxbogomol.wizards_reborn.common.recipe.ArcanumDustTransmutationRecipe;
+import net.minecraft.core.RegistryAccess;
 import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.SimpleContainer;
@@ -43,16 +45,15 @@ public class ArcanumDustItem extends Item {
 
         SimpleContainer inv = new SimpleContainer(1);
         inv.setItem(0, world.getBlockState(blockpos).getBlock().asItem().getDefaultInstance());
-        /*
         Optional<ArcanumDustTransmutationRecipe> recipe = world.getRecipeManager()
-                .getRecipeFor(WizardsReborn.ARCANUM_DUST_TRANSMUTATION_RECIPE, inv, world);
+                .getRecipeFor(WizardsReborn.ARCANUM_DUST_TRANSMUTATION_RECIPE.get(), inv, world);
 
         AtomicBoolean place_block = new AtomicBoolean(true);
         AtomicReference<ItemStack> item = new AtomicReference<>(ItemStack.EMPTY);
 
         recipe.ifPresent(iRecipe -> {
             place_block.set(iRecipe.getPlaceBlock());
-            item.set(iRecipe.getResultItem().copy());
+            item.set(iRecipe.getResultItem(RegistryAccess.EMPTY).copy());
         });
 
         boolean craft = false;
@@ -115,7 +116,7 @@ public class ArcanumDustItem extends Item {
                     }
                 }
             }
-        }*/
+        }
 
         return super.onItemUseFirst(stack, context);
     }

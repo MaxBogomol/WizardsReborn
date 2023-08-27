@@ -21,6 +21,7 @@ import mod.maxbogomol.wizards_reborn.client.particle.KarmaParticleType;
 import mod.maxbogomol.wizards_reborn.client.particle.SparkleParticleType;
 import mod.maxbogomol.wizards_reborn.client.particle.WispParticleType;
 import mod.maxbogomol.wizards_reborn.client.render.WorldRenderHandler;
+import mod.maxbogomol.wizards_reborn.client.render.entity.ArcaneWoodBoatModel;
 import mod.maxbogomol.wizards_reborn.client.render.entity.EmptyRenderer;
 import mod.maxbogomol.wizards_reborn.client.render.item.WandCrystalsModels;
 import mod.maxbogomol.wizards_reborn.client.render.tileentity.*;
@@ -29,11 +30,13 @@ import mod.maxbogomol.wizards_reborn.common.block.flammable.*;
 import mod.maxbogomol.wizards_reborn.common.config.Config;
 import mod.maxbogomol.wizards_reborn.common.crystal.*;
 import mod.maxbogomol.wizards_reborn.common.entity.CustomBoatEntity;
+import mod.maxbogomol.wizards_reborn.common.entity.CustomChestBoatEntity;
 import mod.maxbogomol.wizards_reborn.common.entity.SpellProjectileEntity;
 import mod.maxbogomol.wizards_reborn.common.event.Events;
 import mod.maxbogomol.wizards_reborn.common.item.ArcanemiconItem;
 import mod.maxbogomol.wizards_reborn.common.item.ArcanumDustItem;
 import mod.maxbogomol.wizards_reborn.common.item.CrystalItem;
+import mod.maxbogomol.wizards_reborn.common.item.CustomBoatItem;
 import mod.maxbogomol.wizards_reborn.common.item.equipment.ArcaneWandItem;
 import mod.maxbogomol.wizards_reborn.common.item.equipment.CustomItemTier;
 import mod.maxbogomol.wizards_reborn.common.item.equipment.WissenWandItem;
@@ -43,29 +46,42 @@ import mod.maxbogomol.wizards_reborn.common.item.equipment.curio.LeatherBeltItem
 import mod.maxbogomol.wizards_reborn.common.itemgroup.WizardsRebornItemGroup;
 import mod.maxbogomol.wizards_reborn.common.knowledge.RegisterKnowledges;
 import mod.maxbogomol.wizards_reborn.common.network.PacketHandler;
+import mod.maxbogomol.wizards_reborn.common.recipe.ArcaneWorkbenchRecipe;
+import mod.maxbogomol.wizards_reborn.common.recipe.ArcanumDustTransmutationRecipe;
+import mod.maxbogomol.wizards_reborn.common.recipe.WissenAltarRecipe;
+import mod.maxbogomol.wizards_reborn.common.recipe.WissenCrystallizerRecipe;
 import mod.maxbogomol.wizards_reborn.common.spell.*;
 import mod.maxbogomol.wizards_reborn.common.tileentity.*;
 import mod.maxbogomol.wizards_reborn.common.world.WorldGen;
 import mod.maxbogomol.wizards_reborn.common.world.tree.ArcaneWoodTree;
 import net.minecraft.client.KeyMapping;
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.model.BoatModel;
+import net.minecraft.client.model.ChestBoatModel;
+import net.minecraft.client.renderer.ItemBlockRenderTypes;
+import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.ShaderInstance;
+import net.minecraft.client.renderer.Sheets;
 import net.minecraft.client.renderer.blockentity.BlockEntityRenderers;
+import net.minecraft.client.renderer.blockentity.HangingSignRenderer;
+import net.minecraft.client.renderer.blockentity.SignRenderer;
 import net.minecraft.client.renderer.entity.EntityRenderers;
 import net.minecraft.core.particles.ParticleType;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.MobCategory;
+import net.minecraft.world.inventory.MenuType;
 import net.minecraft.world.item.*;
 import net.minecraft.world.item.crafting.RecipeSerializer;
-import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.Blocks;
-import net.minecraft.world.level.block.HugeMushroomBlock;
-import net.minecraft.world.level.block.SaplingBlock;
+import net.minecraft.world.item.crafting.RecipeType;
+import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockBehaviour;
+import net.minecraft.world.level.block.state.properties.BlockSetType;
+import net.minecraft.world.level.block.state.properties.WoodType;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
+import net.minecraftforge.client.event.EntityRenderersEvent;
 import net.minecraftforge.client.event.RegisterParticleProvidersEvent;
 import net.minecraftforge.client.event.RegisterShadersEvent;
 import net.minecraftforge.client.settings.KeyConflictContext;
@@ -105,10 +121,11 @@ public class WizardsReborn
     public static final DeferredRegister<BlockEntityType<?>> TILE_ENTITIES = DeferredRegister.create(ForgeRegistries.BLOCK_ENTITY_TYPES, MOD_ID);
     public static final DeferredRegister<EntityType<?>> ENTITIES = DeferredRegister.create(ForgeRegistries.ENTITY_TYPES, MOD_ID);
     public static final DeferredRegister<ParticleType<?>> PARTICLES = DeferredRegister.create(ForgeRegistries.PARTICLE_TYPES, MOD_ID);
-    public static final DeferredRegister<RecipeSerializer<?>> RECIPES = DeferredRegister.create(ForgeRegistries.RECIPE_SERIALIZERS, MOD_ID);
-    //public static final DeferredRegister<MenuType<?>> CONTAINERS = DeferredRegister.create(ForgeRegistries.CONTAINERS, MOD_ID);
+    public static final DeferredRegister<RecipeSerializer<?>> RECIPE_SERIALIZERS = DeferredRegister.create(ForgeRegistries.RECIPE_SERIALIZERS, MOD_ID);
+    public static final DeferredRegister<RecipeType<?>> RECIPES = DeferredRegister.create(ForgeRegistries.RECIPE_TYPES, MOD_ID);
+    public static final DeferredRegister<MenuType<?>> CONTAINERS = DeferredRegister.create(ForgeRegistries.MENU_TYPES, MOD_ID);
 
-    //public static final WoodType ARCANE_WOOD_TYPE = WoodType.register(new WoodType(new ResourceLocation(MOD_ID, "arcane_wood").toString()));
+    public static final WoodType ARCANE_WOOD_TYPE = WoodType.register(new WoodType(new ResourceLocation(MOD_ID, "arcane_wood").toString(), BlockSetType.OAK));
 
     //POLISHING_TYPES
     public static final PolishingType CRYSTAL_POLISHING_TYPE  = new CrystalPolishingType();
@@ -156,9 +173,12 @@ public class WizardsReborn
     //BLOCKS
     public static final RegistryObject<Block> ARCANE_GOLD_BLOCK = BLOCKS.register("arcane_gold_block", () -> new Block(BlockBehaviour.Properties.copy(Blocks.GOLD_BLOCK)));
     public static final RegistryObject<Block> ARCANE_GOLD_ORE = BLOCKS.register("arcane_gold_ore", () -> new Block(BlockBehaviour.Properties.copy(Blocks.GOLD_ORE)));
-    public static final RegistryObject<Block> NETHER_ARCANE_GOLD_ORE = BLOCKS.register("nether_arcane_gold_ore", () -> new Block(BlockBehaviour.Properties.copy(Blocks.GOLD_ORE)));
+    public static final RegistryObject<Block> DEEPSLATE_ARCANE_GOLD_ORE = BLOCKS.register("deepslate_arcane_gold_ore", () -> new Block(BlockBehaviour.Properties.copy(Blocks.DEEPSLATE_GOLD_ORE)));
+    public static final RegistryObject<Block> NETHER_ARCANE_GOLD_ORE = BLOCKS.register("nether_arcane_gold_ore", () -> new Block(BlockBehaviour.Properties.copy(Blocks.NETHER_GOLD_ORE)));
+    public static final RegistryObject<Block> RAW_ARCANE_GOLD_BLOCK = BLOCKS.register("raw_arcane_gold_block", () -> new Block(BlockBehaviour.Properties.copy(Blocks.RAW_GOLD_BLOCK)));
     public static final RegistryObject<Block> ARCANUM_BLOCK = BLOCKS.register("arcanum_block", () -> new Block(BlockBehaviour.Properties.copy(Blocks.DIAMOND_BLOCK)));
-    public static final RegistryObject<Block> ARCANUM_ORE = BLOCKS.register("arcanum_ore", () -> new ArcanumOreBlock(BlockBehaviour.Properties.copy(Blocks.DIAMOND_BLOCK)));
+    public static final RegistryObject<Block> ARCANUM_ORE = BLOCKS.register("arcanum_ore", () -> new ArcanumOreBlock(BlockBehaviour.Properties.copy(Blocks.DIAMOND_ORE)));
+    public static final RegistryObject<Block> DEEPSLATE_ARCANUM_ORE = BLOCKS.register("deepslate_arcanum_ore", () -> new ArcanumOreBlock(BlockBehaviour.Properties.copy(Blocks.DEEPSLATE_DIAMOND_ORE)));
 
     public static final RegistryObject<Block> ARCANE_WOOD_LOG = BLOCKS.register("arcane_wood_log", () -> new FlammableRotatedPillarBlock(BlockBehaviour.Properties.copy(Blocks.OAK_LOG), 5, 5));
     public static final RegistryObject<Block> ARCANE_WOOD = BLOCKS.register("arcane_wood", () -> new FlammableRotatedPillarBlock(BlockBehaviour.Properties.copy(Blocks.OAK_WOOD), 5, 5));
@@ -168,17 +188,18 @@ public class WizardsReborn
     public static final RegistryObject<Block> ARCANE_WOOD_STAIRS = BLOCKS.register("arcane_wood_stairs", () -> new FlammableStairsBlock(() -> ARCANE_WOOD_PLANKS.get().defaultBlockState(), BlockBehaviour.Properties.copy(Blocks.OAK_PLANKS),  5, 20));
     public static final RegistryObject<Block> ARCANE_WOOD_SLAB = BLOCKS.register("arcane_wood_slab", () -> new FlammableSlabBlock(BlockBehaviour.Properties.copy(Blocks.OAK_PLANKS),  5, 20));
     public static final RegistryObject<Block> ARCANE_WOOD_FENCE = BLOCKS.register("arcane_wood_fence", () -> new FlammableFenceBlock(BlockBehaviour.Properties.copy(Blocks.OAK_PLANKS),  5, 20));
-    //public static final RegistryObject<Block> ARCANE_WOOD_FENCE_GATE = BLOCKS.register("arcane_wood_fence_gate", () -> new FlammableFenceGateBlock(BlockBehaviour.Properties.copy(Blocks.OAK_PLANKS),  5, 20));
-    //public static final RegistryObject<Block> ARCANE_WOOD_DOOR = BLOCKS.register("arcane_wood_door", () -> new DoorBlock(BlockBehaviour.Properties.copy(Blocks.OAK_PLANKS).noOcclusion()));
-    //public static final RegistryObject<Block> ARCANE_WOOD_TRAPDOOR = BLOCKS.register("arcane_wood_trapdoor", () -> new TrapDoorBlock(BlockBehaviour.Properties.copy(Blocks.OAK_PLANKS).noOcclusion()));
-    //public static final RegistryObject<Block> ARCANE_WOOD_PRESSURE_PLATE = BLOCKS.register("arcane_wood_pressure_plate", () -> new PressurePlateBlock(PressurePlateBlock.Sensitivity.EVERYTHING, BlockBehaviour.Properties.copy(Blocks.OAK_PLANKS).noOcclusion().noCollission()));
-    //public static final RegistryObject<Block> ARCANE_WOOD_BUTTON = BLOCKS.register("arcane_wood_button", () -> new ButtonBlock(BlockBehaviour.Properties.copy(Blocks.OAK_PLANKS).noCollission()));
-    //public static final RegistryObject<Block> ARCANE_WOOD_SIGN = BLOCKS.register("arcane_wood_sign", () -> new ArcaneWoodStandingSignBlock(BlockBehaviour.Properties.copy(Blocks.OAK_PLANKS).noOcclusion().noCollission(), ARCANE_WOOD_TYPE));
-    //public static final RegistryObject<Block> ARCANE_WOOD_WALL_SIGN = BLOCKS.register("arcane_wood_wall_sign", () -> new ArcaneWoodWallSignBlock(BlockBehaviour.Properties.copy(Blocks.OAK_PLANKS).noOcclusion().noCollission(), ARCANE_WOOD_TYPE));
-    ////UIFDGnijbFDZGijnbfdzghijnzcghnijfdghnij
-    public static final RegistryObject<Block> ARCANE_WOOD_LEAVES = BLOCKS.register("arcane_wood_leaves", () -> new ArcaneWoodLeavesBlock(BlockBehaviour.Properties.copy(Blocks.OAK_PLANKS), 30, 60));
+    public static final RegistryObject<Block> ARCANE_WOOD_FENCE_GATE = BLOCKS.register("arcane_wood_fence_gate", () -> new FlammableFenceGateBlock(BlockBehaviour.Properties.copy(Blocks.OAK_PLANKS), WoodType.OAK,  5, 20));
+    public static final RegistryObject<Block> ARCANE_WOOD_DOOR = BLOCKS.register("arcane_wood_door", () -> new DoorBlock(BlockBehaviour.Properties.copy(Blocks.OAK_PLANKS).noOcclusion(), BlockSetType.OAK));
+    public static final RegistryObject<Block> ARCANE_WOOD_TRAPDOOR = BLOCKS.register("arcane_wood_trapdoor", () -> new TrapDoorBlock(BlockBehaviour.Properties.copy(Blocks.OAK_PLANKS).noOcclusion(), BlockSetType.OAK));
+    public static final RegistryObject<Block> ARCANE_WOOD_PRESSURE_PLATE = BLOCKS.register("arcane_wood_pressure_plate", () -> new PressurePlateBlock(PressurePlateBlock.Sensitivity.EVERYTHING, BlockBehaviour.Properties.copy(Blocks.IRON_BLOCK).sound(SoundType.AMETHYST), BlockSetType.OAK));
+    public static final RegistryObject<Block> ARCANE_WOOD_BUTTON = BLOCKS.register("arcane_wood_button", () -> new ButtonBlock(BlockBehaviour.Properties.copy(Blocks.OAK_BUTTON).sound(SoundType.WOOD), BlockSetType.OAK, 30, true));
+    public static final RegistryObject<Block> ARCANE_WOOD_SIGN = BLOCKS.register("arcane_wood_sign", () -> new ArcaneWoodStandingSignBlock(BlockBehaviour.Properties.copy(Blocks.OAK_PLANKS).noOcclusion().noCollission(), ARCANE_WOOD_TYPE));
+    public static final RegistryObject<Block> ARCANE_WOOD_WALL_SIGN = BLOCKS.register("arcane_wood_wall_sign", () -> new ArcaneWoodWallSignBlock(BlockBehaviour.Properties.copy(Blocks.OAK_PLANKS).noOcclusion().noCollission(), ARCANE_WOOD_TYPE));
+    public static final RegistryObject<Block> ARCANE_WOOD_HANGING_SIGN = BLOCKS.register("arcane_wood_hanging_sign", () -> new ArcaneWoodCeilingHangingSignBlock(BlockBehaviour.Properties.copy(Blocks.OAK_PLANKS).noOcclusion().noCollission(), ARCANE_WOOD_TYPE));
+    public static final RegistryObject<Block> ARCANE_WOOD_HANGING_WALL_SIGN = BLOCKS.register("arcane_wood_hanging_wall_sign", () -> new ArcaneWoodWallHangingSignBlock(BlockBehaviour.Properties.copy(Blocks.OAK_PLANKS).noOcclusion().noCollission(), ARCANE_WOOD_TYPE));
+    public static final RegistryObject<Block> ARCANE_WOOD_LEAVES = BLOCKS.register("arcane_wood_leaves", () -> new ArcaneWoodLeavesBlock(BlockBehaviour.Properties.copy(Blocks.OAK_LEAVES), 30, 60));
     public static final RegistryObject<Block> ARCANE_WOOD_SAPLING = BLOCKS.register("arcane_wood_sapling", () -> new SaplingBlock(new ArcaneWoodTree(), BlockBehaviour.Properties.copy(Blocks.OAK_SAPLING)));
-    //public static final RegistryObject<Block> POTTED_ARCANE_WOOD_SAPLING = BLOCKS.register("potted_arcane_wood_sapling", () -> new FlowerPotBlock(ARCANE_WOOD_SAPLING.get(), BlockBehaviour.Properties.of(Material.DECORATION).instabreak().noOcclusion()));
+    public static final RegistryObject<Block> POTTED_ARCANE_WOOD_SAPLING = BLOCKS.register("potted_arcane_wood_sapling", () -> new FlowerPotBlock(ARCANE_WOOD_SAPLING.get(), BlockBehaviour.Properties.copy(Blocks.FLOWER_POT).instabreak().noOcclusion()));
 
     public static final RegistryObject<Block> ARCANE_LINEN = BLOCKS.register("arcane_linen", () -> new ArcaneLinenBlock(BlockBehaviour.Properties.copy(Blocks.WHEAT)));
     public static final RegistryObject<Block> ARCANE_LINEN_HAY = BLOCKS.register("arcane_linen_hay", () -> new FlammableHayBlock(BlockBehaviour.Properties.copy(Blocks.HAY_BLOCK), 60, 20));
@@ -260,9 +281,12 @@ public class WizardsReborn
     //ITEMS
     public static final RegistryObject<Item> ARCANE_GOLD_INGOT = ITEMS.register("arcane_gold_ingot", () -> new Item(new Item.Properties()));
     public static final RegistryObject<Item> ARCANE_GOLD_NUGGET = ITEMS.register("arcane_gold_nugget", () -> new Item(new Item.Properties()));
+    public static final RegistryObject<Item> RAW_ARCANE_GOLD = ITEMS.register("raw_arcane_gold", () -> new Item(new Item.Properties()));
     public static final RegistryObject<Item> ARCANE_GOLD_BLOCK_ITEM = ITEMS.register("arcane_gold_block", () -> new BlockItem(ARCANE_GOLD_BLOCK.get(), new Item.Properties()));
     public static final RegistryObject<Item> ARCANE_GOLD_ORE_ITEM = ITEMS.register("arcane_gold_ore", () -> new BlockItem(ARCANE_GOLD_ORE.get(), new Item.Properties()));
+    public static final RegistryObject<Item> DEEPSLATE_ARCANE_GOLD_ORE_ITEM = ITEMS.register("deepslate_arcane_gold_ore", () -> new BlockItem(DEEPSLATE_ARCANE_GOLD_ORE.get(), new Item.Properties()));
     public static final RegistryObject<Item> NETHER_ARCANE_GOLD_ORE_ITEM = ITEMS.register("nether_arcane_gold_ore", () -> new BlockItem(NETHER_ARCANE_GOLD_ORE.get(), new Item.Properties()));
+    public static final RegistryObject<Item> RAW_ARCANE_GOLD_BLOCK_ITEM = ITEMS.register("raw_arcane_gold_block", () -> new BlockItem(RAW_ARCANE_GOLD_BLOCK.get(), new Item.Properties()));
 
     public static final RegistryObject<Item> ARCANE_GOLD_SWORD = ITEMS.register("arcane_gold_sword", () -> new SwordItem(CustomItemTier.ARCANE_GOLD, 3, -2.4f, new Item.Properties()));
     public static final RegistryObject<Item> ARCANE_GOLD_PICKAXE = ITEMS.register("arcane_gold_pickaxe", () -> new PickaxeItem(CustomItemTier.ARCANE_GOLD, 1, -2.8f, new Item.Properties()));
@@ -275,6 +299,7 @@ public class WizardsReborn
     public static final RegistryObject<Item> ARCANUM_DUST = ITEMS.register("arcanum_dust", () -> new ArcanumDustItem(new Item.Properties()));
     public static final RegistryObject<Item> ARCANUM_BLOCK_ITEM = ITEMS.register("arcanum_block", () -> new BlockItem(ARCANUM_BLOCK.get(), new Item.Properties()));
     public static final RegistryObject<Item> ARCANUM_ORE_ITEM = ITEMS.register("arcanum_ore", () -> new BlockItem(ARCANUM_ORE.get(), new Item.Properties()));
+    public static final RegistryObject<Item> DEEPSLATE_ARCANUM_ORE_ITEM = ITEMS.register("deepslate_arcanum_ore", () -> new BlockItem(DEEPSLATE_ARCANUM_ORE.get(), new Item.Properties()));
 
     public static final RegistryObject<Item> ARCANE_WOOD_LOG_ITEM = ITEMS.register("arcane_wood_log", () -> new BlockItem(ARCANE_WOOD_LOG.get(), new Item.Properties()));
     public static final RegistryObject<Item> ARCANE_WOOD_ITEM = ITEMS.register("arcane_wood", () -> new BlockItem(ARCANE_WOOD.get(), new Item.Properties()));
@@ -284,13 +309,15 @@ public class WizardsReborn
     public static final RegistryObject<Item> ARCANE_WOOD_STAIRS_ITEM = ITEMS.register("arcane_wood_stairs", () -> new BlockItem(ARCANE_WOOD_STAIRS.get(), new Item.Properties()));
     public static final RegistryObject<Item> ARCANE_WOOD_SLAB_ITEM = ITEMS.register("arcane_wood_slab", () -> new BlockItem(ARCANE_WOOD_SLAB.get(), new Item.Properties()));
     public static final RegistryObject<Item> ARCANE_WOOD_FENCE_ITEM = ITEMS.register("arcane_wood_fence", () -> new BlockItem(ARCANE_WOOD_FENCE.get(), new Item.Properties()));
-    //public static final RegistryObject<Item> ARCANE_WOOD_FENCE_GATE_ITEM = ITEMS.register("arcane_wood_fence_gate", () -> new BlockItem(ARCANE_WOOD_FENCE_GATE.get(), new Item.Properties()));
-    //public static final RegistryObject<Item> ARCANE_WOOD_DOOR_ITEM = ITEMS.register("arcane_wood_door", () -> new BlockItem(ARCANE_WOOD_DOOR.get(), new Item.Properties()));
-    //public static final RegistryObject<Item> ARCANE_WOOD_TRAPDOOR_ITEM = ITEMS.register("arcane_wood_trapdoor", () -> new BlockItem(ARCANE_WOOD_TRAPDOOR.get(), new Item.Properties()));
-    //public static final RegistryObject<Item> ARCANE_WOOD_PRESSURE_PLATE_ITEM = ITEMS.register("arcane_wood_pressure_plate", () -> new BlockItem(ARCANE_WOOD_PRESSURE_PLATE.get(), new Item.Properties()));
-    //public static final RegistryObject<Item> ARCANE_WOOD_BUTTON_ITEM = ITEMS.register("arcane_wood_button", () -> new BlockItem(ARCANE_WOOD_BUTTON.get(), new Item.Properties()));
-    //public static final RegistryObject<Item> ARCANE_WOOD_SIGN_ITEM = ITEMS.register("arcane_wood_sign", () -> new SignItem(new Item.Properties().stacksTo(16),ARCANE_WOOD_SIGN.get(), ARCANE_WOOD_WALL_SIGN.get()));
-    //public static final RegistryObject<Item> ARCANE_WOOD_BOAT_ITEM = ITEMS.register("arcane_wood_boat", () -> new CustomBoatItem(new Item.Properties().stacksTo(1), "arcane_wood"));
+    public static final RegistryObject<Item> ARCANE_WOOD_FENCE_GATE_ITEM = ITEMS.register("arcane_wood_fence_gate", () -> new BlockItem(ARCANE_WOOD_FENCE_GATE.get(), new Item.Properties()));
+    public static final RegistryObject<Item> ARCANE_WOOD_DOOR_ITEM = ITEMS.register("arcane_wood_door", () -> new BlockItem(ARCANE_WOOD_DOOR.get(), new Item.Properties()));
+    public static final RegistryObject<Item> ARCANE_WOOD_TRAPDOOR_ITEM = ITEMS.register("arcane_wood_trapdoor", () -> new BlockItem(ARCANE_WOOD_TRAPDOOR.get(), new Item.Properties()));
+    public static final RegistryObject<Item> ARCANE_WOOD_PRESSURE_PLATE_ITEM = ITEMS.register("arcane_wood_pressure_plate", () -> new BlockItem(ARCANE_WOOD_PRESSURE_PLATE.get(), new Item.Properties()));
+    public static final RegistryObject<Item> ARCANE_WOOD_BUTTON_ITEM = ITEMS.register("arcane_wood_button", () -> new BlockItem(ARCANE_WOOD_BUTTON.get(), new Item.Properties()));
+    public static final RegistryObject<Item> ARCANE_WOOD_SIGN_ITEM = ITEMS.register("arcane_wood_sign", () -> new SignItem(new Item.Properties().stacksTo(16),ARCANE_WOOD_SIGN.get(), ARCANE_WOOD_WALL_SIGN.get()));
+    public static final RegistryObject<Item> ARCANE_WOOD_HANGING_SIGN_ITEM = ITEMS.register("arcane_wood_hanging_sign", () -> new HangingSignItem(ARCANE_WOOD_HANGING_SIGN.get(), ARCANE_WOOD_HANGING_WALL_SIGN.get(), new Item.Properties().stacksTo(16)));
+    public static final RegistryObject<Item> ARCANE_WOOD_BOAT_ITEM = ITEMS.register("arcane_wood_boat", () -> new CustomBoatItem(false, CustomBoatEntity.Type.ARCANE_WOOD, new Item.Properties().stacksTo(1)));
+    public static final RegistryObject<Item> ARCANE_WOOD_CHEST_BOAT_ITEM = ITEMS.register("arcane_wood_chest_boat", () -> new CustomBoatItem(true, CustomBoatEntity.Type.ARCANE_WOOD, new Item.Properties().stacksTo(1)));
     public static final RegistryObject<Item> ARCANE_WOOD_BRANCH = ITEMS.register("arcane_wood_branch", () -> new Item(new Item.Properties()));
     public static final RegistryObject<Item> ARCANE_WOOD_LEAVES_ITEM = ITEMS.register("arcane_wood_leaves", () -> new BlockItem(ARCANE_WOOD_LEAVES.get(), new Item.Properties()));
     public static final RegistryObject<Item> ARCANE_WOOD_SAPLING_ITEM = ITEMS.register("arcane_wood_sapling", () -> new BlockItem(ARCANE_WOOD_SAPLING.get(), new Item.Properties()));
@@ -319,17 +346,17 @@ public class WizardsReborn
     public static final RegistryObject<Item> FIRE_CRYSTAL_GROWTH_ITEM = ITEMS.register("fire_crystal_growth", () -> new BlockItem(FIRE_CRYSTAL_GROWTH.get(), new Item.Properties()));
     public static final RegistryObject<Item> VOID_CRYSTAL_GROWTH_ITEM = ITEMS.register("void_crystal_growth", () -> new BlockItem(VOID_CRYSTAL_GROWTH.get(), new Item.Properties()));
 
-    public static final RegistryObject<Item> EARTH_CRYSTAL = ITEMS.register("earth_crystal", () -> new CrystalItem(EARTH_CRYSTAL_BLOCK.get(), new Item.Properties().stacksTo(1)));
-    public static final RegistryObject<Item> WATER_CRYSTAL = ITEMS.register("water_crystal", () -> new CrystalItem(WATER_CRYSTAL_BLOCK.get(), new Item.Properties().stacksTo(1)));
-    public static final RegistryObject<Item> AIR_CRYSTAL = ITEMS.register("air_crystal", () -> new CrystalItem(AIR_CRYSTAL_BLOCK.get(), new Item.Properties().stacksTo(1)));
-    public static final RegistryObject<Item> FIRE_CRYSTAL = ITEMS.register("fire_crystal", () -> new CrystalItem(FIRE_CRYSTAL_BLOCK.get(), new Item.Properties().stacksTo(1)));
-    public static final RegistryObject<Item> VOID_CRYSTAL = ITEMS.register("void_crystal", () -> new CrystalItem(VOID_CRYSTAL_BLOCK.get(), new Item.Properties().stacksTo(1)));
-
     public static final RegistryObject<Item> FRACTURED_EARTH_CRYSTAL = ITEMS.register("fractured_earth_crystal", () -> new Item(new Item.Properties().stacksTo(1)));
     public static final RegistryObject<Item> FRACTURED_WATER_CRYSTAL = ITEMS.register("fractured_water_crystal", () -> new Item(new Item.Properties().stacksTo(1)));
     public static final RegistryObject<Item> FRACTURED_AIR_CRYSTAL = ITEMS.register("fractured_air_crystal", () -> new Item(new Item.Properties().stacksTo(1)));
     public static final RegistryObject<Item> FRACTURED_FIRE_CRYSTAL = ITEMS.register("fractured_fire_crystal", () -> new Item(new Item.Properties().stacksTo(1)));
     public static final RegistryObject<Item> FRACTURED_VOID_CRYSTAL = ITEMS.register("fractured_void_crystal", () -> new Item(new Item.Properties().stacksTo(1)));
+
+    public static final RegistryObject<Item> EARTH_CRYSTAL = ITEMS.register("earth_crystal", () -> new CrystalItem(EARTH_CRYSTAL_BLOCK.get(), new Item.Properties().stacksTo(1)));
+    public static final RegistryObject<Item> WATER_CRYSTAL = ITEMS.register("water_crystal", () -> new CrystalItem(WATER_CRYSTAL_BLOCK.get(), new Item.Properties().stacksTo(1)));
+    public static final RegistryObject<Item> AIR_CRYSTAL = ITEMS.register("air_crystal", () -> new CrystalItem(AIR_CRYSTAL_BLOCK.get(), new Item.Properties().stacksTo(1)));
+    public static final RegistryObject<Item> FIRE_CRYSTAL = ITEMS.register("fire_crystal", () -> new CrystalItem(FIRE_CRYSTAL_BLOCK.get(), new Item.Properties().stacksTo(1)));
+    public static final RegistryObject<Item> VOID_CRYSTAL = ITEMS.register("void_crystal", () -> new CrystalItem(VOID_CRYSTAL_BLOCK.get(), new Item.Properties().stacksTo(1)));
 
     public static final RegistryObject<Item> FACETED_EARTH_CRYSTAL = ITEMS.register("faceted_earth_crystal", () -> new CrystalItem(FACETED_EARTH_CRYSTAL_BLOCK.get(), new Item.Properties().stacksTo(1)));
     public static final RegistryObject<Item> FACETED_WATER_CRYSTAL = ITEMS.register("faceted_water_crystal", () -> new CrystalItem(FACETED_WATER_CRYSTAL_BLOCK.get(), new Item.Properties().stacksTo(1)));
@@ -387,7 +414,8 @@ public class WizardsReborn
     public static final RegistryObject<Item> ARCANEMICON = ITEMS.register("arcanemicon", () -> new ArcanemiconItem(new Item.Properties().stacksTo(1)));
 
     //TILE_ENTITIES
-    //public static final RegistryObject<BlockEntityType<ArcaneWoodSignTileEntity>> ARCANE_WOOD_SIGN_TILE_ENTITY = TILE_ENTITIES.register("arcane_wood_sign", () -> BlockEntityType.Builder.of(ArcaneWoodSignTileEntity::new, ARCANE_WOOD_SIGN.get(), ARCANE_WOOD_WALL_SIGN.get()).build(null));
+    public static final RegistryObject<BlockEntityType<ArcaneWoodSignTileEntity>> ARCANE_WOOD_SIGN_TILE_ENTITY = TILE_ENTITIES.register("arcane_wood_sign", () -> BlockEntityType.Builder.of(ArcaneWoodSignTileEntity::new, ARCANE_WOOD_SIGN.get(), ARCANE_WOOD_WALL_SIGN.get()).build(null));
+    public static final RegistryObject<BlockEntityType<ArcaneWoodHangingSignTileEntity>> ARCANE_WOOD_HANGING_SIGN_TILE_ENTITY = TILE_ENTITIES.register("arcane_wood_hanging_sign", () -> BlockEntityType.Builder.of(ArcaneWoodHangingSignTileEntity::new, ARCANE_WOOD_HANGING_SIGN.get(), ARCANE_WOOD_HANGING_WALL_SIGN.get()).build(null));
 
     public static RegistryObject<BlockEntityType<CrystalTileEntity>> CRYSTAL_TILE_ENTITY = TILE_ENTITIES.register("crystal", () -> BlockEntityType.Builder.of(CrystalTileEntity::new,
             EARTH_CRYSTAL_BLOCK.get(), WATER_CRYSTAL_BLOCK.get(), AIR_CRYSTAL_BLOCK.get(), FIRE_CRYSTAL_BLOCK.get(), VOID_CRYSTAL_BLOCK.get(),
@@ -408,6 +436,7 @@ public class WizardsReborn
 
     //ENTITIES
     public static final RegistryObject<EntityType<CustomBoatEntity>> ARCANE_WOOD_BOAT = ENTITIES.register("arcane_wood_boat", () -> EntityType.Builder.<CustomBoatEntity>of(CustomBoatEntity::new, MobCategory.MISC).sized(1.375f, 0.5625f).build(new ResourceLocation(MOD_ID, "arcane_wood_boat").toString()));
+    public static final RegistryObject<EntityType<CustomChestBoatEntity>> ARCANE_WOOD_CHEST_BOAT = ENTITIES.register("arcane_wood_chest_boat", () -> EntityType.Builder.<CustomChestBoatEntity>of(CustomChestBoatEntity::new, MobCategory.MISC).sized(1.375f, 0.5625f).build(new ResourceLocation(MOD_ID, "arcane_wood_chest_boat").toString()));
     public static final RegistryObject<EntityType<SpellProjectileEntity>> SPELL_PROJECTILE = ENTITIES.register("spell_projectile", () -> EntityType.Builder.<SpellProjectileEntity>of(SpellProjectileEntity::new, MobCategory.MISC).sized(0.4f, 0.4f).build(new ResourceLocation(MOD_ID, "spell_projectile").toString()));
 
     private static final String CATEGORY_KEY = "key.category."+MOD_ID+".general";
@@ -420,26 +449,26 @@ public class WizardsReborn
     public static RegistryObject<ArcaneWoodLeafParticleType> ARCANE_WOOD_LEAF_PARTICLE = PARTICLES.register("arcane_wood_leaf", ArcaneWoodLeafParticleType::new);
 
     //RECIPES
-    /*public static final RegistryObject<ArcanumDustTransmutationRecipe.Serializer> ARCANUM_DUST_TRANSMUTATION_SERIALIZER = RECIPES.register("arcanum_dust_transmutation", ArcanumDustTransmutationRecipe.Serializer::new);
-    public static RecipeType<ArcanumDustTransmutationRecipe> ARCANUM_DUST_TRANSMUTATION_RECIPE = new ArcanumDustTransmutationRecipe.ArcanumDustTransmutationRecipeType();
+    public static final RegistryObject<ArcanumDustTransmutationRecipe.Serializer> ARCANUM_DUST_TRANSMUTATION_SERIALIZER = RECIPE_SERIALIZERS.register("arcanum_dust_transmutation", ArcanumDustTransmutationRecipe.Serializer::new);
+    public static RegistryObject<RecipeType<ArcanumDustTransmutationRecipe>> ARCANUM_DUST_TRANSMUTATION_RECIPE = RECIPES.register("arcanum_dust_transmutation", () -> RecipeType.simple(ArcanumDustTransmutationRecipe.TYPE_ID));
 
-    public static final RegistryObject<WissenAltarRecipe.Serializer> WISSEN_ALTAR_SERIALIZER = RECIPES.register("wissen_altar", WissenAltarRecipe.Serializer::new);
-    public static RecipeType<WissenAltarRecipe> WISSEN_ALTAR_RECIPE = new WissenAltarRecipe.WissenAltarRecipeType();
+    public static final RegistryObject<WissenAltarRecipe.Serializer> WISSEN_ALTAR_SERIALIZER = RECIPE_SERIALIZERS.register("wissen_altar", WissenAltarRecipe.Serializer::new);
+    public static RegistryObject<RecipeType<WissenAltarRecipe>> WISSEN_ALTAR_RECIPE = RECIPES.register("wissen_altar", () -> RecipeType.simple(WissenAltarRecipe.TYPE_ID));
 
-    public static final RegistryObject<WissenCrystallizerRecipe.Serializer> WISSEN_CRYSTALLIZER_SERIALIZER = RECIPES.register("wissen_crystallizer", WissenCrystallizerRecipe.Serializer::new);
-    public static RecipeType<WissenCrystallizerRecipe> WISSEN_CRYSTALLIZER_RECIPE = new WissenCrystallizerRecipe.WissenCrystallizerRecipeType();
+    public static final RegistryObject<WissenCrystallizerRecipe.Serializer> WISSEN_CRYSTALLIZER_SERIALIZER = RECIPE_SERIALIZERS.register("wissen_crystallizer", WissenCrystallizerRecipe.Serializer::new);
+    public static RegistryObject<RecipeType<WissenCrystallizerRecipe>> WISSEN_CRYSTALLIZER_RECIPE = RECIPES.register("wissen_crystallizer", () -> RecipeType.simple(WissenCrystallizerRecipe.TYPE_ID));
 
-    public static final RegistryObject<ArcaneWorkbenchRecipe.Serializer> ARCANE_WORKBENCH_SERIALIZER = RECIPES.register("arcane_workbench", ArcaneWorkbenchRecipe.Serializer::new);
-    public static RecipeType<ArcaneWorkbenchRecipe> ARCANE_WORKBENCH_RECIPE = new ArcaneWorkbenchRecipe.ArcaneWorkbenchRecipeType();*/
+    public static final RegistryObject<ArcaneWorkbenchRecipe.Serializer> ARCANE_WORKBENCH_SERIALIZER = RECIPE_SERIALIZERS.register("arcane_workbench", ArcaneWorkbenchRecipe.Serializer::new);
+    public static RegistryObject<RecipeType<ArcaneWorkbenchRecipe>> ARCANE_WORKBENCH_RECIPE = RECIPES.register("arcane_workbench", () -> RecipeType.simple(ArcaneWorkbenchRecipe.TYPE_ID));
 
     //CONTAINERS
-    //public static final RegistryObject<MenuType<ArcaneWorkbenchContainer>> ARCANE_WORKBENCH_CONTAINER
-    //        = CONTAINERS.register("arcane_workbench_container",
-    //        () -> IForgeContainerType.create(((windowId, inv, data) -> {
-    //            BlockPos pos = data.readBlockPos();
-    //            Level world = inv.player.getCommandSenderWorld();
-    //            return new ArcaneWorkbenchContainer(windowId, world, pos, inv, inv.player);
-    //        })));
+    /*public static final RegistryObject<MenuType<ArcaneWorkbenchContainer>> ARCANE_WORKBENCH_CONTAINER
+            = CONTAINERS.register("arcane_workbench_container",
+            () -> IForgeMenuType.create(((windowId, inv, data) -> {
+                BlockPos pos = data.readBlockPos();
+                Level world = inv.player.getCommandSenderWorld();
+                return new ArcaneWorkbenchContainer(windowId, world, pos, inv, inv.player);
+            })));*/
 
     public WizardsReborn() {
         InterModComms.sendTo(CuriosApi.MODID, SlotTypeMessage.REGISTER_TYPE,
@@ -462,13 +491,9 @@ public class WizardsReborn
         TILE_ENTITIES.register(eventBus);
         ENTITIES.register(eventBus);
         PARTICLES.register(eventBus);
+        RECIPE_SERIALIZERS.register(eventBus);
         RECIPES.register(eventBus);
         //CONTAINERS.register(eventBus);
-
-        //Registry.register(Registry.RECIPE_TYPE, ArcanumDustTransmutationRecipe.TYPE_ID, ARCANUM_DUST_TRANSMUTATION_RECIPE);
-        //Registry.register(Registry.RECIPE_TYPE, WissenAltarRecipe.TYPE_ID, WISSEN_ALTAR_RECIPE);
-        //Registry.register(Registry.RECIPE_TYPE, WissenCrystallizerRecipe.TYPE_ID, WISSEN_CRYSTALLIZER_RECIPE);
-        //Registry.register(Registry.RECIPE_TYPE, ArcaneWorkbenchRecipe.TYPE_ID, ARCANE_WORKBENCH_RECIPE);
 
         setupMonograms();
         setupSpells();
@@ -513,10 +538,10 @@ public class WizardsReborn
     }
 
     private void clientSetup(final FMLClientSetupEvent event) {
-        //event.enqueueWork(() -> {
-        //    MenuScreens.register(ARCANE_WORKBENCH_CONTAINER.get(),
-        //            ArcaneWorkbenchScreen::new);
-        //});
+        event.enqueueWork(() -> {
+            //MenuScreens.register(ARCANE_WORKBENCH_CONTAINER.get(),
+            //        ArcaneWorkbenchScreen::new);
+        });
     }
 
     public static ShaderInstance GLOWING_PARTICLE_SHADER, SPRITE_PARTICLE_SHADER;
@@ -604,26 +629,25 @@ public class WizardsReborn
         WandCrystalsModels.addCrystal(MOD_ID+":pure_void_crystal");
     }
 
-    // You can use EventBusSubscriber to automatically subscribe events on the contained class (this is subscribing to the MOD
-    // Event bus for receiving Registry Events)
     @Mod.EventBusSubscriber(bus=Mod.EventBusSubscriber.Bus.MOD)
     public static class RegistryEvents {
         @SubscribeEvent
         public static void onRenderTypeSetup(FMLClientSetupEvent event) {
-            //Sheets.addWoodType(ARCANE_WOOD_TYPE);
+            Sheets.addWoodType(ARCANE_WOOD_TYPE);
 
-            //ItemBlockRenderTypes.setRenderLayer(ARCANE_WOOD_DOOR.get(), RenderType.cutout());
-            //ItemBlockRenderTypes.setRenderLayer(ARCANE_WOOD_TRAPDOOR.get(), RenderType.cutout());
-            //ItemBlockRenderTypes.setRenderLayer(ARCANE_WOOD_LEAVES.get(), RenderType.cutout());
-            //ItemBlockRenderTypes.setRenderLayer(ARCANE_WOOD_SAPLING.get(), RenderType.cutout());
-            //ItemBlockRenderTypes.setRenderLayer(POTTED_ARCANE_WOOD_SAPLING.get(), RenderType.cutout());
-            //ItemBlockRenderTypes.setRenderLayer(ARCANE_LINEN.get(), RenderType.cutout());
+            ItemBlockRenderTypes.setRenderLayer(ARCANE_WOOD_DOOR.get(), RenderType.cutout());
+            ItemBlockRenderTypes.setRenderLayer(ARCANE_WOOD_TRAPDOOR.get(), RenderType.cutout());
+            ItemBlockRenderTypes.setRenderLayer(ARCANE_WOOD_LEAVES.get(), RenderType.cutout());
+            ItemBlockRenderTypes.setRenderLayer(ARCANE_WOOD_SAPLING.get(), RenderType.cutout());
+            ItemBlockRenderTypes.setRenderLayer(POTTED_ARCANE_WOOD_SAPLING.get(), RenderType.cutout());
+            ItemBlockRenderTypes.setRenderLayer(ARCANE_LINEN.get(), RenderType.cutout());
             //ItemBlockRenderTypes.setRenderLayer(MOR.get(), RenderType.cutout());
             //ItemBlockRenderTypes.setRenderLayer(POTTED_MOR.get(), RenderType.cutout());
             //ItemBlockRenderTypes.setRenderLayer(ELDER_MOR.get(), RenderType.cutout());
             //ItemBlockRenderTypes.setRenderLayer(POTTED_ELDER_MOR.get(), RenderType.cutout());
 
-            //BlockEntityRenderers.register(ARCANE_WOOD_SIGN_TILE_ENTITY.get(), SignRenderer::new);
+            BlockEntityRenderers.register(ARCANE_WOOD_SIGN_TILE_ENTITY.get(), SignRenderer::new);
+            BlockEntityRenderers.register(ARCANE_WOOD_HANGING_SIGN_TILE_ENTITY.get(), HangingSignRenderer::new);
             BlockEntityRenderers.register(ARCANE_PEDESTAL_TILE_ENTITY.get(), (trd) -> new ArcanePedestalTileEntityRenderer());
             BlockEntityRenderers.register(WISSEN_ALTAR_TILE_ENTITY.get(), (trd) -> new WissenAltarTileEntityRenderer());
             BlockEntityRenderers.register(WISSEN_TRANSLATOR_TILE_ENTITY.get(), (trd) -> new WissenTranslatorTileEntityRenderer());
@@ -632,7 +656,8 @@ public class WizardsReborn
 
             BlockEntityRenderers.register(CRYSTAL_TILE_ENTITY.get(), (trd) -> new CrystalTileEntityRenderer());
 
-            //EntityRenderers.register(ARCANE_WOOD_BOAT.get(), ArcaneWoodBoatModel::new);
+            EntityRenderers.register(ARCANE_WOOD_BOAT.get(), m -> new ArcaneWoodBoatModel(m, false));
+            EntityRenderers.register(ARCANE_WOOD_CHEST_BOAT.get(), m -> new ArcaneWoodBoatModel(m, true));
             EntityRenderers.register(SPELL_PROJECTILE.get(), EmptyRenderer::new);
         }
 
@@ -679,6 +704,14 @@ public class WizardsReborn
                     shader -> { GLOWING_PARTICLE_SHADER = shader; });
             event.registerShader(new ShaderInstance(event.getResourceProvider(), new ResourceLocation("wizards_reborn:sprite_particle"), DefaultVertexFormat.PARTICLE),
                     shader -> { SPRITE_PARTICLE_SHADER = shader; });
+        }
+
+        @SubscribeEvent
+        public static void registerLayers(EntityRenderersEvent.RegisterLayerDefinitions event) {
+            for(CustomBoatEntity.Type boatType : CustomBoatEntity.Type.values()) {
+                event.registerLayerDefinition(ArcaneWoodBoatModel.createBoatModelName(boatType), BoatModel::createBodyModel);
+                event.registerLayerDefinition(ArcaneWoodBoatModel.createChestBoatModelName(boatType), ChestBoatModel::createBodyModel);
+            }
         }
     }
 }

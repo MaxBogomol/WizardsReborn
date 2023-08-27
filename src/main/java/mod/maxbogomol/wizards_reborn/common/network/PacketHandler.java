@@ -1,26 +1,39 @@
 package mod.maxbogomol.wizards_reborn.common.network;
 
+import com.mojang.datafixers.util.Pair;
 import mod.maxbogomol.wizards_reborn.WizardsReborn;
+import net.minecraft.server.level.ServerChunkCache;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.level.ChunkPos;
 import net.minecraft.world.level.Level;
-import net.minecraft.server.level.ServerLevel;
 import net.minecraftforge.network.NetworkDirection;
 import net.minecraftforge.network.NetworkRegistry;
 import net.minecraftforge.network.PacketDistributor;
 import net.minecraftforge.network.simple.SimpleChannel;
 
 public final class PacketHandler {
-    private static final String PROTOCOL = "10";
-    public static final SimpleChannel HANDLER = NetworkRegistry.newSimpleChannel(
-            new ResourceLocation(WizardsReborn.MOD_ID,"network"),
-            () -> PROTOCOL,
-            PROTOCOL::equals,
-            PROTOCOL::equals
-    );
+    private static final String PROTOCOL = "2";
+    //public static final SimpleChannel HANDLER = NetworkRegistry.newSimpleChannel(
+    //        new ResourceLocation(WizardsReborn.MOD_ID,"network"),
+    //        () -> PROTOCOL,
+    //        PROTOCOL::equals,
+    //        PROTOCOL::equals
+    //);
+    //public static final SimpleChannel HANDLER = NetworkRegistry.ChannelBuilder.named(new ResourceLocation(WizardsReborn.MOD_ID, "main"))
+    //        .networkProtocolVersion(() -> PROTOCOL)
+    //        .clientAcceptedVersions(PROTOCOL::equals)
+    //        .serverAcceptedVersions(PROTOCOL::equals)
+    //        .simpleChannel();
+
+    public static final SimpleChannel HANDLER = NetworkRegistry.ChannelBuilder
+            .named(new ResourceLocation(WizardsReborn.MOD_ID, "messages"))
+            .networkProtocolVersion(() -> "1.0")
+            .clientAcceptedVersions(s -> true)
+            .serverAcceptedVersions(s -> true)
+            .simpleChannel();
 
     public static void init() {
         int id = 0;
@@ -42,18 +55,39 @@ public final class PacketHandler {
         HANDLER.registerMessage(id++, KnowledgeUpdatePacket.class, KnowledgeUpdatePacket::encode, KnowledgeUpdatePacket::decode, KnowledgeUpdatePacket::handle);
 
         HANDLER.registerMessage(id++, SpellProjectileRayEffectPacket.class, SpellProjectileRayEffectPacket::encode, SpellProjectileRayEffectPacket::decode, SpellProjectileRayEffectPacket::handle);
+
+        HANDLER.registerMessage(id++, TESyncPacket.class, TESyncPacket::encode, TESyncPacket::decode, TESyncPacket::handle);
     }
 
-    public static void sendToNearby(Level world, BlockPos pos, Object toSend) {
-        sendToNearby(world, pos, toSend);
-    }
+    private static final PacketDistributor<Pair<Level, BlockPos>> TRACKING_CHUNK_AND_NEAR = new PacketDistributor<>(
+            (_d, pairSupplier) -> {
+                var pair = pairSupplier.get();
+                var level = pair.getFirst();
+                var blockpos = pair.getSecond();
+                var chunkpos = new ChunkPos(blockpos);
+                return packet -> {
+                    var players = ((ServerChunkCache) level.getChunkSource()).chunkMap
+                            .getPlayers(chunkpos, false);
+                    for (var player : players) {
+                        if (player.distanceToSqr(blockpos.getX(), blockpos.getY(), blockpos.getZ()) < 64 * 64) {
+                            player.connection.send(packet);
+                        }
+                    }
+                };
+            },
+            NetworkDirection.PLAY_TO_CLIENT
+    );
 
-    public static void sendToNearby(Level world, Entity e, Object toSend) {
-        sendToNearby(world, e.blockPosition(), toSend);
-    }
+    //public static void sendToNearby(Level world, BlockPos pos, Object toSend) {
+    //    sendToNearby(world, pos, toSend);
+    //}
+
+    //public static void sendToNearby(Level world, Entity e, Object toSend) {
+    //    sendToNearby(world, e.blockPosition(), toSend);
+    //}
 
     public static void sendTo(ServerPlayer playerMP, Object toSend) {
-        //HANDLER.sendTo(toSend, playerMP.connection.getConnection(), NetworkDirection.PLAY_TO_CLIENT);
+        HANDLER.sendTo(toSend, playerMP.connection.connection, NetworkDirection.PLAY_TO_CLIENT);
     }
 
     public static void sendNonLocal(ServerPlayer playerMP, Object toSend) {
@@ -63,7 +97,8 @@ public final class PacketHandler {
     }
 
     public static void sendToTracking(Level world, BlockPos pos, Object msg) {
-        HANDLER.send(PacketDistributor.TRACKING_CHUNK.with(() -> world.getChunkAt(pos)), msg);
+        //HANDLER.send(PacketDistributor.TRACKING_CHUNK.with(() -> world.getChunkAt(pos)), msg);
+        HANDLER.send(TRACKING_CHUNK_AND_NEAR.with(() -> Pair.of(world, pos)), msg);
     }
 
     public static void sendToServer(Object msg) {
@@ -71,5 +106,4 @@ public final class PacketHandler {
     }
 
     private PacketHandler() {}
-
 }

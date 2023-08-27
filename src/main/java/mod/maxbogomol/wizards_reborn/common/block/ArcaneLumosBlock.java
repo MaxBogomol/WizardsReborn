@@ -4,6 +4,7 @@ import mod.maxbogomol.wizards_reborn.WizardsReborn;
 import mod.maxbogomol.wizards_reborn.client.event.ClientTickHandler;
 import mod.maxbogomol.wizards_reborn.client.particle.Particles;
 import net.minecraft.util.RandomSource;
+import net.minecraft.world.entity.Entity;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.client.particle.ParticleEngine;
@@ -20,8 +21,10 @@ import net.minecraftforge.api.distmarker.OnlyIn;
 import javax.annotation.Nonnull;
 import java.awt.*;
 import java.util.Random;
+import java.util.function.Consumer;
 
 import net.minecraft.world.level.block.state.BlockBehaviour.Properties;
+import net.minecraftforge.client.extensions.common.IClientBlockExtensions;
 
 public class ArcaneLumosBlock extends Block {
     private static final VoxelShape SHAPE = Block.box(6, 6, 6, 10, 10, 10);
@@ -103,18 +106,26 @@ public class ArcaneLumosBlock extends Block {
             }
         }
     }
-    /*
+
     @Override
-    @OnlyIn(Dist.CLIENT)
-    public boolean addDestroyEffects(BlockState state, Level world, BlockPos pos, ParticleEngine manager) {
-        return true;
+    public void initializeClient(Consumer<IClientBlockExtensions> consumer) {
+        consumer.accept(new IClientBlockExtensions() {
+            @Override
+            public boolean addHitEffects(BlockState state, Level level, HitResult target, ParticleEngine manager) {
+                return true;
+            }
+
+            @Override
+            public boolean addDestroyEffects(BlockState state, Level level, BlockPos pos, ParticleEngine manager) {
+                return true;
+            }
+        });
     }
 
     @Override
-    @OnlyIn(Dist.CLIENT)
-    public boolean addHitEffects(BlockState state, Level worldObj, HitResult target, ParticleEngine manager) {
-        return true;
-    }*/
+    public void updateEntityAfterFallOn(BlockGetter pLevel, Entity pEntity) {
+
+    }
 
     public Color getColor(Colors color) {
         switch (color) {

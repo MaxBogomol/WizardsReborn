@@ -6,9 +6,11 @@ import mod.maxbogomol.wizards_reborn.api.wissen.IWissenWandFunctionalTileEntity;
 import mod.maxbogomol.wizards_reborn.api.wissen.WissenUtils;
 import mod.maxbogomol.wizards_reborn.client.particle.Particles;
 import mod.maxbogomol.wizards_reborn.common.network.PacketHandler;
+import mod.maxbogomol.wizards_reborn.common.recipe.WissenCrystallizerRecipe;
 import mod.maxbogomol.wizards_reborn.utils.PacketUtils;
 import mod.maxbogomol.wizards_reborn.common.network.WissenCrystallizerBurstEffectPacket;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.RegistryAccess;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityTicker;
@@ -18,11 +20,12 @@ import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.Connection;
 import net.minecraft.network.protocol.game.ClientboundBlockEntityDataPacket;
 import net.minecraft.world.level.block.entity.BlockEntityType;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.Optional;
 import java.util.Random;
 
-public class WissenCrystallizerTileEntity extends TileSimpleInventory implements BlockEntityTicker, IWissenTileEntity, IWissenWandFunctionalTileEntity {
+public class WissenCrystallizerTileEntity extends TileSimpleInventory implements TickableBlockEntity, IWissenTileEntity, IWissenWandFunctionalTileEntity {
 
     public int wissenInCraft= 0;
     public int wissenIsCraft = 0;
@@ -41,9 +44,9 @@ public class WissenCrystallizerTileEntity extends TileSimpleInventory implements
     }
 
     @Override
-    public void tick(Level pLevel, BlockPos pPos, BlockState pState, BlockEntity pBlockEntity) {
+    public void tick() {
         if (!level.isClientSide()) {
-            /*Optional<WissenCrystallizerRecipe> recipe = level.getRecipeManager().getRecipeFor(WizardsReborn.WISSEN_CRYSTALLIZER_RECIPE, getItemHandler(), level);
+            Optional<WissenCrystallizerRecipe> recipe = level.getRecipeManager().getRecipeFor(WizardsReborn.WISSEN_CRYSTALLIZER_RECIPE.get(), getItemHandler(), level);
             wissenInCraft =  recipe.map(WissenCrystallizerRecipe::getRecipeWissen).orElse(0);
 
             if (wissenInCraft <= 0) {
@@ -72,19 +75,19 @@ public class WissenCrystallizerTileEntity extends TileSimpleInventory implements
                         getItemHandler().removeItemNoUpdate(i);
                     }
 
-                    int count = recipe.get().getResultItem().getCount();
+                    int count = recipe.get().getResultItem(RegistryAccess.EMPTY).getCount();
                     if (count > getItemHandler().getContainerSize()) {
                         count = getItemHandler().getContainerSize();
                     }
 
                     for (int i = 0; i < count; i++) {
-                        getItemHandler().setItem(i, recipe.get().getResultItem());
+                        getItemHandler().setItem(i, recipe.get().getResultItem(RegistryAccess.EMPTY));
                     }
 
                     PacketHandler.sendToTracking(level, getBlockPos(), new WissenCrystallizerBurstEffectPacket(getBlockPos()));
                     PacketUtils.SUpdateTileEntityPacket(this);
                 }
-            }*/
+            }
         }
 
         if (level.isClientSide()) {
@@ -149,39 +152,37 @@ public class WissenCrystallizerTileEntity extends TileSimpleInventory implements
         };
     }
 
-    /*@Override
-    public final ClientboundBlockEntityDataPacket getUpdatePacket() {
-        CompoundTag tag = new CompoundTag();
-        save(tag);
-        return new ClientboundBlockEntityDataPacket(worldPosition, -999, tag);
-    }*/
-
     @Override
-    public void onDataPacket(Connection net, ClientboundBlockEntityDataPacket packet) {
-        super.onDataPacket(net, packet);
-        load(packet.getTag());
+    public ClientboundBlockEntityDataPacket getUpdatePacket() {
+        return ClientboundBlockEntityDataPacket.create(this, (e) -> e.getUpdateTag());
     }
 
-    /*@Override
-    public CompoundTag getUpdateTag()
-    {
-        return this.save(new CompoundTag());
-    }*/
+    @Override
+    public void onDataPacket(Connection net, ClientboundBlockEntityDataPacket pkt) {
+        super.onDataPacket(net, pkt);
+        handleUpdateTag(pkt.getTag());
+    }
+
+    @NotNull
+    @Override
+    public final CompoundTag getUpdateTag() {
+        var tag = new CompoundTag();
+        saveAdditional(tag);
+        return tag;
+    }
 
     public float getStage() {
         return ((float) getWissen() / (float) getMaxWissen());
     }
 
-    /*@Override
-    public CompoundTag save(CompoundTag tag) {
-        super.save(tag);
+    @Override
+    public void saveAdditional(CompoundTag tag) {
+        super.saveAdditional(tag);
         tag.putInt("wissenInCraft", wissenInCraft);
         tag.putInt("wissenIsCraft", wissenIsCraft);
         tag.putBoolean("startCraft", startCraft);
         tag.putInt("wissen", wissen);
-        CompoundTag ret = super.save(tag);
-        return ret;
-    }*/
+    }
 
     @Override
     public void load(CompoundTag tag) {
@@ -190,7 +191,6 @@ public class WissenCrystallizerTileEntity extends TileSimpleInventory implements
         wissenIsCraft = tag.getInt("wissenIsCraft");
         startCraft = tag.getBoolean("startCraft");
         wissen = tag.getInt("wissen");
-        super.load(tag);
     }
 
     @Override

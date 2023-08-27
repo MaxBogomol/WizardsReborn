@@ -35,7 +35,17 @@ public class ArcaneWorkbenchContainer extends AbstractContainerMenu {
         return false;
     }
 
-    /*public ArcaneWorkbenchContainer(int windowId, Level world, BlockPos pos,
+    /*@Override
+    public ItemStack quickMoveStack(Player pPlayer, int pIndex) {
+        return null;
+    }
+
+    @Override
+    public boolean stillValid(Player pPlayer) {
+        return false;
+    }
+
+    public ArcaneWorkbenchContainer(int windowId, Level world, BlockPos pos,
                                     Inventory playerInventory, Player player) {
         super(WizardsReborn.ARCANE_WORKBENCH_CONTAINER.get(), windowId);
         this.tileEntity = world.getBlockEntity(pos);
@@ -44,7 +54,7 @@ public class ArcaneWorkbenchContainer extends AbstractContainerMenu {
         this.layoutPlayerInventorySlots(8, 86 + 33);
 
         if (tileEntity != null) {
-            tileEntity.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY).ifPresent(h -> {
+            tileEntity.getCapability(ForgeCapabilities.ITEM_HANDLER_CAPABILITY).ifPresent(h -> {
                 addSlot(new SlotItemHandler(h, 0, 30, 30));
                 addSlot(new SlotItemHandler(h, 1, 48, 30));
                 addSlot(new SlotItemHandler(h, 2, 66, 30));
@@ -63,9 +73,9 @@ public class ArcaneWorkbenchContainer extends AbstractContainerMenu {
                 addSlot(new ResultSlot(h, 13, 146, 48));
             });
         }
-    }*/
+    }
 
-    /*@Override
+    @Override
     public boolean stillValid(Player playerIn) {
         return stillValid(ContainerLevelAccess.create(tileEntity.getLevel(), tileEntity.getBlockPos()),
                 playerIn, WizardsReborn.ARCANE_WORKBENCH.get());

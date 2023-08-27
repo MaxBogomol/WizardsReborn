@@ -25,14 +25,15 @@ public class ArcanumOreBlock extends Block {
         return Mth.nextInt(rand, 3, 6);
     }
 
-    //public void spawnAfterBreak(BlockState state, ServerLevel worldIn, BlockPos pos, ItemStack stack) {
-    //    super.spawnAfterBreak(state, worldIn, pos, stack);
-    //}
+    @Override
+    public void spawnAfterBreak(BlockState pState, ServerLevel pLevel, BlockPos pPos, ItemStack pStack, boolean pDropExperience) {
+        super.spawnAfterBreak(pState, pLevel, pPos, pStack, pDropExperience);
+    }
 
-    //@Override
-    //public int getExpDrop(BlockState state, net.minecraft.world.level.LevelReader reader, BlockPos pos, int fortune, int silktouch) {
-    //    return silktouch == 0 ? this.getExperience(RANDOM) : 0;
-    //}
+    @Override
+    public int getExpDrop(BlockState state, net.minecraft.world.level.LevelReader world, RandomSource randomSource, BlockPos pos, int fortune, int silktouch) {
+        return silktouch == 0 ? this.getExperience(randomSource) : 0;
+    }
 
     @Override
     public void playerWillDestroy(Level world, BlockPos pos, BlockState state, Player player) {

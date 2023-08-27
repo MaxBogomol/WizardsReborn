@@ -1,7 +1,0 @@
-{
-  "parent": "minecraft:block/door_bottom",
-  "textures": {
-    "top": "wizards_reborn:block/arcane_wood_door_top",
-    "bottom": "wizards_reborn:block/arcane_wood_door_bottom"
-  }
-}

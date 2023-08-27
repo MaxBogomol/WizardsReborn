@@ -2,10 +2,14 @@ package mod.maxbogomol.wizards_reborn.common.block;
 
 import mod.maxbogomol.wizards_reborn.WizardsReborn;
 import mod.maxbogomol.wizards_reborn.api.wissen.IWissenItem;
+import mod.maxbogomol.wizards_reborn.common.recipe.WissenAltarRecipe;
+import mod.maxbogomol.wizards_reborn.common.tileentity.TickableBlockEntity;
 import mod.maxbogomol.wizards_reborn.common.tileentity.TileSimpleInventory;
 import mod.maxbogomol.wizards_reborn.common.tileentity.WissenAltarTileEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.entity.BlockEntityTicker;
+import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.material.FluidState;
 import net.minecraft.world.level.material.Fluids;
@@ -36,6 +40,7 @@ import net.minecraft.world.level.block.EntityBlock;
 import net.minecraft.world.level.block.HorizontalDirectionalBlock;
 import net.minecraft.world.level.block.SimpleWaterloggedBlock;
 import net.minecraft.world.level.block.state.BlockState;
+import org.jetbrains.annotations.NotNull;
 
 public class WissenAltarBlock extends HorizontalDirectionalBlock implements EntityBlock, SimpleWaterloggedBlock  {
 
@@ -100,11 +105,10 @@ public class WissenAltarBlock extends HorizontalDirectionalBlock implements Enti
         }
 
         SimpleContainer inv = new SimpleContainer(1);
-        inv.setItem(0, stack);
-        int wissenInItem = 0;
-        //int wissenInItem = world.getRecipeManager().getRecipeFor(WizardsReborn.WISSEN_ALTAR_RECIPE, inv, world)
-        //        .map(WissenAltarRecipe::getRecipeWissen)
-        //        .orElse(0);
+        inv.setItem(0, stack);;
+        int wissenInItem = world.getRecipeManager().getRecipeFor(WizardsReborn.WISSEN_ALTAR_RECIPE.get(), inv, world)
+                .map(WissenAltarRecipe::getRecipeWissen)
+                .orElse(0);
         if (wissenInItem > 0) {
             if (altar.getItemHandler().getItem(1).isEmpty()) {
                 altar.getItemHandler().setItem(1, stack);
@@ -161,5 +165,11 @@ public class WissenAltarBlock extends HorizontalDirectionalBlock implements Enti
     @Override
     public BlockEntity newBlockEntity(BlockPos pPos, BlockState pState) {
         return new WissenAltarTileEntity(pPos, pState);
+    }
+
+    @Nullable
+    @Override
+    public <T extends BlockEntity> BlockEntityTicker<T> getTicker(@NotNull Level level, @NotNull BlockState state, @NotNull BlockEntityType<T> type) {
+        return TickableBlockEntity.getTickerHelper();
     }
 }

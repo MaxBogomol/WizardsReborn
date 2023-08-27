@@ -4,6 +4,7 @@ import com.google.common.collect.Lists;
 import com.mojang.blaze3d.systems.RenderSystem;
 import com.mojang.blaze3d.vertex.PoseStack;
 import mod.maxbogomol.wizards_reborn.WizardsReborn;
+import mod.maxbogomol.wizards_reborn.utils.RenderUtils;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.resources.language.I18n;
@@ -34,7 +35,7 @@ public class BlockPage extends Page {
         int ii = 0;
 
         for (int i = 0; i < blocks.size(); i++) {
-            //Minecraft.getInstance().getItemRenderer().blitOffset -= 1.0F;
+            RenderUtils.blitOffset += 10.0F;
             int width = 0;
             if (lines == line) {
                 width = (120 - (20 * (6 - ((lines + 1) * 6 - blocks.size())))) / 2;
@@ -42,7 +43,7 @@ public class BlockPage extends Page {
             if (!blocks.get(i).block.isEmpty()) {
                 gui.blit(BACKGROUND, x + 4 + width + (ii * 20), y + 120 - (20 * line), 128, 20, 18, 18, 256, 256);
             }
-            blocks.get(i).render(gui, x + 4 + width + (ii * 20) + 1, y + 120 - (20 * line) + 1, mouseX, mouseY);
+            blocks.get(i).render(gui, x + 4 + width + (ii * 20) + 1, y + 120 - (20 * line) + 1, mouseX, mouseY, i);
 
             if (ii >= 5) {
                 line++;
@@ -51,7 +52,7 @@ public class BlockPage extends Page {
                 ii++;
             }
         }
-        //Minecraft.getInstance().getItemRenderer().blitOffset += 1.0F * blocks.size();
+        RenderUtils.blitOffset  -= 10.0F * blocks.size();
 
         line = 0;
         ii = 0;

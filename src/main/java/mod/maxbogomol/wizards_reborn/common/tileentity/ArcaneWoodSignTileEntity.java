@@ -11,8 +11,8 @@ public class ArcaneWoodSignTileEntity extends SignBlockEntity {
         super(pPos, pState);
     }
 
-    /*@Override
+    @Override
     public BlockEntityType<?> getType() {
         return WizardsReborn.ARCANE_WOOD_SIGN_TILE_ENTITY.get();
-    }*/
+    }
 }

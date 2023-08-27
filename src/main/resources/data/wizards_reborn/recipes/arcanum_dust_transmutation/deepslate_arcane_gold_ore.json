@@ -1,0 +1,9 @@
+{
+  "type": "wizards_reborn:arcanum_dust_transmutation",
+  "from": {
+    "item": "minecraft:deepslate_gold_ore"
+  },
+  "to": {
+    "item": "wizards_reborn:deepslate_arcane_gold_ore"
+  }
+}

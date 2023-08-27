@@ -34,8 +34,8 @@ public abstract class Page {
     @OnlyIn(Dist.CLIENT)
     public static void drawText(ArcanemiconGui book, GuiGraphics gui, String text, int x, int y) {
         Font font = Minecraft.getInstance().font;
-        gui.drawString(font, text, x + 1, y + 1, ColorUtils.packColor(255, 220, 199, 182));
-        gui.drawString(font, text, x, y, ColorUtils.packColor(255, 56, 33, 39));
+        gui.drawString(font, text, x + 1, y + 1, ColorUtils.packColor(255, 220, 199, 182), false);
+        gui.drawString(font, text, x, y, ColorUtils.packColor(255, 56, 33, 39), false);
     }
 
     @OnlyIn(Dist.CLIENT)

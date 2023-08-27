@@ -20,17 +20,19 @@ public class WorldRenderHandler {
     public static Matrix4f particleMVMatrix = null;
 
     public static void onRenderWorldLast(RenderLevelStageEvent event) {
-        if (ClientConfig.BETTER_LAYERING.get()) {
-            RenderSystem.getModelViewStack().pushPose();
-            RenderSystem.getModelViewStack().setIdentity();
-            if (particleMVMatrix != null) RenderSystem.getModelViewStack().mulPoseMatrix(particleMVMatrix);
-            RenderSystem.applyModelViewMatrix();
-            RenderSystem.blendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
-            getDelayedRender().endBatch(RenderUtils.DELAYED_PARTICLE);
-            RenderSystem.blendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE);
-            getDelayedRender().endBatch(RenderUtils.GLOWING_PARTICLE);
-            RenderSystem.getModelViewStack().popPose();
-            RenderSystem.applyModelViewMatrix();
+        if (event.getStage() == RenderLevelStageEvent.Stage.AFTER_LEVEL) {
+            if (ClientConfig.BETTER_LAYERING.get()) {
+                RenderSystem.getModelViewStack().pushPose();
+                RenderSystem.getModelViewStack().setIdentity();
+                if (particleMVMatrix != null) RenderSystem.getModelViewStack().mulPoseMatrix(particleMVMatrix);
+                RenderSystem.applyModelViewMatrix();
+                RenderSystem.blendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
+                getDelayedRender().endBatch(RenderUtils.DELAYED_PARTICLE);
+                RenderSystem.blendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE);
+                getDelayedRender().endBatch(RenderUtils.GLOWING_PARTICLE);
+                RenderSystem.getModelViewStack().popPose();
+                RenderSystem.applyModelViewMatrix();
+            }
         }
     }
 

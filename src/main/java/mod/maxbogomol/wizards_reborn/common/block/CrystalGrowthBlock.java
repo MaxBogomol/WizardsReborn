@@ -37,7 +37,6 @@ import java.util.stream.Stream;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.EntityBlock;
 import net.minecraft.world.level.block.SimpleWaterloggedBlock;
-import net.minecraft.world.level.block.state.BlockBehaviour.Properties;
 import net.minecraft.world.level.block.state.BlockState;
 
 public class CrystalGrowthBlock extends Block implements EntityBlock, SimpleWaterloggedBlock {

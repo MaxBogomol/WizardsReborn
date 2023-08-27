@@ -1,15 +1,19 @@
 package mod.maxbogomol.wizards_reborn.common.item;
 
 import mod.maxbogomol.wizards_reborn.common.entity.CustomBoatEntity;
+import mod.maxbogomol.wizards_reborn.common.entity.CustomChestBoatEntity;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.entity.vehicle.Boat;
+import net.minecraft.world.entity.vehicle.ChestBoat;
 import net.minecraft.world.item.BoatItem;
+import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.stats.Stats;
 import net.minecraft.world.InteractionResultHolder;
 import net.minecraft.world.entity.EntitySelector;
 import net.minecraft.world.InteractionHand;
+import net.minecraft.world.level.gameevent.GameEvent;
 import net.minecraft.world.phys.AABB;
 import net.minecraft.world.level.ClipContext;
 import net.minecraft.world.phys.HitResult;
@@ -21,56 +25,65 @@ import java.util.function.Predicate;
 
 import net.minecraft.world.item.Item.Properties;
 
-public class CustomBoatItem extends BoatItem {
+public class CustomBoatItem extends Item {
     private static final Predicate<Entity> ENTITY_PREDICATE = EntitySelector.NO_SPECTATORS.and(Entity::isPickable);
+    private final CustomBoatEntity.Type type;
+    private final boolean chest;
 
-    public CustomBoatItem(boolean pHasChest, Boat.Type pType, Properties pProperties) {
-        super(pHasChest, pType, pProperties);
+    public CustomBoatItem(boolean chest, CustomBoatEntity.Type type, Item.Properties properties) {
+        super(properties);
+        this.chest = chest;
+        this.type = type;
     }
 
-    /*public InteractionResultHolder<ItemStack> use(Level worldIn, Player playerIn, InteractionHand handIn) {
-        /*
-        //ItemStack itemstack = playerIn.getItemInHand(handIn);
-        HitResult raytraceresult = getPlayerPOVHitResult(worldIn, playerIn, ClipContext.Fluid.ANY);
-        if (raytraceresult.getType() == HitResult.Type.MISS) {
+    @Override
+    public InteractionResultHolder<ItemStack> use(Level level, Player player, InteractionHand hand) {
+        ItemStack itemstack = player.getItemInHand(hand);
+        HitResult result = getPlayerPOVHitResult(level, player, ClipContext.Fluid.ANY);
+        if (result.getType() == HitResult.Type.MISS) {
             return InteractionResultHolder.pass(itemstack);
-        } else {
-            Vec3 vector3d = playerIn.getViewVector(1.0F);
-            double d0 = 5.0D;
-            List<Entity> list = worldIn.getEntities(playerIn,
-                    playerIn.getBoundingBox().expandTowards(vector3d.scale(5.0D)).inflate(1.0D), ENTITY_PREDICATE);
+        }
+        else {
+            Vec3 vector3d = player.getViewVector(1.0F);
+            List<Entity> list = level.getEntities(player, player.getBoundingBox().expandTowards(vector3d.scale(5.0D)).inflate(1.0D), ENTITY_PREDICATE);
             if (!list.isEmpty()) {
-                Vec3 vector3d1 = playerIn.getEyePosition(1.0F);
+                Vec3 vector3d1 = player.getEyePosition(1.0F);
 
                 for(Entity entity : list) {
-                    AABB axisalignedbb = entity.getBoundingBox().inflate((double)entity.getPickRadius());
-                    if (axisalignedbb.contains(vector3d1)) {
+                    AABB aabb = entity.getBoundingBox().inflate(entity.getPickRadius());
+                    if (aabb.contains(vector3d1)) {
                         return InteractionResultHolder.pass(itemstack);
                     }
                 }
             }
 
-            if (raytraceresult.getType() == HitResult.Type.BLOCK) {
-                CustomBoatEntity boatentity = new CustomBoatEntity(worldIn, raytraceresult.getLocation().x,
-                        raytraceresult.getLocation().y, raytraceresult.getLocation().z);
-                boatentity.setWoodType(woodType);
-                boatentity.yRotO = playerIn.yRotO;
-                if (!worldIn.noCollision(boatentity, boatentity.getBoundingBox().inflate(-0.1D))) {
+            if (result.getType() == HitResult.Type.BLOCK) {
+                CustomBoatEntity boat = this.getBoat(level, result);
+                boat.setCustomBoatEntityType(this.type);
+                boat.setYRot(player.getYRot());
+                if (!level.noCollision(boat, boat.getBoundingBox())) {
                     return InteractionResultHolder.fail(itemstack);
-                } else {
-                    if (!worldIn.isClientSide) {
-                        worldIn.addFreshEntity(boatentity);
-                        if (!playerIn.getAbilities().instabuild) {
+                }
+                else {
+                    if (!level.isClientSide()) {
+                        level.addFreshEntity(boat);
+                        level.gameEvent(player, GameEvent.ENTITY_PLACE, result.getLocation());
+                        if (!player.getAbilities().instabuild) {
                             itemstack.shrink(1);
                         }
                     }
 
-                    playerIn.awardStat(Stats.ITEM_USED.get(this));
-                    return InteractionResultHolder.sidedSuccess(itemstack, worldIn.isClientSide());
+                    player.awardStat(Stats.ITEM_USED.get(this));
+                    return InteractionResultHolder.sidedSuccess(itemstack, level.isClientSide());
                 }
-            } else {
+            }
+            else {
                 return InteractionResultHolder.pass(itemstack);
             }
         }
-    }*/
+    }
+
+    private CustomBoatEntity getBoat(Level level, HitResult result) {
+        return this.chest ? new CustomChestBoatEntity(level, result.getLocation().x(), result.getLocation().y(), result.getLocation().z()) :new CustomBoatEntity(level, result.getLocation().x(), result.getLocation().y(), result.getLocation().z());
+    }
 }

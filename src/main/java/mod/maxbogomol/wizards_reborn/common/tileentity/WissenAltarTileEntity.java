@@ -8,6 +8,7 @@ import mod.maxbogomol.wizards_reborn.api.wissen.WissenUtils;
 import mod.maxbogomol.wizards_reborn.client.particle.Particles;
 import mod.maxbogomol.wizards_reborn.common.network.WissenAltarSendEffectPacket;
 import mod.maxbogomol.wizards_reborn.common.network.PacketHandler;
+import mod.maxbogomol.wizards_reborn.common.recipe.WissenAltarRecipe;
 import mod.maxbogomol.wizards_reborn.utils.PacketUtils;
 import mod.maxbogomol.wizards_reborn.common.network.WissenAltarBurstEffectPacket;
 import net.minecraft.core.BlockPos;
@@ -16,16 +17,14 @@ import net.minecraft.network.Connection;
 import net.minecraft.network.protocol.game.ClientboundBlockEntityDataPacket;
 import net.minecraft.world.SimpleContainer;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.level.Level;
-import net.minecraft.world.level.block.entity.BlockEntity;
-import net.minecraft.world.level.block.entity.BlockEntityTicker;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.Random;
 
-public class WissenAltarTileEntity extends TileSimpleInventory implements BlockEntityTicker, IWissenTileEntity {
+public class WissenAltarTileEntity extends TileSimpleInventory implements TickableBlockEntity, IWissenTileEntity {
 
     public int wissenInItem = 0;
     public int wissenIsCraft = 0;
@@ -43,7 +42,7 @@ public class WissenAltarTileEntity extends TileSimpleInventory implements BlockE
     }
 
     @Override
-    public void tick(Level pLevel, BlockPos pPos, BlockState pState, BlockEntity pBlockEntity) {
+    public void tick() {
         if (!level.isClientSide()) {
             if ((getItemHandler().getItem(2).isEmpty()) && (!getItemHandler().getItem(1).isEmpty())) {
                 getItemHandler().setItem(2, getItemHandler().getItem(1).copy());
@@ -60,9 +59,9 @@ public class WissenAltarTileEntity extends TileSimpleInventory implements BlockE
             SimpleContainer inv = new SimpleContainer(1);
             inv.setItem(0, getItemHandler().getItem(2));
             wissenInItem = 0;
-            //wissenInItem = level.getRecipeManager().getRecipeFor(WizardsReborn.WISSEN_ALTAR_RECIPE, inv, level)
-            //        .map(WissenAltarRecipe::getRecipeWissen)
-            //        .orElse(0);
+            wissenInItem = level.getRecipeManager().getRecipeFor(WizardsReborn.WISSEN_ALTAR_RECIPE.get(), inv, level)
+                    .map(WissenAltarRecipe::getRecipeWissen)
+                    .orElse(0);
 
             if ((wissenInItem > 0) && (wissen < getMaxWissen())) {
                 int addRemainCraft = WissenUtils.getAddWissenRemain(wissenIsCraft, getWissenPerTick(), wissenInItem);
@@ -81,7 +80,6 @@ public class WissenAltarTileEntity extends TileSimpleInventory implements BlockE
                     wissenIsCraft = 0;
 
                     PacketHandler.sendToTracking(level, getBlockPos(), new WissenAltarBurstEffectPacket(getBlockPos()));
-                    PacketUtils.SUpdateTileEntityPacket(this);
                 }
             }
 
@@ -151,24 +149,40 @@ public class WissenAltarTileEntity extends TileSimpleInventory implements BlockE
         };
     }
 
-    /*@Override
-    public final ClientboundBlockEntityDataPacket getUpdatePacket() {
-        CompoundTag tag = new CompoundTag();
-        save(tag);
-        return new ClientboundBlockEntityDataPacket(worldPosition, -999, tag);
-    }*/
-
     @Override
-    public void onDataPacket(Connection net, ClientboundBlockEntityDataPacket packet) {
-        super.onDataPacket(net, packet);
-        load(packet.getTag());
+    public ClientboundBlockEntityDataPacket getUpdatePacket() {
+        return ClientboundBlockEntityDataPacket.create(this, (e) -> e.getUpdateTag());
     }
 
-    /*@Override
-    public CompoundTag getUpdateTag()
-    {
-        return this.save(new CompoundTag());
-    }*/
+    @Override
+    public void onDataPacket(Connection net, ClientboundBlockEntityDataPacket pkt) {
+        super.onDataPacket(net, pkt);
+        handleUpdateTag(pkt.getTag());
+    }
+
+    @NotNull
+    @Override
+    public final CompoundTag getUpdateTag() {
+        var tag = new CompoundTag();
+        saveAdditional(tag);
+        return tag;
+    }
+
+    @Override
+    public void saveAdditional(CompoundTag tag) {
+        super.saveAdditional(tag);
+        tag.putInt("wissenInItem", wissenInItem);
+        tag.putInt("wissenIsCraft", wissenIsCraft);
+        tag.putInt("wissen", wissen);
+    }
+
+    @Override
+    public void load(CompoundTag tag) {
+        super.load(tag);
+        wissenInItem = tag.getInt("wissenInItem");
+        wissenIsCraft = tag.getInt("wissenIsCraft");
+        wissen = tag.getInt("wissen");
+    }
 
     public float getBlockRotate() {
         switch (this.getBlockState().getValue(BlockStateProperties.HORIZONTAL_FACING)) {
@@ -194,25 +208,6 @@ public class WissenAltarTileEntity extends TileSimpleInventory implements BlockE
             return 1F;
         }
         return (1F - ((float) wissenIsCraft / (float) wissenInItem));
-    }
-
-    /*@Override
-    public CompoundTag save(CompoundTag tag) {
-        super.save(tag);
-        tag.putInt("wissenInItem", wissenInItem);
-        tag.putInt("wissenIsCraft", wissenIsCraft);
-        tag.putInt("wissen", wissen);
-        CompoundTag ret = super.save(tag);
-        return ret;
-    }*/
-
-    @Override
-    public void load(CompoundTag tag) {
-        super.load(tag);
-        wissenInItem = tag.getInt("wissenInItem");
-        wissenIsCraft = tag.getInt("wissenIsCraft");
-        wissen = tag.getInt("wissen");
-        super.load(tag);
     }
 
     @Override

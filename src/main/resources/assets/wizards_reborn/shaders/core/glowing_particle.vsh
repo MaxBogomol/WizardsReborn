@@ -19,5 +19,5 @@ void main() {
 
     vertexDistance = length((ModelViewMat * vec4(Position, 1.0)).xyz);
     texCoord0 = UV0;
-    vertexColor = Color; // unlit
+    vertexColor = Color;
 }

@@ -21,12 +21,14 @@ import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.core.BlockPos;
 import net.minecraft.util.Mth;
+import net.minecraftforge.network.PacketDistributor;
+import org.jetbrains.annotations.NotNull;
 
 import java.awt.*;
 import java.util.ArrayList;
 import java.util.Random;
 
-public class WissenTranslatorTileEntity extends BlockEntity implements BlockEntityTicker, IWissenTileEntity {
+public class WissenTranslatorTileEntity extends BlockEntity implements TickableBlockEntity, IWissenTileEntity {
 
     public int blockFromX = 0;
     public int blockFromY = 0;
@@ -42,7 +44,6 @@ public class WissenTranslatorTileEntity extends BlockEntity implements BlockEnti
     public int cooldown = 0;
 
     public CompoundTag wissenRays = new CompoundTag();
-    public int wissenRaysCount = 0;
 
     public Random random = new Random();
 
@@ -55,7 +56,7 @@ public class WissenTranslatorTileEntity extends BlockEntity implements BlockEnti
     }
 
     @Override
-    public void tick(Level pLevel, BlockPos pPos, BlockState pState, BlockEntity pBlockEntity) {
+    public void tick() {
         if (!level.isClientSide()) {
             if (cooldown > 0) {
                 cooldown = cooldown - 1;
@@ -119,8 +120,9 @@ public class WissenTranslatorTileEntity extends BlockEntity implements BlockEnti
                 }
             }
 
-            if (wissenRaysCount > 0) {
+            if (wissenRays.size() > 0) {
                 updateWissenRays();
+                PacketUtils.SUpdateTileEntityPacket(this);
             }
 
             if (setCooldown) {
@@ -153,24 +155,24 @@ public class WissenTranslatorTileEntity extends BlockEntity implements BlockEnti
         }
     }
 
-    /*@Override
-    public final ClientboundBlockEntityDataPacket getUpdatePacket() {
-        CompoundTag tag = new CompoundTag();
-        save(tag);
-        return new ClientboundBlockEntityDataPacket(worldPosition, -999, tag);
-    }*/
-
     @Override
-    public void onDataPacket(Connection net, ClientboundBlockEntityDataPacket packet) {
-        super.onDataPacket(net, packet);
-        load(packet.getTag());
+    public ClientboundBlockEntityDataPacket getUpdatePacket() {
+        return ClientboundBlockEntityDataPacket.create(this, (e) -> e.getUpdateTag());
     }
 
-    /*@Override
-    public CompoundTag getUpdateTag()
-    {
-        return this.save(new CompoundTag());
-    }*/
+    @Override
+    public void onDataPacket(Connection net, ClientboundBlockEntityDataPacket pkt) {
+        super.onDataPacket(net, pkt);
+        handleUpdateTag(pkt.getTag());
+    }
+
+    @NotNull
+    @Override
+    public final CompoundTag getUpdateTag() {
+        var tag = new CompoundTag();
+        saveAdditional(tag);
+        return tag;
+    }
 
     public boolean isSameFromAndTo() {
         return ((blockFromX == blockToX) && (blockFromY == blockToY) && (blockFromZ == blockToZ));
@@ -180,9 +182,9 @@ public class WissenTranslatorTileEntity extends BlockEntity implements BlockEnti
         return ((posFrom.getX() == posTo.getX()) && (posFrom.getY() == posTo.getY()) && (posFrom.getZ() == posTo.getZ()));
     }
 
-    /*@Override
-    public CompoundTag save(CompoundTag tag) {
-        super.save(tag);
+    @Override
+    public void saveAdditional(CompoundTag tag) {
+        super.saveAdditional(tag);
         tag.putInt("blockFromX", blockFromX);
         tag.putInt("blockFromY", blockFromY);
         tag.putInt("blockFromZ", blockFromZ);
@@ -197,11 +199,7 @@ public class WissenTranslatorTileEntity extends BlockEntity implements BlockEnti
         tag.putInt("cooldown", cooldown);
 
         tag.put("wissenRays", wissenRays);
-        tag.putInt("wissenRaysCount", wissenRaysCount);
-
-        CompoundTag ret = super.save(tag);
-        return ret;
-    }*/
+    }
 
     @Override
     public void load(CompoundTag tag) {
@@ -220,9 +218,6 @@ public class WissenTranslatorTileEntity extends BlockEntity implements BlockEnti
         cooldown = tag.getInt("cooldown");
 
         wissenRays = tag.getCompound("wissenRays");
-        wissenRaysCount = tag.getInt("wissenRaysCount");
-
-        super.load(tag);
     }
 
     public float getStage() {
@@ -403,8 +398,7 @@ public class WissenTranslatorTileEntity extends BlockEntity implements BlockEnti
         tag.putInt("wissen", wissenCount);
         tag.putInt("mitting", 0);
 
-        wissenRaysCount = wissenRaysCount + 1;
-        wissenRays.put(String.valueOf(wissenRaysCount - 1), tag);
+        wissenRays.put(String.valueOf(wissenRays.size()), tag);
     }
 
     public void deleteWissenRay(ArrayList<Integer> indexs) {
@@ -412,21 +406,19 @@ public class WissenTranslatorTileEntity extends BlockEntity implements BlockEnti
 
         int ii = 0;
 
-        for (int i = 0; i < wissenRaysCount; i++) {
+        for (int i = 0; i < wissenRays.size(); i++) {
             if (!indexs.contains(i)) {
                 tag.put(String.valueOf(ii), wissenRays.getCompound(String.valueOf(i)));
                 ii = ii + 1;
             }
         }
-        wissenRaysCount = wissenRaysCount - 1;
         wissenRays = tag;
     }
 
     public void updateWissenRays() {
-        int preWissenRaysCount = wissenRaysCount;
         ArrayList<Integer> deleteRays = new ArrayList<Integer>();
 
-        for (int i = 0; i < wissenRaysCount; i++) {
+        for (int i = 0; i < wissenRays.size(); i++) {
             CompoundTag tag = wissenRays.getCompound(String.valueOf(i));
 
             int blockFromX = tag.getInt("blockFromX");
@@ -445,17 +437,19 @@ public class WissenTranslatorTileEntity extends BlockEntity implements BlockEnti
             tag.putFloat("blockY", Y);
             tag.putFloat("blockZ", Z);
 
+            PacketUtils.SUpdateTileEntityPacket(this);
             PacketHandler.sendToTracking(level, getBlockPos(), new WissenSendEffectPacket(blockX, blockY, blockZ, X, Y, Z));
+            PacketUtils.SUpdateTileEntityPacket(this);
 
             if (tag.getInt("wissen") <= 0) {
                 PacketHandler.sendToTracking(level, getBlockPos(), new WissenTranslatorBurstEffectPacket(X, Y, Z));
                 deleteRays.add(i);
             } else if ((blockFromX != Mth.floor(blockX)) || blockFromY != Mth.floor(blockY) || (blockFromZ != Mth.floor(blockZ))) {
-                BlockEntity tileentity = level.getBlockEntity(new BlockPos((int) blockX, (int) blockY, (int) blockZ));
+                BlockEntity tileentity = level.getBlockEntity(new BlockPos(Mth.floor(blockX), Mth.floor(blockY), Mth.floor(blockZ)));
                 if (tileentity instanceof IWissenTileEntity) {
-                    if ((Math.abs(blockX) % 1F > 0.25F && Math.abs(blockX) % 1F <= 0.75F) &&
-                            (Math.abs(blockY) % 1F > 0.25F && Math.abs(blockY) % 1F <= 0.75F) &&
-                            (Math.abs(blockZ) % 1F > 0.25F && Math.abs(blockZ) % 1F <= 0.75F)) {
+                    if ((Math.abs(blockX) % 1F > 0.15F && Math.abs(blockX) % 1F <= 0.85F) &&
+                            (Math.abs(blockY) % 1F > 0.15F && Math.abs(blockY) % 1F <= 0.85F) &&
+                            (Math.abs(blockZ) % 1F > 0.15F && Math.abs(blockZ) % 1F <= 0.85F)) {
                         IWissenTileEntity wissenTileEntity = (IWissenTileEntity) tileentity;
 
                         int addRemain = WissenUtils.getAddWissenRemain(wissenTileEntity.getWissen(), tag.getInt("wissen"), wissenTileEntity.getMaxWissen());
@@ -463,12 +457,12 @@ public class WissenTranslatorTileEntity extends BlockEntity implements BlockEnti
                         PacketUtils.SUpdateTileEntityPacket(tileentity);
 
                         PacketHandler.sendToTracking(level, getBlockPos(), new WissenTranslatorBurstEffectPacket(X, Y, Z));
-                        PacketHandler.sendToTracking(level, getBlockPos(), new WissenTranslatorSendEffectPacket(new BlockPos((int) X, (int) Y, (int) Z)));
+                        PacketHandler.sendToTracking(level, getBlockPos(), new WissenTranslatorSendEffectPacket(new BlockPos(Mth.floor(X), Mth.floor(Y), Mth.floor(Z))));
 
                         deleteRays.add(i);
                     }
                 } else {
-                    BlockPos blockpos = new BlockPos((int) blockX, (int) blockY, (int) blockZ);
+                    BlockPos blockpos = new BlockPos(Mth.floor(blockX), Mth.floor(blockY), Mth.floor(blockZ));
                     if (level.getBlockState(blockpos).isCollisionShapeFullBlock(level, blockpos)) {
                         tag.putInt("wissen", tag.getInt("wissen") - 1);
                     }
@@ -483,10 +477,6 @@ public class WissenTranslatorTileEntity extends BlockEntity implements BlockEnti
 
         if (deleteRays.size() > 0) {
             deleteWissenRay(deleteRays);
-        }
-
-        if (preWissenRaysCount > wissenRaysCount) {
-            PacketUtils.SUpdateTileEntityPacket(this);
         }
     }
 }

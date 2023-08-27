@@ -7,8 +7,10 @@ import mod.maxbogomol.wizards_reborn.api.wissen.WissenUtils;
 import mod.maxbogomol.wizards_reborn.client.particle.Particles;
 import mod.maxbogomol.wizards_reborn.common.network.ArcaneWorkbenchBurstEffectPacket;
 import mod.maxbogomol.wizards_reborn.common.network.PacketHandler;
+import mod.maxbogomol.wizards_reborn.common.recipe.ArcaneWorkbenchRecipe;
 import mod.maxbogomol.wizards_reborn.utils.PacketUtils;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.RegistryAccess;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityTicker;
@@ -25,6 +27,7 @@ import net.minecraftforge.common.util.LazyOptional;
 import net.minecraftforge.items.IItemHandler;
 import net.minecraftforge.items.ItemHandlerHelper;
 import net.minecraftforge.items.ItemStackHandler;
+import org.jetbrains.annotations.NotNull;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
@@ -33,7 +36,7 @@ import java.util.Random;
 
 import static net.minecraft.world.level.block.state.properties.BlockStateProperties.HORIZONTAL_FACING;
 
-public class ArcaneWorkbenchTileEntity extends BlockEntity implements BlockEntityTicker, IWissenTileEntity, IWissenWandFunctionalTileEntity {
+public class ArcaneWorkbenchTileEntity extends BlockEntity implements TickableBlockEntity, IWissenTileEntity, IWissenWandFunctionalTileEntity {
     public final ItemStackHandler itemHandler = createHandler();
     public final LazyOptional<IItemHandler> handler = LazyOptional.of(() -> itemHandler);
 
@@ -54,15 +57,14 @@ public class ArcaneWorkbenchTileEntity extends BlockEntity implements BlockEntit
     }
 
     @Override
-    public void tick(Level pLevel, BlockPos pPos, BlockState pState, BlockEntity pBlockEntity) {
+    public void tick() {
         if (!level.isClientSide()) {
             SimpleContainer inv = new SimpleContainer(itemHandler.getSlots());
             for (int i = 0; i < itemHandler.getSlots(); i++) {
                 inv.setItem(i, itemHandler.getStackInSlot(i));
             }
 
-            /*
-            Optional<ArcaneWorkbenchRecipe> recipe = level.getRecipeManager().getRecipeFor(WizardsReborn.ARCANE_WORKBENCH_RECIPE, inv, level);
+            Optional<ArcaneWorkbenchRecipe> recipe = level.getRecipeManager().getRecipeFor(WizardsReborn.ARCANE_WORKBENCH_RECIPE.get(), inv, level);
             wissenInCraft =  recipe.map(ArcaneWorkbenchRecipe::getRecipeWissen).orElse(0);
 
             if (wissenInCraft <= 0) {
@@ -71,7 +73,7 @@ public class ArcaneWorkbenchTileEntity extends BlockEntity implements BlockEntit
             }
 
             if ((wissenInCraft > 0) && (wissen > 0) && (startCraft)) {
-                ItemStack output = recipe.get().getResultItem();
+                ItemStack output = recipe.get().getResultItem(RegistryAccess.EMPTY);
 
                 if (isCanCraft(inv, output)) {
                     int addRemainCraft = WissenUtils.getAddWissenRemain(wissenIsCraft, getWissenPerTick(), wissenInCraft);
@@ -86,7 +88,7 @@ public class ArcaneWorkbenchTileEntity extends BlockEntity implements BlockEntit
 
             if (wissenInCraft > 0 && startCraft) {
                 if (wissenInCraft <= wissenIsCraft) {
-                    ItemStack output = recipe.get().getResultItem().copy();
+                    ItemStack output = recipe.get().getResultItem(RegistryAccess.EMPTY).copy();
 
                     if (isCanCraft(inv, output)) {
                         wissenInCraft = 0;
@@ -105,7 +107,7 @@ public class ArcaneWorkbenchTileEntity extends BlockEntity implements BlockEntit
                         PacketUtils.SUpdateTileEntityPacket(this);
                     }
                 }
-            }*/
+            }
         }
 
         if (level.isClientSide()) {
@@ -191,34 +193,34 @@ public class ArcaneWorkbenchTileEntity extends BlockEntity implements BlockEntit
         };
     }
 
-    /*@Nonnull
-    @Override
-    public <T> LazyOptional<T> getCapability(@Nonnull Capability<T> cap, @Nullable Direction side) {
-        if(cap == CapabilityItemHandler.ITEM_HANDLER_CAPABILITY) {
-            return handler.cast();
-        }
-
-        return super.getCapability(cap, side);
-    }*/
-
+    //@Nonnull
     //@Override
-    //public final ClientboundBlockEntityDataPacket getUpdatePacket() {
-    //    CompoundTag tag = new CompoundTag();
-    //    save(tag);
-    //    return new ClientboundBlockEntityDataPacket(worldPosition, -999, tag);
+    //public <T> LazyOptional<T> getCapability(@Nonnull Capability<T> cap, @Nullable Direction side) {
+        //if(cap == CapabilityItemHandler.ITEM_HANDLER_CAPABILITY) {
+        //    return handler.cast();
+        //}
+
+        //return super.getCapability(cap, side);
     //}
 
     @Override
-    public void onDataPacket(Connection net, ClientboundBlockEntityDataPacket packet) {
-        super.onDataPacket(net, packet);
-        load(packet.getTag());
+    public ClientboundBlockEntityDataPacket getUpdatePacket() {
+        return ClientboundBlockEntityDataPacket.create(this, (e) -> e.getUpdateTag());
     }
 
-    /*@Override
-    public CompoundTag getUpdateTag()
-    {
-        return this.save(new CompoundTag());
-    }*/
+    @Override
+    public void onDataPacket(Connection net, ClientboundBlockEntityDataPacket pkt) {
+        super.onDataPacket(net, pkt);
+        handleUpdateTag(pkt.getTag());
+    }
+
+    @NotNull
+    @Override
+    public final CompoundTag getUpdateTag() {
+        var tag = new CompoundTag();
+        saveAdditional(tag);
+        return tag;
+    }
 
     public float getBlockRotate() {
         switch (this.getBlockState().getValue(HORIZONTAL_FACING)) {
@@ -251,18 +253,16 @@ public class ArcaneWorkbenchTileEntity extends BlockEntity implements BlockEntit
         return false;
     }
 
-    /*@Override
-    public CompoundTag save(CompoundTag tag) {
-        super.save(tag);
+    @Override
+    public void saveAdditional(CompoundTag tag) {
+        super.saveAdditional(tag);
         tag.put("inv", itemHandler.serializeNBT());
 
         tag.putInt("wissenInCraft", wissenInCraft);
         tag.putInt("wissenIsCraft", wissenIsCraft);
         tag.putBoolean("startCraft", startCraft);
         tag.putInt("wissen", wissen);
-        CompoundTag ret = super.save(tag);
-        return ret;
-    }*/
+    }
 
     @Override
     public void load(CompoundTag tag) {
@@ -273,7 +273,6 @@ public class ArcaneWorkbenchTileEntity extends BlockEntity implements BlockEntit
         wissenIsCraft = tag.getInt("wissenIsCraft");
         startCraft = tag.getBoolean("startCraft");
         wissen = tag.getInt("wissen");
-        super.load(tag);
     }
 
     @Override

@@ -1,6 +1,18 @@
 {
-  "parent": "item/handheld",
-  "textures": {
-    "layer0": "wizards_reborn:item/arcane_gold_scythe"
+  "parent": "minecraft:item/handheld",
+  "loader": "forge:separate_transforms",
+  "base": {
+    "parent": "wizards_reborn:item/arcane_gold_scythe_in_hand"
+  },
+  "perspectives": {
+    "gui": {
+      "parent": "wizards_reborn:item/arcane_gold_scythe_icon"
+    },
+    "ground": {
+      "parent": "wizards_reborn:item/arcane_gold_scythe_icon"
+    },
+    "fixed": {
+      "parent": "wizards_reborn:item/arcane_gold_scythe_icon"
+    }
   }
 }

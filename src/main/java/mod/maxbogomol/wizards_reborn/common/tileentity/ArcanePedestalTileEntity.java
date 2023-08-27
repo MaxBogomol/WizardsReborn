@@ -8,6 +8,7 @@ import net.minecraft.network.Connection;
 import net.minecraft.network.protocol.game.ClientboundBlockEntityDataPacket;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
+import org.jetbrains.annotations.NotNull;
 
 public class ArcanePedestalTileEntity extends TileSimpleInventory {
     public ArcanePedestalTileEntity(BlockEntityType<?> type, BlockPos pos, BlockState state) {
@@ -28,21 +29,22 @@ public class ArcanePedestalTileEntity extends TileSimpleInventory {
         };
     }
 
-    //@Override
-    //public final ClientboundBlockEntityDataPacket getUpdatePacket() {
-    //    CompoundTag tag = new CompoundTag();
-    //    return new ClientboundBlockEntityDataPacket(worldPosition, -999, tag);
-    //}
-
     @Override
-    public void onDataPacket(Connection net, ClientboundBlockEntityDataPacket packet) {
-        super.onDataPacket(net, packet);
-        load(packet.getTag());
+    public ClientboundBlockEntityDataPacket getUpdatePacket() {
+        return ClientboundBlockEntityDataPacket.create(this, (e) -> e.getUpdateTag());
     }
 
-    //@Override
-    //public CompoundTag getUpdateTag()
-    //{
-    //    return this.save(new CompoundTag());
-    //}
+    @Override
+    public void onDataPacket(Connection net, ClientboundBlockEntityDataPacket pkt) {
+        super.onDataPacket(net, pkt);
+        handleUpdateTag(pkt.getTag());
+    }
+
+    @NotNull
+    @Override
+    public final CompoundTag getUpdateTag() {
+        var tag = new CompoundTag();
+        saveAdditional(tag);
+        return tag;
+    }
 }

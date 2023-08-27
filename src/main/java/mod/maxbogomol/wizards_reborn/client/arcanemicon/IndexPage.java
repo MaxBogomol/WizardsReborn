@@ -43,6 +43,7 @@ public class IndexPage extends Page {
 
         for (int i = 0; i < entries.length; i ++) {
             if (entries[i].isUnlocked()) {
+                gui.renderItem(entries[i].icon,x + 3, y + 8 + i * 20);
                 gui.renderItemDecorations(Minecraft.getInstance().font, entries[i].icon,x + 3, y + 8 + i * 20, null);
                 drawText(book, gui, I18n.get(entries[i].chapter.titleKey), x + 24, y + 20 + i * 20 - Minecraft.getInstance().font.lineHeight);
             } else {

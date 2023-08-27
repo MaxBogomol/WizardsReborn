@@ -26,15 +26,20 @@ public class BlockEntry {
         this.item = ItemStack.EMPTY;
     }
 
-    public void render(GuiGraphics gui, int x, int y, int mouseX, int mouseY) {
+    public void render(GuiGraphics gui, int x, int y, int mouseX, int mouseY, int index) {
+        gui.renderItem(block, x, y);
         gui.renderItemDecorations(Minecraft.getInstance().font, block, x, y, null);
 
         float partialTicks = Minecraft.getInstance().getFrameTime();
         double ticks = (ClientTickHandler.ticksInGame + partialTicks) * 2;
         double ticksUp = (ClientTickHandler.ticksInGame + partialTicks) * 4;
-        ticksUp = (ticksUp) % 360;
+        ticks = ticks + (index * 35);
+        ticks = ticks % 360;
+        ticksUp = ticksUp % 360;
 
-        RenderUtils.renderFloatingItemModelIntoGUI(item, x, y - 12, (float) ticks, (float) ticksUp);
+        if (item != ItemStack.EMPTY) {
+            RenderUtils.renderFloatingItemModelIntoGUI(item, x, y - 12, (float) ticks, (float) ticksUp);
+        }
     }
 
     public void drawTooltip(ArcanemiconGui gui, int x, int y, int mouseX, int mouseY) {

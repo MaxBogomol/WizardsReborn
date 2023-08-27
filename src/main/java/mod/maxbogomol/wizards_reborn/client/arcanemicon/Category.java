@@ -59,6 +59,7 @@ public class Category {
         }
 
         gui.blit(ArcanemiconGui.BACKGROUND, x, y, 312, right ? 0 : 18, 39, 18, 512, 512);
+        gui.renderItem(icon, x + (right ? 21 : 2), y + 1);
         gui.renderItemDecorations(Minecraft.getInstance().font, icon, x + (right ? 21 : 2), y + 1, null);
     }
 
