@@ -28,8 +28,7 @@ public class IndexEntry {
         if (knowledge == null) {
             return true;
         } else {
-            //return (KnowledgeUtils.isKnowledge(Minecraft.getInstance().player, knowledge));
-            return true;
+            return (KnowledgeUtils.isKnowledge(Minecraft.getInstance().player, knowledge));
         }
     }
 }

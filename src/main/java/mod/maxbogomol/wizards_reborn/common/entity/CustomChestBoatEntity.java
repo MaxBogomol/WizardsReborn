@@ -36,7 +36,7 @@ public class CustomChestBoatEntity extends CustomBoatEntity implements HasCustom
     }
 
     public CustomChestBoatEntity(Level level, double x, double y, double z) {
-        this(WizardsReborn.ARCANE_WOOD_CHEST_BOAT.get(), level);
+        this(WizardsReborn.CHEST_BOAT.get(), level);
         this.setPos(x, y, z);
         this.xo = x;
         this.yo = y;

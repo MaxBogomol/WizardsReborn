@@ -47,17 +47,17 @@ public class SetCrystalPacket {
 
                 List<ItemStack> items = player.inventoryMenu.getItems();
                 for (ItemStack item : items) {
-                    //if (item.sameItem(crystal)) {
-                    //    if (item.getOrCreateTag().toString().equals(crystal.getOrCreateTag().toString())) {
-                    //        player.getInventory().removeItem(item);
-                    //        if (nbt.getBoolean("crystal")) {
-                    //            player.getInventory().add(stack_inv.getItem(0));
-                    //        }
-                    //        stack_inv.setItem(0, crystal);
-                     //       nbt.putBoolean("crystal", true);
-                    //        break;
-                    //    }
-                    //}
+                    if (item.equals(crystal, false)) {
+                        if (item.getOrCreateTag().toString().equals(crystal.getOrCreateTag().toString())) {
+                            player.getInventory().removeItem(item);
+                            if (nbt.getBoolean("crystal")) {
+                                player.getInventory().add(stack_inv.getItem(0));
+                            }
+                            stack_inv.setItem(0, crystal);
+                            nbt.putBoolean("crystal", true);
+                            break;
+                        }
+                    }
                 }
             });
         }

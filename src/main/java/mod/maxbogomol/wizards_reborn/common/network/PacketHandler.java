@@ -2,11 +2,11 @@ package mod.maxbogomol.wizards_reborn.common.network;
 
 import com.mojang.datafixers.util.Pair;
 import mod.maxbogomol.wizards_reborn.WizardsReborn;
-import net.minecraft.server.level.ServerChunkCache;
-import net.minecraft.world.entity.Entity;
-import net.minecraft.server.level.ServerPlayer;
-import net.minecraft.resources.ResourceLocation;
 import net.minecraft.core.BlockPos;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.server.level.ServerChunkCache;
+import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.ChunkPos;
 import net.minecraft.world.level.Level;
 import net.minecraftforge.network.NetworkDirection;
@@ -15,25 +15,13 @@ import net.minecraftforge.network.PacketDistributor;
 import net.minecraftforge.network.simple.SimpleChannel;
 
 public final class PacketHandler {
-    private static final String PROTOCOL = "2";
-    //public static final SimpleChannel HANDLER = NetworkRegistry.newSimpleChannel(
-    //        new ResourceLocation(WizardsReborn.MOD_ID,"network"),
-    //        () -> PROTOCOL,
-    //        PROTOCOL::equals,
-    //        PROTOCOL::equals
-    //);
-    //public static final SimpleChannel HANDLER = NetworkRegistry.ChannelBuilder.named(new ResourceLocation(WizardsReborn.MOD_ID, "main"))
-    //        .networkProtocolVersion(() -> PROTOCOL)
-    //        .clientAcceptedVersions(PROTOCOL::equals)
-    //        .serverAcceptedVersions(PROTOCOL::equals)
-    //        .simpleChannel();
-
-    public static final SimpleChannel HANDLER = NetworkRegistry.ChannelBuilder
-            .named(new ResourceLocation(WizardsReborn.MOD_ID, "messages"))
-            .networkProtocolVersion(() -> "1.0")
-            .clientAcceptedVersions(s -> true)
-            .serverAcceptedVersions(s -> true)
-            .simpleChannel();
+    private static final String PROTOCOL = "10";
+    public static final SimpleChannel HANDLER = NetworkRegistry.newSimpleChannel(
+            new ResourceLocation(WizardsReborn.MOD_ID,"network"),
+            () -> PROTOCOL,
+            PROTOCOL::equals,
+            PROTOCOL::equals
+    );
 
     public static void init() {
         int id = 0;
@@ -99,6 +87,10 @@ public final class PacketHandler {
     public static void sendToTracking(Level world, BlockPos pos, Object msg) {
         //HANDLER.send(PacketDistributor.TRACKING_CHUNK.with(() -> world.getChunkAt(pos)), msg);
         HANDLER.send(TRACKING_CHUNK_AND_NEAR.with(() -> Pair.of(world, pos)), msg);
+    }
+
+    public static void sendTo(Player entity, Object msg) {
+        HANDLER.send(PacketDistributor.PLAYER.with(() -> (ServerPlayer)entity), msg);
     }
 
     public static void sendToServer(Object msg) {

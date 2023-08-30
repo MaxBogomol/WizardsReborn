@@ -1,6 +1,6 @@
 package mod.maxbogomol.wizards_reborn.common.block;
 
-import mod.maxbogomol.wizards_reborn.common.tileentity.ArcaneWoodSignTileEntity;
+import mod.maxbogomol.wizards_reborn.common.tileentity.CustomSignTileEntity;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.StandingSignBlock;
@@ -17,6 +17,6 @@ public class ArcaneWoodStandingSignBlock extends StandingSignBlock {
     @Nullable
     @Override
     public BlockEntity newBlockEntity(BlockPos pPos, BlockState pState) {
-        return new ArcaneWoodSignTileEntity(pPos, pState);
+        return new CustomSignTileEntity(pPos, pState);
     }
 }

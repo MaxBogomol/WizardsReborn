@@ -5,6 +5,7 @@ import mod.maxbogomol.wizards_reborn.api.spell.Spells;
 import mod.maxbogomol.wizards_reborn.common.network.PacketHandler;
 import mod.maxbogomol.wizards_reborn.common.network.SpellBurstEffectPacket;
 import mod.maxbogomol.wizards_reborn.common.network.SpellProjectileRayEffectPacket;
+import net.minecraft.network.protocol.game.ClientGamePacketListener;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.projectile.ProjectileUtil;
@@ -44,7 +45,7 @@ public class SpellProjectileEntity extends Entity {
     @Override
     public void tick() {
         Vec3 motion = getDeltaMovement();
-        setDeltaMovement(motion.x * 0.96, (motion.y > 0 ? motion.y * 0.96 : motion.y) - 0.03f, motion.z * 0.96);
+        setDeltaMovement(motion.x * 0.96, (motion.y > 0 ? motion.y * 0.96 : motion.y) - 0.02f, motion.z * 0.96);
 
         super.tick();
 
@@ -55,13 +56,15 @@ public class SpellProjectileEntity extends Entity {
         setPos(pos.x + motion.x, pos.y + motion.y, pos.z + motion.z);
 
         if (!level().isClientSide) {
-            //HitResult ray = ProjectileUtil.getHitResult(this, (e) -> !e.isSpectator() && e.isPickable() && !e.getUUID().equals(getEntityData().get(casterId)));
-            //if (ray.getType() == HitResult.Type.ENTITY) {
-            //    onImpact(ray, ((EntityHitResult)ray).getEntity());
-            //}
-            //else if (ray.getType() == HitResult.Type.BLOCK) {
-            //    onImpact(ray);
-            //}
+            HitResult ray = ProjectileUtil.getHitResultOnMoveVector(this, (e) -> {
+                return !e.isSpectator() && e.isPickable() && !e.getUUID().equals(casterId);
+            });
+            if (ray.getType() == HitResult.Type.ENTITY) {
+                onImpact(ray, ((EntityHitResult)ray).getEntity());
+            }
+            else if (ray.getType() == HitResult.Type.BLOCK) {
+                onImpact(ray);
+            }
             rayEffect();
         }
     }
@@ -95,10 +98,10 @@ public class SpellProjectileEntity extends Entity {
         getEntityData().set(spellId, compound.getString("spelll"));
     }
 
-    /*@Override
-    public Packet<?> getAddEntityPacket() {
+    @Override
+    public Packet<ClientGamePacketListener> getAddEntityPacket() {
         return NetworkHooks.getEntitySpawningPacket(this);
-    }*/
+    }
 
     public Spell getSpell() {
         return Spells.getSpell(getEntityData().get(spellId));

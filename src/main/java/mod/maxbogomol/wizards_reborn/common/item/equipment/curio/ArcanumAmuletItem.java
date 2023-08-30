@@ -6,6 +6,7 @@ import mod.maxbogomol.wizards_reborn.WizardsReborn;
 import mod.maxbogomol.wizards_reborn.api.wissen.IWissenItem;
 import mod.maxbogomol.wizards_reborn.api.wissen.WissenItemUtils;
 import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.ai.attributes.Attribute;
 import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 import net.minecraft.world.item.Item;
@@ -20,7 +21,7 @@ import top.theillusivec4.curios.api.type.capability.ICurioItem;
 import javax.annotation.Nonnull;
 import java.util.UUID;
 
-public class ArcanumAmuletItem extends Item implements ICurioItem, IWissenItem {
+public class ArcanumAmuletItem extends Item implements ICurioItem, ICurioItemTexture, IWissenItem {
 
     private static final ResourceLocation AMULET_TEXTURE = new ResourceLocation(WizardsReborn.MOD_ID,"textures/entity/curio/arcanum_amulet.png");
 
@@ -46,31 +47,6 @@ public class ArcanumAmuletItem extends Item implements ICurioItem, IWissenItem {
         return atts;
     }
 
-    /*@Override
-    public boolean canRender(String identifier, int index, LivingEntity living, ItemStack stack) {
-        return true;
-    }
-
-    @Override
-    public void render(String identifier, int index, PoseStack matrixStack,
-                       MultiBufferSource renderTypeBuffer, int light, LivingEntity living,
-                       float limbSwing, float limbSwingAmount, float partialTicks, float ageInTicks,
-                       float netHeadYaw, float headPitch, ItemStack stack) {
-        ICurio.RenderHelper.translateIfSneaking(matrixStack, living);
-        ICurio.RenderHelper.rotateIfSneaking(matrixStack, living);
-
-        AmuletModel<?> model = new AmuletModel<>();
-        Vec3 rotate = RenderUtils.followBodyRotation(living);
-        model.model.yRot = (float) rotate.y();
-
-        VertexConsumer vertexBuilder = ItemRenderer
-                .getFoilBuffer(renderTypeBuffer, model.renderType(AMULET_TEXTURE), false,
-                        false);
-        model
-                .renderToBuffer(matrixStack, vertexBuilder, light, OverlayTexture.NO_OVERLAY, 1.0F, 1.0F, 1.0F,
-                        1.0F);
-    }*/
-
     @Override
     public int getMaxWissen() {
         return 1000;
@@ -81,5 +57,10 @@ public class ArcanumAmuletItem extends Item implements ICurioItem, IWissenItem {
         if (!world.isClientSide()) {
             WissenItemUtils.existWissen(stack);
         }
+    }
+
+    @Override
+    public ResourceLocation getTexture(ItemStack stack, LivingEntity entity) {
+        return AMULET_TEXTURE;
     }
 }

@@ -11,38 +11,22 @@ import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.inventory.ContainerLevelAccess;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.level.Level;
+import net.minecraftforge.common.capabilities.ForgeCapabilities;
 import net.minecraftforge.items.IItemHandler;
 import net.minecraftforge.items.SlotItemHandler;
 import net.minecraftforge.items.wrapper.InvWrapper;
 import org.jetbrains.annotations.Nullable;
 
 public class ArcaneWorkbenchContainer extends AbstractContainerMenu {
-    //private final BlockEntity tileEntity;
-    //private final Player playerEntity;
-    //private final IItemHandler playerInventory;
+    public final BlockEntity tileEntity;
+    public final Player playerEntity;
+    public final IItemHandler playerInventory;
 
-    protected ArcaneWorkbenchContainer(@Nullable MenuType<?> pMenuType, int pContainerId) {
+    protected ArcaneWorkbenchContainer(@Nullable MenuType<?> pMenuType, int pContainerId, BlockEntity tileEntity, Player playerEntity, IItemHandler playerInventory) {
         super(pMenuType, pContainerId);
-    }
-
-    @Override
-    public ItemStack quickMoveStack(Player pPlayer, int pIndex) {
-        return null;
-    }
-
-    @Override
-    public boolean stillValid(Player pPlayer) {
-        return false;
-    }
-
-    /*@Override
-    public ItemStack quickMoveStack(Player pPlayer, int pIndex) {
-        return null;
-    }
-
-    @Override
-    public boolean stillValid(Player pPlayer) {
-        return false;
+        this.tileEntity = tileEntity;
+        this.playerEntity = playerEntity;
+        this.playerInventory = playerInventory;
     }
 
     public ArcaneWorkbenchContainer(int windowId, Level world, BlockPos pos,
@@ -54,7 +38,7 @@ public class ArcaneWorkbenchContainer extends AbstractContainerMenu {
         this.layoutPlayerInventorySlots(8, 86 + 33);
 
         if (tileEntity != null) {
-            tileEntity.getCapability(ForgeCapabilities.ITEM_HANDLER_CAPABILITY).ifPresent(h -> {
+            tileEntity.getCapability(ForgeCapabilities.ITEM_HANDLER).ifPresent(h -> {
                 addSlot(new SlotItemHandler(h, 0, 30, 30));
                 addSlot(new SlotItemHandler(h, 1, 48, 30));
                 addSlot(new SlotItemHandler(h, 2, 66, 30));
@@ -145,5 +129,5 @@ public class ArcaneWorkbenchContainer extends AbstractContainerMenu {
         }
         sourceSlot.onTake(playerEntity, sourceStack);
         return copyOfSourceStack;
-    }*/
+    }
 }

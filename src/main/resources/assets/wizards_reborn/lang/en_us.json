@@ -1,5 +1,9 @@
 {
   "itemGroup.wizards_reborn_mod_tab": "Wizard's Reborn",
+
+  "trim_material.wizards_reborn.arcane_gold": "Arcane Gold",
+  "trim_material.wizards_reborn.arcanum": "Arcanum",
+
   "item.wizards_reborn.arcane_gold_ingot": "Arcane Gold Ingot",
   "item.wizards_reborn.arcane_gold_nugget": "Arcane Gold Nugget",
   "item.wizards_reborn.raw_arcane_gold": "Raw Arcane Gold",

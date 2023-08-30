@@ -22,7 +22,7 @@ public class KeyBindHandler {
     private KeyBindHandler() {}
 
     @SubscribeEvent
-    public static void onKeyPress (InputEvent.InteractionKeyMappingTriggered event) {
+    public static void onKeyPress(InputEvent event) {
         if (WizardsReborn.OPEN_WAND_SELECTION_KEY.isDown()) {
             Minecraft mc = Minecraft.getInstance();
             Player player = mc.player;

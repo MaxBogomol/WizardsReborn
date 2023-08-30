@@ -1,7 +1,6 @@
 package mod.maxbogomol.wizards_reborn.common.block;
 
-import mod.maxbogomol.wizards_reborn.common.tileentity.ArcaneWoodHangingSignTileEntity;
-import mod.maxbogomol.wizards_reborn.common.tileentity.ArcaneWoodSignTileEntity;
+import mod.maxbogomol.wizards_reborn.common.tileentity.CustomHangingSignTileEntity;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.level.block.WallHangingSignBlock;
 import net.minecraft.world.level.block.entity.BlockEntity;
@@ -18,6 +17,6 @@ public class ArcaneWoodWallHangingSignBlock extends WallHangingSignBlock {
     @Nullable
     @Override
     public BlockEntity newBlockEntity(BlockPos pPos, BlockState pState) {
-        return new ArcaneWoodHangingSignTileEntity(pPos, pState);
+        return new CustomHangingSignTileEntity(pPos, pState);
     }
 }

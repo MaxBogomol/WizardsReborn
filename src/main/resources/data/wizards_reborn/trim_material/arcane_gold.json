@@ -1,0 +1,9 @@
+{
+  "asset_name": "arcane_gold",
+  "description": {
+    "color": "#EAC790",
+    "translate": "trim_material.wizards_reborn.arcane_gold"
+  },
+  "ingredient": "wizards_reborn:arcane_gold_ingot",
+  "item_model_index": 0.6
+}

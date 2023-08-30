@@ -1,6 +1,7 @@
 package mod.maxbogomol.wizards_reborn.client.render.item;
 
 import net.minecraft.client.resources.model.BakedModel;
+import net.minecraft.client.resources.model.ModelResourceLocation;
 import net.minecraft.resources.ResourceLocation;
 
 import java.util.ArrayList;
@@ -48,10 +49,10 @@ public class WandCrystalsModels {
         return crystals.get(id);
     }
 
-    public static ResourceLocation getModelLocationCrystal(String id) {
+    public static ModelResourceLocation getModelLocationCrystal(String id) {
         int i = id.indexOf(":");
         String modId = id.substring(0, i);
         String crystalId = id.substring(i + 1);
-        return new ResourceLocation(modId, "item/wand_crystals/" + crystalId);
+        return new ModelResourceLocation(new ResourceLocation(modId, "wand_crystals/" + crystalId), "inventory");
     }
 }

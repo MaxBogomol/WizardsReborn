@@ -31,6 +31,9 @@ public class WissenSendEffectPacket {
         this.posToZ = posToZ;
     }
 
+    public WissenSendEffectPacket(FriendlyByteBuf friendlyByteBuf) {
+    }
+
     public static WissenSendEffectPacket decode(FriendlyByteBuf buf) {
         return new WissenSendEffectPacket(buf.readFloat(), buf.readFloat(), buf.readFloat(), buf.readFloat(), buf.readFloat(), buf.readFloat());
     }
@@ -45,40 +48,44 @@ public class WissenSendEffectPacket {
         buf.writeFloat(posToZ);
     }
 
+    @SuppressWarnings("Convert2Lambda")
     public static void handle(WissenSendEffectPacket msg, Supplier<NetworkEvent.Context> ctx) {
         if (ctx.get().getDirection().getReceptionSide().isClient()) {
-            ctx.get().enqueueWork(() -> {
-                ClientLevel world = Minecraft.getInstance().level;
+            ctx.get().enqueueWork(new Runnable() {
+                @Override
+                public void run() {
+                    ClientLevel world = Minecraft.getInstance().level;
 
-                int particlePerBlock = 4;
+                    int particlePerBlock = 4;
 
-                double dX = posFromX - posToX;
-                double dY = posFromY - posToY;
-                double dZ = posFromZ - posToZ;
+                    double dX = posFromX - posToX;
+                    double dY = posFromY - posToY;
+                    double dZ = posFromZ - posToZ;
 
-                float x = (float) (dX / (particlePerBlock));
-                float y = (float) (dY / (particlePerBlock));
-                float z = (float) (dZ / (particlePerBlock));
+                    float x = (float) (dX / (particlePerBlock));
+                    float y = (float) (dY / (particlePerBlock));
+                    float z = (float) (dZ / (particlePerBlock));
 
-                for (int i = 0; i < particlePerBlock; i++) {
-                    Particles.create(WizardsReborn.WISP_PARTICLE)
-                            .addVelocity(((random.nextDouble() - 0.5D) / 50), ((random.nextDouble() - 0.5D) / 50), ((random.nextDouble() - 0.5D) / 50))
-                            .setAlpha(0.3f, 0).setScale(0.15f, 0)
-                            .setColor(0.466f, 0.643f, 0.815f)
-                            .setLifetime(20)
-                            .spawn(world, posFromX - (x * i), posFromY - (y * i), posFromZ - (z * i));
-                    if (random.nextFloat() < 0.1) {
-                        Particles.create(WizardsReborn.SPARKLE_PARTICLE)
-                                .addVelocity(((random.nextDouble() - 0.5D) / 25), ((random.nextDouble() - 0.5D) / 25), ((random.nextDouble() - 0.5D) / 25))
-                                .setAlpha(0.125f, 0).setScale(0.2f, 0)
+                    for (int i = 0; i < particlePerBlock; i++) {
+                        Particles.create(WizardsReborn.WISP_PARTICLE)
+                                .addVelocity(((random.nextDouble() - 0.5D) / 50), ((random.nextDouble() - 0.5D) / 50), ((random.nextDouble() - 0.5D) / 50))
+                                .setAlpha(0.3f, 0).setScale(0.15f, 0)
                                 .setColor(0.466f, 0.643f, 0.815f)
-                                .setLifetime(30)
-                                .setSpin((0.5f * (float) ((random.nextDouble() - 0.5D) * 2)))
+                                .setLifetime(20)
                                 .spawn(world, posFromX - (x * i), posFromY - (y * i), posFromZ - (z * i));
+                        if (random.nextFloat() < 0.1) {
+                            Particles.create(WizardsReborn.SPARKLE_PARTICLE)
+                                    .addVelocity(((random.nextDouble() - 0.5D) / 25), ((random.nextDouble() - 0.5D) / 25), ((random.nextDouble() - 0.5D) / 25))
+                                    .setAlpha(0.125f, 0).setScale(0.2f, 0)
+                                    .setColor(0.466f, 0.643f, 0.815f)
+                                    .setLifetime(30)
+                                    .setSpin((0.5f * (float) ((random.nextDouble() - 0.5D) * 2)))
+                                    .spawn(world, posFromX - (x * i), posFromY - (y * i), posFromZ - (z * i));
+                        }
                     }
+                    ctx.get().setPacketHandled(true);
                 }
             });
         }
-        ctx.get().setPacketHandled(true);
     }
 }

@@ -73,9 +73,9 @@ public class WizardsRebornItemGroup {
             event.accept(WizardsReborn.ARCANE_LINEN_ITEM);
             event.accept(WizardsReborn.ARCANE_LINEN_HAY_ITEM);
 
-            //event.accept(WizardsReborn.MOR_ITEM);
+            event.accept(WizardsReborn.MOR_ITEM);
             event.accept(WizardsReborn.MOR_BLOCK_ITEM);
-            //event.accept(WizardsReborn.ELDER_MOR_ITEM);
+            event.accept(WizardsReborn.ELDER_MOR_ITEM);
             event.accept(WizardsReborn.ELDER_MOR_BLOCK_ITEM);
 
             event.accept(WizardsReborn.ARCANE_WAND);

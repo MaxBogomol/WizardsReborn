@@ -19,6 +19,7 @@ import net.minecraft.core.Direction;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.level.Level;
 import net.minecraftforge.common.capabilities.Capability;
+import net.minecraftforge.common.capabilities.ForgeCapabilities;
 import net.minecraftforge.common.capabilities.ICapabilityProvider;
 import net.minecraftforge.common.util.LazyOptional;
 import net.minecraftforge.items.IItemHandler;
@@ -37,7 +38,7 @@ public class ArcaneWandItem extends Item implements IWissenItem {
         return new ItemBackedInventory(stack, 1);
     }
 
-    /*@Nonnull
+    @Nonnull
     @Override
     public ICapabilityProvider initCapabilities(ItemStack stack, CompoundTag oldCapNbt) {
         return new InvProvider(stack);
@@ -53,9 +54,9 @@ public class ArcaneWandItem extends Item implements IWissenItem {
         @Nonnull
         @Override
         public <T> LazyOptional<T> getCapability(@Nonnull Capability<T> capability, @Nullable Direction facing) {
-            return CapabilityItemHandler.ITEM_HANDLER_CAPABILITY.orEmpty(capability, opt);
+            return ForgeCapabilities.ITEM_HANDLER.orEmpty(capability, opt);
         }
-    }*/
+    }
 
     @Override
     public void inventoryTick(ItemStack stack, Level world, Entity entity, int slot, boolean isSelected) {
@@ -89,9 +90,9 @@ public class ArcaneWandItem extends Item implements IWissenItem {
     @Override
     public InteractionResultHolder<ItemStack> use(Level world, Player player, InteractionHand hand) {
         ItemStack stack = player.getItemInHand(hand);
-        //KnowledgeUtils.removeAllKnowledge(player);
 
         if (!world.isClientSide) {
+            KnowledgeUtils.removeAllKnowledge(player);
             CompoundTag nbt = stack.getTag();
             if (nbt.getBoolean("crystal")) {
                 Spell spell = Spells.getSpell(nbt.getString("spell"));

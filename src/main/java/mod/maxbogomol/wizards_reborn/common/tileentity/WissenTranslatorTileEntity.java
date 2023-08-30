@@ -437,9 +437,7 @@ public class WissenTranslatorTileEntity extends BlockEntity implements TickableB
             tag.putFloat("blockY", Y);
             tag.putFloat("blockZ", Z);
 
-            PacketUtils.SUpdateTileEntityPacket(this);
             PacketHandler.sendToTracking(level, getBlockPos(), new WissenSendEffectPacket(blockX, blockY, blockZ, X, Y, Z));
-            PacketUtils.SUpdateTileEntityPacket(this);
 
             if (tag.getInt("wissen") <= 0) {
                 PacketHandler.sendToTracking(level, getBlockPos(), new WissenTranslatorBurstEffectPacket(X, Y, Z));

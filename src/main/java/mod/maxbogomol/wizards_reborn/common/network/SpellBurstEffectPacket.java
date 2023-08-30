@@ -42,26 +42,30 @@ public class SpellBurstEffectPacket {
 
     public static void handle(SpellBurstEffectPacket msg, Supplier<NetworkEvent.Context> ctx) {
         if (ctx.get().getDirection().getReceptionSide().isClient()) {
-            ctx.get().enqueueWork(() -> {
-                ClientLevel world = Minecraft.getInstance().level;
+            ctx.get().enqueueWork(new Runnable() {
+                @Override
+                public void run() {
+                    ClientLevel world = Minecraft.getInstance().level;
 
-                for (int i = 0; i < 25; i++) {
-                    Particles.create(WizardsReborn.WISP_PARTICLE)
-                            .addVelocity(((random.nextDouble() - 0.5D) / 20), ((random.nextDouble() - 0.5D) / 20), ((random.nextDouble() - 0.5D) / 20))
-                            .setAlpha(0.125f, 0).setScale(0.2f, 0)
-                            .setColor(colorR, colorG, colorB)
-                            .setLifetime(20)
-                            .spawn(world, posX, posY, posZ);
-                    Particles.create(WizardsReborn.SPARKLE_PARTICLE)
-                            .addVelocity(((random.nextDouble() - 0.5D) / 20), ((random.nextDouble() - 0.5D) / 20), ((random.nextDouble() - 0.5D) / 20))
-                            .setAlpha(0.25f, 0).setScale(0.075f, 0)
-                            .setColor(colorR, colorG, colorB)
-                            .setLifetime(30)
-                            .setSpin((0.5f * (float) ((random.nextDouble() - 0.5D) * 2)))
-                            .spawn(world, posX, posY, posZ);
+                    for (int i = 0; i < 25; i++) {
+                        Particles.create(WizardsReborn.WISP_PARTICLE)
+                                .addVelocity(((random.nextDouble() - 0.5D) / 20), ((random.nextDouble() - 0.5D) / 20), ((random.nextDouble() - 0.5D) / 20))
+                                .setAlpha(0.125f, 0).setScale(0.2f, 0)
+                                .setColor(colorR, colorG, colorB)
+                                .setLifetime(20)
+                                .spawn(world, posX, posY, posZ);
+                        Particles.create(WizardsReborn.SPARKLE_PARTICLE)
+                                .addVelocity(((random.nextDouble() - 0.5D) / 20), ((random.nextDouble() - 0.5D) / 20), ((random.nextDouble() - 0.5D) / 20))
+                                .setAlpha(0.25f, 0).setScale(0.075f, 0)
+                                .setColor(colorR, colorG, colorB)
+                                .setLifetime(30)
+                                .setSpin((0.5f * (float) ((random.nextDouble() - 0.5D) * 2)))
+                                .spawn(world, posX, posY, posZ);
+
+                    }
+                    ctx.get().setPacketHandled(true);
                 }
             });
         }
-        ctx.get().setPacketHandled(true);
     }
 }

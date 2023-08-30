@@ -23,6 +23,7 @@ import net.minecraft.network.protocol.game.ClientboundBlockEntityDataPacket;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.core.Direction;
 import net.minecraftforge.common.capabilities.Capability;
+import net.minecraftforge.common.capabilities.ForgeCapabilities;
 import net.minecraftforge.common.util.LazyOptional;
 import net.minecraftforge.items.IItemHandler;
 import net.minecraftforge.items.ItemHandlerHelper;
@@ -36,7 +37,7 @@ import java.util.Random;
 
 import static net.minecraft.world.level.block.state.properties.BlockStateProperties.HORIZONTAL_FACING;
 
-public class ArcaneWorkbenchTileEntity extends BlockEntity implements TickableBlockEntity, IWissenTileEntity, IWissenWandFunctionalTileEntity {
+public class ArcaneWorkbenchTileEntity extends TileSimpleInventory implements TickableBlockEntity, IWissenTileEntity, IWissenWandFunctionalTileEntity {
     public final ItemStackHandler itemHandler = createHandler();
     public final LazyOptional<IItemHandler> handler = LazyOptional.of(() -> itemHandler);
 
@@ -65,11 +66,20 @@ public class ArcaneWorkbenchTileEntity extends BlockEntity implements TickableBl
             }
 
             Optional<ArcaneWorkbenchRecipe> recipe = level.getRecipeManager().getRecipeFor(WizardsReborn.ARCANE_WORKBENCH_RECIPE.get(), inv, level);
-            wissenInCraft =  recipe.map(ArcaneWorkbenchRecipe::getRecipeWissen).orElse(0);
+            wissenInCraft = recipe.map(ArcaneWorkbenchRecipe::getRecipeWissen).orElse(0);
 
             if (wissenInCraft <= 0) {
                 wissenIsCraft = 0;
                 startCraft = false;
+                if (!getItemHandler().getItem(0).isEmpty()) {
+                    getItemHandler().setItem(0, ItemStack.EMPTY);
+                    PacketUtils.SUpdateTileEntityPacket(this);
+                }
+            }
+
+            if (wissenInCraft > 0) {
+                getItemHandler().setItem(0, recipe.get().getResultItem(RegistryAccess.EMPTY).copy());
+                PacketUtils.SUpdateTileEntityPacket(this);
             }
 
             if ((wissenInCraft > 0) && (wissen > 0) && (startCraft)) {
@@ -164,6 +174,16 @@ public class ArcaneWorkbenchTileEntity extends BlockEntity implements TickableBl
         }
     }
 
+    @Override
+    protected SimpleContainer createItemHandler() {
+        return new SimpleContainer(1) {
+            @Override
+            public int getMaxStackSize() {
+                return 64;
+            }
+        };
+    }
+
     private ItemStackHandler createHandler() {
         return new ItemStackHandler(14) {
             @Override
@@ -193,15 +213,15 @@ public class ArcaneWorkbenchTileEntity extends BlockEntity implements TickableBl
         };
     }
 
-    //@Nonnull
-    //@Override
-    //public <T> LazyOptional<T> getCapability(@Nonnull Capability<T> cap, @Nullable Direction side) {
-        //if(cap == CapabilityItemHandler.ITEM_HANDLER_CAPABILITY) {
-        //    return handler.cast();
-        //}
+    @Nonnull
+    @Override
+    public <T> LazyOptional<T> getCapability(@Nonnull Capability<T> cap, @Nullable Direction side) {
+        if(cap == ForgeCapabilities.ITEM_HANDLER) {
+            return handler.cast();
+        }
 
-        //return super.getCapability(cap, side);
-    //}
+        return super.getCapability(cap, side);
+    }
 
     @Override
     public ClientboundBlockEntityDataPacket getUpdatePacket() {

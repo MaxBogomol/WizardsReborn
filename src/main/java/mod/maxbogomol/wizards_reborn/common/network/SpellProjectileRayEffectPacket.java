@@ -73,35 +73,38 @@ public class SpellProjectileRayEffectPacket {
 
     public static void handle(SpellProjectileRayEffectPacket msg, Supplier<NetworkEvent.Context> ctx) {
         if (ctx.get().getDirection().getReceptionSide().isClient()) {
-            ctx.get().enqueueWork(() -> {
-                ClientLevel world = Minecraft.getInstance().level;
+            ctx.get().enqueueWork(new Runnable() {
+                @Override
+                public void run() {
+                    ClientLevel world = Minecraft.getInstance().level;
 
-                Vec3 pos = new Vec3(posToX, posToY, posToZ);
-                Vec3 norm = new Vec3(motionX, motionY, motionZ).normalize().scale(0.025f);
+                    Vec3 pos = new Vec3(posToX, posToY, posToZ);
+                    Vec3 norm = new Vec3(motionX, motionY, motionZ).normalize().scale(0.025f);
 
-                for (int i = 0; i < 10; i ++) {
-                    double lerpX = Mth.lerp(i / 10.0f, posFromX, pos.x);
-                    double lerpY = Mth.lerp(i / 10.0f, posFromY, pos.y);
-                    double lerpZ = Mth.lerp(i / 10.0f, posFromZ, pos.z);
+                    for (int i = 0; i < 10; i++) {
+                        double lerpX = Mth.lerp(i / 10.0f, posFromX, pos.x);
+                        double lerpY = Mth.lerp(i / 10.0f, posFromY, pos.y);
+                        double lerpZ = Mth.lerp(i / 10.0f, posFromZ, pos.z);
 
-                    Particles.create(WizardsReborn.WISP_PARTICLE)
-                            .addVelocity(-norm.x + ((random.nextDouble() - 0.5D) / 500), -norm.y + ((random.nextDouble() - 0.5D) / 500), -norm.z + ((random.nextDouble() - 0.5D) / 500))
-                            .setAlpha(0.2f, 0).setScale(0.15f, 0)
-                            .setColor(r, g, b)
-                            .setLifetime(20)
-                            .spawn(world, lerpX, lerpY, lerpZ);
-
-                    if (random.nextFloat() < 0.1f) {
-                        Particles.create(WizardsReborn.SPARKLE_PARTICLE)
-                                .addVelocity(-norm.x + ((random.nextDouble() - 0.5D) / 250), -norm.y + ((random.nextDouble() - 0.5D) / 250), -norm.z + ((random.nextDouble() - 0.5D) / 250))
-                                .setAlpha(0.125f, 0).setScale(0.2f, 0)
+                        Particles.create(WizardsReborn.WISP_PARTICLE)
+                                .addVelocity(-norm.x + ((random.nextDouble() - 0.5D) / 500), -norm.y + ((random.nextDouble() - 0.5D) / 500), -norm.z + ((random.nextDouble() - 0.5D) / 500))
+                                .setAlpha(0.2f, 0).setScale(0.15f, 0)
                                 .setColor(r, g, b)
-                                .setLifetime(30)
+                                .setLifetime(20)
                                 .spawn(world, lerpX, lerpY, lerpZ);
+
+                        if (random.nextFloat() < 0.1f) {
+                            Particles.create(WizardsReborn.SPARKLE_PARTICLE)
+                                    .addVelocity(-norm.x + ((random.nextDouble() - 0.5D) / 250), -norm.y + ((random.nextDouble() - 0.5D) / 250), -norm.z + ((random.nextDouble() - 0.5D) / 250))
+                                    .setAlpha(0.125f, 0).setScale(0.2f, 0)
+                                    .setColor(r, g, b)
+                                    .setLifetime(30)
+                                    .spawn(world, lerpX, lerpY, lerpZ);
+                        }
                     }
+                    ctx.get().setPacketHandled(true);
                 }
             });
         }
-        ctx.get().setPacketHandled(true);
     }
 }

@@ -14,7 +14,7 @@ import org.lwjgl.opengl.GL11;
 public class TooltipEventHandler {
     private TooltipEventHandler() {}
 
-    public static void onPostTooltipEvent(RenderTooltipEvent.Pre event) {
+    public static void onPostTooltipEvent(RenderTooltipEvent.Color event) {
         ItemStack stack = event.getItemStack();
 
         int x = event.getX();

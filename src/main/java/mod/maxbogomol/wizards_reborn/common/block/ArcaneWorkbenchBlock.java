@@ -129,8 +129,8 @@ public class ArcaneWorkbenchBlock extends HorizontalDirectionalBlock implements 
             if (!isWand) {
                 BlockEntity tileEntity = world.getBlockEntity(pos);
 
-                //MenuProvider containerProvider = createContainerProvider(world, pos);
-                //NetworkHooks.openScreen(((ServerPlayer) player), containerProvider, tileEntity.getBlockPos());
+                MenuProvider containerProvider = createContainerProvider(world, pos);
+                NetworkHooks.openScreen(((ServerPlayer) player), containerProvider, tileEntity.getBlockPos());
                 return InteractionResult.CONSUME;
             }
         }
@@ -138,11 +138,11 @@ public class ArcaneWorkbenchBlock extends HorizontalDirectionalBlock implements 
         return InteractionResult.PASS;
     }
 
-    /*private MenuProvider createContainerProvider(Level worldIn, BlockPos pos) {
+    private MenuProvider createContainerProvider(Level worldIn, BlockPos pos) {
         return new MenuProvider() {
             @Override
             public Component getDisplayName() {
-                return Component.translatable(null);
+                return Component.empty();
             }
 
             @Nullable
@@ -151,7 +151,7 @@ public class ArcaneWorkbenchBlock extends HorizontalDirectionalBlock implements 
                 return new ArcaneWorkbenchContainer(i, worldIn, pos, playerInventory, playerEntity);
             }
         };
-    }*/
+    }
 
     @Override
     public FluidState getFluidState(BlockState state) {

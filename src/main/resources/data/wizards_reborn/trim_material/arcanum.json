@@ -1,0 +1,9 @@
+{
+  "asset_name": "arcanum",
+  "description": {
+    "color": "#9DC7E4",
+    "translate": "trim_material.wizards_reborn.arcanum"
+  },
+  "ingredient": "wizards_reborn:arcanum",
+  "item_model_index": 0.9
+}

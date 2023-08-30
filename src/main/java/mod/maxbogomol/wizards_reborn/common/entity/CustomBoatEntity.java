@@ -30,7 +30,7 @@ public class CustomBoatEntity extends Boat {
     }
 
     public CustomBoatEntity(Level level, double x, double y, double z) {
-        this(WizardsReborn.ARCANE_WOOD_BOAT.get(), level);
+        this(WizardsReborn.BOAT.get(), level);
         this.setPos(x, y, z);
         this.xo = x;
         this.yo = y;

@@ -24,8 +24,15 @@ public class WandModelOverrideList extends CustomModelOverrideList {
         if (nbt != null) {
             if (nbt.getBoolean("crystal")) {
                 SimpleContainer stack_inv = ArcaneWandItem.getInventory(stack);
+                String string = stack_inv.getItem(0).getDescriptionId();
 
-                return WandCrystalsModels.getModel(stack_inv.getItem(0).getItem().getDescriptionId().toString());
+                int i = string.indexOf(".");
+                string = string.substring(i + 1);
+                i = string.indexOf(".");
+                String modId = string.substring(0, i);
+                String crystalId = string.substring(i + 1);
+
+                return WandCrystalsModels.getModel(modId + ":" + crystalId);
             }
         }
         return originalModel;

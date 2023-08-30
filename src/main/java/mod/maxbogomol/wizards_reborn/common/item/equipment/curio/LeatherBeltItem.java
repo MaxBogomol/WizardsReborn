@@ -3,6 +3,7 @@ package mod.maxbogomol.wizards_reborn.common.item.equipment.curio;
 import com.google.common.collect.LinkedHashMultimap;
 import com.google.common.collect.Multimap;
 import mod.maxbogomol.wizards_reborn.WizardsReborn;
+import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.ai.attributes.Attribute;
 import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
@@ -17,7 +18,7 @@ import top.theillusivec4.curios.api.type.capability.ICurioItem;
 import javax.annotation.Nonnull;
 import java.util.UUID;
 
-public class LeatherBeltItem extends Item implements ICurioItem {
+public class LeatherBeltItem extends Item implements ICurioItem, ICurioItemTexture {
 
     private static final ResourceLocation BELT_TEXTURE = new ResourceLocation(WizardsReborn.MOD_ID,"textures/entity/curio/leather_belt.png");
 
@@ -40,32 +41,12 @@ public class LeatherBeltItem extends Item implements ICurioItem {
     public Multimap<Attribute, AttributeModifier> getAttributeModifiers(SlotContext slotContext,
                                                                         UUID uuid, ItemStack stack) {
         Multimap<Attribute, AttributeModifier> atts = LinkedHashMultimap.create();
-        atts.put(Attributes.KNOCKBACK_RESISTANCE, new AttributeModifier(uuid, "bonus", 1, AttributeModifier.Operation.ADDITION));
+        atts.put(Attributes.KNOCKBACK_RESISTANCE, new AttributeModifier(uuid, "bonus", 0.1f, AttributeModifier.Operation.ADDITION));
         return atts;
     }
-/*
+
     @Override
-    public boolean canRender(String identifier, int index, LivingEntity living, ItemStack stack) {
-        return true;
+    public ResourceLocation getTexture(ItemStack stack, LivingEntity entity) {
+        return BELT_TEXTURE;
     }
-
-    @Override
-    public void render(String identifier, int index, PoseStack matrixStack,
-                       MultiBufferSource renderTypeBuffer, int light, LivingEntity living,
-                       float limbSwing, float limbSwingAmount, float partialTicks, float ageInTicks,
-                       float netHeadYaw, float headPitch, ItemStack stack) {
-        ICurio.RenderHelper.translateIfSneaking(matrixStack, living);
-        ICurio.RenderHelper.rotateIfSneaking(matrixStack, living);
-
-        BeltModel<?> model = new BeltModel<>();
-        Vec3 rotate = RenderUtils.followBodyRotation(living);
-        model.model.yRot = (float) rotate.y();
-
-        VertexConsumer vertexBuilder = ItemRenderer
-                .getFoilBuffer(renderTypeBuffer, model.renderType(BELT_TEXTURE), false,
-                        false);
-        model
-                .renderToBuffer(matrixStack, vertexBuilder, light, OverlayTexture.NO_OVERLAY, 1.0F, 1.0F, 1.0F,
-                        1.0F);
-    }*/
 }

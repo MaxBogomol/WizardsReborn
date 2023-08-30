@@ -8,16 +8,16 @@ public class Knowledges {
     public static Map<String, Knowledge> knowledges = new HashMap<String, Knowledge>();
     public static ArrayList<Knowledge> knowledgeList = new ArrayList<Knowledge>();
 
-    public static void addSpell(String id, Knowledge spell) {
+    public static void addKnowledge(String id, Knowledge spell) {
         knowledges.put(id, spell);
         knowledgeList.add(spell);
     }
 
-    public static Knowledge getSpell(int id) {
+    public static Knowledge getKnowledge(int id) {
         return knowledges.get(id);
     }
 
-    public static Knowledge getSpell(String id) {
+    public static Knowledge getKnowledge(String id) {
         return knowledges.get(id);
     }
 
@@ -30,7 +30,7 @@ public class Knowledges {
         return knowledges.size();
     }
 
-    public static ArrayList<Knowledge> getSpells() {
+    public static ArrayList<Knowledge> getKnowledges() {
         return knowledgeList;
     }
 }
