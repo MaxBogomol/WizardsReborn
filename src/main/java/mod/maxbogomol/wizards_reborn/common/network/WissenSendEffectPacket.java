@@ -19,7 +19,23 @@ public class WissenSendEffectPacket {
     private static float posToY;
     private static float posToZ;
 
+    private static float colorR, colorG, colorB;
+
     private static Random random = new Random();
+
+    public WissenSendEffectPacket(float posFromX, float posFromY, float posFromZ, float posToX, float posToY, float posToZ, float colorR, float colorG, float colorB) {
+        this.posFromX = posFromX;
+        this.posFromY = posFromY;
+        this.posFromZ = posFromZ;
+
+        this.posToX = posToX;
+        this.posToY = posToY;
+        this.posToZ = posToZ;
+
+        this.colorR = colorR;
+        this.colorG = colorG;
+        this.colorB = colorB;
+    }
 
     public WissenSendEffectPacket(float posFromX, float posFromY, float posFromZ, float posToX, float posToY, float posToZ) {
         this.posFromX = posFromX;
@@ -29,13 +45,17 @@ public class WissenSendEffectPacket {
         this.posToX = posToX;
         this.posToY = posToY;
         this.posToZ = posToZ;
+
+        this.colorR = 0.466f;
+        this.colorG = 0.643f;
+        this.colorB = 0.815f;
     }
 
     public WissenSendEffectPacket(FriendlyByteBuf friendlyByteBuf) {
     }
 
     public static WissenSendEffectPacket decode(FriendlyByteBuf buf) {
-        return new WissenSendEffectPacket(buf.readFloat(), buf.readFloat(), buf.readFloat(), buf.readFloat(), buf.readFloat(), buf.readFloat());
+        return new WissenSendEffectPacket(buf.readFloat(), buf.readFloat(), buf.readFloat(), buf.readFloat(), buf.readFloat(), buf.readFloat(), buf.readFloat(), buf.readFloat(), buf.readFloat());
     }
 
     public void encode(FriendlyByteBuf buf) {
@@ -46,6 +66,10 @@ public class WissenSendEffectPacket {
         buf.writeFloat(posToX);
         buf.writeFloat(posToY);
         buf.writeFloat(posToZ);
+
+        buf.writeFloat(colorR);
+        buf.writeFloat(colorG);
+        buf.writeFloat(colorB);
     }
 
     @SuppressWarnings("Convert2Lambda")
@@ -70,14 +94,14 @@ public class WissenSendEffectPacket {
                         Particles.create(WizardsReborn.WISP_PARTICLE)
                                 .addVelocity(((random.nextDouble() - 0.5D) / 50), ((random.nextDouble() - 0.5D) / 50), ((random.nextDouble() - 0.5D) / 50))
                                 .setAlpha(0.3f, 0).setScale(0.15f, 0)
-                                .setColor(0.466f, 0.643f, 0.815f)
+                                .setColor(colorR, colorG, colorB)
                                 .setLifetime(20)
                                 .spawn(world, posFromX - (x * i), posFromY - (y * i), posFromZ - (z * i));
                         if (random.nextFloat() < 0.1) {
                             Particles.create(WizardsReborn.SPARKLE_PARTICLE)
                                     .addVelocity(((random.nextDouble() - 0.5D) / 25), ((random.nextDouble() - 0.5D) / 25), ((random.nextDouble() - 0.5D) / 25))
                                     .setAlpha(0.125f, 0).setScale(0.2f, 0)
-                                    .setColor(0.466f, 0.643f, 0.815f)
+                                    .setColor(colorR, colorG, colorB)
                                     .setLifetime(30)
                                     .setSpin((0.5f * (float) ((random.nextDouble() - 0.5D) * 2)))
                                     .spawn(world, posFromX - (x * i), posFromY - (y * i), posFromZ - (z * i));

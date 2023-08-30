@@ -127,7 +127,7 @@ public class ArcaneLumosBlock extends Block {
 
     }
 
-    public Color getColor(Colors color) {
+    public static Color getColor(Colors color) {
         switch (color) {
             case WHITE:
                 return getDyeColor(DyeColor.WHITE);
@@ -170,7 +170,7 @@ public class ArcaneLumosBlock extends Block {
         return getDyeColor(DyeColor.WHITE);
     }
 
-    public Color getDyeColor(DyeColor color) {
+    public static Color getDyeColor(DyeColor color) {
         return new Color(color.getMapColor().col);
     }
 }

@@ -48,7 +48,6 @@ public class Events {
     public void registerCustomAI(EntityJoinLevelEvent event) {
         if (event.getEntity() instanceof LivingEntity && !event.getLevel().isClientSide) {
             if (event.getEntity() instanceof Player) {
-                KnowledgeUtils.removeAllKnowledge(event.getEntity());
                 PacketHandler.sendTo((ServerPlayer) event.getEntity(), new KnowledgeUpdatePacket((Player)event.getEntity()));
             }
         }

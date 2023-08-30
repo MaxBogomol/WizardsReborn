@@ -30,21 +30,24 @@ public class TESyncPacket {
     }
 
     public static void handle(TESyncPacket packet, Supplier<NetworkEvent.Context> ctx) {
-        ctx.get().enqueueWork(() -> {
-            Level world;
-            if (ctx.get().getDirection() == NetworkDirection.PLAY_TO_CLIENT)
-                world = Minecraft.getInstance().level;
-            else {
-                if (ctx.get().getSender() == null) return;
-                world = ctx.get().getSender().level();
-            }
+        ctx.get().enqueueWork(new Runnable() {
+            @Override
+            public void run() {
+                Level world;
+                if (ctx.get().getDirection() == NetworkDirection.PLAY_TO_CLIENT)
+                    world = Minecraft.getInstance().level;
+                else {
+                    if (ctx.get().getSender() == null) return;
+                    world = ctx.get().getSender().level();
+                }
 
-            BlockEntity t = world.getBlockEntity(packet.pos);
-            if (t != null) {
-                world.getBlockEntity(packet.pos).load(packet.tag);
-                world.getBlockEntity(packet.pos).setChanged();
+                BlockEntity t = world.getBlockEntity(packet.pos);
+                if (t != null) {
+                    world.getBlockEntity(packet.pos).load(packet.tag);
+                    world.getBlockEntity(packet.pos).setChanged();
+                }
+                ctx.get().setPacketHandled(true);
             }
         });
-        ctx.get().setPacketHandled(true);
     }
 }

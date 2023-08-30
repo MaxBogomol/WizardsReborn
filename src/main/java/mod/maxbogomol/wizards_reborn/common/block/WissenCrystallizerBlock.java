@@ -4,6 +4,7 @@ import mod.maxbogomol.wizards_reborn.common.item.equipment.WissenWandItem;
 import mod.maxbogomol.wizards_reborn.common.tileentity.TickableBlockEntity;
 import mod.maxbogomol.wizards_reborn.common.tileentity.WissenCrystallizerTileEntity;
 import mod.maxbogomol.wizards_reborn.common.tileentity.TileSimpleInventory;
+import mod.maxbogomol.wizards_reborn.utils.PacketUtils;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.entity.BlockEntityTicker;
 import net.minecraft.world.level.block.entity.BlockEntityType;
@@ -121,10 +122,12 @@ public class WissenCrystallizerBlock extends Block implements EntityBlock, Simpl
                         player.getMainHandItem().setCount(stack.getCount() - 1);
                         stack.setCount(1);
                         tile.getItemHandler().setItem(slot, stack);
+                        PacketUtils.SUpdateTileEntityPacket(tile);
                         return InteractionResult.SUCCESS;
                     } else {
                         tile.getItemHandler().setItem(slot, stack);
                         player.getInventory().removeItem(player.getItemInHand(hand));
+                        PacketUtils.SUpdateTileEntityPacket(tile);
                         return InteractionResult.SUCCESS;
                     }
                 }
@@ -135,6 +138,7 @@ public class WissenCrystallizerBlock extends Block implements EntityBlock, Simpl
                 if (!tile.getItemHandler().getItem(slot).isEmpty()) {
                     player.getInventory().add(tile.getItemHandler().getItem(slot).copy());
                     tile.getItemHandler().removeItemNoUpdate(slot);
+                    PacketUtils.SUpdateTileEntityPacket(tile);
                     return InteractionResult.SUCCESS;
                 }
             }

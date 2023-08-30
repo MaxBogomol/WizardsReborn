@@ -1,9 +1,13 @@
 package mod.maxbogomol.wizards_reborn.common.block;
 
+import mod.maxbogomol.wizards_reborn.WizardsReborn;
+import mod.maxbogomol.wizards_reborn.common.tileentity.ArcanePedestalTileEntity;
 import mod.maxbogomol.wizards_reborn.common.tileentity.TickableBlockEntity;
 import mod.maxbogomol.wizards_reborn.common.tileentity.TileSimpleInventory;
 import mod.maxbogomol.wizards_reborn.common.tileentity.WissenTranslatorTileEntity;
+import mod.maxbogomol.wizards_reborn.utils.PacketUtils;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.entity.BlockEntityTicker;
 import net.minecraft.world.level.block.entity.BlockEntityType;
@@ -157,7 +161,32 @@ public class WissenTranslatorBlock extends FaceAttachedHorizontalDirectionalBloc
 
     @Override
     public InteractionResult use(BlockState state, Level world, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hit) {
+        WissenTranslatorTileEntity tile = (WissenTranslatorTileEntity) world.getBlockEntity(pos);
+        ItemStack stack = player.getItemInHand(hand).copy();
 
+        if ((!stack.isEmpty()) && (tile.getItemHandler().getItem(0).isEmpty())) {
+            if (stack.is(WizardsReborn.ARCANE_LUMOS_ITEM_TAG)) {
+                if (stack.getCount() > 1) {
+                    player.getMainHandItem().setCount(stack.getCount() - 1);
+                    stack.setCount(1);
+                    tile.getItemHandler().setItem(0, stack);
+                    PacketUtils.SUpdateTileEntityPacket(tile);
+                    return InteractionResult.SUCCESS;
+                } else {
+                    tile.getItemHandler().setItem(0, stack);
+                    player.getInventory().removeItem(player.getItemInHand(hand));
+                    PacketUtils.SUpdateTileEntityPacket(tile);
+                    return InteractionResult.SUCCESS;
+                }
+            }
+        }
+
+        if (!tile.getItemHandler().getItem(0).isEmpty()) {
+            player.getInventory().add(tile.getItemHandler().getItem(0).copy());
+            tile.getItemHandler().removeItemNoUpdate(0);
+            PacketUtils.SUpdateTileEntityPacket(tile);
+            return InteractionResult.SUCCESS;
+        }
 
         return InteractionResult.PASS;
     }

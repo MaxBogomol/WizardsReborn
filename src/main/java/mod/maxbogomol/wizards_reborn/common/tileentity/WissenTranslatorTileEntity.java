@@ -5,9 +5,12 @@ import mod.maxbogomol.wizards_reborn.api.wissen.IWissenTileEntity;
 import mod.maxbogomol.wizards_reborn.api.wissen.WissenUtils;
 import mod.maxbogomol.wizards_reborn.client.config.ClientConfig;
 import mod.maxbogomol.wizards_reborn.client.particle.Particles;
+import mod.maxbogomol.wizards_reborn.common.block.ArcaneLumosBlock;
 import mod.maxbogomol.wizards_reborn.common.item.equipment.WissenWandItem;
 import mod.maxbogomol.wizards_reborn.common.network.*;
 import mod.maxbogomol.wizards_reborn.utils.PacketUtils;
+import net.minecraft.world.SimpleContainer;
+import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntityTicker;
 import net.minecraft.world.level.block.state.BlockState;
@@ -28,7 +31,7 @@ import java.awt.*;
 import java.util.ArrayList;
 import java.util.Random;
 
-public class WissenTranslatorTileEntity extends BlockEntity implements TickableBlockEntity, IWissenTileEntity {
+public class WissenTranslatorTileEntity extends TileSimpleInventory implements TickableBlockEntity, IWissenTileEntity {
 
     public int blockFromX = 0;
     public int blockFromY = 0;
@@ -88,7 +91,9 @@ public class WissenTranslatorTileEntity extends BlockEntity implements TickableB
 
                             setCooldown = true;
 
-                            PacketHandler.sendToTracking(level, getBlockPos(), new WissenTranslatorBurstEffectPacket(getBlockPos().getX() + 0.5f, getBlockPos().getY() + 0.5f, getBlockPos().getZ() + 0.5f));
+                            Color color = getColor();
+
+                            PacketHandler.sendToTracking(level, getBlockPos(), new WissenTranslatorBurstEffectPacket(getBlockPos().getX() + 0.5f, getBlockPos().getY() + 0.5f, getBlockPos().getZ() + 0.5f, (float) color.getRed() / 255, (float) color.getGreen()/ 255, (float) color.getBlue() / 255));
                         }
                     } else {
                         isToBlock = false;
@@ -133,11 +138,13 @@ public class WissenTranslatorTileEntity extends BlockEntity implements TickableB
 
         if (level.isClientSide()) {
             if (getWissen() > 0) {
+                Color color = getColor();
+
                 if (random.nextFloat() < 0.5) {
                     Particles.create(WizardsReborn.WISP_PARTICLE)
                             .addVelocity(((random.nextDouble() - 0.5D) / 30) * getStage(), ((random.nextDouble() - 0.5D) / 30) * getStage(), ((random.nextDouble() - 0.5D) / 30) * getStage())
                             .setAlpha(0.25f, 0).setScale(0.2f * getStage(), 0)
-                            .setColor(0.466f, 0.643f, 0.815f)
+                            .setColor((float) color.getRed() / 255, (float) color.getGreen()/ 255, (float) color.getBlue() / 255)
                             .setLifetime(20)
                             .spawn(level, worldPosition.getX() + 0.5F, worldPosition.getY() + 0.5F, worldPosition.getZ() + 0.5F);
                 }
@@ -145,7 +152,7 @@ public class WissenTranslatorTileEntity extends BlockEntity implements TickableB
                     Particles.create(WizardsReborn.SPARKLE_PARTICLE)
                             .addVelocity(((random.nextDouble() - 0.5D) / 30) * getStage(), ((random.nextDouble() - 0.5D) / 30) * getStage(), ((random.nextDouble() - 0.5D) / 30) * getStage())
                             .setAlpha(0.25f, 0).setScale(0.075f * getStage(), 0)
-                            .setColor(0.466f, 0.643f, 0.815f)
+                            .setColor((float) color.getRed() / 255, (float) color.getGreen()/ 255, (float) color.getBlue() / 255)
                             .setLifetime(30)
                             .setSpin((0.5f * (float) ((random.nextDouble() - 0.5D) * 2)))
                             .spawn(level, worldPosition.getX() + 0.5F, worldPosition.getY() + 0.5F, worldPosition.getZ() + 0.5F);
@@ -153,6 +160,16 @@ public class WissenTranslatorTileEntity extends BlockEntity implements TickableB
             }
             wissenWandEffect();
         }
+    }
+
+    @Override
+    protected SimpleContainer createItemHandler() {
+        return new SimpleContainer(1) {
+            @Override
+            public int getMaxStackSize() {
+                return 1;
+            }
+        };
     }
 
     @Override
@@ -437,10 +454,12 @@ public class WissenTranslatorTileEntity extends BlockEntity implements TickableB
             tag.putFloat("blockY", Y);
             tag.putFloat("blockZ", Z);
 
-            PacketHandler.sendToTracking(level, getBlockPos(), new WissenSendEffectPacket(blockX, blockY, blockZ, X, Y, Z));
+            Color color = getColor();
+
+            PacketHandler.sendToTracking(level, getBlockPos(), new WissenSendEffectPacket(blockX, blockY, blockZ, X, Y, Z, (float) color.getRed() / 255, (float) color.getGreen()/ 255, (float) color.getBlue() / 255));
 
             if (tag.getInt("wissen") <= 0) {
-                PacketHandler.sendToTracking(level, getBlockPos(), new WissenTranslatorBurstEffectPacket(X, Y, Z));
+                PacketHandler.sendToTracking(level, getBlockPos(), new WissenTranslatorBurstEffectPacket(X, Y, Z, (float) color.getRed() / 255, (float) color.getGreen()/ 255, (float) color.getBlue() / 255));
                 deleteRays.add(i);
             } else if ((blockFromX != Mth.floor(blockX)) || blockFromY != Mth.floor(blockY) || (blockFromZ != Mth.floor(blockZ))) {
                 BlockEntity tileentity = level.getBlockEntity(new BlockPos(Mth.floor(blockX), Mth.floor(blockY), Mth.floor(blockZ)));
@@ -454,7 +473,7 @@ public class WissenTranslatorTileEntity extends BlockEntity implements TickableB
                         wissenTileEntity.addWissen(tag.getInt("wissen") - addRemain);
                         PacketUtils.SUpdateTileEntityPacket(tileentity);
 
-                        PacketHandler.sendToTracking(level, getBlockPos(), new WissenTranslatorBurstEffectPacket(X, Y, Z));
+                        PacketHandler.sendToTracking(level, getBlockPos(), new WissenTranslatorBurstEffectPacket(X, Y, Z, (float) color.getRed() / 255, (float) color.getGreen()/ 255, (float) color.getBlue() / 255));
                         PacketHandler.sendToTracking(level, getBlockPos(), new WissenTranslatorSendEffectPacket(new BlockPos(Mth.floor(X), Mth.floor(Y), Mth.floor(Z))));
 
                         deleteRays.add(i);
@@ -476,5 +495,21 @@ public class WissenTranslatorTileEntity extends BlockEntity implements TickableB
         if (deleteRays.size() > 0) {
             deleteWissenRay(deleteRays);
         }
+    }
+
+    public Color getColor() {
+        Color color = new Color(0.466f, 0.643f, 0.815f);
+
+        if (!getItemHandler().getItem(0).isEmpty()) {
+            if (getItemHandler().getItem(0).getItem() instanceof BlockItem) {
+                BlockItem blockItem = (BlockItem) getItemHandler().getItem(0).getItem();
+                if (blockItem.getBlock() instanceof ArcaneLumosBlock) {
+                    ArcaneLumosBlock lumos = (ArcaneLumosBlock) blockItem.getBlock();
+                    color = ArcaneLumosBlock.getColor(lumos.color);
+                }
+            }
+        }
+
+        return color;
     }
 }
