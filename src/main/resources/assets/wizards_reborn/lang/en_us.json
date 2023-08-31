@@ -4,6 +4,9 @@
   "trim_material.wizards_reborn.arcane_gold": "Arcane Gold",
   "trim_material.wizards_reborn.arcanum": "Arcanum",
 
+  "entity.wizards_reborn.boat": "Boat",
+  "entity.wizards_reborn.chest_boat": "Boat with Chest",
+
   "item.wizards_reborn.arcane_gold_ingot": "Arcane Gold Ingot",
   "item.wizards_reborn.arcane_gold_nugget": "Arcane Gold Nugget",
   "item.wizards_reborn.raw_arcane_gold": "Raw Arcane Gold",
