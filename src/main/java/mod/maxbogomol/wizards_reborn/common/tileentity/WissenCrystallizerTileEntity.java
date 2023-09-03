@@ -1,6 +1,7 @@
 package mod.maxbogomol.wizards_reborn.common.tileentity;
 
 import mod.maxbogomol.wizards_reborn.WizardsReborn;
+import mod.maxbogomol.wizards_reborn.api.wissen.ICooldownTileEntity;
 import mod.maxbogomol.wizards_reborn.api.wissen.IWissenTileEntity;
 import mod.maxbogomol.wizards_reborn.api.wissen.IWissenWandFunctionalTileEntity;
 import mod.maxbogomol.wizards_reborn.api.wissen.WissenUtils;
@@ -25,7 +26,7 @@ import org.jetbrains.annotations.NotNull;
 import java.util.Optional;
 import java.util.Random;
 
-public class WissenCrystallizerTileEntity extends TileSimpleInventory implements TickableBlockEntity, IWissenTileEntity, IWissenWandFunctionalTileEntity {
+public class WissenCrystallizerTileEntity extends TileSimpleInventory implements TickableBlockEntity, IWissenTileEntity, ICooldownTileEntity, IWissenWandFunctionalTileEntity {
 
     public int wissenInCraft= 0;
     public int wissenIsCraft = 0;
@@ -275,5 +276,13 @@ public class WissenCrystallizerTileEntity extends TileSimpleInventory implements
     @Override
     public void wissenWandFuction() {
         startCraft = true;
+    }
+
+    @Override
+    public float getCooldown() {
+        if (wissenInCraft > 0) {
+            return (float) wissenInCraft / wissenIsCraft;
+        }
+        return 0;
     }
 }

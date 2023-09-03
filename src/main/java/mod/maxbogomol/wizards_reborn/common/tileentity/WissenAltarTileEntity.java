@@ -1,10 +1,7 @@
 package mod.maxbogomol.wizards_reborn.common.tileentity;
 
 import mod.maxbogomol.wizards_reborn.WizardsReborn;
-import mod.maxbogomol.wizards_reborn.api.wissen.IWissenItem;
-import mod.maxbogomol.wizards_reborn.api.wissen.IWissenTileEntity;
-import mod.maxbogomol.wizards_reborn.api.wissen.WissenItemUtils;
-import mod.maxbogomol.wizards_reborn.api.wissen.WissenUtils;
+import mod.maxbogomol.wizards_reborn.api.wissen.*;
 import mod.maxbogomol.wizards_reborn.client.particle.Particles;
 import mod.maxbogomol.wizards_reborn.common.network.WissenAltarSendEffectPacket;
 import mod.maxbogomol.wizards_reborn.common.network.PacketHandler;
@@ -24,7 +21,7 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.Random;
 
-public class WissenAltarTileEntity extends TileSimpleInventory implements TickableBlockEntity, IWissenTileEntity {
+public class WissenAltarTileEntity extends TileSimpleInventory implements TickableBlockEntity, IWissenTileEntity, ICooldownTileEntity {
 
     public int wissenInItem = 0;
     public int wissenIsCraft = 0;
@@ -273,5 +270,13 @@ public class WissenAltarTileEntity extends TileSimpleInventory implements Tickab
 
     public int getWissenPerTick() {
         return 10;
+    }
+
+    @Override
+    public float getCooldown() {
+        if (wissenInItem > 0) {
+            return (float) wissenInItem / wissenIsCraft;
+        }
+        return 0;
     }
 }

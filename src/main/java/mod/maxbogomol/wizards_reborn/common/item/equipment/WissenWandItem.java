@@ -1,9 +1,15 @@
 package mod.maxbogomol.wizards_reborn.common.item.equipment;
 
+import com.mojang.blaze3d.systems.RenderSystem;
+import mod.maxbogomol.wizards_reborn.WizardsReborn;
+import mod.maxbogomol.wizards_reborn.api.wissen.ICooldownTileEntity;
 import mod.maxbogomol.wizards_reborn.api.wissen.IWissenTileEntity;
 import mod.maxbogomol.wizards_reborn.api.wissen.IWissenWandFunctionalTileEntity;
 import mod.maxbogomol.wizards_reborn.utils.PacketUtils;
 import mod.maxbogomol.wizards_reborn.common.tileentity.WissenTranslatorTileEntity;
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.gui.GuiGraphics;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
@@ -18,12 +24,13 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.network.chat.Component;
 import net.minecraft.ChatFormatting;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.phys.BlockHitResult;
+import net.minecraft.world.phys.HitResult;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
+import org.lwjgl.opengl.GL11;
 
 import java.util.List;
-
-import net.minecraft.world.item.Item.Properties;
 
 public class WissenWandItem extends Item {
     public WissenWandItem(Properties properties) {
@@ -237,5 +244,64 @@ public class WissenWandItem extends Item {
         mode = nbt.getInt("mode");
 
         return mode;
+    }
+
+    public static void drawWissenGui(GuiGraphics gui) {
+        Minecraft mc = Minecraft.getInstance();
+        Player player = mc.player;
+        ItemStack main = mc.player.getMainHandItem();
+        ItemStack offhand = mc.player.getOffhandItem();
+
+        boolean renderWissenWand = false;
+
+        if (!main.isEmpty() && main.getItem() instanceof WissenWandItem) {
+            renderWissenWand=true;
+        } else {
+            if (!offhand.isEmpty() && offhand.getItem() instanceof WissenWandItem) {
+                renderWissenWand=true;
+            }
+        }
+
+        RenderSystem.enableBlend();
+        RenderSystem.blendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
+
+        if (renderWissenWand) {
+            if (!player.isSpectator()) {
+                HitResult pos = mc.hitResult;
+                if (pos != null) {
+                    BlockPos bpos = pos.getType() == HitResult.Type.BLOCK ? ((BlockHitResult) pos).getBlockPos() : null;
+                    BlockEntity tileentity = bpos != null ? mc.level.getBlockEntity(bpos) : null;
+
+                    if (tileentity != null) {
+                        if (tileentity instanceof IWissenTileEntity) {
+                            IWissenTileEntity wissenTile = (IWissenTileEntity) tileentity;
+
+                            int x = mc.getWindow().getGuiScaledWidth() / 2 - (48 / 2);
+                            int y = mc.getWindow().getGuiScaledHeight() / 2 + 32 - 10;
+
+                            gui.blit(new ResourceLocation(WizardsReborn.MOD_ID + ":textures/gui/wissen_frame.png"), x, y, 0, 0, 48, 10, 64, 64);
+                            int width = 32;
+                            width /= (double) wissenTile.getMaxWissen() / (double) wissenTile.getWissen();
+                            gui.blit(new ResourceLocation(WizardsReborn.MOD_ID + ":textures/gui/wissen_frame.png"), x + 8, y + 1, 0, 10, width, 8, 64, 64);
+                        }
+
+                        if (tileentity instanceof ICooldownTileEntity) {
+                            ICooldownTileEntity cooldownTile = (ICooldownTileEntity) tileentity;
+
+                            int x = mc.getWindow().getGuiScaledWidth() / 2 - (48 / 2);
+                            int y = mc.getWindow().getGuiScaledHeight() / 2 + 32 - 10 - 11;
+
+                            gui.blit(new ResourceLocation(WizardsReborn.MOD_ID + ":textures/gui/cooldown_frame.png"), x, y, 0, 0, 48, 10, 64, 64);
+                            int width = 32;
+                            width /= (double) cooldownTile.getCooldown();
+                            gui.blit(new ResourceLocation(WizardsReborn.MOD_ID + ":textures/gui/cooldown_frame.png"), x + 8, y + 1, 0, 10, width, 8, 64, 64);
+                        }
+                    }
+                }
+            }
+        }
+
+        RenderSystem.disableBlend();
+        RenderSystem.setShaderColor(1F, 1F, 1F, 1F);
     }
 }

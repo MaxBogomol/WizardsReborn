@@ -1,6 +1,7 @@
 package mod.maxbogomol.wizards_reborn.common.tileentity;
 
 import mod.maxbogomol.wizards_reborn.WizardsReborn;
+import mod.maxbogomol.wizards_reborn.api.wissen.ICooldownTileEntity;
 import mod.maxbogomol.wizards_reborn.api.wissen.IWissenTileEntity;
 import mod.maxbogomol.wizards_reborn.api.wissen.IWissenWandFunctionalTileEntity;
 import mod.maxbogomol.wizards_reborn.api.wissen.WissenUtils;
@@ -37,7 +38,7 @@ import java.util.Random;
 
 import static net.minecraft.world.level.block.state.properties.BlockStateProperties.HORIZONTAL_FACING;
 
-public class ArcaneWorkbenchTileEntity extends TileSimpleInventory implements TickableBlockEntity, IWissenTileEntity, IWissenWandFunctionalTileEntity {
+public class ArcaneWorkbenchTileEntity extends TileSimpleInventory implements TickableBlockEntity, IWissenTileEntity, ICooldownTileEntity, IWissenWandFunctionalTileEntity {
     public final ItemStackHandler itemHandler = createHandler();
     public final LazyOptional<IItemHandler> handler = LazyOptional.of(() -> itemHandler);
 
@@ -363,5 +364,13 @@ public class ArcaneWorkbenchTileEntity extends TileSimpleInventory implements Ti
     @Override
     public void wissenWandFuction() {
         startCraft = true;
+    }
+
+    @Override
+    public float getCooldown() {
+        if (wissenInCraft > 0) {
+            return (float) wissenInCraft / wissenIsCraft;
+        }
+        return 0;
     }
 }

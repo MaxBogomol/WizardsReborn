@@ -1,6 +1,7 @@
 package mod.maxbogomol.wizards_reborn.common.tileentity;
 
 import mod.maxbogomol.wizards_reborn.WizardsReborn;
+import mod.maxbogomol.wizards_reborn.api.wissen.ICooldownTileEntity;
 import mod.maxbogomol.wizards_reborn.api.wissen.IWissenTileEntity;
 import mod.maxbogomol.wizards_reborn.api.wissen.WissenUtils;
 import mod.maxbogomol.wizards_reborn.client.config.ClientConfig;
@@ -31,7 +32,7 @@ import java.awt.*;
 import java.util.ArrayList;
 import java.util.Random;
 
-public class WissenTranslatorTileEntity extends TileSimpleInventory implements TickableBlockEntity, IWissenTileEntity {
+public class WissenTranslatorTileEntity extends TileSimpleInventory implements TickableBlockEntity, IWissenTileEntity, ICooldownTileEntity {
 
     public int blockFromX = 0;
     public int blockFromY = 0;
@@ -511,5 +512,13 @@ public class WissenTranslatorTileEntity extends TileSimpleInventory implements T
         }
 
         return color;
+    }
+
+    @Override
+    public float getCooldown() {
+        if (getSendWissenCooldown() > 0) {
+            return (float) getSendWissenCooldown() / cooldown;
+        }
+        return 0;
     }
 }
