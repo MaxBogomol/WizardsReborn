@@ -1,12 +1,6 @@
 {
   "itemGroup.wizards_reborn_mod_tab": "Wizard's Reborn",
 
-  "trim_material.wizards_reborn.arcane_gold": "Arcane Gold",
-  "trim_material.wizards_reborn.arcanum": "Arcanum",
-
-  "entity.wizards_reborn.boat": "Boat",
-  "entity.wizards_reborn.chest_boat": "Boat with Chest",
-
   "item.wizards_reborn.arcane_gold_ingot": "Arcane Gold Ingot",
   "item.wizards_reborn.arcane_gold_nugget": "Arcane Gold Nugget",
   "item.wizards_reborn.raw_arcane_gold": "Raw Arcane Gold",
@@ -21,6 +15,7 @@
   "item.wizards_reborn.arcane_gold_shovel": "Arcane Gold Shovel",
   "item.wizards_reborn.arcane_gold_hoe": "Arcane Gold Hoe",
   "item.wizards_reborn.arcane_gold_scythe": "Arcane Gold Scythe",
+
   "item.wizards_reborn.arcanum": "Arcanum",
   "item.wizards_reborn.arcanum_dust": "Arcanum Dust",
   "block.wizards_reborn.arcanum_block": "Arcanum Block",
@@ -146,11 +141,31 @@
 
   "item.wizards_reborn.arcanemicon": "Arcanemicon",
 
+  "item.wizards_reborn.violence_banner_pattern": "Banner Pattern",
+  "item.wizards_reborn.reproduction_banner_pattern": "Banner Pattern",
+  "item.wizards_reborn.cooperation_banner_pattern": "Banner Pattern",
+  "item.wizards_reborn.hunger_banner_pattern": "Banner Pattern",
+  "item.wizards_reborn.survival_banner_pattern": "Banner Pattern",
+  "item.wizards_reborn.elevation_banner_pattern": "Banner Pattern",
+
   "lore.wizards_reborn.wissen_wand_mode.functional": "Functional Mode",
   "lore.wizards_reborn.wissen_wand_mode.receive_connect": "Receive Connect Mode",
   "lore.wizards_reborn.wissen_wand_mode.send_connect": "Send Connect Mode",
   "lore.wizards_reborn.wissen_wand_mode.reload": "Reload Mode",
   "lore.wizards_reborn.wissen_wand_mode.off": "Off Mode",
+
+  "trim_material.wizards_reborn.arcane_gold": "Arcane Gold",
+  "trim_material.wizards_reborn.arcanum": "Arcanum",
+
+  "item.wizards_reborn.violence_banner_pattern.desc": "Violence",
+  "item.wizards_reborn.reproduction_banner_pattern.desc": "Reproduction",
+  "item.wizards_reborn.cooperation_banner_pattern.desc": "Cooperation",
+  "item.wizards_reborn.hunger_banner_pattern.desc": "Hunger",
+  "item.wizards_reborn.survival_banner_pattern.desc": "Survival",
+  "item.wizards_reborn.elevation_banner_pattern.desc": "Elevation",
+
+  "entity.wizards_reborn.boat": "Boat",
+  "entity.wizards_reborn.chest_boat": "Boat with Chest",
 
   "gui.wizards_reborn.arcanemicon.title": "Arcanemicon",
 

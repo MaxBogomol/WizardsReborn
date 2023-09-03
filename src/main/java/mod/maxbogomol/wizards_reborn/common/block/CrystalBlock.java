@@ -6,6 +6,7 @@ import mod.maxbogomol.wizards_reborn.api.crystal.PolishingType;
 import mod.maxbogomol.wizards_reborn.client.particle.Particles;
 import mod.maxbogomol.wizards_reborn.common.tileentity.CrystalTileEntity;
 import net.minecraft.util.RandomSource;
+import net.minecraft.world.Containers;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.material.PushReaction;
@@ -165,5 +166,12 @@ public class CrystalBlock extends Block implements EntityBlock, SimpleWaterlogge
     @Override
     public BlockEntity newBlockEntity(BlockPos pPos, BlockState pState) {
         return new CrystalTileEntity(pPos, pState);
+    }
+
+    @Override
+    public void onRemove(@Nonnull BlockState state, @Nonnull Level world, @Nonnull BlockPos pos, @Nonnull BlockState newState, boolean isMoving) {
+        if (state.getBlock() != newState.getBlock()) {
+            Containers.dropItemStack(world, pos.getX(), pos.getY(), pos.getZ(), asItem().getDefaultInstance());
+        }
     }
 }

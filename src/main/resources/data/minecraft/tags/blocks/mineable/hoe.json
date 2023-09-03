@@ -1,6 +1,7 @@
 {
   "replace": false,
   "values": [
+    "wizards_reborn:arcane_wood_leaves",
     "wizards_reborn:arcane_linen_hay"
   ]
 }

@@ -108,20 +108,7 @@ public class ArcaneWorkbenchBlock extends HorizontalDirectionalBlock implements 
             boolean isWand = false;
 
             if (stack.getItem() instanceof WissenWandItem) {
-                CompoundTag nbt = stack.getTag();
-                if (nbt == null) {
-                    nbt = new CompoundTag();
-                    stack.setTag(nbt);
-                }
-
-                if (!nbt.contains("block")) {
-                    nbt.putBoolean("block", false);
-                }
-                if (!nbt.contains("mode")) {
-                    nbt.putInt("mode", 0);
-                }
-
-                if (nbt.getInt("mode") != 4) {
+                if (WissenWandItem.getMode(stack) != 4) {
                     isWand = true;
                 }
             }

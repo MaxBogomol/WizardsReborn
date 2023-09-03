@@ -217,4 +217,25 @@ public class WissenWandItem extends Item {
                 .append(")");
         return mode;
     }
+
+    public static int getMode(ItemStack stack) {
+        int mode = 0;
+
+        CompoundTag nbt = stack.getTag();
+        if (nbt == null) {
+            nbt = new CompoundTag();
+            stack.setTag(nbt);
+        }
+
+        if (!nbt.contains("block")) {
+            nbt.putBoolean("block", false);
+        }
+        if (!nbt.contains("mode")) {
+            nbt.putInt("mode", 0);
+        }
+
+        mode = nbt.getInt("mode");
+
+        return mode;
+    }
 }

@@ -1,0 +1,22 @@
+{
+  "type": "wizards_reborn:wissen_crystallizer",
+  "output": {
+    "item": "wizards_reborn:earth_crystal",
+    "count": 1
+  },
+  "wissen": 2000,
+  "ingredients": [
+    {
+      "item": "wizards_reborn:arcanum"
+    },
+    {
+      "item": "wizards_reborn:fractured_earth_crystal"
+    },
+    {
+      "item": "wizards_reborn:fractured_earth_crystal"
+    },
+    {
+      "item": "wizards_reborn:fractured_earth_crystal"
+    }
+  ]
+}

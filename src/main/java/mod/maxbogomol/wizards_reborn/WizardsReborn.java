@@ -90,6 +90,7 @@ import net.minecraft.world.item.crafting.RecipeSerializer;
 import net.minecraft.world.item.crafting.RecipeType;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.*;
+import net.minecraft.world.level.block.entity.BannerPattern;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.properties.BlockSetType;
@@ -131,8 +132,6 @@ public class WizardsReborn
 
     private static final Logger LOGGER = LogManager.getLogger();
 
-    //public static final CreativeModeTab WIZARDS_REBORN_GROUP = WizardsRebornItemGroup.WIZARDS_REBORN_GROUP;
-
     public static final DeferredRegister<Item> ITEMS = DeferredRegister.create(ForgeRegistries.ITEMS, MOD_ID);
     public static final DeferredRegister<Block> BLOCKS = DeferredRegister.create(ForgeRegistries.BLOCKS, MOD_ID);
     public static final DeferredRegister<BlockEntityType<?>> TILE_ENTITIES = DeferredRegister.create(ForgeRegistries.BLOCK_ENTITY_TYPES, MOD_ID);
@@ -141,8 +140,18 @@ public class WizardsReborn
     public static final DeferredRegister<RecipeSerializer<?>> RECIPE_SERIALIZERS = DeferredRegister.create(ForgeRegistries.RECIPE_SERIALIZERS, MOD_ID);
     public static final DeferredRegister<RecipeType<?>> RECIPES = DeferredRegister.create(ForgeRegistries.RECIPE_TYPES, MOD_ID);
     public static final DeferredRegister<MenuType<?>> CONTAINERS = DeferredRegister.create(ForgeRegistries.MENU_TYPES, MOD_ID);
+    public static final DeferredRegister<BannerPattern> BANNER_PATTERNS = DeferredRegister.create(Registries.BANNER_PATTERN, MOD_ID);
 
     public static final WoodType ARCANE_WOOD_TYPE = WoodType.register(new WoodType(new ResourceLocation(MOD_ID, "arcane_wood").toString(), BlockSetType.OAK));
+
+    public static final TagKey<Item> ARCANE_LUMOS_ITEM_TAG = TagKey.create(Registries.ITEM, new ResourceLocation(MOD_ID, "arcane_lumos"));
+
+    public static final TagKey<BannerPattern> VIOLENCE_BANNER_PATTERN_TAG = TagKey.create(Registries.BANNER_PATTERN, new ResourceLocation(MOD_ID, "pattern_item/violence"));
+    public static final TagKey<BannerPattern> REPRODUCTION_BANNER_PATTERN_TAG = TagKey.create(Registries.BANNER_PATTERN, new ResourceLocation(MOD_ID, "pattern_item/reproduction"));
+    public static final TagKey<BannerPattern> COOPERATION_BANNER_PATTERN_TAG = TagKey.create(Registries.BANNER_PATTERN, new ResourceLocation(MOD_ID, "pattern_item/cooperation"));
+    public static final TagKey<BannerPattern> HUNGER_BANNER_PATTERN_TAG = TagKey.create(Registries.BANNER_PATTERN, new ResourceLocation(MOD_ID, "pattern_item/hunger"));
+    public static final TagKey<BannerPattern> SURVIVAL_BANNER_PATTERN_TAG = TagKey.create(Registries.BANNER_PATTERN, new ResourceLocation(MOD_ID, "pattern_item/survival"));
+    public static final TagKey<BannerPattern> ELEVATION_BANNER_PATTERN_TAG = TagKey.create(Registries.BANNER_PATTERN, new ResourceLocation(MOD_ID, "pattern_item/elevation"));
 
     //POLISHING_TYPES
     public static final PolishingType CRYSTAL_POLISHING_TYPE  = new CrystalPolishingType();
@@ -430,6 +439,13 @@ public class WizardsReborn
 
     public static final RegistryObject<Item> ARCANEMICON = ITEMS.register("arcanemicon", () -> new ArcanemiconItem(new Item.Properties().stacksTo(1)));
 
+    public static final RegistryObject<Item> VIOLENCE_BANNER_PATTERN_ITEM = ITEMS.register("violence_banner_pattern", () -> new BannerPatternItem(VIOLENCE_BANNER_PATTERN_TAG, (new Item.Properties()).stacksTo(1).rarity(Rarity.UNCOMMON)));
+    public static final RegistryObject<Item> REPRODUCTION_BANNER_PATTERN_ITEM = ITEMS.register("reproduction_banner_pattern", () -> new BannerPatternItem(REPRODUCTION_BANNER_PATTERN_TAG, (new Item.Properties()).stacksTo(1).rarity(Rarity.UNCOMMON)));
+    public static final RegistryObject<Item> COOPERATION_BANNER_PATTERN_ITEM = ITEMS.register("cooperation_banner_pattern", () -> new BannerPatternItem(COOPERATION_BANNER_PATTERN_TAG, (new Item.Properties()).stacksTo(1).rarity(Rarity.UNCOMMON)));
+    public static final RegistryObject<Item> HUNGER_BANNER_PATTERN_ITEM = ITEMS.register("hunger_banner_pattern", () -> new BannerPatternItem(HUNGER_BANNER_PATTERN_TAG, (new Item.Properties()).stacksTo(1).rarity(Rarity.UNCOMMON)));
+    public static final RegistryObject<Item> SURVIVAL_BANNER_PATTERN_ITEM = ITEMS.register("survival_banner_pattern", () -> new BannerPatternItem(SURVIVAL_BANNER_PATTERN_TAG, (new Item.Properties()).stacksTo(1).rarity(Rarity.UNCOMMON)));
+    public static final RegistryObject<Item> ELEVATION_BANNER_PATTERN_ITEM = ITEMS.register("elevation_banner_pattern", () -> new BannerPatternItem(ELEVATION_BANNER_PATTERN_TAG, (new Item.Properties()).stacksTo(1).rarity(Rarity.UNCOMMON)));
+
     //TILE_ENTITIES
     public static final RegistryObject<BlockEntityType<CustomSignTileEntity>> SIGN_TILE_ENTITY = TILE_ENTITIES.register("sign", () -> BlockEntityType.Builder.of(CustomSignTileEntity::new, ARCANE_WOOD_SIGN.get(), ARCANE_WOOD_WALL_SIGN.get()).build(null));
     public static final RegistryObject<BlockEntityType<CustomHangingSignTileEntity>> HANGING_SIGN_TILE_ENTITY = TILE_ENTITIES.register("hanging_sign", () -> BlockEntityType.Builder.of(CustomHangingSignTileEntity::new, ARCANE_WOOD_HANGING_SIGN.get(), ARCANE_WOOD_WALL_HANGING_SIGN.get()).build(null));
@@ -487,10 +503,15 @@ public class WizardsReborn
                 return new ArcaneWorkbenchContainer(windowId, world, pos, inv, inv.player);
             })));
 
-    public static final TagKey<Item> ARCANE_LUMOS_ITEM_TAG = TagKey.create(Registries.ITEM, new ResourceLocation(MOD_ID, "arcane_lumos"));
-
     public static ModelLayerLocation BELT_LAYER = new ModelLayerLocation(new ResourceLocation(MOD_ID, "belt"), "main");
     public static ModelLayerLocation AMULET_LAYER = new ModelLayerLocation(new ResourceLocation(MOD_ID, "amulet"), "main");
+
+    public static final RegistryObject<BannerPattern> VIOLENCE_BANNER_PATTERN = BANNER_PATTERNS.register("violence", () -> new BannerPattern("wrv"));
+    public static final RegistryObject<BannerPattern> REPRODUCTION_BANNER_PATTERN = BANNER_PATTERNS.register("reproduction", () -> new BannerPattern("wrr"));
+    public static final RegistryObject<BannerPattern> COOPERATION_BANNER_PATTERN = BANNER_PATTERNS.register("cooperation", () -> new BannerPattern("wrc"));
+    public static final RegistryObject<BannerPattern> HUNGER_BANNER_PATTERN = BANNER_PATTERNS.register("hunger", () -> new BannerPattern("wrh"));
+    public static final RegistryObject<BannerPattern> SURVIVAL_BANNER_PATTERN = BANNER_PATTERNS.register("survival", () -> new BannerPattern("wrs"));
+    public static final RegistryObject<BannerPattern> ELEVATION_BANNER_PATTERN = BANNER_PATTERNS.register("elevation", () -> new BannerPattern("wre"));
 
     public WizardsReborn() {
         InterModComms.sendTo(CuriosApi.MODID, SlotTypeMessage.REGISTER_TYPE, () -> SlotTypePreset.BELT.getMessageBuilder().build());
@@ -510,6 +531,7 @@ public class WizardsReborn
         RECIPE_SERIALIZERS.register(eventBus);
         RECIPES.register(eventBus);
         CONTAINERS.register(eventBus);
+        BANNER_PATTERNS.register(eventBus);
 
         setupMonograms();
         setupSpells();

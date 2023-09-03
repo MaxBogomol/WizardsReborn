@@ -1,6 +1,7 @@
 package mod.maxbogomol.wizards_reborn.common.block;
 
 import mod.maxbogomol.wizards_reborn.WizardsReborn;
+import mod.maxbogomol.wizards_reborn.common.item.equipment.WissenWandItem;
 import mod.maxbogomol.wizards_reborn.common.tileentity.ArcanePedestalTileEntity;
 import mod.maxbogomol.wizards_reborn.common.tileentity.TickableBlockEntity;
 import mod.maxbogomol.wizards_reborn.common.tileentity.TileSimpleInventory;
@@ -163,6 +164,12 @@ public class WissenTranslatorBlock extends FaceAttachedHorizontalDirectionalBloc
     public InteractionResult use(BlockState state, Level world, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hit) {
         WissenTranslatorTileEntity tile = (WissenTranslatorTileEntity) world.getBlockEntity(pos);
         ItemStack stack = player.getItemInHand(hand).copy();
+
+        if (stack.getItem() instanceof WissenWandItem) {
+            if (WissenWandItem.getMode(stack) != 4) {
+                return InteractionResult.PASS;
+            }
+        }
 
         if ((!stack.isEmpty()) && (tile.getItemHandler().getItem(0).isEmpty())) {
             if (stack.is(WizardsReborn.ARCANE_LUMOS_ITEM_TAG)) {

@@ -159,6 +159,13 @@ public class WizardsRebornItemGroup {
             event.accept(WizardsReborn.LEATHER_BELT);
 
             event.accept(WizardsReborn.ARCANEMICON);
+
+            event.accept(WizardsReborn.VIOLENCE_BANNER_PATTERN_ITEM);
+            event.accept(WizardsReborn.REPRODUCTION_BANNER_PATTERN_ITEM);
+            event.accept(WizardsReborn.COOPERATION_BANNER_PATTERN_ITEM);
+            event.accept(WizardsReborn.HUNGER_BANNER_PATTERN_ITEM);
+            event.accept(WizardsReborn.SURVIVAL_BANNER_PATTERN_ITEM);
+            event.accept(WizardsReborn.ELEVATION_BANNER_PATTERN_ITEM);
         }
     }
 }

@@ -1,9 +1,9 @@
 {
   "type": "minecraft:blasting",
   "ingredient": {
-    "tag": "wizards_reborn:arcanum_ores"
+    "item": "wizards_reborn:raw_arcane_gold"
   },
-  "result": "wizards_reborn:arcanum",
+  "result": "wizards_reborn:arcane_gold_ingot",
   "experience": 1.0,
   "cookingtime": 100
 }
