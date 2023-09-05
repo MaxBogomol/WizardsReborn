@@ -153,7 +153,7 @@ public class CrystalGrowthBlock extends Block implements EntityBlock, SimpleWate
     }
 
     public void randomTick(BlockState state, ServerLevel worldIn, BlockPos pos, RandomSource random) {
-        if (!worldIn.isAreaLoaded(pos, 1)) return; // Forge: prevent loading unloaded chunks when checking neighbor's light
+        if (!worldIn.isAreaLoaded(pos, 1)) return;
         if (worldIn.getRawBrightness(pos, 0) >= 9) {
             int i = this.getAge(state);
             if (i < this.getMaxAge()) {
@@ -164,7 +164,6 @@ public class CrystalGrowthBlock extends Block implements EntityBlock, SimpleWate
                 }
             }
         }
-
     }
 
     public void grow(Level worldIn, BlockPos pos, BlockState state) {

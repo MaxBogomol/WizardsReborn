@@ -1,0 +1,19 @@
+{
+  "replace": false,
+  "values": [
+    "#wizards_reborn:arcane_gold_ores",
+    "wizards_reborn:arcane_gold_ingot",
+    "wizards_reborn:arcane_gold_nugget",
+    "wizards_reborn:raw_arcane_gold",
+    "wizards_reborn:arcane_gold_block",
+    "wizards_reborn:raw_arcane_gold_block",
+    "wizards_reborn:arcane_gold_sword",
+    "wizards_reborn:arcane_gold_pickaxe",
+    "wizards_reborn:arcane_gold_axe",
+    "wizards_reborn:arcane_gold_shovel",
+    "wizards_reborn:arcane_gold_hoe",
+    "wizards_reborn:arcane_gold_scythe",
+    "wizards_reborn:arcanum_amulet",
+    "wizards_reborn:arcanum_ring"
+  ]
+}

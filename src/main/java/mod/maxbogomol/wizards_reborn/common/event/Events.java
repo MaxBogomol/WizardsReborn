@@ -8,6 +8,7 @@ import mod.maxbogomol.wizards_reborn.common.capability.IKnowledge;
 import mod.maxbogomol.wizards_reborn.common.capability.KnowledgeProvider;
 import mod.maxbogomol.wizards_reborn.common.item.equipment.ScytheItem;
 import mod.maxbogomol.wizards_reborn.common.knowledge.ItemKnowledge;
+import mod.maxbogomol.wizards_reborn.common.knowledge.ItemTagKnowledge;
 import mod.maxbogomol.wizards_reborn.common.network.KnowledgeUpdatePacket;
 import mod.maxbogomol.wizards_reborn.common.network.PacketHandler;
 import net.minecraft.nbt.CompoundTag;
@@ -64,6 +65,13 @@ public class Events {
 
             for (Knowledge knowledge : Knowledges.getKnowledges()) {
                 if (knowledge instanceof ItemKnowledge) {
+                    ItemKnowledge itemKnowledge = (ItemKnowledge) knowledge;
+                    if (itemKnowledge.canReceived(items)) {
+                        KnowledgeUtils.addKnowledge(player, knowledge);
+                    }
+                }
+
+                if (knowledge instanceof ItemTagKnowledge) {
                     ItemKnowledge itemKnowledge = (ItemKnowledge) knowledge;
                     if (itemKnowledge.canReceived(items)) {
                         KnowledgeUtils.addKnowledge(player, knowledge);
