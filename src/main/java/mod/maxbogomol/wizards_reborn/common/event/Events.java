@@ -72,7 +72,7 @@ public class Events {
                 }
 
                 if (knowledge instanceof ItemTagKnowledge) {
-                    ItemKnowledge itemKnowledge = (ItemKnowledge) knowledge;
+                    ItemTagKnowledge itemKnowledge = (ItemTagKnowledge) knowledge;
                     if (itemKnowledge.canReceived(items)) {
                         KnowledgeUtils.addKnowledge(player, knowledge);
                     }
