@@ -26,7 +26,7 @@ public class ArcanumDustTransmutationRecipe implements Recipe<Container>  {
     private final Ingredient recipeItem;
     private final ItemStack output;
     private final ItemStack display;
-    private boolean place_block;
+    private final boolean place_block;
 
     public ArcanumDustTransmutationRecipe(ResourceLocation id, Ingredient recipeItem, ItemStack output, ItemStack display, boolean place_block) {
         this.id = id;

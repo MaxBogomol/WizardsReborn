@@ -33,7 +33,7 @@ public class ArcaneWorkbenchRecipe implements Recipe<Container> {
     private final ResourceLocation id;
     private final ItemStack output;
     private final NonNullList<Ingredient> inputs;
-    private int wissen;
+    private final int wissen;
 
     public ArcaneWorkbenchRecipe(ResourceLocation id, ItemStack output, int wissen, Ingredient... inputs) {
         this.id = id;

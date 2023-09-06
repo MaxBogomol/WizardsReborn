@@ -31,13 +31,26 @@ public class WissenCrystallizerRecipe implements Recipe<Container> {
     private final ResourceLocation id;
     private final ItemStack output;
     private final NonNullList<Ingredient> inputs;
-    private int wissen;
+    private final int wissen;
+    private final boolean isNBTCrystal;
+    private final boolean isSaveNBT;
 
     public WissenCrystallizerRecipe(ResourceLocation id, ItemStack output, int wissen, Ingredient... inputs) {
         this.id = id;
         this.output = output;
         this.inputs = NonNullList.of(Ingredient.EMPTY, inputs);
         this.wissen = wissen;
+        this.isNBTCrystal = false;
+        this.isSaveNBT = false;
+    }
+
+    public WissenCrystallizerRecipe(ResourceLocation id, ItemStack output, int wissen, boolean isNBTCrystal, boolean isSaveNBT, Ingredient... inputs) {
+        this.id = id;
+        this.output = output;
+        this.inputs = NonNullList.of(Ingredient.EMPTY, inputs);
+        this.wissen = wissen;
+        this.isNBTCrystal = isNBTCrystal;
+        this.isSaveNBT = isSaveNBT;
     }
 
     @Override
@@ -98,6 +111,14 @@ public class WissenCrystallizerRecipe implements Recipe<Container> {
         return wissen;
     }
 
+    public boolean getRecipeIsNBTCrystal() {
+        return isNBTCrystal;
+    }
+
+    public boolean getRecipeIsSaveNBT() {
+        return isSaveNBT;
+    }
+
     public ItemStack getToastSymbol() {
         return new ItemStack(WizardsReborn.WISSEN_CRYSTALLIZER_ITEM.get());
     }
@@ -130,8 +151,17 @@ public class WissenCrystallizerRecipe implements Recipe<Container> {
             for (JsonElement e : ingrs) {
                 inputs.add(Ingredient.fromJson(e));
             }
+            boolean isNBTCrystal = false;
+            boolean isSaveNBT = false;
 
-            return new WissenCrystallizerRecipe(recipeId, output, wissen, inputs.toArray(new Ingredient[0]));
+            if (json.has("NBTCrystal")) {
+                isNBTCrystal = GsonHelper.getAsBoolean(json, "NBTCrystal");
+            }
+            if (json.has("saveNBT")) {
+                isSaveNBT = GsonHelper.getAsBoolean(json, "saveNBT");
+            }
+
+            return new WissenCrystallizerRecipe(recipeId, output, wissen, isNBTCrystal, isSaveNBT, inputs.toArray(new Ingredient[0]));
         }
 
         @Nullable
@@ -143,7 +173,9 @@ public class WissenCrystallizerRecipe implements Recipe<Container> {
             }
             ItemStack output = buffer.readItem();
             int wissen = buffer.readInt();
-            return new WissenCrystallizerRecipe(recipeId, output, wissen, inputs);
+            boolean isNBTCrystal = buffer.readBoolean();
+            boolean isSaveNBT = buffer.readBoolean();
+            return new WissenCrystallizerRecipe(recipeId, output, wissen, isNBTCrystal, isSaveNBT, inputs);
         }
 
         @Override
@@ -154,6 +186,8 @@ public class WissenCrystallizerRecipe implements Recipe<Container> {
             }
             buffer.writeItemStack(recipe.getResultItem(RegistryAccess.EMPTY), false);
             buffer.writeVarInt(recipe.getRecipeWissen());
+            buffer.writeBoolean(recipe.getRecipeIsNBTCrystal());
+            buffer.writeBoolean(recipe.getRecipeIsSaveNBT());
         }
     }
 

@@ -18,5 +18,6 @@
     {
       "item": "wizards_reborn:fractured_water_crystal"
     }
-  ]
+  ],
+  "NBTCrystal": true
 }

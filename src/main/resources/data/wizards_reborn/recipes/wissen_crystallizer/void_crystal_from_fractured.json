@@ -18,5 +18,6 @@
     {
       "item": "wizards_reborn:fractured_void_crystal"
     }
-  ]
+  ],
+  "NBTCrystal": true
 }

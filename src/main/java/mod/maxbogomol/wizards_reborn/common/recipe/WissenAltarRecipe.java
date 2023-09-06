@@ -22,7 +22,7 @@ public class WissenAltarRecipe implements Recipe<Container> {
     public static ResourceLocation TYPE_ID = new ResourceLocation(WizardsReborn.MOD_ID, "wissen_altar");
     private final ResourceLocation id;
     private final Ingredient recipeItem;
-    private int wissen;
+    private final int wissen;
 
     public WissenAltarRecipe(ResourceLocation id, Ingredient recipeItem, int wissen) {
         this.id = id;

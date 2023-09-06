@@ -1,26 +1,25 @@
 package mod.maxbogomol.wizards_reborn.common.tileentity;
 
 import mod.maxbogomol.wizards_reborn.WizardsReborn;
+import mod.maxbogomol.wizards_reborn.api.crystal.CrystalUtils;
 import mod.maxbogomol.wizards_reborn.api.wissen.ICooldownTileEntity;
 import mod.maxbogomol.wizards_reborn.api.wissen.IWissenTileEntity;
 import mod.maxbogomol.wizards_reborn.api.wissen.IWissenWandFunctionalTileEntity;
 import mod.maxbogomol.wizards_reborn.api.wissen.WissenUtils;
 import mod.maxbogomol.wizards_reborn.client.particle.Particles;
 import mod.maxbogomol.wizards_reborn.common.network.PacketHandler;
+import mod.maxbogomol.wizards_reborn.common.network.WissenCrystallizerBurstEffectPacket;
 import mod.maxbogomol.wizards_reborn.common.recipe.WissenCrystallizerRecipe;
 import mod.maxbogomol.wizards_reborn.utils.PacketUtils;
-import mod.maxbogomol.wizards_reborn.common.network.WissenCrystallizerBurstEffectPacket;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.RegistryAccess;
-import net.minecraft.world.level.Level;
-import net.minecraft.world.level.block.entity.BlockEntity;
-import net.minecraft.world.level.block.entity.BlockEntityTicker;
-import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.SimpleContainer;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.Connection;
 import net.minecraft.network.protocol.game.ClientboundBlockEntityDataPacket;
+import net.minecraft.world.SimpleContainer;
+import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.entity.BlockEntityType;
+import net.minecraft.world.level.block.state.BlockState;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.Optional;
@@ -67,10 +66,14 @@ public class WissenCrystallizerTileEntity extends TileSimpleInventory implements
 
             if (wissenInCraft > 0 && startCraft) {
                 if (wissenInCraft <= wissenIsCraft) {
-                    getItemHandler().removeItemNoUpdate(2);
                     wissenInCraft = 0;
                     wissenIsCraft = 0;
                     startCraft = false;
+
+                    ItemStack stack = recipe.get().getResultItem(RegistryAccess.EMPTY);
+                    if (recipe.get().getRecipeIsNBTCrystal()) {
+                        CrystalUtils.createCrystalFromFractured(stack, getItemHandler());
+                    }
 
                     for (int i = 0; i < getItemHandler().getContainerSize(); i++) {
                         getItemHandler().removeItemNoUpdate(i);
@@ -82,7 +85,7 @@ public class WissenCrystallizerTileEntity extends TileSimpleInventory implements
                     }
 
                     for (int i = 0; i < count; i++) {
-                        getItemHandler().setItem(i, recipe.get().getResultItem(RegistryAccess.EMPTY));
+                        getItemHandler().setItem(i, stack);
                     }
 
                     PacketHandler.sendToTracking(level, getBlockPos(), new WissenCrystallizerBurstEffectPacket(getBlockPos()));

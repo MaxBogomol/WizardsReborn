@@ -18,5 +18,6 @@
     {
       "item": "wizards_reborn:fractured_air_crystal"
     }
-  ]
+  ],
+  "NBTCrystal": true
 }

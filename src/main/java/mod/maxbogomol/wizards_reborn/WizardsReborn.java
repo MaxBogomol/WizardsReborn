@@ -40,10 +40,7 @@ import mod.maxbogomol.wizards_reborn.common.entity.CustomBoatEntity;
 import mod.maxbogomol.wizards_reborn.common.entity.CustomChestBoatEntity;
 import mod.maxbogomol.wizards_reborn.common.entity.SpellProjectileEntity;
 import mod.maxbogomol.wizards_reborn.common.event.Events;
-import mod.maxbogomol.wizards_reborn.common.item.ArcanemiconItem;
-import mod.maxbogomol.wizards_reborn.common.item.ArcanumDustItem;
-import mod.maxbogomol.wizards_reborn.common.item.CrystalItem;
-import mod.maxbogomol.wizards_reborn.common.item.CustomBoatItem;
+import mod.maxbogomol.wizards_reborn.common.item.*;
 import mod.maxbogomol.wizards_reborn.common.item.equipment.ArcaneWandItem;
 import mod.maxbogomol.wizards_reborn.common.item.equipment.CustomItemTier;
 import mod.maxbogomol.wizards_reborn.common.item.equipment.ScytheItem;
@@ -373,11 +370,11 @@ public class WizardsReborn
     public static final RegistryObject<Item> FIRE_CRYSTAL_GROWTH_ITEM = ITEMS.register("fire_crystal_growth", () -> new BlockItem(FIRE_CRYSTAL_GROWTH.get(), new Item.Properties()));
     public static final RegistryObject<Item> VOID_CRYSTAL_GROWTH_ITEM = ITEMS.register("void_crystal_growth", () -> new BlockItem(VOID_CRYSTAL_GROWTH.get(), new Item.Properties()));
 
-    public static final RegistryObject<Item> FRACTURED_EARTH_CRYSTAL = ITEMS.register("fractured_earth_crystal", () -> new Item(new Item.Properties().stacksTo(1)));
-    public static final RegistryObject<Item> FRACTURED_WATER_CRYSTAL = ITEMS.register("fractured_water_crystal", () -> new Item(new Item.Properties().stacksTo(1)));
-    public static final RegistryObject<Item> FRACTURED_AIR_CRYSTAL = ITEMS.register("fractured_air_crystal", () -> new Item(new Item.Properties().stacksTo(1)));
-    public static final RegistryObject<Item> FRACTURED_FIRE_CRYSTAL = ITEMS.register("fractured_fire_crystal", () -> new Item(new Item.Properties().stacksTo(1)));
-    public static final RegistryObject<Item> FRACTURED_VOID_CRYSTAL = ITEMS.register("fractured_void_crystal", () -> new Item(new Item.Properties().stacksTo(1)));
+    public static final RegistryObject<Item> FRACTURED_EARTH_CRYSTAL = ITEMS.register("fractured_earth_crystal", () -> new FracturedCrystalItem(EARTH_CRYSTAL_TYPE, new Item.Properties().stacksTo(1)));
+    public static final RegistryObject<Item> FRACTURED_WATER_CRYSTAL = ITEMS.register("fractured_water_crystal", () -> new FracturedCrystalItem(WATER_CRYSTAL_TYPE, new Item.Properties().stacksTo(1)));
+    public static final RegistryObject<Item> FRACTURED_AIR_CRYSTAL = ITEMS.register("fractured_air_crystal", () -> new FracturedCrystalItem(AIR_CRYSTAL_TYPE, new Item.Properties().stacksTo(1)));
+    public static final RegistryObject<Item> FRACTURED_FIRE_CRYSTAL = ITEMS.register("fractured_fire_crystal", () -> new FracturedCrystalItem(FIRE_CRYSTAL_TYPE, new Item.Properties().stacksTo(1)));
+    public static final RegistryObject<Item> FRACTURED_VOID_CRYSTAL = ITEMS.register("fractured_void_crystal", () -> new FracturedCrystalItem(VOID_CRYSTAL_TYPE, new Item.Properties().stacksTo(1)));
 
     public static final RegistryObject<Item> EARTH_CRYSTAL = ITEMS.register("earth_crystal", () -> new CrystalItem(EARTH_CRYSTAL_BLOCK.get(), new Item.Properties().stacksTo(1)));
     public static final RegistryObject<Item> WATER_CRYSTAL = ITEMS.register("water_crystal", () -> new CrystalItem(WATER_CRYSTAL_BLOCK.get(), new Item.Properties().stacksTo(1)));

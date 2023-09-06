@@ -5,10 +5,16 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;
 
 import java.awt.*;
+import java.util.ArrayList;
 
 public class CrystalType {
-    public CrystalType() {
+    public ArrayList<CrystalStat> stats = new ArrayList<CrystalStat>();
 
+    public CrystalType() {
+        addStat(new CrystalStat(WizardsReborn.MOD_ID+":focus", 3));
+        addStat(new CrystalStat(WizardsReborn.MOD_ID+":balance", 3));
+        addStat(new CrystalStat(WizardsReborn.MOD_ID+":absorption", 3));
+        addStat(new CrystalStat(WizardsReborn.MOD_ID+":resonance", 3));
     }
 
     public Color getColor() {
@@ -29,5 +35,13 @@ public class CrystalType {
 
     public ItemStack getCrystal() {
         return ItemStack.EMPTY;
+    }
+
+    public void addStat(CrystalStat stat) {
+        stats.add(stat);
+    }
+
+    public ArrayList<CrystalStat> getStats() {
+        return stats;
     }
 }

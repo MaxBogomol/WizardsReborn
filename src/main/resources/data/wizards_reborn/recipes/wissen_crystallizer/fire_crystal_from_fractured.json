@@ -18,5 +18,6 @@
     {
       "item": "wizards_reborn:fractured_fire_crystal"
     }
-  ]
+  ],
+  "NBTCrystal": true
 }

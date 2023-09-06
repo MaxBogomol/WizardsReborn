@@ -1,0 +1,19 @@
+{
+  "type": "wizards_reborn:wissen_crystallizer",
+  "output": {
+    "item": "wizards_reborn:cosmic_arcane_lumos",
+    "count": 1
+  },
+  "wissen": 100,
+  "ingredients": [
+    {
+      "tag": "wizards_reborn:dyeable_arcane_lumos"
+    },
+    {
+      "item": "minecraft:glowstone_dust"
+    },
+    {
+      "item": "minecraft:amethyst_shard"
+    }
+  ]
+}

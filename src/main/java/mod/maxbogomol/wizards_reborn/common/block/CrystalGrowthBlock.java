@@ -2,6 +2,7 @@ package mod.maxbogomol.wizards_reborn.common.block;
 
 import mod.maxbogomol.wizards_reborn.WizardsReborn;
 import mod.maxbogomol.wizards_reborn.api.crystal.CrystalType;
+import mod.maxbogomol.wizards_reborn.api.crystal.CrystalUtils;
 import mod.maxbogomol.wizards_reborn.client.particle.Particles;
 import mod.maxbogomol.wizards_reborn.common.tileentity.CrystalGrowthTileEntity;
 import net.minecraft.core.BlockPos;
@@ -10,6 +11,7 @@ import net.minecraft.server.level.ServerLevel;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.Containers;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
@@ -214,11 +216,15 @@ public class CrystalGrowthBlock extends Block implements EntityBlock, SimpleWate
     public void onRemove(@Nonnull BlockState state, @Nonnull Level world, @Nonnull BlockPos pos, @Nonnull BlockState newState, boolean isMoving) {
         if (state.getBlock() != newState.getBlock()) {
             if (random.nextFloat() < getAge(state) * 0.05) {
-                Containers.dropItemStack(world, pos.getX(), pos.getY(), pos.getZ(), type.getFracturedCrystal());
+                ItemStack crystalItem = type.getFracturedCrystal();
+                CrystalUtils.createCrystalItemStats(crystalItem, type, world, 4);
+                Containers.dropItemStack(world, pos.getX(), pos.getY(), pos.getZ(), crystalItem);
             }
 
             if (getAge(state) == getMaxAge()) {
-                Containers.dropItemStack(world, pos.getX(), pos.getY(), pos.getZ(), type.getCrystal());
+                ItemStack crystalItem = type.getCrystal();
+                CrystalUtils.createCrystalItemStats(crystalItem, type, world, 6);
+                Containers.dropItemStack(world, pos.getX(), pos.getY(), pos.getZ(), crystalItem);
             }
         }
     }

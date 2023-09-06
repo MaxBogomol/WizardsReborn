@@ -169,6 +169,11 @@
 
   "gui.wizards_reborn.arcanemicon.title": "Arcanemicon",
 
+  "crystal_stat.wizards_reborn.focus": "Focus",
+  "crystal_stat.wizards_reborn.balance": "Balance",
+  "crystal_stat.wizards_reborn.absorption": "Absorption",
+  "crystal_stat.wizards_reborn.resonance": "Resonance",
+
   "wizards_reborn.arcanemicon.category.arcane_nature": "Arcane Nature",
   "wizards_reborn.arcanemicon.chapter.arcane_nature_index": "Arcane Nature",
   "wizards_reborn.arcanemicon.page.arcane_nature_index.title": "Arcane Nature",
