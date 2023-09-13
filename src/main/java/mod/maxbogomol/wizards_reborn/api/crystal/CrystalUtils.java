@@ -70,4 +70,12 @@ public class CrystalUtils {
         }
         stack.setTag(nbt);
     }
+
+    public static int getStatLevel(CompoundTag nbt, CrystalStat stat) {
+        int statlevel = 0;
+        if (nbt.contains(stat.getId())) {
+            statlevel = nbt.getInt(stat.getId());
+        }
+        return statlevel;
+    }
 }

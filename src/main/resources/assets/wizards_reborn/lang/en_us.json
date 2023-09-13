@@ -154,6 +154,9 @@
   "lore.wizards_reborn.wissen_wand_mode.reload": "Reload Mode",
   "lore.wizards_reborn.wissen_wand_mode.off": "Off Mode",
 
+  "lore.wizards_reborn.arcane_wand.crystal": "Crystal:",
+  "lore.wizards_reborn.arcane_wand.spell": "Spell:",
+
   "trim_material.wizards_reborn.arcane_gold": "Arcane Gold",
   "trim_material.wizards_reborn.arcanum": "Arcanum",
 
@@ -173,6 +176,13 @@
   "crystal_stat.wizards_reborn.balance": "Balance",
   "crystal_stat.wizards_reborn.absorption": "Absorption",
   "crystal_stat.wizards_reborn.resonance": "Resonance",
+
+  "spell.wizards_reborn.earth_projectile": "Earth Projectile Spell",
+  "spell.wizards_reborn.water_projectile": "Water Projectile Spell",
+  "spell.wizards_reborn.air_projectile": "Air Projectile Spell",
+  "spell.wizards_reborn.fire_projectile": "Fire Projectile Spell",
+  "spell.wizards_reborn.void_projectile": "Void Projectile Spell",
+  "spell.wizards_reborn.frost_projectile": "Frost Projectile Spell",
 
   "wizards_reborn.arcanemicon.category.arcane_nature": "Arcane Nature",
   "wizards_reborn.arcanemicon.chapter.arcane_nature_index": "Arcane Nature",

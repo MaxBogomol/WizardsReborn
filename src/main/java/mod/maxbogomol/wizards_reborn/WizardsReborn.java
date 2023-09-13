@@ -3,6 +3,7 @@ package mod.maxbogomol.wizards_reborn;
 import com.google.common.collect.ImmutableMap;
 import com.mojang.blaze3d.platform.InputConstants;
 import com.mojang.blaze3d.vertex.DefaultVertexFormat;
+import mod.maxbogomol.wizards_reborn.api.crystal.CrystalStat;
 import mod.maxbogomol.wizards_reborn.api.crystal.CrystalType;
 import mod.maxbogomol.wizards_reborn.api.crystal.PolishingType;
 import mod.maxbogomol.wizards_reborn.api.monogram.Monogram;
@@ -165,6 +166,12 @@ public class WizardsReborn
     public static final CrystalType FIRE_CRYSTAL_TYPE  = new FireCrystalType();
     public static final CrystalType VOID_CRYSTAL_TYPE  = new VoidCrystalType();
 
+    //CRYSTAL_STATS
+    public static CrystalStat FOCUS_CRYSTAL_STAT = new CrystalStat(MOD_ID+":focus", 3);
+    public static CrystalStat BALANCE_CRYSTAL_STAT = new CrystalStat(MOD_ID+":balance", 3);
+    public static CrystalStat ABSORPTION_CRYSTAL_STAT = new CrystalStat(MOD_ID+":absorption", 3);
+    public static CrystalStat RESONANCE_CRYSTAL_STAT = new CrystalStat(MOD_ID+":resonance", 3);
+
     //MONOGRAMS
     public static Monogram TEST1_MONOGRAM = new Monogram(MOD_ID+":test1");
     public static Monogram TEST2_MONOGRAM = new Monogram(MOD_ID+":test2");
@@ -193,6 +200,7 @@ public class WizardsReborn
     public static Spell AIR_PROJECTILE_SPELL = new AirProjectileSpell(MOD_ID+":air_projectile");
     public static Spell FIRE_PROJECTILE_SPELL = new FireProjectileSpell(MOD_ID+":fire_projectile");
     public static Spell VOID_PROJECTILE_SPELL = new VoidProjectileSpell(MOD_ID+":void_projectile");
+    public static Spell FROST_PROJECTILE_SPELL = new FrostProjectileSpell(MOD_ID+":frost_projectile");
 
     //BLOCKS
     public static final RegistryObject<Block> ARCANE_GOLD_BLOCK = BLOCKS.register("arcane_gold_block", () -> new Block(BlockBehaviour.Properties.copy(Blocks.GOLD_BLOCK)));
@@ -319,7 +327,7 @@ public class WizardsReborn
     public static final RegistryObject<Item> ARCANE_GOLD_HOE = ITEMS.register("arcane_gold_hoe", () -> new HoeItem(CustomItemTier.ARCANE_GOLD, -2, -1f, new Item.Properties()));
     public static final RegistryObject<Item> ARCANE_GOLD_SCYTHE = ITEMS.register("arcane_gold_scythe", () -> new ScytheItem(CustomItemTier.ARCANE_GOLD, 4, -2.8f, new Item.Properties(), 1));
 
-    public static final RegistryObject<Item> ARCANUM = ITEMS.register("arcanum", () -> new Item(new Item.Properties()));
+    public static final RegistryObject<Item> ARCANUM = ITEMS.register("arcanum", () -> new ArcanumItem(new Item.Properties()));
     public static final RegistryObject<Item> ARCANUM_DUST = ITEMS.register("arcanum_dust", () -> new ArcanumDustItem(new Item.Properties()));
     public static final RegistryObject<Item> ARCANUM_BLOCK_ITEM = ITEMS.register("arcanum_block", () -> new BlockItem(ARCANUM_BLOCK.get(), new Item.Properties()));
     public static final RegistryObject<Item> ARCANUM_ORE_ITEM = ITEMS.register("arcanum_ore", () -> new BlockItem(ARCANUM_ORE.get(), new Item.Properties()));
@@ -629,6 +637,7 @@ public class WizardsReborn
         Spells.register(AIR_PROJECTILE_SPELL);
         Spells.register(FIRE_PROJECTILE_SPELL);
         Spells.register(VOID_PROJECTILE_SPELL);
+        Spells.register(FROST_PROJECTILE_SPELL);
     }
 
     public static void setupWandCrystalsModels() {

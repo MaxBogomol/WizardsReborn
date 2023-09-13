@@ -9,7 +9,7 @@ import net.minecraft.core.particles.ParticleType;
 
 public class SparkleParticleType extends ParticleType<GenericParticleData> {
     public SparkleParticleType() {
-        super(false, GenericParticleData.DESERIALIZER);
+        super(true, GenericParticleData.DESERIALIZER);
     }
 
     @Override

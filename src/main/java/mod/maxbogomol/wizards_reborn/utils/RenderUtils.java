@@ -76,15 +76,10 @@ public class RenderUtils {
     public static void renderItemModelInGui(ItemStack stack, int x, int y, int xSize, int ySize, int zSize) {
         BakedModel bakedmodel = Minecraft.getInstance().getItemRenderer().getModel(stack, (Level)null, (LivingEntity)null, 0);
 
-        Minecraft.getInstance().getTextureManager().getTexture(TextureAtlas.LOCATION_BLOCKS).setFilter(false, false);
-        RenderSystem.setShaderTexture(0, TextureAtlas.LOCATION_BLOCKS);
-        RenderSystem.enableBlend();
-        RenderSystem.blendFunc(GlStateManager.SourceFactor.SRC_ALPHA, GlStateManager.DestFactor.ONE);
-        RenderSystem.setShaderColor(1.0F, 1.0F, 1.0F, 1.0F);
         PoseStack posestack = RenderSystem.getModelViewStack();
         posestack.pushPose();
         posestack.translate(x, y, (100.0F));
-        posestack.translate(8.0D, 8.0D, 0.0D);
+        posestack.translate((double) xSize / 2, (double) ySize / 2, 0.0D);
         posestack.scale(1.0F, -1.0F, 1.0F);
         posestack.scale(xSize, ySize, zSize);
         RenderSystem.applyModelViewMatrix();
@@ -96,8 +91,11 @@ public class RenderUtils {
         }
 
         Minecraft.getInstance().getItemRenderer().render(stack, ItemDisplayContext.GUI, false, posestack1, multibuffersource$buffersource, 15728880, OverlayTexture.NO_OVERLAY, bakedmodel);
+
+        RenderSystem.disableDepthTest();
         multibuffersource$buffersource.endBatch();
         RenderSystem.enableDepthTest();
+
         if (flag) {
             Lighting.setupFor3DItems();
         }
@@ -153,11 +151,6 @@ public class RenderUtils {
 
         blitOffset += 50.0F;
 
-        Minecraft.getInstance().getTextureManager().getTexture(TextureAtlas.LOCATION_BLOCKS).setFilter(false, false);
-        RenderSystem.setShaderTexture(0, TextureAtlas.LOCATION_BLOCKS);
-        RenderSystem.enableBlend();
-        RenderSystem.blendFunc(GlStateManager.SourceFactor.SRC_ALPHA, GlStateManager.DestFactor.ONE);
-        RenderSystem.setShaderColor(1.0F, 1.0F, 1.0F, 1.0F);
         PoseStack posestack = RenderSystem.getModelViewStack();
         posestack.pushPose();
         posestack.translate(x, y, (100.0F + blitOffset));
@@ -175,8 +168,10 @@ public class RenderUtils {
         }
 
         Minecraft.getInstance().getItemRenderer().render(stack, ItemDisplayContext.GUI, false, posestack1, multibuffersource$buffersource, 15728880, OverlayTexture.NO_OVERLAY, bakedmodel);
+        RenderSystem.disableDepthTest();
         multibuffersource$buffersource.endBatch();
         RenderSystem.enableDepthTest();
+
         if (flag) {
             Lighting.setupFor3DItems();
         }

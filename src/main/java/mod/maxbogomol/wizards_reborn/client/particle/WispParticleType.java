@@ -9,7 +9,7 @@ import net.minecraft.core.particles.ParticleType;
 
 public class WispParticleType extends ParticleType<GenericParticleData> {
     public WispParticleType() {
-        super(false, GenericParticleData.DESERIALIZER);
+        super(true, GenericParticleData.DESERIALIZER);
     }
 
     @Override

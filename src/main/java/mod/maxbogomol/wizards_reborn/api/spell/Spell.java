@@ -2,7 +2,11 @@ package mod.maxbogomol.wizards_reborn.api.spell;
 
 import mod.maxbogomol.wizards_reborn.WizardsReborn;
 import mod.maxbogomol.wizards_reborn.api.crystal.CrystalType;
+import mod.maxbogomol.wizards_reborn.api.crystal.CrystalUtils;
+import mod.maxbogomol.wizards_reborn.api.wissen.WissenItemUtils;
 import mod.maxbogomol.wizards_reborn.common.entity.SpellProjectileEntity;
+import mod.maxbogomol.wizards_reborn.common.item.equipment.ArcaneWandItem;
+import net.minecraft.nbt.CompoundTag;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
@@ -62,11 +66,69 @@ public class Spell {
         return crystalTypes;
     }
 
-    public void useSpell(Level world, Player player, InteractionHand hand) {
+    public int getCooldown() {
+        return 20;
+    }
 
+    public int getWissenCost() {
+        return 50;
+    }
+
+    public float getCooldownStatModifier() {
+        return 0.15f;
+    }
+
+    public float getWissenStatModifier() {
+        return 0.15f;
+    }
+
+    public int getCooldownWithStat(CompoundTag nbt) {
+        int absorptionLevel = CrystalUtils.getStatLevel(nbt, WizardsReborn.ABSORPTION_CRYSTAL_STAT);
+        return (int) (getCooldown() * (1 - (getCooldownStatModifier() * absorptionLevel)));
+    }
+
+    public int getWissenCostWithStat(CompoundTag nbt) {
+        int balanceLevel = CrystalUtils.getStatLevel(nbt, WizardsReborn.BALANCE_CRYSTAL_STAT);
+        return (int) (getWissenCost() * (1 - (getWissenStatModifier() * balanceLevel)));
+    }
+
+    public boolean canSpell(Level world, Player player, InteractionHand hand) {
+        ItemStack stack = player.getItemInHand(hand);
+
+        CompoundTag nbt = stack.getTag();
+        if (nbt.getBoolean("crystal") && nbt.getInt("cooldown") <= 0 && WissenItemUtils.canRemoveWissen(stack, getWissenCost())) {
+            return true;
+        }
+
+        return false;
+    }
+
+    public void setCooldown(ItemStack stack, CompoundTag stats) {
+        CompoundTag nbt = stack.getTag();
+        nbt.putInt("cooldown", getCooldownWithStat(stats));
+    }
+
+    public void removeWissen(ItemStack stack, CompoundTag stats) {
+        WissenItemUtils.removeWissen(stack, getWissenCostWithStat(stats));
+    }
+
+    public CompoundTag getStats(ItemStack stack) {
+        return ArcaneWandItem.getInventory(stack).getItem(0).getOrCreateTag();
+    }
+
+    public void useSpell(Level world, Player player, InteractionHand hand) {
+        ItemStack stack = player.getItemInHand(hand);
+
+        CompoundTag stats = getStats(stack);
+        setCooldown(stack, stats);
+        removeWissen(stack, stats);
     }
 
     public void onWandUseFirst(ItemStack stack, UseOnContext context) {
+
+    }
+
+    public void entityTick(SpellProjectileEntity entity) {
 
     }
 
@@ -78,11 +140,11 @@ public class Spell {
 
     }
 
-    public void spawnSpellStandart(Level world, Player player) {
+    public void spawnSpellStandart(Level world, Player player, CompoundTag stats) {
         Vec3 pos = player.getEyePosition(0);
         Vec3 vel = player.getEyePosition(0).add(player.getLookAngle().scale(40)).subtract(pos).scale(1.0 / 30);
         world.addFreshEntity(new SpellProjectileEntity(WizardsReborn.SPELL_PROJECTILE.get(), world).shoot(
-                pos.x, pos.y - 0.2f, pos.z, vel.x, vel.y, vel.z, player.getUUID(), this.getId()
+                pos.x, pos.y - 0.2f, pos.z, vel.x, vel.y, vel.z, player.getUUID(), this.getId(), stats
         ));
     }
 }

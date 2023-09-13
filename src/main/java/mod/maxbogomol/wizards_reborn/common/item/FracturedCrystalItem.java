@@ -1,12 +1,15 @@
 package mod.maxbogomol.wizards_reborn.common.item;
 
+import mod.maxbogomol.wizards_reborn.WizardsReborn;
 import mod.maxbogomol.wizards_reborn.api.crystal.CrystalStat;
 import mod.maxbogomol.wizards_reborn.api.crystal.CrystalType;
+import mod.maxbogomol.wizards_reborn.client.particle.Particles;
 import mod.maxbogomol.wizards_reborn.utils.ColorUtils;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.Style;
 import net.minecraft.util.Mth;
+import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
@@ -16,8 +19,10 @@ import net.minecraftforge.api.distmarker.OnlyIn;
 
 import java.awt.*;
 import java.util.List;
+import java.util.Random;
 
-public class FracturedCrystalItem extends Item {
+public class FracturedCrystalItem extends Item implements IParticleItem {
+    private static Random random = new Random();
     public CrystalType type;
 
     public FracturedCrystalItem(CrystalType type, Properties properties) {
@@ -51,6 +56,26 @@ public class FracturedCrystalItem extends Item {
 
             int packColor = ColorUtils.packColor(255, red, green, blue);
             list.add(Component.translatable(stat.getTranslatedName()).append(" " + statlevel).withStyle(Style.EMPTY.withColor(packColor)));
+        }
+    }
+
+    @Override
+    public void addParticles(Level level, ItemEntity entity) {
+        CrystalType type = getType();
+
+        if (random.nextFloat() < 0.01) {
+            Color color = type.getColor();
+            float r = color.getRed() / 255f;
+            float g = color.getGreen() / 255f;
+            float b = color.getBlue() / 255f;
+
+            Particles.create(WizardsReborn.SPARKLE_PARTICLE)
+                    .addVelocity(((random.nextDouble() - 0.5D) / 50), ((random.nextDouble() - 0.5D) / 50), ((random.nextDouble() - 0.5D) / 50))
+                    .setAlpha(0.5f, 0).setScale(0.1f, 0)
+                    .setColor(r, g, b)
+                    .setLifetime(30)
+                    .setSpin((0.5f * (float) ((random.nextDouble() - 0.5D) * 2)))
+                    .spawn(level, entity.getX() + ((random.nextDouble() - 0.5D) * 0.25), entity.getY() + 0.25F + ((random.nextDouble() - 0.5D) * 0.25), entity.getZ() + ((random.nextDouble() - 0.5D) * 0.25));
         }
     }
 }

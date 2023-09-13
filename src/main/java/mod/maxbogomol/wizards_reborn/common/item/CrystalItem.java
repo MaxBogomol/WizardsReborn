@@ -1,8 +1,10 @@
 package mod.maxbogomol.wizards_reborn.common.item;
 
+import mod.maxbogomol.wizards_reborn.WizardsReborn;
 import mod.maxbogomol.wizards_reborn.api.crystal.CrystalStat;
 import mod.maxbogomol.wizards_reborn.api.crystal.CrystalType;
 import mod.maxbogomol.wizards_reborn.api.crystal.PolishingType;
+import mod.maxbogomol.wizards_reborn.client.particle.Particles;
 import mod.maxbogomol.wizards_reborn.common.block.CrystalBlock;
 import mod.maxbogomol.wizards_reborn.common.tileentity.CrystalTileEntity;
 import mod.maxbogomol.wizards_reborn.utils.ColorUtils;
@@ -16,6 +18,7 @@ import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.util.Mth;
 import net.minecraft.world.InteractionResult;
+import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.ItemStack;
@@ -34,8 +37,11 @@ import net.minecraftforge.api.distmarker.OnlyIn;
 
 import java.awt.*;
 import java.util.List;
+import java.util.Random;
 
-public class CrystalItem extends BlockItem {
+public class CrystalItem extends BlockItem implements IParticleItem {
+    private static Random random = new Random();
+
     public CrystalItem(Block blockIn, Properties properties) {
         super(blockIn, properties);
     }
@@ -159,5 +165,43 @@ public class CrystalItem extends BlockItem {
         return pProperty.getValue(pValueIdentifier).map((p_40592_) -> {
             return pState.setValue(pProperty, p_40592_);
         }).orElse(pState);
+    }
+
+    @Override
+    public void addParticles(Level level, ItemEntity entity) {
+        CrystalType type = getType();
+        PolishingType polishing = getPolishing();
+
+        if (random.nextFloat() < 0.01) {
+            Color color = type.getColor();
+            float r = color.getRed() / 255f;
+            float g = color.getGreen() / 255f;
+            float b = color.getBlue() / 255f;
+
+            Particles.create(WizardsReborn.SPARKLE_PARTICLE)
+                    .addVelocity(((random.nextDouble() - 0.5D) / 50), ((random.nextDouble() - 0.5D) / 50), ((random.nextDouble() - 0.5D) / 50))
+                    .setAlpha(0.5f, 0).setScale(0.1f, 0)
+                    .setColor(r, g, b)
+                    .setLifetime(30)
+                    .setSpin((0.5f * (float) ((random.nextDouble() - 0.5D) * 2)))
+                    .spawn(level, entity.getX() + ((random.nextDouble() - 0.5D) * 0.25), entity.getY() + 0.25F + ((random.nextDouble() - 0.5D) * 0.25), entity.getZ() + ((random.nextDouble() - 0.5D) * 0.25));
+        }
+
+        if (polishing.hasParticle()) {
+            if (random.nextFloat() < 0.01) {
+                Color color = polishing.getColor();
+                float r = color.getRed() / 255f;
+                float g = color.getGreen() / 255f;
+                float b = color.getBlue() / 255f;
+
+                Particles.create(WizardsReborn.SPARKLE_PARTICLE)
+                        .addVelocity(((random.nextDouble() - 0.5D) / 50), ((random.nextDouble() - 0.5D) / 50), ((random.nextDouble() - 0.5D) / 50))
+                        .setAlpha(0.5f, 0).setScale(0.1f, 0)
+                        .setColor(r, g, b)
+                        .setLifetime(30)
+                        .setSpin((0.5f * (float) ((random.nextDouble() - 0.5D) * 2)))
+                        .spawn(level, entity.getX() + ((random.nextDouble() - 0.5D) * 0.25), entity.getY() + 0.125F + ((random.nextDouble() - 0.5D) * 0.25), entity.getZ() + ((random.nextDouble() - 0.5D) * 0.25));
+            }
+        }
     }
 }

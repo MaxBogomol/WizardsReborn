@@ -129,12 +129,16 @@ public class CrystalChooseScreen extends Screen {
                 int Y = (int) (Math.sin(dst) * (100 * Math.sin(Math.toRadians(90 * hoveramount))));
 
                 if (stack == selectedItem) {
-                    RenderUtils.renderItemModelInGui(stack, x + X, y + Y, 48, 48, 48);
+                    RenderUtils.renderItemModelInGui(stack, x + X - 24, y + Y - 24, 48, 48, 48);
                 } else {
-                    RenderUtils.renderItemModelInGui(stack, x + X, y + Y, 32, 32, 32);
+                    RenderUtils.renderItemModelInGui(stack, x + X - 16, y + Y - 16, 32, 32, 32);
                 }
 
                 i = i + 1F;
+            }
+
+            if (selectedItem != null) {
+                gui.renderTooltip(Minecraft.getInstance().font, selectedItem, mouseX, mouseY);
             }
         }
 

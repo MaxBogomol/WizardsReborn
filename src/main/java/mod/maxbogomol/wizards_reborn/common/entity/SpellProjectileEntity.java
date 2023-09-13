@@ -26,76 +26,62 @@ import java.util.Optional;
 import java.util.UUID;
 
 public class SpellProjectileEntity extends Entity {
-    private static final EntityDataAccessor<Optional<UUID>> casterId = SynchedEntityData.defineId(SpellProjectileEntity.class, EntityDataSerializers.OPTIONAL_UUID);
-    private static final EntityDataAccessor<String> spellId = SynchedEntityData.defineId(SpellProjectileEntity.class, EntityDataSerializers.STRING);
+    public static final EntityDataAccessor<Optional<UUID>> casterId = SynchedEntityData.defineId(SpellProjectileEntity.class, EntityDataSerializers.OPTIONAL_UUID);
+    public static final EntityDataAccessor<String> spellId = SynchedEntityData.defineId(SpellProjectileEntity.class, EntityDataSerializers.STRING);
+    public static final EntityDataAccessor<CompoundTag> crystalStats = SynchedEntityData.defineId(SpellProjectileEntity.class, EntityDataSerializers.COMPOUND_TAG);
 
     public SpellProjectileEntity(EntityType<?> entityTypeIn, Level worldIn) {
         super(entityTypeIn, worldIn);
     }
 
-    public Entity shoot(double x, double y, double z, double vx, double vy, double vz, UUID caster, String spell) {
+    public Entity shoot(double x, double y, double z, double vx, double vy, double vz, UUID caster, String spell, CompoundTag stats) {
         setPos(x, y, z);
         setDeltaMovement(vx, vy, vz);
         getEntityData().set(casterId, Optional.of(caster));
         getEntityData().set(spellId, spell);
+        getEntityData().set(crystalStats, stats);
         hurtMarked = true;
         return this;
     }
 
     @Override
     public void tick() {
-        Vec3 motion = getDeltaMovement();
-        setDeltaMovement(motion.x * 0.96, (motion.y > 0 ? motion.y * 0.96 : motion.y) - 0.02f, motion.z * 0.96);
-
         super.tick();
 
-        Vec3 pos = position();
-        xo = pos.x;
-        yo = pos.y;
-        zo = pos.z;
-        setPos(pos.x + motion.x, pos.y + motion.y, pos.z + motion.z);
+        Spell spell = getSpell();
 
-        if (!level().isClientSide) {
-            HitResult ray = ProjectileUtil.getHitResultOnMoveVector(this, (e) -> {
-                return !e.isSpectator() && e.isPickable() && !e.getUUID().equals(casterId);
-            });
-            if (ray.getType() == HitResult.Type.ENTITY) {
-                onImpact(ray, ((EntityHitResult)ray).getEntity());
-            }
-            else if (ray.getType() == HitResult.Type.BLOCK) {
-                onImpact(ray);
-            }
-            rayEffect();
-        }
+        spell.entityTick(this);
     }
 
-    protected void onImpact(HitResult ray, Entity target) {
-        removeAfterChangingDimensions();
-        burstEffect();
+    public void onImpact(HitResult ray, Entity target) {
+        Spell spell = getSpell();
+        spell.onImpact(ray, level(), this, level().getPlayerByUUID(getEntityData().get(casterId).get()), target);
     }
 
-    protected void onImpact(HitResult ray) {
-        removeAfterChangingDimensions();
-        setPos(ray.getLocation().x, ray.getLocation().y, ray.getLocation().z);
-        burstEffect();
+    public void onImpact(HitResult ray) {
+        Spell spell = getSpell();
+        spell.onImpact(ray, level(), this, level().getPlayerByUUID(getEntityData().get(casterId).get()));
     }
 
     @Override
     protected void defineSynchedData() {
-        this.getEntityData().define(spellId,"");
+        getEntityData().define(spellId,"");
         getEntityData().define(casterId, Optional.empty());
+        getEntityData().define(crystalStats, new CompoundTag());
     }
 
     @Override
     protected void readAdditionalSaveData(CompoundTag compound) {
         compound.putUUID("caster", getEntityData().get(casterId).get());
         compound.putString("spelll", getEntityData().get(spellId));
+        compound.put("stats", getEntityData().get(crystalStats));
     }
 
     @Override
     protected void addAdditionalSaveData(CompoundTag compound) {
         getEntityData().set(casterId, Optional.of(compound.getUUID("caster")));
         getEntityData().set(spellId, compound.getString("spelll"));
+        getEntityData().set(crystalStats, compound.getCompound("stats"));
     }
 
     @Override
@@ -108,17 +94,19 @@ public class SpellProjectileEntity extends Entity {
     }
 
     public void rayEffect() {
-        Vec3 motion = getDeltaMovement();
-        Vec3 pos = position();
-        Vec3 norm = motion.normalize().scale(0.025f);
+        if (tickCount > 1) {
+            Vec3 motion = getDeltaMovement();
+            Vec3 pos = position();
+            Vec3 norm = motion.normalize().scale(0.025f);
 
-        Spell spell = getSpell();
-        Color color = spell.getColor();
-        float r = color.getRed() / 255f;
-        float g = color.getGreen() / 255f;
-        float b = color.getBlue() / 255f;
+            Spell spell = getSpell();
+            Color color = spell.getColor();
+            float r = color.getRed() / 255f;
+            float g = color.getGreen() / 255f;
+            float b = color.getBlue() / 255f;
 
-        PacketHandler.sendToTracking(level(), new BlockPos((int) pos.x, (int) pos.y, (int) pos.z), new SpellProjectileRayEffectPacket((float) xo, (float) yo + 0.2f, (float) zo, (float) pos.x, (float) pos.y + 0.2f, (float) pos.z, (float) norm.x, (float) norm.y, (float) norm.z, r, g, b));
+            PacketHandler.sendToTracking(level(), new BlockPos((int) pos.x, (int) pos.y, (int) pos.z), new SpellProjectileRayEffectPacket((float) xo, (float) yo + 0.2f, (float) zo, (float) pos.x, (float) pos.y + 0.2f, (float) pos.z, (float) norm.x, (float) norm.y, (float) norm.z, r, g, b));
+        }
     }
 
     public void burstEffect() {
@@ -131,5 +119,13 @@ public class SpellProjectileEntity extends Entity {
         float b = color.getBlue() / 255f;
 
         PacketHandler.sendToTracking(level(), new BlockPos((int) pos.x, (int) pos.y, (int) pos.z), new SpellBurstEffectPacket((float) pos.x, (float) pos.y + 0.2f, (float) pos.z, r, g, b));
+    }
+
+    public void remove() {
+        removeAfterChangingDimensions();
+    }
+
+    public CompoundTag getStats() {
+        return getEntityData().get(crystalStats);
     }
 }

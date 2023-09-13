@@ -9,7 +9,7 @@ import net.minecraft.core.particles.ParticleType;
 
 public class ArcaneWoodLeafParticleType extends ParticleType<GenericParticleData> {
     public ArcaneWoodLeafParticleType() {
-        super(false, GenericParticleData.DESERIALIZER);
+        super(true, GenericParticleData.DESERIALIZER);
     }
 
     @Override

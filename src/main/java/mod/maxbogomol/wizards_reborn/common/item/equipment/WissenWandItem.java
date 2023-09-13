@@ -252,20 +252,20 @@ public class WissenWandItem extends Item {
         ItemStack main = mc.player.getMainHandItem();
         ItemStack offhand = mc.player.getOffhandItem();
 
-        boolean renderWissenWand = false;
+        boolean render = false;
 
         if (!main.isEmpty() && main.getItem() instanceof WissenWandItem) {
-            renderWissenWand=true;
+            render = true;
         } else {
             if (!offhand.isEmpty() && offhand.getItem() instanceof WissenWandItem) {
-                renderWissenWand=true;
+                render = true;
             }
         }
 
         RenderSystem.enableBlend();
         RenderSystem.blendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
 
-        if (renderWissenWand) {
+        if (render) {
             if (!player.isSpectator()) {
                 HitResult pos = mc.hitResult;
                 if (pos != null) {

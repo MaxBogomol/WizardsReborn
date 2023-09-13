@@ -9,7 +9,7 @@ import net.minecraft.core.particles.ParticleType;
 
 public class KarmaParticleType extends ParticleType<GenericParticleData> {
     public KarmaParticleType() {
-        super(false, GenericParticleData.DESERIALIZER);
+        super(true, GenericParticleData.DESERIALIZER);
     }
 
     @Override
