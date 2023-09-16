@@ -164,6 +164,7 @@ public class ArcaneWandItem extends Item implements IWissenItem {
     @OnlyIn(Dist.CLIENT)
     @Override
     public void appendHoverText(ItemStack stack, Level world, List<Component> list, TooltipFlag flags) {
+        list.add(Component.empty());
         list.add(Component.translatable("lore.wizards_reborn.arcane_wand.crystal").withStyle(ChatFormatting.GRAY));
 
         CompoundTag nbt = stack.getOrCreateTag();
@@ -198,6 +199,7 @@ public class ArcaneWandItem extends Item implements IWissenItem {
         return crystal;
     }
 
+    @OnlyIn(Dist.CLIENT)
     public static void drawWandGui(GuiGraphics gui) {
         Minecraft mc = Minecraft.getInstance();
         Player player = mc.player;

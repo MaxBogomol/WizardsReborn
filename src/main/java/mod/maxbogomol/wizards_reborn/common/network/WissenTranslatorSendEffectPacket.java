@@ -2,14 +2,15 @@ package mod.maxbogomol.wizards_reborn.common.network;
 
 import mod.maxbogomol.wizards_reborn.WizardsReborn;
 import mod.maxbogomol.wizards_reborn.client.particle.Particles;
-import net.minecraft.client.Minecraft;
-import net.minecraft.client.multiplayer.ClientLevel;
-import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.core.BlockPos;
+import net.minecraft.network.FriendlyByteBuf;
+import net.minecraft.world.level.Level;
 import net.minecraftforge.network.NetworkEvent;
 
 import java.util.Random;
-import java.util.function.Supplier;;
+import java.util.function.Supplier;
+
+;
 
 public class WissenTranslatorSendEffectPacket {
     private static BlockPos pos;
@@ -32,7 +33,7 @@ public class WissenTranslatorSendEffectPacket {
             ctx.get().enqueueWork(new Runnable() {
                 @Override
                 public void run() {
-                    ClientLevel world = Minecraft.getInstance().level;
+                    Level world = WizardsReborn.proxy.getWorld();
 
                     for (int i = 0; i < 15; i++) {
                         Particles.create(WizardsReborn.SPARKLE_PARTICLE)

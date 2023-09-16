@@ -2,15 +2,14 @@ package mod.maxbogomol.wizards_reborn.common.network;
 
 import mod.maxbogomol.wizards_reborn.WizardsReborn;
 import mod.maxbogomol.wizards_reborn.client.particle.Particles;
-import net.minecraft.client.Minecraft;
-import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.util.Mth;
+import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.Vec3;
 import net.minecraftforge.network.NetworkEvent;
 
 import java.util.Random;
-import java.util.function.Supplier;;
+import java.util.function.Supplier;
 
 public class SpellProjectileRayEffectPacket {
     private static float posFromX;
@@ -76,7 +75,7 @@ public class SpellProjectileRayEffectPacket {
             ctx.get().enqueueWork(new Runnable() {
                 @Override
                 public void run() {
-                    ClientLevel world = Minecraft.getInstance().level;
+                    Level world = WizardsReborn.proxy.getWorld();
 
                     Vec3 pos = new Vec3(posToX, posToY, posToZ);
                     Vec3 norm = new Vec3(motionX, motionY, motionZ).normalize().scale(0.025f);

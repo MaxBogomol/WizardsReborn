@@ -1,6 +1,6 @@
 package mod.maxbogomol.wizards_reborn.client.event;
 
-import mod.maxbogomol.wizards_reborn.WizardsReborn;
+import mod.maxbogomol.wizards_reborn.WizardsRebornClient;
 import mod.maxbogomol.wizards_reborn.client.gui.screen.CrystalChooseScreen;
 import mod.maxbogomol.wizards_reborn.common.item.equipment.ArcaneWandItem;
 import mod.maxbogomol.wizards_reborn.common.network.DeleteCrystalPacket;
@@ -13,9 +13,7 @@ import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.client.event.InputEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
-import net.minecraftforge.fml.common.Mod;
 
-@Mod.EventBusSubscriber
 @OnlyIn(Dist.CLIENT)
 public class KeyBindHandler {
 
@@ -23,7 +21,7 @@ public class KeyBindHandler {
 
     @SubscribeEvent
     public static void onKeyPress(InputEvent event) {
-        if (WizardsReborn.OPEN_WAND_SELECTION_KEY.isDown()) {
+        if (WizardsRebornClient.OPEN_WAND_SELECTION_KEY.isDown()) {
             Minecraft mc = Minecraft.getInstance();
             Player player = mc.player;
             ItemStack main = mc.player.getMainHandItem();

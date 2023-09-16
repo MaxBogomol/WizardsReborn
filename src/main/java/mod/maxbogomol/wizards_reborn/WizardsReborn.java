@@ -1,8 +1,6 @@
 package mod.maxbogomol.wizards_reborn;
 
 import com.google.common.collect.ImmutableMap;
-import com.mojang.blaze3d.platform.InputConstants;
-import com.mojang.blaze3d.vertex.DefaultVertexFormat;
 import mod.maxbogomol.wizards_reborn.api.crystal.CrystalStat;
 import mod.maxbogomol.wizards_reborn.api.crystal.CrystalType;
 import mod.maxbogomol.wizards_reborn.api.crystal.PolishingType;
@@ -15,12 +13,11 @@ import mod.maxbogomol.wizards_reborn.client.arcanemicon.ArcanemiconChapters;
 import mod.maxbogomol.wizards_reborn.client.config.ClientConfig;
 import mod.maxbogomol.wizards_reborn.client.event.ClientTickHandler;
 import mod.maxbogomol.wizards_reborn.client.event.ClientWorldEvent;
+import mod.maxbogomol.wizards_reborn.client.event.KeyBindHandler;
 import mod.maxbogomol.wizards_reborn.client.gui.HUDEventHandler;
 import mod.maxbogomol.wizards_reborn.client.gui.TooltipEventHandler;
 import mod.maxbogomol.wizards_reborn.client.gui.container.ArcaneWorkbenchContainer;
 import mod.maxbogomol.wizards_reborn.client.gui.screen.ArcaneWorkbenchScreen;
-import mod.maxbogomol.wizards_reborn.client.model.curio.AmuletModel;
-import mod.maxbogomol.wizards_reborn.client.model.curio.BeltModel;
 import mod.maxbogomol.wizards_reborn.client.particle.ArcaneWoodLeafParticleType;
 import mod.maxbogomol.wizards_reborn.client.particle.KarmaParticleType;
 import mod.maxbogomol.wizards_reborn.client.particle.SparkleParticleType;
@@ -28,10 +25,7 @@ import mod.maxbogomol.wizards_reborn.client.particle.WispParticleType;
 import mod.maxbogomol.wizards_reborn.client.render.WorldRenderHandler;
 import mod.maxbogomol.wizards_reborn.client.render.curio.AmuletRenderer;
 import mod.maxbogomol.wizards_reborn.client.render.curio.BeltRenderer;
-import mod.maxbogomol.wizards_reborn.client.render.entity.ArcaneWoodBoatModel;
-import mod.maxbogomol.wizards_reborn.client.render.entity.EmptyRenderer;
-import mod.maxbogomol.wizards_reborn.client.render.item.*;
-import mod.maxbogomol.wizards_reborn.client.render.tileentity.*;
+import mod.maxbogomol.wizards_reborn.client.render.item.WandCrystalsModels;
 import mod.maxbogomol.wizards_reborn.common.block.*;
 import mod.maxbogomol.wizards_reborn.common.block.flammable.*;
 import mod.maxbogomol.wizards_reborn.common.capability.IKnowledge;
@@ -52,6 +46,9 @@ import mod.maxbogomol.wizards_reborn.common.item.equipment.curio.LeatherBeltItem
 import mod.maxbogomol.wizards_reborn.common.itemgroup.WizardsRebornItemGroup;
 import mod.maxbogomol.wizards_reborn.common.knowledge.RegisterKnowledges;
 import mod.maxbogomol.wizards_reborn.common.network.PacketHandler;
+import mod.maxbogomol.wizards_reborn.common.proxy.ClientProxy;
+import mod.maxbogomol.wizards_reborn.common.proxy.ISidedProxy;
+import mod.maxbogomol.wizards_reborn.common.proxy.ServerProxy;
 import mod.maxbogomol.wizards_reborn.common.recipe.ArcaneWorkbenchRecipe;
 import mod.maxbogomol.wizards_reborn.common.recipe.ArcanumDustTransmutationRecipe;
 import mod.maxbogomol.wizards_reborn.common.recipe.WissenAltarRecipe;
@@ -59,22 +56,7 @@ import mod.maxbogomol.wizards_reborn.common.recipe.WissenCrystallizerRecipe;
 import mod.maxbogomol.wizards_reborn.common.spell.*;
 import mod.maxbogomol.wizards_reborn.common.tileentity.*;
 import mod.maxbogomol.wizards_reborn.common.world.tree.ArcaneWoodTree;
-import net.minecraft.client.KeyMapping;
-import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.screens.MenuScreens;
-import net.minecraft.client.model.BoatModel;
-import net.minecraft.client.model.ChestBoatModel;
-import net.minecraft.client.model.geom.ModelLayerLocation;
-import net.minecraft.client.renderer.ItemBlockRenderTypes;
-import net.minecraft.client.renderer.RenderType;
-import net.minecraft.client.renderer.ShaderInstance;
-import net.minecraft.client.renderer.Sheets;
-import net.minecraft.client.renderer.blockentity.BlockEntityRenderers;
-import net.minecraft.client.renderer.blockentity.HangingSignRenderer;
-import net.minecraft.client.renderer.blockentity.SignRenderer;
-import net.minecraft.client.renderer.entity.EntityRenderers;
-import net.minecraft.client.resources.model.BakedModel;
-import net.minecraft.client.resources.model.ModelResourceLocation;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.particles.ParticleType;
 import net.minecraft.core.registries.Registries;
@@ -94,14 +76,12 @@ import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.properties.BlockSetType;
 import net.minecraft.world.level.block.state.properties.WoodType;
 import net.minecraftforge.api.distmarker.Dist;
-import net.minecraftforge.api.distmarker.OnlyIn;
-import net.minecraftforge.client.event.*;
-import net.minecraftforge.client.settings.KeyConflictContext;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.capabilities.RegisterCapabilitiesEvent;
 import net.minecraftforge.common.extensions.IForgeMenuType;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
+import net.minecraftforge.fml.DistExecutor;
 import net.minecraftforge.fml.InterModComms;
 import net.minecraftforge.fml.ModLoadingContext;
 import net.minecraftforge.fml.common.Mod;
@@ -112,23 +92,17 @@ import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
-import org.lwjgl.glfw.GLFW;
 import top.theillusivec4.curios.api.CuriosApi;
 import top.theillusivec4.curios.api.SlotTypeMessage;
 import top.theillusivec4.curios.api.SlotTypePreset;
 import top.theillusivec4.curios.api.client.CuriosRendererRegistry;
-
-import java.io.IOException;
-import java.util.Map;
 
 @Mod("wizards_reborn")
 public class WizardsReborn
 {
     public static final String MOD_ID = "wizards_reborn";
 
-    private static final Logger LOGGER = LogManager.getLogger();
+    public static final ISidedProxy proxy = DistExecutor.unsafeRunForDist(() -> ClientProxy::new, () -> ServerProxy::new);
 
     public static final DeferredRegister<Item> ITEMS = DeferredRegister.create(ForgeRegistries.ITEMS, MOD_ID);
     public static final DeferredRegister<Block> BLOCKS = DeferredRegister.create(ForgeRegistries.BLOCKS, MOD_ID);
@@ -478,9 +452,6 @@ public class WizardsReborn
     public static final RegistryObject<EntityType<CustomChestBoatEntity>> CHEST_BOAT = ENTITIES.register("chest_boat", () -> EntityType.Builder.<CustomChestBoatEntity>of(CustomChestBoatEntity::new, MobCategory.MISC).sized(1.375f, 0.5625f).build(new ResourceLocation(MOD_ID, "arcane_wood_chest_boat").toString()));
     public static final RegistryObject<EntityType<SpellProjectileEntity>> SPELL_PROJECTILE = ENTITIES.register("spell_projectile", () -> EntityType.Builder.<SpellProjectileEntity>of(SpellProjectileEntity::new, MobCategory.MISC).sized(0.4f, 0.4f).build(new ResourceLocation(MOD_ID, "spell_projectile").toString()));
 
-    private static final String CATEGORY_KEY = "key.category."+MOD_ID+".general";
-    public static final KeyMapping OPEN_WAND_SELECTION_KEY = new KeyMapping("key."+MOD_ID+".selection_hud", KeyConflictContext.IN_GAME, InputConstants.Type.KEYSYM, GLFW.GLFW_KEY_V, CATEGORY_KEY);
-
     //PARTICLES
     public static RegistryObject<WispParticleType> WISP_PARTICLE = PARTICLES.register("wisp", WispParticleType::new);
     public static RegistryObject<SparkleParticleType> SPARKLE_PARTICLE = PARTICLES.register("sparkle", SparkleParticleType::new);
@@ -492,13 +463,13 @@ public class WizardsReborn
     public static RegistryObject<RecipeType<ArcanumDustTransmutationRecipe>> ARCANUM_DUST_TRANSMUTATION_RECIPE = RECIPES.register("arcanum_dust_transmutation", () -> RecipeType.simple(ArcanumDustTransmutationRecipe.TYPE_ID));
 
     public static final RegistryObject<WissenAltarRecipe.Serializer> WISSEN_ALTAR_SERIALIZER = RECIPE_SERIALIZERS.register("wissen_altar", WissenAltarRecipe.Serializer::new);
-    public static RegistryObject<RecipeType<WissenAltarRecipe>> WISSEN_ALTAR_RECIPE = RECIPES.register("wissen_altar", () -> RecipeType.simple(WissenAltarRecipe.TYPE_ID));
+    public static final RegistryObject<RecipeType<WissenAltarRecipe>> WISSEN_ALTAR_RECIPE = RECIPES.register("wissen_altar", () -> RecipeType.simple(WissenAltarRecipe.TYPE_ID));
 
     public static final RegistryObject<WissenCrystallizerRecipe.Serializer> WISSEN_CRYSTALLIZER_SERIALIZER = RECIPE_SERIALIZERS.register("wissen_crystallizer", WissenCrystallizerRecipe.Serializer::new);
-    public static RegistryObject<RecipeType<WissenCrystallizerRecipe>> WISSEN_CRYSTALLIZER_RECIPE = RECIPES.register("wissen_crystallizer", () -> RecipeType.simple(WissenCrystallizerRecipe.TYPE_ID));
+    public static final RegistryObject<RecipeType<WissenCrystallizerRecipe>> WISSEN_CRYSTALLIZER_RECIPE = RECIPES.register("wissen_crystallizer", () -> RecipeType.simple(WissenCrystallizerRecipe.TYPE_ID));
 
     public static final RegistryObject<ArcaneWorkbenchRecipe.Serializer> ARCANE_WORKBENCH_SERIALIZER = RECIPE_SERIALIZERS.register("arcane_workbench", ArcaneWorkbenchRecipe.Serializer::new);
-    public static RegistryObject<RecipeType<ArcaneWorkbenchRecipe>> ARCANE_WORKBENCH_RECIPE = RECIPES.register("arcane_workbench", () -> RecipeType.simple(ArcaneWorkbenchRecipe.TYPE_ID));
+    public static final RegistryObject<RecipeType<ArcaneWorkbenchRecipe>> ARCANE_WORKBENCH_RECIPE = RECIPES.register("arcane_workbench", () -> RecipeType.simple(ArcaneWorkbenchRecipe.TYPE_ID));
 
     //CONTAINERS
     public static final RegistryObject<MenuType<ArcaneWorkbenchContainer>> ARCANE_WORKBENCH_CONTAINER
@@ -508,9 +479,6 @@ public class WizardsReborn
                 Level world = inv.player.getCommandSenderWorld();
                 return new ArcaneWorkbenchContainer(windowId, world, pos, inv, inv.player);
             })));
-
-    public static ModelLayerLocation BELT_LAYER = new ModelLayerLocation(new ResourceLocation(MOD_ID, "belt"), "main");
-    public static ModelLayerLocation AMULET_LAYER = new ModelLayerLocation(new ResourceLocation(MOD_ID, "amulet"), "main");
 
     public static final RegistryObject<BannerPattern> VIOLENCE_BANNER_PATTERN = BANNER_PATTERNS.register("violence", () -> new BannerPattern("wrv"));
     public static final RegistryObject<BannerPattern> REPRODUCTION_BANNER_PATTERN = BANNER_PATTERNS.register("reproduction", () -> new BannerPattern("wrr"));
@@ -541,18 +509,23 @@ public class WizardsReborn
 
         setupMonograms();
         setupSpells();
-        setupWandCrystalsModels();
 
         IEventBus forgeBus = MinecraftForge.EVENT_BUS;
 
         ModLoadingContext.get().registerConfig(ModConfig.Type.CLIENT, ClientConfig.SPEC);
         ModLoadingContext.get().registerConfig(ModConfig.Type.COMMON, Config.SPEC);
 
-        forgeBus.addListener(ClientTickHandler::clientTickEnd);
-        forgeBus.addListener(WorldRenderHandler::onRenderWorldLast);
-        forgeBus.addListener(ClientWorldEvent::onTick);
-        forgeBus.addListener(HUDEventHandler::onDrawScreenPost);
-        forgeBus.addListener(TooltipEventHandler::onPostTooltipEvent);
+        DistExecutor.unsafeCallWhenOn(Dist.CLIENT, () -> () -> {
+            setupWandCrystalsModels();
+
+            forgeBus.addListener(ClientTickHandler::clientTickEnd);
+            forgeBus.addListener(WorldRenderHandler::onRenderWorldLast);
+            forgeBus.addListener(ClientWorldEvent::onTick);
+            forgeBus.addListener(HUDEventHandler::onDrawScreenPost);
+            forgeBus.addListener(TooltipEventHandler::onPostTooltipEvent);
+            forgeBus.addListener(KeyBindHandler::onKeyPress);
+            return new Object();
+        });
 
         eventBus.addListener(this::setup);
         eventBus.addListener(this::clientSetup);
@@ -567,7 +540,6 @@ public class WizardsReborn
     private void setup(final FMLCommonSetupEvent event)
     {
         PacketHandler.init();
-        ArcanemiconChapters.init();
         RegisterKnowledges.setupKnowledges();
 
         event.enqueueWork(() -> {
@@ -579,17 +551,14 @@ public class WizardsReborn
 
     private void clientSetup(final FMLClientSetupEvent event) {
         event.enqueueWork(() -> {
+            ArcanemiconChapters.init();
+
             MenuScreens.register(ARCANE_WORKBENCH_CONTAINER.get(), ArcaneWorkbenchScreen::new);
 
             CuriosRendererRegistry.register(LEATHER_BELT.get(), BeltRenderer::new);
             CuriosRendererRegistry.register(ARCANUM_AMULET.get(), AmuletRenderer::new);
         });
     }
-
-    public static ShaderInstance GLOWING_PARTICLE_SHADER, SPRITE_PARTICLE_SHADER;
-
-    public static ShaderInstance getGlowingParticleShader() { return GLOWING_PARTICLE_SHADER; }
-    public static ShaderInstance getSpriteParticleShader() { return SPRITE_PARTICLE_SHADER; }
 
     public static void setupMonograms() {
         Monograms.register(TEST1_MONOGRAM);
@@ -674,105 +643,6 @@ public class WizardsReborn
 
     @Mod.EventBusSubscriber(bus=Mod.EventBusSubscriber.Bus.MOD)
     public static class RegistryEvents {
-        @SubscribeEvent
-        public static void onRenderTypeSetup(FMLClientSetupEvent event) {
-            Sheets.addWoodType(ARCANE_WOOD_TYPE);
-
-            ItemBlockRenderTypes.setRenderLayer(ARCANE_WOOD_DOOR.get(), RenderType.cutout());
-            ItemBlockRenderTypes.setRenderLayer(ARCANE_WOOD_TRAPDOOR.get(), RenderType.cutout());
-            ItemBlockRenderTypes.setRenderLayer(ARCANE_WOOD_LEAVES.get(), RenderType.cutout());
-            ItemBlockRenderTypes.setRenderLayer(ARCANE_WOOD_SAPLING.get(), RenderType.cutout());
-            ItemBlockRenderTypes.setRenderLayer(POTTED_ARCANE_WOOD_SAPLING.get(), RenderType.cutout());
-            ItemBlockRenderTypes.setRenderLayer(ARCANE_LINEN.get(), RenderType.cutout());
-            ItemBlockRenderTypes.setRenderLayer(MOR.get(), RenderType.cutout());
-            ItemBlockRenderTypes.setRenderLayer(POTTED_MOR.get(), RenderType.cutout());
-            ItemBlockRenderTypes.setRenderLayer(ELDER_MOR.get(), RenderType.cutout());
-            ItemBlockRenderTypes.setRenderLayer(POTTED_ELDER_MOR.get(), RenderType.cutout());
-
-            BlockEntityRenderers.register(SIGN_TILE_ENTITY.get(), SignRenderer::new);
-            BlockEntityRenderers.register(HANGING_SIGN_TILE_ENTITY.get(), HangingSignRenderer::new);
-            BlockEntityRenderers.register(ARCANE_PEDESTAL_TILE_ENTITY.get(), (trd) -> new ArcanePedestalTileEntityRenderer());
-            BlockEntityRenderers.register(WISSEN_ALTAR_TILE_ENTITY.get(), (trd) -> new WissenAltarTileEntityRenderer());
-            BlockEntityRenderers.register(WISSEN_TRANSLATOR_TILE_ENTITY.get(), (trd) -> new WissenTranslatorTileEntityRenderer());
-            BlockEntityRenderers.register(WISSEN_CRYSTALLIZER_TILE_ENTITY.get(), (trd) -> new WissenCrystallizerTileEntityRenderer());
-            BlockEntityRenderers.register(ARCANE_WORKBENCH_TILE_ENTITY.get(), (trd) -> new ArcaneWorkbenchTileEntityRenderer());
-
-            BlockEntityRenderers.register(CRYSTAL_TILE_ENTITY.get(), (trd) -> new CrystalTileEntityRenderer());
-
-            EntityRenderers.register(BOAT.get(), m -> new ArcaneWoodBoatModel(m, false));
-            EntityRenderers.register(CHEST_BOAT.get(), m -> new ArcaneWoodBoatModel(m, true));
-            EntityRenderers.register(SPELL_PROJECTILE.get(), EmptyRenderer::new);
-        }
-
-        @SubscribeEvent
-        public static void onModelRegistryEvent(ModelEvent.RegisterAdditional event) {
-            for (String crystal : WandCrystalsModels.getCrystals()) {
-                event.register(WandCrystalsModels.getModelLocationCrystal(crystal));
-            }
-
-            if (ClientConfig.LARGE_ITEM_MODEL.get()) {
-                for (String item : Item2DRenderer.HAND_MODEL_ITEMS) {
-                    event.register(new ModelResourceLocation(new ResourceLocation(WizardsReborn.MOD_ID, item + "_in_hand"), "inventory"));
-                }
-            }
-        }
-
-        @SubscribeEvent
-        public static void onModelBakeEvent(ModelEvent.ModifyBakingResult event) {
-            Map<ResourceLocation, BakedModel> map = event.getModels();
-            BakedModel existingModel = map.get(new ModelResourceLocation(ARCANE_WAND.getId(), "inventory"));
-
-            for (String crystal : WandCrystalsModels.getCrystals()) {
-                BakedModel model = map.get(WandCrystalsModels.getModelLocationCrystal(crystal));
-                WandCrystalsModels.addModelCrystals(crystal, model);
-                model = new CustomFinalisedModel(existingModel, WandCrystalsModels.getModelCrystals(crystal));
-                WandCrystalsModels.addModel(crystal, model);
-            }
-            CustomModel customModel = new CustomModel(existingModel, new WandModelOverrideList());
-            map.replace(new ModelResourceLocation(ARCANE_WAND.getId(), "inventory"), customModel);
-
-            if (ClientConfig.LARGE_ITEM_MODEL.get()) {
-                Item2DRenderer.onModelBakeEvent(event);
-            }
-        }
-
-        @SubscribeEvent
-        public static void registerKeyBindings(RegisterKeyMappingsEvent event) {
-            event.register(OPEN_WAND_SELECTION_KEY);
-        }
-
-        @OnlyIn(Dist.CLIENT)
-        @SubscribeEvent
-        public static void registerFactories(RegisterParticleProvidersEvent event) {
-            Minecraft.getInstance().particleEngine.register(WISP_PARTICLE.get(), WispParticleType.Factory::new);
-            Minecraft.getInstance().particleEngine.register(SPARKLE_PARTICLE.get(), SparkleParticleType.Factory::new);
-            Minecraft.getInstance().particleEngine.register(KARMA_PARTICLE.get(), KarmaParticleType.Factory::new);
-            Minecraft.getInstance().particleEngine.register(ARCANE_WOOD_LEAF_PARTICLE.get(), ArcaneWoodLeafParticleType.Factory::new);
-        }
-
-        @OnlyIn(Dist.CLIENT)
-        @SubscribeEvent
-        public static void shaderRegistry(RegisterShadersEvent event) throws IOException {
-            event.registerShader(new ShaderInstance(event.getResourceProvider(), new ResourceLocation("wizards_reborn:glowing_particle"), DefaultVertexFormat.PARTICLE),
-                    shader -> { GLOWING_PARTICLE_SHADER = shader; });
-            event.registerShader(new ShaderInstance(event.getResourceProvider(), new ResourceLocation("wizards_reborn:sprite_particle"), DefaultVertexFormat.PARTICLE),
-                    shader -> { SPRITE_PARTICLE_SHADER = shader; });
-        }
-
-        @SubscribeEvent
-        public static void registerLayers(EntityRenderersEvent.RegisterLayerDefinitions event) {
-            for(CustomBoatEntity.Type boatType : CustomBoatEntity.Type.values()) {
-                event.registerLayerDefinition(ArcaneWoodBoatModel.createBoatModelName(boatType), BoatModel::createBodyModel);
-                event.registerLayerDefinition(ArcaneWoodBoatModel.createChestBoatModelName(boatType), ChestBoatModel::createBodyModel);
-            }
-        }
-
-        @SubscribeEvent
-        public static void onRegisterLayers(EntityRenderersEvent.RegisterLayerDefinitions event) {
-            event.registerLayerDefinition(BELT_LAYER, BeltModel::createBodyLayer);
-            event.registerLayerDefinition(AMULET_LAYER, AmuletModel::createBodyLayer);
-        }
-
         @SubscribeEvent
         public static void registerCaps(RegisterCapabilitiesEvent event) {
             event.register(IKnowledge.class);

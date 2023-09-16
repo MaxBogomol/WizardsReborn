@@ -167,7 +167,7 @@ public class WissenCrystallizerRecipe implements Recipe<Container> {
         @Nullable
         @Override
         public WissenCrystallizerRecipe fromNetwork(ResourceLocation recipeId, FriendlyByteBuf buffer) {
-            Ingredient[] inputs = new Ingredient[buffer.readVarInt()];
+            Ingredient[] inputs = new Ingredient[buffer.readInt()];
             for (int i = 0; i < inputs.length; i++) {
                 inputs[i] = Ingredient.fromNetwork(buffer);
             }
@@ -180,12 +180,12 @@ public class WissenCrystallizerRecipe implements Recipe<Container> {
 
         @Override
         public void toNetwork(FriendlyByteBuf buffer, WissenCrystallizerRecipe recipe) {
-            buffer.writeVarInt(recipe.getIngredients().size());
+            buffer.writeInt(recipe.getIngredients().size());
             for (Ingredient input : recipe.getIngredients()) {
                 input.toNetwork(buffer);
             }
             buffer.writeItemStack(recipe.getResultItem(RegistryAccess.EMPTY), false);
-            buffer.writeVarInt(recipe.getRecipeWissen());
+            buffer.writeInt(recipe.getRecipeWissen());
             buffer.writeBoolean(recipe.getRecipeIsNBTCrystal());
             buffer.writeBoolean(recipe.getRecipeIsSaveNBT());
         }
@@ -210,5 +210,4 @@ public class WissenCrystallizerRecipe implements Recipe<Container> {
     public boolean isSpecial(){
         return true;
     }
-
 }

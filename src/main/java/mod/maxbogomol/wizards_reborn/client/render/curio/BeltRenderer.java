@@ -2,6 +2,7 @@ package mod.maxbogomol.wizards_reborn.client.render.curio;
 
 import com.mojang.blaze3d.vertex.PoseStack;
 import mod.maxbogomol.wizards_reborn.WizardsReborn;
+import mod.maxbogomol.wizards_reborn.WizardsRebornClient;
 import mod.maxbogomol.wizards_reborn.client.model.curio.BeltModel;
 import mod.maxbogomol.wizards_reborn.common.item.equipment.curio.ICurioItemTexture;
 import mod.maxbogomol.wizards_reborn.utils.RenderUtils;
@@ -29,7 +30,7 @@ public class BeltRenderer implements ICurioRenderer {
                                                                           int light, float limbSwing, float limbSwingAmount, float partialTicks,
                                                                           float ageInTicks, float netHeadYaw, float headPitch) {
         if (model == null) {
-            model = new BeltModel(Minecraft.getInstance().getEntityModels().bakeLayer(WizardsReborn.BELT_LAYER));
+            model = new BeltModel(Minecraft.getInstance().getEntityModels().bakeLayer(WizardsRebornClient.BELT_LAYER));
         }
 
         LivingEntity entity = slotContext.entity();

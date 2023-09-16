@@ -8,24 +8,26 @@ import mod.maxbogomol.wizards_reborn.client.config.ClientConfig;
 import mod.maxbogomol.wizards_reborn.client.particle.Particles;
 import mod.maxbogomol.wizards_reborn.common.block.ArcaneLumosBlock;
 import mod.maxbogomol.wizards_reborn.common.item.equipment.WissenWandItem;
-import mod.maxbogomol.wizards_reborn.common.network.*;
+import mod.maxbogomol.wizards_reborn.common.network.PacketHandler;
+import mod.maxbogomol.wizards_reborn.common.network.WissenSendEffectPacket;
+import mod.maxbogomol.wizards_reborn.common.network.WissenTranslatorBurstEffectPacket;
+import mod.maxbogomol.wizards_reborn.common.network.WissenTranslatorSendEffectPacket;
 import mod.maxbogomol.wizards_reborn.utils.PacketUtils;
-import net.minecraft.world.SimpleContainer;
-import net.minecraft.world.item.BlockItem;
-import net.minecraft.world.level.Level;
-import net.minecraft.world.level.block.entity.BlockEntityTicker;
-import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.client.Minecraft;
-import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.item.ItemStack;
+import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.Connection;
 import net.minecraft.network.protocol.game.ClientboundBlockEntityDataPacket;
+import net.minecraft.util.Mth;
+import net.minecraft.world.SimpleContainer;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.BlockItem;
+import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityType;
-import net.minecraft.core.BlockPos;
-import net.minecraft.util.Mth;
-import net.minecraftforge.network.PacketDistributor;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.api.distmarker.OnlyIn;
 import org.jetbrains.annotations.NotNull;
 
 import java.awt.*;
@@ -311,6 +313,7 @@ public class WissenTranslatorTileEntity extends TileSimpleInventory implements T
         }
     }
 
+    @OnlyIn(Dist.CLIENT)
     public void wissenWandEffect() {
         Minecraft mc = Minecraft.getInstance();
 

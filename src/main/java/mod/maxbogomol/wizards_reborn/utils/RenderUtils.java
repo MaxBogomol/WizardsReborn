@@ -9,6 +9,7 @@ import com.mojang.blaze3d.vertex.VertexConsumer;
 import com.mojang.blaze3d.vertex.VertexFormat;
 import com.mojang.math.Axis;
 import mod.maxbogomol.wizards_reborn.WizardsReborn;
+import mod.maxbogomol.wizards_reborn.WizardsRebornClient;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.model.EntityModel;
 import net.minecraft.client.model.HumanoidModel;
@@ -59,7 +60,7 @@ public class RenderUtils {
                     .setLightmapState(new RenderStateShard.LightmapStateShard(false))
                     .setTransparencyState(ADDITIVE_TRANSPARENCY)
                     .setTextureState(new RenderStateShard.TextureStateShard(TextureAtlas.LOCATION_PARTICLES, false, false))
-                    .setShaderState(new RenderStateShard.ShaderStateShard(WizardsReborn::getGlowingParticleShader))
+                    .setShaderState(new RenderStateShard.ShaderStateShard(WizardsRebornClient::getGlowingParticleShader))
                     .createCompositeState(false));
 
     public static RenderType DELAYED_PARTICLE = RenderType.create(
@@ -70,7 +71,7 @@ public class RenderUtils {
                     .setWriteMaskState(new RenderStateShard.WriteMaskStateShard(true, false))
                     .setTransparencyState(NORMAL_TRANSPARENCY)
                     .setTextureState(new RenderStateShard.TextureStateShard(TextureAtlas.LOCATION_PARTICLES, false, false))
-                    .setShaderState(new RenderStateShard.ShaderStateShard(WizardsReborn::getSpriteParticleShader))
+                    .setShaderState(new RenderStateShard.ShaderStateShard(WizardsRebornClient::getSpriteParticleShader))
                     .createCompositeState(false));
 
     public static void renderItemModelInGui(ItemStack stack, int x, int y, int xSize, int ySize, int zSize) {

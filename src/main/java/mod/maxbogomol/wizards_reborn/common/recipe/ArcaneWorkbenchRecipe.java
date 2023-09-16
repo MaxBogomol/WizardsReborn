@@ -28,7 +28,6 @@ import net.minecraft.world.item.crafting.RecipeType;
 import net.minecraft.world.item.crafting.ShapedRecipe;
 
 public class ArcaneWorkbenchRecipe implements Recipe<Container> {
-
     public static ResourceLocation TYPE_ID = new ResourceLocation(WizardsReborn.MOD_ID, "arcane_workbench");
     private final ResourceLocation id;
     private final ItemStack output;
@@ -136,7 +135,7 @@ public class ArcaneWorkbenchRecipe implements Recipe<Container> {
         @Nullable
         @Override
         public ArcaneWorkbenchRecipe fromNetwork(ResourceLocation recipeId, FriendlyByteBuf buffer) {
-            Ingredient[] inputs = new Ingredient[buffer.readVarInt()];
+            Ingredient[] inputs = new Ingredient[buffer.readInt()];
             for (int i = 0; i < inputs.length; i++) {
                 inputs[i] = Ingredient.fromNetwork(buffer);
             }
@@ -147,12 +146,12 @@ public class ArcaneWorkbenchRecipe implements Recipe<Container> {
 
         @Override
         public void toNetwork(FriendlyByteBuf buffer, ArcaneWorkbenchRecipe recipe) {
-            buffer.writeVarInt(recipe.getIngredients().size());
+            buffer.writeInt(recipe.getIngredients().size());
             for (Ingredient input : recipe.getIngredients()) {
                 input.toNetwork(buffer);
             }
             buffer.writeItemStack(recipe.getResultItem(RegistryAccess.EMPTY), false);
-            buffer.writeVarInt(recipe.getRecipeWissen());
+            buffer.writeInt(recipe.getRecipeWissen());
         }
     }
 

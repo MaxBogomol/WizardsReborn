@@ -69,14 +69,17 @@ public class WissenWandItem extends Item {
 
             stack.setTag(nbt);
             player.displayClientMessage(getModeTranslate(stack), true);
+
+            return new InteractionResultHolder<ItemStack>(InteractionResult.SUCCESS, stack);
         }
 
-        return new InteractionResultHolder<ItemStack>(InteractionResult.SUCCESS, stack);
+        return new InteractionResultHolder<ItemStack>(InteractionResult.PASS, stack);
     }
 
     @Override
     public InteractionResult onItemUseFirst(ItemStack stack, UseOnContext context) {
         Level world = context.getLevel();
+        InteractionResult result = InteractionResult.PASS;
 
         if(!world.isClientSide) {
             BlockEntity tileentity = world.getBlockEntity(context.getClickedPos());
@@ -103,6 +106,7 @@ public class WissenWandItem extends Item {
                             nbt.putInt("blockY", context.getClickedPos().getY());
                             nbt.putInt("blockZ", context.getClickedPos().getZ());
                             nbt.putBoolean("block", true);
+                            result = InteractionResult.SUCCESS;
                         }
                     } else {
                         if (tileentity instanceof WissenTranslatorTileEntity) {
@@ -121,6 +125,7 @@ public class WissenWandItem extends Item {
                                             translator.isFromBlock = true;
                                             nbt.putBoolean("block", false);
                                             PacketUtils.SUpdateTileEntityPacket(translator);
+                                            result = InteractionResult.SUCCESS;
                                         }
                                     }
                                 } else if (nbt.getInt("mode") == 2) {
@@ -133,6 +138,7 @@ public class WissenWandItem extends Item {
                                             translator.isToBlock = true;
                                             nbt.putBoolean("block", false);
                                             PacketUtils.SUpdateTileEntityPacket(translator);
+                                            result = InteractionResult.SUCCESS;
                                         }
                                     }
                                 }
@@ -142,6 +148,7 @@ public class WissenWandItem extends Item {
                                 translator.isFromBlock = false;
                                 translator.isToBlock = false;
                                 PacketUtils.SUpdateTileEntityPacket(translator);
+                                result = InteractionResult.SUCCESS;
                             }
                         }
                     }
@@ -154,11 +161,12 @@ public class WissenWandItem extends Item {
                         functionalTile.wissenWandFuction();
                     }
                     stack.setTag(nbt);
+                    result = InteractionResult.SUCCESS;
                 }
             }
         }
 
-        return super.onItemUseFirst(stack, context);
+        return result;
     }
 
 
@@ -246,6 +254,7 @@ public class WissenWandItem extends Item {
         return mode;
     }
 
+    @OnlyIn(Dist.CLIENT)
     public static void drawWissenGui(GuiGraphics gui) {
         Minecraft mc = Minecraft.getInstance();
         Player player = mc.player;

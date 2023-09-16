@@ -20,7 +20,6 @@ import net.minecraft.world.item.crafting.RecipeType;
 import net.minecraft.world.item.crafting.ShapedRecipe;
 
 public class ArcanumDustTransmutationRecipe implements Recipe<Container>  {
-
     public static ResourceLocation TYPE_ID = new ResourceLocation(WizardsReborn.MOD_ID, "arcanum_dust_transmutation");
     private final ResourceLocation id;
     private final Ingredient recipeItem;

@@ -2,7 +2,7 @@ package mod.maxbogomol.wizards_reborn.common.network;
 
 import java.util.function.Supplier;
 
-import net.minecraft.client.Minecraft;
+import mod.maxbogomol.wizards_reborn.WizardsReborn;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.world.level.block.entity.BlockEntity;
@@ -35,7 +35,7 @@ public class TESyncPacket {
             public void run() {
                 Level world;
                 if (ctx.get().getDirection() == NetworkDirection.PLAY_TO_CLIENT)
-                    world = Minecraft.getInstance().level;
+                    world = WizardsReborn.proxy.getWorld();
                 else {
                     if (ctx.get().getSender() == null) return;
                     world = ctx.get().getSender().level();
