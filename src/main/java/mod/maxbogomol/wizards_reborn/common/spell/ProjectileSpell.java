@@ -56,22 +56,19 @@ public class ProjectileSpell extends Spell {
             });
             if (ray.getType() == HitResult.Type.ENTITY) {
                 entity.onImpact(ray, ((EntityHitResult)ray).getEntity());
-            }
-            else if (ray.getType() == HitResult.Type.BLOCK) {
+            } else if (ray.getType() == HitResult.Type.BLOCK) {
                 entity.onImpact(ray);
+            } else {
+                Vec3 motion = entity.getDeltaMovement();
+                entity.setDeltaMovement(motion.x * 0.98, (motion.y > 0 ? motion.y * 0.98 : motion.y) - 0.01f, motion.z * 0.98);
+
+                Vec3 pos = entity.position();
+                entity.xo = pos.x;
+                entity.yo = pos.y;
+                entity.zo = pos.z;
+                entity.setPos(pos.x + motion.x, pos.y + motion.y, pos.z + motion.z);
             }
-        }
 
-        Vec3 motion = entity.getDeltaMovement();
-        entity.setDeltaMovement(motion.x * 0.98, (motion.y > 0 ? motion.y * 0.98 : motion.y) - 0.01f, motion.z * 0.98);
-
-        Vec3 pos = entity.position();
-        entity.xo = pos.x;
-        entity.yo = pos.y;
-        entity.zo = pos.z;
-        entity.setPos(pos.x + motion.x, pos.y + motion.y, pos.z + motion.z);
-
-        if (!entity.level().isClientSide) {
             entity.rayEffect();
         }
     }

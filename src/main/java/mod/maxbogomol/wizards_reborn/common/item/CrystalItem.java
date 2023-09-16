@@ -85,7 +85,7 @@ public class CrystalItem extends BlockItem implements IParticleItem {
             int blue = (int) Mth.lerp((float) statlevel / stat.getMaxLevel(), Color.GRAY.getBlue(), color.getBlue());
 
             int packColor = ColorUtils.packColor(255, red, green, blue);
-            list.add(Component.translatable(stat.getTranslatedName()).append(" " + statlevel).withStyle(Style.EMPTY.withColor(packColor)));
+            list.add(Component.translatable(stat.getTranslatedName()).append(": " + statlevel).withStyle(Style.EMPTY.withColor(packColor)));
         }
     }
 

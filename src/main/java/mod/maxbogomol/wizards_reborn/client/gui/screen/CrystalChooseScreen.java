@@ -160,6 +160,10 @@ public class CrystalChooseScreen extends Screen {
 
                 i = i + 1F;
             }
+
+            if (selectedSpell != null) {
+                gui.renderTooltip(Minecraft.getInstance().font, Component.translatable(selectedSpell.getTranslatedName()), mouseX, mouseY);
+            }
         }
     }
 

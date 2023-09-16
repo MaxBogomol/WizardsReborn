@@ -146,10 +146,24 @@ public class ArcaneWandItem extends Item implements IWissenItem {
         return super.onItemUseFirst(stack, context);
     }
 
+    @Override
+    public Component getName(ItemStack stack) {
+        Component displayName = super.getName(stack);
+
+        CompoundTag nbt = stack.getOrCreateTag();
+        if (nbt.getBoolean("crystal")) {
+            if (ArcaneWandItem.getInventory(stack).getItem(0).getItem() instanceof CrystalItem crystal) {
+                Component crystalName = getCrystalTranslate(crystal.getName(stack));
+                return displayName.copy().append(crystalName);
+            }
+        }
+
+        return displayName;
+    }
+
     @OnlyIn(Dist.CLIENT)
     @Override
     public void appendHoverText(ItemStack stack, Level world, List<Component> list, TooltipFlag flags) {
-        list.add(Component.empty());
         list.add(Component.translatable("lore.wizards_reborn.arcane_wand.crystal").withStyle(ChatFormatting.GRAY));
 
         CompoundTag nbt = stack.getOrCreateTag();
@@ -164,12 +178,11 @@ public class ArcaneWandItem extends Item implements IWissenItem {
                     int blue = (int) Mth.lerp((float) statlevel / stat.getMaxLevel(), Color.GRAY.getBlue(), color.getBlue());
 
                     int packColor = ColorUtils.packColor(255, red, green, blue);
-                    list.add(Component.literal(" ").append(Component.translatable(stat.getTranslatedName()).append(" " + statlevel).withStyle(Style.EMPTY.withColor(packColor))));
+                    list.add(Component.literal(" ").append(Component.translatable(stat.getTranslatedName()).append(": " + statlevel).withStyle(Style.EMPTY.withColor(packColor))));
                 }
             }
         }
 
-        list.add(Component.empty());
         list.add(Component.translatable("lore.wizards_reborn.arcane_wand.spell").withStyle(ChatFormatting.GRAY));
 
         if (nbt.getString("spell") != "") {
@@ -178,6 +191,11 @@ public class ArcaneWandItem extends Item implements IWissenItem {
             int packColor = ColorUtils.packColor(255, color.getRed(), color.getGreen(), color.getBlue());
             list.add(Component.literal(" ").append(Component.translatable(spell.getTranslatedName()).withStyle(Style.EMPTY.withColor(packColor))));
         }
+    }
+
+    public static Component getCrystalTranslate(Component component) {
+        Component crystal = Component.literal(" - ").append(component);
+        return crystal;
     }
 
     public static void drawWandGui(GuiGraphics gui) {
