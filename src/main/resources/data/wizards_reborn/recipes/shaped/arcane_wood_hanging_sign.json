@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "group": "sign",
+  "pattern": [
+    "X X",
+    "###",
+    "###",
+  ],
+  "key": {
+    "#": {
+      "item": "wizards_reborn:stripped_arcane_wood_log"
+    },
+    "X": {
+      "item": "minecraft:chain"
+    }
+  },
+  "result": {
+    "item": "wizards_reborn:arcane_wood_hanging_sign",
+    "count": 6
+  }
+}

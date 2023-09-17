@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "wizards_reborn:raw_arcane_gold_block"
+    }
+  ],
+  "result": {
+    "item": "wizards_reborn:raw_arcane_gold",
+    "count": 9
+  }
+}
