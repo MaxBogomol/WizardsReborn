@@ -124,7 +124,7 @@ jar {
             "Specification-Vendor": "MaxBogomol",
             "Specification-Version": "1",
             "Implementation-Title": project.name,
-            "Implementation-Version": project.version,
+            "Implementation-Version": "${version}",
             "Implementation-Vendor" :"MaxBogomol",
             "Implementation-Timestamp": new Date().format("yyyy-MM-dd'T'HH:mm:ssZ")
         ])

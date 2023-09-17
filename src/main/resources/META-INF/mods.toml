@@ -1,16 +1,15 @@
 modLoader="javafml"
 loaderVersion="[47,)"
-license="All rights reserved"
+license="GPL-2.0"
 
 [[mods]]
 modId="wizards_reborn"
 version="1.20.1-0.0.1"
 displayName="Wizard's Reborn"
 logoFile="wizards_reborn.png"
-credits="Thanks for this example mod goes to Java"
-authors="Love, Cheese and small house plants"
+authors="MaxBogomol"
 description='''
-
+Adds magical things
 '''
 
 [[dependencies.wizards_reborn]]
@@ -26,3 +25,17 @@ description='''
     versionRange="[1.20.1,1.21)"
     ordering="NONE"
     side="BOTH"
+
+[[dependencies.wizards_reborn]]
+    modId = "curios"
+    mandatory = true
+    versionRange = "[5.2.0-beta.3+1.20.1,)"
+    ordering = "AFTER"
+    side = "BOTH"
+
+[[dependencies.wizards_reborn]]
+    modId = "caelus"
+    mandatory = true
+    versionRange = "[3.1.0+1.20,)"
+    ordering = "AFTER"
+    side = "BOTH"
