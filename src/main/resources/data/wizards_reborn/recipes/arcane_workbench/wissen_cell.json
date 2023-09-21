@@ -1,0 +1,30 @@
+{
+  "type": "wizards_reborn:arcane_workbench",
+  "pattern": [
+    "_L_",
+    "#B#",
+    "###",
+    "AGGG"
+  ],
+  "key": {
+    "B": {
+      "item": "wizards_reborn:arcanum_block"
+    },
+    "#": {
+      "item": "wizards_reborn:arcane_wood_planks"
+    },
+    "L": {
+      "item": "wizards_reborn:wissen_altar"
+    },
+    "G": {
+      "item": "wizards_reborn:arcane_gold_ingot"
+    },
+    "A": {
+      "item": "wizards_reborn:arcanum"
+    }
+  },
+  "output": {
+    "item": "wizards_reborn:wissen_cell"
+  },
+  "wissen": 5000
+}

@@ -3,6 +3,7 @@ package mod.maxbogomol.wizards_reborn.common.item;
 import mod.maxbogomol.wizards_reborn.WizardsReborn;
 import mod.maxbogomol.wizards_reborn.api.crystal.CrystalStat;
 import mod.maxbogomol.wizards_reborn.api.crystal.CrystalType;
+import mod.maxbogomol.wizards_reborn.api.crystal.CrystalUtils;
 import mod.maxbogomol.wizards_reborn.api.crystal.PolishingType;
 import mod.maxbogomol.wizards_reborn.client.particle.Particles;
 import mod.maxbogomol.wizards_reborn.common.block.CrystalBlock;
@@ -18,9 +19,11 @@ import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.util.Mth;
 import net.minecraft.world.InteractionResult;
+import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.BlockItem;
+import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.item.context.BlockPlaceContext;
@@ -71,6 +74,26 @@ public class CrystalItem extends BlockItem implements IParticleItem {
             statlevel = nbt.getInt(stat.getId());
         }
         return statlevel;
+    }
+
+    public static ItemStack creativeTabRandomStats(Item item) {
+        ItemStack stack = item.getDefaultInstance();
+        CompoundTag nbt = stack.getOrCreateTag();
+        nbt.putBoolean("random_stats", true);
+        stack.setTag(nbt);
+        return stack;
+    }
+
+    @Override
+    public void inventoryTick(ItemStack stack, Level world, Entity entity, int slot, boolean isSelected) {
+        if (!world.isClientSide()) {
+            CompoundTag nbt = stack.getOrCreateTag();
+            if (nbt.contains("random_stats")) {
+                nbt.remove("random_stats");
+                CrystalUtils.createCrystalItemStats(stack, getType(), world, 6);
+                stack.setTag(nbt);
+            }
+        }
     }
 
     @OnlyIn(Dist.CLIENT)

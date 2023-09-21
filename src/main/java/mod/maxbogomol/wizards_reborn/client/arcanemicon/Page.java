@@ -45,7 +45,10 @@ public abstract class Page {
         String[] words = text.split(" ");
         String line = "";
         for (String s : words) {
-            if (font.width(line) + font.width(s) > w) {
+            if (s.equals("\n")) {
+                lines.add(line);
+                line = "";
+            } else if (font.width(line) + font.width(s) > w) {
                 lines.add(line);
                 line = s + " ";
             }

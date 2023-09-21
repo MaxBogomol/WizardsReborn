@@ -36,7 +36,7 @@ apply plugin: 'eclipse'
 apply plugin: 'maven-publish'
 apply plugin: 'org.parchmentmc.librarian.forgegradle'
 
-version = '1.20.1-0.0.1'
+version = '1.20.1-0.0.2'
 group = 'mod.maxbogomol.wizards_reborn'
 archivesBaseName = 'wizards_reborn'
 

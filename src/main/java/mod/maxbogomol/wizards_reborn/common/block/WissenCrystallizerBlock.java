@@ -93,16 +93,15 @@ public class WissenCrystallizerBlock extends Block implements EntityBlock, Simpl
         ItemStack stack = player.getItemInHand(hand).copy();
 
         int invSize = tile.getInventorySize();
-        boolean isWand = false;
 
         if (stack.getItem() instanceof WissenWandItem) {
             if (WissenWandItem.getMode(stack) != 4) {
-                isWand = true;
+                return InteractionResult.SUCCESS;
             }
         }
 
         if (!player.isShiftKeyDown()) {
-            if (invSize < 11 && !isWand) {
+            if (invSize < 11) {
                 int slot = invSize;
                 if ((!stack.isEmpty()) && (tile.getItemHandler().getItem(slot).isEmpty())) {
                     if (stack.getCount() > 1) {

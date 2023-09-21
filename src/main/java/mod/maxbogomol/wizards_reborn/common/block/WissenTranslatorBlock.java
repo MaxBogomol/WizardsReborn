@@ -167,7 +167,7 @@ public class WissenTranslatorBlock extends FaceAttachedHorizontalDirectionalBloc
 
         if (stack.getItem() instanceof WissenWandItem) {
             if (WissenWandItem.getMode(stack) != 4) {
-                return InteractionResult.PASS;
+                return InteractionResult.SUCCESS;
             }
         }
 

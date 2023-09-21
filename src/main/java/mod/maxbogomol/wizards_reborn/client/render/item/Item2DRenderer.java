@@ -74,7 +74,7 @@ public class Item2DRenderer {
                 @Override
                 public BakedModel applyTransform(ItemDisplayContext transformType, PoseStack poseStack, boolean applyLeftHandTransform) {
                     BakedModel modelToUse = bakedModelDefault;
-                    if (transformType != ItemDisplayContext.GUI && transformType != ItemDisplayContext.GROUND){
+                    if (transformType != ItemDisplayContext.GUI && transformType != ItemDisplayContext.GROUND  && transformType != ItemDisplayContext.FIXED){
                         modelToUse = bakedModelHand;
                     }
                     return ForgeHooksClient.handleCameraTransforms(poseStack, modelToUse, transformType, applyLeftHandTransform);

@@ -1,13 +1,14 @@
 package mod.maxbogomol.wizards_reborn.common.tileentity;
 
 import mod.maxbogomol.wizards_reborn.WizardsReborn;
-import mod.maxbogomol.wizards_reborn.api.wissen.*;
+import mod.maxbogomol.wizards_reborn.api.wissen.IWissenItem;
+import mod.maxbogomol.wizards_reborn.api.wissen.IWissenTileEntity;
+import mod.maxbogomol.wizards_reborn.api.wissen.WissenItemUtils;
+import mod.maxbogomol.wizards_reborn.api.wissen.WissenUtils;
 import mod.maxbogomol.wizards_reborn.client.particle.Particles;
-import mod.maxbogomol.wizards_reborn.common.network.WissenAltarSendEffectPacket;
 import mod.maxbogomol.wizards_reborn.common.network.PacketHandler;
-import mod.maxbogomol.wizards_reborn.common.recipe.WissenAltarRecipe;
+import mod.maxbogomol.wizards_reborn.common.network.WissenCellSendEffectPacket;
 import mod.maxbogomol.wizards_reborn.utils.PacketUtils;
-import mod.maxbogomol.wizards_reborn.common.network.WissenAltarBurstEffectPacket;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.Connection;
@@ -21,71 +22,28 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.Random;
 
-public class WissenAltarTileEntity extends TileSimpleInventory implements TickableBlockEntity, IWissenTileEntity, ICooldownTileEntity {
-
-    public int wissenInItem = 0;
-    public int wissenIsCraft = 0;
-
+public class WissenCellTileEntity extends TileSimpleInventory implements TickableBlockEntity, IWissenTileEntity {
     public int wissen = 0;
 
     public Random random = new Random();
 
-    public WissenAltarTileEntity(BlockEntityType<?> type, BlockPos pos, BlockState state) {
+    public WissenCellTileEntity(BlockEntityType<?> type, BlockPos pos, BlockState state) {
         super(type, pos, state);
     }
 
-    public WissenAltarTileEntity(BlockPos pos, BlockState state) {
-        this(WizardsReborn.WISSEN_ALTAR_TILE_ENTITY.get(), pos, state);
+    public WissenCellTileEntity(BlockPos pos, BlockState state) {
+        this(WizardsReborn.WISSEN_CELL_TILE_ENTITY.get(), pos, state);
     }
 
     @Override
     public void tick() {
         if (!level.isClientSide()) {
-            if ((getItemHandler().getItem(2).isEmpty()) && (!getItemHandler().getItem(1).isEmpty())) {
-                getItemHandler().setItem(2, getItemHandler().getItem(1).copy());
-                getItemHandler().getItem(2).setCount(1);
-                if (getItemHandler().getItem(1).getCount()>  1) {
-                    getItemHandler().getItem(1).setCount(getItemHandler().getItem(1).getCount() - 1);
-                } else {
-                    getItemHandler().removeItemNoUpdate(1);
-                }
-
-                PacketUtils.SUpdateTileEntityPacket(this);
-            }
-
-            SimpleContainer inv = new SimpleContainer(1);
-            inv.setItem(0, getItemHandler().getItem(2));
-            wissenInItem = 0;
-            wissenInItem = level.getRecipeManager().getRecipeFor(WizardsReborn.WISSEN_ALTAR_RECIPE.get(), inv, level)
-                    .map(WissenAltarRecipe::getRecipeWissen)
-                    .orElse(0);
-
-            if ((wissenInItem > 0) && (wissen < getMaxWissen())) {
-                int addRemainCraft = WissenUtils.getAddWissenRemain(wissenIsCraft, getWissenPerTick(), wissenInItem);
-                int addRemain = WissenUtils.getAddWissenRemain(getWissen(), getWissenPerTick() - addRemainCraft, getMaxWissen());
-
-                wissenIsCraft = wissenIsCraft + (getWissenPerTick() - addRemainCraft - addRemain);
-                addWissen(getWissenPerTick() - addRemainCraft - addRemain);
-
-                PacketUtils.SUpdateTileEntityPacket(this);
-            }
-
-            if (wissenInItem > 0) {
-                if (wissenInItem <= wissenIsCraft) {
-                    getItemHandler().removeItemNoUpdate(2);
-                    wissenInItem = 0;
-                    wissenIsCraft = 0;
-
-                    PacketHandler.sendToTracking(level, getBlockPos(), new WissenAltarBurstEffectPacket(getBlockPos()));
-                }
-            }
-
             if (wissen > 0) {
                 if (!getItemHandler().getItem(0).isEmpty()) {
                     ItemStack stack = getItemHandler().getItem(0);
                     if (stack.getItem() instanceof IWissenItem) {
                         IWissenItem item = (IWissenItem) stack.getItem();
-                        int wissen_remain = WissenUtils.getRemoveWissenRemain(wissen, 100);
+                        int wissen_remain = WissenUtils.getRemoveWissenRemain(wissen, 250);
                         wissen_remain = 100 - wissen_remain;
                         WissenItemUtils.existWissen(stack);
                         int item_wissen_remain = WissenItemUtils.getAddWissenRemain(stack, wissen_remain, item.getMaxWissen());
@@ -94,7 +52,7 @@ public class WissenAltarTileEntity extends TileSimpleInventory implements Tickab
                             WissenItemUtils.addWissen(stack, wissen_remain, item.getMaxWissen());
                             wissen = wissen - wissen_remain;
                             if (random.nextFloat() < 0.5) {
-                                PacketHandler.sendToTracking(level, getBlockPos(), new WissenAltarSendEffectPacket(getBlockPos()));
+                                PacketHandler.sendToTracking(level, getBlockPos(), new WissenCellSendEffectPacket(getBlockPos()));
                             }
 
                             PacketUtils.SUpdateTileEntityPacket(this);
@@ -112,28 +70,16 @@ public class WissenAltarTileEntity extends TileSimpleInventory implements Tickab
                             .setAlpha(0.25f, 0).setScale(0.3f * getStage(), 0)
                             .setColor(0.466f, 0.643f, 0.815f)
                             .setLifetime(20)
-                            .spawn(level, worldPosition.getX() + 0.5F, worldPosition.getY() + 1.3125F, worldPosition.getZ() + 0.5F);
+                            .spawn(level, worldPosition.getX() + 0.5F, worldPosition.getY() + 0.9375F, worldPosition.getZ() + 0.5F);
                 }
-                if (random.nextFloat() < 0.1) {
+                if (random.nextFloat() < 0.4) {
                     Particles.create(WizardsReborn.SPARKLE_PARTICLE)
-                            .addVelocity(((random.nextDouble() - 0.5D) / 30) * getStage(), ((random.nextDouble() - 0.5D) / 30) * getStage(), ((random.nextDouble() - 0.5D) / 30) * getStage())
-                            .setAlpha(0.25f, 0).setScale(0.1f * getStage(), 0)
-                            .setColor(0.466f, 0.643f, 0.815f)
-                            .setLifetime(30)
-                            .setSpin((0.5f * (float) ((random.nextDouble() - 0.5D) * 2)))
-                            .spawn(level, worldPosition.getX() + 0.5F, worldPosition.getY() + 1.3125F, worldPosition.getZ() + 0.5F);
-                }
-            }
-
-            if (wissenInItem > 0) {
-                if (random.nextFloat() < 0.2) {
-                    Particles.create(WizardsReborn.SPARKLE_PARTICLE)
-                            .addVelocity(((random.nextDouble() - 0.5D) / 20), ((random.nextDouble() - 0.5D) / 20), ((random.nextDouble() - 0.5D) / 20))
-                            .setAlpha(0.25f, 0).setScale(0.1f * getStage(), 0)
-                            .setColor(0.466f, 0.643f, 0.815f)
-                            .setLifetime(30)
-                            .setSpin((0.5f * (float) ((random.nextDouble() - 0.5D) * 2)))
-                            .spawn(level, worldPosition.getX() + 0.5F, worldPosition.getY() + 1.3125F, worldPosition.getZ() + 0.5F);
+                            .addVelocity(((random.nextDouble() - 0.5D) / 40) * getStage(), ((random.nextDouble() - 0.5D) / 40) * getStage(), ((random.nextDouble() - 0.5D) / 40) * getStage())
+                            .setAlpha(0.25f, 0).setScale(0.2f * getStage(), 0)
+                            .setColor(0.466f, 0.643f, 0.815f, 0.5f, 0.5f, 0)
+                            .setLifetime(100)
+                            .setSpin((0.1f * (float) ((random.nextDouble() - 0.5D) * 2)))
+                            .spawn(level, worldPosition.getX() + 0.5F, worldPosition.getY() + 0.9375F, worldPosition.getZ() + 0.5F);
                 }
             }
         }
@@ -141,7 +87,7 @@ public class WissenAltarTileEntity extends TileSimpleInventory implements Tickab
 
     @Override
     protected SimpleContainer createItemHandler() {
-        return new SimpleContainer(3) {
+        return new SimpleContainer(1) {
             @Override
             public int getMaxStackSize() {
                 return 64;
@@ -171,16 +117,12 @@ public class WissenAltarTileEntity extends TileSimpleInventory implements Tickab
     @Override
     public void saveAdditional(CompoundTag tag) {
         super.saveAdditional(tag);
-        tag.putInt("wissenInItem", wissenInItem);
-        tag.putInt("wissenIsCraft", wissenIsCraft);
         tag.putInt("wissen", wissen);
     }
 
     @Override
     public void load(CompoundTag tag) {
         super.load(tag);
-        wissenInItem = tag.getInt("wissenInItem");
-        wissenIsCraft = tag.getInt("wissenIsCraft");
         wissen = tag.getInt("wissen");
     }
 
@@ -203,13 +145,6 @@ public class WissenAltarTileEntity extends TileSimpleInventory implements Tickab
         return ((float) getWissen() / (float) getMaxWissen());
     }
 
-    public float getCraftingStage () {
-        if (wissenInItem <= 0) {
-            return 1F;
-        }
-        return (1F - ((float) wissenIsCraft / (float) wissenInItem));
-    }
-
     @Override
     public int getWissen() {
         return wissen;
@@ -217,7 +152,7 @@ public class WissenAltarTileEntity extends TileSimpleInventory implements Tickab
 
     @Override
     public int getMaxWissen() {
-        return 10000;
+        return 100000;
     }
 
     @Override
@@ -227,12 +162,12 @@ public class WissenAltarTileEntity extends TileSimpleInventory implements Tickab
 
     @Override
     public boolean canReceiveWissen() {
-        return false;
+        return true;
     }
 
     @Override
     public boolean canConnectSendWissen() {
-        return false;
+        return true;
     }
 
     @Override
@@ -269,17 +204,5 @@ public class WissenAltarTileEntity extends TileSimpleInventory implements Tickab
         if (this.wissen < 0) {
             this.wissen = 0;
         }
-    }
-
-    public int getWissenPerTick() {
-        return 10;
-    }
-
-    @Override
-    public float getCooldown() {
-        if (wissenInItem > 0) {
-            return (float) wissenInItem / wissenIsCraft;
-        }
-        return 0;
     }
 }

@@ -138,8 +138,10 @@ public class ArcaneWandItem extends Item implements IWissenItem {
         if (!context.getLevel().isClientSide) {
             CompoundTag nbt = stack.getTag();
             if (nbt.getBoolean("crystal") && nbt.getInt("cooldown") <= 0) {
-                Spell spell = Spells.getSpell(nbt.getString("spell"));
-                spell.onWandUseFirst(stack, context);
+                if (nbt.getString("spell") != "") {
+                    Spell spell = Spells.getSpell(nbt.getString("spell"));
+                    spell.onWandUseFirst(stack, context);
+                }
             }
         }
 

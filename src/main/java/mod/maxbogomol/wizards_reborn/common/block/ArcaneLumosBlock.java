@@ -5,6 +5,7 @@ import mod.maxbogomol.wizards_reborn.client.event.ClientTickHandler;
 import mod.maxbogomol.wizards_reborn.client.particle.Particles;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.client.particle.ParticleEngine;
@@ -123,8 +124,8 @@ public class ArcaneLumosBlock extends Block {
     }
 
     @Override
-    public void updateEntityAfterFallOn(BlockGetter pLevel, Entity pEntity) {
-
+    public boolean addRunningEffects(BlockState state, Level level, BlockPos pos, Entity entity) {
+        return true;
     }
 
     public static Color getColor(Colors color) {

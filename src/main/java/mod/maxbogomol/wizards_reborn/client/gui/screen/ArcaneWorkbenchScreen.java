@@ -6,6 +6,7 @@ import mod.maxbogomol.wizards_reborn.client.event.ClientTickHandler;
 import mod.maxbogomol.wizards_reborn.client.gui.container.ArcaneWorkbenchContainer;
 import mod.maxbogomol.wizards_reborn.common.recipe.ArcaneWorkbenchRecipe;
 import mod.maxbogomol.wizards_reborn.common.tileentity.ArcaneWorkbenchTileEntity;
+import mod.maxbogomol.wizards_reborn.utils.RenderUtils;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
@@ -52,9 +53,8 @@ public class ArcaneWorkbenchScreen extends AbstractContainerScreen<ArcaneWorkben
                 RenderSystem.setShaderColor(1f, 1f, 1f, (float) (0.5f + (Math.sin(Math.toRadians(ticks)) * 0.25)));
                 gui.renderItem(workbench.getItemHandler().getItem(0), i + 146, j + 48);
                 gui.renderItemDecorations(Minecraft.getInstance().font, workbench.getItemHandler().getItem(0), i + 146, j + 48);
+                RenderSystem.setShaderColor(1f, 1f, 1f, 1f);
             }
         }
-
-        RenderSystem.setShaderColor(1f, 1f, 1f, 1f);
     }
 }

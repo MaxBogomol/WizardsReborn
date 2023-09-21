@@ -1,6 +1,7 @@
 package mod.maxbogomol.wizards_reborn.client.gui.screen;
 
 import com.mojang.blaze3d.vertex.PoseStack;
+import mod.maxbogomol.wizards_reborn.WizardsReborn;
 import mod.maxbogomol.wizards_reborn.api.spell.Spell;
 import mod.maxbogomol.wizards_reborn.api.spell.Spells;
 import mod.maxbogomol.wizards_reborn.common.network.SetSpellPacket;
@@ -109,6 +110,15 @@ public class CrystalChooseScreen extends Screen {
         }
 
         this.mouseX = mouseX;
+
+        if (mode == Mode.CHOOSE) {
+            int x = width / 2;
+            int y = height / 2;
+
+            RenderUtils.renderItemModelInGui(new ItemStack(WizardsReborn.EARTH_CRYSTAL.get()), x - 48, y - 16, 32, 32, 32);
+
+            gui.blit(WizardsReborn.EARTH_PROJECTILE_SPELL.getIcon(), x + 16, y - 16, 0, 0, 32, 32, 32, 32);
+        }
 
         if (mode == Mode.CRYSTAL) {
             if (hover) {

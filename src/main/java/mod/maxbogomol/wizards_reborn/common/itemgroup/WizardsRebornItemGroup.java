@@ -1,6 +1,8 @@
 package mod.maxbogomol.wizards_reborn.common.itemgroup;
 
 import mod.maxbogomol.wizards_reborn.WizardsReborn;
+import mod.maxbogomol.wizards_reborn.common.item.CrystalItem;
+import mod.maxbogomol.wizards_reborn.common.item.FracturedCrystalItem;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.item.CreativeModeTab;
@@ -87,53 +89,48 @@ public class WizardsRebornItemGroup {
             event.accept(WizardsReborn.FIRE_CRYSTAL_SEED);
             event.accept(WizardsReborn.VOID_CRYSTAL_SEED);
 
-            event.accept(WizardsReborn.FRACTURED_EARTH_CRYSTAL);
-            event.accept(WizardsReborn.FRACTURED_WATER_CRYSTAL);
-            event.accept(WizardsReborn.FRACTURED_AIR_CRYSTAL);
-            event.accept(WizardsReborn.FRACTURED_FIRE_CRYSTAL);
-            event.accept(WizardsReborn.FRACTURED_VOID_CRYSTAL);
+            event.accept(FracturedCrystalItem.creativeTabRandomStats(WizardsReborn.FRACTURED_EARTH_CRYSTAL.get()));
+            event.accept(FracturedCrystalItem.creativeTabRandomStats(WizardsReborn.FRACTURED_WATER_CRYSTAL.get()));
+            event.accept(FracturedCrystalItem.creativeTabRandomStats(WizardsReborn.FRACTURED_AIR_CRYSTAL.get()));
+            event.accept(FracturedCrystalItem.creativeTabRandomStats(WizardsReborn.FRACTURED_FIRE_CRYSTAL.get()));
+            event.accept(FracturedCrystalItem.creativeTabRandomStats(WizardsReborn.FRACTURED_VOID_CRYSTAL.get()));
 
-            event.accept(WizardsReborn.EARTH_CRYSTAL);
-            event.accept(WizardsReborn.WATER_CRYSTAL);
-            event.accept(WizardsReborn.AIR_CRYSTAL);
-            event.accept(WizardsReborn.FIRE_CRYSTAL);
-            event.accept(WizardsReborn.VOID_CRYSTAL);
+            event.accept(CrystalItem.creativeTabRandomStats(WizardsReborn.EARTH_CRYSTAL.get()));
+            event.accept(CrystalItem.creativeTabRandomStats(WizardsReborn.WATER_CRYSTAL.get()));
+            event.accept(CrystalItem.creativeTabRandomStats(WizardsReborn.AIR_CRYSTAL.get()));
+            event.accept(CrystalItem.creativeTabRandomStats(WizardsReborn.FIRE_CRYSTAL.get()));
+            event.accept(CrystalItem.creativeTabRandomStats(WizardsReborn.VOID_CRYSTAL.get()));
 
-            event.accept(WizardsReborn.EARTH_CRYSTAL_SEED);
-            event.accept(WizardsReborn.WATER_CRYSTAL_SEED);
-            event.accept(WizardsReborn.AIR_CRYSTAL_SEED);
-            event.accept(WizardsReborn.FIRE_CRYSTAL_SEED);
-            event.accept(WizardsReborn.VOID_CRYSTAL_SEED);
+            event.accept(CrystalItem.creativeTabRandomStats(WizardsReborn.FACETED_EARTH_CRYSTAL.get()));
+            event.accept(CrystalItem.creativeTabRandomStats(WizardsReborn.FACETED_WATER_CRYSTAL.get()));
+            event.accept(CrystalItem.creativeTabRandomStats(WizardsReborn.FACETED_AIR_CRYSTAL.get()));
+            event.accept(CrystalItem.creativeTabRandomStats(WizardsReborn.FACETED_FIRE_CRYSTAL.get()));
+            event.accept(CrystalItem.creativeTabRandomStats(WizardsReborn.FACETED_VOID_CRYSTAL.get()));
 
-            event.accept(WizardsReborn.FACETED_EARTH_CRYSTAL);
-            event.accept(WizardsReborn.FACETED_WATER_CRYSTAL);
-            event.accept(WizardsReborn.FACETED_AIR_CRYSTAL);
-            event.accept(WizardsReborn.FACETED_FIRE_CRYSTAL);
-            event.accept(WizardsReborn.FACETED_VOID_CRYSTAL);
+            event.accept(CrystalItem.creativeTabRandomStats(WizardsReborn.ADVANCED_EARTH_CRYSTAL.get()));
+            event.accept(CrystalItem.creativeTabRandomStats(WizardsReborn.ADVANCED_WATER_CRYSTAL.get()));
+            event.accept(CrystalItem.creativeTabRandomStats(WizardsReborn.ADVANCED_AIR_CRYSTAL.get()));
+            event.accept(CrystalItem.creativeTabRandomStats(WizardsReborn.ADVANCED_FIRE_CRYSTAL.get()));
+            event.accept(CrystalItem.creativeTabRandomStats(WizardsReborn.ADVANCED_VOID_CRYSTAL.get()));
 
-            event.accept(WizardsReborn.ADVANCED_EARTH_CRYSTAL);
-            event.accept(WizardsReborn.ADVANCED_WATER_CRYSTAL);
-            event.accept(WizardsReborn.ADVANCED_AIR_CRYSTAL);
-            event.accept(WizardsReborn.ADVANCED_FIRE_CRYSTAL);
-            event.accept(WizardsReborn.ADVANCED_VOID_CRYSTAL);
+            event.accept(CrystalItem.creativeTabRandomStats(WizardsReborn.MASTERFUL_EARTH_CRYSTAL.get()));
+            event.accept(CrystalItem.creativeTabRandomStats(WizardsReborn.MASTERFUL_WATER_CRYSTAL.get()));
+            event.accept(CrystalItem.creativeTabRandomStats(WizardsReborn.MASTERFUL_AIR_CRYSTAL.get()));
+            event.accept(CrystalItem.creativeTabRandomStats(WizardsReborn.MASTERFUL_FIRE_CRYSTAL.get()));
+            event.accept(CrystalItem.creativeTabRandomStats(WizardsReborn.MASTERFUL_VOID_CRYSTAL.get()));
 
-            event.accept(WizardsReborn.MASTERFUL_EARTH_CRYSTAL);
-            event.accept(WizardsReborn.MASTERFUL_WATER_CRYSTAL);
-            event.accept(WizardsReborn.MASTERFUL_AIR_CRYSTAL);
-            event.accept(WizardsReborn.MASTERFUL_FIRE_CRYSTAL);
-            event.accept(WizardsReborn.MASTERFUL_VOID_CRYSTAL);
-
-            event.accept(WizardsReborn.PURE_EARTH_CRYSTAL);
-            event.accept(WizardsReborn.PURE_WATER_CRYSTAL);
-            event.accept(WizardsReborn.PURE_AIR_CRYSTAL);
-            event.accept(WizardsReborn.PURE_FIRE_CRYSTAL);
-            event.accept(WizardsReborn.PURE_VOID_CRYSTAL);
+            event.accept(CrystalItem.creativeTabRandomStats(WizardsReborn.PURE_EARTH_CRYSTAL.get()));
+            event.accept(CrystalItem.creativeTabRandomStats(WizardsReborn.PURE_WATER_CRYSTAL.get()));
+            event.accept(CrystalItem.creativeTabRandomStats(WizardsReborn.PURE_AIR_CRYSTAL.get()));
+            event.accept(CrystalItem.creativeTabRandomStats(WizardsReborn.PURE_FIRE_CRYSTAL.get()));
+            event.accept(CrystalItem.creativeTabRandomStats(WizardsReborn.PURE_VOID_CRYSTAL.get()));
 
             event.accept(WizardsReborn.ARCANE_PEDESTAL_ITEM);
             event.accept(WizardsReborn.WISSEN_ALTAR_ITEM);
             event.accept(WizardsReborn.WISSEN_TRANSLATOR_ITEM);
             event.accept(WizardsReborn.WISSEN_CRYSTALLIZER_ITEM);
             event.accept(WizardsReborn.ARCANE_WORKBENCH_ITEM);
+            event.accept(WizardsReborn.WISSEN_CELL_ITEM);
 
             event.accept(WizardsReborn.WHITE_ARCANE_LUMOS_ITEM);
             event.accept(WizardsReborn.ORANGE_ARCANE_LUMOS_ITEM);
