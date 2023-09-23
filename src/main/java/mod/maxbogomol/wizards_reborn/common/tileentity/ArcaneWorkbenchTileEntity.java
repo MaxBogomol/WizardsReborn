@@ -12,6 +12,7 @@ import mod.maxbogomol.wizards_reborn.common.recipe.ArcaneWorkbenchRecipe;
 import mod.maxbogomol.wizards_reborn.utils.PacketUtils;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.RegistryAccess;
+import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityTicker;
@@ -116,6 +117,7 @@ public class ArcaneWorkbenchTileEntity extends TileSimpleInventory implements Ti
 
                         PacketHandler.sendToTracking(level, getBlockPos(), new ArcaneWorkbenchBurstEffectPacket(getBlockPos()));
                         PacketUtils.SUpdateTileEntityPacket(this);
+                        level.playSound(WizardsReborn.proxy.getPlayer(), getBlockPos(), WizardsReborn.WISSEN_BURST_SOUND.get(), SoundSource.BLOCKS, 0.25f, (float) (1f + ((random.nextFloat() - 0.5D) / 4)));
                     }
                 }
             }

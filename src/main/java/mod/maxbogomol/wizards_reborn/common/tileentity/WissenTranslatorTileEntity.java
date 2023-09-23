@@ -18,6 +18,7 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.Connection;
 import net.minecraft.network.protocol.game.ClientboundBlockEntityDataPacket;
+import net.minecraft.sounds.SoundSource;
 import net.minecraft.util.Mth;
 import net.minecraft.world.SimpleContainer;
 import net.minecraft.world.entity.player.Player;
@@ -97,6 +98,7 @@ public class WissenTranslatorTileEntity extends TileSimpleInventory implements T
                             Color color = getColor();
 
                             PacketHandler.sendToTracking(level, getBlockPos(), new WissenTranslatorBurstEffectPacket(getBlockPos().getX() + 0.5f, getBlockPos().getY() + 0.5f, getBlockPos().getZ() + 0.5f, (float) color.getRed() / 255, (float) color.getGreen()/ 255, (float) color.getBlue() / 255));
+                            level.playSound(WizardsReborn.proxy.getPlayer(), getBlockPos(), WizardsReborn.WISSEN_TRANSFER_SOUND.get(), SoundSource.BLOCKS, 0.1f, (float) (1.1f + ((random.nextFloat() - 0.5D) / 2)));
                         }
                     } else {
                         isToBlock = false;
@@ -120,6 +122,7 @@ public class WissenTranslatorTileEntity extends TileSimpleInventory implements T
                             setCooldown = true;
 
                             PacketUtils.SUpdateTileEntityPacket(tileentity);
+                            level.playSound(WizardsReborn.proxy.getPlayer(), tileentity.getBlockPos(), WizardsReborn.WISSEN_TRANSFER_SOUND.get(), SoundSource.BLOCKS, 0.1f, (float) (1.1f + ((random.nextFloat() - 0.5D) / 2)));
                         }
                     } else {
                         isFromBlock = false;
@@ -476,6 +479,7 @@ public class WissenTranslatorTileEntity extends TileSimpleInventory implements T
                         int addRemain = WissenUtils.getAddWissenRemain(wissenTileEntity.getWissen(), tag.getInt("wissen"), wissenTileEntity.getMaxWissen());
                         wissenTileEntity.addWissen(tag.getInt("wissen") - addRemain);
                         PacketUtils.SUpdateTileEntityPacket(tileentity);
+                        level.playSound(WizardsReborn.proxy.getPlayer(), X, Y, Z, WizardsReborn.WISSEN_TRANSFER_SOUND.get(), SoundSource.BLOCKS, 0.1f, (float) (1f + ((random.nextFloat() - 0.5D) / 2)));
 
                         PacketHandler.sendToTracking(level, getBlockPos(), new WissenTranslatorBurstEffectPacket(X, Y, Z, (float) color.getRed() / 255, (float) color.getGreen()/ 255, (float) color.getBlue() / 255));
                         PacketHandler.sendToTracking(level, getBlockPos(), new WissenTranslatorSendEffectPacket(new BlockPos(Mth.floor(X), Mth.floor(Y), Mth.floor(Z))));

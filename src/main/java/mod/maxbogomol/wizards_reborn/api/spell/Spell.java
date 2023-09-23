@@ -19,10 +19,12 @@ import net.minecraft.world.level.Level;
 
 import java.awt.*;
 import java.util.ArrayList;
+import java.util.Random;
 
 public class Spell {
     public String id;
     public ArrayList<CrystalType> crystalTypes = new ArrayList<CrystalType>();
+    public Random random = new Random();
 
     public Spell(String id) {
         this.id = id;

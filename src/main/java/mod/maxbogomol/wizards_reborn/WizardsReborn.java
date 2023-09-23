@@ -61,6 +61,7 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.core.particles.ParticleType;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.sounds.SoundEvent;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.MobCategory;
@@ -113,6 +114,7 @@ public class WizardsReborn
     public static final DeferredRegister<RecipeType<?>> RECIPES = DeferredRegister.create(ForgeRegistries.RECIPE_TYPES, MOD_ID);
     public static final DeferredRegister<MenuType<?>> CONTAINERS = DeferredRegister.create(ForgeRegistries.MENU_TYPES, MOD_ID);
     public static final DeferredRegister<BannerPattern> BANNER_PATTERNS = DeferredRegister.create(Registries.BANNER_PATTERN, MOD_ID);
+    public static final DeferredRegister<SoundEvent> SOUND_EVENTS = DeferredRegister.create(Registries.SOUND_EVENT, MOD_ID);
 
     public static final WoodType ARCANE_WOOD_TYPE = WoodType.register(new WoodType(new ResourceLocation(MOD_ID, "arcane_wood").toString(), BlockSetType.OAK));
 
@@ -490,6 +492,11 @@ public class WizardsReborn
     public static final RegistryObject<BannerPattern> SURVIVAL_BANNER_PATTERN = BANNER_PATTERNS.register("survival", () -> new BannerPattern("wrs"));
     public static final RegistryObject<BannerPattern> ELEVATION_BANNER_PATTERN = BANNER_PATTERNS.register("elevation", () -> new BannerPattern("wre"));
 
+    public static final RegistryObject<SoundEvent> WISSEN_BURST_SOUND = SOUND_EVENTS.register("wissen_burst", () -> SoundEvent.createVariableRangeEvent(new ResourceLocation(MOD_ID, "wissen_burst")));
+    public static final RegistryObject<SoundEvent> WISSEN_TRANSFER_SOUND = SOUND_EVENTS.register("wissen_transfer", () -> SoundEvent.createVariableRangeEvent(new ResourceLocation(MOD_ID, "wissen_transfer")));
+    public static final RegistryObject<SoundEvent> SPELL_CAST_SOUND = SOUND_EVENTS.register("spell_cast", () -> SoundEvent.createVariableRangeEvent(new ResourceLocation(MOD_ID, "spell_cast")));
+    public static final RegistryObject<SoundEvent> SPELL_BURST_SOUND = SOUND_EVENTS.register("spell_burst", () -> SoundEvent.createVariableRangeEvent(new ResourceLocation(MOD_ID, "spell_burst")));
+
     public WizardsReborn() {
         InterModComms.sendTo(CuriosApi.MODID, SlotTypeMessage.REGISTER_TYPE, () -> SlotTypePreset.BELT.getMessageBuilder().build());
         InterModComms.sendTo(CuriosApi.MODID, SlotTypeMessage.REGISTER_TYPE, () -> SlotTypePreset.BODY.getMessageBuilder().build());
@@ -509,6 +516,7 @@ public class WizardsReborn
         RECIPES.register(eventBus);
         CONTAINERS.register(eventBus);
         BANNER_PATTERNS.register(eventBus);
+        SOUND_EVENTS.register(eventBus);
 
         setupMonograms();
         setupSpells();

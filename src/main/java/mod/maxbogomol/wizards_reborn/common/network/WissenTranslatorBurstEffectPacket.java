@@ -9,8 +9,6 @@ import net.minecraftforge.network.NetworkEvent;
 import java.util.Random;
 import java.util.function.Supplier;
 
-;
-
 public class WissenTranslatorBurstEffectPacket {
     private static float posX;
     private static float posY;

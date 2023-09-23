@@ -10,8 +10,6 @@ import net.minecraftforge.network.NetworkEvent;
 import java.util.Random;
 import java.util.function.Supplier;
 
-;
-
 public class WissenTranslatorSendEffectPacket {
     private static BlockPos pos;
     private static Random random = new Random();
