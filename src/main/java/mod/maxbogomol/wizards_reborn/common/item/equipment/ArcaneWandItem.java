@@ -4,7 +4,6 @@ import com.mojang.blaze3d.systems.RenderSystem;
 import mod.maxbogomol.wizards_reborn.WizardsReborn;
 import mod.maxbogomol.wizards_reborn.api.crystal.CrystalStat;
 import mod.maxbogomol.wizards_reborn.api.crystal.CrystalType;
-import mod.maxbogomol.wizards_reborn.api.knowledge.KnowledgeUtils;
 import mod.maxbogomol.wizards_reborn.api.spell.Spell;
 import mod.maxbogomol.wizards_reborn.api.spell.Spells;
 import mod.maxbogomol.wizards_reborn.api.wissen.IWissenItem;
@@ -46,7 +45,6 @@ import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import java.awt.*;
 import java.util.List;
-
 
 public class ArcaneWandItem extends Item implements IWissenItem {
     public ArcaneWandItem(Properties properties) {
@@ -95,6 +93,12 @@ public class ArcaneWandItem extends Item implements IWissenItem {
             if (nbt.contains("cooldown")) {
                 if (nbt.getInt("cooldown") > 0) {
                     nbt.putInt("cooldown", nbt.getInt("cooldown")  - 1);
+                    if (nbt.getInt("cooldown") == 0) {
+                        if (nbt.getString("spell") != "") {
+                            Spell spell = Spells.getSpell(nbt.getString("spell"));
+                            spell.onReload(stack, world, entity, slot, isSelected);
+                        }
+                    }
                 }
             }
         }
@@ -118,7 +122,6 @@ public class ArcaneWandItem extends Item implements IWissenItem {
         ItemStack stack = player.getItemInHand(hand);
 
         if (!world.isClientSide) {
-            KnowledgeUtils.removeAllKnowledge(player);
             CompoundTag nbt = stack.getTag();
             if (nbt.getString("spell") != "") {
                 Spell spell = Spells.getSpell(nbt.getString("spell"));

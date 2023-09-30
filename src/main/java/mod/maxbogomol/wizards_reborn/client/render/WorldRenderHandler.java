@@ -9,6 +9,7 @@ import net.minecraft.client.renderer.RenderType;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.client.event.RenderLevelStageEvent;
+import net.minecraftforge.fml.ModList;
 import org.joml.Matrix4f;
 import org.lwjgl.opengl.GL11;
 
@@ -20,8 +21,8 @@ public class WorldRenderHandler {
     public static Matrix4f particleMVMatrix = null;
 
     public static void onRenderWorldLast(RenderLevelStageEvent event) {
-        if (event.getStage() == RenderLevelStageEvent.Stage.AFTER_LEVEL) {
-            if (ClientConfig.BETTER_LAYERING.get()) {
+        if (ClientConfig.BETTER_LAYERING.get()) {
+            if (event.getStage() == RenderLevelStageEvent.Stage.AFTER_WEATHER) {
                 RenderSystem.getModelViewStack().pushPose();
                 RenderSystem.getModelViewStack().setIdentity();
                 if (particleMVMatrix != null) RenderSystem.getModelViewStack().mulPoseMatrix(particleMVMatrix);
@@ -33,6 +34,11 @@ public class WorldRenderHandler {
                 RenderSystem.getModelViewStack().popPose();
                 RenderSystem.applyModelViewMatrix();
             }
+
+            if (event.getStage() == RenderLevelStageEvent.Stage.AFTER_LEVEL) {
+                getDelayedRender().endBatch(RenderUtils.GLOWING_SPRITE);
+                getDelayedRender().endBatch(RenderUtils.GLOWING);
+            }
         }
     }
 
@@ -43,10 +49,12 @@ public class WorldRenderHandler {
             Map<RenderType, BufferBuilder> buffers = new HashMap<>();
             for (RenderType type : new RenderType[]{
                     RenderUtils.DELAYED_PARTICLE,
-                    RenderUtils.GLOWING_PARTICLE}) {
-                buffers.put(type, new BufferBuilder(type.bufferSize()));
+                    RenderUtils.GLOWING_PARTICLE,
+                    RenderUtils.GLOWING,
+                    RenderUtils.GLOWING_SPRITE}) {
+                buffers.put(type, new BufferBuilder(ModList.get().isLoaded("rubidium") ? 32768 : type.bufferSize()));
             }
-            DELAYED_RENDER = MultiBufferSource.immediateWithBuffers(buffers, new BufferBuilder(256));
+            DELAYED_RENDER = MultiBufferSource.immediateWithBuffers(buffers, new BufferBuilder(128));
         }
         return DELAYED_RENDER;
     }

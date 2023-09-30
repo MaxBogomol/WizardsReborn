@@ -15,7 +15,7 @@ public class EmptyRenderer<T extends Entity> extends EntityRenderer<T> {
 
     @Override
     public boolean shouldRender(T livingEntityIn, Frustum camera, double camX, double camY, double camZ) {
-        return true;
+        return false;
     }
 
     @Override

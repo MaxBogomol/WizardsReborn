@@ -1,0 +1,23 @@
+{
+    "targets": [
+        "swap",
+        "swap1"
+    ],
+    "passes": [
+        {
+            "name": "blobs2",
+            "intarget": "minecraft:main",
+            "outtarget": "swap"
+        },
+        {
+            "name": "wizards_reborn:wobble",
+            "intarget": "swap",
+            "outtarget": "swap1"
+        },
+        {
+            "name": "blit",
+            "intarget": "swap1",
+            "outtarget": "minecraft:main"
+        }
+    ]
+}

@@ -7,7 +7,8 @@
 
   ],
   "client": [
-    "client.ItemEntityMixin"
+    "client.ItemEntityMixin",
+    "client.TitleScreenMixin"
   ],
   "minVersion": "0.8",
   "injectors": {

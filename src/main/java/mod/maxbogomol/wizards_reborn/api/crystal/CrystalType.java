@@ -11,10 +11,10 @@ public class CrystalType {
     public ArrayList<CrystalStat> stats = new ArrayList<CrystalStat>();
 
     public CrystalType() {
-        addStat(new CrystalStat(WizardsReborn.MOD_ID+":focus", 3));
-        addStat(new CrystalStat(WizardsReborn.MOD_ID+":balance", 3));
-        addStat(new CrystalStat(WizardsReborn.MOD_ID+":absorption", 3));
-        addStat(new CrystalStat(WizardsReborn.MOD_ID+":resonance", 3));
+        addStat(WizardsReborn.FOCUS_CRYSTAL_STAT);
+        addStat(WizardsReborn.BALANCE_CRYSTAL_STAT);
+        addStat(WizardsReborn.ABSORPTION_CRYSTAL_STAT);
+        addStat(WizardsReborn.RESONANCE_CRYSTAL_STAT);
     }
 
     public Color getColor() {

@@ -5,20 +5,20 @@ import mod.maxbogomol.wizards_reborn.api.spell.Spells;
 import mod.maxbogomol.wizards_reborn.common.network.PacketHandler;
 import mod.maxbogomol.wizards_reborn.common.network.SpellBurstEffectPacket;
 import mod.maxbogomol.wizards_reborn.common.network.SpellProjectileRayEffectPacket;
-import net.minecraft.network.protocol.game.ClientGamePacketListener;
-import net.minecraft.world.entity.Entity;
-import net.minecraft.world.entity.EntityType;
-import net.minecraft.world.entity.projectile.ProjectileUtil;
+import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.protocol.Packet;
+import net.minecraft.network.protocol.game.ClientGamePacketListener;
 import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
 import net.minecraft.network.syncher.SynchedEntityData;
-import net.minecraft.core.BlockPos;
-import net.minecraft.world.phys.EntityHitResult;
+import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.EntityDimensions;
+import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.Pose;
+import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.HitResult;
 import net.minecraft.world.phys.Vec3;
-import net.minecraft.world.level.Level;
 import net.minecraftforge.network.NetworkHooks;
 
 import java.awt.*;
@@ -47,20 +47,24 @@ public class SpellProjectileEntity extends Entity {
     @Override
     public void tick() {
         super.tick();
-
         Spell spell = getSpell();
-
-        spell.entityTick(this);
+        if (spell != null) {
+            spell.entityTick(this);
+        }
     }
 
     public void onImpact(HitResult ray, Entity target) {
         Spell spell = getSpell();
-        spell.onImpact(ray, level(), this, level().getPlayerByUUID(getEntityData().get(casterId).get()), target);
+        if (spell != null) {
+            spell.onImpact(ray, level(), this, level().getPlayerByUUID(getEntityData().get(casterId).get()), target);
+        }
     }
 
     public void onImpact(HitResult ray) {
         Spell spell = getSpell();
-        spell.onImpact(ray, level(), this, level().getPlayerByUUID(getEntityData().get(casterId).get()));
+        if (spell != null) {
+            spell.onImpact(ray, level(), this, level().getPlayerByUUID(getEntityData().get(casterId).get()));
+        }
     }
 
     @Override
@@ -72,21 +76,26 @@ public class SpellProjectileEntity extends Entity {
 
     @Override
     protected void readAdditionalSaveData(CompoundTag compound) {
-        compound.putUUID("caster", getEntityData().get(casterId).get());
-        compound.putString("spelll", getEntityData().get(spellId));
-        compound.put("stats", getEntityData().get(crystalStats));
-    }
-
-    @Override
-    protected void addAdditionalSaveData(CompoundTag compound) {
         getEntityData().set(casterId, Optional.of(compound.getUUID("caster")));
         getEntityData().set(spellId, compound.getString("spelll"));
         getEntityData().set(crystalStats, compound.getCompound("stats"));
     }
 
     @Override
+    protected void addAdditionalSaveData(CompoundTag compound) {
+        compound.putUUID("caster", getEntityData().get(casterId).get());
+        compound.putString("spelll", getEntityData().get(spellId));
+        compound.put("stats", getEntityData().get(crystalStats));
+    }
+
+    @Override
     public Packet<ClientGamePacketListener> getAddEntityPacket() {
         return NetworkHooks.getEntitySpawningPacket(this);
+    }
+
+    @Override
+    public float getEyeHeight(Pose pPose, EntityDimensions pSize) {
+        return 0.2F;
     }
 
     public Spell getSpell() {
@@ -100,12 +109,14 @@ public class SpellProjectileEntity extends Entity {
             Vec3 norm = motion.normalize().scale(0.025f);
 
             Spell spell = getSpell();
-            Color color = spell.getColor();
-            float r = color.getRed() / 255f;
-            float g = color.getGreen() / 255f;
-            float b = color.getBlue() / 255f;
+            if (spell != null) {
+                Color color = spell.getColor();
+                float r = color.getRed() / 255f;
+                float g = color.getGreen() / 255f;
+                float b = color.getBlue() / 255f;
 
-            PacketHandler.sendToTracking(level(), new BlockPos((int) pos.x, (int) pos.y, (int) pos.z), new SpellProjectileRayEffectPacket((float) xo, (float) yo + 0.2f, (float) zo, (float) pos.x, (float) pos.y + 0.2f, (float) pos.z, (float) norm.x, (float) norm.y, (float) norm.z, r, g, b));
+                PacketHandler.sendToTracking(level(), new BlockPos((int) pos.x, (int) pos.y, (int) pos.z), new SpellProjectileRayEffectPacket((float) xo, (float) yo + 0.2f, (float) zo, (float) pos.x, (float) pos.y + 0.2f, (float) pos.z, (float) norm.x, (float) norm.y, (float) norm.z, r, g, b));
+            }
         }
     }
 
@@ -113,12 +124,14 @@ public class SpellProjectileEntity extends Entity {
         Vec3 pos = position();
 
         Spell spell = getSpell();
-        Color color = spell.getColor();
-        float r = color.getRed() / 255f;
-        float g = color.getGreen() / 255f;
-        float b = color.getBlue() / 255f;
+        if (spell != null) {
+            Color color = spell.getColor();
+            float r = color.getRed() / 255f;
+            float g = color.getGreen() / 255f;
+            float b = color.getBlue() / 255f;
 
-        PacketHandler.sendToTracking(level(), new BlockPos((int) pos.x, (int) pos.y, (int) pos.z), new SpellBurstEffectPacket((float) pos.x, (float) pos.y + 0.2f, (float) pos.z, r, g, b));
+            PacketHandler.sendToTracking(level(), new BlockPos((int) pos.x, (int) pos.y, (int) pos.z), new SpellBurstEffectPacket((float) pos.x, (float) pos.y + 0.2f, (float) pos.z, r, g, b));
+        }
     }
 
     public void remove() {

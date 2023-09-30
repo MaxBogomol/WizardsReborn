@@ -10,6 +10,7 @@ import com.mojang.blaze3d.vertex.VertexFormat;
 import com.mojang.math.Axis;
 import mod.maxbogomol.wizards_reborn.WizardsReborn;
 import mod.maxbogomol.wizards_reborn.WizardsRebornClient;
+import mod.maxbogomol.wizards_reborn.client.event.ClientTickHandler;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.model.EntityModel;
 import net.minecraft.client.model.HumanoidModel;
@@ -28,8 +29,11 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.Vec3;
 import net.minecraft.world.phys.shapes.VoxelShape;
 import org.joml.Matrix4f;
+import org.joml.Quaternionf;
+import org.joml.Vector3f;
 
 import java.awt.*;
+import java.util.Random;
 
 public class RenderUtils {
 
@@ -50,6 +54,31 @@ public class RenderUtils {
         RenderSystem.disableBlend();
         RenderSystem.defaultBlendFunc();
     });
+
+    public static final RenderType GLOWING_SPRITE = RenderType.create(
+            WizardsReborn.MOD_ID + ":glowing_sprite",
+            DefaultVertexFormat.POSITION_TEX_COLOR,
+            VertexFormat.Mode.QUADS, 256, true, false,
+            RenderType.CompositeState.builder()
+                    .setWriteMaskState(new RenderStateShard.WriteMaskStateShard(true, false))
+                    .setLightmapState(new RenderStateShard.LightmapStateShard(false))
+                    .setTransparencyState(ADDITIVE_TRANSPARENCY)
+                    .setTextureState(new RenderStateShard.TextureStateShard(TextureAtlas.LOCATION_BLOCKS, false, false))
+                    .setShaderState(new RenderStateShard.ShaderStateShard(WizardsRebornClient::getGlowingSpriteShader))
+                    .createCompositeState(false)
+    );
+
+    public static final RenderType GLOWING = RenderType.create(
+            WizardsReborn.MOD_ID + ":glowing",
+            DefaultVertexFormat.POSITION_COLOR,
+            VertexFormat.Mode.QUADS, 256, true, false,
+            RenderType.CompositeState.builder()
+                    .setWriteMaskState(new RenderStateShard.WriteMaskStateShard(true, false))
+                    .setLightmapState(new RenderStateShard.LightmapStateShard(false))
+                    .setTransparencyState(ADDITIVE_TRANSPARENCY)
+                    .setShaderState(new RenderStateShard.ShaderStateShard(WizardsRebornClient::getGlowingShader))
+                    .createCompositeState(false)
+    );
 
     public static RenderType GLOWING_PARTICLE = RenderType.create(
             WizardsReborn.MOD_ID + ":glowing_particle",
@@ -166,6 +195,18 @@ public class RenderUtils {
         boolean flag = !bakedmodel.usesBlockLight();
         if (flag) {
             Lighting.setupForFlatItems();
+
+            Quaternionf ax = Axis.YP.rotationDegrees(ticks);
+
+            RenderSystem.setShaderLights(new Vector3f(ax.x, ax.y, ax.z), new Vector3f(ax.x, ax.y, ax.z));
+
+            Matrix4f matrix4f = (new Matrix4f()).scaling(1.0F, -1.0F, 1.0F).rotateY((float) Math.toRadians(ticks)).rotateX(2.3561945F);
+            RenderSystem.setupLevelDiffuseLighting(new Vector3f(ax.x, ax.y, ax.z), new Vector3f(ax.x, ax.y, ax.z), matrix4f);
+        } else {
+
+            Quaternionf ax = Axis.YP.rotationDegrees(ticks);
+
+            RenderSystem.setShaderLights(new Vector3f(ax.x, ax.y, ax.z), new Vector3f(ax.x, ax.y, ax.z));
         }
 
         Minecraft.getInstance().getItemRenderer().render(stack, ItemDisplayContext.GUI, false, posestack1, multibuffersource$buffersource, 15728880, OverlayTexture.NO_OVERLAY, bakedmodel);
@@ -176,10 +217,94 @@ public class RenderUtils {
         if (flag) {
             Lighting.setupFor3DItems();
         }
+        Lighting.setupFor3DItems();
 
         posestack.popPose();
         RenderSystem.applyModelViewMatrix();
 
         blitOffset -= 50.0F;
+    }
+
+    private static final float ROOT_3 = (float)(Math.sqrt(3.0D) / 2.0D);
+
+    public static void dragon(PoseStack mStack, MultiBufferSource buf, double x, double y, double z, float radius, float partialTicks, float r, float g, float b) {
+        float f5 = 0.5f;
+        float f7 = Math.min(f5 > 0.8F ? (f5 - 0.8F) / 0.2F : 0.0F, 1.0F);
+        Random random = new Random(432L);
+        VertexConsumer builder = buf.getBuffer(GLOWING);
+        mStack.pushPose();
+        mStack.translate(x, y, z);
+
+        float rotation = (ClientTickHandler.ticksInGame + partialTicks) / 200;
+
+        for(int i = 0; (float)i < (f5 + f5 * f5) / 2.0F * 60.0F; ++i) {
+            mStack.mulPose(Axis.XP.rotationDegrees(random.nextFloat() * 360.0F));
+            mStack.mulPose(Axis.YP.rotationDegrees(random.nextFloat() * 360.0F));
+            mStack.mulPose(Axis.ZP.rotationDegrees(random.nextFloat() * 360.0F));
+            mStack.mulPose(Axis.XP.rotationDegrees(random.nextFloat() * 360.0F));
+            mStack.mulPose(Axis.YP.rotationDegrees(random.nextFloat() * 360.0F));
+            mStack.mulPose(Axis.ZP.rotationDegrees(random.nextFloat() * 360.0F + rotation * 90.0F));
+            float f3 = random.nextFloat() * 20.0F + 5.0F + f7 * 10.0F;
+            float f4 = random.nextFloat() * 2.0F + 1.0F + f7 * 2.0F;
+            f3 *= 0.05f * radius;
+            f4 *= 0.05f * radius;
+            Matrix4f mat = mStack.last().pose();
+            float alpha = 1 - f7;
+
+            builder.vertex(mat, 0.0F, 0.0F, 0.0F).color(r, g, b, alpha).endVertex();
+            builder.vertex(mat, 0.0F, 0.0F, 0.0F).color(r, g, b, alpha).endVertex();
+            builder.vertex(mat, -ROOT_3 * f4, f3, -0.5F * f4).color(r, g, b, 0).endVertex();
+            builder.vertex(mat, ROOT_3 * f4, f3, -0.5F * f4).color(r, g, b, 0).endVertex();
+            builder.vertex(mat, 0.0F, 0.0F, 0.0F).color(r, g, b, alpha).endVertex();
+            builder.vertex(mat, 0.0F, 0.0F, 0.0F).color(r, g, b, alpha).endVertex();
+            builder.vertex(mat, ROOT_3 * f4, f3, -0.5F * f4).color(r, g, b, 0).endVertex();
+            builder.vertex(mat, 0.0F, f3, f4).color(r, g, b, 0).endVertex();
+            builder.vertex(mat, 0.0F, 0.0F, 0.0F).color(r, g, b, alpha).endVertex();
+            builder.vertex(mat, 0.0F, 0.0F, 0.0F).color(r, g, b, alpha).endVertex();
+            builder.vertex(mat, 0.0F, f3, f4).color(r, g, b, 0).endVertex();
+            builder.vertex(mat, -ROOT_3 * f4, f3, -0.5F * f4).color(r, g, b, 0).endVertex();
+        }
+
+        mStack.popPose();
+    }
+
+    public static void ray(PoseStack mStack, MultiBufferSource buf, float width, float height, float r, float g, float b, float a) {
+        ray(mStack, buf, width, height, r, g, b, a, r, g, b, a);
+    }
+
+    public static void ray(PoseStack mStack, MultiBufferSource buf, float width, float height, float r1, float g1, float b1, float a1, float r2, float g2, float b2, float a2) {
+        VertexConsumer builder = buf.getBuffer(GLOWING);
+
+        Matrix4f mat = mStack.last().pose();
+
+        builder.vertex(mat, -width, width, -width).color(r1, g1, b1, a1).endVertex();
+        builder.vertex(mat, height, width, -width).color(r2, g2, b2, a2).endVertex();
+        builder.vertex(mat, height, -width, -width).color(r2, g2, b2, a2).endVertex();
+        builder.vertex(mat, -width, -width, -width).color(r1, g1, b1, a1).endVertex();
+
+        builder.vertex(mat, height, width, width).color(r2, g2, b2, a2).endVertex();
+        builder.vertex(mat, -width, width, width).color(r1, g1, b1, a1).endVertex();
+        builder.vertex(mat, -width, -width, width).color(r1, g1, b1, a1).endVertex();
+        builder.vertex(mat, height, -width, width).color(r2, g2, b2, a2).endVertex();
+
+        builder.vertex(mat, height, -width, width).color(r2, g2, b2, a2).endVertex();
+        builder.vertex(mat, height, -width, -width).color(r2, g2, b2, a2).endVertex();
+        builder.vertex(mat, height, width, -width).color(r2, g2, b2, a2).endVertex();
+        builder.vertex(mat, height, width, width).color(r2, g2, b2, a2).endVertex();
+
+        builder.vertex(mat, -width, -width, -width).color(r1, g1, b1, a1).endVertex();
+        builder.vertex(mat, -width, -width, width).color(r1, g1, b1, a1).endVertex();
+        builder.vertex(mat, -width, width, width).color(r1, g1, b1, a1).endVertex();
+        builder.vertex(mat, -width, width, -width).color(r1, g1, b1, a1).endVertex();
+
+        builder.vertex(mat, -width, width, width).color(r1, g1, b1, a1).endVertex();
+        builder.vertex(mat, height, width, width).color(r2, g2, b2, a2).endVertex();
+        builder.vertex(mat, height, width, -width).color(r2, g2, b2, a2).endVertex();
+        builder.vertex(mat, -width, width, -width).color(r1, g1, b1, a1).endVertex();
+
+        builder.vertex(mat, -width, -width, -width).color(r1, g1, b1, a1).endVertex();
+        builder.vertex(mat, height, -width, -width).color(r2, g2, b2, a2).endVertex();
+        builder.vertex(mat, height, -width, width).color(r2, g2, b2, a2).endVertex();
+        builder.vertex(mat, -width, -width, width).color(r1, g1, b1, a1).endVertex();
     }
 }

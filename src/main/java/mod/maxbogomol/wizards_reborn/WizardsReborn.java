@@ -63,8 +63,11 @@ import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.tags.TagKey;
+import net.minecraft.world.effect.MobEffectInstance;
+import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.MobCategory;
+import net.minecraft.world.food.FoodProperties;
 import net.minecraft.world.inventory.MenuType;
 import net.minecraft.world.item.*;
 import net.minecraft.world.item.crafting.RecipeSerializer;
@@ -128,6 +131,12 @@ public class WizardsReborn
     public static final TagKey<BannerPattern> SURVIVAL_BANNER_PATTERN_TAG = TagKey.create(Registries.BANNER_PATTERN, new ResourceLocation(MOD_ID, "pattern_item/survival"));
     public static final TagKey<BannerPattern> ELEVATION_BANNER_PATTERN_TAG = TagKey.create(Registries.BANNER_PATTERN, new ResourceLocation(MOD_ID, "pattern_item/elevation"));
 
+    //CRYSTAL_STATS
+    public static CrystalStat FOCUS_CRYSTAL_STAT = new CrystalStat(MOD_ID+":focus", 3);
+    public static CrystalStat BALANCE_CRYSTAL_STAT = new CrystalStat(MOD_ID+":balance", 3);
+    public static CrystalStat ABSORPTION_CRYSTAL_STAT = new CrystalStat(MOD_ID+":absorption", 3);
+    public static CrystalStat RESONANCE_CRYSTAL_STAT = new CrystalStat(MOD_ID+":resonance", 3);
+
     //POLISHING_TYPES
     public static final PolishingType CRYSTAL_POLISHING_TYPE  = new CrystalPolishingType();
     public static final PolishingType FACETED_POLISHING_TYPE  = new FacetedPolishingType();
@@ -142,33 +151,27 @@ public class WizardsReborn
     public static final CrystalType FIRE_CRYSTAL_TYPE  = new FireCrystalType();
     public static final CrystalType VOID_CRYSTAL_TYPE  = new VoidCrystalType();
 
-    //CRYSTAL_STATS
-    public static CrystalStat FOCUS_CRYSTAL_STAT = new CrystalStat(MOD_ID+":focus", 3);
-    public static CrystalStat BALANCE_CRYSTAL_STAT = new CrystalStat(MOD_ID+":balance", 3);
-    public static CrystalStat ABSORPTION_CRYSTAL_STAT = new CrystalStat(MOD_ID+":absorption", 3);
-    public static CrystalStat RESONANCE_CRYSTAL_STAT = new CrystalStat(MOD_ID+":resonance", 3);
-
     //MONOGRAMS
-    public static Monogram TEST1_MONOGRAM = new Monogram(MOD_ID+":test1");
-    public static Monogram TEST2_MONOGRAM = new Monogram(MOD_ID+":test2");
-    public static Monogram TEST3_MONOGRAM = new Monogram(MOD_ID+":test3");
-    public static Monogram TEST4_MONOGRAM = new Monogram(MOD_ID+":test4");
-    public static Monogram TEST5_MONOGRAM = new Monogram(MOD_ID+":test5");
-    public static Monogram TEST6_MONOGRAM = new Monogram(MOD_ID+":test6");
-    public static Monogram TEST7_MONOGRAM = new Monogram(MOD_ID+":test7");
-    public static Monogram TEST8_MONOGRAM = new Monogram(MOD_ID+":test8");
-    public static Monogram TEST9_MONOGRAM = new Monogram(MOD_ID+":test9");
-    public static Monogram TEST10_MONOGRAM = new Monogram(MOD_ID+":test10");
-    public static Monogram TEST11_MONOGRAM = new Monogram(MOD_ID+":test11");
-    public static Monogram TEST12_MONOGRAM = new Monogram(MOD_ID+":test12");
-    public static Monogram TEST13_MONOGRAM = new Monogram(MOD_ID+":test13");
-    public static Monogram TEST14_MONOGRAM = new Monogram(MOD_ID+":test14");
-    public static Monogram TEST15_MONOGRAM = new Monogram(MOD_ID+":test15");
-    public static Monogram TEST16_MONOGRAM = new Monogram(MOD_ID+":test16");
-    public static Monogram TEST17_MONOGRAM = new Monogram(MOD_ID+":test17");
-    public static Monogram TEST18_MONOGRAM = new Monogram(MOD_ID+":test18");
-    public static Monogram TEST19_MONOGRAM = new Monogram(MOD_ID+":test19");
-    public static Monogram TEST20_MONOGRAM = new Monogram(MOD_ID+":test20");
+    public static Monogram LUNAM_MONOGRAM = new Monogram(MOD_ID+":lunam");
+    public static Monogram VITA_MONOGRAM = new Monogram(MOD_ID+":vita");
+    public static Monogram SOLEM_MONOGRAM = new Monogram(MOD_ID+":solem");
+    public static Monogram MORS_MONOGRAM = new Monogram(MOD_ID+":mors");
+    public static Monogram MIRACULUM_MONOGRAM = new Monogram(MOD_ID+":miraculum");
+    public static Monogram TEMPUS_MONOGRAM = new Monogram(MOD_ID+":tempus");
+    public static Monogram STATERA_MONOGRAM = new Monogram(MOD_ID+":statera");
+    public static Monogram ECLIPSIS_MONOGRAM = new Monogram(MOD_ID+":eclipsis");
+    public static Monogram SICCITAS_MONOGRAM = new Monogram(MOD_ID+":siccitas");
+    public static Monogram SOLSTITIUM_MONOGRAM = new Monogram(MOD_ID+":solstitium");
+    public static Monogram FAMES_MONOGRAM = new Monogram(MOD_ID+":fames");
+    public static Monogram RENAISSANCE_MONOGRAM = new Monogram(MOD_ID+":renaissance");
+    public static Monogram BELLUM_MONOGRAM = new Monogram(MOD_ID+":bellum");
+    public static Monogram LUX_MONOGRAM = new Monogram(MOD_ID+":lux");
+    public static Monogram KARA_MONOGRAM = new Monogram(MOD_ID+":kara");
+    public static Monogram DEGRADATIO_MONOGRAM = new Monogram(MOD_ID+":degradatio");
+    public static Monogram PRAEDICTIONEM_MONOGRAM = new Monogram(MOD_ID+":praedictionem");
+    public static Monogram EVOLUTIONIS_MONOGRAM = new Monogram(MOD_ID+":evolutionis");
+    public static Monogram DARK_MONOGRAM = new Monogram(MOD_ID+":dark");
+    public static Monogram UNIVERSUM_MONOGRAM = new Monogram(MOD_ID+":universum");
 
     //SPELLS
     public static Spell EARTH_PROJECTILE_SPELL = new EarthProjectileSpell(MOD_ID+":earth_projectile");
@@ -177,6 +180,16 @@ public class WizardsReborn
     public static Spell FIRE_PROJECTILE_SPELL = new FireProjectileSpell(MOD_ID+":fire_projectile");
     public static Spell VOID_PROJECTILE_SPELL = new VoidProjectileSpell(MOD_ID+":void_projectile");
     public static Spell FROST_PROJECTILE_SPELL = new FrostProjectileSpell(MOD_ID+":frost_projectile");
+    public static Spell HOLY_PROJECTILE_SPELL = new HolyProjectileSpell(MOD_ID+":holy_projectile");
+    public static Spell EARTH_RAY_SPELL = new EarthRaySpell(MOD_ID+":earth_ray");
+    public static Spell WATER_RAY_SPELL = new WaterProjectileSpell(MOD_ID+":water_ray");
+    public static Spell AIR_RAY_SPELL = new AirProjectileSpell(MOD_ID+":air_ray");
+    public static Spell FIRE_RAY_SPELL = new FireProjectileSpell(MOD_ID+":fire_ray");
+    public static Spell VOID_RAY_SPELL = new VoidProjectileSpell(MOD_ID+":void_ray");
+    public static Spell FROST_RAY_SPELL = new FrostProjectileSpell(MOD_ID+":frost_ray");
+    public static Spell HOLY_RAY_SPELL = new HolyProjectileSpell(MOD_ID+":holy_ray");
+
+    public static final FoodProperties MOR_FOOD = (new FoodProperties.Builder()).nutrition(1).saturationMod(0.6F).effect(new MobEffectInstance(MobEffects.POISON, 250, 1), 1.0F).effect(new MobEffectInstance(MobEffects.CONFUSION, 250, 1), 1.0F).effect(new MobEffectInstance(MobEffects.BLINDNESS, 250, 1), 1.0F).effect(new MobEffectInstance(MobEffects.WEAKNESS, 250, 1), 1.0F).build();
 
     //BLOCKS
     public static final RegistryObject<Block> ARCANE_GOLD_BLOCK = BLOCKS.register("arcane_gold_block", () -> new Block(BlockBehaviour.Properties.copy(Blocks.GOLD_BLOCK)));
@@ -335,9 +348,9 @@ public class WizardsReborn
     public static final RegistryObject<Item> ARCANE_LINEN_ITEM = ITEMS.register("arcane_linen", () -> new Item(new Item.Properties()));
     public static final RegistryObject<Item> ARCANE_LINEN_HAY_ITEM = ITEMS.register("arcane_linen_hay", () -> new BlockItem(ARCANE_LINEN_HAY.get(), new Item.Properties()));
 
-    public static final RegistryObject<Item> MOR_ITEM = ITEMS.register("mor", () -> new BlockItem(MOR.get(), new Item.Properties()));
+    public static final RegistryObject<Item> MOR_ITEM = ITEMS.register("mor", () -> new BlockItem(MOR.get(), new Item.Properties().food(MOR_FOOD)));
     public static final RegistryObject<Item> MOR_BLOCK_ITEM = ITEMS.register("mor_block", () -> new BlockItem(MOR_BLOCK.get(), new Item.Properties()));
-    public static final RegistryObject<Item> ELDER_MOR_ITEM = ITEMS.register("elder_mor", () -> new BlockItem(ELDER_MOR.get(), new Item.Properties()));
+    public static final RegistryObject<Item> ELDER_MOR_ITEM = ITEMS.register("elder_mor", () -> new BlockItem(ELDER_MOR.get(), new Item.Properties().food(MOR_FOOD)));
     public static final RegistryObject<Item> ELDER_MOR_BLOCK_ITEM = ITEMS.register("elder_mor_block", () -> new BlockItem(ELDER_MOR_BLOCK.get(), new Item.Properties()));
 
     public static final RegistryObject<Item> ARCANE_WAND = ITEMS.register("arcane_wand", () -> new ArcaneWandItem(new Item.Properties().stacksTo(1)));
@@ -496,6 +509,7 @@ public class WizardsReborn
     public static final RegistryObject<SoundEvent> WISSEN_TRANSFER_SOUND = SOUND_EVENTS.register("wissen_transfer", () -> SoundEvent.createVariableRangeEvent(new ResourceLocation(MOD_ID, "wissen_transfer")));
     public static final RegistryObject<SoundEvent> SPELL_CAST_SOUND = SOUND_EVENTS.register("spell_cast", () -> SoundEvent.createVariableRangeEvent(new ResourceLocation(MOD_ID, "spell_cast")));
     public static final RegistryObject<SoundEvent> SPELL_BURST_SOUND = SOUND_EVENTS.register("spell_burst", () -> SoundEvent.createVariableRangeEvent(new ResourceLocation(MOD_ID, "spell_burst")));
+    public static final RegistryObject<SoundEvent> SPELL_RELOAD_SOUND = SOUND_EVENTS.register("spell_reload", () -> SoundEvent.createVariableRangeEvent(new ResourceLocation(MOD_ID, "spell_reload")));
 
     public WizardsReborn() {
         InterModComms.sendTo(CuriosApi.MODID, SlotTypeMessage.REGISTER_TYPE, () -> SlotTypePreset.BELT.getMessageBuilder().build());
@@ -561,6 +575,13 @@ public class WizardsReborn
     }
 
     private void clientSetup(final FMLClientSetupEvent event) {
+        try {
+            Class.forName("net.optifine.Config");
+            WizardsRebornClient.optifinePresent = true;
+        } catch (ClassNotFoundException e) {
+            WizardsRebornClient.optifinePresent = false;
+        }
+
         event.enqueueWork(() -> {
             ArcanemiconChapters.init();
 
@@ -572,43 +593,43 @@ public class WizardsReborn
     }
 
     public static void setupMonograms() {
-        Monograms.register(TEST1_MONOGRAM);
-        Monograms.register(TEST2_MONOGRAM);
-        Monograms.register(TEST3_MONOGRAM);
-        Monograms.register(TEST4_MONOGRAM);
-        Monograms.register(TEST5_MONOGRAM);
-        Monograms.register(TEST6_MONOGRAM);
-        Monograms.register(TEST7_MONOGRAM);
-        Monograms.register(TEST8_MONOGRAM);
-        Monograms.register(TEST9_MONOGRAM);
-        Monograms.register(TEST10_MONOGRAM);
-        Monograms.register(TEST11_MONOGRAM);
-        Monograms.register(TEST12_MONOGRAM);
-        Monograms.register(TEST13_MONOGRAM);
-        Monograms.register(TEST14_MONOGRAM);
-        Monograms.register(TEST15_MONOGRAM);
-        Monograms.register(TEST16_MONOGRAM);
-        Monograms.register(TEST17_MONOGRAM);
-        Monograms.register(TEST18_MONOGRAM);
-        Monograms.register(TEST19_MONOGRAM);
-        Monograms.register(TEST20_MONOGRAM);
+        Monograms.register(LUNAM_MONOGRAM);
+        Monograms.register(VITA_MONOGRAM);
+        Monograms.register(SOLEM_MONOGRAM);
+        Monograms.register(MORS_MONOGRAM);
+        Monograms.register(MIRACULUM_MONOGRAM);
+        Monograms.register(TEMPUS_MONOGRAM);
+        Monograms.register(STATERA_MONOGRAM);
+        Monograms.register(ECLIPSIS_MONOGRAM);
+        Monograms.register(SICCITAS_MONOGRAM);
+        Monograms.register(SOLSTITIUM_MONOGRAM);
+        Monograms.register(FAMES_MONOGRAM);
+        Monograms.register(RENAISSANCE_MONOGRAM);
+        Monograms.register(BELLUM_MONOGRAM);
+        Monograms.register(LUX_MONOGRAM);
+        Monograms.register(KARA_MONOGRAM);
+        Monograms.register(DEGRADATIO_MONOGRAM);
+        Monograms.register(PRAEDICTIONEM_MONOGRAM);
+        Monograms.register(EVOLUTIONIS_MONOGRAM);
+        Monograms.register(DARK_MONOGRAM);
+        Monograms.register(UNIVERSUM_MONOGRAM);
 
-        Monograms.addRecipe(new MonogramRecipe(TEST5_MONOGRAM, TEST1_MONOGRAM, TEST2_MONOGRAM));
-        Monograms.addRecipe(new MonogramRecipe(TEST6_MONOGRAM, TEST1_MONOGRAM, TEST3_MONOGRAM));
-        Monograms.addRecipe(new MonogramRecipe(TEST7_MONOGRAM, TEST4_MONOGRAM, TEST2_MONOGRAM));
-        Monograms.addRecipe(new MonogramRecipe(TEST8_MONOGRAM, TEST4_MONOGRAM, TEST1_MONOGRAM));
-        Monograms.addRecipe(new MonogramRecipe(TEST9_MONOGRAM, TEST3_MONOGRAM, TEST4_MONOGRAM));
-        Monograms.addRecipe(new MonogramRecipe(TEST10_MONOGRAM, TEST3_MONOGRAM, TEST2_MONOGRAM));
-        Monograms.addRecipe(new MonogramRecipe(TEST11_MONOGRAM, TEST6_MONOGRAM, TEST9_MONOGRAM));
-        Monograms.addRecipe(new MonogramRecipe(TEST12_MONOGRAM, TEST6_MONOGRAM, TEST4_MONOGRAM));
-        Monograms.addRecipe(new MonogramRecipe(TEST13_MONOGRAM, TEST10_MONOGRAM, TEST4_MONOGRAM));
-        Monograms.addRecipe(new MonogramRecipe(TEST14_MONOGRAM, TEST2_MONOGRAM, TEST4_MONOGRAM));
-        Monograms.addRecipe(new MonogramRecipe(TEST15_MONOGRAM, TEST9_MONOGRAM, TEST7_MONOGRAM));
-        Monograms.addRecipe(new MonogramRecipe(TEST16_MONOGRAM, TEST2_MONOGRAM, TEST8_MONOGRAM));
-        Monograms.addRecipe(new MonogramRecipe(TEST17_MONOGRAM, TEST10_MONOGRAM, TEST5_MONOGRAM));
-        Monograms.addRecipe(new MonogramRecipe(TEST18_MONOGRAM, TEST2_MONOGRAM, TEST7_MONOGRAM));
-        Monograms.addRecipe(new MonogramRecipe(TEST19_MONOGRAM, TEST3_MONOGRAM, TEST8_MONOGRAM));
-        Monograms.addRecipe(new MonogramRecipe(TEST20_MONOGRAM, TEST7_MONOGRAM, TEST6_MONOGRAM));
+        Monograms.addRecipe(new MonogramRecipe(MIRACULUM_MONOGRAM, LUNAM_MONOGRAM, VITA_MONOGRAM));
+        Monograms.addRecipe(new MonogramRecipe(TEMPUS_MONOGRAM, LUNAM_MONOGRAM, SOLEM_MONOGRAM));
+        Monograms.addRecipe(new MonogramRecipe(STATERA_MONOGRAM, MORS_MONOGRAM, VITA_MONOGRAM));
+        Monograms.addRecipe(new MonogramRecipe(ECLIPSIS_MONOGRAM, MORS_MONOGRAM, LUNAM_MONOGRAM));
+        Monograms.addRecipe(new MonogramRecipe(SICCITAS_MONOGRAM, SOLEM_MONOGRAM, MORS_MONOGRAM));
+        Monograms.addRecipe(new MonogramRecipe(SOLSTITIUM_MONOGRAM, SOLEM_MONOGRAM, VITA_MONOGRAM));
+        Monograms.addRecipe(new MonogramRecipe(FAMES_MONOGRAM, TEMPUS_MONOGRAM, SICCITAS_MONOGRAM));
+        Monograms.addRecipe(new MonogramRecipe(RENAISSANCE_MONOGRAM, TEMPUS_MONOGRAM, MORS_MONOGRAM));
+        Monograms.addRecipe(new MonogramRecipe(BELLUM_MONOGRAM, SOLSTITIUM_MONOGRAM, MORS_MONOGRAM));
+        Monograms.addRecipe(new MonogramRecipe(LUX_MONOGRAM, VITA_MONOGRAM, SOLSTITIUM_MONOGRAM));
+        Monograms.addRecipe(new MonogramRecipe(KARA_MONOGRAM, SICCITAS_MONOGRAM, STATERA_MONOGRAM));
+        Monograms.addRecipe(new MonogramRecipe(DEGRADATIO_MONOGRAM, VITA_MONOGRAM, ECLIPSIS_MONOGRAM));
+        Monograms.addRecipe(new MonogramRecipe(PRAEDICTIONEM_MONOGRAM, SOLSTITIUM_MONOGRAM, MIRACULUM_MONOGRAM));
+        Monograms.addRecipe(new MonogramRecipe(EVOLUTIONIS_MONOGRAM, VITA_MONOGRAM, STATERA_MONOGRAM));
+        Monograms.addRecipe(new MonogramRecipe(DARK_MONOGRAM, SOLEM_MONOGRAM, ECLIPSIS_MONOGRAM));
+        Monograms.addRecipe(new MonogramRecipe(UNIVERSUM_MONOGRAM, STATERA_MONOGRAM, TEMPUS_MONOGRAM));
     }
 
     public static void setupSpells() {
@@ -618,6 +639,14 @@ public class WizardsReborn
         Spells.register(FIRE_PROJECTILE_SPELL);
         Spells.register(VOID_PROJECTILE_SPELL);
         Spells.register(FROST_PROJECTILE_SPELL);
+        Spells.register(HOLY_PROJECTILE_SPELL);
+        Spells.register(EARTH_RAY_SPELL);
+        Spells.register(WATER_RAY_SPELL);
+        Spells.register(AIR_RAY_SPELL);
+        Spells.register(FIRE_RAY_SPELL);
+        Spells.register(VOID_RAY_SPELL);
+        Spells.register(FROST_RAY_SPELL);
+        Spells.register(HOLY_RAY_SPELL);
     }
 
     public static void setupWandCrystalsModels() {

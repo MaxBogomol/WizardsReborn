@@ -11,7 +11,7 @@ public class MonogramRecipe {
 
     public MonogramRecipe(Monogram output, Monogram... inputs) {
         this.output = output;
-        this.inputs = NonNullList.of(WizardsReborn.TEST1_MONOGRAM, inputs);
+        this.inputs = NonNullList.of(WizardsReborn.LUNAM_MONOGRAM, inputs);
     }
 
     public Monogram getOutput() {

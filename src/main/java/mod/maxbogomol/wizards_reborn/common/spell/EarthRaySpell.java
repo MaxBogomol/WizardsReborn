@@ -11,15 +11,15 @@ import net.minecraft.world.phys.HitResult;
 
 import java.awt.*;
 
-public class AirProjectileSpell extends ProjectileSpell {
-    public AirProjectileSpell(String id) {
+public class EarthRaySpell extends RaySpell {
+    public EarthRaySpell(String id) {
         super(id);
-        addCrystalType(WizardsReborn.AIR_CRYSTAL_TYPE);
+        addCrystalType(WizardsReborn.EARTH_CRYSTAL_TYPE);
     }
 
     @Override
     public Color getColor() {
-        return new Color(230, 173, 134);
+        return new Color(138, 201, 123);
     }
 
     @Override
@@ -27,6 +27,6 @@ public class AirProjectileSpell extends ProjectileSpell {
         super.onImpact(ray, world, projectile, player, target);
 
         int focusLevel = CrystalUtils.getStatLevel(projectile.getStats(), WizardsReborn.FOCUS_CRYSTAL_STAT);
-        target.hurt(new DamageSource(projectile.damageSources().fall().typeHolder(), projectile, player), (float) (2.0f + (focusLevel * 0.5)));
+        target.hurt(new DamageSource(projectile.damageSources().generic().typeHolder(), projectile, player), (float) (4.5f + (focusLevel * 0.5)));
     }
 }

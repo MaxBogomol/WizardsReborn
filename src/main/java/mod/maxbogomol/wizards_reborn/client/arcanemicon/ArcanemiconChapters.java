@@ -15,10 +15,11 @@ public class ArcanemiconChapters {
     public static List<Category> categories = new ArrayList<>();
     public static Category ARCANE_NATURE, SPELLS, CRYSTALS_RITUALS, ALCHEMY;
     public static Chapter ARCANE_NATURE_INDEX, SPELLS_INDEX, CRYSTALS_RITUALS_INDEX, ALCHEMY_INDEX,
-            ARCANUM, ARCANUM_DUST_TRANSMUTATION, ARCANE_WOOD, ARCANE_GOLD, WISSEN, WISSEN_TRANSLATOR, ARCANE_PEDESTAL, WISSEN_ALTAR, WISSEN_CRYSTALLIZER, ARCANE_WORKBENCH, ARCANE_LUMOS,
+            ARCANUM, ARCANUM_DUST_TRANSMUTATION, ARCANE_WOOD, ARCANE_GOLD, SCYTHES, TRINKETS, WISSEN, WISSEN_TRANSLATOR, ARCANE_PEDESTAL, WISSEN_ALTAR, WISSEN_CRYSTALLIZER, ARCANE_WORKBENCH, ARCANE_LUMOS, CRYSTALS, ARCANE_WAND, WISSEN_CELL,
             ALL_SPELLS, EARTH_SPELLS, WATER_SPELLS, AIR_SPELLS, FIRE_SPELLS, VOID_SPELLS,
             EARTH_PROJECTILE, WATER_PROJECTILE, AIR_PROJECTILE, FIRE_PROJECTILE, VOID_PROJECTILE,
-            MONOGRAMS, TEST1_MONOGRAM, TEST2_MONOGRAM, TEST3_MONOGRAM, TEST4_MONOGRAM, TEST5_MONOGRAM, TEST6_MONOGRAM, TEST7_MONOGRAM, TEST8_MONOGRAM, TEST9_MONOGRAM, TEST10_MONOGRAM, TEST11_MONOGRAM, TEST12_MONOGRAM, TEST13_MONOGRAM, TEST14_MONOGRAM, TEST15_MONOGRAM, TEST16_MONOGRAM, TEST17_MONOGRAM, TEST18_MONOGRAM, TEST19_MONOGRAM, TEST20_MONOGRAM;
+            MONOGRAMS, LUNAM_MONOGRAM, VITA_MONOGRAM, SOLEM_MONOGRAM, MORS_MONOGRAM, MIRACULUM_MONOGRAM, TEMPUS_MONOGRAM, STATERA_MONOGRAM, ECLIPSIS_MONOGRAM, SICCITAS_MONOGRAM, SOLSTITIUM_MONOGRAM, FAMES_MONOGRAM, RENAISSANCE_MONOGRAM, BELLUM_MONOGRAM, LUX_MONOGRAM, KARA_MONOGRAM, DEGRADATIO_MONOGRAM, PRAEDICTIONEM_MONOGRAM, EVOLUTIONIS_MONOGRAM, DARK_MONOGRAM, UNIVERSUM_MONOGRAM,
+            MOR, ARCANE_LINEN;
 
     public static void init() {
         ARCANUM = new Chapter(
@@ -37,7 +38,8 @@ public class ArcanemiconChapters {
                 ),
                 new CraftingTablePage(new ItemStack(WizardsReborn.ARCANUM.get(), 9), new ItemStack(WizardsReborn.ARCANUM_BLOCK_ITEM.get())),
                 new CraftingTablePage(new ItemStack(WizardsReborn.ARCANUM_DUST.get(), 2), new ItemStack(WizardsReborn.ARCANUM.get())),
-                new CraftingTablePage(new ItemStack(WizardsReborn.ARCANUM_DUST.get(), 3), new ItemStack(WizardsReborn.ARCANUM.get()), new ItemStack(Items.REDSTONE))
+                new CraftingTablePage(new ItemStack(WizardsReborn.ARCANUM_DUST.get(), 3), new ItemStack(WizardsReborn.ARCANUM.get()), new ItemStack(Items.REDSTONE)),
+                new CraftingTablePage(new ItemStack(WizardsReborn.ARCANEMICON.get()), new ItemStack(Items.BOOK), new ItemStack(WizardsReborn.ARCANUM.get()))
         );
 
         ARCANUM_DUST_TRANSMUTATION = new Chapter(
@@ -208,6 +210,37 @@ public class ArcanemiconChapters {
                 )
         );
 
+        SCYTHES = new Chapter(
+                "wizards_reborn.arcanemicon.chapter.scythes",
+                new TitledBlockPage("wizards_reborn.arcanemicon.page.scythes",
+                        new BlockEntry(new ItemStack(WizardsReborn.ARCANE_PEDESTAL_ITEM.get()), new ItemStack(WizardsReborn.ARCANE_GOLD_SCYTHE.get()))
+                )
+        );
+
+        TRINKETS = new Chapter(
+                "wizards_reborn.arcanemicon.chapter.trinkets",
+                new TitledBlockPage("wizards_reborn.arcanemicon.page.trinkets",
+                        new BlockEntry(new ItemStack(WizardsReborn.ARCANE_PEDESTAL_ITEM.get()), new ItemStack(WizardsReborn.ARCANUM_AMULET.get())),
+                        new BlockEntry(new ItemStack(WizardsReborn.ARCANE_PEDESTAL_ITEM.get()), new ItemStack(WizardsReborn.ARCANUM_RING.get())),
+                        new BlockEntry(new ItemStack(WizardsReborn.ARCANE_PEDESTAL_ITEM.get()), new ItemStack(WizardsReborn.LEATHER_BELT.get()))
+                ),
+                new CraftingTablePage(new ItemStack(WizardsReborn.ARCANUM_AMULET.get()),
+                        new ItemStack(WizardsReborn.ARCANE_GOLD_INGOT.get()), new ItemStack(WizardsReborn.ARCANE_GOLD_NUGGET.get()), new ItemStack(WizardsReborn.ARCANE_GOLD_INGOT.get()),
+                        new ItemStack(WizardsReborn.ARCANE_GOLD_NUGGET.get()), ItemStack.EMPTY, new ItemStack(WizardsReborn.ARCANE_GOLD_INGOT.get()),
+                        new ItemStack(WizardsReborn.ARCANUM.get()), new ItemStack(WizardsReborn.ARCANE_GOLD_NUGGET.get()), ItemStack.EMPTY
+                ),
+                new CraftingTablePage(new ItemStack(WizardsReborn.ARCANUM_RING.get()),
+                        new ItemStack(WizardsReborn.ARCANUM.get()), new ItemStack(WizardsReborn.ARCANE_GOLD_INGOT.get()), ItemStack.EMPTY,
+                        new ItemStack(WizardsReborn.ARCANE_GOLD_INGOT.get()), ItemStack.EMPTY, new ItemStack(WizardsReborn.ARCANE_GOLD_NUGGET.get()),
+                        ItemStack.EMPTY, new ItemStack(WizardsReborn.ARCANE_GOLD_NUGGET.get()), ItemStack.EMPTY
+                ),
+                new CraftingTablePage(new ItemStack(WizardsReborn.LEATHER_BELT.get()),
+                        ItemStack.EMPTY, new ItemStack(Items.LEATHER), ItemStack.EMPTY,
+                        new ItemStack(Items.LEATHER), ItemStack.EMPTY, new ItemStack(Items.LEATHER),
+                        ItemStack.EMPTY, new ItemStack(WizardsReborn.ARCANE_GOLD_NUGGET.get()), ItemStack.EMPTY
+                )
+        );
+
         WISSEN = new Chapter(
                 "wizards_reborn.arcanemicon.chapter.wissen",
                 new TitledBlockPage("wizards_reborn.arcanemicon.page.wissen",
@@ -359,6 +392,39 @@ public class ArcanemiconChapters {
                 new CraftingTablePage(new ItemStack(WizardsReborn.BLACK_ARCANE_LUMOS_ITEM.get()), new ItemStack(WizardsReborn.WHITE_ARCANE_LUMOS_ITEM.get()), new ItemStack(Items.BLACK_DYE))
         );
 
+        CRYSTALS = new Chapter(
+                "wizards_reborn.arcanemicon.chapter.crystals",
+                new TitledBlockPage("wizards_reborn.arcanemicon.page.crystals",
+                        new BlockEntry(new ItemStack(WizardsReborn.ARCANE_PEDESTAL_ITEM.get()), new ItemStack(WizardsReborn.ARCANE_GOLD_SCYTHE.get()))
+                )
+        );
+
+        ARCANE_WAND = new Chapter(
+                "wizards_reborn.arcanemicon.chapter.arcane_wand",
+                new TitledBlockPage("wizards_reborn.arcanemicon.page.arcane_wand",
+                        new BlockEntry(new ItemStack(WizardsReborn.ARCANE_PEDESTAL_ITEM.get()), new ItemStack(WizardsReborn.ARCANE_WAND.get()))
+                ),
+                new ArcaneWorkbenchPage(new ItemStack(WizardsReborn.ARCANE_WAND.get()),
+                        ItemStack.EMPTY, new ItemStack(WizardsReborn.ARCANE_GOLD_NUGGET.get()), new ItemStack(WizardsReborn.ARCANE_GOLD_INGOT.get()),
+                        ItemStack.EMPTY, new ItemStack(WizardsReborn.ARCANE_WOOD_BRANCH.get()), new ItemStack(WizardsReborn.ARCANE_GOLD_NUGGET.get()),
+                        new ItemStack(WizardsReborn.ARCANE_GOLD_INGOT.get()),  ItemStack.EMPTY,  ItemStack.EMPTY,
+                        new ItemStack(WizardsReborn.ARCANUM.get()), new ItemStack(WizardsReborn.ARCANUM.get()), new ItemStack(WizardsReborn.ARCANUM.get()), new ItemStack(WizardsReborn.ARCANUM.get())
+                )
+        );
+
+        WISSEN_CELL = new Chapter(
+                "wizards_reborn.arcanemicon.chapter.wissen_cell",
+                new TitledBlockPage("wizards_reborn.arcanemicon.page.wissen_cell",
+                        new BlockEntry(new ItemStack(WizardsReborn.ARCANE_PEDESTAL_ITEM.get()), new ItemStack(WizardsReborn.WISSEN_CELL_ITEM.get()))
+                ),
+                new ArcaneWorkbenchPage(new ItemStack(WizardsReborn.WISSEN_CELL_ITEM.get()),
+                        ItemStack.EMPTY, new ItemStack(WizardsReborn.WISSEN_ALTAR_ITEM.get()), ItemStack.EMPTY,
+                        new ItemStack(WizardsReborn.ARCANE_WOOD_PLANKS_ITEM.get()), new ItemStack(WizardsReborn.ARCANUM_BLOCK_ITEM.get()), new ItemStack(WizardsReborn.ARCANE_WOOD_PLANKS_ITEM.get()),
+                        new ItemStack(WizardsReborn.ARCANE_WOOD_PLANKS_ITEM.get()), new ItemStack(WizardsReborn.ARCANE_WOOD_PLANKS_ITEM.get()), new ItemStack(WizardsReborn.ARCANE_WOOD_PLANKS_ITEM.get()),
+                        new ItemStack(WizardsReborn.ARCANUM.get()), new ItemStack(WizardsReborn.ARCANE_GOLD_INGOT.get()), new ItemStack(WizardsReborn.ARCANE_GOLD_INGOT.get()), new ItemStack(WizardsReborn.ARCANE_GOLD_INGOT.get())
+                )
+        );
+
         ARCANE_NATURE_INDEX = new Chapter(
                 "wizards_reborn.arcanemicon.chapter.arcane_nature_index",
                 new TitledIndexPage("wizards_reborn.arcanemicon.page.arcane_nature_index",
@@ -366,15 +432,22 @@ public class ArcanemiconChapters {
                         new IndexEntry(ARCANUM_DUST_TRANSMUTATION, new ItemStack(WizardsReborn.ARCANUM_DUST.get()), RegisterKnowledges.ARCANUM_DUST_KNOWLEDGE),
                         new IndexEntry(ARCANE_WOOD, new ItemStack(WizardsReborn.ARCANE_WOOD_PLANKS_ITEM.get()), RegisterKnowledges.ARCANUM_DUST_KNOWLEDGE),
                         new IndexEntry(ARCANE_GOLD, new ItemStack(WizardsReborn.ARCANE_GOLD_INGOT.get()), RegisterKnowledges.ARCANUM_DUST_KNOWLEDGE),
-                        new IndexEntry(WISSEN, new ItemStack(WizardsReborn.WISSEN_WAND.get()), RegisterKnowledges.ARCANUM_DUST_KNOWLEDGE),
-                        new IndexEntry(WISSEN_TRANSLATOR, new ItemStack(WizardsReborn.WISSEN_TRANSLATOR_ITEM.get()), RegisterKnowledges.ARCANE_GOLD_KNOWLEDGE)
+                        new IndexEntry(SCYTHES, new ItemStack(WizardsReborn.ARCANE_GOLD_SCYTHE.get()), RegisterKnowledges.ARCANUM_DUST_KNOWLEDGE),
+                        new IndexEntry(TRINKETS, new ItemStack(WizardsReborn.ARCANUM_AMULET.get()), RegisterKnowledges.ARCANE_GOLD_KNOWLEDGE)
                 ),
                 new IndexPage(
+                        new IndexEntry(WISSEN, new ItemStack(WizardsReborn.WISSEN_WAND.get()), RegisterKnowledges.ARCANUM_DUST_KNOWLEDGE),
+                        new IndexEntry(WISSEN_TRANSLATOR, new ItemStack(WizardsReborn.WISSEN_TRANSLATOR_ITEM.get()), RegisterKnowledges.ARCANE_GOLD_KNOWLEDGE),
                         new IndexEntry(ARCANE_PEDESTAL, new ItemStack(WizardsReborn.ARCANE_PEDESTAL_ITEM.get()), RegisterKnowledges.ARCANE_WOOD_KNOWLEDGE),
                         new IndexEntry(WISSEN_ALTAR, new ItemStack(WizardsReborn.WISSEN_ALTAR_ITEM.get()), RegisterKnowledges.ARCANE_GOLD_KNOWLEDGE),
                         new IndexEntry(WISSEN_CRYSTALLIZER, new ItemStack(WizardsReborn.WISSEN_CRYSTALLIZER_ITEM.get()), RegisterKnowledges.ARCANE_GOLD_KNOWLEDGE),
                         new IndexEntry(ARCANE_WORKBENCH, new ItemStack(WizardsReborn.ARCANE_WORKBENCH_ITEM.get()), RegisterKnowledges.ARCANE_GOLD_KNOWLEDGE),
                         new IndexEntry(ARCANE_LUMOS, new ItemStack(WizardsReborn.WHITE_ARCANE_LUMOS_ITEM.get()), RegisterKnowledges.WISSEN_CRYSTALLIZER)
+                ),
+                new IndexPage(
+                        new IndexEntry(CRYSTALS, new ItemStack(WizardsReborn.EARTH_CRYSTAL.get()), RegisterKnowledges.ARCANE_GOLD_KNOWLEDGE),
+                        new IndexEntry(ARCANE_WAND, new ItemStack(WizardsReborn.ARCANE_WAND.get()), RegisterKnowledges.ARCANE_WOOD_KNOWLEDGE),
+                        new IndexEntry(WISSEN_CELL, new ItemStack(WizardsReborn.WISSEN_CELL_ITEM.get()), RegisterKnowledges.ARCANE_GOLD_KNOWLEDGE)
                 )
         );
 
@@ -403,105 +476,105 @@ public class ArcanemiconChapters {
                 new TitledSpellPage("wizards_reborn.arcanemicon.page.void_projectile", WizardsReborn.VOID_PROJECTILE_SPELL)
         );
 
-        TEST1_MONOGRAM = new Chapter(
-                "wizards_reborn.arcanemicon.chapter.test1_monogram",
-                new TitledMonogramPage("wizards_reborn.arcanemicon.page.test1_monogram", WizardsReborn.TEST1_MONOGRAM),
-                new MonogramRecipesPage(WizardsReborn.TEST1_MONOGRAM)
+        LUNAM_MONOGRAM = new Chapter(
+                "wizards_reborn.arcanemicon.chapter.lunam_monogram",
+                new TitledMonogramPage("wizards_reborn.arcanemicon.page.lunam_monogram", WizardsReborn.LUNAM_MONOGRAM),
+                new MonogramRecipesPage(WizardsReborn.LUNAM_MONOGRAM)
         );
-        TEST2_MONOGRAM = new Chapter(
-                "wizards_reborn.arcanemicon.chapter.test2_monogram",
-                new TitledMonogramPage("wizards_reborn.arcanemicon.page.test2_monogram", WizardsReborn.TEST2_MONOGRAM),
-                new MonogramRecipesPage(WizardsReborn.TEST2_MONOGRAM)
+        VITA_MONOGRAM = new Chapter(
+                "wizards_reborn.arcanemicon.chapter.vita_monogram",
+                new TitledMonogramPage("wizards_reborn.arcanemicon.page.vita_monogram", WizardsReborn.VITA_MONOGRAM),
+                new MonogramRecipesPage(WizardsReborn.VITA_MONOGRAM)
         );
-        TEST3_MONOGRAM = new Chapter(
-                "wizards_reborn.arcanemicon.chapter.test3_monogram",
-                new TitledMonogramPage("wizards_reborn.arcanemicon.page.test3_monogram", WizardsReborn.TEST3_MONOGRAM),
-                new MonogramRecipesPage(WizardsReborn.TEST3_MONOGRAM)
+        SOLEM_MONOGRAM = new Chapter(
+                "wizards_reborn.arcanemicon.chapter.solem_monogram",
+                new TitledMonogramPage("wizards_reborn.arcanemicon.page.solem_monogram", WizardsReborn.SOLEM_MONOGRAM),
+                new MonogramRecipesPage(WizardsReborn.SOLEM_MONOGRAM)
         );
-        TEST4_MONOGRAM = new Chapter(
-                "wizards_reborn.arcanemicon.chapter.test4_monogram",
-                new TitledMonogramPage("wizards_reborn.arcanemicon.page.test4_monogram", WizardsReborn.TEST4_MONOGRAM),
-                new MonogramRecipesPage(WizardsReborn.TEST4_MONOGRAM)
+        MORS_MONOGRAM = new Chapter(
+                "wizards_reborn.arcanemicon.chapter.mors_monogram",
+                new TitledMonogramPage("wizards_reborn.arcanemicon.page.mors_monogram", WizardsReborn.MORS_MONOGRAM),
+                new MonogramRecipesPage(WizardsReborn.MORS_MONOGRAM)
         );
-        TEST5_MONOGRAM = new Chapter(
-                "wizards_reborn.arcanemicon.chapter.test5_monogram",
-                new TitledMonogramPage("wizards_reborn.arcanemicon.page.test5_monogram", WizardsReborn.TEST5_MONOGRAM),
-                new MonogramRecipesPage(WizardsReborn.TEST5_MONOGRAM)
+        MIRACULUM_MONOGRAM = new Chapter(
+                "wizards_reborn.arcanemicon.chapter.miraculum_monogram",
+                new TitledMonogramPage("wizards_reborn.arcanemicon.page.miraculum_monogram", WizardsReborn.MIRACULUM_MONOGRAM),
+                new MonogramRecipesPage(WizardsReborn.MIRACULUM_MONOGRAM)
         );
-        TEST6_MONOGRAM = new Chapter(
-                "wizards_reborn.arcanemicon.chapter.test6_monogram",
-                new TitledMonogramPage("wizards_reborn.arcanemicon.page.test6_monogram", WizardsReborn.TEST6_MONOGRAM),
-                new MonogramRecipesPage(WizardsReborn.TEST6_MONOGRAM)
+        TEMPUS_MONOGRAM = new Chapter(
+                "wizards_reborn.arcanemicon.chapter.tempus_monogram",
+                new TitledMonogramPage("wizards_reborn.arcanemicon.page.tempus_monogram", WizardsReborn.TEMPUS_MONOGRAM),
+                new MonogramRecipesPage(WizardsReborn.TEMPUS_MONOGRAM)
         );
-        TEST7_MONOGRAM = new Chapter(
-                "wizards_reborn.arcanemicon.chapter.test7_monogram",
-                new TitledMonogramPage("wizards_reborn.arcanemicon.page.test7_monogram", WizardsReborn.TEST7_MONOGRAM),
-                new MonogramRecipesPage(WizardsReborn.TEST7_MONOGRAM)
+        STATERA_MONOGRAM = new Chapter(
+                "wizards_reborn.arcanemicon.chapter.statera_monogram",
+                new TitledMonogramPage("wizards_reborn.arcanemicon.page.statera_monogram", WizardsReborn.STATERA_MONOGRAM),
+                new MonogramRecipesPage(WizardsReborn.STATERA_MONOGRAM)
         );
-        TEST8_MONOGRAM = new Chapter(
-                "wizards_reborn.arcanemicon.chapter.test8_monogram",
-                new TitledMonogramPage("wizards_reborn.arcanemicon.page.test8_monogram", WizardsReborn.TEST8_MONOGRAM),
-                new MonogramRecipesPage(WizardsReborn.TEST8_MONOGRAM)
+        ECLIPSIS_MONOGRAM = new Chapter(
+                "wizards_reborn.arcanemicon.chapter.eclipsis_monogram",
+                new TitledMonogramPage("wizards_reborn.arcanemicon.page.eclipsis_monogram", WizardsReborn.ECLIPSIS_MONOGRAM),
+                new MonogramRecipesPage(WizardsReborn.ECLIPSIS_MONOGRAM)
         );
-        TEST9_MONOGRAM = new Chapter(
-                "wizards_reborn.arcanemicon.chapter.test9_monogram",
-                new TitledMonogramPage("wizards_reborn.arcanemicon.page.test9_monogram", WizardsReborn.TEST9_MONOGRAM),
-                new MonogramRecipesPage(WizardsReborn.TEST9_MONOGRAM)
+        SICCITAS_MONOGRAM = new Chapter(
+                "wizards_reborn.arcanemicon.chapter.siccitas_monogram",
+                new TitledMonogramPage("wizards_reborn.arcanemicon.page.siccitas_monogram", WizardsReborn.SICCITAS_MONOGRAM),
+                new MonogramRecipesPage(WizardsReborn.SICCITAS_MONOGRAM)
         );
-        TEST10_MONOGRAM = new Chapter(
-                "wizards_reborn.arcanemicon.chapter.test10_monogram",
-                new TitledMonogramPage("wizards_reborn.arcanemicon.page.test10_monogram", WizardsReborn.TEST10_MONOGRAM),
-                new MonogramRecipesPage(WizardsReborn.TEST10_MONOGRAM)
+        SOLSTITIUM_MONOGRAM = new Chapter(
+                "wizards_reborn.arcanemicon.chapter.solstitium_monogram",
+                new TitledMonogramPage("wizards_reborn.arcanemicon.page.solstitium_monogram", WizardsReborn.SOLSTITIUM_MONOGRAM),
+                new MonogramRecipesPage(WizardsReborn.SOLSTITIUM_MONOGRAM)
         );
-        TEST11_MONOGRAM = new Chapter(
-                "wizards_reborn.arcanemicon.chapter.test11_monogram",
-                new TitledMonogramPage("wizards_reborn.arcanemicon.page.test11_monogram", WizardsReborn.TEST11_MONOGRAM),
-                new MonogramRecipesPage(WizardsReborn.TEST11_MONOGRAM)
+        FAMES_MONOGRAM = new Chapter(
+                "wizards_reborn.arcanemicon.chapter.fames_monogram",
+                new TitledMonogramPage("wizards_reborn.arcanemicon.page.fames_monogram", WizardsReborn.FAMES_MONOGRAM),
+                new MonogramRecipesPage(WizardsReborn.FAMES_MONOGRAM)
         );
-        TEST12_MONOGRAM = new Chapter(
-                "wizards_reborn.arcanemicon.chapter.test12_monogram",
-                new TitledMonogramPage("wizards_reborn.arcanemicon.page.test12_monogram", WizardsReborn.TEST12_MONOGRAM),
-                new MonogramRecipesPage(WizardsReborn.TEST12_MONOGRAM)
+        RENAISSANCE_MONOGRAM = new Chapter(
+                "wizards_reborn.arcanemicon.chapter.renaissance_monogram",
+                new TitledMonogramPage("wizards_reborn.arcanemicon.page.renaissance_monogram", WizardsReborn.RENAISSANCE_MONOGRAM),
+                new MonogramRecipesPage(WizardsReborn.RENAISSANCE_MONOGRAM)
         );
-        TEST13_MONOGRAM = new Chapter(
-                "wizards_reborn.arcanemicon.chapter.test13_monogram",
-                new TitledMonogramPage("wizards_reborn.arcanemicon.page.test13_monogram", WizardsReborn.TEST13_MONOGRAM),
-                new MonogramRecipesPage(WizardsReborn.TEST13_MONOGRAM)
+        BELLUM_MONOGRAM = new Chapter(
+                "wizards_reborn.arcanemicon.chapter.bellum_monogram",
+                new TitledMonogramPage("wizards_reborn.arcanemicon.page.bellum_monogram", WizardsReborn.BELLUM_MONOGRAM),
+                new MonogramRecipesPage(WizardsReborn.BELLUM_MONOGRAM)
         );
-        TEST14_MONOGRAM = new Chapter(
-                "wizards_reborn.arcanemicon.chapter.test14_monogram",
-                new TitledMonogramPage("wizards_reborn.arcanemicon.page.test14_monogram", WizardsReborn.TEST14_MONOGRAM),
-                new MonogramRecipesPage(WizardsReborn.TEST14_MONOGRAM)
+        LUX_MONOGRAM = new Chapter(
+                "wizards_reborn.arcanemicon.chapter.lux_monogram",
+                new TitledMonogramPage("wizards_reborn.arcanemicon.page.lux_monogram", WizardsReborn.LUX_MONOGRAM),
+                new MonogramRecipesPage(WizardsReborn.LUX_MONOGRAM)
         );
-        TEST15_MONOGRAM = new Chapter(
-                "wizards_reborn.arcanemicon.chapter.test15_monogram",
-                new TitledMonogramPage("wizards_reborn.arcanemicon.page.test15_monogram", WizardsReborn.TEST15_MONOGRAM),
-                new MonogramRecipesPage(WizardsReborn.TEST15_MONOGRAM)
+        KARA_MONOGRAM = new Chapter(
+                "wizards_reborn.arcanemicon.chapter.kara_monogram",
+                new TitledMonogramPage("wizards_reborn.arcanemicon.page.kara_monogram", WizardsReborn.KARA_MONOGRAM),
+                new MonogramRecipesPage(WizardsReborn.KARA_MONOGRAM)
         );
-        TEST16_MONOGRAM = new Chapter(
-                "wizards_reborn.arcanemicon.chapter.test16_monogram",
-                new TitledMonogramPage("wizards_reborn.arcanemicon.page.test16_monogram", WizardsReborn.TEST16_MONOGRAM),
-                new MonogramRecipesPage(WizardsReborn.TEST16_MONOGRAM)
+        DEGRADATIO_MONOGRAM = new Chapter(
+                "wizards_reborn.arcanemicon.chapter.degradatio_monogram",
+                new TitledMonogramPage("wizards_reborn.arcanemicon.page.degradatio_monogram", WizardsReborn.DEGRADATIO_MONOGRAM),
+                new MonogramRecipesPage(WizardsReborn.DEGRADATIO_MONOGRAM)
         );
-        TEST17_MONOGRAM = new Chapter(
-                "wizards_reborn.arcanemicon.chapter.test17_monogram",
-                new TitledMonogramPage("wizards_reborn.arcanemicon.page.test17_monogram", WizardsReborn.TEST17_MONOGRAM),
-                new MonogramRecipesPage(WizardsReborn.TEST17_MONOGRAM)
+        PRAEDICTIONEM_MONOGRAM = new Chapter(
+                "wizards_reborn.arcanemicon.chapter.praedictionem_monogram",
+                new TitledMonogramPage("wizards_reborn.arcanemicon.page.praedictionem_monogram", WizardsReborn.PRAEDICTIONEM_MONOGRAM),
+                new MonogramRecipesPage(WizardsReborn.PRAEDICTIONEM_MONOGRAM)
         );
-        TEST18_MONOGRAM = new Chapter(
-                "wizards_reborn.arcanemicon.chapter.test18_monogram",
-                new TitledMonogramPage("wizards_reborn.arcanemicon.page.test18_monogram", WizardsReborn.TEST18_MONOGRAM),
-                new MonogramRecipesPage(WizardsReborn.TEST18_MONOGRAM)
+        EVOLUTIONIS_MONOGRAM = new Chapter(
+                "wizards_reborn.arcanemicon.chapter.evolutionis_monogram",
+                new TitledMonogramPage("wizards_reborn.arcanemicon.page.evolutionis_monogram", WizardsReborn.EVOLUTIONIS_MONOGRAM),
+                new MonogramRecipesPage(WizardsReborn.EVOLUTIONIS_MONOGRAM)
         );
-        TEST19_MONOGRAM = new Chapter(
-                "wizards_reborn.arcanemicon.chapter.test19_monogram",
-                new TitledMonogramPage("wizards_reborn.arcanemicon.page.test19_monogram", WizardsReborn.TEST19_MONOGRAM),
-                new MonogramRecipesPage(WizardsReborn.TEST19_MONOGRAM)
+        DARK_MONOGRAM = new Chapter(
+                "wizards_reborn.arcanemicon.chapter.dark_monogram",
+                new TitledMonogramPage("wizards_reborn.arcanemicon.page.dark_monogram", WizardsReborn.DARK_MONOGRAM),
+                new MonogramRecipesPage(WizardsReborn.DARK_MONOGRAM)
         );
-        TEST20_MONOGRAM = new Chapter(
-                "wizards_reborn.arcanemicon.chapter.test20_monogram",
-                new TitledMonogramPage("wizards_reborn.arcanemicon.page.test20_monogram", WizardsReborn.TEST20_MONOGRAM),
-                new MonogramRecipesPage(WizardsReborn.TEST20_MONOGRAM)
+        UNIVERSUM_MONOGRAM = new Chapter(
+                "wizards_reborn.arcanemicon.chapter.universum_monogram",
+                new TitledMonogramPage("wizards_reborn.arcanemicon.page.universum_monogram", WizardsReborn.UNIVERSUM_MONOGRAM),
+                new MonogramRecipesPage(WizardsReborn.UNIVERSUM_MONOGRAM)
         );
 
         ALL_SPELLS = new Chapter(
@@ -553,32 +626,32 @@ public class ArcanemiconChapters {
         MONOGRAMS = new Chapter(
                 "wizards_reborn.arcanemicon.chapter.monograms",
                 new TitledMonogramIndexPage("wizards_reborn.arcanemicon.page.monograms",
-                        new MonogramIndexEntry(TEST1_MONOGRAM, WizardsReborn.TEST1_MONOGRAM),
-                        new MonogramIndexEntry(TEST2_MONOGRAM, WizardsReborn.TEST2_MONOGRAM),
-                        new MonogramIndexEntry(TEST3_MONOGRAM, WizardsReborn.TEST3_MONOGRAM),
-                        new MonogramIndexEntry(TEST4_MONOGRAM, WizardsReborn.TEST4_MONOGRAM),
-                        new MonogramIndexEntry(TEST5_MONOGRAM, WizardsReborn.TEST5_MONOGRAM),
-                        new MonogramIndexEntry(TEST6_MONOGRAM, WizardsReborn.TEST6_MONOGRAM)
+                        new MonogramIndexEntry(LUNAM_MONOGRAM, WizardsReborn.LUNAM_MONOGRAM),
+                        new MonogramIndexEntry(VITA_MONOGRAM, WizardsReborn.VITA_MONOGRAM),
+                        new MonogramIndexEntry(SOLEM_MONOGRAM, WizardsReborn.SOLEM_MONOGRAM),
+                        new MonogramIndexEntry(MORS_MONOGRAM, WizardsReborn.MORS_MONOGRAM),
+                        new MonogramIndexEntry(MIRACULUM_MONOGRAM, WizardsReborn.MIRACULUM_MONOGRAM),
+                        new MonogramIndexEntry(TEMPUS_MONOGRAM, WizardsReborn.TEMPUS_MONOGRAM)
                 ),
                 new MonogramIndexPage(
-                        new MonogramIndexEntry(TEST7_MONOGRAM, WizardsReborn.TEST7_MONOGRAM),
-                        new MonogramIndexEntry(TEST8_MONOGRAM, WizardsReborn.TEST8_MONOGRAM),
-                        new MonogramIndexEntry(TEST9_MONOGRAM, WizardsReborn.TEST9_MONOGRAM),
-                        new MonogramIndexEntry(TEST10_MONOGRAM, WizardsReborn.TEST10_MONOGRAM),
-                        new MonogramIndexEntry(TEST11_MONOGRAM, WizardsReborn.TEST11_MONOGRAM),
-                        new MonogramIndexEntry(TEST12_MONOGRAM, WizardsReborn.TEST12_MONOGRAM)
+                        new MonogramIndexEntry(STATERA_MONOGRAM, WizardsReborn.STATERA_MONOGRAM),
+                        new MonogramIndexEntry(ECLIPSIS_MONOGRAM, WizardsReborn.ECLIPSIS_MONOGRAM),
+                        new MonogramIndexEntry(SICCITAS_MONOGRAM, WizardsReborn.SICCITAS_MONOGRAM),
+                        new MonogramIndexEntry(SOLSTITIUM_MONOGRAM, WizardsReborn.SOLSTITIUM_MONOGRAM),
+                        new MonogramIndexEntry(FAMES_MONOGRAM, WizardsReborn.FAMES_MONOGRAM),
+                        new MonogramIndexEntry(RENAISSANCE_MONOGRAM, WizardsReborn.RENAISSANCE_MONOGRAM)
                 ),
                 new MonogramIndexPage(
-                        new MonogramIndexEntry(TEST13_MONOGRAM, WizardsReborn.TEST13_MONOGRAM),
-                        new MonogramIndexEntry(TEST14_MONOGRAM, WizardsReborn.TEST14_MONOGRAM),
-                        new MonogramIndexEntry(TEST15_MONOGRAM, WizardsReborn.TEST15_MONOGRAM),
-                        new MonogramIndexEntry(TEST16_MONOGRAM, WizardsReborn.TEST16_MONOGRAM),
-                        new MonogramIndexEntry(TEST17_MONOGRAM, WizardsReborn.TEST17_MONOGRAM),
-                        new MonogramIndexEntry(TEST18_MONOGRAM, WizardsReborn.TEST18_MONOGRAM)
+                        new MonogramIndexEntry(BELLUM_MONOGRAM, WizardsReborn.BELLUM_MONOGRAM),
+                        new MonogramIndexEntry(LUX_MONOGRAM, WizardsReborn.LUX_MONOGRAM),
+                        new MonogramIndexEntry(KARA_MONOGRAM, WizardsReborn.KARA_MONOGRAM),
+                        new MonogramIndexEntry(DEGRADATIO_MONOGRAM, WizardsReborn.DEGRADATIO_MONOGRAM),
+                        new MonogramIndexEntry(PRAEDICTIONEM_MONOGRAM, WizardsReborn.PRAEDICTIONEM_MONOGRAM),
+                        new MonogramIndexEntry(EVOLUTIONIS_MONOGRAM, WizardsReborn.EVOLUTIONIS_MONOGRAM)
                 ),
                 new MonogramIndexPage(
-                        new MonogramIndexEntry(TEST19_MONOGRAM, WizardsReborn.TEST19_MONOGRAM),
-                        new MonogramIndexEntry(TEST20_MONOGRAM, WizardsReborn.TEST20_MONOGRAM)
+                        new MonogramIndexEntry(DARK_MONOGRAM, WizardsReborn.DARK_MONOGRAM),
+                        new MonogramIndexEntry(UNIVERSUM_MONOGRAM, WizardsReborn.UNIVERSUM_MONOGRAM)
                 )
         );
 
@@ -601,8 +674,42 @@ public class ArcanemiconChapters {
                 "wizards_reborn.arcanemicon.chapter.crystals_rituals_index"
         );
 
+        MOR = new Chapter(
+                "wizards_reborn.arcanemicon.chapter.mor",
+                new TitledBlockPage("wizards_reborn.arcanemicon.page.mor",
+                        new BlockEntry(new ItemStack(WizardsReborn.ARCANE_PEDESTAL_ITEM.get()), new ItemStack(WizardsReborn.MOR_ITEM.get())),
+                        new BlockEntry(new ItemStack(WizardsReborn.ARCANE_PEDESTAL_ITEM.get()), new ItemStack(WizardsReborn.MOR_BLOCK_ITEM.get())),
+                        new BlockEntry(new ItemStack(WizardsReborn.ARCANE_PEDESTAL_ITEM.get()), new ItemStack(WizardsReborn.ELDER_MOR_ITEM.get())),
+                        new BlockEntry(new ItemStack(WizardsReborn.ARCANE_PEDESTAL_ITEM.get()), new ItemStack(WizardsReborn.ELDER_MOR_BLOCK_ITEM.get()))
+                )
+        );
+
+        ARCANE_LINEN = new Chapter(
+                "wizards_reborn.arcanemicon.chapter.arcane_linen",
+                new TitledBlockPage("wizards_reborn.arcanemicon.page.arcane_linen",
+                        new BlockEntry(new ItemStack(WizardsReborn.ARCANE_PEDESTAL_ITEM.get()), new ItemStack(WizardsReborn.ARCANE_LINEN_SEEDS.get())),
+                        new BlockEntry(new ItemStack(WizardsReborn.ARCANE_PEDESTAL_ITEM.get()), new ItemStack(WizardsReborn.ARCANE_LINEN_ITEM.get())),
+                        new BlockEntry(new ItemStack(WizardsReborn.ARCANE_PEDESTAL_ITEM.get()), new ItemStack(WizardsReborn.ARCANE_LINEN_HAY_ITEM.get()))
+                ),
+                new WissenCrystallizerPage(new ItemStack(WizardsReborn.ARCANE_LINEN_SEEDS.get()),
+                        new ItemStack(Items.WHEAT_SEEDS), new ItemStack(WizardsReborn.ARCANUM.get()), new ItemStack(WizardsReborn.ARCANUM.get()),
+                        new ItemStack(WizardsReborn.ARCANE_GOLD_NUGGET.get()), new ItemStack(WizardsReborn.ARCANE_GOLD_NUGGET.get()), new ItemStack(WizardsReborn.ARCANE_GOLD_NUGGET.get()),
+                        new ItemStack(Items.WHEAT), new ItemStack(Items.WHEAT)
+                ),
+                new CraftingTablePage(new ItemStack(WizardsReborn.ARCANE_LINEN_HAY_ITEM.get()),
+                        new ItemStack(WizardsReborn.ARCANE_LINEN_ITEM.get()), new ItemStack(WizardsReborn.ARCANE_LINEN_ITEM.get()), new ItemStack(WizardsReborn.ARCANE_LINEN_ITEM.get()),
+                        new ItemStack(WizardsReborn.ARCANE_LINEN_ITEM.get()), new ItemStack(WizardsReborn.ARCANE_LINEN_ITEM.get()), new ItemStack(WizardsReborn.ARCANE_LINEN_ITEM.get()),
+                        new ItemStack(WizardsReborn.ARCANE_LINEN_ITEM.get()), new ItemStack(WizardsReborn.ARCANE_LINEN_ITEM.get()), new ItemStack(WizardsReborn.ARCANE_LINEN_ITEM.get())
+                ),
+                new CraftingTablePage(new ItemStack(WizardsReborn.ARCANE_LINEN_ITEM.get(), 9), new ItemStack(WizardsReborn.ARCANE_LINEN_HAY_ITEM.get()))
+        );
+
         ALCHEMY_INDEX = new Chapter(
-                "wizards_reborn.arcanemicon.chapter.alchemy_index"
+                "wizards_reborn.arcanemicon.chapter.alchemy_index",
+                new TitledIndexPage("wizards_reborn.arcanemicon.page.alchemy_index",
+                    new IndexEntry(MOR, new ItemStack(WizardsReborn.MOR_ITEM.get())),
+                    new IndexEntry(ARCANE_LINEN, new ItemStack(WizardsReborn.ARCANE_LINEN_ITEM.get()))
+                )
         );
 
         ARCANE_NATURE = new Category(

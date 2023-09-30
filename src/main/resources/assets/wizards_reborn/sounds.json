@@ -22,5 +22,11 @@
     "sounds": [
       "wizards_reborn:spell_burst"
     ]
+  },
+  "spell_reload": {
+    "subtitle": "sounds.wizards_reborn.spell_reload",
+    "sounds": [
+      "wizards_reborn:spell_reload"
+    ]
   }
 }

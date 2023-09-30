@@ -10,7 +10,7 @@ import mod.maxbogomol.wizards_reborn.client.particle.KarmaParticleType;
 import mod.maxbogomol.wizards_reborn.client.particle.SparkleParticleType;
 import mod.maxbogomol.wizards_reborn.client.particle.WispParticleType;
 import mod.maxbogomol.wizards_reborn.client.render.entity.ArcaneWoodBoatModel;
-import mod.maxbogomol.wizards_reborn.client.render.entity.EmptyRenderer;
+import mod.maxbogomol.wizards_reborn.client.render.entity.SpellProjectileRenderer;
 import mod.maxbogomol.wizards_reborn.client.render.item.*;
 import mod.maxbogomol.wizards_reborn.client.render.tileentity.*;
 import mod.maxbogomol.wizards_reborn.common.entity.CustomBoatEntity;
@@ -31,7 +31,6 @@ import net.minecraft.client.resources.model.BakedModel;
 import net.minecraft.client.resources.model.ModelResourceLocation;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraftforge.api.distmarker.Dist;
-import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.client.event.*;
 import net.minecraftforge.client.settings.KeyConflictContext;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
@@ -49,10 +48,14 @@ public class WizardsRebornClient {
     public static ModelLayerLocation BELT_LAYER = new ModelLayerLocation(new ResourceLocation(WizardsReborn.MOD_ID, "belt"), "main");
     public static ModelLayerLocation AMULET_LAYER = new ModelLayerLocation(new ResourceLocation(WizardsReborn.MOD_ID, "amulet"), "main");
 
-    public static ShaderInstance GLOWING_PARTICLE_SHADER, SPRITE_PARTICLE_SHADER;
+    public static ShaderInstance GLOWING_SHADER, GLOWING_SPRITE_SHADER, GLOWING_PARTICLE_SHADER, SPRITE_PARTICLE_SHADER;
 
+    public static ShaderInstance getGlowingShader() { return GLOWING_SHADER; }
+    public static ShaderInstance getGlowingSpriteShader() { return GLOWING_SPRITE_SHADER; }
     public static ShaderInstance getGlowingParticleShader() { return GLOWING_PARTICLE_SHADER; }
     public static ShaderInstance getSpriteParticleShader() { return SPRITE_PARTICLE_SHADER; }
+
+    public static boolean optifinePresent = false;
 
     @Mod.EventBusSubscriber(bus=Mod.EventBusSubscriber.Bus.MOD, value = Dist.CLIENT)
     public static class RegistryEvents {
@@ -84,7 +87,7 @@ public class WizardsRebornClient {
 
             EntityRenderers.register(WizardsReborn.BOAT.get(), m -> new ArcaneWoodBoatModel(m, false));
             EntityRenderers.register(WizardsReborn.CHEST_BOAT.get(), m -> new ArcaneWoodBoatModel(m, true));
-            EntityRenderers.register(WizardsReborn.SPELL_PROJECTILE.get(), EmptyRenderer::new);
+            EntityRenderers.register(WizardsReborn.SPELL_PROJECTILE.get(), SpellProjectileRenderer::new);
         }
 
         @SubscribeEvent
@@ -134,14 +137,14 @@ public class WizardsRebornClient {
 
         @SubscribeEvent
         public static void shaderRegistry(RegisterShadersEvent event) throws IOException {
+            event.registerShader(new ShaderInstance(event.getResourceProvider(), new ResourceLocation("wizards_reborn:glowing"), DefaultVertexFormat.POSITION_COLOR),
+                    shader -> { GLOWING_SHADER = shader; });
+            event.registerShader(new ShaderInstance(event.getResourceProvider(), new ResourceLocation("wizards_reborn:glowing_sprite"), DefaultVertexFormat.POSITION_TEX_COLOR),
+                    shader -> { GLOWING_SPRITE_SHADER = shader; });
             event.registerShader(new ShaderInstance(event.getResourceProvider(), new ResourceLocation("wizards_reborn:glowing_particle"), DefaultVertexFormat.PARTICLE),
-                    shader -> {
-                        GLOWING_PARTICLE_SHADER = shader;
-                    });
+                    shader -> { GLOWING_PARTICLE_SHADER = shader; });
             event.registerShader(new ShaderInstance(event.getResourceProvider(), new ResourceLocation("wizards_reborn:sprite_particle"), DefaultVertexFormat.PARTICLE),
-                    shader -> {
-                        SPRITE_PARTICLE_SHADER = shader;
-                    });
+                    shader -> { SPRITE_PARTICLE_SHADER = shader; });
         }
 
         @SubscribeEvent
