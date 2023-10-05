@@ -102,8 +102,7 @@ import top.theillusivec4.curios.api.SlotTypePreset;
 import top.theillusivec4.curios.api.client.CuriosRendererRegistry;
 
 @Mod("wizards_reborn")
-public class WizardsReborn
-{
+public class WizardsReborn {
     public static final String MOD_ID = "wizards_reborn";
 
     public static final ISidedProxy proxy = DistExecutor.unsafeRunForDist(() -> ClientProxy::new, () -> ServerProxy::new);
@@ -182,12 +181,12 @@ public class WizardsReborn
     public static Spell FROST_PROJECTILE_SPELL = new FrostProjectileSpell(MOD_ID+":frost_projectile");
     public static Spell HOLY_PROJECTILE_SPELL = new HolyProjectileSpell(MOD_ID+":holy_projectile");
     public static Spell EARTH_RAY_SPELL = new EarthRaySpell(MOD_ID+":earth_ray");
-    public static Spell WATER_RAY_SPELL = new WaterProjectileSpell(MOD_ID+":water_ray");
-    public static Spell AIR_RAY_SPELL = new AirProjectileSpell(MOD_ID+":air_ray");
-    public static Spell FIRE_RAY_SPELL = new FireProjectileSpell(MOD_ID+":fire_ray");
-    public static Spell VOID_RAY_SPELL = new VoidProjectileSpell(MOD_ID+":void_ray");
-    public static Spell FROST_RAY_SPELL = new FrostProjectileSpell(MOD_ID+":frost_ray");
-    public static Spell HOLY_RAY_SPELL = new HolyProjectileSpell(MOD_ID+":holy_ray");
+    public static Spell WATER_RAY_SPELL = new WaterRaySpell(MOD_ID+":water_ray");
+    public static Spell AIR_RAY_SPELL = new AirRaySpell(MOD_ID+":air_ray");
+    public static Spell FIRE_RAY_SPELL = new FireRaySpell(MOD_ID+":fire_ray");
+    public static Spell VOID_RAY_SPELL = new VoidRaySpell(MOD_ID+":void_ray");
+    public static Spell FROST_RAY_SPELL = new FrostRaySpell(MOD_ID+":frost_ray");
+    public static Spell HOLY_RAY_SPELL = new HolyRaySpell(MOD_ID+":holy_ray");
 
     public static final FoodProperties MOR_FOOD = (new FoodProperties.Builder()).nutrition(1).saturationMod(0.6F).effect(new MobEffectInstance(MobEffects.POISON, 250, 1), 1.0F).effect(new MobEffectInstance(MobEffects.CONFUSION, 250, 1), 1.0F).effect(new MobEffectInstance(MobEffects.BLINDNESS, 250, 1), 1.0F).effect(new MobEffectInstance(MobEffects.WEAKNESS, 250, 1), 1.0F).build();
 

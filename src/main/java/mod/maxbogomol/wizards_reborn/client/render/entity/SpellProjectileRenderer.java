@@ -8,6 +8,7 @@ import net.minecraft.client.renderer.culling.Frustum;
 import net.minecraft.client.renderer.entity.EntityRenderer;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.phys.Vec3;
 
 public class SpellProjectileRenderer<T extends SpellProjectileEntity> extends EntityRenderer<T> {
 
@@ -31,5 +32,14 @@ public class SpellProjectileRenderer<T extends SpellProjectileEntity> extends En
     @Override
     public ResourceLocation getTextureLocation(T entity) {
         return null;
+    }
+
+    @Override
+    public Vec3 getRenderOffset(T entity, float partialTicks) {
+        Spell spell = entity.getSpell();
+        if (spell != null) {
+            return spell.getRenderOffset(entity, partialTicks);
+        }
+        return Vec3.ZERO;
     }
 }

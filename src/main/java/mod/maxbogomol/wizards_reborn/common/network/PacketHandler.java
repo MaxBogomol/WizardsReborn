@@ -42,6 +42,8 @@ public final class PacketHandler {
 
         HANDLER.registerMessage(id++, SpellBurstEffectPacket.class, SpellBurstEffectPacket::encode, SpellBurstEffectPacket::decode, SpellBurstEffectPacket::handle);
         HANDLER.registerMessage(id++, SpellProjectileRayEffectPacket.class, SpellProjectileRayEffectPacket::encode, SpellProjectileRayEffectPacket::decode, SpellProjectileRayEffectPacket::handle);
+        HANDLER.registerMessage(id++, SpellProjectileUpdateSpellDataPacket.class, SpellProjectileUpdateSpellDataPacket::encode, SpellProjectileUpdateSpellDataPacket::decode, SpellProjectileUpdateSpellDataPacket::handle);
+        HANDLER.registerMessage(id++, RaySpellEffectPacket.class, RaySpellEffectPacket::encode, RaySpellEffectPacket::decode, RaySpellEffectPacket::handle);
 
         HANDLER.registerMessage(id++, WissenDustBurstEffectPacket.class, WissenDustBurstEffectPacket::encode, WissenDustBurstEffectPacket::decode, WissenDustBurstEffectPacket::handle);
 

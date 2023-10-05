@@ -2,9 +2,7 @@ package mod.maxbogomol.wizards_reborn.common.entity;
 
 import mod.maxbogomol.wizards_reborn.api.spell.Spell;
 import mod.maxbogomol.wizards_reborn.api.spell.Spells;
-import mod.maxbogomol.wizards_reborn.common.network.PacketHandler;
-import mod.maxbogomol.wizards_reborn.common.network.SpellBurstEffectPacket;
-import mod.maxbogomol.wizards_reborn.common.network.SpellProjectileRayEffectPacket;
+import mod.maxbogomol.wizards_reborn.common.network.*;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.protocol.Packet;
@@ -16,6 +14,7 @@ import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityDimensions;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.Pose;
+import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.HitResult;
 import net.minecraft.world.phys.Vec3;
@@ -29,20 +28,27 @@ public class SpellProjectileEntity extends Entity {
     public static final EntityDataAccessor<Optional<UUID>> casterId = SynchedEntityData.defineId(SpellProjectileEntity.class, EntityDataSerializers.OPTIONAL_UUID);
     public static final EntityDataAccessor<String> spellId = SynchedEntityData.defineId(SpellProjectileEntity.class, EntityDataSerializers.STRING);
     public static final EntityDataAccessor<CompoundTag> crystalStats = SynchedEntityData.defineId(SpellProjectileEntity.class, EntityDataSerializers.COMPOUND_TAG);
+    public static final EntityDataAccessor<CompoundTag> spellData = SynchedEntityData.defineId(SpellProjectileEntity.class, EntityDataSerializers.COMPOUND_TAG);
 
     public SpellProjectileEntity(EntityType<?> entityTypeIn, Level worldIn) {
         super(entityTypeIn, worldIn);
     }
 
-    public Entity shoot(double x, double y, double z, double vx, double vy, double vz, UUID caster, String spell, CompoundTag stats) {
+    public SpellProjectileEntity shoot(double x, double y, double z, double vx, double vy, double vz, UUID caster, String spell, CompoundTag stats) {
         setPos(x, y, z);
         setDeltaMovement(vx, vy, vz);
         getEntityData().set(casterId, Optional.of(caster));
         getEntityData().set(spellId, spell);
         getEntityData().set(crystalStats, stats);
-        hurtMarked = true;
+        //hurtMarked = true;
         return this;
     }
+
+    public SpellProjectileEntity createSpellData(CompoundTag spellData) {
+        getEntityData().set(this.spellData, spellData);
+        return this;
+    }
+
 
     @Override
     public void tick() {
@@ -56,14 +62,14 @@ public class SpellProjectileEntity extends Entity {
     public void onImpact(HitResult ray, Entity target) {
         Spell spell = getSpell();
         if (spell != null) {
-            spell.onImpact(ray, level(), this, level().getPlayerByUUID(getEntityData().get(casterId).get()), target);
+            spell.onImpact(ray, level(), this, getSender(), target);
         }
     }
 
     public void onImpact(HitResult ray) {
         Spell spell = getSpell();
         if (spell != null) {
-            spell.onImpact(ray, level(), this, level().getPlayerByUUID(getEntityData().get(casterId).get()));
+            spell.onImpact(ray, level(), this, getSender());
         }
     }
 
@@ -72,6 +78,7 @@ public class SpellProjectileEntity extends Entity {
         getEntityData().define(spellId,"");
         getEntityData().define(casterId, Optional.empty());
         getEntityData().define(crystalStats, new CompoundTag());
+        getEntityData().define(spellData, new CompoundTag());
     }
 
     @Override
@@ -79,6 +86,7 @@ public class SpellProjectileEntity extends Entity {
         getEntityData().set(casterId, Optional.of(compound.getUUID("caster")));
         getEntityData().set(spellId, compound.getString("spelll"));
         getEntityData().set(crystalStats, compound.getCompound("stats"));
+        getEntityData().set(spellData, compound.getCompound("spell_data"));
     }
 
     @Override
@@ -86,6 +94,7 @@ public class SpellProjectileEntity extends Entity {
         compound.putUUID("caster", getEntityData().get(casterId).get());
         compound.putString("spelll", getEntityData().get(spellId));
         compound.put("stats", getEntityData().get(crystalStats));
+        compound.put("spell_data", getEntityData().get(spellData));
     }
 
     @Override
@@ -122,6 +131,11 @@ public class SpellProjectileEntity extends Entity {
 
     public void burstEffect() {
         Vec3 pos = position();
+        burstEffect((float) pos.x, (float) pos.y + 0.2f, (float) pos.z);
+    }
+
+    public void burstEffect(float x, float y, float z) {
+        Vec3 pos = position();
 
         Spell spell = getSpell();
         if (spell != null) {
@@ -130,7 +144,7 @@ public class SpellProjectileEntity extends Entity {
             float g = color.getGreen() / 255f;
             float b = color.getBlue() / 255f;
 
-            PacketHandler.sendToTracking(level(), new BlockPos((int) pos.x, (int) pos.y, (int) pos.z), new SpellBurstEffectPacket((float) pos.x, (float) pos.y + 0.2f, (float) pos.z, r, g, b));
+            PacketHandler.sendToTracking(level(), new BlockPos((int) pos.x, (int) pos.y, (int) pos.z), new SpellBurstEffectPacket(x, y, z, r, g, b));
         }
     }
 
@@ -140,5 +154,21 @@ public class SpellProjectileEntity extends Entity {
 
     public CompoundTag getStats() {
         return getEntityData().get(crystalStats);
+    }
+
+    public CompoundTag getSpellData() {
+        return getEntityData().get(spellData);
+    }
+
+    public void setSpellData(CompoundTag nbt) {
+        getEntityData().set(spellData, nbt);
+    }
+
+    public void updateSpellData() {
+        PacketHandler.sendToTracking(level(), getOnPos(), new SpellProjectileUpdateSpellDataPacket(getUUID(), getEntityData().get(spellData)));
+    }
+
+    public Player getSender() {
+        return level().getPlayerByUUID(getEntityData().get(casterId).get());
     }
 }

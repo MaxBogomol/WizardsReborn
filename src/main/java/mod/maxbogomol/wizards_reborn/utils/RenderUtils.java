@@ -268,29 +268,29 @@ public class RenderUtils {
         mStack.popPose();
     }
 
-    public static void ray(PoseStack mStack, MultiBufferSource buf, float width, float height, float r, float g, float b, float a) {
-        ray(mStack, buf, width, height, r, g, b, a, r, g, b, a);
+    public static void ray(PoseStack mStack, MultiBufferSource buf, float width, float height, float endOffset, float r, float g, float b, float a) {
+        ray(mStack, buf, width, height, endOffset, r, g, b, a, r, g, b, a);
     }
 
-    public static void ray(PoseStack mStack, MultiBufferSource buf, float width, float height, float r1, float g1, float b1, float a1, float r2, float g2, float b2, float a2) {
+    public static void ray(PoseStack mStack, MultiBufferSource buf, float width, float height, float endOffset, float r1, float g1, float b1, float a1, float r2, float g2, float b2, float a2) {
         VertexConsumer builder = buf.getBuffer(GLOWING);
 
         Matrix4f mat = mStack.last().pose();
 
         builder.vertex(mat, -width, width, -width).color(r1, g1, b1, a1).endVertex();
-        builder.vertex(mat, height, width, -width).color(r2, g2, b2, a2).endVertex();
-        builder.vertex(mat, height, -width, -width).color(r2, g2, b2, a2).endVertex();
+        builder.vertex(mat, height, width * endOffset, -width * endOffset).color(r2, g2, b2, a2).endVertex();
+        builder.vertex(mat, height, -width * endOffset, -width * endOffset).color(r2, g2, b2, a2).endVertex();
         builder.vertex(mat, -width, -width, -width).color(r1, g1, b1, a1).endVertex();
 
-        builder.vertex(mat, height, width, width).color(r2, g2, b2, a2).endVertex();
+        builder.vertex(mat, height, width * endOffset, width * endOffset).color(r2, g2, b2, a2).endVertex();
         builder.vertex(mat, -width, width, width).color(r1, g1, b1, a1).endVertex();
         builder.vertex(mat, -width, -width, width).color(r1, g1, b1, a1).endVertex();
-        builder.vertex(mat, height, -width, width).color(r2, g2, b2, a2).endVertex();
+        builder.vertex(mat, height, -width * endOffset, width * endOffset).color(r2, g2, b2, a2).endVertex();
 
-        builder.vertex(mat, height, -width, width).color(r2, g2, b2, a2).endVertex();
-        builder.vertex(mat, height, -width, -width).color(r2, g2, b2, a2).endVertex();
-        builder.vertex(mat, height, width, -width).color(r2, g2, b2, a2).endVertex();
-        builder.vertex(mat, height, width, width).color(r2, g2, b2, a2).endVertex();
+        builder.vertex(mat, height, -width * endOffset, width * endOffset).color(r2, g2, b2, a2).endVertex();
+        builder.vertex(mat, height, -width * endOffset, -width * endOffset).color(r2, g2, b2, a2).endVertex();
+        builder.vertex(mat, height, width * endOffset, -width * endOffset).color(r2, g2, b2, a2).endVertex();
+        builder.vertex(mat, height, width * endOffset, width * endOffset).color(r2, g2, b2, a2).endVertex();
 
         builder.vertex(mat, -width, -width, -width).color(r1, g1, b1, a1).endVertex();
         builder.vertex(mat, -width, -width, width).color(r1, g1, b1, a1).endVertex();
@@ -298,13 +298,13 @@ public class RenderUtils {
         builder.vertex(mat, -width, width, -width).color(r1, g1, b1, a1).endVertex();
 
         builder.vertex(mat, -width, width, width).color(r1, g1, b1, a1).endVertex();
-        builder.vertex(mat, height, width, width).color(r2, g2, b2, a2).endVertex();
-        builder.vertex(mat, height, width, -width).color(r2, g2, b2, a2).endVertex();
+        builder.vertex(mat, height, width * endOffset, width * endOffset).color(r2, g2, b2, a2).endVertex();
+        builder.vertex(mat, height, width * endOffset, -width * endOffset).color(r2, g2, b2, a2).endVertex();
         builder.vertex(mat, -width, width, -width).color(r1, g1, b1, a1).endVertex();
 
         builder.vertex(mat, -width, -width, -width).color(r1, g1, b1, a1).endVertex();
-        builder.vertex(mat, height, -width, -width).color(r2, g2, b2, a2).endVertex();
-        builder.vertex(mat, height, -width, width).color(r2, g2, b2, a2).endVertex();
+        builder.vertex(mat, height, -width * endOffset, -width * endOffset).color(r2, g2, b2, a2).endVertex();
+        builder.vertex(mat, height, -width * endOffset, width * endOffset).color(r2, g2, b2, a2).endVertex();
         builder.vertex(mat, -width, -width, width).color(r1, g1, b1, a1).endVertex();
     }
 }

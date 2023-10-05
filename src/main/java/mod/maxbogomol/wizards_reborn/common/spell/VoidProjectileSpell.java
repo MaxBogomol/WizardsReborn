@@ -1,6 +1,7 @@
 package mod.maxbogomol.wizards_reborn.common.spell;
 
 import mod.maxbogomol.wizards_reborn.WizardsReborn;
+import mod.maxbogomol.wizards_reborn.api.crystal.CrystalUtils;
 import mod.maxbogomol.wizards_reborn.common.entity.SpellProjectileEntity;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.Entity;
@@ -25,6 +26,7 @@ public class VoidProjectileSpell extends ProjectileSpell {
     public void onImpact(HitResult ray, Level world, SpellProjectileEntity projectile, Player player, Entity target) {
         super.onImpact(ray, world, projectile, player, target);
 
-        target.hurt(new DamageSource(projectile.damageSources().magic().typeHolder(), projectile, player), 5.0f);
+        int focusLevel = CrystalUtils.getStatLevel(projectile.getStats(), WizardsReborn.FOCUS_CRYSTAL_STAT);
+        target.hurt(new DamageSource(projectile.damageSources().magic().typeHolder(), projectile, player), (float) (5.0f + (focusLevel * 0.5)));
     }
 }

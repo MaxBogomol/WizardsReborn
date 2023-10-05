@@ -11,15 +11,15 @@ import net.minecraft.world.phys.HitResult;
 
 import java.awt.*;
 
-public class FireProjectileSpell extends ProjectileSpell {
-    public FireProjectileSpell(String id) {
+public class FrostRaySpell extends RaySpell {
+    public FrostRaySpell(String id) {
         super(id);
-        addCrystalType(WizardsReborn.FIRE_CRYSTAL_TYPE);
+        addCrystalType(WizardsReborn.WATER_CRYSTAL_TYPE);
     }
 
     @Override
     public Color getColor() {
-        return new Color(225, 127, 103);
+        return new Color(221, 243, 254);
     }
 
     @Override
@@ -27,11 +27,12 @@ public class FireProjectileSpell extends ProjectileSpell {
         super.onImpact(ray, world, projectile, player, target);
 
         int focusLevel = CrystalUtils.getStatLevel(projectile.getStats(), WizardsReborn.FOCUS_CRYSTAL_STAT);
-        target.hurt(new DamageSource(projectile.damageSources().onFire().typeHolder(), projectile, player), (float) (3.5f + (focusLevel * 0.5)));
-        int fire = target.getRemainingFireTicks() + 5;
-        if (fire > 10) {
-            fire = 10;
+        target.hurt(new DamageSource(projectile.damageSources().freeze().typeHolder(), projectile, player), (float) (1.5f + (focusLevel * 0.5)));
+        target.clearFire();
+        int frost = target.getTicksFrozen() + 75;
+        if (frost > 250) {
+            frost = 250;
         }
-        target.setSecondsOnFire(fire);
+        target.setTicksFrozen(frost);
     }
 }

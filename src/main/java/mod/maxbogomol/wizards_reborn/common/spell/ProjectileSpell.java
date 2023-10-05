@@ -8,7 +8,6 @@ import net.minecraft.sounds.SoundSource;
 import net.minecraft.util.Mth;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.entity.Entity;
-import net.minecraft.world.entity.MoverType;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.entity.projectile.ProjectileUtil;
 import net.minecraft.world.item.ItemStack;
@@ -44,13 +43,15 @@ public class ProjectileSpell extends Spell {
 
     @Override
     public void useSpell(Level world, Player player, InteractionHand hand) {
-        ItemStack stack = player.getItemInHand(hand);
+        if (!world.isClientSide) {
+            ItemStack stack = player.getItemInHand(hand);
 
-        CompoundTag stats = getStats(stack);
-        spawnSpellStandart(world, player, stats);
-        setCooldown(stack, stats);
-        removeWissen(stack, stats);
-        world.playSound(WizardsReborn.proxy.getPlayer(), player.getX(), player.getY() + player.getEyeHeight(), player.getZ(), WizardsReborn.SPELL_CAST_SOUND.get(), SoundSource.BLOCKS, 0.25f, (float) (1f + ((random.nextFloat() - 0.5D) / 4)));
+            CompoundTag stats = getStats(stack);
+            spawnSpellStandart(world, player, stats);
+            setCooldown(stack, stats);
+            removeWissen(stack, stats);
+            world.playSound(WizardsReborn.proxy.getPlayer(), player.getX(), player.getY() + player.getEyeHeight(), player.getZ(), WizardsReborn.SPELL_CAST_SOUND.get(), SoundSource.BLOCKS, 0.25f, (float) (1f + ((random.nextFloat() - 0.5D) / 4)));
+        }
     }
 
     @Override

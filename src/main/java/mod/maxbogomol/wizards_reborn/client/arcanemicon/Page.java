@@ -2,11 +2,15 @@ package mod.maxbogomol.wizards_reborn.client.arcanemicon;
 
 import com.mojang.blaze3d.systems.RenderSystem;
 import com.mojang.blaze3d.vertex.PoseStack;
+import mod.maxbogomol.wizards_reborn.WizardsRebornClient;
 import mod.maxbogomol.wizards_reborn.utils.ColorUtils;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Font;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.renderer.entity.ItemRenderer;
+import net.minecraft.client.resources.language.I18n;
+import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraftforge.api.distmarker.Dist;
@@ -42,6 +46,10 @@ public abstract class Page {
     public static void drawWrappingText(ArcanemiconGui book, GuiGraphics gui, String text, int x, int y, int w) {
         Font font = Minecraft.getInstance().font;
         List<String> lines = new ArrayList<>();
+        if (text.contains("wizards_reborn:wandMenu")) {
+            MutableComponent mutablecomponent = Component.empty();
+            text = text.replace("wizards_reborn:wandMenu", WizardsRebornClient.OPEN_WAND_SELECTION_KEY.getTranslatedKeyMessage().getString());
+        }
         String[] words = text.split(" ");
         String line = "";
         for (String s : words) {

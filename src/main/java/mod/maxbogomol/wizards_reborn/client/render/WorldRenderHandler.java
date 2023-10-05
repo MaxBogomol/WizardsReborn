@@ -22,7 +22,7 @@ public class WorldRenderHandler {
 
     public static void onRenderWorldLast(RenderLevelStageEvent event) {
         if (ClientConfig.BETTER_LAYERING.get()) {
-            if (event.getStage() == RenderLevelStageEvent.Stage.AFTER_WEATHER) {
+            if (event.getStage() == RenderLevelStageEvent.Stage.AFTER_LEVEL) {
                 RenderSystem.getModelViewStack().pushPose();
                 RenderSystem.getModelViewStack().setIdentity();
                 if (particleMVMatrix != null) RenderSystem.getModelViewStack().mulPoseMatrix(particleMVMatrix);
@@ -33,9 +33,7 @@ public class WorldRenderHandler {
                 getDelayedRender().endBatch(RenderUtils.GLOWING_PARTICLE);
                 RenderSystem.getModelViewStack().popPose();
                 RenderSystem.applyModelViewMatrix();
-            }
 
-            if (event.getStage() == RenderLevelStageEvent.Stage.AFTER_LEVEL) {
                 getDelayedRender().endBatch(RenderUtils.GLOWING_SPRITE);
                 getDelayedRender().endBatch(RenderUtils.GLOWING);
             }

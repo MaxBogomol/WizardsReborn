@@ -70,10 +70,10 @@ public class WissenWandItem extends Item {
             stack.setTag(nbt);
             player.displayClientMessage(getModeTranslate(stack), true);
 
-            return new InteractionResultHolder<ItemStack>(InteractionResult.SUCCESS, stack);
+            return InteractionResultHolder.success(stack);
         }
 
-        return new InteractionResultHolder<ItemStack>(InteractionResult.PASS, stack);
+        return InteractionResultHolder.pass(stack);
     }
 
     @Override

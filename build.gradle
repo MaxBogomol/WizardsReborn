@@ -104,9 +104,6 @@ dependencies {
     compileOnly fg.deobf("top.theillusivec4.curios:curios-forge:5.2.0-beta.3+1.20.1:api")
     runtimeOnly fg.deobf("top.theillusivec4.curios:curios-forge:5.2.0-beta.3+1.20.1")
 
-    compileOnly fg.deobf("top.theillusivec4.caelus:caelus-forge:3.1.0+1.20:api")
-    runtimeOnly fg.deobf("top.theillusivec4.caelus:caelus-forge:3.1.0+1.20")
-
     compileOnly fg.deobf("mezz.jei:jei-1.20.1-common-api:15.0.0.14")
     runtimeOnly fg.deobf("mezz.jei:jei-1.20.1-forge:15.0.0.14")
 

@@ -25,10 +25,12 @@ import net.minecraft.world.InteractionResult;
 import net.minecraft.world.InteractionResultHolder;
 import net.minecraft.world.SimpleContainer;
 import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
+import net.minecraft.world.item.UseAnim;
 import net.minecraft.world.item.context.UseOnContext;
 import net.minecraft.world.level.Level;
 import net.minecraftforge.api.distmarker.Dist;
@@ -77,8 +79,9 @@ public class ArcaneWandItem extends Item implements IWissenItem {
 
     @Override
     public void inventoryTick(ItemStack stack, Level world, Entity entity, int slot, boolean isSelected) {
-        if (!world.isClientSide()) {
-            CompoundTag nbt = stack.getTag();
+        CompoundTag nbt = stack.getTag();
+
+        if (!world.isClientSide) {
             if (nbt == null) {
                 nbt = new CompoundTag();
                 nbt.putBoolean("crystal", false);
@@ -89,15 +92,15 @@ public class ArcaneWandItem extends Item implements IWissenItem {
             }
 
             WissenItemUtils.existWissen(stack);
+        }
 
-            if (nbt.contains("cooldown")) {
-                if (nbt.getInt("cooldown") > 0) {
-                    nbt.putInt("cooldown", nbt.getInt("cooldown")  - 1);
-                    if (nbt.getInt("cooldown") == 0) {
-                        if (nbt.getString("spell") != "") {
-                            Spell spell = Spells.getSpell(nbt.getString("spell"));
-                            spell.onReload(stack, world, entity, slot, isSelected);
-                        }
+        if (nbt.contains("cooldown")) {
+            if (nbt.getInt("cooldown") > 0) {
+                nbt.putInt("cooldown", nbt.getInt("cooldown")  - 1);
+                if (nbt.getInt("cooldown") == 0) {
+                    if (nbt.getString("spell") != "") {
+                        Spell spell = Spells.getSpell(nbt.getString("spell"));
+                        spell.onReload(stack, world, entity, slot, isSelected);
                     }
                 }
             }
@@ -121,34 +124,99 @@ public class ArcaneWandItem extends Item implements IWissenItem {
     public InteractionResultHolder<ItemStack> use(Level world, Player player, InteractionHand hand) {
         ItemStack stack = player.getItemInHand(hand);
 
-        if (!world.isClientSide) {
-            CompoundTag nbt = stack.getTag();
-            if (nbt.getString("spell") != "") {
-                Spell spell = Spells.getSpell(nbt.getString("spell"));
-                if (spell.canSpell(world, player, hand)) {
+        CompoundTag nbt = stack.getTag();
+        if (nbt.getString("spell") != "") {
+            Spell spell = Spells.getSpell(nbt.getString("spell"));
+            if (spell.canSpell(world, player, hand)) {
+                if (spell.canWandWithCrystal(stack)) {
                     spell.useSpell(world, player, hand);
-                    return new InteractionResultHolder<ItemStack>(InteractionResult.SUCCESS, stack);
+                    return InteractionResultHolder.success(stack);
                 }
             }
         }
 
-        return new InteractionResultHolder<ItemStack>(InteractionResult.PASS, stack);
+        return InteractionResultHolder.fail(stack);
     }
 
     @Override
     public InteractionResult onItemUseFirst(ItemStack stack, UseOnContext context) {
-
-        if (!context.getLevel().isClientSide) {
-            CompoundTag nbt = stack.getTag();
-            if (nbt.getBoolean("crystal") && nbt.getInt("cooldown") <= 0) {
-                if (nbt.getString("spell") != "") {
-                    Spell spell = Spells.getSpell(nbt.getString("spell"));
+        CompoundTag nbt = stack.getTag();
+        if (nbt.getBoolean("crystal")) {
+            if (nbt.getString("spell") != "") {
+                Spell spell = Spells.getSpell(nbt.getString("spell"));
+                if (spell.canWandWithCrystal(stack)) {
                     spell.onWandUseFirst(stack, context);
                 }
             }
         }
 
         return super.onItemUseFirst(stack, context);
+    }
+
+    @Override
+    public void onUseTick(Level level, LivingEntity livingEntity, ItemStack stack, int remainingUseDuration) {
+        CompoundTag nbt = stack.getTag();
+        if (nbt.getBoolean("crystal")) {
+            if (nbt.getString("spell") != "") {
+                Spell spell = Spells.getSpell(nbt.getString("spell"));
+                if (spell.canWandWithCrystal(stack)) {
+                    spell.onUseTick(level, livingEntity, stack, remainingUseDuration);
+                }
+            }
+        }
+    }
+
+    @Override
+    public void releaseUsing(ItemStack stack, Level level, LivingEntity entityLiving, int timeLeft) {
+        CompoundTag nbt = stack.getTag();
+        if (nbt.getBoolean("crystal")) {
+            if (nbt.getString("spell") != "") {
+                Spell spell = Spells.getSpell(nbt.getString("spell"));
+                if (spell.canWandWithCrystal(stack)) {
+                    spell.releaseUsing(stack, level, entityLiving, timeLeft);
+                }
+            }
+        }
+    }
+
+    @Override
+    public ItemStack finishUsingItem(ItemStack stack, Level level, LivingEntity entityLiving) {
+        CompoundTag nbt = stack.getTag();
+        if (nbt.getBoolean("crystal")) {
+            if (nbt.getString("spell") != "") {
+                Spell spell = Spells.getSpell(nbt.getString("spell"));
+                if (spell.canWandWithCrystal(stack)) {
+                    spell.finishUsingItem(stack, level, entityLiving);
+                }
+            }
+        }
+
+        return stack;
+    }
+
+    @Override
+    public int getUseDuration(ItemStack stack) {
+        CompoundTag nbt = stack.getTag();
+        if (nbt.getBoolean("crystal")) {
+            if (nbt.getString("spell") != "") {
+                Spell spell = Spells.getSpell(nbt.getString("spell"));
+                return spell.getUseDuration(stack);
+            }
+        }
+
+        return 72000;
+    }
+
+    @Override
+    public UseAnim getUseAnimation(ItemStack stack) {
+        CompoundTag nbt = stack.getTag();
+        if (nbt.getBoolean("crystal")) {
+            if (nbt.getString("spell") != "") {
+                Spell spell = Spells.getSpell(nbt.getString("spell"));
+                return spell.getUseAnimation(stack);
+            }
+        }
+        return UseAnim.NONE;
     }
 
     @Override
@@ -265,6 +333,9 @@ public class ArcaneWandItem extends Item implements IWissenItem {
 
                 if (spell != null) {
                     gui.blit(spell.getIcon(), x + 28, y + 1, 0, 0, 16, 16, 16, 16);
+                    if (!spell.canWandWithCrystal(stack)) {
+                        gui.blit(new ResourceLocation(WizardsReborn.MOD_ID + ":textures/gui/arcane_wand_frame.png"), x + 27, y, 0, 18, 18, 18, 64, 64);
+                    }
                 }
             }
         }

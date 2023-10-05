@@ -7,7 +7,8 @@ modId="wizards_reborn"
 version="1.20.1-0.0.3"
 displayName="Wizard's Reborn"
 logoFile="wizards_reborn.png"
-authors='''MaxBogomol - Developer
+authors='''
+MaxBogomol - Developer
 FoxPlane and iDark - Ukrainian localization
 Kekqupap - Belarusian localization
 '''
@@ -33,12 +34,5 @@ Adds magical things
     modId = "curios"
     mandatory = true
     versionRange = "[5.2.0-beta.3+1.20.1,)"
-    ordering = "AFTER"
-    side = "BOTH"
-
-[[dependencies.wizards_reborn]]
-    modId = "caelus"
-    mandatory = true
-    versionRange = "[3.1.0+1.20,)"
     ordering = "AFTER"
     side = "BOTH"

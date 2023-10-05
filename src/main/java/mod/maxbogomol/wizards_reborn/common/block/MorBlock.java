@@ -34,7 +34,7 @@ public class MorBlock extends MushroomBlock {
                 configuredfeature = WorldGen.TALL_ELDER_MOR;
             }
         } else {
-            if (this == WizardsReborn.ELDER_MOR.get()) {
+            if (this == WizardsReborn.MOR.get()) {
                 configuredfeature = WorldGen.HUGE_MOR;
             } else {
                 configuredfeature = WorldGen.HUGE_ELDER_MOR;

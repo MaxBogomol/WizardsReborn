@@ -34,7 +34,7 @@ public class Events {
 
     @SubscribeEvent
     public void attachEntityCaps(AttachCapabilitiesEvent<Entity> event) {
-        if (event.getObject() instanceof Entity) event.addCapability(new ResourceLocation(WizardsReborn.MOD_ID, "knowledge"), new KnowledgeProvider());
+        if (event.getObject() instanceof Player) event.addCapability(new ResourceLocation(WizardsReborn.MOD_ID, "knowledge"), new KnowledgeProvider());
     }
 
     @SubscribeEvent
