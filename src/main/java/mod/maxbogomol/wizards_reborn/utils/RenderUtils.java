@@ -227,10 +227,10 @@ public class RenderUtils {
 
     private static final float ROOT_3 = (float)(Math.sqrt(3.0D) / 2.0D);
 
-    public static void dragon(PoseStack mStack, MultiBufferSource buf, double x, double y, double z, float radius, float partialTicks, float r, float g, float b) {
+    public static void dragon(PoseStack mStack, MultiBufferSource buf, double x, double y, double z, float radius, float partialTicks, float r, float g, float b, float randomF) {
         float f5 = 0.5f;
         float f7 = Math.min(f5 > 0.8F ? (f5 - 0.8F) / 0.2F : 0.0F, 1.0F);
-        Random random = new Random(432L);
+        Random random = new Random((long) (432L + randomF));
         VertexConsumer builder = buf.getBuffer(GLOWING);
         mStack.pushPose();
         mStack.translate(x, y, z);

@@ -156,18 +156,20 @@ public class RaySpell extends Spell {
     public void entityTick(SpellProjectileEntity entity) {
         if (!entity.level().isClientSide) {
             boolean burst = false;
+            CompoundTag spellData = entity.getSpellData();
             HitResult ray = getHitResult(entity, entity.position(), entity.getLookAngle().scale(getRayDistance()), entity.level(), (e) -> {
                 return !e.isSpectator() && e.isPickable() && !e.getUUID().equals(entity.getEntityData().get(entity.casterId).get());
             });
-            if (ray.getType() == HitResult.Type.ENTITY) {
-                entity.onImpact(ray, ((EntityHitResult)ray).getEntity());
-                burst = true;
-            } else if (ray.getType() == HitResult.Type.BLOCK) {
-                entity.onImpact(ray);
-                burst = true;
+            if (spellData.getInt("tick_left") <= 0) {
+                if (ray.getType() == HitResult.Type.ENTITY) {
+                    entity.onImpact(ray, ((EntityHitResult) ray).getEntity());
+                    burst = true;
+                } else if (ray.getType() == HitResult.Type.BLOCK) {
+                    entity.onImpact(ray);
+                    burst = true;
+                }
             }
 
-            CompoundTag spellData = entity.getSpellData();
             if (spellData.getInt("ticks") <= 0) {
                 if (spellData.getInt("ticks_left") <= 0) {
                     entity.remove();
@@ -234,7 +236,7 @@ public class RaySpell extends Spell {
 
     @Override
     public void onImpact(HitResult ray, Level world, SpellProjectileEntity projectile, Player player, Entity target) {
-        world.playSound(WizardsReborn.proxy.getPlayer(), projectile.getX(), projectile.getY(), projectile.getZ(), WizardsReborn.SPELL_BURST_SOUND.get(), SoundSource.BLOCKS, 0.35f, (float) (1f + ((random.nextFloat() - 0.5D) / 4)));
+        //world.playSound(WizardsReborn.proxy.getPlayer(), projectile.getX(), projectile.getY(), projectile.getZ(), WizardsReborn.SPELL_BURST_SOUND.get(), SoundSource.BLOCKS, 0.35f, (float) (1f + ((random.nextFloat() - 0.5D) / 4)));
     }
 
     @Override

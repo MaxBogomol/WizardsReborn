@@ -182,6 +182,9 @@
   "gui.wizards_reborn.menu.optifine.0": "ATTENTION! It seems you have Optifine installed",
   "gui.wizards_reborn.menu.optifine.1": "Optifine can break the render of particles in Wizard's Reborn",
 
+  "knowledge.toast.wizards_reborn.new_knowledge": "Knowledge gained",
+  "knowledge.toast.wizards_reborn.new_articles": "Articles available",
+
   "key.category.wizards_reborn.general": "Wizard's Reborn",
   "key.wizards_reborn.selection_hud": "Selection Hud",
 

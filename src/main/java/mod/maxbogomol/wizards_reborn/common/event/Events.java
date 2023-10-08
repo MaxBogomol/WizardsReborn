@@ -6,22 +6,24 @@ import mod.maxbogomol.wizards_reborn.api.knowledge.KnowledgeUtils;
 import mod.maxbogomol.wizards_reborn.api.knowledge.Knowledges;
 import mod.maxbogomol.wizards_reborn.common.capability.IKnowledge;
 import mod.maxbogomol.wizards_reborn.common.capability.KnowledgeProvider;
+import mod.maxbogomol.wizards_reborn.common.command.WizardsRebornCommand;
 import mod.maxbogomol.wizards_reborn.common.item.equipment.ScytheItem;
 import mod.maxbogomol.wizards_reborn.common.knowledge.ItemKnowledge;
 import mod.maxbogomol.wizards_reborn.common.knowledge.ItemTagKnowledge;
 import mod.maxbogomol.wizards_reborn.common.network.KnowledgeUpdatePacket;
 import mod.maxbogomol.wizards_reborn.common.network.PacketHandler;
 import net.minecraft.nbt.CompoundTag;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.resources.ResourceLocation;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.util.INBTSerializable;
 import net.minecraftforge.event.AttachCapabilitiesEvent;
+import net.minecraftforge.event.RegisterCommandsEvent;
 import net.minecraftforge.event.TickEvent;
 import net.minecraftforge.event.entity.EntityJoinLevelEvent;
 import net.minecraftforge.event.entity.player.PlayerEvent;
@@ -92,5 +94,10 @@ public class Events {
                 event.setCancellationResult(res);
             }
         }
+    }
+
+    @SubscribeEvent
+    public void registerCommands(RegisterCommandsEvent event) {
+        WizardsRebornCommand.register(event.getDispatcher());
     }
 }

@@ -1,9 +1,9 @@
 package mod.maxbogomol.wizards_reborn.api.knowledge;
 
 import mod.maxbogomol.wizards_reborn.common.capability.IKnowledge;
+import mod.maxbogomol.wizards_reborn.common.network.KnowledgeToastPacket;
 import mod.maxbogomol.wizards_reborn.common.network.KnowledgeUpdatePacket;
 import mod.maxbogomol.wizards_reborn.common.network.PacketHandler;
-import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.player.Player;
 
@@ -27,6 +27,7 @@ public class KnowledgeUtils {
             k.addKnowledge(knowledge);
 
             PacketHandler.sendTo((Player) entity, new KnowledgeUpdatePacket((Player) entity));
+            PacketHandler.sendTo((Player) entity, new KnowledgeToastPacket((Player) entity, knowledge.getId(), false));
         });
     }
 
@@ -46,6 +47,7 @@ public class KnowledgeUtils {
             k.addAllKnowledge();
 
             PacketHandler.sendTo((Player) entity, new KnowledgeUpdatePacket((Player) entity));
+            PacketHandler.sendTo((Player) entity, new KnowledgeToastPacket((Player) entity, "", true));
         });
     }
 

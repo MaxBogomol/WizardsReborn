@@ -29,6 +29,8 @@ import mod.maxbogomol.wizards_reborn.client.render.item.WandCrystalsModels;
 import mod.maxbogomol.wizards_reborn.common.block.*;
 import mod.maxbogomol.wizards_reborn.common.block.flammable.*;
 import mod.maxbogomol.wizards_reborn.common.capability.IKnowledge;
+import mod.maxbogomol.wizards_reborn.common.command.KnowledgeArgument;
+import mod.maxbogomol.wizards_reborn.common.command.WizardsRebornCommand;
 import mod.maxbogomol.wizards_reborn.common.config.Config;
 import mod.maxbogomol.wizards_reborn.common.crystal.*;
 import mod.maxbogomol.wizards_reborn.common.entity.CustomBoatEntity;
@@ -57,6 +59,9 @@ import mod.maxbogomol.wizards_reborn.common.spell.*;
 import mod.maxbogomol.wizards_reborn.common.tileentity.*;
 import mod.maxbogomol.wizards_reborn.common.world.tree.ArcaneWoodTree;
 import net.minecraft.client.gui.screens.MenuScreens;
+import net.minecraft.commands.synchronization.ArgumentTypeInfo;
+import net.minecraft.commands.synchronization.ArgumentTypeInfos;
+import net.minecraft.commands.synchronization.SingletonArgumentInfo;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.particles.ParticleType;
 import net.minecraft.core.registries.Registries;
@@ -117,6 +122,7 @@ public class WizardsReborn {
     public static final DeferredRegister<MenuType<?>> CONTAINERS = DeferredRegister.create(ForgeRegistries.MENU_TYPES, MOD_ID);
     public static final DeferredRegister<BannerPattern> BANNER_PATTERNS = DeferredRegister.create(Registries.BANNER_PATTERN, MOD_ID);
     public static final DeferredRegister<SoundEvent> SOUND_EVENTS = DeferredRegister.create(Registries.SOUND_EVENT, MOD_ID);
+    static final DeferredRegister<ArgumentTypeInfo<?, ?>> ARG_TYPES = DeferredRegister.create(ForgeRegistries.COMMAND_ARGUMENT_TYPES, MOD_ID);
 
     public static final WoodType ARCANE_WOOD_TYPE = WoodType.register(new WoodType(new ResourceLocation(MOD_ID, "arcane_wood").toString(), BlockSetType.OAK));
 
@@ -510,6 +516,9 @@ public class WizardsReborn {
     public static final RegistryObject<SoundEvent> SPELL_BURST_SOUND = SOUND_EVENTS.register("spell_burst", () -> SoundEvent.createVariableRangeEvent(new ResourceLocation(MOD_ID, "spell_burst")));
     public static final RegistryObject<SoundEvent> SPELL_RELOAD_SOUND = SOUND_EVENTS.register("spell_reload", () -> SoundEvent.createVariableRangeEvent(new ResourceLocation(MOD_ID, "spell_reload")));
 
+
+    public static final RegistryObject<ArgumentTypeInfo<?, ?>> KNOWLEDGE_ARG = ARG_TYPES.register("knowledge", () -> ArgumentTypeInfos.registerByClass(KnowledgeArgument.class, SingletonArgumentInfo.contextFree(KnowledgeArgument::knowledges)));
+
     public WizardsReborn() {
         InterModComms.sendTo(CuriosApi.MODID, SlotTypeMessage.REGISTER_TYPE, () -> SlotTypePreset.BELT.getMessageBuilder().build());
         InterModComms.sendTo(CuriosApi.MODID, SlotTypeMessage.REGISTER_TYPE, () -> SlotTypePreset.BODY.getMessageBuilder().build());
@@ -530,6 +539,7 @@ public class WizardsReborn {
         CONTAINERS.register(eventBus);
         BANNER_PATTERNS.register(eventBus);
         SOUND_EVENTS.register(eventBus);
+        ARG_TYPES.register(eventBus);
 
         setupMonograms();
         setupSpells();

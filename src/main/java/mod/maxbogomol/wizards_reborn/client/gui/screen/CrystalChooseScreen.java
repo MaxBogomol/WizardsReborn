@@ -1,9 +1,17 @@
 package mod.maxbogomol.wizards_reborn.client.gui.screen;
 
+import com.mojang.blaze3d.platform.GlStateManager;
+import com.mojang.blaze3d.systems.RenderSystem;
 import com.mojang.blaze3d.vertex.PoseStack;
+import com.mojang.blaze3d.vertex.Tesselator;
+import com.mojang.math.Axis;
 import mod.maxbogomol.wizards_reborn.WizardsReborn;
+import mod.maxbogomol.wizards_reborn.WizardsRebornClient;
 import mod.maxbogomol.wizards_reborn.api.spell.Spell;
 import mod.maxbogomol.wizards_reborn.api.spell.Spells;
+import mod.maxbogomol.wizards_reborn.client.event.ClientTickHandler;
+import mod.maxbogomol.wizards_reborn.client.render.WorldRenderHandler;
+import mod.maxbogomol.wizards_reborn.common.network.DeleteCrystalPacket;
 import mod.maxbogomol.wizards_reborn.common.network.SetSpellPacket;
 import mod.maxbogomol.wizards_reborn.utils.RenderUtils;
 import mod.maxbogomol.wizards_reborn.common.item.CrystalItem;
@@ -13,10 +21,14 @@ import mod.maxbogomol.wizards_reborn.common.network.SetCrystalPacket;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.screens.Screen;
+import net.minecraft.client.renderer.GameRenderer;
+import net.minecraft.client.renderer.MultiBufferSource;
+import net.minecraft.util.Mth;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.network.chat.Component;
 
+import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -38,6 +50,7 @@ public class CrystalChooseScreen extends Screen {
     public Mode mode = Mode.CHOOSE;
     public int mouseX = 0;
     public Spell selectedSpell;
+    public float mouseAngleI = 0;
 
     @Override
     public boolean isPauseScreen() {
@@ -58,12 +71,22 @@ public class CrystalChooseScreen extends Screen {
         if (mode == Mode.CRYSTAL) {
             hover = false;
 
-            if ((getPlayerCrystals().size() > 0) && (selectedItem != null)) {
+            if (mouseAngleI > getWandItemDistance()) {
+                if ((getPlayerCrystals().size() > 0) && (selectedItem != null)) {
+                    if (!main.isEmpty() && main.getItem() instanceof ArcaneWandItem) {
+                        PacketHandler.sendToServer(new SetCrystalPacket(true, selectedItem));
+                    } else {
+                        if (!offhand.isEmpty() && offhand.getItem() instanceof ArcaneWandItem) {
+                            PacketHandler.sendToServer(new SetCrystalPacket(false, selectedItem));
+                        }
+                    }
+                }
+            } else {
                 if (!main.isEmpty() && main.getItem() instanceof ArcaneWandItem) {
-                    PacketHandler.sendToServer(new SetCrystalPacket(true, selectedItem));
+                    PacketHandler.sendToServer(new DeleteCrystalPacket(true));
                 } else {
                     if (!offhand.isEmpty() && offhand.getItem() instanceof ArcaneWandItem) {
-                        PacketHandler.sendToServer(new SetCrystalPacket(false, selectedItem));
+                        PacketHandler.sendToServer(new DeleteCrystalPacket(false));
                     }
                 }
             }
@@ -132,13 +155,40 @@ public class CrystalChooseScreen extends Screen {
             int x = width / 2;
             int y = height / 2;
 
-            for (ItemStack stack : crystals) {
+            float mouseAngle = getMouseAngle(mouseX, mouseY);
+            float mouseDistance = getMouseDistance(mouseX, mouseY);
+            if (mouseDistance > (100 * hoveramount)) {
+                mouseDistance = (100 * hoveramount);
+            }
+            mouseAngleI = mouseDistance;
 
+            RenderSystem.enableBlend();
+            RenderSystem.blendFunc(GlStateManager.SourceFactor.SRC_ALPHA, GlStateManager.DestFactor.ONE);
+            Tesselator tess = Tesselator.getInstance();
+            RenderSystem.depthMask(false);
+            RenderSystem.setShader(WizardsRebornClient::getGlowingShader);
+
+            gui.pose().pushPose();
+            gui.pose().translate(x, y, 0);
+            gui.pose().mulPose(Axis.ZP.rotationDegrees(mouseAngle));
+            gui.pose().mulPose(Axis.XP.rotationDegrees((ClientTickHandler.ticksInGame + partialTicks + (i * 10) * 5)));
+            RenderUtils.ray(gui.pose(), MultiBufferSource.immediate(tess.getBuilder()), 1f, mouseDistance, 10f, 1, 1, 1, 0.5f, 1, 1, 1, 0F);
+            gui.pose().popPose();
+            tess.end();
+
+            RenderSystem.disableBlend();
+            RenderSystem.depthMask(true);
+            RenderSystem.blendFunc(GlStateManager.SourceFactor.SRC_ALPHA, GlStateManager.DestFactor.ONE_MINUS_SRC_ALPHA);
+            RenderSystem.setShader(GameRenderer::getPositionTexShader);
+
+            for (ItemStack stack : crystals) {
                 double dst = Math.toRadians((i * step) + (step / 2));
                 int X = (int) (Math.cos(dst) * (100 * Math.sin(Math.toRadians(90 * hoveramount))));
                 int Y = (int) (Math.sin(dst) * (100 * Math.sin(Math.toRadians(90 * hoveramount))));
 
-                if (stack == selectedItem) {
+                renderCrystalRays(stack, gui, x + X, y + Y, mouseX, mouseY, partialTicks, i, step, true);
+
+                if (stack == selectedItem && mouseDistance > getWandItemDistance()) {
                     RenderUtils.renderItemModelInGui(stack, x + X - 24, y + Y - 24, 48, 48, 48);
                 } else {
                     RenderUtils.renderItemModelInGui(stack, x + X - 16, y + Y - 16, 32, 32, 32);
@@ -147,8 +197,17 @@ public class CrystalChooseScreen extends Screen {
                 i = i + 1F;
             }
 
-            if (selectedItem != null) {
+            if (istWandItem(getWandCrystal())) {
+                renderCrystalRays(getWandCrystal(), gui, x, y, mouseX, mouseY, partialTicks, i, step, false);
+                RenderUtils.renderItemModelInGui(getWandCrystal(), x - 16, y - 16, 32, 32, 32);
+            }
+
+            if (selectedItem != null && mouseDistance > getWandItemDistance()) {
                 gui.renderTooltip(Minecraft.getInstance().font, selectedItem, mouseX, mouseY);
+            }
+
+            if (mouseDistance <= getWandItemDistance() && istWandItem(getWandCrystal())) {
+                gui.renderTooltip(Minecraft.getInstance().font, getWandCrystal(), mouseX, mouseY);
             }
         }
 
@@ -231,5 +290,106 @@ public class CrystalChooseScreen extends Screen {
             }
         }
         return null;
+    }
+
+    public float getMouseAngle(double X, double Y) {
+        double x = width / 2;
+        double y = height / 2;
+
+        double angle =  Math.toDegrees(Math.atan2(Y-y,X-x));
+        if (angle < 0D) {
+            angle += 360D;
+        }
+
+        return (float) angle;
+    }
+
+    public float getMouseDistance(double X, double Y) {
+        double x = width / 2;
+        double y = height / 2;
+
+        return (float) Math.sqrt(Math.pow(x - X, 2) + Math.pow(y - Y, 2));
+    }
+
+    public ItemStack getWandCrystal() {
+        Player player = minecraft.player;
+        ItemStack main = player.getMainHandItem();
+        ItemStack offhand = player.getOffhandItem();
+
+        if (!main.isEmpty() && main.getItem() instanceof ArcaneWandItem) {
+            return ArcaneWandItem.getInventory(main).getItem(0);
+        } else {
+            if (!offhand.isEmpty() && offhand.getItem() instanceof ArcaneWandItem) {
+                ArcaneWandItem.getInventory(offhand).getItem(0);
+            }
+        }
+
+        return ItemStack.EMPTY;
+    }
+
+    public void renderCrystalRays(ItemStack stack, GuiGraphics gui, float x, float y, int mouseX, int mouseY, float partialTicks, float i, float step, boolean renderRay) {
+        float r = 1f;
+        float g = 1f;
+        float b = 1f;
+        float r1 = 1f;
+        float g1 = 1f;
+        float b1 = 1f;
+        boolean renderPolishing = false;
+        float mouseDistance = getMouseDistance(mouseX, mouseY);
+        float chooseRay = (stack == selectedItem && mouseDistance > getWandItemDistance()) ? 1.2f : 0.8f;
+
+        if (stack.getItem() instanceof CrystalItem crystalItem) {
+            Color color = crystalItem.getType().getColor();;
+            r = color.getRed() / 255f;
+            g = color.getGreen() / 255f;
+            b = color.getBlue() / 255f;
+
+            if (crystalItem.getPolishing().hasParticle()) {
+                renderPolishing = true;
+                Color color1 = crystalItem.getPolishing().getColor();
+                r1 = color1.getRed() / 255f;
+                g1 = color1.getGreen() / 255f;
+                b1 = color1.getBlue() / 255f;
+            }
+        }
+
+        RenderSystem.enableBlend();
+        RenderSystem.blendFunc(GlStateManager.SourceFactor.SRC_ALPHA, GlStateManager.DestFactor.ONE);
+        Tesselator tess = Tesselator.getInstance();
+        RenderSystem.depthMask(false);
+        RenderSystem.setShader(WizardsRebornClient::getGlowingShader);
+
+        RenderUtils.dragon(gui.pose(), MultiBufferSource.immediate(tess.getBuilder()), x, y, 0, 30, partialTicks, r, g, b, i);
+        tess.end();
+        if (renderPolishing) {
+            RenderUtils.dragon(gui.pose(), MultiBufferSource.immediate(tess.getBuilder()), x, y, 0, 20, partialTicks, r1 / 2f, g1 / 2f, b1 / 2f, i * 5);
+            tess.end();
+        }
+
+        if (renderRay) {
+            gui.pose().pushPose();
+            gui.pose().translate(width / 2,  height / 2, 0);
+            gui.pose().mulPose(Axis.ZP.rotationDegrees(i * step + (step / 2)));
+            gui.pose().mulPose(Axis.XP.rotationDegrees((ClientTickHandler.ticksInGame + partialTicks + (i * 10) * 5)));
+            RenderUtils.ray(gui.pose(), MultiBufferSource.immediate(tess.getBuilder()), 1f, (100 * hoveramount) * chooseRay, 10f, r, g, b, 1, r, g, b, 0F);
+            gui.pose().popPose();
+            tess.end();
+        }
+
+        RenderSystem.disableBlend();
+        RenderSystem.depthMask(true);
+        RenderSystem.blendFunc(GlStateManager.SourceFactor.SRC_ALPHA, GlStateManager.DestFactor.ONE_MINUS_SRC_ALPHA);
+        RenderSystem.setShader(GameRenderer::getPositionTexShader);
+    }
+
+    public float getWandItemDistance() {
+        return 20f;
+    }
+
+    public boolean istWandItem(ItemStack stack) {
+        if (stack.getItem() instanceof CrystalItem crystalItem) {
+            return true;
+        }
+        return false;
     }
 }
