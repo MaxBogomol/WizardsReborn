@@ -134,11 +134,11 @@
   "block.wizards_reborn.rainbow_arcane_lumos": "Радужный аркановый люмос",
   "block.wizards_reborn.cosmic_arcane_lumos": "Космический аркановый люмос",
 
-  "gui.wizards_reborn.category.arcanum_dust_transmutation": "Трансмутация арканумной пыли",
-
   "item.wizards_reborn.arcanum_amulet": "Аркановый амулет",
   "item.wizards_reborn.arcanum_ring": "Аркановое кольцо",
   "item.wizards_reborn.leather_belt": "Кожаный пояс",
+
+  "gui.wizards_reborn.category.arcanum_dust_transmutation": "Трансмутация арканумной пыли",
 
   "item.wizards_reborn.arcanemicon": "Аркейномикон",
 
@@ -184,6 +184,9 @@
 
   "gui.wizards_reborn.menu.optifine.0": "ВНИМАНИЕ! Кажется, у вас установлен Optifine",
   "gui.wizards_reborn.menu.optifine.1": "Optifine может сломать рендеринг частиц в Wizard's Reborn",
+
+  "knowledge.toast.wizards_reborn.new_knowledge": "Получены знания",
+  "knowledge.toast.wizards_reborn.new_articles": "Доступны статьи",
 
   "crystal_stat.wizards_reborn.focus": "Фокус",
   "crystal_stat.wizards_reborn.balance": "Баланс",

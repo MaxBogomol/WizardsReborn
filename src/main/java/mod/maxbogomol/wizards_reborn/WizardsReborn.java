@@ -3,6 +3,7 @@ package mod.maxbogomol.wizards_reborn;
 import com.google.common.collect.ImmutableMap;
 import mod.maxbogomol.wizards_reborn.api.crystal.CrystalStat;
 import mod.maxbogomol.wizards_reborn.api.crystal.CrystalType;
+import mod.maxbogomol.wizards_reborn.api.crystal.Crystals;
 import mod.maxbogomol.wizards_reborn.api.crystal.PolishingType;
 import mod.maxbogomol.wizards_reborn.api.monogram.Monogram;
 import mod.maxbogomol.wizards_reborn.api.monogram.MonogramRecipe;
@@ -18,6 +19,7 @@ import mod.maxbogomol.wizards_reborn.client.gui.HUDEventHandler;
 import mod.maxbogomol.wizards_reborn.client.gui.TooltipEventHandler;
 import mod.maxbogomol.wizards_reborn.client.gui.container.ArcaneWorkbenchContainer;
 import mod.maxbogomol.wizards_reborn.client.gui.screen.ArcaneWorkbenchScreen;
+import mod.maxbogomol.wizards_reborn.client.gui.screen.CrystalChooseScreen;
 import mod.maxbogomol.wizards_reborn.client.particle.ArcaneWoodLeafParticleType;
 import mod.maxbogomol.wizards_reborn.client.particle.KarmaParticleType;
 import mod.maxbogomol.wizards_reborn.client.particle.SparkleParticleType;
@@ -143,18 +145,18 @@ public class WizardsReborn {
     public static CrystalStat RESONANCE_CRYSTAL_STAT = new CrystalStat(MOD_ID+":resonance", 3);
 
     //POLISHING_TYPES
-    public static final PolishingType CRYSTAL_POLISHING_TYPE  = new CrystalPolishingType();
-    public static final PolishingType FACETED_POLISHING_TYPE  = new FacetedPolishingType();
-    public static final PolishingType ADVANCED_POLISHING_TYPE  = new AdvancedPolishingType();
-    public static final PolishingType MASTERFUL_POLISHING_TYPE  = new MasterfulPolishingType();
-    public static final PolishingType PURE_POLISHING_TYPE  = new PurePolishingType();
+    public static final PolishingType CRYSTAL_POLISHING_TYPE  = new CrystalPolishingType(MOD_ID+":crystal");
+    public static final PolishingType FACETED_POLISHING_TYPE  = new FacetedPolishingType(MOD_ID+":faceted");
+    public static final PolishingType ADVANCED_POLISHING_TYPE  = new AdvancedPolishingType(MOD_ID+":advanced");
+    public static final PolishingType MASTERFUL_POLISHING_TYPE  = new MasterfulPolishingType(MOD_ID+":masterful");
+    public static final PolishingType PURE_POLISHING_TYPE  = new PurePolishingType(MOD_ID+":pure");
 
     //CRYSTAL_TYPES
-    public static final CrystalType EARTH_CRYSTAL_TYPE  = new EarthCrystalType();
-    public static final CrystalType WATER_CRYSTAL_TYPE  = new WaterCrystalType();
-    public static final CrystalType AIR_CRYSTAL_TYPE  = new AirCrystalType();
-    public static final CrystalType FIRE_CRYSTAL_TYPE  = new FireCrystalType();
-    public static final CrystalType VOID_CRYSTAL_TYPE  = new VoidCrystalType();
+    public static final CrystalType EARTH_CRYSTAL_TYPE  = new EarthCrystalType(MOD_ID+":earth");
+    public static final CrystalType WATER_CRYSTAL_TYPE  = new WaterCrystalType(MOD_ID+":water");
+    public static final CrystalType AIR_CRYSTAL_TYPE  = new AirCrystalType(MOD_ID+":air");
+    public static final CrystalType FIRE_CRYSTAL_TYPE  = new FireCrystalType(MOD_ID+":fire");
+    public static final CrystalType VOID_CRYSTAL_TYPE  = new VoidCrystalType(MOD_ID+":void");
 
     //MONOGRAMS
     public static Monogram LUNAM_MONOGRAM = new Monogram(MOD_ID+":lunam");
@@ -541,6 +543,7 @@ public class WizardsReborn {
         SOUND_EVENTS.register(eventBus);
         ARG_TYPES.register(eventBus);
 
+        setupCrystals();
         setupMonograms();
         setupSpells();
 
@@ -593,12 +596,27 @@ public class WizardsReborn {
 
         event.enqueueWork(() -> {
             ArcanemiconChapters.init();
+            CrystalChooseScreen.initSpells();
 
             MenuScreens.register(ARCANE_WORKBENCH_CONTAINER.get(), ArcaneWorkbenchScreen::new);
 
             CuriosRendererRegistry.register(LEATHER_BELT.get(), BeltRenderer::new);
             CuriosRendererRegistry.register(ARCANUM_AMULET.get(), AmuletRenderer::new);
         });
+    }
+
+    public static void setupCrystals() {
+        Crystals.registerPolishing(CRYSTAL_POLISHING_TYPE);
+        Crystals.registerPolishing(FACETED_POLISHING_TYPE);
+        Crystals.registerPolishing(ADVANCED_POLISHING_TYPE);
+        Crystals.registerPolishing(MASTERFUL_POLISHING_TYPE);
+        Crystals.registerPolishing(PURE_POLISHING_TYPE);
+
+        Crystals.registerType(EARTH_CRYSTAL_TYPE);
+        Crystals.registerType(WATER_CRYSTAL_TYPE);
+        Crystals.registerType(AIR_CRYSTAL_TYPE);
+        Crystals.registerType(FIRE_CRYSTAL_TYPE);
+        Crystals.registerType(VOID_CRYSTAL_TYPE);
     }
 
     public static void setupMonograms() {

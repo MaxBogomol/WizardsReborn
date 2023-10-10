@@ -235,24 +235,27 @@ public class RaySpell extends Spell {
     }
 
     @Override
-    public void onImpact(HitResult ray, Level world, SpellProjectileEntity projectile, Player player, Entity target) {
-        //world.playSound(WizardsReborn.proxy.getPlayer(), projectile.getX(), projectile.getY(), projectile.getZ(), WizardsReborn.SPELL_BURST_SOUND.get(), SoundSource.BLOCKS, 0.35f, (float) (1f + ((random.nextFloat() - 0.5D) / 4)));
-    }
-
-    @Override
-    public void onImpact(HitResult ray, Level world, SpellProjectileEntity projectile, Player player) {
-        //projectile.burstEffect((float) ray.getLocation().x, (float) ray.getLocation().y + 0.2f, (float) ray.getLocation().z);
-        //world.playSound(WizardsReborn.proxy.getPlayer(), projectile.getX(), projectile.getY(), projectile.getZ(), WizardsReborn.SPELL_BURST_SOUND.get(), SoundSource.BLOCKS, 0.35f, (float) (1f + ((random.nextFloat() - 0.5D) / 4)));
-    }
-
-    @Override
     public UseAnim getUseAnimation(ItemStack stack) {
-        return UseAnim.CUSTOM;
+        CompoundTag nbt = stack.getOrCreateTag();
+        if (nbt.contains("spell_data")) {
+            CompoundTag stackSpellData = nbt.getCompound("spell_data");
+            if (stackSpellData.contains("entity")) {
+                return UseAnim.CUSTOM;
+            }
+        }
+        return UseAnim.NONE;
     }
 
     @Override
     public boolean hasCustomAnimation(ItemStack stack) {
-        return true;
+        CompoundTag nbt = stack.getOrCreateTag();
+        if (nbt.contains("spell_data")) {
+            CompoundTag stackSpellData = nbt.getCompound("spell_data");
+            if (stackSpellData.contains("entity")) {
+                return true;
+            }
+        }
+        return false;
     }
 
     @Override

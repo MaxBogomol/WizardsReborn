@@ -5,8 +5,8 @@ import mod.maxbogomol.wizards_reborn.api.crystal.PolishingType;
 import java.awt.*;
 
 public class AdvancedPolishingType extends PolishingType {
-    public AdvancedPolishingType() {
-
+    public AdvancedPolishingType(String id) {
+        super(id);
     }
 
     public boolean hasParticle() {

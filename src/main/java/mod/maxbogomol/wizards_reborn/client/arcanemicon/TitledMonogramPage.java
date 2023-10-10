@@ -7,6 +7,7 @@ import mod.maxbogomol.wizards_reborn.api.monogram.Monogram;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.resources.language.I18n;
+import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
@@ -35,5 +36,9 @@ public class TitledMonogramPage extends Page {
 
         gui.blit(BACKGROUND, x + 49, y + 126, 128, 20, 30, 30);
         monogram.renderArcanemiconIcon(book, gui, x + 56, y + 133);
+
+        if (mouseX >= x + 56 && mouseY >= y + 133 && mouseX <= x + 56 + 16 && mouseY <= y + 133 + 16) {
+            gui.renderTooltip(Minecraft.getInstance().font, Component.translatable(monogram.getTranslatedName()), mouseX, mouseY);
+        }
     }
 }

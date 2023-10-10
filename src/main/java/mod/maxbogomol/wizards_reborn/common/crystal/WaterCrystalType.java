@@ -8,8 +8,8 @@ import net.minecraft.world.item.ItemStack;
 import java.awt.*;
 
 public class WaterCrystalType extends CrystalType {
-    public WaterCrystalType() {
-
+    public WaterCrystalType(String id) {
+        super(id);
     }
 
     public Color getColor() {

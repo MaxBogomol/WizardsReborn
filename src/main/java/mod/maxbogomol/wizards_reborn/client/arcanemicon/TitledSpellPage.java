@@ -8,6 +8,7 @@ import mod.maxbogomol.wizards_reborn.api.spell.Spell;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.resources.language.I18n;
+import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
@@ -43,6 +44,20 @@ public class TitledSpellPage extends Page {
                 w = 78;
             }
             gui.blit(spell.getCrystalTypes().get(i).getIcon(), x + 3, y + 130 + (i * 9) + w, 0, 0, 8, 8, 8, 8);
+        }
+
+        if (mouseX >= x + 56 && mouseY >= y + 133 && mouseX <= x + 56 + 16 && mouseY <= y + 133 + 16) {
+            gui.renderTooltip(Minecraft.getInstance().font, Component.translatable(spell.getTranslatedName()), mouseX, mouseY);
+        }
+
+        for (int i = 0; i < spell.getCrystalTypes().size(); i ++) {
+            int w = 0;
+            if (i >= 4) {
+                w = 78;
+            }
+            if (mouseX >= x + 3 && mouseY >= y + 130 + (i * 9) + w && mouseX <= x + 3 + 8 && mouseY <= y + 130 + (i * 9) + w + 8) {
+                gui.renderTooltip(Minecraft.getInstance().font, Component.translatable(spell.getCrystalTypes().get(i).getTranslatedName()), mouseX, mouseY);
+            }
         }
     }
 }

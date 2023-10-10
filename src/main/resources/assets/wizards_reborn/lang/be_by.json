@@ -134,11 +134,11 @@
   "block.wizards_reborn.rainbow_arcane_lumos": "Вясёлкавы арканавы люмас",
   "block.wizards_reborn.cosmic_arcane_lumos": "Касмічны арканавы люмас",
 
-  "gui.wizards_reborn.category.arcanum_dust_transmutation": "Трансмутацыя арканумным пылам",
-
   "item.wizards_reborn.arcanum_amulet": "Арканавы кудмень",
   "item.wizards_reborn.arcanum_ring": "Арканавае кольца",
   "item.wizards_reborn.leather_belt": "Скураны пояс",
+
+  "gui.wizards_reborn.category.arcanum_dust_transmutation": "Трансмутацыя арканумным пылам",
 
   "item.wizards_reborn.arcanemicon": "Арканамікон",
 

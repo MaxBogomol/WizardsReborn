@@ -8,8 +8,8 @@ import net.minecraft.world.item.ItemStack;
 import java.awt.*;
 
 public class VoidCrystalType extends CrystalType {
-    public VoidCrystalType() {
-
+    public VoidCrystalType(String id) {
+        super(id);
     }
 
     public Color getColor() {

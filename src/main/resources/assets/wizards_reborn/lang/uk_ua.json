@@ -134,11 +134,11 @@
   "block.wizards_reborn.rainbow_arcane_lumos": "Райдужний аркановий люмос",
   "block.wizards_reborn.cosmic_arcane_lumos": "Космічний аркановий люмос",
 
-  "gui.wizards_reborn.category.arcanum_dust_transmutation": "Трансмутація арканумного пилу",
-
   "item.wizards_reborn.arcanum_amulet": "Аркановий амулет",
   "item.wizards_reborn.arcanum_ring": "Арканове кільце",
   "item.wizards_reborn.leather_belt": "Шкіряний пояс",
+
+  "gui.wizards_reborn.category.arcanum_dust_transmutation": "Трансмутація арканумного пилу",
 
   "item.wizards_reborn.arcanemicon": "Аркейномікон",
 

@@ -55,7 +55,7 @@ public class CrystalItem extends BlockItem implements IParticleItem {
             return block.type;
         }
 
-        return new CrystalType();
+        return new CrystalType("");
     }
 
     public PolishingType getPolishing() {
@@ -64,7 +64,7 @@ public class CrystalItem extends BlockItem implements IParticleItem {
             return block.polishing;
         }
 
-        return new PolishingType();
+        return new PolishingType("");
     }
 
     public static int getStatLevel(ItemStack stack, CrystalStat stat) {

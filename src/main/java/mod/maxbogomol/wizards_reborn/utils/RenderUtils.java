@@ -104,6 +104,10 @@ public class RenderUtils {
                     .createCompositeState(false));
 
     public static void renderItemModelInGui(ItemStack stack, int x, int y, float xSize, float ySize, float zSize) {
+        renderItemModelInGui(stack, x, y, xSize, ySize, zSize, 0, 0, 0);
+    }
+
+    public static void renderItemModelInGui(ItemStack stack, int x, int y, float xSize, float ySize, float zSize, float xRot, float yRot, float zRot) {
         BakedModel bakedmodel = Minecraft.getInstance().getItemRenderer().getModel(stack, (Level)null, (LivingEntity)null, 0);
 
         PoseStack posestack = RenderSystem.getModelViewStack();
@@ -112,6 +116,9 @@ public class RenderUtils {
         posestack.translate((double) xSize / 2, (double) ySize / 2, 0.0D);
         posestack.scale(1.0F, -1.0F, 1.0F);
         posestack.scale(xSize, ySize, zSize);
+        posestack.mulPose(Axis.XP.rotationDegrees(xRot));
+        posestack.mulPose(Axis.YP.rotationDegrees(yRot));
+        posestack.mulPose(Axis.ZP.rotationDegrees(zRot));
         RenderSystem.applyModelViewMatrix();
         PoseStack posestack1 = new PoseStack();
         MultiBufferSource.BufferSource multibuffersource$buffersource = Minecraft.getInstance().renderBuffers().bufferSource();
@@ -306,5 +313,52 @@ public class RenderUtils {
         builder.vertex(mat, height, -width * endOffset, -width * endOffset).color(r2, g2, b2, a2).endVertex();
         builder.vertex(mat, height, -width * endOffset, width * endOffset).color(r2, g2, b2, a2).endVertex();
         builder.vertex(mat, -width, -width, width).color(r1, g1, b1, a1).endVertex();
+    }
+
+    public static void litQuad(PoseStack mStack, MultiBufferSource buf, float x, float y, float width, float height, float r, float g, float b, float a) {
+        VertexConsumer builder = buf.getBuffer(GLOWING);
+
+        Matrix4f mat = mStack.last().pose();
+        builder.vertex(mat, x, y + height, 0).color(r, g, b, a).endVertex();
+        builder.vertex(mat, x + width, y + height, 0).color(r, g, b, a).endVertex();
+        builder.vertex(mat, x + width, y, 0).color(r, g, b, a).endVertex();
+        builder.vertex(mat, x, y, 0).color(r, g, b, a).endVertex();
+    }
+
+    public static void quadCrystallType(PoseStack mStack, MultiBufferSource buf, float x, float y, float width, float height, float r, float g, float b, float a) {
+        VertexConsumer builder = buf.getBuffer(GLOWING);
+
+        Matrix4f mat = mStack.last().pose();
+        builder.vertex(mat, x, y + (height / 2), 0).color(r, g, b, a).endVertex();
+        builder.vertex(mat, x + width, y + (height / 2), 0).color(r, g, b, a).endVertex();
+        builder.vertex(mat, x + width, y, 0).color(r, g, b, 0).endVertex();
+        builder.vertex(mat, x, y, 0).color(r, g, b, 0).endVertex();
+
+        builder.vertex(mat, x, y + height, 0).color(r, g, b, 0).endVertex();
+        builder.vertex(mat, x + width, y + height, 0).color(r, g, b, 0).endVertex();
+        builder.vertex(mat, x + width, y + (height / 2), 0).color(r, g, b, a).endVertex();
+        builder.vertex(mat, x, y + (height / 2), 0).color(r, g, b, a).endVertex();
+
+
+        builder.vertex(mat, x - (width / 8), y + (height / 2), 0).color(r, g, b, 0).endVertex();
+        builder.vertex(mat, x, y + (height / 2), 0).color(r, g, b, a).endVertex();
+        builder.vertex(mat, x, y, 0).color(r, g, b, 0).endVertex();
+        builder.vertex(mat, x - (width / 8), y, 0).color(r, g, b, 0).endVertex();
+
+        builder.vertex(mat, x, y + height, 0).color(r, g, b, 0).endVertex();
+        builder.vertex(mat, x, y + (height / 2), 0).color(r, g, b, a).endVertex();
+        builder.vertex(mat, x - (width / 8), y + (height / 2), 0).color(r, g, b, 0).endVertex();
+        builder.vertex(mat, x - (width / 8), y + height, 0).color(r, g, b, 0).endVertex();
+
+
+        builder.vertex(mat, x + width + (width / 8), y + (height / 2), 0).color(r, g, b, 0).endVertex();
+        builder.vertex(mat, x + width + (width / 8), y, 0).color(r, g, b, 0).endVertex();
+        builder.vertex(mat, x + width, y, 0).color(r, g, b, 0).endVertex();
+        builder.vertex(mat, x + width, y + (height / 2), 0).color(r, g, b, a).endVertex();
+
+        builder.vertex(mat, x + width + (width / 8), y + (height / 2), 0).color(r, g, b, 0).endVertex();
+        builder.vertex(mat, x + width, y + (height / 2), 0).color(r, g, b, a).endVertex();
+        builder.vertex(mat, x + width, y + height, 0).color(r, g, b, 0).endVertex();
+        builder.vertex(mat, x + width + (width / 8), y + height, 0).color(r, g, b, 0).endVertex();
     }
 }

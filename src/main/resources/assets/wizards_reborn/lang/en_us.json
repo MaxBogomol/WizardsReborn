@@ -134,11 +134,11 @@
   "block.wizards_reborn.rainbow_arcane_lumos": "Rainbow Arcane Lumos",
   "block.wizards_reborn.cosmic_arcane_lumos": "Cosmic Arcane Lumos",
 
-  "gui.wizards_reborn.category.arcanum_dust_transmutation": "Arcanum Dust Transmutation",
-
   "item.wizards_reborn.arcanum_amulet": "Arcanum Amulet",
   "item.wizards_reborn.arcanum_ring": "Arcanum Ring",
   "item.wizards_reborn.leather_belt": "Leather Belt",
+
+  "gui.wizards_reborn.category.arcanum_dust_transmutation": "Arcanum Dust Transmutation",
 
   "item.wizards_reborn.arcanemicon": "Arcanemicon",
 
@@ -192,6 +192,12 @@
   "crystal_stat.wizards_reborn.balance": "Balance",
   "crystal_stat.wizards_reborn.absorption": "Absorption",
   "crystal_stat.wizards_reborn.resonance": "Resonance",
+
+  "crystal_type.wizards_reborn.earth": "Earth",
+  "crystal_type.wizards_reborn.water": "Water",
+  "crystal_type.wizards_reborn.air": "Air",
+  "crystal_type.wizards_reborn.fire": "Fire",
+  "crystal_type.wizards_reborn.void": "Void",
 
   "spell.wizards_reborn.earth_projectile": "Earth Projectile",
   "spell.wizards_reborn.water_projectile": "Water Projectile",
