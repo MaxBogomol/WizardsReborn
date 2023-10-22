@@ -13,8 +13,8 @@ import net.minecraft.world.phys.HitResult;
 import java.awt.*;
 
 public class FireRaySpell extends RaySpell {
-    public FireRaySpell(String id) {
-        super(id);
+    public FireRaySpell(String id, int points) {
+        super(id, points);
         addCrystalType(WizardsReborn.FIRE_CRYSTAL_TYPE);
     }
 

@@ -15,8 +15,8 @@ public class ItemTagKnowledge extends Knowledge {
 
     public ItemStack item;
 
-    public ItemTagKnowledge(String id, TagKey<Item> tag, ItemStack item) {
-        super(id);
+    public ItemTagKnowledge(String id, boolean articles, int points, TagKey<Item> tag, ItemStack item) {
+        super(id, articles, points);
         this.tag = tag;
         this.item = item;
     }

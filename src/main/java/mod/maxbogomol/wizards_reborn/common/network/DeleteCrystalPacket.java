@@ -9,7 +9,7 @@ import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.world.InteractionHand;
 import net.minecraftforge.network.NetworkEvent;
 
-import java.util.function.Supplier;;
+import java.util.function.Supplier;
 
 public class DeleteCrystalPacket {
     private static boolean hand;

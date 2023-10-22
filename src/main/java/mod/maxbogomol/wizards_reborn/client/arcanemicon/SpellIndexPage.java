@@ -4,6 +4,7 @@ import com.mojang.blaze3d.systems.RenderSystem;
 import com.mojang.blaze3d.vertex.PoseStack;
 import mod.maxbogomol.wizards_reborn.WizardsReborn;
 import mod.maxbogomol.wizards_reborn.api.crystal.CrystalType;
+import mod.maxbogomol.wizards_reborn.api.knowledge.KnowledgeUtils;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.resources.language.I18n;
@@ -43,11 +44,19 @@ public class SpellIndexPage extends Page {
         }
 
         for (int i = 0; i < entries.length; i ++) {
-            gui.blit(entries[i].icon.getIcon(), x + 3, y + 8 + i * 20, 0, 0, 16, 16, 16, 16);
-            for (int ii = 0; ii < entries[i].icon.getCrystalTypes().size(); ii ++) {
-                gui.blit(entries[i].icon.getCrystalTypes().get(ii).getMiniIcon(), x + 22, (y + 8 + i * 20) + 14, 0, 0, 3, 3, 4, 4);
+            if (entries[i].isUnlocked()) {
+                gui.blit(entries[i].icon.getIcon(), x + 3, y + 8 + i * 20, 0, 0, 16, 16, 16, 16);
+                if (!KnowledgeUtils.isSpell(Minecraft.getInstance().player, entries[i].icon)) {
+                    gui.blit(new ResourceLocation(WizardsReborn.MOD_ID, "textures/gui/arcanemicon_unknown.png"), x + 3, y + 8 + i * 20, 0, 0, 16, 16, 16, 16);
+                }
+                for (int ii = 0; ii < entries[i].icon.getCrystalTypes().size(); ii++) {
+                    gui.blit(entries[i].icon.getCrystalTypes().get(ii).getMiniIcon(), x + 22 + (ii * 4), (y + 8 + i * 20) + 14, 0, 0, 3, 3, 4, 4);
+                }
+                drawText(book, gui, I18n.get(entries[i].chapter.titleKey), x + 24, y + 20 + i * 20 - Minecraft.getInstance().font.lineHeight);
+            } else {
+                gui.blit(new ResourceLocation(WizardsReborn.MOD_ID, "textures/gui/arcanemicon_unknown.png"), x + 3, y + 8 + i * 20, 0, 0, 16, 16, 16, 16);
+                drawText(book, gui, I18n.get("wizards_reborn.arcanemicon.unknown"), x + 24, y + 20 + i * 20 - Minecraft.getInstance().font.lineHeight);
             }
-            drawText(book, gui, I18n.get(entries[i].chapter.titleKey), x + 24, y + 20 + i * 20 - Minecraft.getInstance().font.lineHeight);
         }
     }
 }

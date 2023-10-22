@@ -15,8 +15,9 @@ import net.minecraft.world.phys.HitResult;
 import java.awt.*;
 
 public class HolyRaySpell extends RaySpell {
-    public HolyRaySpell(String id) {
-        super(id);
+    public HolyRaySpell(String id, int points) {
+        super(id, points);
+        addCrystalType(WizardsReborn.EARTH_CRYSTAL_TYPE);
         addCrystalType(WizardsReborn.AIR_CRYSTAL_TYPE);
     }
 

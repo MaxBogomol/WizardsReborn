@@ -13,8 +13,8 @@ import net.minecraft.world.phys.HitResult;
 import java.awt.*;
 
 public class WaterRaySpell extends RaySpell {
-    public WaterRaySpell(String id) {
-        super(id);
+    public WaterRaySpell(String id, int points) {
+        super(id, points);
         addCrystalType(WizardsReborn.WATER_CRYSTAL_TYPE);
     }
 

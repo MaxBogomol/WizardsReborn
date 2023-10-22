@@ -44,6 +44,7 @@ public class ArcanumAmuletItem extends Item implements ICurioItem, ICurioItemTex
     public Multimap<Attribute, AttributeModifier> getAttributeModifiers(SlotContext slotContext,
                                                                         UUID uuid, ItemStack stack) {
         Multimap<Attribute, AttributeModifier> atts = LinkedHashMultimap.create();
+        atts.put(WizardsReborn.WISSEN_SALE.get(), new AttributeModifier(uuid, "bonus", 3, AttributeModifier.Operation.ADDITION));
         return atts;
     }
 

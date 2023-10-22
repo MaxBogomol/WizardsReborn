@@ -12,8 +12,8 @@ import net.minecraft.world.phys.HitResult;
 import java.awt.*;
 
 public class AirProjectileSpell extends ProjectileSpell {
-    public AirProjectileSpell(String id) {
-        super(id);
+    public AirProjectileSpell(String id, int points) {
+        super(id, points);
         addCrystalType(WizardsReborn.AIR_CRYSTAL_TYPE);
     }
 

@@ -12,8 +12,8 @@ import net.minecraft.world.phys.HitResult;
 import java.awt.*;
 
 public class FireProjectileSpell extends ProjectileSpell {
-    public FireProjectileSpell(String id) {
-        super(id);
+    public FireProjectileSpell(String id, int points) {
+        super(id, points);
         addCrystalType(WizardsReborn.FIRE_CRYSTAL_TYPE);
     }
 

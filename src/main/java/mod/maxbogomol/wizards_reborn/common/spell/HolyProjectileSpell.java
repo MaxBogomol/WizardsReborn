@@ -14,8 +14,9 @@ import net.minecraft.world.phys.HitResult;
 import java.awt.*;
 
 public class HolyProjectileSpell extends ProjectileSpell {
-    public HolyProjectileSpell(String id) {
-        super(id);
+    public HolyProjectileSpell(String id, int points) {
+        super(id, points);
+        addCrystalType(WizardsReborn.EARTH_CRYSTAL_TYPE);
         addCrystalType(WizardsReborn.AIR_CRYSTAL_TYPE);
     }
 

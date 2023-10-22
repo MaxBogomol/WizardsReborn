@@ -1,9 +1,7 @@
 package mod.maxbogomol.wizards_reborn.client.arcanemicon;
 
-import com.google.common.collect.Lists;
-import com.mojang.blaze3d.systems.RenderSystem;
-import com.mojang.blaze3d.vertex.PoseStack;
 import mod.maxbogomol.wizards_reborn.WizardsReborn;
+import mod.maxbogomol.wizards_reborn.api.knowledge.KnowledgeUtils;
 import mod.maxbogomol.wizards_reborn.api.spell.Spell;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
@@ -12,8 +10,6 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
-
-import java.util.List;
 
 public class TitledSpellPage extends Page {
     public static final ResourceLocation BACKGROUND = new ResourceLocation(WizardsReborn.MOD_ID, "textures/gui/arcanemicon_spell_page.png");
@@ -37,17 +33,13 @@ public class TitledSpellPage extends Page {
         drawText(book, gui, title, x + 64 - titleWidth / 2, y + 15 - Minecraft.getInstance().font.lineHeight);
         drawWrappingText(book, gui, I18n.get(text), x + 4, y + 24, 124);
 
-        gui.blit(spell.getIcon(), x + 56, y + 133, 0, 0, 16, 16, 16, 16);
-        for (int i = 0; i < spell.getCrystalTypes().size(); i ++) {
-            int w = 0;
-            if (i >= 4) {
-                w = 78;
+        if (KnowledgeUtils.isSpell(Minecraft.getInstance().player, spell)) {
+            gui.blit(spell.getIcon(), x + 56, y + 133, 0, 0, 16, 16, 16, 16);
+            if (mouseX >= x + 56 && mouseY >= y + 133 && mouseX <= x + 56 + 16 && mouseY <= y + 133 + 16) {
+                gui.renderTooltip(Minecraft.getInstance().font, Component.translatable(spell.getTranslatedName()), mouseX, mouseY);
             }
-            gui.blit(spell.getCrystalTypes().get(i).getIcon(), x + 3, y + 130 + (i * 9) + w, 0, 0, 8, 8, 8, 8);
-        }
-
-        if (mouseX >= x + 56 && mouseY >= y + 133 && mouseX <= x + 56 + 16 && mouseY <= y + 133 + 16) {
-            gui.renderTooltip(Minecraft.getInstance().font, Component.translatable(spell.getTranslatedName()), mouseX, mouseY);
+        } else {
+            gui.blit(new ResourceLocation(WizardsReborn.MOD_ID, "textures/gui/arcanemicon_unknown.png"), x + 56, y + 133, 0, 0, 16, 16, 16, 16);
         }
 
         for (int i = 0; i < spell.getCrystalTypes().size(); i ++) {
@@ -55,7 +47,15 @@ public class TitledSpellPage extends Page {
             if (i >= 4) {
                 w = 78;
             }
-            if (mouseX >= x + 3 && mouseY >= y + 130 + (i * 9) + w && mouseX <= x + 3 + 8 && mouseY <= y + 130 + (i * 9) + w + 8) {
+            gui.blit(spell.getCrystalTypes().get(i).getIcon(), x + 3 + (i * 9) + w, y + 130, 0, 0, 8, 8, 8, 8);
+        }
+
+        for (int i = 0; i < spell.getCrystalTypes().size(); i ++) {
+            int w = 0;
+            if (i >= 4) {
+                w = 78;
+            }
+            if (mouseX >= x + 3 + (i * 9) + w && mouseY >= y + 130 && mouseX <= x + 3 + (i * 9) + w + 8 && mouseY <= y + 130 + 8) {
                 gui.renderTooltip(Minecraft.getInstance().font, Component.translatable(spell.getCrystalTypes().get(i).getTranslatedName()), mouseX, mouseY);
             }
         }

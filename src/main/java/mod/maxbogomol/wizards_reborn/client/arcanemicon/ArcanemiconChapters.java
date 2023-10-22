@@ -17,9 +17,11 @@ public class ArcanemiconChapters {
     public static Chapter ARCANE_NATURE_INDEX, SPELLS_INDEX, CRYSTALS_RITUALS_INDEX, ALCHEMY_INDEX,
             ARCANUM, ARCANUM_DUST_TRANSMUTATION, ARCANE_WOOD, ARCANE_GOLD, SCYTHES, TRINKETS, WISSEN, WISSEN_TRANSLATOR, ARCANE_PEDESTAL, WISSEN_ALTAR, WISSEN_CRYSTALLIZER, ARCANE_WORKBENCH, ARCANE_LUMOS, CRYSTALS, ARCANE_WAND, WISSEN_CELL,
             ALL_SPELLS, EARTH_SPELLS, WATER_SPELLS, AIR_SPELLS, FIRE_SPELLS, VOID_SPELLS,
-            EARTH_PROJECTILE, WATER_PROJECTILE, AIR_PROJECTILE, FIRE_PROJECTILE, VOID_PROJECTILE,
-            MONOGRAMS, LUNAM_MONOGRAM, VITA_MONOGRAM, SOLEM_MONOGRAM, MORS_MONOGRAM, MIRACULUM_MONOGRAM, TEMPUS_MONOGRAM, STATERA_MONOGRAM, ECLIPSIS_MONOGRAM, SICCITAS_MONOGRAM, SOLSTITIUM_MONOGRAM, FAMES_MONOGRAM, RENAISSANCE_MONOGRAM, BELLUM_MONOGRAM, LUX_MONOGRAM, KARA_MONOGRAM, DEGRADATIO_MONOGRAM, PRAEDICTIONEM_MONOGRAM, EVOLUTIONIS_MONOGRAM, DARK_MONOGRAM, UNIVERSUM_MONOGRAM,
+            EARTH_PROJECTILE, WATER_PROJECTILE, AIR_PROJECTILE, FIRE_PROJECTILE, VOID_PROJECTILE, FROST_PROJECTILE, HOLY_PROJECTILE,
+            EARTH_RAY, WATER_RAY, AIR_RAY, FIRE_RAY, VOID_RAY, FROST_RAY, HOLY_RAY,
+            MONOGRAMS, RESEARCHES, RESEARCH, LUNAM_MONOGRAM, VITA_MONOGRAM, SOLEM_MONOGRAM, MORS_MONOGRAM, MIRACULUM_MONOGRAM, TEMPUS_MONOGRAM, STATERA_MONOGRAM, ECLIPSIS_MONOGRAM, SICCITAS_MONOGRAM, SOLSTITIUM_MONOGRAM, FAMES_MONOGRAM, RENAISSANCE_MONOGRAM, BELLUM_MONOGRAM, LUX_MONOGRAM, KARA_MONOGRAM, DEGRADATIO_MONOGRAM, PRAEDICTIONEM_MONOGRAM, EVOLUTIONIS_MONOGRAM, DARK_MONOGRAM, UNIVERSUM_MONOGRAM,
             MOR, ARCANE_LINEN;
+    public static ResearchPage RESEARCH_MAIN, RESEARCH_LIST;
 
     public static void init() {
         ARCANUM = new Chapter(
@@ -434,6 +436,9 @@ public class ArcanemiconChapters {
                 new TitledBlockPage("wizards_reborn.arcanemicon.page.arcane_wand.0",
                         new BlockEntry(new ItemStack(WizardsReborn.ARCANE_PEDESTAL_ITEM.get()), new ItemStack(WizardsReborn.ARCANE_WAND.get()))
                 ),
+                new TitlePage("wizards_reborn.arcanemicon.page.arcane_wand.focus"),
+                new TitlePage("wizards_reborn.arcanemicon.page.arcane_wand.balance"),
+                new TitlePage("wizards_reborn.arcanemicon.page.arcane_wand.absorption"),
                 new TextPage("wizards_reborn.arcanemicon.page.arcane_wand.1"),
                 new ArcaneWorkbenchPage(new ItemStack(WizardsReborn.ARCANE_WAND.get()),
                         ItemStack.EMPTY, new ItemStack(WizardsReborn.ARCANE_GOLD_NUGGET.get()), new ItemStack(WizardsReborn.ARCANE_GOLD_INGOT.get()),
@@ -485,27 +490,74 @@ public class ArcanemiconChapters {
 
         EARTH_PROJECTILE = new Chapter(
                 "wizards_reborn.arcanemicon.chapter.earth_projectile",
-                new TitledSpellPage("wizards_reborn.arcanemicon.page.earth_projectile", WizardsReborn.EARTH_PROJECTILE_SPELL)
+                new TitledSpellPage("wizards_reborn.arcanemicon.page.earth_projectile", WizardsReborn.EARTH_PROJECTILE_SPELL),
+                new SpellCharPage("wizards_reborn.arcanemicon.page.earth_projectile.char", WizardsReborn.EARTH_PROJECTILE_SPELL)
         );
-
         WATER_PROJECTILE = new Chapter(
                 "wizards_reborn.arcanemicon.chapter.water_projectile",
-                new TitledSpellPage("wizards_reborn.arcanemicon.page.water_projectile", WizardsReborn.WATER_PROJECTILE_SPELL)
+                new TitledSpellPage("wizards_reborn.arcanemicon.page.water_projectile", WizardsReborn.WATER_PROJECTILE_SPELL),
+                new SpellCharPage("wizards_reborn.arcanemicon.page.water_projectile.char", WizardsReborn.WATER_PROJECTILE_SPELL)
         );
-
         AIR_PROJECTILE = new Chapter(
                 "wizards_reborn.arcanemicon.chapter.air_projectile",
-                new TitledSpellPage("wizards_reborn.arcanemicon.page.air_projectile", WizardsReborn.AIR_PROJECTILE_SPELL)
+                new TitledSpellPage("wizards_reborn.arcanemicon.page.air_projectile", WizardsReborn.AIR_PROJECTILE_SPELL),
+                new SpellCharPage("wizards_reborn.arcanemicon.page.air_projectile.char", WizardsReborn.AIR_PROJECTILE_SPELL)
         );
-
         FIRE_PROJECTILE = new Chapter(
                 "wizards_reborn.arcanemicon.chapter.fire_projectile",
-                new TitledSpellPage("wizards_reborn.arcanemicon.page.fire_projectile", WizardsReborn.FIRE_PROJECTILE_SPELL)
+                new TitledSpellPage("wizards_reborn.arcanemicon.page.fire_projectile", WizardsReborn.FIRE_PROJECTILE_SPELL),
+                new SpellCharPage("wizards_reborn.arcanemicon.page.fire_projectile.char", WizardsReborn.FIRE_PROJECTILE_SPELL)
         );
-
         VOID_PROJECTILE = new Chapter(
                 "wizards_reborn.arcanemicon.chapter.void_projectile",
-                new TitledSpellPage("wizards_reborn.arcanemicon.page.void_projectile", WizardsReborn.VOID_PROJECTILE_SPELL)
+                new TitledSpellPage("wizards_reborn.arcanemicon.page.void_projectile", WizardsReborn.VOID_PROJECTILE_SPELL),
+                new SpellCharPage("wizards_reborn.arcanemicon.page.void_projectile.char", WizardsReborn.VOID_PROJECTILE_SPELL)
+        );
+        FROST_PROJECTILE = new Chapter(
+                "wizards_reborn.arcanemicon.chapter.frost_projectile",
+                new TitledSpellPage("wizards_reborn.arcanemicon.page.frost_projectile", WizardsReborn.FROST_PROJECTILE_SPELL),
+                new SpellCharPage("wizards_reborn.arcanemicon.page.frost_projectile.char", WizardsReborn.FROST_PROJECTILE_SPELL)
+        );
+        HOLY_PROJECTILE = new Chapter(
+                "wizards_reborn.arcanemicon.chapter.holy_projectile",
+                new TitledSpellPage("wizards_reborn.arcanemicon.page.holy_projectile", WizardsReborn.HOLY_PROJECTILE_SPELL),
+                new SpellCharPage("wizards_reborn.arcanemicon.page.holy_projectile.char", WizardsReborn.HOLY_PROJECTILE_SPELL)
+        );
+
+        EARTH_RAY = new Chapter(
+                "wizards_reborn.arcanemicon.chapter.earth_ray",
+                new TitledSpellPage("wizards_reborn.arcanemicon.page.earth_ray", WizardsReborn.EARTH_RAY_SPELL),
+                new SpellCharPage("wizards_reborn.arcanemicon.page.earth_ray.char", WizardsReborn.EARTH_RAY_SPELL)
+        );
+        WATER_RAY = new Chapter(
+                "wizards_reborn.arcanemicon.chapter.water_ray",
+                new TitledSpellPage("wizards_reborn.arcanemicon.page.water_ray", WizardsReborn.WATER_RAY_SPELL),
+                new SpellCharPage("wizards_reborn.arcanemicon.page.water_ray.char", WizardsReborn.WATER_RAY_SPELL)
+        );
+        AIR_RAY = new Chapter(
+                "wizards_reborn.arcanemicon.chapter.air_ray",
+                new TitledSpellPage("wizards_reborn.arcanemicon.page.air_ray", WizardsReborn.AIR_RAY_SPELL),
+                new SpellCharPage("wizards_reborn.arcanemicon.page.air_ray.char", WizardsReborn.AIR_RAY_SPELL)
+        );
+        FIRE_RAY = new Chapter(
+                "wizards_reborn.arcanemicon.chapter.fire_ray",
+                new TitledSpellPage("wizards_reborn.arcanemicon.page.fire_ray", WizardsReborn.FIRE_RAY_SPELL),
+                new SpellCharPage("wizards_reborn.arcanemicon.page.fire_ray.char", WizardsReborn.FIRE_RAY_SPELL)
+        );
+        VOID_RAY = new Chapter(
+                "wizards_reborn.arcanemicon.chapter.void_ray",
+                new TitledSpellPage("wizards_reborn.arcanemicon.page.void_ray", WizardsReborn.VOID_RAY_SPELL),
+                new SpellCharPage("wizards_reborn.arcanemicon.page.void_ray.char", WizardsReborn.VOID_RAY_SPELL)
+        );
+        FROST_RAY = new Chapter(
+                "wizards_reborn.arcanemicon.chapter.frost_ray",
+                new TitledSpellPage("wizards_reborn.arcanemicon.page.frost_ray", WizardsReborn.FROST_RAY_SPELL),
+                new SpellCharPage("wizards_reborn.arcanemicon.page.frost_ray.char", WizardsReborn.FROST_RAY_SPELL)
+        );
+        HOLY_RAY = new Chapter(
+                "wizards_reborn.arcanemicon.chapter.holy_ray",
+                new TitledSpellPage("wizards_reborn.arcanemicon.page.holy_ray", WizardsReborn.HOLY_RAY_SPELL),
+                new SpellCharPage("wizards_reborn.arcanemicon.page.holy_ray.char", WizardsReborn.HOLY_RAY_SPELL)
         );
 
         LUNAM_MONOGRAM = new Chapter(
@@ -612,47 +664,84 @@ public class ArcanemiconChapters {
         ALL_SPELLS = new Chapter(
                 "wizards_reborn.arcanemicon.chapter.all_spells",
                 new TitledSpellIndexPage("wizards_reborn.arcanemicon.page.all_spells",
-                        new SpellIndexEntry(EARTH_PROJECTILE, WizardsReborn.EARTH_PROJECTILE_SPELL),
-                        new SpellIndexEntry(WATER_PROJECTILE, WizardsReborn.WATER_PROJECTILE_SPELL),
-                        new SpellIndexEntry(AIR_PROJECTILE, WizardsReborn.AIR_PROJECTILE_SPELL),
-                        new SpellIndexEntry(FIRE_PROJECTILE, WizardsReborn.FIRE_PROJECTILE_SPELL),
-                        new SpellIndexEntry(VOID_PROJECTILE, WizardsReborn.VOID_PROJECTILE_SPELL)
+                        new SpellIndexEntry(EARTH_PROJECTILE, WizardsReborn.EARTH_PROJECTILE_SPELL, RegisterKnowledges.ARCANE_WAND),
+                        new SpellIndexEntry(WATER_PROJECTILE, WizardsReborn.WATER_PROJECTILE_SPELL, RegisterKnowledges.ARCANE_WAND),
+                        new SpellIndexEntry(AIR_PROJECTILE, WizardsReborn.AIR_PROJECTILE_SPELL, RegisterKnowledges.ARCANE_WAND),
+                        new SpellIndexEntry(FIRE_PROJECTILE, WizardsReborn.FIRE_PROJECTILE_SPELL, RegisterKnowledges.ARCANE_WAND),
+                        new SpellIndexEntry(VOID_PROJECTILE, WizardsReborn.VOID_PROJECTILE_SPELL, RegisterKnowledges.VOID_CRYSTAL),
+                        new SpellIndexEntry(FROST_PROJECTILE, WizardsReborn.FROST_PROJECTILE_SPELL, RegisterKnowledges.ARCANE_WAND)
+                ),
+                new SpellIndexPage(
+                        new SpellIndexEntry(HOLY_PROJECTILE, WizardsReborn.HOLY_PROJECTILE_SPELL, RegisterKnowledges.ARCANE_WAND),
+                        new SpellIndexEntry(EARTH_RAY, WizardsReborn.EARTH_RAY_SPELL, RegisterKnowledges.ARCANE_WAND),
+                        new SpellIndexEntry(WATER_RAY, WizardsReborn.WATER_RAY_SPELL, RegisterKnowledges.ARCANE_WAND),
+                        new SpellIndexEntry(AIR_RAY, WizardsReborn.AIR_RAY_SPELL, RegisterKnowledges.ARCANE_WAND),
+                        new SpellIndexEntry(FIRE_RAY, WizardsReborn.FIRE_RAY_SPELL, RegisterKnowledges.ARCANE_WAND),
+                        new SpellIndexEntry(VOID_RAY, WizardsReborn.VOID_RAY_SPELL, RegisterKnowledges.VOID_CRYSTAL),
+                        new SpellIndexEntry(FROST_RAY, WizardsReborn.FROST_RAY_SPELL, RegisterKnowledges.ARCANE_WAND)
+                ),
+                new SpellIndexPage(
+                        new SpellIndexEntry(HOLY_RAY, WizardsReborn.HOLY_RAY_SPELL, RegisterKnowledges.ARCANE_WAND)
                 )
         );
 
         EARTH_SPELLS = new Chapter(
                 "wizards_reborn.arcanemicon.chapter.earth_spells",
                 new TitledSpellIndexPage("wizards_reborn.arcanemicon.page.earth_spells",
-                        new SpellIndexEntry(EARTH_PROJECTILE, WizardsReborn.EARTH_PROJECTILE_SPELL)
+                        new SpellIndexEntry(EARTH_PROJECTILE, WizardsReborn.EARTH_PROJECTILE_SPELL, RegisterKnowledges.ARCANE_WAND),
+                        new SpellIndexEntry(HOLY_PROJECTILE, WizardsReborn.HOLY_PROJECTILE_SPELL, RegisterKnowledges.ARCANE_WAND),
+                        new SpellIndexEntry(EARTH_RAY, WizardsReborn.EARTH_RAY_SPELL, RegisterKnowledges.ARCANE_WAND),
+                        new SpellIndexEntry(HOLY_RAY, WizardsReborn.HOLY_RAY_SPELL, RegisterKnowledges.ARCANE_WAND)
                 )
         );
 
         WATER_SPELLS = new Chapter(
                 "wizards_reborn.arcanemicon.chapter.water_spells",
                 new TitledSpellIndexPage("wizards_reborn.arcanemicon.page.water_spells",
-                        new SpellIndexEntry(WATER_PROJECTILE, WizardsReborn.WATER_PROJECTILE_SPELL)
+                        new SpellIndexEntry(WATER_PROJECTILE, WizardsReborn.WATER_PROJECTILE_SPELL, RegisterKnowledges.ARCANE_WAND),
+                        new SpellIndexEntry(FROST_PROJECTILE, WizardsReborn.FROST_PROJECTILE_SPELL, RegisterKnowledges.ARCANE_WAND),
+                        new SpellIndexEntry(WATER_RAY, WizardsReborn.WATER_RAY_SPELL, RegisterKnowledges.ARCANE_WAND),
+                        new SpellIndexEntry(FROST_RAY, WizardsReborn.FROST_RAY_SPELL, RegisterKnowledges.ARCANE_WAND)
                 )
         );
 
         AIR_SPELLS = new Chapter(
                 "wizards_reborn.arcanemicon.chapter.air_spells",
                 new TitledSpellIndexPage("wizards_reborn.arcanemicon.page.air_spells",
-                        new SpellIndexEntry(AIR_PROJECTILE, WizardsReborn.AIR_PROJECTILE_SPELL)
+                        new SpellIndexEntry(AIR_PROJECTILE, WizardsReborn.AIR_PROJECTILE_SPELL, RegisterKnowledges.ARCANE_WAND),
+                        new SpellIndexEntry(AIR_RAY, WizardsReborn.AIR_RAY_SPELL, RegisterKnowledges.ARCANE_WAND)
                 )
         );
 
         FIRE_SPELLS = new Chapter(
                 "wizards_reborn.arcanemicon.chapter.fire_spells",
                 new TitledSpellIndexPage("wizards_reborn.arcanemicon.page.fire_spells",
-                        new SpellIndexEntry(FIRE_PROJECTILE, WizardsReborn.FIRE_PROJECTILE_SPELL)
+                        new SpellIndexEntry(FIRE_PROJECTILE, WizardsReborn.FIRE_PROJECTILE_SPELL, RegisterKnowledges.ARCANE_WAND),
+                        new SpellIndexEntry(FIRE_RAY, WizardsReborn.FIRE_RAY_SPELL, RegisterKnowledges.ARCANE_WAND)
                 )
         );
 
         VOID_SPELLS = new Chapter(
                 "wizards_reborn.arcanemicon.chapter.void_spells",
                 new TitledSpellIndexPage("wizards_reborn.arcanemicon.page.void_spells",
-                        new SpellIndexEntry(VOID_PROJECTILE, WizardsReborn.VOID_PROJECTILE_SPELL)
+                        new SpellIndexEntry(VOID_PROJECTILE, WizardsReborn.VOID_PROJECTILE_SPELL, RegisterKnowledges.VOID_CRYSTAL),
+                        new SpellIndexEntry(VOID_RAY, WizardsReborn.VOID_RAY_SPELL, RegisterKnowledges.VOID_CRYSTAL)
                 )
+        );
+
+        RESEARCH_MAIN = new ResearchPage(true);
+        RESEARCH_LIST = new ResearchPage(false);
+
+        RESEARCH = new Chapter(
+                "wizards_reborn.arcanemicon.chapter.research",
+                RESEARCH_MAIN,
+                RESEARCH_LIST
+        );
+
+        RESEARCHES = new Chapter(
+                "wizards_reborn.arcanemicon.chapter.researches",
+                new TitlePage("wizards_reborn.arcanemicon.page.researches.0"),
+                new TextPage("wizards_reborn.arcanemicon.page.researches.1")
         );
 
         MONOGRAMS = new Chapter(
@@ -690,15 +779,16 @@ public class ArcanemiconChapters {
         SPELLS_INDEX = new Chapter(
                 "wizards_reborn.arcanemicon.chapter.spells_index",
                 new TitledIndexPage("wizards_reborn.arcanemicon.page.spells_index",
-                        new IndexEntry(ALL_SPELLS, new ItemStack(WizardsReborn.ARCANE_WAND.get())),
-                        new IndexEntry(EARTH_SPELLS, new ItemStack(WizardsReborn.FACETED_EARTH_CRYSTAL.get())),
-                        new IndexEntry(WATER_SPELLS, new ItemStack(WizardsReborn.FACETED_WATER_CRYSTAL.get())),
-                        new IndexEntry(AIR_SPELLS, new ItemStack(WizardsReborn.FACETED_AIR_CRYSTAL.get())),
-                        new IndexEntry(FIRE_SPELLS, new ItemStack(WizardsReborn.FACETED_FIRE_CRYSTAL.get())),
-                        new IndexEntry(VOID_SPELLS, new ItemStack(WizardsReborn.FACETED_VOID_CRYSTAL.get()))
+                        new IndexEntry(ALL_SPELLS, new ItemStack(WizardsReborn.ARCANE_WAND.get()), RegisterKnowledges.ARCANE_WAND),
+                        new IndexEntry(EARTH_SPELLS, new ItemStack(WizardsReborn.FACETED_EARTH_CRYSTAL.get()), RegisterKnowledges.ARCANE_WAND),
+                        new IndexEntry(WATER_SPELLS, new ItemStack(WizardsReborn.FACETED_WATER_CRYSTAL.get()), RegisterKnowledges.ARCANE_WAND),
+                        new IndexEntry(AIR_SPELLS, new ItemStack(WizardsReborn.FACETED_AIR_CRYSTAL.get()), RegisterKnowledges.ARCANE_WAND),
+                        new IndexEntry(FIRE_SPELLS, new ItemStack(WizardsReborn.FACETED_FIRE_CRYSTAL.get()), RegisterKnowledges.ARCANE_WAND),
+                        new IndexEntry(VOID_SPELLS, new ItemStack(WizardsReborn.FACETED_VOID_CRYSTAL.get()), RegisterKnowledges.VOID_CRYSTAL)
                 ),
                 new IndexPage(
-                        new IndexEntry(MONOGRAMS, new ItemStack(WizardsReborn.ARCANEMICON.get()))
+                        new IndexEntry(RESEARCHES, new ItemStack(WizardsReborn.ARCANEMICON.get()), RegisterKnowledges.ARCANE_WAND),
+                        new IndexEntry(MONOGRAMS, new ItemStack(WizardsReborn.ARCANEMICON.get()), RegisterKnowledges.ARCANE_WAND)
                 )
         );
 

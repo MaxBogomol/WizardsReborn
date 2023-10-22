@@ -12,8 +12,8 @@ import net.minecraft.world.phys.HitResult;
 import java.awt.*;
 
 public class WaterProjectileSpell extends ProjectileSpell {
-    public WaterProjectileSpell(String id) {
-        super(id);
+    public WaterProjectileSpell(String id, int points) {
+        super(id, points);
         addCrystalType(WizardsReborn.WATER_CRYSTAL_TYPE);
     }
 

@@ -17,28 +17,8 @@ import net.minecraft.world.phys.HitResult;
 import net.minecraft.world.phys.Vec3;
 
 public class ProjectileSpell extends Spell {
-    public ProjectileSpell(String id) {
-        super(id);
-    }
-
-    @Override
-    public int getCooldown() {
-        return 20;
-    }
-
-    @Override
-    public int getWissenCost() {
-        return 50;
-    }
-
-    @Override
-    public float getCooldownStatModifier() {
-        return 0.15f;
-    }
-
-    @Override
-    public float getWissenStatModifier() {
-        return 0.15f;
+    public ProjectileSpell(String id, int points) {
+        super(id, points);
     }
 
     @Override
@@ -49,7 +29,7 @@ public class ProjectileSpell extends Spell {
             CompoundTag stats = getStats(stack);
             spawnSpellStandart(world, player, stats);
             setCooldown(stack, stats);
-            removeWissen(stack, stats);
+            removeWissen(stack, stats, player);
             world.playSound(WizardsReborn.proxy.getPlayer(), player.getX(), player.getY() + player.getEyeHeight(), player.getZ(), WizardsReborn.SPELL_CAST_SOUND.get(), SoundSource.BLOCKS, 0.25f, (float) (1f + ((random.nextFloat() - 0.5D) / 4)));
         }
     }

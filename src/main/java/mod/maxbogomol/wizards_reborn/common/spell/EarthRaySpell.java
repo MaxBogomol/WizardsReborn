@@ -13,8 +13,8 @@ import net.minecraft.world.phys.HitResult;
 import java.awt.*;
 
 public class EarthRaySpell extends RaySpell {
-    public EarthRaySpell(String id) {
-        super(id);
+    public EarthRaySpell(String id, int points) {
+        super(id, points);
         addCrystalType(WizardsReborn.EARTH_CRYSTAL_TYPE);
     }
 

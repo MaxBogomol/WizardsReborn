@@ -34,6 +34,13 @@ public class ArcanemiconGui extends Screen {
     }
 
     @Override
+    public void tick() {
+        Page left = currentChapter.getPage(currentPage), right = currentChapter.getPage(currentPage + 1);
+        if (left != null) left.tick(this);
+        if (right != null) right.tick(this);
+    }
+
+    @Override
     public void render(GuiGraphics gui, int mouseX, int mouseY, float partialTicks) {
         renderBackground(gui);
         Minecraft mc = Minecraft.getInstance();

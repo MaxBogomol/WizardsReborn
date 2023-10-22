@@ -6,9 +6,13 @@ import net.minecraftforge.api.distmarker.OnlyIn;
 
 public class Knowledge {
     public String id;
+    public int points;
+    public boolean articles;
 
-    public Knowledge(String id) {
+    public Knowledge(String id, boolean articles, int points) {
         this.id = id;
+        this.points = points;
+        this.articles = articles;
     }
 
     public boolean canReceived() {
@@ -17,6 +21,14 @@ public class Knowledge {
 
     public String getId() {
         return id;
+    }
+
+    public int getPoints() {
+        return points;
+    }
+
+    public boolean getArticles() {
+        return articles;
     }
 
     @OnlyIn(Dist.CLIENT)

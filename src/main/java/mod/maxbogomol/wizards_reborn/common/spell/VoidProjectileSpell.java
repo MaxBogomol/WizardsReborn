@@ -12,8 +12,8 @@ import net.minecraft.world.phys.HitResult;
 import java.awt.*;
 
 public class VoidProjectileSpell extends ProjectileSpell {
-    public VoidProjectileSpell(String id) {
-        super(id);
+    public VoidProjectileSpell(String id, int points) {
+        super(id, points);
         addCrystalType(WizardsReborn.VOID_CRYSTAL_TYPE);
     }
 

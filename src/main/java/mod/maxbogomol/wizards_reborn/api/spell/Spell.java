@@ -4,7 +4,9 @@ import com.mojang.blaze3d.vertex.PoseStack;
 import mod.maxbogomol.wizards_reborn.WizardsReborn;
 import mod.maxbogomol.wizards_reborn.api.crystal.CrystalType;
 import mod.maxbogomol.wizards_reborn.api.crystal.CrystalUtils;
+import mod.maxbogomol.wizards_reborn.api.knowledge.Research;
 import mod.maxbogomol.wizards_reborn.api.wissen.WissenItemUtils;
+import mod.maxbogomol.wizards_reborn.api.wissen.WissenUtils;
 import mod.maxbogomol.wizards_reborn.common.entity.SpellProjectileEntity;
 import mod.maxbogomol.wizards_reborn.common.item.CrystalItem;
 import mod.maxbogomol.wizards_reborn.common.item.equipment.ArcaneWandItem;
@@ -38,13 +40,20 @@ public class Spell {
     public String id;
     public ArrayList<CrystalType> crystalTypes = new ArrayList<CrystalType>();
     public Random random = new Random();
+    public Research research;
+    public int points;
 
-    public Spell(String id) {
+    public Spell(String id, int points) {
         this.id = id;
+        this.points = points;
     }
 
     public String getId() {
         return id;
+    }
+
+    public int getPoints() {
+        return points;
     }
 
     public Color getColor() {
@@ -94,7 +103,7 @@ public class Spell {
     }
 
     public float getWissenStatModifier() {
-        return 0.15f;
+        return 0.1f;
     }
 
     public int getCooldownWithStat(CompoundTag nbt) {
@@ -105,6 +114,15 @@ public class Spell {
     public int getWissenCostWithStat(CompoundTag nbt) {
         int balanceLevel = CrystalUtils.getStatLevel(nbt, WizardsReborn.BALANCE_CRYSTAL_STAT);
         return (int) (getWissenCost() * (1 - (getWissenStatModifier() * balanceLevel)));
+    }
+
+    public int getWissenCostWithStat(CompoundTag nbt, Player player) {
+        int balanceLevel = CrystalUtils.getStatLevel(nbt, WizardsReborn.BALANCE_CRYSTAL_STAT);
+        float modifier = (1 - (getWissenStatModifier() * balanceLevel) - WissenUtils.getWissenCostModifierWithSale(player));
+        if (modifier <= 0) {
+            return 1;
+        }
+        return (int) (getWissenCost() * modifier);
     }
 
     public boolean canWandWithCrystal(ItemStack stack) {
@@ -142,6 +160,10 @@ public class Spell {
         WissenItemUtils.removeWissen(stack, getWissenCostWithStat(stats));
     }
 
+    public void removeWissen(ItemStack stack, CompoundTag stats, Player player) {
+        WissenItemUtils.removeWissen(stack, getWissenCostWithStat(stats, player));
+    }
+
     public CompoundTag getStats(ItemStack stack) {
         return ArcaneWandItem.getInventory(stack).getItem(0).getOrCreateTag();
     }
@@ -152,7 +174,7 @@ public class Spell {
 
             CompoundTag stats = getStats(stack);
             setCooldown(stack, stats);
-            removeWissen(stack, stats);
+            removeWissen(stack, stats, player);
         }
     }
 
@@ -245,5 +267,13 @@ public class Spell {
     @OnlyIn(Dist.CLIENT)
     public Vec3 getRenderOffset(Entity entity, float partialTicks) {
         return Vec3.ZERO;
+    }
+
+    public void setResearch(Research research) {
+        this.research = research;
+    }
+
+    public Research getResearch() {
+        return research;
     }
 }

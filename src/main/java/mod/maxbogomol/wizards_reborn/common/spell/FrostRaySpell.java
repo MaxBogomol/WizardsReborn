@@ -12,8 +12,8 @@ import net.minecraft.world.phys.HitResult;
 import java.awt.*;
 
 public class FrostRaySpell extends RaySpell {
-    public FrostRaySpell(String id) {
-        super(id);
+    public FrostRaySpell(String id, int points) {
+        super(id, points);
         addCrystalType(WizardsReborn.WATER_CRYSTAL_TYPE);
     }
 

@@ -14,8 +14,8 @@ import net.minecraft.world.phys.HitResult;
 import java.awt.*;
 
 public class AirRaySpell extends RaySpell {
-    public AirRaySpell(String id) {
-        super(id);
+    public AirRaySpell(String id, int points) {
+        super(id, points);
         addCrystalType(WizardsReborn.AIR_CRYSTAL_TYPE);
     }
 

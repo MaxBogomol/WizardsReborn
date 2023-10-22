@@ -41,28 +41,8 @@ import java.util.UUID;
 import java.util.function.Predicate;
 
 public class RaySpell extends Spell {
-    public RaySpell(String id) {
-        super(id);
-    }
-
-    @Override
-    public int getCooldown() {
-        return 20;
-    }
-
-    @Override
-    public int getWissenCost() {
-        return 20;
-    }
-
-    @Override
-    public float getCooldownStatModifier() {
-        return 0.15f;
-    }
-
-    @Override
-    public float getWissenStatModifier() {
-        return 0.15f;
+    public RaySpell(String id, int points) {
+        super(id, points);
     }
 
     public float getRayDistance() {

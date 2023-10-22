@@ -10,7 +10,7 @@ import net.minecraft.world.InteractionHand;
 import net.minecraftforge.network.NetworkEvent;
 
 import java.util.List;
-import java.util.function.Supplier;;
+import java.util.function.Supplier;
 
 public class SetCrystalPacket {
     private static boolean hand;

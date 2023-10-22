@@ -18,6 +18,7 @@ public class KnowledgeToast implements Toast {
     public int count = 1;
     public static KnowledgeToast instance;
     public boolean all;
+    public boolean articles;
 
     public KnowledgeToast(Component id) {
         this.id = id;
@@ -35,7 +36,9 @@ public class KnowledgeToast implements Toast {
         }
 
         guiGraphics.drawString(toastComponent.getMinecraft().font, getNameWithCount(), 30, 7, 16776960, false);
-        guiGraphics.drawString(toastComponent.getMinecraft().font, Component.translatable("knowledge.toast.wizards_reborn.new_articles"), 30, 18, -1, false);
+        if (articles) {
+            guiGraphics.drawString(toastComponent.getMinecraft().font, Component.translatable("knowledge.toast.wizards_reborn.new_articles"), 30, 18, -1, false);
+        }
 
         return (double)timeSinceLastVisible >= 5000.0D * toastComponent.getNotificationDisplayTimeMultiplier() + (count * 100.0D) ? Toast.Visibility.HIDE : Toast.Visibility.SHOW;
     }

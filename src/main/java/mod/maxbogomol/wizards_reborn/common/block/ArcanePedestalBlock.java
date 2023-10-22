@@ -34,7 +34,7 @@ import javax.annotation.Nullable;
 
 import java.util.stream.Stream;
 
-public class ArcanePedestalBlock extends Block implements EntityBlock, SimpleWaterloggedBlock  {
+public class ArcanePedestalBlock extends Block implements EntityBlock, SimpleWaterloggedBlock {
 
     private static final VoxelShape SHAPE = Stream.of(
             Block.box(5, 13, 5, 11, 14, 11),

@@ -12,8 +12,8 @@ import net.minecraft.world.phys.HitResult;
 import java.awt.*;
 
 public class FrostProjectileSpell extends ProjectileSpell {
-    public FrostProjectileSpell(String id) {
-        super(id);
+    public FrostProjectileSpell(String id, int points) {
+        super(id, points);
         addCrystalType(WizardsReborn.WATER_CRYSTAL_TYPE);
     }
 

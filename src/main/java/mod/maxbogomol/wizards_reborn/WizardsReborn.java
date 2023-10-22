@@ -32,7 +32,7 @@ import mod.maxbogomol.wizards_reborn.common.block.*;
 import mod.maxbogomol.wizards_reborn.common.block.flammable.*;
 import mod.maxbogomol.wizards_reborn.common.capability.IKnowledge;
 import mod.maxbogomol.wizards_reborn.common.command.KnowledgeArgument;
-import mod.maxbogomol.wizards_reborn.common.command.WizardsRebornCommand;
+import mod.maxbogomol.wizards_reborn.common.command.SpellArgument;
 import mod.maxbogomol.wizards_reborn.common.config.Config;
 import mod.maxbogomol.wizards_reborn.common.crystal.*;
 import mod.maxbogomol.wizards_reborn.common.entity.CustomBoatEntity;
@@ -49,6 +49,7 @@ import mod.maxbogomol.wizards_reborn.common.item.equipment.curio.ArcanumRingItem
 import mod.maxbogomol.wizards_reborn.common.item.equipment.curio.LeatherBeltItem;
 import mod.maxbogomol.wizards_reborn.common.itemgroup.WizardsRebornItemGroup;
 import mod.maxbogomol.wizards_reborn.common.knowledge.RegisterKnowledges;
+import mod.maxbogomol.wizards_reborn.common.knowledge.Researches;
 import mod.maxbogomol.wizards_reborn.common.network.PacketHandler;
 import mod.maxbogomol.wizards_reborn.common.proxy.ClientProxy;
 import mod.maxbogomol.wizards_reborn.common.proxy.ISidedProxy;
@@ -74,6 +75,8 @@ import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.MobCategory;
+import net.minecraft.world.entity.ai.attributes.Attribute;
+import net.minecraft.world.entity.ai.attributes.RangedAttribute;
 import net.minecraft.world.food.FoodProperties;
 import net.minecraft.world.inventory.MenuType;
 import net.minecraft.world.item.*;
@@ -124,7 +127,8 @@ public class WizardsReborn {
     public static final DeferredRegister<MenuType<?>> CONTAINERS = DeferredRegister.create(ForgeRegistries.MENU_TYPES, MOD_ID);
     public static final DeferredRegister<BannerPattern> BANNER_PATTERNS = DeferredRegister.create(Registries.BANNER_PATTERN, MOD_ID);
     public static final DeferredRegister<SoundEvent> SOUND_EVENTS = DeferredRegister.create(Registries.SOUND_EVENT, MOD_ID);
-    static final DeferredRegister<ArgumentTypeInfo<?, ?>> ARG_TYPES = DeferredRegister.create(ForgeRegistries.COMMAND_ARGUMENT_TYPES, MOD_ID);
+    public static final DeferredRegister<ArgumentTypeInfo<?, ?>> ARG_TYPES = DeferredRegister.create(ForgeRegistries.COMMAND_ARGUMENT_TYPES, MOD_ID);
+    public static final DeferredRegister<Attribute> ATTRIBUTES = DeferredRegister.create(ForgeRegistries.ATTRIBUTES, MOD_ID);
 
     public static final WoodType ARCANE_WOOD_TYPE = WoodType.register(new WoodType(new ResourceLocation(MOD_ID, "arcane_wood").toString(), BlockSetType.OAK));
 
@@ -181,20 +185,20 @@ public class WizardsReborn {
     public static Monogram UNIVERSUM_MONOGRAM = new Monogram(MOD_ID+":universum");
 
     //SPELLS
-    public static Spell EARTH_PROJECTILE_SPELL = new EarthProjectileSpell(MOD_ID+":earth_projectile");
-    public static Spell WATER_PROJECTILE_SPELL = new WaterProjectileSpell(MOD_ID+":water_projectile");
-    public static Spell AIR_PROJECTILE_SPELL = new AirProjectileSpell(MOD_ID+":air_projectile");
-    public static Spell FIRE_PROJECTILE_SPELL = new FireProjectileSpell(MOD_ID+":fire_projectile");
-    public static Spell VOID_PROJECTILE_SPELL = new VoidProjectileSpell(MOD_ID+":void_projectile");
-    public static Spell FROST_PROJECTILE_SPELL = new FrostProjectileSpell(MOD_ID+":frost_projectile");
-    public static Spell HOLY_PROJECTILE_SPELL = new HolyProjectileSpell(MOD_ID+":holy_projectile");
-    public static Spell EARTH_RAY_SPELL = new EarthRaySpell(MOD_ID+":earth_ray");
-    public static Spell WATER_RAY_SPELL = new WaterRaySpell(MOD_ID+":water_ray");
-    public static Spell AIR_RAY_SPELL = new AirRaySpell(MOD_ID+":air_ray");
-    public static Spell FIRE_RAY_SPELL = new FireRaySpell(MOD_ID+":fire_ray");
-    public static Spell VOID_RAY_SPELL = new VoidRaySpell(MOD_ID+":void_ray");
-    public static Spell FROST_RAY_SPELL = new FrostRaySpell(MOD_ID+":frost_ray");
-    public static Spell HOLY_RAY_SPELL = new HolyRaySpell(MOD_ID+":holy_ray");
+    public static Spell EARTH_PROJECTILE_SPELL = new EarthProjectileSpell(MOD_ID+":earth_projectile", 5);
+    public static Spell WATER_PROJECTILE_SPELL = new WaterProjectileSpell(MOD_ID+":water_projectile", 5);
+    public static Spell AIR_PROJECTILE_SPELL = new AirProjectileSpell(MOD_ID+":air_projectile", 5);
+    public static Spell FIRE_PROJECTILE_SPELL = new FireProjectileSpell(MOD_ID+":fire_projectile", 5);
+    public static Spell VOID_PROJECTILE_SPELL = new VoidProjectileSpell(MOD_ID+":void_projectile", 5);
+    public static Spell FROST_PROJECTILE_SPELL = new FrostProjectileSpell(MOD_ID+":frost_projectile", 5);
+    public static Spell HOLY_PROJECTILE_SPELL = new HolyProjectileSpell(MOD_ID+":holy_projectile", 5);
+    public static Spell EARTH_RAY_SPELL = new EarthRaySpell(MOD_ID+":earth_ray", 7);
+    public static Spell WATER_RAY_SPELL = new WaterRaySpell(MOD_ID+":water_ray", 7);
+    public static Spell AIR_RAY_SPELL = new AirRaySpell(MOD_ID+":air_ray", 7);
+    public static Spell FIRE_RAY_SPELL = new FireRaySpell(MOD_ID+":fire_ray", 7);
+    public static Spell VOID_RAY_SPELL = new VoidRaySpell(MOD_ID+":void_ray", 7);
+    public static Spell FROST_RAY_SPELL = new FrostRaySpell(MOD_ID+":frost_ray", 7);
+    public static Spell HOLY_RAY_SPELL = new HolyRaySpell(MOD_ID+":holy_ray", 7);
 
     public static final FoodProperties MOR_FOOD = (new FoodProperties.Builder()).nutrition(1).saturationMod(0.6F).effect(new MobEffectInstance(MobEffects.POISON, 250, 1), 1.0F).effect(new MobEffectInstance(MobEffects.CONFUSION, 250, 1), 1.0F).effect(new MobEffectInstance(MobEffects.BLINDNESS, 250, 1), 1.0F).effect(new MobEffectInstance(MobEffects.WEAKNESS, 250, 1), 1.0F).build();
 
@@ -221,10 +225,10 @@ public class WizardsReborn {
     public static final RegistryObject<Block> ARCANE_WOOD_TRAPDOOR = BLOCKS.register("arcane_wood_trapdoor", () -> new TrapDoorBlock(BlockBehaviour.Properties.copy(Blocks.OAK_PLANKS).noOcclusion(), BlockSetType.OAK));
     public static final RegistryObject<Block> ARCANE_WOOD_PRESSURE_PLATE = BLOCKS.register("arcane_wood_pressure_plate", () -> new PressurePlateBlock(PressurePlateBlock.Sensitivity.EVERYTHING, BlockBehaviour.Properties.copy(Blocks.IRON_BLOCK).sound(SoundType.AMETHYST), BlockSetType.OAK));
     public static final RegistryObject<Block> ARCANE_WOOD_BUTTON = BLOCKS.register("arcane_wood_button", () -> new ButtonBlock(BlockBehaviour.Properties.copy(Blocks.OAK_BUTTON).sound(SoundType.WOOD), BlockSetType.OAK, 30, true));
-    public static final RegistryObject<Block> ARCANE_WOOD_SIGN = BLOCKS.register("arcane_wood_sign", () -> new ArcaneWoodStandingSignBlock(BlockBehaviour.Properties.copy(Blocks.OAK_PLANKS).noOcclusion().noCollission(), ARCANE_WOOD_TYPE));
-    public static final RegistryObject<Block> ARCANE_WOOD_WALL_SIGN = BLOCKS.register("arcane_wood_wall_sign", () -> new ArcaneWoodWallSignBlock(BlockBehaviour.Properties.copy(Blocks.OAK_PLANKS).noOcclusion().noCollission(), ARCANE_WOOD_TYPE));
-    public static final RegistryObject<Block> ARCANE_WOOD_HANGING_SIGN = BLOCKS.register("arcane_wood_hanging_sign", () -> new ArcaneWoodCeilingHangingSignBlock(BlockBehaviour.Properties.copy(Blocks.OAK_PLANKS).noOcclusion().noCollission(), ARCANE_WOOD_TYPE));
-    public static final RegistryObject<Block> ARCANE_WOOD_WALL_HANGING_SIGN = BLOCKS.register("arcane_wood_wall_hanging_sign", () -> new ArcaneWoodWallHangingSignBlock(BlockBehaviour.Properties.copy(Blocks.OAK_PLANKS).noOcclusion().noCollission(), ARCANE_WOOD_TYPE));
+    public static final RegistryObject<Block> ARCANE_WOOD_SIGN = BLOCKS.register("arcane_wood_sign", () -> new CustomStandingSignBlock(BlockBehaviour.Properties.copy(Blocks.OAK_PLANKS).noOcclusion().noCollission(), ARCANE_WOOD_TYPE));
+    public static final RegistryObject<Block> ARCANE_WOOD_WALL_SIGN = BLOCKS.register("arcane_wood_wall_sign", () -> new CustomWallSignBlock(BlockBehaviour.Properties.copy(Blocks.OAK_PLANKS).noOcclusion().noCollission(), ARCANE_WOOD_TYPE));
+    public static final RegistryObject<Block> ARCANE_WOOD_HANGING_SIGN = BLOCKS.register("arcane_wood_hanging_sign", () -> new CustomCeilingHangingSignBlock(BlockBehaviour.Properties.copy(Blocks.OAK_PLANKS).noOcclusion().noCollission(), ARCANE_WOOD_TYPE));
+    public static final RegistryObject<Block> ARCANE_WOOD_WALL_HANGING_SIGN = BLOCKS.register("arcane_wood_wall_hanging_sign", () -> new CustomWallHangingSignBlock(BlockBehaviour.Properties.copy(Blocks.OAK_PLANKS).noOcclusion().noCollission(), ARCANE_WOOD_TYPE));
     public static final RegistryObject<Block> ARCANE_WOOD_LEAVES = BLOCKS.register("arcane_wood_leaves", () -> new ArcaneWoodLeavesBlock(BlockBehaviour.Properties.copy(Blocks.OAK_LEAVES).lightLevel((state) -> 5), 30, 60));
     public static final RegistryObject<Block> ARCANE_WOOD_SAPLING = BLOCKS.register("arcane_wood_sapling", () -> new SaplingBlock(new ArcaneWoodTree(), BlockBehaviour.Properties.copy(Blocks.OAK_SAPLING)));
     public static final RegistryObject<Block> POTTED_ARCANE_WOOD_SAPLING = BLOCKS.register("potted_arcane_wood_sapling", () -> new FlowerPotBlock(ARCANE_WOOD_SAPLING.get(), BlockBehaviour.Properties.copy(Blocks.FLOWER_POT).instabreak().noOcclusion()));
@@ -518,8 +522,10 @@ public class WizardsReborn {
     public static final RegistryObject<SoundEvent> SPELL_BURST_SOUND = SOUND_EVENTS.register("spell_burst", () -> SoundEvent.createVariableRangeEvent(new ResourceLocation(MOD_ID, "spell_burst")));
     public static final RegistryObject<SoundEvent> SPELL_RELOAD_SOUND = SOUND_EVENTS.register("spell_reload", () -> SoundEvent.createVariableRangeEvent(new ResourceLocation(MOD_ID, "spell_reload")));
 
-
     public static final RegistryObject<ArgumentTypeInfo<?, ?>> KNOWLEDGE_ARG = ARG_TYPES.register("knowledge", () -> ArgumentTypeInfos.registerByClass(KnowledgeArgument.class, SingletonArgumentInfo.contextFree(KnowledgeArgument::knowledges)));
+    public static final RegistryObject<ArgumentTypeInfo<?, ?>> SPELLS_ARG = ARG_TYPES.register("spell", () -> ArgumentTypeInfos.registerByClass(SpellArgument.class, SingletonArgumentInfo.contextFree(SpellArgument::spells)));
+
+    public static final RegistryObject<Attribute> WISSEN_SALE = ATTRIBUTES.register("wissen_sale", () -> new RangedAttribute("attribute.name.wizards_reborn.wissen_sale", 0, 0, 75).setSyncable(true));
 
     public WizardsReborn() {
         InterModComms.sendTo(CuriosApi.MODID, SlotTypeMessage.REGISTER_TYPE, () -> SlotTypePreset.BELT.getMessageBuilder().build());
@@ -542,6 +548,7 @@ public class WizardsReborn {
         BANNER_PATTERNS.register(eventBus);
         SOUND_EVENTS.register(eventBus);
         ARG_TYPES.register(eventBus);
+        ATTRIBUTES.register(eventBus);
 
         setupCrystals();
         setupMonograms();
@@ -577,7 +584,8 @@ public class WizardsReborn {
     private void setup(final FMLCommonSetupEvent event)
     {
         PacketHandler.init();
-        RegisterKnowledges.setupKnowledges();
+        RegisterKnowledges.init();
+        Researches.init();
 
         event.enqueueWork(() -> {
             AxeItem.STRIPPABLES = new ImmutableMap.Builder<Block, Block>().putAll(AxeItem.STRIPPABLES)

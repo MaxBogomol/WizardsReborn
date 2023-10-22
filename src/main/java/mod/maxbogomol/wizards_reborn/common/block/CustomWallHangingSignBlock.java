@@ -9,8 +9,8 @@ import net.minecraft.world.level.block.state.properties.WoodType;
 
 import javax.annotation.Nullable;
 
-public class ArcaneWoodWallHangingSignBlock extends WallHangingSignBlock {
-    public ArcaneWoodWallHangingSignBlock(Properties properties, WoodType type) {
+public class CustomWallHangingSignBlock extends WallHangingSignBlock {
+    public CustomWallHangingSignBlock(Properties properties, WoodType type) {
         super(properties, type);
     }
 

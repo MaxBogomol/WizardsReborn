@@ -12,8 +12,8 @@ public class ItemKnowledge extends Knowledge {
     @Deprecated
     public final Item item;
 
-    public ItemKnowledge(String id, Item item) {
-        super(id);
+    public ItemKnowledge(String id, boolean articles, int points, Item item) {
+        super(id, articles, points);
         this.item = item;
     }
 

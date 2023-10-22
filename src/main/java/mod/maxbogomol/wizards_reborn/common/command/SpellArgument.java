@@ -7,37 +7,37 @@ import com.mojang.brigadier.exceptions.CommandSyntaxException;
 import com.mojang.brigadier.exceptions.DynamicCommandExceptionType;
 import com.mojang.brigadier.suggestion.Suggestions;
 import com.mojang.brigadier.suggestion.SuggestionsBuilder;
-import mod.maxbogomol.wizards_reborn.api.knowledge.Knowledge;
-import mod.maxbogomol.wizards_reborn.api.knowledge.Knowledges;
+import mod.maxbogomol.wizards_reborn.api.spell.Spell;
+import mod.maxbogomol.wizards_reborn.api.spell.Spells;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 
 import java.util.concurrent.CompletableFuture;
 
-public class KnowledgeArgument implements ArgumentType<Knowledge> {
-    private static final DynamicCommandExceptionType UNKNOWN = new DynamicCommandExceptionType((obj) -> Component.translatable("commands.wizards_reborn.knowledge.unknown", obj));
+public class SpellArgument implements ArgumentType<Spell> {
+    private static final DynamicCommandExceptionType UNKNOWN = new DynamicCommandExceptionType((obj) -> Component.translatable("commands.wizards_reborn.spell.unknown", obj));
 
-    public static Knowledge getKnowledge(final CommandContext<?> context, final String name) {
-        return context.getArgument(name, Knowledge.class);
+    public static Spell getSpell(final CommandContext<?> context, final String name) {
+        return context.getArgument(name, Spell.class);
     }
 
     @Override
     public <S> CompletableFuture<Suggestions> listSuggestions(final CommandContext<S> context, final SuggestionsBuilder builder) {
-        for (Knowledge s : Knowledges.getKnowledges())
+        for (Spell s : Spells.getSpells())
             if (s.getId().startsWith(builder.getRemainingLowerCase()))
                 builder.suggest(s.getId());
         return builder.buildFuture();
     }
 
     @Override
-    public Knowledge parse(StringReader reader) throws CommandSyntaxException {
+    public Spell parse(StringReader reader) throws CommandSyntaxException {
         ResourceLocation rl = ResourceLocation.read(reader);
-        Knowledge s = Knowledges.getKnowledge(rl.toString());
+        Spell s = Spells.getSpell(rl.toString());
         if (s == null) throw UNKNOWN.create(rl.toString());
         return s;
     }
 
-    public static KnowledgeArgument knowledges() {
-        return new KnowledgeArgument();
+    public static SpellArgument spells() {
+        return new SpellArgument();
     }
 }

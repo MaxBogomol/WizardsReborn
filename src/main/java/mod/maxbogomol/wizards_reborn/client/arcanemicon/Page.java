@@ -1,18 +1,14 @@
 package mod.maxbogomol.wizards_reborn.client.arcanemicon;
 
-import com.mojang.blaze3d.systems.RenderSystem;
-import com.mojang.blaze3d.vertex.PoseStack;
 import mod.maxbogomol.wizards_reborn.WizardsRebornClient;
 import mod.maxbogomol.wizards_reborn.utils.ColorUtils;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Font;
 import net.minecraft.client.gui.GuiGraphics;
-import net.minecraft.client.renderer.entity.ItemRenderer;
-import net.minecraft.client.resources.language.I18n;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;
-import net.minecraft.world.item.ItemStack;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 
@@ -66,6 +62,11 @@ public abstract class Page {
         for (int i = 0; i < lines.size(); i ++) {
             drawText(book, gui, lines.get(i), x, y + i * (font.lineHeight + 1));
         }
+    }
+
+    @OnlyIn(Dist.CLIENT)
+    public void tick(ArcanemiconGui book) {
+
     }
 
     @OnlyIn(Dist.CLIENT)

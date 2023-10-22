@@ -13,8 +13,8 @@ import net.minecraft.world.phys.HitResult;
 import java.awt.*;
 
 public class VoidRaySpell extends RaySpell {
-    public VoidRaySpell(String id) {
-        super(id);
+    public VoidRaySpell(String id, int points) {
+        super(id, points);
         addCrystalType(WizardsReborn.VOID_CRYSTAL_TYPE);
     }
 
