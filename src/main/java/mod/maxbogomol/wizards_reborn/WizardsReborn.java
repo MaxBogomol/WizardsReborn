@@ -40,10 +40,7 @@ import mod.maxbogomol.wizards_reborn.common.entity.CustomChestBoatEntity;
 import mod.maxbogomol.wizards_reborn.common.entity.SpellProjectileEntity;
 import mod.maxbogomol.wizards_reborn.common.event.Events;
 import mod.maxbogomol.wizards_reborn.common.item.*;
-import mod.maxbogomol.wizards_reborn.common.item.equipment.ArcaneWandItem;
-import mod.maxbogomol.wizards_reborn.common.item.equipment.CustomItemTier;
-import mod.maxbogomol.wizards_reborn.common.item.equipment.ScytheItem;
-import mod.maxbogomol.wizards_reborn.common.item.equipment.WissenWandItem;
+import mod.maxbogomol.wizards_reborn.common.item.equipment.*;
 import mod.maxbogomol.wizards_reborn.common.item.equipment.curio.ArcanumAmuletItem;
 import mod.maxbogomol.wizards_reborn.common.item.equipment.curio.ArcanumRingItem;
 import mod.maxbogomol.wizards_reborn.common.item.equipment.curio.LeatherBeltItem;
@@ -54,10 +51,7 @@ import mod.maxbogomol.wizards_reborn.common.network.PacketHandler;
 import mod.maxbogomol.wizards_reborn.common.proxy.ClientProxy;
 import mod.maxbogomol.wizards_reborn.common.proxy.ISidedProxy;
 import mod.maxbogomol.wizards_reborn.common.proxy.ServerProxy;
-import mod.maxbogomol.wizards_reborn.common.recipe.ArcaneWorkbenchRecipe;
-import mod.maxbogomol.wizards_reborn.common.recipe.ArcanumDustTransmutationRecipe;
-import mod.maxbogomol.wizards_reborn.common.recipe.WissenAltarRecipe;
-import mod.maxbogomol.wizards_reborn.common.recipe.WissenCrystallizerRecipe;
+import mod.maxbogomol.wizards_reborn.common.recipe.*;
 import mod.maxbogomol.wizards_reborn.common.spell.*;
 import mod.maxbogomol.wizards_reborn.common.tileentity.*;
 import mod.maxbogomol.wizards_reborn.common.world.tree.ArcaneWoodTree;
@@ -352,6 +346,7 @@ public class WizardsReborn {
     public static final RegistryObject<Item> ARCANE_WOOD_BOAT_ITEM = ITEMS.register("arcane_wood_boat", () -> new CustomBoatItem(false, CustomBoatEntity.Type.ARCANE_WOOD, new Item.Properties().stacksTo(1)));
     public static final RegistryObject<Item> ARCANE_WOOD_CHEST_BOAT_ITEM = ITEMS.register("arcane_wood_chest_boat", () -> new CustomBoatItem(true, CustomBoatEntity.Type.ARCANE_WOOD, new Item.Properties().stacksTo(1)));
     public static final RegistryObject<Item> ARCANE_WOOD_BRANCH = ITEMS.register("arcane_wood_branch", () -> new Item(new Item.Properties()));
+    public static final RegistryObject<Item> ARCANE_WOOD_MORTAR = ITEMS.register("arcane_wood_mortar", () -> new MortarItem(new Item.Properties().stacksTo(1)));
     public static final RegistryObject<Item> ARCANE_WOOD_LEAVES_ITEM = ITEMS.register("arcane_wood_leaves", () -> new BlockItem(ARCANE_WOOD_LEAVES.get(), new Item.Properties()));
     public static final RegistryObject<Item> ARCANE_WOOD_SAPLING_ITEM = ITEMS.register("arcane_wood_sapling", () -> new BlockItem(ARCANE_WOOD_SAPLING.get(), new Item.Properties()));
 
@@ -363,6 +358,14 @@ public class WizardsReborn {
     public static final RegistryObject<Item> MOR_BLOCK_ITEM = ITEMS.register("mor_block", () -> new BlockItem(MOR_BLOCK.get(), new Item.Properties()));
     public static final RegistryObject<Item> ELDER_MOR_ITEM = ITEMS.register("elder_mor", () -> new BlockItem(ELDER_MOR.get(), new Item.Properties().food(MOR_FOOD)));
     public static final RegistryObject<Item> ELDER_MOR_BLOCK_ITEM = ITEMS.register("elder_mor_block", () -> new BlockItem(ELDER_MOR_BLOCK.get(), new Item.Properties()));
+
+    public static final RegistryObject<Item> PETALS = ITEMS.register("petals", () -> new Item(new Item.Properties()));
+    public static final RegistryObject<Item> GROUND_BROWN_MUSHROOM = ITEMS.register("ground_brown_mushroom", () -> new Item(new Item.Properties()));
+    public static final RegistryObject<Item> GROUND_RED_MUSHROOM = ITEMS.register("ground_red_mushroom", () -> new Item(new Item.Properties()));
+    public static final RegistryObject<Item> GROUND_CRIMSON_FUNGUS = ITEMS.register("ground_crimson_fungus", () -> new Item(new Item.Properties()));
+    public static final RegistryObject<Item> GROUND_WARPED_FUNGUS = ITEMS.register("ground_warped_fungus", () -> new Item(new Item.Properties()));
+    public static final RegistryObject<Item> GROUND_MOR = ITEMS.register("ground_mor", () -> new Item(new Item.Properties()));
+    public static final RegistryObject<Item> GROUND_ELDER_MOR = ITEMS.register("ground_elder_mor", () -> new Item(new Item.Properties()));
 
     public static final RegistryObject<Item> ARCANE_WAND = ITEMS.register("arcane_wand", () -> new ArcaneWandItem(new Item.Properties().stacksTo(1)));
     public static final RegistryObject<Item> WISSEN_WAND = ITEMS.register("wissen_wand", () -> new WissenWandItem(new Item.Properties().stacksTo(1)));
@@ -499,6 +502,9 @@ public class WizardsReborn {
 
     public static final RegistryObject<ArcaneWorkbenchRecipe.Serializer> ARCANE_WORKBENCH_SERIALIZER = RECIPE_SERIALIZERS.register("arcane_workbench", ArcaneWorkbenchRecipe.Serializer::new);
     public static final RegistryObject<RecipeType<ArcaneWorkbenchRecipe>> ARCANE_WORKBENCH_RECIPE = RECIPES.register("arcane_workbench", () -> RecipeType.simple(ArcaneWorkbenchRecipe.TYPE_ID));
+
+    public static final RegistryObject<MortarRecipe.Serializer> MORTAR_SERIALIZER = RECIPE_SERIALIZERS.register("mortar", MortarRecipe.Serializer::new);
+    public static final RegistryObject<RecipeType<MortarRecipe>> MORTAR_RECIPE = RECIPES.register("mortar", () -> RecipeType.simple(MortarRecipe.TYPE_ID));
 
     //CONTAINERS
     public static final RegistryObject<MenuType<ArcaneWorkbenchContainer>> ARCANE_WORKBENCH_CONTAINER

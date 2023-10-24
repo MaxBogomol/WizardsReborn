@@ -1,0 +1,9 @@
+{
+  "type": "wizards_reborn:mortar",
+  "from": {
+    "item": "minecraft:red_mushroom"
+  },
+  "to": {
+    "item": "wizards_reborn:ground_red_mushroom"
+  }
+}

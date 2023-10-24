@@ -1,0 +1,9 @@
+{
+  "type": "wizards_reborn:mortar",
+  "from": {
+    "item": "wizards_reborn:elder_mor"
+  },
+  "to": {
+    "item": "wizards_reborn:ground_elder_mor"
+  }
+}

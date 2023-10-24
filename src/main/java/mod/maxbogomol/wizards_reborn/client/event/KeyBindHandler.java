@@ -7,6 +7,8 @@ import mod.maxbogomol.wizards_reborn.common.network.DeleteCrystalPacket;
 import mod.maxbogomol.wizards_reborn.common.network.PacketHandler;
 import net.minecraft.client.Minecraft;
 import net.minecraft.network.chat.Component;
+import net.minecraft.sounds.SoundEvents;
+import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.api.distmarker.Dist;
@@ -42,6 +44,7 @@ public class KeyBindHandler {
                 Minecraft.getInstance().setScreen(new CrystalChooseScreen(Component.empty()));
             } else if (open && player.isShiftKeyDown()) {
                 PacketHandler.sendToServer(new DeleteCrystalPacket(hand));
+                Minecraft.getInstance().player.playNotifySound(SoundEvents.AMETHYST_BLOCK_RESONATE, SoundSource.NEUTRAL, 1.0f, 1.0f);
             }
         }
     }

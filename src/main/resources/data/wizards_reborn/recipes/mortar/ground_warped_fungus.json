@@ -1,0 +1,9 @@
+{
+  "type": "wizards_reborn:mortar",
+  "from": {
+    "item": "minecraft:warped_fungus"
+  },
+  "to": {
+    "item": "wizards_reborn:ground_warped_fungus"
+  }
+}

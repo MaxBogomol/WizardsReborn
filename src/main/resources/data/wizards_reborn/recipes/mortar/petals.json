@@ -1,0 +1,9 @@
+{
+  "type": "wizards_reborn:mortar",
+  "from": {
+    "tag": "minecraft:flowers"
+  },
+  "to": {
+    "item": "wizards_reborn:petals"
+  }
+}

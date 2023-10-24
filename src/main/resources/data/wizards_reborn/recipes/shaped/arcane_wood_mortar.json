@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "#B#",
+    " # "
+  ],
+  "key": {
+    "#": {
+      "item": "wizards_reborn:arcane_wood_planks"
+    },
+    "B": {
+      "item": "wizards_reborn:arcane_wood_branch"
+    }
+  },
+  "result": {
+    "item": "wizards_reborn:arcane_wood_mortar"
+  }
+}

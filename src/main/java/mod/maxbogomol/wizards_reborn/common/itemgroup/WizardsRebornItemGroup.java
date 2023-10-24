@@ -68,6 +68,7 @@ public class WizardsRebornItemGroup {
             event.accept(WizardsReborn.ARCANE_WOOD_BOAT_ITEM);
             event.accept(WizardsReborn.ARCANE_WOOD_CHEST_BOAT_ITEM);
             event.accept(WizardsReborn.ARCANE_WOOD_BRANCH);
+            event.accept(WizardsReborn.ARCANE_WOOD_MORTAR);
             event.accept(WizardsReborn.ARCANE_WOOD_LEAVES_ITEM);
             event.accept(WizardsReborn.ARCANE_WOOD_SAPLING_ITEM);
 
@@ -79,6 +80,14 @@ public class WizardsRebornItemGroup {
             event.accept(WizardsReborn.MOR_BLOCK_ITEM);
             event.accept(WizardsReborn.ELDER_MOR_ITEM);
             event.accept(WizardsReborn.ELDER_MOR_BLOCK_ITEM);
+
+            event.accept(WizardsReborn.PETALS);
+            event.accept(WizardsReborn.GROUND_BROWN_MUSHROOM);
+            event.accept(WizardsReborn.GROUND_RED_MUSHROOM);
+            event.accept(WizardsReborn.GROUND_CRIMSON_FUNGUS);
+            event.accept(WizardsReborn.GROUND_WARPED_FUNGUS);
+            event.accept(WizardsReborn.GROUND_MOR);
+            event.accept(WizardsReborn.GROUND_ELDER_MOR);
 
             event.accept(WizardsReborn.ARCANE_WAND);
             event.accept(WizardsReborn.WISSEN_WAND);

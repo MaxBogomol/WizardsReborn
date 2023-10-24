@@ -196,10 +196,9 @@ public class RaySpell extends Spell {
     }
 
     public void updatePos(SpellProjectileEntity entity) {
-        Vec3 pos = entity.position();
-        entity.xo = pos.x;
-        entity.yo = pos.y;
-        entity.zo = pos.z;
+        entity.xo = entity.xOld;
+        entity.yo = entity.yOld;
+        entity.zo =  entity.zOld;
         if (entity.getSender() != null) {
             entity.setPos(entity.getSender().getEyePosition().add(0, -0.5, 0));
         }

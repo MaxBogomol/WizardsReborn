@@ -42,6 +42,7 @@
   "item.wizards_reborn.arcane_wood_boat": "Arcane Wood Boat",
   "item.wizards_reborn.arcane_wood_chest_boat": "Arcane Wood Boat with Chest",
   "item.wizards_reborn.arcane_wood_branch": "Arcane Wood Branch",
+  "item.wizards_reborn.arcane_wood_mortar": "Arcane Wood Mortar",
   "block.wizards_reborn.arcane_wood_leaves": "Arcane Wood Leaves",
   "block.wizards_reborn.arcane_wood_sapling": "Arcane Wood Sapling",
   "block.wizards_reborn.potted_arcane_wood_sapling": "Potted Arcane Wood Sapling",
@@ -56,6 +57,14 @@
   "block.wizards_reborn.elder_mor": "Elder Mor",
   "block.wizards_reborn.potted_elder_mor": "Potted Elder Mor",
   "block.wizards_reborn.elder_mor_block": "Elder Mor Block",
+
+  "item.wizards_reborn.petals": "Petals",
+  "item.wizards_reborn.ground_brown_mushroom": "Ground Brown Mushroom",
+  "item.wizards_reborn.ground_red_mushroom": "Ground Red Mushroom",
+  "item.wizards_reborn.ground_crimson_fungus": "Ground Crimson Fungus",
+  "item.wizards_reborn.ground_warped_fungus": "Ground Warped Fungus",
+  "item.wizards_reborn.ground_mor": "Ground Mor",
+  "item.wizards_reborn.ground_elder_mor": "Ground Elder Mor",
 
   "item.wizards_reborn.arcane_wand": "Arcane Wand",
   "item.wizards_reborn.wissen_wand": "Wissen Wand",

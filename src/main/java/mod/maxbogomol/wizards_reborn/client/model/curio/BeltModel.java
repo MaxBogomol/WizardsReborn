@@ -1,6 +1,5 @@
 package mod.maxbogomol.wizards_reborn.client.model.curio;
 
-import com.google.common.collect.ImmutableList;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
 import net.minecraft.client.model.HumanoidModel;

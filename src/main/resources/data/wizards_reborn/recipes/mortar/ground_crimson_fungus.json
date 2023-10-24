@@ -1,0 +1,9 @@
+{
+  "type": "wizards_reborn:mortar",
+  "from": {
+    "item": "minecraft:crimson_fungus"
+  },
+  "to": {
+    "item": "wizards_reborn:ground_crimson_fungus"
+  }
+}
