@@ -78,7 +78,7 @@ public class ArcanumDustItem extends ArcanumItem {
                         stack.setCount(stack.getCount() - 1);
                     }
 
-                    Vec3 pos = player.getEyePosition();
+                    Vec3 pos = player.getEyePosition().add(player.getLookAngle().scale(0.75f));
                     Vec3 vel = player.getEyePosition().add(player.getLookAngle().scale(40)).subtract(pos).scale(1.0 / 20).normalize().scale(0.2f);
 
                     PacketHandler.sendToTracking(world, player.getOnPos(), new WissenDustBurstEffectPacket(blockpos, (float) pos.x, (float) pos.y, (float) pos.z, (float) vel.x, (float) vel.y, (float) vel.z));

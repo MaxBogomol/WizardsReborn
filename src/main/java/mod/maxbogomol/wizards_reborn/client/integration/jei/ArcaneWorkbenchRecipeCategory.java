@@ -79,6 +79,6 @@ public class ArcaneWorkbenchRecipeCategory implements IRecipeCategory<ArcaneWork
         String text_wissen = Integer.toString(recipe.getRecipeWissen());
         int stringWidth = font_renderer.width(text_wissen);
 
-        gui.drawString(Minecraft.getInstance().font, text_wissen, 154 - (stringWidth/2) + font_renderer.lineHeight, 95, 0xffffff);
+        gui.drawString(Minecraft.getInstance().font, text_wissen, 154 - (stringWidth / 2 ), 95, 0xffffff);
     }
 }

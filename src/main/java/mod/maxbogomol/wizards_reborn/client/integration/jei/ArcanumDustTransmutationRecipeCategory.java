@@ -21,12 +21,10 @@ public class ArcanumDustTransmutationRecipeCategory implements IRecipeCategory<A
     public final static ResourceLocation TEXTURE = new ResourceLocation(WizardsReborn.MOD_ID, "textures/gui/jei/arcanum_dust_transmutation.png");
 
     private final IDrawable background;
-    private final IDrawable display;
     private final IDrawable icon;
 
     public ArcanumDustTransmutationRecipeCategory(IGuiHelper helper) {
-        background = helper.createDrawable(TEXTURE, 0, 0, 118, 48);
-        display = helper.createDrawable(TEXTURE, 0, 48, 118, 96);
+        background = helper.createDrawable(TEXTURE, 0, 0, 148, 48);
         icon = helper.createDrawableIngredient(VanillaTypes.ITEM_STACK, new ItemStack(WizardsReborn.ARCANUM_DUST.get()));
     }
 
@@ -53,9 +51,9 @@ public class ArcanumDustTransmutationRecipeCategory implements IRecipeCategory<A
 
     @Override
     public void setRecipe(@NotNull IRecipeLayoutBuilder builder, @NotNull ArcanumDustTransmutationRecipe recipe, @NotNull IFocusGroup focusGroup) {
-        builder.addSlot(RecipeIngredientRole.INPUT, 1, 15).addItemStack(WizardsReborn.ARCANUM_DUST.get().getDefaultInstance());
-        builder.addSlot(RecipeIngredientRole.INPUT, 51, 15).addIngredients(recipe.getIngredientRecipe());
+        builder.addSlot(RecipeIngredientRole.INPUT, 4, 16).addItemStack(WizardsReborn.ARCANUM_DUST.get().getDefaultInstance());
+        builder.addSlot(RecipeIngredientRole.INPUT, 63, 16).addIngredients(recipe.getIngredientRecipe());
 
-        builder.addSlot(RecipeIngredientRole.OUTPUT, 101, 15).addItemStack(recipe.getResultItem(RegistryAccess.EMPTY));
+        builder.addSlot(RecipeIngredientRole.OUTPUT, 125, 16).addItemStack(recipe.getResultItem(RegistryAccess.EMPTY));
     }
 }

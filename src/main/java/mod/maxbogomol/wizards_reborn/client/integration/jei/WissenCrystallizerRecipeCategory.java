@@ -30,7 +30,7 @@ public class WissenCrystallizerRecipeCategory implements IRecipeCategory<WissenC
     private final IDrawable icon;
 
     public WissenCrystallizerRecipeCategory(IGuiHelper helper) {
-        background = helper.createDrawable(TEXTURE, 0, 0, 142, 88);
+        background = helper.createDrawable(TEXTURE, 0, 0, 146, 88);
         icon = helper.createDrawableIngredient(VanillaTypes.ITEM_STACK, new ItemStack(WizardsReborn.WISSEN_CRYSTALLIZER_ITEM.get()));
     }
 
@@ -59,7 +59,7 @@ public class WissenCrystallizerRecipeCategory implements IRecipeCategory<WissenC
     public void setRecipe(@NotNull IRecipeLayoutBuilder builder, @NotNull WissenCrystallizerRecipe recipe, @NotNull IFocusGroup focusGroup) {
         int index = 1;
         double angleBetweenEach = 360.0 / (recipe.getIngredients().size() - 1);
-        Vec2 point = new Vec2(36, 0), center = new Vec2(36, 36);
+        Vec2 point = new Vec2(35, 0), center = new Vec2(35, 36);
         boolean first = false;
 
         for (Ingredient o : recipe.getIngredients()) {
@@ -68,7 +68,7 @@ public class WissenCrystallizerRecipeCategory implements IRecipeCategory<WissenC
                 index += 1;
                 point = rotatePointAbout(point, center, angleBetweenEach);
             } else {
-                builder.addSlot(RecipeIngredientRole.INPUT, 36, 36).addIngredients(o);
+                builder.addSlot(RecipeIngredientRole.INPUT, 35, 36).addIngredients(o);
                 first = true;
             }
         }
@@ -89,6 +89,6 @@ public class WissenCrystallizerRecipeCategory implements IRecipeCategory<WissenC
         String text_wissen = Integer.toString(recipe.getRecipeWissen());
         int stringWidth = font_renderer.width(text_wissen);
 
-        gui.drawString(Minecraft.getInstance().font, text_wissen, 120 - (stringWidth/2) + font_renderer.lineHeight, 65, 0xffffff);
+        gui.drawString(Minecraft.getInstance().font, text_wissen, 120 - (stringWidth / 2), 65, 0xffffff);
     }
 }

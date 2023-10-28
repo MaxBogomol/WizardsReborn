@@ -27,7 +27,7 @@ public class WissenAltarRecipeCategory implements IRecipeCategory<WissenAltarRec
     private final IDrawable icon;
 
     public WissenAltarRecipeCategory(IGuiHelper helper) {
-        background = helper.createDrawable(TEXTURE, 0, 0, 48, 48);
+        background = helper.createDrawable(TEXTURE, 0, 0, 56, 56);
         icon = helper.createDrawableIngredient(VanillaTypes.ITEM_STACK, new ItemStack(WizardsReborn.WISSEN_ALTAR_ITEM.get()));
     }
 
@@ -54,7 +54,7 @@ public class WissenAltarRecipeCategory implements IRecipeCategory<WissenAltarRec
 
     @Override
     public void setRecipe(@NotNull IRecipeLayoutBuilder builder, @NotNull WissenAltarRecipe recipe, @NotNull IFocusGroup focusGroup) {
-        builder.addSlot(RecipeIngredientRole.INPUT, 16, 12).addIngredients(recipe.getIngredientRecipe());
+        builder.addSlot(RecipeIngredientRole.INPUT, 20, 20).addIngredients(recipe.getIngredientRecipe());
     }
 
     @Override
@@ -63,6 +63,6 @@ public class WissenAltarRecipeCategory implements IRecipeCategory<WissenAltarRec
         String text_wissen = Integer.toString(recipe.getRecipeWissen());
         int stringWidth = font_renderer.width(text_wissen);
 
-        gui.drawString(Minecraft.getInstance().font, text_wissen, 15 - (stringWidth/2) + font_renderer.lineHeight, 38, 0xffffff);
+        gui.drawString(Minecraft.getInstance().font, text_wissen, (56 - stringWidth) / 2, 34 + font_renderer.lineHeight, 0xffffff);
     }
 }
