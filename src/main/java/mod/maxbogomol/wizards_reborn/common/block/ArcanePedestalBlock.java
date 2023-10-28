@@ -2,6 +2,7 @@ package mod.maxbogomol.wizards_reborn.common.block;
 
 import mod.maxbogomol.wizards_reborn.common.tileentity.ArcanePedestalTileEntity;
 import mod.maxbogomol.wizards_reborn.common.tileentity.TileSimpleInventory;
+import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.EntityBlock;
@@ -86,10 +87,12 @@ public class ArcanePedestalBlock extends Block implements EntityBlock, SimpleWat
                 player.getMainHandItem().setCount(stack.getCount() - 1);
                 stack.setCount(1);
                 tile.getItemHandler().setItem(0, stack);
+                world.updateNeighbourForOutputSignal(pos, this);
                 return InteractionResult.SUCCESS;
             } else {
                 tile.getItemHandler().setItem(0, stack);
                 player.getInventory().removeItem(player.getItemInHand(hand));
+                world.updateNeighbourForOutputSignal(pos, this);
                 return InteractionResult.SUCCESS;
             }
         }
@@ -97,6 +100,7 @@ public class ArcanePedestalBlock extends Block implements EntityBlock, SimpleWat
         if (!tile.getItemHandler().getItem(0).isEmpty()) {
             player.getInventory().add(tile.getItemHandler().getItem(0).copy());
             tile.getItemHandler().removeItemNoUpdate(0);
+            world.updateNeighbourForOutputSignal(pos, this);
             return InteractionResult.SUCCESS;
         }
 
@@ -128,5 +132,16 @@ public class ArcanePedestalBlock extends Block implements EntityBlock, SimpleWat
     @Override
     public BlockEntity newBlockEntity(BlockPos pPos, BlockState pState) {
         return new ArcanePedestalTileEntity(pPos, pState);
+    }
+
+    @Override
+    public boolean hasAnalogOutputSignal(BlockState state) {
+        return true;
+    }
+
+    @Override
+    public int getAnalogOutputSignal(BlockState blockState, Level level, BlockPos pos) {
+        TileSimpleInventory tile = (TileSimpleInventory) level.getBlockEntity(pos);
+        return AbstractContainerMenu.getRedstoneSignalFromContainer(tile.getItemHandler());
     }
 }

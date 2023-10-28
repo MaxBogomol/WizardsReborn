@@ -1,6 +1,7 @@
 package mod.maxbogomol.wizards_reborn.common.block;
 
 import mod.maxbogomol.wizards_reborn.common.item.equipment.WissenWandItem;
+import mod.maxbogomol.wizards_reborn.common.tileentity.ArcanePedestalTileEntity;
 import mod.maxbogomol.wizards_reborn.common.tileentity.TickableBlockEntity;
 import mod.maxbogomol.wizards_reborn.common.tileentity.TileSimpleInventory;
 import mod.maxbogomol.wizards_reborn.common.tileentity.WissenCrystallizerTileEntity;
@@ -10,6 +11,7 @@ import net.minecraft.world.Containers;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.BlockGetter;
@@ -106,10 +108,12 @@ public class WissenCrystallizerBlock extends Block implements EntityBlock, Simpl
                         player.getMainHandItem().setCount(stack.getCount() - 1);
                         stack.setCount(1);
                         tile.getItemHandler().setItem(slot, stack);
+                        world.updateNeighbourForOutputSignal(pos, this);
                         return InteractionResult.SUCCESS;
                     } else {
                         tile.getItemHandler().setItem(slot, stack);
                         player.getInventory().removeItem(player.getItemInHand(hand));
+                        world.updateNeighbourForOutputSignal(pos, this);
                         return InteractionResult.SUCCESS;
                     }
                 }
@@ -120,6 +124,7 @@ public class WissenCrystallizerBlock extends Block implements EntityBlock, Simpl
                 if (!tile.getItemHandler().getItem(slot).isEmpty()) {
                     player.getInventory().add(tile.getItemHandler().getItem(slot).copy());
                     tile.getItemHandler().removeItemNoUpdate(slot);
+                    world.updateNeighbourForOutputSignal(pos, this);
                     return InteractionResult.SUCCESS;
                 }
             }
@@ -159,5 +164,16 @@ public class WissenCrystallizerBlock extends Block implements EntityBlock, Simpl
     @Override
     public <T extends BlockEntity> BlockEntityTicker<T> getTicker(@NotNull Level level, @NotNull BlockState state, @NotNull BlockEntityType<T> type) {
         return TickableBlockEntity.getTickerHelper();
+    }
+
+    @Override
+    public boolean hasAnalogOutputSignal(BlockState state) {
+        return true;
+    }
+
+    @Override
+    public int getAnalogOutputSignal(BlockState blockState, Level level, BlockPos pos) {
+        TileSimpleInventory tile = (TileSimpleInventory) level.getBlockEntity(pos);
+        return AbstractContainerMenu.getRedstoneSignalFromContainer(tile.getItemHandler());
     }
 }

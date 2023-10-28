@@ -15,6 +15,7 @@ import mod.maxbogomol.wizards_reborn.common.network.WissenTranslatorSendEffectPa
 import mod.maxbogomol.wizards_reborn.utils.PacketUtils;
 import net.minecraft.client.Minecraft;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.Connection;
 import net.minecraft.network.protocol.game.ClientboundBlockEntityDataPacket;
@@ -31,6 +32,7 @@ import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import org.jetbrains.annotations.NotNull;
 
+import javax.annotation.Nullable;
 import java.awt.*;
 import java.util.ArrayList;
 import java.util.Random;
@@ -200,6 +202,20 @@ public class WissenTranslatorTileEntity extends ExposedTileSimpleInventory imple
         if (level != null && !level.isClientSide) {
             PacketUtils.SUpdateTileEntityPacket(this);
         }
+    }
+
+    @Override
+    public boolean canPlaceItemThroughFace(int index, @NotNull ItemStack stack, @Nullable Direction direction) {
+        if (stack.is(WizardsReborn.ARCANE_LUMOS_ITEM_TAG)) {
+            return true;
+        }
+
+        return false;
+    }
+
+    @Override
+    public boolean canTakeItemThroughFace(int index, @NotNull ItemStack stack, @Nullable Direction direction) {
+        return true;
     }
 
     public boolean isSameFromAndTo() {

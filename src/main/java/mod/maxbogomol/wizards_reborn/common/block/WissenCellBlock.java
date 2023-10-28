@@ -13,6 +13,7 @@ import net.minecraft.world.Containers;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.BlockGetter;
@@ -106,6 +107,7 @@ public class WissenCellBlock extends HorizontalDirectionalBlock implements Entit
             if (cell.getItemHandler().getItem(0).isEmpty()) {
                 cell.getItemHandler().setItem(0, stack);
                 player.getInventory().removeItem(player.getItemInHand(hand));
+                world.updateNeighbourForOutputSignal(pos, this);
                 return InteractionResult.SUCCESS;
             }
         }
@@ -113,6 +115,7 @@ public class WissenCellBlock extends HorizontalDirectionalBlock implements Entit
         if (!cell.getItemHandler().getItem(0).isEmpty()) {
             player.getInventory().add(cell.getItemHandler().getItem(0).copy());
             cell.getItemHandler().removeItemNoUpdate(0);
+            world.updateNeighbourForOutputSignal(pos, this);
             return InteractionResult.SUCCESS;
         }
 
@@ -150,5 +153,16 @@ public class WissenCellBlock extends HorizontalDirectionalBlock implements Entit
     @Override
     public <T extends BlockEntity> BlockEntityTicker<T> getTicker(@NotNull Level level, @NotNull BlockState state, @NotNull BlockEntityType<T> type) {
         return TickableBlockEntity.getTickerHelper();
+    }
+
+    @Override
+    public boolean hasAnalogOutputSignal(BlockState state) {
+        return true;
+    }
+
+    @Override
+    public int getAnalogOutputSignal(BlockState blockState, Level level, BlockPos pos) {
+        TileSimpleInventory tile = (TileSimpleInventory) level.getBlockEntity(pos);
+        return AbstractContainerMenu.getRedstoneSignalFromContainer(tile.getItemHandler());
     }
 }

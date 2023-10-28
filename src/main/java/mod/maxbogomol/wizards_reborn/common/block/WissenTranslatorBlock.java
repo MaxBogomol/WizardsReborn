@@ -10,6 +10,7 @@ import net.minecraft.core.Direction;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.BlockGetter;
@@ -174,10 +175,12 @@ public class WissenTranslatorBlock extends FaceAttachedHorizontalDirectionalBloc
                     player.getMainHandItem().setCount(stack.getCount() - 1);
                     stack.setCount(1);
                     tile.getItemHandler().setItem(0, stack);
+                    world.updateNeighbourForOutputSignal(pos, this);
                     return InteractionResult.SUCCESS;
                 } else {
                     tile.getItemHandler().setItem(0, stack);
                     player.getInventory().removeItem(player.getItemInHand(hand));
+                    world.updateNeighbourForOutputSignal(pos, this);
                     return InteractionResult.SUCCESS;
                 }
             }
@@ -186,6 +189,7 @@ public class WissenTranslatorBlock extends FaceAttachedHorizontalDirectionalBloc
         if (!tile.getItemHandler().getItem(0).isEmpty()) {
             player.getInventory().add(tile.getItemHandler().getItem(0).copy());
             tile.getItemHandler().removeItemNoUpdate(0);
+            world.updateNeighbourForOutputSignal(pos, this);
             return InteractionResult.SUCCESS;
         }
 
@@ -223,5 +227,16 @@ public class WissenTranslatorBlock extends FaceAttachedHorizontalDirectionalBloc
     @Override
     public <T extends BlockEntity> BlockEntityTicker<T> getTicker(@NotNull Level level, @NotNull BlockState state, @NotNull BlockEntityType<T> type) {
         return TickableBlockEntity.getTickerHelper();
+    }
+
+    @Override
+    public boolean hasAnalogOutputSignal(BlockState state) {
+        return true;
+    }
+
+    @Override
+    public int getAnalogOutputSignal(BlockState blockState, Level level, BlockPos pos) {
+        TileSimpleInventory tile = (TileSimpleInventory) level.getBlockEntity(pos);
+        return AbstractContainerMenu.getRedstoneSignalFromContainer(tile.getItemHandler());
     }
 }
