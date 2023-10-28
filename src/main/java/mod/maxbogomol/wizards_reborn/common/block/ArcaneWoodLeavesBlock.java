@@ -2,8 +2,8 @@ package mod.maxbogomol.wizards_reborn.common.block;
 
 import mod.maxbogomol.wizards_reborn.WizardsReborn;
 import mod.maxbogomol.wizards_reborn.client.particle.Particles;
-import mod.maxbogomol.wizards_reborn.common.block.flammable.FlammableLeavesBlock;
 import net.minecraft.util.RandomSource;
+import net.minecraft.world.level.block.LeavesBlock;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.core.BlockPos;
@@ -13,11 +13,11 @@ import net.minecraftforge.api.distmarker.OnlyIn;
 
 import java.util.Random;
 
-public class ArcaneWoodLeavesBlock extends FlammableLeavesBlock {
+public class ArcaneWoodLeavesBlock extends LeavesBlock {
     private static Random random = new Random();
 
-    public ArcaneWoodLeavesBlock(Properties properties, int fireSpeed, int flammability) {
-        super(properties, fireSpeed, flammability);
+    public ArcaneWoodLeavesBlock(Properties properties) {
+        super(properties);
     }
 
     @Override

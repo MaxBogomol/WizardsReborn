@@ -29,7 +29,6 @@ import mod.maxbogomol.wizards_reborn.client.render.curio.AmuletRenderer;
 import mod.maxbogomol.wizards_reborn.client.render.curio.BeltRenderer;
 import mod.maxbogomol.wizards_reborn.client.render.item.WandCrystalsModels;
 import mod.maxbogomol.wizards_reborn.common.block.*;
-import mod.maxbogomol.wizards_reborn.common.block.flammable.*;
 import mod.maxbogomol.wizards_reborn.common.capability.IKnowledge;
 import mod.maxbogomol.wizards_reborn.common.command.KnowledgeArgument;
 import mod.maxbogomol.wizards_reborn.common.command.SpellArgument;
@@ -213,15 +212,15 @@ public class WizardsReborn {
     public static final RegistryObject<Block> ARCANUM_ORE = BLOCKS.register("arcanum_ore", () -> new ArcanumOreBlock(BlockBehaviour.Properties.copy(Blocks.DIAMOND_ORE)));
     public static final RegistryObject<Block> DEEPSLATE_ARCANUM_ORE = BLOCKS.register("deepslate_arcanum_ore", () -> new ArcanumOreBlock(BlockBehaviour.Properties.copy(Blocks.DEEPSLATE_DIAMOND_ORE)));
 
-    public static final RegistryObject<Block> ARCANE_WOOD_LOG = BLOCKS.register("arcane_wood_log", () -> new FlammableRotatedPillarBlock(BlockBehaviour.Properties.copy(Blocks.OAK_LOG), 5, 5));
-    public static final RegistryObject<Block> ARCANE_WOOD = BLOCKS.register("arcane_wood", () -> new FlammableRotatedPillarBlock(BlockBehaviour.Properties.copy(Blocks.OAK_WOOD), 5, 5));
-    public static final RegistryObject<Block> STRIPPED_ARCANE_WOOD_LOG = BLOCKS.register("stripped_arcane_wood_log", () -> new FlammableRotatedPillarBlock(BlockBehaviour.Properties.copy(Blocks.STRIPPED_OAK_LOG), 5, 5));
-    public static final RegistryObject<Block> STRIPPED_ARCANE_WOOD = BLOCKS.register("stripped_arcane_wood", () -> new FlammableRotatedPillarBlock(BlockBehaviour.Properties.copy(Blocks.STRIPPED_OAK_WOOD), 5, 5));
-    public static final RegistryObject<Block> ARCANE_WOOD_PLANKS = BLOCKS.register("arcane_wood_planks", () -> new FlammableBlock(BlockBehaviour.Properties.copy(Blocks.OAK_PLANKS), 5, 20));
-    public static final RegistryObject<Block> ARCANE_WOOD_STAIRS = BLOCKS.register("arcane_wood_stairs", () -> new FlammableStairsBlock(() -> ARCANE_WOOD_PLANKS.get().defaultBlockState(), BlockBehaviour.Properties.copy(Blocks.OAK_PLANKS),  5, 20));
-    public static final RegistryObject<Block> ARCANE_WOOD_SLAB = BLOCKS.register("arcane_wood_slab", () -> new FlammableSlabBlock(BlockBehaviour.Properties.copy(Blocks.OAK_PLANKS),  5, 20));
-    public static final RegistryObject<Block> ARCANE_WOOD_FENCE = BLOCKS.register("arcane_wood_fence", () -> new FlammableFenceBlock(BlockBehaviour.Properties.copy(Blocks.OAK_PLANKS),  5, 20));
-    public static final RegistryObject<Block> ARCANE_WOOD_FENCE_GATE = BLOCKS.register("arcane_wood_fence_gate", () -> new FlammableFenceGateBlock(BlockBehaviour.Properties.copy(Blocks.OAK_PLANKS), WoodType.OAK,  5, 20));
+    public static final RegistryObject<Block> ARCANE_WOOD_LOG = BLOCKS.register("arcane_wood_log", () -> new RotatedPillarBlock(BlockBehaviour.Properties.copy(Blocks.OAK_LOG)));
+    public static final RegistryObject<Block> ARCANE_WOOD = BLOCKS.register("arcane_wood", () -> new RotatedPillarBlock(BlockBehaviour.Properties.copy(Blocks.OAK_WOOD)));
+    public static final RegistryObject<Block> STRIPPED_ARCANE_WOOD_LOG = BLOCKS.register("stripped_arcane_wood_log", () -> new RotatedPillarBlock(BlockBehaviour.Properties.copy(Blocks.STRIPPED_OAK_LOG)));
+    public static final RegistryObject<Block> STRIPPED_ARCANE_WOOD = BLOCKS.register("stripped_arcane_wood", () -> new RotatedPillarBlock(BlockBehaviour.Properties.copy(Blocks.STRIPPED_OAK_WOOD)));
+    public static final RegistryObject<Block> ARCANE_WOOD_PLANKS = BLOCKS.register("arcane_wood_planks", () -> new Block(BlockBehaviour.Properties.copy(Blocks.OAK_PLANKS)));
+    public static final RegistryObject<Block> ARCANE_WOOD_STAIRS = BLOCKS.register("arcane_wood_stairs", () -> new StairBlock(() -> ARCANE_WOOD_PLANKS.get().defaultBlockState(), BlockBehaviour.Properties.copy(Blocks.OAK_PLANKS)));
+    public static final RegistryObject<Block> ARCANE_WOOD_SLAB = BLOCKS.register("arcane_wood_slab", () -> new SlabBlock(BlockBehaviour.Properties.copy(Blocks.OAK_PLANKS)));
+    public static final RegistryObject<Block> ARCANE_WOOD_FENCE = BLOCKS.register("arcane_wood_fence", () -> new FenceBlock(BlockBehaviour.Properties.copy(Blocks.OAK_PLANKS)));
+    public static final RegistryObject<Block> ARCANE_WOOD_FENCE_GATE = BLOCKS.register("arcane_wood_fence_gate", () -> new FenceGateBlock(BlockBehaviour.Properties.copy(Blocks.OAK_PLANKS), WoodType.OAK));
     public static final RegistryObject<Block> ARCANE_WOOD_DOOR = BLOCKS.register("arcane_wood_door", () -> new DoorBlock(BlockBehaviour.Properties.copy(Blocks.OAK_PLANKS).noOcclusion(), BlockSetType.OAK));
     public static final RegistryObject<Block> ARCANE_WOOD_TRAPDOOR = BLOCKS.register("arcane_wood_trapdoor", () -> new TrapDoorBlock(BlockBehaviour.Properties.copy(Blocks.OAK_PLANKS).noOcclusion(), BlockSetType.OAK));
     public static final RegistryObject<Block> ARCANE_WOOD_PRESSURE_PLATE = BLOCKS.register("arcane_wood_pressure_plate", () -> new PressurePlateBlock(PressurePlateBlock.Sensitivity.EVERYTHING, BlockBehaviour.Properties.copy(Blocks.IRON_BLOCK).sound(SoundType.AMETHYST), BlockSetType.OAK));
@@ -230,12 +229,12 @@ public class WizardsReborn {
     public static final RegistryObject<Block> ARCANE_WOOD_WALL_SIGN = BLOCKS.register("arcane_wood_wall_sign", () -> new CustomWallSignBlock(BlockBehaviour.Properties.copy(Blocks.OAK_PLANKS).noOcclusion().noCollission(), ARCANE_WOOD_TYPE));
     public static final RegistryObject<Block> ARCANE_WOOD_HANGING_SIGN = BLOCKS.register("arcane_wood_hanging_sign", () -> new CustomCeilingHangingSignBlock(BlockBehaviour.Properties.copy(Blocks.OAK_PLANKS).noOcclusion().noCollission(), ARCANE_WOOD_TYPE));
     public static final RegistryObject<Block> ARCANE_WOOD_WALL_HANGING_SIGN = BLOCKS.register("arcane_wood_wall_hanging_sign", () -> new CustomWallHangingSignBlock(BlockBehaviour.Properties.copy(Blocks.OAK_PLANKS).noOcclusion().noCollission(), ARCANE_WOOD_TYPE));
-    public static final RegistryObject<Block> ARCANE_WOOD_LEAVES = BLOCKS.register("arcane_wood_leaves", () -> new ArcaneWoodLeavesBlock(BlockBehaviour.Properties.copy(Blocks.OAK_LEAVES).lightLevel((state) -> 5), 30, 60));
+    public static final RegistryObject<Block> ARCANE_WOOD_LEAVES = BLOCKS.register("arcane_wood_leaves", () -> new ArcaneWoodLeavesBlock(BlockBehaviour.Properties.copy(Blocks.OAK_LEAVES).lightLevel((state) -> 5)));
     public static final RegistryObject<Block> ARCANE_WOOD_SAPLING = BLOCKS.register("arcane_wood_sapling", () -> new SaplingBlock(new ArcaneWoodTree(), BlockBehaviour.Properties.copy(Blocks.OAK_SAPLING)));
     public static final RegistryObject<Block> POTTED_ARCANE_WOOD_SAPLING = BLOCKS.register("potted_arcane_wood_sapling", () -> new FlowerPotBlock(ARCANE_WOOD_SAPLING.get(), BlockBehaviour.Properties.copy(Blocks.FLOWER_POT).instabreak().noOcclusion()));
 
     public static final RegistryObject<Block> ARCANE_LINEN = BLOCKS.register("arcane_linen", () -> new ArcaneLinenBlock(BlockBehaviour.Properties.copy(Blocks.WHEAT)));
-    public static final RegistryObject<Block> ARCANE_LINEN_HAY = BLOCKS.register("arcane_linen_hay", () -> new FlammableHayBlock(BlockBehaviour.Properties.copy(Blocks.HAY_BLOCK), 60, 20));
+    public static final RegistryObject<Block> ARCANE_LINEN_HAY = BLOCKS.register("arcane_linen_hay", () -> new HayBlock(BlockBehaviour.Properties.copy(Blocks.HAY_BLOCK)));
 
     public static final RegistryObject<Block> MOR = BLOCKS.register("mor", () -> new MorBlock(BlockBehaviour.Properties.copy(Blocks.BROWN_MUSHROOM)));
     public static final RegistryObject<Block> POTTED_MOR = BLOCKS.register("potted_mor", () -> new FlowerPotBlock(MOR.get(), BlockBehaviour.Properties.copy(Blocks.FLOWER_POT).instabreak().noOcclusion()));
@@ -615,6 +614,36 @@ public class WizardsReborn {
             AxeItem.STRIPPABLES = new ImmutableMap.Builder<Block, Block>().putAll(AxeItem.STRIPPABLES)
                     .put(ARCANE_WOOD_LOG.get(), STRIPPED_ARCANE_WOOD_LOG.get())
                     .put(ARCANE_WOOD.get(), STRIPPED_ARCANE_WOOD.get()).build();
+
+            FireBlock fireblock = (FireBlock) Blocks.FIRE;
+            fireblock.setFlammable(ARCANE_WOOD_LOG.get(), 5, 20);
+            fireblock.setFlammable(ARCANE_WOOD.get(), 5, 20);
+            fireblock.setFlammable(STRIPPED_ARCANE_WOOD_LOG.get(), 5, 20);
+            fireblock.setFlammable(STRIPPED_ARCANE_WOOD.get(), 5, 20);
+            fireblock.setFlammable(ARCANE_WOOD_PLANKS.get(), 5, 20);
+            fireblock.setFlammable(ARCANE_WOOD_STAIRS.get(), 5, 20);
+            fireblock.setFlammable(ARCANE_WOOD_SLAB.get(), 5, 20);
+            fireblock.setFlammable(ARCANE_WOOD_FENCE.get(), 5, 20);
+            fireblock.setFlammable(ARCANE_WOOD_FENCE_GATE.get(), 5, 20);
+            fireblock.setFlammable(ARCANE_WOOD_LEAVES.get(), 30, 60);
+            fireblock.setFlammable(ARCANE_LINEN_HAY.get(), 60, 20);
+
+            ComposterBlock.add(0.3F, ARCANE_WOOD_LEAVES_ITEM.get());
+            ComposterBlock.add(0.3F, ARCANE_WOOD_SAPLING_ITEM.get());
+            ComposterBlock.add(0.3F, ARCANE_LINEN_SEEDS.get());
+            ComposterBlock.add(0.65F, ARCANE_LINEN_ITEM.get());
+            ComposterBlock.add(0.85F, ARCANE_LINEN_HAY_ITEM.get());
+            ComposterBlock.add(0.65F, MOR_ITEM.get());
+            ComposterBlock.add(0.65F, ELDER_MOR_ITEM.get());
+            ComposterBlock.add(0.85F, MOR_BLOCK_ITEM.get());
+            ComposterBlock.add(0.85F, ELDER_MOR_BLOCK_ITEM.get());
+            ComposterBlock.add(0.2F, PETALS.get());
+            ComposterBlock.add(0.2F, GROUND_BROWN_MUSHROOM.get());
+            ComposterBlock.add(0.2F, GROUND_RED_MUSHROOM.get());
+            ComposterBlock.add(0.2F, GROUND_CRIMSON_FUNGUS.get());
+            ComposterBlock.add(0.2F, GROUND_WARPED_FUNGUS.get());
+            ComposterBlock.add(0.2F, GROUND_MOR.get());
+            ComposterBlock.add(0.2F, GROUND_ELDER_MOR.get());
         });
     }
 
