@@ -2,6 +2,7 @@ package mod.maxbogomol.wizards_reborn.common.block;
 
 import mod.maxbogomol.wizards_reborn.common.tileentity.ArcanePedestalTileEntity;
 import mod.maxbogomol.wizards_reborn.common.tileentity.TileSimpleInventory;
+import mod.maxbogomol.wizards_reborn.utils.PacketUtils;
 import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockState;
@@ -88,11 +89,14 @@ public class ArcanePedestalBlock extends Block implements EntityBlock, SimpleWat
                 stack.setCount(1);
                 tile.getItemHandler().setItem(0, stack);
                 world.updateNeighbourForOutputSignal(pos, this);
+                PacketUtils.SUpdateTileEntityPacket(tile);
                 return InteractionResult.SUCCESS;
             } else {
                 tile.getItemHandler().setItem(0, stack);
                 player.getInventory().removeItem(player.getItemInHand(hand));
                 world.updateNeighbourForOutputSignal(pos, this);
+                PacketUtils.SUpdateTileEntityPacket(tile);
+
                 return InteractionResult.SUCCESS;
             }
         }
@@ -101,6 +105,7 @@ public class ArcanePedestalBlock extends Block implements EntityBlock, SimpleWat
             player.getInventory().add(tile.getItemHandler().getItem(0).copy());
             tile.getItemHandler().removeItemNoUpdate(0);
             world.updateNeighbourForOutputSignal(pos, this);
+            PacketUtils.SUpdateTileEntityPacket(tile);
             return InteractionResult.SUCCESS;
         }
 

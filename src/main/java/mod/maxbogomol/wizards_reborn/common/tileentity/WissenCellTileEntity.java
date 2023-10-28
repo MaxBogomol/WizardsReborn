@@ -56,6 +56,8 @@ public class WissenCellTileEntity extends ExposedTileSimpleInventory implements 
                             if (random.nextFloat() < 0.5) {
                                 PacketHandler.sendToTracking(level, getBlockPos(), new WissenCellSendEffectPacket(getBlockPos()));
                             }
+
+                            PacketUtils.SUpdateTileEntityPacket(this);
                         }
                     }
                 }

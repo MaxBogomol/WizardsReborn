@@ -5,6 +5,7 @@ import mod.maxbogomol.wizards_reborn.common.item.equipment.WissenWandItem;
 import mod.maxbogomol.wizards_reborn.common.tileentity.TickableBlockEntity;
 import mod.maxbogomol.wizards_reborn.common.tileentity.TileSimpleInventory;
 import mod.maxbogomol.wizards_reborn.common.tileentity.WissenTranslatorTileEntity;
+import mod.maxbogomol.wizards_reborn.utils.PacketUtils;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.world.InteractionHand;
@@ -165,6 +166,8 @@ public class WissenTranslatorBlock extends FaceAttachedHorizontalDirectionalBloc
 
         if (stack.getItem() instanceof WissenWandItem) {
             if (WissenWandItem.getMode(stack) != 4) {
+                world.updateNeighbourForOutputSignal(pos, this);
+                PacketUtils.SUpdateTileEntityPacket(tile);
                 return InteractionResult.SUCCESS;
             }
         }
@@ -176,11 +179,13 @@ public class WissenTranslatorBlock extends FaceAttachedHorizontalDirectionalBloc
                     stack.setCount(1);
                     tile.getItemHandler().setItem(0, stack);
                     world.updateNeighbourForOutputSignal(pos, this);
+                    PacketUtils.SUpdateTileEntityPacket(tile);
                     return InteractionResult.SUCCESS;
                 } else {
                     tile.getItemHandler().setItem(0, stack);
                     player.getInventory().removeItem(player.getItemInHand(hand));
                     world.updateNeighbourForOutputSignal(pos, this);
+                    PacketUtils.SUpdateTileEntityPacket(tile);
                     return InteractionResult.SUCCESS;
                 }
             }
@@ -190,6 +195,7 @@ public class WissenTranslatorBlock extends FaceAttachedHorizontalDirectionalBloc
             player.getInventory().add(tile.getItemHandler().getItem(0).copy());
             tile.getItemHandler().removeItemNoUpdate(0);
             world.updateNeighbourForOutputSignal(pos, this);
+            PacketUtils.SUpdateTileEntityPacket(tile);
             return InteractionResult.SUCCESS;
         }
 

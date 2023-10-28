@@ -7,6 +7,7 @@ import mod.maxbogomol.wizards_reborn.common.recipe.WissenAltarRecipe;
 import mod.maxbogomol.wizards_reborn.common.tileentity.TickableBlockEntity;
 import mod.maxbogomol.wizards_reborn.common.tileentity.TileSimpleInventory;
 import mod.maxbogomol.wizards_reborn.common.tileentity.WissenAltarTileEntity;
+import mod.maxbogomol.wizards_reborn.utils.PacketUtils;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.level.block.Block;
@@ -100,6 +101,8 @@ public class WissenAltarBlock extends HorizontalDirectionalBlock implements Enti
 
         if (stack.getItem() instanceof WissenWandItem) {
             if (WissenWandItem.getMode(stack) != 4) {
+                world.updateNeighbourForOutputSignal(pos, this);
+                PacketUtils.SUpdateTileEntityPacket(altar);
                 return InteractionResult.SUCCESS;
             }
         }
@@ -109,6 +112,7 @@ public class WissenAltarBlock extends HorizontalDirectionalBlock implements Enti
                 altar.getItemHandler().setItem(0, stack);
                 player.getInventory().removeItem(player.getItemInHand(hand));
                 world.updateNeighbourForOutputSignal(pos, this);
+                PacketUtils.SUpdateTileEntityPacket(altar);
                 return InteractionResult.SUCCESS;
             }
         }
@@ -123,12 +127,14 @@ public class WissenAltarBlock extends HorizontalDirectionalBlock implements Enti
                 altar.getItemHandler().setItem(1, stack);
                 player.getInventory().removeItem(player.getItemInHand(hand));
                 world.updateNeighbourForOutputSignal(pos, this);
+                PacketUtils.SUpdateTileEntityPacket(altar);
                 return InteractionResult.SUCCESS;
             } else {
                 if (altar.getItemHandler().getItem(1).equals(stack)
                         && altar.getItemHandler().getItem(1).getCount() + stack.getCount() <= altar.getItemHandler().getItem(1).getMaxStackSize()) {
                     altar.getItemHandler().getItem(1).setCount(altar.getItemHandler().getItem(1).getCount() + stack.getCount());
                     world.updateNeighbourForOutputSignal(pos, this);
+                    PacketUtils.SUpdateTileEntityPacket(altar);
                     return InteractionResult.SUCCESS;
                 }
             }
@@ -138,12 +144,14 @@ public class WissenAltarBlock extends HorizontalDirectionalBlock implements Enti
             player.getInventory().add(altar.getItemHandler().getItem(0).copy());
             altar.getItemHandler().removeItemNoUpdate(0);
             world.updateNeighbourForOutputSignal(pos, this);
+            PacketUtils.SUpdateTileEntityPacket(altar);
             return InteractionResult.SUCCESS;
         } else {
             if (!altar.getItemHandler().getItem(1).isEmpty()) {
                 player.getInventory().add(altar.getItemHandler().getItem(1).copy());
                 altar.getItemHandler().removeItemNoUpdate(1);
                 world.updateNeighbourForOutputSignal(pos, this);
+                PacketUtils.SUpdateTileEntityPacket(altar);
                 return InteractionResult.SUCCESS;
             }
         }

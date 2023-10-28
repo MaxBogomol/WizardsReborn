@@ -73,10 +73,14 @@ public class ArcaneWorkbenchTileEntity extends TileSimpleInventory implements Ti
                 if (!getItemHandler().getItem(0).isEmpty()) {
                     getItemHandler().setItem(0, ItemStack.EMPTY);
                 }
+
+                PacketUtils.SUpdateTileEntityPacket(this);
             }
 
             if (wissenInCraft > 0) {
                 getItemHandler().setItem(0, recipe.get().getResultItem(RegistryAccess.EMPTY).copy());
+
+                PacketUtils.SUpdateTileEntityPacket(this);
             }
 
             if ((wissenInCraft > 0) && (wissen > 0) && (startCraft)) {
@@ -88,6 +92,8 @@ public class ArcaneWorkbenchTileEntity extends TileSimpleInventory implements Ti
 
                     wissenIsCraft = wissenIsCraft + (getWissenPerTick() - addRemainCraft - removeRemain);
                     removeWissen(getWissenPerTick() - addRemainCraft - removeRemain);
+
+                    PacketUtils.SUpdateTileEntityPacket(this);
                 }
             }
 
@@ -107,6 +113,8 @@ public class ArcaneWorkbenchTileEntity extends TileSimpleInventory implements Ti
                         for (int i = 0; i < 13; i++) {
                             itemHandler.extractItem(i, 1, false);
                         }
+
+                        PacketUtils.SUpdateTileEntityPacket(this);
 
                         PacketHandler.sendToTracking(level, getBlockPos(), new ArcaneWorkbenchBurstEffectPacket(getBlockPos()));
                         level.playSound(WizardsReborn.proxy.getPlayer(), getBlockPos(), WizardsReborn.WISSEN_BURST_SOUND.get(), SoundSource.BLOCKS, 0.25f, (float) (1f + ((random.nextFloat() - 0.5D) / 4)));

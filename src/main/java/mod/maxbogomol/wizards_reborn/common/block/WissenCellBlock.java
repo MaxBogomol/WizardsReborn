@@ -7,6 +7,7 @@ import mod.maxbogomol.wizards_reborn.common.item.equipment.WissenWandItem;
 import mod.maxbogomol.wizards_reborn.common.tileentity.TickableBlockEntity;
 import mod.maxbogomol.wizards_reborn.common.tileentity.TileSimpleInventory;
 import mod.maxbogomol.wizards_reborn.common.tileentity.WissenCellTileEntity;
+import mod.maxbogomol.wizards_reborn.utils.PacketUtils;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.world.Containers;
@@ -99,6 +100,8 @@ public class WissenCellBlock extends HorizontalDirectionalBlock implements Entit
 
         if (stack.getItem() instanceof WissenWandItem) {
             if (WissenWandItem.getMode(stack) != 4) {
+                world.updateNeighbourForOutputSignal(pos, this);
+                PacketUtils.SUpdateTileEntityPacket(cell);
                 return InteractionResult.SUCCESS;
             }
         }
@@ -108,6 +111,7 @@ public class WissenCellBlock extends HorizontalDirectionalBlock implements Entit
                 cell.getItemHandler().setItem(0, stack);
                 player.getInventory().removeItem(player.getItemInHand(hand));
                 world.updateNeighbourForOutputSignal(pos, this);
+                PacketUtils.SUpdateTileEntityPacket(cell);
                 return InteractionResult.SUCCESS;
             }
         }
@@ -116,6 +120,7 @@ public class WissenCellBlock extends HorizontalDirectionalBlock implements Entit
             player.getInventory().add(cell.getItemHandler().getItem(0).copy());
             cell.getItemHandler().removeItemNoUpdate(0);
             world.updateNeighbourForOutputSignal(pos, this);
+            PacketUtils.SUpdateTileEntityPacket(cell);
             return InteractionResult.SUCCESS;
         }
 

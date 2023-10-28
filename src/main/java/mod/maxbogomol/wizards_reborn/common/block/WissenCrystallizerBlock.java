@@ -5,6 +5,7 @@ import mod.maxbogomol.wizards_reborn.common.tileentity.ArcanePedestalTileEntity;
 import mod.maxbogomol.wizards_reborn.common.tileentity.TickableBlockEntity;
 import mod.maxbogomol.wizards_reborn.common.tileentity.TileSimpleInventory;
 import mod.maxbogomol.wizards_reborn.common.tileentity.WissenCrystallizerTileEntity;
+import mod.maxbogomol.wizards_reborn.utils.PacketUtils;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.world.Containers;
@@ -96,6 +97,8 @@ public class WissenCrystallizerBlock extends Block implements EntityBlock, Simpl
 
         if (stack.getItem() instanceof WissenWandItem) {
             if (WissenWandItem.getMode(stack) != 4) {
+                world.updateNeighbourForOutputSignal(pos, this);
+                PacketUtils.SUpdateTileEntityPacket(tile);
                 return InteractionResult.SUCCESS;
             }
         }
@@ -109,11 +112,13 @@ public class WissenCrystallizerBlock extends Block implements EntityBlock, Simpl
                         stack.setCount(1);
                         tile.getItemHandler().setItem(slot, stack);
                         world.updateNeighbourForOutputSignal(pos, this);
+                        PacketUtils.SUpdateTileEntityPacket(tile);
                         return InteractionResult.SUCCESS;
                     } else {
                         tile.getItemHandler().setItem(slot, stack);
                         player.getInventory().removeItem(player.getItemInHand(hand));
                         world.updateNeighbourForOutputSignal(pos, this);
+                        PacketUtils.SUpdateTileEntityPacket(tile);
                         return InteractionResult.SUCCESS;
                     }
                 }
@@ -125,6 +130,7 @@ public class WissenCrystallizerBlock extends Block implements EntityBlock, Simpl
                     player.getInventory().add(tile.getItemHandler().getItem(slot).copy());
                     tile.getItemHandler().removeItemNoUpdate(slot);
                     world.updateNeighbourForOutputSignal(pos, this);
+                    PacketUtils.SUpdateTileEntityPacket(tile);
                     return InteractionResult.SUCCESS;
                 }
             }
