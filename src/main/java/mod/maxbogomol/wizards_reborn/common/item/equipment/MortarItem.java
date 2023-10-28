@@ -5,6 +5,7 @@ import mod.maxbogomol.wizards_reborn.common.recipe.MortarRecipe;
 import net.minecraft.core.RegistryAccess;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
+import net.minecraft.stats.Stats;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResultHolder;
 import net.minecraft.world.SimpleContainer;
@@ -42,7 +43,8 @@ public class MortarItem extends Item {
                     }
 
                     player.getInventory().add(recipe.get().getResultItem(RegistryAccess.EMPTY).copy());
-                    world.playSound(null, player.getX(), player.getY() + player.getEyeHeight(), player.getZ(), SoundEvents.BONE_MEAL_USE, SoundSource.PLAYERS, 1.0f, 1.0f);
+                    world.playSound(null, player.getX(), player.getY(), player.getZ(), SoundEvents.BONE_MEAL_USE, SoundSource.PLAYERS, 1.0f, 1.0f);
+                    player.awardStat(Stats.ITEM_USED.get(this));
 
                     return InteractionResultHolder.success(stack);
                 }

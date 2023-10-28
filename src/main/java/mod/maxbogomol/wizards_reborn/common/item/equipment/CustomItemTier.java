@@ -9,7 +9,7 @@ import java.util.function.Supplier;
 
 public enum CustomItemTier implements Tier {
 
-    ARCANE_GOLD(3, 450, 8f, 2f, 20, () -> Ingredient.of(WizardsReborn.ARCANE_GOLD_INGOT.get()));
+    ARCANE_GOLD(3, 450, 8f, 2f, 25, () -> Ingredient.of(WizardsReborn.ARCANE_GOLD_INGOT.get()));
 
     private final int harvestLevel;
     private final int maxUses;

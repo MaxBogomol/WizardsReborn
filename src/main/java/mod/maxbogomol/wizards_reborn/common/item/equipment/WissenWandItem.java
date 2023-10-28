@@ -10,6 +10,7 @@ import mod.maxbogomol.wizards_reborn.common.tileentity.WissenTranslatorTileEntit
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.stats.Stats;
 import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
@@ -69,6 +70,8 @@ public class WissenWandItem extends Item {
 
             stack.setTag(nbt);
             player.displayClientMessage(getModeTranslate(stack), true);
+
+            player.awardStat(Stats.ITEM_USED.get(this));
 
             return InteractionResultHolder.success(stack);
         }
@@ -164,6 +167,10 @@ public class WissenWandItem extends Item {
                     result = InteractionResult.SUCCESS;
                 }
             }
+        }
+
+        if (result == InteractionResult.SUCCESS) {
+            context.getPlayer().awardStat(Stats.ITEM_USED.get(this));
         }
 
         return result;

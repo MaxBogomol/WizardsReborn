@@ -6,6 +6,7 @@ import mod.maxbogomol.wizards_reborn.common.network.WissenDustBurstEffectPacket;
 import mod.maxbogomol.wizards_reborn.common.recipe.ArcanumDustTransmutationRecipe;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.RegistryAccess;
+import net.minecraft.stats.Stats;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.SimpleContainer;
 import net.minecraft.world.entity.item.ItemEntity;
@@ -81,6 +82,8 @@ public class ArcanumDustItem extends ArcanumItem {
                     Vec3 vel = player.getEyePosition().add(player.getLookAngle().scale(40)).subtract(pos).scale(1.0 / 20).normalize().scale(0.2f);
 
                     PacketHandler.sendToTracking(world, player.getOnPos(), new WissenDustBurstEffectPacket(blockpos, (float) pos.x, (float) pos.y, (float) pos.z, (float) vel.x, (float) vel.y, (float) vel.z));
+
+                    player.awardStat(Stats.ITEM_USED.get(this));
 
                     return InteractionResult.SUCCESS;
                 }

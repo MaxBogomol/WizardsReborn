@@ -4,6 +4,7 @@ import mod.maxbogomol.wizards_reborn.client.arcanemicon.ArcanemiconGui;
 import net.minecraft.client.Minecraft;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
+import net.minecraft.stats.Stats;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.InteractionResultHolder;
@@ -22,6 +23,7 @@ public class ArcanemiconItem extends Item {
     @Override
     public InteractionResultHolder<ItemStack> use(Level world, Player player, InteractionHand hand) {
         ItemStack stack = player.getItemInHand(hand);
+        player.awardStat(Stats.ITEM_USED.get(this));
 
         if (world.isClientSide) {
             openGui();

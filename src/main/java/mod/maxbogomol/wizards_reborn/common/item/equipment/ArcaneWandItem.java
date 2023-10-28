@@ -213,7 +213,7 @@ public class ArcaneWandItem extends Item implements IWissenItem {
         if (nbt.getBoolean("crystal")) {
             if (nbt.getString("spell") != "") {
                 Spell spell = Spells.getSpell(nbt.getString("spell"));
-                return (KnowledgeUtils.isSpell(Minecraft.getInstance().player, spell));
+                return (KnowledgeUtils.isSpell(WizardsReborn.proxy.getPlayer(), spell));
             }
         }
         return false;

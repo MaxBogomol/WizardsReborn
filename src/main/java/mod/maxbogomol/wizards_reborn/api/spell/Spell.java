@@ -15,6 +15,7 @@ import net.minecraft.client.player.AbstractClientPlayer;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.sounds.SoundSource;
+import net.minecraft.stats.Stats;
 import net.minecraft.world.SimpleContainer;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.HumanoidArm;
@@ -175,6 +176,7 @@ public class Spell {
             CompoundTag stats = getStats(stack);
             setCooldown(stack, stats);
             removeWissen(stack, stats, player);
+            awardStat(player, stack);
         }
     }
 
@@ -255,7 +257,7 @@ public class Spell {
 
     public void onReload(ItemStack stack, Level world, Entity entity, int slot, boolean isSelected) {
         if (world.isClientSide) {
-            world.playSound(WizardsReborn.proxy.getPlayer(), entity.getX(), entity.getY() + entity.getEyeHeight(), entity.getZ(), WizardsReborn.SPELL_RELOAD_SOUND.get(), SoundSource.BLOCKS, 0.1f, (float) (1f + ((random.nextFloat() - 0.5D) / 4)));
+            world.playSound(WizardsReborn.proxy.getPlayer(), entity.getX(), entity.getY(), entity.getZ(), WizardsReborn.SPELL_RELOAD_SOUND.get(), SoundSource.BLOCKS, 0.1f, (float) (1f + ((random.nextFloat() - 0.5D) / 4)));
         }
     }
 
@@ -275,5 +277,9 @@ public class Spell {
 
     public Research getResearch() {
         return research;
+    }
+
+    public void awardStat(Player player, ItemStack stack) {
+        player.awardStat(Stats.ITEM_USED.get(stack.getItem()));
     }
 }

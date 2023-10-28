@@ -30,7 +30,8 @@ public class ProjectileSpell extends Spell {
             spawnSpellStandart(world, player, stats);
             setCooldown(stack, stats);
             removeWissen(stack, stats, player);
-            world.playSound(WizardsReborn.proxy.getPlayer(), player.getX(), player.getY() + player.getEyeHeight(), player.getZ(), WizardsReborn.SPELL_CAST_SOUND.get(), SoundSource.BLOCKS, 0.25f, (float) (1f + ((random.nextFloat() - 0.5D) / 4)));
+            awardStat(player, stack);
+            world.playSound(WizardsReborn.proxy.getPlayer(), player.getX(), player.getY(), player.getZ(), WizardsReborn.SPELL_CAST_SOUND.get(), SoundSource.BLOCKS, 0.25f, (float) (1f + ((random.nextFloat() - 0.5D) / 4)));
         }
     }
 

@@ -47,14 +47,16 @@ public class ArcaneWoodLeavesBlock extends FlammableLeavesBlock {
 
     @OnlyIn(Dist.CLIENT)
     public void animateTick(BlockState state, Level world, BlockPos pos, RandomSource random) {
-        if (random.nextFloat() < 0.01) {
-            Particles.create(WizardsReborn.ARCANE_WOOD_LEAF_PARTICLE)
-                    .addVelocity(((random.nextDouble() - 0.5D) / 12), ((random.nextDouble() - 1D) / 4), ((random.nextDouble() - 0.5D) / 12))
-                    .setAlpha(1f, 1f).setScale(0.25f, 0f)
-                    .setColor(1f, 1f, 1f)
-                    .setLifetime(150)
-                    .setSpin((0.1f * ((random.nextFloat() - 0.5f) * 2)))
-                    .spawn(world, pos.getX() + 0.5F + (random.nextFloat() - 0.5f), pos.getY() + 0.5F + (random.nextFloat() - 0.5f), pos.getZ() + 0.5F + (random.nextFloat() - 0.5f));
+        if (world.getBlockState(new BlockPos(pos.getX(), pos.getY() - 1, pos.getZ())).isAir()) {
+            if (random.nextFloat() < 0.015) {
+                Particles.create(WizardsReborn.ARCANE_WOOD_LEAF_PARTICLE)
+                        .addVelocity(((random.nextDouble() - 0.5D) / 12), ((random.nextDouble() - 1.1D) / 4), ((random.nextDouble() - 0.5D) / 12))
+                        .setAlpha(1f, 1f).setScale(0.25f, 0f)
+                        .setColor(1f, 1f, 1f)
+                        .setLifetime(150)
+                        .setSpin((0.1f * ((random.nextFloat() - 0.5f) * 2)))
+                        .spawn(world, pos.getX() + 0.5F + ((random.nextFloat() - 0.5f) * 0.9f), pos.getY() - 0.05, pos.getZ() + 0.5F + ((random.nextFloat() - 0.5f * 0.9f)));
+            }
         }
     }
 }

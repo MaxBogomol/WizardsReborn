@@ -44,6 +44,11 @@ public class WizardsRebornItemGroup {
             event.accept(WizardsReborn.ARCANE_GOLD_HOE);
             event.accept(WizardsReborn.ARCANE_GOLD_SCYTHE);
 
+            event.accept(WizardsReborn.ARCANE_GOLD_HELMET);
+            event.accept(WizardsReborn.ARCANE_GOLD_CHESTPLATE);
+            event.accept(WizardsReborn.ARCANE_GOLD_LEGGINGS);
+            event.accept(WizardsReborn.ARCANE_GOLD_BOOTS);
+
             event.accept(WizardsReborn.ARCANUM);
             event.accept(WizardsReborn.ARCANUM_DUST);
             event.accept(WizardsReborn.ARCANUM_BLOCK_ITEM);

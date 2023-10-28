@@ -9,6 +9,8 @@ import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.network.NetworkDirection;
 import net.minecraftforge.network.NetworkEvent;
 
@@ -61,36 +63,41 @@ public class KnowledgeToastPacket {
             Level world = WizardsReborn.proxy.getWorld();
             Player player = world.getPlayerByUUID(packet.uuid);
             if (player != null) {
-                if (KnowledgeToast.instance == null) {
-                    KnowledgeToast.instance = new KnowledgeToast(packet.id);
-                }
-
-                KnowledgeToast.instance.id = packet.id;
-                if (Minecraft.getInstance().getToasts().getToast(KnowledgeToast.class, KnowledgeToast.instance.getToken()) == null) {
-                    if (packet.all) {
-                        KnowledgeToast.instance.all = true;
-                        KnowledgeToast.instance.articles = true;
-                        KnowledgeToast.instance.count = Knowledges.getKnowledges().size();
-                    } else {
-                        KnowledgeToast.instance.all = false;
-                        Knowledge knowledge = Knowledges.getKnowledge(packet.id.getString());
-                        if (knowledge != null) {
-                            KnowledgeToast.instance.articles = knowledge.getArticles();
-                        }
-                        KnowledgeToast.instance.count = 1;
-                    }
-                    Minecraft.getInstance().getToasts().addToast(KnowledgeToast.instance);
-                } else {
-                    if (packet.all) {
-                        KnowledgeToast.instance.all = true;
-                        KnowledgeToast.instance.articles = true;
-                        KnowledgeToast.instance.count = KnowledgeToast.instance.count + Knowledges.getKnowledges().size();
-                    } else {
-                        KnowledgeToast.instance.count = KnowledgeToast.instance.count + 1;
-                    }
-                }
+                toast(packet);
             }
         });
         ctx.get().setPacketHandled(true);
+    }
+
+    @OnlyIn(Dist.CLIENT)
+    public static void toast(KnowledgeToastPacket packet) {
+        if (KnowledgeToast.instance == null) {
+            KnowledgeToast.instance = new KnowledgeToast(packet.id);
+        }
+
+        KnowledgeToast.instance.id = packet.id;
+        if (Minecraft.getInstance().getToasts().getToast(KnowledgeToast.class, KnowledgeToast.instance.getToken()) == null) {
+            if (packet.all) {
+                KnowledgeToast.instance.all = true;
+                KnowledgeToast.instance.articles = true;
+                KnowledgeToast.instance.count = Knowledges.getKnowledges().size();
+            } else {
+                KnowledgeToast.instance.all = false;
+                Knowledge knowledge = Knowledges.getKnowledge(packet.id.getString());
+                if (knowledge != null) {
+                    KnowledgeToast.instance.articles = knowledge.getArticles();
+                }
+                KnowledgeToast.instance.count = 1;
+            }
+            Minecraft.getInstance().getToasts().addToast(KnowledgeToast.instance);
+        } else {
+            if (packet.all) {
+                KnowledgeToast.instance.all = true;
+                KnowledgeToast.instance.articles = true;
+                KnowledgeToast.instance.count = KnowledgeToast.instance.count + Knowledges.getKnowledges().size();
+            } else {
+                KnowledgeToast.instance.count = KnowledgeToast.instance.count + 1;
+            }
+        }
     }
 }

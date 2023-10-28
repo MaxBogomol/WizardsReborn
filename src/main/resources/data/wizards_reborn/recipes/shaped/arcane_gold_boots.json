@@ -1,0 +1,15 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "# #",
+    "# #"
+  ],
+  "key": {
+    "#": {
+      "item": "wizards_reborn:arcane_gold_ingot"
+    }
+  },
+  "result": {
+    "item": "wizards_reborn:arcane_gold_boots"
+  }
+}

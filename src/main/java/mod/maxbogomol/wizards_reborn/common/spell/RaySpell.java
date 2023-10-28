@@ -76,7 +76,8 @@ public class RaySpell extends Spell {
             stack.setTag(nbt);
 
             player.startUsingItem(hand);
-            world.playSound(WizardsReborn.proxy.getPlayer(), player.getX(), player.getY() + player.getEyeHeight(), player.getZ(), WizardsReborn.SPELL_CAST_SOUND.get(), SoundSource.BLOCKS, 0.25f, (float) (1f + ((random.nextFloat() - 0.5D) / 4)));
+            awardStat(player, stack);
+            world.playSound(WizardsReborn.proxy.getPlayer(), player.getX(), player.getY(), player.getZ(), WizardsReborn.SPELL_CAST_SOUND.get(), SoundSource.BLOCKS, 0.25f, (float) (1f + ((random.nextFloat() - 0.5D) / 4)));
         }
     }
 
@@ -196,10 +197,10 @@ public class RaySpell extends Spell {
     }
 
     public void updatePos(SpellProjectileEntity entity) {
-        entity.xo = entity.xOld;
-        entity.yo = entity.yOld;
-        entity.zo =  entity.zOld;
         if (entity.getSender() != null) {
+            entity.xo = entity.getSender().xo;
+            entity.yo = entity.getSender().yo;
+            entity.zo =  entity.getSender().zo;
             entity.setPos(entity.getSender().getEyePosition().add(0, -0.5, 0));
         }
     }
