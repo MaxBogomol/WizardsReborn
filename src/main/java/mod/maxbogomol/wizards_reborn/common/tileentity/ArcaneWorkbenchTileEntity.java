@@ -13,9 +13,6 @@ import mod.maxbogomol.wizards_reborn.utils.PacketUtils;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.RegistryAccess;
 import net.minecraft.sounds.SoundSource;
-import net.minecraft.world.level.Level;
-import net.minecraft.world.level.block.entity.BlockEntity;
-import net.minecraft.world.level.block.entity.BlockEntityTicker;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.SimpleContainer;
 import net.minecraft.world.item.ItemStack;
@@ -75,13 +72,11 @@ public class ArcaneWorkbenchTileEntity extends TileSimpleInventory implements Ti
                 startCraft = false;
                 if (!getItemHandler().getItem(0).isEmpty()) {
                     getItemHandler().setItem(0, ItemStack.EMPTY);
-                    PacketUtils.SUpdateTileEntityPacket(this);
                 }
             }
 
             if (wissenInCraft > 0) {
                 getItemHandler().setItem(0, recipe.get().getResultItem(RegistryAccess.EMPTY).copy());
-                PacketUtils.SUpdateTileEntityPacket(this);
             }
 
             if ((wissenInCraft > 0) && (wissen > 0) && (startCraft)) {
@@ -93,8 +88,6 @@ public class ArcaneWorkbenchTileEntity extends TileSimpleInventory implements Ti
 
                     wissenIsCraft = wissenIsCraft + (getWissenPerTick() - addRemainCraft - removeRemain);
                     removeWissen(getWissenPerTick() - addRemainCraft - removeRemain);
-
-                    PacketUtils.SUpdateTileEntityPacket(this);
                 }
             }
 
@@ -116,7 +109,6 @@ public class ArcaneWorkbenchTileEntity extends TileSimpleInventory implements Ti
                         }
 
                         PacketHandler.sendToTracking(level, getBlockPos(), new ArcaneWorkbenchBurstEffectPacket(getBlockPos()));
-                        PacketUtils.SUpdateTileEntityPacket(this);
                         level.playSound(WizardsReborn.proxy.getPlayer(), getBlockPos(), WizardsReborn.WISSEN_BURST_SOUND.get(), SoundSource.BLOCKS, 0.25f, (float) (1f + ((random.nextFloat() - 0.5D) / 4)));
                     }
                 }
@@ -243,6 +235,14 @@ public class ArcaneWorkbenchTileEntity extends TileSimpleInventory implements Ti
         var tag = new CompoundTag();
         saveAdditional(tag);
         return tag;
+    }
+
+    @Override
+    public void setChanged() {
+        super.setChanged();
+        if (level != null && !level.isClientSide) {
+            PacketUtils.SUpdateTileEntityPacket(this);
+        }
     }
 
     public float getBlockRotate() {

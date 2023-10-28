@@ -35,7 +35,7 @@ import java.awt.*;
 import java.util.ArrayList;
 import java.util.Random;
 
-public class WissenTranslatorTileEntity extends TileSimpleInventory implements TickableBlockEntity, IWissenTileEntity, ICooldownTileEntity {
+public class WissenTranslatorTileEntity extends ExposedTileSimpleInventory implements TickableBlockEntity, IWissenTileEntity, ICooldownTileEntity {
 
     public int blockFromX = 0;
     public int blockFromY = 0;
@@ -67,7 +67,6 @@ public class WissenTranslatorTileEntity extends TileSimpleInventory implements T
         if (!level.isClientSide()) {
             if (cooldown > 0) {
                 cooldown = cooldown - 1;
-                PacketUtils.SUpdateTileEntityPacket(this);
             }
 
             boolean setCooldown = false;
@@ -76,7 +75,6 @@ public class WissenTranslatorTileEntity extends TileSimpleInventory implements T
                 if (isSameFromAndTo()) {
                     isFromBlock = false;
                     isToBlock = false;
-                    PacketUtils.SUpdateTileEntityPacket(this);
                 }
             }
 
@@ -103,7 +101,6 @@ public class WissenTranslatorTileEntity extends TileSimpleInventory implements T
                             }
                         } else {
                             isToBlock = false;
-                            PacketUtils.SUpdateTileEntityPacket(this);
                         }
                     }
                 }
@@ -124,12 +121,10 @@ public class WissenTranslatorTileEntity extends TileSimpleInventory implements T
 
                                 setCooldown = true;
 
-                                PacketUtils.SUpdateTileEntityPacket(tileentity);
                                 level.playSound(WizardsReborn.proxy.getPlayer(), tileentity.getBlockPos(), WizardsReborn.WISSEN_TRANSFER_SOUND.get(), SoundSource.BLOCKS, 0.1f, (float) (1.1f + ((random.nextFloat() - 0.5D) / 2)));
                             }
                         } else {
                             isFromBlock = false;
-                            PacketUtils.SUpdateTileEntityPacket(this);
                         }
                     }
                 }
@@ -137,12 +132,10 @@ public class WissenTranslatorTileEntity extends TileSimpleInventory implements T
 
             if (wissenRays.size() > 0) {
                 updateWissenRays();
-                PacketUtils.SUpdateTileEntityPacket(this);
             }
 
             if (setCooldown) {
                 cooldown = getSendWissenCooldown();
-                PacketUtils.SUpdateTileEntityPacket(this);
             }
         }
 
@@ -199,6 +192,14 @@ public class WissenTranslatorTileEntity extends TileSimpleInventory implements T
         var tag = new CompoundTag();
         saveAdditional(tag);
         return tag;
+    }
+
+    @Override
+    public void setChanged() {
+        super.setChanged();
+        if (level != null && !level.isClientSide) {
+            PacketUtils.SUpdateTileEntityPacket(this);
+        }
     }
 
     public boolean isSameFromAndTo() {
@@ -488,7 +489,6 @@ public class WissenTranslatorTileEntity extends TileSimpleInventory implements T
 
                             int addRemain = WissenUtils.getAddWissenRemain(wissenTileEntity.getWissen(), tag.getInt("wissen"), wissenTileEntity.getMaxWissen());
                             wissenTileEntity.addWissen(tag.getInt("wissen") - addRemain);
-                            PacketUtils.SUpdateTileEntityPacket(tileentity);
                             level.playSound(WizardsReborn.proxy.getPlayer(), X, Y, Z, WizardsReborn.WISSEN_TRANSFER_SOUND.get(), SoundSource.BLOCKS, 0.1f, (float) (1f + ((random.nextFloat() - 0.5D) / 2)));
 
                             PacketHandler.sendToTracking(level, getBlockPos(), new WissenTranslatorBurstEffectPacket(X, Y, Z, (float) color.getRed() / 255, (float) color.getGreen() / 255, (float) color.getBlue() / 255));

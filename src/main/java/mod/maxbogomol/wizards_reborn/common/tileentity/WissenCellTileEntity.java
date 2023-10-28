@@ -10,6 +10,7 @@ import mod.maxbogomol.wizards_reborn.common.network.PacketHandler;
 import mod.maxbogomol.wizards_reborn.common.network.WissenCellSendEffectPacket;
 import mod.maxbogomol.wizards_reborn.utils.PacketUtils;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.Connection;
 import net.minecraft.network.protocol.game.ClientboundBlockEntityDataPacket;
@@ -20,9 +21,10 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import org.jetbrains.annotations.NotNull;
 
+import javax.annotation.Nullable;
 import java.util.Random;
 
-public class WissenCellTileEntity extends TileSimpleInventory implements TickableBlockEntity, IWissenTileEntity {
+public class WissenCellTileEntity extends ExposedTileSimpleInventory implements TickableBlockEntity, IWissenTileEntity {
     public int wissen = 0;
 
     public Random random = new Random();
@@ -54,8 +56,6 @@ public class WissenCellTileEntity extends TileSimpleInventory implements Tickabl
                             if (random.nextFloat() < 0.5) {
                                 PacketHandler.sendToTracking(level, getBlockPos(), new WissenCellSendEffectPacket(getBlockPos()));
                             }
-
-                            PacketUtils.SUpdateTileEntityPacket(this);
                         }
                     }
                 }
@@ -112,6 +112,28 @@ public class WissenCellTileEntity extends TileSimpleInventory implements Tickabl
         var tag = new CompoundTag();
         saveAdditional(tag);
         return tag;
+    }
+
+    @Override
+    public void setChanged() {
+        super.setChanged();
+        if (level != null && !level.isClientSide) {
+            PacketUtils.SUpdateTileEntityPacket(this);
+        }
+    }
+
+    @Override
+    public boolean canPlaceItemThroughFace(int index, @NotNull ItemStack stack, @Nullable Direction direction) {
+        if (stack.getItem() instanceof IWissenItem) {
+            return true;
+        }
+
+        return false;
+    }
+
+    @Override
+    public boolean canTakeItemThroughFace(int index, @NotNull ItemStack stack, @Nullable Direction direction) {
+        return true;
     }
 
     @Override

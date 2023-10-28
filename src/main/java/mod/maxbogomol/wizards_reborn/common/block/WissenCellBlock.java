@@ -1,23 +1,17 @@
 package mod.maxbogomol.wizards_reborn.common.block;
 
-import mod.maxbogomol.wizards_reborn.WizardsReborn;
-import mod.maxbogomol.wizards_reborn.api.crystal.CrystalUtils;
 import mod.maxbogomol.wizards_reborn.api.wissen.IWissenItem;
 import mod.maxbogomol.wizards_reborn.api.wissen.IWissenTileEntity;
 import mod.maxbogomol.wizards_reborn.api.wissen.WissenItemUtils;
 import mod.maxbogomol.wizards_reborn.common.item.equipment.WissenWandItem;
-import mod.maxbogomol.wizards_reborn.common.recipe.WissenAltarRecipe;
 import mod.maxbogomol.wizards_reborn.common.tileentity.TickableBlockEntity;
 import mod.maxbogomol.wizards_reborn.common.tileentity.TileSimpleInventory;
-import mod.maxbogomol.wizards_reborn.common.tileentity.WissenAltarTileEntity;
 import mod.maxbogomol.wizards_reborn.common.tileentity.WissenCellTileEntity;
-import mod.maxbogomol.wizards_reborn.utils.PacketUtils;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.world.Containers;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
-import net.minecraft.world.SimpleContainer;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.context.BlockPlaceContext;
@@ -112,7 +106,6 @@ public class WissenCellBlock extends HorizontalDirectionalBlock implements Entit
             if (cell.getItemHandler().getItem(0).isEmpty()) {
                 cell.getItemHandler().setItem(0, stack);
                 player.getInventory().removeItem(player.getItemInHand(hand));
-                PacketUtils.SUpdateTileEntityPacket(cell);
                 return InteractionResult.SUCCESS;
             }
         }
@@ -120,7 +113,6 @@ public class WissenCellBlock extends HorizontalDirectionalBlock implements Entit
         if (!cell.getItemHandler().getItem(0).isEmpty()) {
             player.getInventory().add(cell.getItemHandler().getItem(0).copy());
             cell.getItemHandler().removeItemNoUpdate(0);
-            PacketUtils.SUpdateTileEntityPacket(cell);
             return InteractionResult.SUCCESS;
         }
 

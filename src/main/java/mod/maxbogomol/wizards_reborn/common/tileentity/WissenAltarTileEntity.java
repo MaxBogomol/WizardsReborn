@@ -9,6 +9,7 @@ import mod.maxbogomol.wizards_reborn.common.recipe.WissenAltarRecipe;
 import mod.maxbogomol.wizards_reborn.utils.PacketUtils;
 import mod.maxbogomol.wizards_reborn.common.network.WissenAltarBurstEffectPacket;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.Connection;
 import net.minecraft.network.protocol.game.ClientboundBlockEntityDataPacket;
@@ -20,9 +21,10 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import org.jetbrains.annotations.NotNull;
 
+import javax.annotation.Nullable;
 import java.util.Random;
 
-public class WissenAltarTileEntity extends TileSimpleInventory implements TickableBlockEntity, IWissenTileEntity, ICooldownTileEntity {
+public class WissenAltarTileEntity extends ExposedTileSimpleInventory implements TickableBlockEntity, IWissenTileEntity, ICooldownTileEntity {
 
     public int wissenInItem = 0;
     public int wissenIsCraft = 0;
@@ -50,8 +52,6 @@ public class WissenAltarTileEntity extends TileSimpleInventory implements Tickab
                 } else {
                     getItemHandler().removeItemNoUpdate(1);
                 }
-
-                PacketUtils.SUpdateTileEntityPacket(this);
             }
 
             SimpleContainer inv = new SimpleContainer(1);
@@ -67,8 +67,6 @@ public class WissenAltarTileEntity extends TileSimpleInventory implements Tickab
 
                 wissenIsCraft = wissenIsCraft + (getWissenPerTick() - addRemainCraft - addRemain);
                 addWissen(getWissenPerTick() - addRemainCraft - addRemain);
-
-                PacketUtils.SUpdateTileEntityPacket(this);
             }
 
             if (wissenInItem > 0) {
@@ -78,7 +76,6 @@ public class WissenAltarTileEntity extends TileSimpleInventory implements Tickab
                     wissenIsCraft = 0;
 
                     PacketHandler.sendToTracking(level, getBlockPos(), new WissenAltarBurstEffectPacket(getBlockPos()));
-                    PacketUtils.SUpdateTileEntityPacket(this);
                     level.playSound(WizardsReborn.proxy.getPlayer(), getBlockPos(), WizardsReborn.WISSEN_BURST_SOUND.get(), SoundSource.BLOCKS, 0.25f, (float) (1f + ((random.nextFloat() - 0.5D) / 4)));
                 }
             }
@@ -99,8 +96,6 @@ public class WissenAltarTileEntity extends TileSimpleInventory implements Tickab
                             if (random.nextFloat() < 0.5) {
                                 PacketHandler.sendToTracking(level, getBlockPos(), new WissenAltarSendEffectPacket(getBlockPos()));
                             }
-
-                            PacketUtils.SUpdateTileEntityPacket(this);
                         }
                     }
                 }
@@ -169,6 +164,48 @@ public class WissenAltarTileEntity extends TileSimpleInventory implements Tickab
         var tag = new CompoundTag();
         saveAdditional(tag);
         return tag;
+    }
+
+    @Override
+    public void setChanged() {
+        super.setChanged();
+        if (level != null && !level.isClientSide) {
+            PacketUtils.SUpdateTileEntityPacket(this);
+        }
+    }
+
+    @Override
+    public boolean canPlaceItemThroughFace(int index, @NotNull ItemStack stack, @Nullable Direction direction) {
+        if (index == 0) {
+            if (stack.getItem() instanceof IWissenItem) {
+                return true;
+            }
+        }
+
+        if (index == 1) {
+            SimpleContainer inv = new SimpleContainer(1);
+            inv.setItem(0, stack);
+            int wissenInItem = getLevel().getRecipeManager().getRecipeFor(WizardsReborn.WISSEN_ALTAR_RECIPE.get(), inv, getLevel())
+                    .map(WissenAltarRecipe::getRecipeWissen)
+                    .orElse(0);
+            if (wissenInItem > 0) {
+                if (canPlaceItem(index, stack)) {
+                    ItemStack existing = getItem(index);
+                    return existing.getCount() < getMaxStackSize();
+                }
+            }
+        }
+
+        return false;
+    }
+
+    @Override
+    public boolean canTakeItemThroughFace(int index, @NotNull ItemStack stack, @Nullable Direction direction) {
+        if (index <= 1) {
+            return true;
+        }
+
+        return false;
     }
 
     @Override

@@ -2,37 +2,35 @@ package mod.maxbogomol.wizards_reborn.common.block;
 
 import mod.maxbogomol.wizards_reborn.common.item.equipment.WissenWandItem;
 import mod.maxbogomol.wizards_reborn.common.tileentity.TickableBlockEntity;
-import mod.maxbogomol.wizards_reborn.common.tileentity.WissenCrystallizerTileEntity;
 import mod.maxbogomol.wizards_reborn.common.tileentity.TileSimpleInventory;
-import mod.maxbogomol.wizards_reborn.utils.PacketUtils;
+import mod.maxbogomol.wizards_reborn.common.tileentity.WissenCrystallizerTileEntity;
+import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
+import net.minecraft.world.Containers;
+import net.minecraft.world.InteractionHand;
+import net.minecraft.world.InteractionResult;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.context.BlockPlaceContext;
+import net.minecraft.world.level.BlockGetter;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.EntityBlock;
+import net.minecraft.world.level.block.SimpleWaterloggedBlock;
+import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityTicker;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.level.block.EntityBlock;
-import net.minecraft.world.level.block.SimpleWaterloggedBlock;
-import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.material.FluidState;
 import net.minecraft.world.level.material.Fluids;
-import net.minecraft.world.Containers;
-import net.minecraft.world.item.context.BlockPlaceContext;
-import net.minecraft.world.item.ItemStack;
-import net.minecraft.nbt.CompoundTag;
-import net.minecraft.world.level.block.state.StateDefinition;
-import net.minecraft.world.level.block.entity.BlockEntity;
-import net.minecraft.world.InteractionResult;
-import net.minecraft.core.Direction;
-import net.minecraft.world.InteractionHand;
-import net.minecraft.core.BlockPos;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.shapes.BooleanOp;
 import net.minecraft.world.phys.shapes.CollisionContext;
-import net.minecraft.world.phys.shapes.VoxelShape;
 import net.minecraft.world.phys.shapes.Shapes;
-import net.minecraft.world.level.BlockGetter;
-import net.minecraft.world.level.LevelAccessor;
-import net.minecraft.world.level.Level;
+import net.minecraft.world.phys.shapes.VoxelShape;
 import org.jetbrains.annotations.NotNull;
 
 import javax.annotation.Nonnull;
@@ -108,12 +106,10 @@ public class WissenCrystallizerBlock extends Block implements EntityBlock, Simpl
                         player.getMainHandItem().setCount(stack.getCount() - 1);
                         stack.setCount(1);
                         tile.getItemHandler().setItem(slot, stack);
-                        PacketUtils.SUpdateTileEntityPacket(tile);
                         return InteractionResult.SUCCESS;
                     } else {
                         tile.getItemHandler().setItem(slot, stack);
                         player.getInventory().removeItem(player.getItemInHand(hand));
-                        PacketUtils.SUpdateTileEntityPacket(tile);
                         return InteractionResult.SUCCESS;
                     }
                 }
@@ -124,7 +120,6 @@ public class WissenCrystallizerBlock extends Block implements EntityBlock, Simpl
                 if (!tile.getItemHandler().getItem(slot).isEmpty()) {
                     player.getInventory().add(tile.getItemHandler().getItem(slot).copy());
                     tile.getItemHandler().removeItemNoUpdate(slot);
-                    PacketUtils.SUpdateTileEntityPacket(tile);
                     return InteractionResult.SUCCESS;
                 }
             }

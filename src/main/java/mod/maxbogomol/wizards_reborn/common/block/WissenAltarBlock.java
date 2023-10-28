@@ -7,7 +7,6 @@ import mod.maxbogomol.wizards_reborn.common.recipe.WissenAltarRecipe;
 import mod.maxbogomol.wizards_reborn.common.tileentity.TickableBlockEntity;
 import mod.maxbogomol.wizards_reborn.common.tileentity.TileSimpleInventory;
 import mod.maxbogomol.wizards_reborn.common.tileentity.WissenAltarTileEntity;
-import mod.maxbogomol.wizards_reborn.utils.PacketUtils;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.entity.BlockEntityTicker;
@@ -108,7 +107,6 @@ public class WissenAltarBlock extends HorizontalDirectionalBlock implements Enti
             if (altar.getItemHandler().getItem(0).isEmpty()) {
                 altar.getItemHandler().setItem(0, stack);
                 player.getInventory().removeItem(player.getItemInHand(hand));
-                PacketUtils.SUpdateTileEntityPacket(altar);
                 return InteractionResult.SUCCESS;
             }
         }
@@ -122,13 +120,11 @@ public class WissenAltarBlock extends HorizontalDirectionalBlock implements Enti
             if (altar.getItemHandler().getItem(1).isEmpty()) {
                 altar.getItemHandler().setItem(1, stack);
                 player.getInventory().removeItem(player.getItemInHand(hand));
-                PacketUtils.SUpdateTileEntityPacket(altar);
                 return InteractionResult.SUCCESS;
             } else {
                 if (altar.getItemHandler().getItem(1).equals(stack)
                         && altar.getItemHandler().getItem(1).getCount() + stack.getCount() <= altar.getItemHandler().getItem(1).getMaxStackSize()) {
                     altar.getItemHandler().getItem(1).setCount(altar.getItemHandler().getItem(1).getCount() + stack.getCount());
-                    PacketUtils.SUpdateTileEntityPacket(altar);
                     return InteractionResult.SUCCESS;
                 }
             }
@@ -137,13 +133,11 @@ public class WissenAltarBlock extends HorizontalDirectionalBlock implements Enti
         if (!altar.getItemHandler().getItem(0).isEmpty()) {
             player.getInventory().add(altar.getItemHandler().getItem(0).copy());
             altar.getItemHandler().removeItemNoUpdate(0);
-            PacketUtils.SUpdateTileEntityPacket(altar);
             return InteractionResult.SUCCESS;
         } else {
             if (!altar.getItemHandler().getItem(1).isEmpty()) {
                 player.getInventory().add(altar.getItemHandler().getItem(1).copy());
                 altar.getItemHandler().removeItemNoUpdate(1);
-                PacketUtils.SUpdateTileEntityPacket(altar);
                 return InteractionResult.SUCCESS;
             }
         }

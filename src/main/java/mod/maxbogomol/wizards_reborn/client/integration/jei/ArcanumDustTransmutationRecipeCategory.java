@@ -54,6 +54,10 @@ public class ArcanumDustTransmutationRecipeCategory implements IRecipeCategory<A
         builder.addSlot(RecipeIngredientRole.INPUT, 4, 16).addItemStack(WizardsReborn.ARCANUM_DUST.get().getDefaultInstance());
         builder.addSlot(RecipeIngredientRole.INPUT, 63, 16).addIngredients(recipe.getIngredientRecipe());
 
-        builder.addSlot(RecipeIngredientRole.OUTPUT, 125, 16).addItemStack(recipe.getResultItem(RegistryAccess.EMPTY));
+        if (recipe.getDisplay() == ItemStack.EMPTY) {
+            builder.addSlot(RecipeIngredientRole.OUTPUT, 125, 16).addItemStack(recipe.getResultItem(RegistryAccess.EMPTY));
+        } else {
+            builder.addSlot(RecipeIngredientRole.OUTPUT, 125, 16).addItemStack(recipe.getDisplay());
+        }
     }
 }

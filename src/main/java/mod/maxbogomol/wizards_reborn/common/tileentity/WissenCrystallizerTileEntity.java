@@ -26,7 +26,7 @@ import org.jetbrains.annotations.NotNull;
 import java.util.Optional;
 import java.util.Random;
 
-public class WissenCrystallizerTileEntity extends TileSimpleInventory implements TickableBlockEntity, IWissenTileEntity, ICooldownTileEntity, IWissenWandFunctionalTileEntity {
+public class WissenCrystallizerTileEntity extends ExposedTileSimpleInventory implements TickableBlockEntity, IWissenTileEntity, ICooldownTileEntity, IWissenWandFunctionalTileEntity {
 
     public int wissenInCraft= 0;
     public int wissenIsCraft = 0;
@@ -61,8 +61,6 @@ public class WissenCrystallizerTileEntity extends TileSimpleInventory implements
 
                 wissenIsCraft = wissenIsCraft + (getWissenPerTick() - addRemainCraft - removeRemain);
                 removeWissen(getWissenPerTick() - addRemainCraft - removeRemain);
-
-                PacketUtils.SUpdateTileEntityPacket(this);
             }
 
             if (wissenInCraft > 0 && startCraft) {
@@ -90,7 +88,6 @@ public class WissenCrystallizerTileEntity extends TileSimpleInventory implements
                     }
 
                     PacketHandler.sendToTracking(level, getBlockPos(), new WissenCrystallizerBurstEffectPacket(getBlockPos()));
-                    PacketUtils.SUpdateTileEntityPacket(this);
                     level.playSound(WizardsReborn.proxy.getPlayer(), getBlockPos(), WizardsReborn.WISSEN_BURST_SOUND.get(), SoundSource.BLOCKS, 0.25f, (float) (1f + ((random.nextFloat() - 0.5D) / 4)));
                 }
             }
@@ -175,6 +172,14 @@ public class WissenCrystallizerTileEntity extends TileSimpleInventory implements
         var tag = new CompoundTag();
         saveAdditional(tag);
         return tag;
+    }
+
+    @Override
+    public void setChanged() {
+        super.setChanged();
+        if (level != null && !level.isClientSide) {
+            PacketUtils.SUpdateTileEntityPacket(this);
+        }
     }
 
     public float getStage() {
