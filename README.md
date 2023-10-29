@@ -2,7 +2,7 @@
 
 Status: **Alpha**
 
-Requires: **[Curios API](https://modrinth.com/mod/curios)** and **[Caelus API](https://modrinth.com/mod/caelus)**
+Requires: **[Curios API](https://modrinth.com/mod/curios)**
 
 # About:
 

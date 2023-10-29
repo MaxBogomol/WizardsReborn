@@ -15,6 +15,10 @@
   "item.wizards_reborn.arcane_gold_shovel": "Арканова золота лопата",
   "item.wizards_reborn.arcane_gold_hoe": "Арканова золота мотика",
   "item.wizards_reborn.arcane_gold_scythe": "Арканова золота коса",
+  "item.wizards_reborn.arcane_gold_helmet": "Арканово золотий шолом",
+  "item.wizards_reborn.arcane_gold_chestplate": "Арканово золота кіраса",
+  "item.wizards_reborn.arcane_gold_leggings": "Арканово золоті наголінники",
+  "item.wizards_reborn.arcane_gold_boots": "Арканово золоті чоботи",
 
   "item.wizards_reborn.arcanum": "Арканум",
   "item.wizards_reborn.arcanum_dust": "Пил аркануму",
@@ -42,6 +46,7 @@
   "item.wizards_reborn.arcane_wood_boat": "Арканово-деревинний човен",
   "item.wizards_reborn.arcane_wood_chest_boat": "Арканово-деревинний човен зі скринею",
   "item.wizards_reborn.arcane_wood_branch": "Арканово-деревинна гілка",
+  "item.wizards_reborn.arcane_wood_mortar": "Арканово-деревинна ступа",
   "block.wizards_reborn.arcane_wood_leaves": "Арканово-деревинне листя",
   "block.wizards_reborn.arcane_wood_sapling": "Паросток арканового дерева",
   "block.wizards_reborn.potted_arcane_wood_sapling": "Паросток арканового дерева в горщику",
@@ -56,6 +61,14 @@
   "block.wizards_reborn.elder_mor": "Стародавній мор",
   "block.wizards_reborn.potted_elder_mor": "Стародавній мор у горщику",
   "block.wizards_reborn.elder_mor_block": "Блок стародавнього мору",
+
+  "item.wizards_reborn.petals": "Пелюстки",
+  "item.wizards_reborn.ground_brown_mushroom": "Мелений коричневий гриб",
+  "item.wizards_reborn.ground_red_mushroom": "Мелений червоний гриб",
+  "item.wizards_reborn.ground_crimson_fungus": "Мелений багровий гриб",
+  "item.wizards_reborn.ground_warped_fungus": "Мелений спотворений гриб",
+  "item.wizards_reborn.ground_mor": "Мелений мор",
+  "item.wizards_reborn.ground_elder_mor": "Мелений стародавній мор",
 
   "item.wizards_reborn.arcane_wand": "Аркановий жезл",
   "item.wizards_reborn.wissen_wand": "Віссен жезл",
