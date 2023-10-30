@@ -175,7 +175,7 @@ public class WissenTranslatorBlock extends FaceAttachedHorizontalDirectionalBloc
         if ((!stack.isEmpty()) && (tile.getItemHandler().getItem(0).isEmpty())) {
             if (stack.is(WizardsReborn.ARCANE_LUMOS_ITEM_TAG)) {
                 if (stack.getCount() > 1) {
-                    player.getMainHandItem().setCount(stack.getCount() - 1);
+                    player.getItemInHand(hand).setCount(stack.getCount() - 1);
                     stack.setCount(1);
                     tile.getItemHandler().setItem(0, stack);
                     world.updateNeighbourForOutputSignal(pos, this);

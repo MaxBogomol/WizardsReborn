@@ -4,7 +4,7 @@ import net.minecraftforge.common.ForgeConfigSpec;
 import org.apache.commons.lang3.tuple.Pair;
 
 public class ClientConfig {
-    public static ForgeConfigSpec.ConfigValue<Integer> TEST;
+    public static ForgeConfigSpec.ConfigValue<Integer> WISSEN_TRANSLATOR_PARTICLE_PER_BLOCK;
     public static ForgeConfigSpec.ConfigValue<Boolean> BETTER_LAYERING, LARGE_ITEM_MODEL;
 
     public ClientConfig(ForgeConfigSpec.Builder builder) {
@@ -15,10 +15,11 @@ public class ClientConfig {
                 .define("betterLayering", true);
         LARGE_ITEM_MODEL = builder.comment("Enable large item models.")
                 .define("largeItemModel", true);
-        builder.pop();
 
-        TEST = builder.comment("Maximum Y value for arcanum ore veins")
-                .defineInRange("arcanumOreMaxY", 4, 1, 10);
+        builder.comment("Wissen mechanism's").push("wissenMechanisms");
+        WISSEN_TRANSLATOR_PARTICLE_PER_BLOCK = builder.comment("Maximum Y value for arcanum ore veins")
+                .defineInRange("particlePerBlock", 4, 1, 10);
+        builder.pop();
     }
 
     public static final ClientConfig INSTANCE;

@@ -47,13 +47,14 @@ public class WissenCrystallizerTileEntity extends ExposedTileSimpleInventory imp
     @Override
     public void tick() {
         if (!level.isClientSide()) {
+            boolean update = false;
             Optional<WissenCrystallizerRecipe> recipe = level.getRecipeManager().getRecipeFor(WizardsReborn.WISSEN_CRYSTALLIZER_RECIPE.get(), getItemHandler(), level);
             wissenInCraft =  recipe.map(WissenCrystallizerRecipe::getRecipeWissen).orElse(0);
 
             if (wissenInCraft <= 0) {
                 wissenIsCraft = 0;
                 startCraft = false;
-                PacketUtils.SUpdateTileEntityPacket(this);
+                update = true;
             }
             
             if ((wissenInCraft > 0) && (wissen > 0) && (startCraft)) {
@@ -62,7 +63,7 @@ public class WissenCrystallizerTileEntity extends ExposedTileSimpleInventory imp
 
                 wissenIsCraft = wissenIsCraft + (getWissenPerTick() - addRemainCraft - removeRemain);
                 removeWissen(getWissenPerTick() - addRemainCraft - removeRemain);
-                PacketUtils.SUpdateTileEntityPacket(this);
+                update = true;
             }
 
             if (wissenInCraft > 0 && startCraft) {
@@ -89,11 +90,15 @@ public class WissenCrystallizerTileEntity extends ExposedTileSimpleInventory imp
                         getItemHandler().setItem(i, stack);
                     }
 
-                    PacketUtils.SUpdateTileEntityPacket(this);
+                    update = true;
 
                     PacketHandler.sendToTracking(level, getBlockPos(), new WissenCrystallizerBurstEffectPacket(getBlockPos()));
                     level.playSound(WizardsReborn.proxy.getPlayer(), getBlockPos(), WizardsReborn.WISSEN_BURST_SOUND.get(), SoundSource.BLOCKS, 0.25f, (float) (1f + ((random.nextFloat() - 0.5D) / 4)));
                 }
+            }
+
+            if (update) {
+                PacketUtils.SUpdateTileEntityPacket(this);
             }
         }
 

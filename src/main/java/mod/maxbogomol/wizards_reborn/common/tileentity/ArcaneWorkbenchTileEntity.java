@@ -59,6 +59,7 @@ public class ArcaneWorkbenchTileEntity extends TileSimpleInventory implements Ti
     @Override
     public void tick() {
         if (!level.isClientSide()) {
+            boolean update = false;
             SimpleContainer inv = new SimpleContainer(itemHandler.getSlots());
             for (int i = 0; i < itemHandler.getSlots(); i++) {
                 inv.setItem(i, itemHandler.getStackInSlot(i));
@@ -67,20 +68,22 @@ public class ArcaneWorkbenchTileEntity extends TileSimpleInventory implements Ti
             Optional<ArcaneWorkbenchRecipe> recipe = level.getRecipeManager().getRecipeFor(WizardsReborn.ARCANE_WORKBENCH_RECIPE.get(), inv, level);
             wissenInCraft = recipe.map(ArcaneWorkbenchRecipe::getRecipeWissen).orElse(0);
 
-            if (wissenInCraft <= 0) {
+            if (wissenInCraft <= 0 && (wissenIsCraft > 0 || startCraft)) {
                 wissenIsCraft = 0;
                 startCraft = false;
-                if (!getItemHandler().getItem(0).isEmpty()) {
-                    getItemHandler().setItem(0, ItemStack.EMPTY);
-                }
 
-                PacketUtils.SUpdateTileEntityPacket(this);
+                update = true;
+            }
+
+            if (!getItemHandler().getItem(0).isEmpty()) {
+                getItemHandler().setItem(0, ItemStack.EMPTY);
+                update = true;
             }
 
             if (wissenInCraft > 0) {
                 getItemHandler().setItem(0, recipe.get().getResultItem(RegistryAccess.EMPTY).copy());
 
-                PacketUtils.SUpdateTileEntityPacket(this);
+                update = true;
             }
 
             if ((wissenInCraft > 0) && (wissen > 0) && (startCraft)) {
@@ -93,7 +96,7 @@ public class ArcaneWorkbenchTileEntity extends TileSimpleInventory implements Ti
                     wissenIsCraft = wissenIsCraft + (getWissenPerTick() - addRemainCraft - removeRemain);
                     removeWissen(getWissenPerTick() - addRemainCraft - removeRemain);
 
-                    PacketUtils.SUpdateTileEntityPacket(this);
+                    update = true;
                 }
             }
 
@@ -114,12 +117,16 @@ public class ArcaneWorkbenchTileEntity extends TileSimpleInventory implements Ti
                             itemHandler.extractItem(i, 1, false);
                         }
 
-                        PacketUtils.SUpdateTileEntityPacket(this);
+                        update = true;
 
                         PacketHandler.sendToTracking(level, getBlockPos(), new ArcaneWorkbenchBurstEffectPacket(getBlockPos()));
                         level.playSound(WizardsReborn.proxy.getPlayer(), getBlockPos(), WizardsReborn.WISSEN_BURST_SOUND.get(), SoundSource.BLOCKS, 0.25f, (float) (1f + ((random.nextFloat() - 0.5D) / 4)));
                     }
                 }
+            }
+
+            if (update) {
+                PacketUtils.SUpdateTileEntityPacket(this);
             }
         }
 

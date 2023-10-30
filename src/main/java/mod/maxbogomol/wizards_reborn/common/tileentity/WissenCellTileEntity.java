@@ -40,6 +40,7 @@ public class WissenCellTileEntity extends ExposedTileSimpleInventory implements 
     @Override
     public void tick() {
         if (!level.isClientSide()) {
+            boolean update = false;
             if (wissen > 0) {
                 if (!getItemHandler().getItem(0).isEmpty()) {
                     ItemStack stack = getItemHandler().getItem(0);
@@ -57,10 +58,14 @@ public class WissenCellTileEntity extends ExposedTileSimpleInventory implements 
                                 PacketHandler.sendToTracking(level, getBlockPos(), new WissenCellSendEffectPacket(getBlockPos()));
                             }
 
-                            PacketUtils.SUpdateTileEntityPacket(this);
+                            update = true;
                         }
                     }
                 }
+            }
+
+            if (update) {
+                PacketUtils.SUpdateTileEntityPacket(this);
             }
         }
 

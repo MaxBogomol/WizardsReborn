@@ -85,7 +85,7 @@ public class ArcanePedestalBlock extends Block implements EntityBlock, SimpleWat
 
         if ((!stack.isEmpty()) && (tile.getItemHandler().getItem(0).isEmpty())) {
             if (stack.getCount() > 1) {
-                player.getMainHandItem().setCount(stack.getCount() - 1);
+                player.getItemInHand(hand).setCount(stack.getCount() - 1);
                 stack.setCount(1);
                 tile.getItemHandler().setItem(0, stack);
                 world.updateNeighbourForOutputSignal(pos, this);

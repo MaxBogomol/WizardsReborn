@@ -44,6 +44,7 @@ public class WissenAltarTileEntity extends ExposedTileSimpleInventory implements
     @Override
     public void tick() {
         if (!level.isClientSide()) {
+            boolean update = false;
             if ((getItemHandler().getItem(2).isEmpty()) && (!getItemHandler().getItem(1).isEmpty())) {
                 getItemHandler().setItem(2, getItemHandler().getItem(1).copy());
                 getItemHandler().getItem(2).setCount(1);
@@ -53,7 +54,7 @@ public class WissenAltarTileEntity extends ExposedTileSimpleInventory implements
                     getItemHandler().removeItemNoUpdate(1);
                 }
 
-                PacketUtils.SUpdateTileEntityPacket(this);
+                update = true;
             }
 
             SimpleContainer inv = new SimpleContainer(1);
@@ -70,7 +71,7 @@ public class WissenAltarTileEntity extends ExposedTileSimpleInventory implements
                 wissenIsCraft = wissenIsCraft + (getWissenPerTick() - addRemainCraft - addRemain);
                 addWissen(getWissenPerTick() - addRemainCraft - addRemain);
 
-                PacketUtils.SUpdateTileEntityPacket(this);
+                update = true;
             }
 
             if (wissenInItem > 0) {
@@ -79,7 +80,7 @@ public class WissenAltarTileEntity extends ExposedTileSimpleInventory implements
                     wissenInItem = 0;
                     wissenIsCraft = 0;
 
-                    PacketUtils.SUpdateTileEntityPacket(this);
+                    update = true;
 
                     PacketHandler.sendToTracking(level, getBlockPos(), new WissenAltarBurstEffectPacket(getBlockPos()));
                     level.playSound(WizardsReborn.proxy.getPlayer(), getBlockPos(), WizardsReborn.WISSEN_BURST_SOUND.get(), SoundSource.BLOCKS, 0.25f, (float) (1f + ((random.nextFloat() - 0.5D) / 4)));
@@ -103,10 +104,14 @@ public class WissenAltarTileEntity extends ExposedTileSimpleInventory implements
                                 PacketHandler.sendToTracking(level, getBlockPos(), new WissenAltarSendEffectPacket(getBlockPos()));
                             }
 
-                            PacketUtils.SUpdateTileEntityPacket(this);
+                            update = true;
                         }
                     }
                 }
+            }
+
+            if (update) {
+                PacketUtils.SUpdateTileEntityPacket(this);
             }
         }
 

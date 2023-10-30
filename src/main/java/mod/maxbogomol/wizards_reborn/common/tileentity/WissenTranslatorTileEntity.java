@@ -67,9 +67,10 @@ public class WissenTranslatorTileEntity extends ExposedTileSimpleInventory imple
     @Override
     public void tick() {
         if (!level.isClientSide()) {
+            boolean update = false;
             if (cooldown > 0) {
                 cooldown = cooldown - 1;
-                PacketUtils.SUpdateTileEntityPacket(this);
+                update = true;
             }
 
             boolean setCooldown = false;
@@ -78,7 +79,7 @@ public class WissenTranslatorTileEntity extends ExposedTileSimpleInventory imple
                 if (isSameFromAndTo()) {
                     isFromBlock = false;
                     isToBlock = false;
-                    PacketUtils.SUpdateTileEntityPacket(this);
+                    update = true;
                 }
             }
 
@@ -97,7 +98,7 @@ public class WissenTranslatorTileEntity extends ExposedTileSimpleInventory imple
                                 addWissenRay(getBlockPos(), new BlockPos(blockToX, blockToY, blockToZ), getWissenPerReceive() - removeRemain - addRemain);
 
                                 setCooldown = true;
-                                PacketUtils.SUpdateTileEntityPacket(this);
+                                update = true;
 
                                 Color color = getColor();
 
@@ -106,7 +107,7 @@ public class WissenTranslatorTileEntity extends ExposedTileSimpleInventory imple
                             }
                         } else {
                             isToBlock = false;
-                            PacketUtils.SUpdateTileEntityPacket(this);
+                            update = true;
                         }
                     }
                 }
@@ -126,13 +127,13 @@ public class WissenTranslatorTileEntity extends ExposedTileSimpleInventory imple
                                 addWissenRay(new BlockPos(blockFromX, blockFromY, blockFromZ), getBlockPos(), getWissenPerReceive() - removeRemain - addRemain);
 
                                 setCooldown = true;
-                                PacketUtils.SUpdateTileEntityPacket(this);
+                                update = true;
 
                                 level.playSound(WizardsReborn.proxy.getPlayer(), tileentity.getBlockPos(), WizardsReborn.WISSEN_TRANSFER_SOUND.get(), SoundSource.BLOCKS, 0.1f, (float) (1.1f + ((random.nextFloat() - 0.5D) / 2)));
                             }
                         } else {
                             isFromBlock = false;
-                            PacketUtils.SUpdateTileEntityPacket(this);
+                            update = true;
                         }
                     }
                 }
@@ -140,11 +141,15 @@ public class WissenTranslatorTileEntity extends ExposedTileSimpleInventory imple
 
             if (wissenRays.size() > 0) {
                 updateWissenRays();
-                PacketUtils.SUpdateTileEntityPacket(this);
+                update = true;
             }
 
             if (setCooldown) {
                 cooldown = getSendWissenCooldown();
+            }
+
+            if (update) {
+                PacketUtils.SUpdateTileEntityPacket(this);
             }
         }
 
@@ -400,7 +405,7 @@ public class WissenTranslatorTileEntity extends ExposedTileSimpleInventory imple
         double dY = posFrom.getY() - posTo.getY();
         double dZ = posFrom.getZ() - posTo.getZ();
 
-        int particlePerBlock = ClientConfig.TEST.get();
+        int particlePerBlock = ClientConfig.WISSEN_TRANSLATOR_PARTICLE_PER_BLOCK.get();
 
         float x = (float) (dX / (blocks * particlePerBlock));
         float y = (float) (dY / (blocks * particlePerBlock));

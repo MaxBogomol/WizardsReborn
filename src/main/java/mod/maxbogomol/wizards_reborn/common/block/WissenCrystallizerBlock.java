@@ -1,7 +1,6 @@
 package mod.maxbogomol.wizards_reborn.common.block;
 
 import mod.maxbogomol.wizards_reborn.common.item.equipment.WissenWandItem;
-import mod.maxbogomol.wizards_reborn.common.tileentity.ArcanePedestalTileEntity;
 import mod.maxbogomol.wizards_reborn.common.tileentity.TickableBlockEntity;
 import mod.maxbogomol.wizards_reborn.common.tileentity.TileSimpleInventory;
 import mod.maxbogomol.wizards_reborn.common.tileentity.WissenCrystallizerTileEntity;
@@ -108,7 +107,7 @@ public class WissenCrystallizerBlock extends Block implements EntityBlock, Simpl
                 int slot = invSize;
                 if ((!stack.isEmpty()) && (tile.getItemHandler().getItem(slot).isEmpty())) {
                     if (stack.getCount() > 1) {
-                        player.getMainHandItem().setCount(stack.getCount() - 1);
+                        player.getItemInHand(hand).setCount(stack.getCount() - 1);
                         stack.setCount(1);
                         tile.getItemHandler().setItem(slot, stack);
                         world.updateNeighbourForOutputSignal(pos, this);
