@@ -5,6 +5,7 @@ import mod.maxbogomol.wizards_reborn.api.crystal.CrystalUtils;
 import mod.maxbogomol.wizards_reborn.common.entity.SpellProjectileEntity;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.HitResult;
@@ -27,6 +28,9 @@ public class EarthProjectileSpell extends ProjectileSpell {
         super.onImpact(ray, world, projectile, player, target);
 
         int focusLevel = CrystalUtils.getStatLevel(projectile.getStats(), WizardsReborn.FOCUS_CRYSTAL_STAT);
-        target.hurt(new DamageSource(projectile.damageSources().generic().typeHolder(), projectile, player), (float) (4.5f + (focusLevel * 0.5)));
+        float damage = (float) (4.5f + (focusLevel * 0.5));
+        DamageSource damageSource = new DamageSource(target.damageSources().generic().typeHolder(), projectile, player);
+        target.hurt(damageSource, damage);
+        player.getInventory().hurtArmor(damageSource, damage, Inventory.ALL_ARMOR_SLOTS);
     }
 }

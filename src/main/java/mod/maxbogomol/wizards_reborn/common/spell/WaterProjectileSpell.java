@@ -28,7 +28,7 @@ public class WaterProjectileSpell extends ProjectileSpell {
 
         int focusLevel = CrystalUtils.getStatLevel(projectile.getStats(), WizardsReborn.FOCUS_CRYSTAL_STAT);
 
-        target.hurt(new DamageSource(projectile.damageSources().drown().typeHolder(), projectile, player),  (float) (2.0f + (focusLevel * 0.5)));
+        target.hurt(new DamageSource(target.damageSources().drown().typeHolder(), projectile, player),  (float) (2.0f + (focusLevel * 0.5)));
         target.clearFire();
         int frost = target.getTicksFrozen() + 10;
         if (frost > 250) {

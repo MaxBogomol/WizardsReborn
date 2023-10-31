@@ -32,7 +32,7 @@ public class AirRaySpell extends RaySpell {
             ItemStack stack = player.getItemInHand(player.getUsedItemHand());
             removeWissen(stack, projectile.getStats());
             int focusLevel = CrystalUtils.getStatLevel(projectile.getStats(), WizardsReborn.FOCUS_CRYSTAL_STAT);
-            target.hurt(new DamageSource(projectile.damageSources().fall().typeHolder(), projectile, player), (float) (1.5f + (focusLevel * 0.5)));
+            target.hurt(new DamageSource(target.damageSources().fall().typeHolder(), projectile, player), (float) (1.5f + (focusLevel * 0.5)));
         }
     }
 }

@@ -4,7 +4,7 @@ license="GPL-2.0"
 
 [[mods]]
 modId="wizards_reborn"
-version="1.20.1-0.0.5"
+version="1.20.1-0.0.6"
 displayName="Wizard's Reborn"
 logoFile="wizards_reborn.png"
 authors='''

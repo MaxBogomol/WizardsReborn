@@ -27,6 +27,6 @@ public class AirProjectileSpell extends ProjectileSpell {
         super.onImpact(ray, world, projectile, player, target);
 
         int focusLevel = CrystalUtils.getStatLevel(projectile.getStats(), WizardsReborn.FOCUS_CRYSTAL_STAT);
-        target.hurt(new DamageSource(projectile.damageSources().fall().typeHolder(), projectile, player), (float) (2.0f + (focusLevel * 0.5)));
+        target.hurt(new DamageSource(target.damageSources().fall().typeHolder(), projectile, player), (float) (2.0f + (focusLevel * 0.5)));
     }
 }

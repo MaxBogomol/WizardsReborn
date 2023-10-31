@@ -31,7 +31,7 @@ public class VoidRaySpell extends RaySpell {
             ItemStack stack = player.getItemInHand(player.getUsedItemHand());
             removeWissen(stack, projectile.getStats());
             int focusLevel = CrystalUtils.getStatLevel(projectile.getStats(), WizardsReborn.FOCUS_CRYSTAL_STAT);
-            target.hurt(new DamageSource(projectile.damageSources().magic().typeHolder(), projectile, player), (float) (2.5f + (focusLevel * 1.0)));
+            target.hurt(new DamageSource(target.damageSources().magic().typeHolder(), projectile, player), (float) (2.5f + (focusLevel * 1.0)));
         }
     }
 }

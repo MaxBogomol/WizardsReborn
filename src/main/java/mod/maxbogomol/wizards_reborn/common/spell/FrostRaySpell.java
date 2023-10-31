@@ -27,7 +27,7 @@ public class FrostRaySpell extends RaySpell {
         super.onImpact(ray, world, projectile, player, target);
 
         int focusLevel = CrystalUtils.getStatLevel(projectile.getStats(), WizardsReborn.FOCUS_CRYSTAL_STAT);
-        target.hurt(new DamageSource(projectile.damageSources().freeze().typeHolder(), projectile, player), (float) (1.5f + (focusLevel * 0.5)));
+        target.hurt(new DamageSource(target.damageSources().freeze().typeHolder(), projectile, player), (float) (1.5f + (focusLevel * 0.5)));
         target.clearFire();
         int frost = target.getTicksFrozen() + 75;
         if (frost > 250) {

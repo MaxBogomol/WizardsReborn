@@ -32,7 +32,7 @@ public class HolyProjectileSpell extends ProjectileSpell {
         if (target instanceof LivingEntity livingEntity) {
             int focusLevel = CrystalUtils.getStatLevel(projectile.getStats(), WizardsReborn.FOCUS_CRYSTAL_STAT);
             if (livingEntity.getMobType() == MobType.UNDEAD) {
-                target.hurt(new DamageSource(projectile.damageSources().magic().typeHolder(), projectile, player), (float) (1.5f + (focusLevel * 0.5)));
+                target.hurt(new DamageSource(target.damageSources().magic().typeHolder(), projectile, player), (float) (1.5f + (focusLevel * 0.5)));
             } else {
                 livingEntity.heal((float) (1.5f + (focusLevel * 0.5)));
             }

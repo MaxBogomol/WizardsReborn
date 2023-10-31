@@ -27,7 +27,7 @@ public class FireProjectileSpell extends ProjectileSpell {
         super.onImpact(ray, world, projectile, player, target);
 
         int focusLevel = CrystalUtils.getStatLevel(projectile.getStats(), WizardsReborn.FOCUS_CRYSTAL_STAT);
-        target.hurt(new DamageSource(projectile.damageSources().onFire().typeHolder(), projectile, player), (float) (3.5f + (focusLevel * 0.5)));
+        target.hurt(new DamageSource(target.damageSources().onFire().typeHolder(), projectile, player), (float) (3.5f + (focusLevel * 0.5)));
         int fire = target.getRemainingFireTicks() + 5;
         if (fire > 10) {
             fire = 10;

@@ -5,6 +5,7 @@ import mod.maxbogomol.wizards_reborn.api.crystal.CrystalUtils;
 import mod.maxbogomol.wizards_reborn.common.entity.SpellProjectileEntity;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
@@ -31,7 +32,10 @@ public class EarthRaySpell extends RaySpell {
             ItemStack stack = player.getItemInHand(player.getUsedItemHand());
             removeWissen(stack, projectile.getStats());
             int focusLevel = CrystalUtils.getStatLevel(projectile.getStats(), WizardsReborn.FOCUS_CRYSTAL_STAT);
-            target.hurt(new DamageSource(projectile.damageSources().generic().typeHolder(), projectile, player), (float) (2.0f + (focusLevel * 0.5)));
+            float damage = (float) (2.0f + (focusLevel * 0.5));
+            DamageSource damageSource = new DamageSource(target.damageSources().generic().typeHolder(), projectile, player);
+            target.hurt(new DamageSource(target.damageSources().generic().typeHolder(), projectile, player), damage);
+            player.getInventory().hurtArmor(damageSource, damage, Inventory.ALL_ARMOR_SLOTS);
         }
     }
 }
