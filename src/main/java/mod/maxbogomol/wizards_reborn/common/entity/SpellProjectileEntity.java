@@ -3,6 +3,8 @@ package mod.maxbogomol.wizards_reborn.common.entity;
 import mod.maxbogomol.wizards_reborn.api.spell.Spell;
 import mod.maxbogomol.wizards_reborn.api.spell.Spells;
 import mod.maxbogomol.wizards_reborn.common.network.*;
+import mod.maxbogomol.wizards_reborn.common.network.spell.SpellBurstEffectPacket;
+import mod.maxbogomol.wizards_reborn.common.network.spell.SpellProjectileRayEffectPacket;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.protocol.Packet;

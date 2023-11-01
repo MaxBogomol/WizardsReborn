@@ -2,6 +2,10 @@ package mod.maxbogomol.wizards_reborn.common.network;
 
 import com.mojang.datafixers.util.Pair;
 import mod.maxbogomol.wizards_reborn.WizardsReborn;
+import mod.maxbogomol.wizards_reborn.common.network.spell.RaySpellEffectPacket;
+import mod.maxbogomol.wizards_reborn.common.network.spell.SpellBurstEffectPacket;
+import mod.maxbogomol.wizards_reborn.common.network.spell.SpellProjectileRayEffectPacket;
+import mod.maxbogomol.wizards_reborn.common.network.tileentity.*;
 import net.minecraft.core.BlockPos;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerChunkCache;

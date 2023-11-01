@@ -390,7 +390,7 @@ public class CrystalChooseScreen extends Screen {
                         gui.blit(spell.getIcon(), x - 64 + w, y - h + (i * 34), 0, 0, 32, 32, 32, 32);
                         gui.drawString(Minecraft.getInstance().font, Component.translatable(spell.getTranslatedName()), x - 64 + w + 34, y - h + (i * 34) + 12, -1, true);
                     } else {
-                        gui.blit(new ResourceLocation(WizardsReborn.MOD_ID, "textures/gui/arcanemicon_unknown.png"), x - 64 + w, y - h + (i * 34), 0, 0, 32, 32, 32, 32);
+                        gui.blit(new ResourceLocation(WizardsReborn.MOD_ID, "textures/gui/arcanemicon/unknown.png"), x - 64 + w, y - h + (i * 34), 0, 0, 32, 32, 32, 32);
                         gui.drawString(Minecraft.getInstance().font, I18n.get("wizards_reborn.arcanemicon.unknown"), x - 64 + w + 34, y - h + (i * 34) + 12, -1, true);
                     }
                     i++;

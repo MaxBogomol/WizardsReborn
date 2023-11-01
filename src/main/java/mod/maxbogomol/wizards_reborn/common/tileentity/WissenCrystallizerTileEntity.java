@@ -8,7 +8,7 @@ import mod.maxbogomol.wizards_reborn.api.wissen.IWissenWandFunctionalTileEntity;
 import mod.maxbogomol.wizards_reborn.api.wissen.WissenUtils;
 import mod.maxbogomol.wizards_reborn.client.particle.Particles;
 import mod.maxbogomol.wizards_reborn.common.network.PacketHandler;
-import mod.maxbogomol.wizards_reborn.common.network.WissenCrystallizerBurstEffectPacket;
+import mod.maxbogomol.wizards_reborn.common.network.tileentity.WissenCrystallizerBurstEffectPacket;
 import mod.maxbogomol.wizards_reborn.common.recipe.WissenCrystallizerRecipe;
 import mod.maxbogomol.wizards_reborn.utils.PacketUtils;
 import net.minecraft.core.BlockPos;

@@ -1,6 +1,13 @@
 package mod.maxbogomol.wizards_reborn.client.arcanemicon;
 
 import mod.maxbogomol.wizards_reborn.WizardsReborn;
+import mod.maxbogomol.wizards_reborn.client.arcanemicon.index.BlockEntry;
+import mod.maxbogomol.wizards_reborn.client.arcanemicon.index.IndexEntry;
+import mod.maxbogomol.wizards_reborn.client.arcanemicon.index.MonogramIndexEntry;
+import mod.maxbogomol.wizards_reborn.client.arcanemicon.index.SpellIndexEntry;
+import mod.maxbogomol.wizards_reborn.client.arcanemicon.page.*;
+import mod.maxbogomol.wizards_reborn.client.arcanemicon.recipe.*;
+import mod.maxbogomol.wizards_reborn.client.arcanemicon.titledpage.*;
 import mod.maxbogomol.wizards_reborn.common.item.equipment.ArcaneWandItem;
 import mod.maxbogomol.wizards_reborn.common.knowledge.RegisterKnowledges;
 import net.minecraft.world.SimpleContainer;

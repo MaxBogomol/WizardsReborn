@@ -6,7 +6,7 @@ import mod.maxbogomol.wizards_reborn.api.wissen.IWissenTileEntity;
 import mod.maxbogomol.wizards_reborn.api.wissen.IWissenWandFunctionalTileEntity;
 import mod.maxbogomol.wizards_reborn.api.wissen.WissenUtils;
 import mod.maxbogomol.wizards_reborn.client.particle.Particles;
-import mod.maxbogomol.wizards_reborn.common.network.ArcaneWorkbenchBurstEffectPacket;
+import mod.maxbogomol.wizards_reborn.common.network.tileentity.ArcaneWorkbenchBurstEffectPacket;
 import mod.maxbogomol.wizards_reborn.common.network.PacketHandler;
 import mod.maxbogomol.wizards_reborn.common.recipe.ArcaneWorkbenchRecipe;
 import mod.maxbogomol.wizards_reborn.utils.PacketUtils;

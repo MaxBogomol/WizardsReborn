@@ -340,7 +340,7 @@ public class ArcaneWandItem extends Item implements IWissenItem {
                                 gui.blit(new ResourceLocation(WizardsReborn.MOD_ID + ":textures/gui/arcane_wand_frame.png"), x + 27, y, 0, 18, 18, 18, 64, 64);
                             }
                         } else {
-                            gui.blit(new ResourceLocation(WizardsReborn.MOD_ID, "textures/gui/arcanemicon_unknown.png"), x + 28, y + 1, 0, 0, 16, 16, 16, 16);
+                            gui.blit(new ResourceLocation(WizardsReborn.MOD_ID, "textures/gui/arcanemicon/unknown.png"), x + 28, y + 1, 0, 0, 16, 16, 16, 16);
                         }
                     }
                 }

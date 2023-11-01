@@ -2,7 +2,7 @@ package mod.maxbogomol.wizards_reborn.mixin.client;
 
 import com.mojang.blaze3d.vertex.PoseStack;
 import mod.maxbogomol.wizards_reborn.common.entity.SpellProjectileEntity;
-import mod.maxbogomol.wizards_reborn.common.spell.RaySpell;
+import mod.maxbogomol.wizards_reborn.common.spell.ray.RaySpell;
 import net.minecraft.client.renderer.LevelRenderer;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.nbt.CompoundTag;
