@@ -342,7 +342,7 @@ public class WizardsReborn {
     public static final RegistryObject<Item> ARCANUM_ORE_ITEM = ITEMS.register("arcanum_ore", () -> new BlockItem(ARCANUM_ORE.get(), new Item.Properties()));
     public static final RegistryObject<Item> DEEPSLATE_ARCANUM_ORE_ITEM = ITEMS.register("deepslate_arcanum_ore", () -> new BlockItem(DEEPSLATE_ARCANUM_ORE.get(), new Item.Properties()));
 
-    public static final RegistryObject<Item> ARCACITE = ITEMS.register("arcacite", () -> new ArcanumItem(new Item.Properties()));
+    public static final RegistryObject<Item> ARCACITE = ITEMS.register("arcacite", () -> new ArcaciteItem(new Item.Properties()));
     public static final RegistryObject<Item> ARCACITE_BLOCK_ITEM = ITEMS.register("arcacite_block", () -> new BlockItem(ARCACITE_BLOCK.get(), new Item.Properties()));
 
     public static final RegistryObject<Item> ARCANE_WOOD_LOG_ITEM = ITEMS.register("arcane_wood_log", () -> new BlockItem(ARCANE_WOOD_LOG.get(), new Item.Properties()));
