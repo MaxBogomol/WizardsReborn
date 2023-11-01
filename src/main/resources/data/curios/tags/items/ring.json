@@ -1,6 +1,7 @@
 {
   "replace": false,
   "values": [
-    "wizards_reborn:arcanum_ring"
+    "wizards_reborn:arcanum_ring",
+    "wizards_reborn:arcacite_ring"
   ]
 }

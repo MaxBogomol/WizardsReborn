@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "###",
+    "###",
+    "###"
+  ],
+  "key": {
+    "#": {
+      "item": "wizards_reborn:arcacite"
+    }
+  },
+  "result": {
+    "item": "wizards_reborn:arcacite_block"
+  }
+}

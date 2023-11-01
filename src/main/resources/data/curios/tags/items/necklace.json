@@ -1,6 +1,7 @@
 {
   "replace": false,
   "values": [
-    "wizards_reborn:arcanum_amulet"
+    "wizards_reborn:arcanum_amulet",
+    "wizards_reborn:arcacite_amulet"
   ]
 }

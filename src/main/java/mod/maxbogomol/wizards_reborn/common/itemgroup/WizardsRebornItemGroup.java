@@ -55,6 +55,9 @@ public class WizardsRebornItemGroup {
             event.accept(WizardsReborn.ARCANUM_ORE_ITEM);
             event.accept(WizardsReborn.DEEPSLATE_ARCANUM_ORE_ITEM);
 
+            event.accept(WizardsReborn.ARCACITE);
+            event.accept(WizardsReborn.ARCACITE_BLOCK_ITEM);
+
             event.accept(WizardsReborn.ARCANE_WOOD_LOG_ITEM);
             event.accept(WizardsReborn.ARCANE_WOOD_ITEM);
             event.accept(WizardsReborn.STRIPPED_ARCANE_WOOD_LOG_ITEM);
@@ -167,6 +170,8 @@ public class WizardsRebornItemGroup {
 
             event.accept(WizardsReborn.ARCANUM_AMULET);
             event.accept(WizardsReborn.ARCANUM_RING);
+            event.accept(WizardsReborn.ARCACITE_AMULET);
+            event.accept(WizardsReborn.ARCACITE_RING);
             event.accept(WizardsReborn.LEATHER_BELT);
 
             event.accept(WizardsReborn.ARCANEMICON);

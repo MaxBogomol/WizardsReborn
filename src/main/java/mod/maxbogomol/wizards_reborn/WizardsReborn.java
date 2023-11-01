@@ -40,6 +40,7 @@ import mod.maxbogomol.wizards_reborn.common.entity.SpellProjectileEntity;
 import mod.maxbogomol.wizards_reborn.common.event.Events;
 import mod.maxbogomol.wizards_reborn.common.item.*;
 import mod.maxbogomol.wizards_reborn.common.item.equipment.*;
+import mod.maxbogomol.wizards_reborn.common.item.equipment.curio.ArcaciteAmuletItem;
 import mod.maxbogomol.wizards_reborn.common.item.equipment.curio.ArcanumAmuletItem;
 import mod.maxbogomol.wizards_reborn.common.item.equipment.curio.ArcanumRingItem;
 import mod.maxbogomol.wizards_reborn.common.item.equipment.curio.LeatherBeltItem;
@@ -212,6 +213,7 @@ public class WizardsReborn {
     public static final RegistryObject<Block> ARCANUM_BLOCK = BLOCKS.register("arcanum_block", () -> new Block(BlockBehaviour.Properties.copy(Blocks.DIAMOND_BLOCK)));
     public static final RegistryObject<Block> ARCANUM_ORE = BLOCKS.register("arcanum_ore", () -> new ArcanumOreBlock(BlockBehaviour.Properties.copy(Blocks.DIAMOND_ORE)));
     public static final RegistryObject<Block> DEEPSLATE_ARCANUM_ORE = BLOCKS.register("deepslate_arcanum_ore", () -> new ArcanumOreBlock(BlockBehaviour.Properties.copy(Blocks.DEEPSLATE_DIAMOND_ORE)));
+    public static final RegistryObject<Block> ARCACITE_BLOCK = BLOCKS.register("arcacite_block", () -> new Block(BlockBehaviour.Properties.copy(Blocks.DIAMOND_BLOCK)));
 
     public static final RegistryObject<Block> ARCANE_WOOD_LOG = BLOCKS.register("arcane_wood_log", () -> new RotatedPillarBlock(BlockBehaviour.Properties.copy(Blocks.OAK_LOG)));
     public static final RegistryObject<Block> ARCANE_WOOD = BLOCKS.register("arcane_wood", () -> new RotatedPillarBlock(BlockBehaviour.Properties.copy(Blocks.OAK_WOOD)));
@@ -340,6 +342,9 @@ public class WizardsReborn {
     public static final RegistryObject<Item> ARCANUM_ORE_ITEM = ITEMS.register("arcanum_ore", () -> new BlockItem(ARCANUM_ORE.get(), new Item.Properties()));
     public static final RegistryObject<Item> DEEPSLATE_ARCANUM_ORE_ITEM = ITEMS.register("deepslate_arcanum_ore", () -> new BlockItem(DEEPSLATE_ARCANUM_ORE.get(), new Item.Properties()));
 
+    public static final RegistryObject<Item> ARCACITE = ITEMS.register("arcacite", () -> new ArcanumItem(new Item.Properties()));
+    public static final RegistryObject<Item> ARCACITE_BLOCK_ITEM = ITEMS.register("arcacite_block", () -> new BlockItem(ARCACITE_BLOCK.get(), new Item.Properties()));
+
     public static final RegistryObject<Item> ARCANE_WOOD_LOG_ITEM = ITEMS.register("arcane_wood_log", () -> new BlockItem(ARCANE_WOOD_LOG.get(), new Item.Properties()));
     public static final RegistryObject<Item> ARCANE_WOOD_ITEM = ITEMS.register("arcane_wood", () -> new BlockItem(ARCANE_WOOD.get(), new Item.Properties()));
     public static final RegistryObject<Item> STRIPPED_ARCANE_WOOD_LOG_ITEM = ITEMS.register("stripped_arcane_wood_log", () -> new BlockItem(STRIPPED_ARCANE_WOOD_LOG.get(), new Item.Properties()));
@@ -458,6 +463,8 @@ public class WizardsReborn {
 
     public static final RegistryObject<Item> ARCANUM_AMULET = ITEMS.register("arcanum_amulet", () -> new ArcanumAmuletItem(new Item.Properties().stacksTo(1)));
     public static final RegistryObject<Item> ARCANUM_RING = ITEMS.register("arcanum_ring", () -> new ArcanumRingItem(new Item.Properties().stacksTo(1)));
+    public static final RegistryObject<Item> ARCACITE_AMULET = ITEMS.register("arcacite_amulet", () -> new ArcaciteAmuletItem(new Item.Properties().stacksTo(1)));
+    public static final RegistryObject<Item> ARCACITE_RING = ITEMS.register("arcacite_ring", () -> new ArcanumRingItem(new Item.Properties().stacksTo(1)));
     public static final RegistryObject<Item> LEATHER_BELT = ITEMS.register("leather_belt", () -> new LeatherBeltItem(new Item.Properties().stacksTo(1)));
 
     public static final RegistryObject<Item> ARCANEMICON = ITEMS.register("arcanemicon", () -> new ArcanemiconItem(new Item.Properties().stacksTo(1)));
@@ -664,6 +671,7 @@ public class WizardsReborn {
 
             CuriosRendererRegistry.register(LEATHER_BELT.get(), BeltRenderer::new);
             CuriosRendererRegistry.register(ARCANUM_AMULET.get(), AmuletRenderer::new);
+            CuriosRendererRegistry.register(ARCACITE_AMULET.get(), AmuletRenderer::new);
         });
     }
 

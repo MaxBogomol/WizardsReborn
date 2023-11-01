@@ -320,7 +320,11 @@ public class RaySpell extends Spell {
         stack.popPose();
     }
 
-    public static HitResult getHitResult(Entity pProjectile, Vec3 pStartVec, Vec3 pEndVecOffset, Level pLevel, Predicate<Entity> pFilter) {
+    public HitResult getHitResult(SpellProjectileEntity pProjectile, Vec3 pStartVec, Vec3 pEndVecOffset, Level pLevel, Predicate<Entity> pFilter) {
+        return getHitResultStandart(pProjectile, pStartVec, pEndVecOffset, pLevel, pFilter);
+    }
+
+    public static HitResult getHitResultStandart(Entity pProjectile, Vec3 pStartVec, Vec3 pEndVecOffset, Level pLevel, Predicate<Entity> pFilter) {
         Vec3 vec3 = pStartVec.add(pEndVecOffset);
         HitResult hitresult = pLevel.clip(new ClipContext(pStartVec, vec3, ClipContext.Block.COLLIDER, ClipContext.Fluid.NONE, pProjectile));
         if (hitresult.getType() != HitResult.Type.MISS) {
@@ -333,5 +337,11 @@ public class RaySpell extends Spell {
         }
 
         return hitresult;
+    }
+
+    public static Vec3 getBlockHitOffset(HitResult ray, Entity projectile, float offset) {
+        Vec3 vec = new Vec3(ray.getLocation().x() + (projectile.getViewVector(0).x() * offset), ray.getLocation().y() + (projectile.getViewVector(0).y() * offset), ray.getLocation().z() + (projectile.getViewVector(0).z() * offset));
+
+        return vec;
     }
 }

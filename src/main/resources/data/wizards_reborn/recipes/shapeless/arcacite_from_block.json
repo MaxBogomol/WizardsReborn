@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "wizards_reborn:arcacite_block"
+    }
+  ],
+  "result": {
+    "item": "wizards_reborn:arcacite",
+    "count": 9
+  }
+}

@@ -2,9 +2,7 @@ package mod.maxbogomol.wizards_reborn.common.network;
 
 import com.mojang.datafixers.util.Pair;
 import mod.maxbogomol.wizards_reborn.WizardsReborn;
-import mod.maxbogomol.wizards_reborn.common.network.spell.RaySpellEffectPacket;
-import mod.maxbogomol.wizards_reborn.common.network.spell.SpellBurstEffectPacket;
-import mod.maxbogomol.wizards_reborn.common.network.spell.SpellProjectileRayEffectPacket;
+import mod.maxbogomol.wizards_reborn.common.network.spell.*;
 import mod.maxbogomol.wizards_reborn.common.network.tileentity.*;
 import net.minecraft.core.BlockPos;
 import net.minecraft.resources.ResourceLocation;
@@ -54,6 +52,9 @@ public final class PacketHandler {
         HANDLER.registerMessage(id++, KnowledgeUpdatePacket.class, KnowledgeUpdatePacket::encode, KnowledgeUpdatePacket::decode, KnowledgeUpdatePacket::handle);
         HANDLER.registerMessage(id++, KnowledgeToastPacket.class, KnowledgeToastPacket::encode, KnowledgeToastPacket::decode, KnowledgeToastPacket::handle);
         HANDLER.registerMessage(id++, UnlockSpellPacket.class, UnlockSpellPacket::encode, UnlockSpellPacket::decode, UnlockSpellPacket::handle);
+
+        HANDLER.registerMessage(id++, FireRaySpellEffectPacket.class, FireRaySpellEffectPacket::encode, FireRaySpellEffectPacket::decode, FireRaySpellEffectPacket::handle);
+        HANDLER.registerMessage(id++, EarthRaySpellEffectPacket.class, EarthRaySpellEffectPacket::encode, EarthRaySpellEffectPacket::decode, EarthRaySpellEffectPacket::handle);
     }
 
     private static final PacketDistributor<Pair<Level, BlockPos>> TRACKING_CHUNK_AND_NEAR = new PacketDistributor<>(

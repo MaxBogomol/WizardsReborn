@@ -1,0 +1,22 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "XWX",
+    "W X",
+    "#W "
+  ],
+  "key": {
+    "#": {
+      "item": "wizards_reborn:arcacite"
+    },
+    "X": {
+      "item": "wizards_reborn:arcane_gold_ingot"
+    },
+    "W": {
+      "item": "wizards_reborn:arcane_gold_nugget"
+    }
+  },
+  "result": {
+    "item": "wizards_reborn:arcacite_amulet"
+  }
+}
