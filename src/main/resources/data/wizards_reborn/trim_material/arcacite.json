@@ -1,0 +1,9 @@
+{
+  "asset_name": "arcacite",
+  "description": {
+    "color": "#C46362",
+    "translate": "trim_material.wizards_reborn.arcacite"
+  },
+  "ingredient": "wizards_reborn:arcacite",
+  "item_model_index": 0.4
+}

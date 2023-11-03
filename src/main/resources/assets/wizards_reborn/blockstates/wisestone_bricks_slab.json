@@ -1,0 +1,13 @@
+{
+  "variants": {
+    "type=bottom": {
+      "model": "wizards_reborn:block/wisestone_bricks_slab"
+    },
+    "type=double": {
+      "model": "wizards_reborn:block/wisestone_bricks"
+    },
+    "type=top": {
+      "model": "wizards_reborn:block/wisestone_bricks_slab_top"
+    }
+  }
+}

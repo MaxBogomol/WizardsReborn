@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:block/template_wall_post",
+  "textures": {
+    "wall": "wizards_reborn:block/polished_wisestone"
+  }
+}

@@ -45,6 +45,11 @@ public class RaySpell extends Spell {
         super(id, points);
     }
 
+    @Override
+    public int getWissenCost() {
+        return 20;
+    }
+
     public float getRayDistance() {
         return 25f;
     }

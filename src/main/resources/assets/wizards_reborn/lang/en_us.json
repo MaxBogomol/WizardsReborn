@@ -26,6 +26,9 @@
   "block.wizards_reborn.arcanum_ore": "Arcanum Ore",
   "block.wizards_reborn.deepslate_arcanum_ore": "Deepslate Arcanum Ore",
 
+  "item.wizards_reborn.arcacite": "Arcacite",
+  "block.wizards_reborn.arcacite_block": "Arcacite Block",
+
   "block.wizards_reborn.arcane_wood_log": "Arcane Wood Log",
   "block.wizards_reborn.stripped_arcane_wood_log": "Stripped Arcane Wood Log",
   "block.wizards_reborn.arcane_wood": "Arcane Wood",
@@ -149,6 +152,8 @@
 
   "item.wizards_reborn.arcanum_amulet": "Arcanum Amulet",
   "item.wizards_reborn.arcanum_ring": "Arcanum Ring",
+  "item.wizards_reborn.arcacite_amulet": "Arcacite Amulet",
+  "item.wizards_reborn.arcacite_ring": "Arcacite Ring",
   "item.wizards_reborn.leather_belt": "Leather Belt",
 
   "gui.wizards_reborn.category.arcanum_dust_transmutation": "Arcanum Dust Transmutation",
@@ -173,6 +178,7 @@
 
   "trim_material.wizards_reborn.arcane_gold": "Arcane Gold Material",
   "trim_material.wizards_reborn.arcanum": "Arcanum Material",
+  "trim_material.wizards_reborn.arcacite": "Arcacite Material",
 
   "item.wizards_reborn.violence_banner_pattern.desc": "Violence",
   "item.wizards_reborn.reproduction_banner_pattern.desc": "Reproduction",

@@ -226,7 +226,7 @@ public class WizardsReborn {
     public static final RegistryObject<Block> ARCANE_WOOD_FENCE_GATE = BLOCKS.register("arcane_wood_fence_gate", () -> new FenceGateBlock(BlockBehaviour.Properties.copy(Blocks.OAK_PLANKS), WoodType.OAK));
     public static final RegistryObject<Block> ARCANE_WOOD_DOOR = BLOCKS.register("arcane_wood_door", () -> new DoorBlock(BlockBehaviour.Properties.copy(Blocks.OAK_PLANKS).noOcclusion(), BlockSetType.OAK));
     public static final RegistryObject<Block> ARCANE_WOOD_TRAPDOOR = BLOCKS.register("arcane_wood_trapdoor", () -> new TrapDoorBlock(BlockBehaviour.Properties.copy(Blocks.OAK_PLANKS).noOcclusion(), BlockSetType.OAK));
-    public static final RegistryObject<Block> ARCANE_WOOD_PRESSURE_PLATE = BLOCKS.register("arcane_wood_pressure_plate", () -> new PressurePlateBlock(PressurePlateBlock.Sensitivity.EVERYTHING, BlockBehaviour.Properties.copy(Blocks.IRON_BLOCK).sound(SoundType.AMETHYST), BlockSetType.OAK));
+    public static final RegistryObject<Block> ARCANE_WOOD_PRESSURE_PLATE = BLOCKS.register("arcane_wood_pressure_plate", () -> new PressurePlateBlock(PressurePlateBlock.Sensitivity.EVERYTHING, BlockBehaviour.Properties.copy(Blocks.OAK_PLANKS).noOcclusion().noCollission(), BlockSetType.OAK));
     public static final RegistryObject<Block> ARCANE_WOOD_BUTTON = BLOCKS.register("arcane_wood_button", () -> new ButtonBlock(BlockBehaviour.Properties.copy(Blocks.OAK_BUTTON).sound(SoundType.WOOD), BlockSetType.OAK, 30, true));
     public static final RegistryObject<Block> ARCANE_WOOD_SIGN = BLOCKS.register("arcane_wood_sign", () -> new CustomStandingSignBlock(BlockBehaviour.Properties.copy(Blocks.OAK_PLANKS).noOcclusion().noCollission(), ARCANE_WOOD_TYPE));
     public static final RegistryObject<Block> ARCANE_WOOD_WALL_SIGN = BLOCKS.register("arcane_wood_wall_sign", () -> new CustomWallSignBlock(BlockBehaviour.Properties.copy(Blocks.OAK_PLANKS).noOcclusion().noCollission(), ARCANE_WOOD_TYPE));
@@ -235,6 +235,21 @@ public class WizardsReborn {
     public static final RegistryObject<Block> ARCANE_WOOD_LEAVES = BLOCKS.register("arcane_wood_leaves", () -> new ArcaneWoodLeavesBlock(BlockBehaviour.Properties.copy(Blocks.OAK_LEAVES).lightLevel((state) -> 5)));
     public static final RegistryObject<Block> ARCANE_WOOD_SAPLING = BLOCKS.register("arcane_wood_sapling", () -> new SaplingBlock(new ArcaneWoodTree(), BlockBehaviour.Properties.copy(Blocks.OAK_SAPLING)));
     public static final RegistryObject<Block> POTTED_ARCANE_WOOD_SAPLING = BLOCKS.register("potted_arcane_wood_sapling", () -> new FlowerPotBlock(ARCANE_WOOD_SAPLING.get(), BlockBehaviour.Properties.copy(Blocks.FLOWER_POT).instabreak().noOcclusion()));
+
+    public static final RegistryObject<Block> WISESTONE = BLOCKS.register("wisestone", () -> new RotatedPillarBlock(BlockBehaviour.Properties.copy(Blocks.DEEPSLATE)));
+    public static final RegistryObject<Block> WISESTONE_STAIRS = BLOCKS.register("wisestone_stairs", () -> new StairBlock(() -> WISESTONE.get().defaultBlockState(), BlockBehaviour.Properties.copy(Blocks.POLISHED_DEEPSLATE)));
+    public static final RegistryObject<Block> WISESTONE_SLAB = BLOCKS.register("wisestone_slab", () -> new SlabBlock(BlockBehaviour.Properties.copy(Blocks.POLISHED_DEEPSLATE)));
+    public static final RegistryObject<Block> WISESTONE_WALL = BLOCKS.register("wisestone_wall", () -> new WallBlock(BlockBehaviour.Properties.copy(Blocks.POLISHED_DEEPSLATE)));
+    public static final RegistryObject<Block> POLISHED_WISESTONE = BLOCKS.register("polished_wisestone", () -> new Block(BlockBehaviour.Properties.copy(Blocks.POLISHED_DEEPSLATE)));
+    public static final RegistryObject<Block> POLISHED_WISESTONE_STAIRS = BLOCKS.register("polished_wisestone_stairs", () -> new StairBlock(() -> POLISHED_WISESTONE.get().defaultBlockState(), BlockBehaviour.Properties.copy(Blocks.POLISHED_DEEPSLATE)));
+    public static final RegistryObject<Block> POLISHED_WISESTONE_SLAB = BLOCKS.register("polished_wisestone_slab", () -> new SlabBlock(BlockBehaviour.Properties.copy(Blocks.POLISHED_DEEPSLATE)));
+    public static final RegistryObject<Block> POLISHED_WISESTONE_WALL = BLOCKS.register("polished_wisestone_wall", () -> new WallBlock(BlockBehaviour.Properties.copy(Blocks.POLISHED_DEEPSLATE)));
+    public static final RegistryObject<Block> WISESTONE_BRICKS = BLOCKS.register("wisestone_bricks", () -> new Block(BlockBehaviour.Properties.copy(Blocks.POLISHED_DEEPSLATE)));
+    public static final RegistryObject<Block> WISESTONE_BRICKS_STAIRS = BLOCKS.register("wisestone_bricks_stairs", () -> new StairBlock(() -> WISESTONE_BRICKS.get().defaultBlockState(), BlockBehaviour.Properties.copy(Blocks.POLISHED_DEEPSLATE)));
+    public static final RegistryObject<Block> WISESTONE_BRICKS_SLAB = BLOCKS.register("wisestone_bricks_slab", () -> new SlabBlock(BlockBehaviour.Properties.copy(Blocks.POLISHED_DEEPSLATE)));
+    public static final RegistryObject<Block> WISESTONE_BRICKS_WALL = BLOCKS.register("wisestone_bricks_wall", () -> new WallBlock(BlockBehaviour.Properties.copy(Blocks.POLISHED_DEEPSLATE)));
+    public static final RegistryObject<Block> POLISHED_WISESTONE_PRESSURE_PLATE = BLOCKS.register("polished_wisestone_pressure_plate", () -> new PressurePlateBlock(PressurePlateBlock.Sensitivity.MOBS, BlockBehaviour.Properties.copy(Blocks.POLISHED_DEEPSLATE).noOcclusion().noCollission(), BlockSetType.POLISHED_BLACKSTONE));
+    public static final RegistryObject<Block> POLISHED_WISESTONE_BUTTON = BLOCKS.register("polished_wisestone_button", () -> new ButtonBlock(BlockBehaviour.Properties.copy(Blocks.POLISHED_BLACKSTONE_BUTTON).sound(SoundType.POLISHED_DEEPSLATE), BlockSetType.OAK, 20, false));
 
     public static final RegistryObject<Block> ARCANE_LINEN = BLOCKS.register("arcane_linen", () -> new ArcaneLinenBlock(BlockBehaviour.Properties.copy(Blocks.WHEAT)));
     public static final RegistryObject<Block> ARCANE_LINEN_HAY = BLOCKS.register("arcane_linen_hay", () -> new HayBlock(BlockBehaviour.Properties.copy(Blocks.HAY_BLOCK)));
@@ -366,6 +381,21 @@ public class WizardsReborn {
     public static final RegistryObject<Item> ARCANE_WOOD_MORTAR = ITEMS.register("arcane_wood_mortar", () -> new MortarItem(new Item.Properties().stacksTo(1)));
     public static final RegistryObject<Item> ARCANE_WOOD_LEAVES_ITEM = ITEMS.register("arcane_wood_leaves", () -> new BlockItem(ARCANE_WOOD_LEAVES.get(), new Item.Properties()));
     public static final RegistryObject<Item> ARCANE_WOOD_SAPLING_ITEM = ITEMS.register("arcane_wood_sapling", () -> new BlockItem(ARCANE_WOOD_SAPLING.get(), new Item.Properties()));
+
+    public static final RegistryObject<Item> WISESTONE_ITEM = ITEMS.register("wisestone", () -> new BlockItem(WISESTONE.get(), new Item.Properties()));
+    public static final RegistryObject<Item> WISESTONE_STAIRS_ITEM = ITEMS.register("wisestone_stairs", () -> new BlockItem(WISESTONE_STAIRS.get(), new Item.Properties()));
+    public static final RegistryObject<Item> WISESTONE_SLAB_ITEM = ITEMS.register("wisestone_slab", () -> new BlockItem(WISESTONE_SLAB.get(), new Item.Properties()));
+    public static final RegistryObject<Item> WISESTONE_WALL_ITEM = ITEMS.register("wisestone_wall", () -> new BlockItem(WISESTONE_WALL.get(), new Item.Properties()));
+    public static final RegistryObject<Item> POLISHED_WISESTONE_ITEM = ITEMS.register("polished_wisestone", () -> new BlockItem(POLISHED_WISESTONE.get(), new Item.Properties()));
+    public static final RegistryObject<Item> POLISHED_WISESTONE_STAIRS_ITEM = ITEMS.register("polished_wisestone_stairs", () -> new BlockItem(POLISHED_WISESTONE_STAIRS.get(), new Item.Properties()));
+    public static final RegistryObject<Item> POLISHED_WISESTONE_SLAB_ITEM = ITEMS.register("polished_wisestone_slab", () -> new BlockItem(POLISHED_WISESTONE_SLAB.get(), new Item.Properties()));
+    public static final RegistryObject<Item> POLISHED_WISESTONE_WALL_ITEM = ITEMS.register("polished_wisestone_wall", () -> new BlockItem(POLISHED_WISESTONE_WALL.get(), new Item.Properties()));
+    public static final RegistryObject<Item> WISESTONE_BRICKS_ITEM = ITEMS.register("wisestone_bricks", () -> new BlockItem(WISESTONE_BRICKS.get(), new Item.Properties()));
+    public static final RegistryObject<Item> WISESTONE_BRICKS_STAIRS_ITEM = ITEMS.register("wisestone_bricks_stairs", () -> new BlockItem(WISESTONE_BRICKS_STAIRS.get(), new Item.Properties()));
+    public static final RegistryObject<Item> WISESTONE_BRICKS_SLAB_ITEM = ITEMS.register("wisestone_bricks_slab", () -> new BlockItem(WISESTONE_BRICKS_SLAB.get(), new Item.Properties()));
+    public static final RegistryObject<Item> WISESTONE_BRICKS_WALL_ITEM = ITEMS.register("wisestone_bricks_wall", () -> new BlockItem(WISESTONE_BRICKS_WALL.get(), new Item.Properties()));
+    public static final RegistryObject<Item> POLISHED_WISESTONE_PRESSURE_PLATE_ITEM = ITEMS.register("polished_wisestone_pressure_plate", () -> new BlockItem(POLISHED_WISESTONE_PRESSURE_PLATE.get(), new Item.Properties()));
+    public static final RegistryObject<Item> POLISHED_WISESTONE_BUTTON_ITEM = ITEMS.register("polished_wisestone_button", () -> new BlockItem(POLISHED_WISESTONE_BUTTON.get(), new Item.Properties()));
 
     public static final RegistryObject<Item> ARCANE_LINEN_SEEDS = ITEMS.register("arcane_linen_seeds", () -> new BlockItem(ARCANE_LINEN.get(), new Item.Properties()));
     public static final RegistryObject<Item> ARCANE_LINEN_ITEM = ITEMS.register("arcane_linen", () -> new Item(new Item.Properties()));

@@ -1,0 +1,9 @@
+{
+  "replace": false,
+  "values": [
+    "wizards_reborn:arcane_gold_helmet",
+    "wizards_reborn:arcane_gold_chestplate",
+    "wizards_reborn:arcane_gold_leggings",
+    "wizards_reborn:arcane_gold_boots"
+  ]
+}

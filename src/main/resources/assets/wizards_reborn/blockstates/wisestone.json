@@ -1,0 +1,62 @@
+{
+  "variants": {
+    "axis=x": [
+      {
+        "model": "wizards_reborn:block/wisestone",
+        "x": 90,
+        "y": 90
+      },
+      {
+        "model": "wizards_reborn:block/wisestone",
+        "x": 90,
+        "y": 90
+      },
+      {
+        "model": "wizards_reborn:block/wisestone",
+        "x": 90,
+        "y": 90
+      },
+      {
+        "model": "wizards_reborn:block/wisestone",
+        "x": 90,
+        "y": 90
+      }
+    ],
+    "axis=y": [
+      {
+        "model": "wizards_reborn:block/wisestone"
+      },
+      {
+        "model": "wizards_reborn:block/wisestone"
+      },
+      {
+        "model": "wizards_reborn:block/wisestone",
+        "y": 180
+      },
+      {
+        "model": "wizards_reborn:block/wisestone",
+        "y": 180
+      }
+    ],
+    "axis=z": [
+      {
+        "model": "wizards_reborn:block/wisestone",
+        "x": 90
+      },
+      {
+        "model": "wizards_reborn:block/wisestone",
+        "x": 90
+      },
+      {
+        "model": "wizards_reborn:block/wisestone",
+        "x": 90,
+        "y": 180
+      },
+      {
+        "model": "wizards_reborn:block/wisestone",
+        "x": 90,
+        "y": 180
+      }
+    ]
+  }
+}

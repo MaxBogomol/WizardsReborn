@@ -80,6 +80,21 @@ public class WizardsRebornItemGroup {
             event.accept(WizardsReborn.ARCANE_WOOD_LEAVES_ITEM);
             event.accept(WizardsReborn.ARCANE_WOOD_SAPLING_ITEM);
 
+            event.accept(WizardsReborn.WISESTONE_ITEM);
+            event.accept(WizardsReborn.WISESTONE_STAIRS_ITEM);
+            event.accept(WizardsReborn.WISESTONE_SLAB_ITEM);
+            event.accept(WizardsReborn.WISESTONE_WALL_ITEM);
+            event.accept(WizardsReborn.POLISHED_WISESTONE_ITEM);
+            event.accept(WizardsReborn.POLISHED_WISESTONE_STAIRS_ITEM);
+            event.accept(WizardsReborn.POLISHED_WISESTONE_SLAB_ITEM);
+            event.accept(WizardsReborn.POLISHED_WISESTONE_WALL_ITEM);
+            event.accept(WizardsReborn.WISESTONE_BRICKS_ITEM);
+            event.accept(WizardsReborn.WISESTONE_BRICKS_STAIRS_ITEM);
+            event.accept(WizardsReborn.WISESTONE_BRICKS_SLAB_ITEM);
+            event.accept(WizardsReborn.WISESTONE_BRICKS_WALL_ITEM);
+            event.accept(WizardsReborn.POLISHED_WISESTONE_PRESSURE_PLATE_ITEM);
+            event.accept(WizardsReborn.POLISHED_WISESTONE_BUTTON_ITEM);
+
             event.accept(WizardsReborn.ARCANE_LINEN_SEEDS);
             event.accept(WizardsReborn.ARCANE_LINEN_ITEM);
             event.accept(WizardsReborn.ARCANE_LINEN_HAY_ITEM);
