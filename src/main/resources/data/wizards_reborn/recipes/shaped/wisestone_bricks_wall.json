@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "group": "stone_wall",
+  "pattern": [
+    "###",
+    "###"
+  ],
+  "key": {
+    "#": {
+      "item": "wizards_reborn:wisestone_bricks"
+    }
+  },
+  "result": {
+    "item": "wizards_reborn:wisestone_bricks_wall",
+    "count": 6
+  }
+}

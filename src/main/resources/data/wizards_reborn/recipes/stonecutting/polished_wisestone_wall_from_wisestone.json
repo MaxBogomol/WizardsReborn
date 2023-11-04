@@ -1,0 +1,8 @@
+{
+  "type": "minecraft:stonecutting",
+  "count": 1,
+  "ingredient": {
+    "item": "wizards_reborn:wisestone"
+  },
+  "result": "wizards_reborn:polished_wisestone_wall"
+}

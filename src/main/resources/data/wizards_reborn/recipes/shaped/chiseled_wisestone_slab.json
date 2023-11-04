@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "group": "stone_slab",
+  "pattern": [
+    "###"
+  ],
+  "key": {
+    "#": {
+      "item": "wizards_reborn:chiseled_wisestone"
+    }
+  },
+  "result": {
+    "item": "wizards_reborn:chiseled_wisestone_slab",
+    "count": 6
+  }
+}

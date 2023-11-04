@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "group": "stone_button",
+  "ingredients": [
+    {
+      "item": "wizards_reborn:polished_wisestone"
+    }
+  ],
+  "result": {
+    "item": "wizards_reborn:polished_wisestone_button"
+  }
+}
