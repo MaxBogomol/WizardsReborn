@@ -292,7 +292,6 @@ public class ArcaneWandItem extends Item implements IWissenItem {
             }
         }
 
-        RenderSystem.enableBlend();
         RenderSystem.blendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
 
         if (render) {
@@ -347,7 +346,7 @@ public class ArcaneWandItem extends Item implements IWissenItem {
             }
         }
 
-        RenderSystem.disableBlend();
+        RenderSystem.defaultBlendFunc();
         RenderSystem.setShaderColor(1F, 1F, 1F, 1F);
     }
 }

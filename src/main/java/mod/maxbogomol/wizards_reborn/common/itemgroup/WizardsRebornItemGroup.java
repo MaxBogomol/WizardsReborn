@@ -92,6 +92,10 @@ public class WizardsRebornItemGroup {
             event.accept(WizardsReborn.WISESTONE_BRICKS_STAIRS_ITEM);
             event.accept(WizardsReborn.WISESTONE_BRICKS_SLAB_ITEM);
             event.accept(WizardsReborn.WISESTONE_BRICKS_WALL_ITEM);
+            event.accept(WizardsReborn.WISESTONE_TILE_ITEM);
+            event.accept(WizardsReborn.WISESTONE_TILE_STAIRS_ITEM);
+            event.accept(WizardsReborn.WISESTONE_TILE_SLAB_ITEM);
+            event.accept(WizardsReborn.WISESTONE_TILE_WALL_ITEM);
             event.accept(WizardsReborn.POLISHED_WISESTONE_PRESSURE_PLATE_ITEM);
             event.accept(WizardsReborn.POLISHED_WISESTONE_BUTTON_ITEM);
 
