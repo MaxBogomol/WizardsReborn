@@ -526,7 +526,7 @@
   "wizards_reborn.arcanemicon.chapter.earth_ray": "Earth ray",
     "wizards_reborn.arcanemicon.page.earth_ray.title": "Earth Ray",
     "wizards_reborn.arcanemicon.page.earth_ray": "A bright ray of wissen that deals physical damage.",
-    "wizards_reborn.arcanemicon.page.earth_ray.char": "",
+    "wizards_reborn.arcanemicon.page.earth_ray.char": "[minecraft:sneak]",
   "wizards_reborn.arcanemicon.chapter.water_ray": "Water Ray",
     "wizards_reborn.arcanemicon.page.water_ray.title": "Water Ray",
     "wizards_reborn.arcanemicon.page.water_ray": "A bright ray of wissen that causes suffocation. Puts out the fire.",

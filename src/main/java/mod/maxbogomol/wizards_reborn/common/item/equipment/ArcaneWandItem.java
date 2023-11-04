@@ -9,6 +9,7 @@ import mod.maxbogomol.wizards_reborn.api.spell.Spell;
 import mod.maxbogomol.wizards_reborn.api.spell.Spells;
 import mod.maxbogomol.wizards_reborn.api.wissen.IWissenItem;
 import mod.maxbogomol.wizards_reborn.api.wissen.WissenItemUtils;
+import mod.maxbogomol.wizards_reborn.client.config.ClientConfig;
 import mod.maxbogomol.wizards_reborn.common.item.CrystalItem;
 import mod.maxbogomol.wizards_reborn.common.item.ItemBackedInventory;
 import mod.maxbogomol.wizards_reborn.utils.ColorUtils;
@@ -200,6 +201,9 @@ public class ArcaneWandItem extends Item implements IWissenItem {
 
     @Override
     public UseAnim getUseAnimation(ItemStack stack) {
+        if (!ClientConfig.SPELLS_FIRST_PERSON_ITEM_ANIMATIONS.get()) {
+            return UseAnim.NONE;
+        }
         CompoundTag nbt = stack.getTag();
         if (canSpell(stack)) {
             Spell spell = Spells.getSpell(nbt.getString("spell"));

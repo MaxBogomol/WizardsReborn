@@ -4,6 +4,7 @@ import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.math.Axis;
 import mod.maxbogomol.wizards_reborn.api.spell.Spell;
 import mod.maxbogomol.wizards_reborn.api.spell.Spells;
+import mod.maxbogomol.wizards_reborn.client.config.ClientConfig;
 import mod.maxbogomol.wizards_reborn.common.item.equipment.ArcaneWandItem;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.model.ArmedModel;
@@ -29,13 +30,15 @@ public abstract class ItemInHandLayerMixin {
     @Inject(at = @At(value = "INVOKE", target = "Lnet/minecraft/client/renderer/ItemInHandRenderer;renderItem(Lnet/minecraft/world/entity/LivingEntity;Lnet/minecraft/world/item/ItemStack;Lnet/minecraft/world/item/ItemDisplayContext;ZLcom/mojang/blaze3d/vertex/PoseStack;Lnet/minecraft/client/renderer/MultiBufferSource;I)V"), method = "renderArmWithItem")
     public void renderArmWithItem(LivingEntity pLivingEntity, ItemStack pItemStack, ItemDisplayContext pDisplayContext, HumanoidArm pArm, PoseStack pPoseStack, MultiBufferSource pBuffer, int pPackedLight, CallbackInfo ci) {
         if (pLivingEntity.isUsingItem() && pLivingEntity.getUseItemRemainingTicks() > 0) {
-            if (pItemStack.getItem() instanceof ArcaneWandItem) {
-                CompoundTag nbt = pItemStack.getTag();
-                if (nbt.getBoolean("crystal")) {
-                    if (nbt.getString("spell") != "") {
-                        Spell spell = Spells.getSpell(nbt.getString("spell"));
-                        if (spell.hasCustomAnimation(pItemStack)) {
-                            spell.renderArmWithItem(pLivingEntity, pItemStack, pDisplayContext, pArm, pPoseStack, pBuffer, pPackedLight);
+            if (ClientConfig.SPELLS_ITEM_ANIMATIONS.get()) {
+                if (pItemStack.getItem() instanceof ArcaneWandItem) {
+                    CompoundTag nbt = pItemStack.getTag();
+                    if (nbt.getBoolean("crystal")) {
+                        if (nbt.getString("spell") != "") {
+                            Spell spell = Spells.getSpell(nbt.getString("spell"));
+                            if (spell.hasCustomAnimation(pItemStack)) {
+                                spell.renderArmWithItem(pLivingEntity, pItemStack, pDisplayContext, pArm, pPoseStack, pBuffer, pPackedLight);
+                            }
                         }
                     }
                 }
