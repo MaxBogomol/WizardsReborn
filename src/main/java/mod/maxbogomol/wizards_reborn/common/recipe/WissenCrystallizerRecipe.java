@@ -144,7 +144,7 @@ public class WissenCrystallizerRecipe implements Recipe<Container> {
 
         @Override
         public WissenCrystallizerRecipe fromJson(ResourceLocation recipeId, JsonObject json) {
-            ItemStack output = ShapedRecipe.itemFromJson(GsonHelper.getAsJsonObject(json, "output")).getDefaultInstance();
+            ItemStack output = ShapedRecipe.itemStackFromJson(GsonHelper.getAsJsonObject(json, "output"));
             int wissen = GsonHelper.getAsInt(json, "wissen");
             JsonArray ingrs = GsonHelper.getAsJsonArray(json, "ingredients");
             List<Ingredient> inputs = new ArrayList<>();

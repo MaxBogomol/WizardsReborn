@@ -2,6 +2,7 @@ package mod.maxbogomol.wizards_reborn.common.spell.ray;
 
 import mod.maxbogomol.wizards_reborn.WizardsReborn;
 import mod.maxbogomol.wizards_reborn.api.crystal.CrystalUtils;
+import mod.maxbogomol.wizards_reborn.api.wissen.WissenItemUtils;
 import mod.maxbogomol.wizards_reborn.common.entity.SpellProjectileEntity;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.Entity;
@@ -27,11 +28,15 @@ public class VoidRaySpell extends RaySpell {
     public void onImpact(HitResult ray, Level world, SpellProjectileEntity projectile, Player player, Entity target) {
         super.onImpact(ray, world, projectile, player, target);
 
-        if (target.tickCount % 10 == 0) {
-            ItemStack stack = player.getItemInHand(player.getUsedItemHand());
-            removeWissen(stack, projectile.getStats());
-            int focusLevel = CrystalUtils.getStatLevel(projectile.getStats(), WizardsReborn.FOCUS_CRYSTAL_STAT);
-            target.hurt(new DamageSource(target.damageSources().magic().typeHolder(), projectile, player), (float) (2.5f + (focusLevel * 1.0)));
+        if (player != null) {
+            if (target.tickCount % 10 == 0) {
+                ItemStack stack = player.getItemInHand(player.getUsedItemHand());
+                if (WissenItemUtils.canRemoveWissen(stack, getWissenCostWithStat(projectile.getStats(), player))) {
+                    removeWissen(stack, projectile.getStats(), player);
+                    int focusLevel = CrystalUtils.getStatLevel(projectile.getStats(), WizardsReborn.FOCUS_CRYSTAL_STAT);
+                    target.hurt(new DamageSource(target.damageSources().magic().typeHolder(), projectile, player), (float) (2.5f + (focusLevel * 1.0)));
+                }
+            }
         }
     }
 }

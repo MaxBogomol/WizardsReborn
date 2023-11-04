@@ -86,7 +86,7 @@ public class MortarRecipe implements Recipe<Container>  {
         @Override
         public MortarRecipe fromJson(ResourceLocation recipeId, JsonObject json) {
             Ingredient input = Ingredient.fromJson(GsonHelper.getAsJsonObject(json, "from"));
-            ItemStack output = ShapedRecipe.itemFromJson(GsonHelper.getAsJsonObject(json, "to")).getDefaultInstance();
+            ItemStack output = ShapedRecipe.itemStackFromJson(GsonHelper.getAsJsonObject(json, "to"));
 
             return new MortarRecipe(recipeId, input, output);
         }

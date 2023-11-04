@@ -1,0 +1,8 @@
+{
+  "parent": "minecraft:block/slab",
+  "textures": {
+    "bottom": "wizards_reborn:block/chiseled_wisestone",
+    "top": "wizards_reborn:block/chiseled_wisestone",
+    "side": "wizards_reborn:block/chiseled_wisestone"
+  }
+}

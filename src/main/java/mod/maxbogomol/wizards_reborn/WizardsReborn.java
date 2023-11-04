@@ -252,6 +252,10 @@ public class WizardsReborn {
     public static final RegistryObject<Block> WISESTONE_TILE_STAIRS = BLOCKS.register("wisestone_tile_stairs", () -> new StairBlock(() -> WISESTONE_BRICKS.get().defaultBlockState(), BlockBehaviour.Properties.copy(Blocks.POLISHED_DEEPSLATE)));
     public static final RegistryObject<Block> WISESTONE_TILE_SLAB = BLOCKS.register("wisestone_tile_slab", () -> new SlabBlock(BlockBehaviour.Properties.copy(Blocks.POLISHED_DEEPSLATE)));
     public static final RegistryObject<Block> WISESTONE_TILE_WALL = BLOCKS.register("wisestone_tile_wall", () -> new WallBlock(BlockBehaviour.Properties.copy(Blocks.POLISHED_DEEPSLATE)));
+    public static final RegistryObject<Block> CHISELED_WISESTONE = BLOCKS.register("chiseled_wisestone", () -> new Block(BlockBehaviour.Properties.copy(Blocks.POLISHED_DEEPSLATE)));
+    public static final RegistryObject<Block> CHISELED_WISESTONE_STAIRS = BLOCKS.register("chiseled_wisestone_stairs", () -> new StairBlock(() -> POLISHED_WISESTONE.get().defaultBlockState(), BlockBehaviour.Properties.copy(Blocks.POLISHED_DEEPSLATE)));
+    public static final RegistryObject<Block> CHISELED_WISESTONE_SLAB = BLOCKS.register("chiseled_wisestone_slab", () -> new SlabBlock(BlockBehaviour.Properties.copy(Blocks.POLISHED_DEEPSLATE)));
+    public static final RegistryObject<Block> CHISELED_WISESTONE_WALL = BLOCKS.register("chiseled_wisestone_wall", () -> new WallBlock(BlockBehaviour.Properties.copy(Blocks.POLISHED_DEEPSLATE)));
     public static final RegistryObject<Block> POLISHED_WISESTONE_PRESSURE_PLATE = BLOCKS.register("polished_wisestone_pressure_plate", () -> new PressurePlateBlock(PressurePlateBlock.Sensitivity.MOBS, BlockBehaviour.Properties.copy(Blocks.POLISHED_DEEPSLATE).noOcclusion().noCollission(), BlockSetType.POLISHED_BLACKSTONE));
     public static final RegistryObject<Block> POLISHED_WISESTONE_BUTTON = BLOCKS.register("polished_wisestone_button", () -> new ButtonBlock(BlockBehaviour.Properties.copy(Blocks.POLISHED_BLACKSTONE_BUTTON).sound(SoundType.POLISHED_DEEPSLATE), BlockSetType.OAK, 20, false));
 
@@ -402,6 +406,10 @@ public class WizardsReborn {
     public static final RegistryObject<Item> WISESTONE_TILE_STAIRS_ITEM = ITEMS.register("wisestone_tile_stairs", () -> new BlockItem(WISESTONE_TILE_STAIRS.get(), new Item.Properties()));
     public static final RegistryObject<Item> WISESTONE_TILE_SLAB_ITEM = ITEMS.register("wisestone_tile_slab", () -> new BlockItem(WISESTONE_TILE_SLAB.get(), new Item.Properties()));
     public static final RegistryObject<Item> WISESTONE_TILE_WALL_ITEM = ITEMS.register("wisestone_tile_wall", () -> new BlockItem(WISESTONE_TILE_WALL.get(), new Item.Properties()));
+    public static final RegistryObject<Item> CHISELED_WISESTONE_ITEM = ITEMS.register("chiseled_wisestone", () -> new BlockItem(CHISELED_WISESTONE.get(), new Item.Properties()));
+    public static final RegistryObject<Item> CHISELED_WISESTONE_STAIRS_ITEM = ITEMS.register("chiseled_wisestone_stairs", () -> new BlockItem(CHISELED_WISESTONE_STAIRS.get(), new Item.Properties()));
+    public static final RegistryObject<Item> CHISELED_WISESTONE_SLAB_ITEM = ITEMS.register("chiseled_wisestone_slab", () -> new BlockItem(CHISELED_WISESTONE_SLAB.get(), new Item.Properties()));
+    public static final RegistryObject<Item> CHISELED_WISESTONE_WALL_ITEM = ITEMS.register("chiseled_wisestone_wall", () -> new BlockItem(CHISELED_WISESTONE_WALL.get(), new Item.Properties()));
     public static final RegistryObject<Item> POLISHED_WISESTONE_PRESSURE_PLATE_ITEM = ITEMS.register("polished_wisestone_pressure_plate", () -> new BlockItem(POLISHED_WISESTONE_PRESSURE_PLATE.get(), new Item.Properties()));
     public static final RegistryObject<Item> POLISHED_WISESTONE_BUTTON_ITEM = ITEMS.register("polished_wisestone_button", () -> new BlockItem(POLISHED_WISESTONE_BUTTON.get(), new Item.Properties()));
 

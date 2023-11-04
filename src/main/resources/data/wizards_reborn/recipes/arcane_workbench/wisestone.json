@@ -1,0 +1,22 @@
+{
+  "type": "wizards_reborn:arcane_workbench",
+  "pattern": [
+    "###",
+    "#A#",
+    "###",
+    "____"
+  ],
+  "key": {
+    "#": {
+      "tag": "minecraft:stone_tool_materials"
+    },
+    "A": {
+      "item": "wizards_reborn:arcanum"
+    }
+  },
+  "output": {
+    "item": "wizards_reborn:wisestone",
+    "count": 8
+  },
+  "wissen": 100
+}

@@ -72,7 +72,7 @@ public class WissenCrystallizerTileEntity extends ExposedTileSimpleInventory imp
                     wissenIsCraft = 0;
                     startCraft = false;
 
-                    ItemStack stack = recipe.get().getResultItem(RegistryAccess.EMPTY);
+                    ItemStack stack = recipe.get().getResultItem(RegistryAccess.EMPTY).copy();
                     if (recipe.get().getRecipeIsNBTCrystal()) {
                         CrystalUtils.createCrystalFromFractured(stack, getItemHandler());
                     }

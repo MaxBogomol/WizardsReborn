@@ -2,6 +2,7 @@ package mod.maxbogomol.wizards_reborn.common.spell.ray;
 
 import mod.maxbogomol.wizards_reborn.WizardsReborn;
 import mod.maxbogomol.wizards_reborn.api.crystal.CrystalUtils;
+import mod.maxbogomol.wizards_reborn.api.wissen.WissenItemUtils;
 import mod.maxbogomol.wizards_reborn.common.entity.SpellProjectileEntity;
 import mod.maxbogomol.wizards_reborn.common.network.PacketHandler;
 import mod.maxbogomol.wizards_reborn.common.network.spell.FireRaySpellEffectPacket;
@@ -41,16 +42,20 @@ public class FireRaySpell extends RaySpell {
     public void onImpact(HitResult ray, Level world, SpellProjectileEntity projectile, Player player, Entity target) {
         super.onImpact(ray, world, projectile, player, target);
 
-        if (target.tickCount % 10 == 0) {
-            ItemStack stack = player.getItemInHand(player.getUsedItemHand());
-            removeWissen(stack, projectile.getStats());
-            int focusLevel = CrystalUtils.getStatLevel(projectile.getStats(), WizardsReborn.FOCUS_CRYSTAL_STAT);
-            target.hurt(new DamageSource(target.damageSources().onFire().typeHolder(), projectile, player), (float) (1.5f + (focusLevel * 0.5)));
-            int fire = target.getRemainingFireTicks() + 5;
-            if (fire > 10) {
-                fire = 10;
+        if (player != null) {
+            if (target.tickCount % 10 == 0) {
+                ItemStack stack = player.getItemInHand(player.getUsedItemHand());
+                if (WissenItemUtils.canRemoveWissen(stack, getWissenCostWithStat(projectile.getStats(), player))) {
+                    removeWissen(stack, projectile.getStats(), player);
+                    int focusLevel = CrystalUtils.getStatLevel(projectile.getStats(), WizardsReborn.FOCUS_CRYSTAL_STAT);
+                    target.hurt(new DamageSource(target.damageSources().onFire().typeHolder(), projectile, player), (float) (1.5f + (focusLevel * 0.5)));
+                    int fire = target.getRemainingFireTicks() + 5;
+                    if (fire > 10) {
+                        fire = 10;
+                    }
+                    target.setSecondsOnFire(fire);
+                }
             }
-            target.setSecondsOnFire(fire);
         }
     }
 
@@ -61,6 +66,7 @@ public class FireRaySpell extends RaySpell {
         if (player != null) {
             if (player.isShiftKeyDown()) {
                 int focusLevel = CrystalUtils.getStatLevel(projectile.getStats(), WizardsReborn.FOCUS_CRYSTAL_STAT);
+                ItemStack stack = player.getItemInHand(player.getUsedItemHand());
 
                 Color color = getColor();
                 float r = color.getRed() / 255f;
@@ -68,29 +74,29 @@ public class FireRaySpell extends RaySpell {
                 float b = color.getBlue() / 255f;
 
                 if (projectile.tickCount % (15 - (focusLevel * 3)) == 0) {
-                    Vec3 vec = getBlockHitOffset(ray, projectile, -0.1f);
-                    BlockPos blockPos = new BlockPos((int) vec.x(), (int) vec.y(), (int) vec.z());
-                    BlockState blockState = world.getBlockState(blockPos);
-                    if (!CampfireBlock.canLight(blockState) && !CandleBlock.canLight(blockState) && !CandleCakeBlock.canLight(blockState)) {
-                        if (BaseFireBlock.canBePlacedAt(world, blockPos, Direction.UP)) {
-                            world.playSound(null, blockPos, SoundEvents.FIRECHARGE_USE, SoundSource.BLOCKS, 0.1F, world.getRandom().nextFloat() * 0.4F + 0.8F);
-                            BlockState blockstate1 = BaseFireBlock.getState(world, blockPos);
-                            world.setBlock(blockPos, blockstate1, 11);
+                    if (WissenItemUtils.canRemoveWissen(stack, getWissenCostWithStat(projectile.getStats(), player))) {
+                        Vec3 vec = getBlockHitOffset(ray, projectile, -0.1f);
+                        BlockPos blockPos = new BlockPos((int) vec.x(), (int) vec.y(), (int) vec.z());
+                        BlockState blockState = world.getBlockState(blockPos);
+                        if (!CampfireBlock.canLight(blockState) && !CandleBlock.canLight(blockState) && !CandleCakeBlock.canLight(blockState)) {
+                            if (BaseFireBlock.canBePlacedAt(world, blockPos, Direction.UP)) {
+                                world.playSound(null, blockPos, SoundEvents.FIRECHARGE_USE, SoundSource.BLOCKS, 0.1F, world.getRandom().nextFloat() * 0.4F + 0.8F);
+                                BlockState blockstate1 = BaseFireBlock.getState(world, blockPos);
+                                world.setBlock(blockPos, blockstate1, 11);
 
-                            ItemStack stack = player.getItemInHand(player.getUsedItemHand());
-                            removeWissen(stack, projectile.getStats());
+                                removeWissen(stack, projectile.getStats(), player);
 
-                            PacketHandler.sendToTracking(world, player.getOnPos(), new FireRaySpellEffectPacket((float) blockPos.getX() + 0.5f, (float) blockPos.getY() + 0.2f, (float) blockPos.getZ() + 0.5f, r, g, b));
+                                PacketHandler.sendToTracking(world, player.getOnPos(), new FireRaySpellEffectPacket((float) blockPos.getX() + 0.5f, (float) blockPos.getY() + 0.2f, (float) blockPos.getZ() + 0.5f, r, g, b));
+                            }
+                        } else {
+                            world.playSound(player, blockPos, SoundEvents.FLINTANDSTEEL_USE, SoundSource.BLOCKS, 1.0F, world.getRandom().nextFloat() * 0.4F + 0.8F);
+                            world.setBlock(blockPos, blockState.setValue(BlockStateProperties.LIT, Boolean.valueOf(true)), 11);
+                            world.gameEvent(player, GameEvent.BLOCK_CHANGE, blockPos);
+
+                            removeWissen(stack, projectile.getStats(), player);
+
+                            PacketHandler.sendToTracking(world, player.getOnPos(), new FireRaySpellEffectPacket((float) blockPos.getX() + 0.5f, (float) blockPos.getY() + 0.5f, (float) blockPos.getZ() + 0.5f, r, g, b));
                         }
-                    } else {
-                        world.playSound(player, blockPos, SoundEvents.FLINTANDSTEEL_USE, SoundSource.BLOCKS, 1.0F, world.getRandom().nextFloat() * 0.4F + 0.8F);
-                        world.setBlock(blockPos, blockState.setValue(BlockStateProperties.LIT, Boolean.valueOf(true)), 11);
-                        world.gameEvent(player, GameEvent.BLOCK_CHANGE, blockPos);
-
-                        ItemStack stack = player.getItemInHand(player.getUsedItemHand());
-                        removeWissen(stack, projectile.getStats());
-
-                        PacketHandler.sendToTracking(world, player.getOnPos(), new FireRaySpellEffectPacket((float) blockPos.getX() + 0.5f, (float) blockPos.getY() + 0.5f, (float) blockPos.getZ() + 0.5f, r, g, b));
                     }
                 }
             }

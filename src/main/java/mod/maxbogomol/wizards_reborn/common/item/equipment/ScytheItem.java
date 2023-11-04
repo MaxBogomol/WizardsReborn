@@ -18,6 +18,7 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.SwordItem;
 import net.minecraft.world.item.Tier;
+import net.minecraft.world.item.context.UseOnContext;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.CropBlock;
@@ -46,14 +47,23 @@ public class ScytheItem extends SwordItem {
         return slot == EquipmentSlot.MAINHAND ? atts.build() : super.getDefaultAttributeModifiers(slot);
     }
 
-    public InteractionResult onBlockUse(Player player, Level world, InteractionHand hand,
-                                        net.minecraft.world.phys.BlockHitResult hitResult,
-                                        boolean initialCall) {
+    @Override
+    public InteractionResult onItemUseFirst(ItemStack stack, UseOnContext context) {
+        Player player = context.getPlayer();
+        InteractionHand hand = context.getHand();
+        Level world = context.getLevel();
+        BlockPos blockpos = context.getClickedPos();
+        InteractionResult res = onBlockUse(player, world, hand, blockpos, true);
+
+        return res;
+    }
+
+    public InteractionResult onBlockUse(Player player, Level world, InteractionHand hand, BlockPos blockPos, boolean initialCall) {
         if (player.isSpectator() || hand == InteractionHand.OFF_HAND) {
             return InteractionResult.PASS;
         }
 
-        BlockState state = world.getBlockState(hitResult.getBlockPos());
+        BlockState state = world.getBlockState(blockPos);
         ItemStack stack = player.getItemInHand(hand);
 
         if (state.getBlock() instanceof CropBlock) {
@@ -61,25 +71,25 @@ public class ScytheItem extends SwordItem {
                 if (radius != 0 && initialCall) {
                     for (int x = -radius; x <= radius; x++) {
                         for (int z = -radius; z <= radius; z++) {
-                            BlockPos pos = hitResult.getBlockPos().relative(Direction.Axis.X, x)
+                            BlockPos pos = blockPos.relative(Direction.Axis.X, x)
                                     .relative(Direction.Axis.Z, z);
-                            onBlockUse(player, world, hand, hitResult.withPosition(pos), false);
+                            onBlockUse(player, world, hand, pos, false);
                         }
                     }
                 }
 
                 if (!world.isClientSide) {
-                    BlockEvent.BreakEvent breakEv = new BlockEvent.BreakEvent(world, hitResult.getBlockPos(), state, player);
+                    BlockEvent.BreakEvent breakEv = new BlockEvent.BreakEvent(world, blockPos, state, player);
                     if (MinecraftForge.EVENT_BUS.post(breakEv)) return InteractionResult.FAIL;
                     BlockState replantState = getReplantState(state);
                     BlockEvent.EntityPlaceEvent placeEv = new BlockEvent.EntityPlaceEvent(
-                            BlockSnapshot.create(world.dimension(), world, hitResult.getBlockPos()),
-                            world.getBlockState(hitResult.getBlockPos().below()),
+                            BlockSnapshot.create(world.dimension(), world, blockPos),
+                            world.getBlockState(blockPos.below()),
                             player
                     );
                     if (MinecraftForge.EVENT_BUS.post(placeEv)) return InteractionResult.FAIL;
-                    world.setBlockAndUpdate(hitResult.getBlockPos(), replantState);
-                    dropStacks(state, (ServerLevel) world, hitResult.getBlockPos(), player,
+                    world.setBlockAndUpdate(blockPos, replantState);
+                    dropStacks(state, (ServerLevel) world, blockPos, player,
                             player.getItemInHand(hand));
 
                     stack.hurtAndBreak(1, player, (entity) -> entity.broadcastBreakEvent(hand));

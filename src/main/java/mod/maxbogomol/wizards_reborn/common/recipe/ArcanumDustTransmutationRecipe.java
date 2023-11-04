@@ -107,7 +107,7 @@ public class ArcanumDustTransmutationRecipe implements Recipe<Container>  {
             ItemStack display = ItemStack.EMPTY;
             boolean place_block = true;
             if (GsonHelper.isValidNode(json, "display")) {
-                display = ShapedRecipe.itemFromJson(GsonHelper.getAsJsonObject(json, "display")).getDefaultInstance();
+                display = ShapedRecipe.itemStackFromJson(GsonHelper.getAsJsonObject(json, "display"));
             }
             if (GsonHelper.isValidNode(json, "place_block")) {
                 place_block = GsonHelper.getAsBoolean(json, "place_block");

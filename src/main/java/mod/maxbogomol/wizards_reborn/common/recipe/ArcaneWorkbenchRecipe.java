@@ -126,7 +126,7 @@ public class ArcaneWorkbenchRecipe implements Recipe<Container> {
                 }
             }
 
-            ItemStack output = ShapedRecipe.itemFromJson(GsonHelper.getAsJsonObject(json, "output")).getDefaultInstance();
+            ItemStack output = ShapedRecipe.itemStackFromJson(GsonHelper.getAsJsonObject(json, "output"));
             int wissen = GsonHelper.getAsInt(json, "wissen");
 
             return new ArcaneWorkbenchRecipe(recipeId, output, wissen, inputs.toArray(new Ingredient[0]));
