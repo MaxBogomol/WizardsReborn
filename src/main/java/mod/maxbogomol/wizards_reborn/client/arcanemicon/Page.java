@@ -3,6 +3,7 @@ package mod.maxbogomol.wizards_reborn.client.arcanemicon;
 import mod.maxbogomol.wizards_reborn.WizardsRebornClient;
 import mod.maxbogomol.wizards_reborn.utils.ColorUtils;
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.OptionInstance;
 import net.minecraft.client.Options;
 import net.minecraft.client.gui.Font;
 import net.minecraft.client.gui.GuiGraphics;
@@ -46,7 +47,7 @@ public abstract class Page {
             text = text.replace("wizards_reborn:wandMenu", WizardsRebornClient.OPEN_WAND_SELECTION_KEY.getTranslatedKeyMessage().getString());
         }
         if (text.contains("minecraft:sneak")) {
-            text = text.replace("minecraft:sneak", Component.translatable("key.sneak").getString());
+            text = text.replace("minecraft:sneak", Minecraft.getInstance().options.keyShift.getTranslatedKeyMessage().getString());
         }
         String[] words = text.split(" ");
         String line = "";

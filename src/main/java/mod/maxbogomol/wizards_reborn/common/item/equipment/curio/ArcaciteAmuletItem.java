@@ -11,17 +11,15 @@ import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.ai.attributes.Attribute;
 import net.minecraft.world.entity.ai.attributes.AttributeModifier;
-import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import top.theillusivec4.curios.api.SlotContext;
 import top.theillusivec4.curios.api.type.capability.ICurio;
-import top.theillusivec4.curios.api.type.capability.ICurioItem;
 
 import javax.annotation.Nonnull;
 import java.util.UUID;
 
-public class ArcaciteAmuletItem extends Item implements ICurioItem, ICurioItemTexture, IWissenItem {
+public class ArcaciteAmuletItem extends BaseCurioItem implements IWissenItem {
 
     private static final ResourceLocation AMULET_TEXTURE = new ResourceLocation(WizardsReborn.MOD_ID,"textures/entity/curio/arcacite_amulet.png");
 
@@ -33,11 +31,6 @@ public class ArcaciteAmuletItem extends Item implements ICurioItem, ICurioItemTe
     @Override
     public ICurio.SoundInfo getEquipSound(SlotContext slotContext, ItemStack stack) {
         return new ICurio.SoundInfo(SoundEvents.ARMOR_EQUIP_GOLD, 1.0f, 1.0f);
-    }
-
-    @Override
-    public boolean canEquipFromUse(SlotContext slot, ItemStack stack) {
-        return true;
     }
 
     @Override
