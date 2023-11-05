@@ -8,6 +8,7 @@ import mod.maxbogomol.wizards_reborn.common.network.PacketHandler;
 import mod.maxbogomol.wizards_reborn.common.network.spell.EarthRaySpellEffectPacket;
 import net.minecraft.core.BlockPos;
 import net.minecraft.tags.BlockTags;
+import net.minecraft.util.Mth;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.player.Inventory;
@@ -61,7 +62,7 @@ public class EarthRaySpell extends RaySpell {
                 if (projectile.tickCount % (20 - (focusLevel * 3)) == 0) {
                     if (WissenItemUtils.canRemoveWissen(stack, getWissenCostWithStat(projectile.getStats(), player))) {
                         Vec3 vec = getBlockHitOffset(ray, projectile, 0.1f);
-                        BlockPos blockPos = new BlockPos((int) vec.x(), (int) vec.y(), (int) vec.z());
+                        BlockPos blockPos = new BlockPos(Mth.floor(vec.x()), Mth.floor(vec.y()), Mth.floor(vec.z()));
                         BlockState blockState = world.getBlockState(blockPos);
                         if (!blockState.isAir()) {
                             if (canBreak(blockState)) {

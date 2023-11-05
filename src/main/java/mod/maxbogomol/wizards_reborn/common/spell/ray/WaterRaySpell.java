@@ -8,6 +8,7 @@ import mod.maxbogomol.wizards_reborn.common.network.PacketHandler;
 import mod.maxbogomol.wizards_reborn.common.network.spell.WaterRaySpellEffectPacket;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.util.Mth;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.player.Player;
@@ -59,7 +60,7 @@ public class WaterRaySpell extends RaySpell {
         if (player != null) {
             if (player.isShiftKeyDown()) {
                 Vec3 vec = getBlockHitOffset(ray, projectile, -0.1f);
-                BlockPos blockPos = new BlockPos((int) vec.x(), (int) vec.y(), (int) vec.z());
+                BlockPos blockPos = new BlockPos(Mth.floor(vec.x()), Mth.floor(vec.y()), Mth.floor(vec.z()));
 
                 int focusLevel = CrystalUtils.getStatLevel(projectile.getStats(), WizardsReborn.FOCUS_CRYSTAL_STAT);
                 int radius = focusLevel + 1;

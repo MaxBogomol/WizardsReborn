@@ -10,6 +10,7 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
+import net.minecraft.util.Mth;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.player.Player;
@@ -76,7 +77,7 @@ public class FireRaySpell extends RaySpell {
                 if (projectile.tickCount % (15 - (focusLevel * 3)) == 0) {
                     if (WissenItemUtils.canRemoveWissen(stack, getWissenCostWithStat(projectile.getStats(), player))) {
                         Vec3 vec = getBlockHitOffset(ray, projectile, -0.1f);
-                        BlockPos blockPos = new BlockPos((int) vec.x(), (int) vec.y(), (int) vec.z());
+                        BlockPos blockPos = new BlockPos(Mth.floor(vec.x()), Mth.floor(vec.y()), Mth.floor(vec.z()));
                         BlockState blockState = world.getBlockState(blockPos);
                         if (!CampfireBlock.canLight(blockState) && !CandleBlock.canLight(blockState) && !CandleCakeBlock.canLight(blockState)) {
                             if (BaseFireBlock.canBePlacedAt(world, blockPos, Direction.UP)) {
