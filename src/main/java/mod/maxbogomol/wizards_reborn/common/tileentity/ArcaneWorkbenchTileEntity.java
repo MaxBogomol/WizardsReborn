@@ -6,27 +6,28 @@ import mod.maxbogomol.wizards_reborn.api.wissen.IWissenTileEntity;
 import mod.maxbogomol.wizards_reborn.api.wissen.IWissenWandFunctionalTileEntity;
 import mod.maxbogomol.wizards_reborn.api.wissen.WissenUtils;
 import mod.maxbogomol.wizards_reborn.client.particle.Particles;
-import mod.maxbogomol.wizards_reborn.common.network.tileentity.ArcaneWorkbenchBurstEffectPacket;
 import mod.maxbogomol.wizards_reborn.common.network.PacketHandler;
+import mod.maxbogomol.wizards_reborn.common.network.tileentity.ArcaneWorkbenchBurstEffectPacket;
 import mod.maxbogomol.wizards_reborn.common.recipe.ArcaneWorkbenchRecipe;
 import mod.maxbogomol.wizards_reborn.utils.PacketUtils;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
 import net.minecraft.core.RegistryAccess;
-import net.minecraft.sounds.SoundSource;
-import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.SimpleContainer;
-import net.minecraft.world.item.ItemStack;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.Connection;
 import net.minecraft.network.protocol.game.ClientboundBlockEntityDataPacket;
+import net.minecraft.sounds.SoundSource;
+import net.minecraft.world.SimpleContainer;
+import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.entity.BlockEntityType;
-import net.minecraft.core.Direction;
+import net.minecraft.world.level.block.state.BlockState;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.capabilities.ForgeCapabilities;
 import net.minecraftforge.common.util.LazyOptional;
 import net.minecraftforge.items.IItemHandler;
 import net.minecraftforge.items.ItemHandlerHelper;
 import net.minecraftforge.items.ItemStackHandler;
+import net.minecraftforge.items.wrapper.CombinedInvWrapper;
 import org.jetbrains.annotations.NotNull;
 
 import javax.annotation.Nonnull;
@@ -37,8 +38,10 @@ import java.util.Random;
 import static net.minecraft.world.level.block.state.properties.BlockStateProperties.HORIZONTAL_FACING;
 
 public class ArcaneWorkbenchTileEntity extends TileSimpleInventory implements TickableBlockEntity, IWissenTileEntity, ICooldownTileEntity, IWissenWandFunctionalTileEntity {
-    public final ItemStackHandler itemHandler = createHandler();
+    public final ItemStackHandler itemHandler = createHandler(13);
     public final LazyOptional<IItemHandler> handler = LazyOptional.of(() -> itemHandler);
+    public final ItemStackHandler itemOutputHandler = createHandler(1);
+    public final LazyOptional<IItemHandler> outputHandler = LazyOptional.of(() -> itemOutputHandler);
 
     public int wissenInCraft= 0;
     public int wissenIsCraft = 0;
@@ -60,10 +63,11 @@ public class ArcaneWorkbenchTileEntity extends TileSimpleInventory implements Ti
     public void tick() {
         if (!level.isClientSide()) {
             boolean update = false;
-            SimpleContainer inv = new SimpleContainer(itemHandler.getSlots());
+            SimpleContainer inv = new SimpleContainer(itemHandler.getSlots() + 1);
             for (int i = 0; i < itemHandler.getSlots(); i++) {
                 inv.setItem(i, itemHandler.getStackInSlot(i));
             }
+            inv.setItem(13, itemOutputHandler.getStackInSlot(0));
 
             Optional<ArcaneWorkbenchRecipe> recipe = level.getRecipeManager().getRecipeFor(WizardsReborn.ARCANE_WORKBENCH_RECIPE.get(), inv, level);
             wissenInCraft = recipe.map(ArcaneWorkbenchRecipe::getRecipeWissen).orElse(0);
@@ -109,11 +113,11 @@ public class ArcaneWorkbenchTileEntity extends TileSimpleInventory implements Ti
                         wissenIsCraft = 0;
                         startCraft = false;
 
-                        output.setCount(itemHandler.getStackInSlot(13).getCount() + output.getCount());
+                        output.setCount(itemOutputHandler.getStackInSlot(0).getCount() + output.getCount());
 
-                        itemHandler.setStackInSlot(13, output);
+                        itemOutputHandler.setStackInSlot(0, output);
 
-                        for (int i = 0; i < 13; i++) {
+                        for (int i = 0; i < 12; i++) {
                             itemHandler.extractItem(i, 1, false);
                         }
 
@@ -194,8 +198,8 @@ public class ArcaneWorkbenchTileEntity extends TileSimpleInventory implements Ti
         };
     }
 
-    private ItemStackHandler createHandler() {
-        return new ItemStackHandler(14) {
+    private ItemStackHandler createHandler(int size) {
+        return new ItemStackHandler(size) {
             @Override
             protected void onContentsChanged(int slot) {
                 setChanged();
@@ -214,7 +218,7 @@ public class ArcaneWorkbenchTileEntity extends TileSimpleInventory implements Ti
             @Nonnull
             @Override
             public ItemStack insertItem(int slot, @Nonnull ItemStack stack, boolean simulate) {
-                if(!isItemValid(slot, stack)) {
+                if (!isItemValid(slot, stack)) {
                     return stack;
                 }
 
@@ -226,8 +230,17 @@ public class ArcaneWorkbenchTileEntity extends TileSimpleInventory implements Ti
     @Nonnull
     @Override
     public <T> LazyOptional<T> getCapability(@Nonnull Capability<T> cap, @Nullable Direction side) {
-        if(cap == ForgeCapabilities.ITEM_HANDLER) {
-            return handler.cast();
+        if (cap == ForgeCapabilities.ITEM_HANDLER) {
+            if (side == null) {
+                CombinedInvWrapper item = new CombinedInvWrapper(itemHandler, itemOutputHandler);
+                return LazyOptional.of(() -> item).cast();
+            }
+
+            if (side == Direction.DOWN) {
+                return outputHandler.cast();
+            } else {
+                return handler.cast();
+            }
         }
 
         return super.getCapability(cap, side);
@@ -295,6 +308,7 @@ public class ArcaneWorkbenchTileEntity extends TileSimpleInventory implements Ti
     public void saveAdditional(CompoundTag tag) {
         super.saveAdditional(tag);
         tag.put("inv", itemHandler.serializeNBT());
+        tag.put("output", itemOutputHandler.serializeNBT());
 
         tag.putInt("wissenInCraft", wissenInCraft);
         tag.putInt("wissenIsCraft", wissenIsCraft);
@@ -306,6 +320,7 @@ public class ArcaneWorkbenchTileEntity extends TileSimpleInventory implements Ti
     public void load(CompoundTag tag) {
         super.load(tag);
         itemHandler.deserializeNBT(tag.getCompound("inv"));
+        itemOutputHandler.deserializeNBT(tag.getCompound("output"));
 
         wissenInCraft = tag.getInt("wissenInCraft");
         wissenIsCraft = tag.getInt("wissenIsCraft");

@@ -48,7 +48,7 @@ public class ArcaneWorkbenchScreen extends AbstractContainerScreen<ArcaneWorkben
         if (menu.tileEntity instanceof ArcaneWorkbenchTileEntity) {
             ArcaneWorkbenchTileEntity workbench = (ArcaneWorkbenchTileEntity) menu.tileEntity;
 
-            if (workbench.itemHandler.getStackInSlot(13).isEmpty()) {
+            if (workbench.itemOutputHandler.getStackInSlot(0).isEmpty()) {
                 double ticks = (ClientTickHandler.ticksInGame + partialTicks) * 3;
                 RenderSystem.setShaderColor(1f, 1f, 1f, (float) (0.5f + (Math.sin(Math.toRadians(ticks)) * 0.25)));
                 gui.renderItem(workbench.getItemHandler().getItem(0), i + 146, j + 48);

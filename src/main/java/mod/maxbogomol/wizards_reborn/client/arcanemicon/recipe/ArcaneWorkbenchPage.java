@@ -30,10 +30,18 @@ public class ArcaneWorkbenchPage extends Page {
                     drawItem(book, gui, inputs[index], x + 38 + j * 18, y + 38 + i * 18, mouseX, mouseY);
             }
         }
-        drawItem(book, gui, inputs[9], x + 56, y + 16, mouseX, mouseY);
-        drawItem(book, gui, inputs[10], x + 96, y + 56, mouseX, mouseY);
-        drawItem(book, gui, inputs[11], x + 56, y + 96, mouseX, mouseY);
-        drawItem(book, gui, inputs[12], x + 16, y + 56, mouseX, mouseY);
+        if (9 < inputs.length && !inputs[9].isEmpty()) {
+            drawItem(book, gui, inputs[9], x + 56, y + 16, mouseX, mouseY);
+        }
+        if (10 < inputs.length && !inputs[10].isEmpty()) {
+            drawItem(book, gui, inputs[10], x + 96, y + 56, mouseX, mouseY);
+        }
+        if (11 < inputs.length && !inputs[11].isEmpty()) {
+            drawItem(book, gui, inputs[11], x + 56, y + 96, mouseX, mouseY);
+        }
+        if (12 < inputs.length && !inputs[12].isEmpty()) {
+            drawItem(book, gui, inputs[12], x + 16, y + 56, mouseX, mouseY);
+        }
         drawItem(book, gui, result,x + 56, y + 128, mouseX, mouseY);
     }
 }

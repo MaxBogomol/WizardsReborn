@@ -37,6 +37,8 @@ public class WizardsRebornJei implements IModPlugin {
                 new WissenCrystallizerRecipeCategory(registration.getJeiHelpers().getGuiHelper()));
         registration.addRecipeCategories(
                 new ArcaneWorkbenchRecipeCategory(registration.getJeiHelpers().getGuiHelper()));
+        registration.addRecipeCategories(
+                new MortarRecipeCategory(registration.getJeiHelpers().getGuiHelper()));
     }
 
     @Override
@@ -45,6 +47,7 @@ public class WizardsRebornJei implements IModPlugin {
         registration.addRecipes(WissenAltarRecipeCategory.TYPE, sortRecipes(WizardsReborn.WISSEN_ALTAR_RECIPE.get(), BY_ID));
         registration.addRecipes(WissenCrystallizerRecipeCategory.TYPE, sortRecipes(WizardsReborn.WISSEN_CRYSTALLIZER_RECIPE.get(), BY_ID));
         registration.addRecipes(ArcaneWorkbenchRecipeCategory.TYPE, sortRecipes(WizardsReborn.ARCANE_WORKBENCH_RECIPE.get(), BY_ID));
+        registration.addRecipes(MortarRecipeCategory.TYPE, sortRecipes(WizardsReborn.MORTAR_RECIPE.get(), BY_ID));
     }
 
     @Override
@@ -53,6 +56,7 @@ public class WizardsRebornJei implements IModPlugin {
         registration.addRecipeCatalyst(new ItemStack(WizardsReborn.WISSEN_ALTAR_ITEM.get()), WissenAltarRecipeCategory.TYPE);
         registration.addRecipeCatalyst(new ItemStack(WizardsReborn.WISSEN_CRYSTALLIZER_ITEM.get()), WissenCrystallizerRecipeCategory.TYPE);
         registration.addRecipeCatalyst(new ItemStack(WizardsReborn.ARCANE_WORKBENCH_ITEM.get()), ArcaneWorkbenchRecipeCategory.TYPE);
+        registration.addRecipeCatalyst(new ItemStack(WizardsReborn.ARCANE_WOOD_MORTAR.get()), MortarRecipeCategory.TYPE);
     }
 
     private static <T extends Recipe<C>, C extends Container> List<T> sortRecipes(RecipeType<T> type, Comparator<? super T> comparator) {

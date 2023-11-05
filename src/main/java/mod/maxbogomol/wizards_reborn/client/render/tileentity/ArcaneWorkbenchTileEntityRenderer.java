@@ -28,7 +28,7 @@ public class ArcaneWorkbenchTileEntityRenderer implements BlockEntityRenderer<Ar
         ms.translate(0F, (float) (Math.sin(Math.toRadians(ticksUp)) * 0.03125F), 0F);
         ms.mulPose(Axis.YP.rotationDegrees((float) ticks));
         ms.scale(0.5F, 0.5F, 0.5F);
-        mc.getItemRenderer().renderStatic(workbench.itemHandler.getStackInSlot(13), ItemDisplayContext.FIXED, light, overlay, ms, buffers, workbench.getLevel(), 0);
+        mc.getItemRenderer().renderStatic(workbench.itemOutputHandler.getStackInSlot(0), ItemDisplayContext.FIXED, light, overlay, ms, buffers, workbench.getLevel(), 0);
         ms.popPose();
 
         int x = -1;
