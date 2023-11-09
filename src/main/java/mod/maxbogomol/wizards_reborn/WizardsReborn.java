@@ -18,8 +18,10 @@ import mod.maxbogomol.wizards_reborn.client.event.KeyBindHandler;
 import mod.maxbogomol.wizards_reborn.client.gui.HUDEventHandler;
 import mod.maxbogomol.wizards_reborn.client.gui.TooltipEventHandler;
 import mod.maxbogomol.wizards_reborn.client.gui.container.ArcaneWorkbenchContainer;
+import mod.maxbogomol.wizards_reborn.client.gui.container.JewelerTableContainer;
 import mod.maxbogomol.wizards_reborn.client.gui.screen.ArcaneWorkbenchScreen;
 import mod.maxbogomol.wizards_reborn.client.gui.screen.CrystalChooseScreen;
+import mod.maxbogomol.wizards_reborn.client.gui.screen.JewelerTableScreen;
 import mod.maxbogomol.wizards_reborn.client.particle.ArcaneWoodLeafParticleType;
 import mod.maxbogomol.wizards_reborn.client.particle.KarmaParticleType;
 import mod.maxbogomol.wizards_reborn.client.particle.SparkleParticleType;
@@ -318,6 +320,7 @@ public class WizardsReborn {
     public static final RegistryObject<Block> WISSEN_CRYSTALLIZER = BLOCKS.register("wissen_crystallizer", () -> new WissenCrystallizerBlock(BlockBehaviour.Properties.copy(Blocks.OAK_PLANKS)));
     public static final RegistryObject<Block> ARCANE_WORKBENCH = BLOCKS.register("arcane_workbench", () -> new ArcaneWorkbenchBlock(BlockBehaviour.Properties.copy(Blocks.OAK_PLANKS)));
     public static final RegistryObject<Block> WISSEN_CELL = BLOCKS.register("wissen_cell", () -> new WissenCellBlock(BlockBehaviour.Properties.copy(Blocks.OAK_PLANKS)));
+    public static final RegistryObject<Block> JEWELER_TABLE = BLOCKS.register("jeweler_table", () -> new JewelerTableBlock(BlockBehaviour.Properties.copy(Blocks.OAK_PLANKS)));
 
     public static final RegistryObject<Block> WHITE_ARCANE_LUMOS = BLOCKS.register("white_arcane_lumos", () -> new ArcaneLumosBlock(ArcaneLumosBlock.Colors.WHITE, BlockBehaviour.Properties.copy(Blocks.WHITE_WOOL).lightLevel((state) -> 15).noOcclusion().noCollission().instabreak()));
     public static final RegistryObject<Block> ORANGE_ARCANE_LUMOS = BLOCKS.register("orange_arcane_lumos", () -> new ArcaneLumosBlock(ArcaneLumosBlock.Colors.ORANGE, BlockBehaviour.Properties.copy(Blocks.WHITE_WOOL).lightLevel((state) -> 15).noOcclusion().noCollission().instabreak()));
@@ -488,6 +491,7 @@ public class WizardsReborn {
     public static final RegistryObject<Item> WISSEN_CRYSTALLIZER_ITEM = ITEMS.register("wissen_crystallizer", () -> new BlockItem(WISSEN_CRYSTALLIZER.get(), new Item.Properties()));
     public static final RegistryObject<Item> ARCANE_WORKBENCH_ITEM = ITEMS.register("arcane_workbench", () -> new BlockItem(ARCANE_WORKBENCH.get(), new Item.Properties()));
     public static final RegistryObject<Item> WISSEN_CELL_ITEM = ITEMS.register("wissen_cell", () -> new WissenStorageBaseItem(WISSEN_CELL.get(), new Item.Properties().stacksTo(1)));
+    public static final RegistryObject<Item> JEWELER_TABLE_ITEM = ITEMS.register("jeweler_table", () -> new BlockItem(JEWELER_TABLE.get(), new Item.Properties()));
 
     public static final RegistryObject<Item> WHITE_ARCANE_LUMOS_ITEM = ITEMS.register("white_arcane_lumos", () -> new BlockItem(WHITE_ARCANE_LUMOS.get(), new Item.Properties()));
     public static final RegistryObject<Item> ORANGE_ARCANE_LUMOS_ITEM = ITEMS.register("orange_arcane_lumos", () -> new BlockItem(ORANGE_ARCANE_LUMOS.get(), new Item.Properties()));
@@ -544,6 +548,7 @@ public class WizardsReborn {
     public static RegistryObject<BlockEntityType<WissenCrystallizerTileEntity>> WISSEN_CRYSTALLIZER_TILE_ENTITY = TILE_ENTITIES.register("wissen_crystallizer", () -> BlockEntityType.Builder.of(WissenCrystallizerTileEntity::new, WISSEN_CRYSTALLIZER.get()).build(null));
     public static RegistryObject<BlockEntityType<ArcaneWorkbenchTileEntity>> ARCANE_WORKBENCH_TILE_ENTITY = TILE_ENTITIES.register("arcane_workbench", () -> BlockEntityType.Builder.of(ArcaneWorkbenchTileEntity::new, ARCANE_WORKBENCH.get()).build(null));
     public static RegistryObject<BlockEntityType<WissenCellTileEntity>> WISSEN_CELL_TILE_ENTITY = TILE_ENTITIES.register("wissen_cell", () -> BlockEntityType.Builder.of(WissenCellTileEntity::new, WISSEN_CELL.get()).build(null));
+    public static RegistryObject<BlockEntityType<JewelerTableTileEntity>> JEWELER_TABLE_TILE_ENTITY = TILE_ENTITIES.register("jeweler_table", () -> BlockEntityType.Builder.of(JewelerTableTileEntity::new, JEWELER_TABLE.get()).build(null));
 
     //ENTITIES
     public static final RegistryObject<EntityType<CustomBoatEntity>> BOAT = ENTITIES.register("boat", () -> EntityType.Builder.<CustomBoatEntity>of(CustomBoatEntity::new, MobCategory.MISC).sized(1.375f, 0.5625f).build(new ResourceLocation(MOD_ID, "arcane_wood_boat").toString()));
@@ -572,6 +577,9 @@ public class WizardsReborn {
     public static final RegistryObject<MortarRecipe.Serializer> MORTAR_SERIALIZER = RECIPE_SERIALIZERS.register("mortar", MortarRecipe.Serializer::new);
     public static final RegistryObject<RecipeType<MortarRecipe>> MORTAR_RECIPE = RECIPES.register("mortar", () -> RecipeType.simple(MortarRecipe.TYPE_ID));
 
+    public static final RegistryObject<JewelerTableRecipe.Serializer> JEWELER_TABLE_SERIALIZER = RECIPE_SERIALIZERS.register("jeweler_table", JewelerTableRecipe.Serializer::new);
+    public static final RegistryObject<RecipeType<JewelerTableRecipe>> JEWELER_TABLE_RECIPE = RECIPES.register("jeweler_table", () -> RecipeType.simple(JewelerTableRecipe.TYPE_ID));
+
     //CONTAINERS
     public static final RegistryObject<MenuType<ArcaneWorkbenchContainer>> ARCANE_WORKBENCH_CONTAINER
             = CONTAINERS.register("arcane_workbench_container",
@@ -579,6 +587,14 @@ public class WizardsReborn {
                 BlockPos pos = data.readBlockPos();
                 Level world = inv.player.getCommandSenderWorld();
                 return new ArcaneWorkbenchContainer(windowId, world, pos, inv, inv.player);
+            })));
+
+    public static final RegistryObject<MenuType<JewelerTableContainer>> JEWELER_TABLE_CONTAINER
+            = CONTAINERS.register("jeweler_table_container",
+            () -> IForgeMenuType.create(((windowId, inv, data) -> {
+                BlockPos pos = data.readBlockPos();
+                Level world = inv.player.getCommandSenderWorld();
+                return new JewelerTableContainer(windowId, world, pos, inv, inv.player);
             })));
 
     public static final RegistryObject<BannerPattern> VIOLENCE_BANNER_PATTERN = BANNER_PATTERNS.register("violence", () -> new BannerPattern("wrv"));
@@ -715,6 +731,7 @@ public class WizardsReborn {
             CrystalChooseScreen.initSpells();
 
             MenuScreens.register(ARCANE_WORKBENCH_CONTAINER.get(), ArcaneWorkbenchScreen::new);
+            MenuScreens.register(JEWELER_TABLE_CONTAINER.get(), JewelerTableScreen::new);
 
             CuriosRendererRegistry.register(LEATHER_BELT.get(), BeltRenderer::new);
             CuriosRendererRegistry.register(ARCANUM_AMULET.get(), AmuletRenderer::new);

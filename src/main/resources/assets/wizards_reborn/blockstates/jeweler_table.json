@@ -1,0 +1,19 @@
+{
+  "variants": {
+    "facing=east": {
+      "model": "wizards_reborn:block/jeweler_table",
+      "y": 90
+    },
+    "facing=north": {
+      "model": "wizards_reborn:block/jeweler_table"
+    },
+    "facing=south": {
+      "model": "wizards_reborn:block/jeweler_table",
+      "y": 180
+    },
+    "facing=west": {
+      "model": "wizards_reborn:block/jeweler_table",
+      "y": 270
+    }
+  }
+}

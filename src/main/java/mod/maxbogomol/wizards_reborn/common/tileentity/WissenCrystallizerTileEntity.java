@@ -76,6 +76,9 @@ public class WissenCrystallizerTileEntity extends ExposedTileSimpleInventory imp
                     if (recipe.get().getRecipeIsNBTCrystal()) {
                         CrystalUtils.createCrystalFromFractured(stack, getItemHandler());
                     }
+                    if (recipe.get().getRecipeIsSaveNBT()) {
+                        stack.setTag(getItemHandler().getItem(0).getOrCreateTag());
+                    }
 
                     for (int i = 0; i < getItemHandler().getContainerSize(); i++) {
                         getItemHandler().removeItemNoUpdate(i);

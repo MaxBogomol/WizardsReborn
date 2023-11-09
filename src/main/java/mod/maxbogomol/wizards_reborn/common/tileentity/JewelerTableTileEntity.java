@@ -6,9 +6,7 @@ import mod.maxbogomol.wizards_reborn.api.wissen.IWissenTileEntity;
 import mod.maxbogomol.wizards_reborn.api.wissen.IWissenWandFunctionalTileEntity;
 import mod.maxbogomol.wizards_reborn.api.wissen.WissenUtils;
 import mod.maxbogomol.wizards_reborn.client.particle.Particles;
-import mod.maxbogomol.wizards_reborn.common.network.PacketHandler;
-import mod.maxbogomol.wizards_reborn.common.network.tileentity.ArcaneWorkbenchBurstEffectPacket;
-import mod.maxbogomol.wizards_reborn.common.recipe.ArcaneWorkbenchRecipe;
+import mod.maxbogomol.wizards_reborn.common.recipe.JewelerTableRecipe;
 import mod.maxbogomol.wizards_reborn.utils.PacketUtils;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -16,11 +14,11 @@ import net.minecraft.core.RegistryAccess;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.Connection;
 import net.minecraft.network.protocol.game.ClientboundBlockEntityDataPacket;
-import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.SimpleContainer;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.phys.Vec3;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.capabilities.ForgeCapabilities;
 import net.minecraftforge.common.util.LazyOptional;
@@ -37,8 +35,8 @@ import java.util.Random;
 
 import static net.minecraft.world.level.block.state.properties.BlockStateProperties.HORIZONTAL_FACING;
 
-public class ArcaneWorkbenchTileEntity extends TileSimpleInventory implements TickableBlockEntity, IWissenTileEntity, ICooldownTileEntity, IWissenWandFunctionalTileEntity {
-    public final ItemStackHandler itemHandler = createHandler(13);
+public class JewelerTableTileEntity extends TileSimpleInventory implements TickableBlockEntity, IWissenTileEntity, ICooldownTileEntity, IWissenWandFunctionalTileEntity {
+    public final ItemStackHandler itemHandler = createHandler(2);
     public final LazyOptional<IItemHandler> handler = LazyOptional.of(() -> itemHandler);
     public final ItemStackHandler itemOutputHandler = createHandler(1);
     public final LazyOptional<IItemHandler> outputHandler = LazyOptional.of(() -> itemOutputHandler);
@@ -51,26 +49,26 @@ public class ArcaneWorkbenchTileEntity extends TileSimpleInventory implements Ti
 
     public Random random = new Random();
 
-    public ArcaneWorkbenchTileEntity(BlockEntityType<?> type, BlockPos pos, BlockState state) {
+    public JewelerTableTileEntity(BlockEntityType<?> type, BlockPos pos, BlockState state) {
         super(type, pos, state);
     }
 
-    public ArcaneWorkbenchTileEntity(BlockPos pos, BlockState state) {
-        this(WizardsReborn.ARCANE_WORKBENCH_TILE_ENTITY.get(), pos, state);
+    public JewelerTableTileEntity(BlockPos pos, BlockState state) {
+        this(WizardsReborn.JEWELER_TABLE_TILE_ENTITY.get(), pos, state);
     }
 
     @Override
     public void tick() {
         if (!level.isClientSide()) {
             boolean update = false;
-            SimpleContainer inv = new SimpleContainer(14);
+            SimpleContainer inv = new SimpleContainer(3);
             for (int i = 0; i < itemHandler.getSlots(); i++) {
                 inv.setItem(i, itemHandler.getStackInSlot(i));
             }
-            inv.setItem(13, itemOutputHandler.getStackInSlot(0));
+            inv.setItem(2, itemOutputHandler.getStackInSlot(0));
 
-            Optional<ArcaneWorkbenchRecipe> recipe = level.getRecipeManager().getRecipeFor(WizardsReborn.ARCANE_WORKBENCH_RECIPE.get(), inv, level);
-            wissenInCraft = recipe.map(ArcaneWorkbenchRecipe::getRecipeWissen).orElse(0);
+            Optional<JewelerTableRecipe> recipe = level.getRecipeManager().getRecipeFor(WizardsReborn.JEWELER_TABLE_RECIPE.get(), inv, level);
+            wissenInCraft = recipe.map(JewelerTableRecipe::getRecipeWissen).orElse(0);
 
             if (wissenInCraft <= 0 && (wissenIsCraft > 0 || startCraft)) {
                 wissenIsCraft = 0;
@@ -114,17 +112,20 @@ public class ArcaneWorkbenchTileEntity extends TileSimpleInventory implements Ti
                         startCraft = false;
 
                         output.setCount(itemOutputHandler.getStackInSlot(0).getCount() + output.getCount());
+                        if (recipe.get().getRecipeIsSaveNBT()) {
+                            output.setTag(itemHandler.getStackInSlot(0).getOrCreateTag());
+                        }
 
                         itemOutputHandler.setStackInSlot(0, output);
 
-                        for (int i = 0; i < 12; i++) {
+                        for (int i = 0; i < 2; i++) {
                             itemHandler.extractItem(i, 1, false);
                         }
 
                         update = true;
 
-                        PacketHandler.sendToTracking(level, getBlockPos(), new ArcaneWorkbenchBurstEffectPacket(getBlockPos()));
-                        level.playSound(WizardsReborn.proxy.getPlayer(), getBlockPos(), WizardsReborn.WISSEN_BURST_SOUND.get(), SoundSource.BLOCKS, 0.25f, (float) (1f + ((random.nextFloat() - 0.5D) / 4)));
+                        //PacketHandler.sendToTracking(level, getBlockPos(), new ArcaneWorkbenchBurstEffectPacket(getBlockPos()));
+                        //level.playSound(WizardsReborn.proxy.getPlayer(), getBlockPos(), WizardsReborn.WISSEN_BURST_SOUND.get(), SoundSource.BLOCKS, 0.25f, (float) (1f + ((random.nextFloat() - 0.5D) / 4)));
                     }
                 }
             }
@@ -136,26 +137,32 @@ public class ArcaneWorkbenchTileEntity extends TileSimpleInventory implements Ti
 
         if (level.isClientSide()) {
             if (getWissen() > 0) {
+                Vec3 pos = getBlockRotatePos();
+                pos = new Vec3(worldPosition.getX() + pos.x(), worldPosition.getY() + pos.y() + 0.1875F, worldPosition.getZ() + pos.z());
+
                 if (random.nextFloat() < 0.5) {
                     Particles.create(WizardsReborn.WISP_PARTICLE)
                             .addVelocity(((random.nextDouble() - 0.5D) / 30) * getStage(), ((random.nextDouble() - 0.5D) / 30) * getStage(), ((random.nextDouble() - 0.5D) / 30) * getStage())
-                            .setAlpha(0.25f, 0).setScale(0.3f * getStage(), 0)
+                            .setAlpha(0.25f, 0).setScale(0.2f * getStage(), 0)
                             .setColor(0.466f, 0.643f, 0.815f)
                             .setLifetime(20)
-                            .spawn(level, worldPosition.getX() + 0.5F, worldPosition.getY() + 1.5F, worldPosition.getZ() + 0.5F);
+                            .spawn(level, pos.x(), pos.y(), pos.z());
                 }
                 if (random.nextFloat() < 0.1) {
                     Particles.create(WizardsReborn.SPARKLE_PARTICLE)
                             .addVelocity(((random.nextDouble() - 0.5D) / 30) * getStage(), ((random.nextDouble() - 0.5D) / 30) * getStage(), ((random.nextDouble() - 0.5D) / 30) * getStage())
-                            .setAlpha(0.25f, 0).setScale(0.1f * getStage(), 0)
+                            .setAlpha(0.25f, 0).setScale(0.05f * getStage(), 0)
                             .setColor(0.466f, 0.643f, 0.815f)
                             .setLifetime(30)
                             .setSpin((0.5f * (float) ((random.nextDouble() - 0.5D) * 2)))
-                            .spawn(level, worldPosition.getX() + 0.5F, worldPosition.getY() + 1.5F, worldPosition.getZ() + 0.5F);
+                            .spawn(level, pos.x(), pos.y(), pos.z());
                 }
             }
 
             if (wissenInCraft > 0 && startCraft) {
+                Vec3 pos = getBlockRotatePos();
+                pos = new Vec3(worldPosition.getX() + pos.x(), worldPosition.getY() + pos.y() + 0.1875F, worldPosition.getZ() + pos.z());
+
                 if (random.nextFloat() < 0.2) {
                     Particles.create(WizardsReborn.SPARKLE_PARTICLE)
                             .addVelocity(((random.nextDouble() - 0.5D) / 20), ((random.nextDouble() - 0.5D) / 20), ((random.nextDouble() - 0.5D) / 20))
@@ -163,7 +170,7 @@ public class ArcaneWorkbenchTileEntity extends TileSimpleInventory implements Ti
                             .setColor(0.466f, 0.643f, 0.815f)
                             .setLifetime(30)
                             .setSpin((0.5f * (float) ((random.nextDouble() - 0.5D) * 2)))
-                            .spawn(level, worldPosition.getX() + 0.5F, worldPosition.getY() + 1.5F, worldPosition.getZ() + 0.5F);
+                            .spawn(level, pos.x(), pos.y(), pos.z());
                 }
                 if (random.nextFloat() < 0.1) {
                     Particles.create(WizardsReborn.SPARKLE_PARTICLE)
@@ -172,7 +179,7 @@ public class ArcaneWorkbenchTileEntity extends TileSimpleInventory implements Ti
                             .setColor(random.nextFloat(), random.nextFloat(), random.nextFloat())
                             .setLifetime(65)
                             .setSpin((0.1f * (float) ((random.nextDouble() - 0.5D) * 2)))
-                            .spawn(level, worldPosition.getX() + 0.5F, worldPosition.getY() + 1.5F, worldPosition.getZ() + 0.5F);
+                            .spawn(level, pos.x(), pos.y(), pos.z());
                 }
                 if (random.nextFloat() < 0.3) {
                     double X = ((random.nextDouble() - 0.5D) * 0.5);
@@ -182,7 +189,7 @@ public class ArcaneWorkbenchTileEntity extends TileSimpleInventory implements Ti
                             .setAlpha(0.5f, 0).setScale(0.1f, 0.025f)
                             .setColor(0.733f, 0.564f, 0.937f)
                             .setLifetime(15)
-                            .spawn(level, worldPosition.getX() + 0.5F + X, worldPosition.getY() + 1F, worldPosition.getZ() + 0.5F + Z);
+                            .spawn(level, pos.x(), pos.y(), pos.z());
                 }
             }
         }
@@ -288,16 +295,31 @@ public class ArcaneWorkbenchTileEntity extends TileSimpleInventory implements Ti
         }
     }
 
+    public Vec3 getBlockRotatePos() {
+        switch (this.getBlockState().getValue(HORIZONTAL_FACING)) {
+            case NORTH:
+                return new Vec3(0.5F, 0.84375F, 0.71875F);
+            case SOUTH:
+                return new Vec3(0.5F, 0.84375F, 0.28125F);
+            case WEST:
+                return new Vec3(0.71875F, 0.84375F, 0.5F);
+            case EAST:
+                return new Vec3(0.28125F, 0.84375F, 0.5F);
+            default:
+                return new Vec3(0.5F, 0.84375F, 0.5F);
+        }
+    }
+
     public float getStage() {
         return ((float) getWissen() / (float) getMaxWissen());
     }
 
     public boolean isCanCraft(SimpleContainer inv, ItemStack output) {
-        if (inv.getItem(13).isEmpty()) {
+        if (inv.getItem(2).isEmpty()) {
             return true;
         }
 
-        if ((ItemHandlerHelper.canItemStacksStack(output, inv.getItem(13))) && (inv.getItem(13).getCount() + output.getCount() <= output.getMaxStackSize())) {
+        if ((ItemHandlerHelper.canItemStacksStack(output, inv.getItem(2))) && (inv.getItem(2).getCount() + output.getCount() <= output.getMaxStackSize())) {
             return true;
         }
 
@@ -335,7 +357,7 @@ public class ArcaneWorkbenchTileEntity extends TileSimpleInventory implements Ti
 
     @Override
     public int getMaxWissen() {
-        return 10000;
+        return 5000;
     }
 
     @Override
@@ -390,7 +412,7 @@ public class ArcaneWorkbenchTileEntity extends TileSimpleInventory implements Ti
     }
 
     public int getWissenPerTick() {
-        return 15;
+        return 10;
     }
 
     @Override

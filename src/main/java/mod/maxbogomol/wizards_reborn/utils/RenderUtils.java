@@ -22,9 +22,12 @@ import net.minecraft.client.renderer.entity.LivingEntityRenderer;
 import net.minecraft.client.renderer.texture.OverlayTexture;
 import net.minecraft.client.renderer.texture.TextureAtlas;
 import net.minecraft.client.resources.model.BakedModel;
+import net.minecraft.client.resources.model.ModelResourceLocation;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.ItemDisplayContext;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.Vec3;
 import net.minecraft.world.phys.shapes.VoxelShape;
@@ -32,6 +35,7 @@ import org.joml.Matrix4f;
 import org.joml.Quaternionf;
 import org.joml.Vector3f;
 
+import javax.annotation.Nullable;
 import java.awt.*;
 import java.util.Random;
 
@@ -397,5 +401,10 @@ public class RenderUtils {
         builder.vertex(mat, x + width, y + (height / 2), 0).color(r, g, b, a).endVertex();
         builder.vertex(mat, x + width, y + height, 0).color(r, g, b, 0).endVertex();
         builder.vertex(mat, x + width + (width / 8), y + height, 0).color(r, g, b, 0).endVertex();
+    }
+
+    public static void renderCustomModel(ModelResourceLocation model, ItemDisplayContext diplayContext, boolean leftHand, PoseStack poseStack, MultiBufferSource buffer, int combinedLight, int combinedOverlay) {
+        BakedModel bakedmodel = Minecraft.getInstance().getItemRenderer().getItemModelShaper().getModelManager().getModel(model);
+        Minecraft.getInstance().getItemRenderer().render(new ItemStack(Items.DIRT), diplayContext, leftHand, poseStack, buffer, combinedLight, combinedOverlay, bakedmodel);
     }
 }

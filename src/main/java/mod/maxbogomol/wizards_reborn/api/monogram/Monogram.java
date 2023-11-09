@@ -1,17 +1,14 @@
 package mod.maxbogomol.wizards_reborn.api.monogram;
 
-import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.platform.GlStateManager;
 import com.mojang.blaze3d.systems.RenderSystem;
 import mod.maxbogomol.wizards_reborn.client.arcanemicon.ArcanemiconGui;
 import mod.maxbogomol.wizards_reborn.client.event.ClientTickHandler;
-import mod.maxbogomol.wizards_reborn.utils.RenderUtils;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
-import org.lwjgl.opengl.GL11;
 
 import java.util.Random;
 

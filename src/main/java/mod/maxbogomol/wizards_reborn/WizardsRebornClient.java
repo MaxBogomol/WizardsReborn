@@ -48,6 +48,8 @@ public class WizardsRebornClient {
     public static ModelLayerLocation BELT_LAYER = new ModelLayerLocation(new ResourceLocation(WizardsReborn.MOD_ID, "belt"), "main");
     public static ModelLayerLocation AMULET_LAYER = new ModelLayerLocation(new ResourceLocation(WizardsReborn.MOD_ID, "amulet"), "main");
 
+    public static ModelResourceLocation JEWELER_TABLE_STONE_MODEl = new ModelResourceLocation(WizardsReborn.MOD_ID, "jeweler_table_stone", "inventory");
+
     public static ShaderInstance GLOWING_SHADER, GLOWING_SPRITE_SHADER, GLOWING_PARTICLE_SHADER, SPRITE_PARTICLE_SHADER;
 
     public static ShaderInstance getGlowingShader() { return GLOWING_SHADER; }
@@ -82,6 +84,7 @@ public class WizardsRebornClient {
             BlockEntityRenderers.register(WizardsReborn.WISSEN_CRYSTALLIZER_TILE_ENTITY.get(), (trd) -> new WissenCrystallizerTileEntityRenderer());
             BlockEntityRenderers.register(WizardsReborn.ARCANE_WORKBENCH_TILE_ENTITY.get(), (trd) -> new ArcaneWorkbenchTileEntityRenderer());
             BlockEntityRenderers.register(WizardsReborn.WISSEN_CELL_TILE_ENTITY.get(), (trd) -> new WissenCellTileEntityRenderer());
+            BlockEntityRenderers.register(WizardsReborn.JEWELER_TABLE_TILE_ENTITY.get(), (trd) -> new JewelerTableTileEntityRenderer());
 
             BlockEntityRenderers.register(WizardsReborn.CRYSTAL_TILE_ENTITY.get(), (trd) -> new CrystalTileEntityRenderer());
 
@@ -101,6 +104,8 @@ public class WizardsRebornClient {
                     event.register(new ModelResourceLocation(new ResourceLocation(WizardsReborn.MOD_ID, item + "_in_hand"), "inventory"));
                 }
             }
+
+            event.register(JEWELER_TABLE_STONE_MODEl);
         }
 
         @SubscribeEvent

@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "minecraft:paper"
+    },
+    {
+      "item": "minecraft:yellow_wool"
+    },
+    {
+      "item": "wizards_reborn:arcanum"
+    }
+  ],
+  "result": {
+    "item": "wizards_reborn:elevation_banner_pattern",
+    "count": 1
+  }
+}

@@ -1,66 +1,53 @@
 package mod.maxbogomol.wizards_reborn.common.block;
 
-import mod.maxbogomol.wizards_reborn.client.gui.container.ArcaneWorkbenchContainer;
+import mod.maxbogomol.wizards_reborn.client.gui.container.JewelerTableContainer;
 import mod.maxbogomol.wizards_reborn.common.item.equipment.WissenWandItem;
-import mod.maxbogomol.wizards_reborn.common.tileentity.ArcaneWorkbenchTileEntity;
+import mod.maxbogomol.wizards_reborn.common.tileentity.JewelerTableTileEntity;
 import mod.maxbogomol.wizards_reborn.common.tileentity.TickableBlockEntity;
 import mod.maxbogomol.wizards_reborn.common.tileentity.TileSimpleInventory;
-import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.entity.player.Inventory;
+import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
+import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerPlayer;
-import net.minecraft.world.level.block.Block;
+import net.minecraft.world.*;
+import net.minecraft.world.entity.player.Inventory;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.inventory.AbstractContainerMenu;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.context.BlockPlaceContext;
+import net.minecraft.world.level.BlockGetter;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.level.LevelAccessor;
+import net.minecraft.world.level.block.*;
+import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityTicker;
 import net.minecraft.world.level.block.entity.BlockEntityType;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.material.FluidState;
 import net.minecraft.world.level.material.Fluids;
-import net.minecraft.world.SimpleContainer;
-import net.minecraft.world.Containers;
-import net.minecraft.world.inventory.AbstractContainerMenu;
-import net.minecraft.world.MenuProvider;
-import net.minecraft.world.item.context.BlockPlaceContext;
-import net.minecraft.world.item.ItemStack;
-import net.minecraft.nbt.CompoundTag;
-import net.minecraft.world.level.block.state.StateDefinition;
-import net.minecraft.world.level.block.entity.BlockEntity;
-import net.minecraft.world.InteractionResult;
-import net.minecraft.core.Direction;
-import net.minecraft.world.InteractionHand;
-import net.minecraft.core.BlockPos;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.shapes.BooleanOp;
 import net.minecraft.world.phys.shapes.CollisionContext;
-import net.minecraft.world.phys.shapes.VoxelShape;
 import net.minecraft.world.phys.shapes.Shapes;
-import net.minecraft.network.chat.Component;
-import net.minecraft.world.level.BlockGetter;
-import net.minecraft.world.level.LevelAccessor;
-import net.minecraft.world.level.Level;
+import net.minecraft.world.phys.shapes.VoxelShape;
+import net.minecraftforge.network.NetworkHooks;
+import org.jetbrains.annotations.NotNull;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import java.util.stream.Stream;
 
-import net.minecraft.world.level.block.EntityBlock;
-import net.minecraft.world.level.block.HorizontalDirectionalBlock;
-import net.minecraft.world.level.block.SimpleWaterloggedBlock;
-import net.minecraft.world.level.block.state.BlockState;
-import net.minecraftforge.network.NetworkHooks;
-import org.jetbrains.annotations.NotNull;
-
-public class ArcaneWorkbenchBlock extends HorizontalDirectionalBlock implements EntityBlock, SimpleWaterloggedBlock  {
+public class JewelerTableBlock extends HorizontalDirectionalBlock implements EntityBlock, SimpleWaterloggedBlock  {
 
     private static final VoxelShape SHAPE = Stream.of(
-            Block.box(0, 0, 0, 16, 4, 16),
-            Block.box(4, 4, 4, 12, 11, 12),
-            Block.box(0, 11, 0, 16, 16, 16),
-            Block.box(0, 9, 0, 4, 11, 4),
-            Block.box(12, 9, 0, 16, 11, 4),
-            Block.box(12, 9, 12, 16, 11, 16),
-            Block.box(0, 9, 12, 4, 11, 16)
+            Block.box(5, 0, 5, 11, 2, 11),
+            Block.box(6, 2, 6, 10, 8, 10),
+            Block.box(2, 8, 2, 14, 11, 14)
     ).reduce((v1, v2) -> Shapes.join(v1, v2, BooleanOp.OR)).get();
 
-    public ArcaneWorkbenchBlock(Properties properties) {
+    public JewelerTableBlock(Properties properties) {
         super(properties);
         registerDefaultState(defaultBlockState().setValue(BlockStateProperties.WATERLOGGED, false));
     }
@@ -88,13 +75,13 @@ public class ArcaneWorkbenchBlock extends HorizontalDirectionalBlock implements 
     public void onRemove(@Nonnull BlockState state, @Nonnull Level world, @Nonnull BlockPos pos, @Nonnull BlockState newState, boolean isMoving) {
         if (state.getBlock() != newState.getBlock()) {
             BlockEntity tile = world.getBlockEntity(pos);
-            if (tile instanceof ArcaneWorkbenchTileEntity) {
-                ArcaneWorkbenchTileEntity workbench = (ArcaneWorkbenchTileEntity) tile;
-                SimpleContainer inv = new SimpleContainer(workbench.itemHandler.getSlots() + 1);
-                for (int i = 0; i < workbench.itemHandler.getSlots(); i++) {
-                    inv.setItem(i, workbench.itemHandler.getStackInSlot(i));
+            if (tile instanceof JewelerTableTileEntity) {
+                JewelerTableTileEntity table = (JewelerTableTileEntity) tile;
+                SimpleContainer inv = new SimpleContainer(table.itemHandler.getSlots() + 1);
+                for (int i = 0; i < table.itemHandler.getSlots(); i++) {
+                    inv.setItem(i, table.itemHandler.getStackInSlot(i));
                 }
-                inv.setItem(workbench.itemHandler.getSlots(), workbench.itemOutputHandler.getStackInSlot(0));
+                inv.setItem(table.itemHandler.getSlots(), table.itemOutputHandler.getStackInSlot(0));
                 Containers.dropContents(world, pos, inv);
             }
             super.onRemove(state, world, pos, newState, isMoving);
@@ -137,7 +124,7 @@ public class ArcaneWorkbenchBlock extends HorizontalDirectionalBlock implements 
             @Nullable
             @Override
             public AbstractContainerMenu createMenu(int i, Inventory playerInventory, Player playerEntity) {
-                return new ArcaneWorkbenchContainer(i, worldIn, pos, playerInventory, playerEntity);
+                return new JewelerTableContainer(i, worldIn, pos, playerInventory, playerEntity);
             }
         };
     }
@@ -166,7 +153,7 @@ public class ArcaneWorkbenchBlock extends HorizontalDirectionalBlock implements 
     @Nullable
     @Override
     public BlockEntity newBlockEntity(BlockPos pPos, BlockState pState) {
-        return new ArcaneWorkbenchTileEntity(pPos, pState);
+        return new JewelerTableTileEntity(pPos, pState);
     }
 
     @Nullable

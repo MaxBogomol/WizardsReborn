@@ -27,7 +27,7 @@ public class ArcanemiconChapters {
             EARTH_PROJECTILE, WATER_PROJECTILE, AIR_PROJECTILE, FIRE_PROJECTILE, VOID_PROJECTILE, FROST_PROJECTILE, HOLY_PROJECTILE,
             EARTH_RAY, WATER_RAY, AIR_RAY, FIRE_RAY, VOID_RAY, FROST_RAY, HOLY_RAY,
             MONOGRAMS, RESEARCHES, RESEARCH, LUNAM_MONOGRAM, VITA_MONOGRAM, SOLEM_MONOGRAM, MORS_MONOGRAM, MIRACULUM_MONOGRAM, TEMPUS_MONOGRAM, STATERA_MONOGRAM, ECLIPSIS_MONOGRAM, SICCITAS_MONOGRAM, SOLSTITIUM_MONOGRAM, FAMES_MONOGRAM, RENAISSANCE_MONOGRAM, BELLUM_MONOGRAM, LUX_MONOGRAM, KARA_MONOGRAM, DEGRADATIO_MONOGRAM, PRAEDICTIONEM_MONOGRAM, EVOLUTIONIS_MONOGRAM, DARK_MONOGRAM, UNIVERSUM_MONOGRAM,
-            MOR, ARCANE_LINEN, WISESTONE;
+            MOR, MORTAR, ARCANE_LINEN, WISESTONE;
     public static ResearchPage RESEARCH_MAIN, RESEARCH_LIST;
 
     public static void init() {
@@ -515,19 +515,19 @@ public class ArcanemiconChapters {
                 "wizards_reborn.arcanemicon.chapter.arcane_nature_index",
                 new TitledIndexPage("wizards_reborn.arcanemicon.page.arcane_nature_index",
                         new IndexEntry(ARCANUM, new ItemStack(WizardsReborn.ARCANUM.get())),
-                        new IndexEntry(ARCANUM_DUST_TRANSMUTATION, new ItemStack(WizardsReborn.ARCANUM_DUST.get()), RegisterKnowledges.ARCANUM_DUST_KNOWLEDGE),
-                        new IndexEntry(ARCANE_WOOD, new ItemStack(WizardsReborn.ARCANE_WOOD_PLANKS_ITEM.get()), RegisterKnowledges.ARCANUM_DUST_KNOWLEDGE),
-                        new IndexEntry(ARCANE_GOLD, new ItemStack(WizardsReborn.ARCANE_GOLD_INGOT.get()), RegisterKnowledges.ARCANUM_DUST_KNOWLEDGE),
-                        new IndexEntry(SCYTHES, new ItemStack(WizardsReborn.ARCANE_GOLD_SCYTHE.get()), RegisterKnowledges.ARCANE_GOLD_KNOWLEDGE),
-                        new IndexEntry(TRINKETS, new ItemStack(WizardsReborn.ARCANUM_AMULET.get()), RegisterKnowledges.ARCANE_GOLD_KNOWLEDGE)
+                        new IndexEntry(ARCANUM_DUST_TRANSMUTATION, new ItemStack(WizardsReborn.ARCANUM_DUST.get()), RegisterKnowledges.ARCANUM_DUST),
+                        new IndexEntry(ARCANE_WOOD, new ItemStack(WizardsReborn.ARCANE_WOOD_PLANKS_ITEM.get()), RegisterKnowledges.ARCANUM_DUST),
+                        new IndexEntry(ARCANE_GOLD, new ItemStack(WizardsReborn.ARCANE_GOLD_INGOT.get()), RegisterKnowledges.ARCANUM_DUST),
+                        new IndexEntry(SCYTHES, new ItemStack(WizardsReborn.ARCANE_GOLD_SCYTHE.get()), RegisterKnowledges.ARCANE_GOLD),
+                        new IndexEntry(TRINKETS, new ItemStack(WizardsReborn.ARCANUM_AMULET.get()), RegisterKnowledges.ARCANE_GOLD)
                 ),
                 new IndexPage(
-                        new IndexEntry(WISSEN, new ItemStack(WizardsReborn.WISSEN_WAND.get()), RegisterKnowledges.ARCANUM_DUST_KNOWLEDGE),
-                        new IndexEntry(WISSEN_TRANSLATOR, new ItemStack(WizardsReborn.WISSEN_TRANSLATOR_ITEM.get()), RegisterKnowledges.ARCANE_GOLD_KNOWLEDGE),
-                        new IndexEntry(ARCANE_PEDESTAL, new ItemStack(WizardsReborn.ARCANE_PEDESTAL_ITEM.get()), RegisterKnowledges.ARCANE_WOOD_KNOWLEDGE),
-                        new IndexEntry(WISSEN_ALTAR, new ItemStack(WizardsReborn.WISSEN_ALTAR_ITEM.get()), RegisterKnowledges.ARCANE_GOLD_KNOWLEDGE),
-                        new IndexEntry(WISSEN_CRYSTALLIZER, new ItemStack(WizardsReborn.WISSEN_CRYSTALLIZER_ITEM.get()), RegisterKnowledges.ARCANE_GOLD_KNOWLEDGE),
-                        new IndexEntry(ARCANE_WORKBENCH, new ItemStack(WizardsReborn.ARCANE_WORKBENCH_ITEM.get()), RegisterKnowledges.ARCANE_GOLD_KNOWLEDGE),
+                        new IndexEntry(WISSEN, new ItemStack(WizardsReborn.WISSEN_WAND.get()), RegisterKnowledges.ARCANUM_DUST),
+                        new IndexEntry(WISSEN_TRANSLATOR, new ItemStack(WizardsReborn.WISSEN_TRANSLATOR_ITEM.get()), RegisterKnowledges.ARCANE_GOLD),
+                        new IndexEntry(ARCANE_PEDESTAL, new ItemStack(WizardsReborn.ARCANE_PEDESTAL_ITEM.get()), RegisterKnowledges.ARCANE_WOOD),
+                        new IndexEntry(WISSEN_ALTAR, new ItemStack(WizardsReborn.WISSEN_ALTAR_ITEM.get()), RegisterKnowledges.ARCANE_GOLD),
+                        new IndexEntry(WISSEN_CRYSTALLIZER, new ItemStack(WizardsReborn.WISSEN_CRYSTALLIZER_ITEM.get()), RegisterKnowledges.ARCANE_GOLD),
+                        new IndexEntry(ARCANE_WORKBENCH, new ItemStack(WizardsReborn.ARCANE_WORKBENCH_ITEM.get()), RegisterKnowledges.ARCANE_GOLD),
                         new IndexEntry(ARCANE_LUMOS, new ItemStack(WizardsReborn.WHITE_ARCANE_LUMOS_ITEM.get()), RegisterKnowledges.WISSEN_CRYSTALLIZER)
                 ),
                 new IndexPage(
@@ -858,6 +858,35 @@ public class ArcanemiconChapters {
                 new TextPage("wizards_reborn.arcanemicon.page.mor.1")
         );
 
+        MORTAR = new Chapter(
+                "wizards_reborn.arcanemicon.chapter.mortar",
+                new TitledBlockPage("wizards_reborn.arcanemicon.page.mortar",
+                        new BlockEntry(new ItemStack(WizardsReborn.ARCANE_PEDESTAL_ITEM.get()), new ItemStack(WizardsReborn.ARCANE_WOOD_MORTAR.get()))
+                ),
+                new TitledBlockPage("wizards_reborn.arcanemicon.page.petals",
+                        new BlockEntry(new ItemStack(WizardsReborn.ARCANE_PEDESTAL_ITEM.get()), new ItemStack(WizardsReborn.PETALS.get()))
+                ),
+                new TitledBlockPage("wizards_reborn.arcanemicon.page.ground_mushrooms",
+                        new BlockEntry(new ItemStack(WizardsReborn.ARCANE_PEDESTAL_ITEM.get()), new ItemStack(WizardsReborn.GROUND_BROWN_MUSHROOM.get())),
+                        new BlockEntry(new ItemStack(WizardsReborn.ARCANE_PEDESTAL_ITEM.get()), new ItemStack(WizardsReborn.GROUND_RED_MUSHROOM.get())),
+                        new BlockEntry(new ItemStack(WizardsReborn.ARCANE_PEDESTAL_ITEM.get()), new ItemStack(WizardsReborn.GROUND_CRIMSON_FUNGUS.get())),
+                        new BlockEntry(new ItemStack(WizardsReborn.ARCANE_PEDESTAL_ITEM.get()), new ItemStack(WizardsReborn.GROUND_WARPED_FUNGUS.get())),
+                        new BlockEntry(new ItemStack(WizardsReborn.ARCANE_PEDESTAL_ITEM.get()), new ItemStack(WizardsReborn.GROUND_MOR.get())),
+                        new BlockEntry(new ItemStack(WizardsReborn.ARCANE_PEDESTAL_ITEM.get()), new ItemStack(WizardsReborn.GROUND_ELDER_MOR.get()))
+                ),
+                new CraftingTablePage(new ItemStack(WizardsReborn.ARCANE_WOOD_MORTAR.get()),
+                        new ItemStack(WizardsReborn.ARCANE_WOOD_PLANKS.get()), new ItemStack(WizardsReborn.ARCANE_WOOD_BRANCH.get()), new ItemStack(WizardsReborn.ARCANE_WOOD_PLANKS.get()),
+                        ItemStack.EMPTY, new ItemStack(WizardsReborn.ARCANE_WOOD_PLANKS.get())
+                ),
+                new MortarPage(new ItemStack(WizardsReborn.PETALS.get()), new ItemStack(Items.DANDELION)),
+                new MortarPage(new ItemStack(WizardsReborn.GROUND_BROWN_MUSHROOM.get()), new ItemStack(Items.BROWN_MUSHROOM)),
+                new MortarPage(new ItemStack(WizardsReborn.GROUND_RED_MUSHROOM.get()), new ItemStack(Items.RED_MUSHROOM)),
+                new MortarPage(new ItemStack(WizardsReborn.GROUND_CRIMSON_FUNGUS.get()), new ItemStack(Items.CRIMSON_FUNGUS)),
+                new MortarPage(new ItemStack(WizardsReborn.GROUND_WARPED_FUNGUS.get()), new ItemStack(Items.WARPED_FUNGUS)),
+                new MortarPage(new ItemStack(WizardsReborn.GROUND_MOR.get()), new ItemStack(WizardsReborn.MOR_ITEM.get())),
+                new MortarPage(new ItemStack(WizardsReborn.GROUND_ELDER_MOR.get()), new ItemStack(WizardsReborn.ELDER_MOR_ITEM.get()))
+        );
+
         ARCANE_LINEN = new Chapter(
                 "wizards_reborn.arcanemicon.chapter.arcane_linen",
                 new TitledBlockPage("wizards_reborn.arcanemicon.page.arcane_linen",
@@ -899,7 +928,6 @@ public class ArcanemiconChapters {
                         new ItemStack(Items.BLACKSTONE), new ItemStack(Items.BLACKSTONE), new ItemStack(Items.BLACKSTONE)
                 ),
                 new TitledBlockPage("wizards_reborn.arcanemicon.page.decorative_wisestone",
-                        new BlockEntry(new ItemStack(WizardsReborn.WISESTONE_ITEM.get())),
                         new BlockEntry(new ItemStack(WizardsReborn.WISESTONE_STAIRS_ITEM.get())),
                         new BlockEntry(new ItemStack(WizardsReborn.WISESTONE_SLAB_ITEM.get())),
                         new BlockEntry(new ItemStack(WizardsReborn.WISESTONE_WALL_ITEM.get())),
@@ -921,14 +949,92 @@ public class ArcanemiconChapters {
                         new BlockEntry(new ItemStack(WizardsReborn.CHISELED_WISESTONE_WALL_ITEM.get())),
                         new BlockEntry(new ItemStack(WizardsReborn.POLISHED_WISESTONE_PRESSURE_PLATE_ITEM.get())),
                         new BlockEntry(new ItemStack(WizardsReborn.POLISHED_WISESTONE_BUTTON_ITEM.get()))
+                ),
+                new CraftingTablePage(new ItemStack(WizardsReborn.WISESTONE_STAIRS_ITEM.get(), 4),
+                        new ItemStack(WizardsReborn.WISESTONE_ITEM.get()), ItemStack.EMPTY, ItemStack.EMPTY,
+                        new ItemStack(WizardsReborn.WISESTONE_ITEM.get()), new ItemStack(WizardsReborn.WISESTONE_ITEM.get()), ItemStack.EMPTY,
+                        new ItemStack(WizardsReborn.WISESTONE_ITEM.get()), new ItemStack(WizardsReborn.WISESTONE_ITEM.get()), new ItemStack(WizardsReborn.WISESTONE_ITEM.get())
+                ),
+                new CraftingTablePage(new ItemStack(WizardsReborn.WISESTONE_SLAB_ITEM.get(), 6),
+                        new ItemStack(WizardsReborn.WISESTONE_ITEM.get()), new ItemStack(WizardsReborn.WISESTONE_ITEM.get()), new ItemStack(WizardsReborn.WISESTONE_ITEM.get())
+                ),
+                new CraftingTablePage(new ItemStack(WizardsReborn.WISESTONE_WALL_ITEM.get(), 6),
+                        new ItemStack(WizardsReborn.WISESTONE_ITEM.get()), new ItemStack(WizardsReborn.WISESTONE_ITEM.get()), new ItemStack(WizardsReborn.WISESTONE_ITEM.get()),
+                        new ItemStack(WizardsReborn.WISESTONE_ITEM.get()), new ItemStack(WizardsReborn.WISESTONE_ITEM.get()), new ItemStack(WizardsReborn.WISESTONE_ITEM.get())
+                ),
+                new CraftingTablePage(new ItemStack(WizardsReborn.POLISHED_WISESTONE_ITEM.get(), 4),
+                        new ItemStack(WizardsReborn.WISESTONE_ITEM.get()), new ItemStack(WizardsReborn.WISESTONE_ITEM.get()), ItemStack.EMPTY,
+                        new ItemStack(WizardsReborn.WISESTONE_ITEM.get()), new ItemStack(WizardsReborn.WISESTONE_ITEM.get())
+                ),
+                new CraftingTablePage(new ItemStack(WizardsReborn.POLISHED_WISESTONE_STAIRS_ITEM.get(), 4),
+                        new ItemStack(WizardsReborn.POLISHED_WISESTONE_ITEM.get()), ItemStack.EMPTY, ItemStack.EMPTY,
+                        new ItemStack(WizardsReborn.POLISHED_WISESTONE_ITEM.get()), new ItemStack(WizardsReborn.POLISHED_WISESTONE_ITEM.get()), ItemStack.EMPTY,
+                        new ItemStack(WizardsReborn.POLISHED_WISESTONE_ITEM.get()), new ItemStack(WizardsReborn.POLISHED_WISESTONE_ITEM.get()), new ItemStack(WizardsReborn.POLISHED_WISESTONE_ITEM.get())
+                ),
+                new CraftingTablePage(new ItemStack(WizardsReborn.POLISHED_WISESTONE_SLAB_ITEM.get(), 6),
+                        new ItemStack(WizardsReborn.POLISHED_WISESTONE_ITEM.get()), new ItemStack(WizardsReborn.POLISHED_WISESTONE_ITEM.get()), new ItemStack(WizardsReborn.POLISHED_WISESTONE_ITEM.get())
+                ),
+                new CraftingTablePage(new ItemStack(WizardsReborn.POLISHED_WISESTONE_WALL_ITEM.get(), 6),
+                        new ItemStack(WizardsReborn.POLISHED_WISESTONE_ITEM.get()), new ItemStack(WizardsReborn.POLISHED_WISESTONE_ITEM.get()), new ItemStack(WizardsReborn.POLISHED_WISESTONE_ITEM.get()),
+                        new ItemStack(WizardsReborn.POLISHED_WISESTONE_ITEM.get()), new ItemStack(WizardsReborn.POLISHED_WISESTONE_ITEM.get()), new ItemStack(WizardsReborn.POLISHED_WISESTONE_ITEM.get())
+                ),
+                new CraftingTablePage(new ItemStack(WizardsReborn.WISESTONE_BRICKS_ITEM.get(), 4),
+                        new ItemStack(WizardsReborn.POLISHED_WISESTONE_ITEM.get()), new ItemStack(WizardsReborn.POLISHED_WISESTONE_ITEM.get()), ItemStack.EMPTY,
+                        new ItemStack(WizardsReborn.POLISHED_WISESTONE_ITEM.get()), new ItemStack(WizardsReborn.POLISHED_WISESTONE_ITEM.get())
+                ),
+                new CraftingTablePage(new ItemStack(WizardsReborn.WISESTONE_BRICKS_STAIRS_ITEM.get(), 4),
+                        new ItemStack(WizardsReborn.WISESTONE_BRICKS_ITEM.get()), ItemStack.EMPTY, ItemStack.EMPTY,
+                        new ItemStack(WizardsReborn.WISESTONE_BRICKS_ITEM.get()), new ItemStack(WizardsReborn.WISESTONE_BRICKS_ITEM.get()), ItemStack.EMPTY,
+                        new ItemStack(WizardsReborn.WISESTONE_BRICKS_ITEM.get()), new ItemStack(WizardsReborn.WISESTONE_BRICKS_ITEM.get()), new ItemStack(WizardsReborn.WISESTONE_BRICKS_ITEM.get())
+                ),
+                new CraftingTablePage(new ItemStack(WizardsReborn.WISESTONE_BRICKS_SLAB_ITEM.get(), 6),
+                        new ItemStack(WizardsReborn.WISESTONE_BRICKS_ITEM.get()), new ItemStack(WizardsReborn.WISESTONE_BRICKS_ITEM.get()), new ItemStack(WizardsReborn.WISESTONE_BRICKS_ITEM.get())
+                ),
+                new CraftingTablePage(new ItemStack(WizardsReborn.WISESTONE_BRICKS_WALL_ITEM.get(), 6),
+                        new ItemStack(WizardsReborn.WISESTONE_BRICKS_ITEM.get()), new ItemStack(WizardsReborn.WISESTONE_BRICKS_ITEM.get()), new ItemStack(WizardsReborn.WISESTONE_BRICKS_ITEM.get()),
+                        new ItemStack(WizardsReborn.WISESTONE_BRICKS_ITEM.get()), new ItemStack(WizardsReborn.WISESTONE_BRICKS_ITEM.get()), new ItemStack(WizardsReborn.WISESTONE_BRICKS_ITEM.get())
+                ),
+                new CraftingTablePage(new ItemStack(WizardsReborn.WISESTONE_TILE_ITEM.get(), 4),
+                        new ItemStack(WizardsReborn.WISESTONE_BRICKS_ITEM.get()), new ItemStack(WizardsReborn.WISESTONE_BRICKS_ITEM.get()), ItemStack.EMPTY,
+                        new ItemStack(WizardsReborn.WISESTONE_BRICKS_ITEM.get()), new ItemStack(WizardsReborn.WISESTONE_BRICKS_ITEM.get())
+                ),
+                new CraftingTablePage(new ItemStack(WizardsReborn.WISESTONE_TILE_STAIRS_ITEM.get(), 4),
+                        new ItemStack(WizardsReborn.WISESTONE_TILE_ITEM.get()), ItemStack.EMPTY, ItemStack.EMPTY,
+                        new ItemStack(WizardsReborn.WISESTONE_TILE_ITEM.get()), new ItemStack(WizardsReborn.WISESTONE_TILE_ITEM.get()), ItemStack.EMPTY,
+                        new ItemStack(WizardsReborn.WISESTONE_TILE_ITEM.get()), new ItemStack(WizardsReborn.WISESTONE_TILE_ITEM.get()), new ItemStack(WizardsReborn.WISESTONE_TILE_ITEM.get())
+                ),
+                new CraftingTablePage(new ItemStack(WizardsReborn.WISESTONE_TILE_SLAB_ITEM.get(), 6),
+                        new ItemStack(WizardsReborn.WISESTONE_TILE_ITEM.get()), new ItemStack(WizardsReborn.WISESTONE_TILE_ITEM.get()), new ItemStack(WizardsReborn.WISESTONE_TILE_ITEM.get())
+                ),
+                new CraftingTablePage(new ItemStack(WizardsReborn.WISESTONE_TILE_WALL_ITEM.get(), 6),
+                        new ItemStack(WizardsReborn.WISESTONE_TILE_ITEM.get()), new ItemStack(WizardsReborn.WISESTONE_TILE_ITEM.get()), new ItemStack(WizardsReborn.WISESTONE_TILE_ITEM.get()),
+                        new ItemStack(WizardsReborn.WISESTONE_TILE_ITEM.get()), new ItemStack(WizardsReborn.WISESTONE_TILE_ITEM.get()), new ItemStack(WizardsReborn.WISESTONE_TILE_ITEM.get())
+                ),
+                new CraftingTablePage(new ItemStack(WizardsReborn.CHISELED_WISESTONE_ITEM.get(), 4),
+                        ItemStack.EMPTY, new ItemStack(WizardsReborn.POLISHED_WISESTONE_ITEM.get()), ItemStack.EMPTY,
+                        new ItemStack(WizardsReborn.POLISHED_WISESTONE_ITEM.get()), ItemStack.EMPTY, new ItemStack(WizardsReborn.POLISHED_WISESTONE_ITEM.get()),
+                        ItemStack.EMPTY, new ItemStack(WizardsReborn.POLISHED_WISESTONE_ITEM.get())
+                ),
+                new CraftingTablePage(new ItemStack(WizardsReborn.CHISELED_WISESTONE_STAIRS_ITEM.get(), 4),
+                        new ItemStack(WizardsReborn.CHISELED_WISESTONE_ITEM.get()), ItemStack.EMPTY, ItemStack.EMPTY,
+                        new ItemStack(WizardsReborn.CHISELED_WISESTONE_ITEM.get()), new ItemStack(WizardsReborn.CHISELED_WISESTONE_ITEM.get()), ItemStack.EMPTY,
+                        new ItemStack(WizardsReborn.CHISELED_WISESTONE_ITEM.get()), new ItemStack(WizardsReborn.CHISELED_WISESTONE_ITEM.get()), new ItemStack(WizardsReborn.CHISELED_WISESTONE_ITEM.get())
+                ),
+                new CraftingTablePage(new ItemStack(WizardsReborn.CHISELED_WISESTONE_SLAB_ITEM.get(), 6),
+                        new ItemStack(WizardsReborn.CHISELED_WISESTONE_ITEM.get()), new ItemStack(WizardsReborn.CHISELED_WISESTONE_ITEM.get()), new ItemStack(WizardsReborn.CHISELED_WISESTONE_ITEM.get())
+                ),
+                new CraftingTablePage(new ItemStack(WizardsReborn.CHISELED_WISESTONE_WALL_ITEM.get(), 6),
+                        new ItemStack(WizardsReborn.CHISELED_WISESTONE_ITEM.get()), new ItemStack(WizardsReborn.CHISELED_WISESTONE_ITEM.get()), new ItemStack(WizardsReborn.CHISELED_WISESTONE_ITEM.get()),
+                        new ItemStack(WizardsReborn.CHISELED_WISESTONE_ITEM.get()), new ItemStack(WizardsReborn.CHISELED_WISESTONE_ITEM.get()), new ItemStack(WizardsReborn.CHISELED_WISESTONE_ITEM.get())
                 )
         );
 
         ALCHEMY_INDEX = new Chapter(
                 "wizards_reborn.arcanemicon.chapter.alchemy_index",
                 new TitledIndexPage("wizards_reborn.arcanemicon.page.alchemy_index",
-                    new IndexEntry(MOR, new ItemStack(WizardsReborn.MOR_ITEM.get())),
-                    new IndexEntry(ARCANE_LINEN, new ItemStack(WizardsReborn.ARCANE_LINEN_ITEM.get()), RegisterKnowledges.WISSEN_CRYSTALLIZER),
+                        new IndexEntry(MOR, new ItemStack(WizardsReborn.MOR_ITEM.get())),
+                        new IndexEntry(MORTAR, new ItemStack(WizardsReborn.ARCANE_WOOD_MORTAR.get()), RegisterKnowledges.ARCANE_WOOD),
+                        new IndexEntry(ARCANE_LINEN, new ItemStack(WizardsReborn.ARCANE_LINEN_ITEM.get()), RegisterKnowledges.WISSEN_CRYSTALLIZER),
                         new IndexEntry(WISESTONE, new ItemStack(WizardsReborn.WISESTONE_ITEM.get()), RegisterKnowledges.ARCANE_WORKBENCH)
                 )
         );

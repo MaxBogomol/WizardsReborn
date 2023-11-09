@@ -171,6 +171,7 @@ public class WizardsRebornItemGroup {
             event.accept(WizardsReborn.WISSEN_CRYSTALLIZER_ITEM);
             event.accept(WizardsReborn.ARCANE_WORKBENCH_ITEM);
             event.accept(WizardsReborn.WISSEN_CELL_ITEM);
+            event.accept(WizardsReborn.JEWELER_TABLE_ITEM);
 
             event.accept(WizardsReborn.WHITE_ARCANE_LUMOS_ITEM);
             event.accept(WizardsReborn.ORANGE_ARCANE_LUMOS_ITEM);
