@@ -1,0 +1,17 @@
+{
+  "type": "wizards_reborn:jeweler_table",
+  "output": {
+    "item": "wizards_reborn:faceted_water_crystal",
+    "count": 1
+  },
+  "wissen": 1500,
+  "ingredients": [
+    {
+      "item": "wizards_reborn:water_crystal"
+    },
+    {
+      "item": "wizards_reborn:arcanum"
+    }
+  ],
+  "saveNBT": true
+}

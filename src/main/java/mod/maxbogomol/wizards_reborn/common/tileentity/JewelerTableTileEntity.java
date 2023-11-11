@@ -6,6 +6,7 @@ import mod.maxbogomol.wizards_reborn.api.wissen.IWissenTileEntity;
 import mod.maxbogomol.wizards_reborn.api.wissen.IWissenWandFunctionalTileEntity;
 import mod.maxbogomol.wizards_reborn.api.wissen.WissenUtils;
 import mod.maxbogomol.wizards_reborn.client.particle.Particles;
+import mod.maxbogomol.wizards_reborn.common.item.CrystalItem;
 import mod.maxbogomol.wizards_reborn.common.recipe.JewelerTableRecipe;
 import mod.maxbogomol.wizards_reborn.utils.PacketUtils;
 import net.minecraft.core.BlockPos;
@@ -18,6 +19,7 @@ import net.minecraft.world.SimpleContainer;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.phys.Vec2;
 import net.minecraft.world.phys.Vec3;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.capabilities.ForgeCapabilities;
@@ -30,6 +32,7 @@ import org.jetbrains.annotations.NotNull;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
+import java.awt.*;
 import java.util.Optional;
 import java.util.Random;
 
@@ -161,35 +164,25 @@ public class JewelerTableTileEntity extends TileSimpleInventory implements Ticka
 
             if (wissenInCraft > 0 && startCraft) {
                 Vec3 pos = getBlockRotatePos();
-                pos = new Vec3(worldPosition.getX() + pos.x(), worldPosition.getY() + pos.y() + 0.1875F, worldPosition.getZ() + pos.z());
+                Vec2 vel = getBlockRotateParticle();
+                pos = new Vec3(worldPosition.getX() + pos.x(), worldPosition.getY() + pos.y() - 0.125F, worldPosition.getZ() + pos.z());
 
-                if (random.nextFloat() < 0.2) {
-                    Particles.create(WizardsReborn.SPARKLE_PARTICLE)
-                            .addVelocity(((random.nextDouble() - 0.5D) / 20), ((random.nextDouble() - 0.5D) / 20), ((random.nextDouble() - 0.5D) / 20))
-                            .setAlpha(0.25f, 0).setScale(0.1f * getStage(), 0)
-                            .setColor(0.466f, 0.643f, 0.815f)
-                            .setLifetime(30)
-                            .setSpin((0.5f * (float) ((random.nextDouble() - 0.5D) * 2)))
-                            .spawn(level, pos.x(), pos.y(), pos.z());
-                }
-                if (random.nextFloat() < 0.1) {
-                    Particles.create(WizardsReborn.SPARKLE_PARTICLE)
-                            .addVelocity(((random.nextDouble() - 0.5D) / 40), ((random.nextDouble() - 0.5D) / 40), ((random.nextDouble() - 0.5D) / 40))
-                            .setAlpha(0.75f, 0).setScale(0.1f * getStage(), 0)
-                            .setColor(random.nextFloat(), random.nextFloat(), random.nextFloat())
-                            .setLifetime(65)
-                            .setSpin((0.1f * (float) ((random.nextDouble() - 0.5D) * 2)))
-                            .spawn(level, pos.x(), pos.y(), pos.z());
-                }
-                if (random.nextFloat() < 0.3) {
-                    double X = ((random.nextDouble() - 0.5D) * 0.5);
-                    double Z = ((random.nextDouble() - 0.5D) * 0.5);
-                    Particles.create(WizardsReborn.KARMA_PARTICLE)
-                            .addVelocity(-(X / 100), (random.nextDouble() / 20), -(Z / 100))
-                            .setAlpha(0.5f, 0).setScale(0.1f, 0.025f)
-                            .setColor(0.733f, 0.564f, 0.937f)
-                            .setLifetime(15)
-                            .spawn(level, pos.x(), pos.y(), pos.z());
+                if (itemHandler.getStackInSlot(0).getItem() instanceof CrystalItem crystalItem) {
+
+                    Color color = crystalItem.getType().getColor();
+                    float r = color.getRed() / 255f;
+                    float g = color.getGreen() / 255f;
+                    float b = color.getBlue() / 255f;
+
+                    if (random.nextFloat() < 0.6) {
+                        Particles.create(WizardsReborn.SPARKLE_PARTICLE)
+                                .addVelocity((random.nextDouble() / 20) * vel.x, (random.nextDouble() / 20), (random.nextDouble() / 20) * vel.y)
+                                .setAlpha(0.25f, 0).setScale(0.2f, 0)
+                                .setColor(r, g, b)
+                                .setLifetime(30)
+                                .setSpin((0.5f * (float) ((random.nextDouble() - 0.5D) * 2)))
+                                .spawn(level, pos.x(), pos.y(), pos.z());
+                    }
                 }
             }
         }
@@ -307,6 +300,21 @@ public class JewelerTableTileEntity extends TileSimpleInventory implements Ticka
                 return new Vec3(0.28125F, 0.84375F, 0.5F);
             default:
                 return new Vec3(0.5F, 0.84375F, 0.5F);
+        }
+    }
+
+    public Vec2 getBlockRotateParticle() {
+        switch (this.getBlockState().getValue(HORIZONTAL_FACING)) {
+            case NORTH:
+                return new Vec2(0F, -1F);
+            case SOUTH:
+                return new Vec2(0F, 1F);
+            case WEST:
+                return new Vec2(-1F, 0F);
+            case EAST:
+                return new Vec2(1F, 0F);
+            default:
+                return new Vec2(0F, 0F);
         }
     }
 

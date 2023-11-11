@@ -1,0 +1,17 @@
+{
+  "type": "wizards_reborn:jeweler_table",
+  "output": {
+    "item": "wizards_reborn:faceted_void_crystal",
+    "count": 1
+  },
+  "wissen": 1500,
+  "ingredients": [
+    {
+      "item": "wizards_reborn:void_crystal"
+    },
+    {
+      "item": "wizards_reborn:arcanum"
+    }
+  ],
+  "saveNBT": true
+}

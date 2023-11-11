@@ -947,6 +947,7 @@ public class ArcanemiconChapters {
                         new BlockEntry(new ItemStack(WizardsReborn.CHISELED_WISESTONE_STAIRS_ITEM.get())),
                         new BlockEntry(new ItemStack(WizardsReborn.CHISELED_WISESTONE_SLAB_ITEM.get())),
                         new BlockEntry(new ItemStack(WizardsReborn.CHISELED_WISESTONE_WALL_ITEM.get())),
+                        new BlockEntry(new ItemStack(WizardsReborn.WISESTONE_PILLAR_ITEM.get())),
                         new BlockEntry(new ItemStack(WizardsReborn.POLISHED_WISESTONE_PRESSURE_PLATE_ITEM.get())),
                         new BlockEntry(new ItemStack(WizardsReborn.POLISHED_WISESTONE_BUTTON_ITEM.get()))
                 ),
@@ -1026,6 +1027,16 @@ public class ArcanemiconChapters {
                 new CraftingTablePage(new ItemStack(WizardsReborn.CHISELED_WISESTONE_WALL_ITEM.get(), 6),
                         new ItemStack(WizardsReborn.CHISELED_WISESTONE_ITEM.get()), new ItemStack(WizardsReborn.CHISELED_WISESTONE_ITEM.get()), new ItemStack(WizardsReborn.CHISELED_WISESTONE_ITEM.get()),
                         new ItemStack(WizardsReborn.CHISELED_WISESTONE_ITEM.get()), new ItemStack(WizardsReborn.CHISELED_WISESTONE_ITEM.get()), new ItemStack(WizardsReborn.CHISELED_WISESTONE_ITEM.get())
+                ),
+                new CraftingTablePage(new ItemStack(WizardsReborn.WISESTONE_PILLAR_ITEM.get(), 2),
+                        new ItemStack(WizardsReborn.POLISHED_WISESTONE_ITEM.get()), ItemStack.EMPTY, ItemStack.EMPTY,
+                        new ItemStack(WizardsReborn.CHISELED_WISESTONE_ITEM.get())
+                ),
+                new CraftingTablePage(new ItemStack(WizardsReborn.POLISHED_WISESTONE_PRESSURE_PLATE_ITEM.get(), 1),
+                        new ItemStack(WizardsReborn.POLISHED_WISESTONE_ITEM.get()), new ItemStack(WizardsReborn.CHISELED_WISESTONE_ITEM.get())
+                ),
+                new CraftingTablePage(new ItemStack(WizardsReborn.POLISHED_WISESTONE_BUTTON_ITEM.get(), 1),
+                        new ItemStack(WizardsReborn.POLISHED_WISESTONE_ITEM.get())
                 )
         );
 

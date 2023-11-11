@@ -19,13 +19,17 @@ public class JewelerTableTileEntityRenderer implements BlockEntityRenderer<Jewel
     @Override
     public void render(JewelerTableTileEntity table, float partialTicks, PoseStack ms, MultiBufferSource buffers, int light, int overlay) {
         Minecraft mc = Minecraft.getInstance();
-
         Vec3 pos = table.getBlockRotatePos();
+        double ticks = (ClientTickHandler.ticksInGame + partialTicks) * 2;
+        double ticksUp = (ClientTickHandler.ticksInGame + partialTicks) * 4;
+        ticksUp = (ticksUp) % 360;
+
+        double ticksStone = (ClientTickHandler.ticksInGame + partialTicks) * 20;
 
         ms.pushPose();
         ms.translate(pos.x(), pos.y(), pos.z());
         ms.mulPose(Axis.YP.rotationDegrees(table.getBlockRotate()));
-        ms.mulPose(Axis.XP.rotationDegrees((ClientTickHandler.ticksInGame + partialTicks) * 2));
+        ms.mulPose(Axis.XP.rotationDegrees((float) ticksStone));
         RenderUtils.renderCustomModel(WizardsRebornClient.JEWELER_TABLE_STONE_MODEl, ItemDisplayContext.FIXED, false, ms, buffers, light, overlay);
         ms.popPose();
 
@@ -50,12 +54,12 @@ public class JewelerTableTileEntityRenderer implements BlockEntityRenderer<Jewel
         ms.popPose();
 
         ms.pushPose();
-        ms.translate(0.5F, 0.703125F + 0.03125F, 0.5F);
-        ms.mulPose(Axis.YP.rotationDegrees(table.getBlockRotate()));
-        ms.mulPose(Axis.XP.rotationDegrees(90F + 7F));
-        ms.mulPose(Axis.ZP.rotationDegrees(-15F));
-        ms.translate(-0.125F, -0.0625F, 0);
-        ms.scale(0.5F,0.5F,0.5F);
+        ms.translate(0.5F, 1F, 0.5F);
+        ms.mulPose(Axis.YP.rotationDegrees(table.getBlockRotate() + 90F));
+        ms.translate(0.125F, 0, 0);
+        ms.translate(0F, (float) (Math.sin(Math.toRadians(ticksUp)) * 0.03125F), 0F);
+        ms.mulPose(Axis.YP.rotationDegrees((float) ticks));
+        ms.scale(0.5F, 0.5F, 0.5F);
         mc.getItemRenderer().renderStatic(table.itemOutputHandler.getStackInSlot(0), ItemDisplayContext.FIXED, light, overlay, ms, buffers, table.getLevel(), 0);
         ms.popPose();
     }
