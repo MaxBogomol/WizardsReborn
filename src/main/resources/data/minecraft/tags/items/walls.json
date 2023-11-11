@@ -1,0 +1,10 @@
+{
+  "replace": false,
+  "values": [
+    "wizards_reborn:wisestone_wall",
+    "wizards_reborn:polished_wisestone_wall",
+    "wizards_reborn:wisestone_bricks_wall",
+    "wizards_reborn:wisestone_tile_wall",
+    "wizards_reborn:chiseled_wisestone_wall"
+  ]
+}
