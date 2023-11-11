@@ -175,9 +175,24 @@ public class JewelerTableTileEntity extends TileSimpleInventory implements Ticka
                     float b = color.getBlue() / 255f;
 
                     if (random.nextFloat() < 0.6) {
+                        float x = 0F;
+                        float y = 0F;
+
+                        if (vel.x == 0) {
+                            x = (float) (random.nextDouble()/ 20 * vel.x);
+                        } else {
+                            x = (float) ((random.nextDouble() - 0.5D) / 20);
+                        }
+
+                        if (vel.y == 0) {
+                            y = (float) (random.nextDouble()/ 20 * vel.y);
+                        } else {
+                            y = (float) ((random.nextDouble() - 0.5D) / 20);
+                        }
+
                         Particles.create(WizardsReborn.SPARKLE_PARTICLE)
-                                .addVelocity((random.nextDouble() / 20) * vel.x, (random.nextDouble() / 20), (random.nextDouble() / 20) * vel.y)
-                                .setAlpha(0.25f, 0).setScale(0.2f, 0)
+                                .addVelocity(x, (random.nextDouble() / 30), y)
+                                .setAlpha(0.35f, 0).setScale(0.2f, 0)
                                 .setColor(r, g, b)
                                 .setLifetime(30)
                                 .setSpin((0.5f * (float) ((random.nextDouble() - 0.5D) * 2)))

@@ -1,0 +1,10 @@
+{
+  "replace": false,
+  "values": [
+    "wizards_reborn:wisestone_stairs",
+    "wizards_reborn:polished_wisestone_stairs",
+    "wizards_reborn:wisestone_bricks_stairs",
+    "wizards_reborn:wisestone_tile_stairs",
+    "wizards_reborn:chiseled_wisestone_stairs"
+  ]
+}
