@@ -179,15 +179,15 @@ public class JewelerTableTileEntity extends TileSimpleInventory implements Ticka
                         float y = 0F;
 
                         if (vel.x == 0) {
-                            x = (float) (random.nextDouble()/ 20 * vel.x);
-                        } else {
                             x = (float) ((random.nextDouble() - 0.5D) / 20);
+                        } else {
+                            x = (float) ((random.nextDouble() / 20) * vel.x);
                         }
 
                         if (vel.y == 0) {
-                            y = (float) (random.nextDouble()/ 20 * vel.y);
-                        } else {
                             y = (float) ((random.nextDouble() - 0.5D) / 20);
+                        } else {
+                            y = (float) ((random.nextDouble() / 20) * vel.y);
                         }
 
                         Particles.create(WizardsReborn.SPARKLE_PARTICLE)

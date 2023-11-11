@@ -9,6 +9,7 @@ import mod.maxbogomol.wizards_reborn.client.particle.ArcaneWoodLeafParticleType;
 import mod.maxbogomol.wizards_reborn.client.particle.KarmaParticleType;
 import mod.maxbogomol.wizards_reborn.client.particle.SparkleParticleType;
 import mod.maxbogomol.wizards_reborn.client.particle.WispParticleType;
+import mod.maxbogomol.wizards_reborn.client.render.block.PipeModel;
 import mod.maxbogomol.wizards_reborn.client.render.entity.ArcaneWoodBoatModel;
 import mod.maxbogomol.wizards_reborn.client.render.entity.SpellProjectileRenderer;
 import mod.maxbogomol.wizards_reborn.client.render.item.*;
@@ -27,8 +28,7 @@ import net.minecraft.client.renderer.blockentity.BlockEntityRenderers;
 import net.minecraft.client.renderer.blockentity.HangingSignRenderer;
 import net.minecraft.client.renderer.blockentity.SignRenderer;
 import net.minecraft.client.renderer.entity.EntityRenderers;
-import net.minecraft.client.resources.model.BakedModel;
-import net.minecraft.client.resources.model.ModelResourceLocation;
+import net.minecraft.client.resources.model.*;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.client.event.*;
@@ -58,6 +58,16 @@ public class WizardsRebornClient {
     public static ShaderInstance getSpriteParticleShader() { return SPRITE_PARTICLE_SHADER; }
 
     public static boolean optifinePresent = false;
+
+    public static PipeModel fluidPipe;
+
+    public static final ModelResourceLocation FLUID_CENTER = new ModelResourceLocation(new ResourceLocation(WizardsReborn.MOD_ID, "fluid_pipe_center"), "");
+    public static final ModelResourceLocation FLUID_EXTRACTOR = new ModelResourceLocation(new ResourceLocation(WizardsReborn.MOD_ID, "fluid_extractor_center"), "");
+    public static final ModelResourceLocation FLUID_CONNECTION = new ModelResourceLocation(new ResourceLocation(WizardsReborn.MOD_ID, "fluid_pipe_connection"), "");
+    public static final ModelResourceLocation FLUID_END = new ModelResourceLocation(new ResourceLocation(WizardsReborn.MOD_ID, "fluid_pipe_end"), "");
+    public static final ModelResourceLocation FLUID_CONNECTION_2 = new ModelResourceLocation(new ResourceLocation(WizardsReborn.MOD_ID, "fluid_pipe_connection_opposite"), "");
+    public static final ModelResourceLocation FLUID_END_2 = new ModelResourceLocation(new ResourceLocation(WizardsReborn.MOD_ID, "fluid_pipe_end_opposite"), "");
+
 
     @Mod.EventBusSubscriber(bus=Mod.EventBusSubscriber.Bus.MOD, value = Dist.CLIENT)
     public static class RegistryEvents {
@@ -106,6 +116,13 @@ public class WizardsRebornClient {
             }
 
             event.register(JEWELER_TABLE_STONE_MODEl);
+
+            event.register(FLUID_CENTER);
+            event.register(FLUID_EXTRACTOR);
+            event.register(FLUID_CONNECTION);
+            event.register(FLUID_END);
+            event.register(FLUID_CONNECTION_2);
+            event.register(FLUID_END_2);
         }
 
         @SubscribeEvent
@@ -125,6 +142,19 @@ public class WizardsRebornClient {
             if (ClientConfig.LARGE_ITEM_MODEL.get()) {
                 Item2DRenderer.onModelBakeEvent(event);
             }
+
+            fluidPipe = new PipeModel(map.get(FLUID_CENTER), "fluid_pipe");
+
+            for (ResourceLocation resourceLocation : event.getModels().keySet()) {
+                if (resourceLocation.getPath().equals("fluid_pipe") && !resourceLocation.toString().contains("inventory")) {
+                    map.put(resourceLocation, fluidPipe);
+                }
+            }
+        }
+
+        @SubscribeEvent
+        public static void afterModelBake(ModelEvent.BakingCompleted event) {
+            fluidPipe.init(event.getModelManager());
         }
 
         @SubscribeEvent

@@ -1,0 +1,6 @@
+{
+  "parent": "wizards_reborn:block/pipe_inventory",
+  "textures": {
+    "pipe": "wizards_reborn:block/fluid_pipe"
+  }
+}

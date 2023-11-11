@@ -1,0 +1,16 @@
+{
+	"credit": "Made with Blockbench",
+	"parent": "block/block",
+	"elements": [
+		{
+			"from": [5, 0, 5],
+			"to": [11, 5, 11],
+			"faces": {
+				"north": {"uv": [0, 0, 5, 6], "rotation": 270, "texture": "#pipe"},
+				"east": {"uv": [0, 0, 5, 6], "rotation": 270, "texture": "#pipe"},
+				"south": {"uv": [0, 0, 5, 6], "rotation": 270, "texture": "#pipe"},
+				"west": {"uv": [0, 0, 5, 6], "rotation": 270, "texture": "#pipe"}
+			}
+		}
+	]
+}
