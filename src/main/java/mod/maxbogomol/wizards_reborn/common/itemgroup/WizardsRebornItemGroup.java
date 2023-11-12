@@ -175,6 +175,7 @@ public class WizardsRebornItemGroup {
             event.accept(WizardsReborn.JEWELER_TABLE_ITEM);
 
             event.accept(WizardsReborn.FLUID_PIPE_ITEM);
+            event.accept(WizardsReborn.STEAM_PIPE_ITEM);
 
             event.accept(WizardsReborn.WHITE_ARCANE_LUMOS_ITEM);
             event.accept(WizardsReborn.ORANGE_ARCANE_LUMOS_ITEM);

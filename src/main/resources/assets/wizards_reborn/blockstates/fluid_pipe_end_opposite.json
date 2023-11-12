@@ -1,7 +1,7 @@
 {
   "variants": {
     "": {
-      "model": "wizards_reborn:block/fluid_pipe_end_2"
+      "model": "wizards_reborn:block/fluid_pipe_end_alt"
     }
   }
 }

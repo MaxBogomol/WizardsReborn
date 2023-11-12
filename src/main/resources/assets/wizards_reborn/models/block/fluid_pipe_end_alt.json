@@ -1,5 +1,5 @@
 {
-  "parent": "wizards_reborn:block/pipe_center",
+  "parent": "wizards_reborn:block/pipe_end_alt",
   "textures": {
     "particle": "wizards_reborn:block/polished_wisestone",
     "pipe": "wizards_reborn:block/fluid_pipe"

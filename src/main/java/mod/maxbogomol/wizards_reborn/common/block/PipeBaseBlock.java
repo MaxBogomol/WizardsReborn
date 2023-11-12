@@ -1,13 +1,17 @@
 package mod.maxbogomol.wizards_reborn.common.block;
 
+import mod.maxbogomol.wizards_reborn.common.item.equipment.WissenWandItem;
 import mod.maxbogomol.wizards_reborn.common.tileentity.PipeBaseTileEntity;
 import mod.maxbogomol.wizards_reborn.utils.PacketUtils;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.sounds.SoundEvents;
+import net.minecraft.sounds.SoundSource;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
@@ -69,98 +73,106 @@ public abstract class PipeBaseBlock extends Block implements EntityBlock, Simple
 
     @Override
     public InteractionResult use(BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hit) {
-        //if (!Misc.isHoldingHammer(player, hand)) {
-        //    if (player.getItemInHand(hand).is(EmbersItemTags.PIPE_UNCLOGGER)) {
-        //        if (unclog(level.getBlockEntity(pos), level, pos))
-        //            return InteractionResult.SUCCESS;
-        //    }
-        //    return InteractionResult.PASS;
-        //}
-        BlockEntity BE = level.getBlockEntity(pos);
-        if (BE instanceof PipeBaseTileEntity pipe) {
-            double reach = player.getBlockReach();
-            Vec3 eyePosition = player.getEyePosition();
-            Vec3 lookVector = player.getLookAngle().multiply(reach, reach, reach).add(eyePosition);
+        if (!level.isClientSide) {
+            ItemStack stack = player.getItemInHand(hand).copy();
+            boolean isWand = false;
 
-            Vec3[] hitPositions = new Vec3[6];
-            BlockHitResult centerHit = getCenterShape().clip(eyePosition, lookVector, pos);
-
-            for (int i = 0; i < 6; i++) {
-                BlockHitResult partHit = null;
-                if (pipe.connections[i] == PipeConnection.END) {
-                    partHit = END_AABBS[i].clip(eyePosition, lookVector, pos);
-                } else if (pipe.connections[i] == PipeConnection.PIPE) {
-                    partHit = PIPE_AABBS[i].clip(eyePosition, lookVector, pos);
-                }
-                if (partHit != null) {
-                    hitPositions[i] = partHit.getLocation();
+            if (stack.getItem() instanceof WissenWandItem) {
+                if (WissenWandItem.getMode(stack) == 0) {
+                    isWand = true;
                 }
             }
-            int closestHit = -1;
-            double closestDistance = reach;
-            if (centerHit != null)
-                closestDistance = eyePosition.distanceTo(centerHit.getLocation());
-            for (int i = 0; i < 6; i++) {
-                if (hitPositions[i] != null) {
-                    double dist = eyePosition.distanceTo(hitPositions[i]);
-                    if (dist < closestDistance) {
-                        closestDistance = dist;
-                        closestHit = i;
-                    }
-                }
+
+            if (!isWand) {
+                return InteractionResult.PASS;
             }
-            if (closestHit == -1) {
-                Direction face = hit.getDirection();
-                if (pipe.getConnection(face) != PipeConnection.DISABLED)
-                    return InteractionResult.PASS;
-                BlockPos facingPos = pos.relative(face);
-                BlockState facingState = level.getBlockState(facingPos);
 
-                if (facingState.is(getToggleConnectionTag()) && level.getBlockEntity(facingPos) instanceof PipeBaseTileEntity facingPipe) {
-                    pipe.setConnection(face, PipeConnection.PIPE);
-                    facingPipe.setConnection(face.getOpposite(), PipeConnection.PIPE);
-                    level.updateNeighbourForOutputSignal(pos, this);
-                    level.updateNeighbourForOutputSignal(facingPos, this);
-                    //level.playLocalSound(pos.getX() + 0.5 + face.getStepX() * 0.5, pos.getY() + 0.5 + face.getStepY() * 0.5, pos.getZ() + 0.5 + face.getStepZ() * 0.5, EmbersSounds.PIPE_CONNECT.get(), SoundSource.BLOCKS, 1.0f, 1.0f, false);
-                    PacketUtils.SUpdateTileEntityPacket(pipe);
-                    return InteractionResult.SUCCESS;
-                }
-                BlockEntity blockEntity = level.getBlockEntity(facingPos);
-                if (connectToTile(blockEntity, face)) {
-                    if (facingState.getBlock() instanceof IPipeConnection) {
-                        pipe.setConnection(face, ((IPipeConnection) facingState.getBlock()).getPipeConnection(facingState, face.getOpposite()));
-                    } else {
-                        pipe.setConnection(face, PipeConnection.END);
+            BlockEntity BE = level.getBlockEntity(pos);
+            if (BE instanceof PipeBaseTileEntity pipe) {
+                double reach = player.getBlockReach();
+                Vec3 eyePosition = player.getEyePosition();
+                Vec3 lookVector = player.getLookAngle().multiply(reach, reach, reach).add(eyePosition);
+
+                Vec3[] hitPositions = new Vec3[6];
+                BlockHitResult centerHit = getCenterShape().clip(eyePosition, lookVector, pos);
+
+                for (int i = 0; i < 6; i++) {
+                    BlockHitResult partHit = null;
+                    if (pipe.connections[i] == PipeConnection.END) {
+                        partHit = END_AABBS[i].clip(eyePosition, lookVector, pos);
+                    } else if (pipe.connections[i] == PipeConnection.PIPE) {
+                        partHit = PIPE_AABBS[i].clip(eyePosition, lookVector, pos);
                     }
-                    level.updateNeighbourForOutputSignal(pos, this);
-                    facingState.updateShape(face.getOpposite(), state, level, facingPos, pos);
-                    //level.playLocalSound(pos.getX() + 0.5 + face.getStepX() * 0.4, pos.getY() + 0.5 + face.getStepY() * 0.4, pos.getZ() + 0.5 + face.getStepZ() * 0.4, EmbersSounds.PIPE_CONNECT.get(), SoundSource.BLOCKS, 1.0f, 1.0f, false);
-                    PacketUtils.SUpdateTileEntityPacket(pipe);
-                    return InteractionResult.SUCCESS;
+                    if (partHit != null) {
+                        hitPositions[i] = partHit.getLocation();
+                    }
                 }
-            } else {
-                Direction direction = Direction.from3DDataValue(closestHit);
-                if (!pipe.getConnection(direction).transfer)
-                    return InteractionResult.PASS;
-                BlockPos facingPos = pos.relative(direction);
-                BlockState facingState = level.getBlockState(facingPos);
+                int closestHit = -1;
+                double closestDistance = reach;
+                if (centerHit != null)
+                    closestDistance = eyePosition.distanceTo(centerHit.getLocation());
+                for (int i = 0; i < 6; i++) {
+                    if (hitPositions[i] != null) {
+                        double dist = eyePosition.distanceTo(hitPositions[i]);
+                        if (dist < closestDistance) {
+                            closestDistance = dist;
+                            closestHit = i;
+                        }
+                    }
+                }
+                if (closestHit == -1) {
+                    Direction face = hit.getDirection();
+                    if (pipe.getConnection(face) != PipeConnection.DISABLED)
+                        return InteractionResult.PASS;
+                    BlockPos facingPos = pos.relative(face);
+                    BlockState facingState = level.getBlockState(facingPos);
 
-                if (pipe.getConnection(direction) == PipeConnection.PIPE && facingState.is(getToggleConnectionTag()) && level.getBlockEntity(facingPos) instanceof PipeBaseTileEntity facingPipe) {
-                    pipe.setConnection(direction, PipeConnection.DISABLED);
-                    facingPipe.setConnection(direction.getOpposite(), PipeConnection.DISABLED);
-                    level.updateNeighbourForOutputSignal(pos, this);
-                    level.updateNeighbourForOutputSignal(facingPos, this);
-                    //level.playLocalSound(pos.getX() + 0.5 + direction.getStepX() * 0.5, pos.getY() + 0.5 + direction.getStepY() * 0.5, pos.getZ() + 0.5 + direction.getStepZ() * 0.5, EmbersSounds.PIPE_DISCONNECT.get(), SoundSource.BLOCKS, 1.0f, 1.0f, false);
-                    PacketUtils.SUpdateTileEntityPacket(pipe);
-                    return InteractionResult.SUCCESS;
-                }
-                if (pipe.getConnection(direction).transfer && !facingState.is(getConnectionTag()) && !connected(direction, facingState)) {
-                    pipe.setConnection(direction, PipeConnection.DISABLED);
-                    level.updateNeighbourForOutputSignal(pos, this);
-                    facingState.updateShape(direction.getOpposite(), state, level, facingPos, pos);
-                    //level.playLocalSound(pos.getX() + 0.5 + direction.getStepX() * 0.4, pos.getY() + 0.5 + direction.getStepY() * 0.4, pos.getZ() + 0.5 + direction.getStepZ() * 0.4, EmbersSounds.PIPE_DISCONNECT.get(), SoundSource.BLOCKS, 1.0f, 1.0f, false);
-                    PacketUtils.SUpdateTileEntityPacket(pipe);
-                    return InteractionResult.SUCCESS;
+                    if (facingState.is(getToggleConnectionTag()) && level.getBlockEntity(facingPos) instanceof PipeBaseTileEntity facingPipe) {
+                        pipe.setConnection(face, PipeConnection.PIPE);
+                        facingPipe.setConnection(face.getOpposite(), PipeConnection.PIPE);
+                        level.updateNeighbourForOutputSignal(pos, this);
+                        level.updateNeighbourForOutputSignal(facingPos, this);
+                        level.playSound(null, pos.getX() + 0.5 + face.getStepX() * 0.5, pos.getY() + 0.5 + face.getStepY() * 0.5, pos.getZ() + 0.5 + face.getStepZ() * 0.5, SoundEvents.DEEPSLATE_HIT, SoundSource.BLOCKS, 1.0f, 1.0f);
+                        PacketUtils.SUpdateTileEntityPacket(pipe);
+                        return InteractionResult.SUCCESS;
+                    }
+                    BlockEntity blockEntity = level.getBlockEntity(facingPos);
+                    if (connectToTile(blockEntity, face)) {
+                        if (facingState.getBlock() instanceof IPipeConnection) {
+                            pipe.setConnection(face, ((IPipeConnection) facingState.getBlock()).getPipeConnection(facingState, face.getOpposite()));
+                        } else {
+                            pipe.setConnection(face, PipeConnection.END);
+                        }
+                        level.updateNeighbourForOutputSignal(pos, this);
+                        facingState.updateShape(face.getOpposite(), state, level, facingPos, pos);
+                        level.playSound(null, pos.getX() + 0.5 + face.getStepX() * 0.4, pos.getY() + 0.5 + face.getStepY() * 0.4, pos.getZ() + 0.5 + face.getStepZ() * 0.4, SoundEvents.DEEPSLATE_HIT, SoundSource.BLOCKS, 1.0f, 1.0f);
+                        PacketUtils.SUpdateTileEntityPacket(pipe);
+                        return InteractionResult.SUCCESS;
+                    }
+                } else {
+                    Direction direction = Direction.from3DDataValue(closestHit);
+                    if (!pipe.getConnection(direction).transfer)
+                        return InteractionResult.PASS;
+                    BlockPos facingPos = pos.relative(direction);
+                    BlockState facingState = level.getBlockState(facingPos);
+
+                    if (pipe.getConnection(direction) == PipeConnection.PIPE && facingState.is(getToggleConnectionTag()) && level.getBlockEntity(facingPos) instanceof PipeBaseTileEntity facingPipe) {
+                        pipe.setConnection(direction, PipeConnection.DISABLED);
+                        facingPipe.setConnection(direction.getOpposite(), PipeConnection.DISABLED);
+                        level.updateNeighbourForOutputSignal(pos, this);
+                        level.updateNeighbourForOutputSignal(facingPos, this);
+                        level.playSound(null, pos.getX() + 0.5 + direction.getStepX() * 0.5, pos.getY() + 0.5 + direction.getStepY() * 0.5, pos.getZ() + 0.5 + direction.getStepZ() * 0.5, SoundEvents.DEEPSLATE_HIT, SoundSource.BLOCKS, 1.0f, 1.0f);
+                        PacketUtils.SUpdateTileEntityPacket(pipe);
+                        return InteractionResult.SUCCESS;
+                    }
+                    if (pipe.getConnection(direction).transfer && !facingState.is(getConnectionTag()) && !connected(direction, facingState)) {
+                        pipe.setConnection(direction, PipeConnection.DISABLED);
+                        level.updateNeighbourForOutputSignal(pos, this);
+                        facingState.updateShape(direction.getOpposite(), state, level, facingPos, pos);
+                        level.playSound(null, pos.getX() + 0.5 + direction.getStepX() * 0.4, pos.getY() + 0.5 + direction.getStepY() * 0.4, pos.getZ() + 0.5 + direction.getStepZ() * 0.4, SoundEvents.DEEPSLATE_HIT, SoundSource.BLOCKS, 1.0f, 1.0f);
+                        PacketUtils.SUpdateTileEntityPacket(pipe);
+                        return InteractionResult.SUCCESS;
+                    }
                 }
             }
         }

@@ -44,7 +44,7 @@ public class PipeModel implements BakedModel {
 
     public static BakedModel[] getRotatedModels(ModelBakery bakery, String name) {
         ResourceLocation location = new ResourceLocation(WizardsReborn.MOD_ID, "block/" + name);
-        ResourceLocation location2 = new ResourceLocation(WizardsReborn.MOD_ID, "block/" + name + "_2");
+        ResourceLocation location2 = new ResourceLocation(WizardsReborn.MOD_ID, "block/" + name + "_alt");
 
         ModelBakerImpl bakerImpl = bakery.new ModelBakerImpl((modelLoc, material) -> material.sprite(), location);
 

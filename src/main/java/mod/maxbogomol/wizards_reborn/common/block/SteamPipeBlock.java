@@ -14,19 +14,19 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraftforge.common.capabilities.ForgeCapabilities;
 import org.jetbrains.annotations.NotNull;
 
-public class FluidBlockPipe extends PipeBaseBlock {
-    public FluidBlockPipe(Properties pProperties) {
+public class SteamPipeBlock extends TinyPipeBaseBlock {
+    public SteamPipeBlock(Properties pProperties) {
         super(pProperties);
     }
 
     @Override
     public TagKey<Block> getConnectionTag() {
-        return WizardsReborn.FLUID_PIPE_CONNECTION_BLOCK_TAG;
+        return WizardsReborn.STEAM_PIPE_CONNECTION_BLOCK_TAG;
     }
 
     @Override
     public TagKey<Block> getToggleConnectionTag() {
-        return WizardsReborn.FLUID_PIPE_CONNECTION_TOGGLE_BLOCK_TAG;
+        return WizardsReborn.STEAM_PIPE_CONNECTION_TOGGLE_BLOCK_TAG;
     }
 
     @Override
@@ -53,7 +53,7 @@ public class FluidBlockPipe extends PipeBaseBlock {
 
     @Override
     public BlockEntity newBlockEntity(BlockPos pPos, BlockState pState) {
-        return WizardsReborn.FLUID_PIPE_TILE_ENTITY.get().create(pPos, pState);
+        return WizardsReborn.STEAM_PIPE_TILE_ENTITY.get().create(pPos, pState);
     }
 
     @Override

@@ -1,7 +1,7 @@
 {
   "parent": "wizards_reborn:block/pipe_end",
   "textures": {
-    "particle": "wizards_reborn:block/fluid_pipe",
+    "particle": "wizards_reborn:block/polished_wisestone",
     "pipe": "wizards_reborn:block/fluid_pipe"
   }
 }

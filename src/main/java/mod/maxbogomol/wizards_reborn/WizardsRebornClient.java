@@ -37,6 +37,7 @@ import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import org.lwjgl.glfw.GLFW;
+import org.stringtemplate.v4.ST;
 
 import java.io.IOException;
 import java.util.Map;
@@ -60,6 +61,7 @@ public class WizardsRebornClient {
     public static boolean optifinePresent = false;
 
     public static PipeModel fluidPipe;
+    public static PipeModel steamPipe;
 
     public static final ModelResourceLocation FLUID_CENTER = new ModelResourceLocation(new ResourceLocation(WizardsReborn.MOD_ID, "fluid_pipe_center"), "");
     public static final ModelResourceLocation FLUID_EXTRACTOR = new ModelResourceLocation(new ResourceLocation(WizardsReborn.MOD_ID, "fluid_extractor_center"), "");
@@ -67,6 +69,13 @@ public class WizardsRebornClient {
     public static final ModelResourceLocation FLUID_END = new ModelResourceLocation(new ResourceLocation(WizardsReborn.MOD_ID, "fluid_pipe_end"), "");
     public static final ModelResourceLocation FLUID_CONNECTION_2 = new ModelResourceLocation(new ResourceLocation(WizardsReborn.MOD_ID, "fluid_pipe_connection_opposite"), "");
     public static final ModelResourceLocation FLUID_END_2 = new ModelResourceLocation(new ResourceLocation(WizardsReborn.MOD_ID, "fluid_pipe_end_opposite"), "");
+
+    public static final ModelResourceLocation STEAM_CENTER = new ModelResourceLocation(new ResourceLocation(WizardsReborn.MOD_ID, "steam_pipe_center"), "");
+    public static final ModelResourceLocation STEAM_EXTRACTOR = new ModelResourceLocation(new ResourceLocation(WizardsReborn.MOD_ID, "steam_extractor_center"), "");
+    public static final ModelResourceLocation STEAM_CONNECTION = new ModelResourceLocation(new ResourceLocation(WizardsReborn.MOD_ID, "steam_pipe_connection"), "");
+    public static final ModelResourceLocation STEAM_END = new ModelResourceLocation(new ResourceLocation(WizardsReborn.MOD_ID, "steam_pipe_end"), "");
+    public static final ModelResourceLocation STEAM_CONNECTION_2 = new ModelResourceLocation(new ResourceLocation(WizardsReborn.MOD_ID, "steam_pipe_connection_opposite"), "");
+    public static final ModelResourceLocation STEAM_END_2 = new ModelResourceLocation(new ResourceLocation(WizardsReborn.MOD_ID, "steam_pipe_end_opposite"), "");
 
 
     @Mod.EventBusSubscriber(bus=Mod.EventBusSubscriber.Bus.MOD, value = Dist.CLIENT)
@@ -123,6 +132,13 @@ public class WizardsRebornClient {
             event.register(FLUID_END);
             event.register(FLUID_CONNECTION_2);
             event.register(FLUID_END_2);
+
+            event.register(STEAM_CENTER);
+            event.register(STEAM_EXTRACTOR);
+            event.register(STEAM_CONNECTION);
+            event.register(STEAM_END);
+            event.register(STEAM_CONNECTION_2);
+            event.register(STEAM_END_2);
         }
 
         @SubscribeEvent
@@ -144,10 +160,16 @@ public class WizardsRebornClient {
             }
 
             fluidPipe = new PipeModel(map.get(FLUID_CENTER), "fluid_pipe");
+            steamPipe = new PipeModel(map.get(STEAM_CENTER), "steam_pipe");
 
             for (ResourceLocation resourceLocation : event.getModels().keySet()) {
-                if (resourceLocation.getPath().equals("fluid_pipe") && !resourceLocation.toString().contains("inventory")) {
-                    map.put(resourceLocation, fluidPipe);
+                if (resourceLocation.getNamespace().equals(WizardsReborn.MOD_ID)) {
+                    if (resourceLocation.getPath().equals("fluid_pipe") && !resourceLocation.toString().contains("inventory")) {
+                        map.put(resourceLocation, fluidPipe);
+                    }
+                    if (resourceLocation.getPath().equals("steam_pipe") && !resourceLocation.toString().contains("inventory")) {
+                        map.put(resourceLocation, steamPipe);
+                    }
                 }
             }
         }
@@ -155,6 +177,7 @@ public class WizardsRebornClient {
         @SubscribeEvent
         public static void afterModelBake(ModelEvent.BakingCompleted event) {
             fluidPipe.init(event.getModelManager());
+            steamPipe.init(event.getModelManager());
         }
 
         @SubscribeEvent
