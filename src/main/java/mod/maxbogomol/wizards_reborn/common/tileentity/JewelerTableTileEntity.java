@@ -7,6 +7,8 @@ import mod.maxbogomol.wizards_reborn.api.wissen.IWissenWandFunctionalTileEntity;
 import mod.maxbogomol.wizards_reborn.api.wissen.WissenUtils;
 import mod.maxbogomol.wizards_reborn.client.particle.Particles;
 import mod.maxbogomol.wizards_reborn.common.item.CrystalItem;
+import mod.maxbogomol.wizards_reborn.common.network.PacketHandler;
+import mod.maxbogomol.wizards_reborn.common.network.spell.JewelerTableBurstEffectPacket;
 import mod.maxbogomol.wizards_reborn.common.recipe.JewelerTableRecipe;
 import mod.maxbogomol.wizards_reborn.utils.PacketUtils;
 import net.minecraft.core.BlockPos;
@@ -15,6 +17,7 @@ import net.minecraft.core.RegistryAccess;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.Connection;
 import net.minecraft.network.protocol.game.ClientboundBlockEntityDataPacket;
+import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.SimpleContainer;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.entity.BlockEntityType;
@@ -47,6 +50,8 @@ public class JewelerTableTileEntity extends TileSimpleInventory implements Ticka
     public int wissenInCraft= 0;
     public int wissenIsCraft = 0;
     public boolean startCraft = false;
+    public int stoneRotate = 0;
+    public int stoneSpeed = 0;
 
     public int wissen = 0;
 
@@ -127,8 +132,20 @@ public class JewelerTableTileEntity extends TileSimpleInventory implements Ticka
 
                         update = true;
 
-                        //PacketHandler.sendToTracking(level, getBlockPos(), new ArcaneWorkbenchBurstEffectPacket(getBlockPos()));
-                        //level.playSound(WizardsReborn.proxy.getPlayer(), getBlockPos(), WizardsReborn.WISSEN_BURST_SOUND.get(), SoundSource.BLOCKS, 0.25f, (float) (1f + ((random.nextFloat() - 0.5D) / 4)));
+                        Vec3 pos = getBlockRotatePos();
+                        Vec2 vel = getBlockRotateParticle();
+
+                        if (itemOutputHandler.getStackInSlot(0).getItem() instanceof CrystalItem crystalItem) {
+                            Color color = crystalItem.getType().getColor();
+                            float r = color.getRed() / 255f;
+                            float g = color.getGreen() / 255f;
+                            float b = color.getBlue() / 255f;
+
+                            PacketHandler.sendToTracking(level, getBlockPos(), new JewelerTableBurstEffectPacket(getBlockPos(), (float) pos.x(), (float) pos.y(), (float) pos.z(), vel.x , vel.y, r, g, b));
+                        } else {
+                            PacketHandler.sendToTracking(level, getBlockPos(), new JewelerTableBurstEffectPacket(getBlockPos(), (float) pos.x(), (float) pos.y(), (float) pos.z()));
+                        }
+                        level.playSound(WizardsReborn.proxy.getPlayer(), getBlockPos(), WizardsReborn.WISSEN_BURST_SOUND.get(), SoundSource.BLOCKS, 0.25f, (float) (1f + ((random.nextFloat() - 0.5D) / 4)));
                     }
                 }
             }
@@ -167,6 +184,13 @@ public class JewelerTableTileEntity extends TileSimpleInventory implements Ticka
                 Vec2 vel = getBlockRotateParticle();
                 pos = new Vec3(worldPosition.getX() + pos.x(), worldPosition.getY() + pos.y() - 0.125F, worldPosition.getZ() + pos.z());
 
+                if (stoneSpeed < 35) {
+                    stoneSpeed = stoneSpeed + 1;
+                }
+
+                stoneRotate = stoneRotate + stoneSpeed;
+                stoneRotate = stoneRotate % 360;
+
                 if (itemHandler.getStackInSlot(0).getItem() instanceof CrystalItem crystalItem) {
 
                     Color color = crystalItem.getType().getColor();
@@ -198,6 +222,13 @@ public class JewelerTableTileEntity extends TileSimpleInventory implements Ticka
                                 .setSpin((0.5f * (float) ((random.nextDouble() - 0.5D) * 2)))
                                 .spawn(level, pos.x(), pos.y(), pos.z());
                     }
+                }
+            } else {
+                if (stoneSpeed > 0) {
+                    stoneSpeed = stoneSpeed - 1;
+
+                    stoneRotate = stoneRotate + stoneSpeed;
+                    stoneRotate = stoneRotate % 360;
                 }
             }
         }

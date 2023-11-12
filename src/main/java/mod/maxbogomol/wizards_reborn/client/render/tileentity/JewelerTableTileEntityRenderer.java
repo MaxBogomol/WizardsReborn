@@ -24,7 +24,11 @@ public class JewelerTableTileEntityRenderer implements BlockEntityRenderer<Jewel
         double ticksUp = (ClientTickHandler.ticksInGame + partialTicks) * 4;
         ticksUp = (ticksUp) % 360;
 
-        double ticksStone = (ClientTickHandler.ticksInGame + partialTicks) * 20;
+
+        double ticksStone = table.stoneRotate;
+        if (table.stoneSpeed > 0) {
+            ticksStone = (table.stoneRotate + ((partialTicks) * table.stoneSpeed));
+        }
 
         ms.pushPose();
         ms.translate(pos.x(), pos.y(), pos.z());
