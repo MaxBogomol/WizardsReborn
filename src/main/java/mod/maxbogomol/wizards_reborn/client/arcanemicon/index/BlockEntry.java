@@ -39,7 +39,7 @@ public class BlockEntry {
         ticksUp = ticksUp % 360;
 
         if (item != ItemStack.EMPTY) {
-            RenderUtils.renderFloatingItemModelIntoGUI(item, x, y - 12, (float) ticks, (float) ticksUp);
+            RenderUtils.renderFloatingItemModelIntoGUI(gui, item, x, y - 12, (float) ticks, (float) ticksUp);
         }
     }
 

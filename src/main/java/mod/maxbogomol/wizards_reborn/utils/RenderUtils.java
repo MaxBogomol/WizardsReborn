@@ -11,12 +11,16 @@ import com.mojang.math.Axis;
 import mod.maxbogomol.wizards_reborn.WizardsReborn;
 import mod.maxbogomol.wizards_reborn.WizardsRebornClient;
 import mod.maxbogomol.wizards_reborn.client.event.ClientTickHandler;
+import mod.maxbogomol.wizards_reborn.client.render.item.CustomItemRenderer;
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.model.EntityModel;
 import net.minecraft.client.model.HumanoidModel;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.RenderStateShard;
 import net.minecraft.client.renderer.RenderType;
+import net.minecraft.client.renderer.block.model.ItemTransform;
+import net.minecraft.client.renderer.block.model.ItemTransforms;
 import net.minecraft.client.renderer.entity.EntityRenderer;
 import net.minecraft.client.renderer.entity.LivingEntityRenderer;
 import net.minecraft.client.renderer.texture.OverlayTexture;
@@ -31,6 +35,7 @@ import net.minecraft.world.item.Items;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.Vec3;
 import net.minecraft.world.phys.shapes.VoxelShape;
+import net.minecraftforge.client.ForgeHooksClient;
 import org.joml.Matrix4f;
 import org.joml.Quaternionf;
 import org.joml.Vector3f;
@@ -186,49 +191,29 @@ public class RenderUtils {
         builder.vertex(matrix4f, (float) (x1), (float) (y1), (float) (z1)).color(red, green, blue, alpha).endVertex();
         builder.vertex(matrix4f, (float) (x2), (float) (y2), (float) (z2)).color(red, green, blue, alpha).endVertex();
     }
-
-    public static void renderFloatingItemModelIntoGUI(ItemStack stack, int x, int y, float ticks, float ticksUp) {
-        BakedModel bakedmodel = Minecraft.getInstance().getItemRenderer().getModel(stack, (Level)null, (LivingEntity)null, 0);
+    public static void renderFloatingItemModelIntoGUI(GuiGraphics gui, ItemStack stack, int x, int y, float ticks, float ticksUp) {
+        Minecraft minecraft = Minecraft.getInstance();
+        BakedModel bakedmodel = Minecraft.getInstance().getItemRenderer().getModel(stack, minecraft.level, minecraft.player, 0);
+        CustomItemRenderer customItemRenderer = new CustomItemRenderer(minecraft, minecraft.getTextureManager(), minecraft.getModelManager(), minecraft.getItemColors(), minecraft.getItemRenderer().getBlockEntityRenderer());
 
         blitOffset += 50.0F;
 
-        PoseStack posestack = RenderSystem.getModelViewStack();
+        PoseStack posestack = gui.pose();
+
         posestack.pushPose();
-        posestack.translate(x, y, (100.0F + blitOffset));
-        posestack.translate(8.0D, 8.0D, 0.0D);
-        posestack.scale(1.0F, -1.0F, 1.0F);
+        posestack.translate((float)(x + 8), (float)(y + 8), (float)(150));
+        posestack.mulPoseMatrix((new Matrix4f()).scaling(1.0F, -1.0F, 1.0F));
         posestack.scale(16.0F, 16.0F, 16.0F);
-        RenderSystem.getModelViewStack().mulPose(Axis.YP.rotationDegrees(ticks));
+        posestack.translate(0.0D, 0.0D, blitOffset);
         posestack.translate(0.0D, Math.sin(Math.toRadians(ticksUp)) * 0.03125F, 0.0D);
-        RenderSystem.applyModelViewMatrix();
-        PoseStack posestack1 = new PoseStack();
-        MultiBufferSource.BufferSource multibuffersource$buffersource = Minecraft.getInstance().renderBuffers().bufferSource();
-        boolean flag = !bakedmodel.usesBlockLight();
-        if (flag) {
-            Lighting.setupForFlatItems();
+        posestack.mulPose(Axis.YP.rotationDegrees(ticks));
+        Lighting.setupForFlatItems();
 
-            Quaternionf ax = Axis.YP.rotationDegrees(ticks);
+        customItemRenderer.renderItem(stack, ItemDisplayContext.GUI, false, posestack, Minecraft.getInstance().renderBuffers().bufferSource(), 15728880, OverlayTexture.NO_OVERLAY, bakedmodel);
 
-            RenderSystem.setShaderLights(new Vector3f(ax.x, ax.y, ax.z), new Vector3f(ax.x, ax.y, ax.z));
-
-            Matrix4f matrix4f = (new Matrix4f()).scaling(1.0F, -1.0F, 1.0F).rotateY((float) Math.toRadians(ticks)).rotateX(2.3561945F);
-            RenderSystem.setupLevelDiffuseLighting(new Vector3f(ax.x, ax.y, ax.z), new Vector3f(ax.x, ax.y, ax.z), matrix4f);
-        } else {
-
-            Quaternionf ax = Axis.YP.rotationDegrees(ticks);
-
-            RenderSystem.setShaderLights(new Vector3f(ax.x, ax.y, ax.z), new Vector3f(ax.x, ax.y, ax.z));
-        }
-
-        Minecraft.getInstance().getItemRenderer().render(stack, ItemDisplayContext.GUI, false, posestack1, multibuffersource$buffersource, 15728880, OverlayTexture.NO_OVERLAY, bakedmodel);
         RenderSystem.disableDepthTest();
-        multibuffersource$buffersource.endBatch();
+        Minecraft.getInstance().renderBuffers().bufferSource().endBatch();
         RenderSystem.enableDepthTest();
-
-        if (flag) {
-            Lighting.setupFor3DItems();
-        }
-        Lighting.setupFor3DItems();
 
         posestack.popPose();
         RenderSystem.applyModelViewMatrix();
