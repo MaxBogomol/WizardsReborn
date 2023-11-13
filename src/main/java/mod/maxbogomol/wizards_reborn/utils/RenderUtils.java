@@ -29,6 +29,7 @@ import net.minecraft.client.resources.model.BakedModel;
 import net.minecraft.client.resources.model.ModelResourceLocation;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.ItemDisplayContext;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
@@ -197,6 +198,7 @@ public class RenderUtils {
         CustomItemRenderer customItemRenderer = new CustomItemRenderer(minecraft, minecraft.getTextureManager(), minecraft.getModelManager(), minecraft.getItemColors(), minecraft.getItemRenderer().getBlockEntityRenderer());
 
         blitOffset += 50.0F;
+        float old = bakedmodel.getTransforms().gui.rotation.y;
 
         PoseStack posestack = gui.pose();
 
@@ -206,7 +208,11 @@ public class RenderUtils {
         posestack.scale(16.0F, 16.0F, 16.0F);
         posestack.translate(0.0D, 0.0D, blitOffset);
         posestack.translate(0.0D, Math.sin(Math.toRadians(ticksUp)) * 0.03125F, 0.0D);
-        posestack.mulPose(Axis.YP.rotationDegrees(ticks));
+        if (stack.getItem() instanceof BlockItem) {
+            bakedmodel.getTransforms().gui.rotation.y = ticks;
+        } else {
+            posestack.mulPose(Axis.YP.rotationDegrees(ticks));
+        }
         Lighting.setupForFlatItems();
 
         customItemRenderer.renderItem(stack, ItemDisplayContext.GUI, false, posestack, Minecraft.getInstance().renderBuffers().bufferSource(), 15728880, OverlayTexture.NO_OVERLAY, bakedmodel);
@@ -217,6 +223,8 @@ public class RenderUtils {
 
         posestack.popPose();
         RenderSystem.applyModelViewMatrix();
+
+        bakedmodel.getTransforms().gui.rotation.y = old;
 
         blitOffset -= 50.0F;
     }
