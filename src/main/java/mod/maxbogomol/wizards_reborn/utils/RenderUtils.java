@@ -203,23 +203,30 @@ public class RenderUtils {
         PoseStack posestack = gui.pose();
 
         posestack.pushPose();
-        posestack.translate((float)(x + 8), (float)(y + 8), (float)(150));
+        posestack.translate((float)(x + 8), (float)(y + 8), 100 + blitOffset);
         posestack.mulPoseMatrix((new Matrix4f()).scaling(1.0F, -1.0F, 1.0F));
+        //posestack.translate(0.0D, 0.0D, -blitOffset + 200);
         posestack.scale(16.0F, 16.0F, 16.0F);
-        posestack.translate(0.0D, 0.0D, blitOffset);
         posestack.translate(0.0D, Math.sin(Math.toRadians(ticksUp)) * 0.03125F, 0.0D);
         if (stack.getItem() instanceof BlockItem) {
             bakedmodel.getTransforms().gui.rotation.y = ticks;
         } else {
             posestack.mulPose(Axis.YP.rotationDegrees(ticks));
         }
-        Lighting.setupForFlatItems();
+        boolean flag = !bakedmodel.usesBlockLight();
+        if (flag) {
+            Lighting.setupForFlatItems();
+        }
 
         customItemRenderer.renderItem(stack, ItemDisplayContext.GUI, false, posestack, Minecraft.getInstance().renderBuffers().bufferSource(), 15728880, OverlayTexture.NO_OVERLAY, bakedmodel);
 
         RenderSystem.disableDepthTest();
         Minecraft.getInstance().renderBuffers().bufferSource().endBatch();
         RenderSystem.enableDepthTest();
+
+        if (flag) {
+            Lighting.setupFor3DItems();
+        }
 
         posestack.popPose();
         RenderSystem.applyModelViewMatrix();
