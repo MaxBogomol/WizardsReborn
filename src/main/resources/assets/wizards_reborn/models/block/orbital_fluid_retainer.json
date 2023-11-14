@@ -1,56 +1,61 @@
 {
 	"credit": "Made with Blockbench",
+	"parent": "minecraft:block/block",
+	"textures": {
+		"0": "wizards_reborn:block/orbital_fluid_retainer_top_1",
+		"1": "wizards_reborn:block/orbital_fluid_retainer_mid",
+		"2": "wizards_reborn:block/orbital_fluid_retainer_top_2",
+		"3": "wizards_reborn:block/orbital_fluid_retainer_bottom_1",
+		"4": "wizards_reborn:block/orbital_fluid_retainer_bottom_2",
+		"particle": "wizards_reborn:block/polished_wisestone"
+	},
 	"elements": [
 		{
 			"from": [2, 0, 2],
 			"to": [14, 3, 14],
-			"color": 3,
 			"faces": {
-				"north": {"uv": [0, 0, 12, 3], "texture": "#missing"},
-				"east": {"uv": [0, 0, 12, 3], "texture": "#missing"},
-				"south": {"uv": [0, 0, 12, 3], "texture": "#missing"},
-				"west": {"uv": [0, 0, 12, 3], "texture": "#missing"},
-				"up": {"uv": [0, 0, 12, 12], "texture": "#missing"},
-				"down": {"uv": [0, 0, 12, 12], "texture": "#missing"}
+				"north": {"uv": [0, 12, 12, 15], "texture": "#3"},
+				"east": {"uv": [0, 12, 12, 15], "texture": "#3"},
+				"south": {"uv": [0, 12, 12, 15], "texture": "#3"},
+				"west": {"uv": [0, 12, 12, 15], "texture": "#3"},
+				"up": {"uv": [0, 0, 12, 12], "texture": "#3"},
+				"down": {"uv": [0, 0, 12, 12], "texture": "#4"}
 			}
 		},
 		{
 			"from": [5, 3, 5],
 			"to": [11, 12, 11],
-			"color": 3,
 			"faces": {
-				"north": {"uv": [0, 0, 6, 9], "texture": "#missing"},
-				"east": {"uv": [0, 0, 6, 9], "texture": "#missing"},
-				"south": {"uv": [0, 0, 6, 9], "texture": "#missing"},
-				"west": {"uv": [0, 0, 6, 9], "texture": "#missing"},
-				"up": {"uv": [0, 0, 6, 6], "texture": "#missing"},
-				"down": {"uv": [0, 0, 6, 6], "texture": "#missing"}
+				"north": {"uv": [0, 3, 6, 12], "texture": "#1"},
+				"east": {"uv": [0, 3, 6, 12], "texture": "#1"},
+				"south": {"uv": [0, 3, 6, 12], "texture": "#1"},
+				"west": {"uv": [0, 3, 6, 12], "texture": "#1"},
+				"up": {"uv": [6, 3, 12, 9], "texture": "#1"},
+				"down": {"uv": [6, 3, 12, 9], "texture": "#1"}
 			}
 		},
 		{
 			"from": [1, 12, 1],
 			"to": [15, 15, 15],
-			"color": 3,
 			"faces": {
-				"north": {"uv": [0, 0, 14, 3], "texture": "#missing"},
-				"east": {"uv": [0, 0, 14, 3], "texture": "#missing"},
-				"south": {"uv": [0, 0, 14, 3], "texture": "#missing"},
-				"west": {"uv": [0, 0, 14, 3], "texture": "#missing"},
-				"up": {"uv": [0, 0, 14, 14], "texture": "#missing"},
-				"down": {"uv": [0, 0, 14, 14], "texture": "#missing"}
+				"north": {"uv": [0, 0, 14, 3], "texture": "#1"},
+				"east": {"uv": [0, 0, 14, 3], "texture": "#1"},
+				"south": {"uv": [0, 0, 14, 3], "texture": "#1"},
+				"west": {"uv": [0, 0, 14, 3], "texture": "#1"},
+				"up": {"uv": [0, 0, 14, 14], "texture": "#0"},
+				"down": {"uv": [0, 0, 14, 14], "texture": "#2"}
 			}
 		},
 		{
 			"from": [3, 15, 3],
 			"to": [13, 16, 13],
-			"color": 3,
 			"faces": {
-				"north": {"uv": [0, 0, 10, 1], "texture": "#missing"},
-				"east": {"uv": [0, 0, 10, 1], "texture": "#missing"},
-				"south": {"uv": [0, 0, 10, 1], "texture": "#missing"},
-				"west": {"uv": [0, 0, 10, 1], "texture": "#missing"},
-				"up": {"uv": [0, 0, 10, 10], "texture": "#missing"},
-				"down": {"uv": [0, 0, 10, 10], "texture": "#missing"}
+				"north": {"uv": [2, 2, 12, 3], "texture": "#0"},
+				"east": {"uv": [11, 2, 12, 12], "rotation": 90, "texture": "#0"},
+				"south": {"uv": [2, 11, 12, 12], "texture": "#0"},
+				"west": {"uv": [2, 2, 3, 12], "rotation": 90, "texture": "#0"},
+				"up": {"uv": [2, 2, 12, 12], "texture": "#0"},
+				"down": {"uv": [2, 2, 12, 12], "texture": "#0"}
 			}
 		}
 	]

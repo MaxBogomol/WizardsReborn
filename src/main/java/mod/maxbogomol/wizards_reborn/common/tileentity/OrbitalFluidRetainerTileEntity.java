@@ -12,7 +12,6 @@ import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.capabilities.ForgeCapabilities;
 import net.minecraftforge.common.util.LazyOptional;
@@ -52,9 +51,7 @@ public class OrbitalFluidRetainerTileEntity extends PipeBaseTileEntity implement
 
     @Override
     public void tick() {
-        if (!loaded) {
-            initConnections();
-        }
+        initConnections();
     }
 
     @Nonnull
@@ -78,6 +75,9 @@ public class OrbitalFluidRetainerTileEntity extends PipeBaseTileEntity implement
     public void onDataPacket(Connection net, ClientboundBlockEntityDataPacket pkt) {
         super.onDataPacket(net, pkt);
         handleUpdateTag(pkt.getTag());
+        if (level.isClientSide()) {
+            level.sendBlockUpdated(worldPosition, getBlockState(), getBlockState(), Block.UPDATE_ALL);
+        }
     }
 
     @NotNull
@@ -99,11 +99,13 @@ public class OrbitalFluidRetainerTileEntity extends PipeBaseTileEntity implement
     @Override
     public void saveAdditional(CompoundTag tag) {
         super.saveAdditional(tag);
+        tag.put("fluidTank", fluidTank.writeToNBT(new CompoundTag()));
     }
 
     @Override
     public void load(CompoundTag tag) {
         super.load(tag);
+        fluidTank.readFromNBT(tag.getCompound("fluidTank"));
     }
 
     public void initConnections() {
