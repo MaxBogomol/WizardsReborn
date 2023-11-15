@@ -8,6 +8,7 @@ import mod.maxbogomol.wizards_reborn.client.render.fluid.FluidRenderer;
 import mod.maxbogomol.wizards_reborn.common.tileentity.OrbitalFluidRetainerTileEntity;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.blockentity.BlockEntityRenderer;
+import net.minecraft.util.Mth;
 import net.minecraft.world.level.material.Fluids;
 import net.minecraftforge.fluids.FluidStack;
 import org.joml.Vector3f;
@@ -23,9 +24,11 @@ public class OrbitalFluidRetainerTileEntityRenderer implements BlockEntityRender
     public OrbitalFluidRetainerTileEntityRenderer() {}
 
     @Override
-    public void render(OrbitalFluidRetainerTileEntity pedestal, float partialTicks, PoseStack ms, MultiBufferSource buffers, int light, int overlay) {
+    public void render(OrbitalFluidRetainerTileEntity retainer, float partialTicks, PoseStack ms, MultiBufferSource buffers, int light, int overlay) {
         Random random = new Random();
-        random.setSeed(pedestal.getBlockPos().getX()+pedestal.getBlockPos().getY()+pedestal.getBlockPos().getZ());
+        random.setSeed(retainer.getBlockPos().getX()+retainer.getBlockPos().getY()+retainer.getBlockPos().getZ());
+
+        FluidStack fluidStack = retainer.getFluidStack();
 
         double ticks = (ClientTickHandler.ticksInGame + partialTicks) * 2;
         double ticksSub = (ClientTickHandler.ticksInGame + partialTicks) * 1;
@@ -35,7 +38,8 @@ public class OrbitalFluidRetainerTileEntityRenderer implements BlockEntityRender
 
         double v = Math.sin(Math.toRadians(ticksUp)) * 0.0625F;
 
-        float amount = 1.0f;
+        float lastAmount = Mth.lerp(partialTicks, retainer.fluidLastAmount, retainer.getFluidStack().getAmount());
+        float amount = lastAmount / retainer.getMaxCapacity();
 
         ms.pushPose();
         ms.translate(0.5F, 1.5F, 0.5F);
@@ -45,7 +49,7 @@ public class OrbitalFluidRetainerTileEntityRenderer implements BlockEntityRender
         ms.mulPose(Axis.ZP.rotationDegrees((float) ((random.nextFloat() * 360) + ticksSub)));
         ms.scale(amount, amount, amount);
         ms.translate(-0.25F, -0.25F, -0.25F);
-        FluidRenderer.renderScaledCuboid(ms, buffers, cube, new FluidStack(Fluids.WATER, 10), 0, 10, light, false);
+        FluidRenderer.renderCuboid(ms, buffers, cube, fluidStack, retainer.getCapacity(), light, false);
         ms.popPose();
 
         for (int i = 0; i < amount * 25; i++) {
@@ -68,7 +72,7 @@ public class OrbitalFluidRetainerTileEntityRenderer implements BlockEntityRender
                 subCube = cube_large;
             }
 
-            FluidRenderer.renderScaledCuboid(ms, buffers, subCube, new FluidStack(Fluids.WATER, 10), 0, 10, light, false);
+            FluidRenderer.renderCuboid(ms, buffers, subCube, fluidStack, retainer.getCapacity(), light, false);
             ms.popPose();
         }
     }

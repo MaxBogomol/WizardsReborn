@@ -334,4 +334,36 @@ public class FluidRenderer {
         // draw cuboid
         renderCuboid(matrices, buffer.getBuffer(RenderUtils.FLUID), cube, still, flowing, from, to, clientType.getTintColor(fluid), light, isGas && flipGas);
     }
+
+    public static void renderCuboid(PoseStack matrices, MultiBufferSource buffer, FluidCuboid cube, FluidStack fluid, int capacity, int light, boolean flipGas) {
+        // nothing to render
+        if (fluid.isEmpty() || capacity <= 0) {
+            return;
+        }
+
+        // fluid type
+        FluidType type = fluid.getFluid().getFluidType();
+        IClientFluidTypeExtensions clientType = IClientFluidTypeExtensions.of(type);
+        TextureAtlasSprite still = getBlockSprite(clientType.getStillTexture(fluid));
+        TextureAtlasSprite flowing = getBlockSprite(clientType.getFlowingTexture(fluid));
+        boolean isGas = type.isLighterThanAir();
+        light = withBlockLight(light, type.getLightLevel(fluid));
+
+        // determine height based on fluid amount
+        Vector3f from = cube.getFromScaled();
+        Vector3f to = cube.getToScaled();
+        // gas renders upside down
+        float minY = from.y();
+        float maxY = to.y();
+        if (isGas && flipGas) {
+            from = new Vector3f(from);
+            from.set(from.x(), maxY + ((minY - maxY)), from.z());
+        } else {
+            to = new Vector3f(to);
+            to.set(to.x(), minY + ((maxY - minY)), to.z());
+        }
+
+        // draw cuboid
+        renderCuboid(matrices, buffer.getBuffer(RenderUtils.FLUID), cube, still, flowing, from, to, clientType.getTintColor(fluid), light, isGas && flipGas);
+    }
 }

@@ -11,6 +11,7 @@ import net.minecraft.world.Containers;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
@@ -32,6 +33,9 @@ import net.minecraft.world.phys.shapes.BooleanOp;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
+import net.minecraftforge.common.capabilities.ForgeCapabilities;
+import net.minecraftforge.fluids.FluidUtil;
+import net.minecraftforge.fluids.capability.IFluidHandler;
 import org.jetbrains.annotations.NotNull;
 
 import javax.annotation.Nonnull;
@@ -88,7 +92,22 @@ public class OrbitalFluidRetainerBlock extends Block implements EntityBlock, Sim
 
     @Override
     public InteractionResult use(BlockState state, Level world, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hit) {
+        if (world.getBlockEntity(pos) instanceof OrbitalFluidRetainerTileEntity retainer) {
+            ItemStack stack = player.getItemInHand(hand);
+            if (!stack.isEmpty()) {
+                IFluidHandler cap = retainer.getCapability(ForgeCapabilities.FLUID_HANDLER).orElse(null);
+                if (cap != null) {
+                    boolean didFill = FluidUtil.interactWithFluidHandler(player, hand, cap);
 
+                    if (didFill) {
+                        return InteractionResult.SUCCESS;
+                    }
+                }
+                if (stack.getCapability(ForgeCapabilities.FLUID_HANDLER_ITEM).isPresent()) {
+                    return InteractionResult.CONSUME_PARTIAL;
+                }
+            }
+        }
         return InteractionResult.PASS;
     }
 

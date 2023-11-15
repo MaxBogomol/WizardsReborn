@@ -15,6 +15,7 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.capabilities.ForgeCapabilities;
 import net.minecraftforge.common.util.LazyOptional;
+import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.capability.IFluidHandler;
 import net.minecraftforge.fluids.capability.templates.FluidTank;
 import org.jetbrains.annotations.NotNull;
@@ -24,10 +25,11 @@ import javax.annotation.Nullable;
 import java.util.Random;
 
 public class OrbitalFluidRetainerTileEntity extends PipeBaseTileEntity implements TickableBlockEntity {
-    protected FluidTank fluidTank = new FluidTank(10) {
+    protected FluidTank fluidTank = new FluidTank(getMaxCapacity()) {
         @Override
         public void onContentsChanged() {
             OrbitalFluidRetainerTileEntity.this.setChanged();
+            OrbitalFluidRetainerTileEntity.this.fluidLastTick = OrbitalFluidRetainerTileEntity.this.ticksExisted + 1;
         }
     };
     public LazyOptional<IFluidHandler> fluidHolder = LazyOptional.of(() -> fluidTank);
@@ -38,6 +40,10 @@ public class OrbitalFluidRetainerTileEntity extends PipeBaseTileEntity implement
             Direction.WEST,
             Direction.EAST
     };
+
+    public int ticksExisted = 0;
+    public int fluidLastAmount = 0;
+    public int fluidLastTick = 0;
 
     public Random random = new Random();
 
@@ -52,6 +58,16 @@ public class OrbitalFluidRetainerTileEntity extends PipeBaseTileEntity implement
     @Override
     public void tick() {
         initConnections();
+
+        if (level.isClientSide()) {
+            ticksExisted++;
+
+            if (fluidLastAmount != getTank().getFluidAmount()) {
+                if (fluidLastTick < ticksExisted) {
+                    fluidLastAmount = getTank().getFluidAmount();
+                }
+            }
+        }
     }
 
     @Nonnull
@@ -127,5 +143,21 @@ public class OrbitalFluidRetainerTileEntity extends PipeBaseTileEntity implement
         setChanged();
         level.getChunkAt(worldPosition).setUnsaved(true);
         level.updateNeighbourForOutputSignal(worldPosition, block);
+    }
+
+    public int getMaxCapacity() {
+        return 10000;
+    }
+
+    public int getCapacity() {
+        return fluidTank.getCapacity();
+    }
+
+    public FluidStack getFluidStack() {
+        return fluidTank.getFluid();
+    }
+
+    public FluidTank getTank() {
+        return fluidTank;
     }
 }
