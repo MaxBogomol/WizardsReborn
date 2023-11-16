@@ -66,7 +66,11 @@
     "wizards_reborn:chiseled_wisestone_slab",
     "wizards_reborn:chiseled_wisestone_wall",
     "wizards_reborn:wisestone_pillar",
-    "wizards_reborn:polished_wisestone",
-    "wizards_reborn:polished_wisestone_stairs"
+    "wizards_reborn:polished_wisestone_pressure_plate",
+    "wizards_reborn:polished_wisestone_button",
+    "wizards_reborn:fluid_pipe",
+    "wizards_reborn:fluid_extractor",
+    "wizards_reborn:steam_pipe",
+    "wizards_reborn:orbital_fluid_retainer"
   ]
 }

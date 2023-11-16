@@ -63,6 +63,7 @@ public class WizardsRebornClient {
 
     public static PipeModel fluidPipe;
     public static PipeModel steamPipe;
+    public static ArrayList<PipeModel> fluidExtractor = new ArrayList<PipeModel>();
     public static ArrayList<PipeModel> orbitalFluidRetainer = new ArrayList<PipeModel>();
 
     public static final ModelResourceLocation FLUID_CENTER = new ModelResourceLocation(new ResourceLocation(WizardsReborn.MOD_ID, "fluid_pipe_center"), "");
@@ -173,6 +174,11 @@ public class WizardsRebornClient {
                     if (resourceLocation.getPath().equals("steam_pipe") && !resourceLocation.toString().contains("inventory")) {
                         map.put(resourceLocation, steamPipe);
                     }
+                    if (resourceLocation.getPath().equals("fluid_extractor") && !resourceLocation.toString().contains("inventory")) {
+                        PipeModel model = new PipeModel(map.get(resourceLocation), "fluid_pipe");
+                        fluidExtractor.add(model);
+                        map.put(resourceLocation, model);
+                    }
                     if (resourceLocation.getPath().equals("orbital_fluid_retainer") && !resourceLocation.toString().contains("inventory")) {
                         PipeModel model = new PipeModel(map.get(resourceLocation), "fluid_pipe");
                         orbitalFluidRetainer.add(model);
@@ -186,6 +192,9 @@ public class WizardsRebornClient {
         public static void afterModelBake(ModelEvent.BakingCompleted event) {
             fluidPipe.init(event.getModelManager());
             steamPipe.init(event.getModelManager());
+            for (PipeModel model : fluidExtractor) {
+                model.init(event.getModelManager());
+            }
             for (PipeModel model : orbitalFluidRetainer) {
                 model.init(event.getModelManager());
             }

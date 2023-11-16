@@ -17,8 +17,8 @@ import net.minecraftforge.common.capabilities.ForgeCapabilities;
 import net.minecraftforge.fluids.capability.IFluidHandler;
 import org.jetbrains.annotations.NotNull;
 
-public class FluidPipeBlock extends PipeBaseBlock {
-    public FluidPipeBlock(Properties pProperties) {
+public class FluidExtractorBlock extends ExtractorBaseBlock {
+    public FluidExtractorBlock(Properties pProperties) {
         super(pProperties);
     }
 
@@ -56,7 +56,7 @@ public class FluidPipeBlock extends PipeBaseBlock {
 
     @Override
     public BlockEntity newBlockEntity(BlockPos pPos, BlockState pState) {
-        return WizardsReborn.FLUID_PIPE_TILE_ENTITY.get().create(pPos, pState);
+        return WizardsReborn.FLUID_EXTRACTOR_TILE_ENTITY.get().create(pPos, pState);
     }
 
     @Override

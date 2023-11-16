@@ -175,6 +175,7 @@ public class WizardsRebornItemGroup {
             event.accept(WizardsReborn.JEWELER_TABLE_ITEM);
 
             event.accept(WizardsReborn.FLUID_PIPE_ITEM);
+            event.accept(WizardsReborn.FLUID_EXTRACTOR_ITEM);
             event.accept(WizardsReborn.STEAM_PIPE_ITEM);
             event.accept(WizardsReborn.ORBITAL_FLUID_RETAINER_ITEM);
 

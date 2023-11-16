@@ -1,0 +1,16 @@
+{
+  "variants": {
+    "lit=false,powered=false": {
+      "model": "wizards_reborn:block/fluid_extractor"
+    },
+    "lit=true,powered=false": {
+      "model": "wizards_reborn:block/fluid_extractor_on"
+    },
+    "lit=false,powered=true": {
+      "model": "wizards_reborn:block/fluid_extractor_on"
+    },
+    "lit=true,powered=true": {
+      "model": "wizards_reborn:block/fluid_extractor_on"
+    }
+  }
+}

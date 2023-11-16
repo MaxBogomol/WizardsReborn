@@ -4,10 +4,10 @@ import mod.maxbogomol.wizards_reborn.WizardsReborn;
 import mod.maxbogomol.wizards_reborn.common.tileentity.OrbitalFluidRetainerTileEntity;
 import mod.maxbogomol.wizards_reborn.common.tileentity.PipeBaseTileEntity;
 import mod.maxbogomol.wizards_reborn.common.tileentity.TickableBlockEntity;
-import mod.maxbogomol.wizards_reborn.common.tileentity.TileSimpleInventory;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
-import net.minecraft.world.Containers;
+import net.minecraft.nbt.CompoundTag;
+import net.minecraft.util.Mth;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.player.Player;
@@ -28,6 +28,8 @@ import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.material.FluidState;
 import net.minecraft.world.level.material.Fluids;
+import net.minecraft.world.level.storage.loot.LootParams;
+import net.minecraft.world.level.storage.loot.parameters.LootContextParams;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.shapes.BooleanOp;
 import net.minecraft.world.phys.shapes.CollisionContext;
@@ -40,6 +42,7 @@ import org.jetbrains.annotations.NotNull;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
+import java.util.List;
 import java.util.stream.Stream;
 
 public class OrbitalFluidRetainerBlock extends Block implements EntityBlock, SimpleWaterloggedBlock, IPipeConnection {
@@ -79,16 +82,23 @@ public class OrbitalFluidRetainerBlock extends Block implements EntityBlock, Sim
         return this.defaultBlockState().setValue(BlockStateProperties.WATERLOGGED, fluidState.getType() == Fluids.WATER);
     }
 
-    /*@Override
-    public void onRemove(@Nonnull BlockState state, @Nonnull Level world, @Nonnull BlockPos pos, @Nonnull BlockState newState, boolean isMoving) {
-        if (state.getBlock() != newState.getBlock()) {
-            BlockEntity tile = world.getBlockEntity(pos);
-            if (tile instanceof TileSimpleInventory) {
-                Containers.dropContents(world, pos, ((TileSimpleInventory) tile).getItemHandler());
+    @Override
+    public List<ItemStack> getDrops(BlockState state, LootParams.Builder builder) {
+        List<ItemStack> items = super.getDrops(state, builder);
+        BlockEntity tile = builder.getOptionalParameter(LootContextParams.BLOCK_ENTITY);
+        if (tile instanceof OrbitalFluidRetainerTileEntity) {
+            CompoundTag nbt = tile.getUpdateTag();
+            if (nbt != null) {
+                for (ItemStack stack : items) {
+                    if (stack.getItem() == WizardsReborn.ORBITAL_FLUID_RETAINER_ITEM.get()) {
+                        CompoundTag tag = stack.getOrCreateTag();
+                        tag.put("fluidTank", nbt.getCompound("fluidTank"));
+                    }
+                }
             }
-            super.onRemove(state, world, pos, newState, isMoving);
         }
-    }*/
+        return items;
+    }
 
     @Override
     public InteractionResult use(BlockState state, Level world, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hit) {
@@ -157,19 +167,19 @@ public class OrbitalFluidRetainerBlock extends Block implements EntityBlock, Sim
         return TickableBlockEntity.getTickerHelper();
     }
 
-    /*@Override
+    @Override
+    public PipeConnection getPipeConnection(BlockState state, Direction direction) {
+        return PipeConnection.END;
+    }
+
+    @Override
     public boolean hasAnalogOutputSignal(BlockState state) {
         return true;
     }
 
     @Override
     public int getAnalogOutputSignal(BlockState blockState, Level level, BlockPos pos) {
-        TileSimpleInventory tile = (TileSimpleInventory) level.getBlockEntity(pos);
-        return AbstractContainerMenu.getRedstoneSignalFromContainer(tile.getItemHandler());
-    }*/
-
-    @Override
-    public PipeConnection getPipeConnection(BlockState state, Direction direction) {
-        return PipeConnection.END;
+        OrbitalFluidRetainerTileEntity tile = (OrbitalFluidRetainerTileEntity) level.getBlockEntity(pos);
+        return Mth.floor(((float) tile.getTank().getFluidAmount() / tile.getMaxCapacity()) * 14.0F);
     }
 }

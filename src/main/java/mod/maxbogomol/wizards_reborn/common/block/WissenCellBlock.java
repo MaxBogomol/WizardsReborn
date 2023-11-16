@@ -10,6 +10,7 @@ import mod.maxbogomol.wizards_reborn.common.tileentity.WissenCellTileEntity;
 import mod.maxbogomol.wizards_reborn.utils.PacketUtils;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.nbt.CompoundTag;
 import net.minecraft.world.Containers;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
@@ -32,6 +33,8 @@ import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.material.FluidState;
 import net.minecraft.world.level.material.Fluids;
+import net.minecraft.world.level.storage.loot.LootParams;
+import net.minecraft.world.level.storage.loot.parameters.LootContextParams;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.shapes.BooleanOp;
 import net.minecraft.world.phys.shapes.CollisionContext;
@@ -41,6 +44,7 @@ import org.jetbrains.annotations.NotNull;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
+import java.util.List;
 import java.util.stream.Stream;
 
 public class WissenCellBlock extends HorizontalDirectionalBlock implements EntityBlock, SimpleWaterloggedBlock  {
@@ -82,15 +86,26 @@ public class WissenCellBlock extends HorizontalDirectionalBlock implements Entit
                 Containers.dropContents(world, pos, ((TileSimpleInventory) tile).getItemHandler());
             }
 
-            if (tile instanceof IWissenTileEntity wissenTile) {
-                ItemStack item = asItem().getDefaultInstance();
-                WissenItemUtils.existWissen(item);
-                WissenItemUtils.setWissen(item, wissenTile.getWissen());
-                Containers.dropItemStack(world, pos.getX(), pos.getY(), pos.getZ(), item);
-            }
-
             super.onRemove(state, world, pos, newState, isMoving);
         }
+    }
+
+    @Override
+    public List<ItemStack> getDrops(BlockState state, LootParams.Builder builder) {
+        List<ItemStack> items = super.getDrops(state, builder);
+        BlockEntity tile = builder.getOptionalParameter(LootContextParams.BLOCK_ENTITY);
+        if (tile instanceof IWissenTileEntity wissenTile) {
+            CompoundTag nbt = tile.getUpdateTag();
+            if (nbt != null) {
+                for (ItemStack stack : items) {
+                    if (stack.getItem() instanceof IWissenItem) {
+                        WissenItemUtils.existWissen(stack);
+                        WissenItemUtils.setWissen(stack, wissenTile.getWissen());
+                    }
+                }
+            }
+        }
+        return items;
     }
 
     @Override
