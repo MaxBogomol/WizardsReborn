@@ -26,7 +26,7 @@ public class OrbitalFluidRetainerTileEntityRenderer implements BlockEntityRender
     @Override
     public void render(OrbitalFluidRetainerTileEntity retainer, float partialTicks, PoseStack ms, MultiBufferSource buffers, int light, int overlay) {
         Random random = new Random();
-        random.setSeed(retainer.getBlockPos().getX()+retainer.getBlockPos().getY()+retainer.getBlockPos().getZ());
+        random.setSeed(retainer.getBlockPos().asLong());
 
         FluidStack fluidStack = retainer.getFluidStack();
 

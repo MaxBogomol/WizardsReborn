@@ -1,5 +1,7 @@
 package mod.maxbogomol.wizards_reborn.common.tileentity;
 
+import mod.maxbogomol.wizards_reborn.api.alchemy.IFluidPipePriority;
+import mod.maxbogomol.wizards_reborn.api.alchemy.PipePriorityMap;
 import mod.maxbogomol.wizards_reborn.utils.PacketUtils;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -16,6 +18,7 @@ import net.minecraftforge.common.util.LazyOptional;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.capability.IFluidHandler;
 import net.minecraftforge.fluids.capability.templates.FluidTank;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
 import java.util.Random;
@@ -24,7 +27,7 @@ public abstract class FluidPipeBaseTileEntity extends PipeBaseTileEntity impleme
 
     public static final int PRIORITY_BLOCK = 0;
     public static final int PRIORITY_PIPE = PRIORITY_BLOCK;
-    public static final int MAX_PUSH = 150;
+    public static final int MAX_PUSH = 120;
 
     static Random random = new Random();
     boolean[] from = new boolean[Direction.values().length];
@@ -102,10 +105,10 @@ public abstract class FluidPipeBaseTileEntity extends PipeBaseTileEntity impleme
     }
 
     public void tick() {
-        if (!loaded) {
-            initConnections();
-        }
         if (!level.isClientSide()) {
+            if (!loaded)
+                initConnections();
+            ticksExisted++;
             boolean fluidMoved = false;
             FluidStack passStack = tank.drain(MAX_PUSH, IFluidHandler.FluidAction.SIMULATE);
             if (!passStack.isEmpty()) {
@@ -167,8 +170,6 @@ public abstract class FluidPipeBaseTileEntity extends PipeBaseTileEntity impleme
                 syncCloggedFlag = true;
                 setChanged();
             }
-        } else {
-            ticksExisted++;
         }
     }
 

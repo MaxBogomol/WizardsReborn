@@ -1,6 +1,8 @@
 package mod.maxbogomol.wizards_reborn.common.block;
 
 import mod.maxbogomol.wizards_reborn.WizardsReborn;
+import mod.maxbogomol.wizards_reborn.api.alchemy.IPipeConnection;
+import mod.maxbogomol.wizards_reborn.api.alchemy.PipeConnection;
 import mod.maxbogomol.wizards_reborn.common.tileentity.OrbitalFluidRetainerTileEntity;
 import mod.maxbogomol.wizards_reborn.common.tileentity.PipeBaseTileEntity;
 import mod.maxbogomol.wizards_reborn.common.tileentity.TickableBlockEntity;

@@ -1,5 +1,7 @@
 package mod.maxbogomol.wizards_reborn.common.block;
 
+import mod.maxbogomol.wizards_reborn.api.alchemy.IPipeConnection;
+import mod.maxbogomol.wizards_reborn.api.alchemy.PipeConnection;
 import mod.maxbogomol.wizards_reborn.common.item.equipment.WissenWandItem;
 import mod.maxbogomol.wizards_reborn.common.tileentity.PipeBaseTileEntity;
 import mod.maxbogomol.wizards_reborn.utils.PacketUtils;
@@ -16,10 +18,7 @@ import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelAccessor;
-import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.EntityBlock;
-import net.minecraft.world.level.block.RenderShape;
-import net.minecraft.world.level.block.SimpleWaterloggedBlock;
+import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;

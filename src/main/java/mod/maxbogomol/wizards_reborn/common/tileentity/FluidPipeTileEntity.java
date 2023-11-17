@@ -72,12 +72,34 @@ public class FluidPipeTileEntity extends FluidPipeBaseTileEntity {
 
     public FluidPipeTileEntity(BlockEntityType<?> pType, BlockPos pPos, BlockState pBlockState) {
         super(pType, pPos, pBlockState);
-        initFluidTank();
     }
 
     public FluidPipeTileEntity(BlockPos pos, BlockState state) {
         this(WizardsReborn.FLUID_PIPE_TILE_ENTITY.get(), pos, state);
-        initFluidTank();
+    }
+
+    public void tick() {
+        super.tick();
+        if (level.isClientSide()) {
+            if (clogged && isAnySideUnclogged()) {
+                Random posRand = new Random(getBlockPos().asLong());
+                double angleA = posRand.nextDouble() * Math.PI * 2;
+                double angleB = posRand.nextDouble() * Math.PI * 2;
+                float xOffset = (float) (Math.cos(angleA) * Math.cos(angleB));
+                float yOffset = (float) (Math.sin(angleA) * Math.cos(angleB));
+                float zOffset = (float) Math.sin(angleB);
+                float speed = 0.1f;
+                float vx = xOffset * speed + posRand.nextFloat() * speed * 0.3f;
+                float vy = yOffset * speed + posRand.nextFloat() * speed * 0.3f;
+                float vz = zOffset * speed + posRand.nextFloat() * speed * 0.3f;
+                Particles.create(WizardsReborn.WISP_PARTICLE)
+                        .addVelocity(vx, vy, vz)
+                        .setAlpha(0.3f, 0).setScale(0.15f, 0)
+                        .setColor(1F, 1F, 1F)
+                        .setLifetime(20)
+                        .spawn(level, getBlockPos().getX() + 0.5, getBlockPos().getY() + 0.5 + 0.5, getBlockPos().getZ() + 0.5);
+            }
+        }
     }
 
     @Override
@@ -89,15 +111,7 @@ public class FluidPipeTileEntity extends FluidPipeBaseTileEntity {
     }
 
     @Override
-    public void setChanged() {
-        super.setChanged();
-        if (level != null && !level.isClientSide) {
-            PacketUtils.SUpdateTileEntityPacket(this);
-        }
-    }
-
-    @Override
     public int getCapacity() {
-        return 350;
+        return 240;
     }
 }

@@ -7,7 +7,7 @@
       "model": "wizards_reborn:block/arcane_wood_planks"
     },
     "type=top": {
-      "model": "wizards_reborn:block/arcane_wood_slab"
+      "model": "wizards_reborn:block/arcane_wood_slab_top"
     }
   }
 }

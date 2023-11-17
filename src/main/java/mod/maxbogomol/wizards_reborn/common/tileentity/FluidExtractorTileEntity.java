@@ -19,7 +19,7 @@ import javax.annotation.Nullable;
 public class FluidExtractorTileEntity extends FluidPipeBaseTileEntity {
     IFluidHandler[] sideHandlers;
     boolean active;
-    public static final int MAX_DRAIN = 150;
+    public static final int MAX_DRAIN = 120;
 
     public FluidExtractorTileEntity(BlockEntityType<?> pType, BlockPos pPos, BlockState pBlockState) {
         super(pType, pPos, pBlockState);
@@ -121,6 +121,6 @@ public class FluidExtractorTileEntity extends FluidPipeBaseTileEntity {
 
     @Override
     public int getCapacity() {
-        return 350;
+        return 240;
     }
 }

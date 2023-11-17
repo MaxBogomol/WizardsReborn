@@ -1,4 +1,4 @@
-package mod.maxbogomol.wizards_reborn.common.tileentity;
+package mod.maxbogomol.wizards_reborn.api.alchemy;
 
 import net.minecraft.core.Direction;
 

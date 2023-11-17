@@ -100,7 +100,6 @@ public abstract class ExtractorBaseBlock extends PipeBaseBlock {
                     pLevel.setBlock(pPos, pState.cycle(BlockStateProperties.LIT), 2);
                 }
             }
-
         }
     }
 
@@ -109,7 +108,6 @@ public abstract class ExtractorBaseBlock extends PipeBaseBlock {
         if (pState.getValue(BlockStateProperties.LIT) && !pLevel.hasNeighborSignal(pPos)) {
             pLevel.setBlock(pPos, pState.cycle(BlockStateProperties.LIT), 2);
         }
-
     }
 
     public InteractionResult use(BlockState pState, Level pLevel, BlockPos pPos, Player pPlayer, InteractionHand pHand, BlockHitResult pHit) {

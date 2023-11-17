@@ -1,4 +1,4 @@
-package mod.maxbogomol.wizards_reborn.common.block;
+package mod.maxbogomol.wizards_reborn.api.alchemy;
 
 import net.minecraft.util.StringRepresentable;
 
