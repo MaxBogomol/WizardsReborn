@@ -145,12 +145,4 @@ public class PipeBaseTileEntity extends BlockEntity {
             nbt.putInt("connection" + direction.get3DDataValue(), getConnection(direction).index);
         }
     }
-
-    @Override
-    public void setChanged() {
-        super.setChanged();
-        if (level != null && !level.isClientSide) {
-            PacketUtils.SUpdateTileEntityPacket(this);
-        }
-    }
 }

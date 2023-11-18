@@ -330,6 +330,7 @@ public class WizardsReborn {
     public static final RegistryObject<Block> FLUID_PIPE = BLOCKS.register("fluid_pipe", () -> new FluidPipeBlock(BlockBehaviour.Properties.copy(Blocks.POLISHED_DEEPSLATE)));
     public static final RegistryObject<Block> FLUID_EXTRACTOR = BLOCKS.register("fluid_extractor", () -> new FluidExtractorBlock(BlockBehaviour.Properties.copy(Blocks.POLISHED_DEEPSLATE)));
     public static final RegistryObject<Block> STEAM_PIPE = BLOCKS.register("steam_pipe", () -> new SteamPipeBlock(BlockBehaviour.Properties.copy(Blocks.POLISHED_DEEPSLATE)));
+    public static final RegistryObject<Block> STEAM_EXTRACTOR = BLOCKS.register("steam_extractor", () -> new SteamExtractorBlock(BlockBehaviour.Properties.copy(Blocks.POLISHED_DEEPSLATE)));
     public static final RegistryObject<Block> ORBITAL_FLUID_RETAINER = BLOCKS.register("orbital_fluid_retainer", () -> new OrbitalFluidRetainerBlock(BlockBehaviour.Properties.copy(Blocks.POLISHED_DEEPSLATE)));
 
     public static final RegistryObject<Block> WHITE_ARCANE_LUMOS = BLOCKS.register("white_arcane_lumos", () -> new ArcaneLumosBlock(ArcaneLumosBlock.Colors.WHITE, BlockBehaviour.Properties.copy(Blocks.WHITE_WOOL).lightLevel((state) -> 15).noOcclusion().noCollission().instabreak()));
@@ -507,6 +508,7 @@ public class WizardsReborn {
     public static final RegistryObject<Item> FLUID_PIPE_ITEM = ITEMS.register("fluid_pipe", () -> new BlockItem(FLUID_PIPE.get(), new Item.Properties()));
     public static final RegistryObject<Item> FLUID_EXTRACTOR_ITEM = ITEMS.register("fluid_extractor", () -> new BlockItem(FLUID_EXTRACTOR.get(), new Item.Properties()));
     public static final RegistryObject<Item> STEAM_PIPE_ITEM = ITEMS.register("steam_pipe", () -> new BlockItem(STEAM_PIPE.get(), new Item.Properties()));
+    public static final RegistryObject<Item> STEAM_EXTRACTOR_ITEM = ITEMS.register("steam_extractor", () -> new BlockItem(STEAM_EXTRACTOR.get(), new Item.Properties()));
     public static final RegistryObject<Item> ORBITAL_FLUID_RETAINER_ITEM = ITEMS.register("orbital_fluid_retainer", () -> new OrbitalFluidRetainerBlockItem(ORBITAL_FLUID_RETAINER.get(), new Item.Properties().stacksTo(1)));
 
     public static final RegistryObject<Item> WHITE_ARCANE_LUMOS_ITEM = ITEMS.register("white_arcane_lumos", () -> new BlockItem(WHITE_ARCANE_LUMOS.get(), new Item.Properties()));
@@ -569,6 +571,7 @@ public class WizardsReborn {
     public static RegistryObject<BlockEntityType<FluidPipeTileEntity>> FLUID_PIPE_TILE_ENTITY = TILE_ENTITIES.register("fluid_pipe", () -> BlockEntityType.Builder.of(FluidPipeTileEntity::new, FLUID_PIPE.get()).build(null));
     public static RegistryObject<BlockEntityType<FluidExtractorTileEntity>> FLUID_EXTRACTOR_TILE_ENTITY = TILE_ENTITIES.register("fluid_extractor", () -> BlockEntityType.Builder.of(FluidExtractorTileEntity::new, FLUID_EXTRACTOR.get()).build(null));
     public static RegistryObject<BlockEntityType<SteamPipeTileEntity>> STEAM_PIPE_TILE_ENTITY = TILE_ENTITIES.register("steam_pipe", () -> BlockEntityType.Builder.of(SteamPipeTileEntity::new, STEAM_PIPE.get()).build(null));
+    public static RegistryObject<BlockEntityType<SteamExtractorTileEntity>> STEAM_EXTRACTOR_TILE_ENTITY = TILE_ENTITIES.register("steam_extractor", () -> BlockEntityType.Builder.of(SteamExtractorTileEntity::new, STEAM_EXTRACTOR.get()).build(null));
     public static RegistryObject<BlockEntityType<OrbitalFluidRetainerTileEntity>> ORBITAL_FLUID_RETAINER_TILE_ENTITY = TILE_ENTITIES.register("orbital_fluid_retainer", () -> BlockEntityType.Builder.of(OrbitalFluidRetainerTileEntity::new, ORBITAL_FLUID_RETAINER.get()).build(null));
 
     //ENTITIES

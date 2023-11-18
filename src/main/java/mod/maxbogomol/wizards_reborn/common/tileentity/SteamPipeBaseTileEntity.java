@@ -1,6 +1,6 @@
 package mod.maxbogomol.wizards_reborn.common.tileentity;
 
-import mod.maxbogomol.wizards_reborn.api.alchemy.IFluidPipePriority;
+import mod.maxbogomol.wizards_reborn.api.alchemy.ISteamPipePriority;
 import mod.maxbogomol.wizards_reborn.api.alchemy.IFluidTileEntity;
 import mod.maxbogomol.wizards_reborn.api.alchemy.PipePriorityMap;
 import net.minecraft.core.BlockPos;
@@ -22,7 +22,7 @@ import net.minecraftforge.fluids.capability.templates.FluidTank;
 import java.util.ArrayList;
 import java.util.Random;
 
-public abstract class FluidPipeBaseTileEntity extends PipeBaseTileEntity implements IFluidPipePriority, TickableBlockEntity, IFluidTileEntity {
+public abstract class SteamPipeBaseTileEntity extends PipeBaseTileEntity implements ISteamPipePriority, TickableBlockEntity, IFluidTileEntity {
 
     public static final int PRIORITY_BLOCK = 0;
     public static final int PRIORITY_PIPE = PRIORITY_BLOCK;
@@ -41,7 +41,7 @@ public abstract class FluidPipeBaseTileEntity extends PipeBaseTileEntity impleme
     int lastRobin;
     boolean lastDrain = true;
 
-    public FluidPipeBaseTileEntity(BlockEntityType<?> pType, BlockPos pPos, BlockState pBlockState) {
+    public SteamPipeBaseTileEntity(BlockEntityType<?> pType, BlockPos pPos, BlockState pBlockState) {
         super(pType, pPos, pBlockState);
         initFluidTank();
     }
@@ -50,8 +50,8 @@ public abstract class FluidPipeBaseTileEntity extends PipeBaseTileEntity impleme
         tank = new FluidTank(getCapacity()) {
             @Override
             protected void onContentsChanged() {
-                FluidPipeBaseTileEntity.this.syncTank = true;
-                FluidPipeBaseTileEntity.this.setChanged();
+                SteamPipeBaseTileEntity.this.syncTank = true;
+                SteamPipeBaseTileEntity.this.setChanged();
             }
         };
     }
@@ -93,7 +93,7 @@ public abstract class FluidPipeBaseTileEntity extends PipeBaseTileEntity impleme
             if (!getConnection(facing).transfer)
                 continue;
             BlockEntity tile = level.getBlockEntity(worldPosition.relative(facing));
-            if (tile instanceof FluidPipeBaseTileEntity && !((FluidPipeBaseTileEntity) tile).clogged)
+            if (tile instanceof SteamPipeBaseTileEntity && !((SteamPipeBaseTileEntity) tile).clogged)
                 return true;
         }
         return false;
@@ -127,8 +127,8 @@ public abstract class FluidPipeBaseTileEntity extends PipeBaseTileEntity impleme
                             IFluidHandler handler = tile.getCapability(ForgeCapabilities.FLUID_HANDLER, facing.getOpposite()).orElse(null);
                             if (handler != null) {
                                 int priority = PRIORITY_BLOCK;
-                                if (tile instanceof IFluidPipePriority)
-                                    priority = ((IFluidPipePriority) tile).getPriority(facing.getOpposite());
+                                if (tile instanceof ISteamPipePriority)
+                                    priority = ((ISteamPipePriority) tile).getPriority(facing.getOpposite());
                                 if (isFrom(facing.getOpposite()))
                                     priority -= 5;
                                 possibleDirections.put(priority, facing);

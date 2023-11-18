@@ -1,6 +1,7 @@
 package mod.maxbogomol.wizards_reborn.common.tileentity;
 
 import mod.maxbogomol.wizards_reborn.WizardsReborn;
+import mod.maxbogomol.wizards_reborn.client.particle.Particles;
 import mod.maxbogomol.wizards_reborn.utils.PacketUtils;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -9,32 +10,96 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.capabilities.ForgeCapabilities;
 import net.minecraftforge.common.util.LazyOptional;
+import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.capability.IFluidHandler;
 import net.minecraftforge.fluids.capability.templates.FluidTank;
+import org.jetbrains.annotations.NotNull;
 
-public class SteamPipeTileEntity extends PipeBaseTileEntity implements TickableBlockEntity {
-    public FluidTank tank;
-    public LazyOptional<IFluidHandler> holder = LazyOptional.of(() -> tank);
+import javax.annotation.Nullable;
+import java.util.Random;
 
+public class SteamPipeTileEntity extends SteamPipeBaseTileEntity implements TickableBlockEntity {
+    IFluidHandler[] sideHandlers;
+
+    @Override
     protected void initFluidTank() {
-        tank = new FluidTank(10) {
-        };
+        super.initFluidTank();
+        sideHandlers = new IFluidHandler[Direction.values().length];
+        for (Direction facing : Direction.values()) {
+            sideHandlers[facing.get3DDataValue()] = new IFluidHandler() {
+
+                @Override
+                public int fill(FluidStack resource, FluidAction action) {
+                    if(action.execute())
+                        setFrom(facing, true);
+                    return tank.fill(resource, action);
+                }
+
+                @Nullable
+                @Override
+                public FluidStack drain(FluidStack resource, FluidAction action) {
+                    return tank.drain(resource, action);
+                }
+
+                @Nullable
+                @Override
+                public FluidStack drain(int maxDrain, FluidAction action) {
+                    return tank.drain(maxDrain, action);
+                }
+
+                @Override
+                public int getTanks() {
+                    return tank.getTanks();
+                }
+
+                @Override
+                public @NotNull FluidStack getFluidInTank(int tankNum) {
+                    return tank.getFluidInTank(tankNum);
+                }
+
+                @Override
+                public int getTankCapacity(int tankNum) {
+                    return tank.getTankCapacity(tankNum);
+                }
+
+                @Override
+                public boolean isFluidValid(int tankNum, @NotNull FluidStack stack) {
+                    return tank.isFluidValid(tankNum, stack);
+                }
+            };
+        }
     }
 
     public SteamPipeTileEntity(BlockEntityType<?> pType, BlockPos pPos, BlockState pBlockState) {
         super(pType, pPos, pBlockState);
-        initFluidTank();
     }
 
     public SteamPipeTileEntity(BlockPos pos, BlockState state) {
         this(WizardsReborn.STEAM_PIPE_TILE_ENTITY.get(), pos, state);
-        initFluidTank();
     }
 
-    @Override
     public void tick() {
-        if (!loaded) {
-            initConnections();
+        super.tick();
+        if (level.isClientSide()) {
+            if (clogged && isAnySideUnclogged()) {
+                Random posRand = new Random(getBlockPos().asLong());
+                double angleA = posRand.nextDouble() * Math.PI * 2;
+                double angleB = posRand.nextDouble() * Math.PI * 2;
+                float xOffset = (float) (Math.cos(angleA) * Math.cos(angleB));
+                float yOffset = (float) (Math.sin(angleA) * Math.cos(angleB));
+                float zOffset = (float) Math.sin(angleB);
+                float speed = 0.03f;
+                float vx = xOffset * speed + posRand.nextFloat() * speed * 0.3f;
+                float vy = yOffset * speed + posRand.nextFloat() * speed * 0.3f;
+                float vz = zOffset * speed + posRand.nextFloat() * speed * 0.3f;
+                Particles.create(WizardsReborn.WISP_PARTICLE)
+                        .addVelocity(vx, vy, vz)
+                        .setAlpha(0.4f, 0).setScale(0.05f, 0.15f)
+                        .setColor(1F, 1F, 1F)
+                        .setLifetime(20)
+                        .setSpin((0.1f * (float) ((random.nextDouble() - 0.5D) * 2)))
+                        .spawn(level, getBlockPos().getX() + 0.5, getBlockPos().getY() + 0.5, getBlockPos().getZ() + 0.5);
+            }
         }
     }
 
@@ -47,10 +112,17 @@ public class SteamPipeTileEntity extends PipeBaseTileEntity implements TickableB
     }
 
     @Override
-    public void setChanged() {
-        super.setChanged();
-        if (level != null && !level.isClientSide) {
-            PacketUtils.SUpdateTileEntityPacket(this);
-        }
+    public int getCapacity() {
+        return 350;
+    }
+
+    @Override
+    public int getFluidAmount() {
+        return tank.getFluidAmount();
+    }
+
+    @Override
+    public int getFluidMaxAmount() {
+        return getCapacity();
     }
 }

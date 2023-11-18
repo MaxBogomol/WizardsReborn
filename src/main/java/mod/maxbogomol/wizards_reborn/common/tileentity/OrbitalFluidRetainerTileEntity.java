@@ -1,6 +1,7 @@
 package mod.maxbogomol.wizards_reborn.common.tileentity;
 
 import mod.maxbogomol.wizards_reborn.WizardsReborn;
+import mod.maxbogomol.wizards_reborn.api.alchemy.IFluidTileEntity;
 import mod.maxbogomol.wizards_reborn.api.alchemy.PipeConnection;
 import mod.maxbogomol.wizards_reborn.utils.PacketUtils;
 import net.minecraft.core.BlockPos;
@@ -24,7 +25,7 @@ import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import java.util.Random;
 
-public class OrbitalFluidRetainerTileEntity extends PipeBaseTileEntity implements TickableBlockEntity {
+public class OrbitalFluidRetainerTileEntity extends PipeBaseTileEntity implements TickableBlockEntity, IFluidTileEntity {
     protected FluidTank fluidTank = new FluidTank(getMaxCapacity()) {
         @Override
         public void onContentsChanged() {
@@ -161,5 +162,15 @@ public class OrbitalFluidRetainerTileEntity extends PipeBaseTileEntity implement
 
     public FluidTank getTank() {
         return fluidTank;
+    }
+
+    @Override
+    public int getFluidAmount() {
+        return getFluidStack().getAmount();
+    }
+
+    @Override
+    public int getFluidMaxAmount() {
+        return getMaxCapacity();
     }
 }

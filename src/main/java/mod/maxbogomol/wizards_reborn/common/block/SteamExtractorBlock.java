@@ -17,19 +17,19 @@ import net.minecraftforge.common.capabilities.ForgeCapabilities;
 import net.minecraftforge.fluids.capability.IFluidHandler;
 import org.jetbrains.annotations.NotNull;
 
-public class SteamPipeBlock extends TinyPipeBaseBlock {
-    public SteamPipeBlock(Properties pProperties) {
+public class SteamExtractorBlock extends TinyExtractorBaseBlock {
+    public SteamExtractorBlock(Properties pProperties) {
         super(pProperties);
     }
 
     @Override
     public TagKey<Block> getConnectionTag() {
-        return WizardsReborn.STEAM_PIPE_CONNECTION_BLOCK_TAG;
+        return WizardsReborn.FLUID_PIPE_CONNECTION_BLOCK_TAG;
     }
 
     @Override
     public TagKey<Block> getToggleConnectionTag() {
-        return WizardsReborn.STEAM_PIPE_CONNECTION_TOGGLE_BLOCK_TAG;
+        return WizardsReborn.FLUID_PIPE_CONNECTION_TOGGLE_BLOCK_TAG;
     }
 
     @Override
@@ -56,7 +56,7 @@ public class SteamPipeBlock extends TinyPipeBaseBlock {
 
     @Override
     public BlockEntity newBlockEntity(BlockPos pPos, BlockState pState) {
-        return WizardsReborn.STEAM_PIPE_TILE_ENTITY.get().create(pPos, pState);
+        return WizardsReborn.STEAM_EXTRACTOR_TILE_ENTITY.get().create(pPos, pState);
     }
 
     @Override

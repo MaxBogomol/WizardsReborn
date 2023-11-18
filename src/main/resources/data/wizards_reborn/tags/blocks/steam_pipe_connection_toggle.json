@@ -1,6 +1,7 @@
 {
   "replace": false,
   "values": [
-    "wizards_reborn:steam_pipe"
+    "wizards_reborn:steam_pipe",
+    "wizards_reborn:steam_extractor"
   ]
 }
