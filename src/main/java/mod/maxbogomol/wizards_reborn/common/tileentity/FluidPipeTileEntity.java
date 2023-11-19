@@ -4,8 +4,10 @@ import mod.maxbogomol.wizards_reborn.WizardsReborn;
 import mod.maxbogomol.wizards_reborn.client.particle.Particles;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.capabilities.ForgeCapabilities;
 import net.minecraftforge.common.util.LazyOptional;
@@ -104,7 +106,10 @@ public class FluidPipeTileEntity extends FluidPipeBaseTileEntity {
     @Override
     public <T> LazyOptional<T> getCapability(Capability<T> cap, Direction side) {
         if (!this.remove && cap == ForgeCapabilities.FLUID_HANDLER) {
-            return ForgeCapabilities.FLUID_HANDLER.orEmpty(cap, holder);
+            if (side == null)
+                return ForgeCapabilities.FLUID_HANDLER.orEmpty(cap, holder);
+            else if (getConnection(side).transfer)
+                return ForgeCapabilities.FLUID_HANDLER.orEmpty(cap, LazyOptional.of(() -> this.sideHandlers[side.get3DDataValue()]));
         }
         return super.getCapability(cap, side);
     }

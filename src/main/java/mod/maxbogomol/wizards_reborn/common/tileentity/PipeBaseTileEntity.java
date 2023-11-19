@@ -1,9 +1,8 @@
 package mod.maxbogomol.wizards_reborn.common.tileentity;
 
 import mod.maxbogomol.wizards_reborn.api.alchemy.IPipeConnection;
-import mod.maxbogomol.wizards_reborn.common.block.PipeBaseBlock;
 import mod.maxbogomol.wizards_reborn.api.alchemy.PipeConnection;
-import mod.maxbogomol.wizards_reborn.utils.PacketUtils;
+import mod.maxbogomol.wizards_reborn.common.block.PipeBaseBlock;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.nbt.CompoundTag;

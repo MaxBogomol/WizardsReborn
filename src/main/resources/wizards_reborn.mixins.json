@@ -13,7 +13,8 @@
     "client.LevelRendererMixin",
     "client.HumanoidModelMixin",
     "client.ItemInHandLayerMixin",
-    "client.ItemInHandRendererMixin"
+    "client.ItemInHandRendererMixin",
+    "client.PlayerRendererMixin"
   ],
   "minVersion": "0.8",
   "injectors": {

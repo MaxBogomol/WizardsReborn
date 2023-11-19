@@ -12,6 +12,8 @@ import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.ticks.ScheduledTick;
+import net.minecraft.world.ticks.TickPriority;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.capabilities.ForgeCapabilities;
 import net.minecraftforge.common.util.LazyOptional;
@@ -39,7 +41,6 @@ public abstract class FluidPipeBaseTileEntity extends PipeBaseTileEntity impleme
     boolean syncTransfer = true;
     int ticksExisted;
     int lastRobin;
-    boolean lastDrain = true;
 
     public FluidPipeBaseTileEntity(BlockEntityType<?> pType, BlockPos pPos, BlockState pBlockState) {
         super(pType, pPos, pBlockState);
@@ -106,63 +107,57 @@ public abstract class FluidPipeBaseTileEntity extends PipeBaseTileEntity impleme
 
     public void tick() {
         if (!level.isClientSide()) {
+            //level.scheduleTick(getBlockPos(), getBlockState().getBlock(), 0, TickPriority.EXTREMELY_LOW);
             if (!loaded)
                 initConnections();
             ticksExisted++;
+            System.out.println(lastRobin);
             boolean fluidMoved = false;
 
-            if (lastDrain) {
-                FluidStack passStack = tank.drain(MAX_PUSH, IFluidHandler.FluidAction.SIMULATE);
-                if (!passStack.isEmpty()) {
-                    PipePriorityMap<Integer, Direction> possibleDirections = new PipePriorityMap<>();
-                    IFluidHandler[] fluidHandlers = new IFluidHandler[Direction.values().length];
+            FluidStack passStack = tank.drain(MAX_PUSH, IFluidHandler.FluidAction.SIMULATE);
+            if (!passStack.isEmpty()) {
+                PipePriorityMap<Integer, Direction> possibleDirections = new PipePriorityMap<>();
+                IFluidHandler[] fluidHandlers = new IFluidHandler[Direction.values().length];
 
-                    for (Direction facing : Direction.values()) {
-                        if (!getConnection(facing).transfer)
-                            continue;
-                        if (isFrom(facing))
-                            continue;
-                        BlockEntity tile = level.getBlockEntity(getBlockPos().relative(facing));
-                        if (tile != null) {
-                            IFluidHandler handler = tile.getCapability(ForgeCapabilities.FLUID_HANDLER, facing.getOpposite()).orElse(null);
-                            if (handler != null) {
-                                int priority = PRIORITY_BLOCK;
-                                if (tile instanceof IFluidPipePriority)
-                                    priority = ((IFluidPipePriority) tile).getPriority(facing.getOpposite());
-                                if (isFrom(facing.getOpposite()))
-                                    priority -= 5;
-                                possibleDirections.put(priority, facing);
-                                fluidHandlers[facing.get3DDataValue()] = handler;
-                            }
+                for (Direction facing : Direction.values()) {
+                    if (!getConnection(facing).transfer)
+                        continue;
+                    if (isFrom(facing))
+                        continue;
+                    BlockEntity tile = level.getBlockEntity(getBlockPos().relative(facing));
+                    if (tile != null) {
+                        IFluidHandler handler = tile.getCapability(ForgeCapabilities.FLUID_HANDLER, facing.getOpposite()).orElse(null);
+                        if (handler != null) {
+                            int priority = PRIORITY_BLOCK;
+                            if (tile instanceof IFluidPipePriority)
+                                priority = ((IFluidPipePriority) tile).getPriority(facing.getOpposite());
+                            if (isFrom(facing.getOpposite()))
+                                priority -= 5;
+                            possibleDirections.put(priority, facing);
+                            fluidHandlers[facing.get3DDataValue()] = handler;
                         }
-                    }
-
-                    for (int key : possibleDirections.keySet()) {
-                        ArrayList<Direction> list = possibleDirections.get(key);
-                        for (int i = 0; i < list.size(); i++) {
-                            Direction facing = list.get((i + lastRobin) % list.size());
-                            IFluidHandler handler = fluidHandlers[facing.get3DDataValue()];
-                            fluidMoved = pushStack(passStack, facing, handler);
-                            if (lastTransfer != facing) {
-                                syncTransfer = true;
-                                lastTransfer = facing;
-                                setChanged();
-                            }
-                            if (fluidMoved) {
-                                lastRobin++;
-                                break;
-                            }
-                        }
-                        if (fluidMoved)
-                            break;
                     }
                 }
-            } else {
-                lastDrain = true;
-            }
 
-            if (fluidMoved) {
-                lastDrain = false;
+                for (int key : possibleDirections.keySet()) {
+                    ArrayList<Direction> list = possibleDirections.get(key);
+                    for (int i = 0; i < list.size(); i++) {
+                        Direction facing = list.get((i + lastRobin) % list.size());
+                        IFluidHandler handler = fluidHandlers[facing.get3DDataValue()];
+                        fluidMoved = pushStack(passStack, facing, handler);
+                        if (lastTransfer != facing) {
+                            syncTransfer = true;
+                            lastTransfer = facing;
+                            setChanged();
+                        }
+                        if (fluidMoved) {
+                            lastRobin++;
+                            break;
+                        }
+                    }
+                    if (fluidMoved)
+                        break;
+                }
             }
 
             if (tank.getFluidAmount() <= 0) {
@@ -220,8 +215,6 @@ public abstract class FluidPipeBaseTileEntity extends PipeBaseTileEntity impleme
                 from[facing.get3DDataValue()] = nbt.getBoolean("from"+facing.get3DDataValue());
         if (nbt.contains("lastRobin"))
             lastRobin = nbt.getInt("lastRobin");
-        if (nbt.contains("lastDrain"))
-            lastDrain = nbt.getBoolean("lastDrain");
     }
 
     @Override
@@ -233,7 +226,6 @@ public abstract class FluidPipeBaseTileEntity extends PipeBaseTileEntity impleme
         for(Direction facing : Direction.values())
             nbt.putBoolean("from"+facing.get3DDataValue(),from[facing.get3DDataValue()]);
         nbt.putInt("lastRobin",lastRobin);
-        nbt.putBoolean("lastDrain",lastDrain);
     }
 
     @Override
