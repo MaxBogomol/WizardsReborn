@@ -1,0 +1,19 @@
+{
+  "variants": {
+    "facing=east": {
+      "model": "wizards_reborn:block/alchemy_furnace",
+      "y": 90
+    },
+    "facing=north": {
+      "model": "wizards_reborn:block/alchemy_furnace"
+    },
+    "facing=south": {
+      "model": "wizards_reborn:block/alchemy_furnace",
+      "y": 180
+    },
+    "facing=west": {
+      "model": "wizards_reborn:block/alchemy_furnace",
+      "y": 270
+    }
+  }
+}

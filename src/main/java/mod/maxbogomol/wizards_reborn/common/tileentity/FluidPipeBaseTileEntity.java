@@ -9,6 +9,8 @@ import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.protocol.game.ClientboundBlockEntityDataPacket;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.sounds.SoundEvents;
+import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
@@ -107,11 +109,9 @@ public abstract class FluidPipeBaseTileEntity extends PipeBaseTileEntity impleme
 
     public void tick() {
         if (!level.isClientSide()) {
-            //level.scheduleTick(getBlockPos(), getBlockState().getBlock(), 0, TickPriority.EXTREMELY_LOW);
             if (!loaded)
                 initConnections();
             ticksExisted++;
-            System.out.println(lastRobin);
             boolean fluidMoved = false;
 
             FluidStack passStack = tank.drain(MAX_PUSH, IFluidHandler.FluidAction.SIMULATE);
@@ -155,8 +155,12 @@ public abstract class FluidPipeBaseTileEntity extends PipeBaseTileEntity impleme
                             break;
                         }
                     }
-                    if (fluidMoved)
+                    if (fluidMoved) {
+                        if (random.nextFloat() < 0.005F) {
+                            level.playSound(null, getBlockPos(), SoundEvents.WATER_AMBIENT, SoundSource.BLOCKS, 0.6f, 1.0f);
+                        }
                         break;
+                    }
                 }
             }
 

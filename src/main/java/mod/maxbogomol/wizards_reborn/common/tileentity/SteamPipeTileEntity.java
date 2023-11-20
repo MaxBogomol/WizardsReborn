@@ -19,56 +19,6 @@ import javax.annotation.Nullable;
 import java.util.Random;
 
 public class SteamPipeTileEntity extends SteamPipeBaseTileEntity implements TickableBlockEntity {
-    IFluidHandler[] sideHandlers;
-
-    @Override
-    protected void initFluidTank() {
-        super.initFluidTank();
-        sideHandlers = new IFluidHandler[Direction.values().length];
-        for (Direction facing : Direction.values()) {
-            sideHandlers[facing.get3DDataValue()] = new IFluidHandler() {
-
-                @Override
-                public int fill(FluidStack resource, FluidAction action) {
-                    if(action.execute())
-                        setFrom(facing, true);
-                    return tank.fill(resource, action);
-                }
-
-                @Nullable
-                @Override
-                public FluidStack drain(FluidStack resource, FluidAction action) {
-                    return tank.drain(resource, action);
-                }
-
-                @Nullable
-                @Override
-                public FluidStack drain(int maxDrain, FluidAction action) {
-                    return tank.drain(maxDrain, action);
-                }
-
-                @Override
-                public int getTanks() {
-                    return tank.getTanks();
-                }
-
-                @Override
-                public @NotNull FluidStack getFluidInTank(int tankNum) {
-                    return tank.getFluidInTank(tankNum);
-                }
-
-                @Override
-                public int getTankCapacity(int tankNum) {
-                    return tank.getTankCapacity(tankNum);
-                }
-
-                @Override
-                public boolean isFluidValid(int tankNum, @NotNull FluidStack stack) {
-                    return tank.isFluidValid(tankNum, stack);
-                }
-            };
-        }
-    }
 
     public SteamPipeTileEntity(BlockEntityType<?> pType, BlockPos pPos, BlockState pBlockState) {
         super(pType, pPos, pBlockState);
@@ -104,25 +54,48 @@ public class SteamPipeTileEntity extends SteamPipeBaseTileEntity implements Tick
     }
 
     @Override
-    public <T> LazyOptional<T> getCapability(Capability<T> cap, Direction side) {
-        if (!this.remove && cap == ForgeCapabilities.FLUID_HANDLER) {
-            return ForgeCapabilities.FLUID_HANDLER.orEmpty(cap, holder);
-        }
-        return super.getCapability(cap, side);
-    }
-
-    @Override
     public int getCapacity() {
         return 350;
     }
 
     @Override
-    public int getFluidAmount() {
-        return tank.getFluidAmount();
+    public int getSteam() {
+        return steam;
     }
 
     @Override
-    public int getFluidMaxAmount() {
+    public int getMaxSteam() {
         return getCapacity();
+    }
+
+    @Override
+    public void setSteam(int steam) {
+        this.steam = steam;
+    }
+
+    @Override
+    public void addSteam(int steam) {
+        this.steam = this.steam + steam;
+        if (this.steam > getMaxSteam()) {
+            this.steam = getMaxSteam();
+        }
+    }
+
+    @Override
+    public void removeSteam(int steam) {
+        this.steam = this.steam - steam;
+        if (this.steam < 0) {
+            this.steam = 0;
+        }
+    }
+
+    @Override
+    public boolean canSteamTransfer(Direction side) {
+        return (getConnection(side).transfer);
+    }
+
+    @Override
+    public boolean canSteamConnection(Direction side) {
+        return true;
     }
 }

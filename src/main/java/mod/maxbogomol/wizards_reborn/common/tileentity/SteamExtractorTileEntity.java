@@ -1,6 +1,10 @@
 package mod.maxbogomol.wizards_reborn.common.tileentity;
 
 import mod.maxbogomol.wizards_reborn.WizardsReborn;
+import mod.maxbogomol.wizards_reborn.api.alchemy.ISteamTileEntity;
+import mod.maxbogomol.wizards_reborn.api.alchemy.SteamUtils;
+import mod.maxbogomol.wizards_reborn.api.wissen.WissenUtils;
+import mod.maxbogomol.wizards_reborn.utils.PacketUtils;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.world.level.block.entity.BlockEntity;
@@ -17,7 +21,6 @@ import org.jetbrains.annotations.NotNull;
 import javax.annotation.Nullable;
 
 public class SteamExtractorTileEntity extends SteamPipeBaseTileEntity {
-    IFluidHandler[] sideHandlers;
     boolean active;
     public static final int MAX_DRAIN = 150;
 
@@ -29,57 +32,6 @@ public class SteamExtractorTileEntity extends SteamPipeBaseTileEntity {
         this(WizardsReborn.STEAM_EXTRACTOR_TILE_ENTITY.get(), pos, state);
     }
 
-    @Override
-    protected void initFluidTank() {
-        super.initFluidTank();
-        sideHandlers = new IFluidHandler[Direction.values().length];
-        for (Direction facing : Direction.values()) {
-            sideHandlers[facing.get3DDataValue()] = new IFluidHandler() {
-
-                @Override
-                public int fill(FluidStack resource, FluidAction action) {
-                    if (active)
-                        return 0;
-                    if (action.execute())
-                        setFrom(facing,true);
-                    return tank.fill(resource, action);
-                }
-
-                @Nullable
-                @Override
-                public FluidStack drain(FluidStack resource, FluidAction action) {
-                    return tank.drain(resource, action);
-                }
-
-                @Nullable
-                @Override
-                public FluidStack drain(int maxDrain, FluidAction action) {
-                    return tank.drain(maxDrain, action);
-                }
-
-                @Override
-                public int getTanks() {
-                    return tank.getTanks();
-                }
-
-                @Override
-                public @NotNull FluidStack getFluidInTank(int tankNum) {
-                    return tank.getFluidInTank(tankNum);
-                }
-
-                @Override
-                public int getTankCapacity(int tankNum) {
-                    return tank.getTankCapacity(tankNum);
-                }
-
-                @Override
-                public boolean isFluidValid(int tankNum, @NotNull FluidStack stack) {
-                    return tank.isFluidValid(tankNum, stack);
-                }
-            };
-        }
-    }
-
     public void tick() {
         if (!level.isClientSide()) {
             active = (level.hasNeighborSignal(getBlockPos()) || level.getBlockState(getBlockPos()).getValue(BlockStateProperties.POWERED));
@@ -87,15 +39,19 @@ public class SteamExtractorTileEntity extends SteamPipeBaseTileEntity {
                 if (!getConnection(facing).transfer)
                     continue;
                 BlockEntity tile = level.getBlockEntity(getBlockPos().relative(facing));
-                if (tile != null && !(tile instanceof FluidPipeBaseTileEntity)) {
+                if (tile != null && !(tile instanceof SteamPipeBaseTileEntity)) {
                     if (active) {
-                        IFluidHandler handler = tile.getCapability(ForgeCapabilities.FLUID_HANDLER, facing.getOpposite()).orElse(null);
-                        if (handler != null && handler.drain(MAX_DRAIN, IFluidHandler.FluidAction.SIMULATE) != null) {
-                            FluidStack extracted = handler.drain(MAX_DRAIN, IFluidHandler.FluidAction.SIMULATE);
-                            int filled = tank.fill(extracted, IFluidHandler.FluidAction.SIMULATE);
-                            if (filled > 0) {
-                                tank.fill(extracted, IFluidHandler.FluidAction.EXECUTE);
-                                handler.drain(filled, IFluidHandler.FluidAction.EXECUTE);
+                        if (tile instanceof ISteamTileEntity steamTileEntity) {
+                            if (steamTileEntity.canSteamTransfer(facing.getOpposite())) {
+                                int steam_remain = WissenUtils.getAddWissenRemain(steam, MAX_DRAIN, getMaxSteam());
+                                steam_remain = MAX_DRAIN - steam_remain;
+                                int removeRemain = SteamUtils.getRemoveSteamRemain(steamTileEntity.getSteam(), steam_remain);
+                                steam_remain = steam_remain - removeRemain;
+                                if (steam_remain > 0) {
+                                    steamTileEntity.addSteam(steam_remain);
+                                    removeSteam(steam_remain);
+                                    PacketUtils.SUpdateTileEntityPacket(tile);
+                                }
                             }
                         }
                         setFrom(facing, true);
@@ -109,28 +65,48 @@ public class SteamExtractorTileEntity extends SteamPipeBaseTileEntity {
     }
 
     @Override
-    public <T> LazyOptional<T> getCapability(Capability<T> cap, Direction side) {
-        if (!this.remove && cap == ForgeCapabilities.FLUID_HANDLER) {
-            if (side == null)
-                return ForgeCapabilities.FLUID_HANDLER.orEmpty(cap, holder);
-            else if (getConnection(side).transfer)
-                return ForgeCapabilities.FLUID_HANDLER.orEmpty(cap, LazyOptional.of(() -> this.sideHandlers[side.get3DDataValue()]));
-        }
-        return super.getCapability(cap, side);
-    }
-
-    @Override
     public int getCapacity() {
         return 350;
     }
 
     @Override
-    public int getFluidAmount() {
-        return tank.getFluidAmount();
+    public int getSteam() {
+        return steam;
     }
 
     @Override
-    public int getFluidMaxAmount() {
+    public int getMaxSteam() {
         return getCapacity();
+    }
+
+    @Override
+    public void setSteam(int steam) {
+        this.steam = steam;
+    }
+
+    @Override
+    public void addSteam(int steam) {
+        this.steam = this.steam + steam;
+        if (this.steam > getMaxSteam()) {
+            this.steam = getMaxSteam();
+        }
+    }
+
+    @Override
+    public void removeSteam(int steam) {
+        this.steam = this.steam - steam;
+        if (this.steam < 0) {
+            this.steam = 0;
+        }
+    }
+
+    @Override
+    public boolean canSteamTransfer(Direction side) {
+        return (getConnection(side).transfer);
+    }
+
+    @Override
+    public boolean canSteamConnection(Direction side) {
+        return true;
     }
 }

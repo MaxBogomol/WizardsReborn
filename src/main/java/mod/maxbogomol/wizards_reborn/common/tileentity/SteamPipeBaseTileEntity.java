@@ -1,28 +1,24 @@
 package mod.maxbogomol.wizards_reborn.common.tileentity;
 
-import mod.maxbogomol.wizards_reborn.api.alchemy.ISteamPipePriority;
-import mod.maxbogomol.wizards_reborn.api.alchemy.IFluidTileEntity;
-import mod.maxbogomol.wizards_reborn.api.alchemy.PipePriorityMap;
+import mod.maxbogomol.wizards_reborn.api.alchemy.*;
+import mod.maxbogomol.wizards_reborn.api.wissen.WissenUtils;
+import mod.maxbogomol.wizards_reborn.utils.PacketUtils;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.protocol.game.ClientboundBlockEntityDataPacket;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.sounds.SoundEvents;
+import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
-import net.minecraftforge.common.capabilities.Capability;
-import net.minecraftforge.common.capabilities.ForgeCapabilities;
-import net.minecraftforge.common.util.LazyOptional;
-import net.minecraftforge.fluids.FluidStack;
-import net.minecraftforge.fluids.capability.IFluidHandler;
-import net.minecraftforge.fluids.capability.templates.FluidTank;
 
 import java.util.ArrayList;
 import java.util.Random;
 
-public abstract class SteamPipeBaseTileEntity extends PipeBaseTileEntity implements ISteamPipePriority, TickableBlockEntity, IFluidTileEntity {
+public abstract class SteamPipeBaseTileEntity extends PipeBaseTileEntity implements ISteamPipePriority, TickableBlockEntity, ISteamTileEntity {
 
     public static final int PRIORITY_BLOCK = 0;
     public static final int PRIORITY_PIPE = PRIORITY_BLOCK;
@@ -31,29 +27,16 @@ public abstract class SteamPipeBaseTileEntity extends PipeBaseTileEntity impleme
     static Random random = new Random();
     boolean[] from = new boolean[Direction.values().length];
     public boolean clogged = false;
-    public FluidTank tank;
-    public LazyOptional<IFluidHandler> holder = LazyOptional.of(() -> tank);
     Direction lastTransfer;
-    boolean syncTank = true;
     boolean syncCloggedFlag = true;
     boolean syncTransfer = true;
     int ticksExisted;
     int lastRobin;
-    boolean lastDrain = true;
+
+    public int steam = 0;
 
     public SteamPipeBaseTileEntity(BlockEntityType<?> pType, BlockPos pPos, BlockState pBlockState) {
         super(pType, pPos, pBlockState);
-        initFluidTank();
-    }
-
-    protected void initFluidTank() {
-        tank = new FluidTank(getCapacity()) {
-            @Override
-            protected void onContentsChanged() {
-                SteamPipeBaseTileEntity.this.syncTank = true;
-                SteamPipeBaseTileEntity.this.setChanged();
-            }
-        };
     }
 
     public void onLoad() {
@@ -109,86 +92,92 @@ public abstract class SteamPipeBaseTileEntity extends PipeBaseTileEntity impleme
             if (!loaded)
                 initConnections();
             ticksExisted++;
-            boolean fluidMoved = false;
+            boolean steamMoved = false;
 
-            if (lastDrain) {
-                FluidStack passStack = tank.drain(MAX_PUSH, IFluidHandler.FluidAction.SIMULATE);
-                if (!passStack.isEmpty()) {
-                    PipePriorityMap<Integer, Direction> possibleDirections = new PipePriorityMap<>();
-                    IFluidHandler[] fluidHandlers = new IFluidHandler[Direction.values().length];
+            if (steam > 0) {
+                PipePriorityMap<Integer, Direction> possibleDirections = new PipePriorityMap<>();
 
-                    for (Direction facing : Direction.values()) {
-                        if (!getConnection(facing).transfer)
-                            continue;
-                        if (isFrom(facing))
-                            continue;
-                        BlockEntity tile = level.getBlockEntity(getBlockPos().relative(facing));
-                        if (tile != null) {
-                            IFluidHandler handler = tile.getCapability(ForgeCapabilities.FLUID_HANDLER, facing.getOpposite()).orElse(null);
-                            if (handler != null) {
+                for (Direction facing : Direction.values()) {
+                    if (!getConnection(facing).transfer)
+                        continue;
+                    if (isFrom(facing))
+                        continue;
+                    BlockEntity tile = level.getBlockEntity(getBlockPos().relative(facing));
+                    if (tile != null) {
+                        if (tile instanceof ISteamTileEntity steamTileEntity) {
+                            if (steamTileEntity.canSteamTransfer(facing.getOpposite())) {
                                 int priority = PRIORITY_BLOCK;
                                 if (tile instanceof ISteamPipePriority)
                                     priority = ((ISteamPipePriority) tile).getPriority(facing.getOpposite());
                                 if (isFrom(facing.getOpposite()))
                                     priority -= 5;
                                 possibleDirections.put(priority, facing);
-                                fluidHandlers[facing.get3DDataValue()] = handler;
                             }
                         }
-                    }
-
-                    for (int key : possibleDirections.keySet()) {
-                        ArrayList<Direction> list = possibleDirections.get(key);
-                        for (int i = 0; i < list.size(); i++) {
-                            Direction facing = list.get((i + lastRobin) % list.size());
-                            IFluidHandler handler = fluidHandlers[facing.get3DDataValue()];
-                            fluidMoved = pushStack(passStack, facing, handler);
-                            if (lastTransfer != facing) {
-                                syncTransfer = true;
-                                lastTransfer = facing;
-                                setChanged();
-                            }
-                            if (fluidMoved) {
-                                lastRobin++;
-                                break;
-                            }
-                        }
-                        if (fluidMoved)
-                            break;
                     }
                 }
-            } else {
-                lastDrain = true;
+
+                for (int key : possibleDirections.keySet()) {
+                    ArrayList<Direction> list = possibleDirections.get(key);
+                    for (int i = 0; i < list.size(); i++) {
+                        Direction facing = list.get((i + lastRobin) % list.size());
+                        steamMoved = pushSteam(MAX_PUSH, facing);
+                        if (lastTransfer != facing) {
+                            syncTransfer = true;
+                            lastTransfer = facing;
+                            setChanged();
+                        }
+                        if (steamMoved) {
+                            lastRobin++;
+                            break;
+                        }
+                    }
+                    if (steamMoved) {
+                        if (random.nextFloat() < 0.01F) {
+                            level.playSound(null, getBlockPos(), SoundEvents.LAVA_EXTINGUISH, SoundSource.BLOCKS, 0.1f, 1.0f);
+                        }
+                        break;
+                    }
+                }
             }
 
-            if (fluidMoved) {
-                lastDrain = false;
-            }
-
-            if (tank.getFluidAmount() <= 0) {
-                if (lastTransfer != null && !fluidMoved) {
+            if (getSteam() <= 0) {
+                if (lastTransfer != null && !steamMoved) {
                     syncTransfer = true;
                     lastTransfer = null;
                     setChanged();
                 }
-                fluidMoved = true;
+                steamMoved = true;
                 resetFrom();
             }
-            if (clogged == fluidMoved) {
-                clogged = !fluidMoved;
+
+            if (clogged == steamMoved) {
+                clogged = !steamMoved;
                 syncCloggedFlag = true;
                 setChanged();
             }
         }
     }
 
-    private boolean pushStack(FluidStack passStack, Direction facing, IFluidHandler handler) {
-        int added = handler.fill(passStack, IFluidHandler.FluidAction.SIMULATE);
-        if (added > 0) {
-            handler.fill(passStack, IFluidHandler.FluidAction.EXECUTE);
-            this.tank.drain(added, IFluidHandler.FluidAction.EXECUTE);
-            passStack.setAmount(passStack.getAmount() - added);
-            return passStack.getAmount() <= 0;
+    private boolean pushSteam(int amount, Direction facing) {
+        BlockEntity tile = level.getBlockEntity(getBlockPos().relative(facing));
+        if (tile instanceof ISteamTileEntity steamTileEntity) {
+            System.out.println(getBlockPos().toString());
+            System.out.println(tile.getBlockPos().toString());
+            int steam_remain = WissenUtils.getRemoveWissenRemain(steam, amount);
+            steam_remain = amount - steam_remain;
+            int addRemain = SteamUtils.getAddSteamRemain(steamTileEntity.getSteam(), steam_remain, steamTileEntity.getMaxSteam());
+            steam_remain = steam_remain - addRemain;
+            if (steam_remain > 0) {
+                steamTileEntity.addSteam(steam_remain);
+                removeSteam(steam_remain);
+                PacketUtils.SUpdateTileEntityPacket(this);
+                PacketUtils.SUpdateTileEntityPacket(tile);
+                if (tile instanceof SteamPipeBaseTileEntity steamPipe) {
+                    steamPipe.setFrom(facing.getOpposite(), true);
+                }
+                return steam <= 0;
+            }
         }
 
         if (isFrom(facing))
@@ -197,7 +186,6 @@ public abstract class SteamPipeBaseTileEntity extends PipeBaseTileEntity impleme
     }
 
     protected void resetSync() {
-        syncTank = false;
         syncCloggedFlag = false;
         syncTransfer = false;
     }
@@ -211,8 +199,6 @@ public abstract class SteamPipeBaseTileEntity extends PipeBaseTileEntity impleme
         super.load(nbt);
         if (nbt.contains("clogged"))
             clogged = nbt.getBoolean("clogged");
-        if (nbt.contains("tank"))
-            tank.readFromNBT(nbt.getCompound("tank"));
         if (nbt.contains("lastTransfer"))
             lastTransfer = readNullableFacing(nbt.getInt("lastTransfer"));
         for(Direction facing : Direction.values())
@@ -220,27 +206,25 @@ public abstract class SteamPipeBaseTileEntity extends PipeBaseTileEntity impleme
                 from[facing.get3DDataValue()] = nbt.getBoolean("from"+facing.get3DDataValue());
         if (nbt.contains("lastRobin"))
             lastRobin = nbt.getInt("lastRobin");
-        if (nbt.contains("lastDrain"))
-            lastDrain = nbt.getBoolean("lastDrain");
+        if (nbt.contains("steam"))
+            steam = nbt.getInt("steam");
     }
 
     @Override
     public void saveAdditional(CompoundTag nbt) {
         super.saveAdditional(nbt);
-        writeTank(nbt);
         writeCloggedFlag(nbt);
         writeLastTransfer(nbt);
         for(Direction facing : Direction.values())
             nbt.putBoolean("from"+facing.get3DDataValue(),from[facing.get3DDataValue()]);
         nbt.putInt("lastRobin",lastRobin);
-        nbt.putBoolean("lastDrain",lastDrain);
+        nbt.putInt("steam",steam);
     }
 
     @Override
     public CompoundTag getUpdateTag() {
         CompoundTag nbt = super.getUpdateTag();
-        if (syncTank)
-            writeTank(nbt);
+        nbt.putInt("steam",steam);
         if (syncCloggedFlag)
             writeCloggedFlag(nbt);
         if (syncTransfer)
@@ -256,18 +240,6 @@ public abstract class SteamPipeBaseTileEntity extends PipeBaseTileEntity impleme
         nbt.putInt("lastTransfer", writeNullableFacing(lastTransfer));
     }
 
-    private void writeTank(CompoundTag nbt) {
-        nbt.put("tank", tank.writeToNBT(new CompoundTag()));
-    }
-
-    @Override
-    public <T> LazyOptional<T> getCapability(Capability<T> cap, Direction side) {
-        if (!this.remove && cap == ForgeCapabilities.FLUID_HANDLER) {
-            return holder.cast();
-        }
-        return super.getCapability(cap, side);
-    }
-
     @Override
     public void setChanged() {
         super.setChanged();
@@ -279,12 +251,6 @@ public abstract class SteamPipeBaseTileEntity extends PipeBaseTileEntity impleme
                 this.resetSync();
             }
         }
-    }
-
-    @Override
-    public void invalidateCaps() {
-        super.invalidateCaps();
-        holder.invalidate();
     }
 
     public static Direction readNullableFacing(int index) {

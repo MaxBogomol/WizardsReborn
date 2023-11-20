@@ -3,6 +3,7 @@ package mod.maxbogomol.wizards_reborn.common.item.equipment;
 import com.mojang.blaze3d.systems.RenderSystem;
 import mod.maxbogomol.wizards_reborn.WizardsReborn;
 import mod.maxbogomol.wizards_reborn.api.alchemy.IFluidTileEntity;
+import mod.maxbogomol.wizards_reborn.api.alchemy.ISteamTileEntity;
 import mod.maxbogomol.wizards_reborn.api.wissen.ICooldownTileEntity;
 import mod.maxbogomol.wizards_reborn.api.wissen.IWissenTileEntity;
 import mod.maxbogomol.wizards_reborn.api.wissen.IWissenWandFunctionalTileEntity;
@@ -289,40 +290,57 @@ public class WissenWandItem extends Item {
                     BlockEntity tileentity = bpos != null ? mc.level.getBlockEntity(bpos) : null;
 
                     if (tileentity != null) {
+                        int i = 0;
                         if (tileentity instanceof IWissenTileEntity) {
                             IWissenTileEntity wissenTile = (IWissenTileEntity) tileentity;
 
                             int x = mc.getWindow().getGuiScaledWidth() / 2 - (48 / 2);
-                            int y = mc.getWindow().getGuiScaledHeight() / 2 + 32 - 10;
+                            int y = mc.getWindow().getGuiScaledHeight() / 2 + 32 - 10 - 11 + i;
 
                             gui.blit(new ResourceLocation(WizardsReborn.MOD_ID + ":textures/gui/wissen_frame.png"), x, y, 0, 0, 48, 10, 64, 64);
                             int width = 32;
                             width /= (double) wissenTile.getMaxWissen() / (double) wissenTile.getWissen();
                             gui.blit(new ResourceLocation(WizardsReborn.MOD_ID + ":textures/gui/wissen_frame.png"), x + 8, y + 1, 0, 10, width, 8, 64, 64);
+                            i = i + 11;
                         }
 
                         if (tileentity instanceof ICooldownTileEntity) {
                             ICooldownTileEntity cooldownTile = (ICooldownTileEntity) tileentity;
 
                             int x = mc.getWindow().getGuiScaledWidth() / 2 - (48 / 2);
-                            int y = mc.getWindow().getGuiScaledHeight() / 2 + 32 - 10 - 11;
+                            int y = mc.getWindow().getGuiScaledHeight() / 2 + 32 - 10 - 11 + i;
 
                             gui.blit(new ResourceLocation(WizardsReborn.MOD_ID + ":textures/gui/cooldown_frame.png"), x, y, 0, 0, 48, 10, 64, 64);
                             int width = 32;
                             width /= (double) cooldownTile.getCooldown();
                             gui.blit(new ResourceLocation(WizardsReborn.MOD_ID + ":textures/gui/cooldown_frame.png"), x + 8, y + 1, 0, 10, width, 8, 64, 64);
+                            i = i + 11;
                         }
 
                         if (tileentity instanceof IFluidTileEntity) {
                             IFluidTileEntity fluidTile = (IFluidTileEntity) tileentity;
 
                             int x = mc.getWindow().getGuiScaledWidth() / 2 - (48 / 2);
-                            int y = mc.getWindow().getGuiScaledHeight() / 2 + 32 - 10 - 11;
+                            int y = mc.getWindow().getGuiScaledHeight() / 2 + 32 - 10 - 11 + i;
 
-                            gui.blit(new ResourceLocation(WizardsReborn.MOD_ID + ":textures/gui/cooldown_frame.png"), x, y, 0, 0, 48, 10, 64, 64);
+                            gui.blit(new ResourceLocation(WizardsReborn.MOD_ID + ":textures/gui/fluid_frame.png"), x, y, 0, 0, 48, 10, 64, 64);
                             int width = 32;
                             width /= (double) fluidTile.getFluidMaxAmount() / (double) fluidTile.getFluidAmount();
-                            gui.blit(new ResourceLocation(WizardsReborn.MOD_ID + ":textures/gui/cooldown_frame.png"), x + 8, y + 1, 0, 10, width, 8, 64, 64);
+                            gui.blit(new ResourceLocation(WizardsReborn.MOD_ID + ":textures/gui/fluid_frame.png"), x + 8, y + 1, 0, 10, width, 8, 64, 64);
+                            i = i + 11;
+                        }
+
+                        if (tileentity instanceof ISteamTileEntity) {
+                            ISteamTileEntity steamTile = (ISteamTileEntity) tileentity;
+
+                            int x = mc.getWindow().getGuiScaledWidth() / 2 - (48 / 2);
+                            int y = mc.getWindow().getGuiScaledHeight() / 2 + 32 - 10 - 11 + i;
+
+                            gui.blit(new ResourceLocation(WizardsReborn.MOD_ID + ":textures/gui/steam_frame.png"), x, y, 0, 0, 48, 10, 64, 64);
+                            int width = 32;
+                            width /= (double) steamTile.getMaxSteam() / (double) steamTile.getSteam();
+                            gui.blit(new ResourceLocation(WizardsReborn.MOD_ID + ":textures/gui/steam_frame.png"), x + 8, y + 1, 0, 10, width, 8, 64, 64);
+                            i = i + 11;
                         }
                     }
                 }

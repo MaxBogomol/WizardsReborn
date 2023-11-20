@@ -5,7 +5,8 @@
   "refmap": "wizards_reborn.refmap.json",
   "mixins": [
     "LivingEntityMixin",
-    "PlayerMixin"
+    "PlayerMixin",
+    "BlocksMixin"
   ],
   "client": [
     "client.ItemEntityMixin",

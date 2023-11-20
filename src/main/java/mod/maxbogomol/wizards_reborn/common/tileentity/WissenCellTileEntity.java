@@ -47,7 +47,7 @@ public class WissenCellTileEntity extends ExposedTileSimpleInventory implements 
                     if (stack.getItem() instanceof IWissenItem) {
                         IWissenItem item = (IWissenItem) stack.getItem();
                         int wissen_remain = WissenUtils.getRemoveWissenRemain(wissen, 250);
-                        wissen_remain = 100 - wissen_remain;
+                        wissen_remain = 250 - wissen_remain;
                         WissenItemUtils.existWissen(stack);
                         int item_wissen_remain = WissenItemUtils.getAddWissenRemain(stack, wissen_remain, item.getMaxWissen());
                         wissen_remain = wissen_remain - item_wissen_remain;

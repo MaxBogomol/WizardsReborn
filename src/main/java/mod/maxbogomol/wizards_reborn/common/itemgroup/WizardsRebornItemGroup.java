@@ -174,10 +174,12 @@ public class WizardsRebornItemGroup {
             event.accept(WizardsReborn.WISSEN_CELL_ITEM);
             event.accept(WizardsReborn.JEWELER_TABLE_ITEM);
 
+            event.accept(WizardsReborn.WISESTONE_PEDESTAL_ITEM);
             event.accept(WizardsReborn.FLUID_PIPE_ITEM);
             event.accept(WizardsReborn.FLUID_EXTRACTOR_ITEM);
             event.accept(WizardsReborn.STEAM_PIPE_ITEM);
             event.accept(WizardsReborn.STEAM_EXTRACTOR_ITEM);
+            event.accept(WizardsReborn.ALCHEMY_FURNACE_ITEM);
             event.accept(WizardsReborn.ORBITAL_FLUID_RETAINER_ITEM);
 
             event.accept(WizardsReborn.WHITE_ARCANE_LUMOS_ITEM);

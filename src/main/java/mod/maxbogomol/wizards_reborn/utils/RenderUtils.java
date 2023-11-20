@@ -27,7 +27,6 @@ import net.minecraft.client.renderer.texture.TextureAtlas;
 import net.minecraft.client.resources.model.BakedModel;
 import net.minecraft.client.resources.model.ModelResourceLocation;
 import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.ItemDisplayContext;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
@@ -230,10 +229,9 @@ public class RenderUtils {
         posestack.pushPose();
         posestack.translate((float)(x + 8), (float)(y + 8), 100 + blitOffset);
         posestack.mulPoseMatrix((new Matrix4f()).scaling(1.0F, -1.0F, 1.0F));
-        //posestack.translate(0.0D, 0.0D, -blitOffset + 200);
         posestack.scale(16.0F, 16.0F, 16.0F);
         posestack.translate(0.0D, Math.sin(Math.toRadians(ticksUp)) * 0.03125F, 0.0D);
-        if (stack.getItem() instanceof BlockItem) {
+        if (bakedmodel.usesBlockLight()) {
             bakedmodel.getTransforms().gui.rotation.y = ticks;
         } else {
             posestack.mulPose(Axis.YP.rotationDegrees(ticks));
