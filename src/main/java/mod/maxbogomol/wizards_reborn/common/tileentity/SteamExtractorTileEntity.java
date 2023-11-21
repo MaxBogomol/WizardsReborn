@@ -50,8 +50,9 @@ public class SteamExtractorTileEntity extends SteamPipeBaseTileEntity {
                                 int removeRemain = SteamUtils.getRemoveSteamRemain(steamTileEntity.getSteam(), steam_remain);
                                 steam_remain = steam_remain - removeRemain;
                                 if (steam_remain > 0) {
-                                    steamTileEntity.addSteam(steam_remain);
-                                    removeSteam(steam_remain);
+                                    steamTileEntity.removeSteam(steam_remain);
+                                    addSteam(steam_remain);
+                                    PacketUtils.SUpdateTileEntityPacket(this);
                                     PacketUtils.SUpdateTileEntityPacket(tile);
                                 }
                             }

@@ -7,14 +7,24 @@ import mod.maxbogomol.wizards_reborn.api.alchemy.ISteamTileEntity;
 import mod.maxbogomol.wizards_reborn.utils.PacketUtils;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.core.NonNullList;
+import net.minecraft.core.RegistryAccess;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.Connection;
 import net.minecraft.network.protocol.game.ClientboundBlockEntityDataPacket;
 import net.minecraft.world.SimpleContainer;
+import net.minecraft.world.WorldlyContainer;
+import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
+import net.minecraft.world.item.crafting.Recipe;
+import net.minecraft.world.item.crafting.RecipeType;
+import net.minecraft.world.item.crafting.SmeltingRecipe;
+import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.material.Fluids;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.capabilities.ForgeCapabilities;
 import net.minecraftforge.common.util.LazyOptional;
@@ -29,13 +39,16 @@ import org.jetbrains.annotations.NotNull;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
+import java.util.Optional;
 import java.util.Random;
 
 import static net.minecraft.world.level.block.state.properties.BlockStateProperties.HORIZONTAL_FACING;
 
 public class AlchemyFurnaceTileEntity extends BlockEntity implements TickableBlockEntity, IFluidTileEntity, ISteamTileEntity, IHeatTileEntity {
-    public final ItemStackHandler itemHandler = createHandler(2);
+    public final ItemStackHandler itemHandler = createHandler(1);
     public final LazyOptional<IItemHandler> handler = LazyOptional.of(() -> itemHandler);
+    public final ItemStackHandler itemFuelHandler = createHandler(1);
+    public final LazyOptional<IItemHandler> fuelHandler = LazyOptional.of(() -> itemFuelHandler);
     public final ItemStackHandler itemOutputHandler = createHandler(1);
     public final LazyOptional<IItemHandler> outputHandler = LazyOptional.of(() -> itemOutputHandler);
 
@@ -47,12 +60,17 @@ public class AlchemyFurnaceTileEntity extends BlockEntity implements TickableBlo
     };
     public LazyOptional<IFluidHandler> fluidHolder = LazyOptional.of(() -> fluidTank);
 
-    public int wissenInCraft= 0;
-    public int wissenIsCraft = 0;
-    public boolean startCraft = false;
+    public int burnMaxTime = 0;
+    public int burnTime = 0;
+    public int burnLastTime = 0;
+    public int heatLastTime = 0;
+    public int cookMaxTime = 0;
+    public int cookTime = 0;
 
     public int steam = 0;
     public int heat = 0;
+
+    Optional<SmeltingRecipe> lastRecipe;
 
     public Random random = new Random();
 
@@ -66,7 +84,134 @@ public class AlchemyFurnaceTileEntity extends BlockEntity implements TickableBlo
 
     @Override
     public void tick() {
+        if (!level.isClientSide()) {
+            boolean update = false;
 
+            if (burnLastTime > 0) {
+                burnLastTime = burnLastTime - 1;
+                update = true;
+            } else {
+                if (burnTime > 0) {
+                    burnTime = burnTime - 1;
+                    update = true;
+                }
+
+                if (burnTime <= 0) {
+                    burnMaxTime = 0;
+                    update = true;
+                }
+            }
+
+            if (heatLastTime > 0) {
+                heatLastTime = heatLastTime - 1;
+                update = true;
+            } else {
+                if (heat > 0) {
+                    heat = heat - 1;
+                    update = true;
+                }
+            }
+
+            if (burnTime > 0) {
+                for (int i = 0; i < 10; i++) {
+                    if (burnTime > 0) {
+                        if (heat < getMaxHeat()) {
+                            burnTime = burnTime - 1;
+                            heat = heat + 1;
+                            burnLastTime = 10 * 20;
+                            update = true;
+                        }
+                    }
+                }
+
+                if (burnTime <= 0) {
+                    burnMaxTime = 0;
+                    update = true;
+                }
+            }
+
+            if (getTank().getFluid().getFluid() == Fluids.WATER) {
+                for (int i = 0; i < 5; i++) {
+                    if (steam < getMaxSteam() && heat > 0 && getFluidAmount() > 0) {
+                        getTank().drain(1, IFluidHandler.FluidAction.EXECUTE);
+                        heat = heat - 1;
+                        steam = steam + 1;
+                        heatLastTime = 10 * 20;
+                        update = true;
+                    }
+                }
+            }
+
+            if (burnTime <= 0) {
+                if (isFuel(itemFuelHandler.getStackInSlot(0))) {
+                    int burn = getBurnDuration(itemFuelHandler.getStackInSlot(0));
+                    burnMaxTime = burn;
+                    burnTime = burn;
+                    burnLastTime = 10 * 20;
+                    heatLastTime = 10 * 20;
+
+                    ItemStack itemstack = itemFuelHandler.getStackInSlot(0);
+
+                    if (itemstack.hasCraftingRemainingItem()) {
+                        itemFuelHandler.setStackInSlot(0, itemstack.getCraftingRemainingItem());
+                    } else if (!itemFuelHandler.getStackInSlot(0).isEmpty()) {
+                        itemstack.shrink(1);
+                        if (itemstack.isEmpty()) {
+                            itemFuelHandler.setStackInSlot(0, itemstack.getCraftingRemainingItem());
+                        }
+                    }
+
+                    update = true;
+                }
+            }
+
+            SimpleContainer inv = new SimpleContainer(1);
+            inv.setItem(0, itemHandler.getStackInSlot(0));
+
+            Optional<SmeltingRecipe> recipe = level.getRecipeManager().getRecipeFor(RecipeType.SMELTING, inv, level);
+            cookMaxTime = recipe.map(SmeltingRecipe::getCookingTime).orElse(200);
+
+            if (recipe.isPresent()) {
+                if (lastRecipe != null) {
+                    if (lastRecipe.isPresent()) {
+                        if (recipe.get().getId() != lastRecipe.get().getId()) {
+                            cookMaxTime = 0;
+                            cookTime = 0;
+                            update = true;
+                        }
+                    }
+                }
+
+                if (canBurn(RegistryAccess.EMPTY, recipe.get(), 64)) {
+                    if (cookMaxTime > 0 && heat > 0) {
+                        cookTime = cookTime + 1;
+                        heat = heat - 1;
+                        heatLastTime = 10 * 20;
+                        update = true;
+                    }
+
+                    if (cookMaxTime > 0) {
+                        if (cookTime >= cookMaxTime) {
+                            if (burn(RegistryAccess.EMPTY, recipe.get(), 64)) {
+                                cookMaxTime = 0;
+                                cookTime = 0;
+                                update = true;
+                            }
+                        }
+                    }
+                }
+            } else {
+                cookMaxTime = 0;
+                cookTime = 0;
+                update = true;
+            }
+
+            lastRecipe = recipe;
+
+            if (update) {
+                PacketUtils.SUpdateTileEntityPacket(this);
+            }
+        }
     }
 
     private ItemStackHandler createHandler(int size) {
@@ -103,8 +248,9 @@ public class AlchemyFurnaceTileEntity extends BlockEntity implements TickableBlo
     public <T> LazyOptional<T> getCapability(@Nonnull Capability<T> cap, @Nullable Direction side) {
         if (cap == ForgeCapabilities.ITEM_HANDLER) {
             if (side == null) {
-                CombinedInvWrapper item = new CombinedInvWrapper(itemHandler, itemOutputHandler);
-                return LazyOptional.of(() -> item).cast();
+                CombinedInvWrapper item = new CombinedInvWrapper(itemHandler, itemFuelHandler);
+                CombinedInvWrapper item1 = new CombinedInvWrapper(item, itemOutputHandler);
+                return LazyOptional.of(() -> item1).cast();
             }
 
             if (side == Direction.DOWN) {
@@ -150,27 +296,18 @@ public class AlchemyFurnaceTileEntity extends BlockEntity implements TickableBlo
         }
     }
 
-    public boolean isCanCraft(SimpleContainer inv, ItemStack output) {
-        if (inv.getItem(2).isEmpty()) {
-            return true;
-        }
-
-        if ((ItemHandlerHelper.canItemStacksStack(output, inv.getItem(2))) && (inv.getItem(2).getCount() + output.getCount() <= output.getMaxStackSize())) {
-            return true;
-        }
-
-        return false;
-    }
-
     @Override
     public void saveAdditional(CompoundTag tag) {
         super.saveAdditional(tag);
         tag.put("inv", itemHandler.serializeNBT());
         tag.put("output", itemOutputHandler.serializeNBT());
 
-        tag.putInt("wissenInCraft", wissenInCraft);
-        tag.putInt("wissenIsCraft", wissenIsCraft);
-        tag.putBoolean("startCraft", startCraft);
+        tag.putInt("burnLastTime", burnLastTime);
+        tag.putInt("heatLastTime", heatLastTime);
+        tag.putInt("burnMaxTime", burnMaxTime);
+        tag.putInt("burnTime", burnTime);
+        tag.putInt("cookMaxTime", cookMaxTime);
+        tag.putInt("cookTime", cookTime);
 
         tag.putInt("steam", steam);
         tag.putInt("heat", heat);
@@ -184,9 +321,12 @@ public class AlchemyFurnaceTileEntity extends BlockEntity implements TickableBlo
         itemHandler.deserializeNBT(tag.getCompound("inv"));
         itemOutputHandler.deserializeNBT(tag.getCompound("output"));
 
-        wissenInCraft = tag.getInt("wissenInCraft");
-        wissenIsCraft = tag.getInt("wissenIsCraft");
-        startCraft = tag.getBoolean("startCraft");
+        burnLastTime = tag.getInt("burnLastTime");
+        heatLastTime = tag.getInt("heatLastTime");
+        burnMaxTime = tag.getInt("burnMaxTime");
+        burnTime = tag.getInt("burnTime");
+        cookMaxTime = tag.getInt("cookMaxTime");
+        cookTime = tag.getInt("cookTime");
 
         steam = tag.getInt("steam");
         heat = tag.getInt("heat");
@@ -194,6 +334,68 @@ public class AlchemyFurnaceTileEntity extends BlockEntity implements TickableBlo
         fluidTank.readFromNBT(tag.getCompound("fluidTank"));
     }
 
+    public boolean isFuel(ItemStack pStack) {
+        return net.minecraftforge.common.ForgeHooks.getBurnTime(pStack, RecipeType.SMELTING) > 0;
+    }
+
+    public int getBurnDuration(ItemStack pFuel) {
+        if (pFuel.isEmpty()) {
+            return 0;
+        } else {
+            Item item = pFuel.getItem();
+            return net.minecraftforge.common.ForgeHooks.getBurnTime(pFuel, RecipeType.SMELTING);
+        }
+    }
+
+    public boolean canBurn(RegistryAccess pRegistryAccess, SmeltingRecipe pRecipe, int pMaxStackSize) {
+        if (!itemHandler.getStackInSlot(0).isEmpty() && pRecipe != null) {
+            SimpleContainer inv = new SimpleContainer(1);
+            inv.setItem(0, itemHandler.getStackInSlot(0));
+
+            ItemStack itemstack = pRecipe.assemble(inv, pRegistryAccess);
+            if (itemstack.isEmpty()) {
+                return false;
+            } else {
+                ItemStack itemstack1 = itemOutputHandler.getStackInSlot(0);
+                if (itemstack1.isEmpty()) {
+                    return true;
+                } else if (!ItemStack.isSameItem(itemstack1, itemstack)) {
+                    return false;
+                } else if (itemstack1.getCount() + itemstack.getCount() <= pMaxStackSize && itemstack1.getCount() + itemstack.getCount() <= itemstack1.getMaxStackSize()) {
+                    return true;
+                } else {
+                    return itemstack1.getCount() + itemstack.getCount() <= itemstack.getMaxStackSize();
+                }
+            }
+        } else {
+            return false;
+        }
+    }
+
+    public boolean burn(RegistryAccess pRegistryAccess, SmeltingRecipe pRecipe, int pMaxStackSize) {
+        if (pRecipe != null && this.canBurn(pRegistryAccess, pRecipe, pMaxStackSize)) {
+            SimpleContainer inv = new SimpleContainer(1);
+            inv.setItem(0, itemHandler.getStackInSlot(0));
+
+            ItemStack itemstack = itemHandler.getStackInSlot(0);
+            ItemStack itemstack1 = pRecipe.assemble(inv, pRegistryAccess);
+            ItemStack itemstack2 = itemOutputHandler.getStackInSlot(0);
+            if (itemstack2.isEmpty()) {
+                itemOutputHandler.setStackInSlot(0, itemstack1.copy());
+            } else if (itemstack2.is(itemstack1.getItem())) {
+                itemstack2.grow(itemstack1.getCount());
+            }
+
+            if (itemstack.is(Blocks.WET_SPONGE.asItem()) && !itemFuelHandler.getStackInSlot(0).isEmpty() && itemFuelHandler.getStackInSlot(0).is(Items.BUCKET)) {
+                itemFuelHandler.setStackInSlot(0, new ItemStack(Items.WATER_BUCKET));
+            }
+
+            itemstack.shrink(1);
+            return true;
+        } else {
+            return false;
+        }
+    }
 
     public int getMaxCapacity() {
         return 10000;
@@ -228,7 +430,7 @@ public class AlchemyFurnaceTileEntity extends BlockEntity implements TickableBlo
 
     @Override
     public int getMaxSteam() {
-        return 350;
+        return 10000;
     }
 
     @Override

@@ -48,11 +48,23 @@ public class AlchemyFurnaceScreen extends AbstractContainerScreen<AlchemyFurnace
 
             width = 32;
             width /= (double) furnace.getMaxHeat() / (double) furnace.getHeat();
-            gui.blit(GUI, i + 19 + 15, j + 40 + 32 - width, 176, 32 - width, 8, width, 256, 256);
+            gui.blit(GUI, i + 19 + 15, j + 40 + 32 - width, 176 + 8, 32 - width, 8, width, 256, 256);
 
             width = 32;
             width /= (double) furnace.getMaxSteam() / (double) furnace.getSteam();
-            gui.blit(GUI, i + 19 + 30, j + 40 + 32 - width, 176, 32 - width, 8, width, 256, 256);
+            gui.blit(GUI, i + 19 + 30, j + 40 + 32 - width, 176 + 16, 32 - width, 8, width, 256, 256);
+
+            if (furnace.burnMaxTime > 0) {
+                width = 18;
+                width /= (double) furnace.burnMaxTime / (double) furnace.burnTime;
+                gui.blit(GUI, i + 72, j + 46 + 18 - width, 176, 47 + 18 - width, 18, width, 256, 256);
+            }
+
+            if (furnace.cookTime > 0) {
+                width = 22;
+                width /= (double) furnace.cookMaxTime / (double) furnace.cookTime;
+                gui.blit(GUI, i + 97, j + 47, 176, 32, width, 15, 256, 256);
+            }
         }
     }
 }

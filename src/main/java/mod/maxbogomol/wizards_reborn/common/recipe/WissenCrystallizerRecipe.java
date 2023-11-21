@@ -6,6 +6,7 @@ import com.google.gson.JsonObject;
 import mod.maxbogomol.wizards_reborn.WizardsReborn;
 import net.minecraft.core.RegistryAccess;
 import net.minecraft.core.registries.BuiltInRegistries;
+import net.minecraft.nbt.CompoundTag;
 import net.minecraft.world.Container;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.network.FriendlyByteBuf;
@@ -159,6 +160,10 @@ public class WissenCrystallizerRecipe implements Recipe<Container> {
             }
             if (json.has("saveNBT")) {
                 isSaveNBT = GsonHelper.getAsBoolean(json, "saveNBT");
+            }
+            if (json.has("SkullOwner")) {
+                CompoundTag tag = output.getOrCreateTag();
+                tag.putString("SkullOwner", json.get("SkullOwner").getAsString());
             }
 
             return new WissenCrystallizerRecipe(recipeId, output, wissen, isNBTCrystal, isSaveNBT, inputs.toArray(new Ingredient[0]));

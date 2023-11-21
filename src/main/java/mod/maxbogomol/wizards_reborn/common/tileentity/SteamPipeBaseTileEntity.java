@@ -1,6 +1,10 @@
 package mod.maxbogomol.wizards_reborn.common.tileentity;
 
-import mod.maxbogomol.wizards_reborn.api.alchemy.*;
+import mod.maxbogomol.wizards_reborn.WizardsReborn;
+import mod.maxbogomol.wizards_reborn.api.alchemy.ISteamPipePriority;
+import mod.maxbogomol.wizards_reborn.api.alchemy.ISteamTileEntity;
+import mod.maxbogomol.wizards_reborn.api.alchemy.PipePriorityMap;
+import mod.maxbogomol.wizards_reborn.api.alchemy.SteamUtils;
 import mod.maxbogomol.wizards_reborn.api.wissen.WissenUtils;
 import mod.maxbogomol.wizards_reborn.utils.PacketUtils;
 import net.minecraft.core.BlockPos;
@@ -9,7 +13,6 @@ import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.protocol.game.ClientboundBlockEntityDataPacket;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
-import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityType;
@@ -133,8 +136,8 @@ public abstract class SteamPipeBaseTileEntity extends PipeBaseTileEntity impleme
                         }
                     }
                     if (steamMoved) {
-                        if (random.nextFloat() < 0.01F) {
-                            level.playSound(null, getBlockPos(), SoundEvents.LAVA_EXTINGUISH, SoundSource.BLOCKS, 0.1f, 1.0f);
+                        if (random.nextFloat() < 0.005F) {
+                            level.playSound(null, getBlockPos(), WizardsReborn.STEAM_BURST_SOUND.get(), SoundSource.BLOCKS, 0.1f, 1.0f);
                         }
                         break;
                     }
@@ -162,8 +165,6 @@ public abstract class SteamPipeBaseTileEntity extends PipeBaseTileEntity impleme
     private boolean pushSteam(int amount, Direction facing) {
         BlockEntity tile = level.getBlockEntity(getBlockPos().relative(facing));
         if (tile instanceof ISteamTileEntity steamTileEntity) {
-            System.out.println(getBlockPos().toString());
-            System.out.println(tile.getBlockPos().toString());
             int steam_remain = WissenUtils.getRemoveWissenRemain(steam, amount);
             steam_remain = amount - steam_remain;
             int addRemain = SteamUtils.getAddSteamRemain(steamTileEntity.getSteam(), steam_remain, steamTileEntity.getMaxSteam());

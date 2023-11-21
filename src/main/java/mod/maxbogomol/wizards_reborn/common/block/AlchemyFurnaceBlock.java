@@ -1,9 +1,11 @@
 package mod.maxbogomol.wizards_reborn.common.block;
 
+import mod.maxbogomol.wizards_reborn.WizardsReborn;
+import mod.maxbogomol.wizards_reborn.api.alchemy.ISteamTileEntity;
 import mod.maxbogomol.wizards_reborn.client.gui.container.AlchemyFurnaceContainer;
+import mod.maxbogomol.wizards_reborn.client.particle.Particles;
 import mod.maxbogomol.wizards_reborn.common.item.equipment.WissenWandItem;
 import mod.maxbogomol.wizards_reborn.common.tileentity.AlchemyFurnaceTileEntity;
-import mod.maxbogomol.wizards_reborn.common.tileentity.JewelerTableTileEntity;
 import mod.maxbogomol.wizards_reborn.common.tileentity.TickableBlockEntity;
 import mod.maxbogomol.wizards_reborn.common.tileentity.TileSimpleInventory;
 import net.minecraft.core.BlockPos;
@@ -30,8 +32,10 @@ import org.jetbrains.annotations.NotNull;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
+import java.util.Random;
 
 public class AlchemyFurnaceBlock extends HorizontalDirectionalBlock implements EntityBlock  {
+    private static Random random = new Random();
 
     public AlchemyFurnaceBlock(Properties properties) {
         super(properties);
@@ -52,13 +56,12 @@ public class AlchemyFurnaceBlock extends HorizontalDirectionalBlock implements E
     public void onRemove(@Nonnull BlockState state, @Nonnull Level world, @Nonnull BlockPos pos, @Nonnull BlockState newState, boolean isMoving) {
         if (state.getBlock() != newState.getBlock()) {
             BlockEntity tile = world.getBlockEntity(pos);
-            if (tile instanceof JewelerTableTileEntity) {
-                JewelerTableTileEntity table = (JewelerTableTileEntity) tile;
-                SimpleContainer inv = new SimpleContainer(table.itemHandler.getSlots() + 1);
-                for (int i = 0; i < table.itemHandler.getSlots(); i++) {
-                    inv.setItem(i, table.itemHandler.getStackInSlot(i));
-                }
-                inv.setItem(table.itemHandler.getSlots(), table.itemOutputHandler.getStackInSlot(0));
+            if (tile instanceof AlchemyFurnaceTileEntity) {
+                AlchemyFurnaceTileEntity furnace = (AlchemyFurnaceTileEntity) tile;
+                SimpleContainer inv = new SimpleContainer(3);
+                inv.setItem(0, furnace.itemHandler.getStackInSlot(0));
+                inv.setItem(1, furnace.itemFuelHandler.getStackInSlot(0));
+                inv.setItem(2, furnace.itemOutputHandler.getStackInSlot(0));
                 Containers.dropContents(world, pos, inv);
             }
             super.onRemove(state, world, pos, newState, isMoving);
@@ -134,5 +137,31 @@ public class AlchemyFurnaceBlock extends HorizontalDirectionalBlock implements E
     public int getAnalogOutputSignal(BlockState blockState, Level level, BlockPos pos) {
         TileSimpleInventory tile = (TileSimpleInventory) level.getBlockEntity(pos);
         return AbstractContainerMenu.getRedstoneSignalFromContainer(tile.getItemHandler());
+    }
+
+    @Override
+    public void playerWillDestroy(Level world, BlockPos pos, BlockState state, Player player) {
+        if (world.isClientSide()) {
+            if (!player.isCreative()) {
+                if (world.getBlockEntity(pos) != null) {
+                    if (world.getBlockEntity(pos) instanceof ISteamTileEntity tile) {
+                        if (tile.getMaxSteam() > 0) {
+                            float amount = (float) tile.getSteam() / (float) tile.getMaxSteam();
+                            for (int i = 0; i < 25 * amount; i++) {
+                                Particles.create(WizardsReborn.STEAM_PARTICLE)
+                                        .addVelocity(((random.nextDouble() - 0.5D) / 30), (random.nextDouble() / 30) + 0.001, ((random.nextDouble() - 0.5D) / 30))
+                                        .setAlpha(0.4f, 0).setScale(0.1f, 0.5f)
+                                        .setColor(1f, 1f, 1f)
+                                        .setLifetime(30)
+                                        .setSpin((0.1f * (float) ((random.nextDouble() - 0.5D) * 2)))
+                                        .spawn(world, pos.getX() + 0.5F + ((random.nextDouble() - 0.5D) * 0.5), pos.getY() + 0.5F + ((random.nextDouble() - 0.5D) * 0.5), pos.getZ() + 0.5F + ((random.nextDouble() - 0.5D) * 0.5));
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+        super.playerWillDestroy(world, pos, state, player);
     }
 }

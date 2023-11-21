@@ -1,0 +1,44 @@
+{
+  "type": "wizards_reborn:wissen_crystallizer",
+  "output": {
+    "item": "minecraft:player_head",
+    "count": 1
+  },
+  "wissen": 100,
+  "ingredients": [
+    {
+      "tag": "forge:heads"
+    },
+    {
+      "item": "wizards_reborn:rainbow_arcane_lumos"
+    },
+    {
+      "item": "wizards_reborn:purple_arcane_lumos"
+    },
+    {
+      "item": "wizards_reborn:purple_arcane_lumos"
+    },
+    {
+      "item": "wizards_reborn:purple_arcane_lumos"
+    },
+    {
+      "item": "wizards_reborn:green_arcane_lumos"
+    },
+    {
+      "item": "wizards_reborn:green_arcane_lumos"
+    },
+    {
+      "item": "wizards_reborn:green_arcane_lumos"
+    },
+    {
+      "item": "wizards_reborn:gray_arcane_lumos"
+    },
+    {
+      "item": "wizards_reborn:gray_arcane_lumos"
+    },
+    {
+      "item": "wizards_reborn:gray_arcane_lumos"
+    }
+  ],
+  "SkullOwner" : "Kekqupap"
+}

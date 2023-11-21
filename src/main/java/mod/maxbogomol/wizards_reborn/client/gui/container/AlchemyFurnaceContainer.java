@@ -9,6 +9,7 @@ import net.minecraft.world.inventory.ContainerLevelAccess;
 import net.minecraft.world.inventory.MenuType;
 import net.minecraft.world.inventory.Slot;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.crafting.RecipeType;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraftforge.common.capabilities.ForgeCapabilities;
@@ -40,7 +41,7 @@ public class AlchemyFurnaceContainer extends AbstractContainerMenu {
         if (tileEntity != null) {
             tileEntity.getCapability(ForgeCapabilities.ITEM_HANDLER).ifPresent(h -> {
                 addSlot(new SlotItemHandler(h, 0, 74, 30));
-                addSlot(new SlotItemHandler(h, 1, 74, 66));
+                addSlot(new AlchemyFurnaceFuelSlot(this, h, 1, 74, 66));
 
                 addSlot(new ResultSlot(h, 2, 132, 48));
             });
@@ -117,5 +118,9 @@ public class AlchemyFurnaceContainer extends AbstractContainerMenu {
         }
         sourceSlot.onTake(playerEntity, sourceStack);
         return copyOfSourceStack;
+    }
+
+    protected boolean isFuel(ItemStack pStack) {
+        return net.minecraftforge.common.ForgeHooks.getBurnTime(pStack, RecipeType.SMELTING) > 0;
     }
 }

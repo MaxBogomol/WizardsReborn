@@ -71,6 +71,8 @@
     "wizards_reborn:fluid_pipe",
     "wizards_reborn:fluid_extractor",
     "wizards_reborn:steam_pipe",
+    "wizards_reborn:steam_extractor",
+    "wizards_reborn:alchemy_furnace",
     "wizards_reborn:orbital_fluid_retainer"
   ]
 }
