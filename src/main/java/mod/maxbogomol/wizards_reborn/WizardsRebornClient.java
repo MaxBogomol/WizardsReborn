@@ -5,10 +5,7 @@ import com.mojang.blaze3d.vertex.DefaultVertexFormat;
 import mod.maxbogomol.wizards_reborn.client.config.ClientConfig;
 import mod.maxbogomol.wizards_reborn.client.model.curio.AmuletModel;
 import mod.maxbogomol.wizards_reborn.client.model.curio.BeltModel;
-import mod.maxbogomol.wizards_reborn.client.particle.ArcaneWoodLeafParticleType;
-import mod.maxbogomol.wizards_reborn.client.particle.KarmaParticleType;
-import mod.maxbogomol.wizards_reborn.client.particle.SparkleParticleType;
-import mod.maxbogomol.wizards_reborn.client.particle.WispParticleType;
+import mod.maxbogomol.wizards_reborn.client.particle.*;
 import mod.maxbogomol.wizards_reborn.client.render.block.PipeModel;
 import mod.maxbogomol.wizards_reborn.client.render.entity.ArcaneWoodBoatModel;
 import mod.maxbogomol.wizards_reborn.client.render.entity.SpellProjectileRenderer;
@@ -220,6 +217,7 @@ public class WizardsRebornClient {
             Minecraft.getInstance().particleEngine.register(WizardsReborn.SPARKLE_PARTICLE.get(), SparkleParticleType.Factory::new);
             Minecraft.getInstance().particleEngine.register(WizardsReborn.KARMA_PARTICLE.get(), KarmaParticleType.Factory::new);
             Minecraft.getInstance().particleEngine.register(WizardsReborn.ARCANE_WOOD_LEAF_PARTICLE.get(), ArcaneWoodLeafParticleType.Factory::new);
+            Minecraft.getInstance().particleEngine.register(WizardsReborn.STEAM_PARTICLE.get(), SteamParticleType.Factory::new);
         }
 
         @SubscribeEvent

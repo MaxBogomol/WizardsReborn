@@ -3,6 +3,7 @@ package mod.maxbogomol.wizards_reborn.common.item.equipment;
 import com.mojang.blaze3d.systems.RenderSystem;
 import mod.maxbogomol.wizards_reborn.WizardsReborn;
 import mod.maxbogomol.wizards_reborn.api.alchemy.IFluidTileEntity;
+import mod.maxbogomol.wizards_reborn.api.alchemy.IHeatTileEntity;
 import mod.maxbogomol.wizards_reborn.api.alchemy.ISteamTileEntity;
 import mod.maxbogomol.wizards_reborn.api.wissen.ICooldownTileEntity;
 import mod.maxbogomol.wizards_reborn.api.wissen.IWissenTileEntity;
@@ -327,6 +328,19 @@ public class WissenWandItem extends Item {
                             int width = 32;
                             width /= (double) fluidTile.getFluidMaxAmount() / (double) fluidTile.getFluidAmount();
                             gui.blit(new ResourceLocation(WizardsReborn.MOD_ID + ":textures/gui/fluid_frame.png"), x + 8, y + 1, 0, 10, width, 8, 64, 64);
+                            i = i + 11;
+                        }
+
+                        if (tileentity instanceof IHeatTileEntity) {
+                            IHeatTileEntity heatTile = (IHeatTileEntity) tileentity;
+
+                            int x = mc.getWindow().getGuiScaledWidth() / 2 - (48 / 2);
+                            int y = mc.getWindow().getGuiScaledHeight() / 2 + 32 - 10 - 11 + i;
+
+                            gui.blit(new ResourceLocation(WizardsReborn.MOD_ID + ":textures/gui/heat_frame.png"), x, y, 0, 0, 48, 10, 64, 64);
+                            int width = 32;
+                            width /= (double) heatTile.getMaxHeat() / (double) heatTile.getHeat();
+                            gui.blit(new ResourceLocation(WizardsReborn.MOD_ID + ":textures/gui/heat_frame.png"), x + 8, y + 1, 0, 10, width, 8, 64, 64);
                             i = i + 11;
                         }
 

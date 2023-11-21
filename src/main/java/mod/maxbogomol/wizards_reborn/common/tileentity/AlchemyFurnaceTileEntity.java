@@ -2,31 +2,19 @@ package mod.maxbogomol.wizards_reborn.common.tileentity;
 
 import mod.maxbogomol.wizards_reborn.WizardsReborn;
 import mod.maxbogomol.wizards_reborn.api.alchemy.IFluidTileEntity;
+import mod.maxbogomol.wizards_reborn.api.alchemy.IHeatTileEntity;
 import mod.maxbogomol.wizards_reborn.api.alchemy.ISteamTileEntity;
-import mod.maxbogomol.wizards_reborn.api.wissen.ICooldownTileEntity;
-import mod.maxbogomol.wizards_reborn.api.wissen.IWissenTileEntity;
-import mod.maxbogomol.wizards_reborn.api.wissen.IWissenWandFunctionalTileEntity;
-import mod.maxbogomol.wizards_reborn.api.wissen.WissenUtils;
-import mod.maxbogomol.wizards_reborn.client.particle.Particles;
-import mod.maxbogomol.wizards_reborn.common.item.CrystalItem;
-import mod.maxbogomol.wizards_reborn.common.network.PacketHandler;
-import mod.maxbogomol.wizards_reborn.common.network.spell.JewelerTableBurstEffectPacket;
-import mod.maxbogomol.wizards_reborn.common.recipe.JewelerTableRecipe;
 import mod.maxbogomol.wizards_reborn.utils.PacketUtils;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
-import net.minecraft.core.RegistryAccess;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.Connection;
 import net.minecraft.network.protocol.game.ClientboundBlockEntityDataPacket;
-import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.SimpleContainer;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.phys.Vec2;
-import net.minecraft.world.phys.Vec3;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.capabilities.ForgeCapabilities;
 import net.minecraftforge.common.util.LazyOptional;
@@ -41,13 +29,11 @@ import org.jetbrains.annotations.NotNull;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
-import java.awt.*;
-import java.util.Optional;
 import java.util.Random;
 
 import static net.minecraft.world.level.block.state.properties.BlockStateProperties.HORIZONTAL_FACING;
 
-public class AlchemyFurnaceTileEntity extends BlockEntity implements TickableBlockEntity, IFluidTileEntity, ISteamTileEntity {
+public class AlchemyFurnaceTileEntity extends BlockEntity implements TickableBlockEntity, IFluidTileEntity, ISteamTileEntity, IHeatTileEntity {
     public final ItemStackHandler itemHandler = createHandler(2);
     public final LazyOptional<IItemHandler> handler = LazyOptional.of(() -> itemHandler);
     public final ItemStackHandler itemOutputHandler = createHandler(1);
@@ -66,7 +52,7 @@ public class AlchemyFurnaceTileEntity extends BlockEntity implements TickableBlo
     public boolean startCraft = false;
 
     public int steam = 0;
-
+    public int heat = 0;
 
     public Random random = new Random();
 
@@ -187,6 +173,7 @@ public class AlchemyFurnaceTileEntity extends BlockEntity implements TickableBlo
         tag.putBoolean("startCraft", startCraft);
 
         tag.putInt("steam", steam);
+        tag.putInt("heat", heat);
 
         tag.put("fluidTank", fluidTank.writeToNBT(new CompoundTag()));
     }
@@ -202,6 +189,7 @@ public class AlchemyFurnaceTileEntity extends BlockEntity implements TickableBlo
         startCraft = tag.getBoolean("startCraft");
 
         steam = tag.getInt("steam");
+        heat = tag.getInt("heat");
 
         fluidTank.readFromNBT(tag.getCompound("fluidTank"));
     }
@@ -272,5 +260,36 @@ public class AlchemyFurnaceTileEntity extends BlockEntity implements TickableBlo
     @Override
     public boolean canSteamConnection(Direction side) {
         return (side == Direction.UP);
+    }
+
+    @Override
+    public int getHeat() {
+        return heat;
+    }
+
+    @Override
+    public int getMaxHeat() {
+        return 10000;
+    }
+
+    @Override
+    public void setHeat(int heat) {
+        this.heat = heat;
+    }
+
+    @Override
+    public void addHeat(int heat) {
+        this.heat = this.heat + heat;
+        if (this.heat > getMaxHeat()) {
+            this.heat = getMaxHeat();
+        }
+    }
+
+    @Override
+    public void removeHeat(int heat) {
+        this.heat = this.heat - heat;
+        if (this.heat < 0) {
+            this.heat = 0;
+        }
     }
 }

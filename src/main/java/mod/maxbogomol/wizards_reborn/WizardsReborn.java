@@ -17,15 +17,14 @@ import mod.maxbogomol.wizards_reborn.client.event.ClientWorldEvent;
 import mod.maxbogomol.wizards_reborn.client.event.KeyBindHandler;
 import mod.maxbogomol.wizards_reborn.client.gui.HUDEventHandler;
 import mod.maxbogomol.wizards_reborn.client.gui.TooltipEventHandler;
+import mod.maxbogomol.wizards_reborn.client.gui.container.AlchemyFurnaceContainer;
 import mod.maxbogomol.wizards_reborn.client.gui.container.ArcaneWorkbenchContainer;
 import mod.maxbogomol.wizards_reborn.client.gui.container.JewelerTableContainer;
+import mod.maxbogomol.wizards_reborn.client.gui.screen.AlchemyFurnaceScreen;
 import mod.maxbogomol.wizards_reborn.client.gui.screen.ArcaneWorkbenchScreen;
 import mod.maxbogomol.wizards_reborn.client.gui.screen.CrystalChooseScreen;
 import mod.maxbogomol.wizards_reborn.client.gui.screen.JewelerTableScreen;
-import mod.maxbogomol.wizards_reborn.client.particle.ArcaneWoodLeafParticleType;
-import mod.maxbogomol.wizards_reborn.client.particle.KarmaParticleType;
-import mod.maxbogomol.wizards_reborn.client.particle.SparkleParticleType;
-import mod.maxbogomol.wizards_reborn.client.particle.WispParticleType;
+import mod.maxbogomol.wizards_reborn.client.particle.*;
 import mod.maxbogomol.wizards_reborn.client.render.WorldRenderHandler;
 import mod.maxbogomol.wizards_reborn.client.render.curio.AmuletRenderer;
 import mod.maxbogomol.wizards_reborn.client.render.curio.BeltRenderer;
@@ -589,6 +588,7 @@ public class WizardsReborn {
     public static RegistryObject<SparkleParticleType> SPARKLE_PARTICLE = PARTICLES.register("sparkle", SparkleParticleType::new);
     public static RegistryObject<KarmaParticleType> KARMA_PARTICLE = PARTICLES.register("karma", KarmaParticleType::new);
     public static RegistryObject<ArcaneWoodLeafParticleType> ARCANE_WOOD_LEAF_PARTICLE = PARTICLES.register("arcane_wood_leaf", ArcaneWoodLeafParticleType::new);
+    public static RegistryObject<SteamParticleType> STEAM_PARTICLE = PARTICLES.register("steam", SteamParticleType::new);
 
     //RECIPES
     public static final RegistryObject<ArcanumDustTransmutationRecipe.Serializer> ARCANUM_DUST_TRANSMUTATION_SERIALIZER = RECIPE_SERIALIZERS.register("arcanum_dust_transmutation", ArcanumDustTransmutationRecipe.Serializer::new);
@@ -624,6 +624,14 @@ public class WizardsReborn {
                 BlockPos pos = data.readBlockPos();
                 Level world = inv.player.getCommandSenderWorld();
                 return new JewelerTableContainer(windowId, world, pos, inv, inv.player);
+            })));
+
+    public static final RegistryObject<MenuType<AlchemyFurnaceContainer>> ALCHEMY_FURNACE_CONTAINER
+            = CONTAINERS.register("alchemy_furnace_container",
+            () -> IForgeMenuType.create(((windowId, inv, data) -> {
+                BlockPos pos = data.readBlockPos();
+                Level world = inv.player.getCommandSenderWorld();
+                return new AlchemyFurnaceContainer(windowId, world, pos, inv, inv.player);
             })));
 
     public static final RegistryObject<BannerPattern> VIOLENCE_BANNER_PATTERN = BANNER_PATTERNS.register("violence", () -> new BannerPattern("wrv"));
@@ -761,6 +769,7 @@ public class WizardsReborn {
 
             MenuScreens.register(ARCANE_WORKBENCH_CONTAINER.get(), ArcaneWorkbenchScreen::new);
             MenuScreens.register(JEWELER_TABLE_CONTAINER.get(), JewelerTableScreen::new);
+            MenuScreens.register(ALCHEMY_FURNACE_CONTAINER.get(), AlchemyFurnaceScreen::new);
 
             CuriosRendererRegistry.register(LEATHER_BELT.get(), BeltRenderer::new);
             CuriosRendererRegistry.register(ARCANUM_AMULET.get(), AmuletRenderer::new);

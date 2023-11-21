@@ -121,11 +121,11 @@ public class FluidExtractorTileEntity extends FluidPipeBaseTileEntity {
                 float vx = xOffset * speed + posRand.nextFloat() * speed * 0.3f;
                 float vy = yOffset * speed + posRand.nextFloat() * speed * 0.3f;
                 float vz = zOffset * speed + posRand.nextFloat() * speed * 0.3f;
-                Particles.create(WizardsReborn.WISP_PARTICLE)
+                Particles.create(WizardsReborn.STEAM_PARTICLE)
                         .addVelocity(vx, vy, vz)
                         .setAlpha(0.4f, 0).setScale(0.05f, 0.15f)
                         .setColor(1F, 1F, 1F)
-                        .setLifetime(20)
+                        .setLifetime(30)
                         .setSpin((0.1f * (float) ((random.nextDouble() - 0.5D) * 2)))
                         .spawn(level, getBlockPos().getX() + 0.5, getBlockPos().getY() + 0.5, getBlockPos().getZ() + 0.5);
             }
