@@ -1,0 +1,16 @@
+{
+  "variants": {
+    "axis=x": {
+      "model": "wizards_reborn:block/steam_thermal_storage",
+      "x": 90,
+      "y": 90
+    },
+    "axis=y": {
+      "model": "wizards_reborn:block/steam_thermal_storage"
+    },
+    "axis=z": {
+      "model": "wizards_reborn:block/steam_thermal_storage",
+      "x": 90
+    }
+  }
+}

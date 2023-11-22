@@ -7,24 +7,27 @@ import mod.maxbogomol.wizards_reborn.api.alchemy.ISteamTileEntity;
 import mod.maxbogomol.wizards_reborn.utils.PacketUtils;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
-import net.minecraft.core.NonNullList;
 import net.minecraft.core.RegistryAccess;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.Connection;
 import net.minecraft.network.protocol.game.ClientboundBlockEntityDataPacket;
+import net.minecraft.server.level.ServerLevel;
+import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.SimpleContainer;
-import net.minecraft.world.WorldlyContainer;
+import net.minecraft.world.entity.ExperienceOrb;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
-import net.minecraft.world.item.crafting.Recipe;
 import net.minecraft.world.item.crafting.RecipeType;
 import net.minecraft.world.item.crafting.SmeltingRecipe;
+import net.minecraft.world.level.block.AbstractFurnaceBlock;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.material.Fluids;
+import net.minecraft.world.phys.Vec3;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.capabilities.ForgeCapabilities;
 import net.minecraftforge.common.util.LazyOptional;
@@ -32,7 +35,6 @@ import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.capability.IFluidHandler;
 import net.minecraftforge.fluids.capability.templates.FluidTank;
 import net.minecraftforge.items.IItemHandler;
-import net.minecraftforge.items.ItemHandlerHelper;
 import net.minecraftforge.items.ItemStackHandler;
 import net.minecraftforge.items.wrapper.CombinedInvWrapper;
 import org.jetbrains.annotations.NotNull;
@@ -66,6 +68,7 @@ public class AlchemyFurnaceTileEntity extends BlockEntity implements TickableBlo
     public int heatLastTime = 0;
     public int cookMaxTime = 0;
     public int cookTime = 0;
+    public float exp = 0;
 
     public int steam = 0;
     public int heat = 0;
@@ -86,6 +89,7 @@ public class AlchemyFurnaceTileEntity extends BlockEntity implements TickableBlo
     public void tick() {
         if (!level.isClientSide()) {
             boolean update = false;
+            boolean flag = isLit();
 
             if (burnLastTime > 0) {
                 burnLastTime = burnLastTime - 1;
@@ -108,6 +112,12 @@ public class AlchemyFurnaceTileEntity extends BlockEntity implements TickableBlo
             } else {
                 if (heat > 0) {
                     heat = heat - 1;
+                    update = true;
+                }
+
+                if (heat <= 0) {
+                    cookMaxTime = 0;
+                    cookTime = 0;
                     update = true;
                 }
             }
@@ -137,8 +147,17 @@ public class AlchemyFurnaceTileEntity extends BlockEntity implements TickableBlo
                         heat = heat - 1;
                         steam = steam + 1;
                         heatLastTime = 10 * 20;
+                        if (random.nextFloat() < 0.001F) {
+                            level.playSound(null, getBlockPos(), WizardsReborn.STEAM_BURST_SOUND.get(), SoundSource.BLOCKS, 0.1f, 1.0f);
+                        }
                         update = true;
                     }
+                }
+
+                if (heat <= 0) {
+                    cookMaxTime = 0;
+                    cookTime = 0;
+                    update = true;
                 }
             }
 
@@ -194,7 +213,8 @@ public class AlchemyFurnaceTileEntity extends BlockEntity implements TickableBlo
                         if (cookTime >= cookMaxTime) {
                             if (burn(RegistryAccess.EMPTY, recipe.get(), 64)) {
                                 cookMaxTime = 0;
-                                cookTime = 0;
+                                cookTime = 1;
+                                exp = exp + recipe.get().getExperience();
                                 update = true;
                             }
                         }
@@ -203,6 +223,12 @@ public class AlchemyFurnaceTileEntity extends BlockEntity implements TickableBlo
             } else {
                 cookMaxTime = 0;
                 cookTime = 0;
+                update = true;
+            }
+
+            if (flag != isLit()) {
+                BlockState blockState = getBlockState().setValue(AbstractFurnaceBlock.LIT, Boolean.valueOf(isLit()));
+                level.setBlock(getBlockPos(), blockState, 3);
                 update = true;
             }
 
@@ -308,6 +334,7 @@ public class AlchemyFurnaceTileEntity extends BlockEntity implements TickableBlo
         tag.putInt("burnTime", burnTime);
         tag.putInt("cookMaxTime", cookMaxTime);
         tag.putInt("cookTime", cookTime);
+        tag.putFloat("exp", exp);
 
         tag.putInt("steam", steam);
         tag.putInt("heat", heat);
@@ -327,6 +354,7 @@ public class AlchemyFurnaceTileEntity extends BlockEntity implements TickableBlo
         burnTime = tag.getInt("burnTime");
         cookMaxTime = tag.getInt("cookMaxTime");
         cookTime = tag.getInt("cookTime");
+        exp = tag.getFloat("exp");
 
         steam = tag.getInt("steam");
         heat = tag.getInt("heat");
@@ -395,6 +423,26 @@ public class AlchemyFurnaceTileEntity extends BlockEntity implements TickableBlo
         } else {
             return false;
         }
+    }
+
+    public void popExperience(ServerPlayer pPlayer) {
+        createExperience(pPlayer.serverLevel(), pPlayer.getPosition(0), (int) exp);
+        exp = exp - ((int) exp);
+        PacketUtils.SUpdateTileEntityPacket(this);
+    }
+
+    public void popExperience(ServerLevel pLevel, Vec3 pPopVec) {
+        createExperience(pLevel, pPopVec, (int) exp);
+        exp = exp - ((int) exp);
+        PacketUtils.SUpdateTileEntityPacket(this);
+    }
+
+    public static void createExperience(ServerLevel pLevel, Vec3 pPopVec, int pExperience) {
+        ExperienceOrb.award(pLevel, pPopVec, pExperience);
+    }
+
+    public boolean isLit() {
+        return cookTime > 0 || burnTime > 0 || cookMaxTime > 0 || burnMaxTime > 0;
     }
 
     public int getMaxCapacity() {

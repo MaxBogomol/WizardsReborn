@@ -181,6 +181,7 @@ public class WizardsRebornItemGroup {
             event.accept(WizardsReborn.STEAM_EXTRACTOR_ITEM);
             event.accept(WizardsReborn.ALCHEMY_FURNACE_ITEM);
             event.accept(WizardsReborn.ORBITAL_FLUID_RETAINER_ITEM);
+            event.accept(WizardsReborn.STEAM_THERMAL_STORAGE_ITEM);
 
             event.accept(WizardsReborn.WHITE_ARCANE_LUMOS_ITEM);
             event.accept(WizardsReborn.ORANGE_ARCANE_LUMOS_ITEM);

@@ -11,9 +11,9 @@ import net.minecraft.world.level.block.state.BlockState;
 
 import javax.annotation.Nullable;
 
-public class OrbitalFluidRetainerBlockItem extends BlockItem {
+public class FluidStorageBaseItem extends BlockItem {
 
-    public OrbitalFluidRetainerBlockItem(Block blockIn, Properties properties) {
+    public FluidStorageBaseItem(Block blockIn, Properties properties) {
         super(blockIn, properties);
     }
 

@@ -43,7 +43,7 @@ public class AlchemyFurnaceContainer extends AbstractContainerMenu {
                 addSlot(new SlotItemHandler(h, 0, 74, 30));
                 addSlot(new AlchemyFurnaceFuelSlot(this, h, 1, 74, 66));
 
-                addSlot(new ResultSlot(h, 2, 132, 48));
+                addSlot(new AlchemyFurnaceResultSlot(playerEntity, this, h, 2, 132, 48));
             });
         }
     }

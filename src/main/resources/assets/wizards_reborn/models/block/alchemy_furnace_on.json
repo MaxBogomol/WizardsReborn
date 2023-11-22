@@ -1,0 +1,12 @@
+{
+  "parent": "block/cube",
+  "textures": {
+    "particle": "wizards_reborn:block/alchemy_block",
+    "up": "wizards_reborn:block/steam_alchemy_connection",
+    "north": "wizards_reborn:block/alchemy_furnace_on",
+    "south": "wizards_reborn:block/fluid_alchemy_connection",
+    "east": "wizards_reborn:block/alchemy_block",
+    "west": "wizards_reborn:block/alchemy_block",
+    "down": "wizards_reborn:block/alchemy_block"
+  }
+}

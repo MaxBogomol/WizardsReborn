@@ -15,7 +15,8 @@
     "client.HumanoidModelMixin",
     "client.ItemInHandLayerMixin",
     "client.ItemInHandRendererMixin",
-    "client.PlayerRendererMixin"
+    "client.PlayerRendererMixin",
+    "client.RabbitRendererMixin"
   ],
   "minVersion": "0.8",
   "injectors": {
