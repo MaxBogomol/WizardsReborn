@@ -74,6 +74,7 @@
   "block.wizards_reborn.chiseled_wisestone_stairs": "Chiseled Wisestone Stairs",
   "block.wizards_reborn.chiseled_wisestone_slab": "Chiseled Wisestone Slab",
   "block.wizards_reborn.chiseled_wisestone_wall": "Chiseled Wisestone Wall",
+  "block.wizards_reborn.wisestone_pillar": "Wisestone Pillar",
   "block.wizards_reborn.polished_wisestone_pressure_plate": "Polished Wisestone Pressure Plate",
   "block.wizards_reborn.polished_wisestone_button": "Polished Wisestone Button",
 
@@ -154,6 +155,15 @@
   "block.wizards_reborn.arcane_workbench": "Arcane Workbench",
   "block.wizards_reborn.wissen_cell": "Wissen Cell",
 
+  "block.wizards_reborn.wisestone_pedestal": "Wisestone Pedestal",
+  "block.wizards_reborn.fluid_pipe": "Fluid Pipe",
+  "block.wizards_reborn.fluid_extractor": "Fluid Extractor",
+  "block.wizards_reborn.steam_pipe": "Steam Pipe",
+  "block.wizards_reborn.steam_extractor": "Steam Extractor",
+  "block.wizards_reborn.alchemy_furnace": "Alchemy Furnace",
+  "block.wizards_reborn.orbital_fluid_retainer": "Orbital Fluid Retainer",
+  "block.wizards_reborn.steam_thermal_storage": "Steam-Thermal Storage",
+
   "block.wizards_reborn.white_arcane_lumos": "White Arcane Lumos",
   "block.wizards_reborn.orange_arcane_lumos": "Orange Arcane Lumos",
   "block.wizards_reborn.magenta_arcane_lumos": "Magenta Arcane Lumos",
@@ -178,6 +188,7 @@
   "item.wizards_reborn.arcacite_amulet": "Arcacite Amulet",
   "item.wizards_reborn.arcacite_ring": "Arcacite Ring",
   "item.wizards_reborn.leather_belt": "Leather Belt",
+  "item.wizards_reborn.music_disc_arcanum": "Arcane Music Disc",
 
   "gui.wizards_reborn.category.arcanum_dust_transmutation": "Arcanum Dust Transmutation",
   "gui.wizards_reborn.category.mortar": "Mortar",
@@ -210,6 +221,8 @@
   "item.wizards_reborn.hunger_banner_pattern.desc": "Hunger",
   "item.wizards_reborn.survival_banner_pattern.desc": "Survival",
   "item.wizards_reborn.elevation_banner_pattern.desc": "Elevation",
+
+  "item.wizards_reborn.music_disc_arcanum.desc": "Onjerlay - Arcanum Swinging",
 
   "block.minecraft.banner.wizards_reborn.violence.black": "Black Symbol \"Violence\"",
   "block.minecraft.banner.wizards_reborn.violence.blue": "Blue Symbol \"Violence\"",

@@ -2,34 +2,34 @@ package mod.maxbogomol.wizards_reborn.common.block;
 
 import mod.maxbogomol.wizards_reborn.WizardsReborn;
 import mod.maxbogomol.wizards_reborn.api.alchemy.ISteamTileEntity;
-import mod.maxbogomol.wizards_reborn.client.particle.Particles;
-import mod.maxbogomol.wizards_reborn.common.item.equipment.WissenWandItem;
 import mod.maxbogomol.wizards_reborn.common.tileentity.SteamThermalStorageTileEntity;
 import mod.maxbogomol.wizards_reborn.common.tileentity.TickableBlockEntity;
-import mod.maxbogomol.wizards_reborn.common.tileentity.TileSimpleInventory;
-import mod.maxbogomol.wizards_reborn.common.tileentity.WissenTranslatorTileEntity;
-import mod.maxbogomol.wizards_reborn.utils.PacketUtils;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.nbt.CompoundTag;
+import net.minecraft.util.Mth;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelAccessor;
-import net.minecraft.world.level.block.*;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.EntityBlock;
+import net.minecraft.world.level.block.RotatedPillarBlock;
+import net.minecraft.world.level.block.SimpleWaterloggedBlock;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityTicker;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
-import net.minecraft.world.level.block.state.properties.AttachFace;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.material.FluidState;
 import net.minecraft.world.level.material.Fluids;
+import net.minecraft.world.level.storage.loot.LootParams;
+import net.minecraft.world.level.storage.loot.parameters.LootContextParams;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.shapes.BooleanOp;
 import net.minecraft.world.phys.shapes.CollisionContext;
@@ -39,6 +39,7 @@ import org.jetbrains.annotations.NotNull;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
+import java.util.List;
 import java.util.Random;
 import java.util.stream.Stream;
 
@@ -111,14 +112,21 @@ public class SteamThermalStorageBlock extends RotatedPillarBlock implements Enti
     }
 
     @Override
-    public void onRemove(@Nonnull BlockState state, @Nonnull Level world, @Nonnull BlockPos pos, @Nonnull BlockState newState, boolean isMoving) {
-        if (state.getBlock() != newState.getBlock()) {
-            BlockEntity tile = world.getBlockEntity(pos);
-            if (tile instanceof TileSimpleInventory) {
-                net.minecraft.world.Containers.dropContents(world, pos, ((TileSimpleInventory) tile).getItemHandler());
+    public List<ItemStack> getDrops(BlockState state, LootParams.Builder builder) {
+        List<ItemStack> items = super.getDrops(state, builder);
+        BlockEntity tile = builder.getOptionalParameter(LootContextParams.BLOCK_ENTITY);
+        if (tile instanceof ISteamTileEntity steamTile) {
+            CompoundTag nbt = tile.getUpdateTag();
+            if (nbt != null) {
+                for (ItemStack stack : items) {
+                    if (stack.getItem() == WizardsReborn.STEAM_THERMAL_STORAGE_ITEM.get()) {
+                        CompoundTag tag = stack.getOrCreateTag();
+                        tag.putInt("steam", steamTile.getSteam());
+                    }
+                }
             }
-            super.onRemove(state, world, pos, newState, isMoving);
         }
+        return items;
     }
 
     @Override
@@ -159,40 +167,14 @@ public class SteamThermalStorageBlock extends RotatedPillarBlock implements Enti
         return TickableBlockEntity.getTickerHelper();
     }
 
-    /*@Override
+    @Override
     public boolean hasAnalogOutputSignal(BlockState state) {
         return true;
     }
 
     @Override
     public int getAnalogOutputSignal(BlockState blockState, Level level, BlockPos pos) {
-        TileSimpleInventory tile = (TileSimpleInventory) level.getBlockEntity(pos);
-        return AbstractContainerMenu.getRedstoneSignalFromContainer(tile.getItemHandler());
-    }*/
-
-    @Override
-    public void playerWillDestroy(Level world, BlockPos pos, BlockState state, Player player) {
-        if (world.isClientSide()) {
-            if (!player.isCreative()) {
-                if (world.getBlockEntity(pos) != null) {
-                    if (world.getBlockEntity(pos) instanceof ISteamTileEntity tile) {
-                        if (tile.getMaxSteam() > 0) {
-                            float amount = (float) tile.getSteam() / (float) tile.getMaxSteam();
-                            for (int i = 0; i < 15 * amount; i++) {
-                                Particles.create(WizardsReborn.STEAM_PARTICLE)
-                                        .addVelocity(((random.nextDouble() - 0.5D) / 30), (random.nextDouble() / 30) + 0.001, ((random.nextDouble() - 0.5D) / 30))
-                                        .setAlpha(0.4f, 0).setScale(0.1f, 0.5f)
-                                        .setColor(1f, 1f, 1f)
-                                        .setLifetime(30)
-                                        .setSpin((0.1f * (float) ((random.nextDouble() - 0.5D) * 2)))
-                                        .spawn(world, pos.getX() + 0.5F, pos.getY() + 0.5F, pos.getZ() + 0.5F);
-                            }
-                        }
-                    }
-                }
-            }
-        }
-
-        super.playerWillDestroy(world, pos, state, player);
+        ISteamTileEntity tile = (ISteamTileEntity) level.getBlockEntity(pos);
+        return Mth.floor(((float) tile.getSteam() / tile.getMaxSteam()) * 14.0F);
     }
 }

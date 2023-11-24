@@ -4,7 +4,6 @@ import mod.maxbogomol.wizards_reborn.client.gui.container.JewelerTableContainer;
 import mod.maxbogomol.wizards_reborn.common.item.equipment.WissenWandItem;
 import mod.maxbogomol.wizards_reborn.common.tileentity.JewelerTableTileEntity;
 import mod.maxbogomol.wizards_reborn.common.tileentity.TickableBlockEntity;
-import mod.maxbogomol.wizards_reborn.common.tileentity.TileSimpleInventory;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.network.chat.Component;
@@ -18,7 +17,10 @@ import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelAccessor;
-import net.minecraft.world.level.block.*;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.EntityBlock;
+import net.minecraft.world.level.block.HorizontalDirectionalBlock;
+import net.minecraft.world.level.block.SimpleWaterloggedBlock;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityTicker;
 import net.minecraft.world.level.block.entity.BlockEntityType;
@@ -163,13 +165,13 @@ public class JewelerTableBlock extends HorizontalDirectionalBlock implements Ent
     }
 
     @Override
-    public boolean hasAnalogOutputSignal(BlockState state) {
-        return true;
-    }
-
-    @Override
     public int getAnalogOutputSignal(BlockState blockState, Level level, BlockPos pos) {
-        TileSimpleInventory tile = (TileSimpleInventory) level.getBlockEntity(pos);
-        return AbstractContainerMenu.getRedstoneSignalFromContainer(tile.getItemHandler());
+        JewelerTableTileEntity table = (JewelerTableTileEntity) level.getBlockEntity(pos);
+        SimpleContainer inv = new SimpleContainer(table.itemHandler.getSlots() + 1);
+        for (int i = 0; i < table.itemHandler.getSlots(); i++) {
+            inv.setItem(i, table.itemHandler.getStackInSlot(i));
+        }
+        inv.setItem(table.itemHandler.getSlots(), table.itemOutputHandler.getStackInSlot(0));
+        return AbstractContainerMenu.getRedstoneSignalFromContainer(inv);
     }
 }

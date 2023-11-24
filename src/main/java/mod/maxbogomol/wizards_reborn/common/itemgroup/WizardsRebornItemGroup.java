@@ -216,6 +216,8 @@ public class WizardsRebornItemGroup {
             event.accept(WizardsReborn.HUNGER_BANNER_PATTERN_ITEM);
             event.accept(WizardsReborn.SURVIVAL_BANNER_PATTERN_ITEM);
             event.accept(WizardsReborn.ELEVATION_BANNER_PATTERN_ITEM);
+
+            event.accept(WizardsReborn.MUSIC_DISC_ARCANUM);
         }
     }
 }

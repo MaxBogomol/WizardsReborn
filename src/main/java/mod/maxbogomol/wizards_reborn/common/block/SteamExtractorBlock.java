@@ -3,10 +3,12 @@ package mod.maxbogomol.wizards_reborn.common.block;
 import mod.maxbogomol.wizards_reborn.WizardsReborn;
 import mod.maxbogomol.wizards_reborn.api.alchemy.ISteamTileEntity;
 import mod.maxbogomol.wizards_reborn.client.particle.Particles;
+import mod.maxbogomol.wizards_reborn.common.tileentity.SteamPipeBaseTileEntity;
 import mod.maxbogomol.wizards_reborn.common.tileentity.TickableBlockEntity;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.tags.TagKey;
+import net.minecraft.util.Mth;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
@@ -73,16 +75,16 @@ public class SteamExtractorBlock extends TinyExtractorBaseBlock {
         return TickableBlockEntity.getTickerHelper();
     }
 
-    /*@Override
+    @Override
     public boolean hasAnalogOutputSignal(BlockState state) {
         return true;
     }
 
     @Override
     public int getAnalogOutputSignal(BlockState blockState, Level level, BlockPos pos) {
-        FluidPipeBaseTileEntity tile = (FluidPipeBaseTileEntity) level.getBlockEntity(pos);
-        return Mth.floor(((float) tile.tank.getFluidAmount() / tile.getCapacity()) * 14.0F);
-    }*/
+        SteamPipeBaseTileEntity tile = (SteamPipeBaseTileEntity) level.getBlockEntity(pos);
+        return Mth.floor(((float) tile.getSteam() / tile.getMaxSteam()) * 14.0F);
+    }
 
     @Override
     public void playerWillDestroy(Level world, BlockPos pos, BlockState state, Player player) {

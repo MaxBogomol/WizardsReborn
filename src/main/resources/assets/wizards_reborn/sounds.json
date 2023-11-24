@@ -34,5 +34,13 @@
     "sounds": [
       "wizards_reborn:steam_burst"
     ]
+  },
+  "arcanum_swinging": {
+    "sounds": [
+      {
+        "name": "wizards_reborn:arcanum_swinging",
+        "stream": true
+      }
+    ]
   }
 }

@@ -112,7 +112,7 @@ public class SteamThermalStorageTileEntity extends BlockEntity implements Tickab
 
     @Override
     public int getMaxSteam() {
-        return 10000;
+        return 25000;
     }
 
     @Override

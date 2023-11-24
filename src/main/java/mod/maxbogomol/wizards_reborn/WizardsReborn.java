@@ -150,6 +150,8 @@ public class WizardsReborn {
     public static final TagKey<BannerPattern> SURVIVAL_BANNER_PATTERN_TAG = TagKey.create(Registries.BANNER_PATTERN, new ResourceLocation(MOD_ID, "pattern_item/survival"));
     public static final TagKey<BannerPattern> ELEVATION_BANNER_PATTERN_TAG = TagKey.create(Registries.BANNER_PATTERN, new ResourceLocation(MOD_ID, "pattern_item/elevation"));
 
+    public static final RegistryObject<SoundEvent> MUSIC_DISC_ARCANUM_SOUND = SOUND_EVENTS.register("arcanum_swinging", () -> SoundEvent.createVariableRangeEvent(new ResourceLocation(MOD_ID, "arcanum_swinging")));
+
     //CRYSTAL_STATS
     public static CrystalStat FOCUS_CRYSTAL_STAT = new CrystalStat(MOD_ID+":focus", 3);
     public static CrystalStat BALANCE_CRYSTAL_STAT = new CrystalStat(MOD_ID+":balance", 3);
@@ -514,7 +516,7 @@ public class WizardsReborn {
     public static final RegistryObject<Item> STEAM_EXTRACTOR_ITEM = ITEMS.register("steam_extractor", () -> new BlockItem(STEAM_EXTRACTOR.get(), new Item.Properties()));
     public static final RegistryObject<Item> ALCHEMY_FURNACE_ITEM = ITEMS.register("alchemy_furnace", () -> new BlockItem(ALCHEMY_FURNACE.get(), new Item.Properties()));
     public static final RegistryObject<Item> ORBITAL_FLUID_RETAINER_ITEM = ITEMS.register("orbital_fluid_retainer", () -> new FluidStorageBaseItem(ORBITAL_FLUID_RETAINER.get(), new Item.Properties().stacksTo(1)));
-    public static final RegistryObject<Item> STEAM_THERMAL_STORAGE_ITEM = ITEMS.register("steam_thermal_storage", () -> new BlockItem(STEAM_THERMAL_STORAGE.get(), new Item.Properties()));
+    public static final RegistryObject<Item> STEAM_THERMAL_STORAGE_ITEM = ITEMS.register("steam_thermal_storage", () -> new SteamStorageBaseItem(STEAM_THERMAL_STORAGE.get(), new Item.Properties().stacksTo(1)));
 
     public static final RegistryObject<Item> WHITE_ARCANE_LUMOS_ITEM = ITEMS.register("white_arcane_lumos", () -> new BlockItem(WHITE_ARCANE_LUMOS.get(), new Item.Properties()));
     public static final RegistryObject<Item> ORANGE_ARCANE_LUMOS_ITEM = ITEMS.register("orange_arcane_lumos", () -> new BlockItem(ORANGE_ARCANE_LUMOS.get(), new Item.Properties()));
@@ -549,6 +551,8 @@ public class WizardsReborn {
     public static final RegistryObject<Item> HUNGER_BANNER_PATTERN_ITEM = ITEMS.register("hunger_banner_pattern", () -> new BannerPatternItem(HUNGER_BANNER_PATTERN_TAG, (new Item.Properties()).stacksTo(1).rarity(Rarity.UNCOMMON)));
     public static final RegistryObject<Item> SURVIVAL_BANNER_PATTERN_ITEM = ITEMS.register("survival_banner_pattern", () -> new BannerPatternItem(SURVIVAL_BANNER_PATTERN_TAG, (new Item.Properties()).stacksTo(1).rarity(Rarity.UNCOMMON)));
     public static final RegistryObject<Item> ELEVATION_BANNER_PATTERN_ITEM = ITEMS.register("elevation_banner_pattern", () -> new BannerPatternItem(ELEVATION_BANNER_PATTERN_TAG, (new Item.Properties()).stacksTo(1).rarity(Rarity.UNCOMMON)));
+
+    public static final RegistryObject<Item> MUSIC_DISC_ARCANUM = ITEMS.register("music_disc_arcanum", () -> new RecordItem(6, MUSIC_DISC_ARCANUM_SOUND.get(), new Item.Properties().stacksTo(1).rarity(Rarity.RARE), 122));
 
     //TILE_ENTITIES
     public static final RegistryObject<BlockEntityType<CustomSignTileEntity>> SIGN_TILE_ENTITY = TILE_ENTITIES.register("sign", () -> BlockEntityType.Builder.of(CustomSignTileEntity::new, ARCANE_WOOD_SIGN.get(), ARCANE_WOOD_WALL_SIGN.get()).build(null));

@@ -146,8 +146,12 @@ public class AlchemyFurnaceBlock extends HorizontalDirectionalBlock implements E
 
     @Override
     public int getAnalogOutputSignal(BlockState blockState, Level level, BlockPos pos) {
-        TileSimpleInventory tile = (TileSimpleInventory) level.getBlockEntity(pos);
-        return AbstractContainerMenu.getRedstoneSignalFromContainer(tile.getItemHandler());
+        AlchemyFurnaceTileEntity furnace = (AlchemyFurnaceTileEntity) level.getBlockEntity(pos);
+        SimpleContainer inv = new SimpleContainer(3);
+        inv.setItem(0, furnace.itemHandler.getStackInSlot(0));
+        inv.setItem(1, furnace.itemFuelHandler.getStackInSlot(0));
+        inv.setItem(2, furnace.itemOutputHandler.getStackInSlot(0));
+        return AbstractContainerMenu.getRedstoneSignalFromContainer(inv);
     }
 
     @Override

@@ -1,5 +1,6 @@
 package mod.maxbogomol.wizards_reborn.common.block;
 
+import mod.maxbogomol.wizards_reborn.WizardsReborn;
 import mod.maxbogomol.wizards_reborn.api.wissen.IWissenItem;
 import mod.maxbogomol.wizards_reborn.api.wissen.IWissenTileEntity;
 import mod.maxbogomol.wizards_reborn.api.wissen.WissenItemUtils;
@@ -98,9 +99,11 @@ public class WissenCellBlock extends HorizontalDirectionalBlock implements Entit
             CompoundTag nbt = tile.getUpdateTag();
             if (nbt != null) {
                 for (ItemStack stack : items) {
-                    if (stack.getItem() instanceof IWissenItem) {
-                        WissenItemUtils.existWissen(stack);
-                        WissenItemUtils.setWissen(stack, wissenTile.getWissen());
+                    if (stack.getItem() == WizardsReborn.WISSEN_CELL_ITEM.get()) {
+                        if (stack.getItem() instanceof IWissenItem) {
+                            WissenItemUtils.existWissen(stack);
+                            WissenItemUtils.setWissen(stack, wissenTile.getWissen());
+                        }
                     }
                 }
             }

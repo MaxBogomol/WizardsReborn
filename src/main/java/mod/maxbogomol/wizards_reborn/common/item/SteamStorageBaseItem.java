@@ -1,7 +1,7 @@
 package mod.maxbogomol.wizards_reborn.common.item;
 
-import mod.maxbogomol.wizards_reborn.api.alchemy.IFluidItem;
-import mod.maxbogomol.wizards_reborn.api.alchemy.IFluidTileEntity;
+import mod.maxbogomol.wizards_reborn.api.alchemy.ISteamItem;
+import mod.maxbogomol.wizards_reborn.api.alchemy.ISteamTileEntity;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.world.entity.player.Player;
@@ -15,9 +15,9 @@ import net.minecraft.world.level.block.state.BlockState;
 
 import javax.annotation.Nullable;
 
-public class FluidStorageBaseItem extends BlockItem implements IFluidItem {
+public class SteamStorageBaseItem extends BlockItem implements ISteamItem {
 
-    public FluidStorageBaseItem(Block blockIn, Properties properties) {
+    public SteamStorageBaseItem(Block blockIn, Properties properties) {
         super(blockIn, properties);
     }
 
@@ -26,7 +26,7 @@ public class FluidStorageBaseItem extends BlockItem implements IFluidItem {
         CompoundTag nbt = stack.getOrCreateTag();
         if (!nbt.contains("BlockEntityTag")) {
             CompoundTag tileNbt = new CompoundTag();
-            tileNbt.put("fluidTank", nbt.getCompound("fluidTank"));
+            tileNbt.putInt("steam", nbt.getInt("steam"));
             nbt.put("BlockEntityTag", tileNbt);
         }
 
@@ -34,11 +34,11 @@ public class FluidStorageBaseItem extends BlockItem implements IFluidItem {
     }
 
     @Override
-    public int getMaxFluid(ItemStack stack) {
+    public int getMaxSteam() {
         if (getBlock() instanceof EntityBlock tileBlock) {
             BlockEntity tile = tileBlock.newBlockEntity(new BlockPos(0, 0, 0), getBlock().defaultBlockState());
-            if (tile instanceof IFluidTileEntity steamTile) {
-                return steamTile.getFluidMaxAmount();
+            if (tile instanceof ISteamTileEntity steamTile) {
+                return steamTile.getMaxSteam();
             }
         }
         return 0;
