@@ -10,7 +10,7 @@
       "model": "wizards_reborn:block/fluid_extractor_on"
     },
     "lit=true,powered=true": {
-      "model": "wizards_reborn:block/fluid_extractor_on"
+      "model": "wizards_reborn:block/fluid_extractor"
     }
   }
 }

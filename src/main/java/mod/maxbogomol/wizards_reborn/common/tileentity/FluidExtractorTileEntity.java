@@ -84,7 +84,7 @@ public class FluidExtractorTileEntity extends FluidPipeBaseTileEntity {
 
     public void tick() {
         if (!level.isClientSide()) {
-            active = (level.hasNeighborSignal(getBlockPos()) || level.getBlockState(getBlockPos()).getValue(BlockStateProperties.POWERED));
+            active = (level.hasNeighborSignal(getBlockPos()) != level.getBlockState(getBlockPos()).getValue(BlockStateProperties.POWERED));
             for (Direction facing : Direction.values()) {
                 if (!getConnection(facing).transfer)
                     continue;

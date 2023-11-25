@@ -188,7 +188,9 @@
   "item.wizards_reborn.arcacite_amulet": "Arcacite Amulet",
   "item.wizards_reborn.arcacite_ring": "Arcacite Ring",
   "item.wizards_reborn.leather_belt": "Leather Belt",
+
   "item.wizards_reborn.music_disc_arcanum": "Arcane Music Disc",
+  "item.wizards_reborn.music_disc_mor": "Arcane Music Disc",
 
   "gui.wizards_reborn.category.arcanum_dust_transmutation": "Arcanum Dust Transmutation",
   "gui.wizards_reborn.category.mortar": "Mortar",
@@ -223,6 +225,7 @@
   "item.wizards_reborn.elevation_banner_pattern.desc": "Elevation",
 
   "item.wizards_reborn.music_disc_arcanum.desc": "Onjerlay - Arcanum Swinging",
+  "item.wizards_reborn.music_disc_mor.desc": "Onjerlay - Mor Marsh",
 
   "block.minecraft.banner.wizards_reborn.violence.black": "Black Symbol \"Violence\"",
   "block.minecraft.banner.wizards_reborn.violence.blue": "Blue Symbol \"Violence\"",

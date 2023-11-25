@@ -1,0 +1,19 @@
+{
+  "variants": {
+    "facing=east": {
+      "model": "wizards_reborn:block/alchemy_boiler",
+      "y": 90
+    },
+    "facing=north": {
+      "model": "wizards_reborn:block/alchemy_boiler"
+    },
+    "facing=south": {
+      "model": "wizards_reborn:block/alchemy_boiler",
+      "y": 180
+    },
+    "facing=west": {
+      "model": "wizards_reborn:block/alchemy_boiler",
+      "y": 270
+    }
+  }
+}

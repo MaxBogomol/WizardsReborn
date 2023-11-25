@@ -42,5 +42,13 @@
         "stream": true
       }
     ]
+  },
+  "mor_marsh": {
+    "sounds": [
+      {
+        "name": "wizards_reborn:mor_marsh",
+        "stream": true
+      }
+    ]
   }
 }

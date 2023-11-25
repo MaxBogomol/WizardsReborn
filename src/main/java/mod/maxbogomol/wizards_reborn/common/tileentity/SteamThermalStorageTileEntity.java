@@ -18,6 +18,8 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.Random;
 
+import static net.minecraft.world.level.block.NetherPortalBlock.AXIS;
+
 public class SteamThermalStorageTileEntity extends BlockEntity implements TickableBlockEntity, ISteamTileEntity {
     public int steam = 0;
 
@@ -143,7 +145,7 @@ public class SteamThermalStorageTileEntity extends BlockEntity implements Tickab
 
     @Override
     public boolean canSteamConnection(Direction side) {
-        switch (getBlockState().getValue(SteamThermalStorageBlock.AXIS)) {
+        switch (getBlockState().getValue(AXIS)) {
             case X:
                 return (side == Direction.EAST || side == Direction.WEST);
             case Y:

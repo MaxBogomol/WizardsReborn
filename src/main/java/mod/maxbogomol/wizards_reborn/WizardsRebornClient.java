@@ -28,6 +28,7 @@ import net.minecraft.client.renderer.entity.EntityRenderers;
 import net.minecraft.client.resources.model.BakedModel;
 import net.minecraft.client.resources.model.ModelResourceLocation;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.sounds.Music;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.client.event.*;
 import net.minecraftforge.client.settings.KeyConflictContext;
@@ -63,6 +64,8 @@ public class WizardsRebornClient {
     public static ArrayList<PipeModel> fluidExtractor = new ArrayList<PipeModel>();
     public static ArrayList<PipeModel> steamExtractor = new ArrayList<PipeModel>();
     public static ArrayList<PipeModel> orbitalFluidRetainer = new ArrayList<PipeModel>();
+    public static ArrayList<PipeModel> alchemyMachine = new ArrayList<PipeModel>();
+    public static ArrayList<PipeModel> alchemyBoiler = new ArrayList<PipeModel>();
 
     public static final ModelResourceLocation FLUID_CENTER = new ModelResourceLocation(new ResourceLocation(WizardsReborn.MOD_ID, "fluid_pipe_center"), "");
     public static final ModelResourceLocation FLUID_EXTRACTOR = new ModelResourceLocation(new ResourceLocation(WizardsReborn.MOD_ID, "fluid_extractor_center"), "");
@@ -78,6 +81,7 @@ public class WizardsRebornClient {
     public static final ModelResourceLocation STEAM_CONNECTION_2 = new ModelResourceLocation(new ResourceLocation(WizardsReborn.MOD_ID, "steam_pipe_connection_opposite"), "");
     public static final ModelResourceLocation STEAM_END_2 = new ModelResourceLocation(new ResourceLocation(WizardsReborn.MOD_ID, "steam_pipe_end_opposite"), "");
 
+    public static final Music MOR_MUSIC = new Music(WizardsReborn.MUSIC_DISC_MOR_SOUND.getHolder().get(), 6000, 12000, true);
 
     @Mod.EventBusSubscriber(bus=Mod.EventBusSubscriber.Bus.MOD, value = Dist.CLIENT)
     public static class RegistryEvents {
@@ -188,6 +192,16 @@ public class WizardsRebornClient {
                         orbitalFluidRetainer.add(model);
                         map.put(resourceLocation, model);
                     }
+                    if (resourceLocation.getPath().equals("alchemy_machine") && !resourceLocation.toString().contains("inventory")) {
+                        PipeModel model = new PipeModel(map.get(resourceLocation), "fluid_pipe");
+                        alchemyMachine.add(model);
+                        map.put(resourceLocation, model);
+                    }
+                    if (resourceLocation.getPath().equals("alchemy_boiler") && !resourceLocation.toString().contains("inventory")) {
+                        PipeModel model = new PipeModel(map.get(resourceLocation), "steam_pipe");
+                        alchemyBoiler.add(model);
+                        map.put(resourceLocation, model);
+                    }
                 }
             }
         }
@@ -203,6 +217,12 @@ public class WizardsRebornClient {
                 model.init(event.getModelManager());
             }
             for (PipeModel model : orbitalFluidRetainer) {
+                model.init(event.getModelManager());
+            }
+            for (PipeModel model : alchemyMachine) {
+                model.init(event.getModelManager());
+            }
+            for (PipeModel model : alchemyBoiler) {
                 model.init(event.getModelManager());
             }
         }

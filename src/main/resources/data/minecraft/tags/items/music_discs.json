@@ -1,6 +1,7 @@
 {
   "replace": false,
   "values": [
-    "wizards_reborn:music_disc_arcanum"
+    "wizards_reborn:music_disc_arcanum",
+    "wizards_reborn:music_disc_mor"
   ]
 }

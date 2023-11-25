@@ -182,6 +182,8 @@ public class WizardsRebornItemGroup {
             event.accept(WizardsReborn.ALCHEMY_FURNACE_ITEM);
             event.accept(WizardsReborn.ORBITAL_FLUID_RETAINER_ITEM);
             event.accept(WizardsReborn.STEAM_THERMAL_STORAGE_ITEM);
+            event.accept(WizardsReborn.ALCHEMY_MACHINE_ITEM);
+            event.accept(WizardsReborn.ALCHEMY_BOILER_ITEM);
 
             event.accept(WizardsReborn.WHITE_ARCANE_LUMOS_ITEM);
             event.accept(WizardsReborn.ORANGE_ARCANE_LUMOS_ITEM);
@@ -218,6 +220,7 @@ public class WizardsRebornItemGroup {
             event.accept(WizardsReborn.ELEVATION_BANNER_PATTERN_ITEM);
 
             event.accept(WizardsReborn.MUSIC_DISC_ARCANUM);
+            event.accept(WizardsReborn.MUSIC_DISC_MOR);
         }
     }
 }
