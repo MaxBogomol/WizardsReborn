@@ -8,6 +8,7 @@ import mod.maxbogomol.wizards_reborn.api.alchemy.ISteamTileEntity;
 import mod.maxbogomol.wizards_reborn.api.wissen.ICooldownTileEntity;
 import mod.maxbogomol.wizards_reborn.api.wissen.IWissenTileEntity;
 import mod.maxbogomol.wizards_reborn.api.wissen.IWissenWandFunctionalTileEntity;
+import mod.maxbogomol.wizards_reborn.common.tileentity.AlchemyMachineTileEntity;
 import mod.maxbogomol.wizards_reborn.utils.PacketUtils;
 import mod.maxbogomol.wizards_reborn.common.tileentity.WissenTranslatorTileEntity;
 import net.minecraft.client.Minecraft;
@@ -355,6 +356,21 @@ public class WissenWandItem extends Item {
                             width /= (double) steamTile.getMaxSteam() / (double) steamTile.getSteam();
                             gui.blit(new ResourceLocation(WizardsReborn.MOD_ID + ":textures/gui/steam_frame.png"), x + 8, y + 1, 0, 10, width, 8, 64, 64);
                             i = i + 11;
+                        }
+
+                        if (tileentity instanceof AlchemyMachineTileEntity machine) {
+                            for (int ii = 0; ii <= 2; ii++) {
+
+                                int x = mc.getWindow().getGuiScaledWidth() / 2 - (48 / 2);
+                                int y = mc.getWindow().getGuiScaledHeight() / 2 + 32 - 10 - 11 + i;
+
+                                gui.blit(new ResourceLocation(WizardsReborn.MOD_ID + ":textures/gui/steam_frame.png"), x, y, 0, 0, 48, 10, 64, 64);
+                                int width = 32;
+                                width /= (double) machine.getMaxCapacity() / (double) machine.getTank(ii).getFluidAmount();
+                                gui.blit(new ResourceLocation(WizardsReborn.MOD_ID + ":textures/gui/fluid_frame.png"), x + 8, y + 1, 0, 10, width, 8, 64, 64);
+
+                                i = i + 11;
+                            }
                         }
                     }
                 }

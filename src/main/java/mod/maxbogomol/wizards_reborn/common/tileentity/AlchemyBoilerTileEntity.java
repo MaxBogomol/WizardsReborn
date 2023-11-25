@@ -4,6 +4,8 @@ import mod.maxbogomol.wizards_reborn.WizardsReborn;
 import mod.maxbogomol.wizards_reborn.api.alchemy.IFluidTileEntity;
 import mod.maxbogomol.wizards_reborn.api.alchemy.ISteamTileEntity;
 import mod.maxbogomol.wizards_reborn.api.alchemy.PipeConnection;
+import mod.maxbogomol.wizards_reborn.api.wissen.IWissenTileEntity;
+import mod.maxbogomol.wizards_reborn.api.wissen.IWissenWandFunctionalTileEntity;
 import mod.maxbogomol.wizards_reborn.utils.PacketUtils;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -29,7 +31,7 @@ import java.util.Random;
 import static net.minecraft.world.level.block.NetherPortalBlock.AXIS;
 import static net.minecraft.world.level.block.state.properties.BlockStateProperties.HORIZONTAL_FACING;
 
-public class AlchemyBoilerTileEntity extends PipeBaseTileEntity implements TickableBlockEntity, IFluidTileEntity, ISteamTileEntity {
+public class AlchemyBoilerTileEntity extends PipeBaseTileEntity implements TickableBlockEntity, IFluidTileEntity, ISteamTileEntity, IWissenTileEntity, IWissenWandFunctionalTileEntity {
     protected FluidTank fluidTank = new FluidTank(getMaxCapacity()) {
         @Override
         public void onContentsChanged() {
@@ -46,6 +48,7 @@ public class AlchemyBoilerTileEntity extends PipeBaseTileEntity implements Ticka
     };
 
     public int steam = 0;
+    public int wissen = 0;
 
     public Random random = new Random();
 
@@ -111,6 +114,7 @@ public class AlchemyBoilerTileEntity extends PipeBaseTileEntity implements Ticka
         super.saveAdditional(tag);
         tag.put("fluidTank", fluidTank.writeToNBT(new CompoundTag()));
         tag.putInt("steam", steam);
+        tag.putInt("wissen", wissen);
     }
 
     @Override
@@ -118,6 +122,7 @@ public class AlchemyBoilerTileEntity extends PipeBaseTileEntity implements Ticka
         super.load(tag);
         fluidTank.readFromNBT(tag.getCompound("fluidTank"));
         steam = tag.getInt("steam");
+        wissen = tag.getInt("wissen");
     }
 
     public void initConnections() {
@@ -142,7 +147,7 @@ public class AlchemyBoilerTileEntity extends PipeBaseTileEntity implements Ticka
     }
 
     public int getMaxCapacity() {
-        return 10000;
+        return 5000;
     }
 
     public int getCapacity() {
@@ -206,5 +211,73 @@ public class AlchemyBoilerTileEntity extends PipeBaseTileEntity implements Ticka
     @Override
     public boolean canSteamConnection(Direction side) {
         return (side == getBlockState().getValue(HORIZONTAL_FACING).getOpposite());
+    }
+
+    @Override
+    public int getWissen() {
+        return wissen;
+    }
+
+    @Override
+    public int getMaxWissen() {
+        return 5000;
+    }
+
+    @Override
+    public boolean canSendWissen() {
+        return true;
+    }
+
+    @Override
+    public boolean canReceiveWissen() {
+        return true;
+    }
+
+    @Override
+    public boolean canConnectSendWissen() {
+        return true;
+    }
+
+    @Override
+    public boolean canConnectReceiveWissen() {
+        return true;
+    }
+
+    @Override
+    public int getWissenPerReceive() {
+        return 0;
+    }
+
+    @Override
+    public int getSendWissenCooldown() {
+        return 0;
+    }
+
+    @Override
+    public void setWissen(int wissen) {
+        this.wissen = wissen;
+    }
+
+    @Override
+    public void addWissen(int wissen) {
+        this.wissen = this.wissen + wissen;
+        if (this.wissen > getMaxWissen()) {
+            this.wissen = getMaxWissen();
+        }
+    }
+
+    @Override
+    public void removeWissen(int wissen) {
+        this.wissen = this.wissen - wissen;
+        if (this.wissen < 0) {
+            this.wissen = 0;
+        }
+    }
+
+    @Override
+    public void wissenWandFuction() {
+        if (level.getBlockEntity(getBlockPos().below()) instanceof AlchemyMachineTileEntity machine) {
+            machine.startCraft = true;
+        }
     }
 }

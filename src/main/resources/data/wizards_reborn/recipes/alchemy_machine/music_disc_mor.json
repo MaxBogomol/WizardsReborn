@@ -1,0 +1,23 @@
+{
+  "type": "wizards_reborn:alchemy_machine",
+  "outputItem": {
+    "item": "wizards_reborn:music_disc_mor",
+    "count": 1
+  },
+  "wissen": 1000,
+  "steam": 250,
+  "ingredients": [
+    {
+      "tag": "minecraft:music_discs"
+    },
+    {
+      "item": "wizards_reborn:mor"
+    }
+  ],
+  "fluidIngredients": [
+    {
+      "name": "minecraft:water",
+      "amount" : 1000
+    }
+  ]
+}

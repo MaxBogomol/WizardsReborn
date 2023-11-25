@@ -1,0 +1,32 @@
+{
+  "type": "wizards_reborn:alchemy_machine",
+  "outputItem": {
+    "item": "wizards_reborn:arcacite",
+    "count": 1
+  },
+  "wissen": 200,
+  "steam": 200,
+  "ingredients": [
+    {
+      "item": "wizards_reborn:arcanum"
+    },
+    {
+      "item": "wizards_reborn:arcanum"
+    },
+    {
+      "item": "minecraft:quartz"
+    },
+    {
+      "item": "minecraft:quartz"
+    },
+    {
+      "item": "wizards_reborn:arcane_linen"
+    }
+  ],
+  "fluidIngredients": [
+    {
+      "name": "minecraft:water",
+      "amount" : 250
+    }
+  ]
+}

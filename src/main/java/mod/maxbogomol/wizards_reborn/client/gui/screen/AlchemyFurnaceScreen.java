@@ -55,9 +55,9 @@ public class AlchemyFurnaceScreen extends AbstractContainerScreen<AlchemyFurnace
             gui.blit(GUI, i + 19 + 30, j + 40 + 32 - width, 176 + 16, 32 - width, 8, width, 256, 256);
 
             if (furnace.burnMaxTime > 0) {
-                width = 18;
+                width = 13;
                 width /= (double) furnace.burnMaxTime / (double) furnace.burnTime;
-                gui.blit(GUI, i + 72, j + 46 + 18 - width, 176, 47 + 18 - width, 18, width, 256, 256);
+                gui.blit(GUI, i + 72, j + 46 + 16 - width, 176, 47 + 13 - width, 18, width, 256, 256);
             }
 
             if (furnace.cookTime > 0) {

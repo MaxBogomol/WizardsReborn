@@ -1,0 +1,33 @@
+{
+  "type": "wizards_reborn:arcane_workbench",
+  "pattern": [
+    "#W#",
+    "WBW",
+    "WWW",
+    "S_F_"
+  ],
+  "key": {
+    "#": {
+      "item": "wizards_reborn:polished_wisestone_slab"
+    },
+    "W": {
+      "item": "wizards_reborn:polished_wisestone"
+    },
+    "F": {
+      "item": "wizards_reborn:fluid_pipe"
+    },
+    "S": {
+      "item": "wizards_reborn:steam_pipe"
+    },
+    "G": {
+      "item": "wizards_reborn:arcane_gold_ingot"
+    },
+    "B": {
+      "item": "minecraft:furnace"
+    }
+  },
+  "output": {
+    "item": "wizards_reborn:alchemy_furnace"
+  },
+  "wissen": 1000
+}

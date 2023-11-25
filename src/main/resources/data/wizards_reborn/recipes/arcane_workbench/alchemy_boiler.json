@@ -1,0 +1,30 @@
+{
+  "type": "wizards_reborn:arcane_workbench",
+  "pattern": [
+    "WWW",
+    "WWW",
+    "_#_",
+    "GSGF"
+  ],
+  "key": {
+    "#": {
+      "item": "wizards_reborn:wissen_altar"
+    },
+    "W": {
+      "item": "wizards_reborn:polished_wisestone"
+    },
+    "F": {
+      "item": "wizards_reborn:fluid_pipe"
+    },
+    "S": {
+      "item": "wizards_reborn:steam_pipe"
+    },
+    "G": {
+      "item": "wizards_reborn:arcane_gold_ingot"
+    }
+  },
+  "output": {
+    "item": "wizards_reborn:alchemy_boiler"
+  },
+  "wissen": 1000
+}

@@ -74,6 +74,8 @@
     "wizards_reborn:steam_extractor",
     "wizards_reborn:alchemy_furnace",
     "wizards_reborn:orbital_fluid_retainer",
-    "wizards_reborn:steam_thermal_storage"
+    "wizards_reborn:steam_thermal_storage",
+    "wizards_reborn:alchemy_machine",
+    "wizards_reborn:alchemy_boiler"
   ]
 }

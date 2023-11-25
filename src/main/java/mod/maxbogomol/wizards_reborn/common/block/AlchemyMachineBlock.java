@@ -3,14 +3,20 @@ package mod.maxbogomol.wizards_reborn.common.block;
 import mod.maxbogomol.wizards_reborn.WizardsReborn;
 import mod.maxbogomol.wizards_reborn.api.alchemy.IPipeConnection;
 import mod.maxbogomol.wizards_reborn.api.alchemy.PipeConnection;
+import mod.maxbogomol.wizards_reborn.client.gui.container.AlchemyMachineContainer;
+import mod.maxbogomol.wizards_reborn.common.item.equipment.WissenWandItem;
 import mod.maxbogomol.wizards_reborn.common.tileentity.AlchemyMachineTileEntity;
 import mod.maxbogomol.wizards_reborn.common.tileentity.PipeBaseTileEntity;
 import mod.maxbogomol.wizards_reborn.common.tileentity.TickableBlockEntity;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
-import net.minecraft.world.InteractionHand;
-import net.minecraft.world.InteractionResult;
+import net.minecraft.network.chat.Component;
+import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.world.*;
+import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.inventory.AbstractContainerMenu;
+import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
@@ -29,6 +35,7 @@ import net.minecraft.world.phys.shapes.BooleanOp;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
+import net.minecraftforge.network.NetworkHooks;
 import org.jetbrains.annotations.NotNull;
 
 import javax.annotation.Nonnull;
@@ -95,9 +102,61 @@ public class AlchemyMachineBlock extends HorizontalDirectionalBlock implements E
     }
 
     @Override
+    public void onRemove(@Nonnull BlockState state, @Nonnull Level world, @Nonnull BlockPos pos, @Nonnull BlockState newState, boolean isMoving) {
+        if (state.getBlock() != newState.getBlock()) {
+            BlockEntity tile = world.getBlockEntity(pos);
+            if (tile instanceof AlchemyMachineTileEntity) {
+                AlchemyMachineTileEntity machine = (AlchemyMachineTileEntity) tile;
+                SimpleContainer inv = new SimpleContainer(machine.itemHandler.getSlots() + 1);
+                for (int i = 0; i < machine.itemHandler.getSlots(); i++) {
+                    inv.setItem(i, machine.itemHandler.getStackInSlot(i));
+                }
+                inv.setItem(machine.itemHandler.getSlots(), machine.itemOutputHandler.getStackInSlot(0));
+                Containers.dropContents(world, pos, inv);
+            }
+            super.onRemove(state, world, pos, newState, isMoving);
+        }
+    }
+
+    @Override
     public InteractionResult use(BlockState state, Level world, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hit) {
+        if (world.isClientSide) {
+            return InteractionResult.SUCCESS;
+        } else {
+            ItemStack stack = player.getItemInHand(hand).copy();
+            boolean isWand = false;
+
+            if (stack.getItem() instanceof WissenWandItem) {
+                if (WissenWandItem.getMode(stack) != 4) {
+                    isWand = true;
+                }
+            }
+
+            if (!isWand) {
+                BlockEntity tileEntity = world.getBlockEntity(pos);
+
+                MenuProvider containerProvider = createContainerProvider(world, pos);
+                NetworkHooks.openScreen(((ServerPlayer) player), containerProvider, tileEntity.getBlockPos());
+                return InteractionResult.CONSUME;
+            }
+        }
 
         return InteractionResult.PASS;
+    }
+
+    private MenuProvider createContainerProvider(Level worldIn, BlockPos pos) {
+        return new MenuProvider() {
+            @Override
+            public Component getDisplayName() {
+                return Component.empty();
+            }
+
+            @Nullable
+            @Override
+            public AbstractContainerMenu createMenu(int i, Inventory playerInventory, Player playerEntity) {
+                return new AlchemyMachineContainer(i, worldIn, pos, playerInventory, playerEntity);
+            }
+        };
     }
 
     @Override

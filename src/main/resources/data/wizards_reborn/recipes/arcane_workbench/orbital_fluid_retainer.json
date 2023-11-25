@@ -1,0 +1,27 @@
+{
+  "type": "wizards_reborn:arcane_workbench",
+  "pattern": [
+    "AAA",
+    "W#W",
+    "_W_",
+    "G___"
+  ],
+  "key": {
+    "#": {
+      "item": "wizards_reborn:wisestone_pedestal"
+    },
+    "W": {
+      "item": "wizards_reborn:polished_wisestone"
+    },
+    "G": {
+      "item": "wizards_reborn:arcane_gold_ingot"
+    },
+    "A": {
+      "item": "wizards_reborn:arcanum"
+    }
+  },
+  "output": {
+    "item": "wizards_reborn:orbital_fluid_retainer"
+  },
+  "wissen": 1000
+}

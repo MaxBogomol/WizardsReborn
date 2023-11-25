@@ -1,0 +1,27 @@
+{
+  "type": "wizards_reborn:arcane_workbench",
+  "pattern": [
+    "WWW",
+    "_#_",
+    "WWW",
+    "FFGF"
+  ],
+  "key": {
+    "#": {
+      "item": "wizards_reborn:orbital_fluid_retainer"
+    },
+    "W": {
+      "item": "wizards_reborn:polished_wisestone"
+    },
+    "F": {
+      "item": "wizards_reborn:fluid_pipe"
+    },
+    "G": {
+      "item": "wizards_reborn:arcane_gold_ingot"
+    }
+  },
+  "output": {
+    "item": "wizards_reborn:alchemy_machine"
+  },
+  "wissen": 1000
+}

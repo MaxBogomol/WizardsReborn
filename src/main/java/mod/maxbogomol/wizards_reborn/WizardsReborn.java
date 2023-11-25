@@ -18,12 +18,10 @@ import mod.maxbogomol.wizards_reborn.client.event.KeyBindHandler;
 import mod.maxbogomol.wizards_reborn.client.gui.HUDEventHandler;
 import mod.maxbogomol.wizards_reborn.client.gui.TooltipEventHandler;
 import mod.maxbogomol.wizards_reborn.client.gui.container.AlchemyFurnaceContainer;
+import mod.maxbogomol.wizards_reborn.client.gui.container.AlchemyMachineContainer;
 import mod.maxbogomol.wizards_reborn.client.gui.container.ArcaneWorkbenchContainer;
 import mod.maxbogomol.wizards_reborn.client.gui.container.JewelerTableContainer;
-import mod.maxbogomol.wizards_reborn.client.gui.screen.AlchemyFurnaceScreen;
-import mod.maxbogomol.wizards_reborn.client.gui.screen.ArcaneWorkbenchScreen;
-import mod.maxbogomol.wizards_reborn.client.gui.screen.CrystalChooseScreen;
-import mod.maxbogomol.wizards_reborn.client.gui.screen.JewelerTableScreen;
+import mod.maxbogomol.wizards_reborn.client.gui.screen.*;
 import mod.maxbogomol.wizards_reborn.client.particle.*;
 import mod.maxbogomol.wizards_reborn.client.render.WorldRenderHandler;
 import mod.maxbogomol.wizards_reborn.client.render.curio.AmuletRenderer;
@@ -624,6 +622,9 @@ public class WizardsReborn {
     public static final RegistryObject<JewelerTableRecipe.Serializer> JEWELER_TABLE_SERIALIZER = RECIPE_SERIALIZERS.register("jeweler_table", JewelerTableRecipe.Serializer::new);
     public static final RegistryObject<RecipeType<JewelerTableRecipe>> JEWELER_TABLE_RECIPE = RECIPES.register("jeweler_table", () -> RecipeType.simple(JewelerTableRecipe.TYPE_ID));
 
+    public static final RegistryObject<AlchemyMachineRecipe.Serializer> ALCHEMY_MACHINE_SERIALIZER = RECIPE_SERIALIZERS.register("alchemy_machine", AlchemyMachineRecipe.Serializer::new);
+    public static final RegistryObject<RecipeType<AlchemyMachineRecipe>> ALCHEMY_MACHINE_RECIPE = RECIPES.register("alchemy_machine", () -> RecipeType.simple(AlchemyMachineRecipe.TYPE_ID));
+
     //CONTAINERS
     public static final RegistryObject<MenuType<ArcaneWorkbenchContainer>> ARCANE_WORKBENCH_CONTAINER
             = CONTAINERS.register("arcane_workbench_container",
@@ -647,6 +648,14 @@ public class WizardsReborn {
                 BlockPos pos = data.readBlockPos();
                 Level world = inv.player.getCommandSenderWorld();
                 return new AlchemyFurnaceContainer(windowId, world, pos, inv, inv.player);
+            })));
+
+    public static final RegistryObject<MenuType<AlchemyMachineContainer>> ALCHEMY_MACHINE_CONTAINER
+            = CONTAINERS.register("alchemy_machine_container",
+            () -> IForgeMenuType.create(((windowId, inv, data) -> {
+                BlockPos pos = data.readBlockPos();
+                Level world = inv.player.getCommandSenderWorld();
+                return new AlchemyMachineContainer(windowId, world, pos, inv, inv.player);
             })));
 
     public static final RegistryObject<BannerPattern> VIOLENCE_BANNER_PATTERN = BANNER_PATTERNS.register("violence", () -> new BannerPattern("wrv"));
@@ -786,6 +795,7 @@ public class WizardsReborn {
             MenuScreens.register(ARCANE_WORKBENCH_CONTAINER.get(), ArcaneWorkbenchScreen::new);
             MenuScreens.register(JEWELER_TABLE_CONTAINER.get(), JewelerTableScreen::new);
             MenuScreens.register(ALCHEMY_FURNACE_CONTAINER.get(), AlchemyFurnaceScreen::new);
+            MenuScreens.register(ALCHEMY_MACHINE_CONTAINER.get(), AlchemyMachineScreen::new);
 
             CuriosRendererRegistry.register(LEATHER_BELT.get(), BeltRenderer::new);
             CuriosRendererRegistry.register(ARCANUM_AMULET.get(), AmuletRenderer::new);

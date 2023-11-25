@@ -1,0 +1,24 @@
+{
+  "type": "wizards_reborn:arcane_workbench",
+  "pattern": [
+    "#W#",
+    "_W_",
+    "#W#",
+    "G___"
+  ],
+  "key": {
+    "#": {
+      "item": "wizards_reborn:polished_wisestone_slab"
+    },
+    "W": {
+      "item": "wizards_reborn:polished_wisestone"
+    },
+    "G": {
+      "item": "wizards_reborn:arcane_gold_ingot"
+    }
+  },
+  "output": {
+    "item": "wizards_reborn:wisestone_pedestal"
+  },
+  "wissen": 150
+}

@@ -1,0 +1,22 @@
+{
+  "type": "wizards_reborn:arcane_workbench",
+  "pattern": [
+    "___",
+    "WWW",
+    "___",
+    "_#_#"
+  ],
+  "key": {
+    "#": {
+      "item": "wizards_reborn:polished_wisestone_slab"
+    },
+    "W": {
+      "item": "wizards_reborn:polished_wisestone"
+    }
+  },
+  "output": {
+    "item": "wizards_reborn:fluid_pipe",
+    "count": 6
+  },
+  "wissen": 100
+}
