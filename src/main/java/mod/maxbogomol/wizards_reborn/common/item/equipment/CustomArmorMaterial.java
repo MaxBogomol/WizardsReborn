@@ -10,7 +10,8 @@ import net.minecraft.world.item.crafting.Ingredient;
 import java.util.function.Supplier;
 
 public enum CustomArmorMaterial implements ArmorMaterial {
-    ARCANE_GOLD("arcane_gold", 20, new int[]{ 2, 6, 5, 2 }, 30, SoundEvents.ARMOR_EQUIP_GOLD, 1f, 0f, () -> Ingredient.of(WizardsReborn.ARCANE_GOLD_INGOT.get()));
+    ARCANE_GOLD("arcane_gold", 20, new int[]{ 2, 6, 5, 2 }, 30, SoundEvents.ARMOR_EQUIP_GOLD, 1f, 0f, () -> Ingredient.of(WizardsReborn.ARCANE_GOLD_INGOT.get())),
+    INVENTOR_WIZARD("inventor_wizard", 20, new int[]{ 2, 6, 5, 2 }, 30, SoundEvents.ARMOR_EQUIP_LEATHER, 1f, 0f, () -> Ingredient.of(WizardsReborn.ARCANE_GOLD_INGOT.get()));
 
     private final String name;
     private final int durabilityMultiplier;

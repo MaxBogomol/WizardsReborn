@@ -210,6 +210,11 @@ public class WizardsRebornItemGroup {
             event.accept(WizardsReborn.ARCACITE_RING);
             event.accept(WizardsReborn.LEATHER_BELT);
 
+            event.accept(WizardsReborn.INVENTOR_WIZARD_HAT);
+            event.accept(WizardsReborn.INVENTOR_WIZARD_COSTUME);
+            event.accept(WizardsReborn.INVENTOR_WIZARD_TROUSERS);
+            event.accept(WizardsReborn.INVENTOR_WIZARD_BOOTS);
+
             event.accept(WizardsReborn.ARCANEMICON);
 
             event.accept(WizardsReborn.VIOLENCE_BANNER_PATTERN_ITEM);

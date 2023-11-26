@@ -14,6 +14,8 @@ import net.minecraft.world.SimpleContainer;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.nbt.CompoundTag;
+import net.minecraft.world.level.material.Fluids;
+import net.minecraftforge.fluids.FluidStack;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -27,7 +29,7 @@ public class ArcanemiconChapters {
             EARTH_PROJECTILE, WATER_PROJECTILE, AIR_PROJECTILE, FIRE_PROJECTILE, VOID_PROJECTILE, FROST_PROJECTILE, HOLY_PROJECTILE,
             EARTH_RAY, WATER_RAY, AIR_RAY, FIRE_RAY, VOID_RAY, FROST_RAY, HOLY_RAY,
             MONOGRAMS, RESEARCHES, RESEARCH, LUNAM_MONOGRAM, VITA_MONOGRAM, SOLEM_MONOGRAM, MORS_MONOGRAM, MIRACULUM_MONOGRAM, TEMPUS_MONOGRAM, STATERA_MONOGRAM, ECLIPSIS_MONOGRAM, SICCITAS_MONOGRAM, SOLSTITIUM_MONOGRAM, FAMES_MONOGRAM, RENAISSANCE_MONOGRAM, BELLUM_MONOGRAM, LUX_MONOGRAM, KARA_MONOGRAM, DEGRADATIO_MONOGRAM, PRAEDICTIONEM_MONOGRAM, EVOLUTIONIS_MONOGRAM, DARK_MONOGRAM, UNIVERSUM_MONOGRAM,
-            MOR, MORTAR, ARCANE_LINEN, WISESTONE;
+            MOR, MORTAR, ARCANE_LINEN, WISESTONE, WISESTONE_PEDESTAL, FLUID_PIPES, STEAM_PIPES, ORBITAL_FLUID_RETAINER, ALCHEMY_FURNACE, STEAM_THERMAL_STORAGE, ALCHEMY_MACHINE, ARCACITE, MUSIC_DISC_ARCANUM, MUSIC_DISC_MOR;
     public static ResearchPage RESEARCH_MAIN, RESEARCH_LIST;
 
     public static void init() {
@@ -1040,13 +1042,123 @@ public class ArcanemiconChapters {
                 )
         );
 
+        WISESTONE_PEDESTAL = new Chapter(
+                "wizards_reborn.arcanemicon.chapter.wisestone_pedestal",
+                new TitledBlockPage("wizards_reborn.arcanemicon.page.wisestone_pedestal",
+                        new BlockEntry(new ItemStack(WizardsReborn.ARCANE_PEDESTAL_ITEM.get()), new ItemStack(WizardsReborn.WISESTONE_PEDESTAL_ITEM.get()))
+                )
+        );
+
+        FLUID_PIPES = new Chapter(
+                "wizards_reborn.arcanemicon.chapter.fluid_pipes",
+                new TitledBlockPage("wizards_reborn.arcanemicon.page.fluid_pipe",
+                        new BlockEntry(new ItemStack(WizardsReborn.WISESTONE_PEDESTAL_ITEM.get()), new ItemStack(WizardsReborn.FLUID_PIPE_ITEM.get()))
+                ),
+                new TitledBlockPage("wizards_reborn.arcanemicon.page.fluid_extractor",
+                        new BlockEntry(new ItemStack(WizardsReborn.WISESTONE_PEDESTAL_ITEM.get()), new ItemStack(WizardsReborn.FLUID_EXTRACTOR_ITEM.get()))
+                )
+        );
+
+        STEAM_PIPES = new Chapter(
+                "wizards_reborn.arcanemicon.chapter.steam_pipes",
+                new TitledBlockPage("wizards_reborn.arcanemicon.page.steam_pipe",
+                        new BlockEntry(new ItemStack(WizardsReborn.WISESTONE_PEDESTAL_ITEM.get()), new ItemStack(WizardsReborn.STEAM_PIPE_ITEM.get()))
+                ),
+                new TitledBlockPage("wizards_reborn.arcanemicon.page.steam_extractor",
+                        new BlockEntry(new ItemStack(WizardsReborn.WISESTONE_PEDESTAL_ITEM.get()), new ItemStack(WizardsReborn.STEAM_EXTRACTOR_ITEM.get()))
+                )
+        );
+
+        ORBITAL_FLUID_RETAINER = new Chapter(
+                "wizards_reborn.arcanemicon.chapter.orbital_fluid_retainer",
+                new TitledBlockPage("wizards_reborn.arcanemicon.page.orbital_fluid_retainer",
+                        new BlockEntry(new ItemStack(WizardsReborn.WISESTONE_PEDESTAL_ITEM.get()), new ItemStack(WizardsReborn.ORBITAL_FLUID_RETAINER_ITEM.get()))
+                )
+        );
+
+        ALCHEMY_FURNACE = new Chapter(
+                "wizards_reborn.arcanemicon.chapter.alchemy_furnace",
+                new TitledBlockPage("wizards_reborn.arcanemicon.page.alchemy_furnace",
+                        new BlockEntry(new ItemStack(WizardsReborn.WISESTONE_PEDESTAL_ITEM.get()), new ItemStack(WizardsReborn.ALCHEMY_FURNACE_ITEM.get()))
+                )
+        );
+
+        STEAM_THERMAL_STORAGE = new Chapter(
+                "wizards_reborn.arcanemicon.chapter.steam_thermal_storage",
+                new TitledBlockPage("wizards_reborn.arcanemicon.page.steam_thermal_storage",
+                        new BlockEntry(new ItemStack(WizardsReborn.WISESTONE_PEDESTAL_ITEM.get()), new ItemStack(WizardsReborn.STEAM_THERMAL_STORAGE_ITEM.get()))
+                )
+        );
+
+        ALCHEMY_MACHINE = new Chapter(
+                "wizards_reborn.arcanemicon.chapter.alchemy_machine",
+                new TitledBlockPage("wizards_reborn.arcanemicon.page.alchemy_machine",
+                        new BlockEntry(new ItemStack(WizardsReborn.WISESTONE_PEDESTAL_ITEM.get()), new ItemStack(WizardsReborn.ALCHEMY_MACHINE_ITEM.get()))
+                )
+        );
+
+        ARCACITE = new Chapter(
+                "wizards_reborn.arcanemicon.chapter.arcacite",
+                new TitledBlockPage("wizards_reborn.arcanemicon.page.arcacite",
+                        new BlockEntry(new ItemStack(WizardsReborn.WISESTONE_PEDESTAL_ITEM.get()), new ItemStack(WizardsReborn.ARCACITE.get())),
+                        new BlockEntry(new ItemStack(WizardsReborn.WISESTONE_PEDESTAL_ITEM.get()), new ItemStack(WizardsReborn.ARCACITE_BLOCK_ITEM.get()))
+                ),
+                new AlchemyMachinePage(new ItemStack(WizardsReborn.ARCACITE.get()), FluidStack.EMPTY, true, true,
+                        new FluidStack(Fluids.WATER, 250), FluidStack.EMPTY, FluidStack.EMPTY,
+                        new ItemStack(WizardsReborn.ARCANUM.get()), new ItemStack(WizardsReborn.ARCANUM.get()), new ItemStack(Items.QUARTZ),
+                        new ItemStack(Items.QUARTZ), new ItemStack(WizardsReborn.ARCANE_LINEN_ITEM.get())
+                ),
+                new CraftingTablePage(new ItemStack(WizardsReborn.ARCACITE_BLOCK_ITEM.get()),
+                        new ItemStack(WizardsReborn.ARCACITE.get()), new ItemStack(WizardsReborn.ARCACITE.get()), new ItemStack(WizardsReborn.ARCACITE.get()),
+                        new ItemStack(WizardsReborn.ARCACITE.get()), new ItemStack(WizardsReborn.ARCACITE.get()), new ItemStack(WizardsReborn.ARCACITE.get()),
+                        new ItemStack(WizardsReborn.ARCACITE.get()), new ItemStack(WizardsReborn.ARCACITE.get()), new ItemStack(WizardsReborn.ARCACITE.get())
+                ),
+                new CraftingTablePage(new ItemStack(WizardsReborn.ARCACITE.get(), 9), new ItemStack(WizardsReborn.ARCACITE_BLOCK_ITEM.get()))
+        );
+
+        MUSIC_DISC_ARCANUM = new Chapter(
+                "wizards_reborn.arcanemicon.chapter.music_disc_arcanum",
+                new TitledBlockPage("wizards_reborn.arcanemicon.page.music_disc_arcanum",
+                        new BlockEntry(new ItemStack(WizardsReborn.WISESTONE_PEDESTAL_ITEM.get()), new ItemStack(WizardsReborn.MUSIC_DISC_ARCANUM.get()))
+                ),
+                new AlchemyMachinePage(new ItemStack(WizardsReborn.MUSIC_DISC_ARCANUM.get()), FluidStack.EMPTY, true, true,
+                        new FluidStack(Fluids.WATER, 1000), FluidStack.EMPTY, FluidStack.EMPTY,
+                        new ItemStack(Items.MUSIC_DISC_13), new ItemStack(WizardsReborn.ARCANUM.get())
+                )
+        );
+
+        MUSIC_DISC_MOR = new Chapter(
+                "wizards_reborn.arcanemicon.chapter.music_disc_mor",
+                new TitledBlockPage("wizards_reborn.arcanemicon.page.music_disc_mor",
+                        new BlockEntry(new ItemStack(WizardsReborn.WISESTONE_PEDESTAL_ITEM.get()), new ItemStack(WizardsReborn.MUSIC_DISC_MOR.get()))
+                ),
+                new AlchemyMachinePage(new ItemStack(WizardsReborn.MUSIC_DISC_MOR.get()), FluidStack.EMPTY, true, true,
+                        new FluidStack(Fluids.WATER, 1000), FluidStack.EMPTY, FluidStack.EMPTY,
+                        new ItemStack(Items.MUSIC_DISC_13), new ItemStack(WizardsReborn.MOR.get())
+                )
+        );
+
         ALCHEMY_INDEX = new Chapter(
                 "wizards_reborn.arcanemicon.chapter.alchemy_index",
                 new TitledIndexPage("wizards_reborn.arcanemicon.page.alchemy_index",
                         new IndexEntry(MOR, new ItemStack(WizardsReborn.MOR_ITEM.get())),
                         new IndexEntry(MORTAR, new ItemStack(WizardsReborn.ARCANE_WOOD_MORTAR.get()), RegisterKnowledges.ARCANE_WOOD),
                         new IndexEntry(ARCANE_LINEN, new ItemStack(WizardsReborn.ARCANE_LINEN_ITEM.get()), RegisterKnowledges.WISSEN_CRYSTALLIZER),
-                        new IndexEntry(WISESTONE, new ItemStack(WizardsReborn.WISESTONE_ITEM.get()), RegisterKnowledges.ARCANE_WORKBENCH)
+                        new IndexEntry(WISESTONE, new ItemStack(WizardsReborn.WISESTONE_ITEM.get()), RegisterKnowledges.ARCANE_WORKBENCH),
+                        new IndexEntry(WISESTONE_PEDESTAL, new ItemStack(WizardsReborn.WISESTONE_PEDESTAL_ITEM.get()), RegisterKnowledges.ARCANE_WORKBENCH),
+                        new IndexEntry(FLUID_PIPES, new ItemStack(WizardsReborn.FLUID_PIPE_ITEM.get()), RegisterKnowledges.ARCANE_WORKBENCH)
+                ),
+                new IndexPage(
+                        new IndexEntry(STEAM_PIPES, new ItemStack(WizardsReborn.STEAM_PIPE_ITEM.get()), RegisterKnowledges.ARCANE_WORKBENCH),
+                        new IndexEntry(ORBITAL_FLUID_RETAINER, new ItemStack(WizardsReborn.ORBITAL_FLUID_RETAINER_ITEM.get()), RegisterKnowledges.ARCANE_WORKBENCH),
+                        new IndexEntry(ALCHEMY_FURNACE, new ItemStack(WizardsReborn.ALCHEMY_FURNACE_ITEM.get()), RegisterKnowledges.ARCANE_WORKBENCH),
+                        new IndexEntry(STEAM_THERMAL_STORAGE, new ItemStack(WizardsReborn.STEAM_THERMAL_STORAGE_ITEM.get()), RegisterKnowledges.ARCANE_WORKBENCH),
+                        new IndexEntry(ALCHEMY_MACHINE, new ItemStack(WizardsReborn.ALCHEMY_MACHINE_ITEM.get()), RegisterKnowledges.ARCANE_WORKBENCH),
+                        new IndexEntry(ARCACITE, new ItemStack(WizardsReborn.ARCACITE.get()), RegisterKnowledges.ARCANE_WORKBENCH),
+                        new IndexEntry(MUSIC_DISC_ARCANUM, new ItemStack(WizardsReborn.MUSIC_DISC_ARCANUM.get()), RegisterKnowledges.ARCANE_WORKBENCH)
+                ),
+                new IndexPage(
+                        new IndexEntry(MUSIC_DISC_MOR, new ItemStack(WizardsReborn.MUSIC_DISC_MOR.get()), RegisterKnowledges.ARCANE_WORKBENCH)
                 )
         );
 

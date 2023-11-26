@@ -2,18 +2,25 @@ package mod.maxbogomol.wizards_reborn.common.item;
 
 import mod.maxbogomol.wizards_reborn.api.alchemy.IFluidItem;
 import mod.maxbogomol.wizards_reborn.api.alchemy.IFluidTileEntity;
+import net.minecraft.ChatFormatting;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
+import net.minecraft.network.chat.Component;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.EntityBlock;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.api.distmarker.OnlyIn;
+import net.minecraftforge.fluids.FluidStack;
 
 import javax.annotation.Nullable;
+import java.util.List;
 
 public class FluidStorageBaseItem extends BlockItem implements IFluidItem {
 
@@ -37,10 +44,33 @@ public class FluidStorageBaseItem extends BlockItem implements IFluidItem {
     public int getMaxFluid(ItemStack stack) {
         if (getBlock() instanceof EntityBlock tileBlock) {
             BlockEntity tile = tileBlock.newBlockEntity(new BlockPos(0, 0, 0), getBlock().defaultBlockState());
-            if (tile instanceof IFluidTileEntity steamTile) {
-                return steamTile.getFluidMaxAmount();
+            if (tile instanceof IFluidTileEntity fluidTile) {
+                return fluidTile.getFluidMaxAmount();
             }
         }
         return 0;
+    }
+
+    @OnlyIn(Dist.CLIENT)
+    @Override
+    public void appendHoverText(ItemStack stack, Level world, List<Component> list, TooltipFlag flags) {
+        if (getBlock() instanceof EntityBlock tileBlock) {
+            BlockEntity tile = tileBlock.newBlockEntity(new BlockPos(0, 0, 0), getBlock().defaultBlockState());
+            if (tile instanceof IFluidTileEntity fluidTile) {
+                CompoundTag nbt = stack.getOrCreateTag();
+                if (nbt.contains("fluidTank")) {
+                    FluidStack fluid = FluidStack.loadFluidStackFromNBT(nbt.getCompound("fluidTank"));
+                    list.add(Component.empty().append(getFluidName(fluid, fluidTile.getFluidMaxAmount())).withStyle(ChatFormatting.GRAY));
+                }
+            }
+        }
+    }
+
+    public static Component getFluidName(FluidStack fluid, int maxAmount) {
+        return Component.literal(fluid.getDisplayName().getString())
+                .append(Component.literal(" "))
+                .append(Component.literal(String.valueOf(fluid.getAmount())).
+                        append(Component.literal("/")).
+                        append(Component.literal(String.valueOf(maxAmount))));
     }
 }

@@ -3,7 +3,9 @@ package mod.maxbogomol.wizards_reborn.client.gui.screen;
 import com.mojang.blaze3d.systems.RenderSystem;
 import mod.maxbogomol.wizards_reborn.WizardsReborn;
 import mod.maxbogomol.wizards_reborn.client.gui.container.AlchemyFurnaceContainer;
+import mod.maxbogomol.wizards_reborn.common.item.FluidStorageBaseItem;
 import mod.maxbogomol.wizards_reborn.common.tileentity.AlchemyFurnaceTileEntity;
+import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
 import net.minecraft.network.chat.Component;
@@ -64,6 +66,12 @@ public class AlchemyFurnaceScreen extends AbstractContainerScreen<AlchemyFurnace
                 width = 22;
                 width /= (double) furnace.cookMaxTime / (double) furnace.cookTime;
                 gui.blit(GUI, i + 97, j + 47, 176, 32, width, 15, 256, 256);
+            }
+
+            if (!furnace.getTank().getFluid().isEmpty()) {
+                if (x >= i + 19 && y >= j + 40 && x <= i + 19 + 8 && y <= j + 40 + 32) {
+                    gui.renderTooltip(Minecraft.getInstance().font, FluidStorageBaseItem.getFluidName(furnace.getTank().getFluid(), 10000), x, y);
+                }
             }
         }
     }

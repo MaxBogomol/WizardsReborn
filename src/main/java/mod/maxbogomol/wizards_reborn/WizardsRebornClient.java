@@ -3,6 +3,7 @@ package mod.maxbogomol.wizards_reborn;
 import com.mojang.blaze3d.platform.InputConstants;
 import com.mojang.blaze3d.vertex.DefaultVertexFormat;
 import mod.maxbogomol.wizards_reborn.client.config.ClientConfig;
+import mod.maxbogomol.wizards_reborn.client.model.armor.InventorWizardArmorModel;
 import mod.maxbogomol.wizards_reborn.client.model.curio.AmuletModel;
 import mod.maxbogomol.wizards_reborn.client.model.curio.BeltModel;
 import mod.maxbogomol.wizards_reborn.client.particle.*;
@@ -47,6 +48,10 @@ public class WizardsRebornClient {
 
     public static ModelLayerLocation BELT_LAYER = new ModelLayerLocation(new ResourceLocation(WizardsReborn.MOD_ID, "belt"), "main");
     public static ModelLayerLocation AMULET_LAYER = new ModelLayerLocation(new ResourceLocation(WizardsReborn.MOD_ID, "amulet"), "main");
+
+    public static final ModelLayerLocation INVENTOR_WIZARD_ARMOR_LAYER = new ModelLayerLocation(new ResourceLocation(WizardsReborn.MOD_ID, "inventor_wizard_armor"), "main");
+
+    public static InventorWizardArmorModel INVENTOR_WIZARD_ARMOR_MODEL = null;
 
     public static ModelResourceLocation JEWELER_TABLE_STONE_MODEl = new ModelResourceLocation(WizardsReborn.MOD_ID, "jeweler_table_stone", "");
 
@@ -262,6 +267,13 @@ public class WizardsRebornClient {
 
             event.registerLayerDefinition(WizardsRebornClient.BELT_LAYER, BeltModel::createBodyLayer);
             event.registerLayerDefinition(WizardsRebornClient.AMULET_LAYER, AmuletModel::createBodyLayer);
+
+            event.registerLayerDefinition(INVENTOR_WIZARD_ARMOR_LAYER, InventorWizardArmorModel::createBodyLayer);
+        }
+
+        @SubscribeEvent
+        public static void onRegisterLayers(EntityRenderersEvent.AddLayers event) {
+            INVENTOR_WIZARD_ARMOR_MODEL = new InventorWizardArmorModel(event.getEntityModels().bakeLayer(INVENTOR_WIZARD_ARMOR_LAYER));
         }
     }
 }

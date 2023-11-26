@@ -546,6 +546,11 @@ public class WizardsReborn {
     public static final RegistryObject<Item> ARCACITE_RING = ITEMS.register("arcacite_ring", () -> new ArcanumRingItem(new Item.Properties().stacksTo(1)));
     public static final RegistryObject<Item> LEATHER_BELT = ITEMS.register("leather_belt", () -> new LeatherBeltItem(new Item.Properties().stacksTo(1)));
 
+    public static final RegistryObject<Item> INVENTOR_WIZARD_HAT = ITEMS.register("inventor_wizard_hat", () -> new InventorWizardArmorItem(CustomArmorMaterial.INVENTOR_WIZARD, ArmorItem.Type.HELMET, new Item.Properties()));
+    public static final RegistryObject<Item> INVENTOR_WIZARD_COSTUME = ITEMS.register("inventor_wizard_costume", () -> new InventorWizardArmorItem(CustomArmorMaterial.INVENTOR_WIZARD, ArmorItem.Type.CHESTPLATE, new Item.Properties()));
+    public static final RegistryObject<Item> INVENTOR_WIZARD_TROUSERS = ITEMS.register("inventor_wizard_trousers", () -> new InventorWizardArmorItem(CustomArmorMaterial.INVENTOR_WIZARD, ArmorItem.Type.LEGGINGS, new Item.Properties()));
+    public static final RegistryObject<Item> INVENTOR_WIZARD_BOOTS = ITEMS.register("inventor_wizard_boots", () -> new InventorWizardArmorItem(CustomArmorMaterial.INVENTOR_WIZARD, ArmorItem.Type.BOOTS, new Item.Properties()));
+
     public static final RegistryObject<Item> ARCANEMICON = ITEMS.register("arcanemicon", () -> new ArcanemiconItem(new Item.Properties().stacksTo(1)));
 
     public static final RegistryObject<Item> VIOLENCE_BANNER_PATTERN_ITEM = ITEMS.register("violence_banner_pattern", () -> new BannerPatternItem(VIOLENCE_BANNER_PATTERN_TAG, (new Item.Properties()).stacksTo(1).rarity(Rarity.UNCOMMON)));
