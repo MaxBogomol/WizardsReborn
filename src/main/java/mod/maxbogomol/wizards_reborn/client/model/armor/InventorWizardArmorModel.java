@@ -44,12 +44,12 @@ public class InventorWizardArmorModel extends ArmorModel {
                 .addBox(-1.0F, -2.0F, -2.0F, 4.0F, 5.0F, 4.0F, new CubeDeformation(0.72F)), PartPose.ZERO);
 
         PartDefinition right_legging_armor = right_legging.addOrReplaceChild("right_legging_armor", CubeListBuilder.create().texOffs(40, 18)
-                .addBox(-2.0F, 0.0F, -2.0F, 4.0F, 12.0F, 4.0F, new CubeDeformation(0.83F)), PartPose.ZERO);
+                .addBox(-2.0F, 0.0F, -2.0F, 4.0F, 12.0F, 4.0F, new CubeDeformation(0.75F)), PartPose.ZERO);
         PartDefinition right_legging_layer_armor = right_legging_armor.addOrReplaceChild("right_legging_layer_armor", CubeListBuilder.create().texOffs(56, 18)
                 .addBox(-2.0F, 0.0F, -2.0F, 4.0F, 12.0F, 4.0F, new CubeDeformation(1.02F)), PartPose.ZERO);
 
         PartDefinition left_legging_armor = left_legging.addOrReplaceChild("left_legging_armor", CubeListBuilder.create().texOffs(40, 34)
-                .addBox(-2.0F, 0.0F, -2.0F, 4.0F, 12.0F, 4.0F, new CubeDeformation(0.83F)), PartPose.ZERO);
+                .addBox(-2.0F, 0.0F, -2.0F, 4.0F, 12.0F, 4.0F, new CubeDeformation(0.75F)), PartPose.ZERO);
         PartDefinition left_legging_layer_armor = left_legging_armor.addOrReplaceChild("left_legging_layer_armor", CubeListBuilder.create().texOffs(56, 34)
                 .addBox(-2.0F, 0.0F, -2.0F, 4.0F, 12.0F, 4.0F, new CubeDeformation(1.02F)), PartPose.ZERO);
 
@@ -58,7 +58,7 @@ public class InventorWizardArmorModel extends ArmorModel {
         PartDefinition left_foot_armor = left_foot.addOrReplaceChild("left_foot_armor", CubeListBuilder.create().texOffs(72, 34)
                 .addBox(-2.0F, 0.0F, -2.0F, 4.0F, 12.0F, 4.0F, new CubeDeformation(1.02F)), PartPose.ZERO);
 
-        PartDefinition codpiece = pelvis.addOrReplaceChild("codpiece", CubeListBuilder.create().texOffs(16, 32).addBox(-4.0F, 0.0F, -2.0F, 8.0F, 5.0F, 4.0F, new CubeDeformation(0.5F)), PartPose.offset(0.0F, 7.0F, 0.0F));
+        PartDefinition codpiece = pelvis.addOrReplaceChild("codpiece", CubeListBuilder.create().texOffs(96, 0).addBox(-4.0F, 0.0F, -2.0F, 8.0F, 5.0F, 4.0F, new CubeDeformation(0.5F)), PartPose.offset(0.0F, 7.0F, 0.0F));
 
         return LayerDefinition.create(mesh, 128, 64);
     }

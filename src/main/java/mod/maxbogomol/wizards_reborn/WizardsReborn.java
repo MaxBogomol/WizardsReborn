@@ -546,6 +546,11 @@ public class WizardsReborn {
     public static final RegistryObject<Item> ARCACITE_RING = ITEMS.register("arcacite_ring", () -> new ArcanumRingItem(new Item.Properties().stacksTo(1)));
     public static final RegistryObject<Item> LEATHER_BELT = ITEMS.register("leather_belt", () -> new LeatherBeltItem(new Item.Properties().stacksTo(1)));
 
+    public static final RegistryObject<Item> ARCANE_FORTRESS_HELMET = ITEMS.register("arcane_fortress_helmet", () -> new ArcaneFortressArmorItem(CustomArmorMaterial.ARCANE_FORTRESS, ArmorItem.Type.HELMET, new Item.Properties()));
+    public static final RegistryObject<Item> ARCANE_FORTRESS_CHESTPLATE = ITEMS.register("arcane_fortress_chestplate", () -> new ArcaneFortressArmorItem(CustomArmorMaterial.ARCANE_FORTRESS, ArmorItem.Type.CHESTPLATE, new Item.Properties()));
+    public static final RegistryObject<Item> ARCANE_FORTRESS_LEGGINGS = ITEMS.register("arcane_fortress_leggings", () -> new ArcaneFortressArmorItem(CustomArmorMaterial.ARCANE_FORTRESS, ArmorItem.Type.LEGGINGS, new Item.Properties()));
+    public static final RegistryObject<Item> ARCANE_FORTRESS_BOOTS = ITEMS.register("arcane_fortress_boots", () -> new ArcaneFortressArmorItem(CustomArmorMaterial.ARCANE_FORTRESS, ArmorItem.Type.BOOTS, new Item.Properties()));
+
     public static final RegistryObject<Item> INVENTOR_WIZARD_HAT = ITEMS.register("inventor_wizard_hat", () -> new InventorWizardArmorItem(CustomArmorMaterial.INVENTOR_WIZARD, ArmorItem.Type.HELMET, new Item.Properties()));
     public static final RegistryObject<Item> INVENTOR_WIZARD_COSTUME = ITEMS.register("inventor_wizard_costume", () -> new InventorWizardArmorItem(CustomArmorMaterial.INVENTOR_WIZARD, ArmorItem.Type.CHESTPLATE, new Item.Properties()));
     public static final RegistryObject<Item> INVENTOR_WIZARD_TROUSERS = ITEMS.register("inventor_wizard_trousers", () -> new InventorWizardArmorItem(CustomArmorMaterial.INVENTOR_WIZARD, ArmorItem.Type.LEGGINGS, new Item.Properties()));
