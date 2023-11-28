@@ -1,0 +1,28 @@
+{
+  "type": "wizards_reborn:arcane_workbench",
+  "pattern": [
+    "N_N",
+    "G#G",
+    "N_N",
+    "A_A_"
+  ],
+  "key": {
+    "#": {
+      "item": "wizards_reborn:arcane_gold_leggings"
+    },
+    "G": {
+      "item": "wizards_reborn:arcane_gold_ingot"
+    },
+    "N": {
+      "item": "wizards_reborn:arcane_gold_nugget"
+    },
+    "A": {
+      "item": "wizards_reborn:arcacite"
+    }
+  },
+  "output": {
+    "item": "wizards_reborn:arcane_fortress_leggings"
+  },
+  "wissen": 1000,
+  "saveNBT": 4
+}

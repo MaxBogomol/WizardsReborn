@@ -104,11 +104,10 @@ dependencies {
     compileOnly fg.deobf("top.theillusivec4.curios:curios-forge:5.2.0-beta.3+1.20.1:api")
     runtimeOnly fg.deobf("top.theillusivec4.curios:curios-forge:5.2.0-beta.3+1.20.1")
 
-    compileOnly fg.deobf("mezz.jei:jei-1.20.1-common-api:15.0.0.14")
-    runtimeOnly fg.deobf("mezz.jei:jei-1.20.1-forge:15.0.0.14")
-
     compileOnly fg.deobf("com.blamejared.crafttweaker:CraftTweaker-forge-1.20.1:14.0.13")
     runtimeOnly fg.deobf("com.blamejared.crafttweaker:CraftTweaker-forge-1.20.1:14.0.13")
+
+    implementation fg.deobf("mezz.jei:jei-1.20.1-forge:15.0.0.14")
 
     implementation fg.deobf('team.chisel.ctm:CTM:1.20.1-1.1.8+4')
     implementation fg.deobf("curse.maven:config-menus-forge-544048:4672356")

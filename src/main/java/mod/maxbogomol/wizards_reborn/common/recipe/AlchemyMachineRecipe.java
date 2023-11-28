@@ -50,14 +50,17 @@ public class AlchemyMachineRecipe implements Recipe<AlchemyMachineContext> {
     @Override
     public boolean matches(AlchemyMachineContext inv, Level worldIn) {
         if (matches(inputs, inv.container)) {
-            return fluidMatches(inv, worldIn);
+            if (fluidInputs.size() > 0) {
+                return fluidMatches(inv, worldIn);
+            } else {
+                return true;
+            }
         }
         return false;
     }
 
     public static boolean matches(List<Ingredient> inputs, Container inv) {
         List<Ingredient> ingredientsMissing = new ArrayList<>(inputs);
-
         for (int i = 0; i < inv.getContainerSize(); i++) {
             ItemStack input = inv.getItem(i);
             if (input.isEmpty()) {
@@ -175,16 +178,21 @@ public class AlchemyMachineRecipe implements Recipe<AlchemyMachineContext> {
                 steam = GsonHelper.getAsInt(json, "steam");
             }
 
-            JsonArray ingrs = GsonHelper.getAsJsonArray(json, "ingredients");
             NonNullList<Ingredient> inputs = NonNullList.create();
-            for (JsonElement e : ingrs) {
-                inputs.add(Ingredient.fromJson(e));
+            NonNullList<FluidIngredient> fluidInputs = NonNullList.create();
+
+            if (json.has("ingredients")) {
+                JsonArray ingrs = GsonHelper.getAsJsonArray(json, "ingredients");
+                for (JsonElement e : ingrs) {
+                    inputs.add(Ingredient.fromJson(e));
+                }
             }
 
-            JsonArray fluids = GsonHelper.getAsJsonArray(json, "fluidIngredients", null);
-            NonNullList<FluidIngredient> fluidInputs = NonNullList.create();
-            for (JsonElement e : fluids) {
-                fluidInputs.add(FluidIngredient.deserialize(e, "fluid"));
+            if (json.has("fluidIngredients")) {
+                JsonArray fluids = GsonHelper.getAsJsonArray(json, "fluidIngredients", null);
+                for (JsonElement e : fluids) {
+                    fluidInputs.add(FluidIngredient.deserialize(e, "fluid"));
+                }
             }
 
             return new AlchemyMachineRecipe(recipeId, outputItem, outputFluid, wissen, steam, inputs, fluidInputs);
@@ -194,11 +202,13 @@ public class AlchemyMachineRecipe implements Recipe<AlchemyMachineContext> {
         @Override
         public AlchemyMachineRecipe fromNetwork(ResourceLocation recipeId, FriendlyByteBuf buffer) {
             NonNullList<Ingredient> inputs = NonNullList.create();
-            for (int i = 0; i < buffer.readInt(); i++) {
+            int inputsSize = buffer.readInt();
+            for (int i = 0; i < inputsSize; i++) {
                 inputs.add(Ingredient.fromNetwork(buffer));
             }
             NonNullList<FluidIngredient> fluidInputs = NonNullList.create();
-            for (int i = 0; i < buffer.readInt(); i++) {
+            int fluidInputsSize = buffer.readInt();
+            for (int i = 0; i < fluidInputsSize; i++) {
                 fluidInputs.add(FluidIngredient.read(buffer));
             }
             ItemStack outputItem = buffer.readItem();

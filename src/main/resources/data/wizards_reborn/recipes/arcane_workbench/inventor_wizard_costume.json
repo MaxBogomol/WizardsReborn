@@ -1,0 +1,28 @@
+{
+  "type": "wizards_reborn:arcane_workbench",
+  "pattern": [
+    "LGL",
+    "L#L",
+    "LLL",
+    "A_A_"
+  ],
+  "key": {
+    "#": {
+      "item": "wizards_reborn:arcane_gold_chestplate"
+    },
+    "L": {
+      "item": "minecraft:leather"
+    },
+    "G": {
+      "item": "wizards_reborn:arcane_gold_nugget"
+    },
+    "A": {
+      "item": "wizards_reborn:arcacite"
+    }
+  },
+  "output": {
+    "item": "wizards_reborn:inventor_wizard_costume"
+  },
+  "wissen": 1000,
+  "saveNBT": 4
+}

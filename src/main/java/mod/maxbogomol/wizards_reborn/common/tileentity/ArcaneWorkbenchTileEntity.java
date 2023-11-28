@@ -113,11 +113,18 @@ public class ArcaneWorkbenchTileEntity extends TileSimpleInventory implements Ti
                         wissenIsCraft = 0;
                         startCraft = false;
 
+                        CompoundTag tag = new CompoundTag();
+                        if (recipe.get().getRecipeSaveNBT() >= 0) {
+                            tag = itemHandler.getStackInSlot(recipe.get().getRecipeSaveNBT()).getOrCreateTag();
+                        }
                         output.setCount(itemOutputHandler.getStackInSlot(0).getCount() + output.getCount());
 
                         itemOutputHandler.setStackInSlot(0, output);
+                        if (!tag.isEmpty()) {
+                            itemOutputHandler.getStackInSlot(0).setTag(tag);
+                        }
 
-                        for (int i = 0; i < 12; i++) {
+                        for (int i = 0; i < 13; i++) {
                             itemHandler.extractItem(i, 1, false);
                         }
 

@@ -110,7 +110,7 @@ public class AlchemyMachineTileEntity extends PipeBaseTileEntity implements Tick
                 wissenInCraft = recipe.map(AlchemyMachineRecipe::getRecipeWissen).orElse(0);
                 steamInCraft = recipe.map(AlchemyMachineRecipe::getRecipeSteam).orElse(0);
 
-                if ((wissenInCraft <= 0 && (wissenIsCraft > 0 || startCraft)) || (steamInCraft <= 0 && (steamIsCraft > 0 || startCraft))) {
+                if ((wissenInCraft <= 0 && (wissenIsCraft > 0 || startCraft)) && (steamInCraft <= 0 && (steamIsCraft > 0 || startCraft))) {
                     wissenIsCraft = 0;
                     steamIsCraft = 0;
                     startCraft = false;
@@ -119,10 +119,15 @@ public class AlchemyMachineTileEntity extends PipeBaseTileEntity implements Tick
                 }
 
                 if (recipe.isPresent()) {
+                    int filled = boiler.getTank().fill(recipe.get().getResultFluid(), IFluidHandler.FluidAction.SIMULATE);
+                    boolean isCanFluid = true;
+                    if (filled != recipe.get().getResultFluid().getAmount()) {
+                        isCanFluid = false;
+                    }
                     if ((wissenInCraft > 0) && (boiler.wissen > 0) && (startCraft)) {
                         ItemStack output = recipe.get().getResultItem(RegistryAccess.EMPTY);
 
-                        if (isCanCraft(inv, output)) {
+                        if (isCanCraft(inv, output, recipe.get(), isCanFluid)) {
                             int addRemainCraft = WissenUtils.getAddWissenRemain(wissenIsCraft, 6, wissenInCraft);
                             int removeRemain = WissenUtils.getRemoveWissenRemain(boiler.getWissen(), 6 - addRemainCraft);
 
@@ -136,7 +141,7 @@ public class AlchemyMachineTileEntity extends PipeBaseTileEntity implements Tick
                     if ((steamInCraft > 0) && (boiler.steam > 0) && (startCraft)) {
                         ItemStack output = recipe.get().getResultItem(RegistryAccess.EMPTY);
 
-                        if (isCanCraft(inv, output)) {
+                        if (isCanCraft(inv, output, recipe.get(), isCanFluid)) {
                             int addRemainCraft = SteamUtils.getAddSteamRemain(steamIsCraft, 3, steamInCraft);
                             int removeRemain = SteamUtils.getRemoveSteamRemain(boiler.getSteam(), 3 - addRemainCraft);
 
@@ -151,7 +156,7 @@ public class AlchemyMachineTileEntity extends PipeBaseTileEntity implements Tick
                         if (wissenInCraft <= wissenIsCraft && steamInCraft <= steamIsCraft) {
                             ItemStack output = recipe.get().getResultItem(RegistryAccess.EMPTY).copy();
 
-                            if (isCanCraft(inv, output)) {
+                            if (isCanCraft(inv, output, recipe.get(), isCanFluid)) {
                                 wissenInCraft = 0;
                                 wissenIsCraft = 0;
                                 steamInCraft = 0;
@@ -170,18 +175,24 @@ public class AlchemyMachineTileEntity extends PipeBaseTileEntity implements Tick
                                     FluidStack fluidStack = recipe.get().getFluidIngredients().get(i).getFluids().get(0);
 
                                     if (fluidTank1.isFluidValid(fluidStack)) {
-                                        FluidStack extracted1 = fluidTank1.drain(fluidStack, IFluidHandler.FluidAction.SIMULATE);
-                                        fluidTank1.drain(extracted1, IFluidHandler.FluidAction.EXECUTE);
+                                        FluidStack extracted = fluidTank1.drain(fluidStack, IFluidHandler.FluidAction.SIMULATE);
+                                        fluidTank1.drain(extracted, IFluidHandler.FluidAction.EXECUTE);
                                     }
 
                                     if (fluidTank2.isFluidValid(fluidStack)) {
-                                        FluidStack extracted2 = fluidTank2.drain(fluidStack, IFluidHandler.FluidAction.SIMULATE);
-                                        fluidTank2.drain(extracted2, IFluidHandler.FluidAction.EXECUTE);
+                                        FluidStack extracted = fluidTank2.drain(fluidStack, IFluidHandler.FluidAction.SIMULATE);
+                                        fluidTank2.drain(extracted, IFluidHandler.FluidAction.EXECUTE);
                                     }
 
                                     if (fluidTank3.isFluidValid(fluidStack)) {
-                                        FluidStack extracted3 = fluidTank3.drain(fluidStack, IFluidHandler.FluidAction.SIMULATE);
-                                        fluidTank3.drain(extracted3, IFluidHandler.FluidAction.EXECUTE);
+                                        FluidStack extracted = fluidTank3.drain(fluidStack, IFluidHandler.FluidAction.SIMULATE);
+                                        fluidTank3.drain(extracted, IFluidHandler.FluidAction.EXECUTE);
+                                    }
+                                }
+
+                                if (!recipe.get().getResultFluid().isEmpty()) {
+                                    if (boiler.getTank().isFluidValid(recipe.get().getResultFluid())) {
+                                        boiler.getTank().fill(recipe.get().getResultFluid(), IFluidHandler.FluidAction.EXECUTE);
                                     }
                                 }
 
@@ -412,7 +423,25 @@ public class AlchemyMachineTileEntity extends PipeBaseTileEntity implements Tick
         startCraft = true;
     }
 
-    public boolean isCanCraft(SimpleContainer inv, ItemStack output) {
+    public boolean isCanCraft(SimpleContainer inv, ItemStack output, AlchemyMachineRecipe recipe, boolean isCanFluid) {
+        if (!recipe.getResultFluid().isEmpty() && !recipe.getResultItem(RegistryAccess.EMPTY).isEmpty()) {
+            if (isCanFluid) {
+                return isCanCraftItem(inv, output);
+            }
+        }
+
+        if (!recipe.getResultFluid().isEmpty()) {
+            return isCanFluid;
+        }
+
+        if (!recipe.getResultItem(RegistryAccess.EMPTY).isEmpty()) {
+            return isCanCraftItem(inv, output);
+        }
+
+        return false;
+    }
+
+    public boolean isCanCraftItem(SimpleContainer inv, ItemStack output) {
         if (inv.getItem(6).isEmpty()) {
             return true;
         }

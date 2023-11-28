@@ -33,12 +33,22 @@ public class ArcaneWorkbenchRecipe implements Recipe<Container> {
     private final ItemStack output;
     private final NonNullList<Ingredient> inputs;
     private final int wissen;
+    private final int saveNBT;
 
     public ArcaneWorkbenchRecipe(ResourceLocation id, ItemStack output, int wissen, Ingredient... inputs) {
         this.id = id;
         this.output = output;
         this.inputs = NonNullList.of(Ingredient.EMPTY, inputs);
         this.wissen = wissen;
+        this.saveNBT = -1;
+    }
+
+    public ArcaneWorkbenchRecipe(ResourceLocation id, ItemStack output, int wissen, int saveNBT, Ingredient... inputs) {
+        this.id = id;
+        this.output = output;
+        this.inputs = NonNullList.of(Ingredient.EMPTY, inputs);
+        this.wissen = wissen;
+        this.saveNBT = saveNBT;
     }
 
     @Override
@@ -70,6 +80,10 @@ public class ArcaneWorkbenchRecipe implements Recipe<Container> {
 
     public int getRecipeWissen() {
         return wissen;
+    }
+
+    public int getRecipeSaveNBT() {
+        return saveNBT;
     }
 
     public ItemStack getToastSymbol() {
@@ -129,7 +143,12 @@ public class ArcaneWorkbenchRecipe implements Recipe<Container> {
             ItemStack output = ShapedRecipe.itemStackFromJson(GsonHelper.getAsJsonObject(json, "output"));
             int wissen = GsonHelper.getAsInt(json, "wissen");
 
-            return new ArcaneWorkbenchRecipe(recipeId, output, wissen, inputs.toArray(new Ingredient[0]));
+            int saveNBT = -1;
+            if (json.has("saveNBT")) {
+                saveNBT = GsonHelper.getAsInt(json, "saveNBT");
+            }
+
+            return new ArcaneWorkbenchRecipe(recipeId, output, wissen, saveNBT, inputs.toArray(new Ingredient[0]));
         }
 
         @Nullable
@@ -141,7 +160,8 @@ public class ArcaneWorkbenchRecipe implements Recipe<Container> {
             }
             ItemStack output = buffer.readItem();
             int wissen = buffer.readInt();
-            return new ArcaneWorkbenchRecipe(recipeId, output, wissen, inputs);
+            int saveNBT = buffer.readInt();
+            return new ArcaneWorkbenchRecipe(recipeId, output, wissen, saveNBT, inputs);
         }
 
         @Override
@@ -152,6 +172,7 @@ public class ArcaneWorkbenchRecipe implements Recipe<Container> {
             }
             buffer.writeItemStack(recipe.getResultItem(RegistryAccess.EMPTY), false);
             buffer.writeInt(recipe.getRecipeWissen());
+            buffer.writeInt(recipe.getRecipeSaveNBT());
         }
     }
 
