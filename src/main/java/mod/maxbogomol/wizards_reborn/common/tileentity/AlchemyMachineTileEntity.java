@@ -14,6 +14,8 @@ import net.minecraft.core.RegistryAccess;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.Connection;
 import net.minecraft.network.protocol.game.ClientboundBlockEntityDataPacket;
+import net.minecraft.sounds.SoundEvents;
+import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.SimpleContainer;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.Block;
@@ -136,6 +138,10 @@ public class AlchemyMachineTileEntity extends PipeBaseTileEntity implements Tick
 
                             update = true;
                         }
+
+                        if (random.nextFloat() < 0.01F) {
+                            level.playSound(null, getBlockPos(), SoundEvents.WATER_AMBIENT, SoundSource.BLOCKS, 0.6f, 1.0f);
+                        }
                     }
 
                     if ((steamInCraft > 0) && (boiler.steam > 0) && (startCraft)) {
@@ -149,6 +155,10 @@ public class AlchemyMachineTileEntity extends PipeBaseTileEntity implements Tick
                             boiler.removeSteam(3 - addRemainCraft - removeRemain);
 
                             update = true;
+                        }
+
+                        if (random.nextFloat() < 0.01F) {
+                            level.playSound(null, getBlockPos(), WizardsReborn.STEAM_BURST_SOUND.get(), SoundSource.BLOCKS, 0.1f, 1.0f);
                         }
                     }
 

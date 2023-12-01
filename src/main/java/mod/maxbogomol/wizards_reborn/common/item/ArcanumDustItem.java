@@ -6,6 +6,7 @@ import mod.maxbogomol.wizards_reborn.common.network.WissenDustBurstEffectPacket;
 import mod.maxbogomol.wizards_reborn.common.recipe.ArcanumDustTransmutationRecipe;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.RegistryAccess;
+import net.minecraft.sounds.SoundSource;
 import net.minecraft.stats.Stats;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.SimpleContainer;
@@ -84,6 +85,7 @@ public class ArcanumDustItem extends ArcanumItem {
                     PacketHandler.sendToTracking(world, player.getOnPos(), new WissenDustBurstEffectPacket(blockpos, (float) pos.x, (float) pos.y, (float) pos.z, (float) vel.x, (float) vel.y, (float) vel.z));
 
                     player.awardStat(Stats.ITEM_USED.get(this));
+                    world.playSound(WizardsReborn.proxy.getPlayer(), blockpos, WizardsReborn.WISSEN_TRANSFER_SOUND.get(), SoundSource.PLAYERS, 0.5f, (float) (1.1f + ((random.nextFloat() - 0.5D) / 2)));
 
                     return InteractionResult.SUCCESS;
                 }

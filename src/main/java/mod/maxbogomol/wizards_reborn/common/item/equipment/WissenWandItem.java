@@ -14,6 +14,8 @@ import mod.maxbogomol.wizards_reborn.common.tileentity.WissenTranslatorTileEntit
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.sounds.SoundEvents;
+import net.minecraft.sounds.SoundSource;
 import net.minecraft.stats.Stats;
 import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.entity.player.Player;
@@ -76,6 +78,7 @@ public class WissenWandItem extends Item {
             player.displayClientMessage(getModeTranslate(stack), true);
 
             player.awardStat(Stats.ITEM_USED.get(this));
+            world.playSound(WizardsReborn.proxy.getPlayer(), player.blockPosition(), SoundEvents.AMETHYST_BLOCK_RESONATE, SoundSource.PLAYERS, 1.0f, 1.2f);
 
             return InteractionResultHolder.success(stack);
         }
@@ -175,6 +178,7 @@ public class WissenWandItem extends Item {
 
         if (result == InteractionResult.SUCCESS) {
             context.getPlayer().awardStat(Stats.ITEM_USED.get(this));
+            world.playSound(WizardsReborn.proxy.getPlayer(), context.getClickedPos(), SoundEvents.AMETHYST_BLOCK_RESONATE, SoundSource.PLAYERS, 1.0f, 1.0f);
         }
 
         return result;
