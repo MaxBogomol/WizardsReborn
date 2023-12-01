@@ -20,7 +20,7 @@
   "item.wizards_reborn.arcane_gold_leggings": "Jambières en or des arcanes",
   "item.wizards_reborn.arcane_gold_boots": "Bottes en or des arcanes",
 
-  "item.wizards_reborn.arcanum": "Arcane",
+  "item.wizards_reborn.arcanum": "Arcanum",
   "item.wizards_reborn.arcanum_dust": "Poudre d'arcane",
   "block.wizards_reborn.arcanum_block": "Bloc d'arcane",
   "block.wizards_reborn.arcanum_ore": "Minerai d'arcane",
@@ -74,6 +74,7 @@
   "block.wizards_reborn.chiseled_wisestone_stairs": "Escalier de sophialith sculptée",
   "block.wizards_reborn.chiseled_wisestone_slab": "Dalle de sophialith sculptée",
   "block.wizards_reborn.chiseled_wisestone_wall": "Muret de sophialith sculptée",
+  "block.wizards_reborn.wisestone_pillar": "Pilier de sophialith",
   "block.wizards_reborn.polished_wisestone_pressure_plate": "Plaque de pression en sophialith",
   "block.wizards_reborn.polished_wisestone_button": "Bouton en sophialith polie",
 
@@ -153,7 +154,18 @@
   "block.wizards_reborn.wissen_crystallizer": "Cristalliseur de wissen",
   "block.wizards_reborn.arcane_workbench": "Établi arcanique",
   "block.wizards_reborn.wissen_cell": "Cellule de wissen",
-
+ 
+  "block.wizards_reborn.wisestone_pedestal": "Piédestal en sophialith",
+  "block.wizards_reborn.fluid_pipe": "Conduite de fluides",
+  "block.wizards_reborn.fluid_extractor": "Extracteur de fluides",
+  "block.wizards_reborn.steam_pipe": "Conduite de vapeur",
+  "block.wizards_reborn.steam_extractor": "Extracteur de vapeur",
+  "block.wizards_reborn.alchemy_furnace": "Four alchimique",
+  "block.wizards_reborn.orbital_fluid_retainer": "Retenue de fluide orbitale",
+  "block.wizards_reborn.steam_thermal_storage": "Cuves à vapeur",
+  "block.wizards_reborn.alchemy_machine": "Machine alchimique",
+  "block.wizards_reborn.alchemy_boiler": "Chaudière alchimique",
+  
   "block.wizards_reborn.white_arcane_lumos": "Lumos arcanique blanc",
   "block.wizards_reborn.orange_arcane_lumos": "Lumos arcanique orange",
   "block.wizards_reborn.magenta_arcane_lumos": "Lumos arcanique magenta",
@@ -176,12 +188,25 @@
   "item.wizards_reborn.arcanum_amulet": "Amulette des arcanes",
   "item.wizards_reborn.arcanum_ring": "Anneau des arcanes",
   "item.wizards_reborn.arcacite_amulet": "Amulette d'arcacite",
-  "item.wizards_reborn.arcacite_ring": "Anneau d'arcacite",														   												   
+  "item.wizards_reborn.arcacite_ring": "Anneau d'arcacite",
   "item.wizards_reborn.leather_belt": "Ceinture en cuir",
+  
+  "item.wizards_reborn.arcane_fortress_helmet": "Casque arcanique fortifié",
+  "item.wizards_reborn.arcane_fortress_chestplate": "Cuirasse arcanique fortifiée",
+  "item.wizards_reborn.arcane_fortress_leggings": "Jambières arcaniques fortifiées",
+  "item.wizards_reborn.arcane_fortress_boots": "Bottes arcaniques fortifiées",
+
+  "item.wizards_reborn.inventor_wizard_hat": "Coiffe du sorcier inventeur",
+  "item.wizards_reborn.inventor_wizard_costume": "Robe du sorcier inventeur",
+  "item.wizards_reborn.inventor_wizard_trousers": "Pantalon du sorcier inventeur",
+  "item.wizards_reborn.inventor_wizard_boots": "Bottes du sorcier inventeur",
+
+  "item.wizards_reborn.music_disc_arcanum": "Disque de musique arcanique",
+  "item.wizards_reborn.music_disc_mor": "Disque de musique arcanique",
 
   "gui.wizards_reborn.category.arcanum_dust_transmutation": "Transmutation de poussière des arcanes",
-  "gui.wizards_reborn.category.mortar": "Mortier",											 
-
+  "gui.wizards_reborn.category.mortar": "Mortier",
+  
   "item.wizards_reborn.arcanemicon": "Arcanemicon",
 
   "item.wizards_reborn.violence_banner_pattern": "Motif de bannière",
@@ -202,7 +227,7 @@
 
   "trim_material.wizards_reborn.arcane_gold": "Matériau d'or des arcanes",
   "trim_material.wizards_reborn.arcanum": "Matériau de poudre d'arcane",
-  "trim_material.wizards_reborn.arcacite": "Matériau d'arcacite",														   
+  "trim_material.wizards_reborn.arcacite": "Matériau d'arcacite",
 
   "item.wizards_reborn.violence_banner_pattern.desc": "Violence",
   "item.wizards_reborn.reproduction_banner_pattern.desc": "Reproduction",
@@ -210,6 +235,9 @@
   "item.wizards_reborn.hunger_banner_pattern.desc": "Faim",
   "item.wizards_reborn.survival_banner_pattern.desc": "Survie",
   "item.wizards_reborn.elevation_banner_pattern.desc": "Élévation",
+
+  "item.wizards_reborn.music_disc_arcanum.desc": "Onjerlay - Arcanum Swinging",
+  "item.wizards_reborn.music_disc_mor.desc": "Onjerlay - Mor Marsh",
 
   "block.minecraft.banner.wizards_reborn.violence.black": "Symbole noir \"Violence\"",
   "block.minecraft.banner.wizards_reborn.violence.blue": "Symbole bleu \"Violence\"",
@@ -315,16 +343,17 @@
 
   "sounds.wizards_reborn.wissen_burst": "Éclat de wissen",
   "sounds.wizards_reborn.wissen_transfer": "Transfert de wissen",
-  "sounds.wizards_reborn.spell_cast": "Jet de sorts",
+  "sounds.wizards_reborn.spell_cast": "Incantation",
   "sounds.wizards_reborn.spell_burst": "Éclat de sorts",
   "sounds.wizards_reborn.spell_reload": "Rechargement de sorts",
-
+  "sounds.wizards_reborn.steam_burst": "Coup de vapeur",
+  
   "entity.wizards_reborn.boat": "Bateau",
   "entity.wizards_reborn.chest_boat": "Bateau de stockage",
-
+  
   "gui.wizards_reborn.arcanemicon.title": "Arcanemicon",
 
-  "attribute.name.wizards_reborn.wissen_sale": "Soif de wissen",
+  "attribute.name.wizards_reborn.wissen_sale": "soif de wissen",
 
   "gui.wizards_reborn.menu.optifine.0": "ATTENTION ! Il semble que vous ayez installé Optifine",
   "gui.wizards_reborn.menu.optifine.1": "Optifine peut supprimer le rendu des particules de Wizard's Reborn",
@@ -406,7 +435,7 @@
   "wizards_reborn.arcanemicon.page.arcane_nature_index.title": "Nature des arcanes",
   "wizards_reborn.arcanemicon.chapter.arcanum": "Arcanum",
     "wizards_reborn.arcanemicon.page.arcanum.title": "Arcanum",
-    "wizards_reborn.arcanemicon.page.arcanum": "D'anciens cristaux peuvent être trouvés dans des grottes souterraines, contenant un pouvoir primordial d'une connaissance sacrée, appelée sagesse ou wissen, capable de transformer la matière.",
+    "wizards_reborn.arcanemicon.page.arcanum": "Cristaux ancestraux découverts dans des cavernes, renfermant le pouvoir primordial d'une connaissance sacrée, appelée wissen, capable de transformer la matière.",
   "wizards_reborn.arcanemicon.chapter.arcanum_dust_transmutation": "Transmutation",
     "wizards_reborn.arcanemicon.page.arcanum_dust_transmutation.title": "Transmutation",
     "wizards_reborn.arcanemicon.page.arcanum_dust_transmutation": "Grâce à ses puissantes propriétés magiques, la poussière des arcanes est capable de transformer certains objets en de tout autres produits, saturés d'énergie magique.",
@@ -421,7 +450,7 @@
     "wizards_reborn.arcanemicon.page.arcane_gold_tools.title": "Outils en or des arcanes",
     "wizards_reborn.arcanemicon.page.arcane_gold_tools": "Outils en or améliorés. \n \n Ils ne sont pas inutiles.",
     "wizards_reborn.arcanemicon.page.arcane_gold_armor.title": "Armure en or des arcanes",
-    "wizards_reborn.arcanemicon.page.arcane_gold_armor": "",																				   															
+    "wizards_reborn.arcanemicon.page.arcane_gold_armor": "",
   "wizards_reborn.arcanemicon.chapter.scythes": "Faux",
     "wizards_reborn.arcanemicon.page.scythes.title": "Faux",
     "wizards_reborn.arcanemicon.page.scythes": "Outil généralement destiné aux moissons. Par ailleurs, grâce à son long manche, elle permet de porter des coups à une distance plus importante.",
@@ -430,7 +459,7 @@
     "wizards_reborn.arcanemicon.page.trinkets": "Ce sont des petits ornements qui renforcent légèrement certaines de vos caractéristiques. \n \n Tu es magnifaïk ma chérie UwU",
   "wizards_reborn.arcanemicon.chapter.wissen": "Wissen",
     "wizards_reborn.arcanemicon.page.wissen.title": "Wissen",
-    "wizards_reborn.arcanemicon.page.wissen": "(ou sagesse) Puissance magique primordiale pouvant revêtir la forme d'un éther lumineux. Il peut donner vie à divers mécanismes magiques.",
+    "wizards_reborn.arcanemicon.page.wissen": "Puissance magique primordiale pouvant revêtir la forme d'un éther lumineux. Il peut donner vie à divers mécanismes magiques.",
     "wizards_reborn.arcanemicon.page.wissen_wand.title": "Baguette de la sagesse",
     "wizards_reborn.arcanemicon.page.wissen_wand": "Un instrument destiné à contrôler le fonctionnement de vos mécanismes utilisant le wissen. Dotée de cinq fonctions différentes.",
     "wizards_reborn.arcanemicon.page.wissen_wand_mode.functional.title": "Mode fonction",
@@ -482,7 +511,13 @@
     "wizards_reborn.arcanemicon.page.wissen_cell.0.title": "Cellule de wissen",
     "wizards_reborn.arcanemicon.page.wissen_cell.0": "Petite batterie de wissen. Contrairement aux autres appareils de wissen, il est capable de préserver son wissen quand il est démantelé.",
     "wizards_reborn.arcanemicon.page.wissen_cell.1": "Utilisé pour charger des éléments avec du wissen et pour en transporter.",
-
+  "wizards_reborn.arcanemicon.chapter.arcane_fortress_armor": "Armure fortifiée",
+    "wizards_reborn.arcanemicon.page.arcane_fortress_armor.title": "Armure arcanique fortifiée",
+    "wizards_reborn.arcanemicon.page.arcane_fortress_armor": "Armure formée de plaques d'or arcanique denses. Elle est très robuste face aux effets de recul.",
+  "wizards_reborn.arcanemicon.chapter.inventor_wizard_armor": "Armure du sorcier",
+    "wizards_reborn.arcanemicon.page.inventor_wizard_armor.title": "Armure du sorcier inventeur",
+    "wizards_reborn.arcanemicon.page.inventor_wizard_armor": "Elégant costume britannique d'un sorcier inventeur. Reduit les couts en wissen \n \n Ce couvre-chef me va comme un gant.",																			   	
+	
   "wizards_reborn.arcanemicon.category.spells": "Sorts",
   "wizards_reborn.arcanemicon.chapter.spells_index": "Sorts",
   "wizards_reborn.arcanemicon.page.spells_index.title": "Sorts",
@@ -645,6 +680,42 @@
     "wizards_reborn.arcanemicon.page.wisestone": "",
     "wizards_reborn.arcanemicon.page.decorative_wisestone.title": "Bloc décoratif",
     "wizards_reborn.arcanemicon.page.decorative_wisestone": "",
-
+  "wizards_reborn.arcanemicon.chapter.wisestone_pedestal": "Piédestal en sophialith",
+    "wizards_reborn.arcanemicon.page.wisestone_pedestal.title": "Piédestal en sophialith",
+    "wizards_reborn.arcanemicon.page.wisestone_pedestal": "Un piédestal en sophialith plus élégant. Vos reliques seront ainsi plus éclatantes.",
+  "wizards_reborn.arcanemicon.chapter.fluid_pipes": "Conduites de fluides",
+    "wizards_reborn.arcanemicon.page.fluid_pipe.title": "Conduite de fluides",
+    "wizards_reborn.arcanemicon.page.fluid_pipe": "Elles transportent les fluides entre elles. À l'aide d'une baguette de wissen, vous pouvez configurer les liaisons.",
+    "wizards_reborn.arcanemicon.page.fluid_extractor.title": "Extracteur de fluide",
+    "wizards_reborn.arcanemicon.page.fluid_extractor": "Extrait les fluides des stockages et les fait circuler dans les conduites. Activé par la redstone. Lorsqu'il est enclenché, il passe en mode inversion.",
+  "wizards_reborn.arcanemicon.chapter.steam_pipes": "Conduites de vapeur",
+    "wizards_reborn.arcanemicon.page.steam_pipe.title": "Conduite de vapeur",
+    "wizards_reborn.arcanemicon.page.steam_pipe": "Elles transportent la vapeur entre elles. À l'aide d'une baguette de wissen, vous pouvez configurer les liaisons.",
+    "wizards_reborn.arcanemicon.page.steam_extractor.title": "Extracteur de vapeur",
+    "wizards_reborn.arcanemicon.page.steam_extractor": "Extrait la vapeur des stockages et les fait circuler dans les conduites. Activé par la redstone. Lorsqu'il est enclenché, il passe en mode inversion.",
+  "wizards_reborn.arcanemicon.chapter.orbital_fluid_retainer": "Retenue de fluide",
+    "wizards_reborn.arcanemicon.page.orbital_fluid_retainer.title": "Retenue de fluide",
+    "wizards_reborn.arcanemicon.page.orbital_fluid_retainer": "Le dispositif orbital de rétention des fluides possède un champ gravitationnel puissant capable de piéger les fluides.",
+  "wizards_reborn.arcanemicon.chapter.alchemy_furnace": "Four alchimique",
+    "wizards_reborn.arcanemicon.page.alchemy_furnace.title": "Four alchimique",
+    "wizards_reborn.arcanemicon.page.alchemy_furnace": "Système qui transforme l'eau en vapeur. Conserve la chaleur pendant une longue période. Peut être utilisé comme un four ordinaire pour faire fondre des objets.",
+  "wizards_reborn.arcanemicon.chapter.steam_thermal_storage": "Cuves à vapeur",
+    "wizards_reborn.arcanemicon.page.steam_thermal_storage.title": "Cuves à vapeur",
+    "wizards_reborn.arcanemicon.page.steam_thermal_storage": "Cuve de stockage thermoregulé de vapeur, conserve la vapeur dans son état d'origine.",
+  "wizards_reborn.arcanemicon.chapter.alchemy_machine": "Machine alchimique",
+    "wizards_reborn.arcanemicon.page.alchemy_machine.title": "Machine alchimique",
+    "wizards_reborn.arcanemicon.page.alchemy_machine": "Principal instrument de l'alchimie. Il permet de transformer des objets et des fluides à l'aide de la vapeur.",
+    "wizards_reborn.arcanemicon.page.alchemy_boiler.title": "Chaudière alchimique",
+    "wizards_reborn.arcanemicon.page.alchemy_boiler": "La chaudière, installée au-dessus de la machine alchimique, est nécessaire pour la faire fonctionner. Peut contenir de la vapeur, du wissen et le fluide qui en résulte.",
+  "wizards_reborn.arcanemicon.chapter.arcacite": "Arcacite",
+    "wizards_reborn.arcanemicon.page.arcacite.title": "Arcacite",
+    "wizards_reborn.arcanemicon.page.arcacite": "De par sa structure remaniée par l'alchimie, l'arcacite est plus résistante que l'arcanum. Toutefois, ses propriétés de réfraction se sont estompées.",
+  "wizards_reborn.arcanemicon.chapter.music_disc_arcanum": "\"Arcanum Swinging\"",
+    "wizards_reborn.arcanemicon.page.music_disc_arcanum.title": "\"Arcanum Swinging\"",
+    "wizards_reborn.arcanemicon.page.music_disc_arcanum": "\"Vos machines magiques travaillent d'arrache-pied pour assurer la diffusion du wissen. Vous êtes assis(e) sur une chaise et vous sirotez un thé.\" \n \n Onjerlay - Arcanum Swinging",
+  "wizards_reborn.arcanemicon.chapter.music_disc_mor": "\"Mor Marsh\"",
+    "wizards_reborn.arcanemicon.page.music_disc_mor.title": "\"Mor Marsh\"",
+    "wizards_reborn.arcanemicon.page.music_disc_mor": "\"Un parfum humide envahit l'air. Vos oreilles sont caressées par le coassement des grenouilles. Les champignons poussent en abondance après la pluie d'hier...\" \n \n Onjerlay - Mor Marsh",																			
+  
   "wizards_reborn.arcanemicon.unknown": "Inconnu"
 }
