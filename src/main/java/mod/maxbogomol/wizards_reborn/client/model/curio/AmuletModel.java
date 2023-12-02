@@ -1,5 +1,6 @@
 package mod.maxbogomol.wizards_reborn.client.model.curio;
 
+import com.google.common.collect.ImmutableList;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
 import net.minecraft.client.model.HumanoidModel;
@@ -20,6 +21,7 @@ public class AmuletModel extends HumanoidModel {
     public static LayerDefinition createBodyLayer() {
         MeshDefinition mesh = HumanoidModel.createMesh(new CubeDeformation(0), 1);
         PartDefinition root = mesh.getRoot();
+        PartDefinition head = root.addOrReplaceChild("head", new CubeListBuilder(), PartPose.ZERO);
         PartDefinition body = root.addOrReplaceChild("body", new CubeListBuilder(), PartPose.ZERO);
 
         PartDefinition model = body.addOrReplaceChild("model", CubeListBuilder.create().texOffs(0, 0).addBox(-4.0F, 0.0F, -2.0F, 8, 4, 4, new CubeDeformation(0.3F)), PartPose.ZERO);
@@ -34,7 +36,17 @@ public class AmuletModel extends HumanoidModel {
     }
 
     @Override
+    protected Iterable<ModelPart> headParts() {
+        return ImmutableList.of(root.getChild("head"));
+    }
+
+    @Override
+    protected Iterable<ModelPart> bodyParts() {
+        return ImmutableList.of(root.getChild("body"));
+    }
+
+    @Override
     public void renderToBuffer(PoseStack poseStack, VertexConsumer buffer, int packedLight, int packedOverlay, float red, float green, float blue, float alpha) {
-        this.model.render(poseStack, buffer, packedLight, packedOverlay, red, green, blue, alpha);
+        super.renderToBuffer(poseStack, buffer, packedLight, packedOverlay, red, green, blue, alpha);
     }
 }

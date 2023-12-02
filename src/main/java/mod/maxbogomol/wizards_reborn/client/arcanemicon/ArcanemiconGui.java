@@ -2,6 +2,7 @@ package mod.maxbogomol.wizards_reborn.client.arcanemicon;
 
 import com.mojang.blaze3d.systems.RenderSystem;
 import mod.maxbogomol.wizards_reborn.WizardsReborn;
+import mod.maxbogomol.wizards_reborn.client.arcanemicon.index.ChapterHistoryEntry;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.screens.Screen;
@@ -13,21 +14,43 @@ import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.item.ItemStack;
 import org.lwjgl.glfw.GLFW;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class ArcanemiconGui extends Screen {
     public static final ResourceLocation BACKGROUND = new ResourceLocation(WizardsReborn.MOD_ID, "textures/gui/arcanemicon.png");
     public static int xSize = 312;
     public static int ySize = 180;
 
-    public Chapter currentChapter;
-    public int currentPage = 0;
+    public static Chapter currentChapter;
+    public static int currentPage = 0;
     public ItemStack currentItem;
+
+    public static List<ChapterHistoryEntry> historyEntries = new ArrayList<>();
+    public static int currentHistory = 0;
 
     public ArcanemiconGui() {
         super(Component.translatable("gui.wizards_reborn.arcanemicon.title"));
-        currentChapter = ArcanemiconChapters.ARCANE_NATURE_INDEX;
+        if (currentChapter == null) {
+            currentChapter = ArcanemiconChapters.ARCANE_NATURE_INDEX;
+        }
+        for (Category category : ArcanemiconChapters.categories) {
+            category.reset();
+        }
     }
 
     public void changeChapter(Chapter next) {
+        if (historyEntries.size() > 0) {
+            int deleteSize = (historyEntries.size() - currentHistory);
+            for (int i = 0; i < deleteSize; i++) {
+                historyEntries.remove(historyEntries.size() - 1);
+            }
+            if (deleteSize > 0) {
+                currentHistory = historyEntries.size();
+            }
+        }
+        currentHistory = currentHistory + 1;
+        historyEntries.add(new ChapterHistoryEntry(next, 0));
         currentChapter = next;
         currentPage = 0;
     }
@@ -75,6 +98,20 @@ public class ArcanemiconGui extends Screen {
             gui.blit(BACKGROUND, guiLeft + x, guiTop + y, 383, v, 32, 16, 512, 512);
         }
 
+        if (currentHistory > 1) {
+            int x = 110 + 7, y = 155;
+            int v = 0;
+            if (mouseX >= guiLeft + x && mouseY >= guiTop + y && mouseX <= guiLeft + x + 19 && mouseY <= guiTop + y + 12) v += 12;
+            gui.blit(BACKGROUND, guiLeft + x, guiTop + y, 415, v, 19, 12, 512, 512);
+        }
+
+        if (currentHistory < historyEntries.size()) {
+            int x = 169 + 7, y = 155;
+            int v = 0;
+            if (mouseX >= guiLeft + x && mouseY >= guiTop + y && mouseX <= guiLeft + x + 19 && mouseY <= guiTop + y + 12) v += 12;
+            gui.blit(BACKGROUND, guiLeft + x, guiTop + y, 434, v, 19, 12, 512, 512);
+        }
+
         for (int i = 0; i < ArcanemiconChapters.categories.size(); i ++) {
             int y = guiTop + 12 + (i % 8) * 20;
             ArcanemiconChapters.categories.get(i).drawTooltip(this, gui, guiLeft + (i >= 8 ? 301 : 10), y, i >= 8, mouseX, mouseY);
@@ -95,6 +132,7 @@ public class ArcanemiconGui extends Screen {
                 int x = guiLeft + 11, y = guiTop + 151;
                 if (mouseX >= x && mouseY >= y && mouseX <= x + 32 && mouseY <= y + 16) {
                     currentPage -= 2;
+                    historyEntries.set(currentHistory - 1, new ChapterHistoryEntry(currentChapter, currentPage));
                     Minecraft.getInstance().player.playNotifySound(SoundEvents.BOOK_PAGE_TURN, SoundSource.NEUTRAL, 1.0f, 1.0f);
                     return true;
                 }
@@ -103,6 +141,31 @@ public class ArcanemiconGui extends Screen {
                 int x = guiLeft + 269, y = guiTop + 151;
                 if (mouseX >= x && mouseY >= y && mouseX <= x + 32 && mouseY <= y + 16) {
                     currentPage += 2;
+                    historyEntries.set(currentHistory - 1, new ChapterHistoryEntry(currentChapter, currentPage));
+                    Minecraft.getInstance().player.playNotifySound(SoundEvents.BOOK_PAGE_TURN, SoundSource.NEUTRAL, 1.0f, 1.0f);
+                    return true;
+                }
+            }
+
+            if (currentHistory > 1) {
+                int x = 110 + 7, y = 155;
+                if (mouseX >= guiLeft + x && mouseY >= guiTop + y && mouseX <= guiLeft + x + 19 && mouseY <= guiTop + y + 12) {
+                    currentHistory = currentHistory - 1;
+                    currentChapter = historyEntries.get(currentHistory - 1).chapter;
+                    currentPage = historyEntries.get(currentHistory - 1).page;
+
+                    Minecraft.getInstance().player.playNotifySound(SoundEvents.BOOK_PAGE_TURN, SoundSource.NEUTRAL, 1.0f, 1.0f);
+                    return true;
+                }
+            }
+
+            if (currentHistory < historyEntries.size()) {
+                int x = 169 + 7, y = 151;
+                if (mouseX >= guiLeft + x && mouseY >= guiTop + y && mouseX <= guiLeft + x + 19 && mouseY <= guiTop + y + 12) {
+                    currentHistory = currentHistory + 1;
+                    currentChapter = historyEntries.get(currentHistory - 1).chapter;
+                    currentPage = historyEntries.get(currentHistory - 1).page;
+
                     Minecraft.getInstance().player.playNotifySound(SoundEvents.BOOK_PAGE_TURN, SoundSource.NEUTRAL, 1.0f, 1.0f);
                     return true;
                 }

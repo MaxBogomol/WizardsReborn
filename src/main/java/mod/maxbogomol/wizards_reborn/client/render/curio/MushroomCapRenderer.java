@@ -3,7 +3,7 @@ package mod.maxbogomol.wizards_reborn.client.render.curio;
 import com.mojang.blaze3d.vertex.PoseStack;
 import mod.maxbogomol.wizards_reborn.WizardsReborn;
 import mod.maxbogomol.wizards_reborn.WizardsRebornClient;
-import mod.maxbogomol.wizards_reborn.client.model.curio.AmuletModel;
+import mod.maxbogomol.wizards_reborn.client.model.curio.MushroomCapModel;
 import mod.maxbogomol.wizards_reborn.common.item.equipment.curio.ICurioItemTexture;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.model.EntityModel;
@@ -17,10 +17,10 @@ import net.minecraft.world.item.ItemStack;
 import top.theillusivec4.curios.api.SlotContext;
 import top.theillusivec4.curios.api.client.ICurioRenderer;
 
-public class AmuletRenderer implements ICurioRenderer {
-    public static ResourceLocation TEXTURE = new ResourceLocation(WizardsReborn.MOD_ID, "textures/entity/curio/arcanum_amulet.png");
+public class MushroomCapRenderer implements ICurioRenderer {
+    public static ResourceLocation TEXTURE = new ResourceLocation(WizardsReborn.MOD_ID, "textures/entity/curio/brown_mushroom_cap.png");
 
-    AmuletModel model = null;
+    MushroomCapModel model = null;
 
     @Override
     public <T extends LivingEntity, M extends EntityModel<T>> void render(ItemStack stack, SlotContext slotContext,
@@ -28,7 +28,7 @@ public class AmuletRenderer implements ICurioRenderer {
                                                                           int light, float limbSwing, float limbSwingAmount, float partialTicks,
                                                                           float ageInTicks, float netHeadYaw, float headPitch) {
         if (model == null) {
-            model = new AmuletModel(Minecraft.getInstance().getEntityModels().bakeLayer(WizardsRebornClient.AMULET_LAYER));
+            model = new MushroomCapModel(Minecraft.getInstance().getEntityModels().bakeLayer(WizardsRebornClient.MUSHROOM_CAP));
         }
 
         LivingEntity entity = slotContext.entity();
@@ -38,6 +38,7 @@ public class AmuletRenderer implements ICurioRenderer {
         }
 
         ICurioRenderer.followBodyRotations(entity, model);
+        ICurioRenderer.followHeadRotations(entity, model.getHead());
 
         model.setupAnim(entity, limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch);
         model.renderToBuffer(matrixStack, renderTypeBuffer.getBuffer(RenderType.entityCutoutNoCull(TEXTURE)), light, OverlayTexture.NO_OVERLAY, 1, 1, 1, 1);

@@ -1,14 +1,12 @@
 package mod.maxbogomol.wizards_reborn.client.arcanemicon;
 
-import com.mojang.blaze3d.systems.RenderSystem;
-import com.mojang.blaze3d.vertex.PoseStack;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.network.chat.Component;
-import net.minecraft.world.item.ItemStack;
-import net.minecraft.sounds.SoundSource;
 import net.minecraft.sounds.SoundEvents;
+import net.minecraft.sounds.SoundSource;
 import net.minecraft.util.Mth;
+import net.minecraft.world.item.ItemStack;
 
 public class Category {
     public ItemStack icon;
@@ -34,8 +32,9 @@ public class Category {
 
         boolean hover = mouseX >= x && mouseY >= y && mouseX <= x + w && mouseY <= y + 18;
         if (hover) {
-            gui.currentPage = 0;
-            gui.currentChapter = chapter;
+            ArcanemiconGui.historyEntries.clear();
+            ArcanemiconGui.currentHistory = 0;
+            gui.changeChapter(chapter);
             Minecraft.getInstance().player.playNotifySound(SoundEvents.UI_BUTTON_CLICK.get(), SoundSource.NEUTRAL, 1.0f, 1.0f);
             return true;
         }

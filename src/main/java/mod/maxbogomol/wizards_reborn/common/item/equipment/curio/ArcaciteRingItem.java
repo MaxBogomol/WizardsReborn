@@ -5,7 +5,6 @@ import com.google.common.collect.Multimap;
 import mod.maxbogomol.wizards_reborn.WizardsReborn;
 import mod.maxbogomol.wizards_reborn.api.wissen.IWissenItem;
 import mod.maxbogomol.wizards_reborn.api.wissen.WissenItemUtils;
-import net.minecraft.resources.ResourceLocation;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
@@ -20,11 +19,9 @@ import top.theillusivec4.curios.api.type.capability.ICurio;
 import javax.annotation.Nonnull;
 import java.util.UUID;
 
-public class ArcaciteAmuletItem extends BaseCurioItem implements IWissenItem {
+public class ArcaciteRingItem extends BaseCurioItem implements IWissenItem {
 
-    private static final ResourceLocation AMULET_TEXTURE = new ResourceLocation(WizardsReborn.MOD_ID,"textures/entity/curio/arcacite_amulet.png");
-
-    public ArcaciteAmuletItem(Properties properties) {
+    public ArcaciteRingItem(Properties properties) {
         super(properties);
     }
 
@@ -38,14 +35,14 @@ public class ArcaciteAmuletItem extends BaseCurioItem implements IWissenItem {
     public Multimap<Attribute, AttributeModifier> getAttributeModifiers(SlotContext slotContext,
                                                                         UUID uuid, ItemStack stack) {
         Multimap<Attribute, AttributeModifier> atts = LinkedHashMultimap.create();
-        atts.put(WizardsReborn.WISSEN_SALE.get(), new AttributeModifier(uuid, "bonus", 3, AttributeModifier.Operation.ADDITION));
-        atts.put(Attributes.ARMOR, new AttributeModifier(uuid, "bonus", 1, AttributeModifier.Operation.ADDITION));
+        atts.put(Attributes.ARMOR_TOUGHNESS, new AttributeModifier(uuid, "bonus", 1, AttributeModifier.Operation.ADDITION));
+        atts.put(WizardsReborn.WISSEN_SALE.get(), new AttributeModifier(uuid, "bonus", 1, AttributeModifier.Operation.ADDITION));
         return atts;
     }
 
     @Override
     public int getMaxWissen() {
-        return 1500;
+        return 1000;
     }
 
     @Override
@@ -60,18 +57,13 @@ public class ArcaciteAmuletItem extends BaseCurioItem implements IWissenItem {
         if (!slotContext.entity().level().isClientSide()) {
             WissenItemUtils.existWissen(stack);
             if (slotContext.entity().getHealth() < slotContext.entity().getMaxHealth()) {
-                if (slotContext.entity().tickCount % 100 == 0) {
-                    if (WissenItemUtils.canRemoveWissen(stack, 25)) {
-                        slotContext.entity().heal(1);
-                        WissenItemUtils.removeWissen(stack, 25);
+                if (slotContext.entity().tickCount % 80 == 0) {
+                    if (WissenItemUtils.canRemoveWissen(stack, 12)) {
+                        slotContext.entity().heal(0.5F);
+                        WissenItemUtils.removeWissen(stack, 12);
                     }
                 }
             }
         }
-    }
-
-    @Override
-    public ResourceLocation getTexture(ItemStack stack, LivingEntity entity) {
-        return AMULET_TEXTURE;
     }
 }

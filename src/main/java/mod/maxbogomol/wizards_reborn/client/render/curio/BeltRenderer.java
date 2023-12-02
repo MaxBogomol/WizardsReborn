@@ -5,7 +5,6 @@ import mod.maxbogomol.wizards_reborn.WizardsReborn;
 import mod.maxbogomol.wizards_reborn.WizardsRebornClient;
 import mod.maxbogomol.wizards_reborn.client.model.curio.BeltModel;
 import mod.maxbogomol.wizards_reborn.common.item.equipment.curio.ICurioItemTexture;
-import mod.maxbogomol.wizards_reborn.utils.RenderUtils;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.model.EntityModel;
 import net.minecraft.client.renderer.MultiBufferSource;
@@ -15,7 +14,6 @@ import net.minecraft.client.renderer.texture.OverlayTexture;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.phys.Vec3;
 import top.theillusivec4.curios.api.SlotContext;
 import top.theillusivec4.curios.api.client.ICurioRenderer;
 
@@ -39,16 +37,9 @@ public class BeltRenderer implements ICurioRenderer {
             TEXTURE = curio.getTexture(stack, entity);
         }
 
-        matrixStack.pushPose();
         ICurioRenderer.followBodyRotations(entity, model);
-        ICurioRenderer.translateIfSneaking(matrixStack, entity);
-        ICurioRenderer.rotateIfSneaking(matrixStack, entity);
-
-        Vec3 rotate = RenderUtils.followBodyRotation(entity);
-        model.model.yRot = (float) rotate.y();
 
         model.setupAnim(entity, limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch);
         model.renderToBuffer(matrixStack, renderTypeBuffer.getBuffer(RenderType.entityCutoutNoCull(TEXTURE)), light, OverlayTexture.NO_OVERLAY, 1, 1, 1, 1);
-        matrixStack.popPose();
     }
 }

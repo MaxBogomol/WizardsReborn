@@ -76,7 +76,6 @@ public class AlchemyMachineTileEntity extends PipeBaseTileEntity implements Tick
             Direction.EAST
     };
 
-
     public int wissenInCraft= 0;
     public int wissenIsCraft = 0;
     public int steamInCraft= 0;

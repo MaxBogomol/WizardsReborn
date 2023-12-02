@@ -210,6 +210,13 @@ public class WizardsRebornItemGroup {
             event.accept(WizardsReborn.ARCACITE_RING);
             event.accept(WizardsReborn.LEATHER_BELT);
 
+            event.accept(WizardsReborn.BROWN_MUSHROOM_CAP);
+            event.accept(WizardsReborn.RED_MUSHROOM_CAP);
+            event.accept(WizardsReborn.CRIMSON_FUNGUS_CAP);
+            event.accept(WizardsReborn.WARPED_FUNGUS_CAP);
+            event.accept(WizardsReborn.MOR_CAP);
+            event.accept(WizardsReborn.ELDER_MOR_CAP);
+
             event.accept(WizardsReborn.ARCANE_FORTRESS_HELMET);
             event.accept(WizardsReborn.ARCANE_FORTRESS_CHESTPLATE);
             event.accept(WizardsReborn.ARCANE_FORTRESS_LEGGINGS);
