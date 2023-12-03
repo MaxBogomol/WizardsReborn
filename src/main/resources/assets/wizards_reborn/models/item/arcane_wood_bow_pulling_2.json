@@ -1,0 +1,6 @@
+{
+  "parent": "wizards_reborn:item/arcane_wood_bow",
+  "textures": {
+    "layer0": "wizards_reborn:item/arcane_wood_bow_pulling_2"
+  }
+}

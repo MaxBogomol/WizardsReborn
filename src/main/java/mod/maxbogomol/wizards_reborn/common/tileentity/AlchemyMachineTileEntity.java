@@ -5,6 +5,7 @@ import mod.maxbogomol.wizards_reborn.api.alchemy.PipeConnection;
 import mod.maxbogomol.wizards_reborn.api.alchemy.SteamUtils;
 import mod.maxbogomol.wizards_reborn.api.wissen.IWissenWandFunctionalTileEntity;
 import mod.maxbogomol.wizards_reborn.api.wissen.WissenUtils;
+import mod.maxbogomol.wizards_reborn.client.particle.Particles;
 import mod.maxbogomol.wizards_reborn.common.recipe.AlchemyMachineContext;
 import mod.maxbogomol.wizards_reborn.common.recipe.AlchemyMachineRecipe;
 import mod.maxbogomol.wizards_reborn.utils.PacketUtils;
@@ -205,6 +206,8 @@ public class AlchemyMachineTileEntity extends PipeBaseTileEntity implements Tick
                                     }
                                 }
 
+                                level.playSound(null, getBlockPos(), WizardsReborn.STEAM_BURST_SOUND.get(), SoundSource.BLOCKS, 0.1f, 1.0f);
+
                                 update = true;
                             }
                         }
@@ -216,6 +219,22 @@ public class AlchemyMachineTileEntity extends PipeBaseTileEntity implements Tick
                 PacketUtils.SUpdateTileEntityPacket(this);
                 if (level.getBlockEntity(getBlockPos().above()) instanceof AlchemyBoilerTileEntity boiler) {
                     PacketUtils.SUpdateTileEntityPacket(boiler);
+                }
+            }
+        }
+
+        if (level.isClientSide()) {
+            if (level.getBlockEntity(getBlockPos().above()) instanceof AlchemyBoilerTileEntity boiler) {
+                if (wissenIsCraft > 0 || steamIsCraft > 0) {
+                    if (random.nextFloat() < 0.6F) {
+                        Particles.create(WizardsReborn.STEAM_PARTICLE)
+                                .addVelocity(((random.nextDouble() - 0.5D) / 40), (random.nextDouble() / 20) + 0.005, ((random.nextDouble() - 0.5D) / 40))
+                                .setAlpha(0.4f, 0).setScale(0.1f, 0.5f)
+                                .setColor(1f, 1f, 1f)
+                                .setLifetime(30)
+                                .setSpin((0.1f * (float) ((random.nextDouble() - 0.5D) * 2)))
+                                .spawn(level, getBlockPos().getX() + 0.5F, getBlockPos().getY() + 2F, getBlockPos().getZ() + 0.5F);
+                    }
                 }
             }
         }

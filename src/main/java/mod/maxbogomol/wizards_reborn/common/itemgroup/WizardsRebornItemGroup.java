@@ -79,6 +79,7 @@ public class WizardsRebornItemGroup {
             event.accept(WizardsReborn.ARCANE_WOOD_MORTAR);
             event.accept(WizardsReborn.ARCANE_WOOD_LEAVES_ITEM);
             event.accept(WizardsReborn.ARCANE_WOOD_SAPLING_ITEM);
+            event.accept(WizardsReborn.ARCANE_WOOD_BOW);
 
             event.accept(WizardsReborn.WISESTONE_ITEM);
             event.accept(WizardsReborn.WISESTONE_STAIRS_ITEM);

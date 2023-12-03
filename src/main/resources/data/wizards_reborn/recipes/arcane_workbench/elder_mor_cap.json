@@ -1,0 +1,24 @@
+{
+  "type": "wizards_reborn:arcane_workbench",
+  "pattern": [
+    "BBB",
+    "B#B",
+    "_S_",
+    "____"
+  ],
+  "key": {
+    "#": {
+      "item": "minecraft:leather_helmet"
+    },
+    "B": {
+      "item": "wizards_reborn:elder_mor_block"
+    },
+    "S": {
+      "item": "minecraft:mushroom_stem"
+    }
+  },
+  "output": {
+    "item": "wizards_reborn:elder_mor_cap"
+  },
+  "wissen": 100
+}

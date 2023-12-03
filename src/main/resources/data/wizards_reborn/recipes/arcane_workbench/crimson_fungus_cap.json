@@ -1,0 +1,24 @@
+{
+  "type": "wizards_reborn:arcane_workbench",
+  "pattern": [
+    "BBB",
+    "B#B",
+    "_S_",
+    "____"
+  ],
+  "key": {
+    "#": {
+      "item": "minecraft:leather_helmet"
+    },
+    "B": {
+      "item": "minecraft:nether_wart_block"
+    },
+    "S": {
+      "item": "minecraft:crimson_stem"
+    }
+  },
+  "output": {
+    "item": "wizards_reborn:crimson_fungus_cap"
+  },
+  "wissen": 100
+}

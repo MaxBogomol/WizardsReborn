@@ -160,7 +160,7 @@ public class ArcanemiconGui extends Screen {
             }
 
             if (currentHistory < historyEntries.size()) {
-                int x = 169 + 7, y = 151;
+                int x = 169 + 7, y = 155;
                 if (mouseX >= guiLeft + x && mouseY >= guiTop + y && mouseX <= guiLeft + x + 19 && mouseY <= guiTop + y + 12) {
                     currentHistory = currentHistory + 1;
                     currentChapter = historyEntries.get(currentHistory - 1).chapter;
