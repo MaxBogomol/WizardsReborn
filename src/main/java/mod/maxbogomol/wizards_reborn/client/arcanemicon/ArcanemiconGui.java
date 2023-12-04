@@ -27,12 +27,13 @@ public class ArcanemiconGui extends Screen {
     public ItemStack currentItem;
 
     public static List<ChapterHistoryEntry> historyEntries = new ArrayList<>();
-    public static int currentHistory = 0;
+    public static int currentHistory = 1;
 
     public ArcanemiconGui() {
         super(Component.translatable("gui.wizards_reborn.arcanemicon.title"));
         if (currentChapter == null) {
             currentChapter = ArcanemiconChapters.ARCANE_NATURE_INDEX;
+            historyEntries.add(new ChapterHistoryEntry(currentChapter, 0));
         }
         for (Category category : ArcanemiconChapters.categories) {
             category.reset();

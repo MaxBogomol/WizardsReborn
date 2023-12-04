@@ -168,6 +168,7 @@ public class WizardsRebornItemGroup {
             event.accept(CrystalItem.creativeTabRandomStats(WizardsReborn.PURE_VOID_CRYSTAL.get()));
 
             event.accept(WizardsReborn.ARCANE_PEDESTAL_ITEM);
+            event.accept(WizardsReborn.HOVERING_TOME_STAND_ITEM);
             event.accept(WizardsReborn.WISSEN_ALTAR_ITEM);
             event.accept(WizardsReborn.WISSEN_TRANSLATOR_ITEM);
             event.accept(WizardsReborn.WISSEN_CRYSTALLIZER_ITEM);
@@ -176,6 +177,7 @@ public class WizardsRebornItemGroup {
             event.accept(WizardsReborn.JEWELER_TABLE_ITEM);
 
             event.accept(WizardsReborn.WISESTONE_PEDESTAL_ITEM);
+            event.accept(WizardsReborn.WISESTONE_HOVERING_TOME_STAND_ITEM);
             event.accept(WizardsReborn.FLUID_PIPE_ITEM);
             event.accept(WizardsReborn.FLUID_EXTRACTOR_ITEM);
             event.accept(WizardsReborn.STEAM_PIPE_ITEM);

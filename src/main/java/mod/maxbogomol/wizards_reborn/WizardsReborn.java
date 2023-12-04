@@ -318,6 +318,7 @@ public class WizardsReborn {
     public static final RegistryObject<Block> PURE_VOID_CRYSTAL_BLOCK = BLOCKS.register("pure_void_crystal", () -> new CrystalBlock(VOID_CRYSTAL_TYPE, PURE_POLISHING_TYPE, BlockBehaviour.Properties.copy(Blocks.AMETHYST_CLUSTER)));
 
     public static final RegistryObject<Block> ARCANE_PEDESTAL = BLOCKS.register("arcane_pedestal", () -> new ArcanePedestalBlock(BlockBehaviour.Properties.copy(Blocks.OAK_PLANKS)));
+    public static final RegistryObject<Block> HOVERING_TOME_STAND = BLOCKS.register("hovering_tome_stand", () -> new HoveringTomeStandBlock(BlockBehaviour.Properties.copy(Blocks.OAK_PLANKS)));
     public static final RegistryObject<Block> WISSEN_ALTAR = BLOCKS.register("wissen_altar", () -> new WissenAltarBlock(BlockBehaviour.Properties.copy(Blocks.OAK_PLANKS)));
     public static final RegistryObject<Block> WISSEN_TRANSLATOR = BLOCKS.register("wissen_translator", () -> new WissenTranslatorBlock(BlockBehaviour.Properties.copy(Blocks.OAK_PLANKS)));
     public static final RegistryObject<Block> WISSEN_CRYSTALLIZER = BLOCKS.register("wissen_crystallizer", () -> new WissenCrystallizerBlock(BlockBehaviour.Properties.copy(Blocks.OAK_PLANKS)));
@@ -326,6 +327,7 @@ public class WizardsReborn {
     public static final RegistryObject<Block> JEWELER_TABLE = BLOCKS.register("jeweler_table", () -> new JewelerTableBlock(BlockBehaviour.Properties.copy(Blocks.OAK_PLANKS)));
 
     public static final RegistryObject<Block> WISESTONE_PEDESTAL = BLOCKS.register("wisestone_pedestal", () -> new ArcanePedestalBlock(BlockBehaviour.Properties.copy(Blocks.POLISHED_DEEPSLATE)));
+    public static final RegistryObject<Block> WISESTONE_HOVERING_TOME_STAND = BLOCKS.register("wisestone_hovering_tome_stand", () -> new HoveringTomeStandBlock(BlockBehaviour.Properties.copy(Blocks.POLISHED_DEEPSLATE)));
     public static final RegistryObject<Block> FLUID_PIPE = BLOCKS.register("fluid_pipe", () -> new FluidPipeBlock(BlockBehaviour.Properties.copy(Blocks.POLISHED_DEEPSLATE)));
     public static final RegistryObject<Block> FLUID_EXTRACTOR = BLOCKS.register("fluid_extractor", () -> new FluidExtractorBlock(BlockBehaviour.Properties.copy(Blocks.POLISHED_DEEPSLATE)));
     public static final RegistryObject<Block> STEAM_PIPE = BLOCKS.register("steam_pipe", () -> new SteamPipeBlock(BlockBehaviour.Properties.copy(Blocks.POLISHED_DEEPSLATE)));
@@ -502,6 +504,7 @@ public class WizardsReborn {
     public static final RegistryObject<Item> PURE_VOID_CRYSTAL = ITEMS.register("pure_void_crystal", () -> new CrystalItem(PURE_VOID_CRYSTAL_BLOCK.get(), new Item.Properties().stacksTo(1)));
 
     public static final RegistryObject<Item> ARCANE_PEDESTAL_ITEM = ITEMS.register("arcane_pedestal", () -> new BlockItem(ARCANE_PEDESTAL.get(), new Item.Properties()));
+    public static final RegistryObject<Item> HOVERING_TOME_STAND_ITEM = ITEMS.register("hovering_tome_stand", () -> new BlockItem(HOVERING_TOME_STAND.get(), new Item.Properties()));
     public static final RegistryObject<Item> WISSEN_ALTAR_ITEM = ITEMS.register("wissen_altar", () -> new BlockItem(WISSEN_ALTAR.get(), new Item.Properties()));
     public static final RegistryObject<Item> WISSEN_TRANSLATOR_ITEM = ITEMS.register("wissen_translator", () -> new BlockItem(WISSEN_TRANSLATOR.get(), new Item.Properties()));
     public static final RegistryObject<Item> WISSEN_CRYSTALLIZER_ITEM = ITEMS.register("wissen_crystallizer", () -> new BlockItem(WISSEN_CRYSTALLIZER.get(), new Item.Properties()));
@@ -510,6 +513,7 @@ public class WizardsReborn {
     public static final RegistryObject<Item> JEWELER_TABLE_ITEM = ITEMS.register("jeweler_table", () -> new BlockItem(JEWELER_TABLE.get(), new Item.Properties()));
 
     public static final RegistryObject<Item> WISESTONE_PEDESTAL_ITEM = ITEMS.register("wisestone_pedestal", () -> new BlockItem(WISESTONE_PEDESTAL.get(), new Item.Properties()));
+    public static final RegistryObject<Item> WISESTONE_HOVERING_TOME_STAND_ITEM = ITEMS.register("wisestone_hovering_tome_stand", () -> new BlockItem(WISESTONE_HOVERING_TOME_STAND.get(), new Item.Properties()));
     public static final RegistryObject<Item> FLUID_PIPE_ITEM = ITEMS.register("fluid_pipe", () -> new BlockItem(FLUID_PIPE.get(), new Item.Properties()));
     public static final RegistryObject<Item> FLUID_EXTRACTOR_ITEM = ITEMS.register("fluid_extractor", () -> new BlockItem(FLUID_EXTRACTOR.get(), new Item.Properties()));
     public static final RegistryObject<Item> STEAM_PIPE_ITEM = ITEMS.register("steam_pipe", () -> new BlockItem(STEAM_PIPE.get(), new Item.Properties()));
@@ -590,6 +594,7 @@ public class WizardsReborn {
             ).build(null));
 
     public static RegistryObject<BlockEntityType<ArcanePedestalTileEntity>> ARCANE_PEDESTAL_TILE_ENTITY = TILE_ENTITIES.register("arcane_pedestal", () -> BlockEntityType.Builder.of(ArcanePedestalTileEntity::new, ARCANE_PEDESTAL.get(), WISESTONE_PEDESTAL.get()).build(null));
+    public static RegistryObject<BlockEntityType<HoveringTomeStandTileEntity>> HOVERING_TOME_STAND_TILE_ENTITY = TILE_ENTITIES.register("hovering_tome_stand", () -> BlockEntityType.Builder.of(HoveringTomeStandTileEntity::new, HOVERING_TOME_STAND.get(), WISESTONE_HOVERING_TOME_STAND.get()).build(null));
     public static RegistryObject<BlockEntityType<WissenAltarTileEntity>> WISSEN_ALTAR_TILE_ENTITY = TILE_ENTITIES.register("wissen_altar", () -> BlockEntityType.Builder.of(WissenAltarTileEntity::new, WISSEN_ALTAR.get()).build(null));
     public static RegistryObject<BlockEntityType<WissenTranslatorTileEntity>> WISSEN_TRANSLATOR_TILE_ENTITY = TILE_ENTITIES.register("wissen_translator", () -> BlockEntityType.Builder.of(WissenTranslatorTileEntity::new, WISSEN_TRANSLATOR.get()).build(null));
     public static RegistryObject<BlockEntityType<WissenCrystallizerTileEntity>> WISSEN_CRYSTALLIZER_TILE_ENTITY = TILE_ENTITIES.register("wissen_crystallizer", () -> BlockEntityType.Builder.of(WissenCrystallizerTileEntity::new, WISSEN_CRYSTALLIZER.get()).build(null));
