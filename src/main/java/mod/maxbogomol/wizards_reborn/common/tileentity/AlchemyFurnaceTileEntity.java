@@ -442,7 +442,7 @@ public class AlchemyFurnaceTileEntity extends BlockEntity implements TickableBlo
     }
 
     public boolean isLit() {
-        return cookTime > 0 || burnTime > 0 || cookMaxTime > 0 || burnMaxTime > 0;
+        return cookTime > 0 || burnTime > 0 || burnMaxTime > 0;
     }
 
     public int getMaxCapacity() {
