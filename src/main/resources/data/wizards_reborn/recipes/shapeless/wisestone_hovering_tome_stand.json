@@ -1,0 +1,14 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "wizards_reborn:wisestone_pedestal"
+    },
+    {
+      "item": "wizards_reborn:arcanemicon"
+    }
+  ],
+  "result": {
+    "item": "wizards_reborn:wisestone_hovering_tome_stand"
+  }
+}

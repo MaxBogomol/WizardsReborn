@@ -242,7 +242,7 @@ public class WizardsReborn {
     public static final RegistryObject<Block> ARCANE_WOOD_SAPLING = BLOCKS.register("arcane_wood_sapling", () -> new SaplingBlock(new ArcaneWoodTree(), BlockBehaviour.Properties.copy(Blocks.OAK_SAPLING)));
     public static final RegistryObject<Block> POTTED_ARCANE_WOOD_SAPLING = BLOCKS.register("potted_arcane_wood_sapling", () -> new FlowerPotBlock(ARCANE_WOOD_SAPLING.get(), BlockBehaviour.Properties.copy(Blocks.FLOWER_POT).instabreak().noOcclusion()));
 
-    public static final RegistryObject<Block> WISESTONE = BLOCKS.register("wisestone", () -> new RotatedPillarBlock(BlockBehaviour.Properties.copy(Blocks.DEEPSLATE)));
+    public static final RegistryObject<Block> WISESTONE = BLOCKS.register("wisestone", () -> new Block(BlockBehaviour.Properties.copy(Blocks.DEEPSLATE)));
     public static final RegistryObject<Block> WISESTONE_STAIRS = BLOCKS.register("wisestone_stairs", () -> new StairBlock(() -> WISESTONE.get().defaultBlockState(), BlockBehaviour.Properties.copy(Blocks.POLISHED_DEEPSLATE)));
     public static final RegistryObject<Block> WISESTONE_SLAB = BLOCKS.register("wisestone_slab", () -> new SlabBlock(BlockBehaviour.Properties.copy(Blocks.POLISHED_DEEPSLATE)));
     public static final RegistryObject<Block> WISESTONE_WALL = BLOCKS.register("wisestone_wall", () -> new WallBlock(BlockBehaviour.Properties.copy(Blocks.POLISHED_DEEPSLATE)));
