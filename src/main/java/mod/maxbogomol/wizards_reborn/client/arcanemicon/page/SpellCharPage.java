@@ -39,7 +39,9 @@ public class SpellCharPage extends Page {
                 if (mouseX >= x + 55 && mouseY >= y + 131 && mouseX <= x + 55 + 18 && mouseY <= y + 131 + 18) {
                     if (spell.getResearch() != null) {
                         ArcanemiconChapters.RESEARCH_MAIN.lastChapter = book.currentChapter;
-                        book.currentChapter = ArcanemiconChapters.RESEARCH;
+                        ArcanemiconGui.currentChapter = ArcanemiconChapters.RESEARCH;
+                        ArcanemiconGui.currentHistory = 1;
+                        ArcanemiconGui.historyEntries.clear();
                         ArcanemiconChapters.RESEARCH_MAIN.createNap(spell);
                         Minecraft.getInstance().player.playNotifySound(SoundEvents.BOOK_PAGE_TURN, SoundSource.NEUTRAL, 1.0f, 1.0f);
                         return true;

@@ -43,50 +43,22 @@ public class ArcaneWoodTrunkPlacer extends TrunkPlacer {
 
         int numBranches = 0;
         int lastBranch = 0;
-        double branchChance = 1;
+        double branchChance = 0.85;
 
         for (int i = 0; i < foliageHeight; ++i) {
             if (i == foliageHeight - 2) {
-                branchChance = 0.9;
+                branchChance = 0.25;
             }
-            boolean northB = random.nextFloat() >= branchChance;
-            boolean southB = random.nextFloat() >= branchChance;
-            boolean eastB = random.nextFloat() >= branchChance;
-            boolean westB = random.nextFloat() >= branchChance;
-            branchChance = 0.45;
+            boolean northB = random.nextFloat() <= branchChance;
+            boolean southB = random.nextFloat() <= branchChance;
+            boolean eastB = random.nextFloat() <= branchChance;
+            boolean westB = random.nextFloat() <= branchChance;
+            branchChance = 0.15;
 
             int j2 = y + i;
             BlockPos blockpos1 = new BlockPos(x, j2, z);
             if (TreeFeature.isAirOrLeaves(world, blockpos1)) {
                 placeLog(world, consumer, random, blockpos1, baseTreeFeatureConfig);
-            }
-
-            if (i > foliageHeight - 5 ) {
-                setBlock(world, pos.above(i).north(), baseTreeFeatureConfig.foliageProvider.getState(random, pos.above(i).north()), consumer);
-                setBlock(world, pos.above(i).south(), baseTreeFeatureConfig.foliageProvider.getState(random, pos.above(i).south()), consumer);
-                setBlock(world, pos.above(i).west(), baseTreeFeatureConfig.foliageProvider.getState(random, pos.above(i).west()), consumer);
-                setBlock(world, pos.above(i).east(), baseTreeFeatureConfig.foliageProvider.getState(random, pos.above(i).east()), consumer);
-
-                if (random.nextFloat() < 0.5f) {
-                    setBlock(world, pos.above(i).north(2), baseTreeFeatureConfig.foliageProvider.getState(random, pos.above(i).north()), consumer);
-                }
-
-                if (random.nextFloat() < 0.5f) {
-                    setBlock(world, pos.above(i).south(2), baseTreeFeatureConfig.foliageProvider.getState(random, pos.above(i).south()), consumer);
-                }
-
-                if (random.nextFloat() < 0.5f) {
-                    setBlock(world, pos.above(i).west(2), baseTreeFeatureConfig.foliageProvider.getState(random, pos.above(i).west()), consumer);
-                }
-
-                if (random.nextFloat() < 0.5f) {
-                    setBlock(world, pos.above(i).east(2), baseTreeFeatureConfig.foliageProvider.getState(random, pos.above(i).east()), consumer);
-                }
-            }
-
-            if (i == foliageHeight - 1) {
-                setBlock(world, pos.above(i + 1), baseTreeFeatureConfig.foliageProvider.getState(random, pos.above(i + 1)), consumer);
-                setBlock(world, pos.above(i + 2), baseTreeFeatureConfig.foliageProvider.getState(random, pos.above(i + 2)), consumer);
             }
 
             if ((i > 1 && i > lastBranch) || (i == foliageHeight - 2)) {
@@ -95,29 +67,53 @@ public class ArcaneWoodTrunkPlacer extends TrunkPlacer {
                     lastBranch = i;
                     numBranches++;
                     northB = false;
-                } else if (southB) {
+                }
+                if (southB) {
                     addBranch(world, pos, i, Direction.SOUTH, random, baseTreeFeatureConfig, consumer);
                     lastBranch = i;
                     numBranches++;
                     southB = false;
-                } else if (eastB) {
+                }
+                if (eastB) {
                     addBranch(world, pos, i, Direction.EAST, random, baseTreeFeatureConfig, consumer);
                     lastBranch = i;
                     numBranches++;
                     eastB = false;
-                } else if (westB) {
+                }
+                if (westB) {
                     addBranch(world, pos, i, Direction.WEST, random, baseTreeFeatureConfig, consumer);
                     lastBranch = i;
                     numBranches++;
                     westB = false;
-                } else if (numBranches == 0) {
-                    addBranch(world, pos, i, Direction.NORTH, random, baseTreeFeatureConfig, consumer);
-                    lastBranch = i;
-                    numBranches++;
-
-                    addBranch(world, pos, i, Direction.SOUTH, random, baseTreeFeatureConfig, consumer);
-                    numBranches++;
                 }
+            }
+
+            if (i > foliageHeight - 5 ) {
+                addBlock(world, pos.above(i).north(), baseTreeFeatureConfig.foliageProvider.getState(random, pos.above(i).north()), consumer);
+                addBlock(world, pos.above(i).south(), baseTreeFeatureConfig.foliageProvider.getState(random, pos.above(i).south()), consumer);
+                addBlock(world, pos.above(i).west(), baseTreeFeatureConfig.foliageProvider.getState(random, pos.above(i).west()), consumer);
+                addBlock(world, pos.above(i).east(), baseTreeFeatureConfig.foliageProvider.getState(random, pos.above(i).east()), consumer);
+
+                if (random.nextFloat() < 0.5f) {
+                    addBlock(world, pos.above(i).north(2), baseTreeFeatureConfig.foliageProvider.getState(random, pos.above(i).north()), consumer);
+                }
+
+                if (random.nextFloat() < 0.5f) {
+                    addBlock(world, pos.above(i).south(2), baseTreeFeatureConfig.foliageProvider.getState(random, pos.above(i).south()), consumer);
+                }
+
+                if (random.nextFloat() < 0.5f) {
+                    addBlock(world, pos.above(i).west(2), baseTreeFeatureConfig.foliageProvider.getState(random, pos.above(i).west()), consumer);
+                }
+
+                if (random.nextFloat() < 0.5f) {
+                    addBlock(world, pos.above(i).east(2), baseTreeFeatureConfig.foliageProvider.getState(random, pos.above(i).east()), consumer);
+                }
+            }
+
+            if (i == foliageHeight - 1) {
+                addBlock(world, pos.above(i + 1), baseTreeFeatureConfig.foliageProvider.getState(random, pos.above(i + 1)), consumer);
+                addBlock(world, pos.above(i + 2), baseTreeFeatureConfig.foliageProvider.getState(random, pos.above(i + 2)), consumer);
             }
         }
 
@@ -158,7 +154,6 @@ public class ArcaneWoodTrunkPlacer extends TrunkPlacer {
 
         addLineLeaves(world, pos.relative(d, 5).above(1), d, 3, random, baseTreeFeatureConfig, 0.1f, consumer);
         addLineLeaves(world, pos.relative(d, 5).above(2), d, 3, random, baseTreeFeatureConfig, 0.1f, consumer);
-
     }
 
     public void addLineLeaves(LevelSimulatedReader world, BlockPos pos, Direction d, int length, RandomSource rand, TreeConfiguration baseTreeFeatureConfig, BiConsumer<BlockPos, BlockState> consumer) {

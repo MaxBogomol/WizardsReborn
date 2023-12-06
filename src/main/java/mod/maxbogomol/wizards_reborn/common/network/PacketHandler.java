@@ -38,6 +38,9 @@ public final class PacketHandler {
         HANDLER.registerMessage(id++, WissenAltarSendEffectPacket.class, WissenAltarSendEffectPacket::encode, WissenAltarSendEffectPacket::decode, WissenAltarSendEffectPacket::handle);
         HANDLER.registerMessage(id++, WissenCellSendEffectPacket.class, WissenCellSendEffectPacket::encode, WissenCellSendEffectPacket::decode, WissenCellSendEffectPacket::handle);
         HANDLER.registerMessage(id++, JewelerTableBurstEffectPacket.class, JewelerTableBurstEffectPacket::encode, JewelerTableBurstEffectPacket::decode, JewelerTableBurstEffectPacket::handle);
+        HANDLER.registerMessage(id++, AltarOfDroughtBurstEffectPacket.class, AltarOfDroughtBurstEffectPacket::encode, AltarOfDroughtBurstEffectPacket::decode, AltarOfDroughtBurstEffectPacket::handle);
+        HANDLER.registerMessage(id++, AltarOfDroughtSendEffectPacket.class, AltarOfDroughtSendEffectPacket::encode, AltarOfDroughtSendEffectPacket::decode, AltarOfDroughtSendEffectPacket::handle);
+        HANDLER.registerMessage(id++, AltarOfDroughtBreakEffectPacket.class, AltarOfDroughtBreakEffectPacket::encode, AltarOfDroughtBreakEffectPacket::decode, AltarOfDroughtBreakEffectPacket::handle);
 
         HANDLER.registerMessage(id++, WissenTranslatorBurstEffectPacket.class, WissenTranslatorBurstEffectPacket::encode, WissenTranslatorBurstEffectPacket::decode, WissenTranslatorBurstEffectPacket::handle);
         HANDLER.registerMessage(id++, WissenTranslatorSendEffectPacket.class, WissenTranslatorSendEffectPacket::encode, WissenTranslatorSendEffectPacket::decode, WissenTranslatorSendEffectPacket::handle);

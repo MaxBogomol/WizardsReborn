@@ -81,20 +81,19 @@ public class ArcaneWandItem extends Item implements IWissenItem {
 
     @Override
     public void inventoryTick(ItemStack stack, Level world, Entity entity, int slot, boolean isSelected) {
-        CompoundTag nbt = stack.getTag();
+        CompoundTag nbt = stack.getOrCreateTag();
 
-        if (!world.isClientSide) {
-            if (nbt == null) {
-                nbt = new CompoundTag();
-                nbt.putBoolean("crystal", false);
-                nbt.putString("spell", "");
-                nbt.putInt("cooldown", 0);
-                SimpleContainer item = getInventory(stack);
-                stack.setTag(nbt);
-            }
-
-            WissenItemUtils.existWissen(stack);
+        if (!nbt.contains("crystal")) {
+            nbt.putBoolean("crystal", false);
         }
+        if (!nbt.contains("spell")) {
+            nbt.putString("spell", "");
+        }
+        if (!nbt.contains("cooldown")) {
+            nbt.putInt("cooldown", 0);
+        }
+
+        WissenItemUtils.existWissen(stack);
 
         if (nbt.contains("cooldown")) {
             if (nbt.getInt("cooldown") > 0) {
@@ -301,7 +300,17 @@ public class ArcaneWandItem extends Item implements IWissenItem {
         if (render) {
             if (!player.isSpectator()) {
                 ArcaneWandItem wand = (ArcaneWandItem) stack.getItem();
-                CompoundTag nbt = stack.getTag();
+                CompoundTag nbt = stack.getOrCreateTag();
+                if (!nbt.contains("crystal")) {
+                    nbt.putBoolean("crystal", false);
+                }
+                if (!nbt.contains("spell")) {
+                    nbt.putString("spell", "");
+                }
+                if (!nbt.contains("cooldown")) {
+                    nbt.putInt("cooldown", 0);
+                }
+                WissenItemUtils.existWissen(stack);
                 Spell spell = null;
 
                 if (nbt != null) {

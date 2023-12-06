@@ -68,6 +68,7 @@ public class ResearchPage extends Page {
                         int index = getSelectedMonogramWithShift(x, y, mouseX, mouseY);
                         if (index >= 0) {
                             map.add(getSelectedMonogramWithShift(x, y, mouseX, mouseY), new MonogramMapEntry(currentMonogram));
+                            Minecraft.getInstance().player.playNotifySound(SoundEvents.ITEM_PICKUP, SoundSource.NEUTRAL, 1.0f, 1.0f);
                             currentMonogram = null;
                             return true;
                         }
@@ -77,6 +78,7 @@ public class ResearchPage extends Page {
                             if (!map.get(getSelectedMonogram(x, y, mouseX, mouseY)).isStart()) {
                                 currentMonogram = map.get(getSelectedMonogram(x, y, mouseX, mouseY)).getMonogram();
                                 map.remove(getSelectedMonogram(x, y, mouseX, mouseY));
+                                Minecraft.getInstance().player.playNotifySound(SoundEvents.ITEM_PICKUP, SoundSource.NEUTRAL, 1.0f, 1.2f);
                                 return true;
                             }
                         }
@@ -85,7 +87,7 @@ public class ResearchPage extends Page {
                     int actives = getAllActives();
                     if (actives >= mapSize) {
                         if (mouseX >= x + 95 && mouseY >= y + 132 && mouseX <= x + 95 + 18 && mouseY <= y + 132 + 18) {
-                            book.currentChapter = lastChapter;
+                            ArcanemiconGui.currentChapter = lastChapter;
                             PacketHandler.sendToServer(new UnlockSpellPacket(spell));
                             Minecraft.getInstance().player.playNotifySound(SoundEvents.EXPERIENCE_ORB_PICKUP, SoundSource.NEUTRAL, 1.0f, 1.0f);
                             Minecraft.getInstance().player.playNotifySound(SoundEvents.BOOK_PAGE_TURN, SoundSource.NEUTRAL, 1.0f, 1.0f);
@@ -96,6 +98,7 @@ public class ResearchPage extends Page {
             } else {
                 if (ArcanemiconChapters.RESEARCH_MAIN.currentMonogram != null) {
                     Monogram monogram = ArcanemiconChapters.RESEARCH_MAIN.currentMonogram;
+                    Minecraft.getInstance().player.playNotifySound(SoundEvents.ITEM_PICKUP, SoundSource.NEUTRAL, 1.0f, 1.0f);
                     ArcanemiconChapters.RESEARCH_MAIN.monograms.put(monogram, ArcanemiconChapters.RESEARCH_MAIN.monograms.get(monogram) + 1);
                     ArcanemiconChapters.RESEARCH_MAIN.currentMonogram = null;
                     return true;
@@ -112,6 +115,7 @@ public class ResearchPage extends Page {
                     if (mouseX >= x + X + 1 && mouseY >= y + 8 + (ii * 15) && mouseX <= x + X + 9 && mouseY <= y + 8 + (ii * 15) + 8) {
                         Monogram monogram = monogramsSet[i];
                         if (ArcanemiconChapters.RESEARCH_MAIN.monograms.get(monogram) > 0) {
+                            Minecraft.getInstance().player.playNotifySound(SoundEvents.ITEM_PICKUP, SoundSource.NEUTRAL, 1.0f, 1.2f);
                             ArcanemiconChapters.RESEARCH_MAIN.monograms.put(monogram, ArcanemiconChapters.RESEARCH_MAIN.monograms.get(monogram) - 1);
                             ArcanemiconChapters.RESEARCH_MAIN.currentMonogram = monogram;
                             return true;

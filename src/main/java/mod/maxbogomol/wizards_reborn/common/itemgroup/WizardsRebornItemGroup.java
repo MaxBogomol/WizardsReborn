@@ -175,6 +175,7 @@ public class WizardsRebornItemGroup {
             event.accept(WizardsReborn.ARCANE_WORKBENCH_ITEM);
             event.accept(WizardsReborn.WISSEN_CELL_ITEM);
             event.accept(WizardsReborn.JEWELER_TABLE_ITEM);
+            event.accept(WizardsReborn.ALTAR_OF_DROUGHT_ITEM);
 
             event.accept(WizardsReborn.WISESTONE_PEDESTAL_ITEM);
             event.accept(WizardsReborn.WISESTONE_HOVERING_TOME_STAND_ITEM);

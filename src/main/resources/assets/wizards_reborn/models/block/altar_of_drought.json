@@ -1,0 +1,34 @@
+{
+	"credit": "Made with Blockbench",
+	"parent": "minecraft:block/block",
+	"textures": {
+		"0": "wizards_reborn:block/altar_of_drought",
+		"particle": "wizards_reborn:block/arcane_wood_planks"
+	},
+	"elements": [
+		{
+			"from": [3, 0, 3],
+			"to": [13, 2, 13],
+			"faces": {
+				"north": {"uv": [0, 10, 10, 12], "texture": "#0"},
+				"east": {"uv": [0, 10, 10, 12], "texture": "#0"},
+				"south": {"uv": [0, 10, 10, 12], "texture": "#0"},
+				"west": {"uv": [0, 10, 10, 12], "texture": "#0"},
+				"up": {"uv": [0, 0, 10, 10], "texture": "#0"},
+				"down": {"uv": [0, 0, 10, 10], "texture": "#0"}
+			}
+		},
+		{
+			"from": [5, 2, 5],
+			"to": [11, 3, 11],
+			"faces": {
+				"north": {"uv": [10, 5, 16, 6], "texture": "#0"},
+				"east": {"uv": [10, 0, 11, 6], "rotation": 90, "texture": "#0"},
+				"south": {"uv": [10, 0, 16, 1], "texture": "#0"},
+				"west": {"uv": [15, 0, 16, 6], "rotation": 90, "texture": "#0"},
+				"up": {"uv": [10, 0, 16, 6], "texture": "#0"},
+				"down": {"uv": [10, 0, 16, 6], "texture": "#0"}
+			}
+		}
+	]
+}

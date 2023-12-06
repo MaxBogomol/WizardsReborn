@@ -883,18 +883,18 @@ public class ArcanemiconChapters {
                         new MonogramIndexEntry(SICCITAS_MONOGRAM, WizardsReborn.SICCITAS_MONOGRAM),
                         new MonogramIndexEntry(SOLSTITIUM_MONOGRAM, WizardsReborn.SOLSTITIUM_MONOGRAM),
                         new MonogramIndexEntry(FAMES_MONOGRAM, WizardsReborn.FAMES_MONOGRAM),
-                        new MonogramIndexEntry(RENAISSANCE_MONOGRAM, WizardsReborn.RENAISSANCE_MONOGRAM)
+                        new MonogramIndexEntry(RENAISSANCE_MONOGRAM, WizardsReborn.RENAISSANCE_MONOGRAM),
+                        new MonogramIndexEntry(BELLUM_MONOGRAM, WizardsReborn.BELLUM_MONOGRAM)
                 ),
                 new MonogramIndexPage(
-                        new MonogramIndexEntry(BELLUM_MONOGRAM, WizardsReborn.BELLUM_MONOGRAM),
                         new MonogramIndexEntry(LUX_MONOGRAM, WizardsReborn.LUX_MONOGRAM),
                         new MonogramIndexEntry(KARA_MONOGRAM, WizardsReborn.KARA_MONOGRAM),
                         new MonogramIndexEntry(DEGRADATIO_MONOGRAM, WizardsReborn.DEGRADATIO_MONOGRAM),
                         new MonogramIndexEntry(PRAEDICTIONEM_MONOGRAM, WizardsReborn.PRAEDICTIONEM_MONOGRAM),
-                        new MonogramIndexEntry(EVOLUTIONIS_MONOGRAM, WizardsReborn.EVOLUTIONIS_MONOGRAM)
+                        new MonogramIndexEntry(EVOLUTIONIS_MONOGRAM, WizardsReborn.EVOLUTIONIS_MONOGRAM),
+                        new MonogramIndexEntry(DARK_MONOGRAM, WizardsReborn.DARK_MONOGRAM)
                 ),
                 new MonogramIndexPage(
-                        new MonogramIndexEntry(DARK_MONOGRAM, WizardsReborn.DARK_MONOGRAM),
                         new MonogramIndexEntry(UNIVERSUM_MONOGRAM, WizardsReborn.UNIVERSUM_MONOGRAM)
                 )
         );
