@@ -6,10 +6,11 @@ import mod.maxbogomol.wizards_reborn.api.alchemy.SteamUtils;
 import mod.maxbogomol.wizards_reborn.client.particle.Particles;
 import mod.maxbogomol.wizards_reborn.common.network.PacketHandler;
 import mod.maxbogomol.wizards_reborn.common.network.SmokeEffectPacket;
-import mod.maxbogomol.wizards_reborn.common.network.WissenDustBurstEffectPacket;
+import mod.maxbogomol.wizards_reborn.common.recipe.CenserRecipe;
 import mod.maxbogomol.wizards_reborn.common.tileentity.ArcaneCenserTileEntity;
 import mod.maxbogomol.wizards_reborn.common.tileentity.TickableBlockEntity;
 import mod.maxbogomol.wizards_reborn.common.tileentity.TileSimpleInventory;
+import mod.maxbogomol.wizards_reborn.utils.ColorUtils;
 import mod.maxbogomol.wizards_reborn.utils.PacketUtils;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -18,7 +19,11 @@ import net.minecraft.util.Mth;
 import net.minecraft.world.Containers;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
+import net.minecraft.world.SimpleContainer;
+import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.alchemy.PotionUtils;
 import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
@@ -45,6 +50,7 @@ import org.jetbrains.annotations.NotNull;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
+import java.util.Optional;
 import java.util.Random;
 import java.util.stream.Stream;
 
@@ -100,21 +106,57 @@ public class ArcaneCenserBlock extends HorizontalDirectionalBlock implements Ent
 
     @Override
     public InteractionResult use(BlockState state, Level world, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hit) {
-        if (world.getBlockEntity(pos) instanceof ArcaneCenserTileEntity censer) {
-            if (censer.cooldown <= 0 && SteamUtils.canRemoveSteam(censer.steam, 250)) {
-                if (!world.isClientSide) {
-                    censer.cooldown = 100;
-                    censer.removeSteam(250);
-                    PacketUtils.SUpdateTileEntityPacket(censer);
+        ArcaneCenserTileEntity tile = (ArcaneCenserTileEntity) world.getBlockEntity(pos);
+        ItemStack stack = player.getItemInHand(hand).copy();
 
-                    Vec3 posSmoke = player.getEyePosition().add(player.getLookAngle().scale(0.75f));
-                    Vec3 vel = player.getEyePosition().add(player.getLookAngle().scale(40)).subtract(posSmoke).scale(1.0 / 20).normalize().scale(0.05f);
-                    PacketHandler.sendToTracking(world, player.getOnPos(), new SmokeEffectPacket((float) posSmoke.x, (float) posSmoke.y, (float) posSmoke.z, (float) vel.x, (float) vel.y, (float) vel.z, 1f, 1f, 1f));
-                    world.playSound(null, player.getOnPos(), WizardsReborn.STEAM_BURST_SOUND.get(), SoundSource.BLOCKS, 0.1f, 2.0f);
+        int invSize = tile.getInventorySize();
+
+        SimpleContainer inv = new SimpleContainer(1);
+        inv.setItem(0, stack);
+        Optional<CenserRecipe> recipe = world.getRecipeManager().getRecipeFor(WizardsReborn.CENSER_RECIPE.get(), inv, world);
+
+        if (!player.isShiftKeyDown()) {
+            if (recipe.isPresent()) {
+                if (invSize < 8) {
+                    int slot = invSize;
+                    if ((!stack.isEmpty()) && (tile.getItemHandler().getItem(slot).isEmpty())) {
+                        if (stack.getCount() > 1) {
+                            player.getItemInHand(hand).setCount(stack.getCount() - 1);
+                            stack.setCount(1);
+                            tile.getItemHandler().setItem(slot, stack);
+                            world.updateNeighbourForOutputSignal(pos, this);
+                            PacketUtils.SUpdateTileEntityPacket(tile);
+                            return InteractionResult.SUCCESS;
+                        } else {
+                            tile.getItemHandler().setItem(slot, stack);
+                            player.getInventory().removeItem(player.getItemInHand(hand));
+                            world.updateNeighbourForOutputSignal(pos, this);
+                            PacketUtils.SUpdateTileEntityPacket(tile);
+                            return InteractionResult.SUCCESS;
+                        }
+                    }
                 }
-                return InteractionResult.SUCCESS;
+            }
+        } else {
+            if (invSize > 0) {
+                int slot = invSize - 1;
+                if (!tile.getItemHandler().getItem(slot).isEmpty()) {
+                    player.getInventory().add(tile.getItemHandler().getItem(slot).copy());
+                    tile.getItemHandler().removeItemNoUpdate(slot);
+                    world.updateNeighbourForOutputSignal(pos, this);
+                    PacketUtils.SUpdateTileEntityPacket(tile);
+                    return InteractionResult.SUCCESS;
+                }
             }
         }
+
+        if (tile.cooldown <= 0 && SteamUtils.canRemoveSteam(tile.steam, 250) && player.getItemInHand(hand).isEmpty() && !player.isShiftKeyDown()) {
+            if (!world.isClientSide) {
+                tile.smoke(player);
+            }
+            return InteractionResult.SUCCESS;
+        }
+
         return InteractionResult.PASS;
     }
 

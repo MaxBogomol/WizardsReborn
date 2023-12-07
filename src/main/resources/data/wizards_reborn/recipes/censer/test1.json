@@ -1,0 +1,13 @@
+{
+  "type": "wizards_reborn:censer",
+  "ingredient": {
+    "item": "wizards_reborn:petals"
+  },
+  "effects": [
+    {
+      "effect": "minecraft:regeneration",
+      "duration": 100,
+      "amplifier": 0
+    }
+  ]
+}

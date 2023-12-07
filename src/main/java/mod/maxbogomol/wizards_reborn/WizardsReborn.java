@@ -653,6 +653,9 @@ public class WizardsReborn {
     public static final RegistryObject<AlchemyMachineRecipe.Serializer> ALCHEMY_MACHINE_SERIALIZER = RECIPE_SERIALIZERS.register("alchemy_machine", AlchemyMachineRecipe.Serializer::new);
     public static final RegistryObject<RecipeType<AlchemyMachineRecipe>> ALCHEMY_MACHINE_RECIPE = RECIPES.register("alchemy_machine", () -> RecipeType.simple(AlchemyMachineRecipe.TYPE_ID));
 
+    public static final RegistryObject<CenserRecipe.Serializer> CENSER_SERIALIZER = RECIPE_SERIALIZERS.register("censer", CenserRecipe.Serializer::new);
+    public static final RegistryObject<RecipeType<CenserRecipe>> CENSER_RECIPE = RECIPES.register("censer", () -> RecipeType.simple(CenserRecipe.TYPE_ID));
+
     //CONTAINERS
     public static final RegistryObject<MenuType<ArcaneWorkbenchContainer>> ARCANE_WORKBENCH_CONTAINER
             = CONTAINERS.register("arcane_workbench_container",
