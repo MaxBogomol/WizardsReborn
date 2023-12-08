@@ -232,6 +232,8 @@ public class WizardsRebornItemGroup {
             event.accept(WizardsReborn.INVENTOR_WIZARD_TROUSERS);
             event.accept(WizardsReborn.INVENTOR_WIZARD_BOOTS);
 
+            event.accept(WizardsReborn.ARCANE_WOOD_SMOKING_PIPE);
+
             event.accept(WizardsReborn.ARCANEMICON);
 
             event.accept(WizardsReborn.VIOLENCE_BANNER_PATTERN_ITEM);

@@ -13,10 +13,12 @@ import net.minecraft.core.Direction;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.Connection;
 import net.minecraft.network.protocol.game.ClientboundBlockEntityDataPacket;
+import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.SimpleContainer;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.alchemy.PotionUtils;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
@@ -24,6 +26,8 @@ import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.phys.Vec3;
 import org.jetbrains.annotations.NotNull;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 import java.util.Random;
 
@@ -89,33 +93,61 @@ public class ArcaneCenserTileEntity extends ExposedTileSimpleInventory implement
         cooldown = 100;
         removeSteam(250);
 
+        List<MobEffectInstance> effects = new ArrayList<>();
+
         SimpleContainer inv = new SimpleContainer(1);
-        inv.setItem(0, getItem(getInventorySize() - 1));
-        Optional<CenserRecipe>  recipe = level.getRecipeManager().getRecipeFor(WizardsReborn.CENSER_RECIPE.get(), inv, level);
+        for (int i = 0; i < getInventorySize(); i++) {
+            inv.setItem(0, getItem(i).copy());
+            Optional<CenserRecipe> recipe = level.getRecipeManager().getRecipeFor(WizardsReborn.CENSER_RECIPE.get(), inv, level);
+            if (recipe.isPresent()) {
+                for (MobEffectInstance effectInstance : recipe.get().getEffects()) {
+                    effects.add(new MobEffectInstance(effectInstance));
+                }
+            }
+        }
 
         float R = 1f;
         float G = 1f;
         float B = 1f;
 
-        if (recipe.isPresent()) {
-            removeItemNoUpdate(getInventorySize() - 1);
+        if (effects.size() > 0) {
+            for (int i = 0; i < getInventorySize(); i++) {
+                ItemStack item = getItem(i);
+                setItemBurnCenser(item, getItemBurnCenser(item) + 1);
+                setItem(i, item);
+                if (getItemBurnCenser(item) >= 3) {
+                    level.playSound(null, getBlockPos(), SoundEvents.BONE_MEAL_USE, SoundSource.BLOCKS, 1.0f, 1.0f);
+                }
+            }
 
-            for (MobEffectInstance effectInstance : recipe.get().getEffects()) {
+            List<ItemStack> stacks = new ArrayList<>();
+            for (int i = 0; i < 8; i++) {
+                if (!getItem(i).isEmpty() && getItemBurnCenser(getItem(i)) < 3) {
+                    stacks.add(getItem(i).copy());
+                }
+            }
+            for (int i = 0; i < 8; i++) {
+                removeItemNoUpdate(i);
+            }
+
+            for (int i = 0; i < stacks.size(); i++) {
+                setItem(i, stacks.get(i));
+            }
+
+            for (MobEffectInstance effectInstance : effects) {
                 player.addEffect(new MobEffectInstance(effectInstance));
             }
 
-            if (recipe.get().getEffects().size() > 0) {
-                int color = PotionUtils.getColor(recipe.get().getEffects());
-                R = ColorUtils.getRed(color) / 255F;
-                G = ColorUtils.getGreen(color) / 255F;
-                B = ColorUtils.getBlue(color) / 255F;
-            }
+            int color = PotionUtils.getColor(effects);
+            R = ColorUtils.getRed(color) / 255F;
+            G = ColorUtils.getGreen(color) / 255F;
+            B = ColorUtils.getBlue(color) / 255F;
         }
 
         Vec3 posSmoke = player.getEyePosition().add(player.getLookAngle().scale(0.75f));
         Vec3 vel = player.getEyePosition().add(player.getLookAngle().scale(40)).subtract(posSmoke).scale(1.0 / 20).normalize().scale(0.05f);
         PacketHandler.sendToTracking(level, player.getOnPos(), new SmokeEffectPacket((float) posSmoke.x, (float) posSmoke.y, (float) posSmoke.z, (float) vel.x, (float) vel.y, (float) vel.z, R, G, B));
-        level.playSound(null, player.getOnPos(), WizardsReborn.STEAM_BURST_SOUND.get(), SoundSource.BLOCKS, 0.1f, 2.0f);
+        level.playSound(null, player.getOnPos(), WizardsReborn.STEAM_BURST_SOUND.get(), SoundSource.PLAYERS, 0.1f, 2.0f);
 
         PacketUtils.SUpdateTileEntityPacket(this);
     }
@@ -239,5 +271,21 @@ public class ArcaneCenserTileEntity extends ExposedTileSimpleInventory implement
             default:
                 return 0F;
         }
+    }
+
+    public static void setItemBurnCenser(ItemStack itemStack, int burn) {
+        CompoundTag nbt = itemStack.getOrCreateTag();
+        nbt.putInt("burnCenser", burn);
+    }
+
+    public static int getItemBurnCenser(ItemStack itemStack) {
+        CompoundTag nbt = itemStack.getTag();
+        if (nbt != null) {
+            if (nbt.contains("burnCenser")) {
+                return nbt.getInt("burnCenser");
+            }
+        }
+
+        return 0;
     }
 }

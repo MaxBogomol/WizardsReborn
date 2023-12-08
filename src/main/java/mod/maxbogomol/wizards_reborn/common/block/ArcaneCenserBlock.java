@@ -141,16 +141,18 @@ public class ArcaneCenserBlock extends HorizontalDirectionalBlock implements Ent
             if (invSize > 0) {
                 int slot = invSize - 1;
                 if (!tile.getItemHandler().getItem(slot).isEmpty()) {
-                    player.getInventory().add(tile.getItemHandler().getItem(slot).copy());
-                    tile.getItemHandler().removeItemNoUpdate(slot);
-                    world.updateNeighbourForOutputSignal(pos, this);
-                    PacketUtils.SUpdateTileEntityPacket(tile);
-                    return InteractionResult.SUCCESS;
+                    if (ArcaneCenserTileEntity.getItemBurnCenser(tile.getItemHandler().getItem(slot)) <= 0) {
+                        player.getInventory().add(tile.getItemHandler().getItem(slot).copy());
+                        tile.getItemHandler().removeItemNoUpdate(slot);
+                        world.updateNeighbourForOutputSignal(pos, this);
+                        PacketUtils.SUpdateTileEntityPacket(tile);
+                        return InteractionResult.SUCCESS;
+                    }
                 }
             }
         }
 
-        if (tile.cooldown <= 0 && SteamUtils.canRemoveSteam(tile.steam, 250) && player.getItemInHand(hand).isEmpty() && !player.isShiftKeyDown()) {
+        if (tile.cooldown <= 0 && SteamUtils.canRemoveSteam(tile.steam, 250) && player.getItemInHand(InteractionHand.MAIN_HAND).isEmpty() && !player.isShiftKeyDown()) {
             if (!world.isClientSide) {
                 tile.smoke(player);
             }
