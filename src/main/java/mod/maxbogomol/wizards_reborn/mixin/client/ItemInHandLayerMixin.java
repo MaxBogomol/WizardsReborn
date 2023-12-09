@@ -1,22 +1,16 @@
 package mod.maxbogomol.wizards_reborn.mixin.client;
 
 import com.mojang.blaze3d.vertex.PoseStack;
-import com.mojang.math.Axis;
 import mod.maxbogomol.wizards_reborn.api.spell.Spell;
 import mod.maxbogomol.wizards_reborn.api.spell.Spells;
 import mod.maxbogomol.wizards_reborn.client.config.ClientConfig;
+import mod.maxbogomol.wizards_reborn.common.item.ICustomAnimationItem;
 import mod.maxbogomol.wizards_reborn.common.item.equipment.ArcaneWandItem;
-import net.minecraft.client.Minecraft;
-import net.minecraft.client.model.ArmedModel;
-import net.minecraft.client.model.EntityModel;
-import net.minecraft.client.model.HumanoidModel;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.entity.layers.ItemInHandLayer;
 import net.minecraft.nbt.CompoundTag;
-import net.minecraft.util.Mth;
 import net.minecraft.world.entity.HumanoidArm;
 import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemDisplayContext;
 import net.minecraft.world.item.ItemStack;
 import org.spongepowered.asm.mixin.Mixin;
@@ -42,6 +36,9 @@ public abstract class ItemInHandLayerMixin {
                         }
                     }
                 }
+            }
+            if (pItemStack.getItem() instanceof ICustomAnimationItem item) {
+                item.renderArmWithItem(pLivingEntity, pItemStack, pDisplayContext, pArm, pPoseStack, pBuffer, pPackedLight);
             }
         }
     }

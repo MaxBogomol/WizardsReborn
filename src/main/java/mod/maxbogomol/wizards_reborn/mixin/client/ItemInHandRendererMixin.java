@@ -4,6 +4,7 @@ import com.mojang.blaze3d.vertex.PoseStack;
 import mod.maxbogomol.wizards_reborn.api.spell.Spell;
 import mod.maxbogomol.wizards_reborn.api.spell.Spells;
 import mod.maxbogomol.wizards_reborn.client.config.ClientConfig;
+import mod.maxbogomol.wizards_reborn.common.item.ICustomAnimationItem;
 import mod.maxbogomol.wizards_reborn.common.item.equipment.ArcaneWandItem;
 import net.minecraft.client.player.AbstractClientPlayer;
 import net.minecraft.client.renderer.ItemInHandRenderer;
@@ -34,6 +35,9 @@ public abstract class ItemInHandRendererMixin {
                         }
                     }
                 }
+            }
+            if (pStack.getItem() instanceof ICustomAnimationItem item) {
+                item.renderArmWithItem(pPlayer, pPartialTicks, pPitch, pHand, pSwingProgress, pStack, pEquippedProgress, pPoseStack, pBuffer, pCombinedLight);
             }
         }
     }

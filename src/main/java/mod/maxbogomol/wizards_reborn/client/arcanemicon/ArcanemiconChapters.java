@@ -249,6 +249,11 @@ public class ArcanemiconChapters {
                 "wizards_reborn.arcanemicon.chapter.scythes",
                 new TitledBlockPage("wizards_reborn.arcanemicon.page.scythes",
                         new BlockEntry(new ItemStack(WizardsReborn.ARCANE_PEDESTAL_ITEM.get()), new ItemStack(WizardsReborn.ARCANE_GOLD_SCYTHE.get()))
+                ),
+                new CraftingTablePage(new ItemStack(WizardsReborn.ARCANE_GOLD_SCYTHE.get()),
+                        new ItemStack(WizardsReborn.ARCANE_GOLD_INGOT.get()), new ItemStack(WizardsReborn.ARCANE_GOLD_INGOT.get()), new ItemStack(WizardsReborn.ARCANE_WOOD_BRANCH.get()),
+                        ItemStack.EMPTY, new ItemStack(WizardsReborn.ARCANE_WOOD_BRANCH.get()), new ItemStack(WizardsReborn.ARCANE_GOLD_INGOT.get()),
+                        new ItemStack(WizardsReborn.ARCANE_WOOD_BRANCH.get()), ItemStack.EMPTY, ItemStack.EMPTY
                 )
         );
 
@@ -1118,7 +1123,7 @@ public class ArcanemiconChapters {
                         new BlockEntry(new ItemStack(WizardsReborn.ARCANE_PEDESTAL_ITEM.get()), new ItemStack(WizardsReborn.WISESTONE_PEDESTAL_ITEM.get()))
                 ),
                 new ArcaneWorkbenchPage(new ItemStack(WizardsReborn.WISESTONE_PEDESTAL_ITEM.get()),
-                        new ItemStack(WizardsReborn.POLISHED_WISESTONE_SLAB_ITEM.get()), new ItemStack(WizardsReborn.ARCANUM.get()), new ItemStack(WizardsReborn.POLISHED_WISESTONE_SLAB_ITEM.get()),
+                        new ItemStack(WizardsReborn.POLISHED_WISESTONE_SLAB_ITEM.get()), new ItemStack(WizardsReborn.POLISHED_WISESTONE_ITEM.get()), new ItemStack(WizardsReborn.POLISHED_WISESTONE_SLAB_ITEM.get()),
                         ItemStack.EMPTY, new ItemStack(WizardsReborn.POLISHED_WISESTONE_ITEM.get()), ItemStack.EMPTY,
                         new ItemStack(WizardsReborn.POLISHED_WISESTONE_SLAB_ITEM.get()), new ItemStack(WizardsReborn.POLISHED_WISESTONE_ITEM.get()), new ItemStack(WizardsReborn.POLISHED_WISESTONE_SLAB_ITEM.get()),
                         new ItemStack(WizardsReborn.ARCANE_GOLD_INGOT.get())

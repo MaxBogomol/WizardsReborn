@@ -3,6 +3,7 @@ package mod.maxbogomol.wizards_reborn.mixin.client;
 import mod.maxbogomol.wizards_reborn.api.spell.Spell;
 import mod.maxbogomol.wizards_reborn.api.spell.Spells;
 import mod.maxbogomol.wizards_reborn.client.config.ClientConfig;
+import mod.maxbogomol.wizards_reborn.common.item.ICustomAnimationItem;
 import mod.maxbogomol.wizards_reborn.common.item.equipment.ArcaneWandItem;
 import net.minecraft.client.model.HumanoidModel;
 import net.minecraft.nbt.CompoundTag;
@@ -22,9 +23,9 @@ public abstract class HumanoidModelMixin<T extends LivingEntity>  {
     public void setupAnim(T pEntity, float pLimbSwing, float pLimbSwingAmount, float pAgeInTicks, float pNetHeadYaw, float pHeadPitch, CallbackInfo ci) {
         HumanoidModel self = (HumanoidModel) ((Object) this);
         if (pEntity instanceof Player player) {
-            if (ClientConfig.SPELLS_ANIMATIONS.get()) {
-                if (player.getItemInHand(player.getUsedItemHand()).getItem() instanceof ArcaneWandItem) {
-                    if (pEntity.isUsingItem() && pEntity.getUseItemRemainingTicks() > 0) {
+            if (pEntity.isUsingItem() && pEntity.getUseItemRemainingTicks() > 0) {
+                if (ClientConfig.SPELLS_ANIMATIONS.get()) {
+                    if (player.getItemInHand(player.getUsedItemHand()).getItem() instanceof ArcaneWandItem) {
                         ItemStack stack = player.getItemInHand(player.getUsedItemHand());
                         CompoundTag nbt = stack.getTag();
                         if (nbt.getBoolean("crystal")) {
@@ -41,6 +42,14 @@ public abstract class HumanoidModelMixin<T extends LivingEntity>  {
                             }
                         }
                     }
+                }
+                if (player.getItemInHand(player.getUsedItemHand()).getItem() instanceof ICustomAnimationItem item) {
+                    if (player.getUsedItemHand() == InteractionHand.MAIN_HAND) {
+                        item.setupAnimRight(self, pEntity, pLimbSwing, pLimbSwingAmount, pAgeInTicks, pNetHeadYaw, pHeadPitch);
+                    } else {
+                        item.setupAnimLeft(self, pEntity, pLimbSwing, pLimbSwingAmount, pAgeInTicks, pNetHeadYaw, pHeadPitch);
+                    }
+                    item.setupAnim(self, pEntity, pLimbSwing, pLimbSwingAmount, pAgeInTicks, pNetHeadYaw, pHeadPitch);
                 }
             }
         }
