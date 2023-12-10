@@ -89,7 +89,7 @@ public class SmokingPipeItem extends Item implements ICustomAnimationItem {
                         Optional<CenserRecipe> recipe = world.getRecipeManager().getRecipeFor(WizardsReborn.CENSER_RECIPE.get(), inv, world);
                         if (recipe.isPresent()) {
                             for (MobEffectInstance effectInstance : recipe.get().getEffects()) {
-                                effects.add(new MobEffectInstance(effectInstance.getEffect(), effectInstance.getDuration() / 4, effectInstance.getAmplifier()));
+                                effects.add(new MobEffectInstance(effectInstance.getEffect(), (int) Math.ceil(effectInstance.getDuration() / 4F), effectInstance.getAmplifier()));
                             }
                         }
                     }
@@ -98,30 +98,31 @@ public class SmokingPipeItem extends Item implements ICustomAnimationItem {
                     float G = 1f;
                     float B = 1f;
 
+
+                    for (int i = 0; i < getInventorySize(stack); i++) {
+                        ItemStack item = getInventory(stack).getItem(i);
+                        setItemBurnCenser(item, getItemBurnCenser(item) + 1);
+                        getInventory(stack).setItem(i, item);
+                        if (getItemBurnCenser(item) >= 5) {
+                            world.playSound(null, player.getOnPos(), SoundEvents.BONE_MEAL_USE, SoundSource.BLOCKS, 1.0f, 1.0f);
+                        }
+                    }
+
+                    List<ItemStack> stacks = new ArrayList<>();
+                    for (int i = 0; i < 6; i++) {
+                        if (!getInventory(stack).getItem(i).isEmpty() && getItemBurnCenser(getInventory(stack).getItem(i)) < 5) {
+                            stacks.add(getInventory(stack).getItem(i).copy());
+                        }
+                    }
+                    for (int i = 0; i < 8; i++) {
+                        getInventory(stack).removeItem(i, 1);
+                    }
+
+                    for (int i = 0; i < stacks.size(); i++) {
+                        getInventory(stack).setItem(i, stacks.get(i));
+                    }
+
                     if (effects.size() > 0) {
-                        for (int i = 0; i < getInventorySize(stack); i++) {
-                            ItemStack item = getInventory(stack).getItem(i);
-                            setItemBurnCenser(item, getItemBurnCenser(item) + 1);
-                            getInventory(stack).setItem(i, item);
-                            if (getItemBurnCenser(item) >= 5) {
-                                world.playSound(null, player.getOnPos(), SoundEvents.BONE_MEAL_USE, SoundSource.BLOCKS, 1.0f, 1.0f);
-                            }
-                        }
-
-                        List<ItemStack> stacks = new ArrayList<>();
-                        for (int i = 0; i < 6; i++) {
-                            if (!getInventory(stack).getItem(i).isEmpty() && getItemBurnCenser(getInventory(stack).getItem(i)) < 5) {
-                                stacks.add(getInventory(stack).getItem(i).copy());
-                            }
-                        }
-                        for (int i = 0; i < 8; i++) {
-                            getInventory(stack).removeItem(i, 1);
-                        }
-
-                        for (int i = 0; i < stacks.size(); i++) {
-                            getInventory(stack).setItem(i, stacks.get(i));
-                        }
-
                         for (MobEffectInstance effectInstance : effects) {
                             player.addEffect(new MobEffectInstance(effectInstance));
                         }
@@ -239,10 +240,10 @@ public class SmokingPipeItem extends Item implements ICustomAnimationItem {
     @OnlyIn(Dist.CLIENT)
     @Override
     public void appendHoverText(ItemStack stack, Level world, List<Component> list, TooltipFlag flags) {
-        list.add(Component.empty());
-
         CompoundTag nbt = stack.getOrCreateTag();
         int invSize = getInventorySize(stack);
+
+        if (invSize > 0) list.add(Component.empty());
 
         for (int i = 0; i < invSize; i++) {
             int burn = getItemBurnCenser(getInventory(stack).getItem(i));
@@ -251,6 +252,8 @@ public class SmokingPipeItem extends Item implements ICustomAnimationItem {
             int B = (int) Mth.lerp(((float) burn / 5), 255, 0);
             list.add(Component.translatable(getInventory(stack).getItem(i).getDescriptionId()).withStyle(Style.EMPTY.withColor(ColorUtils.packColor(255, R, G, B))));
         }
+
+        if (invSize > 0) list.add(Component.empty());
     }
 
     @OnlyIn(Dist.CLIENT)

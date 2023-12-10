@@ -34,6 +34,7 @@ import mod.maxbogomol.wizards_reborn.common.command.KnowledgeArgument;
 import mod.maxbogomol.wizards_reborn.common.command.SpellArgument;
 import mod.maxbogomol.wizards_reborn.common.config.Config;
 import mod.maxbogomol.wizards_reborn.common.crystal.*;
+import mod.maxbogomol.wizards_reborn.common.effect.MorSporesEffect;
 import mod.maxbogomol.wizards_reborn.common.entity.CustomBoatEntity;
 import mod.maxbogomol.wizards_reborn.common.entity.CustomChestBoatEntity;
 import mod.maxbogomol.wizards_reborn.common.entity.SpellProjectileEntity;
@@ -66,6 +67,7 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.tags.TagKey;
 import net.minecraft.util.valueproviders.UniformInt;
+import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.EntityType;
@@ -129,6 +131,7 @@ public class WizardsReborn {
     public static final DeferredRegister<Attribute> ATTRIBUTES = DeferredRegister.create(ForgeRegistries.ATTRIBUTES, MOD_ID);
     public static final DeferredRegister<TrunkPlacerType<?>> TRUNK_PLACER_TYPES = DeferredRegister.createOptional(Registries.TRUNK_PLACER_TYPE, MOD_ID);
     public static final DeferredRegister<BlockStateProviderType<?>> BLOCK_STATE_PROVIDER_TYPE = DeferredRegister.createOptional(Registries.BLOCK_STATE_PROVIDER_TYPE, MOD_ID);
+    public static final DeferredRegister<MobEffect> EFFECTS = DeferredRegister.create(ForgeRegistries.MOB_EFFECTS, MOD_ID);
 
     public static final WoodType ARCANE_WOOD_TYPE = WoodType.register(new WoodType(new ResourceLocation(MOD_ID, "arcane_wood").toString(), BlockSetType.OAK));
 
@@ -208,7 +211,7 @@ public class WizardsReborn {
     public static Spell FROST_RAY_SPELL = new FrostRaySpell(MOD_ID+":frost_ray", 7);
     public static Spell HOLY_RAY_SPELL = new HolyRaySpell(MOD_ID+":holy_ray", 7);
 
-    public static final FoodProperties MOR_FOOD = (new FoodProperties.Builder()).nutrition(1).saturationMod(0.6F).effect(new MobEffectInstance(MobEffects.POISON, 250, 1), 1.0F).effect(new MobEffectInstance(MobEffects.CONFUSION, 250, 1), 1.0F).effect(new MobEffectInstance(MobEffects.BLINDNESS, 250, 1), 1.0F).effect(new MobEffectInstance(MobEffects.WEAKNESS, 250, 1), 1.0F).build();
+    public static final FoodProperties MOR_FOOD = (new FoodProperties.Builder()).nutrition(1).saturationMod(0.6F).effect(new MobEffectInstance(MobEffects.POISON, 450, 0), 1.0F).effect(new MobEffectInstance(MobEffects.CONFUSION, 350, 0), 1.0F).effect(new MobEffectInstance(MobEffects.BLINDNESS, 250, 0), 1.0F).effect(new MobEffectInstance(MobEffects.WEAKNESS, 550, 1), 1.0F).build();
 
     //BLOCKS
     public static final RegistryObject<Block> ARCANE_GOLD_BLOCK = BLOCKS.register("arcane_gold_block", () -> new Block(BlockBehaviour.Properties.copy(Blocks.GOLD_BLOCK)));
@@ -275,6 +278,9 @@ public class WizardsReborn {
     public static final RegistryObject<Block> ELDER_MOR = BLOCKS.register("elder_mor", () -> new MorBlock(BlockBehaviour.Properties.copy(Blocks.RED_MUSHROOM)));
     public static final RegistryObject<Block> POTTED_ELDER_MOR = BLOCKS.register("potted_elder_mor", () -> new FlowerPotBlock(ELDER_MOR.get(), BlockBehaviour.Properties.copy(Blocks.FLOWER_POT).instabreak().noOcclusion()));
     public static final RegistryObject<Block> ELDER_MOR_BLOCK = BLOCKS.register("elder_mor_block", () -> new HugeMushroomBlock(BlockBehaviour.Properties.copy(Blocks.BROWN_MUSHROOM_BLOCK)));
+
+    public static final RegistryObject<Block> ARCANUM_SEED_BLOCK = BLOCKS.register("arcanum_seed", () -> new CrystalSeedBlock(BlockBehaviour.Properties.copy(Blocks.AMETHYST_CLUSTER)));
+    public static final RegistryObject<Block> ARCANUM_GROWTH = BLOCKS.register("arcanum_growth", () -> new ArcanumGrowthBlock(BlockBehaviour.Properties.copy(Blocks.AMETHYST_CLUSTER)));
 
     public static final RegistryObject<Block> EARTH_CRYSTAL_SEED_BLOCK = BLOCKS.register("earth_crystal_seed", () -> new CrystalSeedBlock(BlockBehaviour.Properties.copy(Blocks.AMETHYST_CLUSTER)));
     public static final RegistryObject<Block> WATER_CRYSTAL_SEED_BLOCK = BLOCKS.register("water_crystal_seed", () -> new CrystalSeedBlock(BlockBehaviour.Properties.copy(Blocks.AMETHYST_CLUSTER)));
@@ -442,10 +448,10 @@ public class WizardsReborn {
     public static final RegistryObject<Item> ARCANE_LINEN_ITEM = ITEMS.register("arcane_linen", () -> new Item(new Item.Properties()));
     public static final RegistryObject<Item> ARCANE_LINEN_HAY_ITEM = ITEMS.register("arcane_linen_hay", () -> new BlockItem(ARCANE_LINEN_HAY.get(), new Item.Properties()));
 
-    public static final RegistryObject<Item> MOR_ITEM = ITEMS.register("mor", () -> new BlockItem(MOR.get(), new Item.Properties().food(MOR_FOOD)));
+    public static final RegistryObject<Item> MOR_ITEM = ITEMS.register("mor", () -> new MorItem(MOR.get(), new Item.Properties().food(MOR_FOOD), 1500, 1800));
     public static final RegistryObject<Item> MOR_BLOCK_ITEM = ITEMS.register("mor_block", () -> new BlockItem(MOR_BLOCK.get(), new Item.Properties()));
     public static final RegistryObject<Item> ELDER_MOR_ITEM = ITEMS.register("elder_mor", () -> new BlockItem(ELDER_MOR.get(), new Item.Properties().food(MOR_FOOD)));
-    public static final RegistryObject<Item> ELDER_MOR_BLOCK_ITEM = ITEMS.register("elder_mor_block", () -> new BlockItem(ELDER_MOR_BLOCK.get(), new Item.Properties()));
+    public static final RegistryObject<Item> ELDER_MOR_BLOCK_ITEM = ITEMS.register("elder_mor_block", () -> new MorItem(ELDER_MOR_BLOCK.get(), new Item.Properties(), 1700, 2100));
 
     public static final RegistryObject<Item> PETALS = ITEMS.register("petals", () -> new Item(new Item.Properties()));
     public static final RegistryObject<Item> GROUND_BROWN_MUSHROOM = ITEMS.register("ground_brown_mushroom", () -> new Item(new Item.Properties()));
@@ -457,6 +463,9 @@ public class WizardsReborn {
 
     public static final RegistryObject<Item> ARCANE_WAND = ITEMS.register("arcane_wand", () -> new ArcaneWandItem(new Item.Properties().stacksTo(1)));
     public static final RegistryObject<Item> WISSEN_WAND = ITEMS.register("wissen_wand", () -> new WissenWandItem(new Item.Properties().stacksTo(1)));
+
+    public static final RegistryObject<Item> ARCANUM_SEED = ITEMS.register("arcanum_seed", () -> new BlockItem(ARCANUM_SEED_BLOCK.get(), new Item.Properties()));
+    public static final RegistryObject<Item> ARCANUM_GROWTH_ITEM = ITEMS.register("arcanum_growth", () -> new BlockItem(ARCANUM_GROWTH.get(), new Item.Properties()));
 
     public static final RegistryObject<Item> EARTH_CRYSTAL_SEED = ITEMS.register("earth_crystal_seed", () -> new BlockItem(EARTH_CRYSTAL_SEED_BLOCK.get(), new Item.Properties()));
     public static final RegistryObject<Item> WATER_CRYSTAL_SEED = ITEMS.register("water_crystal_seed", () -> new BlockItem(WATER_CRYSTAL_SEED_BLOCK.get(), new Item.Properties()));
@@ -589,6 +598,7 @@ public class WizardsReborn {
     public static final RegistryObject<BlockEntityType<CustomSignTileEntity>> SIGN_TILE_ENTITY = TILE_ENTITIES.register("sign", () -> BlockEntityType.Builder.of(CustomSignTileEntity::new, ARCANE_WOOD_SIGN.get(), ARCANE_WOOD_WALL_SIGN.get()).build(null));
     public static final RegistryObject<BlockEntityType<CustomHangingSignTileEntity>> HANGING_SIGN_TILE_ENTITY = TILE_ENTITIES.register("hanging_sign", () -> BlockEntityType.Builder.of(CustomHangingSignTileEntity::new, ARCANE_WOOD_HANGING_SIGN.get(), ARCANE_WOOD_WALL_HANGING_SIGN.get()).build(null));
 
+    public static RegistryObject<BlockEntityType<ArcanumGrowthTileEntity>> ARCANUM_GROWTH_TILE_ENTITY = TILE_ENTITIES.register("arcanum_growth", () -> BlockEntityType.Builder.of(ArcanumGrowthTileEntity::new, ARCANUM_GROWTH.get()).build(null));
     public static RegistryObject<BlockEntityType<CrystalTileEntity>> CRYSTAL_TILE_ENTITY = TILE_ENTITIES.register("crystal", () -> BlockEntityType.Builder.of(CrystalTileEntity::new,
             EARTH_CRYSTAL_BLOCK.get(), WATER_CRYSTAL_BLOCK.get(), AIR_CRYSTAL_BLOCK.get(), FIRE_CRYSTAL_BLOCK.get(), VOID_CRYSTAL_BLOCK.get(),
             FACETED_EARTH_CRYSTAL_BLOCK.get(), FACETED_WATER_CRYSTAL_BLOCK.get(), FACETED_AIR_CRYSTAL_BLOCK.get(), FACETED_FIRE_CRYSTAL_BLOCK.get(), FACETED_VOID_CRYSTAL_BLOCK.get(),
@@ -710,6 +720,8 @@ public class WizardsReborn {
 
     public static final RegistryObject<Attribute> WISSEN_SALE = ATTRIBUTES.register("wissen_sale", () -> new RangedAttribute("attribute.name.wizards_reborn.wissen_sale", 0, 0, 75).setSyncable(true));
 
+    public static final RegistryObject<MobEffect> MOR_EFFECT = EFFECTS.register("mor_spores", MorSporesEffect::new);
+
     public static final RegistryObject<TrunkPlacerType<ArcaneWoodTrunkPlacer>> ARCANE_WOOD_TRUNK_PLACER = TRUNK_PLACER_TYPES.register("arcane_wood_trunk_placer", () -> new TrunkPlacerType<>(ArcaneWoodTrunkPlacer.CODEC));
 
     public static final RegistryObject<BlockStateProviderType<?>> AN_STATEPROVIDER = BLOCK_STATE_PROVIDER_TYPE.register("an_stateprovider", () -> new BlockStateProviderType<>(SupplierBlockStateProvider.CODEC));
@@ -738,6 +750,7 @@ public class WizardsReborn {
         ATTRIBUTES.register(eventBus);
         TRUNK_PLACER_TYPES.register(eventBus);
         BLOCK_STATE_PROVIDER_TYPE.register(eventBus);
+        EFFECTS.register(eventBus);
 
         setupCrystals();
         setupMonograms();

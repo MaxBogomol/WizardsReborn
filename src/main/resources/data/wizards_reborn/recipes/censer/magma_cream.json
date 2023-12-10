@@ -1,0 +1,13 @@
+{
+  "type": "wizards_reborn:censer",
+  "ingredient": {
+    "item": "minecraft:magma_cream"
+  },
+  "effects": [
+    {
+      "effect": "minecraft:fire_resistance",
+      "duration": 10000,
+      "amplifier": 0
+    }
+  ]
+}

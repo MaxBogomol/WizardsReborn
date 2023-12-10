@@ -125,6 +125,7 @@ public class WizardsRebornItemGroup {
             event.accept(WizardsReborn.ARCANE_WAND);
             event.accept(WizardsReborn.WISSEN_WAND);
 
+            event.accept(WizardsReborn.ARCANUM_SEED);
             event.accept(WizardsReborn.EARTH_CRYSTAL_SEED);
             event.accept(WizardsReborn.WATER_CRYSTAL_SEED);
             event.accept(WizardsReborn.AIR_CRYSTAL_SEED);

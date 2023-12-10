@@ -1,0 +1,13 @@
+{
+  "type": "wizards_reborn:censer",
+  "ingredient": {
+    "item": "minecraft:sugar"
+  },
+  "effects": [
+    {
+      "effect": "minecraft:speed",
+      "duration": 10000,
+      "amplifier": 0
+    }
+  ]
+}

@@ -1,0 +1,13 @@
+{
+  "type": "wizards_reborn:censer",
+  "ingredient": {
+    "item": "minecraft:golden_carrot"
+  },
+  "effects": [
+    {
+      "effect": "minecraft:night_vision",
+      "duration": 8400,
+      "amplifier": 0
+    }
+  ]
+}

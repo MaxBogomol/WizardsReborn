@@ -64,12 +64,12 @@ public class SmokeEffectPacket {
 
                     for (int i = 0; i < 40; i++) {
                         Particles.create(WizardsReborn.STEAM_PARTICLE)
-                                .addVelocity(velX + ((random.nextDouble() - 0.5D) / 20), velY + ((random.nextDouble() - 0.5D) / 20), velZ + ((random.nextDouble() - 0.5D) / 20))
+                                .addVelocity(velX + ((random.nextDouble() - 0.5D) / (20 - (5 * random.nextDouble()))), velY + ((random.nextDouble() - 0.5D) / (20 - (5 * random.nextDouble()))), velZ + ((random.nextDouble() - 0.5D) / (20 - (5 * random.nextDouble()))))
                                 .setAlpha(0.05f, 0).setScale(0.1f, 2)
                                 .setColor(colorR, colorG, colorB)
                                 .setLifetime(500 + random.nextInt(100))
                                 .setSpin((0.1f * (float) ((random.nextDouble() - 0.5D) * 2)))
-                                .spawn(world, posX + ((random.nextDouble() - 0.5D) / 3), posY + ((random.nextDouble() - 0.5D) / 3), posZ + ((random.nextDouble() - 0.5D) / 3));
+                                .spawn(world, posX + ((random.nextDouble() - 0.5D) / 10), posY + ((random.nextDouble() - 0.5D) / 10), posZ + ((random.nextDouble() - 0.5D) / 10));
                     }
                     ctx.get().setPacketHandled(true);
                 }

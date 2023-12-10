@@ -1,0 +1,13 @@
+{
+  "type": "wizards_reborn:censer",
+  "ingredient": {
+    "item": "minecraft:glowstone_dust"
+  },
+  "effects": [
+    {
+      "effect": "minecraft:glowing",
+      "duration": 1000,
+      "amplifier": 0
+    }
+  ]
+}

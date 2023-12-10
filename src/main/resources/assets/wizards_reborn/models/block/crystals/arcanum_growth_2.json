@@ -1,0 +1,26 @@
+{
+	"credit": "Made with Blockbench",
+	"parent": "minecraft:block/block",
+	"textures": {
+		"0": "wizards_reborn:block/crystals/arcanum_1",
+		"1": "wizards_reborn:block/crystals/arcanum_2",
+		"2": "wizards_reborn:block/crystals/arcanum_3",
+		"3": "wizards_reborn:block/crystals/arcanum_4",
+		"4": "wizards_reborn:block/crystals/arcanum_5",
+		"particle": "wizards_reborn:block/crystals/arcanum_5"
+	},
+	"elements": [
+		{
+			"from": [6, 0, 6],
+			"to": [10, 3, 10],
+			"faces": {
+				"north": {"uv": [4, 0, 8, 3], "texture": "#1"},
+				"east": {"uv": [4, 0, 8, 3], "texture": "#1"},
+				"south": {"uv": [4, 0, 8, 3], "texture": "#1"},
+				"west": {"uv": [4, 0, 8, 3], "texture": "#1"},
+				"up": {"uv": [0, 0, 4, 4], "texture": "#1"},
+				"down": {"uv": [0, 4, 4, 8], "texture": "#1"}
+			}
+		}
+	]
+}

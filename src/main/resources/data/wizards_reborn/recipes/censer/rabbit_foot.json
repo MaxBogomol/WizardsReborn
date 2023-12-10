@@ -1,0 +1,13 @@
+{
+  "type": "wizards_reborn:censer",
+  "ingredient": {
+    "item": "minecraft:rabbit_foot"
+  },
+  "effects": [
+    {
+      "effect": "minecraft:jump_boost",
+      "duration": 10000,
+      "amplifier": 0
+    }
+  ]
+}

@@ -28,10 +28,10 @@ public class ArcaneCenserTileEntityRenderer implements BlockEntityRenderer<Arcan
             int newLight = light;
             int burn = ArcaneCenserTileEntity.getItemBurnCenser(censer.getItemHandler().getItem(i));
             if (burn > 0) {
-                int R = (int) Mth.lerp(((float) 3 / burn), ColorUtils.getRed(light), 0);
-                int G = (int) Mth.lerp(((float) 3 / burn), ColorUtils.getGreen(light), 0);
-                int B = (int) Mth.lerp(((float) 3 / burn), ColorUtils.getBlue(light), 0);
-                newLight = -ColorUtils.packColor(255, R, G, B);
+                int R = (int) Mth.lerp(((float) burn / 3), ColorUtils.getRed(light), 0) / 2;
+                int G = (int) Mth.lerp(((float) burn / 3), ColorUtils.getGreen(light), 0) / 2;
+                int B = (int) Mth.lerp(((float) burn / 3), ColorUtils.getBlue(light), 0) / 2;
+                newLight = ColorUtils.packColor(0, R, G, B);
             }
 
             ms.pushPose();

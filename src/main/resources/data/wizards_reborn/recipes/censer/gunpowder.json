@@ -1,0 +1,23 @@
+{
+  "type": "wizards_reborn:censer",
+  "ingredient": {
+    "item": "minecraft:gunpowder"
+  },
+  "effects": [
+    {
+      "effect": "minecraft:blindness",
+      "duration": 1200,
+      "amplifier": 0
+    },
+    {
+      "effect": "minecraft:nausea",
+      "duration": 800,
+      "amplifier": 0
+    },
+    {
+      "effect": "minecraft:instant_damage",
+      "duration": 1,
+      "amplifier": 1
+    }
+  ]
+}

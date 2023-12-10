@@ -175,20 +175,6 @@ public class RenderUtils {
         RenderSystem.applyModelViewMatrix();
     }
 
-    public static Vec3 followBodyRotation(LivingEntity living) {
-        Vec3 rotate = new Vec3(0, 0, 0);
-        EntityRenderer<? super LivingEntity> render = Minecraft.getInstance().getEntityRenderDispatcher().getRenderer(living);
-        if(render instanceof LivingEntityRenderer) {
-            LivingEntityRenderer<LivingEntity, EntityModel<LivingEntity>> livingRenderer = (LivingEntityRenderer<LivingEntity, EntityModel<LivingEntity>>) render;
-            EntityModel<LivingEntity> entityModel = livingRenderer.getModel();
-            if (entityModel instanceof HumanoidModel) {
-                HumanoidModel<LivingEntity> bipedModel = (HumanoidModel<LivingEntity>) entityModel;
-                rotate = new Vec3(bipedModel.body.xRot, bipedModel.body.yRot, bipedModel.body.zRot);;
-            }
-        }
-        return rotate;
-    }
-
     public static void renderBoxBlockOutline(PoseStack matrixStack, MultiBufferSource bufferIn, VoxelShape voxelShape, double originX, double originY, double originZ, Color color) {
         VertexConsumer builder = bufferIn.getBuffer(RenderType.lines());
         Matrix4f matrix4f = matrixStack.last().pose();
@@ -216,6 +202,7 @@ public class RenderUtils {
         builder.vertex(matrix4f, (float) (x1), (float) (y1), (float) (z1)).color(red, green, blue, alpha).endVertex();
         builder.vertex(matrix4f, (float) (x2), (float) (y2), (float) (z2)).color(red, green, blue, alpha).endVertex();
     }
+
     public static void renderFloatingItemModelIntoGUI(GuiGraphics gui, ItemStack stack, int x, int y, float ticks, float ticksUp) {
         Minecraft minecraft = Minecraft.getInstance();
         BakedModel bakedmodel = Minecraft.getInstance().getItemRenderer().getModel(stack, minecraft.level, minecraft.player, 0);

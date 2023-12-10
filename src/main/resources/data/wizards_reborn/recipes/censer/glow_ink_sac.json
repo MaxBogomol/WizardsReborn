@@ -1,0 +1,18 @@
+{
+  "type": "wizards_reborn:censer",
+  "ingredient": {
+    "item": "minecraft:glow_ink_sac"
+  },
+  "effects": [
+    {
+      "effect": "minecraft:blindness",
+      "duration": 2400,
+      "amplifier": 0
+    },
+    {
+      "effect": "minecraft:glowing",
+      "duration": 1800,
+      "amplifier": 0
+    }
+  ]
+}

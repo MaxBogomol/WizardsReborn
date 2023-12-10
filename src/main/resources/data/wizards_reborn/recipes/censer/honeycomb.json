@@ -1,0 +1,18 @@
+{
+  "type": "wizards_reborn:censer",
+  "ingredient": {
+    "item": "minecraft:honeycomb"
+  },
+  "effects": [
+    {
+      "effect": "minecraft:instant_health",
+      "duration": 2,
+      "amplifier": 0
+    },
+    {
+      "effect": "minecraft:health_boost",
+      "duration": 4200,
+      "amplifier": 0
+    }
+  ]
+}

@@ -1,0 +1,13 @@
+{
+  "type": "wizards_reborn:censer",
+  "ingredient": {
+    "item": "minecraft:glistering_melon_slice"
+  },
+  "effects": [
+    {
+      "effect": "minecraft:instant_health",
+      "duration": 2,
+      "amplifier": 0
+    }
+  ]
+}

@@ -1,0 +1,13 @@
+{
+  "type": "wizards_reborn:censer",
+  "ingredient": {
+    "item": "minecraft:blaze_powder"
+  },
+  "effects": [
+    {
+      "effect": "minecraft:strength",
+      "duration": 6000,
+      "amplifier": 0
+    }
+  ]
+}

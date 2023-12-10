@@ -110,30 +110,30 @@ public class ArcaneCenserTileEntity extends ExposedTileSimpleInventory implement
         float G = 1f;
         float B = 1f;
 
+        for (int i = 0; i < getInventorySize(); i++) {
+            ItemStack item = getItem(i);
+            setItemBurnCenser(item, getItemBurnCenser(item) + 1);
+            setItem(i, item);
+            if (getItemBurnCenser(item) >= 3) {
+                level.playSound(null, getBlockPos(), SoundEvents.BONE_MEAL_USE, SoundSource.BLOCKS, 1.0f, 1.0f);
+            }
+        }
+
+        List<ItemStack> stacks = new ArrayList<>();
+        for (int i = 0; i < 8; i++) {
+            if (!getItem(i).isEmpty() && getItemBurnCenser(getItem(i)) < 3) {
+                stacks.add(getItem(i).copy());
+            }
+        }
+        for (int i = 0; i < 8; i++) {
+            removeItem(i, 1);
+        }
+
+        for (int i = 0; i < stacks.size(); i++) {
+            setItem(i, stacks.get(i));
+        }
+
         if (effects.size() > 0) {
-            for (int i = 0; i < getInventorySize(); i++) {
-                ItemStack item = getItem(i);
-                setItemBurnCenser(item, getItemBurnCenser(item) + 1);
-                setItem(i, item);
-                if (getItemBurnCenser(item) >= 3) {
-                    level.playSound(null, getBlockPos(), SoundEvents.BONE_MEAL_USE, SoundSource.BLOCKS, 1.0f, 1.0f);
-                }
-            }
-
-            List<ItemStack> stacks = new ArrayList<>();
-            for (int i = 0; i < 8; i++) {
-                if (!getItem(i).isEmpty() && getItemBurnCenser(getItem(i)) < 3) {
-                    stacks.add(getItem(i).copy());
-                }
-            }
-            for (int i = 0; i < 8; i++) {
-                removeItemNoUpdate(i);
-            }
-
-            for (int i = 0; i < stacks.size(); i++) {
-                setItem(i, stacks.get(i));
-            }
-
             for (MobEffectInstance effectInstance : effects) {
                 player.addEffect(new MobEffectInstance(effectInstance));
             }

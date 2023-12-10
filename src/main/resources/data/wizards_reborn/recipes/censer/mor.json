@@ -1,0 +1,18 @@
+{
+  "type": "wizards_reborn:censer",
+  "ingredient": {
+    "item": "wizards_reborn:mor"
+  },
+  "effects": [
+    {
+      "effect": "wizards_reborn:mor_spores",
+      "duration": 1300,
+      "amplifier": 0
+    },
+    {
+      "effect": "minecraft:nausea",
+      "duration": 700,
+      "amplifier": 0
+    }
+  ]
+}

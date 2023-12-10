@@ -15,7 +15,7 @@ public class WissenCrystallizerTileEntityRenderer implements BlockEntityRenderer
     public WissenCrystallizerTileEntityRenderer() {}
 
     @Override
-    public void render(WissenCrystallizerTileEntity сrystallizer, float partialTicks, PoseStack ms, MultiBufferSource buffers, int light, int overlay) {
+    public void render(WissenCrystallizerTileEntity crystallizer, float partialTicks, PoseStack ms, MultiBufferSource buffers, int light, int overlay) {
         Minecraft mc = Minecraft.getInstance();
 
         double ticks = (ClientTickHandler.ticksInGame + partialTicks) * 2;
@@ -27,10 +27,10 @@ public class WissenCrystallizerTileEntityRenderer implements BlockEntityRenderer
         ms.translate(0F, (float) (Math.sin(Math.toRadians(ticksUp)) * 0.03125F), 0F);
         ms.mulPose(Axis.YP.rotationDegrees((float) ticks));
         ms.scale(0.5F, 0.5F, 0.5F);
-        mc.getItemRenderer().renderStatic(сrystallizer.getItemHandler().getItem(0), ItemDisplayContext.FIXED, light, overlay, ms, buffers, сrystallizer.getLevel(), 0);
+        mc.getItemRenderer().renderStatic(crystallizer.getItemHandler().getItem(0), ItemDisplayContext.FIXED, light, overlay, ms, buffers, crystallizer.getLevel(), 0);
         ms.popPose();
 
-        int size = сrystallizer.getInventorySize();
+        int size = crystallizer.getInventorySize();
         float rotate = 360f / (size - 1);
 
         if (size > 1) {
@@ -42,7 +42,7 @@ public class WissenCrystallizerTileEntityRenderer implements BlockEntityRenderer
                 ms.translate(0.5F, 0F, 0F);
                 ms.mulPose(Axis.YP.rotationDegrees(90f));
                 ms.scale(0.25F, 0.25F, 0.25F);
-                mc.getItemRenderer().renderStatic(сrystallizer.getItemHandler().getItem(i + 1), ItemDisplayContext.FIXED, light, overlay, ms, buffers, сrystallizer.getLevel(), 0);
+                mc.getItemRenderer().renderStatic(crystallizer.getItemHandler().getItem(i + 1), ItemDisplayContext.FIXED, light, overlay, ms, buffers, crystallizer.getLevel(), 0);
                 ms.popPose();
             }
         }

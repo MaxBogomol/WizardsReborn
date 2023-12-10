@@ -1,0 +1,13 @@
+{
+  "type": "wizards_reborn:censer",
+  "ingredient": {
+    "item": "minecraft:phantom_membrane"
+  },
+  "effects": [
+    {
+      "effect": "minecraft:slow_falling",
+      "duration": 3000,
+      "amplifier": 0
+    }
+  ]
+}

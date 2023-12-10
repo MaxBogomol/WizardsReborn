@@ -1,0 +1,98 @@
+{
+	"credit": "Made with Blockbench",
+	"parent": "minecraft:block/block",
+	"textures": {
+		"0": "wizards_reborn:block/crystals/arcanum_1",
+		"1": "wizards_reborn:block/crystals/arcanum_2",
+		"2": "wizards_reborn:block/crystals/arcanum_3",
+		"3": "wizards_reborn:block/crystals/arcanum_4",
+		"4": "wizards_reborn:block/crystals/arcanum_5",
+		"particle": "wizards_reborn:block/crystals/arcanum_5"
+	},
+	"elements": [
+		{
+			"from": [5, 0.001, 5],
+			"to": [11, 9.001, 11],
+			"faces": {
+				"north": {"uv": [6, 0, 12, 9], "texture": "#4"},
+				"east": {"uv": [6, 0, 12, 9], "texture": "#4"},
+				"south": {"uv": [6, 0, 12, 9], "texture": "#4"},
+				"west": {"uv": [6, 0, 12, 9], "texture": "#4"},
+				"up": {"uv": [0, 0, 6, 6], "texture": "#4"},
+				"down": {"uv": [0, 6, 6, 12], "texture": "#4"}
+			}
+		},
+		{
+			"from": [9, 0, 3],
+			"to": [14, 7, 8],
+			"faces": {
+				"north": {"uv": [5, 0, 10, 7], "texture": "#3"},
+				"east": {"uv": [5, 0, 10, 7], "texture": "#3"},
+				"south": {"uv": [5, 0, 10, 7], "texture": "#3"},
+				"west": {"uv": [5, 0, 10, 7], "texture": "#3"},
+				"up": {"uv": [0, 0, 5, 5], "texture": "#3"},
+				"down": {"uv": [0, 5, 5, 10], "texture": "#3"}
+			}
+		},
+		{
+			"from": [3, 0, 8],
+			"to": [7, 5, 12],
+			"faces": {
+				"north": {"uv": [4, 0, 8, 5], "texture": "#2"},
+				"east": {"uv": [4, 0, 8, 5], "texture": "#2"},
+				"south": {"uv": [4, 0, 8, 5], "texture": "#2"},
+				"west": {"uv": [4, 0, 8, 5], "texture": "#2"},
+				"up": {"uv": [0, 0, 4, 4], "texture": "#2"},
+				"down": {"uv": [0, 4, 4, 8], "texture": "#2"}
+			}
+		},
+		{
+			"from": [9, 5, 9],
+			"to": [13, 10, 13],
+			"faces": {
+				"north": {"uv": [4, 0, 8, 5], "texture": "#2"},
+				"east": {"uv": [4, 0, 8, 5], "texture": "#2"},
+				"south": {"uv": [4, 0, 8, 5], "texture": "#2"},
+				"west": {"uv": [4, 0, 8, 5], "texture": "#2"},
+				"up": {"uv": [0, 0, 4, 4], "texture": "#2"},
+				"down": {"uv": [0, 4, 4, 8], "texture": "#2"}
+			}
+		},
+		{
+			"from": [5, 0, 2],
+			"to": [8, 3, 5],
+			"faces": {
+				"north": {"uv": [3, 0, 6, 3], "texture": "#0"},
+				"east": {"uv": [3, 0, 6, 3], "texture": "#0"},
+				"south": {"uv": [3, 0, 6, 3], "texture": "#0"},
+				"west": {"uv": [3, 0, 6, 3], "texture": "#0"},
+				"up": {"uv": [0, 0, 3, 3], "texture": "#0"},
+				"down": {"uv": [0, 3, 3, 6], "texture": "#0"}
+			}
+		},
+		{
+			"from": [8, 0, 9],
+			"to": [12, 3, 13],
+			"faces": {
+				"north": {"uv": [4, 0, 8, 3], "texture": "#1"},
+				"east": {"uv": [4, 0, 8, 3], "texture": "#1"},
+				"south": {"uv": [4, 0, 8, 3], "texture": "#1"},
+				"west": {"uv": [4, 0, 8, 3], "texture": "#1"},
+				"up": {"uv": [0, 0, 4, 4], "texture": "#1"},
+				"down": {"uv": [0, 4, 4, 8], "texture": "#1"}
+			}
+		},
+		{
+			"from": [3, 2, 3],
+			"to": [7, 7, 7],
+			"faces": {
+				"north": {"uv": [4, 0, 8, 5], "texture": "#2"},
+				"east": {"uv": [4, 0, 8, 5], "texture": "#2"},
+				"south": {"uv": [4, 0, 8, 5], "texture": "#2"},
+				"west": {"uv": [4, 0, 8, 5], "texture": "#2"},
+				"up": {"uv": [0, 0, 4, 4], "texture": "#2"},
+				"down": {"uv": [0, 4, 4, 8], "texture": "#2"}
+			}
+		}
+	]
+}

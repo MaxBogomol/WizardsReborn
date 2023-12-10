@@ -1,0 +1,13 @@
+{
+  "type": "wizards_reborn:censer",
+  "ingredient": {
+    "item": "minecraft:fermented_spider_eye"
+  },
+  "effects": [
+    {
+      "effect": "minecraft:weakness",
+      "duration": 3000,
+      "amplifier": 0
+    }
+  ]
+}

@@ -1,0 +1,13 @@
+{
+  "type": "wizards_reborn:censer",
+  "ingredient": {
+    "item": "minecraft:rotten_flesh"
+  },
+  "effects": [
+    {
+      "effect": "minecraft:hunger",
+      "duration": 1200,
+      "amplifier": 0
+    }
+  ]
+}

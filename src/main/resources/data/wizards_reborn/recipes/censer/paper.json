@@ -1,12 +1,12 @@
 {
   "type": "wizards_reborn:censer",
   "ingredient": {
-    "item": "wizards_reborn:petals"
+    "item": "minecraft:paper"
   },
   "effects": [
     {
-      "effect": "minecraft:regeneration",
-      "duration": 100,
+      "effect": "minecraft:slowness",
+      "duration": 550,
       "amplifier": 0
     }
   ]

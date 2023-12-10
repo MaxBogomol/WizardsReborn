@@ -1,0 +1,23 @@
+{
+  "type": "wizards_reborn:censer",
+  "ingredient": {
+    "item": "minecraft:fire_charge"
+  },
+  "effects": [
+    {
+      "effect": "minecraft:blindness",
+      "duration": 1300,
+      "amplifier": 0
+    },
+    {
+      "effect": "minecraft:nausea",
+      "duration": 900,
+      "amplifier": 0
+    },
+    {
+      "effect": "minecraft:instant_damage",
+      "duration": 1,
+      "amplifier": 1
+    }
+  ]
+}
