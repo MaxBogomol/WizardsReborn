@@ -3,8 +3,8 @@ package mod.maxbogomol.wizards_reborn.common.recipe;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
-import com.google.gson.JsonSyntaxException;
 import mod.maxbogomol.wizards_reborn.WizardsReborn;
+import mod.maxbogomol.wizards_reborn.utils.RecipeUtils;
 import net.minecraft.core.NonNullList;
 import net.minecraft.core.RegistryAccess;
 import net.minecraft.core.registries.BuiltInRegistries;
@@ -15,11 +15,8 @@ import net.minecraft.world.Container;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.*;
 import net.minecraft.world.level.Level;
-import net.minecraft.world.level.material.Fluid;
-import net.minecraft.world.level.material.Fluids;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.capability.IFluidHandler;
-import net.minecraftforge.registries.ForgeRegistries;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
@@ -167,7 +164,7 @@ public class AlchemyMachineRecipe implements Recipe<AlchemyMachineContext> {
                 outputItem = ShapedRecipe.itemStackFromJson(GsonHelper.getAsJsonObject(json, "outputItem"));
             }
             if (json.has("outputFluid")) {
-                outputFluid = deserializeFluidStack(GsonHelper.getAsJsonObject(json, "outputFluid"));
+                outputFluid = RecipeUtils.deserializeFluidStack(GsonHelper.getAsJsonObject(json, "outputFluid"));
             }
 
             if (json.has("wissen")) {
@@ -257,15 +254,5 @@ public class AlchemyMachineRecipe implements Recipe<AlchemyMachineContext> {
     @Override
     public boolean isSpecial(){
         return true;
-    }
-
-    public static FluidStack deserializeFluidStack(JsonObject json) {
-        String fluidName = GsonHelper.getAsString(json, "fluid");
-        Fluid fluid = ForgeRegistries.FLUIDS.getValue(new ResourceLocation(fluidName));
-        if (fluid == null || fluid == Fluids.EMPTY) {
-            throw new JsonSyntaxException("Unknown fluid " + fluidName);
-        }
-        int amount = GsonHelper.getAsInt(json, "amount");
-        return new FluidStack(fluid, amount);
     }
 }

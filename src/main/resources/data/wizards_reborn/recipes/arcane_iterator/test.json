@@ -1,0 +1,22 @@
+{
+  "type": "wizards_reborn:arcane_iterator",
+  "output": {
+    "item": "wizards_reborn:mor",
+    "count": 1
+  },
+  "wissen": 1000,
+  "ingredients": [
+    {
+      "item": "wizards_reborn:arcane_gold_ingot"
+    },
+    {
+      "item": "wizards_reborn:arcanum"
+    },
+    {
+      "item": "wizards_reborn:arcanum"
+    },
+    {
+      "item": "wizards_reborn:arcanum"
+    }
+  ]
+}

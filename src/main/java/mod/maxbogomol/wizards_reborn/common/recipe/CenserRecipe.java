@@ -3,15 +3,14 @@ package mod.maxbogomol.wizards_reborn.common.recipe;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
-import com.google.gson.JsonSyntaxException;
 import mod.maxbogomol.wizards_reborn.WizardsReborn;
+import mod.maxbogomol.wizards_reborn.utils.RecipeUtils;
 import net.minecraft.core.RegistryAccess;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.GsonHelper;
 import net.minecraft.world.Container;
-import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.Ingredient;
@@ -107,7 +106,7 @@ public class CenserRecipe implements Recipe<Container>  {
             if (json.has("effects")) {
                 JsonArray eff = GsonHelper.getAsJsonArray(json, "effects");
                 for (JsonElement e : eff) {
-                    effects.add(deserializeMobEffect(e.getAsJsonObject()));
+                    effects.add(RecipeUtils.deserializeMobEffect(e.getAsJsonObject()));
                 }
             }
 
@@ -122,10 +121,7 @@ public class CenserRecipe implements Recipe<Container>  {
             List<MobEffectInstance> effects = new ArrayList<>();
             int effectsSize = buffer.readInt();
             for (int i = 0; i < effectsSize; i++) {
-                MobEffect mobEffect = ForgeRegistries.MOB_EFFECTS.getValue(buffer.readResourceLocation());
-                int duration = buffer.readInt();
-                int amplifier = buffer.readInt();
-                effects.add(new MobEffectInstance(mobEffect, duration, amplifier));
+                effects.add(RecipeUtils.mobEffectFromNetwork(buffer));
             }
 
             return new CenserRecipe(recipeId, input, effects);
@@ -138,21 +134,8 @@ public class CenserRecipe implements Recipe<Container>  {
 
             buffer.writeInt(recipe.getEffects().size());
             for (MobEffectInstance effect : recipe.getEffects()) {
-                buffer.writeRegistryId(ForgeRegistries.MOB_EFFECTS, effect.getEffect());
-                buffer.writeVarInt(effect.getDuration());
-                buffer.writeVarInt(effect.getAmplifier());
+                RecipeUtils.mobEffectToNetwork(effect, buffer);
             }
         }
-    }
-
-    public static MobEffectInstance deserializeMobEffect(JsonObject json) {
-        String effectName = GsonHelper.getAsString(json, "effect");
-        MobEffect mobEffect = ForgeRegistries.MOB_EFFECTS.getValue(new ResourceLocation(effectName));
-        if (mobEffect == null) {
-            throw new JsonSyntaxException("Unknown effect " + effectName);
-        }
-        int duration = GsonHelper.getAsInt(json, "duration");
-        int amplifier = GsonHelper.getAsInt(json, "amplifier");
-        return new MobEffectInstance(mobEffect, duration, amplifier);
     }
 }

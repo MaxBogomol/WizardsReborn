@@ -5,6 +5,7 @@ import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonSyntaxException;
 import mod.maxbogomol.wizards_reborn.WizardsReborn;
+import mod.maxbogomol.wizards_reborn.utils.RecipeUtils;
 import net.minecraft.core.NonNullList;
 import net.minecraft.core.RegistryAccess;
 import net.minecraft.core.registries.BuiltInRegistries;
@@ -154,10 +155,10 @@ public class ArcaneIteratorRecipe implements Recipe<Container> {
             boolean isSaveNBT = false;
 
             if (json.has("output")) {
-                ShapedRecipe.itemStackFromJson(GsonHelper.getAsJsonObject(json, "output"));
+                output = ShapedRecipe.itemStackFromJson(GsonHelper.getAsJsonObject(json, "output"));
             }
             if (json.has("enchantment")) {
-                enchantment = deserializeEnchantment(GsonHelper.getAsJsonObject(json, "enchantment"));
+                enchantment = RecipeUtils.deserializeEnchantment(GsonHelper.getAsJsonObject(json, "enchantment"));
             }
 
             if (json.has("health")) {
@@ -189,7 +190,7 @@ public class ArcaneIteratorRecipe implements Recipe<Container> {
                 inputs.add(Ingredient.fromNetwork(buffer));
             }
             ItemStack output = buffer.readItem();
-            Enchantment enchantment = ForgeRegistries.ENCHANTMENTS.getValue(buffer.readResourceLocation());
+            Enchantment enchantment = RecipeUtils.enchantmentFromNetwork(buffer);
             int wissen = buffer.readInt();
             int health = buffer.readInt();
             int experience = buffer.readInt();
@@ -204,7 +205,7 @@ public class ArcaneIteratorRecipe implements Recipe<Container> {
                 input.toNetwork(buffer);
             }
             buffer.writeItemStack(recipe.getResultItem(RegistryAccess.EMPTY), false);
-            buffer.writeRegistryId(ForgeRegistries.ENCHANTMENTS, recipe.getRecipeEnchantment());
+            RecipeUtils.enchantmentToNetwork(recipe.getRecipeEnchantment(), buffer);
             buffer.writeInt(recipe.getRecipeWissen());
             buffer.writeInt(recipe.getRecipeHealth());
             buffer.writeInt(recipe.getRecipeExperience());
@@ -230,14 +231,5 @@ public class ArcaneIteratorRecipe implements Recipe<Container> {
     @Override
     public boolean isSpecial(){
         return true;
-    }
-
-    public static Enchantment deserializeEnchantment(JsonObject json) {
-        String effectName = GsonHelper.getAsString(json, "enchantment");
-        Enchantment enchantment = ForgeRegistries.ENCHANTMENTS.getValue(new ResourceLocation(effectName));
-        if (enchantment == null) {
-            throw new JsonSyntaxException("Unknown enchantment " + effectName);
-        }
-        return enchantment;
     }
 }
