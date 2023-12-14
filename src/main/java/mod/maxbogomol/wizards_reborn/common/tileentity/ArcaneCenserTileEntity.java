@@ -18,6 +18,7 @@ import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.SimpleContainer;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.alchemy.PotionUtils;
 import net.minecraft.world.level.block.entity.BlockEntityType;
@@ -91,9 +92,10 @@ public class ArcaneCenserTileEntity extends ExposedTileSimpleInventory implement
 
     public void smoke(Player player) {
         cooldown = 100;
-        removeSteam(250);
+        removeSteam(150);
 
         List<MobEffectInstance> effects = new ArrayList<>();
+        List<Item> usedItems = new ArrayList<>();
 
         SimpleContainer inv = new SimpleContainer(1);
         for (int i = 0; i < getInventorySize(); i++) {
@@ -102,6 +104,9 @@ public class ArcaneCenserTileEntity extends ExposedTileSimpleInventory implement
             if (recipe.isPresent()) {
                 for (MobEffectInstance effectInstance : recipe.get().getEffects()) {
                     effects.add(new MobEffectInstance(effectInstance));
+                }
+                if (!usedItems.contains(getItem(i).getItem())) {
+                    usedItems.add(getItem(i).getItem());
                 }
             }
         }
@@ -112,26 +117,17 @@ public class ArcaneCenserTileEntity extends ExposedTileSimpleInventory implement
 
         for (int i = 0; i < getInventorySize(); i++) {
             ItemStack item = getItem(i);
-            setItemBurnCenser(item, getItemBurnCenser(item) + 1);
-            setItem(i, item);
-            if (getItemBurnCenser(item) >= 3) {
-                level.playSound(null, getBlockPos(), SoundEvents.BONE_MEAL_USE, SoundSource.BLOCKS, 1.0f, 1.0f);
+            if (usedItems.contains(item.getItem())) {
+                setItemBurnCenser(item, getItemBurnCenser(item) + 1);
+                setItem(i, item);
+                if (getItemBurnCenser(item) >= 3) {
+                    level.playSound(null, getBlockPos(), SoundEvents.BONE_MEAL_USE, SoundSource.BLOCKS, 1.0f, 1.0f);
+                }
+                usedItems.remove(item.getItem());
             }
         }
 
-        List<ItemStack> stacks = new ArrayList<>();
-        for (int i = 0; i < 8; i++) {
-            if (!getItem(i).isEmpty() && getItemBurnCenser(getItem(i)) < 3) {
-                stacks.add(getItem(i).copy());
-            }
-        }
-        for (int i = 0; i < 8; i++) {
-            removeItem(i, 1);
-        }
-
-        for (int i = 0; i < stacks.size(); i++) {
-            setItem(i, stacks.get(i));
-        }
+        sortItems();
 
         if (effects.size() > 0) {
             for (MobEffectInstance effectInstance : effects) {
@@ -150,6 +146,22 @@ public class ArcaneCenserTileEntity extends ExposedTileSimpleInventory implement
         level.playSound(null, player.getOnPos(), WizardsReborn.STEAM_BURST_SOUND.get(), SoundSource.PLAYERS, 0.1f, 2.0f);
 
         PacketUtils.SUpdateTileEntityPacket(this);
+    }
+
+    public void sortItems() {
+        List<ItemStack> stacks = new ArrayList<>();
+        for (int i = 0; i < 8; i++) {
+            if (!getItem(i).isEmpty() && getItemBurnCenser(getItem(i)) < 3) {
+                stacks.add(getItem(i).copy());
+            }
+        }
+        for (int i = 0; i < 8; i++) {
+            removeItem(i, 1);
+        }
+
+        for (int i = 0; i < stacks.size(); i++) {
+            setItem(i, stacks.get(i));
+        }
     }
 
     @Override

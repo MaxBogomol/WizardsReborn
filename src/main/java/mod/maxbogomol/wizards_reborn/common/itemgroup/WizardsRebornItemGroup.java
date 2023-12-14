@@ -79,7 +79,6 @@ public class WizardsRebornItemGroup {
             event.accept(WizardsReborn.ARCANE_WOOD_MORTAR);
             event.accept(WizardsReborn.ARCANE_WOOD_LEAVES_ITEM);
             event.accept(WizardsReborn.ARCANE_WOOD_SAPLING_ITEM);
-            event.accept(WizardsReborn.ARCANE_WOOD_BOW);
 
             event.accept(WizardsReborn.WISESTONE_ITEM);
             event.accept(WizardsReborn.WISESTONE_STAIRS_ITEM);
@@ -177,6 +176,7 @@ public class WizardsRebornItemGroup {
             event.accept(WizardsReborn.WISSEN_CELL_ITEM);
             event.accept(WizardsReborn.JEWELER_TABLE_ITEM);
             event.accept(WizardsReborn.ALTAR_OF_DROUGHT_ITEM);
+            event.accept(WizardsReborn.ARCANE_ITERATOR_ITEM);
 
             event.accept(WizardsReborn.WISESTONE_PEDESTAL_ITEM);
             event.accept(WizardsReborn.WISESTONE_HOVERING_TOME_STAND_ITEM);
@@ -234,6 +234,8 @@ public class WizardsRebornItemGroup {
             event.accept(WizardsReborn.INVENTOR_WIZARD_BOOTS);
 
             event.accept(WizardsReborn.ARCANE_WOOD_SMOKING_PIPE);
+            event.accept(WizardsReborn.ARCANE_WOOD_CANE);
+            event.accept(WizardsReborn.ARCANE_WOOD_BOW);
 
             event.accept(WizardsReborn.ARCANEMICON);
 

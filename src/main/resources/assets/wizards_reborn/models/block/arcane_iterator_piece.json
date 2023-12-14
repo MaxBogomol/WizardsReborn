@@ -1,0 +1,21 @@
+{
+	"credit": "Made with Blockbench",
+	"textures": {
+		"0": "wizards_reborn:block/arcane_iterator",
+		"particle": "wizards_reborn:block/arcane_wood_planks"
+	},
+	"elements": [
+		{
+			"from": [5.5, 5.5, 5.5],
+			"to": [10.5, 10.5, 10.5],
+			"faces": {
+				"north": {"uv": [0, 0, 5, 5], "texture": "#0"},
+				"east": {"uv": [0, 0, 5, 5], "rotation": 90, "texture": "#0"},
+				"south": {"uv": [10, 0, 15, 5], "rotation": 180, "texture": "#0"},
+				"west": {"uv": [10, 0, 15, 5], "rotation": 90, "texture": "#0"},
+				"up": {"uv": [0, 0, 5, 5], "rotation": 90, "texture": "#0"},
+				"down": {"uv": [10, 0, 15, 5], "rotation": 270, "texture": "#0"}
+			}
+		}
+	]
+}

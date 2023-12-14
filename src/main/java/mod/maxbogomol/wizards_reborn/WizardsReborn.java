@@ -333,6 +333,7 @@ public class WizardsReborn {
     public static final RegistryObject<Block> WISSEN_CELL = BLOCKS.register("wissen_cell", () -> new WissenCellBlock(BlockBehaviour.Properties.copy(Blocks.OAK_PLANKS)));
     public static final RegistryObject<Block> JEWELER_TABLE = BLOCKS.register("jeweler_table", () -> new JewelerTableBlock(BlockBehaviour.Properties.copy(Blocks.OAK_PLANKS)));
     public static final RegistryObject<Block> ALTAR_OF_DROUGHT = BLOCKS.register("altar_of_drought", () -> new AltarOfDroughtBlock(BlockBehaviour.Properties.copy(Blocks.OAK_PLANKS)));
+    public static final RegistryObject<Block> ARCANE_ITERATOR = BLOCKS.register("arcane_iterator", () -> new ArcaneIteratorBlock(BlockBehaviour.Properties.copy(Blocks.OAK_PLANKS)));
 
     public static final RegistryObject<Block> WISESTONE_PEDESTAL = BLOCKS.register("wisestone_pedestal", () -> new ArcanePedestalBlock(BlockBehaviour.Properties.copy(Blocks.POLISHED_DEEPSLATE)));
     public static final RegistryObject<Block> WISESTONE_HOVERING_TOME_STAND = BLOCKS.register("wisestone_hovering_tome_stand", () -> new HoveringTomeStandBlock(BlockBehaviour.Properties.copy(Blocks.POLISHED_DEEPSLATE)));
@@ -418,7 +419,6 @@ public class WizardsReborn {
     public static final RegistryObject<Item> ARCANE_WOOD_MORTAR = ITEMS.register("arcane_wood_mortar", () -> new MortarItem(new Item.Properties().stacksTo(1)));
     public static final RegistryObject<Item> ARCANE_WOOD_LEAVES_ITEM = ITEMS.register("arcane_wood_leaves", () -> new BlockItem(ARCANE_WOOD_LEAVES.get(), new Item.Properties()));
     public static final RegistryObject<Item> ARCANE_WOOD_SAPLING_ITEM = ITEMS.register("arcane_wood_sapling", () -> new BlockItem(ARCANE_WOOD_SAPLING.get(), new Item.Properties()));
-    public static final RegistryObject<Item> ARCANE_WOOD_BOW = ITEMS.register("arcane_wood_bow", () -> new BowItem(new Item.Properties().durability(576)));
 
     public static final RegistryObject<Item> WISESTONE_ITEM = ITEMS.register("wisestone", () -> new BlockItem(WISESTONE.get(), new Item.Properties()));
     public static final RegistryObject<Item> WISESTONE_STAIRS_ITEM = ITEMS.register("wisestone_stairs", () -> new BlockItem(WISESTONE_STAIRS.get(), new Item.Properties()));
@@ -524,6 +524,7 @@ public class WizardsReborn {
     public static final RegistryObject<Item> WISSEN_CELL_ITEM = ITEMS.register("wissen_cell", () -> new WissenStorageBaseItem(WISSEN_CELL.get(), new Item.Properties().stacksTo(1)));
     public static final RegistryObject<Item> JEWELER_TABLE_ITEM = ITEMS.register("jeweler_table", () -> new BlockItem(JEWELER_TABLE.get(), new Item.Properties()));
     public static final RegistryObject<Item> ALTAR_OF_DROUGHT_ITEM = ITEMS.register("altar_of_drought", () -> new BlockItem(ALTAR_OF_DROUGHT.get(), new Item.Properties()));
+    public static final RegistryObject<Item> ARCANE_ITERATOR_ITEM = ITEMS.register("arcane_iterator", () -> new BlockItem(ARCANE_ITERATOR.get(), new Item.Properties()));
 
     public static final RegistryObject<Item> WISESTONE_PEDESTAL_ITEM = ITEMS.register("wisestone_pedestal", () -> new BlockItem(WISESTONE_PEDESTAL.get(), new Item.Properties()));
     public static final RegistryObject<Item> WISESTONE_HOVERING_TOME_STAND_ITEM = ITEMS.register("wisestone_hovering_tome_stand", () -> new BlockItem(WISESTONE_HOVERING_TOME_STAND.get(), new Item.Properties()));
@@ -581,6 +582,8 @@ public class WizardsReborn {
     public static final RegistryObject<Item> INVENTOR_WIZARD_BOOTS = ITEMS.register("inventor_wizard_boots", () -> new InventorWizardArmorItem(CustomArmorMaterial.INVENTOR_WIZARD, ArmorItem.Type.BOOTS, new Item.Properties()));
 
     public static final RegistryObject<Item> ARCANE_WOOD_SMOKING_PIPE = ITEMS.register("arcane_wood_smoking_pipe", () -> new SmokingPipeItem(new Item.Properties().stacksTo(1)));
+    public static final RegistryObject<Item> ARCANE_WOOD_CANE = ITEMS.register("arcane_wood_cane", () -> new CaneItem(new Item.Properties().stacksTo(1)));
+    public static final RegistryObject<Item> ARCANE_WOOD_BOW = ITEMS.register("arcane_wood_bow", () -> new BowItem(new Item.Properties().durability(576)));
 
     public static final RegistryObject<Item> ARCANEMICON = ITEMS.register("arcanemicon", () -> new ArcanemiconItem(new Item.Properties().stacksTo(1)));
 
@@ -619,6 +622,7 @@ public class WizardsReborn {
     public static RegistryObject<BlockEntityType<WissenCellTileEntity>> WISSEN_CELL_TILE_ENTITY = TILE_ENTITIES.register("wissen_cell", () -> BlockEntityType.Builder.of(WissenCellTileEntity::new, WISSEN_CELL.get()).build(null));
     public static RegistryObject<BlockEntityType<JewelerTableTileEntity>> JEWELER_TABLE_TILE_ENTITY = TILE_ENTITIES.register("jeweler_table", () -> BlockEntityType.Builder.of(JewelerTableTileEntity::new, JEWELER_TABLE.get()).build(null));
     public static RegistryObject<BlockEntityType<AltarOfDroughtTileEntity>> ALTAR_OF_DROUGHT_TILE_ENTITY = TILE_ENTITIES.register("altar_of_drought", () -> BlockEntityType.Builder.of(AltarOfDroughtTileEntity::new, ALTAR_OF_DROUGHT.get()).build(null));
+    public static RegistryObject<BlockEntityType<ArcaneIteratorTileEntity>> ARCANE_ITERATOR_TILE_ENTITY = TILE_ENTITIES.register("arcane_iterator", () -> BlockEntityType.Builder.of(ArcaneIteratorTileEntity::new, ARCANE_ITERATOR.get()).build(null));
 
     public static RegistryObject<BlockEntityType<FluidPipeTileEntity>> FLUID_PIPE_TILE_ENTITY = TILE_ENTITIES.register("fluid_pipe", () -> BlockEntityType.Builder.of(FluidPipeTileEntity::new, FLUID_PIPE.get()).build(null));
     public static RegistryObject<BlockEntityType<FluidExtractorTileEntity>> FLUID_EXTRACTOR_TILE_ENTITY = TILE_ENTITIES.register("fluid_extractor", () -> BlockEntityType.Builder.of(FluidExtractorTileEntity::new, FLUID_EXTRACTOR.get()).build(null));
@@ -667,6 +671,9 @@ public class WizardsReborn {
 
     public static final RegistryObject<CenserRecipe.Serializer> CENSER_SERIALIZER = RECIPE_SERIALIZERS.register("censer", CenserRecipe.Serializer::new);
     public static final RegistryObject<RecipeType<CenserRecipe>> CENSER_RECIPE = RECIPES.register("censer", () -> RecipeType.simple(CenserRecipe.TYPE_ID));
+
+    public static final RegistryObject<ArcaneIteratorRecipe.Serializer> ARCANE_ITERATOR_SERIALIZER = RECIPE_SERIALIZERS.register("arcane_iterator", ArcaneIteratorRecipe.Serializer::new);
+    public static final RegistryObject<RecipeType<ArcaneIteratorRecipe>> ARCANE_ITERATOR_RECIPE = RECIPES.register("arcane_iterator", () -> RecipeType.simple(ArcaneIteratorRecipe.TYPE_ID));
 
     //CONTAINERS
     public static final RegistryObject<MenuType<ArcaneWorkbenchContainer>> ARCANE_WORKBENCH_CONTAINER

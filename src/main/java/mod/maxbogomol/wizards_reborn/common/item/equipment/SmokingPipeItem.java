@@ -80,8 +80,12 @@ public class SmokingPipeItem extends Item implements ICustomAnimationItem {
     public void releaseUsing(ItemStack stack, Level world, LivingEntity entityLiving, int pTimeLeft) {
         if (!world.isClientSide) {
             if (entityLiving instanceof Player player) {
-                if (getUseDuration(stack) - player.getUseItemRemainingTicks() >= 20) {
+                CompoundTag nbt = stack.getOrCreateTag();
+                int invSize = getInventorySize(stack);
+
+                if (getUseDuration(stack) - player.getUseItemRemainingTicks() >= 20 && invSize > 0) {
                     List<MobEffectInstance> effects = new ArrayList<>();
+                    List<Item> usedItems = new ArrayList<>();
 
                     SimpleContainer inv = new SimpleContainer(1);
                     for (int i = 0; i < getInventorySize(stack); i++) {
@@ -90,6 +94,9 @@ public class SmokingPipeItem extends Item implements ICustomAnimationItem {
                         if (recipe.isPresent()) {
                             for (MobEffectInstance effectInstance : recipe.get().getEffects()) {
                                 effects.add(new MobEffectInstance(effectInstance.getEffect(), (int) Math.ceil(effectInstance.getDuration() / 4F), effectInstance.getAmplifier()));
+                            }
+                            if (!usedItems.contains(getInventory(stack).getItem(i).getItem())) {
+                                usedItems.add(getInventory(stack).getItem(i).getItem());
                             }
                         }
                     }
@@ -101,26 +108,17 @@ public class SmokingPipeItem extends Item implements ICustomAnimationItem {
 
                     for (int i = 0; i < getInventorySize(stack); i++) {
                         ItemStack item = getInventory(stack).getItem(i);
-                        setItemBurnCenser(item, getItemBurnCenser(item) + 1);
-                        getInventory(stack).setItem(i, item);
-                        if (getItemBurnCenser(item) >= 5) {
-                            world.playSound(null, player.getOnPos(), SoundEvents.BONE_MEAL_USE, SoundSource.BLOCKS, 1.0f, 1.0f);
+                        if (usedItems.contains(item.getItem())) {
+                            setItemBurnCenser(item, getItemBurnCenser(item) + 1);
+                            getInventory(stack).setItem(i, item);
+                            if (getItemBurnCenser(item) >= 5) {
+                                world.playSound(null, player.getOnPos(), SoundEvents.BONE_MEAL_USE, SoundSource.BLOCKS, 1.0f, 1.0f);
+                            }
+                            usedItems.remove(item.getItem());
                         }
                     }
 
-                    List<ItemStack> stacks = new ArrayList<>();
-                    for (int i = 0; i < 6; i++) {
-                        if (!getInventory(stack).getItem(i).isEmpty() && getItemBurnCenser(getInventory(stack).getItem(i)) < 5) {
-                            stacks.add(getInventory(stack).getItem(i).copy());
-                        }
-                    }
-                    for (int i = 0; i < 8; i++) {
-                        getInventory(stack).removeItem(i, 1);
-                    }
-
-                    for (int i = 0; i < stacks.size(); i++) {
-                        getInventory(stack).setItem(i, stacks.get(i));
-                    }
+                    sortItems(stack);
 
                     if (effects.size() > 0) {
                         for (MobEffectInstance effectInstance : effects) {
@@ -181,12 +179,15 @@ public class SmokingPipeItem extends Item implements ICustomAnimationItem {
                 }
             } else {
                 if (invSize > 0) {
-                    int slot = invSize - 1;
-                    if (!getInventory(stack).getItem(slot).isEmpty()) {
-                        if (getItemBurnCenser(getInventory(stack).getItem(slot)) <= 0) {
-                            player.getInventory().add(getInventory(stack).getItem(slot).copy());
-                            getInventory(stack).removeItem(slot, 1);
-                            return InteractionResultHolder.success(stack);
+                    for (int i = 0; i < invSize; i++) {
+                        int slot = invSize - i - 1;
+                        if (!getInventory(stack).getItem(slot).isEmpty()) {
+                            if (getItemBurnCenser(getInventory(stack).getItem(slot)) <= 0) {
+                                player.getInventory().add(getInventory(stack).getItem(slot).copy());
+                                getInventory(stack).removeItem(slot, 1);
+                                sortItems(stack);
+                                return InteractionResultHolder.success(stack);
+                            }
                         }
                     }
                 }
@@ -195,6 +196,22 @@ public class SmokingPipeItem extends Item implements ICustomAnimationItem {
 
         player.startUsingItem(hand);
         return InteractionResultHolder.consume(stack);
+    }
+
+    public void sortItems(ItemStack stack) {
+        List<ItemStack> stacks = new ArrayList<>();
+        for (int i = 0; i < 6; i++) {
+            if (!getInventory(stack).getItem(i).isEmpty() && getItemBurnCenser(getInventory(stack).getItem(i)) < 5) {
+                stacks.add(getInventory(stack).getItem(i).copy());
+            }
+        }
+        for (int i = 0; i < 8; i++) {
+            getInventory(stack).removeItem(i, 1);
+        }
+
+        for (int i = 0; i < stacks.size(); i++) {
+            getInventory(stack).setItem(i, stacks.get(i));
+        }
     }
 
     public int getInventorySize(ItemStack stack) {

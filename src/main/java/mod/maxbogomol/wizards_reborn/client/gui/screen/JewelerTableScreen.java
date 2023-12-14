@@ -4,14 +4,19 @@ import com.mojang.blaze3d.systems.RenderSystem;
 import mod.maxbogomol.wizards_reborn.WizardsReborn;
 import mod.maxbogomol.wizards_reborn.client.event.ClientTickHandler;
 import mod.maxbogomol.wizards_reborn.client.gui.container.JewelerTableContainer;
+import mod.maxbogomol.wizards_reborn.common.recipe.JewelerTableRecipe;
 import mod.maxbogomol.wizards_reborn.common.tileentity.JewelerTableTileEntity;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
+import net.minecraft.core.RegistryAccess;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.SimpleContainer;
 import net.minecraft.world.entity.player.Inventory;
 import org.lwjgl.opengl.GL11;
+
+import java.util.Optional;
 
 public class JewelerTableScreen extends AbstractContainerScreen<JewelerTableContainer> {
     private final ResourceLocation GUI = new ResourceLocation(WizardsReborn.MOD_ID, "textures/gui/jeweler_table.png");
@@ -45,11 +50,19 @@ public class JewelerTableScreen extends AbstractContainerScreen<JewelerTableCont
         if (menu.tileEntity instanceof JewelerTableTileEntity) {
             JewelerTableTileEntity table = (JewelerTableTileEntity) menu.tileEntity;
 
-            if (table.itemOutputHandler.getStackInSlot(0).isEmpty()) {
+            SimpleContainer inv = new SimpleContainer(3);
+            for (int ii = 0; ii < table.itemHandler.getSlots(); ii++) {
+                inv.setItem(ii, table.itemHandler.getStackInSlot(ii));
+            }
+            inv.setItem(2, table.itemOutputHandler.getStackInSlot(0));
+
+            Optional<JewelerTableRecipe> recipe = table.getLevel().getRecipeManager().getRecipeFor(WizardsReborn.JEWELER_TABLE_RECIPE.get(), inv, table.getLevel());
+
+            if (recipe.isPresent()) {
                 double ticks = (ClientTickHandler.ticksInGame + partialTicks) * 3;
                 RenderSystem.setShaderColor(1f, 1f, 1f, (float) (0.5f + (Math.sin(Math.toRadians(ticks)) * 0.25)));
-                gui.renderItem(table.getItemHandler().getItem(0), i + 132, j + 48);
-                gui.renderItemDecorations(Minecraft.getInstance().font, table.getItemHandler().getItem(0), i + 146, j + 48);
+                gui.renderItem(recipe.get().getResultItem(RegistryAccess.EMPTY), i + 132, j + 48);
+                gui.renderItemDecorations(Minecraft.getInstance().font, recipe.get().getResultItem(RegistryAccess.EMPTY), i + 146, j + 48);
                 RenderSystem.setShaderColor(1f, 1f, 1f, 1f);
             }
         }

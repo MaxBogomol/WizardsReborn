@@ -97,7 +97,15 @@ public class ArcaneCenserBlock extends HorizontalDirectionalBlock implements Ent
         if (state.getBlock() != newState.getBlock()) {
             BlockEntity tile = world.getBlockEntity(pos);
             if (tile instanceof TileSimpleInventory) {
-                Containers.dropContents(world, pos, ((TileSimpleInventory) tile).getItemHandler());
+                ArcaneCenserTileEntity censerTile = (ArcaneCenserTileEntity) world.getBlockEntity(pos);
+                SimpleContainer inv = new SimpleContainer(censerTile.getInventorySize());
+                for (int i = 0; i < censerTile.getInventorySize(); i++) {
+                    ItemStack item = censerTile.getItem(i);
+                    if (ArcaneCenserTileEntity.getItemBurnCenser(item) <= 0) {
+                        inv.addItem(item);
+                    }
+                }
+                Containers.dropContents(world, pos, inv);
             }
 
             super.onRemove(state, world, pos, newState, isMoving);
@@ -139,20 +147,23 @@ public class ArcaneCenserBlock extends HorizontalDirectionalBlock implements Ent
             }
         } else {
             if (invSize > 0) {
-                int slot = invSize - 1;
-                if (!tile.getItemHandler().getItem(slot).isEmpty()) {
-                    if (ArcaneCenserTileEntity.getItemBurnCenser(tile.getItemHandler().getItem(slot)) <= 0) {
-                        player.getInventory().add(tile.getItemHandler().getItem(slot).copy());
-                        tile.getItemHandler().removeItemNoUpdate(slot);
-                        world.updateNeighbourForOutputSignal(pos, this);
-                        PacketUtils.SUpdateTileEntityPacket(tile);
-                        return InteractionResult.SUCCESS;
+                for (int i = 0; i < invSize; i++) {
+                    int slot = invSize - i - 1;
+                    if (!tile.getItemHandler().getItem(slot).isEmpty()) {
+                        if (ArcaneCenserTileEntity.getItemBurnCenser(tile.getItemHandler().getItem(slot)) <= 0) {
+                            player.getInventory().add(tile.getItemHandler().getItem(slot).copy());
+                            tile.getItemHandler().removeItemNoUpdate(slot);
+                            world.updateNeighbourForOutputSignal(pos, this);
+                            tile.sortItems();
+                            PacketUtils.SUpdateTileEntityPacket(tile);
+                            return InteractionResult.SUCCESS;
+                        }
                     }
                 }
             }
         }
 
-        if (tile.cooldown <= 0 && SteamUtils.canRemoveSteam(tile.steam, 250) && player.getItemInHand(InteractionHand.MAIN_HAND).isEmpty() && !player.isShiftKeyDown()) {
+        if (tile.cooldown <= 0 && SteamUtils.canRemoveSteam(tile.steam, 150) && player.getItemInHand(InteractionHand.MAIN_HAND).isEmpty() && !player.isShiftKeyDown()) {
             if (!world.isClientSide) {
                 tile.smoke(player);
             }

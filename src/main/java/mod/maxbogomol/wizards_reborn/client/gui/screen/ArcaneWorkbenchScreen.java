@@ -2,16 +2,16 @@ package mod.maxbogomol.wizards_reborn.client.gui.screen;
 
 import com.mojang.blaze3d.systems.RenderSystem;
 import mod.maxbogomol.wizards_reborn.WizardsReborn;
-import mod.maxbogomol.wizards_reborn.client.event.ClientTickHandler;
 import mod.maxbogomol.wizards_reborn.client.gui.container.ArcaneWorkbenchContainer;
 import mod.maxbogomol.wizards_reborn.common.recipe.ArcaneWorkbenchRecipe;
 import mod.maxbogomol.wizards_reborn.common.tileentity.ArcaneWorkbenchTileEntity;
-import mod.maxbogomol.wizards_reborn.utils.RenderUtils;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
+import net.minecraft.core.RegistryAccess;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.SimpleContainer;
 import net.minecraft.world.entity.player.Inventory;
 
 import java.util.Optional;
@@ -48,11 +48,18 @@ public class ArcaneWorkbenchScreen extends AbstractContainerScreen<ArcaneWorkben
         if (menu.tileEntity instanceof ArcaneWorkbenchTileEntity) {
             ArcaneWorkbenchTileEntity workbench = (ArcaneWorkbenchTileEntity) menu.tileEntity;
 
-            if (workbench.itemOutputHandler.getStackInSlot(0).isEmpty()) {
-                double ticks = (ClientTickHandler.ticksInGame + partialTicks) * 3;
-                RenderSystem.setShaderColor(1f, 1f, 1f, (float) (0.5f + (Math.sin(Math.toRadians(ticks)) * 0.25)));
-                gui.renderItem(workbench.getItemHandler().getItem(0), i + 146, j + 48);
-                gui.renderItemDecorations(Minecraft.getInstance().font, workbench.getItemHandler().getItem(0), i + 146, j + 48);
+            SimpleContainer inv = new SimpleContainer(14);
+            for (int ii = 0; ii < workbench.itemHandler.getSlots(); ii++) {
+                inv.setItem(ii, workbench.itemHandler.getStackInSlot(ii));
+            }
+            inv.setItem(13, workbench.itemOutputHandler.getStackInSlot(0));
+
+            Optional<ArcaneWorkbenchRecipe> recipe = workbench.getLevel().getRecipeManager().getRecipeFor(WizardsReborn.ARCANE_WORKBENCH_RECIPE.get(), inv, workbench.getLevel());
+
+            if (recipe.isPresent()) {
+                RenderSystem.setShaderColor(1f, 1f, 1f, 0.25f);
+                gui.renderItem(recipe.get().getResultItem(RegistryAccess.EMPTY), i + 146, j + 48);
+                gui.renderItemDecorations(Minecraft.getInstance().font, recipe.get().getResultItem(RegistryAccess.EMPTY), i + 146, j + 48);
                 RenderSystem.setShaderColor(1f, 1f, 1f, 1f);
             }
         }

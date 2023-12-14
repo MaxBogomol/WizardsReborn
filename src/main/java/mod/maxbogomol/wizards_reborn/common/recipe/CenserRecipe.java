@@ -66,10 +66,10 @@ public class CenserRecipe implements Recipe<Container>  {
 
     @Override
     public RecipeSerializer<?> getSerializer() {
-        return WizardsReborn.MORTAR_SERIALIZER.get();
+        return WizardsReborn.CENSER_SERIALIZER.get();
     }
 
-    public static class MortarRecipeType implements RecipeType<CenserRecipe> {
+    public static class CenserRecipeType implements RecipeType<CenserRecipe> {
         @Override
         public String toString() {
             return CenserRecipe.TYPE_ID.toString();

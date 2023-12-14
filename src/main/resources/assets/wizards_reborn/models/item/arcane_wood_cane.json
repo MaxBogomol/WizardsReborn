@@ -1,0 +1,68 @@
+{
+	"credit": "Made with Blockbench",
+	"parent": "minecraft:block/block",
+	"texture_size": [32, 32],
+	"textures": {
+		"0": "wizards_reborn:item/arcane_wood_cane",
+		"particle": "wizards_reborn:item/arcane_wood_cane"
+	},
+	"elements": [
+		{
+			"from": [0, 6, 6],
+			"to": [4, 14, 10],
+			"faces": {
+				"north": {"uv": [2, 2, 0, 6], "texture": "#0"},
+				"east": {"uv": [2, 2, 4, 6], "texture": "#0"},
+				"south": {"uv": [0, 2, 2, 6], "texture": "#0"},
+				"west": {"uv": [2, 2, 4, 6], "texture": "#0"},
+				"up": {"uv": [4, 2, 6, 4], "texture": "#0"},
+				"down": {"uv": [4, 4, 6, 6], "texture": "#0"}
+			}
+		},
+		{
+			"from": [4, 6, 6],
+			"to": [26, 10, 10],
+			"faces": {
+				"north": {"uv": [0, 0, 11, 2], "texture": "#0"},
+				"east": {"uv": [11, 0, 13, 2], "texture": "#0"},
+				"south": {"uv": [0, 0, 11, 2], "rotation": 180, "texture": "#0"},
+				"west": {"uv": [11, 0, 13, 2], "texture": "#0"},
+				"up": {"uv": [0, 0, 11, 2], "rotation": 180, "texture": "#0"},
+				"down": {"uv": [0, 0, 11, 2], "rotation": 180, "texture": "#0"}
+			}
+		}
+	],
+	"display": {
+		"thirdperson_righthand": {
+			"rotation": [0, 90, 0],
+			"translation": [0, -1.5, -3.25],
+			"scale": [0.5, 0.5, 0.5]
+		},
+		"thirdperson_lefthand": {
+			"rotation": [0, -90, 0],
+			"translation": [0, -1.5, -3.25],
+			"scale": [0.5, 0.5, 0.5]
+		},
+		"firstperson_righthand": {
+			"rotation": [-72, 90, 0],
+			"scale": [0.5, 0.5, 0.5]
+		},
+		"firstperson_lefthand": {
+			"rotation": [-72, -90, 0],
+			"scale": [0.5, 0.5, 0.5]
+		},
+		"ground": {
+			"translation": [-3, 3, 0],
+			"scale": [0.5, 0.5, 0.5]
+		},
+		"gui": {
+			"rotation": [30, 225, 0],
+			"translation": [2, 0, 0],
+			"scale": [0.6, 0.6, 0.6]
+		},
+		"fixed": {
+			"translation": [-3.75, 0, 0],
+			"scale": [0.75, 0.75, 0.75]
+		}
+	}
+}

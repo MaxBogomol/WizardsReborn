@@ -62,6 +62,7 @@ public class WizardsRebornClient {
 
     public static ModelResourceLocation JEWELER_TABLE_STONE_MODEl = new ModelResourceLocation(WizardsReborn.MOD_ID, "jeweler_table_stone", "");
     public static ModelResourceLocation ALTAR_OF_DROUGHT_FRAME_MODEl = new ModelResourceLocation(WizardsReborn.MOD_ID, "altar_of_drought_frame", "");
+    public static ModelResourceLocation ARCANE_ITERATOR_PIECE_MODEl = new ModelResourceLocation(WizardsReborn.MOD_ID, "arcane_iterator_piece", "");
 
     public static ShaderInstance GLOWING_SHADER, GLOWING_SPRITE_SHADER, GLOWING_PARTICLE_SHADER, SPRITE_PARTICLE_SHADER;
 
@@ -128,6 +129,7 @@ public class WizardsRebornClient {
             BlockEntityRenderers.register(WizardsReborn.ORBITAL_FLUID_RETAINER_TILE_ENTITY.get(), (trd) -> new OrbitalFluidRetainerTileEntityRenderer());
             BlockEntityRenderers.register(WizardsReborn.ALTAR_OF_DROUGHT_TILE_ENTITY.get(), (trd) -> new AltarOfDroughtTileEntityRenderer());
             BlockEntityRenderers.register(WizardsReborn.ARCANE_CENSER_TILE_ENTITY.get(), (trd) -> new ArcaneCenserTileEntityRenderer());
+            BlockEntityRenderers.register(WizardsReborn.ARCANE_ITERATOR_TILE_ENTITY.get(), (trd) -> new ArcaneIteratorTileEntityRenderer());
 
             BlockEntityRenderers.register(WizardsReborn.CRYSTAL_TILE_ENTITY.get(), (trd) -> new CrystalTileEntityRenderer());
 
@@ -152,6 +154,7 @@ public class WizardsRebornClient {
 
             event.register(JEWELER_TABLE_STONE_MODEl);
             event.register(ALTAR_OF_DROUGHT_FRAME_MODEl);
+            event.register(ARCANE_ITERATOR_PIECE_MODEl);
 
             event.register(FLUID_CENTER);
             event.register(FLUID_EXTRACTOR);
