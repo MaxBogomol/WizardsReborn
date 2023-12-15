@@ -1,10 +1,7 @@
 package mod.maxbogomol.wizards_reborn.common.tileentity;
 
 import mod.maxbogomol.wizards_reborn.WizardsReborn;
-import mod.maxbogomol.wizards_reborn.api.wissen.IWissenItem;
-import mod.maxbogomol.wizards_reborn.api.wissen.IWissenTileEntity;
-import mod.maxbogomol.wizards_reborn.api.wissen.WissenItemUtils;
-import mod.maxbogomol.wizards_reborn.api.wissen.WissenUtils;
+import mod.maxbogomol.wizards_reborn.api.wissen.*;
 import mod.maxbogomol.wizards_reborn.client.particle.Particles;
 import mod.maxbogomol.wizards_reborn.common.network.PacketHandler;
 import mod.maxbogomol.wizards_reborn.common.network.WissenSendEffectPacket;
@@ -27,9 +24,10 @@ import org.jetbrains.annotations.NotNull;
 import javax.annotation.Nullable;
 import java.util.Random;
 
-public class AltarOfDroughtTileEntity extends ExposedTileSimpleInventory implements TickableBlockEntity, IWissenTileEntity {
+public class AltarOfDroughtTileEntity extends ExposedTileSimpleInventory implements TickableBlockEntity, IWissenTileEntity, ICooldownTileEntity {
     public int wissen = 0;
     public int ticks = 0;
+    public int maxTicks = 0;
 
     public Random random = new Random();
 
@@ -78,6 +76,9 @@ public class AltarOfDroughtTileEntity extends ExposedTileSimpleInventory impleme
 
             if (ticks > 0) {
                 ticks = ticks - 1;
+                if (ticks <= 0) {
+                    maxTicks = 0;
+                }
                 update = true;
             }
 
@@ -96,6 +97,7 @@ public class AltarOfDroughtTileEntity extends ExposedTileSimpleInventory impleme
                                 level.destroyBlock(breakPos, false);
                                 addWissen(12);
                                 ticks = 20 + random.nextInt(10);
+                                maxTicks = ticks;
                                 isBreak = true;
                                 update = true;
                             }
@@ -197,6 +199,7 @@ public class AltarOfDroughtTileEntity extends ExposedTileSimpleInventory impleme
         super.saveAdditional(tag);
         tag.putInt("wissen", wissen);
         tag.putInt("ticks", ticks);
+        tag.putInt("maxTicks", maxTicks);
     }
 
     @Override
@@ -204,6 +207,7 @@ public class AltarOfDroughtTileEntity extends ExposedTileSimpleInventory impleme
         super.load(tag);
         wissen = tag.getInt("wissen");
         ticks = tag.getInt("ticks");
+        maxTicks = tag.getInt("maxTicks");
     }
 
     public float getBlockRotate() {
@@ -284,5 +288,13 @@ public class AltarOfDroughtTileEntity extends ExposedTileSimpleInventory impleme
         if (this.wissen < 0) {
             this.wissen = 0;
         }
+    }
+
+    @Override
+    public float getCooldown() {
+        if (ticks > 0) {
+            return (float) maxTicks / ticks;
+        }
+        return 0;
     }
 }

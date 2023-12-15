@@ -13,7 +13,9 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.SimpleContainer;
 import net.minecraft.world.entity.player.Inventory;
+import net.minecraft.world.item.ItemStack;
 
+import java.util.List;
 import java.util.Optional;
 
 public class ArcaneWorkbenchScreen extends AbstractContainerScreen<ArcaneWorkbenchContainer> {
@@ -48,18 +50,12 @@ public class ArcaneWorkbenchScreen extends AbstractContainerScreen<ArcaneWorkben
         if (menu.tileEntity instanceof ArcaneWorkbenchTileEntity) {
             ArcaneWorkbenchTileEntity workbench = (ArcaneWorkbenchTileEntity) menu.tileEntity;
 
-            SimpleContainer inv = new SimpleContainer(14);
-            for (int ii = 0; ii < workbench.itemHandler.getSlots(); ii++) {
-                inv.setItem(ii, workbench.itemHandler.getStackInSlot(ii));
-            }
-            inv.setItem(13, workbench.itemOutputHandler.getStackInSlot(0));
+            List<ItemStack> items = workbench.getItemsResult();
 
-            Optional<ArcaneWorkbenchRecipe> recipe = workbench.getLevel().getRecipeManager().getRecipeFor(WizardsReborn.ARCANE_WORKBENCH_RECIPE.get(), inv, workbench.getLevel());
-
-            if (recipe.isPresent()) {
+            if (items.size() > 0) {
                 RenderSystem.setShaderColor(1f, 1f, 1f, 0.25f);
-                gui.renderItem(recipe.get().getResultItem(RegistryAccess.EMPTY), i + 146, j + 48);
-                gui.renderItemDecorations(Minecraft.getInstance().font, recipe.get().getResultItem(RegistryAccess.EMPTY), i + 146, j + 48);
+                gui.renderItem(items.get(0), i + 146, j + 48);
+                gui.renderItemDecorations(Minecraft.getInstance().font, items.get(0), i + 146, j + 48);
                 RenderSystem.setShaderColor(1f, 1f, 1f, 1f);
             }
         }

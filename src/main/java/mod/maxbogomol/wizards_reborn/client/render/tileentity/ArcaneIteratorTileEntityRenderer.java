@@ -23,22 +23,58 @@ public class ArcaneIteratorTileEntityRenderer implements BlockEntityRenderer<Arc
         random.setSeed(iterator.getBlockPos().asLong());
 
         Minecraft mc = Minecraft.getInstance();
-        double ticks = (ClientTickHandler.ticksInGame + partialTicks);
+        double ticks = (iterator.rotate + partialTicks);
         double ticksOffset = (ClientTickHandler.ticksInGame + partialTicks) * 0.1F;
         double ticksUp = (ClientTickHandler.ticksInGame + partialTicks) * 4;
         ticksUp = (ticksUp) % 360;
+
+        if (!iterator.isWorks()) {
+            ticks = iterator.rotate;
+        }
 
         float x = 0.15625F;
         float y = 0.15625F;
         float z = 0.15625F;
         float offset = 1;
+        float size = 1;
 
-        offset = offset + Math.abs((float) ((Math.sin(Math.toRadians(random.nextFloat() * 360) + ticksOffset))));
-        float size =  Math.abs((float) ((Math.sin(Math.toRadians(random.nextFloat() * 360) + ticks / 100))));
-        size = 1;
+        if (iterator.wissenInCraft > 0 && iterator.startCraft) {
+            if (iterator.offset > 0) {
+                offset = (iterator.offset + partialTicks) / 40F;
+                if (offset > 1) {
+                    offset = 1;
+                }
+                offset = offset + 1;
+            }
+            if (iterator.scale > 0) {
+                size = (iterator.scale + partialTicks) / 60F;
+                if (size > 1) {
+                    size = 1;
+                }
+                size = 1 - size;
+            }
+        } else {
+            if (iterator.offset > 0) {
+                offset = (iterator.offset - partialTicks) / 40F;
+                if (offset < 0) {
+                    offset = 0;
+                }
+                offset = offset + 1;
+            }
+            if (iterator.scale > 0) {
+                size = (iterator.scale - partialTicks) / 60F;
+                if (size < 0) {
+                    size = 0;
+                }
+                size = 1 - size;
+            }
+        }
+        if (size < 0) {
+            size = 0;
+        }
 
         ms.pushPose();
-        ms.translate(0.5F, 0.5F, 0.5F);
+        ms.translate(0.5F, 0.5F + (Math.sin(Math.toRadians(ticksUp)) * 0.03125F), 0.5F);
         ms.mulPose(Axis.YP.rotationDegrees((float) (random.nextFloat() * 360 + ticks)));
         ms.mulPose(Axis.XP.rotationDegrees((float) (random.nextFloat() * 360 + ticks)));
         ms.scale(size, size, size);

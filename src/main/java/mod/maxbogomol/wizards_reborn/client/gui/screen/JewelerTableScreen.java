@@ -14,8 +14,10 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.SimpleContainer;
 import net.minecraft.world.entity.player.Inventory;
+import net.minecraft.world.item.ItemStack;
 import org.lwjgl.opengl.GL11;
 
+import java.util.List;
 import java.util.Optional;
 
 public class JewelerTableScreen extends AbstractContainerScreen<JewelerTableContainer> {
@@ -50,19 +52,13 @@ public class JewelerTableScreen extends AbstractContainerScreen<JewelerTableCont
         if (menu.tileEntity instanceof JewelerTableTileEntity) {
             JewelerTableTileEntity table = (JewelerTableTileEntity) menu.tileEntity;
 
-            SimpleContainer inv = new SimpleContainer(3);
-            for (int ii = 0; ii < table.itemHandler.getSlots(); ii++) {
-                inv.setItem(ii, table.itemHandler.getStackInSlot(ii));
-            }
-            inv.setItem(2, table.itemOutputHandler.getStackInSlot(0));
+            List<ItemStack> items = table.getItemsResult();
 
-            Optional<JewelerTableRecipe> recipe = table.getLevel().getRecipeManager().getRecipeFor(WizardsReborn.JEWELER_TABLE_RECIPE.get(), inv, table.getLevel());
-
-            if (recipe.isPresent()) {
+            if (items.size() > 0) {
                 double ticks = (ClientTickHandler.ticksInGame + partialTicks) * 3;
                 RenderSystem.setShaderColor(1f, 1f, 1f, (float) (0.5f + (Math.sin(Math.toRadians(ticks)) * 0.25)));
-                gui.renderItem(recipe.get().getResultItem(RegistryAccess.EMPTY), i + 132, j + 48);
-                gui.renderItemDecorations(Minecraft.getInstance().font, recipe.get().getResultItem(RegistryAccess.EMPTY), i + 146, j + 48);
+                gui.renderItem(items.get(0), i + 132, j + 48);
+                gui.renderItemDecorations(Minecraft.getInstance().font, items.get(0), i + 146, j + 48);
                 RenderSystem.setShaderColor(1f, 1f, 1f, 1f);
             }
         }

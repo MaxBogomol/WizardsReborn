@@ -25,6 +25,10 @@ import java.util.UUID;
 
 public class InventorWizardArmorItem extends ArmorItem implements IForgeItem {
     public static final UUID BASE_WISSEN_SALE_UUID = UUID.fromString("0D0AA300-8D31-11EE-B9D1-0242AC120002");
+    public static final UUID CHEST_WISSEN_SALE_UUID = UUID.fromString("78537078-9ABB-11EE-b9D1-0242AC120002");
+    public static final UUID HEAD_WISSEN_SALE_UUID = UUID.fromString("7BEC8BFC-9ABB-11EE-B9D1-0242AC120002");
+    public static final UUID LEGS_WISSEN_SALE_UUID = UUID.fromString("7E429B80-9ABB-11EE-B9D1-0242AC120002");
+    public static final UUID FEET_WISSEN_SALE_UUID = UUID.fromString("834D5B42-9ABB-11EE-B9D1-0242AC120002");
 
     public InventorWizardArmorItem(ArmorMaterial material, ArmorItem.Type type, Properties properties) {
         super(material, type, properties);
@@ -40,11 +44,21 @@ public class InventorWizardArmorItem extends ArmorItem implements IForgeItem {
         };
     }
 
+    public static UUID getWissenSaleUUIDForSlot(EquipmentSlot slot) {
+        return switch (slot) {
+            case CHEST -> CHEST_WISSEN_SALE_UUID;
+            case HEAD -> HEAD_WISSEN_SALE_UUID;
+            case LEGS -> LEGS_WISSEN_SALE_UUID;
+            case FEET -> FEET_WISSEN_SALE_UUID;
+            default -> BASE_WISSEN_SALE_UUID;
+        };
+    }
+
     @Override
     public Multimap<Attribute, AttributeModifier> getDefaultAttributeModifiers(EquipmentSlot slot) {
         ImmutableMultimap.Builder<Attribute, AttributeModifier> atts = ImmutableMultimap.builder();
         atts.putAll(super.getDefaultAttributeModifiers(slot));
-        atts.put(WizardsReborn.WISSEN_SALE.get(), new AttributeModifier(BASE_WISSEN_SALE_UUID, "bonus", getWissenSaleForSlot(slot), AttributeModifier.Operation.ADDITION));
+        atts.put(WizardsReborn.WISSEN_SALE.get(), new AttributeModifier(getWissenSaleUUIDForSlot(slot), "bonus", getWissenSaleForSlot(slot), AttributeModifier.Operation.ADDITION));
         return slot == type.getSlot() ? atts.build() : super.getDefaultAttributeModifiers(slot);
     }
 

@@ -2,10 +2,7 @@ package mod.maxbogomol.wizards_reborn.common.tileentity;
 
 import mod.maxbogomol.wizards_reborn.WizardsReborn;
 import mod.maxbogomol.wizards_reborn.api.crystal.CrystalUtils;
-import mod.maxbogomol.wizards_reborn.api.wissen.ICooldownTileEntity;
-import mod.maxbogomol.wizards_reborn.api.wissen.IWissenTileEntity;
-import mod.maxbogomol.wizards_reborn.api.wissen.IWissenWandFunctionalTileEntity;
-import mod.maxbogomol.wizards_reborn.api.wissen.WissenUtils;
+import mod.maxbogomol.wizards_reborn.api.wissen.*;
 import mod.maxbogomol.wizards_reborn.client.particle.Particles;
 import mod.maxbogomol.wizards_reborn.common.network.PacketHandler;
 import mod.maxbogomol.wizards_reborn.common.network.tileentity.WissenCrystallizerBurstEffectPacket;
@@ -23,10 +20,12 @@ import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 import org.jetbrains.annotations.NotNull;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 import java.util.Random;
 
-public class WissenCrystallizerTileEntity extends ExposedTileSimpleInventory implements TickableBlockEntity, IWissenTileEntity, ICooldownTileEntity, IWissenWandFunctionalTileEntity {
+public class WissenCrystallizerTileEntity extends ExposedTileSimpleInventory implements TickableBlockEntity, IWissenTileEntity, ICooldownTileEntity, IWissenWandFunctionalTileEntity, IItemResultTileEntity {
 
     public int wissenInCraft= 0;
     public int wissenIsCraft = 0;
@@ -306,5 +305,23 @@ public class WissenCrystallizerTileEntity extends ExposedTileSimpleInventory imp
             return (float) wissenInCraft / wissenIsCraft;
         }
         return 0;
+    }
+
+
+    @Override
+    public List<ItemStack> getItemsResult() {
+        List<ItemStack> list = new ArrayList<>();
+        Optional<WissenCrystallizerRecipe> recipe = level.getRecipeManager().getRecipeFor(WizardsReborn.WISSEN_CRYSTALLIZER_RECIPE.get(), getItemHandler(), level);
+        wissenInCraft =  recipe.map(WissenCrystallizerRecipe::getRecipeWissen).orElse(0);
+
+        if (recipe.isPresent() && wissenInCraft > 0) {
+            ItemStack stack = recipe.get().getResultItem(RegistryAccess.EMPTY).copy();
+            if (recipe.get().getRecipeIsSaveNBT()) {
+                stack.setTag(getItemHandler().getItem(0).copy().getOrCreateTag());
+            }
+            list.add(stack);
+        }
+
+        return list;
     }
 }

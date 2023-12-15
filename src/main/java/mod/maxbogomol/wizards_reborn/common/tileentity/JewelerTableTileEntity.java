@@ -1,10 +1,7 @@
 package mod.maxbogomol.wizards_reborn.common.tileentity;
 
 import mod.maxbogomol.wizards_reborn.WizardsReborn;
-import mod.maxbogomol.wizards_reborn.api.wissen.ICooldownTileEntity;
-import mod.maxbogomol.wizards_reborn.api.wissen.IWissenTileEntity;
-import mod.maxbogomol.wizards_reborn.api.wissen.IWissenWandFunctionalTileEntity;
-import mod.maxbogomol.wizards_reborn.api.wissen.WissenUtils;
+import mod.maxbogomol.wizards_reborn.api.wissen.*;
 import mod.maxbogomol.wizards_reborn.client.particle.Particles;
 import mod.maxbogomol.wizards_reborn.common.item.CrystalItem;
 import mod.maxbogomol.wizards_reborn.common.network.PacketHandler;
@@ -37,12 +34,14 @@ import org.jetbrains.annotations.NotNull;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import java.awt.*;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 import java.util.Random;
 
 import static net.minecraft.world.level.block.state.properties.BlockStateProperties.HORIZONTAL_FACING;
 
-public class JewelerTableTileEntity extends BlockEntity implements TickableBlockEntity, IWissenTileEntity, ICooldownTileEntity, IWissenWandFunctionalTileEntity {
+public class JewelerTableTileEntity extends BlockEntity implements TickableBlockEntity, IWissenTileEntity, ICooldownTileEntity, IWissenWandFunctionalTileEntity, IItemResultTileEntity {
     public final ItemStackHandler itemHandler = createHandler(2);
     public final LazyOptional<IItemHandler> handler = LazyOptional.of(() -> itemHandler);
     public final ItemStackHandler itemOutputHandler = createHandler(1);
@@ -460,5 +459,29 @@ public class JewelerTableTileEntity extends BlockEntity implements TickableBlock
             return (float) wissenInCraft / wissenIsCraft;
         }
         return 0;
+    }
+
+    @Override
+    public List<ItemStack> getItemsResult() {
+        List<ItemStack> list = new ArrayList<>();
+
+        SimpleContainer inv = new SimpleContainer(3);
+        for (int i = 0; i < itemHandler.getSlots(); i++) {
+            inv.setItem(i, itemHandler.getStackInSlot(i));
+        }
+        inv.setItem(2, itemOutputHandler.getStackInSlot(0));
+
+        Optional<JewelerTableRecipe> recipe = level.getRecipeManager().getRecipeFor(WizardsReborn.JEWELER_TABLE_RECIPE.get(), inv, level);
+        wissenInCraft = recipe.map(JewelerTableRecipe::getRecipeWissen).orElse(0);
+
+        if (recipe.isPresent() && wissenInCraft > 0) {
+            ItemStack stack = recipe.get().getResultItem(RegistryAccess.EMPTY).copy();
+            if (recipe.get().getRecipeIsSaveNBT()) {
+                stack.setTag(itemHandler.getStackInSlot(0).copy().getOrCreateTag());
+            }
+            list.add(stack);
+        }
+
+        return list;
     }
 }

@@ -6,6 +6,7 @@ import mod.maxbogomol.wizards_reborn.api.alchemy.IFluidTileEntity;
 import mod.maxbogomol.wizards_reborn.api.alchemy.IHeatTileEntity;
 import mod.maxbogomol.wizards_reborn.api.alchemy.ISteamTileEntity;
 import mod.maxbogomol.wizards_reborn.api.wissen.ICooldownTileEntity;
+import mod.maxbogomol.wizards_reborn.api.wissen.IItemResultTileEntity;
 import mod.maxbogomol.wizards_reborn.api.wissen.IWissenTileEntity;
 import mod.maxbogomol.wizards_reborn.api.wissen.IWissenWandFunctionalTileEntity;
 import mod.maxbogomol.wizards_reborn.common.tileentity.AlchemyMachineTileEntity;
@@ -296,6 +297,18 @@ public class WissenWandItem extends Item {
                     BlockEntity tileentity = bpos != null ? mc.level.getBlockEntity(bpos) : null;
 
                     if (tileentity != null) {
+                        if (tileentity instanceof IItemResultTileEntity tile) {
+                            List<ItemStack> list = tile.getItemsResult();
+                            int i = 0;
+                            for (ItemStack item : list) {
+                                int x = mc.getWindow().getGuiScaledWidth() / 2 - 8;
+                                int y = mc.getWindow().getGuiScaledHeight() / 2 - 26;
+                                gui.renderItem(item, x, y);
+                                gui.renderItemDecorations(Minecraft.getInstance().font, item, x, y);
+                                i++;
+                            }
+                        }
+
                         int i = 0;
                         if (tileentity instanceof IWissenTileEntity) {
                             IWissenTileEntity wissenTile = (IWissenTileEntity) tileentity;
