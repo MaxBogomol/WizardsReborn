@@ -3,6 +3,7 @@ package mod.maxbogomol.wizards_reborn.common.tileentity;
 import mod.maxbogomol.wizards_reborn.WizardsReborn;
 import mod.maxbogomol.wizards_reborn.api.alchemy.PipeConnection;
 import mod.maxbogomol.wizards_reborn.api.alchemy.SteamUtils;
+import mod.maxbogomol.wizards_reborn.api.wissen.IItemResultTileEntity;
 import mod.maxbogomol.wizards_reborn.api.wissen.IWissenWandFunctionalTileEntity;
 import mod.maxbogomol.wizards_reborn.api.wissen.WissenUtils;
 import mod.maxbogomol.wizards_reborn.client.particle.Particles;
@@ -37,12 +38,14 @@ import org.jetbrains.annotations.NotNull;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 import java.util.Random;
 
 import static net.minecraft.world.level.block.state.properties.BlockStateProperties.HORIZONTAL_FACING;
 
-public class AlchemyMachineTileEntity extends PipeBaseTileEntity implements TickableBlockEntity, IWissenWandFunctionalTileEntity {
+public class AlchemyMachineTileEntity extends PipeBaseTileEntity implements TickableBlockEntity, IWissenWandFunctionalTileEntity, IItemResultTileEntity {
     protected FluidTank fluidTank1 = new FluidTank(getMaxCapacity()) {
         @Override
         public void onContentsChanged() {
@@ -479,5 +482,29 @@ public class AlchemyMachineTileEntity extends PipeBaseTileEntity implements Tick
         }
 
         return false;
+    }
+
+    @Override
+    public List<ItemStack> getItemsResult() {
+        List<ItemStack> list = new ArrayList<>();
+
+        SimpleContainer inv = new SimpleContainer(7);
+        for (int i = 0; i < itemHandler.getSlots(); i++) {
+            inv.setItem(i, itemHandler.getStackInSlot(i));
+        }
+        inv.setItem(6, itemOutputHandler.getStackInSlot(0));
+
+        AlchemyMachineContext conext = new AlchemyMachineContext(inv, fluidTank1, fluidTank2, fluidTank3);
+        Optional<AlchemyMachineRecipe> recipe = level.getRecipeManager().getRecipeFor(WizardsReborn.ALCHEMY_MACHINE_RECIPE.get(), conext, level);
+        if (recipe.isPresent()) {
+            ItemStack stack = recipe.get().getResultItem(RegistryAccess.EMPTY).copy();
+            list.add(stack);
+
+            if (!recipe.get().getResultFluid().isEmpty()) {
+                list.add(recipe.get().getResultFluid().getFluid().getBucket().getDefaultInstance().copy());
+            }
+        }
+
+        return list;
     }
 }

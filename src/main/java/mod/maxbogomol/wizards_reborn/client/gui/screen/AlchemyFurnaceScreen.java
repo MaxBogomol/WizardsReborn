@@ -13,9 +13,11 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.SimpleContainer;
 import net.minecraft.world.entity.player.Inventory;
+import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.RecipeType;
 import net.minecraft.world.item.crafting.SmeltingRecipe;
 
+import java.util.List;
 import java.util.Optional;
 
 public class AlchemyFurnaceScreen extends AbstractContainerScreen<AlchemyFurnaceContainer> {
@@ -80,15 +82,12 @@ public class AlchemyFurnaceScreen extends AbstractContainerScreen<AlchemyFurnace
                 }
             }
 
-            SimpleContainer inv = new SimpleContainer(1);
-            inv.setItem(0, furnace.itemHandler.getStackInSlot(0));
+            List<ItemStack> items = furnace.getItemsResult();
 
-            Optional<SmeltingRecipe> recipe = furnace.getLevel().getRecipeManager().getRecipeFor(RecipeType.SMELTING, inv, furnace.getLevel());
-
-            if (recipe.isPresent()) {
+            if (items.size() > 0) {
                 RenderSystem.setShaderColor(1f, 1f, 1f, 0.25f);
-                gui.renderItem(recipe.get().getResultItem(RegistryAccess.EMPTY), i + 132, j + 48);
-                gui.renderItemDecorations(Minecraft.getInstance().font, recipe.get().getResultItem(RegistryAccess.EMPTY), i + 132, j + 48);
+                gui.renderItem(items.get(0), i + 132, j + 48);
+                gui.renderItemDecorations(Minecraft.getInstance().font, items.get(0), i + 132, j + 48);
                 RenderSystem.setShaderColor(1f, 1f, 1f, 1f);
             }
         }

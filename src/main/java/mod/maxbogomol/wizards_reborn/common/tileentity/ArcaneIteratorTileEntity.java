@@ -96,14 +96,16 @@ public class ArcaneIteratorTileEntity extends BlockEntity implements TickableBlo
                         }
 
                         for (int i = 0; i < pedestals.size(); i++) {
-                            pedestals.get(i).getItemHandler().removeItemNoUpdate(0);
-                            PacketUtils.SUpdateTileEntityPacket(pedestals.get(i));
-                            CompoundTag tagBlock = new CompoundTag();
-                            tagBlock.putInt("x", pedestals.get(i).getBlockPos().getX());
-                            tagBlock.putInt("y", pedestals.get(i).getBlockPos().getY());
-                            tagBlock.putInt("z", pedestals.get(i).getBlockPos().getZ());
-                            tagPos.put(String.valueOf(i), tagBlock);
-                            level.playSound(WizardsReborn.proxy.getPlayer(), pedestals.get(i).getBlockPos(), WizardsReborn.WISSEN_TRANSFER_SOUND.get(), SoundSource.BLOCKS, 0.25f, (float) (1f + ((random.nextFloat() - 0.5D) / 4)));
+                            if (!pedestals.get(i).getItemHandler().getItem(0).isEmpty()) {
+                                pedestals.get(i).getItemHandler().removeItemNoUpdate(0);
+                                PacketUtils.SUpdateTileEntityPacket(pedestals.get(i));
+                                CompoundTag tagBlock = new CompoundTag();
+                                tagBlock.putInt("x", pedestals.get(i).getBlockPos().getX());
+                                tagBlock.putInt("y", pedestals.get(i).getBlockPos().getY());
+                                tagBlock.putInt("z", pedestals.get(i).getBlockPos().getZ());
+                                tagPos.put(String.valueOf(i), tagBlock);
+                                level.playSound(WizardsReborn.proxy.getPlayer(), pedestals.get(i).getBlockPos(), WizardsReborn.WISSEN_TRANSFER_SOUND.get(), SoundSource.BLOCKS, 0.25f, (float) (1f + ((random.nextFloat() - 0.5D) / 4)));
+                            }
                         }
                         getMainPedestal().setItem(0, stack);
                         PacketUtils.SUpdateTileEntityPacket(getMainPedestal());
@@ -183,11 +185,13 @@ public class ArcaneIteratorTileEntity extends BlockEntity implements TickableBlo
 
                     List<ArcanePedestalTileEntity> pedestals = getPedestals();
                     for (ArcanePedestalTileEntity pedestal : pedestals) {
-                        if (random.nextFloat() < 0.025) {
-                            bursts.add(new ArcaneIteratorBurst(level, pedestal.getBlockPos().getX() + 0.5F, pedestal.getBlockPos().getY() + 1.3F, pedestal.getBlockPos().getZ() + 0.5F,
-                                    getBlockPos().getX() + 0.5F, getBlockPos().getY() + 0.5F, getBlockPos().getZ() + 0.5F, 0.05f, 20, 200,
-                                    random.nextFloat(), random.nextFloat(), random.nextFloat()));
-                            level.playSound(WizardsReborn.proxy.getPlayer(), pedestal.getBlockPos(), WizardsReborn.WISSEN_TRANSFER_SOUND.get(), SoundSource.BLOCKS, 0.25f, (float) (1f + ((random.nextFloat() - 0.5D) / 4)));
+                        if (!pedestal.getItemHandler().getItem(0).isEmpty()) {
+                            if (random.nextFloat() < 0.025) {
+                                bursts.add(new ArcaneIteratorBurst(level, pedestal.getBlockPos().getX() + 0.5F, pedestal.getBlockPos().getY() + 1.3F, pedestal.getBlockPos().getZ() + 0.5F,
+                                        getBlockPos().getX() + 0.5F, getBlockPos().getY() + 0.5F, getBlockPos().getZ() + 0.5F, 0.05f, 20, 200,
+                                        random.nextFloat(), random.nextFloat(), random.nextFloat()));
+                                level.playSound(WizardsReborn.proxy.getPlayer(), pedestal.getBlockPos(), WizardsReborn.WISSEN_TRANSFER_SOUND.get(), SoundSource.BLOCKS, 0.25f, (float) (1f + ((random.nextFloat() - 0.5D) / 4)));
+                            }
                         }
                     }
                 } else {

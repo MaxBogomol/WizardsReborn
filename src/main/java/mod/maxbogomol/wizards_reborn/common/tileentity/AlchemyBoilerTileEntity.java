@@ -4,6 +4,7 @@ import mod.maxbogomol.wizards_reborn.WizardsReborn;
 import mod.maxbogomol.wizards_reborn.api.alchemy.IFluidTileEntity;
 import mod.maxbogomol.wizards_reborn.api.alchemy.ISteamTileEntity;
 import mod.maxbogomol.wizards_reborn.api.alchemy.PipeConnection;
+import mod.maxbogomol.wizards_reborn.api.wissen.IItemResultTileEntity;
 import mod.maxbogomol.wizards_reborn.api.wissen.IWissenTileEntity;
 import mod.maxbogomol.wizards_reborn.api.wissen.IWissenWandFunctionalTileEntity;
 import mod.maxbogomol.wizards_reborn.utils.PacketUtils;
@@ -12,6 +13,7 @@ import net.minecraft.core.Direction;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.Connection;
 import net.minecraft.network.protocol.game.ClientboundBlockEntityDataPacket;
+import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityType;
@@ -26,12 +28,14 @@ import org.jetbrains.annotations.NotNull;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
 
 import static net.minecraft.world.level.block.NetherPortalBlock.AXIS;
 import static net.minecraft.world.level.block.state.properties.BlockStateProperties.HORIZONTAL_FACING;
 
-public class AlchemyBoilerTileEntity extends PipeBaseTileEntity implements TickableBlockEntity, IFluidTileEntity, ISteamTileEntity, IWissenTileEntity, IWissenWandFunctionalTileEntity {
+public class AlchemyBoilerTileEntity extends PipeBaseTileEntity implements TickableBlockEntity, IFluidTileEntity, ISteamTileEntity, IWissenTileEntity, IWissenWandFunctionalTileEntity, IItemResultTileEntity {
     protected FluidTank fluidTank = new FluidTank(getMaxCapacity()) {
         @Override
         public void onContentsChanged() {
@@ -279,5 +283,15 @@ public class AlchemyBoilerTileEntity extends PipeBaseTileEntity implements Ticka
         if (level.getBlockEntity(getBlockPos().below()) instanceof AlchemyMachineTileEntity machine) {
             machine.startCraft = true;
         }
+    }
+
+    @Override
+    public List<ItemStack> getItemsResult() {
+        List<ItemStack> list = new ArrayList<>();
+        if (level.getBlockEntity(getBlockPos().below()) instanceof AlchemyMachineTileEntity machine) {
+            return machine.getItemsResult();
+        }
+
+        return list;
     }
 }

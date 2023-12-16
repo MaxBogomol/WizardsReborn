@@ -1,5 +1,6 @@
 package mod.maxbogomol.wizards_reborn.api.knowledge;
 
+import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
@@ -29,6 +30,18 @@ public class Knowledge {
 
     public boolean getArticles() {
         return articles;
+    }
+
+    public boolean hasToast() {
+        return true;
+    }
+
+    public boolean hasAllAward() {
+        return true;
+    }
+
+    public void award(Player player) {
+
     }
 
     @OnlyIn(Dist.CLIENT)

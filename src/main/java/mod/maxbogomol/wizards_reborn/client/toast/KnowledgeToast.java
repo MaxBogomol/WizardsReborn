@@ -3,11 +3,11 @@ package mod.maxbogomol.wizards_reborn.client.toast;
 import mod.maxbogomol.wizards_reborn.WizardsReborn;
 import mod.maxbogomol.wizards_reborn.api.knowledge.Knowledge;
 import mod.maxbogomol.wizards_reborn.api.knowledge.Knowledges;
-import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.components.toasts.Toast;
 import net.minecraft.client.gui.components.toasts.ToastComponent;
 import net.minecraft.network.chat.Component;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 
@@ -19,6 +19,7 @@ public class KnowledgeToast implements Toast {
     public static KnowledgeToast instance;
     public boolean all;
     public boolean articles;
+    public ResourceLocation TEXTURE = new ResourceLocation(WizardsReborn.MOD_ID, "textures/gui/knowledge_toast.png");
 
     public KnowledgeToast(Component id) {
         this.id = id;
@@ -26,7 +27,7 @@ public class KnowledgeToast implements Toast {
 
     @Override
     public Visibility render(GuiGraphics guiGraphics, ToastComponent toastComponent, long timeSinceLastVisible) {
-        guiGraphics.blit(TEXTURE, 0, 0, 0, 0, this.width(), this.height());
+        guiGraphics.blit(TEXTURE, 0, 0, 0, 0, this.width(), this.height(), 256, 32);
 
         if (all) {
             guiGraphics.renderItem(WizardsReborn.ARCANEMICON.get().getDefaultInstance(), 8, 8);

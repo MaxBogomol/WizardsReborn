@@ -45,7 +45,9 @@ public class EarthRaySpell extends RaySpell {
                     float damage = (float) (2.0f + (focusLevel * 0.5));
                     DamageSource damageSource = new DamageSource(target.damageSources().generic().typeHolder(), projectile, player);
                     target.hurt(new DamageSource(target.damageSources().generic().typeHolder(), projectile, player), damage);
-                    player.getInventory().hurtArmor(damageSource, damage, Inventory.ALL_ARMOR_SLOTS);
+                    if (target instanceof Player targetPlayer) {
+                        targetPlayer.getInventory().hurtArmor(damageSource, damage, Inventory.ALL_ARMOR_SLOTS);
+                    }
                 }
             }
         }

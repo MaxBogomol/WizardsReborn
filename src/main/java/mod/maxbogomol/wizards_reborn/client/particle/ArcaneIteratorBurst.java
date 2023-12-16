@@ -39,7 +39,7 @@ public class ArcaneIteratorBurst {
         double pitch = random.nextDouble() * Math.PI * 2;
 
         this.velX = (float) (Math.sin(pitch) * Math.cos(yaw) * speed);
-        velY = (float) (Math.cos(pitch) * speed);
+        this.velY = (float) (Math.cos(pitch) * speed);
         this.velZ = (float) (Math.sin(pitch) * Math.sin(yaw) * speed);
 
         this.end = false;

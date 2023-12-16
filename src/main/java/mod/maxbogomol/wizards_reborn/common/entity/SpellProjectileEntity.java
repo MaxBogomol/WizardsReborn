@@ -42,7 +42,6 @@ public class SpellProjectileEntity extends Entity {
         getEntityData().set(casterId, Optional.of(caster));
         getEntityData().set(spellId, spell);
         getEntityData().set(crystalStats, stats);
-        //hurtMarked = true;
         return this;
     }
 

@@ -31,6 +31,8 @@ public class EarthProjectileSpell extends ProjectileSpell {
         float damage = (float) (4.5f + (focusLevel * 0.5));
         DamageSource damageSource = new DamageSource(target.damageSources().generic().typeHolder(), projectile, player);
         target.hurt(damageSource, damage);
-        player.getInventory().hurtArmor(damageSource, damage, Inventory.ALL_ARMOR_SLOTS);
+        if (target instanceof Player targetPlayer) {
+            targetPlayer.getInventory().hurtArmor(damageSource, damage, Inventory.ALL_ARMOR_SLOTS);
+        }
     }
 }

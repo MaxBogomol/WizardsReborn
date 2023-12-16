@@ -28,8 +28,12 @@ public class KnowledgeUtils {
             if (k.isKnowledge(knowledge)) return;
             k.addKnowledge(knowledge);
 
+            knowledge.award((Player) entity);
+
             PacketHandler.sendTo((Player) entity, new KnowledgeUpdatePacket((Player) entity));
-            PacketHandler.sendTo((Player) entity, new KnowledgeToastPacket((Player) entity, knowledge.getId(), false));
+            if (knowledge.hasToast()) {
+                PacketHandler.sendTo((Player) entity, new KnowledgeToastPacket((Player) entity, knowledge.getId(), false));
+            }
         });
     }
 
@@ -47,6 +51,12 @@ public class KnowledgeUtils {
         if (!(entity instanceof Player)) return;
         entity.getCapability(IKnowledge.INSTANCE, null).ifPresent((k) -> {
             k.addAllKnowledge();
+
+            for (Knowledge knowledge : Knowledges.getKnowledges()) {
+                if (knowledge.hasAllAward()) {
+                    knowledge.award((Player) entity);
+                }
+            }
 
             PacketHandler.sendTo((Player) entity, new KnowledgeUpdatePacket((Player) entity));
             PacketHandler.sendTo((Player) entity, new KnowledgeToastPacket((Player) entity, "", true));

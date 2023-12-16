@@ -9,7 +9,6 @@ import net.minecraft.util.Mth;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.world.item.ArmorItem;
 import net.minecraft.world.item.ArmorMaterial;
 import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.api.distmarker.Dist;
@@ -17,7 +16,7 @@ import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.client.extensions.common.IClientItemExtensions;
 import net.minecraftforge.common.extensions.IForgeItem;
 
-public class ArcaneFortressArmorItem extends ArmorItem implements IForgeItem {
+public class ArcaneFortressArmorItem extends ArcaneArmorItem implements IForgeItem {
     public ArcaneFortressArmorItem(ArmorMaterial material, Type type, Properties properties) {
         super(material, type, properties);
     }

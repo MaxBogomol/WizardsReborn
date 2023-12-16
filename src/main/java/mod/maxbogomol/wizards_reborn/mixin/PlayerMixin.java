@@ -13,5 +13,6 @@ public class PlayerMixin {
     @Inject(method = "createAttributes", at = @At("RETURN"))
     private static void createAttributes(CallbackInfoReturnable<AttributeSupplier.Builder> ci) {
         ci.getReturnValue().add(WizardsReborn.WISSEN_SALE.get());
+        ci.getReturnValue().add(WizardsReborn.MAGIC_ARMOR.get());
     }
 }

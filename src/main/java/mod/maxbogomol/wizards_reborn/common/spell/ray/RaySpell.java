@@ -67,7 +67,7 @@ public class RaySpell extends Spell {
 
             Vec3 pos = player.getEyePosition();
             SpellProjectileEntity entity = new SpellProjectileEntity(WizardsReborn.SPELL_PROJECTILE.get(), world).shoot(
-                    pos.x, pos.y - 0.5, pos.z, 0, 0, 0, player.getUUID(), this.getId(), stats
+                    pos.x, pos.y - 0.4, pos.z, 0, 0, 0, player.getUUID(), this.getId(), stats
             ).createSpellData(spellData);
             world.addFreshEntity(entity);
 
@@ -186,7 +186,7 @@ public class RaySpell extends Spell {
                 float g = color.getGreen() / 255f;
                 float b = color.getBlue() / 255f;
 
-                PacketHandler.sendToTracking(entity.level(), new BlockPos((int) pos.x, (int) pos.y, (int) pos.z), new RaySpellEffectPacket((float) posStart.x, (float) (posStart.y + 0.2), (float) posStart.z, (float) posEnd.x, (float) (posEnd.y + 0.2), (float) posEnd.z, r, g, b, burst));
+                PacketHandler.sendToTracking(entity.level(), new BlockPos((int) pos.x, (int) pos.y, (int) pos.z), new RaySpellEffectPacket((float) posStart.x, (float) posStart.y + 0.2F, (float) posStart.z, (float) posEnd.x, (float) posEnd.y + 0.4F, (float) posEnd.z, r, g, b, burst));
             }
 
             if (random.nextFloat() < 0.5) {
@@ -204,9 +204,9 @@ public class RaySpell extends Spell {
     public void updatePos(SpellProjectileEntity entity) {
         if (entity.getSender() != null) {
             entity.xo = entity.getSender().xo;
-            entity.yo = entity.getSender().yo - 0.5;
+            entity.yo = entity.getSender().yo - 0.4;
             entity.zo =  entity.getSender().zo;
-            entity.setPos(entity.getSender().getEyePosition().add(0, -0.5, 0));
+            entity.setPos(entity.getSender().getEyePosition().add(0, -0.4f, 0));
         }
     }
 
@@ -283,6 +283,10 @@ public class RaySpell extends Spell {
     @Override
     @OnlyIn(Dist.CLIENT)
     public void render(SpellProjectileEntity entity, float entityYaw, float partialTicks, PoseStack stack, MultiBufferSource buffer, int light) {
+        HitResult ray = getHitResult(entity, entity.position(), entity.getLookAngle().scale(getRayDistance()), entity.level(), (e) -> {
+            return !e.isSpectator() && e.isPickable() && !e.getUUID().equals(entity.getEntityData().get(entity.casterId).get());
+        });
+
         Color color = getColor();
         float r = color.getRed() / 255f;
         float g = color.getGreen() / 255f;
@@ -291,10 +295,22 @@ public class RaySpell extends Spell {
         float offset = 1.0f;
         updateRot(entity);
 
+        float yRot = Mth.lerp(partialTicks, -entity.yRotO, -entity.getYRot()) - 90.0F;
+        float xRot = Mth.lerp(partialTicks, -entity.xRotO, -entity.getXRot());
+
+        double dX = entity.getX() - ray.getLocation().x();
+        double dY = entity.getY() + 0.2F - ray.getLocation().y();
+        double dZ = entity.getZ() - ray.getLocation().z();
+
+        double yaw = Math.atan2(dZ, dX);
+        double pitch = Math.atan2(Math.sqrt(dZ * dZ + dX * dX), dY) + Math.PI;
+
+        float angle = (float) (xRot - pitch);
+
         stack.pushPose();
         stack.translate(0, 0.2, 0);
-        stack.mulPose(Axis.YP.rotationDegrees(Mth.lerp(partialTicks, -entity.yRotO, -entity.getYRot()) - 90.0F));
-        stack.mulPose(Axis.ZP.rotationDegrees(Mth.lerp(partialTicks, -entity.xRotO, -entity.getXRot())));
+        stack.mulPose(Axis.YP.rotationDegrees(yRot));
+        stack.mulPose(Axis.ZP.rotationDegrees(angle));
         stack.mulPose(Axis.XP.rotationDegrees((entity.tickCount + partialTicks) * 5f));
 
         stack.translate(offset, 0, 0);
@@ -313,9 +329,6 @@ public class RaySpell extends Spell {
             }
         }
 
-        HitResult ray = getHitResult(entity, entity.position(), entity.getLookAngle().scale(getRayDistance()), entity.level(), (e) -> {
-            return !e.isSpectator() && e.isPickable() && !e.getUUID().equals(entity.getEntityData().get(entity.casterId).get());
-        });
         float distance = (float) Math.sqrt(Math.pow(entity.getX() - ray.getLocation().x, 2) + Math.pow(entity.getY() - ray.getLocation().y, 2) + Math.pow(entity.getZ() - ray.getLocation().z, 2));
         RenderUtils.ray(stack, bufferDelayed, 0.1f * width, (distance - offset) * width, Mth.lerp(distance / 25f, 1f, 0.5f), r, g, b, 1, r, g, b, 0.1F);
         stack.translate(-0.05f, 0, 0);

@@ -4,6 +4,7 @@ import mod.maxbogomol.wizards_reborn.WizardsReborn;
 import mod.maxbogomol.wizards_reborn.api.alchemy.IFluidTileEntity;
 import mod.maxbogomol.wizards_reborn.api.alchemy.IHeatTileEntity;
 import mod.maxbogomol.wizards_reborn.api.alchemy.ISteamTileEntity;
+import mod.maxbogomol.wizards_reborn.api.wissen.IItemResultTileEntity;
 import mod.maxbogomol.wizards_reborn.utils.PacketUtils;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -41,12 +42,14 @@ import org.jetbrains.annotations.NotNull;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 import java.util.Random;
 
 import static net.minecraft.world.level.block.state.properties.BlockStateProperties.HORIZONTAL_FACING;
 
-public class AlchemyFurnaceTileEntity extends BlockEntity implements TickableBlockEntity, IFluidTileEntity, ISteamTileEntity, IHeatTileEntity {
+public class AlchemyFurnaceTileEntity extends BlockEntity implements TickableBlockEntity, IFluidTileEntity, ISteamTileEntity, IHeatTileEntity, IItemResultTileEntity {
     public final ItemStackHandler itemHandler = createHandler(1);
     public final LazyOptional<IItemHandler> handler = LazyOptional.of(() -> itemHandler);
     public final ItemStackHandler itemFuelHandler = createHandler(1);
@@ -541,5 +544,21 @@ public class AlchemyFurnaceTileEntity extends BlockEntity implements TickableBlo
         if (this.heat < 0) {
             this.heat = 0;
         }
+    }
+
+    @Override
+    public List<ItemStack> getItemsResult() {
+        List<ItemStack> list = new ArrayList<>();
+
+        SimpleContainer inv = new SimpleContainer(1);
+        inv.setItem(0, itemHandler.getStackInSlot(0));
+
+        Optional<SmeltingRecipe> recipe = level.getRecipeManager().getRecipeFor(RecipeType.SMELTING, inv, level);
+        if (recipe.isPresent()) {
+            ItemStack stack = recipe.get().getResultItem(RegistryAccess.EMPTY).copy();
+            list.add(stack);
+        }
+
+        return list;
     }
 }

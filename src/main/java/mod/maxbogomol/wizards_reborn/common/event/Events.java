@@ -7,6 +7,8 @@ import mod.maxbogomol.wizards_reborn.api.knowledge.Knowledges;
 import mod.maxbogomol.wizards_reborn.common.capability.IKnowledge;
 import mod.maxbogomol.wizards_reborn.common.capability.KnowledgeProvider;
 import mod.maxbogomol.wizards_reborn.common.command.WizardsRebornCommand;
+import mod.maxbogomol.wizards_reborn.common.entity.SpellProjectileEntity;
+import mod.maxbogomol.wizards_reborn.common.knowledge.ArcanumKnowledge;
 import mod.maxbogomol.wizards_reborn.common.knowledge.ItemKnowledge;
 import mod.maxbogomol.wizards_reborn.common.knowledge.ItemTagKnowledge;
 import mod.maxbogomol.wizards_reborn.common.network.KnowledgeUpdatePacket;
@@ -14,8 +16,10 @@ import mod.maxbogomol.wizards_reborn.common.network.PacketHandler;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.tags.DamageTypeTags;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.ai.attributes.AttributeInstance;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.common.capabilities.Capability;
@@ -24,6 +28,7 @@ import net.minecraftforge.event.AttachCapabilitiesEvent;
 import net.minecraftforge.event.RegisterCommandsEvent;
 import net.minecraftforge.event.TickEvent;
 import net.minecraftforge.event.entity.EntityJoinLevelEvent;
+import net.minecraftforge.event.entity.living.LivingDamageEvent;
 import net.minecraftforge.event.entity.player.PlayerEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 
@@ -62,15 +67,19 @@ public class Events {
             List<ItemStack> items = player.inventoryMenu.getItems();
 
             for (Knowledge knowledge : Knowledges.getKnowledges()) {
-                if (knowledge instanceof ItemKnowledge) {
-                    ItemKnowledge itemKnowledge = (ItemKnowledge) knowledge;
+                if (knowledge instanceof ArcanumKnowledge arcanumKnowledge) {
+                    if (arcanumKnowledge.canReceived(items)) {
+                        KnowledgeUtils.addKnowledge(player, knowledge);
+                    }
+                }
+
+                if (knowledge instanceof ItemKnowledge itemKnowledge) {
                     if (itemKnowledge.canReceived(items)) {
                         KnowledgeUtils.addKnowledge(player, knowledge);
                     }
                 }
 
-                if (knowledge instanceof ItemTagKnowledge) {
-                    ItemTagKnowledge itemKnowledge = (ItemTagKnowledge) knowledge;
+                if (knowledge instanceof ItemTagKnowledge itemKnowledge) {
                     if (itemKnowledge.canReceived(items)) {
                         KnowledgeUtils.addKnowledge(player, knowledge);
                     }
@@ -82,5 +91,27 @@ public class Events {
     @SubscribeEvent
     public void registerCommands(RegisterCommandsEvent event) {
         WizardsRebornCommand.register(event.getDispatcher());
+    }
+
+    @SubscribeEvent
+    public void onDamage(LivingDamageEvent event) {
+        float scale = 1;
+        if (event.getEntity() instanceof Player player) {
+            AttributeInstance attr = player.getAttribute(WizardsReborn.MAGIC_ARMOR.get());
+
+            if (event.getSource().is(WizardsReborn.MAGIC_DAMAGE_TYPE_TAG)) {
+                scale = (float) (1f - (attr.getValue() / 100f));
+            }
+            if (scale == 1 && event.getSource().getDirectEntity() instanceof SpellProjectileEntity) {
+                scale = (float) (1f - ((attr.getValue() / 2) / 100f));
+            }
+            if (scale < 0) {
+                scale = 0;
+            }
+
+            if (scale < 1) {
+                event.setAmount(event.getAmount() * scale);
+            }
+        }
     }
 }
