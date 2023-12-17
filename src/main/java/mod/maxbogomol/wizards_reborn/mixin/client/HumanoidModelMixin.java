@@ -24,32 +24,39 @@ public abstract class HumanoidModelMixin<T extends LivingEntity>  {
         HumanoidModel self = (HumanoidModel) ((Object) this);
         if (pEntity instanceof Player player) {
             if (pEntity.isUsingItem() && pEntity.getUseItemRemainingTicks() > 0) {
+                boolean isWand = false;
                 if (ClientConfig.SPELLS_ANIMATIONS.get()) {
                     if (player.getItemInHand(player.getUsedItemHand()).getItem() instanceof ArcaneWandItem) {
+                        isWand = true;
                         ItemStack stack = player.getItemInHand(player.getUsedItemHand());
                         CompoundTag nbt = stack.getTag();
                         if (nbt.getBoolean("crystal")) {
                             if (nbt.getString("spell") != "") {
                                 Spell spell = Spells.getSpell(nbt.getString("spell"));
-                                if (spell.hasCustomAnimation(stack)) {
+                                if (spell.hasCustomAnimation(stack) && spell.getAnimation(stack) != null) {
                                     if (player.getUsedItemHand() == InteractionHand.MAIN_HAND) {
-                                        spell.setupAnimRight(self, pEntity, pLimbSwing, pLimbSwingAmount, pAgeInTicks, pNetHeadYaw, pHeadPitch);
+                                        spell.getAnimation(stack).setupAnimRight(self, pEntity, pLimbSwing, pLimbSwingAmount, pAgeInTicks, pNetHeadYaw, pHeadPitch);
                                     } else {
-                                        spell.setupAnimLeft(self, pEntity, pLimbSwing, pLimbSwingAmount, pAgeInTicks, pNetHeadYaw, pHeadPitch);
+                                        spell.getAnimation(stack).setupAnimLeft(self, pEntity, pLimbSwing, pLimbSwingAmount, pAgeInTicks, pNetHeadYaw, pHeadPitch);
                                     }
-                                    spell.setupAnim(self, pEntity, pLimbSwing, pLimbSwingAmount, pAgeInTicks, pNetHeadYaw, pHeadPitch);
+                                    spell.getAnimation(stack).setupAnim(self, pEntity, pLimbSwing, pLimbSwingAmount, pAgeInTicks, pNetHeadYaw, pHeadPitch);
                                 }
                             }
                         }
                     }
                 }
-                if (player.getItemInHand(player.getUsedItemHand()).getItem() instanceof ICustomAnimationItem item) {
-                    if (player.getUsedItemHand() == InteractionHand.MAIN_HAND) {
-                        item.setupAnimRight(self, pEntity, pLimbSwing, pLimbSwingAmount, pAgeInTicks, pNetHeadYaw, pHeadPitch);
-                    } else {
-                        item.setupAnimLeft(self, pEntity, pLimbSwing, pLimbSwingAmount, pAgeInTicks, pNetHeadYaw, pHeadPitch);
+                if (!isWand) {
+                    if (player.getItemInHand(player.getUsedItemHand()).getItem() instanceof ICustomAnimationItem item) {
+                        ItemStack stack = player.getItemInHand(player.getUsedItemHand());
+                        if (item.getAnimation(stack) != null) {
+                            if (player.getUsedItemHand() == InteractionHand.MAIN_HAND) {
+                                item.getAnimation(stack).setupAnimRight(self, pEntity, pLimbSwing, pLimbSwingAmount, pAgeInTicks, pNetHeadYaw, pHeadPitch);
+                            } else {
+                                item.getAnimation(stack).setupAnimLeft(self, pEntity, pLimbSwing, pLimbSwingAmount, pAgeInTicks, pNetHeadYaw, pHeadPitch);
+                            }
+                            item.getAnimation(stack).setupAnim(self, pEntity, pLimbSwing, pLimbSwingAmount, pAgeInTicks, pNetHeadYaw, pHeadPitch);
+                        }
                     }
-                    item.setupAnim(self, pEntity, pLimbSwing, pLimbSwingAmount, pAgeInTicks, pNetHeadYaw, pHeadPitch);
                 }
             }
         }

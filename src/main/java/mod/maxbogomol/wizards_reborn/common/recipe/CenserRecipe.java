@@ -130,7 +130,6 @@ public class CenserRecipe implements Recipe<Container>  {
         @Override
         public void toNetwork(FriendlyByteBuf buffer, CenserRecipe recipe) {
             recipe.getIngredientRecipe().toNetwork(buffer);
-            buffer.writeItemStack(recipe.getResultItem(RegistryAccess.EMPTY), false);
 
             buffer.writeInt(recipe.getEffects().size());
             for (MobEffectInstance effect : recipe.getEffects()) {

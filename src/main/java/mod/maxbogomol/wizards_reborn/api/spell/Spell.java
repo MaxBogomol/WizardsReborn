@@ -7,6 +7,7 @@ import mod.maxbogomol.wizards_reborn.api.crystal.CrystalUtils;
 import mod.maxbogomol.wizards_reborn.api.knowledge.Research;
 import mod.maxbogomol.wizards_reborn.api.wissen.WissenItemUtils;
 import mod.maxbogomol.wizards_reborn.api.wissen.WissenUtils;
+import mod.maxbogomol.wizards_reborn.client.animation.ItemAnimation;
 import mod.maxbogomol.wizards_reborn.common.entity.SpellProjectileEntity;
 import mod.maxbogomol.wizards_reborn.common.item.CrystalItem;
 import mod.maxbogomol.wizards_reborn.common.item.equipment.ArcaneWandItem;
@@ -213,28 +214,8 @@ public class Spell {
     }
 
     @OnlyIn(Dist.CLIENT)
-    public void setupAnim(HumanoidModel model, Entity entity, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch) {
-
-    }
-
-    @OnlyIn(Dist.CLIENT)
-    public void setupAnimRight(HumanoidModel model, Entity entity, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch) {
-
-    }
-
-    @OnlyIn(Dist.CLIENT)
-    public void setupAnimLeft(HumanoidModel model, Entity entity, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch) {
-
-    }
-
-    @OnlyIn(Dist.CLIENT)
-    public void renderArmWithItem(LivingEntity livingEntity, ItemStack itemStack, ItemDisplayContext displayContext, HumanoidArm arm, PoseStack poseStack, MultiBufferSource buffer, int packedLight) {
-
-    }
-
-    @OnlyIn(Dist.CLIENT)
-    public void renderArmWithItem(AbstractClientPlayer player, float partialTicks, float pitch, InteractionHand hand, float swingProgress, ItemStack stack, float equippedProgress, PoseStack poseStack, MultiBufferSource buffer, int combinedLight) {
-
+    public ItemAnimation getAnimation(ItemStack stack) {
+        return null;
     }
 
     public void onImpact(HitResult ray, Level world, SpellProjectileEntity projectile, Player player, Entity target) {

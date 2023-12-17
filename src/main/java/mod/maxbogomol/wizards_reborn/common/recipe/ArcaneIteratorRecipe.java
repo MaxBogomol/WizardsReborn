@@ -120,8 +120,12 @@ public class ArcaneIteratorRecipe implements Recipe<Container> {
         return isSaveNBT;
     }
 
+    public boolean hasRecipeEnchantment() {
+        return enchantment != null;
+    }
+
     public ItemStack getToastSymbol() {
-        return new ItemStack(WizardsReborn.WISSEN_CRYSTALLIZER_ITEM.get());
+        return new ItemStack(WizardsReborn.ARCANE_ITERATOR_ITEM.get());
     }
 
     @Override
@@ -131,7 +135,7 @@ public class ArcaneIteratorRecipe implements Recipe<Container> {
 
     @Override
     public RecipeSerializer<?> getSerializer() {
-        return WizardsReborn.WISSEN_CRYSTALLIZER_SERIALIZER.get();
+        return WizardsReborn.ARCANE_ITERATOR_SERIALIZER.get();
     }
 
     public static class ArcaneIteratorRecipeType implements RecipeType<ArcaneIteratorRecipe> {
@@ -195,7 +199,7 @@ public class ArcaneIteratorRecipe implements Recipe<Container> {
             int health = buffer.readInt();
             int experience = buffer.readInt();
             boolean isSaveNBT = buffer.readBoolean();
-            return new ArcaneIteratorRecipe(recipeId, output, enchantment, wissen, health, experience, isSaveNBT, inputs);
+            return new ArcaneIteratorRecipe(recipeId, output, null, wissen, health, experience, isSaveNBT, inputs);
         }
 
         @Override

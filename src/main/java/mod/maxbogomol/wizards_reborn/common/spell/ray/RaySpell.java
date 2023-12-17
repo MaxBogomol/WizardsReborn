@@ -5,14 +5,13 @@ import com.mojang.math.Axis;
 import mod.maxbogomol.wizards_reborn.WizardsReborn;
 import mod.maxbogomol.wizards_reborn.api.spell.Spell;
 import mod.maxbogomol.wizards_reborn.api.wissen.WissenItemUtils;
+import mod.maxbogomol.wizards_reborn.client.animation.ItemAnimation;
+import mod.maxbogomol.wizards_reborn.client.animation.SpellHandItemAnimation;
 import mod.maxbogomol.wizards_reborn.client.render.WorldRenderHandler;
 import mod.maxbogomol.wizards_reborn.common.entity.SpellProjectileEntity;
 import mod.maxbogomol.wizards_reborn.common.network.PacketHandler;
 import mod.maxbogomol.wizards_reborn.common.network.spell.RaySpellEffectPacket;
 import mod.maxbogomol.wizards_reborn.utils.RenderUtils;
-import net.minecraft.client.Minecraft;
-import net.minecraft.client.model.HumanoidModel;
-import net.minecraft.client.player.AbstractClientPlayer;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
@@ -21,11 +20,9 @@ import net.minecraft.sounds.SoundSource;
 import net.minecraft.util.Mth;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.entity.Entity;
-import net.minecraft.world.entity.HumanoidArm;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.entity.projectile.ProjectileUtil;
-import net.minecraft.world.item.ItemDisplayContext;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.UseAnim;
 import net.minecraft.world.level.ClipContext;
@@ -41,6 +38,8 @@ import java.util.UUID;
 import java.util.function.Predicate;
 
 public class RaySpell extends Spell {
+    public static SpellHandItemAnimation animation = new SpellHandItemAnimation();
+
     public RaySpell(String id, int points) {
         super(id, points);
     }
@@ -67,7 +66,7 @@ public class RaySpell extends Spell {
 
             Vec3 pos = player.getEyePosition();
             SpellProjectileEntity entity = new SpellProjectileEntity(WizardsReborn.SPELL_PROJECTILE.get(), world).shoot(
-                    pos.x, pos.y - 0.4, pos.z, 0, 0, 0, player.getUUID(), this.getId(), stats
+                    pos.x, pos.y - 0.5, pos.z, 0, 0, 0, player.getUUID(), this.getId(), stats
             ).createSpellData(spellData);
             world.addFreshEntity(entity);
 
@@ -103,7 +102,7 @@ public class RaySpell extends Spell {
                         projectile.updateSpellData();
                         projectile.hurtMarked = true;
 
-                        if (projectile.tickCount % 5 == 0) {
+                        if (projectile.tickCount % 7 == 0) {
                             WissenItemUtils.removeWissen(stack, 1);
                         }
                     }
@@ -143,7 +142,7 @@ public class RaySpell extends Spell {
         if (!entity.level().isClientSide) {
             boolean burst = false;
             CompoundTag spellData = entity.getSpellData();
-            HitResult ray = getHitResult(entity, entity.position(), entity.getLookAngle().scale(getRayDistance()), entity.level(), (e) -> {
+            HitResult ray = getHitResult(entity, entity.position().add(0, 0.3F, 0), entity.getLookAngle().scale(getRayDistance()), entity.level(), (e) -> {
                 return !e.isSpectator() && e.isPickable() && !e.getUUID().equals(entity.getEntityData().get(entity.casterId).get());
             });
             if (spellData.getInt("tick_left") <= 0) {
@@ -192,21 +191,17 @@ public class RaySpell extends Spell {
             if (random.nextFloat() < 0.5) {
                 entity.level().playSound(WizardsReborn.proxy.getPlayer(), entity.getX(), entity.getY(), entity.getZ(), WizardsReborn.SPELL_BURST_SOUND.get(), SoundSource.BLOCKS, 0.25f, (float) (0.5f + ((random.nextFloat() - 0.5D) / 4)));
             }
-        } else {
-            CompoundTag spellData = entity.getSpellData();
-            if (spellData.getInt("tick_left") <= 0) {
-                updatePos(entity);
-                updateRot(entity);
-            }
         }
     }
 
     public void updatePos(SpellProjectileEntity entity) {
         if (entity.getSender() != null) {
-            entity.xo = entity.getSender().xo;
-            entity.yo = entity.getSender().yo - 0.4;
-            entity.zo =  entity.getSender().zo;
-            entity.setPos(entity.getSender().getEyePosition().add(0, -0.4f, 0));
+            Player player = entity.getSender();
+            entity.copyPosition(player);
+            entity.setPos(entity.getX(), entity.getY() + ((player.getEyeHeight() - 0.5F)), entity.getZ());
+            entity.xOld = player.xOld;
+            entity.yOld = player.yOld + ((player.getEyeHeight() - 0.5F));
+            entity.zOld = player.zOld;
         }
     }
 
@@ -214,9 +209,9 @@ public class RaySpell extends Spell {
         if (entity.getSender() != null) {
             entity.setYRot(entity.getSender().getYRot());
             entity.setXRot(entity.getSender().getXRot());
+            entity.yRotO = entity.getSender().yRotO;
+            entity.xRotO = entity.getSender().xRotO;
         }
-        entity.yRotO = entity.getYRot();
-        entity.xRotO = entity.getXRot();
     }
 
     @Override
@@ -245,45 +240,14 @@ public class RaySpell extends Spell {
 
     @Override
     @OnlyIn(Dist.CLIENT)
-    public void setupAnimRight(HumanoidModel model, Entity entity, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch) {
-        model.rightArm.yRot = -0.1F + model.head.yRot - 0.1F;
-        model.rightArm.xRot = (-(float) Math.PI / 2F) + model.head.xRot;
-    }
-
-    @Override
-    @OnlyIn(Dist.CLIENT)
-    public void setupAnimLeft(HumanoidModel model, Entity entity, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch) {
-        model.leftArm.yRot = 0.1F + model.head.yRot + 0.1F;
-        model.leftArm.xRot = (-(float) Math.PI / 2F) + model.head.xRot;
-    }
-
-    @Override
-    @OnlyIn(Dist.CLIENT)
-    public void renderArmWithItem(LivingEntity livingEntity, ItemStack itemStack, ItemDisplayContext displayContext, HumanoidArm arm, PoseStack poseStack, MultiBufferSource buffer, int packedLight) {
-        poseStack.translate(0, -0.125F + (-1 / 16.0F), 0);
-        poseStack.mulPose(Axis.XP.rotationDegrees(-85f));
-        poseStack.mulPose(Axis.YP.rotationDegrees(((Mth.lerp(Minecraft.getInstance().getPartialTick(), -livingEntity.xRotO, -livingEntity.getXRot())) / 2f)));
-    }
-
-    @Override
-    @OnlyIn(Dist.CLIENT)
-    public void renderArmWithItem(AbstractClientPlayer player, float partialTicks, float pitch, InteractionHand hand, float swingProgress, ItemStack stack, float equippedProgress, PoseStack poseStack, MultiBufferSource buffer, int combinedLight) {
-        boolean flag = hand == InteractionHand.MAIN_HAND;
-        int i = flag ? 1 : -1;
-        poseStack.translate((float)i * 0.56F, -0.52F + 1 * -0.6F, -0.72F);
-
-        poseStack.translate(0, 0.8f, 0);
-        poseStack.translate(-0.3 * i, -0.125F + (-1 / 16.0F), 0);
-
-        poseStack.mulPose(Axis.XP.rotationDegrees(-90f));
-        poseStack.mulPose(Axis.ZP.rotationDegrees(25 * i));
-        poseStack.mulPose(Axis.YP.rotationDegrees(((Mth.lerp(Minecraft.getInstance().getPartialTick(), -player.xRotO, -player.getXRot())) / 4f) * i));
+    public ItemAnimation getAnimation(ItemStack stack) {
+        return animation;
     }
 
     @Override
     @OnlyIn(Dist.CLIENT)
     public void render(SpellProjectileEntity entity, float entityYaw, float partialTicks, PoseStack stack, MultiBufferSource buffer, int light) {
-        HitResult ray = getHitResult(entity, entity.position(), entity.getLookAngle().scale(getRayDistance()), entity.level(), (e) -> {
+        HitResult ray = getHitResult(entity, entity.position().add(0, 0.3F, 0), entity.getLookAngle().scale(getRayDistance()), entity.level(), (e) -> {
             return !e.isSpectator() && e.isPickable() && !e.getUUID().equals(entity.getEntityData().get(entity.casterId).get());
         });
 
@@ -298,19 +262,10 @@ public class RaySpell extends Spell {
         float yRot = Mth.lerp(partialTicks, -entity.yRotO, -entity.getYRot()) - 90.0F;
         float xRot = Mth.lerp(partialTicks, -entity.xRotO, -entity.getXRot());
 
-        double dX = entity.getX() - ray.getLocation().x();
-        double dY = entity.getY() + 0.2F - ray.getLocation().y();
-        double dZ = entity.getZ() - ray.getLocation().z();
-
-        double yaw = Math.atan2(dZ, dX);
-        double pitch = Math.atan2(Math.sqrt(dZ * dZ + dX * dX), dY) + Math.PI;
-
-        float angle = (float) (xRot - pitch);
-
         stack.pushPose();
         stack.translate(0, 0.2, 0);
         stack.mulPose(Axis.YP.rotationDegrees(yRot));
-        stack.mulPose(Axis.ZP.rotationDegrees(angle));
+        stack.mulPose(Axis.ZP.rotationDegrees(xRot));
         stack.mulPose(Axis.XP.rotationDegrees((entity.tickCount + partialTicks) * 5f));
 
         stack.translate(offset, 0, 0);

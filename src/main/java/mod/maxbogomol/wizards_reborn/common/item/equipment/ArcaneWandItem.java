@@ -9,8 +9,10 @@ import mod.maxbogomol.wizards_reborn.api.spell.Spell;
 import mod.maxbogomol.wizards_reborn.api.spell.Spells;
 import mod.maxbogomol.wizards_reborn.api.wissen.IWissenItem;
 import mod.maxbogomol.wizards_reborn.api.wissen.WissenItemUtils;
+import mod.maxbogomol.wizards_reborn.client.animation.ItemAnimation;
 import mod.maxbogomol.wizards_reborn.client.config.ClientConfig;
 import mod.maxbogomol.wizards_reborn.common.item.CrystalItem;
+import mod.maxbogomol.wizards_reborn.common.item.ICustomAnimationItem;
 import mod.maxbogomol.wizards_reborn.common.item.ItemBackedInventory;
 import mod.maxbogomol.wizards_reborn.utils.ColorUtils;
 import net.minecraft.ChatFormatting;
@@ -50,7 +52,7 @@ import javax.annotation.Nullable;
 import java.awt.*;
 import java.util.List;
 
-public class ArcaneWandItem extends Item implements IWissenItem {
+public class ArcaneWandItem extends Item implements IWissenItem, ICustomAnimationItem {
     public ArcaneWandItem(Properties properties) {
         super(properties);
     }
@@ -126,7 +128,7 @@ public class ArcaneWandItem extends Item implements IWissenItem {
         ItemStack stack = player.getItemInHand(hand);
 
         CompoundTag nbt = stack.getTag();
-        if (canSpell(stack)) {
+        if (canSpell(stack, player)) {
             Spell spell = Spells.getSpell(nbt.getString("spell"));
             if (spell.canSpell(world, player, hand)) {
                 if (spell.canWandWithCrystal(stack)) {
@@ -142,7 +144,7 @@ public class ArcaneWandItem extends Item implements IWissenItem {
     @Override
     public InteractionResult onItemUseFirst(ItemStack stack, UseOnContext context) {
         CompoundTag nbt = stack.getTag();
-        if (canSpell(stack)) {
+        if (canSpell(stack, context.getPlayer())) {
             Spell spell = Spells.getSpell(nbt.getString("spell"));
             if (spell.canWandWithCrystal(stack)) {
                 spell.onWandUseFirst(stack, context);
@@ -155,7 +157,7 @@ public class ArcaneWandItem extends Item implements IWissenItem {
     @Override
     public void onUseTick(Level level, LivingEntity livingEntity, ItemStack stack, int remainingUseDuration) {
         CompoundTag nbt = stack.getTag();
-        if (canSpell(stack)) {
+        if (canSpell(stack, (Player) livingEntity)) {
             Spell spell = Spells.getSpell(nbt.getString("spell"));
             if (spell.canWandWithCrystal(stack)) {
                 spell.onUseTick(level, livingEntity, stack, remainingUseDuration);
@@ -166,7 +168,7 @@ public class ArcaneWandItem extends Item implements IWissenItem {
     @Override
     public void releaseUsing(ItemStack stack, Level level, LivingEntity entityLiving, int timeLeft) {
         CompoundTag nbt = stack.getTag();
-        if (canSpell(stack)) {
+        if (canSpell(stack, (Player) entityLiving)) {
             Spell spell = Spells.getSpell(nbt.getString("spell"));
             if (spell.canWandWithCrystal(stack)) {
                 spell.releaseUsing(stack, level, entityLiving, timeLeft);
@@ -177,7 +179,7 @@ public class ArcaneWandItem extends Item implements IWissenItem {
     @Override
     public ItemStack finishUsingItem(ItemStack stack, Level level, LivingEntity entityLiving) {
         CompoundTag nbt = stack.getTag();
-        if (canSpell(stack)) {
+        if (canSpell(stack, (Player) entityLiving)) {
             Spell spell = Spells.getSpell(nbt.getString("spell"));
             if (spell.canWandWithCrystal(stack)) {
                 spell.finishUsingItem(stack, level, entityLiving);
@@ -198,26 +200,47 @@ public class ArcaneWandItem extends Item implements IWissenItem {
         return 72000;
     }
 
+    @OnlyIn(Dist.CLIENT)
     @Override
     public UseAnim getUseAnimation(ItemStack stack) {
         if (!ClientConfig.SPELLS_FIRST_PERSON_ITEM_ANIMATIONS.get()) {
             return UseAnim.NONE;
         }
         CompoundTag nbt = stack.getTag();
-        if (canSpell(stack)) {
+        if (canSpell(stack, WizardsReborn.proxy.getPlayer())) {
             Spell spell = Spells.getSpell(nbt.getString("spell"));
             return spell.getUseAnimation(stack);
         }
         return UseAnim.NONE;
     }
 
-    public boolean canSpell(ItemStack stack) {
+    @OnlyIn(Dist.CLIENT)
+    @Override
+    public ItemAnimation getAnimation(ItemStack stack) {
         CompoundTag nbt = stack.getTag();
+        if (canSpell(stack, WizardsReborn.proxy.getPlayer())) {
+            Spell spell = Spells.getSpell(nbt.getString("spell"));
+            return spell.getAnimation(stack);
+        }
+
+        return null;
+    }
+
+    public boolean canSpell(ItemStack stack, Player player) {
+        CompoundTag nbt = stack.getOrCreateTag();
         if (nbt.getBoolean("crystal")) {
-            if (nbt.getString("spell") != "") {
+            if (!nbt.getString("spell").isEmpty()) {
                 Spell spell = Spells.getSpell(nbt.getString("spell"));
-                return (KnowledgeUtils.isSpell(WizardsReborn.proxy.getPlayer(), spell));
+                return (KnowledgeUtils.isSpell(player, spell));
             }
+        }
+        return false;
+    }
+
+    public boolean canSpell(ItemStack stack) {
+        CompoundTag nbt = stack.getOrCreateTag();
+        if (nbt.getBoolean("crystal")) {
+            return !nbt.getString("spell").isEmpty();
         }
         return false;
     }

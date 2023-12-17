@@ -42,7 +42,13 @@ public class InventorWizardArmorItem extends ArcaneArmorItem implements IForgeIt
 
     @Override
     public int getMagicArmorForSlot(EquipmentSlot slot) {
-        return 3;
+        return switch (slot) {
+            case CHEST -> 5;
+            case HEAD -> 4;
+            case LEGS -> 3;
+            case FEET -> 3;
+            default -> 0;
+        };
     }
 
     @Override

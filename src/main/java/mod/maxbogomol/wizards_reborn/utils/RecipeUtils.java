@@ -36,32 +36,46 @@ public class RecipeUtils {
     }
 
     public static MobEffectInstance mobEffectFromNetwork(FriendlyByteBuf buffer) {
-        MobEffect mobEffect = ForgeRegistries.MOB_EFFECTS.getValue(buffer.readResourceLocation());
-        int duration = buffer.readInt();
-        int amplifier = buffer.readInt();
-        return new MobEffectInstance(mobEffect, duration, amplifier);
+        if (buffer.readBoolean()) {
+            MobEffect mobEffect = buffer.readRegistryId();
+            int duration = buffer.readInt();
+            int amplifier = buffer.readInt();
+            return new MobEffectInstance(mobEffect, duration, amplifier);
+        }
+        return null;
     }
 
     public static void mobEffectToNetwork(MobEffectInstance effect, FriendlyByteBuf buffer) {
-        buffer.writeRegistryId(ForgeRegistries.MOB_EFFECTS, effect.getEffect());
-        buffer.writeVarInt(effect.getDuration());
-        buffer.writeVarInt(effect.getAmplifier());
+        if (effect == null) {
+            buffer.writeBoolean(false);
+        } else {
+            buffer.writeBoolean(true);
+            buffer.writeRegistryId(ForgeRegistries.MOB_EFFECTS, effect.getEffect());
+            buffer.writeInt(effect.getDuration());
+            buffer.writeInt(effect.getAmplifier());
+        }
+
     }
 
     public static Enchantment deserializeEnchantment(JsonObject json) {
-        String effectName = GsonHelper.getAsString(json, "enchantment");
-        Enchantment enchantment = ForgeRegistries.ENCHANTMENTS.getValue(new ResourceLocation(effectName));
+        String enchantmentName = GsonHelper.getAsString(json, "enchantment");
+        Enchantment enchantment = ForgeRegistries.ENCHANTMENTS.getValue(new ResourceLocation(enchantmentName));
         if (enchantment == null) {
-            throw new JsonSyntaxException("Unknown enchantment " + effectName);
+            throw new JsonSyntaxException("Unknown enchantment " + enchantmentName);
         }
         return enchantment;
     }
 
     public static Enchantment enchantmentFromNetwork(FriendlyByteBuf buffer) {
-        return ForgeRegistries.ENCHANTMENTS.getValue(buffer.readResourceLocation());
+        return !buffer.readBoolean() ? null : buffer.readRegistryId();
     }
 
     public static void enchantmentToNetwork(Enchantment enchantment, FriendlyByteBuf buffer) {
-        buffer.writeRegistryId(ForgeRegistries.ENCHANTMENTS, enchantment);
+        if (enchantment == null) {
+            buffer.writeBoolean(false);
+        } else {
+            buffer.writeBoolean(true);
+            buffer.writeRegistryId(ForgeRegistries.ENCHANTMENTS, enchantment);
+        }
     }
 }

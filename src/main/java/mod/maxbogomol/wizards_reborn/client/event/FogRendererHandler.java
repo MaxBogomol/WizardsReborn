@@ -3,16 +3,17 @@ package mod.maxbogomol.wizards_reborn.client.event;
 import mod.maxbogomol.wizards_reborn.WizardsReborn;
 import net.minecraft.client.Minecraft;
 import net.minecraft.util.Mth;
+import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.client.event.ViewportEvent;
 import net.minecraftforge.event.TickEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 
-public class ForRendererHandler {
+public class FogRendererHandler {
     public static int morEffectRoll = 0;
     public static float morEffectFov = 0;
 
-    @Mod.EventBusSubscriber(bus=Mod.EventBusSubscriber.Bus.FORGE)
+    @Mod.EventBusSubscriber(bus=Mod.EventBusSubscriber.Bus.FORGE, value = Dist.CLIENT)
     public static class RegistryEvents {
 
         @SubscribeEvent

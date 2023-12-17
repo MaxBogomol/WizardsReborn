@@ -24,21 +24,27 @@ public abstract class ItemInHandLayerMixin {
     @Inject(at = @At(value = "INVOKE", target = "Lnet/minecraft/client/renderer/ItemInHandRenderer;renderItem(Lnet/minecraft/world/entity/LivingEntity;Lnet/minecraft/world/item/ItemStack;Lnet/minecraft/world/item/ItemDisplayContext;ZLcom/mojang/blaze3d/vertex/PoseStack;Lnet/minecraft/client/renderer/MultiBufferSource;I)V"), method = "renderArmWithItem")
     public void renderArmWithItem(LivingEntity pLivingEntity, ItemStack pItemStack, ItemDisplayContext pDisplayContext, HumanoidArm pArm, PoseStack pPoseStack, MultiBufferSource pBuffer, int pPackedLight, CallbackInfo ci) {
         if (pLivingEntity.isUsingItem() && pLivingEntity.getUseItemRemainingTicks() > 0) {
+            boolean isWand = false;
             if (ClientConfig.SPELLS_ITEM_ANIMATIONS.get()) {
                 if (pItemStack.getItem() instanceof ArcaneWandItem) {
+                    isWand = true;
                     CompoundTag nbt = pItemStack.getTag();
                     if (nbt.getBoolean("crystal")) {
                         if (nbt.getString("spell") != "") {
                             Spell spell = Spells.getSpell(nbt.getString("spell"));
-                            if (spell.hasCustomAnimation(pItemStack)) {
-                                spell.renderArmWithItem(pLivingEntity, pItemStack, pDisplayContext, pArm, pPoseStack, pBuffer, pPackedLight);
+                            if (spell.hasCustomAnimation(pItemStack) && spell.getAnimation(pItemStack) != null) {
+                                spell.getAnimation(pItemStack).renderArmWithItem(pLivingEntity, pItemStack, pDisplayContext, pArm, pPoseStack, pBuffer, pPackedLight);
                             }
                         }
                     }
                 }
             }
-            if (pItemStack.getItem() instanceof ICustomAnimationItem item) {
-                item.renderArmWithItem(pLivingEntity, pItemStack, pDisplayContext, pArm, pPoseStack, pBuffer, pPackedLight);
+            if (!isWand) {
+                if (pItemStack.getItem() instanceof ICustomAnimationItem item) {
+                    if (item.getAnimation(pItemStack) != null) {
+                        item.getAnimation(pItemStack).renderArmWithItem(pLivingEntity, pItemStack, pDisplayContext, pArm, pPoseStack, pBuffer, pPackedLight);
+                    }
+                }
             }
         }
     }
