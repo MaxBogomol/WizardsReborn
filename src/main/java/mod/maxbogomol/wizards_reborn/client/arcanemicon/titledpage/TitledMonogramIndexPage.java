@@ -1,6 +1,5 @@
 package mod.maxbogomol.wizards_reborn.client.arcanemicon.titledpage;
 
-import com.mojang.blaze3d.systems.RenderSystem;
 import mod.maxbogomol.wizards_reborn.client.arcanemicon.ArcanemiconGui;
 import mod.maxbogomol.wizards_reborn.client.arcanemicon.index.MonogramIndexEntry;
 import mod.maxbogomol.wizards_reborn.client.arcanemicon.page.MonogramIndexPage;
@@ -32,7 +31,6 @@ public class TitledMonogramIndexPage extends MonogramIndexPage {
         int titleWidth = Minecraft.getInstance().font.width(title);
         drawText(book, gui, title, x + 64 - titleWidth / 2, y + 15 - Minecraft.getInstance().font.lineHeight);
 
-        RenderSystem.setShaderTexture(0, BACKGROUND);
         super.render(book, gui, x, y + 16, mouseX, mouseY);
     }
 }

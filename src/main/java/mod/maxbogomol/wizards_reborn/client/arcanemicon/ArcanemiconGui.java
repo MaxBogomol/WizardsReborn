@@ -1,6 +1,5 @@
 package mod.maxbogomol.wizards_reborn.client.arcanemicon;
 
-import com.mojang.blaze3d.systems.RenderSystem;
 import mod.maxbogomol.wizards_reborn.WizardsReborn;
 import mod.maxbogomol.wizards_reborn.client.arcanemicon.index.ChapterHistoryEntry;
 import net.minecraft.client.Minecraft;
@@ -67,7 +66,6 @@ public class ArcanemiconGui extends Screen {
     public void render(GuiGraphics gui, int mouseX, int mouseY, float partialTicks) {
         renderBackground(gui);
         Minecraft mc = Minecraft.getInstance();
-        RenderSystem.setShaderTexture(0, BACKGROUND);
 
         currentItem = ItemStack.EMPTY;
 

@@ -34,7 +34,6 @@ public class FogRendererHandler {
         public static void onCameraAngles(ViewportEvent.ComputeCameraAngles event) {
             if (hasMorEffect() || morEffectRoll > 0) {
                 double ticks = gerMorEffectRollTicks((float) event.getPartialTick());
-                System.out.println(ticks);
                 event.setRoll(event.getRoll() + (float) (Math.sin(Math.toRadians(ticks)) * -10F));
                 event.setYaw(event.getYaw() + (float) (Math.sin(Math.toRadians(ticks)) * 5F));
             }

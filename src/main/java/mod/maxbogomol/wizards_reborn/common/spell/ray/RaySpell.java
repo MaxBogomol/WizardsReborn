@@ -102,8 +102,12 @@ public class RaySpell extends Spell {
                         projectile.updateSpellData();
                         projectile.hurtMarked = true;
 
-                        if (projectile.tickCount % 7 == 0) {
-                            WissenItemUtils.removeWissen(stack, 1);
+                        if (WissenItemUtils.canRemoveWissen(stack, 1)) {
+                            if (projectile.tickCount % 7 == 0) {
+                                WissenItemUtils.removeWissen(stack, 1);
+                            }
+                        } else {
+                            livingEntity.stopUsingItem();
                         }
                     }
                 }

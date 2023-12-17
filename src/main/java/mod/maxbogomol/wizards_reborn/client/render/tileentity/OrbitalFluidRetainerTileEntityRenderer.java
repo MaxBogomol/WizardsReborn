@@ -54,6 +54,7 @@ public class OrbitalFluidRetainerTileEntityRenderer implements BlockEntityRender
 
         for (int i = 0; i < amount * 25; i++) {
             double f = Math.sin(Math.toRadians(((random.nextFloat() * 360) + ticks))) * amount;
+            double j = Math.abs(f);
             ms.pushPose();
             ms.translate(0.5F, 1.5F, 0.5F);
             ms.translate(0F, (float) v, 0F);
@@ -61,7 +62,7 @@ public class OrbitalFluidRetainerTileEntityRenderer implements BlockEntityRender
             ms.mulPose(Axis.XP.rotationDegrees((float) ((random.nextFloat() * 360) + ticksSub)));
             ms.mulPose(Axis.ZP.rotationDegrees((float) ((random.nextFloat() * 360) + ticksSub)));
             ms.translate(0F, (0.15F + (random.nextFloat() * 0.5F)) * f, 0F);
-            ms.scale((float) f, (float) f, (float) f);
+            ms.scale((float) j, (float) j, (float) j);
             ms.mulPose(Axis.YP.rotationDegrees((float) ((random.nextFloat() * 360) + ticks)));
             ms.mulPose(Axis.XP.rotationDegrees((float) ((random.nextFloat() * 360) + ticks)));
             ms.mulPose(Axis.ZP.rotationDegrees((float) ((random.nextFloat() * 360) + ticks)));

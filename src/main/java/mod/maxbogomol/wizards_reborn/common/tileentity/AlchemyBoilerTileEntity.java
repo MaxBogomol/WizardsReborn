@@ -158,6 +158,7 @@ public class AlchemyBoilerTileEntity extends PipeBaseTileEntity implements Ticka
         return fluidTank.getCapacity();
     }
 
+    @Override
     public FluidStack getFluidStack() {
         return fluidTank.getFluid();
     }

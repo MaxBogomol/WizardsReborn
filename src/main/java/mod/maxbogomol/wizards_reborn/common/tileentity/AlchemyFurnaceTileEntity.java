@@ -456,6 +456,7 @@ public class AlchemyFurnaceTileEntity extends BlockEntity implements TickableBlo
         return fluidTank.getCapacity();
     }
 
+    @Override
     public FluidStack getFluidStack() {
         return fluidTank.getFluid();
     }

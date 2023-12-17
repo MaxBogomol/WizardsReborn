@@ -9,29 +9,30 @@ import mod.maxbogomol.wizards_reborn.api.wissen.ICooldownTileEntity;
 import mod.maxbogomol.wizards_reborn.api.wissen.IItemResultTileEntity;
 import mod.maxbogomol.wizards_reborn.api.wissen.IWissenTileEntity;
 import mod.maxbogomol.wizards_reborn.api.wissen.IWissenWandFunctionalTileEntity;
+import mod.maxbogomol.wizards_reborn.common.item.FluidStorageBaseItem;
 import mod.maxbogomol.wizards_reborn.common.tileentity.AlchemyMachineTileEntity;
-import mod.maxbogomol.wizards_reborn.utils.PacketUtils;
 import mod.maxbogomol.wizards_reborn.common.tileentity.WissenTranslatorTileEntity;
+import mod.maxbogomol.wizards_reborn.utils.PacketUtils;
+import net.minecraft.ChatFormatting;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
+import net.minecraft.core.BlockPos;
+import net.minecraft.nbt.CompoundTag;
+import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.stats.Stats;
-import net.minecraft.world.item.TooltipFlag;
+import net.minecraft.world.InteractionHand;
+import net.minecraft.world.InteractionResult;
+import net.minecraft.world.InteractionResultHolder;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.item.context.UseOnContext;
-import net.minecraft.nbt.CompoundTag;
-import net.minecraft.world.level.block.entity.BlockEntity;
-import net.minecraft.world.InteractionResultHolder;
-import net.minecraft.world.InteractionResult;
-import net.minecraft.world.InteractionHand;
-import net.minecraft.core.BlockPos;
-import net.minecraft.network.chat.Component;
-import net.minecraft.ChatFormatting;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.HitResult;
 import net.minecraftforge.api.distmarker.Dist;
@@ -339,6 +340,20 @@ public class WissenWandItem extends Item {
                         if (tileentity instanceof IFluidTileEntity) {
                             IFluidTileEntity fluidTile = (IFluidTileEntity) tileentity;
 
+                            if (player.isShiftKeyDown()) {
+                                int x = mc.getWindow().getGuiScaledWidth() / 2;
+                                int y = mc.getWindow().getGuiScaledHeight() / 2 + 32 - 10 - 10 + i;
+
+                                if (!fluidTile.getFluidStack().isEmpty()) {
+                                    Component fluidName = FluidStorageBaseItem.getFluidName(fluidTile.getFluidStack(), fluidTile.getFluidMaxAmount());
+                                    String string = fluidName.getString();
+                                    int stringWidth = Minecraft.getInstance().font.width(string);
+
+                                    gui.drawString(Minecraft.getInstance().font, string, x - (stringWidth / 2), y, 0xffffff);
+                                    i = i + 11;
+                                }
+                            }
+
                             int x = mc.getWindow().getGuiScaledWidth() / 2 - (48 / 2);
                             int y = mc.getWindow().getGuiScaledHeight() / 2 + 32 - 10 - 11 + i;
 
@@ -377,6 +392,19 @@ public class WissenWandItem extends Item {
 
                         if (tileentity instanceof AlchemyMachineTileEntity machine) {
                             for (int ii = 0; ii <= 2; ii++) {
+                                if (player.isShiftKeyDown()) {
+                                    int x = mc.getWindow().getGuiScaledWidth() / 2;
+                                    int y = mc.getWindow().getGuiScaledHeight() / 2 + 32 - 10 - 10 + i;
+
+                                    if (!machine.getFluidStack(ii).isEmpty()) {
+                                        Component fluidName = FluidStorageBaseItem.getFluidName(machine.getFluidStack(ii), machine.getMaxCapacity());
+                                        String string = fluidName.getString();
+                                        int stringWidth = Minecraft.getInstance().font.width(string);
+
+                                        gui.drawString(Minecraft.getInstance().font, string, x - (stringWidth / 2), y, 0xffffff);
+                                        i = i + 11;
+                                    }
+                                }
 
                                 int x = mc.getWindow().getGuiScaledWidth() / 2 - (48 / 2);
                                 int y = mc.getWindow().getGuiScaledHeight() / 2 + 32 - 10 - 11 + i;

@@ -149,6 +149,11 @@ public class FluidExtractorTileEntity extends FluidPipeBaseTileEntity {
     }
 
     @Override
+    public FluidStack getFluidStack() {
+        return tank.getFluid();
+    }
+
+    @Override
     public int getFluidAmount() {
         return tank.getFluidAmount();
     }

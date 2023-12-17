@@ -3,7 +3,6 @@ package mod.maxbogomol.wizards_reborn.common.recipe;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
-import com.google.gson.JsonSyntaxException;
 import mod.maxbogomol.wizards_reborn.WizardsReborn;
 import mod.maxbogomol.wizards_reborn.utils.RecipeUtils;
 import net.minecraft.core.NonNullList;
@@ -17,7 +16,6 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.*;
 import net.minecraft.world.item.enchantment.Enchantment;
 import net.minecraft.world.level.Level;
-import net.minecraftforge.registries.ForgeRegistries;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
@@ -48,13 +46,19 @@ public class ArcaneIteratorRecipe implements Recipe<Container> {
 
     @Override
     public boolean matches(Container inv, Level worldIn) {
-        return matches(inputs, inv);
+        boolean hasEnchantment = (getResultItem(RegistryAccess.EMPTY).isEmpty() && hasRecipeEnchantment());
+        return matches(inputs, inv, hasEnchantment);
     }
 
-    public static boolean matches(List<Ingredient> inputs, Container inv) {
+    public static boolean matches(List<Ingredient> inputs, Container inv, boolean hasEnchantment) {
         List<Ingredient> ingredientsMissing = new ArrayList<>(inputs);
 
-        for (int i = 0; i < inv.getContainerSize(); i++) {
+        int u = 0;
+        if (hasEnchantment) {
+            u = 1;
+        }
+
+        for (int i = u; i < inv.getContainerSize(); i++) {
             ItemStack input = inv.getItem(i);
             if (input.isEmpty()) {
                 break;
@@ -77,13 +81,15 @@ public class ArcaneIteratorRecipe implements Recipe<Container> {
             }
         }
 
-        ItemStack stack = inv.getItem(0);
-        if (stack.isEmpty()) {
-            return false;
-        }
-        Ingredient ingr = inputs.get(0);
-        if (!ingr.test(stack)) {
-            return false;
+        if (!hasEnchantment) {
+            ItemStack stack = inv.getItem(0);
+            if (stack.isEmpty()) {
+                return false;
+            }
+            Ingredient ingr = inputs.get(0);
+            if (!ingr.test(stack)) {
+                return false;
+            }
         }
 
         return ingredientsMissing.isEmpty();
@@ -199,7 +205,7 @@ public class ArcaneIteratorRecipe implements Recipe<Container> {
             int health = buffer.readInt();
             int experience = buffer.readInt();
             boolean isSaveNBT = buffer.readBoolean();
-            return new ArcaneIteratorRecipe(recipeId, output, null, wissen, health, experience, isSaveNBT, inputs);
+            return new ArcaneIteratorRecipe(recipeId, output, enchantment, wissen, health, experience, isSaveNBT, inputs);
         }
 
         @Override

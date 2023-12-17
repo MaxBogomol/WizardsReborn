@@ -13,22 +13,28 @@ import net.minecraft.core.RegistryAccess;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.Connection;
 import net.minecraft.network.protocol.game.ClientboundBlockEntityDataPacket;
+import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.SimpleContainer;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.inventory.AnvilMenu;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.enchantment.Enchantment;
+import net.minecraft.world.item.enchantment.EnchantmentHelper;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.phys.AABB;
 import org.jetbrains.annotations.NotNull;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
-import java.util.Random;
+import java.util.*;
 
 public class ArcaneIteratorTileEntity extends BlockEntity implements TickableBlockEntity, IWissenTileEntity, ICooldownTileEntity, IWissenWandFunctionalTileEntity, IItemResultTileEntity {
     public int wissenInCraft= 0;
     public int wissenIsCraft = 0;
+    public int experienceInCraft= 0;
+    public int experienceIsCraft = 0;
+    public int experienceTick = 0;
     public boolean startCraft = false;
     public double angleA = 0;
     public double angleB = 0;
@@ -65,34 +71,68 @@ public class ArcaneIteratorTileEntity extends BlockEntity implements TickableBlo
 
                 Optional<ArcaneIteratorRecipe> recipe = level.getRecipeManager().getRecipeFor(WizardsReborn.ARCANE_ITERATOR_RECIPE.get(), inv, level);
                 wissenInCraft = recipe.map(ArcaneIteratorRecipe::getRecipeWissen).orElse(0);
+                experienceInCraft = recipe.map(ArcaneIteratorRecipe::getRecipeExperience).orElse(0);
 
-                if (wissenInCraft <= 0 && (wissenIsCraft > 0 || startCraft)) {
+                boolean canCraft = canCraft(recipe);
+
+                if (wissenInCraft <= 0 && (wissenIsCraft > 0 || startCraft) || !canCraft) {
                     wissenIsCraft = 0;
+                    experienceIsCraft = 0;
                     startCraft = false;
 
                     update = true;
                 }
 
-                if ((wissenInCraft > 0) && (wissen > 0) && (startCraft)) {
+                if (experienceTick > 0) {
+                    experienceTick--;
+
+                    update = true;
+                }
+
+                if ((wissenInCraft > 0) && (wissen > 0) && (startCraft) && canCraft) {
                     int addRemainCraft = WissenUtils.getAddWissenRemain(wissenIsCraft, getWissenPerTick(), wissenInCraft);
                     int removeRemain = WissenUtils.getRemoveWissenRemain(getWissen(), getWissenPerTick() - addRemainCraft);
 
                     wissenIsCraft = wissenIsCraft + (getWissenPerTick() - addRemainCraft - removeRemain);
                     removeWissen(getWissenPerTick() - addRemainCraft - removeRemain);
 
+                    if (experienceInCraft > 0 && experienceIsCraft < experienceInCraft && experienceTick == 0) {
+                        Player player = getPlayer();
+                        if (player != null) {
+                            if (player.experienceLevel > 0) {
+                                experienceIsCraft++;
+                                experienceTick = 10;
+                                getPlayer().giveExperienceLevels(-1);
+                                level.playSound(WizardsReborn.proxy.getPlayer(), player.getOnPos(), SoundEvents.EXPERIENCE_ORB_PICKUP, SoundSource.BLOCKS, 1f, 1f);
+                            }
+                        }
+                    }
+
                     update = true;
                 }
 
-                if (wissenInCraft > 0 && startCraft) {
-                    if (wissenInCraft <= wissenIsCraft) {
+                if (wissenInCraft > 0 && startCraft && canCraft) {
+                    if (wissenInCraft <= wissenIsCraft && experienceInCraft <= experienceIsCraft) {
                         wissenInCraft = 0;
                         wissenIsCraft = 0;
+                        experienceIsCraft = 0;
                         startCraft = false;
 
                         CompoundTag tagPos = new CompoundTag();
                         ItemStack stack = recipe.get().getResultItem(RegistryAccess.EMPTY).copy();
-                        if (recipe.get().getRecipeIsSaveNBT()) {
-                            stack.setTag(items.get(0).getOrCreateTag());
+                        if (!stack.isEmpty()) {
+                            if (recipe.get().getRecipeIsSaveNBT()) {
+                                stack.setTag(items.get(0).getOrCreateTag());
+                            }
+                        } else {
+                            stack = getMainPedestal().getItem(0).copy();
+                        }
+
+                        if (recipe.get().hasRecipeEnchantment()) {
+                            Enchantment enchantment = recipe.get().getRecipeEnchantment();
+                            if (canEnchant(stack, enchantment)) {
+                                enchant(stack, enchantment);
+                            }
                         }
 
                         for (int i = 0; i < pedestals.size(); i++) {
@@ -156,6 +196,15 @@ public class ArcaneIteratorTileEntity extends BlockEntity implements TickableBlo
                                 .setLifetime(30)
                                 .setSpin((0.5f * (float) ((random.nextDouble() - 0.5D) * 2)))
                                 .spawn(level, worldPosition.getX() + 0.5F, worldPosition.getY() - 0.7F, worldPosition.getZ() + 0.5F);
+                    }
+                }
+
+                if (experienceTick == 10) {
+                    Player player = getPlayer();
+                    if (player != null) {
+                        bursts.add(new ArcaneIteratorBurst(level, (float) player.getX(), (float) player.getY() + (player.getEyeHeight() / 2), (float) player.getZ(),
+                                getBlockPos().getX() + 0.5F, getBlockPos().getY() + 0.5F, getBlockPos().getZ() + 0.5F, 0.05f, 20, 200,
+                                0F, 1F, 0F));
                     }
                 }
 
@@ -294,6 +343,14 @@ public class ArcaneIteratorTileEntity extends BlockEntity implements TickableBlo
         return getItemsFromPedestals(getPedestals());
     }
 
+    public Player getPlayer() {
+        List<Player> players = level.getEntitiesOfClass(Player.class, new AABB(getBlockPos()).inflate(4, 2, 4));
+        if (players.size() > 0) {
+            return players.get(0);
+        }
+        return null;
+    }
+
     @Override
     public ClientboundBlockEntityDataPacket getUpdatePacket() {
         return ClientboundBlockEntityDataPacket.create(this, (e) -> e.getUpdateTag());
@@ -326,6 +383,9 @@ public class ArcaneIteratorTileEntity extends BlockEntity implements TickableBlo
         super.saveAdditional(tag);
         tag.putInt("wissenInCraft", wissenInCraft);
         tag.putInt("wissenIsCraft", wissenIsCraft);
+        tag.putInt("experienceInCraft", experienceInCraft);
+        tag.putInt("experienceIsCraft", experienceIsCraft);
+        tag.putInt("experienceTick", experienceTick);
         tag.putBoolean("startCraft", startCraft);
         tag.putDouble("angleA", angleA);
         tag.putDouble("angleB", angleB);
@@ -337,6 +397,9 @@ public class ArcaneIteratorTileEntity extends BlockEntity implements TickableBlo
         super.load(tag);
         wissenInCraft = tag.getInt("wissenInCraft");
         wissenIsCraft = tag.getInt("wissenIsCraft");
+        experienceInCraft = tag.getInt("experienceInCraft");
+        experienceIsCraft = tag.getInt("experienceIsCraft");
+        experienceTick = tag.getInt("experienceTick");
         startCraft = tag.getBoolean("startCraft");
         angleA = tag.getDouble("angleA");
         angleB = tag.getDouble("angleB");
@@ -444,13 +507,91 @@ public class ArcaneIteratorTileEntity extends BlockEntity implements TickableBlo
 
             Optional<ArcaneIteratorRecipe> recipe = level.getRecipeManager().getRecipeFor(WizardsReborn.ARCANE_ITERATOR_RECIPE.get(), inv, level);
             if (recipe.isPresent()) {
-                ItemStack stack = recipe.get().getResultItem(RegistryAccess.EMPTY).copy();
-                if (recipe.get().getRecipeIsSaveNBT()) {
-                    stack.setTag(items.get(0).copy().getOrCreateTag());
+                if (!recipe.get().getResultItem(RegistryAccess.EMPTY).isEmpty()) {
+                    ItemStack stack = recipe.get().getResultItem(RegistryAccess.EMPTY).copy();
+                    if (recipe.get().getRecipeIsSaveNBT()) {
+                        stack.setTag(items.get(0).copy().getOrCreateTag());
+                    }
+                    if (recipe.get().hasRecipeEnchantment()) {
+                        Enchantment enchantment = recipe.get().getRecipeEnchantment();
+                        if (canEnchant(stack, enchantment)) {
+                            enchant(stack, enchantment);
+                        }
+                    }
+                    list.add(stack);
+                } else {
+                    ArcanePedestalTileEntity pedestal = getMainPedestal();
+                    if (!pedestal.getItemHandler().getItem(0).isEmpty() && recipe.get().hasRecipeEnchantment()) {
+                        ItemStack stack = pedestal.getItemHandler().getItem(0).copy();
+                        Enchantment enchantment = recipe.get().getRecipeEnchantment();
+                        if (canEnchant(stack, enchantment)) {
+                            enchant(stack, enchantment);
+                            list.add(stack);
+                        }
+                    }
                 }
-                list.add(stack);
             }
         }
         return list;
+    }
+
+    public List<ItemStack> getItemsResult(Optional<ArcaneIteratorRecipe> recipe) {
+        List<ItemStack> list = new ArrayList<>();
+        if (isWorks()) {
+            List<ArcanePedestalTileEntity> pedestals = getPedestals();
+            List<ItemStack> items = getItemsFromPedestals(pedestals);
+            if (recipe.isPresent()) {
+                if (!recipe.get().getResultItem(RegistryAccess.EMPTY).isEmpty()) {
+                    ItemStack stack = recipe.get().getResultItem(RegistryAccess.EMPTY).copy();
+                    if (recipe.get().getRecipeIsSaveNBT()) {
+                        stack.setTag(items.get(0).copy().getOrCreateTag());
+                    }
+                    if (recipe.get().hasRecipeEnchantment()) {
+                        Enchantment enchantment = recipe.get().getRecipeEnchantment();
+                        if (canEnchant(stack, enchantment)) {
+                            enchant(stack, enchantment);
+                        }
+                    }
+                    list.add(stack);
+                } else {
+                    ArcanePedestalTileEntity pedestal = getMainPedestal();
+                    if (!pedestal.getItemHandler().getItem(0).isEmpty() && recipe.get().hasRecipeEnchantment()) {
+                        ItemStack stack = pedestal.getItemHandler().getItem(0).copy();
+                        Enchantment enchantment = recipe.get().getRecipeEnchantment();
+                        if (canEnchant(stack, enchantment)) {
+                            enchant(stack, enchantment);
+                            list.add(stack);
+                        }
+                    }
+                }
+            }
+        }
+        return list;
+    }
+
+    public static boolean canEnchant(ItemStack stack, Enchantment enchantment) {
+        int enchantmentLevel = stack.getEnchantmentLevel(enchantment);
+        int repairCost = stack.getBaseRepairCost();
+        if (enchantmentLevel == 0) {
+            repairCost++;
+        }
+        int xp = AnvilMenu.calculateIncreasedRepairCost(repairCost);
+        return (enchantment.canEnchant(stack) && enchantmentLevel + 1 <= enchantment.getMaxLevel() && xp <= 60);
+    }
+
+    public static void enchant(ItemStack stack, Enchantment enchantment) {
+        int enchantmentLevel = stack.getEnchantmentLevel(enchantment);
+        if (enchantmentLevel == 0) {
+            stack.enchant(enchantment, enchantmentLevel + 1);
+            stack.setRepairCost(stack.getBaseRepairCost() + 1);
+        } else {
+            Map<Enchantment, Integer> enchantments = stack.getAllEnchantments();
+            enchantments.put(enchantment, enchantmentLevel + 1);
+            EnchantmentHelper.setEnchantments(enchantments, stack);
+        }
+    }
+
+    public boolean canCraft(Optional<ArcaneIteratorRecipe> recipe) {
+        return getItemsResult(recipe).size() > 0;
     }
 }
