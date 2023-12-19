@@ -1,6 +1,8 @@
 package mod.maxbogomol.wizards_reborn;
 
 import com.google.common.collect.ImmutableMap;
+import mod.maxbogomol.wizards_reborn.api.arcaneenchantment.ArcaneEnchantment;
+import mod.maxbogomol.wizards_reborn.api.arcaneenchantment.ArcaneEnchantments;
 import mod.maxbogomol.wizards_reborn.api.crystal.CrystalStat;
 import mod.maxbogomol.wizards_reborn.api.crystal.CrystalType;
 import mod.maxbogomol.wizards_reborn.api.crystal.Crystals;
@@ -28,6 +30,7 @@ import mod.maxbogomol.wizards_reborn.client.render.curio.AmuletRenderer;
 import mod.maxbogomol.wizards_reborn.client.render.curio.BeltRenderer;
 import mod.maxbogomol.wizards_reborn.client.render.curio.MushroomCapRenderer;
 import mod.maxbogomol.wizards_reborn.client.render.item.WandCrystalsModels;
+import mod.maxbogomol.wizards_reborn.common.arcaneenchantment.WissenMendingArcaneEnchantment;
 import mod.maxbogomol.wizards_reborn.common.block.*;
 import mod.maxbogomol.wizards_reborn.common.capability.IKnowledge;
 import mod.maxbogomol.wizards_reborn.common.command.KnowledgeArgument;
@@ -41,6 +44,7 @@ import mod.maxbogomol.wizards_reborn.common.entity.SpellProjectileEntity;
 import mod.maxbogomol.wizards_reborn.common.event.Events;
 import mod.maxbogomol.wizards_reborn.common.item.*;
 import mod.maxbogomol.wizards_reborn.common.item.equipment.*;
+import mod.maxbogomol.wizards_reborn.common.item.equipment.arcane.ArcaneSwordItem;
 import mod.maxbogomol.wizards_reborn.common.item.equipment.curio.*;
 import mod.maxbogomol.wizards_reborn.common.itemgroup.WizardsRebornItemGroup;
 import mod.maxbogomol.wizards_reborn.common.knowledge.RegisterKnowledges;
@@ -107,10 +111,13 @@ import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
+import org.checkerframework.checker.units.qual.A;
 import top.theillusivec4.curios.api.CuriosApi;
 import top.theillusivec4.curios.api.SlotTypeMessage;
 import top.theillusivec4.curios.api.SlotTypePreset;
 import top.theillusivec4.curios.api.client.CuriosRendererRegistry;
+
+import java.awt.*;
 
 @Mod("wizards_reborn")
 public class WizardsReborn {
@@ -213,6 +220,9 @@ public class WizardsReborn {
     public static Spell VOID_RAY_SPELL = new VoidRaySpell(MOD_ID+":void_ray", 7);
     public static Spell FROST_RAY_SPELL = new FrostRaySpell(MOD_ID+":frost_ray", 7);
     public static Spell HOLY_RAY_SPELL = new HolyRaySpell(MOD_ID+":holy_ray", 7);
+
+    //ARCANE ENCHANTMENT
+    public static ArcaneEnchantment WISSEN_MENDING_ARCANE_ENCHANTMENT = new WissenMendingArcaneEnchantment(MOD_ID+":wissen_mending", 3);
 
     public static final FoodProperties MOR_FOOD = (new FoodProperties.Builder()).nutrition(1).saturationMod(0.6F).effect(new MobEffectInstance(MobEffects.POISON, 450, 0), 1.0F).effect(new MobEffectInstance(MobEffects.CONFUSION, 350, 0), 1.0F).effect(new MobEffectInstance(MobEffects.BLINDNESS, 250, 0), 1.0F).effect(new MobEffectInstance(MobEffects.WEAKNESS, 550, 1), 1.0F).build();
 
@@ -380,7 +390,7 @@ public class WizardsReborn {
     public static final RegistryObject<Item> NETHER_ARCANE_GOLD_ORE_ITEM = ITEMS.register("nether_arcane_gold_ore", () -> new BlockItem(NETHER_ARCANE_GOLD_ORE.get(), new Item.Properties()));
     public static final RegistryObject<Item> RAW_ARCANE_GOLD_BLOCK_ITEM = ITEMS.register("raw_arcane_gold_block", () -> new BlockItem(RAW_ARCANE_GOLD_BLOCK.get(), new Item.Properties()));
 
-    public static final RegistryObject<Item> ARCANE_GOLD_SWORD = ITEMS.register("arcane_gold_sword", () -> new SwordItem(CustomItemTier.ARCANE_GOLD, 3, -2.4f, new Item.Properties()));
+    public static final RegistryObject<Item> ARCANE_GOLD_SWORD = ITEMS.register("arcane_gold_sword", () -> new ArcaneSwordItem(CustomItemTier.ARCANE_GOLD, 3, -2.4f, new Item.Properties()));
     public static final RegistryObject<Item> ARCANE_GOLD_PICKAXE = ITEMS.register("arcane_gold_pickaxe", () -> new PickaxeItem(CustomItemTier.ARCANE_GOLD, 1, -2.8f, new Item.Properties()));
     public static final RegistryObject<Item> ARCANE_GOLD_AXE = ITEMS.register("arcane_gold_axe", () -> new AxeItem(CustomItemTier.ARCANE_GOLD, 6, -3.1f, new Item.Properties()));
     public static final RegistryObject<Item> ARCANE_GOLD_SHOVEL = ITEMS.register("arcane_gold_shovel", () -> new ShovelItem(CustomItemTier.ARCANE_GOLD, 1.5f, -3f, new Item.Properties()));
@@ -766,6 +776,7 @@ public class WizardsReborn {
         setupCrystals();
         setupMonograms();
         setupSpells();
+        setupArcaneEnchantments();
 
         IEventBus forgeBus = MinecraftForge.EVENT_BUS;
 
@@ -935,6 +946,10 @@ public class WizardsReborn {
         Spells.register(VOID_RAY_SPELL);
         Spells.register(FROST_RAY_SPELL);
         Spells.register(HOLY_RAY_SPELL);
+    }
+
+    public static void setupArcaneEnchantments() {
+        ArcaneEnchantments.register(WISSEN_MENDING_ARCANE_ENCHANTMENT);
     }
 
     public static void setupWandCrystalsModels() {

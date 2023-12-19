@@ -16,6 +16,7 @@ import net.minecraft.network.protocol.game.ClientboundBlockEntityDataPacket;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.SimpleContainer;
+import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.AnvilMenu;
 import net.minecraft.world.item.ItemStack;
@@ -35,6 +36,9 @@ public class ArcaneIteratorTileEntity extends BlockEntity implements TickableBlo
     public int experienceInCraft= 0;
     public int experienceIsCraft = 0;
     public int experienceTick = 0;
+    public int healthInCraft= 0;
+    public int healthIsCraft = 0;
+    public int healthTick = 0;
     public boolean startCraft = false;
     public double angleA = 0;
     public double angleB = 0;
@@ -72,12 +76,14 @@ public class ArcaneIteratorTileEntity extends BlockEntity implements TickableBlo
                 Optional<ArcaneIteratorRecipe> recipe = level.getRecipeManager().getRecipeFor(WizardsReborn.ARCANE_ITERATOR_RECIPE.get(), inv, level);
                 wissenInCraft = recipe.map(ArcaneIteratorRecipe::getRecipeWissen).orElse(0);
                 experienceInCraft = recipe.map(ArcaneIteratorRecipe::getRecipeExperience).orElse(0);
+                healthInCraft = recipe.map(ArcaneIteratorRecipe::getRecipeHealth).orElse(0);
 
                 boolean canCraft = canCraft(recipe);
 
                 if (wissenInCraft <= 0 && (wissenIsCraft > 0 || startCraft) || !canCraft) {
                     wissenIsCraft = 0;
                     experienceIsCraft = 0;
+                    healthIsCraft = 0;
                     startCraft = false;
 
                     update = true;
@@ -85,6 +91,12 @@ public class ArcaneIteratorTileEntity extends BlockEntity implements TickableBlo
 
                 if (experienceTick > 0) {
                     experienceTick--;
+
+                    update = true;
+                }
+
+                if (healthTick > 0) {
+                    healthTick--;
 
                     update = true;
                 }
@@ -108,6 +120,17 @@ public class ArcaneIteratorTileEntity extends BlockEntity implements TickableBlo
                         }
                     }
 
+                    if (healthInCraft > 0 && healthIsCraft < healthInCraft && healthTick == 0 && experienceTick == 0) {
+                        Player player = getPlayer();
+                        if (player != null) {
+                            if (player.getHealth() > 0) {
+                                healthIsCraft++;
+                                healthTick = 10;
+                                player.hurt(new DamageSource(player.damageSources().magic().typeHolder()), 1f);
+                            }
+                        }
+                    }
+
                     update = true;
                 }
 
@@ -116,6 +139,7 @@ public class ArcaneIteratorTileEntity extends BlockEntity implements TickableBlo
                         wissenInCraft = 0;
                         wissenIsCraft = 0;
                         experienceIsCraft = 0;
+                        healthIsCraft = 0;
                         startCraft = false;
 
                         CompoundTag tagPos = new CompoundTag();
@@ -205,6 +229,15 @@ public class ArcaneIteratorTileEntity extends BlockEntity implements TickableBlo
                         bursts.add(new ArcaneIteratorBurst(level, (float) player.getX(), (float) player.getY() + (player.getEyeHeight() / 2), (float) player.getZ(),
                                 getBlockPos().getX() + 0.5F, getBlockPos().getY() + 0.5F, getBlockPos().getZ() + 0.5F, 0.05f, 20, 200,
                                 0F, 1F, 0F));
+                    }
+                }
+
+                if (healthTick == 5) {
+                    Player player = getPlayer();
+                    if (player != null) {
+                        bursts.add(new ArcaneIteratorBurst(level, (float) player.getX(), (float) player.getY() + (player.getEyeHeight() / 2), (float) player.getZ(),
+                                getBlockPos().getX() + 0.5F, getBlockPos().getY() + 0.5F, getBlockPos().getZ() + 0.5F, 0.05f, 20, 200,
+                                1F, 0F, 0F));
                     }
                 }
 
@@ -386,6 +419,9 @@ public class ArcaneIteratorTileEntity extends BlockEntity implements TickableBlo
         tag.putInt("experienceInCraft", experienceInCraft);
         tag.putInt("experienceIsCraft", experienceIsCraft);
         tag.putInt("experienceTick", experienceTick);
+        tag.putInt("healthInCraft", healthInCraft);
+        tag.putInt("healthIsCraft", healthIsCraft);
+        tag.putInt("healthTick", healthTick);
         tag.putBoolean("startCraft", startCraft);
         tag.putDouble("angleA", angleA);
         tag.putDouble("angleB", angleB);
@@ -400,6 +436,9 @@ public class ArcaneIteratorTileEntity extends BlockEntity implements TickableBlo
         experienceInCraft = tag.getInt("experienceInCraft");
         experienceIsCraft = tag.getInt("experienceIsCraft");
         experienceTick = tag.getInt("experienceTick");
+        healthInCraft = tag.getInt("healthInCraft");
+        healthIsCraft = tag.getInt("healthIsCraft");
+        healthTick = tag.getInt("healthTick");
         startCraft = tag.getBoolean("startCraft");
         angleA = tag.getDouble("angleA");
         angleB = tag.getDouble("angleB");
