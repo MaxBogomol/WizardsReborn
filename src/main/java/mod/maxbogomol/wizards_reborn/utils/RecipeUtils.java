@@ -2,7 +2,10 @@ package mod.maxbogomol.wizards_reborn.utils;
 
 import com.google.gson.JsonObject;
 import com.google.gson.JsonSyntaxException;
+import mod.maxbogomol.wizards_reborn.api.arcaneenchantment.ArcaneEnchantment;
+import mod.maxbogomol.wizards_reborn.api.arcaneenchantment.ArcaneEnchantments;
 import net.minecraft.network.FriendlyByteBuf;
+import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.GsonHelper;
 import net.minecraft.world.effect.MobEffect;
@@ -76,6 +79,28 @@ public class RecipeUtils {
         } else {
             buffer.writeBoolean(true);
             buffer.writeRegistryId(ForgeRegistries.ENCHANTMENTS, enchantment);
+        }
+    }
+
+    public static ArcaneEnchantment deserializeArcaneEnchantment(JsonObject json) {
+        String enchantmentName = GsonHelper.getAsString(json, "arcane_enchantment");
+        ArcaneEnchantment enchantment = ArcaneEnchantments.getArcaneEnchantment(enchantmentName);
+        if (enchantment == null) {
+            throw new JsonSyntaxException("Unknown arcane enchantment " + enchantmentName);
+        }
+        return enchantment;
+    }
+
+    public static ArcaneEnchantment  arcaneEnchantmentFromNetwork(FriendlyByteBuf buffer) {
+        return !buffer.readBoolean() ? null : ArcaneEnchantments.getArcaneEnchantment(buffer.readComponent().getString());
+    }
+
+    public static void arcaneEnchantmentToNetwork(ArcaneEnchantment enchantment, FriendlyByteBuf buffer) {
+        if (enchantment == null) {
+            buffer.writeBoolean(false);
+        } else {
+            buffer.writeBoolean(true);
+            buffer.writeComponent(Component.literal(enchantment.getId()));
         }
     }
 }

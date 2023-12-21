@@ -1,6 +1,8 @@
 package mod.maxbogomol.wizards_reborn.common.tileentity;
 
 import mod.maxbogomol.wizards_reborn.WizardsReborn;
+import mod.maxbogomol.wizards_reborn.api.arcaneenchantment.ArcaneEnchantment;
+import mod.maxbogomol.wizards_reborn.api.arcaneenchantment.ArcaneEnchantmentUtils;
 import mod.maxbogomol.wizards_reborn.api.wissen.*;
 import mod.maxbogomol.wizards_reborn.client.particle.ArcaneIteratorBurst;
 import mod.maxbogomol.wizards_reborn.client.particle.Particles;
@@ -159,6 +161,14 @@ public class ArcaneIteratorTileEntity extends BlockEntity implements TickableBlo
                             }
                         }
 
+                        if (recipe.get().hasRecipeArcaneEnchantment()) {
+                            ArcaneEnchantment enchantment = recipe.get().getRecipeArcaneEnchantment();
+                            //if (canEnchant(stack, enchantment)) {
+                                //enchant(stack, enchantment);
+                            ArcaneEnchantmentUtils.addItemArcaneEnchantment(stack, enchantment);
+                            //}
+                        }
+
                         for (int i = 0; i < pedestals.size(); i++) {
                             if (!pedestals.get(i).getItemHandler().getItem(0).isEmpty()) {
                                 pedestals.get(i).getItemHandler().removeItemNoUpdate(0);
@@ -241,7 +251,7 @@ public class ArcaneIteratorTileEntity extends BlockEntity implements TickableBlo
                     }
                 }
 
-                if (wissenInCraft > 0 && startCraft) {
+                if (wissenInCraft > 0 && startCraft && wissenIsCraft < wissenInCraft) {
                     if (offset < 40) {
                         offset++;
                     }
@@ -378,10 +388,22 @@ public class ArcaneIteratorTileEntity extends BlockEntity implements TickableBlo
 
     public Player getPlayer() {
         List<Player> players = level.getEntitiesOfClass(Player.class, new AABB(getBlockPos()).inflate(4, 2, 4));
+        Player minPlayer = null;
         if (players.size() > 0) {
-            return players.get(0);
+            float minDistance = (float) Math.sqrt(players.get(0).distanceToSqr(getBlockPos().getX() + 0.5F, getBlockPos().getY() + 0.5F, getBlockPos().getZ() + 0.5F));
+            minPlayer = players.get(0);
+
+            for (Player player : players) {
+                float distance = (float) Math.sqrt(player.distanceToSqr(getBlockPos().getX() + 0.5F, getBlockPos().getY() + 0.5F, getBlockPos().getZ() + 0.5F));
+
+                if (distance < minDistance) {
+                    minDistance = distance;
+                    minPlayer = player;
+                }
+            }
         }
-        return null;
+
+        return minPlayer;
     }
 
     @Override
@@ -545,32 +567,9 @@ public class ArcaneIteratorTileEntity extends BlockEntity implements TickableBlo
             }
 
             Optional<ArcaneIteratorRecipe> recipe = level.getRecipeManager().getRecipeFor(WizardsReborn.ARCANE_ITERATOR_RECIPE.get(), inv, level);
-            if (recipe.isPresent()) {
-                if (!recipe.get().getResultItem(RegistryAccess.EMPTY).isEmpty()) {
-                    ItemStack stack = recipe.get().getResultItem(RegistryAccess.EMPTY).copy();
-                    if (recipe.get().getRecipeIsSaveNBT()) {
-                        stack.setTag(items.get(0).copy().getOrCreateTag());
-                    }
-                    if (recipe.get().hasRecipeEnchantment()) {
-                        Enchantment enchantment = recipe.get().getRecipeEnchantment();
-                        if (canEnchant(stack, enchantment)) {
-                            enchant(stack, enchantment);
-                        }
-                    }
-                    list.add(stack);
-                } else {
-                    ArcanePedestalTileEntity pedestal = getMainPedestal();
-                    if (!pedestal.getItemHandler().getItem(0).isEmpty() && recipe.get().hasRecipeEnchantment()) {
-                        ItemStack stack = pedestal.getItemHandler().getItem(0).copy();
-                        Enchantment enchantment = recipe.get().getRecipeEnchantment();
-                        if (canEnchant(stack, enchantment)) {
-                            enchant(stack, enchantment);
-                            list.add(stack);
-                        }
-                    }
-                }
-            }
+            list.addAll(getItemsResult(recipe));
         }
+
         return list;
     }
 
@@ -591,14 +590,33 @@ public class ArcaneIteratorTileEntity extends BlockEntity implements TickableBlo
                             enchant(stack, enchantment);
                         }
                     }
+                    if (recipe.get().hasRecipeArcaneEnchantment()) {
+                        ArcaneEnchantment enchantment = recipe.get().getRecipeArcaneEnchantment();
+                        if (ArcaneEnchantmentUtils.canAddItemArcaneEnchantment(stack, enchantment)) {
+                            ArcaneEnchantmentUtils.addItemArcaneEnchantment(stack, enchantment);
+                        }
+                    }
                     list.add(stack);
                 } else {
                     ArcanePedestalTileEntity pedestal = getMainPedestal();
-                    if (!pedestal.getItemHandler().getItem(0).isEmpty() && recipe.get().hasRecipeEnchantment()) {
+                    if (!pedestal.getItemHandler().getItem(0).isEmpty() && (recipe.get().hasRecipeEnchantment() || recipe.get().hasRecipeArcaneEnchantment())) {
                         ItemStack stack = pedestal.getItemHandler().getItem(0).copy();
-                        Enchantment enchantment = recipe.get().getRecipeEnchantment();
-                        if (canEnchant(stack, enchantment)) {
-                            enchant(stack, enchantment);
+                        boolean canEnchant = false;
+                        if (recipe.get().hasRecipeEnchantment()) {
+                            Enchantment enchantment = recipe.get().getRecipeEnchantment();
+                            if (canEnchant(stack, enchantment)) {
+                                canEnchant = true;
+                                enchant(stack, enchantment);
+                            }
+                        }
+                        if (recipe.get().hasRecipeArcaneEnchantment()) {
+                            ArcaneEnchantment enchantment = recipe.get().getRecipeArcaneEnchantment();
+                            if (ArcaneEnchantmentUtils.canAddItemArcaneEnchantment(stack, enchantment)) {
+                                canEnchant = true;
+                                ArcaneEnchantmentUtils.addItemArcaneEnchantment(stack, enchantment);
+                            }
+                        }
+                        if (canEnchant) {
                             list.add(stack);
                         }
                     }

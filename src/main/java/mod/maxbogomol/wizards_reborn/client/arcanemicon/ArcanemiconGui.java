@@ -2,15 +2,19 @@ package mod.maxbogomol.wizards_reborn.client.arcanemicon;
 
 import mod.maxbogomol.wizards_reborn.WizardsReborn;
 import mod.maxbogomol.wizards_reborn.client.arcanemicon.index.ChapterHistoryEntry;
+import mod.maxbogomol.wizards_reborn.common.tileentity.HoveringTomeStandTileEntity;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.screens.Screen;
+import net.minecraft.core.BlockPos;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
+import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
+import net.minecraftforge.common.ForgeMod;
 import org.lwjgl.glfw.GLFW;
 
 import java.util.ArrayList;
@@ -28,6 +32,8 @@ public class ArcanemiconGui extends Screen {
     public static List<ChapterHistoryEntry> historyEntries = new ArrayList<>();
     public static int currentHistory = 1;
 
+    public static BlockPos blockPos;
+
     public ArcanemiconGui() {
         super(Component.translatable("gui.wizards_reborn.arcanemicon.title"));
         if (currentChapter == null) {
@@ -37,6 +43,7 @@ public class ArcanemiconGui extends Screen {
         for (Category category : ArcanemiconChapters.categories) {
             category.reset();
         }
+        blockPos = null;
     }
 
     public void changeChapter(Chapter next) {
@@ -60,6 +67,19 @@ public class ArcanemiconGui extends Screen {
         Page left = currentChapter.getPage(currentPage), right = currentChapter.getPage(currentPage + 1);
         if (left != null) left.tick(this);
         if (right != null) right.tick(this);
+
+        if (blockPos != null && minecraft != null) {
+            Player player = minecraft.player;
+            if (player != null) {
+                float distance = (float) Math.sqrt(Math.pow(player.getX() - blockPos.getX(), 2) + Math.pow(player.getY() + player.getEyeHeight() - blockPos.getY(), 2) + Math.pow(player.getZ() - blockPos.getZ(), 2));
+                if (distance - 1.5F > player.getAttributeValue(ForgeMod.BLOCK_REACH.get())) {
+                    minecraft.player.closeContainer();
+                }
+                if (!(minecraft.level.getBlockEntity(blockPos) instanceof HoveringTomeStandTileEntity)) {
+                    minecraft.player.closeContainer();
+                }
+            }
+        }
     }
 
     @Override

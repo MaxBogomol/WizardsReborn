@@ -7,6 +7,7 @@ import mod.maxbogomol.wizards_reborn.api.monogram.MonogramRecipe;
 import mod.maxbogomol.wizards_reborn.api.monogram.Monograms;
 import mod.maxbogomol.wizards_reborn.api.spell.Spell;
 import mod.maxbogomol.wizards_reborn.client.arcanemicon.*;
+import mod.maxbogomol.wizards_reborn.client.arcanemicon.index.ChapterHistoryEntry;
 import mod.maxbogomol.wizards_reborn.common.network.PacketHandler;
 import mod.maxbogomol.wizards_reborn.common.network.UnlockSpellPacket;
 import net.minecraft.client.Minecraft;
@@ -20,10 +21,7 @@ import net.minecraft.world.phys.Vec2;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Random;
+import java.util.*;
 
 public class ResearchPage extends Page {
     public static final ResourceLocation BACKGROUND = new ResourceLocation(WizardsReborn.MOD_ID, "textures/gui/arcanemicon/monogram_page.png");
@@ -36,6 +34,8 @@ public class ResearchPage extends Page {
     public MonogramRecipesPage recipeList;
     public Spell spell;
     public Chapter lastChapter;
+    public static List<ChapterHistoryEntry> historyEntries = new ArrayList<>();
+    public static int currentHistory = 1;
 
     public ResearchPage(boolean main) {
         super(BACKGROUND);
@@ -88,6 +88,8 @@ public class ResearchPage extends Page {
                     if (actives >= mapSize) {
                         if (mouseX >= x + 95 && mouseY >= y + 132 && mouseX <= x + 95 + 18 && mouseY <= y + 132 + 18) {
                             ArcanemiconGui.currentChapter = lastChapter;
+                            ArcanemiconGui.historyEntries = historyEntries;
+                            ArcanemiconGui.currentHistory = currentHistory;
                             PacketHandler.sendToServer(new UnlockSpellPacket(spell));
                             Minecraft.getInstance().player.playNotifySound(SoundEvents.EXPERIENCE_ORB_PICKUP, SoundSource.NEUTRAL, 1.0f, 1.0f);
                             Minecraft.getInstance().player.playNotifySound(SoundEvents.BOOK_PAGE_TURN, SoundSource.NEUTRAL, 1.0f, 1.0f);

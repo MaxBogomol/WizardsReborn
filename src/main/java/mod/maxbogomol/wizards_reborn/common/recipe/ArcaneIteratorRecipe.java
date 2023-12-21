@@ -4,6 +4,7 @@ import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import mod.maxbogomol.wizards_reborn.WizardsReborn;
+import mod.maxbogomol.wizards_reborn.api.arcaneenchantment.ArcaneEnchantment;
 import mod.maxbogomol.wizards_reborn.utils.RecipeUtils;
 import net.minecraft.core.NonNullList;
 import net.minecraft.core.RegistryAccess;
@@ -27,16 +28,18 @@ public class ArcaneIteratorRecipe implements Recipe<Container> {
     private final ResourceLocation id;
     private final ItemStack output;
     private final Enchantment enchantment;
+    private final ArcaneEnchantment arcaneEnchantment;
     private final NonNullList<Ingredient> inputs;
     private final int wissen;
     private final int health;
     private final int experience;
     private final boolean isSaveNBT;
 
-    public ArcaneIteratorRecipe(ResourceLocation id, ItemStack output, Enchantment enchantment, int wissen, int health, int experience, boolean isSaveNBT, NonNullList<Ingredient> inputs) {
+    public ArcaneIteratorRecipe(ResourceLocation id, ItemStack output, Enchantment enchantment, ArcaneEnchantment arcaneEnchantment, int wissen, int health, int experience, boolean isSaveNBT, NonNullList<Ingredient> inputs) {
         this.id = id;
         this.output = output;
         this.enchantment = enchantment;
+        this.arcaneEnchantment = arcaneEnchantment;
         this.inputs = inputs;
         this.wissen = wissen;
         this.health = health;
@@ -46,7 +49,7 @@ public class ArcaneIteratorRecipe implements Recipe<Container> {
 
     @Override
     public boolean matches(Container inv, Level worldIn) {
-        boolean hasEnchantment = (getResultItem(RegistryAccess.EMPTY).isEmpty() && hasRecipeEnchantment());
+        boolean hasEnchantment = (getResultItem(RegistryAccess.EMPTY).isEmpty() && (hasRecipeEnchantment() || hasRecipeArcaneEnchantment()));
         return matches(inputs, inv, hasEnchantment);
     }
 
@@ -122,12 +125,22 @@ public class ArcaneIteratorRecipe implements Recipe<Container> {
         return enchantment;
     }
 
+
+    public ArcaneEnchantment getRecipeArcaneEnchantment() {
+        return arcaneEnchantment;
+    }
+
     public boolean getRecipeIsSaveNBT() {
         return isSaveNBT;
     }
 
     public boolean hasRecipeEnchantment() {
         return enchantment != null;
+    }
+
+
+    public boolean hasRecipeArcaneEnchantment() {
+        return arcaneEnchantment != null;
     }
 
     public ItemStack getToastSymbol() {
@@ -157,6 +170,7 @@ public class ArcaneIteratorRecipe implements Recipe<Container> {
         public ArcaneIteratorRecipe fromJson(ResourceLocation recipeId, JsonObject json) {
             ItemStack output = ItemStack.EMPTY;
             Enchantment enchantment = null;
+            ArcaneEnchantment arcaneEnchantment = null;
 
             int wissen = GsonHelper.getAsInt(json, "wissen");
             int health = 0;
@@ -169,6 +183,9 @@ public class ArcaneIteratorRecipe implements Recipe<Container> {
             }
             if (json.has("enchantment")) {
                 enchantment = RecipeUtils.deserializeEnchantment(GsonHelper.getAsJsonObject(json, "enchantment"));
+            }
+            if (json.has("arcane_enchantment")) {
+                arcaneEnchantment = RecipeUtils.deserializeArcaneEnchantment(GsonHelper.getAsJsonObject(json, "arcane_enchantment"));
             }
 
             if (json.has("health")) {
@@ -188,7 +205,7 @@ public class ArcaneIteratorRecipe implements Recipe<Container> {
                 isSaveNBT = GsonHelper.getAsBoolean(json, "saveNBT");
             }
 
-            return new ArcaneIteratorRecipe(recipeId, output, enchantment, wissen, health, experience, isSaveNBT, inputs);
+            return new ArcaneIteratorRecipe(recipeId, output, enchantment,arcaneEnchantment, wissen, health, experience, isSaveNBT, inputs);
         }
 
         @Nullable
@@ -201,11 +218,12 @@ public class ArcaneIteratorRecipe implements Recipe<Container> {
             }
             ItemStack output = buffer.readItem();
             Enchantment enchantment = RecipeUtils.enchantmentFromNetwork(buffer);
+            ArcaneEnchantment arcaneEnchantment = RecipeUtils.arcaneEnchantmentFromNetwork(buffer);
             int wissen = buffer.readInt();
             int health = buffer.readInt();
             int experience = buffer.readInt();
             boolean isSaveNBT = buffer.readBoolean();
-            return new ArcaneIteratorRecipe(recipeId, output, enchantment, wissen, health, experience, isSaveNBT, inputs);
+            return new ArcaneIteratorRecipe(recipeId, output, enchantment, arcaneEnchantment, wissen, health, experience, isSaveNBT, inputs);
         }
 
         @Override
@@ -216,6 +234,7 @@ public class ArcaneIteratorRecipe implements Recipe<Container> {
             }
             buffer.writeItemStack(recipe.getResultItem(RegistryAccess.EMPTY), false);
             RecipeUtils.enchantmentToNetwork(recipe.getRecipeEnchantment(), buffer);
+            RecipeUtils.arcaneEnchantmentToNetwork(recipe.getRecipeArcaneEnchantment(), buffer);
             buffer.writeInt(recipe.getRecipeWissen());
             buffer.writeInt(recipe.getRecipeHealth());
             buffer.writeInt(recipe.getRecipeExperience());

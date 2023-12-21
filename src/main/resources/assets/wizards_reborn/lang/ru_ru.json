@@ -204,9 +204,6 @@
   "item.wizards_reborn.music_disc_arcanum": "Аркановая пластинка",
   "item.wizards_reborn.music_disc_mor": "Аркановая пластинка",
 
-  "gui.wizards_reborn.category.arcanum_dust_transmutation": "Трансмутация арканумной пыли",
-  "gui.wizards_reborn.category.mortar": "Ступка",
-
   "item.wizards_reborn.arcanemicon": "Аркейномикон",
 
   "key.category.wizards_reborn.general": "Wizard's Reborn",
@@ -356,10 +353,13 @@
 
   "gui.wizards_reborn.arcanemicon.title": "Аркейномикон",
 
-  "attribute.name.wizards_reborn.wissen_sale": "Скидка виссена",
+  "gui.wizards_reborn.category.arcanum_dust_transmutation": "Трансмутация арканумной пыли",
+  "gui.wizards_reborn.category.mortar": "Ступка",
 
   "gui.wizards_reborn.menu.optifine.0": "ВНИМАНИЕ! Кажется, у вас установлен Optifine",
   "gui.wizards_reborn.menu.optifine.1": "Optifine может сломать рендеринг частиц в Wizard's Reborn",
+
+  "attribute.name.wizards_reborn.wissen_sale": "Скидка виссена",
 
   "knowledge.toast.wizards_reborn.new_knowledge": "Получены знания",
   "knowledge.toast.wizards_reborn.new_articles": "Доступны статьи",

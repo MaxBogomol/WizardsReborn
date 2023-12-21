@@ -40,6 +40,9 @@ public class SpellCharPage extends Page {
                     if (spell.getResearch() != null) {
                         ArcanemiconChapters.RESEARCH_MAIN.lastChapter = book.currentChapter;
                         ArcanemiconGui.currentChapter = ArcanemiconChapters.RESEARCH;
+                        ResearchPage.currentHistory = ArcanemiconGui.currentHistory;
+                        ResearchPage.historyEntries.clear();
+                        ResearchPage.historyEntries.addAll(ArcanemiconGui.historyEntries);
                         ArcanemiconGui.currentHistory = 1;
                         ArcanemiconGui.historyEntries.clear();
                         ArcanemiconChapters.RESEARCH_MAIN.createNap(spell);

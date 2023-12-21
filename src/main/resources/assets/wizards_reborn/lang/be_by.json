@@ -179,12 +179,7 @@
   "item.wizards_reborn.arcacite_ring": "Аркацытавае кольца",
   "item.wizards_reborn.leather_belt": "Скураны пояс",
 
-  "gui.wizards_reborn.category.arcanum_dust_transmutation": "Трансмутацыя арканумным пылам",
-
   "item.wizards_reborn.arcanemicon": "Арканамікон",
-
-  "gui.wizards_reborn.menu.optifine.0": "УВАГА! Здаецца, у вас усталяваны Optifine",
-  "gui.wizards_reborn.menu.optifine.1": "Optifine можа зламаць рэндарынг часцінак у Wizard's Reborn",
 
   "knowledge.toast.wizards_reborn.new_knowledge": "Атрымлены веды",
   "knowledge.toast.wizards_reborn.new_articles": "Даступныя артыкулы",
@@ -350,6 +345,11 @@
   "entity.wizards_reborn.chest_boat": "Човен з куфарам",
 
   "gui.wizards_reborn.arcanemicon.title": "Арканамікон",
+
+  "gui.wizards_reborn.category.arcanum_dust_transmutation": "Трансмутацыя арканумным пылам",
+
+  "gui.wizards_reborn.menu.optifine.0": "УВАГА! Здаецца, у вас усталяваны Optifine",
+  "gui.wizards_reborn.menu.optifine.1": "Optifine можа зламаць рэндарынг часцінак у Wizard's Reborn",
 
   "attribute.name.wizards_reborn.wissen_sale": "Зніжка вісена",
 

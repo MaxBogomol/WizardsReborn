@@ -137,6 +137,8 @@ public class RenderUtils {
                     .setOutputState(TRANSLUCENT_TARGET)
                     .createCompositeState(false));
 
+    public static CustomItemRenderer customItemRenderer;
+
     public static void renderItemModelInGui(ItemStack stack, int x, int y, float xSize, float ySize, float zSize) {
         renderItemModelInGui(stack, x, y, xSize, ySize, zSize, 0, 0, 0);
     }
@@ -206,7 +208,9 @@ public class RenderUtils {
     public static void renderFloatingItemModelIntoGUI(GuiGraphics gui, ItemStack stack, int x, int y, float ticks, float ticksUp) {
         Minecraft minecraft = Minecraft.getInstance();
         BakedModel bakedmodel = Minecraft.getInstance().getItemRenderer().getModel(stack, minecraft.level, minecraft.player, 0);
-        CustomItemRenderer customItemRenderer = new CustomItemRenderer(minecraft, minecraft.getTextureManager(), minecraft.getModelManager(), minecraft.getItemColors(), minecraft.getItemRenderer().getBlockEntityRenderer());
+        if (customItemRenderer == null) {
+            customItemRenderer = new CustomItemRenderer(minecraft, minecraft.getTextureManager(), minecraft.getModelManager(), minecraft.getItemColors(), minecraft.getItemRenderer().getBlockEntityRenderer());
+        }
 
         blitOffset += 50.0F;
         float old = bakedmodel.getTransforms().gui.rotation.y;

@@ -204,9 +204,6 @@
   "item.wizards_reborn.music_disc_arcanum": "Арканова платівка",
   "item.wizards_reborn.music_disc_mor": "Арканова платівка",
 
-  "gui.wizards_reborn.category.arcanum_dust_transmutation": "Трансмутація арканумного пилу",
-  "gui.wizards_reborn.category.mortar": "Ступа",
-
   "item.wizards_reborn.arcanemicon": "Аркейномікон",
 
   "item.wizards_reborn.violence_banner_pattern": "Шаблон стяга",
@@ -372,10 +369,13 @@
 
   "gui.wizards_reborn.arcanemicon.title": "Аркейномікон",
 
-  "attribute.name.wizards_reborn.wissen_sale": "Знижка віссену",
+  "gui.wizards_reborn.category.arcanum_dust_transmutation": "Трансмутація арканумного пилу",
+  "gui.wizards_reborn.category.mortar": "Ступа",
 
   "gui.wizards_reborn.menu.optifine.0": "УВАГА!, Схоже у вас встановленний Optifine",
   "gui.wizards_reborn.menu.optifine.1": "Optifine може зламати рендеринг частинок в Wizard's Reborn",
+
+  "attribute.name.wizards_reborn.wissen_sale": "Знижка віссену",
 
   "knowledge.toast.wizards_reborn.new_knowledge": "Отримані знання",
   "knowledge.toast.wizards_reborn.new_articles": "Доступні статті",

@@ -203,9 +203,6 @@
 
   "item.wizards_reborn.music_disc_arcanum": "Disque de musique arcanique",
   "item.wizards_reborn.music_disc_mor": "Disque de musique arcanique",
-
-  "gui.wizards_reborn.category.arcanum_dust_transmutation": "Transmutation de poussière des arcanes",
-  "gui.wizards_reborn.category.mortar": "Mortier",
   
   "item.wizards_reborn.arcanemicon": "Arcanemicon",
 
@@ -353,10 +350,13 @@
   
   "gui.wizards_reborn.arcanemicon.title": "Arcanemicon",
 
-  "attribute.name.wizards_reborn.wissen_sale": "soif de wissen",
+  "gui.wizards_reborn.category.arcanum_dust_transmutation": "Transmutation de poussière des arcanes",
+  "gui.wizards_reborn.category.mortar": "Mortier",
 
   "gui.wizards_reborn.menu.optifine.0": "ATTENTION ! Il semble que vous ayez installé Optifine",
   "gui.wizards_reborn.menu.optifine.1": "Optifine peut supprimer le rendu des particules de Wizard's Reborn",
+
+  "attribute.name.wizards_reborn.wissen_sale": "soif de wissen",
 
   "knowledge.toast.wizards_reborn.new_knowledge": "Connaissance acquise",
   "knowledge.toast.wizards_reborn.new_articles": "Informations disponibles",

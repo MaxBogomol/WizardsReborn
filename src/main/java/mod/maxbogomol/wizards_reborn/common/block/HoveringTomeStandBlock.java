@@ -74,16 +74,17 @@ public class HoveringTomeStandBlock extends Block implements EntityBlock, Simple
     @Override
     public InteractionResult use(BlockState state, Level world, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hit) {
         if (world.isClientSide) {
-            openGui();
+            openGui(pos);
         }
 
         return InteractionResult.SUCCESS;
     }
 
     @OnlyIn(Dist.CLIENT)
-    public void openGui() {
+    public void openGui(BlockPos blockPos) {
         Minecraft.getInstance().player.playNotifySound(SoundEvents.BOOK_PAGE_TURN, SoundSource.NEUTRAL, 1.0f, 1.0f);
         Minecraft.getInstance().setScreen(new ArcanemiconGui());
+        ArcanemiconGui.blockPos = blockPos;
     }
 
     @Override

@@ -2,6 +2,7 @@ package mod.maxbogomol.wizards_reborn.api.arcaneenchantment;
 
 import com.google.common.collect.Maps;
 import mod.maxbogomol.wizards_reborn.utils.ColorUtils;
+import net.minecraft.ChatFormatting;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.Style;
@@ -71,6 +72,20 @@ public class ArcaneEnchantmentUtils {
         }
     }
 
+    public static boolean canAddArcaneEnchantment(ItemStack stack, ArcaneEnchantment arcaneEnchantment, int enchantmentLevel) {
+        existArcaneEnchantments(stack);
+
+        return enchantmentLevel <= arcaneEnchantment.getMaxLevel();
+    }
+
+    public static boolean canAddItemArcaneEnchantment(ItemStack stack, ArcaneEnchantment arcaneEnchantment) {
+        existArcaneEnchantments(stack);
+
+        int enchantmentLevel = getArcaneEnchantment(stack, arcaneEnchantment);
+
+        return enchantmentLevel + 1 <= arcaneEnchantment.getMaxLevel();
+    }
+
     public static void existArcaneEnchantments(ItemStack stack) {
         CompoundTag nbt = stack.getOrCreateTag();
         if (!nbt.contains("arcaneEnchantments")) {
@@ -86,6 +101,7 @@ public class ArcaneEnchantmentUtils {
 
         if (!arcaneEnchantments.isEmpty()) {
             list.add(Component.empty());
+            list.add(Component.translatable("lore.wizards_reborn.arcane_enchantments").withStyle(ChatFormatting.GOLD));
 
             for (ArcaneEnchantment arcaneEnchantment : arcaneEnchantments.keySet()) {
                 int enchantmentLevel = arcaneEnchantments.get(arcaneEnchantment);

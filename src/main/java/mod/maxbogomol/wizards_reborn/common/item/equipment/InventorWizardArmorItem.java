@@ -92,7 +92,7 @@ public class InventorWizardArmorItem extends ArcaneArmorItem implements IForgeIt
 
     @Override
     public MutableComponent getArmorSetName() {
-        return Component.empty();
+        return Component.translatable("lore.wizards_reborn.inventor_wizard_armor");
     }
 
     @Override
