@@ -1,27 +1,27 @@
 package mod.maxbogomol.wizards_reborn.api.alchemy;
 
 public class SteamUtils {
-    public static int getAddSteamRemain(int current_steam, int steam, int max_steam) {
-        int steam_remain = 0;
-        if (max_steam < (current_steam + steam)) {
-            steam_remain = (current_steam + steam) - max_steam;
+    public static int getAddSteamRemain(int currentSteam, int steam, int maxSteam) {
+        int steamRemain = 0;
+        if (maxSteam < (currentSteam + steam)) {
+            steamRemain = (currentSteam + steam) - maxSteam;
         }
-        return steam_remain;
+        return steamRemain;
     }
 
-    public static int getRemoveSteamRemain(int current_steam, int steam) {
-        int steam_remain = 0;
-        if (0 > (current_steam - steam)) {
-            steam_remain = -(current_steam - steam);
+    public static int getRemoveSteamRemain(int currentSteam, int steam) {
+        int steamRemain = 0;
+        if (0 > (currentSteam - steam)) {
+            steamRemain = -(currentSteam - steam);
         }
-        return steam_remain;
+        return steamRemain;
     }
 
-    public static boolean canAddSteam(int current_steam, int steam, int max_steam) {
-        return (max_steam >= (current_steam + steam));
+    public static boolean canAddSteam(int currentSteam, int steam, int maxSteam) {
+        return (maxSteam >= (currentSteam + steam));
     }
 
-    public static boolean canRemoveSteam(int current_steam, int steam) {
-        return (0 <= (current_steam - steam));
+    public static boolean canRemoveSteam(int currentSteam, int steam) {
+        return (0 <= (currentSteam - steam));
     }
 }

@@ -32,8 +32,7 @@ public class BeltRenderer implements ICurioRenderer {
         }
 
         LivingEntity entity = slotContext.entity();
-        if (stack.getItem() instanceof ICurioItemTexture) {
-            ICurioItemTexture curio = (ICurioItemTexture) stack.getItem();
+        if (stack.getItem() instanceof ICurioItemTexture curio) {
             TEXTURE = curio.getTexture(stack, entity);
         }
 

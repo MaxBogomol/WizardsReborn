@@ -17,6 +17,7 @@
     "client.ItemInHandRendererMixin",
     "client.PlayerRendererMixin",
     "client.RabbitRendererMixin",
+    "client.FoxRendererMixin",
     "client.ClientMusicChoiceMixin"
   ],
   "minVersion": "0.8",

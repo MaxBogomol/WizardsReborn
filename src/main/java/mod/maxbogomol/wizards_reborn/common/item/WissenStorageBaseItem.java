@@ -2,6 +2,7 @@ package mod.maxbogomol.wizards_reborn.common.item;
 
 import mod.maxbogomol.wizards_reborn.api.wissen.IWissenItem;
 import mod.maxbogomol.wizards_reborn.api.wissen.IWissenTileEntity;
+import mod.maxbogomol.wizards_reborn.api.wissen.WissenItemType;
 import mod.maxbogomol.wizards_reborn.api.wissen.WissenItemUtils;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
@@ -44,5 +45,10 @@ public class WissenStorageBaseItem extends BlockItem implements IWissenItem {
             }
         }
         return 0;
+    }
+
+    @Override
+    public WissenItemType getWissenItemType() {
+        return WissenItemType.OFF;
     }
 }

@@ -1,12 +1,15 @@
 package mod.maxbogomol.wizards_reborn.api.arcaneenchantment;
 
 import com.google.common.collect.Maps;
+import mod.maxbogomol.wizards_reborn.common.arcaneenchantment.WissenMendingArcaneEnchantment;
 import mod.maxbogomol.wizards_reborn.utils.ColorUtils;
 import net.minecraft.ChatFormatting;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.Style;
 import net.minecraft.util.Mth;
+import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.level.Level;
@@ -73,17 +76,25 @@ public class ArcaneEnchantmentUtils {
     }
 
     public static boolean canAddArcaneEnchantment(ItemStack stack, ArcaneEnchantment arcaneEnchantment, int enchantmentLevel) {
-        existArcaneEnchantments(stack);
+        if (isArcaneItem(stack)) {
+            existArcaneEnchantments(stack);
 
-        return enchantmentLevel <= arcaneEnchantment.getMaxLevel();
+            return enchantmentLevel <= arcaneEnchantment.getMaxLevel();
+        }
+
+        return false;
     }
 
     public static boolean canAddItemArcaneEnchantment(ItemStack stack, ArcaneEnchantment arcaneEnchantment) {
-        existArcaneEnchantments(stack);
+        if (isArcaneItem(stack)) {
+            existArcaneEnchantments(stack);
 
-        int enchantmentLevel = getArcaneEnchantment(stack, arcaneEnchantment);
+            int enchantmentLevel = getArcaneEnchantment(stack, arcaneEnchantment);
 
-        return enchantmentLevel + 1 <= arcaneEnchantment.getMaxLevel();
+            return enchantmentLevel + 1 <= arcaneEnchantment.getMaxLevel();
+        }
+
+        return false;
     }
 
     public static void existArcaneEnchantments(ItemStack stack) {
@@ -92,6 +103,10 @@ public class ArcaneEnchantmentUtils {
             CompoundTag nbtEnchantments = new CompoundTag();
             nbt.put("arcaneEnchantments", nbtEnchantments);
         }
+    }
+
+    public static boolean isArcaneItem(ItemStack stack) {
+        return stack.getItem() instanceof IArcaneItem;
     }
 
     @OnlyIn(Dist.CLIENT)
@@ -117,5 +132,13 @@ public class ArcaneEnchantmentUtils {
         }
 
         return list;
+    }
+
+    public static void inventoryTick(ItemStack stack, Level world, Entity entity, int slot, boolean isSelected) {
+        WissenMendingArcaneEnchantment.inventoryTick(stack, world, entity, slot, isSelected);
+    }
+
+    public static int damageItem(ItemStack stack, int amount, LivingEntity entity) {
+        return WissenMendingArcaneEnchantment.damageItem(stack, amount, entity);
     }
 }

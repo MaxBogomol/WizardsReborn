@@ -1,22 +1,30 @@
-package mod.maxbogomol.wizards_reborn.common.item.equipment;
+package mod.maxbogomol.wizards_reborn.common.item.equipment.arcane;
 
+import mod.maxbogomol.wizards_reborn.api.arcaneenchantment.ArcaneEnchantmentUtils;
+import mod.maxbogomol.wizards_reborn.api.arcaneenchantment.IArcaneItem;
 import net.minecraft.ChatFormatting;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.network.chat.Style;
+import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EquipmentSlot;
+import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.item.*;
+import net.minecraft.world.item.ArmorItem;
+import net.minecraft.world.item.ArmorMaterial;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.level.Level;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 
 import java.util.List;
 import java.util.UUID;
+import java.util.function.Consumer;
 
-public class ArcaneArmorItem extends ArmorItem {
+public class ArcaneArmorItem extends ArmorItem implements IArcaneItem {
     public static final UUID BASE_WISSEN_SALE_UUID = UUID.fromString("0D0AA300-8D31-11EE-B9D1-0242AC120002");
     public static final UUID CHEST_WISSEN_SALE_UUID = UUID.fromString("78537078-9ABB-11EE-b9D1-0242AC120002");
     public static final UUID HEAD_WISSEN_SALE_UUID = UUID.fromString("7BEC8BFC-9ABB-11EE-B9D1-0242AC120002");
@@ -76,6 +84,8 @@ public class ArcaneArmorItem extends ArmorItem {
                 list.add(getArmorSetItemComponent(EquipmentSlot.FEET, player));
             }
         }
+
+        list.addAll(ArcaneEnchantmentUtils.appendHoverText(stack, world, flags));
     }
 
     public boolean hasArmorSet() {
@@ -104,5 +114,15 @@ public class ArcaneArmorItem extends ArmorItem {
 
     public boolean hasArmorSetPlayer(Player player) {
         return hasArmorSetItem(EquipmentSlot.HEAD, player) && hasArmorSetItem(EquipmentSlot.CHEST, player) && hasArmorSetItem(EquipmentSlot.LEGS, player) && hasArmorSetItem(EquipmentSlot.FEET, player);
+    }
+
+    @Override
+    public void inventoryTick(ItemStack stack, Level world, Entity entity, int slot, boolean isSelected) {
+        ArcaneEnchantmentUtils.inventoryTick(stack, world, entity, slot, isSelected);
+    }
+
+    @Override
+    public <T extends LivingEntity> int damageItem(ItemStack stack, int amount, T entity, Consumer<T> onBroken) {
+        return ArcaneEnchantmentUtils.damageItem(stack, amount, entity);
     }
 }

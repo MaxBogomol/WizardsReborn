@@ -8,6 +8,7 @@ import mod.maxbogomol.wizards_reborn.api.knowledge.KnowledgeUtils;
 import mod.maxbogomol.wizards_reborn.api.spell.Spell;
 import mod.maxbogomol.wizards_reborn.api.spell.Spells;
 import mod.maxbogomol.wizards_reborn.api.wissen.IWissenItem;
+import mod.maxbogomol.wizards_reborn.api.wissen.WissenItemType;
 import mod.maxbogomol.wizards_reborn.api.wissen.WissenItemUtils;
 import mod.maxbogomol.wizards_reborn.client.animation.ItemAnimation;
 import mod.maxbogomol.wizards_reborn.client.config.ClientConfig;
@@ -113,6 +114,11 @@ public class ArcaneWandItem extends Item implements IWissenItem, ICustomAnimatio
     @Override
     public int getMaxWissen() {
         return 10000;
+    }
+
+    @Override
+    public WissenItemType getWissenItemType() {
+        return WissenItemType.USING;
     }
 
     @Override

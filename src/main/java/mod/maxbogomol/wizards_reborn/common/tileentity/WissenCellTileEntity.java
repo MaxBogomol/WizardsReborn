@@ -46,14 +46,14 @@ public class WissenCellTileEntity extends ExposedTileSimpleInventory implements 
                     ItemStack stack = getItemHandler().getItem(0);
                     if (stack.getItem() instanceof IWissenItem) {
                         IWissenItem item = (IWissenItem) stack.getItem();
-                        int wissen_remain = WissenUtils.getRemoveWissenRemain(wissen, 250);
-                        wissen_remain = 250 - wissen_remain;
+                        int wissenRemain = WissenUtils.getRemoveWissenRemain(wissen, 250);
+                        wissenRemain = 250 - wissenRemain;
                         WissenItemUtils.existWissen(stack);
-                        int item_wissen_remain = WissenItemUtils.getAddWissenRemain(stack, wissen_remain, item.getMaxWissen());
-                        wissen_remain = wissen_remain - item_wissen_remain;
-                        if (wissen_remain > 0) {
-                            WissenItemUtils.addWissen(stack, wissen_remain, item.getMaxWissen());
-                            wissen = wissen - wissen_remain;
+                        int itemWissenRemain = WissenItemUtils.getAddWissenRemain(stack, wissenRemain, item.getMaxWissen());
+                        wissenRemain = wissenRemain - itemWissenRemain;
+                        if (wissenRemain > 0) {
+                            WissenItemUtils.addWissen(stack, wissenRemain, item.getMaxWissen());
+                            wissen = wissen - wissenRemain;
                             if (random.nextFloat() < 0.5) {
                                 PacketHandler.sendToTracking(level, getBlockPos(), new WissenCellSendEffectPacket(getBlockPos()));
                             }

@@ -16,7 +16,7 @@ public class ExtraLayer<T extends LivingEntity, M extends EntityModel<T>> extend
         super(pRenderer);
     }
 
-    public void render(PoseStack ms, MultiBufferSource buffer, int pPackedLight, T livingEntity, float limbSwing, float limbSwingAmount, float partialTicks, float ageInTicks, float betHeadYaw, float headPitch) {
+    public void render(PoseStack ms, MultiBufferSource buffer, int packedLight, T livingEntity, float limbSwing, float limbSwingAmount, float partialTicks, float ageInTicks, float betHeadYaw, float headPitch) {
         Minecraft mc = Minecraft.getInstance();
     }
 }

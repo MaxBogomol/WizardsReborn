@@ -2,11 +2,11 @@ package mod.maxbogomol.wizards_reborn.common.item.equipment.arcane;
 
 import mod.maxbogomol.wizards_reborn.api.arcaneenchantment.ArcaneEnchantmentUtils;
 import mod.maxbogomol.wizards_reborn.api.arcaneenchantment.IArcaneItem;
+import mod.maxbogomol.wizards_reborn.common.item.equipment.ScytheItem;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.SwordItem;
 import net.minecraft.world.item.Tier;
 import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.level.Level;
@@ -16,9 +16,9 @@ import net.minecraftforge.api.distmarker.OnlyIn;
 import java.util.List;
 import java.util.function.Consumer;
 
-public class ArcaneSwordItem extends SwordItem implements IArcaneItem {
-    public ArcaneSwordItem(Tier tier, int attackDamageModifier, float attackSpeedModifier, Properties properties) {
-        super(tier, attackDamageModifier, attackSpeedModifier, properties);
+public class ArcaneScytheItem extends ScytheItem implements IArcaneItem {
+    public ArcaneScytheItem(Tier tier, int attackDamageModifier, float attackSpeedModifier, Properties properties, int radius) {
+        super(tier, attackDamageModifier, attackSpeedModifier, properties, radius);
     }
 
     @OnlyIn(Dist.CLIENT)

@@ -44,7 +44,7 @@ import mod.maxbogomol.wizards_reborn.common.entity.SpellProjectileEntity;
 import mod.maxbogomol.wizards_reborn.common.event.Events;
 import mod.maxbogomol.wizards_reborn.common.item.*;
 import mod.maxbogomol.wizards_reborn.common.item.equipment.*;
-import mod.maxbogomol.wizards_reborn.common.item.equipment.arcane.ArcaneSwordItem;
+import mod.maxbogomol.wizards_reborn.common.item.equipment.arcane.*;
 import mod.maxbogomol.wizards_reborn.common.item.equipment.curio.*;
 import mod.maxbogomol.wizards_reborn.common.itemgroup.WizardsRebornItemGroup;
 import mod.maxbogomol.wizards_reborn.common.knowledge.RegisterKnowledges;
@@ -111,13 +111,10 @@ import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
-import org.checkerframework.checker.units.qual.A;
 import top.theillusivec4.curios.api.CuriosApi;
 import top.theillusivec4.curios.api.SlotTypeMessage;
 import top.theillusivec4.curios.api.SlotTypePreset;
 import top.theillusivec4.curios.api.client.CuriosRendererRegistry;
-
-import java.awt.*;
 
 @Mod("wizards_reborn")
 public class WizardsReborn {
@@ -391,16 +388,16 @@ public class WizardsReborn {
     public static final RegistryObject<Item> RAW_ARCANE_GOLD_BLOCK_ITEM = ITEMS.register("raw_arcane_gold_block", () -> new BlockItem(RAW_ARCANE_GOLD_BLOCK.get(), new Item.Properties()));
 
     public static final RegistryObject<Item> ARCANE_GOLD_SWORD = ITEMS.register("arcane_gold_sword", () -> new ArcaneSwordItem(CustomItemTier.ARCANE_GOLD, 3, -2.4f, new Item.Properties()));
-    public static final RegistryObject<Item> ARCANE_GOLD_PICKAXE = ITEMS.register("arcane_gold_pickaxe", () -> new PickaxeItem(CustomItemTier.ARCANE_GOLD, 1, -2.8f, new Item.Properties()));
-    public static final RegistryObject<Item> ARCANE_GOLD_AXE = ITEMS.register("arcane_gold_axe", () -> new AxeItem(CustomItemTier.ARCANE_GOLD, 6, -3.1f, new Item.Properties()));
-    public static final RegistryObject<Item> ARCANE_GOLD_SHOVEL = ITEMS.register("arcane_gold_shovel", () -> new ShovelItem(CustomItemTier.ARCANE_GOLD, 1.5f, -3f, new Item.Properties()));
-    public static final RegistryObject<Item> ARCANE_GOLD_HOE = ITEMS.register("arcane_gold_hoe", () -> new HoeItem(CustomItemTier.ARCANE_GOLD, -2, -1f, new Item.Properties()));
-    public static final RegistryObject<Item> ARCANE_GOLD_SCYTHE = ITEMS.register("arcane_gold_scythe", () -> new ScytheItem(CustomItemTier.ARCANE_GOLD, 4, -2.8f, new Item.Properties(), 1));
+    public static final RegistryObject<Item> ARCANE_GOLD_PICKAXE = ITEMS.register("arcane_gold_pickaxe", () -> new ArcanePickaxeItem(CustomItemTier.ARCANE_GOLD, 1, -2.8f, new Item.Properties()));
+    public static final RegistryObject<Item> ARCANE_GOLD_AXE = ITEMS.register("arcane_gold_axe", () -> new ArcaneAxeItem(CustomItemTier.ARCANE_GOLD, 6, -3.1f, new Item.Properties()));
+    public static final RegistryObject<Item> ARCANE_GOLD_SHOVEL = ITEMS.register("arcane_gold_shovel", () -> new ArcaneShovelItem(CustomItemTier.ARCANE_GOLD, 1.5f, -3f, new Item.Properties()));
+    public static final RegistryObject<Item> ARCANE_GOLD_HOE = ITEMS.register("arcane_gold_hoe", () -> new ArcaneHoeItem(CustomItemTier.ARCANE_GOLD, -2, -1f, new Item.Properties()));
+    public static final RegistryObject<Item> ARCANE_GOLD_SCYTHE = ITEMS.register("arcane_gold_scythe", () -> new ArcaneScytheItem(CustomItemTier.ARCANE_GOLD, 4, -2.8f, new Item.Properties(), 1));
 
-    public static final RegistryObject<Item> ARCANE_GOLD_HELMET = ITEMS.register("arcane_gold_helmet", () -> new ArmorItem(CustomArmorMaterial.ARCANE_GOLD, ArmorItem.Type.HELMET, new Item.Properties()));
-    public static final RegistryObject<Item> ARCANE_GOLD_CHESTPLATE = ITEMS.register("arcane_gold_chestplate", () -> new ArmorItem(CustomArmorMaterial.ARCANE_GOLD, ArmorItem.Type.CHESTPLATE, new Item.Properties()));
-    public static final RegistryObject<Item> ARCANE_GOLD_LEGGINGS = ITEMS.register("arcane_gold_leggings", () -> new ArmorItem(CustomArmorMaterial.ARCANE_GOLD, ArmorItem.Type.LEGGINGS, new Item.Properties()));
-    public static final RegistryObject<Item> ARCANE_GOLD_BOOTS = ITEMS.register("arcane_gold_boots", () -> new ArmorItem(CustomArmorMaterial.ARCANE_GOLD, ArmorItem.Type.BOOTS, new Item.Properties()));
+    public static final RegistryObject<Item> ARCANE_GOLD_HELMET = ITEMS.register("arcane_gold_helmet", () -> new ArcaneArmorItem(CustomArmorMaterial.ARCANE_GOLD, ArmorItem.Type.HELMET, new Item.Properties()));
+    public static final RegistryObject<Item> ARCANE_GOLD_CHESTPLATE = ITEMS.register("arcane_gold_chestplate", () -> new ArcaneArmorItem(CustomArmorMaterial.ARCANE_GOLD, ArmorItem.Type.CHESTPLATE, new Item.Properties()));
+    public static final RegistryObject<Item> ARCANE_GOLD_LEGGINGS = ITEMS.register("arcane_gold_leggings", () -> new ArcaneArmorItem(CustomArmorMaterial.ARCANE_GOLD, ArmorItem.Type.LEGGINGS, new Item.Properties()));
+    public static final RegistryObject<Item> ARCANE_GOLD_BOOTS = ITEMS.register("arcane_gold_boots", () -> new ArcaneArmorItem(CustomArmorMaterial.ARCANE_GOLD, ArmorItem.Type.BOOTS, new Item.Properties()));
 
     public static final RegistryObject<Item> ARCANUM = ITEMS.register("arcanum", () -> new ArcanumItem(new Item.Properties()));
     public static final RegistryObject<Item> ARCANUM_DUST = ITEMS.register("arcanum_dust", () -> new ArcanumDustItem(new Item.Properties()));
@@ -575,6 +572,7 @@ public class WizardsReborn {
     public static final RegistryObject<Item> ARCANUM_RING = ITEMS.register("arcanum_ring", () -> new ArcanumRingItem(new Item.Properties().stacksTo(1)));
     public static final RegistryObject<Item> ARCACITE_AMULET = ITEMS.register("arcacite_amulet", () -> new ArcaciteAmuletItem(new Item.Properties().stacksTo(1)));
     public static final RegistryObject<Item> ARCACITE_RING = ITEMS.register("arcacite_ring", () -> new ArcaciteRingItem(new Item.Properties().stacksTo(1)));
+    public static final RegistryObject<Item> WISSEN_KEYCHAIN = ITEMS.register("wissen_keychain", () -> new WissenKeychainItem(new Item.Properties().stacksTo(1)));
     public static final RegistryObject<Item> LEATHER_BELT = ITEMS.register("leather_belt", () -> new LeatherBeltItem(new Item.Properties().stacksTo(1)));
 
     public static final RegistryObject<Item> BROWN_MUSHROOM_CAP = ITEMS.register("brown_mushroom_cap", () -> new MushroomCapItem(new Item.Properties().stacksTo(1), "brown_mushroom_cap"));
@@ -596,7 +594,7 @@ public class WizardsReborn {
 
     public static final RegistryObject<Item> ARCANE_WOOD_SMOKING_PIPE = ITEMS.register("arcane_wood_smoking_pipe", () -> new SmokingPipeItem(new Item.Properties().stacksTo(1)));
     public static final RegistryObject<Item> ARCANE_WOOD_CANE = ITEMS.register("arcane_wood_cane", () -> new CaneItem(new Item.Properties().stacksTo(1)));
-    public static final RegistryObject<Item> ARCANE_WOOD_BOW = ITEMS.register("arcane_wood_bow", () -> new BowItem(new Item.Properties().durability(576)));
+    public static final RegistryObject<Item> ARCANE_WOOD_BOW = ITEMS.register("arcane_wood_bow", () -> new ArcaneBowItem(new Item.Properties().durability(576)));
 
     public static final RegistryObject<Item> ARCANEMICON = ITEMS.register("arcanemicon", () -> new ArcanemiconItem(new Item.Properties().stacksTo(1)));
 
@@ -748,10 +746,10 @@ public class WizardsReborn {
     public static final RegistryObject<BlockStateProviderType<?>> AN_STATEPROVIDER = BLOCK_STATE_PROVIDER_TYPE.register("an_stateprovider", () -> new BlockStateProviderType<>(SupplierBlockStateProvider.CODEC));
 
     public WizardsReborn() {
-        InterModComms.sendTo(CuriosApi.MODID, SlotTypeMessage.REGISTER_TYPE, () -> SlotTypePreset.BELT.getMessageBuilder().build());
+        InterModComms.sendTo(CuriosApi.MODID, SlotTypeMessage.REGISTER_TYPE, () -> SlotTypePreset.BELT.getMessageBuilder().cosmetic().build());
         InterModComms.sendTo(CuriosApi.MODID, SlotTypeMessage.REGISTER_TYPE, () -> SlotTypePreset.BODY.getMessageBuilder().build());
         InterModComms.sendTo(CuriosApi.MODID, SlotTypeMessage.REGISTER_TYPE, () -> SlotTypePreset.CHARM.getMessageBuilder().build());
-        InterModComms.sendTo(CuriosApi.MODID, SlotTypeMessage.REGISTER_TYPE, () -> SlotTypePreset.NECKLACE.getMessageBuilder().build());
+        InterModComms.sendTo(CuriosApi.MODID, SlotTypeMessage.REGISTER_TYPE, () -> SlotTypePreset.NECKLACE.getMessageBuilder().cosmetic().build());
         InterModComms.sendTo(CuriosApi.MODID, SlotTypeMessage.REGISTER_TYPE, () -> SlotTypePreset.HEAD.getMessageBuilder().cosmetic().build());
         InterModComms.sendTo(CuriosApi.MODID, SlotTypeMessage.REGISTER_TYPE, () -> SlotTypePreset.RING.getMessageBuilder().size(2).build());
 

@@ -52,7 +52,7 @@ public class WizardsRebornClient {
 
     public static ModelLayerLocation BELT_LAYER = new ModelLayerLocation(new ResourceLocation(WizardsReborn.MOD_ID, "belt"), "main");
     public static ModelLayerLocation AMULET_LAYER = new ModelLayerLocation(new ResourceLocation(WizardsReborn.MOD_ID, "amulet"), "main");
-    public static ModelLayerLocation MUSHROOM_CAP = new ModelLayerLocation(new ResourceLocation(WizardsReborn.MOD_ID, "mushroom_cap"), "main");
+    public static ModelLayerLocation MUSHROOM_CAP_LAYER = new ModelLayerLocation(new ResourceLocation(WizardsReborn.MOD_ID, "mushroom_cap"), "main");
 
     public static final ModelLayerLocation INVENTOR_WIZARD_ARMOR_LAYER = new ModelLayerLocation(new ResourceLocation(WizardsReborn.MOD_ID, "inventor_wizard_armor"), "main");
     public static final ModelLayerLocation ARCANE_FORTRESS_ARMOR_LAYER = new ModelLayerLocation(new ResourceLocation(WizardsReborn.MOD_ID, "arcane_fortress_armor"), "main");
@@ -285,7 +285,7 @@ public class WizardsRebornClient {
 
             event.registerLayerDefinition(WizardsRebornClient.BELT_LAYER, BeltModel::createBodyLayer);
             event.registerLayerDefinition(WizardsRebornClient.AMULET_LAYER, AmuletModel::createBodyLayer);
-            event.registerLayerDefinition(WizardsRebornClient.MUSHROOM_CAP, MushroomCapModel::createBodyLayer);
+            event.registerLayerDefinition(WizardsRebornClient.MUSHROOM_CAP_LAYER, MushroomCapModel::createBodyLayer);
 
             event.registerLayerDefinition(INVENTOR_WIZARD_ARMOR_LAYER, InventorWizardArmorModel::createBodyLayer);
             event.registerLayerDefinition(ARCANE_FORTRESS_ARMOR_LAYER, ArcaneFortressArmorModel::createBodyLayer);

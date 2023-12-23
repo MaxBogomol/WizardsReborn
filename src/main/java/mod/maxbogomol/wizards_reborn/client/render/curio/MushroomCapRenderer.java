@@ -28,12 +28,11 @@ public class MushroomCapRenderer implements ICurioRenderer {
                                                                           int light, float limbSwing, float limbSwingAmount, float partialTicks,
                                                                           float ageInTicks, float netHeadYaw, float headPitch) {
         if (model == null) {
-            model = new MushroomCapModel(Minecraft.getInstance().getEntityModels().bakeLayer(WizardsRebornClient.MUSHROOM_CAP));
+            model = new MushroomCapModel(Minecraft.getInstance().getEntityModels().bakeLayer(WizardsRebornClient.MUSHROOM_CAP_LAYER));
         }
 
         LivingEntity entity = slotContext.entity();
-        if (stack.getItem() instanceof ICurioItemTexture) {
-            ICurioItemTexture curio = (ICurioItemTexture) stack.getItem();
+        if (stack.getItem() instanceof ICurioItemTexture curio) {
             TEXTURE = curio.getTexture(stack, entity);
         }
 
