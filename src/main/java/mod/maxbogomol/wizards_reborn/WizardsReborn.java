@@ -30,6 +30,7 @@ import mod.maxbogomol.wizards_reborn.client.render.curio.AmuletRenderer;
 import mod.maxbogomol.wizards_reborn.client.render.curio.BeltRenderer;
 import mod.maxbogomol.wizards_reborn.client.render.curio.MushroomCapRenderer;
 import mod.maxbogomol.wizards_reborn.client.render.item.WandCrystalsModels;
+import mod.maxbogomol.wizards_reborn.common.arcaneenchantment.MagicBladeArcaneEnchantment;
 import mod.maxbogomol.wizards_reborn.common.arcaneenchantment.WissenMendingArcaneEnchantment;
 import mod.maxbogomol.wizards_reborn.common.block.*;
 import mod.maxbogomol.wizards_reborn.common.capability.IKnowledge;
@@ -220,6 +221,7 @@ public class WizardsReborn {
 
     //ARCANE ENCHANTMENT
     public static ArcaneEnchantment WISSEN_MENDING_ARCANE_ENCHANTMENT = new WissenMendingArcaneEnchantment(MOD_ID+":wissen_mending", 3);
+    public static ArcaneEnchantment MAGIC_BLADE_ARCANE_ENCHANTMENT = new MagicBladeArcaneEnchantment(MOD_ID+":magic_blade", 5);
 
     public static final FoodProperties MOR_FOOD = (new FoodProperties.Builder()).nutrition(1).saturationMod(0.6F).effect(new MobEffectInstance(MobEffects.POISON, 450, 0), 1.0F).effect(new MobEffectInstance(MobEffects.CONFUSION, 350, 0), 1.0F).effect(new MobEffectInstance(MobEffects.BLINDNESS, 250, 0), 1.0F).effect(new MobEffectInstance(MobEffects.WEAKNESS, 550, 1), 1.0F).build();
 
@@ -948,6 +950,7 @@ public class WizardsReborn {
 
     public static void setupArcaneEnchantments() {
         ArcaneEnchantments.register(WISSEN_MENDING_ARCANE_ENCHANTMENT);
+        ArcaneEnchantments.register(MAGIC_BLADE_ARCANE_ENCHANTMENT);
     }
 
     public static void setupWandCrystalsModels() {

@@ -14,10 +14,10 @@
       "item": "wizards_reborn:arcane_wood_slab"
     },
     "W": {
-      "item": "wizards_reborn:arcane_gold_ingot"
+      "tag": "wizards_reborn:arcane_gold_ingot"
     },
     "G": {
-      "item": "wizards_reborn:arcane_gold_nugget"
+      "tag": "wizards_reborn:arcane_gold_nugget"
     }
   },
   "result": {

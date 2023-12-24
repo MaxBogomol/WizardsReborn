@@ -11,10 +11,10 @@
       "item": "wizards_reborn:arcane_gold_boots"
     },
     "G": {
-      "item": "wizards_reborn:arcane_gold_ingot"
+      "tag": "wizards_reborn:arcane_gold_ingot"
     },
     "N": {
-      "item": "wizards_reborn:arcane_gold_nugget"
+      "tag": "wizards_reborn:arcane_gold_nugget"
     },
     "A": {
       "item": "wizards_reborn:arcacite"

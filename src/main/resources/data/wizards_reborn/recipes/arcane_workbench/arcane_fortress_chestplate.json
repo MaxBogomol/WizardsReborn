@@ -11,13 +11,13 @@
       "item": "wizards_reborn:arcane_gold_chestplate"
     },
     "G": {
-      "item": "wizards_reborn:arcane_gold_ingot"
+      "tag": "wizards_reborn:arcane_gold_ingot"
     },
     "L": {
       "item": "minecraft:leather"
     },
     "N": {
-      "item": "wizards_reborn:arcane_gold_nugget"
+      "tag": "wizards_reborn:arcane_gold_nugget"
     },
     "A": {
       "item": "wizards_reborn:arcacite"

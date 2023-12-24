@@ -3,6 +3,7 @@ package mod.maxbogomol.wizards_reborn.api.arcaneenchantment;
 import net.minecraft.network.chat.CommonComponents;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;
+import net.minecraft.world.item.ItemStack;
 
 import java.awt.*;
 
@@ -36,6 +37,10 @@ public class ArcaneEnchantment {
         String modId = id.substring(0, i);
         String spellId = id.substring(i + 1);
         return "arcane_enchantment."  + modId + "." + spellId;
+    }
+
+    public boolean canEnchantItem(ItemStack stack) {
+        return true;
     }
 
     public boolean checkCompatibility(ArcaneEnchantment arcaneEnchantment) {

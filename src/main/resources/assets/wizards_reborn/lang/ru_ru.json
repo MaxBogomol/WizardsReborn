@@ -149,13 +149,18 @@
   "block.wizards_reborn.pure_void_crystal": "Чистый кристалл пустоты",
 
   "block.wizards_reborn.arcane_pedestal": "Аркановый пьедестал",
+  "block.wizards_reborn.hovering_tome_stand": "Подставка левитирующего тома",
   "block.wizards_reborn.wissen_altar": "Аркановый алтарь",
   "block.wizards_reborn.wissen_translator": "Виссен транслятор",
   "block.wizards_reborn.wissen_crystallizer": "Виссен кристаллизатор",
   "block.wizards_reborn.arcane_workbench": "Аркановый верстак",
   "block.wizards_reborn.wissen_cell": "Виссен ячейка",
+  "block.wizards_reborn.jeweler_table": "Ювелирный стол",
+  "block.wizards_reborn.altar_of_drought": "Алтарь засухи",
+  "block.wizards_reborn.arcane_iterator": "Аркановый итератор",
 
   "block.wizards_reborn.wisestone_pedestal": "Мудро-каменный пьедестал",
+  "block.wizards_reborn.wisestone_hovering_tome_stand": "Мудро-каменная подставка левитирующего тома",
   "block.wizards_reborn.fluid_pipe": "Жидкостная труба",
   "block.wizards_reborn.fluid_extractor": "Жидкостный экстрактор",
   "block.wizards_reborn.steam_pipe": "Паровая труба",
@@ -165,6 +170,7 @@
   "block.wizards_reborn.steam_thermal_storage": "Паротермическое хранилище",
   "block.wizards_reborn.alchemy_machine": "Алхимическая машина",
   "block.wizards_reborn.alchemy_boiler": "Алхимический бойлер",
+  "block.wizards_reborn.arcane_censer": "Аркановая курильница",
 
   "block.wizards_reborn.white_arcane_lumos": "Белый аркановый люмос",
   "block.wizards_reborn.orange_arcane_lumos": "Оранжевый аркановый люмос",
@@ -191,6 +197,13 @@
   "item.wizards_reborn.arcacite_ring": "Аркацитовое кольцо",
   "item.wizards_reborn.leather_belt": "Кожаный пояс",
 
+  "item.wizards_reborn.brown_mushroom_cap": "Коричневая грибная шляпка",
+  "item.wizards_reborn.red_mushroom_cap": "Красная грибная шляпка",
+  "item.wizards_reborn.crimson_fungus_cap": "Багровая грибная шляпка",
+  "item.wizards_reborn.warped_fungus_cap": "Искажённая грибная шляпка",
+  "item.wizards_reborn.mor_cap": "Моровая шляпка",
+  "item.wizards_reborn.elder_mor_cap": "Древне-моровая шляпка",
+
   "item.wizards_reborn.arcane_fortress_helmet": "Аркановый штурмовой шлем",
   "item.wizards_reborn.arcane_fortress_chestplate": "Аркановый штурмовой нагрудник",
   "item.wizards_reborn.arcane_fortress_leggings": "Аркановые штурмовые поножи",
@@ -203,6 +216,10 @@
 
   "item.wizards_reborn.music_disc_arcanum": "Аркановая пластинка",
   "item.wizards_reborn.music_disc_mor": "Аркановая пластинка",
+
+  "item.wizards_reborn.arcane_wood_smoking_pipe": "Арканово-древесная курительная трубка",
+  "item.wizards_reborn.arcane_wood_cane": "Арканово-древесная трость",
+  "item.wizards_reborn.arcane_wood_bow": "Арканово-древесный лук",
 
   "item.wizards_reborn.arcanemicon": "Аркейномикон",
 
@@ -224,6 +241,10 @@
 
   "lore.wizards_reborn.arcane_wand.crystal": "Кристалл:",
   "lore.wizards_reborn.arcane_wand.spell": "Заклинание:",
+
+  "lore.wizards_reborn.arcane_enchantments": "Аркановые зачарования:",
+
+  "lore.wizards_reborn.inventor_wizard_armor": "Виссен природа",
 
   "trim_material.wizards_reborn.arcane_gold": "Аркановый золотой материал",
   "trim_material.wizards_reborn.arcanum": "Арканумный материал",
@@ -360,6 +381,7 @@
   "gui.wizards_reborn.menu.optifine.1": "Optifine может сломать рендеринг частиц в Wizard's Reborn",
 
   "attribute.name.wizards_reborn.wissen_sale": "Скидка виссена",
+  "attribute.name.wizards_reborn.magic_armor": "Магическая броня",
 
   "knowledge.toast.wizards_reborn.new_knowledge": "Получены знания",
   "knowledge.toast.wizards_reborn.new_articles": "Доступны статьи",
@@ -430,6 +452,8 @@
   "monogram.wizards_reborn.dark": "Dark",
   "monogram.wizards_reborn.universum": "Universum",
 
+  "arcane_enchantment.wizards_reborn.wissen_mending": "Виссен починка",
+
   "wizards_reborn.arcanemicon.category.arcane_nature": "Аркановая природа",
   "wizards_reborn.arcanemicon.chapter.arcane_nature_index": "Аркановая природа",
   "wizards_reborn.arcanemicon.page.arcane_nature_index.title": "Аркановая природа",
@@ -497,6 +521,8 @@
     "wizards_reborn.arcanemicon.page.crystal_seeds": "Кристаллизация арканума вместе с элементальными предметами создаёт особый магический камень способный к росту самостоятельно.",
     "wizards_reborn.arcanemicon.page.crystals.title": "Кристаллы",
     "wizards_reborn.arcanemicon.page.crystals": "Во время роста, семя изменят свою кристаллическую решётку, что меняет свойства выращенного кристалла разными способами.",
+    "wizards_reborn.arcanemicon.page.fractured_crystals.title": "Сломанные кристаллы",
+    "wizards_reborn.arcanemicon.page.fractured_crystals": "",
   "wizards_reborn.arcanemicon.chapter.arcane_wand": "Аркановый жезл",
     "wizards_reborn.arcanemicon.page.arcane_wand.0.title": "Аркановый жезл",
     "wizards_reborn.arcanemicon.page.arcane_wand.0": "Главный инструмент волшебника. \n Используя кристалл в качестве линзы, способен преломлять энергию виссена, освобождая истинную силу.",

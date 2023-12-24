@@ -17,7 +17,7 @@
       "item": "wizards_reborn:fluid_pipe"
     },
     "G": {
-      "item": "wizards_reborn:arcane_gold_ingot"
+      "tag": "wizards_reborn:arcane_gold_ingot"
     }
   },
   "output": {

@@ -76,7 +76,7 @@ public class ArcaneEnchantmentUtils {
     }
 
     public static boolean canAddArcaneEnchantment(ItemStack stack, ArcaneEnchantment arcaneEnchantment, int enchantmentLevel) {
-        if (isArcaneItem(stack)) {
+        if (checkCompatibility(stack, arcaneEnchantment)) {
             existArcaneEnchantments(stack);
 
             return enchantmentLevel <= arcaneEnchantment.getMaxLevel();
@@ -86,7 +86,7 @@ public class ArcaneEnchantmentUtils {
     }
 
     public static boolean canAddItemArcaneEnchantment(ItemStack stack, ArcaneEnchantment arcaneEnchantment) {
-        if (isArcaneItem(stack)) {
+        if (checkCompatibility(stack, arcaneEnchantment)) {
             existArcaneEnchantments(stack);
 
             int enchantmentLevel = getArcaneEnchantment(stack, arcaneEnchantment);
@@ -107,6 +107,23 @@ public class ArcaneEnchantmentUtils {
 
     public static boolean isArcaneItem(ItemStack stack) {
         return stack.getItem() instanceof IArcaneItem;
+    }
+
+    public static boolean checkCompatibility(ItemStack stack, ArcaneEnchantment arcaneEnchantment) {
+        if (isArcaneItem(stack) && arcaneEnchantment.canEnchantItem(stack)) {
+            existArcaneEnchantments(stack);
+            Map<ArcaneEnchantment, Integer> arcaneEnchantments = getAllArcaneEnchantments(stack);
+
+            for (ArcaneEnchantment enchantment : arcaneEnchantments.keySet()) {
+                if (!enchantment.checkCompatibility(arcaneEnchantment)) {
+                    break;
+                }
+            }
+
+            return true;
+        }
+
+        return false;
     }
 
     @OnlyIn(Dist.CLIENT)

@@ -1,16 +1,16 @@
 {
   "type": "wizards_reborn:arcane_iterator",
-  "output": {
-    "item": "wizards_reborn:mor",
-    "count": 1
+  "arcane_enchantment": {
+    "arcane_enchantment": "wizards_reborn:magic_blade"
   },
   "wissen": 1000,
+  "experience": 5,
   "ingredients": [
     {
-      "tag": "wizards_reborn:arcane_gold_ingot"
+      "item": "minecraft:lapis_lazuli"
     },
     {
-      "item": "wizards_reborn:arcanum"
+      "item": "minecraft:lapis_lazuli"
     },
     {
       "item": "wizards_reborn:arcanum"

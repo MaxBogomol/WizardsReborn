@@ -14,7 +14,7 @@
       "item": "wizards_reborn:polished_wisestone"
     },
     "G": {
-      "item": "wizards_reborn:arcane_gold_ingot"
+      "tag": "wizards_reborn:arcane_gold_ingot"
     }
   },
   "output": {
