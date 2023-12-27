@@ -195,6 +195,7 @@
   "item.wizards_reborn.arcanum_ring": "Arcanum Ring",
   "item.wizards_reborn.arcacite_amulet": "Arcacite Amulet",
   "item.wizards_reborn.arcacite_ring": "Arcacite Ring",
+  "item.wizards_reborn.wissen_keychain": "Wissen Keychain",
   "item.wizards_reborn.leather_belt": "Leather Belt",
 
   "item.wizards_reborn.brown_mushroom_cap": "Brown Mushroom Cap",
@@ -401,6 +402,9 @@
   "commands.wizards_reborn.spell.give.all.multiple": "Gave all spells to %s players",
   "commands.wizards_reborn.spell.remove.all.single": "Removed all spells from player %s",
   "commands.wizards_reborn.spell.remove.all.multiple": "Removed all spells from %s players",
+  "commands.wizards_reborn.arcane_enchantment.unknown": "No arcane enchantment exists with the ID '%s'",
+  "commands.wizards_reborn.arcane_enchantment.multiple": "Applied .arcane enchantment %s to %s entities",
+  "commands.wizards_reborn.arcane_enchantment.single": "Applied arcane enchantment %s to %s's item",
 
   "key.category.wizards_reborn.general": "Wizard's Reborn",
   "key.wizards_reborn.selection_hud": "Selection Hud",
@@ -453,6 +457,7 @@
   "monogram.wizards_reborn.universum": "Universum",
 
   "arcane_enchantment.wizards_reborn.wissen_mending": "Wissen Mending",
+  "arcane_enchantment.wizards_reborn.magic_blade": "Magic Blade",
 
   "wizards_reborn.arcanemicon.category.arcane_nature": "Arcane Nature",
   "wizards_reborn.arcanemicon.chapter.arcane_nature_index": "Arcane Nature",

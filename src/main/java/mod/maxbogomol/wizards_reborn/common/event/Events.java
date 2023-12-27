@@ -1,6 +1,7 @@
 package mod.maxbogomol.wizards_reborn.common.event;
 
 import mod.maxbogomol.wizards_reborn.WizardsReborn;
+import mod.maxbogomol.wizards_reborn.api.arcaneenchantment.ArcaneEnchantmentUtils;
 import mod.maxbogomol.wizards_reborn.api.knowledge.Knowledge;
 import mod.maxbogomol.wizards_reborn.api.knowledge.KnowledgeUtils;
 import mod.maxbogomol.wizards_reborn.api.knowledge.Knowledges;
@@ -94,23 +95,30 @@ public class Events {
     }
 
     @SubscribeEvent
-    public void onDamage(LivingDamageEvent event) {
-        float scale = 1;
-        if (event.getEntity() instanceof Player player) {
-            AttributeInstance attr = player.getAttribute(WizardsReborn.MAGIC_ARMOR.get());
+    public void onLivingDamage(LivingDamageEvent event) {
+        magicArmor(event);
+        ArcaneEnchantmentUtils.onLivingDamage(event);
+    }
 
-            if (event.getSource().is(WizardsReborn.MAGIC_DAMAGE_TYPE_TAG)) {
-                scale = (float) (1f - (attr.getValue() / 100f));
-            }
-            if (scale == 1 && event.getSource().getDirectEntity() instanceof SpellProjectileEntity) {
-                scale = (float) (1f - ((attr.getValue() / 2) / 100f));
-            }
-            if (scale < 0) {
-                scale = 0;
-            }
+    public void magicArmor(LivingDamageEvent event) {
+        if (!event.getEntity().level().isClientSide) {
+            float scale = 1;
+            if (event.getEntity() instanceof Player player) {
+                AttributeInstance attr = player.getAttribute(WizardsReborn.MAGIC_ARMOR.get());
 
-            if (scale < 1) {
-                event.setAmount(event.getAmount() * scale);
+                if (event.getSource().is(WizardsReborn.MAGIC_DAMAGE_TYPE_TAG)) {
+                    scale = (float) (1f - (attr.getValue() / 100f));
+                }
+                if (scale == 1 && event.getSource().getDirectEntity() instanceof SpellProjectileEntity) {
+                    scale = (float) (1f - ((attr.getValue() / 2) / 100f));
+                }
+                if (scale < 0) {
+                    scale = 0;
+                }
+
+                if (scale < 1) {
+                    event.setAmount(event.getAmount() * scale);
+                }
             }
         }
     }

@@ -2,8 +2,11 @@ package mod.maxbogomol.wizards_reborn.common.command;
 
 import com.mojang.brigadier.Command;
 import com.mojang.brigadier.CommandDispatcher;
+import com.mojang.brigadier.arguments.IntegerArgumentType;
 import com.mojang.brigadier.context.CommandContext;
 import com.mojang.brigadier.exceptions.CommandSyntaxException;
+import mod.maxbogomol.wizards_reborn.api.arcaneenchantment.ArcaneEnchantment;
+import mod.maxbogomol.wizards_reborn.api.arcaneenchantment.ArcaneEnchantmentUtils;
 import mod.maxbogomol.wizards_reborn.api.knowledge.Knowledge;
 import mod.maxbogomol.wizards_reborn.api.knowledge.KnowledgeUtils;
 import mod.maxbogomol.wizards_reborn.api.spell.Spell;
@@ -12,6 +15,7 @@ import net.minecraft.commands.Commands;
 import net.minecraft.commands.arguments.EntityArgument;
 import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.world.item.ItemStack;
 
 import java.util.Collection;
 
@@ -26,7 +30,8 @@ public class WizardsRebornCommand {
                                                 .executes(ctx -> giveKnowledge(ctx, EntityArgument.getPlayers(ctx, "player"), KnowledgeArgument.getKnowledge(ctx, "knowledge")))
                                         )
                                         .then(Commands.literal("all")
-                                                .executes(ctx -> giveAllKnowledge(ctx, EntityArgument.getPlayers(ctx, "player"))))
+                                                .executes(ctx -> giveAllKnowledge(ctx, EntityArgument.getPlayers(ctx, "player")))
+                                        )
                                 )
                         )
                         .then(Commands.literal("remove")
@@ -35,7 +40,8 @@ public class WizardsRebornCommand {
                                                 .executes(ctx -> removeKnowledge(ctx, EntityArgument.getPlayers(ctx, "player"), KnowledgeArgument.getKnowledge(ctx, "knowledge")))
                                         )
                                         .then(Commands.literal("all")
-                                                .executes(ctx -> removeAllKnowledge(ctx, EntityArgument.getPlayers(ctx, "player"))))
+                                                .executes(ctx -> removeAllKnowledge(ctx, EntityArgument.getPlayers(ctx, "player")))
+                                        )
                                 )
                         )
                 )
@@ -46,7 +52,8 @@ public class WizardsRebornCommand {
                                                 .executes(ctx -> giveSpell(ctx, EntityArgument.getPlayers(ctx, "player"), SpellArgument.getSpell(ctx, "spell")))
                                         )
                                         .then(Commands.literal("all")
-                                                .executes(ctx -> giveAllSpell(ctx, EntityArgument.getPlayers(ctx, "player"))))
+                                                .executes(ctx -> giveAllSpell(ctx, EntityArgument.getPlayers(ctx, "player")))
+                                        )
                                 )
                         )
                         .then(Commands.literal("remove")
@@ -55,8 +62,18 @@ public class WizardsRebornCommand {
                                                 .executes(ctx -> removeSpell(ctx, EntityArgument.getPlayers(ctx, "player"), SpellArgument.getSpell(ctx, "spell")))
                                         )
                                         .then(Commands.literal("all")
-                                                .executes(ctx -> removeAllSpell(ctx, EntityArgument.getPlayers(ctx, "player"))))
+                                                .executes(ctx -> removeAllSpell(ctx, EntityArgument.getPlayers(ctx, "player")))
+                                        )
                                 )
+                        )
+                )
+                .then(Commands.literal("arcane_enchantment")
+                        .then(Commands.argument("player", EntityArgument.player())
+                                .then(Commands.argument("arcane_enchantment", new ArcaneEnchantmentArgument())
+                                        .executes(ctx -> addArcaneEnchantment(ctx, EntityArgument.getPlayers(ctx, "player"), ArcaneEnchantmentArgument.getArcaneEnchantments(ctx, "arcane_enchantment")))
+                                .then(Commands.argument("level", IntegerArgumentType.integer(0))
+                                        .executes(ctx -> arcaneEnchantment(ctx, EntityArgument.getPlayers(ctx, "player"), ArcaneEnchantmentArgument.getArcaneEnchantments(ctx, "arcane_enchantment"), IntegerArgumentType.getInteger(ctx,"level")))
+                                ))
                         )
                 )
         );
@@ -154,11 +171,11 @@ public class WizardsRebornCommand {
 
         if (targetPlayers.size() == 1) {
             command.getSource().sendSuccess(() -> {
-                return Component.translatable("commands.wizards_reborn.spell.give.single", Component.translatable(spell.getTranslatedName()), targetPlayers.iterator().next().getDisplayName());
+                return Component.translatable("commands.wizards_reborn.spell.remove.single", Component.translatable(spell.getTranslatedName()), targetPlayers.iterator().next().getDisplayName());
             }, true);
         } else {
             command.getSource().sendSuccess(() -> {
-                return Component.translatable("commands.wizards_reborn.spell.give.multiple", Component.translatable(spell.getTranslatedName()), targetPlayers.size());
+                return Component.translatable("commands.wizards_reborn.spell.remove.multiple", Component.translatable(spell.getTranslatedName()), targetPlayers.size());
             }, true);
         }
         return Command.SINGLE_SUCCESS;
@@ -188,11 +205,59 @@ public class WizardsRebornCommand {
 
         if (targetPlayers.size() == 1) {
             command.getSource().sendSuccess(() -> {
-                return Component.translatable("commands.wizards_reborn.spell.give.all.single", targetPlayers.iterator().next().getDisplayName());
+                return Component.translatable("commands.wizards_reborn.spell.remove.all.single", targetPlayers.iterator().next().getDisplayName());
             }, true);
         } else {
             command.getSource().sendSuccess(() -> {
-                return Component.translatable("commands.wizards_reborn.spell.give.all.multiple", targetPlayers.size());
+                return Component.translatable("commands.wizards_reborn.spell.remove.all.multiple", targetPlayers.size());
+            }, true);
+        }
+        return Command.SINGLE_SUCCESS;
+    }
+
+    private static int addArcaneEnchantment(CommandContext<CommandSourceStack> command, Collection<ServerPlayer> targetPlayers, ArcaneEnchantment arcaneEnchantment) throws CommandSyntaxException {
+        for(ServerPlayer player : targetPlayers) {
+            ItemStack stack = player.getMainHandItem();
+            if (!stack.isEmpty()) {
+                if (ArcaneEnchantmentUtils.isArcaneItem(stack)) {
+                    int enchantmentLevel = ArcaneEnchantmentUtils.getArcaneEnchantment(stack, arcaneEnchantment) + 1;
+                    if (ArcaneEnchantmentUtils.canAddArcaneEnchantment(stack, arcaneEnchantment, enchantmentLevel)) {
+                        ArcaneEnchantmentUtils.addArcaneEnchantment(stack, arcaneEnchantment, enchantmentLevel);
+                    }
+                }
+            }
+        }
+
+        if (targetPlayers.size() == 1) {
+            command.getSource().sendSuccess(() -> {
+                return Component.translatable("commands.wizards_reborn.arcane_enchantment.single", Component.translatable(arcaneEnchantment.getTranslatedName()), targetPlayers.iterator().next().getMainHandItem().getDisplayName());
+            }, true);
+        } else {
+            command.getSource().sendSuccess(() -> {
+                return Component.translatable("commands.wizards_reborn.arcane_enchantment.multiple", Component.translatable(arcaneEnchantment.getTranslatedName()), targetPlayers.size());
+            }, true);
+        }
+
+        return Command.SINGLE_SUCCESS;
+    }
+
+    private static int arcaneEnchantment(CommandContext<CommandSourceStack> command, Collection<ServerPlayer> targetPlayers, ArcaneEnchantment arcaneEnchantment, int enchantmentLevel) throws CommandSyntaxException {
+        for(ServerPlayer player : targetPlayers) {
+            ItemStack stack = player.getMainHandItem();
+            if (!stack.isEmpty()) {
+                if (ArcaneEnchantmentUtils.canAddArcaneEnchantment(stack, arcaneEnchantment, enchantmentLevel)) {
+                    ArcaneEnchantmentUtils.addArcaneEnchantment(stack, arcaneEnchantment, enchantmentLevel);
+                }
+            }
+        }
+
+        if (targetPlayers.size() == 1) {
+            command.getSource().sendSuccess(() -> {
+                return Component.translatable("commands.wizards_reborn.arcane_enchantment.single", Component.translatable(arcaneEnchantment.getTranslatedName()), targetPlayers.iterator().next().getMainHandItem().getDisplayName());
+            }, true);
+        } else {
+            command.getSource().sendSuccess(() -> {
+                return Component.translatable("commands.wizards_reborn.arcane_enchantment.multiple", Component.translatable(arcaneEnchantment.getTranslatedName()), targetPlayers.size());
             }, true);
         }
         return Command.SINGLE_SUCCESS;

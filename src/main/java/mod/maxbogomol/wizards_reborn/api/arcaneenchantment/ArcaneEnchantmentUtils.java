@@ -1,6 +1,7 @@
 package mod.maxbogomol.wizards_reborn.api.arcaneenchantment;
 
 import com.google.common.collect.Maps;
+import mod.maxbogomol.wizards_reborn.common.arcaneenchantment.MagicBladeArcaneEnchantment;
 import mod.maxbogomol.wizards_reborn.common.arcaneenchantment.WissenMendingArcaneEnchantment;
 import mod.maxbogomol.wizards_reborn.utils.ColorUtils;
 import net.minecraft.ChatFormatting;
@@ -15,6 +16,7 @@ import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.level.Level;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
+import net.minecraftforge.event.entity.living.LivingDamageEvent;
 
 import java.awt.*;
 import java.util.ArrayList;
@@ -138,13 +140,16 @@ public class ArcaneEnchantmentUtils {
             for (ArcaneEnchantment arcaneEnchantment : arcaneEnchantments.keySet()) {
                 int enchantmentLevel = arcaneEnchantments.get(arcaneEnchantment);
                 int maxEnchantmentLevel = arcaneEnchantment.getMaxLevel();
-                Color color = arcaneEnchantment.getColor();
 
-                int R = (int) Mth.lerp(((float) enchantmentLevel / maxEnchantmentLevel), 100, color.getRed());
-                int G = (int) Mth.lerp(((float) enchantmentLevel / maxEnchantmentLevel), 100, color.getGreen());
-                int B = (int) Mth.lerp(((float) enchantmentLevel / maxEnchantmentLevel), 100, color.getBlue());
+                if (enchantmentLevel > 0) {
+                    Color color = arcaneEnchantment.getColor();
 
-                list.add(Component.literal(" ").append(arcaneEnchantment.getFullname(enchantmentLevel)).withStyle(Style.EMPTY.withColor(ColorUtils.packColor(255, R, G, B))));
+                    int R = (int) Mth.lerp(((float) enchantmentLevel / maxEnchantmentLevel), 100, color.getRed());
+                    int G = (int) Mth.lerp(((float) enchantmentLevel / maxEnchantmentLevel), 100, color.getGreen());
+                    int B = (int) Mth.lerp(((float) enchantmentLevel / maxEnchantmentLevel), 100, color.getBlue());
+
+                    list.add(Component.literal(" ").append(arcaneEnchantment.getFullname(enchantmentLevel)).withStyle(Style.EMPTY.withColor(ColorUtils.packColor(255, R, G, B))));
+                }
             }
         }
 
@@ -157,5 +162,9 @@ public class ArcaneEnchantmentUtils {
 
     public static int damageItem(ItemStack stack, int amount, LivingEntity entity) {
         return WissenMendingArcaneEnchantment.damageItem(stack, amount, entity);
+    }
+
+    public static void onLivingDamage(LivingDamageEvent event) {
+        MagicBladeArcaneEnchantment.onLivingDamage(event);
     }
 }
