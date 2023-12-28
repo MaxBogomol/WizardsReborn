@@ -1,0 +1,28 @@
+{
+  "type": "wizards_reborn:arcane_iterator",
+  "enchantment": {
+    "enchantment": "minecraft:frost_walker"
+  },
+  "wissen": 1200,
+  "experience": 5,
+  "ingredients": [
+    {
+      "item": "minecraft:lapis_lazuli"
+    },
+    {
+      "item": "minecraft:lapis_lazuli"
+    },
+    {
+      "item": "minecraft:slime_ball"
+    },
+    {
+      "item": "minecraft:slime_ball"
+    },
+    {
+      "item": "minecraft:packed_ice"
+    },
+    {
+      "item": "minecraft:packed_ice"
+    }
+  ]
+}

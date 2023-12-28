@@ -39,6 +39,15 @@ public class ArcaneWorkbenchRecipeManager implements IRecipeManager, IRecipeHand
                 new ArcaneWorkbenchRecipe(resourceLocation, output.getInternal(), wissen, Arrays.stream(inputs).map(IIngredient::asVanillaIngredient).toArray(Ingredient[]::new)), ""));
     }
 
+    @ZenCodeType.Method
+    public void addRecipe(String name, IItemStack output, int wissen, int saveNBT, IIngredient... inputs) {
+        name = fixRecipeName(name);
+        ResourceLocation resourceLocation = new ResourceLocation("crafttweaker", name);
+
+        CraftTweakerAPI.apply(new ActionAddRecipe(this,
+                new ArcaneWorkbenchRecipe(resourceLocation, output.getInternal(), wissen, saveNBT, Arrays.stream(inputs).map(IIngredient::asVanillaIngredient).toArray(Ingredient[]::new)), ""));
+    }
+
     @Override
     public RecipeType getRecipeType() {
         return WizardsReborn.ARCANE_WORKBENCH_RECIPE.get();

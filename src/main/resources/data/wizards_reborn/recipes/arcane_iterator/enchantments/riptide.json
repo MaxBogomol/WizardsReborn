@@ -1,0 +1,28 @@
+{
+  "type": "wizards_reborn:arcane_iterator",
+  "enchantment": {
+    "enchantment": "minecraft:riptide"
+  },
+  "wissen": 1200,
+  "experience": 5,
+  "ingredients": [
+    {
+      "item": "minecraft:lapis_lazuli"
+    },
+    {
+      "item": "minecraft:lapis_lazuli"
+    },
+    {
+      "item": "minecraft:prismarine_crystals"
+    },
+    {
+      "item": "minecraft:prismarine_shard"
+    },
+    {
+      "item": "minecraft:prismarine_shard"
+    },
+    {
+      "item": "minecraft:prismarine_shard"
+    }
+  ]
+}

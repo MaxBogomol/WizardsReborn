@@ -1,7 +1,7 @@
 {
   "type": "wizards_reborn:arcane_iterator",
   "enchantment": {
-    "enchantment": "minecraft:binding_curse"
+    "enchantment": "minecraft:vanishing_curse"
   },
   "wissen": 1000,
   "experience": 1,
@@ -17,7 +17,7 @@
       "item": "minecraft:poisonous_potato"
     },
     {
-      "item": "minecraft:obsidian"
+      "item": "minecraft:iron_ingot"
     }
   ]
 }

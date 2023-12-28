@@ -1,0 +1,28 @@
+{
+  "type": "wizards_reborn:arcane_iterator",
+  "enchantment": {
+    "enchantment": "minecraft:fire_protection"
+  },
+  "wissen": 1200,
+  "experience": 5,
+  "ingredients": [
+    {
+      "item": "minecraft:lapis_lazuli"
+    },
+    {
+      "item": "minecraft:lapis_lazuli"
+    },
+    {
+      "item": "minecraft:obsidian"
+    },
+    {
+      "item": "minecraft:blaze_powder"
+    },
+    {
+      "item": "minecraft:blaze_powder"
+    },
+    {
+      "item": "minecraft:blaze_powder"
+    }
+  ]
+}

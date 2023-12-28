@@ -12,7 +12,7 @@ import com.blamejared.crafttweaker.api.recipe.manager.base.IRecipeManager;
 import com.blamejared.crafttweaker.api.util.StringUtil;
 import com.blamejared.crafttweaker_annotations.annotations.Document;
 import mod.maxbogomol.wizards_reborn.WizardsReborn;
-import mod.maxbogomol.wizards_reborn.common.recipe.WissenCrystallizerRecipe;
+import mod.maxbogomol.wizards_reborn.common.recipe.JewelerTableRecipe;
 import net.minecraft.core.RegistryAccess;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.crafting.Ingredient;
@@ -24,11 +24,11 @@ import java.util.Arrays;
 import java.util.Optional;
 import java.util.StringJoiner;
 
-@Document("mods/WizardsReborn/WissenCrystallizer")
+@Document("mods/WizardsReborn/JewelerTable")
 @ZenRegister
-@IRecipeHandler.For(WissenCrystallizerRecipe.class)
-@ZenCodeType.Name("mods.wizards_reborn.WissenCrystallizer")
-public class WissenCrystallizerRecipeManager implements IRecipeManager, IRecipeHandler<WissenCrystallizerRecipe> {
+@IRecipeHandler.For(JewelerTableRecipe.class)
+@ZenCodeType.Name("mods.wizards_reborn.JewelerTable")
+public class JewelerTableRecipeManager implements IRecipeManager, IRecipeHandler<JewelerTableRecipe> {
 
     @ZenCodeType.Method
     public void addRecipe(String name, IItemStack output, int wissen, IIngredient... inputs) {
@@ -36,25 +36,25 @@ public class WissenCrystallizerRecipeManager implements IRecipeManager, IRecipeH
         ResourceLocation resourceLocation = new ResourceLocation("crafttweaker", name);
 
         CraftTweakerAPI.apply(new ActionAddRecipe(this,
-                new WissenCrystallizerRecipe(resourceLocation, output.getInternal(), wissen, Arrays.stream(inputs).map(IIngredient::asVanillaIngredient).toArray(Ingredient[]::new)), ""));
+                new JewelerTableRecipe(resourceLocation, output.getInternal(), wissen, Arrays.stream(inputs).map(IIngredient::asVanillaIngredient).toArray(Ingredient[]::new)), ""));
     }
 
     @ZenCodeType.Method
-    public void addRecipe(String name, IItemStack output, int wissen, boolean isNBTCrystal, boolean isSaveNBT, IIngredient... inputs) {
+    public void addRecipe(String name, IItemStack output, int wissen, boolean saveNBT, IIngredient... inputs) {
         name = fixRecipeName(name);
         ResourceLocation resourceLocation = new ResourceLocation("crafttweaker", name);
 
         CraftTweakerAPI.apply(new ActionAddRecipe(this,
-                new WissenCrystallizerRecipe(resourceLocation, output.getInternal(), wissen, isNBTCrystal, isSaveNBT, Arrays.stream(inputs).map(IIngredient::asVanillaIngredient).toArray(Ingredient[]::new)), ""));
+                new JewelerTableRecipe(resourceLocation, output.getInternal(), wissen, saveNBT, Arrays.stream(inputs).map(IIngredient::asVanillaIngredient).toArray(Ingredient[]::new)), ""));
     }
 
     @Override
     public RecipeType getRecipeType() {
-        return WizardsReborn.WISSEN_CRYSTALLIZER_RECIPE.get();
+        return WizardsReborn.JEWELER_TABLE_RECIPE.get();
     }
 
     @Override
-    public String dumpToCommandString(IRecipeManager manager, WissenCrystallizerRecipe recipe) {
+    public String dumpToCommandString(IRecipeManager manager, JewelerTableRecipe recipe) {
         StringJoiner s = new StringJoiner(", ", manager.getCommandString() + ".addRecipe(", ");");
 
         s.add(StringUtil.quoteAndEscape(recipe.getId()));
@@ -68,17 +68,17 @@ public class WissenCrystallizerRecipeManager implements IRecipeManager, IRecipeH
     }
 
     @Override
-    public <U extends Recipe<?>> boolean doesConflict(IRecipeManager<? super WissenCrystallizerRecipe> manager, WissenCrystallizerRecipe firstRecipe, U secondRecipe) {
+    public <U extends Recipe<?>> boolean doesConflict(IRecipeManager<? super JewelerTableRecipe> manager, JewelerTableRecipe firstRecipe, U secondRecipe) {
         return false;
     }
 
     @Override
-    public Optional<IDecomposedRecipe> decompose(IRecipeManager<? super WissenCrystallizerRecipe> manager, WissenCrystallizerRecipe recipe) {
+    public Optional<IDecomposedRecipe> decompose(IRecipeManager<? super JewelerTableRecipe> manager, JewelerTableRecipe recipe) {
         return Optional.empty();
     }
 
     @Override
-    public Optional<WissenCrystallizerRecipe> recompose(IRecipeManager<? super WissenCrystallizerRecipe> manager, ResourceLocation name, IDecomposedRecipe recipe) {
+    public Optional<JewelerTableRecipe> recompose(IRecipeManager<? super JewelerTableRecipe> manager, ResourceLocation name, IDecomposedRecipe recipe) {
         return Optional.empty();
     }
 }

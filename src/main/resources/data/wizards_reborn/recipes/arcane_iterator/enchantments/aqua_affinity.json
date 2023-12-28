@@ -1,0 +1,28 @@
+{
+  "type": "wizards_reborn:arcane_iterator",
+  "enchantment": {
+    "enchantment": "minecraft:aqua_affinity"
+  },
+  "wissen": 1200,
+  "experience": 6,
+  "ingredients": [
+    {
+      "item": "minecraft:lapis_lazuli"
+    },
+    {
+      "item": "minecraft:lapis_lazuli"
+    },
+    {
+      "item": "minecraft:water_bucket"
+    },
+    {
+      "item": "minecraft:clay_ball"
+    },
+    {
+      "item": "minecraft:clay_ball"
+    },
+    {
+      "item": "minecraft:clay_ball"
+    }
+  ]
+}
