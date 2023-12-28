@@ -4,6 +4,7 @@ import mod.maxbogomol.wizards_reborn.WizardsReborn;
 import mod.maxbogomol.wizards_reborn.api.crystal.CrystalUtils;
 import mod.maxbogomol.wizards_reborn.api.wissen.WissenItemUtils;
 import mod.maxbogomol.wizards_reborn.common.entity.SpellProjectileEntity;
+import mod.maxbogomol.wizards_reborn.common.item.equipment.arcane.ArcaneArmorItem;
 import mod.maxbogomol.wizards_reborn.common.network.PacketHandler;
 import mod.maxbogomol.wizards_reborn.common.network.spell.AirRaySpellEffectPacket;
 import net.minecraft.util.Mth;
@@ -39,10 +40,12 @@ public class AirRaySpell extends RaySpell {
                 if (WissenItemUtils.canRemoveWissen(stack, getWissenCostWithStat(projectile.getStats(), player))) {
                     removeWissen(stack, projectile.getStats(), player);
                     int focusLevel = CrystalUtils.getStatLevel(projectile.getStats(), WizardsReborn.FOCUS_CRYSTAL_STAT);
-                    target.hurt(new DamageSource(target.damageSources().fall().typeHolder(), projectile, player), (float) (1.5f + (focusLevel * 0.5)));
+                    float magicModifier = ArcaneArmorItem.getPlayerMagicModifier(player);
+                    float damage = (float) (1.5f + (focusLevel * 0.5)) + magicModifier;
+                    target.hurt(new DamageSource(target.damageSources().fall().typeHolder(), projectile, player), damage);
                     if (player.isShiftKeyDown()) {
                         if (target instanceof LivingEntity livingEntity) {
-                            livingEntity.knockback(((float) focusLevel * 0.5F), Mth.sin(projectile.getYRot() * ((float) Math.PI / 180F)), (-Mth.cos(projectile.getYRot() * ((float) Math.PI / 180F))));
+                            livingEntity.knockback(((focusLevel + magicModifier) * 0.5F), Mth.sin(projectile.getYRot() * ((float) Math.PI / 180F)), (-Mth.cos(projectile.getYRot() * ((float) Math.PI / 180F))));
 
                             Color color = getColor();
                             float r = color.getRed() / 255f;

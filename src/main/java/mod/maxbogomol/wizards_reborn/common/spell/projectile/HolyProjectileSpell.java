@@ -3,6 +3,7 @@ package mod.maxbogomol.wizards_reborn.common.spell.projectile;
 import mod.maxbogomol.wizards_reborn.WizardsReborn;
 import mod.maxbogomol.wizards_reborn.api.crystal.CrystalUtils;
 import mod.maxbogomol.wizards_reborn.common.entity.SpellProjectileEntity;
+import mod.maxbogomol.wizards_reborn.common.item.equipment.arcane.ArcaneArmorItem;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
@@ -31,10 +32,12 @@ public class HolyProjectileSpell extends ProjectileSpell {
 
         if (target instanceof LivingEntity livingEntity) {
             int focusLevel = CrystalUtils.getStatLevel(projectile.getStats(), WizardsReborn.FOCUS_CRYSTAL_STAT);
+            float magicModifier = ArcaneArmorItem.getPlayerMagicModifier(player);
+            float damage = (float) (1.5f + (focusLevel * 0.5)) + magicModifier;
             if (livingEntity.getMobType() == MobType.UNDEAD) {
-                target.hurt(new DamageSource(target.damageSources().magic().typeHolder(), projectile, player), (float) (1.5f + (focusLevel * 0.5)));
+                target.hurt(new DamageSource(target.damageSources().magic().typeHolder(), projectile, player), damage);
             } else {
-                livingEntity.heal((float) (1.5f + (focusLevel * 0.5)));
+                livingEntity.heal(damage);
             }
         }
     }

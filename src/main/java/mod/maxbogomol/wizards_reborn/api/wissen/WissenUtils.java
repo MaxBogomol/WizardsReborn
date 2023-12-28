@@ -1,6 +1,7 @@
 package mod.maxbogomol.wizards_reborn.api.wissen;
 
 import mod.maxbogomol.wizards_reborn.WizardsReborn;
+import net.minecraft.world.InteractionHand;
 import net.minecraft.world.entity.ai.attributes.AttributeInstance;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
@@ -74,6 +75,9 @@ public class WissenUtils {
             if (player.getInventory().getItem(i).getItem() instanceof IWissenItem) {
                 items.add(player.getInventory().getItem(i));
             }
+        }
+        if (player.getItemInHand(InteractionHand.OFF_HAND).getItem() instanceof IWissenItem) {
+            items.add(player.getItemInHand(InteractionHand.OFF_HAND));
         }
 
         return items;

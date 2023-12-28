@@ -104,6 +104,22 @@ public class ArcaneArmorItem extends ArmorItem implements IArcaneItem {
         return ChatFormatting.GREEN;
     }
 
+    public float getMagicModifier() {
+        return 0f;
+    }
+
+    public static float getPlayerMagicModifier(Player player) {
+        if (player.getItemBySlot(EquipmentSlot.HEAD).getItem() instanceof ArcaneArmorItem armor) {
+            if (armor.hasArmorSet()) {
+                if (armor.hasArmorSetPlayer(player)) {
+                    return armor.getMagicModifier();
+                }
+            }
+        }
+
+        return 0f;
+    }
+
     public boolean hasArmorSetItem(EquipmentSlot slot, Player player) {
         return player.getItemBySlot(slot).getItem() == getArmorSetItem(slot).getItem();
     }

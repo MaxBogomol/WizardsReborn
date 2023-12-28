@@ -4,6 +4,7 @@ import mod.maxbogomol.wizards_reborn.WizardsReborn;
 import mod.maxbogomol.wizards_reborn.api.crystal.CrystalUtils;
 import mod.maxbogomol.wizards_reborn.api.wissen.WissenItemUtils;
 import mod.maxbogomol.wizards_reborn.common.entity.SpellProjectileEntity;
+import mod.maxbogomol.wizards_reborn.common.item.equipment.arcane.ArcaneArmorItem;
 import mod.maxbogomol.wizards_reborn.common.network.PacketHandler;
 import mod.maxbogomol.wizards_reborn.common.network.spell.FireRaySpellEffectPacket;
 import net.minecraft.core.BlockPos;
@@ -49,7 +50,9 @@ public class FireRaySpell extends RaySpell {
                 if (WissenItemUtils.canRemoveWissen(stack, getWissenCostWithStat(projectile.getStats(), player))) {
                     removeWissen(stack, projectile.getStats(), player);
                     int focusLevel = CrystalUtils.getStatLevel(projectile.getStats(), WizardsReborn.FOCUS_CRYSTAL_STAT);
-                    target.hurt(new DamageSource(target.damageSources().onFire().typeHolder(), projectile, player), (float) (1.5f + (focusLevel * 0.5)));
+                    float magicModifier = ArcaneArmorItem.getPlayerMagicModifier(player);
+                    float damage = (float) (1.5f + (focusLevel * 0.5)) + magicModifier;
+                    target.hurt(new DamageSource(target.damageSources().onFire().typeHolder(), projectile, player), damage);
                     int fire = target.getRemainingFireTicks() + 5;
                     if (fire > 10) {
                         fire = 10;

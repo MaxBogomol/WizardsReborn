@@ -163,9 +163,14 @@ public class ResearchPage extends Page {
                 size = 50;
             }
             Vec2 point = new Vec2(size, 0), center = new Vec2(size, size);
+            Vec2 pointS = new Vec2(size + 5, 0), centerS = new Vec2(size + 5, size + 5);
 
             int i = 0;
+            int selected = getSelectedMonogram(x, y, mouseX, mouseY);
             for (MonogramMapEntry monogramMapEntry : map) {
+                if (i == selected) {
+                    gui.blit(BACKGROUND, x + 59 - (int) size + (int) pointS.x - 2 - 5, y + 59 - (int) size + (int) pointS.y - 2 - 5, 158, 40, 14, 14);
+                }
                 if (monogramMapEntry.isActive()) {
                     gui.blit(BACKGROUND, x + 59 - (int) size + (int) point.x - 2, y + 59 - (int) size + (int) point.y - 2, 158, 40, 14, 14);
                 }
@@ -184,6 +189,7 @@ public class ResearchPage extends Page {
                     gui.renderTooltip(Minecraft.getInstance().font, Component.translatable(monogramMapEntry.getMonogram().getTranslatedName()), mouseX, mouseY);
                 }
                 point = rotatePointAbout(point, center, angleBetweenEach);
+                pointS = rotatePointAbout(pointS, centerS, angleBetweenEach);
                 i++;
             }
 
@@ -232,7 +238,7 @@ public class ResearchPage extends Page {
         double X = x + 59;
         double Y = y + 59;
 
-        double angle =  Math.toDegrees(Math.atan2(mouseY-Y,mouseX-X)) + 90 % 360;
+        double angle =  Math.toDegrees(Math.atan2(mouseY-Y,mouseX-X)) + 90 + 25.5F % 360;
         if (angle < 0D) {
             angle += 360D;
         }

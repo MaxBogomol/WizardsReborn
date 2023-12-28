@@ -4,6 +4,7 @@ import mod.maxbogomol.wizards_reborn.WizardsReborn;
 import mod.maxbogomol.wizards_reborn.api.crystal.CrystalUtils;
 import mod.maxbogomol.wizards_reborn.api.wissen.WissenItemUtils;
 import mod.maxbogomol.wizards_reborn.common.entity.SpellProjectileEntity;
+import mod.maxbogomol.wizards_reborn.common.item.equipment.arcane.ArcaneArmorItem;
 import mod.maxbogomol.wizards_reborn.common.network.PacketHandler;
 import mod.maxbogomol.wizards_reborn.common.network.spell.EarthRaySpellEffectPacket;
 import net.minecraft.core.BlockPos;
@@ -42,7 +43,8 @@ public class EarthRaySpell extends RaySpell {
                 if (WissenItemUtils.canRemoveWissen(stack, getWissenCostWithStat(projectile.getStats(), player))) {
                     removeWissen(stack, projectile.getStats(), player);
                     int focusLevel = CrystalUtils.getStatLevel(projectile.getStats(), WizardsReborn.FOCUS_CRYSTAL_STAT);
-                    float damage = (float) (2.0f + (focusLevel * 0.5));
+                    float magicModifier = ArcaneArmorItem.getPlayerMagicModifier(player);
+                    float damage = (float) (2.0f + (focusLevel * 0.5)) + magicModifier;
                     DamageSource damageSource = new DamageSource(target.damageSources().generic().typeHolder(), projectile, player);
                     target.hurt(new DamageSource(target.damageSources().generic().typeHolder(), projectile, player), damage);
                     if (target instanceof Player targetPlayer) {

@@ -11,7 +11,8 @@ import net.minecraft.world.item.Item;
 import java.util.UUID;
 
 public class CaneItem extends Item {
-    public static final UUID BASE_MOVEMENT_SPEED_UUID = UUID.fromString("1EF77B34-978A-11EE-B9B1-0242AC120002");
+    public static final UUID BASE_MOVEMENT_SPEED_MAINHAND_UUID = UUID.fromString("1EF77B34-978A-11EE-B9B1-0242AC120002");
+    public static final UUID BASE_MOVEMENT_SPEED_OFFHAND_UUID = UUID.fromString("BB9F719D-A476-498C-A645-118BD98A5228");
 
     public CaneItem(Properties properties) {
         super(properties);
@@ -21,7 +22,8 @@ public class CaneItem extends Item {
     public Multimap<Attribute, AttributeModifier> getDefaultAttributeModifiers(EquipmentSlot slot) {
         ImmutableMultimap.Builder<Attribute, AttributeModifier> atts = ImmutableMultimap.builder();
         atts.putAll(super.getDefaultAttributeModifiers(slot));
-        atts.put(Attributes.MOVEMENT_SPEED, new AttributeModifier(BASE_MOVEMENT_SPEED_UUID, "bonus", 0.15f, AttributeModifier.Operation.MULTIPLY_BASE));
+        if (slot == EquipmentSlot.MAINHAND ) atts.put(Attributes.MOVEMENT_SPEED, new AttributeModifier(BASE_MOVEMENT_SPEED_MAINHAND_UUID, "bonus", 0.15f, AttributeModifier.Operation.MULTIPLY_BASE));
+        if (slot == EquipmentSlot.OFFHAND ) atts.put(Attributes.MOVEMENT_SPEED, new AttributeModifier(BASE_MOVEMENT_SPEED_OFFHAND_UUID, "bonus", 0.15f, AttributeModifier.Operation.MULTIPLY_BASE));
         return (slot == EquipmentSlot.MAINHAND || slot == EquipmentSlot.OFFHAND) ? atts.build() : super.getDefaultAttributeModifiers(slot);
     }
 }

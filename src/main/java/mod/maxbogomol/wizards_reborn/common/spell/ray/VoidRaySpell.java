@@ -4,6 +4,7 @@ import mod.maxbogomol.wizards_reborn.WizardsReborn;
 import mod.maxbogomol.wizards_reborn.api.crystal.CrystalUtils;
 import mod.maxbogomol.wizards_reborn.api.wissen.WissenItemUtils;
 import mod.maxbogomol.wizards_reborn.common.entity.SpellProjectileEntity;
+import mod.maxbogomol.wizards_reborn.common.item.equipment.arcane.ArcaneArmorItem;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.player.Player;
@@ -34,7 +35,9 @@ public class VoidRaySpell extends RaySpell {
                 if (WissenItemUtils.canRemoveWissen(stack, getWissenCostWithStat(projectile.getStats(), player))) {
                     removeWissen(stack, projectile.getStats(), player);
                     int focusLevel = CrystalUtils.getStatLevel(projectile.getStats(), WizardsReborn.FOCUS_CRYSTAL_STAT);
-                    target.hurt(new DamageSource(target.damageSources().magic().typeHolder(), projectile, player), (float) (2.5f + (focusLevel * 1.0)));
+                    float magicModifier = ArcaneArmorItem.getPlayerMagicModifier(player);
+                    float damage = (float) (2.5f + (focusLevel * 1.0)) + magicModifier;
+                    target.hurt(new DamageSource(target.damageSources().magic().typeHolder(), projectile, player), damage);
                 }
             }
         }

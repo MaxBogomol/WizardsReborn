@@ -1,0 +1,24 @@
+{
+  "type": "wizards_reborn:arcane_workbench",
+  "pattern": [
+    "###",
+    "#A#",
+    "###",
+    "GGGG"
+  ],
+  "key": {
+    "#": {
+      "item": "wizards_reborn:arcane_wood_planks"
+    },
+    "A": {
+      "item": "wizards_reborn:arcacite_block"
+    },
+    "G": {
+      "tag": "wizards_reborn:arcane_gold_ingot"
+    }
+  },
+  "output": {
+    "item": "wizards_reborn:arcane_iterator"
+  },
+  "wissen": 3000
+}

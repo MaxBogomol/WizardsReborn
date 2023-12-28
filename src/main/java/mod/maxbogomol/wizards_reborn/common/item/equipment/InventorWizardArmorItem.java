@@ -111,4 +111,9 @@ public class InventorWizardArmorItem extends ArcaneArmorItem implements IForgeIt
             default -> ItemStack.EMPTY;
         };
     }
+
+    @Override
+    public float getMagicModifier() {
+        return 1f;
+    }
 }

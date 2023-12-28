@@ -3,7 +3,7 @@
   "arcane_enchantment": {
     "arcane_enchantment": "wizards_reborn:magic_blade"
   },
-  "wissen": 1000,
+  "wissen": 1500,
   "experience": 5,
   "ingredients": [
     {
@@ -11,6 +11,18 @@
     },
     {
       "item": "minecraft:lapis_lazuli"
+    },
+    {
+      "item": "minecraft:quartz"
+    },
+    {
+      "item": "minecraft:quartz"
+    },
+    {
+      "item": "minecraft:quartz"
+    },
+    {
+      "item": "wizards_reborn:arcanum"
     },
     {
       "item": "wizards_reborn:arcanum"

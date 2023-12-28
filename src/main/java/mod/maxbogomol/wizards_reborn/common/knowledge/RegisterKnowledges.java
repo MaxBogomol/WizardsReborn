@@ -24,6 +24,8 @@ public class RegisterKnowledges {
     public static ItemKnowledge ALCHEMY_FURNACE = new ItemKnowledge(WizardsReborn.MOD_ID+":alchemy_furnace", true, 10, WizardsReborn.ALCHEMY_FURNACE_ITEM.get());
     public static ItemKnowledge ALCHEMY_MACHINE = new ItemKnowledge(WizardsReborn.MOD_ID+":alchemy_machine", true, 10, WizardsReborn.ALCHEMY_MACHINE_ITEM.get());
     public static ItemKnowledge ARCACITE = new ItemKnowledge(WizardsReborn.MOD_ID+":arcacite", true, 10, WizardsReborn.ARCACITE.get());
+    public static ItemKnowledge ARCANE_ITERATOR = new ItemKnowledge(WizardsReborn.MOD_ID+":arcane_iterator", true, 10, WizardsReborn.ARCANE_ITERATOR_ITEM.get());
+    public static ItemKnowledge ARCANE_CENSER = new ItemKnowledge(WizardsReborn.MOD_ID+":arcane_censer", true, 10, WizardsReborn.ARCANE_CENSER_ITEM.get());
 
     public static void init() {
         Knowledges.register(ARCANUM);
@@ -44,5 +46,7 @@ public class RegisterKnowledges {
         Knowledges.register(ALCHEMY_FURNACE);
         Knowledges.register(ALCHEMY_MACHINE);
         Knowledges.register(ARCACITE);
+        Knowledges.register(ARCANE_ITERATOR);
+        Knowledges.register(ARCANE_CENSER);
     }
 }

@@ -1,0 +1,21 @@
+{
+  "type": "wizards_reborn:arcane_workbench",
+  "pattern": [
+    "#__",
+    "###",
+    "___",
+    "A___"
+  ],
+  "key": {
+    "#": {
+      "item": "wizards_reborn:arcane_wood_planks"
+    },
+    "A": {
+      "item": "wizards_reborn:arcacite"
+    }
+  },
+  "output": {
+    "item": "wizards_reborn:arcane_wood_smoking_pipe"
+  },
+  "wissen": 1000
+}

@@ -4,6 +4,7 @@ import mod.maxbogomol.wizards_reborn.WizardsReborn;
 import mod.maxbogomol.wizards_reborn.api.crystal.CrystalUtils;
 import mod.maxbogomol.wizards_reborn.api.wissen.WissenItemUtils;
 import mod.maxbogomol.wizards_reborn.common.entity.SpellProjectileEntity;
+import mod.maxbogomol.wizards_reborn.common.item.equipment.arcane.ArcaneArmorItem;
 import mod.maxbogomol.wizards_reborn.common.network.PacketHandler;
 import mod.maxbogomol.wizards_reborn.common.network.spell.HolyRaySpellEffectPacket;
 import net.minecraft.world.damagesource.DamageSource;
@@ -43,14 +44,16 @@ public class HolyRaySpell extends RaySpell {
                     if (WissenItemUtils.canRemoveWissen(stack, getWissenCostWithStat(projectile.getStats(), player))) {
                         if (target instanceof LivingEntity livingEntity) {
                             int focusLevel = CrystalUtils.getStatLevel(projectile.getStats(), WizardsReborn.FOCUS_CRYSTAL_STAT);
+                            float magicModifier = ArcaneArmorItem.getPlayerMagicModifier(player);
+                            float damage = (float) (1.0f + (focusLevel * 0.5)) + magicModifier;
                             boolean effect = false;
                             if (livingEntity.getMobType() == MobType.UNDEAD) {
-                                target.hurt(new DamageSource(target.damageSources().magic().typeHolder(), projectile, player), (float) (1.0f + (focusLevel * 0.5)));
+                                target.hurt(new DamageSource(target.damageSources().magic().typeHolder(), projectile, player), damage);
                                 removeWissen(stack, projectile.getStats(), player);
                                 effect = true;
                             } else {
                                 if (livingEntity.getHealth() != livingEntity.getMaxHealth()) {
-                                    livingEntity.heal((float) (1.0f + (focusLevel * 0.5)));
+                                    livingEntity.heal(damage);
                                     removeWissen(stack, projectile.getStats(), player);
                                     effect = true;
                                 }

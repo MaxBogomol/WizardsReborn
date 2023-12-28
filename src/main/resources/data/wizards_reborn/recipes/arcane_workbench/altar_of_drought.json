@@ -1,0 +1,27 @@
+{
+  "type": "wizards_reborn:arcane_workbench",
+  "pattern": [
+    "G#G",
+    "#_#",
+    "G#G",
+    "_AWA"
+  ],
+  "key": {
+    "#": {
+      "item": "wizards_reborn:arcane_wood_planks"
+    },
+    "A": {
+      "item": "wizards_reborn:arcacite"
+    },
+    "G": {
+      "tag": "wizards_reborn:arcane_gold_ingot"
+    },
+    "W": {
+      "item": "wizards_reborn:wisestone_pedestal"
+    }
+  },
+  "output": {
+    "item": "wizards_reborn:altar_of_drought"
+  },
+  "wissen": 1500
+}

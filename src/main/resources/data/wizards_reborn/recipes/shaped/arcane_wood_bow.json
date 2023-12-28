@@ -1,0 +1,22 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "X#S",
+    "# S",
+    "X#S"
+  ],
+  "key": {
+    "#": {
+      "item": "wizards_reborn:arcane_wood_branch"
+    },
+    "X": {
+      "tag": "wizards_reborn:arcane_gold_ingot"
+    },
+    "S": {
+      "item": "minecraft:string"
+    }
+  },
+  "result": {
+    "item": "wizards_reborn:arcane_wood_bow"
+  }
+}

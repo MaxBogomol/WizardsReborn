@@ -1,0 +1,36 @@
+{
+  "type": "wizards_reborn:arcane_workbench",
+  "pattern": [
+    "NGN",
+    "W#W",
+    "BWB",
+    "A_S_"
+  ],
+  "key": {
+    "#": {
+      "item": "minecraft:glass"
+    },
+    "W": {
+      "item": "wizards_reborn:polished_wisestone"
+    },
+    "B": {
+      "item": "wizards_reborn:polished_wisestone_slab"
+    },
+    "S": {
+      "item": "wizards_reborn:steam_pipe"
+    },
+    "A": {
+      "item": "wizards_reborn:arcacite"
+    },
+    "G": {
+      "tag": "wizards_reborn:arcane_gold_ingot"
+    },
+    "N": {
+      "tag": "wizards_reborn:arcane_gold_nugget"
+    }
+  },
+  "output": {
+    "item": "wizards_reborn:arcane_censer"
+  },
+  "wissen": 1000
+}

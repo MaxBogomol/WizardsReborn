@@ -3,6 +3,7 @@ package mod.maxbogomol.wizards_reborn.common.spell.projectile;
 import mod.maxbogomol.wizards_reborn.WizardsReborn;
 import mod.maxbogomol.wizards_reborn.api.crystal.CrystalUtils;
 import mod.maxbogomol.wizards_reborn.common.entity.SpellProjectileEntity;
+import mod.maxbogomol.wizards_reborn.common.item.equipment.arcane.ArcaneArmorItem;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.player.Player;
@@ -27,6 +28,8 @@ public class AirProjectileSpell extends ProjectileSpell {
         super.onImpact(ray, world, projectile, player, target);
 
         int focusLevel = CrystalUtils.getStatLevel(projectile.getStats(), WizardsReborn.FOCUS_CRYSTAL_STAT);
-        target.hurt(new DamageSource(target.damageSources().fall().typeHolder(), projectile, player), (float) (2.0f + (focusLevel * 0.5)));
+        float magicModifier = ArcaneArmorItem.getPlayerMagicModifier(player);
+        float damage = (float) (2.0f + (focusLevel * 0.5)) + magicModifier;
+        target.hurt(new DamageSource(target.damageSources().fall().typeHolder(), projectile, player), damage);
     }
 }
