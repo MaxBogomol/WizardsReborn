@@ -302,7 +302,7 @@ public class WissenWandItem extends Item {
                             List<ItemStack> list = tile.getItemsResult();
                             int i = 0;
                             for (ItemStack item : list) {
-                                int x = mc.getWindow().getGuiScaledWidth() / 2 - 8;
+                                int x = mc.getWindow().getGuiScaledWidth() / 2 - 8 + (i * 16) - ((list.size() - 1) * 8);
                                 int y = mc.getWindow().getGuiScaledHeight() / 2 - 26;
                                 gui.renderItem(item, x, y);
                                 gui.renderItemDecorations(Minecraft.getInstance().font, item, x, y);
