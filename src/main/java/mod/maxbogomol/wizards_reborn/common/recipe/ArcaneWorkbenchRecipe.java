@@ -58,7 +58,7 @@ public class ArcaneWorkbenchRecipe implements Recipe<Container> {
 
     public static boolean matches(List<Ingredient> inputs, Container inv) {
         boolean craft = true;
-        for (int i = 0; i < 13; i += 1) {
+        for (int i = 0; i < inputs.size(); i += 1) {
             if (!inputs.get(i).test(inv.getItem(i))) {
                 craft = false;
             }

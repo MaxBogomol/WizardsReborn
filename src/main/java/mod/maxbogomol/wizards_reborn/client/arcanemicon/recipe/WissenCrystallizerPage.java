@@ -35,7 +35,7 @@ public class WissenCrystallizerPage extends Page {
                 index += 1;
                 point = rotatePointAbout(point, center, angleBetweenEach);
             } else {
-                drawItem(book, gui, o,x + 56, y + 57, mouseX, mouseY);
+                drawItem(book, gui, o,x + 56, y + 56, mouseX, mouseY);
                 first = true;
             }
         }

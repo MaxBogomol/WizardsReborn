@@ -30,7 +30,7 @@ public class WissenCrystallizerRecipeCategory implements IRecipeCategory<WissenC
     private final IDrawable icon;
 
     public WissenCrystallizerRecipeCategory(IGuiHelper helper) {
-        background = helper.createDrawable(TEXTURE, 0, 0, 146, 88);
+        background = helper.createDrawable(TEXTURE, 0, 0, 144, 88);
         icon = helper.createDrawableIngredient(VanillaTypes.ITEM_STACK, new ItemStack(WizardsReborn.WISSEN_CRYSTALLIZER_ITEM.get()));
     }
 

@@ -37,3 +37,6 @@
 <recipetype:wizards_reborn:arcane_iterator>.addRecipe("zs_test_19", <item:wizards_reborn:arcane_gold_scythe>, null, "wizards_reborn:magic_blade", 100, 1, 1, false, [<item:minecraft:diamond_block>, <item:minecraft:diamond_block>, <item:minecraft:diamond_block>, <item:minecraft:diamond_block>]);
 //<recipetype:wizards_reborn:arcane_iterator>.remove("wizards_reborn:magic_blade");
 //<recipetype:wizards_reborn:arcane_iterator>.remove(<enchantment:minecraft:sharpness>);
+
+<recipetype:wizards_reborn:arcane_workbench>.addRecipe("zs_test_20", <item:minecraft:diamond_sword>, 2000, 0, <item:minecraft:wooden_sword>);
+<recipetype:wizards_reborn:wissen_crystallizer>.addRecipe("zs_test_21", <item:minecraft:diamond_sword>, 100, false, true, <item:minecraft:wooden_sword>, <item:minecraft:diamond>);

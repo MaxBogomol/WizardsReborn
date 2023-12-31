@@ -41,6 +41,10 @@ public class WizardsRebornJei implements IModPlugin {
                 new MortarRecipeCategory(registration.getJeiHelpers().getGuiHelper()));
         registration.addRecipeCategories(
                 new AlchemyMachineRecipeCategory(registration.getJeiHelpers().getGuiHelper()));
+        registration.addRecipeCategories(
+                new CenserRecipeCategory(registration.getJeiHelpers().getGuiHelper()));
+        registration.addRecipeCategories(
+                new ArcaneIteratorRecipeCategory(registration.getJeiHelpers().getGuiHelper()));
     }
 
     @Override
@@ -51,6 +55,8 @@ public class WizardsRebornJei implements IModPlugin {
         registration.addRecipes(ArcaneWorkbenchRecipeCategory.TYPE, sortRecipes(WizardsReborn.ARCANE_WORKBENCH_RECIPE.get(), BY_ID));
         registration.addRecipes(MortarRecipeCategory.TYPE, sortRecipes(WizardsReborn.MORTAR_RECIPE.get(), BY_ID));
         registration.addRecipes(AlchemyMachineRecipeCategory.TYPE, sortRecipes(WizardsReborn.ALCHEMY_MACHINE_RECIPE.get(), BY_ID));
+        registration.addRecipes(CenserRecipeCategory.TYPE, sortRecipes(WizardsReborn.CENSER_RECIPE.get(), BY_ID));
+        registration.addRecipes(ArcaneIteratorRecipeCategory.TYPE, sortRecipes(WizardsReborn.ARCANE_ITERATOR_RECIPE.get(), BY_ID));
     }
 
     @Override
@@ -62,6 +68,9 @@ public class WizardsRebornJei implements IModPlugin {
         registration.addRecipeCatalyst(new ItemStack(WizardsReborn.ARCANE_WOOD_MORTAR.get()), MortarRecipeCategory.TYPE);
         registration.addRecipeCatalyst(new ItemStack(WizardsReborn.ALCHEMY_MACHINE_ITEM.get()), AlchemyMachineRecipeCategory.TYPE);
         registration.addRecipeCatalyst(new ItemStack(WizardsReborn.ALCHEMY_BOILER_ITEM.get()), AlchemyMachineRecipeCategory.TYPE);
+        registration.addRecipeCatalyst(new ItemStack(WizardsReborn.ARCANE_CENSER_ITEM.get()), CenserRecipeCategory.TYPE);
+        registration.addRecipeCatalyst(new ItemStack(WizardsReborn.ARCANE_WOOD_SMOKING_PIPE.get()), CenserRecipeCategory.TYPE);
+        registration.addRecipeCatalyst(new ItemStack(WizardsReborn.ARCANE_ITERATOR_ITEM.get()), ArcaneIteratorRecipeCategory.TYPE);
     }
 
     private static <T extends Recipe<C>, C extends Container> List<T> sortRecipes(RecipeType<T> type, Comparator<? super T> comparator) {
