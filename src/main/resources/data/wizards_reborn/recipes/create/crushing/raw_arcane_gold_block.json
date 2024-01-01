@@ -1,0 +1,20 @@
+{
+  "type": "create:crushing",
+  "ingredients": [
+    {
+      "item": "wizards_reborn:raw_arcane_gold_block"
+    }
+  ],
+  "results": [
+    {
+      "item": "wizards_reborn:crushed_raw_arcane_gold",
+      "count": 9
+    },
+    {
+      "item": "create:experience_nugget",
+      "count": 18,
+      "chance": 0.75
+    }
+  ],
+  "processingTime": 400
+}

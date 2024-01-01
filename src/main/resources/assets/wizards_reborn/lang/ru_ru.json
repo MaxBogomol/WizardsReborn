@@ -9,6 +9,7 @@
   "block.wizards_reborn.deepslate_arcane_gold_ore": "Аркановый золотоносный глубинный сланец",
   "block.wizards_reborn.nether_arcane_gold_ore": "Незерская аркановая золотая руда",
   "block.wizards_reborn.raw_arcane_gold_block": "Блок рудного арканового золота",
+  "item.wizards_reborn.crushed_raw_arcane_gold": "Дроблёное рудное аркановое золото",
   "item.wizards_reborn.arcane_gold_sword": "Аркановый золотой меч",
   "item.wizards_reborn.arcane_gold_pickaxe": "Аркановая золотая кирка",
   "item.wizards_reborn.arcane_gold_axe": "Аркановый золотой топор",
@@ -793,5 +794,7 @@
   "wizards_reborn.arcanemicon.page.arcane_iterator_enchantments.title": "Зачарования",
   "wizards_reborn.arcanemicon.page.arcane_iterator_enchantments": "Альтернативный способ получения обычных чар.",
   "wizards_reborn.arcanemicon.page.smoke_warning.title": "!ВНИМАНИЕ!",
-  "wizards_reborn.arcanemicon.page.smoke_warning": "!КУРЕНИЕ ВРЕДИТ ВАШЕМУ ЗДОРОВЬЮ!"
+  "wizards_reborn.arcanemicon.page.smoke_warning": "!КУРЕНИЕ ВРЕДИТ ВАШЕМУ ЗДОРОВЬЮ!",
+  "wizards_reborn.arcanemicon.page.inventor_wizard_armor.wissen_nature.title": "Виссен природа",
+  "wizards_reborn.arcanemicon.page.inventor_wizard_armor.wissen_nature": "Полный набор брони улучшает характеристики многих заклинаний, и даже добавляет уникальные эффекты."
 }

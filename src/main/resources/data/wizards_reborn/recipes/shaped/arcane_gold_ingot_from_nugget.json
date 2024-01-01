@@ -7,10 +7,10 @@
   ],
   "key": {
     "#": {
-      "tag": "wizards_reborn:arcane_gold_nugget"
+      "item": "wizards_reborn:arcane_gold_nugget"
     }
   },
   "result": {
-    "tag": "wizards_reborn:arcane_gold_ingot"
+    "item": "wizards_reborn:arcane_gold_ingot"
   }
 }

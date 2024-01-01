@@ -1,0 +1,23 @@
+{
+  "type": "create:crushing",
+  "ingredients": [
+    {
+      "item": "wizards_reborn:nether_arcane_gold_ore"
+    }
+  ],
+  "results": [
+    {
+      "item": "wizards_reborn:arcane_gold_nugget",
+      "count": 18
+    },
+    {
+      "item": "create:experience_nugget",
+      "chance": 0.75
+    },
+    {
+      "item": "minecraft:netherrack",
+      "chance": 0.125
+    }
+  ],
+  "processingTime": 350
+}

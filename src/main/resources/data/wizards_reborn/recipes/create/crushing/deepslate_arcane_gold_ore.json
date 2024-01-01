@@ -1,0 +1,28 @@
+{
+  "type": "create:crushing",
+  "ingredients": [
+    {
+      "item": "wizards_reborn:deepslate_arcane_gold_ore"
+    }
+  ],
+  "results": [
+    {
+      "item": "wizards_reborn:crushed_raw_arcane_gold",
+      "count": 2
+    },
+    {
+      "item": "wizards_reborn:crushed_raw_arcane_gold",
+      "chance": 0.25
+    },
+    {
+      "item": "create:experience_nugget",
+      "count": 2,
+      "chance": 0.75
+    },
+    {
+      "item": "minecraft:cobbled_deepslate",
+      "chance": 0.125
+    }
+  ],
+  "processingTime": 350
+}

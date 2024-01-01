@@ -1,0 +1,19 @@
+{
+  "type": "create:crushing",
+  "ingredients": [
+    {
+      "item": "wizards_reborn:arcanum"
+    }
+  ],
+  "results": [
+    {
+      "item": "wizards_reborn:arcanum_dust",
+      "count": 3
+    },
+    {
+      "item": "wizards_reborn:arcanum_dust",
+      "chance": 0.45
+    }
+  ],
+  "processingTime": 400
+}

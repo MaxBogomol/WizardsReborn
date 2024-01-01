@@ -1,6 +1,7 @@
 package mod.maxbogomol.wizards_reborn.common.itemgroup;
 
 import mod.maxbogomol.wizards_reborn.WizardsReborn;
+import mod.maxbogomol.wizards_reborn.common.integration.create.CreateIntegration;
 import mod.maxbogomol.wizards_reborn.common.item.CrystalItem;
 import mod.maxbogomol.wizards_reborn.common.item.FracturedCrystalItem;
 import net.minecraft.core.registries.Registries;
@@ -36,6 +37,10 @@ public class WizardsRebornItemGroup {
             event.accept(WizardsReborn.DEEPSLATE_ARCANE_GOLD_ORE_ITEM);
             event.accept(WizardsReborn.NETHER_ARCANE_GOLD_ORE_ITEM);
             event.accept(WizardsReborn.RAW_ARCANE_GOLD_BLOCK_ITEM);
+
+            if (CreateIntegration.isCreateLoaded()) {
+                event.accept(WizardsReborn.CRUSHED_RAW_ARCANE_GOLD);
+            }
 
             event.accept(WizardsReborn.ARCANE_GOLD_SWORD);
             event.accept(WizardsReborn.ARCANE_GOLD_PICKAXE);

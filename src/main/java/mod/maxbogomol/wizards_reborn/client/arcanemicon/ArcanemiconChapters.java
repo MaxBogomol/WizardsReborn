@@ -625,6 +625,7 @@ public class ArcanemiconChapters {
                         new BlockEntry(new ItemStack(WizardsReborn.ARCANE_PEDESTAL_ITEM.get()), new ItemStack(WizardsReborn.INVENTOR_WIZARD_TROUSERS.get())),
                         new BlockEntry(new ItemStack(WizardsReborn.ARCANE_PEDESTAL_ITEM.get()), new ItemStack(WizardsReborn.INVENTOR_WIZARD_BOOTS.get()))
                 ),
+                new TitlePage("wizards_reborn.arcanemicon.page.inventor_wizard_armor.wissen_nature"),
                 new ArcaneWorkbenchPage(new ItemStack(WizardsReborn.INVENTOR_WIZARD_HAT.get()),
                         new ItemStack(Items.LEATHER), new ItemStack(Items.LEATHER), new ItemStack(Items.LEATHER),
                         new ItemStack(Items.LEATHER), new ItemStack(WizardsReborn.ARCANE_GOLD_HELMET.get()),  new ItemStack(Items.LEATHER),
