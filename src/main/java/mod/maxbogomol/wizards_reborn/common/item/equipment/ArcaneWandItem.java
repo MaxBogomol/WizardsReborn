@@ -95,13 +95,17 @@ public class ArcaneWandItem extends Item implements IWissenItem, ICustomAnimatio
         if (!nbt.contains("cooldown")) {
             nbt.putInt("cooldown", 0);
         }
+        if (!nbt.contains("maxCooldown")) {
+            nbt.putInt("maxCooldown", 0);
+        }
 
         WissenItemUtils.existWissen(stack);
 
         if (nbt.contains("cooldown")) {
             if (nbt.getInt("cooldown") > 0) {
-                nbt.putInt("cooldown", nbt.getInt("cooldown")  - 1);
+                nbt.putInt("cooldown", nbt.getInt("cooldown") - 1);
                 if (nbt.getInt("cooldown") == 0) {
+                    nbt.putInt("maxCooldown", 0);
                     if (nbt.getString("spell") != "") {
                         Spell spell = Spells.getSpell(nbt.getString("spell"));
                         spell.onReload(stack, world, entity, slot, isSelected);
@@ -136,7 +140,7 @@ public class ArcaneWandItem extends Item implements IWissenItem, ICustomAnimatio
         CompoundTag nbt = stack.getTag();
         if (canSpell(stack, player)) {
             Spell spell = Spells.getSpell(nbt.getString("spell"));
-            if (spell.canSpell(world, player, hand)) {
+            if (spell.canSpell(world, player, hand) && spell.canSpellAir(world, player, hand)) {
                 if (spell.canWandWithCrystal(stack)) {
                     spell.useSpell(world, player, hand);
                     return InteractionResultHolder.success(stack);
@@ -153,7 +157,7 @@ public class ArcaneWandItem extends Item implements IWissenItem, ICustomAnimatio
         if (canSpell(stack, context.getPlayer())) {
             Spell spell = Spells.getSpell(nbt.getString("spell"));
             if (spell.canWandWithCrystal(stack)) {
-                spell.onWandUseFirst(stack, context);
+                return spell.onWandUseFirst(stack, context);
             }
         }
 
@@ -339,6 +343,9 @@ public class ArcaneWandItem extends Item implements IWissenItem, ICustomAnimatio
                 if (!nbt.contains("cooldown")) {
                     nbt.putInt("cooldown", 0);
                 }
+                if (!nbt.contains("maxCooldown")) {
+                    nbt.putInt("maxCooldown", 0);
+                }
                 WissenItemUtils.existWissen(stack);
                 Spell spell = null;
 
@@ -358,8 +365,7 @@ public class ArcaneWandItem extends Item implements IWissenItem, ICustomAnimatio
 
                     int width = 32;
                     if (spell != null && nbt.getInt("cooldown") > 0) {
-                        CompoundTag stats = spell.getStats(stack);
-                        width /= (double) spell.getCooldownWithStat(stats) / (double) nbt.getInt("cooldown");
+                        width /= (double) nbt.getInt("maxCooldown") / (double) nbt.getInt("cooldown");
                     } else {
                         width = -32;
                     }

@@ -36,7 +36,7 @@ apply plugin: 'eclipse'
 apply plugin: 'maven-publish'
 apply plugin: 'org.parchmentmc.librarian.forgegradle'
 
-version = '1.20.1-0.0.8.1'
+version = '1.20.1-0.0.9'
 group = 'mod.maxbogomol.wizards_reborn'
 archivesBaseName = 'wizards_reborn'
 
@@ -109,7 +109,7 @@ dependencies {
 
     implementation fg.deobf("mezz.jei:jei-1.20.1-forge:15.0.0.14")
 
-    implementation fg.deobf('team.chisel.ctm:CTM:1.20.1-1.1.8+4')
+    implementation fg.deobf('team.chisel.ctm:CTM:1.20.1-1.1.8+6')
     implementation fg.deobf("curse.maven:config-menus-forge-544048:4672356")
 }
 

@@ -3,6 +3,8 @@ package mod.maxbogomol.wizards_reborn.common.block;
 import mod.maxbogomol.wizards_reborn.WizardsReborn;
 import mod.maxbogomol.wizards_reborn.api.alchemy.IPipeConnection;
 import mod.maxbogomol.wizards_reborn.api.alchemy.PipeConnection;
+import mod.maxbogomol.wizards_reborn.common.item.equipment.AlchemyBottleItem;
+import mod.maxbogomol.wizards_reborn.common.item.equipment.AlchemyPotionItem;
 import mod.maxbogomol.wizards_reborn.common.tileentity.OrbitalFluidRetainerTileEntity;
 import mod.maxbogomol.wizards_reborn.common.tileentity.PipeBaseTileEntity;
 import mod.maxbogomol.wizards_reborn.common.tileentity.TickableBlockEntity;
@@ -110,6 +112,11 @@ public class OrbitalFluidRetainerBlock extends Block implements EntityBlock, Sim
                 IFluidHandler cap = retainer.getCapability(ForgeCapabilities.FLUID_HANDLER).orElse(null);
                 if (cap != null) {
                     boolean didFill = FluidUtil.interactWithFluidHandler(player, hand, cap);
+                    if (AlchemyPotionItem.interactWithFluidHandler(player, hand, cap)) {
+                        didFill = true;
+                    } else if (AlchemyBottleItem.interactWithFluidHandler(player, hand, cap)) {
+                        didFill = true;
+                    }
 
                     if (didFill) {
                         return InteractionResult.SUCCESS;

@@ -5,7 +5,7 @@ import mod.maxbogomol.wizards_reborn.api.wissen.*;
 import mod.maxbogomol.wizards_reborn.client.particle.Particles;
 import mod.maxbogomol.wizards_reborn.common.item.CrystalItem;
 import mod.maxbogomol.wizards_reborn.common.network.PacketHandler;
-import mod.maxbogomol.wizards_reborn.common.network.spell.JewelerTableBurstEffectPacket;
+import mod.maxbogomol.wizards_reborn.common.network.tileentity.JewelerTableBurstEffectPacket;
 import mod.maxbogomol.wizards_reborn.common.recipe.JewelerTableRecipe;
 import mod.maxbogomol.wizards_reborn.utils.PacketUtils;
 import net.minecraft.core.BlockPos;

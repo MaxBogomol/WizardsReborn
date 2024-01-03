@@ -30,6 +30,7 @@ import mod.maxbogomol.wizards_reborn.client.render.curio.AmuletRenderer;
 import mod.maxbogomol.wizards_reborn.client.render.curio.BeltRenderer;
 import mod.maxbogomol.wizards_reborn.client.render.curio.MushroomCapRenderer;
 import mod.maxbogomol.wizards_reborn.client.render.item.WandCrystalsModels;
+import mod.maxbogomol.wizards_reborn.common.alchemypotion.RegisterAlchemyPotions;
 import mod.maxbogomol.wizards_reborn.common.arcaneenchantment.MagicBladeArcaneEnchantment;
 import mod.maxbogomol.wizards_reborn.common.arcaneenchantment.WissenMendingArcaneEnchantment;
 import mod.maxbogomol.wizards_reborn.common.block.*;
@@ -44,7 +45,6 @@ import mod.maxbogomol.wizards_reborn.common.entity.CustomBoatEntity;
 import mod.maxbogomol.wizards_reborn.common.entity.CustomChestBoatEntity;
 import mod.maxbogomol.wizards_reborn.common.entity.SpellProjectileEntity;
 import mod.maxbogomol.wizards_reborn.common.event.Events;
-import mod.maxbogomol.wizards_reborn.common.integration.create.CreateIntegration;
 import mod.maxbogomol.wizards_reborn.common.item.*;
 import mod.maxbogomol.wizards_reborn.common.item.equipment.*;
 import mod.maxbogomol.wizards_reborn.common.item.equipment.arcane.*;
@@ -57,6 +57,8 @@ import mod.maxbogomol.wizards_reborn.common.proxy.ClientProxy;
 import mod.maxbogomol.wizards_reborn.common.proxy.ISidedProxy;
 import mod.maxbogomol.wizards_reborn.common.proxy.ServerProxy;
 import mod.maxbogomol.wizards_reborn.common.recipe.*;
+import mod.maxbogomol.wizards_reborn.common.spell.self.HeartOfNatureSpell;
+import mod.maxbogomol.wizards_reborn.common.spell.MagicSproutSpell;
 import mod.maxbogomol.wizards_reborn.common.spell.projectile.*;
 import mod.maxbogomol.wizards_reborn.common.spell.ray.*;
 import mod.maxbogomol.wizards_reborn.common.tileentity.*;
@@ -220,6 +222,8 @@ public class WizardsReborn {
     public static Spell VOID_RAY_SPELL = new VoidRaySpell(MOD_ID+":void_ray", 7);
     public static Spell FROST_RAY_SPELL = new FrostRaySpell(MOD_ID+":frost_ray", 7);
     public static Spell HOLY_RAY_SPELL = new HolyRaySpell(MOD_ID+":holy_ray", 7);
+    public static Spell HEART_OF_NATURE_SPELL = new HeartOfNatureSpell(MOD_ID+":heart_of_nature", 7);
+    public static Spell MAGIC_SPROUT_SPELL = new MagicSproutSpell(MOD_ID+":magic_sprout", 7);
 
     //ARCANE ENCHANTMENT
     public static ArcaneEnchantment WISSEN_MENDING_ARCANE_ENCHANTMENT = new WissenMendingArcaneEnchantment(MOD_ID+":wissen_mending", 3);
@@ -361,6 +365,8 @@ public class WizardsReborn {
     public static final RegistryObject<Block> ALCHEMY_MACHINE = BLOCKS.register("alchemy_machine", () -> new AlchemyMachineBlock(BlockBehaviour.Properties.copy(Blocks.POLISHED_DEEPSLATE)));
     public static final RegistryObject<Block> ALCHEMY_BOILER = BLOCKS.register("alchemy_boiler", () -> new AlchemyBoilerBlock(BlockBehaviour.Properties.copy(Blocks.POLISHED_DEEPSLATE)));
     public static final RegistryObject<Block> ARCANE_CENSER = BLOCKS.register("arcane_censer", () -> new ArcaneCenserBlock(BlockBehaviour.Properties.copy(Blocks.POLISHED_DEEPSLATE)));
+
+    public static final RegistryObject<Block> ALCHEMY_GLASS = BLOCKS.register("alchemy_glass", () -> new TintedGlassBlock(BlockBehaviour.Properties.copy(Blocks.TINTED_GLASS).noOcclusion()));
 
     public static final RegistryObject<Block> WHITE_ARCANE_LUMOS = BLOCKS.register("white_arcane_lumos", () -> new ArcaneLumosBlock(ArcaneLumosBlock.Colors.WHITE, BlockBehaviour.Properties.copy(Blocks.WHITE_WOOL).lightLevel((state) -> 15).noOcclusion().noCollission().instabreak()));
     public static final RegistryObject<Block> ORANGE_ARCANE_LUMOS = BLOCKS.register("orange_arcane_lumos", () -> new ArcaneLumosBlock(ArcaneLumosBlock.Colors.ORANGE, BlockBehaviour.Properties.copy(Blocks.WHITE_WOOL).lightLevel((state) -> 15).noOcclusion().noCollission().instabreak()));
@@ -553,6 +559,12 @@ public class WizardsReborn {
     public static final RegistryObject<Item> ALCHEMY_MACHINE_ITEM = ITEMS.register("alchemy_machine", () -> new BlockItem(ALCHEMY_MACHINE.get(), new Item.Properties()));
     public static final RegistryObject<Item> ALCHEMY_BOILER_ITEM = ITEMS.register("alchemy_boiler", () -> new BlockItem(ALCHEMY_BOILER.get(), new Item.Properties()));
     public static final RegistryObject<Item> ARCANE_CENSER_ITEM = ITEMS.register("arcane_censer", () -> new BlockItem(ARCANE_CENSER.get(), new Item.Properties()));
+
+    public static final RegistryObject<Item> ALCHEMY_GLASS_ITEM = ITEMS.register("alchemy_glass", () -> new BlockItem(ALCHEMY_GLASS.get(), new Item.Properties()));
+    public static final RegistryObject<Item> ALCHEMY_VIAL = ITEMS.register("alchemy_vial", () -> new VialItem(new Item.Properties(), 3));
+    public static final RegistryObject<Item> ALCHEMY_FLASK = ITEMS.register("alchemy_flask", () -> new FlaskItem(new Item.Properties(), 6));
+    public static final RegistryObject<Item> ALCHEMY_VIAL_POTION = ITEMS.register("alchemy_vial_potion", () -> new AlchemyPotionItem(new Item.Properties().stacksTo(1), 3, ALCHEMY_VIAL.get()));
+    public static final RegistryObject<Item> ALCHEMY_FLASK_POTION = ITEMS.register("alchemy_flask_potion", () -> new AlchemyPotionItem(new Item.Properties().stacksTo(1), 6, ALCHEMY_FLASK.get()));
 
     public static final RegistryObject<Item> WHITE_ARCANE_LUMOS_ITEM = ITEMS.register("white_arcane_lumos", () -> new BlockItem(WHITE_ARCANE_LUMOS.get(), new Item.Properties()));
     public static final RegistryObject<Item> ORANGE_ARCANE_LUMOS_ITEM = ITEMS.register("orange_arcane_lumos", () -> new BlockItem(ORANGE_ARCANE_LUMOS.get(), new Item.Properties()));
@@ -815,6 +827,7 @@ public class WizardsReborn {
         PacketHandler.init();
         RegisterKnowledges.init();
         Researches.init();
+        RegisterAlchemyPotions.init();
 
         event.enqueueWork(() -> {
             AxeItem.STRIPPABLES = new ImmutableMap.Builder<Block, Block>().putAll(AxeItem.STRIPPABLES)
@@ -951,6 +964,8 @@ public class WizardsReborn {
         Spells.register(VOID_RAY_SPELL);
         Spells.register(FROST_RAY_SPELL);
         Spells.register(HOLY_RAY_SPELL);
+        Spells.register(HEART_OF_NATURE_SPELL);
+        Spells.register(MAGIC_SPROUT_SPELL);
     }
 
     public static void setupArcaneEnchantments() {

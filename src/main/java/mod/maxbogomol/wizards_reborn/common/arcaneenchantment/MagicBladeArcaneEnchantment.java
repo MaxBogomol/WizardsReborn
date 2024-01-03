@@ -58,7 +58,7 @@ public class MagicBladeArcaneEnchantment extends ArcaneEnchantment {
                                 WissenUtils.removeWissenFromWissenItems(items, cost);
                                 event.getEntity().hurt(new DamageSource(event.getEntity().damageSources().magic().typeHolder(), player), (1.0f * enchantmentLevel) + event.getAmount());
                                 event.getEntity().level().playSound(WizardsReborn.proxy.getPlayer(), event.getEntity().getOnPos(), SoundEvents.AMETHYST_BLOCK_HIT, SoundSource.PLAYERS, 1.0f, (float) (0.8f + ((random.nextFloat() - 0.5D) / 2)));
-                                PacketHandler.sendToTracking( event.getEntity().level(), event.getEntity().getOnPos(), new MagicBladeEffectPacket((float) event.getEntity().getX(), (float) event.getEntity().getY() + (event.getEntity().getEyeHeight() / 2), (float) event.getEntity().getZ()));
+                                PacketHandler.sendToTracking( event.getEntity().level(), event.getEntity().getOnPos(), new MagicBladeEffectPacket((float) event.getEntity().getX(), (float) event.getEntity().getY() + (event.getEntity().getBbHeight() / 2), (float) event.getEntity().getZ()));
                             }
                         }
                     }

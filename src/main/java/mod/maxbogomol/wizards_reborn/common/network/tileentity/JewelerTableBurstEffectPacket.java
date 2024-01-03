@@ -1,4 +1,4 @@
-package mod.maxbogomol.wizards_reborn.common.network.spell;
+package mod.maxbogomol.wizards_reborn.common.network.tileentity;
 
 import mod.maxbogomol.wizards_reborn.WizardsReborn;
 import mod.maxbogomol.wizards_reborn.client.particle.Particles;

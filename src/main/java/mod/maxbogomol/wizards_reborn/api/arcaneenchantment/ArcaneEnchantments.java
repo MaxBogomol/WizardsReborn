@@ -21,9 +21,9 @@ public class ArcaneEnchantments {
         return arcaneEnchantments.get(id);
     }
 
-    public static void register(ArcaneEnchantment spell) {
-        arcaneEnchantments.put(spell.getId(), spell);
-        arcaneEnchantmentList.add(spell);
+    public static void register(ArcaneEnchantment enchantments) {
+        arcaneEnchantments.put(enchantments.getId(), enchantments);
+        arcaneEnchantmentList.add(enchantments);
     }
 
     public static int size() {

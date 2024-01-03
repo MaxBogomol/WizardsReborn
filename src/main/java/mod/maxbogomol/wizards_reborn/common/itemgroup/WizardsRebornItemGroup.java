@@ -1,6 +1,10 @@
 package mod.maxbogomol.wizards_reborn.common.itemgroup;
 
 import mod.maxbogomol.wizards_reborn.WizardsReborn;
+import mod.maxbogomol.wizards_reborn.api.alchemy.AlchemyPotion;
+import mod.maxbogomol.wizards_reborn.api.alchemy.AlchemyPotionUtils;
+import mod.maxbogomol.wizards_reborn.api.alchemy.AlchemyPotions;
+import mod.maxbogomol.wizards_reborn.common.alchemypotion.RegisterAlchemyPotions;
 import mod.maxbogomol.wizards_reborn.common.integration.create.CreateIntegration;
 import mod.maxbogomol.wizards_reborn.common.item.CrystalItem;
 import mod.maxbogomol.wizards_reborn.common.item.FracturedCrystalItem;
@@ -196,6 +200,10 @@ public class WizardsRebornItemGroup {
             event.accept(WizardsReborn.ALCHEMY_BOILER_ITEM);
             event.accept(WizardsReborn.ARCANE_CENSER_ITEM);
 
+            event.accept(WizardsReborn.ALCHEMY_GLASS_ITEM);
+            event.accept(WizardsReborn.ALCHEMY_VIAL);
+            event.accept(WizardsReborn.ALCHEMY_FLASK);
+
             event.accept(WizardsReborn.WHITE_ARCANE_LUMOS_ITEM);
             event.accept(WizardsReborn.ORANGE_ARCANE_LUMOS_ITEM);
             event.accept(WizardsReborn.MAGENTA_ARCANE_LUMOS_ITEM);
@@ -254,6 +262,22 @@ public class WizardsRebornItemGroup {
 
             event.accept(WizardsReborn.MUSIC_DISC_ARCANUM);
             event.accept(WizardsReborn.MUSIC_DISC_MOR);
+
+            for (AlchemyPotion potion : AlchemyPotions.getAlchemyPotions()) {
+                if (potion != RegisterAlchemyPotions.EMPTY && potion != RegisterAlchemyPotions.COMBINED) {
+                    ItemStack stack = new ItemStack(WizardsReborn.ALCHEMY_VIAL_POTION.get());
+                    AlchemyPotionUtils.setPotion(stack, potion);
+                    event.accept(stack);
+                }
+            }
+
+            for (AlchemyPotion potion : AlchemyPotions.getAlchemyPotions()) {
+                if (potion != RegisterAlchemyPotions.EMPTY && potion != RegisterAlchemyPotions.COMBINED) {
+                    ItemStack stack = new ItemStack(WizardsReborn.ALCHEMY_FLASK_POTION.get());
+                    AlchemyPotionUtils.setPotion(stack, potion);
+                    event.accept(stack);
+                }
+            }
         }
     }
 }

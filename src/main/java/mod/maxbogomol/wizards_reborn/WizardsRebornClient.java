@@ -15,6 +15,7 @@ import mod.maxbogomol.wizards_reborn.client.render.entity.SpellProjectileRendere
 import mod.maxbogomol.wizards_reborn.client.render.item.*;
 import mod.maxbogomol.wizards_reborn.client.render.tileentity.*;
 import mod.maxbogomol.wizards_reborn.common.entity.CustomBoatEntity;
+import mod.maxbogomol.wizards_reborn.common.item.equipment.AlchemyPotionItem;
 import net.minecraft.client.KeyMapping;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.model.BoatModel;
@@ -115,6 +116,7 @@ public class WizardsRebornClient {
             ItemBlockRenderTypes.setRenderLayer(WizardsReborn.POTTED_ELDER_MOR.get(), RenderType.cutout());
             ItemBlockRenderTypes.setRenderLayer(WizardsReborn.STEAM_THERMAL_STORAGE.get(), RenderType.cutout());
             ItemBlockRenderTypes.setRenderLayer(WizardsReborn.ARCANE_CENSER.get(), RenderType.cutout());
+            ItemBlockRenderTypes.setRenderLayer(WizardsReborn.ALCHEMY_GLASS.get(), RenderType.translucent());
 
             BlockEntityRenderers.register(WizardsReborn.SIGN_TILE_ENTITY.get(), SignRenderer::new);
             BlockEntityRenderers.register(WizardsReborn.HANGING_SIGN_TILE_ENTITY.get(), HangingSignRenderer::new);
@@ -138,6 +140,9 @@ public class WizardsRebornClient {
             EntityRenderers.register(WizardsReborn.SPELL_PROJECTILE.get(), SpellProjectileRenderer::new);
 
             makeBow(WizardsReborn.ARCANE_WOOD_BOW.get());
+
+            ItemProperties.register(WizardsReborn.ALCHEMY_VIAL_POTION.get(), new ResourceLocation("uses"), (stack, world, living, count) -> AlchemyPotionItem.getUses(stack));
+            ItemProperties.register(WizardsReborn.ALCHEMY_FLASK_POTION.get(), new ResourceLocation("uses"), (stack, world, living, count) -> AlchemyPotionItem.getUses(stack));
         }
 
         @SubscribeEvent
@@ -295,6 +300,11 @@ public class WizardsRebornClient {
         public static void onRegisterLayers(EntityRenderersEvent.AddLayers event) {
             INVENTOR_WIZARD_ARMOR_MODEL = new InventorWizardArmorModel(event.getEntityModels().bakeLayer(INVENTOR_WIZARD_ARMOR_LAYER));
             ARCANE_FORTRESS_ARMOR_MODEL = new ArcaneFortressArmorModel(event.getEntityModels().bakeLayer(ARCANE_FORTRESS_ARMOR_LAYER));
+        }
+
+        @SubscribeEvent
+        public static void registerItemColorHandlers(RegisterColorHandlersEvent.Item event) {
+            event.register(new AlchemyPotionItem.ColorHandler(), WizardsReborn.ALCHEMY_VIAL_POTION.get(), WizardsReborn.ALCHEMY_FLASK_POTION.get());
         }
     }
 

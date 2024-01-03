@@ -17,6 +17,7 @@ import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.stats.Stats;
+import net.minecraft.world.InteractionResult;
 import net.minecraft.world.SimpleContainer;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.HumanoidArm;
@@ -109,8 +110,12 @@ public class Spell {
     }
 
     public int getCooldownWithStat(CompoundTag nbt) {
+        return getCooldownWithStat(nbt, getCooldown());
+    }
+
+    public int getCooldownWithStat(CompoundTag nbt, int cost) {
         int absorptionLevel = CrystalUtils.getStatLevel(nbt, WizardsReborn.ABSORPTION_CRYSTAL_STAT);
-        return (int) (getCooldown() * (1 - (getCooldownStatModifier() * absorptionLevel)));
+        return (int) (cost * (1 - (getCooldownStatModifier() * absorptionLevel)));
     }
 
     public int getWissenCostWithStat(CompoundTag nbt) {
@@ -119,12 +124,16 @@ public class Spell {
     }
 
     public int getWissenCostWithStat(CompoundTag nbt, Player player) {
+        return getWissenCostWithStat(nbt, player, getWissenCost());
+    }
+
+    public int getWissenCostWithStat(CompoundTag nbt, Player player, int cost) {
         int balanceLevel = CrystalUtils.getStatLevel(nbt, WizardsReborn.BALANCE_CRYSTAL_STAT);
         float modifier = (1 - (getWissenStatModifier() * balanceLevel) - WissenUtils.getWissenCostModifierWithSale(player));
         if (modifier <= 0) {
             return 1;
         }
-        return (int) (getWissenCost() * modifier);
+        return (int) (cost * modifier);
     }
 
     public boolean canWandWithCrystal(ItemStack stack) {
@@ -153,9 +162,22 @@ public class Spell {
         return false;
     }
 
+    public boolean canSpellAir(Level world, Player player, InteractionHand hand) {
+        return true;
+    }
+
     public void setCooldown(ItemStack stack, CompoundTag stats) {
         CompoundTag nbt = stack.getTag();
-        nbt.putInt("cooldown", getCooldownWithStat(stats));
+        int cooldown = getCooldownWithStat(stats);
+        nbt.putInt("cooldown", cooldown);
+        nbt.putInt("maxCooldown", cooldown);
+    }
+
+    public void setCooldown(ItemStack stack, CompoundTag stats, int cost) {
+        CompoundTag nbt = stack.getTag();
+        int cooldown = getCooldownWithStat(stats, cost);
+        nbt.putInt("cooldown", cooldown);
+        nbt.putInt("maxCooldown", cooldown);
     }
 
     public void removeWissen(ItemStack stack, CompoundTag stats) {
@@ -164,6 +186,10 @@ public class Spell {
 
     public void removeWissen(ItemStack stack, CompoundTag stats, Player player) {
         WissenItemUtils.removeWissen(stack, getWissenCostWithStat(stats, player));
+    }
+
+    public void removeWissen(ItemStack stack, CompoundTag stats, Player player, int cost) {
+        WissenItemUtils.removeWissen(stack, getWissenCostWithStat(stats, player, cost));
     }
 
     public CompoundTag getStats(ItemStack stack) {
@@ -181,8 +207,8 @@ public class Spell {
         }
     }
 
-    public void onWandUseFirst(ItemStack stack, UseOnContext context) {
-
+    public InteractionResult onWandUseFirst(ItemStack stack, UseOnContext context) {
+        return InteractionResult.PASS;
     }
 
     public void onUseTick(Level world, LivingEntity livingEntity, ItemStack stack, int remainingUseDuration) {
@@ -237,9 +263,7 @@ public class Spell {
     }
 
     public void onReload(ItemStack stack, Level world, Entity entity, int slot, boolean isSelected) {
-        if (world.isClientSide) {
-            world.playSound(WizardsReborn.proxy.getPlayer(), entity.getX(), entity.getY(), entity.getZ(), WizardsReborn.SPELL_RELOAD_SOUND.get(), SoundSource.BLOCKS, 0.1f, (float) (1f + ((random.nextFloat() - 0.5D) / 4)));
-        }
+        world.playSound(WizardsReborn.proxy.getPlayer(), entity.getX(), entity.getY(), entity.getZ(), WizardsReborn.SPELL_RELOAD_SOUND.get(), SoundSource.BLOCKS, 0.1f, (float) (1f + ((random.nextFloat() - 0.5D) / 4)));
     }
 
     @OnlyIn(Dist.CLIENT)
