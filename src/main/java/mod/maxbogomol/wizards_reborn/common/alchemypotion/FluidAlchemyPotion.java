@@ -1,6 +1,7 @@
 package mod.maxbogomol.wizards_reborn.common.alchemypotion;
 
 import mod.maxbogomol.wizards_reborn.api.alchemy.AlchemyPotion;
+import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.level.material.Fluid;
 
 import java.awt.*;
@@ -11,6 +12,12 @@ public class FluidAlchemyPotion extends AlchemyPotion {
 
     public FluidAlchemyPotion(String id, Fluid fluid, Color color) {
         super(id);
+        this.fluid = fluid;
+        this.color = color;
+    }
+
+    public FluidAlchemyPotion(String id, Fluid fluid, Color color, MobEffectInstance... effects) {
+        super(id, effects);
         this.fluid = fluid;
         this.color = color;
     }

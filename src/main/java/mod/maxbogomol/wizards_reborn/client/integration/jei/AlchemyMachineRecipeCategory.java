@@ -3,6 +3,7 @@ package mod.maxbogomol.wizards_reborn.client.integration.jei;
 import mezz.jei.api.constants.VanillaTypes;
 import mezz.jei.api.forge.ForgeTypes;
 import mezz.jei.api.gui.builder.IRecipeLayoutBuilder;
+import mezz.jei.api.gui.builder.IRecipeSlotBuilder;
 import mezz.jei.api.gui.drawable.IDrawable;
 import mezz.jei.api.gui.ingredient.IRecipeSlotsView;
 import mezz.jei.api.helpers.IGuiHelper;
@@ -11,6 +12,8 @@ import mezz.jei.api.recipe.RecipeIngredientRole;
 import mezz.jei.api.recipe.RecipeType;
 import mezz.jei.api.recipe.category.IRecipeCategory;
 import mod.maxbogomol.wizards_reborn.WizardsReborn;
+import mod.maxbogomol.wizards_reborn.api.alchemy.AlchemyPotionUtils;
+import mod.maxbogomol.wizards_reborn.common.item.equipment.AlchemyPotionItem;
 import mod.maxbogomol.wizards_reborn.common.recipe.AlchemyMachineRecipe;
 import mod.maxbogomol.wizards_reborn.common.recipe.FluidIngredient;
 import net.minecraft.client.Minecraft;
@@ -61,7 +64,24 @@ public class AlchemyMachineRecipeCategory implements IRecipeCategory<AlchemyMach
         int x = 0;
         int y = 0;
         for (Ingredient o : recipe.getIngredients()) {
-            builder.addSlot(RecipeIngredientRole.INPUT, 15 + x, 30 + y).addIngredients(o);
+            ItemStack[] items = o.getItems();
+            boolean setIngr = true;
+            IRecipeSlotBuilder slot =  builder.addSlot(RecipeIngredientRole.INPUT, 15 + x, 30 + y);
+
+            for (ItemStack stack : items) {
+                if (!AlchemyPotionUtils.isEmpty(recipe.getRecipeAlchemyPotionIngredient())) {
+                    if (stack.getItem() instanceof AlchemyPotionItem item) {
+                        setIngr = false;
+                        ItemStack bottle = stack.copy();
+                        AlchemyPotionUtils.setPotion(bottle, recipe.getRecipeAlchemyPotionIngredient());
+                        slot.addItemStack(bottle);
+                    }
+                }
+            }
+
+            if (setIngr) {
+                slot.addIngredients(o);
+            }
             x = x + 18;
             if (x >= 34) {
                 y = y + 18;
@@ -83,7 +103,17 @@ public class AlchemyMachineRecipeCategory implements IRecipeCategory<AlchemyMach
                     .addIngredient(ForgeTypes.FLUID_STACK, recipe.getResultFluid());
         }
 
-        builder.addSlot(RecipeIngredientRole.OUTPUT, 144, 70).addItemStack(recipe.getResultItem(RegistryAccess.EMPTY));
+        if (!AlchemyPotionUtils.isEmpty(recipe.getRecipeAlchemyPotion())) {
+            ItemStack vial = new ItemStack(WizardsReborn.ALCHEMY_VIAL_POTION.get());
+            AlchemyPotionUtils.setPotion(vial, recipe.getRecipeAlchemyPotion());
+
+            ItemStack flask = new ItemStack(WizardsReborn.ALCHEMY_FLASK_POTION.get());
+            AlchemyPotionUtils.setPotion(flask, recipe.getRecipeAlchemyPotion());
+
+            builder.addSlot(RecipeIngredientRole.OUTPUT, 144, 70).addItemStack(vial).addItemStack(flask);
+        } else {
+            builder.addSlot(RecipeIngredientRole.OUTPUT, 144, 70).addItemStack(recipe.getResultItem(RegistryAccess.EMPTY));
+        }
     }
 
     @Override

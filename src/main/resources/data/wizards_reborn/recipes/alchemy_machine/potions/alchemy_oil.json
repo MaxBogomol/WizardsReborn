@@ -1,0 +1,21 @@
+{
+  "type": "wizards_reborn:alchemy_machine",
+  "alchemyPotion": {
+    "alchemy_potion": "wizards_reborn:alchemy_oil"
+  },
+  "steam": 25,
+  "ingredients": [
+    {
+      "item": "wizards_reborn:arcane_linen"
+    },
+    {
+      "item": "wizards_reborn:arcane_linen"
+    },
+    {
+      "item": "wizards_reborn:arcane_linen"
+    },
+    {
+      "tag": "wizards_reborn:alchemy_bottles"
+    }
+  ]
+}

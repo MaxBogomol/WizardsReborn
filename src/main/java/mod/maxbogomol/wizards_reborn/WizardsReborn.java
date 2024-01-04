@@ -45,6 +45,7 @@ import mod.maxbogomol.wizards_reborn.common.entity.CustomBoatEntity;
 import mod.maxbogomol.wizards_reborn.common.entity.CustomChestBoatEntity;
 import mod.maxbogomol.wizards_reborn.common.entity.SpellProjectileEntity;
 import mod.maxbogomol.wizards_reborn.common.event.Events;
+import mod.maxbogomol.wizards_reborn.common.fluid.CustomFluidType;
 import mod.maxbogomol.wizards_reborn.common.item.*;
 import mod.maxbogomol.wizards_reborn.common.item.equipment.*;
 import mod.maxbogomol.wizards_reborn.common.item.equipment.arcane.*;
@@ -57,10 +58,10 @@ import mod.maxbogomol.wizards_reborn.common.proxy.ClientProxy;
 import mod.maxbogomol.wizards_reborn.common.proxy.ISidedProxy;
 import mod.maxbogomol.wizards_reborn.common.proxy.ServerProxy;
 import mod.maxbogomol.wizards_reborn.common.recipe.*;
-import mod.maxbogomol.wizards_reborn.common.spell.self.HeartOfNatureSpell;
 import mod.maxbogomol.wizards_reborn.common.spell.MagicSproutSpell;
 import mod.maxbogomol.wizards_reborn.common.spell.projectile.*;
 import mod.maxbogomol.wizards_reborn.common.spell.ray.*;
+import mod.maxbogomol.wizards_reborn.common.spell.self.HeartOfNatureSpell;
 import mod.maxbogomol.wizards_reborn.common.tileentity.*;
 import mod.maxbogomol.wizards_reborn.common.world.tree.ArcaneWoodTree;
 import mod.maxbogomol.wizards_reborn.common.world.tree.ArcaneWoodTrunkPlacer;
@@ -74,6 +75,7 @@ import net.minecraft.core.particles.ParticleType;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.sounds.SoundEvent;
+import net.minecraft.sounds.SoundEvents;
 import net.minecraft.tags.TagKey;
 import net.minecraft.util.valueproviders.UniformInt;
 import net.minecraft.world.damagesource.DamageType;
@@ -99,12 +101,17 @@ import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.block.state.properties.WoodType;
 import net.minecraft.world.level.levelgen.feature.stateproviders.BlockStateProviderType;
 import net.minecraft.world.level.levelgen.feature.trunkplacers.TrunkPlacerType;
+import net.minecraft.world.level.material.FlowingFluid;
+import net.minecraft.world.level.material.Fluid;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.common.MinecraftForge;
+import net.minecraftforge.common.SoundActions;
 import net.minecraftforge.common.capabilities.RegisterCapabilitiesEvent;
 import net.minecraftforge.common.extensions.IForgeMenuType;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
+import net.minecraftforge.fluids.FluidType;
+import net.minecraftforge.fluids.ForgeFlowingFluid;
 import net.minecraftforge.fml.DistExecutor;
 import net.minecraftforge.fml.InterModComms;
 import net.minecraftforge.fml.ModLoadingContext;
@@ -116,6 +123,7 @@ import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
+import org.joml.Vector3f;
 import top.theillusivec4.curios.api.CuriosApi;
 import top.theillusivec4.curios.api.SlotTypeMessage;
 import top.theillusivec4.curios.api.SlotTypePreset;
@@ -142,6 +150,8 @@ public class WizardsReborn {
     public static final DeferredRegister<TrunkPlacerType<?>> TRUNK_PLACER_TYPES = DeferredRegister.createOptional(Registries.TRUNK_PLACER_TYPE, MOD_ID);
     public static final DeferredRegister<BlockStateProviderType<?>> BLOCK_STATE_PROVIDER_TYPE = DeferredRegister.createOptional(Registries.BLOCK_STATE_PROVIDER_TYPE, MOD_ID);
     public static final DeferredRegister<MobEffect> EFFECTS = DeferredRegister.create(ForgeRegistries.MOB_EFFECTS, MOD_ID);
+    public static final DeferredRegister<FluidType> FLUID_TYPES = DeferredRegister.create(ForgeRegistries.Keys.FLUID_TYPES, MOD_ID);
+    public static final DeferredRegister<Fluid> FLUIDS = DeferredRegister.create(ForgeRegistries.FLUIDS, MOD_ID);
 
     public static final WoodType ARCANE_WOOD_TYPE = WoodType.register(new WoodType(new ResourceLocation(MOD_ID, "arcane_wood").toString(), BlockSetType.OAK));
 
@@ -764,6 +774,99 @@ public class WizardsReborn {
 
     public static final RegistryObject<BlockStateProviderType<?>> AN_STATEPROVIDER = BLOCK_STATE_PROVIDER_TYPE.register("an_stateprovider", () -> new BlockStateProviderType<>(SupplierBlockStateProvider.CODEC));
 
+    //FLUIDS
+    public static final RegistryObject<FlowingFluid> MUNDANE_BREW_FLUID = FLUIDS.register("mundane_brew", () -> new ForgeFlowingFluid.Source(WizardsReborn.MUNDANE_BREW_FLUID_PROPERTIES));
+    public static final RegistryObject<FlowingFluid> FLOWING_MUNDANE_BREW_FLUID = FLUIDS.register("flowing_mundane_brew", () -> new ForgeFlowingFluid.Flowing(WizardsReborn.MUNDANE_BREW_FLUID_PROPERTIES));
+
+    public static final RegistryObject<FlowingFluid> ALCHEMY_OIL_FLUID = FLUIDS.register("alchemy_oil", () -> new ForgeFlowingFluid.Source(WizardsReborn.ALCHEMY_OIL_FLUID_PROPERTIES));
+    public static final RegistryObject<FlowingFluid> FLOWING_ALCHEMY_OIL_FLUID = FLUIDS.register("flowing_alchemy_oil", () -> new ForgeFlowingFluid.Flowing(WizardsReborn.ALCHEMY_OIL_FLUID_PROPERTIES));
+
+    public static final RegistryObject<FlowingFluid> OIL_TEA_FLUID = FLUIDS.register("oil_tea", () -> new ForgeFlowingFluid.Source(WizardsReborn.OIL_TEA_FLUID_PROPERTIES));
+    public static final RegistryObject<FlowingFluid> FLOWING_OIL_TEA_FLUID = FLUIDS.register("flowing_oil_tea", () -> new ForgeFlowingFluid.Flowing(WizardsReborn.OIL_TEA_FLUID_PROPERTIES));
+
+    public static final RegistryObject<FlowingFluid> WISSEN_TEA_FLUID = FLUIDS.register("wissen_tea", () -> new ForgeFlowingFluid.Source(WizardsReborn.WISSEN_TEA_FLUID_PROPERTIES));
+    public static final RegistryObject<FlowingFluid> FLOWING_WISSEN_TEA_FLUID = FLUIDS.register("flowing_wissen_tea", () -> new ForgeFlowingFluid.Flowing(WizardsReborn.WISSEN_TEA_FLUID_PROPERTIES));
+
+    public static final RegistryObject<FlowingFluid> MUSHROOM_BREW_FLUID  = FLUIDS.register("mushroom_brew", () -> new ForgeFlowingFluid.Source(WizardsReborn.MUSHROOM_BREW_PROPERTIES));
+    public static final RegistryObject<FlowingFluid> FLOWING_MUSHROOM_BREW_FLUID = FLUIDS.register("flowing_mushroom_brew", () -> new ForgeFlowingFluid.Flowing(WizardsReborn.MUSHROOM_BREW_PROPERTIES));
+
+    public static final RegistryObject<FlowingFluid> HELLISH_MUSHROOM_BREW_FLUID = FLUIDS.register("hellish_mushroom_brew", () -> new ForgeFlowingFluid.Source(WizardsReborn.HELLISH_MUSHROOM_BREW_FLUID_PROPERTIES));
+    public static final RegistryObject<FlowingFluid> FLOWING_HELLISH_MUSHROOM_BREW_FLUID = FLUIDS.register("flowing_hellish_mushroom_brew", () -> new ForgeFlowingFluid.Flowing(WizardsReborn.HELLISH_MUSHROOM_BREW_FLUID_PROPERTIES));
+
+    public static final RegistryObject<FlowingFluid> MOR_BREW_FLUID = FLUIDS.register("mor_brew", () -> new ForgeFlowingFluid.Source(WizardsReborn.MOR_BREW_FLUID_PROPERTIES));
+    public static final RegistryObject<FlowingFluid> FLOWING_MOR_BREW_FLUID = FLUIDS.register("flowing_mor_brew", () -> new ForgeFlowingFluid.Flowing(WizardsReborn.MOR_BREW_FLUID_PROPERTIES));
+
+    public static final RegistryObject<FlowingFluid> FLOWER_BREW_FLUID = FLUIDS.register("flower_brew", () -> new ForgeFlowingFluid.Source(WizardsReborn.FLOWER_BREW_FLUID_PROPERTIES));
+    public static final RegistryObject<FlowingFluid> FLOWING_FLOWER_BREW_FLUID = FLUIDS.register("flowing_flower_brew", () -> new ForgeFlowingFluid.Flowing(WizardsReborn.FLOWER_BREW_FLUID_PROPERTIES));
+
+    public static final RegistryObject<LiquidBlock> MUNDANE_BREW_FLUID_BLOCK = BLOCKS.register("mundane_brew_fluid_block", () -> new LiquidBlock(WizardsReborn.MUNDANE_BREW_FLUID, BlockBehaviour.Properties.copy(Blocks.WATER)));
+    public static final RegistryObject<LiquidBlock> ALCHEMY_OIL_FLUID_BLOCK = BLOCKS.register("alchemy_oil_fluid_block", () -> new LiquidBlock(WizardsReborn.ALCHEMY_OIL_FLUID, BlockBehaviour.Properties.copy(Blocks.WATER)));
+    public static final RegistryObject<LiquidBlock> OIL_TEA_FLUID_BLOCK = BLOCKS.register("oil_tea_fluid_block", () -> new LiquidBlock(WizardsReborn.OIL_TEA_FLUID, BlockBehaviour.Properties.copy(Blocks.WATER)));
+    public static final RegistryObject<LiquidBlock> WISSEN_TEA_FLUID_BLOCK = BLOCKS.register("wissen_tea_fluid_block", () -> new LiquidBlock(WizardsReborn.MUNDANE_BREW_FLUID, BlockBehaviour.Properties.copy(Blocks.WATER)));
+    public static final RegistryObject<LiquidBlock> MUSHROOM_BREW_FLUID_BLOCK = BLOCKS.register("mushroom_brew_fluid_block", () -> new LiquidBlock(WizardsReborn.WISSEN_TEA_FLUID, BlockBehaviour.Properties.copy(Blocks.WATER)));
+    public static final RegistryObject<LiquidBlock> HELLISH_MUSHROOM_BREW_FLUID_BLOCK = BLOCKS.register("hellish_mushroom_brew_fluid_block", () -> new LiquidBlock(WizardsReborn.HELLISH_MUSHROOM_BREW_FLUID, BlockBehaviour.Properties.copy(Blocks.WATER)));
+    public static final RegistryObject<LiquidBlock> MOR_BREW_FLUID_BLOCK = BLOCKS.register("mor_brew_fluid_block", () -> new LiquidBlock(WizardsReborn.MOR_BREW_FLUID, BlockBehaviour.Properties.copy(Blocks.WATER)));
+    public static final RegistryObject<LiquidBlock> FLOWER_BREW_FLUID_BLOCK = BLOCKS.register("flower_brew_fluid_block", () -> new LiquidBlock(WizardsReborn.FLOWER_BREW_FLUID, BlockBehaviour.Properties.copy(Blocks.WATER)));
+
+    public static final RegistryObject<Item> MUNDANE_BREW_BUCKET = ITEMS.register("mundane_brew_bucket", () -> new BucketItem(MUNDANE_BREW_FLUID, new Item.Properties().craftRemainder(Items.BUCKET).stacksTo(1)));
+    public static final RegistryObject<Item> ALCHEMY_OIL_BUCKET = ITEMS.register("alchemy_oil_bucket", () -> new BucketItem(ALCHEMY_OIL_FLUID, new Item.Properties().craftRemainder(Items.BUCKET).stacksTo(1)));
+    public static final RegistryObject<Item> OIL_TEA_BUCKET = ITEMS.register("oil_tea_bucket", () -> new BucketItem(OIL_TEA_FLUID, new Item.Properties().craftRemainder(Items.BUCKET).stacksTo(1)));
+    public static final RegistryObject<Item> WISSEN_TEA_BUCKET = ITEMS.register("wissen_tea_bucket", () -> new BucketItem(WISSEN_TEA_FLUID, new Item.Properties().craftRemainder(Items.BUCKET).stacksTo(1)));
+    public static final RegistryObject<Item> MUSHROOM_BREW_BUCKET = ITEMS.register("mushroom_brew_bucket", () -> new BucketItem(MUSHROOM_BREW_FLUID, new Item.Properties().craftRemainder(Items.BUCKET).stacksTo(1)));
+    public static final RegistryObject<Item> HELLISH_MUSHROOM_BREW_BUCKET = ITEMS.register("hellish_mushroom_brew_bucket", () -> new BucketItem(HELLISH_MUSHROOM_BREW_FLUID, new Item.Properties().craftRemainder(Items.BUCKET).stacksTo(1)));
+    public static final RegistryObject<Item> MOR_BREW_BUCKET = ITEMS.register("mor_brew_bucket", () -> new BucketItem(MOR_BREW_FLUID, new Item.Properties().craftRemainder(Items.BUCKET).stacksTo(1)));
+    public static final RegistryObject<Item> FLOWER_BREW_BUCKET = ITEMS.register("flower_brew_bucket", () -> new BucketItem(FLOWER_BREW_FLUID, new Item.Properties().craftRemainder(Items.BUCKET).stacksTo(1)));
+
+    public static final RegistryObject<FluidType> MUNDANE_BREW_FLUID_TYPE =  FLUID_TYPES.register("mundane_brew", () -> new CustomFluidType( new ResourceLocation("block/water_still"),  new ResourceLocation("block/water_flow"), new ResourceLocation("misc/underwater"),
+            0xFF324B8D, new Vector3f(50f / 255f, 75f / 255f, 141f / 255f), FluidType.Properties.create().density(1).viscosity(15).sound(SoundActions.BUCKET_FILL, SoundEvents.BUCKET_FILL).sound(SoundActions.BUCKET_EMPTY, SoundEvents.BUCKET_EMPTY)));
+    public static final RegistryObject<FluidType> ALCHEMY_OIL_FLUID_TYPE =  FLUID_TYPES.register("alchemy_oil", () -> new CustomFluidType( new ResourceLocation("block/water_still"),  new ResourceLocation("block/water_flow"), new ResourceLocation("misc/underwater"),
+            0xFF602F3B, new Vector3f(96f / 255f, 47f / 255f, 59f / 255f), FluidType.Properties.create().density(1).viscosity(15).sound(SoundActions.BUCKET_FILL, SoundEvents.BUCKET_FILL).sound(SoundActions.BUCKET_EMPTY, SoundEvents.BUCKET_EMPTY)));
+    public static final RegistryObject<FluidType> OIL_TEA_FLUID_TYPE =  FLUID_TYPES.register("oil_tea", () -> new CustomFluidType( new ResourceLocation("block/water_still"),  new ResourceLocation("block/water_flow"), new ResourceLocation("misc/underwater"),
+            0xFFBD7C81, new Vector3f(189f / 255f, 124f / 255f, 129f / 255f), FluidType.Properties.create().density(1).viscosity(15).sound(SoundActions.BUCKET_FILL, SoundEvents.BUCKET_FILL).sound(SoundActions.BUCKET_EMPTY, SoundEvents.BUCKET_EMPTY)));
+    public static final RegistryObject<FluidType> WISSEN_TEA_FLUID_TYPE =  FLUID_TYPES.register("wissen_tea", () -> new CustomFluidType( new ResourceLocation("block/water_still"),  new ResourceLocation("block/water_flow"), new ResourceLocation("misc/underwater"),
+            0xFF77A4D0, new Vector3f(119f / 255f, 164f / 255f, 208f / 255f), FluidType.Properties.create().density(1).viscosity(15).sound(SoundActions.BUCKET_FILL, SoundEvents.BUCKET_FILL).sound(SoundActions.BUCKET_EMPTY, SoundEvents.BUCKET_EMPTY)));
+    public static final RegistryObject<FluidType> MUSHROOM_BREW_FLUID_TYPE =  FLUID_TYPES.register("mushroom_brew", () -> new CustomFluidType( new ResourceLocation("block/water_still"),  new ResourceLocation("block/water_flow"), new ResourceLocation("misc/underwater"),
+            0xFF8D6B53, new Vector3f(141f / 255f, 107f / 255f, 83f / 255f), FluidType.Properties.create().density(1).viscosity(15).sound(SoundActions.BUCKET_FILL, SoundEvents.BUCKET_FILL).sound(SoundActions.BUCKET_EMPTY, SoundEvents.BUCKET_EMPTY)));
+    public static final RegistryObject<FluidType> HELLISH_MUSHROOM_BREW_FLUID_TYPE =  FLUID_TYPES.register("hellish_mushroom_brew", () -> new CustomFluidType( new ResourceLocation("block/water_still"),  new ResourceLocation("block/water_flow"), new ResourceLocation("misc/underwater"),
+            0xFF4E1B1B, new Vector3f(78f / 255f, 27f / 255f, 27f / 255f), FluidType.Properties.create().density(1).viscosity(15).sound(SoundActions.BUCKET_FILL, SoundEvents.BUCKET_FILL).sound(SoundActions.BUCKET_EMPTY, SoundEvents.BUCKET_EMPTY)));
+    public static final RegistryObject<FluidType> MOR_BREW_FLUID_TYPE =  FLUID_TYPES.register("mor_brew", () -> new CustomFluidType( new ResourceLocation("block/water_still"),  new ResourceLocation("block/water_flow"), new ResourceLocation("misc/underwater"),
+            0xFF4D5474, new Vector3f(77f / 255f, 84f / 255f, 116f / 255f), FluidType.Properties.create().density(1).viscosity(15).sound(SoundActions.BUCKET_FILL, SoundEvents.BUCKET_FILL).sound(SoundActions.BUCKET_EMPTY, SoundEvents.BUCKET_EMPTY)));
+    public static final RegistryObject<FluidType> FLOWER_BREW_FLUID_TYPE =  FLUID_TYPES.register("flower_brew", () -> new CustomFluidType( new ResourceLocation("block/water_still"),  new ResourceLocation("block/water_flow"), new ResourceLocation("misc/underwater"),
+            0xFF204426, new Vector3f(32f / 255f, 68f / 255f, 38f / 255f), FluidType.Properties.create().density(1).viscosity(15).sound(SoundActions.BUCKET_FILL, SoundEvents.BUCKET_FILL).sound(SoundActions.BUCKET_EMPTY, SoundEvents.BUCKET_EMPTY)));
+
+    public static final ForgeFlowingFluid.Properties MUNDANE_BREW_FLUID_PROPERTIES = new ForgeFlowingFluid.Properties(
+            MUNDANE_BREW_FLUID_TYPE, MUNDANE_BREW_FLUID, FLOWING_MUNDANE_BREW_FLUID)
+            .slopeFindDistance(1).levelDecreasePerBlock(1).block(MUNDANE_BREW_FLUID_BLOCK)
+            .bucket(MUNDANE_BREW_BUCKET);
+    public static final ForgeFlowingFluid.Properties ALCHEMY_OIL_FLUID_PROPERTIES = new ForgeFlowingFluid.Properties(
+            ALCHEMY_OIL_FLUID_TYPE, ALCHEMY_OIL_FLUID, FLOWING_ALCHEMY_OIL_FLUID)
+            .slopeFindDistance(1).levelDecreasePerBlock(1).block(ALCHEMY_OIL_FLUID_BLOCK)
+            .bucket(ALCHEMY_OIL_BUCKET);
+    public static final ForgeFlowingFluid.Properties OIL_TEA_FLUID_PROPERTIES = new ForgeFlowingFluid.Properties(
+            OIL_TEA_FLUID_TYPE, OIL_TEA_FLUID, FLOWING_OIL_TEA_FLUID)
+            .slopeFindDistance(1).levelDecreasePerBlock(1).block(OIL_TEA_FLUID_BLOCK)
+            .bucket(OIL_TEA_BUCKET);
+    public static final ForgeFlowingFluid.Properties WISSEN_TEA_FLUID_PROPERTIES = new ForgeFlowingFluid.Properties(
+            WISSEN_TEA_FLUID_TYPE, WISSEN_TEA_FLUID, FLOWING_WISSEN_TEA_FLUID)
+            .slopeFindDistance(1).levelDecreasePerBlock(1).block(WISSEN_TEA_FLUID_BLOCK)
+            .bucket(WISSEN_TEA_BUCKET);
+    public static final ForgeFlowingFluid.Properties MUSHROOM_BREW_PROPERTIES = new ForgeFlowingFluid.Properties(
+            MUSHROOM_BREW_FLUID_TYPE, MUSHROOM_BREW_FLUID, FLOWING_MUSHROOM_BREW_FLUID)
+            .slopeFindDistance(1).levelDecreasePerBlock(1).block(MUSHROOM_BREW_FLUID_BLOCK)
+            .bucket(MUSHROOM_BREW_BUCKET);
+    public static final ForgeFlowingFluid.Properties HELLISH_MUSHROOM_BREW_FLUID_PROPERTIES = new ForgeFlowingFluid.Properties(
+            HELLISH_MUSHROOM_BREW_FLUID_TYPE, HELLISH_MUSHROOM_BREW_FLUID, FLOWING_HELLISH_MUSHROOM_BREW_FLUID)
+            .slopeFindDistance(1).levelDecreasePerBlock(1).block(HELLISH_MUSHROOM_BREW_FLUID_BLOCK)
+            .bucket(HELLISH_MUSHROOM_BREW_BUCKET);
+    public static final ForgeFlowingFluid.Properties MOR_BREW_FLUID_PROPERTIES = new ForgeFlowingFluid.Properties(
+            MOR_BREW_FLUID_TYPE, MOR_BREW_FLUID, FLOWING_MOR_BREW_FLUID)
+            .slopeFindDistance(1).levelDecreasePerBlock(1).block(MOR_BREW_FLUID_BLOCK)
+            .bucket(MOR_BREW_BUCKET);
+    public static final ForgeFlowingFluid.Properties FLOWER_BREW_FLUID_PROPERTIES = new ForgeFlowingFluid.Properties(
+            FLOWER_BREW_FLUID_TYPE,FLOWER_BREW_FLUID, FLOWING_FLOWER_BREW_FLUID)
+            .slopeFindDistance(1).levelDecreasePerBlock(1).block(FLOWER_BREW_FLUID_BLOCK)
+            .bucket(FLOWER_BREW_BUCKET);
+
     public WizardsReborn() {
         InterModComms.sendTo(CuriosApi.MODID, SlotTypeMessage.REGISTER_TYPE, () -> SlotTypePreset.BELT.getMessageBuilder().cosmetic().build());
         InterModComms.sendTo(CuriosApi.MODID, SlotTypeMessage.REGISTER_TYPE, () -> SlotTypePreset.BODY.getMessageBuilder().build());
@@ -789,6 +892,8 @@ public class WizardsReborn {
         TRUNK_PLACER_TYPES.register(eventBus);
         BLOCK_STATE_PROVIDER_TYPE.register(eventBus);
         EFFECTS.register(eventBus);
+        FLUID_TYPES.register(eventBus);
+        FLUIDS.register(eventBus);
 
         setupCrystals();
         setupMonograms();

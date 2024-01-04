@@ -1,0 +1,19 @@
+{
+  "type": "wizards_reborn:alchemy_machine",
+  "outputFluid": {
+    "fluid": "wizards_reborn:mundane_brew",
+    "amount": 250
+  },
+  "steam": 25,
+  "ingredients": [
+    {
+      "item": "minecraft:nether_wart"
+    }
+  ],
+  "fluidIngredients": [
+    {
+      "name": "minecraft:water",
+      "amount" : 250
+    }
+  ]
+}

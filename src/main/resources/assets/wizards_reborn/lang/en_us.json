@@ -173,6 +173,12 @@
   "block.wizards_reborn.alchemy_boiler": "Alchemy Boiler",
   "block.wizards_reborn.arcane_censer": "Arcane Censer",
 
+  "block.wizards_reborn.alchemy_glass": "Alchemy Glass",
+  "item.wizards_reborn.alchemy_vial": "Alchemy Vial",
+  "item.wizards_reborn.alchemy_flask": "Alchemy Flask",
+  "item.wizards_reborn.alchemy_vial_potion": "Alchemy Vial",
+  "item.wizards_reborn.alchemy_flask_potion": "Alchemy Flask",
+
   "block.wizards_reborn.white_arcane_lumos": "White Arcane Lumos",
   "block.wizards_reborn.orange_arcane_lumos": "Orange Arcane Lumos",
   "block.wizards_reborn.magenta_arcane_lumos": "Magenta Arcane Lumos",
@@ -232,6 +238,24 @@
   "item.wizards_reborn.hunger_banner_pattern": "Banner Pattern",
   "item.wizards_reborn.survival_banner_pattern": "Banner Pattern",
   "item.wizards_reborn.elevation_banner_pattern": "Banner Pattern",
+
+  "item.wizards_reborn.mundane_brew_bucket": "Mundane Brew Bucket",
+  "item.wizards_reborn.alchemy_oil_bucket": "Alchemy Oil Bucket",
+  "item.wizards_reborn.oil_tea_bucket": "Oil Tea Bucket",
+  "item.wizards_reborn.wissen_tea_bucket": "Wissen Tea Bucket",
+  "item.wizards_reborn.mushroom_brew_bucket": "Mushroom Brew Bucket",
+  "item.wizards_reborn.hellish_mushroom_brew_bucket": "Hellish Mushroom Brew Bucket",
+  "item.wizards_reborn.mor_brew_bucket": "Mor Brew Bucket",
+  "item.wizards_reborn.flower_brew_bucket": "Flower Brew Bucket",
+
+  "fluid_type.wizards_reborn.mundane_brew": "Mundane Brew",
+  "fluid_type.wizards_reborn.alchemy_oil": "Alchemy Oil",
+  "fluid_type.wizards_reborn.oil_tea": "Oil Tea",
+  "fluid_type.wizards_reborn.wissen_tea": "Wissen Tea",
+  "fluid_type.wizards_reborn.mushroom_brew": "Mushroom Brew",
+  "fluid_type.wizards_reborn.hellish_mushroom_brew": "Hellish Mushroom Brew",
+  "fluid_type.wizards_reborn.mor_brew": "Mor Brew",
+  "fluid_type.wizards_reborn.flower_brew": "Flower Brew",
 
   "lore.wizards_reborn.wissen_wand_mode.functional": "Functional Mode",
   "lore.wizards_reborn.wissen_wand_mode.receive_connect": "Receive Connect Mode",

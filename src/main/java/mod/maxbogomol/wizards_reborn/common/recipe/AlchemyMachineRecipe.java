@@ -4,6 +4,8 @@ import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import mod.maxbogomol.wizards_reborn.WizardsReborn;
+import mod.maxbogomol.wizards_reborn.api.alchemy.AlchemyPotion;
+import mod.maxbogomol.wizards_reborn.common.alchemypotion.RegisterAlchemyPotions;
 import mod.maxbogomol.wizards_reborn.utils.RecipeUtils;
 import net.minecraft.core.NonNullList;
 import net.minecraft.core.RegistryAccess;
@@ -33,8 +35,10 @@ public class AlchemyMachineRecipe implements Recipe<AlchemyMachineContext> {
     private final NonNullList<FluidIngredient> fluidInputs;
     private final int wissen;
     private final int steam;
+    private final AlchemyPotion alchemyPotion;
+    private final AlchemyPotion alchemyPotionIngredient;
 
-    public AlchemyMachineRecipe(ResourceLocation id, ItemStack output, FluidStack fluidOutput, int wissen, int steam, NonNullList<Ingredient> inputs, NonNullList<FluidIngredient> fluidInputs) {
+    public AlchemyMachineRecipe(ResourceLocation id, ItemStack output, FluidStack fluidOutput, AlchemyPotion alchemyPotion, int wissen, int steam, NonNullList<Ingredient> inputs, NonNullList<FluidIngredient> fluidInputs, AlchemyPotion alchemyPotionIngredient) {
         this.id = id;
         this.output = output;
         this.fluidOutput = fluidOutput;
@@ -42,6 +46,8 @@ public class AlchemyMachineRecipe implements Recipe<AlchemyMachineContext> {
         this.fluidInputs = fluidInputs;
         this.wissen = wissen;
         this.steam = steam;
+        this.alchemyPotion = alchemyPotion;
+        this.alchemyPotionIngredient = alchemyPotionIngredient;
     }
 
     @Override
@@ -58,12 +64,15 @@ public class AlchemyMachineRecipe implements Recipe<AlchemyMachineContext> {
 
     public static boolean matches(List<Ingredient> inputs, Container inv) {
         List<Ingredient> ingredientsMissing = new ArrayList<>(inputs);
+        List<ItemStack> items = new ArrayList<>();
         for (int i = 0; i < inv.getContainerSize(); i++) {
             ItemStack input = inv.getItem(i);
-            if (input.isEmpty()) {
-                break;
+            if (!input.isEmpty()) {
+                items.add(input);
             }
+        }
 
+        for (ItemStack input : items) {
             int stackIndex = -1;
 
             for (int j = 0; j < ingredientsMissing.size(); j++) {
@@ -122,6 +131,14 @@ public class AlchemyMachineRecipe implements Recipe<AlchemyMachineContext> {
         return fluidInputs;
     }
 
+    public AlchemyPotion getRecipeAlchemyPotion() {
+        return alchemyPotion;
+    }
+
+    public AlchemyPotion getRecipeAlchemyPotionIngredient() {
+        return alchemyPotionIngredient;
+    }
+
     public int getRecipeWissen() {
         return wissen;
     }
@@ -157,6 +174,8 @@ public class AlchemyMachineRecipe implements Recipe<AlchemyMachineContext> {
         public AlchemyMachineRecipe fromJson(ResourceLocation recipeId, JsonObject json) {
             ItemStack outputItem = ItemStack.EMPTY;
             FluidStack outputFluid = FluidStack.EMPTY;
+            AlchemyPotion alchemyPotion = RegisterAlchemyPotions.EMPTY;
+            AlchemyPotion alchemyPotionIngredient = RegisterAlchemyPotions.EMPTY;
             int wissen = 0;
             int steam = 0;
 
@@ -165,6 +184,13 @@ public class AlchemyMachineRecipe implements Recipe<AlchemyMachineContext> {
             }
             if (json.has("outputFluid")) {
                 outputFluid = RecipeUtils.deserializeFluidStack(GsonHelper.getAsJsonObject(json, "outputFluid"));
+            }
+            if (json.has("alchemyPotion")) {
+                alchemyPotion = RecipeUtils.deserializeAlchemyPotion(GsonHelper.getAsJsonObject(json, "alchemyPotion"));
+            }
+
+            if (json.has("alchemyPotionIngredient")) {
+                alchemyPotionIngredient = RecipeUtils.deserializeAlchemyPotion(GsonHelper.getAsJsonObject(json, "alchemyPotionIngredient"));
             }
 
             if (json.has("wissen")) {
@@ -192,7 +218,7 @@ public class AlchemyMachineRecipe implements Recipe<AlchemyMachineContext> {
                 }
             }
 
-            return new AlchemyMachineRecipe(recipeId, outputItem, outputFluid, wissen, steam, inputs, fluidInputs);
+            return new AlchemyMachineRecipe(recipeId, outputItem, outputFluid, alchemyPotion, wissen, steam, inputs, fluidInputs, alchemyPotionIngredient);
         }
 
         @Nullable
@@ -208,11 +234,13 @@ public class AlchemyMachineRecipe implements Recipe<AlchemyMachineContext> {
             for (int i = 0; i < fluidInputsSize; i++) {
                 fluidInputs.add(FluidIngredient.read(buffer));
             }
+            AlchemyPotion alchemyPotionIngredient = RecipeUtils.alchemyPotionFromNetwork(buffer);
             ItemStack outputItem = buffer.readItem();
             FluidStack outputFluid = buffer.readFluidStack();
+            AlchemyPotion alchemyPotion = RecipeUtils.alchemyPotionFromNetwork(buffer);
             int wissen = buffer.readInt();
             int steam = buffer.readInt();
-            return new AlchemyMachineRecipe(recipeId, outputItem, outputFluid, wissen, steam, inputs, fluidInputs);
+            return new AlchemyMachineRecipe(recipeId, outputItem, outputFluid, alchemyPotion, wissen, steam, inputs, fluidInputs, alchemyPotionIngredient);
         }
 
         @Override
@@ -225,8 +253,10 @@ public class AlchemyMachineRecipe implements Recipe<AlchemyMachineContext> {
             for (FluidIngredient input : recipe.getFluidIngredients()) {
                 input.write(buffer);
             }
+            RecipeUtils.alchemyPotionToNetwork(recipe.getRecipeAlchemyPotion(), buffer);
             buffer.writeItemStack(recipe.getResultItem(RegistryAccess.EMPTY), false);
             buffer.writeFluidStack(recipe.getResultFluid());
+            RecipeUtils.alchemyPotionToNetwork(recipe.getRecipeAlchemyPotion(), buffer);
             buffer.writeInt(recipe.getRecipeWissen());
             buffer.writeInt(recipe.getRecipeSteam());
         }

@@ -6,6 +6,7 @@ import net.minecraft.world.item.alchemy.PotionUtils;
 
 import java.awt.*;
 import java.util.ArrayList;
+import java.util.Arrays;
 
 public class AlchemyPotion {
     public String id;
@@ -13,6 +14,11 @@ public class AlchemyPotion {
 
     public AlchemyPotion(String id) {
         this.id = id;
+    }
+
+    public AlchemyPotion(String id, MobEffectInstance... effects) {
+        this.id = id;
+        this.effects = new ArrayList<>(Arrays.asList(effects));;
     }
 
     public String getId() {

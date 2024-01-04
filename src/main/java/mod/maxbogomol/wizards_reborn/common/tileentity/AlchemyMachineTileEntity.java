@@ -1,12 +1,15 @@
 package mod.maxbogomol.wizards_reborn.common.tileentity;
 
 import mod.maxbogomol.wizards_reborn.WizardsReborn;
+import mod.maxbogomol.wizards_reborn.api.alchemy.AlchemyPotionUtils;
 import mod.maxbogomol.wizards_reborn.api.alchemy.PipeConnection;
 import mod.maxbogomol.wizards_reborn.api.alchemy.SteamUtils;
 import mod.maxbogomol.wizards_reborn.api.wissen.IItemResultTileEntity;
 import mod.maxbogomol.wizards_reborn.api.wissen.IWissenWandFunctionalTileEntity;
 import mod.maxbogomol.wizards_reborn.api.wissen.WissenUtils;
 import mod.maxbogomol.wizards_reborn.client.particle.Particles;
+import mod.maxbogomol.wizards_reborn.common.item.equipment.AlchemyBottleItem;
+import mod.maxbogomol.wizards_reborn.common.item.equipment.AlchemyPotionItem;
 import mod.maxbogomol.wizards_reborn.common.recipe.AlchemyMachineContext;
 import mod.maxbogomol.wizards_reborn.common.recipe.AlchemyMachineRecipe;
 import mod.maxbogomol.wizards_reborn.utils.PacketUtils;
@@ -177,6 +180,10 @@ public class AlchemyMachineTileEntity extends PipeBaseTileEntity implements Tick
                                 startCraft = false;
 
                                 output.setCount(itemOutputHandler.getStackInSlot(0).getCount() + output.getCount());
+                                if (!AlchemyPotionUtils.isEmpty(recipe.get().getRecipeAlchemyPotion())) {
+                                    output = getAlchemyBottle();
+                                    AlchemyPotionUtils.setPotion(output, recipe.get().getRecipeAlchemyPotion());
+                                }
 
                                 itemOutputHandler.setStackInSlot(0, output);
 
@@ -455,6 +462,21 @@ public class AlchemyMachineTileEntity extends PipeBaseTileEntity implements Tick
     }
 
     public boolean isCanCraft(SimpleContainer inv, ItemStack output, AlchemyMachineRecipe recipe, boolean isCanFluid) {
+        if (!AlchemyPotionUtils.isEmpty(recipe.getRecipeAlchemyPotionIngredient())) {
+            ItemStack bottle = getAlchemyBottle();
+            if (bottle.getItem() instanceof AlchemyPotionItem item) {
+                if (AlchemyPotionUtils.getPotion(bottle) != recipe.getRecipeAlchemyPotionIngredient()) {
+                    return false;
+                }
+            } else {
+                return false;
+            }
+        }
+
+        if (!AlchemyPotionUtils.isEmpty(recipe.getRecipeAlchemyPotion())) {
+            return true;
+        }
+
         if (!recipe.getResultFluid().isEmpty() && !recipe.getResultItem(RegistryAccess.EMPTY).isEmpty()) {
             if (isCanFluid) {
                 return isCanCraftItem(inv, output);
@@ -498,13 +520,51 @@ public class AlchemyMachineTileEntity extends PipeBaseTileEntity implements Tick
         Optional<AlchemyMachineRecipe> recipe = level.getRecipeManager().getRecipeFor(WizardsReborn.ALCHEMY_MACHINE_RECIPE.get(), conext, level);
         if (recipe.isPresent()) {
             ItemStack stack = recipe.get().getResultItem(RegistryAccess.EMPTY).copy();
-            list.add(stack);
+            boolean canPotion = true;
 
-            if (!recipe.get().getResultFluid().isEmpty()) {
-                list.add(recipe.get().getResultFluid().getFluid().getBucket().getDefaultInstance().copy());
+            if (!AlchemyPotionUtils.isEmpty(recipe.get().getRecipeAlchemyPotionIngredient())) {
+                ItemStack bottle = getAlchemyBottle();
+                if (bottle.getItem() instanceof AlchemyPotionItem item) {
+                    if (AlchemyPotionUtils.getPotion(bottle) != recipe.get().getRecipeAlchemyPotionIngredient()) {
+                        canPotion = false;
+                    }
+                } else {
+                    canPotion = false;
+                }
+            }
+
+            if (canPotion) {
+                if (!stack.isEmpty()) {
+                    list.add(stack);
+                } else {
+                    if (!AlchemyPotionUtils.isEmpty(recipe.get().getRecipeAlchemyPotion())) {
+                        ItemStack bottle = getAlchemyBottle();
+                        AlchemyPotionUtils.setPotion(bottle, recipe.get().getRecipeAlchemyPotion());
+                        list.add(bottle);
+                    }
+                }
+
+                if (!recipe.get().getResultFluid().isEmpty()) {
+                    list.add(recipe.get().getResultFluid().getFluid().getBucket().getDefaultInstance().copy());
+                }
             }
         }
 
         return list;
+    }
+
+    public ItemStack getAlchemyBottle() {
+        ItemStack stack = ItemStack.EMPTY;
+
+        for (int i = 0; i < itemHandler.getSlots(); i++) {
+            if (itemHandler.getStackInSlot(i).getItem() instanceof AlchemyBottleItem item) {
+                stack = item.getPotionItem();
+            }
+            if (itemHandler.getStackInSlot(i).getItem() instanceof AlchemyPotionItem item) {
+                stack = itemHandler.getStackInSlot(i).copy();
+            }
+        }
+
+        return stack;
     }
 }

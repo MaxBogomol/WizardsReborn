@@ -278,6 +278,15 @@ public class WizardsRebornItemGroup {
                     event.accept(stack);
                 }
             }
+
+            event.accept(WizardsReborn.MUNDANE_BREW_BUCKET);
+            event.accept(WizardsReborn.ALCHEMY_OIL_BUCKET);
+            event.accept(WizardsReborn.OIL_TEA_BUCKET);
+            event.accept(WizardsReborn.WISSEN_TEA_BUCKET);
+            event.accept(WizardsReborn.MUSHROOM_BREW_BUCKET);
+            event.accept(WizardsReborn.HELLISH_MUSHROOM_BREW_BUCKET);
+            event.accept(WizardsReborn.MOR_BREW_BUCKET);
+            event.accept(WizardsReborn.FLOWER_BREW_BUCKET);
         }
     }
 }

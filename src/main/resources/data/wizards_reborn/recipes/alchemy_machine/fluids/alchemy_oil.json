@@ -1,0 +1,22 @@
+{
+  "type": "wizards_reborn:alchemy_machine",
+  "outputFluid": {
+    "fluid": "wizards_reborn:alchemy_oil",
+    "amount": 1000
+  },
+  "steam": 25,
+  "ingredients": [
+    {
+      "item": "wizards_reborn:arcane_linen"
+    },
+    {
+      "item": "wizards_reborn:arcane_linen"
+    },
+    {
+      "item": "wizards_reborn:arcane_linen"
+    },
+    {
+      "item": "wizards_reborn:arcane_linen"
+    }
+  ]
+}

@@ -118,6 +118,23 @@ public class WizardsRebornClient {
             ItemBlockRenderTypes.setRenderLayer(WizardsReborn.ARCANE_CENSER.get(), RenderType.cutout());
             ItemBlockRenderTypes.setRenderLayer(WizardsReborn.ALCHEMY_GLASS.get(), RenderType.translucent());
 
+            ItemBlockRenderTypes.setRenderLayer(WizardsReborn.MUNDANE_BREW_FLUID.get(), RenderType.translucent());
+            ItemBlockRenderTypes.setRenderLayer(WizardsReborn.FLOWING_MUNDANE_BREW_FLUID.get(), RenderType.translucent());
+            ItemBlockRenderTypes.setRenderLayer(WizardsReborn.ALCHEMY_OIL_FLUID.get(), RenderType.translucent());
+            ItemBlockRenderTypes.setRenderLayer(WizardsReborn.FLOWING_ALCHEMY_OIL_FLUID.get(), RenderType.translucent());
+            ItemBlockRenderTypes.setRenderLayer(WizardsReborn.OIL_TEA_FLUID.get(), RenderType.translucent());
+            ItemBlockRenderTypes.setRenderLayer(WizardsReborn.FLOWING_OIL_TEA_FLUID.get(), RenderType.translucent());
+            ItemBlockRenderTypes.setRenderLayer(WizardsReborn.WISSEN_TEA_FLUID.get(), RenderType.translucent());
+            ItemBlockRenderTypes.setRenderLayer(WizardsReborn.FLOWING_WISSEN_TEA_FLUID.get(), RenderType.translucent());
+            ItemBlockRenderTypes.setRenderLayer(WizardsReborn.MUSHROOM_BREW_FLUID.get(), RenderType.translucent());
+            ItemBlockRenderTypes.setRenderLayer(WizardsReborn.FLOWING_MUSHROOM_BREW_FLUID.get(), RenderType.translucent());
+            ItemBlockRenderTypes.setRenderLayer(WizardsReborn.HELLISH_MUSHROOM_BREW_FLUID.get(), RenderType.translucent());
+            ItemBlockRenderTypes.setRenderLayer(WizardsReborn.FLOWING_HELLISH_MUSHROOM_BREW_FLUID.get(), RenderType.translucent());
+            ItemBlockRenderTypes.setRenderLayer(WizardsReborn.MOR_BREW_FLUID.get(), RenderType.translucent());
+            ItemBlockRenderTypes.setRenderLayer(WizardsReborn.FLOWING_MOR_BREW_FLUID.get(), RenderType.translucent());
+            ItemBlockRenderTypes.setRenderLayer(WizardsReborn.FLOWER_BREW_FLUID.get(), RenderType.translucent());
+            ItemBlockRenderTypes.setRenderLayer(WizardsReborn.FLOWING_FLOWER_BREW_FLUID.get(), RenderType.translucent());
+
             BlockEntityRenderers.register(WizardsReborn.SIGN_TILE_ENTITY.get(), SignRenderer::new);
             BlockEntityRenderers.register(WizardsReborn.HANGING_SIGN_TILE_ENTITY.get(), HangingSignRenderer::new);
             BlockEntityRenderers.register(WizardsReborn.ARCANE_PEDESTAL_TILE_ENTITY.get(), (trd) -> new ArcanePedestalTileEntityRenderer());

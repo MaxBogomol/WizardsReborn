@@ -2,6 +2,7 @@ package mod.maxbogomol.wizards_reborn.client.gui.screen;
 
 import com.mojang.blaze3d.systems.RenderSystem;
 import mod.maxbogomol.wizards_reborn.WizardsReborn;
+import mod.maxbogomol.wizards_reborn.api.alchemy.AlchemyPotionUtils;
 import mod.maxbogomol.wizards_reborn.client.gui.container.AlchemyMachineContainer;
 import mod.maxbogomol.wizards_reborn.common.item.FluidStorageBaseItem;
 import mod.maxbogomol.wizards_reborn.common.recipe.AlchemyMachineContext;
@@ -15,7 +16,9 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.SimpleContainer;
 import net.minecraft.world.entity.player.Inventory;
+import net.minecraft.world.item.ItemStack;
 
+import java.util.List;
 import java.util.Optional;
 
 public class AlchemyMachineScreen extends AbstractContainerScreen<AlchemyMachineContainer> {
@@ -74,13 +77,12 @@ public class AlchemyMachineScreen extends AbstractContainerScreen<AlchemyMachine
             }
             inv.setItem(6, machine.itemOutputHandler.getStackInSlot(0));
 
-            AlchemyMachineContext conext = new AlchemyMachineContext(inv, machine.getTank(0), machine.getTank(1), machine.getTank(2));
-            Optional<AlchemyMachineRecipe> recipe = machine.getLevel().getRecipeManager().getRecipeFor(WizardsReborn.ALCHEMY_MACHINE_RECIPE.get(), conext, machine.getLevel());
+            List<ItemStack> items = machine.getItemsResult();
 
-            if (recipe.isPresent()) {
+            if (items.size() > 0) {
                 RenderSystem.setShaderColor(1f, 1f, 1f, 0.25f);
-                gui.renderItem(recipe.get().getResultItem(RegistryAccess.EMPTY), i + 132, j + 48);
-                gui.renderItemDecorations(Minecraft.getInstance().font, recipe.get().getResultItem(RegistryAccess.EMPTY), i + 132, j + 48);
+                gui.renderItem(items.get(0), i + 132, j + 48);
+                gui.renderItemDecorations(Minecraft.getInstance().font, items.get(0), i + 132, j + 48);
                 RenderSystem.setShaderColor(1f, 1f, 1f, 1f);
             }
         }

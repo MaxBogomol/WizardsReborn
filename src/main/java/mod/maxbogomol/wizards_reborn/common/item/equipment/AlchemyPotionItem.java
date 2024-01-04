@@ -113,16 +113,30 @@ public class AlchemyPotionItem extends Item {
         return stack;
     }
 
+    @Override
+    public Component getHighlightTip(ItemStack stack, Component displayName) {
+        AlchemyPotion potion = AlchemyPotionUtils.getPotion(stack);
+        if (!AlchemyPotionUtils.isEmpty(potion)) {
+            return displayName.copy().append(Component.literal(" (")).append(getPotionName(potion)).append(Component.literal(")"));
+        }
+
+        return displayName;
+    }
+
     @OnlyIn(Dist.CLIENT)
     @Override
     public void appendHoverText(ItemStack stack, Level world, List<Component> list, TooltipFlag flags) {
         AlchemyPotion potion = AlchemyPotionUtils.getPotion(stack);
         if (!AlchemyPotionUtils.isEmpty(potion)) {
-            Color color = potion.getColor();
-
-            list.add(Component.translatable(potion.getTranslatedName()).withStyle(Style.EMPTY.withColor(ColorUtils.packColor(255, color.getRed(), color.getGreen(), color.getBlue()))));
+            list.add(getPotionName(potion));
             PotionUtils.addPotionTooltip(potion.getEffects(), list, 1.0f);
         }
+    }
+
+    public Component getPotionName(AlchemyPotion potion) {
+        Color color = potion.getColor();
+
+        return Component.translatable(potion.getTranslatedName()).withStyle(Style.EMPTY.withColor(ColorUtils.packColor(255, color.getRed(), color.getGreen(), color.getBlue())));
     }
 
     @Override
