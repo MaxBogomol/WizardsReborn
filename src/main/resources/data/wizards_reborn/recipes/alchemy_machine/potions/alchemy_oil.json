@@ -3,7 +3,7 @@
   "alchemyPotion": {
     "alchemy_potion": "wizards_reborn:alchemy_oil"
   },
-  "steam": 25,
+  "steam": 150,
   "ingredients": [
     {
       "item": "wizards_reborn:arcane_linen"
@@ -13,6 +13,9 @@
     },
     {
       "item": "wizards_reborn:arcane_linen"
+    },
+    {
+      "item": "wizards_reborn:petals"
     },
     {
       "tag": "wizards_reborn:alchemy_bottles"

@@ -65,7 +65,7 @@ public class AlchemyMachineRecipe implements Recipe<AlchemyMachineContext> {
     public static boolean matches(List<Ingredient> inputs, Container inv) {
         List<Ingredient> ingredientsMissing = new ArrayList<>(inputs);
         List<ItemStack> items = new ArrayList<>();
-        for (int i = 0; i < inv.getContainerSize(); i++) {
+        for (int i = 0; i < 6; i++) {
             ItemStack input = inv.getItem(i);
             if (!input.isEmpty()) {
                 items.add(input);

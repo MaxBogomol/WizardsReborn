@@ -16,7 +16,7 @@
   ],
   "fluidIngredients": [
     {
-      "name": "minecraft:water",
+      "name": "wizards_reborn:alchemy_oil",
       "amount" : 1000
     }
   ]

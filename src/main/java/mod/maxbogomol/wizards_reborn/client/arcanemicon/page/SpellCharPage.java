@@ -6,6 +6,7 @@ import mod.maxbogomol.wizards_reborn.api.spell.Spell;
 import mod.maxbogomol.wizards_reborn.client.arcanemicon.ArcanemiconChapters;
 import mod.maxbogomol.wizards_reborn.client.arcanemicon.ArcanemiconGui;
 import mod.maxbogomol.wizards_reborn.client.arcanemicon.Page;
+import mod.maxbogomol.wizards_reborn.client.arcanemicon.index.ChapterHistoryEntry;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Font;
 import net.minecraft.client.gui.GuiGraphics;
@@ -40,11 +41,6 @@ public class SpellCharPage extends Page {
                     if (spell.getResearch() != null) {
                         ArcanemiconChapters.RESEARCH_MAIN.lastChapter = book.currentChapter;
                         ArcanemiconGui.currentChapter = ArcanemiconChapters.RESEARCH;
-                        ResearchPage.currentHistory = ArcanemiconGui.currentHistory;
-                        ResearchPage.historyEntries.clear();
-                        ResearchPage.historyEntries.addAll(ArcanemiconGui.historyEntries);
-                        ArcanemiconGui.currentHistory = 1;
-                        ArcanemiconGui.historyEntries.clear();
                         ArcanemiconChapters.RESEARCH_MAIN.createNap(spell);
                         Minecraft.getInstance().player.playNotifySound(SoundEvents.BOOK_PAGE_TURN, SoundSource.NEUTRAL, 1.0f, 1.0f);
                         return true;

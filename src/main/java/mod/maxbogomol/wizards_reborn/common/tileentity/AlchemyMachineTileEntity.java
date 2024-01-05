@@ -469,7 +469,7 @@ public class AlchemyMachineTileEntity extends PipeBaseTileEntity implements Tick
                     return false;
                 }
             } else {
-                return false;
+               return false;
             }
         }
 

@@ -34,8 +34,6 @@ public class ResearchPage extends Page {
     public MonogramRecipesPage recipeList;
     public Spell spell;
     public Chapter lastChapter;
-    public static List<ChapterHistoryEntry> historyEntries = new ArrayList<>();
-    public static int currentHistory = 1;
 
     public ResearchPage(boolean main) {
         super(BACKGROUND);
@@ -88,8 +86,6 @@ public class ResearchPage extends Page {
                     if (actives >= mapSize) {
                         if (mouseX >= x + 95 && mouseY >= y + 132 && mouseX <= x + 95 + 18 && mouseY <= y + 132 + 18) {
                             ArcanemiconGui.currentChapter = lastChapter;
-                            ArcanemiconGui.historyEntries = historyEntries;
-                            ArcanemiconGui.currentHistory = currentHistory;
                             PacketHandler.sendToServer(new UnlockSpellPacket(spell));
                             Minecraft.getInstance().player.playNotifySound(SoundEvents.EXPERIENCE_ORB_PICKUP, SoundSource.NEUTRAL, 1.0f, 1.0f);
                             Minecraft.getInstance().player.playNotifySound(SoundEvents.BOOK_PAGE_TURN, SoundSource.NEUTRAL, 1.0f, 1.0f);

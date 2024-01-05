@@ -155,7 +155,7 @@ public class Spell {
         ItemStack stack = player.getItemInHand(hand);
 
         CompoundTag nbt = stack.getTag();
-        if (nbt.getBoolean("crystal") && nbt.getInt("cooldown") <= 0 && WissenItemUtils.canRemoveWissen(stack, getWissenCost())) {
+        if (nbt.getBoolean("crystal") && nbt.getInt("cooldown") <= 0 && WissenItemUtils.canRemoveWissen(stack, getWissenCostWithStat(getStats(stack), player))) {
             return true;
         }
 

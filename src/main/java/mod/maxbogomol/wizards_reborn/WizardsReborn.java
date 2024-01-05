@@ -59,6 +59,7 @@ import mod.maxbogomol.wizards_reborn.common.proxy.ISidedProxy;
 import mod.maxbogomol.wizards_reborn.common.proxy.ServerProxy;
 import mod.maxbogomol.wizards_reborn.common.recipe.*;
 import mod.maxbogomol.wizards_reborn.common.spell.MagicSproutSpell;
+import mod.maxbogomol.wizards_reborn.common.spell.charge.*;
 import mod.maxbogomol.wizards_reborn.common.spell.projectile.*;
 import mod.maxbogomol.wizards_reborn.common.spell.ray.*;
 import mod.maxbogomol.wizards_reborn.common.spell.self.HeartOfNatureSpell;
@@ -232,6 +233,13 @@ public class WizardsReborn {
     public static Spell VOID_RAY_SPELL = new VoidRaySpell(MOD_ID+":void_ray", 7);
     public static Spell FROST_RAY_SPELL = new FrostRaySpell(MOD_ID+":frost_ray", 7);
     public static Spell HOLY_RAY_SPELL = new HolyRaySpell(MOD_ID+":holy_ray", 7);
+    public static Spell EARTH_CHARGE_SPELL = new EarthChargeSpell(MOD_ID+":earth_charge", 7);
+    public static Spell WATER_CHARGE_SPELL = new WaterChargeSpell(MOD_ID+":water_charge", 7);
+    public static Spell AIR_CHARGE_SPELL = new AirChargeSpell(MOD_ID+":air_charge", 7);
+    public static Spell FIRE_CHARGE_SPELL = new FireChargeSpell(MOD_ID+":fire_charge", 7);
+    public static Spell VOID_CHARGE_SPELL = new VoidChargeSpell(MOD_ID+":void_charge", 7);
+    public static Spell FROST_CHARGE_SPELL = new FrostChargeSpell(MOD_ID+":frost_charge", 7);
+    public static Spell HOLY_CHARGE_SPELL = new HolyChargeSpell(MOD_ID+":holy_charge", 7);
     public static Spell HEART_OF_NATURE_SPELL = new HeartOfNatureSpell(MOD_ID+":heart_of_nature", 7);
     public static Spell MAGIC_SPROUT_SPELL = new MagicSproutSpell(MOD_ID+":magic_sprout", 7);
 
@@ -1069,6 +1077,13 @@ public class WizardsReborn {
         Spells.register(VOID_RAY_SPELL);
         Spells.register(FROST_RAY_SPELL);
         Spells.register(HOLY_RAY_SPELL);
+        Spells.register(EARTH_CHARGE_SPELL);
+        Spells.register(WATER_CHARGE_SPELL);
+        Spells.register(AIR_CHARGE_SPELL);
+        Spells.register(FIRE_CHARGE_SPELL);
+        Spells.register(VOID_CHARGE_SPELL);
+        Spells.register(FROST_CHARGE_SPELL);
+        Spells.register(HOLY_CHARGE_SPELL);
         Spells.register(HEART_OF_NATURE_SPELL);
         Spells.register(MAGIC_SPROUT_SPELL);
     }

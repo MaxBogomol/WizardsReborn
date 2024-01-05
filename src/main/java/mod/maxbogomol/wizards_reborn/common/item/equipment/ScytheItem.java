@@ -22,6 +22,7 @@ import net.minecraft.world.item.context.UseOnContext;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.CropBlock;
+import net.minecraft.world.level.block.NetherWartBlock;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraftforge.common.ForgeMod;
 import net.minecraftforge.common.MinecraftForge;
@@ -66,7 +67,7 @@ public class ScytheItem extends SwordItem {
         BlockState state = world.getBlockState(blockPos);
         ItemStack stack = player.getItemInHand(hand);
 
-        if (state.getBlock() instanceof CropBlock) {
+        if (state.getBlock() instanceof CropBlock || state.getBlock() instanceof NetherWartBlock) {
             if (isMature(state)) {
                 if (radius != 0 && initialCall) {
                     for (int x = -radius; x <= radius; x++) {
@@ -111,12 +112,20 @@ public class ScytheItem extends SwordItem {
             return cropBlock.isMaxAge(state);
         }
 
+        if (state.getBlock() instanceof NetherWartBlock wartBlock) {
+            return state.getValue(NetherWartBlock.AGE) >= NetherWartBlock.MAX_AGE;
+        }
+
         return false;
     }
 
     private static BlockState getReplantState(BlockState state) {
         if (state.getBlock() instanceof CropBlock cropBlock) {
             return cropBlock.getStateForAge(0);
+        }
+
+        if (state.getBlock() instanceof NetherWartBlock wartBlock) {
+            return wartBlock.defaultBlockState();
         }
 
         return state;

@@ -139,12 +139,16 @@ public class RenderUtils {
 
     public static CustomItemRenderer customItemRenderer;
 
-    public static void renderItemModelInGui(ItemStack stack, int x, int y, float xSize, float ySize, float zSize) {
+    public static void renderItemModelInGui(ItemStack stack, float x, float y, float xSize, float ySize, float zSize) {
         renderItemModelInGui(stack, x, y, xSize, ySize, zSize, 0, 0, 0);
     }
 
-    public static void renderItemModelInGui(ItemStack stack, int x, int y, float xSize, float ySize, float zSize, float xRot, float yRot, float zRot) {
-        BakedModel bakedmodel = Minecraft.getInstance().getItemRenderer().getModel(stack, (Level)null, (LivingEntity)null, 0);
+    public static void renderItemModelInGui(ItemStack stack, float x, float y, float xSize, float ySize, float zSize, float xRot, float yRot, float zRot) {
+        Minecraft minecraft = Minecraft.getInstance();
+        BakedModel bakedmodel = Minecraft.getInstance().getItemRenderer().getModel(stack, minecraft.level, minecraft.player, 0);
+        if (customItemRenderer == null) {
+            customItemRenderer = new CustomItemRenderer(minecraft, minecraft.getTextureManager(), minecraft.getModelManager(), minecraft.getItemColors(), minecraft.getItemRenderer().getBlockEntityRenderer());
+        }
 
         PoseStack posestack = RenderSystem.getModelViewStack();
         posestack.pushPose();
@@ -163,7 +167,7 @@ public class RenderUtils {
             Lighting.setupForFlatItems();
         }
 
-        Minecraft.getInstance().getItemRenderer().render(stack, ItemDisplayContext.GUI, false, posestack1, multibuffersource$buffersource, 15728880, OverlayTexture.NO_OVERLAY, bakedmodel);
+        customItemRenderer.render(stack, ItemDisplayContext.GUI, false, posestack1, multibuffersource$buffersource, 15728880, OverlayTexture.NO_OVERLAY, bakedmodel);
 
         RenderSystem.disableDepthTest();
         multibuffersource$buffersource.endBatch();

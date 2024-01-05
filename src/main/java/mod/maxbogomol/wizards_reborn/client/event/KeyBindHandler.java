@@ -6,6 +6,7 @@ import mod.maxbogomol.wizards_reborn.common.item.equipment.ArcaneWandItem;
 import mod.maxbogomol.wizards_reborn.common.network.DeleteCrystalPacket;
 import mod.maxbogomol.wizards_reborn.common.network.PacketHandler;
 import net.minecraft.client.Minecraft;
+import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
@@ -30,6 +31,7 @@ public class KeyBindHandler {
             ItemStack offhand = mc.player.getOffhandItem();
             boolean open = false;
             boolean hand = true;
+            ItemStack stack = mc.player.getMainHandItem();
 
             if (!main.isEmpty() && main.getItem() instanceof ArcaneWandItem) {
                 open=true;
@@ -37,14 +39,20 @@ public class KeyBindHandler {
                 if (!offhand.isEmpty() && offhand.getItem() instanceof ArcaneWandItem) {
                     open=true;
                     hand=false;
+                    stack = offhand;
                 }
             }
 
             if (open && !player.isShiftKeyDown()) {
                 Minecraft.getInstance().setScreen(new CrystalChooseScreen(Component.empty()));
             } else if (open && player.isShiftKeyDown()) {
-                PacketHandler.sendToServer(new DeleteCrystalPacket(hand));
-                Minecraft.getInstance().player.playNotifySound(SoundEvents.AMETHYST_BLOCK_RESONATE, SoundSource.NEUTRAL, 1.0f, 1.0f);
+                CompoundTag nbt = stack.getOrCreateTag();
+                if (nbt.contains("crystal")) {
+                    if (nbt.getBoolean("crystal")) {
+                        PacketHandler.sendToServer(new DeleteCrystalPacket(hand));
+                        Minecraft.getInstance().player.playNotifySound(SoundEvents.AMETHYST_BLOCK_RESONATE, SoundSource.NEUTRAL, 1.0f, 1.0f);
+                    }
+                }
             }
         }
     }

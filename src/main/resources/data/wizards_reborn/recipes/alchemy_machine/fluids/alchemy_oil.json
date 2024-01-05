@@ -4,7 +4,7 @@
     "fluid": "wizards_reborn:alchemy_oil",
     "amount": 1000
   },
-  "steam": 25,
+  "steam": 150,
   "ingredients": [
     {
       "item": "wizards_reborn:arcane_linen"
@@ -17,6 +17,9 @@
     },
     {
       "item": "wizards_reborn:arcane_linen"
+    },
+    {
+      "item": "wizards_reborn:petals"
     }
   ]
 }

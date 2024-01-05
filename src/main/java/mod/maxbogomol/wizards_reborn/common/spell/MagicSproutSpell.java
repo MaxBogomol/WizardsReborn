@@ -3,6 +3,7 @@ package mod.maxbogomol.wizards_reborn.common.spell;
 import mod.maxbogomol.wizards_reborn.WizardsReborn;
 import mod.maxbogomol.wizards_reborn.api.crystal.CrystalUtils;
 import mod.maxbogomol.wizards_reborn.api.spell.Spell;
+import mod.maxbogomol.wizards_reborn.api.wissen.WissenItemUtils;
 import mod.maxbogomol.wizards_reborn.common.item.equipment.arcane.ArcaneArmorItem;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
@@ -41,7 +42,7 @@ public class MagicSproutSpell extends Spell {
             if (growCrop(stack, context, context.getClickedPos()) == InteractionResult.SUCCESS) {
                 if (!context.getPlayer().isShiftKeyDown()) {
                     useGrow(stack, context, 1f, 1f);
-                } else {
+                } else if (WissenItemUtils.canRemoveWissen(stack, getWissenCostWithStat(getStats(stack), context.getPlayer(), getWissenCost() * 10))) {
                     CompoundTag stats = getStats(stack);
                     int focusLevel = CrystalUtils.getStatLevel(stats, WizardsReborn.FOCUS_CRYSTAL_STAT);
                     float magicModifier = ArcaneArmorItem.getPlayerMagicModifier(context.getPlayer());
@@ -85,6 +86,6 @@ public class MagicSproutSpell extends Spell {
         setCooldown(stack, stats, (int) (getCooldown() * cooldownModifier));
         removeWissen(stack, stats, player, (int) (getWissenCost() * costModifier));
         awardStat(player, stack);
-        context.getLevel().playSound(WizardsReborn.proxy.getPlayer(), player.getX(), player.getY(), player.getZ(), WizardsReborn.SPELL_CAST_SOUND.get(), SoundSource.BLOCKS, 0.25f, (float) (1f + ((random.nextFloat() - 0.5D) / 4)));
+        context.getLevel().playSound(WizardsReborn.proxy.getPlayer(), player.getX(), player.getY(), player.getZ(), WizardsReborn.SPELL_CAST_SOUND.get(), SoundSource.PLAYERS, 0.25f, (float) (1f + ((random.nextFloat() - 0.5D) / 4)));
     }
 }

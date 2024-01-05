@@ -117,18 +117,22 @@ public class ArcanemiconGui extends Screen {
             gui.blit(BACKGROUND, guiLeft + x, guiTop + y, 383, v, 32, 16, 512, 512);
         }
 
-        if (currentHistory > 1) {
-            int x = 110 + 7, y = 155;
-            int v = 0;
-            if (mouseX >= guiLeft + x && mouseY >= guiTop + y && mouseX <= guiLeft + x + 19 && mouseY <= guiTop + y + 12) v += 12;
-            gui.blit(BACKGROUND, guiLeft + x, guiTop + y, 415, v, 19, 12, 512, 512);
-        }
+        if (currentChapter != ArcanemiconChapters.RESEARCH) {
+            if (currentHistory > 1) {
+                int x = 110 + 7, y = 155;
+                int v = 0;
+                if (mouseX >= guiLeft + x && mouseY >= guiTop + y && mouseX <= guiLeft + x + 19 && mouseY <= guiTop + y + 12)
+                    v += 12;
+                gui.blit(BACKGROUND, guiLeft + x, guiTop + y, 415, v, 19, 12, 512, 512);
+            }
 
-        if (currentHistory < historyEntries.size()) {
-            int x = 169 + 7, y = 155;
-            int v = 0;
-            if (mouseX >= guiLeft + x && mouseY >= guiTop + y && mouseX <= guiLeft + x + 19 && mouseY <= guiTop + y + 12) v += 12;
-            gui.blit(BACKGROUND, guiLeft + x, guiTop + y, 434, v, 19, 12, 512, 512);
+            if (currentHistory < historyEntries.size()) {
+                int x = 169 + 7, y = 155;
+                int v = 0;
+                if (mouseX >= guiLeft + x && mouseY >= guiTop + y && mouseX <= guiLeft + x + 19 && mouseY <= guiTop + y + 12)
+                    v += 12;
+                gui.blit(BACKGROUND, guiLeft + x, guiTop + y, 434, v, 19, 12, 512, 512);
+            }
         }
 
         for (int i = 0; i < ArcanemiconChapters.categories.size(); i ++) {
@@ -166,27 +170,29 @@ public class ArcanemiconGui extends Screen {
                 }
             }
 
-            if (currentHistory > 1) {
-                int x = 110 + 7, y = 155;
-                if (mouseX >= guiLeft + x && mouseY >= guiTop + y && mouseX <= guiLeft + x + 19 && mouseY <= guiTop + y + 12) {
-                    currentHistory = currentHistory - 1;
-                    currentChapter = historyEntries.get(currentHistory - 1).chapter;
-                    currentPage = historyEntries.get(currentHistory - 1).page;
+            if (currentChapter != ArcanemiconChapters.RESEARCH) {
+                if (currentHistory > 1) {
+                    int x = 110 + 7, y = 155;
+                    if (mouseX >= guiLeft + x && mouseY >= guiTop + y && mouseX <= guiLeft + x + 19 && mouseY <= guiTop + y + 12) {
+                        currentHistory = currentHistory - 1;
+                        currentChapter = historyEntries.get(currentHistory - 1).chapter;
+                        currentPage = historyEntries.get(currentHistory - 1).page;
 
-                    Minecraft.getInstance().player.playNotifySound(SoundEvents.BOOK_PAGE_TURN, SoundSource.NEUTRAL, 1.0f, 1.0f);
-                    return true;
+                        Minecraft.getInstance().player.playNotifySound(SoundEvents.BOOK_PAGE_TURN, SoundSource.NEUTRAL, 1.0f, 1.0f);
+                        return true;
+                    }
                 }
-            }
 
-            if (currentHistory < historyEntries.size()) {
-                int x = 169 + 7, y = 155;
-                if (mouseX >= guiLeft + x && mouseY >= guiTop + y && mouseX <= guiLeft + x + 19 && mouseY <= guiTop + y + 12) {
-                    currentHistory = currentHistory + 1;
-                    currentChapter = historyEntries.get(currentHistory - 1).chapter;
-                    currentPage = historyEntries.get(currentHistory - 1).page;
+                if (currentHistory < historyEntries.size()) {
+                    int x = 169 + 7, y = 155;
+                    if (mouseX >= guiLeft + x && mouseY >= guiTop + y && mouseX <= guiLeft + x + 19 && mouseY <= guiTop + y + 12) {
+                        currentHistory = currentHistory + 1;
+                        currentChapter = historyEntries.get(currentHistory - 1).chapter;
+                        currentPage = historyEntries.get(currentHistory - 1).page;
 
-                    Minecraft.getInstance().player.playNotifySound(SoundEvents.BOOK_PAGE_TURN, SoundSource.NEUTRAL, 1.0f, 1.0f);
-                    return true;
+                        Minecraft.getInstance().player.playNotifySound(SoundEvents.BOOK_PAGE_TURN, SoundSource.NEUTRAL, 1.0f, 1.0f);
+                        return true;
+                    }
                 }
             }
 

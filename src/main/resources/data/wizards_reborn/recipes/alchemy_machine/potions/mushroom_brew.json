@@ -1,7 +1,7 @@
 {
   "type": "wizards_reborn:alchemy_machine",
   "alchemyPotion": {
-    "alchemy_potion": "wizards_reborn:mundane_brew"
+    "alchemy_potion": "wizards_reborn:mushroom_brew"
   },
   "steam": 100,
   "ingredients": [
@@ -9,10 +9,13 @@
       "item": "minecraft:nether_wart"
     },
     {
-      "item": "minecraft:nether_wart"
+      "tag": "wizards_reborn:mushroom_brew_ingredients"
     },
     {
-      "item": "minecraft:nether_wart"
+      "tag": "wizards_reborn:mushroom_brew_ingredients"
+    },
+    {
+      "tag": "wizards_reborn:mushroom_brew_ingredients"
     },
     {
       "tag": "wizards_reborn:alchemy_potions"

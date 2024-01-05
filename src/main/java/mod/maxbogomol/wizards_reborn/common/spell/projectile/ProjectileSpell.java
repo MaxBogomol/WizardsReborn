@@ -31,7 +31,7 @@ public class ProjectileSpell extends Spell {
             setCooldown(stack, stats);
             removeWissen(stack, stats, player);
             awardStat(player, stack);
-            world.playSound(WizardsReborn.proxy.getPlayer(), player.getX(), player.getY(), player.getZ(), WizardsReborn.SPELL_CAST_SOUND.get(), SoundSource.BLOCKS, 0.25f, (float) (1f + ((random.nextFloat() - 0.5D) / 4)));
+            world.playSound(WizardsReborn.proxy.getPlayer(), player.getX(), player.getY(), player.getZ(), WizardsReborn.SPELL_CAST_SOUND.get(), SoundSource.PLAYERS, 0.25f, (float) (1f + ((random.nextFloat() - 0.5D) / 4)));
         }
     }
 
@@ -81,7 +81,7 @@ public class ProjectileSpell extends Spell {
     public void onImpact(HitResult ray, Level world, SpellProjectileEntity projectile, Player player, Entity target) {
         projectile.remove();
         projectile.burstEffect();
-        world.playSound(WizardsReborn.proxy.getPlayer(), projectile.getX(), projectile.getY(), player.getZ(), WizardsReborn.SPELL_BURST_SOUND.get(), SoundSource.BLOCKS, 0.35f, (float) (1f + ((random.nextFloat() - 0.5D) / 4)));
+        world.playSound(WizardsReborn.proxy.getPlayer(), projectile.getX(), projectile.getY(), player.getZ(), WizardsReborn.SPELL_BURST_SOUND.get(), SoundSource.PLAYERS, 0.35f, (float) (1f + ((random.nextFloat() - 0.5D) / 4)));
     }
 
     @Override
@@ -89,6 +89,6 @@ public class ProjectileSpell extends Spell {
         projectile.remove();
         projectile.setPos(ray.getLocation().x, ray.getLocation().y, ray.getLocation().z);
         projectile.burstEffect();
-        world.playSound(WizardsReborn.proxy.getPlayer(), projectile.getX(), projectile.getY(), projectile.getZ(), WizardsReborn.SPELL_BURST_SOUND.get(), SoundSource.BLOCKS, 0.35f, (float) (1f + ((random.nextFloat() - 0.5D) / 4)));
+        world.playSound(WizardsReborn.proxy.getPlayer(), projectile.getX(), projectile.getY(), projectile.getZ(), WizardsReborn.SPELL_BURST_SOUND.get(), SoundSource.PLAYERS, 0.35f, (float) (1f + ((random.nextFloat() - 0.5D) / 4)));
     }
 }

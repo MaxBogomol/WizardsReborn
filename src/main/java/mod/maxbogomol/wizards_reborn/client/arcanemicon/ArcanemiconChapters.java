@@ -738,7 +738,7 @@ public class ArcanemiconChapters {
                         new ItemStack(Items.BOOK), new ItemStack(Items.LAPIS_LAZULI), new ItemStack(Items.LAPIS_LAZULI),
                         new ItemStack(Items.QUARTZ), new ItemStack(Items.ROTTEN_FLESH), new ItemStack(Items.ROTTEN_FLESH)
                 ),
-                new ArcaneIteratorPage(new ItemStack(Items.ENCHANTED_BOOK), 5, 0, Enchantments.SMITE,
+                new ArcaneIteratorPage(new ItemStack(Items.ENCHANTED_BOOK), 5, 0, Enchantments.BANE_OF_ARTHROPODS,
                         new ItemStack(Items.BOOK), new ItemStack(Items.LAPIS_LAZULI), new ItemStack(Items.LAPIS_LAZULI),
                         new ItemStack(Items.QUARTZ), new ItemStack(Items.SPIDER_EYE), new ItemStack(Items.SPIDER_EYE)
                 ),
@@ -766,7 +766,7 @@ public class ArcanemiconChapters {
                         new ItemStack(Items.BOOK), new ItemStack(Items.LAPIS_LAZULI), new ItemStack(Items.LAPIS_LAZULI),
                         new ItemStack(Items.IRON_INGOT), new ItemStack(Items.IRON_INGOT), new ItemStack(Items.IRON_INGOT)
                 ),
-                new ArcaneIteratorPage(new ItemStack(Items.ENCHANTED_BOOK), 8, 0, Enchantments.UNBREAKING,
+                new ArcaneIteratorPage(new ItemStack(Items.ENCHANTED_BOOK), 8, 0, Enchantments.BLOCK_FORTUNE,
                         new ItemStack(Items.BOOK), new ItemStack(Items.LAPIS_LAZULI), new ItemStack(Items.LAPIS_LAZULI),
                         new ItemStack(Items.DIAMOND), new ItemStack(Items.EMERALD), new ItemStack(Items.EMERALD)
                 ),
@@ -778,7 +778,7 @@ public class ArcanemiconChapters {
                         new ItemStack(Items.BOOK), new ItemStack(Items.LAPIS_LAZULI), new ItemStack(Items.LAPIS_LAZULI),
                         new ItemStack(Items.ARROW), new ItemStack(Items.PISTON), new ItemStack(Items.PISTON)
                 ),
-                new ArcaneIteratorPage(new ItemStack(Items.ENCHANTED_BOOK), 8, 0, Enchantments.POWER_ARROWS,
+                new ArcaneIteratorPage(new ItemStack(Items.ENCHANTED_BOOK), 8, 0, Enchantments.FLAMING_ARROWS,
                         new ItemStack(Items.BOOK), new ItemStack(Items.LAPIS_LAZULI), new ItemStack(Items.LAPIS_LAZULI),
                         new ItemStack(Items.ARROW), new ItemStack(Items.BLAZE_POWDER), new ItemStack(Items.BLAZE_POWDER), new ItemStack(Items.BLAZE_POWDER), new ItemStack(Items.BLAZE_POWDER)
                 ),

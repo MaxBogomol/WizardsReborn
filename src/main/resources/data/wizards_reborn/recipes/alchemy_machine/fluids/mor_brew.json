@@ -1,7 +1,7 @@
 {
   "type": "wizards_reborn:alchemy_machine",
   "outputFluid": {
-    "fluid": "wizards_reborn:mundane_brew",
+    "fluid": "wizards_reborn:mor_brew",
     "amount": 1000
   },
   "steam": 100,
@@ -10,13 +10,13 @@
       "item": "minecraft:nether_wart"
     },
     {
-      "item": "minecraft:nether_wart"
+      "tag": "wizards_reborn:mor_brew_ingredients"
     },
     {
-      "item": "minecraft:nether_wart"
+      "tag": "wizards_reborn:mor_brew_ingredients"
     },
     {
-      "item": "minecraft:nether_wart"
+      "tag": "wizards_reborn:mor_brew_ingredients"
     }
   ],
   "fluidIngredients": [

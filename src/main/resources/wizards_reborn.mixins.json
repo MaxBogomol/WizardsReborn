@@ -18,7 +18,8 @@
     "client.PlayerRendererMixin",
     "client.RabbitRendererMixin",
     "client.FoxRendererMixin",
-    "client.ClientMusicChoiceMixin"
+    "client.ClientMusicChoiceMixin",
+    "client.LogoRendererMixin"
   ],
   "minVersion": "0.8",
   "injectors": {
