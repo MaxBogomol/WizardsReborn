@@ -31,6 +31,7 @@ public class ArcanemiconChapters {
             ALL_SPELLS, EARTH_SPELLS, WATER_SPELLS, AIR_SPELLS, FIRE_SPELLS, VOID_SPELLS,
             EARTH_PROJECTILE, WATER_PROJECTILE, AIR_PROJECTILE, FIRE_PROJECTILE, VOID_PROJECTILE, FROST_PROJECTILE, HOLY_PROJECTILE,
             EARTH_RAY, WATER_RAY, AIR_RAY, FIRE_RAY, VOID_RAY, FROST_RAY, HOLY_RAY,
+            EARTH_CHARGE, WATER_CHARGE, AIR_CHARGE, FIRE_CHARGE, VOID_CHARGE, FROST_CHARGE, HOLY_CHARGE,
             MONOGRAMS, RESEARCHES, RESEARCH, LUNAM_MONOGRAM, VITA_MONOGRAM, SOLEM_MONOGRAM, MORS_MONOGRAM, MIRACULUM_MONOGRAM, TEMPUS_MONOGRAM, STATERA_MONOGRAM, ECLIPSIS_MONOGRAM, SICCITAS_MONOGRAM, SOLSTITIUM_MONOGRAM, FAMES_MONOGRAM, RENAISSANCE_MONOGRAM, BELLUM_MONOGRAM, LUX_MONOGRAM, KARA_MONOGRAM, DEGRADATIO_MONOGRAM, PRAEDICTIONEM_MONOGRAM, EVOLUTIONIS_MONOGRAM, DARK_MONOGRAM, UNIVERSUM_MONOGRAM,
             MOR, MORTAR, ARCANE_LINEN, MUSHROOM_CAPS, WISESTONE, WISESTONE_PEDESTAL, FLUID_PIPES, STEAM_PIPES, ORBITAL_FLUID_RETAINER, ALCHEMY_FURNACE, STEAM_THERMAL_STORAGE, ALCHEMY_MACHINE, ARCACITE, MUSIC_DISC_ARCANUM, MUSIC_DISC_MOR, ARCANE_CENSER, SMOKING_PIPE;
     public static ResearchPage RESEARCH_MAIN, RESEARCH_LIST;
@@ -952,6 +953,42 @@ public class ArcanemiconChapters {
                 new SpellCharPage("wizards_reborn.arcanemicon.page.holy_ray.char", WizardsReborn.HOLY_RAY_SPELL)
         );
 
+        EARTH_CHARGE = new Chapter(
+                "wizards_reborn.arcanemicon.chapter.earth_charge",
+                new TitledSpellPage("wizards_reborn.arcanemicon.page.earth_charge", WizardsReborn.EARTH_CHARGE_SPELL),
+                new SpellCharPage("wizards_reborn.arcanemicon.page.earth_charge.char", WizardsReborn.EARTH_CHARGE_SPELL)
+        );
+        WATER_CHARGE = new Chapter(
+                "wizards_reborn.arcanemicon.chapter.water_charge",
+                new TitledSpellPage("wizards_reborn.arcanemicon.page.water_charge", WizardsReborn.WATER_CHARGE_SPELL),
+                new SpellCharPage("wizards_reborn.arcanemicon.page.water_charge.char", WizardsReborn.WATER_CHARGE_SPELL)
+        );
+        AIR_CHARGE = new Chapter(
+                "wizards_reborn.arcanemicon.chapter.air_charge",
+                new TitledSpellPage("wizards_reborn.arcanemicon.page.air_charge", WizardsReborn.AIR_CHARGE_SPELL),
+                new SpellCharPage("wizards_reborn.arcanemicon.page.air_charge.char", WizardsReborn.AIR_CHARGE_SPELL)
+        );
+        FIRE_CHARGE = new Chapter(
+                "wizards_reborn.arcanemicon.chapter.fire_charge",
+                new TitledSpellPage("wizards_reborn.arcanemicon.page.fire_charge", WizardsReborn.FIRE_CHARGE_SPELL),
+                new SpellCharPage("wizards_reborn.arcanemicon.page.fire_charge.char", WizardsReborn.FIRE_CHARGE_SPELL)
+        );
+        VOID_CHARGE = new Chapter(
+                "wizards_reborn.arcanemicon.chapter.void_charge",
+                new TitledSpellPage("wizards_reborn.arcanemicon.page.void_charge", WizardsReborn.VOID_CHARGE_SPELL),
+                new SpellCharPage("wizards_reborn.arcanemicon.page.void_charge.char", WizardsReborn.VOID_CHARGE_SPELL)
+        );
+        FROST_CHARGE = new Chapter(
+                "wizards_reborn.arcanemicon.chapter.frost_charge",
+                new TitledSpellPage("wizards_reborn.arcanemicon.page.frost_charge", WizardsReborn.FROST_CHARGE_SPELL),
+                new SpellCharPage("wizards_reborn.arcanemicon.page.frost_charge.char", WizardsReborn.FROST_CHARGE_SPELL)
+        );
+        HOLY_CHARGE = new Chapter(
+                "wizards_reborn.arcanemicon.chapter.holy_charge",
+                new TitledSpellPage("wizards_reborn.arcanemicon.page.holy_charge", WizardsReborn.HOLY_CHARGE_SPELL),
+                new SpellCharPage("wizards_reborn.arcanemicon.page.holy_charge.char", WizardsReborn.HOLY_CHARGE_SPELL)
+        );
+
         LUNAM_MONOGRAM = new Chapter(
                 "wizards_reborn.arcanemicon.chapter.lunam_monogram",
                 new TitledMonogramPage("wizards_reborn.arcanemicon.page.lunam_monogram", WizardsReborn.LUNAM_MONOGRAM),
@@ -1074,6 +1111,15 @@ public class ArcanemiconChapters {
                 ),
                 new SpellIndexPage(
                         new SpellIndexEntry(HOLY_RAY, WizardsReborn.HOLY_RAY_SPELL, RegisterKnowledges.ARCANE_WAND)
+                ),
+                new SpellIndexPage(
+                        new SpellIndexEntry(EARTH_CHARGE, WizardsReborn.EARTH_CHARGE_SPELL, RegisterKnowledges.ARCANE_WAND),
+                        new SpellIndexEntry(WATER_CHARGE, WizardsReborn.WATER_CHARGE_SPELL, RegisterKnowledges.ARCANE_WAND),
+                        new SpellIndexEntry(AIR_CHARGE, WizardsReborn.AIR_CHARGE_SPELL, RegisterKnowledges.ARCANE_WAND),
+                        new SpellIndexEntry(FIRE_CHARGE, WizardsReborn.FIRE_CHARGE_SPELL, RegisterKnowledges.ARCANE_WAND),
+                        new SpellIndexEntry(VOID_CHARGE, WizardsReborn.VOID_CHARGE_SPELL, RegisterKnowledges.VOID_CRYSTAL),
+                        new SpellIndexEntry(FROST_CHARGE, WizardsReborn.FROST_CHARGE_SPELL, RegisterKnowledges.ARCANE_WAND),
+                        new SpellIndexEntry(HOLY_CHARGE, WizardsReborn.HOLY_CHARGE_SPELL, RegisterKnowledges.ARCANE_WAND)
                 )
         );
 
@@ -1084,6 +1130,10 @@ public class ArcanemiconChapters {
                         new SpellIndexEntry(HOLY_PROJECTILE, WizardsReborn.HOLY_PROJECTILE_SPELL, RegisterKnowledges.ARCANE_WAND),
                         new SpellIndexEntry(EARTH_RAY, WizardsReborn.EARTH_RAY_SPELL, RegisterKnowledges.ARCANE_WAND),
                         new SpellIndexEntry(HOLY_RAY, WizardsReborn.HOLY_RAY_SPELL, RegisterKnowledges.ARCANE_WAND)
+                ),
+                new SpellIndexPage(
+                        new SpellIndexEntry(EARTH_CHARGE, WizardsReborn.EARTH_CHARGE_SPELL, RegisterKnowledges.ARCANE_WAND),
+                        new SpellIndexEntry(HOLY_CHARGE, WizardsReborn.HOLY_CHARGE_SPELL, RegisterKnowledges.ARCANE_WAND)
                 )
         );
 
@@ -1094,6 +1144,10 @@ public class ArcanemiconChapters {
                         new SpellIndexEntry(FROST_PROJECTILE, WizardsReborn.FROST_PROJECTILE_SPELL, RegisterKnowledges.ARCANE_WAND),
                         new SpellIndexEntry(WATER_RAY, WizardsReborn.WATER_RAY_SPELL, RegisterKnowledges.ARCANE_WAND),
                         new SpellIndexEntry(FROST_RAY, WizardsReborn.FROST_RAY_SPELL, RegisterKnowledges.ARCANE_WAND)
+                ),
+                new SpellIndexPage(
+                        new SpellIndexEntry(WATER_CHARGE, WizardsReborn.WATER_CHARGE_SPELL, RegisterKnowledges.ARCANE_WAND),
+                        new SpellIndexEntry(FROST_CHARGE, WizardsReborn.FROST_CHARGE_SPELL, RegisterKnowledges.ARCANE_WAND)
                 )
         );
 
@@ -1104,6 +1158,10 @@ public class ArcanemiconChapters {
                         new SpellIndexEntry(HOLY_PROJECTILE, WizardsReborn.HOLY_PROJECTILE_SPELL, RegisterKnowledges.ARCANE_WAND),
                         new SpellIndexEntry(AIR_RAY, WizardsReborn.AIR_RAY_SPELL, RegisterKnowledges.ARCANE_WAND),
                         new SpellIndexEntry(HOLY_RAY, WizardsReborn.HOLY_RAY_SPELL, RegisterKnowledges.ARCANE_WAND)
+                ),
+                new SpellIndexPage(
+                        new SpellIndexEntry(AIR_CHARGE, WizardsReborn.AIR_CHARGE_SPELL, RegisterKnowledges.ARCANE_WAND),
+                        new SpellIndexEntry(HOLY_CHARGE, WizardsReborn.HOLY_CHARGE_SPELL, RegisterKnowledges.ARCANE_WAND)
                 )
         );
 
@@ -1112,6 +1170,9 @@ public class ArcanemiconChapters {
                 new TitledSpellIndexPage("wizards_reborn.arcanemicon.page.fire_spells",
                         new SpellIndexEntry(FIRE_PROJECTILE, WizardsReborn.FIRE_PROJECTILE_SPELL, RegisterKnowledges.ARCANE_WAND),
                         new SpellIndexEntry(FIRE_RAY, WizardsReborn.FIRE_RAY_SPELL, RegisterKnowledges.ARCANE_WAND)
+                ),
+                new SpellIndexPage(
+                        new SpellIndexEntry(FIRE_CHARGE, WizardsReborn.FIRE_CHARGE_SPELL, RegisterKnowledges.ARCANE_WAND)
                 )
         );
 
@@ -1120,6 +1181,9 @@ public class ArcanemiconChapters {
                 new TitledSpellIndexPage("wizards_reborn.arcanemicon.page.void_spells",
                         new SpellIndexEntry(VOID_PROJECTILE, WizardsReborn.VOID_PROJECTILE_SPELL, RegisterKnowledges.VOID_CRYSTAL),
                         new SpellIndexEntry(VOID_RAY, WizardsReborn.VOID_RAY_SPELL, RegisterKnowledges.VOID_CRYSTAL)
+                ),
+                new SpellIndexPage(
+                        new SpellIndexEntry(VOID_CHARGE, WizardsReborn.VOID_CHARGE_SPELL, RegisterKnowledges.ARCANE_WAND)
                 )
         );
 

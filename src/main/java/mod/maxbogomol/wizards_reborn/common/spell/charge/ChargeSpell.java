@@ -159,7 +159,7 @@ public class ChargeSpell extends Spell {
                 updateRot(entity);
             }
 
-            if (spellData.getInt("ticks") <= 1000) {
+            if (spellData.getInt("ticks") <= 500) {
                 spellData.putInt("ticks", spellData.getInt("ticks") + 1);
             } else {
                 entity.remove();

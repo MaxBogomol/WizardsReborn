@@ -1,0 +1,7 @@
+{
+  "parent": "wizards_reborn:block/sensor_piece",
+  "textures": {
+    "particle": "wizards_reborn:block/arcane_wood_planks",
+    "sensor": "wizards_reborn:block/fluid_sensor"
+  }
+}

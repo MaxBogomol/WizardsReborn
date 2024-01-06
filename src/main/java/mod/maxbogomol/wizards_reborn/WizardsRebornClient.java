@@ -64,6 +64,15 @@ public class WizardsRebornClient {
     public static ModelResourceLocation JEWELER_TABLE_STONE_MODEl = new ModelResourceLocation(WizardsReborn.MOD_ID, "jeweler_table_stone", "");
     public static ModelResourceLocation ALTAR_OF_DROUGHT_FRAME_MODEl = new ModelResourceLocation(WizardsReborn.MOD_ID, "altar_of_drought_frame", "");
     public static ModelResourceLocation ARCANE_ITERATOR_PIECE_MODEl = new ModelResourceLocation(WizardsReborn.MOD_ID, "arcane_iterator_piece", "");
+    public static ModelResourceLocation REDSTONE_SENSOR_PIECE_MODEl = new ModelResourceLocation(WizardsReborn.MOD_ID, "redstone_sensor_piece", "");
+    public static ModelResourceLocation REDSTONE_SENSOR_PIECE_ON_MODEl = new ModelResourceLocation(WizardsReborn.MOD_ID, "redstone_sensor_piece_on", "");
+    public static ModelResourceLocation WISSEN_SENSOR_PIECE_MODEl = new ModelResourceLocation(WizardsReborn.MOD_ID, "wissen_sensor_piece", "");
+    public static ModelResourceLocation COOLDOWN_SENSOR_PIECE_MODEl = new ModelResourceLocation(WizardsReborn.MOD_ID, "cooldown_sensor_piece", "");
+    public static ModelResourceLocation HEAT_SENSOR_PIECE_MODEl = new ModelResourceLocation(WizardsReborn.MOD_ID, "heat_sensor_piece", "");
+    public static ModelResourceLocation FLUID_SENSOR_PIECE_MODEl = new ModelResourceLocation(WizardsReborn.MOD_ID, "fluid_sensor_piece", "");
+    public static ModelResourceLocation FLUID_SENSOR_PIECE_ON_MODEl = new ModelResourceLocation(WizardsReborn.MOD_ID, "fluid_sensor_piece_on", "");
+    public static ModelResourceLocation STEAM_SENSOR_PIECE_MODEl = new ModelResourceLocation(WizardsReborn.MOD_ID, "steam_sensor_piece", "");
+    public static ModelResourceLocation WISSEN_ACTIVATOR_PIECE_MODEl = new ModelResourceLocation(WizardsReborn.MOD_ID, "wissen_activator_piece", "");
 
     public static ShaderInstance GLOWING_SHADER, GLOWING_SPRITE_SHADER, GLOWING_PARTICLE_SHADER, SPRITE_PARTICLE_SHADER;
 
@@ -118,6 +127,9 @@ public class WizardsRebornClient {
             ItemBlockRenderTypes.setRenderLayer(WizardsReborn.ARCANE_CENSER.get(), RenderType.cutout());
             ItemBlockRenderTypes.setRenderLayer(WizardsReborn.ALCHEMY_GLASS.get(), RenderType.translucent());
 
+            ItemBlockRenderTypes.setRenderLayer(WizardsReborn.FLUID_SENSOR.get(), RenderType.translucent());
+            ItemBlockRenderTypes.setRenderLayer(WizardsReborn.WISSEN_ACTIVATOR.get(), RenderType.translucent());
+
             ItemBlockRenderTypes.setRenderLayer(WizardsReborn.MUNDANE_BREW_FLUID.get(), RenderType.translucent());
             ItemBlockRenderTypes.setRenderLayer(WizardsReborn.FLOWING_MUNDANE_BREW_FLUID.get(), RenderType.translucent());
             ItemBlockRenderTypes.setRenderLayer(WizardsReborn.ALCHEMY_OIL_FLUID.get(), RenderType.translucent());
@@ -150,6 +162,9 @@ public class WizardsRebornClient {
             BlockEntityRenderers.register(WizardsReborn.ARCANE_CENSER_TILE_ENTITY.get(), (trd) -> new ArcaneCenserTileEntityRenderer());
             BlockEntityRenderers.register(WizardsReborn.ARCANE_ITERATOR_TILE_ENTITY.get(), (trd) -> new ArcaneIteratorTileEntityRenderer());
 
+            BlockEntityRenderers.register(WizardsReborn.SENSOR_TILE_ENTITY.get(), (trd) -> new SensorTileEntityRenderer());
+            BlockEntityRenderers.register(WizardsReborn.WISSEN_ACTIVATOR_TILE_ENTITY.get(), (trd) -> new SensorTileEntityRenderer());
+
             BlockEntityRenderers.register(WizardsReborn.CRYSTAL_TILE_ENTITY.get(), (trd) -> new CrystalTileEntityRenderer());
 
             EntityRenderers.register(WizardsReborn.BOAT.get(), m -> new ArcaneWoodBoatModel(m, false));
@@ -177,6 +192,15 @@ public class WizardsRebornClient {
             event.register(JEWELER_TABLE_STONE_MODEl);
             event.register(ALTAR_OF_DROUGHT_FRAME_MODEl);
             event.register(ARCANE_ITERATOR_PIECE_MODEl);
+            event.register(REDSTONE_SENSOR_PIECE_MODEl);
+            event.register(REDSTONE_SENSOR_PIECE_ON_MODEl);
+            event.register(WISSEN_SENSOR_PIECE_MODEl);
+            event.register(HEAT_SENSOR_PIECE_MODEl);
+            event.register(COOLDOWN_SENSOR_PIECE_MODEl);
+            event.register(FLUID_SENSOR_PIECE_MODEl);
+            event.register(FLUID_SENSOR_PIECE_ON_MODEl);
+            event.register(STEAM_SENSOR_PIECE_MODEl);
+            event.register(WISSEN_ACTIVATOR_PIECE_MODEl);
 
             event.register(FLUID_CENTER);
             event.register(FLUID_EXTRACTOR);

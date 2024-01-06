@@ -384,6 +384,14 @@ public class WizardsReborn {
     public static final RegistryObject<Block> ALCHEMY_BOILER = BLOCKS.register("alchemy_boiler", () -> new AlchemyBoilerBlock(BlockBehaviour.Properties.copy(Blocks.POLISHED_DEEPSLATE)));
     public static final RegistryObject<Block> ARCANE_CENSER = BLOCKS.register("arcane_censer", () -> new ArcaneCenserBlock(BlockBehaviour.Properties.copy(Blocks.POLISHED_DEEPSLATE)));
 
+    public static final RegistryObject<Block> REDSTONE_SENSOR = BLOCKS.register("redstone_sensor", () -> new RedstoneSensorBlock(BlockBehaviour.Properties.copy(Blocks.OAK_PLANKS)));
+    public static final RegistryObject<Block> WISSEN_SENSOR = BLOCKS.register("wissen_sensor", () -> new WissenSensorBlock(BlockBehaviour.Properties.copy(Blocks.OAK_PLANKS)));
+    public static final RegistryObject<Block> COOLDOWN_SENSOR = BLOCKS.register("cooldown_sensor", () -> new CooldownSensorBlock(BlockBehaviour.Properties.copy(Blocks.OAK_PLANKS)));
+    public static final RegistryObject<Block> HEAT_SENSOR = BLOCKS.register("heat_sensor", () -> new HeatSensorBlock(BlockBehaviour.Properties.copy(Blocks.OAK_PLANKS)));
+    public static final RegistryObject<Block> FLUID_SENSOR = BLOCKS.register("fluid_sensor", () -> new FluidSensorBlock(BlockBehaviour.Properties.copy(Blocks.OAK_PLANKS)));
+    public static final RegistryObject<Block> STEAM_SENSOR = BLOCKS.register("steam_sensor", () -> new SteamSensorBlock(BlockBehaviour.Properties.copy(Blocks.OAK_PLANKS)));
+    public static final RegistryObject<Block> WISSEN_ACTIVATOR = BLOCKS.register("wissen_activator", () -> new WissenActivatorBlock(BlockBehaviour.Properties.copy(Blocks.OAK_PLANKS)));
+
     public static final RegistryObject<Block> ALCHEMY_GLASS = BLOCKS.register("alchemy_glass", () -> new TintedGlassBlock(BlockBehaviour.Properties.copy(Blocks.TINTED_GLASS).noOcclusion()));
 
     public static final RegistryObject<Block> WHITE_ARCANE_LUMOS = BLOCKS.register("white_arcane_lumos", () -> new ArcaneLumosBlock(ArcaneLumosBlock.Colors.WHITE, BlockBehaviour.Properties.copy(Blocks.WHITE_WOOL).lightLevel((state) -> 15).noOcclusion().noCollission().instabreak()));
@@ -578,6 +586,14 @@ public class WizardsReborn {
     public static final RegistryObject<Item> ALCHEMY_BOILER_ITEM = ITEMS.register("alchemy_boiler", () -> new BlockItem(ALCHEMY_BOILER.get(), new Item.Properties()));
     public static final RegistryObject<Item> ARCANE_CENSER_ITEM = ITEMS.register("arcane_censer", () -> new BlockItem(ARCANE_CENSER.get(), new Item.Properties()));
 
+    public static final RegistryObject<Item> REDSTONE_SENSOR_ITEM = ITEMS.register("redstone_sensor", () -> new BlockItem(REDSTONE_SENSOR.get(), new Item.Properties()));
+    public static final RegistryObject<Item> WISSEN_SENSOR_ITEM = ITEMS.register("wissen_sensor", () -> new BlockItem(WISSEN_SENSOR.get(), new Item.Properties()));
+    public static final RegistryObject<Item> COOLDOWN_SENSOR_ITEM = ITEMS.register("cooldown_sensor", () -> new BlockItem(COOLDOWN_SENSOR.get(), new Item.Properties()));
+    public static final RegistryObject<Item> HEAT_SENSOR_ITEM = ITEMS.register("heat_sensor", () -> new BlockItem(HEAT_SENSOR.get(), new Item.Properties()));
+    public static final RegistryObject<Item> FLUID_SENSOR_ITEM = ITEMS.register("fluid_sensor", () -> new BlockItem(FLUID_SENSOR.get(), new Item.Properties()));
+    public static final RegistryObject<Item> STEAM_SENSOR_ITEM = ITEMS.register("steam_sensor", () -> new BlockItem(STEAM_SENSOR.get(), new Item.Properties()));
+    public static final RegistryObject<Item> WISSEN_ACTIVATOR_ITEM = ITEMS.register("wissen_activator", () -> new BlockItem(WISSEN_ACTIVATOR.get(), new Item.Properties()));
+
     public static final RegistryObject<Item> ALCHEMY_GLASS_ITEM = ITEMS.register("alchemy_glass", () -> new BlockItem(ALCHEMY_GLASS.get(), new Item.Properties()));
     public static final RegistryObject<Item> ALCHEMY_VIAL = ITEMS.register("alchemy_vial", () -> new VialItem(new Item.Properties(), 3));
     public static final RegistryObject<Item> ALCHEMY_FLASK = ITEMS.register("alchemy_flask", () -> new FlaskItem(new Item.Properties(), 6));
@@ -681,6 +697,9 @@ public class WizardsReborn {
     public static RegistryObject<BlockEntityType<AlchemyMachineTileEntity>> ALCHEMY_MACHINE_TILE_ENTITY = TILE_ENTITIES.register("alchemy_machine", () -> BlockEntityType.Builder.of(AlchemyMachineTileEntity::new, ALCHEMY_MACHINE.get()).build(null));
     public static RegistryObject<BlockEntityType<AlchemyBoilerTileEntity>> ALCHEMY_BOILER_TILE_ENTITY = TILE_ENTITIES.register("alchemy_boiler", () -> BlockEntityType.Builder.of(AlchemyBoilerTileEntity::new, ALCHEMY_BOILER.get()).build(null));
     public static RegistryObject<BlockEntityType<ArcaneCenserTileEntity>> ARCANE_CENSER_TILE_ENTITY = TILE_ENTITIES.register("arcane_censer", () -> BlockEntityType.Builder.of(ArcaneCenserTileEntity::new, ARCANE_CENSER.get()).build(null));
+
+    public static RegistryObject<BlockEntityType<SensorTileEntity>> SENSOR_TILE_ENTITY = TILE_ENTITIES.register("sensor", () -> BlockEntityType.Builder.of(SensorTileEntity::new, REDSTONE_SENSOR.get(), WISSEN_SENSOR.get(), COOLDOWN_SENSOR.get(), HEAT_SENSOR.get(), FLUID_SENSOR.get(), STEAM_SENSOR.get()).build(null));
+    public static RegistryObject<BlockEntityType<WissenActivatorTileEntity>> WISSEN_ACTIVATOR_TILE_ENTITY = TILE_ENTITIES.register("wissen_activator", () -> BlockEntityType.Builder.of(WissenActivatorTileEntity::new, WISSEN_ACTIVATOR.get()).build(null));
 
     //ENTITIES
     public static final RegistryObject<EntityType<CustomBoatEntity>> BOAT = ENTITIES.register("boat", () -> EntityType.Builder.<CustomBoatEntity>of(CustomBoatEntity::new, MobCategory.MISC).sized(1.375f, 0.5625f).build(new ResourceLocation(MOD_ID, "arcane_wood_boat").toString()));
@@ -807,14 +826,14 @@ public class WizardsReborn {
     public static final RegistryObject<FlowingFluid> FLOWER_BREW_FLUID = FLUIDS.register("flower_brew", () -> new ForgeFlowingFluid.Source(WizardsReborn.FLOWER_BREW_FLUID_PROPERTIES));
     public static final RegistryObject<FlowingFluid> FLOWING_FLOWER_BREW_FLUID = FLUIDS.register("flowing_flower_brew", () -> new ForgeFlowingFluid.Flowing(WizardsReborn.FLOWER_BREW_FLUID_PROPERTIES));
 
-    public static final RegistryObject<LiquidBlock> MUNDANE_BREW_FLUID_BLOCK = BLOCKS.register("mundane_brew_fluid_block", () -> new LiquidBlock(WizardsReborn.MUNDANE_BREW_FLUID, BlockBehaviour.Properties.copy(Blocks.WATER)));
-    public static final RegistryObject<LiquidBlock> ALCHEMY_OIL_FLUID_BLOCK = BLOCKS.register("alchemy_oil_fluid_block", () -> new LiquidBlock(WizardsReborn.ALCHEMY_OIL_FLUID, BlockBehaviour.Properties.copy(Blocks.WATER)));
-    public static final RegistryObject<LiquidBlock> OIL_TEA_FLUID_BLOCK = BLOCKS.register("oil_tea_fluid_block", () -> new LiquidBlock(WizardsReborn.OIL_TEA_FLUID, BlockBehaviour.Properties.copy(Blocks.WATER)));
-    public static final RegistryObject<LiquidBlock> WISSEN_TEA_FLUID_BLOCK = BLOCKS.register("wissen_tea_fluid_block", () -> new LiquidBlock(WizardsReborn.MUNDANE_BREW_FLUID, BlockBehaviour.Properties.copy(Blocks.WATER)));
-    public static final RegistryObject<LiquidBlock> MUSHROOM_BREW_FLUID_BLOCK = BLOCKS.register("mushroom_brew_fluid_block", () -> new LiquidBlock(WizardsReborn.WISSEN_TEA_FLUID, BlockBehaviour.Properties.copy(Blocks.WATER)));
-    public static final RegistryObject<LiquidBlock> HELLISH_MUSHROOM_BREW_FLUID_BLOCK = BLOCKS.register("hellish_mushroom_brew_fluid_block", () -> new LiquidBlock(WizardsReborn.HELLISH_MUSHROOM_BREW_FLUID, BlockBehaviour.Properties.copy(Blocks.WATER)));
-    public static final RegistryObject<LiquidBlock> MOR_BREW_FLUID_BLOCK = BLOCKS.register("mor_brew_fluid_block", () -> new LiquidBlock(WizardsReborn.MOR_BREW_FLUID, BlockBehaviour.Properties.copy(Blocks.WATER)));
-    public static final RegistryObject<LiquidBlock> FLOWER_BREW_FLUID_BLOCK = BLOCKS.register("flower_brew_fluid_block", () -> new LiquidBlock(WizardsReborn.FLOWER_BREW_FLUID, BlockBehaviour.Properties.copy(Blocks.WATER)));
+    public static final RegistryObject<LiquidBlock> MUNDANE_BREW_FLUID_BLOCK = BLOCKS.register("mundane_brew_block", () -> new LiquidBlock(WizardsReborn.MUNDANE_BREW_FLUID, BlockBehaviour.Properties.copy(Blocks.WATER)));
+    public static final RegistryObject<LiquidBlock> ALCHEMY_OIL_FLUID_BLOCK = BLOCKS.register("alchemy_oil_block", () -> new LiquidBlock(WizardsReborn.ALCHEMY_OIL_FLUID, BlockBehaviour.Properties.copy(Blocks.WATER)));
+    public static final RegistryObject<LiquidBlock> OIL_TEA_FLUID_BLOCK = BLOCKS.register("oil_tea_block", () -> new LiquidBlock(WizardsReborn.OIL_TEA_FLUID, BlockBehaviour.Properties.copy(Blocks.WATER)));
+    public static final RegistryObject<LiquidBlock> WISSEN_TEA_FLUID_BLOCK = BLOCKS.register("wissen_tea_block", () -> new LiquidBlock(WizardsReborn.MUNDANE_BREW_FLUID, BlockBehaviour.Properties.copy(Blocks.WATER)));
+    public static final RegistryObject<LiquidBlock> MUSHROOM_BREW_FLUID_BLOCK = BLOCKS.register("mushroom_brew_block", () -> new LiquidBlock(WizardsReborn.WISSEN_TEA_FLUID, BlockBehaviour.Properties.copy(Blocks.WATER)));
+    public static final RegistryObject<LiquidBlock> HELLISH_MUSHROOM_BREW_FLUID_BLOCK = BLOCKS.register("hellish_mushroom_brew_block", () -> new LiquidBlock(WizardsReborn.HELLISH_MUSHROOM_BREW_FLUID, BlockBehaviour.Properties.copy(Blocks.WATER)));
+    public static final RegistryObject<LiquidBlock> MOR_BREW_FLUID_BLOCK = BLOCKS.register("mor_brew_block", () -> new LiquidBlock(WizardsReborn.MOR_BREW_FLUID, BlockBehaviour.Properties.copy(Blocks.WATER)));
+    public static final RegistryObject<LiquidBlock> FLOWER_BREW_FLUID_BLOCK = BLOCKS.register("flower_brew_block", () -> new LiquidBlock(WizardsReborn.FLOWER_BREW_FLUID, BlockBehaviour.Properties.copy(Blocks.WATER)));
 
     public static final RegistryObject<Item> MUNDANE_BREW_BUCKET = ITEMS.register("mundane_brew_bucket", () -> new BucketItem(MUNDANE_BREW_FLUID, new Item.Properties().craftRemainder(Items.BUCKET).stacksTo(1)));
     public static final RegistryObject<Item> ALCHEMY_OIL_BUCKET = ITEMS.register("alchemy_oil_bucket", () -> new BucketItem(ALCHEMY_OIL_FLUID, new Item.Properties().craftRemainder(Items.BUCKET).stacksTo(1)));

@@ -166,15 +166,4 @@ public class AlchemyBoilerBlock extends HorizontalDirectionalBlock implements En
     public PipeConnection getPipeConnection(BlockState state, Direction direction) {
         return PipeConnection.END;
     }
-
-    /*@Override
-    public boolean hasAnalogOutputSignal(BlockState state) {
-        return true;
-    }
-
-    @Override
-    public int getAnalogOutputSignal(BlockState blockState, Level level, BlockPos pos) {
-        OrbitalFluidRetainerTileEntity tile = (OrbitalFluidRetainerTileEntity) level.getBlockEntity(pos);
-        return Mth.floor(((float) tile.getTank().getFluidAmount() / tile.getMaxCapacity()) * 14.0F);
-    }*/
 }
