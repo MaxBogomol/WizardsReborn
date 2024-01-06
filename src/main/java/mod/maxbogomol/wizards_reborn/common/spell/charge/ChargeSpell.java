@@ -163,6 +163,7 @@ public class ChargeSpell extends Spell {
                 spellData.putInt("ticks", spellData.getInt("ticks") + 1);
             } else {
                 entity.remove();
+                entity.burstEffect();
             }
 
             if (spellData.getInt("ticks_left") <= 0) {

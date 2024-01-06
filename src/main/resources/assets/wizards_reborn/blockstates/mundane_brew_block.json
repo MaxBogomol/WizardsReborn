@@ -1,0 +1,7 @@
+{
+  "variants": {
+    "": {
+      "model": "wizards_reborn:block/mundane_brew_block"
+    }
+  }
+}

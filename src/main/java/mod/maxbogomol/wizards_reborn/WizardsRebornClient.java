@@ -73,6 +73,7 @@ public class WizardsRebornClient {
     public static ModelResourceLocation FLUID_SENSOR_PIECE_ON_MODEl = new ModelResourceLocation(WizardsReborn.MOD_ID, "fluid_sensor_piece_on", "");
     public static ModelResourceLocation STEAM_SENSOR_PIECE_MODEl = new ModelResourceLocation(WizardsReborn.MOD_ID, "steam_sensor_piece", "");
     public static ModelResourceLocation WISSEN_ACTIVATOR_PIECE_MODEl = new ModelResourceLocation(WizardsReborn.MOD_ID, "wissen_activator_piece", "");
+    public static ModelResourceLocation ITEM_SORTER_PIECE_MODEl = new ModelResourceLocation(WizardsReborn.MOD_ID, "item_sorter_piece", "");
 
     public static ShaderInstance GLOWING_SHADER, GLOWING_SPRITE_SHADER, GLOWING_PARTICLE_SHADER, SPRITE_PARTICLE_SHADER;
 
@@ -129,6 +130,7 @@ public class WizardsRebornClient {
 
             ItemBlockRenderTypes.setRenderLayer(WizardsReborn.FLUID_SENSOR.get(), RenderType.translucent());
             ItemBlockRenderTypes.setRenderLayer(WizardsReborn.WISSEN_ACTIVATOR.get(), RenderType.translucent());
+            ItemBlockRenderTypes.setRenderLayer(WizardsReborn.ITEM_SORTER.get(), RenderType.translucent());
 
             ItemBlockRenderTypes.setRenderLayer(WizardsReborn.MUNDANE_BREW_FLUID.get(), RenderType.translucent());
             ItemBlockRenderTypes.setRenderLayer(WizardsReborn.FLOWING_MUNDANE_BREW_FLUID.get(), RenderType.translucent());
@@ -164,6 +166,7 @@ public class WizardsRebornClient {
 
             BlockEntityRenderers.register(WizardsReborn.SENSOR_TILE_ENTITY.get(), (trd) -> new SensorTileEntityRenderer());
             BlockEntityRenderers.register(WizardsReborn.WISSEN_ACTIVATOR_TILE_ENTITY.get(), (trd) -> new SensorTileEntityRenderer());
+            BlockEntityRenderers.register(WizardsReborn.ITEM_SORTER_TILE_ENTITY.get(), (trd) -> new SensorTileEntityRenderer());
 
             BlockEntityRenderers.register(WizardsReborn.CRYSTAL_TILE_ENTITY.get(), (trd) -> new CrystalTileEntityRenderer());
 
@@ -201,6 +204,7 @@ public class WizardsRebornClient {
             event.register(FLUID_SENSOR_PIECE_ON_MODEl);
             event.register(STEAM_SENSOR_PIECE_MODEl);
             event.register(WISSEN_ACTIVATOR_PIECE_MODEl);
+            event.register(ITEM_SORTER_PIECE_MODEl);
 
             event.register(FLUID_CENTER);
             event.register(FLUID_EXTRACTOR);

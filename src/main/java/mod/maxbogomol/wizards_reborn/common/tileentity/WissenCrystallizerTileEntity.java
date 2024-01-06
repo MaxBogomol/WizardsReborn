@@ -50,6 +50,8 @@ public class WissenCrystallizerTileEntity extends ExposedTileSimpleInventory imp
             Optional<WissenCrystallizerRecipe> recipe = level.getRecipeManager().getRecipeFor(WizardsReborn.WISSEN_CRYSTALLIZER_RECIPE.get(), getItemHandler(), level);
             wissenInCraft =  recipe.map(WissenCrystallizerRecipe::getRecipeWissen).orElse(0);
 
+            if (sortItems()) update = true;
+
             if (wissenInCraft <= 0) {
                 wissenIsCraft = 0;
                 startCraft = false;
@@ -286,8 +288,6 @@ public class WissenCrystallizerTileEntity extends ExposedTileSimpleInventory imp
         for (int i = 0; i < getItemHandler().getContainerSize(); i++) {
             if (!getItemHandler().getItem(i).isEmpty()) {
                 size++;
-            } else {
-                break;
             }
         }
 
@@ -323,5 +323,30 @@ public class WissenCrystallizerTileEntity extends ExposedTileSimpleInventory imp
         }
 
         return list;
+    }
+
+    public boolean sortItems() {
+        List<ItemStack> stacks = new ArrayList<>();
+
+        if (getInventorySize() > 0) {
+            if (getItem(0).isEmpty()) {
+                for (int i = 0; i < 11; i++) {
+                    if (!getItem(i).isEmpty()) {
+                        stacks.add(getItem(i).copy());
+                    }
+                }
+                for (int i = 0; i < 11; i++) {
+                    removeItem(i, 1);
+                }
+
+                for (int i = 0; i < stacks.size(); i++) {
+                    setItem(i, stacks.get(i));
+                }
+
+                return true;
+            }
+        }
+
+        return false;
     }
 }

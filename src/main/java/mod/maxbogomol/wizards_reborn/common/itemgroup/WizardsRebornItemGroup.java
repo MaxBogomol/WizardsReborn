@@ -207,6 +207,7 @@ public class WizardsRebornItemGroup {
             event.accept(WizardsReborn.FLUID_SENSOR_ITEM);
             event.accept(WizardsReborn.STEAM_SENSOR_ITEM);
             event.accept(WizardsReborn.WISSEN_ACTIVATOR_ITEM);
+            event.accept(WizardsReborn.ITEM_SORTER_ITEM);
 
             event.accept(WizardsReborn.ALCHEMY_GLASS_ITEM);
             event.accept(WizardsReborn.ALCHEMY_VIAL);
