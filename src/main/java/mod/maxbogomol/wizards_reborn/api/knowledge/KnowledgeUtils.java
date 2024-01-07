@@ -142,4 +142,24 @@ public class KnowledgeUtils {
 
         return points;
     }
+
+    public static int getAllKnowledgePoints() {
+        int points = 0;
+
+        for (Knowledge knowledge : Knowledges.getKnowledges()) {
+            points = points + knowledge.getPoints();
+        }
+
+        return points;
+    }
+
+    public static int getAllSpellPoints() {
+        int points = 0;
+
+        for (Spell spell : Spells.getSpells()) {
+            points = points + spell.getPoints();
+        }
+
+        return points;
+    }
 }

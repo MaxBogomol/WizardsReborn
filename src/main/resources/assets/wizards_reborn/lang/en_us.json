@@ -173,6 +173,15 @@
   "block.wizards_reborn.alchemy_boiler": "Alchemy Boiler",
   "block.wizards_reborn.arcane_censer": "Arcane Censer",
 
+  "block.wizards_reborn.redstone_sensor": "Redstone Sensor",
+  "block.wizards_reborn.wissen_sensor": "Wissen Sensor",
+  "block.wizards_reborn.cooldown_sensor": "Cooldown Sensor",
+  "block.wizards_reborn.heat_sensor": "Heat Sensor",
+  "block.wizards_reborn.fluid_sensor": "Fluid Sensor",
+  "block.wizards_reborn.steam_sensor": "Steam Sensor",
+  "block.wizards_reborn.wissen_activator": "Wissen Activator",
+  "block.wizards_reborn.item_sorter": "Item Sorter",
+
   "block.wizards_reborn.alchemy_glass": "Alchemy Glass",
   "item.wizards_reborn.alchemy_vial": "Alchemy Vial",
   "item.wizards_reborn.alchemy_flask": "Alchemy Flask",

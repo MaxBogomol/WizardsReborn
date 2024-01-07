@@ -1,0 +1,21 @@
+{
+  "type": "wizards_reborn:arcane_workbench",
+  "pattern": [
+    "_A_",
+    "_#_",
+    "_A_",
+    "____"
+  ],
+  "key": {
+    "#": {
+      "item": "wizards_reborn:redstone_sensor"
+    },
+    "A": {
+      "item": "wizards_reborn:steam_pipe"
+    }
+  },
+  "output": {
+    "item": "wizards_reborn:steam_sensor"
+  },
+  "wissen": 100
+}

@@ -144,7 +144,7 @@ public class ChargeSpell extends Spell {
             CompoundTag spellData = entity.getSpellData();
             if (spellData.getBoolean("throw")) {
                 HitResult ray = ProjectileUtil.getHitResultOnMoveVector(entity, (e) -> {
-                    return !e.isSpectator() && e.isPickable() && (!e.getUUID().equals(entity.getEntityData().get(entity.casterId).get()) || entity.tickCount > 5);
+                    return !e.isSpectator() && e.isPickable() && (!e.getUUID().equals(entity.getEntityData().get(entity.casterId).get()) || (spellData.getInt("ticks") > 5));
                 });
                 if (ray.getType() == HitResult.Type.ENTITY) {
                     entity.onImpact(ray, ((EntityHitResult) ray).getEntity());

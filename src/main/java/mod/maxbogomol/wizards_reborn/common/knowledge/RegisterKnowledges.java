@@ -26,6 +26,17 @@ public class RegisterKnowledges {
     public static ItemKnowledge ARCACITE = new ItemKnowledge(WizardsReborn.MOD_ID+":arcacite", true, 10, WizardsReborn.ARCACITE.get());
     public static ItemKnowledge ARCANE_ITERATOR = new ItemKnowledge(WizardsReborn.MOD_ID+":arcane_iterator", true, 10, WizardsReborn.ARCANE_ITERATOR_ITEM.get());
     public static ItemKnowledge ARCANE_CENSER = new ItemKnowledge(WizardsReborn.MOD_ID+":arcane_censer", true, 10, WizardsReborn.ARCANE_CENSER_ITEM.get());
+    public static ItemKnowledge REDSTONE_SENSOR = new ItemKnowledge(WizardsReborn.MOD_ID+":redstone_sensor", false, 3, WizardsReborn.REDSTONE_SENSOR_ITEM.get());
+    public static ItemKnowledge WISSEN_SENSOR = new ItemKnowledge(WizardsReborn.MOD_ID+":wissen_sensor", false, 3, WizardsReborn.WISSEN_SENSOR_ITEM.get());
+    public static ItemKnowledge COOLDOWN_SENSOR = new ItemKnowledge(WizardsReborn.MOD_ID+":cooldown_sensor", false, 3, WizardsReborn.COOLDOWN_SENSOR_ITEM.get());
+    public static ItemKnowledge HEAT_SENSOR = new ItemKnowledge(WizardsReborn.MOD_ID+":heat_sensor", false, 3, WizardsReborn.HEAT_SENSOR_ITEM.get());
+    public static ItemKnowledge FLUID_SENSOR = new ItemKnowledge(WizardsReborn.MOD_ID+":fluid_sensor", false, 3, WizardsReborn.FLUID_SENSOR_ITEM.get());
+    public static ItemKnowledge STEAM_SENSOR = new ItemKnowledge(WizardsReborn.MOD_ID+":steam_sensor", false, 3, WizardsReborn.STEAM_SENSOR_ITEM.get());
+    public static ItemKnowledge WISSEN_ACTIVATOR = new ItemKnowledge(WizardsReborn.MOD_ID+":wissen_activator", false, 3, WizardsReborn.WISSEN_ACTIVATOR_ITEM.get());
+    public static ItemKnowledge ITEM_SORTER = new ItemKnowledge(WizardsReborn.MOD_ID+":item_sorter", false, 3, WizardsReborn.ITEM_SORTER_ITEM.get());
+    public static ItemKnowledge PETALS = new ItemKnowledge(WizardsReborn.MOD_ID+":petals", false, 2, WizardsReborn.PETALS.get());
+    public static ItemKnowledge ARCANE_WOOD_SMOKING_PIPE = new ItemKnowledge(WizardsReborn.MOD_ID+":arcane_wood_smoking_pipe", false, 7, WizardsReborn.ARCANE_WOOD_SMOKING_PIPE.get());
+    public static ItemKnowledge ALCHEMY_GLASS = new ItemKnowledge(WizardsReborn.MOD_ID+":alchemy_glass", true, 10, WizardsReborn.ALCHEMY_GLASS_ITEM.get());
 
     public static void init() {
         Knowledges.register(ARCANUM);
@@ -48,5 +59,16 @@ public class RegisterKnowledges {
         Knowledges.register(ARCACITE);
         Knowledges.register(ARCANE_ITERATOR);
         Knowledges.register(ARCANE_CENSER);
+        Knowledges.register(REDSTONE_SENSOR);
+        Knowledges.register(WISSEN_SENSOR);
+        Knowledges.register(COOLDOWN_SENSOR);
+        Knowledges.register(HEAT_SENSOR);
+        Knowledges.register(FLUID_SENSOR);
+        Knowledges.register(STEAM_SENSOR);
+        Knowledges.register(WISSEN_ACTIVATOR);
+        Knowledges.register(ITEM_SORTER);
+        Knowledges.register(PETALS);
+        Knowledges.register(ARCANE_WOOD_SMOKING_PIPE);
+        Knowledges.register(ALCHEMY_GLASS);
     }
 }

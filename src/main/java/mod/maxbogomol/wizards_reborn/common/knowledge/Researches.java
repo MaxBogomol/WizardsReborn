@@ -11,90 +11,100 @@ public class Researches {
             EARTH_RAY, WATER_RAY, AIR_RAY, FIRE_RAY, VOID_RAY, FROST_RAY, HOLY_RAY;
 
     public static void init() {
-        EARTH_PROJECTILE = new Research(10, new ResearchMapEntry(
-                WizardsReborn.LUNAM_MONOGRAM, WizardsReborn.LUNAM_MONOGRAM, WizardsReborn.SOLEM_MONOGRAM, WizardsReborn.MORS_MONOGRAM),
-                new ResearchMonogramEntry(WizardsReborn.MIRACULUM_MONOGRAM, 5),
+        EARTH_PROJECTILE = new Research(6, new ResearchMapEntry(
+                WizardsReborn.VITA_MONOGRAM, WizardsReborn.VITA_MONOGRAM),
+                new ResearchMonogramEntry(WizardsReborn.VITA_MONOGRAM, 4),
+                new ResearchMonogramEntry(WizardsReborn.MIRACULUM_MONOGRAM, 3),
                 new ResearchMonogramEntry(WizardsReborn.LUNAM_MONOGRAM, 5),
-                new ResearchMonogramEntry(WizardsReborn.SICCITAS_MONOGRAM, 5)
+                new ResearchMonogramEntry(WizardsReborn.DEGRADATIO_MONOGRAM, 3)
         );
-        WATER_PROJECTILE = new Research(10, new ResearchMapEntry(
-                WizardsReborn.LUNAM_MONOGRAM, WizardsReborn.LUNAM_MONOGRAM, WizardsReborn.SOLEM_MONOGRAM, WizardsReborn.MORS_MONOGRAM),
-                new ResearchMonogramEntry(WizardsReborn.MIRACULUM_MONOGRAM, 5),
-                new ResearchMonogramEntry(WizardsReborn.LUNAM_MONOGRAM, 5),
-                new ResearchMonogramEntry(WizardsReborn.SICCITAS_MONOGRAM, 5)
+        WATER_PROJECTILE = new Research(6, new ResearchMapEntry(
+                WizardsReborn.STATERA_MONOGRAM, WizardsReborn.DEGRADATIO_MONOGRAM),
+                new ResearchMonogramEntry(WizardsReborn.STATERA_MONOGRAM, 5),
+                new ResearchMonogramEntry(WizardsReborn.VITA_MONOGRAM, 5),
+                new ResearchMonogramEntry(WizardsReborn.DEGRADATIO_MONOGRAM, 3),
+                new ResearchMonogramEntry(WizardsReborn.KARA_MONOGRAM, 4)
         );
-        AIR_PROJECTILE = new Research(10, new ResearchMapEntry(
-                WizardsReborn.LUNAM_MONOGRAM, WizardsReborn.LUNAM_MONOGRAM, WizardsReborn.SOLEM_MONOGRAM, WizardsReborn.MORS_MONOGRAM),
-                new ResearchMonogramEntry(WizardsReborn.MIRACULUM_MONOGRAM, 5),
-                new ResearchMonogramEntry(WizardsReborn.LUNAM_MONOGRAM, 5),
-                new ResearchMonogramEntry(WizardsReborn.SICCITAS_MONOGRAM, 5)
+        AIR_PROJECTILE = new Research(6, new ResearchMapEntry(
+                WizardsReborn.FAMES_MONOGRAM,  WizardsReborn.TEMPUS_MONOGRAM),
+                new ResearchMonogramEntry(WizardsReborn.SICCITAS_MONOGRAM, 4),
+                new ResearchMonogramEntry(WizardsReborn.RENAISSANCE_MONOGRAM, 4),
+                new ResearchMonogramEntry(WizardsReborn.LUNAM_MONOGRAM, 3),
+                new ResearchMonogramEntry(WizardsReborn.FAMES_MONOGRAM, 3),
+                new ResearchMonogramEntry(WizardsReborn.TEMPUS_MONOGRAM, 5)
         );
-        FIRE_PROJECTILE = new Research(10, new ResearchMapEntry(
-                WizardsReborn.LUNAM_MONOGRAM, WizardsReborn.LUNAM_MONOGRAM, WizardsReborn.SOLEM_MONOGRAM, WizardsReborn.MORS_MONOGRAM),
-                new ResearchMonogramEntry(WizardsReborn.MIRACULUM_MONOGRAM, 5),
+        FIRE_PROJECTILE = new Research(6, new ResearchMapEntry(
+                WizardsReborn.ECLIPSIS_MONOGRAM,  WizardsReborn.LUNAM_MONOGRAM),
+                new ResearchMonogramEntry(WizardsReborn.ECLIPSIS_MONOGRAM, 5),
                 new ResearchMonogramEntry(WizardsReborn.LUNAM_MONOGRAM, 5),
-                new ResearchMonogramEntry(WizardsReborn.SICCITAS_MONOGRAM, 5)
+                new ResearchMonogramEntry(WizardsReborn.SOLEM_MONOGRAM, 4)
         );
-        VOID_PROJECTILE = new Research(10, new ResearchMapEntry(
-                WizardsReborn.LUNAM_MONOGRAM, WizardsReborn.LUNAM_MONOGRAM, WizardsReborn.SOLEM_MONOGRAM, WizardsReborn.MORS_MONOGRAM),
-                new ResearchMonogramEntry(WizardsReborn.MIRACULUM_MONOGRAM, 5),
-                new ResearchMonogramEntry(WizardsReborn.LUNAM_MONOGRAM, 5),
-                new ResearchMonogramEntry(WizardsReborn.SICCITAS_MONOGRAM, 5)
+        VOID_PROJECTILE = new Research(6, new ResearchMapEntry(
+                WizardsReborn.SOLSTITIUM_MONOGRAM,  WizardsReborn.LUX_MONOGRAM),
+                new ResearchMonogramEntry(WizardsReborn.VITA_MONOGRAM, 4),
+                new ResearchMonogramEntry(WizardsReborn.PRAEDICTIONEM_MONOGRAM, 4),
+                new ResearchMonogramEntry(WizardsReborn.LUX_MONOGRAM, 4),
+                new ResearchMonogramEntry(WizardsReborn.SOLSTITIUM_MONOGRAM, 5)
         );
-        FROST_PROJECTILE = new Research(10, new ResearchMapEntry(
-                WizardsReborn.LUNAM_MONOGRAM, WizardsReborn.LUNAM_MONOGRAM, WizardsReborn.SOLEM_MONOGRAM, WizardsReborn.MORS_MONOGRAM),
-                new ResearchMonogramEntry(WizardsReborn.MIRACULUM_MONOGRAM, 5),
-                new ResearchMonogramEntry(WizardsReborn.LUNAM_MONOGRAM, 5),
-                new ResearchMonogramEntry(WizardsReborn.SICCITAS_MONOGRAM, 5)
+        FROST_PROJECTILE = new Research(6, new ResearchMapEntry(
+                WizardsReborn.LUNAM_MONOGRAM,  WizardsReborn.TEMPUS_MONOGRAM),
+                new ResearchMonogramEntry(WizardsReborn.SOLEM_MONOGRAM, 3),
+                new ResearchMonogramEntry(WizardsReborn.LUNAM_MONOGRAM, 3),
+                new ResearchMonogramEntry(WizardsReborn.FAMES_MONOGRAM, 3),
+                new ResearchMonogramEntry(WizardsReborn.TEMPUS_MONOGRAM, 6)
         );
-        HOLY_PROJECTILE = new Research(10, new ResearchMapEntry(
-                WizardsReborn.LUNAM_MONOGRAM, WizardsReborn.LUNAM_MONOGRAM, WizardsReborn.SOLEM_MONOGRAM, WizardsReborn.MORS_MONOGRAM),
-                new ResearchMonogramEntry(WizardsReborn.MIRACULUM_MONOGRAM, 5),
-                new ResearchMonogramEntry(WizardsReborn.LUNAM_MONOGRAM, 5),
-                new ResearchMonogramEntry(WizardsReborn.SICCITAS_MONOGRAM, 5)
+        HOLY_PROJECTILE = new Research(6, new ResearchMapEntry(
+                WizardsReborn.MORS_MONOGRAM,  WizardsReborn.ECLIPSIS_MONOGRAM),
+                new ResearchMonogramEntry(WizardsReborn.ECLIPSIS_MONOGRAM, 6),
+                new ResearchMonogramEntry(WizardsReborn.DARK_MONOGRAM, 4),
+                new ResearchMonogramEntry(WizardsReborn.MORS_MONOGRAM, 3)
         );
 
         EARTH_RAY = new Research(10, new ResearchMapEntry(
-                WizardsReborn.LUNAM_MONOGRAM, WizardsReborn.LUNAM_MONOGRAM, WizardsReborn.SOLEM_MONOGRAM, WizardsReborn.MORS_MONOGRAM),
-                new ResearchMonogramEntry(WizardsReborn.MIRACULUM_MONOGRAM, 5),
-                new ResearchMonogramEntry(WizardsReborn.LUNAM_MONOGRAM, 5),
-                new ResearchMonogramEntry(WizardsReborn.SICCITAS_MONOGRAM, 5)
+                WizardsReborn.SOLSTITIUM_MONOGRAM,  WizardsReborn.PRAEDICTIONEM_MONOGRAM,  WizardsReborn.PRAEDICTIONEM_MONOGRAM,  WizardsReborn.PRAEDICTIONEM_MONOGRAM),
+                new ResearchMonogramEntry(WizardsReborn.PRAEDICTIONEM_MONOGRAM, 6),
+                new ResearchMonogramEntry(WizardsReborn.SOLSTITIUM_MONOGRAM, 4),
+                new ResearchMonogramEntry(WizardsReborn.MIRACULUM_MONOGRAM, 8)
         );
         WATER_RAY = new Research(10, new ResearchMapEntry(
-                WizardsReborn.LUNAM_MONOGRAM, WizardsReborn.LUNAM_MONOGRAM, WizardsReborn.SOLEM_MONOGRAM, WizardsReborn.MORS_MONOGRAM),
-                new ResearchMonogramEntry(WizardsReborn.MIRACULUM_MONOGRAM, 5),
-                new ResearchMonogramEntry(WizardsReborn.LUNAM_MONOGRAM, 5),
-                new ResearchMonogramEntry(WizardsReborn.SICCITAS_MONOGRAM, 5)
+                WizardsReborn.SOLSTITIUM_MONOGRAM,  WizardsReborn.MIRACULUM_MONOGRAM,  WizardsReborn.MIRACULUM_MONOGRAM,  WizardsReborn.MIRACULUM_MONOGRAM),
+                new ResearchMonogramEntry(WizardsReborn.LUNAM_MONOGRAM, 6),
+                new ResearchMonogramEntry(WizardsReborn.SOLSTITIUM_MONOGRAM, 4),
+                new ResearchMonogramEntry(WizardsReborn.MIRACULUM_MONOGRAM, 8)
         );
         AIR_RAY = new Research(10, new ResearchMapEntry(
-                WizardsReborn.LUNAM_MONOGRAM, WizardsReborn.LUNAM_MONOGRAM, WizardsReborn.SOLEM_MONOGRAM, WizardsReborn.MORS_MONOGRAM),
-                new ResearchMonogramEntry(WizardsReborn.MIRACULUM_MONOGRAM, 5),
-                new ResearchMonogramEntry(WizardsReborn.LUNAM_MONOGRAM, 5),
-                new ResearchMonogramEntry(WizardsReborn.SICCITAS_MONOGRAM, 5)
+                WizardsReborn.SOLSTITIUM_MONOGRAM,  WizardsReborn.BELLUM_MONOGRAM,  WizardsReborn.BELLUM_MONOGRAM,  WizardsReborn.SOLSTITIUM_MONOGRAM),
+                new ResearchMonogramEntry(WizardsReborn.BELLUM_MONOGRAM, 6),
+                new ResearchMonogramEntry(WizardsReborn.SOLSTITIUM_MONOGRAM, 7),
+                new ResearchMonogramEntry(WizardsReborn.MIRACULUM_MONOGRAM, 4)
         );
         FIRE_RAY = new Research(10, new ResearchMapEntry(
-                WizardsReborn.LUNAM_MONOGRAM, WizardsReborn.LUNAM_MONOGRAM, WizardsReborn.SOLEM_MONOGRAM, WizardsReborn.MORS_MONOGRAM),
-                new ResearchMonogramEntry(WizardsReborn.MIRACULUM_MONOGRAM, 5),
-                new ResearchMonogramEntry(WizardsReborn.LUNAM_MONOGRAM, 5),
-                new ResearchMonogramEntry(WizardsReborn.SICCITAS_MONOGRAM, 5)
+                WizardsReborn.PRAEDICTIONEM_MONOGRAM,  WizardsReborn.ECLIPSIS_MONOGRAM,  WizardsReborn.VITA_MONOGRAM,  WizardsReborn.VITA_MONOGRAM),
+                new ResearchMonogramEntry(WizardsReborn.PRAEDICTIONEM_MONOGRAM, 4),
+                new ResearchMonogramEntry(WizardsReborn.SOLSTITIUM_MONOGRAM, 4),
+                new ResearchMonogramEntry(WizardsReborn.EVOLUTIONIS_MONOGRAM, 3),
+                new ResearchMonogramEntry(WizardsReborn.ECLIPSIS_MONOGRAM, 5),
+                new ResearchMonogramEntry(WizardsReborn.VITA_MONOGRAM, 6)
         );
         VOID_RAY = new Research(10, new ResearchMapEntry(
-                WizardsReborn.LUNAM_MONOGRAM, WizardsReborn.LUNAM_MONOGRAM, WizardsReborn.SOLEM_MONOGRAM, WizardsReborn.MORS_MONOGRAM),
-                new ResearchMonogramEntry(WizardsReborn.MIRACULUM_MONOGRAM, 5),
-                new ResearchMonogramEntry(WizardsReborn.LUNAM_MONOGRAM, 5),
-                new ResearchMonogramEntry(WizardsReborn.SICCITAS_MONOGRAM, 5)
+                WizardsReborn.RENAISSANCE_MONOGRAM,  WizardsReborn.LUNAM_MONOGRAM,  WizardsReborn.MORS_MONOGRAM,  WizardsReborn.LUNAM_MONOGRAM),
+                new ResearchMonogramEntry(WizardsReborn.LUNAM_MONOGRAM, 6),
+                new ResearchMonogramEntry(WizardsReborn.RENAISSANCE_MONOGRAM, 3),
+                new ResearchMonogramEntry(WizardsReborn.MORS_MONOGRAM, 7)
         );
         FROST_RAY = new Research(10, new ResearchMapEntry(
-                WizardsReborn.LUNAM_MONOGRAM, WizardsReborn.LUNAM_MONOGRAM, WizardsReborn.SOLEM_MONOGRAM, WizardsReborn.MORS_MONOGRAM),
-                new ResearchMonogramEntry(WizardsReborn.MIRACULUM_MONOGRAM, 5),
-                new ResearchMonogramEntry(WizardsReborn.LUNAM_MONOGRAM, 5),
-                new ResearchMonogramEntry(WizardsReborn.SICCITAS_MONOGRAM, 5)
+                WizardsReborn.LUNAM_MONOGRAM,  WizardsReborn.TEMPUS_MONOGRAM,  WizardsReborn.TEMPUS_MONOGRAM,  WizardsReborn.TEMPUS_MONOGRAM),
+                new ResearchMonogramEntry(WizardsReborn.LUNAM_MONOGRAM, 4),
+                new ResearchMonogramEntry(WizardsReborn.TEMPUS_MONOGRAM, 6),
+                new ResearchMonogramEntry(WizardsReborn.VITA_MONOGRAM, 3),
+                new ResearchMonogramEntry(WizardsReborn.UNIVERSUM_MONOGRAM, 7)
         );
-        HOLY_RAY = new Research(12, new ResearchMapEntry(
-                WizardsReborn.LUNAM_MONOGRAM, WizardsReborn.LUNAM_MONOGRAM, WizardsReborn.SOLEM_MONOGRAM, WizardsReborn.MORS_MONOGRAM),
-                new ResearchMonogramEntry(WizardsReborn.MIRACULUM_MONOGRAM, 5),
-                new ResearchMonogramEntry(WizardsReborn.LUNAM_MONOGRAM, 5),
-                new ResearchMonogramEntry(WizardsReborn.SICCITAS_MONOGRAM, 5)
+        HOLY_RAY = new Research(10, new ResearchMapEntry(
+                WizardsReborn.SICCITAS_MONOGRAM,  WizardsReborn.SICCITAS_MONOGRAM,  WizardsReborn.MORS_MONOGRAM,  WizardsReborn.MORS_MONOGRAM),
+                new ResearchMonogramEntry(WizardsReborn.SOLEM_MONOGRAM, 4),
+                new ResearchMonogramEntry(WizardsReborn.VITA_MONOGRAM, 6),
+                new ResearchMonogramEntry(WizardsReborn.SICCITAS_MONOGRAM, 5),
+                new ResearchMonogramEntry(WizardsReborn.MORS_MONOGRAM, 7)
         );
 
         WizardsReborn.EARTH_PROJECTILE_SPELL.setResearch(EARTH_PROJECTILE);

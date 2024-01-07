@@ -1,0 +1,24 @@
+{
+  "type": "wizards_reborn:arcane_workbench",
+  "pattern": [
+    "_W_",
+    "A#A",
+    "___",
+    "____"
+  ],
+  "key": {
+    "#": {
+      "item": "wizards_reborn:wissen_sensor"
+    },
+    "A": {
+      "item": "wizards_reborn:arcanum"
+    },
+    "W": {
+      "item": "wizards_reborn:wissen_wand"
+    }
+  },
+  "output": {
+    "item": "wizards_reborn:wissen_activator"
+  },
+  "wissen": 500
+}

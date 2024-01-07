@@ -1,0 +1,28 @@
+{
+  "type": "wizards_reborn:arcane_workbench",
+  "pattern": [
+    "_G_",
+    "G#G",
+    "_G_",
+    "C_R_"
+  ],
+  "key": {
+    "#": {
+      "item": "wizards_reborn:arcane_wood_planks"
+    },
+    "G": {
+      "item": "wizards_reborn:arcane_gold_nugget"
+    },
+    "C": {
+      "item": "minecraft:comparator"
+    },
+    "R": {
+      "item": "minecraft:redstone"
+    }
+  },
+  "output": {
+    "item": "wizards_reborn:redstone_sensor",
+    "count": 2
+  },
+  "wissen": 150
+}

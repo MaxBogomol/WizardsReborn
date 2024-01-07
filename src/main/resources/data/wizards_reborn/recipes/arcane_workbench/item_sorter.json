@@ -1,0 +1,27 @@
+{
+  "type": "wizards_reborn:arcane_workbench",
+  "pattern": [
+    "_C_",
+    "G#G",
+    "_R_",
+    "____"
+  ],
+  "key": {
+    "#": {
+      "item": "wizards_reborn:redstone_sensor"
+    },
+    "C": {
+      "item": "minecraft:chest"
+    },
+    "G": {
+      "item": "wizards_reborn:alchemy_glass"
+    },
+    "R": {
+      "item": "minecraft:redstone_block"
+    }
+  },
+  "output": {
+    "item": "wizards_reborn:item_sorter"
+  },
+  "wissen": 500
+}

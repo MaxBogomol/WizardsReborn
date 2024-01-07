@@ -85,9 +85,9 @@ public class AlchemyFurnaceScreen extends AbstractContainerScreen<AlchemyFurnace
             List<ItemStack> items = furnace.getItemsResult();
 
             if (items.size() > 0) {
-                RenderSystem.setShaderColor(1f, 1f, 1f, 0.25f);
                 gui.renderItem(items.get(0), i + 132, j + 48);
-                gui.renderItemDecorations(Minecraft.getInstance().font, items.get(0), i + 132, j + 48);
+                RenderSystem.setShaderColor(1f, 1f, 1f, 0.25f);
+                gui.renderItemDecorations(Minecraft.getInstance().font, items.get(0), i + 132, j + 48, String.valueOf(items.get(0).getCount()));
                 RenderSystem.setShaderColor(1f, 1f, 1f, 1f);
             }
         }

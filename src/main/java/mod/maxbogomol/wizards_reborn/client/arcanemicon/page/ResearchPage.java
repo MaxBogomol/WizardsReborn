@@ -6,8 +6,10 @@ import mod.maxbogomol.wizards_reborn.api.monogram.MonogramMapEntry;
 import mod.maxbogomol.wizards_reborn.api.monogram.MonogramRecipe;
 import mod.maxbogomol.wizards_reborn.api.monogram.Monograms;
 import mod.maxbogomol.wizards_reborn.api.spell.Spell;
-import mod.maxbogomol.wizards_reborn.client.arcanemicon.*;
-import mod.maxbogomol.wizards_reborn.client.arcanemicon.index.ChapterHistoryEntry;
+import mod.maxbogomol.wizards_reborn.client.arcanemicon.ArcanemiconChapters;
+import mod.maxbogomol.wizards_reborn.client.arcanemicon.ArcanemiconGui;
+import mod.maxbogomol.wizards_reborn.client.arcanemicon.Chapter;
+import mod.maxbogomol.wizards_reborn.client.arcanemicon.Page;
 import mod.maxbogomol.wizards_reborn.common.network.PacketHandler;
 import mod.maxbogomol.wizards_reborn.common.network.UnlockSpellPacket;
 import net.minecraft.client.Minecraft;
@@ -21,7 +23,10 @@ import net.minecraft.world.phys.Vec2;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Random;
 
 public class ResearchPage extends Page {
     public static final ResourceLocation BACKGROUND = new ResourceLocation(WizardsReborn.MOD_ID, "textures/gui/arcanemicon/monogram_page.png");

@@ -1,0 +1,21 @@
+{
+  "type": "wizards_reborn:arcane_workbench",
+  "pattern": [
+    "_A_",
+    "_#_",
+    "___",
+    "____"
+  ],
+  "key": {
+    "#": {
+      "item": "wizards_reborn:redstone_sensor"
+    },
+    "A": {
+      "item": "minecraft:furnace"
+    }
+  },
+  "output": {
+    "item": "wizards_reborn:heat_sensor"
+  },
+  "wissen": 100
+}
