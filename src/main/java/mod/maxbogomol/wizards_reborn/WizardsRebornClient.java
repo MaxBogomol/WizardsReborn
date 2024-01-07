@@ -165,6 +165,7 @@ public class WizardsRebornClient {
             BlockEntityRenderers.register(WizardsReborn.ARCANE_ITERATOR_TILE_ENTITY.get(), (trd) -> new ArcaneIteratorTileEntityRenderer());
 
             BlockEntityRenderers.register(WizardsReborn.SENSOR_TILE_ENTITY.get(), (trd) -> new SensorTileEntityRenderer());
+            BlockEntityRenderers.register(WizardsReborn.FLUID_SENSOR_TILE_ENTITY.get(), (trd) -> new FluidSensorTileEntityRenderer());
             BlockEntityRenderers.register(WizardsReborn.WISSEN_ACTIVATOR_TILE_ENTITY.get(), (trd) -> new SensorTileEntityRenderer());
             BlockEntityRenderers.register(WizardsReborn.ITEM_SORTER_TILE_ENTITY.get(), (trd) -> new SensorTileEntityRenderer());
 

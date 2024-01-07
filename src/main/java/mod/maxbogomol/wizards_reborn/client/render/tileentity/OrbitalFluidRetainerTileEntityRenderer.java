@@ -19,7 +19,7 @@ public class OrbitalFluidRetainerTileEntityRenderer implements BlockEntityRender
 
     FluidCuboid cube = new FluidCuboid(new Vector3f(0, 0, 0), new Vector3f(8, 8, 8), FluidCuboid.DEFAULT_FACES);
     FluidCuboid cube_large = new FluidCuboid(new Vector3f(0, 0, 0), new Vector3f(2, 2, 2), FluidCuboid.DEFAULT_FACES);
-    FluidCuboid cube_tiny = new FluidCuboid(new Vector3f(0, 0, 0), new Vector3f(1, 1, 1), FluidCuboid.DEFAULT_FACES); //medium
+    FluidCuboid cube_tiny = new FluidCuboid(new Vector3f(0, 0, 0), new Vector3f(1, 1, 1), FluidCuboid.DEFAULT_FACES);
 
     public OrbitalFluidRetainerTileEntityRenderer() {}
 
