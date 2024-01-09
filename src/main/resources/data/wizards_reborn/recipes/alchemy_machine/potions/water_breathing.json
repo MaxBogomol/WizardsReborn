@@ -1,0 +1,21 @@
+{
+  "type": "wizards_reborn:alchemy_machine",
+  "alchemyPotion": {
+    "alchemy_potion": "wizards_reborn:water_breathing"
+  },
+  "steam": 200,
+  "ingredients": [
+    {
+      "tag": "wizards_reborn:alchemy_potions"
+    },
+    {
+      "item": "minecraft:pufferfish"
+    },
+    {
+      "item": "minecraft:redstone"
+    }
+  ],
+  "alchemyPotionIngredient": {
+    "alchemy_potion": "wizards_reborn:mundane_brew"
+  }
+}

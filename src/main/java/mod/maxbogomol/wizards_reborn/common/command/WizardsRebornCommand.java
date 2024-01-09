@@ -340,12 +340,8 @@ public class WizardsRebornCommand {
             for (int iii = 0; iii < 1000; iii++) {
                 Monogram monogram = Monograms.getMonograms().get(random.nextInt(0, Monograms.size()));
 
-                if (maxMap.size() > max - 1) {
+                if (maxMap.size() > max - 2) {
                     monogram = maxMap.get(random.nextInt(0, maxMap.size()));
-                } else {
-                    if (!maxMap.contains(monogram)) {
-                        maxMap.add(monogram);
-                    }
                 }
 
                 for (MonogramRecipe recipe : Monograms.getRecipes().values()) {
@@ -383,6 +379,11 @@ public class WizardsRebornCommand {
                 }
 
                 if (add) {
+                    if (!(maxMap.size() > max - 2)) {
+                        if (!maxMap.contains(monogram)) {
+                            maxMap.add(monogram);
+                        }
+                    }
                     map.add(monogram);
                     break;
                 }

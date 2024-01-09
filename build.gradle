@@ -111,6 +111,7 @@ dependencies {
 
     implementation fg.deobf('team.chisel.ctm:CTM:1.20.1-1.1.8+6')
     implementation fg.deobf("curse.maven:config-menus-forge-544048:4672356")
+    implementation fg.deobf("curse.maven:model-gap-fix-676136:4607206")
 }
 
 jar {

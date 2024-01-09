@@ -144,7 +144,7 @@ public class AlchemyMachineBlock extends HorizontalDirectionalBlock implements E
         return InteractionResult.PASS;
     }
 
-    private MenuProvider createContainerProvider(Level worldIn, BlockPos pos) {
+    public MenuProvider createContainerProvider(Level worldIn, BlockPos pos) {
         return new MenuProvider() {
             @Override
             public Component getDisplayName() {

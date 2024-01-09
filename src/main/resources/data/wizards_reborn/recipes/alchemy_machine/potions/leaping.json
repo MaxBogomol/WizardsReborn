@@ -1,0 +1,24 @@
+{
+  "type": "wizards_reborn:alchemy_machine",
+  "alchemyPotion": {
+    "alchemy_potion": "wizards_reborn:leaping"
+  },
+  "steam": 200,
+  "ingredients": [
+    {
+      "tag": "wizards_reborn:alchemy_potions"
+    },
+    {
+      "item": "minecraft:rabbit_foot"
+    },
+    {
+      "item": "minecraft:redstone"
+    },
+    {
+      "item": "minecraft:glowstone_dust"
+    }
+  ],
+  "alchemyPotionIngredient": {
+    "alchemy_potion": "wizards_reborn:mundane_brew"
+  }
+}

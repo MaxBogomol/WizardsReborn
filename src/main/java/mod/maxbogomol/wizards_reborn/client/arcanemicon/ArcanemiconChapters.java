@@ -27,7 +27,8 @@ public class ArcanemiconChapters {
     public static List<Category> categories = new ArrayList<>();
     public static Category ARCANE_NATURE, SPELLS, CRYSTALS_RITUALS, ALCHEMY;
     public static Chapter ARCANE_NATURE_INDEX, SPELLS_INDEX, CRYSTALS_RITUALS_INDEX, ALCHEMY_INDEX,
-            ARCANUM, ARCANUM_DUST_TRANSMUTATION, ARCANE_WOOD, ARCANE_GOLD, SCYTHES, TRINKETS, ARCANE_WOOD_BOW, BANNER_PATTERNS, WISSEN, WISSEN_TRANSLATOR, ARCANE_PEDESTAL, WISSEN_ALTAR, WISSEN_CRYSTALLIZER, ARCANE_WORKBENCH, ARCANE_LUMOS, CRYSTALS, ARCANE_WAND, WISSEN_CELL, ALTAR_OF_DROUGHT, ARCANE_FORTRESS_ARMOR, INVENTOR_WIZARD_ARMOR, ARCANE_WOOD_CANE, ARCANE_ITERATOR, WISSEN_KEYCHAIN,
+            ARCANUM, ARCANUM_DUST_TRANSMUTATION, ARCANE_WOOD, ARCANE_GOLD, SCYTHES, TRINKETS, ARCANE_WOOD_BOW, BANNER_PATTERNS, WISSEN, WISSEN_TRANSLATOR, ARCANE_PEDESTAL, WISSEN_ALTAR, WISSEN_CRYSTALLIZER, ARCANE_WORKBENCH, ARCANE_LUMOS, CRYSTALS, ARCANE_WAND, AUTOMATION, WISSEN_CELL, ALTAR_OF_DROUGHT, ARCANE_FORTRESS_ARMOR, INVENTOR_WIZARD_ARMOR, ARCANE_WOOD_CANE, ARCANE_ITERATOR, WISSEN_KEYCHAIN,
+            REDSTONE_SENSOR, WISSEN_SENSOR, COOLDOWN_SENSOR, HEAT_SENSOR, FLUID_SENSOR, STEAM_SENSOR, WISSEN_ACTIVATOR, ITEM_SORTER,
             ALL_SPELLS, EARTH_SPELLS, WATER_SPELLS, AIR_SPELLS, FIRE_SPELLS, VOID_SPELLS,
             EARTH_PROJECTILE, WATER_PROJECTILE, AIR_PROJECTILE, FIRE_PROJECTILE, VOID_PROJECTILE, FROST_PROJECTILE, HOLY_PROJECTILE,
             EARTH_RAY, WATER_RAY, AIR_RAY, FIRE_RAY, VOID_RAY, FROST_RAY, HOLY_RAY,
@@ -556,6 +557,117 @@ public class ArcanemiconChapters {
                 )
         );
 
+        REDSTONE_SENSOR = new Chapter(
+                "wizards_reborn.arcanemicon.chapter.redstone_sensor",
+                new TitledBlockPage("wizards_reborn.arcanemicon.page.redstone_sensor",
+                        new BlockEntry(new ItemStack(WizardsReborn.ARCANE_PEDESTAL_ITEM.get()), new ItemStack(WizardsReborn.REDSTONE_SENSOR_ITEM.get()))
+                ),
+                new ArcaneWorkbenchPage(new ItemStack(WizardsReborn.REDSTONE_SENSOR_ITEM.get()),
+                        ItemStack.EMPTY, new ItemStack(WizardsReborn.ARCANE_GOLD_NUGGET.get()), ItemStack.EMPTY,
+                        new ItemStack(WizardsReborn.ARCANE_GOLD_NUGGET.get()), new ItemStack(WizardsReborn.ARCANE_WOOD_PLANKS_ITEM.get()), new ItemStack(WizardsReborn.ARCANE_GOLD_NUGGET.get()),
+                        ItemStack.EMPTY, new ItemStack(WizardsReborn.ARCANE_GOLD_NUGGET.get()), ItemStack.EMPTY,
+                        new ItemStack(Items.COMPARATOR), new ItemStack(WizardsReborn.ARCACITE.get()), new ItemStack(Items.REDSTONE)
+                )
+        );
+
+        WISSEN_SENSOR = new Chapter(
+                "wizards_reborn.arcanemicon.chapter.wissen_sensor",
+                new TitledBlockPage("wizards_reborn.arcanemicon.page.wissen_sensor",
+                        new BlockEntry(new ItemStack(WizardsReborn.ARCANE_PEDESTAL_ITEM.get()), new ItemStack(WizardsReborn.WISSEN_SENSOR_ITEM.get()))
+                ),
+                new ArcaneWorkbenchPage(new ItemStack(WizardsReborn.WISSEN_SENSOR_ITEM.get()),
+                        ItemStack.EMPTY, new ItemStack(WizardsReborn.ARCANUM.get()), ItemStack.EMPTY,
+                        ItemStack.EMPTY, new ItemStack(WizardsReborn.REDSTONE_SENSOR_ITEM.get()), ItemStack.EMPTY,
+                        ItemStack.EMPTY, new ItemStack(WizardsReborn.ARCANUM.get())
+                )
+        );
+
+        COOLDOWN_SENSOR = new Chapter(
+                "wizards_reborn.arcanemicon.chapter.cooldown_sensor",
+                new TitledBlockPage("wizards_reborn.arcanemicon.page.cooldown_sensor",
+                        new BlockEntry(new ItemStack(WizardsReborn.ARCANE_PEDESTAL_ITEM.get()), new ItemStack(WizardsReborn.COOLDOWN_SENSOR_ITEM.get()))
+                ),
+                new ArcaneWorkbenchPage(new ItemStack(WizardsReborn.COOLDOWN_SENSOR_ITEM.get()),
+                        ItemStack.EMPTY, new ItemStack(WizardsReborn.WISSEN_TRANSLATOR_ITEM.get()), ItemStack.EMPTY,
+                        ItemStack.EMPTY, new ItemStack(WizardsReborn.REDSTONE_SENSOR_ITEM.get())
+                )
+        );
+
+        HEAT_SENSOR = new Chapter(
+                "wizards_reborn.arcanemicon.chapter.heat_sensor",
+                new TitledBlockPage("wizards_reborn.arcanemicon.page.heat_sensor",
+                        new BlockEntry(new ItemStack(WizardsReborn.ARCANE_PEDESTAL_ITEM.get()), new ItemStack(WizardsReborn.HEAT_SENSOR_ITEM.get()))
+                ),
+                new ArcaneWorkbenchPage(new ItemStack(WizardsReborn.HEAT_SENSOR_ITEM.get()),
+                        ItemStack.EMPTY, new ItemStack(Items.FURNACE), ItemStack.EMPTY,
+                        ItemStack.EMPTY, new ItemStack(WizardsReborn.REDSTONE_SENSOR_ITEM.get())
+                )
+        );
+
+        FLUID_SENSOR = new Chapter(
+                "wizards_reborn.arcanemicon.chapter.fluid_sensor",
+                new TitledBlockPage("wizards_reborn.arcanemicon.page.fluid_sensor",
+                        new BlockEntry(new ItemStack(WizardsReborn.ARCANE_PEDESTAL_ITEM.get()), new ItemStack(WizardsReborn.FLUID_SENSOR_ITEM.get()))
+                ),
+                new ArcaneWorkbenchPage(new ItemStack(WizardsReborn.FLUID_SENSOR_ITEM.get()),
+                        ItemStack.EMPTY, new ItemStack(WizardsReborn.FLUID_PIPE_ITEM.get()), ItemStack.EMPTY,
+                        ItemStack.EMPTY, new ItemStack(WizardsReborn.REDSTONE_SENSOR_ITEM.get()), ItemStack.EMPTY,
+                        ItemStack.EMPTY, new ItemStack(WizardsReborn.FLUID_PIPE_ITEM.get())
+                )
+        );
+
+        STEAM_SENSOR = new Chapter(
+                "wizards_reborn.arcanemicon.chapter.steam_sensor",
+                new TitledBlockPage("wizards_reborn.arcanemicon.page.steam_sensor",
+                        new BlockEntry(new ItemStack(WizardsReborn.ARCANE_PEDESTAL_ITEM.get()), new ItemStack(WizardsReborn.STEAM_SENSOR_ITEM.get()))
+                ),
+                new ArcaneWorkbenchPage(new ItemStack(WizardsReborn.STEAM_SENSOR_ITEM.get()),
+                        ItemStack.EMPTY, new ItemStack(WizardsReborn.STEAM_PIPE_ITEM.get()), ItemStack.EMPTY,
+                        ItemStack.EMPTY, new ItemStack(WizardsReborn.REDSTONE_SENSOR_ITEM.get()), ItemStack.EMPTY,
+                        ItemStack.EMPTY, new ItemStack(WizardsReborn.STEAM_PIPE_ITEM.get())
+                )
+        );
+
+        WISSEN_ACTIVATOR = new Chapter(
+                "wizards_reborn.arcanemicon.chapter.wissen_activator",
+                new TitledBlockPage("wizards_reborn.arcanemicon.page.wissen_activator",
+                        new BlockEntry(new ItemStack(WizardsReborn.ARCANE_PEDESTAL_ITEM.get()), new ItemStack(WizardsReborn.WISSEN_ACTIVATOR_ITEM.get()))
+                ),
+                new ArcaneWorkbenchPage(new ItemStack(WizardsReborn.WISSEN_ACTIVATOR_ITEM.get()),
+                        ItemStack.EMPTY, new ItemStack(WizardsReborn.WISSEN_WAND.get()), ItemStack.EMPTY,
+                        new ItemStack(WizardsReborn.ARCANUM.get()), new ItemStack(WizardsReborn.WISSEN_SENSOR_ITEM.get()), new ItemStack(WizardsReborn.ARCANUM.get())
+                )
+        );
+
+        ITEM_SORTER = new Chapter(
+                "wizards_reborn.arcanemicon.chapter.item_sorter",
+                new TitledBlockPage("wizards_reborn.arcanemicon.page.item_sorter",
+                        new BlockEntry(new ItemStack(WizardsReborn.ARCANE_PEDESTAL_ITEM.get()), new ItemStack(WizardsReborn.ITEM_SORTER_ITEM.get()))
+                ),
+                new ArcaneWorkbenchPage(new ItemStack(WizardsReborn.ITEM_SORTER_ITEM.get()),
+                        ItemStack.EMPTY, new ItemStack(Items.CHEST), ItemStack.EMPTY,
+                        new ItemStack(WizardsReborn.ALCHEMY_GLASS_ITEM.get()), new ItemStack(WizardsReborn.REDSTONE_SENSOR_ITEM.get()), new ItemStack(WizardsReborn.ALCHEMY_GLASS_ITEM.get()),
+                        ItemStack.EMPTY, new ItemStack(Items.REDSTONE_BLOCK)
+                )
+        );
+
+        AUTOMATION = new Chapter(
+                "wizards_reborn.arcanemicon.chapter.automation",
+                new TitledBlockPage("wizards_reborn.arcanemicon.page.automation"),
+                new IndexPage(
+                        new IndexEntry(REDSTONE_SENSOR, new ItemStack(WizardsReborn.REDSTONE_SENSOR_ITEM.get())),
+                        new IndexEntry(WISSEN_SENSOR, new ItemStack(WizardsReborn.WISSEN_SENSOR_ITEM.get())),
+                        new IndexEntry(COOLDOWN_SENSOR, new ItemStack(WizardsReborn.COOLDOWN_SENSOR_ITEM.get())),
+                        new IndexEntry(HEAT_SENSOR, new ItemStack(WizardsReborn.HEAT_SENSOR_ITEM.get()), RegisterKnowledges.ALCHEMY_FURNACE),
+                        new IndexEntry(FLUID_SENSOR, new ItemStack(WizardsReborn.FLUID_SENSOR_ITEM.get()), RegisterKnowledges.FLUID_PIPE),
+                        new IndexEntry(STEAM_SENSOR, new ItemStack(WizardsReborn.STEAM_SENSOR_ITEM.get()), RegisterKnowledges.STEAM_PIPE),
+                        new IndexEntry(WISSEN_ACTIVATOR, new ItemStack(WizardsReborn.WISSEN_ACTIVATOR_ITEM.get()))
+                ),
+                new IndexPage(
+                        new IndexEntry(ITEM_SORTER, new ItemStack(WizardsReborn.ITEM_SORTER_ITEM.get()), RegisterKnowledges.ALCHEMY_GLASS)
+                )
+        );
+
         WISSEN_CELL = new Chapter(
                 "wizards_reborn.arcanemicon.chapter.wissen_cell",
                 new TitledBlockPage("wizards_reborn.arcanemicon.page.wissen_cell.0",
@@ -869,10 +981,11 @@ public class ArcanemiconChapters {
                         new IndexEntry(ARCANE_LUMOS, new ItemStack(WizardsReborn.WHITE_ARCANE_LUMOS_ITEM.get()), RegisterKnowledges.WISSEN_CRYSTALLIZER),
                         new IndexEntry(CRYSTALS, new ItemStack(WizardsReborn.EARTH_CRYSTAL.get()), RegisterKnowledges.WISSEN_CRYSTALLIZER),
                         new IndexEntry(ARCANE_WAND, new ItemStack(WizardsReborn.ARCANE_WAND.get()), RegisterKnowledges.ARCANE_WORKBENCH),
-                        new IndexEntry(WISSEN_CELL, new ItemStack(WizardsReborn.WISSEN_CELL_ITEM.get()), RegisterKnowledges.ARCANE_WORKBENCH),
-                        new IndexEntry(ALTAR_OF_DROUGHT, new ItemStack(WizardsReborn.ALTAR_OF_DROUGHT_ITEM.get()), RegisterKnowledges.ARCACITE)
+                        new IndexEntry(AUTOMATION, new ItemStack(WizardsReborn.REDSTONE_SENSOR_ITEM.get()), RegisterKnowledges.ARCANE_WORKBENCH),
+                        new IndexEntry(WISSEN_CELL, new ItemStack(WizardsReborn.WISSEN_CELL_ITEM.get()), RegisterKnowledges.ARCANE_WORKBENCH)
                 ),
                 new IndexPage(
+                        new IndexEntry(ALTAR_OF_DROUGHT, new ItemStack(WizardsReborn.ALTAR_OF_DROUGHT_ITEM.get()), RegisterKnowledges.ARCACITE),
                         new IndexEntry(ARCANE_FORTRESS_ARMOR, new ItemStack(WizardsReborn.ARCANE_FORTRESS_CHESTPLATE.get()), RegisterKnowledges.ARCACITE),
                         new IndexEntry(INVENTOR_WIZARD_ARMOR, new ItemStack(WizardsReborn.INVENTOR_WIZARD_HAT.get()), RegisterKnowledges.ARCACITE),
                         new IndexEntry(ARCANE_WOOD_CANE, new ItemStack(WizardsReborn.ARCANE_WOOD_CANE.get()), RegisterKnowledges.ARCACITE),
@@ -1613,7 +1726,7 @@ public class ArcanemiconChapters {
                         new BlockEntry(new ItemStack(WizardsReborn.WISESTONE_PEDESTAL_ITEM.get()), new ItemStack(WizardsReborn.ARCACITE_BLOCK_ITEM.get()))
                 ),
                 new AlchemyMachinePage(new ItemStack(WizardsReborn.ARCACITE.get()), FluidStack.EMPTY, true, true,
-                        new FluidStack(Fluids.WATER, 250), FluidStack.EMPTY, FluidStack.EMPTY,
+                        new FluidStack(WizardsReborn.ALCHEMY_OIL_FLUID.get(), 250), FluidStack.EMPTY, FluidStack.EMPTY,
                         new ItemStack(WizardsReborn.ARCANUM.get()), new ItemStack(WizardsReborn.ARCANUM.get()), new ItemStack(Items.QUARTZ),
                         new ItemStack(Items.QUARTZ), new ItemStack(WizardsReborn.ARCANE_LINEN_ITEM.get())
                 ),
@@ -1645,7 +1758,7 @@ public class ArcanemiconChapters {
                         new BlockEntry(new ItemStack(WizardsReborn.WISESTONE_PEDESTAL_ITEM.get()), new ItemStack(WizardsReborn.MUSIC_DISC_ARCANUM.get()))
                 ),
                 new AlchemyMachinePage(new ItemStack(WizardsReborn.MUSIC_DISC_ARCANUM.get()), FluidStack.EMPTY, true, true,
-                        new FluidStack(Fluids.WATER, 1000), FluidStack.EMPTY, FluidStack.EMPTY,
+                        new FluidStack(WizardsReborn.ALCHEMY_OIL_FLUID.get(), 1000), FluidStack.EMPTY, FluidStack.EMPTY,
                         new ItemStack(Items.MUSIC_DISC_13), new ItemStack(WizardsReborn.ARCANUM.get())
                 )
         );
@@ -1656,7 +1769,7 @@ public class ArcanemiconChapters {
                         new BlockEntry(new ItemStack(WizardsReborn.WISESTONE_PEDESTAL_ITEM.get()), new ItemStack(WizardsReborn.MUSIC_DISC_MOR.get()))
                 ),
                 new AlchemyMachinePage(new ItemStack(WizardsReborn.MUSIC_DISC_MOR.get()), FluidStack.EMPTY, true, true,
-                        new FluidStack(Fluids.WATER, 1000), FluidStack.EMPTY, FluidStack.EMPTY,
+                        new FluidStack(WizardsReborn.ALCHEMY_OIL_FLUID.get(), 1000), FluidStack.EMPTY, FluidStack.EMPTY,
                         new ItemStack(Items.MUSIC_DISC_13), new ItemStack(WizardsReborn.MOR.get())
                 )
         );

@@ -1,0 +1,18 @@
+{
+  "type": "wizards_reborn:alchemy_machine",
+  "alchemyPotion": {
+    "alchemy_potion": "wizards_reborn:slowness"
+  },
+  "steam": 200,
+  "ingredients": [
+    {
+      "tag": "wizards_reborn:alchemy_potions"
+    },
+    {
+      "item": "minecraft:fermented_spider_eye"
+    }
+  ],
+  "alchemyPotionIngredient": {
+    "alchemy_potion": "wizards_reborn:swiftness"
+  }
+}

@@ -8,7 +8,8 @@ import mod.maxbogomol.wizards_reborn.api.knowledge.ResearchMonogramEntry;
 public class Researches {
     public static Research
             EARTH_PROJECTILE, WATER_PROJECTILE, AIR_PROJECTILE, FIRE_PROJECTILE, VOID_PROJECTILE, FROST_PROJECTILE, HOLY_PROJECTILE,
-            EARTH_RAY, WATER_RAY, AIR_RAY, FIRE_RAY, VOID_RAY, FROST_RAY, HOLY_RAY;
+            EARTH_RAY, WATER_RAY, AIR_RAY, FIRE_RAY, VOID_RAY, FROST_RAY, HOLY_RAY,
+            EARTH_CHARGE, WATER_CHARGE, AIR_CHARGE, FIRE_CHARGE, VOID_CHARGE, FROST_CHARGE, HOLY_CHARGE;
 
     public static void init() {
         EARTH_PROJECTILE = new Research(6, new ResearchMapEntry(
@@ -107,6 +108,59 @@ public class Researches {
                 new ResearchMonogramEntry(WizardsReborn.MORS_MONOGRAM, 7)
         );
 
+        EARTH_CHARGE = new Research(12, new ResearchMapEntry(
+                WizardsReborn.LUNAM_MONOGRAM,  WizardsReborn.ECLIPSIS_MONOGRAM,  WizardsReborn.DARK_MONOGRAM,  WizardsReborn.DARK_MONOGRAM),
+                new ResearchMonogramEntry(WizardsReborn.DARK_MONOGRAM, 8),
+                new ResearchMonogramEntry(WizardsReborn.ECLIPSIS_MONOGRAM, 9),
+                new ResearchMonogramEntry(WizardsReborn.LUNAM_MONOGRAM, 3)
+        );
+        WATER_CHARGE = new Research(12, new ResearchMapEntry(
+                WizardsReborn.MORS_MONOGRAM,  WizardsReborn.MORS_MONOGRAM,  WizardsReborn.MORS_MONOGRAM,  WizardsReborn.ECLIPSIS_MONOGRAM),
+                new ResearchMonogramEntry(WizardsReborn.FAMES_MONOGRAM, 4),
+                new ResearchMonogramEntry(WizardsReborn.ECLIPSIS_MONOGRAM, 6),
+                new ResearchMonogramEntry(WizardsReborn.TEMPUS_MONOGRAM, 5),
+                new ResearchMonogramEntry(WizardsReborn.MORS_MONOGRAM, 7)
+        );
+        AIR_CHARGE = new Research(12, new ResearchMapEntry(
+                WizardsReborn.STATERA_MONOGRAM,  WizardsReborn.EVOLUTIONIS_MONOGRAM,  WizardsReborn.SOLSTITIUM_MONOGRAM,  WizardsReborn.VITA_MONOGRAM),
+                new ResearchMonogramEntry(WizardsReborn.SOLSTITIUM_MONOGRAM, 6),
+                new ResearchMonogramEntry(WizardsReborn.PRAEDICTIONEM_MONOGRAM, 4),
+                new ResearchMonogramEntry(WizardsReborn.EVOLUTIONIS_MONOGRAM, 4),
+                new ResearchMonogramEntry(WizardsReborn.STATERA_MONOGRAM, 5),
+                new ResearchMonogramEntry(WizardsReborn.VITA_MONOGRAM, 7)
+        );
+        FIRE_CHARGE = new Research(12, new ResearchMapEntry(
+                WizardsReborn.TEMPUS_MONOGRAM,  WizardsReborn.TEMPUS_MONOGRAM,  WizardsReborn.MORS_MONOGRAM,  WizardsReborn.RENAISSANCE_MONOGRAM),
+                new ResearchMonogramEntry(WizardsReborn.FAMES_MONOGRAM, 4),
+                new ResearchMonogramEntry(WizardsReborn.ECLIPSIS_MONOGRAM, 4),
+                new ResearchMonogramEntry(WizardsReborn.TEMPUS_MONOGRAM, 6),
+                new ResearchMonogramEntry(WizardsReborn.MORS_MONOGRAM, 5),
+                new ResearchMonogramEntry(WizardsReborn.RENAISSANCE_MONOGRAM, 6)
+        );
+        VOID_CHARGE = new Research(12, new ResearchMapEntry(
+                WizardsReborn.SOLEM_MONOGRAM,  WizardsReborn.SOLEM_MONOGRAM,  WizardsReborn.ECLIPSIS_MONOGRAM,  WizardsReborn.DARK_MONOGRAM),
+                new ResearchMonogramEntry(WizardsReborn.SOLEM_MONOGRAM, 6),
+                new ResearchMonogramEntry(WizardsReborn.DARK_MONOGRAM, 4),
+                new ResearchMonogramEntry(WizardsReborn.ECLIPSIS_MONOGRAM, 5),
+                new ResearchMonogramEntry(WizardsReborn.MORS_MONOGRAM, 5),
+                new ResearchMonogramEntry(WizardsReborn.RENAISSANCE_MONOGRAM, 4)
+        );
+        FROST_CHARGE = new Research(12, new ResearchMapEntry(
+                WizardsReborn.SOLSTITIUM_MONOGRAM,  WizardsReborn.SOLEM_MONOGRAM,  WizardsReborn.SOLEM_MONOGRAM,  WizardsReborn.SOLSTITIUM_MONOGRAM),
+                new ResearchMonogramEntry(WizardsReborn.SOLEM_MONOGRAM, 5),
+                new ResearchMonogramEntry(WizardsReborn.SOLSTITIUM_MONOGRAM, 6),
+                new ResearchMonogramEntry(WizardsReborn.LUX_MONOGRAM, 5),
+                new ResearchMonogramEntry(WizardsReborn.VITA_MONOGRAM, 6)
+        );
+        HOLY_CHARGE = new Research(12, new ResearchMapEntry(
+                WizardsReborn.BELLUM_MONOGRAM,  WizardsReborn.MORS_MONOGRAM,  WizardsReborn.SICCITAS_MONOGRAM,  WizardsReborn.MORS_MONOGRAM),
+                new ResearchMonogramEntry(WizardsReborn.BELLUM_MONOGRAM, 3),
+                new ResearchMonogramEntry(WizardsReborn.SOLSTITIUM_MONOGRAM, 4),
+                new ResearchMonogramEntry(WizardsReborn.SICCITAS_MONOGRAM, 4),
+                new ResearchMonogramEntry(WizardsReborn.MORS_MONOGRAM, 8),
+                new ResearchMonogramEntry(WizardsReborn.VITA_MONOGRAM, 5)
+        );
+
         WizardsReborn.EARTH_PROJECTILE_SPELL.setResearch(EARTH_PROJECTILE);
         WizardsReborn.WATER_PROJECTILE_SPELL.setResearch(WATER_PROJECTILE);
         WizardsReborn.AIR_PROJECTILE_SPELL.setResearch(AIR_PROJECTILE);
@@ -122,5 +176,13 @@ public class Researches {
         WizardsReborn.VOID_RAY_SPELL.setResearch(VOID_RAY);
         WizardsReborn.FROST_RAY_SPELL.setResearch(FROST_RAY);
         WizardsReborn.HOLY_RAY_SPELL.setResearch(HOLY_RAY);
+
+        WizardsReborn.EARTH_CHARGE_SPELL.setResearch(EARTH_CHARGE);
+        WizardsReborn.WATER_CHARGE_SPELL.setResearch(WATER_CHARGE);
+        WizardsReborn.AIR_CHARGE_SPELL.setResearch(AIR_CHARGE);
+        WizardsReborn.FIRE_CHARGE_SPELL.setResearch(FIRE_CHARGE);
+        WizardsReborn.VOID_CHARGE_SPELL.setResearch(VOID_CHARGE);
+        WizardsReborn.FROST_CHARGE_SPELL.setResearch(FROST_CHARGE);
+        WizardsReborn.HOLY_CHARGE_SPELL.setResearch(HOLY_CHARGE);
     }
 }

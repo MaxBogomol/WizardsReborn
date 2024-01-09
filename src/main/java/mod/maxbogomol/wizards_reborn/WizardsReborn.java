@@ -160,6 +160,7 @@ public class WizardsReborn {
     public static final TagKey<Block> FLUID_PIPE_CONNECTION_TOGGLE_BLOCK_TAG = TagKey.create(Registries.BLOCK, new ResourceLocation(MOD_ID, "fluid_pipe_connection_toggle"));
     public static final TagKey<Block> STEAM_PIPE_CONNECTION_BLOCK_TAG = TagKey.create(Registries.BLOCK, new ResourceLocation(MOD_ID, "steam_pipe_connection"));
     public static final TagKey<Block> STEAM_PIPE_CONNECTION_TOGGLE_BLOCK_TAG = TagKey.create(Registries.BLOCK, new ResourceLocation(MOD_ID, "steam_pipe_connection_toggle"));
+    public static final TagKey<Block> ALTAR_OF_DROUGHT_TARGET = TagKey.create(Registries.BLOCK, new ResourceLocation(MOD_ID, "altar_of_drought_target"));
 
     public static final TagKey<BannerPattern> VIOLENCE_BANNER_PATTERN_TAG = TagKey.create(Registries.BANNER_PATTERN, new ResourceLocation(MOD_ID, "pattern_item/violence"));
     public static final TagKey<BannerPattern> REPRODUCTION_BANNER_PATTERN_TAG = TagKey.create(Registries.BANNER_PATTERN, new ResourceLocation(MOD_ID, "pattern_item/reproduction"));
@@ -598,6 +599,7 @@ public class WizardsReborn {
     public static final RegistryObject<Item> ALCHEMY_FLASK = ITEMS.register("alchemy_flask", () -> new FlaskItem(new Item.Properties(), 6));
     public static final RegistryObject<Item> ALCHEMY_VIAL_POTION = ITEMS.register("alchemy_vial_potion", () -> new AlchemyPotionItem(new Item.Properties().stacksTo(1), 3, ALCHEMY_VIAL.get()));
     public static final RegistryObject<Item> ALCHEMY_FLASK_POTION = ITEMS.register("alchemy_flask_potion", () -> new AlchemyPotionItem(new Item.Properties().stacksTo(1), 6, ALCHEMY_FLASK.get()));
+    public static final RegistryObject<Item> ARCACITE_POLISHING_MIXTURE = ITEMS.register("arcacite_polishing_mixture", () -> new Item(new Item.Properties()));
 
     public static final RegistryObject<Item> WHITE_ARCANE_LUMOS_ITEM = ITEMS.register("white_arcane_lumos", () -> new BlockItem(WHITE_ARCANE_LUMOS.get(), new Item.Properties()));
     public static final RegistryObject<Item> ORANGE_ARCANE_LUMOS_ITEM = ITEMS.register("orange_arcane_lumos", () -> new BlockItem(ORANGE_ARCANE_LUMOS.get(), new Item.Properties()));
@@ -645,6 +647,8 @@ public class WizardsReborn {
     public static final RegistryObject<Item> ARCANE_WOOD_SMOKING_PIPE = ITEMS.register("arcane_wood_smoking_pipe", () -> new SmokingPipeItem(new Item.Properties().stacksTo(1)));
     public static final RegistryObject<Item> ARCANE_WOOD_CANE = ITEMS.register("arcane_wood_cane", () -> new CaneItem(new Item.Properties().stacksTo(1)));
     public static final RegistryObject<Item> ARCANE_WOOD_BOW = ITEMS.register("arcane_wood_bow", () -> new ArcaneBowItem(new Item.Properties().durability(576)));
+
+    public static final RegistryObject<Item> BLAZE_REAP = ITEMS.register("blaze_reap", () -> new ArcanePickaxeItem(CustomItemTier.ARCANE_GOLD, 1, -2.8f, new Item.Properties().rarity(Rarity.EPIC)));
 
     public static final RegistryObject<Item> ARCANE_ENCHANTED_BOOK = ITEMS.register("arcane_enchanted_book", () -> new ArcaneEnchantedBookItem(new Item.Properties().stacksTo(1)));
     public static final RegistryObject<Item> ARCANEMICON = ITEMS.register("arcanemicon", () -> new ArcanemiconItem(new Item.Properties().stacksTo(1)));

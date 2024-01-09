@@ -3,14 +3,18 @@ package mod.maxbogomol.wizards_reborn.common.block;
 import mod.maxbogomol.wizards_reborn.WizardsReborn;
 import mod.maxbogomol.wizards_reborn.api.alchemy.IPipeConnection;
 import mod.maxbogomol.wizards_reborn.api.alchemy.PipeConnection;
+import mod.maxbogomol.wizards_reborn.common.item.equipment.WissenWandItem;
 import mod.maxbogomol.wizards_reborn.common.tileentity.AlchemyBoilerTileEntity;
 import mod.maxbogomol.wizards_reborn.common.tileentity.PipeBaseTileEntity;
 import mod.maxbogomol.wizards_reborn.common.tileentity.TickableBlockEntity;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
+import net.minecraft.world.MenuProvider;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
@@ -29,6 +33,7 @@ import net.minecraft.world.phys.shapes.BooleanOp;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
+import net.minecraftforge.network.NetworkHooks;
 import org.jetbrains.annotations.NotNull;
 
 import javax.annotation.Nonnull;
@@ -112,6 +117,28 @@ public class AlchemyBoilerBlock extends HorizontalDirectionalBlock implements En
 
     @Override
     public InteractionResult use(BlockState state, Level world, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hit) {
+        if (world.isClientSide) {
+            return InteractionResult.SUCCESS;
+        } else {
+            ItemStack stack = player.getItemInHand(hand).copy();
+            boolean isWand = false;
+
+            if (stack.getItem() instanceof WissenWandItem) {
+                if (WissenWandItem.getMode(stack) != 4) {
+                    isWand = true;
+                }
+            }
+
+            if (!isWand) {
+                BlockEntity tileEntity = world.getBlockEntity(pos.below());
+
+                if (world.getBlockState(pos.below()).getBlock() instanceof AlchemyMachineBlock block) {
+                    MenuProvider containerProvider = block.createContainerProvider(world, pos.below());
+                    NetworkHooks.openScreen(((ServerPlayer) player), containerProvider, tileEntity.getBlockPos());
+                    return InteractionResult.CONSUME;
+                }
+            }
+        }
 
         return InteractionResult.PASS;
     }

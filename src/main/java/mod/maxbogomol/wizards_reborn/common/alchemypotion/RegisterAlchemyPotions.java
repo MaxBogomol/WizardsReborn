@@ -36,7 +36,7 @@ public class RegisterAlchemyPotions {
         WATER_BREATHING = new AlchemyPotion(WizardsReborn.MOD_ID+":water_breathing", new MobEffectInstance(MobEffects.WATER_BREATHING, 12000));
         HEALING = new AlchemyPotion(WizardsReborn.MOD_ID+":healing", new MobEffectInstance(MobEffects.HEAL, 1, 1));
         HARMING = new AlchemyPotion(WizardsReborn.MOD_ID+":harming", new MobEffectInstance(MobEffects.HARM, 1, 1));
-        POISON = new AlchemyPotion(WizardsReborn.MOD_ID+":poison", new MobEffectInstance(MobEffects.WATER_BREATHING, 1200, 1));
+        POISON = new AlchemyPotion(WizardsReborn.MOD_ID+":poison", new MobEffectInstance(MobEffects.POISON, 1200, 1));
         REGENERATION = new AlchemyPotion(WizardsReborn.MOD_ID+":regeneration", new MobEffectInstance(MobEffects.REGENERATION, 3600, 1));
         STRENGTH = new AlchemyPotion(WizardsReborn.MOD_ID+":strength", new MobEffectInstance(MobEffects.DAMAGE_BOOST, 7200, 1));
         WEAKNESS = new AlchemyPotion(WizardsReborn.MOD_ID+":weakness", new MobEffectInstance(MobEffects.WEAKNESS, 3600, 1));
