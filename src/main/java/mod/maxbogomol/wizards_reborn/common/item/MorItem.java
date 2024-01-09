@@ -23,7 +23,7 @@ public class MorItem extends BlockItem {
 
     @Override
     public ItemStack finishUsingItem(ItemStack stack, Level level, LivingEntity livingEntity) {
-        livingEntity.addEffect(new MobEffectInstance(WizardsReborn.MOR_EFFECT.get(), random.nextInt(minEffect, maxEffect), 0));
+        livingEntity.addEffect(new MobEffectInstance(WizardsReborn.MOR_SPORES_EFFECT.get(), random.nextInt(minEffect, maxEffect), 0));
         return super.finishUsingItem(stack, level, livingEntity);
     }
 }

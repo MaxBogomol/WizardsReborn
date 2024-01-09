@@ -83,7 +83,7 @@ public class FogRendererHandler {
 
     public static boolean hasMorEffect() {
         if (Minecraft.getInstance().player != null) {
-            return Minecraft.getInstance().player.hasEffect(WizardsReborn.MOR_EFFECT.get());
+            return Minecraft.getInstance().player.hasEffect(WizardsReborn.MOR_SPORES_EFFECT.get());
         }
 
         return false;

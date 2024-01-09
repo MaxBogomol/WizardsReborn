@@ -1,0 +1,25 @@
+{
+  "type": "wizards_reborn:wissen_crystallizer",
+  "output": {
+    "item": "wizards_reborn:void_crystal_seed",
+    "count": 2
+  },
+  "wissen": 1500,
+  "ingredients": [
+    {
+      "item": "wizards_reborn:arcacite"
+    },
+    {
+      "item": "wizards_reborn:earth_crystal_seed"
+    },
+    {
+      "item": "wizards_reborn:water_crystal_seed"
+    },
+    {
+      "item": "wizards_reborn:air_crystal_seed"
+    },
+    {
+      "item": "wizards_reborn:fire_crystal_seed"
+    }
+  ]
+}

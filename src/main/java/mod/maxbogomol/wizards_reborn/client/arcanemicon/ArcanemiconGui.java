@@ -105,16 +105,16 @@ public class ArcanemiconGui extends Screen {
         if (right != null) right.fullRender(this, gui, guiLeft + 174, guiTop + 8, mouseX, mouseY);
 
         if (currentPage > 0) {
-            int x = 11, y = 151;
+            int x = 11, y = 155;
             int v = 0;
-            if (mouseX >= guiLeft + x && mouseY >= guiTop + y && mouseX <= guiLeft + x + 32 && mouseY <= guiTop + y + 16) v += 16;
-            gui.blit(BACKGROUND, guiLeft + x, guiTop + y, 351, v, 32, 16, 512, 512);
+            if (mouseX >= guiLeft + x && mouseY >= guiTop + y && mouseX <= guiLeft + x + 30 && mouseY <= guiTop + y + 12) v += 12;
+            gui.blit(BACKGROUND, guiLeft + x, guiTop + y, 351, v, 30, 12, 512, 512);
         }
         if (currentPage + 2 < currentChapter.size()) {
-            int x = 269, y = 151;
+            int x = 271, y = 155;
             int v = 0;
-            if (mouseX >= guiLeft + x && mouseY >= guiTop + y && mouseX <= guiLeft + x + 32 && mouseY <= guiTop + y + 16) v += 16;
-            gui.blit(BACKGROUND, guiLeft + x, guiTop + y, 383, v, 32, 16, 512, 512);
+            if (mouseX >= guiLeft + x && mouseY >= guiTop + y && mouseX <= guiLeft + x + 30 && mouseY <= guiTop + y + 12) v += 12;
+            gui.blit(BACKGROUND, guiLeft + x, guiTop + y, 381, v, 30, 12, 512, 512);
         }
 
         if (currentChapter != ArcanemiconChapters.RESEARCH) {
@@ -123,7 +123,7 @@ public class ArcanemiconGui extends Screen {
                 int v = 0;
                 if (mouseX >= guiLeft + x && mouseY >= guiTop + y && mouseX <= guiLeft + x + 19 && mouseY <= guiTop + y + 12)
                     v += 12;
-                gui.blit(BACKGROUND, guiLeft + x, guiTop + y, 415, v, 19, 12, 512, 512);
+                gui.blit(BACKGROUND, guiLeft + x, guiTop + y, 411, v, 19, 12, 512, 512);
             }
 
             if (currentHistory < historyEntries.size()) {
@@ -131,7 +131,7 @@ public class ArcanemiconGui extends Screen {
                 int v = 0;
                 if (mouseX >= guiLeft + x && mouseY >= guiTop + y && mouseX <= guiLeft + x + 19 && mouseY <= guiTop + y + 12)
                     v += 12;
-                gui.blit(BACKGROUND, guiLeft + x, guiTop + y, 434, v, 19, 12, 512, 512);
+                gui.blit(BACKGROUND, guiLeft + x, guiTop + y, 430, v, 19, 12, 512, 512);
             }
         }
 
@@ -152,8 +152,8 @@ public class ArcanemiconGui extends Screen {
             int guiLeft = (width - xSize) / 2, guiTop = (height - ySize) / 2;
 
             if (currentPage > 0) {
-                int x = guiLeft + 11, y = guiTop + 151;
-                if (mouseX >= x && mouseY >= y && mouseX <= x + 32 && mouseY <= y + 16) {
+                int x = guiLeft + 11, y = guiTop + 155;
+                if (mouseX >= x && mouseY >= y && mouseX <= x + 30 && mouseY <= y + 12) {
                     currentPage -= 2;
                     historyEntries.set(currentHistory - 1, new ChapterHistoryEntry(currentChapter, currentPage));
                     Minecraft.getInstance().player.playNotifySound(SoundEvents.BOOK_PAGE_TURN, SoundSource.NEUTRAL, 1.0f, 1.0f);
@@ -161,8 +161,8 @@ public class ArcanemiconGui extends Screen {
                 }
             }
             if (currentPage + 2 < currentChapter.size()) {
-                int x = guiLeft + 269, y = guiTop + 151;
-                if (mouseX >= x && mouseY >= y && mouseX <= x + 32 && mouseY <= y + 16) {
+                int x = guiLeft + 271, y = guiTop + 155;
+                if (mouseX >= x && mouseY >= y && mouseX <= x + 30 && mouseY <= y + 12) {
                     currentPage += 2;
                     historyEntries.set(currentHistory - 1, new ChapterHistoryEntry(currentChapter, currentPage));
                     Minecraft.getInstance().player.playNotifySound(SoundEvents.BOOK_PAGE_TURN, SoundSource.NEUTRAL, 1.0f, 1.0f);

@@ -38,6 +38,7 @@ import mod.maxbogomol.wizards_reborn.common.command.SpellArgument;
 import mod.maxbogomol.wizards_reborn.common.config.Config;
 import mod.maxbogomol.wizards_reborn.common.crystal.*;
 import mod.maxbogomol.wizards_reborn.common.effect.MorSporesEffect;
+import mod.maxbogomol.wizards_reborn.common.effect.WissenAuraEffect;
 import mod.maxbogomol.wizards_reborn.common.entity.CustomBoatEntity;
 import mod.maxbogomol.wizards_reborn.common.entity.CustomChestBoatEntity;
 import mod.maxbogomol.wizards_reborn.common.entity.SpellProjectileEntity;
@@ -808,7 +809,8 @@ public class WizardsReborn {
     public static final RegistryObject<Attribute> WISSEN_SALE = ATTRIBUTES.register("wissen_sale", () -> new RangedAttribute("attribute.name.wizards_reborn.wissen_sale", 0, 0, 75).setSyncable(true));
     public static final RegistryObject<Attribute> MAGIC_ARMOR = ATTRIBUTES.register("magic_armor", () -> new RangedAttribute("attribute.name.wizards_reborn.magic_armor", 0, 0, 100).setSyncable(true));
 
-    public static final RegistryObject<MobEffect> MOR_EFFECT = EFFECTS.register("mor_spores", MorSporesEffect::new);
+    public static final RegistryObject<MobEffect> MOR_SPORES_EFFECT = EFFECTS.register("mor_spores", MorSporesEffect::new);
+    public static final RegistryObject<MobEffect> WISSEN_AURA_EFFECT = EFFECTS.register("wissen_aura", WissenAuraEffect::new);
 
     public static final RegistryObject<TrunkPlacerType<ArcaneWoodTrunkPlacer>> ARCANE_WOOD_TRUNK_PLACER = TRUNK_PLACER_TYPES.register("arcane_wood_trunk_placer", () -> new TrunkPlacerType<>(ArcaneWoodTrunkPlacer.CODEC));
 

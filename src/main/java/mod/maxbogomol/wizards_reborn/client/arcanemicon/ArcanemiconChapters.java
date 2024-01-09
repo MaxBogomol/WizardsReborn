@@ -982,10 +982,10 @@ public class ArcanemiconChapters {
                         new IndexEntry(CRYSTALS, new ItemStack(WizardsReborn.EARTH_CRYSTAL.get()), RegisterKnowledges.WISSEN_CRYSTALLIZER),
                         new IndexEntry(ARCANE_WAND, new ItemStack(WizardsReborn.ARCANE_WAND.get()), RegisterKnowledges.ARCANE_WORKBENCH),
                         new IndexEntry(AUTOMATION, new ItemStack(WizardsReborn.REDSTONE_SENSOR_ITEM.get()), RegisterKnowledges.ARCANE_WORKBENCH),
-                        new IndexEntry(WISSEN_CELL, new ItemStack(WizardsReborn.WISSEN_CELL_ITEM.get()), RegisterKnowledges.ARCANE_WORKBENCH)
+                        new IndexEntry(WISSEN_CELL, new ItemStack(WizardsReborn.WISSEN_CELL_ITEM.get()), RegisterKnowledges.ARCANE_WORKBENCH),
+                        new IndexEntry(ALTAR_OF_DROUGHT, new ItemStack(WizardsReborn.ALTAR_OF_DROUGHT_ITEM.get()), RegisterKnowledges.ARCACITE)
                 ),
                 new IndexPage(
-                        new IndexEntry(ALTAR_OF_DROUGHT, new ItemStack(WizardsReborn.ALTAR_OF_DROUGHT_ITEM.get()), RegisterKnowledges.ARCACITE),
                         new IndexEntry(ARCANE_FORTRESS_ARMOR, new ItemStack(WizardsReborn.ARCANE_FORTRESS_CHESTPLATE.get()), RegisterKnowledges.ARCACITE),
                         new IndexEntry(INVENTOR_WIZARD_ARMOR, new ItemStack(WizardsReborn.INVENTOR_WIZARD_HAT.get()), RegisterKnowledges.ARCACITE),
                         new IndexEntry(ARCANE_WOOD_CANE, new ItemStack(WizardsReborn.ARCANE_WOOD_CANE.get()), RegisterKnowledges.ARCACITE),
@@ -1340,9 +1340,7 @@ public class ArcanemiconChapters {
                         new MonogramIndexEntry(DEGRADATIO_MONOGRAM, WizardsReborn.DEGRADATIO_MONOGRAM),
                         new MonogramIndexEntry(PRAEDICTIONEM_MONOGRAM, WizardsReborn.PRAEDICTIONEM_MONOGRAM),
                         new MonogramIndexEntry(EVOLUTIONIS_MONOGRAM, WizardsReborn.EVOLUTIONIS_MONOGRAM),
-                        new MonogramIndexEntry(DARK_MONOGRAM, WizardsReborn.DARK_MONOGRAM)
-                ),
-                new MonogramIndexPage(
+                        new MonogramIndexEntry(DARK_MONOGRAM, WizardsReborn.DARK_MONOGRAM),
                         new MonogramIndexEntry(UNIVERSUM_MONOGRAM, WizardsReborn.UNIVERSUM_MONOGRAM)
                 )
         );

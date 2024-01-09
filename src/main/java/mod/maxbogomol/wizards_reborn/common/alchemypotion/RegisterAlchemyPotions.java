@@ -20,10 +20,10 @@ public class RegisterAlchemyPotions {
         MUNDANE_BREW = new FluidAlchemyPotion(WizardsReborn.MOD_ID+":mundane_brew", WizardsReborn.MUNDANE_BREW_FLUID.get(), new Color(50, 75, 141));
         ALCHEMY_OIL = new FluidAlchemyPotion(WizardsReborn.MOD_ID+":alchemy_oil", WizardsReborn.ALCHEMY_OIL_FLUID.get(), new Color(96, 47, 59), new MobEffectInstance(MobEffects.MOVEMENT_SLOWDOWN, 800, 3), new MobEffectInstance(MobEffects.WEAKNESS, 800, 1));
         OIL_TEA = new FluidAlchemyPotion(WizardsReborn.MOD_ID+":oil_tea", WizardsReborn.OIL_TEA_FLUID.get(), new Color(189, 124, 129), new MobEffectInstance(MobEffects.MOVEMENT_SLOWDOWN, 3600, 1), new MobEffectInstance(MobEffects.REGENERATION, 3600, 0), new MobEffectInstance(MobEffects.DAMAGE_BOOST, 3600, 1));
-        WISSEN_TEA = new FluidAlchemyPotion(WizardsReborn.MOD_ID+":wissen_tea", WizardsReborn.WISSEN_TEA_FLUID.get(), new Color(119, 164, 208));
+        WISSEN_TEA = new FluidAlchemyPotion(WizardsReborn.MOD_ID+":wissen_tea", WizardsReborn.WISSEN_TEA_FLUID.get(), new Color(119, 164, 208), new MobEffectInstance(WizardsReborn.WISSEN_AURA_EFFECT.get(), 7800));
         MUSHROOM_BREW = new FluidAlchemyPotion(WizardsReborn.MOD_ID+":mushroom_brew", WizardsReborn.MUSHROOM_BREW_FLUID.get(), new Color(141, 107, 83));
         HELLISH_MUSHROOM_BREW = new FluidAlchemyPotion(WizardsReborn.MOD_ID+":hellish_mushroom_brew", WizardsReborn.HELLISH_MUSHROOM_BREW_FLUID.get(), new Color(78, 27, 27));
-        MOR_BREW = new FluidAlchemyPotion(WizardsReborn.MOD_ID+":mor_brew", WizardsReborn.MOR_BREW_FLUID.get(), new Color(77, 84, 116));
+        MOR_BREW = new FluidAlchemyPotion(WizardsReborn.MOD_ID+":mor_brew", WizardsReborn.MOR_BREW_FLUID.get(), new Color(77, 84, 116), new MobEffectInstance(WizardsReborn.MOR_SPORES_EFFECT.get(), 1600));
         FLOWER_BREW = new FluidAlchemyPotion(WizardsReborn.MOD_ID+":flower_brew", WizardsReborn.FLOWER_BREW_FLUID.get(), new Color(32, 68, 38));
 
         NIGHT_VISION = new AlchemyPotion(WizardsReborn.MOD_ID+":night_vision", new MobEffectInstance(MobEffects.NIGHT_VISION, 12000));
