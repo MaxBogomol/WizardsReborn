@@ -5,6 +5,9 @@ import mod.maxbogomol.wizards_reborn.api.crystal.CrystalUtils;
 import mod.maxbogomol.wizards_reborn.api.spell.Spell;
 import mod.maxbogomol.wizards_reborn.api.wissen.WissenItemUtils;
 import mod.maxbogomol.wizards_reborn.common.item.equipment.arcane.ArcaneArmorItem;
+import mod.maxbogomol.wizards_reborn.common.network.PacketHandler;
+import mod.maxbogomol.wizards_reborn.common.network.spell.HeartOfNatureSpellEffectPacket;
+import mod.maxbogomol.wizards_reborn.common.network.spell.MagicSproutSpellEffectPacket;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.sounds.SoundSource;
@@ -32,16 +35,27 @@ public class MagicSproutSpell extends Spell {
     }
 
     @Override
+    public int getMinimumPolishingLevel() {
+        return 1;
+    }
+
+    @Override
     public boolean canSpellAir(Level world, Player player, InteractionHand hand) {
         return false;
     }
 
     @Override
     public InteractionResult onWandUseFirst(ItemStack stack, UseOnContext context) {
-        if (canSpell(context.getLevel(), context.getPlayer(), context.getHand())) {
+        if (canSpell(context.getLevel(), context.getPlayer(), context.getHand()) && !context.getPlayer().level().isClientSide()) {
+            Color color = getColor();
+            float r = color.getRed() / 255f;
+            float g = color.getGreen() / 255f;
+            float b = color.getBlue() / 255f;
+
             if (growCrop(stack, context, context.getClickedPos()) == InteractionResult.SUCCESS) {
                 if (!context.getPlayer().isShiftKeyDown()) {
                     useGrow(stack, context, 1f, 1f);
+                    PacketHandler.sendToTracking(context.getPlayer().level(), context.getClickedPos(), new MagicSproutSpellEffectPacket((float) context.getClickedPos().getX() + 0.5F, (float) context.getClickedPos().getY() + 0.5F, context.getClickedPos().getZ() + 0.5F, r, g, b));
                 } else if (WissenItemUtils.canRemoveWissen(stack, getWissenCostWithStat(getStats(stack), context.getPlayer(), getWissenCost() * 10))) {
                     CompoundTag stats = getStats(stack);
                     int focusLevel = CrystalUtils.getStatLevel(stats, WizardsReborn.FOCUS_CRYSTAL_STAT);
@@ -52,7 +66,9 @@ public class MagicSproutSpell extends Spell {
                         for (int y = -radius; y <= radius; y++) {
                             for (int z = -radius; z <= radius; z++) {
                                 if (random.nextFloat() < 0.15f * (focusLevel + magicModifier)) {
-                                    growCrop(stack, context, new BlockPos(blockPos.getX() + x, blockPos.getY() + y, blockPos.getZ() + z));
+                                    if (growCrop(stack, context, new BlockPos(blockPos.getX() + x, blockPos.getY() + y, blockPos.getZ() + z)) == InteractionResult.SUCCESS) {
+                                        PacketHandler.sendToTracking(context.getPlayer().level(), context.getClickedPos(), new MagicSproutSpellEffectPacket((float) blockPos.getX() + x + 0.5F, (float) blockPos.getY() + y + 0.5F, blockPos.getZ() + z + 0.5F, r, g, b));
+                                    }
                                 }
                             }
                         }

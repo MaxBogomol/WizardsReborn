@@ -61,7 +61,7 @@ public class FluidSensorBlock extends SensorBaseBlock {
             boolean active = ((!pState.getValue(BlockStateProperties.LIT) || pLevel.hasNeighborSignal(pPos)));
             if (tile instanceof IFluidTileEntity fluidTile) {
                 if (!sensor.getTank().isEmpty()) {
-                    if ((active && fluidTile.getFluidStack().getFluid() == sensor.getTank().getFluid().getFluid()) ||
+                    if ((active && fluidTile.getFluidStack().getFluid().isSame(sensor.getTank().getFluid().getFluid())) ||
                             (!active && fluidTile.getFluidStack().getFluid() != sensor.getTank().getFluid().getFluid())) {
                         i = Mth.floor(((float) fluidTile.getFluidAmount() / fluidTile.getFluidMaxAmount()) * 14.0F);
                     }
@@ -75,7 +75,7 @@ public class FluidSensorBlock extends SensorBaseBlock {
                 if (cap != null) {
                     if (!sensor.getTank().isEmpty()) {
                         if ((active && cap.getFluidInTank(0).getFluid() == sensor.getTank().getFluid().getFluid()) ||
-                                (!active && cap.getFluidInTank(0).getFluid() != sensor.getTank().getFluid().getFluid())) {
+                                (!active && !cap.getFluidInTank(0).getFluid().isSame(sensor.getTank().getFluid().getFluid()))) {
                             i = Mth.floor(((float) cap.getFluidInTank(0).getAmount() / cap.getTankCapacity(0)) * 14.0F);
                         }
                     } else {

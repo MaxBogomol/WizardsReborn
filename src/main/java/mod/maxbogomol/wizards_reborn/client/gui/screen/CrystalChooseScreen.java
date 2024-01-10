@@ -60,6 +60,7 @@ public class CrystalChooseScreen extends Screen {
     public float mouseAngleI = 0;
     public CrystalType selectedCrystalType;
     public boolean isSelectedCrystalType = false;
+    public int page = 0;
 
     public static Map<CrystalType, ArrayList<Spell>> spellsList = new HashMap<CrystalType, ArrayList<Spell>>();
 
@@ -129,8 +130,12 @@ public class CrystalChooseScreen extends Screen {
                     i++;
                 }
             } else {
-                for (Spell spell : spellsList.get(selectedCrystalType)) {
-                    if (mouseX >= x - 64 && mouseY >= y - h + (i * 34) + 2 && mouseX <= x - 64 + 128 && mouseY <= y - h + (i * 34) + 32 - 2) {
+                for (int ii = (page * 5); ii < (page + 1) * 5; ii++) {
+                    if (spellsList.get(selectedCrystalType).size() <= ii) {
+                        break;
+                    }
+                    Spell spell = spellsList.get(selectedCrystalType).get(ii);
+                    if (mouseX >= x - 64 && mouseY >= y - h + (ii * 34) + 2 && mouseX <= x - 64 + 128 && mouseY <= y - h + (ii * 34) + 32 - 2) {
                         selectedSpell = spell;
                     }
                     i++;
@@ -138,6 +143,19 @@ public class CrystalChooseScreen extends Screen {
             }
 
             if (isSelectedCrystalType) {
+                int pages = (int) Math.ceil(spellsList.get(selectedCrystalType).size() / 5f);
+                if (page > 0) {
+                    if (mouseX >= x - 64 + 148 && mouseY >= y - h + 2 && mouseX <= x - 64 + 148 + 32 && mouseY <= y - h + 32 - 2) {
+                        page--;
+                        return true;
+                    }
+                }
+                if (page + 1 < pages) {
+                    if (mouseX >= x - 64 + 148 && mouseY >= y - h + 136 + 2 && mouseX <= x - 64 + 148 + 32 && mouseY <= y - h + 136 + 32 - 2) {
+                        page++;
+                        return true;
+                    }
+                }
                 if (selectedSpell != null) {
                     if (KnowledgeUtils.isSpell(Minecraft.getInstance().player, selectedSpell)) {
                         hover = false;
@@ -331,7 +349,18 @@ public class CrystalChooseScreen extends Screen {
                     i++;
                 }
             } else {
-                for (Spell spell : spellsList.get(selectedCrystalType)) {
+                int iii = 0;
+                int wCount = 0;
+                int wPageLeft = 0;
+                int wPageRight = 0;
+
+                selectedSpell = null;
+
+                for (int ii = (page * 5); ii < (page + 1) * 5; ii++) {
+                    if (spellsList.get(selectedCrystalType).size() <= ii) {
+                        break;
+                    }
+                    Spell spell = spellsList.get(selectedCrystalType).get(ii);
                     int w = 0;
                     float f = 1;
                     if (spellWand != null) {
@@ -385,6 +414,17 @@ public class CrystalChooseScreen extends Screen {
                     RenderSystem.blendFunc(GlStateManager.SourceFactor.SRC_ALPHA, GlStateManager.DestFactor.ONE_MINUS_SRC_ALPHA);
                     RenderSystem.setShader(GameRenderer::getPositionTexShader);
 
+                    if (iii >= 1 && iii <= 3 && wCount == 0) {
+                        wCount = w;
+                    }
+                    if (iii == 0) {
+                        wPageLeft = w;
+                    }
+                    if (iii == 4) {
+                        wPageRight = w;
+                    }
+                    iii++;
+
                     if (isKnow) {
                         gui.blit(spell.getIcon(), x - 64 + w, y - h + (i * 34), 0, 0, 32, 32, 32, 32);
                         gui.drawString(Minecraft.getInstance().font, Component.translatable(spell.getTranslatedName()), x - 64 + w + 34, y - h + (i * 34) + 12, -1, true);
@@ -393,6 +433,67 @@ public class CrystalChooseScreen extends Screen {
                         gui.drawString(Minecraft.getInstance().font, I18n.get("wizards_reborn.arcanemicon.unknown"), x - 64 + w + 34, y - h + (i * 34) + 12, -1, true);
                     }
                     i++;
+                }
+
+                int pages = (int) Math.ceil(spellsList.get(selectedCrystalType).size() / 5f);
+
+                RenderSystem.enableBlend();
+                RenderSystem.blendFunc(GlStateManager.SourceFactor.SRC_ALPHA, GlStateManager.DestFactor.ONE);
+                Tesselator tess = Tesselator.getInstance();
+                RenderSystem.depthMask(false);
+                RenderSystem.setShader(WizardsRebornClient::getGlowingShader);
+
+                float r = 255f;
+                float g = 255f;
+                float b = 255f;
+
+                if (getWandCrystal().getItem() instanceof CrystalItem crystalItem) {
+                    Color color = crystalItem.getType().getColor();
+                    r = color.getRed() / 255f;
+                    g = color.getGreen() / 255f;
+                    b = color.getBlue() / 255f;
+                }
+
+                if (page > 0) {
+                    gui.pose().pushPose();
+                    gui.pose().translate(x - 64 + wPageLeft + 16 + 148, y - h + 16, 0);
+                    float s = (float) (0.5f * (Math.sin(Math.toRadians((ClientTickHandler.ticksInGame * 10 + partialTicks + (i * 10) * 3) + (90)))));
+                    RenderUtils.ray(gui.pose(), MultiBufferSource.immediate(tess.getBuilder()), 14, 14, 1f, r, g, b, 0.5f + s, r, g, b, 0.5f - s);
+                    tess.end();
+                    gui.pose().popPose();
+                }
+
+                gui.pose().pushPose();
+                gui.pose().translate(x - 64 + wCount + 16 + 148, y - h + 16 + 54, 0);
+                gui.pose().mulPose(Axis.ZP.rotationDegrees(90));
+                float s = (float) (0.5f * (Math.sin(Math.toRadians((ClientTickHandler.ticksInGame * 10 + partialTicks + (i * 10) * 3) + (90 * 2)))));
+                RenderUtils.ray(gui.pose(), MultiBufferSource.immediate(tess.getBuilder()), 14, 42, 1f, r, g, b, 0.5f + s, r, g, b, 0.5f - s);
+                tess.end();
+                gui.pose().popPose();
+
+                if (page + 1 < pages) {
+                    gui.pose().pushPose();
+                    gui.pose().translate(x - 64 + wPageRight + 16 + 148, y - h + 16 + 136, 0);
+                    s = (float) (0.5f * (Math.sin(Math.toRadians((ClientTickHandler.ticksInGame * 10 + partialTicks + (i * 10) * 3) + (90 * 3)))));
+                    RenderUtils.ray(gui.pose(), MultiBufferSource.immediate(tess.getBuilder()), 14, 14, 1f, r, g, b, 0.5f + s, r, g, b, 0.5f - s);
+                    tess.end();
+                    gui.pose().popPose();
+                }
+
+
+                RenderSystem.disableBlend();
+                RenderSystem.depthMask(true);
+                RenderSystem.blendFunc(GlStateManager.SourceFactor.SRC_ALPHA, GlStateManager.DestFactor.ONE_MINUS_SRC_ALPHA);
+                RenderSystem.setShader(GameRenderer::getPositionTexShader);
+
+                if (page > 0) {
+                    gui.drawString(Minecraft.getInstance().font, Component.literal("<-"), x - 64 + wPageLeft + 34 + 125, y - h + 12, -1, true);
+                }
+                gui.drawString(Minecraft.getInstance().font, Component.literal(String.valueOf(page + 1)), x - 64 + wCount + 34 + 125, y - h + 12 + 68 - 12, -1, true);
+                gui.drawString(Minecraft.getInstance().font, Component.literal("/"), x - 64 + wCount + 34 + 125, y - h + 12 + 68, -1, true);
+                gui.drawString(Minecraft.getInstance().font, Component.literal(String.valueOf(pages)), x - 64 + wCount + 34 + 125, y - h + 12 + 68 + 12, -1, true);
+                if (page + 1 < pages) {
+                    gui.drawString(Minecraft.getInstance().font, Component.literal("->"), x - 64 + wPageRight + 34 + 125, y - h + 12 + 136, -1, true);
                 }
             }
 

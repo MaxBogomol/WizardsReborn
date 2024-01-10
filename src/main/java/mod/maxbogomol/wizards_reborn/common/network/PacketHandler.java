@@ -68,6 +68,11 @@ public final class PacketHandler {
         HANDLER.registerMessage(id++, HolyRaySpellEffectPacket.class, HolyRaySpellEffectPacket::encode, HolyRaySpellEffectPacket::decode, HolyRaySpellEffectPacket::handle);
         HANDLER.registerMessage(id++, ChargeSpellProjectileRayEffectPacket.class, ChargeSpellProjectileRayEffectPacket::encode, ChargeSpellProjectileRayEffectPacket::decode, ChargeSpellProjectileRayEffectPacket::handle);
         HANDLER.registerMessage(id++, HeartOfNatureSpellEffectPacket.class, HeartOfNatureSpellEffectPacket::encode, HeartOfNatureSpellEffectPacket::decode, HeartOfNatureSpellEffectPacket::handle);
+        HANDLER.registerMessage(id++, MagicSproutSpellEffectPacket.class, MagicSproutSpellEffectPacket::encode, MagicSproutSpellEffectPacket::decode, MagicSproutSpellEffectPacket::handle);
+        HANDLER.registerMessage(id++, AirFlowEffectSpellPuchPacket.class, AirFlowEffectSpellPuchPacket::encode, AirFlowEffectSpellPuchPacket::decode, AirFlowEffectSpellPuchPacket::handle);
+        HANDLER.registerMessage(id++, WaterBreathingSpellEffectPacket.class, WaterBreathingSpellEffectPacket::encode, WaterBreathingSpellEffectPacket::decode, WaterBreathingSpellEffectPacket::handle);
+        HANDLER.registerMessage(id++, AirFlowSpellEffectPacket.class, AirFlowSpellEffectPacket::encode, AirFlowSpellEffectPacket::decode, AirFlowSpellEffectPacket::handle);
+        HANDLER.registerMessage(id++, FireShieldSpellEffectPacket.class, FireShieldSpellEffectPacket::encode, FireShieldSpellEffectPacket::decode, FireShieldSpellEffectPacket::handle);
 
         HANDLER.registerMessage(id++, MagicBladeEffectPacket.class, MagicBladeEffectPacket::encode, MagicBladeEffectPacket::decode, MagicBladeEffectPacket::handle);
     }
@@ -90,14 +95,6 @@ public final class PacketHandler {
             },
             NetworkDirection.PLAY_TO_CLIENT
     );
-
-    //public static void sendToNearby(Level world, BlockPos pos, Object toSend) {
-    //    sendToNearby(world, pos, toSend);
-    //}
-
-    //public static void sendToNearby(Level world, Entity e, Object toSend) {
-    //    sendToNearby(world, e.blockPosition(), toSend);
-    //}
 
     public static void sendTo(ServerPlayer playerMP, Object toSend) {
         HANDLER.sendTo(toSend, playerMP.connection.connection, NetworkDirection.PLAY_TO_CLIENT);

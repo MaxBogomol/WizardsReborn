@@ -16,7 +16,7 @@ public class SelfSpell extends Spell {
 
     @Override
     public void useSpell(Level world, Player player, InteractionHand hand) {
-        if (!world.isClientSide) {
+        if (!world.isClientSide && canSelfSpell(world, player, hand)) {
             ItemStack stack = player.getItemInHand(hand);
 
             CompoundTag stats = getStats(stack);
@@ -26,6 +26,10 @@ public class SelfSpell extends Spell {
             world.playSound(WizardsReborn.proxy.getPlayer(), player.getX(), player.getY(), player.getZ(), WizardsReborn.SPELL_CAST_SOUND.get(), SoundSource.BLOCKS, 0.25f, (float) (1f + ((random.nextFloat() - 0.5D) / 4)));
             selfSpell(world, player, hand);
         }
+    }
+
+    public boolean canSelfSpell(Level world, Player player, InteractionHand hand) {
+        return true;
     }
 
     public void selfSpell(Level world, Player player, InteractionHand hand) {
