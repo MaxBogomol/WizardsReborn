@@ -6,7 +6,7 @@ import java.awt.*;
 
 public class PurePolishingType extends PolishingType {
     public PurePolishingType(String id) {
-        super(id);
+        super(id, 4);
     }
 
     public boolean hasParticle() {

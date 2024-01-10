@@ -46,6 +46,11 @@ public class ChargeSpell extends Spell {
     }
 
     @Override
+    public int getMinimumPolishingLevel() {
+        return 1;
+    }
+
+    @Override
     public void useSpell(Level world, Player player, InteractionHand hand) {
         if (!world.isClientSide) {
             ItemStack stack = player.getItemInHand(hand);

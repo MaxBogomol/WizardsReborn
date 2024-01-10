@@ -188,7 +188,11 @@ public class AlchemyMachineTileEntity extends PipeBaseTileEntity implements Tick
                                 itemOutputHandler.setStackInSlot(0, output);
 
                                 for (int i = 0; i < 6; i++) {
-                                    itemHandler.extractItem(i, 1, false);
+                                    if (itemHandler.getStackInSlot(0).hasCraftingRemainingItem()) {
+                                        itemHandler.setStackInSlot(0, itemHandler.getStackInSlot(0).getCraftingRemainingItem());
+                                    } else {
+                                        itemHandler.extractItem(i, 1, false);
+                                    }
                                 }
 
                                 boolean ft1 = false;

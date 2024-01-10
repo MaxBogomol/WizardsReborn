@@ -141,7 +141,7 @@ public class Spell {
             SimpleContainer stack_inv = ArcaneWandItem.getInventory(stack);
             if (stack_inv.getItem(0).getItem() instanceof CrystalItem crystal) {
                 for (CrystalType type : getCrystalTypes()) {
-                    if (crystal.getType() == type) {
+                    if (crystal.getType() == type && crystal.getPolishing().getPolishingLevel() >= getMinimumPolishingLevel()) {
                         return true;
                     }
                 }
@@ -286,5 +286,9 @@ public class Spell {
 
     public void awardStat(Player player, ItemStack stack) {
         player.awardStat(Stats.ITEM_USED.get(stack.getItem()));
+    }
+
+    public int getMinimumPolishingLevel() {
+        return 0;
     }
 }

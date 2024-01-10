@@ -4,9 +4,11 @@ import java.awt.*;
 
 public class PolishingType {
     public String id;
+    public int level;
 
-    public PolishingType(String id) {
+    public PolishingType(String id, int level) {
         this.id = id;
+        this.level = level;
     }
 
     public boolean hasParticle() {
@@ -19,5 +21,9 @@ public class PolishingType {
 
     public String getId() {
         return id;
+    }
+
+    public int getPolishingLevel() {
+        return level;
     }
 }

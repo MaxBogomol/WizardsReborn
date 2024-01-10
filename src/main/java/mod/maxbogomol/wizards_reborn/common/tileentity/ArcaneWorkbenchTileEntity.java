@@ -114,7 +114,11 @@ public class ArcaneWorkbenchTileEntity extends BlockEntity implements TickableBl
                         }
 
                         for (int i = 0; i < 13; i++) {
-                            itemHandler.extractItem(i, 1, false);
+                            if (itemHandler.getStackInSlot(0).hasCraftingRemainingItem()) {
+                                itemHandler.setStackInSlot(0, itemHandler.getStackInSlot(0).getCraftingRemainingItem());
+                            } else {
+                                itemHandler.extractItem(i, 1, false);
+                            }
                         }
 
                         update = true;

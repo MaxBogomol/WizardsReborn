@@ -39,6 +39,7 @@ public class RegisterKnowledges {
     public static ItemKnowledge ALCHEMY_GLASS = new ItemKnowledge(WizardsReborn.MOD_ID+":alchemy_glass", true, 10, WizardsReborn.ALCHEMY_GLASS_ITEM.get());
     public static ItemKnowledge FLUID_PIPE = new ItemKnowledge(WizardsReborn.MOD_ID+":fluid_pipe", false, 2, WizardsReborn.FLUID_PIPE_ITEM.get());
     public static ItemKnowledge STEAM_PIPE = new ItemKnowledge(WizardsReborn.MOD_ID+":steam_pipe", false, 2, WizardsReborn.STEAM_PIPE_ITEM.get());
+    public static ItemKnowledge ALCHEMY_OIL = new ItemKnowledge(WizardsReborn.MOD_ID+":alchemy_oil", true, 10, WizardsReborn.ALCHEMY_OIL_BUCKET.get());
 
     public static void init() {
         Knowledges.register(ARCANUM);
@@ -74,5 +75,6 @@ public class RegisterKnowledges {
         Knowledges.register(ALCHEMY_GLASS);
         Knowledges.register(FLUID_PIPE);
         Knowledges.register(STEAM_PIPE);
+        Knowledges.register(ALCHEMY_OIL);
     }
 }

@@ -163,21 +163,24 @@ public class ArcaneIteratorTileEntity extends BlockEntity implements TickableBlo
 
                         if (recipe.get().hasRecipeArcaneEnchantment()) {
                             ArcaneEnchantment enchantment = recipe.get().getRecipeArcaneEnchantment();
-                            //if (canEnchant(stack, enchantment)) {
-                                //enchant(stack, enchantment);
                             ArcaneEnchantmentUtils.addItemArcaneEnchantment(stack, enchantment);
-                            //}
                         }
 
+                        int ii = 0;
                         for (int i = 0; i < pedestals.size(); i++) {
                             if (!pedestals.get(i).getItemHandler().getItem(0).isEmpty()) {
-                                pedestals.get(i).getItemHandler().removeItemNoUpdate(0);
+                                if (pedestals.get(i).getItemHandler().getItem(0).hasCraftingRemainingItem()) {
+                                    pedestals.get(i).getItemHandler().setItem(0, pedestals.get(i).getItemHandler().getItem(0).getCraftingRemainingItem());
+                                } else {
+                                    pedestals.get(i).getItemHandler().removeItemNoUpdate(0);
+                                }
                                 PacketUtils.SUpdateTileEntityPacket(pedestals.get(i));
                                 CompoundTag tagBlock = new CompoundTag();
                                 tagBlock.putInt("x", pedestals.get(i).getBlockPos().getX());
                                 tagBlock.putInt("y", pedestals.get(i).getBlockPos().getY());
                                 tagBlock.putInt("z", pedestals.get(i).getBlockPos().getZ());
-                                tagPos.put(String.valueOf(i), tagBlock);
+                                tagPos.put(String.valueOf(ii), tagBlock);
+                                ii++;
                                 level.playSound(WizardsReborn.proxy.getPlayer(), pedestals.get(i).getBlockPos(), WizardsReborn.WISSEN_TRANSFER_SOUND.get(), SoundSource.BLOCKS, 0.25f, (float) (1f + ((random.nextFloat() - 0.5D) / 4)));
                             }
                         }
