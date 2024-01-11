@@ -1,0 +1,26 @@
+{
+  "type": "wizards_reborn:alchemy_machine",
+  "outputFluid": {
+    "fluid": "wizards_reborn:oil_tea",
+    "amount": 1000
+  },
+  "steam": 150,
+  "ingredients": [
+    {
+      "item": "wizards_reborn:petals"
+    },
+    {
+      "item": "wizards_reborn:petals"
+    }
+  ],
+  "fluidIngredients": [
+    {
+      "name": "wizards_reborn:alchemy_oil",
+      "amount" : 500
+    },
+    {
+      "name": "minecraft:water",
+      "amount" : 500
+    }
+  ]
+}

@@ -1,7 +1,9 @@
 package mod.maxbogomol.wizards_reborn.client.arcanemicon;
 
 import mod.maxbogomol.wizards_reborn.WizardsReborn;
+import mod.maxbogomol.wizards_reborn.api.alchemy.AlchemyPotion;
 import mod.maxbogomol.wizards_reborn.api.alchemy.AlchemyPotionUtils;
+import mod.maxbogomol.wizards_reborn.api.alchemy.AlchemyPotions;
 import mod.maxbogomol.wizards_reborn.client.arcanemicon.index.BlockEntry;
 import mod.maxbogomol.wizards_reborn.client.arcanemicon.index.IndexEntry;
 import mod.maxbogomol.wizards_reborn.client.arcanemicon.index.MonogramIndexEntry;
@@ -23,18 +25,21 @@ import net.minecraft.world.level.material.Fluids;
 import net.minecraftforge.fluids.FluidStack;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class ArcanemiconChapters {
     public static List<Category> categories = new ArrayList<>();
     public static Category ARCANE_NATURE, SPELLS, CRYSTALS_RITUALS, ALCHEMY;
     public static Chapter ARCANE_NATURE_INDEX, SPELLS_INDEX, CRYSTALS_RITUALS_INDEX, ALCHEMY_INDEX,
-            ARCANUM, ARCANUM_DUST_TRANSMUTATION, ARCANE_WOOD, ARCANE_GOLD, SCYTHES, TRINKETS, ARCANE_WOOD_BOW, BANNER_PATTERNS, WISSEN, WISSEN_TRANSLATOR, ARCANE_PEDESTAL, WISSEN_ALTAR, WISSEN_CRYSTALLIZER, ARCANE_WORKBENCH, ARCANE_LUMOS, CRYSTALS, ARCANE_WAND, AUTOMATION, WISSEN_CELL, ALTAR_OF_DROUGHT, ARCANE_FORTRESS_ARMOR, INVENTOR_WIZARD_ARMOR, ARCANE_WOOD_CANE, ARCANE_ITERATOR, WISSEN_KEYCHAIN, JEWELER_TABLE,
+            ARCANUM, ARCANUM_DUST_TRANSMUTATION, ARCANE_WOOD, ARCANE_GOLD, SCYTHES, TRINKETS, ARCANE_WOOD_BOW, BANNER_PATTERNS, WISSEN, WISSEN_TRANSLATOR, ARCANE_PEDESTAL, WISSEN_ALTAR, WISSEN_CRYSTALLIZER, ARCANE_WORKBENCH, ARCANE_LUMOS, CRYSTALS, ARCANE_WAND, AUTOMATION, WISSEN_CELL, ALTAR_OF_DROUGHT, VOID_CRYSTAL, ARCANE_FORTRESS_ARMOR, INVENTOR_WIZARD_ARMOR, ARCANE_WOOD_CANE, ARCANE_ITERATOR, WISSEN_KEYCHAIN, JEWELER_TABLE,
             REDSTONE_SENSOR, WISSEN_SENSOR, COOLDOWN_SENSOR, HEAT_SENSOR, FLUID_SENSOR, STEAM_SENSOR, WISSEN_ACTIVATOR, ITEM_SORTER,
             ALL_SPELLS, EARTH_SPELLS, WATER_SPELLS, AIR_SPELLS, FIRE_SPELLS, VOID_SPELLS,
-            EARTH_PROJECTILE, WATER_PROJECTILE, AIR_PROJECTILE, FIRE_PROJECTILE, VOID_PROJECTILE, FROST_PROJECTILE, HOLY_PROJECTILE,
-            EARTH_RAY, WATER_RAY, AIR_RAY, FIRE_RAY, VOID_RAY, FROST_RAY, HOLY_RAY,
-            EARTH_CHARGE, WATER_CHARGE, AIR_CHARGE, FIRE_CHARGE, VOID_CHARGE, FROST_CHARGE, HOLY_CHARGE,
+            EARTH_PROJECTILE, WATER_PROJECTILE, AIR_PROJECTILE, FIRE_PROJECTILE, VOID_PROJECTILE, FROST_PROJECTILE, HOLY_PROJECTILE, CURSE_PROJECTILE,
+            EARTH_RAY, WATER_RAY, AIR_RAY, FIRE_RAY, VOID_RAY, FROST_RAY, HOLY_RAY, CURSE_RAY,
+            EARTH_CHARGE, WATER_CHARGE, AIR_CHARGE, FIRE_CHARGE, VOID_CHARGE, FROST_CHARGE, HOLY_CHARGE, CURSE_CHARGE,
+            HEART_OF_NATURE, WATER_BREATHING, AIR_FLOW, FIRE_SHIELD, MAGIC_SPROUT,
             MONOGRAMS, RESEARCHES, RESEARCH, LUNAM_MONOGRAM, VITA_MONOGRAM, SOLEM_MONOGRAM, MORS_MONOGRAM, MIRACULUM_MONOGRAM, TEMPUS_MONOGRAM, STATERA_MONOGRAM, ECLIPSIS_MONOGRAM, SICCITAS_MONOGRAM, SOLSTITIUM_MONOGRAM, FAMES_MONOGRAM, RENAISSANCE_MONOGRAM, BELLUM_MONOGRAM, LUX_MONOGRAM, KARA_MONOGRAM, DEGRADATIO_MONOGRAM, PRAEDICTIONEM_MONOGRAM, EVOLUTIONIS_MONOGRAM, DARK_MONOGRAM, UNIVERSUM_MONOGRAM,
             MOR, MORTAR, ARCANE_LINEN, MUSHROOM_CAPS, WISESTONE, WISESTONE_PEDESTAL, FLUID_PIPES, STEAM_PIPES, ORBITAL_FLUID_RETAINER, ALCHEMY_FURNACE, STEAM_THERMAL_STORAGE, ALCHEMY_MACHINE, ALCHEMY_OIL, ARCACITE, MUSIC_DISC_ARCANUM, MUSIC_DISC_MOR, ALCHEMY_GLASS, ALCHEMY_POTIONS, TEA, ALCHEMY_BREWS, ARCANE_CENSER, SMOKING_PIPE, ARCACITE_POLISHING_MIXTURE;
     public static ResearchPage RESEARCH_MAIN, RESEARCH_LIST;
@@ -698,6 +703,22 @@ public class ArcanemiconChapters {
                 new TextPage("wizards_reborn.arcanemicon.page.altar_of_drought.poem")
         );
 
+        VOID_CRYSTAL = new Chapter(
+                "wizards_reborn.arcanemicon.chapter.void_crystal",
+                new TitledBlockPage("wizards_reborn.arcanemicon.page.void_crystal",
+                        new BlockEntry(new ItemStack(WizardsReborn.ARCANE_PEDESTAL_ITEM.get()), new ItemStack(WizardsReborn.VOID_CRYSTAL_SEED.get())),
+                        new BlockEntry(new ItemStack(WizardsReborn.ARCANE_PEDESTAL_ITEM.get()), new ItemStack(WizardsReborn.VOID_CRYSTAL.get())),
+                        new BlockEntry(new ItemStack(WizardsReborn.ARCANE_PEDESTAL_ITEM.get()), new ItemStack(WizardsReborn.FRACTURED_VOID_CRYSTAL.get()))
+                ),
+                new WissenCrystallizerPage(new ItemStack(WizardsReborn.VOID_CRYSTAL_SEED.get()),
+                        new ItemStack(WizardsReborn.ARCACITE.get()), new ItemStack(WizardsReborn.EARTH_CRYSTAL_SEED.get()), new ItemStack(WizardsReborn.WATER_CRYSTAL_SEED.get()), new ItemStack(WizardsReborn.AIR_CRYSTAL_SEED.get()), new ItemStack(WizardsReborn.FIRE_CRYSTAL_SEED.get())
+                ),
+                new ArcanumDustTransmutationPage(new ItemStack(WizardsReborn.VOID_CRYSTAL.get()), new ItemStack(WizardsReborn.VOID_CRYSTAL_SEED.get())),
+                new WissenCrystallizerPage(new ItemStack(WizardsReborn.VOID_CRYSTAL.get()),
+                        new ItemStack(WizardsReborn.ARCANUM.get()), new ItemStack(WizardsReborn.FRACTURED_VOID_CRYSTAL.get()), new ItemStack(WizardsReborn.FRACTURED_VOID_CRYSTAL.get()), new ItemStack(WizardsReborn.FRACTURED_VOID_CRYSTAL.get())
+                )
+        );
+
         ARCANE_FORTRESS_ARMOR = new Chapter(
                 "wizards_reborn.arcanemicon.chapter.arcane_fortress_armor",
                 new TitledBlockPage("wizards_reborn.arcanemicon.page.arcane_fortress_armor",
@@ -962,12 +983,26 @@ public class ArcanemiconChapters {
         JEWELER_TABLE = new Chapter(
                 "wizards_reborn.arcanemicon.chapter.jeweler_table",
                 new TitledBlockPage("wizards_reborn.arcanemicon.page.jeweler_table",
-                        new BlockEntry(new ItemStack(WizardsReborn.WISESTONE_PEDESTAL_ITEM.get()), new ItemStack(WizardsReborn.MUSIC_DISC_ARCANUM.get()))
+                        new BlockEntry(new ItemStack(WizardsReborn.ARCANE_PEDESTAL_ITEM.get()), new ItemStack(WizardsReborn.JEWELER_TABLE_ITEM.get()))
                 ),
-                new AlchemyMachinePage(new ItemStack(WizardsReborn.MUSIC_DISC_ARCANUM.get()), FluidStack.EMPTY, true, true,
-                        new FluidStack(WizardsReborn.ALCHEMY_OIL_FLUID.get(), 1000), FluidStack.EMPTY, FluidStack.EMPTY,
-                        new ItemStack(Items.MUSIC_DISC_13), new ItemStack(WizardsReborn.ARCANUM.get())
-                )
+                new ArcaneWorkbenchPage(new ItemStack(WizardsReborn.JEWELER_TABLE_ITEM.get()),
+                        new ItemStack(WizardsReborn.ARCANE_WOOD_BRANCH.get()), ItemStack.EMPTY, new ItemStack(WizardsReborn.ARCANE_WOOD_BRANCH.get()),
+                        new ItemStack(Items.RED_WOOL), new ItemStack(Items.RED_WOOL), new ItemStack(Items.RED_WOOL),
+                        new ItemStack(WizardsReborn.ARCANE_GOLD_INGOT.get()), new ItemStack(WizardsReborn.WISSEN_ALTAR.get()), new ItemStack(WizardsReborn.ARCANE_GOLD_INGOT.get()),
+                        new ItemStack(WizardsReborn.ARCACITE.get()), new ItemStack(WizardsReborn.ARCANUM.get()), new ItemStack(WizardsReborn.ARCANUM.get()), new ItemStack(WizardsReborn.ARCANUM.get())
+                ),
+                new TitledBlockPage("wizards_reborn.arcanemicon.page.faceted_crystals",
+                        new BlockEntry(new ItemStack(WizardsReborn.ARCANE_PEDESTAL_ITEM.get()), new ItemStack(WizardsReborn.FACETED_EARTH_CRYSTAL.get())),
+                        new BlockEntry(new ItemStack(WizardsReborn.ARCANE_PEDESTAL_ITEM.get()), new ItemStack(WizardsReborn.FACETED_WATER_CRYSTAL.get())),
+                        new BlockEntry(new ItemStack(WizardsReborn.ARCANE_PEDESTAL_ITEM.get()), new ItemStack(WizardsReborn.FACETED_AIR_CRYSTAL.get())),
+                        new BlockEntry(new ItemStack(WizardsReborn.ARCANE_PEDESTAL_ITEM.get()), new ItemStack(WizardsReborn.FACETED_FIRE_CRYSTAL.get())),
+                        new BlockEntry(new ItemStack(WizardsReborn.ARCANE_PEDESTAL_ITEM.get()), new ItemStack(WizardsReborn.FACETED_VOID_CRYSTAL.get()))
+                ),
+                new JewelerTablePage(new ItemStack(WizardsReborn.FACETED_EARTH_CRYSTAL.get()), new ItemStack(WizardsReborn.EARTH_CRYSTAL.get()), new ItemStack(WizardsReborn.ARCACITE_POLISHING_MIXTURE.get())),
+                new JewelerTablePage(new ItemStack(WizardsReborn.FACETED_WATER_CRYSTAL.get()), new ItemStack(WizardsReborn.WATER_CRYSTAL.get()), new ItemStack(WizardsReborn.ARCACITE_POLISHING_MIXTURE.get())),
+                new JewelerTablePage(new ItemStack(WizardsReborn.FACETED_AIR_CRYSTAL.get()), new ItemStack(WizardsReborn.AIR_CRYSTAL.get()), new ItemStack(WizardsReborn.ARCACITE_POLISHING_MIXTURE.get())),
+                new JewelerTablePage(new ItemStack(WizardsReborn.FACETED_FIRE_CRYSTAL.get()), new ItemStack(WizardsReborn.FIRE_CRYSTAL.get()), new ItemStack(WizardsReborn.ARCACITE_POLISHING_MIXTURE.get())),
+                new JewelerTablePage(new ItemStack(WizardsReborn.FACETED_VOID_CRYSTAL.get()), new ItemStack(WizardsReborn.VOID_CRYSTAL.get()), new ItemStack(WizardsReborn.ARCACITE_POLISHING_MIXTURE.get()))
         );
 
         ARCANE_NATURE_INDEX = new Chapter(
@@ -999,12 +1034,13 @@ public class ArcanemiconChapters {
                         new IndexEntry(ALTAR_OF_DROUGHT, new ItemStack(WizardsReborn.ALTAR_OF_DROUGHT_ITEM.get()), RegisterKnowledges.ARCACITE)
                 ),
                 new IndexPage(
+                        new IndexEntry(VOID_CRYSTAL, new ItemStack(WizardsReborn.VOID_CRYSTAL.get()), RegisterKnowledges.ARCACITE),
                         new IndexEntry(ARCANE_FORTRESS_ARMOR, new ItemStack(WizardsReborn.ARCANE_FORTRESS_CHESTPLATE.get()), RegisterKnowledges.ARCACITE),
                         new IndexEntry(INVENTOR_WIZARD_ARMOR, new ItemStack(WizardsReborn.INVENTOR_WIZARD_HAT.get()), RegisterKnowledges.ARCACITE),
                         new IndexEntry(ARCANE_WOOD_CANE, new ItemStack(WizardsReborn.ARCANE_WOOD_CANE.get()), RegisterKnowledges.ARCACITE),
                         new IndexEntry(ARCANE_ITERATOR, new ItemStack(WizardsReborn.ARCANE_ITERATOR_ITEM.get()), RegisterKnowledges.ARCACITE),
                         new IndexEntry(WISSEN_KEYCHAIN, new ItemStack(WizardsReborn.WISSEN_KEYCHAIN.get()), RegisterKnowledges.ARCANE_ITERATOR),
-                        new IndexEntry(JEWELER_TABLE, new ItemStack(WizardsReborn.JEWELER_TABLE_ITEM.get()), RegisterKnowledges.ARCANE_ITERATOR)
+                        new IndexEntry(JEWELER_TABLE, new ItemStack(WizardsReborn.JEWELER_TABLE_ITEM.get()), RegisterKnowledges.ARCACITE_POLISHING_MIXTURE)
                 )
         );
 
@@ -1043,6 +1079,11 @@ public class ArcanemiconChapters {
                 new TitledSpellPage("wizards_reborn.arcanemicon.page.holy_projectile", WizardsReborn.HOLY_PROJECTILE_SPELL),
                 new SpellCharPage("wizards_reborn.arcanemicon.page.holy_projectile.char", WizardsReborn.HOLY_PROJECTILE_SPELL)
         );
+        CURSE_PROJECTILE = new Chapter(
+                "wizards_reborn.arcanemicon.chapter.curse_projectile",
+                new TitledSpellPage("wizards_reborn.arcanemicon.page.curse_projectile", WizardsReborn.CURSE_PROJECTILE_SPELL),
+                new SpellCharPage("wizards_reborn.arcanemicon.page.curse_projectile.char", WizardsReborn.CURSE_PROJECTILE_SPELL)
+        );
 
         EARTH_RAY = new Chapter(
                 "wizards_reborn.arcanemicon.chapter.earth_ray",
@@ -1079,6 +1120,11 @@ public class ArcanemiconChapters {
                 new TitledSpellPage("wizards_reborn.arcanemicon.page.holy_ray", WizardsReborn.HOLY_RAY_SPELL),
                 new SpellCharPage("wizards_reborn.arcanemicon.page.holy_ray.char", WizardsReborn.HOLY_RAY_SPELL)
         );
+        CURSE_RAY = new Chapter(
+                "wizards_reborn.arcanemicon.chapter.curse_ray",
+                new TitledSpellPage("wizards_reborn.arcanemicon.page.curse_ray", WizardsReborn.CURSE_RAY_SPELL),
+                new SpellCharPage("wizards_reborn.arcanemicon.page.curse_ray.char", WizardsReborn.CURSE_RAY_SPELL)
+        );
 
         EARTH_CHARGE = new Chapter(
                 "wizards_reborn.arcanemicon.chapter.earth_charge",
@@ -1114,6 +1160,38 @@ public class ArcanemiconChapters {
                 "wizards_reborn.arcanemicon.chapter.holy_charge",
                 new TitledSpellPage("wizards_reborn.arcanemicon.page.holy_charge", WizardsReborn.HOLY_CHARGE_SPELL),
                 new SpellCharPage("wizards_reborn.arcanemicon.page.holy_charge.char", WizardsReborn.HOLY_CHARGE_SPELL)
+        );
+        CURSE_CHARGE = new Chapter(
+                "wizards_reborn.arcanemicon.chapter.curse_charge",
+                new TitledSpellPage("wizards_reborn.arcanemicon.page.curse_charge", WizardsReborn.CURSE_CHARGE_SPELL),
+                new SpellCharPage("wizards_reborn.arcanemicon.page.curse_charge.char", WizardsReborn.CURSE_CHARGE_SPELL)
+        );
+
+        HEART_OF_NATURE = new Chapter(
+                "wizards_reborn.arcanemicon.chapter.heart_of_nature",
+                new TitledSpellPage("wizards_reborn.arcanemicon.page.heart_of_nature", WizardsReborn.HEART_OF_NATURE_SPELL),
+                new SpellCharPage("wizards_reborn.arcanemicon.page.heart_of_nature.char", WizardsReborn.HEART_OF_NATURE_SPELL)
+        );
+        WATER_BREATHING = new Chapter(
+                "wizards_reborn.arcanemicon.chapter.water_breathing",
+                new TitledSpellPage("wizards_reborn.arcanemicon.page.water_breathing", WizardsReborn.WATER_BREATHING_SPELL),
+                new SpellCharPage("wizards_reborn.arcanemicon.page.water_breathing.char", WizardsReborn.WATER_BREATHING_SPELL)
+        );
+        AIR_FLOW = new Chapter(
+                "wizards_reborn.arcanemicon.chapter.air_flow",
+                new TitledSpellPage("wizards_reborn.arcanemicon.page.air_flow", WizardsReborn.AIR_FLOW_SPELL),
+                new SpellCharPage("wizards_reborn.arcanemicon.page.air_flow.char", WizardsReborn.AIR_FLOW_SPELL)
+        );
+        FIRE_SHIELD = new Chapter(
+                "wizards_reborn.arcanemicon.chapter.fire_shield",
+                new TitledSpellPage("wizards_reborn.arcanemicon.page.fire_shield", WizardsReborn.FIRE_SHIELD_SPELL),
+                new SpellCharPage("wizards_reborn.arcanemicon.page.fire_shield.char", WizardsReborn.FIRE_SHIELD_SPELL)
+        );
+
+        MAGIC_SPROUT = new Chapter(
+                "wizards_reborn.arcanemicon.chapter.magic_sprout",
+                new TitledSpellPage("wizards_reborn.arcanemicon.page.magic_sprout", WizardsReborn.MAGIC_SPROUT_SPELL),
+                new SpellCharPage("wizards_reborn.arcanemicon.page.magic_sprout.char", WizardsReborn.MAGIC_SPROUT_SPELL)
         );
 
         LUNAM_MONOGRAM = new Chapter(
@@ -1229,24 +1307,34 @@ public class ArcanemiconChapters {
                 ),
                 new SpellIndexPage(
                         new SpellIndexEntry(HOLY_PROJECTILE, WizardsReborn.HOLY_PROJECTILE_SPELL, RegisterKnowledges.ARCANE_WAND),
+                        new SpellIndexEntry(CURSE_PROJECTILE, WizardsReborn.CURSE_PROJECTILE_SPELL, RegisterKnowledges.ARCANE_WAND),
                         new SpellIndexEntry(EARTH_RAY, WizardsReborn.EARTH_RAY_SPELL, RegisterKnowledges.ARCANE_WAND),
                         new SpellIndexEntry(WATER_RAY, WizardsReborn.WATER_RAY_SPELL, RegisterKnowledges.ARCANE_WAND),
                         new SpellIndexEntry(AIR_RAY, WizardsReborn.AIR_RAY_SPELL, RegisterKnowledges.ARCANE_WAND),
                         new SpellIndexEntry(FIRE_RAY, WizardsReborn.FIRE_RAY_SPELL, RegisterKnowledges.ARCANE_WAND),
-                        new SpellIndexEntry(VOID_RAY, WizardsReborn.VOID_RAY_SPELL, RegisterKnowledges.VOID_CRYSTAL),
-                        new SpellIndexEntry(FROST_RAY, WizardsReborn.FROST_RAY_SPELL, RegisterKnowledges.ARCANE_WAND)
+                        new SpellIndexEntry(VOID_RAY, WizardsReborn.VOID_RAY_SPELL, RegisterKnowledges.VOID_CRYSTAL)
                 ),
                 new SpellIndexPage(
-                        new SpellIndexEntry(HOLY_RAY, WizardsReborn.HOLY_RAY_SPELL, RegisterKnowledges.ARCANE_WAND)
+                        new SpellIndexEntry(FROST_RAY, WizardsReborn.FROST_RAY_SPELL, RegisterKnowledges.ARCANE_WAND),
+                        new SpellIndexEntry(HOLY_RAY, WizardsReborn.HOLY_RAY_SPELL, RegisterKnowledges.ARCANE_WAND),
+                        new SpellIndexEntry(CURSE_RAY, WizardsReborn.CURSE_RAY_SPELL, RegisterKnowledges.ARCANE_WAND)
                 ),
                 new SpellIndexPage(
-                        new SpellIndexEntry(EARTH_CHARGE, WizardsReborn.EARTH_CHARGE_SPELL, RegisterKnowledges.ARCANE_WAND),
-                        new SpellIndexEntry(WATER_CHARGE, WizardsReborn.WATER_CHARGE_SPELL, RegisterKnowledges.ARCANE_WAND),
+                        new SpellIndexEntry(EARTH_CHARGE, WizardsReborn.EARTH_CHARGE_SPELL, RegisterKnowledges.FACETED_CRYSTALS),
+                        new SpellIndexEntry(WATER_CHARGE, WizardsReborn.WATER_CHARGE_SPELL, RegisterKnowledges.FACETED_CRYSTALS),
                         new SpellIndexEntry(AIR_CHARGE, WizardsReborn.AIR_CHARGE_SPELL, RegisterKnowledges.ARCANE_WAND),
-                        new SpellIndexEntry(FIRE_CHARGE, WizardsReborn.FIRE_CHARGE_SPELL, RegisterKnowledges.ARCANE_WAND),
-                        new SpellIndexEntry(VOID_CHARGE, WizardsReborn.VOID_CHARGE_SPELL, RegisterKnowledges.VOID_CRYSTAL),
-                        new SpellIndexEntry(FROST_CHARGE, WizardsReborn.FROST_CHARGE_SPELL, RegisterKnowledges.ARCANE_WAND),
-                        new SpellIndexEntry(HOLY_CHARGE, WizardsReborn.HOLY_CHARGE_SPELL, RegisterKnowledges.ARCANE_WAND)
+                        new SpellIndexEntry(FIRE_CHARGE, WizardsReborn.FIRE_CHARGE_SPELL, RegisterKnowledges.FACETED_CRYSTALS),
+                        new SpellIndexEntry(VOID_CHARGE, WizardsReborn.VOID_CHARGE_SPELL, RegisterKnowledges.FACETED_CRYSTALS),
+                        new SpellIndexEntry(FROST_CHARGE, WizardsReborn.FROST_CHARGE_SPELL, RegisterKnowledges.FACETED_CRYSTALS),
+                        new SpellIndexEntry(HOLY_CHARGE, WizardsReborn.HOLY_CHARGE_SPELL, RegisterKnowledges.FACETED_CRYSTALS)
+                ),
+                new SpellIndexPage(
+                        new SpellIndexEntry(CURSE_CHARGE, WizardsReborn.CURSE_CHARGE_SPELL, RegisterKnowledges.FACETED_CRYSTALS),
+                        new SpellIndexEntry(HEART_OF_NATURE, WizardsReborn.HEART_OF_NATURE_SPELL, RegisterKnowledges.ARCANE_WAND),
+                        new SpellIndexEntry(WATER_BREATHING, WizardsReborn.WATER_BREATHING_SPELL, RegisterKnowledges.FACETED_CRYSTALS),
+                        new SpellIndexEntry(AIR_FLOW, WizardsReborn.AIR_FLOW_SPELL, RegisterKnowledges.FACETED_CRYSTALS),
+                        new SpellIndexEntry(FIRE_SHIELD, WizardsReborn.FIRE_SHIELD_SPELL, RegisterKnowledges.FACETED_CRYSTALS),
+                        new SpellIndexEntry(MAGIC_SPROUT, WizardsReborn.MAGIC_SPROUT_SPELL, RegisterKnowledges.FACETED_CRYSTALS)
                 )
         );
 
@@ -1259,8 +1347,10 @@ public class ArcanemiconChapters {
                         new SpellIndexEntry(HOLY_RAY, WizardsReborn.HOLY_RAY_SPELL, RegisterKnowledges.ARCANE_WAND)
                 ),
                 new SpellIndexPage(
-                        new SpellIndexEntry(EARTH_CHARGE, WizardsReborn.EARTH_CHARGE_SPELL, RegisterKnowledges.ARCANE_WAND),
-                        new SpellIndexEntry(HOLY_CHARGE, WizardsReborn.HOLY_CHARGE_SPELL, RegisterKnowledges.ARCANE_WAND)
+                        new SpellIndexEntry(EARTH_CHARGE, WizardsReborn.EARTH_CHARGE_SPELL, RegisterKnowledges.FACETED_CRYSTALS),
+                        new SpellIndexEntry(HOLY_CHARGE, WizardsReborn.HOLY_CHARGE_SPELL, RegisterKnowledges.FACETED_CRYSTALS),
+                        new SpellIndexEntry(HEART_OF_NATURE, WizardsReborn.HEART_OF_NATURE_SPELL, RegisterKnowledges.FACETED_CRYSTALS),
+                        new SpellIndexEntry(MAGIC_SPROUT, WizardsReborn.MAGIC_SPROUT_SPELL, RegisterKnowledges.FACETED_CRYSTALS)
                 )
         );
 
@@ -1273,8 +1363,10 @@ public class ArcanemiconChapters {
                         new SpellIndexEntry(FROST_RAY, WizardsReborn.FROST_RAY_SPELL, RegisterKnowledges.ARCANE_WAND)
                 ),
                 new SpellIndexPage(
-                        new SpellIndexEntry(WATER_CHARGE, WizardsReborn.WATER_CHARGE_SPELL, RegisterKnowledges.ARCANE_WAND),
-                        new SpellIndexEntry(FROST_CHARGE, WizardsReborn.FROST_CHARGE_SPELL, RegisterKnowledges.ARCANE_WAND)
+                        new SpellIndexEntry(WATER_CHARGE, WizardsReborn.WATER_CHARGE_SPELL, RegisterKnowledges.FACETED_CRYSTALS),
+                        new SpellIndexEntry(FROST_CHARGE, WizardsReborn.FROST_CHARGE_SPELL, RegisterKnowledges.FACETED_CRYSTALS),
+                        new SpellIndexEntry(WATER_BREATHING, WizardsReborn.WATER_BREATHING_SPELL, RegisterKnowledges.FACETED_CRYSTALS),
+                        new SpellIndexEntry(MAGIC_SPROUT, WizardsReborn.MAGIC_SPROUT_SPELL, RegisterKnowledges.FACETED_CRYSTALS)
                 )
         );
 
@@ -1287,8 +1379,9 @@ public class ArcanemiconChapters {
                         new SpellIndexEntry(HOLY_RAY, WizardsReborn.HOLY_RAY_SPELL, RegisterKnowledges.ARCANE_WAND)
                 ),
                 new SpellIndexPage(
-                        new SpellIndexEntry(AIR_CHARGE, WizardsReborn.AIR_CHARGE_SPELL, RegisterKnowledges.ARCANE_WAND),
-                        new SpellIndexEntry(HOLY_CHARGE, WizardsReborn.HOLY_CHARGE_SPELL, RegisterKnowledges.ARCANE_WAND)
+                        new SpellIndexEntry(AIR_CHARGE, WizardsReborn.AIR_CHARGE_SPELL, RegisterKnowledges.FACETED_CRYSTALS),
+                        new SpellIndexEntry(HOLY_CHARGE, WizardsReborn.HOLY_CHARGE_SPELL, RegisterKnowledges.FACETED_CRYSTALS),
+                        new SpellIndexEntry(AIR_FLOW, WizardsReborn.AIR_FLOW_SPELL, RegisterKnowledges.FACETED_CRYSTALS)
                 )
         );
 
@@ -1296,10 +1389,14 @@ public class ArcanemiconChapters {
                 "wizards_reborn.arcanemicon.chapter.fire_spells",
                 new TitledSpellIndexPage("wizards_reborn.arcanemicon.page.fire_spells",
                         new SpellIndexEntry(FIRE_PROJECTILE, WizardsReborn.FIRE_PROJECTILE_SPELL, RegisterKnowledges.ARCANE_WAND),
-                        new SpellIndexEntry(FIRE_RAY, WizardsReborn.FIRE_RAY_SPELL, RegisterKnowledges.ARCANE_WAND)
+                        new SpellIndexEntry(CURSE_PROJECTILE, WizardsReborn.CURSE_PROJECTILE_SPELL, RegisterKnowledges.ARCANE_WAND),
+                        new SpellIndexEntry(FIRE_RAY, WizardsReborn.FIRE_RAY_SPELL, RegisterKnowledges.ARCANE_WAND),
+                        new SpellIndexEntry(CURSE_RAY, WizardsReborn.CURSE_RAY_SPELL, RegisterKnowledges.ARCANE_WAND)
                 ),
                 new SpellIndexPage(
-                        new SpellIndexEntry(FIRE_CHARGE, WizardsReborn.FIRE_CHARGE_SPELL, RegisterKnowledges.ARCANE_WAND)
+                        new SpellIndexEntry(FIRE_CHARGE, WizardsReborn.FIRE_CHARGE_SPELL, RegisterKnowledges.FACETED_CRYSTALS),
+                        new SpellIndexEntry(CURSE_CHARGE, WizardsReborn.CURSE_CHARGE_SPELL, RegisterKnowledges.FACETED_CRYSTALS),
+                        new SpellIndexEntry(FIRE_SHIELD, WizardsReborn.FIRE_SHIELD_SPELL, RegisterKnowledges.FACETED_CRYSTALS)
                 )
         );
 
@@ -1307,10 +1404,13 @@ public class ArcanemiconChapters {
                 "wizards_reborn.arcanemicon.chapter.void_spells",
                 new TitledSpellIndexPage("wizards_reborn.arcanemicon.page.void_spells",
                         new SpellIndexEntry(VOID_PROJECTILE, WizardsReborn.VOID_PROJECTILE_SPELL, RegisterKnowledges.VOID_CRYSTAL),
-                        new SpellIndexEntry(VOID_RAY, WizardsReborn.VOID_RAY_SPELL, RegisterKnowledges.VOID_CRYSTAL)
+                        new SpellIndexEntry(CURSE_PROJECTILE, WizardsReborn.CURSE_PROJECTILE_SPELL, RegisterKnowledges.ARCANE_WAND),
+                        new SpellIndexEntry(VOID_RAY, WizardsReborn.VOID_RAY_SPELL, RegisterKnowledges.VOID_CRYSTAL),
+                        new SpellIndexEntry(CURSE_RAY, WizardsReborn.CURSE_RAY_SPELL, RegisterKnowledges.ARCANE_WAND)
                 ),
                 new SpellIndexPage(
-                        new SpellIndexEntry(VOID_CHARGE, WizardsReborn.VOID_CHARGE_SPELL, RegisterKnowledges.ARCANE_WAND)
+                        new SpellIndexEntry(VOID_CHARGE, WizardsReborn.VOID_CHARGE_SPELL, RegisterKnowledges.FACETED_CRYSTALS),
+                        new SpellIndexEntry(CURSE_CHARGE, WizardsReborn.CURSE_CHARGE_SPELL, RegisterKnowledges.FACETED_CRYSTALS)
                 )
         );
 
@@ -1728,17 +1828,22 @@ public class ArcanemiconChapters {
                         new ItemStack(WizardsReborn.POLISHED_WISESTONE_ITEM.get()), new ItemStack(WizardsReborn.POLISHED_WISESTONE_ITEM.get()),  new ItemStack(WizardsReborn.POLISHED_WISESTONE_ITEM.get()),
                         ItemStack.EMPTY, new ItemStack(WizardsReborn.WISSEN_ALTAR_ITEM.get()),  ItemStack.EMPTY,
                         new ItemStack(WizardsReborn.ARCANE_GOLD_INGOT.get()), new ItemStack(WizardsReborn.FLUID_PIPE_ITEM.get()), new ItemStack(WizardsReborn.ARCANE_GOLD_INGOT.get()), new ItemStack(WizardsReborn.FLUID_PIPE_ITEM.get())
+                ),
+                new AlchemyMachinePage(ItemStack.EMPTY, new FluidStack(Fluids.LAVA, 750), false, true,
+                        FluidStack.EMPTY, FluidStack.EMPTY, FluidStack.EMPTY,
+                        new ItemStack(Items.MAGMA_BLOCK), new ItemStack(Items.MAGMA_BLOCK), new ItemStack(Items.MAGMA_BLOCK), new ItemStack(Items.MAGMA_BLOCK)
                 )
         );
 
         ALCHEMY_OIL = new Chapter(
                 "wizards_reborn.arcanemicon.chapter.alchemy_oil",
                 new TitledBlockPage("wizards_reborn.arcanemicon.page.alchemy_oil",
-                        new BlockEntry(new ItemStack(WizardsReborn.WISESTONE_PEDESTAL_ITEM.get()), new ItemStack(WizardsReborn.MUSIC_DISC_ARCANUM.get()))
+                        new BlockEntry(new ItemStack(WizardsReborn.WISESTONE_PEDESTAL_ITEM.get()), new ItemStack(WizardsReborn.ALCHEMY_OIL_BUCKET.get()))
                 ),
-                new AlchemyMachinePage(new ItemStack(WizardsReborn.MUSIC_DISC_ARCANUM.get()), FluidStack.EMPTY, true, true,
-                        new FluidStack(WizardsReborn.ALCHEMY_OIL_FLUID.get(), 1000), FluidStack.EMPTY, FluidStack.EMPTY,
-                        new ItemStack(Items.MUSIC_DISC_13), new ItemStack(WizardsReborn.ARCANUM.get())
+                new AlchemyMachinePage(ItemStack.EMPTY, new FluidStack(WizardsReborn.ALCHEMY_OIL_FLUID.get(), 1000), false, true,
+                        FluidStack.EMPTY, FluidStack.EMPTY, FluidStack.EMPTY,
+                        new ItemStack(WizardsReborn.ARCANE_LINEN_ITEM.get()), new ItemStack(WizardsReborn.ARCANE_LINEN_ITEM.get()), new ItemStack(WizardsReborn.ARCANE_LINEN_ITEM.get()), new ItemStack(WizardsReborn.ARCANE_LINEN_ITEM.get()),
+                        new ItemStack(WizardsReborn.PETALS.get())
                 )
         );
 
@@ -1797,59 +1902,165 @@ public class ArcanemiconChapters {
                 )
         );
 
+        Map<AlchemyPotion, ItemStack> vialPotions = new HashMap<AlchemyPotion, ItemStack>();
+        Map<AlchemyPotion, ItemStack> flaskPotions = new HashMap<AlchemyPotion, ItemStack>();
+
+        for (AlchemyPotion potion : AlchemyPotions.getAlchemyPotions()) {
+            ItemStack stack = new ItemStack(WizardsReborn.ALCHEMY_VIAL_POTION.get());
+            AlchemyPotionUtils.setPotion(stack, potion);
+            vialPotions.put(potion, stack);
+
+            stack = new ItemStack(WizardsReborn.ALCHEMY_FLASK_POTION.get());
+            AlchemyPotionUtils.setPotion(stack, potion);
+            flaskPotions.put(potion, stack);
+        }
+
+
         ALCHEMY_GLASS = new Chapter(
                 "wizards_reborn.arcanemicon.chapter.alchemy_glass",
                 new TitledBlockPage("wizards_reborn.arcanemicon.page.alchemy_glass",
-                        new BlockEntry(new ItemStack(WizardsReborn.WISESTONE_PEDESTAL_ITEM.get()), new ItemStack(WizardsReborn.MUSIC_DISC_ARCANUM.get()))
+                        new BlockEntry(new ItemStack(WizardsReborn.WISESTONE_PEDESTAL_ITEM.get()), new ItemStack(WizardsReborn.ALCHEMY_GLASS_ITEM.get()))
                 ),
-                new AlchemyMachinePage(new ItemStack(WizardsReborn.MUSIC_DISC_ARCANUM.get()), FluidStack.EMPTY, true, true,
-                        new FluidStack(WizardsReborn.ALCHEMY_OIL_FLUID.get(), 1000), FluidStack.EMPTY, FluidStack.EMPTY,
-                        new ItemStack(Items.MUSIC_DISC_13), new ItemStack(WizardsReborn.ARCANUM.get())
+                new AlchemyMachinePage(new ItemStack(WizardsReborn.ALCHEMY_GLASS_ITEM.get(), 4), FluidStack.EMPTY, true, true,
+                        new FluidStack(WizardsReborn.ALCHEMY_OIL_FLUID.get(), 500), FluidStack.EMPTY, FluidStack.EMPTY,
+                        new ItemStack(Items.GLASS), new ItemStack(Items.GLASS), new ItemStack(Items.GLASS), new ItemStack(Items.GLASS),
+                        new ItemStack(WizardsReborn.ARCANUM_DUST.get())
+                ),
+                new TitledBlockPage("wizards_reborn.arcanemicon.page.alchemy_vial",
+                        new BlockEntry(new ItemStack(WizardsReborn.WISESTONE_PEDESTAL_ITEM.get()), new ItemStack(WizardsReborn.ALCHEMY_VIAL.get()))
+                ),
+                new ArcaneWorkbenchPage(new ItemStack(WizardsReborn.ALCHEMY_VIAL.get()),
+                        ItemStack.EMPTY, new ItemStack(WizardsReborn.ARCANE_WOOD_PLANKS.get()),  ItemStack.EMPTY,
+                        new ItemStack(WizardsReborn.ALCHEMY_GLASS_ITEM.get()), ItemStack.EMPTY,  new ItemStack(WizardsReborn.ALCHEMY_GLASS_ITEM.get()),
+                        new ItemStack(WizardsReborn.ALCHEMY_GLASS_ITEM.get()), new ItemStack(WizardsReborn.ALCHEMY_GLASS_ITEM.get()),  new ItemStack(WizardsReborn.ALCHEMY_GLASS_ITEM.get())
+                ),
+                new AlchemyMachinePage(vialPotions.get(RegisterAlchemyPotions.ALCHEMY_OIL), FluidStack.EMPTY, false, true,
+                        FluidStack.EMPTY, FluidStack.EMPTY, FluidStack.EMPTY,
+                        new ItemStack(WizardsReborn.ARCANE_LINEN_ITEM.get()), new ItemStack(WizardsReborn.ARCANE_LINEN_ITEM.get()), new ItemStack(WizardsReborn.ARCANE_LINEN_ITEM.get()),
+                        new ItemStack(WizardsReborn.PETALS.get()), new ItemStack(WizardsReborn.ALCHEMY_VIAL.get())
                 )
         );
-
-        ItemStack vialWater = new ItemStack(WizardsReborn.ALCHEMY_VIAL_POTION.get());
-        ItemStack vialMundaneBrew = new ItemStack(WizardsReborn.ALCHEMY_VIAL_POTION.get());
-        ItemStack vialAlchemyOil = new ItemStack(WizardsReborn.ALCHEMY_VIAL_POTION.get());
-        ItemStack vialOilTea = new ItemStack(WizardsReborn.ALCHEMY_VIAL_POTION.get());
-        ItemStack vialWissenTea = new ItemStack(WizardsReborn.ALCHEMY_VIAL_POTION.get());
-
-        AlchemyPotionUtils.setPotion(vialWater, RegisterAlchemyPotions.WATER);
-        AlchemyPotionUtils.setPotion(vialMundaneBrew, RegisterAlchemyPotions.MUNDANE_BREW);
-        AlchemyPotionUtils.setPotion(vialAlchemyOil, RegisterAlchemyPotions.ALCHEMY_OIL);
-        AlchemyPotionUtils.setPotion(vialOilTea, RegisterAlchemyPotions.OIL_TEA);
-        AlchemyPotionUtils.setPotion(vialWissenTea, RegisterAlchemyPotions.WISSEN_TEA);
 
         ALCHEMY_POTIONS = new Chapter(
                 "wizards_reborn.arcanemicon.chapter.alchemy_potions",
                 new TitledBlockPage("wizards_reborn.arcanemicon.page.alchemy_potions",
-                        new BlockEntry(new ItemStack(WizardsReborn.WISESTONE_PEDESTAL_ITEM.get()), new ItemStack(WizardsReborn.MUSIC_DISC_ARCANUM.get()))
+                        new BlockEntry(new ItemStack(WizardsReborn.WISESTONE_PEDESTAL_ITEM.get()), vialPotions.get(RegisterAlchemyPotions.MUNDANE_BREW))
                 ),
-                new AlchemyMachinePage(new ItemStack(WizardsReborn.MUSIC_DISC_ARCANUM.get()), FluidStack.EMPTY, true, true,
-                        new FluidStack(WizardsReborn.ALCHEMY_OIL_FLUID.get(), 1000), FluidStack.EMPTY, FluidStack.EMPTY,
-                        new ItemStack(Items.MUSIC_DISC_13), new ItemStack(WizardsReborn.ARCANUM.get())
+                new AlchemyMachinePage(ItemStack.EMPTY, new FluidStack(WizardsReborn.MUNDANE_BREW_FLUID.get(), 250), false, true,
+                        new FluidStack(Fluids.WATER, 250), FluidStack.EMPTY, FluidStack.EMPTY,
+                        new ItemStack(Items.NETHER_WART)
+                ),
+                new AlchemyMachinePage(ItemStack.EMPTY, new FluidStack(WizardsReborn.MUNDANE_BREW_FLUID.get(), 1000), false, true,
+                        new FluidStack(Fluids.WATER, 1000), FluidStack.EMPTY, FluidStack.EMPTY,
+                        new ItemStack(Items.NETHER_WART), new ItemStack(Items.NETHER_WART), new ItemStack(Items.NETHER_WART), new ItemStack(Items.NETHER_WART)
+                ),
+                new AlchemyMachinePage(vialPotions.get(RegisterAlchemyPotions.MUNDANE_BREW), FluidStack.EMPTY, false, true,
+                        FluidStack.EMPTY, FluidStack.EMPTY, FluidStack.EMPTY,
+                        new ItemStack(Items.NETHER_WART), new ItemStack(Items.NETHER_WART), new ItemStack(Items.NETHER_WART), vialPotions.get(RegisterAlchemyPotions.WATER)
                 )
         );
 
         TEA = new Chapter(
                 "wizards_reborn.arcanemicon.chapter.tea",
-                new TitledBlockPage("wizards_reborn.arcanemicon.page.tea",
-                        new BlockEntry(new ItemStack(WizardsReborn.WISESTONE_PEDESTAL_ITEM.get()), new ItemStack(WizardsReborn.MUSIC_DISC_ARCANUM.get()))
+                new TitledBlockPage("wizards_reborn.arcanemicon.page.oil_tea",
+                        new BlockEntry(new ItemStack(WizardsReborn.WISESTONE_PEDESTAL_ITEM.get()), vialPotions.get(RegisterAlchemyPotions.OIL_TEA))
                 ),
-                new AlchemyMachinePage(new ItemStack(WizardsReborn.MUSIC_DISC_ARCANUM.get()), FluidStack.EMPTY, true, true,
-                        new FluidStack(WizardsReborn.ALCHEMY_OIL_FLUID.get(), 1000), FluidStack.EMPTY, FluidStack.EMPTY,
-                        new ItemStack(Items.MUSIC_DISC_13), new ItemStack(WizardsReborn.ARCANUM.get())
+                new AlchemyMachinePage(ItemStack.EMPTY, new FluidStack(WizardsReborn.OIL_TEA_FLUID.get(), 1000), true, true,
+                        new FluidStack(WizardsReborn.ALCHEMY_OIL_FLUID.get(), 500), new FluidStack(Fluids.WATER, 500), FluidStack.EMPTY,
+                        new ItemStack(WizardsReborn.PETALS.get()), new ItemStack(WizardsReborn.PETALS.get())
+                ),
+                new AlchemyMachinePage(vialPotions.get(RegisterAlchemyPotions.OIL_TEA), FluidStack.EMPTY, true, true,
+                        new FluidStack(WizardsReborn.ALCHEMY_OIL_FLUID.get(), 500), FluidStack.EMPTY, FluidStack.EMPTY,
+                        new ItemStack(WizardsReborn.PETALS.get()), new ItemStack(WizardsReborn.PETALS.get()), vialPotions.get(RegisterAlchemyPotions.WATER)
+                ),
+                new TitledBlockPage("wizards_reborn.arcanemicon.page.wissen_tea",
+                        new BlockEntry(new ItemStack(WizardsReborn.WISESTONE_PEDESTAL_ITEM.get()), vialPotions.get(RegisterAlchemyPotions.WISSEN_TEA))
+                ),
+                new AlchemyMachinePage(ItemStack.EMPTY, new FluidStack(WizardsReborn.WISSEN_TEA_FLUID.get(), 1000), true, true,
+                        new FluidStack(Fluids.WATER, 1000), FluidStack.EMPTY, FluidStack.EMPTY,
+                        new ItemStack(WizardsReborn.PETALS.get()), new ItemStack(WizardsReborn.PETALS.get()), new ItemStack(WizardsReborn.ARCANUM_DUST.get()), new ItemStack(WizardsReborn.ARCANUM_DUST.get()), new ItemStack(WizardsReborn.ARCANUM_DUST.get())
+                ),
+                new AlchemyMachinePage(vialPotions.get(RegisterAlchemyPotions.WISSEN_TEA), FluidStack.EMPTY, true, true,
+                        FluidStack.EMPTY, FluidStack.EMPTY, FluidStack.EMPTY,
+                        new ItemStack(WizardsReborn.PETALS.get()), new ItemStack(WizardsReborn.PETALS.get()), new ItemStack(WizardsReborn.ARCANUM_DUST.get()), new ItemStack(WizardsReborn.ARCANUM_DUST.get()), new ItemStack(WizardsReborn.ARCANUM_DUST.get()), vialPotions.get(RegisterAlchemyPotions.WATER)
                 )
         );
 
         ALCHEMY_BREWS = new Chapter(
                 "wizards_reborn.arcanemicon.chapter.alchemy_brews",
                 new TitledBlockPage("wizards_reborn.arcanemicon.page.alchemy_brews",
-                        new BlockEntry(new ItemStack(WizardsReborn.WISESTONE_PEDESTAL_ITEM.get()), new ItemStack(WizardsReborn.MUSIC_DISC_ARCANUM.get()))
+                        new BlockEntry(new ItemStack(WizardsReborn.WISESTONE_PEDESTAL_ITEM.get()), new ItemStack(WizardsReborn.MUSHROOM_BREW_BUCKET.get())),
+                        new BlockEntry(new ItemStack(WizardsReborn.WISESTONE_PEDESTAL_ITEM.get()), new ItemStack(WizardsReborn.HELLISH_MUSHROOM_BREW_BUCKET.get())),
+                        new BlockEntry(new ItemStack(WizardsReborn.WISESTONE_PEDESTAL_ITEM.get()), new ItemStack(WizardsReborn.MOR_BREW_BUCKET.get())),
+                        new BlockEntry(new ItemStack(WizardsReborn.WISESTONE_PEDESTAL_ITEM.get()), new ItemStack(WizardsReborn.FLOWER_BREW_BUCKET.get()))
                 ),
-                new AlchemyMachinePage(new ItemStack(WizardsReborn.MUSIC_DISC_ARCANUM.get()), FluidStack.EMPTY, true, true,
-                        new FluidStack(WizardsReborn.ALCHEMY_OIL_FLUID.get(), 1000), FluidStack.EMPTY, FluidStack.EMPTY,
-                        new ItemStack(Items.MUSIC_DISC_13), new ItemStack(WizardsReborn.ARCANUM.get())
+                new AlchemyMachinePage(ItemStack.EMPTY, new FluidStack(WizardsReborn.MUNDANE_BREW_FLUID.get(), 1000), false, true,
+                        new FluidStack(Fluids.WATER, 1000), FluidStack.EMPTY, FluidStack.EMPTY,
+                        new ItemStack(Items.NETHER_WART), new ItemStack(WizardsReborn.GROUND_BROWN_MUSHROOM.get()), new ItemStack(WizardsReborn.GROUND_BROWN_MUSHROOM.get()), new ItemStack(WizardsReborn.GROUND_BROWN_MUSHROOM.get())
+                ),
+                new AlchemyMachinePage(ItemStack.EMPTY, new FluidStack(WizardsReborn.MUNDANE_BREW_FLUID.get(), 1000), false, true,
+                        new FluidStack(Fluids.WATER, 1000), FluidStack.EMPTY, FluidStack.EMPTY,
+                        new ItemStack(Items.NETHER_WART), new ItemStack(WizardsReborn.GROUND_RED_MUSHROOM.get()), new ItemStack(WizardsReborn.GROUND_RED_MUSHROOM.get()), new ItemStack(WizardsReborn.GROUND_RED_MUSHROOM.get())
+                ),
+                new AlchemyMachinePage(ItemStack.EMPTY, new FluidStack(WizardsReborn.HELLISH_MUSHROOM_BREW_FLUID.get(), 1000), false, true,
+                        new FluidStack(Fluids.WATER, 1000), FluidStack.EMPTY, FluidStack.EMPTY,
+                        new ItemStack(Items.NETHER_WART), new ItemStack(WizardsReborn.GROUND_CRIMSON_FUNGUS.get()), new ItemStack(WizardsReborn.GROUND_CRIMSON_FUNGUS.get()), new ItemStack(WizardsReborn.GROUND_CRIMSON_FUNGUS.get())
+                ),
+                new AlchemyMachinePage(ItemStack.EMPTY, new FluidStack(WizardsReborn.HELLISH_MUSHROOM_BREW_FLUID.get(), 1000), false, true,
+                        new FluidStack(Fluids.WATER, 1000), FluidStack.EMPTY, FluidStack.EMPTY,
+                        new ItemStack(Items.NETHER_WART), new ItemStack(WizardsReborn.GROUND_WARPED_FUNGUS.get()), new ItemStack(WizardsReborn.GROUND_WARPED_FUNGUS.get()), new ItemStack(WizardsReborn.GROUND_WARPED_FUNGUS.get())
+                ),
+                new AlchemyMachinePage(ItemStack.EMPTY, new FluidStack(WizardsReborn.MOR_BREW_FLUID.get(), 1000), false, true,
+                        new FluidStack(Fluids.WATER, 1000), FluidStack.EMPTY, FluidStack.EMPTY,
+                        new ItemStack(Items.NETHER_WART), new ItemStack(WizardsReborn.GROUND_MOR.get()), new ItemStack(WizardsReborn.GROUND_MOR.get()), new ItemStack(WizardsReborn.GROUND_MOR.get())
+                ),
+                new AlchemyMachinePage(ItemStack.EMPTY, new FluidStack(WizardsReborn.MOR_BREW_FLUID.get(), 1000), false, true,
+                        new FluidStack(Fluids.WATER, 1000), FluidStack.EMPTY, FluidStack.EMPTY,
+                        new ItemStack(Items.NETHER_WART), new ItemStack(WizardsReborn.GROUND_ELDER_MOR.get()), new ItemStack(WizardsReborn.GROUND_ELDER_MOR.get()), new ItemStack(WizardsReborn.GROUND_ELDER_MOR.get())
+                ),
+                new AlchemyMachinePage(ItemStack.EMPTY, new FluidStack(WizardsReborn.FLOWER_BREW_FLUID.get(), 1000), false, true,
+                        new FluidStack(Fluids.WATER, 1000), FluidStack.EMPTY, FluidStack.EMPTY,
+                        new ItemStack(Items.NETHER_WART), new ItemStack(WizardsReborn.PETALS.get()), new ItemStack(WizardsReborn.PETALS.get()), new ItemStack(WizardsReborn.PETALS.get())
+                ),
+                new AlchemyMachinePage(vialPotions.get(RegisterAlchemyPotions.MUSHROOM_BREW), FluidStack.EMPTY, false, true,
+                        FluidStack.EMPTY, FluidStack.EMPTY, FluidStack.EMPTY,
+                        new ItemStack(Items.NETHER_WART), new ItemStack(WizardsReborn.GROUND_BROWN_MUSHROOM.get()), new ItemStack(WizardsReborn.GROUND_BROWN_MUSHROOM.get()), new ItemStack(WizardsReborn.GROUND_BROWN_MUSHROOM.get()), vialPotions.get(RegisterAlchemyPotions.WATER)
+                ),
+                new AlchemyMachinePage(vialPotions.get(RegisterAlchemyPotions.MUSHROOM_BREW), FluidStack.EMPTY, false, true,
+                        FluidStack.EMPTY, FluidStack.EMPTY, FluidStack.EMPTY,
+                        new ItemStack(Items.NETHER_WART), new ItemStack(WizardsReborn.GROUND_RED_MUSHROOM.get()), new ItemStack(WizardsReborn.GROUND_RED_MUSHROOM.get()), new ItemStack(WizardsReborn.GROUND_RED_MUSHROOM.get()), vialPotions.get(RegisterAlchemyPotions.WATER)
+                ),
+                new AlchemyMachinePage(vialPotions.get(RegisterAlchemyPotions.HELLISH_MUSHROOM_BREW), FluidStack.EMPTY, false, true,
+                        FluidStack.EMPTY, FluidStack.EMPTY, FluidStack.EMPTY,
+                        new ItemStack(Items.NETHER_WART), new ItemStack(WizardsReborn.GROUND_CRIMSON_FUNGUS.get()), new ItemStack(WizardsReborn.GROUND_CRIMSON_FUNGUS.get()), new ItemStack(WizardsReborn.GROUND_CRIMSON_FUNGUS.get()), vialPotions.get(RegisterAlchemyPotions.WATER)
+                ),
+                new AlchemyMachinePage(vialPotions.get(RegisterAlchemyPotions.HELLISH_MUSHROOM_BREW), FluidStack.EMPTY, false, true,
+                        FluidStack.EMPTY, FluidStack.EMPTY, FluidStack.EMPTY,
+                        new ItemStack(Items.NETHER_WART), new ItemStack(WizardsReborn.GROUND_WARPED_FUNGUS.get()), new ItemStack(WizardsReborn.GROUND_WARPED_FUNGUS.get()), new ItemStack(WizardsReborn.GROUND_WARPED_FUNGUS.get()), vialPotions.get(RegisterAlchemyPotions.WATER)
+                ),
+                new AlchemyMachinePage(vialPotions.get(RegisterAlchemyPotions.MOR_BREW), FluidStack.EMPTY, false, true,
+                        FluidStack.EMPTY, FluidStack.EMPTY, FluidStack.EMPTY,
+                        new ItemStack(Items.NETHER_WART), new ItemStack(WizardsReborn.GROUND_MOR.get()), new ItemStack(WizardsReborn.GROUND_MOR.get()), new ItemStack(WizardsReborn.GROUND_MOR.get()), vialPotions.get(RegisterAlchemyPotions.WATER)
+                ),
+                new AlchemyMachinePage(vialPotions.get(RegisterAlchemyPotions.MOR_BREW), FluidStack.EMPTY, false, true,
+                        FluidStack.EMPTY, FluidStack.EMPTY, FluidStack.EMPTY,
+                        new ItemStack(Items.NETHER_WART), new ItemStack(WizardsReborn.GROUND_ELDER_MOR.get()), new ItemStack(WizardsReborn.GROUND_ELDER_MOR.get()), new ItemStack(WizardsReborn.GROUND_ELDER_MOR.get()), vialPotions.get(RegisterAlchemyPotions.WATER)
+                ),
+                new AlchemyMachinePage(vialPotions.get(RegisterAlchemyPotions.FLOWER_BREW), FluidStack.EMPTY, false, true,
+                        FluidStack.EMPTY, FluidStack.EMPTY, FluidStack.EMPTY,
+                        new ItemStack(Items.NETHER_WART), new ItemStack(WizardsReborn.PETALS.get()), new ItemStack(WizardsReborn.PETALS.get()), new ItemStack(WizardsReborn.PETALS.get()), vialPotions.get(RegisterAlchemyPotions.WATER)
+                ),
+                new AlchemyMachinePage(new ItemStack(Items.FERMENTED_SPIDER_EYE), FluidStack.EMPTY, false, true,
+                        new FluidStack(WizardsReborn.ALCHEMY_OIL_FLUID.get(), 50), new FluidStack(WizardsReborn.MUSHROOM_BREW_FLUID.get(), 100), FluidStack.EMPTY,
+                        new ItemStack(Items.SPIDER_EYE), new ItemStack(Items.SUGAR)
+                ),
+                new AlchemyMachinePage(new ItemStack(Items.FERMENTED_SPIDER_EYE), FluidStack.EMPTY, false, true,
+                        new FluidStack(WizardsReborn.ALCHEMY_OIL_FLUID.get(), 50), new FluidStack(WizardsReborn.HELLISH_MUSHROOM_BREW_FLUID.get(), 100), FluidStack.EMPTY,
+                        new ItemStack(Items.SPIDER_EYE), new ItemStack(Items.SUGAR)
+                ),
+                new AlchemyMachinePage(new ItemStack(Items.FERMENTED_SPIDER_EYE), FluidStack.EMPTY, false, true,
+                        new FluidStack(WizardsReborn.ALCHEMY_OIL_FLUID.get(), 50), new FluidStack(WizardsReborn.MOR_BREW_FLUID.get(), 100), FluidStack.EMPTY,
+                        new ItemStack(Items.SPIDER_EYE), new ItemStack(Items.SUGAR)
                 )
         );
 
@@ -1934,11 +2145,11 @@ public class ArcanemiconChapters {
         ARCACITE_POLISHING_MIXTURE = new Chapter(
                 "wizards_reborn.arcanemicon.chapter.arcacite_polishing_mixture",
                 new TitledBlockPage("wizards_reborn.arcanemicon.page.arcacite_polishing_mixture",
-                        new BlockEntry(new ItemStack(WizardsReborn.WISESTONE_PEDESTAL_ITEM.get()), new ItemStack(WizardsReborn.MUSIC_DISC_ARCANUM.get()))
+                        new BlockEntry(new ItemStack(WizardsReborn.WISESTONE_PEDESTAL_ITEM.get()), new ItemStack(WizardsReborn.ARCACITE_POLISHING_MIXTURE.get()))
                 ),
-                new AlchemyMachinePage(new ItemStack(WizardsReborn.MUSIC_DISC_ARCANUM.get()), FluidStack.EMPTY, true, true,
-                        new FluidStack(WizardsReborn.ALCHEMY_OIL_FLUID.get(), 1000), FluidStack.EMPTY, FluidStack.EMPTY,
-                        new ItemStack(Items.MUSIC_DISC_13), new ItemStack(WizardsReborn.ARCANUM.get())
+                new AlchemyMachinePage(new ItemStack(WizardsReborn.ARCACITE_POLISHING_MIXTURE.get()), FluidStack.EMPTY, true, true,
+                        new FluidStack(WizardsReborn.ALCHEMY_OIL_FLUID.get(), 2000), FluidStack.EMPTY, FluidStack.EMPTY,
+                        new ItemStack(WizardsReborn.ARCACITE.get()), new ItemStack(WizardsReborn.ARCACITE.get()), new ItemStack(WizardsReborn.ARCANUM_DUST.get()), new ItemStack(WizardsReborn.ARCANUM_DUST.get()), new ItemStack(WizardsReborn.ARCANUM_DUST.get())
                 )
         );
 
@@ -1966,9 +2177,9 @@ public class ArcanemiconChapters {
                         new IndexEntry(MUSIC_DISC_ARCANUM, new ItemStack(WizardsReborn.MUSIC_DISC_ARCANUM.get()), RegisterKnowledges.ALCHEMY_OIL),
                         new IndexEntry(MUSIC_DISC_MOR, new ItemStack(WizardsReborn.MUSIC_DISC_MOR.get()), RegisterKnowledges.ALCHEMY_OIL),
                         new IndexEntry(ALCHEMY_GLASS, new ItemStack(WizardsReborn.ALCHEMY_GLASS_ITEM.get()), RegisterKnowledges.ALCHEMY_OIL),
-                        new IndexEntry(ALCHEMY_POTIONS, vialMundaneBrew, RegisterKnowledges.ALCHEMY_OIL),
-                        new IndexEntry(TEA, vialWissenTea, RegisterKnowledges.ALCHEMY_OIL),
-                        new IndexEntry(ALCHEMY_BREWS, new ItemStack(WizardsReborn.MOR_BREW_BUCKET.get()), RegisterKnowledges.ALCHEMY_OIL)
+                        new IndexEntry(ALCHEMY_POTIONS, vialPotions.get(RegisterAlchemyPotions.MUNDANE_BREW), RegisterKnowledges.ALCHEMY_GLASS),
+                        new IndexEntry(TEA, vialPotions.get(RegisterAlchemyPotions.WISSEN_TEA), RegisterKnowledges.ALCHEMY_GLASS),
+                        new IndexEntry(ALCHEMY_BREWS, new ItemStack(WizardsReborn.MOR_BREW_BUCKET.get()), RegisterKnowledges.ALCHEMY_GLASS)
                 ),
                 new IndexPage(
                         new IndexEntry(ARCANE_CENSER, new ItemStack(WizardsReborn.ARCANE_CENSER_ITEM.get()), RegisterKnowledges.ARCACITE),

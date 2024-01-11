@@ -45,6 +45,8 @@ public class WizardsRebornJei implements IModPlugin {
                 new CenserRecipeCategory(registration.getJeiHelpers().getGuiHelper()));
         registration.addRecipeCategories(
                 new ArcaneIteratorRecipeCategory(registration.getJeiHelpers().getGuiHelper()));
+        registration.addRecipeCategories(
+                new JewelerTableRecipeCategory(registration.getJeiHelpers().getGuiHelper()));
     }
 
     @Override
@@ -57,6 +59,7 @@ public class WizardsRebornJei implements IModPlugin {
         registration.addRecipes(AlchemyMachineRecipeCategory.TYPE, sortRecipes(WizardsReborn.ALCHEMY_MACHINE_RECIPE.get(), BY_ID));
         registration.addRecipes(CenserRecipeCategory.TYPE, sortRecipes(WizardsReborn.CENSER_RECIPE.get(), BY_ID));
         registration.addRecipes(ArcaneIteratorRecipeCategory.TYPE, sortRecipes(WizardsReborn.ARCANE_ITERATOR_RECIPE.get(), BY_ID));
+        registration.addRecipes(JewelerTableRecipeCategory.TYPE, sortRecipes(WizardsReborn.JEWELER_TABLE_RECIPE.get(), BY_ID));
     }
 
     @Override
@@ -71,6 +74,7 @@ public class WizardsRebornJei implements IModPlugin {
         registration.addRecipeCatalyst(new ItemStack(WizardsReborn.ARCANE_CENSER_ITEM.get()), CenserRecipeCategory.TYPE);
         registration.addRecipeCatalyst(new ItemStack(WizardsReborn.ARCANE_WOOD_SMOKING_PIPE.get()), CenserRecipeCategory.TYPE);
         registration.addRecipeCatalyst(new ItemStack(WizardsReborn.ARCANE_ITERATOR_ITEM.get()), ArcaneIteratorRecipeCategory.TYPE);
+        registration.addRecipeCatalyst(new ItemStack(WizardsReborn.JEWELER_TABLE_ITEM.get()), JewelerTableRecipeCategory.TYPE);
     }
 
     private static <T extends Recipe<C>, C extends Container> List<T> sortRecipes(RecipeType<T> type, Comparator<? super T> comparator) {

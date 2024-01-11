@@ -1,0 +1,10 @@
+{
+  "replace": false,
+  "values": [
+    "wizards_reborn:pure_earth_crystal",
+    "wizards_reborn:pure_water_crystal",
+    "wizards_reborn:pure_air_crystal",
+    "wizards_reborn:pure_fire_crystal",
+    "wizards_reborn:pure_void_crystal"
+  ]
+}

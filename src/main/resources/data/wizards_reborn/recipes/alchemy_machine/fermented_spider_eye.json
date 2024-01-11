@@ -1,0 +1,25 @@
+{
+  "type": "wizards_reborn:alchemy_machine",
+  "outputItem": {
+    "item": "minecraft:fermented_spider_eye"
+  },
+  "steam": 20,
+  "ingredients": [
+    {
+      "item": "minecraft:spider_eye"
+    },
+    {
+      "item": "minecraft:sugar"
+    }
+  ],
+  "fluidIngredients": [
+    {
+      "name": "wizards_reborn:alchemy_oil",
+      "amount" : 50
+    },
+    {
+      "tag": "wizards_reborn:mushroom_brews",
+      "amount" : 100
+    }
+  ]
+}

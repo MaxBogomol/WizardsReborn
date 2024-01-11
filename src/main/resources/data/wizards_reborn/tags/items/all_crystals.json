@@ -1,0 +1,10 @@
+{
+  "replace": false,
+  "values": [
+    "#wizards_reborn:crystals",
+    "#wizards_reborn:faceted_crystals",
+    "#wizards_reborn:advanced_crystals",
+    "#wizards_reborn:masterful_crystals",
+    "#wizards_reborn:pure_crystals"
+  ]
+}

@@ -41,11 +41,14 @@ public class AlchemyMachinePage extends Page {
         for (int i = 0; i < 2; i ++) {
             for (int j = 0; j < 3; j ++) {
                 int index = i * 3 + j;
-                if (index < inputs.length && !inputs[index].isEmpty())
+                if (index < inputs.length && !inputs[index].isEmpty()) {
                     drawItem(book, gui, inputs[index], x + 38 + j * 18, y + 15 + i * 18, mouseX, mouseY);
+                }
             }
         }
-        drawItem(book, gui, result,x + 34, y + 128, mouseX, mouseY);
+        if (!result.isEmpty()) {
+            drawItem(book, gui, result, x + 34, y + 128, mouseX, mouseY);
+        }
 
         if (!fluidInputs1.isEmpty()) {
             drawItem(book, gui, fluidInputs1.getFluid().getBucket().asItem().getDefaultInstance(), x + 38, y + 55, mouseX, mouseY);
@@ -94,8 +97,8 @@ public class AlchemyMachinePage extends Page {
             width /= (double) 5000 / (double) fluidResult.getAmount();
             gui.blit(BACKGROUND, x + 60, y + 120 + 32 - width, 128, 32 - width, 8, width, 256, 256);
 
-            if (mouseX >= x + 60 && mouseY >= y + 120 && mouseX <= x + x + 60 + 8 && mouseY <= y + 120 + 32) {
-                gui.renderTooltip(Minecraft.getInstance().font, FluidStorageBaseItem.getFluidName(fluidInputs1, 5000), mouseX, mouseY);
+            if (mouseX >= x + 60 && mouseY >= y + 120 && mouseX <= x + 60 + 8 && mouseY <= y + 120 + 32) {
+                gui.renderTooltip(Minecraft.getInstance().font, FluidStorageBaseItem.getFluidName(fluidResult, 5000), mouseX, mouseY);
             }
         } else {
             gui.blit(BACKGROUND, x + 56, y + 120 + 8, 136, 0, 16, 16, 256, 256);

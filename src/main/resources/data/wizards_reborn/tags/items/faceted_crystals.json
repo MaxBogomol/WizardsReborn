@@ -1,0 +1,10 @@
+{
+  "replace": false,
+  "values": [
+    "wizards_reborn:faceted_earth_crystal",
+    "wizards_reborn:faceted_water_crystal",
+    "wizards_reborn:faceted_air_crystal",
+    "wizards_reborn:faceted_fire_crystal",
+    "wizards_reborn:faceted_void_crystal"
+  ]
+}

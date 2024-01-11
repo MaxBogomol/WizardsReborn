@@ -1,0 +1,10 @@
+{
+  "replace": false,
+  "values": [
+    "wizards_reborn:fractured_earth_crystal",
+    "wizards_reborn:fractured_water_crystal",
+    "wizards_reborn:fractured_air_crystal",
+    "wizards_reborn:fractured_fire_crystal",
+    "wizards_reborn:fractured_void_crystal"
+  ]
+}

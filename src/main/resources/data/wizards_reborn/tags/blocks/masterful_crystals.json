@@ -1,0 +1,10 @@
+{
+  "replace": false,
+  "values": [
+    "wizards_reborn:masterful_earth_crystal",
+    "wizards_reborn:masterful_water_crystal",
+    "wizards_reborn:masterful_air_crystal",
+    "wizards_reborn:masterful_fire_crystal",
+    "wizards_reborn:masterful_void_crystal"
+  ]
+}

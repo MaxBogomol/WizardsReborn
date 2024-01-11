@@ -1,0 +1,10 @@
+{
+  "replace": false,
+  "values": [
+    "wizards_reborn:advanced_earth_crystal",
+    "wizards_reborn:advanced_water_crystal",
+    "wizards_reborn:advanced_air_crystal",
+    "wizards_reborn:advanced_fire_crystal",
+    "wizards_reborn:advanced_void_crystal"
+  ]
+}

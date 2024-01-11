@@ -201,19 +201,19 @@ public class AlchemyMachineTileEntity extends PipeBaseTileEntity implements Tick
 
                                 for (int i = 0; i < recipe.get().getFluidIngredients().size(); i++) {
                                     for (FluidStack fluidStack : recipe.get().getFluidIngredients().get(i).getFluids()) {
-                                        if (fluidTank1.isFluidValid(fluidStack) & !ft1) {
+                                        if (fluidTank1.getFluid().isFluidEqual(fluidStack) & !ft1) {
                                             FluidStack extracted = fluidTank1.drain(fluidStack, IFluidHandler.FluidAction.SIMULATE);
                                             fluidTank1.drain(extracted, IFluidHandler.FluidAction.EXECUTE);
                                             ft1 = true;
                                         }
 
-                                        if (fluidTank2.isFluidValid(fluidStack) & !ft2) {
+                                        if (fluidTank2.getFluid().isFluidEqual(fluidStack) & !ft2) {
                                             FluidStack extracted = fluidTank2.drain(fluidStack, IFluidHandler.FluidAction.SIMULATE);
                                             fluidTank2.drain(extracted, IFluidHandler.FluidAction.EXECUTE);
                                             ft2 = true;
                                         }
 
-                                        if (fluidTank3.isFluidValid(fluidStack) & !ft3) {
+                                        if (fluidTank3.getFluid().isFluidEqual(fluidStack) & !ft3) {
                                             FluidStack extracted = fluidTank3.drain(fluidStack, IFluidHandler.FluidAction.SIMULATE);
                                             fluidTank3.drain(extracted, IFluidHandler.FluidAction.EXECUTE);
                                             ft3 = true;
@@ -222,7 +222,7 @@ public class AlchemyMachineTileEntity extends PipeBaseTileEntity implements Tick
                                 }
 
                                 if (!recipe.get().getResultFluid().isEmpty()) {
-                                    if (boiler.getTank().isFluidValid(recipe.get().getResultFluid())) {
+                                    if (boiler.getTank().getFluid().isFluidEqual(recipe.get().getResultFluid()) || boiler.getTank().isEmpty()) {
                                         boiler.getTank().fill(recipe.get().getResultFluid(), IFluidHandler.FluidAction.EXECUTE);
                                     }
                                 }
