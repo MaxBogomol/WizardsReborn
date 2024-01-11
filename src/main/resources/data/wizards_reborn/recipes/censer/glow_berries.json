@@ -1,0 +1,18 @@
+{
+  "type": "wizards_reborn:censer",
+  "ingredient": {
+    "item": "minecraft:glow_berries"
+  },
+  "effects": [
+    {
+      "effect": "minecraft:saturation",
+      "duration": 2,
+      "amplifier": 0
+    },
+    {
+      "effect": "minecraft:glowing",
+      "duration": 1000,
+      "amplifier": 0
+    }
+  ]
+}

@@ -1,0 +1,18 @@
+{
+  "type": "wizards_reborn:censer",
+  "ingredient": {
+    "item": "minecraft:bone_meal"
+  },
+  "effects": [
+    {
+      "effect": "minecraft:saturation",
+      "duration": 1,
+      "amplifier": 0
+    },
+    {
+      "effect": "minecraft:regeneration",
+      "duration": 400,
+      "amplifier": 0
+    }
+  ]
+}

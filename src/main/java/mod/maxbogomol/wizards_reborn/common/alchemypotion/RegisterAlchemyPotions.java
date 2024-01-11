@@ -14,6 +14,7 @@ public class RegisterAlchemyPotions {
     public static AlchemyPotion COMBINED = new AlchemyPotion(WizardsReborn.MOD_ID+":combined");
     public static FluidAlchemyPotion WATER, MUNDANE_BREW, ALCHEMY_OIL, OIL_TEA, WISSEN_TEA, MUSHROOM_BREW, HELLISH_MUSHROOM_BREW, MOR_BREW, FLOWER_BREW;
     public static AlchemyPotion NIGHT_VISION, INVISIBILITY, LEAPING, FIRE_RESISTANCE, SWIFTNESS, SLOWNESS, TURTLE_MASTER, WATER_BREATHING, HEALING, HARMING, POISON, REGENERATION, STRENGTH, WEAKNESS, LUCK, SLOW_FALLING;
+    public static ColorAlchemyPotion ABSORPTION;
 
     public static void init() {
         WATER = new FluidAlchemyPotion(WizardsReborn.MOD_ID+":water", Fluids.WATER, new Color(55, 92, 196));
@@ -43,6 +44,8 @@ public class RegisterAlchemyPotions {
         LUCK = new AlchemyPotion(WizardsReborn.MOD_ID+":luck", new MobEffectInstance(MobEffects.LUCK, 12000, 1));
         SLOW_FALLING = new AlchemyPotion(WizardsReborn.MOD_ID+":slow_falling", new MobEffectInstance(MobEffects.SLOW_FALLING, 12000));
 
+        ABSORPTION = new ColorAlchemyPotion(WizardsReborn.MOD_ID+":absorption", new Color(236, 203, 69), new MobEffectInstance(MobEffects.ABSORPTION, 2400, 3));
+
         AlchemyPotions.register(EMPTY);
         AlchemyPotions.register(COMBINED);
         AlchemyPotions.register(WATER);
@@ -70,5 +73,6 @@ public class RegisterAlchemyPotions {
         AlchemyPotions.register(WEAKNESS);
         AlchemyPotions.register(LUCK);
         AlchemyPotions.register(SLOW_FALLING);
+        AlchemyPotions.register(ABSORPTION);
     }
 }

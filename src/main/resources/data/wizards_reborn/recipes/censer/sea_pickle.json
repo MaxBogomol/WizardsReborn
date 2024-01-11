@@ -1,0 +1,18 @@
+{
+  "type": "wizards_reborn:censer",
+  "ingredient": {
+    "item": "minecraft:sea_pickle"
+  },
+  "effects": [
+    {
+      "effect": "minecraft:saturation",
+      "duration": 1,
+      "amplifier": 0
+    },
+    {
+      "effect": "minecraft:water_breathing",
+      "duration": 400,
+      "amplifier": 0
+    }
+  ]
+}

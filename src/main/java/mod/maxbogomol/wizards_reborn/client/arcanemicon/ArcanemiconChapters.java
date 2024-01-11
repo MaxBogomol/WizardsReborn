@@ -1957,6 +1957,74 @@ public class ArcanemiconChapters {
                 new AlchemyMachinePage(vialPotions.get(RegisterAlchemyPotions.MUNDANE_BREW), FluidStack.EMPTY, false, true,
                         FluidStack.EMPTY, FluidStack.EMPTY, FluidStack.EMPTY,
                         new ItemStack(Items.NETHER_WART), new ItemStack(Items.NETHER_WART), new ItemStack(Items.NETHER_WART), vialPotions.get(RegisterAlchemyPotions.WATER)
+                ),
+                new AlchemyMachinePage(vialPotions.get(RegisterAlchemyPotions.NIGHT_VISION), FluidStack.EMPTY, false, true,
+                        FluidStack.EMPTY, FluidStack.EMPTY, FluidStack.EMPTY,
+                        vialPotions.get(RegisterAlchemyPotions.MUNDANE_BREW), new ItemStack(Items.GOLDEN_CARROT), new ItemStack(Items.REDSTONE)
+                ),
+                new AlchemyMachinePage(vialPotions.get(RegisterAlchemyPotions.INVISIBILITY), FluidStack.EMPTY, false, true,
+                        FluidStack.EMPTY, FluidStack.EMPTY, FluidStack.EMPTY,
+                        vialPotions.get(RegisterAlchemyPotions.NIGHT_VISION), new ItemStack(Items.FERMENTED_SPIDER_EYE)
+                ),
+                new AlchemyMachinePage(vialPotions.get(RegisterAlchemyPotions.LEAPING), FluidStack.EMPTY, false, true,
+                        FluidStack.EMPTY, FluidStack.EMPTY, FluidStack.EMPTY,
+                        vialPotions.get(RegisterAlchemyPotions.MUNDANE_BREW), new ItemStack(Items.RABBIT_FOOT), new ItemStack(Items.REDSTONE), new ItemStack(Items.GLOWSTONE_DUST)
+                ),
+                new AlchemyMachinePage(vialPotions.get(RegisterAlchemyPotions.FIRE_RESISTANCE), FluidStack.EMPTY, false, true,
+                        FluidStack.EMPTY, FluidStack.EMPTY, FluidStack.EMPTY,
+                        vialPotions.get(RegisterAlchemyPotions.MUNDANE_BREW), new ItemStack(Items.MAGMA_CREAM), new ItemStack(Items.REDSTONE)
+                ),
+                new AlchemyMachinePage(vialPotions.get(RegisterAlchemyPotions.SWIFTNESS), FluidStack.EMPTY, false, true,
+                        FluidStack.EMPTY, FluidStack.EMPTY, FluidStack.EMPTY,
+                        vialPotions.get(RegisterAlchemyPotions.MUNDANE_BREW), new ItemStack(Items.SUGAR), new ItemStack(Items.REDSTONE), new ItemStack(Items.GLOWSTONE_DUST)
+                ),
+                new AlchemyMachinePage(vialPotions.get(RegisterAlchemyPotions.SLOWNESS), FluidStack.EMPTY, false, true,
+                        FluidStack.EMPTY, FluidStack.EMPTY, FluidStack.EMPTY,
+                        vialPotions.get(RegisterAlchemyPotions.SWIFTNESS), new ItemStack(Items.FERMENTED_SPIDER_EYE)
+                ),
+                new AlchemyMachinePage(vialPotions.get(RegisterAlchemyPotions.SLOWNESS), FluidStack.EMPTY, false, true,
+                        FluidStack.EMPTY, FluidStack.EMPTY, FluidStack.EMPTY,
+                        vialPotions.get(RegisterAlchemyPotions.LEAPING), new ItemStack(Items.FERMENTED_SPIDER_EYE)
+                ),
+                new AlchemyMachinePage(vialPotions.get(RegisterAlchemyPotions.TURTLE_MASTER), FluidStack.EMPTY, false, true,
+                        FluidStack.EMPTY, FluidStack.EMPTY, FluidStack.EMPTY,
+                        vialPotions.get(RegisterAlchemyPotions.MUNDANE_BREW), new ItemStack(Items.TURTLE_HELMET), new ItemStack(Items.REDSTONE), new ItemStack(Items.GLOWSTONE_DUST)
+                ),
+                new AlchemyMachinePage(vialPotions.get(RegisterAlchemyPotions.WATER_BREATHING), FluidStack.EMPTY, false, true,
+                        FluidStack.EMPTY, FluidStack.EMPTY, FluidStack.EMPTY,
+                        vialPotions.get(RegisterAlchemyPotions.MUNDANE_BREW), new ItemStack(Items.PUFFERFISH), new ItemStack(Items.REDSTONE)
+                ),
+                new AlchemyMachinePage(vialPotions.get(RegisterAlchemyPotions.HEALING), FluidStack.EMPTY, false, true,
+                        FluidStack.EMPTY, FluidStack.EMPTY, FluidStack.EMPTY,
+                        vialPotions.get(RegisterAlchemyPotions.MUNDANE_BREW), new ItemStack(Items.GLISTERING_MELON_SLICE), new ItemStack(Items.GLOWSTONE_DUST)
+                ),
+                new AlchemyMachinePage(vialPotions.get(RegisterAlchemyPotions.HARMING), FluidStack.EMPTY, false, true,
+                        FluidStack.EMPTY, FluidStack.EMPTY, FluidStack.EMPTY,
+                        vialPotions.get(RegisterAlchemyPotions.HEALING), new ItemStack(Items.FERMENTED_SPIDER_EYE)
+                ),
+                new AlchemyMachinePage(vialPotions.get(RegisterAlchemyPotions.HARMING), FluidStack.EMPTY, false, true,
+                        FluidStack.EMPTY, FluidStack.EMPTY, FluidStack.EMPTY,
+                        vialPotions.get(RegisterAlchemyPotions.POISON), new ItemStack(Items.FERMENTED_SPIDER_EYE)
+                ),
+                new AlchemyMachinePage(vialPotions.get(RegisterAlchemyPotions.POISON), FluidStack.EMPTY, false, true,
+                        FluidStack.EMPTY, FluidStack.EMPTY, FluidStack.EMPTY,
+                        vialPotions.get(RegisterAlchemyPotions.MUNDANE_BREW), new ItemStack(Items.SPIDER_EYE), new ItemStack(Items.REDSTONE), new ItemStack(Items.GLOWSTONE_DUST)
+                ),
+                new AlchemyMachinePage(vialPotions.get(RegisterAlchemyPotions.REGENERATION), FluidStack.EMPTY, false, true,
+                        FluidStack.EMPTY, FluidStack.EMPTY, FluidStack.EMPTY,
+                        vialPotions.get(RegisterAlchemyPotions.MUNDANE_BREW), new ItemStack(Items.GHAST_TEAR), new ItemStack(Items.REDSTONE), new ItemStack(Items.GLOWSTONE_DUST)
+                ),
+                new AlchemyMachinePage(vialPotions.get(RegisterAlchemyPotions.STRENGTH), FluidStack.EMPTY, false, true,
+                        FluidStack.EMPTY, FluidStack.EMPTY, FluidStack.EMPTY,
+                        vialPotions.get(RegisterAlchemyPotions.MUNDANE_BREW), new ItemStack(Items.BLAZE_POWDER), new ItemStack(Items.REDSTONE), new ItemStack(Items.GLOWSTONE_DUST)
+                ),
+                new AlchemyMachinePage(vialPotions.get(RegisterAlchemyPotions.WEAKNESS), FluidStack.EMPTY, false, true,
+                        FluidStack.EMPTY, FluidStack.EMPTY, FluidStack.EMPTY,
+                        vialPotions.get(RegisterAlchemyPotions.STRENGTH), new ItemStack(Items.FERMENTED_SPIDER_EYE)
+                ),
+                new AlchemyMachinePage(vialPotions.get(RegisterAlchemyPotions.SLOW_FALLING), FluidStack.EMPTY, false, true,
+                        FluidStack.EMPTY, FluidStack.EMPTY, FluidStack.EMPTY,
+                        vialPotions.get(RegisterAlchemyPotions.MUNDANE_BREW), new ItemStack(Items.PHANTOM_MEMBRANE), new ItemStack(Items.REDSTONE)
                 )
         );
 
@@ -2061,6 +2129,10 @@ public class ArcanemiconChapters {
                 new AlchemyMachinePage(new ItemStack(Items.FERMENTED_SPIDER_EYE), FluidStack.EMPTY, false, true,
                         new FluidStack(WizardsReborn.ALCHEMY_OIL_FLUID.get(), 50), new FluidStack(WizardsReborn.MOR_BREW_FLUID.get(), 100), FluidStack.EMPTY,
                         new ItemStack(Items.SPIDER_EYE), new ItemStack(Items.SUGAR)
+                ),
+                new AlchemyMachinePage(vialPotions.get(RegisterAlchemyPotions.ABSORPTION), FluidStack.EMPTY, false, true,
+                        new FluidStack(WizardsReborn.FLOWER_BREW_FLUID.get(), 1000), FluidStack.EMPTY, FluidStack.EMPTY,
+                        vialPotions.get(RegisterAlchemyPotions.WATER), new ItemStack(Items.GOLDEN_APPLE), new ItemStack(Items.GOLDEN_APPLE), new ItemStack(Items.REDSTONE), new ItemStack(Items.GLOWSTONE_DUST)
                 )
         );
 
@@ -2074,6 +2146,7 @@ public class ArcanemiconChapters {
         List<MobEffectInstance> goldenCarrotEffects = new ArrayList<>();
         List<MobEffectInstance> sugarEffects = new ArrayList<>();
         List<MobEffectInstance> blazePowderEffects = new ArrayList<>();
+        List<MobEffectInstance> spiderEyeEffects = new ArrayList<>();
         List<MobEffectInstance> fermentedSpiderEyeEffects = new ArrayList<>();
         List<MobEffectInstance> rabbitGootEffects = new ArrayList<>();
         List<MobEffectInstance> glisteringMelonSliceEffects = new ArrayList<>();
@@ -2088,6 +2161,7 @@ public class ArcanemiconChapters {
         goldenCarrotEffects.add(new MobEffectInstance(MobEffects.NIGHT_VISION, 8400, 0));
         sugarEffects.add(new MobEffectInstance(MobEffects.MOVEMENT_SPEED, 10000, 0));
         blazePowderEffects.add(new MobEffectInstance(MobEffects.DAMAGE_BOOST, 6000, 0));
+        spiderEyeEffects.add(new MobEffectInstance(MobEffects.POISON, 3000, 0));
         fermentedSpiderEyeEffects.add(new MobEffectInstance(MobEffects.WEAKNESS, 3000, 0));
         rabbitGootEffects.add(new MobEffectInstance(MobEffects.JUMP, 10000, 0));
         glisteringMelonSliceEffects.add(new MobEffectInstance(MobEffects.HEAL, 2, 0));
@@ -2113,6 +2187,7 @@ public class ArcanemiconChapters {
                 new CenserPage(goldenCarrotEffects, new ItemStack(Items.GOLDEN_CARROT)),
                 new CenserPage(sugarEffects, new ItemStack(Items.SUGAR)),
                 new CenserPage(blazePowderEffects, new ItemStack(Items.BLAZE_POWDER)),
+                new CenserPage(spiderEyeEffects, new ItemStack(Items.SPIDER_EYE)),
                 new CenserPage(fermentedSpiderEyeEffects, new ItemStack(Items.FERMENTED_SPIDER_EYE)),
                 new CenserPage(rabbitGootEffects, new ItemStack(Items.RABBIT_FOOT)),
                 new CenserPage(glisteringMelonSliceEffects, new ItemStack(Items.GLISTERING_MELON_SLICE))

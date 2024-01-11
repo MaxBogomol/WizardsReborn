@@ -67,6 +67,6 @@ public class JewelerTableRecipeCategory implements IRecipeCategory<JewelerTableR
         String text_wissen = Integer.toString(recipe.getRecipeWissen());
         int stringWidth = font_renderer.width(text_wissen);
 
-        gui.drawString(Minecraft.getInstance().font, text_wissen, 120 - (stringWidth / 2), 65, 0xffffff);
+        gui.drawString(Minecraft.getInstance().font, text_wissen, 120 - (stringWidth / 2), 38, 0xffffff);
     }
 }

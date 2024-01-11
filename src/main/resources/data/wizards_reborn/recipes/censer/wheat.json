@@ -1,0 +1,13 @@
+{
+  "type": "wizards_reborn:censer",
+  "ingredient": {
+    "item": "minecraft:wheat"
+  },
+  "effects": [
+    {
+      "effect": "minecraft:saturation",
+      "duration": 2,
+      "amplifier": 0
+    }
+  ]
+}

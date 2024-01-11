@@ -1,0 +1,33 @@
+{
+  "type": "wizards_reborn:alchemy_machine",
+  "alchemyPotion": {
+    "alchemy_potion": "wizards_reborn:absorption"
+  },
+  "steam": 300,
+  "ingredients": [
+    {
+      "tag": "wizards_reborn:alchemy_potions"
+    },
+    {
+      "item": "minecraft:golden_apple"
+    },
+    {
+      "item": "minecraft:golden_apple"
+    },
+    {
+      "item": "minecraft:redstone"
+    },
+    {
+      "item": "minecraft:glowstone_dust"
+    }
+  ],
+  "fluidIngredients": [
+    {
+      "name": "wizards_reborn:flower_brew",
+      "amount" : 1000
+    }
+  ],
+  "alchemyPotionIngredient": {
+    "alchemy_potion": "wizards_reborn:mundane_brew"
+  }
+}

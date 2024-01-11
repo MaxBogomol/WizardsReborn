@@ -1,0 +1,18 @@
+{
+  "type": "wizards_reborn:censer",
+  "ingredient": {
+    "item": "minecraft:nether_wart"
+  },
+  "effects": [
+    {
+      "effect": "minecraft:saturation",
+      "duration": 1,
+      "amplifier": 0
+    },
+    {
+      "effect": "minecraft:fire_resistance",
+      "duration": 400,
+      "amplifier": 0
+    }
+  ]
+}

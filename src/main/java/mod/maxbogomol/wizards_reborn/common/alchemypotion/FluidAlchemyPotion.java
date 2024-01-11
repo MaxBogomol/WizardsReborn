@@ -30,9 +30,7 @@ public class FluidAlchemyPotion extends AlchemyPotion {
         return fluid.getFluidType().getDescriptionId();
     }
 
-
     public Fluid getFluid() {
         return fluid;
     }
-
 }
