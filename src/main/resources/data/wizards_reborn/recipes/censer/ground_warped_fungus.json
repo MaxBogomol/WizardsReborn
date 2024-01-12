@@ -1,0 +1,18 @@
+{
+  "type": "wizards_reborn:censer",
+  "ingredient": {
+    "item": "wizards_reborn:ground_warped_fungus"
+  },
+  "effects": [
+    {
+      "effect": "minecraft:slowness",
+      "duration": 200,
+      "amplifier": 0
+    },
+    {
+      "effect": "minecraft:regeneration",
+      "duration": 300,
+      "amplifier": 1
+    }
+  ]
+}

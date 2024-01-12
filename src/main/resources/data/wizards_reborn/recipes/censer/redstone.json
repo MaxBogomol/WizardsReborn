@@ -1,0 +1,18 @@
+{
+  "type": "wizards_reborn:censer",
+  "ingredient": {
+    "item": "minecraft:redstone"
+  },
+  "effects": [
+    {
+      "effect": "minecraft:speed",
+      "duration": 10000,
+      "amplifier": 1
+    },
+    {
+      "effect": "minecraft:haste",
+      "duration": 10000,
+      "amplifier": 1
+    }
+  ]
+}

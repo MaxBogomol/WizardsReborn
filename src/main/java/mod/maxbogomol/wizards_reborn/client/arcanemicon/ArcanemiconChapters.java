@@ -1322,7 +1322,7 @@ public class ArcanemiconChapters {
                 new SpellIndexPage(
                         new SpellIndexEntry(EARTH_CHARGE, WizardsReborn.EARTH_CHARGE_SPELL, RegisterKnowledges.FACETED_CRYSTALS),
                         new SpellIndexEntry(WATER_CHARGE, WizardsReborn.WATER_CHARGE_SPELL, RegisterKnowledges.FACETED_CRYSTALS),
-                        new SpellIndexEntry(AIR_CHARGE, WizardsReborn.AIR_CHARGE_SPELL, RegisterKnowledges.ARCANE_WAND),
+                        new SpellIndexEntry(AIR_CHARGE, WizardsReborn.AIR_CHARGE_SPELL, RegisterKnowledges.FACETED_CRYSTALS),
                         new SpellIndexEntry(FIRE_CHARGE, WizardsReborn.FIRE_CHARGE_SPELL, RegisterKnowledges.FACETED_CRYSTALS),
                         new SpellIndexEntry(VOID_CHARGE, WizardsReborn.VOID_CHARGE_SPELL, RegisterKnowledges.FACETED_CRYSTALS),
                         new SpellIndexEntry(FROST_CHARGE, WizardsReborn.FROST_CHARGE_SPELL, RegisterKnowledges.FACETED_CRYSTALS),
@@ -1330,7 +1330,7 @@ public class ArcanemiconChapters {
                 ),
                 new SpellIndexPage(
                         new SpellIndexEntry(CURSE_CHARGE, WizardsReborn.CURSE_CHARGE_SPELL, RegisterKnowledges.FACETED_CRYSTALS),
-                        new SpellIndexEntry(HEART_OF_NATURE, WizardsReborn.HEART_OF_NATURE_SPELL, RegisterKnowledges.ARCANE_WAND),
+                        new SpellIndexEntry(HEART_OF_NATURE, WizardsReborn.HEART_OF_NATURE_SPELL, RegisterKnowledges.FACETED_CRYSTALS),
                         new SpellIndexEntry(WATER_BREATHING, WizardsReborn.WATER_BREATHING_SPELL, RegisterKnowledges.FACETED_CRYSTALS),
                         new SpellIndexEntry(AIR_FLOW, WizardsReborn.AIR_FLOW_SPELL, RegisterKnowledges.FACETED_CRYSTALS),
                         new SpellIndexEntry(FIRE_SHIELD, WizardsReborn.FIRE_SHIELD_SPELL, RegisterKnowledges.FACETED_CRYSTALS),
@@ -2132,7 +2132,15 @@ public class ArcanemiconChapters {
                 ),
                 new AlchemyMachinePage(vialPotions.get(RegisterAlchemyPotions.ABSORPTION), FluidStack.EMPTY, false, true,
                         new FluidStack(WizardsReborn.FLOWER_BREW_FLUID.get(), 1000), FluidStack.EMPTY, FluidStack.EMPTY,
-                        vialPotions.get(RegisterAlchemyPotions.WATER), new ItemStack(Items.GOLDEN_APPLE), new ItemStack(Items.GOLDEN_APPLE), new ItemStack(Items.REDSTONE), new ItemStack(Items.GLOWSTONE_DUST)
+                        vialPotions.get(RegisterAlchemyPotions.MUNDANE_BREW), new ItemStack(Items.GOLDEN_APPLE), new ItemStack(Items.GOLDEN_APPLE), new ItemStack(Items.REDSTONE), new ItemStack(Items.GLOWSTONE_DUST)
+                ),
+                new AlchemyMachinePage(vialPotions.get(RegisterAlchemyPotions.RESISTANCE), FluidStack.EMPTY, false, true,
+                        new FluidStack(WizardsReborn.MUSHROOM_BREW_FLUID.get(), 1000), FluidStack.EMPTY, FluidStack.EMPTY,
+                        vialPotions.get(RegisterAlchemyPotions.MUNDANE_BREW), new ItemStack(Items.OBSIDIAN), new ItemStack(Items.OBSIDIAN), new ItemStack(Items.REDSTONE), new ItemStack(Items.GLOWSTONE_DUST)
+                ),
+                new AlchemyMachinePage(vialPotions.get(RegisterAlchemyPotions.MAGICAL_ATTUNEMENT), FluidStack.EMPTY, false, true,
+                        new FluidStack(WizardsReborn.MOR_BREW_FLUID.get(), 1000), FluidStack.EMPTY, FluidStack.EMPTY,
+                        vialPotions.get(RegisterAlchemyPotions.WISSEN_TEA), new ItemStack(WizardsReborn.ARCANUM.get()), new ItemStack(WizardsReborn.ARCANUM.get()), new ItemStack(WizardsReborn.ARCACITE.get()), new ItemStack(Items.REDSTONE), new ItemStack(Items.REDSTONE)
                 )
         );
 
