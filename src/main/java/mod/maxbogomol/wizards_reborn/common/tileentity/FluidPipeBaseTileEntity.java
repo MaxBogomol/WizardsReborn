@@ -1,8 +1,12 @@
 package mod.maxbogomol.wizards_reborn.common.tileentity;
 
+import mod.maxbogomol.wizards_reborn.WizardsReborn;
 import mod.maxbogomol.wizards_reborn.api.alchemy.IFluidPipePriority;
 import mod.maxbogomol.wizards_reborn.api.alchemy.IFluidTileEntity;
 import mod.maxbogomol.wizards_reborn.api.alchemy.PipePriorityMap;
+import mod.maxbogomol.wizards_reborn.client.particle.Particles;
+import mod.maxbogomol.wizards_reborn.common.item.equipment.WissenWandItem;
+import net.minecraft.client.Minecraft;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.nbt.CompoundTag;
@@ -11,11 +15,13 @@ import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.ticks.ScheduledTick;
-import net.minecraft.world.ticks.TickPriority;
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.capabilities.ForgeCapabilities;
 import net.minecraftforge.common.util.LazyOptional;
@@ -177,6 +183,49 @@ public abstract class FluidPipeBaseTileEntity extends PipeBaseTileEntity impleme
                 clogged = !fluidMoved;
                 syncCloggedFlag = true;
                 setChanged();
+            }
+        }
+
+        if (level.isClientSide()) {
+            wissenWandEffect();
+        }
+    }
+
+    @OnlyIn(Dist.CLIENT)
+    public void wissenWandEffect() {
+        Minecraft mc = Minecraft.getInstance();
+
+        Player player = mc.player;
+        ItemStack main = player.getMainHandItem();
+        ItemStack offhand = player.getOffhandItem();
+        boolean renderWand = false;
+
+        if (!main.isEmpty() && main.getItem() instanceof WissenWandItem) {
+            renderWand = true;
+        } else {
+            if (!offhand.isEmpty() && offhand.getItem() instanceof WissenWandItem) {
+                renderWand = true;
+            }
+        }
+
+        if (lastTransfer != null && renderWand) {
+            float vx = lastTransfer.getStepX();
+            float vy = lastTransfer.getStepY();
+            float vz = lastTransfer.getStepZ() ;
+            double x = getBlockPos().getX() + 0.2f + random.nextFloat() * 0.6f;
+            double y = getBlockPos().getY() + 0.2f + random.nextFloat() * 0.6f;
+            double z = getBlockPos().getZ() + 0.2f + random.nextFloat() * 0.6f;
+            float r = clogged ? 255f : 16f;
+            float g = clogged ? 16f : 255f;
+            float b = 16f;
+            for(int i = 0; i < 2; i++) {
+                Particles.create(WizardsReborn.SPARKLE_PARTICLE)
+                        .addVelocity(vx / 10f, vy / 10f, vz / 10f)
+                        .setAlpha(0.3f, 0f).setScale(0.1f, 0f)
+                        .setColor(r / 255f, g / 255f, b / 255f)
+                        .setLifetime(10)
+                        .setSpin((0.1f * (float) ((random.nextDouble() - 0.5D) * 2)))
+                        .spawn(level,  x,  y, z);
             }
         }
     }

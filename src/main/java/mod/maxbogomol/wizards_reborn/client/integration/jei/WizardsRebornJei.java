@@ -2,6 +2,7 @@ package mod.maxbogomol.wizards_reborn.client.integration.jei;
 
 import mezz.jei.api.IModPlugin;
 import mezz.jei.api.JeiPlugin;
+import mezz.jei.api.constants.RecipeTypes;
 import mezz.jei.api.registration.IRecipeCatalystRegistration;
 import mezz.jei.api.registration.IRecipeCategoryRegistration;
 import mezz.jei.api.registration.IRecipeRegistration;
@@ -75,6 +76,9 @@ public class WizardsRebornJei implements IModPlugin {
         registration.addRecipeCatalyst(new ItemStack(WizardsReborn.ARCANE_WOOD_SMOKING_PIPE.get()), CenserRecipeCategory.TYPE);
         registration.addRecipeCatalyst(new ItemStack(WizardsReborn.ARCANE_ITERATOR_ITEM.get()), ArcaneIteratorRecipeCategory.TYPE);
         registration.addRecipeCatalyst(new ItemStack(WizardsReborn.JEWELER_TABLE_ITEM.get()), JewelerTableRecipeCategory.TYPE);
+
+        registration.addRecipeCatalyst(new ItemStack(WizardsReborn.ALCHEMY_FURNACE_ITEM.get()), RecipeTypes.SMELTING);
+        registration.addRecipeCatalyst(new ItemStack(WizardsReborn.ALCHEMY_FURNACE_ITEM.get()), RecipeTypes.FUELING);
     }
 
     private static <T extends Recipe<C>, C extends Container> List<T> sortRecipes(RecipeType<T> type, Comparator<? super T> comparator) {

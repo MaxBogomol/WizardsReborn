@@ -5,6 +5,7 @@ import mod.maxbogomol.wizards_reborn.api.alchemy.ISteamTileEntity;
 import mod.maxbogomol.wizards_reborn.client.particle.Particles;
 import mod.maxbogomol.wizards_reborn.common.tileentity.SteamPipeBaseTileEntity;
 import mod.maxbogomol.wizards_reborn.common.tileentity.TickableBlockEntity;
+import mod.maxbogomol.wizards_reborn.utils.PacketUtils;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.tags.TagKey;
@@ -55,12 +56,12 @@ public class SteamExtractorBlock extends TinyExtractorBaseBlock {
 
     @Override
     public boolean unclog(BlockEntity blockEntity, Level level, BlockPos pos) {
-        /*if (blockEntity instanceof FluidPipeBaseTileEntity pipeEntity && pipeEntity.clogged) {
-            IFluidHandler handler = blockEntity.getCapability(ForgeCapabilities.FLUID_HANDLER, null).orElse(null);
-            handler.drain(handler.getTankCapacity(0), IFluidHandler.FluidAction.EXECUTE);
+        if (blockEntity instanceof SteamPipeBaseTileEntity pipeEntity && pipeEntity.clogged) {
+            pipeEntity.setSteam(0);
             level.updateNeighbourForOutputSignal(pos, this);
+            PacketUtils.SUpdateTileEntityPacket(pipeEntity);
             return true;
-        }*/
+        }
 
         return false;
     }

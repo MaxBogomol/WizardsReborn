@@ -70,6 +70,14 @@ public abstract class PipeBaseBlock extends Block implements EntityBlock, Simple
         this.registerDefaultState(this.stateDefinition.any().setValue(BlockStateProperties.WATERLOGGED, false));
     }
 
+    public VoxelShape[] getPipeAabbs() {
+        return PIPE_AABBS;
+    }
+
+    public VoxelShape[] getEndAabbs() {
+        return END_AABBS;
+    }
+
     @Override
     public InteractionResult use(BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hit) {
         if (!level.isClientSide) {
@@ -79,6 +87,11 @@ public abstract class PipeBaseBlock extends Block implements EntityBlock, Simple
             if (stack.getItem() instanceof WissenWandItem) {
                 if (WissenWandItem.getMode(stack) == 0) {
                     isWand = true;
+                }
+                if (WissenWandItem.getMode(stack) == 3) {
+                    if (unclog(level.getBlockEntity(pos), level, pos)) {
+                        return InteractionResult.SUCCESS;
+                    }
                 }
             }
 
@@ -98,9 +111,9 @@ public abstract class PipeBaseBlock extends Block implements EntityBlock, Simple
                 for (int i = 0; i < 6; i++) {
                     BlockHitResult partHit = null;
                     if (pipe.connections[i] == PipeConnection.END) {
-                        partHit = END_AABBS[i].clip(eyePosition, lookVector, pos);
+                        partHit = getEndAabbs()[i].clip(eyePosition, lookVector, pos);
                     } else if (pipe.connections[i] == PipeConnection.PIPE) {
-                        partHit = PIPE_AABBS[i].clip(eyePosition, lookVector, pos);
+                        partHit = getPipeAabbs()[i].clip(eyePosition, lookVector, pos);
                     }
                     if (partHit != null) {
                         hitPositions[i] = partHit.getLocation();
