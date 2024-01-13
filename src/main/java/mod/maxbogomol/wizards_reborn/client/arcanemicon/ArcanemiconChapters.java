@@ -289,7 +289,7 @@ public class ArcanemiconChapters {
                 new CraftingTablePage(new ItemStack(WizardsReborn.LEATHER_BELT.get()),
                         ItemStack.EMPTY, new ItemStack(Items.LEATHER), ItemStack.EMPTY,
                         new ItemStack(Items.LEATHER), ItemStack.EMPTY, new ItemStack(Items.LEATHER),
-                        ItemStack.EMPTY, new ItemStack(WizardsReborn.ARCANE_GOLD_NUGGET.get()), ItemStack.EMPTY
+                        ItemStack.EMPTY, new ItemStack(WizardsReborn.ARCANE_GOLD_INGOT.get()), ItemStack.EMPTY
                 )
         );
 

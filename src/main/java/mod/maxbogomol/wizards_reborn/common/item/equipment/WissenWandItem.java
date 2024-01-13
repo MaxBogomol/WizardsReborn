@@ -5,14 +5,9 @@ import mod.maxbogomol.wizards_reborn.WizardsReborn;
 import mod.maxbogomol.wizards_reborn.api.alchemy.IFluidTileEntity;
 import mod.maxbogomol.wizards_reborn.api.alchemy.IHeatTileEntity;
 import mod.maxbogomol.wizards_reborn.api.alchemy.ISteamTileEntity;
-import mod.maxbogomol.wizards_reborn.api.wissen.ICooldownTileEntity;
-import mod.maxbogomol.wizards_reborn.api.wissen.IItemResultTileEntity;
-import mod.maxbogomol.wizards_reborn.api.wissen.IWissenTileEntity;
-import mod.maxbogomol.wizards_reborn.api.wissen.IWissenWandFunctionalTileEntity;
+import mod.maxbogomol.wizards_reborn.api.wissen.*;
 import mod.maxbogomol.wizards_reborn.common.item.FluidStorageBaseItem;
 import mod.maxbogomol.wizards_reborn.common.tileentity.AlchemyMachineTileEntity;
-import mod.maxbogomol.wizards_reborn.common.tileentity.WissenTranslatorTileEntity;
-import mod.maxbogomol.wizards_reborn.utils.PacketUtils;
 import net.minecraft.ChatFormatting;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
@@ -95,11 +90,7 @@ public class WissenWandItem extends Item {
 
         if(!world.isClientSide) {
             BlockEntity tileentity = world.getBlockEntity(context.getClickedPos());
-            CompoundTag nbt = stack.getTag();
-            if (nbt == null) {
-                nbt = new CompoundTag();
-                stack.setTag(nbt);
-            }
+            CompoundTag nbt = stack.getOrCreateTag();
 
             if (!nbt.contains("block")) {
                 nbt.putBoolean("block", false);
@@ -109,66 +100,10 @@ public class WissenWandItem extends Item {
             }
 
             if (nbt.getInt("mode") != 4) {
-                if (tileentity instanceof IWissenTileEntity) {
-                    IWissenTileEntity wissenTile = (IWissenTileEntity) tileentity;
+                boolean control = controlled(stack, context, tileentity);
+                if (control) result = InteractionResult.SUCCESS;
 
-                    if (!nbt.getBoolean("block")) {
-                        if (((nbt.getInt("mode") == 1) && wissenTile.canConnectReceiveWissen()) || ((nbt.getInt("mode") == 2) && wissenTile.canConnectSendWissen())) {
-                            nbt.putInt("blockX", context.getClickedPos().getX());
-                            nbt.putInt("blockY", context.getClickedPos().getY());
-                            nbt.putInt("blockZ", context.getClickedPos().getZ());
-                            nbt.putBoolean("block", true);
-                            result = InteractionResult.SUCCESS;
-                        }
-                    } else {
-                        if (tileentity instanceof WissenTranslatorTileEntity) {
-                            WissenTranslatorTileEntity translator = (WissenTranslatorTileEntity) tileentity;
-                            BlockPos blockPos = new BlockPos(nbt.getInt("blockX"), nbt.getInt("blockY"), nbt.getInt("blockZ"));
-                            BlockEntity oldTileentity = world.getBlockEntity(blockPos);
-
-                            if (!context.getPlayer().isShiftKeyDown()) {
-                                if (nbt.getInt("mode") == 1) {
-                                    if (oldTileentity instanceof IWissenTileEntity) {
-                                        IWissenTileEntity wissenTileentity = (IWissenTileEntity) oldTileentity;
-                                        if ((!translator.isSameFromAndTo(translator.getBlockPos(), blockPos)) && (wissenTileentity.canConnectReceiveWissen())) {
-                                            translator.blockFromX = nbt.getInt("blockX");
-                                            translator.blockFromY = nbt.getInt("blockY");
-                                            translator.blockFromZ = nbt.getInt("blockZ");
-                                            translator.isFromBlock = true;
-                                            nbt.putBoolean("block", false);
-                                            PacketUtils.SUpdateTileEntityPacket(translator);
-                                            result = InteractionResult.SUCCESS;
-                                        }
-                                    }
-                                } else if (nbt.getInt("mode") == 2) {
-                                    if (oldTileentity instanceof IWissenTileEntity) {
-                                        IWissenTileEntity wissenTileentity = (IWissenTileEntity) oldTileentity;
-                                        if ((!translator.isSameFromAndTo(translator.getBlockPos(), blockPos)) && (wissenTileentity.canConnectSendWissen())) {
-                                            translator.blockToX = nbt.getInt("blockX");
-                                            translator.blockToY = nbt.getInt("blockY");
-                                            translator.blockToZ = nbt.getInt("blockZ");
-                                            translator.isToBlock = true;
-                                            nbt.putBoolean("block", false);
-                                            PacketUtils.SUpdateTileEntityPacket(translator);
-                                            result = InteractionResult.SUCCESS;
-                                        }
-                                    }
-                                }
-                            }
-
-                            if (nbt.getInt("mode") == 3) {
-                                translator.isFromBlock = false;
-                                translator.isToBlock = false;
-                                PacketUtils.SUpdateTileEntityPacket(translator);
-                                result = InteractionResult.SUCCESS;
-                            }
-                        }
-                    }
-                    stack.setTag(nbt);
-                }
-
-                if (tileentity instanceof IWissenWandFunctionalTileEntity) {
-                    IWissenWandFunctionalTileEntity functionalTile = (IWissenWandFunctionalTileEntity) tileentity;
+                if (tileentity instanceof IWissenWandFunctionalTileEntity functionalTile) {
                     if (nbt.getInt("mode") == 0) {
                         functionalTile.wissenWandFuction();
                     }
@@ -186,6 +121,77 @@ public class WissenWandItem extends Item {
         return result;
     }
 
+    public boolean controlled(ItemStack stack, UseOnContext context, BlockEntity tile) {
+        int mode = getMode(stack);
+
+        if (tile instanceof IWissenTileEntity wissenTile) {
+            if (!getBlock(stack)) {
+                if ((mode == 1 && wissenTile.canConnectReceiveWissen()) || (mode == 2 && wissenTile.canConnectSendWissen())) {
+                    setBlockPos(stack, context.getClickedPos());
+                    setBlock(stack, true);
+                    return true;
+                }
+            }
+        }
+
+        if (tile instanceof IWissenWandControlledTileEntity controlledTile) {
+            if (mode == 1) {
+                return controlledTile.wissenWandReceiveConnect(stack, context, tile);
+            }
+            if (mode == 2) {
+                return controlledTile.wissenWandSendConnect(stack, context, tile);
+            }
+            if (mode == 3) {
+                return controlledTile.wissenWandReload(stack, context, tile);
+            }
+        }
+
+        return false;
+    }
+
+    public static int getMode(ItemStack stack) {
+        CompoundTag nbt = stack.getOrCreateTag();
+        if (nbt.contains("mode")) {
+            return nbt.getInt("mode");
+        }
+
+        return 0;
+    }
+
+    public static void setMode(ItemStack stack, int mode) {
+        CompoundTag nbt = stack.getOrCreateTag();
+        nbt.putInt("mode", mode);
+    }
+
+    public static boolean getBlock(ItemStack stack) {
+        CompoundTag nbt = stack.getOrCreateTag();
+        if (nbt.contains("block")) {
+            return nbt.getBoolean("block");
+        }
+
+        return false;
+    }
+
+    public static void setBlock(ItemStack stack, boolean block) {
+        CompoundTag nbt = stack.getOrCreateTag();
+        nbt.putBoolean("block", block);
+    }
+
+    public static BlockPos getBlockPos(ItemStack stack) {
+        CompoundTag nbt = stack.getOrCreateTag();
+        if (nbt.contains("blockX") && nbt.contains("blockY") && nbt.contains("blockZ")) {
+            return new BlockPos(nbt.getInt("blockX"), nbt.getInt("blockY"), nbt.getInt("blockZ"));
+        }
+
+        return BlockPos.ZERO;
+    }
+
+    public static void setBlockPos(ItemStack stack, BlockPos blockPos) {
+        CompoundTag nbt = stack.getOrCreateTag();
+        nbt.putInt("blockX", blockPos.getX());
+        nbt.putInt("blockY", blockPos.getY());
+        nbt.putInt("blockZ", blockPos.getZ());
+    }
 
     @OnlyIn(Dist.CLIENT)
     @Override
@@ -247,27 +253,6 @@ public class WissenWandItem extends Item {
         Component mode = Component.literal(" (")
                 .append(Component.translatable(getModeString(stack)).withStyle(getModeColor(stack)))
                 .append(")");
-        return mode;
-    }
-
-    public static int getMode(ItemStack stack) {
-        int mode = 0;
-
-        CompoundTag nbt = stack.getTag();
-        if (nbt == null) {
-            nbt = new CompoundTag();
-            stack.setTag(nbt);
-        }
-
-        if (!nbt.contains("block")) {
-            nbt.putBoolean("block", false);
-        }
-        if (!nbt.contains("mode")) {
-            nbt.putInt("mode", 0);
-        }
-
-        mode = nbt.getInt("mode");
-
         return mode;
     }
 

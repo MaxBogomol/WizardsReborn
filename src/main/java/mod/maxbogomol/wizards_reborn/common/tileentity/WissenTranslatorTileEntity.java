@@ -3,6 +3,7 @@ package mod.maxbogomol.wizards_reborn.common.tileentity;
 import mod.maxbogomol.wizards_reborn.WizardsReborn;
 import mod.maxbogomol.wizards_reborn.api.wissen.ICooldownTileEntity;
 import mod.maxbogomol.wizards_reborn.api.wissen.IWissenTileEntity;
+import mod.maxbogomol.wizards_reborn.api.wissen.IWissenWandControlledTileEntity;
 import mod.maxbogomol.wizards_reborn.api.wissen.WissenUtils;
 import mod.maxbogomol.wizards_reborn.client.config.ClientConfig;
 import mod.maxbogomol.wizards_reborn.client.particle.Particles;
@@ -25,6 +26,7 @@ import net.minecraft.world.SimpleContainer;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.context.UseOnContext;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
@@ -37,7 +39,7 @@ import java.awt.*;
 import java.util.ArrayList;
 import java.util.Random;
 
-public class WissenTranslatorTileEntity extends ExposedTileSimpleInventory implements TickableBlockEntity, IWissenTileEntity, ICooldownTileEntity {
+public class WissenTranslatorTileEntity extends ExposedTileSimpleInventory implements TickableBlockEntity, IWissenTileEntity, ICooldownTileEntity, IWissenWandControlledTileEntity {
 
     public int blockFromX = 0;
     public int blockFromY = 0;
@@ -236,7 +238,7 @@ public class WissenTranslatorTileEntity extends ExposedTileSimpleInventory imple
         return ((blockFromX == blockToX) && (blockFromY == blockToY) && (blockFromZ == blockToZ));
     }
 
-    public boolean isSameFromAndTo(BlockPos posFrom, BlockPos posTo) {
+    public static boolean isSameFromAndTo(BlockPos posFrom, BlockPos posTo) {
         return ((posFrom.getX() == posTo.getX()) && (posFrom.getY() == posTo.getY()) && (posFrom.getZ() == posTo.getZ()));
     }
 
@@ -574,5 +576,53 @@ public class WissenTranslatorTileEntity extends ExposedTileSimpleInventory imple
             return (float) getSendWissenCooldown() / cooldown;
         }
         return 0;
+    }
+
+    @Override
+    public boolean wissenWandReceiveConnect(ItemStack stack, UseOnContext context, BlockEntity tile) {
+        BlockPos oldBlockPos = WissenWandItem.getBlockPos(stack);
+        BlockEntity oldTile = level.getBlockEntity(oldBlockPos);
+
+        if (oldTile instanceof IWissenTileEntity wissenTile) {
+            if ((!isSameFromAndTo(getBlockPos(), oldBlockPos)) && (wissenTile.canConnectReceiveWissen())) {
+                blockFromX = oldBlockPos.getX();
+                blockFromY = oldBlockPos.getY();
+                blockFromZ = oldBlockPos.getZ();
+                isFromBlock = true;
+                WissenWandItem.setBlock(stack, false);
+                PacketUtils.SUpdateTileEntityPacket(this);
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    @Override
+    public boolean wissenWandSendConnect(ItemStack stack, UseOnContext context, BlockEntity tile) {
+        BlockPos oldBlockPos = WissenWandItem.getBlockPos(stack);
+        BlockEntity oldTile = level.getBlockEntity(oldBlockPos);
+
+        if (oldTile instanceof IWissenTileEntity wissenTile) {
+            if ((!isSameFromAndTo(getBlockPos(), oldBlockPos)) && (wissenTile.canConnectSendWissen())) {
+                blockToX = oldBlockPos.getX();
+                blockToY = oldBlockPos.getY();
+                blockToZ = oldBlockPos.getZ();
+                isToBlock = true;
+                WissenWandItem.setBlock(stack, false);
+                PacketUtils.SUpdateTileEntityPacket(this);
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    @Override
+    public boolean wissenWandReload(ItemStack stack, UseOnContext context, BlockEntity tile) {
+        isFromBlock = false;
+        isToBlock = false;
+        PacketUtils.SUpdateTileEntityPacket(this);
+        return false;
     }
 }
