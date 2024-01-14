@@ -12,6 +12,7 @@ import mezz.jei.api.recipe.RecipeIngredientRole;
 import mezz.jei.api.recipe.RecipeType;
 import mezz.jei.api.recipe.category.IRecipeCategory;
 import mod.maxbogomol.wizards_reborn.WizardsReborn;
+import mod.maxbogomol.wizards_reborn.api.alchemy.AlchemyPotion;
 import mod.maxbogomol.wizards_reborn.api.alchemy.AlchemyPotionUtils;
 import mod.maxbogomol.wizards_reborn.common.item.equipment.AlchemyPotionItem;
 import mod.maxbogomol.wizards_reborn.common.recipe.AlchemyMachineRecipe;
@@ -25,6 +26,9 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.Ingredient;
 import org.jetbrains.annotations.NotNull;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class AlchemyMachineRecipeCategory implements IRecipeCategory<AlchemyMachineRecipe> {
     public static final RecipeType<AlchemyMachineRecipe> TYPE = RecipeType.create(WizardsReborn.MOD_ID, "alchemy_machine", AlchemyMachineRecipe.class);
@@ -104,13 +108,7 @@ public class AlchemyMachineRecipeCategory implements IRecipeCategory<AlchemyMach
         }
 
         if (!AlchemyPotionUtils.isEmpty(recipe.getRecipeAlchemyPotion())) {
-            ItemStack vial = new ItemStack(WizardsReborn.ALCHEMY_VIAL_POTION.get());
-            AlchemyPotionUtils.setPotion(vial, recipe.getRecipeAlchemyPotion());
-
-            ItemStack flask = new ItemStack(WizardsReborn.ALCHEMY_FLASK_POTION.get());
-            AlchemyPotionUtils.setPotion(flask, recipe.getRecipeAlchemyPotion());
-
-            builder.addSlot(RecipeIngredientRole.OUTPUT, 144, 70).addItemStack(vial).addItemStack(flask);
+            builder.addSlot(RecipeIngredientRole.OUTPUT, 144, 70).addItemStacks(getPotionItems(recipe.getRecipeAlchemyPotion()));
         } else {
             builder.addSlot(RecipeIngredientRole.OUTPUT, 144, 70).addItemStack(recipe.getResultItem(RegistryAccess.EMPTY));
         }
@@ -159,5 +157,19 @@ public class AlchemyMachineRecipeCategory implements IRecipeCategory<AlchemyMach
         } else {
             gui.blit(TEXTURE, 144, 48, 176, 8, 16, 16, 256, 256);
         }
+    }
+
+    public static List<ItemStack> getPotionItems(AlchemyPotion potion) {
+        List<ItemStack> items = new ArrayList<>();
+
+        ItemStack vial = new ItemStack(WizardsReborn.ALCHEMY_VIAL_POTION.get());
+        AlchemyPotionUtils.setPotion(vial, potion);
+        items.add(vial);
+
+        ItemStack flask = new ItemStack(WizardsReborn.ALCHEMY_FLASK_POTION.get());
+        AlchemyPotionUtils.setPotion(flask, potion);
+        items.add(flask);
+
+        return items;
     }
 }

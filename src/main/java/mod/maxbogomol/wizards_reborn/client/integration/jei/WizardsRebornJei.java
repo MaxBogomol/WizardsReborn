@@ -3,16 +3,24 @@ package mod.maxbogomol.wizards_reborn.client.integration.jei;
 import mezz.jei.api.IModPlugin;
 import mezz.jei.api.JeiPlugin;
 import mezz.jei.api.constants.RecipeTypes;
+import mezz.jei.api.constants.VanillaTypes;
+import mezz.jei.api.ingredients.subtypes.IIngredientSubtypeInterpreter;
 import mezz.jei.api.registration.IRecipeCatalystRegistration;
 import mezz.jei.api.registration.IRecipeCategoryRegistration;
 import mezz.jei.api.registration.IRecipeRegistration;
+import mezz.jei.api.registration.ISubtypeRegistration;
 import mod.maxbogomol.wizards_reborn.WizardsReborn;
+import mod.maxbogomol.wizards_reborn.api.alchemy.AlchemyPotion;
+import mod.maxbogomol.wizards_reborn.api.alchemy.AlchemyPotionUtils;
+import mod.maxbogomol.wizards_reborn.api.alchemy.AlchemyPotions;
+import mod.maxbogomol.wizards_reborn.common.alchemypotion.RegisterAlchemyPotions;
 import net.minecraft.client.Minecraft;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.Container;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.Recipe;
 import net.minecraft.world.item.crafting.RecipeType;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -79,6 +87,13 @@ public class WizardsRebornJei implements IModPlugin {
 
         registration.addRecipeCatalyst(new ItemStack(WizardsReborn.ALCHEMY_FURNACE_ITEM.get()), RecipeTypes.SMELTING);
         registration.addRecipeCatalyst(new ItemStack(WizardsReborn.ALCHEMY_FURNACE_ITEM.get()), RecipeTypes.FUELING);
+    }
+
+    @Override
+    public void registerItemSubtypes(@NotNull ISubtypeRegistration registry) {
+        IIngredientSubtypeInterpreter<ItemStack> interpreterPotion = (stack, ctx) -> String.valueOf(AlchemyPotionUtils.getPotion(stack).getId());
+        registry.registerSubtypeInterpreter(VanillaTypes.ITEM_STACK, WizardsReborn.ALCHEMY_VIAL_POTION.get(), interpreterPotion);
+        registry.registerSubtypeInterpreter(VanillaTypes.ITEM_STACK, WizardsReborn.ALCHEMY_FLASK_POTION.get(), interpreterPotion);
     }
 
     private static <T extends Recipe<C>, C extends Container> List<T> sortRecipes(RecipeType<T> type, Comparator<? super T> comparator) {

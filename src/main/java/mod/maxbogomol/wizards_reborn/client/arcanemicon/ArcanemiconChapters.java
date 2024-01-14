@@ -898,6 +898,10 @@ public class ArcanemiconChapters {
                         new ItemStack(Items.BOOK), new ItemStack(Items.LAPIS_LAZULI), new ItemStack(Items.LAPIS_LAZULI),
                         new ItemStack(Items.REDSTONE), new ItemStack(Items.REDSTONE), new ItemStack(Items.REDSTONE)
                 ),
+                new ArcaneIteratorPage(new ItemStack(Items.ENCHANTED_BOOK), 10, 0, Enchantments.SILK_TOUCH,
+                        new ItemStack(Items.BOOK), new ItemStack(Items.LAPIS_LAZULI), new ItemStack(Items.LAPIS_LAZULI),
+                        new ItemStack(Items.GOLD_BLOCK), new ItemStack(Items.DIAMOND)
+                ),
                 new ArcaneIteratorPage(new ItemStack(Items.ENCHANTED_BOOK), 5, 0, Enchantments.UNBREAKING,
                         new ItemStack(Items.BOOK), new ItemStack(Items.LAPIS_LAZULI), new ItemStack(Items.LAPIS_LAZULI),
                         new ItemStack(Items.IRON_INGOT), new ItemStack(Items.IRON_INGOT), new ItemStack(Items.IRON_INGOT)
