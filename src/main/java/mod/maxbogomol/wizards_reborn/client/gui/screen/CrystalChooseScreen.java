@@ -2,7 +2,6 @@ package mod.maxbogomol.wizards_reborn.client.gui.screen;
 
 import com.mojang.blaze3d.platform.GlStateManager;
 import com.mojang.blaze3d.systems.RenderSystem;
-import com.mojang.blaze3d.vertex.Tesselator;
 import com.mojang.math.Axis;
 import mod.maxbogomol.wizards_reborn.WizardsReborn;
 import mod.maxbogomol.wizards_reborn.WizardsRebornClient;
@@ -232,7 +231,7 @@ public class CrystalChooseScreen extends Screen {
 
             RenderSystem.enableBlend();
             RenderSystem.blendFunc(GlStateManager.SourceFactor.SRC_ALPHA, GlStateManager.DestFactor.ONE);
-            Tesselator tess = Tesselator.getInstance();
+            MultiBufferSource.BufferSource buffersource = Minecraft.getInstance().renderBuffers().bufferSource();
             RenderSystem.depthMask(false);
             RenderSystem.setShader(WizardsRebornClient::getGlowingShader);
 
@@ -240,9 +239,9 @@ public class CrystalChooseScreen extends Screen {
             gui.pose().translate(x, y, 0);
             gui.pose().mulPose(Axis.ZP.rotationDegrees(mouseAngle));
             gui.pose().mulPose(Axis.XP.rotationDegrees((ClientTickHandler.ticksInGame + partialTicks + (i * 10) * 5)));
-            RenderUtils.ray(gui.pose(), MultiBufferSource.immediate(tess.getBuilder()), 1f, mouseDistance, 10f, 1, 1, 1, 0.5f, 1, 1, 1, 0F);
+            RenderUtils.ray(gui.pose(), buffersource, 1f, mouseDistance, 10f, 1, 1, 1, 0.5f, 1, 1, 1, 0F);
+            buffersource.endBatch();
             gui.pose().popPose();
-            tess.end();
 
             RenderSystem.disableBlend();
             RenderSystem.depthMask(true);
@@ -320,24 +319,24 @@ public class CrystalChooseScreen extends Screen {
 
                     RenderSystem.enableBlend();
                     RenderSystem.blendFunc(GlStateManager.SourceFactor.SRC_ALPHA, GlStateManager.DestFactor.ONE);
-                    Tesselator tess = Tesselator.getInstance();
+                    MultiBufferSource.BufferSource buffersource = Minecraft.getInstance().renderBuffers().bufferSource();
                     RenderSystem.depthMask(false);
                     RenderSystem.setShader(WizardsRebornClient::getGlowingShader);
 
                     gui.pose().pushPose();
                     gui.pose().translate(x - 64 + w + 16, y - h + (i * 34) + 16, 0);
                     float s = (float) (0.5f * (Math.sin(Math.toRadians((ClientTickHandler.ticksInGame * 10 + partialTicks + (i * 10) * 2)))));
-                    RenderUtils.ray(gui.pose(), MultiBufferSource.immediate(tess.getBuilder()), 14, 128, 1f, r, g, b, 0.5f + s, r, g, b, 0.5f - s);
-                    tess.end();
+                    RenderUtils.ray(gui.pose(), buffersource, 14, 128, 1f, r, g, b, 0.5f + s, r, g, b, 0.5f - s);
+                    buffersource.endBatch();
                     gui.pose().popPose();
 
                     gui.pose().pushPose();
                     gui.pose().translate(x - 144 + 24, y, 0);
                     gui.pose().mulPose(Axis.ZP.rotationDegrees(i * 20 - 40));
                     gui.pose().mulPose(Axis.XP.rotationDegrees((ClientTickHandler.ticksInGame + partialTicks + (i * 10) * 5)));
-                    RenderUtils.ray(gui.pose(), MultiBufferSource.immediate(tess.getBuilder()), 1f, 85, 7.5f, r, g, b, 0.5f + chooseRay, r, g, b, 0F + chooseRay);
+                    RenderUtils.ray(gui.pose(), buffersource, 1f, 85, 7.5f, r, g, b, 0.5f + chooseRay, r, g, b, 0F + chooseRay);
+                    buffersource.endBatch();
                     gui.pose().popPose();
-                    tess.end();
 
                     RenderSystem.disableBlend();
                     RenderSystem.depthMask(true);
@@ -390,24 +389,24 @@ public class CrystalChooseScreen extends Screen {
 
                     RenderSystem.enableBlend();
                     RenderSystem.blendFunc(GlStateManager.SourceFactor.SRC_ALPHA, GlStateManager.DestFactor.ONE);
-                    Tesselator tess = Tesselator.getInstance();
+                    MultiBufferSource.BufferSource buffersource = Minecraft.getInstance().renderBuffers().bufferSource();
                     RenderSystem.depthMask(false);
                     RenderSystem.setShader(WizardsRebornClient::getGlowingShader);
 
                     gui.pose().pushPose();
                     gui.pose().translate(x - 64 + w + 16, y - h + (i * 34) + 16, 0);
                     float s = (float) (0.5f * (Math.sin(Math.toRadians((ClientTickHandler.ticksInGame * 10 + partialTicks + (i * 10) * 2)))));
-                    RenderUtils.ray(gui.pose(), MultiBufferSource.immediate(tess.getBuilder()), 14, 128, 1f, r, g, b, 0.5f + s, r, g, b, 0.5f - s);
-                    tess.end();
+                    RenderUtils.ray(gui.pose(), buffersource, 14, 128, 1f, r, g, b, 0.5f + s, r, g, b, 0.5f - s);
+                    buffersource.endBatch();
                     gui.pose().popPose();
 
                     gui.pose().pushPose();
                     gui.pose().translate(x - 144 + 24, y, 0);
                     gui.pose().mulPose(Axis.ZP.rotationDegrees(i * 20 - 40));
                     gui.pose().mulPose(Axis.XP.rotationDegrees((ClientTickHandler.ticksInGame + partialTicks + (i * 10) * 5)));
-                    RenderUtils.ray(gui.pose(), MultiBufferSource.immediate(tess.getBuilder()), 1f, 85, 7.5f, r, g, b, (0.5f + chooseRay) * f, r, g, b, (0F + chooseRay) * f);
+                    RenderUtils.ray(gui.pose(), buffersource, 1f, 85, 7.5f, r, g, b, (0.5f + chooseRay) * f, r, g, b, (0F + chooseRay) * f);
+                    buffersource.endBatch();
                     gui.pose().popPose();
-                    tess.end();
 
                     RenderSystem.disableBlend();
                     RenderSystem.depthMask(true);
@@ -439,7 +438,7 @@ public class CrystalChooseScreen extends Screen {
 
                 RenderSystem.enableBlend();
                 RenderSystem.blendFunc(GlStateManager.SourceFactor.SRC_ALPHA, GlStateManager.DestFactor.ONE);
-                Tesselator tess = Tesselator.getInstance();
+                MultiBufferSource.BufferSource buffersource = Minecraft.getInstance().renderBuffers().bufferSource();
                 RenderSystem.depthMask(false);
                 RenderSystem.setShader(WizardsRebornClient::getGlowingShader);
 
@@ -458,8 +457,8 @@ public class CrystalChooseScreen extends Screen {
                     gui.pose().pushPose();
                     gui.pose().translate(x - 64 + wPageLeft + 16 + 148, y - h + 16, 0);
                     float s = (float) (0.5f * (Math.sin(Math.toRadians((ClientTickHandler.ticksInGame * 10 + partialTicks + (i * 10) * 3) + (90)))));
-                    RenderUtils.ray(gui.pose(), MultiBufferSource.immediate(tess.getBuilder()), 14, 14, 1f, r, g, b, 0.5f + s, r, g, b, 0.5f - s);
-                    tess.end();
+                    RenderUtils.ray(gui.pose(), buffersource, 14, 14, 1f, r, g, b, 0.5f + s, r, g, b, 0.5f - s);
+                    buffersource.endBatch();
                     gui.pose().popPose();
                 }
 
@@ -467,16 +466,16 @@ public class CrystalChooseScreen extends Screen {
                 gui.pose().translate(x - 64 + wCount + 16 + 148, y - h + 16 + 54, 0);
                 gui.pose().mulPose(Axis.ZP.rotationDegrees(90));
                 float s = (float) (0.5f * (Math.sin(Math.toRadians((ClientTickHandler.ticksInGame * 10 + partialTicks + (i * 10) * 3) + (90 * 2)))));
-                RenderUtils.ray(gui.pose(), MultiBufferSource.immediate(tess.getBuilder()), 14, 42, 1f, r, g, b, 0.5f + s, r, g, b, 0.5f - s);
-                tess.end();
+                RenderUtils.ray(gui.pose(), buffersource, 14, 42, 1f, r, g, b, 0.5f + s, r, g, b, 0.5f - s);
+                buffersource.endBatch();
                 gui.pose().popPose();
 
                 if (page + 1 < pages) {
                     gui.pose().pushPose();
                     gui.pose().translate(x - 64 + wPageRight + 16 + 148, y - h + 16 + 136, 0);
                     s = (float) (0.5f * (Math.sin(Math.toRadians((ClientTickHandler.ticksInGame * 10 + partialTicks + (i * 10) * 3) + (90 * 3)))));
-                    RenderUtils.ray(gui.pose(), MultiBufferSource.immediate(tess.getBuilder()), 14, 14, 1f, r, g, b, 0.5f + s, r, g, b, 0.5f - s);
-                    tess.end();
+                    RenderUtils.ray(gui.pose(), buffersource, 14, 14, 1f, r, g, b, 0.5f + s, r, g, b, 0.5f - s);
+                    buffersource.endBatch();
                     gui.pose().popPose();
                 }
 
@@ -645,15 +644,15 @@ public class CrystalChooseScreen extends Screen {
 
         RenderSystem.enableBlend();
         RenderSystem.blendFunc(GlStateManager.SourceFactor.SRC_ALPHA, GlStateManager.DestFactor.ONE);
-        Tesselator tess = Tesselator.getInstance();
+        MultiBufferSource.BufferSource buffersource = Minecraft.getInstance().renderBuffers().bufferSource();
         RenderSystem.depthMask(false);
         RenderSystem.setShader(WizardsRebornClient::getGlowingShader);
 
-        RenderUtils.dragon(gui.pose(), MultiBufferSource.immediate(tess.getBuilder()), x, y, 0, 30 * scale, partialTicks, r, g, b, i);
-        tess.end();
+        RenderUtils.dragon(gui.pose(), buffersource, x, y, 0, 30 * scale, partialTicks, r, g, b, i);
+        buffersource.endBatch();
         if (renderPolishing) {
-            RenderUtils.dragon(gui.pose(), MultiBufferSource.immediate(tess.getBuilder()), x, y, 0, 20 * scale, partialTicks, r1 / 2f, g1 / 2f, b1 / 2f, i * 5);
-            tess.end();
+            RenderUtils.dragon(gui.pose(), buffersource, x, y, 0, 20 * scale, partialTicks, r1 / 2f, g1 / 2f, b1 / 2f, i * 5);
+            buffersource.endBatch();
         }
 
         if (renderRay) {
@@ -661,9 +660,9 @@ public class CrystalChooseScreen extends Screen {
             gui.pose().translate(width / 2,  height / 2, 0);
             gui.pose().mulPose(Axis.ZP.rotationDegrees(i * step + (step / 2)));
             gui.pose().mulPose(Axis.XP.rotationDegrees((ClientTickHandler.ticksInGame + partialTicks + (i * 10) * 5)));
-            RenderUtils.ray(gui.pose(), MultiBufferSource.immediate(tess.getBuilder()), 1f, (100 * hoveramount) * chooseRay, 10f, r, g, b, 1, r, g, b, 0F);
+            RenderUtils.ray(gui.pose(), buffersource, 1f, (100 * hoveramount) * chooseRay, 10f, r, g, b, 1, r, g, b, 0F);
+            buffersource.endBatch();
             gui.pose().popPose();
-            tess.end();
         }
 
         RenderSystem.disableBlend();
