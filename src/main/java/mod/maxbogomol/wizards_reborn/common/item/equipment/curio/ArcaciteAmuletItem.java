@@ -57,10 +57,10 @@ public class ArcaciteAmuletItem extends BaseCurioItem implements IWissenItem {
     }
 
     @Override
-    public void inventoryTick(ItemStack stack, Level world, Entity entity, int slot, boolean isSelected) {
-        if (!world.isClientSide()) {
-            WissenItemUtils.existWissen(stack);
-        }
+    public ItemStack getDefaultInstance() {
+        ItemStack stack = super.getDefaultInstance();
+        WissenItemUtils.existWissen(stack);
+        return stack;
     }
 
     @Override

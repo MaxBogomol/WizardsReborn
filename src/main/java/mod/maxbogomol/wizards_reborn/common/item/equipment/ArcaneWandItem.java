@@ -83,7 +83,13 @@ public class ArcaneWandItem extends Item implements IWissenItem, ICustomAnimatio
     }
 
     @Override
-    public void inventoryTick(ItemStack stack, Level world, Entity entity, int slot, boolean isSelected) {
+    public ItemStack getDefaultInstance() {
+        ItemStack stack = super.getDefaultInstance();
+        WissenItemUtils.existWissen(stack);
+        return stack;
+    }
+
+    public static ItemStack existTags(ItemStack stack) {
         CompoundTag nbt = stack.getOrCreateTag();
 
         if (!nbt.contains("crystal")) {
@@ -99,7 +105,14 @@ public class ArcaneWandItem extends Item implements IWissenItem, ICustomAnimatio
             nbt.putInt("maxCooldown", 0);
         }
 
+        return stack;
+    }
+
+    @Override
+    public void inventoryTick(ItemStack stack, Level world, Entity entity, int slot, boolean isSelected) {
         WissenItemUtils.existWissen(stack);
+        existTags(stack);
+        CompoundTag nbt = stack.getOrCreateTag();
 
         if (nbt.contains("cooldown")) {
             if (nbt.getInt("cooldown") > 0) {
@@ -334,61 +347,48 @@ public class ArcaneWandItem extends Item implements IWissenItem, ICustomAnimatio
             if (!player.isSpectator()) {
                 ArcaneWandItem wand = (ArcaneWandItem) stack.getItem();
                 CompoundTag nbt = stack.getOrCreateTag();
-                if (!nbt.contains("crystal")) {
-                    nbt.putBoolean("crystal", false);
-                }
-                if (!nbt.contains("spell")) {
-                    nbt.putString("spell", "");
-                }
-                if (!nbt.contains("cooldown")) {
-                    nbt.putInt("cooldown", 0);
-                }
-                if (!nbt.contains("maxCooldown")) {
-                    nbt.putInt("maxCooldown", 0);
-                }
+                existTags(stack);
                 WissenItemUtils.existWissen(stack);
                 Spell spell = null;
 
-                if (nbt != null) {
-                    if (nbt.contains("spell")) {
-                        if (nbt.getString("spell") != "") {
-                            spell = Spells.getSpell(nbt.getString("spell"));
-                        }
+                if (nbt.contains("spell")) {
+                    if (nbt.getString("spell") != "") {
+                        spell = Spells.getSpell(nbt.getString("spell"));
                     }
+                }
 
-                    int x = 1;
-                    int y = 1;
+                int x = 1;
+                int y = 1;
 
-                    gui.blit(new ResourceLocation(WizardsReborn.MOD_ID + ":textures/gui/arcane_wand_frame.png"), x, y, 0, 0, 52, 18, 64, 64);
-                    gui.blit(new ResourceLocation(WizardsReborn.MOD_ID + ":textures/gui/cooldown_frame.png"), x + 2, y + 19, 0, 0, 48, 10, 64, 64);
-                    gui.blit(new ResourceLocation(WizardsReborn.MOD_ID + ":textures/gui/wissen_frame.png"), x + 2, y + 30, 0, 0, 48, 10, 64, 64);
+                gui.blit(new ResourceLocation(WizardsReborn.MOD_ID + ":textures/gui/arcane_wand_frame.png"), x, y, 0, 0, 52, 18, 64, 64);
+                gui.blit(new ResourceLocation(WizardsReborn.MOD_ID + ":textures/gui/cooldown_frame.png"), x + 2, y + 19, 0, 0, 48, 10, 64, 64);
+                gui.blit(new ResourceLocation(WizardsReborn.MOD_ID + ":textures/gui/wissen_frame.png"), x + 2, y + 30, 0, 0, 48, 10, 64, 64);
 
-                    int width = 32;
-                    if (spell != null && nbt.getInt("cooldown") > 0) {
-                        width /= (double) nbt.getInt("maxCooldown") / (double) nbt.getInt("cooldown");
+                int width = 32;
+                if (spell != null && nbt.getInt("cooldown") > 0) {
+                    width /= (double) nbt.getInt("maxCooldown") / (double) nbt.getInt("cooldown");
+                } else {
+                    width = -32;
+                }
+                gui.blit(new ResourceLocation(WizardsReborn.MOD_ID + ":textures/gui/cooldown_frame.png"), x + 10, y + 20, 0, 10, 32 - width, 8, 64, 64);
+
+                width = 32;
+                width /= (double) wand.getMaxWissen() / (double) WissenItemUtils.getWissen(stack);
+                gui.blit(new ResourceLocation(WizardsReborn.MOD_ID + ":textures/gui/wissen_frame.png"), x + 10, y + 31, 0, 10, width, 8, 64, 64);
+
+                if (nbt.getBoolean("crystal")) {
+                    SimpleContainer stack_inv = ArcaneWandItem.getInventory(stack);
+                    gui.renderItem(stack_inv.getItem(0), x + 8, y);
+                }
+
+                if (spell != null) {
+                    if (KnowledgeUtils.isSpell(Minecraft.getInstance().player, spell)) {
+                        gui.blit(spell.getIcon(), x + 28, y + 1, 0, 0, 16, 16, 16, 16);
+                        if (!spell.canWandWithCrystal(stack)) {
+                            gui.blit(new ResourceLocation(WizardsReborn.MOD_ID + ":textures/gui/arcane_wand_frame.png"), x + 27, y, 0, 18, 18, 18, 64, 64);
+                        }
                     } else {
-                        width = -32;
-                    }
-                    gui.blit(new ResourceLocation(WizardsReborn.MOD_ID + ":textures/gui/cooldown_frame.png"), x + 10, y + 20, 0, 10, 32 - width, 8, 64, 64);
-
-                    width = 32;
-                    width /= (double) wand.getMaxWissen() / (double) WissenItemUtils.getWissen(stack);
-                    gui.blit(new ResourceLocation(WizardsReborn.MOD_ID + ":textures/gui/wissen_frame.png"), x + 10, y + 31, 0, 10, width, 8, 64, 64);
-
-                    if (nbt.getBoolean("crystal")) {
-                        SimpleContainer stack_inv = ArcaneWandItem.getInventory(stack);
-                        gui.renderItem(stack_inv.getItem(0), x + 8, y);
-                    }
-
-                    if (spell != null) {
-                        if (KnowledgeUtils.isSpell(Minecraft.getInstance().player, spell)) {
-                            gui.blit(spell.getIcon(), x + 28, y + 1, 0, 0, 16, 16, 16, 16);
-                            if (!spell.canWandWithCrystal(stack)) {
-                                gui.blit(new ResourceLocation(WizardsReborn.MOD_ID + ":textures/gui/arcane_wand_frame.png"), x + 27, y, 0, 18, 18, 18, 64, 64);
-                            }
-                        } else {
-                            gui.blit(new ResourceLocation(WizardsReborn.MOD_ID, "textures/gui/arcanemicon/unknown.png"), x + 28, y + 1, 0, 0, 16, 16, 16, 16);
-                        }
+                        gui.blit(new ResourceLocation(WizardsReborn.MOD_ID, "textures/gui/arcanemicon/unknown.png"), x + 28, y + 1, 0, 0, 16, 16, 16, 16);
                     }
                 }
             }

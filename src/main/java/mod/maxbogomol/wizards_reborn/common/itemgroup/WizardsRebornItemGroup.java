@@ -130,9 +130,6 @@ public class WizardsRebornItemGroup {
             event.accept(WizardsReborn.GROUND_MOR);
             event.accept(WizardsReborn.GROUND_ELDER_MOR);
 
-            event.accept(WizardsReborn.ARCANE_WAND);
-            event.accept(WizardsReborn.WISSEN_WAND);
-
             //event.accept(WizardsReborn.ARCANUM_SEED);
             event.accept(WizardsReborn.EARTH_CRYSTAL_SEED);
             event.accept(WizardsReborn.WATER_CRYSTAL_SEED);
@@ -232,6 +229,9 @@ public class WizardsRebornItemGroup {
             event.accept(WizardsReborn.BLACK_ARCANE_LUMOS_ITEM);
             event.accept(WizardsReborn.RAINBOW_ARCANE_LUMOS_ITEM);
             event.accept(WizardsReborn.COSMIC_ARCANE_LUMOS_ITEM);
+
+            event.accept(WizardsReborn.ARCANE_WAND);
+            event.accept(WizardsReborn.WISSEN_WAND);
 
             event.accept(WizardsReborn.ARCANUM_AMULET);
             event.accept(WizardsReborn.ARCANUM_RING);

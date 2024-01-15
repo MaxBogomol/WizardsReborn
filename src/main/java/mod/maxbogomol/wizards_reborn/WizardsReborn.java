@@ -525,9 +525,6 @@ public class WizardsReborn {
     public static final RegistryObject<Item> GROUND_MOR = ITEMS.register("ground_mor", () -> new Item(new Item.Properties()));
     public static final RegistryObject<Item> GROUND_ELDER_MOR = ITEMS.register("ground_elder_mor", () -> new Item(new Item.Properties()));
 
-    public static final RegistryObject<Item> ARCANE_WAND = ITEMS.register("arcane_wand", () -> new ArcaneWandItem(new Item.Properties().stacksTo(1)));
-    public static final RegistryObject<Item> WISSEN_WAND = ITEMS.register("wissen_wand", () -> new WissenWandItem(new Item.Properties().stacksTo(1)));
-
     public static final RegistryObject<Item> ARCANUM_SEED = ITEMS.register("arcanum_seed", () -> new BlockItem(ARCANUM_SEED_BLOCK.get(), new Item.Properties()));
     public static final RegistryObject<Item> ARCANUM_GROWTH_ITEM = ITEMS.register("arcanum_growth", () -> new BlockItem(ARCANUM_GROWTH.get(), new Item.Properties()));
 
@@ -637,6 +634,9 @@ public class WizardsReborn {
     public static final RegistryObject<Item> BLACK_ARCANE_LUMOS_ITEM = ITEMS.register("black_arcane_lumos", () -> new BlockItem(BLACK_ARCANE_LUMOS.get(), new Item.Properties()));
     public static final RegistryObject<Item> RAINBOW_ARCANE_LUMOS_ITEM = ITEMS.register("rainbow_arcane_lumos", () -> new BlockItem(RAINBOW_ARCANE_LUMOS.get(), new Item.Properties()));
     public static final RegistryObject<Item> COSMIC_ARCANE_LUMOS_ITEM = ITEMS.register("cosmic_arcane_lumos", () -> new BlockItem(COSMIC_ARCANE_LUMOS.get(), new Item.Properties()));
+
+    public static final RegistryObject<Item> ARCANE_WAND = ITEMS.register("arcane_wand", () -> new ArcaneWandItem(new Item.Properties().stacksTo(1)));
+    public static final RegistryObject<Item> WISSEN_WAND = ITEMS.register("wissen_wand", () -> new WissenWandItem(new Item.Properties().stacksTo(1)));
 
     public static final RegistryObject<Item> ARCANUM_AMULET = ITEMS.register("arcanum_amulet", () -> new ArcanumAmuletItem(new Item.Properties().stacksTo(1)));
     public static final RegistryObject<Item> ARCANUM_RING = ITEMS.register("arcanum_ring", () -> new ArcanumRingItem(new Item.Properties().stacksTo(1)));
