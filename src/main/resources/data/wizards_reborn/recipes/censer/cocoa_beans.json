@@ -1,7 +1,7 @@
 {
   "type": "wizards_reborn:censer",
   "ingredient": {
-    "item": "minecraft:cacoa_beans"
+    "item": "minecraft:cocoa_beans"
   },
   "effects": [
     {

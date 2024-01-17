@@ -1,27 +1,40 @@
 {
-  "type": "create:crushing",
-  "ingredients": [
+  "type": "forge:conditional",
+  "recipes": [
     {
-      "item": "wizards_reborn:arcane_gold_ore"
+      "conditions": [
+        {
+          "type": "forge:mod_loaded",
+          "modid": "create"
+        }
+      ],
+      "recipe": {
+        "type": "create:crushing",
+        "ingredients": [
+          {
+            "item": "wizards_reborn:arcane_gold_ore"
+          }
+        ],
+        "results": [
+          {
+            "item": "wizards_reborn:crushed_raw_arcane_gold"
+          },
+          {
+            "item": "wizards_reborn:crushed_raw_arcane_gold",
+            "chance": 0.75
+          },
+          {
+            "item": "create:experience_nugget",
+            "count": 2,
+            "chance": 0.75
+          },
+          {
+            "item": "minecraft:cobblestone",
+            "chance": 0.125
+          }
+        ],
+        "processingTime": 250
+      }
     }
-  ],
-  "results": [
-    {
-      "item": "wizards_reborn:crushed_raw_arcane_gold"
-    },
-    {
-      "item": "wizards_reborn:crushed_raw_arcane_gold",
-      "chance": 0.75
-    },
-    {
-      "item": "create:experience_nugget",
-      "count": 2,
-      "chance": 0.75
-    },
-    {
-      "item": "minecraft:cobblestone",
-      "chance": 0.125
-    }
-  ],
-  "processingTime": 250
+  ]
 }

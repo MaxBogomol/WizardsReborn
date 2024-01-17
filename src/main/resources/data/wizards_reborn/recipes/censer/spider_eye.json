@@ -5,7 +5,7 @@
   },
   "effects": [
     {
-      "effect": "minecraft:potion",
+      "effect": "minecraft:poison",
       "duration": 3000,
       "amplifier": 0
     }

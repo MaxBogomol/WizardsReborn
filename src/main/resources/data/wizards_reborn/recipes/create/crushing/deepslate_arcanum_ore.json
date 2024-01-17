@@ -1,27 +1,40 @@
 {
-  "type": "create:crushing",
-  "ingredients": [
+  "type": "forge:conditional",
+  "recipes": [
     {
-      "item": "wizards_reborn:deepslate_arcanum_ore"
+      "conditions": [
+        {
+          "type": "forge:mod_loaded",
+          "modid": "create"
+        }
+      ],
+      "recipe": {
+        "type": "create:crushing",
+        "ingredients": [
+          {
+            "item": "wizards_reborn:deepslate_arcanum_ore"
+          }
+        ],
+        "results": [
+          {
+            "item": "wizards_reborn:arcanum",
+            "count": 3
+          },
+          {
+            "item": "wizards_reborn:arcanum",
+            "chance": 0.75
+          },
+          {
+            "item": "create:experience_nugget",
+            "chance": 0.75
+          },
+          {
+            "item": "minecraft:cobbled_deepslate",
+            "chance": 0.125
+          }
+        ],
+        "processingTime": 250
+      }
     }
-  ],
-  "results": [
-    {
-      "item": "wizards_reborn:arcanum",
-      "count": 3
-    },
-    {
-      "item": "wizards_reborn:arcanum",
-      "chance": 0.75
-    },
-    {
-      "item": "create:experience_nugget",
-      "chance": 0.75
-    },
-    {
-      "item": "minecraft:cobbled_deepslate",
-      "chance": 0.125
-    }
-  ],
-  "processingTime": 250
+  ]
 }

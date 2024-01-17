@@ -230,8 +230,8 @@ public class WizardsRebornItemGroup {
             event.accept(WizardsReborn.ALCHEMY_FLASK);
             event.accept(WizardsReborn.ARCACITE_POLISHING_MIXTURE);
 
-            //event.accept(WizardsReborn.WISESTONE_PLATE);
-            //event.accept(WizardsReborn.RUNIC_WISESTONE_PLATE);
+            event.accept(WizardsReborn.WISESTONE_PLATE);
+            event.accept(WizardsReborn.RUNIC_WISESTONE_PLATE);
 
             event.accept(WizardsReborn.ARCANE_WAND);
             event.accept(WizardsReborn.WISSEN_WAND);
