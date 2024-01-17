@@ -173,6 +173,25 @@ public class WizardsRebornItemGroup {
             event.accept(CrystalItem.creativeTabRandomStats(WizardsReborn.PURE_FIRE_CRYSTAL.get()));
             event.accept(CrystalItem.creativeTabRandomStats(WizardsReborn.PURE_VOID_CRYSTAL.get()));
 
+            event.accept(WizardsReborn.WHITE_ARCANE_LUMOS_ITEM);
+            event.accept(WizardsReborn.ORANGE_ARCANE_LUMOS_ITEM);
+            event.accept(WizardsReborn.MAGENTA_ARCANE_LUMOS_ITEM);
+            event.accept(WizardsReborn.LIGHT_BLUE_ARCANE_LUMOS_ITEM);
+            event.accept(WizardsReborn.YELLOW_ARCANE_LUMOS_ITEM);
+            event.accept(WizardsReborn.LIME_ARCANE_LUMOS_ITEM);
+            event.accept(WizardsReborn.PINK_ARCANE_LUMOS_ITEM);
+            event.accept(WizardsReborn.GRAY_ARCANE_LUMOS_ITEM);
+            event.accept(WizardsReborn.LIGHT_GRAY_ARCANE_LUMOS_ITEM);
+            event.accept(WizardsReborn.CYAN_ARCANE_LUMOS_ITEM);
+            event.accept(WizardsReborn.PURPLE_ARCANE_LUMOS_ITEM);
+            event.accept(WizardsReborn.BLUE_ARCANE_LUMOS_ITEM);
+            event.accept(WizardsReborn.BROWN_ARCANE_LUMOS_ITEM);
+            event.accept(WizardsReborn.GREEN_ARCANE_LUMOS_ITEM);
+            event.accept(WizardsReborn.RED_ARCANE_LUMOS_ITEM);
+            event.accept(WizardsReborn.BLACK_ARCANE_LUMOS_ITEM);
+            event.accept(WizardsReborn.RAINBOW_ARCANE_LUMOS_ITEM);
+            event.accept(WizardsReborn.COSMIC_ARCANE_LUMOS_ITEM);
+
             event.accept(WizardsReborn.ARCANE_PEDESTAL_ITEM);
             event.accept(WizardsReborn.HOVERING_TOME_STAND_ITEM);
             event.accept(WizardsReborn.WISSEN_ALTAR_ITEM);
@@ -211,24 +230,8 @@ public class WizardsRebornItemGroup {
             event.accept(WizardsReborn.ALCHEMY_FLASK);
             event.accept(WizardsReborn.ARCACITE_POLISHING_MIXTURE);
 
-            event.accept(WizardsReborn.WHITE_ARCANE_LUMOS_ITEM);
-            event.accept(WizardsReborn.ORANGE_ARCANE_LUMOS_ITEM);
-            event.accept(WizardsReborn.MAGENTA_ARCANE_LUMOS_ITEM);
-            event.accept(WizardsReborn.LIGHT_BLUE_ARCANE_LUMOS_ITEM);
-            event.accept(WizardsReborn.YELLOW_ARCANE_LUMOS_ITEM);
-            event.accept(WizardsReborn.LIME_ARCANE_LUMOS_ITEM);
-            event.accept(WizardsReborn.PINK_ARCANE_LUMOS_ITEM);
-            event.accept(WizardsReborn.GRAY_ARCANE_LUMOS_ITEM);
-            event.accept(WizardsReborn.LIGHT_GRAY_ARCANE_LUMOS_ITEM);
-            event.accept(WizardsReborn.CYAN_ARCANE_LUMOS_ITEM);
-            event.accept(WizardsReborn.PURPLE_ARCANE_LUMOS_ITEM);
-            event.accept(WizardsReborn.BLUE_ARCANE_LUMOS_ITEM);
-            event.accept(WizardsReborn.BROWN_ARCANE_LUMOS_ITEM);
-            event.accept(WizardsReborn.GREEN_ARCANE_LUMOS_ITEM);
-            event.accept(WizardsReborn.RED_ARCANE_LUMOS_ITEM);
-            event.accept(WizardsReborn.BLACK_ARCANE_LUMOS_ITEM);
-            event.accept(WizardsReborn.RAINBOW_ARCANE_LUMOS_ITEM);
-            event.accept(WizardsReborn.COSMIC_ARCANE_LUMOS_ITEM);
+            //event.accept(WizardsReborn.WISESTONE_PLATE);
+            //event.accept(WizardsReborn.RUNIC_WISESTONE_PLATE);
 
             event.accept(WizardsReborn.ARCANE_WAND);
             event.accept(WizardsReborn.WISSEN_WAND);
