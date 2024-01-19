@@ -136,7 +136,7 @@ public class WissenCellBlock extends HorizontalDirectionalBlock implements Entit
 
         if (!cell.getItemHandler().getItem(0).isEmpty()) {
             player.getInventory().add(cell.getItemHandler().getItem(0).copy());
-            cell.getItemHandler().removeItemNoUpdate(0);
+            cell.getItemHandler().removeItem(0, 1);
             world.updateNeighbourForOutputSignal(pos, this);
             PacketUtils.SUpdateTileEntityPacket(cell);
             return InteractionResult.SUCCESS;

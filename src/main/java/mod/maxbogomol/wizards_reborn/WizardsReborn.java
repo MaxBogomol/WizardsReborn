@@ -420,6 +420,9 @@ public class WizardsReborn {
     public static final RegistryObject<Block> ALCHEMY_BOILER = BLOCKS.register("alchemy_boiler", () -> new AlchemyBoilerBlock(BlockBehaviour.Properties.copy(Blocks.POLISHED_DEEPSLATE)));
     public static final RegistryObject<Block> ARCANE_CENSER = BLOCKS.register("arcane_censer", () -> new ArcaneCenserBlock(BlockBehaviour.Properties.copy(Blocks.POLISHED_DEEPSLATE)));
 
+    public static final RegistryObject<Block> LIGHT_EMITTER = BLOCKS.register("light_emitter", () -> new LightEmitterBlock(BlockBehaviour.Properties.copy(Blocks.POLISHED_DEEPSLATE)));
+    public static final RegistryObject<Block> LIGHT_TRANSFER_LENS = BLOCKS.register("light_transfer_lens", () -> new LightTransferLensBlock(BlockBehaviour.Properties.copy(Blocks.POLISHED_DEEPSLATE)));
+
     public static final RegistryObject<Block> REDSTONE_SENSOR = BLOCKS.register("redstone_sensor", () -> new RedstoneSensorBlock(BlockBehaviour.Properties.copy(Blocks.OAK_PLANKS)));
     public static final RegistryObject<Block> WISSEN_SENSOR = BLOCKS.register("wissen_sensor", () -> new WissenSensorBlock(BlockBehaviour.Properties.copy(Blocks.OAK_PLANKS)));
     public static final RegistryObject<Block> COOLDOWN_SENSOR = BLOCKS.register("cooldown_sensor", () -> new CooldownSensorBlock(BlockBehaviour.Properties.copy(Blocks.OAK_PLANKS)));
@@ -620,6 +623,9 @@ public class WizardsReborn {
     public static final RegistryObject<Item> ALCHEMY_BOILER_ITEM = ITEMS.register("alchemy_boiler", () -> new BlockItem(ALCHEMY_BOILER.get(), new Item.Properties()));
     public static final RegistryObject<Item> ARCANE_CENSER_ITEM = ITEMS.register("arcane_censer", () -> new BlockItem(ARCANE_CENSER.get(), new Item.Properties()));
 
+    public static final RegistryObject<Item> LIGHT_EMITTER_ITEM = ITEMS.register("light_emitter", () -> new BlockItem(LIGHT_EMITTER.get(), new Item.Properties()));
+    public static final RegistryObject<Item> LIGHT_TRANSFER_LENS_ITEM = ITEMS.register("light_transfer_lens", () -> new BlockItem(LIGHT_TRANSFER_LENS.get(), new Item.Properties()));
+
     public static final RegistryObject<Item> REDSTONE_SENSOR_ITEM = ITEMS.register("redstone_sensor", () -> new BlockItem(REDSTONE_SENSOR.get(), new Item.Properties()));
     public static final RegistryObject<Item> WISSEN_SENSOR_ITEM = ITEMS.register("wissen_sensor", () -> new BlockItem(WISSEN_SENSOR.get(), new Item.Properties()));
     public static final RegistryObject<Item> COOLDOWN_SENSOR_ITEM = ITEMS.register("cooldown_sensor", () -> new BlockItem(COOLDOWN_SENSOR.get(), new Item.Properties()));
@@ -722,6 +728,9 @@ public class WizardsReborn {
     public static RegistryObject<BlockEntityType<AlchemyMachineTileEntity>> ALCHEMY_MACHINE_TILE_ENTITY = TILE_ENTITIES.register("alchemy_machine", () -> BlockEntityType.Builder.of(AlchemyMachineTileEntity::new, ALCHEMY_MACHINE.get()).build(null));
     public static RegistryObject<BlockEntityType<AlchemyBoilerTileEntity>> ALCHEMY_BOILER_TILE_ENTITY = TILE_ENTITIES.register("alchemy_boiler", () -> BlockEntityType.Builder.of(AlchemyBoilerTileEntity::new, ALCHEMY_BOILER.get()).build(null));
     public static RegistryObject<BlockEntityType<ArcaneCenserTileEntity>> ARCANE_CENSER_TILE_ENTITY = TILE_ENTITIES.register("arcane_censer", () -> BlockEntityType.Builder.of(ArcaneCenserTileEntity::new, ARCANE_CENSER.get()).build(null));
+
+    public static RegistryObject<BlockEntityType<LightEmitterTileEntity>> LIGHT_EMITTER_TILE_ENTITY = TILE_ENTITIES.register("light_emitter", () -> BlockEntityType.Builder.of(LightEmitterTileEntity::new, LIGHT_EMITTER.get()).build(null));
+    public static RegistryObject<BlockEntityType<LightTransferLensTileEntity>> LIGHT_TRANSFER_LENS_TILE_ENTITY = TILE_ENTITIES.register("light_transfer_lens", () -> BlockEntityType.Builder.of(LightTransferLensTileEntity::new, LIGHT_TRANSFER_LENS.get()).build(null));
 
     public static RegistryObject<BlockEntityType<SensorTileEntity>> SENSOR_TILE_ENTITY = TILE_ENTITIES.register("sensor", () -> BlockEntityType.Builder.of(SensorTileEntity::new, REDSTONE_SENSOR.get(), WISSEN_SENSOR.get(), COOLDOWN_SENSOR.get(), HEAT_SENSOR.get(), STEAM_SENSOR.get()).build(null));
     public static RegistryObject<BlockEntityType<FluidSensorTileEntity>> FLUID_SENSOR_TILE_ENTITY = TILE_ENTITIES.register("fluid_sensor", () -> BlockEntityType.Builder.of(FluidSensorTileEntity::new, FLUID_SENSOR.get()).build(null));

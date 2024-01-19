@@ -8,6 +8,7 @@ import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
+import net.minecraft.world.phys.AABB;
 
 public class SensorTileEntity extends BlockEntity implements TickableBlockEntity{
     private int output;
@@ -35,6 +36,12 @@ public class SensorTileEntity extends BlockEntity implements TickableBlockEntity
     public void load(CompoundTag pTag) {
         super.load(pTag);
         this.output = pTag.getInt("OutputSignal");
+    }
+
+    @Override
+    public AABB getRenderBoundingBox() {
+        BlockPos pos = getBlockPos();
+        return new AABB(pos.getX(), pos.getY(), pos.getZ(), pos.getX() + 1f, pos.getY() + 1f, pos.getZ() + 1f);
     }
 
     public int getOutputSignal() {

@@ -122,7 +122,7 @@ public class AltarOfDroughtBlock extends HorizontalDirectionalBlock implements E
 
         if (!altar.getItemHandler().getItem(0).isEmpty()) {
             player.getInventory().add(altar.getItemHandler().getItem(0).copy());
-            altar.getItemHandler().removeItemNoUpdate(0);
+            altar.getItemHandler().removeItem(0, 1);
             world.updateNeighbourForOutputSignal(pos, this);
             PacketUtils.SUpdateTileEntityPacket(altar);
             return InteractionResult.SUCCESS;

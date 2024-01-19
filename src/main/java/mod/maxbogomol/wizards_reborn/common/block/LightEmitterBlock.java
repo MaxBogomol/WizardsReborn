@@ -1,13 +1,13 @@
 package mod.maxbogomol.wizards_reborn.common.block;
 
+import mod.maxbogomol.wizards_reborn.WizardsReborn;
 import mod.maxbogomol.wizards_reborn.common.item.equipment.WissenWandItem;
+import mod.maxbogomol.wizards_reborn.common.tileentity.LightEmitterTileEntity;
 import mod.maxbogomol.wizards_reborn.common.tileentity.TickableBlockEntity;
 import mod.maxbogomol.wizards_reborn.common.tileentity.TileSimpleInventory;
-import mod.maxbogomol.wizards_reborn.common.tileentity.WissenCrystallizerTileEntity;
 import mod.maxbogomol.wizards_reborn.utils.PacketUtils;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
-import net.minecraft.world.Containers;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.player.Player;
@@ -39,21 +39,18 @@ import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import java.util.stream.Stream;
 
-public class WissenCrystallizerBlock extends Block implements EntityBlock, SimpleWaterloggedBlock {
+public class LightEmitterBlock extends Block implements EntityBlock, SimpleWaterloggedBlock  {
 
     private static final VoxelShape SHAPE = Stream.of(
-            Block.box(5, 0, 5, 11, 2, 11),
-            Block.box(6, 2, 6, 10, 8, 10),
-            Block.box(4, 8, 4, 12, 10, 12),
-            Block.box(2, 10, 2, 14, 12, 14),
-            Block.box(6, 12, 6, 10, 15, 10),
-            Block.box(2, 12, 2, 5, 14, 5),
-            Block.box(11, 12, 2, 14, 14, 5),
-            Block.box(11, 12, 11, 14, 14, 14),
-            Block.box(2, 12, 11, 5, 14, 14)
+            Block.box(3, 0, 3, 13, 5, 13),
+            Block.box(4, 5, 4, 12, 6, 12),
+            Block.box(12, 4, 12, 14, 7, 14),
+            Block.box(2, 4, 12, 4, 7, 14),
+            Block.box(12, 4, 2, 14, 7, 4),
+            Block.box(2, 4, 2, 4, 7, 4)
     ).reduce((v1, v2) -> Shapes.join(v1, v2, BooleanOp.OR)).get();
 
-    public WissenCrystallizerBlock(Properties properties) {
+    public LightEmitterBlock(Properties properties) {
         super(properties);
         registerDefaultState(defaultBlockState().setValue(BlockStateProperties.WATERLOGGED, false));
     }
@@ -81,7 +78,7 @@ public class WissenCrystallizerBlock extends Block implements EntityBlock, Simpl
         if (state.getBlock() != newState.getBlock()) {
             BlockEntity tile = world.getBlockEntity(pos);
             if (tile instanceof TileSimpleInventory) {
-                Containers.dropContents(world, pos, ((TileSimpleInventory) tile).getItemHandler());
+                net.minecraft.world.Containers.dropContents(world, pos, ((TileSimpleInventory) tile).getItemHandler());
             }
             super.onRemove(state, world, pos, newState, isMoving);
         }
@@ -89,10 +86,8 @@ public class WissenCrystallizerBlock extends Block implements EntityBlock, Simpl
 
     @Override
     public InteractionResult use(BlockState state, Level world, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hit) {
-        WissenCrystallizerTileEntity tile = (WissenCrystallizerTileEntity) world.getBlockEntity(pos);
+        LightEmitterTileEntity tile = (LightEmitterTileEntity) world.getBlockEntity(pos);
         ItemStack stack = player.getItemInHand(hand).copy();
-
-        int invSize = tile.getInventorySize();
 
         if (stack.getItem() instanceof WissenWandItem) {
             if (WissenWandItem.getMode(stack) != 4) {
@@ -102,37 +97,31 @@ public class WissenCrystallizerBlock extends Block implements EntityBlock, Simpl
             }
         }
 
-        if (!player.isShiftKeyDown()) {
-            if (invSize < 11) {
-                int slot = invSize;
-                if ((!stack.isEmpty()) && (tile.getItemHandler().getItem(slot).isEmpty())) {
-                    if (stack.getCount() > 1) {
-                        player.getItemInHand(hand).setCount(stack.getCount() - 1);
-                        stack.setCount(1);
-                        tile.getItemHandler().setItem(slot, stack);
-                        world.updateNeighbourForOutputSignal(pos, this);
-                        PacketUtils.SUpdateTileEntityPacket(tile);
-                        return InteractionResult.SUCCESS;
-                    } else {
-                        tile.getItemHandler().setItem(slot, stack);
-                        player.getInventory().removeItem(player.getItemInHand(hand));
-                        world.updateNeighbourForOutputSignal(pos, this);
-                        PacketUtils.SUpdateTileEntityPacket(tile);
-                        return InteractionResult.SUCCESS;
-                    }
-                }
-            }
-        } else {
-            if (invSize > 0) {
-                int slot = invSize - 1;
-                if (!tile.getItemHandler().getItem(slot).isEmpty()) {
-                    player.getInventory().add(tile.getItemHandler().getItem(slot).copy());
-                    tile.getItemHandler().removeItem(slot, 1);
+        if ((!stack.isEmpty()) && (tile.getItemHandler().getItem(0).isEmpty())) {
+            if (stack.is(WizardsReborn.ARCANE_LUMOS_ITEM_TAG)) {
+                if (stack.getCount() > 1) {
+                    player.getItemInHand(hand).setCount(stack.getCount() - 1);
+                    stack.setCount(1);
+                    tile.getItemHandler().setItem(0, stack);
+                    world.updateNeighbourForOutputSignal(pos, this);
+                    PacketUtils.SUpdateTileEntityPacket(tile);
+                    return InteractionResult.SUCCESS;
+                } else {
+                    tile.getItemHandler().setItem(0, stack);
+                    player.getInventory().removeItem(player.getItemInHand(hand));
                     world.updateNeighbourForOutputSignal(pos, this);
                     PacketUtils.SUpdateTileEntityPacket(tile);
                     return InteractionResult.SUCCESS;
                 }
             }
+        }
+
+        if (!tile.getItemHandler().getItem(0).isEmpty()) {
+            player.getInventory().add(tile.getItemHandler().getItem(0).copy());
+            tile.getItemHandler().removeItem(0, 1);
+            world.updateNeighbourForOutputSignal(pos, this);
+            PacketUtils.SUpdateTileEntityPacket(tile);
+            return InteractionResult.SUCCESS;
         }
 
         return InteractionResult.PASS;
@@ -162,7 +151,7 @@ public class WissenCrystallizerBlock extends Block implements EntityBlock, Simpl
     @Nullable
     @Override
     public BlockEntity newBlockEntity(BlockPos pPos, BlockState pState) {
-        return new WissenCrystallizerTileEntity(pPos, pState);
+        return new LightEmitterTileEntity(pPos, pState);
     }
 
     @Nullable

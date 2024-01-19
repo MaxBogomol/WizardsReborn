@@ -8,6 +8,8 @@ import net.minecraft.network.protocol.game.ClientboundBlockEntityDataPacket;
 import net.minecraft.world.SimpleContainer;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.phys.AABB;
+import net.minecraftforge.common.extensions.IForgeBlockEntity;
 import org.jetbrains.annotations.NotNull;
 
 public class CrystalTileEntity extends TileSimpleInventory {
@@ -46,5 +48,10 @@ public class CrystalTileEntity extends TileSimpleInventory {
         var tag = new CompoundTag();
         saveAdditional(tag);
         return tag;
+    }
+
+    @Override
+    public AABB getRenderBoundingBox() {
+        return IForgeBlockEntity.INFINITE_EXTENT_AABB;
     }
 }

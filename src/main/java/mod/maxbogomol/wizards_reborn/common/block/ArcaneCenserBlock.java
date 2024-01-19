@@ -145,7 +145,7 @@ public class ArcaneCenserBlock extends HorizontalDirectionalBlock implements Ent
                     if (!tile.getItemHandler().getItem(slot).isEmpty()) {
                         if (ArcaneCenserTileEntity.getItemBurnCenser(tile.getItemHandler().getItem(slot)) <= 0) {
                             player.getInventory().add(tile.getItemHandler().getItem(slot).copy());
-                            tile.getItemHandler().removeItemNoUpdate(slot);
+                            tile.getItemHandler().removeItem(slot, 1);
                             world.updateNeighbourForOutputSignal(pos, this);
                             tile.sortItems();
                             PacketUtils.SUpdateTileEntityPacket(tile);

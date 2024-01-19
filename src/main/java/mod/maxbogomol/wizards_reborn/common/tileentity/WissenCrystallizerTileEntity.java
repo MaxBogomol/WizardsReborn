@@ -18,6 +18,7 @@ import net.minecraft.world.SimpleContainer;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.phys.AABB;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
@@ -82,7 +83,7 @@ public class WissenCrystallizerTileEntity extends ExposedTileSimpleInventory imp
                     }
 
                     for (int i = 0; i < getItemHandler().getContainerSize(); i++) {
-                        getItemHandler().removeItemNoUpdate(i);
+                        getItemHandler().removeItem(i, 1);
                     }
 
                     int count = recipe.get().getResultItem(RegistryAccess.EMPTY).getCount();
@@ -215,6 +216,12 @@ public class WissenCrystallizerTileEntity extends ExposedTileSimpleInventory imp
         wissenIsCraft = tag.getInt("wissenIsCraft");
         startCraft = tag.getBoolean("startCraft");
         wissen = tag.getInt("wissen");
+    }
+
+    @Override
+    public AABB getRenderBoundingBox() {
+        BlockPos pos = getBlockPos();
+        return new AABB(pos.getX() - 0.5f, pos.getY() - 0.5f, pos.getZ() - 0.5f, pos.getX() + 1.5f, pos.getY() + 1.5f, pos.getZ() + 1.5f);
     }
 
     @Override

@@ -216,6 +216,9 @@ public class WizardsRebornItemGroup {
             event.accept(WizardsReborn.ALCHEMY_BOILER_ITEM);
             event.accept(WizardsReborn.ARCANE_CENSER_ITEM);
 
+            event.accept(WizardsReborn.LIGHT_EMITTER_ITEM);
+            event.accept(WizardsReborn.LIGHT_TRANSFER_LENS_ITEM);
+
             event.accept(WizardsReborn.REDSTONE_SENSOR_ITEM);
             event.accept(WizardsReborn.WISSEN_SENSOR_ITEM);
             event.accept(WizardsReborn.COOLDOWN_SENSOR_ITEM);

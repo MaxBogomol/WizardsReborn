@@ -87,7 +87,7 @@ public class WissenAltarBlock extends HorizontalDirectionalBlock implements Enti
         if (state.getBlock() != newState.getBlock()) {
             BlockEntity tile = world.getBlockEntity(pos);
             if (tile instanceof TileSimpleInventory) {
-                ((TileSimpleInventory) tile).getItemHandler().removeItemNoUpdate(2);
+                ((TileSimpleInventory) tile).getItemHandler().removeItem(2, 64);
                 Containers.dropContents(world, pos, ((TileSimpleInventory) tile).getItemHandler());
             }
             super.onRemove(state, world, pos, newState, isMoving);
@@ -142,14 +142,14 @@ public class WissenAltarBlock extends HorizontalDirectionalBlock implements Enti
 
         if (!altar.getItemHandler().getItem(0).isEmpty()) {
             player.getInventory().add(altar.getItemHandler().getItem(0).copy());
-            altar.getItemHandler().removeItemNoUpdate(0);
+            altar.getItemHandler().removeItem(0, 1);
             world.updateNeighbourForOutputSignal(pos, this);
             PacketUtils.SUpdateTileEntityPacket(altar);
             return InteractionResult.SUCCESS;
         } else {
             if (!altar.getItemHandler().getItem(1).isEmpty()) {
                 player.getInventory().add(altar.getItemHandler().getItem(1).copy());
-                altar.getItemHandler().removeItemNoUpdate(1);
+                altar.getItemHandler().removeItem(1, 1);
                 world.updateNeighbourForOutputSignal(pos, this);
                 PacketUtils.SUpdateTileEntityPacket(altar);
                 return InteractionResult.SUCCESS;

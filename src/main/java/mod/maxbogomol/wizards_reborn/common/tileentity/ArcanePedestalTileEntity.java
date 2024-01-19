@@ -9,6 +9,7 @@ import net.minecraft.network.Connection;
 import net.minecraft.network.protocol.game.ClientboundBlockEntityDataPacket;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.phys.AABB;
 import org.jetbrains.annotations.NotNull;
 
 public class ArcanePedestalTileEntity extends ExposedTileSimpleInventory {
@@ -55,5 +56,11 @@ public class ArcanePedestalTileEntity extends ExposedTileSimpleInventory {
         if (level != null && !level.isClientSide) {
             PacketUtils.SUpdateTileEntityPacket(this);
         }
+    }
+
+    @Override
+    public AABB getRenderBoundingBox() {
+        BlockPos pos = getBlockPos();
+        return new AABB(pos.getX() - 0.5f, pos.getY() - 0.5f, pos.getZ() - 0.5f, pos.getX() + 1.5f, pos.getY() + 1.5f, pos.getZ() + 1.5f);
     }
 }

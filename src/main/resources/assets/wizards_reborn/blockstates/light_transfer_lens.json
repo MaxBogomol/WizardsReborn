@@ -1,0 +1,16 @@
+{
+  "variants": {
+    "face=floor,facing=east":  { "model": "wizards_reborn:block/light_transfer_lens" },
+    "face=floor,facing=west":  { "model": "wizards_reborn:block/light_transfer_lens" },
+    "face=floor,facing=south": { "model": "wizards_reborn:block/light_transfer_lens" },
+    "face=floor,facing=north": { "model": "wizards_reborn:block/light_transfer_lens" },
+    "face=wall,facing=east":  { "model": "wizards_reborn:block/light_transfer_lens", "x": 90, "y": 90 },
+    "face=wall,facing=west":  { "model": "wizards_reborn:block/light_transfer_lens", "x": 90, "y": 270 },
+    "face=wall,facing=south": { "model": "wizards_reborn:block/light_transfer_lens", "x": 90, "y": 180 },
+    "face=wall,facing=north": { "model": "wizards_reborn:block/light_transfer_lens", "x": 90 },
+    "face=ceiling,facing=east":  { "model": "wizards_reborn:block/light_transfer_lens", "x": 180 },
+    "face=ceiling,facing=west":  { "model": "wizards_reborn:block/light_transfer_lens", "x": 180 },
+    "face=ceiling,facing=south": { "model": "wizards_reborn:block/light_transfer_lens", "x": 180 },
+    "face=ceiling,facing=north": { "model": "wizards_reborn:block/light_transfer_lens", "x": 180 }
+  }
+}

@@ -193,7 +193,7 @@ public class WissenTranslatorBlock extends FaceAttachedHorizontalDirectionalBloc
 
         if (!tile.getItemHandler().getItem(0).isEmpty()) {
             player.getInventory().add(tile.getItemHandler().getItem(0).copy());
-            tile.getItemHandler().removeItemNoUpdate(0);
+            tile.getItemHandler().removeItem(0, 1);
             world.updateNeighbourForOutputSignal(pos, this);
             PacketUtils.SUpdateTileEntityPacket(tile);
             return InteractionResult.SUCCESS;

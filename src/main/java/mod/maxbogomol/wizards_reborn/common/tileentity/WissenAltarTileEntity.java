@@ -3,11 +3,11 @@ package mod.maxbogomol.wizards_reborn.common.tileentity;
 import mod.maxbogomol.wizards_reborn.WizardsReborn;
 import mod.maxbogomol.wizards_reborn.api.wissen.*;
 import mod.maxbogomol.wizards_reborn.client.particle.Particles;
-import mod.maxbogomol.wizards_reborn.common.network.tileentity.WissenAltarSendEffectPacket;
 import mod.maxbogomol.wizards_reborn.common.network.PacketHandler;
+import mod.maxbogomol.wizards_reborn.common.network.tileentity.WissenAltarBurstEffectPacket;
+import mod.maxbogomol.wizards_reborn.common.network.tileentity.WissenAltarSendEffectPacket;
 import mod.maxbogomol.wizards_reborn.common.recipe.WissenAltarRecipe;
 import mod.maxbogomol.wizards_reborn.utils.PacketUtils;
-import mod.maxbogomol.wizards_reborn.common.network.tileentity.WissenAltarBurstEffectPacket;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.nbt.CompoundTag;
@@ -19,6 +19,7 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
+import net.minecraft.world.phys.AABB;
 import org.jetbrains.annotations.NotNull;
 
 import javax.annotation.Nullable;
@@ -235,6 +236,12 @@ public class WissenAltarTileEntity extends ExposedTileSimpleInventory implements
         wissenInItem = tag.getInt("wissenInItem");
         wissenIsCraft = tag.getInt("wissenIsCraft");
         wissen = tag.getInt("wissen");
+    }
+
+    @Override
+    public AABB getRenderBoundingBox() {
+        BlockPos pos = getBlockPos();
+        return new AABB(pos.getX() - 0.5f, pos.getY() - 0.5f, pos.getZ() - 0.5f, pos.getX() + 1.5f, pos.getY() + 1.5f, pos.getZ() + 1.5f);
     }
 
     public float getBlockRotate() {

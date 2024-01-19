@@ -8,6 +8,7 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.phys.AABB;
 
 public class HoveringTomeStandTileEntity extends BlockEntity implements TickableBlockEntity {
     public int time;
@@ -87,5 +88,11 @@ public class HoveringTomeStandTileEntity extends BlockEntity implements Tickable
             flipA += (f - flipA) * 0.9F;
             flip += flipA;
         }
+    }
+
+    @Override
+    public AABB getRenderBoundingBox() {
+        BlockPos pos = getBlockPos();
+        return new AABB(pos.getX() - 0.5f, pos.getY() - 0.5f, pos.getZ() - 0.5f, pos.getX() + 1.5f, pos.getY() + 1.5f, pos.getZ() + 1.5f);
     }
 }

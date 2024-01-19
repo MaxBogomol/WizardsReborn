@@ -470,6 +470,12 @@ public class ArcaneIteratorTileEntity extends BlockEntity implements TickableBlo
         wissen = tag.getInt("wissen");
     }
 
+    @Override
+    public AABB getRenderBoundingBox() {
+        BlockPos pos = getBlockPos();
+        return new AABB(pos.getX() - 0.5f, pos.getY() - 0.5f, pos.getZ() - 0.5f, pos.getX() + 1.5f, pos.getY() + 1.5f, pos.getZ() + 1.5f);
+    }
+
     public float getStage() {
         return ((float) getWissen() / (float) getMaxWissen());
     }
