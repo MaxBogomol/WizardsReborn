@@ -2,6 +2,7 @@
   "replace": false,
   "values": [
     "wizards_reborn:fluid_pipe",
-    "wizards_reborn:fluid_extractor"
+    "wizards_reborn:fluid_extractor",
+    "wizards_reborn:arcane_wood_fluid_casing"
   ]
 }

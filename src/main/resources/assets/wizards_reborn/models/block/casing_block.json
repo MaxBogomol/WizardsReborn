@@ -1,6 +1,7 @@
 {
 	"credit": "Made with Blockbench",
 	"parent": "block/cube",
+	"ambientocclusion": false,
 	"elements": [
 		{
 			"from": [1, 1, 1],

@@ -212,7 +212,7 @@ public abstract class SteamPipeBaseTileEntity extends PipeBaseTileEntity impleme
         }
     }
 
-    private boolean pushSteam(int amount, Direction facing) {
+    public boolean pushSteam(int amount, Direction facing) {
         BlockEntity tile = level.getBlockEntity(getBlockPos().relative(facing));
         if (tile instanceof ISteamTileEntity steamTileEntity) {
             int steam_remain = WissenUtils.getRemoveWissenRemain(steam, amount);

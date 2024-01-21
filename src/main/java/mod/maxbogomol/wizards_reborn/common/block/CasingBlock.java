@@ -26,7 +26,7 @@ public class CasingBlock extends Block {
             Block.box(0, 3, 3, 16, 13, 13)
             ).reduce((v1, v2) -> Shapes.join(v1, v2, BooleanOp.OR)).get();
     private static final VoxelShape SHAPE_C = Shapes.join(SHAPE_SHELL, SHAPE_HOLE, BooleanOp.ONLY_FIRST);
-    private static final VoxelShape SHAPE = Shapes.join(SHAPE_C, SHAPE_CENTER, BooleanOp.OR);
+    public static final VoxelShape SHAPE = Shapes.join(SHAPE_C, SHAPE_CENTER, BooleanOp.OR);
 
     @Nonnull
     @Override

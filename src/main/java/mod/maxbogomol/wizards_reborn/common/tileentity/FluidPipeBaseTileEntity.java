@@ -230,7 +230,7 @@ public abstract class FluidPipeBaseTileEntity extends PipeBaseTileEntity impleme
         }
     }
 
-    private boolean pushStack(FluidStack passStack, Direction facing, IFluidHandler handler) {
+    public boolean pushStack(FluidStack passStack, Direction facing, IFluidHandler handler) {
         int added = handler.fill(passStack, IFluidHandler.FluidAction.SIMULATE);
         if (added > 0) {
             handler.fill(passStack, IFluidHandler.FluidAction.EXECUTE);

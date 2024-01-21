@@ -92,6 +92,10 @@ public class WizardsRebornClient {
     public static ArrayList<PipeModel> orbitalFluidRetainer = new ArrayList<PipeModel>();
     public static ArrayList<PipeModel> alchemyMachine = new ArrayList<PipeModel>();
     public static ArrayList<PipeModel> alchemyBoiler = new ArrayList<PipeModel>();
+    public static ArrayList<PipeModel> arcaneWoodFluidCasing = new ArrayList<PipeModel>();
+    public static ArrayList<PipeModel> wisestoneFluidCasing = new ArrayList<PipeModel>();
+    public static ArrayList<PipeModel> arcaneWoodSteamCasing = new ArrayList<PipeModel>();
+    public static ArrayList<PipeModel> wisestoneSteamCasing = new ArrayList<PipeModel>();
 
     public static final ModelResourceLocation FLUID_CENTER = new ModelResourceLocation(new ResourceLocation(WizardsReborn.MOD_ID, "fluid_pipe_center"), "");
     public static final ModelResourceLocation FLUID_EXTRACTOR = new ModelResourceLocation(new ResourceLocation(WizardsReborn.MOD_ID, "fluid_extractor_center"), "");
@@ -250,7 +254,7 @@ public class WizardsRebornClient {
             for (ResourceLocation resourceLocation : event.getModels().keySet()) {
                 if (resourceLocation.getNamespace().equals(WizardsReborn.MOD_ID)) {
                     if (resourceLocation.getPath().equals("fluid_pipe") && !resourceLocation.toString().contains("inventory")) {
-                        map.put(resourceLocation, fluidPipe);
+                        map.replace(resourceLocation, fluidPipe);
                     }
                     if (resourceLocation.getPath().equals("steam_pipe") && !resourceLocation.toString().contains("inventory")) {
                         map.put(resourceLocation, steamPipe);
@@ -280,6 +284,26 @@ public class WizardsRebornClient {
                         alchemyBoiler.add(model);
                         map.put(resourceLocation, model);
                     }
+                    if (resourceLocation.getPath().equals("arcane_wood_fluid_casing") && !resourceLocation.toString().contains("inventory")) {
+                        PipeModel model = new PipeModel(map.get(resourceLocation), "fluid_pipe");
+                        arcaneWoodFluidCasing.add(model);
+                        map.put(resourceLocation, model);
+                    }
+                    if (resourceLocation.getPath().equals("arcane_wood_steam_casing") && !resourceLocation.toString().contains("inventory")) {
+                        PipeModel model = new PipeModel(map.get(resourceLocation), "fluid_pipe");
+                        wisestoneFluidCasing.add(model);
+                        map.put(resourceLocation, model);
+                    }
+                    if (resourceLocation.getPath().equals("wisestone_fluid_casing") && !resourceLocation.toString().contains("inventory")) {
+                        PipeModel model = new PipeModel(map.get(resourceLocation), "steam_pipe");
+                        arcaneWoodSteamCasing.add(model);
+                        map.put(resourceLocation, model);
+                    }
+                    if (resourceLocation.getPath().equals("wisestone_steam_casing") && !resourceLocation.toString().contains("inventory")) {
+                        PipeModel model = new PipeModel(map.get(resourceLocation), "steam_pipe");
+                        wisestoneSteamCasing.add(model);
+                        map.put(resourceLocation, model);
+                    }
                 }
             }
         }
@@ -301,6 +325,18 @@ public class WizardsRebornClient {
                 model.init(event.getModelManager());
             }
             for (PipeModel model : alchemyBoiler) {
+                model.init(event.getModelManager());
+            }
+            for (PipeModel model : arcaneWoodFluidCasing) {
+                model.init(event.getModelManager());
+            }
+            for (PipeModel model : wisestoneFluidCasing) {
+                model.init(event.getModelManager());
+            }
+            for (PipeModel model : arcaneWoodSteamCasing) {
+                model.init(event.getModelManager());
+            }
+            for (PipeModel model : wisestoneSteamCasing) {
                 model.init(event.getModelManager());
             }
         }
