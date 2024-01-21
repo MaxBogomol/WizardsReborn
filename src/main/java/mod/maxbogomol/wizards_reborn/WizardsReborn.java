@@ -432,6 +432,11 @@ public class WizardsReborn {
     public static final RegistryObject<Block> WISSEN_ACTIVATOR = BLOCKS.register("wissen_activator", () -> new WissenActivatorBlock(BlockBehaviour.Properties.copy(Blocks.OAK_PLANKS)));
     public static final RegistryObject<Block> ITEM_SORTER = BLOCKS.register("item_sorter", () -> new ItemSorterBlock(BlockBehaviour.Properties.copy(Blocks.OAK_PLANKS)));
 
+    public static final RegistryObject<Block> ARCANE_WOOD_FRAME = BLOCKS.register("arcane_wood_frame", () -> new FrameBlock(BlockBehaviour.Properties.copy(Blocks.OAK_PLANKS)));
+    public static final RegistryObject<Block> ARCANE_WOOD_CASING = BLOCKS.register("arcane_wood_casing", () -> new CasingBlock(BlockBehaviour.Properties.copy(Blocks.OAK_PLANKS)));
+    public static final RegistryObject<Block> WISESTONE_FRAME = BLOCKS.register("wisestone_frame", () -> new FrameBlock(BlockBehaviour.Properties.copy(Blocks.POLISHED_DEEPSLATE)));
+    public static final RegistryObject<Block> WISESTONE_CASING = BLOCKS.register("wisestone_casing", () -> new CasingBlock(BlockBehaviour.Properties.copy(Blocks.POLISHED_DEEPSLATE)));
+
     public static final RegistryObject<Block> ALCHEMY_GLASS = BLOCKS.register("alchemy_glass", () -> new TintedGlassBlock(BlockBehaviour.Properties.copy(Blocks.TINTED_GLASS).noOcclusion()));
 
     //ITEMS
@@ -634,6 +639,11 @@ public class WizardsReborn {
     public static final RegistryObject<Item> STEAM_SENSOR_ITEM = ITEMS.register("steam_sensor", () -> new BlockItem(STEAM_SENSOR.get(), new Item.Properties()));
     public static final RegistryObject<Item> WISSEN_ACTIVATOR_ITEM = ITEMS.register("wissen_activator", () -> new BlockItem(WISSEN_ACTIVATOR.get(), new Item.Properties()));
     public static final RegistryObject<Item> ITEM_SORTER_ITEM = ITEMS.register("item_sorter", () -> new BlockItem(ITEM_SORTER.get(), new Item.Properties()));
+
+    public static final RegistryObject<Item> ARCANE_WOOD_FRAME_ITEM = ITEMS.register("arcane_wood_frame", () -> new BlockItem(ARCANE_WOOD_FRAME.get(), new Item.Properties()));
+    public static final RegistryObject<Item> ARCANE_WOOD_CASING_ITEM = ITEMS.register("arcane_wood_casing", () -> new BlockItem(ARCANE_WOOD_CASING.get(), new Item.Properties()));
+    public static final RegistryObject<Item> WISESTONE_FRAME_ITEM = ITEMS.register("wisestone_frame", () -> new BlockItem(WISESTONE_FRAME.get(), new Item.Properties()));
+    public static final RegistryObject<Item> WISESTONE_CASING_ITEM = ITEMS.register("wisestone_casing", () -> new BlockItem(WISESTONE_CASING.get(), new Item.Properties()));
 
     public static final RegistryObject<Item> ALCHEMY_GLASS_ITEM = ITEMS.register("alchemy_glass", () -> new BlockItem(ALCHEMY_GLASS.get(), new Item.Properties()));
     public static final RegistryObject<Item> ALCHEMY_VIAL = ITEMS.register("alchemy_vial", () -> new VialItem(new Item.Properties(), 3));

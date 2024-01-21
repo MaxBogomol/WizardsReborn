@@ -58,6 +58,12 @@ public class OrbitalFluidRetainerBlock extends Block implements EntityBlock, Sim
             Block.box(3, 15, 3, 13, 16, 13)
     ).reduce((v1, v2) -> Shapes.join(v1, v2, BooleanOp.OR)).get();
 
+    public static VoxelShape[] SHAPES = new VoxelShape[729];
+
+    static {
+        PipeBaseBlock.makeShapes(SHAPE, SHAPES);
+    }
+
     public OrbitalFluidRetainerBlock(Properties properties) {
         super(properties);
         registerDefaultState(defaultBlockState().setValue(BlockStateProperties.WATERLOGGED, false));
@@ -71,7 +77,7 @@ public class OrbitalFluidRetainerBlock extends Block implements EntityBlock, Sim
     @Nonnull
     @Override
     public VoxelShape getShape(BlockState state, BlockGetter world, BlockPos pos, CollisionContext ctx) {
-        return SHAPE;
+        return PipeBaseBlock.getShapeWithConnection(state, world, pos, ctx, SHAPES);
     }
 
     @Override

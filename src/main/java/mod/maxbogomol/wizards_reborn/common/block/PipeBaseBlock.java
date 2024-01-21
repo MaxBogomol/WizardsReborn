@@ -242,9 +242,13 @@ public abstract class PipeBaseBlock extends Block implements EntityBlock, Simple
 
     @Override
     public VoxelShape getShape(BlockState state, BlockGetter level, BlockPos pos, CollisionContext context) {
+        return getShapeWithConnection(state, level, pos, context, SHAPES);
+    }
+
+    public static VoxelShape getShapeWithConnection(BlockState state, BlockGetter level, BlockPos pos, CollisionContext context, VoxelShape[] shapes) {
         BlockEntity BE = level.getBlockEntity(pos);
         if (BE instanceof PipeBaseTileEntity pipe) {
-            return SHAPES[getShapeIndex(pipe.connections[0], pipe.connections[1], pipe.connections[2], pipe.connections[3], pipe.connections[4], pipe.connections[5])];
+            return shapes[getShapeIndex(pipe.connections[0], pipe.connections[1], pipe.connections[2], pipe.connections[3], pipe.connections[4], pipe.connections[5])];
         }
         return CENTER_AABB;
     }

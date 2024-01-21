@@ -76,6 +76,18 @@ public class AlchemyBoilerBlock extends HorizontalDirectionalBlock implements En
     private static final VoxelShape SHAPE_W = Shapes.join(SHAPE, SHAPE_W_FACE, BooleanOp.OR);
     private static final VoxelShape SHAPE_E = Shapes.join(SHAPE, SHAPE_E_FACE, BooleanOp.OR);
 
+    public static VoxelShape[] SHAPES_N = new VoxelShape[729];
+    public static VoxelShape[] SHAPES_S = new VoxelShape[729];
+    public static VoxelShape[] SHAPES_W = new VoxelShape[729];
+    public static VoxelShape[] SHAPES_E = new VoxelShape[729];
+
+    static {
+        TinyPipeBaseBlock.makeShapes(SHAPE_N, SHAPES_N);
+        TinyPipeBaseBlock.makeShapes(SHAPE_S, SHAPES_S);
+        TinyPipeBaseBlock.makeShapes(SHAPE_W, SHAPES_W);
+        TinyPipeBaseBlock.makeShapes(SHAPE_E, SHAPES_E);
+    }
+
     public AlchemyBoilerBlock(Properties properties) {
         super(properties);
         registerDefaultState(defaultBlockState().setValue(BlockStateProperties.WATERLOGGED, false));
@@ -91,13 +103,13 @@ public class AlchemyBoilerBlock extends HorizontalDirectionalBlock implements En
     public VoxelShape getShape(BlockState state, BlockGetter world, BlockPos pos, CollisionContext ctx) {
         switch (state.getValue(HORIZONTAL_FACING)) {
             case NORTH:
-                return SHAPE_N;
+                return PipeBaseBlock.getShapeWithConnection(state, world, pos, ctx, SHAPES_N);
             case SOUTH:
-                return SHAPE_S;
+                return PipeBaseBlock.getShapeWithConnection(state, world, pos, ctx, SHAPES_S);
             case WEST:
-                return SHAPE_W;
+                return PipeBaseBlock.getShapeWithConnection(state, world, pos, ctx, SHAPES_W);
             case EAST:
-                return SHAPE_E;
+                return PipeBaseBlock.getShapeWithConnection(state, world, pos, ctx, SHAPES_E);
             default:
                 return SHAPE;
         }

@@ -228,6 +228,11 @@ public class WizardsRebornItemGroup {
             event.accept(WizardsReborn.WISSEN_ACTIVATOR_ITEM);
             event.accept(WizardsReborn.ITEM_SORTER_ITEM);
 
+            event.accept(WizardsReborn.ARCANE_WOOD_FRAME_ITEM);
+            event.accept(WizardsReborn.ARCANE_WOOD_CASING_ITEM);
+            event.accept(WizardsReborn.WISESTONE_FRAME_ITEM);
+            event.accept(WizardsReborn.WISESTONE_CASING_ITEM);
+
             event.accept(WizardsReborn.ALCHEMY_GLASS_ITEM);
             event.accept(WizardsReborn.ALCHEMY_VIAL);
             event.accept(WizardsReborn.ALCHEMY_FLASK);
