@@ -28,9 +28,12 @@ import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.AABB;
+import net.minecraft.world.phys.Vec3;
 import org.jetbrains.annotations.NotNull;
 
+import java.awt.*;
 import java.util.*;
+import java.util.List;
 
 public class ArcaneIteratorTileEntity extends BlockEntity implements TickableBlockEntity, IWissenTileEntity, ICooldownTileEntity, IWissenWandFunctionalTileEntity, IItemResultTileEntity {
     public int wissenInCraft= 0;
@@ -297,12 +300,35 @@ public class ArcaneIteratorTileEntity extends BlockEntity implements TickableBlo
                         scale--;
                     }
                 }
+
+                if (WissenUtils.isCanRenderWissenWand()) {
+                    Color borderColor = new Color(191, 201, 104);
+                    WissenUtils.connectEffect(level, new Vec3(getBlockPos().getX() - 5, getBlockPos().getY() - 3, getBlockPos().getZ() - 5), new Vec3(getBlockPos().getX() + 6, getBlockPos().getY() - 3, getBlockPos().getZ() - 5), borderColor, 2);
+                    WissenUtils.connectEffect(level, new Vec3(getBlockPos().getX() + 6, getBlockPos().getY() - 3, getBlockPos().getZ() - 5), new Vec3(getBlockPos().getX() + 6, getBlockPos().getY() - 3, getBlockPos().getZ() + 6), borderColor, 2);
+                    WissenUtils.connectEffect(level, new Vec3(getBlockPos().getX() + 6, getBlockPos().getY() - 3, getBlockPos().getZ() + 6), new Vec3(getBlockPos().getX() - 5, getBlockPos().getY() - 3, getBlockPos().getZ() + 6), borderColor, 2);
+                    WissenUtils.connectEffect(level, new Vec3(getBlockPos().getX() - 5, getBlockPos().getY() - 3, getBlockPos().getZ() + 6), new Vec3(getBlockPos().getX() - 5, getBlockPos().getY() - 3, getBlockPos().getZ() - 5), borderColor, 2);
+
+                    WissenUtils.connectEffect(level, new Vec3(getBlockPos().getX() - 5, getBlockPos().getY() - 3, getBlockPos().getZ() - 5), new Vec3(getBlockPos().getX() - 5, getBlockPos().getY() + 4, getBlockPos().getZ() - 5), borderColor, 2);
+                    WissenUtils.connectEffect(level, new Vec3(getBlockPos().getX() + 6, getBlockPos().getY() - 3, getBlockPos().getZ() - 5), new Vec3(getBlockPos().getX() + 6, getBlockPos().getY() + 4, getBlockPos().getZ() - 5), borderColor, 2);
+                    WissenUtils.connectEffect(level, new Vec3(getBlockPos().getX() + 6, getBlockPos().getY() - 3, getBlockPos().getZ() + 6), new Vec3(getBlockPos().getX() + 6, getBlockPos().getY() + 4, getBlockPos().getZ() + 6), borderColor, 2);
+                    WissenUtils.connectEffect(level, new Vec3(getBlockPos().getX() - 5, getBlockPos().getY() - 3, getBlockPos().getZ() + 6), new Vec3(getBlockPos().getX() - 5, getBlockPos().getY() + 4, getBlockPos().getZ() + 6), borderColor, 2);
+
+                    WissenUtils.connectEffect(level, new Vec3(getBlockPos().getX() - 5, getBlockPos().getY() + 4, getBlockPos().getZ() - 5), new Vec3(getBlockPos().getX() + 6, getBlockPos().getY() + 4, getBlockPos().getZ() - 5), borderColor, 2);
+                    WissenUtils.connectEffect(level, new Vec3(getBlockPos().getX() + 6, getBlockPos().getY() + 4, getBlockPos().getZ() - 5), new Vec3(getBlockPos().getX() + 6, getBlockPos().getY() + 4, getBlockPos().getZ() + 6), borderColor, 2);
+                    WissenUtils.connectEffect(level, new Vec3(getBlockPos().getX() + 6, getBlockPos().getY() + 4, getBlockPos().getZ() + 6), new Vec3(getBlockPos().getX() - 5, getBlockPos().getY() + 4, getBlockPos().getZ() + 6), borderColor, 2);
+                    WissenUtils.connectEffect(level, new Vec3(getBlockPos().getX() - 5, getBlockPos().getY() + 4, getBlockPos().getZ() + 6), new Vec3(getBlockPos().getX() - 5, getBlockPos().getY() + 4, getBlockPos().getZ() - 5), borderColor, 2);
+                }
             } else {
                 if (offset > 0) {
                     offset--;
                 }
                 if (scale > 0) {
                     scale--;
+                }
+
+                if (WissenUtils.isCanRenderWissenWand()) {
+                    WissenUtils.connectBlockEffect(level, getBlockPos().below(2), new Color(214, 118, 132));
+                    WissenUtils.connectBlockEffect(level, getBlockPos(), new Color(214, 118, 132));
                 }
             }
         }
@@ -350,9 +376,9 @@ public class ArcaneIteratorTileEntity extends BlockEntity implements TickableBlo
     public List<ArcanePedestalTileEntity> getPedestals() {
         List<ArcanePedestalTileEntity> pedestals = new ArrayList<>();
 
-        for (int x = -5; x < 5; x++) {
-            for (int y = -3; y < 3; y++) {
-                for (int z = -5; z < 5; z++) {
+        for (int x = -5; x <= 5; x++) {
+            for (int y = -3; y <= 3; y++) {
+                for (int z = -5; z <= 5; z++) {
                     BlockEntity tile = level.getBlockEntity(new BlockPos(getBlockPos().getX() + x, getBlockPos().getY() + y, getBlockPos().getZ() + z));
                     if (tile != null) {
                         if (tile instanceof ArcanePedestalTileEntity pedestal) {
@@ -508,16 +534,6 @@ public class ArcaneIteratorTileEntity extends BlockEntity implements TickableBlo
     @Override
     public boolean canConnectReceiveWissen() {
         return true;
-    }
-
-    @Override
-    public int getWissenPerReceive() {
-        return 0;
-    }
-
-    @Override
-    public int getSendWissenCooldown() {
-        return 0;
     }
 
     @Override

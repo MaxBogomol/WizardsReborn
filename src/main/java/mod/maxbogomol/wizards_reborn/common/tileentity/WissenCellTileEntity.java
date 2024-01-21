@@ -46,8 +46,8 @@ public class WissenCellTileEntity extends ExposedTileSimpleInventory implements 
                     ItemStack stack = getItemHandler().getItem(0);
                     if (stack.getItem() instanceof IWissenItem) {
                         IWissenItem item = (IWissenItem) stack.getItem();
-                        int wissenRemain = WissenUtils.getRemoveWissenRemain(wissen, 250);
-                        wissenRemain = 250 - wissenRemain;
+                        int wissenRemain = WissenUtils.getRemoveWissenRemain(wissen, getWissenPerReceive());
+                        wissenRemain = getWissenPerReceive() - wissenRemain;
                         WissenItemUtils.existWissen(stack);
                         int itemWissenRemain = WissenItemUtils.getAddWissenRemain(stack, wissenRemain, item.getMaxWissen());
                         wissenRemain = wissenRemain - itemWissenRemain;
@@ -174,6 +174,10 @@ public class WissenCellTileEntity extends ExposedTileSimpleInventory implements 
         return ((float) getWissen() / (float) getMaxWissen());
     }
 
+    public int getWissenPerReceive() {
+        return 250;
+    }
+
     @Override
     public int getWissen() {
         return wissen;
@@ -202,16 +206,6 @@ public class WissenCellTileEntity extends ExposedTileSimpleInventory implements 
     @Override
     public boolean canConnectReceiveWissen() {
         return true;
-    }
-
-    @Override
-    public int getWissenPerReceive() {
-        return 0;
-    }
-
-    @Override
-    public int getSendWissenCooldown() {
-        return 0;
     }
 
     @Override

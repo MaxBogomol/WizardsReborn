@@ -1,7 +1,11 @@
 package mod.maxbogomol.wizards_reborn.common.tileentity;
 
 import mod.maxbogomol.wizards_reborn.WizardsReborn;
+import mod.maxbogomol.wizards_reborn.api.light.ILightTileEntity;
+import mod.maxbogomol.wizards_reborn.api.wissen.IWissenTileEntity;
 import mod.maxbogomol.wizards_reborn.api.wissen.IWissenWandControlledTileEntity;
+import mod.maxbogomol.wizards_reborn.api.wissen.WissenUtils;
+import mod.maxbogomol.wizards_reborn.client.particle.Particles;
 import mod.maxbogomol.wizards_reborn.common.block.ArcaneLumosBlock;
 import mod.maxbogomol.wizards_reborn.common.item.equipment.WissenWandItem;
 import mod.maxbogomol.wizards_reborn.utils.PacketUtils;
@@ -18,6 +22,9 @@ import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.AABB;
+import net.minecraft.world.phys.Vec3;
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.common.extensions.IForgeBlockEntity;
 import org.jetbrains.annotations.NotNull;
 
@@ -25,7 +32,7 @@ import javax.annotation.Nullable;
 import java.awt.*;
 import java.util.Random;
 
-public class LightEmitterTileEntity extends ExposedTileSimpleInventory implements TickableBlockEntity, IWissenWandControlledTileEntity {
+public class LightEmitterTileEntity extends ExposedTileSimpleInventory implements TickableBlockEntity, IWissenTileEntity, ILightTileEntity, IWissenWandControlledTileEntity {
 
     public int blockToX = 0;
     public int blockToY =0 ;
@@ -33,7 +40,7 @@ public class LightEmitterTileEntity extends ExposedTileSimpleInventory implement
     public boolean isToBlock = false;
 
     public int wissen = 0;
-    public int cooldown = 0;
+    public int light = 0;
 
     public Random random = new Random();
 
@@ -47,7 +54,64 @@ public class LightEmitterTileEntity extends ExposedTileSimpleInventory implement
 
     @Override
     public void tick() {
+        if (!level.isClientSide()) {
+            boolean update = false;
 
+            if (isToBlock) {
+                if (level.isLoaded(new BlockPos(blockToX, blockToY, blockToZ))) {
+                    BlockEntity tileentity = level.getBlockEntity(new BlockPos(blockToX, blockToY, blockToZ));
+                    if (tileentity instanceof ILightTileEntity lightTileEntity) {
+                        if (canWork()) {
+
+                        }
+                    } else {
+                        isToBlock = false;
+                        update = true;
+                    }
+                }
+            }
+
+            if (update) {
+                PacketUtils.SUpdateTileEntityPacket(this);
+            }
+        }
+
+        if (level.isClientSide()) {
+            if (getWissen() > 0) {
+                Color color = getColor();
+
+                if (random.nextFloat() < 0.5) {
+                    Particles.create(WizardsReborn.WISP_PARTICLE)
+                            .addVelocity(((random.nextDouble() - 0.5D) / 100) * getStage(), ((random.nextDouble() - 0.5D) / 100) * getStage(), ((random.nextDouble() - 0.5D) / 100) * getStage())
+                            .setAlpha(0.25f, 0).setScale(0.2f * getStage(), 0)
+                            .setColor((float) color.getRed() / 255, (float) color.getGreen()/ 255, (float) color.getBlue() / 255)
+                            .setLifetime(20)
+                            .spawn(level, worldPosition.getX() + 0.5F, worldPosition.getY() + 0.5625F, worldPosition.getZ() + 0.5F);
+                }
+                if (random.nextFloat() < 0.1) {
+                    Particles.create(WizardsReborn.SPARKLE_PARTICLE)
+                            .addVelocity(((random.nextDouble() - 0.5D) / 100) * getStage(), ((random.nextDouble() - 0.5D) / 100) * getStage(), ((random.nextDouble() - 0.5D) / 100) * getStage())
+                            .setAlpha(0.25f, 0).setScale(0.075f * getStage(), 0)
+                            .setColor((float) color.getRed() / 255, (float) color.getGreen()/ 255, (float) color.getBlue() / 255)
+                            .setLifetime(30)
+                            .setSpin((0.5f * (float) ((random.nextDouble() - 0.5D) * 2)))
+                            .spawn(level, worldPosition.getX() + 0.5F, worldPosition.getY() + 0.5625F, worldPosition.getZ() + 0.5F);
+                }
+
+                if (canWork()) {
+                    lightEffect(new Vec3(0.5f, 0.5625f, 0.5), new Vec3(0.1875f, 0.5f, 0.1875f), 0.6f);
+                    lightEffect(new Vec3(0.5f, 0.5625f, 0.5), new Vec3(0.8125f, 0.5f, 0.1875f), 0.6f);
+                    lightEffect(new Vec3(0.5f, 0.5625f, 0.5), new Vec3(0.1875f, 0.5f, 0.8125f), 0.6f);
+                    lightEffect(new Vec3(0.5f, 0.5625f, 0.5), new Vec3(0.8125f, 0.5f, 0.8125f), 0.6f);
+
+                    lightEffect(new Vec3(0.1875f, 0.5f, 0.1875f), new Vec3(0.5f, 0.8125f, 0.5), 0.4f);
+                    lightEffect(new Vec3(0.8125f, 0.5f, 0.1875f), new Vec3(0.5f, 0.8125f, 0.5), 0.4f);
+                    lightEffect(new Vec3(0.1875f, 0.5f, 0.8125f), new Vec3(0.5f, 0.8125f, 0.5), 0.4f);
+                    lightEffect(new Vec3(0.8125f, 0.5f, 0.8125f), new Vec3(0.5f, 0.8125f, 0.5), 0.4f);
+                }
+            }
+            wissenWandEffect();
+        }
     }
 
     @Override
@@ -110,7 +174,7 @@ public class LightEmitterTileEntity extends ExposedTileSimpleInventory implement
         tag.putBoolean("isToBlock", isToBlock);
 
         tag.putInt("wissen", wissen);
-        tag.putInt("cooldown", cooldown);
+        tag.putInt("light", light);
     }
 
     @Override
@@ -122,12 +186,16 @@ public class LightEmitterTileEntity extends ExposedTileSimpleInventory implement
         isToBlock = tag.getBoolean("isToBlock");
 
         wissen = tag.getInt("wissen");
-        cooldown = tag.getInt("cooldown");
+        light = tag.getInt("light");
     }
 
     @Override
     public AABB getRenderBoundingBox() {
         return IForgeBlockEntity.INFINITE_EXTENT_AABB;
+    }
+
+    public float getStage() {
+        return ((float) getWissen() / (float) getMaxWissen());
     }
 
     public Color getColor() {
@@ -150,12 +218,153 @@ public class LightEmitterTileEntity extends ExposedTileSimpleInventory implement
         return !level.hasNeighborSignal(getBlockPos());
     }
 
+    public void lightEffect(Vec3 from, Vec3 to, float chance) {
+        Color color = getColor();
+
+        if (random.nextFloat() < chance) {
+            Particles.create(WizardsReborn.WISP_PARTICLE)
+                    .addVelocity((to.x() - from.x()) / 20, (to.y() - from.y()) / 20, (to.z() - from.z()) / 20)
+                    .setAlpha(0.35f, 0).setScale(0.1f, 0)
+                    .setColor((float) color.getRed() / 255, (float) color.getGreen()/ 255, (float) color.getBlue() / 255)
+                    .setLifetime(20)
+                    .spawn(level, worldPosition.getX() + from.x(), worldPosition.getY() + from.y(), worldPosition.getZ() + from.z());
+        }
+        if (random.nextFloat() < chance / 2) {
+            Particles.create(WizardsReborn.SPARKLE_PARTICLE)
+                    .addVelocity(((random.nextDouble() - 0.5D) / 100) * getStage(), ((random.nextDouble() - 0.5D) / 100) * getStage(), ((random.nextDouble() - 0.5D) / 100) * getStage())
+                    .setAlpha(0.35f, 0).setScale(0.05f, 0)
+                    .setColor((float) color.getRed() / 255, (float) color.getGreen()/ 255, (float) color.getBlue() / 255)
+                    .setLifetime(30)
+                    .setSpin((0.5f * (float) ((random.nextDouble() - 0.5D) * 2)))
+                    .spawn(level, worldPosition.getX() + from.x(), worldPosition.getY() + from.y(), worldPosition.getZ() + from.z());
+        }
+    }
+
+    @OnlyIn(Dist.CLIENT)
+    public void wissenWandEffect() {
+        if (WissenUtils.isCanRenderWissenWand()) {
+            if (isToBlock) {
+                BlockPos pos = new BlockPos(blockToX, blockToY, blockToZ);
+                if (level.getBlockEntity(pos) instanceof ILightTileEntity lightTile) {
+                    Vec3 fromVec = getLightLensPos();
+                    Vec3 toVec = lightTile.getLightLensPos();
+
+                    WissenUtils.connectEffect(level, new Vec3(getBlockPos().getX() + fromVec.x(), getBlockPos().getY() + fromVec.y(), getBlockPos().getZ() + fromVec.z()), new Vec3(blockToX + toVec.x(), blockToY + toVec.y(), blockToZ + toVec.z()), new Color(118, 184, 214));
+                    WissenUtils.connectBlockEffect(level, pos, new Color(118, 184, 214));
+                }
+            }
+        }
+    }
+
+    @Override
+    public int getWissen() {
+        return wissen;
+    }
+
+    @Override
+    public int getMaxWissen() {
+        return 2000;
+    }
+
+    @Override
+    public boolean canSendWissen() {
+        return true;
+    }
+
+    @Override
+    public boolean canReceiveWissen() {
+        return true;
+    }
+
+    @Override
+    public boolean canConnectSendWissen() {
+        return true;
+    }
+
+    @Override
+    public boolean canConnectReceiveWissen() {
+        return true;
+    }
+
+    @Override
+    public void setWissen(int wissen) {
+        this.wissen = wissen;
+    }
+
+    @Override
+    public void addWissen(int wissen) {
+        this.wissen = this.wissen + wissen;
+        if (this.wissen > getMaxWissen()) {
+            this.wissen = getMaxWissen();
+        }
+    }
+
+    @Override
+    public void removeWissen(int wissen) {
+        this.wissen = this.wissen - wissen;
+        if (this.wissen < 0) {
+            this.wissen = 0;
+        }
+    }
+
+    @Override
+    public int getLight() {
+        return light;
+    }
+
+    @Override
+    public int getMaxLight() {
+        return 10;
+    }
+
+    @Override
+    public boolean canSendLight() {
+        return false;
+    }
+
+    @Override
+    public boolean canReceiveLight() {
+        return false;
+    }
+
+    @Override
+    public boolean canConnectSendLight() {
+        return false;
+    }
+
+    @Override
+    public boolean canConnectReceiveLight() {
+        return false;
+    }
+
+    @Override
+    public void setLight(int light) {
+        this.light = light;
+    }
+
+    @Override
+    public void addLight(int light) {
+        this.light = this.light + light;
+        if (this.light > getMaxLight()) {
+            this.light = getMaxLight();
+        }
+    }
+
+    @Override
+    public void removeLight(int light) {
+        this.light = this.light - light;
+        if (this.light < 0) {
+            this.light = 0;
+        }
+    }
+
+    @Override
+    public Vec3 getLightLensPos() {
+        return new Vec3(0.5F, 0.8125F, 0.5F);
+    }
+
     @Override
     public boolean wissenWandReceiveConnect(ItemStack stack, UseOnContext context, BlockEntity tile) {
-        BlockPos oldBlockPos = WissenWandItem.getBlockPos(stack);
-        BlockEntity oldTile = level.getBlockEntity(oldBlockPos);
-
-
         return false;
     }
 
@@ -164,13 +373,24 @@ public class LightEmitterTileEntity extends ExposedTileSimpleInventory implement
         BlockPos oldBlockPos = WissenWandItem.getBlockPos(stack);
         BlockEntity oldTile = level.getBlockEntity(oldBlockPos);
 
+        if (oldTile instanceof ILightTileEntity lightTile) {
+            if (lightTile.canConnectSendLight()) {
+                blockToX = oldBlockPos.getX();
+                blockToY = oldBlockPos.getY();
+                blockToZ = oldBlockPos.getZ();
+                isToBlock = true;
+                WissenWandItem.setBlock(stack, false);
+                PacketUtils.SUpdateTileEntityPacket(this);
+                return true;
+            }
+        }
 
         return false;
     }
 
     @Override
     public boolean wissenWandReload(ItemStack stack, UseOnContext context, BlockEntity tile) {
-
+        isToBlock = false;
         PacketUtils.SUpdateTileEntityPacket(this);
         return false;
     }

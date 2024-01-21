@@ -5,6 +5,7 @@ import mod.maxbogomol.wizards_reborn.WizardsReborn;
 import mod.maxbogomol.wizards_reborn.api.alchemy.IFluidTileEntity;
 import mod.maxbogomol.wizards_reborn.api.alchemy.IHeatTileEntity;
 import mod.maxbogomol.wizards_reborn.api.alchemy.ISteamTileEntity;
+import mod.maxbogomol.wizards_reborn.api.light.ILightTileEntity;
 import mod.maxbogomol.wizards_reborn.api.wissen.*;
 import mod.maxbogomol.wizards_reborn.common.item.FluidStorageBaseItem;
 import mod.maxbogomol.wizards_reborn.common.tileentity.AlchemyMachineTileEntity;
@@ -127,6 +128,16 @@ public class WissenWandItem extends Item {
         if (tile instanceof IWissenTileEntity wissenTile) {
             if (!getBlock(stack)) {
                 if ((mode == 1 && wissenTile.canConnectReceiveWissen()) || (mode == 2 && wissenTile.canConnectSendWissen())) {
+                    setBlockPos(stack, context.getClickedPos());
+                    setBlock(stack, true);
+                    return true;
+                }
+            }
+        }
+
+        if (tile instanceof ILightTileEntity lightTile) {
+            if (!getBlock(stack)) {
+                if ((mode == 1 && lightTile.canConnectReceiveLight()) || (mode == 2 && lightTile.canConnectSendLight())) {
                     setBlockPos(stack, context.getClickedPos());
                     setBlock(stack, true);
                     return true;

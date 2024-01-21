@@ -10,9 +10,6 @@ public interface IWissenTileEntity {
     boolean canConnectSendWissen();
     boolean canConnectReceiveWissen();
 
-    int getWissenPerReceive();
-    int getSendWissenCooldown();
-
     void setWissen(int wissen);
     void addWissen(int wissen);
     void removeWissen(int wissen);

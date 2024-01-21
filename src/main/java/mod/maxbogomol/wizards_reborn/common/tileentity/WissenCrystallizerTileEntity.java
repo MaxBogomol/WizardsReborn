@@ -255,16 +255,6 @@ public class WissenCrystallizerTileEntity extends ExposedTileSimpleInventory imp
     }
 
     @Override
-    public int getWissenPerReceive() {
-        return 0;
-    }
-
-    @Override
-    public int getSendWissenCooldown() {
-        return 0;
-    }
-
-    @Override
     public void setWissen(int wissen) {
         this.wissen = wissen;
     }

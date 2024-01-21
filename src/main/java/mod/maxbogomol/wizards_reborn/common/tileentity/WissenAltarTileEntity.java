@@ -93,8 +93,8 @@ public class WissenAltarTileEntity extends ExposedTileSimpleInventory implements
                     ItemStack stack = getItemHandler().getItem(0);
                     if (stack.getItem() instanceof IWissenItem) {
                         IWissenItem item = (IWissenItem) stack.getItem();
-                        int wissenRemain = WissenUtils.getRemoveWissenRemain(wissen, 100);
-                        wissenRemain = 100 - wissenRemain;
+                        int wissenRemain = WissenUtils.getRemoveWissenRemain(wissen, getWissenPerReceive());
+                        wissenRemain = getWissenPerReceive() - wissenRemain;
                         WissenItemUtils.existWissen(stack);
                         int itemWissenRemain = WissenItemUtils.getAddWissenRemain(stack, wissenRemain, item.getMaxWissen());
                         wissenRemain = wissenRemain - itemWissenRemain;
@@ -270,6 +270,10 @@ public class WissenAltarTileEntity extends ExposedTileSimpleInventory implements
         return (1F - ((float) wissenIsCraft / (float) wissenInItem));
     }
 
+    public int getWissenPerReceive() {
+        return 100;
+    }
+
     @Override
     public int getWissen() {
         return wissen;
@@ -298,16 +302,6 @@ public class WissenAltarTileEntity extends ExposedTileSimpleInventory implements
     @Override
     public boolean canConnectReceiveWissen() {
         return true;
-    }
-
-    @Override
-    public int getWissenPerReceive() {
-        return 0;
-    }
-
-    @Override
-    public int getSendWissenCooldown() {
-        return 0;
     }
 
     @Override

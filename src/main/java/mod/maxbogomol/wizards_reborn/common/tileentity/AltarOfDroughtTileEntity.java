@@ -84,9 +84,9 @@ public class AltarOfDroughtTileEntity extends ExposedTileSimpleInventory impleme
             }
 
             if (ticks <= 0 && wissen < getMaxWissen()) {
-                for (int x = -distance; x < distance; x++) {
-                    for (int y = -distance; y < distance; y++) {
-                        for (int z = -distance; z < distance; z++) {
+                for (int x = -distance; x <= distance; x++) {
+                    for (int y = -distance; y <= distance; y++) {
+                        for (int z = -distance; z <= distance; z++) {
                             int X = ((x + xOffset) % distance);
                             int Y = ((y + yOffset) % distance);
                             int Z = ((z + zOffset) % distance);
@@ -266,16 +266,6 @@ public class AltarOfDroughtTileEntity extends ExposedTileSimpleInventory impleme
     @Override
     public boolean canConnectReceiveWissen() {
         return true;
-    }
-
-    @Override
-    public int getWissenPerReceive() {
-        return 0;
-    }
-
-    @Override
-    public int getSendWissenCooldown() {
-        return 0;
     }
 
     @Override

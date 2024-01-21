@@ -41,6 +41,7 @@ import org.jetbrains.annotations.NotNull;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
+import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -256,6 +257,11 @@ public class AlchemyMachineTileEntity extends PipeBaseTileEntity implements Tick
                                 .setSpin((0.1f * (float) ((random.nextDouble() - 0.5D) * 2)))
                                 .spawn(level, getBlockPos().getX() + 0.5F, getBlockPos().getY() + 2F, getBlockPos().getZ() + 0.5F);
                     }
+                }
+            } else {
+                if (WissenUtils.isCanRenderWissenWand()) {
+                    WissenUtils.connectBlockEffect(level, getBlockPos().above(), new Color(214, 118, 132));
+                    WissenUtils.connectBlockEffect(level, getBlockPos(), new Color(214, 118, 132));
                 }
             }
         }

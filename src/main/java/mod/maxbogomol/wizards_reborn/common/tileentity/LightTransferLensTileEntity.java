@@ -1,7 +1,9 @@
 package mod.maxbogomol.wizards_reborn.common.tileentity;
 
 import mod.maxbogomol.wizards_reborn.WizardsReborn;
+import mod.maxbogomol.wizards_reborn.api.light.ILightTileEntity;
 import mod.maxbogomol.wizards_reborn.api.wissen.IWissenWandControlledTileEntity;
+import mod.maxbogomol.wizards_reborn.api.wissen.WissenUtils;
 import mod.maxbogomol.wizards_reborn.common.block.ArcaneLumosBlock;
 import mod.maxbogomol.wizards_reborn.common.item.equipment.WissenWandItem;
 import mod.maxbogomol.wizards_reborn.utils.PacketUtils;
@@ -18,6 +20,9 @@ import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.AABB;
+import net.minecraft.world.phys.Vec3;
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.common.extensions.IForgeBlockEntity;
 import org.jetbrains.annotations.NotNull;
 
@@ -25,7 +30,7 @@ import javax.annotation.Nullable;
 import java.awt.*;
 import java.util.Random;
 
-public class LightTransferLensTileEntity extends ExposedTileSimpleInventory implements TickableBlockEntity, IWissenWandControlledTileEntity {
+public class LightTransferLensTileEntity extends ExposedTileSimpleInventory implements TickableBlockEntity, ILightTileEntity, IWissenWandControlledTileEntity {
 
     public int blockToX = 0;
     public int blockToY =0 ;
@@ -33,7 +38,7 @@ public class LightTransferLensTileEntity extends ExposedTileSimpleInventory impl
     public boolean isToBlock = false;
 
     public int wissen = 0;
-    public int cooldown = 0;
+    public int light = 0;
 
     public Random random = new Random();
 
@@ -47,7 +52,32 @@ public class LightTransferLensTileEntity extends ExposedTileSimpleInventory impl
 
     @Override
     public void tick() {
+        if (!level.isClientSide()) {
+            boolean update = false;
 
+            if (isToBlock) {
+                if (level.isLoaded(new BlockPos(blockToX, blockToY, blockToZ))) {
+                    BlockEntity tileentity = level.getBlockEntity(new BlockPos(blockToX, blockToY, blockToZ));
+                    if (tileentity instanceof ILightTileEntity lightTileEntity) {
+                        if (canWork()) {
+
+                        }
+
+                    } else {
+                        isToBlock = false;
+                        update = true;
+                    }
+                }
+            }
+
+            if (update) {
+                PacketUtils.SUpdateTileEntityPacket(this);
+            }
+        }
+
+        if (level.isClientSide()) {
+            wissenWandEffect();
+        }
     }
 
     @Override
@@ -110,7 +140,7 @@ public class LightTransferLensTileEntity extends ExposedTileSimpleInventory impl
         tag.putBoolean("isToBlock", isToBlock);
 
         tag.putInt("wissen", wissen);
-        tag.putInt("cooldown", cooldown);
+        tag.putInt("light", light);
     }
 
     @Override
@@ -122,7 +152,7 @@ public class LightTransferLensTileEntity extends ExposedTileSimpleInventory impl
         isToBlock = tag.getBoolean("isToBlock");
 
         wissen = tag.getInt("wissen");
-        cooldown = tag.getInt("cooldown");
+        light = tag.getInt("light");
     }
 
     @Override
@@ -150,12 +180,75 @@ public class LightTransferLensTileEntity extends ExposedTileSimpleInventory impl
         return !level.hasNeighborSignal(getBlockPos());
     }
 
+
+    @OnlyIn(Dist.CLIENT)
+    public void wissenWandEffect() {
+        if (WissenUtils.isCanRenderWissenWand()) {
+            if (isToBlock) {
+                WissenUtils.connectEffect(level, getBlockPos(), new BlockPos(blockToX, blockToY, blockToZ), new Color(118, 184, 214));
+                WissenUtils.connectBlockEffect(level, new BlockPos(blockToX, blockToY, blockToZ), new Color(118, 184, 214));
+            }
+        }
+    }
+
+    @Override
+    public int getLight() {
+        return light;
+    }
+
+    @Override
+    public int getMaxLight() {
+        return 10;
+    }
+
+    @Override
+    public boolean canSendLight() {
+        return false;
+    }
+
+    @Override
+    public boolean canReceiveLight() {
+        return true;
+    }
+
+    @Override
+    public boolean canConnectSendLight() {
+        return true;
+    }
+
+    @Override
+    public boolean canConnectReceiveLight() {
+        return false;
+    }
+
+    @Override
+    public void setLight(int light) {
+        this.light = light;
+    }
+
+    @Override
+    public void addLight(int light) {
+        this.light = this.light + light;
+        if (this.light > getMaxLight()) {
+            this.light = getMaxLight();
+        }
+    }
+
+    @Override
+    public void removeLight(int light) {
+        this.light = this.light - light;
+        if (this.light < 0) {
+            this.light = 0;
+        }
+    }
+
+    @Override
+    public Vec3 getLightLensPos() {
+        return new Vec3(0.5F, 0.5F, 0.5F);
+    }
+
     @Override
     public boolean wissenWandReceiveConnect(ItemStack stack, UseOnContext context, BlockEntity tile) {
-        BlockPos oldBlockPos = WissenWandItem.getBlockPos(stack);
-        BlockEntity oldTile = level.getBlockEntity(oldBlockPos);
-
-
         return false;
     }
 
@@ -164,13 +257,24 @@ public class LightTransferLensTileEntity extends ExposedTileSimpleInventory impl
         BlockPos oldBlockPos = WissenWandItem.getBlockPos(stack);
         BlockEntity oldTile = level.getBlockEntity(oldBlockPos);
 
+        if (oldTile instanceof ILightTileEntity lightTile) {
+            if (lightTile.canConnectSendLight()) {
+                blockToX = oldBlockPos.getX();
+                blockToY = oldBlockPos.getY();
+                blockToZ = oldBlockPos.getZ();
+                isToBlock = true;
+                WissenWandItem.setBlock(stack, false);
+                PacketUtils.SUpdateTileEntityPacket(this);
+                return true;
+            }
+        }
 
         return false;
     }
 
     @Override
     public boolean wissenWandReload(ItemStack stack, UseOnContext context, BlockEntity tile) {
-
+        isToBlock = false;
         PacketUtils.SUpdateTileEntityPacket(this);
         return false;
     }

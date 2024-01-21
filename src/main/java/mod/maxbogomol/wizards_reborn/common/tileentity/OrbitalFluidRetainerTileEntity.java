@@ -131,7 +131,7 @@ public class OrbitalFluidRetainerTileEntity extends PipeBaseTileEntity implement
     @Override
     public AABB getRenderBoundingBox() {
         BlockPos pos = getBlockPos();
-        return new AABB(pos.getX() - 0.5f, pos.getY() - 0.5f, pos.getZ() - 0.5f, pos.getX() + 1.5f, pos.getY() + 1.5f, pos.getZ() + 1.5f);
+        return new AABB(pos.getX() - 0.5f, pos.getY() - 0.5f, pos.getZ() - 0.5f, pos.getX() + 1.5f, pos.getY() + 2f, pos.getZ() + 1.5f);
     }
 
     public void initConnections() {

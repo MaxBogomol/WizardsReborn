@@ -356,16 +356,6 @@ public class ArcaneWorkbenchTileEntity extends BlockEntity implements TickableBl
     }
 
     @Override
-    public int getWissenPerReceive() {
-        return 0;
-    }
-
-    @Override
-    public int getSendWissenCooldown() {
-        return 0;
-    }
-
-    @Override
     public void setWissen(int wissen) {
         this.wissen = wissen;
     }

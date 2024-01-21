@@ -7,6 +7,7 @@ import mod.maxbogomol.wizards_reborn.api.alchemy.PipeConnection;
 import mod.maxbogomol.wizards_reborn.api.wissen.IItemResultTileEntity;
 import mod.maxbogomol.wizards_reborn.api.wissen.IWissenTileEntity;
 import mod.maxbogomol.wizards_reborn.api.wissen.IWissenWandFunctionalTileEntity;
+import mod.maxbogomol.wizards_reborn.api.wissen.WissenUtils;
 import mod.maxbogomol.wizards_reborn.utils.PacketUtils;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -28,6 +29,7 @@ import org.jetbrains.annotations.NotNull;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
+import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
@@ -68,6 +70,15 @@ public class AlchemyBoilerTileEntity extends PipeBaseTileEntity implements Ticka
     public void tick() {
         if (!level.isClientSide()) {
             initConnections();
+        }
+
+        if (level.isClientSide()) {
+            if (!(level.getBlockEntity(getBlockPos().below()) instanceof AlchemyMachineTileEntity machine)) {
+                if (WissenUtils.isCanRenderWissenWand()) {
+                    WissenUtils.connectBlockEffect(level, getBlockPos().below(), new Color(214, 118, 132));
+                    WissenUtils.connectBlockEffect(level, getBlockPos(), new Color(214, 118, 132));
+                }
+            }
         }
     }
 
@@ -246,16 +257,6 @@ public class AlchemyBoilerTileEntity extends PipeBaseTileEntity implements Ticka
     @Override
     public boolean canConnectReceiveWissen() {
         return true;
-    }
-
-    @Override
-    public int getWissenPerReceive() {
-        return 0;
-    }
-
-    @Override
-    public int getSendWissenCooldown() {
-        return 0;
     }
 
     @Override
