@@ -230,10 +230,12 @@ public class WizardsRebornItemGroup {
 
             event.accept(WizardsReborn.ARCANE_WOOD_FRAME_ITEM);
             event.accept(WizardsReborn.ARCANE_WOOD_CASING_ITEM);
+            event.accept(WizardsReborn.ARCANE_WOOD_WISSEN_CASING_ITEM);
             event.accept(WizardsReborn.ARCANE_WOOD_FLUID_CASING_ITEM);
             event.accept(WizardsReborn.ARCANE_WOOD_STEAM_CASING_ITEM);
             event.accept(WizardsReborn.WISESTONE_FRAME_ITEM);
             event.accept(WizardsReborn.WISESTONE_CASING_ITEM);
+            event.accept(WizardsReborn.WISESTONE_WISSEN_CASING_ITEM);
             event.accept(WizardsReborn.WISESTONE_FLUID_CASING_ITEM);
             event.accept(WizardsReborn.WISESTONE_STEAM_CASING_ITEM);
 

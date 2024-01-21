@@ -254,7 +254,7 @@ public class WizardsRebornClient {
             for (ResourceLocation resourceLocation : event.getModels().keySet()) {
                 if (resourceLocation.getNamespace().equals(WizardsReborn.MOD_ID)) {
                     if (resourceLocation.getPath().equals("fluid_pipe") && !resourceLocation.toString().contains("inventory")) {
-                        map.replace(resourceLocation, fluidPipe);
+                        map.put(resourceLocation, fluidPipe);
                     }
                     if (resourceLocation.getPath().equals("steam_pipe") && !resourceLocation.toString().contains("inventory")) {
                         map.put(resourceLocation, steamPipe);

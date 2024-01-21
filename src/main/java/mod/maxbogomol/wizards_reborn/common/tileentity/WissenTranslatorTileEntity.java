@@ -5,7 +5,6 @@ import mod.maxbogomol.wizards_reborn.api.wissen.ICooldownTileEntity;
 import mod.maxbogomol.wizards_reborn.api.wissen.IWissenTileEntity;
 import mod.maxbogomol.wizards_reborn.api.wissen.IWissenWandControlledTileEntity;
 import mod.maxbogomol.wizards_reborn.api.wissen.WissenUtils;
-import mod.maxbogomol.wizards_reborn.client.config.ClientConfig;
 import mod.maxbogomol.wizards_reborn.client.particle.Particles;
 import mod.maxbogomol.wizards_reborn.common.block.ArcaneLumosBlock;
 import mod.maxbogomol.wizards_reborn.common.item.equipment.WissenWandItem;
@@ -14,7 +13,6 @@ import mod.maxbogomol.wizards_reborn.common.network.WissenSendEffectPacket;
 import mod.maxbogomol.wizards_reborn.common.network.tileentity.WissenTranslatorBurstEffectPacket;
 import mod.maxbogomol.wizards_reborn.common.network.tileentity.WissenTranslatorSendEffectPacket;
 import mod.maxbogomol.wizards_reborn.utils.PacketUtils;
-import net.minecraft.client.Minecraft;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.nbt.CompoundTag;
@@ -23,7 +21,6 @@ import net.minecraft.network.protocol.game.ClientboundBlockEntityDataPacket;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.util.Mth;
 import net.minecraft.world.SimpleContainer;
-import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.context.UseOnContext;
@@ -307,12 +304,12 @@ public class WissenTranslatorTileEntity extends ExposedTileSimpleInventory imple
 
     @Override
     public boolean canSendWissen() {
-        return ((cooldown <= 0) && (getWissen() < getMaxWissen()));
+        return true;
     }
 
     @Override
     public boolean canReceiveWissen() {
-        return ((cooldown <= 0) && (getWissen() > 0));
+        return true;
     }
 
     @Override
@@ -515,7 +512,6 @@ public class WissenTranslatorTileEntity extends ExposedTileSimpleInventory imple
         BlockEntity oldTile = level.getBlockEntity(oldBlockPos);
 
         if (oldTile instanceof IWissenTileEntity wissenTile) {
-            System.out.println((wissenTile.canConnectReceiveWissen()));
             if ((!isSameFromAndTo(getBlockPos(), oldBlockPos)) && (wissenTile.canConnectReceiveWissen())) {
                 blockFromX = oldBlockPos.getX();
                 blockFromY = oldBlockPos.getY();
