@@ -136,6 +136,8 @@ public class WizardsRebornClient {
             ItemBlockRenderTypes.setRenderLayer(WizardsReborn.FLUID_SENSOR.get(), RenderType.translucent());
             ItemBlockRenderTypes.setRenderLayer(WizardsReborn.WISSEN_ACTIVATOR.get(), RenderType.translucent());
             ItemBlockRenderTypes.setRenderLayer(WizardsReborn.ITEM_SORTER.get(), RenderType.translucent());
+            ItemBlockRenderTypes.setRenderLayer(WizardsReborn.ARCANE_WOOD_GLASS_FRAME.get(), RenderType.translucent());
+            ItemBlockRenderTypes.setRenderLayer(WizardsReborn.WISESTONE_GLASS_FRAME.get(), RenderType.translucent());
 
             ItemBlockRenderTypes.setRenderLayer(WizardsReborn.MUNDANE_BREW_FLUID.get(), RenderType.translucent());
             ItemBlockRenderTypes.setRenderLayer(WizardsReborn.FLOWING_MUNDANE_BREW_FLUID.get(), RenderType.translucent());

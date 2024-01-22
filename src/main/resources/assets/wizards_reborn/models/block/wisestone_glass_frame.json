@@ -1,0 +1,8 @@
+{
+	"parent": "wizards_reborn:block/glass_frame_block",
+	"textures": {
+		"case": "wizards_reborn:block/wisestone_casing",
+		"glass": "wizards_reborn:block/alchemy_glass",
+		"particle": "wizards_reborn:block/wisestone_casing"
+	}
+}

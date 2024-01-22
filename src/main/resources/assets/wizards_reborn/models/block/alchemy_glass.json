@@ -1,6 +1,14 @@
 {
   "parent": "minecraft:block/cube_all",
+  "render_type": "minecraft:translucent",
   "textures": {
     "all": "wizards_reborn:block/alchemy_glass"
-  }
+  },
+  "connections": [
+    {
+      "type": "fusion:is_same_block"
+    }
+  ],
+  "loader": "fusion:model",
+  "type": "fusion:connecting"
 }

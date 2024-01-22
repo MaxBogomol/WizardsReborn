@@ -1,17 +1,7 @@
 {
-  "ctm": {
-    "ctm_version": 1,
-    "type": "ctm",
-    "layer": "TRANSLUCENT",
-    "textures": [
-      "wizards_reborn:block/alchemy_glass_ctm"
-    ],
-    "extra": {
-      "light": 0,
-      "connect_inside": true,
-      "connect_to": [
-        { "block": "wizards_reborn:alchemy_glass" }
-      ]
-    }
+  "fusion": {
+    "type": "connecting",
+    "layout": "full",
+    "render_type": "translucent"
   }
 }

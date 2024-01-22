@@ -5,42 +5,34 @@ import mod.maxbogomol.wizards_reborn.common.item.equipment.WissenWandItem;
 import mod.maxbogomol.wizards_reborn.common.tileentity.TickableBlockEntity;
 import mod.maxbogomol.wizards_reborn.common.tileentity.TileSimpleInventory;
 import mod.maxbogomol.wizards_reborn.common.tileentity.WissenCasingTileEntity;
-import mod.maxbogomol.wizards_reborn.common.tileentity.WissenTranslatorTileEntity;
 import mod.maxbogomol.wizards_reborn.utils.PacketUtils;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.sounds.SoundEvents;
+import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.context.BlockPlaceContext;
-import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.EntityBlock;
-import net.minecraft.world.level.block.FaceAttachedHorizontalDirectionalBlock;
 import net.minecraft.world.level.block.SimpleWaterloggedBlock;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityTicker;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
-import net.minecraft.world.level.block.state.properties.AttachFace;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.material.FluidState;
 import net.minecraft.world.level.material.Fluids;
 import net.minecraft.world.phys.BlockHitResult;
-import net.minecraft.world.phys.shapes.BooleanOp;
-import net.minecraft.world.phys.shapes.CollisionContext;
-import net.minecraft.world.phys.shapes.Shapes;
-import net.minecraft.world.phys.shapes.VoxelShape;
 import org.jetbrains.annotations.NotNull;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
-import java.util.stream.Stream;
 
 public class WissenCasingBlock extends CasingBlock implements EntityBlock, SimpleWaterloggedBlock  {
 
@@ -67,10 +59,18 @@ public class WissenCasingBlock extends CasingBlock implements EntityBlock, Simpl
 
     @Override
     public InteractionResult use(BlockState state, Level world, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hit) {
-        WissenTranslatorTileEntity tile = (WissenTranslatorTileEntity) world.getBlockEntity(pos);
+        WissenCasingTileEntity tile = (WissenCasingTileEntity) world.getBlockEntity(pos);
         ItemStack stack = player.getItemInHand(hand).copy();
 
         if (stack.getItem() instanceof WissenWandItem) {
+            if (WissenWandItem.getMode(stack) == 0) {
+                float f = tile.isConnection(hit.getDirection()) ? 0.6F : 0.5F;
+                world.playSound(null, pos, SoundEvents.LEVER_CLICK, SoundSource.BLOCKS, 0.3F, f);
+                tile.setConnection(hit.getDirection(), !tile.isConnection(hit.getDirection()));
+                PacketUtils.SUpdateTileEntityPacket(tile);
+                return InteractionResult.SUCCESS;
+            }
+
             if (WissenWandItem.getMode(stack) != 4) {
                 world.updateNeighbourForOutputSignal(pos, this);
                 PacketUtils.SUpdateTileEntityPacket(tile);

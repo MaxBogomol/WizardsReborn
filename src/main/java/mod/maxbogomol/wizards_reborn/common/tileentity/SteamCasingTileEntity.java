@@ -49,19 +49,33 @@ public class SteamCasingTileEntity extends SteamPipeTileEntity {
                                         int priority = PRIORITY_BLOCK;
                                         if (tile instanceof ISteamPipePriority)
                                             priority = ((ISteamPipePriority) tile).getPriority(facing.getOpposite());
-                                        if (isFrom(facing.getOpposite()))
-                                            priority -= 5;
                                         possibleDirections.put(priority, facing);
                                     }
                                 }
                             }
                         }
 
+                        int connectionCount = 0;
+                        Direction transfer = lastTransfer;
+
                         for (int key : possibleDirections.keySet()) {
                             ArrayList<Direction> list = possibleDirections.get(key);
                             for (int i = 0; i < list.size(); i++) {
                                 Direction facing = list.get((i + lastRobin) % list.size());
-                                steamMoved = pushSteam(MAX_PUSH, facing);
+                                if (transfer != facing) {
+                                    connectionCount++;
+                                    transfer = facing;
+                                }
+                            }
+                        }
+                        connectionCount++;
+                        int removeCount = (int) Math.floor((double) MAX_PUSH / connectionCount);
+
+                        for (int key : possibleDirections.keySet()) {
+                            ArrayList<Direction> list = possibleDirections.get(key);
+                            for (int i = 0; i < list.size(); i++) {
+                                Direction facing = list.get((i + lastRobin) % list.size());
+                                steamMoved = pushSteam(removeCount, facing);
                                 if (lastTransfer != facing) {
                                     syncTransfer = true;
                                     lastTransfer = facing;

@@ -60,7 +60,21 @@ public class FluidCasingTileEntity extends FluidPipeTileEntity {
                             }
                         }
 
-                        passStack = tank.drain((int) Math.floor((double) MAX_PUSH / possibleDirections.keySet().size()), IFluidHandler.FluidAction.SIMULATE);
+                        int connectionCount = 0;
+                        Direction transfer = lastTransfer;
+
+                        for (int key : possibleDirections.keySet()) {
+                            ArrayList<Direction> list = possibleDirections.get(key);
+                            for (int i = 0; i < list.size(); i++) {
+                                Direction facing = list.get((i + lastRobin) % list.size());
+                                if (transfer != facing) {
+                                    connectionCount++;
+                                    transfer = facing;
+                                }
+                            }
+                        }
+                        connectionCount++;
+                        passStack = tank.drain((int) Math.floor((double) MAX_PUSH / connectionCount), IFluidHandler.FluidAction.SIMULATE);
 
                         for (int key : possibleDirections.keySet()) {
                             ArrayList<Direction> list = possibleDirections.get(key);

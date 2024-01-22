@@ -109,7 +109,7 @@ dependencies {
 
     implementation fg.deobf("mezz.jei:jei-1.20.1-forge:15.0.0.14")
 
-    implementation fg.deobf('team.chisel.ctm:CTM:1.20.1-1.1.8+6')
+    implementation fg.deobf("curse.maven:fusion-connected-textures-854949:5005130")
     implementation fg.deobf("curse.maven:config-menus-forge-544048:4672356")
     implementation fg.deobf("curse.maven:model-gap-fix-676136:4607206")
 }
