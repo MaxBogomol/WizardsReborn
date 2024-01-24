@@ -31,6 +31,7 @@ import net.minecraft.client.renderer.blockentity.SignRenderer;
 import net.minecraft.client.renderer.entity.EntityRenderers;
 import net.minecraft.client.renderer.item.ItemProperties;
 import net.minecraft.client.resources.model.BakedModel;
+import net.minecraft.client.resources.model.ModelManager;
 import net.minecraft.client.resources.model.ModelResourceLocation;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.sounds.Music;
@@ -253,94 +254,46 @@ public class WizardsRebornClient {
             fluidPipe = new PipeModel(map.get(FLUID_CENTER), "fluid_pipe");
             steamPipe = new PipeModel(map.get(STEAM_CENTER), "steam_pipe");
 
-            for (ResourceLocation resourceLocation : event.getModels().keySet()) {
-                if (resourceLocation.getNamespace().equals(WizardsReborn.MOD_ID)) {
-                    if (resourceLocation.getPath().equals("fluid_pipe") && !resourceLocation.toString().contains("inventory")) {
-                        map.put(resourceLocation, fluidPipe);
-                    }
-                    if (resourceLocation.getPath().equals("steam_pipe") && !resourceLocation.toString().contains("inventory")) {
-                        map.put(resourceLocation, steamPipe);
-                    }
-                    if (resourceLocation.getPath().equals("fluid_extractor") && !resourceLocation.toString().contains("inventory")) {
-                        PipeModel model = new PipeModel(map.get(resourceLocation), "fluid_pipe");
-                        fluidExtractor.add(model);
-                        map.put(resourceLocation, model);
-                    }
-                    if (resourceLocation.getPath().equals("steam_extractor") && !resourceLocation.toString().contains("inventory")) {
-                        PipeModel model = new PipeModel(map.get(resourceLocation), "steam_pipe");
-                        steamExtractor.add(model);
-                        map.put(resourceLocation, model);
-                    }
-                    if (resourceLocation.getPath().equals("orbital_fluid_retainer") && !resourceLocation.toString().contains("inventory")) {
-                        PipeModel model = new PipeModel(map.get(resourceLocation), "fluid_pipe");
-                        orbitalFluidRetainer.add(model);
-                        map.put(resourceLocation, model);
-                    }
-                    if (resourceLocation.getPath().equals("alchemy_machine") && !resourceLocation.toString().contains("inventory")) {
-                        PipeModel model = new PipeModel(map.get(resourceLocation), "fluid_pipe");
-                        alchemyMachine.add(model);
-                        map.put(resourceLocation, model);
-                    }
-                    if (resourceLocation.getPath().equals("alchemy_boiler") && !resourceLocation.toString().contains("inventory")) {
-                        PipeModel model = new PipeModel(map.get(resourceLocation), "steam_pipe");
-                        alchemyBoiler.add(model);
-                        map.put(resourceLocation, model);
-                    }
-                    if (resourceLocation.getPath().equals("arcane_wood_fluid_casing") && !resourceLocation.toString().contains("inventory")) {
-                        PipeModel model = new PipeModel(map.get(resourceLocation), "fluid_pipe");
-                        arcaneWoodFluidCasing.add(model);
-                        map.put(resourceLocation, model);
-                    }
-                    if (resourceLocation.getPath().equals("arcane_wood_steam_casing") && !resourceLocation.toString().contains("inventory")) {
-                        PipeModel model = new PipeModel(map.get(resourceLocation), "fluid_pipe");
-                        wisestoneFluidCasing.add(model);
-                        map.put(resourceLocation, model);
-                    }
-                    if (resourceLocation.getPath().equals("wisestone_fluid_casing") && !resourceLocation.toString().contains("inventory")) {
-                        PipeModel model = new PipeModel(map.get(resourceLocation), "steam_pipe");
-                        arcaneWoodSteamCasing.add(model);
-                        map.put(resourceLocation, model);
-                    }
-                    if (resourceLocation.getPath().equals("wisestone_steam_casing") && !resourceLocation.toString().contains("inventory")) {
-                        PipeModel model = new PipeModel(map.get(resourceLocation), "steam_pipe");
-                        wisestoneSteamCasing.add(model);
-                        map.put(resourceLocation, model);
-                    }
-                }
-            }
+            addPipeModel(map, WizardsReborn.MOD_ID, "fluid_pipe", "waterlogged=false", fluidPipe);
+            addPipeModel(map, WizardsReborn.MOD_ID, "fluid_pipe", "waterlogged=true", fluidPipe);
+            addPipeModel(map, WizardsReborn.MOD_ID, "steam_pipe", "waterlogged=false", steamPipe);
+            addPipeModel(map, WizardsReborn.MOD_ID, "steam_pipe", "waterlogged=true", steamPipe);
+            addPipeModel(map, WizardsReborn.MOD_ID, "fluid_extractor", "lit=false,powered=false", "fluid_pipe", fluidExtractor, true);
+            addPipeModel(map, WizardsReborn.MOD_ID, "fluid_extractor", "lit=true,powered=false", "fluid_pipe", fluidExtractor, true);
+            addPipeModel(map, WizardsReborn.MOD_ID, "fluid_extractor", "lit=false,powered=true", "fluid_pipe", fluidExtractor, true);
+            addPipeModel(map, WizardsReborn.MOD_ID, "fluid_extractor", "lit=true,powered=true", "fluid_pipe", fluidExtractor, true);
+            addPipeModel(map, WizardsReborn.MOD_ID, "steam_extractor", "lit=false,powered=false", "steam_pipe", steamExtractor, true);
+            addPipeModel(map, WizardsReborn.MOD_ID, "steam_extractor", "lit=true,powered=false", "steam_pipe", steamExtractor, true);
+            addPipeModel(map, WizardsReborn.MOD_ID, "steam_extractor", "lit=false,powered=true", "steam_pipe", steamExtractor, true);
+            addPipeModel(map, WizardsReborn.MOD_ID, "steam_extractor", "lit=true,powered=true", "steam_pipe", steamExtractor, true);
+            addPipeModel(map, WizardsReborn.MOD_ID, "orbital_fluid_retainer", "", "fluid_pipe", orbitalFluidRetainer, true);
+            addPipeModel(map, WizardsReborn.MOD_ID, "alchemy_machine", "facing=east", "fluid_pipe", alchemyMachine, true);
+            addPipeModel(map, WizardsReborn.MOD_ID, "alchemy_machine", "facing=north", "fluid_pipe", alchemyMachine, true);
+            addPipeModel(map, WizardsReborn.MOD_ID, "alchemy_machine", "facing=south", "fluid_pipe", alchemyMachine, true);
+            addPipeModel(map, WizardsReborn.MOD_ID, "alchemy_machine", "facing=west", "fluid_pipe", alchemyMachine, true);
+            addPipeModel(map, WizardsReborn.MOD_ID, "alchemy_boiler", "facing=east", "steam_pipe", alchemyBoiler, true);
+            addPipeModel(map, WizardsReborn.MOD_ID, "alchemy_boiler", "facing=north", "steam_pipe", alchemyBoiler, true);
+            addPipeModel(map, WizardsReborn.MOD_ID, "alchemy_boiler", "facing=south", "steam_pipe", alchemyBoiler, true);
+            addPipeModel(map, WizardsReborn.MOD_ID, "alchemy_boiler", "facing=west", "steam_pipe", alchemyBoiler, true);
+            addPipeModel(map, WizardsReborn.MOD_ID, "arcane_wood_fluid_casing", "", "fluid_pipe", arcaneWoodFluidCasing, true);
+            addPipeModel(map, WizardsReborn.MOD_ID, "arcane_wood_steam_casing", "", "fluid_pipe", wisestoneFluidCasing, true);
+            addPipeModel(map, WizardsReborn.MOD_ID, "wisestone_fluid_casing", "", "steam_pipe", arcaneWoodSteamCasing, true);
+            addPipeModel(map, WizardsReborn.MOD_ID, "wisestone_steam_casing", "", "steam_pipe", wisestoneSteamCasing, true);
         }
 
         @SubscribeEvent
         public static void afterModelBake(ModelEvent.BakingCompleted event) {
             fluidPipe.init(event.getModelManager());
             steamPipe.init(event.getModelManager());
-            for (PipeModel model : fluidExtractor) {
-                model.init(event.getModelManager());
-            }
-            for (PipeModel model : steamExtractor) {
-                model.init(event.getModelManager());
-            }
-            for (PipeModel model : orbitalFluidRetainer) {
-                model.init(event.getModelManager());
-            }
-            for (PipeModel model : alchemyMachine) {
-                model.init(event.getModelManager());
-            }
-            for (PipeModel model : alchemyBoiler) {
-                model.init(event.getModelManager());
-            }
-            for (PipeModel model : arcaneWoodFluidCasing) {
-                model.init(event.getModelManager());
-            }
-            for (PipeModel model : wisestoneFluidCasing) {
-                model.init(event.getModelManager());
-            }
-            for (PipeModel model : arcaneWoodSteamCasing) {
-                model.init(event.getModelManager());
-            }
-            for (PipeModel model : wisestoneSteamCasing) {
-                model.init(event.getModelManager());
-            }
+            bakePipeModel(fluidExtractor, event.getModelManager());
+            bakePipeModel(steamExtractor, event.getModelManager());
+            bakePipeModel(orbitalFluidRetainer, event.getModelManager());
+            bakePipeModel(alchemyMachine, event.getModelManager());
+            bakePipeModel(alchemyBoiler, event.getModelManager());
+            bakePipeModel(arcaneWoodFluidCasing, event.getModelManager());
+            bakePipeModel(wisestoneFluidCasing, event.getModelManager());
+            bakePipeModel(arcaneWoodSteamCasing, event.getModelManager());
+            bakePipeModel(wisestoneSteamCasing, event.getModelManager());
         }
 
         @SubscribeEvent
@@ -406,5 +359,39 @@ public class WizardsRebornClient {
         });
 
         ItemProperties.register(item, new ResourceLocation("pulling"), (p_174630_, p_174631_, p_174632_, p_174633_) -> p_174632_ != null && p_174632_.isUsingItem() && p_174632_.getUseItem() == p_174630_ ? 1.0F : 0.0F);
+    }
+
+    public static void addPipeModel(Map<ResourceLocation, BakedModel> map, String modId, String modelId, String path, PipeModel pipe) {
+        map.put(new ModelResourceLocation(new ResourceLocation(modId + ":" + modelId), path), pipe);
+    }
+
+    public static void addPipeModel(Map<ResourceLocation, BakedModel> map, String modId, String modelId, String path, String pipe, ArrayList<PipeModel> pipes) {
+        if (map.get(new ModelResourceLocation(new ResourceLocation(modId + ":" + modelId), path)) != null) {
+            PipeModel model = new PipeModel(map.get(new ModelResourceLocation(new ResourceLocation(modId + ":" + modelId), path)), pipe);
+            pipes.add(model);
+            addPipeModel(map, modId, modelId, path, model);
+        }
+    }
+
+    public static void addPipeModel(Map<ResourceLocation, BakedModel> map, String modId, String modelId, String path, String pipe, ArrayList<PipeModel> pipes, boolean waterlogged) {
+        if (waterlogged) {
+            if (path.equals("")) {
+                addPipeModel(map, modId, modelId, "waterlogged=false", pipe, pipes);
+                addPipeModel(map, modId, modelId, "waterlogged=true", pipe, pipes);
+            } else {
+                addPipeModel(map, modId, modelId, "waterlogged=false," + path, pipe, pipes);
+                addPipeModel(map, modId, modelId, "waterlogged=true," + path, pipe, pipes);
+                addPipeModel(map, modId, modelId, path + ",waterlogged=false", pipe, pipes);
+                addPipeModel(map, modId, modelId, path + ",waterlogged=true", pipe, pipes);
+            }
+        } else {
+            addPipeModel(map, modId, modelId, path, pipe, pipes);
+        }
+    }
+
+    public static void bakePipeModel(ArrayList<PipeModel> pipes, ModelManager manager) {
+        for (PipeModel model : pipes) {
+            model.init(manager);
+        }
     }
 }
