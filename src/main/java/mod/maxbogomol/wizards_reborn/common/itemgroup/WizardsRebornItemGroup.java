@@ -43,7 +43,7 @@ public class WizardsRebornItemGroup {
             event.accept(WizardsReborn.RAW_ARCANE_GOLD_BLOCK_ITEM);
 
             if (CreateIntegration.isCreateLoaded()) {
-                event.accept(WizardsReborn.CRUSHED_RAW_ARCANE_GOLD);
+                event.accept(CreateIntegration.CRUSHED_RAW_ARCANE_GOLD);
             }
 
             event.accept(WizardsReborn.ARCANE_GOLD_SWORD);
@@ -232,12 +232,14 @@ public class WizardsRebornItemGroup {
             event.accept(WizardsReborn.ARCANE_WOOD_GLASS_FRAME_ITEM);
             event.accept(WizardsReborn.ARCANE_WOOD_CASING_ITEM);
             event.accept(WizardsReborn.ARCANE_WOOD_WISSEN_CASING_ITEM);
+            event.accept(WizardsReborn.ARCANE_WOOD_LIGHT_CASING_ITEM);
             event.accept(WizardsReborn.ARCANE_WOOD_FLUID_CASING_ITEM);
             event.accept(WizardsReborn.ARCANE_WOOD_STEAM_CASING_ITEM);
             event.accept(WizardsReborn.WISESTONE_FRAME_ITEM);
             event.accept(WizardsReborn.WISESTONE_GLASS_FRAME_ITEM);
             event.accept(WizardsReborn.WISESTONE_CASING_ITEM);
             event.accept(WizardsReborn.WISESTONE_WISSEN_CASING_ITEM);
+            event.accept(WizardsReborn.WISESTONE_LIGHT_CASING_ITEM);
             event.accept(WizardsReborn.WISESTONE_FLUID_CASING_ITEM);
             event.accept(WizardsReborn.WISESTONE_STEAM_CASING_ITEM);
 

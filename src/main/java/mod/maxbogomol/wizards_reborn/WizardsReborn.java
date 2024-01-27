@@ -436,12 +436,14 @@ public class WizardsReborn {
     public static final RegistryObject<Block> ARCANE_WOOD_GLASS_FRAME = BLOCKS.register("arcane_wood_glass_frame", () -> new GlassBlock(BlockBehaviour.Properties.copy(Blocks.OAK_PLANKS).noOcclusion()));
     public static final RegistryObject<Block> ARCANE_WOOD_CASING = BLOCKS.register("arcane_wood_casing", () -> new CasingBlock(BlockBehaviour.Properties.copy(Blocks.OAK_PLANKS).noOcclusion()));
     public static final RegistryObject<Block> ARCANE_WOOD_WISSEN_CASING = BLOCKS.register("arcane_wood_wissen_casing", () -> new WissenCasingBlock(BlockBehaviour.Properties.copy(Blocks.OAK_PLANKS).noOcclusion()));
+    public static final RegistryObject<Block> ARCANE_WOOD_LIGHT_CASING = BLOCKS.register("arcane_wood_light_casing", () -> new WissenCasingBlock(BlockBehaviour.Properties.copy(Blocks.OAK_PLANKS).noOcclusion()));
     public static final RegistryObject<Block> ARCANE_WOOD_STEAM_CASING = BLOCKS.register("arcane_wood_steam_casing", () -> new SteamCasingBlock(BlockBehaviour.Properties.copy(Blocks.OAK_PLANKS).noOcclusion()));
     public static final RegistryObject<Block> ARCANE_WOOD_FLUID_CASING = BLOCKS.register("arcane_wood_fluid_casing", () -> new FluidCasingBlock(BlockBehaviour.Properties.copy(Blocks.OAK_PLANKS).noOcclusion()));
     public static final RegistryObject<Block> WISESTONE_FRAME = BLOCKS.register("wisestone_frame", () -> new FrameBlock(BlockBehaviour.Properties.copy(Blocks.POLISHED_DEEPSLATE).noOcclusion()));
     public static final RegistryObject<Block> WISESTONE_GLASS_FRAME = BLOCKS.register("wisestone_glass_frame", () -> new GlassBlock(BlockBehaviour.Properties.copy(Blocks.POLISHED_DEEPSLATE).noOcclusion()));
     public static final RegistryObject<Block> WISESTONE_CASING = BLOCKS.register("wisestone_casing", () -> new CasingBlock(BlockBehaviour.Properties.copy(Blocks.POLISHED_DEEPSLATE).noOcclusion()));
     public static final RegistryObject<Block> WISESTONE_WISSEN_CASING = BLOCKS.register("wisestone_wissen_casing", () -> new WissenCasingBlock(BlockBehaviour.Properties.copy(Blocks.POLISHED_DEEPSLATE).noOcclusion()));
+    public static final RegistryObject<Block> WISESTONE_LIGHT_CASING = BLOCKS.register("wisestone_light_casing", () -> new WissenCasingBlock(BlockBehaviour.Properties.copy(Blocks.POLISHED_DEEPSLATE).noOcclusion()));
     public static final RegistryObject<Block> WISESTONE_FLUID_CASING = BLOCKS.register("wisestone_fluid_casing", () -> new FluidCasingBlock(BlockBehaviour.Properties.copy(Blocks.POLISHED_DEEPSLATE).noOcclusion()));
     public static final RegistryObject<Block> WISESTONE_STEAM_CASING = BLOCKS.register("wisestone_steam_casing", () -> new SteamCasingBlock(BlockBehaviour.Properties.copy(Blocks.POLISHED_DEEPSLATE).noOcclusion()));
 
@@ -456,7 +458,6 @@ public class WizardsReborn {
     public static final RegistryObject<Item> DEEPSLATE_ARCANE_GOLD_ORE_ITEM = ITEMS.register("deepslate_arcane_gold_ore", () -> new BlockItem(DEEPSLATE_ARCANE_GOLD_ORE.get(), new Item.Properties()));
     public static final RegistryObject<Item> NETHER_ARCANE_GOLD_ORE_ITEM = ITEMS.register("nether_arcane_gold_ore", () -> new BlockItem(NETHER_ARCANE_GOLD_ORE.get(), new Item.Properties()));
     public static final RegistryObject<Item> RAW_ARCANE_GOLD_BLOCK_ITEM = ITEMS.register("raw_arcane_gold_block", () -> new BlockItem(RAW_ARCANE_GOLD_BLOCK.get(), new Item.Properties()));
-    public static final RegistryObject<Item> CRUSHED_RAW_ARCANE_GOLD = ITEMS.register("crushed_raw_arcane_gold", () -> new Item(new Item.Properties()));
 
     public static final RegistryObject<Item> ARCANE_GOLD_SWORD = ITEMS.register("arcane_gold_sword", () -> new ArcaneSwordItem(CustomItemTier.ARCANE_GOLD, 3, -2.4f, new Item.Properties()));
     public static final RegistryObject<Item> ARCANE_GOLD_PICKAXE = ITEMS.register("arcane_gold_pickaxe", () -> new ArcanePickaxeItem(CustomItemTier.ARCANE_GOLD, 1, -2.8f, new Item.Properties()));
@@ -652,12 +653,14 @@ public class WizardsReborn {
     public static final RegistryObject<Item> ARCANE_WOOD_GLASS_FRAME_ITEM = ITEMS.register("arcane_wood_glass_frame", () -> new BlockItem(ARCANE_WOOD_GLASS_FRAME.get(), new Item.Properties()));
     public static final RegistryObject<Item> ARCANE_WOOD_CASING_ITEM = ITEMS.register("arcane_wood_casing", () -> new BlockItem(ARCANE_WOOD_CASING.get(), new Item.Properties()));
     public static final RegistryObject<Item> ARCANE_WOOD_WISSEN_CASING_ITEM = ITEMS.register("arcane_wood_wissen_casing", () -> new BlockItem(ARCANE_WOOD_WISSEN_CASING.get(), new Item.Properties()));
+    public static final RegistryObject<Item> ARCANE_WOOD_LIGHT_CASING_ITEM = ITEMS.register("arcane_wood_light_casing", () -> new BlockItem(ARCANE_WOOD_LIGHT_CASING.get(), new Item.Properties()));
     public static final RegistryObject<Item> ARCANE_WOOD_FLUID_CASING_ITEM = ITEMS.register("arcane_wood_fluid_casing", () -> new BlockItem(ARCANE_WOOD_FLUID_CASING.get(), new Item.Properties()));
     public static final RegistryObject<Item> ARCANE_WOOD_STEAM_CASING_ITEM = ITEMS.register("arcane_wood_steam_casing", () -> new BlockItem(ARCANE_WOOD_STEAM_CASING.get(), new Item.Properties()));
     public static final RegistryObject<Item> WISESTONE_FRAME_ITEM = ITEMS.register("wisestone_frame", () -> new BlockItem(WISESTONE_FRAME.get(), new Item.Properties()));
     public static final RegistryObject<Item> WISESTONE_GLASS_FRAME_ITEM = ITEMS.register("wisestone_glass_frame", () -> new BlockItem(WISESTONE_GLASS_FRAME.get(), new Item.Properties()));
     public static final RegistryObject<Item> WISESTONE_CASING_ITEM = ITEMS.register("wisestone_casing", () -> new BlockItem(WISESTONE_CASING.get(), new Item.Properties()));
     public static final RegistryObject<Item> WISESTONE_WISSEN_CASING_ITEM = ITEMS.register("wisestone_wissen_casing", () -> new BlockItem(WISESTONE_WISSEN_CASING.get(), new Item.Properties()));
+    public static final RegistryObject<Item> WISESTONE_LIGHT_CASING_ITEM = ITEMS.register("wisestone_light_casing", () -> new BlockItem(WISESTONE_LIGHT_CASING.get(), new Item.Properties()));
     public static final RegistryObject<Item> WISESTONE_FLUID_CASING_ITEM = ITEMS.register("wisestone_fluid_casing", () -> new BlockItem(WISESTONE_FLUID_CASING.get(), new Item.Properties()));
     public static final RegistryObject<Item> WISESTONE_STEAM_CASING_ITEM = ITEMS.register("wisestone_steam_casing", () -> new BlockItem(WISESTONE_STEAM_CASING.get(), new Item.Properties()));
 

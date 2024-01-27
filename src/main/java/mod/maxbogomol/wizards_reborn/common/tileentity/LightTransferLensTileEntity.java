@@ -2,6 +2,8 @@ package mod.maxbogomol.wizards_reborn.common.tileentity;
 
 import mod.maxbogomol.wizards_reborn.WizardsReborn;
 import mod.maxbogomol.wizards_reborn.api.light.ILightTileEntity;
+import mod.maxbogomol.wizards_reborn.api.light.LightRayHitResult;
+import mod.maxbogomol.wizards_reborn.api.light.LightUtils;
 import mod.maxbogomol.wizards_reborn.api.wissen.IWissenWandControlledTileEntity;
 import mod.maxbogomol.wizards_reborn.api.wissen.WissenUtils;
 import mod.maxbogomol.wizards_reborn.common.block.ArcaneLumosBlock;
@@ -12,14 +14,17 @@ import net.minecraft.core.Direction;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.Connection;
 import net.minecraft.network.protocol.game.ClientboundBlockEntityDataPacket;
+import net.minecraft.util.Mth;
 import net.minecraft.world.SimpleContainer;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.context.UseOnContext;
+import net.minecraft.world.level.ClipContext;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.AABB;
+import net.minecraft.world.phys.HitResult;
 import net.minecraft.world.phys.Vec3;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
@@ -55,14 +60,31 @@ public class LightTransferLensTileEntity extends ExposedTileSimpleInventory impl
         if (!level.isClientSide()) {
             boolean update = false;
 
+            removeLight(1);
+            update = true;
+
             if (isToBlock) {
-                if (level.isLoaded(new BlockPos(blockToX, blockToY, blockToZ))) {
-                    BlockEntity tileentity = level.getBlockEntity(new BlockPos(blockToX, blockToY, blockToZ));
+                BlockPos pos = new BlockPos(blockToX, blockToY, blockToZ);
+                if (level.isLoaded(pos)) {
+                    BlockEntity tileentity = level.getBlockEntity(pos);
                     if (tileentity instanceof ILightTileEntity lightTileEntity) {
                         if (canWork()) {
+                            Vec3 from = LightUtils.getLightLensPos(getBlockPos(), getLightLensPos());
+                            Vec3 to = LightUtils.getLightLensPos(pos, lightTileEntity.getLightLensPos());
 
+                            LightRayHitResult hitResult = LightUtils.getLightRayHitResult(level, getBlockPos(), from, to, 25);
+                            BlockEntity hitTile = hitResult.getTile();
+
+                            if (hitTile != null) {
+                                ILightTileEntity lightTileHit = (ILightTileEntity) hitTile;
+                                int max = getLight();
+                                if (max - 1 > lightTileHit.getLight() && lightTileHit.getLight() > 1) {
+                                    max = lightTileHit.getLight() - 1;
+                                }
+                                lightTileHit.setLight(max);
+                                PacketUtils.SUpdateTileEntityPacket(hitTile);
+                            }
                         }
-
                     } else {
                         isToBlock = false;
                         update = true;
@@ -161,7 +183,7 @@ public class LightTransferLensTileEntity extends ExposedTileSimpleInventory impl
     }
 
     public Color getColor() {
-        Color color = new Color(0.466f, 0.643f, 0.815f);
+        Color color = new Color(0.886f, 0.811f, 0.549f);
 
         if (!getItemHandler().getItem(0).isEmpty()) {
             if (getItemHandler().getItem(0).getItem() instanceof BlockItem) {
@@ -185,8 +207,11 @@ public class LightTransferLensTileEntity extends ExposedTileSimpleInventory impl
     public void wissenWandEffect() {
         if (WissenUtils.isCanRenderWissenWand()) {
             if (isToBlock) {
-                WissenUtils.connectEffect(level, getBlockPos(), new BlockPos(blockToX, blockToY, blockToZ), new Color(118, 184, 214));
-                WissenUtils.connectBlockEffect(level, new BlockPos(blockToX, blockToY, blockToZ), new Color(118, 184, 214));
+                BlockPos pos = new BlockPos(blockToX, blockToY, blockToZ);
+                if (level.getBlockEntity(pos) instanceof ILightTileEntity lightTile) {
+                    WissenUtils.connectEffect(level, LightUtils.getLightLensPos(getBlockPos(), getLightLensPos()), LightUtils.getLightLensPos(pos, lightTile.getLightLensPos()), new Color(118, 184, 214));
+                    WissenUtils.connectBlockEffect(level, pos, new Color(118, 184, 214));
+                }
             }
         }
     }

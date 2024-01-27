@@ -307,9 +307,7 @@ public class WissenWandItem extends Item {
                         }
 
                         int i = 0;
-                        if (tileentity instanceof IWissenTileEntity) {
-                            IWissenTileEntity wissenTile = (IWissenTileEntity) tileentity;
-
+                        if (tileentity instanceof IWissenTileEntity wissenTile) {
                             int x = mc.getWindow().getGuiScaledWidth() / 2 - (48 / 2);
                             int y = mc.getWindow().getGuiScaledHeight() / 2 + 32 - 10 - 11 + i;
 
@@ -320,9 +318,7 @@ public class WissenWandItem extends Item {
                             i = i + 11;
                         }
 
-                        if (tileentity instanceof ICooldownTileEntity) {
-                            ICooldownTileEntity cooldownTile = (ICooldownTileEntity) tileentity;
-
+                        if (tileentity instanceof ICooldownTileEntity cooldownTile) {
                             int x = mc.getWindow().getGuiScaledWidth() / 2 - (48 / 2);
                             int y = mc.getWindow().getGuiScaledHeight() / 2 + 32 - 10 - 11 + i;
 
@@ -333,9 +329,7 @@ public class WissenWandItem extends Item {
                             i = i + 11;
                         }
 
-                        if (tileentity instanceof IFluidTileEntity) {
-                            IFluidTileEntity fluidTile = (IFluidTileEntity) tileentity;
-
+                        if (tileentity instanceof IFluidTileEntity fluidTile) {
                             if (player.isShiftKeyDown()) {
                                 int x = mc.getWindow().getGuiScaledWidth() / 2;
                                 int y = mc.getWindow().getGuiScaledHeight() / 2 + 32 - 10 - 10 + i;
@@ -360,9 +354,7 @@ public class WissenWandItem extends Item {
                             i = i + 11;
                         }
 
-                        if (tileentity instanceof IHeatTileEntity) {
-                            IHeatTileEntity heatTile = (IHeatTileEntity) tileentity;
-
+                        if (tileentity instanceof IHeatTileEntity heatTile) {
                             int x = mc.getWindow().getGuiScaledWidth() / 2 - (48 / 2);
                             int y = mc.getWindow().getGuiScaledHeight() / 2 + 32 - 10 - 11 + i;
 
@@ -373,9 +365,7 @@ public class WissenWandItem extends Item {
                             i = i + 11;
                         }
 
-                        if (tileentity instanceof ISteamTileEntity) {
-                            ISteamTileEntity steamTile = (ISteamTileEntity) tileentity;
-
+                        if (tileentity instanceof ISteamTileEntity steamTile) {
                             int x = mc.getWindow().getGuiScaledWidth() / 2 - (48 / 2);
                             int y = mc.getWindow().getGuiScaledHeight() / 2 + 32 - 10 - 11 + i;
 

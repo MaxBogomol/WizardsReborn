@@ -2,6 +2,8 @@ package mod.maxbogomol.wizards_reborn.common.tileentity;
 
 import mod.maxbogomol.wizards_reborn.WizardsReborn;
 import mod.maxbogomol.wizards_reborn.api.light.ILightTileEntity;
+import mod.maxbogomol.wizards_reborn.api.light.LightRayHitResult;
+import mod.maxbogomol.wizards_reborn.api.light.LightUtils;
 import mod.maxbogomol.wizards_reborn.api.wissen.IWissenTileEntity;
 import mod.maxbogomol.wizards_reborn.api.wissen.IWissenWandControlledTileEntity;
 import mod.maxbogomol.wizards_reborn.api.wissen.WissenUtils;
@@ -57,12 +59,32 @@ public class LightEmitterTileEntity extends ExposedTileSimpleInventory implement
         if (!level.isClientSide()) {
             boolean update = false;
 
+            removeLight(2);
+            update = true;
+
             if (isToBlock) {
-                if (level.isLoaded(new BlockPos(blockToX, blockToY, blockToZ))) {
-                    BlockEntity tileentity = level.getBlockEntity(new BlockPos(blockToX, blockToY, blockToZ));
+                BlockPos pos = new BlockPos(blockToX, blockToY, blockToZ);
+                if (level.isLoaded(pos)) {
+                    BlockEntity tileentity = level.getBlockEntity(pos);
                     if (tileentity instanceof ILightTileEntity lightTileEntity) {
                         if (canWork()) {
+                            setLight(10);
+                            update = true;
+                            Vec3 from = LightUtils.getLightLensPos(getBlockPos(), getLightLensPos());
+                            Vec3 to = LightUtils.getLightLensPos(pos, lightTileEntity.getLightLensPos());
 
+                            LightRayHitResult hitResult = LightUtils.getLightRayHitResult(level, getBlockPos(), from, to, 25);
+                            BlockEntity hitTile = hitResult.getTile();
+
+                            if (hitTile != null) {
+                                ILightTileEntity lightTileHit = (ILightTileEntity) hitTile;
+                                int max = getLight();
+                                if (max - 1 > lightTileHit.getLight() && lightTileHit.getLight() > 1) {
+                                    max = lightTileHit.getLight() - 1;
+                                }
+                                lightTileHit.setLight(max);
+                                PacketUtils.SUpdateTileEntityPacket(hitTile);
+                            }
                         }
                     } else {
                         isToBlock = false;
@@ -214,6 +236,22 @@ public class LightEmitterTileEntity extends ExposedTileSimpleInventory implement
         return color;
     }
 
+    public Color getRayColor() {
+        Color color = new Color(0.886f, 0.811f, 0.549f);
+
+        if (!getItemHandler().getItem(0).isEmpty()) {
+            if (getItemHandler().getItem(0).getItem() instanceof BlockItem) {
+                BlockItem blockItem = (BlockItem) getItemHandler().getItem(0).getItem();
+                if (blockItem.getBlock() instanceof ArcaneLumosBlock) {
+                    ArcaneLumosBlock lumos = (ArcaneLumosBlock) blockItem.getBlock();
+                    color = ArcaneLumosBlock.getColor(lumos.color);
+                }
+            }
+        }
+
+        return color;
+    }
+
     public boolean canWork() {
         return !level.hasNeighborSignal(getBlockPos());
     }
@@ -231,7 +269,7 @@ public class LightEmitterTileEntity extends ExposedTileSimpleInventory implement
         }
         if (random.nextFloat() < chance / 2) {
             Particles.create(WizardsReborn.SPARKLE_PARTICLE)
-                    .addVelocity(((random.nextDouble() - 0.5D) / 100) * getStage(), ((random.nextDouble() - 0.5D) / 100) * getStage(), ((random.nextDouble() - 0.5D) / 100) * getStage())
+                    .addVelocity((to.x() - from.x()) / 40, (to.y() - from.y()) / 40, (to.z() - from.z()) / 40)
                     .setAlpha(0.35f, 0).setScale(0.05f, 0)
                     .setColor((float) color.getRed() / 255, (float) color.getGreen()/ 255, (float) color.getBlue() / 255)
                     .setLifetime(30)
@@ -246,10 +284,7 @@ public class LightEmitterTileEntity extends ExposedTileSimpleInventory implement
             if (isToBlock) {
                 BlockPos pos = new BlockPos(blockToX, blockToY, blockToZ);
                 if (level.getBlockEntity(pos) instanceof ILightTileEntity lightTile) {
-                    Vec3 fromVec = getLightLensPos();
-                    Vec3 toVec = lightTile.getLightLensPos();
-
-                    WissenUtils.connectEffect(level, new Vec3(getBlockPos().getX() + fromVec.x(), getBlockPos().getY() + fromVec.y(), getBlockPos().getZ() + fromVec.z()), new Vec3(blockToX + toVec.x(), blockToY + toVec.y(), blockToZ + toVec.z()), new Color(118, 184, 214));
+                    WissenUtils.connectEffect(level, LightUtils.getLightLensPos(getBlockPos(), getLightLensPos()), LightUtils.getLightLensPos(pos, lightTile.getLightLensPos()), new Color(118, 184, 214));
                     WissenUtils.connectBlockEffect(level, pos, new Color(118, 184, 214));
                 }
             }
