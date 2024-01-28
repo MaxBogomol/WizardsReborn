@@ -57,17 +57,12 @@ public class LightEmitterBlockTileEntityRenderer implements BlockEntityRenderer<
     }
 
     @Override
-    public boolean shouldRenderOffScreen(LightEmitterTileEntity blockEntity) {
+    public boolean shouldRenderOffScreen(LightEmitterTileEntity pBlockEntity) {
         return true;
     }
 
     @Override
-    public int getViewDistance() {
-        return 256;
-    }
-
-    @Override
-    public boolean shouldRender(LightEmitterTileEntity blockEntity, Vec3 cameraPos) {
-        return Vec3.atCenterOf(blockEntity.getBlockPos()).multiply(1.0D, 0.0D, 1.0D).closerThan(cameraPos.multiply(1.0D, 0.0D, 1.0D), (double)this.getViewDistance());
+    public boolean shouldRender(LightEmitterTileEntity pBlockEntity, Vec3 pCameraPos) {
+        return true;
     }
 }

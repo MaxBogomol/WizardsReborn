@@ -14,17 +14,14 @@ import net.minecraft.core.Direction;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.Connection;
 import net.minecraft.network.protocol.game.ClientboundBlockEntityDataPacket;
-import net.minecraft.util.Mth;
 import net.minecraft.world.SimpleContainer;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.context.UseOnContext;
-import net.minecraft.world.level.ClipContext;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.AABB;
-import net.minecraft.world.phys.HitResult;
 import net.minecraft.world.phys.Vec3;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
@@ -42,7 +39,6 @@ public class LightTransferLensTileEntity extends ExposedTileSimpleInventory impl
     public int blockToZ = 0;
     public boolean isToBlock = false;
 
-    public int wissen = 0;
     public int light = 0;
 
     public Random random = new Random();
@@ -60,8 +56,10 @@ public class LightTransferLensTileEntity extends ExposedTileSimpleInventory impl
         if (!level.isClientSide()) {
             boolean update = false;
 
-            removeLight(1);
-            update = true;
+            if (getLight() > 0) {
+                removeLight(1);
+                update = true;
+            }
 
             if (isToBlock) {
                 BlockPos pos = new BlockPos(blockToX, blockToY, blockToZ);
@@ -74,16 +72,7 @@ public class LightTransferLensTileEntity extends ExposedTileSimpleInventory impl
 
                             LightRayHitResult hitResult = LightUtils.getLightRayHitResult(level, getBlockPos(), from, to, 25);
                             BlockEntity hitTile = hitResult.getTile();
-
-                            if (hitTile != null) {
-                                ILightTileEntity lightTileHit = (ILightTileEntity) hitTile;
-                                int max = getLight();
-                                if (max - 1 > lightTileHit.getLight() && lightTileHit.getLight() > 1) {
-                                    max = lightTileHit.getLight() - 1;
-                                }
-                                lightTileHit.setLight(max);
-                                PacketUtils.SUpdateTileEntityPacket(hitTile);
-                            }
+                            LightUtils.transferLight(this, hitTile);
                         }
                     } else {
                         isToBlock = false;
@@ -161,7 +150,6 @@ public class LightTransferLensTileEntity extends ExposedTileSimpleInventory impl
         tag.putInt("blockToZ", blockToZ);
         tag.putBoolean("isToBlock", isToBlock);
 
-        tag.putInt("wissen", wissen);
         tag.putInt("light", light);
     }
 
@@ -173,7 +161,6 @@ public class LightTransferLensTileEntity extends ExposedTileSimpleInventory impl
         blockToZ = tag.getInt("blockToZ");
         isToBlock = tag.getBoolean("isToBlock");
 
-        wissen = tag.getInt("wissen");
         light = tag.getInt("light");
     }
 
@@ -270,6 +257,11 @@ public class LightTransferLensTileEntity extends ExposedTileSimpleInventory impl
     @Override
     public Vec3 getLightLensPos() {
         return new Vec3(0.5F, 0.5F, 0.5F);
+    }
+
+    @Override
+    public float getLightLensSize() {
+        return 0.0625f;
     }
 
     @Override

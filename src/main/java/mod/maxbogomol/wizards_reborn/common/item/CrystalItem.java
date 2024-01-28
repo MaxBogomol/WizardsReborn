@@ -5,7 +5,6 @@ import mod.maxbogomol.wizards_reborn.api.crystal.CrystalStat;
 import mod.maxbogomol.wizards_reborn.api.crystal.CrystalType;
 import mod.maxbogomol.wizards_reborn.api.crystal.CrystalUtils;
 import mod.maxbogomol.wizards_reborn.api.crystal.PolishingType;
-import mod.maxbogomol.wizards_reborn.api.wissen.WissenItemUtils;
 import mod.maxbogomol.wizards_reborn.client.particle.Particles;
 import mod.maxbogomol.wizards_reborn.common.block.CrystalBlock;
 import mod.maxbogomol.wizards_reborn.utils.ColorUtils;
@@ -108,7 +107,6 @@ public class CrystalItem extends BlockItem implements IParticleItem {
     protected boolean updateCustomBlockEntityTag(BlockPos pos, Level level, @Nullable Player player, ItemStack stack, BlockState state) {
         CompoundTag nbt = stack.getOrCreateTag();
         if (!nbt.contains("BlockEntityTag")) {
-            WissenItemUtils.existWissen(stack);
             CompoundTag tileNbt = new CompoundTag();
             NonNullList<ItemStack> ret = NonNullList.withSize(1, ItemStack.EMPTY);
             ret.set(0, stack);

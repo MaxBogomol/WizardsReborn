@@ -436,14 +436,14 @@ public class WizardsReborn {
     public static final RegistryObject<Block> ARCANE_WOOD_GLASS_FRAME = BLOCKS.register("arcane_wood_glass_frame", () -> new GlassBlock(BlockBehaviour.Properties.copy(Blocks.OAK_PLANKS).noOcclusion()));
     public static final RegistryObject<Block> ARCANE_WOOD_CASING = BLOCKS.register("arcane_wood_casing", () -> new CasingBlock(BlockBehaviour.Properties.copy(Blocks.OAK_PLANKS).noOcclusion()));
     public static final RegistryObject<Block> ARCANE_WOOD_WISSEN_CASING = BLOCKS.register("arcane_wood_wissen_casing", () -> new WissenCasingBlock(BlockBehaviour.Properties.copy(Blocks.OAK_PLANKS).noOcclusion()));
-    public static final RegistryObject<Block> ARCANE_WOOD_LIGHT_CASING = BLOCKS.register("arcane_wood_light_casing", () -> new WissenCasingBlock(BlockBehaviour.Properties.copy(Blocks.OAK_PLANKS).noOcclusion()));
+    public static final RegistryObject<Block> ARCANE_WOOD_LIGHT_CASING = BLOCKS.register("arcane_wood_light_casing", () -> new LightCasingBlock(BlockBehaviour.Properties.copy(Blocks.OAK_PLANKS).noOcclusion()));
     public static final RegistryObject<Block> ARCANE_WOOD_STEAM_CASING = BLOCKS.register("arcane_wood_steam_casing", () -> new SteamCasingBlock(BlockBehaviour.Properties.copy(Blocks.OAK_PLANKS).noOcclusion()));
     public static final RegistryObject<Block> ARCANE_WOOD_FLUID_CASING = BLOCKS.register("arcane_wood_fluid_casing", () -> new FluidCasingBlock(BlockBehaviour.Properties.copy(Blocks.OAK_PLANKS).noOcclusion()));
     public static final RegistryObject<Block> WISESTONE_FRAME = BLOCKS.register("wisestone_frame", () -> new FrameBlock(BlockBehaviour.Properties.copy(Blocks.POLISHED_DEEPSLATE).noOcclusion()));
     public static final RegistryObject<Block> WISESTONE_GLASS_FRAME = BLOCKS.register("wisestone_glass_frame", () -> new GlassBlock(BlockBehaviour.Properties.copy(Blocks.POLISHED_DEEPSLATE).noOcclusion()));
     public static final RegistryObject<Block> WISESTONE_CASING = BLOCKS.register("wisestone_casing", () -> new CasingBlock(BlockBehaviour.Properties.copy(Blocks.POLISHED_DEEPSLATE).noOcclusion()));
     public static final RegistryObject<Block> WISESTONE_WISSEN_CASING = BLOCKS.register("wisestone_wissen_casing", () -> new WissenCasingBlock(BlockBehaviour.Properties.copy(Blocks.POLISHED_DEEPSLATE).noOcclusion()));
-    public static final RegistryObject<Block> WISESTONE_LIGHT_CASING = BLOCKS.register("wisestone_light_casing", () -> new WissenCasingBlock(BlockBehaviour.Properties.copy(Blocks.POLISHED_DEEPSLATE).noOcclusion()));
+    public static final RegistryObject<Block> WISESTONE_LIGHT_CASING = BLOCKS.register("wisestone_light_casing", () -> new LightCasingBlock(BlockBehaviour.Properties.copy(Blocks.POLISHED_DEEPSLATE).noOcclusion()));
     public static final RegistryObject<Block> WISESTONE_FLUID_CASING = BLOCKS.register("wisestone_fluid_casing", () -> new FluidCasingBlock(BlockBehaviour.Properties.copy(Blocks.POLISHED_DEEPSLATE).noOcclusion()));
     public static final RegistryObject<Block> WISESTONE_STEAM_CASING = BLOCKS.register("wisestone_steam_casing", () -> new SteamCasingBlock(BlockBehaviour.Properties.copy(Blocks.POLISHED_DEEPSLATE).noOcclusion()));
 
@@ -767,6 +767,7 @@ public class WizardsReborn {
     public static RegistryObject<BlockEntityType<ItemSorterTileEntity>> ITEM_SORTER_TILE_ENTITY = TILE_ENTITIES.register("item_sorter", () -> BlockEntityType.Builder.of(ItemSorterTileEntity::new, ITEM_SORTER.get()).build(null));
 
     public static RegistryObject<BlockEntityType<WissenCasingTileEntity>> WISSEN_CASING_TILE_ENTITY = TILE_ENTITIES.register("wissen_casing", () -> BlockEntityType.Builder.of(WissenCasingTileEntity::new, ARCANE_WOOD_WISSEN_CASING.get(), WISESTONE_WISSEN_CASING.get()).build(null));
+    public static RegistryObject<BlockEntityType<LightCasingTileEntity>> LIGHT_CASING_TILE_ENTITY = TILE_ENTITIES.register("light_casing", () -> BlockEntityType.Builder.of(LightCasingTileEntity::new, ARCANE_WOOD_LIGHT_CASING.get(), WISESTONE_LIGHT_CASING.get()).build(null));
     public static RegistryObject<BlockEntityType<FluidCasingTileEntity>> FLUID_CASING_TILE_ENTITY = TILE_ENTITIES.register("fluid_casing", () -> BlockEntityType.Builder.of(FluidCasingTileEntity::new, ARCANE_WOOD_FLUID_CASING.get(), WISESTONE_FLUID_CASING.get()).build(null));
     public static RegistryObject<BlockEntityType<SteamCasingTileEntity>> STEAM_CASING_TILE_ENTITY = TILE_ENTITIES.register("steam_casing", () -> BlockEntityType.Builder.of(SteamCasingTileEntity::new, ARCANE_WOOD_STEAM_CASING.get(), WISESTONE_STEAM_CASING.get()).build(null));
 

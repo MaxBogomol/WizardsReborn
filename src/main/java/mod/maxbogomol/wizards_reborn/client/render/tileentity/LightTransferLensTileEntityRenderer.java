@@ -54,4 +54,14 @@ public class LightTransferLensTileEntityRenderer implements BlockEntityRenderer<
             }
         }
     }
+
+    @Override
+    public boolean shouldRenderOffScreen(LightTransferLensTileEntity pBlockEntity) {
+        return true;
+    }
+
+    @Override
+    public boolean shouldRender(LightTransferLensTileEntity pBlockEntity, Vec3 pCameraPos) {
+        return true;
+    }
 }

@@ -17,4 +17,5 @@ public interface ILightTileEntity {
     void removeLight(int light);
 
     Vec3 getLightLensPos();
+    float getLightLensSize();
 }

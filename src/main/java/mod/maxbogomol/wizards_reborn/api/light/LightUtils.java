@@ -4,6 +4,7 @@ import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.math.Axis;
 import mod.maxbogomol.wizards_reborn.client.event.ClientTickHandler;
 import mod.maxbogomol.wizards_reborn.client.render.WorldRenderHandler;
+import mod.maxbogomol.wizards_reborn.utils.PacketUtils;
 import mod.maxbogomol.wizards_reborn.utils.RenderUtils;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.core.BlockPos;
@@ -54,7 +55,7 @@ public class LightUtils {
                 if (tile instanceof ILightTileEntity lightTileHit) {
                     float hitDistance = (float) Math.sqrt(Math.pow(posHit.x() - tile.getBlockPos().getX() - lightTileHit.getLightLensPos().x(), 2) + Math.pow(posHit.y() - tile.getBlockPos().getY() - lightTileHit.getLightLensPos().y(), 2) + Math.pow(posHit.z() - tile.getBlockPos().getZ() - lightTileHit.getLightLensPos().z(), 2));
 
-                    if (hitDistance <= 0.0625f) {
+                    if (hitDistance <= lightTileHit.getLightLensSize()) {
                         end = posHit;
                         distance = (float) Math.sqrt(Math.pow(from.x() - end.x, 2) + Math.pow(from.y() - end.y, 2) + Math.pow(from.z() - end.z, 2));
                         hitTile = tile;
@@ -62,6 +63,12 @@ public class LightUtils {
                     }
                 }
             }
+        }
+
+        if (distance > rayDistance) {
+            distance = rayDistance;
+            end = newTo;
+            hitTile = null;
         }
 
         return new LightRayHitResult(end, distance, hitTile);
@@ -95,5 +102,23 @@ public class LightUtils {
     public static void renderLightRay(Level level, BlockPos startPos, Vec3 from, Vec3 to, float rayDistance, Color color, float partialTicks, PoseStack ms) {
         LightRayHitResult hitResult = getLightRayHitResult(level, startPos, from, to, rayDistance);
         renderLightRay(from, hitResult.getPosHit(), hitResult.getDistance(), rayDistance, color, partialTicks, ms);
+    }
+
+    public static void transferLight(BlockEntity from, BlockEntity to) {
+        if (from != null && to != null) {
+            if (from instanceof ILightTileEntity fromLight) {
+                if (to instanceof ILightTileEntity toLight) {
+                    int max = fromLight.getLight();
+                    if (max - 1 > toLight.getLight() && toLight.getLight() > 1) {
+                        max = toLight.getLight() - 1;
+                    }
+                    if (max < toLight.getLight()) {
+                        max = toLight.getLight();
+                    }
+                    toLight.setLight(max);
+                    PacketUtils.SUpdateTileEntityPacket(to);
+                }
+            }
+        }
     }
 }

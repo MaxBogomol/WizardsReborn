@@ -59,8 +59,10 @@ public class LightEmitterTileEntity extends ExposedTileSimpleInventory implement
         if (!level.isClientSide()) {
             boolean update = false;
 
-            removeLight(2);
-            update = true;
+            if (getLight() > 0) {
+                removeLight(1);
+                update = true;
+            }
 
             if (isToBlock) {
                 BlockPos pos = new BlockPos(blockToX, blockToY, blockToZ);
@@ -75,16 +77,7 @@ public class LightEmitterTileEntity extends ExposedTileSimpleInventory implement
 
                             LightRayHitResult hitResult = LightUtils.getLightRayHitResult(level, getBlockPos(), from, to, 25);
                             BlockEntity hitTile = hitResult.getTile();
-
-                            if (hitTile != null) {
-                                ILightTileEntity lightTileHit = (ILightTileEntity) hitTile;
-                                int max = getLight();
-                                if (max - 1 > lightTileHit.getLight() && lightTileHit.getLight() > 1) {
-                                    max = lightTileHit.getLight() - 1;
-                                }
-                                lightTileHit.setLight(max);
-                                PacketUtils.SUpdateTileEntityPacket(hitTile);
-                            }
+                            LightUtils.transferLight(this, hitTile);
                         }
                     } else {
                         isToBlock = false;
@@ -396,6 +389,11 @@ public class LightEmitterTileEntity extends ExposedTileSimpleInventory implement
     @Override
     public Vec3 getLightLensPos() {
         return new Vec3(0.5F, 0.8125F, 0.5F);
+    }
+
+    @Override
+    public float getLightLensSize() {
+        return 0.0625f;
     }
 
     @Override

@@ -329,6 +329,19 @@ public class WissenWandItem extends Item {
                             i = i + 11;
                         }
 
+                        if (tileentity instanceof ILightTileEntity lightTile) {
+                            int x = mc.getWindow().getGuiScaledWidth() / 2 - (48 / 2);
+                            int y = mc.getWindow().getGuiScaledHeight() / 2 + 32 - 10 - 11 + i;
+
+                            gui.blit(new ResourceLocation(WizardsReborn.MOD_ID + ":textures/gui/light_frame.png"), x, y, 0, 0, 48, 10, 64, 64);
+                            int width = 32;
+                            if (lightTile.getLight() <= 0) {
+                                width = 0;
+                            }
+                            gui.blit(new ResourceLocation(WizardsReborn.MOD_ID + ":textures/gui/light_frame.png"), x + 8, y + 1, 0, 10, width, 8, 64, 64);
+                            i = i + 11;
+                        }
+
                         if (tileentity instanceof IFluidTileEntity fluidTile) {
                             if (player.isShiftKeyDown()) {
                                 int x = mc.getWindow().getGuiScaledWidth() / 2;

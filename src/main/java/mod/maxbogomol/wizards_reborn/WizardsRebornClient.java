@@ -179,6 +179,8 @@ public class WizardsRebornClient {
             BlockEntityRenderers.register(WizardsReborn.WISSEN_ACTIVATOR_TILE_ENTITY.get(), (trd) -> new SensorTileEntityRenderer());
             BlockEntityRenderers.register(WizardsReborn.ITEM_SORTER_TILE_ENTITY.get(), (trd) -> new SensorTileEntityRenderer());
 
+            BlockEntityRenderers.register(WizardsReborn.LIGHT_CASING_TILE_ENTITY.get(), (trd) -> new LightCasingTileEntityRenderer());
+
             BlockEntityRenderers.register(WizardsReborn.CRYSTAL_TILE_ENTITY.get(), (trd) -> new CrystalTileEntityRenderer());
 
             EntityRenderers.register(WizardsReborn.BOAT.get(), m -> new ArcaneWoodBoatModel(m, false));
