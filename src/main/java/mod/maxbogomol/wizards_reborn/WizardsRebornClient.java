@@ -70,6 +70,7 @@ public class WizardsRebornClient {
     public static ModelResourceLocation REDSTONE_SENSOR_PIECE_ON_MODEl = new ModelResourceLocation(WizardsReborn.MOD_ID, "redstone_sensor_piece_on", "");
     public static ModelResourceLocation WISSEN_SENSOR_PIECE_MODEl = new ModelResourceLocation(WizardsReborn.MOD_ID, "wissen_sensor_piece", "");
     public static ModelResourceLocation COOLDOWN_SENSOR_PIECE_MODEl = new ModelResourceLocation(WizardsReborn.MOD_ID, "cooldown_sensor_piece", "");
+    public static ModelResourceLocation LIGHT_SENSOR_PIECE_MODEl = new ModelResourceLocation(WizardsReborn.MOD_ID, "light_sensor_piece", "");
     public static ModelResourceLocation HEAT_SENSOR_PIECE_MODEl = new ModelResourceLocation(WizardsReborn.MOD_ID, "heat_sensor_piece", "");
     public static ModelResourceLocation FLUID_SENSOR_PIECE_MODEl = new ModelResourceLocation(WizardsReborn.MOD_ID, "fluid_sensor_piece", "");
     public static ModelResourceLocation FLUID_SENSOR_PIECE_ON_MODEl = new ModelResourceLocation(WizardsReborn.MOD_ID, "fluid_sensor_piece_on", "");
@@ -212,8 +213,9 @@ public class WizardsRebornClient {
             event.register(REDSTONE_SENSOR_PIECE_MODEl);
             event.register(REDSTONE_SENSOR_PIECE_ON_MODEl);
             event.register(WISSEN_SENSOR_PIECE_MODEl);
-            event.register(HEAT_SENSOR_PIECE_MODEl);
             event.register(COOLDOWN_SENSOR_PIECE_MODEl);
+            event.register(LIGHT_SENSOR_PIECE_MODEl);
+            event.register(HEAT_SENSOR_PIECE_MODEl);
             event.register(FLUID_SENSOR_PIECE_MODEl);
             event.register(FLUID_SENSOR_PIECE_ON_MODEl);
             event.register(STEAM_SENSOR_PIECE_MODEl);

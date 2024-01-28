@@ -37,7 +37,7 @@ public class WissenSensorBlock extends SensorBaseBlock {
 
         BlockEntity tile = pLevel.getBlockEntity(blockpos);
         if (tile instanceof IWissenTileEntity wissenTile) {
-            i = Mth.floor(((float) wissenTile.getWissen() / wissenTile.getMaxWissen()) * 14.0F);;
+            i = Mth.floor(((float) wissenTile.getWissen() / wissenTile.getMaxWissen()) * 14.0F);
         }
 
         return i;

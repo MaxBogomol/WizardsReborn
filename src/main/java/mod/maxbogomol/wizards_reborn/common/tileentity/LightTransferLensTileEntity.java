@@ -230,7 +230,7 @@ public class LightTransferLensTileEntity extends ExposedTileSimpleInventory impl
 
     @Override
     public boolean canConnectReceiveLight() {
-        return false;
+        return true;
     }
 
     @Override

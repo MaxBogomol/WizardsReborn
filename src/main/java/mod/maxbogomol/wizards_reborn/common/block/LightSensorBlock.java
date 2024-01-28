@@ -1,20 +1,19 @@
 package mod.maxbogomol.wizards_reborn.common.block;
 
 import mod.maxbogomol.wizards_reborn.WizardsRebornClient;
-import mod.maxbogomol.wizards_reborn.api.alchemy.IHeatTileEntity;
+import mod.maxbogomol.wizards_reborn.api.light.ILightTileEntity;
 import net.minecraft.client.resources.model.ModelResourceLocation;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
-import net.minecraft.util.Mth;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 
-public class HeatSensorBlock extends SensorBaseBlock {
+public class LightSensorBlock extends SensorBaseBlock {
 
-    public HeatSensorBlock(Properties properties) {
+    public LightSensorBlock(Properties properties) {
         super(properties);
     }
 
@@ -36,8 +35,8 @@ public class HeatSensorBlock extends SensorBaseBlock {
         }
 
         BlockEntity tile = pLevel.getBlockEntity(blockpos);
-        if (tile instanceof IHeatTileEntity heatTile) {
-            i = Mth.floor(((float) heatTile.getHeat() / heatTile.getMaxHeat()) * 14.0F);
+        if (tile instanceof ILightTileEntity lightTile) {
+            i = 14;
         }
 
         return i;
@@ -46,6 +45,6 @@ public class HeatSensorBlock extends SensorBaseBlock {
     @Override
     @OnlyIn(Dist.CLIENT)
     public ModelResourceLocation getModel(BlockState state) {
-        return WizardsRebornClient.HEAT_SENSOR_PIECE_MODEl;
+        return WizardsRebornClient.LIGHT_SENSOR_PIECE_MODEl;
     }
 }

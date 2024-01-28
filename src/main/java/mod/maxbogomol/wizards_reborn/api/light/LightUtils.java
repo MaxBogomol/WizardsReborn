@@ -42,6 +42,15 @@ public class LightUtils {
         float distance = (float) Math.sqrt(Math.pow(from.x() - end.x, 2) + Math.pow(from.y() - end.y, 2) + Math.pow(from.z() - end.z, 2));
         BlockEntity hitTile = null;
 
+        BlockPos blockPosHit = new BlockPos(Mth.floor(end.x()), Mth.floor(end.y()), Mth.floor(end.z()));
+        if (startPos.getX() != blockPosHit.getX() || startPos.getY() != blockPosHit.getY() || startPos.getZ() != blockPosHit.getZ()) {
+            BlockEntity tile = level.getBlockEntity(blockPosHit);
+            if (tile instanceof ILightTileEntity lightTileHit && lightTileHit.getLightLensSize() == 0) {
+                distance = (float) Math.sqrt(Math.pow(from.x() - end.x, 2) + Math.pow(from.y() - end.y, 2) + Math.pow(from.z() - end.z, 2));
+                hitTile = tile;
+            }
+        }
+
         for (int i = 0; i < distance * 16; i++) {
             float v = (i / (distance * 16)) * distance;
             X = Math.sin(pitch) * Math.cos(yaw) * v;
@@ -49,7 +58,7 @@ public class LightUtils {
             Z = Math.sin(pitch) * Math.sin(yaw) * v;
 
             Vec3 posHit = new Vec3(-X, -Y, -Z).add(from);
-            BlockPos blockPosHit = new BlockPos(Mth.floor(posHit.x()), Mth.floor(posHit.y()), Mth.floor(posHit.z()));
+            blockPosHit = new BlockPos(Mth.floor(posHit.x()), Mth.floor(posHit.y()), Mth.floor(posHit.z()));
             if (startPos.getX() != blockPosHit.getX() || startPos.getY() != blockPosHit.getY() || startPos.getZ() != blockPosHit.getZ()) {
                 BlockEntity tile = level.getBlockEntity(blockPosHit);
                 if (tile instanceof ILightTileEntity lightTileHit) {
@@ -109,9 +118,6 @@ public class LightUtils {
             if (from instanceof ILightTileEntity fromLight) {
                 if (to instanceof ILightTileEntity toLight) {
                     int max = fromLight.getLight();
-                    if (max - 1 > toLight.getLight() && toLight.getLight() > 1) {
-                        max = toLight.getLight() - 1;
-                    }
                     if (max < toLight.getLight()) {
                         max = toLight.getLight();
                     }

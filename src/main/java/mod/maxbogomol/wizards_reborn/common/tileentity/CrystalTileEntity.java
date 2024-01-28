@@ -147,6 +147,6 @@ public class CrystalTileEntity extends TileSimpleInventory implements TickableBl
 
     @Override
     public float getLightLensSize() {
-        return 0.0625f;
+        return 0f;
     }
 }
