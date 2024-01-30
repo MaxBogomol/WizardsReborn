@@ -33,10 +33,18 @@
     "wizards_reborn:redstone_sensor",
     "wizards_reborn:wissen_sensor",
     "wizards_reborn:cooldown_sensor",
+    "wizards_reborn:light_sensor",
     "wizards_reborn:heat_sensor",
     "wizards_reborn:fluid_sensor",
     "wizards_reborn:steam_sensor",
     "wizards_reborn:wissen_activator",
-    "wizards_reborn:item_sorter"
+    "wizards_reborn:item_sorter",
+    "wizards_reborn:arcane_wood_frame",
+    "wizards_reborn:arcane_wood_glass_frame",
+    "wizards_reborn:arcane_wood_casing",
+    "wizards_reborn:arcane_wood_wissen_casing",
+    "wizards_reborn:arcane_wood_light_casing",
+    "wizards_reborn:arcane_wood_fluid_casing",
+    "wizards_reborn:arcane_wood_steam_casing"
   ]
 }

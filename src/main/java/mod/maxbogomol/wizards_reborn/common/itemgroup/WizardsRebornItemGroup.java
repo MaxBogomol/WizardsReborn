@@ -244,6 +244,9 @@ public class WizardsRebornItemGroup {
             event.accept(WizardsReborn.WISESTONE_FLUID_CASING_ITEM);
             event.accept(WizardsReborn.WISESTONE_STEAM_CASING_ITEM);
 
+            event.accept(WizardsReborn.CREATIVE_FLUID_STORAGE_ITEM);
+            event.accept(WizardsReborn.CREATIVE_STEAM_STORAGE_ITEM);
+
             event.accept(WizardsReborn.ALCHEMY_GLASS_ITEM);
             event.accept(WizardsReborn.ALCHEMY_VIAL);
             event.accept(WizardsReborn.ALCHEMY_FLASK);
@@ -294,6 +297,7 @@ public class WizardsRebornItemGroup {
 
             event.accept(WizardsReborn.MUSIC_DISC_ARCANUM);
             event.accept(WizardsReborn.MUSIC_DISC_MOR);
+            event.accept(WizardsReborn.MUSIC_DISC_REBORN);
 
             for (AlchemyPotion potion : AlchemyPotions.getAlchemyPotions()) {
                 if (potion != RegisterAlchemyPotions.EMPTY && potion != RegisterAlchemyPotions.COMBINED) {

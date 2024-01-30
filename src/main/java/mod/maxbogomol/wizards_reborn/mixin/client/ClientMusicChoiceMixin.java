@@ -1,10 +1,10 @@
 package mod.maxbogomol.wizards_reborn.mixin.client;
 
-import mod.maxbogomol.wizards_reborn.WizardsReborn;
 import mod.maxbogomol.wizards_reborn.WizardsRebornClient;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Gui;
 import net.minecraft.client.gui.screens.Screen;
+import net.minecraft.client.gui.screens.TitleScreen;
 import net.minecraft.client.gui.screens.WinScreen;
 import net.minecraft.client.player.LocalPlayer;
 import net.minecraft.core.Holder;
@@ -43,6 +43,10 @@ public class ClientMusicChoiceMixin {
     private void biomemusic$musicChoice(final CallbackInfoReturnable<Music> cir) {
         if (screen instanceof WinScreen) {
             return;
+        }
+
+        if (screen instanceof TitleScreen) {
+            cir.setReturnValue(WizardsRebornClient.REBORN_MUSIC);
         }
 
         List<Music> possibleTracks = new ArrayList<>();

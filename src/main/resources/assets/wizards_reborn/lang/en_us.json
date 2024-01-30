@@ -176,14 +176,33 @@
   "block.wizards_reborn.alchemy_boiler": "Alchemy Boiler",
   "block.wizards_reborn.arcane_censer": "Arcane Censer",
 
+  "block.wizards_reborn.light_emitter": "Light Emitter",
+  "block.wizards_reborn.light_transfer_lens": "Light Transfer-Lens",
+
   "block.wizards_reborn.redstone_sensor": "Redstone Sensor",
   "block.wizards_reborn.wissen_sensor": "Wissen Sensor",
   "block.wizards_reborn.cooldown_sensor": "Cooldown Sensor",
+  "block.wizards_reborn.light_sensor": "Light Sensor",
   "block.wizards_reborn.heat_sensor": "Heat Sensor",
   "block.wizards_reborn.fluid_sensor": "Fluid Sensor",
   "block.wizards_reborn.steam_sensor": "Steam Sensor",
   "block.wizards_reborn.wissen_activator": "Wissen Activator",
   "block.wizards_reborn.item_sorter": "Item Sorter",
+
+  "block.wizards_reborn.arcane_wood_frame": "Arcane Wood Frame",
+  "block.wizards_reborn.arcane_wood_glass_frame": "Arcane Wood Glass Frame",
+  "block.wizards_reborn.arcane_wood_casing": "Arcane Wood Casing",
+  "block.wizards_reborn.arcane_wood_wissen_casing": "Arcane Wood Wissen Casing",
+  "block.wizards_reborn.arcane_wood_light_casing": "Arcane Wood Light Casing",
+  "block.wizards_reborn.arcane_wood_fluid_casing": "Arcane Wood Fluid Casing",
+  "block.wizards_reborn.arcane_wood_steam_casing": "Arcane Wood Steam Casing",
+  "block.wizards_reborn.wisestone_frame": "Wisestone Frame",
+  "block.wizards_reborn.wisestone_glass_frame": "Wisestone Glass Frame",
+  "block.wizards_reborn.wisestone_casing": "Wisestone Casing",
+  "block.wizards_reborn.wisestone_wissen_casing": "Wisestone Wissen Casing",
+  "block.wizards_reborn.wisestone_light_casing": "Wisestone Light Casing",
+  "block.wizards_reborn.wisestone_fluid_casing": "Wisestone Fluid Casing",
+  "block.wizards_reborn.wisestone_steam_casing": "Wisestone Steam Casing",
 
   "block.wizards_reborn.alchemy_glass": "Alchemy Glass",
   "item.wizards_reborn.alchemy_vial": "Alchemy Vial",
@@ -237,6 +256,7 @@
 
   "item.wizards_reborn.music_disc_arcanum": "Arcane Music Disc",
   "item.wizards_reborn.music_disc_mor": "Arcane Music Disc",
+  "item.wizards_reborn.music_disc_reborn": "Arcane Music Disc",
 
   "item.wizards_reborn.arcane_wood_smoking_pipe": "Arcane Wood Smoking Pipe",
   "item.wizards_reborn.arcane_wood_cane": "Arcane Wood Cane",
@@ -298,6 +318,7 @@
 
   "item.wizards_reborn.music_disc_arcanum.desc": "Onjerlay - Arcanum Swinging",
   "item.wizards_reborn.music_disc_mor.desc": "Onjerlay - Mor Marsh",
+  "item.wizards_reborn.music_disc_reborn.desc": "Onjerlay - Reborn",
 
   "block.minecraft.banner.wizards_reborn.violence.black": "Black Symbol \"Violence\"",
   "block.minecraft.banner.wizards_reborn.violence.blue": "Blue Symbol \"Violence\"",

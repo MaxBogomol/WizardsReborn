@@ -50,5 +50,13 @@
         "stream": true
       }
     ]
+  },
+  "reborn": {
+    "sounds": [
+      {
+        "name": "wizards_reborn:reborn",
+        "stream": true
+      }
+    ]
   }
 }

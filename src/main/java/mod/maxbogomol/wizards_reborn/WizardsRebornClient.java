@@ -98,6 +98,8 @@ public class WizardsRebornClient {
     public static ArrayList<PipeModel> wisestoneFluidCasing = new ArrayList<PipeModel>();
     public static ArrayList<PipeModel> arcaneWoodSteamCasing = new ArrayList<PipeModel>();
     public static ArrayList<PipeModel> wisestoneSteamCasing = new ArrayList<PipeModel>();
+    public static ArrayList<PipeModel> creativeFluidStorage = new ArrayList<PipeModel>();
+    public static ArrayList<PipeModel> creativeSteamStorage = new ArrayList<PipeModel>();
 
     public static final ModelResourceLocation FLUID_CENTER = new ModelResourceLocation(new ResourceLocation(WizardsReborn.MOD_ID, "fluid_pipe_center"), "");
     public static final ModelResourceLocation FLUID_EXTRACTOR = new ModelResourceLocation(new ResourceLocation(WizardsReborn.MOD_ID, "fluid_extractor_center"), "");
@@ -114,6 +116,7 @@ public class WizardsRebornClient {
     public static final ModelResourceLocation STEAM_END_2 = new ModelResourceLocation(new ResourceLocation(WizardsReborn.MOD_ID, "steam_pipe_end_opposite"), "");
 
     public static final Music MOR_MUSIC = new Music(WizardsReborn.MUSIC_DISC_MOR_SOUND.getHolder().get(), 6000, 12000, true);
+    public static final Music REBORN_MUSIC = new Music(WizardsReborn.MUSIC_DISC_REBORN_SOUND.getHolder().get(), 6000, 12000, true);
 
     @Mod.EventBusSubscriber(bus=Mod.EventBusSubscriber.Bus.MOD, value = Dist.CLIENT)
     public static class RegistryEvents {
@@ -283,6 +286,8 @@ public class WizardsRebornClient {
             addPipeModel(map, WizardsReborn.MOD_ID, "arcane_wood_steam_casing", "", "fluid_pipe", wisestoneFluidCasing, true);
             addPipeModel(map, WizardsReborn.MOD_ID, "wisestone_fluid_casing", "", "steam_pipe", arcaneWoodSteamCasing, true);
             addPipeModel(map, WizardsReborn.MOD_ID, "wisestone_steam_casing", "", "steam_pipe", wisestoneSteamCasing, true);
+            addPipeModel(map, WizardsReborn.MOD_ID, "creative_fluid_storage", "", "fluid_pipe", creativeFluidStorage, true);
+            addPipeModel(map, WizardsReborn.MOD_ID, "creative_steam_storage", "", "steam_pipe", creativeSteamStorage, true);
         }
 
         @SubscribeEvent
@@ -298,6 +303,8 @@ public class WizardsRebornClient {
             bakePipeModel(wisestoneFluidCasing, event.getModelManager());
             bakePipeModel(arcaneWoodSteamCasing, event.getModelManager());
             bakePipeModel(wisestoneSteamCasing, event.getModelManager());
+            bakePipeModel(creativeFluidStorage, event.getModelManager());
+            bakePipeModel(creativeSteamStorage, event.getModelManager());
         }
 
         @SubscribeEvent

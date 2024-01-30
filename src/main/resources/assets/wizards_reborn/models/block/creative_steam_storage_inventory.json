@@ -2,9 +2,9 @@
 	"credit": "Made with Blockbench",
 	"parent": "block/block",
 	"textures": {
-		"particle": "wizards_reborn:block/polished_wisestone",
 		"pipe": "wizards_reborn:block/steam_pipe",
-		"extractor": "wizards_reborn:block/steam_extractor"
+		"extractor": "wizards_reborn:block/creative_steam_storage",
+		"particle": "wizards_reborn:block/polished_wisestone"
 	},
 	"elements": [
 		{
@@ -63,15 +63,15 @@
 		},
 		{
 			"name": "Cube",
-			"from": [5, 5, 5],
-			"to": [11, 11, 11],
+			"from": [4, 4, 4],
+			"to": [12, 12, 12],
 			"faces": {
-				"north": {"uv": [0, 0, 6, 6], "texture": "#extractor"},
-				"east": {"uv": [0, 0, 6, 6], "texture": "#extractor"},
-				"south": {"uv": [0, 0, 6, 6], "texture": "#extractor"},
-				"west": {"uv": [0, 0, 6, 6], "texture": "#extractor"},
-				"up": {"uv": [0, 0, 6, 6], "texture": "#extractor"},
-				"down": {"uv": [0, 0, 6, 6], "texture": "#extractor"}
+				"north": {"uv": [0, 0, 8, 8], "texture": "#extractor"},
+				"east": {"uv": [0, 0, 8, 8], "texture": "#extractor"},
+				"south": {"uv": [0, 0, 8, 8], "texture": "#extractor"},
+				"west": {"uv": [0, 0, 8, 8], "texture": "#extractor"},
+				"up": {"uv": [0, 0, 8, 8], "texture": "#extractor"},
+				"down": {"uv": [0, 0, 8, 8], "texture": "#extractor"}
 			}
 		}
 	]
