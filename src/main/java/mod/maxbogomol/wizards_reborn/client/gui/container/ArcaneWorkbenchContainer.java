@@ -35,26 +35,26 @@ public class ArcaneWorkbenchContainer extends AbstractContainerMenu {
         this.tileEntity = world.getBlockEntity(pos);
         playerEntity = player;
         this.playerInventory = new InvWrapper(playerInventory);
-        this.layoutPlayerInventorySlots(8, 86 + 33);
+        this.layoutPlayerInventorySlots(8, 138);
 
         if (tileEntity != null) {
             tileEntity.getCapability(ForgeCapabilities.ITEM_HANDLER).ifPresent(h -> {
-                addSlot(new SlotItemHandler(h, 0, 30, 30));
-                addSlot(new SlotItemHandler(h, 1, 48, 30));
-                addSlot(new SlotItemHandler(h, 2, 66, 30));
-                addSlot(new SlotItemHandler(h, 3, 30, 48));
-                addSlot(new SlotItemHandler(h, 4, 48, 48));
-                addSlot(new SlotItemHandler(h, 5, 66, 48));
-                addSlot(new SlotItemHandler(h, 6, 30, 66));
-                addSlot(new SlotItemHandler(h, 7, 48, 66));
-                addSlot(new SlotItemHandler(h, 8, 66, 66));
+                addSlot(new SlotItemHandler(h, 0, 30, 40));
+                addSlot(new SlotItemHandler(h, 1, 48, 40));
+                addSlot(new SlotItemHandler(h, 2, 66, 40));
+                addSlot(new SlotItemHandler(h, 3, 30, 58));
+                addSlot(new SlotItemHandler(h, 4, 48, 58));
+                addSlot(new SlotItemHandler(h, 5, 66, 58));
+                addSlot(new SlotItemHandler(h, 6, 30, 76));
+                addSlot(new SlotItemHandler(h, 7, 48, 76));
+                addSlot(new SlotItemHandler(h, 8, 66, 76));
 
-                addSlot(new SlotItemHandler(h, 9, 48, 8));
-                addSlot(new SlotItemHandler(h, 10, 88, 48));
-                addSlot(new SlotItemHandler(h, 11, 48, 88));
-                addSlot(new SlotItemHandler(h, 12, 8, 48));
+                addSlot(new SlotItemHandler(h, 9, 48, 18));
+                addSlot(new SlotItemHandler(h, 10, 88, 58));
+                addSlot(new SlotItemHandler(h, 11, 48, 98));
+                addSlot(new SlotItemHandler(h, 12, 8, 58));
 
-                addSlot(new ResultSlot(h, 13, 146, 48));
+                addSlot(new ResultSlot(h, 13, 146, 58));
             });
         }
     }

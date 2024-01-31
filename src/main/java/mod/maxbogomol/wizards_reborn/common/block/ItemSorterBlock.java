@@ -73,7 +73,7 @@ public class ItemSorterBlock extends SensorBaseBlock {
         return new MenuProvider() {
             @Override
             public Component getDisplayName() {
-                return Component.empty();
+                return Component.translatable("gui.wizards_reborn.item_sorter.title");
             }
 
             @Nullable

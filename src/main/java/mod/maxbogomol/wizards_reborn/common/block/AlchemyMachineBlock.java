@@ -160,7 +160,7 @@ public class AlchemyMachineBlock extends HorizontalDirectionalBlock implements E
         return new MenuProvider() {
             @Override
             public Component getDisplayName() {
-                return Component.empty();
+                return Component.translatable("gui.wizards_reborn.alchemy_machine.title");
             }
 
             @Nullable

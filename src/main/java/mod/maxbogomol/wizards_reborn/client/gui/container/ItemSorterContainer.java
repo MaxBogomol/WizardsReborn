@@ -35,14 +35,14 @@ public class ItemSorterContainer extends AbstractContainerMenu {
         this.tileEntity = world.getBlockEntity(pos);
         playerEntity = player;
         this.playerInventory = new InvWrapper(playerInventory);
-        this.layoutPlayerInventorySlots(8, 75);
+        this.layoutPlayerInventorySlots(8, 94);
 
         if (tileEntity != null) {
             tileEntity.getCapability(ForgeCapabilities.ITEM_HANDLER).ifPresent(h -> {
                 int c = 0;
                 for (int i = 0; i < 3; i++) {
                     for (int ii = 0; ii < 9; ii++) {
-                        addSlot(new SlotItemHandler(h, c, 8  + (ii * 18), 8 + (i * 18)));
+                        addSlot(new SlotItemHandler(h, c, 8  + (ii * 18), 18 + (i * 18)));
                         c++;
                     }
                 }

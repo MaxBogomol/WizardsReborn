@@ -120,7 +120,7 @@ public class JewelerTableBlock extends HorizontalDirectionalBlock implements Ent
         return new MenuProvider() {
             @Override
             public Component getDisplayName() {
-                return Component.empty();
+                return Component.translatable("gui.wizards_reborn.jeweler_table.title");
             }
 
             @Nullable

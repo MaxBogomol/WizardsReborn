@@ -36,14 +36,14 @@ public class AlchemyFurnaceContainer extends AbstractContainerMenu {
         this.tileEntity = world.getBlockEntity(pos);
         playerEntity = player;
         this.playerInventory = new InvWrapper(playerInventory);
-        this.layoutPlayerInventorySlots(8, 86 + 33);
+        this.layoutPlayerInventorySlots(8, 94);
 
         if (tileEntity != null) {
             tileEntity.getCapability(ForgeCapabilities.ITEM_HANDLER).ifPresent(h -> {
-                addSlot(new SlotItemHandler(h, 0, 74, 30));
-                addSlot(new AlchemyFurnaceFuelSlot(this, h, 1, 74, 66));
+                addSlot(new SlotItemHandler(h, 0, 74, 18));
+                addSlot(new AlchemyFurnaceFuelSlot(this, h, 1, 74, 54));
 
-                addSlot(new AlchemyFurnaceResultSlot(playerEntity, this, h, 2, 132, 48));
+                addSlot(new AlchemyFurnaceResultSlot(playerEntity, this, h, 2, 132, 36));
             });
         }
     }

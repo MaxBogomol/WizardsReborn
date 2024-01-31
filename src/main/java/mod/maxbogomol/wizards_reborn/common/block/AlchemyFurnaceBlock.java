@@ -7,7 +7,6 @@ import mod.maxbogomol.wizards_reborn.client.particle.Particles;
 import mod.maxbogomol.wizards_reborn.common.item.equipment.WissenWandItem;
 import mod.maxbogomol.wizards_reborn.common.tileentity.AlchemyFurnaceTileEntity;
 import mod.maxbogomol.wizards_reborn.common.tileentity.TickableBlockEntity;
-import mod.maxbogomol.wizards_reborn.common.tileentity.TileSimpleInventory;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.particles.ParticleTypes;
@@ -109,7 +108,7 @@ public class AlchemyFurnaceBlock extends HorizontalDirectionalBlock implements E
         return new MenuProvider() {
             @Override
             public Component getDisplayName() {
-                return Component.empty();
+                return Component.translatable("gui.wizards_reborn.alchemy_furnace.title");
             }
 
             @Nullable

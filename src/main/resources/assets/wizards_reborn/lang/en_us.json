@@ -437,6 +437,11 @@
   "effect.wizards_reborn.wissen_aura": "Wissen Aura",
 
   "gui.wizards_reborn.arcanemicon.title": "Arcanemicon",
+  "gui.wizards_reborn.arcane_workbench.title": "Arcane Workbench",
+  "gui.wizards_reborn.jeweler_table.title": "Jeweler Table",
+  "gui.wizards_reborn.alchemy_furnace.title": "Alchemy Furnace",
+  "gui.wizards_reborn.alchemy_machine.title": "Alchemy Machine",
+  "gui.wizards_reborn.item_sorter.title": "Item Sorter",
 
   "gui.wizards_reborn.category.arcanum_dust_transmutation": "Arcanum Dust Transmutation",
   "gui.wizards_reborn.category.mortar": "Mortar",

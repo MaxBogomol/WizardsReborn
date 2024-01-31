@@ -3,6 +3,7 @@ package mod.maxbogomol.wizards_reborn.client.gui.screen;
 import com.mojang.blaze3d.systems.RenderSystem;
 import mod.maxbogomol.wizards_reborn.WizardsReborn;
 import mod.maxbogomol.wizards_reborn.client.gui.container.ItemSorterContainer;
+import mod.maxbogomol.wizards_reborn.utils.ColorUtils;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
 import net.minecraft.network.chat.Component;
@@ -14,8 +15,8 @@ public class ItemSorterScreen extends AbstractContainerScreen<ItemSorterContaine
 
     public ItemSorterScreen(ItemSorterContainer screenContainer, Inventory inv, Component titleIn) {
         super(screenContainer, inv, titleIn);
-        this.imageHeight = 157;
-        this.inventoryLabelY = this.inventoryLabelY + 46;
+        this.imageHeight = 176;
+        this.inventoryLabelY = this.inventoryLabelY + 10;
     }
 
     @Override
@@ -26,14 +27,14 @@ public class ItemSorterScreen extends AbstractContainerScreen<ItemSorterContaine
     }
 
     @Override
-    protected void renderLabels(GuiGraphics pGuiGraphics, int pMouseX, int pMouseY) {
-
+    protected void renderLabels(GuiGraphics guiGraphics, int mouseX, int mouseY) {
+        guiGraphics.drawString(this.font, this.title, this.titleLabelX, this.titleLabelY, ColorUtils.packColor(255, 237, 201, 146), false);
+        guiGraphics.drawString(this.font, this.playerInventoryTitle, this.inventoryLabelX, this.inventoryLabelY, 4210752, false);
     }
 
     @Override
     protected void renderBg(GuiGraphics gui, float partialTicks, int x, int y) {
         RenderSystem.setShaderColor(1f, 1f, 1f, 1f);
-        this.minecraft.getTextureManager().bindForSetup(GUI);
         int i = this.leftPos;
         int j = this.topPos;
         gui.blit(GUI, i, j, 0, 0, this.imageWidth, this.imageHeight);

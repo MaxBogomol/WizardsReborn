@@ -124,7 +124,7 @@ public class ArcaneWorkbenchBlock extends HorizontalDirectionalBlock implements 
         return new MenuProvider() {
             @Override
             public Component getDisplayName() {
-                return Component.empty();
+                return Component.translatable("gui.wizards_reborn.arcane_workbench.title");
             }
 
             @Nullable

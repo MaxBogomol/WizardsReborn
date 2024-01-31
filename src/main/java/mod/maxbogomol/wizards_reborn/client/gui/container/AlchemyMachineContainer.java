@@ -35,18 +35,18 @@ public class AlchemyMachineContainer extends AbstractContainerMenu {
         this.tileEntity = world.getBlockEntity(pos);
         playerEntity = player;
         this.playerInventory = new InvWrapper(playerInventory);
-        this.layoutPlayerInventorySlots(8, 86 + 33);
+        this.layoutPlayerInventorySlots(8, 123);
 
         if (tileEntity != null) {
             tileEntity.getCapability(ForgeCapabilities.ITEM_HANDLER).ifPresent(h -> {
-                addSlot(new SlotItemHandler(h, 0, 29, 12));
-                addSlot(new SlotItemHandler(h, 1, 47, 12));
-                addSlot(new SlotItemHandler(h, 2, 65, 12));
-                addSlot(new SlotItemHandler(h, 3, 29, 30));
-                addSlot(new SlotItemHandler(h, 4, 47, 30));
-                addSlot(new SlotItemHandler(h, 5, 65, 30));
+                addSlot(new SlotItemHandler(h, 0, 29, 18));
+                addSlot(new SlotItemHandler(h, 1, 47, 18));
+                addSlot(new SlotItemHandler(h, 2, 65, 18));
+                addSlot(new SlotItemHandler(h, 3, 29, 36));
+                addSlot(new SlotItemHandler(h, 4, 47, 36));
+                addSlot(new SlotItemHandler(h, 5, 65, 36));
 
-                addSlot(new ResultSlot(h, 6, 132, 48));
+                addSlot(new ResultSlot(h, 6, 132, 54));
             });
         }
     }

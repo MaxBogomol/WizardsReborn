@@ -35,14 +35,14 @@ public class JewelerTableContainer extends AbstractContainerMenu {
         this.tileEntity = world.getBlockEntity(pos);
         playerEntity = player;
         this.playerInventory = new InvWrapper(playerInventory);
-        this.layoutPlayerInventorySlots(8, 86 + 33);
+        this.layoutPlayerInventorySlots(8, 94);
 
         if (tileEntity != null) {
             tileEntity.getCapability(ForgeCapabilities.ITEM_HANDLER).ifPresent(h -> {
-                addSlot(new SlotItemHandler(h, 0, 24, 48));
-                addSlot(new SlotItemHandler(h, 1, 74, 48));
+                addSlot(new SlotItemHandler(h, 0, 24, 36));
+                addSlot(new SlotItemHandler(h, 1, 74, 36));
 
-                addSlot(new ResultSlot(h, 2, 132, 48));
+                addSlot(new ResultSlot(h, 2, 132, 36));
             });
         }
     }
