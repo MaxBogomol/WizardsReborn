@@ -450,8 +450,8 @@ public class WizardsReborn {
     public static final RegistryObject<Block> WISESTONE_FLUID_CASING = BLOCKS.register("wisestone_fluid_casing", () -> new FluidCasingBlock(BlockBehaviour.Properties.copy(Blocks.POLISHED_DEEPSLATE).noOcclusion()));
     public static final RegistryObject<Block> WISESTONE_STEAM_CASING = BLOCKS.register("wisestone_steam_casing", () -> new SteamCasingBlock(BlockBehaviour.Properties.copy(Blocks.POLISHED_DEEPSLATE).noOcclusion()));
 
-    public static final RegistryObject<Block> CREATIVE_FLUID_STORAGE = BLOCKS.register("creative_fluid_storage", () -> new CreativeFluidStorage(BlockBehaviour.Properties.copy(Blocks.POLISHED_DEEPSLATE).noOcclusion()));
-    public static final RegistryObject<Block> CREATIVE_STEAM_STORAGE = BLOCKS.register("creative_steam_storage", () -> new SteamExtractorBlock(BlockBehaviour.Properties.copy(Blocks.POLISHED_DEEPSLATE).noOcclusion()));
+    public static final RegistryObject<Block> CREATIVE_FLUID_STORAGE = BLOCKS.register("creative_fluid_storage", () -> new CreativeFluidStorageBlock(BlockBehaviour.Properties.copy(Blocks.POLISHED_DEEPSLATE)));
+    public static final RegistryObject<Block> CREATIVE_STEAM_STORAGE = BLOCKS.register("creative_steam_storage", () -> new CreativeSteamStorageBlock(BlockBehaviour.Properties.copy(Blocks.POLISHED_DEEPSLATE)));
 
     public static final RegistryObject<Block> ALCHEMY_GLASS = BLOCKS.register("alchemy_glass", () -> new TintedGlassBlock(BlockBehaviour.Properties.copy(Blocks.TINTED_GLASS).noOcclusion()));
 
@@ -781,6 +781,9 @@ public class WizardsReborn {
     public static RegistryObject<BlockEntityType<LightCasingTileEntity>> LIGHT_CASING_TILE_ENTITY = TILE_ENTITIES.register("light_casing", () -> BlockEntityType.Builder.of(LightCasingTileEntity::new, ARCANE_WOOD_LIGHT_CASING.get(), WISESTONE_LIGHT_CASING.get()).build(null));
     public static RegistryObject<BlockEntityType<FluidCasingTileEntity>> FLUID_CASING_TILE_ENTITY = TILE_ENTITIES.register("fluid_casing", () -> BlockEntityType.Builder.of(FluidCasingTileEntity::new, ARCANE_WOOD_FLUID_CASING.get(), WISESTONE_FLUID_CASING.get()).build(null));
     public static RegistryObject<BlockEntityType<SteamCasingTileEntity>> STEAM_CASING_TILE_ENTITY = TILE_ENTITIES.register("steam_casing", () -> BlockEntityType.Builder.of(SteamCasingTileEntity::new, ARCANE_WOOD_STEAM_CASING.get(), WISESTONE_STEAM_CASING.get()).build(null));
+
+    public static RegistryObject<BlockEntityType<CreativeFluidStorageTileEntity>> CREATIVE_FLUID_STORAGE_TILE_ENTITY = TILE_ENTITIES.register("creative_fluid_storage", () -> BlockEntityType.Builder.of(CreativeFluidStorageTileEntity::new, CREATIVE_FLUID_STORAGE.get()).build(null));
+    public static RegistryObject<BlockEntityType<CreativeSteamStorageTileEntity>> CREATIVE_STEAM_STORAGE_TILE_ENTITY = TILE_ENTITIES.register("creative_steam_storage", () -> BlockEntityType.Builder.of(CreativeSteamStorageTileEntity::new, CREATIVE_STEAM_STORAGE.get()).build(null));
 
     //ENTITIES
     public static final RegistryObject<EntityType<CustomBoatEntity>> BOAT = ENTITIES.register("boat", () -> EntityType.Builder.<CustomBoatEntity>of(CustomBoatEntity::new, MobCategory.MISC).sized(1.375f, 0.5625f).build(new ResourceLocation(MOD_ID, "arcane_wood_boat").toString()));

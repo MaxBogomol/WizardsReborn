@@ -10,6 +10,7 @@ import mod.maxbogomol.wizards_reborn.common.tileentity.FluidSensorTileEntity;
 import net.minecraft.client.resources.model.ModelResourceLocation;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.util.Mth;
@@ -24,6 +25,7 @@ import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
+import net.minecraftforge.common.SoundActions;
 import net.minecraftforge.common.capabilities.ForgeCapabilities;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.capability.IFluidHandler;
@@ -98,7 +100,8 @@ public class FluidSensorBlock extends SensorBaseBlock {
                     IFluidHandler cap = stack.getCapability(ForgeCapabilities.FLUID_HANDLER_ITEM).orElse(null);
                     if (cap != null) {
                         sensorTile.getTank().setFluid(new FluidStack(cap.getFluidInTank(0).getFluid(), 1));
-                        pLevel.playSound(pPlayer, pPos, SoundEvents.COMPARATOR_CLICK, SoundSource.BLOCKS, 0.3F, 0.7f);
+                        SoundEvent soundevent = cap.getFluidInTank(0).getFluid().getFluidType().getSound(cap.getFluidInTank(0), SoundActions.BUCKET_FILL);
+                        pLevel.playSound(pPlayer, pPos, soundevent, SoundSource.BLOCKS, 1F, 1f);
 
                         return InteractionResult.SUCCESS;
                     }
@@ -108,7 +111,7 @@ public class FluidSensorBlock extends SensorBaseBlock {
                             if (potion instanceof FluidAlchemyPotion fluidPotion) {
                                 FluidStack fluid = new FluidStack(fluidPotion.fluid, 1);
                                 sensorTile.getTank().setFluid(fluid);
-                                pLevel.playSound(pPlayer, pPos, SoundEvents.COMPARATOR_CLICK, SoundSource.BLOCKS, 0.3F, 0.7f);
+                                pLevel.playSound(pPlayer, pPos, SoundEvents.BOTTLE_EMPTY, SoundSource.BLOCKS, 1F, 1f);
 
                                 return InteractionResult.SUCCESS;
                             }
