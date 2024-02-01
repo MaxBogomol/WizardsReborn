@@ -3,18 +3,12 @@ package mod.maxbogomol.wizards_reborn.common.block;
 import mod.maxbogomol.wizards_reborn.WizardsReborn;
 import mod.maxbogomol.wizards_reborn.api.alchemy.IPipeConnection;
 import mod.maxbogomol.wizards_reborn.api.alchemy.PipeConnection;
-import mod.maxbogomol.wizards_reborn.common.item.equipment.AlchemyBottleItem;
-import mod.maxbogomol.wizards_reborn.common.item.equipment.AlchemyPotionItem;
-import mod.maxbogomol.wizards_reborn.common.tileentity.OrbitalFluidRetainerTileEntity;
+import mod.maxbogomol.wizards_reborn.common.tileentity.CreativeSteamStorageTileEntity;
 import mod.maxbogomol.wizards_reborn.common.tileentity.PipeBaseTileEntity;
 import mod.maxbogomol.wizards_reborn.common.tileentity.TickableBlockEntity;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.util.Mth;
-import net.minecraft.world.InteractionHand;
-import net.minecraft.world.InteractionResult;
-import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
@@ -31,27 +25,23 @@ import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.material.FluidState;
 import net.minecraft.world.level.material.Fluids;
-import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
-import net.minecraftforge.common.capabilities.ForgeCapabilities;
-import net.minecraftforge.fluids.FluidUtil;
-import net.minecraftforge.fluids.capability.IFluidHandler;
 import org.jetbrains.annotations.NotNull;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
-public class CreativeFluidStorage extends Block implements EntityBlock, SimpleWaterloggedBlock, IPipeConnection {
+public class CreativeSteamStorageBlock extends Block implements EntityBlock, SimpleWaterloggedBlock, IPipeConnection {
 
-    public static final VoxelShape SHAPE = Block.box(3,3,3,13,13,13);
+    public static final VoxelShape SHAPE = Block.box(4,4,4,12,12,12);
     public static final VoxelShape[] SHAPES = new VoxelShape[729];
 
     static {
-        PipeBaseBlock.makeShapes(SHAPE, SHAPES);
+        TinyPipeBaseBlock.makeShapes(SHAPE, SHAPES);
     }
 
-    public CreativeFluidStorage(Properties properties) {
+    public CreativeSteamStorageBlock(Properties properties) {
         super(properties);
         registerDefaultState(defaultBlockState().setValue(BlockStateProperties.WATERLOGGED, false));
     }
@@ -64,7 +54,7 @@ public class CreativeFluidStorage extends Block implements EntityBlock, SimpleWa
     @Nonnull
     @Override
     public VoxelShape getShape(BlockState state, BlockGetter world, BlockPos pos, CollisionContext ctx) {
-        return PipeBaseBlock.getShapeWithConnection(state, world, pos, ctx, SHAPES);
+        return TinyPipeBaseBlock.getShapeWithConnection(state, world, pos, ctx, SHAPES);
     }
 
     @Override
@@ -80,32 +70,6 @@ public class CreativeFluidStorage extends Block implements EntityBlock, SimpleWa
     }
 
     @Override
-    public InteractionResult use(BlockState state, Level world, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hit) {
-        if (world.getBlockEntity(pos) instanceof OrbitalFluidRetainerTileEntity retainer) {
-            ItemStack stack = player.getItemInHand(hand);
-            if (!stack.isEmpty()) {
-                IFluidHandler cap = retainer.getCapability(ForgeCapabilities.FLUID_HANDLER).orElse(null);
-                if (cap != null) {
-                    boolean didFill = FluidUtil.interactWithFluidHandler(player, hand, cap);
-                    if (AlchemyPotionItem.interactWithFluidHandler(player, hand, cap)) {
-                        didFill = true;
-                    } else if (AlchemyBottleItem.interactWithFluidHandler(player, hand, cap)) {
-                        didFill = true;
-                    }
-
-                    if (didFill) {
-                        return InteractionResult.SUCCESS;
-                    }
-                }
-                if (stack.getCapability(ForgeCapabilities.FLUID_HANDLER_ITEM).isPresent()) {
-                    return InteractionResult.CONSUME_PARTIAL;
-                }
-            }
-        }
-        return InteractionResult.PASS;
-    }
-
-    @Override
     public FluidState getFluidState(BlockState state) {
         return state.getValue(BlockStateProperties.WATERLOGGED) ? Fluids.WATER.getSource(false) : Fluids.EMPTY.defaultFluidState();
     }
@@ -118,7 +82,7 @@ public class CreativeFluidStorage extends Block implements EntityBlock, SimpleWa
 
         if (pLevel.getBlockEntity(pCurrentPos) instanceof PipeBaseTileEntity pipe) {
             BlockEntity facingBE = pLevel.getBlockEntity(pCurrentPos);
-            if (pNeighborState.is(WizardsReborn.FLUID_PIPE_CONNECTION_BLOCK_TAG)) {
+            if (pNeighborState.is(WizardsReborn.STEAM_PIPE_CONNECTION_BLOCK_TAG)) {
                 if (facingBE instanceof PipeBaseTileEntity && ((PipeBaseTileEntity) facingBE).getConnection(pDirection.getOpposite()) == PipeConnection.DISABLED) {
                     pipe.setConnection(pDirection, PipeConnection.NONE);
                 } else {
@@ -142,7 +106,7 @@ public class CreativeFluidStorage extends Block implements EntityBlock, SimpleWa
     @Nullable
     @Override
     public BlockEntity newBlockEntity(BlockPos pPos, BlockState pState) {
-        return new OrbitalFluidRetainerTileEntity(pPos, pState);
+        return new CreativeSteamStorageTileEntity(pPos, pState);
     }
 
     @Nullable
@@ -163,7 +127,7 @@ public class CreativeFluidStorage extends Block implements EntityBlock, SimpleWa
 
     @Override
     public int getAnalogOutputSignal(BlockState blockState, Level level, BlockPos pos) {
-        OrbitalFluidRetainerTileEntity tile = (OrbitalFluidRetainerTileEntity) level.getBlockEntity(pos);
-        return Mth.floor(((float) tile.getTank().getFluidAmount() / tile.getMaxCapacity()) * 14.0F);
+        CreativeSteamStorageTileEntity tile = (CreativeSteamStorageTileEntity) level.getBlockEntity(pos);
+        return Mth.floor(((float) tile.getSteam() / tile.getMaxSteam()) * 14.0F);
     }
 }
