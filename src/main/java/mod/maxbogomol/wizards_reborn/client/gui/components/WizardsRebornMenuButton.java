@@ -1,6 +1,8 @@
 package mod.maxbogomol.wizards_reborn.client.gui.components;
 
+import com.electronwill.nightconfig.core.UnmodifiableConfig;
 import mod.maxbogomol.wizards_reborn.WizardsReborn;
+import mod.maxbogomol.wizards_reborn.client.config.ClientConfig;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.components.AbstractWidget;
@@ -17,6 +19,7 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.client.event.ScreenEvent;
+import net.minecraftforge.common.ForgeConfigSpec;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod.EventBusSubscriber;
 import org.apache.commons.lang3.mutable.MutableObject;
@@ -26,7 +29,6 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class WizardsRebornMenuButton extends Button {
-    public static boolean on = false;
     public static ItemStack icon;
 
     public WizardsRebornMenuButton(int x, int y) {
@@ -42,7 +44,9 @@ public class WizardsRebornMenuButton extends Button {
 
     public static void click(Button b) {
         if (Minecraft.getInstance().screen instanceof TitleScreen titleScreen) {
-            if (!on) {
+            float spin = titleScreen.panorama.spin;
+            float bob = titleScreen.panorama.bob;
+            if (!ClientConfig.PANORAMA_TEST.get()) {
                 ResourceLocation base = new ResourceLocation(WizardsReborn.MOD_ID, "textures/gui/title/background/panorama");
                 TitleScreen.CUBE_MAP = new CubeMap(base);
                 titleScreen.panorama = new PanoramaRenderer(TitleScreen.CUBE_MAP);
@@ -53,8 +57,16 @@ public class WizardsRebornMenuButton extends Button {
                 titleScreen.panorama = new PanoramaRenderer(TitleScreen.CUBE_MAP);
                 titleScreen.logoRenderer = new LogoRenderer(false);
             }
-            on = !on;
+            titleScreen.panorama.spin = spin;
+            titleScreen.panorama.bob = bob;
+            setPanorama(!ClientConfig.PANORAMA_TEST.get());
         }
+    }
+
+    public static void setPanorama(boolean panorama) {
+        UnmodifiableConfig values = ClientConfig.SPEC.getValues();
+        ForgeConfigSpec.ConfigValue<Object> configValue = values.get(ClientConfig.PANORAMA_TEST.getPath());
+        configValue.set(panorama);
     }
 
     @Override

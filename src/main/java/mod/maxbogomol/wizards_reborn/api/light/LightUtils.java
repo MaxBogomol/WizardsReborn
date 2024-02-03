@@ -118,11 +118,13 @@ public class LightUtils {
             if (from instanceof ILightTileEntity fromLight) {
                 if (to instanceof ILightTileEntity toLight) {
                     int max = fromLight.getLight();
-                    if (max < toLight.getLight()) {
-                        max = toLight.getLight();
+                    if (max > 1) {
+                        if (max < toLight.getLight()) {
+                            max = toLight.getLight();
+                        }
+                        toLight.setLight(max);
+                        PacketUtils.SUpdateTileEntityPacket(to);
                     }
-                    toLight.setLight(max);
-                    PacketUtils.SUpdateTileEntityPacket(to);
                 }
             }
         }

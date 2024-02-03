@@ -424,6 +424,7 @@ public class WizardsReborn {
 
     public static final RegistryObject<Block> LIGHT_EMITTER = BLOCKS.register("light_emitter", () -> new LightEmitterBlock(BlockBehaviour.Properties.copy(Blocks.POLISHED_DEEPSLATE)));
     public static final RegistryObject<Block> LIGHT_TRANSFER_LENS = BLOCKS.register("light_transfer_lens", () -> new LightTransferLensBlock(BlockBehaviour.Properties.copy(Blocks.POLISHED_DEEPSLATE)));
+    public static final RegistryObject<Block> RUNIC_PEDESTAL = BLOCKS.register("runic_pedestal", () -> new RunicPedestalBlock(BlockBehaviour.Properties.copy(Blocks.POLISHED_DEEPSLATE)));
 
     public static final RegistryObject<Block> REDSTONE_SENSOR = BLOCKS.register("redstone_sensor", () -> new RedstoneSensorBlock(BlockBehaviour.Properties.copy(Blocks.OAK_PLANKS)));
     public static final RegistryObject<Block> WISSEN_SENSOR = BLOCKS.register("wissen_sensor", () -> new WissenSensorBlock(BlockBehaviour.Properties.copy(Blocks.OAK_PLANKS)));
@@ -645,6 +646,7 @@ public class WizardsReborn {
 
     public static final RegistryObject<Item> LIGHT_EMITTER_ITEM = ITEMS.register("light_emitter", () -> new BlockItem(LIGHT_EMITTER.get(), new Item.Properties()));
     public static final RegistryObject<Item> LIGHT_TRANSFER_LENS_ITEM = ITEMS.register("light_transfer_lens", () -> new BlockItem(LIGHT_TRANSFER_LENS.get(), new Item.Properties()));
+    public static final RegistryObject<Item> RUNIC_PEDESTAL_ITEM = ITEMS.register("runic_pedestal", () -> new BlockItem(RUNIC_PEDESTAL.get(), new Item.Properties()));
 
     public static final RegistryObject<Item> REDSTONE_SENSOR_ITEM = ITEMS.register("redstone_sensor", () -> new BlockItem(REDSTONE_SENSOR.get(), new Item.Properties()));
     public static final RegistryObject<Item> WISSEN_SENSOR_ITEM = ITEMS.register("wissen_sensor", () -> new BlockItem(WISSEN_SENSOR.get(), new Item.Properties()));

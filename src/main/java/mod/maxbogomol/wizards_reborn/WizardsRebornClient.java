@@ -86,6 +86,7 @@ public class WizardsRebornClient {
     public static ShaderInstance getSpriteParticleShader() { return SPRITE_PARTICLE_SHADER; }
 
     public static boolean optifinePresent = false;
+    public static boolean firstScreen = true;
 
     public static PipeModel fluidPipe;
     public static PipeModel steamPipe;

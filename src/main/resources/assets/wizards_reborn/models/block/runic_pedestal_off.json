@@ -1,0 +1,11 @@
+{
+	"credit": "Made with Blockbench",
+	"parent": "wizards_reborn:block/runic_pedestal",
+	"textures": {
+		"0": "wizards_reborn:block/runic_pedestal_top",
+		"1": "wizards_reborn:block/runic_pedestal_mid_1",
+		"2": "wizards_reborn:block/runic_pedestal_bottom",
+		"3": "wizards_reborn:block/runic_pedestal_mid_2_off",
+		"particle": "wizards_reborn:block/polished_wisestone"
+	}
+}

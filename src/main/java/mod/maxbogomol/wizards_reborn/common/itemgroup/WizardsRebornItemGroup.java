@@ -218,6 +218,7 @@ public class WizardsRebornItemGroup {
 
             event.accept(WizardsReborn.LIGHT_EMITTER_ITEM);
             event.accept(WizardsReborn.LIGHT_TRANSFER_LENS_ITEM);
+            event.accept(WizardsReborn.RUNIC_PEDESTAL_ITEM);
 
             event.accept(WizardsReborn.REDSTONE_SENSOR_ITEM);
             event.accept(WizardsReborn.WISSEN_SENSOR_ITEM);

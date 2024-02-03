@@ -5,9 +5,11 @@ import org.apache.commons.lang3.tuple.Pair;
 
 public class ClientConfig {
     public static ForgeConfigSpec.ConfigValue<Integer> WISSEN_TRANSLATOR_PARTICLE_PER_BLOCK;
-    public static ForgeConfigSpec.ConfigValue<Boolean> BETTER_LAYERING, LARGE_ITEM_MODEL, SPELLS_ANIMATIONS, SPELLS_ITEM_ANIMATIONS, SPELLS_FIRST_PERSON_ITEM_ANIMATIONS;
+    public static ForgeConfigSpec.ConfigValue<Boolean> BETTER_LAYERING, LARGE_ITEM_MODEL, SPELLS_ANIMATIONS, SPELLS_ITEM_ANIMATIONS, SPELLS_FIRST_PERSON_ITEM_ANIMATIONS, PANORAMA_TEST;
 
     public ClientConfig(ForgeConfigSpec.Builder builder) {
+        PANORAMA_TEST = builder.comment("123")
+                .define("panoramaTest", false);
         builder.comment("Graphics settings").push("graphics");
         BETTER_LAYERING = builder.comment("Enable better particle/effect layering.")
                 .comment("Fixes particles and effects rendering behind clouds and weather.")
@@ -23,7 +25,7 @@ public class ClientConfig {
                 .define("spellsFirstPersonItemAnimation", true);
 
         builder.comment("Wissen mechanism's").push("wissenMechanisms");
-        WISSEN_TRANSLATOR_PARTICLE_PER_BLOCK = builder.comment("Maximum Y value for arcanum ore veins")
+        WISSEN_TRANSLATOR_PARTICLE_PER_BLOCK = builder.comment("123")
                 .defineInRange("particlePerBlock", 4, 1, 10);
         builder.pop();
     }
