@@ -4,6 +4,9 @@ import mod.maxbogomol.wizards_reborn.WizardsReborn;
 import mod.maxbogomol.wizards_reborn.api.alchemy.AlchemyPotion;
 import mod.maxbogomol.wizards_reborn.api.alchemy.AlchemyPotionUtils;
 import mod.maxbogomol.wizards_reborn.api.alchemy.AlchemyPotions;
+import mod.maxbogomol.wizards_reborn.api.crystalritual.CrystalRitual;
+import mod.maxbogomol.wizards_reborn.api.crystalritual.CrystalRitualUtils;
+import mod.maxbogomol.wizards_reborn.api.crystalritual.CrystalRituals;
 import mod.maxbogomol.wizards_reborn.common.alchemypotion.RegisterAlchemyPotions;
 import mod.maxbogomol.wizards_reborn.common.integration.create.CreateIntegration;
 import mod.maxbogomol.wizards_reborn.common.item.CrystalItem;
@@ -254,7 +257,11 @@ public class WizardsRebornItemGroup {
             event.accept(WizardsReborn.ARCACITE_POLISHING_MIXTURE);
 
             event.accept(WizardsReborn.WISESTONE_PLATE);
-            event.accept(WizardsReborn.RUNIC_WISESTONE_PLATE);
+            for (CrystalRitual ritual : CrystalRituals.getCrystalRituals()) {
+                ItemStack stack = new ItemStack(WizardsReborn.RUNIC_WISESTONE_PLATE.get());
+                CrystalRitualUtils.setCrystalRitual(stack, ritual);
+                event.accept(stack);
+            }
 
             event.accept(WizardsReborn.ARCANE_WAND);
             event.accept(WizardsReborn.WISSEN_WAND);

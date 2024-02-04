@@ -63,15 +63,14 @@ public class AlchemyFurnaceBlock extends HorizontalDirectionalBlock implements E
     public void onRemove(@Nonnull BlockState state, @Nonnull Level world, @Nonnull BlockPos pos, @Nonnull BlockState newState, boolean isMoving) {
         if (state.getBlock() != newState.getBlock()) {
             BlockEntity tile = world.getBlockEntity(pos);
-            if (tile instanceof AlchemyFurnaceTileEntity furnaceTile) {
-                AlchemyFurnaceTileEntity furnace = (AlchemyFurnaceTileEntity) tile;
+            if (tile instanceof AlchemyFurnaceTileEntity furnace) {
                 SimpleContainer inv = new SimpleContainer(3);
                 inv.setItem(0, furnace.itemHandler.getStackInSlot(0));
                 inv.setItem(1, furnace.itemFuelHandler.getStackInSlot(0));
                 inv.setItem(2, furnace.itemOutputHandler.getStackInSlot(0));
                 Containers.dropContents(world, pos, inv);
                 if (world instanceof ServerLevel) {
-                    furnaceTile.popExperience((ServerLevel) world, Vec3.atCenterOf(pos));
+                    furnace.popExperience((ServerLevel) world, Vec3.atCenterOf(pos));
                 }
             }
             super.onRemove(state, world, pos, newState, isMoving);

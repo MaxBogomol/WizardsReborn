@@ -9,7 +9,9 @@ import mod.maxbogomol.wizards_reborn.api.light.ILightTileEntity;
 import mod.maxbogomol.wizards_reborn.api.wissen.*;
 import mod.maxbogomol.wizards_reborn.common.item.FluidStorageBaseItem;
 import mod.maxbogomol.wizards_reborn.common.tileentity.AlchemyMachineTileEntity;
+import mod.maxbogomol.wizards_reborn.utils.ColorUtils;
 import net.minecraft.ChatFormatting;
+import net.minecraft.client.CameraType;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.core.BlockPos;
@@ -273,6 +275,8 @@ public class WissenWandItem extends Item {
         Player player = mc.player;
         ItemStack main = mc.player.getMainHandItem();
         ItemStack offhand = mc.player.getOffhandItem();
+        ItemStack wand = main;
+        CameraType cameraType = Minecraft.getInstance().options.getCameraType();
 
         boolean render = false;
 
@@ -281,13 +285,30 @@ public class WissenWandItem extends Item {
         } else {
             if (!offhand.isEmpty() && offhand.getItem() instanceof WissenWandItem) {
                 render = true;
+                wand = offhand;
             }
         }
 
         RenderSystem.blendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
 
-        if (render) {
+        gui.pose().pushPose();
+        gui.pose().translate(0, 0, -200);
+
+        if (render && cameraType.isFirstPerson()) {
             if (!player.isSpectator()) {
+                ChatFormatting chatFormatting = getModeColor(wand);
+                int color = chatFormatting.getColor().intValue();
+                float r = ColorUtils.getRed(color) / 255f;
+                float g = ColorUtils.getGreen(color) / 255f;
+                float b = ColorUtils.getBlue(color) / 255f;
+
+                RenderSystem.setShaderColor(r, g, b, 1F);
+
+                int X = (gui.guiWidth() - 11) / 2;
+                int Y = (gui.guiHeight() - 11) / 2;
+                gui.blit(new ResourceLocation(WizardsReborn.MOD_ID + ":textures/gui/wissen_wand_mode.png"), X, Y, 0, 0, 11, 11, 16, 16);
+                RenderSystem.setShaderColor(1F, 1F, 1F, 1F);
+
                 HitResult pos = mc.hitResult;
                 if (pos != null) {
                     BlockPos bpos = pos.getType() == HitResult.Type.BLOCK ? ((BlockHitResult) pos).getBlockPos() : null;
@@ -420,6 +441,8 @@ public class WissenWandItem extends Item {
                 }
             }
         }
+
+        gui.pose().popPose();
 
         RenderSystem.defaultBlendFunc();
         RenderSystem.setShaderColor(1F, 1F, 1F, 1F);

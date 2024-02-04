@@ -77,8 +77,7 @@ public class JewelerTableBlock extends HorizontalDirectionalBlock implements Ent
     public void onRemove(@Nonnull BlockState state, @Nonnull Level world, @Nonnull BlockPos pos, @Nonnull BlockState newState, boolean isMoving) {
         if (state.getBlock() != newState.getBlock()) {
             BlockEntity tile = world.getBlockEntity(pos);
-            if (tile instanceof JewelerTableTileEntity) {
-                JewelerTableTileEntity table = (JewelerTableTileEntity) tile;
+            if (tile instanceof JewelerTableTileEntity table) {
                 SimpleContainer inv = new SimpleContainer(table.itemHandler.getSlots() + 1);
                 for (int i = 0; i < table.itemHandler.getSlots(); i++) {
                     inv.setItem(i, table.itemHandler.getStackInSlot(i));

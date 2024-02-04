@@ -1,7 +1,10 @@
 {
   "variants": {
-    "": {
+    "lit=false": {
       "model": "wizards_reborn:block/runic_pedestal_off"
+    },
+    "lit=true": {
+      "model": "wizards_reborn:block/runic_pedestal_on"
     }
   }
 }

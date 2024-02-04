@@ -7,6 +7,8 @@ import mod.maxbogomol.wizards_reborn.api.crystal.CrystalStat;
 import mod.maxbogomol.wizards_reborn.api.crystal.CrystalType;
 import mod.maxbogomol.wizards_reborn.api.crystal.Crystals;
 import mod.maxbogomol.wizards_reborn.api.crystal.PolishingType;
+import mod.maxbogomol.wizards_reborn.api.crystalritual.CrystalRitual;
+import mod.maxbogomol.wizards_reborn.api.crystalritual.CrystalRituals;
 import mod.maxbogomol.wizards_reborn.api.monogram.Monogram;
 import mod.maxbogomol.wizards_reborn.api.monogram.MonogramRecipe;
 import mod.maxbogomol.wizards_reborn.api.monogram.Monograms;
@@ -265,6 +267,9 @@ public class WizardsReborn {
     //ARCANE ENCHANTMENT
     public static ArcaneEnchantment WISSEN_MENDING_ARCANE_ENCHANTMENT = new WissenMendingArcaneEnchantment(MOD_ID+":wissen_mending", 3);
     public static ArcaneEnchantment MAGIC_BLADE_ARCANE_ENCHANTMENT = new MagicBladeArcaneEnchantment(MOD_ID+":magic_blade", 5);
+
+    //CRYSTAL RITUALS
+    public static CrystalRitual EMPTY_CRYSTAL_RITUAL = new CrystalRitual(MOD_ID+":empty");
 
     public static final FoodProperties MOR_FOOD = (new FoodProperties.Builder()).nutrition(1).saturationMod(0.6F).effect(new MobEffectInstance(MobEffects.POISON, 450, 0), 1.0F).effect(new MobEffectInstance(MobEffects.CONFUSION, 350, 0), 1.0F).effect(new MobEffectInstance(MobEffects.BLINDNESS, 250, 0), 1.0F).effect(new MobEffectInstance(MobEffects.WEAKNESS, 550, 1), 1.0F).build();
 
@@ -683,8 +688,8 @@ public class WizardsReborn {
     public static final RegistryObject<Item> ALCHEMY_FLASK_POTION = ITEMS.register("alchemy_flask_potion", () -> new AlchemyPotionItem(new Item.Properties().stacksTo(1), 6, ALCHEMY_FLASK.get()));
     public static final RegistryObject<Item> ARCACITE_POLISHING_MIXTURE = ITEMS.register("arcacite_polishing_mixture", () -> new Item(new Item.Properties()));
 
-    public static final RegistryObject<Item> WISESTONE_PLATE = ITEMS.register("wisestone_plate", () -> new Item(new Item.Properties()));
-    public static final RegistryObject<Item> RUNIC_WISESTONE_PLATE = ITEMS.register("runic_wisestone_plate", () -> new Item(new Item.Properties()));
+    public static final RegistryObject<Item> WISESTONE_PLATE = ITEMS.register("wisestone_plate", () -> new Item(new Item.Properties().stacksTo(1)));
+    public static final RegistryObject<Item> RUNIC_WISESTONE_PLATE = ITEMS.register("runic_wisestone_plate", () -> new RunicWisestonePlateItem(new Item.Properties().stacksTo(1)));
 
     public static final RegistryObject<Item> ARCANE_WAND = ITEMS.register("arcane_wand", () -> new ArcaneWandItem(new Item.Properties().stacksTo(1)));
     public static final RegistryObject<Item> WISSEN_WAND = ITEMS.register("wissen_wand", () -> new WissenWandItem(new Item.Properties().stacksTo(1)));
@@ -773,6 +778,7 @@ public class WizardsReborn {
 
     public static RegistryObject<BlockEntityType<LightEmitterTileEntity>> LIGHT_EMITTER_TILE_ENTITY = TILE_ENTITIES.register("light_emitter", () -> BlockEntityType.Builder.of(LightEmitterTileEntity::new, LIGHT_EMITTER.get()).build(null));
     public static RegistryObject<BlockEntityType<LightTransferLensTileEntity>> LIGHT_TRANSFER_LENS_TILE_ENTITY = TILE_ENTITIES.register("light_transfer_lens", () -> BlockEntityType.Builder.of(LightTransferLensTileEntity::new, LIGHT_TRANSFER_LENS.get()).build(null));
+    public static RegistryObject<BlockEntityType<RunicPedestalTileEntity>> RUNIC_PEDESTAL_TILE_ENTITY = TILE_ENTITIES.register("runic_pedestal", () -> BlockEntityType.Builder.of(RunicPedestalTileEntity::new, RUNIC_PEDESTAL.get()).build(null));
 
     public static RegistryObject<BlockEntityType<SensorTileEntity>> SENSOR_TILE_ENTITY = TILE_ENTITIES.register("sensor", () -> BlockEntityType.Builder.of(SensorTileEntity::new, REDSTONE_SENSOR.get(), WISSEN_SENSOR.get(), COOLDOWN_SENSOR.get(), LIGHT_SENSOR.get(), HEAT_SENSOR.get(), STEAM_SENSOR.get()).build(null));
     public static RegistryObject<BlockEntityType<FluidSensorTileEntity>> FLUID_SENSOR_TILE_ENTITY = TILE_ENTITIES.register("fluid_sensor", () -> BlockEntityType.Builder.of(FluidSensorTileEntity::new, FLUID_SENSOR.get()).build(null));
@@ -866,6 +872,14 @@ public class WizardsReborn {
                 BlockPos pos = data.readBlockPos();
                 Level world = inv.player.getCommandSenderWorld();
                 return new ItemSorterContainer(windowId, world, pos, inv, inv.player);
+            })));
+
+    public static final RegistryObject<MenuType<RunicPedestalContainer>> RUNIC_PEDESTAL_CONTAINER
+            = CONTAINERS.register("runic_pedestal",
+            () -> IForgeMenuType.create(((windowId, inv, data) -> {
+                BlockPos pos = data.readBlockPos();
+                Level world = inv.player.getCommandSenderWorld();
+                return new RunicPedestalContainer(windowId, world, pos, inv, inv.player);
             })));
 
     public static final RegistryObject<BannerPattern> VIOLENCE_BANNER_PATTERN = BANNER_PATTERNS.register("violence", () -> new BannerPattern("wrv"));
@@ -1023,6 +1037,7 @@ public class WizardsReborn {
         setupMonograms();
         setupSpells();
         setupArcaneEnchantments();
+        setupCrystalRituals();
 
         IEventBus forgeBus = MinecraftForge.EVENT_BUS;
 
@@ -1113,6 +1128,7 @@ public class WizardsReborn {
             MenuScreens.register(ALCHEMY_FURNACE_CONTAINER.get(), AlchemyFurnaceScreen::new);
             MenuScreens.register(ALCHEMY_MACHINE_CONTAINER.get(), AlchemyMachineScreen::new);
             MenuScreens.register(ITEM_SORTER_CONTAINER.get(), ItemSorterScreen::new);
+            MenuScreens.register(RUNIC_PEDESTAL_CONTAINER.get(), RunicPedestalScreen::new);
 
             CuriosRendererRegistry.register(LEATHER_BELT.get(), BeltRenderer::new);
             CuriosRendererRegistry.register(ARCANUM_AMULET.get(), AmuletRenderer::new);
@@ -1215,6 +1231,10 @@ public class WizardsReborn {
     public static void setupArcaneEnchantments() {
         ArcaneEnchantments.register(WISSEN_MENDING_ARCANE_ENCHANTMENT);
         ArcaneEnchantments.register(MAGIC_BLADE_ARCANE_ENCHANTMENT);
+    }
+
+    public static void setupCrystalRituals() {
+        CrystalRituals.register(EMPTY_CRYSTAL_RITUAL);
     }
 
     public static void setupWandCrystalsModels() {

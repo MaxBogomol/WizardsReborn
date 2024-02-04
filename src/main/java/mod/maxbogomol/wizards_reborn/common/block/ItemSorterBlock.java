@@ -44,8 +44,7 @@ public class ItemSorterBlock extends SensorBaseBlock {
     public void onRemove(@Nonnull BlockState state, @Nonnull Level world, @Nonnull BlockPos pos, @Nonnull BlockState newState, boolean isMoving) {
         if (state.getBlock() != newState.getBlock()) {
             BlockEntity tile = world.getBlockEntity(pos);
-            if (tile instanceof ItemSorterTileEntity) {
-                ItemSorterTileEntity sorter = (ItemSorterTileEntity) tile;
+            if (tile instanceof ItemSorterTileEntity sorter) {
                 SimpleContainer inv = new SimpleContainer(sorter.itemHandler.getSlots());
                 for (int i = 0; i < sorter.itemHandler.getSlots(); i++) {
                     inv.setItem(i, sorter.itemHandler.getStackInSlot(i));

@@ -117,8 +117,7 @@ public class AlchemyMachineBlock extends HorizontalDirectionalBlock implements E
     public void onRemove(@Nonnull BlockState state, @Nonnull Level world, @Nonnull BlockPos pos, @Nonnull BlockState newState, boolean isMoving) {
         if (state.getBlock() != newState.getBlock()) {
             BlockEntity tile = world.getBlockEntity(pos);
-            if (tile instanceof AlchemyMachineTileEntity) {
-                AlchemyMachineTileEntity machine = (AlchemyMachineTileEntity) tile;
+            if (tile instanceof AlchemyMachineTileEntity machine) {
                 SimpleContainer inv = new SimpleContainer(machine.itemHandler.getSlots() + 1);
                 for (int i = 0; i < machine.itemHandler.getSlots(); i++) {
                     inv.setItem(i, machine.itemHandler.getStackInSlot(i));

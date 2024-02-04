@@ -81,8 +81,7 @@ public class ArcaneWorkbenchBlock extends HorizontalDirectionalBlock implements 
     public void onRemove(@Nonnull BlockState state, @Nonnull Level world, @Nonnull BlockPos pos, @Nonnull BlockState newState, boolean isMoving) {
         if (state.getBlock() != newState.getBlock()) {
             BlockEntity tile = world.getBlockEntity(pos);
-            if (tile instanceof ArcaneWorkbenchTileEntity) {
-                ArcaneWorkbenchTileEntity workbench = (ArcaneWorkbenchTileEntity) tile;
+            if (tile instanceof ArcaneWorkbenchTileEntity workbench) {
                 SimpleContainer inv = new SimpleContainer(workbench.itemHandler.getSlots() + 1);
                 for (int i = 0; i < workbench.itemHandler.getSlots(); i++) {
                     inv.setItem(i, workbench.itemHandler.getStackInSlot(i));

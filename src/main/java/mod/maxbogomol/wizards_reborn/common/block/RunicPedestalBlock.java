@@ -1,6 +1,6 @@
 package mod.maxbogomol.wizards_reborn.common.block;
 
-import mod.maxbogomol.wizards_reborn.client.gui.container.ArcaneWorkbenchContainer;
+import mod.maxbogomol.wizards_reborn.client.gui.container.RunicPedestalContainer;
 import mod.maxbogomol.wizards_reborn.common.item.equipment.WissenWandItem;
 import mod.maxbogomol.wizards_reborn.common.tileentity.RunicPedestalTileEntity;
 import mod.maxbogomol.wizards_reborn.common.tileentity.TickableBlockEntity;
@@ -19,7 +19,6 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.EntityBlock;
-import net.minecraft.world.level.block.HorizontalDirectionalBlock;
 import net.minecraft.world.level.block.SimpleWaterloggedBlock;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityTicker;
@@ -41,7 +40,7 @@ import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import java.util.stream.Stream;
 
-public class RunicPedestalBlock extends HorizontalDirectionalBlock implements EntityBlock, SimpleWaterloggedBlock  {
+public class RunicPedestalBlock extends Block implements EntityBlock, SimpleWaterloggedBlock  {
 
     private static final VoxelShape SHAPE = Stream.of(
             Block.box(2, 0, 2, 14, 3, 14),
@@ -63,7 +62,7 @@ public class RunicPedestalBlock extends HorizontalDirectionalBlock implements En
 
     @Override
     protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {
-        builder.add(FACING);
+        builder.add(BlockStateProperties.LIT);
         builder.add(BlockStateProperties.WATERLOGGED);
     }
 
@@ -71,7 +70,7 @@ public class RunicPedestalBlock extends HorizontalDirectionalBlock implements En
     @Override
     public BlockState getStateForPlacement(BlockPlaceContext context) {
         FluidState fluidState = context.getLevel().getFluidState(context.getClickedPos());
-        return this.defaultBlockState().setValue(FACING, context.getHorizontalDirection().getOpposite()).setValue(BlockStateProperties.WATERLOGGED, fluidState.getType() == Fluids.WATER);
+        return this.defaultBlockState().setValue(BlockStateProperties.LIT, false).setValue(BlockStateProperties.WATERLOGGED, fluidState.getType() == Fluids.WATER);
     }
 
     @Override
@@ -119,13 +118,13 @@ public class RunicPedestalBlock extends HorizontalDirectionalBlock implements En
         return new MenuProvider() {
             @Override
             public Component getDisplayName() {
-                return Component.translatable("gui.wizards_reborn.arcane_workbench.title");
+                return Component.translatable("gui.wizards_reborn.runic_pedestal.title");
             }
 
             @Nullable
             @Override
             public AbstractContainerMenu createMenu(int i, Inventory playerInventory, Player playerEntity) {
-                return new ArcaneWorkbenchContainer(i, worldIn, pos, playerInventory, playerEntity);
+                return new RunicPedestalContainer(i, worldIn, pos, playerInventory, playerEntity);
             }
         };
     }
@@ -171,11 +170,10 @@ public class RunicPedestalBlock extends HorizontalDirectionalBlock implements En
     @Override
     public int getAnalogOutputSignal(BlockState blockState, Level level, BlockPos pos) {
         RunicPedestalTileEntity workbench = (RunicPedestalTileEntity) level.getBlockEntity(pos);
-        SimpleContainer inv = new SimpleContainer(workbench.itemHandler.getSlots() + 1);
+        SimpleContainer inv = new SimpleContainer(workbench.itemHandler.getSlots());
         for (int i = 0; i < workbench.itemHandler.getSlots(); i++) {
             inv.setItem(i, workbench.itemHandler.getStackInSlot(i));
         }
-        inv.setItem(workbench.itemHandler.getSlots(), workbench.itemOutputHandler.getStackInSlot(0));
         return AbstractContainerMenu.getRedstoneSignalFromContainer(inv);
     }
 }

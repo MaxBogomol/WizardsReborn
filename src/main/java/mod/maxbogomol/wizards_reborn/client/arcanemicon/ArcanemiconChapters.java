@@ -31,8 +31,8 @@ import java.util.Map;
 
 public class ArcanemiconChapters {
     public static List<Category> categories = new ArrayList<>();
-    public static Category ARCANE_NATURE, SPELLS, CRYSTALS_RITUALS, ALCHEMY;
-    public static Chapter ARCANE_NATURE_INDEX, SPELLS_INDEX, CRYSTALS_RITUALS_INDEX, ALCHEMY_INDEX,
+    public static Category ARCANE_NATURE, SPELLS, CRYSTAL_RITUALS, ALCHEMY;
+    public static Chapter ARCANE_NATURE_INDEX, SPELLS_INDEX, CRYSTAL_RITUALS_INDEX, ALCHEMY_INDEX,
             ARCANUM, ARCANUM_DUST_TRANSMUTATION, ARCANE_WOOD, ARCANE_GOLD, SCYTHES, TRINKETS, ARCANE_WOOD_BOW, BANNER_PATTERNS, WISSEN, WISSEN_TRANSLATOR, ARCANE_PEDESTAL, WISSEN_ALTAR, WISSEN_CRYSTALLIZER, ARCANE_WORKBENCH, ARCANE_LUMOS, CRYSTALS, ARCANE_WAND, AUTOMATION, WISSEN_CELL, ALTAR_OF_DROUGHT, VOID_CRYSTAL, ARCANE_FORTRESS_ARMOR, INVENTOR_WIZARD_ARMOR, ARCANE_WOOD_CANE, ARCANE_ITERATOR, WISSEN_KEYCHAIN, JEWELER_TABLE,
             REDSTONE_SENSOR, WISSEN_SENSOR, COOLDOWN_SENSOR, HEAT_SENSOR, FLUID_SENSOR, STEAM_SENSOR, WISSEN_ACTIVATOR, ITEM_SORTER,
             ALL_SPELLS, EARTH_SPELLS, WATER_SPELLS, AIR_SPELLS, FIRE_SPELLS, VOID_SPELLS,
@@ -573,7 +573,7 @@ public class ArcanemiconChapters {
                         ItemStack.EMPTY, new ItemStack(WizardsReborn.ARCANE_GOLD_NUGGET.get()), ItemStack.EMPTY,
                         new ItemStack(WizardsReborn.ARCANE_GOLD_NUGGET.get()), new ItemStack(WizardsReborn.ARCANE_WOOD_PLANKS_ITEM.get()), new ItemStack(WizardsReborn.ARCANE_GOLD_NUGGET.get()),
                         ItemStack.EMPTY, new ItemStack(WizardsReborn.ARCANE_GOLD_NUGGET.get()), ItemStack.EMPTY,
-                        new ItemStack(Items.COMPARATOR), new ItemStack(WizardsReborn.ARCACITE.get()), new ItemStack(Items.REDSTONE)
+                        new ItemStack(Items.COMPARATOR), ItemStack.EMPTY, new ItemStack(Items.REDSTONE)
                 )
         );
 
@@ -1479,8 +1479,8 @@ public class ArcanemiconChapters {
                 )
         );
 
-        CRYSTALS_RITUALS_INDEX = new Chapter(
-                "wizards_reborn.arcanemicon.chapter.crystals_rituals_index"
+        CRYSTAL_RITUALS_INDEX = new Chapter(
+                "wizards_reborn.arcanemicon.chapter.crystal_rituals_index"
         );
 
         MOR = new Chapter(
@@ -2294,10 +2294,10 @@ public class ArcanemiconChapters {
                 SPELLS_INDEX
         );
 
-        CRYSTALS_RITUALS = new Category(
-                "crystals_rituals",
+        CRYSTAL_RITUALS = new Category(
+                "crystal_rituals",
                 new ItemStack(WizardsReborn.FACETED_EARTH_CRYSTAL.get()),
-                CRYSTALS_RITUALS_INDEX
+                CRYSTAL_RITUALS_INDEX
         );
 
         ALCHEMY = new Category(
@@ -2308,7 +2308,7 @@ public class ArcanemiconChapters {
 
         categories.add(ARCANE_NATURE);
         categories.add(SPELLS);
-        categories.add(CRYSTALS_RITUALS);
+        categories.add(CRYSTAL_RITUALS);
         categories.add(ALCHEMY);
     }
 }

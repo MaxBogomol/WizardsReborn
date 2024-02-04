@@ -343,6 +343,9 @@ public class ArcaneWandItem extends Item implements IWissenItem, ICustomAnimatio
 
         RenderSystem.blendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
 
+        gui.pose().pushPose();
+        gui.pose().translate(0, 0, -200);
+
         if (render) {
             if (!player.isSpectator()) {
                 ArcaneWandItem wand = (ArcaneWandItem) stack.getItem();
@@ -393,6 +396,8 @@ public class ArcaneWandItem extends Item implements IWissenItem, ICustomAnimatio
                 }
             }
         }
+
+        gui.pose().popPose();
 
         RenderSystem.defaultBlendFunc();
         RenderSystem.setShaderColor(1F, 1F, 1F, 1F);

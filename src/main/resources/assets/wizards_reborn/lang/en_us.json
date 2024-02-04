@@ -442,6 +442,7 @@
   "gui.wizards_reborn.alchemy_furnace.title": "Alchemy Furnace",
   "gui.wizards_reborn.alchemy_machine.title": "Alchemy Machine",
   "gui.wizards_reborn.item_sorter.title": "Item Sorter",
+  "gui.wizards_reborn.runic_pedestal.title": "Runic Pedestal",
 
   "gui.wizards_reborn.category.arcanum_dust_transmutation": "Arcanum Dust Transmutation",
   "gui.wizards_reborn.category.mortar": "Mortar",
@@ -924,7 +925,7 @@
     "wizards_reborn.arcanemicon.page.universum_monogram.title": "Universum",
     "wizards_reborn.arcanemicon.page.universum_monogram": "Huge endless expanses.. They have everything.. both good... and evil.. \n \n Are you ready to accept the world as it is?",
 
-  "wizards_reborn.arcanemicon.category.crystals_rituals": "Crystals Rituals",
+  "wizards_reborn.arcanemicon.category.crystal_rituals": "Crystal Rituals",
 
   "wizards_reborn.arcanemicon.category.alchemy": "Alchemy",
   "wizards_reborn.arcanemicon.chapter.alchemy_index": "Alchemy",
