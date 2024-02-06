@@ -47,10 +47,10 @@ public class ArcaneWorkbenchScreen extends AbstractContainerScreen<ArcaneWorkben
         if (menu.tileEntity instanceof ArcaneWorkbenchTileEntity workbench) {
             List<ItemStack> items = workbench.getItemsResult();
 
-            if (items.size() > 0) {
-                gui.renderItem(items.get(0), i + 146, j + 48);
+            if (items.size() > 0 && workbench.itemOutputHandler.getStackInSlot(0).isEmpty()) {
+                gui.renderItem(items.get(0), i + 146, j + 58);
                 RenderSystem.setShaderColor(1f, 1f, 1f, 0.25f);
-                gui.renderItemDecorations(Minecraft.getInstance().font, items.get(0), i + 146, j + 48, String.valueOf(items.get(0).getCount()));
+                gui.renderItemDecorations(Minecraft.getInstance().font, items.get(0), i + 146, j + 58, String.valueOf(items.get(0).getCount()));
                 RenderSystem.setShaderColor(1f, 1f, 1f, 1f);
             }
         }

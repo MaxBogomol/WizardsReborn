@@ -27,6 +27,7 @@ import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.capabilities.ForgeCapabilities;
 import net.minecraftforge.common.util.LazyOptional;
@@ -46,8 +47,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.Random;
-
-import static net.minecraft.world.level.block.state.properties.BlockStateProperties.HORIZONTAL_FACING;
 
 public class AlchemyMachineTileEntity extends PipeBaseTileEntity implements TickableBlockEntity, IWissenWandFunctionalTileEntity, IItemResultTileEntity {
     protected FluidTank fluidTank1 = new FluidTank(getMaxCapacity()) {
@@ -300,15 +299,15 @@ public class AlchemyMachineTileEntity extends PipeBaseTileEntity implements Tick
     @Override
     public <T> LazyOptional<T> getCapability(@Nonnull Capability<T> cap, @Nullable Direction side) {
         if (cap == ForgeCapabilities.FLUID_HANDLER) {
-            Direction newSide = getTankDirection(getBlockState().getValue(HORIZONTAL_FACING));
+            Direction newSide = getBlockState().getValue(BlockStateProperties.HORIZONTAL_FACING).getClockWise();
             if (newSide == side) {
                 return ForgeCapabilities.FLUID_HANDLER.orEmpty(cap, fluidHolder1);
             }
-            newSide = getTankDirection(newSide);
+            newSide = newSide.getClockWise();
             if (newSide ==side) {
                 return ForgeCapabilities.FLUID_HANDLER.orEmpty(cap, fluidHolder2);
             }
-            newSide = getTankDirection(newSide);
+            newSide = newSide.getClockWise();
             if (newSide == side) {
                 return ForgeCapabilities.FLUID_HANDLER.orEmpty(cap, fluidHolder3);
             }
@@ -455,21 +454,6 @@ public class AlchemyMachineTileEntity extends PipeBaseTileEntity implements Tick
                 return fluidTank3;
             default:
                 return fluidTank1;
-        }
-    }
-
-    public Direction getTankDirection(Direction side) {
-        switch (side) {
-            case NORTH:
-                return Direction.EAST;
-            case SOUTH:
-                return Direction.WEST;
-            case WEST:
-                return Direction.NORTH;
-            case EAST:
-                return Direction.SOUTH;
-            default:
-                return Direction.NORTH;
         }
     }
 

@@ -22,6 +22,7 @@ import net.minecraft.world.InteractionResultHolder;
 import net.minecraft.world.SimpleContainer;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
@@ -183,7 +184,11 @@ public class SmokingPipeItem extends Item implements ICustomAnimationItem {
                         int slot = invSize - i - 1;
                         if (!getInventory(stack).getItem(slot).isEmpty()) {
                             if (getItemBurnCenser(getInventory(stack).getItem(slot)) <= 0) {
-                                player.getInventory().add(getInventory(stack).getItem(slot).copy());
+                                if (player.getInventory().getSlotWithRemainingSpace(getInventory(stack).getItem(slot)) > 0) {
+                                    player.getInventory().add(getInventory(stack).getItem(slot).copy());
+                                } else {
+                                    world.addFreshEntity(new ItemEntity(world, player.getX(), player.getY() + 0.5F, player.getZ(), getInventory(stack).getItem(slot).copy()));
+                                }
                                 getInventory(stack).removeItem(slot, 1);
                                 sortItems(stack);
                                 return InteractionResultHolder.success(stack);

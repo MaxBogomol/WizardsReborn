@@ -15,6 +15,7 @@ import net.minecraft.world.Containers;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.SimpleContainer;
+import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.item.ItemStack;
@@ -143,7 +144,11 @@ public class ArcaneCenserBlock extends HorizontalDirectionalBlock implements Ent
                     int slot = invSize - i - 1;
                     if (!tile.getItemHandler().getItem(slot).isEmpty()) {
                         if (ArcaneCenserTileEntity.getItemBurnCenser(tile.getItemHandler().getItem(slot)) <= 0) {
-                            player.getInventory().add(tile.getItemHandler().getItem(slot).copy());
+                            if (player.getInventory().getSlotWithRemainingSpace(tile.getItemHandler().getItem(slot)) > 0) {
+                                player.getInventory().add(tile.getItemHandler().getItem(slot).copy());
+                            } else {
+                                world.addFreshEntity(new ItemEntity(world, pos.getX() + 0.5F, pos.getY() + 1.0F, pos.getZ() + 0.5F, tile.getItemHandler().getItem(slot).copy()));
+                            }
                             tile.getItemHandler().removeItem(slot, 1);
                             world.updateNeighbourForOutputSignal(pos, this);
                             tile.sortItems();

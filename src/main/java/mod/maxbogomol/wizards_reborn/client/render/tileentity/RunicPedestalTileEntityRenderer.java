@@ -27,7 +27,6 @@ public class RunicPedestalTileEntityRenderer implements BlockEntityRenderer<Runi
 
         if (pedestal.getBlockState().getValue(BlockStateProperties.LIT)) {
             ms.pushPose();
-            //ms.translate(0.5F, 0.375F, 0.5F);
             RenderUtils.litQuadCube(ms, bufferDelayed, 0.225f, 0.359375f, 0.225f, 0.546875f, 0.09375f, 0.546875f, 0.678f, 0.929f, 0.803f, alpha);
             ms.popPose();
         }

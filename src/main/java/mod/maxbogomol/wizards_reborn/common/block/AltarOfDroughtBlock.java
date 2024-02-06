@@ -11,6 +11,7 @@ import net.minecraft.core.Direction;
 import net.minecraft.world.Containers;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
+import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.item.ItemStack;
@@ -121,7 +122,11 @@ public class AltarOfDroughtBlock extends HorizontalDirectionalBlock implements E
         }
 
         if (!altar.getItemHandler().getItem(0).isEmpty()) {
-            player.getInventory().add(altar.getItemHandler().getItem(0).copy());
+            if (player.getInventory().getSlotWithRemainingSpace(altar.getItemHandler().getItem(0)) > 0) {
+                player.getInventory().add(altar.getItemHandler().getItem(0).copy());
+            } else {
+                world.addFreshEntity(new ItemEntity(world, pos.getX() + 0.5F, pos.getY() + 1.0F, pos.getZ() + 0.5F, altar.getItemHandler().getItem(0).copy()));
+            }
             altar.getItemHandler().removeItem(0, 1);
             world.updateNeighbourForOutputSignal(pos, this);
             PacketUtils.SUpdateTileEntityPacket(altar);

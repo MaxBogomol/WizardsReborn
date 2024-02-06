@@ -50,10 +50,10 @@ public class AlchemyMachineScreen extends AbstractContainerScreen<AlchemyMachine
             for (int ii = 0; ii <= 2; ii++) {
                 int width = 32;
                 width /= (double) machine.getMaxCapacity() / (double) machine.getTank(ii).getFluidAmount();
-                gui.blit(GUI, i + 39, j + 59 + (ii * 15), 176, 0, width, 8, 256, 256);
+                gui.blit(GUI, i + 39, j + 65 + (ii * 15), 176, 0, width, 8, 256, 256);
 
                 if (!machine.getFluidStack(ii).isEmpty()) {
-                    if (x >= i + 39 && y >= j + 59 + (ii * 15) && x <= i + 39 + 32 && y <= j + 59 + (ii * 15) + 8) {
+                    if (x >= i + 39 && y >= j + 65 + (ii * 15) && x <= i + 39 + 32 && y <= j + 59 + (ii * 15) + 8) {
                         gui.renderTooltip(Minecraft.getInstance().font, FluidStorageBaseItem.getFluidName(machine.getFluidStack(ii), 5000), x, y);
                     }
                 }
@@ -62,7 +62,7 @@ public class AlchemyMachineScreen extends AbstractContainerScreen<AlchemyMachine
             if (machine.wissenInCraft > 0 || machine.steamInCraft > 0 ) {
                 int width = 22;
                 width /= (double) (machine.wissenInCraft + machine.steamInCraft) / (machine.wissenIsCraft + machine.steamIsCraft);
-                gui.blit(GUI, i + 97, j + 47, 176, 8, width, 15, 256, 256);
+                gui.blit(GUI, i + 97, j + 53, 176, 8, width, 15, 256, 256);
             }
 
             SimpleContainer inv = new SimpleContainer(7);
@@ -73,10 +73,10 @@ public class AlchemyMachineScreen extends AbstractContainerScreen<AlchemyMachine
 
             List<ItemStack> items = machine.getItemsResult();
 
-            if (items.size() > 0) {
-                gui.renderItem(items.get(0), i + 132, j + 48);
+            if (items.size() > 0 && machine.itemOutputHandler.getStackInSlot(0).isEmpty()) {
+                gui.renderItem(items.get(0), i + 132, j + 54);
                 RenderSystem.setShaderColor(1f, 1f, 1f, 0.25f);
-                gui.renderItemDecorations(Minecraft.getInstance().font, items.get(0), i + 132, j + 48, String.valueOf(items.get(0).getCount()));
+                gui.renderItemDecorations(Minecraft.getInstance().font, items.get(0), i + 132, j + 54, String.valueOf(items.get(0).getCount()));
                 RenderSystem.setShaderColor(1f, 1f, 1f, 1f);
             }
         }

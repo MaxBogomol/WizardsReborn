@@ -48,40 +48,40 @@ public class AlchemyFurnaceScreen extends AbstractContainerScreen<AlchemyFurnace
         if (menu.tileEntity instanceof AlchemyFurnaceTileEntity furnace) {
             int width = 32;
             width /= (double) furnace.getFluidMaxAmount() / (double) furnace.getFluidAmount();
-            gui.blit(GUI, i + 19, j + 40 + 32 - width, 176, 32 - width, 8, width, 256, 256);
+            gui.blit(GUI, i + 19, j + 60 - width, 176, 32 - width, 8, width, 256, 256);
 
             width = 32;
             width /= (double) furnace.getMaxHeat() / (double) furnace.getHeat();
-            gui.blit(GUI, i + 19 + 15, j + 40 + 32 - width, 176 + 8, 32 - width, 8, width, 256, 256);
+            gui.blit(GUI, i + 19 + 15, j + 60 - width, 176 + 8, 32 - width, 8, width, 256, 256);
 
             width = 32;
             width /= (double) furnace.getMaxSteam() / (double) furnace.getSteam();
-            gui.blit(GUI, i + 19 + 30, j + 40 + 32 - width, 176 + 16, 32 - width, 8, width, 256, 256);
+            gui.blit(GUI, i + 19 + 30, j + 60 - width, 176 + 16, 32 - width, 8, width, 256, 256);
 
             if (furnace.burnMaxTime > 0) {
                 width = 13;
                 width /= (double) furnace.burnMaxTime / (double) furnace.burnTime;
-                gui.blit(GUI, i + 72, j + 46 + 16 - width, 176, 47 + 13 - width, 18, width, 256, 256);
+                gui.blit(GUI, i + 72, j + 50 - width, 176, 47 + 13 - width, 18, width, 256, 256);
             }
 
             if (furnace.cookTime > 0) {
                 width = 22;
                 width /= (double) furnace.cookMaxTime / (double) furnace.cookTime;
-                gui.blit(GUI, i + 97, j + 47, 176, 32, width, 15, 256, 256);
+                gui.blit(GUI, i + 97, j + 35, 176, 32, width, 15, 256, 256);
             }
 
             if (!furnace.getTank().getFluid().isEmpty()) {
-                if (x >= i + 19 && y >= j + 40 && x <= i + 19 + 8 && y <= j + 40 + 32) {
+                if (x >= i + 19 && y >= j + 28 && x <= i + 19 + 8 && y <= j + 28 + 32) {
                     gui.renderTooltip(Minecraft.getInstance().font, FluidStorageBaseItem.getFluidName(furnace.getTank().getFluid(), 10000), x, y);
                 }
             }
 
             List<ItemStack> items = furnace.getItemsResult();
 
-            if (items.size() > 0) {
-                gui.renderItem(items.get(0), i + 132, j + 48);
+            if (items.size() > 0 && furnace.itemOutputHandler.getStackInSlot(0).isEmpty()) {
+                gui.renderItem(items.get(0), i + 132, j + 36);
                 RenderSystem.setShaderColor(1f, 1f, 1f, 0.25f);
-                gui.renderItemDecorations(Minecraft.getInstance().font, items.get(0), i + 132, j + 48, String.valueOf(items.get(0).getCount()));
+                gui.renderItemDecorations(Minecraft.getInstance().font, items.get(0), i + 132, j + 36, String.valueOf(items.get(0).getCount()));
                 RenderSystem.setShaderColor(1f, 1f, 1f, 1f);
             }
         }

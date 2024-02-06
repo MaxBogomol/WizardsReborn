@@ -47,10 +47,10 @@ public class JewelerTableScreen extends AbstractContainerScreen<JewelerTableCont
         if (menu.tileEntity instanceof JewelerTableTileEntity table) {
             List<ItemStack> items = table.getItemsResult();
 
-            if (items.size() > 0) {
-                gui.renderItem(items.get(0), i + 132, j + 48);
+            if (items.size() > 0 && table.itemOutputHandler.getStackInSlot(0).isEmpty()) {
+                gui.renderItem(items.get(0), i + 132, j + 36);
                 RenderSystem.setShaderColor(1f, 1f, 1f, 0.25f);
-                gui.renderItemDecorations(Minecraft.getInstance().font, items.get(0), i + 132, j + 48, String.valueOf(items.get(0).getCount()));
+                gui.renderItemDecorations(Minecraft.getInstance().font, items.get(0), i + 132, j + 36, String.valueOf(items.get(0).getCount()));
                 RenderSystem.setShaderColor(1f, 1f, 1f, 1f);
             }
         }
