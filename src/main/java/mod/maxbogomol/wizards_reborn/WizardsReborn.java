@@ -270,6 +270,7 @@ public class WizardsReborn {
 
     //CRYSTAL RITUALS
     public static CrystalRitual EMPTY_CRYSTAL_RITUAL = new CrystalRitual(MOD_ID+":empty");
+    public static CrystalRitual STONE_CALENDAR_CRYSTAL_RITUAL = new CrystalRitual(MOD_ID+":stone_calendar");
 
     public static final FoodProperties MOR_FOOD = (new FoodProperties.Builder()).nutrition(1).saturationMod(0.6F).effect(new MobEffectInstance(MobEffects.POISON, 450, 0), 1.0F).effect(new MobEffectInstance(MobEffects.CONFUSION, 350, 0), 1.0F).effect(new MobEffectInstance(MobEffects.BLINDNESS, 250, 0), 1.0F).effect(new MobEffectInstance(MobEffects.WEAKNESS, 550, 1), 1.0F).build();
 
@@ -456,6 +457,8 @@ public class WizardsReborn {
     public static final RegistryObject<Block> WISESTONE_FLUID_CASING = BLOCKS.register("wisestone_fluid_casing", () -> new FluidCasingBlock(BlockBehaviour.Properties.copy(Blocks.POLISHED_DEEPSLATE).noOcclusion()));
     public static final RegistryObject<Block> WISESTONE_STEAM_CASING = BLOCKS.register("wisestone_steam_casing", () -> new SteamCasingBlock(BlockBehaviour.Properties.copy(Blocks.POLISHED_DEEPSLATE).noOcclusion()));
 
+    public static final RegistryObject<Block> CREATIVE_WISSEN_STORAGE = BLOCKS.register("creative_wissen_storage", () -> new CreativeWissenStorageBlock(BlockBehaviour.Properties.copy(Blocks.OAK_PLANKS)));
+    public static final RegistryObject<Block> CREATIVE_LIGHT_STORAGE = BLOCKS.register("creative_light_storage", () -> new CreativeLightStorageBlock(BlockBehaviour.Properties.copy(Blocks.OAK_PLANKS)));
     public static final RegistryObject<Block> CREATIVE_FLUID_STORAGE = BLOCKS.register("creative_fluid_storage", () -> new CreativeFluidStorageBlock(BlockBehaviour.Properties.copy(Blocks.POLISHED_DEEPSLATE)));
     public static final RegistryObject<Block> CREATIVE_STEAM_STORAGE = BLOCKS.register("creative_steam_storage", () -> new CreativeSteamStorageBlock(BlockBehaviour.Properties.copy(Blocks.POLISHED_DEEPSLATE)));
 
@@ -678,6 +681,8 @@ public class WizardsReborn {
     public static final RegistryObject<Item> WISESTONE_FLUID_CASING_ITEM = ITEMS.register("wisestone_fluid_casing", () -> new BlockItem(WISESTONE_FLUID_CASING.get(), new Item.Properties()));
     public static final RegistryObject<Item> WISESTONE_STEAM_CASING_ITEM = ITEMS.register("wisestone_steam_casing", () -> new BlockItem(WISESTONE_STEAM_CASING.get(), new Item.Properties()));
 
+    public static final RegistryObject<Item> CREATIVE_WISSEN_STORAGE_ITEM = ITEMS.register("creative_wissen_storage", () -> new BlockItem(CREATIVE_WISSEN_STORAGE.get(), new Item.Properties()));
+    public static final RegistryObject<Item> CREATIVE_LIGHT_STORAGE_ITEM = ITEMS.register("creative_light_storage", () -> new BlockItem(CREATIVE_LIGHT_STORAGE.get(), new Item.Properties()));
     public static final RegistryObject<Item> CREATIVE_FLUID_STORAGE_ITEM = ITEMS.register("creative_fluid_storage", () -> new BlockItem(CREATIVE_FLUID_STORAGE.get(), new Item.Properties()));
     public static final RegistryObject<Item> CREATIVE_STEAM_STORAGE_ITEM = ITEMS.register("creative_steam_storage", () -> new BlockItem(CREATIVE_STEAM_STORAGE.get(), new Item.Properties()));
 
@@ -790,6 +795,8 @@ public class WizardsReborn {
     public static RegistryObject<BlockEntityType<FluidCasingTileEntity>> FLUID_CASING_TILE_ENTITY = TILE_ENTITIES.register("fluid_casing", () -> BlockEntityType.Builder.of(FluidCasingTileEntity::new, ARCANE_WOOD_FLUID_CASING.get(), WISESTONE_FLUID_CASING.get()).build(null));
     public static RegistryObject<BlockEntityType<SteamCasingTileEntity>> STEAM_CASING_TILE_ENTITY = TILE_ENTITIES.register("steam_casing", () -> BlockEntityType.Builder.of(SteamCasingTileEntity::new, ARCANE_WOOD_STEAM_CASING.get(), WISESTONE_STEAM_CASING.get()).build(null));
 
+    public static RegistryObject<BlockEntityType<CreativeWissenStorageTileEntity>> CREATIVE_WISSEN_STORAGE_TILE_ENTITY = TILE_ENTITIES.register("creative_wissen_storage", () -> BlockEntityType.Builder.of(CreativeWissenStorageTileEntity::new, CREATIVE_WISSEN_STORAGE.get()).build(null));
+    public static RegistryObject<BlockEntityType<CreativeLightStorageTileEntity>> CREATIVE_LIGHT_STORAGE_TILE_ENTITY = TILE_ENTITIES.register("creative_light_storage", () -> BlockEntityType.Builder.of(CreativeLightStorageTileEntity::new, CREATIVE_LIGHT_STORAGE.get()).build(null));
     public static RegistryObject<BlockEntityType<CreativeFluidStorageTileEntity>> CREATIVE_FLUID_STORAGE_TILE_ENTITY = TILE_ENTITIES.register("creative_fluid_storage", () -> BlockEntityType.Builder.of(CreativeFluidStorageTileEntity::new, CREATIVE_FLUID_STORAGE.get()).build(null));
     public static RegistryObject<BlockEntityType<CreativeSteamStorageTileEntity>> CREATIVE_STEAM_STORAGE_TILE_ENTITY = TILE_ENTITIES.register("creative_steam_storage", () -> BlockEntityType.Builder.of(CreativeSteamStorageTileEntity::new, CREATIVE_STEAM_STORAGE.get()).build(null));
 
@@ -1235,6 +1242,7 @@ public class WizardsReborn {
 
     public static void setupCrystalRituals() {
         CrystalRituals.register(EMPTY_CRYSTAL_RITUAL);
+        CrystalRituals.register(STONE_CALENDAR_CRYSTAL_RITUAL);
     }
 
     public static void setupWandCrystalsModels() {

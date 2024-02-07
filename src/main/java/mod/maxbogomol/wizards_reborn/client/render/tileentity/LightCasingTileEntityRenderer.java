@@ -14,6 +14,7 @@ import net.minecraft.core.Direction;
 import net.minecraft.world.item.ItemDisplayContext;
 import net.minecraft.world.phys.Vec3;
 
+import java.awt.*;
 import java.util.Random;
 
 public class LightCasingTileEntityRenderer implements BlockEntityRenderer<LightCasingTileEntity> {
@@ -34,7 +35,7 @@ public class LightCasingTileEntityRenderer implements BlockEntityRenderer<LightC
             ms.pushPose();
             ms.translate(0.5F, 0.5F, 0.5F);
             BlockPos pos = new BlockPos(0, 0, 0).relative(direction);
-            ms.translate(pos.getX() * 0.4375f, pos.getY() * 0.4375f, pos.getZ() * 0.4375f);
+            ms.translate(pos.getX() * casing.getLightLensOffset(), pos.getY() * casing.getLightLensOffset(), pos.getZ() * casing.getLightLensOffset());
 
             RenderUtils.renderCustomModel(WizardsRebornClient.HOVERING_LENS_MODEl, ItemDisplayContext.FIXED, false, ms, buffers, light, overlay);
 
@@ -42,10 +43,11 @@ public class LightCasingTileEntityRenderer implements BlockEntityRenderer<LightC
                 RenderUtils.ray(ms, bufferDelayed, 0.075f, 0.075f, 1f, 0.564f, 0.682f, 0.705f, alpha, 0.564f, 0.682f, 0.705f, alpha);
 
                 if (casing.canWork() && casing.getLight() > 0) {
-                    Vec3 from = new Vec3(casing.getBlockPos().getX() + 0.5f + (pos.getX() * 0.4375f), casing.getBlockPos().getY() + 0.5f + (pos.getY() * 0.4375f), casing.getBlockPos().getZ() + 0.5f + (pos.getZ() * 0.4375f));
+                    Vec3 from = new Vec3(casing.getBlockPos().getX() + 0.5f + (pos.getX() * casing.getLightLensOffset()), casing.getBlockPos().getY() + 0.5f + (pos.getY() * casing.getLightLensOffset()), casing.getBlockPos().getZ() + 0.5f + (pos.getZ() * casing.getLightLensOffset()));
                     Vec3 to = LightUtils.getLightLensPos(casing.getBlockPos().relative(direction), casing.getLightLensPos());
 
-                    LightUtils.renderLightRay(casing.getLevel(), casing.getBlockPos(), from, to, 25f, casing.getColor(), partialTicks, ms);
+                    Color color = LightUtils.getRayColorFromLumos(casing.getColor(), casing.getLumos(), casing.getBlockPos(), partialTicks);
+                    LightUtils.renderLightRay(casing.getLevel(), casing.getBlockPos(), from, to, 25f, color, partialTicks, ms);
                 }
             }
             ms.popPose();

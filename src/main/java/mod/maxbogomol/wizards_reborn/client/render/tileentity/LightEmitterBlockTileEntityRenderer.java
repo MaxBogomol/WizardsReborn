@@ -15,6 +15,7 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.world.item.ItemDisplayContext;
 import net.minecraft.world.phys.Vec3;
 
+import java.awt.*;
 import java.util.Random;
 
 public class LightEmitterBlockTileEntityRenderer implements BlockEntityRenderer<LightEmitterTileEntity> {
@@ -50,7 +51,8 @@ public class LightEmitterBlockTileEntityRenderer implements BlockEntityRenderer<
 
                 ms.pushPose();
                 ms.translate(0.5F, 0.8125F, 0.5F);
-                LightUtils.renderLightRay(emitter.getLevel(), emitter.getBlockPos(), from, to, 25f, emitter.getRayColor(), partialTicks, ms);
+                Color color = LightUtils.getRayColorFromLumos(emitter.getRayColor(), emitter.getLumos(), emitter.getBlockPos(), partialTicks);
+                LightUtils.renderLightRay(emitter.getLevel(), emitter.getBlockPos(), from, to, 25f, color, partialTicks, ms);
                 ms.popPose();
             }
         }

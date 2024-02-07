@@ -42,7 +42,7 @@ public class LightCasingTileEntity extends LightTransferLensTileEntity {
                 for (Direction direction : Direction.values()) {
                     if (isConnection(direction)) {
                         BlockPos pos = new BlockPos(0, 0, 0).relative(direction);
-                        Vec3 from = new Vec3(getBlockPos().getX() + 0.5f + (pos.getX() * 0.4375f), getBlockPos().getY() + 0.5f + (pos.getY() * 0.4375f), getBlockPos().getZ() + 0.5f + (pos.getZ() * 0.4375f));
+                        Vec3 from = new Vec3(getBlockPos().getX() + 0.5f + (pos.getX() * getLightLensOffset()), getBlockPos().getY() + 0.5f + (pos.getY() * getLightLensOffset()), getBlockPos().getZ() + 0.5f + (pos.getZ() * getLightLensOffset()));
                         Vec3 to = LightUtils.getLightLensPos(getBlockPos().relative(direction), getLightLensPos());
 
                         LightRayHitResult hitResult = LightUtils.getLightRayHitResult(level, getBlockPos(), from, to, 25);
@@ -99,6 +99,10 @@ public class LightCasingTileEntity extends LightTransferLensTileEntity {
     @Override
     public float getLightLensSize() {
         return 0.5f;
+    }
+
+    public float getLightLensOffset() {
+        return 0.4375f;
     }
 
     public void setConnection(Direction facing, boolean flag) {

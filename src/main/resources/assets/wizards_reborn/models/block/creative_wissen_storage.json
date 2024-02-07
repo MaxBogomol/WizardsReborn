@@ -1,0 +1,23 @@
+{
+	"credit": "Made with Blockbench",
+	"parent": "block/block",
+	"textures": {
+		"extractor": "wizards_reborn:block/creative_wissen_storage",
+		"particle": "wizards_reborn:block/arcane_wood_planks"
+	},
+	"elements": [
+		{
+			"name": "Cube",
+			"from": [3, 3, 3],
+			"to": [13, 13, 13],
+			"faces": {
+				"north": {"uv": [0, 0, 10, 10], "texture": "#extractor"},
+				"east": {"uv": [0, 0, 10, 10], "texture": "#extractor"},
+				"south": {"uv": [0, 0, 10, 10], "texture": "#extractor"},
+				"west": {"uv": [0, 0, 10, 10], "texture": "#extractor"},
+				"up": {"uv": [0, 0, 10, 10], "texture": "#extractor"},
+				"down": {"uv": [0, 0, 10, 10], "texture": "#extractor"}
+			}
+		}
+	]
+}

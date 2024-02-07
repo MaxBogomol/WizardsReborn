@@ -4,6 +4,7 @@ import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.math.Axis;
 import mod.maxbogomol.wizards_reborn.client.event.ClientTickHandler;
 import mod.maxbogomol.wizards_reborn.client.render.WorldRenderHandler;
+import mod.maxbogomol.wizards_reborn.common.block.ArcaneLumosBlock;
 import mod.maxbogomol.wizards_reborn.utils.PacketUtils;
 import mod.maxbogomol.wizards_reborn.utils.RenderUtils;
 import net.minecraft.client.renderer.MultiBufferSource;
@@ -16,6 +17,7 @@ import net.minecraft.world.phys.HitResult;
 import net.minecraft.world.phys.Vec3;
 
 import java.awt.*;
+import java.util.Random;
 
 public class LightUtils {
     public static Vec3 getLightLensPos(BlockPos pos, Vec3 lensPos) {
@@ -128,5 +130,36 @@ public class LightUtils {
                 }
             }
         }
+    }
+
+    public static Color getRayColorFromLumos(Color color, ArcaneLumosBlock lumos, BlockPos pos, float partialTicks) {
+        if (lumos != null) {
+            if (lumos.color == ArcaneLumosBlock.Colors.RAINBOW) {
+                double ticks = (ClientTickHandler.ticksInGame + partialTicks) * 0.1f;
+                int i = (int) (ticks % 10);
+                int ii = i + 1 % 10;
+
+                Random random = new Random();
+                random.setSeed(pos.asLong());
+
+                Random random1 = new Random();
+                random1.setSeed(pos.asLong() + (long) (i));
+
+                Random random2 = new Random();
+                random2.setSeed(pos.asLong() + (long) (ii));
+
+                Color color1 = new Color(random1.nextFloat(), random1.nextFloat(), random1.nextFloat());
+                Color color2 = new Color(random2.nextFloat(), random2.nextFloat(), random2.nextFloat());
+
+                int r = (int) Mth.lerp(ticks % 1f, color1.getRed(), color2.getRed());
+                int g = (int) Mth.lerp(ticks % 1f, color1.getBlue(), color2.getBlue());
+                int b = (int) Mth.lerp(ticks % 1f, color1.getGreen(), color2.getGreen());
+
+                color = new Color(r, g, b);
+            }
+        }
+
+
+        return color;
     }
 }

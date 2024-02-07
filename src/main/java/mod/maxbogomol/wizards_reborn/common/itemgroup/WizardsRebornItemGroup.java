@@ -248,6 +248,8 @@ public class WizardsRebornItemGroup {
             event.accept(WizardsReborn.WISESTONE_FLUID_CASING_ITEM);
             event.accept(WizardsReborn.WISESTONE_STEAM_CASING_ITEM);
 
+            event.accept(WizardsReborn.CREATIVE_WISSEN_STORAGE_ITEM);
+            event.accept(WizardsReborn.CREATIVE_LIGHT_STORAGE_ITEM);
             event.accept(WizardsReborn.CREATIVE_FLUID_STORAGE_ITEM);
             event.accept(WizardsReborn.CREATIVE_STEAM_STORAGE_ITEM);
 

@@ -127,7 +127,7 @@ public class WissenCrystallizerBlock extends Block implements EntityBlock, Simpl
             if (invSize > 0) {
                 int slot = invSize - 1;
                 if (!tile.getItemHandler().getItem(slot).isEmpty()) {
-                    if (player.getInventory().getSlotWithRemainingSpace(tile.getItemHandler().getItem(slot)) > 0) {
+                    if (player.getInventory().getSlotWithRemainingSpace(tile.getItemHandler().getItem(slot)) != -1 || player.getInventory().getFreeSlot() > 0) {
                         player.getInventory().add(tile.getItemHandler().getItem(slot).copy());
                     } else {
                         world.addFreshEntity(new ItemEntity(world, pos.getX() + 0.5F, pos.getY() + 1.0F, pos.getZ() + 0.5F, tile.getItemHandler().getItem(slot).copy()));

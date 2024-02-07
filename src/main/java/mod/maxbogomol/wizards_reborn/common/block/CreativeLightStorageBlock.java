@@ -1,30 +1,26 @@
 package mod.maxbogomol.wizards_reborn.common.block;
 
 import mod.maxbogomol.wizards_reborn.WizardsReborn;
-import mod.maxbogomol.wizards_reborn.api.wissen.IWissenItem;
 import mod.maxbogomol.wizards_reborn.common.item.equipment.WissenWandItem;
-import mod.maxbogomol.wizards_reborn.common.recipe.WissenAltarRecipe;
+import mod.maxbogomol.wizards_reborn.common.tileentity.CreativeLightStorageTileEntity;
 import mod.maxbogomol.wizards_reborn.common.tileentity.TickableBlockEntity;
 import mod.maxbogomol.wizards_reborn.common.tileentity.TileSimpleInventory;
-import mod.maxbogomol.wizards_reborn.common.tileentity.WissenAltarTileEntity;
 import mod.maxbogomol.wizards_reborn.utils.PacketUtils;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
-import net.minecraft.world.Containers;
+import net.minecraft.sounds.SoundEvents;
+import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
-import net.minecraft.world.SimpleContainer;
 import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.EntityBlock;
-import net.minecraft.world.level.block.HorizontalDirectionalBlock;
 import net.minecraft.world.level.block.SimpleWaterloggedBlock;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityTicker;
@@ -35,30 +31,18 @@ import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.material.FluidState;
 import net.minecraft.world.level.material.Fluids;
 import net.minecraft.world.phys.BlockHitResult;
-import net.minecraft.world.phys.shapes.BooleanOp;
 import net.minecraft.world.phys.shapes.CollisionContext;
-import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
 import org.jetbrains.annotations.NotNull;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
-import java.util.stream.Stream;
 
-public class WissenAltarBlock extends HorizontalDirectionalBlock implements EntityBlock, SimpleWaterloggedBlock  {
+public class CreativeLightStorageBlock extends Block implements EntityBlock, SimpleWaterloggedBlock  {
 
-    private static final VoxelShape SHAPE = Stream.of(
-            Block.box(5, 13, 5, 11, 14, 11),
-            Block.box(2, 11, 2, 14, 13, 14),
-            Block.box(4, 2, 4, 12, 11, 12),
-            Block.box(2, 0, 2, 14, 2, 14),
-            Block.box(1, 9, 1, 3, 16, 3),
-            Block.box(13, 9, 1, 15, 16, 3),
-            Block.box(1, 9, 13, 3, 16, 15),
-            Block.box(13, 9, 13, 15, 16, 15)
-    ).reduce((v1, v2) -> Shapes.join(v1, v2, BooleanOp.OR)).get();
+    public static final VoxelShape SHAPE = Block.box(4,4,4,12,12,12);
 
-    public WissenAltarBlock(Properties properties) {
+    public CreativeLightStorageBlock(Properties properties) {
         super(properties);
         registerDefaultState(defaultBlockState().setValue(BlockStateProperties.WATERLOGGED, false));
     }
@@ -71,15 +55,7 @@ public class WissenAltarBlock extends HorizontalDirectionalBlock implements Enti
 
     @Override
     protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {
-        builder.add(FACING);
         builder.add(BlockStateProperties.WATERLOGGED);
-    }
-
-    @Nullable
-    @Override
-    public BlockState getStateForPlacement(BlockPlaceContext context) {
-        FluidState fluidState = context.getLevel().getFluidState(context.getClickedPos());
-        return this.defaultBlockState().setValue(FACING, context.getHorizontalDirection().getOpposite()).setValue(BlockStateProperties.WATERLOGGED, fluidState.getType() == Fluids.WATER);
     }
 
     @Override
@@ -87,8 +63,7 @@ public class WissenAltarBlock extends HorizontalDirectionalBlock implements Enti
         if (state.getBlock() != newState.getBlock()) {
             BlockEntity tile = world.getBlockEntity(pos);
             if (tile instanceof TileSimpleInventory) {
-                ((TileSimpleInventory) tile).getItemHandler().removeItem(2, 64);
-                Containers.dropContents(world, pos, ((TileSimpleInventory) tile).getItemHandler());
+                net.minecraft.world.Containers.dropContents(world, pos, ((TileSimpleInventory) tile).getItemHandler());
             }
             super.onRemove(state, world, pos, newState, isMoving);
         }
@@ -96,72 +71,54 @@ public class WissenAltarBlock extends HorizontalDirectionalBlock implements Enti
 
     @Override
     public InteractionResult use(BlockState state, Level world, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hit) {
-        WissenAltarTileEntity altar = (WissenAltarTileEntity) world.getBlockEntity(pos);
+        CreativeLightStorageTileEntity tile = (CreativeLightStorageTileEntity) world.getBlockEntity(pos);
         ItemStack stack = player.getItemInHand(hand).copy();
 
         if (stack.getItem() instanceof WissenWandItem) {
+            if (WissenWandItem.getMode(stack) == 0) {
+                float f = tile.isConnection(hit.getDirection()) ? 0.6F : 0.5F;
+                world.playSound(null, pos, SoundEvents.LEVER_CLICK, SoundSource.BLOCKS, 0.3F, f);
+                tile.setConnection(hit.getDirection(), !tile.isConnection(hit.getDirection()));
+                PacketUtils.SUpdateTileEntityPacket(tile);
+                return InteractionResult.SUCCESS;
+            }
+
             if (WissenWandItem.getMode(stack) != 4) {
                 world.updateNeighbourForOutputSignal(pos, this);
-                PacketUtils.SUpdateTileEntityPacket(altar);
+                PacketUtils.SUpdateTileEntityPacket(tile);
                 return InteractionResult.SUCCESS;
             }
         }
 
-        if (stack.getItem() instanceof IWissenItem) {
-            if (altar.getItemHandler().getItem(0).isEmpty()) {
-                altar.getItemHandler().setItem(0, stack);
-                player.getInventory().removeItem(player.getItemInHand(hand));
-                world.updateNeighbourForOutputSignal(pos, this);
-                PacketUtils.SUpdateTileEntityPacket(altar);
-                return InteractionResult.SUCCESS;
-            }
-        }
-
-        SimpleContainer inv = new SimpleContainer(1);
-        inv.setItem(0, stack);
-        int wissenInItem = world.getRecipeManager().getRecipeFor(WizardsReborn.WISSEN_ALTAR_RECIPE.get(), inv, world)
-                .map(WissenAltarRecipe::getRecipeWissen)
-                .orElse(0);
-        if (wissenInItem > 0) {
-            if (altar.getItemHandler().getItem(1).isEmpty()) {
-                altar.getItemHandler().setItem(1, stack.copy());
-                player.getInventory().removeItem(player.getItemInHand(hand));
-                world.updateNeighbourForOutputSignal(pos, this);
-                PacketUtils.SUpdateTileEntityPacket(altar);
-                return InteractionResult.SUCCESS;
-            } else {
-                if (altar.getItemHandler().getItem(1).equals(stack)
-                        && altar.getItemHandler().getItem(1).getCount() + stack.getCount() <= altar.getItemHandler().getItem(1).getMaxStackSize()) {
-                    altar.getItemHandler().getItem(1).setCount(altar.getItemHandler().getItem(1).getCount() + stack.getCount());
+        if ((!stack.isEmpty()) && (tile.getItemHandler().getItem(0).isEmpty())) {
+            if (stack.is(WizardsReborn.ARCANE_LUMOS_ITEM_TAG)) {
+                if (stack.getCount() > 1) {
+                    player.getItemInHand(hand).setCount(stack.getCount() - 1);
+                    stack.setCount(1);
+                    tile.getItemHandler().setItem(0, stack);
                     world.updateNeighbourForOutputSignal(pos, this);
-                    PacketUtils.SUpdateTileEntityPacket(altar);
+                    PacketUtils.SUpdateTileEntityPacket(tile);
+                    return InteractionResult.SUCCESS;
+                } else {
+                    tile.getItemHandler().setItem(0, stack);
+                    player.getInventory().removeItem(player.getItemInHand(hand));
+                    world.updateNeighbourForOutputSignal(pos, this);
+                    PacketUtils.SUpdateTileEntityPacket(tile);
                     return InteractionResult.SUCCESS;
                 }
             }
         }
 
-        if (!altar.getItemHandler().getItem(0).isEmpty()) {
-            if (player.getInventory().getSlotWithRemainingSpace(altar.getItemHandler().getItem(0)) != -1 || player.getInventory().getFreeSlot() > 0) {
-                player.getInventory().add(altar.getItemHandler().getItem(0).copy());
+        if (!tile.getItemHandler().getItem(0).isEmpty()) {
+            if (player.getInventory().getSlotWithRemainingSpace(tile.getItemHandler().getItem(0)) != -1 || player.getInventory().getFreeSlot() > 0) {
+                player.getInventory().add(tile.getItemHandler().getItem(0).copy());
             } else {
-                world.addFreshEntity(new ItemEntity(world, pos.getX() + 0.5F, pos.getY() + 1.0F, pos.getZ() + 0.5F, altar.getItemHandler().getItem(0).copy()));
+                world.addFreshEntity(new ItemEntity(world, pos.getX() + 0.5F, pos.getY() + 1.0F, pos.getZ() + 0.5F, tile.getItemHandler().getItem(0).copy()));
             }
-            altar.getItemHandler().removeItem(0, 1);
+            tile.getItemHandler().removeItem(0, 1);
             world.updateNeighbourForOutputSignal(pos, this);
-            PacketUtils.SUpdateTileEntityPacket(altar);
+            PacketUtils.SUpdateTileEntityPacket(tile);
             return InteractionResult.SUCCESS;
-        } else {
-            if (!altar.getItemHandler().getItem(1).isEmpty()) {
-                if (player.getInventory().getSlotWithRemainingSpace(altar.getItemHandler().getItem(1)) != -1 || player.getInventory().getFreeSlot() > 0) {
-                    player.getInventory().add(altar.getItemHandler().getItem(0).copy());
-                } else {
-                    world.addFreshEntity(new ItemEntity(world, pos.getX() + 0.5F, pos.getY() + 1.0F, pos.getZ() + 0.5F, altar.getItemHandler().getItem(1).copy()));
-                }
-                altar.getItemHandler().removeItem(1, 64);
-                world.updateNeighbourForOutputSignal(pos, this);
-                PacketUtils.SUpdateTileEntityPacket(altar);
-                return InteractionResult.SUCCESS;
-            }
         }
 
         return InteractionResult.PASS;
@@ -191,7 +148,7 @@ public class WissenAltarBlock extends HorizontalDirectionalBlock implements Enti
     @Nullable
     @Override
     public BlockEntity newBlockEntity(BlockPos pPos, BlockState pState) {
-        return new WissenAltarTileEntity(pPos, pState);
+        return new CreativeLightStorageTileEntity(pPos, pState);
     }
 
     @Nullable

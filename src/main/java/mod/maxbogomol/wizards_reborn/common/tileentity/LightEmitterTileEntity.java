@@ -216,14 +216,9 @@ public class LightEmitterTileEntity extends ExposedTileSimpleInventory implement
     public Color getColor() {
         Color color = new Color(0.466f, 0.643f, 0.815f);
 
-        if (!getItemHandler().getItem(0).isEmpty()) {
-            if (getItemHandler().getItem(0).getItem() instanceof BlockItem) {
-                BlockItem blockItem = (BlockItem) getItemHandler().getItem(0).getItem();
-                if (blockItem.getBlock() instanceof ArcaneLumosBlock) {
-                    ArcaneLumosBlock lumos = (ArcaneLumosBlock) blockItem.getBlock();
-                    color = ArcaneLumosBlock.getColor(lumos.color);
-                }
-            }
+        ArcaneLumosBlock lumos = getLumos();
+        if (lumos != null) {
+            color = ArcaneLumosBlock.getColor(lumos.color);
         }
 
         return color;
@@ -232,17 +227,26 @@ public class LightEmitterTileEntity extends ExposedTileSimpleInventory implement
     public Color getRayColor() {
         Color color = new Color(0.886f, 0.811f, 0.549f);
 
+        ArcaneLumosBlock lumos = getLumos();
+        if (lumos != null) {
+            color = ArcaneLumosBlock.getColor(lumos.color);
+        }
+
+        return color;
+    }
+
+    public ArcaneLumosBlock getLumos() {
         if (!getItemHandler().getItem(0).isEmpty()) {
             if (getItemHandler().getItem(0).getItem() instanceof BlockItem) {
                 BlockItem blockItem = (BlockItem) getItemHandler().getItem(0).getItem();
                 if (blockItem.getBlock() instanceof ArcaneLumosBlock) {
                     ArcaneLumosBlock lumos = (ArcaneLumosBlock) blockItem.getBlock();
-                    color = ArcaneLumosBlock.getColor(lumos.color);
+                    return lumos;
                 }
             }
         }
 
-        return color;
+        return null;
     }
 
     public boolean canWork() {
