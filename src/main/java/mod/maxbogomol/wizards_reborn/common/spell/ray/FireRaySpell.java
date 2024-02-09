@@ -26,6 +26,9 @@ import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.gameevent.GameEvent;
 import net.minecraft.world.phys.HitResult;
 import net.minecraft.world.phys.Vec3;
+import net.minecraftforge.common.MinecraftForge;
+import net.minecraftforge.common.util.BlockSnapshot;
+import net.minecraftforge.event.level.BlockEvent;
 
 import java.awt.*;
 
@@ -83,7 +86,13 @@ public class FireRaySpell extends RaySpell {
                         BlockPos blockPos = new BlockPos(Mth.floor(vec.x()), Mth.floor(vec.y()), Mth.floor(vec.z()));
                         BlockState blockState = world.getBlockState(blockPos);
                         if (!CampfireBlock.canLight(blockState) && !CandleBlock.canLight(blockState) && !CandleCakeBlock.canLight(blockState)) {
-                            if (BaseFireBlock.canBePlacedAt(world, blockPos, Direction.UP)) {
+                            BlockEvent.EntityPlaceEvent placeEv = new BlockEvent.EntityPlaceEvent(
+                                    BlockSnapshot.create(world.dimension(), world, blockPos),
+                                    BaseFireBlock.getState(world, blockPos),
+                                    player
+                            );
+
+                            if (BaseFireBlock.canBePlacedAt(world, blockPos, Direction.UP) && !MinecraftForge.EVENT_BUS.post(placeEv)) {
                                 world.playSound(null, blockPos, SoundEvents.FIRECHARGE_USE, SoundSource.BLOCKS, 0.1F, world.getRandom().nextFloat() * 0.4F + 0.8F);
                                 BlockState blockstate1 = BaseFireBlock.getState(world, blockPos);
                                 world.setBlock(blockPos, blockstate1, 11);
@@ -93,13 +102,21 @@ public class FireRaySpell extends RaySpell {
                                 PacketHandler.sendToTracking(world, player.getOnPos(), new FireRaySpellEffectPacket((float) blockPos.getX() + 0.5f, (float) blockPos.getY() + 0.2f, (float) blockPos.getZ() + 0.5f, r, g, b));
                             }
                         } else {
-                            world.playSound(player, blockPos, SoundEvents.FLINTANDSTEEL_USE, SoundSource.BLOCKS, 1.0F, world.getRandom().nextFloat() * 0.4F + 0.8F);
-                            world.setBlock(blockPos, blockState.setValue(BlockStateProperties.LIT, Boolean.valueOf(true)), 11);
-                            world.gameEvent(player, GameEvent.BLOCK_CHANGE, blockPos);
+                            BlockEvent.EntityPlaceEvent placeEv = new BlockEvent.EntityPlaceEvent(
+                                    BlockSnapshot.create(world.dimension(), world, blockPos),
+                                    world.getBlockState(blockPos),
+                                    player
+                            );
 
-                            removeWissen(stack, projectile.getStats(), player);
+                            if (!MinecraftForge.EVENT_BUS.post(placeEv)) {
+                                world.playSound(player, blockPos, SoundEvents.FLINTANDSTEEL_USE, SoundSource.BLOCKS, 1.0F, world.getRandom().nextFloat() * 0.4F + 0.8F);
+                                world.setBlock(blockPos, blockState.setValue(BlockStateProperties.LIT, Boolean.valueOf(true)), 11);
+                                world.gameEvent(player, GameEvent.BLOCK_CHANGE, blockPos);
 
-                            PacketHandler.sendToTracking(world, player.getOnPos(), new FireRaySpellEffectPacket((float) blockPos.getX() + 0.5f, (float) blockPos.getY() + 0.5f, (float) blockPos.getZ() + 0.5f, r, g, b));
+                                removeWissen(stack, projectile.getStats(), player);
+
+                                PacketHandler.sendToTracking(world, player.getOnPos(), new FireRaySpellEffectPacket((float) blockPos.getX() + 0.5f, (float) blockPos.getY() + 0.5f, (float) blockPos.getZ() + 0.5f, r, g, b));
+                            }
                         }
                     }
                 }

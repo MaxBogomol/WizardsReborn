@@ -1966,7 +1966,7 @@ public class ArcanemiconChapters {
                         new ItemStack(WizardsReborn.ARCANE_GOLD_INGOT.get()), new ItemStack(WizardsReborn.POLISHED_WISESTONE_ITEM.get()),  new ItemStack(WizardsReborn.ARCANE_GOLD_INGOT.get()),
                         new ItemStack(WizardsReborn.POLISHED_WISESTONE_ITEM.get()), new ItemStack(Items.GLASS),  new ItemStack(WizardsReborn.POLISHED_WISESTONE_ITEM.get()),
                         new ItemStack(WizardsReborn.ARCANE_GOLD_INGOT.get()), new ItemStack(WizardsReborn.POLISHED_WISESTONE_ITEM.get()),  new ItemStack(WizardsReborn.ARCANE_GOLD_INGOT.get()),
-                        new ItemStack(WizardsReborn.STEAM_PIPE_ITEM.get()), new ItemStack(WizardsReborn.ARCANE_GOLD_NUGGET.get()), new ItemStack(WizardsReborn.FLUID_PIPE_ITEM.get()), new ItemStack(WizardsReborn.ARCANE_GOLD_NUGGET.get())
+                        new ItemStack(WizardsReborn.STEAM_PIPE_ITEM.get()), new ItemStack(WizardsReborn.ARCANE_GOLD_NUGGET.get()), new ItemStack(WizardsReborn.STEAM_PIPE_ITEM.get()), new ItemStack(WizardsReborn.ARCANE_GOLD_NUGGET.get())
                 )
         );
 

@@ -1086,6 +1086,11 @@ public class WizardsReborn {
                     .put(ARCANE_WOOD_LOG.get(), STRIPPED_ARCANE_WOOD_LOG.get())
                     .put(ARCANE_WOOD.get(), STRIPPED_ARCANE_WOOD.get()).build();
 
+            ArcanePedestalBlock.blocksList.put(ARCANE_PEDESTAL.get(), HOVERING_TOME_STAND.get());
+            ArcanePedestalBlock.blocksList.put(WISESTONE_PEDESTAL.get(), WISESTONE_HOVERING_TOME_STAND.get());
+            HoveringTomeStandBlock.blocksList.put(HOVERING_TOME_STAND.get(), ARCANE_PEDESTAL.get());
+            HoveringTomeStandBlock.blocksList.put(WISESTONE_HOVERING_TOME_STAND.get(), WISESTONE_PEDESTAL.get());
+
             FireBlock fireblock = (FireBlock) Blocks.FIRE;
             fireblock.setFlammable(ARCANE_WOOD_LOG.get(), 5, 20);
             fireblock.setFlammable(ARCANE_WOOD.get(), 5, 20);

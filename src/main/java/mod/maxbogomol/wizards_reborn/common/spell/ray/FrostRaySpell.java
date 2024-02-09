@@ -22,6 +22,9 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.HitResult;
 import net.minecraft.world.phys.Vec3;
 import net.minecraft.world.phys.shapes.CollisionContext;
+import net.minecraftforge.common.MinecraftForge;
+import net.minecraftforge.common.util.BlockSnapshot;
+import net.minecraftforge.event.level.BlockEvent;
 
 import java.awt.*;
 import java.util.function.Predicate;
@@ -82,7 +85,14 @@ public class FrostRaySpell extends RaySpell {
                         BlockPos blockPos = new BlockPos(Mth.floor(vec.x()), Mth.floor(vec.y()), Mth.floor(vec.z()));
                         BlockState blockState = world.getBlockState(blockPos);
                         BlockState blockStateIce = Blocks.FROSTED_ICE.defaultBlockState();
-                        if (blockState == FrostedIceBlock.meltsInto() && blockStateIce.canSurvive(world, blockPos) && world.isUnobstructed(blockStateIce, blockPos, CollisionContext.empty()) && !net.minecraftforge.event.ForgeEventFactory.onBlockPlace(player, net.minecraftforge.common.util.BlockSnapshot.create(world.dimension(), world, blockPos), net.minecraft.core.Direction.UP)) {
+
+                        BlockEvent.EntityPlaceEvent placeEv = new BlockEvent.EntityPlaceEvent(
+                                BlockSnapshot.create(world.dimension(), world, blockPos),
+                                blockStateIce,
+                                player
+                        );
+
+                        if (blockState == FrostedIceBlock.meltsInto() && blockStateIce.canSurvive(world, blockPos) && world.isUnobstructed(blockStateIce, blockPos, CollisionContext.empty()) && !net.minecraftforge.event.ForgeEventFactory.onBlockPlace(player, net.minecraftforge.common.util.BlockSnapshot.create(world.dimension(), world, blockPos), net.minecraft.core.Direction.UP)  && !MinecraftForge.EVENT_BUS.post(placeEv)) {
                             world.setBlockAndUpdate(blockPos, blockStateIce);
                             world.scheduleTick(blockPos, Blocks.FROSTED_ICE, Mth.nextInt(player.getRandom(), 300, 600));
 

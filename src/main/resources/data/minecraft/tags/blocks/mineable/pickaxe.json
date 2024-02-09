@@ -84,12 +84,15 @@
     "wizards_reborn:arcane_censer",
     "wizards_reborn:light_emitter",
     "wizards_reborn:light_transfer_lens",
+    "wizards_reborn:runic_pedestal",
     "wizards_reborn:wisestone_frame",
     "wizards_reborn:wisestone_glass_frame",
     "wizards_reborn:wisestone_casing",
     "wizards_reborn:wisestone_wissen_casing",
     "wizards_reborn:wisestone_light_casing",
     "wizards_reborn:wisestone_fluid_casing",
-    "wizards_reborn:wisestone_steam_casing"
+    "wizards_reborn:wisestone_steam_casing",
+    "wizards_reborn:creative_fluid_storage",
+    "wizards_reborn:creative_steam_storage"
   ]
 }

@@ -1,0 +1,37 @@
+{
+  "type": "wizards_reborn:arcane_workbench",
+  "pattern": [
+    "_I_",
+    "N#N",
+    "SWS",
+    "G_A_"
+  ],
+  "key": {
+    "#": {
+      "item": "wizards_reborn:arcane_wood_planks"
+    },
+    "I": {
+      "tag": "wizards_reborn:arcane_gold_ingot"
+    },
+    "N": {
+      "tag": "wizards_reborn:arcane_gold_nugget"
+    },
+    "W": {
+      "item": "wizards_reborn:polished_wisestone"
+    },
+    "S": {
+      "item": "wizards_reborn:polished_wisestone_slab"
+    },
+    "G": {
+      "item": "wizards_reborn:alchemy_glass"
+    },
+    "A": {
+      "item": "wizards_reborn:arcanum"
+    }
+  },
+  "output": {
+    "item": "wizards_reborn:light_transfer_lens",
+    "count": 2
+  },
+  "wissen": 200
+}

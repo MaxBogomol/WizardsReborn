@@ -226,6 +226,7 @@ public class CrystalGrowthBlock extends Block implements EntityBlock, SimpleWate
                 CrystalUtils.createCrystalItemStats(crystalItem, type, world, 6);
                 Containers.dropItemStack(world, pos.getX(), pos.getY(), pos.getZ(), crystalItem);
             }
+            super.onRemove(state, world, pos, newState, isMoving);
         }
     }
 }

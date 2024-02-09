@@ -6,7 +6,6 @@ import mod.maxbogomol.wizards_reborn.api.spell.Spell;
 import mod.maxbogomol.wizards_reborn.api.wissen.WissenItemUtils;
 import mod.maxbogomol.wizards_reborn.common.item.equipment.arcane.ArcaneArmorItem;
 import mod.maxbogomol.wizards_reborn.common.network.PacketHandler;
-import mod.maxbogomol.wizards_reborn.common.network.spell.HeartOfNatureSpellEffectPacket;
 import mod.maxbogomol.wizards_reborn.common.network.spell.MagicSproutSpellEffectPacket;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
@@ -19,6 +18,9 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.context.UseOnContext;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraftforge.common.MinecraftForge;
+import net.minecraftforge.common.util.BlockSnapshot;
+import net.minecraftforge.event.level.BlockEvent;
 
 import java.awt.*;
 
@@ -83,6 +85,13 @@ public class MagicSproutSpell extends Spell {
     }
 
     public InteractionResult growCrop(ItemStack stack, UseOnContext context, BlockPos blockPos) {
+        BlockEvent.EntityPlaceEvent placeEv = new BlockEvent.EntityPlaceEvent(
+                BlockSnapshot.create(context.getLevel().dimension(), context.getLevel(), blockPos),
+                context.getLevel().getBlockState(blockPos.below()),
+                context.getPlayer()
+        );
+        if (MinecraftForge.EVENT_BUS.post(placeEv)) return InteractionResult.FAIL;
+
         if (BoneMealItem.growCrop(ItemStack.EMPTY, context.getLevel(), blockPos)) {
             return InteractionResult.SUCCESS;
         } else {

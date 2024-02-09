@@ -442,9 +442,9 @@ public class CrystalChooseScreen extends Screen {
                 RenderSystem.depthMask(false);
                 RenderSystem.setShader(WizardsRebornClient::getGlowingShader);
 
-                float r = 255f;
-                float g = 255f;
-                float b = 255f;
+                float r = 1f;
+                float g = 1f;
+                float b = 1f;
 
                 if (getWandCrystal().getItem() instanceof CrystalItem crystalItem) {
                     Color color = crystalItem.getType().getColor();

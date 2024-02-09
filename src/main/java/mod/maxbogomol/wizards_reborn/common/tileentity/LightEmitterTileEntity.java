@@ -70,14 +70,17 @@ public class LightEmitterTileEntity extends ExposedTileSimpleInventory implement
                     BlockEntity tileentity = level.getBlockEntity(pos);
                     if (tileentity instanceof ILightTileEntity lightTileEntity) {
                         if (canWork()) {
-                            setLight(10);
-                            update = true;
-                            Vec3 from = LightUtils.getLightLensPos(getBlockPos(), getLightLensPos());
-                            Vec3 to = LightUtils.getLightLensPos(pos, lightTileEntity.getLightLensPos());
+                            if (getWissen() > 0) {
+                                removeWissen(1);
+                                setLight(10);
+                                update = true;
+                                Vec3 from = LightUtils.getLightLensPos(getBlockPos(), getLightLensPos());
+                                Vec3 to = LightUtils.getLightLensPos(pos, lightTileEntity.getLightLensPos());
 
-                            LightRayHitResult hitResult = LightUtils.getLightRayHitResult(level, getBlockPos(), from, to, 25);
-                            BlockEntity hitTile = hitResult.getTile();
-                            LightUtils.transferLight(this, hitTile);
+                                LightRayHitResult hitResult = LightUtils.getLightRayHitResult(level, getBlockPos(), from, to, 25);
+                                BlockEntity hitTile = hitResult.getTile();
+                                LightUtils.transferLight(this, hitTile);
+                            }
                         }
                     } else {
                         isToBlock = false;

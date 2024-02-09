@@ -18,6 +18,8 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.FireBlock;
 import net.minecraft.world.phys.HitResult;
 import net.minecraft.world.phys.Vec3;
+import net.minecraftforge.common.MinecraftForge;
+import net.minecraftforge.event.level.BlockEvent;
 
 import java.awt.*;
 
@@ -81,7 +83,9 @@ public class WaterRaySpell extends RaySpell {
                             if (WissenItemUtils.canRemoveWissen(stack, getWissenCostWithStat(projectile.getStats(), player))) {
                                 BlockPos pos = blockPos.relative(Direction.Axis.X, x).relative(Direction.Axis.Y, y).relative(Direction.Axis.Z, z);
 
-                                if (!world.getBlockState(pos).isAir()) {
+                                BlockEvent.BreakEvent breakEv = new BlockEvent.BreakEvent(world, blockPos, world.getBlockState(pos), player);
+
+                                if (!world.getBlockState(pos).isAir() && !MinecraftForge.EVENT_BUS.post(breakEv)) {
                                     if (world.getBlockState(pos).getBlock() instanceof FireBlock) {
                                         world.destroyBlock(pos, false);
                                         removeWissen(stack, projectile.getStats(), player);

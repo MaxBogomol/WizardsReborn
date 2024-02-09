@@ -121,6 +121,7 @@ public class WissenTranslatorTileEntity extends ExposedTileSimpleInventory imple
                             if ((getWissenPerReceive() - removeRemain - addRemain) > 0) {
                                 wissenTileEntity.removeWissen(getWissenPerReceive() - removeRemain - addRemain);
                                 addWissenRay(new BlockPos(blockFromX, blockFromY, blockFromZ), getBlockPos(), getWissenPerReceive() - removeRemain - addRemain);
+                                PacketUtils.SUpdateTileEntityPacket(tileentity);
 
                                 setCooldown = true;
                                 update = true;

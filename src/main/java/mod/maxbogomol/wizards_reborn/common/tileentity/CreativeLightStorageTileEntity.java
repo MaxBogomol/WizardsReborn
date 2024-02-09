@@ -15,6 +15,11 @@ public class CreativeLightStorageTileEntity extends LightCasingTileEntity {
     }
 
     @Override
+    public float getLightLensSize() {
+        return 0.25f;
+    }
+
+    @Override
     public float getLightLensOffset() {
         return 0.25f;
     }

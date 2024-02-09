@@ -1,5 +1,6 @@
 package mod.maxbogomol.wizards_reborn.common.block;
 
+import mod.maxbogomol.wizards_reborn.WizardsReborn;
 import mod.maxbogomol.wizards_reborn.client.arcanemicon.ArcanemiconGui;
 import mod.maxbogomol.wizards_reborn.common.tileentity.HoveringTomeStandTileEntity;
 import mod.maxbogomol.wizards_reborn.common.tileentity.TickableBlockEntity;
@@ -10,7 +11,9 @@ import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
+import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
@@ -37,9 +40,13 @@ import org.jetbrains.annotations.NotNull;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.stream.Stream;
 
 public class HoveringTomeStandBlock extends Block implements EntityBlock, SimpleWaterloggedBlock {
+
+    public static Map<Block, Block> blocksList = new HashMap<>();
 
     private static final VoxelShape SHAPE = Stream.of(
             Block.box(5, 13, 5, 11, 14, 11),
@@ -73,6 +80,22 @@ public class HoveringTomeStandBlock extends Block implements EntityBlock, Simple
 
     @Override
     public InteractionResult use(BlockState state, Level world, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hit) {
+        ItemStack stack = player.getItemInHand(hand).copy();
+
+        if (player.isShiftKeyDown()) {
+            Block block = blocksList.get(world.getBlockState(pos).getBlock());
+            if (block != null) {
+                world.setBlockAndUpdate(pos, block.defaultBlockState());
+                ItemStack arcanemicon = new ItemStack(WizardsReborn.ARCANEMICON.get());
+                if (player.getInventory().getSlotWithRemainingSpace(arcanemicon) != -1 || player.getInventory().getFreeSlot() > 0) {
+                    player.getInventory().add(arcanemicon);
+                } else {
+                    world.addFreshEntity(new ItemEntity(world, pos.getX() + 0.5F, pos.getY() + 1.0F, pos.getZ() + 0.5F, arcanemicon));
+                }
+                return InteractionResult.SUCCESS;
+            }
+        }
+
         if (world.isClientSide) {
             openGui(pos);
         }

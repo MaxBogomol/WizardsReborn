@@ -19,6 +19,8 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.HitResult;
 import net.minecraft.world.phys.Vec3;
+import net.minecraftforge.common.MinecraftForge;
+import net.minecraftforge.event.level.BlockEvent;
 
 import java.awt.*;
 
@@ -68,7 +70,10 @@ public class EarthRaySpell extends RaySpell {
                         Vec3 vec = getBlockHitOffset(ray, projectile, 0.1f);
                         BlockPos blockPos = new BlockPos(Mth.floor(vec.x()), Mth.floor(vec.y()), Mth.floor(vec.z()));
                         BlockState blockState = world.getBlockState(blockPos);
-                        if (!blockState.isAir()) {
+
+                        BlockEvent.BreakEvent breakEv = new BlockEvent.BreakEvent(world, blockPos, blockState, player);
+
+                        if (!blockState.isAir() && !MinecraftForge.EVENT_BUS.post(breakEv)) {
                             if (canBreak(blockState)) {
                                 world.destroyBlock(blockPos, true);
 

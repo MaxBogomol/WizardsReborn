@@ -1,5 +1,6 @@
 package mod.maxbogomol.wizards_reborn.common.block;
 
+import mod.maxbogomol.wizards_reborn.common.item.ArcanemiconItem;
 import mod.maxbogomol.wizards_reborn.common.tileentity.ArcanePedestalTileEntity;
 import mod.maxbogomol.wizards_reborn.common.tileentity.TileSimpleInventory;
 import mod.maxbogomol.wizards_reborn.utils.PacketUtils;
@@ -33,9 +34,13 @@ import net.minecraft.world.phys.shapes.VoxelShape;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.stream.Stream;
 
 public class ArcanePedestalBlock extends Block implements EntityBlock, SimpleWaterloggedBlock {
+
+    public static Map<Block, Block> blocksList = new HashMap<>();
 
     private static final VoxelShape SHAPE = Stream.of(
             Block.box(5, 13, 5, 11, 14, 11),
@@ -81,7 +86,13 @@ public class ArcanePedestalBlock extends Block implements EntityBlock, SimpleWat
     @Override
     public InteractionResult use(BlockState state, Level world, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hit) {
         ArcanePedestalTileEntity tile = (ArcanePedestalTileEntity) world.getBlockEntity(pos);
-        ItemStack stack = player.getItemInHand(hand).copy();
+        ItemStack stack = player.getItemInHand(hand);
+
+        if (player.isShiftKeyDown()) {
+            if (stack.getItem() instanceof ArcanemiconItem) {
+                return InteractionResult.PASS;
+            }
+        }
 
         if ((!stack.isEmpty()) && (tile.getItemHandler().getItem(0).isEmpty())) {
             if (stack.getCount() > 1) {
