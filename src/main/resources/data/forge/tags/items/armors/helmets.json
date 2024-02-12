@@ -1,6 +1,8 @@
 {
   "replace": false,
   "values": [
-    "wizards_reborn:arcane_gold_helmet"
+    "wizards_reborn:arcane_gold_helmet",
+    "wizards_reborn:arcane_fortress_helmet",
+    "wizards_reborn:inventor_wizard_hat"
   ]
 }

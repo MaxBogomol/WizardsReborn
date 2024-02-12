@@ -270,6 +270,7 @@ public class WizardsReborn {
 
     //CRYSTAL RITUALS
     public static CrystalRitual EMPTY_CRYSTAL_RITUAL = new CrystalRitual(MOD_ID+":empty");
+    public static CrystalRitual ARTIFICAL_FERTILITY_CRYSTAL_RITUAL = new CrystalRitual(MOD_ID+":artificial_fertility");
     public static CrystalRitual STONE_CALENDAR_CRYSTAL_RITUAL = new CrystalRitual(MOD_ID+":stone_calendar");
 
     public static final FoodProperties MOR_FOOD = (new FoodProperties.Builder()).nutrition(1).saturationMod(0.6F).effect(new MobEffectInstance(MobEffects.POISON, 450, 0), 1.0F).effect(new MobEffectInstance(MobEffects.CONFUSION, 350, 0), 1.0F).effect(new MobEffectInstance(MobEffects.BLINDNESS, 250, 0), 1.0F).effect(new MobEffectInstance(MobEffects.WEAKNESS, 550, 1), 1.0F).build();
@@ -1247,6 +1248,7 @@ public class WizardsReborn {
 
     public static void setupCrystalRituals() {
         CrystalRituals.register(EMPTY_CRYSTAL_RITUAL);
+        CrystalRituals.register(ARTIFICAL_FERTILITY_CRYSTAL_RITUAL);
         CrystalRituals.register(STONE_CALENDAR_CRYSTAL_RITUAL);
     }
 

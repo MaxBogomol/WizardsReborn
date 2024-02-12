@@ -151,6 +151,6 @@ public class WissenCasingTileEntity extends WissenTranslatorTileEntity {
     public boolean wissenWandReload(ItemStack stack, UseOnContext context, BlockEntity tile) {
         resetsConnections();
         PacketUtils.SUpdateTileEntityPacket(this);
-        return false;
+        return true;
     }
 }

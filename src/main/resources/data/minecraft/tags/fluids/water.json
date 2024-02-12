@@ -1,0 +1,19 @@
+{
+  "replace": false,
+  "values": [
+    "wizards_reborn:mundane_brew",
+    "wizards_reborn:flowing_mundane_brew",
+    "wizards_reborn:oil_tea",
+    "wizards_reborn:flowing_oil_tea",
+    "wizards_reborn:wissen_tea",
+    "wizards_reborn:flowing_wissen_tea",
+    "wizards_reborn:mushroom_brew",
+    "wizards_reborn:flowing_mushroom_brew",
+    "wizards_reborn:hellish_mushroom_brew",
+    "wizards_reborn:flowing_hellish_mushroom_brew",
+    "wizards_reborn:mor_brew",
+    "wizards_reborn:flowing_mor_brew",
+    "wizards_reborn:flower_brew",
+    "wizards_reborn:flowing_flower_brew"
+  ]
+}

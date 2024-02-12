@@ -552,6 +552,6 @@ public class WissenTranslatorTileEntity extends ExposedTileSimpleInventory imple
         isFromBlock = false;
         isToBlock = false;
         PacketUtils.SUpdateTileEntityPacket(this);
-        return false;
+        return true;
     }
 }

@@ -302,6 +302,6 @@ public class LightTransferLensTileEntity extends ExposedTileSimpleInventory impl
     public boolean wissenWandReload(ItemStack stack, UseOnContext context, BlockEntity tile) {
         isToBlock = false;
         PacketUtils.SUpdateTileEntityPacket(this);
-        return false;
+        return true;
     }
 }

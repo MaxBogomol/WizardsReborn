@@ -1,6 +1,8 @@
 {
   "replace": false,
   "values": [
-    "wizards_reborn:arcane_gold_chestplate"
+    "wizards_reborn:arcane_gold_chestplate",
+    "wizards_reborn:arcane_fortress_chestplate",
+    "wizards_reborn:inventor_wizard_costume"
   ]
 }

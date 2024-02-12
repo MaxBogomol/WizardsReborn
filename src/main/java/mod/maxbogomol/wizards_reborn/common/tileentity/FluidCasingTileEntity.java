@@ -123,7 +123,7 @@ public class FluidCasingTileEntity extends FluidPipeTileEntity {
             if (clogged && isAnySideUnclogged()) {
                 cloggedEffect();
             }
-            if (level.getBlockState(getBlockPos()).getValue(BlockStateProperties.POWERED) && WissenUtils.isCanRenderWissenWand()) {
+            if (!level.getBlockState(getBlockPos()).isAir() && level.getBlockState(getBlockPos()).getValue(BlockStateProperties.POWERED) && WissenUtils.isCanRenderWissenWand()) {
                 WissenUtils.connectBlockEffect(level, getBlockPos(), new Color(191, 201, 104));
             }
         }

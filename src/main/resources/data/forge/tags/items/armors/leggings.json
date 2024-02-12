@@ -1,6 +1,8 @@
 {
   "replace": false,
   "values": [
-    "wizards_reborn:arcane_gold_leggings"
+    "wizards_reborn:arcane_gold_leggings",
+    "wizards_reborn:arcane_fortress_leggings",
+    "wizards_reborn:inventor_wizard_trousers"
   ]
 }

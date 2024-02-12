@@ -135,6 +135,5 @@ public class WizardsRebornMenuButton extends Button {
                     event.addListener(toAdd.getValue());
             }
         }
-
     }
 }

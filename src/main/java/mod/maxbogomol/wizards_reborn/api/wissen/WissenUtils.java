@@ -70,7 +70,7 @@ public class WissenUtils {
         return renderWand;
     }
 
-    public static void connectBlockEffect(Level level, BlockPos pos, Color color, int particlePerBlock) {
+    public static void connectBlockEffect(Level level, BlockPos pos, Color color, float particlePerBlock) {
         connectBlockEffect(level, new Vec3(pos.getX() + 0.5F, pos.getY() + 0.5F, pos.getZ() + 0.5F), color, particlePerBlock);
     }
 
@@ -78,7 +78,7 @@ public class WissenUtils {
         connectEffect(level, new Vec3(posFrom.getX() + 0.5F, posFrom.getY() + 0.5F, posFrom.getZ() + 0.5F), new Vec3(posTo.getX() + 0.5F, posTo.getY() + 0.5F, posTo.getZ() + 0.5F), color, particlePerBlock);
     }
 
-    public static void connectBlockEffect(Level level, Vec3 pos, Color color, int particlePerBlock) {
+    public static void connectBlockEffect(Level level, Vec3 pos, Color color, float particlePerBlock) {
         float colorR = (color.getRed() / 255f);
         float colorG = (color.getGreen() / 255f);
         float colorB = (color.getBlue() / 255f);
@@ -94,7 +94,7 @@ public class WissenUtils {
         }
     }
 
-    public static void connectEffect(Level level, Vec3 posFrom, Vec3 posTo, Color color, int particlePerBlock) {
+    public static void connectEffect(Level level, Vec3 posFrom, Vec3 posTo, Color color, float particlePerBlock) {
         double distance = Math.sqrt((posTo.x() - posFrom.x()) * (posTo.x() - posFrom.x()) + (posTo.y() - posFrom.y()) * (posTo.y() - posFrom.y()) + (posTo.z() - posFrom.z()) * (posTo.z() - posFrom.z()));
         int blocks = (int) Math.round(distance);
 
@@ -135,6 +135,27 @@ public class WissenUtils {
 
     public static void connectEffect(Level level, Vec3 posFrom, Vec3 posTo, Color color) {
         connectEffect(level, posFrom, posTo, color, ClientConfig.WISSEN_TRANSLATOR_PARTICLE_PER_BLOCK.get());
+    }
+
+    public static void connectBoxEffect(Level level, Vec3 posFrom, Vec3 posTo, Color color, float particlePerBlock) {
+        WissenUtils.connectEffect(level, new Vec3(posFrom.x(), posFrom.y(), posFrom.z()), new Vec3(posTo.x() , posFrom.y(), posFrom.z()), color,  particlePerBlock);
+        WissenUtils.connectEffect(level, new Vec3(posTo.x(), posFrom.y(), posFrom.z()), new Vec3(posTo.x(), posFrom.y(), posTo.z()), color,  particlePerBlock);
+        WissenUtils.connectEffect(level, new Vec3(posTo.x(), posFrom.y(), posTo.z()), new Vec3(posFrom.x(), posFrom.y(), posTo.z()), color,  particlePerBlock);
+        WissenUtils.connectEffect(level, new Vec3(posFrom.x(), posFrom.y(), posTo.z()), new Vec3(posFrom.x(), posFrom.y(), posFrom.z()), color,  particlePerBlock);
+
+        WissenUtils.connectEffect(level, new Vec3(posFrom.x(), posFrom.y(), posFrom.z()), new Vec3(posFrom.x(), posTo.y(), posFrom.z()), color,  particlePerBlock);
+        WissenUtils.connectEffect(level, new Vec3(posTo.x(), posFrom.y(), posFrom.z()), new Vec3(posTo.x(), posTo.y(), posFrom.z()), color,  particlePerBlock);
+        WissenUtils.connectEffect(level, new Vec3(posTo.x(), posFrom.y(), posTo.z()), new Vec3(posTo.x(), posTo.y(), posTo.z()), color,  particlePerBlock);
+        WissenUtils.connectEffect(level, new Vec3(posFrom.x(), posFrom.y(), posTo.z()), new Vec3(posFrom.x(), posTo.y(), posTo.z()), color,  particlePerBlock);
+
+        WissenUtils.connectEffect(level, new Vec3(posFrom.x(), posTo.y(), posFrom.z()), new Vec3(posTo.x(), posTo.y(), posFrom.z()), color, particlePerBlock);
+        WissenUtils.connectEffect(level, new Vec3(posTo.x(), posTo.y(), posFrom.z()), new Vec3(posTo.x() , posTo.y(), posTo.z()), color,  particlePerBlock);
+        WissenUtils.connectEffect(level, new Vec3(posTo.x(), posTo.y(), posTo.z()), new Vec3(posFrom.x(), posTo.y(), posTo.z()), color, particlePerBlock);
+        WissenUtils.connectEffect(level, new Vec3(posFrom.x(), posTo.y(), posTo.z()), new Vec3(posFrom.x(), posTo.y(), posFrom.z()), color, particlePerBlock);
+    }
+
+    public static void connectBoxEffect(Level level, Vec3 posFrom, Vec3 posTo, Color color) {
+        connectBoxEffect(level, posFrom, posTo, color, 1);
     }
 
     public static float getWissenCostModifierWithSale(Player player) {

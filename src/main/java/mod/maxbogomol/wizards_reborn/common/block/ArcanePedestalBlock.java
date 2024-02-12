@@ -113,7 +113,7 @@ public class ArcanePedestalBlock extends Block implements EntityBlock, SimpleWat
         }
 
         if (!tile.getItemHandler().getItem(0).isEmpty()) {
-            if (player.getInventory().getSlotWithRemainingSpace(tile.getItemHandler().getItem(0)) != -1 || player.getInventory().getFreeSlot() > 0) {
+            if (player.getInventory().getSlotWithRemainingSpace(tile.getItemHandler().getItem(0)) != -1 || player.getInventory().getFreeSlot() > -1) {
                 player.getInventory().add(tile.getItemHandler().getItem(0).copy());
             } else {
                 world.addFreshEntity(new ItemEntity(world, pos.getX() + 0.5F, pos.getY() + 1.0F, pos.getZ() + 0.5F, tile.getItemHandler().getItem(0).copy()));

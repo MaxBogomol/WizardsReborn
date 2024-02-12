@@ -141,7 +141,7 @@ public class WissenAltarBlock extends HorizontalDirectionalBlock implements Enti
         }
 
         if (!altar.getItemHandler().getItem(0).isEmpty()) {
-            if (player.getInventory().getSlotWithRemainingSpace(altar.getItemHandler().getItem(0)) != -1 || player.getInventory().getFreeSlot() > 0) {
+            if (player.getInventory().getSlotWithRemainingSpace(altar.getItemHandler().getItem(0)) != -1 || player.getInventory().getFreeSlot() > -1) {
                 player.getInventory().add(altar.getItemHandler().getItem(0).copy());
             } else {
                 world.addFreshEntity(new ItemEntity(world, pos.getX() + 0.5F, pos.getY() + 1.0F, pos.getZ() + 0.5F, altar.getItemHandler().getItem(0).copy()));
@@ -152,8 +152,8 @@ public class WissenAltarBlock extends HorizontalDirectionalBlock implements Enti
             return InteractionResult.SUCCESS;
         } else {
             if (!altar.getItemHandler().getItem(1).isEmpty()) {
-                if (player.getInventory().getSlotWithRemainingSpace(altar.getItemHandler().getItem(1)) != -1 || player.getInventory().getFreeSlot() > 0) {
-                    player.getInventory().add(altar.getItemHandler().getItem(0).copy());
+                if (player.getInventory().getSlotWithRemainingSpace(altar.getItemHandler().getItem(1)) != -1 || player.getInventory().getFreeSlot() > -1) {
+                    player.getInventory().add(altar.getItemHandler().getItem(1).copy());
                 } else {
                     world.addFreshEntity(new ItemEntity(world, pos.getX() + 0.5F, pos.getY() + 1.0F, pos.getZ() + 0.5F, altar.getItemHandler().getItem(1).copy()));
                 }

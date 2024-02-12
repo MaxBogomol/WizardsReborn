@@ -1,6 +1,8 @@
 package mod.maxbogomol.wizards_reborn.common.tileentity;
 
 import mod.maxbogomol.wizards_reborn.WizardsReborn;
+import mod.maxbogomol.wizards_reborn.api.crystalritual.CrystalRitual;
+import mod.maxbogomol.wizards_reborn.api.crystalritual.CrystalRitualUtils;
 import mod.maxbogomol.wizards_reborn.common.item.equipment.RunicWisestonePlateItem;
 import mod.maxbogomol.wizards_reborn.utils.PacketUtils;
 import net.minecraft.core.BlockPos;
@@ -8,8 +10,8 @@ import net.minecraft.core.Direction;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.Connection;
 import net.minecraft.network.protocol.game.ClientboundBlockEntityDataPacket;
+import net.minecraft.world.SimpleContainer;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
@@ -25,7 +27,7 @@ import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import java.util.Random;
 
-public class RunicPedestalTileEntity extends BlockEntity implements TickableBlockEntity {
+public class RunicPedestalTileEntity extends TileSimpleInventory implements TickableBlockEntity {
     public final ItemStackHandler itemHandler = createHandler(1);
     public final LazyOptional<IItemHandler> handler = LazyOptional.of(() -> itemHandler);
 
@@ -44,7 +46,7 @@ public class RunicPedestalTileEntity extends BlockEntity implements TickableBloc
         if (!level.isClientSide()) {
             boolean update = false;
 
-            if (!itemHandler.getStackInSlot(0).isEmpty() && itemHandler.getStackInSlot(0).getItem() instanceof RunicWisestonePlateItem) {
+            if (hasRunicPlate()) {
                 if (!getBlockState().getValue(BlockStateProperties.LIT)) {
                     BlockState blockState = getBlockState().setValue(BlockStateProperties.LIT, true);
                     level.setBlock(getBlockPos(), blockState, 3);
@@ -85,6 +87,16 @@ public class RunicPedestalTileEntity extends BlockEntity implements TickableBloc
                 }
 
                 return super.insertItem(slot, stack, simulate);
+            }
+        };
+    }
+
+    @Override
+    protected SimpleContainer createItemHandler() {
+        return new SimpleContainer(100) {
+            @Override
+            public int getMaxStackSize() {
+                return 64;
             }
         };
     }
@@ -142,5 +154,16 @@ public class RunicPedestalTileEntity extends BlockEntity implements TickableBloc
     public AABB getRenderBoundingBox() {
         BlockPos pos = getBlockPos();
         return new AABB(pos.getX() - 0.5f, pos.getY() - 0.5f, pos.getZ() - 0.5f, pos.getX() + 1.5f, pos.getY() + 1.5f, pos.getZ() + 1.5f);
+    }
+
+    public boolean hasRunicPlate() {
+        return (!itemHandler.getStackInSlot(0).isEmpty() && itemHandler.getStackInSlot(0).getItem() instanceof RunicWisestonePlateItem);
+    }
+
+    public CrystalRitual getCrystalRitual() {
+        if (hasRunicPlate()) {
+            return CrystalRitualUtils.getCrystalRitual(itemHandler.getStackInSlot(0));
+        }
+        return null;
     }
 }

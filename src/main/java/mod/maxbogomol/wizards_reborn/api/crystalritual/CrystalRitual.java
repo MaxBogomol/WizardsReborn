@@ -1,5 +1,7 @@
 package mod.maxbogomol.wizards_reborn.api.crystalritual;
 
+import mod.maxbogomol.wizards_reborn.common.tileentity.CrystalTileEntity;
+
 import java.awt.*;
 import java.util.Random;
 
@@ -28,5 +30,13 @@ public class CrystalRitual {
         String modId = id.substring(0, i);
         String spellId = id.substring(i + 1);
         return "crystal_ritual."  + modId + "." + spellId;
+    }
+
+    public CrystalRitualArea getArea(CrystalTileEntity crystal) {
+        return new CrystalRitualArea(3, 3, 3, 3, 3, 3);
+    }
+
+    public int getMaxCooldown(CrystalTileEntity crystal) {
+        return 0;
     }
 }

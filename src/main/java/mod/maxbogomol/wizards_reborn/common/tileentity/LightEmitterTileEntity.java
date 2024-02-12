@@ -432,6 +432,6 @@ public class LightEmitterTileEntity extends ExposedTileSimpleInventory implement
     public boolean wissenWandReload(ItemStack stack, UseOnContext context, BlockEntity tile) {
         isToBlock = false;
         PacketUtils.SUpdateTileEntityPacket(this);
-        return false;
+        return true;
     }
 }

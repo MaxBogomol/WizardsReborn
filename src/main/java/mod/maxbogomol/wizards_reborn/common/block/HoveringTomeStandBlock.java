@@ -87,7 +87,7 @@ public class HoveringTomeStandBlock extends Block implements EntityBlock, Simple
             if (block != null) {
                 world.setBlockAndUpdate(pos, block.defaultBlockState());
                 ItemStack arcanemicon = new ItemStack(WizardsReborn.ARCANEMICON.get());
-                if (player.getInventory().getSlotWithRemainingSpace(arcanemicon) != -1 || player.getInventory().getFreeSlot() > 0) {
+                if (player.getInventory().getSlotWithRemainingSpace(arcanemicon) != -1 || player.getInventory().getFreeSlot() > -1) {
                     player.getInventory().add(arcanemicon);
                 } else {
                     world.addFreshEntity(new ItemEntity(world, pos.getX() + 0.5F, pos.getY() + 1.0F, pos.getZ() + 0.5F, arcanemicon));

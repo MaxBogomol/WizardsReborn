@@ -117,7 +117,7 @@ public class WizardsRebornClient {
     public static final ModelResourceLocation STEAM_END_2 = new ModelResourceLocation(new ResourceLocation(WizardsReborn.MOD_ID, "steam_pipe_end_opposite"), "");
 
     public static final Music MOR_MUSIC = new Music(WizardsReborn.MUSIC_DISC_MOR_SOUND.getHolder().get(), 6000, 12000, true);
-    public static final Music REBORN_MUSIC = new Music(WizardsReborn.MUSIC_DISC_REBORN_SOUND.getHolder().get(), 6000, 12000, true);
+    public static final Music REBORN_MUSIC = new Music(WizardsReborn.MUSIC_DISC_REBORN_SOUND.getHolder().get(), 400, 1200, true);
 
     @Mod.EventBusSubscriber(bus=Mod.EventBusSubscriber.Bus.MOD, value = Dist.CLIENT)
     public static class RegistryEvents {
