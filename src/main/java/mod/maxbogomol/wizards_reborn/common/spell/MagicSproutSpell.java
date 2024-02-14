@@ -57,7 +57,7 @@ public class MagicSproutSpell extends Spell {
             if (growCrop(stack, context, context.getClickedPos()) == InteractionResult.SUCCESS) {
                 if (!context.getPlayer().isShiftKeyDown()) {
                     useGrow(stack, context, 1f, 1f);
-                    PacketHandler.sendToTracking(context.getPlayer().level(), context.getClickedPos(), new MagicSproutSpellEffectPacket((float) context.getClickedPos().getX() + 0.5F, (float) context.getClickedPos().getY() + 0.5F, context.getClickedPos().getZ() + 0.5F, r, g, b));
+                    PacketHandler.sendToTracking(context.getPlayer().level(), context.getClickedPos(), new MagicSproutSpellEffectPacket((float) context.getClickedPos().getX() + 0.5F, (float) context.getClickedPos().getY() + 0.5F, (float) context.getClickedPos().getZ() + 0.5F, r, g, b));
                 } else if (WissenItemUtils.canRemoveWissen(stack, getWissenCostWithStat(getStats(stack), context.getPlayer(), getWissenCost() * 10))) {
                     CompoundTag stats = getStats(stack);
                     int focusLevel = CrystalUtils.getStatLevel(stats, WizardsReborn.FOCUS_CRYSTAL_STAT);
@@ -69,7 +69,7 @@ public class MagicSproutSpell extends Spell {
                             for (int z = -radius; z <= radius; z++) {
                                 if (random.nextFloat() < 0.15f * (focusLevel + magicModifier)) {
                                     if (growCrop(stack, context, new BlockPos(blockPos.getX() + x, blockPos.getY() + y, blockPos.getZ() + z)) == InteractionResult.SUCCESS) {
-                                        PacketHandler.sendToTracking(context.getPlayer().level(), context.getClickedPos(), new MagicSproutSpellEffectPacket((float) blockPos.getX() + x + 0.5F, (float) blockPos.getY() + y + 0.5F, blockPos.getZ() + z + 0.5F, r, g, b));
+                                        PacketHandler.sendToTracking(context.getPlayer().level(), context.getClickedPos(), new MagicSproutSpellEffectPacket((float) blockPos.getX() + x + 0.5F, (float) blockPos.getY() + y + 0.5F, (float) blockPos.getZ() + z + 0.5F, r, g, b));
                                     }
                                 }
                             }

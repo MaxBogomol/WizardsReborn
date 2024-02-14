@@ -32,6 +32,9 @@ public class CrystalTileEntity extends TileSimpleInventory implements TickableBl
     public int light = 0;
     public int cooldown = 0;
 
+    public boolean startRitual = false;
+    public int tickRitual = 0;
+
     public CrystalTileEntity(BlockEntityType<?> type, BlockPos pos, BlockState state) {
         super(type, pos, state);
     }
@@ -43,10 +46,38 @@ public class CrystalTileEntity extends TileSimpleInventory implements TickableBl
     @Override
     public void tick() {
         CrystalRitual ritual = getCrystalRitual();
+        boolean update = false;
+
+        if (!CrystalRitualUtils.isEmpty(ritual)) {
+            if (getLight() > 0 && startRitual) {
+                if (tickRitual == 0) {
+                    if (ritual.canStart(this)) {
+                        ritual.start(this);
+                    } else {
+                        reload();
+                    }
+                }
+
+                if (startRitual) {
+                    if (ritual.canTick(this)) ritual.tick(this);
+
+                    if (ritual.canEnd(this)) {
+                        ritual.end(this);
+                        reload();
+                    } else {
+                        if (!level.isClientSide()) {
+                            tickRitual++;
+                            update = true;
+                        }
+                    }
+                }
+            }
+        } else {
+            reload();
+            update = true;
+        }
 
         if (!level.isClientSide()) {
-            boolean update = false;
-
             if (getLight() > 0) {
                 removeLight(1);
                 update = true;
@@ -102,6 +133,9 @@ public class CrystalTileEntity extends TileSimpleInventory implements TickableBl
         super.saveAdditional(tag);
         tag.putInt("light", light);
         tag.putInt("cooldown", cooldown);
+
+        tag.putBoolean("startRitual", startRitual);
+        tag.putInt("tickRitual", tickRitual);
     }
 
     @Override
@@ -109,6 +143,9 @@ public class CrystalTileEntity extends TileSimpleInventory implements TickableBl
         super.load(tag);
         light = tag.getInt("light");
         cooldown = tag.getInt("cooldown");
+
+        startRitual = tag.getBoolean("startRitual");
+        tickRitual = tag.getInt("tickRitual");
     }
 
     @Override
@@ -199,12 +236,13 @@ public class CrystalTileEntity extends TileSimpleInventory implements TickableBl
 
     @Override
     public boolean wissenWandReload(ItemStack stack, UseOnContext context, BlockEntity tile) {
+        reload();
         return true;
     }
 
     @Override
     public void wissenWandFuction() {
-
+        startRitual = true;
     }
 
     public CrystalRitual getCrystalRitual() {
@@ -221,5 +259,11 @@ public class CrystalTileEntity extends TileSimpleInventory implements TickableBl
         }
 
         return 0;
+    }
+
+    public void reload() {
+        startRitual = false;
+        tickRitual = 0;
+        cooldown = 0;
     }
 }

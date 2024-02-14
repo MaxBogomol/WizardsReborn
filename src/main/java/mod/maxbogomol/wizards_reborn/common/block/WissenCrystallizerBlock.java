@@ -111,16 +111,13 @@ public class WissenCrystallizerBlock extends Block implements EntityBlock, Simpl
                         player.getItemInHand(hand).setCount(stack.getCount() - 1);
                         stack.setCount(1);
                         tile.getItemHandler().setItem(slot, stack);
-                        world.updateNeighbourForOutputSignal(pos, this);
-                        PacketUtils.SUpdateTileEntityPacket(tile);
-                        return InteractionResult.SUCCESS;
                     } else {
                         tile.getItemHandler().setItem(slot, stack);
                         player.getInventory().removeItem(player.getItemInHand(hand));
-                        world.updateNeighbourForOutputSignal(pos, this);
-                        PacketUtils.SUpdateTileEntityPacket(tile);
-                        return InteractionResult.SUCCESS;
                     }
+                    world.updateNeighbourForOutputSignal(pos, this);
+                    PacketUtils.SUpdateTileEntityPacket(tile);
+                    return InteractionResult.SUCCESS;
                 }
             }
         } else {

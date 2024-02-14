@@ -1,6 +1,7 @@
 package mod.maxbogomol.wizards_reborn.api.crystalritual;
 
 import mod.maxbogomol.wizards_reborn.common.tileentity.CrystalTileEntity;
+import mod.maxbogomol.wizards_reborn.utils.PacketUtils;
 
 import java.awt.*;
 import java.util.Random;
@@ -38,5 +39,41 @@ public class CrystalRitual {
 
     public int getMaxCooldown(CrystalTileEntity crystal) {
         return 0;
+    }
+
+    public void setCooldown(CrystalTileEntity crystal, int cooldown) {
+        crystal.cooldown = cooldown;
+    }
+
+    public int getCooldown(CrystalTileEntity crystal) {
+        return crystal.cooldown;
+    }
+
+    public void updateCrystal(CrystalTileEntity crystal) {
+        PacketUtils.SUpdateTileEntityPacket(crystal);
+    }
+
+    public boolean canStart(CrystalTileEntity crystal) {
+        return true;
+    }
+
+    public boolean canTick(CrystalTileEntity crystal) {
+        return true;
+    }
+
+    public boolean canEnd(CrystalTileEntity crystal) {
+        return false;
+    }
+
+    public void start(CrystalTileEntity crystal) {
+
+    }
+
+    public void tick(CrystalTileEntity crystal) {
+
+    }
+
+    public void end(CrystalTileEntity crystal) {
+
     }
 }

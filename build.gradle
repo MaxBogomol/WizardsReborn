@@ -112,6 +112,7 @@ dependencies {
     implementation fg.deobf("curse.maven:fusion-connected-textures-854949:5005130")
     implementation fg.deobf("curse.maven:config-menus-forge-544048:4672356")
     implementation fg.deobf("curse.maven:model-gap-fix-676136:4607206")
+    implementation fg.deobf("curse.maven:embeddium-908741:5105564")
 }
 
 jar {
