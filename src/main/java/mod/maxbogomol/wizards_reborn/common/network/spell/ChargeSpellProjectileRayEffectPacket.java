@@ -12,25 +12,25 @@ import java.util.Random;
 import java.util.function.Supplier;
 
 public class ChargeSpellProjectileRayEffectPacket {
-    private static float posFromX;
-    private static float posFromY;
-    private static float posFromZ;
+    private final float posFromX;
+    private final float posFromY;
+    private final float posFromZ;
 
-    private static float posToX;
-    private static float posToY;
-    private static float posToZ;
+    private final float posToX;
+    private final float posToY;
+    private final float posToZ;
 
-    private static float motionX;
-    private static float motionY;
-    private static float motionZ;
+    private final float motionX;
+    private final float motionY;
+    private final float motionZ;
 
-    private static float r;
-    private static float g;
-    private static float b;
+    private final float r;
+    private final float g;
+    private final float b;
 
-    private static float charge;
+    private final float charge;
 
-    private static Random random = new Random();
+    private static final Random random = new Random();
 
     public ChargeSpellProjectileRayEffectPacket(float posFromX, float posFromY, float posFromZ, float posToX, float posToY, float posToZ, float motionX, float motionY, float motionZ, float r, float g, float b, float charge) {
         this.posFromX = posFromX;
@@ -83,29 +83,29 @@ public class ChargeSpellProjectileRayEffectPacket {
                 public void run() {
                     Level world = WizardsReborn.proxy.getWorld();
 
-                    Vec3 pos = new Vec3(posToX, posToY, posToZ);
-                    Vec3 norm = new Vec3(motionX, motionY, motionZ).normalize().scale(0.025f);
+                    Vec3 pos = new Vec3(msg.posToX, msg.posToY, msg.posToZ);
+                    Vec3 norm = new Vec3(msg.motionX, msg.motionY, msg.motionZ).normalize().scale(0.025f);
 
                     for (int i = 0; i < 15; i++) {
-                        double lerpX = Mth.lerp(i / 15.0f, posFromX, pos.x);
-                        double lerpY = Mth.lerp(i / 15.0f, posFromY, pos.y);
-                        double lerpZ = Mth.lerp(i / 15.0f, posFromZ, pos.z);
+                        double lerpX = Mth.lerp(i / 15.0f, msg.posFromX, pos.x);
+                        double lerpY = Mth.lerp(i / 15.0f, msg.posFromY, pos.y);
+                        double lerpZ = Mth.lerp(i / 15.0f, msg.posFromZ, pos.z);
 
                         Particles.create(WizardsReborn.WISP_PARTICLE)
                                 .addVelocity(-norm.x + ((random.nextDouble() - 0.5D) / 250), -norm.y + ((random.nextDouble() - 0.5D) / 250), -norm.z + ((random.nextDouble() - 0.5D) / 250))
-                                .setAlpha(0.2f * charge, 0).setScale(0.15f * charge, 0)
-                                .setColor(r, g, b)
+                                .setAlpha(0.2f * msg.charge, 0).setScale(0.15f * msg.charge, 0)
+                                .setColor(msg.r, msg.g, msg.b)
                                 .setLifetime(20)
-                                .setSpin((0.3f * (float) ((random.nextDouble() - 0.5D) * 2)) * charge)
+                                .setSpin((0.3f * (float) ((random.nextDouble() - 0.5D) * 2)) * msg.charge)
                                 .spawn(world, lerpX, lerpY, lerpZ);
 
                         if (random.nextFloat() < 0.3f) {
                             Particles.create(WizardsReborn.SPARKLE_PARTICLE)
                                     .addVelocity(-norm.x + ((random.nextDouble() - 0.5D) / 100), -norm.y + ((random.nextDouble() - 0.5D) / 100), -norm.z + ((random.nextDouble() - 0.5D) / 100))
-                                    .setAlpha(0.125f * charge, 0).setScale(0.2f * charge, 0)
-                                    .setColor(r, g, b)
+                                    .setAlpha(0.125f * msg.charge, 0).setScale(0.2f * msg.charge, 0)
+                                    .setColor(msg.r, msg.g, msg.b)
                                     .setLifetime(30)
-                                    .setSpin((0.3f * (float) ((random.nextDouble() - 0.5D) * 2)) * charge)
+                                    .setSpin((0.3f * (float) ((random.nextDouble() - 0.5D) * 2)) * msg.charge)
                                     .spawn(world, lerpX, lerpY, lerpZ);
                         }
                     }

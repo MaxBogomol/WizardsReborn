@@ -11,8 +11,8 @@ import java.util.Random;
 import java.util.function.Supplier;
 
 public class WissenTranslatorSendEffectPacket {
-    private static BlockPos pos;
-    private static Random random = new Random();
+    private final BlockPos pos;
+    private static final Random random = new Random();
 
     public WissenTranslatorSendEffectPacket(BlockPos pos) {
         this.pos = pos;
@@ -40,7 +40,7 @@ public class WissenTranslatorSendEffectPacket {
                                 .setColor(0.466f, 0.643f, 0.815f, 0.466f, 0.643f, 0.815f)
                                 .setLifetime(30)
                                 .setSpin((0.5f * (float) ((random.nextDouble() - 0.5D) * 2)))
-                                .spawn(world, pos.getX() + 0.5F + ((random.nextDouble() - 0.5D) * 0.75), pos.getY() + 0.5F + ((random.nextDouble() - 0.5D) * 0.75), pos.getZ() + 0.5F + ((random.nextDouble() - 0.5D) * 0.75));
+                                .spawn(world, msg.pos.getX() + 0.5F + ((random.nextDouble() - 0.5D) * 0.75), msg.pos.getY() + 0.5F + ((random.nextDouble() - 0.5D) * 0.75), msg.pos.getZ() + 0.5F + ((random.nextDouble() - 0.5D) * 0.75));
                     }
                     ctx.get().setPacketHandled(true);
                 }

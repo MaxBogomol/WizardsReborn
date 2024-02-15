@@ -18,9 +18,9 @@ import java.util.UUID;
 import java.util.function.Supplier;
 
 public class KnowledgeToastPacket {
-    UUID uuid;
-    Component id;
-    boolean all;
+    private final UUID uuid;
+    private final Component id;
+    private final boolean all;
 
     public KnowledgeToastPacket(UUID uuid, String id, boolean all) {
         this.uuid = uuid;

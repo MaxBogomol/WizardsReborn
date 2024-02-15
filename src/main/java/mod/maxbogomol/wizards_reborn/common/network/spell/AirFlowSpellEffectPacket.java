@@ -10,11 +10,11 @@ import java.util.Random;
 import java.util.function.Supplier;
 
 public class AirFlowSpellEffectPacket {
-    private static float X, Y, Z;
-    private static float velX, velY, velZ;
-    private static float colorR, colorG, colorB;
+    private final float X, Y, Z;
+    private final float velX, velY, velZ;
+    private final float colorR, colorG, colorB;
 
-    private static Random random = new Random();
+    private static final Random random = new Random();
 
     public AirFlowSpellEffectPacket(float X, float Y, float Z, float velX, float velY, float velZ, float colorR, float colorG, float colorB) {
         this.X = X;
@@ -57,19 +57,19 @@ public class AirFlowSpellEffectPacket {
 
                     for (int i = 0; i < 20; i++) {
                         Particles.create(WizardsReborn.STEAM_PARTICLE)
-                                .addVelocity(velX + ((random.nextDouble() - 0.5D) / 20), velY + ((random.nextDouble() - 0.5D) / 20), velZ + ((random.nextDouble() - 0.5D) / 20))
+                                .addVelocity(msg.velX + ((random.nextDouble() - 0.5D) / 20), msg.velY + ((random.nextDouble() - 0.5D) / 20), msg.velZ + ((random.nextDouble() - 0.5D) / 20))
                                 .setAlpha(0.3f, 0).setScale(0.1f, 1.0f)
-                                .setColor(colorR, colorG, colorB)
+                                .setColor(msg.colorR, msg.colorG, msg.colorB)
                                 .setLifetime(70)
                                 .setSpin((0.1f * (float) ((random.nextDouble() - 0.5D) * 2)))
-                                .spawn(world, X + ((random.nextDouble() - 0.5D) / 2), Y + ((random.nextDouble() - 0.5D) / 2), Z + ((random.nextDouble() - 0.5D) / 2));
+                                .spawn(world, msg.X + ((random.nextDouble() - 0.5D) / 2), msg.Y + ((random.nextDouble() - 0.5D) / 2), msg.Z + ((random.nextDouble() - 0.5D) / 2));
                         Particles.create(WizardsReborn.SPARKLE_PARTICLE)
-                                .addVelocity(velX + ((random.nextDouble() - 0.5D) / 10), velY + ((random.nextDouble() - 0.5D) / 10), velZ + ((random.nextDouble() - 0.5D) / 10))
+                                .addVelocity(msg.velX + ((random.nextDouble() - 0.5D) / 10), msg.velY + ((random.nextDouble() - 0.5D) / 10), msg.velZ + ((random.nextDouble() - 0.5D) / 10))
                                 .setAlpha(0.125f, 0).setScale(0.2f, 0)
-                                .setColor(colorR, colorG, colorB)
+                                .setColor(msg.colorR, msg.colorG, msg.colorB)
                                 .setLifetime(20)
                                 .setSpin((0.5f * (float) ((random.nextDouble() - 0.5D) * 2)))
-                                .spawn(world, X + ((random.nextDouble() - 0.5D) / 2), Y + ((random.nextDouble() - 0.5D) / 2), Z + ((random.nextDouble() - 0.5D) / 2));
+                                .spawn(world, msg.X + ((random.nextDouble() - 0.5D) / 2), msg.Y + ((random.nextDouble() - 0.5D) / 2), msg.Z + ((random.nextDouble() - 0.5D) / 2));
                     }
 
                     ctx.get().setPacketHandled(true);

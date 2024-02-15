@@ -86,7 +86,7 @@ public class ArcanePedestalBlock extends Block implements EntityBlock, SimpleWat
     @Override
     public InteractionResult use(BlockState state, Level world, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hit) {
         ArcanePedestalTileEntity tile = (ArcanePedestalTileEntity) world.getBlockEntity(pos);
-        ItemStack stack = player.getItemInHand(hand);
+        ItemStack stack = player.getItemInHand(hand).copy();
 
         if (player.isShiftKeyDown()) {
             if (stack.getItem() instanceof ArcanemiconItem) {

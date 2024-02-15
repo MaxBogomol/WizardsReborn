@@ -11,13 +11,13 @@ import java.util.Random;
 import java.util.function.Supplier;
 
 public class JewelerTableBurstEffectPacket {
-    private static BlockPos pos;
-    private static float X, Y, Z;
-    private static float velX, velY;
-    private static float colorR, colorG, colorB;
-    private static boolean isParticle;
+    private final BlockPos pos;
+    private final float X, Y, Z;
+    private final float velX, velY;
+    private final float colorR, colorG, colorB;
+    private final boolean isParticle;
 
-    private static Random random = new Random();
+    private static final Random random = new Random();
 
     public JewelerTableBurstEffectPacket(BlockPos pos, float X, float Y, float Z, float velX, float velY, float colorR, float colorG, float colorB, boolean isParticle) {
         this.pos = pos;
@@ -103,41 +103,41 @@ public class JewelerTableBurstEffectPacket {
                                 .setAlpha(0.125f, 0).setScale(0.25f, 0)
                                 .setColor(0.466f, 0.643f, 0.815f, 0.466f, 0.643f, 0.815f)
                                 .setLifetime(20)
-                                .spawn(world, X, Y, Z);
+                                .spawn(world, msg.X, msg.Y, msg.Z);
                         Particles.create(WizardsReborn.SPARKLE_PARTICLE)
                                 .addVelocity(((random.nextDouble() - 0.5D) / 20), ((random.nextDouble() - 0.5D) / 20), ((random.nextDouble() - 0.5D) / 20))
                                 .setAlpha(0.25f, 0).setScale(0.1f, 0)
                                 .setColor(0.466f, 0.643f, 0.815f, 0.466f, 0.643f, 0.815f)
                                 .setLifetime(30)
                                 .setSpin((0.5f * (float) ((random.nextDouble() - 0.5D) * 2)))
-                                .spawn(world, pos.getX() + X, pos.getY() + Y + 0.1875F, pos.getZ() + Z);
+                                .spawn(world, msg.pos.getX() + msg.X, msg.pos.getY() + msg.Y + 0.1875F, msg.pos.getZ() + msg.Z);
                     }
 
-                    if (isParticle) {
+                    if (msg.isParticle) {
                         for (int i = 0; i < 25; i++) {
                             if (random.nextFloat() < 0.6) {
                                 float x = 0F;
                                 float y = 0F;
 
-                                if (velX == 0) {
+                                if (msg.velX == 0) {
                                     x = (float) ((random.nextDouble() - 0.5D) / 20);
                                 } else {
-                                    x = (float) ((random.nextDouble() / 20) * velX);
+                                    x = (float) ((random.nextDouble() / 20) * msg.velX);
                                 }
 
-                                if (velY == 0) {
+                                if (msg.velY == 0) {
                                     y = (float) ((random.nextDouble() - 0.5D) / 20);
                                 } else {
-                                    y = (float) ((random.nextDouble() / 20) * velY);
+                                    y = (float) ((random.nextDouble() / 20) * msg.velY);
                                 }
 
                                 Particles.create(WizardsReborn.SPARKLE_PARTICLE)
                                         .addVelocity(x, (random.nextDouble() / 30), y)
                                         .setAlpha(0.35f, 0).setScale(0.2f, 0)
-                                        .setColor(colorR, colorG, colorB)
+                                        .setColor(msg.colorR, msg.colorG, msg.colorB)
                                         .setLifetime(30)
                                         .setSpin((0.5f * (float) ((random.nextDouble() - 0.5D) * 2)))
-                                        .spawn(world, pos.getX() + X, pos.getY() + Y - 0.125F, pos.getZ() + Z);
+                                        .spawn(world, msg.pos.getX() + msg.X, msg.pos.getY() + msg.Y - 0.125F, msg.pos.getZ() + msg.Z);
                             }
                         }
                     }

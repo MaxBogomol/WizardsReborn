@@ -2,7 +2,6 @@ package mod.maxbogomol.wizards_reborn.common.network.tileentity;
 
 import mod.maxbogomol.wizards_reborn.WizardsReborn;
 import mod.maxbogomol.wizards_reborn.client.particle.Particles;
-import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.world.level.Level;
@@ -12,8 +11,8 @@ import java.util.Random;
 import java.util.function.Supplier;
 
 public class ArcaneIteratorBurstEffectPacket {
-    private static CompoundTag tag;
-    private static Random random = new Random();
+    private final CompoundTag tag;
+    private static final Random random = new Random();
 
     public ArcaneIteratorBurstEffectPacket(CompoundTag tag) {
         this.tag = tag;
@@ -34,9 +33,9 @@ public class ArcaneIteratorBurstEffectPacket {
                 public void run() {
                     Level world = WizardsReborn.proxy.getWorld();
 
-                    for (int i = 0; i < tag.size(); i++) {
+                    for (int i = 0; i < msg.tag.size(); i++) {
                         for (int ii = 0; ii < 20; ii++) {
-                            CompoundTag pos = tag.getCompound(String.valueOf(i));
+                            CompoundTag pos = msg.tag.getCompound(String.valueOf(i));
 
                             Particles.create(WizardsReborn.WISP_PARTICLE)
                                     .addVelocity(((random.nextDouble() - 0.5D) / 20), ((random.nextDouble() - 0.5D) / 20), ((random.nextDouble() - 0.5D) / 20))

@@ -11,8 +11,8 @@ import java.util.Random;
 import java.util.function.Supplier;
 
 public class AltarOfDroughtBreakEffectPacket {
-    private static BlockPos pos;
-    private static Random random = new Random();
+    private final BlockPos pos;
+    private static final Random random = new Random();
 
     public AltarOfDroughtBreakEffectPacket(BlockPos pos) {
         this.pos = pos;
@@ -39,14 +39,14 @@ public class AltarOfDroughtBreakEffectPacket {
                                 .setAlpha(0.125f, 0).setScale(0.2f, 0)
                                 .setColor(0.466f, 0.643f, 0.815f, 0.466f, 0.643f, 0.815f)
                                 .setLifetime(20)
-                                .spawn(world, pos.getX() + 0.5F + ((random.nextDouble() - 0.5D) * 0.1), pos.getY() + 0.5F + ((random.nextDouble() - 0.5D) * 0.1), pos.getZ() + 0.5F + ((random.nextDouble() - 0.5D) * 0.1));
+                                .spawn(world, msg.pos.getX() + 0.5F + ((random.nextDouble() - 0.5D) * 0.1), msg.pos.getY() + 0.5F + ((random.nextDouble() - 0.5D) * 0.1), msg.pos.getZ() + 0.5F + ((random.nextDouble() - 0.5D) * 0.1));
                         Particles.create(WizardsReborn.SPARKLE_PARTICLE)
                                 .addVelocity(((random.nextDouble() - 0.5D) / 15), ((random.nextDouble() - 0.5D) / 15), ((random.nextDouble() - 0.5D) / 15))
                                 .setAlpha(0.25f, 0).setScale(0.2f, 0)
                                 .setColor(0.466f, 0.643f, 0.815f, 0.466f, 0.643f, 0.815f)
                                 .setLifetime(30)
                                 .setSpin((0.5f * (float) ((random.nextDouble() - 0.5D) * 2)))
-                                .spawn(world, pos.getX() + 0.5F + ((random.nextDouble() - 0.5D) * 0.5), pos.getY() + 0.5F + ((random.nextDouble() - 0.5D) * 0.5), pos.getZ() + 0.5F + ((random.nextDouble() - 0.5D) * 0.5));
+                                .spawn(world, msg.pos.getX() + 0.5F + ((random.nextDouble() - 0.5D) * 0.5), msg.pos.getY() + 0.5F + ((random.nextDouble() - 0.5D) * 0.5), msg.pos.getZ() + 0.5F + ((random.nextDouble() - 0.5D) * 0.5));
                     }
                     ctx.get().setPacketHandled(true);
                 }

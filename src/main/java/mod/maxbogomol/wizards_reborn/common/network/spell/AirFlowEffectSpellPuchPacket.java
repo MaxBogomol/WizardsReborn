@@ -9,14 +9,12 @@ import net.minecraftforge.network.NetworkEvent;
 import java.util.function.Supplier;
 
 public class AirFlowEffectSpellPuchPacket {
-    private static float velX, velY, velZ;
-    private static float factor;
+    private final float velX, velY, velZ;
 
     public AirFlowEffectSpellPuchPacket(float velX, float velY, float velZ) {
         this.velX = velX;
         this.velY = velY;
         this.velZ = velZ;
-        this.factor = factor;
     }
 
     public static AirFlowEffectSpellPuchPacket decode(FriendlyByteBuf buf) {
@@ -35,7 +33,7 @@ public class AirFlowEffectSpellPuchPacket {
                 @Override
                 public void run() {
                     Player player = WizardsReborn.proxy.getPlayer();
-                    Vec3 vel = new Vec3(velX, velY, velZ);
+                    Vec3 vel = new Vec3(msg.velX, msg.velY, msg.velZ);
                     if (player.isFallFlying()) {
                         vel = vel.scale(0.65f);
                     }

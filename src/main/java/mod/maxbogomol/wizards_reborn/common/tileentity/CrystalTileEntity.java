@@ -1,6 +1,7 @@
 package mod.maxbogomol.wizards_reborn.common.tileentity;
 
 import mod.maxbogomol.wizards_reborn.WizardsReborn;
+import mod.maxbogomol.wizards_reborn.api.crystal.CrystalType;
 import mod.maxbogomol.wizards_reborn.api.crystalritual.CrystalRitual;
 import mod.maxbogomol.wizards_reborn.api.crystalritual.CrystalRitualArea;
 import mod.maxbogomol.wizards_reborn.api.crystalritual.CrystalRitualUtils;
@@ -9,6 +10,7 @@ import mod.maxbogomol.wizards_reborn.api.wissen.ICooldownTileEntity;
 import mod.maxbogomol.wizards_reborn.api.wissen.IWissenWandControlledTileEntity;
 import mod.maxbogomol.wizards_reborn.api.wissen.IWissenWandFunctionalTileEntity;
 import mod.maxbogomol.wizards_reborn.api.wissen.WissenUtils;
+import mod.maxbogomol.wizards_reborn.common.item.CrystalItem;
 import mod.maxbogomol.wizards_reborn.utils.PacketUtils;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
@@ -31,9 +33,11 @@ public class CrystalTileEntity extends TileSimpleInventory implements TickableBl
 
     public int light = 0;
     public int cooldown = 0;
+    public int maxCooldown = 0;
 
     public boolean startRitual = false;
     public int tickRitual = 0;
+    public CompoundTag tagRitual = new CompoundTag();
 
     public CrystalTileEntity(BlockEntityType<?> type, BlockPos pos, BlockState state) {
         super(type, pos, state);
@@ -53,6 +57,7 @@ public class CrystalTileEntity extends TileSimpleInventory implements TickableBl
                 if (tickRitual == 0) {
                     if (ritual.canStart(this)) {
                         ritual.start(this);
+                        tagRitual = new CompoundTag();
                     } else {
                         reload();
                     }
@@ -94,6 +99,10 @@ public class CrystalTileEntity extends TileSimpleInventory implements TickableBl
                     Color borderColor = new Color(191, 201, 104);
                     CrystalRitualArea area = ritual.getArea(this);
                     WissenUtils.connectBoxEffect(level, new Vec3(getBlockPos().getX() - area.getSizeFrom().x(), getBlockPos().getY() - area.getSizeFrom().y(), getBlockPos().getZ() - area.getSizeFrom().z()), new Vec3(getBlockPos().getX() + area.getSizeTo().x() + 1, getBlockPos().getY() + area.getSizeTo().y() + 1, getBlockPos().getZ() + area.getSizeTo().z() + 1), borderColor, 1);
+
+                    if (startRitual) {
+                        WissenUtils.connectBlockEffect(level, getBlockPos(), getCrystalColor());
+                    }
                 }
             }
         }
@@ -133,9 +142,11 @@ public class CrystalTileEntity extends TileSimpleInventory implements TickableBl
         super.saveAdditional(tag);
         tag.putInt("light", light);
         tag.putInt("cooldown", cooldown);
+        tag.putInt("maxCooldown", maxCooldown);
 
         tag.putBoolean("startRitual", startRitual);
         tag.putInt("tickRitual", tickRitual);
+        tag.put("tagRitual", tagRitual);
     }
 
     @Override
@@ -143,9 +154,11 @@ public class CrystalTileEntity extends TileSimpleInventory implements TickableBl
         super.load(tag);
         light = tag.getInt("light");
         cooldown = tag.getInt("cooldown");
+        maxCooldown = tag.getInt("maxCooldown");
 
         startRitual = tag.getBoolean("startRitual");
         tickRitual = tag.getInt("tickRitual");
+        tagRitual = tag.getCompound("tagRitual");
     }
 
     @Override
@@ -216,9 +229,9 @@ public class CrystalTileEntity extends TileSimpleInventory implements TickableBl
 
     @Override
     public float getCooldown() {
-        int maxCooldown = getRitualMaxCooldown();
-        if (maxCooldown > 0) {
-            return (float) maxCooldown / cooldown;
+        float ritualCooldown = getRitualCooldown();
+        if (ritualCooldown > 0) {
+            return ritualCooldown;
         }
         return 0;
     }
@@ -252,10 +265,31 @@ public class CrystalTileEntity extends TileSimpleInventory implements TickableBl
         return null;
     }
 
-    public int getRitualMaxCooldown() {
+    public ItemStack getCrystalItem() {
+        if (!getItemHandler().getItem(0).isEmpty() && getItemHandler().getItem(0).getItem() instanceof CrystalItem crystalItem) {
+            return getItemHandler().getItem(0);
+        }
+        return ItemStack.EMPTY;
+    }
+
+    public Color getCrystalColor(ItemStack crystal) {
+        if (!crystal.isEmpty() && crystal.getItem() instanceof CrystalItem crystalItem) {
+            CrystalType type = crystalItem.getType();
+            if (type != null) {
+                return type.getColor();
+            }
+        }
+        return new Color(255, 255, 255);
+    }
+
+    public Color getCrystalColor() {
+        return getCrystalColor(getCrystalItem());
+    }
+
+    public float getRitualCooldown() {
         CrystalRitual ritual = getCrystalRitual();
         if (!CrystalRitualUtils.isEmpty(ritual)) {
-            return ritual.getMaxCooldown(this);
+            return ritual.getCrystalCooldown(this);
         }
 
         return 0;
@@ -265,5 +299,7 @@ public class CrystalTileEntity extends TileSimpleInventory implements TickableBl
         startRitual = false;
         tickRitual = 0;
         cooldown = 0;
+        maxCooldown = 0;
+        tagRitual = new CompoundTag();
     }
 }

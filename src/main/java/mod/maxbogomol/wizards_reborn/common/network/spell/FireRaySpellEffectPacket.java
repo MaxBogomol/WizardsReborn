@@ -11,10 +11,10 @@ import java.util.Random;
 import java.util.function.Supplier;
 
 public class FireRaySpellEffectPacket {
-    private static float X, Y, Z;
-    private static float colorR, colorG, colorB;
+    private final float X, Y, Z;
+    private final float colorR, colorG, colorB;
 
-    private static Random random = new Random();
+    private static final Random random = new Random();
 
     public FireRaySpellEffectPacket(float X, float Y, float Z, float colorR, float colorG, float colorB) {
         this.X = X;
@@ -52,14 +52,14 @@ public class FireRaySpellEffectPacket {
                             Particles.create(WizardsReborn.WISP_PARTICLE)
                                     .addVelocity(((random.nextDouble() - 0.5D) / 10), ((random.nextDouble() - 0.5D) / 10) + 0.05f, ((random.nextDouble() - 0.5D) / 10))
                                     .setAlpha(0.3f, 0).setScale(0.3f, 0)
-                                    .setColor(colorR, colorG, colorB)
+                                    .setColor(msg.colorR, msg.colorG, msg.colorB)
                                     .setLifetime(40)
-                                    .spawn(world, X, Y, Z);
+                                    .spawn(world, msg.X, msg.Y, msg.Z);
                         }
 
                         if (random.nextFloat() < 0.4f) {
                             world.addParticle(ParticleTypes.LARGE_SMOKE,
-                                    X + ((random.nextDouble() - 0.5D) / 4), Y + ((random.nextDouble() - 0.5D) / 4), Z + ((random.nextDouble() - 0.5D) / 4),
+                                    msg.X + ((random.nextDouble() - 0.5D) / 4), msg.Y + ((random.nextDouble() - 0.5D) / 4), msg.Z + ((random.nextDouble() - 0.5D) / 4),
                                     ((random.nextDouble() - 0.5D) / 10), ((random.nextDouble() - 0.5D) / 10) + 0.05f, ((random.nextDouble() - 0.5D) / 10));
                         }
 
@@ -70,7 +70,7 @@ public class FireRaySpellEffectPacket {
                                     .setColor(0.979f, 0.912f, 0.585f)
                                     .setLifetime(60)
                                     .enableGravity()
-                                    .spawn(world, X, Y, Z);
+                                    .spawn(world, msg.X, msg.Y, msg.Z);
                         }
                     }
 

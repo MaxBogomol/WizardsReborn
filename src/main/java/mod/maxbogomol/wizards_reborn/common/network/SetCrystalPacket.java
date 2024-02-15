@@ -13,8 +13,8 @@ import java.util.List;
 import java.util.function.Supplier;
 
 public class SetCrystalPacket {
-    private static boolean hand;
-    private static ItemStack crystal;
+    private final boolean hand;
+    private final ItemStack crystal;
 
     public SetCrystalPacket(boolean hand, ItemStack crystal) {
         this.hand = hand;
@@ -36,7 +36,7 @@ public class SetCrystalPacket {
                 ServerPlayer player = ctx.get().getSender();
 
                 ItemStack stack = player.getItemInHand(InteractionHand.MAIN_HAND);
-                if (!hand) {
+                if (!msg.hand) {
                     stack = player.getItemInHand(InteractionHand.OFF_HAND);
                 } else {
                     player.startUsingItem(InteractionHand.MAIN_HAND);
@@ -47,13 +47,13 @@ public class SetCrystalPacket {
 
                 List<ItemStack> items = player.inventoryMenu.getItems();
                 for (ItemStack item : items) {
-                    if (item.equals(crystal, false)) {
-                        if (item.getOrCreateTag().toString().equals(crystal.getOrCreateTag().toString())) {
+                    if (item.equals(msg.crystal, false)) {
+                        if (item.getOrCreateTag().toString().equals(msg.crystal.getOrCreateTag().toString())) {
                             player.getInventory().removeItem(item);
                             if (nbt.getBoolean("crystal")) {
                                 player.getInventory().add(stack_inv.getItem(0));
                             }
-                            stack_inv.setItem(0, crystal);
+                            stack_inv.setItem(0, msg.crystal);
                             nbt.putBoolean("crystal", true);
                             break;
                         }

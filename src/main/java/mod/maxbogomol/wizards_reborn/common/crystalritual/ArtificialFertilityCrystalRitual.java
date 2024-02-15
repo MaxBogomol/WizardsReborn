@@ -6,18 +6,18 @@ import mod.maxbogomol.wizards_reborn.common.network.PacketHandler;
 import mod.maxbogomol.wizards_reborn.common.network.spell.MagicSproutSpellEffectPacket;
 import mod.maxbogomol.wizards_reborn.common.tileentity.CrystalTileEntity;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
-import net.minecraft.util.Mth;
-import net.minecraft.world.InteractionResult;
 import net.minecraft.world.item.BoneMealItem;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.context.UseOnContext;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.BonemealableBlock;
 import net.minecraft.world.level.block.CropBlock;
 import net.minecraft.world.level.block.state.BlockState;
 
 import java.awt.*;
+import java.util.ArrayList;
 
 public class ArtificialFertilityCrystalRitual extends CrystalRitual {
     public ArtificialFertilityCrystalRitual(String id) {
@@ -30,13 +30,14 @@ public class ArtificialFertilityCrystalRitual extends CrystalRitual {
     }
 
     @Override
-    public int getMaxCooldown(CrystalTileEntity crystal) {
+    public int getMaxRitualCooldown(CrystalTileEntity crystal) {
         return 60;
     }
 
     @Override
     public void start(CrystalTileEntity crystal) {
         if (!crystal.getLevel().isClientSide()) {
+            setMaxCooldown(crystal, getMaxRitualCooldownWithStat(crystal));
             setCooldown(crystal, getMaxCooldown(crystal));
         }
     }
@@ -49,34 +50,43 @@ public class ArtificialFertilityCrystalRitual extends CrystalRitual {
         if (!level.isClientSide()) {
             if (getCooldown(crystal) <= 0) {
                 CrystalRitualArea area = getArea(crystal);
-                boolean grow = false;
 
-                for (double x = -area.getSizeFrom().x(); x <= area.getSizeTo().x(); x++) {
-                    for (double y = -area.getSizeFrom().y(); y <= area.getSizeTo().y(); y++) {
-                        for (double z = -area.getSizeFrom().z(); z <= area.getSizeTo().z(); z++) {
-                            BlockPos pos = new BlockPos(new BlockPos(blockPos.getX() + Mth.floor(x), blockPos.getY() + Mth.floor(y), blockPos.getZ() + Mth.floor(z)));
-                            if (level.isLoaded(pos)) {
-                                BlockState state = level.getBlockState(pos);
-                                if (state.getBlock() instanceof CropBlock crop) {
-                                    if (!crop.isMaxAge(state)) {
-                                        crop.growCrops(level, pos, state);
-
-                                        Color color = getColor();
-                                        float r = color.getRed() / 255f;
-                                        float g = color.getGreen() / 255f;
-                                        float b = color.getBlue() / 255f;
-
-                                        PacketHandler.sendToTracking(level, pos, new MagicSproutSpellEffectPacket((float) (blockPos.getX() + x + 0.5F), (float) (blockPos.getY() + y + 0.5F), (float) (blockPos.getZ() + z + 0.5F), r, g, b));
-                                        level.playSound(null, pos, SoundEvents.BONE_MEAL_USE, SoundSource.BLOCKS, 1f, 1f);
-                                        grow = true;
-                                        break;
-                                    }
-                                }
-                            }
-                        }
-                        if (grow) break;
+                ArrayList<BlockPos> blockPosList = getBlockPosWithArea(level, blockPos, area, (p) -> {
+                    if (level.getBlockState(p).getBlock() instanceof BonemealableBlock bonemealableBlock) {
+                        return bonemealableBlock.isBonemealSuccess(level, level.random, p, level.getBlockState(p));
                     }
-                    if (grow) break;
+                    return false;
+                    }, true, true, 1);
+
+                for (BlockPos pos : blockPosList) {
+                    BlockState state = level.getBlockState(pos);
+                    if (state.getBlock() instanceof CropBlock crop) {
+                        if (!crop.isMaxAge(state)) {
+                            crop.growCrops(level, pos, state);
+
+                            Color color = getColor();
+                            float r = color.getRed() / 255f;
+                            float g = color.getGreen() / 255f;
+                            float b = color.getBlue() / 255f;
+
+                            PacketHandler.sendToTracking(level, pos, new MagicSproutSpellEffectPacket(pos.getX() + 0.5F, pos.getY() + 0.5F, pos.getZ() + 0.5F, r, g, b));
+                            level.playSound(null, pos, SoundEvents.BONE_MEAL_USE, SoundSource.BLOCKS, 1f, 1f);
+                            setMaxCooldown(crystal, getMaxRitualCooldownWithStat(crystal));
+                            break;
+                        }
+                    } else {
+                        if (growCrop(level, pos)) {
+                            Color color = getColor();
+                            float r = color.getRed() / 255f;
+                            float g = color.getGreen() / 255f;
+                            float b = color.getBlue() / 255f;
+
+                            PacketHandler.sendToTracking(level, pos, new MagicSproutSpellEffectPacket(pos.getX() + 0.5F, pos.above().getY() + 0.5F, pos.getZ() + 0.5F, r, g, b));
+                            level.playSound(null, pos, SoundEvents.BONE_MEAL_USE, SoundSource.BLOCKS, 1f, 1f);
+                            setMaxCooldown(crystal, getMaxRitualCooldownWithStat(crystal) * 2);
+                            break;
+                        }
+                    }
                 }
                 setCooldown(crystal, getMaxCooldown(crystal));
             } else {
@@ -85,11 +95,17 @@ public class ArtificialFertilityCrystalRitual extends CrystalRitual {
         }
     }
 
-    public InteractionResult growCrop(ItemStack stack, UseOnContext context, BlockPos blockPos) {
-        if (BoneMealItem.growCrop(ItemStack.EMPTY, context.getLevel(), blockPos)) {
-            return InteractionResult.SUCCESS;
+    public boolean growCrop(Level level, BlockPos blockPos) {
+        if (BoneMealItem.growCrop(ItemStack.EMPTY, level, blockPos)) {
+            return true;
+        } else {
+            BlockState blockstate = level.getBlockState(blockPos);
+            boolean flag = blockstate.isFaceSturdy(level, blockPos, Direction.UP);
+            if (flag && BoneMealItem.growWaterPlant(ItemStack.EMPTY, level, blockPos.relative(Direction.UP), Direction.UP)) {
+                return true;
+            }
         }
 
-        return InteractionResult.PASS;
+        return false;
     }
 }

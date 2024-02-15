@@ -10,10 +10,10 @@ import java.util.Random;
 import java.util.function.Supplier;
 
 public class MagicSproutSpellEffectPacket {
-    private static float X, Y, Z;
-    private static float colorR, colorG, colorB;
+    private final float X, Y, Z;
+    private final float colorR, colorG, colorB;
 
-    private static Random random = new Random();
+    private static final Random random = new Random();
 
     public MagicSproutSpellEffectPacket(float X, float Y, float Z, float colorR, float colorG, float colorB) {
         this.X = X;
@@ -51,18 +51,18 @@ public class MagicSproutSpellEffectPacket {
                             Particles.create(WizardsReborn.SPARKLE_PARTICLE)
                                     .addVelocity(((random.nextDouble() - 0.5D) / 50), ((random.nextDouble() - 0.5D) / 50), ((random.nextDouble() - 0.5D) / 50))
                                     .setAlpha(0.3f, 0).setScale(0.1f, 0.3f)
-                                    .setColor(colorR, colorG, colorB)
+                                    .setColor(msg.colorR, msg.colorG, msg.colorB)
                                     .setLifetime(40)
-                                    .spawn(world, X + ((random.nextDouble() - 0.5D) / 2), Y + ((random.nextDouble() - 0.5D) / 2), Z + ((random.nextDouble() - 0.5D) / 2));
+                                    .spawn(world, msg.X + ((random.nextDouble() - 0.5D) / 2), msg.Y + ((random.nextDouble() - 0.5D) / 2), msg.Z + ((random.nextDouble() - 0.5D) / 2));
                         }
                         if (random.nextFloat() < 0.3f) {
                             Particles.create(WizardsReborn.STEAM_PARTICLE)
                                     .addVelocity(((random.nextDouble() - 0.5D) / 50), ((random.nextDouble() - 0.5D) / 50), ((random.nextDouble() - 0.5D) / 50))
                                     .setAlpha(0.15f, 0).setScale(0.1f, 1.5f)
-                                    .setColor(colorR, colorG, colorB)
+                                    .setColor(msg.colorR, msg.colorG, msg.colorB)
                                     .setLifetime(80)
                                     .setSpin((0.1f * (float) ((random.nextDouble() - 0.5D) * 2)))
-                                    .spawn(world, X + ((random.nextDouble() - 0.5D) / 2), Y + ((random.nextDouble() - 0.5D) / 2), Z + ((random.nextDouble() - 0.5D) / 2));
+                                    .spawn(world, msg.X + ((random.nextDouble() - 0.5D) / 2), msg.Y + ((random.nextDouble() - 0.5D) / 2), msg.Z + ((random.nextDouble() - 0.5D) / 2));
                         }
                     }
 

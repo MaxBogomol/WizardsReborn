@@ -84,13 +84,15 @@ public class WissenUtils {
         float colorB = (color.getBlue() / 255f);
 
         for (int i = 0; i < particlePerBlock; i++) {
-            Particles.create(WizardsReborn.SPARKLE_PARTICLE)
-                    .addVelocity(((random.nextDouble() - 0.5D) / 100), ((random.nextDouble() - 0.5D) / 100), ((random.nextDouble() - 0.5D) / 100))
-                    .setAlpha(0.25f, 0f).setScale(0.1f, 0f)
-                    .setColor(colorR, colorG, colorB)
-                    .setLifetime(5)
-                    .setSpin((0.1f * (float) ((random.nextDouble() - 0.5D) * 2)))
-                    .spawn(level, pos.x() + (random.nextDouble() - 0.5D), pos.y() + (random.nextDouble() - 0.5D), pos.z() + (random.nextDouble() - 0.5D));
+            if (random.nextFloat() < 0.25f) {
+                Particles.create(WizardsReborn.SPARKLE_PARTICLE)
+                        .addVelocity(((random.nextDouble() - 0.5D) / 100), ((random.nextDouble() - 0.5D) / 100), ((random.nextDouble() - 0.5D) / 100))
+                        .setAlpha(0.25f, 0f).setScale(0.1f, 0f)
+                        .setColor(colorR, colorG, colorB)
+                        .setLifetime(5)
+                        .setSpin((0.1f * (float) ((random.nextDouble() - 0.5D) * 2)))
+                        .spawn(level, pos.x() + (random.nextDouble() - 0.5D), pos.y() + (random.nextDouble() - 0.5D), pos.z() + (random.nextDouble() - 0.5D));
+            }
         }
     }
 
@@ -115,7 +117,7 @@ public class WissenUtils {
                     .addVelocity(((random.nextDouble() - 0.5D) / 100), ((random.nextDouble() - 0.5D) / 100), ((random.nextDouble() - 0.5D) / 100))
                     .setAlpha(0.25f, 0f).setScale(0.05f, 0f)
                     .setColor(colorR, colorG, colorB)
-                    .setLifetime(3)
+                    .setLifetime(1)
                     .setSpin((0.1f * (float) ((random.nextDouble() - 0.5D) * 2)))
                     .spawn(level, posFrom.x() - (x * i), posFrom.y() - (y * i), posFrom.z() - (z * i));
         }

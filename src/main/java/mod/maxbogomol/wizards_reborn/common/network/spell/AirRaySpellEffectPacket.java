@@ -2,7 +2,6 @@ package mod.maxbogomol.wizards_reborn.common.network.spell;
 
 import mod.maxbogomol.wizards_reborn.WizardsReborn;
 import mod.maxbogomol.wizards_reborn.client.particle.Particles;
-import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.world.level.Level;
 import net.minecraftforge.network.NetworkEvent;
@@ -11,11 +10,11 @@ import java.util.Random;
 import java.util.function.Supplier;
 
 public class AirRaySpellEffectPacket {
-    private static float X, Y, Z;
-    private static float velX, velY, velZ;
-    private static float colorR, colorG, colorB;
+    private final float X, Y, Z;
+    private final float velX, velY, velZ;
+    private final float colorR, colorG, colorB;
 
-    private static Random random = new Random();
+    private static final Random random = new Random();
 
     public AirRaySpellEffectPacket(float X, float Y, float Z, float velX, float velY, float velZ, float colorR, float colorG, float colorB) {
         this.X = X;
@@ -58,18 +57,18 @@ public class AirRaySpellEffectPacket {
 
                     for (int i = 0; i < 25; i++) {
                         Particles.create(WizardsReborn.WISP_PARTICLE)
-                                .addVelocity(velX + ((random.nextDouble() - 0.5D) / 30), velY + ((random.nextDouble() - 0.5D) / 30), velZ + ((random.nextDouble() - 0.5D) / 30))
+                                .addVelocity(msg.velX + ((random.nextDouble() - 0.5D) / 30), msg.velY + ((random.nextDouble() - 0.5D) / 30), msg.velZ + ((random.nextDouble() - 0.5D) / 30))
                                 .setAlpha(0.125f, 0).setScale(0.2f, 0)
-                                .setColor(colorR, colorG, colorB)
+                                .setColor(msg.colorR, msg.colorG, msg.colorB)
                                 .setLifetime(20)
-                                .spawn(world, X + ((random.nextDouble() - 0.5D) / 3), Y + ((random.nextDouble() - 0.5D) / 3), Z + ((random.nextDouble() - 0.5D) / 3));
+                                .spawn(world, msg.X + ((random.nextDouble() - 0.5D) / 3), msg.Y + ((random.nextDouble() - 0.5D) / 3), msg.Z + ((random.nextDouble() - 0.5D) / 3));
                         Particles.create(WizardsReborn.SPARKLE_PARTICLE)
-                                .addVelocity(velX + ((random.nextDouble() - 0.5D) / 30), velY + ((random.nextDouble() - 0.5D) / 30), velZ + ((random.nextDouble() - 0.5D) / 30))
+                                .addVelocity(msg.velX + ((random.nextDouble() - 0.5D) / 30), msg.velY + ((random.nextDouble() - 0.5D) / 30), msg.velZ + ((random.nextDouble() - 0.5D) / 30))
                                 .setAlpha(0.125f, 0).setScale(0.2f, 0)
-                                .setColor(colorR, colorG, colorB)
+                                .setColor(msg.colorR, msg.colorG, msg.colorB)
                                 .setLifetime(20)
                                 .setSpin((0.5f * (float) ((random.nextDouble() - 0.5D) * 2)))
-                                .spawn(world, X + ((random.nextDouble() - 0.5D) / 3), Y + ((random.nextDouble() - 0.5D) / 3), Z + ((random.nextDouble() - 0.5D) / 3));
+                                .spawn(world, msg.X + ((msg.random.nextDouble() - 0.5D) / 3), msg.Y + ((msg.random.nextDouble() - 0.5D) / 3), msg.Z + ((msg.random.nextDouble() - 0.5D) / 3));
                     }
 
                     ctx.get().setPacketHandled(true);

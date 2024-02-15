@@ -12,23 +12,23 @@ import java.util.Random;
 import java.util.function.Supplier;
 
 public class SpellProjectileRayEffectPacket {
-    private static float posFromX;
-    private static float posFromY;
-    private static float posFromZ;
+    private final float posFromX;
+    private final float posFromY;
+    private final float posFromZ;
 
-    private static float posToX;
-    private static float posToY;
-    private static float posToZ;
+    private final float posToX;
+    private final float posToY;
+    private final float posToZ;
 
-    private static float motionX;
-    private static float motionY;
-    private static float motionZ;
+    private final float motionX;
+    private final float motionY;
+    private final float motionZ;
 
-    private static float r;
-    private static float g;
-    private static float b;
+    private final float r;
+    private final float g;
+    private final float b;
 
-    private static Random random = new Random();
+    private static final Random random = new Random();
 
     public SpellProjectileRayEffectPacket(float posFromX, float posFromY, float posFromZ, float posToX, float posToY, float posToZ, float motionX, float motionY, float motionZ, float r, float g, float b) {
         this.posFromX = posFromX;
@@ -77,18 +77,18 @@ public class SpellProjectileRayEffectPacket {
                 public void run() {
                     Level world = WizardsReborn.proxy.getWorld();
 
-                    Vec3 pos = new Vec3(posToX, posToY, posToZ);
-                    Vec3 norm = new Vec3(motionX, motionY, motionZ).normalize().scale(0.025f);
+                    Vec3 pos = new Vec3(msg.posToX, msg.posToY, msg.posToZ);
+                    Vec3 norm = new Vec3(msg.motionX, msg.motionY, msg.motionZ).normalize().scale(0.025f);
 
                     for (int i = 0; i < 10; i++) {
-                        double lerpX = Mth.lerp(i / 10.0f, posFromX, pos.x);
-                        double lerpY = Mth.lerp(i / 10.0f, posFromY, pos.y);
-                        double lerpZ = Mth.lerp(i / 10.0f, posFromZ, pos.z);
+                        double lerpX = Mth.lerp(i / 10.0f, msg.posFromX, pos.x);
+                        double lerpY = Mth.lerp(i / 10.0f, msg.posFromY, pos.y);
+                        double lerpZ = Mth.lerp(i / 10.0f, msg.posFromZ, pos.z);
 
                         Particles.create(WizardsReborn.WISP_PARTICLE)
                                 .addVelocity(-norm.x + ((random.nextDouble() - 0.5D) / 500), -norm.y + ((random.nextDouble() - 0.5D) / 500), -norm.z + ((random.nextDouble() - 0.5D) / 500))
                                 .setAlpha(0.2f, 0).setScale(0.15f, 0)
-                                .setColor(r, g, b)
+                                .setColor(msg.r, msg.g, msg.b)
                                 .setLifetime(20)
                                 .spawn(world, lerpX, lerpY, lerpZ);
 
@@ -96,7 +96,7 @@ public class SpellProjectileRayEffectPacket {
                             Particles.create(WizardsReborn.SPARKLE_PARTICLE)
                                     .addVelocity(-norm.x + ((random.nextDouble() - 0.5D) / 250), -norm.y + ((random.nextDouble() - 0.5D) / 250), -norm.z + ((random.nextDouble() - 0.5D) / 250))
                                     .setAlpha(0.125f, 0).setScale(0.2f, 0)
-                                    .setColor(r, g, b)
+                                    .setColor(msg.r, msg.g, msg.b)
                                     .setLifetime(30)
                                     .spawn(world, lerpX, lerpY, lerpZ);
                         }

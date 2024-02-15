@@ -10,8 +10,8 @@ import net.minecraftforge.network.NetworkEvent;
 import java.util.function.Supplier;;
 
 public class SetSpellPacket {
-    private static boolean hand;
-    private static String spell;
+    private final boolean hand;
+    private final String spell;
 
     public SetSpellPacket(boolean hand, String spell) {
         this.hand = hand;
@@ -33,7 +33,7 @@ public class SetSpellPacket {
                 ServerPlayer player = ctx.get().getSender();
 
                 ItemStack stack = player.getItemInHand(InteractionHand.MAIN_HAND);
-                if (!hand) {
+                if (!msg.hand) {
                     stack = player.getItemInHand(InteractionHand.OFF_HAND);
                 } else {
                     player.startUsingItem(InteractionHand.MAIN_HAND);
@@ -41,7 +41,7 @@ public class SetSpellPacket {
 
                 CompoundTag nbt = stack.getTag();
 
-                nbt.putString("spell", spell);
+                nbt.putString("spell", msg.spell);
             });
         }
         ctx.get().setPacketHandled(true);

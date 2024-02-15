@@ -11,8 +11,8 @@ import java.util.Random;
 import java.util.function.Supplier;
 
 public class ArcaneWorkbenchBurstEffectPacket {
-    private static BlockPos pos;
-    private static Random random = new Random();
+    private final BlockPos pos;
+    private static final Random random = new Random();
 
     public ArcaneWorkbenchBurstEffectPacket(BlockPos pos) {
         this.pos = pos;
@@ -39,14 +39,14 @@ public class ArcaneWorkbenchBurstEffectPacket {
                                 .setAlpha(0.125f, 0).setScale(0.3f, 0)
                                 .setColor(0.466f, 0.643f, 0.815f, 0.466f, 0.643f, 0.815f)
                                 .setLifetime(20)
-                                .spawn(world, pos.getX() + 0.5F, pos.getY() + 1.5F, pos.getZ() + 0.5F);
+                                .spawn(world, msg.pos.getX() + 0.5F, msg.pos.getY() + 1.5F, msg.pos.getZ() + 0.5F);
                         Particles.create(WizardsReborn.SPARKLE_PARTICLE)
                                 .addVelocity(((random.nextDouble() - 0.5D) / 20), ((random.nextDouble() - 0.5D) / 20), ((random.nextDouble() - 0.5D) / 20))
                                 .setAlpha(0.25f, 0).setScale(0.1f, 0)
                                 .setColor(0.466f, 0.643f, 0.815f, 0.466f, 0.643f, 0.815f)
                                 .setLifetime(30)
                                 .setSpin((0.5f * (float) ((random.nextDouble() - 0.5D) * 2)))
-                                .spawn(world, pos.getX() + 0.5F, pos.getY() + 1.5F, pos.getZ() + 0.5F);
+                                .spawn(world, msg.pos.getX() + 0.5F, msg.pos.getY() + 1.5F, msg.pos.getZ() + 0.5F);
                     }
                     ctx.get().setPacketHandled(true);
                 }

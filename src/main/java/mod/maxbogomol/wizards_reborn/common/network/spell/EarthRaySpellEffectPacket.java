@@ -2,7 +2,6 @@ package mod.maxbogomol.wizards_reborn.common.network.spell;
 
 import mod.maxbogomol.wizards_reborn.WizardsReborn;
 import mod.maxbogomol.wizards_reborn.client.particle.Particles;
-import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.world.level.Level;
 import net.minecraftforge.network.NetworkEvent;
@@ -11,10 +10,10 @@ import java.util.Random;
 import java.util.function.Supplier;
 
 public class EarthRaySpellEffectPacket {
-    private static float X, Y, Z;
-    private static float colorR, colorG, colorB;
+    private final float X, Y, Z;
+    private final float colorR, colorG, colorB;
 
-    private static Random random = new Random();
+    private static final Random random = new Random();
 
     public EarthRaySpellEffectPacket(float X, float Y, float Z, float colorR, float colorG, float colorB) {
         this.X = X;
@@ -56,9 +55,9 @@ public class EarthRaySpellEffectPacket {
                             Particles.create(WizardsReborn.WISP_PARTICLE)
                                     .addVelocity(-x / 8, -y / 8, -z / 8)
                                     .setAlpha(0.3f, 0).setScale(0.1f, 0.3f)
-                                    .setColor(colorR, colorG, colorB)
+                                    .setColor(msg.colorR, msg.colorG, msg.colorB)
                                     .setLifetime(40)
-                                    .spawn(world, X + (x * 1.5f), Y + (y * 1.5f), Z + (z * 1.5f));
+                                    .spawn(world, msg.X + (x * 1.5f), msg.Y + (y * 1.5f), msg.Z + (z * 1.5f));
                         }
                     }
 

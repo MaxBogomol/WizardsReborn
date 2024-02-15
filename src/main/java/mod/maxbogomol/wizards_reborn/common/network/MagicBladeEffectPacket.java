@@ -10,11 +10,11 @@ import java.util.Random;
 import java.util.function.Supplier;
 
 public class MagicBladeEffectPacket {
-    private static float posX;
-    private static float posY;
-    private static float posZ;
+    private final float posX;
+    private final float posY;
+    private final float posZ;
 
-    private static Random random = new Random();
+    private static final Random random = new Random();
 
     public MagicBladeEffectPacket(float posX, float posY, float posZ) {
         this.posX = posX;
@@ -46,7 +46,7 @@ public class MagicBladeEffectPacket {
                                 .setColor(0.431F, 0.305F, 0.662F)
                                 .setLifetime(30)
                                 .setSpin((0.1f * (float) ((random.nextDouble() - 0.5D) * 2)))
-                                .spawn(world, posX + ((random.nextDouble() - 0.5D) / 10), posY + ((random.nextDouble() - 0.5D) / 10), posZ + ((random.nextDouble() - 0.5D) / 10));
+                                .spawn(world, msg.posX + ((random.nextDouble() - 0.5D) / 10), msg.posY + ((random.nextDouble() - 0.5D) / 10), msg.posZ + ((random.nextDouble() - 0.5D) / 10));
                     }
                     ctx.get().setPacketHandled(true);
                 }

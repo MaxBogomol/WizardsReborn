@@ -10,10 +10,10 @@ import java.util.Random;
 import java.util.function.Supplier;
 
 public class FireShieldSpellEffectPacket {
-    private static float X, Y, Z;
-    private static float colorR, colorG, colorB;
+    private final float X, Y, Z;
+    private final float colorR, colorG, colorB;
 
-    private static Random random = new Random();
+    private static final Random random = new Random();
 
     public FireShieldSpellEffectPacket(float X, float Y, float Z, float colorR, float colorG, float colorB) {
         this.X = X;
@@ -51,9 +51,9 @@ public class FireShieldSpellEffectPacket {
                             Particles.create(WizardsReborn.SPARKLE_PARTICLE)
                                     .addVelocity(((random.nextDouble() - 0.5D) / 10), ((random.nextDouble() - 0.5D) / 10), ((random.nextDouble() - 0.5D) / 10))
                                     .setAlpha(0.5f, 0).setScale(0.1f, 0.4f)
-                                    .setColor(colorR, colorG, colorB)
+                                    .setColor(msg.colorR, msg.colorG, msg.colorB)
                                     .setLifetime(60)
-                                    .spawn(world, X, Y, Z);
+                                    .spawn(world, msg.X, msg.Y, msg.Z);
                         }
                         if (random.nextFloat() < 0.6f) {
                             Particles.create(WizardsReborn.WISP_PARTICLE)
@@ -63,7 +63,7 @@ public class FireShieldSpellEffectPacket {
                                     .setLifetime(80)
                                     .setSpin((0.1f * (float) ((random.nextDouble() - 0.5D) * 2)))
                                     .enableGravity()
-                                    .spawn(world, X + ((random.nextDouble() - 0.5D) / 5), Y + ((random.nextDouble() - 0.5D) / 5), Z + ((random.nextDouble() - 0.5D) / 5));
+                                    .spawn(world, msg.X + ((random.nextDouble() - 0.5D) / 5), msg.Y + ((random.nextDouble() - 0.5D) / 5), msg.Z + ((random.nextDouble() - 0.5D) / 5));
                         }
                     }
 

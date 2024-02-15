@@ -14,8 +14,8 @@ import java.util.UUID;
 import java.util.function.Supplier;
 
 public class KnowledgeUpdatePacket {
-    UUID uuid;
-    CompoundTag tag;
+    private final UUID uuid;
+    private CompoundTag tag;
 
     public KnowledgeUpdatePacket(UUID uuid, CompoundTag tag) {
         this.uuid = uuid;

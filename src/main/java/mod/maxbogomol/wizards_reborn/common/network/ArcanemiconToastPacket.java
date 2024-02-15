@@ -15,7 +15,7 @@ import java.util.UUID;
 import java.util.function.Supplier;
 
 public class ArcanemiconToastPacket {
-    UUID uuid;
+    private final UUID uuid;
 
     public ArcanemiconToastPacket(UUID uuid) {
         this.uuid = uuid;

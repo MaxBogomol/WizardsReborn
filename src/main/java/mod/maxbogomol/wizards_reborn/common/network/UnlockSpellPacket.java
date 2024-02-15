@@ -11,7 +11,7 @@ import net.minecraftforge.network.NetworkEvent;
 import java.util.function.Supplier;
 
 public class UnlockSpellPacket {
-    private static Component spell;
+    private final Component spell;
 
     public UnlockSpellPacket(Spell spell) {
         this.spell = Component.literal(spell.getId());
@@ -38,8 +38,8 @@ public class UnlockSpellPacket {
             ctx.get().enqueueWork(() -> {
                 ServerPlayer player = ctx.get().getSender();
 
-                if (Spells.getSpell(spell.getString()) != null) {
-                    KnowledgeUtils.addSpell(player, Spells.getSpell(spell.getString()));
+                if (Spells.getSpell(msg.spell.getString()) != null) {
+                    KnowledgeUtils.addSpell(player, Spells.getSpell(msg.spell.getString()));
                 }
             });
         }

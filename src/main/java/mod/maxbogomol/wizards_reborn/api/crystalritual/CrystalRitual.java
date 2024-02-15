@@ -1,10 +1,21 @@
 package mod.maxbogomol.wizards_reborn.api.crystalritual;
 
+import mod.maxbogomol.wizards_reborn.WizardsReborn;
+import mod.maxbogomol.wizards_reborn.api.crystal.CrystalType;
+import mod.maxbogomol.wizards_reborn.api.crystal.PolishingType;
+import mod.maxbogomol.wizards_reborn.common.item.CrystalItem;
 import mod.maxbogomol.wizards_reborn.common.tileentity.CrystalTileEntity;
 import mod.maxbogomol.wizards_reborn.utils.PacketUtils;
+import net.minecraft.core.BlockPos;
+import net.minecraft.util.Mth;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.phys.Vec3;
 
 import java.awt.*;
+import java.util.ArrayList;
 import java.util.Random;
+import java.util.function.Predicate;
 
 public class CrystalRitual {
     public String id;
@@ -37,8 +48,25 @@ public class CrystalRitual {
         return new CrystalRitualArea(3, 3, 3, 3, 3, 3);
     }
 
-    public int getMaxCooldown(CrystalTileEntity crystal) {
+    public int getMaxRitualCooldown(CrystalTileEntity crystal) {
         return 0;
+    }
+
+    public int getMaxRitualCooldown(int cooldown, ItemStack item) {
+        int resonanceLevel = CrystalItem.getStatLevel(item, WizardsReborn.RESONANCE_CRYSTAL_STAT);
+        return (int) (cooldown * (1 - (getCooldownStatModifier() * resonanceLevel)));
+    }
+
+    public int getMaxRitualCooldownWithStat(CrystalTileEntity crystal) {
+        ItemStack item = getCrystalItem(crystal);
+        if (!item.isEmpty()) {
+            return getMaxRitualCooldown(getMaxRitualCooldown(crystal), item);
+        }
+        return getMaxRitualCooldown(crystal);
+    }
+
+    public float getCooldownStatModifier() {
+        return 0.15f;
     }
 
     public void setCooldown(CrystalTileEntity crystal, int cooldown) {
@@ -47,6 +75,21 @@ public class CrystalRitual {
 
     public int getCooldown(CrystalTileEntity crystal) {
         return crystal.cooldown;
+    }
+
+    public void setMaxCooldown(CrystalTileEntity crystal, int cooldown) {
+        crystal.maxCooldown = cooldown;
+    }
+
+    public int getMaxCooldown(CrystalTileEntity crystal) {
+        return crystal.maxCooldown;
+    }
+
+    public float getCrystalCooldown(CrystalTileEntity crystal) {
+        if (crystal.cooldown > 0) {
+            return (float) crystal.maxCooldown / (float) crystal.cooldown;
+        }
+        return 0;
     }
 
     public void updateCrystal(CrystalTileEntity crystal) {
@@ -75,5 +118,62 @@ public class CrystalRitual {
 
     public void end(CrystalTileEntity crystal) {
 
+    }
+
+    public ItemStack getCrystalItem(CrystalTileEntity crystal) {
+        return crystal.getCrystalItem();
+    }
+
+    public CrystalType getCrystalType(ItemStack crystal) {
+        if (crystal.getItem() instanceof CrystalItem crystalItem) {
+            return crystalItem.getType();
+        }
+        return null;
+    }
+
+    public PolishingType getCrystalPolishingType(ItemStack crystal) {
+        if (crystal.getItem() instanceof CrystalItem crystalItem) {
+            return crystalItem.getPolishing();
+        }
+        return null;
+    }
+
+    public Color getCrystalColor(ItemStack crystal) {
+        CrystalType type = getCrystalType(crystal);
+        if (type != null) {
+            return type.getColor();
+        }
+        return new Color(255, 255, 255);
+    }
+
+    public static ArrayList<BlockPos> getBlockPosWithArea(Level level, BlockPos startPos, Vec3 sizeFrom, Vec3 sizeTo, Predicate<BlockPos> filter, boolean hasRandomOffset, boolean hasLimit, int limit) {
+        ArrayList<BlockPos> blockPosList = new ArrayList<>();
+        int count = 0;
+        boolean reachLimit = false;
+
+        for (double x = -sizeFrom.x(); x <= sizeTo.x(); x++) {
+            for (double y = -sizeFrom.y(); y <= sizeTo.y(); y++) {
+                for (double z = -sizeFrom.z(); z <= sizeTo.z(); z++) {
+                    BlockPos pos = new BlockPos(new BlockPos(startPos.getX() + Mth.floor(x), startPos.getY() + Mth.floor(y), startPos.getZ() + Mth.floor(z)));
+                    if (level.isLoaded(pos)) {
+                        if (filter.test(pos)) {
+                            blockPosList.add(pos);
+                            count++;
+                            if (limit >= count && hasLimit) {
+                                reachLimit = true;
+                                break;
+                            }
+                        }
+                    }
+                }
+                if (reachLimit) break;
+            }
+            if (reachLimit) break;
+        }
+        return blockPosList;
+    }
+
+    public static ArrayList<BlockPos> getBlockPosWithArea(Level level, BlockPos startPos, CrystalRitualArea area, Predicate<BlockPos> filter, boolean hasRandomOffset, boolean hasLimit, int limit) {
+        return getBlockPosWithArea(level, startPos, area.getSizeFrom(), area.getSizeTo(), filter, hasRandomOffset, hasLimit, limit);
     }
 }

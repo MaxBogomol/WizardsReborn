@@ -3,21 +3,18 @@ package mod.maxbogomol.wizards_reborn.common.network;
 import mod.maxbogomol.wizards_reborn.WizardsReborn;
 import mod.maxbogomol.wizards_reborn.common.entity.SpellProjectileEntity;
 import net.minecraft.client.multiplayer.ClientLevel;
-import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.level.Level;
-import net.minecraft.world.level.block.entity.BlockEntity;
-import net.minecraftforge.network.NetworkDirection;
 import net.minecraftforge.network.NetworkEvent;
 
 import java.util.UUID;
 import java.util.function.Supplier;
 
 public class SpellProjectileUpdateSpellDataPacket {
-    UUID uuid;
-    CompoundTag tag;
+    private final UUID uuid;
+    private final CompoundTag tag;
 
     public SpellProjectileUpdateSpellDataPacket(UUID uuid, CompoundTag tag) {
         this.uuid = uuid;

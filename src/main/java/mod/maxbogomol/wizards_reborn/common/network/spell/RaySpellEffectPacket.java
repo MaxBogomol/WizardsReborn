@@ -12,19 +12,19 @@ import java.util.Random;
 import java.util.function.Supplier;
 
 public class RaySpellEffectPacket {
-    private static float posFromX;
-    private static float posFromY;
-    private static float posFromZ;
+    private final float posFromX;
+    private final float posFromY;
+    private final float posFromZ;
 
-    private static float posToX;
-    private static float posToY;
-    private static float posToZ;
+    private final float posToX;
+    private final float posToY;
+    private final float posToZ;
 
-    private static float colorR, colorG, colorB;
+    private final float colorR, colorG, colorB;
 
-    private static boolean burst;
+    private final boolean burst;
 
-    private static Random random = new Random();
+    private static final Random random = new Random();
 
     public RaySpellEffectPacket(float posFromX, float posFromY, float posFromZ, float posToX, float posToY, float posToZ, float colorR, float colorG, float colorB, boolean burst) {
         this.posFromX = posFromX;
@@ -73,32 +73,32 @@ public class RaySpellEffectPacket {
                         Particles.create(WizardsReborn.WISP_PARTICLE)
                                 .addVelocity(((random.nextDouble() - 0.5D) / 20), ((random.nextDouble() - 0.5D) / 20), ((random.nextDouble() - 0.5D) / 20))
                                 .setAlpha(0.2f, 0).setScale(0.15f, 0)
-                                .setColor(colorR, colorG, colorB)
+                                .setColor(msg.colorR, msg.colorG, msg.colorB)
                                 .setLifetime(25)
-                                .spawn(world, posFromX, posFromY, posFromZ);
+                                .spawn(world, msg.posFromX, msg.posFromY, msg.posFromZ);
 
                         if (random.nextFloat() < 0.1f) {
                             Particles.create(WizardsReborn.SPARKLE_PARTICLE)
                                     .addVelocity(((random.nextDouble() - 0.5D) / 20), ((random.nextDouble() - 0.5D) / 20), ((random.nextDouble() - 0.5D) / 20))
                                     .setAlpha(0.125f, 0).setScale(0.2f, 0)
-                                    .setColor(colorR, colorG, colorB)
+                                    .setColor(msg.colorR, msg.colorG, msg.colorB)
                                     .setLifetime(20)
-                                    .spawn(world, posFromX, posFromY, posFromZ);
+                                    .spawn(world, msg.posFromX, msg.posFromY, msg.posFromZ);
                         }
                     }
 
-                    Vec3 pos = new Vec3(posToX, posToY, posToZ);
+                    Vec3 pos = new Vec3(msg.posToX, msg.posToY, msg.posToZ);
                     for (int i = 0; i < 10; i++) {
                         if (random.nextFloat() < 0.1f) {
                             double lerp = random.nextDouble();
-                            double lerpX = Mth.lerp(lerp, posFromX, pos.x);
-                            double lerpY = Mth.lerp(lerp, posFromY, pos.y);
-                            double lerpZ = Mth.lerp(lerp, posFromZ, pos.z);
+                            double lerpX = Mth.lerp(lerp, msg.posFromX, pos.x);
+                            double lerpY = Mth.lerp(lerp, msg.posFromY, pos.y);
+                            double lerpZ = Mth.lerp(lerp, msg.posFromZ, pos.z);
 
                             Particles.create(WizardsReborn.WISP_PARTICLE)
                                     .addVelocity(((random.nextDouble() - 0.5D) / 30), ((random.nextDouble() - 0.5D) / 30), ((random.nextDouble() - 0.5D) / 30))
                                     .setAlpha(0.2f, 0).setScale(0.15f, 0)
-                                    .setColor(colorR, colorG, colorB)
+                                    .setColor(msg.colorR, msg.colorG, msg.colorB)
                                     .setLifetime(10)
                                     .spawn(world, lerpX, lerpY, lerpZ);
 
@@ -106,29 +106,29 @@ public class RaySpellEffectPacket {
                                 Particles.create(WizardsReborn.SPARKLE_PARTICLE)
                                         .addVelocity(((random.nextDouble() - 0.5D) / 30), ((random.nextDouble() - 0.5D) / 30), ((random.nextDouble() - 0.5D) / 30))
                                         .setAlpha(0.125f, 0).setScale(0.2f, 0)
-                                        .setColor(colorR, colorG, colorB)
+                                        .setColor(msg.colorR, msg.colorG, msg.colorB)
                                         .setLifetime(5)
                                         .spawn(world, lerpX, lerpY, lerpZ);
                             }
                         }
                     }
 
-                    if (burst) {
+                    if (msg.burst) {
                         for (int i = 0; i < 5; i++) {
                             if (random.nextFloat() < 0.1) {
                                 Particles.create(WizardsReborn.WISP_PARTICLE)
                                         .addVelocity(((random.nextDouble() - 0.5D) / 15), ((random.nextDouble() - 0.5D) / 15), ((random.nextDouble() - 0.5D) / 15))
                                         .setAlpha(0.125f, 0).setScale(0.2f, 0)
-                                        .setColor(colorR, colorG, colorB)
+                                        .setColor(msg.colorR, msg.colorG, msg.colorB)
                                         .setLifetime(40)
-                                        .spawn(world, posToX, posToY, posToZ);
+                                        .spawn(world, msg.posToX, msg.posToY, msg.posToZ);
                                 Particles.create(WizardsReborn.SPARKLE_PARTICLE)
                                         .addVelocity(((random.nextDouble() - 0.5D) / 15), ((random.nextDouble() - 0.5D) / 15), ((random.nextDouble() - 0.5D) / 15))
                                         .setAlpha(0.25f, 0).setScale(0.075f, 0)
-                                        .setColor(colorR, colorG, colorB)
+                                        .setColor(msg.colorR, msg.colorG, msg.colorB)
                                         .setLifetime(50)
                                         .setSpin((0.5f * (float) ((random.nextDouble() - 0.5D) * 2)))
-                                        .spawn(world, posToX, posToY, posToZ);
+                                        .spawn(world, msg.posToX, msg.posToY, msg.posToZ);
                             }
                         }
                     }

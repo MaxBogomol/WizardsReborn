@@ -2,7 +2,6 @@ package mod.maxbogomol.wizards_reborn.common.network.spell;
 
 import mod.maxbogomol.wizards_reborn.WizardsReborn;
 import mod.maxbogomol.wizards_reborn.client.particle.Particles;
-import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.world.level.Level;
 import net.minecraftforge.network.NetworkEvent;
@@ -11,10 +10,10 @@ import java.util.Random;
 import java.util.function.Supplier;
 
 public class HolyRaySpellEffectPacket {
-    private static float X, Y, Z;
-    private static float colorR, colorG, colorB;
+    private final float X, Y, Z;
+    private final float colorR, colorG, colorB;
 
-    private static Random random = new Random();
+    private static final Random random = new Random();
 
     public HolyRaySpellEffectPacket(float X, float Y, float Z, float colorR, float colorG, float colorB) {
         this.X = X;
@@ -52,9 +51,9 @@ public class HolyRaySpellEffectPacket {
                             Particles.create(WizardsReborn.SPARKLE_PARTICLE)
                                     .addVelocity(((random.nextDouble() - 0.5D) / 10), ((random.nextDouble() - 0.5D) / 10) + 0.05f, ((random.nextDouble() - 0.5D) / 10))
                                     .setAlpha(0.3f, 0).setScale(0, 0.3f)
-                                    .setColor(colorR, colorG, colorB)
+                                    .setColor(msg.colorR, msg.colorG, msg.colorB)
                                     .setLifetime(60)
-                                    .spawn(world, X, Y, Z);
+                                    .spawn(world, msg.X, msg.Y, msg.Z);
                         }
                     }
 

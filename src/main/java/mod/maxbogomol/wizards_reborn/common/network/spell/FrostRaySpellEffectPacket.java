@@ -11,10 +11,10 @@ import java.util.Random;
 import java.util.function.Supplier;
 
 public class FrostRaySpellEffectPacket {
-    private static float X, Y, Z;
-    private static float colorR, colorG, colorB;
+    private final float X, Y, Z;
+    private final float colorR, colorG, colorB;
 
-    private static Random random = new Random();
+    private static final Random random = new Random();
 
     public FrostRaySpellEffectPacket(float X, float Y, float Z, float colorR, float colorG, float colorB) {
         this.X = X;
@@ -52,15 +52,15 @@ public class FrostRaySpellEffectPacket {
                             Particles.create(WizardsReborn.SPARKLE_PARTICLE)
                                     .addVelocity(((random.nextDouble() - 0.5D) / 10), ((random.nextDouble() - 0.5D) / 10) + 0.05f, ((random.nextDouble() - 0.5D) / 10))
                                     .setAlpha(0.3f, 0).setScale(0.3f, 0)
-                                    .setColor(colorR, colorG, colorB)
+                                    .setColor(msg.colorR, msg.colorG, msg.colorB)
                                     .setLifetime(40)
                                     .setSpin((0.1f * (float) ((random.nextDouble() - 0.5D) * 2)))
-                                    .spawn(world, X, Y, Z);
+                                    .spawn(world, msg.X, msg.Y, msg.Z);
                         }
 
                         if (random.nextFloat() < 0.8f) {
                             world.addParticle(ParticleTypes.SNOWFLAKE,
-                                    X + ((random.nextDouble() - 0.5D) / 2), Y + ((random.nextDouble() - 0.5D) / 2), Z + ((random.nextDouble() - 0.5D) / 2),
+                                    msg.X + ((random.nextDouble() - 0.5D) / 2), msg.Y + ((random.nextDouble() - 0.5D) / 2), msg.Z + ((random.nextDouble() - 0.5D) / 2),
                                     ((random.nextDouble() - 0.5D) / 10), ((random.nextDouble() - 0.5D) / 10) + 0.05f, ((random.nextDouble() - 0.5D) / 10));
                         }
                     }

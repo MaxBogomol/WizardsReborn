@@ -10,13 +10,13 @@ import java.util.Random;
 import java.util.function.Supplier;
 
 public class WissenTranslatorBurstEffectPacket {
-    private static float posX;
-    private static float posY;
-    private static float posZ;
+    private final float posX;
+    private final float posY;
+    private final float posZ;
 
-    private static float colorR, colorG, colorB;
+    private final float colorR, colorG, colorB;
 
-    private static Random random = new Random();
+    private static final Random random = new Random();
 
     public WissenTranslatorBurstEffectPacket(float posX, float posY, float posZ, float colorR, float colorG, float colorB) {
         this.posX = posX;
@@ -63,16 +63,16 @@ public class WissenTranslatorBurstEffectPacket {
                         Particles.create(WizardsReborn.WISP_PARTICLE)
                               .addVelocity(((random.nextDouble() - 0.5D) / 20), ((random.nextDouble() - 0.5D) / 20), ((random.nextDouble() - 0.5D) / 20))
                               .setAlpha(0.125f, 0).setScale(0.2f, 0)
-                              .setColor(colorR, colorG, colorB)
+                              .setColor(msg.colorR, msg.colorG, msg.colorB)
                               .setLifetime(20)
-                              .spawn(world, posX, posY, posZ);
+                              .spawn(world, msg.posX, msg.posY, msg.posZ);
                         Particles.create(WizardsReborn.SPARKLE_PARTICLE)
                               .addVelocity(((random.nextDouble() - 0.5D) / 20), ((random.nextDouble() - 0.5D) / 20), ((random.nextDouble() - 0.5D) / 20))
                               .setAlpha(0.25f, 0).setScale(0.075f, 0)
-                              .setColor(colorR, colorG, colorB)
+                              .setColor(msg.colorR, msg.colorG, msg.colorB)
                               .setLifetime(30)
                               .setSpin((0.5f * (float) ((random.nextDouble() - 0.5D) * 2)))
-                              .spawn(world, posX, posY, posZ);
+                              .spawn(world, msg.posX, msg.posY, msg.posZ);
                     }
                     ctx.get().setPacketHandled(true);
                 }

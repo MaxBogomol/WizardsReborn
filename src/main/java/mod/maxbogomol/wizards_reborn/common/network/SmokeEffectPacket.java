@@ -2,7 +2,6 @@ package mod.maxbogomol.wizards_reborn.common.network;
 
 import mod.maxbogomol.wizards_reborn.WizardsReborn;
 import mod.maxbogomol.wizards_reborn.client.particle.Particles;
-import net.minecraft.core.BlockPos;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.world.level.Level;
 import net.minecraftforge.network.NetworkEvent;
@@ -11,17 +10,17 @@ import java.util.Random;
 import java.util.function.Supplier;
 
 public class SmokeEffectPacket {
-    private static float posX;
-    private static float posY;
-    private static float posZ;
+    private final float posX;
+    private final float posY;
+    private final float posZ;
 
-    private static float velX;
-    private static float velY;
-    private static float velZ;
+    private final float velX;
+    private final float velY;
+    private final float velZ;
 
-    private static float colorR, colorG, colorB;
+    private final float colorR, colorG, colorB;
 
-    private static Random random = new Random();
+    private static final Random random = new Random();
 
     public SmokeEffectPacket(float posX, float posY, float posZ, float velX, float velY, float velZ, float colorR, float colorG, float colorB) {
         this.posX = posX;
@@ -64,12 +63,12 @@ public class SmokeEffectPacket {
 
                     for (int i = 0; i < 40; i++) {
                         Particles.create(WizardsReborn.STEAM_PARTICLE)
-                                .addVelocity(velX + ((random.nextDouble() - 0.5D) / (20 - (5 * random.nextDouble()))), velY + ((random.nextDouble() - 0.5D) / (20 - (5 * random.nextDouble()))), velZ + ((random.nextDouble() - 0.5D) / (20 - (5 * random.nextDouble()))))
+                                .addVelocity(msg.velX + ((random.nextDouble() - 0.5D) / (20 - (5 * random.nextDouble()))), msg.velY + ((random.nextDouble() - 0.5D) / (20 - (5 * random.nextDouble()))), msg.velZ + ((random.nextDouble() - 0.5D) / (20 - (5 * random.nextDouble()))))
                                 .setAlpha(0.05f, 0).setScale(0.1f, 2)
-                                .setColor(colorR, colorG, colorB)
+                                .setColor(msg.colorR, msg.colorG, msg.colorB)
                                 .setLifetime(500 + random.nextInt(100))
                                 .setSpin((0.1f * (float) ((random.nextDouble() - 0.5D) * 2)))
-                                .spawn(world, posX + ((random.nextDouble() - 0.5D) / 10), posY + ((random.nextDouble() - 0.5D) / 10), posZ + ((random.nextDouble() - 0.5D) / 10));
+                                .spawn(world, msg.posX + ((random.nextDouble() - 0.5D) / 10), msg.posY + ((random.nextDouble() - 0.5D) / 10), msg.posZ + ((random.nextDouble() - 0.5D) / 10));
                     }
                     ctx.get().setPacketHandled(true);
                 }

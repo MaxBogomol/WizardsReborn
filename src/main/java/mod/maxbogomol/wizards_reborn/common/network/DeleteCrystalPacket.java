@@ -12,7 +12,7 @@ import net.minecraftforge.network.NetworkEvent;
 import java.util.function.Supplier;
 
 public class DeleteCrystalPacket {
-    private static boolean hand;
+    private final boolean hand;
 
     public DeleteCrystalPacket(boolean hand) {
         this.hand = hand;
@@ -32,7 +32,7 @@ public class DeleteCrystalPacket {
                 ServerPlayer player = ctx.get().getSender();
 
                 ItemStack stack = player.getItemInHand(InteractionHand.MAIN_HAND);
-                if (!hand) {
+                if (!msg.hand) {
                     stack = player.getItemInHand(InteractionHand.OFF_HAND);
                 }
 
