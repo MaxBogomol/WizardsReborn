@@ -146,6 +146,7 @@ public class ChargeSpell extends Spell {
     @Override
     public void entityTick(SpellProjectileEntity entity) {
         if (!entity.level().isClientSide) {
+            boolean hasEffectTrue = true;
             CompoundTag spellData = entity.getSpellData();
             if (spellData.getBoolean("throw")) {
                 HitResult ray = ProjectileUtil.getHitResultOnMoveVector(entity, (e) -> {
@@ -153,6 +154,7 @@ public class ChargeSpell extends Spell {
                 });
                 if (ray.getType() == HitResult.Type.ENTITY) {
                     entity.onImpact(ray, ((EntityHitResult) ray).getEntity());
+                    hasEffectTrue = false;
                 } else if (ray.getType() == HitResult.Type.BLOCK) {
                     entity.onImpact(ray);
                 } else {
@@ -184,7 +186,7 @@ public class ChargeSpell extends Spell {
             entity.setSpellData(spellData);
             entity.updateSpellData();
 
-            rayEffect(entity);
+            if (hasEffectTrue) rayEffect(entity);
             if (entity.getSender() != null) {
                 Vec3 posE = entity.getSender().getEyePosition(0);
                 Vec3 vel = entity.getSender().getEyePosition(0).add(entity.getSender().getLookAngle().scale(40)).subtract(posE).scale(1.0 / 25);

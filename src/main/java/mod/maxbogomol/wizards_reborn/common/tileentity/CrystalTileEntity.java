@@ -76,10 +76,17 @@ public class CrystalTileEntity extends TileSimpleInventory implements TickableBl
                         }
                     }
                 }
+            } else {
+                if (startRitual) {
+                    reload();
+                    update = true;
+                }
             }
         } else {
-            reload();
-            update = true;
+            if (startRitual) {
+                reload();
+                update = true;
+            }
         }
 
         if (!level.isClientSide()) {

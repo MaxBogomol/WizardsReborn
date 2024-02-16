@@ -9,6 +9,7 @@ import net.minecraft.stats.Stats;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResultHolder;
 import net.minecraft.world.SimpleContainer;
+import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
@@ -42,7 +43,11 @@ public class MortarItem extends Item {
                         offStack.setCount(offStack.getCount() - 1);
                     }
 
-                    player.getInventory().add(recipe.get().getResultItem(RegistryAccess.EMPTY).copy());
+                    if (player.getInventory().getSlotWithRemainingSpace(recipe.get().getResultItem(RegistryAccess.EMPTY).copy()) != -1 || player.getInventory().getFreeSlot() > -1) {
+                        player.getInventory().add(recipe.get().getResultItem(RegistryAccess.EMPTY).copy());
+                    } else {
+                        world.addFreshEntity(new ItemEntity(world, player.getX(), player.getY() + 0.5F, player.getZ(), recipe.get().getResultItem(RegistryAccess.EMPTY).copy()));
+                    }
                     world.playSound(null, player.getX(), player.getY(), player.getZ(), SoundEvents.BONE_MEAL_USE, SoundSource.PLAYERS, 1.0f, 1.0f);
                     player.awardStat(Stats.ITEM_USED.get(this));
 

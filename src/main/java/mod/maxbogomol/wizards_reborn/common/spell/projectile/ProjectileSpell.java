@@ -38,11 +38,13 @@ public class ProjectileSpell extends Spell {
     @Override
     public void entityTick(SpellProjectileEntity entity) {
         if (!entity.level().isClientSide) {
+            boolean hasEffectTrue = true;
             HitResult ray = ProjectileUtil.getHitResultOnMoveVector(entity, (e) -> {
                 return !e.isSpectator() && e.isPickable() && (!e.getUUID().equals(entity.getEntityData().get(entity.casterId).get()) || entity.tickCount > 5);
             });
             if (ray.getType() == HitResult.Type.ENTITY) {
                 entity.onImpact(ray, ((EntityHitResult)ray).getEntity());
+                hasEffectTrue = false;
             } else if (ray.getType() == HitResult.Type.BLOCK) {
                 entity.onImpact(ray);
             } else {
@@ -50,7 +52,7 @@ public class ProjectileSpell extends Spell {
                 updateRot(entity);
             }
 
-            entity.rayEffect();
+            if (hasEffectTrue) entity.rayEffect();
         } else {
             updatePos(entity);
             updateRot(entity);

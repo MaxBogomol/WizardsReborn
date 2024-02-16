@@ -78,12 +78,13 @@ public class WizardsRebornClient {
     public static ModelResourceLocation WISSEN_ACTIVATOR_PIECE_MODEl = new ModelResourceLocation(WizardsReborn.MOD_ID, "wissen_activator_piece", "");
     public static ModelResourceLocation ITEM_SORTER_PIECE_MODEl = new ModelResourceLocation(WizardsReborn.MOD_ID, "item_sorter_piece", "");
 
-    public static ShaderInstance GLOWING_SHADER, GLOWING_SPRITE_SHADER, GLOWING_PARTICLE_SHADER, SPRITE_PARTICLE_SHADER;
+    public static ShaderInstance GLOWING_SHADER, GLOWING_SPRITE_SHADER, GLOWING_PARTICLE_SHADER, SPRITE_PARTICLE_SHADER, FLUID_SHADER;
 
     public static ShaderInstance getGlowingShader() { return GLOWING_SHADER; }
     public static ShaderInstance getGlowingSpriteShader() { return GLOWING_SPRITE_SHADER; }
     public static ShaderInstance getGlowingParticleShader() { return GLOWING_PARTICLE_SHADER; }
     public static ShaderInstance getSpriteParticleShader() { return SPRITE_PARTICLE_SHADER; }
+    public static ShaderInstance getFluidShader() { return FLUID_SHADER; }
 
     public static boolean optifinePresent = false;
     public static boolean firstScreen = true;
@@ -336,6 +337,8 @@ public class WizardsRebornClient {
                     shader -> { GLOWING_PARTICLE_SHADER = shader; });
             event.registerShader(new ShaderInstance(event.getResourceProvider(), new ResourceLocation("wizards_reborn:sprite_particle"), DefaultVertexFormat.PARTICLE),
                     shader -> { SPRITE_PARTICLE_SHADER = shader; });
+            event.registerShader(new ShaderInstance(event.getResourceProvider(), new ResourceLocation("wizards_reborn:fluid"), DefaultVertexFormat.POSITION_COLOR_TEX_LIGHTMAP),
+                    shader -> { FLUID_SHADER = shader; });
         }
 
         @SubscribeEvent

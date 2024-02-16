@@ -184,7 +184,7 @@ public class SmokingPipeItem extends Item implements ICustomAnimationItem {
                         int slot = invSize - i - 1;
                         if (!getInventory(stack).getItem(slot).isEmpty()) {
                             if (getItemBurnCenser(getInventory(stack).getItem(slot)) <= 0) {
-                                if (player.getInventory().getSlotWithRemainingSpace(getInventory(stack).getItem(slot)) != -1) {
+                                if (player.getInventory().getSlotWithRemainingSpace(getInventory(stack).getItem(slot)) != -1 || player.getInventory().getFreeSlot() > -1) {
                                     player.getInventory().add(getInventory(stack).getItem(slot).copy());
                                 } else {
                                     world.addFreshEntity(new ItemEntity(world, player.getX(), player.getY() + 0.5F, player.getZ(), getInventory(stack).getItem(slot).copy()));

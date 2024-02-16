@@ -14,7 +14,6 @@ import mod.maxbogomol.wizards_reborn.client.event.ClientTickHandler;
 import mod.maxbogomol.wizards_reborn.client.render.item.CustomItemRenderer;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
-import net.minecraft.client.renderer.GameRenderer;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.RenderStateShard;
 import net.minecraft.client.renderer.RenderType;
@@ -57,17 +56,6 @@ public class RenderUtils {
     }, () -> {
         RenderSystem.disableBlend();
         RenderSystem.defaultBlendFunc();
-    });
-
-    protected static final RenderStateShard.OutputStateShard TRANSLUCENT_TARGET = new RenderStateShard.OutputStateShard("translucent_target", () -> {
-        if (Minecraft.useShaderTransparency()) {
-            Minecraft.getInstance().levelRenderer.getTranslucentTarget().bindWrite(false);
-        }
-
-    }, () -> {
-        if (Minecraft.useShaderTransparency()) {
-            Minecraft.getInstance().getMainRenderTarget().bindWrite(false);
-        }
     });
 
     public static final RenderType GLOWING_SPRITE = RenderType.create(
@@ -116,19 +104,21 @@ public class RenderUtils {
                     .setTransparencyState(NORMAL_TRANSPARENCY)
                     .setTextureState(new RenderStateShard.TextureStateShard(TextureAtlas.LOCATION_PARTICLES, false, false))
                     .setShaderState(new RenderStateShard.ShaderStateShard(WizardsRebornClient::getSpriteParticleShader))
-                    .createCompositeState(false));
+                    .createCompositeState(false)
+    );
 
     public static final RenderType FLUID = RenderType.create(
-            WizardsReborn.MOD_ID + ":fluid_render_type",
-            DefaultVertexFormat.POSITION_COLOR_TEX_LIGHTMAP, VertexFormat.Mode.QUADS, 256, false, true,
+            WizardsReborn.MOD_ID + ":fluid",
+            DefaultVertexFormat.POSITION_COLOR_TEX_LIGHTMAP,
+            VertexFormat.Mode.QUADS, 256, false, true,
             RenderType.CompositeState.builder()
                     .setLightmapState(new RenderStateShard.LightmapStateShard(true))
-                    .setShaderState(new RenderStateShard.ShaderStateShard(GameRenderer::getPositionColorTexLightmapShader))
-                    .setTextureState(new RenderStateShard.TextureStateShard(TextureAtlas.LOCATION_BLOCKS, false, true))
                     .setTransparencyState(TRANSLUCENT_TRANSPARENCY)
+                    .setTextureState(new RenderStateShard.TextureStateShard(TextureAtlas.LOCATION_BLOCKS, false, true))
+                    .setShaderState(new RenderStateShard.ShaderStateShard(WizardsRebornClient::getFluidShader))
                     .setCullState(new RenderStateShard.CullStateShard(true))
-                    .setOutputState(TRANSLUCENT_TARGET)
-                    .createCompositeState(false));
+                    .createCompositeState(true)
+    );
 
     public static CustomItemRenderer customItemRenderer;
 

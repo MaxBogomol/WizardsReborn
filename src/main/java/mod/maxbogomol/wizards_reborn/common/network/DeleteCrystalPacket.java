@@ -3,6 +3,7 @@ package mod.maxbogomol.wizards_reborn.common.network;
 import mod.maxbogomol.wizards_reborn.common.item.equipment.ArcaneWandItem;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.SimpleContainer;
+import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.FriendlyByteBuf;
@@ -39,7 +40,11 @@ public class DeleteCrystalPacket {
                 SimpleContainer stack_inv = ArcaneWandItem.getInventory(stack);
                 CompoundTag nbt = stack.getTag();
 
-                player.getInventory().add(stack_inv.getItem(0));
+                    if (player.getInventory().getFreeSlot() > -1) {
+                        player.getInventory().add(stack_inv.getItem(0));
+                    } else {
+                        player.serverLevel().addFreshEntity(new ItemEntity(player.serverLevel(), player.getX(), player.getY() + 0.5F, player.getZ(), stack_inv.getItem(0)));
+                    }
 
                 stack_inv.clearContent();
                 nbt.putBoolean("crystal", false);
