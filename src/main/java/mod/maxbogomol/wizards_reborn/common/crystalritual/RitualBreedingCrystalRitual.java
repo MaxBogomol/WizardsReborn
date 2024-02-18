@@ -20,7 +20,7 @@ public class RitualBreedingCrystalRitual extends CrystalRitual {
 
     @Override
     public Color getColor() {
-        return new Color(138, 201, 123);
+        return new Color(210, 129, 147);
     }
 
     @Override

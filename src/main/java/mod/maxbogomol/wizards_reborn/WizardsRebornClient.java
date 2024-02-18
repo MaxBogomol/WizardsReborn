@@ -16,6 +16,7 @@ import mod.maxbogomol.wizards_reborn.client.render.item.*;
 import mod.maxbogomol.wizards_reborn.client.render.tileentity.*;
 import mod.maxbogomol.wizards_reborn.common.entity.CustomBoatEntity;
 import mod.maxbogomol.wizards_reborn.common.item.equipment.AlchemyPotionItem;
+import mod.maxbogomol.wizards_reborn.common.item.equipment.RunicWisestonePlateItem;
 import net.minecraft.client.KeyMapping;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.model.BoatModel;
@@ -367,6 +368,7 @@ public class WizardsRebornClient {
         @SubscribeEvent
         public static void registerItemColorHandlers(RegisterColorHandlersEvent.Item event) {
             event.register(new AlchemyPotionItem.ColorHandler(), WizardsReborn.ALCHEMY_VIAL_POTION.get(), WizardsReborn.ALCHEMY_FLASK_POTION.get());
+            event.register(new RunicWisestonePlateItem.ColorHandler(), WizardsReborn.RUNIC_WISESTONE_PLATE.get());
         }
     }
 

@@ -22,7 +22,7 @@ public class CrystalGrowthAccelerationCrystalRitual extends CrystalRitual {
 
     @Override
     public Color getColor() {
-        return new Color(138, 201, 123);
+        return new Color(86, 125, 182);
     }
 
     @Override

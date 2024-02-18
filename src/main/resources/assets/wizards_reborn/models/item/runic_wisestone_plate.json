@@ -1,6 +1,17 @@
 {
   "parent": "item/generated",
   "textures": {
-    "layer0": "wizards_reborn:item/runic_wisestone_plate"
-  }
+    "layer0": "wizards_reborn:item/runic_wisestone_plate",
+    "layer1": "wizards_reborn:item/runic_wisestone_plate_0"
+  },
+  "forge_data": {
+    "layers": {
+      "1": {
+        "block_light": 15,
+        "sky_light": 15
+      }
+    }
+  },
+  "loader": "forge:item_layers",
+  "render_types": {}
 }
