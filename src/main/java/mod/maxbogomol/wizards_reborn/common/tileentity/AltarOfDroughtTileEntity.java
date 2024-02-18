@@ -1,12 +1,13 @@
 package mod.maxbogomol.wizards_reborn.common.tileentity;
 
 import mod.maxbogomol.wizards_reborn.WizardsReborn;
+import mod.maxbogomol.wizards_reborn.api.crystalritual.CrystalRitual;
 import mod.maxbogomol.wizards_reborn.api.wissen.*;
 import mod.maxbogomol.wizards_reborn.client.particle.Particles;
 import mod.maxbogomol.wizards_reborn.common.network.PacketHandler;
 import mod.maxbogomol.wizards_reborn.common.network.WissenSendEffectPacket;
-import mod.maxbogomol.wizards_reborn.common.network.tileentity.AltarOfDroughtBurstEffectPacket;
 import mod.maxbogomol.wizards_reborn.common.network.tileentity.AltarOfDroughtBreakEffectPacket;
+import mod.maxbogomol.wizards_reborn.common.network.tileentity.AltarOfDroughtBurstEffectPacket;
 import mod.maxbogomol.wizards_reborn.common.network.tileentity.AltarOfDroughtSendEffectPacket;
 import mod.maxbogomol.wizards_reborn.utils.PacketUtils;
 import net.minecraft.core.BlockPos;
@@ -25,6 +26,7 @@ import org.jetbrains.annotations.NotNull;
 
 import javax.annotation.Nullable;
 import java.awt.*;
+import java.util.ArrayList;
 import java.util.Random;
 
 public class AltarOfDroughtTileEntity extends ExposedTileSimpleInventory implements TickableBlockEntity, IWissenTileEntity, ICooldownTileEntity {
@@ -71,12 +73,6 @@ public class AltarOfDroughtTileEntity extends ExposedTileSimpleInventory impleme
 
             int distance = 15;
 
-            int xOffset = random.nextInt(distance * 2);
-            int yOffset = random.nextInt(distance * 2);
-            int zOffset = random.nextInt(distance * 2);
-
-            boolean isBreak = false;
-
             if (ticks > 0) {
                 ticks = ticks - 1;
                 if (ticks <= 0) {
@@ -86,36 +82,20 @@ public class AltarOfDroughtTileEntity extends ExposedTileSimpleInventory impleme
             }
 
             if (ticks <= 0 && wissen < getMaxWissen()) {
-                for (int x = -distance; x <= distance; x++) {
-                    for (int y = -distance; y <= distance; y++) {
-                        for (int z = -distance; z <= distance; z++) {
-                            int X = ((x + xOffset) % distance);
-                            int Y = ((y + yOffset) % distance);
-                            int Z = ((z + zOffset) % distance);
-                            BlockPos breakPos = new BlockPos(getBlockPos().getX() + X, getBlockPos().getY() + Y, getBlockPos().getZ() + Z);
-                            if (level.isLoaded(breakPos)) {
-                                if (level.getBlockState(breakPos).is(WizardsReborn.ALTAR_OF_DROUGHT_TARGET) && !level.getBlockState(breakPos).getValue(BlockStateProperties.PERSISTENT)) {
-                                    PacketHandler.sendToTracking(level, getBlockPos(), new AltarOfDroughtBurstEffectPacket(getBlockPos()));
-                                    PacketHandler.sendToTracking(level, breakPos, new AltarOfDroughtBreakEffectPacket(breakPos));
-                                    PacketHandler.sendToTracking(level, getBlockPos(), new WissenSendEffectPacket(getBlockPos().getX() + 0.5F, getBlockPos().getY() + 0.5F, getBlockPos().getZ() + 0.5F, breakPos.getX() + 0.5F, breakPos.getY() + 0.5F, breakPos.getZ() + 0.5F, 0.466f, 0.643f, 0.815f, 25));
-                                    level.destroyBlock(breakPos, false);
-                                    addWissen(12);
-                                    ticks = 20 + random.nextInt(10);
-                                    maxTicks = ticks;
-                                    isBreak = true;
-                                    update = true;
-                                }
-                            }
-                            if (isBreak) {
-                                break;
-                            }
-                        }
-                        if (isBreak) {
-                            break;
-                        }
-                    }
-                    if (isBreak) {
-                        break;
+                ArrayList<BlockPos> blockPosList = CrystalRitual.getBlockPosWithArea(level, getBlockPos(), new Vec3(distance, distance, distance), new Vec3(distance, distance, distance), (p) -> {
+                    return level.getBlockState(p).is(WizardsReborn.ALTAR_OF_DROUGHT_TARGET) && !level.getBlockState(p).getValue(BlockStateProperties.PERSISTENT);
+                }, true, true, 1);
+
+                for (BlockPos breakPos : blockPosList) {
+                    if (level.getBlockState(breakPos).is(WizardsReborn.ALTAR_OF_DROUGHT_TARGET) && !level.getBlockState(breakPos).getValue(BlockStateProperties.PERSISTENT)) {
+                        PacketHandler.sendToTracking(level, getBlockPos(), new AltarOfDroughtBurstEffectPacket(getBlockPos()));
+                        PacketHandler.sendToTracking(level, breakPos, new AltarOfDroughtBreakEffectPacket(breakPos));
+                        PacketHandler.sendToTracking(level, getBlockPos(), new WissenSendEffectPacket(getBlockPos().getX() + 0.5F, getBlockPos().getY() + 0.5F, getBlockPos().getZ() + 0.5F, breakPos.getX() + 0.5F, breakPos.getY() + 0.5F, breakPos.getZ() + 0.5F, 0.466f, 0.643f, 0.815f, 25));
+                        level.destroyBlock(breakPos, false);
+                        addWissen(12);
+                        ticks = 20 + random.nextInt(10);
+                        maxTicks = ticks;
+                        update = true;
                     }
                 }
             }

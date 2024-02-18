@@ -87,7 +87,7 @@ public class WissenUtils {
             if (random.nextFloat() < 0.25f) {
                 Particles.create(WizardsReborn.SPARKLE_PARTICLE)
                         .addVelocity(((random.nextDouble() - 0.5D) / 100), ((random.nextDouble() - 0.5D) / 100), ((random.nextDouble() - 0.5D) / 100))
-                        .setAlpha(0.25f, 0f).setScale(0.1f, 0f)
+                        .setAlpha(0.45f, 0f).setScale(0.1f, 0f)
                         .setColor(colorR, colorG, colorB)
                         .setLifetime(5)
                         .setSpin((0.1f * (float) ((random.nextDouble() - 0.5D) * 2)))
@@ -115,7 +115,7 @@ public class WissenUtils {
         for (int i = 0; i <= blocks * particlePerBlock; i++) {
             Particles.create(WizardsReborn.SPARKLE_PARTICLE)
                     .addVelocity(((random.nextDouble() - 0.5D) / 100), ((random.nextDouble() - 0.5D) / 100), ((random.nextDouble() - 0.5D) / 100))
-                    .setAlpha(0.25f, 0f).setScale(0.05f, 0f)
+                    .setAlpha(0.45f, 0f).setScale(0.05f, 0f)
                     .setColor(colorR, colorG, colorB)
                     .setLifetime(1)
                     .setSpin((0.1f * (float) ((random.nextDouble() - 0.5D) * 2)))

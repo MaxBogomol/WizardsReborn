@@ -1,6 +1,7 @@
 package mod.maxbogomol.wizards_reborn.api.crystalritual;
 
 import mod.maxbogomol.wizards_reborn.WizardsReborn;
+import mod.maxbogomol.wizards_reborn.api.crystal.CrystalStat;
 import mod.maxbogomol.wizards_reborn.api.crystal.CrystalType;
 import mod.maxbogomol.wizards_reborn.api.crystal.PolishingType;
 import mod.maxbogomol.wizards_reborn.common.item.CrystalItem;
@@ -46,6 +47,14 @@ public class CrystalRitual {
 
     public CrystalRitualArea getArea(CrystalTileEntity crystal) {
         return new CrystalRitualArea(3, 3, 3, 3, 3, 3);
+    }
+
+    public int getStatLevel(CrystalTileEntity crystal, CrystalStat stat) {
+        ItemStack item = getCrystalItem(crystal);
+        if (!item.isEmpty()) {
+            return CrystalItem.getStatLevel(item, stat);
+        }
+        return 0;
     }
 
     public int getMaxRitualCooldown(CrystalTileEntity crystal) {
@@ -151,10 +160,27 @@ public class CrystalRitual {
         int count = 0;
         boolean reachLimit = false;
 
+        float xOffset = 0;
+        float yOffset = 0;
+        float zOffset = 0;
+
+        if (hasRandomOffset) {
+            Random random = new Random();
+            xOffset = (float) (random.nextFloat() * (sizeFrom.x() + sizeTo.x()));
+            yOffset = (float) (random.nextFloat() * (sizeFrom.y() + sizeTo.y()));
+            zOffset = (float) (random.nextFloat() * (sizeFrom.z() + sizeTo.z()));
+        }
+
         for (double x = -sizeFrom.x(); x <= sizeTo.x(); x++) {
             for (double y = -sizeFrom.y(); y <= sizeTo.y(); y++) {
                 for (double z = -sizeFrom.z(); z <= sizeTo.z(); z++) {
                     BlockPos pos = new BlockPos(new BlockPos(startPos.getX() + Mth.floor(x), startPos.getY() + Mth.floor(y), startPos.getZ() + Mth.floor(z)));
+                    if (hasRandomOffset) {
+                        float X = (float) (((xOffset + x + sizeFrom.x()) % (sizeFrom.x() + sizeTo.x() + 1)) - sizeFrom.x());
+                        float Y = (float) (((yOffset + y + sizeFrom.y()) % (sizeFrom.y() + sizeTo.y() + 1)) - sizeFrom.y());
+                        float Z = (float) (((zOffset + z + sizeFrom.z()) % (sizeFrom.z() + sizeTo.z() + 1)) - sizeFrom.z());
+                        pos = new BlockPos(new BlockPos(startPos.getX() + Mth.floor(X), startPos.getY() + Mth.floor(Y), startPos.getZ() + Mth.floor(Z)));
+                    }
                     if (level.isLoaded(pos)) {
                         if (filter.test(pos)) {
                             blockPosList.add(pos);

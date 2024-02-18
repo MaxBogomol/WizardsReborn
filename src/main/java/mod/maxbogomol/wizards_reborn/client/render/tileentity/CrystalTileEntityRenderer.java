@@ -2,6 +2,9 @@ package mod.maxbogomol.wizards_reborn.client.render.tileentity;
 
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.math.Axis;
+import mod.maxbogomol.wizards_reborn.api.light.ILightTileEntity;
+import mod.maxbogomol.wizards_reborn.api.light.LightRayHitResult;
+import mod.maxbogomol.wizards_reborn.api.light.LightUtils;
 import mod.maxbogomol.wizards_reborn.client.event.ClientTickHandler;
 import mod.maxbogomol.wizards_reborn.client.render.WorldRenderHandler;
 import mod.maxbogomol.wizards_reborn.common.item.CrystalItem;
@@ -9,6 +12,8 @@ import mod.maxbogomol.wizards_reborn.common.tileentity.CrystalTileEntity;
 import mod.maxbogomol.wizards_reborn.utils.RenderUtils;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.blockentity.BlockEntityRenderer;
+import net.minecraft.core.BlockPos;
+import net.minecraft.world.phys.Vec3;
 
 import java.awt.*;
 import java.util.Random;
@@ -42,6 +47,46 @@ public class CrystalTileEntityRenderer implements BlockEntityRenderer<CrystalTil
                     ms.popPose();
                 }
             }
+
+            if (crystal.isToBlock) {
+                BlockPos pos = new BlockPos(crystal.blockToX, crystal.blockToY, crystal.blockToZ);
+                if (crystal.getLevel().getBlockEntity(pos) instanceof ILightTileEntity lightTile) {
+                    Vec3 from = LightUtils.getLightLensPos(crystal.getBlockPos(), crystal.getLightLensPos());
+                    Vec3 to = LightUtils.getLightLensPos(pos, lightTile.getLightLensPos());
+
+                    double dX = to.x() - from.x();
+                    double dY = to.y() - from.y();
+                    double dZ = to.z() - from.z();
+
+                    double yaw = Math.atan2(dZ, dX);
+                    double pitch = Math.atan2(Math.sqrt(dZ * dZ + dX * dX), dY) + Math.PI;
+
+                    float rayDistance = 0.3f;
+
+                    double X = Math.sin(pitch) * Math.cos(yaw) * rayDistance;
+                    double Y = Math.cos(pitch) * rayDistance;
+                    double Z = Math.sin(pitch) * Math.sin(yaw) * rayDistance;
+
+                    from = from.add(-X, -Y, -Z);
+
+                    ms.pushPose();
+                    ms.translate(0.5F, 0.3125F, 0.5F);
+                    Color color = new Color(0.886f, 0.811f, 0.549f);
+                    LightRayHitResult hitResult = LightUtils.getLightRayHitResult(crystal.getLevel(), crystal.getBlockPos(), from, to, 25f);
+                    LightUtils.renderLightRay(from, hitResult.getPosHit(), hitResult.getDistance() + rayDistance, 25f, color, partialTicks, ms);
+                    ms.popPose();
+                }
+            }
         }
+    }
+
+    @Override
+    public boolean shouldRenderOffScreen(CrystalTileEntity pBlockEntity) {
+        return true;
+    }
+
+    @Override
+    public boolean shouldRender(CrystalTileEntity pBlockEntity, Vec3 pCameraPos) {
+        return true;
     }
 }

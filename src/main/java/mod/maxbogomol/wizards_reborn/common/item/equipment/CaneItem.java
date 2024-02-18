@@ -26,11 +26,11 @@ public class CaneItem extends Item {
         ImmutableMultimap.Builder<Attribute, AttributeModifier> atts = ImmutableMultimap.builder();
         atts.putAll(super.getDefaultAttributeModifiers(slot));
         if (slot == EquipmentSlot.MAINHAND) {
-            atts.put(Attributes.MOVEMENT_SPEED, new AttributeModifier(BASE_MOVEMENT_SPEED_MAINHAND_UUID, "bonus", 0.15f, AttributeModifier.Operation.MULTIPLY_BASE));
+            atts.put(Attributes.MOVEMENT_SPEED, new AttributeModifier(BASE_MOVEMENT_SPEED_MAINHAND_UUID, "bonus", 0.10f, AttributeModifier.Operation.MULTIPLY_BASE));
             atts.put(ForgeMod.STEP_HEIGHT_ADDITION.get(), new AttributeModifier(BASE_STEP_HEIGHT_ADDITION_MAINHAND_UUID, "bonus", 0.5f, AttributeModifier.Operation.ADDITION));
         }
         if (slot == EquipmentSlot.OFFHAND) {
-            atts.put(Attributes.MOVEMENT_SPEED, new AttributeModifier(BASE_MOVEMENT_SPEED_OFFHAND_UUID, "bonus", 0.15f, AttributeModifier.Operation.MULTIPLY_BASE));
+            atts.put(Attributes.MOVEMENT_SPEED, new AttributeModifier(BASE_MOVEMENT_SPEED_OFFHAND_UUID, "bonus", 0.10f, AttributeModifier.Operation.MULTIPLY_BASE));
             atts.put(ForgeMod.STEP_HEIGHT_ADDITION.get(), new AttributeModifier(BASE_STEP_HEIGHT_ADDITION_OFFHAND_UUID, "bonus", 0.5f, AttributeModifier.Operation.ADDITION));
         }
         return (slot == EquipmentSlot.MAINHAND || slot == EquipmentSlot.OFFHAND) ? atts.build() : super.getDefaultAttributeModifiers(slot);

@@ -3,8 +3,10 @@ package mod.maxbogomol.wizards_reborn.common.block;
 import mod.maxbogomol.wizards_reborn.WizardsReborn;
 import mod.maxbogomol.wizards_reborn.api.crystal.CrystalType;
 import mod.maxbogomol.wizards_reborn.api.crystal.CrystalUtils;
+import mod.maxbogomol.wizards_reborn.api.crystalritual.IGrowableCrystal;
 import mod.maxbogomol.wizards_reborn.client.particle.Particles;
 import mod.maxbogomol.wizards_reborn.common.tileentity.CrystalGrowthTileEntity;
+import mod.maxbogomol.wizards_reborn.common.tileentity.TickableBlockEntity;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.server.level.ServerLevel;
@@ -22,6 +24,8 @@ import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.EntityBlock;
 import net.minecraft.world.level.block.SimpleWaterloggedBlock;
 import net.minecraft.world.level.block.entity.BlockEntity;
+import net.minecraft.world.level.block.entity.BlockEntityTicker;
+import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
@@ -33,6 +37,7 @@ import net.minecraft.world.phys.shapes.BooleanOp;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
+import org.jetbrains.annotations.NotNull;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
@@ -156,20 +161,18 @@ public class CrystalGrowthBlock extends Block implements EntityBlock, SimpleWate
 
     public void randomTick(BlockState state, ServerLevel worldIn, BlockPos pos, RandomSource random) {
         if (!worldIn.isAreaLoaded(pos, 1)) return;
-        if (worldIn.getRawBrightness(pos, 0) >= 9) {
-            int i = this.getAge(state);
-            if (i < this.getMaxAge()) {
-                float f = getGrowthChance(this, worldIn, pos);
-                if (net.minecraftforge.common.ForgeHooks.onCropsGrowPre(worldIn, pos, state, random.nextInt((int)(25.0F / f) + 1) == 0)) {
-                    worldIn.setBlock(pos, this.withAge(i + 1), 2);
-                    net.minecraftforge.common.ForgeHooks.onCropsGrowPost(worldIn, pos, state);
-                }
+        int i = this.getAge(state);
+        if (i < this.getMaxAge()) {
+            float f = getGrowthChance(this, worldIn, pos);
+            if (net.minecraftforge.common.ForgeHooks.onCropsGrowPre(worldIn, pos, state, random.nextFloat() <= (0.166f * f))) {
+                worldIn.setBlock(pos, this.withAge(i + 1), 2);
+                net.minecraftforge.common.ForgeHooks.onCropsGrowPost(worldIn, pos, state);
             }
         }
     }
 
     public void grow(Level worldIn, BlockPos pos, BlockState state) {
-        int i = this.getAge(state);
+        int i = this.getAge(state) + 1;
         int j = this.getMaxAge();
         if (i > j) {
             i = j;
@@ -178,8 +181,13 @@ public class CrystalGrowthBlock extends Block implements EntityBlock, SimpleWate
         worldIn.setBlock(pos, this.withAge(i), 2);
     }
 
-    protected static float getGrowthChance(Block blockIn, BlockGetter worldIn, BlockPos pos) {
-        return 5f;
+    public float getGrowthChance(Block blockIn, BlockGetter worldIn, BlockPos pos) {
+        if (worldIn.getBlockEntity(pos) instanceof IGrowableCrystal growable) {
+            if (growable.getGrowingPower() > 0) {
+                return growable.getGrowingPower();
+            }
+        }
+        return 1f;
     }
 
     @Override
@@ -210,6 +218,12 @@ public class CrystalGrowthBlock extends Block implements EntityBlock, SimpleWate
     @Override
     public BlockEntity newBlockEntity(BlockPos pPos, BlockState pState) {
         return new CrystalGrowthTileEntity(pPos, pState);
+    }
+
+    @Nullable
+    @Override
+    public <T extends BlockEntity> BlockEntityTicker<T> getTicker(@NotNull Level level, @NotNull BlockState state, @NotNull BlockEntityType<T> type) {
+        return TickableBlockEntity.getTickerHelper();
     }
 
     @Override

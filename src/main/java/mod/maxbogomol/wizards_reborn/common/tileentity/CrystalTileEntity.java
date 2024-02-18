@@ -6,11 +6,13 @@ import mod.maxbogomol.wizards_reborn.api.crystalritual.CrystalRitual;
 import mod.maxbogomol.wizards_reborn.api.crystalritual.CrystalRitualArea;
 import mod.maxbogomol.wizards_reborn.api.crystalritual.CrystalRitualUtils;
 import mod.maxbogomol.wizards_reborn.api.light.ILightTileEntity;
+import mod.maxbogomol.wizards_reborn.api.light.LightUtils;
 import mod.maxbogomol.wizards_reborn.api.wissen.ICooldownTileEntity;
 import mod.maxbogomol.wizards_reborn.api.wissen.IWissenWandControlledTileEntity;
 import mod.maxbogomol.wizards_reborn.api.wissen.IWissenWandFunctionalTileEntity;
 import mod.maxbogomol.wizards_reborn.api.wissen.WissenUtils;
 import mod.maxbogomol.wizards_reborn.common.item.CrystalItem;
+import mod.maxbogomol.wizards_reborn.common.item.equipment.WissenWandItem;
 import mod.maxbogomol.wizards_reborn.utils.PacketUtils;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
@@ -30,6 +32,11 @@ import org.jetbrains.annotations.NotNull;
 import java.awt.*;
 
 public class CrystalTileEntity extends TileSimpleInventory implements TickableBlockEntity, ILightTileEntity, ICooldownTileEntity, IWissenWandFunctionalTileEntity, IWissenWandControlledTileEntity {
+
+    public int blockToX = 0;
+    public int blockToY =0 ;
+    public int blockToZ = 0;
+    public boolean isToBlock = false;
 
     public int light = 0;
     public int cooldown = 0;
@@ -51,6 +58,20 @@ public class CrystalTileEntity extends TileSimpleInventory implements TickableBl
     public void tick() {
         CrystalRitual ritual = getCrystalRitual();
         boolean update = false;
+
+        setLight(10);
+
+        if (!level.isClientSide()) {
+            if (getLight() > 0) {
+                removeLight(1);
+                update = true;
+            }
+
+            if (isToBlock && CrystalRitualUtils.isEmpty(ritual)) {
+                isToBlock = false;
+                update = true;
+            }
+        }
 
         if (!CrystalRitualUtils.isEmpty(ritual)) {
             if (getLight() > 0 && startRitual) {
@@ -90,11 +111,6 @@ public class CrystalTileEntity extends TileSimpleInventory implements TickableBl
         }
 
         if (!level.isClientSide()) {
-            if (getLight() > 0) {
-                removeLight(1);
-                update = true;
-            }
-
             if (update) {
                 PacketUtils.SUpdateTileEntityPacket(this);
             }
@@ -109,6 +125,14 @@ public class CrystalTileEntity extends TileSimpleInventory implements TickableBl
 
                     if (startRitual) {
                         WissenUtils.connectBlockEffect(level, getBlockPos(), getCrystalColor());
+                    }
+
+                    if (isToBlock) {
+                        BlockPos pos = new BlockPos(blockToX, blockToY, blockToZ);
+                        if (level.getBlockEntity(pos) instanceof ILightTileEntity lightTile) {
+                            WissenUtils.connectEffect(level, LightUtils.getLightLensPos(getBlockPos(), getLightLensPos()), LightUtils.getLightLensPos(pos, lightTile.getLightLensPos()), new Color(118, 184, 214));
+                            WissenUtils.connectBlockEffect(level, pos, new Color(118, 184, 214));
+                        }
                     }
                 }
             }
@@ -147,6 +171,11 @@ public class CrystalTileEntity extends TileSimpleInventory implements TickableBl
     @Override
     public void saveAdditional(CompoundTag tag) {
         super.saveAdditional(tag);
+        tag.putInt("blockToX", blockToX);
+        tag.putInt("blockToY", blockToY);
+        tag.putInt("blockToZ", blockToZ);
+        tag.putBoolean("isToBlock", isToBlock);
+
         tag.putInt("light", light);
         tag.putInt("cooldown", cooldown);
         tag.putInt("maxCooldown", maxCooldown);
@@ -159,6 +188,11 @@ public class CrystalTileEntity extends TileSimpleInventory implements TickableBl
     @Override
     public void load(CompoundTag tag) {
         super.load(tag);
+        blockToX = tag.getInt("blockToX");
+        blockToY = tag.getInt("blockToY");
+        blockToZ = tag.getInt("blockToZ");
+        isToBlock = tag.getBoolean("isToBlock");
+
         light = tag.getInt("light");
         cooldown = tag.getInt("cooldown");
         maxCooldown = tag.getInt("maxCooldown");
@@ -231,7 +265,7 @@ public class CrystalTileEntity extends TileSimpleInventory implements TickableBl
 
     @Override
     public float getLightLensSize() {
-        return 0f;
+        return -10f;
     }
 
     @Override
@@ -250,12 +284,28 @@ public class CrystalTileEntity extends TileSimpleInventory implements TickableBl
 
     @Override
     public boolean wissenWandSendConnect(ItemStack stack, UseOnContext context, BlockEntity tile) {
+        BlockPos oldBlockPos = WissenWandItem.getBlockPos(stack);
+        BlockEntity oldTile = level.getBlockEntity(oldBlockPos);
+
+        if (oldTile instanceof ILightTileEntity lightTile) {
+            if (lightTile.canConnectSendLight()) {
+                blockToX = oldBlockPos.getX();
+                blockToY = oldBlockPos.getY();
+                blockToZ = oldBlockPos.getZ();
+                isToBlock = true;
+                WissenWandItem.setBlock(stack, false);
+                PacketUtils.SUpdateTileEntityPacket(this);
+                return true;
+            }
+        }
+
         return false;
     }
 
 
     @Override
     public boolean wissenWandReload(ItemStack stack, UseOnContext context, BlockEntity tile) {
+        isToBlock = false;
         reload();
         return true;
     }

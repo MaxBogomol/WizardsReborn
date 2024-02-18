@@ -1,7 +1,9 @@
 package mod.maxbogomol.wizards_reborn.common.tileentity;
 
 import mod.maxbogomol.wizards_reborn.WizardsReborn;
+import mod.maxbogomol.wizards_reborn.api.crystalritual.IGrowableCrystal;
 import mod.maxbogomol.wizards_reborn.api.light.ILightTileEntity;
+import mod.maxbogomol.wizards_reborn.common.block.CrystalGrowthBlock;
 import mod.maxbogomol.wizards_reborn.utils.PacketUtils;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
@@ -13,9 +15,15 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.Vec3;
 import org.jetbrains.annotations.NotNull;
 
-public class CrystalGrowthTileEntity extends BlockEntity implements TickableBlockEntity, ILightTileEntity {
+import java.util.Random;
+
+public class CrystalGrowthTileEntity extends BlockEntity implements TickableBlockEntity, ILightTileEntity, IGrowableCrystal {
 
     public int light = 0;
+    public int growingTicks = 0;
+    public float growingPower = 0;
+
+    public Random random = new Random();
 
     public CrystalGrowthTileEntity(BlockEntityType<?> type, BlockPos pos, BlockState state) {
         super(type, pos, state);
@@ -32,6 +40,14 @@ public class CrystalGrowthTileEntity extends BlockEntity implements TickableBloc
 
             if (getLight() > 0) {
                 removeLight(1);
+                update = true;
+            }
+
+            if (growingTicks > 0) {
+                growingTicks--;
+                if (growingTicks <= 0) {
+                    growingPower = 0;
+                }
                 update = true;
             }
 
@@ -64,12 +80,16 @@ public class CrystalGrowthTileEntity extends BlockEntity implements TickableBloc
     public void saveAdditional(CompoundTag tag) {
         super.saveAdditional(tag);
         tag.putInt("light", light);
+        tag.putInt("growingTicks", growingTicks);
+        tag.putFloat("growingPower", growingPower);
     }
 
     @Override
     public void load(CompoundTag tag) {
         super.load(tag);
         light = tag.getInt("light");
+        growingTicks = tag.getInt("growingTicks");
+        growingPower = tag.getFloat("growingPower");
     }
 
     @Override
@@ -125,11 +145,35 @@ public class CrystalGrowthTileEntity extends BlockEntity implements TickableBloc
 
     @Override
     public Vec3 getLightLensPos() {
+        if (getBlockState().getBlock() instanceof CrystalGrowthBlock block) {
+            return new Vec3(0.5F, 0.1125F + (0.2 * ((float) getBlockState().getValue(block.getAgeProperty()) / block.getMaxAge())), 0.5F);
+        }
         return new Vec3(0.5F, 0.3125F, 0.5F);
     }
 
     @Override
     public float getLightLensSize() {
         return 0f;
+    }
+
+    @Override
+    public void setGrowingPower(float power) {
+        if (growingPower < power) {
+            growingPower = power;
+        }
+    }
+
+    @Override
+    public float getGrowingPower() {
+        return growingPower;
+    }
+
+    @Override
+    public void addGrowing() {
+        if (random.nextFloat() < 0.2f) {
+            if (getLevel().getBlockState(getBlockPos()).getBlock() instanceof CrystalGrowthBlock growth) {
+                growth.grow(getLevel(), getBlockPos(), getLevel().getBlockState(getBlockPos()));
+            }
+        }
     }
 }

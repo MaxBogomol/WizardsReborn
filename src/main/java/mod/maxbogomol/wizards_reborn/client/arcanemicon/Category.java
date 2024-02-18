@@ -35,7 +35,7 @@ public class Category {
             ArcanemiconGui.historyEntries.clear();
             ArcanemiconGui.currentHistory = 0;
             gui.changeChapter(chapter);
-            Minecraft.getInstance().player.playNotifySound(SoundEvents.UI_BUTTON_CLICK.get(), SoundSource.NEUTRAL, 1.0f, 1.0f);
+            Minecraft.getInstance().player.playNotifySound(SoundEvents.UI_BUTTON_CLICK.get(), SoundSource.NEUTRAL, 0.5f, 1.0f);
             return true;
         }
         return false;

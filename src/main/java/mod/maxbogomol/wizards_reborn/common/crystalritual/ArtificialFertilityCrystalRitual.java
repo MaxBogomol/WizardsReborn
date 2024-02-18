@@ -53,7 +53,7 @@ public class ArtificialFertilityCrystalRitual extends CrystalRitual {
 
                 ArrayList<BlockPos> blockPosList = getBlockPosWithArea(level, blockPos, area, (p) -> {
                     if (level.getBlockState(p).getBlock() instanceof BonemealableBlock bonemealableBlock) {
-                        return bonemealableBlock.isBonemealSuccess(level, level.random, p, level.getBlockState(p));
+                        return bonemealableBlock.isValidBonemealTarget(level, p, level.getBlockState(p), false);
                     }
                     return false;
                     }, true, true, 1);

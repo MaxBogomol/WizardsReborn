@@ -99,7 +99,7 @@ public class ResearchPage extends Page {
                     }
                 }
             } else {
-                if (ArcanemiconChapters.RESEARCH_MAIN.currentMonogram != null) {
+                if (ArcanemiconChapters.RESEARCH_MAIN.currentMonogram != null && ArcanemiconChapters.RESEARCH_MAIN.monograms.size() > 0) {
                     Monogram monogram = ArcanemiconChapters.RESEARCH_MAIN.currentMonogram;
                     Minecraft.getInstance().player.playNotifySound(SoundEvents.ITEM_PICKUP, SoundSource.NEUTRAL, 1.0f, 1.0f);
                     ArcanemiconChapters.RESEARCH_MAIN.monograms.put(monogram, ArcanemiconChapters.RESEARCH_MAIN.monograms.get(monogram) + 1);
@@ -117,7 +117,7 @@ public class ResearchPage extends Page {
 
                     if (mouseX >= x + X + 1 && mouseY >= y + 8 + (ii * 15) && mouseX <= x + X + 9 && mouseY <= y + 8 + (ii * 15) + 8) {
                         Monogram monogram = monogramsSet[i];
-                        if (ArcanemiconChapters.RESEARCH_MAIN.monograms.get(monogram) > 0) {
+                        if (ArcanemiconChapters.RESEARCH_MAIN.monograms.size() > 0 && ArcanemiconChapters.RESEARCH_MAIN.monograms.get(monogram) > 0) {
                             Minecraft.getInstance().player.playNotifySound(SoundEvents.ITEM_PICKUP, SoundSource.NEUTRAL, 1.0f, 1.2f);
                             ArcanemiconChapters.RESEARCH_MAIN.monograms.put(monogram, ArcanemiconChapters.RESEARCH_MAIN.monograms.get(monogram) - 1);
                             ArcanemiconChapters.RESEARCH_MAIN.currentMonogram = monogram;

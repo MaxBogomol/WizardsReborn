@@ -9,7 +9,7 @@
           "children": [
             {
               "type": "minecraft:item",
-              "name": "wizards_reborn:arcanum_growth",
+              "name": "wizards_reborn:arcanum",
               "functions": [
                 {
                   "function": "minecraft:set_count",
@@ -41,7 +41,7 @@
           "children": [
             {
               "type": "minecraft:item",
-              "name": "wizards_reborn:arcanum_growth",
+              "name": "wizards_reborn:arcanum",
               "functions": [
                 {
                   "function": "minecraft:set_count",
@@ -73,7 +73,7 @@
           "children": [
             {
               "type": "minecraft:item",
-              "name": "wizards_reborn:arcanum_growth",
+              "name": "wizards_reborn:arcanum",
               "functions": [
                 {
                   "function": "minecraft:set_count",
@@ -105,7 +105,7 @@
           "children": [
             {
               "type": "minecraft:item",
-              "name": "wizards_reborn:arcanum_growth",
+              "name": "wizards_reborn:arcanum",
               "functions": [
                 {
                   "function": "minecraft:set_count",

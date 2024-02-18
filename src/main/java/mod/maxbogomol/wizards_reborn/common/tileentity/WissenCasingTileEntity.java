@@ -92,7 +92,7 @@ public class WissenCasingTileEntity extends WissenTranslatorTileEntity {
 
                         Particles.create(WizardsReborn.SPARKLE_PARTICLE)
                                 .addVelocity(((random.nextDouble() - 0.5D) / 100), ((random.nextDouble() - 0.5D) / 100), ((random.nextDouble() - 0.5D) / 100))
-                                .setAlpha(0.25f, 0f).setScale(0.3f, 0f)
+                                .setAlpha(0.45f, 0f).setScale(0.3f, 0f)
                                 .setColor(colorR, colorG, colorB)
                                 .setLifetime(1)
                                 .setSpin((0.1f * (float) ((random.nextDouble() - 0.5D) * 2)))
