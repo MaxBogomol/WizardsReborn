@@ -1,0 +1,20 @@
+{
+  "type": "wizards_reborn:crystal_ritual",
+  "crystal_ritual": {
+    "crystal_ritual": "wizards_reborn:ritual_breeding"
+  },
+  "ingredients": [
+    {
+      "item": "minecraft:golden_carrot"
+    },
+    {
+      "tag": "wizards_reborn:ritual_breeding_food"
+    },
+    {
+      "tag": "wizards_reborn:ritual_breeding_food"
+    },
+    {
+      "tag": "wizards_reborn:ritual_breeding_food"
+    }
+  ]
+}

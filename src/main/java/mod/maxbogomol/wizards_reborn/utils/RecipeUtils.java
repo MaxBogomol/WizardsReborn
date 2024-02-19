@@ -2,10 +2,13 @@ package mod.maxbogomol.wizards_reborn.utils;
 
 import com.google.gson.JsonObject;
 import com.google.gson.JsonSyntaxException;
+import mod.maxbogomol.wizards_reborn.WizardsReborn;
 import mod.maxbogomol.wizards_reborn.api.alchemy.AlchemyPotion;
 import mod.maxbogomol.wizards_reborn.api.alchemy.AlchemyPotions;
 import mod.maxbogomol.wizards_reborn.api.arcaneenchantment.ArcaneEnchantment;
 import mod.maxbogomol.wizards_reborn.api.arcaneenchantment.ArcaneEnchantments;
+import mod.maxbogomol.wizards_reborn.api.crystalritual.CrystalRitual;
+import mod.maxbogomol.wizards_reborn.api.crystalritual.CrystalRituals;
 import mod.maxbogomol.wizards_reborn.common.alchemypotion.RegisterAlchemyPotions;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.network.chat.Component;
@@ -126,6 +129,28 @@ public class RecipeUtils {
         } else {
             buffer.writeBoolean(true);
             buffer.writeComponent(Component.literal(potion.getId()));
+        }
+    }
+
+    public static CrystalRitual deserializeCrystalRitual(JsonObject json) {
+        String ritualName = GsonHelper.getAsString(json, "crystal_ritual");
+        CrystalRitual ritual = CrystalRituals.getCrystalRitual(ritualName);
+        if (ritual == null) {
+            throw new JsonSyntaxException("Unknown crystal ritual " + ritualName);
+        }
+        return ritual;
+    }
+
+    public static CrystalRitual crystalRitualFromNetwork(FriendlyByteBuf buffer) {
+        return !buffer.readBoolean() ? WizardsReborn.EMPTY_CRYSTAL_RITUAL : CrystalRituals.getCrystalRitual(buffer.readComponent().getString());
+    }
+
+    public static void crystalRitualToNetwork(CrystalRitual ritual, FriendlyByteBuf buffer) {
+        if (ritual == null) {
+            buffer.writeBoolean(false);
+        } else {
+            buffer.writeBoolean(true);
+            buffer.writeComponent(Component.literal(ritual.getId()));
         }
     }
 }

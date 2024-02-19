@@ -6,6 +6,7 @@ import mod.maxbogomol.wizards_reborn.api.crystalritual.CrystalRitual;
 import mod.maxbogomol.wizards_reborn.api.crystalritual.CrystalRitualArea;
 import mod.maxbogomol.wizards_reborn.api.crystalritual.CrystalRitualUtils;
 import mod.maxbogomol.wizards_reborn.api.light.ILightTileEntity;
+import mod.maxbogomol.wizards_reborn.api.light.LightRayHitResult;
 import mod.maxbogomol.wizards_reborn.api.light.LightUtils;
 import mod.maxbogomol.wizards_reborn.api.wissen.ICooldownTileEntity;
 import mod.maxbogomol.wizards_reborn.api.wissen.IWissenWandControlledTileEntity;
@@ -59,16 +60,23 @@ public class CrystalTileEntity extends TileSimpleInventory implements TickableBl
         CrystalRitual ritual = getCrystalRitual();
         boolean update = false;
 
-        setLight(10);
-
         if (!level.isClientSide()) {
             if (getLight() > 0) {
                 removeLight(1);
                 update = true;
             }
 
-            if (isToBlock && CrystalRitualUtils.isEmpty(ritual)) {
-                isToBlock = false;
+            if (isToBlock) {
+                if (CrystalRitualUtils.isEmpty(ritual)) {
+                    isToBlock = false;
+                } else if (ritual.hasLightRay(this)) {
+                    LightRayHitResult hitResult = setupLightRay();
+                    if (hitResult != null) {
+                        BlockEntity hitTile = hitResult.getTile();
+                        LightUtils.transferLight(this, hitTile);
+                        PacketUtils.SUpdateTileEntityPacket(hitTile);
+                    }
+                }
                 update = true;
             }
         }
@@ -81,6 +89,7 @@ public class CrystalTileEntity extends TileSimpleInventory implements TickableBl
                         tagRitual = new CompoundTag();
                     } else {
                         reload();
+                        update = true;
                     }
                 }
 
@@ -119,9 +128,11 @@ public class CrystalTileEntity extends TileSimpleInventory implements TickableBl
         if (level.isClientSide()) {
             if (!CrystalRitualUtils.isEmpty(ritual)) {
                 if (WissenUtils.isCanRenderWissenWand()) {
-                    Color borderColor = new Color(191, 201, 104);
-                    CrystalRitualArea area = ritual.getArea(this);
-                    WissenUtils.connectBoxEffect(level, new Vec3(getBlockPos().getX() - area.getSizeFrom().x(), getBlockPos().getY() - area.getSizeFrom().y(), getBlockPos().getZ() - area.getSizeFrom().z()), new Vec3(getBlockPos().getX() + area.getSizeTo().x() + 1, getBlockPos().getY() + area.getSizeTo().y() + 1, getBlockPos().getZ() + area.getSizeTo().z() + 1), borderColor, 1);
+                    if (ritual.hasArea(this)) {
+                        Color borderColor = new Color(191, 201, 104);
+                        CrystalRitualArea area = ritual.getArea(this);
+                        WissenUtils.connectBoxEffect(level, new Vec3(getBlockPos().getX() - area.getSizeFrom().x(), getBlockPos().getY() - area.getSizeFrom().y(), getBlockPos().getZ() - area.getSizeFrom().z()), new Vec3(getBlockPos().getX() + area.getSizeTo().x() + 1, getBlockPos().getY() + area.getSizeTo().y() + 1, getBlockPos().getZ() + area.getSizeTo().z() + 1), borderColor, 1);
+                    }
 
                     if (startRitual) {
                         WissenUtils.connectBlockEffect(level, getBlockPos(), getCrystalColor());
@@ -265,7 +276,7 @@ public class CrystalTileEntity extends TileSimpleInventory implements TickableBl
 
     @Override
     public float getLightLensSize() {
-        return -10f;
+        return 0f;
     }
 
     @Override
@@ -307,6 +318,7 @@ public class CrystalTileEntity extends TileSimpleInventory implements TickableBl
     public boolean wissenWandReload(ItemStack stack, UseOnContext context, BlockEntity tile) {
         isToBlock = false;
         reload();
+        PacketUtils.SUpdateTileEntityPacket(this);
         return true;
     }
 
@@ -358,5 +370,36 @@ public class CrystalTileEntity extends TileSimpleInventory implements TickableBl
         cooldown = 0;
         maxCooldown = 0;
         tagRitual = new CompoundTag();
+    }
+
+    public LightRayHitResult setupLightRay() {
+        BlockPos pos = new BlockPos(blockToX, blockToY, blockToZ);
+
+        if (level.isLoaded(pos)) {
+            BlockEntity tileentity = level.getBlockEntity(pos);
+            if (tileentity instanceof ILightTileEntity lightTileEntity) {
+                Vec3 from = LightUtils.getLightLensPos(getBlockPos(), getLightLensPos());
+                Vec3 to = LightUtils.getLightLensPos(pos, lightTileEntity.getLightLensPos());
+
+                double dX = to.x() - from.x();
+                double dY = to.y() - from.y();
+                double dZ = to.z() - from.z();
+
+                double yaw = Math.atan2(dZ, dX);
+                double pitch = Math.atan2(Math.sqrt(dZ * dZ + dX * dX), dY) + Math.PI;
+
+                float rayDistance = 0.3f;
+
+                double X = Math.sin(pitch) * Math.cos(yaw) * rayDistance;
+                double Y = Math.cos(pitch) * rayDistance;
+                double Z = Math.sin(pitch) * Math.sin(yaw) * rayDistance;
+
+                from = from.add(-X, -Y, -Z);
+
+                return LightUtils.getLightRayHitResult(level, getBlockPos(), from, to, 25);
+            }
+        }
+
+        return null;
     }
 }

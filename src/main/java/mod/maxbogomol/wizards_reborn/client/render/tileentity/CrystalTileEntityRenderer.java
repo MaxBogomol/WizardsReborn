@@ -2,6 +2,8 @@ package mod.maxbogomol.wizards_reborn.client.render.tileentity;
 
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.math.Axis;
+import mod.maxbogomol.wizards_reborn.api.crystalritual.CrystalRitual;
+import mod.maxbogomol.wizards_reborn.api.crystalritual.CrystalRitualUtils;
 import mod.maxbogomol.wizards_reborn.api.light.ILightTileEntity;
 import mod.maxbogomol.wizards_reborn.api.light.LightRayHitResult;
 import mod.maxbogomol.wizards_reborn.api.light.LightUtils;
@@ -32,6 +34,8 @@ public class CrystalTileEntityRenderer implements BlockEntityRenderer<CrystalTil
 
         MultiBufferSource bufferDelayed = WorldRenderHandler.getDelayedRender();
 
+        CrystalRitual ritual = crystal.getCrystalRitual();
+
         if (crystal.getLight() > 0) {
             if (!crystal.getItemHandler().getItem(0).isEmpty()) {
                 if (crystal.getItemHandler().getItem(0).getItem() instanceof CrystalItem crystalItem) {
@@ -48,7 +52,7 @@ public class CrystalTileEntityRenderer implements BlockEntityRenderer<CrystalTil
                 }
             }
 
-            if (crystal.isToBlock) {
+            if (crystal.isToBlock && !CrystalRitualUtils.isEmpty(ritual) && ritual.hasLightRay(crystal)) {
                 BlockPos pos = new BlockPos(crystal.blockToX, crystal.blockToY, crystal.blockToZ);
                 if (crystal.getLevel().getBlockEntity(pos) instanceof ILightTileEntity lightTile) {
                     Vec3 from = LightUtils.getLightLensPos(crystal.getBlockPos(), crystal.getLightLensPos());
@@ -77,6 +81,10 @@ public class CrystalTileEntityRenderer implements BlockEntityRenderer<CrystalTil
                     ms.popPose();
                 }
             }
+        }
+
+        if (!CrystalRitualUtils.isEmpty(ritual)) {
+            ritual.render(crystal, partialTicks, ms, buffers, light, overlay);
         }
     }
 

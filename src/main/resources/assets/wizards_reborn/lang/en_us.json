@@ -98,9 +98,6 @@
   "item.wizards_reborn.ground_mor": "Ground Mor",
   "item.wizards_reborn.ground_elder_mor": "Ground Elder Mor",
 
-  "item.wizards_reborn.arcane_wand": "Arcane Wand",
-  "item.wizards_reborn.wissen_wand": "Wissen Wand",
-
   "block.wizards_reborn.arcanum_seed": "Arcanum Seed",
   "block.wizards_reborn.arcanum_growth": "Arcanum Growth",
 
@@ -178,6 +175,7 @@
 
   "block.wizards_reborn.light_emitter": "Light Emitter",
   "block.wizards_reborn.light_transfer_lens": "Light Transfer-Lens",
+  "block.wizards_reborn.runic_pedestal": "Runic Pedestal",
 
   "block.wizards_reborn.redstone_sensor": "Redstone Sensor",
   "block.wizards_reborn.wissen_sensor": "Wissen Sensor",
@@ -229,6 +227,12 @@
   "block.wizards_reborn.black_arcane_lumos": "Black Arcane Lumos",
   "block.wizards_reborn.rainbow_arcane_lumos": "Rainbow Arcane Lumos",
   "block.wizards_reborn.cosmic_arcane_lumos": "Cosmic Arcane Lumos",
+
+  "item.wizards_reborn.wisestone_plate": "Wisestone Plate",
+  "item.wizards_reborn.runic_wisestone_plate": "Runic Wisestone Plate",
+
+  "item.wizards_reborn.arcane_wand": "Arcane Wand",
+  "item.wizards_reborn.wissen_wand": "Wissen Wand",
 
   "item.wizards_reborn.arcanum_amulet": "Arcanum Amulet",
   "item.wizards_reborn.arcanum_ring": "Arcanum Ring",
@@ -546,6 +550,11 @@
 
   "arcane_enchantment.wizards_reborn.wissen_mending": "Wissen Mending",
   "arcane_enchantment.wizards_reborn.magic_blade": "Magic Blade",
+
+  "crystal_ritual.wizards_reborn.empty": "Empty",
+  "crystal_ritual.wizards_reborn.artificial_fertility": "Artificial Fertility",
+  "crystal_ritual.wizards_reborn.ritual_breeding": "Ritual Breeding",
+  "crystal_ritual.wizards_reborn.crystal_growth_acceleration": "Crystal Growth Acceleration",
 
   "alchemy_potion.wizards_reborn.empty": "Empty",
   "alchemy_potion.wizards_reborn.:combined": "Combined potion",

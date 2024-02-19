@@ -33,6 +33,8 @@ import net.minecraft.world.phys.shapes.BooleanOp;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.api.distmarker.OnlyIn;
 import org.jetbrains.annotations.NotNull;
 
 import javax.annotation.Nonnull;
@@ -189,6 +191,23 @@ public class ArcanumGrowthBlock extends Block implements EntityBlock, SimpleWate
             }
         }
         return 1f;
+    }
+
+    @OnlyIn(Dist.CLIENT)
+    public void animateTick(BlockState state, Level world, BlockPos pos, RandomSource random) {
+        if (world.getBlockEntity(pos) instanceof IGrowableCrystal growable) {
+            if (growable.getGrowingPower() > 0) {
+                if (random.nextFloat() < 0.1f * growable.getGrowingPower()) {
+                    Particles.create(WizardsReborn.SPARKLE_PARTICLE)
+                            .addVelocity(((random.nextDouble() - 0.5D) / 30), ((random.nextDouble() - 0.5D) / 30), ((random.nextDouble() - 0.5D) / 30))
+                            .setAlpha(0.5f, 0).setScale(0.1f, 0)
+                            .setColor(0.466f, 0.643f, 0.815f)
+                            .setLifetime(30)
+                            .setSpin((0.5f * (float) ((random.nextDouble() - 0.5D) * 2)))
+                            .spawn(world, pos.getX() + 0.5F + ((random.nextDouble() - 0.5D) * 0.5), pos.getY() + 0.35F + ((random.nextDouble() - 0.5D) * 0.5), pos.getZ() + 0.5F + ((random.nextDouble() - 0.5D) * 0.5));
+                }
+            }
+        }
     }
 
     @Override

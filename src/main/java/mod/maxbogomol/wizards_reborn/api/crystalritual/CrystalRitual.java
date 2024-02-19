@@ -1,20 +1,34 @@
 package mod.maxbogomol.wizards_reborn.api.crystalritual;
 
+import com.mojang.blaze3d.vertex.PoseStack;
 import mod.maxbogomol.wizards_reborn.WizardsReborn;
 import mod.maxbogomol.wizards_reborn.api.crystal.CrystalStat;
 import mod.maxbogomol.wizards_reborn.api.crystal.CrystalType;
 import mod.maxbogomol.wizards_reborn.api.crystal.PolishingType;
 import mod.maxbogomol.wizards_reborn.common.item.CrystalItem;
+import mod.maxbogomol.wizards_reborn.common.network.PacketHandler;
+import mod.maxbogomol.wizards_reborn.common.network.tileentity.CrystalRitualBurstEffectPacket;
+import mod.maxbogomol.wizards_reborn.common.recipe.CrystalRitualRecipe;
+import mod.maxbogomol.wizards_reborn.common.tileentity.ArcanePedestalTileEntity;
 import mod.maxbogomol.wizards_reborn.common.tileentity.CrystalTileEntity;
+import mod.maxbogomol.wizards_reborn.common.tileentity.RunicPedestalTileEntity;
 import mod.maxbogomol.wizards_reborn.utils.PacketUtils;
+import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.core.BlockPos;
+import net.minecraft.nbt.CompoundTag;
+import net.minecraft.sounds.SoundSource;
 import net.minecraft.util.Mth;
+import net.minecraft.world.Container;
+import net.minecraft.world.SimpleContainer;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.phys.Vec3;
 
 import java.awt.*;
 import java.util.ArrayList;
+import java.util.List;
+import java.util.Optional;
 import java.util.Random;
 import java.util.function.Predicate;
 
@@ -47,6 +61,14 @@ public class CrystalRitual {
 
     public CrystalRitualArea getArea(CrystalTileEntity crystal) {
         return new CrystalRitualArea(3, 3, 3, 3, 3, 3);
+    }
+
+    public boolean hasArea(CrystalTileEntity crystal) {
+        return true;
+    }
+
+    public boolean hasLightRay(CrystalTileEntity crystal) {
+        return false;
     }
 
     public int getStatLevel(CrystalTileEntity crystal, CrystalStat stat) {
@@ -201,5 +223,126 @@ public class CrystalRitual {
 
     public static ArrayList<BlockPos> getBlockPosWithArea(Level level, BlockPos startPos, CrystalRitualArea area, Predicate<BlockPos> filter, boolean hasRandomOffset, boolean hasLimit, int limit) {
         return getBlockPosWithArea(level, startPos, area.getSizeFrom(), area.getSizeTo(), filter, hasRandomOffset, hasLimit, limit);
+    }
+
+    public static List<ArcanePedestalTileEntity> getPedestalsWithArea(Level level, BlockPos startPos, Vec3 sizeFrom, Vec3 sizeTo) {
+        List<ArcanePedestalTileEntity> pedestals = new ArrayList<>();
+
+        for (double x = -sizeFrom.x(); x <= sizeTo.x(); x++) {
+            for (double y = -sizeFrom.y(); y <= sizeTo.y(); y++) {
+                for (double z = -sizeFrom.z(); z <= sizeTo.z(); z++) {
+                    BlockPos pos = new BlockPos(new BlockPos(startPos.getX() + Mth.floor(x), startPos.getY() + Mth.floor(y), startPos.getZ() + Mth.floor(z)));
+                    BlockEntity tile = level.getBlockEntity(pos);
+                    if (tile != null) {
+                        if (tile instanceof ArcanePedestalTileEntity pedestal) {
+                            pedestals.add(pedestal);
+                        }
+                    }
+                }
+            }
+        }
+
+        return pedestals;
+    }
+
+    public static List<ArcanePedestalTileEntity>  getPedestalsWithArea(Level level, BlockPos startPos, CrystalRitualArea area) {
+        return getPedestalsWithArea(level, startPos, area.getSizeFrom(), area.getSizeTo());
+    }
+
+    public static List<ItemStack> getItemsFromPedestals(List<ArcanePedestalTileEntity> pedestals) {
+        List<ItemStack> items = new ArrayList<>();
+        for (ArcanePedestalTileEntity pedestal : pedestals) {
+            if (!pedestal.getItemHandler().getItem(0).isEmpty()) {
+                items.add(pedestal.getItemHandler().getItem(0));
+            }
+        }
+
+        return items;
+    }
+
+    public boolean canActivateWithItems(CrystalTileEntity crystal, CrystalRitualArea area) {
+        Level level = crystal.getLevel();
+        List<ArcanePedestalTileEntity> pedestals = getPedestalsWithArea(level, crystal.getBlockPos(), area);
+        List<ItemStack> items = getItemsFromPedestals(pedestals);
+        SimpleContainer inv = new SimpleContainer(items.size());
+        for (int i = 0; i < items.size(); i++) {
+            inv.setItem(i, items.get(i));
+        }
+
+        Optional<CrystalRitualRecipe> recipe = level.getRecipeManager().getRecipeFor(WizardsReborn.CRYSTAL_RITUAL_RECIPE.get(), inv, level);
+        if (recipe.isPresent()) {
+            return (recipe.get().getRecipeRitual() == this);
+        }
+
+        return false;
+    }
+
+    public static void deleteItemsFromPedestals(Level level, BlockPos startPos, List<ArcanePedestalTileEntity> pedestals, boolean hasSound, boolean hasEffect) {
+        CompoundTag tagPos = new CompoundTag();
+        Random random = new Random();
+
+        int ii = 0;
+        for (int i = 0; i < pedestals.size(); i++) {
+            if (!pedestals.get(i).getItemHandler().getItem(0).isEmpty()) {
+                pedestals.get(i).getItemHandler().removeItemNoUpdate(0);
+                PacketUtils.SUpdateTileEntityPacket(pedestals.get(i));
+
+                if (hasSound) {
+                    level.playSound(WizardsReborn.proxy.getPlayer(), pedestals.get(i).getBlockPos(), WizardsReborn.WISSEN_TRANSFER_SOUND.get(), SoundSource.BLOCKS, 0.25f, (float) (1f + ((random.nextFloat() - 0.5D) / 4)));
+                }
+
+                if (hasEffect) {
+                    CompoundTag tagBlock = new CompoundTag();
+                    tagBlock.putInt("x", pedestals.get(i).getBlockPos().getX());
+                    tagBlock.putInt("y", pedestals.get(i).getBlockPos().getY());
+                    tagBlock.putInt("z", pedestals.get(i).getBlockPos().getZ());
+                    tagPos.put(String.valueOf(ii), tagBlock);
+                    ii++;
+                }
+            }
+        }
+
+        if (hasEffect) {
+            PacketHandler.sendToTracking(level, startPos, new CrystalRitualBurstEffectPacket(tagPos));
+        }
+    }
+
+    public void render(CrystalTileEntity crystal, float partialTicks, PoseStack ms, MultiBufferSource buffers, int light, int overlay) {
+
+    }
+
+    public static Container getItemHandler(CrystalTileEntity crystal) {
+        if (crystal.getLevel().getBlockEntity(crystal.getBlockPos().below()) instanceof RunicPedestalTileEntity pedestal) {
+            return pedestal.getItemHandler();
+        }
+        return null;
+    }
+
+    public static void updateRunicPedestal(CrystalTileEntity crystal) {
+        if (crystal.getLevel().getBlockEntity(crystal.getBlockPos().below()) != null) {
+            PacketUtils.SUpdateTileEntityPacket(crystal.getLevel().getBlockEntity(crystal.getBlockPos().below()));
+        }
+    }
+
+    public static void clearItemHandler(CrystalTileEntity crystal) {
+        Container container = getItemHandler(crystal);
+        if (container != null) {
+            for (int i = 0; i < container.getContainerSize(); i++) {
+                container.removeItem(i, 1);
+            }
+            updateRunicPedestal(crystal);
+        }
+    }
+
+    public int getInventorySize(Container container) {
+        int size = 0;
+
+        for (int i = 0; i < container.getContainerSize(); i++) {
+            if (!container.getItem(i).isEmpty()) {
+                size++;
+            }
+        }
+
+        return size;
     }
 }

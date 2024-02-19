@@ -98,9 +98,6 @@
   "item.wizards_reborn.ground_mor": "Молотый мор",
   "item.wizards_reborn.ground_elder_mor": "Молотый древний мор",
 
-  "item.wizards_reborn.arcane_wand": "Аркановый жезл",
-  "item.wizards_reborn.wissen_wand": "Виссен жезл",
-
   "block.wizards_reborn.arcanum_seed": "Семя арканума",
   "block.wizards_reborn.arcanum_growth": "Растущий арканум",
 
@@ -178,6 +175,7 @@
 
   "block.wizards_reborn.light_emitter": "Световой излучатель",
   "block.wizards_reborn.light_transfer_lens": "Светопереносящая линза",
+  "block.wizards_reborn.runic_pedestal": "Рунический пьедестал",
 
   "block.wizards_reborn.redstone_sensor": "Редстоун сенсор",
   "block.wizards_reborn.wissen_sensor": "Виссен сенсор",
@@ -229,6 +227,12 @@
   "block.wizards_reborn.black_arcane_lumos": "Чёрный аркановый люмос",
   "block.wizards_reborn.rainbow_arcane_lumos": "Радужный аркановый люмос",
   "block.wizards_reborn.cosmic_arcane_lumos": "Космический аркановый люмос",
+
+  "item.wizards_reborn.wisestone_plate": "Мудро-каменная пластина",
+  "item.wizards_reborn.runic_wisestone_plate": "Руническая мудро-каменная пластина",
+
+  "item.wizards_reborn.arcane_wand": "Аркановый жезл",
+  "item.wizards_reborn.wissen_wand": "Виссен жезл",
 
   "item.wizards_reborn.arcanum_amulet": "Арканумный амулет",
   "item.wizards_reborn.arcanum_ring": "Арканумное кольцо",
@@ -440,6 +444,12 @@
   "effect.wizards_reborn.wissen_aura": "Виссен аура",
 
   "gui.wizards_reborn.arcanemicon.title": "Аркейномикон",
+  "gui.wizards_reborn.arcane_workbench.title": "Аркановый верстак",
+  "gui.wizards_reborn.jeweler_table.title": "Ювелирный стол",
+  "gui.wizards_reborn.alchemy_furnace.title": "Алхимическая печь",
+  "gui.wizards_reborn.alchemy_machine.title": "Алхимическая машина",
+  "gui.wizards_reborn.item_sorter.title": "Предметный сортировщик",
+  "gui.wizards_reborn.runic_pedestal.title": "Рунический пьедестал",
 
   "gui.wizards_reborn.category.arcanum_dust_transmutation": "Трансмутация арканумной пыли",
   "gui.wizards_reborn.category.mortar": "Ступка",
@@ -540,6 +550,11 @@
 
   "arcane_enchantment.wizards_reborn.wissen_mending": "Виссен починка",
   "arcane_enchantment.wizards_reborn.magic_blade": "Магическое лезвие",
+
+  "crystal_ritual.wizards_reborn.empty": "Пусто",
+  "crystal_ritual.wizards_reborn.artificial_fertility": "Искусственная плодородность",
+  "crystal_ritual.wizards_reborn.ritual_breeding": "Ритуальное разведение",
+  "crystal_ritual.wizards_reborn.crystal_growth_acceleration": "Ускорение роста кристаллов",
 
   "alchemy_potion.wizards_reborn.empty": "Пусто",
   "alchemy_potion.wizards_reborn.:combined": "Комбинированное зелье",

@@ -133,7 +133,7 @@ public class WizardsRebornItemGroup {
             event.accept(WizardsReborn.GROUND_MOR);
             event.accept(WizardsReborn.GROUND_ELDER_MOR);
 
-            //event.accept(WizardsReborn.ARCANUM_SEED);
+            event.accept(WizardsReborn.ARCANUM_SEED);
             event.accept(WizardsReborn.EARTH_CRYSTAL_SEED);
             event.accept(WizardsReborn.WATER_CRYSTAL_SEED);
             event.accept(WizardsReborn.AIR_CRYSTAL_SEED);

@@ -42,6 +42,7 @@ import mod.maxbogomol.wizards_reborn.common.config.Config;
 import mod.maxbogomol.wizards_reborn.common.crystal.*;
 import mod.maxbogomol.wizards_reborn.common.crystalritual.ArtificialFertilityCrystalRitual;
 import mod.maxbogomol.wizards_reborn.common.crystalritual.CrystalGrowthAccelerationCrystalRitual;
+import mod.maxbogomol.wizards_reborn.common.crystalritual.CrystalInfusionCrystalRitual;
 import mod.maxbogomol.wizards_reborn.common.crystalritual.RitualBreedingCrystalRitual;
 import mod.maxbogomol.wizards_reborn.common.effect.MorSporesEffect;
 import mod.maxbogomol.wizards_reborn.common.effect.WissenAuraEffect;
@@ -276,6 +277,7 @@ public class WizardsReborn {
     public static CrystalRitual ARTIFICAL_FERTILITY_CRYSTAL_RITUAL = new ArtificialFertilityCrystalRitual(MOD_ID+":artificial_fertility");
     public static CrystalRitual RITUAL_BREEDING_CRYSTAL_RITUAL = new RitualBreedingCrystalRitual(MOD_ID+":ritual_breeding");
     public static CrystalRitual CRYSTAL_GROWTH_ACCELERATION_CRYSTAL_RITUAL = new CrystalGrowthAccelerationCrystalRitual(MOD_ID+":crystal_growth_acceleration");
+    public static CrystalRitual CRYSTAL_INFUSION_CRYSTAL_RITUAL = new CrystalInfusionCrystalRitual(MOD_ID+":crystal_infusion");
     //public static CrystalRitual STONE_CALENDAR_CRYSTAL_RITUAL = new CrystalRitual(MOD_ID+":stone_calendar");
 
     public static final FoodProperties MOR_FOOD = (new FoodProperties.Builder()).nutrition(1).saturationMod(0.6F).effect(new MobEffectInstance(MobEffects.POISON, 450, 0), 1.0F).effect(new MobEffectInstance(MobEffects.CONFUSION, 350, 0), 1.0F).effect(new MobEffectInstance(MobEffects.BLINDNESS, 250, 0), 1.0F).effect(new MobEffectInstance(MobEffects.WEAKNESS, 550, 1), 1.0F).build();
@@ -846,6 +848,12 @@ public class WizardsReborn {
     public static final RegistryObject<ArcaneIteratorRecipe.Serializer> ARCANE_ITERATOR_SERIALIZER = RECIPE_SERIALIZERS.register("arcane_iterator", ArcaneIteratorRecipe.Serializer::new);
     public static final RegistryObject<RecipeType<ArcaneIteratorRecipe>> ARCANE_ITERATOR_RECIPE = RECIPES.register("arcane_iterator", () -> RecipeType.simple(ArcaneIteratorRecipe.TYPE_ID));
 
+    public static final RegistryObject<CrystalRitualRecipe.Serializer> CRYSTAL_RITUAL_SERIALIZER = RECIPE_SERIALIZERS.register("crystal_ritual", CrystalRitualRecipe.Serializer::new);
+    public static final RegistryObject<RecipeType<CrystalRitualRecipe>> CRYSTAL_RITUAL_RECIPE = RECIPES.register("crystal_ritual", () -> RecipeType.simple(CrystalRitualRecipe.TYPE_ID));
+
+    public static final RegistryObject<CrystalInfusionRecipe.Serializer> CRYSTAL_INFUSION_SERIALIZER = RECIPE_SERIALIZERS.register("crystal_infusion", CrystalInfusionRecipe.Serializer::new);
+    public static final RegistryObject<RecipeType<CrystalInfusionRecipe>> CRYSTAL_INFUSION_RECIPE = RECIPES.register("crystal_infusion", () -> RecipeType.simple(CrystalInfusionRecipe.TYPE_ID));
+
     //CONTAINERS
     public static final RegistryObject<MenuType<ArcaneWorkbenchContainer>> ARCANE_WORKBENCH_CONTAINER
             = CONTAINERS.register("arcane_workbench",
@@ -1256,6 +1264,7 @@ public class WizardsReborn {
         CrystalRituals.register(ARTIFICAL_FERTILITY_CRYSTAL_RITUAL);
         CrystalRituals.register(RITUAL_BREEDING_CRYSTAL_RITUAL);
         CrystalRituals.register(CRYSTAL_GROWTH_ACCELERATION_CRYSTAL_RITUAL);
+        CrystalRituals.register(CRYSTAL_INFUSION_CRYSTAL_RITUAL);
         //CrystalRituals.register(STONE_CALENDAR_CRYSTAL_RITUAL);
     }
 

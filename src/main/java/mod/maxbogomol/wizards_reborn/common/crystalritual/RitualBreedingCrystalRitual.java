@@ -25,7 +25,17 @@ public class RitualBreedingCrystalRitual extends CrystalRitual {
 
     @Override
     public int getMaxRitualCooldown(CrystalTileEntity crystal) {
-        return 200;
+        return 1000;
+    }
+
+    @Override
+    public boolean canStart(CrystalTileEntity crystal) {
+        if (!crystal.getLevel().isClientSide()) {
+            CrystalRitualArea area = getArea(crystal);
+            return canActivateWithItems(crystal, area);
+        }
+
+        return false;
     }
 
     @Override
@@ -33,6 +43,10 @@ public class RitualBreedingCrystalRitual extends CrystalRitual {
         if (!crystal.getLevel().isClientSide()) {
             setMaxCooldown(crystal, getMaxRitualCooldownWithStat(crystal));
             setCooldown(crystal, getMaxCooldown(crystal));
+
+            Level level = crystal.getLevel();
+            CrystalRitualArea area = getArea(crystal);
+            deleteItemsFromPedestals(level, crystal.getBlockPos(), getPedestalsWithArea(level, crystal.getBlockPos(), area), true, true);
         }
     }
 
@@ -65,7 +79,7 @@ public class RitualBreedingCrystalRitual extends CrystalRitual {
         if (!crystal.getLevel().isClientSide()) {
             CrystalRitualArea area = getArea(crystal);
 
-            List<Animal> animals = level.getEntitiesOfClass(Animal.class, new AABB(blockPos.getX() - area.getSizeFrom().x(), blockPos.getY() - area.getSizeFrom().y(), blockPos.getZ() - area.getSizeFrom().z(), blockPos.getX() + area.getSizeTo().x(), blockPos.getY() + area.getSizeTo().y(), blockPos.getZ() + area.getSizeTo().z()));
+            List<Animal> animals = level.getEntitiesOfClass(Animal.class, new AABB(blockPos.getX() - area.getSizeFrom().x(), blockPos.getY() - area.getSizeFrom().y(), blockPos.getZ() - area.getSizeFrom().z(), blockPos.getX() + area.getSizeTo().x() + 1, blockPos.getY() + area.getSizeTo().y() + 1, blockPos.getZ() + area.getSizeTo().z() + 1));
             for (Animal animal : animals) {
                 if (animal.canFallInLove()) {
                     animal.setInLove(null);
