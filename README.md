@@ -10,21 +10,29 @@ Requires: **[Curios API](https://modrinth.com/mod/curios)**
 
 Inspired by Thaumcraft, Embers, Eidolon, Malum, Electroblob's Wizardry and Astral Sorcery, Wizard's Reborn is a story about magical matters and their manipulation. Everything is divided into four elements, which will help you explore this unusual world.
 
+![](https://cdn.modrinth.com/data/axZDcOCH/images/554f3b41f0eb5a5cd37c6d52319bcb1210162882.png)
+
 Ancient crystals can be found underground, containing a primordial power of a sacred knowledge, called "wissen" capable of transforming matter.
 
 Using the power of wissen, you can grow crystals that can refract energy to release it in the form of a magical physical object.
 
 The mod adds magical materials, spells and mechanisms.
-![](https://cdn.modrinth.com/data/axZDcOCH/images/1d35a7b96edeea4312349f37d50a0606a4389e69.png)
+![](https://cdn.modrinth.com/data/axZDcOCH/images/ffa7156e12d4b914e74c378b93216896d35127d9.png)
 
-Crystals that you have to grow yourself. They have different properties that will affect the spells of your magic wand.
-![](https://cdn.modrinth.com/data/axZDcOCH/images/b01942883e8d898d89d1d7f12f1dcfc4756181fa.png)
+Various mechanisms are set in motion due to the power of wissen.
+![](https://cdn.modrinth.com/data/axZDcOCH/images/eb2f70821f1f3c8f46460af34b5640931f3cc279.png)
 
-Mechanics of wissen energy.
-Wissen can be created, stored and transmitted using translators, and can also be used in various magical mechanisms.
-![](https://cdn.modrinth.com/data/axZDcOCH/images/caab702971ebf18020f7a8c3ff3216a8bbfc2d06.png)
+Connect fluid and steam pipes to create various mixtures and items in the alchemy machine.
+![](https://cdn.modrinth.com/data/axZDcOCH/images/f6a3dddf5d62ca85dc89804960cc65b5cf64a027.png)
 
-You can study all the mechanics in the in-game guide book, which is called "Arcanemicon".
-![](https://cdn.modrinth.com/data/axZDcOCH/images/e574aa86995123de9c34a121136831a1ca804bbb.png)
+Using the power of crystals, wissen and light rays, masterfully learn the art of spells and rituals.
+![](https://cdn.modrinth.com/data/axZDcOCH/images/9793f17ea0b9c2debab129dca3a140c25fc8a85e.png)
 
-The mod is in very early alpha, with a lot of different content planned for the future!
+Automation will allow you to completely subjugate the mechanisms using the power of redstone!
+![](https://cdn.modrinth.com/data/axZDcOCH/images/5aac1cb34cf0c4422f934f3488bc7c6ef84716df.png)
+
+All aspects of the mod are described in the "Arcanemicon" book. Thanks to it, you can learn everything without guides!
+![](https://cdn.modrinth.com/data/axZDcOCH/images/e883e07c835779e9e41a1d6daa2aaf654ee36ad2.png)
+
+The mod is in very early alpha, with a lot of different content planned for the future!  
+You can visit our **[Discord Server](https://discord.gg/cKf55qNugw)** to suggest your ideas or receive news about development.
