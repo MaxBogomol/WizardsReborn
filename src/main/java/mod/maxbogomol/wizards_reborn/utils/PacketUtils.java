@@ -9,7 +9,7 @@ import net.minecraft.world.level.block.entity.BlockEntity;
 
 public class PacketUtils {
     public static void SUpdateTileEntityPacket(BlockEntity tile) {
-        if (tile.getLevel() instanceof ServerLevel) {
+        if (tile != null && tile.getLevel() instanceof ServerLevel) {
             Packet<?> packet = tile.getUpdatePacket();
             if (packet != null) {
                 BlockPos pos = tile.getBlockPos();

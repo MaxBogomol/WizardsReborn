@@ -1,0 +1,40 @@
+{
+  "type": "wizards_reborn:arcane_iterator",
+  "output": {
+    "item": "wizards_reborn:wisestone_plate",
+    "count": 1
+  },
+  "wissen": 1500,
+  "ingredients": [
+    {
+      "item": "wizards_reborn:arcacite"
+    },
+    {
+      "item": "wizards_reborn:polished_wisestone"
+    },
+    {
+      "item": "wizards_reborn:polished_wisestone"
+    },
+    {
+      "item": "wizards_reborn:polished_wisestone"
+    },
+    {
+      "item": "wizards_reborn:polished_wisestone"
+    },
+    {
+      "item": "wizards_reborn:polished_wisestone"
+    },
+    {
+      "item": "wizards_reborn:polished_wisestone"
+    },
+    {
+      "item": "wizards_reborn:arcanum"
+    },
+    {
+      "item": "wizards_reborn:arcanum"
+    },
+    {
+      "item": "wizards_reborn:arcanum"
+    }
+  ]
+}

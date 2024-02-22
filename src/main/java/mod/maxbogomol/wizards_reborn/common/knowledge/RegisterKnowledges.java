@@ -45,6 +45,7 @@ public class RegisterKnowledges {
     public static ItemKnowledge ARCACITE_POLISHING_MIXTURE = new ItemKnowledge(WizardsReborn.MOD_ID+":arcacite_polishing_mixture", true, 10, WizardsReborn.ARCACITE_POLISHING_MIXTURE.get());
     public static ItemKnowledge JEWELER_TABLE = new ItemKnowledge(WizardsReborn.MOD_ID+":jeweler_table", false, 8, WizardsReborn.JEWELER_TABLE_ITEM.get());
     public static ItemTagKnowledge FACETED_CRYSTALS = new ItemTagKnowledge(WizardsReborn.MOD_ID+":faceted_crystals", true, 10, WizardsReborn.FACETED_CRYSTALS_ITEM_TAG, new ItemStack(WizardsReborn.FACETED_EARTH_CRYSTAL.get()));
+    public static ItemKnowledge RUNIC_PEDESTAL = new ItemKnowledge(WizardsReborn.MOD_ID+":runic_pedestal", true, 10, WizardsReborn.RUNIC_PEDESTAL_ITEM.get());
 
     public static void init() {
         Knowledges.register(ARCANUM);
@@ -86,5 +87,6 @@ public class RegisterKnowledges {
         Knowledges.register(ARCACITE_POLISHING_MIXTURE);
         Knowledges.register(JEWELER_TABLE);
         Knowledges.register(FACETED_CRYSTALS);
+        Knowledges.register(RUNIC_PEDESTAL);
     }
 }

@@ -1,5 +1,7 @@
 package mod.maxbogomol.wizards_reborn.api.crystal;
 
+import net.minecraft.world.item.Item;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
@@ -9,6 +11,7 @@ public class Crystals {
     public static ArrayList<CrystalType> crystalTypesList = new ArrayList<CrystalType>();
     public static Map<String, PolishingType> crystalPolishing = new HashMap<String, PolishingType>();
     public static ArrayList<PolishingType> crystalPolishingList = new ArrayList<PolishingType>();
+    public static ArrayList<Item> crystalItems = new ArrayList<Item>();
 
     public static void addType(String id, CrystalType type) {
         crystalTypes.put(id, type);
@@ -60,5 +63,13 @@ public class Crystals {
 
     public static ArrayList<PolishingType> getPolishings() {
         return crystalPolishingList;
+    }
+
+    public static void addItem(Item item) {
+        crystalItems.add(item);
+    }
+
+    public static ArrayList<Item> getItems() {
+        return crystalItems;
     }
 }

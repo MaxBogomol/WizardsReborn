@@ -27,10 +27,10 @@ public class SteamCasingTileEntity extends SteamPipeTileEntity {
 
     public void tick() {
         if (!level.isClientSide()) {
+            if (!loaded)
+                initConnections();
             if (!level.hasNeighborSignal(getBlockPos())) {
                 if (level.getBlockState(getBlockPos()).getValue(BlockStateProperties.POWERED)) {
-                    if (!loaded)
-                        initConnections();
                     ticksExisted++;
                     boolean steamMoved = false;
 

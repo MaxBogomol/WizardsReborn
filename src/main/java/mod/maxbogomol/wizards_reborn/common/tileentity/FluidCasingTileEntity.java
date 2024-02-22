@@ -29,12 +29,13 @@ public class FluidCasingTileEntity extends FluidPipeTileEntity {
     }
 
     public void tick() {
+        initConnections();
         if (!level.isClientSide()) {
+            if (!loaded)
+                initConnections();
+            ticksExisted++;
             if (!level.hasNeighborSignal(getBlockPos())) {
                 if (level.getBlockState(getBlockPos()).getValue(BlockStateProperties.POWERED)) {
-                    if (!loaded)
-                        initConnections();
-                    ticksExisted++;
                     boolean fluidMoved = false;
 
                     FluidStack passStack = tank.drain(MAX_PUSH, IFluidHandler.FluidAction.SIMULATE);

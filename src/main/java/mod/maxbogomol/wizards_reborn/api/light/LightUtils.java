@@ -139,7 +139,6 @@ public class LightUtils {
             }
         }
 
-
         return color;
     }
 }

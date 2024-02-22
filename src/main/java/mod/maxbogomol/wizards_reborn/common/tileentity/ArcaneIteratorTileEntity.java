@@ -3,6 +3,8 @@ package mod.maxbogomol.wizards_reborn.common.tileentity;
 import mod.maxbogomol.wizards_reborn.WizardsReborn;
 import mod.maxbogomol.wizards_reborn.api.arcaneenchantment.ArcaneEnchantment;
 import mod.maxbogomol.wizards_reborn.api.arcaneenchantment.ArcaneEnchantmentUtils;
+import mod.maxbogomol.wizards_reborn.api.crystalritual.CrystalRitual;
+import mod.maxbogomol.wizards_reborn.api.crystalritual.CrystalRitualUtils;
 import mod.maxbogomol.wizards_reborn.api.wissen.*;
 import mod.maxbogomol.wizards_reborn.client.particle.ArcaneIteratorBurst;
 import mod.maxbogomol.wizards_reborn.client.particle.Particles;
@@ -167,6 +169,11 @@ public class ArcaneIteratorTileEntity extends BlockEntity implements TickableBlo
                         if (recipe.get().hasRecipeArcaneEnchantment()) {
                             ArcaneEnchantment enchantment = recipe.get().getRecipeArcaneEnchantment();
                             ArcaneEnchantmentUtils.addItemArcaneEnchantment(stack, enchantment);
+                        }
+
+                        if (recipe.get().hasRecipeCrystalRitual()) {
+                            CrystalRitual crystalRitual = recipe.get().getRecipeCrystalRitual();
+                            CrystalRitualUtils.setCrystalRitual(stack, crystalRitual);
                         }
 
                         int ii = 0;
@@ -607,6 +614,10 @@ public class ArcaneIteratorTileEntity extends BlockEntity implements TickableBlo
                         if (ArcaneEnchantmentUtils.canAddItemArcaneEnchantment(stack, enchantment)) {
                             ArcaneEnchantmentUtils.addItemArcaneEnchantment(stack, enchantment);
                         }
+                    }
+                    if (recipe.get().hasRecipeCrystalRitual()) {
+                        CrystalRitual crystalRitual = recipe.get().getRecipeCrystalRitual();
+                        CrystalRitualUtils.setCrystalRitual(stack, crystalRitual);
                     }
                     list.add(stack);
                 } else {

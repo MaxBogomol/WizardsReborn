@@ -95,4 +95,57 @@ public class ArcanumDustItem extends ArcanumItem {
 
         return InteractionResult.PASS;
     }
+
+    public static boolean executeTransmutation(ItemStack stack, Level world, BlockPos blockpos) {
+        if (!world.isClientSide) {
+            SimpleContainer inv = new SimpleContainer(1);
+            inv.setItem(0, world.getBlockState(blockpos).getBlock().asItem().getDefaultInstance());
+            Optional<ArcanumDustTransmutationRecipe> recipe = world.getRecipeManager()
+                    .getRecipeFor(WizardsReborn.ARCANUM_DUST_TRANSMUTATION_RECIPE.get(), inv, world);
+
+            AtomicBoolean place_block = new AtomicBoolean(true);
+            AtomicReference<ItemStack> item = new AtomicReference<>(ItemStack.EMPTY);
+
+            recipe.ifPresent(iRecipe -> {
+                place_block.set(iRecipe.getPlaceBlock());
+                item.set(iRecipe.getResultItem(RegistryAccess.EMPTY).copy());
+            });
+
+            boolean craft = false;
+
+            if (!(item.get().isEmpty())) {
+                if (item.get().getItem() instanceof BlockItem) {
+                    BlockItem blockitem = (BlockItem) item.get().getItem();
+                    world.destroyBlock(blockpos, false);
+                    if (place_block.get()) {
+                        world.setBlockAndUpdate(blockpos, blockitem.getBlock().defaultBlockState());
+                    } else {
+                        if (!world.isClientSide()) {
+                            world.addFreshEntity(new ItemEntity(world, blockpos.getX() + 0.5F, blockpos.getY() + 0.5F, blockpos.getZ() + 0.5F, item.get()));
+                        }
+                    }
+
+                    craft = true;
+                } else {
+                    world.destroyBlock(blockpos, false);
+                    if (!world.isClientSide()) {
+                        world.addFreshEntity(new ItemEntity(world, blockpos.getX() + 0.5F, blockpos.getY() + 0.5F, blockpos.getZ() + 0.5F, item.get()));
+                    }
+
+                    craft = true;
+                }
+            }
+
+            if (craft) {
+                stack.setCount(stack.getCount() - 1);
+                PacketHandler.sendToTracking(world, blockpos, new WissenDustBurstEffectPacket(blockpos, blockpos.getX() + 0.5F,  blockpos.getY() + 0.5F,  blockpos.getZ() + 0.5F, 0, 0, 0));
+                world.playSound(WizardsReborn.proxy.getPlayer(), blockpos, WizardsReborn.WISSEN_TRANSFER_SOUND.get(), SoundSource.PLAYERS, 0.5f, (float) (1.1f + ((random.nextFloat() - 0.5D) / 2)));
+                world.playSound(WizardsReborn.proxy.getPlayer(), blockpos, WizardsReborn.WISSEN_BURST_SOUND.get(), SoundSource.PLAYERS, 0.5f, (float) (1.3f + ((random.nextFloat() - 0.5D) / 2)));
+
+                return true;
+            }
+        }
+
+        return false;
+    }
 }

@@ -1,0 +1,43 @@
+{
+  "type": "wizards_reborn:arcane_iterator",
+  "output": {
+    "item": "wizards_reborn:runic_wisestone_plate",
+    "count": 1
+  },
+  "crystal_ritual": {
+    "crystal_ritual": "wizards_reborn:crystal_infusion"
+  },
+  "wissen": 2500,
+  "ingredients": [
+    {
+      "item": "wizards_reborn:wisestone_plate"
+    },
+    {
+      "tag": "wizards_reborn:all_crystals"
+    },
+    {
+      "tag": "wizards_reborn:arcane_gold_ingot"
+    },
+    {
+      "tag": "wizards_reborn:arcane_gold_ingot"
+    },
+    {
+      "tag": "wizards_reborn:arcane_gold_ingot"
+    },
+    {
+      "tag": "wizards_reborn:arcane_gold_ingot"
+    },
+    {
+      "item": "wizards_reborn:arcanum"
+    },
+    {
+      "item": "wizards_reborn:arcanum"
+    },
+    {
+      "item": "wizards_reborn:arcanum"
+    },
+    {
+      "item": "wizards_reborn:arcanum"
+    }
+  ]
+}

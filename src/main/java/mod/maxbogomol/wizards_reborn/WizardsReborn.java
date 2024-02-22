@@ -81,6 +81,8 @@ import net.minecraft.commands.synchronization.ArgumentTypeInfo;
 import net.minecraft.commands.synchronization.ArgumentTypeInfos;
 import net.minecraft.commands.synchronization.SingletonArgumentInfo;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.BlockSource;
+import net.minecraft.core.dispenser.OptionalDispenseItemBehavior;
 import net.minecraft.core.particles.ParticleType;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceLocation;
@@ -274,7 +276,7 @@ public class WizardsReborn {
 
     //CRYSTAL RITUALS
     public static CrystalRitual EMPTY_CRYSTAL_RITUAL = new CrystalRitual(MOD_ID+":empty");
-    public static CrystalRitual ARTIFICAL_FERTILITY_CRYSTAL_RITUAL = new ArtificialFertilityCrystalRitual(MOD_ID+":artificial_fertility");
+    public static CrystalRitual ARTIFICIAL_FERTILITY_CRYSTAL_RITUAL = new ArtificialFertilityCrystalRitual(MOD_ID+":artificial_fertility");
     public static CrystalRitual RITUAL_BREEDING_CRYSTAL_RITUAL = new RitualBreedingCrystalRitual(MOD_ID+":ritual_breeding");
     public static CrystalRitual CRYSTAL_GROWTH_ACCELERATION_CRYSTAL_RITUAL = new CrystalGrowthAccelerationCrystalRitual(MOD_ID+":crystal_growth_acceleration");
     public static CrystalRitual CRYSTAL_INFUSION_CRYSTAL_RITUAL = new CrystalInfusionCrystalRitual(MOD_ID+":crystal_infusion");
@@ -1095,6 +1097,8 @@ public class WizardsReborn {
         RegisterKnowledges.init();
         Researches.init();
 
+        setupCrystalsItems();
+
         event.enqueueWork(() -> {
             AxeItem.STRIPPABLES = new ImmutableMap.Builder<Block, Block>().putAll(AxeItem.STRIPPABLES)
                     .put(ARCANE_WOOD_LOG.get(), STRIPPED_ARCANE_WOOD_LOG.get())
@@ -1134,6 +1138,19 @@ public class WizardsReborn {
             ComposterBlock.add(0.2F, GROUND_WARPED_FUNGUS.get());
             ComposterBlock.add(0.2F, GROUND_MOR.get());
             ComposterBlock.add(0.2F, GROUND_ELDER_MOR.get());
+
+            DispenserBlock.registerBehavior(ARCANUM_DUST.get(), new OptionalDispenseItemBehavior() {
+                protected ItemStack execute(BlockSource blockSource, ItemStack itemStack) {
+                    this.setSuccess(true);
+                    Level level = blockSource.getLevel();
+                    BlockPos blockpos = blockSource.getPos().relative(blockSource.getBlockState().getValue(DispenserBlock.FACING));
+                    if (!ArcanumDustItem.executeTransmutation(itemStack, level, blockpos)) {
+                        this.setSuccess(false);
+                    }
+
+                    return itemStack;
+                }
+            });
         });
     }
 
@@ -1261,7 +1278,7 @@ public class WizardsReborn {
 
     public static void setupCrystalRituals() {
         CrystalRituals.register(EMPTY_CRYSTAL_RITUAL);
-        CrystalRituals.register(ARTIFICAL_FERTILITY_CRYSTAL_RITUAL);
+        CrystalRituals.register(ARTIFICIAL_FERTILITY_CRYSTAL_RITUAL);
         CrystalRituals.register(RITUAL_BREEDING_CRYSTAL_RITUAL);
         CrystalRituals.register(CRYSTAL_GROWTH_ACCELERATION_CRYSTAL_RITUAL);
         CrystalRituals.register(CRYSTAL_INFUSION_CRYSTAL_RITUAL);
@@ -1298,6 +1315,38 @@ public class WizardsReborn {
         WandCrystalsModels.addCrystal(MOD_ID+":pure_air_crystal");
         WandCrystalsModels.addCrystal(MOD_ID+":pure_fire_crystal");
         WandCrystalsModels.addCrystal(MOD_ID+":pure_void_crystal");
+    }
+
+    public static void setupCrystalsItems() {
+        Crystals.addItem(EARTH_CRYSTAL.get());
+        Crystals.addItem(WATER_CRYSTAL.get());
+        Crystals.addItem(AIR_CRYSTAL.get());
+        Crystals.addItem(FIRE_CRYSTAL.get());
+        Crystals.addItem(VOID_CRYSTAL.get());
+
+        Crystals.addItem(FACETED_EARTH_CRYSTAL.get());
+        Crystals.addItem(FACETED_WATER_CRYSTAL.get());
+        Crystals.addItem(FACETED_AIR_CRYSTAL.get());
+        Crystals.addItem(FACETED_FIRE_CRYSTAL.get());
+        Crystals.addItem(FACETED_VOID_CRYSTAL.get());
+
+        Crystals.addItem(ADVANCED_EARTH_CRYSTAL.get());
+        Crystals.addItem(ADVANCED_WATER_CRYSTAL.get());
+        Crystals.addItem(ADVANCED_AIR_CRYSTAL.get());
+        Crystals.addItem(ADVANCED_FIRE_CRYSTAL.get());
+        Crystals.addItem(ADVANCED_VOID_CRYSTAL.get());
+
+        Crystals.addItem(MASTERFUL_EARTH_CRYSTAL.get());
+        Crystals.addItem(MASTERFUL_WATER_CRYSTAL.get());
+        Crystals.addItem(MASTERFUL_AIR_CRYSTAL.get());
+        Crystals.addItem(MASTERFUL_FIRE_CRYSTAL.get());
+        Crystals.addItem(MASTERFUL_VOID_CRYSTAL.get());
+
+        Crystals.addItem(PURE_EARTH_CRYSTAL.get());
+        Crystals.addItem(PURE_WATER_CRYSTAL.get());
+        Crystals.addItem(PURE_AIR_CRYSTAL.get());
+        Crystals.addItem(PURE_FIRE_CRYSTAL.get());
+        Crystals.addItem(PURE_VOID_CRYSTAL.get());
     }
 
     @Mod.EventBusSubscriber(bus=Mod.EventBusSubscriber.Bus.MOD)

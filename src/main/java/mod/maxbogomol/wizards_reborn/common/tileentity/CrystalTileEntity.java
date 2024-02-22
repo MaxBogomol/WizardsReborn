@@ -8,10 +8,7 @@ import mod.maxbogomol.wizards_reborn.api.crystalritual.CrystalRitualUtils;
 import mod.maxbogomol.wizards_reborn.api.light.ILightTileEntity;
 import mod.maxbogomol.wizards_reborn.api.light.LightRayHitResult;
 import mod.maxbogomol.wizards_reborn.api.light.LightUtils;
-import mod.maxbogomol.wizards_reborn.api.wissen.ICooldownTileEntity;
-import mod.maxbogomol.wizards_reborn.api.wissen.IWissenWandControlledTileEntity;
-import mod.maxbogomol.wizards_reborn.api.wissen.IWissenWandFunctionalTileEntity;
-import mod.maxbogomol.wizards_reborn.api.wissen.WissenUtils;
+import mod.maxbogomol.wizards_reborn.api.wissen.*;
 import mod.maxbogomol.wizards_reborn.common.item.CrystalItem;
 import mod.maxbogomol.wizards_reborn.common.item.equipment.WissenWandItem;
 import mod.maxbogomol.wizards_reborn.utils.PacketUtils;
@@ -31,8 +28,10 @@ import net.minecraftforge.common.extensions.IForgeBlockEntity;
 import org.jetbrains.annotations.NotNull;
 
 import java.awt.*;
+import java.util.ArrayList;
+import java.util.List;
 
-public class CrystalTileEntity extends TileSimpleInventory implements TickableBlockEntity, ILightTileEntity, ICooldownTileEntity, IWissenWandFunctionalTileEntity, IWissenWandControlledTileEntity {
+public class CrystalTileEntity extends TileSimpleInventory implements TickableBlockEntity, ILightTileEntity, ICooldownTileEntity, IWissenWandFunctionalTileEntity, IWissenWandControlledTileEntity, IItemResultTileEntity {
 
     public int blockToX = 0;
     public int blockToY =0 ;
@@ -82,28 +81,35 @@ public class CrystalTileEntity extends TileSimpleInventory implements TickableBl
         }
 
         if (!CrystalRitualUtils.isEmpty(ritual)) {
-            if (getLight() > 0 && startRitual) {
-                if (tickRitual == 0) {
-                    if (ritual.canStart(this)) {
-                        ritual.start(this);
-                        tagRitual = new CompoundTag();
-                    } else {
-                        reload();
-                        update = true;
-                    }
-                }
-
-                if (startRitual) {
-                    if (ritual.canTick(this)) ritual.tick(this);
-
-                    if (ritual.canEnd(this)) {
-                        ritual.end(this);
-                        reload();
-                    } else {
-                        if (!level.isClientSide()) {
-                            tickRitual++;
+            if (ritual.canStartWithCrystal(this)) {
+                if (getLight() > 0 && startRitual) {
+                    if (tickRitual == 0) {
+                        if (ritual.canStart(this)) {
+                            ritual.start(this);
+                            tagRitual = new CompoundTag();
+                        } else {
+                            reload();
                             update = true;
                         }
+                    }
+
+                    if (startRitual) {
+                        if (ritual.canTick(this)) ritual.tick(this);
+
+                        if (ritual.canEnd(this)) {
+                            ritual.end(this);
+                            reload();
+                        } else {
+                            if (!level.isClientSide()) {
+                                tickRitual++;
+                                update = true;
+                            }
+                        }
+                    }
+                } else {
+                    if (startRitual) {
+                        reload();
+                        update = true;
                     }
                 }
             } else {
@@ -401,5 +407,16 @@ public class CrystalTileEntity extends TileSimpleInventory implements TickableBl
         }
 
         return null;
+    }
+
+    @Override
+    public List<ItemStack> getItemsResult() {
+        List<ItemStack> list = new ArrayList<>();
+
+        CrystalRitual ritual = getCrystalRitual();
+        if (!CrystalRitualUtils.isEmpty(ritual)) {
+            return ritual.getItemsResult(this);
+        }
+        return list;
     }
 }

@@ -1,5 +1,7 @@
 package mod.maxbogomol.wizards_reborn.common.crystalritual;
 
+import mod.maxbogomol.wizards_reborn.WizardsReborn;
+import mod.maxbogomol.wizards_reborn.api.crystal.CrystalType;
 import mod.maxbogomol.wizards_reborn.api.crystalritual.CrystalRitual;
 import mod.maxbogomol.wizards_reborn.api.crystalritual.CrystalRitualArea;
 import mod.maxbogomol.wizards_reborn.common.network.PacketHandler;
@@ -18,6 +20,7 @@ import net.minecraft.world.level.block.state.BlockState;
 
 import java.awt.*;
 import java.util.ArrayList;
+import java.util.List;
 
 public class ArtificialFertilityCrystalRitual extends CrystalRitual {
     public ArtificialFertilityCrystalRitual(String id) {
@@ -32,6 +35,15 @@ public class ArtificialFertilityCrystalRitual extends CrystalRitual {
     @Override
     public int getMaxRitualCooldown(CrystalTileEntity crystal) {
         return 60;
+    }
+
+    @Override
+    public List<CrystalType> getCrystalsList() {
+        List<CrystalType> list = new ArrayList<>();
+        list.add(WizardsReborn.EARTH_CRYSTAL_TYPE);
+        list.add(WizardsReborn.WATER_CRYSTAL_TYPE);
+
+        return list;
     }
 
     @Override

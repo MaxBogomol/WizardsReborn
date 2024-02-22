@@ -54,6 +54,10 @@ public class WizardsRebornJei implements IModPlugin {
                 new ArcaneIteratorRecipeCategory(registration.getJeiHelpers().getGuiHelper()));
         registration.addRecipeCategories(
                 new JewelerTableRecipeCategory(registration.getJeiHelpers().getGuiHelper()));
+        registration.addRecipeCategories(
+                new CrystalRitualRecipeCategory(registration.getJeiHelpers().getGuiHelper()));
+        registration.addRecipeCategories(
+                new CrystalInfusionRecipeCategory(registration.getJeiHelpers().getGuiHelper()));
     }
 
     @Override
@@ -67,6 +71,8 @@ public class WizardsRebornJei implements IModPlugin {
         registration.addRecipes(CenserRecipeCategory.TYPE, sortRecipes(WizardsReborn.CENSER_RECIPE.get(), BY_ID));
         registration.addRecipes(ArcaneIteratorRecipeCategory.TYPE, sortRecipes(WizardsReborn.ARCANE_ITERATOR_RECIPE.get(), BY_ID));
         registration.addRecipes(JewelerTableRecipeCategory.TYPE, sortRecipes(WizardsReborn.JEWELER_TABLE_RECIPE.get(), BY_ID));
+        registration.addRecipes(CrystalRitualRecipeCategory.TYPE, sortRecipes(WizardsReborn.CRYSTAL_RITUAL_RECIPE.get(), BY_ID));
+        registration.addRecipes(CrystalInfusionRecipeCategory.TYPE, sortRecipes(WizardsReborn.CRYSTAL_INFUSION_RECIPE.get(), BY_ID));
     }
 
     @Override
@@ -82,6 +88,8 @@ public class WizardsRebornJei implements IModPlugin {
         registration.addRecipeCatalyst(new ItemStack(WizardsReborn.ARCANE_WOOD_SMOKING_PIPE.get()), CenserRecipeCategory.TYPE);
         registration.addRecipeCatalyst(new ItemStack(WizardsReborn.ARCANE_ITERATOR_ITEM.get()), ArcaneIteratorRecipeCategory.TYPE);
         registration.addRecipeCatalyst(new ItemStack(WizardsReborn.JEWELER_TABLE_ITEM.get()), JewelerTableRecipeCategory.TYPE);
+        registration.addRecipeCatalyst(new ItemStack(WizardsReborn.RUNIC_PEDESTAL_ITEM.get()), CrystalRitualRecipeCategory.TYPE);
+        registration.addRecipeCatalyst(new ItemStack(WizardsReborn.RUNIC_PEDESTAL_ITEM.get()), CrystalInfusionRecipeCategory.TYPE);
 
         registration.addRecipeCatalyst(new ItemStack(WizardsReborn.ALCHEMY_FURNACE_ITEM.get()), RecipeTypes.SMELTING);
         registration.addRecipeCatalyst(new ItemStack(WizardsReborn.ALCHEMY_FURNACE_ITEM.get()), RecipeTypes.FUELING);

@@ -1,0 +1,37 @@
+{
+  "type": "wizards_reborn:arcane_iterator",
+  "output": {
+    "item": "wizards_reborn:runic_wisestone_plate",
+    "count": 1
+  },
+  "crystal_ritual": {
+    "crystal_ritual": "wizards_reborn:crystal_growth_acceleration"
+  },
+  "wissen": 2500,
+  "ingredients": [
+    {
+      "item": "wizards_reborn:wisestone_plate"
+    },
+    {
+      "item": "wizards_reborn:arcanum_block"
+    },
+    {
+      "item": "minecraft:redstone_block"
+    },
+    {
+      "item": "minecraft:redstone_block"
+    },
+    {
+      "item": "wizards_reborn:alchemy_glass"
+    },
+    {
+      "item": "wizards_reborn:alchemy_glass"
+    },
+    {
+      "item": "wizards_reborn:alchemy_glass"
+    },
+    {
+      "item": "wizards_reborn:alchemy_glass"
+    }
+  ]
+}

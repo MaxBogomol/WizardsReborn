@@ -1,0 +1,34 @@
+{
+  "type": "wizards_reborn:arcane_iterator",
+  "output": {
+    "item": "wizards_reborn:runic_wisestone_plate",
+    "count": 1
+  },
+  "crystal_ritual": {
+    "crystal_ritual": "wizards_reborn:artificial_fertility"
+  },
+  "wissen": 2500,
+  "ingredients": [
+    {
+      "item": "wizards_reborn:wisestone_plate"
+    },
+    {
+      "item": "minecraft:water_bucket"
+    },
+    {
+      "item": "minecraft:hay_block"
+    },
+    {
+      "item": "minecraft:hay_block"
+    },
+    {
+      "item": "minecraft:bone_meal"
+    },
+    {
+      "item": "minecraft:bone_meal"
+    },
+    {
+      "item": "minecraft:bone_meal"
+    }
+  ]
+}

@@ -5,6 +5,7 @@ import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import mod.maxbogomol.wizards_reborn.WizardsReborn;
 import mod.maxbogomol.wizards_reborn.api.arcaneenchantment.ArcaneEnchantment;
+import mod.maxbogomol.wizards_reborn.api.crystalritual.CrystalRitual;
 import mod.maxbogomol.wizards_reborn.utils.RecipeUtils;
 import net.minecraft.core.NonNullList;
 import net.minecraft.core.RegistryAccess;
@@ -29,17 +30,19 @@ public class ArcaneIteratorRecipe implements Recipe<Container> {
     private final ItemStack output;
     private final Enchantment enchantment;
     private final ArcaneEnchantment arcaneEnchantment;
+    private final CrystalRitual crystalRitual;
     private final NonNullList<Ingredient> inputs;
     private final int wissen;
     private final int health;
     private final int experience;
     private final boolean isSaveNBT;
 
-    public ArcaneIteratorRecipe(ResourceLocation id, ItemStack output, Enchantment enchantment, ArcaneEnchantment arcaneEnchantment, int wissen, int health, int experience, boolean isSaveNBT, NonNullList<Ingredient> inputs) {
+    public ArcaneIteratorRecipe(ResourceLocation id, ItemStack output, Enchantment enchantment, ArcaneEnchantment arcaneEnchantment, CrystalRitual crystalRitual, int wissen, int health, int experience, boolean isSaveNBT, NonNullList<Ingredient> inputs) {
         this.id = id;
         this.output = output;
         this.enchantment = enchantment;
         this.arcaneEnchantment = arcaneEnchantment;
+        this.crystalRitual = crystalRitual;
         this.inputs = inputs;
         this.wissen = wissen;
         this.health = health;
@@ -125,9 +128,12 @@ public class ArcaneIteratorRecipe implements Recipe<Container> {
         return enchantment;
     }
 
-
     public ArcaneEnchantment getRecipeArcaneEnchantment() {
         return arcaneEnchantment;
+    }
+
+    public CrystalRitual getRecipeCrystalRitual() {
+        return crystalRitual;
     }
 
     public boolean getRecipeIsSaveNBT() {
@@ -138,9 +144,12 @@ public class ArcaneIteratorRecipe implements Recipe<Container> {
         return enchantment != null;
     }
 
-
     public boolean hasRecipeArcaneEnchantment() {
         return arcaneEnchantment != null;
+    }
+
+    public boolean hasRecipeCrystalRitual() {
+        return crystalRitual != null;
     }
 
     public ItemStack getToastSymbol() {
@@ -171,6 +180,7 @@ public class ArcaneIteratorRecipe implements Recipe<Container> {
             ItemStack output = ItemStack.EMPTY;
             Enchantment enchantment = null;
             ArcaneEnchantment arcaneEnchantment = null;
+            CrystalRitual crystalRitual = null;
 
             int wissen = GsonHelper.getAsInt(json, "wissen");
             int health = 0;
@@ -186,6 +196,9 @@ public class ArcaneIteratorRecipe implements Recipe<Container> {
             }
             if (json.has("arcane_enchantment")) {
                 arcaneEnchantment = RecipeUtils.deserializeArcaneEnchantment(GsonHelper.getAsJsonObject(json, "arcane_enchantment"));
+            }
+            if (json.has("crystal_ritual")) {
+                crystalRitual = RecipeUtils.deserializeCrystalRitual(GsonHelper.getAsJsonObject(json, "crystal_ritual"));
             }
 
             if (json.has("health")) {
@@ -205,7 +218,7 @@ public class ArcaneIteratorRecipe implements Recipe<Container> {
                 isSaveNBT = GsonHelper.getAsBoolean(json, "saveNBT");
             }
 
-            return new ArcaneIteratorRecipe(recipeId, output, enchantment,arcaneEnchantment, wissen, health, experience, isSaveNBT, inputs);
+            return new ArcaneIteratorRecipe(recipeId, output, enchantment,arcaneEnchantment, crystalRitual, wissen, health, experience, isSaveNBT, inputs);
         }
 
         @Nullable
@@ -219,11 +232,12 @@ public class ArcaneIteratorRecipe implements Recipe<Container> {
             ItemStack output = buffer.readItem();
             Enchantment enchantment = RecipeUtils.enchantmentFromNetwork(buffer);
             ArcaneEnchantment arcaneEnchantment = RecipeUtils.arcaneEnchantmentFromNetwork(buffer);
+            CrystalRitual crystalRitual = RecipeUtils.crystalRitualFromNetwork(buffer);
             int wissen = buffer.readInt();
             int health = buffer.readInt();
             int experience = buffer.readInt();
             boolean isSaveNBT = buffer.readBoolean();
-            return new ArcaneIteratorRecipe(recipeId, output, enchantment, arcaneEnchantment, wissen, health, experience, isSaveNBT, inputs);
+            return new ArcaneIteratorRecipe(recipeId, output, enchantment, arcaneEnchantment, crystalRitual, wissen, health, experience, isSaveNBT, inputs);
         }
 
         @Override
@@ -235,6 +249,7 @@ public class ArcaneIteratorRecipe implements Recipe<Container> {
             buffer.writeItemStack(recipe.getResultItem(RegistryAccess.EMPTY), false);
             RecipeUtils.enchantmentToNetwork(recipe.getRecipeEnchantment(), buffer);
             RecipeUtils.arcaneEnchantmentToNetwork(recipe.getRecipeArcaneEnchantment(), buffer);
+            RecipeUtils.crystalRitualToNetwork(recipe.getRecipeCrystalRitual(), buffer);
             buffer.writeInt(recipe.getRecipeWissen());
             buffer.writeInt(recipe.getRecipeHealth());
             buffer.writeInt(recipe.getRecipeExperience());

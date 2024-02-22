@@ -4,8 +4,6 @@ import com.blamejared.crafttweaker.api.CraftTweakerAPI;
 import com.blamejared.crafttweaker.api.action.recipe.ActionAddRecipe;
 import com.blamejared.crafttweaker.api.action.recipe.ActionRemoveRecipe;
 import com.blamejared.crafttweaker.api.annotation.ZenRegister;
-import com.blamejared.crafttweaker.api.fluid.CTFluidIngredient;
-import com.blamejared.crafttweaker.api.fluid.IFluidStack;
 import com.blamejared.crafttweaker.api.ingredient.IIngredient;
 import com.blamejared.crafttweaker.api.item.IItemStack;
 import com.blamejared.crafttweaker.api.item.MCItemStackMutable;
@@ -17,9 +15,9 @@ import com.blamejared.crafttweaker_annotations.annotations.Document;
 import mod.maxbogomol.wizards_reborn.WizardsReborn;
 import mod.maxbogomol.wizards_reborn.api.arcaneenchantment.ArcaneEnchantment;
 import mod.maxbogomol.wizards_reborn.api.arcaneenchantment.ArcaneEnchantments;
-import mod.maxbogomol.wizards_reborn.common.recipe.AlchemyMachineRecipe;
+import mod.maxbogomol.wizards_reborn.api.crystalritual.CrystalRitual;
+import mod.maxbogomol.wizards_reborn.api.crystalritual.CrystalRituals;
 import mod.maxbogomol.wizards_reborn.common.recipe.ArcaneIteratorRecipe;
-import mod.maxbogomol.wizards_reborn.common.recipe.FluidIngredient;
 import net.minecraft.core.NonNullList;
 import net.minecraft.core.RegistryAccess;
 import net.minecraft.resources.ResourceLocation;
@@ -28,7 +26,6 @@ import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.item.crafting.Recipe;
 import net.minecraft.world.item.crafting.RecipeType;
 import net.minecraft.world.item.enchantment.Enchantment;
-import net.minecraftforge.fluids.FluidStack;
 import org.openzen.zencode.java.ZenCodeType;
 
 import java.util.Arrays;
@@ -42,13 +39,14 @@ import java.util.StringJoiner;
 public class ArcaneIteratorRecipeManager implements IRecipeManager, IRecipeHandler<ArcaneIteratorRecipe> {
 
     @ZenCodeType.Method
-    public void addRecipe(String name, @ZenCodeType.Nullable() IItemStack output, @ZenCodeType.Nullable() Enchantment enchantment, @ZenCodeType.Nullable() String arcaneEnchantment, int wissen, int health, int experience, boolean isSaveNBT, IIngredient[] inputs) {
+    public void addRecipe(String name, @ZenCodeType.Nullable() IItemStack output, @ZenCodeType.Nullable() Enchantment enchantment, @ZenCodeType.Nullable() String arcaneEnchantment, @ZenCodeType.Nullable() String crystalRitual, int wissen, int health, int experience, boolean isSaveNBT, IIngredient[] inputs) {
         name = fixRecipeName(name);
         ResourceLocation resourceLocation = new ResourceLocation("crafttweaker", name);
 
         ItemStack outputItemF = ItemStack.EMPTY;
         Enchantment enchantmentF = null;
         ArcaneEnchantment arcaneEnchantmentF = null;
+        CrystalRitual crystalRitualF = null;
 
         NonNullList<Ingredient> inputsF = NonNullList.create();
         Ingredient[] inputsArray = Arrays.stream(inputs).map(IIngredient::asVanillaIngredient).toArray(Ingredient[]::new);
@@ -56,20 +54,26 @@ public class ArcaneIteratorRecipeManager implements IRecipeManager, IRecipeHandl
 
         if (enchantment != null) enchantmentF = enchantment;
         if (arcaneEnchantment != null) arcaneEnchantmentF = ArcaneEnchantments.getArcaneEnchantment(arcaneEnchantment);
+        if (crystalRitual != null) crystalRitualF = CrystalRituals.getCrystalRitual(crystalRitual);
         if (output != null) outputItemF = output.getInternal();
 
             CraftTweakerAPI.apply(new ActionAddRecipe(this,
-                new ArcaneIteratorRecipe(resourceLocation, outputItemF, enchantmentF, arcaneEnchantmentF, wissen, health, experience, isSaveNBT, inputsF), ""));
+                new ArcaneIteratorRecipe(resourceLocation, outputItemF, enchantmentF, arcaneEnchantmentF, crystalRitualF, wissen, health, experience, isSaveNBT, inputsF), ""));
     }
 
     @ZenCodeType.Method
-    public void remove(Enchantment enchantment) {
+    public void removeEnchantment(Enchantment enchantment) {
         CraftTweakerAPI.apply(new ActionRemoveRecipe<>(this, iRecipe -> ((ArcaneIteratorRecipe) iRecipe).getRecipeEnchantment() != null && ((ArcaneIteratorRecipe) iRecipe).getRecipeEnchantment().equals(enchantment)));
     }
 
     @ZenCodeType.Method
-    public void remove(String arcaneEnchantment) {
+    public void removeArcaneEnchantment(String arcaneEnchantment) {
         CraftTweakerAPI.apply(new ActionRemoveRecipe<>(this, iRecipe -> ((ArcaneIteratorRecipe) iRecipe).getRecipeArcaneEnchantment() != null && ((ArcaneIteratorRecipe) iRecipe).getRecipeArcaneEnchantment().equals(ArcaneEnchantments.getArcaneEnchantment(arcaneEnchantment))));
+    }
+
+    @ZenCodeType.Method
+    public void removeRitual(String crystalRitual) {
+        CraftTweakerAPI.apply(new ActionRemoveRecipe<>(this, iRecipe -> ((ArcaneIteratorRecipe) iRecipe).getRecipeCrystalRitual() != null && ((ArcaneIteratorRecipe) iRecipe).getRecipeCrystalRitual().equals(CrystalRituals.getCrystalRitual(crystalRitual))));
     }
 
     @Override

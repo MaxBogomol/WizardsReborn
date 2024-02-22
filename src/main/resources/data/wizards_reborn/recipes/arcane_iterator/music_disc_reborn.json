@@ -1,0 +1,16 @@
+{
+  "type": "wizards_reborn:arcane_iterator",
+  "output": {
+    "item": "wizards_reborn:music_disc_reborn",
+    "count": 1
+  },
+  "wissen": 2000,
+  "ingredients": [
+    {
+      "tag": "minecraft:music_discs"
+    },
+    {
+      "tag": "wizards_reborn:arcane_gold_ingot"
+    }
+  ]
+}

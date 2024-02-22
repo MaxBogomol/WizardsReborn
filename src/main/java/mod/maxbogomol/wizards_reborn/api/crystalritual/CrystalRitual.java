@@ -7,7 +7,7 @@ import mod.maxbogomol.wizards_reborn.api.crystal.CrystalType;
 import mod.maxbogomol.wizards_reborn.api.crystal.PolishingType;
 import mod.maxbogomol.wizards_reborn.common.item.CrystalItem;
 import mod.maxbogomol.wizards_reborn.common.network.PacketHandler;
-import mod.maxbogomol.wizards_reborn.common.network.tileentity.CrystalRitualBurstEffectPacket;
+import mod.maxbogomol.wizards_reborn.common.network.crystalritual.CrystalRitualBurstEffectPacket;
 import mod.maxbogomol.wizards_reborn.common.recipe.CrystalRitualRecipe;
 import mod.maxbogomol.wizards_reborn.common.tileentity.ArcanePedestalTileEntity;
 import mod.maxbogomol.wizards_reborn.common.tileentity.CrystalTileEntity;
@@ -24,6 +24,8 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.phys.Vec3;
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.api.distmarker.OnlyIn;
 
 import java.awt.*;
 import java.util.ArrayList;
@@ -57,6 +59,16 @@ public class CrystalRitual {
         String modId = id.substring(0, i);
         String spellId = id.substring(i + 1);
         return "crystal_ritual."  + modId + "." + spellId;
+    }
+
+    public List<CrystalType> getCrystalsList() {
+        List<CrystalType> list = new ArrayList<>();
+
+        return list;
+    }
+
+    public int getMinimalPolishingLevel() {
+        return 0;
     }
 
     public CrystalRitualArea getArea(CrystalTileEntity crystal) {
@@ -307,6 +319,7 @@ public class CrystalRitual {
         }
     }
 
+    @OnlyIn(Dist.CLIENT)
     public void render(CrystalTileEntity crystal, float partialTicks, PoseStack ms, MultiBufferSource buffers, int light, int overlay) {
 
     }
@@ -328,7 +341,7 @@ public class CrystalRitual {
         Container container = getItemHandler(crystal);
         if (container != null) {
             for (int i = 0; i < container.getContainerSize(); i++) {
-                container.removeItem(i, 1);
+                container.removeItemNoUpdate(i);
             }
             updateRunicPedestal(crystal);
         }
@@ -344,5 +357,28 @@ public class CrystalRitual {
         }
 
         return size;
+    }
+
+    public List<ItemStack> getItemsResult(CrystalTileEntity crystal) {
+        List<ItemStack> list = new ArrayList<>();
+
+        return list;
+    }
+
+    public boolean canStartWithCrystal(CrystalTileEntity crystal) {
+        List<CrystalType> list = getCrystalsList();
+
+        if (getCrystalsList().isEmpty()) return true;
+        ItemStack stack = crystal.getCrystalItem();
+
+        if (stack != null) {
+            for (CrystalType type : list) {
+                if (stack.getItem() instanceof CrystalItem crystalItem) {
+                    if (type == crystalItem.getType()) return true;
+                }
+            }
+        }
+
+        return false;
     }
 }

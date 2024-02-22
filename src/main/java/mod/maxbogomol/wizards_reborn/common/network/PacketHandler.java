@@ -2,6 +2,8 @@ package mod.maxbogomol.wizards_reborn.common.network;
 
 import com.mojang.datafixers.util.Pair;
 import mod.maxbogomol.wizards_reborn.WizardsReborn;
+import mod.maxbogomol.wizards_reborn.common.network.crystalritual.CrystalInfusionBurstEffectPacket;
+import mod.maxbogomol.wizards_reborn.common.network.crystalritual.CrystalRitualBurstEffectPacket;
 import mod.maxbogomol.wizards_reborn.common.network.spell.*;
 import mod.maxbogomol.wizards_reborn.common.network.tileentity.*;
 import net.minecraft.core.BlockPos;
@@ -43,6 +45,7 @@ public final class PacketHandler {
         HANDLER.registerMessage(id++, AltarOfDroughtBreakEffectPacket.class, AltarOfDroughtBreakEffectPacket::encode, AltarOfDroughtBreakEffectPacket::decode, AltarOfDroughtBreakEffectPacket::handle);
         HANDLER.registerMessage(id++, ArcaneIteratorBurstEffectPacket.class, ArcaneIteratorBurstEffectPacket::encode, ArcaneIteratorBurstEffectPacket::decode, ArcaneIteratorBurstEffectPacket::handle);
         HANDLER.registerMessage(id++, CrystalRitualBurstEffectPacket.class, CrystalRitualBurstEffectPacket::encode, CrystalRitualBurstEffectPacket::decode, CrystalRitualBurstEffectPacket::handle);
+        HANDLER.registerMessage(id++, CrystalInfusionBurstEffectPacket.class, CrystalInfusionBurstEffectPacket::encode, CrystalInfusionBurstEffectPacket::decode, CrystalInfusionBurstEffectPacket::handle);
 
         HANDLER.registerMessage(id++, WissenTranslatorBurstEffectPacket.class, WissenTranslatorBurstEffectPacket::encode, WissenTranslatorBurstEffectPacket::decode, WissenTranslatorBurstEffectPacket::handle);
         HANDLER.registerMessage(id++, WissenTranslatorSendEffectPacket.class, WissenTranslatorSendEffectPacket::encode, WissenTranslatorSendEffectPacket::decode, WissenTranslatorSendEffectPacket::handle);

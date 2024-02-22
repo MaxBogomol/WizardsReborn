@@ -83,7 +83,7 @@ public class CrystalTileEntityRenderer implements BlockEntityRenderer<CrystalTil
             }
         }
 
-        if (!CrystalRitualUtils.isEmpty(ritual)) {
+        if (!CrystalRitualUtils.isEmpty(ritual) && ritual.canStartWithCrystal(crystal)) {
             ritual.render(crystal, partialTicks, ms, buffers, light, overlay);
         }
     }

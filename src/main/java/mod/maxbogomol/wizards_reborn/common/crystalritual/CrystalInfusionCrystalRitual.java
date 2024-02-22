@@ -7,6 +7,8 @@ import mod.maxbogomol.wizards_reborn.api.crystalritual.CrystalRitual;
 import mod.maxbogomol.wizards_reborn.api.crystalritual.CrystalRitualArea;
 import mod.maxbogomol.wizards_reborn.client.event.ClientTickHandler;
 import mod.maxbogomol.wizards_reborn.client.particle.Particles;
+import mod.maxbogomol.wizards_reborn.common.network.PacketHandler;
+import mod.maxbogomol.wizards_reborn.common.network.crystalritual.CrystalInfusionBurstEffectPacket;
 import mod.maxbogomol.wizards_reborn.common.recipe.CrystalInfusionRecipe;
 import mod.maxbogomol.wizards_reborn.common.tileentity.ArcanePedestalTileEntity;
 import mod.maxbogomol.wizards_reborn.common.tileentity.CrystalTileEntity;
@@ -14,6 +16,7 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.RegistryAccess;
+import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.Container;
 import net.minecraft.world.SimpleContainer;
@@ -21,8 +24,11 @@ import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.item.ItemDisplayContext;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.api.distmarker.OnlyIn;
 
 import java.awt.*;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -103,6 +109,21 @@ public class CrystalInfusionCrystalRitual extends CrystalRitual {
                         clearItemHandler(crystal);
                         container.setItem(0, recipe.get().getResultItem(RegistryAccess.EMPTY).copy());
                         updateRunicPedestal(crystal);
+                        level.playSound(WizardsReborn.proxy.getPlayer(), blockPos, WizardsReborn.WISSEN_BURST_SOUND.get(), SoundSource.BLOCKS, 0.25f, (float) (1f + ((random.nextFloat() - 0.5D) / 4)));
+
+                        float r = 1f;
+                        float g = 1f;
+                        float b = 1f;
+
+                        ItemStack item = getCrystalItem(crystal);
+                        if (!item.isEmpty()) {
+                            Color color = getCrystalColor(item);
+                            r = (color.getRed() / 255f);
+                            g = (color.getGreen() / 255f);
+                            b = (color.getBlue() / 255f);
+                        }
+
+                        PacketHandler.sendToTracking(level, blockPos, new CrystalInfusionBurstEffectPacket(blockPos, r, g, b));
                     }
                 }
             }
@@ -213,10 +234,10 @@ public class CrystalInfusionCrystalRitual extends CrystalRitual {
 
             if (container != null) {
                 level.addFreshEntity(new ItemEntity(level, blockPos.getX() + 0.5F, blockPos.getY() + 1.25F, blockPos.getZ() + 0.5F, container.getItem(0).copy()));
+                level.playSound(WizardsReborn.proxy.getPlayer(), blockPos, SoundEvents.ITEM_PICKUP, SoundSource.BLOCKS, 1f,1f);
             }
 
             clearItemHandler(crystal);
-            level.playSound(WizardsReborn.proxy.getPlayer(), blockPos, WizardsReborn.WISSEN_BURST_SOUND.get(), SoundSource.BLOCKS, 0.25f, (float) (1f + ((random.nextFloat() - 0.5D) / 4)));
         }
     }
 
@@ -241,6 +262,20 @@ public class CrystalInfusionCrystalRitual extends CrystalRitual {
     }
 
     @Override
+    public List<ItemStack> getItemsResult(CrystalTileEntity crystal) {
+        List<ItemStack> list = new ArrayList<>();
+        Optional<CrystalInfusionRecipe> recipe = getRecipe(crystal);
+
+        if (recipe.isPresent()) {
+            ItemStack stack = recipe.get().getResultItem(RegistryAccess.EMPTY).copy();
+            list.add(stack);
+        }
+
+        return list;
+    }
+
+    @Override
+    @OnlyIn(Dist.CLIENT)
     public void render(CrystalTileEntity crystal, float partialTicks, PoseStack ms, MultiBufferSource buffers, int light, int overlay) {
         Minecraft mc = Minecraft.getInstance();
         double ticks = (ClientTickHandler.ticksInGame + partialTicks) * 2;
@@ -266,7 +301,7 @@ public class CrystalInfusionCrystalRitual extends CrystalRitual {
             }
         }
 
-        if (container != null && getCooldown(crystal) <= 20) {
+        if (container != null && getCooldown(crystal) < 20) {
             ms.pushPose();
             ms.translate(0.5F, 1.5F, 0.5F);
             ms.translate(0F, (float) (Math.sin(Math.toRadians(ticksUp)) * 0.03125F), 0F);

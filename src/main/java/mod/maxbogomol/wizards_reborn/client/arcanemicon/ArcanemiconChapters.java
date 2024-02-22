@@ -4,6 +4,9 @@ import mod.maxbogomol.wizards_reborn.WizardsReborn;
 import mod.maxbogomol.wizards_reborn.api.alchemy.AlchemyPotion;
 import mod.maxbogomol.wizards_reborn.api.alchemy.AlchemyPotionUtils;
 import mod.maxbogomol.wizards_reborn.api.alchemy.AlchemyPotions;
+import mod.maxbogomol.wizards_reborn.api.crystalritual.CrystalRitual;
+import mod.maxbogomol.wizards_reborn.api.crystalritual.CrystalRitualUtils;
+import mod.maxbogomol.wizards_reborn.api.crystalritual.CrystalRituals;
 import mod.maxbogomol.wizards_reborn.client.arcanemicon.index.BlockEntry;
 import mod.maxbogomol.wizards_reborn.client.arcanemicon.index.IndexEntry;
 import mod.maxbogomol.wizards_reborn.client.arcanemicon.index.MonogramIndexEntry;
@@ -33,7 +36,7 @@ public class ArcanemiconChapters {
     public static List<Category> categories = new ArrayList<>();
     public static Category ARCANE_NATURE, SPELLS, CRYSTAL_RITUALS, ALCHEMY;
     public static Chapter ARCANE_NATURE_INDEX, SPELLS_INDEX, CRYSTAL_RITUALS_INDEX, ALCHEMY_INDEX,
-            ARCANUM, ARCANUM_DUST_TRANSMUTATION, ARCANE_WOOD, ARCANE_GOLD, SCYTHES, TRINKETS, ARCANE_WOOD_BOW, BANNER_PATTERNS, WISSEN, WISSEN_TRANSLATOR, ARCANE_PEDESTAL, WISSEN_ALTAR, WISSEN_CRYSTALLIZER, ARCANE_WORKBENCH, ARCANE_LUMOS, CRYSTALS, ARCANE_WAND, AUTOMATION, WISSEN_CELL, ALTAR_OF_DROUGHT, VOID_CRYSTAL, ARCANE_FORTRESS_ARMOR, INVENTOR_WIZARD_ARMOR, ARCANE_WOOD_CANE, ARCANE_ITERATOR, WISSEN_KEYCHAIN, JEWELER_TABLE,
+            ARCANUM, ARCANUM_DUST_TRANSMUTATION, ARCANE_WOOD, ARCANE_GOLD, SCYTHES, TRINKETS, ARCANE_WOOD_BOW, BANNER_PATTERNS, WISSEN, WISSEN_TRANSLATOR, ARCANE_PEDESTAL, WISSEN_ALTAR, WISSEN_CRYSTALLIZER, ARCANE_WORKBENCH, ARCANE_LUMOS, CRYSTALS, ARCANE_WAND, AUTOMATION, WISSEN_CELL, ALTAR_OF_DROUGHT, VOID_CRYSTAL, ARCANE_FORTRESS_ARMOR, INVENTOR_WIZARD_ARMOR, ARCANE_WOOD_CANE, ARCANE_ITERATOR, WISSEN_KEYCHAIN, JEWELER_TABLE, MUSIC_DISC_REBORN,
             REDSTONE_SENSOR, WISSEN_SENSOR, COOLDOWN_SENSOR, LIGHT_SENSOR, HEAT_SENSOR, FLUID_SENSOR, STEAM_SENSOR, WISSEN_ACTIVATOR, ITEM_SORTER, ARCANE_WOOD_FRAME, WISSEN_CASING, WISESTONE_CASING, FLUID_CASING, STEAM_CASING, GLASS_FRAME, LIGHT_CASING,
             ALL_SPELLS, EARTH_SPELLS, WATER_SPELLS, AIR_SPELLS, FIRE_SPELLS, VOID_SPELLS,
             EARTH_PROJECTILE, WATER_PROJECTILE, AIR_PROJECTILE, FIRE_PROJECTILE, VOID_PROJECTILE, FROST_PROJECTILE, HOLY_PROJECTILE, CURSE_PROJECTILE,
@@ -41,6 +44,7 @@ public class ArcanemiconChapters {
             EARTH_CHARGE, WATER_CHARGE, AIR_CHARGE, FIRE_CHARGE, VOID_CHARGE, FROST_CHARGE, HOLY_CHARGE, CURSE_CHARGE,
             HEART_OF_NATURE, WATER_BREATHING, AIR_FLOW, FIRE_SHIELD, MAGIC_SPROUT,
             MONOGRAMS, RESEARCHES, RESEARCH, LUNAM_MONOGRAM, VITA_MONOGRAM, SOLEM_MONOGRAM, MORS_MONOGRAM, MIRACULUM_MONOGRAM, TEMPUS_MONOGRAM, STATERA_MONOGRAM, ECLIPSIS_MONOGRAM, SICCITAS_MONOGRAM, SOLSTITIUM_MONOGRAM, FAMES_MONOGRAM, RENAISSANCE_MONOGRAM, BELLUM_MONOGRAM, LUX_MONOGRAM, KARA_MONOGRAM, DEGRADATIO_MONOGRAM, PRAEDICTIONEM_MONOGRAM, EVOLUTIONIS_MONOGRAM, DARK_MONOGRAM, UNIVERSUM_MONOGRAM,
+            LIGHT_RAYS, LIGHT_EMITTER, LIGHT_TRANSFER_LENS, RUNIC_PEDESTAL, CRYSTALS_RITUALS, ARTIFICIAL_FERTILITY, RITUAL_BREEDING, CRYSTAL_GROWTH_ACCELERATION, CRYSTAL_INFUSION, ARCANUM_SEED,
             MOR, MORTAR, ARCANE_LINEN, MUSHROOM_CAPS, WISESTONE, WISESTONE_PEDESTAL, FLUID_PIPES, STEAM_PIPES, ORBITAL_FLUID_RETAINER, ALCHEMY_FURNACE, STEAM_THERMAL_STORAGE, ALCHEMY_MACHINE, ALCHEMY_OIL, ARCACITE, MUSIC_DISC_ARCANUM, MUSIC_DISC_MOR, ALCHEMY_GLASS, ALCHEMY_POTIONS, TEA, ALCHEMY_BREWS, ARCANE_CENSER, SMOKING_PIPE, ARCACITE_POLISHING_MIXTURE;
     public static ResearchPage RESEARCH_MAIN, RESEARCH_LIST;
 
@@ -606,7 +610,7 @@ public class ArcanemiconChapters {
                         new BlockEntry(new ItemStack(WizardsReborn.ARCANE_PEDESTAL_ITEM.get()), new ItemStack(WizardsReborn.LIGHT_SENSOR_ITEM.get()))
                 ),
                 new ArcaneWorkbenchPage(new ItemStack(WizardsReborn.LIGHT_SENSOR_ITEM.get()),
-                        ItemStack.EMPTY, new ItemStack(WizardsReborn.WISSEN_TRANSLATOR_ITEM.get()), ItemStack.EMPTY,
+                        ItemStack.EMPTY, new ItemStack(WizardsReborn.LIGHT_TRANSFER_LENS_ITEM.get()), ItemStack.EMPTY,
                         ItemStack.EMPTY, new ItemStack(WizardsReborn.REDSTONE_SENSOR_ITEM.get())
                 )
         );
@@ -786,7 +790,7 @@ public class ArcanemiconChapters {
         );
 
         LIGHT_CASING = new Chapter(
-                "wizards_reborn.arcanemicon.chapter.item_sorter",
+                "wizards_reborn.arcanemicon.chapter.light_casing",
                 new TitledBlockPage("wizards_reborn.arcanemicon.page.arcane_wood_light_casing",
                         new BlockEntry(new ItemStack(WizardsReborn.ARCANE_PEDESTAL_ITEM.get()), new ItemStack(WizardsReborn.ARCANE_WOOD_LIGHT_CASING_ITEM.get()))
                 ),
@@ -1166,6 +1170,16 @@ public class ArcanemiconChapters {
                 new JewelerTablePage(new ItemStack(WizardsReborn.FACETED_VOID_CRYSTAL.get()), new ItemStack(WizardsReborn.VOID_CRYSTAL.get()), new ItemStack(WizardsReborn.ARCACITE_POLISHING_MIXTURE.get()))
         );
 
+        MUSIC_DISC_REBORN = new Chapter(
+                "wizards_reborn.arcanemicon.chapter.music_disc_reborn",
+                new TitledBlockPage("wizards_reborn.arcanemicon.page.music_disc_reborn",
+                        new BlockEntry(new ItemStack(WizardsReborn.WISESTONE_PEDESTAL_ITEM.get()), new ItemStack(WizardsReborn.MUSIC_DISC_REBORN.get()))
+                ),
+                new ArcaneIteratorPage(new ItemStack(WizardsReborn.MUSIC_DISC_REBORN.get()), 0, 0,
+                        new ItemStack(Items.MUSIC_DISC_13), new ItemStack(WizardsReborn.ARCANE_GOLD_INGOT.get())
+                )
+        );
+
         ARCANE_NATURE_INDEX = new Chapter(
                 "wizards_reborn.arcanemicon.chapter.arcane_nature_index",
                 new TitledIndexPage("wizards_reborn.arcanemicon.page.arcane_nature_index",
@@ -1202,6 +1216,9 @@ public class ArcanemiconChapters {
                         new IndexEntry(ARCANE_ITERATOR, new ItemStack(WizardsReborn.ARCANE_ITERATOR_ITEM.get()), RegisterKnowledges.ARCACITE),
                         new IndexEntry(WISSEN_KEYCHAIN, new ItemStack(WizardsReborn.WISSEN_KEYCHAIN.get()), RegisterKnowledges.ARCANE_ITERATOR),
                         new IndexEntry(JEWELER_TABLE, new ItemStack(WizardsReborn.JEWELER_TABLE_ITEM.get()), RegisterKnowledges.ARCACITE_POLISHING_MIXTURE)
+                ),
+                new IndexPage(
+                        new IndexEntry(MUSIC_DISC_REBORN, new ItemStack(WizardsReborn.MUSIC_DISC_REBORN.get()), RegisterKnowledges.ARCANE_ITERATOR)
                 )
         );
 
@@ -1636,8 +1653,198 @@ public class ArcanemiconChapters {
                 )
         );
 
+        LIGHT_RAYS = new Chapter(
+                "wizards_reborn.arcanemicon.chapter.light_rays",
+                new TitledBlockPage("wizards_reborn.arcanemicon.page.light_rays.0",
+                        new BlockEntry(new ItemStack(WizardsReborn.ARCANE_PEDESTAL_ITEM.get()), new ItemStack(WizardsReborn.LIGHT_EMITTER_ITEM.get())),
+                        new BlockEntry(new ItemStack(WizardsReborn.ARCANE_PEDESTAL_ITEM.get()), new ItemStack(WizardsReborn.LIGHT_TRANSFER_LENS_ITEM.get())),
+                        new BlockEntry(new ItemStack(WizardsReborn.ARCANE_PEDESTAL_ITEM.get()), new ItemStack(WizardsReborn.RUNIC_PEDESTAL_ITEM.get()))
+                ),
+                new TextPage("wizards_reborn.arcanemicon.page.light_rays.1")
+        );
+
+        LIGHT_EMITTER = new Chapter(
+                "wizards_reborn.arcanemicon.chapter.light_emitter",
+                new TitledBlockPage("wizards_reborn.arcanemicon.page.light_emitter",
+                        new BlockEntry(new ItemStack(WizardsReborn.ARCANE_PEDESTAL_ITEM.get()), new ItemStack(WizardsReborn.LIGHT_EMITTER_ITEM.get()))
+                ),
+                new ArcaneWorkbenchPage(new ItemStack(WizardsReborn.LIGHT_EMITTER_ITEM.get()),
+                        new ItemStack(WizardsReborn.ARCANE_GOLD_INGOT.get()), ItemStack.EMPTY,  new ItemStack(WizardsReborn.ARCANE_GOLD_INGOT.get()),
+                        new ItemStack(WizardsReborn.ARCANE_GOLD_NUGGET.get()), new ItemStack(WizardsReborn.WISESTONE_PEDESTAL_ITEM.get()),  new ItemStack(WizardsReborn.ARCANE_GOLD_NUGGET.get()),
+                        new ItemStack(WizardsReborn.POLISHED_WISESTONE_ITEM.get()), new ItemStack(WizardsReborn.POLISHED_WISESTONE_ITEM.get()),  new ItemStack(WizardsReborn.POLISHED_WISESTONE_ITEM.get()),
+                        new ItemStack(WizardsReborn.ALCHEMY_GLASS.get()), ItemStack.EMPTY, new ItemStack(WizardsReborn.ARCANUM.get())
+                )
+        );
+
+        LIGHT_TRANSFER_LENS = new Chapter(
+                "wizards_reborn.arcanemicon.chapter.light_transfer_lens",
+                new TitledBlockPage("wizards_reborn.arcanemicon.page.light_transfer_lens",
+                        new BlockEntry(new ItemStack(WizardsReborn.ARCANE_PEDESTAL_ITEM.get()), new ItemStack(WizardsReborn.LIGHT_TRANSFER_LENS_ITEM.get()))
+                ),
+                new ArcaneWorkbenchPage(new ItemStack(WizardsReborn.LIGHT_TRANSFER_LENS_ITEM.get(), 2),
+                        ItemStack.EMPTY, new ItemStack(WizardsReborn.ARCANE_GOLD_INGOT.get()),  ItemStack.EMPTY,
+                        new ItemStack(WizardsReborn.ARCANE_GOLD_NUGGET.get()), new ItemStack(WizardsReborn.ARCANE_WOOD_PLANKS_ITEM.get()),  new ItemStack(WizardsReborn.ARCANE_GOLD_NUGGET.get()),
+                        new ItemStack(WizardsReborn.POLISHED_WISESTONE_SLAB_ITEM.get()), new ItemStack(WizardsReborn.POLISHED_WISESTONE_ITEM.get()),  new ItemStack(WizardsReborn.POLISHED_WISESTONE_SLAB_ITEM.get()),
+                        new ItemStack(WizardsReborn.ALCHEMY_GLASS_ITEM.get()), ItemStack.EMPTY, new ItemStack(WizardsReborn.ARCANUM.get())
+                )
+        );
+
+        RUNIC_PEDESTAL = new Chapter(
+                "wizards_reborn.arcanemicon.chapter.runic_pedestal",
+                new TitledBlockPage("wizards_reborn.arcanemicon.page.runic_pedestal",
+                        new BlockEntry(new ItemStack(WizardsReborn.ARCANE_PEDESTAL_ITEM.get()), new ItemStack(WizardsReborn.RUNIC_PEDESTAL_ITEM.get()))
+                ),
+                new ArcaneWorkbenchPage(new ItemStack(WizardsReborn.LIGHT_EMITTER_ITEM.get()),
+                        new ItemStack(WizardsReborn.POLISHED_WISESTONE_ITEM.get()), new ItemStack(WizardsReborn.POLISHED_WISESTONE_ITEM.get()),  new ItemStack(WizardsReborn.POLISHED_WISESTONE_ITEM.get()),
+                        new ItemStack(WizardsReborn.ALCHEMY_GLASS_ITEM.get()), new ItemStack(WizardsReborn.WISESTONE_PEDESTAL_ITEM.get()),  new ItemStack(WizardsReborn.ALCHEMY_GLASS_ITEM.get()),
+                        new ItemStack(WizardsReborn.POLISHED_WISESTONE_ITEM.get()), new ItemStack(WizardsReborn.POLISHED_WISESTONE_ITEM.get()),  new ItemStack(WizardsReborn.POLISHED_WISESTONE_ITEM.get()),
+                        new ItemStack(WizardsReborn.ARCANUM.get()), new ItemStack(WizardsReborn.ARCANUM.get()), new ItemStack(WizardsReborn.ARCANUM.get()), new ItemStack(WizardsReborn.ARCANUM.get())
+                ),
+                new TitledBlockPage("wizards_reborn.arcanemicon.page.wisestone_plate",
+                        new BlockEntry(new ItemStack(WizardsReborn.RUNIC_PEDESTAL_ITEM.get()), new ItemStack(WizardsReborn.WISESTONE_PLATE.get())),
+                        new BlockEntry(new ItemStack(WizardsReborn.RUNIC_PEDESTAL_ITEM.get()), new ItemStack(WizardsReborn.RUNIC_WISESTONE_PLATE.get()))
+                ),
+                new ArcaneIteratorPage(new ItemStack(WizardsReborn.WISESTONE_PLATE.get()), 0, 0, new ItemStack(WizardsReborn.ARCANUM.get()),
+                        new ItemStack(WizardsReborn.POLISHED_WISESTONE_ITEM.get()), new ItemStack(WizardsReborn.POLISHED_WISESTONE_ITEM.get()), new ItemStack(WizardsReborn.POLISHED_WISESTONE_ITEM.get()), new ItemStack(WizardsReborn.POLISHED_WISESTONE_ITEM.get()), new ItemStack(WizardsReborn.POLISHED_WISESTONE_ITEM.get()), new ItemStack(WizardsReborn.POLISHED_WISESTONE_ITEM.get()),
+                        new ItemStack(WizardsReborn.ARCANUM.get()), new ItemStack(WizardsReborn.ARCANUM.get()), new ItemStack(WizardsReborn.ARCANUM.get())
+                )
+        );
+
+        Map<CrystalRitual, ItemStack> crystalRituals = new HashMap<CrystalRitual, ItemStack>();
+
+        for (CrystalRitual ritual : CrystalRituals.getCrystalRituals()) {
+            ItemStack stack = new ItemStack(WizardsReborn.RUNIC_WISESTONE_PLATE.get());
+            CrystalRitualUtils.setCrystalRitual(stack, ritual);
+            crystalRituals.put(ritual, stack);
+        }
+
+        CRYSTALS_RITUALS = new Chapter(
+                "wizards_reborn.arcanemicon.chapter.crystal_rituals",
+                new TitledBlockPage("wizards_reborn.arcanemicon.page.crystal_rituals.0",
+                        new BlockEntry(new ItemStack(WizardsReborn.RUNIC_PEDESTAL_ITEM.get()), new ItemStack(WizardsReborn.EARTH_CRYSTAL.get()))
+                ),
+                new TextPage("wizards_reborn.arcanemicon.page.crystal_rituals.1")
+        );
+
+        ARTIFICIAL_FERTILITY = new Chapter(
+                "wizards_reborn.arcanemicon.chapter.artificial_fertility",
+                new TitledBlockPage("wizards_reborn.arcanemicon.page.artificial_fertility",
+                        new BlockEntry(new ItemStack(WizardsReborn.RUNIC_PEDESTAL_ITEM.get()), crystalRituals.get(WizardsReborn.ARTIFICIAL_FERTILITY_CRYSTAL_RITUAL))
+                ),
+                new ArcaneIteratorPage(crystalRituals.get(WizardsReborn.ARTIFICIAL_FERTILITY_CRYSTAL_RITUAL), 0, 0, new ItemStack(WizardsReborn.WISESTONE_PLATE.get()),
+                        new ItemStack(Items.WATER_BUCKET), new ItemStack(Items.HAY_BLOCK), new ItemStack(Items.HAY_BLOCK),
+                        new ItemStack(Items.BONE_MEAL), new ItemStack(Items.BONE_MEAL), new ItemStack(Items.BONE_MEAL)
+                )
+        );
+
+        RITUAL_BREEDING = new Chapter(
+                "wizards_reborn.arcanemicon.chapter.ritual_breeding",
+                new TitledBlockPage("wizards_reborn.arcanemicon.page.ritual_breeding",
+                        new BlockEntry(new ItemStack(WizardsReborn.RUNIC_PEDESTAL_ITEM.get()), crystalRituals.get(WizardsReborn.RITUAL_BREEDING_CRYSTAL_RITUAL))
+                ),
+                new ArcaneIteratorPage(crystalRituals.get(WizardsReborn.RITUAL_BREEDING_CRYSTAL_RITUAL), 0, 0, new ItemStack(WizardsReborn.WISESTONE_PLATE.get()),
+                        new ItemStack(Items.DIRT), new ItemStack(Items.DIRT), new ItemStack(Items.DIRT), new ItemStack(Items.DIRT), new ItemStack(Items.DIRT),
+                        new ItemStack(Items.BREAD), new ItemStack(Items.BREAD), new ItemStack(Items.BREAD), new ItemStack(Items.BREAD),
+                        new ItemStack(Items.GOLDEN_CARROT), new ItemStack(Items.GOLDEN_CARROT), new ItemStack(Items.GOLDEN_CARROT), new ItemStack(Items.GOLDEN_CARROT)
+                ),
+                new CrystalRitualPage(WizardsReborn.RITUAL_BREEDING_CRYSTAL_RITUAL,
+                    new ItemStack(Items.GOLDEN_CARROT), new ItemStack(Items.APPLE), new ItemStack(Items.APPLE), new ItemStack(Items.APPLE)
+                ),
+                new CrystalRitualPage(WizardsReborn.RITUAL_BREEDING_CRYSTAL_RITUAL,
+                        new ItemStack(Items.GOLDEN_CARROT), new ItemStack(Items.CARROT), new ItemStack(Items.CARROT), new ItemStack(Items.CARROT)
+                ),
+                new CrystalRitualPage(WizardsReborn.RITUAL_BREEDING_CRYSTAL_RITUAL,
+                        new ItemStack(Items.GOLDEN_CARROT), new ItemStack(Items.POTATO), new ItemStack(Items.POTATO), new ItemStack(Items.POTATO)
+                ),
+                new CrystalRitualPage(WizardsReborn.RITUAL_BREEDING_CRYSTAL_RITUAL,
+                        new ItemStack(Items.GOLDEN_CARROT), new ItemStack(Items.BEETROOT), new ItemStack(Items.BEETROOT), new ItemStack(Items.BEETROOT)
+                ),
+                new CrystalRitualPage(WizardsReborn.RITUAL_BREEDING_CRYSTAL_RITUAL,
+                        new ItemStack(Items.GOLDEN_APPLE), new ItemStack(Items.APPLE)
+                ),
+                new CrystalRitualPage(WizardsReborn.RITUAL_BREEDING_CRYSTAL_RITUAL,
+                        new ItemStack(Items.GOLDEN_APPLE), new ItemStack(Items.CARROT)
+                ),
+                new CrystalRitualPage(WizardsReborn.RITUAL_BREEDING_CRYSTAL_RITUAL,
+                        new ItemStack(Items.GOLDEN_APPLE), new ItemStack(Items.POTATO)
+                ),
+                new CrystalRitualPage(WizardsReborn.RITUAL_BREEDING_CRYSTAL_RITUAL,
+                        new ItemStack(Items.GOLDEN_APPLE), new ItemStack(Items.BEETROOT)
+                )
+        );
+
+        CRYSTAL_GROWTH_ACCELERATION = new Chapter(
+                "wizards_reborn.arcanemicon.chapter.crystal_growth_acceleration",
+                new TitledBlockPage("wizards_reborn.arcanemicon.page.crystal_growth_acceleration",
+                        new BlockEntry(new ItemStack(WizardsReborn.RUNIC_PEDESTAL_ITEM.get()), crystalRituals.get(WizardsReborn.CRYSTAL_GROWTH_ACCELERATION_CRYSTAL_RITUAL))
+                ),
+                new ArcaneIteratorPage(crystalRituals.get(WizardsReborn.CRYSTAL_GROWTH_ACCELERATION_CRYSTAL_RITUAL), 0, 0, new ItemStack(WizardsReborn.WISESTONE_PLATE.get()),
+                        new ItemStack(WizardsReborn.ARCANUM_BLOCK_ITEM.get()), new ItemStack(Items.REDSTONE_BLOCK), new ItemStack(Items.REDSTONE_BLOCK),
+                        new ItemStack(WizardsReborn.ALCHEMY_GLASS_ITEM.get()), new ItemStack(WizardsReborn.ALCHEMY_GLASS_ITEM.get()), new ItemStack(WizardsReborn.ALCHEMY_GLASS_ITEM.get()), new ItemStack(WizardsReborn.ALCHEMY_GLASS_ITEM.get())
+                )
+        );
+
+        CRYSTAL_INFUSION = new Chapter(
+                "wizards_reborn.arcanemicon.chapter.crystal_infusion",
+                new TitledBlockPage("wizards_reborn.arcanemicon.page.crystal_infusion",
+                        new BlockEntry(new ItemStack(WizardsReborn.RUNIC_PEDESTAL_ITEM.get()), crystalRituals.get(WizardsReborn.CRYSTAL_INFUSION_CRYSTAL_RITUAL))
+                ),
+                new ArcaneIteratorPage(crystalRituals.get(WizardsReborn.CRYSTAL_GROWTH_ACCELERATION_CRYSTAL_RITUAL), 0, 0, new ItemStack(WizardsReborn.WISESTONE_PLATE.get()),
+                        new ItemStack(WizardsReborn.EARTH_CRYSTAL.get()),
+                        new ItemStack(WizardsReborn.ARCANE_GOLD_INGOT.get()), new ItemStack(WizardsReborn.ARCANE_GOLD_INGOT.get()), new ItemStack(WizardsReborn.ARCANE_GOLD_INGOT.get()), new ItemStack(WizardsReborn.ARCANE_GOLD_INGOT.get()),
+                        new ItemStack(WizardsReborn.ARCANUM.get()), new ItemStack(WizardsReborn.ARCANUM.get()), new ItemStack(WizardsReborn.ARCANUM.get()), new ItemStack(WizardsReborn.ARCANUM.get())
+                ),
+                new ArcaneIteratorPage(crystalRituals.get(WizardsReborn.CRYSTAL_GROWTH_ACCELERATION_CRYSTAL_RITUAL), 0, 0, new ItemStack(WizardsReborn.WISESTONE_PLATE.get()),
+                        new ItemStack(WizardsReborn.WATER_CRYSTAL.get()),
+                        new ItemStack(WizardsReborn.ARCANE_GOLD_INGOT.get()), new ItemStack(WizardsReborn.ARCANE_GOLD_INGOT.get()), new ItemStack(WizardsReborn.ARCANE_GOLD_INGOT.get()), new ItemStack(WizardsReborn.ARCANE_GOLD_INGOT.get()),
+                        new ItemStack(WizardsReborn.ARCANUM.get()), new ItemStack(WizardsReborn.ARCANUM.get()), new ItemStack(WizardsReborn.ARCANUM.get()), new ItemStack(WizardsReborn.ARCANUM.get())
+                ),
+                new ArcaneIteratorPage(crystalRituals.get(WizardsReborn.CRYSTAL_GROWTH_ACCELERATION_CRYSTAL_RITUAL), 0, 0, new ItemStack(WizardsReborn.WISESTONE_PLATE.get()),
+                        new ItemStack(WizardsReborn.AIR_CRYSTAL.get()),
+                        new ItemStack(WizardsReborn.ARCANE_GOLD_INGOT.get()), new ItemStack(WizardsReborn.ARCANE_GOLD_INGOT.get()), new ItemStack(WizardsReborn.ARCANE_GOLD_INGOT.get()), new ItemStack(WizardsReborn.ARCANE_GOLD_INGOT.get()),
+                        new ItemStack(WizardsReborn.ARCANUM.get()), new ItemStack(WizardsReborn.ARCANUM.get()), new ItemStack(WizardsReborn.ARCANUM.get()), new ItemStack(WizardsReborn.ARCANUM.get())
+                ),
+                new ArcaneIteratorPage(crystalRituals.get(WizardsReborn.CRYSTAL_GROWTH_ACCELERATION_CRYSTAL_RITUAL), 0, 0, new ItemStack(WizardsReborn.WISESTONE_PLATE.get()),
+                        new ItemStack(WizardsReborn.FIRE_CRYSTAL.get()),
+                        new ItemStack(WizardsReborn.ARCANE_GOLD_INGOT.get()), new ItemStack(WizardsReborn.ARCANE_GOLD_INGOT.get()), new ItemStack(WizardsReborn.ARCANE_GOLD_INGOT.get()), new ItemStack(WizardsReborn.ARCANE_GOLD_INGOT.get()),
+                        new ItemStack(WizardsReborn.ARCANUM.get()), new ItemStack(WizardsReborn.ARCANUM.get()), new ItemStack(WizardsReborn.ARCANUM.get()), new ItemStack(WizardsReborn.ARCANUM.get())
+                ),
+                new ArcaneIteratorPage(crystalRituals.get(WizardsReborn.CRYSTAL_GROWTH_ACCELERATION_CRYSTAL_RITUAL), 0, 0, new ItemStack(WizardsReborn.WISESTONE_PLATE.get()),
+                        new ItemStack(WizardsReborn.VOID_CRYSTAL.get()),
+                        new ItemStack(WizardsReborn.ARCANE_GOLD_INGOT.get()), new ItemStack(WizardsReborn.ARCANE_GOLD_INGOT.get()), new ItemStack(WizardsReborn.ARCANE_GOLD_INGOT.get()), new ItemStack(WizardsReborn.ARCANE_GOLD_INGOT.get()),
+                        new ItemStack(WizardsReborn.ARCANUM.get()), new ItemStack(WizardsReborn.ARCANUM.get()), new ItemStack(WizardsReborn.ARCANUM.get()), new ItemStack(WizardsReborn.ARCANUM.get())
+                )
+        );
+
+        ARCANUM_SEED = new Chapter(
+                "wizards_reborn.arcanemicon.chapter.arcanum_seed",
+                new TitledBlockPage("wizards_reborn.arcanemicon.page.arcanum_seed",
+                        new BlockEntry(new ItemStack(WizardsReborn.RUNIC_PEDESTAL_ITEM.get()), new ItemStack(WizardsReborn.ARCANUM_SEED.get()))
+                ),
+                new CrystalInfusionPage(new ItemStack(WizardsReborn.ARCANUM_SEED.get()), new ItemStack(WizardsReborn.EARTH_CRYSTAL.get()),
+                        new ItemStack(WizardsReborn.ARCANUM.get()), new ItemStack(WizardsReborn.ARCANUM.get()), new ItemStack(WizardsReborn.ARCANUM.get()),
+                        new ItemStack(WizardsReborn.ARCANUM_DUST.get()), new ItemStack(WizardsReborn.ARCANUM_DUST.get()), new ItemStack(WizardsReborn.ARCANUM_DUST.get()),
+                        new ItemStack(Items.WHEAT_SEEDS), new ItemStack(Items.WHEAT_SEEDS), new ItemStack(Items.WHEAT_SEEDS)
+                ),
+                new ArcanumDustTransmutationPage(new ItemStack(WizardsReborn.ARCANUM.get()), new ItemStack(WizardsReborn.ARCANUM_SEED.get()))
+        );
+
         CRYSTAL_RITUALS_INDEX = new Chapter(
-                "wizards_reborn.arcanemicon.chapter.crystal_rituals_index"
+                "wizards_reborn.arcanemicon.chapter.crystal_rituals_index",
+                new TitledIndexPage("wizards_reborn.arcanemicon.page.crystal_rituals_index",
+                        new IndexEntry(LIGHT_RAYS, new ItemStack(WizardsReborn.WISSEN_WAND.get()), RegisterKnowledges.ALCHEMY_GLASS),
+                        new IndexEntry(LIGHT_EMITTER, new ItemStack(WizardsReborn.LIGHT_EMITTER_ITEM.get()), RegisterKnowledges.ALCHEMY_GLASS),
+                        new IndexEntry(LIGHT_TRANSFER_LENS, new ItemStack(WizardsReborn.LIGHT_TRANSFER_LENS_ITEM.get()), RegisterKnowledges.ALCHEMY_GLASS),
+                        new IndexEntry(RUNIC_PEDESTAL, new ItemStack(WizardsReborn.RUNIC_PEDESTAL_ITEM.get()), RegisterKnowledges.ARCACITE),
+                        new IndexEntry(CRYSTALS_RITUALS, new ItemStack(WizardsReborn.EARTH_CRYSTAL.get()), RegisterKnowledges.RUNIC_PEDESTAL),
+                        new IndexEntry(ARTIFICIAL_FERTILITY, crystalRituals.get(WizardsReborn.ARTIFICIAL_FERTILITY_CRYSTAL_RITUAL), RegisterKnowledges.RUNIC_PEDESTAL)
+                ),
+                new IndexPage(
+                        new IndexEntry(RITUAL_BREEDING, crystalRituals.get(WizardsReborn.RITUAL_BREEDING_CRYSTAL_RITUAL), RegisterKnowledges.RUNIC_PEDESTAL),
+                        new IndexEntry(CRYSTAL_GROWTH_ACCELERATION, crystalRituals.get(WizardsReborn.CRYSTAL_GROWTH_ACCELERATION_CRYSTAL_RITUAL), RegisterKnowledges.RUNIC_PEDESTAL),
+                        new IndexEntry(CRYSTAL_INFUSION, crystalRituals.get(WizardsReborn.CRYSTAL_INFUSION_CRYSTAL_RITUAL), RegisterKnowledges.RUNIC_PEDESTAL),
+                        new IndexEntry(ARCANUM_SEED, new ItemStack(WizardsReborn.ARCANUM_SEED.get()), RegisterKnowledges.RUNIC_PEDESTAL)
+                )
         );
 
         MOR = new Chapter(
