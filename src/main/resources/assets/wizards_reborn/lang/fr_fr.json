@@ -180,6 +180,7 @@
   "block.wizards_reborn.redstone_sensor": "Capteur de redstone",
   "block.wizards_reborn.wissen_sensor": "Capteur de wissen",
   "block.wizards_reborn.cooldown_sensor": "Capteur de refroidissement",
+  "block.wizards_reborn.light_sensor": "Capteur de lumière",
   "block.wizards_reborn.heat_sensor": "Capteur de chaleur",
   "block.wizards_reborn.fluid_sensor": "Capteur de fluide",
   "block.wizards_reborn.steam_sensor": "Capteur de vapeur",
@@ -778,8 +779,8 @@
   "wizards_reborn.arcanemicon.chapter.faceted_crystals": "Cristaux facettés",
     "wizards_reborn.arcanemicon.page.faceted_crystals.title": "Cristaux facettés",
     "wizards_reborn.arcanemicon.page.faceted_crystals": "Le polissage améliore les propriétés de réfraction des cristaux. Ils peuvent alors libérer une puissance plus grande.",
-  "wizards_reborn.arcanemicon.chapter.music_disc_reborn": "\"Reborn\"",
-    "wizards_reborn.arcanemicon.page.music_disc_reborn.title": "\"Reborn\"",
+  "wizards_reborn.arcanemicon.chapter.music_disc_reborn": "\"Renaissance\"",
+    "wizards_reborn.arcanemicon.page.music_disc_reborn.title": "\"Renaissance\"",
     "wizards_reborn.arcanemicon.page.music_disc_reborn": "\"La paix éternelle vous remplit de volonté. Vous laissez tout derrière vous et faites un pas en avant...\" \n \n Onjerlay - Reborn",
 
   "wizards_reborn.arcanemicon.category.spells": "Sorts",
