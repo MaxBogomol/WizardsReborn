@@ -6,7 +6,6 @@ import mod.maxbogomol.wizards_reborn.api.light.LightRayHitResult;
 import mod.maxbogomol.wizards_reborn.api.light.LightUtils;
 import mod.maxbogomol.wizards_reborn.api.wissen.IWissenTileEntity;
 import mod.maxbogomol.wizards_reborn.api.wissen.IWissenWandControlledTileEntity;
-import mod.maxbogomol.wizards_reborn.api.wissen.WissenUtils;
 import mod.maxbogomol.wizards_reborn.client.particle.Particles;
 import mod.maxbogomol.wizards_reborn.common.block.ArcaneLumosBlock;
 import mod.maxbogomol.wizards_reborn.common.item.equipment.WissenWandItem;
@@ -25,8 +24,6 @@ import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.Vec3;
-import net.minecraftforge.api.distmarker.Dist;
-import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.common.extensions.IForgeBlockEntity;
 import org.jetbrains.annotations.NotNull;
 
@@ -128,7 +125,6 @@ public class LightEmitterTileEntity extends ExposedTileSimpleInventory implement
                     lightEffect(new Vec3(0.8125f, 0.5f, 0.8125f), new Vec3(0.5f, 0.8125f, 0.5), 0.4f);
                 }
             }
-            wissenWandEffect();
         }
     }
 
@@ -275,19 +271,6 @@ public class LightEmitterTileEntity extends ExposedTileSimpleInventory implement
                     .setLifetime(30)
                     .setSpin((0.5f * (float) ((random.nextDouble() - 0.5D) * 2)))
                     .spawn(level, worldPosition.getX() + from.x(), worldPosition.getY() + from.y(), worldPosition.getZ() + from.z());
-        }
-    }
-
-    @OnlyIn(Dist.CLIENT)
-    public void wissenWandEffect() {
-        if (WissenUtils.isCanRenderWissenWand()) {
-            if (isToBlock) {
-                BlockPos pos = new BlockPos(blockToX, blockToY, blockToZ);
-                if (level.getBlockEntity(pos) instanceof ILightTileEntity lightTile) {
-                    WissenUtils.connectEffect(level, LightUtils.getLightLensPos(getBlockPos(), getLightLensPos()), LightUtils.getLightLensPos(pos, lightTile.getLightLensPos()), new Color(118, 184, 214));
-                    WissenUtils.connectBlockEffect(level, pos, new Color(118, 184, 214));
-                }
-            }
         }
     }
 

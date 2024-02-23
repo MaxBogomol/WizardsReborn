@@ -27,8 +27,8 @@ import net.minecraft.world.item.context.UseOnContext;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
-import net.minecraftforge.api.distmarker.Dist;
-import net.minecraftforge.api.distmarker.OnlyIn;
+import net.minecraft.world.phys.AABB;
+import net.minecraftforge.common.extensions.IForgeBlockEntity;
 import org.jetbrains.annotations.NotNull;
 
 import javax.annotation.Nullable;
@@ -172,7 +172,6 @@ public class WissenTranslatorTileEntity extends ExposedTileSimpleInventory imple
                             .spawn(level, worldPosition.getX() + 0.5F, worldPosition.getY() + 0.5F, worldPosition.getZ() + 0.5F);
                 }
             }
-            wissenWandEffect();
         }
     }
 
@@ -273,6 +272,11 @@ public class WissenTranslatorTileEntity extends ExposedTileSimpleInventory imple
         wissenRays = tag.getCompound("wissenRays");
     }
 
+    @Override
+    public AABB getRenderBoundingBox() {
+        return IForgeBlockEntity.INFINITE_EXTENT_AABB;
+    }
+
     public float getStage() {
         return ((float) getWissen() / (float) getMaxWissen());
     }
@@ -341,21 +345,6 @@ public class WissenTranslatorTileEntity extends ExposedTileSimpleInventory imple
         this.wissen = this.wissen - wissen;
         if (this.wissen < 0) {
             this.wissen = 0;
-        }
-    }
-
-    @OnlyIn(Dist.CLIENT)
-    public void wissenWandEffect() {
-        if (WissenUtils.isCanRenderWissenWand()) {
-            if (isToBlock) {
-                WissenUtils.connectEffect(level, getBlockPos(), new BlockPos(blockToX, blockToY, blockToZ), new Color(118, 184, 214));
-                WissenUtils.connectBlockEffect(level, new BlockPos(blockToX, blockToY, blockToZ), new Color(118, 184, 214));
-            }
-
-            if (isFromBlock) {
-                WissenUtils.connectEffect(level, new BlockPos(blockFromX, blockFromY, blockFromZ), getBlockPos(), new Color(165, 223, 108));
-                WissenUtils.connectBlockEffect(level, new BlockPos(blockFromX, blockFromY, blockFromZ), new Color(165, 223, 108));
-            }
         }
     }
 

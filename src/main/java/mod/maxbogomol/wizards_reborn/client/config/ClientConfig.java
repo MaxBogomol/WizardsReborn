@@ -26,7 +26,7 @@ public class ClientConfig {
 
         builder.comment("Wissen mechanism's").push("wissenMechanisms");
         WISSEN_TRANSLATOR_PARTICLE_PER_BLOCK = builder.comment("123")
-                .defineInRange("particlePerBlock", 4, 1, 10);
+                .defineInRange("particlePerBlock", 2, 1, 10);
         builder.pop();
     }
 

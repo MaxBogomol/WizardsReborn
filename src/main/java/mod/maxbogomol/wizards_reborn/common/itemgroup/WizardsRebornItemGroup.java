@@ -127,6 +127,7 @@ public class WizardsRebornItemGroup {
             event.accept(WizardsReborn.ELDER_MOR_BLOCK_ITEM);
 
             event.accept(WizardsReborn.PETALS);
+            event.accept(WizardsReborn.FLOWER_FERTILIZER);
             event.accept(WizardsReborn.GROUND_BROWN_MUSHROOM);
             event.accept(WizardsReborn.GROUND_RED_MUSHROOM);
             event.accept(WizardsReborn.GROUND_CRIMSON_FUNGUS);

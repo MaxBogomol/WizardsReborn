@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "minecraft:bone_meal"
+    },
+    {
+      "item": "wizards_reborn:petals"
+    },
+    {
+      "item": "wizards_reborn:petals"
+    },
+    {
+      "item": "wizards_reborn:petals"
+    }
+  ],
+  "result": {
+    "item": "wizards_reborn:flower_fertilizer",
+    "count": 2
+  }
+}

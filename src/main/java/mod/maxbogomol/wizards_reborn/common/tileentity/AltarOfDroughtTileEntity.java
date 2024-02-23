@@ -22,10 +22,10 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.Vec3;
+import net.minecraftforge.common.extensions.IForgeBlockEntity;
 import org.jetbrains.annotations.NotNull;
 
 import javax.annotation.Nullable;
-import java.awt.*;
 import java.util.ArrayList;
 import java.util.Random;
 
@@ -125,11 +125,6 @@ public class AltarOfDroughtTileEntity extends ExposedTileSimpleInventory impleme
                             .spawn(level, worldPosition.getX() + 0.5F, worldPosition.getY() + 0.625F, worldPosition.getZ() + 0.5F);
                 }
             }
-
-            if (WissenUtils.isCanRenderWissenWand()) {
-                Color borderColor = new Color(191, 201, 104);
-                WissenUtils.connectBoxEffect(level, new Vec3(getBlockPos().getX() - 15, getBlockPos().getY() - 15, getBlockPos().getZ() - 15), new Vec3(getBlockPos().getX() + 16, getBlockPos().getY() + 16, getBlockPos().getZ() + 16), borderColor, 0.2f);
-            }
         }
     }
 
@@ -202,8 +197,7 @@ public class AltarOfDroughtTileEntity extends ExposedTileSimpleInventory impleme
 
     @Override
     public AABB getRenderBoundingBox() {
-        BlockPos pos = getBlockPos();
-        return new AABB(pos.getX() - 0.5f, pos.getY() - 0.5f, pos.getZ() - 0.5f, pos.getX() + 1.5f, pos.getY() + 1.5f, pos.getZ() + 1.5f);
+        return IForgeBlockEntity.INFINITE_EXTENT_AABB;
     }
 
     public float getBlockRotate() {

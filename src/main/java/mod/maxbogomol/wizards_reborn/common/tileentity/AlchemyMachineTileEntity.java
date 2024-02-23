@@ -28,6 +28,7 @@ import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
+import net.minecraft.world.phys.AABB;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.capabilities.ForgeCapabilities;
 import net.minecraftforge.common.util.LazyOptional;
@@ -42,7 +43,6 @@ import org.jetbrains.annotations.NotNull;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
-import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -257,11 +257,6 @@ public class AlchemyMachineTileEntity extends PipeBaseTileEntity implements Tick
                                 .spawn(level, getBlockPos().getX() + 0.5F, getBlockPos().getY() + 2F, getBlockPos().getZ() + 0.5F);
                     }
                 }
-            } else {
-                if (WissenUtils.isCanRenderWissenWand()) {
-                    WissenUtils.connectBlockEffect(level, getBlockPos().above(), new Color(214, 118, 132));
-                    WissenUtils.connectBlockEffect(level, getBlockPos(), new Color(214, 118, 132));
-                }
             }
         }
     }
@@ -391,6 +386,12 @@ public class AlchemyMachineTileEntity extends PipeBaseTileEntity implements Tick
         steamInCraft = tag.getInt("steamInCraft");
         steamIsCraft = tag.getInt("steamIsCraft");
         startCraft = tag.getBoolean("startCraft");
+    }
+
+    @Override
+    public AABB getRenderBoundingBox() {
+        BlockPos pos = getBlockPos();
+        return new AABB(pos.getX() - 0.5f, pos.getY() - 0.5f, pos.getZ() - 0.5f, pos.getX() + 1.5f, pos.getY() + 2.5f, pos.getZ() + 1.5f);
     }
 
     public void initConnections() {

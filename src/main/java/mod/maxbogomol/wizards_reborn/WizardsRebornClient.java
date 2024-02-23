@@ -176,6 +176,8 @@ public class WizardsRebornClient {
             BlockEntityRenderers.register(WizardsReborn.JEWELER_TABLE_TILE_ENTITY.get(), (trd) -> new JewelerTableTileEntityRenderer());
             BlockEntityRenderers.register(WizardsReborn.ORBITAL_FLUID_RETAINER_TILE_ENTITY.get(), (trd) -> new OrbitalFluidRetainerTileEntityRenderer());
             BlockEntityRenderers.register(WizardsReborn.ALTAR_OF_DROUGHT_TILE_ENTITY.get(), (trd) -> new AltarOfDroughtTileEntityRenderer());
+            BlockEntityRenderers.register(WizardsReborn.ALCHEMY_MACHINE_TILE_ENTITY.get(), (trd) -> new AlchemyMachineTileEntityRenderer());
+            BlockEntityRenderers.register(WizardsReborn.ALCHEMY_BOILER_TILE_ENTITY.get(), (trd) -> new AlchemyBoilerTileEntityRenderer());
             BlockEntityRenderers.register(WizardsReborn.ARCANE_CENSER_TILE_ENTITY.get(), (trd) -> new ArcaneCenserTileEntityRenderer());
             BlockEntityRenderers.register(WizardsReborn.ARCANE_ITERATOR_TILE_ENTITY.get(), (trd) -> new ArcaneIteratorTileEntityRenderer());
             BlockEntityRenderers.register(WizardsReborn.LIGHT_EMITTER_TILE_ENTITY.get(), (trd) -> new LightEmitterBlockTileEntityRenderer());
@@ -187,7 +189,10 @@ public class WizardsRebornClient {
             BlockEntityRenderers.register(WizardsReborn.WISSEN_ACTIVATOR_TILE_ENTITY.get(), (trd) -> new SensorTileEntityRenderer());
             BlockEntityRenderers.register(WizardsReborn.ITEM_SORTER_TILE_ENTITY.get(), (trd) -> new SensorTileEntityRenderer());
 
+            BlockEntityRenderers.register(WizardsReborn.WISSEN_CASING_TILE_ENTITY.get(), (trd) -> new WissenCasingTileEntityRenderer());
             BlockEntityRenderers.register(WizardsReborn.LIGHT_CASING_TILE_ENTITY.get(), (trd) -> new LightCasingTileEntityRenderer());
+            BlockEntityRenderers.register(WizardsReborn.FLUID_CASING_TILE_ENTITY.get(), (trd) -> new FluidCasingTileEntityRenderer());
+            BlockEntityRenderers.register(WizardsReborn.STEAM_CASING_TILE_ENTITY.get(), (trd) -> new SteamCasingTileEntityRenderer());
 
             BlockEntityRenderers.register(WizardsReborn.CREATIVE_WISSEN_STORAGE_TILE_ENTITY.get(), (trd) -> new CreativeWissenStorageTileEntityRenderer());
             BlockEntityRenderers.register(WizardsReborn.CREATIVE_LIGHT_STORAGE_TILE_ENTITY.get(), (trd) -> new LightCasingTileEntityRenderer());

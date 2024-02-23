@@ -3,6 +3,7 @@ package mod.maxbogomol.wizards_reborn.client.render.tileentity;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.math.Axis;
 import mod.maxbogomol.wizards_reborn.WizardsRebornClient;
+import mod.maxbogomol.wizards_reborn.api.wissen.WissenUtils;
 import mod.maxbogomol.wizards_reborn.client.event.ClientTickHandler;
 import mod.maxbogomol.wizards_reborn.common.tileentity.ArcaneIteratorTileEntity;
 import mod.maxbogomol.wizards_reborn.utils.RenderUtils;
@@ -10,6 +11,7 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.blockentity.BlockEntityRenderer;
 import net.minecraft.world.item.ItemDisplayContext;
+import net.minecraft.world.phys.Vec3;
 
 import java.util.Random;
 
@@ -88,6 +90,20 @@ public class ArcaneIteratorTileEntityRenderer implements BlockEntityRenderer<Arc
         renderPiece(-x * offset, -y * offset, z * offset, 180F, 90F, size, iterator, partialTicks, ms, buffers, light, overlay);
         renderPiece(x * offset, -y * offset, z * offset, -90F, 90F, size, iterator, partialTicks, ms, buffers, light, overlay);
         ms.popPose();
+
+        if (WissenUtils.isCanRenderWissenWand()) {
+            ms.pushPose();
+            ms.translate(-5, -3, -5);
+            RenderUtils.renderBoxLines(new Vec3(11, 7, 11), RenderUtils.colorArea, partialTicks, ms);
+            ms.popPose();
+
+            if (!iterator.isWorks()) {
+                ms.pushPose();
+                ms.translate(0, -2, 0);
+                RenderUtils.renderBoxLines(new Vec3(1, 3, 1), RenderUtils.colorMissing, partialTicks, ms);
+                ms.popPose();
+            }
+        }
     }
 
     public void renderPiece(float x, float y, float z, float yRot, float zRot, float size ,ArcaneIteratorTileEntity iterator, float partialTicks, PoseStack ms, MultiBufferSource buffers, int light, int overlay) {
@@ -98,5 +114,15 @@ public class ArcaneIteratorTileEntityRenderer implements BlockEntityRenderer<Arc
         ms.scale(size, size, size);
         RenderUtils.renderCustomModel(WizardsRebornClient.ARCANE_ITERATOR_PIECE_MODEl, ItemDisplayContext.FIXED, false, ms, buffers, light, overlay);
         ms.popPose();
+    }
+
+    @Override
+    public boolean shouldRenderOffScreen(ArcaneIteratorTileEntity pBlockEntity) {
+        return true;
+    }
+
+    @Override
+    public boolean shouldRender(ArcaneIteratorTileEntity pBlockEntity, Vec3 pCameraPos) {
+        return true;
     }
 }

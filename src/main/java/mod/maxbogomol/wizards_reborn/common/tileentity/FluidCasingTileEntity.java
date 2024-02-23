@@ -3,7 +3,6 @@ package mod.maxbogomol.wizards_reborn.common.tileentity;
 import mod.maxbogomol.wizards_reborn.WizardsReborn;
 import mod.maxbogomol.wizards_reborn.api.alchemy.IFluidPipePriority;
 import mod.maxbogomol.wizards_reborn.api.alchemy.PipePriorityMap;
-import mod.maxbogomol.wizards_reborn.api.wissen.WissenUtils;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.sounds.SoundEvents;
@@ -12,11 +11,11 @@ import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
+import net.minecraft.world.phys.AABB;
 import net.minecraftforge.common.capabilities.ForgeCapabilities;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.capability.IFluidHandler;
 
-import java.awt.*;
 import java.util.ArrayList;
 
 public class FluidCasingTileEntity extends FluidPipeTileEntity {
@@ -124,9 +123,12 @@ public class FluidCasingTileEntity extends FluidPipeTileEntity {
             if (clogged && isAnySideUnclogged()) {
                 cloggedEffect();
             }
-            if (!level.getBlockState(getBlockPos()).isAir() && level.getBlockState(getBlockPos()).getValue(BlockStateProperties.POWERED) && WissenUtils.isCanRenderWissenWand()) {
-                WissenUtils.connectBlockEffect(level, getBlockPos(), new Color(191, 201, 104));
-            }
         }
+    }
+
+    @Override
+    public AABB getRenderBoundingBox() {
+        BlockPos pos = getBlockPos();
+        return new AABB(pos.getX() - 0.5f, pos.getY() - 0.5f, pos.getZ() - 0.5f, pos.getX() + 1.5f, pos.getY() + 1.5f, pos.getZ() + 1.5f);
     }
 }

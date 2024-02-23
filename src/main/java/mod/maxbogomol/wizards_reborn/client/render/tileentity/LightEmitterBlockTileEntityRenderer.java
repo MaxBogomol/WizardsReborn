@@ -5,6 +5,7 @@ import com.mojang.math.Axis;
 import mod.maxbogomol.wizards_reborn.WizardsRebornClient;
 import mod.maxbogomol.wizards_reborn.api.light.ILightTileEntity;
 import mod.maxbogomol.wizards_reborn.api.light.LightUtils;
+import mod.maxbogomol.wizards_reborn.api.wissen.WissenUtils;
 import mod.maxbogomol.wizards_reborn.client.event.ClientTickHandler;
 import mod.maxbogomol.wizards_reborn.client.render.WorldRenderHandler;
 import mod.maxbogomol.wizards_reborn.common.tileentity.LightEmitterTileEntity;
@@ -53,6 +54,19 @@ public class LightEmitterBlockTileEntityRenderer implements BlockEntityRenderer<
                 ms.translate(0.5F, 0.8125F, 0.5F);
                 Color color = LightUtils.getRayColorFromLumos(emitter.getRayColor(), emitter.getLumos(), emitter.getBlockPos(), partialTicks);
                 LightUtils.renderLightRay(emitter.getLevel(), emitter.getBlockPos(), from, to, 25f, color, partialTicks, ms);
+                ms.popPose();
+            }
+        }
+
+        if (WissenUtils.isCanRenderWissenWand()) {
+            if (emitter.isToBlock) {
+                ms.pushPose();
+                Vec3 lensPos = emitter.getLightLensPos();
+                ms.translate(lensPos.x(), lensPos.y(), lensPos.z());
+                BlockPos pos = new BlockPos(emitter.blockToX, emitter.blockToY, emitter.blockToZ);
+                if (emitter.getLevel().getBlockEntity(pos) instanceof ILightTileEntity lightTile) {
+                    RenderUtils.renderConnectLine(LightUtils.getLightLensPos(emitter.getBlockPos(), emitter.getLightLensPos()), LightUtils.getLightLensPos(pos, lightTile.getLightLensPos()), RenderUtils.colorConnectFrom, partialTicks, ms);
+                }
                 ms.popPose();
             }
         }

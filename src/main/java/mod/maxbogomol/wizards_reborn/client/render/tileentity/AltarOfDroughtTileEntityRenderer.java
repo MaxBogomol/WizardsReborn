@@ -3,9 +3,9 @@ package mod.maxbogomol.wizards_reborn.client.render.tileentity;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.math.Axis;
 import mod.maxbogomol.wizards_reborn.WizardsRebornClient;
+import mod.maxbogomol.wizards_reborn.api.wissen.WissenUtils;
 import mod.maxbogomol.wizards_reborn.client.event.ClientTickHandler;
 import mod.maxbogomol.wizards_reborn.common.tileentity.AltarOfDroughtTileEntity;
-import mod.maxbogomol.wizards_reborn.common.tileentity.JewelerTableTileEntity;
 import mod.maxbogomol.wizards_reborn.utils.RenderUtils;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.MultiBufferSource;
@@ -44,5 +44,22 @@ public class AltarOfDroughtTileEntityRenderer implements BlockEntityRenderer<Alt
         ms.mulPose(Axis.ZP.rotationDegrees((float) ((Math.sin(Math.toRadians(random.nextFloat() * 360) + ticks))) * 5F));
         RenderUtils.renderCustomModel(WizardsRebornClient.ALTAR_OF_DROUGHT_FRAME_MODEl, ItemDisplayContext.FIXED, false, ms, buffers, light, overlay);
         ms.popPose();
+
+        if (WissenUtils.isCanRenderWissenWand()) {
+            ms.pushPose();
+            ms.translate(-15, -15, -15);
+            RenderUtils.renderBoxLines(new Vec3(31, 31, 31), RenderUtils.colorArea, partialTicks, ms);
+            ms.popPose();
+        }
+    }
+
+    @Override
+    public boolean shouldRenderOffScreen(AltarOfDroughtTileEntity pBlockEntity) {
+        return true;
+    }
+
+    @Override
+    public boolean shouldRender(AltarOfDroughtTileEntity pBlockEntity, Vec3 pCameraPos) {
+        return true;
     }
 }

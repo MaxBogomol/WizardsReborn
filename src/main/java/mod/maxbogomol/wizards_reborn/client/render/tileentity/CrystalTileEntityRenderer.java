@@ -3,10 +3,12 @@ package mod.maxbogomol.wizards_reborn.client.render.tileentity;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.math.Axis;
 import mod.maxbogomol.wizards_reborn.api.crystalritual.CrystalRitual;
+import mod.maxbogomol.wizards_reborn.api.crystalritual.CrystalRitualArea;
 import mod.maxbogomol.wizards_reborn.api.crystalritual.CrystalRitualUtils;
 import mod.maxbogomol.wizards_reborn.api.light.ILightTileEntity;
 import mod.maxbogomol.wizards_reborn.api.light.LightRayHitResult;
 import mod.maxbogomol.wizards_reborn.api.light.LightUtils;
+import mod.maxbogomol.wizards_reborn.api.wissen.WissenUtils;
 import mod.maxbogomol.wizards_reborn.client.event.ClientTickHandler;
 import mod.maxbogomol.wizards_reborn.client.render.WorldRenderHandler;
 import mod.maxbogomol.wizards_reborn.common.item.CrystalItem;
@@ -85,6 +87,39 @@ public class CrystalTileEntityRenderer implements BlockEntityRenderer<CrystalTil
 
         if (!CrystalRitualUtils.isEmpty(ritual) && ritual.canStartWithCrystal(crystal)) {
             ritual.render(crystal, partialTicks, ms, buffers, light, overlay);
+        }
+
+        if (WissenUtils.isCanRenderWissenWand()) {
+            if (!CrystalRitualUtils.isEmpty(ritual)) {
+                CrystalRitualArea area = ritual.getArea(crystal);
+                ms.pushPose();
+                ms.translate(-area.getSizeFrom().x(), -area.getSizeFrom().y(), -area.getSizeFrom().z());
+                RenderUtils.renderBoxLines(new Vec3( area.getSizeFrom().x() + area.getSizeTo().x() + 1, area.getSizeFrom().y() + area.getSizeTo().y() + 1, area.getSizeFrom().z() + area.getSizeTo().z() + 1), RenderUtils.colorArea, partialTicks, ms);
+                ms.popPose();
+            }
+
+            if (crystal.startRitual) {
+                ms.pushPose();
+                RenderUtils.renderBoxLines(new Vec3(1, 1, 1), crystal.getCrystalColor(), partialTicks, ms);
+                ms.popPose();
+            }
+
+            if (crystal.startRitual) {
+                ms.pushPose();
+                RenderUtils.renderBoxLines(new Vec3(1, 1, 1), crystal.getCrystalColor(), partialTicks, ms);
+                ms.popPose();
+            }
+
+            if (crystal.isToBlock) {
+                ms.pushPose();
+                Vec3 lensPos = crystal.getLightLensPos();
+                ms.translate(lensPos.x(), lensPos.y(), lensPos.z());
+                BlockPos pos = new BlockPos(crystal.blockToX, crystal.blockToY, crystal.blockToZ);
+                if (crystal.getLevel().getBlockEntity(pos) instanceof ILightTileEntity lightTile) {
+                    RenderUtils.renderConnectLine(LightUtils.getLightLensPos(crystal.getBlockPos(), crystal.getLightLensPos()), LightUtils.getLightLensPos(pos, lightTile.getLightLensPos()), RenderUtils.colorConnectFrom, partialTicks, ms);
+                }
+                ms.popPose();
+            }
         }
     }
 

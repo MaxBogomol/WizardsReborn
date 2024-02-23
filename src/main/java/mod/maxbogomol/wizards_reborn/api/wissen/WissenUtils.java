@@ -140,18 +140,18 @@ public class WissenUtils {
     }
 
     public static void connectBoxEffect(Level level, Vec3 posFrom, Vec3 posTo, Color color, float particlePerBlock) {
-        WissenUtils.connectEffect(level, new Vec3(posFrom.x(), posFrom.y(), posFrom.z()), new Vec3(posTo.x() , posFrom.y(), posFrom.z()), color,  particlePerBlock);
-        WissenUtils.connectEffect(level, new Vec3(posTo.x(), posFrom.y(), posFrom.z()), new Vec3(posTo.x(), posFrom.y(), posTo.z()), color,  particlePerBlock);
-        WissenUtils.connectEffect(level, new Vec3(posTo.x(), posFrom.y(), posTo.z()), new Vec3(posFrom.x(), posFrom.y(), posTo.z()), color,  particlePerBlock);
-        WissenUtils.connectEffect(level, new Vec3(posFrom.x(), posFrom.y(), posTo.z()), new Vec3(posFrom.x(), posFrom.y(), posFrom.z()), color,  particlePerBlock);
+        WissenUtils.connectEffect(level, new Vec3(posFrom.x(), posFrom.y(), posFrom.z()), new Vec3(posTo.x() , posFrom.y(), posFrom.z()), color, particlePerBlock);
+        WissenUtils.connectEffect(level, new Vec3(posTo.x(), posFrom.y(), posFrom.z()), new Vec3(posTo.x(), posFrom.y(), posTo.z()), color, particlePerBlock);
+        WissenUtils.connectEffect(level, new Vec3(posTo.x(), posFrom.y(), posTo.z()), new Vec3(posFrom.x(), posFrom.y(), posTo.z()), color, particlePerBlock);
+        WissenUtils.connectEffect(level, new Vec3(posFrom.x(), posFrom.y(), posTo.z()), new Vec3(posFrom.x(), posFrom.y(), posFrom.z()), color, particlePerBlock);
 
-        WissenUtils.connectEffect(level, new Vec3(posFrom.x(), posFrom.y(), posFrom.z()), new Vec3(posFrom.x(), posTo.y(), posFrom.z()), color,  particlePerBlock);
-        WissenUtils.connectEffect(level, new Vec3(posTo.x(), posFrom.y(), posFrom.z()), new Vec3(posTo.x(), posTo.y(), posFrom.z()), color,  particlePerBlock);
-        WissenUtils.connectEffect(level, new Vec3(posTo.x(), posFrom.y(), posTo.z()), new Vec3(posTo.x(), posTo.y(), posTo.z()), color,  particlePerBlock);
-        WissenUtils.connectEffect(level, new Vec3(posFrom.x(), posFrom.y(), posTo.z()), new Vec3(posFrom.x(), posTo.y(), posTo.z()), color,  particlePerBlock);
+        WissenUtils.connectEffect(level, new Vec3(posFrom.x(), posFrom.y(), posFrom.z()), new Vec3(posFrom.x(), posTo.y(), posFrom.z()), color, particlePerBlock);
+        WissenUtils.connectEffect(level, new Vec3(posTo.x(), posFrom.y(), posFrom.z()), new Vec3(posTo.x(), posTo.y(), posFrom.z()), color, particlePerBlock);
+        WissenUtils.connectEffect(level, new Vec3(posTo.x(), posFrom.y(), posTo.z()), new Vec3(posTo.x(), posTo.y(), posTo.z()), color, particlePerBlock);
+        WissenUtils.connectEffect(level, new Vec3(posFrom.x(), posFrom.y(), posTo.z()), new Vec3(posFrom.x(), posTo.y(), posTo.z()), color, particlePerBlock);
 
         WissenUtils.connectEffect(level, new Vec3(posFrom.x(), posTo.y(), posFrom.z()), new Vec3(posTo.x(), posTo.y(), posFrom.z()), color, particlePerBlock);
-        WissenUtils.connectEffect(level, new Vec3(posTo.x(), posTo.y(), posFrom.z()), new Vec3(posTo.x() , posTo.y(), posTo.z()), color,  particlePerBlock);
+        WissenUtils.connectEffect(level, new Vec3(posTo.x(), posTo.y(), posFrom.z()), new Vec3(posTo.x() , posTo.y(), posTo.z()), color, particlePerBlock);
         WissenUtils.connectEffect(level, new Vec3(posTo.x(), posTo.y(), posTo.z()), new Vec3(posFrom.x(), posTo.y(), posTo.z()), color, particlePerBlock);
         WissenUtils.connectEffect(level, new Vec3(posFrom.x(), posTo.y(), posTo.z()), new Vec3(posFrom.x(), posTo.y(), posFrom.z()), color, particlePerBlock);
     }

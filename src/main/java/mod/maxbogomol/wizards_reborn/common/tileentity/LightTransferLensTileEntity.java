@@ -5,7 +5,6 @@ import mod.maxbogomol.wizards_reborn.api.light.ILightTileEntity;
 import mod.maxbogomol.wizards_reborn.api.light.LightRayHitResult;
 import mod.maxbogomol.wizards_reborn.api.light.LightUtils;
 import mod.maxbogomol.wizards_reborn.api.wissen.IWissenWandControlledTileEntity;
-import mod.maxbogomol.wizards_reborn.api.wissen.WissenUtils;
 import mod.maxbogomol.wizards_reborn.common.block.ArcaneLumosBlock;
 import mod.maxbogomol.wizards_reborn.common.item.equipment.WissenWandItem;
 import mod.maxbogomol.wizards_reborn.utils.PacketUtils;
@@ -23,8 +22,6 @@ import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.Vec3;
-import net.minecraftforge.api.distmarker.Dist;
-import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.common.extensions.IForgeBlockEntity;
 import org.jetbrains.annotations.NotNull;
 
@@ -84,10 +81,6 @@ public class LightTransferLensTileEntity extends ExposedTileSimpleInventory impl
             if (update) {
                 PacketUtils.SUpdateTileEntityPacket(this);
             }
-        }
-
-        if (level.isClientSide()) {
-            wissenWandEffect();
         }
     }
 
@@ -196,20 +189,6 @@ public class LightTransferLensTileEntity extends ExposedTileSimpleInventory impl
 
     public boolean canWork() {
         return !level.hasNeighborSignal(getBlockPos());
-    }
-
-
-    @OnlyIn(Dist.CLIENT)
-    public void wissenWandEffect() {
-        if (WissenUtils.isCanRenderWissenWand()) {
-            if (isToBlock) {
-                BlockPos pos = new BlockPos(blockToX, blockToY, blockToZ);
-                if (level.getBlockEntity(pos) instanceof ILightTileEntity lightTile) {
-                    WissenUtils.connectEffect(level, LightUtils.getLightLensPos(getBlockPos(), getLightLensPos()), LightUtils.getLightLensPos(pos, lightTile.getLightLensPos()), new Color(118, 184, 214));
-                    WissenUtils.connectBlockEffect(level, pos, new Color(118, 184, 214));
-                }
-            }
-        }
     }
 
     @Override

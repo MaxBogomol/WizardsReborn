@@ -3,6 +3,7 @@ package mod.maxbogomol.wizards_reborn.client.render.tileentity;
 import com.mojang.blaze3d.vertex.PoseStack;
 import mod.maxbogomol.wizards_reborn.WizardsRebornClient;
 import mod.maxbogomol.wizards_reborn.api.light.LightUtils;
+import mod.maxbogomol.wizards_reborn.api.wissen.WissenUtils;
 import mod.maxbogomol.wizards_reborn.client.event.ClientTickHandler;
 import mod.maxbogomol.wizards_reborn.client.render.WorldRenderHandler;
 import mod.maxbogomol.wizards_reborn.common.tileentity.LightCasingTileEntity;
@@ -47,7 +48,16 @@ public class LightCasingTileEntityRenderer implements BlockEntityRenderer<LightC
                     Vec3 to = LightUtils.getLightLensPos(casing.getBlockPos().relative(direction), casing.getLightLensPos());
 
                     Color color = LightUtils.getRayColorFromLumos(casing.getColor(), casing.getLumos(), casing.getBlockPos(), partialTicks);
+                    ms.pushPose();
                     LightUtils.renderLightRay(casing.getLevel(), casing.getBlockPos(), from, to, 25f, color, partialTicks, ms);
+                    ms.popPose();
+                }
+
+                if (WissenUtils.isCanRenderWissenWand()) {
+                    ms.pushPose();
+                    ms.translate(-0.2f, -0.2f, -0.2f);
+                    RenderUtils.renderBoxLines(new Vec3(0.4f, 0.4f, 0.4f), RenderUtils.colorConnectFrom, partialTicks, ms);
+                    ms.popPose();
                 }
             }
             ms.popPose();

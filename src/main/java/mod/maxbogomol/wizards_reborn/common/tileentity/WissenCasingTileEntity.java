@@ -2,7 +2,6 @@ package mod.maxbogomol.wizards_reborn.common.tileentity;
 
 import mod.maxbogomol.wizards_reborn.WizardsReborn;
 import mod.maxbogomol.wizards_reborn.api.wissen.WissenUtils;
-import mod.maxbogomol.wizards_reborn.client.particle.Particles;
 import mod.maxbogomol.wizards_reborn.utils.PacketUtils;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -13,8 +12,6 @@ import net.minecraft.world.item.context.UseOnContext;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
-
-import java.awt.*;
 
 public class WissenCasingTileEntity extends WissenTranslatorTileEntity {
     public boolean[] connection = new boolean[Direction.values().length];
@@ -76,29 +73,6 @@ public class WissenCasingTileEntity extends WissenTranslatorTileEntity {
 
             if (update) {
                 PacketUtils.SUpdateTileEntityPacket(this);
-            }
-        }
-
-        if (level.isClientSide()) {
-            if (WissenUtils.isCanRenderWissenWand()) {
-                for (Direction direction : Direction.values()) {
-                    if (isConnection(direction)) {
-                        BlockPos pos = new BlockPos(0, 0, 0).relative(direction);
-                        Color color = new Color(118, 184, 214);
-
-                        float colorR = (color.getRed() / 255f);
-                        float colorG = (color.getGreen() / 255f);
-                        float colorB = (color.getBlue() / 255f);
-
-                        Particles.create(WizardsReborn.SPARKLE_PARTICLE)
-                                .addVelocity(((random.nextDouble() - 0.5D) / 100), ((random.nextDouble() - 0.5D) / 100), ((random.nextDouble() - 0.5D) / 100))
-                                .setAlpha(0.45f, 0f).setScale(0.3f, 0f)
-                                .setColor(colorR, colorG, colorB)
-                                .setLifetime(1)
-                                .setSpin((0.1f * (float) ((random.nextDouble() - 0.5D) * 2)))
-                                .spawn(level, getBlockPos().getX() + (pos.getX() / 2f) + 0.5f, getBlockPos().getY() + (pos.getY() / 2f) + 0.5f, getBlockPos().getZ() + (pos.getZ() / 2f) + 0.5f);
-                    }
-                }
             }
         }
     }

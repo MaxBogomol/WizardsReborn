@@ -30,12 +30,10 @@ import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.AABB;
-import net.minecraft.world.phys.Vec3;
+import net.minecraftforge.common.extensions.IForgeBlockEntity;
 import org.jetbrains.annotations.NotNull;
 
-import java.awt.*;
 import java.util.*;
-import java.util.List;
 
 public class ArcaneIteratorTileEntity extends BlockEntity implements TickableBlockEntity, IWissenTileEntity, ICooldownTileEntity, IWissenWandFunctionalTileEntity, IItemResultTileEntity {
     public int wissenInCraft= 0;
@@ -307,22 +305,12 @@ public class ArcaneIteratorTileEntity extends BlockEntity implements TickableBlo
                         scale--;
                     }
                 }
-
-                if (WissenUtils.isCanRenderWissenWand()) {
-                    Color borderColor = new Color(191, 201, 104);
-                    WissenUtils.connectBoxEffect(level, new Vec3(getBlockPos().getX() - 5, getBlockPos().getY() - 3, getBlockPos().getZ() - 5), new Vec3(getBlockPos().getX() + 6, getBlockPos().getY() + 4, getBlockPos().getZ() + 6), borderColor);
-                }
             } else {
                 if (offset > 0) {
                     offset--;
                 }
                 if (scale > 0) {
                     scale--;
-                }
-
-                if (WissenUtils.isCanRenderWissenWand()) {
-                    WissenUtils.connectBlockEffect(level, getBlockPos().below(2), new Color(214, 118, 132));
-                    WissenUtils.connectBlockEffect(level, getBlockPos(), new Color(214, 118, 132));
                 }
             }
         }
@@ -492,8 +480,7 @@ public class ArcaneIteratorTileEntity extends BlockEntity implements TickableBlo
 
     @Override
     public AABB getRenderBoundingBox() {
-        BlockPos pos = getBlockPos();
-        return new AABB(pos.getX() - 0.5f, pos.getY() - 0.5f, pos.getZ() - 0.5f, pos.getX() + 1.5f, pos.getY() + 1.5f, pos.getZ() + 1.5f);
+        return IForgeBlockEntity.INFINITE_EXTENT_AABB;
     }
 
     public float getStage() {
