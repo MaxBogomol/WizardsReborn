@@ -47,6 +47,7 @@ public class WizardsRebornItemGroup {
 
             if (CreateIntegration.isCreateLoaded()) {
                 event.accept(CreateIntegration.CRUSHED_RAW_ARCANE_GOLD);
+                event.accept(CreateIntegration.ARCANE_GOLD_SHEET);
             }
 
             event.accept(WizardsReborn.ARCANE_GOLD_SWORD);

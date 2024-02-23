@@ -20,6 +20,7 @@
     "wizards_reborn:wissen_keychain"
   ],
   "optional": [
-    "wizards_reborn:crushed_raw_arcane_gold"
+    "wizards_reborn:crushed_raw_arcane_gold",
+    "wizards_reborn:arcane_gold_sheet"
   ]
 }

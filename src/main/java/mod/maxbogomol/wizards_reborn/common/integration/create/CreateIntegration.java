@@ -12,6 +12,7 @@ public class CreateIntegration {
     public static final DeferredRegister<Item> ITEMS = DeferredRegister.create(ForgeRegistries.ITEMS, WizardsReborn.MOD_ID);
 
     public static final RegistryObject<Item> CRUSHED_RAW_ARCANE_GOLD = ITEMS.register("crushed_raw_arcane_gold", () -> new Item(new Item.Properties()));
+    public static final RegistryObject<Item> ARCANE_GOLD_SHEET = ITEMS.register("arcane_gold_sheet", () -> new Item(new Item.Properties()));
 
     public static void init(IEventBus eventBus) {
         ITEMS.register(eventBus);
