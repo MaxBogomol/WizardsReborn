@@ -374,10 +374,11 @@ public class RenderUtils {
         Minecraft.getInstance().getItemRenderer().render(new ItemStack(Items.DIRT), diplayContext, leftHand, poseStack, buffer, combinedLight, combinedOverlay, bakedmodel);
     }
 
-    public static Color colorConnectFrom = new Color(118, 184, 214);
-    public static Color colorConnectTo = new Color(165, 223, 108);
+    public static Color colorConnectFrom = new Color(165, 223, 108);
+    public static Color colorConnectTo = new Color(118, 184, 214);
     public static Color colorArea = new Color(191, 201, 104);
     public static Color colorMissing = new Color(214, 118, 132);
+    public static Color colorSelected = new Color(255, 255, 255);
 
     public static void renderConnectLine(BlockPos posFrom, BlockPos posTo, Color color, float partialTicks, PoseStack ms) {
         renderConnectLine(posFrom.getCenter(), posTo.getCenter(), color, partialTicks, ms);
@@ -396,11 +397,12 @@ public class RenderUtils {
         float r = color.getRed() / 255f;
         float g = color.getGreen() / 255f;
         float b = color.getBlue() / 255f;
+        float a = color.getAlpha() / 255f;
 
         ms.pushPose();
         ms.mulPose(Axis.YP.rotationDegrees((float) Math.toDegrees(-yaw)));
         ms.mulPose(Axis.ZP.rotationDegrees((float) Math.toDegrees(-pitch) - 90f));
-        RenderUtils.ray(ms, bufferDelayed, 0.01f, (float) from.distanceTo(to) + 0.01f, 1f, r, g, b, 0.5f);
+        RenderUtils.ray(ms, bufferDelayed, 0.01f, (float) from.distanceTo(to) + 0.01f, 1f, r, g, b, 0.5f * a);
         ms.popPose();
     }
 

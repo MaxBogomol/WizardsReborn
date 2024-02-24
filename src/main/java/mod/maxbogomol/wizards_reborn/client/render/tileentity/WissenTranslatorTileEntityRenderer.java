@@ -19,13 +19,13 @@ public class WissenTranslatorTileEntityRenderer implements BlockEntityRenderer<W
             if (translator.isToBlock) {
                 ms.pushPose();
                 ms.translate(0.5F,0.5F,0.5F);
-                RenderUtils.renderConnectLine(translator.getBlockPos(), new BlockPos(translator.blockToX, translator.blockToY, translator.blockToZ), RenderUtils.colorConnectFrom, partialTicks, ms);
+                RenderUtils.renderConnectLine(translator.getBlockPos(), new BlockPos(translator.blockToX, translator.blockToY, translator.blockToZ), RenderUtils.colorConnectTo, partialTicks, ms);
                 ms.popPose();
             }
             if (translator.isFromBlock) {
                 ms.pushPose();
                 ms.translate(0.5F,0.5F,0.5F);
-                RenderUtils.renderConnectLine(translator.getBlockPos(), new BlockPos(translator.blockFromX, translator.blockFromY, translator.blockFromZ), RenderUtils.colorConnectTo, partialTicks, ms);
+                RenderUtils.renderConnectLine(translator.getBlockPos(), new BlockPos(translator.blockFromX, translator.blockFromY, translator.blockFromZ), RenderUtils.colorConnectFrom, partialTicks, ms);
                 ms.popPose();
             }
         }

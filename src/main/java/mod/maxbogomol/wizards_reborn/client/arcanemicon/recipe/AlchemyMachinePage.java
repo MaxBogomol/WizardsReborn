@@ -3,7 +3,7 @@ package mod.maxbogomol.wizards_reborn.client.arcanemicon.recipe;
 import mod.maxbogomol.wizards_reborn.WizardsReborn;
 import mod.maxbogomol.wizards_reborn.client.arcanemicon.ArcanemiconGui;
 import mod.maxbogomol.wizards_reborn.client.arcanemicon.Page;
-import mod.maxbogomol.wizards_reborn.common.item.FluidStorageBaseItem;
+import mod.maxbogomol.wizards_reborn.utils.NumericalUtils;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.resources.ResourceLocation;
@@ -58,7 +58,7 @@ public class AlchemyMachinePage extends Page {
             gui.blit(BACKGROUND, x + 38 + 4, y + 76 + 32 - width, 128, 32 - width, 8, width, 256, 256);
 
             if (mouseX >= x + 38 + 4 && mouseY >= y + 76 && mouseX <= x + 38 + 4 + 8 && mouseY <= y + 76 + 32) {
-                gui.renderTooltip(Minecraft.getInstance().font, FluidStorageBaseItem.getFluidName(fluidInputs1, 5000), mouseX, mouseY);
+                gui.renderTooltip(Minecraft.getInstance().font, NumericalUtils.getFluidName(fluidInputs1, 5000), mouseX, mouseY);
             }
         } else {
             gui.blit(BACKGROUND, x + 38, y + 76 + 8, 136, 0, 16, 16, 256, 256);
@@ -71,7 +71,7 @@ public class AlchemyMachinePage extends Page {
             gui.blit(BACKGROUND, x + 56 + 4, y + 76 + 32 - width, 128, 32 - width, 8, width, 256, 256);
 
             if (mouseX >= x + 56 + 4 && mouseY >= y + 76 && mouseX <= x + 56 + 4 + 8 && mouseY <= y + 76 + 32) {
-                gui.renderTooltip(Minecraft.getInstance().font, FluidStorageBaseItem.getFluidName(fluidInputs2, 5000), mouseX, mouseY);
+                gui.renderTooltip(Minecraft.getInstance().font, NumericalUtils.getFluidName(fluidInputs2, 5000), mouseX, mouseY);
             }
         } else {
             gui.blit(BACKGROUND, x + 56, y + 76 + 8, 136, 0, 16, 16, 256, 256);
@@ -84,7 +84,7 @@ public class AlchemyMachinePage extends Page {
             gui.blit(BACKGROUND, x + 74 + 4, y + 76 + 32 - width, 128, 32 - width, 8, width, 256, 256);
 
             if (mouseX >= x + 74 + 4 && mouseY >= y + 76 && mouseX <= x + 74 + 4 + 8 && mouseY <= y + 76 + 32) {
-                gui.renderTooltip(Minecraft.getInstance().font, FluidStorageBaseItem.getFluidName(fluidInputs3, 5000), mouseX, mouseY);
+                gui.renderTooltip(Minecraft.getInstance().font, NumericalUtils.getFluidName(fluidInputs3, 5000), mouseX, mouseY);
             }
         } else {
             gui.blit(BACKGROUND, x + 74, y + 76 + 8, 136, 0, 16, 16, 256, 256);
@@ -98,7 +98,7 @@ public class AlchemyMachinePage extends Page {
             gui.blit(BACKGROUND, x + 60, y + 120 + 32 - width, 128, 32 - width, 8, width, 256, 256);
 
             if (mouseX >= x + 60 && mouseY >= y + 120 && mouseX <= x + 60 + 8 && mouseY <= y + 120 + 32) {
-                gui.renderTooltip(Minecraft.getInstance().font, FluidStorageBaseItem.getFluidName(fluidResult, 5000), mouseX, mouseY);
+                gui.renderTooltip(Minecraft.getInstance().font, NumericalUtils.getFluidName(fluidResult, 5000), mouseX, mouseY);
             }
         } else {
             gui.blit(BACKGROUND, x + 56, y + 120 + 8, 136, 0, 16, 16, 256, 256);

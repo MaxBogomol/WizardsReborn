@@ -67,7 +67,7 @@ public class CrystalTileEntityRenderer implements BlockEntityRenderer<CrystalTil
                     double yaw = Math.atan2(dZ, dX);
                     double pitch = Math.atan2(Math.sqrt(dZ * dZ + dX * dX), dY) + Math.PI;
 
-                    float rayDistance = 0.3f;
+                    float rayDistance = 0.33f;
 
                     double X = Math.sin(pitch) * Math.cos(yaw) * rayDistance;
                     double Y = Math.cos(pitch) * rayDistance;
@@ -116,7 +116,7 @@ public class CrystalTileEntityRenderer implements BlockEntityRenderer<CrystalTil
                 ms.translate(lensPos.x(), lensPos.y(), lensPos.z());
                 BlockPos pos = new BlockPos(crystal.blockToX, crystal.blockToY, crystal.blockToZ);
                 if (crystal.getLevel().getBlockEntity(pos) instanceof ILightTileEntity lightTile) {
-                    RenderUtils.renderConnectLine(LightUtils.getLightLensPos(crystal.getBlockPos(), crystal.getLightLensPos()), LightUtils.getLightLensPos(pos, lightTile.getLightLensPos()), RenderUtils.colorConnectFrom, partialTicks, ms);
+                    RenderUtils.renderConnectLine(LightUtils.getLightLensPos(crystal.getBlockPos(), crystal.getLightLensPos()), LightUtils.getLightLensPos(pos, lightTile.getLightLensPos()), RenderUtils.colorConnectTo, partialTicks, ms);
                 }
                 ms.popPose();
             }

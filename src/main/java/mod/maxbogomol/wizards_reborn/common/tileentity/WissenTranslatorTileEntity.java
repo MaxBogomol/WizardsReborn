@@ -437,11 +437,11 @@ public class WissenTranslatorTileEntity extends ExposedTileSimpleInventory imple
                                 (Math.abs(blockZ) % 1F > 0.15F && Math.abs(blockZ) % 1F <= 0.85F)) {
                             IWissenTileEntity wissenTileEntity = (IWissenTileEntity) tileentity;
 
-                            PacketUtils.SUpdateTileEntityPacket(tileentity);
-
                             int addRemain = WissenUtils.getAddWissenRemain(wissenTileEntity.getWissen(), tag.getInt("wissen"), wissenTileEntity.getMaxWissen());
                             wissenTileEntity.addWissen(tag.getInt("wissen") - addRemain);
                             level.playSound(WizardsReborn.proxy.getPlayer(), X, Y, Z, WizardsReborn.WISSEN_TRANSFER_SOUND.get(), SoundSource.BLOCKS, 0.1f, (float) (1f + ((random.nextFloat() - 0.5D) / 2)));
+
+                            PacketUtils.SUpdateTileEntityPacket(tileentity);
 
                             PacketHandler.sendToTracking(level, getBlockPos(), new WissenTranslatorBurstEffectPacket(X, Y, Z, (float) color.getRed() / 255, (float) color.getGreen() / 255, (float) color.getBlue() / 255));
                             PacketHandler.sendToTracking(level, getBlockPos(), new WissenTranslatorSendEffectPacket(new BlockPos(Mth.floor(X), Mth.floor(Y), Mth.floor(Z))));
@@ -490,7 +490,7 @@ public class WissenTranslatorTileEntity extends ExposedTileSimpleInventory imple
 
     @Override
     public float getCooldown() {
-        if (getSendWissenCooldown() > 0) {
+        if (cooldown > 0) {
             return (float) getSendWissenCooldown() / cooldown;
         }
         return 0;

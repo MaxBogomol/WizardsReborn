@@ -65,7 +65,7 @@ public class LightEmitterBlockTileEntityRenderer implements BlockEntityRenderer<
                 ms.translate(lensPos.x(), lensPos.y(), lensPos.z());
                 BlockPos pos = new BlockPos(emitter.blockToX, emitter.blockToY, emitter.blockToZ);
                 if (emitter.getLevel().getBlockEntity(pos) instanceof ILightTileEntity lightTile) {
-                    RenderUtils.renderConnectLine(LightUtils.getLightLensPos(emitter.getBlockPos(), emitter.getLightLensPos()), LightUtils.getLightLensPos(pos, lightTile.getLightLensPos()), RenderUtils.colorConnectFrom, partialTicks, ms);
+                    RenderUtils.renderConnectLine(LightUtils.getLightLensPos(emitter.getBlockPos(), emitter.getLightLensPos()), LightUtils.getLightLensPos(pos, lightTile.getLightLensPos()), RenderUtils.colorConnectTo, partialTicks, ms);
                 }
                 ms.popPose();
             }

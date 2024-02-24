@@ -1,18 +1,23 @@
 package mod.maxbogomol.wizards_reborn.client.event;
 
+import com.mojang.blaze3d.vertex.PoseStack;
 import mod.maxbogomol.wizards_reborn.api.light.ILightTileEntity;
+import mod.maxbogomol.wizards_reborn.api.light.LightUtils;
 import mod.maxbogomol.wizards_reborn.api.wissen.IWissenTileEntity;
-import mod.maxbogomol.wizards_reborn.api.wissen.WissenUtils;
 import mod.maxbogomol.wizards_reborn.common.item.equipment.WissenWandItem;
+import mod.maxbogomol.wizards_reborn.utils.RenderUtils;
 import net.minecraft.client.Minecraft;
 import net.minecraft.core.BlockPos;
-import net.minecraft.nbt.CompoundTag;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntity;
+import net.minecraft.world.phys.BlockHitResult;
+import net.minecraft.world.phys.HitResult;
+import net.minecraft.world.phys.Vec3;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
+import net.minecraftforge.client.event.RenderLevelStageEvent;
 import net.minecraftforge.event.TickEvent;
 
 import java.awt.*;
@@ -24,36 +29,87 @@ public class ClientWorldEvent {
 
     @OnlyIn(Dist.CLIENT)
     public static void onTick(TickEvent.LevelTickEvent event) {
+
+    }
+
+    @OnlyIn(Dist.CLIENT)
+    public static void onRender(RenderLevelStageEvent event) {
         Minecraft mc = Minecraft.getInstance();
+        float partialTicks = event.getPartialTick();
+        PoseStack ms = event.getPoseStack();
 
-        Player player = mc.player;
-        if (player != null) {
-            ItemStack main = player.getMainHandItem();
-            ItemStack offhand = player.getOffhandItem();
-            boolean renderWand = false;
-            ItemStack stack = main;
+        Vec3 camera = mc.gameRenderer.getMainCamera().getPosition();
 
-            if (!main.isEmpty() && main.getItem() instanceof WissenWandItem) {
-                renderWand = true;
-            } else {
-                if (!offhand.isEmpty() && offhand.getItem() instanceof WissenWandItem) {
+        if (event.getStage() == RenderLevelStageEvent.Stage.AFTER_SOLID_BLOCKS) {
+            Player player = mc.player;
+            if (player != null) {
+                ItemStack main = player.getMainHandItem();
+                ItemStack offhand = player.getOffhandItem();
+                boolean renderWand = false;
+                ItemStack stack = main;
+
+                if (!main.isEmpty() && main.getItem() instanceof WissenWandItem) {
                     renderWand = true;
-                    stack = offhand;
+                } else {
+                    if (!offhand.isEmpty() && offhand.getItem() instanceof WissenWandItem) {
+                        renderWand = true;
+                        stack = offhand;
+                    }
                 }
-            }
 
-            CompoundTag nbt = stack.getTag();
-            if (nbt == null) {
-                nbt = new CompoundTag();
-            }
+                if (renderWand) {
+                    double ticksAlpha = (ClientTickHandler.ticksInGame + partialTicks) * 5;
+                    float alpha = (float) (0.25f + Math.abs(Math.sin(Math.toRadians(ticksAlpha)) * 0.75f));
 
-            if (nbt.contains("block") && nbt.contains("mode") && renderWand) {
-                if (nbt.getBoolean("block")) {
-                    if (nbt.getInt("mode") == 1 || nbt.getInt("mode") == 2) {
-                        BlockPos blockPos = new BlockPos(nbt.getInt("blockX"), nbt.getInt("blockY"), nbt.getInt("blockZ"));
+                    HitResult hitresult = player.pick(player.getBlockReach(), 0.0F, false);
 
-                        if (canEffect(blockPos, player.level())) {
-                            WissenUtils.connectBlockEffect(player.level(), blockPos, new Color(255, 255, 255), 1);
+                    if (WissenWandItem.getBlock(stack)) {
+                        if (WissenWandItem.getMode(stack) == 1 || WissenWandItem.getMode(stack) == 2) {
+                            BlockPos blockPos = WissenWandItem.getBlockPos(stack);
+
+                            if (canEffect(blockPos, player.level())) {
+                                ms.pushPose();
+                                double dX = blockPos.getX() - camera.x();
+                                double dY = blockPos.getY() - camera.y();
+                                double dZ = blockPos.getZ() - camera.z();
+                                ms.translate(dX, dY, dZ);
+
+                                Color color = RenderUtils.colorSelected;
+                                RenderUtils.renderBoxLines(new Vec3(1, 1, 1), new Color(color.getRed() / 255f, color.getGreen() / 255f, color.getBlue() / 255f, alpha), partialTicks, ms);
+                                ms.popPose();
+
+                                if (hitresult.getType() == HitResult.Type.BLOCK) {
+                                    BlockPos blockpos = ((BlockHitResult) hitresult).getBlockPos();
+                                    if (canEffect(blockpos, player.level())) {
+                                        color = RenderUtils.colorConnectFrom;
+                                        if (WissenWandItem.getMode(stack) == 2) {
+                                            color = RenderUtils.colorConnectTo;
+                                        }
+
+                                        dX = blockpos.getX() - camera.x();
+                                        dY = blockpos.getY() - camera.y();
+                                        dZ = blockpos.getZ() - camera.z();
+
+                                        Vec3 offset = getEffectPos(blockPos, player.level());
+                                        Vec3 newOffset = getEffectPos(blockpos, player.level());
+
+                                        ms.pushPose();
+                                        ms.translate(dX, dY, dZ);
+                                        RenderUtils.renderBoxLines(new Vec3(1, 1, 1), new Color(color.getRed() / 255f, color.getGreen() / 255f, color.getBlue() / 255f, alpha), partialTicks, ms);
+                                        ms.popPose();
+
+                                        dX = blockPos.getX() - camera.x();
+                                        dY = blockPos.getY() - camera.y();
+                                        dZ = blockPos.getZ() - camera.z();
+
+                                        ms.pushPose();
+                                        ms.translate(dX, dY, dZ);
+                                        ms.translate(offset.x(), offset.y(), offset.z());
+                                        RenderUtils.renderConnectLine(LightUtils.getLightLensPos(blockPos, offset), LightUtils.getLightLensPos(blockpos, newOffset), new Color(color.getRed() / 255f, color.getGreen() / 255f, color.getBlue() / 255f, alpha), partialTicks, ms);
+                                        ms.popPose();
+                                    }
+                                }
+                            }
                         }
                     }
                 }
@@ -67,5 +123,12 @@ public class ClientWorldEvent {
         if (blockEntity instanceof ILightTileEntity) return true;
 
         return false;
+    }
+
+    public static Vec3 getEffectPos(BlockPos pos, Level world) {
+        BlockEntity blockEntity = world.getBlockEntity(pos);
+        if (blockEntity instanceof ILightTileEntity lightTile) return lightTile.getLightLensPos();
+
+        return new Vec3(0.5f, 0.5f, 0.5f);
     }
 }

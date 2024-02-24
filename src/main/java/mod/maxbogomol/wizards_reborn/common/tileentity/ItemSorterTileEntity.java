@@ -13,6 +13,7 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.phys.AABB;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.capabilities.ForgeCapabilities;
 import net.minecraftforge.common.util.LazyOptional;
@@ -200,12 +201,21 @@ public class ItemSorterTileEntity extends SensorTileEntity implements ICooldownT
         cooldown = tag.getInt("cooldown");
     }
 
+    @Override
+    public AABB getRenderBoundingBox() {
+        BlockPos pos = getBlockPos();
+        return new AABB(pos.getX() - 1.5f, pos.getY() - 1.5f, pos.getZ() - 1.5f, pos.getX() + 2.5f, pos.getY() + 2.5f, pos.getZ() + 2.5f);
+    }
+
     public int getMaxCooldown() {
         return 20;
     }
 
     @Override
     public float getCooldown() {
-        return (float) cooldown / getMaxCooldown();
+        if (cooldown > 0) {
+            return (float) getMaxCooldown() / cooldown;
+        }
+        return 0;
     }
 }

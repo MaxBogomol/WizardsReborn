@@ -3,9 +3,9 @@ package mod.maxbogomol.wizards_reborn.client.gui.screen;
 import com.mojang.blaze3d.systems.RenderSystem;
 import mod.maxbogomol.wizards_reborn.WizardsReborn;
 import mod.maxbogomol.wizards_reborn.client.gui.container.AlchemyMachineContainer;
-import mod.maxbogomol.wizards_reborn.common.item.FluidStorageBaseItem;
 import mod.maxbogomol.wizards_reborn.common.tileentity.AlchemyMachineTileEntity;
 import mod.maxbogomol.wizards_reborn.utils.ColorUtils;
+import mod.maxbogomol.wizards_reborn.utils.NumericalUtils;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
@@ -52,10 +52,8 @@ public class AlchemyMachineScreen extends AbstractContainerScreen<AlchemyMachine
                 width /= (double) machine.getMaxCapacity() / (double) machine.getTank(ii).getFluidAmount();
                 gui.blit(GUI, i + 39, j + 65 + (ii * 15), 176, 0, width, 8, 256, 256);
 
-                if (!machine.getFluidStack(ii).isEmpty()) {
-                    if (x >= i + 39 && y >= j + 65 + (ii * 15) && x <= i + 39 + 32 && y <= j + 59 + (ii * 15) + 8) {
-                        gui.renderTooltip(Minecraft.getInstance().font, FluidStorageBaseItem.getFluidName(machine.getFluidStack(ii), 5000), x, y);
-                    }
+                if (x >= i + 39 && y >= j + 65 + (ii * 15) && x <= i + 39 + 32 && y <= j + 59 + (ii * 15) + 8) {
+                    gui.renderTooltip(Minecraft.getInstance().font, NumericalUtils.getFluidName(machine.getFluidStack(ii), 5000), x, y);
                 }
             }
 

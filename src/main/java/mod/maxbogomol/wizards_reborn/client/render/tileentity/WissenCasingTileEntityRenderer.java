@@ -26,7 +26,7 @@ public class WissenCasingTileEntityRenderer implements BlockEntityRenderer<Wisse
                 if (WissenUtils.isCanRenderWissenWand()) {
                     ms.pushPose();
                     ms.translate(-0.2f, -0.2f, -0.2f);
-                    RenderUtils.renderBoxLines(new Vec3(0.4f, 0.4f, 0.4f), RenderUtils.colorConnectFrom, partialTicks, ms);
+                    RenderUtils.renderBoxLines(new Vec3(0.4f, 0.4f, 0.4f), RenderUtils.colorConnectTo, partialTicks, ms);
                     ms.popPose();
                 }
             }

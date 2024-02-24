@@ -462,6 +462,12 @@
   "gui.wizards_reborn.menu.optifine.0": "ATTENTION! It seems you have Optifine installed",
   "gui.wizards_reborn.menu.optifine.1": "Optifine can break the render of particles in Wizard's Reborn",
 
+  "gui.wizards_reborn.wissen": "Wissen",
+  "gui.wizards_reborn.cooldown": "Cooldown",
+  "gui.wizards_reborn.light": "Light",
+  "gui.wizards_reborn.heat": "Heat",
+  "gui.wizards_reborn.steam": "Steam",
+
   "attribute.name.wizards_reborn.wissen_sale": "Wissen Sale",
   "attribute.name.wizards_reborn.magic_armor": "Magic Armor",
 

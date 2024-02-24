@@ -3,9 +3,9 @@ package mod.maxbogomol.wizards_reborn.client.gui.screen;
 import com.mojang.blaze3d.systems.RenderSystem;
 import mod.maxbogomol.wizards_reborn.WizardsReborn;
 import mod.maxbogomol.wizards_reborn.client.gui.container.AlchemyFurnaceContainer;
-import mod.maxbogomol.wizards_reborn.common.item.FluidStorageBaseItem;
 import mod.maxbogomol.wizards_reborn.common.tileentity.AlchemyFurnaceTileEntity;
 import mod.maxbogomol.wizards_reborn.utils.ColorUtils;
+import mod.maxbogomol.wizards_reborn.utils.NumericalUtils;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
@@ -70,10 +70,16 @@ public class AlchemyFurnaceScreen extends AbstractContainerScreen<AlchemyFurnace
                 gui.blit(GUI, i + 97, j + 35, 176, 32, width, 15, 256, 256);
             }
 
-            if (!furnace.getTank().getFluid().isEmpty()) {
-                if (x >= i + 19 && y >= j + 28 && x <= i + 19 + 8 && y <= j + 28 + 32) {
-                    gui.renderTooltip(Minecraft.getInstance().font, FluidStorageBaseItem.getFluidName(furnace.getTank().getFluid(), 10000), x, y);
-                }
+            if (x >= i + 19 && y >= j + 28 && x <= i + 19 + 8 && y <= j + 28 + 32) {
+                gui.renderTooltip(Minecraft.getInstance().font, NumericalUtils.getFluidName(furnace.getTank().getFluid(), 10000), x, y);
+            }
+
+            if (x >= i + 19 + 15 && y >= j + 28 && x <= i + 19 + 15 + 8 && y <= j + 28 + 32) {
+                gui.renderTooltip(Minecraft.getInstance().font, NumericalUtils.getHeatName(furnace.getHeat(), furnace.getMaxSteam()), x, y);
+            }
+
+            if (x >= i + 19 + 30 && y >= j + 28 && x <= i + 19 + 30 + 8 && y <= j + 28 + 32) {
+                gui.renderTooltip(Minecraft.getInstance().font, NumericalUtils.getSteamName(furnace.getSteam(), furnace.getMaxSteam()), x, y);
             }
 
             List<ItemStack> items = furnace.getItemsResult();

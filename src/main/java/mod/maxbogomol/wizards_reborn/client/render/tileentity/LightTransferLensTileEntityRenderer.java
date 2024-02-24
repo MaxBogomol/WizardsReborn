@@ -64,7 +64,7 @@ public class LightTransferLensTileEntityRenderer implements BlockEntityRenderer<
                 ms.translate(lensPos.x(), lensPos.y(), lensPos.z());
                 BlockPos pos = new BlockPos(lens.blockToX, lens.blockToY, lens.blockToZ);
                 if (lens.getLevel().getBlockEntity(pos) instanceof ILightTileEntity lightTile) {
-                    RenderUtils.renderConnectLine(LightUtils.getLightLensPos(lens.getBlockPos(), lens.getLightLensPos()), LightUtils.getLightLensPos(pos, lightTile.getLightLensPos()), RenderUtils.colorConnectFrom, partialTicks, ms);
+                    RenderUtils.renderConnectLine(LightUtils.getLightLensPos(lens.getBlockPos(), lens.getLightLensPos()), LightUtils.getLightLensPos(pos, lightTile.getLightLensPos()), RenderUtils.colorConnectTo, partialTicks, ms);
                 }
                 ms.popPose();
             }

@@ -66,20 +66,6 @@ public class CrystalTileEntity extends TileSimpleInventory implements TickableBl
                 removeLight(1);
                 update = true;
             }
-
-            if (isToBlock) {
-                if (CrystalRitualUtils.isEmpty(ritual)) {
-                    isToBlock = false;
-                } else if (ritual.hasLightRay(this)) {
-                    LightRayHitResult hitResult = setupLightRay();
-                    if (hitResult != null) {
-                        BlockEntity hitTile = hitResult.getTile();
-                        LightUtils.transferLight(this, hitTile);
-                        PacketUtils.SUpdateTileEntityPacket(hitTile);
-                    }
-                }
-                update = true;
-            }
         }
 
         if (!CrystalRitualUtils.isEmpty(ritual)) {
@@ -123,6 +109,22 @@ public class CrystalTileEntity extends TileSimpleInventory implements TickableBl
         } else {
             if (startRitual) {
                 reload();
+                update = true;
+            }
+        }
+
+        if (!level.isClientSide()) {
+            if (isToBlock) {
+                if (CrystalRitualUtils.isEmpty(ritual)) {
+                    isToBlock = false;
+                } else if (ritual.hasLightRay(this)) {
+                    LightRayHitResult hitResult = setupLightRay();
+                    if (hitResult != null) {
+                        BlockEntity hitTile = hitResult.getTile();
+                        LightUtils.transferLight(this, hitTile);
+                        PacketUtils.SUpdateTileEntityPacket(hitTile);
+                    }
+                }
                 update = true;
             }
         }
@@ -373,7 +375,7 @@ public class CrystalTileEntity extends TileSimpleInventory implements TickableBl
                 double yaw = Math.atan2(dZ, dX);
                 double pitch = Math.atan2(Math.sqrt(dZ * dZ + dX * dX), dY) + Math.PI;
 
-                float rayDistance = 0.3f;
+                float rayDistance = 0.33f;
 
                 double X = Math.sin(pitch) * Math.cos(yaw) * rayDistance;
                 double Y = Math.cos(pitch) * rayDistance;

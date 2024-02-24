@@ -1074,6 +1074,7 @@ public class WizardsReborn {
             forgeBus.addListener(ClientTickHandler::clientTickEnd);
             forgeBus.addListener(WorldRenderHandler::onRenderWorldLast);
             forgeBus.addListener(ClientWorldEvent::onTick);
+            forgeBus.addListener(ClientWorldEvent::onRender);
             forgeBus.addListener(HUDEventHandler::onDrawScreenPost);
             forgeBus.addListener(TooltipEventHandler::onPostTooltipEvent);
             forgeBus.addListener(KeyBindHandler::onKeyPress);
