@@ -206,6 +206,8 @@ public class WizardsRebornItemGroup {
             event.accept(WizardsReborn.WISSEN_CELL_ITEM);
             event.accept(WizardsReborn.JEWELER_TABLE_ITEM);
             event.accept(WizardsReborn.ALTAR_OF_DROUGHT_ITEM);
+            event.accept(WizardsReborn.TOTEM_BASE_ITEM);
+            event.accept(WizardsReborn.EXPERIENCE_TOTEM_ITEM);
             event.accept(WizardsReborn.ARCANE_ITERATOR_ITEM);
 
             event.accept(WizardsReborn.WISESTONE_PEDESTAL_ITEM);
@@ -229,6 +231,7 @@ public class WizardsRebornItemGroup {
             event.accept(WizardsReborn.WISSEN_SENSOR_ITEM);
             event.accept(WizardsReborn.COOLDOWN_SENSOR_ITEM);
             event.accept(WizardsReborn.LIGHT_SENSOR_ITEM);
+            event.accept(WizardsReborn.EXPERIENCE_SENSOR_ITEM);
             event.accept(WizardsReborn.HEAT_SENSOR_ITEM);
             event.accept(WizardsReborn.FLUID_SENSOR_ITEM);
             event.accept(WizardsReborn.STEAM_SENSOR_ITEM);

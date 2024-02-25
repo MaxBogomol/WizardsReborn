@@ -1,0 +1,35 @@
+{
+	"credit": "Made with Blockbench",
+	"parent": "block/cube",
+	"textures": {
+		"0": "wizards_reborn:block/totem_base_top",
+		"1": "wizards_reborn:block/totem_base_bottom",
+		"particle": "wizards_reborn:block/arcane_wood_planks"
+	},
+	"elements": [
+		{
+			"from": [4, 2, 4],
+			"to": [12, 16, 12],
+			"faces": {
+				"north": {"uv": [0, 0, 8, 14], "texture": "#0"},
+				"east": {"uv": [0, 0, 8, 14], "texture": "#0"},
+				"south": {"uv": [0, 0, 8, 14], "texture": "#0"},
+				"west": {"uv": [0, 0, 8, 14], "texture": "#0"},
+				"up": {"uv": [8, 0, 16, 8], "texture": "#0"},
+				"down": {"uv": [8, 0, 16, 8], "texture": "#0"}
+			}
+		},
+		{
+			"from": [3, 0, 3],
+			"to": [13, 2, 13],
+			"faces": {
+				"north": {"uv": [0, 14, 10, 16], "texture": "#0"},
+				"east": {"uv": [0, 14, 10, 16], "texture": "#0"},
+				"south": {"uv": [0, 14, 10, 16], "texture": "#0"},
+				"west": {"uv": [0, 14, 10, 16], "texture": "#0"},
+				"up": {"uv": [0, 0, 10, 10], "texture": "#1"},
+				"down": {"uv": [0, 0, 10, 10], "texture": "#1"}
+			}
+		}
+	]
+}

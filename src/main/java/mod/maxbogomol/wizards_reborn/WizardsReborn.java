@@ -423,6 +423,8 @@ public class WizardsReborn {
     public static final RegistryObject<Block> WISSEN_CELL = BLOCKS.register("wissen_cell", () -> new WissenCellBlock(BlockBehaviour.Properties.copy(Blocks.OAK_PLANKS)));
     public static final RegistryObject<Block> JEWELER_TABLE = BLOCKS.register("jeweler_table", () -> new JewelerTableBlock(BlockBehaviour.Properties.copy(Blocks.OAK_PLANKS)));
     public static final RegistryObject<Block> ALTAR_OF_DROUGHT = BLOCKS.register("altar_of_drought", () -> new AltarOfDroughtBlock(BlockBehaviour.Properties.copy(Blocks.OAK_PLANKS)));
+    public static final RegistryObject<Block> TOTEM_BASE = BLOCKS.register("totem_base", () -> new TotemBaseBlock(BlockBehaviour.Properties.copy(Blocks.OAK_PLANKS)));
+    public static final RegistryObject<Block> EXPERIENCE_TOTEM = BLOCKS.register("experience_totem", () -> new ExperienceTotemBlock(BlockBehaviour.Properties.copy(Blocks.OAK_PLANKS)));
     public static final RegistryObject<Block> ARCANE_ITERATOR = BLOCKS.register("arcane_iterator", () -> new ArcaneIteratorBlock(BlockBehaviour.Properties.copy(Blocks.OAK_PLANKS)));
 
     public static final RegistryObject<Block> WISESTONE_PEDESTAL = BLOCKS.register("wisestone_pedestal", () -> new ArcanePedestalBlock(BlockBehaviour.Properties.copy(Blocks.POLISHED_DEEPSLATE)));
@@ -446,6 +448,7 @@ public class WizardsReborn {
     public static final RegistryObject<Block> WISSEN_SENSOR = BLOCKS.register("wissen_sensor", () -> new WissenSensorBlock(BlockBehaviour.Properties.copy(Blocks.OAK_PLANKS)));
     public static final RegistryObject<Block> COOLDOWN_SENSOR = BLOCKS.register("cooldown_sensor", () -> new CooldownSensorBlock(BlockBehaviour.Properties.copy(Blocks.OAK_PLANKS)));
     public static final RegistryObject<Block> LIGHT_SENSOR = BLOCKS.register("light_sensor", () -> new LightSensorBlock(BlockBehaviour.Properties.copy(Blocks.OAK_PLANKS)));
+    public static final RegistryObject<Block> EXPERIENCE_SENSOR = BLOCKS.register("experience_sensor", () -> new ExperienceSensorBlock(BlockBehaviour.Properties.copy(Blocks.OAK_PLANKS)));
     public static final RegistryObject<Block> HEAT_SENSOR = BLOCKS.register("heat_sensor", () -> new HeatSensorBlock(BlockBehaviour.Properties.copy(Blocks.OAK_PLANKS)));
     public static final RegistryObject<Block> FLUID_SENSOR = BLOCKS.register("fluid_sensor", () -> new FluidSensorBlock(BlockBehaviour.Properties.copy(Blocks.OAK_PLANKS)));
     public static final RegistryObject<Block> STEAM_SENSOR = BLOCKS.register("steam_sensor", () -> new SteamSensorBlock(BlockBehaviour.Properties.copy(Blocks.OAK_PLANKS)));
@@ -648,6 +651,8 @@ public class WizardsReborn {
     public static final RegistryObject<Item> WISSEN_CELL_ITEM = ITEMS.register("wissen_cell", () -> new WissenStorageBaseItem(WISSEN_CELL.get(), new Item.Properties().stacksTo(1)));
     public static final RegistryObject<Item> JEWELER_TABLE_ITEM = ITEMS.register("jeweler_table", () -> new BlockItem(JEWELER_TABLE.get(), new Item.Properties()));
     public static final RegistryObject<Item> ALTAR_OF_DROUGHT_ITEM = ITEMS.register("altar_of_drought", () -> new BlockItem(ALTAR_OF_DROUGHT.get(), new Item.Properties()));
+    public static final RegistryObject<Item> TOTEM_BASE_ITEM = ITEMS.register("totem_base", () -> new BlockItem(TOTEM_BASE.get(), new Item.Properties()));
+    public static final RegistryObject<Item> EXPERIENCE_TOTEM_ITEM = ITEMS.register("experience_totem", () -> new BlockItem(EXPERIENCE_TOTEM.get(), new Item.Properties()));
     public static final RegistryObject<Item> ARCANE_ITERATOR_ITEM = ITEMS.register("arcane_iterator", () -> new BlockItem(ARCANE_ITERATOR.get(), new Item.Properties()));
 
     public static final RegistryObject<Item> WISESTONE_PEDESTAL_ITEM = ITEMS.register("wisestone_pedestal", () -> new BlockItem(WISESTONE_PEDESTAL.get(), new Item.Properties()));
@@ -670,6 +675,7 @@ public class WizardsReborn {
     public static final RegistryObject<Item> REDSTONE_SENSOR_ITEM = ITEMS.register("redstone_sensor", () -> new BlockItem(REDSTONE_SENSOR.get(), new Item.Properties()));
     public static final RegistryObject<Item> WISSEN_SENSOR_ITEM = ITEMS.register("wissen_sensor", () -> new BlockItem(WISSEN_SENSOR.get(), new Item.Properties()));
     public static final RegistryObject<Item> COOLDOWN_SENSOR_ITEM = ITEMS.register("cooldown_sensor", () -> new BlockItem(COOLDOWN_SENSOR.get(), new Item.Properties()));
+    public static final RegistryObject<Item> EXPERIENCE_SENSOR_ITEM = ITEMS.register("experience_sensor", () -> new BlockItem(EXPERIENCE_SENSOR.get(), new Item.Properties()));
     public static final RegistryObject<Item> HEAT_SENSOR_ITEM = ITEMS.register("heat_sensor", () -> new BlockItem(HEAT_SENSOR.get(), new Item.Properties()));
     public static final RegistryObject<Item> LIGHT_SENSOR_ITEM = ITEMS.register("light_sensor", () -> new BlockItem(LIGHT_SENSOR.get(), new Item.Properties()));
     public static final RegistryObject<Item> FLUID_SENSOR_ITEM = ITEMS.register("fluid_sensor", () -> new BlockItem(FLUID_SENSOR.get(), new Item.Properties()));
@@ -779,6 +785,7 @@ public class WizardsReborn {
     public static RegistryObject<BlockEntityType<WissenCellTileEntity>> WISSEN_CELL_TILE_ENTITY = TILE_ENTITIES.register("wissen_cell", () -> BlockEntityType.Builder.of(WissenCellTileEntity::new, WISSEN_CELL.get()).build(null));
     public static RegistryObject<BlockEntityType<JewelerTableTileEntity>> JEWELER_TABLE_TILE_ENTITY = TILE_ENTITIES.register("jeweler_table", () -> BlockEntityType.Builder.of(JewelerTableTileEntity::new, JEWELER_TABLE.get()).build(null));
     public static RegistryObject<BlockEntityType<AltarOfDroughtTileEntity>> ALTAR_OF_DROUGHT_TILE_ENTITY = TILE_ENTITIES.register("altar_of_drought", () -> BlockEntityType.Builder.of(AltarOfDroughtTileEntity::new, ALTAR_OF_DROUGHT.get()).build(null));
+    public static RegistryObject<BlockEntityType<ExperienceTotemTileEntity>> EXPERIENCE_TOTEM_TILE_ENTITY = TILE_ENTITIES.register("experience_totem", () -> BlockEntityType.Builder.of(ExperienceTotemTileEntity::new, EXPERIENCE_TOTEM.get()).build(null));
     public static RegistryObject<BlockEntityType<ArcaneIteratorTileEntity>> ARCANE_ITERATOR_TILE_ENTITY = TILE_ENTITIES.register("arcane_iterator", () -> BlockEntityType.Builder.of(ArcaneIteratorTileEntity::new, ARCANE_ITERATOR.get()).build(null));
 
     public static RegistryObject<BlockEntityType<FluidPipeTileEntity>> FLUID_PIPE_TILE_ENTITY = TILE_ENTITIES.register("fluid_pipe", () -> BlockEntityType.Builder.of(FluidPipeTileEntity::new, FLUID_PIPE.get()).build(null));
@@ -796,7 +803,7 @@ public class WizardsReborn {
     public static RegistryObject<BlockEntityType<LightTransferLensTileEntity>> LIGHT_TRANSFER_LENS_TILE_ENTITY = TILE_ENTITIES.register("light_transfer_lens", () -> BlockEntityType.Builder.of(LightTransferLensTileEntity::new, LIGHT_TRANSFER_LENS.get()).build(null));
     public static RegistryObject<BlockEntityType<RunicPedestalTileEntity>> RUNIC_PEDESTAL_TILE_ENTITY = TILE_ENTITIES.register("runic_pedestal", () -> BlockEntityType.Builder.of(RunicPedestalTileEntity::new, RUNIC_PEDESTAL.get()).build(null));
 
-    public static RegistryObject<BlockEntityType<SensorTileEntity>> SENSOR_TILE_ENTITY = TILE_ENTITIES.register("sensor", () -> BlockEntityType.Builder.of(SensorTileEntity::new, REDSTONE_SENSOR.get(), WISSEN_SENSOR.get(), COOLDOWN_SENSOR.get(), LIGHT_SENSOR.get(), HEAT_SENSOR.get(), STEAM_SENSOR.get()).build(null));
+    public static RegistryObject<BlockEntityType<SensorTileEntity>> SENSOR_TILE_ENTITY = TILE_ENTITIES.register("sensor", () -> BlockEntityType.Builder.of(SensorTileEntity::new, REDSTONE_SENSOR.get(), WISSEN_SENSOR.get(), COOLDOWN_SENSOR.get(), LIGHT_SENSOR.get(), EXPERIENCE_SENSOR.get(), HEAT_SENSOR.get(), STEAM_SENSOR.get()).build(null));
     public static RegistryObject<BlockEntityType<FluidSensorTileEntity>> FLUID_SENSOR_TILE_ENTITY = TILE_ENTITIES.register("fluid_sensor", () -> BlockEntityType.Builder.of(FluidSensorTileEntity::new, FLUID_SENSOR.get()).build(null));
     public static RegistryObject<BlockEntityType<WissenActivatorTileEntity>> WISSEN_ACTIVATOR_TILE_ENTITY = TILE_ENTITIES.register("wissen_activator", () -> BlockEntityType.Builder.of(WissenActivatorTileEntity::new, WISSEN_ACTIVATOR.get()).build(null));
     public static RegistryObject<BlockEntityType<ItemSorterTileEntity>> ITEM_SORTER_TILE_ENTITY = TILE_ENTITIES.register("item_sorter", () -> BlockEntityType.Builder.of(ItemSorterTileEntity::new, ITEM_SORTER.get()).build(null));

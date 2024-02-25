@@ -20,6 +20,10 @@ public class NumericalUtils {
         return Component.translatable("gui.wizards_reborn.light");
     }
 
+    public static Component getExperienceName(int amount, int maxAmount) {
+        return getName(Component.translatable("gui.wizards_reborn.experience"), amount, maxAmount);
+    }
+
     public static Component getHeatName(int amount, int maxAmount) {
         return getName(Component.translatable("gui.wizards_reborn.heat"), amount, maxAmount);
     }

@@ -72,6 +72,7 @@ public class WizardsRebornClient {
     public static ModelResourceLocation WISSEN_SENSOR_PIECE_MODEl = new ModelResourceLocation(WizardsReborn.MOD_ID, "wissen_sensor_piece", "");
     public static ModelResourceLocation COOLDOWN_SENSOR_PIECE_MODEl = new ModelResourceLocation(WizardsReborn.MOD_ID, "cooldown_sensor_piece", "");
     public static ModelResourceLocation LIGHT_SENSOR_PIECE_MODEl = new ModelResourceLocation(WizardsReborn.MOD_ID, "light_sensor_piece", "");
+    public static ModelResourceLocation EXPERIENCE_SENSOR_PIECE_MODEl = new ModelResourceLocation(WizardsReborn.MOD_ID, "experience_sensor_piece", "");
     public static ModelResourceLocation HEAT_SENSOR_PIECE_MODEl = new ModelResourceLocation(WizardsReborn.MOD_ID, "heat_sensor_piece", "");
     public static ModelResourceLocation FLUID_SENSOR_PIECE_MODEl = new ModelResourceLocation(WizardsReborn.MOD_ID, "fluid_sensor_piece", "");
     public static ModelResourceLocation FLUID_SENSOR_PIECE_ON_MODEl = new ModelResourceLocation(WizardsReborn.MOD_ID, "fluid_sensor_piece_on", "");
@@ -179,6 +180,7 @@ public class WizardsRebornClient {
             BlockEntityRenderers.register(WizardsReborn.ALCHEMY_MACHINE_TILE_ENTITY.get(), (trd) -> new AlchemyMachineTileEntityRenderer());
             BlockEntityRenderers.register(WizardsReborn.ALCHEMY_BOILER_TILE_ENTITY.get(), (trd) -> new AlchemyBoilerTileEntityRenderer());
             BlockEntityRenderers.register(WizardsReborn.ARCANE_CENSER_TILE_ENTITY.get(), (trd) -> new ArcaneCenserTileEntityRenderer());
+            BlockEntityRenderers.register(WizardsReborn.EXPERIENCE_TOTEM_TILE_ENTITY.get(), (trd) -> new ExperienceTotemTileEntityRenderer());
             BlockEntityRenderers.register(WizardsReborn.ARCANE_ITERATOR_TILE_ENTITY.get(), (trd) -> new ArcaneIteratorTileEntityRenderer());
             BlockEntityRenderers.register(WizardsReborn.LIGHT_EMITTER_TILE_ENTITY.get(), (trd) -> new LightEmitterBlockTileEntityRenderer());
             BlockEntityRenderers.register(WizardsReborn.LIGHT_TRANSFER_LENS_TILE_ENTITY.get(), (trd) -> new LightTransferLensTileEntityRenderer());
@@ -232,6 +234,7 @@ public class WizardsRebornClient {
             event.register(WISSEN_SENSOR_PIECE_MODEl);
             event.register(COOLDOWN_SENSOR_PIECE_MODEl);
             event.register(LIGHT_SENSOR_PIECE_MODEl);
+            event.register(EXPERIENCE_SENSOR_PIECE_MODEl);
             event.register(HEAT_SENSOR_PIECE_MODEl);
             event.register(FLUID_SENSOR_PIECE_MODEl);
             event.register(FLUID_SENSOR_PIECE_ON_MODEl);

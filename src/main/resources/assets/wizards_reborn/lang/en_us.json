@@ -467,6 +467,7 @@
   "gui.wizards_reborn.light": "Light",
   "gui.wizards_reborn.heat": "Heat",
   "gui.wizards_reborn.steam": "Steam",
+  "gui.wizards_reborn.experience": "Experience",
 
   "attribute.name.wizards_reborn.wissen_sale": "Wissen Sale",
   "attribute.name.wizards_reborn.magic_armor": "Magic Armor",
@@ -750,7 +751,7 @@
     "wizards_reborn.arcanemicon.page.wissen_cell.1": "Used to charge items with wissen and transport wissen.",
   "wizards_reborn.arcanemicon.chapter.altar_of_drought": "Altar of Drought",
     "wizards_reborn.arcanemicon.page.altar_of_drought.title": "Altar of Drought",
-    "wizards_reborn.arcanemicon.page.altar_of_drought": "Dries the leaves of arcane trees to process them into wissen.",
+    "wizards_reborn.arcanemicon.page.altar_of_drought": "Dries the leaves of arcane trees to process them into wissen. When a redstone signal is given, it stops working.",
     "wizards_reborn.arcanemicon.page.altar_of_drought.poem": "In a barren desert, the scanty land, \n \n On a ground, burned by sun to total, \n \n Anchar, as one of the safeguards stand \n \n Alone in this endless world.",
   "wizards_reborn.arcanemicon.chapter.void_crystal": "Void Crystal",
     "wizards_reborn.arcanemicon.page.void_crystal.title": "Void Crystal",

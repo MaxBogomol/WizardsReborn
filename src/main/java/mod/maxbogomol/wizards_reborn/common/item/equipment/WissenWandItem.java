@@ -5,6 +5,7 @@ import mod.maxbogomol.wizards_reborn.WizardsReborn;
 import mod.maxbogomol.wizards_reborn.api.alchemy.IFluidTileEntity;
 import mod.maxbogomol.wizards_reborn.api.alchemy.IHeatTileEntity;
 import mod.maxbogomol.wizards_reborn.api.alchemy.ISteamTileEntity;
+import mod.maxbogomol.wizards_reborn.api.experience.IExperienceTileEntity;
 import mod.maxbogomol.wizards_reborn.api.light.ILightTileEntity;
 import mod.maxbogomol.wizards_reborn.api.wissen.*;
 import mod.maxbogomol.wizards_reborn.common.tileentity.AlchemyMachineTileEntity;
@@ -418,6 +419,29 @@ public class WissenWandItem extends Item {
                             int width = 32;
                             width /= (double) fluidTile.getFluidMaxAmount() / (double) fluidTile.getFluidAmount();
                             gui.blit(new ResourceLocation(WizardsReborn.MOD_ID + ":textures/gui/fluid_frame.png"), x + 8, y + 1, 0, 10, width, 8, 64, 64);
+                            i = i + 11;
+                        }
+
+                        if (tileentity instanceof IExperienceTileEntity experienceTile) {
+                            if (player.isShiftKeyDown()) {
+                                int x = mc.getWindow().getGuiScaledWidth() / 2;
+                                int y = mc.getWindow().getGuiScaledHeight() / 2 + 32 - 10 - 10 + i;
+
+                                Component experienceName = NumericalUtils.getExperienceName(experienceTile.getExperience(), experienceTile.getMaxExperience());
+                                String string = experienceName.getString();
+                                int stringWidth = Minecraft.getInstance().font.width(string);
+
+                                gui.drawString(Minecraft.getInstance().font, string, x - (stringWidth / 2), y, 0xffffff);
+                                i = i + 11;
+                            }
+
+                            int x = mc.getWindow().getGuiScaledWidth() / 2 - (48 / 2);
+                            int y = mc.getWindow().getGuiScaledHeight() / 2 + 32 - 10 - 11 + i;
+
+                            gui.blit(new ResourceLocation(WizardsReborn.MOD_ID + ":textures/gui/experience_frame.png"), x, y, 0, 0, 48, 10, 64, 64);
+                            int width = 32;
+                            width /= (double) experienceTile.getMaxExperience() / (double) experienceTile.getExperience();
+                            gui.blit(new ResourceLocation(WizardsReborn.MOD_ID + ":textures/gui/experience_frame.png"), x + 8, y + 1, 0, 10, width, 8, 64, 64);
                             i = i + 11;
                         }
 
