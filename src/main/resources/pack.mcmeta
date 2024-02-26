@@ -1,7 +1,7 @@
 {
     "pack": {
         "description": "Wizard's Reborn resources",
-        "pack_format": 6
+        "pack_format": 10
     },
     "fusion": {
         "overrides_folder": "fusion"
