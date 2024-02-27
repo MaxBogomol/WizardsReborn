@@ -5,7 +5,7 @@ import mod.maxbogomol.wizards_reborn.WizardsReborn;
 import mod.maxbogomol.wizards_reborn.api.alchemy.IFluidTileEntity;
 import mod.maxbogomol.wizards_reborn.api.alchemy.IHeatTileEntity;
 import mod.maxbogomol.wizards_reborn.api.alchemy.ISteamTileEntity;
-import mod.maxbogomol.wizards_reborn.api.experience.IExperienceTileEntity;
+import mod.maxbogomol.wizards_reborn.api.wissen.IExperienceTileEntity;
 import mod.maxbogomol.wizards_reborn.api.light.ILightTileEntity;
 import mod.maxbogomol.wizards_reborn.api.wissen.*;
 import mod.maxbogomol.wizards_reborn.common.tileentity.AlchemyMachineTileEntity;

@@ -1,7 +1,7 @@
 package mod.maxbogomol.wizards_reborn.common.block;
 
 import mod.maxbogomol.wizards_reborn.WizardsRebornClient;
-import mod.maxbogomol.wizards_reborn.api.experience.IExperienceTileEntity;
+import mod.maxbogomol.wizards_reborn.api.wissen.IExperienceTileEntity;
 import net.minecraft.client.resources.model.ModelResourceLocation;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;

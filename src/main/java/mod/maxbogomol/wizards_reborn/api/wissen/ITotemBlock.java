@@ -1,4 +1,4 @@
-package mod.maxbogomol.wizards_reborn.api.experience;
+package mod.maxbogomol.wizards_reborn.api.wissen;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.InteractionHand;

@@ -1,0 +1,35 @@
+{
+	"credit": "Made with Blockbench",
+	"parent": "block/cube",
+	"textures": {
+		"0": "wizards_reborn:block/totem_of_experience_absorption",
+		"1": "wizards_reborn:block/totem_base_top",
+		"particle": "wizards_reborn:block/arcane_wood_planks"
+	},
+	"elements": [
+		{
+			"from": [4, 0, 4],
+			"to": [12, 4, 12],
+			"faces": {
+				"north": {"uv": [0, 8, 8, 12], "texture": "#0"},
+				"east": {"uv": [0, 8, 8, 12], "texture": "#0"},
+				"south": {"uv": [0, 8, 8, 12], "texture": "#0"},
+				"west": {"uv": [0, 8, 8, 12], "texture": "#0"},
+				"up": {"uv": [0, 0, 8, 8], "texture": "#0"},
+				"down": {"uv": [8, 0, 16, 8], "texture": "#1"}
+			}
+		},
+		{
+			"from": [6, 4, 6],
+			"to": [10, 6, 10],
+			"faces": {
+				"north": {"uv": [8, 4, 12, 6], "texture": "#0"},
+				"east": {"uv": [8, 4, 12, 6], "texture": "#0"},
+				"south": {"uv": [8, 4, 12, 6], "texture": "#0"},
+				"west": {"uv": [8, 4, 12, 6], "texture": "#0"},
+				"up": {"uv": [8, 0, 12, 4], "texture": "#0"},
+				"down": {"uv": [8, 0, 12, 4], "texture": "#0"}
+			}
+		}
+	]
+}

@@ -1,7 +1,7 @@
 package mod.maxbogomol.wizards_reborn.common.block;
 
 import mod.maxbogomol.wizards_reborn.WizardsReborn;
-import mod.maxbogomol.wizards_reborn.api.experience.ITotemBlock;
+import mod.maxbogomol.wizards_reborn.api.wissen.ITotemBlock;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.world.InteractionHand;

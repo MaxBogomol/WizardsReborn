@@ -4,8 +4,8 @@ import mod.maxbogomol.wizards_reborn.WizardsReborn;
 import mod.maxbogomol.wizards_reborn.api.wissen.ITotemBlock;
 import mod.maxbogomol.wizards_reborn.api.wissen.WissenUtils;
 import mod.maxbogomol.wizards_reborn.common.item.equipment.WissenWandItem;
-import mod.maxbogomol.wizards_reborn.common.tileentity.ExperienceTotemTileEntity;
 import mod.maxbogomol.wizards_reborn.common.tileentity.TickableBlockEntity;
+import mod.maxbogomol.wizards_reborn.common.tileentity.TotemOfExperienceAbsorptionTileEntity;
 import mod.maxbogomol.wizards_reborn.utils.PacketUtils;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -46,15 +46,14 @@ import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import java.util.stream.Stream;
 
-public class ExperienceTotemBlock extends Block implements EntityBlock, SimpleWaterloggedBlock, ITotemBlock {
+public class TotemOfExperienceAbsorptionBlock extends Block implements EntityBlock, SimpleWaterloggedBlock, ITotemBlock {
 
     private static final VoxelShape SHAPE = Stream.of(
             Block.box(4, 0, 4, 12, 4, 12),
-            Block.box(6, 4, 6, 10, 5, 10),
-            Block.box(7, 5, 7, 9, 8, 9)
+            Block.box(6, 4, 6, 10, 6, 10)
     ).reduce((v1, v2) -> Shapes.join(v1, v2, BooleanOp.OR)).get();
 
-    public ExperienceTotemBlock(Properties properties) {
+    public TotemOfExperienceAbsorptionBlock(Properties properties) {
         super(properties);
         registerDefaultState(defaultBlockState().setValue(BlockStateProperties.WATERLOGGED, false));
     }
@@ -82,7 +81,7 @@ public class ExperienceTotemBlock extends Block implements EntityBlock, SimpleWa
     public void onRemove(@Nonnull BlockState state, @Nonnull Level world, @Nonnull BlockPos pos, @Nonnull BlockState newState, boolean isMoving) {
         if (state.getBlock() != newState.getBlock()) {
             BlockEntity tile = world.getBlockEntity(pos);
-            if (tile instanceof ExperienceTotemTileEntity totem) {
+            if (tile instanceof TotemOfExperienceAbsorptionTileEntity totem) {
                 if (totem.getExperience() > 0) {
                     world.addFreshEntity(new ExperienceOrb(world, pos.getX() + 0.5f, pos.getY() + 0.5f, pos.getZ() + 0.5f, totem.getExperience()));
                 }
@@ -94,7 +93,7 @@ public class ExperienceTotemBlock extends Block implements EntityBlock, SimpleWa
 
     @Override
     public InteractionResult use(BlockState state, Level world, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hit) {
-        ExperienceTotemTileEntity tile = (ExperienceTotemTileEntity) world.getBlockEntity(pos);
+        TotemOfExperienceAbsorptionTileEntity tile = (TotemOfExperienceAbsorptionTileEntity) world.getBlockEntity(pos);
         ItemStack stack = player.getItemInHand(hand).copy();
 
         if (stack.getItem() instanceof WissenWandItem) {
@@ -105,23 +104,7 @@ public class ExperienceTotemBlock extends Block implements EntityBlock, SimpleWa
             }
         }
 
-        if (player.isShiftKeyDown()) {
-            if (tile.getExperience() > 0) {
-                int remain = WissenUtils.getRemoveWissenRemain(tile.getExperience(), 100);
-                remain = 100 - remain;
-                if (remain > 0) {
-                    tile.removeExperience(remain);
-                    player.giveExperiencePoints(remain);
-                    world.playSound(WizardsReborn.proxy.getPlayer(), player.getOnPos(), SoundEvents.EXPERIENCE_ORB_PICKUP, SoundSource.BLOCKS, 0.5f, 1f);
-                    if (player.level().isClientSide()) {
-                        tile.addBurst(pos.getCenter().add(0, 0.25f, 0), player.getPosition(0).add(0, player.getEyeHeight() / 2, 0));
-                    }
-                    world.updateNeighbourForOutputSignal(pos, this);
-                    PacketUtils.SUpdateTileEntityPacket(tile);
-                    return InteractionResult.SUCCESS;
-                }
-            }
-        } else {
+        if (!player.isShiftKeyDown()) {
             if (tile.getExperience() < tile.getMaxExperience()) {
                 int remain = WissenUtils.getRemoveWissenRemain(getPlayerXP(player), 100);
                 remain = 100 - remain;
@@ -212,7 +195,7 @@ public class ExperienceTotemBlock extends Block implements EntityBlock, SimpleWa
     @Nullable
     @Override
     public BlockEntity newBlockEntity(BlockPos pPos, BlockState pState) {
-        return new ExperienceTotemTileEntity(pPos, pState);
+        return new TotemOfExperienceAbsorptionTileEntity(pPos, pState);
     }
 
     @Override
@@ -222,7 +205,7 @@ public class ExperienceTotemBlock extends Block implements EntityBlock, SimpleWa
 
     @Override
     public int getAnalogOutputSignal(BlockState blockState, Level level, BlockPos pos) {
-        ExperienceTotemTileEntity tile = (ExperienceTotemTileEntity) level.getBlockEntity(pos);
-        return Mth.floor(((float) tile.getExperience() / tile.getMaxExperience()) * 14.0F);
+        TotemOfExperienceAbsorptionTileEntity tile = (TotemOfExperienceAbsorptionTileEntity) level.getBlockEntity(pos);
+        return Mth.floor(((float) tile.getWissen() / tile.getMaxWissen()) * 14.0F);
     }
 }

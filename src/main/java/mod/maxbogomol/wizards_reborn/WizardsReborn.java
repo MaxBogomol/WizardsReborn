@@ -424,8 +424,9 @@ public class WizardsReborn {
     public static final RegistryObject<Block> JEWELER_TABLE = BLOCKS.register("jeweler_table", () -> new JewelerTableBlock(BlockBehaviour.Properties.copy(Blocks.OAK_PLANKS)));
     public static final RegistryObject<Block> ALTAR_OF_DROUGHT = BLOCKS.register("altar_of_drought", () -> new AltarOfDroughtBlock(BlockBehaviour.Properties.copy(Blocks.OAK_PLANKS)));
     public static final RegistryObject<Block> TOTEM_BASE = BLOCKS.register("totem_base", () -> new TotemBaseBlock(BlockBehaviour.Properties.copy(Blocks.OAK_PLANKS)));
+    public static final RegistryObject<Block> TOTEM_OF_FLAMES = BLOCKS.register("totem_of_flames", () -> new TotemOfFlamesBlock(BlockBehaviour.Properties.copy(Blocks.OAK_PLANKS).lightLevel(TotemOfFlamesBlock::getLightLevel)));
     public static final RegistryObject<Block> EXPERIENCE_TOTEM = BLOCKS.register("experience_totem", () -> new ExperienceTotemBlock(BlockBehaviour.Properties.copy(Blocks.OAK_PLANKS)));
-    public static final RegistryObject<Block> TOTEM_OF_FLAMES = BLOCKS.register("totem_of_flames", () -> new TotemOfFlamesBlock(BlockBehaviour.Properties.copy(Blocks.OAK_PLANKS).lightLevel((state) -> TotemOfFlamesBlock.getLightLevel(state))));
+    public static final RegistryObject<Block> TOTEM_OF_EXPERIENCE_ABSORPTION = BLOCKS.register("totem_of_experience_absorption", () -> new TotemOfExperienceAbsorptionBlock(BlockBehaviour.Properties.copy(Blocks.OAK_PLANKS)));
     public static final RegistryObject<Block> ARCANE_ITERATOR = BLOCKS.register("arcane_iterator", () -> new ArcaneIteratorBlock(BlockBehaviour.Properties.copy(Blocks.OAK_PLANKS)));
 
     public static final RegistryObject<Block> WISESTONE_PEDESTAL = BLOCKS.register("wisestone_pedestal", () -> new ArcanePedestalBlock(BlockBehaviour.Properties.copy(Blocks.POLISHED_DEEPSLATE)));
@@ -653,8 +654,9 @@ public class WizardsReborn {
     public static final RegistryObject<Item> JEWELER_TABLE_ITEM = ITEMS.register("jeweler_table", () -> new BlockItem(JEWELER_TABLE.get(), new Item.Properties()));
     public static final RegistryObject<Item> ALTAR_OF_DROUGHT_ITEM = ITEMS.register("altar_of_drought", () -> new BlockItem(ALTAR_OF_DROUGHT.get(), new Item.Properties()));
     public static final RegistryObject<Item> TOTEM_BASE_ITEM = ITEMS.register("totem_base", () -> new BlockItem(TOTEM_BASE.get(), new Item.Properties()));
-    public static final RegistryObject<Item> EXPERIENCE_TOTEM_ITEM = ITEMS.register("experience_totem", () -> new BlockItem(EXPERIENCE_TOTEM.get(), new Item.Properties()));
     public static final RegistryObject<Item> TOTEM_OF_FLAMES_ITEM = ITEMS.register("totem_of_flames", () -> new BlockItem(TOTEM_OF_FLAMES.get(), new Item.Properties()));
+    public static final RegistryObject<Item> EXPERIENCE_TOTEM_ITEM = ITEMS.register("experience_totem", () -> new BlockItem(EXPERIENCE_TOTEM.get(), new Item.Properties()));
+    public static final RegistryObject<Item> TOTEM_OF_EXPERIENCE_ABSORPTION_ITEM = ITEMS.register("totem_of_experience_absorption", () -> new BlockItem(TOTEM_OF_EXPERIENCE_ABSORPTION.get(), new Item.Properties()));
     public static final RegistryObject<Item> ARCANE_ITERATOR_ITEM = ITEMS.register("arcane_iterator", () -> new BlockItem(ARCANE_ITERATOR.get(), new Item.Properties()));
 
     public static final RegistryObject<Item> WISESTONE_PEDESTAL_ITEM = ITEMS.register("wisestone_pedestal", () -> new BlockItem(WISESTONE_PEDESTAL.get(), new Item.Properties()));
@@ -787,8 +789,9 @@ public class WizardsReborn {
     public static RegistryObject<BlockEntityType<WissenCellTileEntity>> WISSEN_CELL_TILE_ENTITY = TILE_ENTITIES.register("wissen_cell", () -> BlockEntityType.Builder.of(WissenCellTileEntity::new, WISSEN_CELL.get()).build(null));
     public static RegistryObject<BlockEntityType<JewelerTableTileEntity>> JEWELER_TABLE_TILE_ENTITY = TILE_ENTITIES.register("jeweler_table", () -> BlockEntityType.Builder.of(JewelerTableTileEntity::new, JEWELER_TABLE.get()).build(null));
     public static RegistryObject<BlockEntityType<AltarOfDroughtTileEntity>> ALTAR_OF_DROUGHT_TILE_ENTITY = TILE_ENTITIES.register("altar_of_drought", () -> BlockEntityType.Builder.of(AltarOfDroughtTileEntity::new, ALTAR_OF_DROUGHT.get()).build(null));
-    public static RegistryObject<BlockEntityType<ExperienceTotemTileEntity>> EXPERIENCE_TOTEM_TILE_ENTITY = TILE_ENTITIES.register("experience_totem", () -> BlockEntityType.Builder.of(ExperienceTotemTileEntity::new, EXPERIENCE_TOTEM.get()).build(null));
     public static RegistryObject<BlockEntityType<TotemOfFlamesTileEntity>> TOTEM_OF_FLAMES_TILE_ENTITY = TILE_ENTITIES.register("totem_of_flames", () -> BlockEntityType.Builder.of(TotemOfFlamesTileEntity::new, TOTEM_OF_FLAMES.get()).build(null));
+    public static RegistryObject<BlockEntityType<ExperienceTotemTileEntity>> EXPERIENCE_TOTEM_TILE_ENTITY = TILE_ENTITIES.register("experience_totem", () -> BlockEntityType.Builder.of(ExperienceTotemTileEntity::new, EXPERIENCE_TOTEM.get()).build(null));
+    public static RegistryObject<BlockEntityType<TotemOfExperienceAbsorptionTileEntity>> TOTEM_OF_EXPERIENCE_ABSORPTION_TILE_ENTITY = TILE_ENTITIES.register("totem_of_experience_absorption", () -> BlockEntityType.Builder.of(TotemOfExperienceAbsorptionTileEntity::new, TOTEM_OF_EXPERIENCE_ABSORPTION.get()).build(null));
     public static RegistryObject<BlockEntityType<ArcaneIteratorTileEntity>> ARCANE_ITERATOR_TILE_ENTITY = TILE_ENTITIES.register("arcane_iterator", () -> BlockEntityType.Builder.of(ArcaneIteratorTileEntity::new, ARCANE_ITERATOR.get()).build(null));
 
     public static RegistryObject<BlockEntityType<FluidPipeTileEntity>> FLUID_PIPE_TILE_ENTITY = TILE_ENTITIES.register("fluid_pipe", () -> BlockEntityType.Builder.of(FluidPipeTileEntity::new, FLUID_PIPE.get()).build(null));

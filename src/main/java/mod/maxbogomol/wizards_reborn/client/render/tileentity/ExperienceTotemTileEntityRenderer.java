@@ -2,6 +2,7 @@ package mod.maxbogomol.wizards_reborn.client.render.tileentity;
 
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.math.Axis;
+import mod.maxbogomol.wizards_reborn.api.wissen.WissenUtils;
 import mod.maxbogomol.wizards_reborn.client.event.ClientTickHandler;
 import mod.maxbogomol.wizards_reborn.client.render.WorldRenderHandler;
 import mod.maxbogomol.wizards_reborn.common.tileentity.ExperienceTotemTileEntity;
@@ -9,6 +10,7 @@ import mod.maxbogomol.wizards_reborn.utils.RenderUtils;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.blockentity.BlockEntityRenderer;
+import net.minecraft.world.phys.Vec3;
 
 import java.util.Random;
 
@@ -48,6 +50,13 @@ public class ExperienceTotemTileEntityRenderer implements BlockEntityRenderer<Ex
             RenderUtils.ray(ms, bufferDelayed, 0.075f, 0.075f, 1f, 0.243f, 0.564f, 0.250f, alpha);
             RenderUtils.ray(ms, bufferDelayed, 0.1f, 0.1f, 1f, 0.784f, 1f, 0.560f, alpha / 2);
             RenderUtils.ray(ms, bufferDelayed, 0.12f * offset, 0.12f * offset, 1f, 0.960f, 1f, 0.560f, 0.2f);
+            ms.popPose();
+        }
+
+        if (WissenUtils.isCanRenderWissenWand()) {
+            ms.pushPose();
+            ms.translate(-1, -1, -1);
+            RenderUtils.renderBoxLines(new Vec3(3, 3, 3), RenderUtils.colorArea, partialTicks, ms);
             ms.popPose();
         }
     }

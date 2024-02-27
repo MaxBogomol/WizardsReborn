@@ -1,7 +1,8 @@
 package mod.maxbogomol.wizards_reborn.common.block;
 
 import mod.maxbogomol.wizards_reborn.WizardsReborn;
-import mod.maxbogomol.wizards_reborn.api.experience.ITotemBlock;
+import mod.maxbogomol.wizards_reborn.api.wissen.ITotemBlock;
+import mod.maxbogomol.wizards_reborn.common.item.equipment.WissenWandItem;
 import mod.maxbogomol.wizards_reborn.common.tileentity.TickableBlockEntity;
 import mod.maxbogomol.wizards_reborn.common.tileentity.TileSimpleInventory;
 import mod.maxbogomol.wizards_reborn.common.tileentity.TotemOfFlamesTileEntity;
@@ -13,6 +14,7 @@ import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.BlockGetter;
@@ -91,6 +93,14 @@ public class TotemOfFlamesBlock extends Block implements EntityBlock, SimpleWate
     public InteractionResult use(BlockState state, Level world, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hit) {
         TotemOfFlamesTileEntity tile = (TotemOfFlamesTileEntity) world.getBlockEntity(pos);
         ItemStack stack = player.getItemInHand(hand).copy();
+
+        if (stack.getItem() instanceof WissenWandItem) {
+            if (WissenWandItem.getMode(stack) != 4) {
+                world.updateNeighbourForOutputSignal(pos, this);
+                PacketUtils.SUpdateTileEntityPacket(tile);
+                return InteractionResult.SUCCESS;
+            }
+        }
 
         if ((!stack.isEmpty()) && (tile.getItemHandler().getItem(0).isEmpty())) {
             if (stack.is(WizardsReborn.ARCANE_LUMOS_ITEM_TAG)) {
@@ -180,6 +190,17 @@ public class TotemOfFlamesBlock extends Block implements EntityBlock, SimpleWate
     @Override
     public BlockEntity newBlockEntity(BlockPos pPos, BlockState pState) {
         return new TotemOfFlamesTileEntity(pPos, pState);
+    }
+
+    @Override
+    public boolean hasAnalogOutputSignal(BlockState state) {
+        return true;
+    }
+
+    @Override
+    public int getAnalogOutputSignal(BlockState blockState, Level level, BlockPos pos) {
+        TileSimpleInventory tile = (TileSimpleInventory) level.getBlockEntity(pos);
+        return AbstractContainerMenu.getRedstoneSignalFromContainer(tile.getItemHandler());
     }
 
     public static int getLightLevel(BlockState state) {

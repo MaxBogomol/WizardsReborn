@@ -17,12 +17,17 @@ import mod.maxbogomol.wizards_reborn.common.network.PacketHandler;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerPlayer;
-import net.minecraft.tags.DamageTypeTags;
+import net.minecraft.util.RandomSource;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.ai.attributes.AttributeInstance;
+import net.minecraft.world.entity.npc.VillagerTrades;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
+import net.minecraft.world.item.trading.MerchantOffer;
+import net.minecraft.world.level.block.Block;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.util.INBTSerializable;
 import net.minecraftforge.event.AttachCapabilitiesEvent;
@@ -31,6 +36,7 @@ import net.minecraftforge.event.TickEvent;
 import net.minecraftforge.event.entity.EntityJoinLevelEvent;
 import net.minecraftforge.event.entity.living.LivingDamageEvent;
 import net.minecraftforge.event.entity.player.PlayerEvent;
+import net.minecraftforge.event.village.WandererTradesEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 
 import java.util.List;
@@ -120,6 +126,52 @@ public class Events {
                     event.setAmount(event.getAmount() * scale);
                 }
             }
+        }
+    }
+
+    @SubscribeEvent
+    public void addCustomWandererTrades(WandererTradesEvent event) {
+        event.getGenericTrades().add(new ItemsForEmeralds(WizardsReborn.MOR_ITEM.get(), 1, 1, 16, 1));
+        event.getGenericTrades().add(new ItemsForEmeralds(WizardsReborn.ELDER_MOR_ITEM.get(), 2, 1, 16, 1));
+        event.getGenericTrades().add(new ItemsForEmeralds(WizardsReborn.ARCANUM_DUST.get(), 3, 2, 8, 1));
+        event.getGenericTrades().add(new ItemsForEmeralds(WizardsReborn.ARCANUM.get(), 4, 1, 6, 1));
+    }
+
+    public static class ItemsForEmeralds implements VillagerTrades.ItemListing {
+        private final ItemStack itemStack;
+        private final int emeraldCost;
+        private final int numberOfItems;
+        private final int maxUses;
+        private final int villagerXp;
+        private final float priceMultiplier;
+
+        public ItemsForEmeralds(Block pBlock, int pEmeraldCost, int pNumberOfItems, int pMaxUses, int pVillagerXp) {
+            this(new ItemStack(pBlock), pEmeraldCost, pNumberOfItems, pMaxUses, pVillagerXp);
+        }
+
+        public ItemsForEmeralds(Item pItem, int pEmeraldCost, int pNumberOfItems, int pVillagerXp) {
+            this(new ItemStack(pItem), pEmeraldCost, pNumberOfItems, 12, pVillagerXp);
+        }
+
+        public ItemsForEmeralds(Item pItem, int pEmeraldCost, int pNumberOfItems, int pMaxUses, int pVillagerXp) {
+            this(new ItemStack(pItem), pEmeraldCost, pNumberOfItems, pMaxUses, pVillagerXp);
+        }
+
+        public ItemsForEmeralds(ItemStack pItemStack, int pEmeraldCost, int pNumberOfItems, int pMaxUses, int pVillagerXp) {
+            this(pItemStack, pEmeraldCost, pNumberOfItems, pMaxUses, pVillagerXp, 0.05F);
+        }
+
+        public ItemsForEmeralds(ItemStack pItemStack, int pEmeraldCost, int pNumberOfItems, int pMaxUses, int pVillagerXp, float pPriceMultiplier) {
+            this.itemStack = pItemStack;
+            this.emeraldCost = pEmeraldCost;
+            this.numberOfItems = pNumberOfItems;
+            this.maxUses = pMaxUses;
+            this.villagerXp = pVillagerXp;
+            this.priceMultiplier = pPriceMultiplier;
+        }
+
+        public MerchantOffer getOffer(Entity pTrader, RandomSource pRandom) {
+            return new MerchantOffer(new ItemStack(Items.EMERALD, this.emeraldCost), new ItemStack(this.itemStack.getItem(), this.numberOfItems), this.maxUses, this.villagerXp, this.priceMultiplier);
         }
     }
 }

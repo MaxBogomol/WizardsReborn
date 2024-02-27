@@ -106,7 +106,7 @@ public class ArcaneIteratorTileEntityRenderer implements BlockEntityRenderer<Arc
         }
     }
 
-    public void renderPiece(float x, float y, float z, float yRot, float zRot, float size ,ArcaneIteratorTileEntity iterator, float partialTicks, PoseStack ms, MultiBufferSource buffers, int light, int overlay) {
+    public void renderPiece(float x, float y, float z, float yRot, float zRot, float size, ArcaneIteratorTileEntity iterator, float partialTicks, PoseStack ms, MultiBufferSource buffers, int light, int overlay) {
         ms.pushPose();
         ms.translate(x, y, z);
         ms.mulPose(Axis.YP.rotationDegrees(yRot));

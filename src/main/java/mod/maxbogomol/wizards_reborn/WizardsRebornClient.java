@@ -65,6 +65,7 @@ public class WizardsRebornClient {
 
     public static ModelResourceLocation JEWELER_TABLE_STONE_MODEl = new ModelResourceLocation(WizardsReborn.MOD_ID, "jeweler_table_stone", "");
     public static ModelResourceLocation ALTAR_OF_DROUGHT_FRAME_MODEl = new ModelResourceLocation(WizardsReborn.MOD_ID, "altar_of_drought_frame", "");
+    public static ModelResourceLocation TOTEM_OF_EXPERIENCE_ABSORPTION_PIECE_MODEl = new ModelResourceLocation(WizardsReborn.MOD_ID, "totem_of_experience_absorption_piece", "");
     public static ModelResourceLocation ARCANE_ITERATOR_PIECE_MODEl = new ModelResourceLocation(WizardsReborn.MOD_ID, "arcane_iterator_piece", "");
     public static ModelResourceLocation HOVERING_LENS_MODEl = new ModelResourceLocation(WizardsReborn.MOD_ID, "hovering_lens", "");
     public static ModelResourceLocation REDSTONE_SENSOR_PIECE_MODEl = new ModelResourceLocation(WizardsReborn.MOD_ID, "redstone_sensor_piece", "");
@@ -181,6 +182,7 @@ public class WizardsRebornClient {
             BlockEntityRenderers.register(WizardsReborn.ALCHEMY_BOILER_TILE_ENTITY.get(), (trd) -> new AlchemyBoilerTileEntityRenderer());
             BlockEntityRenderers.register(WizardsReborn.ARCANE_CENSER_TILE_ENTITY.get(), (trd) -> new ArcaneCenserTileEntityRenderer());
             BlockEntityRenderers.register(WizardsReborn.EXPERIENCE_TOTEM_TILE_ENTITY.get(), (trd) -> new ExperienceTotemTileEntityRenderer());
+            BlockEntityRenderers.register(WizardsReborn.TOTEM_OF_EXPERIENCE_ABSORPTION_TILE_ENTITY.get(), (trd) -> new TotemOfExperienceAbsorptionTileEntityRenderer());
             BlockEntityRenderers.register(WizardsReborn.ARCANE_ITERATOR_TILE_ENTITY.get(), (trd) -> new ArcaneIteratorTileEntityRenderer());
             BlockEntityRenderers.register(WizardsReborn.LIGHT_EMITTER_TILE_ENTITY.get(), (trd) -> new LightEmitterBlockTileEntityRenderer());
             BlockEntityRenderers.register(WizardsReborn.LIGHT_TRANSFER_LENS_TILE_ENTITY.get(), (trd) -> new LightTransferLensTileEntityRenderer());
@@ -227,6 +229,7 @@ public class WizardsRebornClient {
 
             event.register(JEWELER_TABLE_STONE_MODEl);
             event.register(ALTAR_OF_DROUGHT_FRAME_MODEl);
+            event.register(TOTEM_OF_EXPERIENCE_ABSORPTION_PIECE_MODEl);
             event.register(ARCANE_ITERATOR_PIECE_MODEl);
             event.register(HOVERING_LENS_MODEl);
             event.register(REDSTONE_SENSOR_PIECE_MODEl);

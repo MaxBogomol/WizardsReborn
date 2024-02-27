@@ -44,6 +44,8 @@ public final class PacketHandler {
         HANDLER.registerMessage(id++, AltarOfDroughtSendEffectPacket.class, AltarOfDroughtSendEffectPacket::encode, AltarOfDroughtSendEffectPacket::decode, AltarOfDroughtSendEffectPacket::handle);
         HANDLER.registerMessage(id++, AltarOfDroughtBreakEffectPacket.class, AltarOfDroughtBreakEffectPacket::encode, AltarOfDroughtBreakEffectPacket::decode, AltarOfDroughtBreakEffectPacket::handle);
         HANDLER.registerMessage(id++, ArcaneIteratorBurstEffectPacket.class, ArcaneIteratorBurstEffectPacket::encode, ArcaneIteratorBurstEffectPacket::decode, ArcaneIteratorBurstEffectPacket::handle);
+        HANDLER.registerMessage(id++, ExperienceTotemBurstEffectPacket.class, ExperienceTotemBurstEffectPacket::encode, ExperienceTotemBurstEffectPacket::decode, ExperienceTotemBurstEffectPacket::handle);
+
         HANDLER.registerMessage(id++, CrystalRitualBurstEffectPacket.class, CrystalRitualBurstEffectPacket::encode, CrystalRitualBurstEffectPacket::decode, CrystalRitualBurstEffectPacket::handle);
         HANDLER.registerMessage(id++, CrystalInfusionBurstEffectPacket.class, CrystalInfusionBurstEffectPacket::encode, CrystalInfusionBurstEffectPacket::decode, CrystalInfusionBurstEffectPacket::handle);
 
