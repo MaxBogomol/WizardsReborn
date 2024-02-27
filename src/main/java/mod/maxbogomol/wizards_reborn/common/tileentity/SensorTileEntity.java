@@ -10,7 +10,7 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.phys.AABB;
 
-public class SensorTileEntity extends BlockEntity implements TickableBlockEntity{
+public class SensorTileEntity extends BlockEntity implements TickableBlockEntity {
     private int output;
 
     public SensorTileEntity(BlockEntityType<?> type, BlockPos pos, BlockState state) {
