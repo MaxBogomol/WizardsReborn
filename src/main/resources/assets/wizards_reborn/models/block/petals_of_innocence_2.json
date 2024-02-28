@@ -1,0 +1,7 @@
+{
+	"parent": "minecraft:block/flowerbed_2",
+	"textures": {
+		"flowerbed": "wizards_reborn:block/petals_of_innocence",
+		"stem": "wizards_reborn:block/petals_of_innocence_stem"
+	}
+}

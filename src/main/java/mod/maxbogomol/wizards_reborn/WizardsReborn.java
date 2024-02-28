@@ -350,6 +350,9 @@ public class WizardsReborn {
     public static final RegistryObject<Block> POTTED_ELDER_MOR = BLOCKS.register("potted_elder_mor", () -> new FlowerPotBlock(ELDER_MOR.get(), BlockBehaviour.Properties.copy(Blocks.FLOWER_POT).instabreak().noOcclusion()));
     public static final RegistryObject<Block> ELDER_MOR_BLOCK = BLOCKS.register("elder_mor_block", () -> new HugeMushroomBlock(BlockBehaviour.Properties.copy(Blocks.BROWN_MUSHROOM_BLOCK)));
 
+    public static final RegistryObject<Block> PETALS_OF_INNOCENCE = BLOCKS.register("petals_of_innocence", () -> new PetalsOfInnocenceBlock(BlockBehaviour.Properties.copy(Blocks.PINK_PETALS)));
+    public static final RegistryObject<Block> POTTED_PETALS_OF_INNOCENCE = BLOCKS.register("potted_petals_of_innocence", () -> new FlowerPotBlock(PETALS_OF_INNOCENCE.get(), BlockBehaviour.Properties.copy(Blocks.FLOWER_POT).instabreak().noOcclusion()));
+
     public static final RegistryObject<Block> ARCANUM_SEED_BLOCK = BLOCKS.register("arcanum_seed", () -> new CrystalSeedBlock(BlockBehaviour.Properties.copy(Blocks.AMETHYST_CLUSTER)));
     public static final RegistryObject<Block> ARCANUM_GROWTH = BLOCKS.register("arcanum_growth", () -> new ArcanumGrowthBlock(BlockBehaviour.Properties.copy(Blocks.AMETHYST_CLUSTER)));
 
@@ -573,6 +576,8 @@ public class WizardsReborn {
     public static final RegistryObject<Item> GROUND_WARPED_FUNGUS = ITEMS.register("ground_warped_fungus", () -> new Item(new Item.Properties()));
     public static final RegistryObject<Item> GROUND_MOR = ITEMS.register("ground_mor", () -> new Item(new Item.Properties()));
     public static final RegistryObject<Item> GROUND_ELDER_MOR = ITEMS.register("ground_elder_mor", () -> new Item(new Item.Properties()));
+
+    public static final RegistryObject<Item> PETALS_OF_INNOCENCE_ITEM = ITEMS.register("petals_of_innocence", () -> new BlockItem(PETALS_OF_INNOCENCE.get(), new Item.Properties()));
 
     public static final RegistryObject<Item> ARCANUM_SEED = ITEMS.register("arcanum_seed", () -> new BlockItem(ARCANUM_SEED_BLOCK.get(), new Item.Properties()));
     public static final RegistryObject<Item> ARCANUM_GROWTH_ITEM = ITEMS.register("arcanum_growth", () -> new BlockItem(ARCANUM_GROWTH.get(), new Item.Properties()));
@@ -1137,6 +1142,7 @@ public class WizardsReborn {
             fireblock.setFlammable(ARCANE_WOOD_FENCE_GATE.get(), 5, 20);
             fireblock.setFlammable(ARCANE_WOOD_LEAVES.get(), 30, 60);
             fireblock.setFlammable(ARCANE_LINEN_HAY.get(), 60, 20);
+            fireblock.setFlammable(PETALS_OF_INNOCENCE.get(), 60, 100);
 
             ComposterBlock.add(0.3F, ARCANE_WOOD_LEAVES_ITEM.get());
             ComposterBlock.add(0.3F, ARCANE_WOOD_SAPLING_ITEM.get());
@@ -1154,6 +1160,7 @@ public class WizardsReborn {
             ComposterBlock.add(0.2F, GROUND_WARPED_FUNGUS.get());
             ComposterBlock.add(0.2F, GROUND_MOR.get());
             ComposterBlock.add(0.2F, GROUND_ELDER_MOR.get());
+            ComposterBlock.add(0.3F, PETALS_OF_INNOCENCE.get());
 
             DispenserBlock.registerBehavior(ARCANUM_DUST.get(), new OptionalDispenseItemBehavior() {
                 protected ItemStack execute(BlockSource blockSource, ItemStack itemStack) {

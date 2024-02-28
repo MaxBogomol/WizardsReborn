@@ -14,6 +14,7 @@ import mod.maxbogomol.wizards_reborn.client.render.entity.ArcaneWoodBoatModel;
 import mod.maxbogomol.wizards_reborn.client.render.entity.SpellProjectileRenderer;
 import mod.maxbogomol.wizards_reborn.client.render.item.*;
 import mod.maxbogomol.wizards_reborn.client.render.tileentity.*;
+import mod.maxbogomol.wizards_reborn.common.block.CustomBlockColor;
 import mod.maxbogomol.wizards_reborn.common.entity.CustomBoatEntity;
 import mod.maxbogomol.wizards_reborn.common.item.equipment.AlchemyPotionItem;
 import mod.maxbogomol.wizards_reborn.common.item.equipment.RunicWisestonePlateItem;
@@ -139,6 +140,8 @@ public class WizardsRebornClient {
             ItemBlockRenderTypes.setRenderLayer(WizardsReborn.POTTED_MOR.get(), RenderType.cutout());
             ItemBlockRenderTypes.setRenderLayer(WizardsReborn.ELDER_MOR.get(), RenderType.cutout());
             ItemBlockRenderTypes.setRenderLayer(WizardsReborn.POTTED_ELDER_MOR.get(), RenderType.cutout());
+            ItemBlockRenderTypes.setRenderLayer(WizardsReborn.PETALS_OF_INNOCENCE.get(), RenderType.cutout());
+            ItemBlockRenderTypes.setRenderLayer(WizardsReborn.POTTED_PETALS_OF_INNOCENCE.get(), RenderType.cutout());
             ItemBlockRenderTypes.setRenderLayer(WizardsReborn.STEAM_THERMAL_STORAGE.get(), RenderType.cutout());
             ItemBlockRenderTypes.setRenderLayer(WizardsReborn.ARCANE_CENSER.get(), RenderType.cutout());
             ItemBlockRenderTypes.setRenderLayer(WizardsReborn.ALCHEMY_GLASS.get(), RenderType.translucent());
@@ -385,6 +388,11 @@ public class WizardsRebornClient {
         public static void registerItemColorHandlers(RegisterColorHandlersEvent.Item event) {
             event.register(new AlchemyPotionItem.ColorHandler(), WizardsReborn.ALCHEMY_VIAL_POTION.get(), WizardsReborn.ALCHEMY_FLASK_POTION.get());
             event.register(new RunicWisestonePlateItem.ColorHandler(), WizardsReborn.RUNIC_WISESTONE_PLATE.get());
+        }
+
+        @SubscribeEvent
+        public static void ColorMappingBlocks(RegisterColorHandlersEvent.Block event) {
+            event.register((state, world, pos, tintIndex) -> CustomBlockColor.getInstance().getColor(state, world, pos, tintIndex), CustomBlockColor.PLANTS);
         }
     }
 

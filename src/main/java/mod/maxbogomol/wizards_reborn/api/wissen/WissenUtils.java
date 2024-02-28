@@ -1,7 +1,6 @@
 package mod.maxbogomol.wizards_reborn.api.wissen;
 
 import mod.maxbogomol.wizards_reborn.WizardsReborn;
-import mod.maxbogomol.wizards_reborn.client.config.ClientConfig;
 import mod.maxbogomol.wizards_reborn.client.particle.Particles;
 import mod.maxbogomol.wizards_reborn.common.item.equipment.WissenWandItem;
 import net.minecraft.client.Minecraft;
@@ -128,7 +127,7 @@ public class WissenUtils {
     }
 
     public static void connectEffect(Level level, BlockPos posFrom, BlockPos posTo, Color color) {
-        connectEffect(level, posFrom, posTo, color, ClientConfig.WISSEN_TRANSLATOR_PARTICLE_PER_BLOCK.get());
+        connectEffect(level, posFrom, posTo, color, 4);
     }
 
     public static void connectBlockEffect(Level level, Vec3 pos, Color color) {
@@ -136,7 +135,7 @@ public class WissenUtils {
     }
 
     public static void connectEffect(Level level, Vec3 posFrom, Vec3 posTo, Color color) {
-        connectEffect(level, posFrom, posTo, color, ClientConfig.WISSEN_TRANSLATOR_PARTICLE_PER_BLOCK.get());
+        connectEffect(level, posFrom, posTo, color, 4);
     }
 
     public static void connectBoxEffect(Level level, Vec3 posFrom, Vec3 posTo, Color color, float particlePerBlock) {

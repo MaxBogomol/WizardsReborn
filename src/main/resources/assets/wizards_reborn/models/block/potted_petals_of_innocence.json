@@ -1,0 +1,8 @@
+{
+  "parent": "wizards_reborn:block/potted_petals",
+  "textures": {
+    "pot": "minecraft:block/flower_pot",
+    "dirt": "minecraft:block/dirt",
+    "petals": "wizards_reborn:block/potted_petals_of_innocence"
+  }
+}
