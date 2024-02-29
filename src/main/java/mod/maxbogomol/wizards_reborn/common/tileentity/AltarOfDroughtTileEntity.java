@@ -83,11 +83,11 @@ public class AltarOfDroughtTileEntity extends ExposedTileSimpleInventory impleme
 
             if (ticks <= 0 && wissen < getMaxWissen() && canWork()) {
                 ArrayList<BlockPos> blockPosList = CrystalRitual.getBlockPosWithArea(level, getBlockPos(), new Vec3(distance, distance, distance), new Vec3(distance, distance, distance), (p) -> {
-                    return level.getBlockState(p).is(WizardsReborn.ALTAR_OF_DROUGHT_TARGET) && !level.getBlockState(p).getValue(BlockStateProperties.PERSISTENT);
+                    return level.getBlockState(p).is(WizardsReborn.ALTAR_OF_DROUGHT_TARGET_BLOCK_TAG) && !level.getBlockState(p).getValue(BlockStateProperties.PERSISTENT);
                 }, true, true, 1);
 
                 for (BlockPos breakPos : blockPosList) {
-                    if (level.getBlockState(breakPos).is(WizardsReborn.ALTAR_OF_DROUGHT_TARGET) && !level.getBlockState(breakPos).getValue(BlockStateProperties.PERSISTENT)) {
+                    if (level.getBlockState(breakPos).is(WizardsReborn.ALTAR_OF_DROUGHT_TARGET_BLOCK_TAG) && !level.getBlockState(breakPos).getValue(BlockStateProperties.PERSISTENT)) {
                         PacketHandler.sendToTracking(level, getBlockPos(), new AltarOfDroughtBurstEffectPacket(getBlockPos()));
                         PacketHandler.sendToTracking(level, breakPos, new AltarOfDroughtBreakEffectPacket(breakPos));
                         PacketHandler.sendToTracking(level, getBlockPos(), new WissenSendEffectPacket(getBlockPos().getX() + 0.5F, getBlockPos().getY() + 0.5F, getBlockPos().getZ() + 0.5F, breakPos.getX() + 0.5F, breakPos.getY() + 0.5F, breakPos.getZ() + 0.5F, 0.466f, 0.643f, 0.815f, 25));

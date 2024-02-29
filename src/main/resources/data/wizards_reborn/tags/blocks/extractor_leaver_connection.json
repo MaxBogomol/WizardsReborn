@@ -1,0 +1,7 @@
+{
+  "replace": false,
+  "values": [
+    "minecraft:lever",
+    "wizards_reborn:arcane_lever"
+  ]
+}

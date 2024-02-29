@@ -1,5 +1,6 @@
 package mod.maxbogomol.wizards_reborn.common.block;
 
+import mod.maxbogomol.wizards_reborn.WizardsReborn;
 import mod.maxbogomol.wizards_reborn.common.tileentity.PipeBaseTileEntity;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -17,7 +18,6 @@ import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.AttachFace;
-import net.minecraft.world.level.block.state.properties.BellAttachType;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.gameevent.GameEvent;
 import net.minecraft.world.phys.BlockHitResult;
@@ -55,15 +55,7 @@ public abstract class TinyExtractorBaseBlock extends TinyPipeBaseBlock {
 
     @Override
     public boolean connected(Direction direction, BlockState state) {
-        if (state.hasProperty(BlockStateProperties.BELL_ATTACHMENT) && state.getValue(BlockStateProperties.BELL_ATTACHMENT) == BellAttachType.CEILING && direction == Direction.DOWN) {
-            return true;
-        }
-
-        if (state.hasProperty(BlockStateProperties.HANGING)) {
-            if (direction == Direction.DOWN && state.getValue(BlockStateProperties.HANGING))
-                return true;
-            if (direction == Direction.UP && !state.getValue(BlockStateProperties.HANGING))
-                return true;
+        if (!state.is(WizardsReborn.EXTRACTOR_LEAVER_CONNECTION_BLOCK_TAG)) {
             return false;
         }
 
@@ -80,8 +72,7 @@ public abstract class TinyExtractorBaseBlock extends TinyPipeBaseBlock {
         }
 
         return facingConnected(direction, state, BlockStateProperties.HORIZONTAL_FACING)
-                && facingConnected(direction, state, BlockStateProperties.FACING)
-                && facingConnected(direction, state, BlockStateProperties.FACING_HOPPER);
+                && facingConnected(direction, state, BlockStateProperties.FACING);
     }
 
     @Override

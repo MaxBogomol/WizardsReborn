@@ -1,0 +1,20 @@
+{
+  "parent": "wizards_reborn:block/arcane_lever",
+  "display": {
+    "gui": {
+      "rotation": [ 30, 225, 0 ],
+      "translation": [ 0, 0.8, 0],
+      "scale":[ 0.8, 0.8, 0.8 ]
+    },
+    "firstperson_righthand": {
+      "rotation": [ 0, 225, 0 ],
+      "translation": [ 0, 2.5, 0 ],
+      "scale": [ 0.40, 0.40, 0.40 ]
+    },
+    "firstperson_lefthand": {
+      "rotation": [ 0, 225, 0 ],
+      "translation": [ 0, 2.5, 0 ],
+      "scale": [ 0.40, 0.40, 0.40 ]
+    }
+  }
+}

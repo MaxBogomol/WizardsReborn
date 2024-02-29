@@ -182,7 +182,8 @@ public class WizardsReborn {
     public static final TagKey<Block> FLUID_PIPE_CONNECTION_TOGGLE_BLOCK_TAG = TagKey.create(Registries.BLOCK, new ResourceLocation(MOD_ID, "fluid_pipe_connection_toggle"));
     public static final TagKey<Block> STEAM_PIPE_CONNECTION_BLOCK_TAG = TagKey.create(Registries.BLOCK, new ResourceLocation(MOD_ID, "steam_pipe_connection"));
     public static final TagKey<Block> STEAM_PIPE_CONNECTION_TOGGLE_BLOCK_TAG = TagKey.create(Registries.BLOCK, new ResourceLocation(MOD_ID, "steam_pipe_connection_toggle"));
-    public static final TagKey<Block> ALTAR_OF_DROUGHT_TARGET = TagKey.create(Registries.BLOCK, new ResourceLocation(MOD_ID, "altar_of_drought_target"));
+    public static final TagKey<Block> EXTRACTOR_LEAVER_CONNECTION_BLOCK_TAG = TagKey.create(Registries.BLOCK, new ResourceLocation(MOD_ID, "extractor_leaver_connection"));
+    public static final TagKey<Block> ALTAR_OF_DROUGHT_TARGET_BLOCK_TAG  = TagKey.create(Registries.BLOCK, new ResourceLocation(MOD_ID, "altar_of_drought_target"));
 
     public static final TagKey<BannerPattern> VIOLENCE_BANNER_PATTERN_TAG = TagKey.create(Registries.BANNER_PATTERN, new ResourceLocation(MOD_ID, "pattern_item/violence"));
     public static final TagKey<BannerPattern> REPRODUCTION_BANNER_PATTERN_TAG = TagKey.create(Registries.BANNER_PATTERN, new ResourceLocation(MOD_ID, "pattern_item/reproduction"));
@@ -450,6 +451,7 @@ public class WizardsReborn {
     public static final RegistryObject<Block> LIGHT_TRANSFER_LENS = BLOCKS.register("light_transfer_lens", () -> new LightTransferLensBlock(BlockBehaviour.Properties.copy(Blocks.POLISHED_DEEPSLATE)));
     public static final RegistryObject<Block> RUNIC_PEDESTAL = BLOCKS.register("runic_pedestal", () -> new RunicPedestalBlock(BlockBehaviour.Properties.copy(Blocks.POLISHED_DEEPSLATE)));
 
+    public static final RegistryObject<Block> ARCANE_LEVER = BLOCKS.register("arcane_lever", () -> new WaterloggableLeverBlock(BlockBehaviour.Properties.copy(Blocks.LEVER)));
     public static final RegistryObject<Block> REDSTONE_SENSOR = BLOCKS.register("redstone_sensor", () -> new RedstoneSensorBlock(BlockBehaviour.Properties.copy(Blocks.OAK_PLANKS)));
     public static final RegistryObject<Block> WISSEN_SENSOR = BLOCKS.register("wissen_sensor", () -> new WissenSensorBlock(BlockBehaviour.Properties.copy(Blocks.OAK_PLANKS)));
     public static final RegistryObject<Block> COOLDOWN_SENSOR = BLOCKS.register("cooldown_sensor", () -> new CooldownSensorBlock(BlockBehaviour.Properties.copy(Blocks.OAK_PLANKS)));
@@ -682,6 +684,7 @@ public class WizardsReborn {
     public static final RegistryObject<Item> LIGHT_TRANSFER_LENS_ITEM = ITEMS.register("light_transfer_lens", () -> new BlockItem(LIGHT_TRANSFER_LENS.get(), new Item.Properties()));
     public static final RegistryObject<Item> RUNIC_PEDESTAL_ITEM = ITEMS.register("runic_pedestal", () -> new BlockItem(RUNIC_PEDESTAL.get(), new Item.Properties()));
 
+    public static final RegistryObject<Item> ARCANE_LEVER_ITEM = ITEMS.register("arcane_lever", () -> new BlockItem(ARCANE_LEVER.get(), new Item.Properties()));
     public static final RegistryObject<Item> REDSTONE_SENSOR_ITEM = ITEMS.register("redstone_sensor", () -> new BlockItem(REDSTONE_SENSOR.get(), new Item.Properties()));
     public static final RegistryObject<Item> WISSEN_SENSOR_ITEM = ITEMS.register("wissen_sensor", () -> new BlockItem(WISSEN_SENSOR.get(), new Item.Properties()));
     public static final RegistryObject<Item> COOLDOWN_SENSOR_ITEM = ITEMS.register("cooldown_sensor", () -> new BlockItem(COOLDOWN_SENSOR.get(), new Item.Properties()));

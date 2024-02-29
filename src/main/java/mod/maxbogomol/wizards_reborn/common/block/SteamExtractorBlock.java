@@ -39,11 +39,6 @@ public class SteamExtractorBlock extends TinyExtractorBaseBlock {
     }
 
     @Override
-    public boolean connected(Direction direction, BlockState state) {
-        return false;
-    }
-
-    @Override
     public boolean connectToTile(BlockEntity blockEntity, Direction direction) {
         boolean connect = false;
         if (blockEntity != null) {
