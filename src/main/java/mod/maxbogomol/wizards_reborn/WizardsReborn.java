@@ -434,6 +434,7 @@ public class WizardsReborn {
     public static final RegistryObject<Block> TOTEM_OF_FLAMES = BLOCKS.register("totem_of_flames", () -> new TotemOfFlamesBlock(BlockBehaviour.Properties.copy(Blocks.OAK_PLANKS).lightLevel(TotemOfFlamesBlock::getLightLevel)));
     public static final RegistryObject<Block> EXPERIENCE_TOTEM = BLOCKS.register("experience_totem", () -> new ExperienceTotemBlock(BlockBehaviour.Properties.copy(Blocks.OAK_PLANKS)));
     public static final RegistryObject<Block> TOTEM_OF_EXPERIENCE_ABSORPTION = BLOCKS.register("totem_of_experience_absorption", () -> new TotemOfExperienceAbsorptionBlock(BlockBehaviour.Properties.copy(Blocks.OAK_PLANKS)));
+    public static final RegistryObject<Block> TOTEM_OF_DISENCHANT = BLOCKS.register("totem_of_disenchant", () -> new TotemOfExperienceAbsorptionBlock(BlockBehaviour.Properties.copy(Blocks.OAK_PLANKS)));
     public static final RegistryObject<Block> ARCANE_ITERATOR = BLOCKS.register("arcane_iterator", () -> new ArcaneIteratorBlock(BlockBehaviour.Properties.copy(Blocks.OAK_PLANKS)));
 
     public static final RegistryObject<Block> WISESTONE_PEDESTAL = BLOCKS.register("wisestone_pedestal", () -> new ArcanePedestalBlock(BlockBehaviour.Properties.copy(Blocks.POLISHED_DEEPSLATE)));
@@ -667,6 +668,7 @@ public class WizardsReborn {
     public static final RegistryObject<Item> TOTEM_OF_FLAMES_ITEM = ITEMS.register("totem_of_flames", () -> new BlockItem(TOTEM_OF_FLAMES.get(), new Item.Properties()));
     public static final RegistryObject<Item> EXPERIENCE_TOTEM_ITEM = ITEMS.register("experience_totem", () -> new BlockItem(EXPERIENCE_TOTEM.get(), new Item.Properties()));
     public static final RegistryObject<Item> TOTEM_OF_EXPERIENCE_ABSORPTION_ITEM = ITEMS.register("totem_of_experience_absorption", () -> new BlockItem(TOTEM_OF_EXPERIENCE_ABSORPTION.get(), new Item.Properties()));
+    public static final RegistryObject<Item> TOTEM_OF_DISENCHANT_ITEM = ITEMS.register("totem_of_disenchant", () -> new BlockItem(TOTEM_OF_DISENCHANT.get(), new Item.Properties()));
     public static final RegistryObject<Item> ARCANE_ITERATOR_ITEM = ITEMS.register("arcane_iterator", () -> new BlockItem(ARCANE_ITERATOR.get(), new Item.Properties()));
 
     public static final RegistryObject<Item> WISESTONE_PEDESTAL_ITEM = ITEMS.register("wisestone_pedestal", () -> new BlockItem(WISESTONE_PEDESTAL.get(), new Item.Properties()));

@@ -212,6 +212,7 @@ public class WizardsRebornItemGroup {
             event.accept(WizardsReborn.TOTEM_OF_FLAMES_ITEM);
             event.accept(WizardsReborn.EXPERIENCE_TOTEM_ITEM);
             event.accept(WizardsReborn.TOTEM_OF_EXPERIENCE_ABSORPTION_ITEM);
+            event.accept(WizardsReborn.TOTEM_OF_DISENCHANT_ITEM);
             event.accept(WizardsReborn.ARCANE_ITERATOR_ITEM);
 
             event.accept(WizardsReborn.WISESTONE_PEDESTAL_ITEM);
