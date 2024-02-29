@@ -100,6 +100,8 @@
   "item.wizards_reborn.ground_mor": "Ground Mor",
   "item.wizards_reborn.ground_elder_mor": "Ground Elder Mor",
 
+  "item.wizards_reborn.petals_of_innocence": "Petals of Innocence",
+
   "block.wizards_reborn.arcanum_seed": "Arcanum Seed",
   "block.wizards_reborn.arcanum_growth": "Arcanum Growth",
 
@@ -160,6 +162,11 @@
   "block.wizards_reborn.wissen_cell": "Wissen Cell",
   "block.wizards_reborn.jeweler_table": "Jeweler Table",
   "block.wizards_reborn.altar_of_drought": "Altar of Drought",
+  "block.wizards_reborn.totem_base": "Totem Base",
+  "block.wizards_reborn.totem_of_flames": "Totem of Flames",
+  "block.wizards_reborn.experience_totem": "Experience Totem",
+  "block.wizards_reborn.totem_of_experience_absorption": "Totem of Experience Absorption",
+  "block.wizards_reborn.totem_of_disenchant": "Totem of Disenchant",
   "block.wizards_reborn.arcane_iterator": "Arcane Iterator",
 
   "block.wizards_reborn.wisestone_pedestal": "Wisestone Pedestal",
@@ -179,6 +186,7 @@
   "block.wizards_reborn.light_transfer_lens": "Light Transfer-Lens",
   "block.wizards_reborn.runic_pedestal": "Runic Pedestal",
 
+  "block.wizards_reborn.arcane_lever": "Arcane Lever",
   "block.wizards_reborn.redstone_sensor": "Redstone Sensor",
   "block.wizards_reborn.wissen_sensor": "Wissen Sensor",
   "block.wizards_reborn.cooldown_sensor": "Cooldown Sensor",

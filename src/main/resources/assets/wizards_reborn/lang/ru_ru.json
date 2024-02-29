@@ -100,6 +100,8 @@
   "item.wizards_reborn.ground_mor": "Молотый мор",
   "item.wizards_reborn.ground_elder_mor": "Молотый древний мор",
 
+  "item.wizards_reborn.petals_of_innocence": "Лепестки Невинности",
+
   "block.wizards_reborn.arcanum_seed": "Семя арканума",
   "block.wizards_reborn.arcanum_growth": "Растущий арканум",
 
@@ -160,6 +162,11 @@
   "block.wizards_reborn.wissen_cell": "Виссен ячейка",
   "block.wizards_reborn.jeweler_table": "Ювелирный стол",
   "block.wizards_reborn.altar_of_drought": "Алтарь засухи",
+  "block.wizards_reborn.totem_base": "Основа тотема",
+  "block.wizards_reborn.totem_of_flames": "Тотем пламени",
+  "block.wizards_reborn.experience_totem": "Тотем опыта",
+  "block.wizards_reborn.totem_of_experience_absorption": "Тотем поглощения опыта",
+  "block.wizards_reborn.totem_of_disenchant": "Тотем разачарования",
   "block.wizards_reborn.arcane_iterator": "Аркановый итератор",
 
   "block.wizards_reborn.wisestone_pedestal": "Мудро-каменный пьедестал",
@@ -179,6 +186,7 @@
   "block.wizards_reborn.light_transfer_lens": "Светопереносящая линза",
   "block.wizards_reborn.runic_pedestal": "Рунический пьедестал",
 
+  "block.wizards_reborn.arcane_lever": "Аркановый рычаг",
   "block.wizards_reborn.redstone_sensor": "Редстоун сенсор",
   "block.wizards_reborn.wissen_sensor": "Виссен сенсор",
   "block.wizards_reborn.cooldown_sensor": "Сенсор перезарядки",

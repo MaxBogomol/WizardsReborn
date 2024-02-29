@@ -141,6 +141,8 @@ import top.theillusivec4.curios.api.SlotTypeMessage;
 import top.theillusivec4.curios.api.SlotTypePreset;
 import top.theillusivec4.curios.api.client.CuriosRendererRegistry;
 
+import java.awt.*;
+
 @Mod("wizards_reborn")
 public class WizardsReborn {
     public static final String MOD_ID = "wizards_reborn";
@@ -219,26 +221,26 @@ public class WizardsReborn {
     public static final CrystalType VOID_CRYSTAL_TYPE  = new VoidCrystalType(MOD_ID+":void");
 
     //MONOGRAMS
-    public static Monogram LUNAM_MONOGRAM = new Monogram(MOD_ID+":lunam");
-    public static Monogram VITA_MONOGRAM = new Monogram(MOD_ID+":vita");
-    public static Monogram SOLEM_MONOGRAM = new Monogram(MOD_ID+":solem");
-    public static Monogram MORS_MONOGRAM = new Monogram(MOD_ID+":mors");
-    public static Monogram MIRACULUM_MONOGRAM = new Monogram(MOD_ID+":miraculum");
-    public static Monogram TEMPUS_MONOGRAM = new Monogram(MOD_ID+":tempus");
-    public static Monogram STATERA_MONOGRAM = new Monogram(MOD_ID+":statera");
-    public static Monogram ECLIPSIS_MONOGRAM = new Monogram(MOD_ID+":eclipsis");
-    public static Monogram SICCITAS_MONOGRAM = new Monogram(MOD_ID+":siccitas");
-    public static Monogram SOLSTITIUM_MONOGRAM = new Monogram(MOD_ID+":solstitium");
-    public static Monogram FAMES_MONOGRAM = new Monogram(MOD_ID+":fames");
-    public static Monogram RENAISSANCE_MONOGRAM = new Monogram(MOD_ID+":renaissance");
-    public static Monogram BELLUM_MONOGRAM = new Monogram(MOD_ID+":bellum");
-    public static Monogram LUX_MONOGRAM = new Monogram(MOD_ID+":lux");
-    public static Monogram KARA_MONOGRAM = new Monogram(MOD_ID+":kara");
-    public static Monogram DEGRADATIO_MONOGRAM = new Monogram(MOD_ID+":degradatio");
-    public static Monogram PRAEDICTIONEM_MONOGRAM = new Monogram(MOD_ID+":praedictionem");
-    public static Monogram EVOLUTIONIS_MONOGRAM = new Monogram(MOD_ID+":evolutionis");
-    public static Monogram TENEBRIS_MONOGRAM = new Monogram(MOD_ID+":tenebris");
-    public static Monogram UNIVERSUM_MONOGRAM = new Monogram(MOD_ID+":universum");
+    public static Monogram LUNAM_MONOGRAM = new Monogram(MOD_ID+":lunam", new Color(177, 211, 251));
+    public static Monogram VITA_MONOGRAM = new Monogram(MOD_ID+":vita", new Color(245, 77, 127));
+    public static Monogram SOLEM_MONOGRAM = new Monogram(MOD_ID+":solem", new Color(245, 251, 123));
+    public static Monogram MORS_MONOGRAM = new Monogram(MOD_ID+":mors", new Color(122, 103, 128));
+    public static Monogram MIRACULUM_MONOGRAM = new Monogram(MOD_ID+":miraculum", new Color(67, 148, 114));
+    public static Monogram TEMPUS_MONOGRAM = new Monogram(MOD_ID+":tempus", new Color(214, 152, 137));
+    public static Monogram STATERA_MONOGRAM = new Monogram(MOD_ID+":statera", new Color(85, 132, 227));
+    public static Monogram ECLIPSIS_MONOGRAM = new Monogram(MOD_ID+":eclipsis", new Color(229, 249, 179));
+    public static Monogram SICCITAS_MONOGRAM = new Monogram(MOD_ID+":siccitas", new Color(139, 223, 133));
+    public static Monogram SOLSTITIUM_MONOGRAM = new Monogram(MOD_ID+":solstitium", new Color(228, 188, 67));
+    public static Monogram FAMES_MONOGRAM = new Monogram(MOD_ID+":fames", new Color(151, 103, 135));
+    public static Monogram RENAISSANCE_MONOGRAM = new Monogram(MOD_ID+":renaissance", new Color(124, 236, 197));
+    public static Monogram BELLUM_MONOGRAM = new Monogram(MOD_ID+":bellum", new Color(138, 64, 76));
+    public static Monogram LUX_MONOGRAM = new Monogram(MOD_ID+":lux", new Color(215, 235, 192));
+    public static Monogram KARA_MONOGRAM = new Monogram(MOD_ID+":kara", new Color(133, 56, 89));
+    public static Monogram DEGRADATIO_MONOGRAM = new Monogram(MOD_ID+":degradatio", new Color(134, 130, 93));
+    public static Monogram PRAEDICTIONEM_MONOGRAM = new Monogram(MOD_ID+":praedictionem", new Color(255, 142, 94));
+    public static Monogram EVOLUTIONIS_MONOGRAM = new Monogram(MOD_ID+":evolutionis", new Color(208, 132, 214));
+    public static Monogram TENEBRIS_MONOGRAM = new Monogram(MOD_ID+":tenebris", new Color(62, 77, 111));
+    public static Monogram UNIVERSUM_MONOGRAM = new Monogram(MOD_ID+":universum", new Color(120, 14, 212));
 
     //SPELLS
     public static Spell EARTH_PROJECTILE_SPELL = new EarthProjectileSpell(MOD_ID+":earth_projectile", 5);

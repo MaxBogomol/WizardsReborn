@@ -497,7 +497,10 @@ public class CrystalChooseScreen extends Screen {
             }
 
             if (mouseX >= x - 144 + 24 - 16 && mouseY >= y - 16 && mouseX <= x - 144 + 24 + 16 && mouseY <= y + 16) {
-                gui.renderTooltip(Minecraft.getInstance().font, getWandCrystal(), mouseX, mouseY);
+                ItemStack wandCrystal = getWandCrystal();
+                if (!wandCrystal.isEmpty()) {
+                    gui.renderTooltip(Minecraft.getInstance().font, wandCrystal, mouseX, mouseY);
+                }
                 if (spellWand != null) {
                     gui.blit(spellWand.getIcon(), mouseX + 9, mouseY - 68, 0, 0, 32, 32, 32, 32);
                     if (!spellWand.canWandWithCrystal(getWand())) {

@@ -2,25 +2,38 @@ package mod.maxbogomol.wizards_reborn.api.monogram;
 
 import com.mojang.blaze3d.platform.GlStateManager;
 import com.mojang.blaze3d.systems.RenderSystem;
+import mod.maxbogomol.wizards_reborn.WizardsRebornClient;
 import mod.maxbogomol.wizards_reborn.client.arcanemicon.ArcanemiconGui;
 import mod.maxbogomol.wizards_reborn.client.event.ClientTickHandler;
+import mod.maxbogomol.wizards_reborn.utils.RenderUtils;
 import net.minecraft.ChatFormatting;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
+import net.minecraft.client.renderer.GameRenderer;
+import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.util.Mth;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 
+import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
 public class Monogram {
     public String id;
+    public Color color;
 
     public Monogram(String id) {
         this.id = id;
+        this.color = new Color(255, 255, 255);
+    }
+
+    public Monogram(String id, Color color) {
+        this.id = id;
+        this.color = color;
     }
 
     public String getId() {
@@ -29,6 +42,10 @@ public class Monogram {
 
     public ResourceLocation getIcon() {
         return getIcon(id);
+    }
+
+    public Color getColor() {
+        return color;
     }
 
     public String getTranslatedName() {
@@ -61,12 +78,38 @@ public class Monogram {
     public void renderArcanemiconIcon(ArcanemiconGui book, GuiGraphics gui, int x, int y) {
         Random random = new Random(getId().length());
 
+        float r = Mth.lerp(0.5f, 1f, color.getRed() / 255f);
+        float g = Mth.lerp(0.5f, 1f, color.getGreen() / 255f);
+        float b = Mth.lerp(0.5f, 1f, color.getBlue() / 255f);
+
+        r = color.getRed() / 255f;
+        g = color.getGreen() / 255f;
+        b = color.getBlue() / 255f;
+
         RenderSystem.enableBlend();
         RenderSystem.blendFunc(GlStateManager.SourceFactor.SRC_ALPHA, GlStateManager.DestFactor.ONE);
-        RenderSystem.setShaderColor(1F, 1F, 1F, 0.15F);
+        MultiBufferSource.BufferSource buffersource = Minecraft.getInstance().renderBuffers().bufferSource();
+        RenderSystem.depthMask(false);
+        RenderSystem.setShader(WizardsRebornClient::getGlowingShader);
+
+        gui.pose().pushPose();
+        gui.pose().translate(0, 0, 100);
+        RenderSystem.setShaderColor(r, g, b, 0.35F);
+        RenderUtils.dragon(gui.pose(), buffersource, x + 8, y + 8, 0, 7.5f, Minecraft.getInstance().getPartialTick(), r, g, b, getId().length());
+        buffersource.endBatch();
+        gui.pose().popPose();
+
+        RenderSystem.disableBlend();
+        RenderSystem.depthMask(true);
+        RenderSystem.blendFunc(GlStateManager.SourceFactor.SRC_ALPHA, GlStateManager.DestFactor.ONE_MINUS_SRC_ALPHA);
+        RenderSystem.setShader(GameRenderer::getPositionTexShader);
+
+        RenderSystem.enableBlend();
+        RenderSystem.blendFunc(GlStateManager.SourceFactor.SRC_ALPHA, GlStateManager.DestFactor.ONE);
+        RenderSystem.setShaderColor(r, g, b, 0.15F);
 
         for (int i = 0; i < 5; i++) {
-            RenderSystem.setShaderColor(1F, 1F, 1F, (float) (0.05F + (random.nextDouble() / 10)));
+            RenderSystem.setShaderColor(r, g, b, (float) (0.15F + (random.nextDouble() / 10)));
             double dst = (360 * random.nextDouble()) + (ClientTickHandler.ticksInGame + Minecraft.getInstance().getFrameTime()) / 8;
             double dstX = (360 * random.nextDouble()) + (ClientTickHandler.ticksInGame + Minecraft.getInstance().getFrameTime()) / 16;
             double dstY = (360 * random.nextDouble()) + (ClientTickHandler.ticksInGame + Minecraft.getInstance().getFrameTime()) / 16;
@@ -78,21 +121,31 @@ public class Monogram {
 
         RenderSystem.disableBlend();
         RenderSystem.blendFunc(GlStateManager.SourceFactor.SRC_ALPHA, GlStateManager.DestFactor.ONE_MINUS_SRC_ALPHA);
-        RenderSystem.setShaderColor(1F, 1F, 1F, 1F);
 
+        RenderSystem.setShaderColor(r, g, b, 1F);
+        RenderSystem.setShaderColor(1F, 1F, 1F, 1F);
         gui.blit(getIcon(), x, y, 0, 0, 16, 16, 16, 16);
+        RenderSystem.setShaderColor(1F, 1F, 1F, 1F);
     }
 
     @OnlyIn(Dist.CLIENT)
     public void renderArcanemiconMiniIcon(ArcanemiconGui book, GuiGraphics gui, int x, int y) {
         Random random = new Random(getId().length());
 
+        float r = Mth.lerp(0.5f, 1f, color.getRed() / 255f);
+        float g = Mth.lerp(0.5f, 1f, color.getGreen() / 255f);
+        float b = Mth.lerp(0.5f, 1f, color.getBlue() / 255f);
+
+        r = color.getRed() / 255f;
+        g = color.getGreen() / 255f;
+        b = color.getBlue() / 255f;
+
         RenderSystem.enableBlend();
         RenderSystem.blendFunc(GlStateManager.SourceFactor.SRC_ALPHA, GlStateManager.DestFactor.ONE);
-        RenderSystem.setShaderColor(1F, 1F, 1F, 0.15F);
+        RenderSystem.setShaderColor(r, g, b, 0.15F);
 
         for (int i = 0; i < 5; i++) {
-            RenderSystem.setShaderColor(1F, 1F, 1F, (float) (0.05F + (random.nextDouble() / 10)));
+            RenderSystem.setShaderColor(r, g, b, (float) (0.15F + (random.nextDouble() / 10)));
             double dst = (360 * random.nextDouble()) + (ClientTickHandler.ticksInGame + Minecraft.getInstance().getFrameTime()) / 8;
             double dstX = (360 * random.nextDouble()) + (ClientTickHandler.ticksInGame + Minecraft.getInstance().getFrameTime()) / 16;
             double dstY = (360 * random.nextDouble()) + (ClientTickHandler.ticksInGame + Minecraft.getInstance().getFrameTime()) / 16;
@@ -104,9 +157,15 @@ public class Monogram {
 
         RenderSystem.disableBlend();
         RenderSystem.blendFunc(GlStateManager.SourceFactor.SRC_ALPHA, GlStateManager.DestFactor.ONE_MINUS_SRC_ALPHA);
-        RenderSystem.setShaderColor(1F, 1F, 1F, 1F);
 
+        r = color.getRed() / 255f;
+        g = color.getGreen() / 255f;
+        b = color.getBlue() / 255f;
+
+        RenderSystem.setShaderColor(r, g, b, 1F);
+        RenderSystem.setShaderColor(1F, 1F, 1F, 1F);
         gui.blit(getIcon(), x, y, 0, 0, 8, 8, 8, 8);
+        RenderSystem.setShaderColor(1F, 1F, 1F, 1F);
     }
 
     public List<Component> getComponentList() {
