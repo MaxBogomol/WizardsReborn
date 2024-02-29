@@ -129,7 +129,7 @@ public class Spell {
 
     public int getWissenCostWithStat(CompoundTag nbt, Player player, int cost) {
         int balanceLevel = CrystalUtils.getStatLevel(nbt, WizardsReborn.BALANCE_CRYSTAL_STAT);
-        float modifier = (1 - (getWissenStatModifier() * balanceLevel) - WissenUtils.getWissenCostModifierWithSale(player));
+        float modifier = (1 - (getWissenStatModifier() * balanceLevel) - WissenUtils.getWissenCostModifierWithDiscount(player));
         if (modifier <= 0) {
             return 1;
         }

@@ -469,7 +469,7 @@
   "gui.wizards_reborn.steam": "Steam",
   "gui.wizards_reborn.experience": "Experience",
 
-  "attribute.name.wizards_reborn.wissen_sale": "Wissen Sale",
+  "attribute.name.wizards_reborn.wissen_discount": "Wissen Discount",
   "attribute.name.wizards_reborn.magic_armor": "Magic Armor",
 
   "knowledge.toast.wizards_reborn.new_knowledge": "Knowledge gained",
@@ -761,7 +761,7 @@
     "wizards_reborn.arcanemicon.page.arcane_fortress_armor": "Armor made of dense arcane gold plates. Has high knockback resistance.",
   "wizards_reborn.arcanemicon.chapter.inventor_wizard_armor": "Wizard Armor",
     "wizards_reborn.arcanemicon.page.inventor_wizard_armor.title": "Inventor Wizard Armor",
-    "wizards_reborn.arcanemicon.page.inventor_wizard_armor": "Elegant British costume a inventor wizard. Gives a wissen sale and magic armor. \n \n This hat is just right for me",
+    "wizards_reborn.arcanemicon.page.inventor_wizard_armor": "Elegant British costume a inventor wizard. Gives a wissen discount and magic armor. \n \n This hat is just right for me",
     "wizards_reborn.arcanemicon.page.inventor_wizard_armor.wissen_nature.title": "Wissen Nature",
     "wizards_reborn.arcanemicon.page.inventor_wizard_armor.wissen_nature": "A full set of armor improves the performance of many spells, and even adds unique effects.",
   "wizards_reborn.arcanemicon.chapter.arcane_wood_cane": "Arcane Wood Cane",
@@ -1108,7 +1108,7 @@
     "wizards_reborn.arcanemicon.page.oil_tea.title": "Oil Tea",
     "wizards_reborn.arcanemicon.page.oil_tea": "Alchemy oil tea? It doesn't taste great, but it increases your strength and regeneration.",
     "wizards_reborn.arcanemicon.page.wissen_tea.title": "Wissen Tea",
-    "wizards_reborn.arcanemicon.page.wissen_tea": "Tea with light notes of wissen. Gives wissen sale and magic armor. It also slowly accumulates wissen in your items.",
+    "wizards_reborn.arcanemicon.page.wissen_tea": "Tea with light notes of wissen. Gives wissen discount and magic armor. It also slowly accumulates wissen in your items.",
   "wizards_reborn.arcanemicon.chapter.alchemy_brews": "Alchemy Brews",
     "wizards_reborn.arcanemicon.page.alchemy_brews.title": "Alchemy Brews",
     "wizards_reborn.arcanemicon.page.alchemy_brews": "Unique potions can be brewed from various alchemy brews.",

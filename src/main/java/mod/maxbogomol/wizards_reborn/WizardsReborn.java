@@ -947,7 +947,7 @@ public class WizardsReborn {
     public static final RegistryObject<ArgumentTypeInfo<?, ?>> SPELLS_ARG = ARG_TYPES.register("spell", () -> ArgumentTypeInfos.registerByClass(SpellArgument.class, SingletonArgumentInfo.contextFree(SpellArgument::spells)));
     public static final RegistryObject<ArgumentTypeInfo<?, ?>> ARCANE_ENCHANTMENT_ARG = ARG_TYPES.register("arcane_enchantment", () -> ArgumentTypeInfos.registerByClass(ArcaneEnchantmentArgument.class, SingletonArgumentInfo.contextFree(ArcaneEnchantmentArgument::arcaneEnchantments)));
 
-    public static final RegistryObject<Attribute> WISSEN_SALE = ATTRIBUTES.register("wissen_sale", () -> new RangedAttribute("attribute.name.wizards_reborn.wissen_sale", 0, 0, 75).setSyncable(true));
+    public static final RegistryObject<Attribute> WISSEN_DISCOUNT = ATTRIBUTES.register("wissen_discount", () -> new RangedAttribute("attribute.name.wizards_reborn.wissen_discount", 0, 0, 75).setSyncable(true));
     public static final RegistryObject<Attribute> MAGIC_ARMOR = ATTRIBUTES.register("magic_armor", () -> new RangedAttribute("attribute.name.wizards_reborn.magic_armor", 0, 0, 100).setSyncable(true));
 
     public static final RegistryObject<MobEffect> MOR_SPORES_EFFECT = EFFECTS.register("mor_spores", MorSporesEffect::new);

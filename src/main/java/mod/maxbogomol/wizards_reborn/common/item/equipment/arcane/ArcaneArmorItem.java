@@ -25,11 +25,11 @@ import java.util.UUID;
 import java.util.function.Consumer;
 
 public class ArcaneArmorItem extends ArmorItem implements IArcaneItem {
-    public static final UUID BASE_WISSEN_SALE_UUID = UUID.fromString("0D0AA300-8D31-11EE-B9D1-0242AC120002");
-    public static final UUID CHEST_WISSEN_SALE_UUID = UUID.fromString("78537078-9ABB-11EE-b9D1-0242AC120002");
-    public static final UUID HEAD_WISSEN_SALE_UUID = UUID.fromString("7BEC8BFC-9ABB-11EE-B9D1-0242AC120002");
-    public static final UUID LEGS_WISSEN_SALE_UUID = UUID.fromString("7E429B80-9ABB-11EE-B9D1-0242AC120002");
-    public static final UUID FEET_WISSEN_SALE_UUID = UUID.fromString("834D5B42-9ABB-11EE-B9D1-0242AC120002");
+    public static final UUID BASE_WISSEN_DISCOUNT_UUID = UUID.fromString("0D0AA300-8D31-11EE-B9D1-0242AC120002");
+    public static final UUID CHEST_WISSEN_DISCOUNT_UUID = UUID.fromString("78537078-9ABB-11EE-b9D1-0242AC120002");
+    public static final UUID HEAD_WISSEN_DISCOUNT_UUID = UUID.fromString("7BEC8BFC-9ABB-11EE-B9D1-0242AC120002");
+    public static final UUID LEGS_WISSEN_DISCOUNT_UUID = UUID.fromString("7E429B80-9ABB-11EE-B9D1-0242AC120002");
+    public static final UUID FEET_WISSEN_DISCOUNT_UUID = UUID.fromString("834D5B42-9ABB-11EE-B9D1-0242AC120002");
 
     public static final UUID BASE_MAGIC_ARMOR_UUID = UUID.fromString("3001CCC8-9C1B-11EE-8C90-0242AC120002");
     public static final UUID CHEST_MAGIC_ARMOR_UUID = UUID.fromString("3295267E-9C1B-11EE-8C90-0242AC120002");
@@ -41,17 +41,17 @@ public class ArcaneArmorItem extends ArmorItem implements IArcaneItem {
         super(material, type, properties);
     }
 
-    public int getWissenSaleForSlot(EquipmentSlot slot) {
+    public int getWissenDiscountForSlot(EquipmentSlot slot) {
         return 0;
     }
 
-    public static UUID getWissenSaleUUIDForSlot(EquipmentSlot slot) {
+    public static UUID getWissenDiscountUUIDForSlot(EquipmentSlot slot) {
         return switch (slot) {
-            case HEAD -> HEAD_WISSEN_SALE_UUID;
-            case CHEST -> CHEST_WISSEN_SALE_UUID;
-            case LEGS -> LEGS_WISSEN_SALE_UUID;
-            case FEET -> FEET_WISSEN_SALE_UUID;
-            default -> BASE_WISSEN_SALE_UUID;
+            case HEAD -> HEAD_WISSEN_DISCOUNT_UUID;
+            case CHEST -> CHEST_WISSEN_DISCOUNT_UUID;
+            case LEGS -> LEGS_WISSEN_DISCOUNT_UUID;
+            case FEET -> FEET_WISSEN_DISCOUNT_UUID;
+            default -> BASE_WISSEN_DISCOUNT_UUID;
         };
     }
 

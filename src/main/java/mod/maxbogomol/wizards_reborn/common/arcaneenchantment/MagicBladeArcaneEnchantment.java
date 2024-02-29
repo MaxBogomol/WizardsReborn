@@ -46,7 +46,7 @@ public class MagicBladeArcaneEnchantment extends ArcaneEnchantment {
                         int enchantmentLevel = ArcaneEnchantmentUtils.getArcaneEnchantment(stack, WizardsReborn.MAGIC_BLADE_ARCANE_ENCHANTMENT);
 
                         if (enchantmentLevel > 0 && random.nextFloat() < 0.35F) {
-                            float costModifier = WissenUtils.getWissenCostModifierWithSale(player);
+                            float costModifier = WissenUtils.getWissenCostModifierWithDiscount(player);
                             List<ItemStack> items = WissenUtils.getWissenItemsNoneAndStorage(WissenUtils.getWissenItemsCurios(player));
                             int wissen = WissenUtils.getWissenInItems(items);
                             int cost = (int) (30 * (1 - costModifier));

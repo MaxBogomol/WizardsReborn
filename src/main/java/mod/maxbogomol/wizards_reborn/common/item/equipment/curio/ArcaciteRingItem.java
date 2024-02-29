@@ -39,7 +39,7 @@ public class ArcaciteRingItem extends BaseCurioItem implements IWissenItem {
                                                                         UUID uuid, ItemStack stack) {
         Multimap<Attribute, AttributeModifier> atts = LinkedHashMultimap.create();
         atts.put(Attributes.ARMOR_TOUGHNESS, new AttributeModifier(uuid, "bonus", 1, AttributeModifier.Operation.ADDITION));
-        atts.put(WizardsReborn.WISSEN_SALE.get(), new AttributeModifier(uuid, "bonus", 1, AttributeModifier.Operation.ADDITION));
+        atts.put(WizardsReborn.WISSEN_DISCOUNT.get(), new AttributeModifier(uuid, "bonus", 1, AttributeModifier.Operation.ADDITION));
         return atts;
     }
 
@@ -68,7 +68,7 @@ public class ArcaciteRingItem extends BaseCurioItem implements IWissenItem {
             if (slotContext.entity() instanceof Player player) {
                 if (slotContext.entity().getHealth() < slotContext.entity().getMaxHealth()) {
                     if (slotContext.entity().tickCount % 120 == 0) {
-                        float costModifier = WissenUtils.getWissenCostModifierWithSale(player);
+                        float costModifier = WissenUtils.getWissenCostModifierWithDiscount(player);
                         int cost = (int) (12 * costModifier);
                         if (cost <= 0) {
                             cost = 1;

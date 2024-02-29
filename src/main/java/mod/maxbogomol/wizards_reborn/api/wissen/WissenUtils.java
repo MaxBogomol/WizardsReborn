@@ -159,8 +159,8 @@ public class WissenUtils {
         connectBoxEffect(level, posFrom, posTo, color, 1);
     }
 
-    public static float getWissenCostModifierWithSale(Player player) {
-        AttributeInstance attr = player.getAttribute(WizardsReborn.WISSEN_SALE.get());
+    public static float getWissenCostModifierWithDiscount(Player player) {
+        AttributeInstance attr = player.getAttribute(WizardsReborn.WISSEN_DISCOUNT.get());
         return (float) (attr.getValue() / 100d);
     }
 

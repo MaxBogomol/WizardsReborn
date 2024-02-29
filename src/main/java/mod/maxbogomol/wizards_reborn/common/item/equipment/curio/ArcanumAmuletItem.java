@@ -39,7 +39,7 @@ public class ArcanumAmuletItem extends BaseCurioItem implements IWissenItem {
     public Multimap<Attribute, AttributeModifier> getAttributeModifiers(SlotContext slotContext,
                                                                         UUID uuid, ItemStack stack) {
         Multimap<Attribute, AttributeModifier> atts = LinkedHashMultimap.create();
-        atts.put(WizardsReborn.WISSEN_SALE.get(), new AttributeModifier(uuid, "bonus", 3, AttributeModifier.Operation.ADDITION));
+        atts.put(WizardsReborn.WISSEN_DISCOUNT.get(), new AttributeModifier(uuid, "bonus", 3, AttributeModifier.Operation.ADDITION));
         return atts;
     }
 

@@ -31,7 +31,7 @@ public class InventorWizardArmorItem extends ArcaneArmorItem implements IForgeIt
     }
 
     @Override
-    public int getWissenSaleForSlot(EquipmentSlot slot) {
+    public int getWissenDiscountForSlot(EquipmentSlot slot) {
         return switch (slot) {
             case CHEST -> 3;
             case HEAD -> 3;
@@ -56,7 +56,7 @@ public class InventorWizardArmorItem extends ArcaneArmorItem implements IForgeIt
     public Multimap<Attribute, AttributeModifier> getDefaultAttributeModifiers(EquipmentSlot slot) {
         ImmutableMultimap.Builder<Attribute, AttributeModifier> atts = ImmutableMultimap.builder();
         atts.putAll(super.getDefaultAttributeModifiers(slot));
-        atts.put(WizardsReborn.WISSEN_SALE.get(), new AttributeModifier(getWissenSaleUUIDForSlot(slot), "bonus", getWissenSaleForSlot(slot), AttributeModifier.Operation.ADDITION));
+        atts.put(WizardsReborn.WISSEN_DISCOUNT.get(), new AttributeModifier(getWissenDiscountUUIDForSlot(slot), "bonus", getWissenDiscountForSlot(slot), AttributeModifier.Operation.ADDITION));
         atts.put(WizardsReborn.MAGIC_ARMOR.get(), new AttributeModifier(getMagicArmorUUIDForSlot(slot), "bonus", getMagicArmorForSlot(slot), AttributeModifier.Operation.ADDITION));
         return slot == type.getSlot() ? atts.build() : super.getDefaultAttributeModifiers(slot);
     }

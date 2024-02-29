@@ -41,7 +41,7 @@ public class ArcaciteAmuletItem extends BaseCurioItem implements IWissenItem {
     public Multimap<Attribute, AttributeModifier> getAttributeModifiers(SlotContext slotContext,
                                                                         UUID uuid, ItemStack stack) {
         Multimap<Attribute, AttributeModifier> atts = LinkedHashMultimap.create();
-        atts.put(WizardsReborn.WISSEN_SALE.get(), new AttributeModifier(uuid, "bonus", 3, AttributeModifier.Operation.ADDITION));
+        atts.put(WizardsReborn.WISSEN_DISCOUNT.get(), new AttributeModifier(uuid, "bonus", 3, AttributeModifier.Operation.ADDITION));
         atts.put(Attributes.ARMOR, new AttributeModifier(uuid, "bonus", 1, AttributeModifier.Operation.ADDITION));
         return atts;
     }
@@ -71,7 +71,7 @@ public class ArcaciteAmuletItem extends BaseCurioItem implements IWissenItem {
             if (slotContext.entity() instanceof Player player) {
                 if (slotContext.entity().getHealth() < slotContext.entity().getMaxHealth()) {
                     if (slotContext.entity().tickCount % 150 == 0) {
-                        float costModifier = WissenUtils.getWissenCostModifierWithSale(player);
+                        float costModifier = WissenUtils.getWissenCostModifierWithDiscount(player);
                         int cost = (int) (25 * costModifier);
                         if (cost <= 0) {
                             cost = 1;

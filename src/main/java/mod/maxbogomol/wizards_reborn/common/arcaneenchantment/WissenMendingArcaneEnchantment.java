@@ -34,7 +34,7 @@ public class WissenMendingArcaneEnchantment extends ArcaneEnchantment {
                         tick = 20;
                     }
                     if (entity.tickCount % tick == 0) {
-                        float costModifier = WissenUtils.getWissenCostModifierWithSale(player);
+                        float costModifier = WissenUtils.getWissenCostModifierWithDiscount(player);
                         List<ItemStack> items = WissenUtils.getWissenItemsNoneAndStorage(WissenUtils.getWissenItemsCurios(player));
                         int wissen = WissenUtils.getWissenInItems(items);
                         int cost = (int) (5 * (1 - costModifier));
@@ -57,7 +57,7 @@ public class WissenMendingArcaneEnchantment extends ArcaneEnchantment {
             if (amount > 0) {
                 if (entity instanceof Player player) {
                     int enchantmentLevel = ArcaneEnchantmentUtils.getArcaneEnchantment(stack, WizardsReborn.WISSEN_MENDING_ARCANE_ENCHANTMENT);
-                    float costModifier = WissenUtils.getWissenCostModifierWithSale(player);
+                    float costModifier = WissenUtils.getWissenCostModifierWithDiscount(player);
                     List<ItemStack> items = WissenUtils.getWissenItemsNoneAndStorage(WissenUtils.getWissenItemsCurios(player));
                     int wissen = WissenUtils.getWissenInItems(items);
                     int cost = (int) (5 * (1 - costModifier));
