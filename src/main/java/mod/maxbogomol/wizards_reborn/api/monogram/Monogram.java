@@ -4,12 +4,16 @@ import com.mojang.blaze3d.platform.GlStateManager;
 import com.mojang.blaze3d.systems.RenderSystem;
 import mod.maxbogomol.wizards_reborn.client.arcanemicon.ArcanemiconGui;
 import mod.maxbogomol.wizards_reborn.client.event.ClientTickHandler;
+import net.minecraft.ChatFormatting;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
+import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
 
 public class Monogram {
@@ -31,6 +35,10 @@ public class Monogram {
         return getTranslatedName(id);
     }
 
+    public String getTranslatedLoreName() {
+        return getTranslatedLoreName(id);
+    }
+
     public static ResourceLocation getIcon(String id) {
         int i = id.indexOf(":");
         String modId = id.substring(0, i);
@@ -43,6 +51,10 @@ public class Monogram {
         String modId = id.substring(0, i);
         String monogramId = id.substring(i + 1);
         return "monogram."  + modId + "." + monogramId;
+    }
+
+    public static String getTranslatedLoreName(String id) {
+        return getTranslatedName(id) + ".lore";
     }
 
     @OnlyIn(Dist.CLIENT)
@@ -95,5 +107,12 @@ public class Monogram {
         RenderSystem.setShaderColor(1F, 1F, 1F, 1F);
 
         gui.blit(getIcon(), x, y, 0, 0, 8, 8, 8, 8);
+    }
+
+    public List<Component> getComponentList() {
+        List<Component> list = new ArrayList<>();
+        list.add(Component.translatable(getTranslatedName()));
+        list.add(Component.translatable(getTranslatedLoreName()).withStyle(ChatFormatting.GRAY));
+        return list;
     }
 }

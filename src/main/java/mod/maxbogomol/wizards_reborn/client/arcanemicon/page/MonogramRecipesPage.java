@@ -13,6 +13,8 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 
+import java.util.Optional;
+
 public class MonogramRecipesPage extends Page {
     public static final ResourceLocation BACKGROUND = new ResourceLocation(WizardsReborn.MOD_ID, "textures/gui/arcanemicon/monogram_page.png");
     public Monogram monogram;
@@ -50,15 +52,15 @@ public class MonogramRecipesPage extends Page {
                     recipe.getOutput().renderArcanemiconMiniIcon(book, gui, x + (right ? 69 : 9) + 41, y + 7 + (ii * 12) + 1);
                 } else {
                     if (mouseX >= x + (right ? 69 : 9) + 1 && mouseY >= y + 7 + (ii * 12) + 1 && mouseX <= x + (right ? 69 : 9) + 1 + 8 && mouseY <= y + 7 + (ii * 12) + 1 + 8) {
-                        gui.renderTooltip(Minecraft.getInstance().font, Component.translatable(monogram.getTranslatedName()), mouseX, mouseY);
+                        gui.renderTooltip(Minecraft.getInstance().font, monogram.getComponentList(), Optional.empty(), mouseX, mouseY);
                     }
 
                     if (mouseX >= x + (right ? 69 : 9) + 21 && mouseY >= y + 7 + (ii * 12) + 1 && mouseX <= x + (right ? 69 : 9) + 21 + 8 && mouseY <= y + 7 + (ii * 12) + 1 + 8) {
-                        gui.renderTooltip(Minecraft.getInstance().font, Component.translatable(extraMonogram.getTranslatedName()), mouseX, mouseY);
+                        gui.renderTooltip(Minecraft.getInstance().font, extraMonogram.getComponentList(), Optional.empty(), mouseX, mouseY);
                     }
 
                     if (mouseX >= x + (right ? 69 : 9) + 41 && mouseY >= y + 7 + (ii * 12) + 1 && mouseX <= x + (right ? 69 : 9) + 41+ 8 && mouseY <= y + 7 + (ii * 12) + 1 + 8) {
-                        gui.renderTooltip(Minecraft.getInstance().font, Component.translatable(recipe.getOutput().getTranslatedName()), mouseX, mouseY);
+                        gui.renderTooltip(Minecraft.getInstance().font, recipe.getOutput().getComponentList(), Optional.empty(), mouseX, mouseY);
                     }
                 }
 
@@ -86,15 +88,15 @@ public class MonogramRecipesPage extends Page {
                 recipe.getOutput().renderArcanemiconMiniIcon(book, gui, x + 39 + 41, y + 7 + (ii * 12) + 1);
             } else {
                 if (mouseX >= x + 39 + 1 && mouseY >= y + 7 + (ii * 12) + 1 && mouseX <= x + 39 + 1 + 8 && mouseY <= y + 7 + (ii * 12) + 1 + 8) {
-                    gui.renderTooltip(Minecraft.getInstance().font, Component.translatable(recipe.getInputs().get(0).getTranslatedName()), mouseX, mouseY);
+                    gui.renderTooltip(Minecraft.getInstance().font, recipe.getInputs().get(0).getComponentList(), Optional.empty(), mouseX, mouseY);
                 }
 
                 if (mouseX >= x + 39 + 21 && mouseY >= y + 7 + (ii * 12) + 1 && mouseX <= x + 39 + 21 + 8 && mouseY <= y + 7 + (ii * 12) + 1 + 8) {
-                    gui.renderTooltip(Minecraft.getInstance().font, Component.translatable(recipe.getInputs().get(1).getTranslatedName()), mouseX, mouseY);
+                    gui.renderTooltip(Minecraft.getInstance().font, recipe.getInputs().get(1).getComponentList(), Optional.empty(), mouseX, mouseY);
                 }
 
                 if (mouseX >= x + 39 + 41 && mouseY >= y + 7 + (ii * 12) + 1 && mouseX <= x + 39 + 41 + 8 && mouseY <= y + 7 + (ii * 12) + 1 + 8) {
-                    gui.renderTooltip(Minecraft.getInstance().font, Component.translatable(recipe.getOutput().getTranslatedName()), mouseX, mouseY);
+                    gui.renderTooltip(Minecraft.getInstance().font, recipe.getOutput().getComponentList(), Optional.empty(), mouseX, mouseY);
                 }
             }
         }

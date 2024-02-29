@@ -7,10 +7,11 @@ import mod.maxbogomol.wizards_reborn.client.arcanemicon.Page;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.resources.language.I18n;
-import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
+
+import java.util.Optional;
 
 public class TitledMonogramPage extends Page {
     public static final ResourceLocation BACKGROUND = new ResourceLocation(WizardsReborn.MOD_ID, "textures/gui/arcanemicon/monogram_page.png");
@@ -38,7 +39,7 @@ public class TitledMonogramPage extends Page {
         monogram.renderArcanemiconIcon(book, gui, x + 56, y + 133);
 
         if (mouseX >= x + 56 && mouseY >= y + 133 && mouseX <= x + 56 + 16 && mouseY <= y + 133 + 16) {
-            gui.renderTooltip(Minecraft.getInstance().font, Component.translatable(monogram.getTranslatedName()), mouseX, mouseY);
+            gui.renderTooltip(Minecraft.getInstance().font, monogram.getComponentList(), Optional.empty(), mouseX, mouseY);
         }
     }
 }

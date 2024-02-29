@@ -23,10 +23,7 @@ import net.minecraft.world.phys.Vec2;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Random;
+import java.util.*;
 
 public class ResearchPage extends Page {
     public static final ResourceLocation BACKGROUND = new ResourceLocation(WizardsReborn.MOD_ID, "textures/gui/arcanemicon/monogram_page.png");
@@ -187,7 +184,7 @@ public class ResearchPage extends Page {
                     monogramMapEntry.getMonogram().renderArcanemiconMiniIcon(book, gui, x + 59 - (int) size + (int) point.x + 1, y + 59 - (int) size + (int) point.y + 1);
                 }
                 if (mouseX >= x + 59 - (int) size + (int) point.x && mouseY >= y + 59 - (int) size + (int) point.y && mouseX <= x + 59 - (int) size + (int) point.x + 8 && mouseY <= y + 59 - (int) size + (int) point.y + 8) {
-                    gui.renderTooltip(Minecraft.getInstance().font, Component.translatable(monogramMapEntry.getMonogram().getTranslatedName()), mouseX, mouseY);
+                    gui.renderTooltip(Minecraft.getInstance().font, monogramMapEntry.getMonogram().getComponentList(), Optional.empty(), mouseX, mouseY);
                 }
                 point = rotatePointAbout(point, center, angleBetweenEach);
                 pointS = rotatePointAbout(pointS, centerS, angleBetweenEach);
@@ -212,7 +209,7 @@ public class ResearchPage extends Page {
                 int X = ((i - (ii * 5)) * (24));
 
                 if (mouseX >= x + X + 1 && mouseY >= y + 8 + (ii * 15) && mouseX <= x + X + 9 && mouseY <= y + 8 + (ii * 15) + 8) {
-                    gui.renderTooltip(Minecraft.getInstance().font, Component.translatable(monogramsSet[i].getTranslatedName()), mouseX, mouseY);
+                    gui.renderTooltip(Minecraft.getInstance().font, monogramsSet[i].getComponentList(), Optional.empty(), mouseX, mouseY);
                 }
 
                 gui.blit(BACKGROUND, x + X, y + 7 + (ii * 15), 158, 30, 10, 10);

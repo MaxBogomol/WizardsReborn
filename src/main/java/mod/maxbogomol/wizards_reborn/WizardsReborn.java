@@ -237,7 +237,7 @@ public class WizardsReborn {
     public static Monogram DEGRADATIO_MONOGRAM = new Monogram(MOD_ID+":degradatio");
     public static Monogram PRAEDICTIONEM_MONOGRAM = new Monogram(MOD_ID+":praedictionem");
     public static Monogram EVOLUTIONIS_MONOGRAM = new Monogram(MOD_ID+":evolutionis");
-    public static Monogram DARK_MONOGRAM = new Monogram(MOD_ID+":dark");
+    public static Monogram TENEBRIS_MONOGRAM = new Monogram(MOD_ID+":tenebris");
     public static Monogram UNIVERSUM_MONOGRAM = new Monogram(MOD_ID+":universum");
 
     //SPELLS
@@ -1245,7 +1245,7 @@ public class WizardsReborn {
         Monograms.register(DEGRADATIO_MONOGRAM);
         Monograms.register(PRAEDICTIONEM_MONOGRAM);
         Monograms.register(EVOLUTIONIS_MONOGRAM);
-        Monograms.register(DARK_MONOGRAM);
+        Monograms.register(TENEBRIS_MONOGRAM);
         Monograms.register(UNIVERSUM_MONOGRAM);
 
         Monograms.addRecipe(new MonogramRecipe(MIRACULUM_MONOGRAM, LUNAM_MONOGRAM, VITA_MONOGRAM));
@@ -1262,7 +1262,7 @@ public class WizardsReborn {
         Monograms.addRecipe(new MonogramRecipe(DEGRADATIO_MONOGRAM, VITA_MONOGRAM, ECLIPSIS_MONOGRAM));
         Monograms.addRecipe(new MonogramRecipe(PRAEDICTIONEM_MONOGRAM, SOLSTITIUM_MONOGRAM, MIRACULUM_MONOGRAM));
         Monograms.addRecipe(new MonogramRecipe(EVOLUTIONIS_MONOGRAM, VITA_MONOGRAM, STATERA_MONOGRAM));
-        Monograms.addRecipe(new MonogramRecipe(DARK_MONOGRAM, SOLEM_MONOGRAM, ECLIPSIS_MONOGRAM));
+        Monograms.addRecipe(new MonogramRecipe(TENEBRIS_MONOGRAM, SOLEM_MONOGRAM, ECLIPSIS_MONOGRAM));
         Monograms.addRecipe(new MonogramRecipe(UNIVERSUM_MONOGRAM, STATERA_MONOGRAM, TEMPUS_MONOGRAM));
     }
 

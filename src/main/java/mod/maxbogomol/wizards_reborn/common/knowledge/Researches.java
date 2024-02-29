@@ -58,7 +58,7 @@ public class Researches {
         HOLY_PROJECTILE = new Research(6, new ResearchMapEntry(
                 WizardsReborn.MORS_MONOGRAM,  WizardsReborn.ECLIPSIS_MONOGRAM),
                 new ResearchMonogramEntry(WizardsReborn.ECLIPSIS_MONOGRAM, 6),
-                new ResearchMonogramEntry(WizardsReborn.DARK_MONOGRAM, 4),
+                new ResearchMonogramEntry(WizardsReborn.TENEBRIS_MONOGRAM, 4),
                 new ResearchMonogramEntry(WizardsReborn.MORS_MONOGRAM, 3)
         );
         CURSE_PROJECTILE = new Research(6, new ResearchMapEntry(
@@ -117,17 +117,17 @@ public class Researches {
                 new ResearchMonogramEntry(WizardsReborn.MORS_MONOGRAM, 7)
         );
         CURSE_RAY = new Research(10, new ResearchMapEntry(
-                WizardsReborn.DARK_MONOGRAM,  WizardsReborn.VITA_MONOGRAM,  WizardsReborn.VITA_MONOGRAM,  WizardsReborn.ECLIPSIS_MONOGRAM),
+                WizardsReborn.TENEBRIS_MONOGRAM,  WizardsReborn.VITA_MONOGRAM,  WizardsReborn.VITA_MONOGRAM,  WizardsReborn.ECLIPSIS_MONOGRAM),
                 new ResearchMonogramEntry(WizardsReborn.ECLIPSIS_MONOGRAM, 4),
                 new ResearchMonogramEntry(WizardsReborn.LUX_MONOGRAM, 5),
                 new ResearchMonogramEntry(WizardsReborn.VITA_MONOGRAM, 5),
                 new ResearchMonogramEntry(WizardsReborn.SOLSTITIUM_MONOGRAM, 5),
-                new ResearchMonogramEntry(WizardsReborn.DARK_MONOGRAM, 3)
+                new ResearchMonogramEntry(WizardsReborn.TENEBRIS_MONOGRAM, 3)
         );
 
         EARTH_CHARGE = new Research(12, new ResearchMapEntry(
-                WizardsReborn.LUNAM_MONOGRAM,  WizardsReborn.ECLIPSIS_MONOGRAM,  WizardsReborn.DARK_MONOGRAM,  WizardsReborn.DARK_MONOGRAM),
-                new ResearchMonogramEntry(WizardsReborn.DARK_MONOGRAM, 8),
+                WizardsReborn.LUNAM_MONOGRAM,  WizardsReborn.ECLIPSIS_MONOGRAM,  WizardsReborn.TENEBRIS_MONOGRAM,  WizardsReborn.TENEBRIS_MONOGRAM),
+                new ResearchMonogramEntry(WizardsReborn.TENEBRIS_MONOGRAM, 8),
                 new ResearchMonogramEntry(WizardsReborn.ECLIPSIS_MONOGRAM, 9),
                 new ResearchMonogramEntry(WizardsReborn.LUNAM_MONOGRAM, 3)
         );
@@ -155,9 +155,9 @@ public class Researches {
                 new ResearchMonogramEntry(WizardsReborn.RENAISSANCE_MONOGRAM, 6)
         );
         VOID_CHARGE = new Research(12, new ResearchMapEntry(
-                WizardsReborn.SOLEM_MONOGRAM,  WizardsReborn.SOLEM_MONOGRAM,  WizardsReborn.ECLIPSIS_MONOGRAM,  WizardsReborn.DARK_MONOGRAM),
+                WizardsReborn.SOLEM_MONOGRAM,  WizardsReborn.SOLEM_MONOGRAM,  WizardsReborn.ECLIPSIS_MONOGRAM,  WizardsReborn.TENEBRIS_MONOGRAM),
                 new ResearchMonogramEntry(WizardsReborn.SOLEM_MONOGRAM, 6),
-                new ResearchMonogramEntry(WizardsReborn.DARK_MONOGRAM, 4),
+                new ResearchMonogramEntry(WizardsReborn.TENEBRIS_MONOGRAM, 4),
                 new ResearchMonogramEntry(WizardsReborn.ECLIPSIS_MONOGRAM, 5),
                 new ResearchMonogramEntry(WizardsReborn.MORS_MONOGRAM, 5),
                 new ResearchMonogramEntry(WizardsReborn.RENAISSANCE_MONOGRAM, 4)

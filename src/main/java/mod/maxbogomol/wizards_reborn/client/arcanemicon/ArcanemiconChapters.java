@@ -43,7 +43,7 @@ public class ArcanemiconChapters {
             EARTH_RAY, WATER_RAY, AIR_RAY, FIRE_RAY, VOID_RAY, FROST_RAY, HOLY_RAY, CURSE_RAY,
             EARTH_CHARGE, WATER_CHARGE, AIR_CHARGE, FIRE_CHARGE, VOID_CHARGE, FROST_CHARGE, HOLY_CHARGE, CURSE_CHARGE,
             HEART_OF_NATURE, WATER_BREATHING, AIR_FLOW, FIRE_SHIELD, MAGIC_SPROUT,
-            MONOGRAMS, RESEARCHES, RESEARCH, LUNAM_MONOGRAM, VITA_MONOGRAM, SOLEM_MONOGRAM, MORS_MONOGRAM, MIRACULUM_MONOGRAM, TEMPUS_MONOGRAM, STATERA_MONOGRAM, ECLIPSIS_MONOGRAM, SICCITAS_MONOGRAM, SOLSTITIUM_MONOGRAM, FAMES_MONOGRAM, RENAISSANCE_MONOGRAM, BELLUM_MONOGRAM, LUX_MONOGRAM, KARA_MONOGRAM, DEGRADATIO_MONOGRAM, PRAEDICTIONEM_MONOGRAM, EVOLUTIONIS_MONOGRAM, DARK_MONOGRAM, UNIVERSUM_MONOGRAM,
+            MONOGRAMS, RESEARCHES, RESEARCH, LUNAM_MONOGRAM, VITA_MONOGRAM, SOLEM_MONOGRAM, MORS_MONOGRAM, MIRACULUM_MONOGRAM, TEMPUS_MONOGRAM, STATERA_MONOGRAM, ECLIPSIS_MONOGRAM, SICCITAS_MONOGRAM, SOLSTITIUM_MONOGRAM, FAMES_MONOGRAM, RENAISSANCE_MONOGRAM, BELLUM_MONOGRAM, LUX_MONOGRAM, KARA_MONOGRAM, DEGRADATIO_MONOGRAM, PRAEDICTIONEM_MONOGRAM, EVOLUTIONIS_MONOGRAM, TENEBRIS_MONOGRAM, UNIVERSUM_MONOGRAM,
             LIGHT_RAYS, LIGHT_EMITTER, LIGHT_TRANSFER_LENS, RUNIC_PEDESTAL, CRYSTALS_RITUALS, ARTIFICIAL_FERTILITY, RITUAL_BREEDING, CRYSTAL_GROWTH_ACCELERATION, CRYSTAL_INFUSION, ARCANUM_SEED,
             MOR, MORTAR, ARCANE_LINEN, MUSHROOM_CAPS, WISESTONE, WISESTONE_PEDESTAL, FLUID_PIPES, STEAM_PIPES, ORBITAL_FLUID_RETAINER, ALCHEMY_FURNACE, STEAM_THERMAL_STORAGE, ALCHEMY_MACHINE, ALCHEMY_OIL, ARCACITE, MUSIC_DISC_ARCANUM, MUSIC_DISC_MOR, ALCHEMY_GLASS, ALCHEMY_POTIONS, TEA, ALCHEMY_BREWS, ARCANE_CENSER, SMOKING_PIPE, ARCACITE_POLISHING_MIXTURE;
     public static ResearchPage RESEARCH_MAIN, RESEARCH_LIST;
@@ -1462,10 +1462,10 @@ public class ArcanemiconChapters {
                 new TitledMonogramPage("wizards_reborn.arcanemicon.page.evolutionis_monogram", WizardsReborn.EVOLUTIONIS_MONOGRAM),
                 new MonogramRecipesPage(WizardsReborn.EVOLUTIONIS_MONOGRAM)
         );
-        DARK_MONOGRAM = new Chapter(
-                "wizards_reborn.arcanemicon.chapter.dark_monogram",
-                new TitledMonogramPage("wizards_reborn.arcanemicon.page.dark_monogram", WizardsReborn.DARK_MONOGRAM),
-                new MonogramRecipesPage(WizardsReborn.DARK_MONOGRAM)
+        TENEBRIS_MONOGRAM = new Chapter(
+                "wizards_reborn.arcanemicon.chapter.tenebris_monogram",
+                new TitledMonogramPage("wizards_reborn.arcanemicon.page.tenebris_monogram", WizardsReborn.TENEBRIS_MONOGRAM),
+                new MonogramRecipesPage(WizardsReborn.TENEBRIS_MONOGRAM)
         );
         UNIVERSUM_MONOGRAM = new Chapter(
                 "wizards_reborn.arcanemicon.chapter.universum_monogram",
@@ -1632,7 +1632,7 @@ public class ArcanemiconChapters {
                         new MonogramIndexEntry(DEGRADATIO_MONOGRAM, WizardsReborn.DEGRADATIO_MONOGRAM),
                         new MonogramIndexEntry(PRAEDICTIONEM_MONOGRAM, WizardsReborn.PRAEDICTIONEM_MONOGRAM),
                         new MonogramIndexEntry(EVOLUTIONIS_MONOGRAM, WizardsReborn.EVOLUTIONIS_MONOGRAM),
-                        new MonogramIndexEntry(DARK_MONOGRAM, WizardsReborn.DARK_MONOGRAM),
+                        new MonogramIndexEntry(TENEBRIS_MONOGRAM, WizardsReborn.TENEBRIS_MONOGRAM),
                         new MonogramIndexEntry(UNIVERSUM_MONOGRAM, WizardsReborn.UNIVERSUM_MONOGRAM)
                 )
         );
