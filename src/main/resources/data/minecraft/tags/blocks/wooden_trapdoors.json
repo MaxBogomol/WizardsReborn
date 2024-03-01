@@ -1,6 +1,7 @@
 {
   "replace": false,
   "values": [
-    "wizards_reborn:arcane_wood_trapdoor"
+    "wizards_reborn:arcane_wood_trapdoor",
+    "wizards_reborn:innocent_wood_trapdoor"
   ]
 }

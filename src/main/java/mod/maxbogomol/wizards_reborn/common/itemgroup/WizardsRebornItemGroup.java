@@ -93,6 +93,27 @@ public class WizardsRebornItemGroup {
             event.accept(WizardsReborn.ARCANE_WOOD_LEAVES_ITEM);
             event.accept(WizardsReborn.ARCANE_WOOD_SAPLING_ITEM);
 
+            event.accept(WizardsReborn.INNOCENT_WOOD_LOG_ITEM);
+            event.accept(WizardsReborn.INNOCENT_WOOD_ITEM);
+            event.accept(WizardsReborn.STRIPPED_INNOCENT_WOOD_LOG_ITEM);
+            event.accept(WizardsReborn.STRIPPED_INNOCENT_WOOD_ITEM);
+            event.accept(WizardsReborn.INNOCENT_WOOD_PLANKS_ITEM);
+            event.accept(WizardsReborn.INNOCENT_WOOD_STAIRS_ITEM);
+            event.accept(WizardsReborn.INNOCENT_WOOD_SLAB_ITEM);
+            event.accept(WizardsReborn.INNOCENT_WOOD_FENCE_ITEM);
+            event.accept(WizardsReborn.INNOCENT_WOOD_FENCE_GATE_ITEM);
+            event.accept(WizardsReborn.INNOCENT_WOOD_DOOR_ITEM);
+            event.accept(WizardsReborn.INNOCENT_WOOD_TRAPDOOR_ITEM);
+            event.accept(WizardsReborn.INNOCENT_WOOD_PRESSURE_PLATE_ITEM);
+            event.accept(WizardsReborn.INNOCENT_WOOD_BUTTON_ITEM);
+            event.accept(WizardsReborn.INNOCENT_WOOD_SIGN_ITEM);
+            event.accept(WizardsReborn.INNOCENT_WOOD_HANGING_SIGN_ITEM);
+            event.accept(WizardsReborn.INNOCENT_WOOD_BOAT_ITEM);
+            event.accept(WizardsReborn.INNOCENT_WOOD_CHEST_BOAT_ITEM);
+            event.accept(WizardsReborn.INNOCENT_WOOD_LEAVES_ITEM);
+            event.accept(WizardsReborn.INNOCENT_WOOD_SAPLING_ITEM);
+            event.accept(WizardsReborn.PETALS_OF_INNOCENCE_ITEM);
+
             event.accept(WizardsReborn.WISESTONE_ITEM);
             event.accept(WizardsReborn.WISESTONE_STAIRS_ITEM);
             event.accept(WizardsReborn.WISESTONE_SLAB_ITEM);
@@ -134,8 +155,6 @@ public class WizardsRebornItemGroup {
             event.accept(WizardsReborn.GROUND_WARPED_FUNGUS);
             event.accept(WizardsReborn.GROUND_MOR);
             event.accept(WizardsReborn.GROUND_ELDER_MOR);
-
-            event.accept(WizardsReborn.PETALS_OF_INNOCENCE_ITEM);
 
             event.accept(WizardsReborn.ARCANUM_SEED);
             event.accept(WizardsReborn.EARTH_CRYSTAL_SEED);
@@ -251,6 +270,13 @@ public class WizardsRebornItemGroup {
             event.accept(WizardsReborn.ARCANE_WOOD_LIGHT_CASING_ITEM);
             event.accept(WizardsReborn.ARCANE_WOOD_FLUID_CASING_ITEM);
             event.accept(WizardsReborn.ARCANE_WOOD_STEAM_CASING_ITEM);
+            event.accept(WizardsReborn.INNOCENT_WOOD_FRAME_ITEM);
+            event.accept(WizardsReborn.INNOCENT_WOOD_GLASS_FRAME_ITEM);
+            event.accept(WizardsReborn.INNOCENT_WOOD_CASING_ITEM);
+            event.accept(WizardsReborn.INNOCENT_WOOD_WISSEN_CASING_ITEM);
+            event.accept(WizardsReborn.INNOCENT_WOOD_LIGHT_CASING_ITEM);
+            event.accept(WizardsReborn.INNOCENT_WOOD_FLUID_CASING_ITEM);
+            event.accept(WizardsReborn.INNOCENT_WOOD_STEAM_CASING_ITEM);
             event.accept(WizardsReborn.WISESTONE_FRAME_ITEM);
             event.accept(WizardsReborn.WISESTONE_GLASS_FRAME_ITEM);
             event.accept(WizardsReborn.WISESTONE_CASING_ITEM);

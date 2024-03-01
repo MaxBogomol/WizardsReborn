@@ -109,6 +109,7 @@ public class CustomChestBoatEntity extends CustomBoatEntity implements HasCustom
     public Item getDropItem() {
         return switch (this.getCustomBoatEntityType()) {
             case ARCANE_WOOD -> WizardsReborn.ARCANE_WOOD_CHEST_BOAT_ITEM.get();
+            case INNOCENT_WOOD -> WizardsReborn.INNOCENT_WOOD_CHEST_BOAT_ITEM.get();
         };
     }
 

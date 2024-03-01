@@ -1,0 +1,7 @@
+{
+  "parent": "wizards_reborn:block/casing_block",
+  "textures": {
+    "case": "wizards_reborn:block/innocent_wood_light_casing",
+    "particle": "wizards_reborn:block/innocent_wood_light_casing"
+  }
+}

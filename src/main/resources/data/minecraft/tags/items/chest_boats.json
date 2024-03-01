@@ -1,6 +1,7 @@
 {
   "replace": false,
   "values": [
-    "wizards_reborn:arcane_wood_chest_boat"
+    "wizards_reborn:arcane_wood_chest_boat",
+    "wizards_reborn:innocent_wood_chest_boat"
   ]
 }

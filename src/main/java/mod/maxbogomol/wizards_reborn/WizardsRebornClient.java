@@ -10,7 +10,7 @@ import mod.maxbogomol.wizards_reborn.client.model.curio.BeltModel;
 import mod.maxbogomol.wizards_reborn.client.model.curio.MushroomCapModel;
 import mod.maxbogomol.wizards_reborn.client.particle.*;
 import mod.maxbogomol.wizards_reborn.client.render.block.PipeModel;
-import mod.maxbogomol.wizards_reborn.client.render.entity.ArcaneWoodBoatModel;
+import mod.maxbogomol.wizards_reborn.client.render.entity.CustomBoatModel;
 import mod.maxbogomol.wizards_reborn.client.render.entity.SpellProjectileRenderer;
 import mod.maxbogomol.wizards_reborn.client.render.item.*;
 import mod.maxbogomol.wizards_reborn.client.render.tileentity.*;
@@ -129,20 +129,26 @@ public class WizardsRebornClient {
         @SubscribeEvent
         public static void onRenderTypeSetup(FMLClientSetupEvent event) {
             Sheets.addWoodType(WizardsReborn.ARCANE_WOOD_TYPE);
+            Sheets.addWoodType(WizardsReborn.INNOCENT_WOOD_TYPE);
 
             ItemBlockRenderTypes.setRenderLayer(WizardsReborn.ARCANE_WOOD_DOOR.get(), RenderType.cutout());
             ItemBlockRenderTypes.setRenderLayer(WizardsReborn.ARCANE_WOOD_TRAPDOOR.get(), RenderType.cutout());
             ItemBlockRenderTypes.setRenderLayer(WizardsReborn.ARCANE_WOOD_LEAVES.get(), RenderType.cutout());
             ItemBlockRenderTypes.setRenderLayer(WizardsReborn.ARCANE_WOOD_SAPLING.get(), RenderType.cutout());
             ItemBlockRenderTypes.setRenderLayer(WizardsReborn.POTTED_ARCANE_WOOD_SAPLING.get(), RenderType.cutout());
+            ItemBlockRenderTypes.setRenderLayer(WizardsReborn.INNOCENT_WOOD_DOOR.get(), RenderType.cutout());
+            ItemBlockRenderTypes.setRenderLayer(WizardsReborn.INNOCENT_WOOD_TRAPDOOR.get(), RenderType.cutout());
+            ItemBlockRenderTypes.setRenderLayer(WizardsReborn.INNOCENT_WOOD_LEAVES.get(), RenderType.cutout());
+            ItemBlockRenderTypes.setRenderLayer(WizardsReborn.INNOCENT_WOOD_SAPLING.get(), RenderType.cutout());
+            ItemBlockRenderTypes.setRenderLayer(WizardsReborn.POTTED_INNOCENT_WOOD_SAPLING.get(), RenderType.cutout());
+            ItemBlockRenderTypes.setRenderLayer(WizardsReborn.PETALS_OF_INNOCENCE.get(), RenderType.cutout());
+            ItemBlockRenderTypes.setRenderLayer(WizardsReborn.POTTED_PETALS_OF_INNOCENCE.get(), RenderType.cutout());
+            ItemBlockRenderTypes.setRenderLayer(WizardsReborn.POTTED_PINK_PETALS.get(), RenderType.cutout());
             ItemBlockRenderTypes.setRenderLayer(WizardsReborn.ARCANE_LINEN.get(), RenderType.cutout());
             ItemBlockRenderTypes.setRenderLayer(WizardsReborn.MOR.get(), RenderType.cutout());
             ItemBlockRenderTypes.setRenderLayer(WizardsReborn.POTTED_MOR.get(), RenderType.cutout());
             ItemBlockRenderTypes.setRenderLayer(WizardsReborn.ELDER_MOR.get(), RenderType.cutout());
             ItemBlockRenderTypes.setRenderLayer(WizardsReborn.POTTED_ELDER_MOR.get(), RenderType.cutout());
-            ItemBlockRenderTypes.setRenderLayer(WizardsReborn.PETALS_OF_INNOCENCE.get(), RenderType.cutout());
-            ItemBlockRenderTypes.setRenderLayer(WizardsReborn.POTTED_PETALS_OF_INNOCENCE.get(), RenderType.cutout());
-            ItemBlockRenderTypes.setRenderLayer(WizardsReborn.POTTED_PINK_PETALS.get(), RenderType.cutout());
             ItemBlockRenderTypes.setRenderLayer(WizardsReborn.STEAM_THERMAL_STORAGE.get(), RenderType.cutout());
             ItemBlockRenderTypes.setRenderLayer(WizardsReborn.ARCANE_CENSER.get(), RenderType.cutout());
             ItemBlockRenderTypes.setRenderLayer(WizardsReborn.ALCHEMY_GLASS.get(), RenderType.translucent());
@@ -151,6 +157,7 @@ public class WizardsRebornClient {
             ItemBlockRenderTypes.setRenderLayer(WizardsReborn.WISSEN_ACTIVATOR.get(), RenderType.translucent());
             ItemBlockRenderTypes.setRenderLayer(WizardsReborn.ITEM_SORTER.get(), RenderType.translucent());
             ItemBlockRenderTypes.setRenderLayer(WizardsReborn.ARCANE_WOOD_GLASS_FRAME.get(), RenderType.translucent());
+            ItemBlockRenderTypes.setRenderLayer(WizardsReborn.INNOCENT_WOOD_GLASS_FRAME.get(), RenderType.translucent());
             ItemBlockRenderTypes.setRenderLayer(WizardsReborn.WISESTONE_GLASS_FRAME.get(), RenderType.translucent());
 
             ItemBlockRenderTypes.setRenderLayer(WizardsReborn.MUNDANE_BREW_FLUID.get(), RenderType.translucent());
@@ -209,8 +216,8 @@ public class WizardsRebornClient {
             BlockEntityRenderers.register(WizardsReborn.CRYSTAL_GROWTH_TILE_ENTITY.get(), (trd) -> new CrystalGrowthTileEntityRenderer());
             BlockEntityRenderers.register(WizardsReborn.CRYSTAL_TILE_ENTITY.get(), (trd) -> new CrystalTileEntityRenderer());
 
-            EntityRenderers.register(WizardsReborn.BOAT.get(), m -> new ArcaneWoodBoatModel(m, false));
-            EntityRenderers.register(WizardsReborn.CHEST_BOAT.get(), m -> new ArcaneWoodBoatModel(m, true));
+            EntityRenderers.register(WizardsReborn.BOAT.get(), m -> new CustomBoatModel(m, false));
+            EntityRenderers.register(WizardsReborn.CHEST_BOAT.get(), m -> new CustomBoatModel(m, true));
             EntityRenderers.register(WizardsReborn.SPELL_PROJECTILE.get(), SpellProjectileRenderer::new);
 
             makeBow(WizardsReborn.ARCANE_WOOD_BOW.get());
@@ -367,8 +374,8 @@ public class WizardsRebornClient {
         @SubscribeEvent
         public static void onRegisterLayers(EntityRenderersEvent.RegisterLayerDefinitions event) {
             for (CustomBoatEntity.Type boatType : CustomBoatEntity.Type.values()) {
-                event.registerLayerDefinition(ArcaneWoodBoatModel.createBoatModelName(boatType), BoatModel::createBodyModel);
-                event.registerLayerDefinition(ArcaneWoodBoatModel.createChestBoatModelName(boatType), ChestBoatModel::createBodyModel);
+                event.registerLayerDefinition(CustomBoatModel.createBoatModelName(boatType), BoatModel::createBodyModel);
+                event.registerLayerDefinition(CustomBoatModel.createChestBoatModelName(boatType), ChestBoatModel::createBodyModel);
             }
 
             event.registerLayerDefinition(WizardsRebornClient.BELT_LAYER, BeltModel::createBodyLayer);

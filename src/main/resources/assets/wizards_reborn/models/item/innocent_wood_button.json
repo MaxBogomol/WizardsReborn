@@ -1,0 +1,6 @@
+{
+  "parent": "block/button_inventory",
+  "textures": {
+    "texture": "wizards_reborn:block/innocent_wood_planks"
+  }
+}

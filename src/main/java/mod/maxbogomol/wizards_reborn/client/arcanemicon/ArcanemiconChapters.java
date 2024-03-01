@@ -36,8 +36,8 @@ public class ArcanemiconChapters {
     public static List<Category> categories = new ArrayList<>();
     public static Category ARCANE_NATURE, SPELLS, CRYSTAL_RITUALS, ALCHEMY;
     public static Chapter ARCANE_NATURE_INDEX, SPELLS_INDEX, CRYSTAL_RITUALS_INDEX, ALCHEMY_INDEX,
-            ARCANUM, ARCANUM_DUST_TRANSMUTATION, ARCANE_WOOD, ARCANE_GOLD, SCYTHES, TRINKETS, ARCANE_WOOD_BOW, BANNER_PATTERNS, WISSEN, WISSEN_TRANSLATOR, ARCANE_PEDESTAL, WISSEN_ALTAR, WISSEN_CRYSTALLIZER, ARCANE_WORKBENCH, ARCANE_LUMOS, CRYSTALS, ARCANE_WAND, AUTOMATION, WISSEN_CELL, ALTAR_OF_DROUGHT, VOID_CRYSTAL, ARCANE_FORTRESS_ARMOR, INVENTOR_WIZARD_ARMOR, ARCANE_WOOD_CANE, ARCANE_ITERATOR, WISSEN_KEYCHAIN, JEWELER_TABLE, MUSIC_DISC_REBORN,
-            REDSTONE_SENSOR, WISSEN_SENSOR, COOLDOWN_SENSOR, LIGHT_SENSOR, HEAT_SENSOR, FLUID_SENSOR, STEAM_SENSOR, WISSEN_ACTIVATOR, ITEM_SORTER, ARCANE_WOOD_FRAME, WISSEN_CASING, WISESTONE_CASING, FLUID_CASING, STEAM_CASING, GLASS_FRAME, LIGHT_CASING,
+            ARCANUM, ARCANUM_DUST_TRANSMUTATION, ARCANE_WOOD, ARCANE_GOLD, SCYTHES, TRINKETS, ARCANE_WOOD_BOW, BANNER_PATTERNS, WISSEN, WISSEN_TRANSLATOR, ARCANE_PEDESTAL, WISSEN_ALTAR, WISSEN_CRYSTALLIZER, ARCANE_WORKBENCH, ARCANE_LUMOS, CRYSTALS, ARCANE_WAND, AUTOMATION, WISSEN_CELL, ALTAR_OF_DROUGHT, TOTEM_OF_FLAMES, EXPERIENCE_TOTEM, TOTEM_OF_EXPERIENCE_ABSORPTION, TOTEM_OF_DISENCHANT, VOID_CRYSTAL, ARCANE_FORTRESS_ARMOR, INVENTOR_WIZARD_ARMOR, ARCANE_WOOD_CANE, ARCANE_ITERATOR, WISSEN_KEYCHAIN, JEWELER_TABLE, MUSIC_DISC_REBORN,
+            ARCANE_LEVER, REDSTONE_SENSOR, WISSEN_SENSOR, COOLDOWN_SENSOR, LIGHT_SENSOR, HEAT_SENSOR, FLUID_SENSOR, STEAM_SENSOR, WISSEN_ACTIVATOR, ITEM_SORTER, ARCANE_WOOD_FRAME, WISSEN_CASING, WISESTONE_CASING, FLUID_CASING, STEAM_CASING, GLASS_FRAME, LIGHT_CASING,
             ALL_SPELLS, EARTH_SPELLS, WATER_SPELLS, AIR_SPELLS, FIRE_SPELLS, VOID_SPELLS,
             EARTH_PROJECTILE, WATER_PROJECTILE, AIR_PROJECTILE, FIRE_PROJECTILE, VOID_PROJECTILE, FROST_PROJECTILE, HOLY_PROJECTILE, CURSE_PROJECTILE,
             EARTH_RAY, WATER_RAY, AIR_RAY, FIRE_RAY, VOID_RAY, FROST_RAY, HOLY_RAY, CURSE_RAY,
@@ -568,6 +568,13 @@ public class ArcanemiconChapters {
                 )
         );
 
+        ARCANE_LEVER = new Chapter(
+                "wizards_reborn.arcanemicon.chapter.arcane_lever",
+                new TitledBlockPage("wizards_reborn.arcanemicon.page.arcane_lever",
+                        new BlockEntry(new ItemStack(WizardsReborn.ARCANE_PEDESTAL_ITEM.get()), new ItemStack(WizardsReborn.ARCANE_LEVER_ITEM.get()))
+                )
+        );
+
         REDSTONE_SENSOR = new Chapter(
                 "wizards_reborn.arcanemicon.chapter.redstone_sensor",
                 new TitledBlockPage("wizards_reborn.arcanemicon.page.redstone_sensor",
@@ -813,24 +820,25 @@ public class ArcanemiconChapters {
                 "wizards_reborn.arcanemicon.chapter.automation",
                 new TitledBlockPage("wizards_reborn.arcanemicon.page.automation"),
                 new IndexPage(
+                        new IndexEntry(ARCANE_LEVER, new ItemStack(WizardsReborn.ARCANE_LEVER_ITEM.get())),
                         new IndexEntry(REDSTONE_SENSOR, new ItemStack(WizardsReborn.REDSTONE_SENSOR_ITEM.get())),
                         new IndexEntry(WISSEN_SENSOR, new ItemStack(WizardsReborn.WISSEN_SENSOR_ITEM.get())),
                         new IndexEntry(COOLDOWN_SENSOR, new ItemStack(WizardsReborn.COOLDOWN_SENSOR_ITEM.get())),
                         new IndexEntry(LIGHT_SENSOR, new ItemStack(WizardsReborn.LIGHT_SENSOR_ITEM.get())),
                         new IndexEntry(HEAT_SENSOR, new ItemStack(WizardsReborn.HEAT_SENSOR_ITEM.get()), RegisterKnowledges.ALCHEMY_FURNACE),
-                        new IndexEntry(FLUID_SENSOR, new ItemStack(WizardsReborn.FLUID_SENSOR_ITEM.get()), RegisterKnowledges.FLUID_PIPE),
-                        new IndexEntry(STEAM_SENSOR, new ItemStack(WizardsReborn.STEAM_SENSOR_ITEM.get()), RegisterKnowledges.STEAM_PIPE)
+                        new IndexEntry(FLUID_SENSOR, new ItemStack(WizardsReborn.FLUID_SENSOR_ITEM.get()), RegisterKnowledges.FLUID_PIPE)
                 ),
                 new IndexPage(
+                        new IndexEntry(STEAM_SENSOR, new ItemStack(WizardsReborn.STEAM_SENSOR_ITEM.get()), RegisterKnowledges.STEAM_PIPE),
                         new IndexEntry(WISSEN_ACTIVATOR, new ItemStack(WizardsReborn.WISSEN_ACTIVATOR_ITEM.get())),
                         new IndexEntry(ITEM_SORTER, new ItemStack(WizardsReborn.ITEM_SORTER_ITEM.get()), RegisterKnowledges.ALCHEMY_GLASS),
                         new IndexEntry(ARCANE_WOOD_FRAME, new ItemStack(WizardsReborn.ARCANE_WOOD_FRAME_ITEM.get())),
                         new IndexEntry(WISSEN_CASING, new ItemStack(WizardsReborn.ARCANE_WOOD_WISSEN_CASING_ITEM.get())),
                         new IndexEntry(WISESTONE_CASING, new ItemStack(WizardsReborn.WISESTONE_CASING_ITEM.get()), RegisterKnowledges.WISESTONE),
-                        new IndexEntry(FLUID_CASING, new ItemStack(WizardsReborn.ARCANE_WOOD_FLUID_CASING_ITEM.get()), RegisterKnowledges.FLUID_PIPE),
-                        new IndexEntry(STEAM_CASING, new ItemStack(WizardsReborn.ARCANE_WOOD_STEAM_CASING_ITEM.get()), RegisterKnowledges.STEAM_PIPE)
+                        new IndexEntry(FLUID_CASING, new ItemStack(WizardsReborn.ARCANE_WOOD_FLUID_CASING_ITEM.get()), RegisterKnowledges.FLUID_PIPE)
                 ),
                 new IndexPage(
+                        new IndexEntry(STEAM_CASING, new ItemStack(WizardsReborn.ARCANE_WOOD_STEAM_CASING_ITEM.get()), RegisterKnowledges.STEAM_PIPE),
                         new IndexEntry(GLASS_FRAME, new ItemStack(WizardsReborn.ARCANE_WOOD_GLASS_FRAME_ITEM.get()), RegisterKnowledges.ALCHEMY_GLASS),
                         new IndexEntry(LIGHT_CASING, new ItemStack(WizardsReborn.ARCANE_WOOD_LIGHT_CASING_ITEM.get()), RegisterKnowledges.ALCHEMY_GLASS)
                 )
@@ -864,6 +872,34 @@ public class ArcanemiconChapters {
                 new TextPage("wizards_reborn.arcanemicon.page.altar_of_drought.poem")
         );
 
+        TOTEM_OF_FLAMES = new Chapter(
+                "wizards_reborn.arcanemicon.chapter.totem_of_flames",
+                new TitledBlockPage("wizards_reborn.arcanemicon.page.totem_of_flames",
+                        new BlockEntry(new ItemStack(WizardsReborn.TOTEM_BASE_ITEM.get()), new ItemStack(WizardsReborn.TOTEM_OF_FLAMES_ITEM.get()))
+                )
+        );
+
+        EXPERIENCE_TOTEM = new Chapter(
+                "wizards_reborn.arcanemicon.chapter.experience_totem",
+                new TitledBlockPage("wizards_reborn.arcanemicon.page.experience_totem",
+                        new BlockEntry(new ItemStack(WizardsReborn.TOTEM_BASE_ITEM.get()), new ItemStack(WizardsReborn.EXPERIENCE_TOTEM_ITEM.get()))
+                )
+        );
+
+        TOTEM_OF_EXPERIENCE_ABSORPTION = new Chapter(
+                "wizards_reborn.arcanemicon.chapter.totem_of_experience_absorption",
+                new TitledBlockPage("wizards_reborn.arcanemicon.page.totem_of_experience_absorption",
+                        new BlockEntry(new ItemStack(WizardsReborn.TOTEM_BASE_ITEM.get()), new ItemStack(WizardsReborn.TOTEM_OF_EXPERIENCE_ABSORPTION_ITEM.get()))
+                )
+        );
+
+        TOTEM_OF_DISENCHANT = new Chapter(
+                "wizards_reborn.arcanemicon.chapter.totem_of_disenchant",
+                new TitledBlockPage("wizards_reborn.arcanemicon.page.totem_of_disenchant",
+                        new BlockEntry(new ItemStack(WizardsReborn.TOTEM_BASE_ITEM.get()), new ItemStack(WizardsReborn.TOTEM_OF_DISENCHANT_ITEM.get()))
+                )
+        );
+
         VOID_CRYSTAL = new Chapter(
                 "wizards_reborn.arcanemicon.chapter.void_crystal",
                 new TitledBlockPage("wizards_reborn.arcanemicon.page.void_crystal",
@@ -871,7 +907,7 @@ public class ArcanemiconChapters {
                         new BlockEntry(new ItemStack(WizardsReborn.ARCANE_PEDESTAL_ITEM.get()), new ItemStack(WizardsReborn.VOID_CRYSTAL.get())),
                         new BlockEntry(new ItemStack(WizardsReborn.ARCANE_PEDESTAL_ITEM.get()), new ItemStack(WizardsReborn.FRACTURED_VOID_CRYSTAL.get()))
                 ),
-                new WissenCrystallizerPage(new ItemStack(WizardsReborn.VOID_CRYSTAL_SEED.get()),
+                new WissenCrystallizerPage(new ItemStack(WizardsReborn.VOID_CRYSTAL_SEED.get(), 2),
                         new ItemStack(WizardsReborn.ARCACITE.get()), new ItemStack(WizardsReborn.EARTH_CRYSTAL_SEED.get()), new ItemStack(WizardsReborn.WATER_CRYSTAL_SEED.get()), new ItemStack(WizardsReborn.AIR_CRYSTAL_SEED.get()), new ItemStack(WizardsReborn.FIRE_CRYSTAL_SEED.get())
                 ),
                 new ArcanumDustTransmutationPage(new ItemStack(WizardsReborn.VOID_CRYSTAL.get()), new ItemStack(WizardsReborn.VOID_CRYSTAL_SEED.get())),
@@ -1209,15 +1245,19 @@ public class ArcanemiconChapters {
                         new IndexEntry(ALTAR_OF_DROUGHT, new ItemStack(WizardsReborn.ALTAR_OF_DROUGHT_ITEM.get()), RegisterKnowledges.ARCACITE)
                 ),
                 new IndexPage(
+                        new IndexEntry(TOTEM_OF_FLAMES, new ItemStack(WizardsReborn.TOTEM_OF_FLAMES_ITEM.get()), RegisterKnowledges.ARCACITE),
+                        new IndexEntry(EXPERIENCE_TOTEM, new ItemStack(WizardsReborn.EXPERIENCE_TOTEM_ITEM.get()), RegisterKnowledges.ARCACITE),
+                        new IndexEntry(TOTEM_OF_EXPERIENCE_ABSORPTION, new ItemStack(WizardsReborn.TOTEM_OF_EXPERIENCE_ABSORPTION_ITEM.get()), RegisterKnowledges.ARCACITE),
+                        new IndexEntry(TOTEM_OF_DISENCHANT, new ItemStack(WizardsReborn.TOTEM_OF_DISENCHANT_ITEM.get()), RegisterKnowledges.ARCACITE),
                         new IndexEntry(VOID_CRYSTAL, new ItemStack(WizardsReborn.VOID_CRYSTAL.get()), RegisterKnowledges.ARCACITE),
                         new IndexEntry(ARCANE_FORTRESS_ARMOR, new ItemStack(WizardsReborn.ARCANE_FORTRESS_CHESTPLATE.get()), RegisterKnowledges.ARCACITE),
-                        new IndexEntry(INVENTOR_WIZARD_ARMOR, new ItemStack(WizardsReborn.INVENTOR_WIZARD_HAT.get()), RegisterKnowledges.ARCACITE),
+                        new IndexEntry(INVENTOR_WIZARD_ARMOR, new ItemStack(WizardsReborn.INVENTOR_WIZARD_HAT.get()), RegisterKnowledges.ARCACITE)
+                ),
+                new IndexPage(
                         new IndexEntry(ARCANE_WOOD_CANE, new ItemStack(WizardsReborn.ARCANE_WOOD_CANE.get()), RegisterKnowledges.ARCACITE),
                         new IndexEntry(ARCANE_ITERATOR, new ItemStack(WizardsReborn.ARCANE_ITERATOR_ITEM.get()), RegisterKnowledges.ARCACITE),
                         new IndexEntry(WISSEN_KEYCHAIN, new ItemStack(WizardsReborn.WISSEN_KEYCHAIN.get()), RegisterKnowledges.ARCANE_ITERATOR),
-                        new IndexEntry(JEWELER_TABLE, new ItemStack(WizardsReborn.JEWELER_TABLE_ITEM.get()), RegisterKnowledges.ARCACITE_POLISHING_MIXTURE)
-                ),
-                new IndexPage(
+                        new IndexEntry(JEWELER_TABLE, new ItemStack(WizardsReborn.JEWELER_TABLE_ITEM.get()), RegisterKnowledges.ARCACITE_POLISHING_MIXTURE),
                         new IndexEntry(MUSIC_DISC_REBORN, new ItemStack(WizardsReborn.MUSIC_DISC_REBORN.get()), RegisterKnowledges.ARCANE_ITERATOR)
                 )
         );

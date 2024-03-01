@@ -23,11 +23,11 @@ import org.joml.Quaternionf;
 import java.util.Map;
 import java.util.stream.Stream;
 
-public class ArcaneWoodBoatModel extends EntityRenderer<CustomBoatEntity> {
+public class CustomBoatModel extends EntityRenderer<CustomBoatEntity> {
 
     private final Map<CustomBoatEntity.Type, Pair<ResourceLocation, BoatModel>> boatResources;
 
-    public ArcaneWoodBoatModel(EntityRendererProvider.Context context, boolean chest) {
+    public CustomBoatModel(EntityRendererProvider.Context context, boolean chest) {
         super(context);
         this.shadowRadius = 0.8F;
         this.boatResources = Stream.of(CustomBoatEntity.Type.values()).collect(ImmutableMap.toImmutableMap(type -> type, type -> Pair.of(new ResourceLocation(WizardsReborn.MOD_ID, getTextureLocation(type, chest)), this.createBoatModel(context, type, chest))));

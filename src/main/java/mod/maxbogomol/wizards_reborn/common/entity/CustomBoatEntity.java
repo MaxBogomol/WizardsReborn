@@ -1,25 +1,18 @@
 package mod.maxbogomol.wizards_reborn.common.entity;
 
 import mod.maxbogomol.wizards_reborn.WizardsReborn;
-import net.minecraft.network.protocol.game.ClientGamePacketListener;
-import net.minecraft.world.entity.EntityType;
-import net.minecraft.world.entity.vehicle.Boat;
-import net.minecraft.world.item.Item;
-import net.minecraft.world.item.ItemStack;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.protocol.Packet;
+import net.minecraft.network.protocol.game.ClientGamePacketListener;
 import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
 import net.minecraft.network.syncher.SynchedEntityData;
-import net.minecraft.resources.ResourceLocation;
-import net.minecraft.world.level.block.Block;
-import net.minecraft.world.phys.HitResult;
-import net.minecraft.world.phys.Vec3;
+import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.vehicle.Boat;
+import net.minecraft.world.item.Item;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.Block;
 import net.minecraftforge.network.NetworkHooks;
-import net.minecraftforge.registries.ForgeRegistries;
-
-import javax.annotation.Nonnull;
 
 public class CustomBoatEntity extends Boat {
     private static final EntityDataAccessor<Integer> BOAT_TYPE = SynchedEntityData.defineId(CustomBoatEntity.class, EntityDataSerializers.INT);
@@ -45,6 +38,7 @@ public class CustomBoatEntity extends Boat {
     public Item getDropItem() {
         return switch (this.getCustomBoatEntityType()) {
             case ARCANE_WOOD -> WizardsReborn.ARCANE_WOOD_BOAT_ITEM.get();
+            case INNOCENT_WOOD -> WizardsReborn.INNOCENT_WOOD_BOAT_ITEM.get();
         };
     }
 
@@ -76,7 +70,8 @@ public class CustomBoatEntity extends Boat {
     }
 
     public enum Type {
-        ARCANE_WOOD(WizardsReborn.ARCANE_WOOD_PLANKS.get(), "arcane_wood");
+        ARCANE_WOOD(WizardsReborn.ARCANE_WOOD_PLANKS.get(), "arcane_wood"),
+        INNOCENT_WOOD(WizardsReborn.INNOCENT_WOOD_PLANKS.get(), "innocent_wood");
 
         private final String name;
         private final Block block;

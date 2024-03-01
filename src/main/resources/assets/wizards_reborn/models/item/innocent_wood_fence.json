@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:block/fence_inventory",
+  "textures": {
+    "texture": "wizards_reborn:block/innocent_wood_planks"
+  }
+}

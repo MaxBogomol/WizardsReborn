@@ -168,6 +168,7 @@ public class WizardsReborn {
     public static final DeferredRegister<Fluid> FLUIDS = DeferredRegister.create(ForgeRegistries.FLUIDS, MOD_ID);
 
     public static final WoodType ARCANE_WOOD_TYPE = WoodType.register(new WoodType(new ResourceLocation(MOD_ID, "arcane_wood").toString(), BlockSetType.OAK));
+    public static final WoodType INNOCENT_WOOD_TYPE = WoodType.register(new WoodType(new ResourceLocation(MOD_ID, "innocent_wood").toString(), BlockSetType.CHERRY));
 
     public static final TagKey<Item> ARCANE_WOOD_LOGS_ITEM_TAG = TagKey.create(Registries.ITEM, new ResourceLocation(MOD_ID, "arcane_wood_logs"));
     public static final TagKey<Item> ARCANE_LUMOS_ITEM_TAG = TagKey.create(Registries.ITEM, new ResourceLocation(MOD_ID, "arcane_lumos"));
@@ -319,6 +320,30 @@ public class WizardsReborn {
     public static final RegistryObject<Block> ARCANE_WOOD_SAPLING = BLOCKS.register("arcane_wood_sapling", () -> new SaplingBlock(new ArcaneWoodTree(), BlockBehaviour.Properties.copy(Blocks.OAK_SAPLING)));
     public static final RegistryObject<Block> POTTED_ARCANE_WOOD_SAPLING = BLOCKS.register("potted_arcane_wood_sapling", () -> new FlowerPotBlock(ARCANE_WOOD_SAPLING.get(), BlockBehaviour.Properties.copy(Blocks.FLOWER_POT).instabreak().noOcclusion()));
 
+    public static final RegistryObject<Block> INNOCENT_WOOD_LOG = BLOCKS.register("innocent_wood_log", () -> new RotatedPillarBlock(BlockBehaviour.Properties.copy(Blocks.CHERRY_WOOD)));
+    public static final RegistryObject<Block> INNOCENT_WOOD = BLOCKS.register("innocent_wood", () -> new RotatedPillarBlock(BlockBehaviour.Properties.copy(Blocks.CHERRY_WOOD)));
+    public static final RegistryObject<Block> STRIPPED_INNOCENT_WOOD_LOG = BLOCKS.register("stripped_innocent_wood_log", () -> new RotatedPillarBlock(BlockBehaviour.Properties.copy(Blocks.STRIPPED_CHERRY_LOG)));
+    public static final RegistryObject<Block> STRIPPED_INNOCENT_WOOD = BLOCKS.register("stripped_innocent_wood", () -> new RotatedPillarBlock(BlockBehaviour.Properties.copy(Blocks.STRIPPED_CHERRY_WOOD)));
+    public static final RegistryObject<Block> INNOCENT_WOOD_PLANKS = BLOCKS.register("innocent_wood_planks", () -> new Block(BlockBehaviour.Properties.copy(Blocks.CHERRY_PLANKS)));
+    public static final RegistryObject<Block> INNOCENT_WOOD_STAIRS = BLOCKS.register("innocent_wood_stairs", () -> new StairBlock(() -> INNOCENT_WOOD_PLANKS.get().defaultBlockState(), BlockBehaviour.Properties.copy(Blocks.CHERRY_PLANKS)));
+    public static final RegistryObject<Block> INNOCENT_WOOD_SLAB = BLOCKS.register("innocent_wood_slab", () -> new SlabBlock(BlockBehaviour.Properties.copy(Blocks.CHERRY_PLANKS)));
+    public static final RegistryObject<Block> INNOCENT_WOOD_FENCE = BLOCKS.register("innocent_wood_fence", () -> new FenceBlock(BlockBehaviour.Properties.copy(Blocks.CHERRY_PLANKS)));
+    public static final RegistryObject<Block> INNOCENT_WOOD_FENCE_GATE = BLOCKS.register("innocent_wood_fence_gate", () -> new FenceGateBlock(BlockBehaviour.Properties.copy(Blocks.CHERRY_PLANKS), WoodType.CHERRY));
+    public static final RegistryObject<Block> INNOCENT_WOOD_DOOR = BLOCKS.register("innocent_wood_door", () -> new DoorBlock(BlockBehaviour.Properties.copy(Blocks.CHERRY_PLANKS).noOcclusion(), BlockSetType.CHERRY));
+    public static final RegistryObject<Block> INNOCENT_WOOD_TRAPDOOR = BLOCKS.register("innocent_wood_trapdoor", () -> new TrapDoorBlock(BlockBehaviour.Properties.copy(Blocks.CHERRY_PLANKS).noOcclusion(), BlockSetType.CHERRY));
+    public static final RegistryObject<Block> INNOCENT_WOOD_PRESSURE_PLATE = BLOCKS.register("innocent_wood_pressure_plate", () -> new PressurePlateBlock(PressurePlateBlock.Sensitivity.EVERYTHING, BlockBehaviour.Properties.copy(Blocks.CHERRY_PLANKS).noOcclusion().noCollission(), BlockSetType.OAK));
+    public static final RegistryObject<Block> INNOCENT_WOOD_BUTTON = BLOCKS.register("innocent_wood_button", () -> new ButtonBlock(BlockBehaviour.Properties.copy(Blocks.CHERRY_BUTTON).sound(SoundType.WOOD), BlockSetType.CHERRY, 30, true));
+    public static final RegistryObject<Block> INNOCENT_WOOD_SIGN = BLOCKS.register("innocent_wood_sign", () -> new CustomStandingSignBlock(BlockBehaviour.Properties.copy(Blocks.CHERRY_PLANKS).noOcclusion().noCollission(), INNOCENT_WOOD_TYPE));
+    public static final RegistryObject<Block> INNOCENT_WOOD_WALL_SIGN = BLOCKS.register("innocent_wood_wall_sign", () -> new CustomWallSignBlock(BlockBehaviour.Properties.copy(Blocks.CHERRY_PLANKS).noOcclusion().noCollission(), INNOCENT_WOOD_TYPE));
+    public static final RegistryObject<Block> INNOCENT_WOOD_HANGING_SIGN = BLOCKS.register("innocent_wood_hanging_sign", () -> new CustomCeilingHangingSignBlock(BlockBehaviour.Properties.copy(Blocks.CHERRY_PLANKS).noOcclusion().noCollission(), INNOCENT_WOOD_TYPE));
+    public static final RegistryObject<Block> INNOCENT_WOOD_WALL_HANGING_SIGN = BLOCKS.register("innocent_wood_wall_hanging_sign", () -> new CustomWallHangingSignBlock(BlockBehaviour.Properties.copy(Blocks.CHERRY_PLANKS).noOcclusion().noCollission(), INNOCENT_WOOD_TYPE));
+    public static final RegistryObject<Block> INNOCENT_WOOD_LEAVES = BLOCKS.register("innocent_wood_leaves", () -> new ArcaneWoodLeavesBlock(BlockBehaviour.Properties.copy(Blocks.CHERRY_LEAVES)));
+    public static final RegistryObject<Block> INNOCENT_WOOD_SAPLING = BLOCKS.register("innocent_wood_sapling", () -> new SaplingBlock(new ArcaneWoodTree(), BlockBehaviour.Properties.copy(Blocks.CHERRY_SAPLING)));
+    public static final RegistryObject<Block> POTTED_INNOCENT_WOOD_SAPLING = BLOCKS.register("potted_innocent_wood_sapling", () -> new FlowerPotBlock(INNOCENT_WOOD_SAPLING.get(), BlockBehaviour.Properties.copy(Blocks.FLOWER_POT).instabreak().noOcclusion()));
+    public static final RegistryObject<Block> PETALS_OF_INNOCENCE = BLOCKS.register("petals_of_innocence", () -> new PetalsOfInnocenceBlock(BlockBehaviour.Properties.copy(Blocks.PINK_PETALS)));
+    public static final RegistryObject<Block> POTTED_PETALS_OF_INNOCENCE = BLOCKS.register("potted_petals_of_innocence", () -> new FlowerPotBlock(PETALS_OF_INNOCENCE.get(), BlockBehaviour.Properties.copy(Blocks.FLOWER_POT).instabreak().noOcclusion()));
+    public static final RegistryObject<Block> POTTED_PINK_PETALS = BLOCKS.register("potted_pink_petals", () -> new FlowerPotBlock(Blocks.PINK_PETALS, BlockBehaviour.Properties.copy(Blocks.FLOWER_POT).instabreak().noOcclusion()));
+
     public static final RegistryObject<Block> WISESTONE = BLOCKS.register("wisestone", () -> new Block(BlockBehaviour.Properties.copy(Blocks.DEEPSLATE)));
     public static final RegistryObject<Block> WISESTONE_STAIRS = BLOCKS.register("wisestone_stairs", () -> new StairBlock(() -> WISESTONE.get().defaultBlockState(), BlockBehaviour.Properties.copy(Blocks.POLISHED_DEEPSLATE)));
     public static final RegistryObject<Block> WISESTONE_SLAB = BLOCKS.register("wisestone_slab", () -> new SlabBlock(BlockBehaviour.Properties.copy(Blocks.POLISHED_DEEPSLATE)));
@@ -352,10 +377,6 @@ public class WizardsReborn {
     public static final RegistryObject<Block> ELDER_MOR = BLOCKS.register("elder_mor", () -> new MorBlock(BlockBehaviour.Properties.copy(Blocks.RED_MUSHROOM)));
     public static final RegistryObject<Block> POTTED_ELDER_MOR = BLOCKS.register("potted_elder_mor", () -> new FlowerPotBlock(ELDER_MOR.get(), BlockBehaviour.Properties.copy(Blocks.FLOWER_POT).instabreak().noOcclusion()));
     public static final RegistryObject<Block> ELDER_MOR_BLOCK = BLOCKS.register("elder_mor_block", () -> new HugeMushroomBlock(BlockBehaviour.Properties.copy(Blocks.BROWN_MUSHROOM_BLOCK)));
-
-    public static final RegistryObject<Block> PETALS_OF_INNOCENCE = BLOCKS.register("petals_of_innocence", () -> new PetalsOfInnocenceBlock(BlockBehaviour.Properties.copy(Blocks.PINK_PETALS)));
-    public static final RegistryObject<Block> POTTED_PETALS_OF_INNOCENCE = BLOCKS.register("potted_petals_of_innocence", () -> new FlowerPotBlock(PETALS_OF_INNOCENCE.get(), BlockBehaviour.Properties.copy(Blocks.FLOWER_POT).instabreak().noOcclusion()));
-    public static final RegistryObject<Block> POTTED_PINK_PETALS = BLOCKS.register("potted_pink_petals", () -> new FlowerPotBlock(Blocks.PINK_PETALS, BlockBehaviour.Properties.copy(Blocks.FLOWER_POT).instabreak().noOcclusion()));
 
     public static final RegistryObject<Block> ARCANUM_SEED_BLOCK = BLOCKS.register("arcanum_seed", () -> new CrystalSeedBlock(BlockBehaviour.Properties.copy(Blocks.AMETHYST_CLUSTER)));
     public static final RegistryObject<Block> ARCANUM_GROWTH = BLOCKS.register("arcanum_growth", () -> new ArcanumGrowthBlock(BlockBehaviour.Properties.copy(Blocks.AMETHYST_CLUSTER)));
@@ -473,6 +494,13 @@ public class WizardsReborn {
     public static final RegistryObject<Block> ARCANE_WOOD_LIGHT_CASING = BLOCKS.register("arcane_wood_light_casing", () -> new LightCasingBlock(BlockBehaviour.Properties.copy(Blocks.OAK_PLANKS).noOcclusion()));
     public static final RegistryObject<Block> ARCANE_WOOD_FLUID_CASING = BLOCKS.register("arcane_wood_fluid_casing", () -> new FluidCasingBlock(BlockBehaviour.Properties.copy(Blocks.OAK_PLANKS).noOcclusion()));
     public static final RegistryObject<Block> ARCANE_WOOD_STEAM_CASING = BLOCKS.register("arcane_wood_steam_casing", () -> new SteamCasingBlock(BlockBehaviour.Properties.copy(Blocks.OAK_PLANKS).noOcclusion()));
+    public static final RegistryObject<Block> INNOCENT_WOOD_FRAME = BLOCKS.register("innocent_wood_frame", () -> new FrameBlock(BlockBehaviour.Properties.copy(Blocks.CHERRY_PLANKS).noOcclusion()));
+    public static final RegistryObject<Block> INNOCENT_WOOD_GLASS_FRAME = BLOCKS.register("innocent_wood_glass_frame", () -> new GlassFrameBlock(BlockBehaviour.Properties.copy(Blocks.CHERRY_PLANKS).noOcclusion()));
+    public static final RegistryObject<Block> INNOCENT_WOOD_CASING = BLOCKS.register("innocent_wood_casing", () -> new CasingBlock(BlockBehaviour.Properties.copy(Blocks.CHERRY_PLANKS).noOcclusion()));
+    public static final RegistryObject<Block> INNOCENT_WOOD_WISSEN_CASING = BLOCKS.register("innocent_wood_wissen_casing", () -> new WissenCasingBlock(BlockBehaviour.Properties.copy(Blocks.CHERRY_PLANKS).noOcclusion()));
+    public static final RegistryObject<Block> INNOCENT_WOOD_LIGHT_CASING = BLOCKS.register("innocent_wood_light_casing", () -> new LightCasingBlock(BlockBehaviour.Properties.copy(Blocks.CHERRY_PLANKS).noOcclusion()));
+    public static final RegistryObject<Block> INNOCENT_WOOD_FLUID_CASING = BLOCKS.register("innocent_wood_fluid_casing", () -> new FluidCasingBlock(BlockBehaviour.Properties.copy(Blocks.CHERRY_PLANKS).noOcclusion()));
+    public static final RegistryObject<Block> INNOCENT_WOOD_STEAM_CASING = BLOCKS.register("innocent_wood_steam_casing", () -> new SteamCasingBlock(BlockBehaviour.Properties.copy(Blocks.CHERRY_PLANKS).noOcclusion()));
     public static final RegistryObject<Block> WISESTONE_FRAME = BLOCKS.register("wisestone_frame", () -> new FrameBlock(BlockBehaviour.Properties.copy(Blocks.POLISHED_DEEPSLATE).noOcclusion()));
     public static final RegistryObject<Block> WISESTONE_GLASS_FRAME = BLOCKS.register("wisestone_glass_frame", () -> new GlassFrameBlock(BlockBehaviour.Properties.copy(Blocks.POLISHED_DEEPSLATE).noOcclusion()));
     public static final RegistryObject<Block> WISESTONE_CASING = BLOCKS.register("wisestone_casing", () -> new CasingBlock(BlockBehaviour.Properties.copy(Blocks.POLISHED_DEEPSLATE).noOcclusion()));
@@ -541,6 +569,27 @@ public class WizardsReborn {
     public static final RegistryObject<Item> ARCANE_WOOD_LEAVES_ITEM = ITEMS.register("arcane_wood_leaves", () -> new BlockItem(ARCANE_WOOD_LEAVES.get(), new Item.Properties()));
     public static final RegistryObject<Item> ARCANE_WOOD_SAPLING_ITEM = ITEMS.register("arcane_wood_sapling", () -> new BlockItem(ARCANE_WOOD_SAPLING.get(), new Item.Properties()));
 
+    public static final RegistryObject<Item> INNOCENT_WOOD_LOG_ITEM = ITEMS.register("innocent_wood_log", () -> new BlockItem(INNOCENT_WOOD_LOG.get(), new Item.Properties()));
+    public static final RegistryObject<Item> INNOCENT_WOOD_ITEM = ITEMS.register("innocent_wood", () -> new BlockItem(INNOCENT_WOOD.get(), new Item.Properties()));
+    public static final RegistryObject<Item> STRIPPED_INNOCENT_WOOD_LOG_ITEM = ITEMS.register("stripped_innocent_wood_log", () -> new BlockItem(STRIPPED_INNOCENT_WOOD_LOG.get(), new Item.Properties()));
+    public static final RegistryObject<Item> STRIPPED_INNOCENT_WOOD_ITEM = ITEMS.register("stripped_innocent_wood", () -> new BlockItem(STRIPPED_INNOCENT_WOOD.get(), new Item.Properties()));
+    public static final RegistryObject<Item> INNOCENT_WOOD_PLANKS_ITEM = ITEMS.register("innocent_wood_planks", () -> new BlockItem(INNOCENT_WOOD_PLANKS.get(), new Item.Properties()));
+    public static final RegistryObject<Item> INNOCENT_WOOD_STAIRS_ITEM = ITEMS.register("innocent_wood_stairs", () -> new BlockItem(INNOCENT_WOOD_STAIRS.get(), new Item.Properties()));
+    public static final RegistryObject<Item> INNOCENT_WOOD_SLAB_ITEM = ITEMS.register("innocent_wood_slab", () -> new BlockItem(INNOCENT_WOOD_SLAB.get(), new Item.Properties()));
+    public static final RegistryObject<Item> INNOCENT_WOOD_FENCE_ITEM = ITEMS.register("innocent_wood_fence", () -> new BlockItem(INNOCENT_WOOD_FENCE.get(), new Item.Properties()));
+    public static final RegistryObject<Item> INNOCENT_WOOD_FENCE_GATE_ITEM = ITEMS.register("innocent_wood_fence_gate", () -> new BlockItem(INNOCENT_WOOD_FENCE_GATE.get(), new Item.Properties()));
+    public static final RegistryObject<Item> INNOCENT_WOOD_DOOR_ITEM = ITEMS.register("innocent_wood_door", () -> new BlockItem(INNOCENT_WOOD_DOOR.get(), new Item.Properties()));
+    public static final RegistryObject<Item> INNOCENT_WOOD_TRAPDOOR_ITEM = ITEMS.register("innocent_wood_trapdoor", () -> new BlockItem(INNOCENT_WOOD_TRAPDOOR.get(), new Item.Properties()));
+    public static final RegistryObject<Item> INNOCENT_WOOD_PRESSURE_PLATE_ITEM = ITEMS.register("innocent_wood_pressure_plate", () -> new BlockItem(INNOCENT_WOOD_PRESSURE_PLATE.get(), new Item.Properties()));
+    public static final RegistryObject<Item> INNOCENT_WOOD_BUTTON_ITEM = ITEMS.register("innocent_wood_button", () -> new BlockItem(INNOCENT_WOOD_BUTTON.get(), new Item.Properties()));
+    public static final RegistryObject<Item> INNOCENT_WOOD_SIGN_ITEM = ITEMS.register("innocent_wood_sign", () -> new SignItem(new Item.Properties().stacksTo(16),INNOCENT_WOOD_SIGN.get(), INNOCENT_WOOD_WALL_SIGN.get()));
+    public static final RegistryObject<Item> INNOCENT_WOOD_HANGING_SIGN_ITEM = ITEMS.register("innocent_wood_hanging_sign", () -> new HangingSignItem(INNOCENT_WOOD_HANGING_SIGN.get(), INNOCENT_WOOD_WALL_HANGING_SIGN.get(), new Item.Properties().stacksTo(16)));
+    public static final RegistryObject<Item> INNOCENT_WOOD_BOAT_ITEM = ITEMS.register("innocent_wood_boat", () -> new CustomBoatItem(false, CustomBoatEntity.Type.INNOCENT_WOOD, new Item.Properties().stacksTo(1)));
+    public static final RegistryObject<Item> INNOCENT_WOOD_CHEST_BOAT_ITEM = ITEMS.register("innocent_wood_chest_boat", () -> new CustomBoatItem(true, CustomBoatEntity.Type.INNOCENT_WOOD, new Item.Properties().stacksTo(1)));
+    public static final RegistryObject<Item> INNOCENT_WOOD_LEAVES_ITEM = ITEMS.register("innocent_wood_leaves", () -> new BlockItem(INNOCENT_WOOD_LEAVES.get(), new Item.Properties()));
+    public static final RegistryObject<Item> INNOCENT_WOOD_SAPLING_ITEM = ITEMS.register("innocent_wood_sapling", () -> new BlockItem(INNOCENT_WOOD_SAPLING.get(), new Item.Properties()));
+    public static final RegistryObject<Item> PETALS_OF_INNOCENCE_ITEM = ITEMS.register("petals_of_innocence", () -> new BlockItem(PETALS_OF_INNOCENCE.get(), new Item.Properties()));
+
     public static final RegistryObject<Item> WISESTONE_ITEM = ITEMS.register("wisestone", () -> new BlockItem(WISESTONE.get(), new Item.Properties()));
     public static final RegistryObject<Item> WISESTONE_STAIRS_ITEM = ITEMS.register("wisestone_stairs", () -> new BlockItem(WISESTONE_STAIRS.get(), new Item.Properties()));
     public static final RegistryObject<Item> WISESTONE_SLAB_ITEM = ITEMS.register("wisestone_slab", () -> new BlockItem(WISESTONE_SLAB.get(), new Item.Properties()));
@@ -582,8 +631,6 @@ public class WizardsReborn {
     public static final RegistryObject<Item> GROUND_WARPED_FUNGUS = ITEMS.register("ground_warped_fungus", () -> new Item(new Item.Properties()));
     public static final RegistryObject<Item> GROUND_MOR = ITEMS.register("ground_mor", () -> new Item(new Item.Properties()));
     public static final RegistryObject<Item> GROUND_ELDER_MOR = ITEMS.register("ground_elder_mor", () -> new Item(new Item.Properties()));
-
-    public static final RegistryObject<Item> PETALS_OF_INNOCENCE_ITEM = ITEMS.register("petals_of_innocence", () -> new BlockItem(PETALS_OF_INNOCENCE.get(), new Item.Properties()));
 
     public static final RegistryObject<Item> ARCANUM_SEED = ITEMS.register("arcanum_seed", () -> new BlockItem(ARCANUM_SEED_BLOCK.get(), new Item.Properties()));
     public static final RegistryObject<Item> ARCANUM_GROWTH_ITEM = ITEMS.register("arcanum_growth", () -> new BlockItem(ARCANUM_GROWTH.get(), new Item.Properties()));
@@ -707,6 +754,13 @@ public class WizardsReborn {
     public static final RegistryObject<Item> ARCANE_WOOD_LIGHT_CASING_ITEM = ITEMS.register("arcane_wood_light_casing", () -> new BlockItem(ARCANE_WOOD_LIGHT_CASING.get(), new Item.Properties()));
     public static final RegistryObject<Item> ARCANE_WOOD_FLUID_CASING_ITEM = ITEMS.register("arcane_wood_fluid_casing", () -> new BlockItem(ARCANE_WOOD_FLUID_CASING.get(), new Item.Properties()));
     public static final RegistryObject<Item> ARCANE_WOOD_STEAM_CASING_ITEM = ITEMS.register("arcane_wood_steam_casing", () -> new BlockItem(ARCANE_WOOD_STEAM_CASING.get(), new Item.Properties()));
+    public static final RegistryObject<Item> INNOCENT_WOOD_FRAME_ITEM = ITEMS.register("innocent_wood_frame", () -> new BlockItem(INNOCENT_WOOD_FRAME.get(), new Item.Properties()));
+    public static final RegistryObject<Item> INNOCENT_WOOD_GLASS_FRAME_ITEM = ITEMS.register("innocent_wood_glass_frame", () -> new BlockItem(INNOCENT_WOOD_GLASS_FRAME.get(), new Item.Properties()));
+    public static final RegistryObject<Item> INNOCENT_WOOD_CASING_ITEM = ITEMS.register("innocent_wood_casing", () -> new BlockItem(INNOCENT_WOOD_CASING.get(), new Item.Properties()));
+    public static final RegistryObject<Item> INNOCENT_WOOD_WISSEN_CASING_ITEM = ITEMS.register("innocent_wood_wissen_casing", () -> new BlockItem(INNOCENT_WOOD_WISSEN_CASING.get(), new Item.Properties()));
+    public static final RegistryObject<Item> INNOCENT_WOOD_LIGHT_CASING_ITEM = ITEMS.register("innocent_wood_light_casing", () -> new BlockItem(INNOCENT_WOOD_LIGHT_CASING.get(), new Item.Properties()));
+    public static final RegistryObject<Item> INNOCENT_WOOD_FLUID_CASING_ITEM = ITEMS.register("innocent_wood_fluid_casing", () -> new BlockItem(INNOCENT_WOOD_FLUID_CASING.get(), new Item.Properties()));
+    public static final RegistryObject<Item> INNOCENT_WOOD_STEAM_CASING_ITEM = ITEMS.register("innocent_wood_steam_casing", () -> new BlockItem(INNOCENT_WOOD_STEAM_CASING.get(), new Item.Properties()));
     public static final RegistryObject<Item> WISESTONE_FRAME_ITEM = ITEMS.register("wisestone_frame", () -> new BlockItem(WISESTONE_FRAME.get(), new Item.Properties()));
     public static final RegistryObject<Item> WISESTONE_GLASS_FRAME_ITEM = ITEMS.register("wisestone_glass_frame", () -> new BlockItem(WISESTONE_GLASS_FRAME.get(), new Item.Properties()));
     public static final RegistryObject<Item> WISESTONE_CASING_ITEM = ITEMS.register("wisestone_casing", () -> new BlockItem(WISESTONE_CASING.get(), new Item.Properties()));
@@ -778,8 +832,13 @@ public class WizardsReborn {
     public static final RegistryObject<Item> MUSIC_DISC_REBORN = ITEMS.register("music_disc_reborn", () -> new RecordItem(6, MUSIC_DISC_REBORN_SOUND.get(), new Item.Properties().stacksTo(1).rarity(Rarity.RARE), 211));
 
     //TILE_ENTITIES
-    public static final RegistryObject<BlockEntityType<CustomSignTileEntity>> SIGN_TILE_ENTITY = TILE_ENTITIES.register("sign", () -> BlockEntityType.Builder.of(CustomSignTileEntity::new, ARCANE_WOOD_SIGN.get(), ARCANE_WOOD_WALL_SIGN.get()).build(null));
-    public static final RegistryObject<BlockEntityType<CustomHangingSignTileEntity>> HANGING_SIGN_TILE_ENTITY = TILE_ENTITIES.register("hanging_sign", () -> BlockEntityType.Builder.of(CustomHangingSignTileEntity::new, ARCANE_WOOD_HANGING_SIGN.get(), ARCANE_WOOD_WALL_HANGING_SIGN.get()).build(null));
+    public static final RegistryObject<BlockEntityType<CustomSignTileEntity>> SIGN_TILE_ENTITY = TILE_ENTITIES.register("sign", () -> BlockEntityType.Builder.of(CustomSignTileEntity::new,
+            ARCANE_WOOD_SIGN.get(), ARCANE_WOOD_WALL_SIGN.get(),
+            INNOCENT_WOOD_SIGN.get(), INNOCENT_WOOD_WALL_SIGN.get()).build(null));
+    public static final RegistryObject<BlockEntityType<CustomHangingSignTileEntity>> HANGING_SIGN_TILE_ENTITY = TILE_ENTITIES.register("hanging_sign", () -> BlockEntityType.Builder.of(CustomHangingSignTileEntity::new,
+            ARCANE_WOOD_HANGING_SIGN.get(), ARCANE_WOOD_WALL_HANGING_SIGN.get(),
+            INNOCENT_WOOD_HANGING_SIGN.get(), INNOCENT_WOOD_WALL_HANGING_SIGN.get())
+            .build(null));
 
     public static RegistryObject<BlockEntityType<ArcanumGrowthTileEntity>> ARCANUM_GROWTH_TILE_ENTITY = TILE_ENTITIES.register("arcanum_growth", () -> BlockEntityType.Builder.of(ArcanumGrowthTileEntity::new, ARCANUM_GROWTH.get()).build(null));
     public static RegistryObject<BlockEntityType<CrystalTileEntity>> CRYSTAL_TILE_ENTITY = TILE_ENTITIES.register("crystal", () -> BlockEntityType.Builder.of(CrystalTileEntity::new,
@@ -787,11 +846,11 @@ public class WizardsReborn {
             FACETED_EARTH_CRYSTAL_BLOCK.get(), FACETED_WATER_CRYSTAL_BLOCK.get(), FACETED_AIR_CRYSTAL_BLOCK.get(), FACETED_FIRE_CRYSTAL_BLOCK.get(), FACETED_VOID_CRYSTAL_BLOCK.get(),
             ADVANCED_EARTH_CRYSTAL_BLOCK.get(), ADVANCED_WATER_CRYSTAL_BLOCK.get(), ADVANCED_AIR_CRYSTAL_BLOCK.get(), ADVANCED_FIRE_CRYSTAL_BLOCK.get(), ADVANCED_VOID_CRYSTAL_BLOCK.get(),
             MASTERFUL_EARTH_CRYSTAL_BLOCK.get(), MASTERFUL_WATER_CRYSTAL_BLOCK.get(), MASTERFUL_AIR_CRYSTAL_BLOCK.get(), MASTERFUL_FIRE_CRYSTAL_BLOCK.get(), MASTERFUL_VOID_CRYSTAL_BLOCK.get(),
-            PURE_EARTH_CRYSTAL_BLOCK.get(), PURE_WATER_CRYSTAL_BLOCK.get(), PURE_AIR_CRYSTAL_BLOCK.get(), PURE_FIRE_CRYSTAL_BLOCK.get(), PURE_VOID_CRYSTAL_BLOCK.get()
-            ).build(null));
+            PURE_EARTH_CRYSTAL_BLOCK.get(), PURE_WATER_CRYSTAL_BLOCK.get(), PURE_AIR_CRYSTAL_BLOCK.get(), PURE_FIRE_CRYSTAL_BLOCK.get(), PURE_VOID_CRYSTAL_BLOCK.get())
+            .build(null));
     public static RegistryObject<BlockEntityType<CrystalGrowthTileEntity>> CRYSTAL_GROWTH_TILE_ENTITY = TILE_ENTITIES.register("crystal_growth", () -> BlockEntityType.Builder.of(CrystalGrowthTileEntity::new,
-            EARTH_CRYSTAL_GROWTH.get(), WATER_CRYSTAL_GROWTH.get(), AIR_CRYSTAL_GROWTH.get(), FIRE_CRYSTAL_GROWTH.get(), VOID_CRYSTAL_GROWTH.get()
-            ).build(null));
+            EARTH_CRYSTAL_GROWTH.get(), WATER_CRYSTAL_GROWTH.get(), AIR_CRYSTAL_GROWTH.get(), FIRE_CRYSTAL_GROWTH.get(), VOID_CRYSTAL_GROWTH.get())
+            .build(null));
 
     public static RegistryObject<BlockEntityType<ArcanePedestalTileEntity>> ARCANE_PEDESTAL_TILE_ENTITY = TILE_ENTITIES.register("arcane_pedestal", () -> BlockEntityType.Builder.of(ArcanePedestalTileEntity::new, ARCANE_PEDESTAL.get(), WISESTONE_PEDESTAL.get()).build(null));
     public static RegistryObject<BlockEntityType<HoveringTomeStandTileEntity>> HOVERING_TOME_STAND_TILE_ENTITY = TILE_ENTITIES.register("hovering_tome_stand", () -> BlockEntityType.Builder.of(HoveringTomeStandTileEntity::new, HOVERING_TOME_STAND.get(), WISESTONE_HOVERING_TOME_STAND.get()).build(null));
@@ -827,10 +886,10 @@ public class WizardsReborn {
     public static RegistryObject<BlockEntityType<WissenActivatorTileEntity>> WISSEN_ACTIVATOR_TILE_ENTITY = TILE_ENTITIES.register("wissen_activator", () -> BlockEntityType.Builder.of(WissenActivatorTileEntity::new, WISSEN_ACTIVATOR.get()).build(null));
     public static RegistryObject<BlockEntityType<ItemSorterTileEntity>> ITEM_SORTER_TILE_ENTITY = TILE_ENTITIES.register("item_sorter", () -> BlockEntityType.Builder.of(ItemSorterTileEntity::new, ITEM_SORTER.get()).build(null));
 
-    public static RegistryObject<BlockEntityType<WissenCasingTileEntity>> WISSEN_CASING_TILE_ENTITY = TILE_ENTITIES.register("wissen_casing", () -> BlockEntityType.Builder.of(WissenCasingTileEntity::new, ARCANE_WOOD_WISSEN_CASING.get(), WISESTONE_WISSEN_CASING.get()).build(null));
-    public static RegistryObject<BlockEntityType<LightCasingTileEntity>> LIGHT_CASING_TILE_ENTITY = TILE_ENTITIES.register("light_casing", () -> BlockEntityType.Builder.of(LightCasingTileEntity::new, ARCANE_WOOD_LIGHT_CASING.get(), WISESTONE_LIGHT_CASING.get()).build(null));
-    public static RegistryObject<BlockEntityType<FluidCasingTileEntity>> FLUID_CASING_TILE_ENTITY = TILE_ENTITIES.register("fluid_casing", () -> BlockEntityType.Builder.of(FluidCasingTileEntity::new, ARCANE_WOOD_FLUID_CASING.get(), WISESTONE_FLUID_CASING.get()).build(null));
-    public static RegistryObject<BlockEntityType<SteamCasingTileEntity>> STEAM_CASING_TILE_ENTITY = TILE_ENTITIES.register("steam_casing", () -> BlockEntityType.Builder.of(SteamCasingTileEntity::new, ARCANE_WOOD_STEAM_CASING.get(), WISESTONE_STEAM_CASING.get()).build(null));
+    public static RegistryObject<BlockEntityType<WissenCasingTileEntity>> WISSEN_CASING_TILE_ENTITY = TILE_ENTITIES.register("wissen_casing", () -> BlockEntityType.Builder.of(WissenCasingTileEntity::new, ARCANE_WOOD_WISSEN_CASING.get(), INNOCENT_WOOD_WISSEN_CASING.get(), WISESTONE_WISSEN_CASING.get()).build(null));
+    public static RegistryObject<BlockEntityType<LightCasingTileEntity>> LIGHT_CASING_TILE_ENTITY = TILE_ENTITIES.register("light_casing", () -> BlockEntityType.Builder.of(LightCasingTileEntity::new, ARCANE_WOOD_LIGHT_CASING.get(), INNOCENT_WOOD_LIGHT_CASING.get(), WISESTONE_LIGHT_CASING.get()).build(null));
+    public static RegistryObject<BlockEntityType<FluidCasingTileEntity>> FLUID_CASING_TILE_ENTITY = TILE_ENTITIES.register("fluid_casing", () -> BlockEntityType.Builder.of(FluidCasingTileEntity::new, ARCANE_WOOD_FLUID_CASING.get(), INNOCENT_WOOD_FLUID_CASING.get(), WISESTONE_FLUID_CASING.get()).build(null));
+    public static RegistryObject<BlockEntityType<SteamCasingTileEntity>> STEAM_CASING_TILE_ENTITY = TILE_ENTITIES.register("steam_casing", () -> BlockEntityType.Builder.of(SteamCasingTileEntity::new, ARCANE_WOOD_STEAM_CASING.get(), INNOCENT_WOOD_STEAM_CASING.get(), WISESTONE_STEAM_CASING.get()).build(null));
 
     public static RegistryObject<BlockEntityType<CreativeWissenStorageTileEntity>> CREATIVE_WISSEN_STORAGE_TILE_ENTITY = TILE_ENTITIES.register("creative_wissen_storage", () -> BlockEntityType.Builder.of(CreativeWissenStorageTileEntity::new, CREATIVE_WISSEN_STORAGE.get()).build(null));
     public static RegistryObject<BlockEntityType<CreativeLightStorageTileEntity>> CREATIVE_LIGHT_STORAGE_TILE_ENTITY = TILE_ENTITIES.register("creative_light_storage", () -> BlockEntityType.Builder.of(CreativeLightStorageTileEntity::new, CREATIVE_LIGHT_STORAGE.get()).build(null));
