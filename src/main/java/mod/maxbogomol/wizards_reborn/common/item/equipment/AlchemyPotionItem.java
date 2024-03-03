@@ -32,10 +32,12 @@ import net.minecraftforge.fluids.capability.IFluidHandler;
 import org.jetbrains.annotations.NotNull;
 
 import java.awt.*;
+import java.util.ArrayList;
 import java.util.List;
 
 public class AlchemyPotionItem extends Item {
     public int maxUses;
+    public static List<Item> potionList = new ArrayList<>();
 
     @Deprecated
     public final Item bottle;

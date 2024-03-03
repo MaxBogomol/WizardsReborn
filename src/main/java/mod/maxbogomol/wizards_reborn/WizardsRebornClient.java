@@ -353,6 +353,7 @@ public class WizardsRebornClient {
             Minecraft.getInstance().particleEngine.register(WizardsReborn.SPARKLE_PARTICLE.get(), SparkleParticleType.Factory::new);
             Minecraft.getInstance().particleEngine.register(WizardsReborn.KARMA_PARTICLE.get(), KarmaParticleType.Factory::new);
             Minecraft.getInstance().particleEngine.register(WizardsReborn.ARCANE_WOOD_LEAF_PARTICLE.get(), ArcaneWoodLeafParticleType.Factory::new);
+            Minecraft.getInstance().particleEngine.register(WizardsReborn.INNOCENT_WOOD_LEAF_PARTICLE.get(), InnocenceWoodLeafParticleType.Factory::new);
             Minecraft.getInstance().particleEngine.register(WizardsReborn.STEAM_PARTICLE.get(), SteamParticleType.Factory::new);
             Minecraft.getInstance().particleEngine.register(WizardsReborn.SMOKE_PARTICLE.get(), SmokeParticleType.Factory::new);
         }

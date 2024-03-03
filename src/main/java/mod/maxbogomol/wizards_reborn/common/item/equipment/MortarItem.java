@@ -15,9 +15,14 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 public class MortarItem extends Item {
+
+    public static List<Item> mortarList = new ArrayList<>();
+
     public MortarItem(Properties properties) {
         super(properties);
     }

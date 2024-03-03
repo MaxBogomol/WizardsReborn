@@ -1734,7 +1734,7 @@ public class ArcanemiconChapters {
                 new TitledBlockPage("wizards_reborn.arcanemicon.page.runic_pedestal",
                         new BlockEntry(new ItemStack(WizardsReborn.ARCANE_PEDESTAL_ITEM.get()), new ItemStack(WizardsReborn.RUNIC_PEDESTAL_ITEM.get()))
                 ),
-                new ArcaneWorkbenchPage(new ItemStack(WizardsReborn.LIGHT_EMITTER_ITEM.get()),
+                new ArcaneWorkbenchPage(new ItemStack(WizardsReborn.RUNIC_PEDESTAL_ITEM.get()),
                         new ItemStack(WizardsReborn.POLISHED_WISESTONE_ITEM.get()), new ItemStack(WizardsReborn.POLISHED_WISESTONE_ITEM.get()),  new ItemStack(WizardsReborn.POLISHED_WISESTONE_ITEM.get()),
                         new ItemStack(WizardsReborn.ALCHEMY_GLASS_ITEM.get()), new ItemStack(WizardsReborn.WISESTONE_PEDESTAL_ITEM.get()),  new ItemStack(WizardsReborn.ALCHEMY_GLASS_ITEM.get()),
                         new ItemStack(WizardsReborn.POLISHED_WISESTONE_ITEM.get()), new ItemStack(WizardsReborn.POLISHED_WISESTONE_ITEM.get()),  new ItemStack(WizardsReborn.POLISHED_WISESTONE_ITEM.get()),

@@ -82,6 +82,7 @@ public class WizardsRebornJei implements IModPlugin {
         registration.addRecipeCatalyst(new ItemStack(WizardsReborn.WISSEN_CRYSTALLIZER_ITEM.get()), WissenCrystallizerRecipeCategory.TYPE);
         registration.addRecipeCatalyst(new ItemStack(WizardsReborn.ARCANE_WORKBENCH_ITEM.get()), ArcaneWorkbenchRecipeCategory.TYPE);
         registration.addRecipeCatalyst(new ItemStack(WizardsReborn.ARCANE_WOOD_MORTAR.get()), MortarRecipeCategory.TYPE);
+        registration.addRecipeCatalyst(new ItemStack(WizardsReborn.INNOCENT_WOOD_MORTAR.get()), MortarRecipeCategory.TYPE);
         registration.addRecipeCatalyst(new ItemStack(WizardsReborn.ALCHEMY_MACHINE_ITEM.get()), AlchemyMachineRecipeCategory.TYPE);
         registration.addRecipeCatalyst(new ItemStack(WizardsReborn.ALCHEMY_BOILER_ITEM.get()), AlchemyMachineRecipeCategory.TYPE);
         registration.addRecipeCatalyst(new ItemStack(WizardsReborn.ARCANE_CENSER_ITEM.get()), CenserRecipeCategory.TYPE);

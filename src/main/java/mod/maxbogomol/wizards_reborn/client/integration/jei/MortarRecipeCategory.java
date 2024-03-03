@@ -9,12 +9,17 @@ import mezz.jei.api.recipe.RecipeIngredientRole;
 import mezz.jei.api.recipe.RecipeType;
 import mezz.jei.api.recipe.category.IRecipeCategory;
 import mod.maxbogomol.wizards_reborn.WizardsReborn;
+import mod.maxbogomol.wizards_reborn.common.item.equipment.MortarItem;
 import mod.maxbogomol.wizards_reborn.common.recipe.MortarRecipe;
 import net.minecraft.core.RegistryAccess;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import org.jetbrains.annotations.NotNull;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class MortarRecipeCategory implements IRecipeCategory<MortarRecipe> {
     public static final RecipeType<MortarRecipe> TYPE = RecipeType.create(WizardsReborn.MOD_ID, "mortar", MortarRecipe.class);
@@ -51,8 +56,18 @@ public class MortarRecipeCategory implements IRecipeCategory<MortarRecipe> {
 
     @Override
     public void setRecipe(@NotNull IRecipeLayoutBuilder builder, @NotNull MortarRecipe recipe, @NotNull IFocusGroup focusGroup) {
-        builder.addSlot(RecipeIngredientRole.INPUT, 4, 16).addItemStack(WizardsReborn.ARCANE_WOOD_MORTAR.get().getDefaultInstance());
+        builder.addSlot(RecipeIngredientRole.INPUT, 4, 16).addItemStacks(getMortarItems());
         builder.addSlot(RecipeIngredientRole.INPUT, 63, 16).addIngredients(recipe.getIngredientRecipe());
         builder.addSlot(RecipeIngredientRole.OUTPUT, 125, 16).addItemStack(recipe.getResultItem(RegistryAccess.EMPTY));
+    }
+
+    public static List<ItemStack> getMortarItems() {
+        List<ItemStack> items = new ArrayList<>();
+        for (Item item : MortarItem.mortarList) {
+            ItemStack itemStack = new ItemStack(item);
+            items.add(itemStack);
+        }
+
+        return items;
     }
 }

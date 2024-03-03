@@ -69,7 +69,7 @@ public class LightEmitterTileEntity extends ExposedTileSimpleInventory implement
                         if (canWork()) {
                             if (getWissen() > 0) {
                                 removeWissen(1);
-                                setLight(10);
+                                addLight(2);
                                 update = true;
                                 Vec3 from = LightUtils.getLightLensPos(getBlockPos(), getLightLensPos());
                                 Vec3 to = LightUtils.getLightLensPos(pos, lightTileEntity.getLightLensPos());

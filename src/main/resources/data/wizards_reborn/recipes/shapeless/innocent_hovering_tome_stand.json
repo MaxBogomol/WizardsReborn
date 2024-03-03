@@ -1,0 +1,14 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "wizards_reborn:innocent_pedestal"
+    },
+    {
+      "item": "wizards_reborn:arcanemicon"
+    }
+  ],
+  "result": {
+    "item": "wizards_reborn:innocent_hovering_tome_stand"
+  }
+}

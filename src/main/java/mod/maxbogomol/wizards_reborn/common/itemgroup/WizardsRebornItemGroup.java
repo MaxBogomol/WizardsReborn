@@ -110,6 +110,8 @@ public class WizardsRebornItemGroup {
             event.accept(WizardsReborn.INNOCENT_WOOD_HANGING_SIGN_ITEM);
             event.accept(WizardsReborn.INNOCENT_WOOD_BOAT_ITEM);
             event.accept(WizardsReborn.INNOCENT_WOOD_CHEST_BOAT_ITEM);
+            event.accept(WizardsReborn.INNOCENT_WOOD_BRANCH);
+            event.accept(WizardsReborn.INNOCENT_WOOD_MORTAR);
             event.accept(WizardsReborn.INNOCENT_WOOD_LEAVES_ITEM);
             event.accept(WizardsReborn.INNOCENT_WOOD_SAPLING_ITEM);
             event.accept(WizardsReborn.PETALS_OF_INNOCENCE_ITEM);
@@ -246,6 +248,8 @@ public class WizardsRebornItemGroup {
             event.accept(WizardsReborn.ALCHEMY_MACHINE_ITEM);
             event.accept(WizardsReborn.ALCHEMY_BOILER_ITEM);
             event.accept(WizardsReborn.ARCANE_CENSER_ITEM);
+            event.accept(WizardsReborn.INNOCENT_PEDESTAL_ITEM);
+            event.accept(WizardsReborn.INNOCENT_HOVERING_TOME_STAND_ITEM);
 
             event.accept(WizardsReborn.LIGHT_EMITTER_ITEM);
             event.accept(WizardsReborn.LIGHT_TRANSFER_LENS_ITEM);

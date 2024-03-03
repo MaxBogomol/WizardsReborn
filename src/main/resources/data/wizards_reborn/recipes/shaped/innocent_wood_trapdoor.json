@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "group": "wooden_trapdoor",
+  "pattern": [
+    "###",
+    "###"
+  ],
+  "key": {
+    "#": {
+      "item": "wizards_reborn:innocent_wood_planks"
+    }
+  },
+  "result": {
+    "item": "wizards_reborn:innocent_wood_trapdoor",
+    "count": 2
+  }
+}

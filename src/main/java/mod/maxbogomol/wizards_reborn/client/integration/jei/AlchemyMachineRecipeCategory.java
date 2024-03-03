@@ -23,6 +23,7 @@ import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.core.RegistryAccess;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.Ingredient;
 import org.jetbrains.annotations.NotNull;
@@ -162,13 +163,11 @@ public class AlchemyMachineRecipeCategory implements IRecipeCategory<AlchemyMach
     public static List<ItemStack> getPotionItems(AlchemyPotion potion) {
         List<ItemStack> items = new ArrayList<>();
 
-        ItemStack vial = new ItemStack(WizardsReborn.ALCHEMY_VIAL_POTION.get());
-        AlchemyPotionUtils.setPotion(vial, potion);
-        items.add(vial);
-
-        ItemStack flask = new ItemStack(WizardsReborn.ALCHEMY_FLASK_POTION.get());
-        AlchemyPotionUtils.setPotion(flask, potion);
-        items.add(flask);
+        for (Item item : AlchemyPotionItem.potionList) {
+            ItemStack itemStack = new ItemStack(item);
+            AlchemyPotionUtils.setPotion(itemStack, potion);
+            items.add(itemStack);
+        }
 
         return items;
     }

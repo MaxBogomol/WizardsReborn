@@ -337,7 +337,7 @@ public class WizardsReborn {
     public static final RegistryObject<Block> INNOCENT_WOOD_WALL_SIGN = BLOCKS.register("innocent_wood_wall_sign", () -> new CustomWallSignBlock(BlockBehaviour.Properties.copy(Blocks.CHERRY_PLANKS).noOcclusion().noCollission(), INNOCENT_WOOD_TYPE));
     public static final RegistryObject<Block> INNOCENT_WOOD_HANGING_SIGN = BLOCKS.register("innocent_wood_hanging_sign", () -> new CustomCeilingHangingSignBlock(BlockBehaviour.Properties.copy(Blocks.CHERRY_PLANKS).noOcclusion().noCollission(), INNOCENT_WOOD_TYPE));
     public static final RegistryObject<Block> INNOCENT_WOOD_WALL_HANGING_SIGN = BLOCKS.register("innocent_wood_wall_hanging_sign", () -> new CustomWallHangingSignBlock(BlockBehaviour.Properties.copy(Blocks.CHERRY_PLANKS).noOcclusion().noCollission(), INNOCENT_WOOD_TYPE));
-    public static final RegistryObject<Block> INNOCENT_WOOD_LEAVES = BLOCKS.register("innocent_wood_leaves", () -> new ArcaneWoodLeavesBlock(BlockBehaviour.Properties.copy(Blocks.CHERRY_LEAVES)));
+    public static final RegistryObject<Block> INNOCENT_WOOD_LEAVES = BLOCKS.register("innocent_wood_leaves", () -> new InnocentWoodLeavesBlock(BlockBehaviour.Properties.copy(Blocks.CHERRY_LEAVES)));
     public static final RegistryObject<Block> INNOCENT_WOOD_SAPLING = BLOCKS.register("innocent_wood_sapling", () -> new SaplingBlock(new ArcaneWoodTree(), BlockBehaviour.Properties.copy(Blocks.CHERRY_SAPLING)));
     public static final RegistryObject<Block> POTTED_INNOCENT_WOOD_SAPLING = BLOCKS.register("potted_innocent_wood_sapling", () -> new FlowerPotBlock(INNOCENT_WOOD_SAPLING.get(), BlockBehaviour.Properties.copy(Blocks.FLOWER_POT).instabreak().noOcclusion()));
     public static final RegistryObject<Block> PETALS_OF_INNOCENCE = BLOCKS.register("petals_of_innocence", () -> new PetalsOfInnocenceBlock(BlockBehaviour.Properties.copy(Blocks.PINK_PETALS)));
@@ -470,6 +470,8 @@ public class WizardsReborn {
     public static final RegistryObject<Block> ALCHEMY_MACHINE = BLOCKS.register("alchemy_machine", () -> new AlchemyMachineBlock(BlockBehaviour.Properties.copy(Blocks.POLISHED_DEEPSLATE)));
     public static final RegistryObject<Block> ALCHEMY_BOILER = BLOCKS.register("alchemy_boiler", () -> new AlchemyBoilerBlock(BlockBehaviour.Properties.copy(Blocks.POLISHED_DEEPSLATE)));
     public static final RegistryObject<Block> ARCANE_CENSER = BLOCKS.register("arcane_censer", () -> new ArcaneCenserBlock(BlockBehaviour.Properties.copy(Blocks.POLISHED_DEEPSLATE)));
+    public static final RegistryObject<Block> INNOCENT_PEDESTAL = BLOCKS.register("innocent_pedestal", () -> new ArcanePedestalBlock(BlockBehaviour.Properties.copy(Blocks.CHERRY_PLANKS)));
+    public static final RegistryObject<Block> INNOCENT_HOVERING_TOME_STAND = BLOCKS.register("innocent_hovering_tome_stand", () -> new HoveringTomeStandBlock(BlockBehaviour.Properties.copy(Blocks.CHERRY_PLANKS)));
 
     public static final RegistryObject<Block> LIGHT_EMITTER = BLOCKS.register("light_emitter", () -> new LightEmitterBlock(BlockBehaviour.Properties.copy(Blocks.POLISHED_DEEPSLATE)));
     public static final RegistryObject<Block> LIGHT_TRANSFER_LENS = BLOCKS.register("light_transfer_lens", () -> new LightTransferLensBlock(BlockBehaviour.Properties.copy(Blocks.POLISHED_DEEPSLATE)));
@@ -586,6 +588,8 @@ public class WizardsReborn {
     public static final RegistryObject<Item> INNOCENT_WOOD_HANGING_SIGN_ITEM = ITEMS.register("innocent_wood_hanging_sign", () -> new HangingSignItem(INNOCENT_WOOD_HANGING_SIGN.get(), INNOCENT_WOOD_WALL_HANGING_SIGN.get(), new Item.Properties().stacksTo(16)));
     public static final RegistryObject<Item> INNOCENT_WOOD_BOAT_ITEM = ITEMS.register("innocent_wood_boat", () -> new CustomBoatItem(false, CustomBoatEntity.Type.INNOCENT_WOOD, new Item.Properties().stacksTo(1)));
     public static final RegistryObject<Item> INNOCENT_WOOD_CHEST_BOAT_ITEM = ITEMS.register("innocent_wood_chest_boat", () -> new CustomBoatItem(true, CustomBoatEntity.Type.INNOCENT_WOOD, new Item.Properties().stacksTo(1)));
+    public static final RegistryObject<Item> INNOCENT_WOOD_BRANCH = ITEMS.register("innocent_wood_branch", () -> new Item(new Item.Properties()));
+    public static final RegistryObject<Item> INNOCENT_WOOD_MORTAR = ITEMS.register("innocent_wood_mortar", () -> new MortarItem(new Item.Properties().stacksTo(1)));
     public static final RegistryObject<Item> INNOCENT_WOOD_LEAVES_ITEM = ITEMS.register("innocent_wood_leaves", () -> new BlockItem(INNOCENT_WOOD_LEAVES.get(), new Item.Properties()));
     public static final RegistryObject<Item> INNOCENT_WOOD_SAPLING_ITEM = ITEMS.register("innocent_wood_sapling", () -> new BlockItem(INNOCENT_WOOD_SAPLING.get(), new Item.Properties()));
     public static final RegistryObject<Item> PETALS_OF_INNOCENCE_ITEM = ITEMS.register("petals_of_innocence", () -> new BlockItem(PETALS_OF_INNOCENCE.get(), new Item.Properties()));
@@ -730,6 +734,8 @@ public class WizardsReborn {
     public static final RegistryObject<Item> ALCHEMY_MACHINE_ITEM = ITEMS.register("alchemy_machine", () -> new BlockItem(ALCHEMY_MACHINE.get(), new Item.Properties()));
     public static final RegistryObject<Item> ALCHEMY_BOILER_ITEM = ITEMS.register("alchemy_boiler", () -> new BlockItem(ALCHEMY_BOILER.get(), new Item.Properties()));
     public static final RegistryObject<Item> ARCANE_CENSER_ITEM = ITEMS.register("arcane_censer", () -> new BlockItem(ARCANE_CENSER.get(), new Item.Properties()));
+    public static final RegistryObject<Item> INNOCENT_PEDESTAL_ITEM = ITEMS.register("innocent_pedestal", () -> new BlockItem(INNOCENT_PEDESTAL.get(), new Item.Properties()));
+    public static final RegistryObject<Item> INNOCENT_HOVERING_TOME_STAND_ITEM = ITEMS.register("innocent_hovering_tome_stand", () -> new BlockItem(INNOCENT_HOVERING_TOME_STAND.get(), new Item.Properties()));
 
     public static final RegistryObject<Item> LIGHT_EMITTER_ITEM = ITEMS.register("light_emitter", () -> new BlockItem(LIGHT_EMITTER.get(), new Item.Properties()));
     public static final RegistryObject<Item> LIGHT_TRANSFER_LENS_ITEM = ITEMS.register("light_transfer_lens", () -> new BlockItem(LIGHT_TRANSFER_LENS.get(), new Item.Properties()));
@@ -852,8 +858,8 @@ public class WizardsReborn {
             EARTH_CRYSTAL_GROWTH.get(), WATER_CRYSTAL_GROWTH.get(), AIR_CRYSTAL_GROWTH.get(), FIRE_CRYSTAL_GROWTH.get(), VOID_CRYSTAL_GROWTH.get())
             .build(null));
 
-    public static RegistryObject<BlockEntityType<ArcanePedestalTileEntity>> ARCANE_PEDESTAL_TILE_ENTITY = TILE_ENTITIES.register("arcane_pedestal", () -> BlockEntityType.Builder.of(ArcanePedestalTileEntity::new, ARCANE_PEDESTAL.get(), WISESTONE_PEDESTAL.get()).build(null));
-    public static RegistryObject<BlockEntityType<HoveringTomeStandTileEntity>> HOVERING_TOME_STAND_TILE_ENTITY = TILE_ENTITIES.register("hovering_tome_stand", () -> BlockEntityType.Builder.of(HoveringTomeStandTileEntity::new, HOVERING_TOME_STAND.get(), WISESTONE_HOVERING_TOME_STAND.get()).build(null));
+    public static RegistryObject<BlockEntityType<ArcanePedestalTileEntity>> ARCANE_PEDESTAL_TILE_ENTITY = TILE_ENTITIES.register("arcane_pedestal", () -> BlockEntityType.Builder.of(ArcanePedestalTileEntity::new, ARCANE_PEDESTAL.get(), WISESTONE_PEDESTAL.get(), INNOCENT_PEDESTAL.get()).build(null));
+    public static RegistryObject<BlockEntityType<HoveringTomeStandTileEntity>> HOVERING_TOME_STAND_TILE_ENTITY = TILE_ENTITIES.register("hovering_tome_stand", () -> BlockEntityType.Builder.of(HoveringTomeStandTileEntity::new, HOVERING_TOME_STAND.get(), WISESTONE_HOVERING_TOME_STAND.get(), INNOCENT_HOVERING_TOME_STAND.get()).build(null));
     public static RegistryObject<BlockEntityType<WissenAltarTileEntity>> WISSEN_ALTAR_TILE_ENTITY = TILE_ENTITIES.register("wissen_altar", () -> BlockEntityType.Builder.of(WissenAltarTileEntity::new, WISSEN_ALTAR.get()).build(null));
     public static RegistryObject<BlockEntityType<WissenTranslatorTileEntity>> WISSEN_TRANSLATOR_TILE_ENTITY = TILE_ENTITIES.register("wissen_translator", () -> BlockEntityType.Builder.of(WissenTranslatorTileEntity::new, WISSEN_TRANSLATOR.get()).build(null));
     public static RegistryObject<BlockEntityType<WissenCrystallizerTileEntity>> WISSEN_CRYSTALLIZER_TILE_ENTITY = TILE_ENTITIES.register("wissen_crystallizer", () -> BlockEntityType.Builder.of(WissenCrystallizerTileEntity::new, WISSEN_CRYSTALLIZER.get()).build(null));
@@ -906,6 +912,7 @@ public class WizardsReborn {
     public static RegistryObject<SparkleParticleType> SPARKLE_PARTICLE = PARTICLES.register("sparkle", SparkleParticleType::new);
     public static RegistryObject<KarmaParticleType> KARMA_PARTICLE = PARTICLES.register("karma", KarmaParticleType::new);
     public static RegistryObject<ArcaneWoodLeafParticleType> ARCANE_WOOD_LEAF_PARTICLE = PARTICLES.register("arcane_wood_leaf", ArcaneWoodLeafParticleType::new);
+    public static RegistryObject<InnocenceWoodLeafParticleType> INNOCENT_WOOD_LEAF_PARTICLE = PARTICLES.register("innocence_wood_leaf", InnocenceWoodLeafParticleType::new);
     public static RegistryObject<SteamParticleType> STEAM_PARTICLE = PARTICLES.register("steam", SteamParticleType::new);
     public static RegistryObject<SmokeParticleType> SMOKE_PARTICLE = PARTICLES.register("smoke", SmokeParticleType::new);
 
@@ -1190,12 +1197,22 @@ public class WizardsReborn {
         event.enqueueWork(() -> {
             AxeItem.STRIPPABLES = new ImmutableMap.Builder<Block, Block>().putAll(AxeItem.STRIPPABLES)
                     .put(ARCANE_WOOD_LOG.get(), STRIPPED_ARCANE_WOOD_LOG.get())
-                    .put(ARCANE_WOOD.get(), STRIPPED_ARCANE_WOOD.get()).build();
+                    .put(ARCANE_WOOD.get(), STRIPPED_ARCANE_WOOD.get())
+                    .put(INNOCENT_WOOD_LOG.get(), STRIPPED_INNOCENT_WOOD_LOG.get())
+                    .put(INNOCENT_WOOD.get(), STRIPPED_INNOCENT_WOOD.get()).build();
 
             ArcanePedestalBlock.blocksList.put(ARCANE_PEDESTAL.get(), HOVERING_TOME_STAND.get());
             ArcanePedestalBlock.blocksList.put(WISESTONE_PEDESTAL.get(), WISESTONE_HOVERING_TOME_STAND.get());
+            ArcanePedestalBlock.blocksList.put(INNOCENT_PEDESTAL.get(), INNOCENT_HOVERING_TOME_STAND.get());
             HoveringTomeStandBlock.blocksList.put(HOVERING_TOME_STAND.get(), ARCANE_PEDESTAL.get());
             HoveringTomeStandBlock.blocksList.put(WISESTONE_HOVERING_TOME_STAND.get(), WISESTONE_PEDESTAL.get());
+            HoveringTomeStandBlock.blocksList.put(INNOCENT_HOVERING_TOME_STAND.get(), INNOCENT_PEDESTAL.get());
+
+            MortarItem.mortarList.add(WizardsReborn.ARCANE_WOOD_MORTAR.get());
+            MortarItem.mortarList.add(WizardsReborn.INNOCENT_WOOD_MORTAR.get());
+
+            AlchemyPotionItem.potionList.add(WizardsReborn.ALCHEMY_VIAL_POTION.get());
+            AlchemyPotionItem.potionList.add(WizardsReborn.ALCHEMY_FLASK_POTION.get());
 
             FireBlock fireblock = (FireBlock) Blocks.FIRE;
             fireblock.setFlammable(ARCANE_WOOD_LOG.get(), 5, 20);

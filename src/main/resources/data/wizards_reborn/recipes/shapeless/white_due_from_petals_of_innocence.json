@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "wizards_reborn:petals_of_innocence"
+    }
+  ],
+  "result": {
+    "item": "minecraft:white_due",
+    "count": 1
+  }
+}

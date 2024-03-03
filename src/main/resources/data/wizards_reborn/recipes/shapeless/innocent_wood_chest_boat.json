@@ -1,0 +1,15 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "group": "planks",
+  "ingredients": [
+    {
+      "item": "minecraft:chest"
+    },
+    {
+      "item": "wizards_reborn:innocent_wood_boat"
+    }
+  ],
+  "result": {
+    "item": "wizards_reborn:innocent_wood_chest_boat"
+  }
+}
