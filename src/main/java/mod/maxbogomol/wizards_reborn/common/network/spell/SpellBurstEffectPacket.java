@@ -46,7 +46,7 @@ public class SpellBurstEffectPacket {
                 public void run() {
                     Level world = WizardsReborn.proxy.getWorld();
 
-                    for (int i = 0; i < 25; i++) {
+                    for (int i = 0; i < 10; i++) {
                         Particles.create(WizardsReborn.WISP_PARTICLE)
                                 .addVelocity(((random.nextDouble() - 0.5D) / 20), ((random.nextDouble() - 0.5D) / 20), ((random.nextDouble() - 0.5D) / 20))
                                 .setAlpha(0.125f, 0).setScale(0.2f, 0)
@@ -60,7 +60,15 @@ public class SpellBurstEffectPacket {
                                 .setLifetime(30)
                                 .setSpin((0.5f * (float) ((random.nextDouble() - 0.5D) * 2)))
                                 .spawn(world, msg.posX, msg.posY, msg.posZ);
-
+                    }
+                    for (int i = 0; i < 5; i++) {
+                        Particles.create(WizardsReborn.TRAIL_PARTICLE)
+                                .addVelocity(((random.nextDouble() - 0.5D) / 20), ((random.nextDouble() - 0.5D) / 20), ((random.nextDouble() - 0.5D) / 20))
+                                .setAlpha(0.25f, 0).setScale(0.2f, 0)
+                                .setColor(msg.colorR, msg.colorG, msg.colorB)
+                                .setLifetime(30)
+                                .setSpin((0.5f * (float) ((random.nextDouble() - 0.5D) * 2)))
+                                .spawn(world, msg.posX, msg.posY, msg.posZ);
                     }
                     ctx.get().setPacketHandled(true);
                 }

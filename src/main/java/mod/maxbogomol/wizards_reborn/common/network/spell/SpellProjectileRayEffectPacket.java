@@ -85,14 +85,16 @@ public class SpellProjectileRayEffectPacket {
                         double lerpY = Mth.lerp(i / 10.0f, msg.posFromY, pos.y);
                         double lerpZ = Mth.lerp(i / 10.0f, msg.posFromZ, pos.z);
 
-                        Particles.create(WizardsReborn.WISP_PARTICLE)
-                                .addVelocity(-norm.x + ((random.nextDouble() - 0.5D) / 500), -norm.y + ((random.nextDouble() - 0.5D) / 500), -norm.z + ((random.nextDouble() - 0.5D) / 500))
-                                .setAlpha(0.2f, 0).setScale(0.15f, 0)
-                                .setColor(msg.r, msg.g, msg.b)
-                                .setLifetime(20)
-                                .spawn(world, lerpX, lerpY, lerpZ);
+                        if (random.nextFloat() < 0.25f) {
+                            Particles.create(WizardsReborn.WISP_PARTICLE)
+                                    .addVelocity(-norm.x + ((random.nextDouble() - 0.5D) / 500), -norm.y + ((random.nextDouble() - 0.5D) / 500), -norm.z + ((random.nextDouble() - 0.5D) / 500))
+                                    .setAlpha(0.2f, 0).setScale(0.15f, 0)
+                                    .setColor(msg.r, msg.g, msg.b)
+                                    .setLifetime(20)
+                                    .spawn(world, lerpX, lerpY, lerpZ);
+                        }
 
-                        if (random.nextFloat() < 0.1f) {
+                        if (random.nextFloat() < 0.05f) {
                             Particles.create(WizardsReborn.SPARKLE_PARTICLE)
                                     .addVelocity(-norm.x + ((random.nextDouble() - 0.5D) / 250), -norm.y + ((random.nextDouble() - 0.5D) / 250), -norm.z + ((random.nextDouble() - 0.5D) / 250))
                                     .setAlpha(0.125f, 0).setScale(0.2f, 0)

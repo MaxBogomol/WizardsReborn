@@ -2,8 +2,8 @@ package mod.maxbogomol.wizards_reborn.client.particle;
 
 import com.mojang.blaze3d.vertex.VertexConsumer;
 import mod.maxbogomol.wizards_reborn.client.config.ClientConfig;
-import mod.maxbogomol.wizards_reborn.utils.RenderUtils;
 import mod.maxbogomol.wizards_reborn.client.render.WorldRenderHandler;
+import mod.maxbogomol.wizards_reborn.utils.RenderUtils;
 import net.minecraft.client.Camera;
 import net.minecraft.client.multiplayer.ClientLevel;
 

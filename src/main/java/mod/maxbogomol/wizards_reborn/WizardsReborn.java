@@ -798,7 +798,9 @@ public class WizardsReborn {
     public static final RegistryObject<Item> ARCACITE_AMULET = ITEMS.register("arcacite_amulet", () -> new ArcaciteAmuletItem(new Item.Properties().stacksTo(1)));
     public static final RegistryObject<Item> ARCACITE_RING = ITEMS.register("arcacite_ring", () -> new ArcaciteRingItem(new Item.Properties().stacksTo(1)));
     public static final RegistryObject<Item> WISSEN_KEYCHAIN = ITEMS.register("wissen_keychain", () -> new WissenKeychainItem(new Item.Properties().stacksTo(1)));
+    public static final RegistryObject<Item> WISSEN_RING = ITEMS.register("wissen_ring", () -> new ArcanumAmuletItem(new Item.Properties().stacksTo(1)));
     public static final RegistryObject<Item> LEATHER_BELT = ITEMS.register("leather_belt", () -> new LeatherBeltItem(new Item.Properties().stacksTo(1)));
+    public static final RegistryObject<Item> ARCANE_FORTRESS_BELT = ITEMS.register("arcane_fortress_belt", () -> new ArcaneFortressBeltItem(new Item.Properties().stacksTo(1)));
 
     public static final RegistryObject<Item> BROWN_MUSHROOM_CAP = ITEMS.register("brown_mushroom_cap", () -> new MushroomCapItem(new Item.Properties().stacksTo(1), "brown_mushroom_cap"));
     public static final RegistryObject<Item> RED_MUSHROOM_CAP = ITEMS.register("red_mushroom_cap", () -> new MushroomCapItem(new Item.Properties().stacksTo(1), "red_mushroom_cap"));
@@ -915,6 +917,8 @@ public class WizardsReborn {
     public static RegistryObject<InnocenceWoodLeafParticleType> INNOCENT_WOOD_LEAF_PARTICLE = PARTICLES.register("innocence_wood_leaf", InnocenceWoodLeafParticleType::new);
     public static RegistryObject<SteamParticleType> STEAM_PARTICLE = PARTICLES.register("steam", SteamParticleType::new);
     public static RegistryObject<SmokeParticleType> SMOKE_PARTICLE = PARTICLES.register("smoke", SmokeParticleType::new);
+    public static RegistryObject<CubeParticleType> CUBE_PARTICLE = PARTICLES.register("cube", CubeParticleType::new);
+    public static RegistryObject<TrailParticleType> TRAIL_PARTICLE = PARTICLES.register("trail", TrailParticleType::new);
 
     //RECIPES
     public static final RegistryObject<ArcanumDustTransmutationRecipe.Serializer> ARCANUM_DUST_TRANSMUTATION_SERIALIZER = RECIPE_SERIALIZERS.register("arcanum_dust_transmutation", ArcanumDustTransmutationRecipe.Serializer::new);
@@ -1185,8 +1189,7 @@ public class WizardsReborn {
         MinecraftForge.EVENT_BUS.register(new Events());
     }
 
-    private void setup(final FMLCommonSetupEvent event)
-    {
+    private void setup(final FMLCommonSetupEvent event) {
         PacketHandler.init();
         RegisterAlchemyPotions.init();
         RegisterKnowledges.init();
@@ -1280,9 +1283,10 @@ public class WizardsReborn {
             MenuScreens.register(ITEM_SORTER_CONTAINER.get(), ItemSorterScreen::new);
             MenuScreens.register(RUNIC_PEDESTAL_CONTAINER.get(), RunicPedestalScreen::new);
 
-            CuriosRendererRegistry.register(LEATHER_BELT.get(), BeltRenderer::new);
             CuriosRendererRegistry.register(ARCANUM_AMULET.get(), AmuletRenderer::new);
             CuriosRendererRegistry.register(ARCACITE_AMULET.get(), AmuletRenderer::new);
+            CuriosRendererRegistry.register(LEATHER_BELT.get(), BeltRenderer::new);
+            CuriosRendererRegistry.register(ARCANE_FORTRESS_BELT.get(), BeltRenderer::new);
             CuriosRendererRegistry.register(BROWN_MUSHROOM_CAP.get(), MushroomCapRenderer::new);
             CuriosRendererRegistry.register(RED_MUSHROOM_CAP.get(), MushroomCapRenderer::new);
             CuriosRendererRegistry.register(CRIMSON_FUNGUS_CAP.get(), MushroomCapRenderer::new);

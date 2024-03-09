@@ -157,6 +157,10 @@ public class ArcanemiconChapters {
                 new CraftingTablePage(new ItemStack(WizardsReborn.ARCANE_WOOD_BRANCH.get()),
                         new ItemStack(WizardsReborn.ARCANE_WOOD_LOG_ITEM.get()), ItemStack.EMPTY, ItemStack.EMPTY,
                         new ItemStack(WizardsReborn.ARCANE_WOOD_LOG_ITEM.get())
+                ),
+                new CraftingTablePage(new ItemStack(WizardsReborn.ARCANE_WOOD_BRANCH.get()),
+                        ItemStack.EMPTY, new ItemStack(WizardsReborn.ARCANE_WOOD_LOG_ITEM.get()), ItemStack.EMPTY,
+                        new ItemStack(WizardsReborn.ARCANE_WOOD_LOG_ITEM.get())
                 )
         );
 
@@ -1744,7 +1748,7 @@ public class ArcanemiconChapters {
                         new BlockEntry(new ItemStack(WizardsReborn.RUNIC_PEDESTAL_ITEM.get()), new ItemStack(WizardsReborn.WISESTONE_PLATE.get())),
                         new BlockEntry(new ItemStack(WizardsReborn.RUNIC_PEDESTAL_ITEM.get()), new ItemStack(WizardsReborn.RUNIC_WISESTONE_PLATE.get()))
                 ),
-                new ArcaneIteratorPage(new ItemStack(WizardsReborn.WISESTONE_PLATE.get()), 0, 0, new ItemStack(WizardsReborn.ARCANUM.get()),
+                new ArcaneIteratorPage(new ItemStack(WizardsReborn.WISESTONE_PLATE.get()), 0, 0, new ItemStack(WizardsReborn.ARCACITE.get()),
                         new ItemStack(WizardsReborn.POLISHED_WISESTONE_ITEM.get()), new ItemStack(WizardsReborn.POLISHED_WISESTONE_ITEM.get()), new ItemStack(WizardsReborn.POLISHED_WISESTONE_ITEM.get()), new ItemStack(WizardsReborn.POLISHED_WISESTONE_ITEM.get()), new ItemStack(WizardsReborn.POLISHED_WISESTONE_ITEM.get()), new ItemStack(WizardsReborn.POLISHED_WISESTONE_ITEM.get()),
                         new ItemStack(WizardsReborn.ARCANUM.get()), new ItemStack(WizardsReborn.ARCANUM.get()), new ItemStack(WizardsReborn.ARCANUM.get())
                 )

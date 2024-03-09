@@ -23,6 +23,8 @@ import net.minecraft.world.phys.Vec3;
 import net.minecraftforge.network.NetworkHooks;
 
 import java.awt.*;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
@@ -31,6 +33,8 @@ public class SpellProjectileEntity extends Entity {
     public static final EntityDataAccessor<String> spellId = SynchedEntityData.defineId(SpellProjectileEntity.class, EntityDataSerializers.STRING);
     public static final EntityDataAccessor<CompoundTag> crystalStats = SynchedEntityData.defineId(SpellProjectileEntity.class, EntityDataSerializers.COMPOUND_TAG);
     public static final EntityDataAccessor<CompoundTag> spellData = SynchedEntityData.defineId(SpellProjectileEntity.class, EntityDataSerializers.COMPOUND_TAG);
+    public static final EntityDataAccessor<Boolean> fadeId = SynchedEntityData.defineId(SpellProjectileEntity.class, EntityDataSerializers.BOOLEAN);
+    public static final EntityDataAccessor<Integer> fadeTickId = SynchedEntityData.defineId(SpellProjectileEntity.class, EntityDataSerializers.INT);
 
     public SpellProjectileEntity(EntityType<?> entityTypeIn, Level worldIn) {
         super(entityTypeIn, worldIn);
@@ -50,6 +54,7 @@ public class SpellProjectileEntity extends Entity {
         return this;
     }
 
+    public List<Vec3> trail = new ArrayList<>();
 
     @Override
     public void tick() {
@@ -57,6 +62,27 @@ public class SpellProjectileEntity extends Entity {
         Spell spell = getSpell();
         if (spell != null) {
             spell.entityTick(this);
+        }
+
+        if (getFade()) {
+            if (getFadeTick() <= 0) {
+                remove();
+            } else {
+                setFadeTick(getFadeTick() - 1);
+            }
+        }
+
+        if (level().isClientSide()) {
+            if (getFade()) {
+                setDeltaMovement(0, 0, 0);
+                if (trail.size() > 0) {
+                    trail.remove(0);
+                }
+            } else {
+                if (trail.size() > 20) {
+                    trail.remove(0);
+                }
+            }
         }
     }
 
@@ -80,6 +106,8 @@ public class SpellProjectileEntity extends Entity {
         getEntityData().define(casterId, Optional.empty());
         getEntityData().define(crystalStats, new CompoundTag());
         getEntityData().define(spellData, new CompoundTag());
+        getEntityData().define(fadeId, false);
+        getEntityData().define(fadeTickId, 0);
     }
 
     @Override
@@ -88,6 +116,8 @@ public class SpellProjectileEntity extends Entity {
         getEntityData().set(spellId, compound.getString("spelll"));
         getEntityData().set(crystalStats, compound.getCompound("stats"));
         getEntityData().set(spellData, compound.getCompound("spell_data"));
+        getEntityData().set(fadeId, compound.getBoolean("fade"));
+        getEntityData().set(fadeTickId, compound.getInt("fadeTick"));
     }
 
     @Override
@@ -96,6 +126,8 @@ public class SpellProjectileEntity extends Entity {
         compound.putString("spelll", getEntityData().get(spellId));
         compound.put("stats", getEntityData().get(crystalStats));
         compound.put("spell_data", getEntityData().get(spellData));
+        compound.putBoolean("fade", getEntityData().get(fadeId));
+        compound.putInt("fadeTick", getEntityData().get(fadeTickId));
     }
 
     @Override
@@ -171,5 +203,25 @@ public class SpellProjectileEntity extends Entity {
 
     public Player getSender() {
         return level().getPlayerByUUID(getEntityData().get(casterId).get());
+    }
+
+    public boolean getFade() {
+        return getEntityData().get(fadeId);
+    }
+
+    public void setFade(boolean fade) {
+        getEntityData().set(fadeId, fade);
+    }
+
+    public int getFadeTick() {
+        return getEntityData().get(fadeTickId);
+    }
+
+    public void setFadeTick(int fadeTick) {
+        getEntityData().set(fadeTickId, fadeTick);
+    }
+
+    public void addTrail(Vec3 pos) {
+        trail.add(pos);
     }
 }

@@ -1,12 +1,17 @@
 package mod.maxbogomol.wizards_reborn.common.spell.charge;
 
+import com.mojang.blaze3d.vertex.PoseStack;
+import com.mojang.blaze3d.vertex.VertexConsumer;
 import mod.maxbogomol.wizards_reborn.WizardsReborn;
 import mod.maxbogomol.wizards_reborn.api.spell.Spell;
 import mod.maxbogomol.wizards_reborn.client.animation.ChargeSpellHandItemAnimation;
 import mod.maxbogomol.wizards_reborn.client.animation.ItemAnimation;
+import mod.maxbogomol.wizards_reborn.client.render.WorldRenderHandler;
 import mod.maxbogomol.wizards_reborn.common.entity.SpellProjectileEntity;
 import mod.maxbogomol.wizards_reborn.common.network.PacketHandler;
 import mod.maxbogomol.wizards_reborn.common.network.spell.ChargeSpellProjectileRayEffectPacket;
+import mod.maxbogomol.wizards_reborn.utils.RenderUtils;
+import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.server.level.ServerLevel;
@@ -27,6 +32,8 @@ import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 
 import java.awt.*;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.UUID;
 
 public class ChargeSpell extends Spell {
@@ -146,60 +153,72 @@ public class ChargeSpell extends Spell {
     @Override
     public void entityTick(SpellProjectileEntity entity) {
         if (!entity.level().isClientSide) {
-            boolean hasEffectTrue = true;
-            CompoundTag spellData = entity.getSpellData();
-            if (spellData.getBoolean("throw")) {
-                HitResult ray = ProjectileUtil.getHitResultOnMoveVector(entity, (e) -> {
-                    return !e.isSpectator() && e.isPickable() && (!e.getUUID().equals(entity.getEntityData().get(entity.casterId).get()) || (spellData.getInt("ticks") > 5));
-                });
-                if (ray.getType() == HitResult.Type.ENTITY) {
-                    entity.onImpact(ray, ((EntityHitResult) ray).getEntity());
-                    hasEffectTrue = false;
-                } else if (ray.getType() == HitResult.Type.BLOCK) {
-                    entity.onImpact(ray);
+            if (!entity.getFade()) {
+                boolean hasEffectTrue = true;
+                CompoundTag spellData = entity.getSpellData();
+                if (spellData.getBoolean("throw")) {
+                    HitResult ray = ProjectileUtil.getHitResultOnMoveVector(entity, (e) -> {
+                        return !e.isSpectator() && e.isPickable() && (!e.getUUID().equals(entity.getEntityData().get(entity.casterId).get()) || (spellData.getInt("ticks") > 5));
+                    });
+                    if (ray.getType() == HitResult.Type.ENTITY) {
+                        entity.onImpact(ray, ((EntityHitResult) ray).getEntity());
+                        hasEffectTrue = false;
+                    } else if (ray.getType() == HitResult.Type.BLOCK) {
+                        entity.onImpact(ray);
+                    } else {
+                        updatePos(entity);
+                        updateRot(entity);
+                    }
                 } else {
                     updatePos(entity);
                     updateRot(entity);
                 }
-            } else {
-                updatePos(entity);
-                updateRot(entity);
-            }
 
-            if (spellData.getInt("ticks") <= 500) {
-                spellData.putInt("ticks", spellData.getInt("ticks") + 1);
-            } else {
-                entity.remove();
-                entity.burstEffect();
-            }
+                if (spellData.getInt("ticks") <= 500) {
+                    spellData.putInt("ticks", spellData.getInt("ticks") + 1);
+                } else {
+                    entity.setFade(true);
+                    entity.setFadeTick(20);
+                    entity.burstEffect();
+                }
 
-            if (spellData.getInt("ticks_left") <= 0) {
-                entity.remove();
-            }
+                if (spellData.getInt("ticks_left") <= 0) {
+                    entity.setFade(true);
+                    entity.setFadeTick(20);
+                }
 
-            if (!spellData.getBoolean("throw")) {
-                if (spellData.getInt("ticks_left") > 0) {
-                    spellData.putInt("ticks_left", spellData.getInt("ticks_left")  - 1);
+                if (!spellData.getBoolean("throw")) {
+                    if (spellData.getInt("ticks_left") > 0) {
+                        spellData.putInt("ticks_left", spellData.getInt("ticks_left") - 1);
+                    }
+                }
+
+                entity.setSpellData(spellData);
+                entity.updateSpellData();
+
+                if (hasEffectTrue) rayEffect(entity);
+                if (entity.getSender() != null) {
+                    Vec3 posE = entity.getSender().getEyePosition(0);
+                    Vec3 vel = entity.getSender().getEyePosition(0).add(entity.getSender().getLookAngle().scale(40)).subtract(posE).scale(1.0 / 25);
+                    Vec3 oldPos = entity.position().add(vel);
+
+                    spellData.putFloat("oldX", (float) oldPos.x);
+                    spellData.putFloat("oldY", (float) oldPos.y);
+                    spellData.putFloat("oldZ", (float) oldPos.z);
                 }
             }
-
-            entity.setSpellData(spellData);
-            entity.updateSpellData();
-
-            if (hasEffectTrue) rayEffect(entity);
-            if (entity.getSender() != null) {
-                Vec3 posE = entity.getSender().getEyePosition(0);
-                Vec3 vel = entity.getSender().getEyePosition(0).add(entity.getSender().getLookAngle().scale(40)).subtract(posE).scale(1.0 / 25);
-                Vec3 oldPos = entity.position().add(vel);
-
-                spellData.putFloat("oldX", (float) oldPos.x);
-                spellData.putFloat("oldY", (float) oldPos.y);
-                spellData.putFloat("oldZ", (float) oldPos.z);
-            }
-
         } else {
-            updatePos(entity);
-            updateRot(entity);
+            if (!entity.getFade()) {
+                updatePos(entity);
+                updateRot(entity);
+
+                if (entity.tickCount > 1) {
+                    CompoundTag spellData = entity.getSpellData();
+                    if (spellData.getBoolean("throw")) {
+                        entity.addTrail(new Vec3(entity.position().toVector3f()));
+                    }
+                }
+            }
         }
     }
 
@@ -283,14 +302,16 @@ public class ChargeSpell extends Spell {
 
     @Override
     public void onImpact(HitResult ray, Level world, SpellProjectileEntity projectile, Player player, Entity target) {
-        projectile.remove();
+        projectile.setFade(true);
+        projectile.setFadeTick(20);
         projectile.burstEffect();
         world.playSound(WizardsReborn.proxy.getPlayer(), projectile.getX(), projectile.getY(), player.getZ(), WizardsReborn.SPELL_BURST_SOUND.get(), SoundSource.PLAYERS, 0.35f, (float) (1f + ((random.nextFloat() - 0.5D) / 4)));
     }
 
     @Override
     public void onImpact(HitResult ray, Level world, SpellProjectileEntity projectile, Player player) {
-        projectile.remove();
+        projectile.setFade(true);
+        projectile.setFadeTick(20);
         projectile.setPos(ray.getLocation().x, ray.getLocation().y, ray.getLocation().z);
         projectile.burstEffect();
         world.playSound(WizardsReborn.proxy.getPlayer(), projectile.getX(), projectile.getY(), projectile.getZ(), WizardsReborn.SPELL_BURST_SOUND.get(), SoundSource.PLAYERS, 0.35f, (float) (1f + ((random.nextFloat() - 0.5D) / 4)));
@@ -327,5 +348,43 @@ public class ChargeSpell extends Spell {
                 PacketHandler.sendToTracking(projectile.level(), new BlockPos((int) pos.x, (int) pos.y, (int) pos.z), new ChargeSpellProjectileRayEffectPacket((float) projectile.xo, (float) projectile.yo + 0.2f, (float) projectile.zo, (float) pos.x, (float) pos.y + 0.2f, (float) pos.z, (float) norm.x, (float) norm.y, (float) norm.z, r, g, b, charge));
             }
         }
+    }
+
+    @Override
+    @OnlyIn(Dist.CLIENT)
+    public void render(SpellProjectileEntity entity, float entityYaw, float partialTicks, PoseStack stack, MultiBufferSource buffer, int light) {
+        CompoundTag spellData = entity.getSpellData();
+        MultiBufferSource bufferDelayed = WorldRenderHandler.getDelayedRender();
+        VertexConsumer builder = bufferDelayed.getBuffer(RenderUtils.GLOWING);
+        Color color = getColor();
+
+        List<Vec3> trailList = new ArrayList<>(entity.trail);
+        if (trailList.size() > 1 && entity.tickCount >= 20) {
+            for (int i = 0; i < trailList.size() - 2; i++) {
+                Vec3 position = trailList.get(i);
+                Vec3 nextPosition = trailList.get(i + 1);
+                float x = (float) Mth.lerp(partialTicks, position.x, nextPosition.x);
+                float y = (float) Mth.lerp(partialTicks, position.y, nextPosition.y);
+                float z = (float) Mth.lerp(partialTicks, position.z, nextPosition.z);
+                trailList.set(i, new Vec3(x, y, z));
+            }
+        }
+
+        float x = (float) Mth.lerp(partialTicks, entity.xOld, entity.getX());
+        float y = (float) Mth.lerp(partialTicks, entity.yOld, entity.getY());
+        float z = (float) Mth.lerp(partialTicks, entity.zOld, entity.getZ());
+
+        if (trailList.size() > 1) {
+            trailList.set(trailList.size() - 1, new Vec3(x, y, z));
+        }
+
+        float charge = 0.5f + (((float) spellData.getInt("charge") / getCharge()) / 2f);
+
+        stack.pushPose();
+        stack.translate(0, 0.2f, 0);
+        stack.translate(entity.getX() - x, entity.getY() - y,  entity.getZ() - z);
+        RenderUtils.renderTrail(stack, builder, entity.position(), trailList, 0.15f * charge, 1.0f, color, 8);
+        RenderUtils.renderTrail(stack, builder, entity.position(), trailList, 0.1f * charge, 0.75f, color, 8);
+        stack.popPose();
     }
 }

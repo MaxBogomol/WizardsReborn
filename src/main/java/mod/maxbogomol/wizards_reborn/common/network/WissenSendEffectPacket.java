@@ -1,6 +1,7 @@
 package mod.maxbogomol.wizards_reborn.common.network;
 
 import mod.maxbogomol.wizards_reborn.WizardsReborn;
+import mod.maxbogomol.wizards_reborn.client.event.ClientTickHandler;
 import mod.maxbogomol.wizards_reborn.client.particle.Particles;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.world.level.Level;
@@ -122,21 +123,31 @@ public class WissenSendEffectPacket {
                     float y = (float) (dY / (particlePerBlock));
                     float z = (float) (dZ / (particlePerBlock));
 
+                    ClientTickHandler.wissenCount++;
+
+                    if (ClientTickHandler.wissenCount > 200) {
+                        ClientTickHandler.wissenCount = 200;
+                    }
+
+                    int wissenCount = ClientTickHandler.wissenCountOld;
+
                     for (int i = 0; i < particlePerBlock; i++) {
-                        Particles.create(WizardsReborn.WISP_PARTICLE)
-                                .addVelocity(((random.nextDouble() - 0.5D) / 50), ((random.nextDouble() - 0.5D) / 50), ((random.nextDouble() - 0.5D) / 50))
-                                .setAlpha(0.3f, 0).setScale(0.15f, 0)
-                                .setColor(msg.colorR, msg.colorG, msg.colorB)
-                                .setLifetime(20)
-                                .spawn(world, msg.posFromX - (x * i), msg.posFromY - (y * i), msg.posFromZ - (z * i));
-                        if (random.nextFloat() < 0.1) {
-                            Particles.create(WizardsReborn.SPARKLE_PARTICLE)
-                                    .addVelocity(((random.nextDouble() - 0.5D) / 25), ((random.nextDouble() - 0.5D) / 25), ((random.nextDouble() - 0.5D) / 25))
-                                    .setAlpha(0.125f, 0).setScale(0.2f, 0)
+                        if (random.nextFloat() < (0.75f * (1f - (wissenCount / 200f))) + 0.05f) {
+                            Particles.create(WizardsReborn.WISP_PARTICLE)
+                                    .addVelocity(((random.nextDouble() - 0.5D) / 50), ((random.nextDouble() - 0.5D) / 50), ((random.nextDouble() - 0.5D) / 50))
+                                    .setAlpha(0.3f, 0).setScale(0.15f, 0)
                                     .setColor(msg.colorR, msg.colorG, msg.colorB)
-                                    .setLifetime(30)
-                                    .setSpin((0.5f * (float) ((random.nextDouble() - 0.5D) * 2)))
+                                    .setLifetime(20)
                                     .spawn(world, msg.posFromX - (x * i), msg.posFromY - (y * i), msg.posFromZ - (z * i));
+                            if (random.nextFloat() < 0.1) {
+                                Particles.create(WizardsReborn.SPARKLE_PARTICLE)
+                                        .addVelocity(((random.nextDouble() - 0.5D) / 25), ((random.nextDouble() - 0.5D) / 25), ((random.nextDouble() - 0.5D) / 25))
+                                        .setAlpha(0.125f, 0).setScale(0.2f, 0)
+                                        .setColor(msg.colorR, msg.colorG, msg.colorB)
+                                        .setLifetime(30)
+                                        .setSpin((0.5f * (float) ((random.nextDouble() - 0.5D) * 2)))
+                                        .spawn(world, msg.posFromX - (x * i), msg.posFromY - (y * i), msg.posFromZ - (z * i));
+                            }
                         }
                     }
                     ctx.get().setPacketHandled(true);

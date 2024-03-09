@@ -1,6 +1,7 @@
 {
   "replace": false,
   "values": [
-    "wizards_reborn:leather_belt"
+    "wizards_reborn:leather_belt",
+    "wizards_reborn:arcane_fortress_belt"
   ]
 }

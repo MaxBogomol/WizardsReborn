@@ -356,6 +356,8 @@ public class WizardsRebornClient {
             Minecraft.getInstance().particleEngine.register(WizardsReborn.INNOCENT_WOOD_LEAF_PARTICLE.get(), InnocenceWoodLeafParticleType.Factory::new);
             Minecraft.getInstance().particleEngine.register(WizardsReborn.STEAM_PARTICLE.get(), SteamParticleType.Factory::new);
             Minecraft.getInstance().particleEngine.register(WizardsReborn.SMOKE_PARTICLE.get(), SmokeParticleType.Factory::new);
+            Minecraft.getInstance().particleEngine.register(WizardsReborn.CUBE_PARTICLE.get(), CubeParticleType.Factory::new);
+            Minecraft.getInstance().particleEngine.register(WizardsReborn.TRAIL_PARTICLE.get(), TrailParticleType.Factory::new);
         }
 
         @SubscribeEvent

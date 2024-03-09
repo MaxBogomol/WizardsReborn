@@ -23,6 +23,7 @@ import net.minecraft.client.renderer.texture.TextureAtlas;
 import net.minecraft.client.resources.model.BakedModel;
 import net.minecraft.client.resources.model.ModelResourceLocation;
 import net.minecraft.core.BlockPos;
+import net.minecraft.util.Mth;
 import net.minecraft.world.item.ItemDisplayContext;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
@@ -31,6 +32,7 @@ import net.minecraft.world.phys.shapes.VoxelShape;
 import org.joml.Matrix4f;
 
 import java.awt.*;
+import java.util.List;
 import java.util.Random;
 
 public class RenderUtils {
@@ -428,5 +430,111 @@ public class RenderUtils {
         renderConnectLineOffset(new Vec3(size.x(), size.y(), 0), new Vec3(size.x() , size.y(), size.z()), color, partialTicks, ms);
         renderConnectLineOffset(new Vec3(size.x(), size.y(), size.z()), new Vec3(0, size.y(), size.z()), color, partialTicks, ms);
         renderConnectLineOffset(new Vec3(0, size.y(), size.z()), new Vec3(0, size.y(), 0), color, partialTicks, ms);
+    }
+
+    public static void renderTrail(PoseStack mStack, VertexConsumer builder, Vec3 center, List<Vec3> trailList, float width, float alpha, Color color, int segments) {
+        float r = color.getRed() / 255f;
+        float g = color.getGreen() / 255f;
+        float b = color.getBlue() / 255f;
+
+        float endU = Mth.PI * 2;
+        float stepU = (endU) / segments;
+
+        float size = trailList.size();
+
+        for (int ii = 0; ii < trailList.size() - 1; ii++) {
+            mStack.pushPose();
+            Vec3 pos = trailList.get(ii).vectorTo(center);
+            mStack.translate(-pos.x, -pos.y, -pos.z);
+
+            Vec3 position = trailList.get(ii);
+            Vec3 nextPosition = trailList.get(ii + 1);
+
+            double dX = position.x() - nextPosition.x();
+            double dY = position.y() - nextPosition.y();
+            double dZ = position.z() - nextPosition.z();
+
+            float distance = (float) Math.sqrt(Math.pow(dX, 2) + Math.pow(dY, 2) + Math.pow(dZ, 2));
+
+            double yaw = Math.atan2(dZ, dX);
+            double pitch = Math.atan2(Math.sqrt(dZ * dZ + dX * dX), dY) + Mth.PI;
+
+            double lYaw = yaw;
+            double lPitch = pitch;
+
+            if (ii > 0) {
+                Vec3 lastPosition = trailList.get(ii - 1);
+
+                double ldX = lastPosition.x() - position.x();
+                double ldY = lastPosition.y() - position.y();
+                double ldZ = lastPosition.z() - position.z();
+
+                lYaw = Math.atan2(ldZ, ldX);
+                lPitch = Math.atan2(Math.sqrt(ldZ * ldZ + ldX * ldX), ldY) + Mth.PI;
+            }
+
+            float width1 = Mth.lerp(ii / size, 0, width);
+            float width2 = Mth.lerp((ii + 1) / size, 0, width);
+            float alpha1 = Mth.lerp(ii / size, 0f, alpha);
+            float alpha2 = Mth.lerp((ii + 1) / size, 0f, alpha);
+
+            if (distance <= 0) {
+                width1 = 0;
+                width2 = 0;
+            }
+
+            if (ii == trailList.size() - 2) {
+                width2 = 0;
+            }
+
+            for (int i = 0; i < segments; i++) {
+                float u = i * stepU;
+                float un = (i + 1 == segments) ? endU : (i + 1) * stepU;
+                Matrix4f mat = mStack.last().pose();
+
+                mStack.pushPose();
+                mStack.translate(-dX, -dY, -dZ);
+                mStack.mulPose(Axis.YP.rotationDegrees((float) Math.toDegrees(-yaw)));
+                mStack.mulPose(Axis.ZP.rotationDegrees((float) Math.toDegrees(-pitch) - 90f));
+                mStack.mulPose(Axis.ZP.rotationDegrees(90));
+                mStack.mulPose(Axis.YP.rotationDegrees((float) Math.toDegrees(u)));
+                mStack.translate(width2, 0, 0);
+                mat = mStack.last().pose();
+                builder.vertex(mat, 0, 0, 0).color(r, g, b, alpha2).endVertex();
+                mStack.popPose();
+
+                mStack.pushPose();
+                mStack.mulPose(Axis.YP.rotationDegrees((float) Math.toDegrees(-lYaw)));
+                mStack.mulPose(Axis.ZP.rotationDegrees((float) Math.toDegrees(-lPitch) - 90f));
+                mStack.mulPose(Axis.ZP.rotationDegrees(90));
+                mStack.mulPose(Axis.YP.rotationDegrees((float) Math.toDegrees(u)));
+                mStack.translate(width1, 0, 0);
+                mat = mStack.last().pose();
+                builder.vertex(mat, 0, 0, 0).color(r, g, b, alpha1).endVertex();
+                mStack.popPose();
+
+                mStack.pushPose();
+                mStack.mulPose(Axis.YP.rotationDegrees((float) Math.toDegrees(-lYaw)));
+                mStack.mulPose(Axis.ZP.rotationDegrees((float) Math.toDegrees(-lPitch) - 90f));
+                mStack.mulPose(Axis.ZP.rotationDegrees(90));
+                mStack.mulPose(Axis.YP.rotationDegrees((float) Math.toDegrees(un)));
+                mStack.translate(width1, 0, 0);
+                mat = mStack.last().pose();
+                builder.vertex(mat, 0, 0, 0).color(r, g, b, alpha1).endVertex();
+                mStack.popPose();
+
+                mStack.pushPose();
+                mStack.translate(-dX, -dY, -dZ);
+                mStack.mulPose(Axis.YP.rotationDegrees((float) Math.toDegrees(-yaw)));
+                mStack.mulPose(Axis.ZP.rotationDegrees((float) Math.toDegrees(-pitch) - 90f));
+                mStack.mulPose(Axis.ZP.rotationDegrees(90));
+                mStack.mulPose(Axis.YP.rotationDegrees((float) Math.toDegrees(un)));
+                mStack.translate(width2, 0, 0);
+                mat = mStack.last().pose();
+                builder.vertex(mat, 0, 0, 0).color(r, g, b, alpha2).endVertex();
+                mStack.popPose();
+            }
+            mStack.popPose();
+        }
     }
 }

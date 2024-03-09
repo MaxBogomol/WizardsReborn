@@ -25,7 +25,7 @@ public class BeltModel extends HumanoidModel  {
         PartDefinition body = root.addOrReplaceChild("body", new CubeListBuilder(), PartPose.ZERO);
 
         PartDefinition model = body.addOrReplaceChild("model", CubeListBuilder.create().texOffs(0, 0).addBox(-4.0F, 9.0F, -2.0F, 8, 2, 4, new CubeDeformation(0.3F)), PartPose.ZERO);
-        PartDefinition model1 = model.addOrReplaceChild("model1", CubeListBuilder.create().texOffs(0, 6).addBox(-4.0F, 8.0F, -2.0F, 8, 4, 4, new CubeDeformation(0.5F)), PartPose.ZERO);
+        PartDefinition model1 = model.addOrReplaceChild("model1", CubeListBuilder.create().texOffs(0, 6).addBox(-4.0F, 7.0F, -2.0F, 8, 6, 4, new CubeDeformation(0.5F)), PartPose.ZERO);
 
         return LayerDefinition.create(mesh, 32, 32);
     }
