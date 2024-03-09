@@ -1,10 +1,12 @@
 package mod.maxbogomol.wizards_reborn.client.render.tileentity;
 
 import com.mojang.blaze3d.vertex.PoseStack;
+import com.mojang.blaze3d.vertex.VertexConsumer;
 import com.mojang.math.Axis;
 import mod.maxbogomol.wizards_reborn.WizardsRebornClient;
 import mod.maxbogomol.wizards_reborn.api.wissen.WissenUtils;
 import mod.maxbogomol.wizards_reborn.client.event.ClientTickHandler;
+import mod.maxbogomol.wizards_reborn.client.render.WorldRenderHandler;
 import mod.maxbogomol.wizards_reborn.common.tileentity.ArcaneIteratorTileEntity;
 import mod.maxbogomol.wizards_reborn.utils.RenderUtils;
 import net.minecraft.client.Minecraft;
@@ -13,6 +15,9 @@ import net.minecraft.client.renderer.blockentity.BlockEntityRenderer;
 import net.minecraft.world.item.ItemDisplayContext;
 import net.minecraft.world.phys.Vec3;
 
+import java.awt.*;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
 
 public class ArcaneIteratorTileEntityRenderer implements BlockEntityRenderer<ArcaneIteratorTileEntity> {
@@ -103,6 +108,35 @@ public class ArcaneIteratorTileEntityRenderer implements BlockEntityRenderer<Arc
                 RenderUtils.renderBoxLines(new Vec3(1, 3, 1), RenderUtils.colorMissing, partialTicks, ms);
                 ms.popPose();
             }
+        }
+
+        MultiBufferSource bufferDelayed = WorldRenderHandler.getDelayedRender();
+        VertexConsumer builder = bufferDelayed.getBuffer(RenderUtils.GLOWING);
+
+        if ((1f - size) > 0) {
+            ms.pushPose();
+            List<Vec3> trailList = new ArrayList<>();
+            float xOffset = (float) (Math.cos(iterator.angleA) * Math.cos(iterator.angleB));
+            float yOffset = (float) (Math.sin(iterator.angleA) * Math.cos(iterator.angleB));
+            float zOffset = (float) Math.sin(iterator.angleB);
+
+            float trailSize = (1f - size) * 1.1f;
+            float trailWidth = (1f - size) * 0.3f;
+
+            ms.translate(0.5F, 0.5F, 0.5F);
+            trailList.add(new Vec3(0, 0, 0));
+            trailList.add(new Vec3(xOffset * trailSize, yOffset * trailSize, zOffset * trailSize));
+
+            RenderUtils.renderTrail(ms, builder, Vec3.ZERO, trailList, trailWidth, 0, 0.25f,0, 1.0f, new Color(0.807f, 0.800f, 0.639f), 8, false);
+            RenderUtils.renderTrail(ms, builder, Vec3.ZERO, trailList, trailWidth, 0, 0.5f,0,0.75f, new Color(0.611f, 0.352f, 0.447f), 8, false);
+
+            trailList.clear();
+            trailList.add(new Vec3(0, 0, 0));
+            trailList.add(new Vec3(xOffset * -trailSize, yOffset * -trailSize, zOffset * -trailSize));
+
+            RenderUtils.renderTrail(ms, builder, Vec3.ZERO, trailList, trailWidth, 0, 0.25f,0, 1.0f, new Color(0.807f, 0.800f, 0.639f), 8, false);
+            RenderUtils.renderTrail(ms, builder, Vec3.ZERO, trailList, trailWidth, 0, 0.5f,0,0.75f, new Color(0.611f, 0.352f, 0.447f), 8, false);
+            ms.popPose();
         }
     }
 

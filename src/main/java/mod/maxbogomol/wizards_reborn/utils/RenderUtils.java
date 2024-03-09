@@ -432,7 +432,7 @@ public class RenderUtils {
         renderConnectLineOffset(new Vec3(0, size.y(), size.z()), new Vec3(0, size.y(), 0), color, partialTicks, ms);
     }
 
-    public static void renderTrail(PoseStack mStack, VertexConsumer builder, Vec3 center, List<Vec3> trailList, float width, float alpha, Color color, int segments) {
+    public static void renderTrail(PoseStack mStack, VertexConsumer builder, Vec3 center, List<Vec3> trailList, float startWidth, float endWidth, float startAlpha, float endAlpha, float scale, Color color, int segments, boolean renderSphere) {
         float r = color.getRed() / 255f;
         float g = color.getGreen() / 255f;
         float b = color.getBlue() / 255f;
@@ -454,6 +454,10 @@ public class RenderUtils {
             double dY = position.y() - nextPosition.y();
             double dZ = position.z() - nextPosition.z();
 
+            float oX = 0;
+            float oY = 0;
+            float oZ = 0;
+
             float distance = (float) Math.sqrt(Math.pow(dX, 2) + Math.pow(dY, 2) + Math.pow(dZ, 2));
 
             double yaw = Math.atan2(dZ, dX);
@@ -473,18 +477,28 @@ public class RenderUtils {
                 lPitch = Math.atan2(Math.sqrt(ldZ * ldZ + ldX * ldX), ldY) + Mth.PI;
             }
 
-            float width1 = Mth.lerp(ii / size, 0, width);
-            float width2 = Mth.lerp((ii + 1) / size, 0, width);
-            float alpha1 = Mth.lerp(ii / size, 0f, alpha);
-            float alpha2 = Mth.lerp((ii + 1) / size, 0f, alpha);
+            float width1 = Mth.lerp(ii / size, startWidth, endWidth) * scale;
+            float width2 = Mth.lerp((ii + 1) / size, startWidth, endWidth) * scale;
+            float alpha1 = Mth.lerp(ii / size, startAlpha, endAlpha) * scale;
+            float alpha2 = Mth.lerp((ii + 1) / size, startAlpha, endAlpha) * scale;
 
             if (distance <= 0) {
                 width1 = 0;
                 width2 = 0;
             }
 
+            if (ii == 0) {
+                oX = (float) (Math.sin(pitch) * Math.cos(yaw) * (1f - scale)) * distance;
+                oY = (float) (Math.cos(pitch) * (1f - scale)) * distance;
+                oZ = (float) (Math.sin(pitch) * Math.sin(yaw) * (1f - scale)) * distance;
+            }
+
             if (ii == trailList.size() - 2) {
-                width2 = 0;
+                if (!renderSphere) width2 = 0;
+
+                oX = (float) -(Math.sin(pitch) * Math.cos(yaw) * (1f - scale)) * distance;
+                oY = (float) -(Math.cos(pitch) * (1f - scale)) * distance;
+                oZ = (float) -(Math.sin(pitch) * Math.sin(yaw) * (1f - scale)) * distance;
             }
 
             for (int i = 0; i < segments; i++) {
@@ -494,6 +508,7 @@ public class RenderUtils {
 
                 mStack.pushPose();
                 mStack.translate(-dX, -dY, -dZ);
+                mStack.translate(oX, oY, oZ);
                 mStack.mulPose(Axis.YP.rotationDegrees((float) Math.toDegrees(-yaw)));
                 mStack.mulPose(Axis.ZP.rotationDegrees((float) Math.toDegrees(-pitch) - 90f));
                 mStack.mulPose(Axis.ZP.rotationDegrees(90));
@@ -525,6 +540,7 @@ public class RenderUtils {
 
                 mStack.pushPose();
                 mStack.translate(-dX, -dY, -dZ);
+                mStack.translate(oX, oY, oZ);
                 mStack.mulPose(Axis.YP.rotationDegrees((float) Math.toDegrees(-yaw)));
                 mStack.mulPose(Axis.ZP.rotationDegrees((float) Math.toDegrees(-pitch) - 90f));
                 mStack.mulPose(Axis.ZP.rotationDegrees(90));
@@ -534,7 +550,61 @@ public class RenderUtils {
                 builder.vertex(mat, 0, 0, 0).color(r, g, b, alpha2).endVertex();
                 mStack.popPose();
             }
+
+            if (renderSphere && ii == trailList.size() - 2 && distance > 0 && width2 > 0) {
+                mStack.pushPose();
+                mStack.translate(-dX, -dY, -dZ);
+                mStack.translate(oX, oY, oZ);
+                mStack.mulPose(Axis.YP.rotationDegrees((float) Math.toDegrees(-yaw)));
+                mStack.mulPose(Axis.ZP.rotationDegrees((float) Math.toDegrees(-pitch) - 90f));
+                mStack.mulPose(Axis.YP.rotationDegrees(-90));
+                RenderUtils.renderSemiSphere(mStack, builder, width2, segments, segments / 2, color, alpha2);
+                mStack.popPose();
+            }
+
             mStack.popPose();
         }
+    }
+
+    public static void renderSphere(PoseStack mStack, VertexConsumer builder, float radius, int longs, int lats, Color color, float alpha, float endU) {
+        float r = color.getRed() / 255f;
+        float g = color.getGreen() / 255f;
+        float b = color.getBlue() / 255f;
+
+        Matrix4f last = mStack.last().pose();
+        float startU = 0;
+        float startV = 0;
+        float endV = Mth.PI;
+        float stepU = (endU - startU) / longs;
+        float stepV = (endV - startV) / lats;
+        for (int i = 0; i < longs; ++i) {
+            for (int j = 0; j < lats; ++j) {
+                float u = i * stepU + startU;
+                float v = j * stepV + startV;
+                float un = (i + 1 == longs) ? endU : (i + 1) * stepU + startU;
+                float vn = (j + 1 == lats) ? endV : (j + 1) * stepV + startV;
+                Vec3 p0 = parametricSphere(u, v, radius);
+                Vec3 p1 = parametricSphere(u, vn, radius);
+                Vec3 p2 = parametricSphere(un, v, radius);
+                Vec3 p3 = parametricSphere(un, vn, radius);
+
+                builder.vertex(last, (float) p1.x(), (float) p1.y(), (float) p1.z()).color(r, g, b, alpha).endVertex();
+                builder.vertex(last, (float) p0.x(), (float) p0.y(), (float) p0.z()).color(r, g, b, alpha).endVertex();
+                builder.vertex(last, (float) p2.x(), (float) p2.y(), (float) p2.z()).color(r, g, b, alpha).endVertex();
+                builder.vertex(last, (float) p3.x(), (float) p3.y(), (float) p3.z()).color(r, g, b, alpha).endVertex();
+            }
+        }
+    }
+
+    public static void renderSphere(PoseStack mStack, VertexConsumer builder, float radius, int longs, int lats, Color color, float alpha) {
+        renderSphere(mStack, builder, radius, longs, lats, color, alpha, Mth.PI * 2);
+    }
+
+    public static void renderSemiSphere(PoseStack mStack, VertexConsumer builder, float radius, int longs, int lats, Color color, float alpha) {
+        renderSphere(mStack, builder, radius, longs, lats, color, alpha, Mth.PI);
+    }
+
+    public static Vec3 parametricSphere(float u, float v, float r) {
+        return new Vec3(Mth.cos(u) * Mth.sin(v) * r, Mth.cos(v) * r, Mth.sin(u) * Mth.sin(v) * r);
     }
 }

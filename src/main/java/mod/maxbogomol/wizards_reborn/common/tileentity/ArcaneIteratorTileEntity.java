@@ -270,16 +270,16 @@ public class ArcaneIteratorTileEntity extends BlockEntity implements TickableBlo
                         scale++;
                     }
 
-                    if (random.nextFloat() < 0.55) {
+                    if (random.nextFloat() < 0.255) {
                         particleRay(0.03f);
                     }
-                    if (random.nextFloat() < 0.55) {
+                    if (random.nextFloat() < 0.255) {
                         particleRay(-0.03f);
                     }
-                    if (random.nextFloat() < 0.25) {
+                    if (random.nextFloat() < 0.225) {
                         Particles.create(WizardsReborn.WISP_PARTICLE)
                                 .addVelocity(((random.nextDouble() - 0.5D) / 40), ((random.nextDouble() - 0.5D) / 40), ((random.nextDouble() - 0.5D) / 40))
-                                .setAlpha(0.4f, 0).setScale(0.5f, 0)
+                                .setAlpha(0.3f, 0).setScale(0.5f, 0)
                                 .setColor(0.611f, 0.352f, 0.447f, 0.807f, 0.800f, 0.639f)
                                 .setLifetime(120)
                                 .setSpin((0.25f * (float) ((random.nextDouble() - 0.5D) * 2)))
@@ -326,7 +326,7 @@ public class ArcaneIteratorTileEntity extends BlockEntity implements TickableBlo
 
         Particles.create(WizardsReborn.STEAM_PARTICLE)
                 .addVelocity(vx, vy, vz)
-                .setAlpha(0.3f, 0).setScale(0.5f, 0)
+                .setAlpha(0.4f, 0).setScale(0.5f, 0)
                 .setColor(0.611f, 0.352f, 0.447f, 0.807f, 0.800f, 0.639f)
                 .setLifetime(120)
                 .setSpin((0.25f * (float) ((random.nextDouble() - 0.5D) * 2)))

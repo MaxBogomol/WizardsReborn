@@ -359,7 +359,7 @@ public class ChargeSpell extends Spell {
         Color color = getColor();
 
         List<Vec3> trailList = new ArrayList<>(entity.trail);
-        if (trailList.size() > 1 && entity.tickCount >= 20) {
+        if (trailList.size() > 1 && spellData.getInt("ticks") >= 20) {
             for (int i = 0; i < trailList.size() - 2; i++) {
                 Vec3 position = trailList.get(i);
                 Vec3 nextPosition = trailList.get(i + 1);
@@ -383,8 +383,8 @@ public class ChargeSpell extends Spell {
         stack.pushPose();
         stack.translate(0, 0.2f, 0);
         stack.translate(entity.getX() - x, entity.getY() - y,  entity.getZ() - z);
-        RenderUtils.renderTrail(stack, builder, entity.position(), trailList, 0.15f * charge, 1.0f, color, 8);
-        RenderUtils.renderTrail(stack, builder, entity.position(), trailList, 0.1f * charge, 0.75f, color, 8);
+        RenderUtils.renderTrail(stack, builder, entity.position(), trailList, 0, 0.15f * charge, 0, 1.0f,  1.0f, color, 8, true);
+        RenderUtils.renderTrail(stack, builder, entity.position(), trailList, 0, 0.15f * charge, 0, 0.75f, 0.75f, color, 8, true);
         stack.popPose();
     }
 }

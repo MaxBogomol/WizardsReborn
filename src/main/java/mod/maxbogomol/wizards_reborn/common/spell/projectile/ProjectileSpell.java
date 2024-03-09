@@ -142,8 +142,8 @@ public class ProjectileSpell extends Spell {
         stack.pushPose();
         stack.translate(0, 0.2f, 0);
         stack.translate(entity.getX() - x, entity.getY() - y,  entity.getZ() - z);
-        RenderUtils.renderTrail(stack, builder, entity.position(), trailList, 0.15f, 1.0f, color, 8);
-        RenderUtils.renderTrail(stack, builder, entity.position(), trailList, 0.1f, 0.75f, color, 8);
+        RenderUtils.renderTrail(stack, builder, entity.position(), trailList, 0,0.15f, 0,1.0f, 1.0f, color, 8, true);
+        RenderUtils.renderTrail(stack, builder, entity.position(), trailList, 0,0.15f, 0,0.75f, 0.75f, color, 8, true);
         stack.popPose();
     }
 }
