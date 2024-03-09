@@ -36,6 +36,8 @@ public class SpellProjectileEntity extends Entity {
     public static final EntityDataAccessor<Boolean> fadeId = SynchedEntityData.defineId(SpellProjectileEntity.class, EntityDataSerializers.BOOLEAN);
     public static final EntityDataAccessor<Integer> fadeTickId = SynchedEntityData.defineId(SpellProjectileEntity.class, EntityDataSerializers.INT);
 
+    public List<Vec3> trail = new ArrayList<>();
+
     public SpellProjectileEntity(EntityType<?> entityTypeIn, Level worldIn) {
         super(entityTypeIn, worldIn);
     }
@@ -53,8 +55,6 @@ public class SpellProjectileEntity extends Entity {
         getEntityData().set(this.spellData, spellData);
         return this;
     }
-
-    public List<Vec3> trail = new ArrayList<>();
 
     @Override
     public void tick() {

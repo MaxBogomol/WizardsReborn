@@ -1,17 +1,20 @@
 package mod.maxbogomol.wizards_reborn.common.crystalritual;
 
 import com.mojang.blaze3d.vertex.PoseStack;
+import com.mojang.blaze3d.vertex.VertexConsumer;
 import com.mojang.math.Axis;
 import mod.maxbogomol.wizards_reborn.WizardsReborn;
 import mod.maxbogomol.wizards_reborn.api.crystalritual.CrystalRitual;
 import mod.maxbogomol.wizards_reborn.api.crystalritual.CrystalRitualArea;
 import mod.maxbogomol.wizards_reborn.client.event.ClientTickHandler;
 import mod.maxbogomol.wizards_reborn.client.particle.Particles;
+import mod.maxbogomol.wizards_reborn.client.render.WorldRenderHandler;
 import mod.maxbogomol.wizards_reborn.common.network.PacketHandler;
 import mod.maxbogomol.wizards_reborn.common.network.crystalritual.CrystalInfusionBurstEffectPacket;
 import mod.maxbogomol.wizards_reborn.common.recipe.CrystalInfusionRecipe;
 import mod.maxbogomol.wizards_reborn.common.tileentity.ArcanePedestalTileEntity;
 import mod.maxbogomol.wizards_reborn.common.tileentity.CrystalTileEntity;
+import mod.maxbogomol.wizards_reborn.utils.RenderUtils;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.core.BlockPos;
@@ -24,6 +27,7 @@ import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.item.ItemDisplayContext;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.phys.Vec3;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 
@@ -156,22 +160,22 @@ public class CrystalInfusionCrystalRitual extends CrystalRitual {
                 }
 
                 for (int i = 0; i < size; i++) {
-                    if (random.nextFloat() < 1.0) {
-                        double ticks = (ClientTickHandler.ticksInGame) * 2;
-                        double ticksUp = (ClientTickHandler.ticksInGame) * 4;
-                        ticksUp = (ticksUp) % 360;
+                    double ticks = (ClientTickHandler.ticksInGame) * 2;
+                    double ticksUp = (ClientTickHandler.ticksInGame) * 4;
+                    ticksUp = (ticksUp) % 360;
 
-                        double yaw = Math.toRadians(rotate * i + ticks);
-                        double pitch = 90;
+                    double yaw = Math.toRadians(rotate * i + ticks);
+                    double pitch = 90;
 
-                        float distance = 1.5f;
+                    float distance = 1.5f;
 
-                        double X = Math.sin(pitch) * Math.cos(yaw) * distance;
-                        double Y = Math.cos(pitch);
-                        double Z = Math.sin(pitch) * Math.sin(yaw) * distance;
+                    double X = Math.sin(pitch) * Math.cos(yaw) * distance;
+                    double Y = Math.cos(pitch);
+                    double Z = Math.sin(pitch) * Math.sin(yaw) * distance;
 
-                        double v = Math.sin(Math.toRadians(ticksUp + (rotate * i))) * 0.0625F;
+                    double v = Math.sin(Math.toRadians(ticksUp + (rotate * i))) * 0.0625F;
 
+                    if (random.nextFloat() < 0.25f) {
                         Particles.create(WizardsReborn.WISP_PARTICLE)
                                 .addVelocity(-X / 20, -Y / 10, -Z / 20)
                                 .setAlpha(0.35f, 0).setScale(0.3f, 0)
@@ -179,16 +183,16 @@ public class CrystalInfusionCrystalRitual extends CrystalRitual {
                                 .setLifetime(30)
                                 .setSpin((0.5f * (float) ((random.nextDouble() - 0.5D) * 2)))
                                 .spawn(level, blockPos.getX() + 0.5F + X, blockPos.getY() + 0.5F + v, blockPos.getZ() + 0.5F + Z);
+                    }
 
-                        if (random.nextFloat() < 0.25) {
-                            Particles.create(WizardsReborn.SPARKLE_PARTICLE)
-                                    .addVelocity(-X / 20, -Y / 10, -Z / 20)
-                                    .setAlpha(0.25f, 0).setScale(0.3f, 0)
-                                    .setColor(r, g, b)
-                                    .setLifetime(30)
-                                    .setSpin((0.5f * (float) ((random.nextDouble() - 0.5D) * 2)))
-                                    .spawn(level, blockPos.getX() + 0.5F + X + ((random.nextDouble() - 0.5D) / 10), blockPos.getY() + 0.5F + v + ((random.nextDouble() - 0.5D) / 10), blockPos.getZ() + 0.5F + Z + ((random.nextDouble() - 0.5D) / 10));
-                        }
+                    if (random.nextFloat() < 0.125) {
+                        Particles.create(WizardsReborn.SPARKLE_PARTICLE)
+                                .addVelocity(-X / 20, -Y / 10, -Z / 20)
+                                .setAlpha(0.25f, 0).setScale(0.3f, 0)
+                                .setColor(r, g, b)
+                                .setLifetime(30)
+                                .setSpin((0.5f * (float) ((random.nextDouble() - 0.5D) * 2)))
+                                .spawn(level, blockPos.getX() + 0.5F + X + ((random.nextDouble() - 0.5D) / 10), blockPos.getY() + 0.5F + v + ((random.nextDouble() - 0.5D) / 10), blockPos.getZ() + 0.5F + Z + ((random.nextDouble() - 0.5D) / 10));
                     }
                 }
 
@@ -309,6 +313,57 @@ public class CrystalInfusionCrystalRitual extends CrystalRitual {
             ms.scale(0.5F, 0.5F, 0.5F);
             mc.getItemRenderer().renderStatic(container.getItem(0), ItemDisplayContext.FIXED, light, overlay, ms, buffers, crystal.getLevel(), 0);
             ms.popPose();
+        }
+
+        MultiBufferSource bufferDelayed = WorldRenderHandler.getDelayedRender();
+        VertexConsumer builder = bufferDelayed.getBuffer(RenderUtils.GLOWING);
+        Color color = getColor();
+
+        ItemStack item = getCrystalItem(crystal);
+        if (!item.isEmpty()) {
+            color = getCrystalColor(item);
+        }
+
+        if (container != null && getCooldown(crystal) > 20) {
+            int size = getInventorySize(container);
+            float rotate = 360f / (size);
+
+            float fade = 1f;
+
+            if (getCooldown(crystal) > getMaxCooldown(crystal) - 11) {
+                fade = (getMaxCooldown(crystal) - getCooldown(crystal)) / 11f;
+                System.out.println(fade);
+            }
+
+            if (getCooldown(crystal) < (20 + 11)) {
+                fade = (getCooldown(crystal) - 20) / 11f;
+                System.out.println(fade);
+            }
+
+            for (int i = 0; i < size; i++) {
+                List<Vec3> trailList = new ArrayList<>();
+
+                for (int ii = 0; ii < 11; ii++) {
+                    double yaw = Math.toRadians(rotate * i + (ii * 5) + ticks - (10 * 5));
+                    double pitch = 90;
+
+                    float distance = 1.5f * (ii / 10f);
+
+                    double X = Math.sin(pitch) * Math.cos(yaw) * distance;
+                    double Y = Math.cos(pitch);
+                    double Z = Math.sin(pitch) * Math.sin(yaw) * distance;
+
+                    double v = Math.sin(Math.toRadians(ticksUp + (rotate * i))) * 0.0625F;
+
+                    trailList.add(new Vec3(X, Y + v + (1f - (ii / 10f)), Z));
+                }
+
+                ms.pushPose();
+                ms.translate(0.5F, 1F, 0.5F);
+                RenderUtils.renderTrail(ms, builder, Vec3.ZERO, trailList, 0, 0.15f, 0, 0.5f * fade, 1.0f, color, 8, true);
+                RenderUtils.renderTrail(ms, builder, Vec3.ZERO, trailList, 0, 0.15f, 0, 0.75f * fade, 0.5f, color, 8, true);
+                ms.popPose();
+            }
         }
     }
 }
