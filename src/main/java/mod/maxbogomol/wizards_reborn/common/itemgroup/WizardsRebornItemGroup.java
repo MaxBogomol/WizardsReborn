@@ -297,6 +297,13 @@ public class WizardsRebornItemGroup {
             event.accept(WizardsReborn.ALCHEMY_GLASS_ITEM);
             event.accept(WizardsReborn.ALCHEMY_VIAL);
             event.accept(WizardsReborn.ALCHEMY_FLASK);
+
+            event.accept(WizardsReborn.ALCHEMY_CALX);
+            event.accept(WizardsReborn.NATURAL_CALX);
+            event.accept(WizardsReborn.SCORCHED_CALX);
+            event.accept(WizardsReborn.DISTANT_CALX);
+            event.accept(WizardsReborn.ENCHANTED_CALX);
+
             event.accept(WizardsReborn.ARCACITE_POLISHING_MIXTURE);
 
             event.accept(WizardsReborn.WISESTONE_PLATE);

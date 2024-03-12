@@ -1,0 +1,21 @@
+{
+  "type": "wizards_reborn:arcane_workbench",
+  "pattern": [
+    "_G_",
+    "_#_",
+    "___",
+    "____"
+  ],
+  "key": {
+    "#": {
+      "item": "wizards_reborn:innocent_wood_frame"
+    },
+    "G": {
+      "item": "wizards_reborn:alchemy_glass"
+    }
+  },
+  "output": {
+    "item": "wizards_reborn:innocent_wood_glass_frame"
+  },
+  "wissen": 100
+}

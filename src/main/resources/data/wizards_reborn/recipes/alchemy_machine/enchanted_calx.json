@@ -1,0 +1,39 @@
+{
+  "type": "wizards_reborn:alchemy_machine",
+  "outputItem": {
+    "item": "wizards_reborn:enchanted_calx",
+    "count": 2
+  },
+  "wissen": 250,
+  "steam": 100,
+  "ingredients": [
+    {
+      "item": "wizards_reborn:alchemy_calx"
+    },
+    {
+      "item": "wizards_reborn:alchemy_calx"
+    },
+    {
+      "item": "minecraft:enchanted_book"
+    },
+    {
+      "item": "minecraft:lapis_lazuli"
+    },
+    {
+      "item": "minecraft:lapis_lazuli"
+    },
+    {
+      "item": "minecraft:diamond"
+    }
+  ],
+  "fluidIngredients": [
+    {
+      "name": "wizards_reborn:alchemy_oil",
+      "amount" : 500
+    },
+    {
+      "name": "wizards_reborn:wissen_tea",
+      "amount" : 500
+    }
+  ]
+}

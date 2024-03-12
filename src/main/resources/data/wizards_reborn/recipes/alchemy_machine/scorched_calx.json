@@ -1,0 +1,39 @@
+{
+  "type": "wizards_reborn:alchemy_machine",
+  "outputItem": {
+    "item": "wizards_reborn:scorched_calx",
+    "count": 2
+  },
+  "wissen": 50,
+  "steam": 100,
+  "ingredients": [
+    {
+      "item": "wizards_reborn:alchemy_calx"
+    },
+    {
+      "item": "wizards_reborn:alchemy_calx"
+    },
+    {
+      "item": "minecraft:netherrack"
+    },
+    {
+      "item": "minecraft:soul_sand"
+    },
+    {
+      "item": "minecraft:crimson_fungus"
+    },
+    {
+      "item": "minecraft:warped_fungus"
+    }
+  ],
+  "fluidIngredients": [
+    {
+      "name": "wizards_reborn:alchemy_oil",
+      "amount" : 500
+    },
+    {
+      "name": "wizards_reborn:hellish_mushroom_brew",
+      "amount" : 500
+    }
+  ]
+}

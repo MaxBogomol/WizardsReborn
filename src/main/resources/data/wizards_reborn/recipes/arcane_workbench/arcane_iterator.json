@@ -1,10 +1,10 @@
 {
   "type": "wizards_reborn:arcane_workbench",
   "pattern": [
-    "###",
-    "#A#",
-    "###",
-    "GGGG"
+    "#G#",
+    "GAG",
+    "#G#",
+    "CCCC"
   ],
   "key": {
     "#": {
@@ -15,6 +15,9 @@
     },
     "G": {
       "tag": "wizards_reborn:arcane_gold_ingot"
+    },
+    "C": {
+      "item": "wizards_reborn:enchanted_calx"
     }
   },
   "output": {

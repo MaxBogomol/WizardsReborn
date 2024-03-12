@@ -18,6 +18,7 @@ import mod.maxbogomol.wizards_reborn.common.alchemypotion.RegisterAlchemyPotions
 import mod.maxbogomol.wizards_reborn.common.item.equipment.ArcaneWandItem;
 import mod.maxbogomol.wizards_reborn.common.knowledge.RegisterKnowledges;
 import net.minecraft.nbt.CompoundTag;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.SimpleContainer;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
@@ -1009,11 +1010,12 @@ public class ArcanemiconChapters {
                 ),
                 new TextPage("wizards_reborn.arcanemicon.page.arcane_iterator.1"),
                 new ArcaneWorkbenchPage(new ItemStack(WizardsReborn.ARCANE_ITERATOR_ITEM.get()),
-                        new ItemStack(WizardsReborn.ARCANE_WOOD_PLANKS_ITEM.get()), new ItemStack(WizardsReborn.ARCANE_WOOD_PLANKS_ITEM.get()), new ItemStack(WizardsReborn.ARCANE_WOOD_PLANKS_ITEM.get()),
-                        new ItemStack(WizardsReborn.ARCANE_WOOD_PLANKS_ITEM.get()), new ItemStack(WizardsReborn.ARCACITE_BLOCK_ITEM.get()), new ItemStack(WizardsReborn.ARCANE_WOOD_PLANKS_ITEM.get()),
-                        new ItemStack(WizardsReborn.ARCANE_WOOD_PLANKS_ITEM.get()), new ItemStack(WizardsReborn.ARCANE_WOOD_PLANKS_ITEM.get()), new ItemStack(WizardsReborn.ARCANE_WOOD_PLANKS_ITEM.get()),
-                        new ItemStack(WizardsReborn.ARCANE_GOLD_INGOT.get()), new ItemStack(WizardsReborn.ARCANE_GOLD_INGOT.get()), new ItemStack(WizardsReborn.ARCANE_GOLD_INGOT.get()), new ItemStack(WizardsReborn.ARCANE_GOLD_INGOT.get())
+                        new ItemStack(WizardsReborn.ARCANE_WOOD_PLANKS_ITEM.get()), new ItemStack(WizardsReborn.ARCANE_GOLD_INGOT.get()), new ItemStack(WizardsReborn.ARCANE_WOOD_PLANKS_ITEM.get()),
+                        new ItemStack(WizardsReborn.ARCANE_GOLD_INGOT.get()), new ItemStack(WizardsReborn.ARCACITE_BLOCK_ITEM.get()), new ItemStack(WizardsReborn.ARCANE_GOLD_INGOT.get()),
+                        new ItemStack(WizardsReborn.ARCANE_WOOD_PLANKS_ITEM.get()), new ItemStack(WizardsReborn.ARCANE_GOLD_INGOT.get()), new ItemStack(WizardsReborn.ARCANE_WOOD_PLANKS_ITEM.get()),
+                        new ItemStack(WizardsReborn.ENCHANTED_CALX.get()), new ItemStack(WizardsReborn.ENCHANTED_CALX.get()), new ItemStack(WizardsReborn.ENCHANTED_CALX.get()), new ItemStack(WizardsReborn.ENCHANTED_CALX.get())
                 ),
+                new ImagePage(new ResourceLocation(WizardsReborn.MOD_ID, "textures/gui/arcanemicon/arcane_iterator_image_page.png")),
                 new TitlePage("wizards_reborn.arcanemicon.page.arcane_enchantments"),
                 new TitlePage("wizards_reborn.arcanemicon.page.wissen_mending"),
                 new ArcaneIteratorPage(new ItemStack(WizardsReborn.ARCANE_GOLD_PICKAXE.get()), 5, 0, WizardsReborn.WISSEN_MENDING_ARCANE_ENCHANTMENT,
@@ -2205,7 +2207,8 @@ public class ArcanemiconChapters {
                         new ItemStack(WizardsReborn.POLISHED_WISESTONE_ITEM.get()), new ItemStack(Items.FURNACE),  new ItemStack(WizardsReborn.POLISHED_WISESTONE_ITEM.get()),
                         new ItemStack(WizardsReborn.POLISHED_WISESTONE_ITEM.get()), new ItemStack(WizardsReborn.POLISHED_WISESTONE_ITEM.get()),  new ItemStack(WizardsReborn.POLISHED_WISESTONE_ITEM.get()),
                         new ItemStack(WizardsReborn.STEAM_PIPE_ITEM.get()), ItemStack.EMPTY, new ItemStack(WizardsReborn.FLUID_PIPE_ITEM.get())
-                )
+                ),
+                new ImagePage(new ResourceLocation(WizardsReborn.MOD_ID, "textures/gui/arcanemicon/alchemy_furnace_image_page.png"))
         );
 
         STEAM_THERMAL_STORAGE = new Chapter(
@@ -2241,6 +2244,7 @@ public class ArcanemiconChapters {
                         ItemStack.EMPTY, new ItemStack(WizardsReborn.WISSEN_ALTAR_ITEM.get()),  ItemStack.EMPTY,
                         new ItemStack(WizardsReborn.ARCANE_GOLD_INGOT.get()), new ItemStack(WizardsReborn.FLUID_PIPE_ITEM.get()), new ItemStack(WizardsReborn.ARCANE_GOLD_INGOT.get()), new ItemStack(WizardsReborn.FLUID_PIPE_ITEM.get())
                 ),
+                new ImagePage(new ResourceLocation(WizardsReborn.MOD_ID, "textures/gui/arcanemicon/alchemy_machine_image_page.png")),
                 new AlchemyMachinePage(ItemStack.EMPTY, new FluidStack(Fluids.LAVA, 750), false, true,
                         FluidStack.EMPTY, FluidStack.EMPTY, FluidStack.EMPTY,
                         new ItemStack(Items.MAGMA_BLOCK), new ItemStack(Items.MAGMA_BLOCK), new ItemStack(Items.MAGMA_BLOCK), new ItemStack(Items.MAGMA_BLOCK)

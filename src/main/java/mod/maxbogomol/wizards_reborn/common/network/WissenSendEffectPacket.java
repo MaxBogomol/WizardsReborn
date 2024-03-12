@@ -132,7 +132,7 @@ public class WissenSendEffectPacket {
                     int wissenCount = ClientTickHandler.wissenCountOld;
 
                     for (int i = 0; i < particlePerBlock; i++) {
-                        if (random.nextFloat() < (0.75f * (1f - (wissenCount / 200f))) + 0.05f) {
+                        if (random.nextFloat() < (0.45f * (1f - (wissenCount / 200f))) + 0.05f) {
                             Particles.create(WizardsReborn.WISP_PARTICLE)
                                     .addVelocity(((random.nextDouble() - 0.5D) / 50), ((random.nextDouble() - 0.5D) / 50), ((random.nextDouble() - 0.5D) / 50))
                                     .setAlpha(0.3f, 0).setScale(0.15f, 0)

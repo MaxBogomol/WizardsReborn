@@ -13,6 +13,8 @@ public class WorldGen {
     public static ResourceKey<ConfiguredFeature<?, ?>> TALL_ELDER_MOR = WorldGen.registerKey("tall_elder_mor");
     public static ResourceKey<ConfiguredFeature<?, ?>> HUGE_MOR = WorldGen.registerKey("huge_mor");
     public static ResourceKey<ConfiguredFeature<?, ?>> HUGE_ELDER_MOR = WorldGen.registerKey("huge_elder_mor");
+    public static ResourceKey<ConfiguredFeature<?, ?>> INNOCENT_WOOD_TREE = WorldGen.registerKey("innocent_wood");
+    public static ResourceKey<ConfiguredFeature<?, ?>> INNOCENT_WOOD_BEES_TREE = WorldGen.registerKey("innocent_wood_bees");
 
     public static ResourceKey<ConfiguredFeature<?, ?>> registerKey(String name) {
         return ResourceKey.create(Registries.CONFIGURED_FEATURE, new ResourceLocation(WizardsReborn.MOD_ID, name));

@@ -75,6 +75,7 @@ import mod.maxbogomol.wizards_reborn.common.spell.self.WaterBreathingSpell;
 import mod.maxbogomol.wizards_reborn.common.tileentity.*;
 import mod.maxbogomol.wizards_reborn.common.world.tree.ArcaneWoodTree;
 import mod.maxbogomol.wizards_reborn.common.world.tree.ArcaneWoodTrunkPlacer;
+import mod.maxbogomol.wizards_reborn.common.world.tree.InnocentWoodTree;
 import mod.maxbogomol.wizards_reborn.common.world.tree.SupplierBlockStateProvider;
 import net.minecraft.client.gui.screens.MenuScreens;
 import net.minecraft.commands.synchronization.ArgumentTypeInfo;
@@ -338,7 +339,7 @@ public class WizardsReborn {
     public static final RegistryObject<Block> INNOCENT_WOOD_HANGING_SIGN = BLOCKS.register("innocent_wood_hanging_sign", () -> new CustomCeilingHangingSignBlock(BlockBehaviour.Properties.copy(Blocks.CHERRY_PLANKS).noOcclusion().noCollission(), INNOCENT_WOOD_TYPE));
     public static final RegistryObject<Block> INNOCENT_WOOD_WALL_HANGING_SIGN = BLOCKS.register("innocent_wood_wall_hanging_sign", () -> new CustomWallHangingSignBlock(BlockBehaviour.Properties.copy(Blocks.CHERRY_PLANKS).noOcclusion().noCollission(), INNOCENT_WOOD_TYPE));
     public static final RegistryObject<Block> INNOCENT_WOOD_LEAVES = BLOCKS.register("innocent_wood_leaves", () -> new InnocentWoodLeavesBlock(BlockBehaviour.Properties.copy(Blocks.CHERRY_LEAVES)));
-    public static final RegistryObject<Block> INNOCENT_WOOD_SAPLING = BLOCKS.register("innocent_wood_sapling", () -> new SaplingBlock(new ArcaneWoodTree(), BlockBehaviour.Properties.copy(Blocks.CHERRY_SAPLING)));
+    public static final RegistryObject<Block> INNOCENT_WOOD_SAPLING = BLOCKS.register("innocent_wood_sapling", () -> new SaplingBlock(new InnocentWoodTree(), BlockBehaviour.Properties.copy(Blocks.CHERRY_SAPLING)));
     public static final RegistryObject<Block> POTTED_INNOCENT_WOOD_SAPLING = BLOCKS.register("potted_innocent_wood_sapling", () -> new FlowerPotBlock(INNOCENT_WOOD_SAPLING.get(), BlockBehaviour.Properties.copy(Blocks.FLOWER_POT).instabreak().noOcclusion()));
     public static final RegistryObject<Block> PETALS_OF_INNOCENCE = BLOCKS.register("petals_of_innocence", () -> new PetalsOfInnocenceBlock(BlockBehaviour.Properties.copy(Blocks.PINK_PETALS)));
     public static final RegistryObject<Block> POTTED_PETALS_OF_INNOCENCE = BLOCKS.register("potted_petals_of_innocence", () -> new FlowerPotBlock(PETALS_OF_INNOCENCE.get(), BlockBehaviour.Properties.copy(Blocks.FLOWER_POT).instabreak().noOcclusion()));
@@ -785,6 +786,13 @@ public class WizardsReborn {
     public static final RegistryObject<Item> ALCHEMY_FLASK = ITEMS.register("alchemy_flask", () -> new FlaskItem(new Item.Properties(), 6));
     public static final RegistryObject<Item> ALCHEMY_VIAL_POTION = ITEMS.register("alchemy_vial_potion", () -> new AlchemyPotionItem(new Item.Properties().stacksTo(1), 3, ALCHEMY_VIAL.get()));
     public static final RegistryObject<Item> ALCHEMY_FLASK_POTION = ITEMS.register("alchemy_flask_potion", () -> new AlchemyPotionItem(new Item.Properties().stacksTo(1), 6, ALCHEMY_FLASK.get()));
+
+    public static final RegistryObject<Item> ALCHEMY_CALX = ITEMS.register("alchemy_calx", () -> new Item(new Item.Properties()));
+    public static final RegistryObject<Item> NATURAL_CALX = ITEMS.register("natural_calx", () -> new Item(new Item.Properties()));
+    public static final RegistryObject<Item> SCORCHED_CALX = ITEMS.register("scorched_calx", () -> new Item(new Item.Properties()));
+    public static final RegistryObject<Item> DISTANT_CALX = ITEMS.register("distant_calx", () -> new Item(new Item.Properties()));
+    public static final RegistryObject<Item> ENCHANTED_CALX = ITEMS.register("enchanted_calx", () -> new Item(new Item.Properties()));
+
     public static final RegistryObject<Item> ARCACITE_POLISHING_MIXTURE = ITEMS.register("arcacite_polishing_mixture", () -> new Item(new Item.Properties()));
 
     public static final RegistryObject<Item> WISESTONE_PLATE = ITEMS.register("wisestone_plate", () -> new Item(new Item.Properties().stacksTo(1)));
@@ -1228,11 +1236,24 @@ public class WizardsReborn {
             fireblock.setFlammable(ARCANE_WOOD_FENCE.get(), 5, 20);
             fireblock.setFlammable(ARCANE_WOOD_FENCE_GATE.get(), 5, 20);
             fireblock.setFlammable(ARCANE_WOOD_LEAVES.get(), 30, 60);
-            fireblock.setFlammable(ARCANE_LINEN_HAY.get(), 60, 20);
+            fireblock.setFlammable(INNOCENT_WOOD_LOG.get(), 5, 20);
+            fireblock.setFlammable(INNOCENT_WOOD.get(), 5, 20);
+            fireblock.setFlammable(STRIPPED_INNOCENT_WOOD_LOG.get(), 5, 20);
+            fireblock.setFlammable(STRIPPED_INNOCENT_WOOD.get(), 5, 20);
+            fireblock.setFlammable(INNOCENT_WOOD_PLANKS.get(), 5, 20);
+            fireblock.setFlammable(INNOCENT_WOOD_STAIRS.get(), 5, 20);
+            fireblock.setFlammable(INNOCENT_WOOD_SLAB.get(), 5, 20);
+            fireblock.setFlammable(INNOCENT_WOOD_FENCE.get(), 5, 20);
+            fireblock.setFlammable(INNOCENT_WOOD_FENCE_GATE.get(), 5, 20);
+            fireblock.setFlammable(INNOCENT_WOOD_LEAVES.get(), 30, 60);
             fireblock.setFlammable(PETALS_OF_INNOCENCE.get(), 60, 100);
+            fireblock.setFlammable(ARCANE_LINEN_HAY.get(), 60, 20);
 
             ComposterBlock.add(0.3F, ARCANE_WOOD_LEAVES_ITEM.get());
             ComposterBlock.add(0.3F, ARCANE_WOOD_SAPLING_ITEM.get());
+            ComposterBlock.add(0.3F, INNOCENT_WOOD_LEAVES_ITEM.get());
+            ComposterBlock.add(0.3F, INNOCENT_WOOD_SAPLING_ITEM.get());
+            ComposterBlock.add(0.3F, PETALS_OF_INNOCENCE.get());
             ComposterBlock.add(0.3F, ARCANE_LINEN_SEEDS.get());
             ComposterBlock.add(0.65F, ARCANE_LINEN_ITEM.get());
             ComposterBlock.add(0.85F, ARCANE_LINEN_HAY_ITEM.get());
@@ -1247,7 +1268,6 @@ public class WizardsReborn {
             ComposterBlock.add(0.2F, GROUND_WARPED_FUNGUS.get());
             ComposterBlock.add(0.2F, GROUND_MOR.get());
             ComposterBlock.add(0.2F, GROUND_ELDER_MOR.get());
-            ComposterBlock.add(0.3F, PETALS_OF_INNOCENCE.get());
 
             DispenserBlock.registerBehavior(ARCANUM_DUST.get(), new OptionalDispenseItemBehavior() {
                 protected ItemStack execute(BlockSource blockSource, ItemStack itemStack) {

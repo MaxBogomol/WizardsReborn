@@ -1,20 +1,23 @@
 {
   "type": "wizards_reborn:arcane_workbench",
   "pattern": [
-    "G#G",
+    "N#N",
     "#_#",
-    "G#G",
-    "_AWA"
+    "N#N",
+    "GAWA"
   ],
   "key": {
     "#": {
-      "item": "wizards_reborn:arcane_wood_planks"
+      "item": "wizards_reborn:arcane_wood_slab"
     },
     "A": {
       "item": "wizards_reborn:arcacite"
     },
     "G": {
       "tag": "wizards_reborn:arcane_gold_ingot"
+    },
+    "N": {
+      "tag": "wizards_reborn:arcane_gold_nugget"
     },
     "W": {
       "item": "wizards_reborn:wisestone_pedestal"
