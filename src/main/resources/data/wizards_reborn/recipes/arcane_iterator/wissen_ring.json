@@ -1,0 +1,38 @@
+{
+  "type": "wizards_reborn:arcane_iterator",
+  "output": {
+    "item": "wizards_reborn:wissen_ring",
+    "count": 1
+  },
+  "wissen": 3000,
+  "saveNBT": true,
+  "ingredients": [
+    {
+      "item": "wizards_reborn:arcanum_ring"
+    },
+    {
+      "item": "wizards_reborn:arcanum_lens"
+    },
+    {
+      "item": "wizards_reborn:arcacite"
+    },
+    {
+      "item": "wizards_reborn:arcanum_lens"
+    },
+    {
+      "tag": "wizards_reborn:arcane_gold_ingot"
+    },
+    {
+      "item": "wizards_reborn:arcacite"
+    },
+    {
+      "tag": "wizards_reborn:arcane_gold_ingot"
+    },
+    {
+      "item": "wizards_reborn:arcanum_lens"
+    },
+    {
+      "item": "wizards_reborn:arcacite"
+    }
+  ]
+}

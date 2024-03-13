@@ -1,0 +1,10 @@
+{
+  "replace": false,
+  "values": [
+    "wizards_reborn:alchemy_calx",
+    "wizards_reborn:natural_calx",
+    "wizards_reborn:scorched_calx",
+    "wizards_reborn:distant_calx",
+    "wizards_reborn:enchanted_calx"
+  ]
+}
