@@ -1,0 +1,37 @@
+{
+  "type": "wizards_reborn:crystal_infusion",
+  "output": {
+    "item": "wizards_reborn:petals_of_innocence",
+    "count": 1
+  },
+  "light": 450,
+  "ingredients": [
+    {
+      "item": "minecraft:pink_petals"
+    },
+    {
+      "item": "wizards_reborn:arcanum_dust"
+    },
+    {
+      "item": "wizards_reborn:arcanum_dust"
+    },
+    {
+      "item": "wizards_reborn:arcanum_dust"
+    },
+    {
+      "item": "wizards_reborn:petals"
+    },
+    {
+      "item": "wizards_reborn:petals"
+    },
+    {
+      "item": "wizards_reborn:natural_calx"
+    },
+    {
+      "item": "wizards_reborn:natural_calx"
+    },
+    {
+      "item": "wizards_reborn:natural_calx"
+    }
+  ]
+}

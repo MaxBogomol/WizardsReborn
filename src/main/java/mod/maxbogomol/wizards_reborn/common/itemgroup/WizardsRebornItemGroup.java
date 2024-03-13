@@ -306,6 +306,7 @@ public class WizardsRebornItemGroup {
 
             event.accept(WizardsReborn.ARCACITE_POLISHING_MIXTURE);
 
+            event.accept(WizardsReborn.ARCANUM_LENS);
             event.accept(WizardsReborn.WISESTONE_PLATE);
             for (CrystalRitual ritual : CrystalRituals.getCrystalRituals()) {
                 ItemStack stack = new ItemStack(WizardsReborn.RUNIC_WISESTONE_PLATE.get());

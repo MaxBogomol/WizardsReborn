@@ -1,0 +1,25 @@
+{
+  "type": "wizards_reborn:arcane_workbench",
+  "pattern": [
+    "_N_",
+    "_W_",
+    "_B_",
+    "____"
+  ],
+  "key": {
+    "N": {
+      "tag": "wizards_reborn:arcane_gold_ingot"
+    },
+    "W": {
+      "item": "wizards_reborn:arcane_wood_branch"
+    },
+    "B": {
+      "item": "wizards_reborn:polished_wisestone"
+    }
+  },
+  "output": {
+    "item": "wizards_reborn:arcane_lever",
+    "count": 4
+  },
+  "wissen": 100
+}

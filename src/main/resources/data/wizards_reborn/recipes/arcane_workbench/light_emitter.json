@@ -4,7 +4,7 @@
     "I_I",
     "N#N",
     "WWW",
-    "G_A_"
+    "L___"
   ],
   "key": {
     "#": {
@@ -19,11 +19,8 @@
     "W": {
       "item": "wizards_reborn:polished_wisestone"
     },
-    "G": {
-      "item": "wizards_reborn:alchemy_glass"
-    },
-    "A": {
-      "item": "wizards_reborn:arcanum"
+    "L": {
+      "item": "wizards_reborn:arcanum_lens"
     }
   },
   "output": {

@@ -1,0 +1,31 @@
+{
+  "type": "wizards_reborn:crystal_infusion",
+  "output": {
+    "item": "wizards_reborn:innocent_wood_sapling",
+    "count": 1
+  },
+  "light": 750,
+  "ingredients": [
+    {
+      "item": "minecraft:cherry_sapling"
+    },
+    {
+      "item": "wizards_reborn:arcanum_dust"
+    },
+    {
+      "item": "wizards_reborn:arcanum_dust"
+    },
+    {
+      "item": "wizards_reborn:arcanum_dust"
+    },
+    {
+      "item": "wizards_reborn:natural_calx"
+    },
+    {
+      "item": "wizards_reborn:natural_calx"
+    },
+    {
+      "item": "wizards_reborn:natural_calx"
+    }
+  ]
+}

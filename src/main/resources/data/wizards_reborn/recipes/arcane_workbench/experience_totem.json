@@ -1,0 +1,30 @@
+{
+  "type": "wizards_reborn:arcane_workbench",
+  "pattern": [
+    "_N_",
+    "NBN",
+    "WGW",
+    "C_C_"
+  ],
+  "key": {
+    "G": {
+      "tag": "wizards_reborn:arcane_gold_ingot"
+    },
+    "N": {
+      "tag": "wizards_reborn:arcane_gold_nugget"
+    },
+    "W": {
+      "item": "wizards_reborn:arcane_wood_planks"
+    },
+    "B": {
+      "item": "wizards_reborn:arcane_wood_branch"
+    },
+    "C": {
+      "item": "wizards_reborn:enchanted_calx"
+    }
+  },
+  "output": {
+    "item": "wizards_reborn:experience_totem"
+  },
+  "wissen": 1500
+}

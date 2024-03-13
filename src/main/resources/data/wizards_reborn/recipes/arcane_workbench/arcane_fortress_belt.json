@@ -1,0 +1,31 @@
+{
+  "type": "wizards_reborn:arcane_workbench",
+  "pattern": [
+    "_#_",
+    "GAG",
+    "_G_",
+    "C_N_"
+  ],
+  "key": {
+    "#": {
+      "item": "wizards_reborn:arcane_gold_belt"
+    },
+    "G": {
+      "tag": "wizards_reborn:arcane_gold_ingot"
+    },
+    "A": {
+      "item": "wizards_reborn:arcacite"
+    },
+    "C": {
+      "item": "wizards_reborn:alchemy_calx"
+    },
+    "N": {
+      "item": "wizards_reborn:natural_calx"
+    }
+  },
+  "output": {
+    "item": "wizards_reborn:arcane_fortress_belt"
+  },
+  "wissen": 2500,
+  "saveNBT": 1
+}

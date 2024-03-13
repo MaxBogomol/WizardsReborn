@@ -1,24 +1,27 @@
 {
   "type": "wizards_reborn:arcane_workbench",
   "pattern": [
-    "#__",
-    "###",
     "___",
-    "C_A_"
+    "ACA",
+    "WGW",
+    "____"
   ],
   "key": {
-    "#": {
+    "G": {
+      "tag": "wizards_reborn:arcane_gold_ingot"
+    },
+    "W": {
       "item": "wizards_reborn:arcane_wood_planks"
+    },
+    "C": {
+      "item": "minecraft:coal"
     },
     "A": {
       "item": "wizards_reborn:alchemy_calx"
-    },
-    "C": {
-      "item": "wizards_reborn:natural_calx"
     }
   },
   "output": {
-    "item": "wizards_reborn:arcane_wood_smoking_pipe"
+    "item": "wizards_reborn:totem_of_flames"
   },
-  "wissen": 1000
+  "wissen": 500
 }

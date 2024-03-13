@@ -795,6 +795,7 @@ public class WizardsReborn {
 
     public static final RegistryObject<Item> ARCACITE_POLISHING_MIXTURE = ITEMS.register("arcacite_polishing_mixture", () -> new Item(new Item.Properties()));
 
+    public static final RegistryObject<Item> ARCANUM_LENS = ITEMS.register("arcanum_lens", () -> new ArcanumLensItem(new Item.Properties()));
     public static final RegistryObject<Item> WISESTONE_PLATE = ITEMS.register("wisestone_plate", () -> new Item(new Item.Properties().stacksTo(1)));
     public static final RegistryObject<Item> RUNIC_WISESTONE_PLATE = ITEMS.register("runic_wisestone_plate", () -> new RunicWisestonePlateItem(new Item.Properties().stacksTo(1)));
 

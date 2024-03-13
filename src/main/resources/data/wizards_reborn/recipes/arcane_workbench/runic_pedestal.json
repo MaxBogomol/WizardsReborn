@@ -2,7 +2,7 @@
   "type": "wizards_reborn:arcane_workbench",
   "pattern": [
     "WWW",
-    "G#G",
+    "L#L",
     "WWW",
     "AAAA"
   ],
@@ -13,8 +13,8 @@
     "W": {
       "item": "wizards_reborn:polished_wisestone"
     },
-    "G": {
-      "item": "wizards_reborn:alchemy_glass"
+    "L": {
+      "item": "wizards_reborn:arcanum_lens"
     },
     "A": {
       "item": "wizards_reborn:arcanum"

@@ -4,7 +4,7 @@
     "NGN",
     "W#W",
     "BWB",
-    "A_S_"
+    "ACSC"
   ],
   "key": {
     "#": {
@@ -20,7 +20,10 @@
       "item": "wizards_reborn:steam_pipe"
     },
     "A": {
-      "item": "wizards_reborn:arcacite"
+      "item": "wizards_reborn:alchemy_calx"
+    },
+    "C": {
+      "item": "wizards_reborn:natural_calx"
     },
     "G": {
       "tag": "wizards_reborn:arcane_gold_ingot"
