@@ -259,8 +259,8 @@ public class WizardsRebornItemGroup {
             event.accept(WizardsReborn.REDSTONE_SENSOR_ITEM);
             event.accept(WizardsReborn.WISSEN_SENSOR_ITEM);
             event.accept(WizardsReborn.COOLDOWN_SENSOR_ITEM);
-            event.accept(WizardsReborn.LIGHT_SENSOR_ITEM);
             event.accept(WizardsReborn.EXPERIENCE_SENSOR_ITEM);
+            event.accept(WizardsReborn.LIGHT_SENSOR_ITEM);
             event.accept(WizardsReborn.HEAT_SENSOR_ITEM);
             event.accept(WizardsReborn.FLUID_SENSOR_ITEM);
             event.accept(WizardsReborn.STEAM_SENSOR_ITEM);

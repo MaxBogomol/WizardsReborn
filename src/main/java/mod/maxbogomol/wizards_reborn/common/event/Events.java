@@ -10,6 +10,7 @@ import mod.maxbogomol.wizards_reborn.common.capability.KnowledgeProvider;
 import mod.maxbogomol.wizards_reborn.common.command.WizardsRebornCommand;
 import mod.maxbogomol.wizards_reborn.common.entity.SpellProjectileEntity;
 import mod.maxbogomol.wizards_reborn.common.knowledge.ArcanumKnowledge;
+import mod.maxbogomol.wizards_reborn.common.knowledge.CrystalRitualKnowledge;
 import mod.maxbogomol.wizards_reborn.common.knowledge.ItemKnowledge;
 import mod.maxbogomol.wizards_reborn.common.knowledge.ItemTagKnowledge;
 import mod.maxbogomol.wizards_reborn.common.network.KnowledgeUpdatePacket;
@@ -83,6 +84,12 @@ public class Events {
 
                 if (knowledge instanceof ItemTagKnowledge itemKnowledge) {
                     if (itemKnowledge.canReceived(items)) {
+                        KnowledgeUtils.addKnowledge(player, knowledge);
+                    }
+                }
+
+                if (knowledge instanceof CrystalRitualKnowledge crystalRitualKnowledge) {
+                    if (crystalRitualKnowledge.canReceived(items)) {
                         KnowledgeUtils.addKnowledge(player, knowledge);
                     }
                 }

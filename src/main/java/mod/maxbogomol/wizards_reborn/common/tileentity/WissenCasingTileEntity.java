@@ -16,6 +16,8 @@ import net.minecraft.world.level.block.state.BlockState;
 public class WissenCasingTileEntity extends WissenTranslatorTileEntity {
     public boolean[] connection = new boolean[Direction.values().length];
 
+    public int maxCooldown = 0;
+
     public WissenCasingTileEntity(BlockEntityType<?> pType, BlockPos pPos, BlockState pBlockState) {
         super(pType, pPos, pBlockState);
     }
@@ -68,6 +70,7 @@ public class WissenCasingTileEntity extends WissenTranslatorTileEntity {
 
             if (setCooldown) {
                 cooldown = (int) (getSendWissenCooldown() + (((cooldownCount - 1) / 5f) * getSendWissenCooldown()));
+                maxCooldown = cooldown;
                 level.playSound(WizardsReborn.proxy.getPlayer(), getBlockPos(), WizardsReborn.WISSEN_TRANSFER_SOUND.get(), SoundSource.BLOCKS, 0.1f, (float) (1.1f + ((random.nextFloat() - 0.5D) / 2)));
             }
 
@@ -80,6 +83,7 @@ public class WissenCasingTileEntity extends WissenTranslatorTileEntity {
     @Override
     public void load(CompoundTag nbt) {
         super.load(nbt);
+        maxCooldown = nbt.getInt("maxCooldown");
         for(Direction facing : Direction.values())
             if(nbt.contains("connection"+facing.get3DDataValue()))
                 connection[facing.get3DDataValue()] = nbt.getBoolean("connection"+facing.get3DDataValue());
@@ -88,6 +92,7 @@ public class WissenCasingTileEntity extends WissenTranslatorTileEntity {
     @Override
     public void saveAdditional(CompoundTag nbt) {
         super.saveAdditional(nbt);
+        nbt.putInt("maxCooldown", maxCooldown);
         for(Direction facing : Direction.values())
             nbt.putBoolean("connection"+facing.get3DDataValue(),connection[facing.get3DDataValue()]);
     }
@@ -126,5 +131,13 @@ public class WissenCasingTileEntity extends WissenTranslatorTileEntity {
         resetsConnections();
         PacketUtils.SUpdateTileEntityPacket(this);
         return true;
+    }
+
+    @Override
+    public float getCooldown() {
+        if (cooldown > 0) {
+            return (float) maxCooldown / cooldown;
+        }
+        return super.getCooldown();
     }
 }

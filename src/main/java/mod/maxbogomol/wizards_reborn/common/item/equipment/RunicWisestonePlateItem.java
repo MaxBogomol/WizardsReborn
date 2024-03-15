@@ -29,7 +29,7 @@ public class RunicWisestonePlateItem extends Item {
 
     @Override
     public ItemStack getDefaultInstance() {
-        ItemStack stack = super.getDefaultInstance();;
+        ItemStack stack = super.getDefaultInstance();
         CrystalRitualUtils.setCrystalRitual(stack, WizardsReborn.EMPTY_CRYSTAL_RITUAL);
         return stack;
     }

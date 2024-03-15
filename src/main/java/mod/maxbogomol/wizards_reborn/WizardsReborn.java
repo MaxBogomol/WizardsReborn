@@ -482,8 +482,8 @@ public class WizardsReborn {
     public static final RegistryObject<Block> REDSTONE_SENSOR = BLOCKS.register("redstone_sensor", () -> new RedstoneSensorBlock(BlockBehaviour.Properties.copy(Blocks.OAK_PLANKS)));
     public static final RegistryObject<Block> WISSEN_SENSOR = BLOCKS.register("wissen_sensor", () -> new WissenSensorBlock(BlockBehaviour.Properties.copy(Blocks.OAK_PLANKS)));
     public static final RegistryObject<Block> COOLDOWN_SENSOR = BLOCKS.register("cooldown_sensor", () -> new CooldownSensorBlock(BlockBehaviour.Properties.copy(Blocks.OAK_PLANKS)));
-    public static final RegistryObject<Block> LIGHT_SENSOR = BLOCKS.register("light_sensor", () -> new LightSensorBlock(BlockBehaviour.Properties.copy(Blocks.OAK_PLANKS)));
     public static final RegistryObject<Block> EXPERIENCE_SENSOR = BLOCKS.register("experience_sensor", () -> new ExperienceSensorBlock(BlockBehaviour.Properties.copy(Blocks.OAK_PLANKS)));
+    public static final RegistryObject<Block> LIGHT_SENSOR = BLOCKS.register("light_sensor", () -> new LightSensorBlock(BlockBehaviour.Properties.copy(Blocks.OAK_PLANKS)));
     public static final RegistryObject<Block> HEAT_SENSOR = BLOCKS.register("heat_sensor", () -> new HeatSensorBlock(BlockBehaviour.Properties.copy(Blocks.OAK_PLANKS)));
     public static final RegistryObject<Block> FLUID_SENSOR = BLOCKS.register("fluid_sensor", () -> new FluidSensorBlock(BlockBehaviour.Properties.copy(Blocks.OAK_PLANKS)));
     public static final RegistryObject<Block> STEAM_SENSOR = BLOCKS.register("steam_sensor", () -> new SteamSensorBlock(BlockBehaviour.Properties.copy(Blocks.OAK_PLANKS)));
@@ -747,8 +747,8 @@ public class WizardsReborn {
     public static final RegistryObject<Item> WISSEN_SENSOR_ITEM = ITEMS.register("wissen_sensor", () -> new BlockItem(WISSEN_SENSOR.get(), new Item.Properties()));
     public static final RegistryObject<Item> COOLDOWN_SENSOR_ITEM = ITEMS.register("cooldown_sensor", () -> new BlockItem(COOLDOWN_SENSOR.get(), new Item.Properties()));
     public static final RegistryObject<Item> EXPERIENCE_SENSOR_ITEM = ITEMS.register("experience_sensor", () -> new BlockItem(EXPERIENCE_SENSOR.get(), new Item.Properties()));
-    public static final RegistryObject<Item> HEAT_SENSOR_ITEM = ITEMS.register("heat_sensor", () -> new BlockItem(HEAT_SENSOR.get(), new Item.Properties()));
     public static final RegistryObject<Item> LIGHT_SENSOR_ITEM = ITEMS.register("light_sensor", () -> new BlockItem(LIGHT_SENSOR.get(), new Item.Properties()));
+    public static final RegistryObject<Item> HEAT_SENSOR_ITEM = ITEMS.register("heat_sensor", () -> new BlockItem(HEAT_SENSOR.get(), new Item.Properties()));
     public static final RegistryObject<Item> FLUID_SENSOR_ITEM = ITEMS.register("fluid_sensor", () -> new BlockItem(FLUID_SENSOR.get(), new Item.Properties()));
     public static final RegistryObject<Item> STEAM_SENSOR_ITEM = ITEMS.register("steam_sensor", () -> new BlockItem(STEAM_SENSOR.get(), new Item.Properties()));
     public static final RegistryObject<Item> WISSEN_ACTIVATOR_ITEM = ITEMS.register("wissen_activator", () -> new BlockItem(WISSEN_ACTIVATOR.get(), new Item.Properties()));

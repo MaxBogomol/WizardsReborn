@@ -24,6 +24,7 @@ import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.AnvilMenu;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
 import net.minecraft.world.item.enchantment.Enchantment;
 import net.minecraft.world.item.enchantment.EnchantmentHelper;
 import net.minecraft.world.level.block.entity.BlockEntity;
@@ -160,7 +161,14 @@ public class ArcaneIteratorTileEntity extends BlockEntity implements TickableBlo
                         if (recipe.get().hasRecipeEnchantment()) {
                             Enchantment enchantment = recipe.get().getRecipeEnchantment();
                             if (canEnchant(stack, enchantment)) {
-                                enchant(stack, enchantment);
+                                if (stack.getItem().equals(Items.BOOK)) {
+                                    stack = new ItemStack(Items.ENCHANTED_BOOK);
+                                    enchant(stack, enchantment);
+                                } else if (stack.getItem().equals(Items.ENCHANTED_BOOK)) {
+                                    enchant(stack, enchantment);
+                                } else {
+                                    enchant(stack, enchantment);
+                                }
                             }
                         }
 
@@ -615,8 +623,17 @@ public class ArcaneIteratorTileEntity extends BlockEntity implements TickableBlo
                         if (recipe.get().hasRecipeEnchantment()) {
                             Enchantment enchantment = recipe.get().getRecipeEnchantment();
                             if (canEnchant(stack, enchantment)) {
-                                canEnchant = true;
-                                enchant(stack, enchantment);
+                                if (stack.getItem().equals(Items.BOOK)) {
+                                    canEnchant = true;
+                                    stack = new ItemStack(Items.ENCHANTED_BOOK);
+                                    enchant(stack, enchantment);
+                                } else if (stack.getItem().equals(Items.ENCHANTED_BOOK)) {
+                                    canEnchant = true;
+                                    enchant(stack, enchantment);
+                                } else {
+                                    canEnchant = true;
+                                    enchant(stack, enchantment);
+                                }
                             }
                         }
                         if (recipe.get().hasRecipeArcaneEnchantment()) {
@@ -643,6 +660,9 @@ public class ArcaneIteratorTileEntity extends BlockEntity implements TickableBlo
             repairCost++;
         }
         int xp = AnvilMenu.calculateIncreasedRepairCost(repairCost);
+        if (stack.getItem().equals(Items.BOOK) || stack.getItem().equals(Items.ENCHANTED_BOOK)) {
+            return enchantmentLevel + 1 <= enchantment.getMaxLevel() && xp <= 60;
+        }
         return (enchantment.canEnchant(stack) && enchantmentLevel + 1 <= enchantment.getMaxLevel() && xp <= 60);
     }
 
