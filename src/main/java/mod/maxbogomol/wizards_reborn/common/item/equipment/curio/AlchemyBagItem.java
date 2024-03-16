@@ -40,7 +40,7 @@ import java.util.stream.Stream;
 
 public class AlchemyBagItem extends BaseCurioItem implements ICurioItemTexture {
 
-    private static final ResourceLocation BELT_TEXTURE = new ResourceLocation(WizardsReborn.MOD_ID,"textures/entity/curio/leather_belt.png");
+    private static final ResourceLocation BELT_TEXTURE = new ResourceLocation(WizardsReborn.MOD_ID,"textures/entity/curio/alchemy_bag.png");
 
     public AlchemyBagItem(Properties properties) {
         super(properties);

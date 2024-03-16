@@ -27,6 +27,7 @@ import mod.maxbogomol.wizards_reborn.client.gui.screen.*;
 import mod.maxbogomol.wizards_reborn.client.particle.*;
 import mod.maxbogomol.wizards_reborn.client.render.WorldRenderHandler;
 import mod.maxbogomol.wizards_reborn.client.render.curio.AmuletRenderer;
+import mod.maxbogomol.wizards_reborn.client.render.curio.BagRenderer;
 import mod.maxbogomol.wizards_reborn.client.render.curio.BeltRenderer;
 import mod.maxbogomol.wizards_reborn.client.render.curio.MushroomCapRenderer;
 import mod.maxbogomol.wizards_reborn.client.render.item.WandCrystalsModels;
@@ -1326,8 +1327,8 @@ public class WizardsReborn {
             CuriosRendererRegistry.register(ARCACITE_AMULET.get(), AmuletRenderer::new);
             CuriosRendererRegistry.register(LEATHER_BELT.get(), BeltRenderer::new);
             CuriosRendererRegistry.register(ARCANE_FORTRESS_BELT.get(), BeltRenderer::new);
-            CuriosRendererRegistry.register(CRYSTAL_BAG.get(), BeltRenderer::new);
-            CuriosRendererRegistry.register(ALCHEMY_BAG.get(), BeltRenderer::new);
+            CuriosRendererRegistry.register(CRYSTAL_BAG.get(), BagRenderer::new);
+            CuriosRendererRegistry.register(ALCHEMY_BAG.get(), BagRenderer::new);
             CuriosRendererRegistry.register(BROWN_MUSHROOM_CAP.get(), MushroomCapRenderer::new);
             CuriosRendererRegistry.register(RED_MUSHROOM_CAP.get(), MushroomCapRenderer::new);
             CuriosRendererRegistry.register(CRIMSON_FUNGUS_CAP.get(), MushroomCapRenderer::new);
