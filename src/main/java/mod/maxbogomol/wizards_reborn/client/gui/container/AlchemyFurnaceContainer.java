@@ -30,8 +30,7 @@ public class AlchemyFurnaceContainer extends AbstractContainerMenu {
         this.playerInventory = playerInventory;
     }
 
-    public AlchemyFurnaceContainer(int windowId, Level world, BlockPos pos,
-                                   Inventory playerInventory, Player player) {
+    public AlchemyFurnaceContainer(int windowId, Level world, BlockPos pos, Inventory playerInventory, Player player) {
         super(WizardsReborn.ALCHEMY_FURNACE_CONTAINER.get(), windowId);
         this.tileEntity = world.getBlockEntity(pos);
         playerEntity = player;

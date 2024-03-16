@@ -14,7 +14,7 @@ public class RegisterAlchemyPotions {
     public static AlchemyPotion COMBINED = new AlchemyPotion(WizardsReborn.MOD_ID+":combined");
     public static FluidAlchemyPotion WATER, MUNDANE_BREW, ALCHEMY_OIL, OIL_TEA, WISSEN_TEA, MUSHROOM_BREW, HELLISH_MUSHROOM_BREW, MOR_BREW, FLOWER_BREW;
     public static AlchemyPotion NIGHT_VISION, INVISIBILITY, LEAPING, FIRE_RESISTANCE, SWIFTNESS, SLOWNESS, TURTLE_MASTER, WATER_BREATHING, HEALING, HARMING, POISON, REGENERATION, STRENGTH, WEAKNESS, LUCK, SLOW_FALLING;
-    public static ColorAlchemyPotion ABSORPTION, RESISTANCE, MAGICAL_ATTUNEMENT;
+    public static ColorAlchemyPotion ABSORPTION, RESISTANCE, MAGICAL_ATTUNEMENT, DARKNESS;
 
     public static void init() {
         WATER = new FluidAlchemyPotion(WizardsReborn.MOD_ID+":water", Fluids.WATER, new Color(55, 92, 196));
@@ -47,6 +47,7 @@ public class RegisterAlchemyPotions {
         ABSORPTION = new ColorAlchemyPotion(WizardsReborn.MOD_ID+":absorption", new Color(236, 203, 69), new MobEffectInstance(MobEffects.ABSORPTION, 2400, 3));
         RESISTANCE = new ColorAlchemyPotion(WizardsReborn.MOD_ID+":resistance", new Color(102, 96, 114), new MobEffectInstance(MobEffects.DAMAGE_RESISTANCE, 4800, 1));
         MAGICAL_ATTUNEMENT = new ColorAlchemyPotion(WizardsReborn.MOD_ID+":magical_attunement", new Color(68, 197, 148), new MobEffectInstance(WizardsReborn.WISSEN_AURA_EFFECT.get(), 3600, 1));
+        DARKNESS = new ColorAlchemyPotion(WizardsReborn.MOD_ID+":darkness", new Color(36, 30, 37), new MobEffectInstance(MobEffects.DARKNESS, 6000, 0));
 
         AlchemyPotions.register(EMPTY);
         AlchemyPotions.register(COMBINED);
@@ -78,5 +79,6 @@ public class RegisterAlchemyPotions {
         AlchemyPotions.register(ABSORPTION);
         AlchemyPotions.register(RESISTANCE);
         AlchemyPotions.register(MAGICAL_ATTUNEMENT);
+        AlchemyPotions.register(DARKNESS);
     }
 }

@@ -29,8 +29,7 @@ public class AlchemyMachineContainer extends AbstractContainerMenu {
         this.playerInventory = playerInventory;
     }
 
-    public AlchemyMachineContainer(int windowId, Level world, BlockPos pos,
-                                   Inventory playerInventory, Player player) {
+    public AlchemyMachineContainer(int windowId, Level world, BlockPos pos, Inventory playerInventory, Player player) {
         super(WizardsReborn.ALCHEMY_MACHINE_CONTAINER.get(), windowId);
         this.tileEntity = world.getBlockEntity(pos);
         playerEntity = player;

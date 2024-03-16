@@ -810,6 +810,8 @@ public class WizardsReborn {
     public static final RegistryObject<Item> WISSEN_RING = ITEMS.register("wissen_ring", () -> new ArcanumAmuletItem(new Item.Properties().stacksTo(1)));
     public static final RegistryObject<Item> LEATHER_BELT = ITEMS.register("leather_belt", () -> new LeatherBeltItem(new Item.Properties().stacksTo(1)));
     public static final RegistryObject<Item> ARCANE_FORTRESS_BELT = ITEMS.register("arcane_fortress_belt", () -> new ArcaneFortressBeltItem(new Item.Properties().stacksTo(1)));
+    public static final RegistryObject<Item> CRYSTAL_BAG = ITEMS.register("crystal_bag", () -> new CrystalBagItem(new Item.Properties().stacksTo(1)));
+    public static final RegistryObject<Item> ALCHEMY_BAG = ITEMS.register("alchemy_bag", () -> new AlchemyBagItem(new Item.Properties().stacksTo(1)));
 
     public static final RegistryObject<Item> BROWN_MUSHROOM_CAP = ITEMS.register("brown_mushroom_cap", () -> new MushroomCapItem(new Item.Properties().stacksTo(1), "brown_mushroom_cap"));
     public static final RegistryObject<Item> RED_MUSHROOM_CAP = ITEMS.register("red_mushroom_cap", () -> new MushroomCapItem(new Item.Properties().stacksTo(1), "red_mushroom_cap"));
@@ -1010,6 +1012,20 @@ public class WizardsReborn {
                 BlockPos pos = data.readBlockPos();
                 Level world = inv.player.getCommandSenderWorld();
                 return new RunicPedestalContainer(windowId, world, pos, inv, inv.player);
+            })));
+
+    public static final RegistryObject<MenuType<CrystalBagContainer>> CRYSTAL_BAG_CONTAINER
+            = CONTAINERS.register("crystal_bag",
+            () -> IForgeMenuType.create(((windowId, inv, data) -> {
+                Level world = inv.player.getCommandSenderWorld();
+                return new CrystalBagContainer(windowId, world, data.readItem(), inv, inv.player);
+            })));
+
+    public static final RegistryObject<MenuType<AlchemyBagContainer>> ALCHEMY_BAG_CONTAINER
+            = CONTAINERS.register("alchemy_bag",
+            () -> IForgeMenuType.create(((windowId, inv, data) -> {
+                Level world = inv.player.getCommandSenderWorld();
+                return new AlchemyBagContainer(windowId, world, data.readItem(), inv, inv.player);
             })));
 
     public static final RegistryObject<BannerPattern> VIOLENCE_BANNER_PATTERN = BANNER_PATTERNS.register("violence", () -> new BannerPattern("wrv"));
@@ -1303,11 +1319,15 @@ public class WizardsReborn {
             MenuScreens.register(ALCHEMY_MACHINE_CONTAINER.get(), AlchemyMachineScreen::new);
             MenuScreens.register(ITEM_SORTER_CONTAINER.get(), ItemSorterScreen::new);
             MenuScreens.register(RUNIC_PEDESTAL_CONTAINER.get(), RunicPedestalScreen::new);
+            MenuScreens.register(CRYSTAL_BAG_CONTAINER.get(), CrystalBagScreen::new);
+            MenuScreens.register(ALCHEMY_BAG_CONTAINER.get(), AlchemyBagScreen::new);
 
             CuriosRendererRegistry.register(ARCANUM_AMULET.get(), AmuletRenderer::new);
             CuriosRendererRegistry.register(ARCACITE_AMULET.get(), AmuletRenderer::new);
             CuriosRendererRegistry.register(LEATHER_BELT.get(), BeltRenderer::new);
             CuriosRendererRegistry.register(ARCANE_FORTRESS_BELT.get(), BeltRenderer::new);
+            CuriosRendererRegistry.register(CRYSTAL_BAG.get(), BeltRenderer::new);
+            CuriosRendererRegistry.register(ALCHEMY_BAG.get(), BeltRenderer::new);
             CuriosRendererRegistry.register(BROWN_MUSHROOM_CAP.get(), MushroomCapRenderer::new);
             CuriosRendererRegistry.register(RED_MUSHROOM_CAP.get(), MushroomCapRenderer::new);
             CuriosRendererRegistry.register(CRIMSON_FUNGUS_CAP.get(), MushroomCapRenderer::new);

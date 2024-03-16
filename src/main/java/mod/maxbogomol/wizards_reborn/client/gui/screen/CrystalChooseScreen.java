@@ -13,6 +13,7 @@ import mod.maxbogomol.wizards_reborn.api.spell.Spells;
 import mod.maxbogomol.wizards_reborn.client.event.ClientTickHandler;
 import mod.maxbogomol.wizards_reborn.common.item.CrystalItem;
 import mod.maxbogomol.wizards_reborn.common.item.equipment.ArcaneWandItem;
+import mod.maxbogomol.wizards_reborn.common.item.equipment.curio.CrystalBagItem;
 import mod.maxbogomol.wizards_reborn.common.network.DeleteCrystalPacket;
 import mod.maxbogomol.wizards_reborn.common.network.PacketHandler;
 import mod.maxbogomol.wizards_reborn.common.network.SetCrystalPacket;
@@ -29,8 +30,11 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
+import net.minecraft.world.SimpleContainer;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
+import top.theillusivec4.curios.api.CuriosApi;
+import top.theillusivec4.curios.api.SlotResult;
 
 import java.awt.*;
 import java.util.ArrayList;
@@ -215,7 +219,7 @@ public class CrystalChooseScreen extends Screen {
                 crystals = getPlayerCrystals();
             }
 
-            selectedItem = getSelectedItem(mouseX, mouseY);
+            selectedItem = getSelectedItem(crystals, mouseX, mouseY);
 
             float step = (float) 360 / crystals.size();
             float i = 0;
@@ -516,12 +520,26 @@ public class CrystalChooseScreen extends Screen {
         Minecraft mc = Minecraft.getInstance();
         Player player = mc.player;
         List<ItemStack> items = player.inventoryMenu.getItems();
+        List<SlotResult> curioSlots = CuriosApi.getCuriosHelper().findCurios(player, (i) -> {return true;});
+        for (SlotResult slot : curioSlots) {
+            if (slot.stack() != null) {
+                items.add(slot.stack());
+            }
+        }
 
         ArrayList<ItemStack> crystals = new ArrayList<ItemStack>();
 
         for (ItemStack stack : items) {
             if (stack.getItem() instanceof CrystalItem) {
                 crystals.add(stack);
+            }
+            if (stack.getItem() instanceof CrystalBagItem) {
+                SimpleContainer container = CrystalBagItem.getInventory(stack);
+                for (int i = 0; i < container.getContainerSize(); i++) {
+                    if (container.getItem(i).getItem() instanceof CrystalItem) {
+                        crystals.add(container.getItem(i));
+                    }
+                }
             }
         }
 
@@ -530,7 +548,10 @@ public class CrystalChooseScreen extends Screen {
 
     public ItemStack getSelectedItem(double X, double Y) {
         List<ItemStack> crystals = getPlayerCrystals();
+        return getSelectedItem(crystals, X, Y);
+    }
 
+    public ItemStack getSelectedItem(List<ItemStack> crystals, double X, double Y) {
         double step = (float) 360 / crystals.size();
         double x = width / 2;
         double y = height / 2;

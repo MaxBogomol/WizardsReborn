@@ -303,6 +303,8 @@
   "item.wizards_reborn.wissen_ring": "Виссен кольцо",
   "item.wizards_reborn.leather_belt": "Кожаный пояс",
   "item.wizards_reborn.arcane_fortress_belt": "Аркановый штурмовой пояс",
+  "item.wizards_reborn.crystal_bag": "Кристальная сумка",
+  "item.wizards_reborn.alchemy_bag": "Алхимическая сумка",
 
   "item.wizards_reborn.brown_mushroom_cap": "Коричневая грибная шляпка",
   "item.wizards_reborn.red_mushroom_cap": "Красная грибная шляпка",
@@ -336,6 +338,8 @@
 
   "key.category.wizards_reborn.general": "Wizard's Reborn",
   "key.wizards_reborn.selection_hud": "Экран выбора",
+  "key.wizards_reborn.crystal_bag": "Кристальная сумка",
+  "key.wizards_reborn.alchemy_bag": "Алхимическая сумка",
 
   "item.wizards_reborn.violence_banner_pattern": "Узор флага",
   "item.wizards_reborn.reproduction_banner_pattern": "Узор флага",
@@ -669,6 +673,7 @@
   "alchemy_potion.wizards_reborn.absorption": "Зелье поглощения",
   "alchemy_potion.wizards_reborn.resistance": "Зелье сопротивления",
   "alchemy_potion.wizards_reborn.magical_attunement": "Зелье магического созвучия",
+  "alchemy_potion.wizards_reborn.darkness": "Зелье тьмы",
 
   "wizards_reborn.arcanemicon.category.arcane_nature": "Аркановая природа",
   "wizards_reborn.arcanemicon.chapter.arcane_nature_index": "Аркановая природа",

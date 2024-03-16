@@ -407,7 +407,8 @@ public class ArcanemiconChapters {
                         EMPTY_ITEM, new ItemStack(WizardsReborn.ARCANE_WOOD_BRANCH.get()), ARCANUM_ITEM,
                         EMPTY_ITEM, new ItemStack(WizardsReborn.ARCANE_WOOD_BRANCH.get()), new ItemStack(WizardsReborn.ARCANE_WOOD_BRANCH.get()),
                         new ItemStack(WizardsReborn.ARCANE_WOOD_BRANCH.get()), EMPTY_ITEM, EMPTY_ITEM
-                )
+                ),
+                new ImagePage(new ResourceLocation(WizardsReborn.MOD_ID, "textures/gui/arcanemicon/wissen_image_page.png"))
         );
 
         WISSEN_TRANSLATOR = new Chapter(
@@ -953,7 +954,7 @@ public class ArcanemiconChapters {
                         new IndexEntry(STEAM_CASING, new ItemStack(WizardsReborn.ARCANE_WOOD_STEAM_CASING_ITEM.get()), RegisterKnowledges.STEAM_PIPE),
                         new IndexEntry(GLASS_FRAME, new ItemStack(WizardsReborn.ARCANE_WOOD_GLASS_FRAME_ITEM.get()), RegisterKnowledges.ALCHEMY_GLASS),
                         new IndexEntry(LIGHT_CASING, new ItemStack(WizardsReborn.ARCANE_WOOD_LIGHT_CASING_ITEM.get()), RegisterKnowledges.ALCHEMY_GLASS),
-                        new IndexEntry(INNOCENT_CASING, new ItemStack(WizardsReborn.INNOCENT_WOOD_CASING_ITEM.get()), RegisterKnowledges.RUNIC_PEDESTAL)
+                        new IndexEntry(INNOCENT_CASING, new ItemStack(WizardsReborn.INNOCENT_WOOD_CASING_ITEM.get()), RegisterKnowledges.CRYSTAL_INFUSION)
                 )
         );
 
@@ -1873,7 +1874,8 @@ public class ArcanemiconChapters {
                         new BlockEntry(ARCANE_PEDESTAL_ITEM, new ItemStack(WizardsReborn.LIGHT_TRANSFER_LENS_ITEM.get())),
                         new BlockEntry(ARCANE_PEDESTAL_ITEM, RUNIC_PEDESTAL_ITEM)
                 ),
-                new TextPage("wizards_reborn.arcanemicon.page.light_rays.1")
+                new TextPage("wizards_reborn.arcanemicon.page.light_rays.1"),
+                new ImagePage(new ResourceLocation(WizardsReborn.MOD_ID, "textures/gui/arcanemicon/light_rays_image_page.png"))
         );
 
         LIGHT_EMITTER = new Chapter(
@@ -2816,6 +2818,10 @@ public class ArcanemiconChapters {
                 new AlchemyMachinePage(vialPotions.get(RegisterAlchemyPotions.MAGICAL_ATTUNEMENT), FluidStack.EMPTY, false, true,
                         new FluidStack(WizardsReborn.MOR_BREW_FLUID.get(), 1000), FluidStack.EMPTY, FluidStack.EMPTY,
                         vialPotions.get(RegisterAlchemyPotions.WISSEN_TEA), ARCANUM_ITEM, ARCANUM_ITEM, ARCACITE_ITEM, new ItemStack(Items.REDSTONE), new ItemStack(Items.REDSTONE)
+                ),
+                new AlchemyMachinePage(vialPotions.get(RegisterAlchemyPotions.DARKNESS), FluidStack.EMPTY, false, true,
+                        new FluidStack(WizardsReborn.MUSHROOM_BREW_FLUID.get(), 2000),  new FluidStack(WizardsReborn.HELLISH_MUSHROOM_BREW_FLUID.get(), 1000), FluidStack.EMPTY,
+                        vialPotions.get(RegisterAlchemyPotions.MUNDANE_BREW), new ItemStack(Items.SCULK), new ItemStack(Items.SCULK), new ItemStack(Items.SCULK), new ItemStack(Items.ECHO_SHARD), new ItemStack(Items.REDSTONE)
                 )
         );
 

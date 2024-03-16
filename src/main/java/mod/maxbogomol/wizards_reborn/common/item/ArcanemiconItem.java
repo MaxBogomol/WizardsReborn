@@ -53,7 +53,7 @@ public class ArcanemiconItem extends Item {
             openGui();
         }
 
-        return new InteractionResultHolder<ItemStack>(InteractionResult.SUCCESS, stack);
+        return InteractionResultHolder.success(stack);
     }
 
     @OnlyIn(Dist.CLIENT)

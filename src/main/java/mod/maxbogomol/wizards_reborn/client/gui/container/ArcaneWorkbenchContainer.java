@@ -29,8 +29,7 @@ public class ArcaneWorkbenchContainer extends AbstractContainerMenu {
         this.playerInventory = playerInventory;
     }
 
-    public ArcaneWorkbenchContainer(int windowId, Level world, BlockPos pos,
-                                    Inventory playerInventory, Player player) {
+    public ArcaneWorkbenchContainer(int windowId, Level world, BlockPos pos, Inventory playerInventory, Player player) {
         super(WizardsReborn.ARCANE_WORKBENCH_CONTAINER.get(), windowId);
         this.tileEntity = world.getBlockEntity(pos);
         playerEntity = player;

@@ -31,11 +31,9 @@ import net.minecraft.world.InteractionResultHolder;
 import net.minecraft.world.SimpleContainer;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.item.Item;
-import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.TooltipFlag;
-import net.minecraft.world.item.UseAnim;
+import net.minecraft.world.item.*;
 import net.minecraft.world.item.context.UseOnContext;
 import net.minecraft.world.level.Level;
 import net.minecraftforge.api.distmarker.Dist;
@@ -51,7 +49,9 @@ import org.lwjgl.opengl.GL11;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import java.awt.*;
+import java.util.Iterator;
 import java.util.List;
+import java.util.stream.Stream;
 
 public class ArcaneWandItem extends Item implements IWissenItem, ICustomAnimationItem {
     public ArcaneWandItem(Properties properties) {
@@ -80,6 +80,26 @@ public class ArcaneWandItem extends Item implements IWissenItem, ICustomAnimatio
         public <T> LazyOptional<T> getCapability(@Nonnull Capability<T> capability, @Nullable Direction facing) {
             return ForgeCapabilities.ITEM_HANDLER.orEmpty(capability, opt);
         }
+    }
+
+    @Override
+    public void onDestroyed(ItemEntity pItemEntity) {
+        Iterator<ItemStack> iter = new Iterator<>() {
+            private int i = 0;
+            private final SimpleContainer inventory = getInventory(pItemEntity.getItem());
+
+            @Override
+            public boolean hasNext() {
+                return i < inventory.getContainerSize();
+            }
+
+            @Override
+            public ItemStack next() {
+                return inventory.getItem(i++);
+            }
+        };
+
+        ItemUtils.onContainerDestroyed(pItemEntity, Stream.iterate(iter.next(), t -> iter.hasNext(), t -> iter.next()));
     }
 
     @Override

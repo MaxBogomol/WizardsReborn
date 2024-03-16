@@ -1,54 +1,51 @@
 package mod.maxbogomol.wizards_reborn.client.gui.container;
 
 import mod.maxbogomol.wizards_reborn.WizardsReborn;
-import net.minecraft.core.BlockPos;
+import mod.maxbogomol.wizards_reborn.common.item.equipment.curio.AlchemyBagItem;
+import net.minecraft.world.Container;
+import net.minecraft.world.SimpleContainer;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.AbstractContainerMenu;
-import net.minecraft.world.inventory.ContainerLevelAccess;
-import net.minecraft.world.inventory.MenuType;
 import net.minecraft.world.inventory.Slot;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
-import net.minecraft.world.level.block.entity.BlockEntity;
-import net.minecraftforge.common.capabilities.ForgeCapabilities;
 import net.minecraftforge.items.IItemHandler;
 import net.minecraftforge.items.SlotItemHandler;
 import net.minecraftforge.items.wrapper.InvWrapper;
-import org.jetbrains.annotations.Nullable;
 
-public class RunicPedestalContainer extends AbstractContainerMenu {
-    public final BlockEntity tileEntity;
+public class AlchemyBagContainer extends AbstractContainerMenu {
+    public final ItemStack itemStack;
     public final Player playerEntity;
     public final IItemHandler playerInventory;
+    private final Container inventory;
 
-    protected RunicPedestalContainer(@Nullable MenuType<?> pMenuType, int pContainerId, BlockEntity tileEntity, Player playerEntity, IItemHandler playerInventory) {
-        super(pMenuType, pContainerId);
-        this.tileEntity = tileEntity;
-        this.playerEntity = playerEntity;
-        this.playerInventory = playerInventory;
-    }
-
-    public RunicPedestalContainer(int windowId, Level world, BlockPos pos, Inventory playerInventory, Player player) {
-        super(WizardsReborn.RUNIC_PEDESTAL_CONTAINER.get(), windowId);
-        this.tileEntity = world.getBlockEntity(pos);
-        playerEntity = player;
+    public AlchemyBagContainer(int windowId, Level world, ItemStack stack, Inventory playerInventory, Player player) {
+        super(WizardsReborn.ALCHEMY_BAG_CONTAINER.get(), windowId);
+        this.itemStack = stack;
+        this.playerEntity = player;
         this.playerInventory = new InvWrapper(playerInventory);
-        this.layoutPlayerInventorySlots(8, 82);
+        this.inventory = playerInventory;
+        inventory.startOpen(playerInventory.player);
+        this.layoutPlayerInventorySlots(8, 94);
 
-        if (tileEntity != null) {
-            tileEntity.getCapability(ForgeCapabilities.ITEM_HANDLER).ifPresent(h -> {
-                addSlot(new SlotItemHandler(h, 0, 80, 30));
-            });
+        if (stack != null && stack.getItem() instanceof AlchemyBagItem) {
+            SimpleContainer container = AlchemyBagItem.getInventory(stack);
+            IItemHandler inventoryContainer = new InvWrapper(container);
+            int c = 0;
+            for (int i = 0; i < 3; i++) {
+                for (int ii = 0; ii < 5; ii++) {
+                    addSlot(new AlchemyBagSlot(inventoryContainer, c, 44  + (ii * 18), 18 + (i * 18)));
+                    c++;
+                }
+            }
         }
     }
 
     @Override
     public boolean stillValid(Player playerIn) {
-        return stillValid(ContainerLevelAccess.create(tileEntity.getLevel(), tileEntity.getBlockPos()),
-                playerIn, WizardsReborn.RUNIC_PEDESTAL.get());
+        return this.inventory.stillValid(playerIn);
     }
-
 
     private int addSlotRange(IItemHandler handler, int index, int x, int y, int amount, int dx) {
         for (int i = 0; i < amount; i++) {
@@ -84,7 +81,7 @@ public class RunicPedestalContainer extends AbstractContainerMenu {
     private static final int VANILLA_FIRST_SLOT_INDEX = 0;
     private static final int TE_INVENTORY_FIRST_SLOT_INDEX = VANILLA_FIRST_SLOT_INDEX + VANILLA_SLOT_COUNT;
 
-    private static final int TE_INVENTORY_SLOT_COUNT = 1;
+    private static final int TE_INVENTORY_SLOT_COUNT = 15;
 
     @Override
     public ItemStack quickMoveStack(Player playerIn, int index) {

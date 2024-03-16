@@ -4,6 +4,8 @@ import mod.maxbogomol.wizards_reborn.WizardsRebornClient;
 import mod.maxbogomol.wizards_reborn.client.gui.screen.CrystalChooseScreen;
 import mod.maxbogomol.wizards_reborn.common.item.equipment.ArcaneWandItem;
 import mod.maxbogomol.wizards_reborn.common.network.DeleteCrystalPacket;
+import mod.maxbogomol.wizards_reborn.common.network.OpenAlchemyBagPacket;
+import mod.maxbogomol.wizards_reborn.common.network.OpenCrystalBagPacket;
 import mod.maxbogomol.wizards_reborn.common.network.PacketHandler;
 import net.minecraft.client.Minecraft;
 import net.minecraft.nbt.CompoundTag;
@@ -24,9 +26,10 @@ public class KeyBindHandler {
 
     @SubscribeEvent
     public static void onKeyPress(InputEvent event) {
+        Minecraft mc = Minecraft.getInstance();
+        Player player = mc.player;
+
         if (WizardsRebornClient.OPEN_WAND_SELECTION_KEY.isDown()) {
-            Minecraft mc = Minecraft.getInstance();
-            Player player = mc.player;
             ItemStack main = mc.player.getMainHandItem();
             ItemStack offhand = mc.player.getOffhandItem();
             boolean open = false;
@@ -54,6 +57,14 @@ public class KeyBindHandler {
                     }
                 }
             }
+        }
+
+        if (WizardsRebornClient.OPEN_CRYSTAL_BAG_KEY.isDown()) {
+            PacketHandler.sendToServer(new OpenCrystalBagPacket());
+        }
+
+        if (WizardsRebornClient.OPEN_ALCHEMY_BAG_KEY.isDown()) {
+            PacketHandler.sendToServer(new OpenAlchemyBagPacket());
         }
     }
 }

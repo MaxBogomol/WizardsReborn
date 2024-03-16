@@ -325,6 +325,8 @@ public class WizardsRebornItemGroup {
             event.accept(WizardsReborn.WISSEN_RING);
             event.accept(WizardsReborn.LEATHER_BELT);
             event.accept(WizardsReborn.ARCANE_FORTRESS_BELT);
+            event.accept(WizardsReborn.CRYSTAL_BAG);
+            event.accept(WizardsReborn.ALCHEMY_BAG);
 
             event.accept(WizardsReborn.BROWN_MUSHROOM_CAP);
             event.accept(WizardsReborn.RED_MUSHROOM_CAP);

@@ -29,8 +29,7 @@ public class ItemSorterContainer extends AbstractContainerMenu {
         this.playerInventory = playerInventory;
     }
 
-    public ItemSorterContainer(int windowId, Level world, BlockPos pos,
-                               Inventory playerInventory, Player player) {
+    public ItemSorterContainer(int windowId, Level world, BlockPos pos, Inventory playerInventory, Player player) {
         super(WizardsReborn.ITEM_SORTER_CONTAINER.get(), windowId);
         this.tileEntity = world.getBlockEntity(pos);
         playerEntity = player;

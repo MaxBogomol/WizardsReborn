@@ -39,7 +39,7 @@ public class ItemBackedInventory extends SimpleContainer {
         for (int i = 0; i < getContainerSize(); i++) {
             list.add(getItem(i).save(new CompoundTag()));
         }
-        CompoundTag nbt = stack.getTag();
+        CompoundTag nbt = stack.getOrCreateTag();
         nbt.put(TAG_ITEMS,list);
     }
 }

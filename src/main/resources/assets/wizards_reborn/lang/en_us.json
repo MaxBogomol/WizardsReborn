@@ -303,6 +303,8 @@
   "item.wizards_reborn.wissen_ring": "Wissen Ring",
   "item.wizards_reborn.leather_belt": "Leather Belt",
   "item.wizards_reborn.arcane_fortress_belt": "Arcane Fortress Belt",
+  "item.wizards_reborn.crystal_bag": "Crystal Bag",
+  "item.wizards_reborn.alchemy_bag": "Alchemy Bag",
 
   "item.wizards_reborn.brown_mushroom_cap": "Brown Mushroom Cap",
   "item.wizards_reborn.red_mushroom_cap": "Red Mushroom Cap",
@@ -555,6 +557,8 @@
 
   "key.category.wizards_reborn.general": "Wizard's Reborn",
   "key.wizards_reborn.selection_hud": "Selection Hud",
+  "key.wizards_reborn.crystal_bag": "Crystal Bag",
+  "key.wizards_reborn.alchemy_bag": "Alchemy Bag",
 
   "crystal_stat.wizards_reborn.focus": "Focus",
   "crystal_stat.wizards_reborn.balance": "Balance",
@@ -669,6 +673,7 @@
   "alchemy_potion.wizards_reborn.absorption": "Potion of Absorption",
   "alchemy_potion.wizards_reborn.resistance": "Potion of Resistance",
   "alchemy_potion.wizards_reborn.magical_attunement": "Potion of Magical Attunement",
+  "alchemy_potion.wizards_reborn.darkness": "Potion of Darkness",
 
   "wizards_reborn.arcanemicon.category.arcane_nature": "Arcane Nature",
   "wizards_reborn.arcanemicon.chapter.arcane_nature_index": "Arcane Nature",

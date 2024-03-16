@@ -33,6 +33,8 @@ public final class PacketHandler {
         HANDLER.registerMessage(id++, SetCrystalPacket.class, SetCrystalPacket::encode, SetCrystalPacket::decode, SetCrystalPacket::handle);
         HANDLER.registerMessage(id++, DeleteCrystalPacket.class, DeleteCrystalPacket::encode, DeleteCrystalPacket::decode, DeleteCrystalPacket::handle);
         HANDLER.registerMessage(id++, SetSpellPacket.class, SetSpellPacket::encode, SetSpellPacket::decode, SetSpellPacket::handle);
+        HANDLER.registerMessage(id++, OpenCrystalBagPacket.class, OpenCrystalBagPacket::encode, OpenCrystalBagPacket::decode, OpenCrystalBagPacket::handle);
+        HANDLER.registerMessage(id++, OpenAlchemyBagPacket.class, OpenAlchemyBagPacket::encode, OpenAlchemyBagPacket::decode, OpenAlchemyBagPacket::handle);
 
         HANDLER.registerMessage(id++, WissenAltarBurstEffectPacket.class, WissenAltarBurstEffectPacket::encode, WissenAltarBurstEffectPacket::decode, WissenAltarBurstEffectPacket::handle);
         HANDLER.registerMessage(id++, WissenCrystallizerBurstEffectPacket.class, WissenCrystallizerBurstEffectPacket::encode, WissenCrystallizerBurstEffectPacket::decode, WissenCrystallizerBurstEffectPacket::handle);

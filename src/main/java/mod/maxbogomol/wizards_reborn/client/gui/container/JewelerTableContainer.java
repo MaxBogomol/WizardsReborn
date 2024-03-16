@@ -29,8 +29,7 @@ public class JewelerTableContainer extends AbstractContainerMenu {
         this.playerInventory = playerInventory;
     }
 
-    public JewelerTableContainer(int windowId, Level world, BlockPos pos,
-                                 Inventory playerInventory, Player player) {
+    public JewelerTableContainer(int windowId, Level world, BlockPos pos, Inventory playerInventory, Player player) {
         super(WizardsReborn.JEWELER_TABLE_CONTAINER.get(), windowId);
         this.tileEntity = world.getBlockEntity(pos);
         playerEntity = player;

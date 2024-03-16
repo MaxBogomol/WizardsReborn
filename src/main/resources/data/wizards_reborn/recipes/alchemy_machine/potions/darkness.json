@@ -1,0 +1,40 @@
+{
+  "type": "wizards_reborn:alchemy_machine",
+  "alchemyPotion": {
+    "alchemy_potion": "wizards_reborn:darkness"
+  },
+  "steam": 300,
+  "ingredients": [
+    {
+      "tag": "wizards_reborn:alchemy_potions"
+    },
+    {
+      "item": "minecraft:sculk"
+    },
+    {
+      "item": "minecraft:sculk"
+    },
+    {
+      "item": "minecraft:sculk"
+    },
+    {
+      "item": "minecraft:echo_shard"
+    },
+    {
+      "item": "minecraft:redstone"
+    }
+  ],
+  "fluidIngredients": [
+    {
+      "name": "wizards_reborn:mushroom_brew",
+      "amount" : 2000
+    },
+    {
+      "name": "wizards_reborn:hellish_mushroom_brew",
+      "amount" : 1000
+    }
+  ],
+  "alchemyPotionIngredient": {
+    "alchemy_potion": "wizards_reborn:mundane_brew"
+  }
+}
