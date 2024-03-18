@@ -1,0 +1,31 @@
+{
+  "type": "wizards_reborn:arcane_workbench",
+  "pattern": [
+    "_#_",
+    "LCL",
+    "RLR",
+    "A_A_"
+  ],
+  "key": {
+    "#": {
+      "item": "wizards_reborn:leather_belt"
+    },
+    "L": {
+      "item": "minecraft:leather"
+    },
+    "C": {
+      "item": "minecraft:chest"
+    },
+    "A": {
+      "item": "wizards_reborn:alchemy_calx"
+    },
+    "R": {
+      "item": "wizards_reborn:alchemy_vial"
+    }
+  },
+  "output": {
+    "item": "wizards_reborn:alchemy_bag"
+  },
+  "wissen": 1500,
+  "saveNBT": 1
+}

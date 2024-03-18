@@ -81,6 +81,26 @@ public class TotemOfFlamesTileEntity extends ExposedTileSimpleInventory implemen
                                     .setLifetime(60)
                                     .spawn(level, worldPosition.getX() + 0.5F, worldPosition.getY() + 0.5F, worldPosition.getZ() + 0.5F);
                         }
+
+                        if (lumos.color == ArcaneLumosBlock.Colors.COSMIC) {
+                            if (random.nextFloat() < 0.1) {
+                                Particles.create(WizardsReborn.SPARKLE_PARTICLE)
+                                        .addVelocity(((random.nextDouble() - 0.5D) / 150), ((random.nextDouble() - 0.5D) / 150) + 0.025f, ((random.nextDouble() - 0.5D) / 150))
+                                        .setAlpha(0.75f, 0).setScale(0.1f, 0)
+                                        .setColor((float) color.getRed() / 255, (float) color.getGreen()/ 255, (float) color.getBlue() / 255)
+                                        .setLifetime(10)
+                                        .setSpin((0.1f * (float) ((random.nextDouble() - 0.5D) * 2)))
+                                        .spawn(level, worldPosition.getX() + 0.5F + ((random.nextDouble() - 0.5D) / 3), worldPosition.getY() + 0.5F + ((random.nextDouble() - 0.5D) / 3), worldPosition.getZ() + 0.5F + ((random.nextDouble() - 0.5D) / 3));
+                            }
+                            if (random.nextFloat() < 0.1) {
+                                Particles.create(WizardsReborn.SPARKLE_PARTICLE)
+                                        .addVelocity(((random.nextDouble() - 0.5D) / 150), ((random.nextDouble() - 0.5D) / 150) + 0.025f, ((random.nextDouble() - 0.5D) / 150))
+                                        .setAlpha(0.75f, 0).setScale(0.1f, 0)
+                                        .setColor(1f, 1f, 1f)
+                                        .setLifetime(10)
+                                        .spawn(level, worldPosition.getX() + 0.5F + ((random.nextDouble() - 0.5D) / 3), worldPosition.getY() + 0.5F + ((random.nextDouble() - 0.5D) / 3), worldPosition.getZ() + 0.5F + ((random.nextDouble() - 0.5D) / 3));
+                            }
+                        }
                     }
                 }
             }

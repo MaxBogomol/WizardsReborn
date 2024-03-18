@@ -1,0 +1,34 @@
+{
+  "type": "wizards_reborn:arcane_workbench",
+  "pattern": [
+    "_#_",
+    "LCL",
+    "RLR",
+    "A_E_"
+  ],
+  "key": {
+    "#": {
+      "item": "wizards_reborn:leather_belt"
+    },
+    "L": {
+      "item": "minecraft:leather"
+    },
+    "C": {
+      "item": "minecraft:chest"
+    },
+    "A": {
+      "item": "wizards_reborn:alchemy_calx"
+    },
+    "E": {
+      "item": "wizards_reborn:enchanted_calx"
+    },
+    "R": {
+      "tag": "wizards_reborn:crystal_seeds"
+    }
+  },
+  "output": {
+    "item": "wizards_reborn:crystal_bag"
+  },
+  "wissen": 1500,
+  "saveNBT": 1
+}

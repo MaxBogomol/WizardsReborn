@@ -3,11 +3,8 @@ package mod.maxbogomol.wizards_reborn.client.arcanemicon;
 import mod.maxbogomol.wizards_reborn.WizardsRebornClient;
 import mod.maxbogomol.wizards_reborn.utils.ColorUtils;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.OptionInstance;
-import net.minecraft.client.Options;
 import net.minecraft.client.gui.Font;
 import net.minecraft.client.gui.GuiGraphics;
-import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.api.distmarker.Dist;
@@ -45,6 +42,12 @@ public abstract class Page {
         List<String> lines = new ArrayList<>();
         if (text.contains("wizards_reborn:wandMenu")) {
             text = text.replace("wizards_reborn:wandMenu", WizardsRebornClient.OPEN_WAND_SELECTION_KEY.getTranslatedKeyMessage().getString());
+        }
+        if (text.contains("wizards_reborn:openCrystalBag")) {
+            text = text.replace("wizards_reborn:openCrystalBag", WizardsRebornClient.OPEN_CRYSTAL_BAG_KEY.getTranslatedKeyMessage().getString());
+        }
+        if (text.contains("wizards_reborn:openAlchemyBag")) {
+            text = text.replace("wizards_reborn:openAlchemyBag", WizardsRebornClient.OPEN_ALCHEMY_BAG_KEY.getTranslatedKeyMessage().getString());
         }
         if (text.contains("minecraft:sneak")) {
             text = text.replace("minecraft:sneak", Minecraft.getInstance().options.keyShift.getTranslatedKeyMessage().getString());
