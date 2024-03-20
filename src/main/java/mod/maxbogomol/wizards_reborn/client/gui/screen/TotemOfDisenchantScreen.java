@@ -94,9 +94,18 @@ public class TotemOfDisenchantScreen extends AbstractContainerScreen<TotemOfDise
                     if (enchantment != null) {
                         ItemStack book = new ItemStack(WizardsReborn.ARCANE_ENCHANTED_BOOK.get());
                         ArcaneEnchantmentUtils.addArcaneEnchantment(book, enchantment, arcaneEnchantments.get(enchantment));
-                        gui.renderItem(book, i + 44 + (xx * 18), j + 18 + (yy * 18));
-                        if (x >= i + 44 + (xx * 18) && y >= j + 18 + (yy * 18) && x <= i + 44 + (xx * 18) + 16 && y <= j + 18 + (yy * 18) + 16) {
-                            gui.renderTooltip(Minecraft.getInstance().font, book, x, y);
+
+                        int of = 0;
+                        if (currentBook.getItem().equals(WizardsReborn.ARCANE_ENCHANTED_BOOK.get())) {
+                            if (ArcaneEnchantmentUtils.getArcaneEnchantment(currentBook, enchantment) > 0) {
+                                gui.blit(GUI, i + 42 + (xx * 18), j + 16 + (yy * 18), 176, 18, 20, 20, 256, 256);
+                                of = -1;
+                            }
+                        }
+
+                        gui.renderItem(book, i + 44 + (xx * 18), j + 18 + (yy * 18) + of);
+                        if (x >= i + 44 + (xx * 18) && y >= j + 18 + of + (yy * 18) && x <= i + 44 + (xx * 18) + 16 && y <= j + 18 + of + (yy * 18) + 16) {
+                            gui.renderTooltip(Minecraft.getInstance().font, book, x, y + of);
                         }
                     }
                     xx++;
@@ -110,9 +119,23 @@ public class TotemOfDisenchantScreen extends AbstractContainerScreen<TotemOfDise
                     if (enchantment != null) {
                         ItemStack book = new ItemStack(Items.ENCHANTED_BOOK);
                         EnchantedBookItem.addEnchantment(book, new EnchantmentInstance(enchantment, enchantments.get(enchantment)));
-                        gui.renderItem(book, i + 44 + (xx * 18), j + 18 + (yy * 18));
-                        if (x >= i + 44 + (xx * 18) && y >= j + 18 + (yy * 18) && x <= i + 44 + (xx * 18) + 16 && y <= j + 18 + (yy * 18) + 16) {
-                            gui.renderTooltip(Minecraft.getInstance().font, book, x, y);
+
+                        int of = 0;
+                        if (currentBook.getItem().equals(Items.ENCHANTED_BOOK)) {
+                            ListTag listtag = EnchantedBookItem.getEnchantments(currentBook);
+                            for(int ii = 0; ii < listtag.size(); ++ii) {
+                                CompoundTag compoundtag = listtag.getCompound(ii);
+                                Enchantment enchantment1 = ForgeRegistries.ENCHANTMENTS.getValue(EnchantmentHelper.getEnchantmentId(compoundtag));
+                                if (enchantment.equals(enchantment1)) {
+                                    gui.blit(GUI, i + 42 + (xx * 18), j + 16 + (yy * 18), 176, 18, 20, 20, 256, 256);
+                                    of = -1;
+                                }
+                            }
+                        }
+
+                        gui.renderItem(book, i + 44 + (xx * 18), j + 18 + (yy * 18) + of);
+                        if (x >= i + 44 + (xx * 18) && y >= j + 18 + of + (yy * 18) && x <= i + 44 + (xx * 18) + 16 && y <= j + 18 + of + (yy * 18) + 16) {
+                            gui.renderTooltip(Minecraft.getInstance().font, book, x, y + of);
                         }
                     }
                     xx++;

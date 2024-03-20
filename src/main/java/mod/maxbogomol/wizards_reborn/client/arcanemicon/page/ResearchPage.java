@@ -133,6 +133,11 @@ public class ResearchPage extends Page {
     public void render(ArcanemiconGui book, GuiGraphics gui, int x, int y, int mouseX, int mouseY) {
         if (main) {
             setActives();
+            gui.blit(BACKGROUND, x + 3, y + 3, 188, 60, 15, 15);
+            gui.blit(BACKGROUND, x + 108, y + 3, 188 + 15, 60, 15, 15);
+            gui.blit(BACKGROUND, x + 3, y + 108, 188, 60 + 15, 15, 15);
+            gui.blit(BACKGROUND, x + 108, y + 108, 188 + 15, 60 + 15, 15, 15);
+            gui.blit(BACKGROUND, x + 49, y + 49, 218, 30, 30, 30);
             gui.blit(BACKGROUND, x + 49, y + 126, 128, 50, 30, 30);
             if (spell != null) {
                 gui.blit(spell.getIcon(), x + 56, y + 133, 0, 0, 16, 16, 16, 16);
@@ -140,6 +145,9 @@ public class ResearchPage extends Page {
                     gui.renderTooltip(Minecraft.getInstance().font, Component.translatable(spell.getTranslatedName()), mouseX, mouseY);
                 }
             }
+
+            int outlineXOffset = 0;
+            int outlineYOffset = 14;
 
             int actives = getAllActives();
 
@@ -162,15 +170,25 @@ public class ResearchPage extends Page {
             }
             Vec2 point = new Vec2(size, 0), center = new Vec2(size, size);
             Vec2 pointS = new Vec2(size + 5, 0), centerS = new Vec2(size + 5, size + 5);
+            Vec2 pointL = new Vec2(size, 0), centerL = new Vec2(size, size);
 
             int i = 0;
             int selected = getSelectedMonogram(x, y, mouseX, mouseY);
             for (MonogramMapEntry monogramMapEntry : map) {
-                if (i == selected) {
+                for (int ii = 0; ii < 2; ii++) {
+                    if (monogramMapEntry.isActive()) {
+                        gui.blit(BACKGROUND, x + 59 - (int) size + (int) pointL.x + 3, y + 59 - (int) size + (int) pointL.y + 3, 184, 40, 4, 4);
+                    }
+                    pointL = rotatePointAbout(pointL, centerL, angleBetweenEach / 2);
+                }
+            }
+            i = 0;
+            for (MonogramMapEntry monogramMapEntry : map) {
+                if (i == selected && mouseX >= x + 3  && mouseY >= y + 3 && mouseX <= x + 123 && mouseY <= y + 123) {
                     gui.blit(BACKGROUND, x + 59 - (int) size + (int) pointS.x - 2 - 5, y + 59 - (int) size + (int) pointS.y - 2 - 5, 158, 40, 14, 14);
                 }
                 if (monogramMapEntry.isActive()) {
-                    gui.blit(BACKGROUND, x + 59 - (int) size + (int) point.x - 2, y + 59 - (int) size + (int) point.y - 2, 158, 40, 14, 14);
+                    gui.blit(BACKGROUND, x + 59 - (int) size + (int) point.x - 2, y + 59 - (int) size + (int) point.y - 2, 158 + outlineXOffset, 40 + outlineYOffset, 14, 14);
                 }
                 if (currentMonogram != null) {
                     if (isCanConnect(monogramMapEntry.getMonogram())) {

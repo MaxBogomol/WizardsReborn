@@ -1,0 +1,13 @@
+{
+  "type": "wizards_reborn:censer",
+  "ingredient": {
+    "item": "wizards_reborn:enchanted_calx"
+  },
+  "effects": [
+    {
+      "effect": "minecraft:regeneration",
+      "duration": 500,
+      "amplifier": 0
+    }
+  ]
+}

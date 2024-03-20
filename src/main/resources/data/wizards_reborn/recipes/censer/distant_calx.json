@@ -1,0 +1,13 @@
+{
+  "type": "wizards_reborn:censer",
+  "ingredient": {
+    "item": "wizards_reborn:distant_calx"
+  },
+  "effects": [
+    {
+      "effect": "minecraft:levitation",
+      "duration": 250,
+      "amplifier": 0
+    }
+  ]
+}

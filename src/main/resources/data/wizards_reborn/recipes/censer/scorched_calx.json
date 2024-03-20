@@ -1,0 +1,13 @@
+{
+  "type": "wizards_reborn:censer",
+  "ingredient": {
+    "item": "wizards_reborn:scorched_calx"
+  },
+  "effects": [
+    {
+      "effect": "minecraft:strength",
+      "duration": 500,
+      "amplifier": 0
+    }
+  ]
+}
