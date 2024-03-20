@@ -13,22 +13,31 @@
       "item": "wizards_reborn:wisestone_plate"
     },
     {
+      "item": "wizards_reborn:flower_fertilizer"
+    },
+    {
+      "item": "wizards_reborn:flower_fertilizer"
+    },
+    {
+      "item": "wizards_reborn:flower_fertilizer"
+    },
+    {
+      "item": "wizards_reborn:natural_calx"
+    },
+    {
+      "item": "wizards_reborn:natural_calx"
+    },
+    {
+      "item": "wizards_reborn:natural_calx"
+    },
+    {
+      "item": "wizards_reborn:natural_calx"
+    },
+    {
+      "item": "minecraft:hay_block"
+    },
+    {
       "item": "minecraft:water_bucket"
-    },
-    {
-      "item": "minecraft:hay_block"
-    },
-    {
-      "item": "minecraft:hay_block"
-    },
-    {
-      "item": "minecraft:bone_meal"
-    },
-    {
-      "item": "minecraft:bone_meal"
-    },
-    {
-      "item": "minecraft:bone_meal"
     }
   ]
 }

@@ -2,6 +2,7 @@ package mod.maxbogomol.wizards_reborn.common.item;
 
 import mod.maxbogomol.wizards_reborn.client.arcanemicon.ArcanemiconGui;
 import mod.maxbogomol.wizards_reborn.common.block.ArcanePedestalBlock;
+import mod.maxbogomol.wizards_reborn.common.tileentity.ArcanePedestalTileEntity;
 import net.minecraft.client.Minecraft;
 import net.minecraft.core.BlockPos;
 import net.minecraft.sounds.SoundEvents;
@@ -31,12 +32,14 @@ public class ArcanemiconItem extends Item {
         BlockPos blockpos = context.getClickedPos();
 
         if (player.isShiftKeyDown()) {
-            if (stack.getItem() instanceof ArcanemiconItem) {
-                Block block = ArcanePedestalBlock.blocksList.get(world.getBlockState(blockpos).getBlock());
-                if (block != null) {
-                    world.setBlockAndUpdate(blockpos, block.defaultBlockState());
-                    player.getInventory().removeItem(player.getItemInHand(context.getHand()));
-                    return InteractionResult.SUCCESS;
+            Block block = ArcanePedestalBlock.blocksList.get(world.getBlockState(blockpos).getBlock());
+            if (block != null) {
+                if (world.getBlockEntity(blockpos) instanceof ArcanePedestalTileEntity pedestal) {
+                    if (pedestal.getItemHandler().getItem(0).isEmpty()) {
+                        world.setBlockAndUpdate(blockpos, block.defaultBlockState());
+                        player.getInventory().removeItem(player.getItemInHand(context.getHand()));
+                        return InteractionResult.SUCCESS;
+                    }
                 }
             }
         }

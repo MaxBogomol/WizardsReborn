@@ -13,7 +13,7 @@ import top.theillusivec4.curios.api.type.capability.ICurio;
 import javax.annotation.Nonnull;
 import java.util.List;
 
-public class WissenRingItem extends BaseCurioItem implements IWissenItem {
+public class WissenRingItem extends BaseWissenCurioItem {
 
     public WissenRingItem(Properties properties) {
         super(properties);

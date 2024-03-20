@@ -16,6 +16,7 @@ import mod.maxbogomol.wizards_reborn.common.item.CrystalItem;
 import mod.maxbogomol.wizards_reborn.common.item.ICustomAnimationItem;
 import mod.maxbogomol.wizards_reborn.common.item.ItemBackedInventory;
 import mod.maxbogomol.wizards_reborn.utils.ColorUtils;
+import mod.maxbogomol.wizards_reborn.utils.NumericalUtils;
 import net.minecraft.ChatFormatting;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
@@ -306,6 +307,9 @@ public class ArcaneWandItem extends Item implements IWissenItem, ICustomAnimatio
     @OnlyIn(Dist.CLIENT)
     @Override
     public void appendHoverText(ItemStack stack, Level world, List<Component> list, TooltipFlag flags) {
+        WissenItemUtils.existWissen(stack);
+        list.add(NumericalUtils.getWissenName(WissenItemUtils.getWissen(stack), getMaxWissen()).copy().withStyle(ChatFormatting.GRAY));
+
         list.add(Component.empty());
         list.add(Component.translatable("lore.wizards_reborn.arcane_wand.crystal").withStyle(ChatFormatting.GRAY));
 

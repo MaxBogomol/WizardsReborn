@@ -99,6 +99,19 @@ public class ArcaneEnchantmentUtils {
         return false;
     }
 
+    public static void removeArcaneEnchantment(ItemStack stack, ArcaneEnchantment arcaneEnchantment) {
+        existArcaneEnchantments(stack);
+        CompoundTag nbt = stack.getTag();
+
+        Map<ArcaneEnchantment, Integer> map = getAllArcaneEnchantments(stack);
+        map.remove(arcaneEnchantment);
+        nbt.put("arcaneEnchantments", new CompoundTag());
+
+        for (ArcaneEnchantment enchantment : map.keySet()) {
+            addArcaneEnchantment(stack, enchantment, map.get(enchantment));
+        }
+    }
+
     public static void existArcaneEnchantments(ItemStack stack) {
         CompoundTag nbt = stack.getOrCreateTag();
         if (!nbt.contains("arcaneEnchantments")) {

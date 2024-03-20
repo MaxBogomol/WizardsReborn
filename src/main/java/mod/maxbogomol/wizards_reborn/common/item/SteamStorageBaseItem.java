@@ -2,18 +2,25 @@ package mod.maxbogomol.wizards_reborn.common.item;
 
 import mod.maxbogomol.wizards_reborn.api.alchemy.ISteamItem;
 import mod.maxbogomol.wizards_reborn.api.alchemy.ISteamTileEntity;
+import mod.maxbogomol.wizards_reborn.utils.NumericalUtils;
+import net.minecraft.ChatFormatting;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
+import net.minecraft.network.chat.Component;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.EntityBlock;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.api.distmarker.OnlyIn;
 
 import javax.annotation.Nullable;
+import java.util.List;
 
 public class SteamStorageBaseItem extends BlockItem implements ISteamItem {
 
@@ -42,5 +49,14 @@ public class SteamStorageBaseItem extends BlockItem implements ISteamItem {
             }
         }
         return 0;
+    }
+
+    @OnlyIn(Dist.CLIENT)
+    @Override
+    public void appendHoverText(ItemStack stack, Level world, List<Component> list, TooltipFlag flags) {
+        CompoundTag nbt = stack.getTag();
+        if (nbt != null && nbt.contains("steam")) {
+            list.add(NumericalUtils.getSteamName(nbt.getInt("steam"), getMaxSteam()).copy().withStyle(ChatFormatting.GRAY));
+        }
     }
 }

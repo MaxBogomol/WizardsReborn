@@ -16,7 +16,13 @@
       "tag": "wizards_reborn:all_crystals"
     },
     {
-      "tag": "wizards_reborn:arcane_gold_ingot"
+      "item": "wizards_reborn:enchanted_calx"
+    },
+    {
+      "item": "wizards_reborn:enchanted_calx"
+    },
+    {
+      "item": "wizards_reborn:enchanted_calx"
     },
     {
       "tag": "wizards_reborn:arcane_gold_ingot"
@@ -25,19 +31,10 @@
       "tag": "wizards_reborn:arcane_gold_ingot"
     },
     {
-      "tag": "wizards_reborn:arcane_gold_ingot"
+      "item": "wizards_reborn:arcanum_lens"
     },
     {
-      "item": "wizards_reborn:arcanum"
-    },
-    {
-      "item": "wizards_reborn:arcanum"
-    },
-    {
-      "item": "wizards_reborn:arcanum"
-    },
-    {
-      "item": "wizards_reborn:arcanum"
+      "item": "wizards_reborn:arcanum_lens"
     }
   ]
 }

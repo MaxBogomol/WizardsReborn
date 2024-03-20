@@ -1,14 +1,17 @@
 package mod.maxbogomol.wizards_reborn.common.block;
 
-import mod.maxbogomol.wizards_reborn.client.gui.container.RunicPedestalContainer;
+import mod.maxbogomol.wizards_reborn.WizardsReborn;
+import mod.maxbogomol.wizards_reborn.api.wissen.ITotemBlock;
+import mod.maxbogomol.wizards_reborn.client.gui.container.TotemOfDisenchantContainer;
 import mod.maxbogomol.wizards_reborn.common.item.equipment.WissenWandItem;
-import mod.maxbogomol.wizards_reborn.common.tileentity.RunicPedestalTileEntity;
 import mod.maxbogomol.wizards_reborn.common.tileentity.TickableBlockEntity;
+import mod.maxbogomol.wizards_reborn.common.tileentity.TotemOfDisenchantTileEntity;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.*;
+import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.AbstractContainerMenu;
@@ -17,7 +20,9 @@ import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelAccessor;
+import net.minecraft.world.level.LevelReader;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.EntityBlock;
 import net.minecraft.world.level.block.SimpleWaterloggedBlock;
 import net.minecraft.world.level.block.entity.BlockEntity;
@@ -40,21 +45,24 @@ import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import java.util.stream.Stream;
 
-public class RunicPedestalBlock extends Block implements EntityBlock, SimpleWaterloggedBlock  {
+public class TotemOfDisenchantBlock extends Block implements EntityBlock, SimpleWaterloggedBlock, ITotemBlock {
 
     private static final VoxelShape SHAPE = Stream.of(
-            Block.box(2, 0, 2, 14, 3, 14),
-            Block.box(4, 3, 4, 12, 10, 12),
-            Block.box(3, 10, 3, 13, 12, 13),
-            Block.box(0, 12, 0, 16, 16, 16)
+            Block.box(4, 0, 4, 12, 4, 12),
+            Block.box(5, 4, 5, 11, 6, 11),
+            Block.box(10, 5, 10, 12, 10, 12),
+            Block.box(4, 5, 10, 6, 10, 12),
+            Block.box(10, 5, 4, 12, 10, 6),
+            Block.box(4, 5, 4, 6, 10, 6)
     ).reduce((v1, v2) -> Shapes.join(v1, v2, BooleanOp.OR)).get();
 
-    public RunicPedestalBlock(Properties properties) {
+    public TotemOfDisenchantBlock(Properties properties) {
         super(properties);
         registerDefaultState(defaultBlockState().setValue(BlockStateProperties.WATERLOGGED, false));
     }
 
     @Nonnull
+
     @Override
     public VoxelShape getShape(BlockState state, BlockGetter world, BlockPos pos, CollisionContext ctx) {
         return SHAPE;
@@ -62,7 +70,6 @@ public class RunicPedestalBlock extends Block implements EntityBlock, SimpleWate
 
     @Override
     protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {
-        builder.add(BlockStateProperties.LIT);
         builder.add(BlockStateProperties.WATERLOGGED);
     }
 
@@ -70,17 +77,17 @@ public class RunicPedestalBlock extends Block implements EntityBlock, SimpleWate
     @Override
     public BlockState getStateForPlacement(BlockPlaceContext context) {
         FluidState fluidState = context.getLevel().getFluidState(context.getClickedPos());
-        return this.defaultBlockState().setValue(BlockStateProperties.LIT, false).setValue(BlockStateProperties.WATERLOGGED, fluidState.getType() == Fluids.WATER);
+        return this.defaultBlockState().setValue(BlockStateProperties.WATERLOGGED, fluidState.getType() == Fluids.WATER);
     }
 
     @Override
     public void onRemove(@Nonnull BlockState state, @Nonnull Level world, @Nonnull BlockPos pos, @Nonnull BlockState newState, boolean isMoving) {
         if (state.getBlock() != newState.getBlock()) {
             BlockEntity tile = world.getBlockEntity(pos);
-            if (tile instanceof RunicPedestalTileEntity pedestal) {
-                SimpleContainer inv = new SimpleContainer(pedestal.itemHandler.getSlots());
-                for (int i = 0; i < pedestal.itemHandler.getSlots(); i++) {
-                    inv.setItem(i, pedestal.itemHandler.getStackInSlot(i));
+            if (tile instanceof TotemOfDisenchantTileEntity totem) {
+                SimpleContainer inv = new SimpleContainer(totem.itemHandler.getSlots());
+                for (int i = 0; i < totem.itemHandler.getSlots(); i++) {
+                    inv.setItem(i, totem.itemHandler.getStackInSlot(i));
                 }
                 Containers.dropContents(world, pos, inv);
             }
@@ -118,15 +125,20 @@ public class RunicPedestalBlock extends Block implements EntityBlock, SimpleWate
         return new MenuProvider() {
             @Override
             public Component getDisplayName() {
-                return Component.translatable("gui.wizards_reborn.runic_pedestal.title");
+                return Component.translatable("gui.wizards_reborn.totem_of_disenchant.title");
             }
 
             @Nullable
             @Override
             public AbstractContainerMenu createMenu(int i, Inventory playerInventory, Player playerEntity) {
-                return new RunicPedestalContainer(i, worldIn, pos, playerInventory, playerEntity);
+                return new TotemOfDisenchantContainer(i, worldIn, pos, playerInventory, playerEntity);
             }
         };
+    }
+
+    @Override
+    public InteractionResult useTotem(BlockState state, Level world, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hit) {
+        return use(state, world, pos, player, hand, hit);
     }
 
     @Override
@@ -140,7 +152,25 @@ public class RunicPedestalBlock extends Block implements EntityBlock, SimpleWate
             pLevel.scheduleTick(pCurrentPos, Fluids.WATER, Fluids.WATER.getTickDelay(pLevel));
         }
 
-        return super.updateShape(pState, pDirection, pNeighborState, pLevel, pCurrentPos, pNeighborPos);
+        return !pState.canSurvive(pLevel, pCurrentPos) ? Blocks.AIR.defaultBlockState() : super.updateShape(pState, pDirection, pNeighborState, pLevel, pCurrentPos, pNeighborPos);
+    }
+
+    @Override
+    public boolean canSurvive(BlockState state, LevelReader level, BlockPos pos) {
+        BlockPos blockpos = pos.below();
+        BlockState blockstate = level.getBlockState(blockpos);
+        if (blockstate.getBlock() == WizardsReborn.ARCANE_PEDESTAL.get() || blockstate.getBlock() == WizardsReborn.TOTEM_BASE.get()) {
+            return true;
+        }
+
+        return false;
+    }
+
+    @Override
+    public void setPlacedBy(Level level, BlockPos pos, BlockState state, @Nullable LivingEntity placer, ItemStack stack) {
+        if (level.getBlockState(pos.below()).getBlock() == WizardsReborn.ARCANE_PEDESTAL.get()) {
+            level.setBlockAndUpdate(pos.below(), WizardsReborn.TOTEM_BASE.get().defaultBlockState());
+        }
     }
 
     @Override
@@ -152,14 +182,14 @@ public class RunicPedestalBlock extends Block implements EntityBlock, SimpleWate
 
     @Nullable
     @Override
-    public BlockEntity newBlockEntity(BlockPos pPos, BlockState pState) {
-        return new RunicPedestalTileEntity(pPos, pState);
+    public <T extends BlockEntity> BlockEntityTicker<T> getTicker(@NotNull Level level, @NotNull BlockState state, @NotNull BlockEntityType<T> type) {
+        return TickableBlockEntity.getTickerHelper();
     }
 
     @Nullable
     @Override
-    public <T extends BlockEntity> BlockEntityTicker<T> getTicker(@NotNull Level level, @NotNull BlockState state, @NotNull BlockEntityType<T> type) {
-        return TickableBlockEntity.getTickerHelper();
+    public BlockEntity newBlockEntity(BlockPos pPos, BlockState pState) {
+        return new TotemOfDisenchantTileEntity(pPos, pState);
     }
 
     @Override
@@ -169,10 +199,10 @@ public class RunicPedestalBlock extends Block implements EntityBlock, SimpleWate
 
     @Override
     public int getAnalogOutputSignal(BlockState blockState, Level level, BlockPos pos) {
-        RunicPedestalTileEntity pedestal = (RunicPedestalTileEntity) level.getBlockEntity(pos);
-        SimpleContainer inv = new SimpleContainer(pedestal.itemHandler.getSlots());
-        for (int i = 0; i < pedestal.itemHandler.getSlots(); i++) {
-            inv.setItem(i, pedestal.itemHandler.getStackInSlot(i));
+        TotemOfDisenchantTileEntity totem = (TotemOfDisenchantTileEntity) level.getBlockEntity(pos);
+        SimpleContainer inv = new SimpleContainer(totem.itemHandler.getSlots());
+        for (int i = 0; i < totem.itemHandler.getSlots(); i++) {
+            inv.setItem(i, totem.itemHandler.getStackInSlot(i));
         }
         return AbstractContainerMenu.getRedstoneSignalFromContainer(inv);
     }

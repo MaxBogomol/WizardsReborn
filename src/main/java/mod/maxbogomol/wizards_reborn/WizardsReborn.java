@@ -457,7 +457,7 @@ public class WizardsReborn {
     public static final RegistryObject<Block> TOTEM_OF_FLAMES = BLOCKS.register("totem_of_flames", () -> new TotemOfFlamesBlock(BlockBehaviour.Properties.copy(Blocks.OAK_PLANKS).lightLevel(TotemOfFlamesBlock::getLightLevel)));
     public static final RegistryObject<Block> EXPERIENCE_TOTEM = BLOCKS.register("experience_totem", () -> new ExperienceTotemBlock(BlockBehaviour.Properties.copy(Blocks.OAK_PLANKS)));
     public static final RegistryObject<Block> TOTEM_OF_EXPERIENCE_ABSORPTION = BLOCKS.register("totem_of_experience_absorption", () -> new TotemOfExperienceAbsorptionBlock(BlockBehaviour.Properties.copy(Blocks.OAK_PLANKS)));
-    public static final RegistryObject<Block> TOTEM_OF_DISENCHANT = BLOCKS.register("totem_of_disenchant", () -> new TotemOfExperienceAbsorptionBlock(BlockBehaviour.Properties.copy(Blocks.OAK_PLANKS)));
+    public static final RegistryObject<Block> TOTEM_OF_DISENCHANT = BLOCKS.register("totem_of_disenchant", () -> new TotemOfDisenchantBlock(BlockBehaviour.Properties.copy(Blocks.OAK_PLANKS)));
     public static final RegistryObject<Block> ARCANE_ITERATOR = BLOCKS.register("arcane_iterator", () -> new ArcaneIteratorBlock(BlockBehaviour.Properties.copy(Blocks.OAK_PLANKS)));
 
     public static final RegistryObject<Block> WISESTONE_PEDESTAL = BLOCKS.register("wisestone_pedestal", () -> new ArcanePedestalBlock(BlockBehaviour.Properties.copy(Blocks.POLISHED_DEEPSLATE)));
@@ -837,7 +837,7 @@ public class WizardsReborn {
 
     public static final RegistryObject<Item> BLAZE_REAP = ITEMS.register("blaze_reap", () -> new ArcanePickaxeItem(CustomItemTier.ARCANE_GOLD, 1, -2.8f, new Item.Properties().rarity(Rarity.EPIC)));
 
-    public static final RegistryObject<Item> ARCANE_ENCHANTED_BOOK = ITEMS.register("arcane_enchanted_book", () -> new ArcaneEnchantedBookItem(new Item.Properties().stacksTo(1)));
+    public static final RegistryObject<Item> ARCANE_ENCHANTED_BOOK = ITEMS.register("arcane_enchanted_book", () -> new ArcaneEnchantedBookItem(new Item.Properties().stacksTo(1).rarity(Rarity.UNCOMMON)));
     public static final RegistryObject<Item> ARCANEMICON = ITEMS.register("arcanemicon", () -> new ArcanemiconItem(new Item.Properties().stacksTo(1)));
 
     public static final RegistryObject<Item> VIOLENCE_BANNER_PATTERN_ITEM = ITEMS.register("violence_banner_pattern", () -> new BannerPatternItem(VIOLENCE_BANNER_PATTERN_TAG, (new Item.Properties()).stacksTo(1).rarity(Rarity.UNCOMMON)));
@@ -884,6 +884,7 @@ public class WizardsReborn {
     public static RegistryObject<BlockEntityType<TotemOfFlamesTileEntity>> TOTEM_OF_FLAMES_TILE_ENTITY = TILE_ENTITIES.register("totem_of_flames", () -> BlockEntityType.Builder.of(TotemOfFlamesTileEntity::new, TOTEM_OF_FLAMES.get()).build(null));
     public static RegistryObject<BlockEntityType<ExperienceTotemTileEntity>> EXPERIENCE_TOTEM_TILE_ENTITY = TILE_ENTITIES.register("experience_totem", () -> BlockEntityType.Builder.of(ExperienceTotemTileEntity::new, EXPERIENCE_TOTEM.get()).build(null));
     public static RegistryObject<BlockEntityType<TotemOfExperienceAbsorptionTileEntity>> TOTEM_OF_EXPERIENCE_ABSORPTION_TILE_ENTITY = TILE_ENTITIES.register("totem_of_experience_absorption", () -> BlockEntityType.Builder.of(TotemOfExperienceAbsorptionTileEntity::new, TOTEM_OF_EXPERIENCE_ABSORPTION.get()).build(null));
+    public static RegistryObject<BlockEntityType<TotemOfDisenchantTileEntity>> TOTEM_OF_DISENCHANT_TILE_ENTITY = TILE_ENTITIES.register("totem_of_disenchant", () -> BlockEntityType.Builder.of(TotemOfDisenchantTileEntity::new, TOTEM_OF_DISENCHANT.get()).build(null));
     public static RegistryObject<BlockEntityType<ArcaneIteratorTileEntity>> ARCANE_ITERATOR_TILE_ENTITY = TILE_ENTITIES.register("arcane_iterator", () -> BlockEntityType.Builder.of(ArcaneIteratorTileEntity::new, ARCANE_ITERATOR.get()).build(null));
 
     public static RegistryObject<BlockEntityType<FluidPipeTileEntity>> FLUID_PIPE_TILE_ENTITY = TILE_ENTITIES.register("fluid_pipe", () -> BlockEntityType.Builder.of(FluidPipeTileEntity::new, FLUID_PIPE.get()).build(null));
@@ -1005,6 +1006,14 @@ public class WizardsReborn {
                 BlockPos pos = data.readBlockPos();
                 Level world = inv.player.getCommandSenderWorld();
                 return new ItemSorterContainer(windowId, world, pos, inv, inv.player);
+            })));
+
+    public static final RegistryObject<MenuType<TotemOfDisenchantContainer>> TOTEM_OF_DISENCHANT_CONTAINER
+            = CONTAINERS.register("totem_of_disenchant",
+            () -> IForgeMenuType.create(((windowId, inv, data) -> {
+                BlockPos pos = data.readBlockPos();
+                Level world = inv.player.getCommandSenderWorld();
+                return new TotemOfDisenchantContainer(windowId, world, pos, inv, inv.player);
             })));
 
     public static final RegistryObject<MenuType<RunicPedestalContainer>> RUNIC_PEDESTAL_CONTAINER
@@ -1319,6 +1328,7 @@ public class WizardsReborn {
             MenuScreens.register(ALCHEMY_FURNACE_CONTAINER.get(), AlchemyFurnaceScreen::new);
             MenuScreens.register(ALCHEMY_MACHINE_CONTAINER.get(), AlchemyMachineScreen::new);
             MenuScreens.register(ITEM_SORTER_CONTAINER.get(), ItemSorterScreen::new);
+            MenuScreens.register(TOTEM_OF_DISENCHANT_CONTAINER.get(), TotemOfDisenchantScreen::new);
             MenuScreens.register(RUNIC_PEDESTAL_CONTAINER.get(), RunicPedestalScreen::new);
             MenuScreens.register(CRYSTAL_BAG_CONTAINER.get(), CrystalBagScreen::new);
             MenuScreens.register(ALCHEMY_BAG_CONTAINER.get(), AlchemyBagScreen::new);

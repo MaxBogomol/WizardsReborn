@@ -15,18 +15,22 @@ import mod.maxbogomol.wizards_reborn.utils.PacketUtils;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.RegistryAccess;
 import net.minecraft.nbt.CompoundTag;
+import net.minecraft.nbt.ListTag;
 import net.minecraft.network.Connection;
 import net.minecraft.network.protocol.game.ClientboundBlockEntityDataPacket;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.SimpleContainer;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.AnvilMenu;
+import net.minecraft.world.item.EnchantedBookItem;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.enchantment.Enchantment;
 import net.minecraft.world.item.enchantment.EnchantmentHelper;
+import net.minecraft.world.item.enchantment.EnchantmentInstance;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
@@ -161,13 +165,16 @@ public class ArcaneIteratorTileEntity extends BlockEntity implements TickableBlo
                         if (recipe.get().hasRecipeEnchantment()) {
                             Enchantment enchantment = recipe.get().getRecipeEnchantment();
                             if (canEnchant(stack, enchantment)) {
+                                enchant(stack, enchantment);
+                            }
+
+                            int bookEnchant = canEnchantBook(stack, enchantment);
+                            if (bookEnchant >= 0) {
                                 if (stack.getItem().equals(Items.BOOK)) {
                                     stack = new ItemStack(Items.ENCHANTED_BOOK);
-                                    enchant(stack, enchantment);
+                                    EnchantedBookItem.addEnchantment(stack, new EnchantmentInstance(enchantment, bookEnchant + 1));
                                 } else if (stack.getItem().equals(Items.ENCHANTED_BOOK)) {
-                                    enchant(stack, enchantment);
-                                } else {
-                                    enchant(stack, enchantment);
+                                    EnchantedBookItem.addEnchantment(stack, new EnchantmentInstance(enchantment, bookEnchant + 1));
                                 }
                             }
                         }
@@ -623,16 +630,20 @@ public class ArcaneIteratorTileEntity extends BlockEntity implements TickableBlo
                         if (recipe.get().hasRecipeEnchantment()) {
                             Enchantment enchantment = recipe.get().getRecipeEnchantment();
                             if (canEnchant(stack, enchantment)) {
-                                if (stack.getItem().equals(Items.BOOK)) {
-                                    canEnchant = true;
-                                    stack = new ItemStack(Items.ENCHANTED_BOOK);
-                                    enchant(stack, enchantment);
-                                } else if (stack.getItem().equals(Items.ENCHANTED_BOOK)) {
-                                    canEnchant = true;
-                                    enchant(stack, enchantment);
-                                } else {
-                                    canEnchant = true;
-                                    enchant(stack, enchantment);
+                                canEnchant = true;
+                                enchant(stack, enchantment);
+                            }
+                            if (stack.getItem().equals(Items.BOOK) || stack.getItem().equals(Items.ENCHANTED_BOOK)) {
+                                int bookEnchant = canEnchantBook(stack, enchantment);
+                                if (bookEnchant >= 0) {
+                                    if (stack.getItem().equals(Items.BOOK)) {
+                                        canEnchant = true;
+                                        stack = new ItemStack(Items.ENCHANTED_BOOK);
+                                        EnchantedBookItem.addEnchantment(stack, new EnchantmentInstance(enchantment, bookEnchant + 1));
+                                    } else if (stack.getItem().equals(Items.ENCHANTED_BOOK)) {
+                                        EnchantedBookItem.addEnchantment(stack, new EnchantmentInstance(enchantment, bookEnchant + 1));
+                                        canEnchant = true;
+                                    }
                                 }
                             }
                         }
@@ -660,9 +671,6 @@ public class ArcaneIteratorTileEntity extends BlockEntity implements TickableBlo
             repairCost++;
         }
         int xp = AnvilMenu.calculateIncreasedRepairCost(repairCost);
-        if (stack.getItem().equals(Items.BOOK) || stack.getItem().equals(Items.ENCHANTED_BOOK)) {
-            return enchantmentLevel + 1 <= enchantment.getMaxLevel() && xp <= 60;
-        }
         return (enchantment.canEnchant(stack) && enchantmentLevel + 1 <= enchantment.getMaxLevel() && xp <= 60);
     }
 
@@ -676,6 +684,29 @@ public class ArcaneIteratorTileEntity extends BlockEntity implements TickableBlo
             enchantments.put(enchantment, enchantmentLevel + 1);
             EnchantmentHelper.setEnchantments(enchantments, stack);
         }
+    }
+
+    public static int canEnchantBook(ItemStack stack, Enchantment enchantment) {
+        ListTag listtag = EnchantedBookItem.getEnchantments(stack);
+        boolean flag = true;
+        ResourceLocation resourcelocation = EnchantmentHelper.getEnchantmentId(enchantment);
+
+        for(int i = 0; i < listtag.size(); ++i) {
+            CompoundTag compoundtag = listtag.getCompound(i);
+            ResourceLocation resourcelocation1 = EnchantmentHelper.getEnchantmentId(compoundtag);
+            if (resourcelocation1 != null && resourcelocation1.equals(resourcelocation)) {
+                if (EnchantmentHelper.getEnchantmentLevel(compoundtag) + 1 <= enchantment.getMaxLevel()) {
+                    return EnchantmentHelper.getEnchantmentLevel(compoundtag);
+                }
+
+                flag = false;
+                break;
+            }
+        }
+
+        if (flag) return 0;
+
+        return -1;
     }
 
     public boolean canCraft(Optional<ArcaneIteratorRecipe> recipe) {

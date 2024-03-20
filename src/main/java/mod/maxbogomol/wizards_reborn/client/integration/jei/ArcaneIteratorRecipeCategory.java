@@ -19,8 +19,10 @@ import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.core.RegistryAccess;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.item.EnchantedBookItem;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
+import net.minecraft.world.item.enchantment.EnchantmentInstance;
 import net.minecraft.world.phys.Vec2;
 import org.jetbrains.annotations.NotNull;
 
@@ -75,7 +77,11 @@ public class ArcaneIteratorRecipeCategory implements IRecipeCategory<ArcaneItera
         }
 
         if (recipe.hasRecipeEnchantment()) {
-            bookResult.enchant(recipe.getRecipeEnchantment(), 1);
+            if (bookResult.getItem().equals(Items.ENCHANTED_BOOK)) {
+                EnchantedBookItem.addEnchantment(bookResult, new EnchantmentInstance(recipe.getRecipeEnchantment(), 1));
+            } else {
+                bookResult.enchant(recipe.getRecipeEnchantment(), 1);
+            }
         }
         if (recipe.hasRecipeArcaneEnchantment()) {
             ArcaneEnchantmentUtils.addItemArcaneEnchantment(bookResult, recipe.getRecipeArcaneEnchantment());

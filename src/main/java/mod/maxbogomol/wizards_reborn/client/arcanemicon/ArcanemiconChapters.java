@@ -1981,8 +1981,8 @@ public class ArcanemiconChapters {
                         new BlockEntry(RUNIC_PEDESTAL_ITEM, crystalRituals.get(WizardsReborn.ARTIFICIAL_FERTILITY_CRYSTAL_RITUAL))
                 ),
                 new ArcaneIteratorPage(crystalRituals.get(WizardsReborn.ARTIFICIAL_FERTILITY_CRYSTAL_RITUAL), 0, 0, new ItemStack(WizardsReborn.WISESTONE_PLATE.get()),
-                        new ItemStack(Items.WATER_BUCKET), new ItemStack(Items.HAY_BLOCK), new ItemStack(Items.HAY_BLOCK),
-                        new ItemStack(Items.BONE_MEAL), new ItemStack(Items.BONE_MEAL), new ItemStack(Items.BONE_MEAL)
+                        new ItemStack(WizardsReborn.FLOWER_FERTILIZER.get()), new ItemStack(WizardsReborn.FLOWER_FERTILIZER.get()), new ItemStack(WizardsReborn.FLOWER_FERTILIZER.get()),
+                        NATURAL_CALX_ITEM, NATURAL_CALX_ITEM, NATURAL_CALX_ITEM, new ItemStack(Items.HAY_BLOCK), new ItemStack(Items.WATER_BUCKET)
                 )
         );
 
@@ -1992,9 +1992,8 @@ public class ArcanemiconChapters {
                         new BlockEntry(RUNIC_PEDESTAL_ITEM, crystalRituals.get(WizardsReborn.RITUAL_BREEDING_CRYSTAL_RITUAL))
                 ),
                 new ArcaneIteratorPage(crystalRituals.get(WizardsReborn.RITUAL_BREEDING_CRYSTAL_RITUAL), 0, 0, new ItemStack(WizardsReborn.WISESTONE_PLATE.get()),
-                        new ItemStack(Items.DIRT), new ItemStack(Items.DIRT), new ItemStack(Items.DIRT), new ItemStack(Items.DIRT), new ItemStack(Items.DIRT),
-                        new ItemStack(Items.BREAD), new ItemStack(Items.BREAD), new ItemStack(Items.BREAD), new ItemStack(Items.BREAD),
-                        new ItemStack(Items.GOLDEN_CARROT), new ItemStack(Items.GOLDEN_CARROT), new ItemStack(Items.GOLDEN_CARROT), new ItemStack(Items.GOLDEN_CARROT)
+                        NATURAL_CALX_ITEM, SCORCHED_CALX_ITEM, SCORCHED_CALX_ITEM, SCORCHED_CALX_ITEM,
+                        new ItemStack(Items.DIRT), new ItemStack(Items.BREAD), new ItemStack(Items.GOLDEN_CARROT)
                 ),
                 new CrystalRitualPage(WizardsReborn.RITUAL_BREEDING_CRYSTAL_RITUAL,
                         new ItemStack(Items.GOLDEN_CARROT), new ItemStack(Items.APPLE), new ItemStack(Items.APPLE), new ItemStack(Items.APPLE)
@@ -2028,8 +2027,9 @@ public class ArcanemiconChapters {
                         new BlockEntry(RUNIC_PEDESTAL_ITEM, crystalRituals.get(WizardsReborn.CRYSTAL_GROWTH_ACCELERATION_CRYSTAL_RITUAL))
                 ),
                 new ArcaneIteratorPage(crystalRituals.get(WizardsReborn.CRYSTAL_GROWTH_ACCELERATION_CRYSTAL_RITUAL), 0, 0, new ItemStack(WizardsReborn.WISESTONE_PLATE.get()),
-                        new ItemStack(WizardsReborn.ARCANUM_BLOCK_ITEM.get()), new ItemStack(Items.REDSTONE_BLOCK), new ItemStack(Items.REDSTONE_BLOCK),
-                        new ItemStack(WizardsReborn.ALCHEMY_GLASS_ITEM.get()), new ItemStack(WizardsReborn.ALCHEMY_GLASS_ITEM.get()), new ItemStack(WizardsReborn.ALCHEMY_GLASS_ITEM.get()), new ItemStack(WizardsReborn.ALCHEMY_GLASS_ITEM.get())
+                        ARCANUM_LENS_ITEM, ARCANUM_LENS_ITEM, ARCANUM_LENS_ITEM, ARCANUM_LENS_ITEM,
+                        new ItemStack(Items.REDSTONE_BLOCK), new ItemStack(Items.REDSTONE_BLOCK),
+                        new ItemStack(WizardsReborn.ALCHEMY_GLASS_ITEM.get()), new ItemStack(WizardsReborn.ALCHEMY_GLASS_ITEM.get()), new ItemStack(WizardsReborn.ALCHEMY_GLASS_ITEM.get())
                 )
         );
 
@@ -2040,8 +2040,8 @@ public class ArcanemiconChapters {
                 ),
                 new ArcaneIteratorPage(crystalRituals.get(WizardsReborn.CRYSTAL_GROWTH_ACCELERATION_CRYSTAL_RITUAL), 0, 0, new ItemStack(WizardsReborn.WISESTONE_PLATE.get()),
                         new ItemStack(WizardsReborn.EARTH_CRYSTAL.get()),
-                        ARCANE_GOLD_INGOT_ITEM, ARCANE_GOLD_INGOT_ITEM, ARCANE_GOLD_INGOT_ITEM, ARCANE_GOLD_INGOT_ITEM,
-                        ARCANUM_ITEM, ARCANUM_ITEM, ARCANUM_ITEM, ARCANUM_ITEM
+                        ENCHANTED_CALX_ITEM, ENCHANTED_CALX_ITEM, ENCHANTED_CALX_ITEM,
+                        ARCANE_GOLD_INGOT_ITEM, ARCANE_GOLD_INGOT_ITEM, ARCANUM_LENS_ITEM, ARCANUM_LENS_ITEM
                 ),
                 new ArcaneIteratorPage(crystalRituals.get(WizardsReborn.CRYSTAL_GROWTH_ACCELERATION_CRYSTAL_RITUAL), 0, 0, new ItemStack(WizardsReborn.WISESTONE_PLATE.get()),
                         new ItemStack(WizardsReborn.WATER_CRYSTAL.get()),

@@ -198,6 +198,7 @@ public class WizardsRebornClient {
             BlockEntityRenderers.register(WizardsReborn.ARCANE_CENSER_TILE_ENTITY.get(), (trd) -> new ArcaneCenserTileEntityRenderer());
             BlockEntityRenderers.register(WizardsReborn.EXPERIENCE_TOTEM_TILE_ENTITY.get(), (trd) -> new ExperienceTotemTileEntityRenderer());
             BlockEntityRenderers.register(WizardsReborn.TOTEM_OF_EXPERIENCE_ABSORPTION_TILE_ENTITY.get(), (trd) -> new TotemOfExperienceAbsorptionTileEntityRenderer());
+            BlockEntityRenderers.register(WizardsReborn.TOTEM_OF_DISENCHANT_TILE_ENTITY.get(), (trd) -> new TotemOfDisenchantTileEntityRenderer());
             BlockEntityRenderers.register(WizardsReborn.ARCANE_ITERATOR_TILE_ENTITY.get(), (trd) -> new ArcaneIteratorTileEntityRenderer());
             BlockEntityRenderers.register(WizardsReborn.LIGHT_EMITTER_TILE_ENTITY.get(), (trd) -> new LightEmitterBlockTileEntityRenderer());
             BlockEntityRenderers.register(WizardsReborn.LIGHT_TRANSFER_LENS_TILE_ENTITY.get(), (trd) -> new LightTransferLensTileEntityRenderer());

@@ -5,17 +5,15 @@ import mod.maxbogomol.wizards_reborn.api.wissen.WissenItemType;
 import mod.maxbogomol.wizards_reborn.api.wissen.WissenItemUtils;
 import mod.maxbogomol.wizards_reborn.api.wissen.WissenUtils;
 import net.minecraft.sounds.SoundEvents;
-import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.level.Level;
 import top.theillusivec4.curios.api.SlotContext;
 import top.theillusivec4.curios.api.type.capability.ICurio;
 
 import javax.annotation.Nonnull;
 import java.util.List;
 
-public class WissenKeychainItem extends BaseCurioItem implements IWissenItem {
+public class WissenKeychainItem extends BaseWissenCurioItem {
 
     public WissenKeychainItem(Properties properties) {
         super(properties);
