@@ -32,7 +32,7 @@ public class WissenRingItem extends BaseWissenCurioItem {
 
     @Override
     public WissenItemType getWissenItemType() {
-        return WissenItemType.OFF;
+        return WissenItemType.NONE;
     }
 
     @Override

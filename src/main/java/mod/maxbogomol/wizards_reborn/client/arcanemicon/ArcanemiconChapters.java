@@ -46,7 +46,7 @@ public class ArcanemiconChapters {
             HEART_OF_NATURE, WATER_BREATHING, AIR_FLOW, FIRE_SHIELD, MAGIC_SPROUT,
             MONOGRAMS, RESEARCHES, RESEARCH, LUNAM_MONOGRAM, VITA_MONOGRAM, SOLEM_MONOGRAM, MORS_MONOGRAM, MIRACULUM_MONOGRAM, TEMPUS_MONOGRAM, STATERA_MONOGRAM, ECLIPSIS_MONOGRAM, SICCITAS_MONOGRAM, SOLSTITIUM_MONOGRAM, FAMES_MONOGRAM, RENAISSANCE_MONOGRAM, BELLUM_MONOGRAM, LUX_MONOGRAM, KARA_MONOGRAM, DEGRADATIO_MONOGRAM, PRAEDICTIONEM_MONOGRAM, EVOLUTIONIS_MONOGRAM, TENEBRIS_MONOGRAM, UNIVERSUM_MONOGRAM,
             LIGHT_RAYS, LIGHT_EMITTER, LIGHT_TRANSFER_LENS, RUNIC_PEDESTAL, CRYSTALS_RITUALS, ARTIFICIAL_FERTILITY, RITUAL_BREEDING, CRYSTAL_GROWTH_ACCELERATION, CRYSTAL_INFUSION, ARCANUM_SEED, INNOCENT_WOOD,
-            MOR, MORTAR, ARCANE_LINEN, MUSHROOM_CAPS, WISESTONE, WISESTONE_PEDESTAL, FLUID_PIPES, STEAM_PIPES, ORBITAL_FLUID_RETAINER, ALCHEMY_FURNACE, STEAM_THERMAL_STORAGE, ALCHEMY_MACHINE, ALCHEMY_OIL, MUSIC_DISC_ARCANUM, MUSIC_DISC_MOR, ALCHEMY_CALX, ALCHEMY_GLASS, ALCHEMY_BAG, ALCHEMY_POTIONS, TEA, ALCHEMY_BREWS, ADVANCED_CALX, ARCANE_CENSER, SMOKING_PIPE, ARCACITE, ARCACITE_POLISHING_MIXTURE;
+            MOR, MORTAR, ARCANE_LINEN, MUSHROOM_CAPS, WISESTONE, WISESTONE_PEDESTAL, FLUID_PIPES, STEAM_PIPES, ORBITAL_FLUID_RETAINER, ALCHEMY_FURNACE, STEAM_THERMAL_STORAGE, ALCHEMY_MACHINE, ALCHEMY_OIL, MUSIC_DISC_ARCANUM, MUSIC_DISC_MOR, ALCHEMY_CALX, ALCHEMY_GLASS, ALCHEMY_BAG, ALCHEMY_POTIONS, TEA, ALCHEMY_BREWS, ADVANCED_CALX, ALCHEMY_TRANSMUTATION, ARCANE_CENSER, SMOKING_PIPE, ARCACITE, ARCACITE_POLISHING_MIXTURE;
     public static ResearchPage RESEARCH_MAIN, RESEARCH_LIST;
 
     public static ItemStack EMPTY_ITEM, 
@@ -2916,6 +2916,27 @@ public class ArcanemiconChapters {
                 )
         );
 
+        ALCHEMY_TRANSMUTATION = new Chapter(
+                "wizards_reborn.arcanemicon.chapter.alchemy_transmutation",
+                new TitlePage("wizards_reborn.arcanemicon.page.alchemy_transmutation"),
+                new AlchemyMachinePage(new ItemStack(WizardsReborn.RAW_ARCANE_GOLD.get(), 2), FluidStack.EMPTY, true, true,
+                        new FluidStack(WizardsReborn.ALCHEMY_OIL_FLUID.get(), 100), new FluidStack(WizardsReborn.WISSEN_TEA_FLUID.get(), 200), FluidStack.EMPTY,
+                        new ItemStack(Items.RAW_GOLD), new ItemStack(Items.RAW_GOLD), ARCANUM_ITEM, ALCHEMY_CALX_ITEM, NATURAL_CALX_ITEM
+                ),
+                new AlchemyMachinePage(new ItemStack(Items.COAL, 2), FluidStack.EMPTY, true, true,
+                        new FluidStack(WizardsReborn.ALCHEMY_OIL_FLUID.get(), 50), FluidStack.EMPTY, FluidStack.EMPTY,
+                        new ItemStack(Items.CHARCOAL), new ItemStack(Items.CHARCOAL), new ItemStack(Items.COBBLESTONE), ALCHEMY_CALX_ITEM
+                ),
+                new AlchemyMachinePage(new ItemStack(Items.GLOWSTONE_DUST, 12), FluidStack.EMPTY, true, true,
+                        new FluidStack(WizardsReborn.ALCHEMY_OIL_FLUID.get(), 100), new FluidStack(WizardsReborn.HELLISH_MUSHROOM_BREW_FLUID.get(), 200), FluidStack.EMPTY,
+                        new ItemStack(Items.COAL), new ItemStack(Items.COAL), SCORCHED_CALX_ITEM, new ItemStack(Items.GOLD_NUGGET)
+                ),
+                new AlchemyMachinePage(new ItemStack(Items.LEATHER, 3), FluidStack.EMPTY, true, true,
+                        new FluidStack(WizardsReborn.ALCHEMY_OIL_FLUID.get(), 100), FluidStack.EMPTY, FluidStack.EMPTY,
+                        new ItemStack(Items.ROTTEN_FLESH), new ItemStack(Items.ROTTEN_FLESH), new ItemStack(Items.ROTTEN_FLESH), new ItemStack(Items.HONEYCOMB), ALCHEMY_CALX_ITEM, NATURAL_CALX_ITEM
+                )
+        );
+
         List<MobEffectInstance> noEffects = new ArrayList<>();
         List<MobEffectInstance> petalsEffects = new ArrayList<>();
         List<MobEffectInstance> coalEffects = new ArrayList<>();
@@ -3073,6 +3094,7 @@ public class ArcanemiconChapters {
                 new IndexPage(
                         new IndexEntry(ALCHEMY_BREWS, new ItemStack(WizardsReborn.MOR_BREW_BUCKET.get()), RegisterKnowledges.ALCHEMY_GLASS),
                         new IndexEntry(ADVANCED_CALX, NATURAL_CALX_ITEM, RegisterKnowledges.ALCHEMY_GLASS),
+                        new IndexEntry(ALCHEMY_TRANSMUTATION, new ItemStack(WizardsReborn.RAW_ARCANE_GOLD.get()), RegisterKnowledges.ALCHEMY_GLASS),
                         new IndexEntry(ARCANE_CENSER, new ItemStack(WizardsReborn.ARCANE_CENSER_ITEM.get()), RegisterKnowledges.ALCHEMY_GLASS),
                         new IndexEntry(SMOKING_PIPE, new ItemStack(WizardsReborn.ARCANE_WOOD_SMOKING_PIPE.get()), RegisterKnowledges.ARCANE_CENSER),
                         new IndexEntry(ARCACITE, ARCACITE_ITEM, RegisterKnowledges.ALCHEMY_OIL),

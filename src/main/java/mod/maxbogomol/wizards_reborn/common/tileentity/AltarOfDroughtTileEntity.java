@@ -4,6 +4,7 @@ import mod.maxbogomol.wizards_reborn.WizardsReborn;
 import mod.maxbogomol.wizards_reborn.api.crystalritual.CrystalRitual;
 import mod.maxbogomol.wizards_reborn.api.wissen.*;
 import mod.maxbogomol.wizards_reborn.client.particle.Particles;
+import mod.maxbogomol.wizards_reborn.common.config.Config;
 import mod.maxbogomol.wizards_reborn.common.network.PacketHandler;
 import mod.maxbogomol.wizards_reborn.common.network.WissenSendEffectPacket;
 import mod.maxbogomol.wizards_reborn.common.network.tileentity.AltarOfDroughtBreakEffectPacket;
@@ -90,7 +91,7 @@ public class AltarOfDroughtTileEntity extends ExposedTileSimpleInventory impleme
                     if (level.getBlockState(breakPos).is(WizardsReborn.ALTAR_OF_DROUGHT_TARGET_BLOCK_TAG) && !level.getBlockState(breakPos).getValue(BlockStateProperties.PERSISTENT)) {
                         PacketHandler.sendToTracking(level, getBlockPos(), new AltarOfDroughtBurstEffectPacket(getBlockPos()));
                         PacketHandler.sendToTracking(level, breakPos, new AltarOfDroughtBreakEffectPacket(breakPos));
-                        PacketHandler.sendToTracking(level, getBlockPos(), new WissenSendEffectPacket(getBlockPos().getX() + 0.5F, getBlockPos().getY() + 0.5F, getBlockPos().getZ() + 0.5F, breakPos.getX() + 0.5F, breakPos.getY() + 0.5F, breakPos.getZ() + 0.5F, 0.466f, 0.643f, 0.815f, 25));
+                        PacketHandler.sendToTracking(level, getBlockPos(), new WissenSendEffectPacket(getBlockPos().getX() + 0.5F, getBlockPos().getY() + 0.5F, getBlockPos().getZ() + 0.5F, breakPos.getX() + 0.5F, breakPos.getY() + 0.5F, breakPos.getZ() + 0.5F, Config.wissenColorR(), Config.wissenColorG(), Config.wissenColorB(), 25));
                         level.destroyBlock(breakPos, false);
                         addWissen(25);
                         ticks = 20 + random.nextInt(10);
@@ -111,7 +112,7 @@ public class AltarOfDroughtTileEntity extends ExposedTileSimpleInventory impleme
                     Particles.create(WizardsReborn.WISP_PARTICLE)
                             .addVelocity(((random.nextDouble() - 0.5D) / 30) * getStage(), ((random.nextDouble() - 0.5D) / 30) * getStage(), ((random.nextDouble() - 0.5D) / 30) * getStage())
                             .setAlpha(0.25f, 0).setScale(0.3f * getStage(), 0)
-                            .setColor(0.466f, 0.643f, 0.815f)
+                            .setColor(Config.wissenColorR(), Config.wissenColorG(), Config.wissenColorB())
                             .setLifetime(20)
                             .spawn(level, worldPosition.getX() + 0.5F, worldPosition.getY() + 0.625F, worldPosition.getZ() + 0.5F);
                 }
@@ -119,7 +120,7 @@ public class AltarOfDroughtTileEntity extends ExposedTileSimpleInventory impleme
                     Particles.create(WizardsReborn.SPARKLE_PARTICLE)
                             .addVelocity(((random.nextDouble() - 0.5D) / 30) * getStage(), ((random.nextDouble() - 0.5D) / 30) * getStage(), ((random.nextDouble() - 0.5D) / 30) * getStage())
                             .setAlpha(0.25f, 0).setScale(0.1f * getStage(), 0)
-                            .setColor(0.466f, 0.643f, 0.815f)
+                            .setColor(Config.wissenColorR(), Config.wissenColorG(), Config.wissenColorB())
                             .setLifetime(30)
                             .setSpin((0.5f * (float) ((random.nextDouble() - 0.5D) * 2)))
                             .spawn(level, worldPosition.getX() + 0.5F, worldPosition.getY() + 0.625F, worldPosition.getZ() + 0.5F);

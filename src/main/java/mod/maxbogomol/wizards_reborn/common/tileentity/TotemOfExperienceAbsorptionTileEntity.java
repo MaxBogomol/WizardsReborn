@@ -6,6 +6,7 @@ import mod.maxbogomol.wizards_reborn.api.wissen.IWissenTileEntity;
 import mod.maxbogomol.wizards_reborn.api.wissen.WissenUtils;
 import mod.maxbogomol.wizards_reborn.client.particle.ExperienceTotemBurst;
 import mod.maxbogomol.wizards_reborn.client.particle.Particles;
+import mod.maxbogomol.wizards_reborn.common.config.Config;
 import mod.maxbogomol.wizards_reborn.common.network.PacketHandler;
 import mod.maxbogomol.wizards_reborn.common.network.tileentity.ExperienceTotemBurstEffectPacket;
 import mod.maxbogomol.wizards_reborn.utils.PacketUtils;
@@ -110,7 +111,7 @@ public class TotemOfExperienceAbsorptionTileEntity extends BlockEntity implement
                     Particles.create(WizardsReborn.WISP_PARTICLE)
                             .addVelocity(((random.nextDouble() - 0.5D) / 30) * getStage(), ((random.nextDouble() - 0.5D) / 30) * getStage(), ((random.nextDouble() - 0.5D) / 30) * getStage())
                             .setAlpha(0.25f, 0).setScale(0.2f * getStage(), 0)
-                            .setColor(0.466f, 0.643f, 0.815f)
+                            .setColor(Config.wissenColorR(), Config.wissenColorG(), Config.wissenColorB())
                             .setLifetime(20)
                             .spawn(level, worldPosition.getX() + 0.5F, worldPosition.getY() + 0.5F, worldPosition.getZ() + 0.5F);
                 }
@@ -118,7 +119,7 @@ public class TotemOfExperienceAbsorptionTileEntity extends BlockEntity implement
                     Particles.create(WizardsReborn.SPARKLE_PARTICLE)
                             .addVelocity(((random.nextDouble() - 0.5D) / 30) * getStage(), ((random.nextDouble() - 0.5D) / 30) * getStage(), ((random.nextDouble() - 0.5D) / 30) * getStage())
                             .setAlpha(0.25f, 0).setScale(0.075f * getStage(), 0)
-                            .setColor(0.466f, 0.643f, 0.815f)
+                            .setColor(Config.wissenColorR(), Config.wissenColorG(), Config.wissenColorB())
                             .setLifetime(30)
                             .setSpin((0.5f * (float) ((random.nextDouble() - 0.5D) * 2)))
                             .spawn(level, worldPosition.getX() + 0.5F, worldPosition.getY() + 0.5F, worldPosition.getZ() + 0.5F);
@@ -143,7 +144,7 @@ public class TotemOfExperienceAbsorptionTileEntity extends BlockEntity implement
                     Particles.create(WizardsReborn.WISP_PARTICLE)
                             .addVelocity(((random.nextDouble() - 0.5D) / 30) * getStage(), (((random.nextDouble() - 0.5D) / 30) + 0.05f) * getStage(), ((random.nextDouble() - 0.5D) / 30) * getStage())
                             .setAlpha(0.25f, 0).setScale(0.2f * getStage(), 0)
-                            .setColor(0.466f, 0.643f, 0.815f, 0.784f, 1f, 0.560f)
+                            .setColor(Config.wissenColorR(), Config.wissenColorG(), Config.wissenColorB(), 0.784f, 1f, 0.560f)
                             .setLifetime(60)
                             .spawn(level, worldPosition.getX() + 0.5F, worldPosition.getY() + 0.5F, worldPosition.getZ() + 0.5F);
                 }

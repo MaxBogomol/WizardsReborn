@@ -2,6 +2,7 @@ package mod.maxbogomol.wizards_reborn.client.gui.screen;
 
 import com.mojang.blaze3d.systems.RenderSystem;
 import mod.maxbogomol.wizards_reborn.WizardsReborn;
+import mod.maxbogomol.wizards_reborn.client.config.ClientConfig;
 import mod.maxbogomol.wizards_reborn.client.gui.container.AlchemyFurnaceContainer;
 import mod.maxbogomol.wizards_reborn.common.tileentity.AlchemyFurnaceTileEntity;
 import mod.maxbogomol.wizards_reborn.utils.ColorUtils;
@@ -71,15 +72,27 @@ public class AlchemyFurnaceScreen extends AbstractContainerScreen<AlchemyFurnace
             }
 
             if (x >= i + 19 && y >= j + 28 && x <= i + 19 + 8 && y <= j + 28 + 32) {
-                gui.renderTooltip(Minecraft.getInstance().font, NumericalUtils.getFluidName(furnace.getTank().getFluid(), 10000), x, y);
+                Component component = NumericalUtils.getFluidName(furnace.getTank().getFluid(), 10000);
+                if (!ClientConfig.NUMERICAL_FLUID.get()) {
+                    component = NumericalUtils.getFluidName(furnace.getTank().getFluid());
+                }
+                gui.renderTooltip(Minecraft.getInstance().font, component, x, y);
             }
 
             if (x >= i + 19 + 15 && y >= j + 28 && x <= i + 19 + 15 + 8 && y <= j + 28 + 32) {
-                gui.renderTooltip(Minecraft.getInstance().font, NumericalUtils.getHeatName(furnace.getHeat(), furnace.getMaxSteam()), x, y);
+                Component component = NumericalUtils.getHeatName(furnace.getHeat(), furnace.getMaxSteam());
+                if (!ClientConfig.NUMERICAL_HEAT.get()) {
+                    component = NumericalUtils.getHeatName();
+                }
+                gui.renderTooltip(Minecraft.getInstance().font, component, x, y);
             }
 
             if (x >= i + 19 + 30 && y >= j + 28 && x <= i + 19 + 30 + 8 && y <= j + 28 + 32) {
-                gui.renderTooltip(Minecraft.getInstance().font, NumericalUtils.getSteamName(furnace.getSteam(), furnace.getMaxSteam()), x, y);
+                Component component = NumericalUtils.getSteamName(furnace.getSteam(), furnace.getMaxSteam());
+                if (!ClientConfig.NUMERICAL_STEAM.get()) {
+                    component = NumericalUtils.getSteamName();
+                }
+                gui.renderTooltip(Minecraft.getInstance().font, component, x, y);
             }
 
             List<ItemStack> items = furnace.getItemsResult();

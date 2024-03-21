@@ -5,6 +5,7 @@ import com.mojang.math.Axis;
 import mod.maxbogomol.wizards_reborn.client.event.ClientTickHandler;
 import mod.maxbogomol.wizards_reborn.client.render.WorldRenderHandler;
 import mod.maxbogomol.wizards_reborn.common.block.ArcanumGrowthBlock;
+import mod.maxbogomol.wizards_reborn.common.config.Config;
 import mod.maxbogomol.wizards_reborn.common.tileentity.ArcanumGrowthTileEntity;
 import mod.maxbogomol.wizards_reborn.utils.RenderUtils;
 import net.minecraft.client.renderer.MultiBufferSource;
@@ -29,7 +30,7 @@ public class ArcanumGrowthTileEntityRenderer implements BlockEntityRenderer<Arca
 
         if (crystal.getLight() > 0) {
             if (crystal.getLevel().getBlockState(crystal.getBlockPos()).getBlock() instanceof ArcanumGrowthBlock growth) {
-                Color color = new Color(0.466f, 0.643f, 0.815f);
+                Color color = new Color(Config.wissenColorR(), Config.wissenColorG(), Config.wissenColorB());
                 float r = color.getRed() / 255f;
                 float g = color.getGreen() / 255f;
                 float b = color.getBlue() / 255f;

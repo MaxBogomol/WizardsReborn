@@ -1,0 +1,49 @@
+{
+  "type": "forge:conditional",
+  "recipes": [
+    {
+      "conditions": [
+        {
+          "type": "forge:mod_loaded",
+          "modid": "create"
+        }
+      ],
+      "recipe": {
+        "type": "wizards_reborn:alchemy_machine",
+        "outputItem": {
+          "item": "wizards_reborn:crushed_raw_arcane_gold",
+          "count": 2
+        },
+        "wissen": 300,
+        "steam": 200,
+        "ingredients": [
+          {
+            "item": "create:crushed_raw_gold"
+          },
+          {
+            "item": "create:crushed_raw_gold"
+          },
+          {
+            "item": "wizards_reborn:arcanum"
+          },
+          {
+            "item": "wizards_reborn:alchemy_calx"
+          },
+          {
+            "item": "wizards_reborn:natural_calx"
+          }
+        ],
+        "fluidIngredients": [
+          {
+            "name": "wizards_reborn:alchemy_oil",
+            "amount" : 100
+          },
+          {
+            "name": "wizards_reborn:wissen_tea",
+            "amount" : 200
+          }
+        ]
+      }
+    }
+  ]
+}

@@ -3,6 +3,7 @@ package mod.maxbogomol.wizards_reborn.common.tileentity;
 import mod.maxbogomol.wizards_reborn.WizardsReborn;
 import mod.maxbogomol.wizards_reborn.api.wissen.*;
 import mod.maxbogomol.wizards_reborn.client.particle.Particles;
+import mod.maxbogomol.wizards_reborn.common.config.Config;
 import mod.maxbogomol.wizards_reborn.common.network.PacketHandler;
 import mod.maxbogomol.wizards_reborn.common.network.tileentity.WissenAltarBurstEffectPacket;
 import mod.maxbogomol.wizards_reborn.common.network.tileentity.WissenAltarSendEffectPacket;
@@ -122,7 +123,7 @@ public class WissenAltarTileEntity extends ExposedTileSimpleInventory implements
                     Particles.create(WizardsReborn.WISP_PARTICLE)
                             .addVelocity(((random.nextDouble() - 0.5D) / 30) * getStage(), ((random.nextDouble() - 0.5D) / 30) * getStage(), ((random.nextDouble() - 0.5D) / 30) * getStage())
                             .setAlpha(0.25f, 0).setScale(0.3f * getStage(), 0)
-                            .setColor(0.466f, 0.643f, 0.815f)
+                            .setColor(Config.wissenColorR(), Config.wissenColorG(), Config.wissenColorB())
                             .setLifetime(20)
                             .spawn(level, worldPosition.getX() + 0.5F, worldPosition.getY() + 1.3125F, worldPosition.getZ() + 0.5F);
                 }
@@ -130,7 +131,7 @@ public class WissenAltarTileEntity extends ExposedTileSimpleInventory implements
                     Particles.create(WizardsReborn.SPARKLE_PARTICLE)
                             .addVelocity(((random.nextDouble() - 0.5D) / 30) * getStage(), ((random.nextDouble() - 0.5D) / 30) * getStage(), ((random.nextDouble() - 0.5D) / 30) * getStage())
                             .setAlpha(0.25f, 0).setScale(0.1f * getStage(), 0)
-                            .setColor(0.466f, 0.643f, 0.815f)
+                            .setColor(Config.wissenColorR(), Config.wissenColorG(), Config.wissenColorB())
                             .setLifetime(30)
                             .setSpin((0.5f * (float) ((random.nextDouble() - 0.5D) * 2)))
                             .spawn(level, worldPosition.getX() + 0.5F, worldPosition.getY() + 1.3125F, worldPosition.getZ() + 0.5F);
@@ -142,7 +143,7 @@ public class WissenAltarTileEntity extends ExposedTileSimpleInventory implements
                     Particles.create(WizardsReborn.SPARKLE_PARTICLE)
                             .addVelocity(((random.nextDouble() - 0.5D) / 20), ((random.nextDouble() - 0.5D) / 20), ((random.nextDouble() - 0.5D) / 20))
                             .setAlpha(0.25f, 0).setScale(0.1f * getStage(), 0)
-                            .setColor(0.466f, 0.643f, 0.815f)
+                            .setColor(Config.wissenColorR(), Config.wissenColorG(), Config.wissenColorB())
                             .setLifetime(30)
                             .setSpin((0.5f * (float) ((random.nextDouble() - 0.5D) * 2)))
                             .spawn(level, worldPosition.getX() + 0.5F, worldPosition.getY() + 1.3125F, worldPosition.getZ() + 0.5F);

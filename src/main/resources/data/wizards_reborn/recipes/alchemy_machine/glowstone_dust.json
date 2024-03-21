@@ -1,0 +1,32 @@
+{
+  "type": "wizards_reborn:alchemy_machine",
+  "outputItem": {
+    "item": "minecraft:glowstone_dust",
+    "count": 12
+  },
+  "steam": 250,
+  "ingredients": [
+    {
+      "item": "minecraft:coal"
+    },
+    {
+      "item": "minecraft:coal"
+    },
+    {
+      "item": "wizards_reborn:scorched_calx"
+    },
+    {
+      "item": "minecraft:gold_nugget"
+    }
+  ],
+  "fluidIngredients": [
+    {
+      "name": "wizards_reborn:alchemy_oil",
+      "amount" : 100
+    },
+    {
+      "name": "wizards_reborn:hellish_mushroom_brew",
+      "amount" : 200
+    }
+  ]
+}

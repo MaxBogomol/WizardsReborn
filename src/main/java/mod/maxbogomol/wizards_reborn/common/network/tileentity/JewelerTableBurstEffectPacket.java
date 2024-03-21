@@ -2,6 +2,7 @@ package mod.maxbogomol.wizards_reborn.common.network.tileentity;
 
 import mod.maxbogomol.wizards_reborn.WizardsReborn;
 import mod.maxbogomol.wizards_reborn.client.particle.Particles;
+import mod.maxbogomol.wizards_reborn.common.config.Config;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.world.level.Level;
@@ -101,13 +102,13 @@ public class JewelerTableBurstEffectPacket {
                         Particles.create(WizardsReborn.WISP_PARTICLE)
                                 .addVelocity(((random.nextDouble() - 0.5D) / 20), ((random.nextDouble() - 0.5D) / 20), ((random.nextDouble() - 0.5D) / 20))
                                 .setAlpha(0.125f, 0).setScale(0.25f, 0)
-                                .setColor(0.466f, 0.643f, 0.815f, 0.466f, 0.643f, 0.815f)
+                                .setColor(Config.wissenColorR(), Config.wissenColorG(), Config.wissenColorB())
                                 .setLifetime(20)
                                 .spawn(world, msg.X, msg.Y, msg.Z);
                         Particles.create(WizardsReborn.SPARKLE_PARTICLE)
                                 .addVelocity(((random.nextDouble() - 0.5D) / 20), ((random.nextDouble() - 0.5D) / 20), ((random.nextDouble() - 0.5D) / 20))
                                 .setAlpha(0.25f, 0).setScale(0.1f, 0)
-                                .setColor(0.466f, 0.643f, 0.815f, 0.466f, 0.643f, 0.815f)
+                                .setColor(Config.wissenColorR(), Config.wissenColorG(), Config.wissenColorB())
                                 .setLifetime(30)
                                 .setSpin((0.5f * (float) ((random.nextDouble() - 0.5D) * 2)))
                                 .spawn(world, msg.pos.getX() + msg.X, msg.pos.getY() + msg.Y + 0.1875F, msg.pos.getZ() + msg.Z);

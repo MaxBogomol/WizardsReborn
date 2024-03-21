@@ -17,7 +17,7 @@ public class ClientEvents {
     @SubscribeEvent
     public void openMainMenu(ScreenEvent.Opening event) {
         if (event.getScreen() instanceof TitleScreen titleScreen) {
-            if (ClientConfig.PANORAMA_TEST.get()) {
+            if (ClientConfig.CUSTOM_PANORAMA.get()) {
                 boolean setPanorama = false;
                 if (WizardsRebornClient.firstScreen) {
                     setPanorama = true;

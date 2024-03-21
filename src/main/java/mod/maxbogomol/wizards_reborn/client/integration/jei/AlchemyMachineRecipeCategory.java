@@ -17,6 +17,7 @@ import mod.maxbogomol.wizards_reborn.api.alchemy.AlchemyPotionUtils;
 import mod.maxbogomol.wizards_reborn.common.item.equipment.AlchemyPotionItem;
 import mod.maxbogomol.wizards_reborn.common.recipe.AlchemyMachineRecipe;
 import mod.maxbogomol.wizards_reborn.common.recipe.FluidIngredient;
+import mod.maxbogomol.wizards_reborn.utils.NumericalUtils;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Font;
 import net.minecraft.client.gui.GuiGraphics;
@@ -123,6 +124,9 @@ public class AlchemyMachineRecipeCategory implements IRecipeCategory<AlchemyMach
             int stringWidth = font_renderer.width(text_wissen);
 
             gui.drawString(Minecraft.getInstance().font, text_wissen, 122 - (stringWidth / 2), 95, 0xffffff);
+            if (mouseX >= 116 && mouseY >= 68 && mouseX <= 116 + 16 && mouseY <= 68 + 16) {
+                gui.renderTooltip(Minecraft.getInstance().font, NumericalUtils.getWissenName(), (int) mouseX, (int) mouseY);
+            }
         } else {
             gui.blit(TEXTURE, 116, 68, 176, 8, 16, 16, 256, 256);
         }
@@ -132,6 +136,9 @@ public class AlchemyMachineRecipeCategory implements IRecipeCategory<AlchemyMach
             int stringWidth = font_renderer.width(text_steam);
 
             gui.drawString(Minecraft.getInstance().font, text_steam, 122 - (stringWidth / 2), 15, 0xffffff);
+            if (mouseX >= 116 && mouseY >= 28 && mouseX <= 116 + 16 && mouseY <= 28 + 16) {
+                gui.renderTooltip(Minecraft.getInstance().font, NumericalUtils.getSteamName(), (int) mouseX, (int) mouseY);
+            }
         } else {
             gui.blit(TEXTURE, 116, 28, 176, 8, 16, 16, 256, 256);
         }

@@ -2,6 +2,7 @@ package mod.maxbogomol.wizards_reborn.common.item;
 
 import mod.maxbogomol.wizards_reborn.api.alchemy.ISteamItem;
 import mod.maxbogomol.wizards_reborn.api.alchemy.ISteamTileEntity;
+import mod.maxbogomol.wizards_reborn.client.config.ClientConfig;
 import mod.maxbogomol.wizards_reborn.utils.NumericalUtils;
 import net.minecraft.ChatFormatting;
 import net.minecraft.core.BlockPos;
@@ -54,9 +55,11 @@ public class SteamStorageBaseItem extends BlockItem implements ISteamItem {
     @OnlyIn(Dist.CLIENT)
     @Override
     public void appendHoverText(ItemStack stack, Level world, List<Component> list, TooltipFlag flags) {
-        CompoundTag nbt = stack.getTag();
-        if (nbt != null && nbt.contains("steam")) {
-            list.add(NumericalUtils.getSteamName(nbt.getInt("steam"), getMaxSteam()).copy().withStyle(ChatFormatting.GRAY));
+        if (ClientConfig.NUMERICAL_STEAM.get()) {
+            CompoundTag nbt = stack.getTag();
+            if (nbt != null && nbt.contains("steam")) {
+                list.add(NumericalUtils.getSteamName(nbt.getInt("steam"), getMaxSteam()).copy().withStyle(ChatFormatting.GRAY));
+            }
         }
     }
 }

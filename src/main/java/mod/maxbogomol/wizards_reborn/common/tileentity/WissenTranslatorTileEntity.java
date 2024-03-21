@@ -7,6 +7,7 @@ import mod.maxbogomol.wizards_reborn.api.wissen.IWissenWandControlledTileEntity;
 import mod.maxbogomol.wizards_reborn.api.wissen.WissenUtils;
 import mod.maxbogomol.wizards_reborn.client.particle.Particles;
 import mod.maxbogomol.wizards_reborn.common.block.ArcaneLumosBlock;
+import mod.maxbogomol.wizards_reborn.common.config.Config;
 import mod.maxbogomol.wizards_reborn.common.item.equipment.WissenWandItem;
 import mod.maxbogomol.wizards_reborn.common.network.PacketHandler;
 import mod.maxbogomol.wizards_reborn.common.network.WissenSendEffectPacket;
@@ -469,7 +470,7 @@ public class WissenTranslatorTileEntity extends ExposedTileSimpleInventory imple
     }
 
     public Color getColor() {
-        Color color = new Color(0.466f, 0.643f, 0.815f);
+        Color color = new Color(Config.wissenColorR(), Config.wissenColorG(), Config.wissenColorB());
 
         if (!getItemHandler().getItem(0).isEmpty()) {
             if (getItemHandler().getItem(0).getItem() instanceof BlockItem) {

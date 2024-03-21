@@ -46,7 +46,7 @@ public class WizardsRebornMenuButton extends Button {
         if (Minecraft.getInstance().screen instanceof TitleScreen titleScreen) {
             float spin = titleScreen.panorama.spin;
             float bob = titleScreen.panorama.bob;
-            if (!ClientConfig.PANORAMA_TEST.get()) {
+            if (!ClientConfig.CUSTOM_PANORAMA.get()) {
                 ResourceLocation base = new ResourceLocation(WizardsReborn.MOD_ID, "textures/gui/title/background/panorama");
                 TitleScreen.CUBE_MAP = new CubeMap(base);
                 titleScreen.panorama = new PanoramaRenderer(TitleScreen.CUBE_MAP);
@@ -59,13 +59,13 @@ public class WizardsRebornMenuButton extends Button {
             }
             titleScreen.panorama.spin = spin;
             titleScreen.panorama.bob = bob;
-            setPanorama(!ClientConfig.PANORAMA_TEST.get());
+            setPanorama(!ClientConfig.CUSTOM_PANORAMA.get());
         }
     }
 
     public static void setPanorama(boolean panorama) {
         UnmodifiableConfig values = ClientConfig.SPEC.getValues();
-        ForgeConfigSpec.ConfigValue<Object> configValue = values.get(ClientConfig.PANORAMA_TEST.getPath());
+        ForgeConfigSpec.ConfigValue<Object> configValue = values.get(ClientConfig.CUSTOM_PANORAMA.getPath());
         configValue.set(panorama);
     }
 

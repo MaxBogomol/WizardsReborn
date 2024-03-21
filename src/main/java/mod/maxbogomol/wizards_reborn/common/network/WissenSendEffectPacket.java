@@ -1,8 +1,10 @@
 package mod.maxbogomol.wizards_reborn.common.network;
 
 import mod.maxbogomol.wizards_reborn.WizardsReborn;
+import mod.maxbogomol.wizards_reborn.client.config.ClientConfig;
 import mod.maxbogomol.wizards_reborn.client.event.ClientTickHandler;
 import mod.maxbogomol.wizards_reborn.client.particle.Particles;
+import mod.maxbogomol.wizards_reborn.common.config.Config;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.world.level.Level;
 import net.minecraftforge.network.NetworkEvent;
@@ -49,9 +51,9 @@ public class WissenSendEffectPacket {
         this.posToY = posToY;
         this.posToZ = posToZ;
 
-        this.colorR = 0.466f;
-        this.colorG = 0.643f;
-        this.colorB = 0.815f;
+        this.colorR = Config.wissenColorR();
+        this.colorG = Config.wissenColorG();
+        this.colorB = Config.wissenColorB();
         this.particlePerBlock = 4;
     }
 
@@ -79,9 +81,9 @@ public class WissenSendEffectPacket {
         this.posToY = posToY;
         this.posToZ = posToZ;
 
-        this.colorR = 0.466f;
-        this.colorG = 0.643f;
-        this.colorB = 0.815f;
+        this.colorR = Config.wissenColorR();
+        this.colorG = Config.wissenColorG();
+        this.colorB = Config.wissenColorB();
         this.particlePerBlock = particlePerBlock;
     }
 
@@ -125,14 +127,14 @@ public class WissenSendEffectPacket {
 
                     ClientTickHandler.wissenCount++;
 
-                    if (ClientTickHandler.wissenCount > 200) {
-                        ClientTickHandler.wissenCount = 200;
+                    if (ClientTickHandler.wissenCount > ClientConfig.WISSEN_RAYS_LIMIT.get()) {
+                        ClientTickHandler.wissenCount = ClientConfig.WISSEN_RAYS_LIMIT.get();
                     }
 
                     int wissenCount = ClientTickHandler.wissenCountOld;
 
                     for (int i = 0; i < particlePerBlock; i++) {
-                        if (random.nextFloat() < (0.45f * (1f - (wissenCount / 200f))) + 0.05f) {
+                        if (random.nextFloat() < (0.45f * (1f - ((float) wissenCount / ClientConfig.WISSEN_RAYS_LIMIT.get()))) + 0.05f) {
                             Particles.create(WizardsReborn.WISP_PARTICLE)
                                     .addVelocity(((random.nextDouble() - 0.5D) / 50), ((random.nextDouble() - 0.5D) / 50), ((random.nextDouble() - 0.5D) / 50))
                                     .setAlpha(0.3f, 0).setScale(0.15f, 0)

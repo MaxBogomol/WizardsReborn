@@ -307,8 +307,10 @@ public class ArcaneWandItem extends Item implements IWissenItem, ICustomAnimatio
     @OnlyIn(Dist.CLIENT)
     @Override
     public void appendHoverText(ItemStack stack, Level world, List<Component> list, TooltipFlag flags) {
-        WissenItemUtils.existWissen(stack);
-        list.add(NumericalUtils.getWissenName(WissenItemUtils.getWissen(stack), getMaxWissen()).copy().withStyle(ChatFormatting.GRAY));
+        if (ClientConfig.NUMERICAL_WISSEN.get()) {
+            WissenItemUtils.existWissen(stack);
+            list.add(NumericalUtils.getWissenName(WissenItemUtils.getWissen(stack), getMaxWissen()).copy().withStyle(ChatFormatting.GRAY));
+        }
 
         list.add(Component.empty());
         list.add(Component.translatable("lore.wizards_reborn.arcane_wand.crystal").withStyle(ChatFormatting.GRAY));

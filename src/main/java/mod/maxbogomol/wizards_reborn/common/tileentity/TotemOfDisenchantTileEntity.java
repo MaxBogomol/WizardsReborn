@@ -8,6 +8,7 @@ import mod.maxbogomol.wizards_reborn.api.wissen.ICooldownTileEntity;
 import mod.maxbogomol.wizards_reborn.api.wissen.IWissenTileEntity;
 import mod.maxbogomol.wizards_reborn.client.event.ClientTickHandler;
 import mod.maxbogomol.wizards_reborn.client.particle.Particles;
+import mod.maxbogomol.wizards_reborn.common.config.Config;
 import mod.maxbogomol.wizards_reborn.common.network.PacketHandler;
 import mod.maxbogomol.wizards_reborn.common.network.tileentity.TotemOfDisenchantBurstEffectPacket;
 import mod.maxbogomol.wizards_reborn.utils.PacketUtils;
@@ -163,7 +164,7 @@ public class TotemOfDisenchantTileEntity extends BlockEntity implements Tickable
                     Particles.create(WizardsReborn.WISP_PARTICLE)
                             .addVelocity(((random.nextDouble() - 0.5D) / 30) * getStage(), ((random.nextDouble() - 0.5D) / 30) * getStage(), ((random.nextDouble() - 0.5D) / 30) * getStage())
                             .setAlpha(0.25f, 0).setScale(0.2f * getStage(), 0)
-                            .setColor(0.466f, 0.643f, 0.815f)
+                            .setColor(Config.wissenColorR(), Config.wissenColorG(), Config.wissenColorB())
                             .setLifetime(20)
                             .spawn(level, worldPosition.getX() + 0.5F, worldPosition.getY() + 0.5F, worldPosition.getZ() + 0.5F);
                 }
@@ -171,7 +172,7 @@ public class TotemOfDisenchantTileEntity extends BlockEntity implements Tickable
                     Particles.create(WizardsReborn.SPARKLE_PARTICLE)
                             .addVelocity(((random.nextDouble() - 0.5D) / 30) * getStage(), ((random.nextDouble() - 0.5D) / 30) * getStage(), ((random.nextDouble() - 0.5D) / 30) * getStage())
                             .setAlpha(0.25f, 0).setScale(0.075f * getStage(), 0)
-                            .setColor(0.466f, 0.643f, 0.815f)
+                            .setColor(Config.wissenColorR(), Config.wissenColorG(), Config.wissenColorB())
                             .setLifetime(30)
                             .setSpin((0.5f * (float) ((random.nextDouble() - 0.5D) * 2)))
                             .spawn(level, worldPosition.getX() + 0.5F, worldPosition.getY() + 0.5F, worldPosition.getZ() + 0.5F);
@@ -196,9 +197,9 @@ public class TotemOfDisenchantTileEntity extends BlockEntity implements Tickable
                         float b = 0.560f;
 
                         if (i == 1) {
-                            r = 0.466f;
-                            g = 0.643f;
-                            b = 0.815f;
+                            r = Config.wissenColorR();
+                            g = Config.wissenColorG();
+                            b = Config.wissenColorB();
                         }
 
                         Particles.create(WizardsReborn.SPARKLE_PARTICLE)

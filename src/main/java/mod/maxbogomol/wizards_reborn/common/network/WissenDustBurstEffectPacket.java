@@ -2,6 +2,7 @@ package mod.maxbogomol.wizards_reborn.common.network;
 
 import mod.maxbogomol.wizards_reborn.WizardsReborn;
 import mod.maxbogomol.wizards_reborn.client.particle.Particles;
+import mod.maxbogomol.wizards_reborn.common.config.Config;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.world.level.Level;
@@ -62,13 +63,13 @@ public class WissenDustBurstEffectPacket {
                         Particles.create(WizardsReborn.WISP_PARTICLE)
                                 .addVelocity(msg.velX + ((random.nextDouble() - 0.5D) / 30), msg.velY + ((random.nextDouble() - 0.5D) / 30), msg.velZ + ((random.nextDouble() - 0.5D) / 30))
                                 .setAlpha(0.125f, 0).setScale(0.2f, 0)
-                                .setColor(0.466f, 0.643f, 0.815f, 0.466f, 0.643f, 0.815f)
+                                .setColor(Config.wissenColorR(), Config.wissenColorG(), Config.wissenColorB())
                                 .setLifetime(20)
                                 .spawn(world, msg.posX + ((random.nextDouble() - 0.5D) / 3), msg.posY + ((random.nextDouble() - 0.5D) / 3), msg.posZ + ((random.nextDouble() - 0.5D) / 3));
                         Particles.create(WizardsReborn.SPARKLE_PARTICLE)
                                 .addVelocity(msg.velX + ((random.nextDouble() - 0.5D) / 30), msg.velY + ((random.nextDouble() - 0.5D) / 30), msg.velZ + ((random.nextDouble() - 0.5D) / 30))
                                 .setAlpha(0.125f, 0).setScale(0.2f, 0)
-                                .setColor(0.466f, 0.643f, 0.815f, 0.466f, 0.643f, 0.815f)
+                                .setColor(Config.wissenColorR(), Config.wissenColorG(), Config.wissenColorB())
                                 .setLifetime(20)
                                 .setSpin((0.5f * (float) ((random.nextDouble() - 0.5D) * 2)))
                                 .spawn(world, msg.posX + ((random.nextDouble() - 0.5D) / 3), msg.posY + ((random.nextDouble() - 0.5D) / 3), msg.posZ + ((random.nextDouble() - 0.5D) / 3));
@@ -78,7 +79,7 @@ public class WissenDustBurstEffectPacket {
                         Particles.create(WizardsReborn.SPARKLE_PARTICLE)
                                 .addVelocity(((random.nextDouble() - 0.5D) / 30), ((random.nextDouble() - 0.5D) / 30), ((random.nextDouble() - 0.5D) / 30))
                                 .setAlpha(0.25f, 0).setScale(0.3f, 0)
-                                .setColor(0.466f, 0.643f, 0.815f, 0.466f, 0.643f, 0.815f)
+                                .setColor(Config.wissenColorR(), Config.wissenColorG(), Config.wissenColorB())
                                 .setLifetime(30)
                                 .setSpin((0.5f * (float) ((random.nextDouble() - 0.5D) * 2)))
                                 .spawn(world, msg.pos.getX() + 0.5F + ((random.nextDouble() - 0.5D) * 1.25), msg.pos.getY() + 0.5F + ((random.nextDouble() - 0.5D) * 1.25), msg.pos.getZ() + 0.5F + ((random.nextDouble() - 0.5D) * 1.25));

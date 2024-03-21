@@ -45,6 +45,7 @@ public class ArcaneWoodTrunkPlacer extends TrunkPlacer {
         int lastBranch = 0;
         double branchChance = 0.85;
 
+        System.out.println(foliageHeight);
         for (int i = 0; i < foliageHeight; ++i) {
             if (i == foliageHeight - 2) {
                 branchChance = 0.25;
@@ -61,7 +62,8 @@ public class ArcaneWoodTrunkPlacer extends TrunkPlacer {
                 placeLog(world, consumer, random, blockpos1, baseTreeFeatureConfig);
             }
 
-            if ((i > 1 && i > lastBranch) || (i == foliageHeight - 2)) {
+            if (((i > 1 && i > lastBranch) || (i == foliageHeight - 3)) && (i <= foliageHeight - 2)) {
+                System.out.println(i);
                 if (northB) {
                     addBranch(world, pos, i, Direction.NORTH, random, baseTreeFeatureConfig, consumer);
                     lastBranch = i;

@@ -3,6 +3,7 @@ package mod.maxbogomol.wizards_reborn.common.network.tileentity;
 import mod.maxbogomol.wizards_reborn.WizardsReborn;
 import mod.maxbogomol.wizards_reborn.client.event.ClientTickHandler;
 import mod.maxbogomol.wizards_reborn.client.particle.Particles;
+import mod.maxbogomol.wizards_reborn.common.config.Config;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.world.level.Level;
 import net.minecraftforge.network.NetworkEvent;
@@ -34,9 +35,9 @@ public class WissenTranslatorBurstEffectPacket {
         this.posY = posY;
         this.posZ = posZ;
 
-        this.colorR = 0.466f;
-        this.colorG = 0.643f;
-        this.colorB = 0.815f;
+        this.colorR = Config.wissenColorR();
+        this.colorG = Config.wissenColorG();
+        this.colorB = Config.wissenColorB();
     }
 
     public static WissenTranslatorBurstEffectPacket decode(FriendlyByteBuf buf) {

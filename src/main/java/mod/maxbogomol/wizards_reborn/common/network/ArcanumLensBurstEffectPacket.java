@@ -2,6 +2,7 @@ package mod.maxbogomol.wizards_reborn.common.network;
 
 import mod.maxbogomol.wizards_reborn.WizardsReborn;
 import mod.maxbogomol.wizards_reborn.client.particle.Particles;
+import mod.maxbogomol.wizards_reborn.common.config.Config;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.world.level.Level;
 import net.minecraftforge.network.NetworkEvent;
@@ -43,13 +44,13 @@ public class ArcanumLensBurstEffectPacket {
                         Particles.create(WizardsReborn.WISP_PARTICLE)
                                 .addVelocity(((random.nextDouble() - 0.5D) / 10), ((random.nextDouble() - 0.5D) / 10) + 0.01f, ((random.nextDouble() - 0.5D) / 10))
                                 .setAlpha(0.125f, 0).setScale(0.2f, 0)
-                                .setColor(0.466f, 0.643f, 0.815f, 0.466f, 0.643f, 0.815f)
+                                .setColor(Config.wissenColorR(), Config.wissenColorG(), Config.wissenColorB())
                                 .setLifetime(20)
                                 .spawn(world, msg.posX + ((random.nextDouble() - 0.5D) / 3), msg.posY + ((random.nextDouble() - 0.5D) / 3), msg.posZ + ((random.nextDouble() - 0.5D) / 3));
                         Particles.create(WizardsReborn.SPARKLE_PARTICLE)
                                 .addVelocity(((random.nextDouble() - 0.5D) / 10), ((random.nextDouble() - 0.5D) / 10) + 0.4f, ((random.nextDouble() - 0.5D) / 10))
                                 .setAlpha(0.125f, 0).setScale(0.2f, 0)
-                                .setColor(0.466f, 0.643f, 0.815f, 0.466f, 0.643f, 0.815f)
+                                .setColor(Config.wissenColorR(), Config.wissenColorG(), Config.wissenColorB())
                                 .setLifetime(20)
                                 .enableGravity()
                                 .setSpin((0.5f * (float) ((random.nextDouble() - 0.5D) * 2)))

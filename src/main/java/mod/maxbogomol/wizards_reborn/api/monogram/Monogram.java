@@ -4,6 +4,7 @@ import com.mojang.blaze3d.platform.GlStateManager;
 import com.mojang.blaze3d.systems.RenderSystem;
 import mod.maxbogomol.wizards_reborn.WizardsRebornClient;
 import mod.maxbogomol.wizards_reborn.client.arcanemicon.ArcanemiconGui;
+import mod.maxbogomol.wizards_reborn.client.config.ClientConfig;
 import mod.maxbogomol.wizards_reborn.client.event.ClientTickHandler;
 import mod.maxbogomol.wizards_reborn.utils.RenderUtils;
 import net.minecraft.ChatFormatting;
@@ -13,7 +14,6 @@ import net.minecraft.client.renderer.GameRenderer;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.util.Mth;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 
@@ -78,52 +78,63 @@ public class Monogram {
     public void renderArcanemiconIcon(ArcanemiconGui book, GuiGraphics gui, int x, int y) {
         Random random = new Random(getId().length());
 
-        float r = Mth.lerp(0.5f, 1f, color.getRed() / 255f);
-        float g = Mth.lerp(0.5f, 1f, color.getGreen() / 255f);
-        float b = Mth.lerp(0.5f, 1f, color.getBlue() / 255f);
+        float r = 1f;
+        float g = 1f;
+        float b = 1f;
 
-        r = color.getRed() / 255f;
-        g = color.getGreen() / 255f;
-        b = color.getBlue() / 255f;
+        if (ClientConfig.MONOGRAM_GLOW_COLOR.get()) {
+            r = color.getRed() / 255f;
+            g = color.getGreen() / 255f;
+            b = color.getBlue() / 255f;
+        }
 
-        RenderSystem.enableBlend();
-        RenderSystem.blendFunc(GlStateManager.SourceFactor.SRC_ALPHA, GlStateManager.DestFactor.ONE);
-        MultiBufferSource.BufferSource buffersource = Minecraft.getInstance().renderBuffers().bufferSource();
-        RenderSystem.depthMask(false);
-        RenderSystem.setShader(WizardsRebornClient::getGlowingShader);
+        if (ClientConfig.MONOGRAM_RAYS.get()) {
+            RenderSystem.enableBlend();
+            RenderSystem.blendFunc(GlStateManager.SourceFactor.SRC_ALPHA, GlStateManager.DestFactor.ONE);
+            MultiBufferSource.BufferSource buffersource = Minecraft.getInstance().renderBuffers().bufferSource();
+            RenderSystem.depthMask(false);
+            RenderSystem.setShader(WizardsRebornClient::getGlowingShader);
 
-        gui.pose().pushPose();
-        gui.pose().translate(0, 0, 100);
-        RenderSystem.setShaderColor(r, g, b, 0.35F);
-        RenderUtils.dragon(gui.pose(), buffersource, x + 8, y + 8, 0, 7.5f, Minecraft.getInstance().getPartialTick(), r, g, b, getId().length());
-        buffersource.endBatch();
-        gui.pose().popPose();
+            gui.pose().pushPose();
+            gui.pose().translate(0, 0, 100);
+            RenderSystem.setShaderColor(r, g, b, 0.35F);
+            RenderUtils.dragon(gui.pose(), buffersource, x + 8, y + 8, 0, 7.5f, Minecraft.getInstance().getPartialTick(), r, g, b, getId().length());
+            buffersource.endBatch();
+            gui.pose().popPose();
 
-        RenderSystem.disableBlend();
-        RenderSystem.depthMask(true);
-        RenderSystem.blendFunc(GlStateManager.SourceFactor.SRC_ALPHA, GlStateManager.DestFactor.ONE_MINUS_SRC_ALPHA);
-        RenderSystem.setShader(GameRenderer::getPositionTexShader);
+            RenderSystem.disableBlend();
+            RenderSystem.depthMask(true);
+            RenderSystem.blendFunc(GlStateManager.SourceFactor.SRC_ALPHA, GlStateManager.DestFactor.ONE_MINUS_SRC_ALPHA);
+            RenderSystem.setShader(GameRenderer::getPositionTexShader);
+        }
 
-        RenderSystem.enableBlend();
-        RenderSystem.blendFunc(GlStateManager.SourceFactor.SRC_ALPHA, GlStateManager.DestFactor.ONE);
-        RenderSystem.setShaderColor(r, g, b, 0.15F);
+        if (ClientConfig.MONOGRAM_GLOW.get()) {
+            RenderSystem.enableBlend();
+            RenderSystem.blendFunc(GlStateManager.SourceFactor.SRC_ALPHA, GlStateManager.DestFactor.ONE);
+            RenderSystem.setShaderColor(r, g, b, 0.15F);
 
-        for (int i = 0; i < 5; i++) {
-            RenderSystem.setShaderColor(r, g, b, (float) (0.15F + (random.nextDouble() / 10)));
-            double dst = (360 * random.nextDouble()) + (ClientTickHandler.ticksInGame + Minecraft.getInstance().getFrameTime()) / 8;
-            double dstX = (360 * random.nextDouble()) + (ClientTickHandler.ticksInGame + Minecraft.getInstance().getFrameTime()) / 16;
-            double dstY = (360 * random.nextDouble()) + (ClientTickHandler.ticksInGame + Minecraft.getInstance().getFrameTime()) / 16;
-            int X = (int) (Math.cos(dst) * (4 * Math.sin(Math.toRadians(dstX))));
-            int Y = (int) (Math.sin(dst) * (4 * Math.sin(Math.toRadians(dstY))));
+            for (int i = 0; i < 5; i++) {
+                RenderSystem.setShaderColor(r, g, b, (float) (0.15F + (random.nextDouble() / 10)));
+                double dst = (360 * random.nextDouble()) + (ClientTickHandler.ticksInGame + Minecraft.getInstance().getFrameTime()) / 8;
+                double dstX = (360 * random.nextDouble()) + (ClientTickHandler.ticksInGame + Minecraft.getInstance().getFrameTime()) / 16;
+                double dstY = (360 * random.nextDouble()) + (ClientTickHandler.ticksInGame + Minecraft.getInstance().getFrameTime()) / 16;
+                int X = (int) (Math.cos(dst) * (4 * Math.sin(Math.toRadians(dstX))));
+                int Y = (int) (Math.sin(dst) * (4 * Math.sin(Math.toRadians(dstY))));
 
-            gui.blit(getIcon(), x + X, y + Y, 0, 0, 16, 16, 16, 16);
+                gui.blit(getIcon(), x + X, y + Y, 0, 0, 16, 16, 16, 16);
+            }
         }
 
         RenderSystem.disableBlend();
         RenderSystem.blendFunc(GlStateManager.SourceFactor.SRC_ALPHA, GlStateManager.DestFactor.ONE_MINUS_SRC_ALPHA);
 
-        RenderSystem.setShaderColor(r, g, b, 1F);
         RenderSystem.setShaderColor(1F, 1F, 1F, 1F);
+        if (ClientConfig.MONOGRAM_COLOR.get()) {
+            r = color.getRed() / 255f;
+            g = color.getGreen() / 255f;
+            b = color.getBlue() / 255f;
+            RenderSystem.setShaderColor(r, g, b, 1F);
+        }
         gui.blit(getIcon(), x, y, 0, 0, 16, 16, 16, 16);
         RenderSystem.setShaderColor(1F, 1F, 1F, 1F);
     }
@@ -132,38 +143,43 @@ public class Monogram {
     public void renderArcanemiconMiniIcon(ArcanemiconGui book, GuiGraphics gui, int x, int y) {
         Random random = new Random(getId().length());
 
-        float r = Mth.lerp(0.5f, 1f, color.getRed() / 255f);
-        float g = Mth.lerp(0.5f, 1f, color.getGreen() / 255f);
-        float b = Mth.lerp(0.5f, 1f, color.getBlue() / 255f);
+        float r = 1f;
+        float g = 1f;
+        float b = 1f;
 
-        r = color.getRed() / 255f;
-        g = color.getGreen() / 255f;
-        b = color.getBlue() / 255f;
-
-        RenderSystem.enableBlend();
-        RenderSystem.blendFunc(GlStateManager.SourceFactor.SRC_ALPHA, GlStateManager.DestFactor.ONE);
-        RenderSystem.setShaderColor(r, g, b, 0.15F);
-
-        for (int i = 0; i < 5; i++) {
-            RenderSystem.setShaderColor(r, g, b, (float) (0.15F + (random.nextDouble() / 10)));
-            double dst = (360 * random.nextDouble()) + (ClientTickHandler.ticksInGame + Minecraft.getInstance().getFrameTime()) / 8;
-            double dstX = (360 * random.nextDouble()) + (ClientTickHandler.ticksInGame + Minecraft.getInstance().getFrameTime()) / 16;
-            double dstY = (360 * random.nextDouble()) + (ClientTickHandler.ticksInGame + Minecraft.getInstance().getFrameTime()) / 16;
-            int X = (int) (Math.cos(dst) * (2 * Math.sin(Math.toRadians(dstX))));
-            int Y = (int) (Math.sin(dst) * (2 * Math.sin(Math.toRadians(dstY))));
-
-            gui.blit(getIcon(), x + X, y + Y, 0, 0, 8, 8, 8, 8);
+        if (ClientConfig.MONOGRAM_GLOW_COLOR.get()) {
+            r = color.getRed() / 255f;
+            g = color.getGreen() / 255f;
+            b = color.getBlue() / 255f;
         }
 
-        RenderSystem.disableBlend();
-        RenderSystem.blendFunc(GlStateManager.SourceFactor.SRC_ALPHA, GlStateManager.DestFactor.ONE_MINUS_SRC_ALPHA);
+        if (ClientConfig.MONOGRAM_GLOW.get()) {
+            RenderSystem.enableBlend();
+            RenderSystem.blendFunc(GlStateManager.SourceFactor.SRC_ALPHA, GlStateManager.DestFactor.ONE);
+            RenderSystem.setShaderColor(r, g, b, 0.15F);
 
-        r = color.getRed() / 255f;
-        g = color.getGreen() / 255f;
-        b = color.getBlue() / 255f;
+            for (int i = 0; i < 5; i++) {
+                RenderSystem.setShaderColor(r, g, b, (float) (0.15F + (random.nextDouble() / 10)));
+                double dst = (360 * random.nextDouble()) + (ClientTickHandler.ticksInGame + Minecraft.getInstance().getFrameTime()) / 8;
+                double dstX = (360 * random.nextDouble()) + (ClientTickHandler.ticksInGame + Minecraft.getInstance().getFrameTime()) / 16;
+                double dstY = (360 * random.nextDouble()) + (ClientTickHandler.ticksInGame + Minecraft.getInstance().getFrameTime()) / 16;
+                int X = (int) (Math.cos(dst) * (2 * Math.sin(Math.toRadians(dstX))));
+                int Y = (int) (Math.sin(dst) * (2 * Math.sin(Math.toRadians(dstY))));
 
-        RenderSystem.setShaderColor(r, g, b, 1F);
+                gui.blit(getIcon(), x + X, y + Y, 0, 0, 8, 8, 8, 8);
+            }
+
+            RenderSystem.disableBlend();
+            RenderSystem.blendFunc(GlStateManager.SourceFactor.SRC_ALPHA, GlStateManager.DestFactor.ONE_MINUS_SRC_ALPHA);
+        }
+
         RenderSystem.setShaderColor(1F, 1F, 1F, 1F);
+        if (ClientConfig.MONOGRAM_COLOR.get()) {
+            r = color.getRed() / 255f;
+            g = color.getGreen() / 255f;
+            b = color.getBlue() / 255f;
+            RenderSystem.setShaderColor(r, g, b, 1F);
+        }
         gui.blit(getIcon(), x, y, 0, 0, 8, 8, 8, 8);
         RenderSystem.setShaderColor(1F, 1F, 1F, 1F);
     }

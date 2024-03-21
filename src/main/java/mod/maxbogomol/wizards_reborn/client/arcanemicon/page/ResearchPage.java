@@ -10,6 +10,7 @@ import mod.maxbogomol.wizards_reborn.client.arcanemicon.ArcanemiconChapters;
 import mod.maxbogomol.wizards_reborn.client.arcanemicon.ArcanemiconGui;
 import mod.maxbogomol.wizards_reborn.client.arcanemicon.Chapter;
 import mod.maxbogomol.wizards_reborn.client.arcanemicon.Page;
+import mod.maxbogomol.wizards_reborn.client.config.ClientConfig;
 import mod.maxbogomol.wizards_reborn.common.network.PacketHandler;
 import mod.maxbogomol.wizards_reborn.common.network.UnlockSpellPacket;
 import net.minecraft.client.Minecraft;
@@ -149,6 +150,14 @@ public class ResearchPage extends Page {
             int outlineXOffset = 0;
             int outlineYOffset = 14;
 
+            if (ClientConfig.OLD_RESEARCH_MONOGRAM_OUTLINE.get()) {
+                outlineYOffset = 0;
+            }
+            if (ClientConfig.BRIGHT_RESEARCH_MONOGRAM_OUTLINE.get()) {
+                outlineXOffset = 14;
+                outlineYOffset = 14;
+            }
+
             int actives = getAllActives();
 
             Font font = Minecraft.getInstance().font;
@@ -174,12 +183,14 @@ public class ResearchPage extends Page {
 
             int i = 0;
             int selected = getSelectedMonogram(x, y, mouseX, mouseY);
-            for (MonogramMapEntry monogramMapEntry : map) {
-                for (int ii = 0; ii < 2; ii++) {
-                    if (monogramMapEntry.isActive()) {
-                        gui.blit(BACKGROUND, x + 59 - (int) size + (int) pointL.x + 3, y + 59 - (int) size + (int) pointL.y + 3, 184, 40, 4, 4);
+            if (ClientConfig.RESEARCH_MONOGRAM_CONNECTS.get()) {
+                for (MonogramMapEntry monogramMapEntry : map) {
+                    for (int ii = 0; ii < 2; ii++) {
+                        if (monogramMapEntry.isActive()) {
+                            gui.blit(BACKGROUND, x + 59 - (int) size + (int) pointL.x + 3, y + 59 - (int) size + (int) pointL.y + 3, 184, 40, 4, 4);
+                        }
+                        pointL = rotatePointAbout(pointL, centerL, angleBetweenEach / 2);
                     }
-                    pointL = rotatePointAbout(pointL, centerL, angleBetweenEach / 2);
                 }
             }
             i = 0;

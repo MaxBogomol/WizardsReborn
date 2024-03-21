@@ -2,6 +2,7 @@ package mod.maxbogomol.wizards_reborn.common.item;
 
 import mod.maxbogomol.wizards_reborn.WizardsReborn;
 import mod.maxbogomol.wizards_reborn.client.particle.Particles;
+import mod.maxbogomol.wizards_reborn.common.config.Config;
 import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.Level;
@@ -21,7 +22,7 @@ public class ArcanumItem extends Item implements IParticleItem {
             Particles.create(WizardsReborn.SPARKLE_PARTICLE)
                     .addVelocity(((random.nextDouble() - 0.5D) / 50), ((random.nextDouble() - 0.5D) / 50), ((random.nextDouble() - 0.5D) / 50))
                     .setAlpha(0.5f, 0).setScale(0.1f, 0)
-                    .setColor(0.466f, 0.643f, 0.815f)
+                    .setColor(Config.wissenColorR(), Config.wissenColorG(), Config.wissenColorB())
                     .setLifetime(30)
                     .setSpin((0.5f * (float) ((random.nextDouble() - 0.5D) * 2)))
                     .spawn(level, entity.getX() + ((random.nextDouble() - 0.5D) * 0.25), entity.getY() + 0.25F + ((random.nextDouble() - 0.5D) * 0.25), entity.getZ() + ((random.nextDouble() - 0.5D) * 0.25));

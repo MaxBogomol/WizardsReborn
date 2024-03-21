@@ -8,6 +8,7 @@ import mod.maxbogomol.wizards_reborn.api.alchemy.ISteamTileEntity;
 import mod.maxbogomol.wizards_reborn.api.wissen.IExperienceTileEntity;
 import mod.maxbogomol.wizards_reborn.api.light.ILightTileEntity;
 import mod.maxbogomol.wizards_reborn.api.wissen.*;
+import mod.maxbogomol.wizards_reborn.client.config.ClientConfig;
 import mod.maxbogomol.wizards_reborn.common.tileentity.AlchemyMachineTileEntity;
 import mod.maxbogomol.wizards_reborn.utils.ColorUtils;
 import mod.maxbogomol.wizards_reborn.utils.NumericalUtils;
@@ -330,10 +331,9 @@ public class WissenWandItem extends Item {
 
                         int i = 0;
                         if (tileentity instanceof IWissenTileEntity wissenTile) {
-                            if (player.isShiftKeyDown()) {
+                            if (player.isShiftKeyDown() && ClientConfig.NUMERICAL_WISSEN.get()) {
                                 int x = mc.getWindow().getGuiScaledWidth() / 2;
                                 int y = mc.getWindow().getGuiScaledHeight() / 2 + 32 - 10 - 10 + i;
-
                                 Component wissenName = NumericalUtils.getWissenName(wissenTile.getWissen(), wissenTile.getMaxWissen());
                                 String string = wissenName.getString();
                                 int stringWidth = Minecraft.getInstance().font.width(string);
@@ -353,7 +353,7 @@ public class WissenWandItem extends Item {
                         }
 
                         if (tileentity instanceof ICooldownTileEntity cooldownTile) {
-                            if (player.isShiftKeyDown()) {
+                            if (player.isShiftKeyDown() && ClientConfig.NUMERICAL_COOLDOWN.get()) {
                                 int x = mc.getWindow().getGuiScaledWidth() / 2;
                                 int y = mc.getWindow().getGuiScaledHeight() / 2 + 32 - 10 - 10 + i;
 
@@ -376,7 +376,7 @@ public class WissenWandItem extends Item {
                         }
 
                         if (tileentity instanceof ILightTileEntity lightTile) {
-                            if (player.isShiftKeyDown()) {
+                            if (player.isShiftKeyDown() && ClientConfig.SHOW_LIGHT_NAME.get()) {
                                 int x = mc.getWindow().getGuiScaledWidth() / 2;
                                 int y = mc.getWindow().getGuiScaledHeight() / 2 + 32 - 10 - 10 + i;
 
@@ -405,6 +405,10 @@ public class WissenWandItem extends Item {
                                 int y = mc.getWindow().getGuiScaledHeight() / 2 + 32 - 10 - 10 + i;
 
                                 Component fluidName = NumericalUtils.getFluidName(fluidTile.getFluidStack(), fluidTile.getFluidMaxAmount());
+                                if (!ClientConfig.NUMERICAL_FLUID.get()) {
+                                    fluidName = NumericalUtils.getFluidName(fluidTile.getFluidStack());
+                                }
+
                                 String string = fluidName.getString();
                                 int stringWidth = Minecraft.getInstance().font.width(string);
 
@@ -423,7 +427,7 @@ public class WissenWandItem extends Item {
                         }
 
                         if (tileentity instanceof IExperienceTileEntity experienceTile) {
-                            if (player.isShiftKeyDown()) {
+                            if (player.isShiftKeyDown() && ClientConfig.NUMERICAL_EXPERIENCE.get()) {
                                 int x = mc.getWindow().getGuiScaledWidth() / 2;
                                 int y = mc.getWindow().getGuiScaledHeight() / 2 + 32 - 10 - 10 + i;
 
@@ -446,7 +450,7 @@ public class WissenWandItem extends Item {
                         }
 
                         if (tileentity instanceof IHeatTileEntity heatTile) {
-                            if (player.isShiftKeyDown()) {
+                            if (player.isShiftKeyDown() && ClientConfig.NUMERICAL_HEAT.get()) {
                                 int x = mc.getWindow().getGuiScaledWidth() / 2;
                                 int y = mc.getWindow().getGuiScaledHeight() / 2 + 32 - 10 - 10 + i;
 
@@ -469,7 +473,7 @@ public class WissenWandItem extends Item {
                         }
 
                         if (tileentity instanceof ISteamTileEntity steamTile) {
-                            if (player.isShiftKeyDown()) {
+                            if (player.isShiftKeyDown() && ClientConfig.NUMERICAL_STEAM.get()) {
                                 int x = mc.getWindow().getGuiScaledWidth() / 2;
                                 int y = mc.getWindow().getGuiScaledHeight() / 2 + 32 - 10 - 10 + i;
 
@@ -498,6 +502,9 @@ public class WissenWandItem extends Item {
                                     int y = mc.getWindow().getGuiScaledHeight() / 2 + 32 - 10 - 10 + i;
 
                                     Component fluidName = NumericalUtils.getFluidName(machine.getFluidStack(ii), machine.getMaxCapacity());
+                                    if (!ClientConfig.NUMERICAL_FLUID.get()) {
+                                        fluidName = NumericalUtils.getFluidName(machine.getFluidStack(ii));
+                                    }
                                     String string = fluidName.getString();
                                     int stringWidth = Minecraft.getInstance().font.width(string);
 

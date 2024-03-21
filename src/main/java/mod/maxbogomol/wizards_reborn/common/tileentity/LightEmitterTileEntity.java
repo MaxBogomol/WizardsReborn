@@ -8,6 +8,7 @@ import mod.maxbogomol.wizards_reborn.api.wissen.IWissenTileEntity;
 import mod.maxbogomol.wizards_reborn.api.wissen.IWissenWandControlledTileEntity;
 import mod.maxbogomol.wizards_reborn.client.particle.Particles;
 import mod.maxbogomol.wizards_reborn.common.block.ArcaneLumosBlock;
+import mod.maxbogomol.wizards_reborn.common.config.Config;
 import mod.maxbogomol.wizards_reborn.common.item.equipment.WissenWandItem;
 import mod.maxbogomol.wizards_reborn.utils.PacketUtils;
 import net.minecraft.core.BlockPos;
@@ -213,7 +214,7 @@ public class LightEmitterTileEntity extends ExposedTileSimpleInventory implement
     }
 
     public Color getColor() {
-        Color color = new Color(0.466f, 0.643f, 0.815f);
+        Color color = new Color(Config.wissenColorR(), Config.wissenColorG(), Config.wissenColorB());
 
         ArcaneLumosBlock lumos = getLumos();
         if (lumos != null) {

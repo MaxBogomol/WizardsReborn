@@ -47,7 +47,7 @@ public class ClientMusicChoiceMixin {
         }
 
         if (screen instanceof TitleScreen) {
-            if (ClientConfig.PANORAMA_TEST.get()) {
+            if (ClientConfig.CUSTOM_PANORAMA.get()) {
                 cir.setReturnValue(WizardsRebornClient.REBORN_MUSIC);
             }
         }
