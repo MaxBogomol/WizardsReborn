@@ -136,6 +136,10 @@ public class TotemOfDisenchantTileEntity extends BlockEntity implements Tickable
                         addWissen(enchantmentLevel * 1000);
                     }
 
+                    if (itemHandler.getStackInSlot(0).getBaseRepairCost()  > 0) {
+                        itemHandler.getStackInSlot(0).setRepairCost(itemHandler.getStackInSlot(0).getBaseRepairCost() - 1);
+                    }
+
                     PacketHandler.sendToTracking(level, getBlockPos(), new TotemOfDisenchantBurstEffectPacket(getBlockPos()));
                     level.playSound(WizardsReborn.proxy.getPlayer(), getBlockPos(), WizardsReborn.WISSEN_BURST_SOUND.get(), SoundSource.BLOCKS, 0.25f, (float) (1f + ((random.nextFloat() - 0.5D) / 4)));
                 }

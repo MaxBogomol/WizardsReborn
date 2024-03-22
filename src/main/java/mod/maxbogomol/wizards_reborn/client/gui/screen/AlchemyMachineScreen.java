@@ -57,7 +57,7 @@ public class AlchemyMachineScreen extends AbstractContainerScreen<AlchemyMachine
                 }
             }
 
-            if (machine.wissenInCraft > 0 || machine.steamInCraft > 0 ) {
+            if (machine.wissenInCraft > 0 || machine.steamInCraft > 0) {
                 int width = 22;
                 width /= (double) (machine.wissenInCraft + machine.steamInCraft) / (machine.wissenIsCraft + machine.steamIsCraft);
                 gui.blit(GUI, i + 97, j + 53, 176, 8, width, 15, 256, 256);

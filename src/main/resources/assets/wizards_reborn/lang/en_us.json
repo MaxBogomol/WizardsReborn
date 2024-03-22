@@ -518,6 +518,9 @@
   "gui.wizards_reborn.category.mortar": "Mortar",
   "gui.wizards_reborn.category.censer": "Censer",
 
+  "config.jade.plugin_wizards_reborn.crystal_growth": "Crystal Growth",
+  "config.jade.plugin_wizards_reborn.numerical": "Numerical",
+
   "gui.wizards_reborn.menu.optifine.0": "ATTENTION! It seems you have Optifine installed",
   "gui.wizards_reborn.menu.optifine.1": "Optifine can break the render of particles in Wizard's Reborn",
 

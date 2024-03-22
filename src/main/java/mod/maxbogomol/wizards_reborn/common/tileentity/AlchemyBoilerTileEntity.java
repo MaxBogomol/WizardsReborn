@@ -4,6 +4,7 @@ import mod.maxbogomol.wizards_reborn.WizardsReborn;
 import mod.maxbogomol.wizards_reborn.api.alchemy.IFluidTileEntity;
 import mod.maxbogomol.wizards_reborn.api.alchemy.ISteamTileEntity;
 import mod.maxbogomol.wizards_reborn.api.alchemy.PipeConnection;
+import mod.maxbogomol.wizards_reborn.api.wissen.ICooldownTileEntity;
 import mod.maxbogomol.wizards_reborn.api.wissen.IItemResultTileEntity;
 import mod.maxbogomol.wizards_reborn.api.wissen.IWissenTileEntity;
 import mod.maxbogomol.wizards_reborn.api.wissen.IWissenWandFunctionalTileEntity;
@@ -35,7 +36,7 @@ import java.util.Random;
 
 import static net.minecraft.world.level.block.state.properties.BlockStateProperties.HORIZONTAL_FACING;
 
-public class AlchemyBoilerTileEntity extends PipeBaseTileEntity implements TickableBlockEntity, IFluidTileEntity, ISteamTileEntity, IWissenTileEntity, IWissenWandFunctionalTileEntity, IItemResultTileEntity {
+public class AlchemyBoilerTileEntity extends PipeBaseTileEntity implements TickableBlockEntity, IFluidTileEntity, ISteamTileEntity, IWissenTileEntity, IWissenWandFunctionalTileEntity, ICooldownTileEntity, IItemResultTileEntity {
     protected FluidTank fluidTank = new FluidTank(getMaxCapacity()) {
         @Override
         public void onContentsChanged() {
@@ -290,5 +291,13 @@ public class AlchemyBoilerTileEntity extends PipeBaseTileEntity implements Ticka
         }
 
         return list;
+    }
+
+    @Override
+    public float getCooldown() {
+        if (level.getBlockEntity(getBlockPos().below()) instanceof AlchemyMachineTileEntity machine) {
+            return machine.getCooldown();
+        }
+        return 0;
     }
 }

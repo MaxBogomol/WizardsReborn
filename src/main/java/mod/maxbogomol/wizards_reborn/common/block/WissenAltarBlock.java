@@ -10,6 +10,8 @@ import mod.maxbogomol.wizards_reborn.common.tileentity.WissenAltarTileEntity;
 import mod.maxbogomol.wizards_reborn.utils.PacketUtils;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.sounds.SoundEvents;
+import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.Containers;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
@@ -113,6 +115,7 @@ public class WissenAltarBlock extends HorizontalDirectionalBlock implements Enti
                 player.getInventory().removeItem(player.getItemInHand(hand));
                 world.updateNeighbourForOutputSignal(pos, this);
                 PacketUtils.SUpdateTileEntityPacket(altar);
+                world.playSound(null, pos, SoundEvents.CHERRY_WOOD_PLACE, SoundSource.BLOCKS, 1.0f, 0.75f);
                 return InteractionResult.SUCCESS;
             }
         }
@@ -128,6 +131,7 @@ public class WissenAltarBlock extends HorizontalDirectionalBlock implements Enti
                 player.getInventory().removeItem(player.getItemInHand(hand));
                 world.updateNeighbourForOutputSignal(pos, this);
                 PacketUtils.SUpdateTileEntityPacket(altar);
+                world.playSound(null, pos, SoundEvents.BAMBOO_WOOD_PLACE, SoundSource.BLOCKS, 1.0f, 0.75f);
                 return InteractionResult.SUCCESS;
             } else {
                 if (altar.getItemHandler().getItem(1).equals(stack)
@@ -135,6 +139,7 @@ public class WissenAltarBlock extends HorizontalDirectionalBlock implements Enti
                     altar.getItemHandler().getItem(1).setCount(altar.getItemHandler().getItem(1).getCount() + stack.getCount());
                     world.updateNeighbourForOutputSignal(pos, this);
                     PacketUtils.SUpdateTileEntityPacket(altar);
+                    world.playSound(null, pos, SoundEvents.BAMBOO_WOOD_PLACE, SoundSource.BLOCKS, 1.0f, 0.75f);
                     return InteractionResult.SUCCESS;
                 }
             }
@@ -149,6 +154,7 @@ public class WissenAltarBlock extends HorizontalDirectionalBlock implements Enti
             altar.getItemHandler().removeItem(0, 1);
             world.updateNeighbourForOutputSignal(pos, this);
             PacketUtils.SUpdateTileEntityPacket(altar);
+            world.playSound(null, pos, SoundEvents.BAMBOO_WOOD_HIT, SoundSource.BLOCKS, 1.0f, 1.0f);
             return InteractionResult.SUCCESS;
         } else {
             if (!altar.getItemHandler().getItem(1).isEmpty()) {
@@ -160,6 +166,7 @@ public class WissenAltarBlock extends HorizontalDirectionalBlock implements Enti
                 altar.getItemHandler().removeItem(1, 64);
                 world.updateNeighbourForOutputSignal(pos, this);
                 PacketUtils.SUpdateTileEntityPacket(altar);
+                world.playSound(null, pos, SoundEvents.BAMBOO_WOOD_HIT, SoundSource.BLOCKS, 1.0f, 1.0f);
                 return InteractionResult.SUCCESS;
             }
         }

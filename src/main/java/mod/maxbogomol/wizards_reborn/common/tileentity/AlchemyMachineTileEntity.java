@@ -4,6 +4,7 @@ import mod.maxbogomol.wizards_reborn.WizardsReborn;
 import mod.maxbogomol.wizards_reborn.api.alchemy.AlchemyPotionUtils;
 import mod.maxbogomol.wizards_reborn.api.alchemy.PipeConnection;
 import mod.maxbogomol.wizards_reborn.api.alchemy.SteamUtils;
+import mod.maxbogomol.wizards_reborn.api.wissen.ICooldownTileEntity;
 import mod.maxbogomol.wizards_reborn.api.wissen.IItemResultTileEntity;
 import mod.maxbogomol.wizards_reborn.api.wissen.IWissenWandFunctionalTileEntity;
 import mod.maxbogomol.wizards_reborn.api.wissen.WissenUtils;
@@ -48,7 +49,7 @@ import java.util.List;
 import java.util.Optional;
 import java.util.Random;
 
-public class AlchemyMachineTileEntity extends PipeBaseTileEntity implements TickableBlockEntity, IWissenWandFunctionalTileEntity, IItemResultTileEntity {
+public class AlchemyMachineTileEntity extends PipeBaseTileEntity implements TickableBlockEntity, IWissenWandFunctionalTileEntity, ICooldownTileEntity, IItemResultTileEntity {
     protected FluidTank fluidTank1 = new FluidTank(getMaxCapacity()) {
         @Override
         public void onContentsChanged() {
@@ -576,5 +577,13 @@ public class AlchemyMachineTileEntity extends PipeBaseTileEntity implements Tick
         }
 
         return stack;
+    }
+
+    @Override
+    public float getCooldown() {
+        if (wissenInCraft > 0 || steamInCraft > 0) {
+            return (float) (wissenInCraft + steamInCraft) / (wissenIsCraft + steamIsCraft);
+        }
+        return 0;
     }
 }

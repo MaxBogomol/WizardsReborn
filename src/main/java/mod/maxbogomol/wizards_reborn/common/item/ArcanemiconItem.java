@@ -38,6 +38,8 @@ public class ArcanemiconItem extends Item {
                     if (pedestal.getItemHandler().getItem(0).isEmpty()) {
                         world.setBlockAndUpdate(blockpos, block.defaultBlockState());
                         player.getInventory().removeItem(player.getItemInHand(context.getHand()));
+                        world.playSound(null, blockpos, SoundEvents.BAMBOO_WOOD_PLACE, SoundSource.BLOCKS, 1.0f, 0.75f);
+                        world.playSound(null, blockpos, SoundEvents.BOOK_PAGE_TURN, SoundSource.BLOCKS, 1.0f, 1.0f);
                         return InteractionResult.SUCCESS;
                     }
                 }

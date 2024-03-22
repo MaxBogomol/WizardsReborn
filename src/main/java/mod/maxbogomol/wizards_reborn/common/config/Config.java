@@ -9,11 +9,11 @@ public class Config {
 
     public Config(ForgeConfigSpec.Builder builder) {
         STANDARD_WISSEN_COLOR_R = builder.comment("Standard wissen color RED.")
-                .defineInRange("standartWissenColorR", 119, 0, 255);
+                .defineInRange("standardWissenColorR", 119, 0, 255);
         STANDARD_WISSEN_COLOR_G = builder.comment("Standard wissen color GREEN.")
-                .defineInRange("standartWissenColorG", 164, 0, 255);
+                .defineInRange("standardWissenColorG", 164, 0, 255);
         STANDARD_WISSEN_COLOR_B = builder.comment("Standard wissen color BLUE.")
-                .defineInRange("standartWissenColorB", 208, 0, 255);
+                .defineInRange("standardWissenColorB", 208, 0, 255);
     }
 
     public static final Config INSTANCE;
