@@ -1,8 +1,9 @@
 {
   "replace": false,
   "values": [
-  ],
-  "optional": [
-    "wizards_reborn:arcane_gold_sheet"
+    {
+      "id": "wizards_reborn:arcane_gold_sheet",
+      "required": false
+    }
   ]
 }

@@ -1,0 +1,32 @@
+{
+  "type": "forge:conditional",
+  "recipes": [
+    {
+      "conditions": [
+        {
+          "type": "forge:mod_loaded",
+          "modid": "malum"
+        }
+      ],
+      "recipe": {
+        "type": "malum:spirit_repair",
+        "itemIdRegex": "arcane_gold_.+",
+        "modIdRegex": "wizards_reborn",
+        "durabilityPercentage": 1,
+        "inputs": [
+
+        ],
+        "repairMaterial": {
+          "tag": "wizards_reborn:arcane_gold_ingot",
+          "count": 2
+        },
+        "spirits": [
+          {
+            "type": "arcane",
+            "count": 16
+          }
+        ]
+      }
+    }
+  ]
+}

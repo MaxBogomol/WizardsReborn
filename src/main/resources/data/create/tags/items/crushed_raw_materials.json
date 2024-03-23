@@ -1,8 +1,9 @@
 {
   "replace": false,
   "values": [
-  ],
-  "optional": [
-    "wizards_reborn:crushed_raw_arcane_gold"
+    {
+      "id": "wizards_reborn:crushed_raw_arcane_gold",
+      "required": false
+    }
   ]
 }

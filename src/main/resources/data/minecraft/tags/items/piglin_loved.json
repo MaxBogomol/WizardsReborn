@@ -17,10 +17,18 @@
     "wizards_reborn:arcanum_ring",
     "wizards_reborn:arcacite_amulet",
     "wizards_reborn:arcacite_ring",
-    "wizards_reborn:wissen_keychain"
-  ],
-  "optional": [
-    "wizards_reborn:crushed_raw_arcane_gold",
-    "wizards_reborn:arcane_gold_sheet"
+    "wizards_reborn:wissen_keychain",
+    {
+      "id": "wizards_reborn:crushed_raw_arcane_gold",
+      "required": false
+    },
+    {
+      "id": "wizards_reborn:arcane_gold_sheet",
+      "required": false
+    },
+    {
+      "id": "wizards_reborn:arcane_gold_knife",
+      "required": false
+    }
   ]
 }

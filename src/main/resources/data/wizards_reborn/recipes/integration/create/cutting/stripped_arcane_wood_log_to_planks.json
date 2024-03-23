@@ -1,0 +1,28 @@
+{
+  "type": "forge:conditional",
+  "recipes": [
+    {
+      "conditions": [
+        {
+          "type": "forge:mod_loaded",
+          "modid": "create"
+        }
+      ],
+      "recipe": {
+        "type": "create:cutting",
+        "ingredients": [
+          {
+            "item": "wizards_reborn:stripped_arcane_wood_log"
+          }
+        ],
+        "results": [
+          {
+            "item": "wizards_reborn:arcane_wood_planks",
+            "count": 6
+          }
+        ],
+        "processingTime": 50
+      }
+    }
+  ]
+}

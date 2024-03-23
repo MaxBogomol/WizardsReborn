@@ -1,0 +1,32 @@
+{
+  "type": "forge:conditional",
+  "recipes": [
+    {
+      "conditions": [
+        {
+          "type": "forge:mod_loaded",
+          "modid": "create"
+        }
+      ],
+      "recipe": {
+        "type": "create:splashing",
+        "ingredients": [
+          {
+            "item": "wizards_reborn:crushed_raw_arcane_gold"
+          }
+        ],
+        "results": [
+          {
+            "item": "wizards_reborn:arcane_gold_nugget",
+            "count": 9
+          },
+          {
+            "item": "wizards_reborn:arcanum_dust",
+            "count": 1,
+            "chance": 0.15
+          }
+        ]
+      }
+    }
+  ]
+}

@@ -12,6 +12,7 @@ import mezz.jei.api.registration.ISubtypeRegistration;
 import mod.maxbogomol.wizards_reborn.WizardsReborn;
 import mod.maxbogomol.wizards_reborn.api.alchemy.AlchemyPotionUtils;
 import mod.maxbogomol.wizards_reborn.api.crystalritual.CrystalRitualUtils;
+import mod.maxbogomol.wizards_reborn.common.integration.farmersdelight.FarmersDelightIntegration;
 import net.minecraft.client.Minecraft;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.Container;
@@ -73,6 +74,10 @@ public class WizardsRebornJei implements IModPlugin {
         registration.addRecipes(JewelerTableRecipeCategory.TYPE, sortRecipes(WizardsReborn.JEWELER_TABLE_RECIPE.get(), BY_ID));
         registration.addRecipes(CrystalRitualRecipeCategory.TYPE, sortRecipes(WizardsReborn.CRYSTAL_RITUAL_RECIPE.get(), BY_ID));
         registration.addRecipes(CrystalInfusionRecipeCategory.TYPE, sortRecipes(WizardsReborn.CRYSTAL_INFUSION_RECIPE.get(), BY_ID));
+
+        if (FarmersDelightIntegration.isLoaded()) {
+            FarmersDelightIntegration.LoadedOnly.addArcaneGoldKnifeJEIInfo(registration);
+        }
     }
 
     @Override

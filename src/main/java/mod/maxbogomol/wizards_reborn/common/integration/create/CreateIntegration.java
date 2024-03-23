@@ -18,7 +18,7 @@ public class CreateIntegration {
         ITEMS.register(eventBus);
     }
 
-    public static boolean isCreateLoaded() {
+    public static boolean isLoaded() {
         return ModList.get().isLoaded("create");
     }
 }

@@ -53,6 +53,7 @@ import mod.maxbogomol.wizards_reborn.common.entity.SpellProjectileEntity;
 import mod.maxbogomol.wizards_reborn.common.event.Events;
 import mod.maxbogomol.wizards_reborn.common.fluid.CustomFluidType;
 import mod.maxbogomol.wizards_reborn.common.integration.create.CreateIntegration;
+import mod.maxbogomol.wizards_reborn.common.integration.farmersdelight.FarmersDelightIntegration;
 import mod.maxbogomol.wizards_reborn.common.item.*;
 import mod.maxbogomol.wizards_reborn.common.item.equipment.*;
 import mod.maxbogomol.wizards_reborn.common.item.equipment.arcane.*;
@@ -1187,7 +1188,8 @@ public class WizardsReborn {
         FLUID_TYPES.register(eventBus);
         FLUIDS.register(eventBus);
 
-        if (CreateIntegration.isCreateLoaded()) CreateIntegration.init(eventBus);
+        if (CreateIntegration.isLoaded()) CreateIntegration.init(eventBus);
+        if (FarmersDelightIntegration.isLoaded()) FarmersDelightIntegration.init(eventBus);
 
         setupCrystals();
         setupMonograms();

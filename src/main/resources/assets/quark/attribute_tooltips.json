@@ -1,0 +1,26 @@
+{
+  "wizards_reborn:wissen_discount": {
+    "display": {
+      "mainhand": "flat",
+      "offhand": "flat",
+      "feet": "flat",
+      "legs": "flat",
+      "chest": "flat",
+      "head": "flat",
+      "potion": "flat"
+    },
+    "texture": "wizards_reborn:attribute/wissen_discount"
+  },
+  "wizards_reborn:magic_armor": {
+    "display": {
+      "mainhand": "flat",
+      "offhand": "flat",
+      "feet": "flat",
+      "legs": "flat",
+      "chest": "flat",
+      "head": "flat",
+      "potion": "flat"
+    },
+    "texture": "wizards_reborn:attribute/magic_armor"
+  }
+}

@@ -1,0 +1,9 @@
+{
+  "replace": false,
+  "values": [
+    {
+      "id": "wizards_reborn:arcane_gold_knife",
+      "required": false
+    }
+  ]
+}

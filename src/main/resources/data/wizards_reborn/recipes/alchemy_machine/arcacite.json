@@ -14,10 +14,10 @@
       "item": "wizards_reborn:arcanum"
     },
     {
-      "item": "minecraft:quartz"
+      "tag": "forge:gems/quartz"
     },
     {
-      "item": "minecraft:quartz"
+      "tag": "forge:gems/quartz"
     },
     {
       "item": "wizards_reborn:scorched_calx"

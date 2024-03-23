@@ -9,6 +9,7 @@ import mod.maxbogomol.wizards_reborn.api.crystalritual.CrystalRitualUtils;
 import mod.maxbogomol.wizards_reborn.api.crystalritual.CrystalRituals;
 import mod.maxbogomol.wizards_reborn.common.alchemypotion.RegisterAlchemyPotions;
 import mod.maxbogomol.wizards_reborn.common.integration.create.CreateIntegration;
+import mod.maxbogomol.wizards_reborn.common.integration.farmersdelight.FarmersDelightIntegration;
 import mod.maxbogomol.wizards_reborn.common.item.CrystalItem;
 import mod.maxbogomol.wizards_reborn.common.item.FracturedCrystalItem;
 import net.minecraft.core.registries.Registries;
@@ -45,7 +46,7 @@ public class WizardsRebornItemGroup {
             event.accept(WizardsReborn.NETHER_ARCANE_GOLD_ORE_ITEM);
             event.accept(WizardsReborn.RAW_ARCANE_GOLD_BLOCK_ITEM);
 
-            if (CreateIntegration.isCreateLoaded()) {
+            if (CreateIntegration.isLoaded()) {
                 event.accept(CreateIntegration.CRUSHED_RAW_ARCANE_GOLD);
                 event.accept(CreateIntegration.ARCANE_GOLD_SHEET);
             }
@@ -56,6 +57,10 @@ public class WizardsRebornItemGroup {
             event.accept(WizardsReborn.ARCANE_GOLD_SHOVEL);
             event.accept(WizardsReborn.ARCANE_GOLD_HOE);
             event.accept(WizardsReborn.ARCANE_GOLD_SCYTHE);
+
+            if (FarmersDelightIntegration.isLoaded()) {
+                event.accept(FarmersDelightIntegration.ARCANE_GOLD_KNIFE);
+            }
 
             event.accept(WizardsReborn.ARCANE_GOLD_HELMET);
             event.accept(WizardsReborn.ARCANE_GOLD_CHESTPLATE);

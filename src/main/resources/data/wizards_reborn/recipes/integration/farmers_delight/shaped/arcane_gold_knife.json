@@ -1,0 +1,31 @@
+{
+  "type": "forge:conditional",
+  "recipes": [
+    {
+      "conditions": [
+        {
+          "type": "forge:mod_loaded",
+          "modid": "farmersdelight"
+        }
+      ],
+      "recipe": {
+        "type": "minecraft:crafting_shaped",
+        "key": {
+          "m": {
+            "item": "wizards_reborn:arcane_gold_ingot"
+          },
+          "s": {
+            "item": "wizards_reborn:arcane_wood_branch"
+          }
+        },
+        "pattern": [
+          "m",
+          "s"
+        ],
+        "result": {
+          "item": "wizards_reborn:arcane_gold_knife"
+        }
+      }
+    }
+  ]
+}

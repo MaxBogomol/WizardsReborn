@@ -17,6 +17,7 @@
   "item.wizards_reborn.arcane_gold_shovel": "Аркановая золотая лопата",
   "item.wizards_reborn.arcane_gold_hoe": "Аркановая золотая мотыга",
   "item.wizards_reborn.arcane_gold_scythe": "Аркановая золотая коса",
+  "item.wizards_reborn.arcane_gold_knife": "Аркановый золотой нож",
   "item.wizards_reborn.arcane_gold_helmet": "Арканово золотой шлем",
   "item.wizards_reborn.arcane_gold_chestplate": "Арканово золотой нагрудник",
   "item.wizards_reborn.arcane_gold_leggings": "Арканово золотые поножи",
@@ -522,6 +523,9 @@
   "gui.wizards_reborn.category.arcanum_dust_transmutation": "Трансмутация арканумной пыли",
   "gui.wizards_reborn.category.mortar": "Ступка",
   "gui.wizards_reborn.category.censer": "Курильница",
+
+  "config.jade.plugin_wizards_reborn.crystal_growth": "Рост кристаллов",
+  "config.jade.plugin_wizards_reborn.numerical": "Числовой",
 
   "gui.wizards_reborn.menu.optifine.0": "ВНИМАНИЕ! Кажется, у вас установлен Optifine",
   "gui.wizards_reborn.menu.optifine.1": "Optifine может сломать рендеринг частиц в Wizard's Reborn",

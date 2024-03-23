@@ -7,10 +7,10 @@
   "steam": 100,
   "ingredients": [
     {
-      "item": "minecraft:quartz"
+      "tag": "forge:gems/quartz"
     },
     {
-      "item": "minecraft:quartz"
+      "tag": "forge:gems/quartz"
     },
     {
       "item": "minecraft:calcite"
