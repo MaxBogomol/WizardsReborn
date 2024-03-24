@@ -5,8 +5,12 @@ import mod.maxbogomol.wizards_reborn.api.knowledge.Knowledges;
 import net.minecraft.world.item.ItemStack;
 
 public class RegisterKnowledges {
+    //START
+    public static ArcanemiconOfferingKnowledge ARCANEMICON_OFFERING = new ArcanemiconOfferingKnowledge(WizardsReborn.MOD_ID+":arcanemicon_offering", false, 0);
+    public static ArcanemiconKnowledge ARCANEMICON = new ArcanemiconKnowledge(WizardsReborn.MOD_ID+":arcanemicon", false, 0, WizardsReborn.ARCANEMICON.get());
+    public static ArcanumKnowledge ARCANUM = new ArcanumKnowledge(WizardsReborn.MOD_ID+":arcanum", false, 0, WizardsReborn.ARCANUM.get());
+
     //ARCANE NATURE
-    public static ItemKnowledge ARCANUM = new ArcanumKnowledge(WizardsReborn.MOD_ID+":arcanum", false, 0, WizardsReborn.ARCANUM.get());
     public static ItemKnowledge ARCANUM_DUST = new ItemKnowledge(WizardsReborn.MOD_ID+":arcanum_dust", true, 10, WizardsReborn.ARCANUM_DUST.get());
     public static ItemTagKnowledge ARCANE_WOOD = new ItemTagKnowledge(WizardsReborn.MOD_ID+":arcane_wood", true, 10, WizardsReborn.ARCANE_WOOD_LOGS_ITEM_TAG, new ItemStack(WizardsReborn.ARCANE_WOOD_LOG_ITEM.get()));
     public static ItemKnowledge ARCANE_GOLD = new ItemKnowledge(WizardsReborn.MOD_ID+":arcane_gold", true, 10, WizardsReborn.ARCANE_GOLD_INGOT.get());
@@ -62,8 +66,12 @@ public class RegisterKnowledges {
     public static ItemKnowledge ARCACITE_POLISHING_MIXTURE = new ItemKnowledge(WizardsReborn.MOD_ID+":arcacite_polishing_mixture", true, 10, WizardsReborn.ARCACITE_POLISHING_MIXTURE.get());
 
     public static void init() {
-        //ARCANE NATURE
+        //START
+        Knowledges.register(ARCANEMICON_OFFERING);
+        Knowledges.register(ARCANEMICON);
         Knowledges.register(ARCANUM);
+
+        //ARCANE NATURE
         Knowledges.register(ARCANUM_DUST);
         Knowledges.register(ARCANE_WOOD);
         Knowledges.register(ARCANE_GOLD);

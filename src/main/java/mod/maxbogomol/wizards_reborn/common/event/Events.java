@@ -9,10 +9,7 @@ import mod.maxbogomol.wizards_reborn.common.capability.IKnowledge;
 import mod.maxbogomol.wizards_reborn.common.capability.KnowledgeProvider;
 import mod.maxbogomol.wizards_reborn.common.command.WizardsRebornCommand;
 import mod.maxbogomol.wizards_reborn.common.entity.SpellProjectileEntity;
-import mod.maxbogomol.wizards_reborn.common.knowledge.ArcanumKnowledge;
-import mod.maxbogomol.wizards_reborn.common.knowledge.CrystalRitualKnowledge;
-import mod.maxbogomol.wizards_reborn.common.knowledge.ItemKnowledge;
-import mod.maxbogomol.wizards_reborn.common.knowledge.ItemTagKnowledge;
+import mod.maxbogomol.wizards_reborn.common.knowledge.*;
 import mod.maxbogomol.wizards_reborn.common.network.KnowledgeUpdatePacket;
 import mod.maxbogomol.wizards_reborn.common.network.PacketHandler;
 import net.minecraft.nbt.CompoundTag;
@@ -70,6 +67,18 @@ public class Events {
             List<ItemStack> items = player.inventoryMenu.getItems();
 
             for (Knowledge knowledge : Knowledges.getKnowledges()) {
+                if (knowledge instanceof ArcanemiconKnowledge arcanemiconKnowledge) {
+                    if (arcanemiconKnowledge.canReceived(items)) {
+                        KnowledgeUtils.addKnowledge(player, knowledge);
+                    }
+                }
+
+                if (knowledge instanceof ArcanemiconOfferingKnowledge arcanemiconOfferingKnowledge) {
+                    if (arcanemiconOfferingKnowledge.canReceived(player, items)) {
+                        KnowledgeUtils.addKnowledge(player, knowledge);
+                    }
+                }
+
                 if (knowledge instanceof ArcanumKnowledge arcanumKnowledge) {
                     if (arcanumKnowledge.canReceived(items)) {
                         KnowledgeUtils.addKnowledge(player, knowledge);

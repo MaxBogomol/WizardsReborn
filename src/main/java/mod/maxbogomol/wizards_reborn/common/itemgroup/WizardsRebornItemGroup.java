@@ -366,6 +366,7 @@ public class WizardsRebornItemGroup {
             event.accept(WizardsReborn.MUSIC_DISC_ARCANUM);
             event.accept(WizardsReborn.MUSIC_DISC_MOR);
             event.accept(WizardsReborn.MUSIC_DISC_REBORN);
+            event.accept(WizardsReborn.MUSIC_DISC_PANACHE);
 
             for (AlchemyPotion potion : AlchemyPotions.getAlchemyPotions()) {
                 if (potion != RegisterAlchemyPotions.EMPTY && potion != RegisterAlchemyPotions.COMBINED) {

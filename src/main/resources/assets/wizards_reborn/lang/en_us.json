@@ -327,6 +327,7 @@
   "item.wizards_reborn.music_disc_arcanum": "Arcane Music Disc",
   "item.wizards_reborn.music_disc_mor": "Arcane Music Disc",
   "item.wizards_reborn.music_disc_reborn": "Arcane Music Disc",
+  "item.wizards_reborn.music_disc_panache": "Arcane Сassette",
 
   "item.wizards_reborn.arcane_wood_smoking_pipe": "Arcane Wood Smoking Pipe",
   "item.wizards_reborn.arcane_wood_cane": "Arcane Wood Cane",
@@ -389,6 +390,7 @@
   "item.wizards_reborn.music_disc_arcanum.desc": "Onjerlay - Arcanum Swinging",
   "item.wizards_reborn.music_disc_mor.desc": "Onjerlay - Mor Marsh",
   "item.wizards_reborn.music_disc_reborn.desc": "Onjerlay - Reborn",
+  "item.wizards_reborn.music_disc_panache.desc": "Onjerlay - Magical Panache",
 
   "block.minecraft.banner.wizards_reborn.violence.black": "Black Symbol \"Violence\"",
   "block.minecraft.banner.wizards_reborn.violence.blue": "Blue Symbol \"Violence\"",
@@ -531,6 +533,10 @@
   "gui.wizards_reborn.heat": "Heat",
   "gui.wizards_reborn.steam": "Steam",
   "gui.wizards_reborn.experience": "Experience",
+
+  "message.wizards_reborn.someone": "Someone",
+  "message.wizards_reborn.arcanemicon_offering": "My strength is fading... I give you this book for you to revive lost knowledge! Accomplish this great goal, for I have not...",
+  "message.wizards_reborn.arcanemicon": "The zeal for ancient knowledge begins to blossom inside you! You know what you should do.",
 
   "attribute.name.wizards_reborn.wissen_discount": "Wissen Discount",
   "attribute.name.wizards_reborn.magic_armor": "Magic Armor",

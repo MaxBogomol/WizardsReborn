@@ -327,6 +327,7 @@
   "item.wizards_reborn.music_disc_arcanum": "Аркановая пластинка",
   "item.wizards_reborn.music_disc_mor": "Аркановая пластинка",
   "item.wizards_reborn.music_disc_reborn": "Аркановая пластинка",
+  "item.wizards_reborn.music_disc_panache": "Аркановая кассета",
 
   "item.wizards_reborn.arcane_wood_smoking_pipe": "Арканово-древесная курительная трубка",
   "item.wizards_reborn.arcane_wood_cane": "Арканово-древесная трость",
@@ -394,6 +395,7 @@
   "item.wizards_reborn.music_disc_arcanum.desc": "Onjerlay - Arcanum Swinging",
   "item.wizards_reborn.music_disc_mor.desc": "Onjerlay - Mor Marsh",
   "item.wizards_reborn.music_disc_reborn.desc": "Onjerlay - Reborn",
+  "item.wizards_reborn.music_disc_panache.desc": "Onjerlay - Magical Panache",
 
   "block.minecraft.banner.wizards_reborn.violence.black": "Чёрный символ \"Насилие\"",
   "block.minecraft.banner.wizards_reborn.violence.blue": "Синий символ \"Насилие\"",
@@ -536,6 +538,10 @@
   "gui.wizards_reborn.heat": "Нагрев",
   "gui.wizards_reborn.steam": "Пар",
   "gui.wizards_reborn.experience": "Опыт",
+
+  "message.wizards_reborn.someone": "Нечто",
+  "message.wizards_reborn.arcanemicon_offering": "Мои силы угасают... Я дарую тебе эту книгу, дабы ты возродил потерянные знания! Достигни этой великой цели, ибо я не смог...",
+  "message.wizards_reborn.arcanemicon": "Рвение к древним знаниям начало расцветать в тебе! Ты знаешь что должен делать.",
 
   "attribute.name.wizards_reborn.wissen_discount": "Скидка виссена",
   "attribute.name.wizards_reborn.magic_armor": "Магическая броня",

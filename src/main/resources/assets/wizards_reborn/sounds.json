@@ -58,5 +58,13 @@
         "stream": true
       }
     ]
+  },
+  "magical_panache": {
+    "sounds": [
+      {
+        "name": "wizards_reborn:magical_panache",
+        "stream": true
+      }
+    ]
   }
 }
