@@ -132,7 +132,7 @@ public class WizardsRebornClient {
     public static class RegistryEvents {
         @SubscribeEvent
         public static void onRenderTypeSetup(FMLClientSetupEvent event) {
-            Sheets.addWoodType(WizardsReborn.ARCANE_WOOD_TYPE);
+            Sheets.addWoodType(WizardsReborn.ARCANE_WOOD_TYPE.resolve().get());
             Sheets.addWoodType(WizardsReborn.INNOCENT_WOOD_TYPE);
 
             ItemBlockRenderTypes.setRenderLayer(WizardsReborn.ARCANE_WOOD_DOOR.get(), RenderType.cutout());

@@ -1,70 +1,81 @@
 {
-  "wissen_burst": {
-    "subtitle": "sounds.wizards_reborn.wissen_burst",
-    "sounds": [
-      "wizards_reborn:wissen_burst"
-    ]
-  },
-  "wissen_transfer": {
-    "subtitle": "sounds.wizards_reborn.wissen_transfer",
-    "sounds": [
-      "wizards_reborn:wissen_transfer"
-    ]
-  },
-  "spell_cast": {
-    "subtitle": "sounds.wizards_reborn.spell_cast",
-    "sounds": [
-      "wizards_reborn:spell_cast"
-    ]
-  },
-  "spell_burst": {
-    "subtitle": "sounds.wizards_reborn.spell_burst",
-    "sounds": [
-      "wizards_reborn:spell_burst"
-    ]
-  },
-  "spell_reload": {
-    "subtitle": "sounds.wizards_reborn.spell_reload",
-    "sounds": [
-      "wizards_reborn:spell_reload"
-    ]
-  },
-  "steam_burst": {
-    "subtitle": "sounds.wizards_reborn.steam_burst",
-    "sounds": [
-      "wizards_reborn:steam_burst"
-    ]
-  },
-  "arcanum_swinging": {
-    "sounds": [
-      {
-        "name": "wizards_reborn:arcanum_swinging",
-        "stream": true
-      }
-    ]
-  },
-  "mor_marsh": {
-    "sounds": [
-      {
-        "name": "wizards_reborn:mor_marsh",
-        "stream": true
-      }
-    ]
-  },
-  "reborn": {
-    "sounds": [
-      {
-        "name": "wizards_reborn:reborn",
-        "stream": true
-      }
-    ]
-  },
-  "magical_panache": {
-    "sounds": [
-      {
-        "name": "wizards_reborn:magical_panache",
-        "stream": true
-      }
-    ]
-  }
+  "arcanum_swinging": { "sounds": [{"name": "wizards_reborn:music/arcanum_swinging", "stream": true}]},
+  "mor_marsh": { "sounds": [{"name": "wizards_reborn:music/mor_marsh", "stream": true}]},
+  "reborn": { "sounds": [{"name": "wizards_reborn:music/reborn", "stream": true}]},
+  "magical_panache": { "sounds": [{"name": "wizards_reborn:music/magical_panache", "stream": true}]},
+
+  "wissen_burst": { "sounds": ["wizards_reborn:wissen/burst"], "subtitle": "sounds.wizards_reborn.wissen_burst"},
+  "wissen_transfer": { "sounds": ["wizards_reborn:wissen/transfer"], "subtitle": "sounds.wizards_reborn.wissen_transfer"},
+
+  "steam_burst": { "sounds": ["wizards_reborn:steam/burst"], "subtitle": "sounds.wizards_reborn.steam_burst"},
+
+  "spell_cast": { "sounds": ["wizards_reborn:spell/cast"], "subtitle": "sounds.wizards_reborn.spell_cast"},
+  "spell_burst": { "sounds": ["wizards_reborn:spell/burst"], "subtitle": "sounds.wizards_reborn.spell_burst"},
+  "spell_reload": { "sounds": ["wizards_reborn:spell/reload"],  "subtitle": "sounds.wizards_reborn.spell_reload"},
+
+  "arcane_gold_break": { "sounds": ["wizards_reborn:blocks/arcane_gold/break1", "wizards_reborn:blocks/arcane_gold/break2", "wizards_reborn:blocks/arcane_gold/break3", "wizards_reborn:blocks/arcane_gold/break4"], "subtitle": "sounds.wizards_reborn.arcane_gold_break"},
+  "arcane_gold_step": { "sounds": ["wizards_reborn:blocks/arcane_gold/step1", "wizards_reborn:blocks/arcane_gold/step2", "wizards_reborn:blocks/arcane_gold/step3", "wizards_reborn:blocks/arcane_gold/step4", "wizards_reborn:blocks/arcane_gold/step5"], "subtitle": "sounds.wizards_reborn.arcane_gold_step"},
+  "arcane_gold_place": { "sounds": ["wizards_reborn:blocks/arcane_gold/break1", "wizards_reborn:blocks/arcane_gold/break2", "wizards_reborn:blocks/arcane_gold/break3", "wizards_reborn:blocks/arcane_gold/break4"], "subtitle": "sounds.wizards_reborn.arcane_gold_place"},
+  "arcane_gold_hit": { "sounds": ["wizards_reborn:blocks/arcane_gold/step1", "wizards_reborn:blocks/arcane_gold/step2", "wizards_reborn:blocks/arcane_gold/step3", "wizards_reborn:blocks/arcane_gold/step4", "wizards_reborn:blocks/arcane_gold/step5"], "subtitle": "sounds.wizards_reborn.arcane_gold_hit"},
+
+  "arcane_gold_ore_break": { "sounds": ["wizards_reborn:blocks/arcane_gold_ore/break1", "wizards_reborn:blocks/arcane_gold_ore/break2", "wizards_reborn:blocks/arcane_gold_ore/break3", "wizards_reborn:blocks/arcane_gold_ore/break4"], "subtitle": "sounds.wizards_reborn.arcane_gold_ore_break"},
+  "arcane_gold_ore_step": { "sounds": ["wizards_reborn:blocks/arcane_gold_ore/step1", "wizards_reborn:blocks/arcane_gold_ore/step2", "wizards_reborn:blocks/arcane_gold_ore/step3", "wizards_reborn:blocks/arcane_gold_ore/step4", "wizards_reborn:blocks/arcane_gold_ore/step5", "wizards_reborn:blocks/arcane_gold_ore/step6"], "subtitle": "sounds.wizards_reborn.arcane_gold_ore_step"},
+  "arcane_gold_ore_place": { "sounds": ["wizards_reborn:blocks/arcane_gold_ore/break1", "wizards_reborn:blocks/arcane_gold_ore/break2", "wizards_reborn:blocks/arcane_gold_ore/break3", "wizards_reborn:blocks/arcane_gold_ore/break4"], "subtitle": "sounds.wizards_reborn.arcane_gold_ore_place"},
+  "arcane_gold_ore_hit": { "sounds": ["wizards_reborn:blocks/arcane_gold_ore/step1", "wizards_reborn:blocks/arcane_gold_ore/step2", "wizards_reborn:blocks/arcane_gold_ore/step3", "wizards_reborn:blocks/arcane_gold_ore/step4", "wizards_reborn:blocks/arcane_gold_ore/step5", "wizards_reborn:blocks/arcane_gold_ore/step6"], "subtitle": "sounds.wizards_reborn.arcane_gold_ore_hit"},
+
+  "deepslate_arcane_gold_ore_break": { "sounds": ["wizards_reborn:blocks/deepslate_arcane_gold_ore/break1", "wizards_reborn:blocks/deepslate_arcane_gold_ore/break2", "wizards_reborn:blocks/deepslate_arcane_gold_ore/break3", "wizards_reborn:blocks/deepslate_arcane_gold_ore/break4"], "subtitle": "sounds.wizards_reborn.deepslate_arcane_gold_ore_break"},
+  "deepslate_arcane_gold_ore_step": { "sounds": ["wizards_reborn:blocks/deepslate_arcane_gold_ore/step1", "wizards_reborn:blocks/deepslate_arcane_gold_ore/step2", "wizards_reborn:blocks/deepslate_arcane_gold_ore/step3", "wizards_reborn:blocks/deepslate_arcane_gold_ore/step4", "wizards_reborn:blocks/deepslate_arcane_gold_ore/step5", "wizards_reborn:blocks/deepslate_arcane_gold_ore/step6"], "subtitle": "sounds.wizards_reborn.deepslate_arcane_gold_ore_step"},
+  "deepslate_arcane_gold_ore_place": { "sounds": ["wizards_reborn:blocks/deepslate_arcane_gold_ore/place1", "wizards_reborn:blocks/deepslate_arcane_gold_ore/place2", "wizards_reborn:blocks/deepslate_arcane_gold_ore/place3", "wizards_reborn:blocks/deepslate_arcane_gold_ore/place4", "wizards_reborn:blocks/deepslate_arcane_gold_ore/place5", "wizards_reborn:blocks/deepslate_arcane_gold_ore/place6"], "subtitle": "sounds.wizards_reborn.deepslate_arcane_gold_ore_place"},
+  "deepslate_arcane_gold_ore_hit": { "sounds": ["wizards_reborn:blocks/deepslate_arcane_gold_ore/step1", "wizards_reborn:blocks/deepslate_arcane_gold_ore/step2", "wizards_reborn:blocks/deepslate_arcane_gold_ore/step3", "wizards_reborn:blocks/deepslate_arcane_gold_ore/step4", "wizards_reborn:blocks/deepslate_arcane_gold_ore/step5", "wizards_reborn:blocks/deepslate_arcane_gold_ore/step6"], "subtitle": "sounds.wizards_reborn.deepslate_arcane_gold_ore_hit"},
+
+  "nether_arcane_gold_ore_break": { "sounds": ["wizards_reborn:blocks/nether_arcane_gold_ore/break1", "wizards_reborn:blocks/nether_arcane_gold_ore/break2", "wizards_reborn:blocks/nether_arcane_gold_ore/break3", "wizards_reborn:blocks/nether_arcane_gold_ore/break4"], "subtitle": "sounds.wizards_reborn.nether_arcane_gold_ore_break"},
+  "nether_arcane_gold_ore_step": { "sounds": ["wizards_reborn:blocks/nether_arcane_gold_ore/step1", "wizards_reborn:blocks/nether_arcane_gold_ore/step2", "wizards_reborn:blocks/nether_arcane_gold_ore/step3", "wizards_reborn:blocks/nether_arcane_gold_ore/step4", "wizards_reborn:blocks/nether_arcane_gold_ore/step5"], "subtitle": "sounds.wizards_reborn.nether_arcane_gold_ore_step"},
+  "nether_arcane_gold_ore_place": { "sounds": ["wizards_reborn:blocks/nether_arcane_gold_ore/break1", "wizards_reborn:blocks/nether_arcane_gold_ore/break2", "wizards_reborn:blocks/nether_arcane_gold_ore/break3", "wizards_reborn:blocks/nether_arcane_gold_ore/break4"], "subtitle": "sounds.wizards_reborn.nether_arcane_gold_ore_place"},
+  "nether_arcane_gold_ore_hit": { "sounds": ["wizards_reborn:blocks/nether_arcane_gold_ore/step1", "wizards_reborn:blocks/nether_arcane_gold_ore/step2", "wizards_reborn:blocks/nether_arcane_gold_ore/step3", "wizards_reborn:blocks/nether_arcane_gold_ore/step4", "wizards_reborn:blocks/nether_arcane_gold_ore/step5"], "subtitle": "sounds.wizards_reborn.nether_arcane_gold_ore_hit"},
+
+  "raw_arcane_gold_break": { "sounds": ["wizards_reborn:blocks/arcane_gold_ore/break1", "wizards_reborn:blocks/arcane_gold_ore/break2", "wizards_reborn:blocks/arcane_gold_ore/break3", "wizards_reborn:blocks/arcane_gold_ore/break4"], "subtitle": "sounds.wizards_reborn.arcane_gold_ore_break"},
+  "raw_arcane_gold_step": { "sounds": ["wizards_reborn:blocks/arcane_gold_ore/step1", "wizards_reborn:blocks/arcane_gold_ore/step2", "wizards_reborn:blocks/arcane_gold_ore/step3", "wizards_reborn:blocks/arcane_gold_ore/step4", "wizards_reborn:blocks/arcane_gold_ore/step5", "wizards_reborn:blocks/arcane_gold_ore/step6"], "subtitle": "sounds.wizards_reborn.arcane_gold_ore_step"},
+  "raw_arcane_gold_place": { "sounds": ["wizards_reborn:blocks/arcane_gold_ore/break1", "wizards_reborn:blocks/arcane_gold_ore/break2", "wizards_reborn:blocks/arcane_gold_ore/break3", "wizards_reborn:blocks/arcane_gold_ore/break4"], "subtitle": "sounds.wizards_reborn.arcane_gold_ore_place"},
+  "raw_arcane_gold_hit": { "sounds": ["wizards_reborn:blocks/arcane_gold_ore/step1", "wizards_reborn:blocks/arcane_gold_ore/step2", "wizards_reborn:blocks/arcane_gold_ore/step3", "wizards_reborn:blocks/arcane_gold_ore/step4", "wizards_reborn:blocks/arcane_gold_ore/step5", "wizards_reborn:blocks/arcane_gold_ore/step6"], "subtitle": "sounds.wizards_reborn.arcane_gold_ore_hit"},
+
+  "arcanum_break": { "sounds": ["wizards_reborn:blocks/arcanum/break1", "wizards_reborn:blocks/arcanum/break2", "wizards_reborn:blocks/arcanum/break3", "wizards_reborn:blocks/arcanum/break4", "wizards_reborn:blocks/arcanum/break5", "wizards_reborn:blocks/arcanum/break6"], "subtitle": "sounds.wizards_reborn.arcanum_break"},
+  "arcanum_step": { "sounds": ["wizards_reborn:blocks/arcanum/step1", "wizards_reborn:blocks/arcanum/step2", "wizards_reborn:blocks/arcanum/step3", "wizards_reborn:blocks/arcanum/step4", "wizards_reborn:blocks/arcanum/step5", "wizards_reborn:blocks/arcanum/step6"], "subtitle": "sounds.wizards_reborn.arcanum_step"},
+  "arcanum_place": { "sounds": ["wizards_reborn:blocks/arcanum/break1", "wizards_reborn:blocks/arcanum/break2", "wizards_reborn:blocks/arcanum/break3", "wizards_reborn:blocks/arcanum/break4", "wizards_reborn:blocks/arcanum/break5", "wizards_reborn:blocks/arcanum/break6"], "subtitle": "sounds.wizards_reborn.arcanum_place"},
+  "arcanum_hit": { "sounds": ["wizards_reborn:blocks/arcanum/step1", "wizards_reborn:blocks/arcanum/step2", "wizards_reborn:blocks/arcanum/step3", "wizards_reborn:blocks/arcanum/step4", "wizards_reborn:blocks/arcanum/step5", "wizards_reborn:blocks/arcanum/step6"], "subtitle": "sounds.wizards_reborn.arcanum_hit"},
+
+  "arcanum_ore_break": { "sounds": ["wizards_reborn:blocks/arcanum_ore/break1", "wizards_reborn:blocks/arcanum_ore/break2", "wizards_reborn:blocks/arcanum_ore/break3", "wizards_reborn:blocks/arcanum_ore/break4"], "subtitle": "sounds.wizards_reborn.arcanum_ore_break"},
+  "arcanum_ore_step": { "sounds": ["wizards_reborn:blocks/arcanum_ore/step1", "wizards_reborn:blocks/arcanum_ore/step2", "wizards_reborn:blocks/arcanum_ore/step3", "wizards_reborn:blocks/arcanum_ore/step4", "wizards_reborn:blocks/arcanum_ore/step5", "wizards_reborn:blocks/arcanum_ore/step6"], "subtitle": "sounds.wizards_reborn.arcanum_ore_step"},
+  "arcanum_ore_place": { "sounds": ["wizards_reborn:blocks/arcanum_ore/break1", "wizards_reborn:blocks/arcanum_ore/break2", "wizards_reborn:blocks/arcanum_ore/break3", "wizards_reborn:blocks/arcanum_ore/break4"], "subtitle": "sounds.wizards_reborn.arcanum_ore_place"},
+  "arcanum_ore_hit": { "sounds": ["wizards_reborn:blocks/arcanum_ore/step1", "wizards_reborn:blocks/arcanum_ore/step2", "wizards_reborn:blocks/arcanum_ore/step3", "wizards_reborn:blocks/arcanum_ore/step4", "wizards_reborn:blocks/arcanum_ore/step5", "wizards_reborn:blocks/arcanum_ore/step6"], "subtitle": "sounds.wizards_reborn.arcanum_ore_hit"},
+
+  "deepslate_arcanum_ore_break": { "sounds": ["wizards_reborn:blocks/deepslate_arcanum_ore/break1", "wizards_reborn:blocks/deepslate_arcanum_ore/break2", "wizards_reborn:blocks/deepslate_arcanum_ore/break3", "wizards_reborn:blocks/deepslate_arcanum_ore/break4"], "subtitle": "sounds.wizards_reborn.deepslate_arcanum_ore_break"},
+  "deepslate_arcanum_ore_step": { "sounds": ["wizards_reborn:blocks/deepslate_arcanum_ore/step1", "wizards_reborn:blocks/deepslate_arcanum_ore/step2", "wizards_reborn:blocks/deepslate_arcanum_ore/step3", "wizards_reborn:blocks/deepslate_arcanum_ore/step4", "wizards_reborn:blocks/deepslate_arcanum_ore/step5", "wizards_reborn:blocks/deepslate_arcanum_ore/step6"], "subtitle": "sounds.wizards_reborn.deepslate_arcanum_ore_step"},
+  "deepslate_arcanum_ore_place": { "sounds": ["wizards_reborn:blocks/deepslate_arcanum_ore/place1", "wizards_reborn:blocks/deepslate_arcanum_ore/place2", "wizards_reborn:blocks/deepslate_arcanum_ore/place3", "wizards_reborn:blocks/deepslate_arcanum_ore/place4", "wizards_reborn:blocks/deepslate_arcanum_ore/place5", "wizards_reborn:blocks/deepslate_arcanum_ore/place6"], "subtitle": "sounds.wizards_reborn.deepslate_arcanum_ore_place"},
+  "deepslate_arcanum_ore_hit": { "sounds": ["wizards_reborn:blocks/deepslate_arcanum_ore/step1", "wizards_reborn:blocks/deepslate_arcanum_ore/step2", "wizards_reborn:blocks/deepslate_arcanum_ore/step3", "wizards_reborn:blocks/deepslate_arcanum_ore/step4", "wizards_reborn:blocks/deepslate_arcanum_ore/step5", "wizards_reborn:blocks/deepslate_arcanum_ore/step6"], "subtitle": "sounds.wizards_reborn.deepslate_arcanum_ore_hit"},
+
+  "arcacite_break": { "sounds": ["wizards_reborn:blocks/arcacite/break1", "wizards_reborn:blocks/arcacite/break2", "wizards_reborn:blocks/arcacite/break3", "wizards_reborn:blocks/arcacite/break4", "wizards_reborn:blocks/arcacite/break5", "wizards_reborn:blocks/arcacite/break6"], "subtitle": "sounds.wizards_reborn.arcacite_break"},
+  "arcacite_step": { "sounds": ["wizards_reborn:blocks/arcacite/step1", "wizards_reborn:blocks/arcacite/step2", "wizards_reborn:blocks/arcacite/step3", "wizards_reborn:blocks/arcacite/step4", "wizards_reborn:blocks/arcacite/step5", "wizards_reborn:blocks/arcacite/step6"], "subtitle": "sounds.wizards_reborn.arcacite_step"},
+  "arcacite_place": { "sounds": ["wizards_reborn:blocks/arcacite/break1", "wizards_reborn:blocks/arcacite/break2", "wizards_reborn:blocks/arcacite/break3", "wizards_reborn:blocks/arcacite/break4", "wizards_reborn:blocks/arcacite/break5", "wizards_reborn:blocks/arcacite/break6"], "subtitle": "sounds.wizards_reborn.arcacite_place"},
+  "arcacite_hit": { "sounds": ["wizards_reborn:blocks/arcacite/step1", "wizards_reborn:blocks/arcacite/step2", "wizards_reborn:blocks/arcacite/step3", "wizards_reborn:blocks/arcacite/step4", "wizards_reborn:blocks/arcacite/step5", "wizards_reborn:blocks/arcacite/step6"], "subtitle": "sounds.wizards_reborn.arcacite_hit"},
+
+  "arcane_wood_break": { "sounds": ["wizards_reborn:blocks/arcane_wood/break1", "wizards_reborn:blocks/arcane_wood/break2", "wizards_reborn:blocks/arcane_wood/break3", "wizards_reborn:blocks/arcane_wood/break4", "wizards_reborn:blocks/arcane_wood/break5", "wizards_reborn:blocks/arcane_wood/break6"], "subtitle": "sounds.wizards_reborn.arcane_wood_break"},
+  "arcane_wood_step": { "sounds": ["wizards_reborn:blocks/arcane_wood/step1", "wizards_reborn:blocks/arcane_wood/step2", "wizards_reborn:blocks/arcane_wood/step3", "wizards_reborn:blocks/arcane_wood/step4", "wizards_reborn:blocks/arcane_wood/step5", "wizards_reborn:blocks/arcane_wood/step6"], "subtitle": "sounds.wizards_reborn.arcane_wood_step"},
+  "arcane_wood_place": { "sounds": ["wizards_reborn:blocks/arcane_wood/break1", "wizards_reborn:blocks/arcane_wood/break2", "wizards_reborn:blocks/arcane_wood/break3", "wizards_reborn:blocks/arcane_wood/break4", "wizards_reborn:blocks/arcane_wood/break5", "wizards_reborn:blocks/arcane_wood/break6"], "subtitle": "sounds.wizards_reborn.arcane_wood_place"},
+  "arcane_wood_hit": { "sounds": ["wizards_reborn:blocks/arcane_wood/step1", "wizards_reborn:blocks/arcane_wood/step2", "wizards_reborn:blocks/arcane_wood/step3", "wizards_reborn:blocks/arcane_wood/step4", "wizards_reborn:blocks/arcane_wood/step5", "wizards_reborn:blocks/arcane_wood/step6"], "subtitle": "sounds.wizards_reborn.arcane_wood_hit"},
+
+  "arcane_wood_hanging_sign_break": { "sounds": ["wizards_reborn:blocks/arcane_wood/hanging_sign/break1", "wizards_reborn:blocks/arcane_wood/hanging_sign/break2", "wizards_reborn:blocks/arcane_wood/hanging_sign/break3", "wizards_reborn:blocks/hanging_sign/arcane_wood/break4"], "subtitle": "sounds.wizards_reborn.arcane_wood_hanging_sign_break"},
+  "arcane_wood_hanging_sign_step": { "sounds": ["wizards_reborn:blocks/arcane_wood/hanging_sign/step1", "wizards_reborn:blocks/arcane_wood/hanging_sign/step2", "wizards_reborn:blocks/arcane_wood/hanging_sign/step3", "wizards_reborn:blocks/arcane_wood/hanging_sign/step4"], "subtitle": "sounds.wizards_reborn.arcane_wood_hanging_sign_step"},
+  "arcane_wood_hanging_sign_place": { "sounds": ["wizards_reborn:blocks/arcane_wood/hanging_sign/break1", "wizards_reborn:blocks/arcane_wood/hanging_sign/break2", "wizards_reborn:blocks/arcane_wood/hanging_sign/break3", "wizards_reborn:blocks/arcane_wood/hanging_sign/break4"], "subtitle": "sounds.wizards_reborn.arcane_wood_hanging_sign_place"},
+  "arcane_wood_hanging_sign_hit": { "sounds": ["wizards_reborn:blocks/arcane_wood/hanging_sign/step1", "wizards_reborn:blocks/arcane_wood/hanging_sign/step2", "wizards_reborn:blocks/arcane_wood/hanging_sign/step3", "wizards_reborn:blocks/arcane_wood/hanging_sign/step4"], "subtitle": "sounds.wizards_reborn.arcane_wood_hanging_sign_hit"},
+
+  "arcane_wood_button_click_off": { "sounds": ["wizards_reborn:blocks/arcane_wood/button/arcane_wood_button"], "subtitle": "sounds.wizards_reborn.arcane_wood_button_click_off"},
+  "arcane_wood_button_click_on": { "sounds": ["wizards_reborn:blocks/arcane_wood/button/arcane_wood_button"], "subtitle": "sounds.wizards_reborn.arcane_wood_button_click_on"},
+  "arcane_wood_pressure_plate_click_off": { "sounds": ["wizards_reborn:blocks/arcane_wood/button/arcane_wood_button"], "subtitle": "sounds.wizards_reborn.arcane_wood_pressure_plate_click_off"},
+  "arcane_wood_pressure_plate_click_on": { "sounds": ["wizards_reborn:blocks/arcane_wood/button/arcane_wood_button"], "subtitle": "sounds.wizards_reborn.arcane_wood_pressure_plate_click_on"},
+  "arcane_wood_fence_gate_close": { "sounds": ["wizards_reborn:blocks/arcane_wood/fence_gate/toggle1", "wizards_reborn:blocks/arcane_wood/fence_gate/toggle2", "wizards_reborn:blocks/arcane_wood/fence_gate/toggle3", "wizards_reborn:blocks/arcane_wood/fence_gate/toggle4"], "subtitle": "sounds.wizards_reborn.arcane_wood_fence_gate_close"},
+  "arcane_wood_fence_gate_open": { "sounds": ["wizards_reborn:blocks/arcane_wood/fence_gate/toggle1", "wizards_reborn:blocks/arcane_wood/fence_gate/toggle2", "wizards_reborn:blocks/arcane_wood/fence_gate/toggle3", "wizards_reborn:blocks/arcane_wood/fence_gate/toggle4"], "subtitle": "sounds.wizards_reborn.arcane_wood_fence_gate_open"},
+  "arcane_wood_door_close": { "sounds": ["wizards_reborn:blocks/arcane_wood/door/toggle1", "wizards_reborn:blocks/arcane_wood/door/toggle2", "wizards_reborn:blocks/arcane_wood/door/toggle3", "wizards_reborn:blocks/arcane_wood/door/toggle4"], "subtitle": "sounds.wizards_reborn.arcane_wood_door_close"},
+  "arcane_wood_door_open": { "sounds": ["wizards_reborn:blocks/arcane_wood/door/toggle1", "wizards_reborn:blocks/arcane_wood/door/toggle2", "wizards_reborn:blocks/arcane_wood/door/toggle3", "wizards_reborn:blocks/arcane_wood/door/toggle4"], "subtitle": "sounds.wizards_reborn.arcane_wood_door_open"},
+  "arcane_wood_trapdoor_close": { "sounds": ["wizards_reborn:blocks/arcane_wood/trapdoor/toggle1", "wizards_reborn:blocks/arcane_wood/trapdoor/toggle2", "wizards_reborn:blocks/arcane_wood/trapdoor/toggle3", "wizards_reborn:blocks/arcane_wood/trapdoor/toggle4"], "subtitle": "sounds.wizards_reborn.arcane_wood_trapdoor_close"},
+  "arcane_wood_trapdoor_open": { "sounds": ["wizards_reborn:blocks/arcane_wood/trapdoor/toggle1", "wizards_reborn:blocks/arcane_wood/trapdoor/toggle2", "wizards_reborn:blocks/arcane_wood/trapdoor/toggle3", "wizards_reborn:blocks/arcane_wood/trapdoor/toggle4"], "subtitle": "sounds.wizards_reborn.arcane_wood_trapdoor_open"}
 }

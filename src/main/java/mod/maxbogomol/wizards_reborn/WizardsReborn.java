@@ -123,6 +123,8 @@ import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.SoundActions;
 import net.minecraftforge.common.capabilities.RegisterCapabilitiesEvent;
 import net.minecraftforge.common.extensions.IForgeMenuType;
+import net.minecraftforge.common.util.ForgeSoundType;
+import net.minecraftforge.common.util.LazyOptional;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fluids.FluidType;
@@ -170,9 +172,6 @@ public class WizardsReborn {
     public static final DeferredRegister<FluidType> FLUID_TYPES = DeferredRegister.create(ForgeRegistries.Keys.FLUID_TYPES, MOD_ID);
     public static final DeferredRegister<Fluid> FLUIDS = DeferredRegister.create(ForgeRegistries.FLUIDS, MOD_ID);
 
-    public static final WoodType ARCANE_WOOD_TYPE = WoodType.register(new WoodType(new ResourceLocation(MOD_ID, "arcane_wood").toString(), BlockSetType.OAK));
-    public static final WoodType INNOCENT_WOOD_TYPE = WoodType.register(new WoodType(new ResourceLocation(MOD_ID, "innocent_wood").toString(), BlockSetType.CHERRY));
-
     public static final TagKey<Item> ARCANE_WOOD_LOGS_ITEM_TAG = TagKey.create(Registries.ITEM, new ResourceLocation(MOD_ID, "arcane_wood_logs"));
     public static final TagKey<Item> ARCANE_LUMOS_ITEM_TAG = TagKey.create(Registries.ITEM, new ResourceLocation(MOD_ID, "arcane_lumos"));
     public static final TagKey<Item> CRYSTALS_SEEDS_ITEM_TAG = TagKey.create(Registries.ITEM, new ResourceLocation(MOD_ID, "crystal_seeds"));
@@ -204,6 +203,97 @@ public class WizardsReborn {
     public static final RegistryObject<SoundEvent> MUSIC_DISC_MOR_SOUND = SOUND_EVENTS.register("mor_marsh", () -> SoundEvent.createVariableRangeEvent(new ResourceLocation(MOD_ID, "mor_marsh")));
     public static final RegistryObject<SoundEvent> MUSIC_DISC_REBORN_SOUND = SOUND_EVENTS.register("reborn", () -> SoundEvent.createVariableRangeEvent(new ResourceLocation(MOD_ID, "reborn")));
     public static final RegistryObject<SoundEvent> MUSIC_DISC_PANACHE_SOUND = SOUND_EVENTS.register("magical_panache", () -> SoundEvent.createVariableRangeEvent(new ResourceLocation(MOD_ID, "magical_panache")));
+
+    public static final RegistryObject<SoundEvent> ARCANE_GOLD_BREAK_SOUND = SOUND_EVENTS.register("arcane_gold_break", () -> SoundEvent.createVariableRangeEvent(new ResourceLocation(MOD_ID, "arcane_gold_break")));
+    public static final RegistryObject<SoundEvent> ARCANE_GOLD_STEP_SOUND = SOUND_EVENTS.register("arcane_gold_step", () -> SoundEvent.createVariableRangeEvent(new ResourceLocation(MOD_ID, "arcane_gold_step")));
+    public static final RegistryObject<SoundEvent> ARCANE_GOLD_PLACE_SOUND = SOUND_EVENTS.register("arcane_gold_place", () -> SoundEvent.createVariableRangeEvent(new ResourceLocation(MOD_ID, "arcane_gold_place")));
+    public static final RegistryObject<SoundEvent> ARCANE_GOLD_HIT_SOUND = SOUND_EVENTS.register("arcane_gold_hit", () -> SoundEvent.createVariableRangeEvent(new ResourceLocation(MOD_ID, "arcane_gold_hit")));
+
+    public static final RegistryObject<SoundEvent> ARCANE_GOLD_ORE_BREAK_SOUND = SOUND_EVENTS.register("arcane_gold_ore_break", () -> SoundEvent.createVariableRangeEvent(new ResourceLocation(MOD_ID, "arcane_gold_ore_break")));
+    public static final RegistryObject<SoundEvent> ARCANE_GOLD_ORE_STEP_SOUND = SOUND_EVENTS.register("arcane_gold_ore_step", () -> SoundEvent.createVariableRangeEvent(new ResourceLocation(MOD_ID, "arcane_gold_ore_step")));
+    public static final RegistryObject<SoundEvent> ARCANE_GOLD_ORE_PLACE_SOUND = SOUND_EVENTS.register("arcane_gold_ore_place", () -> SoundEvent.createVariableRangeEvent(new ResourceLocation(MOD_ID, "arcane_gold_ore_place")));
+    public static final RegistryObject<SoundEvent> ARCANE_GOLD_ORE_HIT_SOUND = SOUND_EVENTS.register("arcane_gold_ore_hit", () -> SoundEvent.createVariableRangeEvent(new ResourceLocation(MOD_ID, "arcane_gold_ore_hit")));
+
+    public static final RegistryObject<SoundEvent> DEEPSLATE_ARCANE_GOLD_ORE_BREAK_SOUND = SOUND_EVENTS.register("deepslate_arcane_gold_ore_break", () -> SoundEvent.createVariableRangeEvent(new ResourceLocation(MOD_ID, "deepslate_arcane_gold_ore_break")));
+    public static final RegistryObject<SoundEvent> DEEPSLATE_ARCANE_GOLD_ORE_STEP_SOUND = SOUND_EVENTS.register("deepslate_arcane_gold_ore_step", () -> SoundEvent.createVariableRangeEvent(new ResourceLocation(MOD_ID, "deepslate_arcane_gold_ore_step")));
+    public static final RegistryObject<SoundEvent> DEEPSLATE_ARCANE_GOLD_ORE_PLACE_SOUND = SOUND_EVENTS.register("deepslate_arcane_gold_ore_place", () -> SoundEvent.createVariableRangeEvent(new ResourceLocation(MOD_ID, "deepslate_arcane_gold_ore_place")));
+    public static final RegistryObject<SoundEvent> DEEPSLATE_ARCANE_GOLD_ORE_HIT_SOUND = SOUND_EVENTS.register("deepslate_arcane_gold_ore_hit", () -> SoundEvent.createVariableRangeEvent(new ResourceLocation(MOD_ID, "deepslate_arcane_gold_ore_hit")));
+
+    public static final RegistryObject<SoundEvent> NETHER_ARCANE_GOLD_ORE_BREAK_SOUND = SOUND_EVENTS.register("nether_arcane_gold_ore_break", () -> SoundEvent.createVariableRangeEvent(new ResourceLocation(MOD_ID, "nether_arcane_gold_ore_break")));
+    public static final RegistryObject<SoundEvent> NETHER_ARCANE_GOLD_ORE_STEP_SOUND = SOUND_EVENTS.register("nether_arcane_gold_ore_step", () -> SoundEvent.createVariableRangeEvent(new ResourceLocation(MOD_ID, "nether_arcane_gold_ore_step")));
+    public static final RegistryObject<SoundEvent> NETHER_ARCANE_GOLD_ORE_PLACE_SOUND = SOUND_EVENTS.register("nether_arcane_gold_ore_place", () -> SoundEvent.createVariableRangeEvent(new ResourceLocation(MOD_ID, "nether_arcane_gold_ore_place")));
+    public static final RegistryObject<SoundEvent> NETHER_ARCANE_GOLD_ORE_HIT_SOUND = SOUND_EVENTS.register("nether_arcane_gold_ore_hit", () -> SoundEvent.createVariableRangeEvent(new ResourceLocation(MOD_ID, "nether_arcane_gold_ore_hit")));
+
+    public static final RegistryObject<SoundEvent> RAW_ARCANE_GOLD_BREAK_SOUND = SOUND_EVENTS.register("raw_arcane_gold_break", () -> SoundEvent.createVariableRangeEvent(new ResourceLocation(MOD_ID, "raw_arcane_gold_break")));
+    public static final RegistryObject<SoundEvent> RAW_ARCANE_GOLD_STEP_SOUND = SOUND_EVENTS.register("raw_arcane_gold_step", () -> SoundEvent.createVariableRangeEvent(new ResourceLocation(MOD_ID, "raw_arcane_gold_step")));
+    public static final RegistryObject<SoundEvent> RAW_ARCANE_GOLD_PLACE_SOUND = SOUND_EVENTS.register("raw_arcane_gold_place", () -> SoundEvent.createVariableRangeEvent(new ResourceLocation(MOD_ID, "raw_arcane_gold_place")));
+    public static final RegistryObject<SoundEvent> RAW_ARCANE_GOLD_HIT_SOUND = SOUND_EVENTS.register("raw_arcane_gold_hit", () -> SoundEvent.createVariableRangeEvent(new ResourceLocation(MOD_ID, "raw_arcane_gold_hit")));
+
+    public static final RegistryObject<SoundEvent> ARCANUM_BREAK_SOUND = SOUND_EVENTS.register("arcanum_break", () -> SoundEvent.createVariableRangeEvent(new ResourceLocation(MOD_ID, "arcanum_break")));
+    public static final RegistryObject<SoundEvent> ARCANUM_STEP_SOUND = SOUND_EVENTS.register("arcanum_step", () -> SoundEvent.createVariableRangeEvent(new ResourceLocation(MOD_ID, "arcanum_step")));
+    public static final RegistryObject<SoundEvent> ARCANUM_PLACE_SOUND = SOUND_EVENTS.register("arcanum_place", () -> SoundEvent.createVariableRangeEvent(new ResourceLocation(MOD_ID, "arcanum_place")));
+    public static final RegistryObject<SoundEvent> ARCANUM_HIT_SOUND = SOUND_EVENTS.register("arcanum_hit", () -> SoundEvent.createVariableRangeEvent(new ResourceLocation(MOD_ID, "arcanum_hit")));
+
+    public static final RegistryObject<SoundEvent> ARCANUM_ORE_BREAK_SOUND = SOUND_EVENTS.register("arcanum_ore_break", () -> SoundEvent.createVariableRangeEvent(new ResourceLocation(MOD_ID, "arcanum_ore_break")));
+    public static final RegistryObject<SoundEvent> ARCANUM_ORE_STEP_SOUND = SOUND_EVENTS.register("arcanum_ore_step", () -> SoundEvent.createVariableRangeEvent(new ResourceLocation(MOD_ID, "arcanum_ore_step")));
+    public static final RegistryObject<SoundEvent> ARCANUM_ORE_PLACE_SOUND = SOUND_EVENTS.register("arcanum_ore_place", () -> SoundEvent.createVariableRangeEvent(new ResourceLocation(MOD_ID, "arcanum_ore_place")));
+    public static final RegistryObject<SoundEvent> ARCANUM_ORE_HIT_SOUND = SOUND_EVENTS.register("arcanum_ore_hit", () -> SoundEvent.createVariableRangeEvent(new ResourceLocation(MOD_ID, "arcanum_ore_hit")));
+
+    public static final RegistryObject<SoundEvent> DEEPSLATE_ARCANUM_ORE_BREAK_SOUND = SOUND_EVENTS.register("deepslate_arcanum_ore_break", () -> SoundEvent.createVariableRangeEvent(new ResourceLocation(MOD_ID, "deepslate_arcanum_ore_break")));
+    public static final RegistryObject<SoundEvent> DEEPSLATE_ARCANUM_ORE_STEP_SOUND = SOUND_EVENTS.register("deepslate_arcanum_ore_step", () -> SoundEvent.createVariableRangeEvent(new ResourceLocation(MOD_ID, "deepslate_arcanum_ore_step")));
+    public static final RegistryObject<SoundEvent> DEEPSLATE_ARCANUM_ORE_PLACE_SOUND = SOUND_EVENTS.register("deepslate_arcanum_ore_place", () -> SoundEvent.createVariableRangeEvent(new ResourceLocation(MOD_ID, "deepslate_arcanum_ore_place")));
+    public static final RegistryObject<SoundEvent> DEEPSLATE_ARCANUM_ORE_HIT_SOUND = SOUND_EVENTS.register("deepslate_arcanum_ore_hit", () -> SoundEvent.createVariableRangeEvent(new ResourceLocation(MOD_ID, "deepslate_arcanum_ore_hit")));
+
+    public static final RegistryObject<SoundEvent> ARCACITE_BREAK_SOUND = SOUND_EVENTS.register("arcacite_break", () -> SoundEvent.createVariableRangeEvent(new ResourceLocation(MOD_ID, "arcacite_break")));
+    public static final RegistryObject<SoundEvent> ARCACITE_STEP_SOUND = SOUND_EVENTS.register("arcacite_step", () -> SoundEvent.createVariableRangeEvent(new ResourceLocation(MOD_ID, "arcacite_step")));
+    public static final RegistryObject<SoundEvent> ARCACITE_PLACE_SOUND = SOUND_EVENTS.register("arcacite_place", () -> SoundEvent.createVariableRangeEvent(new ResourceLocation(MOD_ID, "arcacite_place")));
+    public static final RegistryObject<SoundEvent> ARCACITE_HIT_SOUND = SOUND_EVENTS.register("arcacite_hit", () -> SoundEvent.createVariableRangeEvent(new ResourceLocation(MOD_ID, "arcacite_hit")));
+
+    public static final RegistryObject<SoundEvent> ARCANE_WOOD_BREAK_SOUND = SOUND_EVENTS.register("arcane_wood_break", () -> SoundEvent.createVariableRangeEvent(new ResourceLocation(MOD_ID, "arcane_wood_break")));
+    public static final RegistryObject<SoundEvent> ARCANE_WOOD_STEP_SOUND = SOUND_EVENTS.register("arcane_wood_step", () -> SoundEvent.createVariableRangeEvent(new ResourceLocation(MOD_ID, "arcane_wood_step")));
+    public static final RegistryObject<SoundEvent> ARCANE_WOOD_PLACE_SOUND = SOUND_EVENTS.register("arcane_wood_place", () -> SoundEvent.createVariableRangeEvent(new ResourceLocation(MOD_ID, "arcane_wood_place")));
+    public static final RegistryObject<SoundEvent> ARCANE_WOOD_HIT_SOUND = SOUND_EVENTS.register("arcane_wood_hit", () -> SoundEvent.createVariableRangeEvent(new ResourceLocation(MOD_ID, "arcane_wood_hit")));
+
+    public static final RegistryObject<SoundEvent> ARCANE_WOOD_HANGING_SIGN_BREAK_SOUND = SOUND_EVENTS.register("arcane_wood_hanging_sign_break", () -> SoundEvent.createVariableRangeEvent(new ResourceLocation(MOD_ID, "arcane_wood_hanging_sign_break")));
+    public static final RegistryObject<SoundEvent> ARCANE_WOOD_HANGING_SIGN_STEP_SOUND = SOUND_EVENTS.register("arcane_wood_hanging_sign_step", () -> SoundEvent.createVariableRangeEvent(new ResourceLocation(MOD_ID, "arcane_wood_hanging_sign_step")));
+    public static final RegistryObject<SoundEvent> ARCANE_WOOD_HANGING_SIGN_PLACE_SOUND = SOUND_EVENTS.register("arcane_wood_hanging_sign_place", () -> SoundEvent.createVariableRangeEvent(new ResourceLocation(MOD_ID, "arcane_wood_hanging_sign_place")));
+    public static final RegistryObject<SoundEvent> ARCANE_WOOD_HANGING_SIGN_HIT_SOUND = SOUND_EVENTS.register("arcane_wood_hanging_sign_hit", () -> SoundEvent.createVariableRangeEvent(new ResourceLocation(MOD_ID, "arcane_wood_hanging_sign_hit")));
+
+    public static final RegistryObject<SoundEvent> ARCANE_WOOD_BUTTON_CLICK_OFF_SOUND = SOUND_EVENTS.register("arcane_wood_button_click_off", () -> SoundEvent.createVariableRangeEvent(new ResourceLocation(MOD_ID, "arcane_wood_button_click_off")));
+    public static final RegistryObject<SoundEvent> ARCANE_WOOD_BUTTON_CLICK_ON_SOUND = SOUND_EVENTS.register("arcane_wood_button_click_on", () -> SoundEvent.createVariableRangeEvent(new ResourceLocation(MOD_ID, "arcane_wood_button_click_on")));
+    public static final RegistryObject<SoundEvent> ARCANE_WOOD_PRESSURE_PLATE_CLICK_OFF_SOUND = SOUND_EVENTS.register("arcane_wood_pressure_plate_click_off", () -> SoundEvent.createVariableRangeEvent(new ResourceLocation(MOD_ID, "arcane_wood_pressure_plate_click_off")));
+    public static final RegistryObject<SoundEvent> ARCANE_WOOD_PRESSURE_PLATE_CLICK_ON_SOUND = SOUND_EVENTS.register("arcane_wood_pressure_plate_click_on", () -> SoundEvent.createVariableRangeEvent(new ResourceLocation(MOD_ID, "arcane_wood_pressure_plate_click_on")));
+    public static final RegistryObject<SoundEvent> ARCANE_WOOD_FENCE_GATE_CLOSE_SOUND = SOUND_EVENTS.register("arcane_wood_fence_gate_close", () -> SoundEvent.createVariableRangeEvent(new ResourceLocation(MOD_ID, "arcane_wood_fence_gate_close")));
+    public static final RegistryObject<SoundEvent> ARCANE_WOOD_FENCE_GATE_OPEN_SOUND = SOUND_EVENTS.register("arcane_wood_fence_gate_open", () -> SoundEvent.createVariableRangeEvent(new ResourceLocation(MOD_ID, "arcane_wood_fence_gate_open")));
+    public static final RegistryObject<SoundEvent> ARCANE_WOOD_DOOR_CLOSE_SOUND = SOUND_EVENTS.register("arcane_wood_door_close", () -> SoundEvent.createVariableRangeEvent(new ResourceLocation(MOD_ID, "arcane_wood_door_close")));
+    public static final RegistryObject<SoundEvent> ARCANE_WOOD_DOOR_OPEN_SOUND = SOUND_EVENTS.register("arcane_wood_door_open", () -> SoundEvent.createVariableRangeEvent(new ResourceLocation(MOD_ID, "arcane_wood_door_open")));
+    public static final RegistryObject<SoundEvent> ARCANE_WOOD_TRAPDOOR_CLOSE_SOUND = SOUND_EVENTS.register("arcane_wood_trapdoor_close", () -> SoundEvent.createVariableRangeEvent(new ResourceLocation(MOD_ID, "arcane_wood_trapdoor_close")));
+    public static final RegistryObject<SoundEvent> ARCANE_WOOD_TRAPDOOR_OPEN_SOUND = SOUND_EVENTS.register("arcane_wood_trapdoor_open", () -> SoundEvent.createVariableRangeEvent(new ResourceLocation(MOD_ID, "arcane_wood_trapdoor_open")));
+
+    public static final ForgeSoundType ARCANE_GOLD_SOUNDS = new ForgeSoundType(1f, 1f, ARCANE_GOLD_BREAK_SOUND, ARCANE_GOLD_STEP_SOUND, ARCANE_GOLD_PLACE_SOUND, ARCANE_GOLD_HIT_SOUND, () -> SoundEvents.NETHERITE_BLOCK_FALL);
+    public static final ForgeSoundType ARCANE_GOLD_ORE_SOUNDS = new ForgeSoundType(1f, 1f, ARCANE_GOLD_ORE_BREAK_SOUND, ARCANE_GOLD_ORE_STEP_SOUND, ARCANE_GOLD_ORE_PLACE_SOUND, ARCANE_GOLD_ORE_HIT_SOUND, () -> SoundEvents.STONE_FALL);
+    public static final ForgeSoundType DEEPSLATE_ARCANE_GOLD_ORE_SOUNDS = new ForgeSoundType(1f, 1f, DEEPSLATE_ARCANE_GOLD_ORE_BREAK_SOUND, DEEPSLATE_ARCANE_GOLD_ORE_STEP_SOUND, DEEPSLATE_ARCANE_GOLD_ORE_PLACE_SOUND, DEEPSLATE_ARCANE_GOLD_ORE_HIT_SOUND, () -> SoundEvents.DEEPSLATE_FALL);
+    public static final ForgeSoundType NETHER_ARCANE_GOLD_ORE_SOUNDS = new ForgeSoundType(1f, 1f, NETHER_ARCANE_GOLD_ORE_BREAK_SOUND, NETHER_ARCANE_GOLD_ORE_STEP_SOUND, NETHER_ARCANE_GOLD_ORE_PLACE_SOUND, NETHER_ARCANE_GOLD_ORE_HIT_SOUND, () -> SoundEvents.NETHER_ORE_FALL);
+    public static final ForgeSoundType RAW_ARCANE_GOLD_SOUNDS = new ForgeSoundType(1f, 1f, RAW_ARCANE_GOLD_BREAK_SOUND, RAW_ARCANE_GOLD_STEP_SOUND, RAW_ARCANE_GOLD_PLACE_SOUND, RAW_ARCANE_GOLD_HIT_SOUND, () -> SoundEvents.STONE_FALL);
+    public static final ForgeSoundType ARCANUM_SOUNDS = new ForgeSoundType(1f, 1f, ARCANUM_BREAK_SOUND, ARCANUM_STEP_SOUND, ARCANUM_PLACE_SOUND, ARCANUM_HIT_SOUND, () -> SoundEvents.METAL_FALL);
+    public static final ForgeSoundType ARCANUM_ORE_SOUNDS = new ForgeSoundType(1f, 1f, ARCANUM_ORE_BREAK_SOUND, ARCANUM_ORE_STEP_SOUND, ARCANUM_ORE_PLACE_SOUND, ARCANUM_ORE_HIT_SOUND, () -> SoundEvents.STONE_FALL);
+    public static final ForgeSoundType DEEPSLATE_ARCANUM_ORE_SOUNDS = new ForgeSoundType(1f, 1f, DEEPSLATE_ARCANUM_ORE_BREAK_SOUND, DEEPSLATE_ARCANUM_ORE_STEP_SOUND, DEEPSLATE_ARCANUM_ORE_PLACE_SOUND, DEEPSLATE_ARCANUM_ORE_HIT_SOUND, () -> SoundEvents.DEEPSLATE_FALL);
+    public static final ForgeSoundType ARCACITE_SOUNDS = new ForgeSoundType(1f, 1f, ARCACITE_BREAK_SOUND, ARCACITE_STEP_SOUND, ARCACITE_PLACE_SOUND, ARCACITE_HIT_SOUND, () -> SoundEvents.METAL_FALL);
+    public static final ForgeSoundType ARCANE_WOOD_SOUNDS = new ForgeSoundType(1f, 1f, ARCANE_WOOD_BREAK_SOUND, ARCANE_WOOD_STEP_SOUND, ARCANE_WOOD_PLACE_SOUND, ARCANE_WOOD_HIT_SOUND, () -> SoundEvents.BAMBOO_WOOD_FALL);
+    public static final ForgeSoundType ARCANE_WOOD_HANGING_SIGN_SOUNDS = new ForgeSoundType(1f, 1f, ARCANE_WOOD_HANGING_SIGN_BREAK_SOUND, ARCANE_WOOD_HANGING_SIGN_STEP_SOUND, ARCANE_WOOD_HANGING_SIGN_PLACE_SOUND, ARCANE_WOOD_HANGING_SIGN_HIT_SOUND, () -> SoundEvents.BAMBOO_WOOD_FALL);
+
+    public static final LazyOptional<BlockSetType> ARCANE_WOOD_BLOCK_SET = LazyOptional.of(() -> BlockSetType.register(
+            new BlockSetType("arcane_wood", true,
+                    ARCANE_WOOD_SOUNDS,
+                    ARCANE_WOOD_DOOR_CLOSE_SOUND.get(), ARCANE_WOOD_DOOR_OPEN_SOUND.get(),
+                    ARCANE_WOOD_TRAPDOOR_CLOSE_SOUND.get(), ARCANE_WOOD_TRAPDOOR_OPEN_SOUND.get(),
+                    ARCANE_WOOD_PRESSURE_PLATE_CLICK_OFF_SOUND.get(), ARCANE_WOOD_PRESSURE_PLATE_CLICK_ON_SOUND.get(),
+                    ARCANE_WOOD_BUTTON_CLICK_OFF_SOUND.get(), ARCANE_WOOD_BUTTON_CLICK_ON_SOUND.get())));
+
+    public static final LazyOptional<WoodType> ARCANE_WOOD_TYPE = LazyOptional.of(() -> WoodType.register(new WoodType(new ResourceLocation(MOD_ID, "arcane_wood").toString(), ARCANE_WOOD_BLOCK_SET.resolve().get(),
+            ARCANE_WOOD_SOUNDS, ARCANE_WOOD_HANGING_SIGN_SOUNDS,
+            ARCANE_WOOD_FENCE_GATE_CLOSE_SOUND.get(), ARCANE_WOOD_FENCE_GATE_OPEN_SOUND.get())));
+    public static final WoodType INNOCENT_WOOD_TYPE = WoodType.register(new WoodType(new ResourceLocation(MOD_ID, "innocent_wood").toString(), BlockSetType.CHERRY));
 
     //CRYSTAL_STATS
     public static CrystalStat FOCUS_CRYSTAL_STAT = new CrystalStat(MOD_ID+":focus", 3);
@@ -293,33 +383,33 @@ public class WizardsReborn {
     public static final FoodProperties MOR_FOOD = (new FoodProperties.Builder()).nutrition(1).saturationMod(0.6F).effect(new MobEffectInstance(MobEffects.POISON, 450, 0), 1.0F).effect(new MobEffectInstance(MobEffects.CONFUSION, 350, 0), 1.0F).effect(new MobEffectInstance(MobEffects.BLINDNESS, 250, 0), 1.0F).effect(new MobEffectInstance(MobEffects.WEAKNESS, 550, 1), 1.0F).build();
 
     //BLOCKS
-    public static final RegistryObject<Block> ARCANE_GOLD_BLOCK = BLOCKS.register("arcane_gold_block", () -> new Block(BlockBehaviour.Properties.copy(Blocks.GOLD_BLOCK)));
-    public static final RegistryObject<Block> ARCANE_GOLD_ORE = BLOCKS.register("arcane_gold_ore", () -> new Block(BlockBehaviour.Properties.copy(Blocks.GOLD_ORE)));
-    public static final RegistryObject<Block> DEEPSLATE_ARCANE_GOLD_ORE = BLOCKS.register("deepslate_arcane_gold_ore", () -> new Block(BlockBehaviour.Properties.copy(Blocks.DEEPSLATE_GOLD_ORE)));
-    public static final RegistryObject<Block> NETHER_ARCANE_GOLD_ORE = BLOCKS.register("nether_arcane_gold_ore", () -> new DropExperienceBlock(BlockBehaviour.Properties.copy(Blocks.NETHER_GOLD_ORE), UniformInt.of(0, 1)));
-    public static final RegistryObject<Block> RAW_ARCANE_GOLD_BLOCK = BLOCKS.register("raw_arcane_gold_block", () -> new Block(BlockBehaviour.Properties.copy(Blocks.RAW_GOLD_BLOCK)));
-    public static final RegistryObject<Block> ARCANUM_BLOCK = BLOCKS.register("arcanum_block", () -> new Block(BlockBehaviour.Properties.copy(Blocks.DIAMOND_BLOCK)));
-    public static final RegistryObject<Block> ARCANUM_ORE = BLOCKS.register("arcanum_ore", () -> new ArcanumOreBlock(BlockBehaviour.Properties.copy(Blocks.DIAMOND_ORE)));
-    public static final RegistryObject<Block> DEEPSLATE_ARCANUM_ORE = BLOCKS.register("deepslate_arcanum_ore", () -> new ArcanumOreBlock(BlockBehaviour.Properties.copy(Blocks.DEEPSLATE_DIAMOND_ORE)));
-    public static final RegistryObject<Block> ARCACITE_BLOCK = BLOCKS.register("arcacite_block", () -> new Block(BlockBehaviour.Properties.copy(Blocks.DIAMOND_BLOCK)));
+    public static final RegistryObject<Block> ARCANE_GOLD_BLOCK = BLOCKS.register("arcane_gold_block", () -> new Block(BlockBehaviour.Properties.copy(Blocks.GOLD_BLOCK).sound(ARCANE_GOLD_SOUNDS)));
+    public static final RegistryObject<Block> ARCANE_GOLD_ORE = BLOCKS.register("arcane_gold_ore", () -> new Block(BlockBehaviour.Properties.copy(Blocks.GOLD_ORE).sound(ARCANE_GOLD_ORE_SOUNDS)));
+    public static final RegistryObject<Block> DEEPSLATE_ARCANE_GOLD_ORE = BLOCKS.register("deepslate_arcane_gold_ore", () -> new Block(BlockBehaviour.Properties.copy(Blocks.DEEPSLATE_GOLD_ORE).sound(DEEPSLATE_ARCANE_GOLD_ORE_SOUNDS)));
+    public static final RegistryObject<Block> NETHER_ARCANE_GOLD_ORE = BLOCKS.register("nether_arcane_gold_ore", () -> new DropExperienceBlock(BlockBehaviour.Properties.copy(Blocks.NETHER_GOLD_ORE).sound(NETHER_ARCANE_GOLD_ORE_SOUNDS), UniformInt.of(0, 1)));
+    public static final RegistryObject<Block> RAW_ARCANE_GOLD_BLOCK = BLOCKS.register("raw_arcane_gold_block", () -> new Block(BlockBehaviour.Properties.copy(Blocks.RAW_GOLD_BLOCK).sound(RAW_ARCANE_GOLD_SOUNDS)));
+    public static final RegistryObject<Block> ARCANUM_BLOCK = BLOCKS.register("arcanum_block", () -> new Block(BlockBehaviour.Properties.copy(Blocks.DIAMOND_BLOCK).sound(ARCANUM_SOUNDS)));
+    public static final RegistryObject<Block> ARCANUM_ORE = BLOCKS.register("arcanum_ore", () -> new ArcanumOreBlock(BlockBehaviour.Properties.copy(Blocks.DIAMOND_ORE).sound(ARCANUM_ORE_SOUNDS)));
+    public static final RegistryObject<Block> DEEPSLATE_ARCANUM_ORE = BLOCKS.register("deepslate_arcanum_ore", () -> new ArcanumOreBlock(BlockBehaviour.Properties.copy(Blocks.DEEPSLATE_DIAMOND_ORE).sound(DEEPSLATE_ARCANUM_ORE_SOUNDS)));
+    public static final RegistryObject<Block> ARCACITE_BLOCK = BLOCKS.register("arcacite_block", () -> new Block(BlockBehaviour.Properties.copy(Blocks.DIAMOND_BLOCK).sound(ARCACITE_SOUNDS)));
 
-    public static final RegistryObject<Block> ARCANE_WOOD_LOG = BLOCKS.register("arcane_wood_log", () -> new RotatedPillarBlock(BlockBehaviour.Properties.copy(Blocks.OAK_LOG)));
-    public static final RegistryObject<Block> ARCANE_WOOD = BLOCKS.register("arcane_wood", () -> new RotatedPillarBlock(BlockBehaviour.Properties.copy(Blocks.OAK_WOOD)));
-    public static final RegistryObject<Block> STRIPPED_ARCANE_WOOD_LOG = BLOCKS.register("stripped_arcane_wood_log", () -> new RotatedPillarBlock(BlockBehaviour.Properties.copy(Blocks.STRIPPED_OAK_LOG)));
-    public static final RegistryObject<Block> STRIPPED_ARCANE_WOOD = BLOCKS.register("stripped_arcane_wood", () -> new RotatedPillarBlock(BlockBehaviour.Properties.copy(Blocks.STRIPPED_OAK_WOOD)));
-    public static final RegistryObject<Block> ARCANE_WOOD_PLANKS = BLOCKS.register("arcane_wood_planks", () -> new Block(BlockBehaviour.Properties.copy(Blocks.OAK_PLANKS)));
-    public static final RegistryObject<Block> ARCANE_WOOD_STAIRS = BLOCKS.register("arcane_wood_stairs", () -> new StairBlock(() -> ARCANE_WOOD_PLANKS.get().defaultBlockState(), BlockBehaviour.Properties.copy(Blocks.OAK_PLANKS)));
-    public static final RegistryObject<Block> ARCANE_WOOD_SLAB = BLOCKS.register("arcane_wood_slab", () -> new SlabBlock(BlockBehaviour.Properties.copy(Blocks.OAK_PLANKS)));
-    public static final RegistryObject<Block> ARCANE_WOOD_FENCE = BLOCKS.register("arcane_wood_fence", () -> new FenceBlock(BlockBehaviour.Properties.copy(Blocks.OAK_PLANKS)));
-    public static final RegistryObject<Block> ARCANE_WOOD_FENCE_GATE = BLOCKS.register("arcane_wood_fence_gate", () -> new FenceGateBlock(BlockBehaviour.Properties.copy(Blocks.OAK_PLANKS), WoodType.OAK));
-    public static final RegistryObject<Block> ARCANE_WOOD_DOOR = BLOCKS.register("arcane_wood_door", () -> new DoorBlock(BlockBehaviour.Properties.copy(Blocks.OAK_PLANKS).noOcclusion(), BlockSetType.OAK));
-    public static final RegistryObject<Block> ARCANE_WOOD_TRAPDOOR = BLOCKS.register("arcane_wood_trapdoor", () -> new TrapDoorBlock(BlockBehaviour.Properties.copy(Blocks.OAK_PLANKS).noOcclusion(), BlockSetType.OAK));
-    public static final RegistryObject<Block> ARCANE_WOOD_PRESSURE_PLATE = BLOCKS.register("arcane_wood_pressure_plate", () -> new PressurePlateBlock(PressurePlateBlock.Sensitivity.EVERYTHING, BlockBehaviour.Properties.copy(Blocks.OAK_PLANKS).noOcclusion().noCollission(), BlockSetType.OAK));
-    public static final RegistryObject<Block> ARCANE_WOOD_BUTTON = BLOCKS.register("arcane_wood_button", () -> new ButtonBlock(BlockBehaviour.Properties.copy(Blocks.OAK_BUTTON).sound(SoundType.WOOD), BlockSetType.OAK, 30, true));
-    public static final RegistryObject<Block> ARCANE_WOOD_SIGN = BLOCKS.register("arcane_wood_sign", () -> new CustomStandingSignBlock(BlockBehaviour.Properties.copy(Blocks.OAK_PLANKS).noOcclusion().noCollission(), ARCANE_WOOD_TYPE));
-    public static final RegistryObject<Block> ARCANE_WOOD_WALL_SIGN = BLOCKS.register("arcane_wood_wall_sign", () -> new CustomWallSignBlock(BlockBehaviour.Properties.copy(Blocks.OAK_PLANKS).noOcclusion().noCollission(), ARCANE_WOOD_TYPE));
-    public static final RegistryObject<Block> ARCANE_WOOD_HANGING_SIGN = BLOCKS.register("arcane_wood_hanging_sign", () -> new CustomCeilingHangingSignBlock(BlockBehaviour.Properties.copy(Blocks.OAK_PLANKS).noOcclusion().noCollission(), ARCANE_WOOD_TYPE));
-    public static final RegistryObject<Block> ARCANE_WOOD_WALL_HANGING_SIGN = BLOCKS.register("arcane_wood_wall_hanging_sign", () -> new CustomWallHangingSignBlock(BlockBehaviour.Properties.copy(Blocks.OAK_PLANKS).noOcclusion().noCollission(), ARCANE_WOOD_TYPE));
+    public static final RegistryObject<Block> ARCANE_WOOD_LOG = BLOCKS.register("arcane_wood_log", () -> new RotatedPillarBlock(BlockBehaviour.Properties.copy(Blocks.OAK_LOG).sound(ARCANE_WOOD_SOUNDS)));
+    public static final RegistryObject<Block> ARCANE_WOOD = BLOCKS.register("arcane_wood", () -> new RotatedPillarBlock(BlockBehaviour.Properties.copy(Blocks.OAK_WOOD).sound(ARCANE_WOOD_SOUNDS)));
+    public static final RegistryObject<Block> STRIPPED_ARCANE_WOOD_LOG = BLOCKS.register("stripped_arcane_wood_log", () -> new RotatedPillarBlock(BlockBehaviour.Properties.copy(Blocks.STRIPPED_OAK_LOG).sound(ARCANE_WOOD_SOUNDS)));
+    public static final RegistryObject<Block> STRIPPED_ARCANE_WOOD = BLOCKS.register("stripped_arcane_wood", () -> new RotatedPillarBlock(BlockBehaviour.Properties.copy(Blocks.STRIPPED_OAK_WOOD).sound(ARCANE_WOOD_SOUNDS)));
+    public static final RegistryObject<Block> ARCANE_WOOD_PLANKS = BLOCKS.register("arcane_wood_planks", () -> new Block(BlockBehaviour.Properties.copy(Blocks.OAK_PLANKS).sound(ARCANE_WOOD_SOUNDS)));
+    public static final RegistryObject<Block> ARCANE_WOOD_STAIRS = BLOCKS.register("arcane_wood_stairs", () -> new StairBlock(() -> ARCANE_WOOD_PLANKS.get().defaultBlockState(), BlockBehaviour.Properties.copy(Blocks.OAK_PLANKS).sound(ARCANE_WOOD_SOUNDS)));
+    public static final RegistryObject<Block> ARCANE_WOOD_SLAB = BLOCKS.register("arcane_wood_slab", () -> new SlabBlock(BlockBehaviour.Properties.copy(Blocks.OAK_PLANKS).sound(ARCANE_WOOD_SOUNDS)));
+    public static final RegistryObject<Block> ARCANE_WOOD_FENCE = BLOCKS.register("arcane_wood_fence", () -> new FenceBlock(BlockBehaviour.Properties.copy(Blocks.OAK_PLANKS).sound(ARCANE_WOOD_SOUNDS)));
+    public static final RegistryObject<Block> ARCANE_WOOD_FENCE_GATE = BLOCKS.register("arcane_wood_fence_gate", () -> new FenceGateBlock(BlockBehaviour.Properties.copy(Blocks.OAK_PLANKS).sound(ARCANE_WOOD_SOUNDS), ARCANE_WOOD_TYPE.resolve().get()));
+    public static final RegistryObject<Block> ARCANE_WOOD_DOOR = BLOCKS.register("arcane_wood_door", () -> new DoorBlock(BlockBehaviour.Properties.copy(Blocks.OAK_PLANKS).sound(ARCANE_WOOD_SOUNDS).noOcclusion(), ARCANE_WOOD_BLOCK_SET.resolve().get()));
+    public static final RegistryObject<Block> ARCANE_WOOD_TRAPDOOR = BLOCKS.register("arcane_wood_trapdoor", () -> new TrapDoorBlock(BlockBehaviour.Properties.copy(Blocks.OAK_PLANKS).sound(ARCANE_WOOD_SOUNDS).noOcclusion(), ARCANE_WOOD_BLOCK_SET.resolve().get()));
+    public static final RegistryObject<Block> ARCANE_WOOD_PRESSURE_PLATE = BLOCKS.register("arcane_wood_pressure_plate", () -> new PressurePlateBlock(PressurePlateBlock.Sensitivity.EVERYTHING, BlockBehaviour.Properties.copy(Blocks.OAK_PLANKS).sound(ARCANE_WOOD_SOUNDS).noOcclusion().noCollission(), ARCANE_WOOD_BLOCK_SET.resolve().get()));
+    public static final RegistryObject<Block> ARCANE_WOOD_BUTTON = BLOCKS.register("arcane_wood_button", () -> new ButtonBlock(BlockBehaviour.Properties.copy(Blocks.OAK_BUTTON).sound(ARCANE_WOOD_SOUNDS), ARCANE_WOOD_BLOCK_SET.resolve().get(), 30, true));
+    public static final RegistryObject<Block> ARCANE_WOOD_SIGN = BLOCKS.register("arcane_wood_sign", () -> new CustomStandingSignBlock(BlockBehaviour.Properties.copy(Blocks.OAK_PLANKS).sound(ARCANE_WOOD_SOUNDS).noOcclusion().noCollission(), ARCANE_WOOD_TYPE.resolve().get()));
+    public static final RegistryObject<Block> ARCANE_WOOD_WALL_SIGN = BLOCKS.register("arcane_wood_wall_sign", () -> new CustomWallSignBlock(BlockBehaviour.Properties.copy(Blocks.OAK_PLANKS).sound(ARCANE_WOOD_SOUNDS).noOcclusion().noCollission(), ARCANE_WOOD_TYPE.resolve().get()));
+    public static final RegistryObject<Block> ARCANE_WOOD_HANGING_SIGN = BLOCKS.register("arcane_wood_hanging_sign", () -> new CustomCeilingHangingSignBlock(BlockBehaviour.Properties.copy(Blocks.OAK_PLANKS).sound(ARCANE_WOOD_HANGING_SIGN_SOUNDS).noOcclusion().noCollission(), ARCANE_WOOD_TYPE.resolve().get()));
+    public static final RegistryObject<Block> ARCANE_WOOD_WALL_HANGING_SIGN = BLOCKS.register("arcane_wood_wall_hanging_sign", () -> new CustomWallHangingSignBlock(BlockBehaviour.Properties.copy(Blocks.OAK_PLANKS).sound(ARCANE_WOOD_HANGING_SIGN_SOUNDS).noOcclusion().noCollission(), ARCANE_WOOD_TYPE.resolve().get()));
     public static final RegistryObject<Block> ARCANE_WOOD_LEAVES = BLOCKS.register("arcane_wood_leaves", () -> new ArcaneWoodLeavesBlock(BlockBehaviour.Properties.copy(Blocks.OAK_LEAVES).lightLevel((state) -> 5)));
     public static final RegistryObject<Block> ARCANE_WOOD_SAPLING = BLOCKS.register("arcane_wood_sapling", () -> new SaplingBlock(new ArcaneWoodTree(), BlockBehaviour.Properties.copy(Blocks.OAK_SAPLING)));
     public static final RegistryObject<Block> POTTED_ARCANE_WOOD_SAPLING = BLOCKS.register("potted_arcane_wood_sapling", () -> new FlowerPotBlock(ARCANE_WOOD_SAPLING.get(), BlockBehaviour.Properties.copy(Blocks.FLOWER_POT).instabreak().noOcclusion()));
@@ -446,21 +536,21 @@ public class WizardsReborn {
     public static final RegistryObject<Block> RAINBOW_ARCANE_LUMOS = BLOCKS.register("rainbow_arcane_lumos", () -> new ArcaneLumosBlock(ArcaneLumosBlock.Colors.RAINBOW, BlockBehaviour.Properties.copy(Blocks.WHITE_WOOL).lightLevel((state) -> 15).noOcclusion().noCollission().instabreak()));
     public static final RegistryObject<Block> COSMIC_ARCANE_LUMOS = BLOCKS.register("cosmic_arcane_lumos", () -> new ArcaneLumosBlock(ArcaneLumosBlock.Colors.COSMIC, BlockBehaviour.Properties.copy(Blocks.WHITE_WOOL).lightLevel((state) -> 15).noOcclusion().noCollission().instabreak()));
 
-    public static final RegistryObject<Block> ARCANE_PEDESTAL = BLOCKS.register("arcane_pedestal", () -> new ArcanePedestalBlock(BlockBehaviour.Properties.copy(Blocks.OAK_PLANKS)));
-    public static final RegistryObject<Block> HOVERING_TOME_STAND = BLOCKS.register("hovering_tome_stand", () -> new HoveringTomeStandBlock(BlockBehaviour.Properties.copy(Blocks.OAK_PLANKS)));
-    public static final RegistryObject<Block> WISSEN_ALTAR = BLOCKS.register("wissen_altar", () -> new WissenAltarBlock(BlockBehaviour.Properties.copy(Blocks.OAK_PLANKS)));
-    public static final RegistryObject<Block> WISSEN_TRANSLATOR = BLOCKS.register("wissen_translator", () -> new WissenTranslatorBlock(BlockBehaviour.Properties.copy(Blocks.OAK_PLANKS)));
-    public static final RegistryObject<Block> WISSEN_CRYSTALLIZER = BLOCKS.register("wissen_crystallizer", () -> new WissenCrystallizerBlock(BlockBehaviour.Properties.copy(Blocks.OAK_PLANKS)));
-    public static final RegistryObject<Block> ARCANE_WORKBENCH = BLOCKS.register("arcane_workbench", () -> new ArcaneWorkbenchBlock(BlockBehaviour.Properties.copy(Blocks.OAK_PLANKS)));
-    public static final RegistryObject<Block> WISSEN_CELL = BLOCKS.register("wissen_cell", () -> new WissenCellBlock(BlockBehaviour.Properties.copy(Blocks.OAK_PLANKS)));
-    public static final RegistryObject<Block> JEWELER_TABLE = BLOCKS.register("jeweler_table", () -> new JewelerTableBlock(BlockBehaviour.Properties.copy(Blocks.OAK_PLANKS)));
-    public static final RegistryObject<Block> ALTAR_OF_DROUGHT = BLOCKS.register("altar_of_drought", () -> new AltarOfDroughtBlock(BlockBehaviour.Properties.copy(Blocks.OAK_PLANKS)));
-    public static final RegistryObject<Block> TOTEM_BASE = BLOCKS.register("totem_base", () -> new TotemBaseBlock(BlockBehaviour.Properties.copy(Blocks.OAK_PLANKS)));
-    public static final RegistryObject<Block> TOTEM_OF_FLAMES = BLOCKS.register("totem_of_flames", () -> new TotemOfFlamesBlock(BlockBehaviour.Properties.copy(Blocks.OAK_PLANKS).lightLevel(TotemOfFlamesBlock::getLightLevel)));
-    public static final RegistryObject<Block> EXPERIENCE_TOTEM = BLOCKS.register("experience_totem", () -> new ExperienceTotemBlock(BlockBehaviour.Properties.copy(Blocks.OAK_PLANKS)));
-    public static final RegistryObject<Block> TOTEM_OF_EXPERIENCE_ABSORPTION = BLOCKS.register("totem_of_experience_absorption", () -> new TotemOfExperienceAbsorptionBlock(BlockBehaviour.Properties.copy(Blocks.OAK_PLANKS)));
-    public static final RegistryObject<Block> TOTEM_OF_DISENCHANT = BLOCKS.register("totem_of_disenchant", () -> new TotemOfDisenchantBlock(BlockBehaviour.Properties.copy(Blocks.OAK_PLANKS)));
-    public static final RegistryObject<Block> ARCANE_ITERATOR = BLOCKS.register("arcane_iterator", () -> new ArcaneIteratorBlock(BlockBehaviour.Properties.copy(Blocks.OAK_PLANKS)));
+    public static final RegistryObject<Block> ARCANE_PEDESTAL = BLOCKS.register("arcane_pedestal", () -> new ArcanePedestalBlock(BlockBehaviour.Properties.copy(ARCANE_WOOD_PLANKS.get())));
+    public static final RegistryObject<Block> HOVERING_TOME_STAND = BLOCKS.register("hovering_tome_stand", () -> new HoveringTomeStandBlock(BlockBehaviour.Properties.copy(ARCANE_WOOD_PLANKS.get())));
+    public static final RegistryObject<Block> WISSEN_ALTAR = BLOCKS.register("wissen_altar", () -> new WissenAltarBlock(BlockBehaviour.Properties.copy(ARCANE_WOOD_PLANKS.get())));
+    public static final RegistryObject<Block> WISSEN_TRANSLATOR = BLOCKS.register("wissen_translator", () -> new WissenTranslatorBlock(BlockBehaviour.Properties.copy(ARCANE_WOOD_PLANKS.get())));
+    public static final RegistryObject<Block> WISSEN_CRYSTALLIZER = BLOCKS.register("wissen_crystallizer", () -> new WissenCrystallizerBlock(BlockBehaviour.Properties.copy(ARCANE_WOOD_PLANKS.get())));
+    public static final RegistryObject<Block> ARCANE_WORKBENCH = BLOCKS.register("arcane_workbench", () -> new ArcaneWorkbenchBlock(BlockBehaviour.Properties.copy(ARCANE_WOOD_PLANKS.get())));
+    public static final RegistryObject<Block> WISSEN_CELL = BLOCKS.register("wissen_cell", () -> new WissenCellBlock(BlockBehaviour.Properties.copy(ARCANE_WOOD_PLANKS.get())));
+    public static final RegistryObject<Block> JEWELER_TABLE = BLOCKS.register("jeweler_table", () -> new JewelerTableBlock(BlockBehaviour.Properties.copy(ARCANE_WOOD_PLANKS.get())));
+    public static final RegistryObject<Block> ALTAR_OF_DROUGHT = BLOCKS.register("altar_of_drought", () -> new AltarOfDroughtBlock(BlockBehaviour.Properties.copy(ARCANE_WOOD_PLANKS.get())));
+    public static final RegistryObject<Block> TOTEM_BASE = BLOCKS.register("totem_base", () -> new TotemBaseBlock(BlockBehaviour.Properties.copy(ARCANE_WOOD_PLANKS.get())));
+    public static final RegistryObject<Block> TOTEM_OF_FLAMES = BLOCKS.register("totem_of_flames", () -> new TotemOfFlamesBlock(BlockBehaviour.Properties.copy(ARCANE_WOOD_PLANKS.get()).lightLevel(TotemOfFlamesBlock::getLightLevel)));
+    public static final RegistryObject<Block> EXPERIENCE_TOTEM = BLOCKS.register("experience_totem", () -> new ExperienceTotemBlock(BlockBehaviour.Properties.copy(ARCANE_WOOD_PLANKS.get())));
+    public static final RegistryObject<Block> TOTEM_OF_EXPERIENCE_ABSORPTION = BLOCKS.register("totem_of_experience_absorption", () -> new TotemOfExperienceAbsorptionBlock(BlockBehaviour.Properties.copy(ARCANE_WOOD_PLANKS.get())));
+    public static final RegistryObject<Block> TOTEM_OF_DISENCHANT = BLOCKS.register("totem_of_disenchant", () -> new TotemOfDisenchantBlock(BlockBehaviour.Properties.copy(ARCANE_WOOD_PLANKS.get())));
+    public static final RegistryObject<Block> ARCANE_ITERATOR = BLOCKS.register("arcane_iterator", () -> new ArcaneIteratorBlock(BlockBehaviour.Properties.copy(ARCANE_WOOD_PLANKS.get())));
 
     public static final RegistryObject<Block> WISESTONE_PEDESTAL = BLOCKS.register("wisestone_pedestal", () -> new ArcanePedestalBlock(BlockBehaviour.Properties.copy(Blocks.POLISHED_DEEPSLATE)));
     public static final RegistryObject<Block> WISESTONE_HOVERING_TOME_STAND = BLOCKS.register("wisestone_hovering_tome_stand", () -> new HoveringTomeStandBlock(BlockBehaviour.Properties.copy(Blocks.POLISHED_DEEPSLATE)));
@@ -482,24 +572,24 @@ public class WizardsReborn {
     public static final RegistryObject<Block> RUNIC_PEDESTAL = BLOCKS.register("runic_pedestal", () -> new RunicPedestalBlock(BlockBehaviour.Properties.copy(Blocks.POLISHED_DEEPSLATE)));
 
     public static final RegistryObject<Block> ARCANE_LEVER = BLOCKS.register("arcane_lever", () -> new WaterloggableLeverBlock(BlockBehaviour.Properties.copy(Blocks.LEVER)));
-    public static final RegistryObject<Block> REDSTONE_SENSOR = BLOCKS.register("redstone_sensor", () -> new RedstoneSensorBlock(BlockBehaviour.Properties.copy(Blocks.OAK_PLANKS)));
-    public static final RegistryObject<Block> WISSEN_SENSOR = BLOCKS.register("wissen_sensor", () -> new WissenSensorBlock(BlockBehaviour.Properties.copy(Blocks.OAK_PLANKS)));
-    public static final RegistryObject<Block> COOLDOWN_SENSOR = BLOCKS.register("cooldown_sensor", () -> new CooldownSensorBlock(BlockBehaviour.Properties.copy(Blocks.OAK_PLANKS)));
-    public static final RegistryObject<Block> EXPERIENCE_SENSOR = BLOCKS.register("experience_sensor", () -> new ExperienceSensorBlock(BlockBehaviour.Properties.copy(Blocks.OAK_PLANKS)));
-    public static final RegistryObject<Block> LIGHT_SENSOR = BLOCKS.register("light_sensor", () -> new LightSensorBlock(BlockBehaviour.Properties.copy(Blocks.OAK_PLANKS)));
-    public static final RegistryObject<Block> HEAT_SENSOR = BLOCKS.register("heat_sensor", () -> new HeatSensorBlock(BlockBehaviour.Properties.copy(Blocks.OAK_PLANKS)));
-    public static final RegistryObject<Block> FLUID_SENSOR = BLOCKS.register("fluid_sensor", () -> new FluidSensorBlock(BlockBehaviour.Properties.copy(Blocks.OAK_PLANKS)));
-    public static final RegistryObject<Block> STEAM_SENSOR = BLOCKS.register("steam_sensor", () -> new SteamSensorBlock(BlockBehaviour.Properties.copy(Blocks.OAK_PLANKS)));
-    public static final RegistryObject<Block> WISSEN_ACTIVATOR = BLOCKS.register("wissen_activator", () -> new WissenActivatorBlock(BlockBehaviour.Properties.copy(Blocks.OAK_PLANKS)));
-    public static final RegistryObject<Block> ITEM_SORTER = BLOCKS.register("item_sorter", () -> new ItemSorterBlock(BlockBehaviour.Properties.copy(Blocks.OAK_PLANKS)));
+    public static final RegistryObject<Block> REDSTONE_SENSOR = BLOCKS.register("redstone_sensor", () -> new RedstoneSensorBlock(BlockBehaviour.Properties.copy(ARCANE_WOOD_PLANKS.get())));
+    public static final RegistryObject<Block> WISSEN_SENSOR = BLOCKS.register("wissen_sensor", () -> new WissenSensorBlock(BlockBehaviour.Properties.copy(ARCANE_WOOD_PLANKS.get())));
+    public static final RegistryObject<Block> COOLDOWN_SENSOR = BLOCKS.register("cooldown_sensor", () -> new CooldownSensorBlock(BlockBehaviour.Properties.copy(ARCANE_WOOD_PLANKS.get())));
+    public static final RegistryObject<Block> EXPERIENCE_SENSOR = BLOCKS.register("experience_sensor", () -> new ExperienceSensorBlock(BlockBehaviour.Properties.copy(ARCANE_WOOD_PLANKS.get())));
+    public static final RegistryObject<Block> LIGHT_SENSOR = BLOCKS.register("light_sensor", () -> new LightSensorBlock(BlockBehaviour.Properties.copy(ARCANE_WOOD_PLANKS.get())));
+    public static final RegistryObject<Block> HEAT_SENSOR = BLOCKS.register("heat_sensor", () -> new HeatSensorBlock(BlockBehaviour.Properties.copy(ARCANE_WOOD_PLANKS.get())));
+    public static final RegistryObject<Block> FLUID_SENSOR = BLOCKS.register("fluid_sensor", () -> new FluidSensorBlock(BlockBehaviour.Properties.copy(ARCANE_WOOD_PLANKS.get())));
+    public static final RegistryObject<Block> STEAM_SENSOR = BLOCKS.register("steam_sensor", () -> new SteamSensorBlock(BlockBehaviour.Properties.copy(ARCANE_WOOD_PLANKS.get())));
+    public static final RegistryObject<Block> WISSEN_ACTIVATOR = BLOCKS.register("wissen_activator", () -> new WissenActivatorBlock(BlockBehaviour.Properties.copy(ARCANE_WOOD_PLANKS.get())));
+    public static final RegistryObject<Block> ITEM_SORTER = BLOCKS.register("item_sorter", () -> new ItemSorterBlock(BlockBehaviour.Properties.copy(ARCANE_WOOD_PLANKS.get())));
 
-    public static final RegistryObject<Block> ARCANE_WOOD_FRAME = BLOCKS.register("arcane_wood_frame", () -> new FrameBlock(BlockBehaviour.Properties.copy(Blocks.OAK_PLANKS).noOcclusion()));
-    public static final RegistryObject<Block> ARCANE_WOOD_GLASS_FRAME = BLOCKS.register("arcane_wood_glass_frame", () -> new GlassFrameBlock(BlockBehaviour.Properties.copy(Blocks.OAK_PLANKS).noOcclusion()));
-    public static final RegistryObject<Block> ARCANE_WOOD_CASING = BLOCKS.register("arcane_wood_casing", () -> new CasingBlock(BlockBehaviour.Properties.copy(Blocks.OAK_PLANKS).noOcclusion()));
-    public static final RegistryObject<Block> ARCANE_WOOD_WISSEN_CASING = BLOCKS.register("arcane_wood_wissen_casing", () -> new WissenCasingBlock(BlockBehaviour.Properties.copy(Blocks.OAK_PLANKS).noOcclusion()));
-    public static final RegistryObject<Block> ARCANE_WOOD_LIGHT_CASING = BLOCKS.register("arcane_wood_light_casing", () -> new LightCasingBlock(BlockBehaviour.Properties.copy(Blocks.OAK_PLANKS).noOcclusion()));
-    public static final RegistryObject<Block> ARCANE_WOOD_FLUID_CASING = BLOCKS.register("arcane_wood_fluid_casing", () -> new FluidCasingBlock(BlockBehaviour.Properties.copy(Blocks.OAK_PLANKS).noOcclusion()));
-    public static final RegistryObject<Block> ARCANE_WOOD_STEAM_CASING = BLOCKS.register("arcane_wood_steam_casing", () -> new SteamCasingBlock(BlockBehaviour.Properties.copy(Blocks.OAK_PLANKS).noOcclusion()));
+    public static final RegistryObject<Block> ARCANE_WOOD_FRAME = BLOCKS.register("arcane_wood_frame", () -> new FrameBlock(BlockBehaviour.Properties.copy(ARCANE_WOOD_PLANKS.get()).noOcclusion()));
+    public static final RegistryObject<Block> ARCANE_WOOD_GLASS_FRAME = BLOCKS.register("arcane_wood_glass_frame", () -> new GlassFrameBlock(BlockBehaviour.Properties.copy(ARCANE_WOOD_PLANKS.get()).noOcclusion()));
+    public static final RegistryObject<Block> ARCANE_WOOD_CASING = BLOCKS.register("arcane_wood_casing", () -> new CasingBlock(BlockBehaviour.Properties.copy(ARCANE_WOOD_PLANKS.get()).noOcclusion()));
+    public static final RegistryObject<Block> ARCANE_WOOD_WISSEN_CASING = BLOCKS.register("arcane_wood_wissen_casing", () -> new WissenCasingBlock(BlockBehaviour.Properties.copy(ARCANE_WOOD_PLANKS.get()).noOcclusion()));
+    public static final RegistryObject<Block> ARCANE_WOOD_LIGHT_CASING = BLOCKS.register("arcane_wood_light_casing", () -> new LightCasingBlock(BlockBehaviour.Properties.copy(ARCANE_WOOD_PLANKS.get()).noOcclusion()));
+    public static final RegistryObject<Block> ARCANE_WOOD_FLUID_CASING = BLOCKS.register("arcane_wood_fluid_casing", () -> new FluidCasingBlock(BlockBehaviour.Properties.copy(ARCANE_WOOD_PLANKS.get()).noOcclusion()));
+    public static final RegistryObject<Block> ARCANE_WOOD_STEAM_CASING = BLOCKS.register("arcane_wood_steam_casing", () -> new SteamCasingBlock(BlockBehaviour.Properties.copy(ARCANE_WOOD_PLANKS.get()).noOcclusion()));
     public static final RegistryObject<Block> INNOCENT_WOOD_FRAME = BLOCKS.register("innocent_wood_frame", () -> new FrameBlock(BlockBehaviour.Properties.copy(Blocks.CHERRY_PLANKS).noOcclusion()));
     public static final RegistryObject<Block> INNOCENT_WOOD_GLASS_FRAME = BLOCKS.register("innocent_wood_glass_frame", () -> new GlassFrameBlock(BlockBehaviour.Properties.copy(Blocks.CHERRY_PLANKS).noOcclusion()));
     public static final RegistryObject<Block> INNOCENT_WOOD_CASING = BLOCKS.register("innocent_wood_casing", () -> new CasingBlock(BlockBehaviour.Properties.copy(Blocks.CHERRY_PLANKS).noOcclusion()));
@@ -515,8 +605,8 @@ public class WizardsReborn {
     public static final RegistryObject<Block> WISESTONE_FLUID_CASING = BLOCKS.register("wisestone_fluid_casing", () -> new FluidCasingBlock(BlockBehaviour.Properties.copy(Blocks.POLISHED_DEEPSLATE).noOcclusion()));
     public static final RegistryObject<Block> WISESTONE_STEAM_CASING = BLOCKS.register("wisestone_steam_casing", () -> new SteamCasingBlock(BlockBehaviour.Properties.copy(Blocks.POLISHED_DEEPSLATE).noOcclusion()));
 
-    public static final RegistryObject<Block> CREATIVE_WISSEN_STORAGE = BLOCKS.register("creative_wissen_storage", () -> new CreativeWissenStorageBlock(BlockBehaviour.Properties.copy(Blocks.OAK_PLANKS)));
-    public static final RegistryObject<Block> CREATIVE_LIGHT_STORAGE = BLOCKS.register("creative_light_storage", () -> new CreativeLightStorageBlock(BlockBehaviour.Properties.copy(Blocks.OAK_PLANKS)));
+    public static final RegistryObject<Block> CREATIVE_WISSEN_STORAGE = BLOCKS.register("creative_wissen_storage", () -> new CreativeWissenStorageBlock(BlockBehaviour.Properties.copy(ARCANE_WOOD_PLANKS.get())));
+    public static final RegistryObject<Block> CREATIVE_LIGHT_STORAGE = BLOCKS.register("creative_light_storage", () -> new CreativeLightStorageBlock(BlockBehaviour.Properties.copy(ARCANE_WOOD_PLANKS.get())));
     public static final RegistryObject<Block> CREATIVE_FLUID_STORAGE = BLOCKS.register("creative_fluid_storage", () -> new CreativeFluidStorageBlock(BlockBehaviour.Properties.copy(Blocks.POLISHED_DEEPSLATE)));
     public static final RegistryObject<Block> CREATIVE_STEAM_STORAGE = BLOCKS.register("creative_steam_storage", () -> new CreativeSteamStorageBlock(BlockBehaviour.Properties.copy(Blocks.POLISHED_DEEPSLATE)));
 
@@ -1050,10 +1140,12 @@ public class WizardsReborn {
 
     public static final RegistryObject<SoundEvent> WISSEN_BURST_SOUND = SOUND_EVENTS.register("wissen_burst", () -> SoundEvent.createVariableRangeEvent(new ResourceLocation(MOD_ID, "wissen_burst")));
     public static final RegistryObject<SoundEvent> WISSEN_TRANSFER_SOUND = SOUND_EVENTS.register("wissen_transfer", () -> SoundEvent.createVariableRangeEvent(new ResourceLocation(MOD_ID, "wissen_transfer")));
+
+    public static final RegistryObject<SoundEvent> STEAM_BURST_SOUND = SOUND_EVENTS.register("steam_burst", () -> SoundEvent.createVariableRangeEvent(new ResourceLocation(MOD_ID, "steam_burst")));
+
     public static final RegistryObject<SoundEvent> SPELL_CAST_SOUND = SOUND_EVENTS.register("spell_cast", () -> SoundEvent.createVariableRangeEvent(new ResourceLocation(MOD_ID, "spell_cast")));
     public static final RegistryObject<SoundEvent> SPELL_BURST_SOUND = SOUND_EVENTS.register("spell_burst", () -> SoundEvent.createVariableRangeEvent(new ResourceLocation(MOD_ID, "spell_burst")));
     public static final RegistryObject<SoundEvent> SPELL_RELOAD_SOUND = SOUND_EVENTS.register("spell_reload", () -> SoundEvent.createVariableRangeEvent(new ResourceLocation(MOD_ID, "spell_reload")));
-    public static final RegistryObject<SoundEvent> STEAM_BURST_SOUND = SOUND_EVENTS.register("steam_burst", () -> SoundEvent.createVariableRangeEvent(new ResourceLocation(MOD_ID, "steam_burst")));
 
     public static final RegistryObject<ArgumentTypeInfo<?, ?>> KNOWLEDGE_ARG = ARG_TYPES.register("knowledge", () -> ArgumentTypeInfos.registerByClass(KnowledgeArgument.class, SingletonArgumentInfo.contextFree(KnowledgeArgument::knowledges)));
     public static final RegistryObject<ArgumentTypeInfo<?, ?>> SPELLS_ARG = ARG_TYPES.register("spell", () -> ArgumentTypeInfos.registerByClass(SpellArgument.class, SingletonArgumentInfo.contextFree(SpellArgument::spells)));
