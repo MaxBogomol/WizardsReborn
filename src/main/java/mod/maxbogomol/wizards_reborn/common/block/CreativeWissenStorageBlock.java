@@ -1,5 +1,6 @@
 package mod.maxbogomol.wizards_reborn.common.block;
 
+import mod.maxbogomol.wizards_reborn.WizardsReborn;
 import mod.maxbogomol.wizards_reborn.api.wissen.IWissenItem;
 import mod.maxbogomol.wizards_reborn.common.item.equipment.WissenWandItem;
 import mod.maxbogomol.wizards_reborn.common.tileentity.CreativeWissenStorageTileEntity;
@@ -8,6 +9,7 @@ import mod.maxbogomol.wizards_reborn.common.tileentity.TileSimpleInventory;
 import mod.maxbogomol.wizards_reborn.utils.PacketUtils;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.Containers;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
@@ -98,6 +100,7 @@ public class CreativeWissenStorageBlock extends HorizontalDirectionalBlock imple
                 player.getInventory().removeItem(player.getItemInHand(hand));
                 world.updateNeighbourForOutputSignal(pos, this);
                 PacketUtils.SUpdateTileEntityPacket(cell);
+                world.playSound(null, pos, WizardsReborn.PEDESTAL_INSERT_SOUND.get(), SoundSource.BLOCKS, 1.0f, 1.0f);
                 return InteractionResult.SUCCESS;
             }
         }
@@ -111,6 +114,7 @@ public class CreativeWissenStorageBlock extends HorizontalDirectionalBlock imple
             cell.getItemHandler().removeItem(0, 1);
             world.updateNeighbourForOutputSignal(pos, this);
             PacketUtils.SUpdateTileEntityPacket(cell);
+            world.playSound(null, pos, WizardsReborn.PEDESTAL_REMOVE_SOUND.get(), SoundSource.BLOCKS, 1.0f, 1.0f);
             return InteractionResult.SUCCESS;
         }
 

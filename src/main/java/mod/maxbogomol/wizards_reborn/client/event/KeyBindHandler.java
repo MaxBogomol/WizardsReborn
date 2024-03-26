@@ -1,5 +1,6 @@
 package mod.maxbogomol.wizards_reborn.client.event;
 
+import mod.maxbogomol.wizards_reborn.WizardsReborn;
 import mod.maxbogomol.wizards_reborn.WizardsRebornClient;
 import mod.maxbogomol.wizards_reborn.client.gui.screen.CrystalChooseScreen;
 import mod.maxbogomol.wizards_reborn.common.item.equipment.ArcaneWandItem;
@@ -10,7 +11,6 @@ import mod.maxbogomol.wizards_reborn.common.network.PacketHandler;
 import net.minecraft.client.Minecraft;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
-import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
@@ -53,7 +53,7 @@ public class KeyBindHandler {
                 if (nbt.contains("crystal")) {
                     if (nbt.getBoolean("crystal")) {
                         PacketHandler.sendToServer(new DeleteCrystalPacket(hand));
-                        Minecraft.getInstance().player.playNotifySound(SoundEvents.AMETHYST_BLOCK_RESONATE, SoundSource.NEUTRAL, 1.0f, 1.0f);
+                        Minecraft.getInstance().player.playNotifySound(WizardsReborn.CRYSTAL_RESONATE_SOUND.get(), SoundSource.NEUTRAL, 1.0f, 1.0f);
                     }
                 }
             }

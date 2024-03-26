@@ -131,7 +131,7 @@ public class WissenAltarBlock extends HorizontalDirectionalBlock implements Enti
                 player.getInventory().removeItem(player.getItemInHand(hand));
                 world.updateNeighbourForOutputSignal(pos, this);
                 PacketUtils.SUpdateTileEntityPacket(altar);
-                world.playSound(null, pos, SoundEvents.BAMBOO_WOOD_PLACE, SoundSource.BLOCKS, 1.0f, 0.75f);
+                world.playSound(null, pos, WizardsReborn.PEDESTAL_INSERT_SOUND.get(), SoundSource.BLOCKS, 1.0f, 1.0f);
                 return InteractionResult.SUCCESS;
             } else {
                 if (altar.getItemHandler().getItem(1).equals(stack)
@@ -139,7 +139,7 @@ public class WissenAltarBlock extends HorizontalDirectionalBlock implements Enti
                     altar.getItemHandler().getItem(1).setCount(altar.getItemHandler().getItem(1).getCount() + stack.getCount());
                     world.updateNeighbourForOutputSignal(pos, this);
                     PacketUtils.SUpdateTileEntityPacket(altar);
-                    world.playSound(null, pos, SoundEvents.BAMBOO_WOOD_PLACE, SoundSource.BLOCKS, 1.0f, 0.75f);
+                    world.playSound(null, pos, WizardsReborn.PEDESTAL_INSERT_SOUND.get(), SoundSource.BLOCKS, 1.0f, 1.0f);
                     return InteractionResult.SUCCESS;
                 }
             }
@@ -154,7 +154,7 @@ public class WissenAltarBlock extends HorizontalDirectionalBlock implements Enti
             altar.getItemHandler().removeItem(0, 1);
             world.updateNeighbourForOutputSignal(pos, this);
             PacketUtils.SUpdateTileEntityPacket(altar);
-            world.playSound(null, pos, SoundEvents.BAMBOO_WOOD_HIT, SoundSource.BLOCKS, 1.0f, 1.0f);
+            world.playSound(null, pos, WizardsReborn.PEDESTAL_REMOVE_SOUND.get(), SoundSource.BLOCKS, 1.0f, 1.0f);
             return InteractionResult.SUCCESS;
         } else {
             if (!altar.getItemHandler().getItem(1).isEmpty()) {
@@ -166,7 +166,7 @@ public class WissenAltarBlock extends HorizontalDirectionalBlock implements Enti
                 altar.getItemHandler().removeItem(1, 64);
                 world.updateNeighbourForOutputSignal(pos, this);
                 PacketUtils.SUpdateTileEntityPacket(altar);
-                world.playSound(null, pos, SoundEvents.BAMBOO_WOOD_HIT, SoundSource.BLOCKS, 1.0f, 1.0f);
+                world.playSound(null, pos, WizardsReborn.PEDESTAL_REMOVE_SOUND.get(), SoundSource.BLOCKS, 1.0f, 1.0f);
                 return InteractionResult.SUCCESS;
             }
         }

@@ -8,6 +8,7 @@ import mod.maxbogomol.wizards_reborn.common.tileentity.TileSimpleInventory;
 import mod.maxbogomol.wizards_reborn.utils.PacketUtils;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.item.ItemEntity;
@@ -175,12 +176,14 @@ public class LightTransferLensBlock extends FaceAttachedHorizontalDirectionalBlo
                     tile.getItemHandler().setItem(0, stack);
                     world.updateNeighbourForOutputSignal(pos, this);
                     PacketUtils.SUpdateTileEntityPacket(tile);
+                    world.playSound(null, pos, WizardsReborn.PEDESTAL_INSERT_SOUND.get(), SoundSource.BLOCKS, 1.0f, 1.0f);
                     return InteractionResult.SUCCESS;
                 } else {
                     tile.getItemHandler().setItem(0, stack);
                     player.getInventory().removeItem(player.getItemInHand(hand));
                     world.updateNeighbourForOutputSignal(pos, this);
                     PacketUtils.SUpdateTileEntityPacket(tile);
+                    world.playSound(null, pos, WizardsReborn.PEDESTAL_INSERT_SOUND.get(), SoundSource.BLOCKS, 1.0f, 1.0f);
                     return InteractionResult.SUCCESS;
                 }
             }
@@ -195,6 +198,7 @@ public class LightTransferLensBlock extends FaceAttachedHorizontalDirectionalBlo
             tile.getItemHandler().removeItem(0, 1);
             world.updateNeighbourForOutputSignal(pos, this);
             PacketUtils.SUpdateTileEntityPacket(tile);
+            world.playSound(null, pos, WizardsReborn.PEDESTAL_REMOVE_SOUND.get(), SoundSource.BLOCKS, 1.0f, 1.0f);
             return InteractionResult.SUCCESS;
         }
 

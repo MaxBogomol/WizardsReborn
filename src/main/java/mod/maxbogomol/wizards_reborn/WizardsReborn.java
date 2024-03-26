@@ -270,6 +270,88 @@ public class WizardsReborn {
     public static final RegistryObject<SoundEvent> ARCANE_WOOD_TRAPDOOR_CLOSE_SOUND = SOUND_EVENTS.register("arcane_wood_trapdoor_close", () -> SoundEvent.createVariableRangeEvent(new ResourceLocation(MOD_ID, "arcane_wood_trapdoor_close")));
     public static final RegistryObject<SoundEvent> ARCANE_WOOD_TRAPDOOR_OPEN_SOUND = SOUND_EVENTS.register("arcane_wood_trapdoor_open", () -> SoundEvent.createVariableRangeEvent(new ResourceLocation(MOD_ID, "arcane_wood_trapdoor_open")));
 
+    public static final RegistryObject<SoundEvent> INNOCENT_WOOD_BREAK_SOUND = SOUND_EVENTS.register("innocent_wood_break", () -> SoundEvent.createVariableRangeEvent(new ResourceLocation(MOD_ID, "innocent_wood_break")));
+    public static final RegistryObject<SoundEvent> INNOCENT_WOOD_STEP_SOUND = SOUND_EVENTS.register("innocent_wood_step", () -> SoundEvent.createVariableRangeEvent(new ResourceLocation(MOD_ID, "innocent_wood_step")));
+    public static final RegistryObject<SoundEvent> INNOCENT_WOOD_PLACE_SOUND = SOUND_EVENTS.register("innocent_wood_place", () -> SoundEvent.createVariableRangeEvent(new ResourceLocation(MOD_ID, "innocent_wood_place")));
+    public static final RegistryObject<SoundEvent> INNOCENT_WOOD_HIT_SOUND = SOUND_EVENTS.register("innocent_wood_hit", () -> SoundEvent.createVariableRangeEvent(new ResourceLocation(MOD_ID, "innocent_wood_hit")));
+
+    public static final RegistryObject<SoundEvent> INNOCENT_WOOD_HANGING_SIGN_BREAK_SOUND = SOUND_EVENTS.register("innocent_wood_hanging_sign_break", () -> SoundEvent.createVariableRangeEvent(new ResourceLocation(MOD_ID, "innocent_wood_hanging_sign_break")));
+    public static final RegistryObject<SoundEvent> INNOCENT_WOOD_HANGING_SIGN_STEP_SOUND = SOUND_EVENTS.register("innocent_wood_hanging_sign_step", () -> SoundEvent.createVariableRangeEvent(new ResourceLocation(MOD_ID, "innocent_wood_hanging_sign_step")));
+    public static final RegistryObject<SoundEvent> INNOCENT_WOOD_HANGING_SIGN_PLACE_SOUND = SOUND_EVENTS.register("innocent_wood_hanging_sign_place", () -> SoundEvent.createVariableRangeEvent(new ResourceLocation(MOD_ID, "innocent_wood_hanging_sign_place")));
+    public static final RegistryObject<SoundEvent> INNOCENT_WOOD_HANGING_SIGN_HIT_SOUND = SOUND_EVENTS.register("innocent_wood_hanging_sign_hit", () -> SoundEvent.createVariableRangeEvent(new ResourceLocation(MOD_ID, "innocent_wood_hanging_sign_hit")));
+
+    public static final RegistryObject<SoundEvent> INNOCENT_WOOD_BUTTON_CLICK_OFF_SOUND = SOUND_EVENTS.register("innocent_wood_button_click_off", () -> SoundEvent.createVariableRangeEvent(new ResourceLocation(MOD_ID, "innocent_wood_button_click_off")));
+    public static final RegistryObject<SoundEvent> INNOCENT_WOOD_BUTTON_CLICK_ON_SOUND = SOUND_EVENTS.register("innocent_wood_button_click_on", () -> SoundEvent.createVariableRangeEvent(new ResourceLocation(MOD_ID, "innocent_wood_button_click_on")));
+    public static final RegistryObject<SoundEvent> INNOCENT_WOOD_PRESSURE_PLATE_CLICK_OFF_SOUND = SOUND_EVENTS.register("innocent_wood_pressure_plate_click_off", () -> SoundEvent.createVariableRangeEvent(new ResourceLocation(MOD_ID, "innocent_wood_pressure_plate_click_off")));
+    public static final RegistryObject<SoundEvent> INNOCENT_WOOD_PRESSURE_PLATE_CLICK_ON_SOUND = SOUND_EVENTS.register("innocent_wood_pressure_plate_click_on", () -> SoundEvent.createVariableRangeEvent(new ResourceLocation(MOD_ID, "innocent_wood_pressure_plate_click_on")));
+    public static final RegistryObject<SoundEvent> INNOCENT_WOOD_FENCE_GATE_CLOSE_SOUND = SOUND_EVENTS.register("innocent_wood_fence_gate_close", () -> SoundEvent.createVariableRangeEvent(new ResourceLocation(MOD_ID, "innocent_wood_fence_gate_close")));
+    public static final RegistryObject<SoundEvent> INNOCENT_WOOD_FENCE_GATE_OPEN_SOUND = SOUND_EVENTS.register("innocent_wood_fence_gate_open", () -> SoundEvent.createVariableRangeEvent(new ResourceLocation(MOD_ID, "innocent_wood_fence_gate_open")));
+    public static final RegistryObject<SoundEvent> INNOCENT_WOOD_DOOR_CLOSE_SOUND = SOUND_EVENTS.register("innocent_wood_door_close", () -> SoundEvent.createVariableRangeEvent(new ResourceLocation(MOD_ID, "innocent_wood_door_close")));
+    public static final RegistryObject<SoundEvent> INNOCENT_WOOD_DOOR_OPEN_SOUND = SOUND_EVENTS.register("innocent_wood_door_open", () -> SoundEvent.createVariableRangeEvent(new ResourceLocation(MOD_ID, "innocent_wood_door_open")));
+    public static final RegistryObject<SoundEvent> INNOCENT_WOOD_TRAPDOOR_CLOSE_SOUND = SOUND_EVENTS.register("innocent_wood_trapdoor_close", () -> SoundEvent.createVariableRangeEvent(new ResourceLocation(MOD_ID, "innocent_wood_trapdoor_close")));
+    public static final RegistryObject<SoundEvent> INNOCENT_WOOD_TRAPDOOR_OPEN_SOUND = SOUND_EVENTS.register("innocent_wood_trapdoor_open", () -> SoundEvent.createVariableRangeEvent(new ResourceLocation(MOD_ID, "innocent_wood_trapdoor_open")));
+
+    public static final RegistryObject<SoundEvent> WISESTONE_BREAK_SOUND = SOUND_EVENTS.register("wisestone_break", () -> SoundEvent.createVariableRangeEvent(new ResourceLocation(MOD_ID, "wisestone_break")));
+    public static final RegistryObject<SoundEvent> WISESTONE_STEP_SOUND = SOUND_EVENTS.register("wisestone_step", () -> SoundEvent.createVariableRangeEvent(new ResourceLocation(MOD_ID, "wisestone_step")));
+    public static final RegistryObject<SoundEvent> WISESTONE_PLACE_SOUND = SOUND_EVENTS.register("wisestone_place", () -> SoundEvent.createVariableRangeEvent(new ResourceLocation(MOD_ID, "wisestone_place")));
+    public static final RegistryObject<SoundEvent> WISESTONE_HIT_SOUND = SOUND_EVENTS.register("wisestone_hit", () -> SoundEvent.createVariableRangeEvent(new ResourceLocation(MOD_ID, "wisestone_hit")));
+
+    public static final RegistryObject<SoundEvent> POLISHED_WISESTONE_BREAK_SOUND = SOUND_EVENTS.register("polished_wisestone_break", () -> SoundEvent.createVariableRangeEvent(new ResourceLocation(MOD_ID, "polished_wisestone_break")));
+    public static final RegistryObject<SoundEvent> POLISHED_WISESTONE_STEP_SOUND = SOUND_EVENTS.register("polished_wisestone_step", () -> SoundEvent.createVariableRangeEvent(new ResourceLocation(MOD_ID, "polished_wisestone_step")));
+    public static final RegistryObject<SoundEvent> POLISHED_WISESTONE_PLACE_SOUND = SOUND_EVENTS.register("polished_wisestone_place", () -> SoundEvent.createVariableRangeEvent(new ResourceLocation(MOD_ID, "polished_wisestone_place")));
+    public static final RegistryObject<SoundEvent> POLISHED_WISESTONE_HIT_SOUND = SOUND_EVENTS.register("polished_wisestone_hit", () -> SoundEvent.createVariableRangeEvent(new ResourceLocation(MOD_ID, "polished_wisestone_hit")));
+
+    public static final RegistryObject<SoundEvent> WISESTONE_BRICKS_BREAK_SOUND = SOUND_EVENTS.register("wisestone_bricks_break", () -> SoundEvent.createVariableRangeEvent(new ResourceLocation(MOD_ID, "wisestone_bricks_break")));
+    public static final RegistryObject<SoundEvent> WISESTONE_BRICKS_STEP_SOUND = SOUND_EVENTS.register("wisestone_bricks_step", () -> SoundEvent.createVariableRangeEvent(new ResourceLocation(MOD_ID, "wisestone_bricks_step")));
+    public static final RegistryObject<SoundEvent> WISESTONE_BRICKS_PLACE_SOUND = SOUND_EVENTS.register("wisestone_bricks_place", () -> SoundEvent.createVariableRangeEvent(new ResourceLocation(MOD_ID, "wisestone_bricks_place")));
+    public static final RegistryObject<SoundEvent> WISESTONE_BRICKS_HIT_SOUND = SOUND_EVENTS.register("wisestone_bricks_hit", () -> SoundEvent.createVariableRangeEvent(new ResourceLocation(MOD_ID, "wisestone_bricks_hit")));
+
+    public static final RegistryObject<SoundEvent> WISESTONE_TILE_BREAK_SOUND = SOUND_EVENTS.register("wisestone_tile_break", () -> SoundEvent.createVariableRangeEvent(new ResourceLocation(MOD_ID, "wisestone_tile_break")));
+    public static final RegistryObject<SoundEvent> WISESTONE_TILE_STEP_SOUND = SOUND_EVENTS.register("wisestone_tile_step", () -> SoundEvent.createVariableRangeEvent(new ResourceLocation(MOD_ID, "wisestone_tile_step")));
+    public static final RegistryObject<SoundEvent> WISESTONE_TILE_PLACE_SOUND = SOUND_EVENTS.register("wisestone_tile_place", () -> SoundEvent.createVariableRangeEvent(new ResourceLocation(MOD_ID, "wisestone_tile_place")));
+    public static final RegistryObject<SoundEvent> WISESTONE_TILE_HIT_SOUND = SOUND_EVENTS.register("wisestone_tile_hit", () -> SoundEvent.createVariableRangeEvent(new ResourceLocation(MOD_ID, "wisestone_tile_hit")));
+
+    public static final RegistryObject<SoundEvent> CHISELED_WISESTONE_BREAK_SOUND = SOUND_EVENTS.register("chiseled_wisestone_break", () -> SoundEvent.createVariableRangeEvent(new ResourceLocation(MOD_ID, "chiseled_wisestone_break")));
+    public static final RegistryObject<SoundEvent> CHISELED_WISESTONE_STEP_SOUND = SOUND_EVENTS.register("chiseled_wisestone_step", () -> SoundEvent.createVariableRangeEvent(new ResourceLocation(MOD_ID, "chiseled_wisestone_step")));
+    public static final RegistryObject<SoundEvent> CHISELED_WISESTONE_PLACE_SOUND = SOUND_EVENTS.register("chiseled_wisestone_place", () -> SoundEvent.createVariableRangeEvent(new ResourceLocation(MOD_ID, "chiseled_wisestone_place")));
+    public static final RegistryObject<SoundEvent> CHISELED_WISESTONE_HIT_SOUND = SOUND_EVENTS.register("chiseled_wisestone_hit", () -> SoundEvent.createVariableRangeEvent(new ResourceLocation(MOD_ID, "chiseled_wisestone_hit")));
+
+    public static final RegistryObject<SoundEvent> WISESTONE_BUTTON_CLICK_OFF_SOUND = SOUND_EVENTS.register("wisestone_button_click_off", () -> SoundEvent.createVariableRangeEvent(new ResourceLocation(MOD_ID, "wisestone_button_click_off")));
+    public static final RegistryObject<SoundEvent> WISESTONE_BUTTON_CLICK_ON_SOUND = SOUND_EVENTS.register("wisestone_button_click_on", () -> SoundEvent.createVariableRangeEvent(new ResourceLocation(MOD_ID, "wisestone_button_click_on")));
+    public static final RegistryObject<SoundEvent> WISESTONE_PRESSURE_PLATE_CLICK_OFF_SOUND = SOUND_EVENTS.register("wisestone_pressure_plate_click_off", () -> SoundEvent.createVariableRangeEvent(new ResourceLocation(MOD_ID, "wisestone_pressure_plate_click_off")));
+    public static final RegistryObject<SoundEvent> WISESTONE_PRESSURE_PLATE_CLICK_ON_SOUND = SOUND_EVENTS.register("wisestone_pressure_plate_click_on", () -> SoundEvent.createVariableRangeEvent(new ResourceLocation(MOD_ID, "wisestone_pressure_plate_click_on")));
+
+    public static final RegistryObject<SoundEvent> MOR_BREAK_SOUND = SOUND_EVENTS.register("mor_break", () -> SoundEvent.createVariableRangeEvent(new ResourceLocation(MOD_ID, "mor_break")));
+    public static final RegistryObject<SoundEvent> MOR_STEP_SOUND = SOUND_EVENTS.register("mor_step", () -> SoundEvent.createVariableRangeEvent(new ResourceLocation(MOD_ID, "mor_step")));
+    public static final RegistryObject<SoundEvent> MOR_PLACE_SOUND = SOUND_EVENTS.register("mor_place", () -> SoundEvent.createVariableRangeEvent(new ResourceLocation(MOD_ID, "mor_place")));
+    public static final RegistryObject<SoundEvent> MOR_HIT_SOUND = SOUND_EVENTS.register("mor_hit", () -> SoundEvent.createVariableRangeEvent(new ResourceLocation(MOD_ID, "mor_hit")));
+
+    public static final RegistryObject<SoundEvent> ELDER_MOR_BREAK_SOUND = SOUND_EVENTS.register("elder_mor_break", () -> SoundEvent.createVariableRangeEvent(new ResourceLocation(MOD_ID, "elder_mor_break")));
+    public static final RegistryObject<SoundEvent> ELDER_MOR_STEP_SOUND = SOUND_EVENTS.register("elder_mor_step", () -> SoundEvent.createVariableRangeEvent(new ResourceLocation(MOD_ID, "elder_mor_step")));
+    public static final RegistryObject<SoundEvent> ELDER_MOR_PLACE_SOUND = SOUND_EVENTS.register("elder_mor_place", () -> SoundEvent.createVariableRangeEvent(new ResourceLocation(MOD_ID, "elder_mor_place")));
+    public static final RegistryObject<SoundEvent> ELDER_MOR_HIT_SOUND = SOUND_EVENTS.register("elder_mor_hit", () -> SoundEvent.createVariableRangeEvent(new ResourceLocation(MOD_ID, "elder_mor_hit")));
+
+    public static final RegistryObject<SoundEvent> MOR_BLOCK_BREAK_SOUND = SOUND_EVENTS.register("mor_block_break", () -> SoundEvent.createVariableRangeEvent(new ResourceLocation(MOD_ID, "mor_block_break")));
+    public static final RegistryObject<SoundEvent> MOR_BLOCK_STEP_SOUND = SOUND_EVENTS.register("mor_block_step", () -> SoundEvent.createVariableRangeEvent(new ResourceLocation(MOD_ID, "mor_block_step")));
+    public static final RegistryObject<SoundEvent> MOR_BLOCK_PLACE_SOUND = SOUND_EVENTS.register("mor_block_place", () -> SoundEvent.createVariableRangeEvent(new ResourceLocation(MOD_ID, "mor_block_place")));
+    public static final RegistryObject<SoundEvent> MOR_BLOCK_HIT_SOUND = SOUND_EVENTS.register("mor_block_hit", () -> SoundEvent.createVariableRangeEvent(new ResourceLocation(MOD_ID, "mor_block_hit")));
+
+    public static final RegistryObject<SoundEvent> ELDER_MOR_BLOCK_BREAK_SOUND = SOUND_EVENTS.register("elder_mor_block_break", () -> SoundEvent.createVariableRangeEvent(new ResourceLocation(MOD_ID, "elder_mor_block_break")));
+    public static final RegistryObject<SoundEvent> ELDER_MOR_BLOCK_STEP_SOUND = SOUND_EVENTS.register("elder_mor_block_step", () -> SoundEvent.createVariableRangeEvent(new ResourceLocation(MOD_ID, "elder_mor_block_step")));
+    public static final RegistryObject<SoundEvent> ELDER_MOR_BLOCK_PLACE_SOUND = SOUND_EVENTS.register("elder_mor_block_place", () -> SoundEvent.createVariableRangeEvent(new ResourceLocation(MOD_ID, "elder_mor_block_place")));
+    public static final RegistryObject<SoundEvent> ELDER_MOR_BLOCK_HIT_SOUND = SOUND_EVENTS.register("elder_mor_block_hit", () -> SoundEvent.createVariableRangeEvent(new ResourceLocation(MOD_ID, "elder_mor_block_hit")));
+
+    public static final RegistryObject<SoundEvent> CRYSTAL_BREAK_SOUND = SOUND_EVENTS.register("crystal_break", () -> SoundEvent.createVariableRangeEvent(new ResourceLocation(MOD_ID, "crystal_break")));
+    public static final RegistryObject<SoundEvent> CRYSTAL_STEP_SOUND = SOUND_EVENTS.register("crystal_step", () -> SoundEvent.createVariableRangeEvent(new ResourceLocation(MOD_ID, "crystal_step")));
+    public static final RegistryObject<SoundEvent> CRYSTAL_PLACE_SOUND = SOUND_EVENTS.register("crystal_place", () -> SoundEvent.createVariableRangeEvent(new ResourceLocation(MOD_ID, "crystal_place")));
+    public static final RegistryObject<SoundEvent> CRYSTAL_HIT_SOUND = SOUND_EVENTS.register("crystal_hit", () -> SoundEvent.createVariableRangeEvent(new ResourceLocation(MOD_ID, "crystal_hit")));
+
+    public static final RegistryObject<SoundEvent> CRYSTAL_RESONATE_SOUND = SOUND_EVENTS.register("crystal_resonate", () -> SoundEvent.createVariableRangeEvent(new ResourceLocation(MOD_ID, "crystal_resonate")));
+    public static final RegistryObject<SoundEvent> CRYSTAL_SHIMMER_SOUND = SOUND_EVENTS.register("crystal_shimmer", () -> SoundEvent.createVariableRangeEvent(new ResourceLocation(MOD_ID, "crystal_shimmer")));
+
+    public static final RegistryObject<SoundEvent> PEDESTAL_INSERT_SOUND = SOUND_EVENTS.register("pedestal_insert", () -> SoundEvent.createVariableRangeEvent(new ResourceLocation(MOD_ID, "pedestal_insert")));
+    public static final RegistryObject<SoundEvent> PEDESTAL_REMOVE_SOUND = SOUND_EVENTS.register("pedestal_remove", () -> SoundEvent.createVariableRangeEvent(new ResourceLocation(MOD_ID, "pedestal_remove")));
+
     public static final ForgeSoundType ARCANE_GOLD_SOUNDS = new ForgeSoundType(1f, 1f, ARCANE_GOLD_BREAK_SOUND, ARCANE_GOLD_STEP_SOUND, ARCANE_GOLD_PLACE_SOUND, ARCANE_GOLD_HIT_SOUND, () -> SoundEvents.NETHERITE_BLOCK_FALL);
     public static final ForgeSoundType ARCANE_GOLD_ORE_SOUNDS = new ForgeSoundType(1f, 1f, ARCANE_GOLD_ORE_BREAK_SOUND, ARCANE_GOLD_ORE_STEP_SOUND, ARCANE_GOLD_ORE_PLACE_SOUND, ARCANE_GOLD_ORE_HIT_SOUND, () -> SoundEvents.STONE_FALL);
     public static final ForgeSoundType DEEPSLATE_ARCANE_GOLD_ORE_SOUNDS = new ForgeSoundType(1f, 1f, DEEPSLATE_ARCANE_GOLD_ORE_BREAK_SOUND, DEEPSLATE_ARCANE_GOLD_ORE_STEP_SOUND, DEEPSLATE_ARCANE_GOLD_ORE_PLACE_SOUND, DEEPSLATE_ARCANE_GOLD_ORE_HIT_SOUND, () -> SoundEvents.DEEPSLATE_FALL);
@@ -281,6 +363,18 @@ public class WizardsReborn {
     public static final ForgeSoundType ARCACITE_SOUNDS = new ForgeSoundType(1f, 1f, ARCACITE_BREAK_SOUND, ARCACITE_STEP_SOUND, ARCACITE_PLACE_SOUND, ARCACITE_HIT_SOUND, () -> SoundEvents.METAL_FALL);
     public static final ForgeSoundType ARCANE_WOOD_SOUNDS = new ForgeSoundType(1f, 1f, ARCANE_WOOD_BREAK_SOUND, ARCANE_WOOD_STEP_SOUND, ARCANE_WOOD_PLACE_SOUND, ARCANE_WOOD_HIT_SOUND, () -> SoundEvents.BAMBOO_WOOD_FALL);
     public static final ForgeSoundType ARCANE_WOOD_HANGING_SIGN_SOUNDS = new ForgeSoundType(1f, 1f, ARCANE_WOOD_HANGING_SIGN_BREAK_SOUND, ARCANE_WOOD_HANGING_SIGN_STEP_SOUND, ARCANE_WOOD_HANGING_SIGN_PLACE_SOUND, ARCANE_WOOD_HANGING_SIGN_HIT_SOUND, () -> SoundEvents.BAMBOO_WOOD_FALL);
+    public static final ForgeSoundType INNOCENT_WOOD_SOUNDS = new ForgeSoundType(1f, 1f, INNOCENT_WOOD_BREAK_SOUND, INNOCENT_WOOD_STEP_SOUND, INNOCENT_WOOD_PLACE_SOUND, INNOCENT_WOOD_HIT_SOUND, () -> SoundEvents.CHERRY_WOOD_FALL);
+    public static final ForgeSoundType INNOCENT_WOOD_HANGING_SIGN_SOUNDS = new ForgeSoundType(1f, 1f, INNOCENT_WOOD_HANGING_SIGN_BREAK_SOUND, INNOCENT_WOOD_HANGING_SIGN_STEP_SOUND, INNOCENT_WOOD_HANGING_SIGN_PLACE_SOUND, INNOCENT_WOOD_HANGING_SIGN_HIT_SOUND, () -> SoundEvents.CHERRY_WOOD_FALL);
+    public static final ForgeSoundType WISESTONE_SOUNDS = new ForgeSoundType(1f, 1f, WISESTONE_BREAK_SOUND, WISESTONE_STEP_SOUND, WISESTONE_PLACE_SOUND, WISESTONE_HIT_SOUND, () -> SoundEvents.DEEPSLATE_FALL);
+    public static final ForgeSoundType POLISHED_WISESTONE_SOUNDS = new ForgeSoundType(1f, 1f, POLISHED_WISESTONE_BREAK_SOUND, POLISHED_WISESTONE_STEP_SOUND, POLISHED_WISESTONE_PLACE_SOUND, POLISHED_WISESTONE_HIT_SOUND, () -> SoundEvents.POLISHED_DEEPSLATE_FALL);
+    public static final ForgeSoundType WISESTONE_BRICKS_SOUNDS = new ForgeSoundType(1f, 1f, WISESTONE_BRICKS_BREAK_SOUND, WISESTONE_BRICKS_STEP_SOUND, WISESTONE_BRICKS_PLACE_SOUND, WISESTONE_BRICKS_HIT_SOUND, () -> SoundEvents.DEEPSLATE_BRICKS_FALL);
+    public static final ForgeSoundType WISESTONE_TILE_SOUNDS = new ForgeSoundType(1f, 1f, WISESTONE_TILE_BREAK_SOUND, WISESTONE_TILE_STEP_SOUND, WISESTONE_TILE_PLACE_SOUND, WISESTONE_TILE_HIT_SOUND, () -> SoundEvents.DEEPSLATE_TILES_FALL);
+    public static final ForgeSoundType CHISELED_WISESTONE_SOUNDS = new ForgeSoundType(1f, 1f, CHISELED_WISESTONE_BREAK_SOUND, CHISELED_WISESTONE_STEP_SOUND, CHISELED_WISESTONE_PLACE_SOUND, CHISELED_WISESTONE_HIT_SOUND, () -> SoundEvents.POLISHED_DEEPSLATE_FALL);
+    public static final ForgeSoundType MOR_SOUNDS = new ForgeSoundType(1f, 1f, MOR_BREAK_SOUND, MOR_STEP_SOUND, MOR_PLACE_SOUND, MOR_HIT_SOUND, () -> SoundEvents.FUNGUS_FALL);
+    public static final ForgeSoundType ELDER_MOR_SOUNDS = new ForgeSoundType(1f, 1f, ELDER_MOR_BREAK_SOUND, ELDER_MOR_STEP_SOUND, ELDER_MOR_PLACE_SOUND, ELDER_MOR_HIT_SOUND, () -> SoundEvents.FUNGUS_FALL);
+    public static final ForgeSoundType MOR_BLOCK_SOUNDS = new ForgeSoundType(1f, 1f, MOR_BLOCK_BREAK_SOUND, MOR_BLOCK_STEP_SOUND, MOR_BLOCK_PLACE_SOUND, MOR_BLOCK_HIT_SOUND, () -> SoundEvents.MUDDY_MANGROVE_ROOTS_FALL);
+    public static final ForgeSoundType ELDER_MOR_BLOCK_SOUNDS = new ForgeSoundType(1f, 1f, ELDER_MOR_BLOCK_BREAK_SOUND, ELDER_MOR_BLOCK_STEP_SOUND, ELDER_MOR_BLOCK_PLACE_SOUND, ELDER_MOR_BLOCK_HIT_SOUND, () -> SoundEvents.MUDDY_MANGROVE_ROOTS_FALL);
+    public static final ForgeSoundType CRYSTAL_SOUNDS = new ForgeSoundType(1f, 1f, CRYSTAL_BREAK_SOUND, CRYSTAL_STEP_SOUND, CRYSTAL_PLACE_SOUND, CRYSTAL_HIT_SOUND, () -> SoundEvents.AMETHYST_CLUSTER_FALL);
 
     public static final LazyOptional<BlockSetType> ARCANE_WOOD_BLOCK_SET = LazyOptional.of(() -> BlockSetType.register(
             new BlockSetType("arcane_wood", true,
@@ -289,11 +383,27 @@ public class WizardsReborn {
                     ARCANE_WOOD_TRAPDOOR_CLOSE_SOUND.get(), ARCANE_WOOD_TRAPDOOR_OPEN_SOUND.get(),
                     ARCANE_WOOD_PRESSURE_PLATE_CLICK_OFF_SOUND.get(), ARCANE_WOOD_PRESSURE_PLATE_CLICK_ON_SOUND.get(),
                     ARCANE_WOOD_BUTTON_CLICK_OFF_SOUND.get(), ARCANE_WOOD_BUTTON_CLICK_ON_SOUND.get())));
+    public static final LazyOptional<BlockSetType> INNOCENT_WOOD_BLOCK_SET = LazyOptional.of(() -> BlockSetType.register(
+            new BlockSetType("innocent_wood", true,
+                    INNOCENT_WOOD_SOUNDS,
+                    INNOCENT_WOOD_DOOR_CLOSE_SOUND.get(), INNOCENT_WOOD_DOOR_OPEN_SOUND.get(),
+                    INNOCENT_WOOD_TRAPDOOR_CLOSE_SOUND.get(), INNOCENT_WOOD_TRAPDOOR_OPEN_SOUND.get(),
+                    INNOCENT_WOOD_PRESSURE_PLATE_CLICK_OFF_SOUND.get(), INNOCENT_WOOD_PRESSURE_PLATE_CLICK_ON_SOUND.get(),
+                    INNOCENT_WOOD_BUTTON_CLICK_OFF_SOUND.get(), INNOCENT_WOOD_BUTTON_CLICK_ON_SOUND.get())));
+    public static final LazyOptional<BlockSetType> WISESTONE_BLOCK_SET = LazyOptional.of(() -> BlockSetType.register(
+            new BlockSetType("wisestone", true,
+                    POLISHED_WISESTONE_SOUNDS,
+                    SoundEvents.IRON_DOOR_CLOSE, SoundEvents.IRON_DOOR_OPEN,
+                    SoundEvents.IRON_TRAPDOOR_CLOSE, SoundEvents.IRON_TRAPDOOR_OPEN,
+                    WISESTONE_PRESSURE_PLATE_CLICK_OFF_SOUND.get(), WISESTONE_PRESSURE_PLATE_CLICK_ON_SOUND.get(),
+                    WISESTONE_BUTTON_CLICK_OFF_SOUND.get(), WISESTONE_BUTTON_CLICK_ON_SOUND.get())));
 
     public static final LazyOptional<WoodType> ARCANE_WOOD_TYPE = LazyOptional.of(() -> WoodType.register(new WoodType(new ResourceLocation(MOD_ID, "arcane_wood").toString(), ARCANE_WOOD_BLOCK_SET.resolve().get(),
             ARCANE_WOOD_SOUNDS, ARCANE_WOOD_HANGING_SIGN_SOUNDS,
             ARCANE_WOOD_FENCE_GATE_CLOSE_SOUND.get(), ARCANE_WOOD_FENCE_GATE_OPEN_SOUND.get())));
-    public static final WoodType INNOCENT_WOOD_TYPE = WoodType.register(new WoodType(new ResourceLocation(MOD_ID, "innocent_wood").toString(), BlockSetType.CHERRY));
+    public static final LazyOptional<WoodType> INNOCENT_WOOD_TYPE = LazyOptional.of(() -> WoodType.register(new WoodType(new ResourceLocation(MOD_ID, "innocent_wood").toString(), INNOCENT_WOOD_BLOCK_SET.resolve().get(),
+            INNOCENT_WOOD_SOUNDS, INNOCENT_WOOD_HANGING_SIGN_SOUNDS,
+            INNOCENT_WOOD_FENCE_GATE_CLOSE_SOUND.get(), INNOCENT_WOOD_FENCE_GATE_OPEN_SOUND.get())));
 
     //CRYSTAL_STATS
     public static CrystalStat FOCUS_CRYSTAL_STAT = new CrystalStat(MOD_ID+":focus", 3);
@@ -410,27 +520,27 @@ public class WizardsReborn {
     public static final RegistryObject<Block> ARCANE_WOOD_WALL_SIGN = BLOCKS.register("arcane_wood_wall_sign", () -> new CustomWallSignBlock(BlockBehaviour.Properties.copy(Blocks.OAK_PLANKS).sound(ARCANE_WOOD_SOUNDS).noOcclusion().noCollission(), ARCANE_WOOD_TYPE.resolve().get()));
     public static final RegistryObject<Block> ARCANE_WOOD_HANGING_SIGN = BLOCKS.register("arcane_wood_hanging_sign", () -> new CustomCeilingHangingSignBlock(BlockBehaviour.Properties.copy(Blocks.OAK_PLANKS).sound(ARCANE_WOOD_HANGING_SIGN_SOUNDS).noOcclusion().noCollission(), ARCANE_WOOD_TYPE.resolve().get()));
     public static final RegistryObject<Block> ARCANE_WOOD_WALL_HANGING_SIGN = BLOCKS.register("arcane_wood_wall_hanging_sign", () -> new CustomWallHangingSignBlock(BlockBehaviour.Properties.copy(Blocks.OAK_PLANKS).sound(ARCANE_WOOD_HANGING_SIGN_SOUNDS).noOcclusion().noCollission(), ARCANE_WOOD_TYPE.resolve().get()));
-    public static final RegistryObject<Block> ARCANE_WOOD_LEAVES = BLOCKS.register("arcane_wood_leaves", () -> new ArcaneWoodLeavesBlock(BlockBehaviour.Properties.copy(Blocks.OAK_LEAVES).lightLevel((state) -> 5)));
-    public static final RegistryObject<Block> ARCANE_WOOD_SAPLING = BLOCKS.register("arcane_wood_sapling", () -> new SaplingBlock(new ArcaneWoodTree(), BlockBehaviour.Properties.copy(Blocks.OAK_SAPLING)));
+    public static final RegistryObject<Block> ARCANE_WOOD_LEAVES = BLOCKS.register("arcane_wood_leaves", () -> new ArcaneWoodLeavesBlock(BlockBehaviour.Properties.copy(Blocks.AZALEA_LEAVES).lightLevel((state) -> 5)));
+    public static final RegistryObject<Block> ARCANE_WOOD_SAPLING = BLOCKS.register("arcane_wood_sapling", () -> new SaplingBlock(new ArcaneWoodTree(), BlockBehaviour.Properties.copy(Blocks.OAK_SAPLING).sound(SoundType.AZALEA)));
     public static final RegistryObject<Block> POTTED_ARCANE_WOOD_SAPLING = BLOCKS.register("potted_arcane_wood_sapling", () -> new FlowerPotBlock(ARCANE_WOOD_SAPLING.get(), BlockBehaviour.Properties.copy(Blocks.FLOWER_POT).instabreak().noOcclusion()));
 
-    public static final RegistryObject<Block> INNOCENT_WOOD_LOG = BLOCKS.register("innocent_wood_log", () -> new RotatedPillarBlock(BlockBehaviour.Properties.copy(Blocks.CHERRY_WOOD)));
-    public static final RegistryObject<Block> INNOCENT_WOOD = BLOCKS.register("innocent_wood", () -> new RotatedPillarBlock(BlockBehaviour.Properties.copy(Blocks.CHERRY_WOOD)));
-    public static final RegistryObject<Block> STRIPPED_INNOCENT_WOOD_LOG = BLOCKS.register("stripped_innocent_wood_log", () -> new RotatedPillarBlock(BlockBehaviour.Properties.copy(Blocks.STRIPPED_CHERRY_LOG)));
-    public static final RegistryObject<Block> STRIPPED_INNOCENT_WOOD = BLOCKS.register("stripped_innocent_wood", () -> new RotatedPillarBlock(BlockBehaviour.Properties.copy(Blocks.STRIPPED_CHERRY_WOOD)));
-    public static final RegistryObject<Block> INNOCENT_WOOD_PLANKS = BLOCKS.register("innocent_wood_planks", () -> new Block(BlockBehaviour.Properties.copy(Blocks.CHERRY_PLANKS)));
-    public static final RegistryObject<Block> INNOCENT_WOOD_STAIRS = BLOCKS.register("innocent_wood_stairs", () -> new StairBlock(() -> INNOCENT_WOOD_PLANKS.get().defaultBlockState(), BlockBehaviour.Properties.copy(Blocks.CHERRY_PLANKS)));
-    public static final RegistryObject<Block> INNOCENT_WOOD_SLAB = BLOCKS.register("innocent_wood_slab", () -> new SlabBlock(BlockBehaviour.Properties.copy(Blocks.CHERRY_PLANKS)));
-    public static final RegistryObject<Block> INNOCENT_WOOD_FENCE = BLOCKS.register("innocent_wood_fence", () -> new FenceBlock(BlockBehaviour.Properties.copy(Blocks.CHERRY_PLANKS)));
-    public static final RegistryObject<Block> INNOCENT_WOOD_FENCE_GATE = BLOCKS.register("innocent_wood_fence_gate", () -> new FenceGateBlock(BlockBehaviour.Properties.copy(Blocks.CHERRY_PLANKS), WoodType.CHERRY));
-    public static final RegistryObject<Block> INNOCENT_WOOD_DOOR = BLOCKS.register("innocent_wood_door", () -> new DoorBlock(BlockBehaviour.Properties.copy(Blocks.CHERRY_PLANKS).noOcclusion(), BlockSetType.CHERRY));
-    public static final RegistryObject<Block> INNOCENT_WOOD_TRAPDOOR = BLOCKS.register("innocent_wood_trapdoor", () -> new TrapDoorBlock(BlockBehaviour.Properties.copy(Blocks.CHERRY_PLANKS).noOcclusion(), BlockSetType.CHERRY));
-    public static final RegistryObject<Block> INNOCENT_WOOD_PRESSURE_PLATE = BLOCKS.register("innocent_wood_pressure_plate", () -> new PressurePlateBlock(PressurePlateBlock.Sensitivity.EVERYTHING, BlockBehaviour.Properties.copy(Blocks.CHERRY_PLANKS).noOcclusion().noCollission(), BlockSetType.OAK));
-    public static final RegistryObject<Block> INNOCENT_WOOD_BUTTON = BLOCKS.register("innocent_wood_button", () -> new ButtonBlock(BlockBehaviour.Properties.copy(Blocks.CHERRY_BUTTON).sound(SoundType.WOOD), BlockSetType.CHERRY, 30, true));
-    public static final RegistryObject<Block> INNOCENT_WOOD_SIGN = BLOCKS.register("innocent_wood_sign", () -> new CustomStandingSignBlock(BlockBehaviour.Properties.copy(Blocks.CHERRY_PLANKS).noOcclusion().noCollission(), INNOCENT_WOOD_TYPE));
-    public static final RegistryObject<Block> INNOCENT_WOOD_WALL_SIGN = BLOCKS.register("innocent_wood_wall_sign", () -> new CustomWallSignBlock(BlockBehaviour.Properties.copy(Blocks.CHERRY_PLANKS).noOcclusion().noCollission(), INNOCENT_WOOD_TYPE));
-    public static final RegistryObject<Block> INNOCENT_WOOD_HANGING_SIGN = BLOCKS.register("innocent_wood_hanging_sign", () -> new CustomCeilingHangingSignBlock(BlockBehaviour.Properties.copy(Blocks.CHERRY_PLANKS).noOcclusion().noCollission(), INNOCENT_WOOD_TYPE));
-    public static final RegistryObject<Block> INNOCENT_WOOD_WALL_HANGING_SIGN = BLOCKS.register("innocent_wood_wall_hanging_sign", () -> new CustomWallHangingSignBlock(BlockBehaviour.Properties.copy(Blocks.CHERRY_PLANKS).noOcclusion().noCollission(), INNOCENT_WOOD_TYPE));
+    public static final RegistryObject<Block> INNOCENT_WOOD_LOG = BLOCKS.register("innocent_wood_log", () -> new RotatedPillarBlock(BlockBehaviour.Properties.copy(Blocks.CHERRY_WOOD).sound(INNOCENT_WOOD_SOUNDS)));
+    public static final RegistryObject<Block> INNOCENT_WOOD = BLOCKS.register("innocent_wood", () -> new RotatedPillarBlock(BlockBehaviour.Properties.copy(Blocks.CHERRY_WOOD).sound(INNOCENT_WOOD_SOUNDS)));
+    public static final RegistryObject<Block> STRIPPED_INNOCENT_WOOD_LOG = BLOCKS.register("stripped_innocent_wood_log", () -> new RotatedPillarBlock(BlockBehaviour.Properties.copy(Blocks.STRIPPED_CHERRY_LOG).sound(INNOCENT_WOOD_SOUNDS)));
+    public static final RegistryObject<Block> STRIPPED_INNOCENT_WOOD = BLOCKS.register("stripped_innocent_wood", () -> new RotatedPillarBlock(BlockBehaviour.Properties.copy(Blocks.STRIPPED_CHERRY_WOOD).sound(INNOCENT_WOOD_SOUNDS)));
+    public static final RegistryObject<Block> INNOCENT_WOOD_PLANKS = BLOCKS.register("innocent_wood_planks", () -> new Block(BlockBehaviour.Properties.copy(Blocks.CHERRY_PLANKS).sound(INNOCENT_WOOD_SOUNDS)));
+    public static final RegistryObject<Block> INNOCENT_WOOD_STAIRS = BLOCKS.register("innocent_wood_stairs", () -> new StairBlock(() -> INNOCENT_WOOD_PLANKS.get().defaultBlockState(), BlockBehaviour.Properties.copy(Blocks.CHERRY_PLANKS).sound(INNOCENT_WOOD_SOUNDS)));
+    public static final RegistryObject<Block> INNOCENT_WOOD_SLAB = BLOCKS.register("innocent_wood_slab", () -> new SlabBlock(BlockBehaviour.Properties.copy(Blocks.CHERRY_PLANKS).sound(INNOCENT_WOOD_SOUNDS)));
+    public static final RegistryObject<Block> INNOCENT_WOOD_FENCE = BLOCKS.register("innocent_wood_fence", () -> new FenceBlock(BlockBehaviour.Properties.copy(Blocks.CHERRY_PLANKS).sound(INNOCENT_WOOD_SOUNDS)));
+    public static final RegistryObject<Block> INNOCENT_WOOD_FENCE_GATE = BLOCKS.register("innocent_wood_fence_gate", () -> new FenceGateBlock(BlockBehaviour.Properties.copy(Blocks.CHERRY_PLANKS).sound(INNOCENT_WOOD_SOUNDS), INNOCENT_WOOD_TYPE.resolve().get()));
+    public static final RegistryObject<Block> INNOCENT_WOOD_DOOR = BLOCKS.register("innocent_wood_door", () -> new DoorBlock(BlockBehaviour.Properties.copy(Blocks.CHERRY_PLANKS).sound(INNOCENT_WOOD_SOUNDS).noOcclusion(), ARCANE_WOOD_BLOCK_SET.resolve().get()));
+    public static final RegistryObject<Block> INNOCENT_WOOD_TRAPDOOR = BLOCKS.register("innocent_wood_trapdoor", () -> new TrapDoorBlock(BlockBehaviour.Properties.copy(Blocks.CHERRY_PLANKS).sound(INNOCENT_WOOD_SOUNDS).noOcclusion(), ARCANE_WOOD_BLOCK_SET.resolve().get()));
+    public static final RegistryObject<Block> INNOCENT_WOOD_PRESSURE_PLATE = BLOCKS.register("innocent_wood_pressure_plate", () -> new PressurePlateBlock(PressurePlateBlock.Sensitivity.EVERYTHING, BlockBehaviour.Properties.copy(Blocks.CHERRY_PLANKS).sound(INNOCENT_WOOD_SOUNDS).noOcclusion().noCollission(), BlockSetType.OAK));
+    public static final RegistryObject<Block> INNOCENT_WOOD_BUTTON = BLOCKS.register("innocent_wood_button", () -> new ButtonBlock(BlockBehaviour.Properties.copy(Blocks.CHERRY_BUTTON).sound(INNOCENT_WOOD_SOUNDS), ARCANE_WOOD_BLOCK_SET.resolve().get(), 30, true));
+    public static final RegistryObject<Block> INNOCENT_WOOD_SIGN = BLOCKS.register("innocent_wood_sign", () -> new CustomStandingSignBlock(BlockBehaviour.Properties.copy(Blocks.CHERRY_PLANKS).sound(INNOCENT_WOOD_SOUNDS).noOcclusion().noCollission(), INNOCENT_WOOD_TYPE.resolve().get()));
+    public static final RegistryObject<Block> INNOCENT_WOOD_WALL_SIGN = BLOCKS.register("innocent_wood_wall_sign", () -> new CustomWallSignBlock(BlockBehaviour.Properties.copy(Blocks.CHERRY_PLANKS).sound(INNOCENT_WOOD_SOUNDS).noOcclusion().noCollission(), INNOCENT_WOOD_TYPE.resolve().get()));
+    public static final RegistryObject<Block> INNOCENT_WOOD_HANGING_SIGN = BLOCKS.register("innocent_wood_hanging_sign", () -> new CustomCeilingHangingSignBlock(BlockBehaviour.Properties.copy(Blocks.CHERRY_PLANKS).sound(INNOCENT_WOOD_HANGING_SIGN_SOUNDS).noOcclusion().noCollission(), INNOCENT_WOOD_TYPE.resolve().get()));
+    public static final RegistryObject<Block> INNOCENT_WOOD_WALL_HANGING_SIGN = BLOCKS.register("innocent_wood_wall_hanging_sign", () -> new CustomWallHangingSignBlock(BlockBehaviour.Properties.copy(Blocks.CHERRY_PLANKS).sound(INNOCENT_WOOD_HANGING_SIGN_SOUNDS).noOcclusion().noCollission(), INNOCENT_WOOD_TYPE.resolve().get()));
     public static final RegistryObject<Block> INNOCENT_WOOD_LEAVES = BLOCKS.register("innocent_wood_leaves", () -> new InnocentWoodLeavesBlock(BlockBehaviour.Properties.copy(Blocks.CHERRY_LEAVES)));
     public static final RegistryObject<Block> INNOCENT_WOOD_SAPLING = BLOCKS.register("innocent_wood_sapling", () -> new SaplingBlock(new InnocentWoodTree(), BlockBehaviour.Properties.copy(Blocks.CHERRY_SAPLING)));
     public static final RegistryObject<Block> POTTED_INNOCENT_WOOD_SAPLING = BLOCKS.register("potted_innocent_wood_sapling", () -> new FlowerPotBlock(INNOCENT_WOOD_SAPLING.get(), BlockBehaviour.Properties.copy(Blocks.FLOWER_POT).instabreak().noOcclusion()));
@@ -438,39 +548,39 @@ public class WizardsReborn {
     public static final RegistryObject<Block> POTTED_PETALS_OF_INNOCENCE = BLOCKS.register("potted_petals_of_innocence", () -> new FlowerPotBlock(PETALS_OF_INNOCENCE.get(), BlockBehaviour.Properties.copy(Blocks.FLOWER_POT).instabreak().noOcclusion()));
     public static final RegistryObject<Block> POTTED_PINK_PETALS = BLOCKS.register("potted_pink_petals", () -> new FlowerPotBlock(Blocks.PINK_PETALS, BlockBehaviour.Properties.copy(Blocks.FLOWER_POT).instabreak().noOcclusion()));
 
-    public static final RegistryObject<Block> WISESTONE = BLOCKS.register("wisestone", () -> new Block(BlockBehaviour.Properties.copy(Blocks.DEEPSLATE)));
-    public static final RegistryObject<Block> WISESTONE_STAIRS = BLOCKS.register("wisestone_stairs", () -> new StairBlock(() -> WISESTONE.get().defaultBlockState(), BlockBehaviour.Properties.copy(Blocks.POLISHED_DEEPSLATE)));
-    public static final RegistryObject<Block> WISESTONE_SLAB = BLOCKS.register("wisestone_slab", () -> new SlabBlock(BlockBehaviour.Properties.copy(Blocks.POLISHED_DEEPSLATE)));
-    public static final RegistryObject<Block> WISESTONE_WALL = BLOCKS.register("wisestone_wall", () -> new WallBlock(BlockBehaviour.Properties.copy(Blocks.POLISHED_DEEPSLATE)));
-    public static final RegistryObject<Block> POLISHED_WISESTONE = BLOCKS.register("polished_wisestone", () -> new Block(BlockBehaviour.Properties.copy(Blocks.POLISHED_DEEPSLATE)));
-    public static final RegistryObject<Block> POLISHED_WISESTONE_STAIRS = BLOCKS.register("polished_wisestone_stairs", () -> new StairBlock(() -> POLISHED_WISESTONE.get().defaultBlockState(), BlockBehaviour.Properties.copy(Blocks.POLISHED_DEEPSLATE)));
-    public static final RegistryObject<Block> POLISHED_WISESTONE_SLAB = BLOCKS.register("polished_wisestone_slab", () -> new SlabBlock(BlockBehaviour.Properties.copy(Blocks.POLISHED_DEEPSLATE)));
-    public static final RegistryObject<Block> POLISHED_WISESTONE_WALL = BLOCKS.register("polished_wisestone_wall", () -> new WallBlock(BlockBehaviour.Properties.copy(Blocks.POLISHED_DEEPSLATE)));
-    public static final RegistryObject<Block> WISESTONE_BRICKS = BLOCKS.register("wisestone_bricks", () -> new Block(BlockBehaviour.Properties.copy(Blocks.POLISHED_DEEPSLATE)));
-    public static final RegistryObject<Block> WISESTONE_BRICKS_STAIRS = BLOCKS.register("wisestone_bricks_stairs", () -> new StairBlock(() -> WISESTONE_BRICKS.get().defaultBlockState(), BlockBehaviour.Properties.copy(Blocks.POLISHED_DEEPSLATE)));
-    public static final RegistryObject<Block> WISESTONE_BRICKS_SLAB = BLOCKS.register("wisestone_bricks_slab", () -> new SlabBlock(BlockBehaviour.Properties.copy(Blocks.POLISHED_DEEPSLATE)));
-    public static final RegistryObject<Block> WISESTONE_BRICKS_WALL = BLOCKS.register("wisestone_bricks_wall", () -> new WallBlock(BlockBehaviour.Properties.copy(Blocks.POLISHED_DEEPSLATE)));
-    public static final RegistryObject<Block> WISESTONE_TILE = BLOCKS.register("wisestone_tile", () -> new Block(BlockBehaviour.Properties.copy(Blocks.POLISHED_DEEPSLATE)));
-    public static final RegistryObject<Block> WISESTONE_TILE_STAIRS = BLOCKS.register("wisestone_tile_stairs", () -> new StairBlock(() -> WISESTONE_BRICKS.get().defaultBlockState(), BlockBehaviour.Properties.copy(Blocks.POLISHED_DEEPSLATE)));
-    public static final RegistryObject<Block> WISESTONE_TILE_SLAB = BLOCKS.register("wisestone_tile_slab", () -> new SlabBlock(BlockBehaviour.Properties.copy(Blocks.POLISHED_DEEPSLATE)));
-    public static final RegistryObject<Block> WISESTONE_TILE_WALL = BLOCKS.register("wisestone_tile_wall", () -> new WallBlock(BlockBehaviour.Properties.copy(Blocks.POLISHED_DEEPSLATE)));
-    public static final RegistryObject<Block> CHISELED_WISESTONE = BLOCKS.register("chiseled_wisestone", () -> new Block(BlockBehaviour.Properties.copy(Blocks.POLISHED_DEEPSLATE)));
-    public static final RegistryObject<Block> CHISELED_WISESTONE_STAIRS = BLOCKS.register("chiseled_wisestone_stairs", () -> new StairBlock(() -> POLISHED_WISESTONE.get().defaultBlockState(), BlockBehaviour.Properties.copy(Blocks.POLISHED_DEEPSLATE)));
-    public static final RegistryObject<Block> CHISELED_WISESTONE_SLAB = BLOCKS.register("chiseled_wisestone_slab", () -> new SlabBlock(BlockBehaviour.Properties.copy(Blocks.POLISHED_DEEPSLATE)));
-    public static final RegistryObject<Block> CHISELED_WISESTONE_WALL = BLOCKS.register("chiseled_wisestone_wall", () -> new WallBlock(BlockBehaviour.Properties.copy(Blocks.POLISHED_DEEPSLATE)));
-    public static final RegistryObject<Block> WISESTONE_PILLAR = BLOCKS.register("wisestone_pillar", () -> new RotatedPillarBlock(BlockBehaviour.Properties.copy(Blocks.POLISHED_DEEPSLATE)));
-    public static final RegistryObject<Block> POLISHED_WISESTONE_PRESSURE_PLATE = BLOCKS.register("polished_wisestone_pressure_plate", () -> new PressurePlateBlock(PressurePlateBlock.Sensitivity.MOBS, BlockBehaviour.Properties.copy(Blocks.POLISHED_DEEPSLATE).noOcclusion().noCollission(), BlockSetType.POLISHED_BLACKSTONE));
-    public static final RegistryObject<Block> POLISHED_WISESTONE_BUTTON = BLOCKS.register("polished_wisestone_button", () -> new ButtonBlock(BlockBehaviour.Properties.copy(Blocks.POLISHED_BLACKSTONE_BUTTON).sound(SoundType.POLISHED_DEEPSLATE), BlockSetType.POLISHED_BLACKSTONE, 20, false));
+    public static final RegistryObject<Block> WISESTONE = BLOCKS.register("wisestone", () -> new Block(BlockBehaviour.Properties.copy(Blocks.DEEPSLATE).sound(WISESTONE_SOUNDS)));
+    public static final RegistryObject<Block> WISESTONE_STAIRS = BLOCKS.register("wisestone_stairs", () -> new StairBlock(() -> WISESTONE.get().defaultBlockState(), BlockBehaviour.Properties.copy(Blocks.POLISHED_DEEPSLATE).sound(WISESTONE_SOUNDS)));
+    public static final RegistryObject<Block> WISESTONE_SLAB = BLOCKS.register("wisestone_slab", () -> new SlabBlock(BlockBehaviour.Properties.copy(Blocks.POLISHED_DEEPSLATE).sound(WISESTONE_SOUNDS)));
+    public static final RegistryObject<Block> WISESTONE_WALL = BLOCKS.register("wisestone_wall", () -> new WallBlock(BlockBehaviour.Properties.copy(Blocks.POLISHED_DEEPSLATE).sound(WISESTONE_SOUNDS)));
+    public static final RegistryObject<Block> POLISHED_WISESTONE = BLOCKS.register("polished_wisestone", () -> new Block(BlockBehaviour.Properties.copy(Blocks.POLISHED_DEEPSLATE).sound(POLISHED_WISESTONE_SOUNDS)));
+    public static final RegistryObject<Block> POLISHED_WISESTONE_STAIRS = BLOCKS.register("polished_wisestone_stairs", () -> new StairBlock(() -> POLISHED_WISESTONE.get().defaultBlockState(), BlockBehaviour.Properties.copy(Blocks.POLISHED_DEEPSLATE).sound(POLISHED_WISESTONE_SOUNDS)));
+    public static final RegistryObject<Block> POLISHED_WISESTONE_SLAB = BLOCKS.register("polished_wisestone_slab", () -> new SlabBlock(BlockBehaviour.Properties.copy(Blocks.POLISHED_DEEPSLATE).sound(POLISHED_WISESTONE_SOUNDS)));
+    public static final RegistryObject<Block> POLISHED_WISESTONE_WALL = BLOCKS.register("polished_wisestone_wall", () -> new WallBlock(BlockBehaviour.Properties.copy(Blocks.POLISHED_DEEPSLATE).sound(POLISHED_WISESTONE_SOUNDS)));
+    public static final RegistryObject<Block> WISESTONE_BRICKS = BLOCKS.register("wisestone_bricks", () -> new Block(BlockBehaviour.Properties.copy(Blocks.POLISHED_DEEPSLATE).sound(WISESTONE_BRICKS_SOUNDS)));
+    public static final RegistryObject<Block> WISESTONE_BRICKS_STAIRS = BLOCKS.register("wisestone_bricks_stairs", () -> new StairBlock(() -> WISESTONE_BRICKS.get().defaultBlockState(), BlockBehaviour.Properties.copy(Blocks.POLISHED_DEEPSLATE).sound(WISESTONE_BRICKS_SOUNDS)));
+    public static final RegistryObject<Block> WISESTONE_BRICKS_SLAB = BLOCKS.register("wisestone_bricks_slab", () -> new SlabBlock(BlockBehaviour.Properties.copy(Blocks.POLISHED_DEEPSLATE).sound(WISESTONE_BRICKS_SOUNDS)));
+    public static final RegistryObject<Block> WISESTONE_BRICKS_WALL = BLOCKS.register("wisestone_bricks_wall", () -> new WallBlock(BlockBehaviour.Properties.copy(Blocks.POLISHED_DEEPSLATE).sound(WISESTONE_BRICKS_SOUNDS)));
+    public static final RegistryObject<Block> WISESTONE_TILE = BLOCKS.register("wisestone_tile", () -> new Block(BlockBehaviour.Properties.copy(Blocks.POLISHED_DEEPSLATE).sound(WISESTONE_TILE_SOUNDS)));
+    public static final RegistryObject<Block> WISESTONE_TILE_STAIRS = BLOCKS.register("wisestone_tile_stairs", () -> new StairBlock(() -> WISESTONE_BRICKS.get().defaultBlockState(), BlockBehaviour.Properties.copy(Blocks.POLISHED_DEEPSLATE).sound(WISESTONE_TILE_SOUNDS)));
+    public static final RegistryObject<Block> WISESTONE_TILE_SLAB = BLOCKS.register("wisestone_tile_slab", () -> new SlabBlock(BlockBehaviour.Properties.copy(Blocks.POLISHED_DEEPSLATE).sound(WISESTONE_TILE_SOUNDS)));
+    public static final RegistryObject<Block> WISESTONE_TILE_WALL = BLOCKS.register("wisestone_tile_wall", () -> new WallBlock(BlockBehaviour.Properties.copy(Blocks.POLISHED_DEEPSLATE).sound(WISESTONE_TILE_SOUNDS)));
+    public static final RegistryObject<Block> CHISELED_WISESTONE = BLOCKS.register("chiseled_wisestone", () -> new Block(BlockBehaviour.Properties.copy(Blocks.POLISHED_DEEPSLATE).sound(CHISELED_WISESTONE_SOUNDS)));
+    public static final RegistryObject<Block> CHISELED_WISESTONE_STAIRS = BLOCKS.register("chiseled_wisestone_stairs", () -> new StairBlock(() -> POLISHED_WISESTONE.get().defaultBlockState(), BlockBehaviour.Properties.copy(Blocks.POLISHED_DEEPSLATE).sound(CHISELED_WISESTONE_SOUNDS)));
+    public static final RegistryObject<Block> CHISELED_WISESTONE_SLAB = BLOCKS.register("chiseled_wisestone_slab", () -> new SlabBlock(BlockBehaviour.Properties.copy(Blocks.POLISHED_DEEPSLATE).sound(CHISELED_WISESTONE_SOUNDS)));
+    public static final RegistryObject<Block> CHISELED_WISESTONE_WALL = BLOCKS.register("chiseled_wisestone_wall", () -> new WallBlock(BlockBehaviour.Properties.copy(Blocks.POLISHED_DEEPSLATE).sound(CHISELED_WISESTONE_SOUNDS)));
+    public static final RegistryObject<Block> WISESTONE_PILLAR = BLOCKS.register("wisestone_pillar", () -> new RotatedPillarBlock(BlockBehaviour.Properties.copy(Blocks.POLISHED_DEEPSLATE).sound(WISESTONE_BRICKS_SOUNDS)));
+    public static final RegistryObject<Block> POLISHED_WISESTONE_PRESSURE_PLATE = BLOCKS.register("polished_wisestone_pressure_plate", () -> new PressurePlateBlock(PressurePlateBlock.Sensitivity.MOBS, BlockBehaviour.Properties.copy(Blocks.POLISHED_DEEPSLATE).sound(POLISHED_WISESTONE_SOUNDS).noOcclusion().noCollission(), WISESTONE_BLOCK_SET.resolve().get()));
+    public static final RegistryObject<Block> POLISHED_WISESTONE_BUTTON = BLOCKS.register("polished_wisestone_button", () -> new ButtonBlock(BlockBehaviour.Properties.copy(Blocks.POLISHED_BLACKSTONE_BUTTON).sound(POLISHED_WISESTONE_SOUNDS), WISESTONE_BLOCK_SET.resolve().get(), 20, false));
 
     public static final RegistryObject<Block> ARCANE_LINEN = BLOCKS.register("arcane_linen", () -> new ArcaneLinenBlock(BlockBehaviour.Properties.copy(Blocks.WHEAT)));
     public static final RegistryObject<Block> ARCANE_LINEN_HAY = BLOCKS.register("arcane_linen_hay", () -> new HayBlock(BlockBehaviour.Properties.copy(Blocks.HAY_BLOCK)));
 
-    public static final RegistryObject<Block> MOR = BLOCKS.register("mor", () -> new MorBlock(BlockBehaviour.Properties.copy(Blocks.BROWN_MUSHROOM)));
+    public static final RegistryObject<Block> MOR = BLOCKS.register("mor", () -> new MorBlock(BlockBehaviour.Properties.copy(Blocks.BROWN_MUSHROOM).sound(MOR_SOUNDS)));
     public static final RegistryObject<Block> POTTED_MOR = BLOCKS.register("potted_mor", () -> new FlowerPotBlock(MOR.get(), BlockBehaviour.Properties.copy(Blocks.FLOWER_POT).instabreak().noOcclusion()));
-    public static final RegistryObject<Block> MOR_BLOCK = BLOCKS.register("mor_block", () -> new HugeMushroomBlock(BlockBehaviour.Properties.copy(Blocks.BROWN_MUSHROOM_BLOCK)));
-    public static final RegistryObject<Block> ELDER_MOR = BLOCKS.register("elder_mor", () -> new MorBlock(BlockBehaviour.Properties.copy(Blocks.RED_MUSHROOM)));
+    public static final RegistryObject<Block> MOR_BLOCK = BLOCKS.register("mor_block", () -> new HugeMushroomBlock(BlockBehaviour.Properties.copy(Blocks.BROWN_MUSHROOM_BLOCK).sound(MOR_BLOCK_SOUNDS)));
+    public static final RegistryObject<Block> ELDER_MOR = BLOCKS.register("elder_mor", () -> new MorBlock(BlockBehaviour.Properties.copy(Blocks.RED_MUSHROOM).sound(ELDER_MOR_SOUNDS)));
     public static final RegistryObject<Block> POTTED_ELDER_MOR = BLOCKS.register("potted_elder_mor", () -> new FlowerPotBlock(ELDER_MOR.get(), BlockBehaviour.Properties.copy(Blocks.FLOWER_POT).instabreak().noOcclusion()));
-    public static final RegistryObject<Block> ELDER_MOR_BLOCK = BLOCKS.register("elder_mor_block", () -> new HugeMushroomBlock(BlockBehaviour.Properties.copy(Blocks.BROWN_MUSHROOM_BLOCK)));
+    public static final RegistryObject<Block> ELDER_MOR_BLOCK = BLOCKS.register("elder_mor_block", () -> new HugeMushroomBlock(BlockBehaviour.Properties.copy(Blocks.BROWN_MUSHROOM_BLOCK).sound(ELDER_MOR_BLOCK_SOUNDS)));
 
     public static final RegistryObject<Block> ARCANUM_SEED_BLOCK = BLOCKS.register("arcanum_seed", () -> new CrystalSeedBlock(BlockBehaviour.Properties.copy(Blocks.AMETHYST_CLUSTER)));
     public static final RegistryObject<Block> ARCANUM_GROWTH = BLOCKS.register("arcanum_growth", () -> new ArcanumGrowthBlock(BlockBehaviour.Properties.copy(Blocks.AMETHYST_CLUSTER)));
@@ -487,11 +597,11 @@ public class WizardsReborn {
     public static final RegistryObject<Block> FIRE_CRYSTAL_GROWTH = BLOCKS.register("fire_crystal_growth", () -> new CrystalGrowthBlock(FIRE_CRYSTAL_TYPE, BlockBehaviour.Properties.copy(Blocks.AMETHYST_CLUSTER)));
     public static final RegistryObject<Block> VOID_CRYSTAL_GROWTH = BLOCKS.register("void_crystal_growth", () -> new CrystalGrowthBlock(VOID_CRYSTAL_TYPE, BlockBehaviour.Properties.copy(Blocks.AMETHYST_CLUSTER)));
 
-    public static final RegistryObject<Block> EARTH_CRYSTAL_BLOCK = BLOCKS.register("earth_crystal", () -> new CrystalBlock(EARTH_CRYSTAL_TYPE, CRYSTAL_POLISHING_TYPE, BlockBehaviour.Properties.copy(Blocks.AMETHYST_CLUSTER)));
-    public static final RegistryObject<Block> WATER_CRYSTAL_BLOCK = BLOCKS.register("water_crystal", () -> new CrystalBlock(WATER_CRYSTAL_TYPE, CRYSTAL_POLISHING_TYPE, BlockBehaviour.Properties.copy(Blocks.AMETHYST_CLUSTER)));
-    public static final RegistryObject<Block> AIR_CRYSTAL_BLOCK = BLOCKS.register("air_crystal", () -> new CrystalBlock(AIR_CRYSTAL_TYPE, CRYSTAL_POLISHING_TYPE, BlockBehaviour.Properties.copy(Blocks.AMETHYST_CLUSTER)));
-    public static final RegistryObject<Block> FIRE_CRYSTAL_BLOCK = BLOCKS.register("fire_crystal", () -> new CrystalBlock(FIRE_CRYSTAL_TYPE, CRYSTAL_POLISHING_TYPE, BlockBehaviour.Properties.copy(Blocks.AMETHYST_CLUSTER)));
-    public static final RegistryObject<Block> VOID_CRYSTAL_BLOCK = BLOCKS.register("void_crystal", () -> new CrystalBlock(VOID_CRYSTAL_TYPE, CRYSTAL_POLISHING_TYPE, BlockBehaviour.Properties.copy(Blocks.AMETHYST_CLUSTER)));
+    public static final RegistryObject<Block> EARTH_CRYSTAL_BLOCK = BLOCKS.register("earth_crystal", () -> new CrystalBlock(EARTH_CRYSTAL_TYPE, CRYSTAL_POLISHING_TYPE, BlockBehaviour.Properties.copy(Blocks.AMETHYST_CLUSTER).sound(CRYSTAL_SOUNDS)));
+    public static final RegistryObject<Block> WATER_CRYSTAL_BLOCK = BLOCKS.register("water_crystal", () -> new CrystalBlock(WATER_CRYSTAL_TYPE, CRYSTAL_POLISHING_TYPE, BlockBehaviour.Properties.copy(Blocks.AMETHYST_CLUSTER).sound(CRYSTAL_SOUNDS)));
+    public static final RegistryObject<Block> AIR_CRYSTAL_BLOCK = BLOCKS.register("air_crystal", () -> new CrystalBlock(AIR_CRYSTAL_TYPE, CRYSTAL_POLISHING_TYPE, BlockBehaviour.Properties.copy(Blocks.AMETHYST_CLUSTER).sound(CRYSTAL_SOUNDS)));
+    public static final RegistryObject<Block> FIRE_CRYSTAL_BLOCK = BLOCKS.register("fire_crystal", () -> new CrystalBlock(FIRE_CRYSTAL_TYPE, CRYSTAL_POLISHING_TYPE, BlockBehaviour.Properties.copy(Blocks.AMETHYST_CLUSTER).sound(CRYSTAL_SOUNDS)));
+    public static final RegistryObject<Block> VOID_CRYSTAL_BLOCK = BLOCKS.register("void_crystal", () -> new CrystalBlock(VOID_CRYSTAL_TYPE, CRYSTAL_POLISHING_TYPE, BlockBehaviour.Properties.copy(Blocks.AMETHYST_CLUSTER).sound(CRYSTAL_SOUNDS)));
 
     public static final RegistryObject<Block> FACETED_EARTH_CRYSTAL_BLOCK = BLOCKS.register("faceted_earth_crystal", () -> new CrystalBlock(EARTH_CRYSTAL_TYPE, FACETED_POLISHING_TYPE, BlockBehaviour.Properties.copy(Blocks.AMETHYST_CLUSTER)));
     public static final RegistryObject<Block> FACETED_WATER_CRYSTAL_BLOCK = BLOCKS.register("faceted_water_crystal", () -> new CrystalBlock(WATER_CRYSTAL_TYPE, FACETED_POLISHING_TYPE, BlockBehaviour.Properties.copy(Blocks.AMETHYST_CLUSTER)));
@@ -656,7 +766,7 @@ public class WizardsReborn {
     public static final RegistryObject<Item> ARCANE_WOOD_TRAPDOOR_ITEM = ITEMS.register("arcane_wood_trapdoor", () -> new BlockItem(ARCANE_WOOD_TRAPDOOR.get(), new Item.Properties()));
     public static final RegistryObject<Item> ARCANE_WOOD_PRESSURE_PLATE_ITEM = ITEMS.register("arcane_wood_pressure_plate", () -> new BlockItem(ARCANE_WOOD_PRESSURE_PLATE.get(), new Item.Properties()));
     public static final RegistryObject<Item> ARCANE_WOOD_BUTTON_ITEM = ITEMS.register("arcane_wood_button", () -> new BlockItem(ARCANE_WOOD_BUTTON.get(), new Item.Properties()));
-    public static final RegistryObject<Item> ARCANE_WOOD_SIGN_ITEM = ITEMS.register("arcane_wood_sign", () -> new SignItem(new Item.Properties().stacksTo(16),ARCANE_WOOD_SIGN.get(), ARCANE_WOOD_WALL_SIGN.get()));
+    public static final RegistryObject<Item> ARCANE_WOOD_SIGN_ITEM = ITEMS.register("arcane_wood_sign", () -> new SignItem(new Item.Properties().stacksTo(16), ARCANE_WOOD_SIGN.get(), ARCANE_WOOD_WALL_SIGN.get()));
     public static final RegistryObject<Item> ARCANE_WOOD_HANGING_SIGN_ITEM = ITEMS.register("arcane_wood_hanging_sign", () -> new HangingSignItem(ARCANE_WOOD_HANGING_SIGN.get(), ARCANE_WOOD_WALL_HANGING_SIGN.get(), new Item.Properties().stacksTo(16)));
     public static final RegistryObject<Item> ARCANE_WOOD_BOAT_ITEM = ITEMS.register("arcane_wood_boat", () -> new CustomBoatItem(false, CustomBoatEntity.Type.ARCANE_WOOD, new Item.Properties().stacksTo(1)));
     public static final RegistryObject<Item> ARCANE_WOOD_CHEST_BOAT_ITEM = ITEMS.register("arcane_wood_chest_boat", () -> new CustomBoatItem(true, CustomBoatEntity.Type.ARCANE_WOOD, new Item.Properties().stacksTo(1)));
@@ -678,7 +788,7 @@ public class WizardsReborn {
     public static final RegistryObject<Item> INNOCENT_WOOD_TRAPDOOR_ITEM = ITEMS.register("innocent_wood_trapdoor", () -> new BlockItem(INNOCENT_WOOD_TRAPDOOR.get(), new Item.Properties()));
     public static final RegistryObject<Item> INNOCENT_WOOD_PRESSURE_PLATE_ITEM = ITEMS.register("innocent_wood_pressure_plate", () -> new BlockItem(INNOCENT_WOOD_PRESSURE_PLATE.get(), new Item.Properties()));
     public static final RegistryObject<Item> INNOCENT_WOOD_BUTTON_ITEM = ITEMS.register("innocent_wood_button", () -> new BlockItem(INNOCENT_WOOD_BUTTON.get(), new Item.Properties()));
-    public static final RegistryObject<Item> INNOCENT_WOOD_SIGN_ITEM = ITEMS.register("innocent_wood_sign", () -> new SignItem(new Item.Properties().stacksTo(16),INNOCENT_WOOD_SIGN.get(), INNOCENT_WOOD_WALL_SIGN.get()));
+    public static final RegistryObject<Item> INNOCENT_WOOD_SIGN_ITEM = ITEMS.register("innocent_wood_sign", () -> new SignItem(new Item.Properties().stacksTo(16), INNOCENT_WOOD_SIGN.get(), INNOCENT_WOOD_WALL_SIGN.get()));
     public static final RegistryObject<Item> INNOCENT_WOOD_HANGING_SIGN_ITEM = ITEMS.register("innocent_wood_hanging_sign", () -> new HangingSignItem(INNOCENT_WOOD_HANGING_SIGN.get(), INNOCENT_WOOD_WALL_HANGING_SIGN.get(), new Item.Properties().stacksTo(16)));
     public static final RegistryObject<Item> INNOCENT_WOOD_BOAT_ITEM = ITEMS.register("innocent_wood_boat", () -> new CustomBoatItem(false, CustomBoatEntity.Type.INNOCENT_WOOD, new Item.Properties().stacksTo(1)));
     public static final RegistryObject<Item> INNOCENT_WOOD_CHEST_BOAT_ITEM = ITEMS.register("innocent_wood_chest_boat", () -> new CustomBoatItem(true, CustomBoatEntity.Type.INNOCENT_WOOD, new Item.Properties().stacksTo(1)));
@@ -947,7 +1057,8 @@ public class WizardsReborn {
     //TILE_ENTITIES
     public static final RegistryObject<BlockEntityType<CustomSignTileEntity>> SIGN_TILE_ENTITY = TILE_ENTITIES.register("sign", () -> BlockEntityType.Builder.of(CustomSignTileEntity::new,
             ARCANE_WOOD_SIGN.get(), ARCANE_WOOD_WALL_SIGN.get(),
-            INNOCENT_WOOD_SIGN.get(), INNOCENT_WOOD_WALL_SIGN.get()).build(null));
+            INNOCENT_WOOD_SIGN.get(), INNOCENT_WOOD_WALL_SIGN.get())
+            .build(null));
     public static final RegistryObject<BlockEntityType<CustomHangingSignTileEntity>> HANGING_SIGN_TILE_ENTITY = TILE_ENTITIES.register("hanging_sign", () -> BlockEntityType.Builder.of(CustomHangingSignTileEntity::new,
             ARCANE_WOOD_HANGING_SIGN.get(), ARCANE_WOOD_WALL_HANGING_SIGN.get(),
             INNOCENT_WOOD_HANGING_SIGN.get(), INNOCENT_WOOD_WALL_HANGING_SIGN.get())

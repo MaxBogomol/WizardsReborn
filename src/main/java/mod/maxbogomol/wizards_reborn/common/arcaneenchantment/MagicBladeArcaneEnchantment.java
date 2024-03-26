@@ -10,7 +10,6 @@ import mod.maxbogomol.wizards_reborn.common.item.equipment.arcane.ArcaneScytheIt
 import mod.maxbogomol.wizards_reborn.common.item.equipment.arcane.ArcaneSwordItem;
 import mod.maxbogomol.wizards_reborn.common.network.MagicBladeEffectPacket;
 import mod.maxbogomol.wizards_reborn.common.network.PacketHandler;
-import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.EquipmentSlot;
@@ -60,7 +59,7 @@ public class MagicBladeArcaneEnchantment extends ArcaneEnchantment {
                                 WissenUtils.removeWissenFromWissenItems(items, cost);
                                 event.getEntity().invulnerableTime = 0;
                                 event.getEntity().hurt(new DamageSource(event.getEntity().damageSources().magic().typeHolder(), player), (1.0f * enchantmentLevel));
-                                event.getEntity().level().playSound(WizardsReborn.proxy.getPlayer(), event.getEntity().getOnPos(), SoundEvents.AMETHYST_BLOCK_HIT, SoundSource.PLAYERS, 1.0f, (float) (0.8f + ((random.nextFloat() - 0.5D) / 2)));
+                                event.getEntity().level().playSound(WizardsReborn.proxy.getPlayer(), event.getEntity().getOnPos(), WizardsReborn.CRYSTAL_HIT_SOUND.get(), SoundSource.PLAYERS, 1.3f, (float) (1.0f + ((random.nextFloat() - 0.5D) / 3)));
                                 PacketHandler.sendToTracking( event.getEntity().level(), event.getEntity().getOnPos(), new MagicBladeEffectPacket((float) event.getEntity().getX(), (float) event.getEntity().getY() + (event.getEntity().getBbHeight() / 2), (float) event.getEntity().getZ()));
                             }
                         }
