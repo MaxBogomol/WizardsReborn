@@ -1,0 +1,26 @@
+{
+  "type": "forge:conditional",
+  "recipes": [
+    {
+      "conditions": [
+        {
+          "type": "forge:mod_loaded",
+          "modid": "create"
+        }
+      ],
+      "recipe": {
+        "type": "create:pressing",
+        "ingredients": [
+          {
+            "item": "wizards_reborn:sarcon_ingot"
+          }
+        ],
+        "results": [
+          {
+            "item": "wizards_reborn:sarcon_sheet"
+          }
+        ]
+      }
+    }
+  ]
+}

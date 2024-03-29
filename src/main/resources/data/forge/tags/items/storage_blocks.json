@@ -2,6 +2,8 @@
   "replace": false,
   "values": [
     "wizards_reborn:arcane_gold_block",
+    "wizards_reborn:sarcon_block",
+    "wizards_reborn:vilenium_block",
     "wizards_reborn:arcanum_block",
     "wizards_reborn:arcacite_block"
   ]

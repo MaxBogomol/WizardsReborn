@@ -1,8 +1,6 @@
 {
   "replace": false,
   "values": [
-    "wizards_reborn:arcane_gold_nugget",
-    "wizards_reborn:sarcon_nugget",
     "wizards_reborn:vilenium_nugget"
   ]
 }

@@ -230,6 +230,16 @@ public class WizardsReborn {
     public static final RegistryObject<SoundEvent> RAW_ARCANE_GOLD_PLACE_SOUND = SOUND_EVENTS.register("raw_arcane_gold_place", () -> SoundEvent.createVariableRangeEvent(new ResourceLocation(MOD_ID, "raw_arcane_gold_place")));
     public static final RegistryObject<SoundEvent> RAW_ARCANE_GOLD_HIT_SOUND = SOUND_EVENTS.register("raw_arcane_gold_hit", () -> SoundEvent.createVariableRangeEvent(new ResourceLocation(MOD_ID, "raw_arcane_gold_hit")));
 
+    public static final RegistryObject<SoundEvent> SARCON_BREAK_SOUND = SOUND_EVENTS.register("sarcon_break", () -> SoundEvent.createVariableRangeEvent(new ResourceLocation(MOD_ID, "sarcon_break")));
+    public static final RegistryObject<SoundEvent> SARCON_STEP_SOUND = SOUND_EVENTS.register("sarcon_step", () -> SoundEvent.createVariableRangeEvent(new ResourceLocation(MOD_ID, "sarcon_step")));
+    public static final RegistryObject<SoundEvent> SARCON_PLACE_SOUND = SOUND_EVENTS.register("sarcon_place", () -> SoundEvent.createVariableRangeEvent(new ResourceLocation(MOD_ID, "sarcon_place")));
+    public static final RegistryObject<SoundEvent> SARCON_HIT_SOUND = SOUND_EVENTS.register("sarcon_hit", () -> SoundEvent.createVariableRangeEvent(new ResourceLocation(MOD_ID, "sarcon_hit")));
+
+    public static final RegistryObject<SoundEvent> VILENIUM_BREAK_SOUND = SOUND_EVENTS.register("vilenium_break", () -> SoundEvent.createVariableRangeEvent(new ResourceLocation(MOD_ID, "vilenium_break")));
+    public static final RegistryObject<SoundEvent> VILENIUM_STEP_SOUND = SOUND_EVENTS.register("vilenium_step", () -> SoundEvent.createVariableRangeEvent(new ResourceLocation(MOD_ID, "vilenium_step")));
+    public static final RegistryObject<SoundEvent> VILENIUM_PLACE_SOUND = SOUND_EVENTS.register("vilenium_place", () -> SoundEvent.createVariableRangeEvent(new ResourceLocation(MOD_ID, "vilenium_place")));
+    public static final RegistryObject<SoundEvent> VILENIUM_HIT_SOUND = SOUND_EVENTS.register("vilenium_hit", () -> SoundEvent.createVariableRangeEvent(new ResourceLocation(MOD_ID, "vilenium_hit")));
+
     public static final RegistryObject<SoundEvent> ARCANUM_BREAK_SOUND = SOUND_EVENTS.register("arcanum_break", () -> SoundEvent.createVariableRangeEvent(new ResourceLocation(MOD_ID, "arcanum_break")));
     public static final RegistryObject<SoundEvent> ARCANUM_STEP_SOUND = SOUND_EVENTS.register("arcanum_step", () -> SoundEvent.createVariableRangeEvent(new ResourceLocation(MOD_ID, "arcanum_step")));
     public static final RegistryObject<SoundEvent> ARCANUM_PLACE_SOUND = SOUND_EVENTS.register("arcanum_place", () -> SoundEvent.createVariableRangeEvent(new ResourceLocation(MOD_ID, "arcanum_place")));
@@ -358,6 +368,8 @@ public class WizardsReborn {
     public static final ForgeSoundType DEEPSLATE_ARCANE_GOLD_ORE_SOUNDS = new ForgeSoundType(1f, 1f, DEEPSLATE_ARCANE_GOLD_ORE_BREAK_SOUND, DEEPSLATE_ARCANE_GOLD_ORE_STEP_SOUND, DEEPSLATE_ARCANE_GOLD_ORE_PLACE_SOUND, DEEPSLATE_ARCANE_GOLD_ORE_HIT_SOUND, () -> SoundEvents.DEEPSLATE_FALL);
     public static final ForgeSoundType NETHER_ARCANE_GOLD_ORE_SOUNDS = new ForgeSoundType(1f, 1f, NETHER_ARCANE_GOLD_ORE_BREAK_SOUND, NETHER_ARCANE_GOLD_ORE_STEP_SOUND, NETHER_ARCANE_GOLD_ORE_PLACE_SOUND, NETHER_ARCANE_GOLD_ORE_HIT_SOUND, () -> SoundEvents.NETHER_ORE_FALL);
     public static final ForgeSoundType RAW_ARCANE_GOLD_SOUNDS = new ForgeSoundType(1f, 1f, RAW_ARCANE_GOLD_BREAK_SOUND, RAW_ARCANE_GOLD_STEP_SOUND, RAW_ARCANE_GOLD_PLACE_SOUND, RAW_ARCANE_GOLD_HIT_SOUND, () -> SoundEvents.STONE_FALL);
+    public static final ForgeSoundType SARCON_SOUNDS = new ForgeSoundType(1f, 1f, SARCON_BREAK_SOUND, SARCON_STEP_SOUND, SARCON_PLACE_SOUND, SARCON_HIT_SOUND, () -> SoundEvents.NETHERITE_BLOCK_FALL);
+    public static final ForgeSoundType VILENIUM_SOUNDS = new ForgeSoundType(1f, 1f, VILENIUM_BREAK_SOUND, VILENIUM_STEP_SOUND, VILENIUM_PLACE_SOUND, VILENIUM_HIT_SOUND, () -> SoundEvents.NETHERITE_BLOCK_FALL);
     public static final ForgeSoundType ARCANUM_SOUNDS = new ForgeSoundType(1f, 1f, ARCANUM_BREAK_SOUND, ARCANUM_STEP_SOUND, ARCANUM_PLACE_SOUND, ARCANUM_HIT_SOUND, () -> SoundEvents.METAL_FALL);
     public static final ForgeSoundType ARCANUM_ORE_SOUNDS = new ForgeSoundType(1f, 1f, ARCANUM_ORE_BREAK_SOUND, ARCANUM_ORE_STEP_SOUND, ARCANUM_ORE_PLACE_SOUND, ARCANUM_ORE_HIT_SOUND, () -> SoundEvents.STONE_FALL);
     public static final ForgeSoundType DEEPSLATE_ARCANUM_ORE_SOUNDS = new ForgeSoundType(1f, 1f, DEEPSLATE_ARCANUM_ORE_BREAK_SOUND, DEEPSLATE_ARCANUM_ORE_STEP_SOUND, DEEPSLATE_ARCANUM_ORE_PLACE_SOUND, DEEPSLATE_ARCANUM_ORE_HIT_SOUND, () -> SoundEvents.DEEPSLATE_FALL);
@@ -499,6 +511,8 @@ public class WizardsReborn {
     public static final RegistryObject<Block> DEEPSLATE_ARCANE_GOLD_ORE = BLOCKS.register("deepslate_arcane_gold_ore", () -> new Block(BlockBehaviour.Properties.copy(Blocks.DEEPSLATE_GOLD_ORE).sound(DEEPSLATE_ARCANE_GOLD_ORE_SOUNDS)));
     public static final RegistryObject<Block> NETHER_ARCANE_GOLD_ORE = BLOCKS.register("nether_arcane_gold_ore", () -> new DropExperienceBlock(BlockBehaviour.Properties.copy(Blocks.NETHER_GOLD_ORE).sound(NETHER_ARCANE_GOLD_ORE_SOUNDS), UniformInt.of(0, 1)));
     public static final RegistryObject<Block> RAW_ARCANE_GOLD_BLOCK = BLOCKS.register("raw_arcane_gold_block", () -> new Block(BlockBehaviour.Properties.copy(Blocks.RAW_GOLD_BLOCK).sound(RAW_ARCANE_GOLD_SOUNDS)));
+    public static final RegistryObject<Block> SARCON_BLOCK = BLOCKS.register("sarcon_block", () -> new Block(BlockBehaviour.Properties.copy(Blocks.NETHERITE_BLOCK).mapColor(MapColor.COLOR_PURPLE).sound(SARCON_SOUNDS)));
+    public static final RegistryObject<Block> VILENIUM_BLOCK = BLOCKS.register("vilenium_block", () -> new Block(BlockBehaviour.Properties.copy(Blocks.NETHERITE_BLOCK).mapColor(MapColor.COLOR_YELLOW).sound(VILENIUM_SOUNDS)));
     public static final RegistryObject<Block> ARCANUM_BLOCK = BLOCKS.register("arcanum_block", () -> new Block(BlockBehaviour.Properties.copy(Blocks.DIAMOND_BLOCK).sound(ARCANUM_SOUNDS)));
     public static final RegistryObject<Block> ARCANUM_ORE = BLOCKS.register("arcanum_ore", () -> new ArcanumOreBlock(BlockBehaviour.Properties.copy(Blocks.DIAMOND_ORE).sound(ARCANUM_ORE_SOUNDS)));
     public static final RegistryObject<Block> DEEPSLATE_ARCANUM_ORE = BLOCKS.register("deepslate_arcanum_ore", () -> new ArcanumOreBlock(BlockBehaviour.Properties.copy(Blocks.DEEPSLATE_DIAMOND_ORE).sound(DEEPSLATE_ARCANUM_ORE_SOUNDS)));
@@ -744,6 +758,14 @@ public class WizardsReborn {
     public static final RegistryObject<Item> ARCANE_GOLD_CHESTPLATE = ITEMS.register("arcane_gold_chestplate", () -> new ArcaneArmorItem(CustomArmorMaterial.ARCANE_GOLD, ArmorItem.Type.CHESTPLATE, new Item.Properties()));
     public static final RegistryObject<Item> ARCANE_GOLD_LEGGINGS = ITEMS.register("arcane_gold_leggings", () -> new ArcaneArmorItem(CustomArmorMaterial.ARCANE_GOLD, ArmorItem.Type.LEGGINGS, new Item.Properties()));
     public static final RegistryObject<Item> ARCANE_GOLD_BOOTS = ITEMS.register("arcane_gold_boots", () -> new ArcaneArmorItem(CustomArmorMaterial.ARCANE_GOLD, ArmorItem.Type.BOOTS, new Item.Properties()));
+
+    public static final RegistryObject<Item> SARCON_INGOT = ITEMS.register("sarcon_ingot", () -> new Item(new Item.Properties()));
+    public static final RegistryObject<Item> SARCON_NUGGET = ITEMS.register("sarcon_nugget", () -> new Item(new Item.Properties()));
+    public static final RegistryObject<Item> SARCON_BLOCK_ITEM = ITEMS.register("sarcon_block", () -> new BlockItem(SARCON_BLOCK.get(), new Item.Properties()));
+
+    public static final RegistryObject<Item> VILENIUM_INGOT = ITEMS.register("vilenium_ingot", () -> new Item(new Item.Properties()));
+    public static final RegistryObject<Item> VILENIUM_NUGGET = ITEMS.register("vilenium_nugget", () -> new Item(new Item.Properties()));
+    public static final RegistryObject<Item> VILENIUM_BLOCK_ITEM = ITEMS.register("vilenium_block", () -> new BlockItem(VILENIUM_BLOCK.get(), new Item.Properties()));
 
     public static final RegistryObject<Item> ARCANUM = ITEMS.register("arcanum", () -> new ArcanumItem(new Item.Properties()));
     public static final RegistryObject<Item> ARCANUM_DUST = ITEMS.register("arcanum_dust", () -> new ArcanumDustItem(new Item.Properties()));

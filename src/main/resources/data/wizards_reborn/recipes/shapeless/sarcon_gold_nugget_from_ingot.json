@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "wizards_reborn:sarcon_ingot"
+    }
+  ],
+  "result": {
+    "item": "wizards_reborn:sarcon_nugget",
+    "count": 9
+  }
+}

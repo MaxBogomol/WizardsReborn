@@ -67,6 +67,22 @@ public class WizardsRebornItemGroup {
             event.accept(WizardsReborn.ARCANE_GOLD_LEGGINGS);
             event.accept(WizardsReborn.ARCANE_GOLD_BOOTS);
 
+            event.accept(WizardsReborn.SARCON_INGOT);
+            event.accept(WizardsReborn.SARCON_NUGGET);
+            event.accept(WizardsReborn.SARCON_BLOCK_ITEM);
+
+            if (CreateIntegration.isLoaded()) {
+                event.accept(CreateIntegration.SARCON_SHEET);
+            }
+
+            event.accept(WizardsReborn.VILENIUM_INGOT);
+            event.accept(WizardsReborn.VILENIUM_NUGGET);
+            event.accept(WizardsReborn.VILENIUM_BLOCK_ITEM);
+
+            if (CreateIntegration.isLoaded()) {
+                event.accept(CreateIntegration.VILENIUM_SHEET);
+            }
+
             event.accept(WizardsReborn.ARCANUM);
             event.accept(WizardsReborn.ARCANUM_DUST);
             event.accept(WizardsReborn.ARCANUM_BLOCK_ITEM);

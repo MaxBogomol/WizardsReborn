@@ -1,0 +1,9 @@
+{
+  "replace": false,
+  "values": [
+    {
+      "id": "wizards_reborn:sarcon_sheet",
+      "required": false
+    }
+  ]
+}
