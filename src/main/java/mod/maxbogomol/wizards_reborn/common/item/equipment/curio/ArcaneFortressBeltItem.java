@@ -16,7 +16,7 @@ import top.theillusivec4.curios.api.type.capability.ICurio;
 import javax.annotation.Nonnull;
 import java.util.UUID;
 
-public class ArcaneFortressBeltItem extends BaseWissenCurioItem {
+public class ArcaneFortressBeltItem extends BaseCurioItem {
 
     private static final ResourceLocation BELT_TEXTURE = new ResourceLocation(WizardsReborn.MOD_ID,"textures/entity/curio/arcane_fortress_belt.png");
 

@@ -381,6 +381,13 @@
 
   "lore.wizards_reborn.inventor_wizard_armor": "Виссен природа",
 
+  "lore.wizards_reborn.violence_banner_pattern": "Окрась этот холст алым цветом!",
+  "lore.wizards_reborn.reproduction_banner_pattern": "Цепи постоянной похоти окутали этот мир...",
+  "lore.wizards_reborn.cooperation_banner_pattern": "Не предай своего друга.",
+  "lore.wizards_reborn.hunger_banner_pattern": "Охотник не может стать добычей.",
+  "lore.wizards_reborn.survival_banner_pattern": "Убей или будь убитым!",
+  "lore.wizards_reborn.elevation_banner_pattern": "Отбрось всё... Очисти свою душу...",
+
   "trim_material.wizards_reborn.arcane_gold": "Аркановый золотой материал",
   "trim_material.wizards_reborn.arcanum": "Арканумный материал",
   "trim_material.wizards_reborn.arcacite": "Аркацитовый материал",
@@ -501,10 +508,16 @@
 
   "sounds.wizards_reborn.wissen_burst": "Вспышка виссена",
   "sounds.wizards_reborn.wissen_transfer": "Передача виссена",
+  "sounds.wizards_reborn.steam_burst": "Пар выходит",
   "sounds.wizards_reborn.spell_cast": "Заклинание",
   "sounds.wizards_reborn.spell_burst": "Вспышка заклинания",
   "sounds.wizards_reborn.spell_reload": "Перезарядка заклинания",
-  "sounds.wizards_reborn.steam_burst": "Пар выходит",
+
+  "sounds.wizards_reborn.crystal_resonate": "Кристалл резонирует",
+  "sounds.wizards_reborn.crystal_shimmer": "Кристалл звенит",
+
+  "sounds.wizards_reborn.pedestal_insert": "Предмет установлен на пьедестал",
+  "sounds.wizards_reborn.pedestal_remove": "Предмет взят с пьедестала",
 
   "entity.wizards_reborn.boat": "Лодка",
   "entity.wizards_reborn.chest_boat": "Грузовая лодка",

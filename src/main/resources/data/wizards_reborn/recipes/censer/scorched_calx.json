@@ -5,7 +5,7 @@
   },
   "effects": [
     {
-      "effect": "minecraft:strength",
+      "effect": "minecraft:fire_resistance",
       "duration": 500,
       "amplifier": 0
     }

@@ -104,12 +104,6 @@ public class CrystalTileEntityRenderer implements BlockEntityRenderer<CrystalTil
                 ms.popPose();
             }
 
-            if (crystal.startRitual) {
-                ms.pushPose();
-                RenderUtils.renderBoxLines(new Vec3(1, 1, 1), crystal.getCrystalColor(), partialTicks, ms);
-                ms.popPose();
-            }
-
             if (crystal.isToBlock) {
                 ms.pushPose();
                 Vec3 lensPos = crystal.getLightLensPos();

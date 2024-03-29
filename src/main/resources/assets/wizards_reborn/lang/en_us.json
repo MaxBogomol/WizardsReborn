@@ -376,6 +376,13 @@
 
   "lore.wizards_reborn.inventor_wizard_armor": "Wissen Nature",
 
+  "lore.wizards_reborn.violence_banner_pattern": "Paint this canvas scarlet!",
+  "lore.wizards_reborn.reproduction_banner_pattern": "The chains of constant lust have shrouded this world...",
+  "lore.wizards_reborn.cooperation_banner_pattern": "Don't betray your friend.",
+  "lore.wizards_reborn.hunger_banner_pattern": "The hunter cannot become the hunted.",
+  "lore.wizards_reborn.survival_banner_pattern": "Kill or be killed!",
+  "lore.wizards_reborn.elevation_banner_pattern": "Leave everything... Cleanse your soul...",
+
   "trim_material.wizards_reborn.arcane_gold": "Arcane Gold Material",
   "trim_material.wizards_reborn.arcanum": "Arcanum Material",
   "trim_material.wizards_reborn.arcacite": "Arcacite Material",
@@ -496,10 +503,16 @@
 
   "sounds.wizards_reborn.wissen_burst": "Wissen Burst",
   "sounds.wizards_reborn.wissen_transfer": "Wissen Transfer",
+  "sounds.wizards_reborn.steam_burst": "Steam Burst",
   "sounds.wizards_reborn.spell_cast": "Spell Cast",
   "sounds.wizards_reborn.spell_burst": "Spell Burst",
   "sounds.wizards_reborn.spell_reload": "Spell Reload",
-  "sounds.wizards_reborn.steam_burst": "Steam Burst",
+
+  "sounds.wizards_reborn.crystal_resonate": "Crystal resonates",
+  "sounds.wizards_reborn.crystal_shimmer": "Crystal chimes",
+
+  "sounds.wizards_reborn.pedestal_insert": "Pedestal item inserted",
+  "sounds.wizards_reborn.pedestal_remove": "Pedestal item picked up",
 
   "entity.wizards_reborn.boat": "Boat",
   "entity.wizards_reborn.chest_boat": "Boat with Chest",

@@ -18,6 +18,7 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.Connection;
 import net.minecraft.network.protocol.game.ClientboundBlockEntityDataPacket;
+import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.SimpleContainer;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.context.UseOnContext;
@@ -32,6 +33,7 @@ import org.jetbrains.annotations.NotNull;
 import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 public class CrystalTileEntity extends TileSimpleInventory implements TickableBlockEntity, ILightTileEntity, ICooldownTileEntity, IWissenWandFunctionalTileEntity, IWissenWandControlledTileEntity, IItemResultTileEntity {
 
@@ -47,6 +49,8 @@ public class CrystalTileEntity extends TileSimpleInventory implements TickableBl
     public boolean startRitual = false;
     public int tickRitual = 0;
     public CompoundTag tagRitual = new CompoundTag();
+
+    public Random random = new Random();
 
     public CrystalTileEntity(BlockEntityType<?> type, BlockPos pos, BlockState state) {
         super(type, pos, state);
@@ -126,6 +130,14 @@ public class CrystalTileEntity extends TileSimpleInventory implements TickableBl
                     }
                 }
                 update = true;
+            }
+
+            if (random.nextFloat() < 0.001f) {
+                if (!getCrystalItem().isEmpty()) {
+                    if (getCrystalItem().getItem() instanceof CrystalItem crystalItem && crystalItem.getPolishing().getPolishingLevel() > 0) {
+                        level.playSound(null, getBlockPos(), WizardsReborn.CRYSTAL_SHIMMER_SOUND.get(), SoundSource.BLOCKS, 1.0f, 1.0f + ((random.nextFloat() - 0.5f) / 2));
+                    }
+                }
             }
         }
 

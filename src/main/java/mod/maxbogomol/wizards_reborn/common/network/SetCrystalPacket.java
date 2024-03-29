@@ -73,7 +73,6 @@ public class SetCrystalPacket {
                             if (item.getOrCreateTag().toString().equals(msg.crystal.getOrCreateTag().toString())) {
                                 player.getInventory().removeItem(item);
                                 if (nbt.getBoolean("crystal")) {
-                                    player.getInventory().add(stack_inv.getItem(0).copy());
                                     removeCrystal = stack_inv.getItem(0).copy();
                                 }
                                 stack_inv.setItem(0, msg.crystal);
@@ -120,10 +119,10 @@ public class SetCrystalPacket {
                                 }
                             }
                         }
+                    }
 
-                        if (!added) {
-                            player.getInventory().add(removeCrystal);
-                        }
+                    if (!added) {
+                        player.getInventory().add(removeCrystal);
                     }
                 }
 

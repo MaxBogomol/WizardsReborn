@@ -1,6 +1,6 @@
 {
   "type": "wizards_reborn:censer",
   "ingredient": {
-    "item": "minecraft:wheat_seeds"
+    "tag": "forge:seeds"
   }
 }

@@ -2,6 +2,8 @@ package mod.maxbogomol.wizards_reborn.client.gui.container;
 
 import mod.maxbogomol.wizards_reborn.WizardsReborn;
 import mod.maxbogomol.wizards_reborn.common.item.equipment.curio.CrystalBagItem;
+import net.minecraft.sounds.SoundEvents;
+import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.Container;
 import net.minecraft.world.SimpleContainer;
 import net.minecraft.world.entity.player.Inventory;
@@ -11,7 +13,6 @@ import net.minecraft.world.inventory.Slot;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraftforge.items.IItemHandler;
-import net.minecraftforge.items.SlotItemHandler;
 import net.minecraftforge.items.wrapper.InvWrapper;
 
 public class CrystalBagContainer extends AbstractContainerMenu {
@@ -43,13 +44,20 @@ public class CrystalBagContainer extends AbstractContainerMenu {
     }
 
     @Override
+    public void removed(Player player) {
+        player.level().playSound(null, player.getX(), player.getY(), player.getZ(), SoundEvents.ARMOR_EQUIP_LEATHER, SoundSource.PLAYERS, 1, 1);
+        super.removed(player);
+        this.inventory.stopOpen(player);
+    }
+
+    @Override
     public boolean stillValid(Player playerIn) {
         return this.inventory.stillValid(playerIn);
     }
 
     private int addSlotRange(IItemHandler handler, int index, int x, int y, int amount, int dx) {
         for (int i = 0; i < amount; i++) {
-            addSlot(new SlotItemHandler(handler, index, x, y));
+            addSlot(new CrystalBagInventorySlot(handler, index, x, y));
             x += dx;
             index++;
         }
