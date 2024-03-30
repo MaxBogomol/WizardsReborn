@@ -88,9 +88,17 @@ public class WizardsRebornItemGroup {
             event.accept(WizardsReborn.ARCANUM_BLOCK_ITEM);
             event.accept(WizardsReborn.ARCANUM_ORE_ITEM);
             event.accept(WizardsReborn.DEEPSLATE_ARCANUM_ORE_ITEM);
+            event.accept(WizardsReborn.ARCANUM_DUST_BLOCK_ITEM);
 
             event.accept(WizardsReborn.ARCACITE);
             event.accept(WizardsReborn.ARCACITE_BLOCK_ITEM);
+
+            event.accept(WizardsReborn.PRECISION_CRYSTAL);
+            event.accept(WizardsReborn.PRECISION_CRYSTAL_BLOCK_ITEM);
+
+            event.accept(WizardsReborn.NETHER_SALT);
+            event.accept(WizardsReborn.NETHER_SALT_BLOCK_ITEM);
+            event.accept(WizardsReborn.NETHER_SALT_ORE_ITEM);
 
             event.accept(WizardsReborn.ARCANE_WOOD_LOG_ITEM);
             event.accept(WizardsReborn.ARCANE_WOOD_ITEM);
@@ -324,6 +332,12 @@ public class WizardsRebornItemGroup {
             event.accept(WizardsReborn.SCORCHED_CALX);
             event.accept(WizardsReborn.DISTANT_CALX);
             event.accept(WizardsReborn.ENCHANTED_CALX);
+
+            event.accept(WizardsReborn.ALCHEMY_CALX_BLOCK_ITEM);
+            event.accept(WizardsReborn.NATURAL_CALX_BLOCK_ITEM);
+            event.accept(WizardsReborn.SCORCHED_CALX_BLOCK_ITEM);
+            event.accept(WizardsReborn.DISTANT_CALX_BLOCK_ITEM);
+            event.accept(WizardsReborn.ENCHANTED_CALX_BLOCK_ITEM);
 
             event.accept(WizardsReborn.ARCACITE_POLISHING_MIXTURE);
 

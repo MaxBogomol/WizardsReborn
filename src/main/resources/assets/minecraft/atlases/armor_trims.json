@@ -39,8 +39,11 @@
       "palette_key": "trims/color_palettes/trim_palette",
       "permutations": {
         "arcane_gold": "wizards_reborn:trims/color_palettes/arcane_gold",
+        "sarcon": "wizards_reborn:trims/color_palettes/sarcon",
+        "vilenium": "wizards_reborn:trims/color_palettes/vilenium",
         "arcanum": "wizards_reborn:trims/color_palettes/arcanum",
-        "arcacite": "wizards_reborn:trims/color_palettes/arcacite"
+        "arcacite": "wizards_reborn:trims/color_palettes/arcacite",
+        "precision_crystal": "wizards_reborn:trims/color_palettes/precision_crystal"
       }
     }
   ]

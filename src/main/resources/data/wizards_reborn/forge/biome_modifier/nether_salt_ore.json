@@ -1,0 +1,6 @@
+{
+  "type": "forge:add_features",
+  "biomes": "#is_nether",
+  "features": "wizards_reborn:nether_salt_ore",
+  "step": "underground_ores"
+}

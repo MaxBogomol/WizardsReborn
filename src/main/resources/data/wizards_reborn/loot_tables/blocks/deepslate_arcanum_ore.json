@@ -9,7 +9,7 @@
           "children": [
             {
               "type": "minecraft:item",
-              "name": "wizards_reborn:arcanum_ore",
+              "name": "wizards_reborn:deepslate_arcanum_ore",
               "conditions": [
                 {
                   "condition": "minecraft:match_tool",
@@ -27,40 +27,15 @@
               ]
             },
             {
-              "type": "minecraft:item",
-              "name": "wizards_reborn:arcanum",
+              "type": "minecraft:loot_table",
+              "name": "wizards_reborn:blocks/arcanum_ore_drop",
               "functions": [
-                {
-                  "function": "minecraft:apply_bonus",
-                  "enchantment": "minecraft:fortune",
-                  "formula": "minecraft:ore_drops"
-                },
                 {
                   "function": "minecraft:explosion_decay"
                 }
               ]
             }
           ]
-        }
-      ]
-    },
-    {
-      "rolls": 1,
-      "entries": [
-        {
-          "type": "minecraft:item",
-          "name": "wizards_reborn:arcanum_dust",
-          "functions": [
-            {
-              "function": "minecraft:explosion_decay"
-            }
-          ]
-        }
-      ],
-      "conditions": [
-        {
-          "condition": "minecraft:random_chance",
-          "chance": 0.55
         }
       ]
     }

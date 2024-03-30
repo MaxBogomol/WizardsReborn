@@ -1,0 +1,9 @@
+{
+  "type": "minecraft:blasting",
+  "ingredient": {
+    "tag": "wizards_reborn:nether_salt_ores"
+  },
+  "result": "wizards_reborn:nether_salt",
+  "experience": 1.0,
+  "cookingtime": 100
+}

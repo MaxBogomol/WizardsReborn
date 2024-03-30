@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "wizards_reborn:nether_salt_block"
+    }
+  ],
+  "result": {
+    "item": "wizards_reborn:nether_salt",
+    "count": 9
+  }
+}

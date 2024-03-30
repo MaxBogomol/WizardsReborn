@@ -1,0 +1,9 @@
+{
+  "asset_name": "sarcon",
+  "description": {
+    "color": "#A288BA",
+    "translate": "trim_material.wizards_reborn.sarcon"
+  },
+  "ingredient": "wizards_reborn:sarcon_ingot",
+  "item_model_index": 1.0
+}

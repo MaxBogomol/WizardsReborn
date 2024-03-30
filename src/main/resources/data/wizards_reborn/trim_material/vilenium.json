@@ -1,0 +1,9 @@
+{
+  "asset_name": "vilenium",
+  "description": {
+    "color": "#EECC9D",
+    "translate": "trim_material.wizards_reborn.vilenium"
+  },
+  "ingredient": "wizards_reborn:vilenium_ingot",
+  "item_model_index": 0.6
+}

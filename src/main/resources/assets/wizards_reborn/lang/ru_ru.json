@@ -23,14 +23,32 @@
   "item.wizards_reborn.arcane_gold_leggings": "Арканово золотые поножи",
   "item.wizards_reborn.arcane_gold_boots": "Арканово золотые ботинки",
 
+  "item.wizards_reborn.sarcon_ingot": "Сарконовый слиток",
+  "item.wizards_reborn.sarcon_nugget": "Кусочек саркона",
+  "block.wizards_reborn.sarcon_block": "Сарконовый блок",
+  "item.wizards_reborn.sarcon_sheet": "Сарконовый лист",
+
+  "item.wizards_reborn.vilenium_ingot": "Вилениумный слиток",
+  "item.wizards_reborn.vilenium_nugget": "Кусочек вилениума",
+  "block.wizards_reborn.vilenium_block": "Вилениумный блок",
+  "item.wizards_reborn.vilenium_sheet": "Вилениумный лист",
+
   "item.wizards_reborn.arcanum": "Арканум",
   "item.wizards_reborn.arcanum_dust": "Арканумная пыль",
   "block.wizards_reborn.arcanum_block": "Арканумный блок",
   "block.wizards_reborn.arcanum_ore": "Арканумная руда",
   "block.wizards_reborn.deepslate_arcanum_ore": "Аркнумоносный глубинный сланец",
+  "block.wizards_reborn.arcanum_dust_block": "Блок арканумной пыли",
 
   "item.wizards_reborn.arcacite": "Аркацит",
   "block.wizards_reborn.arcacite_block": "Аркацитовый блок",
+
+  "item.wizards_reborn.precision_crystal": "Кристалл точности",
+  "block.wizards_reborn.precision_crystal_block": "Блок кристалла точности",
+
+  "item.wizards_reborn.nether_salt": "Незер соль",
+  "block.wizards_reborn.nether_salt_block": "Блок незер соли",
+  "block.wizards_reborn.nether_salt_ore": "Руда незер соли",
 
   "block.wizards_reborn.arcane_wood_log": "Арканово-древесное бревно",
   "block.wizards_reborn.arcane_wood": "Аркановая древесина",
@@ -287,6 +305,12 @@
   "item.wizards_reborn.distant_calx": "Далёкая известь",
   "item.wizards_reborn.enchanted_calx": "Зачарованная известь",
 
+  "block.wizards_reborn.alchemy_calx_block": "Блок алхимическеской извести",
+  "block.wizards_reborn.natural_calx_block": "Блок Природная извести",
+  "block.wizards_reborn.scorched_calx_block": "Блок выжженной извести",
+  "block.wizards_reborn.distant_calx_block": "Блок далёкой извести",
+  "block.wizards_reborn.enchanted_calx_block": "Блок зачарованной извести",
+
   "item.wizards_reborn.arcacite_polishing_mixture": "Аркацитовая смесь полировки",
 
   "item.wizards_reborn.arcanum_lens": "Арканумная линза",
@@ -389,8 +413,11 @@
   "lore.wizards_reborn.elevation_banner_pattern": "Отбрось всё... Очисти свою душу...",
 
   "trim_material.wizards_reborn.arcane_gold": "Аркановый золотой материал",
+  "trim_material.wizards_reborn.sarcon": "Сарконовый материал",
+  "trim_material.wizards_reborn.vilenium": "Вилениумный материал",
   "trim_material.wizards_reborn.arcanum": "Арканумный материал",
   "trim_material.wizards_reborn.arcacite": "Аркацитовый материал",
+  "trim_material.wizards_reborn.precision_crystal": "Материал кристалла точности",
 
   "item.wizards_reborn.violence_banner_pattern.desc": "Насилие",
   "item.wizards_reborn.reproduction_banner_pattern.desc": "Репродукция",

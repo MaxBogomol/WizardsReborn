@@ -1,0 +1,11 @@
+{
+  "replace": false,
+  "values": [
+    "wizards_reborn:arcanum_dust_block",
+    "wizards_reborn:alchemy_calx_block",
+    "wizards_reborn:natural_calx_block",
+    "wizards_reborn:scorched_calx_block",
+    "wizards_reborn:distant_calx_block",
+    "wizards_reborn:enchanted_calx_block"
+  ]
+}

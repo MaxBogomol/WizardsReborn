@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "wizards_reborn:arcanum_dust_block"
+    }
+  ],
+  "result": {
+    "item": "wizards_reborn:arcanum_dust",
+    "count": 9
+  }
+}

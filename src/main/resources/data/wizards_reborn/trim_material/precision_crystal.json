@@ -1,0 +1,9 @@
+{
+  "asset_name": "precision_crystal",
+  "description": {
+    "color": "#A6DFA2",
+    "translate": "trim_material.wizards_reborn.precision_crystal"
+  },
+  "ingredient": "wizards_reborn:precision_crystal",
+  "item_model_index": 0.7
+}

@@ -260,6 +260,21 @@ public class WizardsReborn {
     public static final RegistryObject<SoundEvent> ARCACITE_PLACE_SOUND = SOUND_EVENTS.register("arcacite_place", () -> SoundEvent.createVariableRangeEvent(new ResourceLocation(MOD_ID, "arcacite_place")));
     public static final RegistryObject<SoundEvent> ARCACITE_HIT_SOUND = SOUND_EVENTS.register("arcacite_hit", () -> SoundEvent.createVariableRangeEvent(new ResourceLocation(MOD_ID, "arcacite_hit")));
 
+    public static final RegistryObject<SoundEvent> PRECISION_CRYSTAL_BREAK_SOUND = SOUND_EVENTS.register("precision_crystal_break", () -> SoundEvent.createVariableRangeEvent(new ResourceLocation(MOD_ID, "precision_crystal_break")));
+    public static final RegistryObject<SoundEvent> PRECISION_CRYSTAL_STEP_SOUND = SOUND_EVENTS.register("precision_crystal_step", () -> SoundEvent.createVariableRangeEvent(new ResourceLocation(MOD_ID, "precision_crystal_step")));
+    public static final RegistryObject<SoundEvent> PRECISION_CRYSTAL_PLACE_SOUND = SOUND_EVENTS.register("precision_crystal_place", () -> SoundEvent.createVariableRangeEvent(new ResourceLocation(MOD_ID, "precision_crystal_place")));
+    public static final RegistryObject<SoundEvent> PRECISION_CRYSTAL_HIT_SOUND = SOUND_EVENTS.register("precision_crystal_hit", () -> SoundEvent.createVariableRangeEvent(new ResourceLocation(MOD_ID, "precision_crystal_hit")));
+
+    public static final RegistryObject<SoundEvent> NETHER_SALT_BREAK_SOUND = SOUND_EVENTS.register("nether_salt_break", () -> SoundEvent.createVariableRangeEvent(new ResourceLocation(MOD_ID, "nether_salt_break")));
+    public static final RegistryObject<SoundEvent> NETHER_SALT_STEP_SOUND = SOUND_EVENTS.register("nether_salt_step", () -> SoundEvent.createVariableRangeEvent(new ResourceLocation(MOD_ID, "nether_salt_step")));
+    public static final RegistryObject<SoundEvent> NETHER_SALT_PLACE_SOUND = SOUND_EVENTS.register("nether_salt_place", () -> SoundEvent.createVariableRangeEvent(new ResourceLocation(MOD_ID, "nether_salt_place")));
+    public static final RegistryObject<SoundEvent> NETHER_SALT_HIT_SOUND = SOUND_EVENTS.register("nether_salt_hit", () -> SoundEvent.createVariableRangeEvent(new ResourceLocation(MOD_ID, "nether_salt_hit")));
+
+    public static final RegistryObject<SoundEvent> NETHER_SALT_ORE_BREAK_SOUND = SOUND_EVENTS.register("nether_salt_ore_break", () -> SoundEvent.createVariableRangeEvent(new ResourceLocation(MOD_ID, "nether_salt_ore_break")));
+    public static final RegistryObject<SoundEvent> NETHER_SALT_ORE_STEP_SOUND = SOUND_EVENTS.register("nether_salt_ore_step", () -> SoundEvent.createVariableRangeEvent(new ResourceLocation(MOD_ID, "nether_salt_ore_step")));
+    public static final RegistryObject<SoundEvent> NETHER_SALT_ORE_PLACE_SOUND = SOUND_EVENTS.register("nether_salt_ore_place", () -> SoundEvent.createVariableRangeEvent(new ResourceLocation(MOD_ID, "nether_salt_ore_place")));
+    public static final RegistryObject<SoundEvent> NETHER_SALT_ORE_HIT_SOUND = SOUND_EVENTS.register("nether_salt_ore_hit", () -> SoundEvent.createVariableRangeEvent(new ResourceLocation(MOD_ID, "nether_salt_ore_hit")));
+
     public static final RegistryObject<SoundEvent> ARCANE_WOOD_BREAK_SOUND = SOUND_EVENTS.register("arcane_wood_break", () -> SoundEvent.createVariableRangeEvent(new ResourceLocation(MOD_ID, "arcane_wood_break")));
     public static final RegistryObject<SoundEvent> ARCANE_WOOD_STEP_SOUND = SOUND_EVENTS.register("arcane_wood_step", () -> SoundEvent.createVariableRangeEvent(new ResourceLocation(MOD_ID, "arcane_wood_step")));
     public static final RegistryObject<SoundEvent> ARCANE_WOOD_PLACE_SOUND = SOUND_EVENTS.register("arcane_wood_place", () -> SoundEvent.createVariableRangeEvent(new ResourceLocation(MOD_ID, "arcane_wood_place")));
@@ -374,6 +389,9 @@ public class WizardsReborn {
     public static final ForgeSoundType ARCANUM_ORE_SOUNDS = new ForgeSoundType(1f, 1f, ARCANUM_ORE_BREAK_SOUND, ARCANUM_ORE_STEP_SOUND, ARCANUM_ORE_PLACE_SOUND, ARCANUM_ORE_HIT_SOUND, () -> SoundEvents.STONE_FALL);
     public static final ForgeSoundType DEEPSLATE_ARCANUM_ORE_SOUNDS = new ForgeSoundType(1f, 1f, DEEPSLATE_ARCANUM_ORE_BREAK_SOUND, DEEPSLATE_ARCANUM_ORE_STEP_SOUND, DEEPSLATE_ARCANUM_ORE_PLACE_SOUND, DEEPSLATE_ARCANUM_ORE_HIT_SOUND, () -> SoundEvents.DEEPSLATE_FALL);
     public static final ForgeSoundType ARCACITE_SOUNDS = new ForgeSoundType(1f, 1f, ARCACITE_BREAK_SOUND, ARCACITE_STEP_SOUND, ARCACITE_PLACE_SOUND, ARCACITE_HIT_SOUND, () -> SoundEvents.METAL_FALL);
+    public static final ForgeSoundType PRECISION_CRYSTAL_SOUNDS = new ForgeSoundType(1f, 1f, PRECISION_CRYSTAL_BREAK_SOUND, PRECISION_CRYSTAL_STEP_SOUND, PRECISION_CRYSTAL_PLACE_SOUND, PRECISION_CRYSTAL_HIT_SOUND, () -> SoundEvents.COPPER_FALL);
+    public static final ForgeSoundType NETHER_SALT_SOUNDS = new ForgeSoundType(1f, 1f, NETHER_SALT_BREAK_SOUND, NETHER_SALT_STEP_SOUND, NETHER_SALT_PLACE_SOUND, NETHER_SALT_HIT_SOUND, () -> SoundEvents.STONE_FALL);
+    public static final ForgeSoundType NETHER_SALT_ORE_SOUNDS = new ForgeSoundType(1f, 1f, NETHER_SALT_ORE_BREAK_SOUND, NETHER_SALT_ORE_STEP_SOUND, NETHER_SALT_ORE_PLACE_SOUND, NETHER_SALT_ORE_HIT_SOUND, () -> SoundEvents.NETHER_ORE_FALL);
     public static final ForgeSoundType ARCANE_WOOD_SOUNDS = new ForgeSoundType(1f, 1f, ARCANE_WOOD_BREAK_SOUND, ARCANE_WOOD_STEP_SOUND, ARCANE_WOOD_PLACE_SOUND, ARCANE_WOOD_HIT_SOUND, () -> SoundEvents.BAMBOO_WOOD_FALL);
     public static final ForgeSoundType ARCANE_WOOD_HANGING_SIGN_SOUNDS = new ForgeSoundType(1f, 1f, ARCANE_WOOD_HANGING_SIGN_BREAK_SOUND, ARCANE_WOOD_HANGING_SIGN_STEP_SOUND, ARCANE_WOOD_HANGING_SIGN_PLACE_SOUND, ARCANE_WOOD_HANGING_SIGN_HIT_SOUND, () -> SoundEvents.BAMBOO_WOOD_FALL);
     public static final ForgeSoundType INNOCENT_WOOD_SOUNDS = new ForgeSoundType(1f, 1f, INNOCENT_WOOD_BREAK_SOUND, INNOCENT_WOOD_STEP_SOUND, INNOCENT_WOOD_PLACE_SOUND, INNOCENT_WOOD_HIT_SOUND, () -> SoundEvents.CHERRY_WOOD_FALL);
@@ -516,7 +534,11 @@ public class WizardsReborn {
     public static final RegistryObject<Block> ARCANUM_BLOCK = BLOCKS.register("arcanum_block", () -> new Block(BlockBehaviour.Properties.copy(Blocks.DIAMOND_BLOCK).sound(ARCANUM_SOUNDS)));
     public static final RegistryObject<Block> ARCANUM_ORE = BLOCKS.register("arcanum_ore", () -> new ArcanumOreBlock(BlockBehaviour.Properties.copy(Blocks.DIAMOND_ORE).sound(ARCANUM_ORE_SOUNDS)));
     public static final RegistryObject<Block> DEEPSLATE_ARCANUM_ORE = BLOCKS.register("deepslate_arcanum_ore", () -> new ArcanumOreBlock(BlockBehaviour.Properties.copy(Blocks.DEEPSLATE_DIAMOND_ORE).sound(DEEPSLATE_ARCANUM_ORE_SOUNDS)));
+    public static final RegistryObject<Block> ARCANUM_DUST_BLOCK = BLOCKS.register("arcanum_dust_block", () -> new FallingBlock(BlockBehaviour.Properties.copy(Blocks.LIGHT_BLUE_CONCRETE_POWDER)));
     public static final RegistryObject<Block> ARCACITE_BLOCK = BLOCKS.register("arcacite_block", () -> new Block(BlockBehaviour.Properties.copy(Blocks.DIAMOND_BLOCK).mapColor(MapColor.COLOR_RED).sound(ARCACITE_SOUNDS)));
+    public static final RegistryObject<Block> PRECISION_CRYSTAL_BLOCK = BLOCKS.register("precision_crystal_block", () -> new Block(BlockBehaviour.Properties.copy(Blocks.DIAMOND_BLOCK).mapColor(MapColor.COLOR_LIGHT_GREEN).sound(PRECISION_CRYSTAL_SOUNDS)));
+    public static final RegistryObject<Block> NETHER_SALT_BLOCK = BLOCKS.register("nether_salt_block", () -> new Block(BlockBehaviour.Properties.copy(Blocks.GOLD_BLOCK).sound(NETHER_SALT_SOUNDS)));
+    public static final RegistryObject<Block> NETHER_SALT_ORE = BLOCKS.register("nether_salt_ore", () -> new NetherSaltOreBlock(BlockBehaviour.Properties.copy(Blocks.NETHER_GOLD_ORE).sound(NETHER_SALT_ORE_SOUNDS)));
 
     public static final RegistryObject<Block> ARCANE_WOOD_LOG = BLOCKS.register("arcane_wood_log", () -> new RotatedPillarBlock(BlockBehaviour.Properties.copy(Blocks.OAK_LOG).mapColor(MapColor.PODZOL).sound(ARCANE_WOOD_SOUNDS)));
     public static final RegistryObject<Block> ARCANE_WOOD = BLOCKS.register("arcane_wood", () -> new RotatedPillarBlock(BlockBehaviour.Properties.copy(Blocks.OAK_LOG).mapColor(MapColor.PODZOL).sound(ARCANE_WOOD_SOUNDS)));
@@ -737,6 +759,12 @@ public class WizardsReborn {
 
     public static final RegistryObject<Block> ALCHEMY_GLASS = BLOCKS.register("alchemy_glass", () -> new TintedGlassBlock(BlockBehaviour.Properties.copy(Blocks.TINTED_GLASS).mapColor(MapColor.COLOR_LIGHT_GRAY).noOcclusion()));
 
+    public static final RegistryObject<Block> ALCHEMY_CALX_BLOCK = BLOCKS.register("alchemy_calx_block", () -> new FallingBlock(BlockBehaviour.Properties.copy(Blocks.WHITE_CONCRETE_POWDER)));
+    public static final RegistryObject<Block> NATURAL_CALX_BLOCK = BLOCKS.register("natural_calx_block", () -> new FallingBlock(BlockBehaviour.Properties.copy(Blocks.GREEN_CONCRETE_POWDER)));
+    public static final RegistryObject<Block> SCORCHED_CALX_BLOCK = BLOCKS.register("scorched_calx_block", () -> new FallingBlock(BlockBehaviour.Properties.copy(Blocks.RED_CONCRETE_POWDER)));
+    public static final RegistryObject<Block> DISTANT_CALX_BLOCK = BLOCKS.register("distant_calx_block", () -> new FallingBlock(BlockBehaviour.Properties.copy(Blocks.CYAN_CONCRETE_POWDER)));
+    public static final RegistryObject<Block> ENCHANTED_CALX_BLOCK = BLOCKS.register("enchanted_calx_block", () -> new FallingBlock(BlockBehaviour.Properties.copy(Blocks.LIME_CONCRETE_POWDER)));
+
     //ITEMS
     public static final RegistryObject<Item> ARCANE_GOLD_INGOT = ITEMS.register("arcane_gold_ingot", () -> new Item(new Item.Properties()));
     public static final RegistryObject<Item> ARCANE_GOLD_NUGGET = ITEMS.register("arcane_gold_nugget", () -> new Item(new Item.Properties()));
@@ -759,12 +787,12 @@ public class WizardsReborn {
     public static final RegistryObject<Item> ARCANE_GOLD_LEGGINGS = ITEMS.register("arcane_gold_leggings", () -> new ArcaneArmorItem(CustomArmorMaterial.ARCANE_GOLD, ArmorItem.Type.LEGGINGS, new Item.Properties()));
     public static final RegistryObject<Item> ARCANE_GOLD_BOOTS = ITEMS.register("arcane_gold_boots", () -> new ArcaneArmorItem(CustomArmorMaterial.ARCANE_GOLD, ArmorItem.Type.BOOTS, new Item.Properties()));
 
-    public static final RegistryObject<Item> SARCON_INGOT = ITEMS.register("sarcon_ingot", () -> new Item(new Item.Properties()));
-    public static final RegistryObject<Item> SARCON_NUGGET = ITEMS.register("sarcon_nugget", () -> new Item(new Item.Properties()));
+    public static final RegistryObject<Item> SARCON_INGOT = ITEMS.register("sarcon_ingot", () -> new SarconIngotItem(new Item.Properties()));
+    public static final RegistryObject<Item> SARCON_NUGGET = ITEMS.register("sarcon_nugget", () -> new SarconIngotItem(new Item.Properties()));
     public static final RegistryObject<Item> SARCON_BLOCK_ITEM = ITEMS.register("sarcon_block", () -> new BlockItem(SARCON_BLOCK.get(), new Item.Properties()));
 
-    public static final RegistryObject<Item> VILENIUM_INGOT = ITEMS.register("vilenium_ingot", () -> new Item(new Item.Properties()));
-    public static final RegistryObject<Item> VILENIUM_NUGGET = ITEMS.register("vilenium_nugget", () -> new Item(new Item.Properties()));
+    public static final RegistryObject<Item> VILENIUM_INGOT = ITEMS.register("vilenium_ingot", () -> new VileniumIngotItem(new Item.Properties()));
+    public static final RegistryObject<Item> VILENIUM_NUGGET = ITEMS.register("vilenium_nugget", () -> new VileniumIngotItem(new Item.Properties()));
     public static final RegistryObject<Item> VILENIUM_BLOCK_ITEM = ITEMS.register("vilenium_block", () -> new BlockItem(VILENIUM_BLOCK.get(), new Item.Properties()));
 
     public static final RegistryObject<Item> ARCANUM = ITEMS.register("arcanum", () -> new ArcanumItem(new Item.Properties()));
@@ -772,9 +800,17 @@ public class WizardsReborn {
     public static final RegistryObject<Item> ARCANUM_BLOCK_ITEM = ITEMS.register("arcanum_block", () -> new BlockItem(ARCANUM_BLOCK.get(), new Item.Properties()));
     public static final RegistryObject<Item> ARCANUM_ORE_ITEM = ITEMS.register("arcanum_ore", () -> new BlockItem(ARCANUM_ORE.get(), new Item.Properties()));
     public static final RegistryObject<Item> DEEPSLATE_ARCANUM_ORE_ITEM = ITEMS.register("deepslate_arcanum_ore", () -> new BlockItem(DEEPSLATE_ARCANUM_ORE.get(), new Item.Properties()));
+    public static final RegistryObject<Item> ARCANUM_DUST_BLOCK_ITEM = ITEMS.register("arcanum_dust_block", () -> new BlockItem(ARCANUM_DUST_BLOCK.get(), new Item.Properties()));
 
     public static final RegistryObject<Item> ARCACITE = ITEMS.register("arcacite", () -> new ArcaciteItem(new Item.Properties()));
     public static final RegistryObject<Item> ARCACITE_BLOCK_ITEM = ITEMS.register("arcacite_block", () -> new BlockItem(ARCACITE_BLOCK.get(), new Item.Properties()));
+
+    public static final RegistryObject<Item> PRECISION_CRYSTAL = ITEMS.register("precision_crystal", () -> new PrecisionCrystalItem(new Item.Properties()));
+    public static final RegistryObject<Item> PRECISION_CRYSTAL_BLOCK_ITEM = ITEMS.register("precision_crystal_block", () -> new BlockItem(PRECISION_CRYSTAL_BLOCK.get(), new Item.Properties()));
+
+    public static final RegistryObject<Item> NETHER_SALT = ITEMS.register("nether_salt", () -> new NetherSaltItem(new Item.Properties()));
+    public static final RegistryObject<Item> NETHER_SALT_BLOCK_ITEM = ITEMS.register("nether_salt_block", () -> new BlockItem(NETHER_SALT_BLOCK.get(), new Item.Properties()));
+    public static final RegistryObject<Item> NETHER_SALT_ORE_ITEM = ITEMS.register("nether_salt_ore", () -> new BlockItem(NETHER_SALT_ORE.get(), new Item.Properties()));
 
     public static final RegistryObject<Item> ARCANE_WOOD_LOG_ITEM = ITEMS.register("arcane_wood_log", () -> new BlockItem(ARCANE_WOOD_LOG.get(), new Item.Properties()));
     public static final RegistryObject<Item> ARCANE_WOOD_ITEM = ITEMS.register("arcane_wood", () -> new BlockItem(ARCANE_WOOD.get(), new Item.Properties()));
@@ -1018,6 +1054,12 @@ public class WizardsReborn {
     public static final RegistryObject<Item> SCORCHED_CALX = ITEMS.register("scorched_calx", () -> new Item(new Item.Properties()));
     public static final RegistryObject<Item> DISTANT_CALX = ITEMS.register("distant_calx", () -> new Item(new Item.Properties()));
     public static final RegistryObject<Item> ENCHANTED_CALX = ITEMS.register("enchanted_calx", () -> new Item(new Item.Properties()));
+
+    public static final RegistryObject<Item> ALCHEMY_CALX_BLOCK_ITEM = ITEMS.register("alchemy_calx_block", () -> new BlockItem(ALCHEMY_CALX_BLOCK.get(), new Item.Properties()));
+    public static final RegistryObject<Item> NATURAL_CALX_BLOCK_ITEM = ITEMS.register("natural_calx_block", () -> new BlockItem(NATURAL_CALX_BLOCK.get(), new Item.Properties()));
+    public static final RegistryObject<Item> SCORCHED_CALX_BLOCK_ITEM = ITEMS.register("scorched_calx_block", () -> new BlockItem(SCORCHED_CALX_BLOCK.get(), new Item.Properties()));
+    public static final RegistryObject<Item> DISTANT_CALX_BLOCK_ITEM = ITEMS.register("distant_calx_block", () -> new BlockItem(DISTANT_CALX_BLOCK.get(), new Item.Properties()));
+    public static final RegistryObject<Item> ENCHANTED_CALX_BLOCK_ITEM = ITEMS.register("enchanted_calx_block", () -> new BlockItem(ENCHANTED_CALX_BLOCK.get(), new Item.Properties()));
 
     public static final RegistryObject<Item> ARCACITE_POLISHING_MIXTURE = ITEMS.register("arcacite_polishing_mixture", () -> new Item(new Item.Properties()));
 
