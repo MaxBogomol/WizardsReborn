@@ -277,12 +277,12 @@ public class WizardsRebornItemGroup {
             event.accept(WizardsReborn.ALCHEMY_MACHINE_ITEM);
             event.accept(WizardsReborn.ALCHEMY_BOILER_ITEM);
             event.accept(WizardsReborn.ARCANE_CENSER_ITEM);
-            event.accept(WizardsReborn.INNOCENT_PEDESTAL_ITEM);
-            event.accept(WizardsReborn.INNOCENT_HOVERING_TOME_STAND_ITEM);
 
             event.accept(WizardsReborn.LIGHT_EMITTER_ITEM);
             event.accept(WizardsReborn.LIGHT_TRANSFER_LENS_ITEM);
             event.accept(WizardsReborn.RUNIC_PEDESTAL_ITEM);
+            event.accept(WizardsReborn.INNOCENT_PEDESTAL_ITEM);
+            event.accept(WizardsReborn.INNOCENT_HOVERING_TOME_STAND_ITEM);
 
             event.accept(WizardsReborn.ARCANE_LEVER_ITEM);
             event.accept(WizardsReborn.REDSTONE_SENSOR_ITEM);
@@ -322,6 +322,9 @@ public class WizardsRebornItemGroup {
             event.accept(WizardsReborn.CREATIVE_LIGHT_STORAGE_ITEM);
             event.accept(WizardsReborn.CREATIVE_FLUID_STORAGE_ITEM);
             event.accept(WizardsReborn.CREATIVE_STEAM_STORAGE_ITEM);
+
+            event.accept(WizardsReborn.ARCANE_SALT_TORCH_ITEM);
+            event.accept(WizardsReborn.INNOCENT_SALT_TORCH_ITEM);
 
             event.accept(WizardsReborn.ALCHEMY_GLASS_ITEM);
             event.accept(WizardsReborn.ALCHEMY_VIAL);

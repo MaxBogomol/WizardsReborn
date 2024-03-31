@@ -164,6 +164,11 @@ public class WizardsRebornClient {
             ItemBlockRenderTypes.setRenderLayer(WizardsReborn.INNOCENT_WOOD_GLASS_FRAME.get(), RenderType.translucent());
             ItemBlockRenderTypes.setRenderLayer(WizardsReborn.WISESTONE_GLASS_FRAME.get(), RenderType.translucent());
 
+            ItemBlockRenderTypes.setRenderLayer(WizardsReborn.ARCANE_SALT_TORCH.get(), RenderType.cutout());
+            ItemBlockRenderTypes.setRenderLayer(WizardsReborn.ARCANE_SALT_WALL_TORCH.get(), RenderType.cutout());
+            ItemBlockRenderTypes.setRenderLayer(WizardsReborn.INNOCENT_SALT_TORCH.get(), RenderType.cutout());
+            ItemBlockRenderTypes.setRenderLayer(WizardsReborn.INNOCENT_SALT_WALL_TORCH.get(), RenderType.cutout());
+
             ItemBlockRenderTypes.setRenderLayer(WizardsReborn.MUNDANE_BREW_FLUID.get(), RenderType.translucent());
             ItemBlockRenderTypes.setRenderLayer(WizardsReborn.FLOWING_MUNDANE_BREW_FLUID.get(), RenderType.translucent());
             ItemBlockRenderTypes.setRenderLayer(WizardsReborn.ALCHEMY_OIL_FLUID.get(), RenderType.translucent());

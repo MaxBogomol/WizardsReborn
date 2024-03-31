@@ -3,6 +3,7 @@ package mod.maxbogomol.wizards_reborn.common.tileentity;
 import mod.maxbogomol.wizards_reborn.WizardsReborn;
 import mod.maxbogomol.wizards_reborn.client.particle.Particles;
 import mod.maxbogomol.wizards_reborn.common.block.ArcaneLumosBlock;
+import mod.maxbogomol.wizards_reborn.common.block.SaltWallTorchBlock;
 import mod.maxbogomol.wizards_reborn.utils.PacketUtils;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -14,73 +15,45 @@ import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.phys.AABB;
+import net.minecraft.world.phys.Vec3;
 import org.jetbrains.annotations.NotNull;
 
 import javax.annotation.Nullable;
 import java.awt.*;
 import java.util.Random;
 
-public class TotemOfFlamesTileEntity extends ExposedTileSimpleInventory implements TickableBlockEntity {
+public class SaltTorchTileEntity extends ExposedTileSimpleInventory implements TickableBlockEntity {
 
     public Random random = new Random();
+    public Color colorFirst = new Color(255, 170, 65);
+    public Color colorSecond = new Color(231, 71, 101);
 
-    public TotemOfFlamesTileEntity(BlockEntityType<?> type, BlockPos pos, BlockState state) {
+    public SaltTorchTileEntity(BlockEntityType<?> type, BlockPos pos, BlockState state) {
         super(type, pos, state);
     }
 
-    public TotemOfFlamesTileEntity(BlockPos pos, BlockState state) {
-        this(WizardsReborn.TOTEM_OF_FLAMES_TILE_ENTITY.get(), pos, state);
+    public SaltTorchTileEntity(BlockPos pos, BlockState state) {
+        this(WizardsReborn.SALT_TORCH.get(), pos, state);
     }
 
     @Override
     public void tick() {
-        if (!level.isClientSide()) {
-            if (!getItemHandler().getItem(0).isEmpty()) {
-                if (!getBlockState().getValue(BlockStateProperties.LIT)) {
-                    BlockState blockState = getBlockState().setValue(BlockStateProperties.LIT, true);
-                    level.setBlock(getBlockPos(), blockState, 3);
-                }
-            } else if (getBlockState().getValue(BlockStateProperties.LIT)) {
-                BlockState blockState = getBlockState().setValue(BlockStateProperties.LIT, false);
-                level.setBlock(getBlockPos(), blockState, 3);
-            }
-        }
-
         if (level.isClientSide()) {
+            Color color = colorSecond;
+            Vec3 pos = new Vec3(0.5f, 0.6875f, 0.5f);
+
+            if (getBlockState().getBlock() instanceof SaltWallTorchBlock) {
+                BlockPos blockPos = new BlockPos(0, 0, 0).relative(getBlockState().getValue(SaltWallTorchBlock.FACING));
+                pos = pos.add(blockPos.getX() * -0.25f, 0.09375f, blockPos.getZ() * -0.25f);
+            }
+
             if (!getItemHandler().getItem(0).isEmpty()) {
                 if (getItemHandler().getItem(0).getItem() instanceof BlockItem) {
                     BlockItem blockItem = (BlockItem) getItemHandler().getItem(0).getItem();
                     if (blockItem.getBlock() instanceof ArcaneLumosBlock) {
                         ArcaneLumosBlock lumos = (ArcaneLumosBlock) blockItem.getBlock();
-                        Color color = ArcaneLumosBlock.getColor(lumos.color);
-
-                        if (random.nextFloat() < 0.5) {
-                            Particles.create(WizardsReborn.WISP_PARTICLE)
-                                    .addVelocity(((random.nextDouble() - 0.5D) / 50), ((random.nextDouble() - 0.5D) / 50), ((random.nextDouble() - 0.5D) / 50))
-                                    .setAlpha(0.25f, 0).setScale(0.25f, 0)
-                                    .setColor(color.getRed() / 255f, color.getGreen()/ 255f, color.getBlue() / 255f)
-                                    .setLifetime(20)
-                                    .spawn(level, worldPosition.getX() + 0.5F, worldPosition.getY() + 0.5F, worldPosition.getZ() + 0.5F);
-                        }
-                        if (random.nextFloat() < 0.75) {
-                            Particles.create(WizardsReborn.SPARKLE_PARTICLE)
-                                    .addVelocity(((random.nextDouble() - 0.5D) / 150), ((random.nextDouble() - 0.5D) / 150) + 0.015f, ((random.nextDouble() - 0.5D) / 150))
-                                    .setAlpha(0.35f, 0).setScale(0.25f, 0)
-                                    .setColor(color.getRed() / 255f, color.getGreen()/ 255f, color.getBlue() / 255f)
-                                    .setLifetime(60)
-                                    .spawn(level, worldPosition.getX() + 0.5F, worldPosition.getY() + 0.5F, worldPosition.getZ() + 0.5F);
-                        }
-                        if (random.nextFloat() < 0.1) {
-                            Particles.create(WizardsReborn.SMOKE_PARTICLE)
-                                    .addVelocity(((random.nextDouble() - 0.5D) / 150), ((random.nextDouble() - 0.5D) / 150) + 0.02f, ((random.nextDouble() - 0.5D) / 150))
-                                    .setAlpha(0.25f, 0).setScale(0.25f, 0)
-                                    .setColor(0, 0, 0)
-                                    .setSpin((0.1f * (float) ((random.nextDouble() - 0.5D) * 2)))
-                                    .setLifetime(60)
-                                    .spawn(level, worldPosition.getX() + 0.5F, worldPosition.getY() + 0.5F, worldPosition.getZ() + 0.5F);
-                        }
+                        color = ArcaneLumosBlock.getColor(lumos.color);
 
                         if (lumos.color == ArcaneLumosBlock.Colors.COSMIC) {
                             if (random.nextFloat() < 0.1) {
@@ -90,7 +63,7 @@ public class TotemOfFlamesTileEntity extends ExposedTileSimpleInventory implemen
                                         .setColor((float) color.getRed() / 255, (float) color.getGreen()/ 255, (float) color.getBlue() / 255)
                                         .setLifetime(10)
                                         .setSpin((0.1f * (float) ((random.nextDouble() - 0.5D) * 2)))
-                                        .spawn(level, worldPosition.getX() + 0.5F + ((random.nextDouble() - 0.5D) / 3), worldPosition.getY() + 0.5F + ((random.nextDouble() - 0.5D) / 3), worldPosition.getZ() + 0.5F + ((random.nextDouble() - 0.5D) / 3));
+                                        .spawn(level, worldPosition.getX() + pos.x() + ((random.nextDouble() - 0.5D) / 3), worldPosition.getY() + pos.y() + ((random.nextDouble() - 0.5D) / 3), worldPosition.getZ() + pos.z() + ((random.nextDouble() - 0.5D) / 3));
                             }
                             if (random.nextFloat() < 0.1) {
                                 Particles.create(WizardsReborn.SPARKLE_PARTICLE)
@@ -98,11 +71,44 @@ public class TotemOfFlamesTileEntity extends ExposedTileSimpleInventory implemen
                                         .setAlpha(0.75f, 0).setScale(0.1f, 0)
                                         .setColor(1f, 1f, 1f)
                                         .setLifetime(10)
-                                        .spawn(level, worldPosition.getX() + 0.5F + ((random.nextDouble() - 0.5D) / 3), worldPosition.getY() + 0.5F + ((random.nextDouble() - 0.5D) / 3), worldPosition.getZ() + 0.5F + ((random.nextDouble() - 0.5D) / 3));
+                                        .spawn(level, worldPosition.getX() + pos.x() + ((random.nextDouble() - 0.5D) / 3), worldPosition.getY() + pos.y() + ((random.nextDouble() - 0.5D) / 3), worldPosition.getZ() + pos.z() + ((random.nextDouble() - 0.5D) / 3));
                             }
                         }
                     }
                 }
+            }
+
+            if (random.nextFloat() < 0.5) {
+                Particles.create(WizardsReborn.SPARKLE_PARTICLE)
+                        .setAlpha(0.25f, 0).setScale(0.35f, 0)
+                        .setColor(colorFirst.getRed() / 255f, colorFirst.getGreen()/ 255f, colorFirst.getBlue() / 255f, color.getRed() / 255f, color.getGreen()/ 255f, color.getBlue() / 255f)
+                        .setLifetime(30)
+                        .spawn(level, worldPosition.getX() + pos.x(), worldPosition.getY() + pos.y(), worldPosition.getZ() + pos.z());
+            }
+            if (random.nextFloat() < 0.45) {
+                Particles.create(WizardsReborn.SPARKLE_PARTICLE)
+                        .addVelocity(((random.nextDouble() - 0.5D) / 300), ((random.nextDouble() - 0.5D) / 150) + 0.015f, ((random.nextDouble() - 0.5D) / 300))
+                        .setAlpha(0.35f, 0).setScale(0.25f, 0)
+                        .setColor(colorFirst.getRed() / 255f, colorFirst.getGreen()/ 255f, colorFirst.getBlue() / 255f, color.getRed() / 255f, color.getGreen()/ 255f, color.getBlue() / 255f)
+                        .setLifetime(60)
+                        .spawn(level, worldPosition.getX() + pos.x(), worldPosition.getY() + pos.y(), worldPosition.getZ() + pos.z());
+            }
+            if (random.nextFloat() < 0.45) {
+                Particles.create(WizardsReborn.WISP_PARTICLE)
+                        .addVelocity(((random.nextDouble() - 0.5D) / 150), ((random.nextDouble() - 0.5D) / 150) + 0.03f, ((random.nextDouble() - 0.5D) / 150))
+                        .setAlpha(0.35f, 0).setScale(0.15f, 0)
+                        .setColor(colorFirst.getRed() / 255f, colorFirst.getGreen()/ 255f, colorFirst.getBlue() / 255f, color.getRed() / 255f, color.getGreen()/ 255f, color.getBlue() / 255f)
+                        .setLifetime(30)
+                        .spawn(level, worldPosition.getX() + pos.x(), worldPosition.getY() + pos.y(), worldPosition.getZ() + pos.z());
+            }
+            if (random.nextFloat() < 0.3) {
+                Particles.create(WizardsReborn.SMOKE_PARTICLE)
+                        .addVelocity(((random.nextDouble() - 0.5D) / 150), ((random.nextDouble() - 0.5D) / 150) + 0.03f, ((random.nextDouble() - 0.5D) / 150))
+                        .setAlpha(0.2f, 0).setScale(0.25f, 0)
+                        .setColor(0, 0, 0)
+                        .setSpin((0.1f * (float) ((random.nextDouble() - 0.5D) * 2)))
+                        .setLifetime(60)
+                        .spawn(level, worldPosition.getX() + pos.x(), worldPosition.getY() + pos.y(), worldPosition.getZ() + pos.z());
             }
         }
     }

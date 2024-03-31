@@ -85,6 +85,7 @@ import net.minecraft.commands.synchronization.ArgumentTypeInfos;
 import net.minecraft.commands.synchronization.SingletonArgumentInfo;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.BlockSource;
+import net.minecraft.core.Direction;
 import net.minecraft.core.dispenser.OptionalDispenseItemBehavior;
 import net.minecraft.core.particles.ParticleType;
 import net.minecraft.core.registries.Registries;
@@ -711,12 +712,12 @@ public class WizardsReborn {
     public static final RegistryObject<Block> ALCHEMY_MACHINE = BLOCKS.register("alchemy_machine", () -> new AlchemyMachineBlock(BlockBehaviour.Properties.copy(POLISHED_WISESTONE.get())));
     public static final RegistryObject<Block> ALCHEMY_BOILER = BLOCKS.register("alchemy_boiler", () -> new AlchemyBoilerBlock(BlockBehaviour.Properties.copy(POLISHED_WISESTONE.get())));
     public static final RegistryObject<Block> ARCANE_CENSER = BLOCKS.register("arcane_censer", () -> new ArcaneCenserBlock(BlockBehaviour.Properties.copy(POLISHED_WISESTONE.get())));
-    public static final RegistryObject<Block> INNOCENT_PEDESTAL = BLOCKS.register("innocent_pedestal", () -> new ArcanePedestalBlock(BlockBehaviour.Properties.copy(INNOCENT_WOOD_PLANKS.get())));
-    public static final RegistryObject<Block> INNOCENT_HOVERING_TOME_STAND = BLOCKS.register("innocent_hovering_tome_stand", () -> new HoveringTomeStandBlock(BlockBehaviour.Properties.copy(INNOCENT_WOOD_PLANKS.get())));
 
     public static final RegistryObject<Block> LIGHT_EMITTER = BLOCKS.register("light_emitter", () -> new LightEmitterBlock(BlockBehaviour.Properties.copy(POLISHED_WISESTONE.get())));
     public static final RegistryObject<Block> LIGHT_TRANSFER_LENS = BLOCKS.register("light_transfer_lens", () -> new LightTransferLensBlock(BlockBehaviour.Properties.copy(POLISHED_WISESTONE.get())));
     public static final RegistryObject<Block> RUNIC_PEDESTAL = BLOCKS.register("runic_pedestal", () -> new RunicPedestalBlock(BlockBehaviour.Properties.copy(POLISHED_WISESTONE.get())));
+    public static final RegistryObject<Block> INNOCENT_PEDESTAL = BLOCKS.register("innocent_pedestal", () -> new ArcanePedestalBlock(BlockBehaviour.Properties.copy(INNOCENT_WOOD_PLANKS.get())));
+    public static final RegistryObject<Block> INNOCENT_HOVERING_TOME_STAND = BLOCKS.register("innocent_hovering_tome_stand", () -> new HoveringTomeStandBlock(BlockBehaviour.Properties.copy(INNOCENT_WOOD_PLANKS.get())));
 
     public static final RegistryObject<Block> ARCANE_LEVER = BLOCKS.register("arcane_lever", () -> new WaterloggableLeverBlock(BlockBehaviour.Properties.copy(Blocks.LEVER)));
     public static final RegistryObject<Block> REDSTONE_SENSOR = BLOCKS.register("redstone_sensor", () -> new RedstoneSensorBlock(BlockBehaviour.Properties.copy(ARCANE_WOOD_PLANKS.get())));
@@ -756,6 +757,11 @@ public class WizardsReborn {
     public static final RegistryObject<Block> CREATIVE_LIGHT_STORAGE = BLOCKS.register("creative_light_storage", () -> new CreativeLightStorageBlock(BlockBehaviour.Properties.copy(ARCANE_WOOD_PLANKS.get())));
     public static final RegistryObject<Block> CREATIVE_FLUID_STORAGE = BLOCKS.register("creative_fluid_storage", () -> new CreativeFluidStorageBlock(BlockBehaviour.Properties.copy(POLISHED_WISESTONE.get())));
     public static final RegistryObject<Block> CREATIVE_STEAM_STORAGE = BLOCKS.register("creative_steam_storage", () -> new CreativeSteamStorageBlock(BlockBehaviour.Properties.copy(POLISHED_WISESTONE.get())));
+
+    public static final RegistryObject<Block> ARCANE_SALT_TORCH = BLOCKS.register("arcane_salt_torch", () -> new SaltTorchBlock(BlockBehaviour.Properties.copy(Blocks.TORCH).lightLevel((state) -> 15).mapColor(MapColor.PODZOL).sound(ARCANE_WOOD_SOUNDS)));
+    public static final RegistryObject<Block> ARCANE_SALT_WALL_TORCH = BLOCKS.register("arcane_salt_wall_torch", () -> new SaltWallTorchBlock(BlockBehaviour.Properties.copy(Blocks.TORCH).lightLevel((state) -> 15).mapColor(MapColor.PODZOL).sound(ARCANE_WOOD_SOUNDS)));
+    public static final RegistryObject<Block> INNOCENT_SALT_TORCH = BLOCKS.register("innocent_salt_torch", () -> new SaltTorchBlock(BlockBehaviour.Properties.copy(Blocks.WALL_TORCH).lightLevel((state) -> 15).mapColor(MapColor.TERRACOTTA_GRAY).sound(INNOCENT_WOOD_SOUNDS)));
+    public static final RegistryObject<Block> INNOCENT_SALT_WALL_TORCH = BLOCKS.register("innocent_salt_wall_torch", () -> new SaltWallTorchBlock(BlockBehaviour.Properties.copy(Blocks.WALL_TORCH).lightLevel((state) -> 15).mapColor(MapColor.TERRACOTTA_GRAY).sound(INNOCENT_WOOD_SOUNDS)));
 
     public static final RegistryObject<Block> ALCHEMY_GLASS = BLOCKS.register("alchemy_glass", () -> new TintedGlassBlock(BlockBehaviour.Properties.copy(Blocks.TINTED_GLASS).mapColor(MapColor.COLOR_LIGHT_GRAY).noOcclusion()));
 
@@ -997,12 +1003,12 @@ public class WizardsReborn {
     public static final RegistryObject<Item> ALCHEMY_MACHINE_ITEM = ITEMS.register("alchemy_machine", () -> new BlockItem(ALCHEMY_MACHINE.get(), new Item.Properties()));
     public static final RegistryObject<Item> ALCHEMY_BOILER_ITEM = ITEMS.register("alchemy_boiler", () -> new BlockItem(ALCHEMY_BOILER.get(), new Item.Properties()));
     public static final RegistryObject<Item> ARCANE_CENSER_ITEM = ITEMS.register("arcane_censer", () -> new BlockItem(ARCANE_CENSER.get(), new Item.Properties()));
-    public static final RegistryObject<Item> INNOCENT_PEDESTAL_ITEM = ITEMS.register("innocent_pedestal", () -> new BlockItem(INNOCENT_PEDESTAL.get(), new Item.Properties()));
-    public static final RegistryObject<Item> INNOCENT_HOVERING_TOME_STAND_ITEM = ITEMS.register("innocent_hovering_tome_stand", () -> new BlockItem(INNOCENT_HOVERING_TOME_STAND.get(), new Item.Properties()));
 
     public static final RegistryObject<Item> LIGHT_EMITTER_ITEM = ITEMS.register("light_emitter", () -> new BlockItem(LIGHT_EMITTER.get(), new Item.Properties()));
     public static final RegistryObject<Item> LIGHT_TRANSFER_LENS_ITEM = ITEMS.register("light_transfer_lens", () -> new BlockItem(LIGHT_TRANSFER_LENS.get(), new Item.Properties()));
     public static final RegistryObject<Item> RUNIC_PEDESTAL_ITEM = ITEMS.register("runic_pedestal", () -> new BlockItem(RUNIC_PEDESTAL.get(), new Item.Properties()));
+    public static final RegistryObject<Item> INNOCENT_PEDESTAL_ITEM = ITEMS.register("innocent_pedestal", () -> new BlockItem(INNOCENT_PEDESTAL.get(), new Item.Properties()));
+    public static final RegistryObject<Item> INNOCENT_HOVERING_TOME_STAND_ITEM = ITEMS.register("innocent_hovering_tome_stand", () -> new BlockItem(INNOCENT_HOVERING_TOME_STAND.get(), new Item.Properties()));
 
     public static final RegistryObject<Item> ARCANE_LEVER_ITEM = ITEMS.register("arcane_lever", () -> new BlockItem(ARCANE_LEVER.get(), new Item.Properties()));
     public static final RegistryObject<Item> REDSTONE_SENSOR_ITEM = ITEMS.register("redstone_sensor", () -> new BlockItem(REDSTONE_SENSOR.get(), new Item.Properties()));
@@ -1042,6 +1048,9 @@ public class WizardsReborn {
     public static final RegistryObject<Item> CREATIVE_LIGHT_STORAGE_ITEM = ITEMS.register("creative_light_storage", () -> new BlockItem(CREATIVE_LIGHT_STORAGE.get(), new Item.Properties()));
     public static final RegistryObject<Item> CREATIVE_FLUID_STORAGE_ITEM = ITEMS.register("creative_fluid_storage", () -> new BlockItem(CREATIVE_FLUID_STORAGE.get(), new Item.Properties()));
     public static final RegistryObject<Item> CREATIVE_STEAM_STORAGE_ITEM = ITEMS.register("creative_steam_storage", () -> new BlockItem(CREATIVE_STEAM_STORAGE.get(), new Item.Properties()));
+
+    public static final RegistryObject<Item> ARCANE_SALT_TORCH_ITEM = ITEMS.register("arcane_salt_torch", () -> new StandingAndWallBlockItem(ARCANE_SALT_TORCH.get(), ARCANE_SALT_WALL_TORCH.get(), new Item.Properties(), Direction.DOWN));
+    public static final RegistryObject<Item> INNOCENT_SALT_TORCH_ITEM = ITEMS.register("innocent_salt_torch", () -> new StandingAndWallBlockItem(INNOCENT_SALT_TORCH.get(), INNOCENT_SALT_WALL_TORCH.get(), new Item.Properties(), Direction.DOWN));
 
     public static final RegistryObject<Item> ALCHEMY_GLASS_ITEM = ITEMS.register("alchemy_glass", () -> new BlockItem(ALCHEMY_GLASS.get(), new Item.Properties()));
     public static final RegistryObject<Item> ALCHEMY_VIAL = ITEMS.register("alchemy_vial", () -> new VialItem(new Item.Properties(), 3));
@@ -1185,6 +1194,8 @@ public class WizardsReborn {
     public static RegistryObject<BlockEntityType<CreativeLightStorageTileEntity>> CREATIVE_LIGHT_STORAGE_TILE_ENTITY = TILE_ENTITIES.register("creative_light_storage", () -> BlockEntityType.Builder.of(CreativeLightStorageTileEntity::new, CREATIVE_LIGHT_STORAGE.get()).build(null));
     public static RegistryObject<BlockEntityType<CreativeFluidStorageTileEntity>> CREATIVE_FLUID_STORAGE_TILE_ENTITY = TILE_ENTITIES.register("creative_fluid_storage", () -> BlockEntityType.Builder.of(CreativeFluidStorageTileEntity::new, CREATIVE_FLUID_STORAGE.get()).build(null));
     public static RegistryObject<BlockEntityType<CreativeSteamStorageTileEntity>> CREATIVE_STEAM_STORAGE_TILE_ENTITY = TILE_ENTITIES.register("creative_steam_storage", () -> BlockEntityType.Builder.of(CreativeSteamStorageTileEntity::new, CREATIVE_STEAM_STORAGE.get()).build(null));
+
+    public static RegistryObject<BlockEntityType<SaltTorchTileEntity>> SALT_TORCH = TILE_ENTITIES.register("salt_torch", () -> BlockEntityType.Builder.of(SaltTorchTileEntity::new, ARCANE_SALT_TORCH.get(), ARCANE_SALT_WALL_TORCH.get(), INNOCENT_SALT_TORCH.get(), INNOCENT_SALT_WALL_TORCH.get()).build(null));
 
     //ENTITIES
     public static final RegistryObject<EntityType<CustomBoatEntity>> BOAT = ENTITIES.register("boat", () -> EntityType.Builder.<CustomBoatEntity>of(CustomBoatEntity::new, MobCategory.MISC).sized(1.375f, 0.5625f).build(new ResourceLocation(MOD_ID, "arcane_wood_boat").toString()));
