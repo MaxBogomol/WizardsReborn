@@ -759,11 +759,14 @@ public class WizardsReborn {
     public static final RegistryObject<Block> CREATIVE_STEAM_STORAGE = BLOCKS.register("creative_steam_storage", () -> new CreativeSteamStorageBlock(BlockBehaviour.Properties.copy(POLISHED_WISESTONE.get())));
 
     public static final RegistryObject<Block> ARCANE_SALT_TORCH = BLOCKS.register("arcane_salt_torch", () -> new SaltTorchBlock(BlockBehaviour.Properties.copy(Blocks.TORCH).lightLevel((state) -> 15).mapColor(MapColor.PODZOL).sound(ARCANE_WOOD_SOUNDS)));
-    public static final RegistryObject<Block> ARCANE_SALT_WALL_TORCH = BLOCKS.register("arcane_salt_wall_torch", () -> new SaltWallTorchBlock(BlockBehaviour.Properties.copy(Blocks.TORCH).lightLevel((state) -> 15).mapColor(MapColor.PODZOL).sound(ARCANE_WOOD_SOUNDS)));
-    public static final RegistryObject<Block> INNOCENT_SALT_TORCH = BLOCKS.register("innocent_salt_torch", () -> new SaltTorchBlock(BlockBehaviour.Properties.copy(Blocks.WALL_TORCH).lightLevel((state) -> 15).mapColor(MapColor.TERRACOTTA_GRAY).sound(INNOCENT_WOOD_SOUNDS)));
+    public static final RegistryObject<Block> ARCANE_SALT_WALL_TORCH = BLOCKS.register("arcane_salt_wall_torch", () -> new SaltWallTorchBlock(BlockBehaviour.Properties.copy(Blocks.WALL_TORCH).lightLevel((state) -> 15).mapColor(MapColor.PODZOL).sound(ARCANE_WOOD_SOUNDS)));
+    public static final RegistryObject<Block> INNOCENT_SALT_TORCH = BLOCKS.register("innocent_salt_torch", () -> new SaltTorchBlock(BlockBehaviour.Properties.copy(Blocks.TORCH).lightLevel((state) -> 15).mapColor(MapColor.TERRACOTTA_GRAY).sound(INNOCENT_WOOD_SOUNDS)));
     public static final RegistryObject<Block> INNOCENT_SALT_WALL_TORCH = BLOCKS.register("innocent_salt_wall_torch", () -> new SaltWallTorchBlock(BlockBehaviour.Properties.copy(Blocks.WALL_TORCH).lightLevel((state) -> 15).mapColor(MapColor.TERRACOTTA_GRAY).sound(INNOCENT_WOOD_SOUNDS)));
-    public static final RegistryObject<Block> WISESTONE_SALT_TORCH = BLOCKS.register("wisestone_salt_torch", () -> new SaltTorchBlock(BlockBehaviour.Properties.copy(Blocks.WALL_TORCH).lightLevel((state) -> 15).mapColor(MapColor.TERRACOTTA_BLACK).sound(POLISHED_WISESTONE_SOUNDS)));
+    public static final RegistryObject<Block> WISESTONE_SALT_TORCH = BLOCKS.register("wisestone_salt_torch", () -> new SaltTorchBlock(BlockBehaviour.Properties.copy(Blocks.TORCH).lightLevel((state) -> 15).mapColor(MapColor.TERRACOTTA_BLACK).sound(POLISHED_WISESTONE_SOUNDS)));
     public static final RegistryObject<Block> WISESTONE_SALT_WALL_TORCH = BLOCKS.register("wisestone_salt_wall_torch", () -> new SaltWallTorchBlock(BlockBehaviour.Properties.copy(Blocks.WALL_TORCH).lightLevel((state) -> 15).mapColor(MapColor.TERRACOTTA_BLACK).sound(POLISHED_WISESTONE_SOUNDS)));
+    public static final RegistryObject<Block> ARCANE_SALT_LANTERN = BLOCKS.register("arcane_salt_lantern", () -> new SaltLanternBlock(BlockBehaviour.Properties.copy(Blocks.LANTERN).lightLevel((state) -> 15).mapColor(MapColor.PODZOL).sound(ARCANE_WOOD_SOUNDS)));
+    public static final RegistryObject<Block> INNOCENT_SALT_LANTERN = BLOCKS.register("innocent_salt_lantern", () -> new SaltLanternBlock(BlockBehaviour.Properties.copy(Blocks.LANTERN).lightLevel((state) -> 15).mapColor(MapColor.TERRACOTTA_GRAY).sound(INNOCENT_WOOD_SOUNDS)));
+    public static final RegistryObject<Block> WISESTONE_SALT_LANTERN = BLOCKS.register("wisestone_salt_lantern", () -> new SaltLanternBlock(BlockBehaviour.Properties.copy(Blocks.LANTERN).lightLevel((state) -> 15).mapColor(MapColor.TERRACOTTA_BLACK).sound(POLISHED_WISESTONE_SOUNDS)));
 
     public static final RegistryObject<Block> ALCHEMY_GLASS = BLOCKS.register("alchemy_glass", () -> new TintedGlassBlock(BlockBehaviour.Properties.copy(Blocks.TINTED_GLASS).mapColor(MapColor.COLOR_LIGHT_GRAY).noOcclusion()));
 
@@ -1054,6 +1057,9 @@ public class WizardsReborn {
     public static final RegistryObject<Item> ARCANE_SALT_TORCH_ITEM = ITEMS.register("arcane_salt_torch", () -> new StandingAndWallBlockItem(ARCANE_SALT_TORCH.get(), ARCANE_SALT_WALL_TORCH.get(), new Item.Properties(), Direction.DOWN));
     public static final RegistryObject<Item> INNOCENT_SALT_TORCH_ITEM = ITEMS.register("innocent_salt_torch", () -> new StandingAndWallBlockItem(INNOCENT_SALT_TORCH.get(), INNOCENT_SALT_WALL_TORCH.get(), new Item.Properties(), Direction.DOWN));
     public static final RegistryObject<Item> WISESTONE_SALT_TORCH_ITEM = ITEMS.register("wisestone_salt_torch", () -> new StandingAndWallBlockItem(WISESTONE_SALT_TORCH.get(), WISESTONE_SALT_WALL_TORCH.get(), new Item.Properties(), Direction.DOWN));
+    public static final RegistryObject<Item> ARCANE_SALT_LANTERN_ITEM = ITEMS.register("arcane_salt_lantern", () -> new BlockItem(ARCANE_SALT_LANTERN.get(), new Item.Properties()));
+    public static final RegistryObject<Item> INNOCENT_SALT_LANTERN_ITEM = ITEMS.register("innocent_salt_lantern", () -> new BlockItem(INNOCENT_SALT_LANTERN.get(), new Item.Properties()));
+    public static final RegistryObject<Item> WISESTONE_SALT_LANTERN_ITEM = ITEMS.register("wisestone_salt_lantern", () -> new BlockItem(WISESTONE_SALT_LANTERN.get(), new Item.Properties()));
 
     public static final RegistryObject<Item> ALCHEMY_GLASS_ITEM = ITEMS.register("alchemy_glass", () -> new BlockItem(ALCHEMY_GLASS.get(), new Item.Properties()));
     public static final RegistryObject<Item> ALCHEMY_VIAL = ITEMS.register("alchemy_vial", () -> new VialItem(new Item.Properties(), 3));
@@ -1199,6 +1205,7 @@ public class WizardsReborn {
     public static RegistryObject<BlockEntityType<CreativeSteamStorageTileEntity>> CREATIVE_STEAM_STORAGE_TILE_ENTITY = TILE_ENTITIES.register("creative_steam_storage", () -> BlockEntityType.Builder.of(CreativeSteamStorageTileEntity::new, CREATIVE_STEAM_STORAGE.get()).build(null));
 
     public static RegistryObject<BlockEntityType<SaltTorchTileEntity>> SALT_TORCH = TILE_ENTITIES.register("salt_torch", () -> BlockEntityType.Builder.of(SaltTorchTileEntity::new, ARCANE_SALT_TORCH.get(), ARCANE_SALT_WALL_TORCH.get(), INNOCENT_SALT_TORCH.get(), INNOCENT_SALT_WALL_TORCH.get(), WISESTONE_SALT_TORCH.get(), WISESTONE_SALT_WALL_TORCH.get()).build(null));
+    public static RegistryObject<BlockEntityType<SaltLanternTileEntity>> SALT_LANTERN = TILE_ENTITIES.register("salt_lantern", () -> BlockEntityType.Builder.of(SaltLanternTileEntity::new, ARCANE_SALT_LANTERN.get(), INNOCENT_SALT_LANTERN.get(), WISESTONE_SALT_LANTERN.get()).build(null));
 
     //ENTITIES
     public static final RegistryObject<EntityType<CustomBoatEntity>> BOAT = ENTITIES.register("boat", () -> EntityType.Builder.<CustomBoatEntity>of(CustomBoatEntity::new, MobCategory.MISC).sized(1.375f, 0.5625f).build(new ResourceLocation(MOD_ID, "arcane_wood_boat").toString()));

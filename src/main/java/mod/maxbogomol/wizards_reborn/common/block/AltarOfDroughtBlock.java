@@ -61,7 +61,6 @@ public class AltarOfDroughtBlock extends HorizontalDirectionalBlock implements E
             Block.box(4, 12, 10, 12, 14, 12),
             Block.box(4, 12, 4, 6, 14, 12),
             Block.box(4, 12, 4, 12, 14, 6)
-
     ).reduce((v1, v2) -> Shapes.join(v1, v2, BooleanOp.OR)).get();
 
     public AltarOfDroughtBlock(Properties properties) {

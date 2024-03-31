@@ -1,0 +1,10 @@
+{
+  "variants": {
+    "hanging=false": {
+      "model": "wizards_reborn:block/wisestone_salt_lantern"
+    },
+    "hanging=true": {
+      "model": "wizards_reborn:block/wisestone_salt_hanging_lantern"
+    }
+  }
+}
