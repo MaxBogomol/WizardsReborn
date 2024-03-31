@@ -293,6 +293,13 @@
   "block.wizards_reborn.creative_fluid_storage": "Креативное жидкостное хранилище",
   "block.wizards_reborn.creative_steam_storage": "Креативное паровое хранилище",
 
+  "block.wizards_reborn.arcane_salt_torch": "Аркановый солевой факел",
+  "block.wizards_reborn.arcane_salt_wall_torch": "Аркановый солевой настенный факел",
+  "block.wizards_reborn.innocent_salt_torch": "Невинный солевой факел",
+  "block.wizards_reborn.innocent_salt_wall_torch": "Невинный солевой настенный факел",
+  "block.wizards_reborn.wisestone_salt_torch": "Мудро-каменный солевой факел",
+  "block.wizards_reborn.wisestone_salt_wall_torch": "Мудро-каменный солевой настенный факел",
+
   "block.wizards_reborn.alchemy_glass": "Алхимическое стекло",
   "item.wizards_reborn.alchemy_vial": "Алхимический флакон",
   "item.wizards_reborn.alchemy_flask": "Алхимическая колба",

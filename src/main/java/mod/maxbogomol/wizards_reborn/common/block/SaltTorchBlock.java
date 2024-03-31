@@ -83,6 +83,8 @@ public class SaltTorchBlock extends Block implements EntityBlock, SimpleWaterlog
         SaltTorchTileEntity tile = (SaltTorchTileEntity) world.getBlockEntity(pos);
         ItemStack stack = player.getItemInHand(hand).copy();
 
+        int invSize = tile.getInventorySize();
+
         if (stack.getItem() instanceof WissenWandItem) {
             if (WissenWandItem.getMode(stack) != 4) {
                 world.updateNeighbourForOutputSignal(pos, this);
@@ -91,38 +93,42 @@ public class SaltTorchBlock extends Block implements EntityBlock, SimpleWaterlog
             }
         }
 
-        if ((!stack.isEmpty()) && (tile.getItemHandler().getItem(0).isEmpty())) {
-            if (stack.is(WizardsReborn.ARCANE_LUMOS_ITEM_TAG)) {
-                if (stack.getCount() > 1) {
-                    player.getItemInHand(hand).setCount(stack.getCount() - 1);
-                    stack.setCount(1);
-                    tile.getItemHandler().setItem(0, stack);
+        if (!player.isShiftKeyDown()) {
+            if (invSize < 2) {
+                int slot = invSize;
+                if (stack.is(WizardsReborn.ARCANE_LUMOS_ITEM_TAG)) {
+                    if ((!stack.isEmpty()) && (tile.getItemHandler().getItem(slot).isEmpty())) {
+                        if (stack.getCount() > 1) {
+                            player.getItemInHand(hand).setCount(stack.getCount() - 1);
+                            stack.setCount(1);
+                            tile.getItemHandler().setItem(slot, stack);
+                        } else {
+                            tile.getItemHandler().setItem(slot, stack);
+                            player.getInventory().removeItem(player.getItemInHand(hand));
+                        }
+                        world.updateNeighbourForOutputSignal(pos, this);
+                        PacketUtils.SUpdateTileEntityPacket(tile);
+                        world.playSound(null, pos, WizardsReborn.PEDESTAL_INSERT_SOUND.get(), SoundSource.BLOCKS, 1.0f, 1.0f);
+                        return InteractionResult.SUCCESS;
+                    }
+                }
+            }
+        } else {
+            if (invSize > 0) {
+                int slot = invSize - 1;
+                if (!tile.getItemHandler().getItem(slot).isEmpty()) {
+                    if (player.getInventory().getSlotWithRemainingSpace(tile.getItemHandler().getItem(slot)) != -1 || player.getInventory().getFreeSlot() > -1) {
+                        player.getInventory().add(tile.getItemHandler().getItem(slot).copy());
+                    } else {
+                        world.addFreshEntity(new ItemEntity(world, pos.getX() + 0.5F, pos.getY() + 1.0F, pos.getZ() + 0.5F, tile.getItemHandler().getItem(slot).copy()));
+                    }
+                    tile.getItemHandler().removeItem(slot, 1);
                     world.updateNeighbourForOutputSignal(pos, this);
                     PacketUtils.SUpdateTileEntityPacket(tile);
-                    world.playSound(null, pos, WizardsReborn.PEDESTAL_INSERT_SOUND.get(), SoundSource.BLOCKS, 1.0f, 1.0f);
-                    return InteractionResult.SUCCESS;
-                } else {
-                    tile.getItemHandler().setItem(0, stack);
-                    player.getInventory().removeItem(player.getItemInHand(hand));
-                    world.updateNeighbourForOutputSignal(pos, this);
-                    PacketUtils.SUpdateTileEntityPacket(tile);
-                    world.playSound(null, pos, WizardsReborn.PEDESTAL_INSERT_SOUND.get(), SoundSource.BLOCKS, 1.0f, 1.0f);
+                    world.playSound(null, pos, WizardsReborn.PEDESTAL_REMOVE_SOUND.get(), SoundSource.BLOCKS, 1.0f, 1.0f);
                     return InteractionResult.SUCCESS;
                 }
             }
-        }
-
-        if (!tile.getItemHandler().getItem(0).isEmpty()) {
-            if (player.getInventory().getSlotWithRemainingSpace(tile.getItemHandler().getItem(0)) != -1 || player.getInventory().getFreeSlot() > -1) {
-                player.getInventory().add(tile.getItemHandler().getItem(0).copy());
-            } else {
-                world.addFreshEntity(new ItemEntity(world, pos.getX() + 0.5F, pos.getY() + 1.0F, pos.getZ() + 0.5F, tile.getItemHandler().getItem(0).copy()));
-            }
-            tile.getItemHandler().removeItem(0, 1);
-            world.updateNeighbourForOutputSignal(pos, this);
-            PacketUtils.SUpdateTileEntityPacket(tile);
-            world.playSound(null, pos, WizardsReborn.PEDESTAL_REMOVE_SOUND.get(), SoundSource.BLOCKS, 1.0f, 1.0f);
-            return InteractionResult.SUCCESS;
         }
 
         return InteractionResult.PASS;

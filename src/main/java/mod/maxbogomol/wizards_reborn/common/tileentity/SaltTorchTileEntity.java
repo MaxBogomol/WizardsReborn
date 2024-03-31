@@ -40,8 +40,10 @@ public class SaltTorchTileEntity extends ExposedTileSimpleInventory implements T
     @Override
     public void tick() {
         if (level.isClientSide()) {
+            Color colorF = colorFirst;
             Color color = colorSecond;
             Vec3 pos = new Vec3(0.5f, 0.6875f, 0.5f);
+            boolean isCosmic = false;
 
             if (getBlockState().getBlock() instanceof SaltWallTorchBlock) {
                 BlockPos blockPos = new BlockPos(0, 0, 0).relative(getBlockState().getValue(SaltWallTorchBlock.FACING));
@@ -56,23 +58,20 @@ public class SaltTorchTileEntity extends ExposedTileSimpleInventory implements T
                         color = ArcaneLumosBlock.getColor(lumos.color);
 
                         if (lumos.color == ArcaneLumosBlock.Colors.COSMIC) {
-                            if (random.nextFloat() < 0.1) {
-                                Particles.create(WizardsReborn.SPARKLE_PARTICLE)
-                                        .addVelocity(((random.nextDouble() - 0.5D) / 150), ((random.nextDouble() - 0.5D) / 150) + 0.025f, ((random.nextDouble() - 0.5D) / 150))
-                                        .setAlpha(0.75f, 0).setScale(0.1f, 0)
-                                        .setColor((float) color.getRed() / 255, (float) color.getGreen()/ 255, (float) color.getBlue() / 255)
-                                        .setLifetime(10)
-                                        .setSpin((0.1f * (float) ((random.nextDouble() - 0.5D) * 2)))
-                                        .spawn(level, worldPosition.getX() + pos.x() + ((random.nextDouble() - 0.5D) / 3), worldPosition.getY() + pos.y() + ((random.nextDouble() - 0.5D) / 3), worldPosition.getZ() + pos.z() + ((random.nextDouble() - 0.5D) / 3));
-                            }
-                            if (random.nextFloat() < 0.1) {
-                                Particles.create(WizardsReborn.SPARKLE_PARTICLE)
-                                        .addVelocity(((random.nextDouble() - 0.5D) / 150), ((random.nextDouble() - 0.5D) / 150) + 0.025f, ((random.nextDouble() - 0.5D) / 150))
-                                        .setAlpha(0.75f, 0).setScale(0.1f, 0)
-                                        .setColor(1f, 1f, 1f)
-                                        .setLifetime(10)
-                                        .spawn(level, worldPosition.getX() + pos.x() + ((random.nextDouble() - 0.5D) / 3), worldPosition.getY() + pos.y() + ((random.nextDouble() - 0.5D) / 3), worldPosition.getZ() + pos.z() + ((random.nextDouble() - 0.5D) / 3));
-                            }
+                            isCosmic = true;
+                        }
+                    }
+                }
+            }
+            if (!getItemHandler().getItem(1).isEmpty()) {
+                if (getItemHandler().getItem(1).getItem() instanceof BlockItem) {
+                    BlockItem blockItem = (BlockItem) getItemHandler().getItem(1).getItem();
+                    if (blockItem.getBlock() instanceof ArcaneLumosBlock) {
+                        ArcaneLumosBlock lumos = (ArcaneLumosBlock) blockItem.getBlock();
+                        colorF = ArcaneLumosBlock.getColor(lumos.color);
+
+                        if (lumos.color == ArcaneLumosBlock.Colors.COSMIC) {
+                            isCosmic = true;
                         }
                     }
                 }
@@ -81,7 +80,7 @@ public class SaltTorchTileEntity extends ExposedTileSimpleInventory implements T
             if (random.nextFloat() < 0.5) {
                 Particles.create(WizardsReborn.SPARKLE_PARTICLE)
                         .setAlpha(0.25f, 0).setScale(0.35f, 0)
-                        .setColor(colorFirst.getRed() / 255f, colorFirst.getGreen()/ 255f, colorFirst.getBlue() / 255f, color.getRed() / 255f, color.getGreen()/ 255f, color.getBlue() / 255f)
+                        .setColor(colorF.getRed() / 255f, colorF.getGreen()/ 255f, colorF.getBlue() / 255f, color.getRed() / 255f, color.getGreen()/ 255f, color.getBlue() / 255f)
                         .setLifetime(30)
                         .spawn(level, worldPosition.getX() + pos.x(), worldPosition.getY() + pos.y(), worldPosition.getZ() + pos.z());
             }
@@ -89,7 +88,7 @@ public class SaltTorchTileEntity extends ExposedTileSimpleInventory implements T
                 Particles.create(WizardsReborn.SPARKLE_PARTICLE)
                         .addVelocity(((random.nextDouble() - 0.5D) / 300), ((random.nextDouble() - 0.5D) / 150) + 0.015f, ((random.nextDouble() - 0.5D) / 300))
                         .setAlpha(0.35f, 0).setScale(0.25f, 0)
-                        .setColor(colorFirst.getRed() / 255f, colorFirst.getGreen()/ 255f, colorFirst.getBlue() / 255f, color.getRed() / 255f, color.getGreen()/ 255f, color.getBlue() / 255f)
+                        .setColor(colorF.getRed() / 255f, colorF.getGreen()/ 255f, colorF.getBlue() / 255f, color.getRed() / 255f, color.getGreen()/ 255f, color.getBlue() / 255f)
                         .setLifetime(60)
                         .spawn(level, worldPosition.getX() + pos.x(), worldPosition.getY() + pos.y(), worldPosition.getZ() + pos.z());
             }
@@ -97,7 +96,7 @@ public class SaltTorchTileEntity extends ExposedTileSimpleInventory implements T
                 Particles.create(WizardsReborn.WISP_PARTICLE)
                         .addVelocity(((random.nextDouble() - 0.5D) / 150), ((random.nextDouble() - 0.5D) / 150) + 0.03f, ((random.nextDouble() - 0.5D) / 150))
                         .setAlpha(0.35f, 0).setScale(0.15f, 0)
-                        .setColor(colorFirst.getRed() / 255f, colorFirst.getGreen()/ 255f, colorFirst.getBlue() / 255f, color.getRed() / 255f, color.getGreen()/ 255f, color.getBlue() / 255f)
+                        .setColor(colorF.getRed() / 255f, colorF.getGreen()/ 255f, colorF.getBlue() / 255f, color.getRed() / 255f, color.getGreen()/ 255f, color.getBlue() / 255f)
                         .setLifetime(30)
                         .spawn(level, worldPosition.getX() + pos.x(), worldPosition.getY() + pos.y(), worldPosition.getZ() + pos.z());
             }
@@ -110,12 +109,32 @@ public class SaltTorchTileEntity extends ExposedTileSimpleInventory implements T
                         .setLifetime(60)
                         .spawn(level, worldPosition.getX() + pos.x(), worldPosition.getY() + pos.y(), worldPosition.getZ() + pos.z());
             }
+
+            if (isCosmic) {
+                if (random.nextFloat() < 0.1) {
+                    Particles.create(WizardsReborn.SPARKLE_PARTICLE)
+                            .addVelocity(((random.nextDouble() - 0.5D) / 150), ((random.nextDouble() - 0.5D) / 150) + 0.025f, ((random.nextDouble() - 0.5D) / 150))
+                            .setAlpha(0.75f, 0).setScale(0.1f, 0)
+                            .setColor((float) color.getRed() / 255, (float) color.getGreen()/ 255, (float) color.getBlue() / 255)
+                            .setLifetime(10)
+                            .setSpin((0.1f * (float) ((random.nextDouble() - 0.5D) * 2)))
+                            .spawn(level, worldPosition.getX() + pos.x() + ((random.nextDouble() - 0.5D) / 3), worldPosition.getY() + pos.y() + ((random.nextDouble() - 0.5D) / 3), worldPosition.getZ() + pos.z() + ((random.nextDouble() - 0.5D) / 3));
+                }
+                if (random.nextFloat() < 0.1) {
+                    Particles.create(WizardsReborn.SPARKLE_PARTICLE)
+                            .addVelocity(((random.nextDouble() - 0.5D) / 150), ((random.nextDouble() - 0.5D) / 150) + 0.025f, ((random.nextDouble() - 0.5D) / 150))
+                            .setAlpha(0.75f, 0).setScale(0.1f, 0)
+                            .setColor(1f, 1f, 1f)
+                            .setLifetime(10)
+                            .spawn(level, worldPosition.getX() + pos.x() + ((random.nextDouble() - 0.5D) / 3), worldPosition.getY() + pos.y() + ((random.nextDouble() - 0.5D) / 3), worldPosition.getZ() + pos.z() + ((random.nextDouble() - 0.5D) / 3));
+                }
+            }
         }
     }
 
     @Override
     protected SimpleContainer createItemHandler() {
-        return new SimpleContainer(1) {
+        return new SimpleContainer(2) {
             @Override
             public int getMaxStackSize() {
                 return 1;
@@ -168,5 +187,17 @@ public class SaltTorchTileEntity extends ExposedTileSimpleInventory implements T
     @Override
     public boolean canTakeItemThroughFace(int index, @NotNull ItemStack stack, @Nullable Direction direction) {
         return true;
+    }
+
+    public int getInventorySize() {
+        int size = 0;
+
+        for (int i = 0; i < getItemHandler().getContainerSize(); i++) {
+            if (!getItemHandler().getItem(i).isEmpty()) {
+                size++;
+            }
+        }
+
+        return size;
     }
 }

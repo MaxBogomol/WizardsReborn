@@ -1,0 +1,8 @@
+{
+  "variants": {
+    "facing=east":  { "model": "wizards_reborn:block/wisestone_salt_wall_torch", "y": 90 },
+    "facing=west":  { "model": "wizards_reborn:block/wisestone_salt_wall_torch", "y": 270 },
+    "facing=south": { "model": "wizards_reborn:block/wisestone_salt_wall_torch", "y": 180 },
+    "facing=north": { "model": "wizards_reborn:block/wisestone_salt_wall_torch" }
+  }
+}

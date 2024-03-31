@@ -325,6 +325,7 @@ public class WizardsRebornItemGroup {
 
             event.accept(WizardsReborn.ARCANE_SALT_TORCH_ITEM);
             event.accept(WizardsReborn.INNOCENT_SALT_TORCH_ITEM);
+            event.accept(WizardsReborn.WISESTONE_SALT_TORCH_ITEM);
 
             event.accept(WizardsReborn.ALCHEMY_GLASS_ITEM);
             event.accept(WizardsReborn.ALCHEMY_VIAL);

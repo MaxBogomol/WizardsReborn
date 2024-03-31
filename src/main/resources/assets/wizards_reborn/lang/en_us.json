@@ -293,6 +293,13 @@
   "block.wizards_reborn.creative_fluid_storage": "Creative Fluid Storage",
   "block.wizards_reborn.creative_steam_storage": "Creative Steam Storage",
 
+  "block.wizards_reborn.arcane_salt_torch": "Arcane Salt Torch",
+  "block.wizards_reborn.arcane_salt_wall_torch": "Arcane Salt Wall Torch",
+  "block.wizards_reborn.innocent_salt_torch": "Innocent Salt Torch",
+  "block.wizards_reborn.innocent_salt_wall_torch": "Innocent Salt Wall Torch",
+  "block.wizards_reborn.wisestone_salt_torch": "Arcane Salt Torch",
+  "block.wizards_reborn.wisestone_salt_wall_torch": "Wisestone Salt Wall Torch",
+
   "block.wizards_reborn.alchemy_glass": "Alchemy Glass",
   "item.wizards_reborn.alchemy_vial": "Alchemy Vial",
   "item.wizards_reborn.alchemy_flask": "Alchemy Flask",
