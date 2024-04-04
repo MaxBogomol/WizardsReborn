@@ -18,7 +18,7 @@ public class SaltLanternTileEntity extends SaltTorchTileEntity {
     }
 
     public SaltLanternTileEntity(BlockPos pos, BlockState state) {
-        this(WizardsReborn.SALT_LANTERN.get(), pos, state);
+        this(WizardsReborn.SALT_LANTERN_TILE_ENTITY.get(), pos, state);
     }
 
     @Override
@@ -73,6 +73,7 @@ public class SaltLanternTileEntity extends SaltTorchTileEntity {
                         .setAlpha(0.35f, 0).setScale(0f, 0.35f)
                         .setColor(colorF.getRed() / 255f, colorF.getGreen()/ 255f, colorF.getBlue() / 255f, color.getRed() / 255f, color.getGreen()/ 255f, color.getBlue() / 255f)
                         .setLifetime(60)
+                        .setSpin((0.01f * (float) ((random.nextDouble() - 0.5D) * 2)))
                         .spawn(level, worldPosition.getX() + pos.x(), worldPosition.getY() + pos.y(), worldPosition.getZ() + pos.z());
             }
             if (random.nextFloat() < 0.45) {

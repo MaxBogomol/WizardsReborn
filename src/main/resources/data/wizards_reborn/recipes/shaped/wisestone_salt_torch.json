@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "X",
+    "#"
+  ],
+  "key": {
+    "#": {
+      "item": "wizards_reborn:polished_wisestone"
+    },
+    "X": {
+      "item": "wizards_reborn:nether_salt"
+    }
+  },
+  "result": {
+    "item": "wizards_reborn:wisestone_salt_torch",
+    "count": 4
+  }
+}

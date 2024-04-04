@@ -1,5 +1,7 @@
 package mod.maxbogomol.wizards_reborn.client.particle;
 
+import net.minecraft.client.Camera;
+import net.minecraft.client.Minecraft;
 import net.minecraft.core.particles.ParticleType;
 import net.minecraft.world.level.Level;
 import net.minecraftforge.registries.RegistryObject;
@@ -155,7 +157,10 @@ public class Particles {
             this.dy = Math.sin(pitch2) * yDist;
             this.dz = Math.cos(yaw2) * Math.cos(pitch2) * zDist;
 
-            world.addParticle(data, x + dx, y + dy, z + dz, vx, vy, vz);
+            Camera camera = Minecraft.getInstance().gameRenderer.getMainCamera();
+            if (camera.getPosition().distanceToSqr(x + dx, y + dy, z + dz) <= 10240.0D) {
+                world.addParticle(data, x + dx, y + dy, z + dz, vx, vy, vz);
+            }
             return this;
         }
 

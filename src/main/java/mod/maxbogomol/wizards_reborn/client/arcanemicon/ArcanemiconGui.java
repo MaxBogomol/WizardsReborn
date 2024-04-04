@@ -1,5 +1,6 @@
 package mod.maxbogomol.wizards_reborn.client.arcanemicon;
 
+import com.mojang.blaze3d.platform.InputConstants;
 import mod.maxbogomol.wizards_reborn.WizardsReborn;
 import mod.maxbogomol.wizards_reborn.client.arcanemicon.index.ChapterHistoryEntry;
 import mod.maxbogomol.wizards_reborn.common.tileentity.HoveringTomeStandTileEntity;
@@ -219,5 +220,17 @@ public class ArcanemiconGui extends Screen {
     @Override
     public boolean isPauseScreen() {
         return false;
+    }
+
+    @Override
+    public boolean keyPressed(int keyCode, int scanCode, int modifiers) {
+        InputConstants.Key mouseKey = InputConstants.getKey(keyCode, scanCode);
+
+        if (this.minecraft.options.keyInventory.isActiveAndMatches(mouseKey)) {
+            this.onClose();
+            return true;
+        }
+
+        return (super.keyPressed(keyCode, scanCode, modifiers));
     }
 }

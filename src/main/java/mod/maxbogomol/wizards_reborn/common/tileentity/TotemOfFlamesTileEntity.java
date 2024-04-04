@@ -70,6 +70,7 @@ public class TotemOfFlamesTileEntity extends ExposedTileSimpleInventory implemen
                                     .setAlpha(0.35f, 0).setScale(0.25f, 0)
                                     .setColor(color.getRed() / 255f, color.getGreen()/ 255f, color.getBlue() / 255f)
                                     .setLifetime(60)
+                                    .setSpin((0.005f * (float) ((random.nextDouble() - 0.5D) * 2)))
                                     .spawn(level, worldPosition.getX() + 0.5F, worldPosition.getY() + 0.5F, worldPosition.getZ() + 0.5F);
                         }
                         if (random.nextFloat() < 0.1) {

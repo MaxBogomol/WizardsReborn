@@ -99,6 +99,10 @@ public class WizardsRebornJei implements IModPlugin {
 
         registration.addRecipeCatalyst(new ItemStack(WizardsReborn.ALCHEMY_FURNACE_ITEM.get()), RecipeTypes.SMELTING);
         registration.addRecipeCatalyst(new ItemStack(WizardsReborn.ALCHEMY_FURNACE_ITEM.get()), RecipeTypes.FUELING);
+
+        registration.addRecipeCatalyst(new ItemStack(WizardsReborn.ARCANE_SALT_CAMPFIRE_ITEM.get()), RecipeTypes.CAMPFIRE_COOKING);
+        registration.addRecipeCatalyst(new ItemStack(WizardsReborn.INNOCENT_SALT_CAMPFIRE_ITEM.get()), RecipeTypes.CAMPFIRE_COOKING);
+        registration.addRecipeCatalyst(new ItemStack(WizardsReborn.WISESTONE_SALT_CAMPFIRE_ITEM.get()), RecipeTypes.CAMPFIRE_COOKING);
     }
 
     @Override

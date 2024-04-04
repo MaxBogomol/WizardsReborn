@@ -302,6 +302,9 @@
   "block.wizards_reborn.arcane_salt_lantern": "Arcane Salt Lantern",
   "block.wizards_reborn.innocent_salt_lantern": "Innocent Salt Lantern",
   "block.wizards_reborn.wisestone_salt_lantern": "Wisestone Salt Lantern",
+  "block.wizards_reborn.arcane_salt_campfire": "Arcane Salt Campfire",
+  "block.wizards_reborn.innocent_salt_campfire": "Innocent Salt Campfire",
+  "block.wizards_reborn.wisestone_salt_campfire": "Wisestone Salt Campfire",
 
   "block.wizards_reborn.alchemy_glass": "Alchemy Glass",
   "item.wizards_reborn.alchemy_vial": "Alchemy Vial",
@@ -573,6 +576,7 @@
 
   "config.jade.plugin_wizards_reborn.crystal_growth": "Crystal Growth",
   "config.jade.plugin_wizards_reborn.numerical": "Numerical",
+  "config.jade.plugin_wizards_reborn.salt_campfire": "Salt Campfire",
 
   "gui.wizards_reborn.menu.optifine.0": "ATTENTION! It seems you have Optifine installed",
   "gui.wizards_reborn.menu.optifine.1": "Optifine can break the render of particles in Wizard's Reborn",

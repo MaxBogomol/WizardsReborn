@@ -94,7 +94,8 @@ public class ArcanemiconChapters {
                         new BlockEntry(ARCANE_PEDESTAL_ITEM, ARCANUM_DUST_ITEM),
                         new BlockEntry(ARCANE_PEDESTAL_ITEM, new ItemStack(WizardsReborn.ARCANUM_BLOCK_ITEM.get())),
                         new BlockEntry(ARCANE_PEDESTAL_ITEM, new ItemStack(WizardsReborn.ARCANUM_ORE_ITEM.get())),
-                        new BlockEntry(ARCANE_PEDESTAL_ITEM, new ItemStack(WizardsReborn.DEEPSLATE_ARCANUM_ORE_ITEM.get()))
+                        new BlockEntry(ARCANE_PEDESTAL_ITEM, new ItemStack(WizardsReborn.DEEPSLATE_ARCANUM_ORE_ITEM.get())),
+                        new BlockEntry(ARCANE_PEDESTAL_ITEM, new ItemStack(WizardsReborn.ARCANUM_DUST_BLOCK_ITEM.get()))
                 ),
                 new CraftingTablePage(new ItemStack(WizardsReborn.ARCANUM_BLOCK_ITEM.get()),
                         ARCANUM_ITEM, ARCANUM_ITEM, ARCANUM_ITEM,
@@ -102,6 +103,12 @@ public class ArcanemiconChapters {
                         ARCANUM_ITEM, ARCANUM_ITEM, ARCANUM_ITEM
                 ),
                 new CraftingTablePage(new ItemStack(WizardsReborn.ARCANUM.get(), 9), new ItemStack(WizardsReborn.ARCANUM_BLOCK_ITEM.get())),
+                new CraftingTablePage(new ItemStack(WizardsReborn.ARCANUM_DUST_BLOCK_ITEM.get()),
+                        ARCANUM_DUST_ITEM, ARCANUM_DUST_ITEM, ARCANUM_DUST_ITEM,
+                        ARCANUM_DUST_ITEM, ARCANUM_DUST_ITEM, ARCANUM_DUST_ITEM,
+                        ARCANUM_DUST_ITEM, ARCANUM_DUST_ITEM, ARCANUM_DUST_ITEM
+                ),
+                new CraftingTablePage(new ItemStack(WizardsReborn.ARCANUM_DUST.get(), 9), new ItemStack(WizardsReborn.ARCANUM_DUST_BLOCK_ITEM.get())),
                 new CraftingTablePage(new ItemStack(WizardsReborn.ARCANUM_DUST.get(), 2), ARCANUM_ITEM),
                 new CraftingTablePage(new ItemStack(WizardsReborn.ARCANUM_DUST.get(), 3), ARCANUM_ITEM, new ItemStack(Items.REDSTONE)),
                 new CraftingTablePage(new ItemStack(WizardsReborn.ARCANEMICON.get()), new ItemStack(Items.BOOK), ARCANUM_ITEM)
@@ -2624,13 +2631,20 @@ public class ArcanemiconChapters {
         ALCHEMY_CALX = new Chapter(
                 "wizards_reborn.arcanemicon.chapter.alchemy_calx",
                 new TitledBlockPage("wizards_reborn.arcanemicon.page.alchemy_calx",
-                        new BlockEntry(WISESTONE_PEDESTAL_ITEM, ALCHEMY_CALX_ITEM)
+                        new BlockEntry(WISESTONE_PEDESTAL_ITEM, ALCHEMY_CALX_ITEM),
+                        new BlockEntry(WISESTONE_PEDESTAL_ITEM, new ItemStack(WizardsReborn.ALCHEMY_CALX_BLOCK_ITEM.get()))
                 ),
                 new AlchemyMachinePage(new ItemStack(WizardsReborn.ALCHEMY_CALX.get(), 3), FluidStack.EMPTY, false, true,
                         new FluidStack(WizardsReborn.ALCHEMY_OIL_FLUID.get(), 150), FluidStack.EMPTY, FluidStack.EMPTY,
                         new ItemStack(Items.QUARTZ), new ItemStack(Items.QUARTZ), new ItemStack(Items.CALCITE),
                         new ItemStack(Items.BONE_MEAL), new ItemStack(Items.BONE_MEAL), new ItemStack(WizardsReborn.ARCANE_LINEN_ITEM.get())
-                )
+                ),
+                new CraftingTablePage(new ItemStack(WizardsReborn.ALCHEMY_CALX_BLOCK_ITEM.get()),
+                        ALCHEMY_CALX_ITEM, ALCHEMY_CALX_ITEM, ALCHEMY_CALX_ITEM,
+                        ALCHEMY_CALX_ITEM, ALCHEMY_CALX_ITEM, ALCHEMY_CALX_ITEM,
+                        ALCHEMY_CALX_ITEM, ALCHEMY_CALX_ITEM, ALCHEMY_CALX_ITEM
+                ),
+                new CraftingTablePage(new ItemStack(WizardsReborn.ALCHEMY_CALX.get(), 9), new ItemStack(WizardsReborn.ALCHEMY_CALX_BLOCK_ITEM.get()))
         );
 
         Map<AlchemyPotion, ItemStack> vialPotions = new HashMap<AlchemyPotion, ItemStack>();
@@ -2897,7 +2911,11 @@ public class ArcanemiconChapters {
                         new BlockEntry(WISESTONE_PEDESTAL_ITEM, NATURAL_CALX_ITEM),
                         new BlockEntry(WISESTONE_PEDESTAL_ITEM, SCORCHED_CALX_ITEM),
                         new BlockEntry(WISESTONE_PEDESTAL_ITEM, DISTANT_CALX_ITEM),
-                        new BlockEntry(WISESTONE_PEDESTAL_ITEM, ENCHANTED_CALX_ITEM)
+                        new BlockEntry(WISESTONE_PEDESTAL_ITEM, ENCHANTED_CALX_ITEM),
+                        new BlockEntry(WISESTONE_PEDESTAL_ITEM, new ItemStack(WizardsReborn.NATURAL_CALX_BLOCK_ITEM.get())),
+                        new BlockEntry(WISESTONE_PEDESTAL_ITEM, new ItemStack(WizardsReborn.SCORCHED_CALX_BLOCK_ITEM.get())),
+                        new BlockEntry(WISESTONE_PEDESTAL_ITEM, new ItemStack(WizardsReborn.DISTANT_CALX_BLOCK_ITEM.get())),
+                        new BlockEntry(WISESTONE_PEDESTAL_ITEM, new ItemStack(WizardsReborn.ENCHANTED_CALX_BLOCK_ITEM.get()))
                 ),
                 new AlchemyMachinePage(new ItemStack(WizardsReborn.NATURAL_CALX.get(), 2), FluidStack.EMPTY, true, true,
                         new FluidStack(WizardsReborn.ALCHEMY_OIL_FLUID.get(), 500), new FluidStack(WizardsReborn.FLOWER_BREW_FLUID.get(), 500), FluidStack.EMPTY,
@@ -2918,7 +2936,31 @@ public class ArcanemiconChapters {
                         new FluidStack(WizardsReborn.ALCHEMY_OIL_FLUID.get(), 500), new FluidStack(WizardsReborn.WISSEN_TEA_FLUID.get(), 500), FluidStack.EMPTY,
                         ALCHEMY_CALX_ITEM, ALCHEMY_CALX_ITEM, new ItemStack(Items.ENCHANTED_BOOK),
                         new ItemStack(Items.LAPIS_LAZULI), new ItemStack(Items.LAPIS_LAZULI), new ItemStack(Items.DIAMOND)
-                )
+                ),
+                new CraftingTablePage(new ItemStack(WizardsReborn.NATURAL_CALX_BLOCK_ITEM.get()),
+                        NATURAL_CALX_ITEM, NATURAL_CALX_ITEM, NATURAL_CALX_ITEM,
+                        NATURAL_CALX_ITEM, NATURAL_CALX_ITEM, NATURAL_CALX_ITEM,
+                        NATURAL_CALX_ITEM, NATURAL_CALX_ITEM, NATURAL_CALX_ITEM
+                ),
+                new CraftingTablePage(new ItemStack(WizardsReborn.NATURAL_CALX.get(), 9), new ItemStack(WizardsReborn.NATURAL_CALX_BLOCK_ITEM.get())),
+                new CraftingTablePage(new ItemStack(WizardsReborn.SCORCHED_CALX_BLOCK_ITEM.get()),
+                        SCORCHED_CALX_ITEM, SCORCHED_CALX_ITEM, SCORCHED_CALX_ITEM,
+                        SCORCHED_CALX_ITEM, SCORCHED_CALX_ITEM, SCORCHED_CALX_ITEM,
+                        SCORCHED_CALX_ITEM, SCORCHED_CALX_ITEM, SCORCHED_CALX_ITEM
+                ),
+                new CraftingTablePage(new ItemStack(WizardsReborn.SCORCHED_CALX.get(), 9), new ItemStack(WizardsReborn.SCORCHED_CALX_BLOCK_ITEM.get())),
+                new CraftingTablePage(new ItemStack(WizardsReborn.DISTANT_CALX_BLOCK_ITEM.get()),
+                        DISTANT_CALX_ITEM, DISTANT_CALX_ITEM, DISTANT_CALX_ITEM,
+                        DISTANT_CALX_ITEM, DISTANT_CALX_ITEM, DISTANT_CALX_ITEM,
+                        DISTANT_CALX_ITEM, DISTANT_CALX_ITEM, DISTANT_CALX_ITEM
+                ),
+                new CraftingTablePage(new ItemStack(WizardsReborn.DISTANT_CALX.get(), 9), new ItemStack(WizardsReborn.DISTANT_CALX_BLOCK_ITEM.get())),
+                new CraftingTablePage(new ItemStack(WizardsReborn.ENCHANTED_CALX_BLOCK_ITEM.get()),
+                        ENCHANTED_CALX_ITEM, ENCHANTED_CALX_ITEM, ENCHANTED_CALX_ITEM,
+                        ENCHANTED_CALX_ITEM, ENCHANTED_CALX_ITEM, ENCHANTED_CALX_ITEM,
+                        ENCHANTED_CALX_ITEM, ENCHANTED_CALX_ITEM, ENCHANTED_CALX_ITEM
+                ),
+                new CraftingTablePage(new ItemStack(WizardsReborn.ENCHANTED_CALX.get(), 9), new ItemStack(WizardsReborn.ENCHANTED_CALX_BLOCK_ITEM.get()))
         );
 
         ALCHEMY_TRANSMUTATION = new Chapter(

@@ -1,6 +1,7 @@
 package mod.maxbogomol.wizards_reborn.client.gui.screen;
 
 import com.mojang.blaze3d.platform.GlStateManager;
+import com.mojang.blaze3d.platform.InputConstants;
 import com.mojang.blaze3d.systems.RenderSystem;
 import com.mojang.math.Axis;
 import mod.maxbogomol.wizards_reborn.WizardsReborn;
@@ -715,5 +716,17 @@ public class CrystalChooseScreen extends Screen {
                 spellsList.get(type).add(spell);
             }
         }
+    }
+
+    @Override
+    public boolean keyPressed(int keyCode, int scanCode, int modifiers) {
+        InputConstants.Key mouseKey = InputConstants.getKey(keyCode, scanCode);
+
+        if (this.minecraft.options.keyInventory.isActiveAndMatches(mouseKey)) {
+            this.onClose();
+            return true;
+        }
+
+        return (super.keyPressed(keyCode, scanCode, modifiers));
     }
 }

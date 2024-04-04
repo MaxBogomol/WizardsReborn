@@ -12,6 +12,7 @@ import snownee.jade.api.WailaPlugin;
 public class WizardsRebornJade implements IWailaPlugin {
     public static final ResourceLocation CRYSTAL_GROWTH = new ResourceLocation(WizardsReborn.MOD_ID,"crystal_growth");
     public static final ResourceLocation NUMERICAL = new ResourceLocation(WizardsReborn.MOD_ID,"numerical");
+    public static final ResourceLocation SALT_CAMPFIRE = new ResourceLocation(WizardsReborn.MOD_ID,"salt_campfire");
 
     @Override
     public void register(IWailaCommonRegistration registration) {
@@ -22,5 +23,6 @@ public class WizardsRebornJade implements IWailaPlugin {
     public void registerClient(IWailaClientRegistration registration) {
         registration.registerBlockComponent(CrystalGrowthProvider.INSTANCE, Block.class);
         registration.registerBlockComponent(NumericalProvider.INSTANCE, Block.class);
+        registration.registerBlockComponent(SaltCampfireProvider.INSTANCE, Block.class);
     }
 }

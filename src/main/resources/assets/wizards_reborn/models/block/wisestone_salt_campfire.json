@@ -1,0 +1,9 @@
+{
+	"credit": "Made with Blockbench",
+	"parent": "wizards_reborn:block/salt_campfire",
+	"textures": {
+		"campfire": "wizards_reborn:block/wisestone_salt_campfire",
+		"base": "wizards_reborn:block/salt_campfire_base",
+		"particle": "wizards_reborn:block/polished_wisestone"
+	}
+}

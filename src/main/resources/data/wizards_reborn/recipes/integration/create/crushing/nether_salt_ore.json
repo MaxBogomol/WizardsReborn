@@ -1,0 +1,40 @@
+{
+  "type": "forge:conditional",
+    "recipes": [
+      {
+        "conditions": [
+          {
+            "type": "forge:mod_loaded",
+            "modid": "create"
+          }
+        ],
+        "recipe": {
+    "type": "create:crushing",
+        "ingredients": [
+          {
+            "item": "wizards_reborn:nether_salt_ore"
+          }
+        ],
+        "results": [
+          {
+            "item": "wizards_reborn:nether_salt",
+            "count": 2
+          },
+          {
+            "item": "wizards_reborn:nether_salt",
+            "chance": 0.25
+          },
+          {
+            "item": "create:experience_nugget",
+            "chance": 0.75
+          },
+          {
+            "item": "minecraft:netherrack",
+            "chance": 0.125
+          }
+        ],
+        "processingTime": 350
+      }
+    }
+  ]
+}

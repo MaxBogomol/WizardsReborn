@@ -34,7 +34,7 @@ public class SaltTorchTileEntity extends ExposedTileSimpleInventory implements T
     }
 
     public SaltTorchTileEntity(BlockPos pos, BlockState state) {
-        this(WizardsReborn.SALT_TORCH.get(), pos, state);
+        this(WizardsReborn.SALT_TORCH_TILE_ENTITY.get(), pos, state);
     }
 
     @Override
@@ -90,6 +90,7 @@ public class SaltTorchTileEntity extends ExposedTileSimpleInventory implements T
                         .setAlpha(0.35f, 0).setScale(0.25f, 0)
                         .setColor(colorF.getRed() / 255f, colorF.getGreen()/ 255f, colorF.getBlue() / 255f, color.getRed() / 255f, color.getGreen()/ 255f, color.getBlue() / 255f)
                         .setLifetime(60)
+                        .setSpin((0.01f * (float) ((random.nextDouble() - 0.5D) * 2)))
                         .spawn(level, worldPosition.getX() + pos.x(), worldPosition.getY() + pos.y(), worldPosition.getZ() + pos.z());
             }
             if (random.nextFloat() < 0.45) {
