@@ -1364,7 +1364,7 @@ public class ArcanemiconChapters {
                 new TitledBlockPage("wizards_reborn.arcanemicon.page.arcanum_lens",
                         new BlockEntry(ARCANE_PEDESTAL_ITEM, ARCANUM_LENS_ITEM)
                 ),
-                new ArcaneIteratorPage(ARCANUM_LENS_ITEM, 0, 0, new ItemStack(WizardsReborn.ARCANUM_AMULET.get()),
+                new ArcaneIteratorPage(ARCANUM_LENS_ITEM, 0, 0, new ItemStack(WizardsReborn.ALCHEMY_GLASS_ITEM.get()),
                         ARCANUM_ITEM, ARCANUM_ITEM, ARCANUM_ITEM, ARCANUM_DUST_ITEM,
                         ALCHEMY_CALX_ITEM, ALCHEMY_CALX_ITEM
                 )
@@ -3225,11 +3225,45 @@ public class ArcanemiconChapters {
         List<MobEffectInstance> noEffects = new ArrayList<>();
 
         if (ModList.get().isLoaded("create")) {
+            ItemStack experienceNugget = new ItemStack(IntegrationUtils.getItem("create", "experience_nugget"));
+            ItemStack experienceNuggetTwo = new ItemStack(IntegrationUtils.getItem("create", "experience_nugget"), 2);
+            ItemStack experienceNuggetBig = new ItemStack(IntegrationUtils.getItem("create", "experience_nugget"), 18);
+
+            ARCANUM.addPage(new CrushingPage(ARCANUM_ITEM,
+                    new ItemStack(WizardsReborn.ARCANUM_DUST.get(), 3), ARCANUM_DUST_ITEM
+            ));
+            ARCANUM.addPage(new CrushingPage(new ItemStack(WizardsReborn.ARCANUM_ORE_ITEM.get()),
+                    new ItemStack(WizardsReborn.ARCANUM.get(), 3), ARCANUM_ITEM, experienceNugget, new ItemStack(Items.COBBLESTONE)
+            ));
+            ARCANUM.addPage(new CrushingPage(new ItemStack(WizardsReborn.DEEPSLATE_ARCANUM_ORE_ITEM.get()),
+                    new ItemStack(WizardsReborn.ARCANUM.get(), 3), ARCANUM_ITEM, experienceNugget, new ItemStack(Items.COBBLED_DEEPSLATE)
+            ));
+
             ARCANE_GOLD.addPage(new TitledBlockPage("wizards_reborn.arcanemicon.page.crushed_raw_arcane_gold",
                     new BlockEntry(ARCANE_PEDESTAL_ITEM, new ItemStack(CreateIntegration.CRUSHED_RAW_ARCANE_GOLD.get()))
             ));
+            ARCANE_GOLD.addPage(new CrushingPage(new ItemStack(WizardsReborn.ARCANE_GOLD_ORE_ITEM.get()),
+                    new ItemStack(CreateIntegration.CRUSHED_RAW_ARCANE_GOLD.get()), new ItemStack(CreateIntegration.CRUSHED_RAW_ARCANE_GOLD.get()), experienceNuggetTwo, new ItemStack(Items.COBBLED_DEEPSLATE)
+            ));
+            ARCANE_GOLD.addPage(new CrushingPage(new ItemStack(WizardsReborn.DEEPSLATE_ARCANE_GOLD_ORE_ITEM.get()),
+                    new ItemStack(CreateIntegration.CRUSHED_RAW_ARCANE_GOLD.get()), new ItemStack(CreateIntegration.CRUSHED_RAW_ARCANE_GOLD.get()), experienceNuggetTwo, new ItemStack(Items.COBBLED_DEEPSLATE)
+            ));
+            ARCANE_GOLD.addPage(new CrushingPage(new ItemStack(WizardsReborn.NETHER_ARCANE_GOLD_ORE_ITEM.get()),
+                    new ItemStack(WizardsReborn.ARCANE_GOLD_NUGGET.get(), 12), experienceNugget, new ItemStack(Items.NETHERRACK)
+            ));
+            ARCANE_GOLD.addPage(new CrushingPage(new ItemStack(WizardsReborn.RAW_ARCANE_GOLD.get()),
+                    new ItemStack(CreateIntegration.CRUSHED_RAW_ARCANE_GOLD.get()), experienceNugget
+            ));
+            ARCANE_GOLD.addPage(new CrushingPage(new ItemStack(WizardsReborn.RAW_ARCANE_GOLD_BLOCK_ITEM.get()),
+                    new ItemStack(CreateIntegration.CRUSHED_RAW_ARCANE_GOLD.get(), 9), experienceNuggetBig
+            ));
+            ARCANE_GOLD.addPage(new SmeltingPage(ARCANE_GOLD_INGOT_ITEM, new ItemStack(CreateIntegration.CRUSHED_RAW_ARCANE_GOLD.get())));
             ARCANE_GOLD.addPage(new TitledBlockPage("wizards_reborn.arcanemicon.page.arcane_gold_sheet",
                     new BlockEntry(ARCANE_PEDESTAL_ITEM, new ItemStack(CreateIntegration.ARCANE_GOLD_SHEET.get()))
+            ));
+
+            ARCANUM_LENS.addPage(new CrushingPage(ARCANUM_LENS_ITEM,
+                    new ItemStack(WizardsReborn.ARCANUM_DUST.get(), 4), ARCANUM_DUST_ITEM
             ));
 
             SMOKING_PIPE.addPage(new CenserPage(noEffects, new ItemStack(IntegrationUtils.getItem("create", "wheat_flour"))));
@@ -3285,6 +3319,7 @@ public class ArcanemiconChapters {
         List<MobEffectInstance> noEffects = new ArrayList<>();
 
         if (ModList.get().isLoaded("malum")) {
+            SMOKING_PIPE.addPage(new CenserPage(noEffects, new ItemStack(IntegrationUtils.getItem("malum", "rotting_essence"))));
             SMOKING_PIPE.addPage(new CenserPage(noEffects, new ItemStack(IntegrationUtils.getItem("malum", "hex_ash"))));
             SMOKING_PIPE.addPage(new CenserPage(noEffects, new ItemStack(IntegrationUtils.getItem("malum", "alchemical_calx"))));
             SMOKING_PIPE.addPage(new CenserPage(noEffects, new ItemStack(IntegrationUtils.getItem("malum", "cursed_grit"))));

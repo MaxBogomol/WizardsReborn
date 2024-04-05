@@ -141,7 +141,7 @@ public class TotemOfDisenchantTileEntity extends BlockEntity implements Tickable
                     }
 
                     PacketHandler.sendToTracking(level, getBlockPos(), new TotemOfDisenchantBurstEffectPacket(getBlockPos()));
-                    level.playSound(WizardsReborn.proxy.getPlayer(), getBlockPos(), WizardsReborn.WISSEN_BURST_SOUND.get(), SoundSource.BLOCKS, 0.25f, (float) (1f + ((random.nextFloat() - 0.5D) / 4)));
+                    level.playSound(WizardsReborn.proxy.getPlayer(), getBlockPos(), WizardsReborn.TOTEM_OF_DISENCHANT_END_SOUND.get(), SoundSource.BLOCKS, 1f, (float) (1f + ((random.nextFloat() - 0.5D) / 4)));
                 }
 
                 cooldown = 0;

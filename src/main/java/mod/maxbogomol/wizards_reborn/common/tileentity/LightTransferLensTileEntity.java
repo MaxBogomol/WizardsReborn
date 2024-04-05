@@ -5,6 +5,7 @@ import mod.maxbogomol.wizards_reborn.api.light.ILightTileEntity;
 import mod.maxbogomol.wizards_reborn.api.light.LightRayHitResult;
 import mod.maxbogomol.wizards_reborn.api.light.LightUtils;
 import mod.maxbogomol.wizards_reborn.api.wissen.IWissenWandControlledTileEntity;
+import mod.maxbogomol.wizards_reborn.client.sound.LightTransferLensSoundInstance;
 import mod.maxbogomol.wizards_reborn.common.block.ArcaneLumosBlock;
 import mod.maxbogomol.wizards_reborn.common.item.equipment.WissenWandItem;
 import mod.maxbogomol.wizards_reborn.utils.PacketUtils;
@@ -39,6 +40,8 @@ public class LightTransferLensTileEntity extends ExposedTileSimpleInventory impl
     public int light = 0;
 
     public Random random = new Random();
+
+    public LightTransferLensSoundInstance sound;
 
     public LightTransferLensTileEntity(BlockEntityType<?> type, BlockPos pos, BlockState state) {
         super(type, pos, state);
@@ -80,6 +83,16 @@ public class LightTransferLensTileEntity extends ExposedTileSimpleInventory impl
 
             if (update) {
                 PacketUtils.SUpdateTileEntityPacket(this);
+            }
+        }
+
+        if (level.isClientSide()) {
+            if (getLight() > 0 && isToBlock) {
+                if (sound == null) {
+                    sound = LightTransferLensSoundInstance.playSound(this);
+                } else if (sound.isStopped()) {
+                    sound = LightTransferLensSoundInstance.playSound(this);
+                }
             }
         }
     }

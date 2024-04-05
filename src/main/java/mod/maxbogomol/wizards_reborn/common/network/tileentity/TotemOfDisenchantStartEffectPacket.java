@@ -1,7 +1,9 @@
 package mod.maxbogomol.wizards_reborn.common.network.tileentity;
 
+import mod.maxbogomol.wizards_reborn.WizardsReborn;
 import mod.maxbogomol.wizards_reborn.api.arcaneenchantment.ArcaneEnchantment;
 import mod.maxbogomol.wizards_reborn.api.arcaneenchantment.ArcaneEnchantmentUtils;
+import mod.maxbogomol.wizards_reborn.client.sound.TotemOfDisenchantSoundInstance;
 import mod.maxbogomol.wizards_reborn.common.tileentity.TotemOfDisenchantTileEntity;
 import mod.maxbogomol.wizards_reborn.utils.PacketUtils;
 import net.minecraft.core.BlockPos;
@@ -11,6 +13,7 @@ import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.item.EnchantedBookItem;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
@@ -112,6 +115,9 @@ public class TotemOfDisenchantStartEffectPacket {
                     totem.arcaneEnchantment = msg.arcaneEnchantment.getString();
                     totem.enchantmentLevel = msg.enchantmentLevel;
                     PacketUtils.SUpdateTileEntityPacket(totem);
+
+                    level.playSound(WizardsReborn.proxy.getPlayer(), totem.getBlockPos(), WizardsReborn.TOTEM_OF_DISENCHANT_START_SOUND.get(), SoundSource.BLOCKS, 1f, 1f);
+                    TotemOfDisenchantSoundInstance.playSound(totem);
                 }
             });
         }

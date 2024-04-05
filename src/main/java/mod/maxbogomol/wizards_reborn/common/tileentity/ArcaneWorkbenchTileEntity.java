@@ -3,6 +3,7 @@ package mod.maxbogomol.wizards_reborn.common.tileentity;
 import mod.maxbogomol.wizards_reborn.WizardsReborn;
 import mod.maxbogomol.wizards_reborn.api.wissen.*;
 import mod.maxbogomol.wizards_reborn.client.particle.Particles;
+import mod.maxbogomol.wizards_reborn.client.sound.ArcaneWorkbenchSoundInstance;
 import mod.maxbogomol.wizards_reborn.common.config.Config;
 import mod.maxbogomol.wizards_reborn.common.network.PacketHandler;
 import mod.maxbogomol.wizards_reborn.common.network.tileentity.ArcaneWorkbenchBurstEffectPacket;
@@ -85,6 +86,11 @@ public class ArcaneWorkbenchTileEntity extends BlockEntity implements TickableBl
                 ItemStack output = recipe.get().getResultItem(RegistryAccess.EMPTY);
 
                 if (isCanCraft(inv, output)) {
+                    if (wissenIsCraft == 0) {
+                        level.playSound(WizardsReborn.proxy.getPlayer(), getBlockPos(), WizardsReborn.ARCANE_WORKBENCH_START_SOUND.get(), SoundSource.BLOCKS, 1f, 1f);
+                        ArcaneWorkbenchSoundInstance.playSound(this);
+                    }
+
                     int addRemainCraft = WissenUtils.getAddWissenRemain(wissenIsCraft, getWissenPerTick(), wissenInCraft);
                     int removeRemain = WissenUtils.getRemoveWissenRemain(getWissen(), getWissenPerTick() - addRemainCraft);
 
@@ -126,7 +132,7 @@ public class ArcaneWorkbenchTileEntity extends BlockEntity implements TickableBl
                         update = true;
 
                         PacketHandler.sendToTracking(level, getBlockPos(), new ArcaneWorkbenchBurstEffectPacket(getBlockPos()));
-                        level.playSound(WizardsReborn.proxy.getPlayer(), getBlockPos(), WizardsReborn.WISSEN_BURST_SOUND.get(), SoundSource.BLOCKS, 0.25f, (float) (1f + ((random.nextFloat() - 0.5D) / 4)));
+                        level.playSound(WizardsReborn.proxy.getPlayer(), getBlockPos(), WizardsReborn.ARCANE_WORKBENCH_END_SOUND.get(), SoundSource.BLOCKS, 1f, (float) (1f + ((random.nextFloat() - 0.5D) / 4)));
                     }
                 }
             }

@@ -16,6 +16,7 @@ import net.minecraft.core.Direction;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.Connection;
 import net.minecraft.network.protocol.game.ClientboundBlockEntityDataPacket;
+import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.SimpleContainer;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.entity.BlockEntityType;
@@ -65,6 +66,9 @@ public class AltarOfDroughtTileEntity extends ExposedTileSimpleInventory impleme
                             if (random.nextFloat() < 0.5) {
                                 PacketHandler.sendToTracking(level, getBlockPos(), new AltarOfDroughtSendEffectPacket(getBlockPos()));
                             }
+                            if (random.nextFloat() < 0.1) {
+                                level.playSound(WizardsReborn.proxy.getPlayer(), getBlockPos(), WizardsReborn.WISSEN_BURST_SOUND.get(), SoundSource.BLOCKS, 0.15f, (float) (0.5f + ((random.nextFloat() - 0.5D) / 4)));
+                            }
 
                             update = true;
                         }
@@ -97,6 +101,7 @@ public class AltarOfDroughtTileEntity extends ExposedTileSimpleInventory impleme
                         ticks = 20 + random.nextInt(10);
                         maxTicks = ticks;
                         update = true;
+                        level.playSound(WizardsReborn.proxy.getPlayer(), getBlockPos(), WizardsReborn.ALTAR_OF_DROUGHT_SOUND.get(), SoundSource.BLOCKS, 0.5f, (float) (1f + ((random.nextFloat() - 0.5D) / 4)));
                     }
                 }
             }

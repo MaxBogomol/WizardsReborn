@@ -6,6 +6,7 @@ import mod.maxbogomol.wizards_reborn.api.wissen.IWissenTileEntity;
 import mod.maxbogomol.wizards_reborn.api.wissen.WissenUtils;
 import mod.maxbogomol.wizards_reborn.client.particle.ExperienceTotemBurst;
 import mod.maxbogomol.wizards_reborn.client.particle.Particles;
+import mod.maxbogomol.wizards_reborn.client.sound.TotemOfExperienceAbsorptionSoundInstance;
 import mod.maxbogomol.wizards_reborn.common.config.Config;
 import mod.maxbogomol.wizards_reborn.common.network.PacketHandler;
 import mod.maxbogomol.wizards_reborn.common.network.tileentity.ExperienceTotemBurstEffectPacket;
@@ -41,6 +42,8 @@ public class TotemOfExperienceAbsorptionTileEntity extends BlockEntity implement
     public Random random = new Random();
 
     public List<ExperienceTotemBurst> bursts = new ArrayList<>();
+
+    public TotemOfExperienceAbsorptionSoundInstance sound;
 
     public TotemOfExperienceAbsorptionTileEntity(BlockEntityType<?> type, BlockPos pos, BlockState state) {
         super(type, pos, state);
@@ -148,6 +151,13 @@ public class TotemOfExperienceAbsorptionTileEntity extends BlockEntity implement
                             .setLifetime(60)
                             .spawn(level, worldPosition.getX() + 0.5F, worldPosition.getY() + 0.5F, worldPosition.getZ() + 0.5F);
                 }
+
+                if (sound == null) {
+                    sound = TotemOfExperienceAbsorptionSoundInstance.playSound(this);
+                } else if (sound.isStopped()) {
+                    sound = TotemOfExperienceAbsorptionSoundInstance.playSound(this);
+                }
+
                 if (tick < 20) {
                     tick++;
                 }

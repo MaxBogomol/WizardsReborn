@@ -3,6 +3,7 @@ package mod.maxbogomol.wizards_reborn.common.tileentity;
 import mod.maxbogomol.wizards_reborn.WizardsReborn;
 import mod.maxbogomol.wizards_reborn.api.light.LightRayHitResult;
 import mod.maxbogomol.wizards_reborn.api.light.LightUtils;
+import mod.maxbogomol.wizards_reborn.client.sound.LightCasingSoundInstance;
 import mod.maxbogomol.wizards_reborn.utils.PacketUtils;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -16,6 +17,8 @@ import net.minecraft.world.phys.Vec3;
 
 public class LightCasingTileEntity extends LightTransferLensTileEntity {
     public boolean[] connection = new boolean[Direction.values().length];
+
+    public LightCasingSoundInstance sound;
 
     public LightCasingTileEntity(BlockEntityType<?> pType, BlockPos pPos, BlockState pBlockState) {
         super(pType, pPos, pBlockState);
@@ -50,6 +53,20 @@ public class LightCasingTileEntity extends LightTransferLensTileEntity {
 
             if (update) {
                 PacketUtils.SUpdateTileEntityPacket(this);
+            }
+        }
+
+        if (level.isClientSide()) {
+            if (getLight() > 0) {
+                for (Direction direction : Direction.values()) {
+                    if (isConnection(direction)) {
+                        if (sound == null) {
+                            sound = LightCasingSoundInstance.playSound(this);
+                        } else if (sound.isStopped()) {
+                            sound = LightCasingSoundInstance.playSound(this);
+                        }
+                    }
+                }
             }
         }
     }

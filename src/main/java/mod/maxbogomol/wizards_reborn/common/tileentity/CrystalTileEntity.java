@@ -11,6 +11,7 @@ import mod.maxbogomol.wizards_reborn.api.wissen.ICooldownTileEntity;
 import mod.maxbogomol.wizards_reborn.api.wissen.IItemResultTileEntity;
 import mod.maxbogomol.wizards_reborn.api.wissen.IWissenWandControlledTileEntity;
 import mod.maxbogomol.wizards_reborn.api.wissen.IWissenWandFunctionalTileEntity;
+import mod.maxbogomol.wizards_reborn.client.sound.CrystalSoundInstance;
 import mod.maxbogomol.wizards_reborn.common.item.CrystalItem;
 import mod.maxbogomol.wizards_reborn.common.item.equipment.WissenWandItem;
 import mod.maxbogomol.wizards_reborn.utils.PacketUtils;
@@ -52,6 +53,8 @@ public class CrystalTileEntity extends TileSimpleInventory implements TickableBl
 
     public Random random = new Random();
 
+    public CrystalSoundInstance sound;
+
     public CrystalTileEntity(BlockEntityType<?> type, BlockPos pos, BlockState state) {
         super(type, pos, state);
     }
@@ -78,6 +81,7 @@ public class CrystalTileEntity extends TileSimpleInventory implements TickableBl
                     if (tickRitual == 0) {
                         if (ritual.canStart(this)) {
                             ritual.start(this);
+                            level.playSound(WizardsReborn.proxy.getPlayer(), getBlockPos(), WizardsReborn.CRYSTAL_RITUAL_START_SOUND.get(), SoundSource.BLOCKS, 1f, 1f);
                             tagRitual = new CompoundTag();
                         } else {
                             reload();
@@ -90,6 +94,7 @@ public class CrystalTileEntity extends TileSimpleInventory implements TickableBl
 
                         if (ritual.canEnd(this)) {
                             ritual.end(this);
+                            level.playSound(WizardsReborn.proxy.getPlayer(), getBlockPos(), WizardsReborn.CRYSTAL_RITUAL_END_SOUND.get(), SoundSource.BLOCKS, 1f, 1f);
                             reload();
                         } else {
                             if (!level.isClientSide()) {
@@ -144,6 +149,16 @@ public class CrystalTileEntity extends TileSimpleInventory implements TickableBl
         if (!level.isClientSide()) {
             if (update) {
                 PacketUtils.SUpdateTileEntityPacket(this);
+            }
+        }
+
+        if (level.isClientSide()) {
+            if (getLight() > 0 && isToBlock || startRitual) {
+                if (sound == null) {
+                    sound = CrystalSoundInstance.playSound(this);
+                } else if (sound.isStopped()) {
+                    sound = CrystalSoundInstance.playSound(this);
+                }
             }
         }
     }
@@ -317,6 +332,7 @@ public class CrystalTileEntity extends TileSimpleInventory implements TickableBl
         isToBlock = false;
         reload();
         PacketUtils.SUpdateTileEntityPacket(this);
+        level.playSound(WizardsReborn.proxy.getPlayer(), getBlockPos(), WizardsReborn.CRYSTAL_RITUAL_END_SOUND.get(), SoundSource.BLOCKS, 1f, 1f);
         return true;
     }
 

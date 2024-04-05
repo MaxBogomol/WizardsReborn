@@ -1,0 +1,28 @@
+package mod.maxbogomol.wizards_reborn.client.sound;
+
+import mod.maxbogomol.wizards_reborn.WizardsReborn;
+import mod.maxbogomol.wizards_reborn.common.tileentity.CrystalTileEntity;
+import net.minecraft.client.Minecraft;
+
+public class CrystalSoundInstance extends TileEntitySoundInstance<CrystalTileEntity> {
+    public CrystalSoundInstance(CrystalTileEntity blockEntity, float volume, float pitch) {
+        super(blockEntity, WizardsReborn.ARCANUM_LENS_RESONATE_SOUND.get(), volume, pitch);
+        this.x = blockEntity.getBlockPos().getX() + 0.5f;
+        this.y = blockEntity.getBlockPos().getY() + 0.5f;
+        this.z = blockEntity.getBlockPos().getZ() + 0.5f;
+    }
+
+    @Override
+    public void tick() {
+        if (blockEntity.getLight() <= 0 || !blockEntity.isToBlock || !blockEntity.startRitual) {
+            stop();
+        }
+        super.tick();
+    }
+
+    public static CrystalSoundInstance playSound(CrystalTileEntity tileEntity) {
+        CrystalSoundInstance sound = new CrystalSoundInstance(tileEntity, 1, 1);
+        Minecraft.getInstance().getSoundManager().queueTickingSound(sound);
+        return sound;
+    }
+}

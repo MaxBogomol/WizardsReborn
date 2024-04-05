@@ -1345,11 +1345,42 @@ public class WizardsReborn {
     public static final RegistryObject<SoundEvent> WISSEN_BURST_SOUND = SOUND_EVENTS.register("wissen_burst", () -> SoundEvent.createVariableRangeEvent(new ResourceLocation(MOD_ID, "wissen_burst")));
     public static final RegistryObject<SoundEvent> WISSEN_TRANSFER_SOUND = SOUND_EVENTS.register("wissen_transfer", () -> SoundEvent.createVariableRangeEvent(new ResourceLocation(MOD_ID, "wissen_transfer")));
 
+    public static final RegistryObject<SoundEvent> ARCANUM_LENS_RESONATE_SOUND = SOUND_EVENTS.register("arcanum_lens_resonate", () -> SoundEvent.createVariableRangeEvent(new ResourceLocation(MOD_ID, "arcanum_lens_resonate")));
+
     public static final RegistryObject<SoundEvent> STEAM_BURST_SOUND = SOUND_EVENTS.register("steam_burst", () -> SoundEvent.createVariableRangeEvent(new ResourceLocation(MOD_ID, "steam_burst")));
 
     public static final RegistryObject<SoundEvent> SPELL_CAST_SOUND = SOUND_EVENTS.register("spell_cast", () -> SoundEvent.createVariableRangeEvent(new ResourceLocation(MOD_ID, "spell_cast")));
     public static final RegistryObject<SoundEvent> SPELL_BURST_SOUND = SOUND_EVENTS.register("spell_burst", () -> SoundEvent.createVariableRangeEvent(new ResourceLocation(MOD_ID, "spell_burst")));
     public static final RegistryObject<SoundEvent> SPELL_RELOAD_SOUND = SOUND_EVENTS.register("spell_reload", () -> SoundEvent.createVariableRangeEvent(new ResourceLocation(MOD_ID, "spell_reload")));
+
+    public static final RegistryObject<SoundEvent> ARCANEMICON_OFFERING_SOUND = SOUND_EVENTS.register("arcanemicon_offering", () -> SoundEvent.createVariableRangeEvent(new ResourceLocation(MOD_ID, "arcanemicon_offering")));
+
+    public static final RegistryObject<SoundEvent> ARCANUM_DUST_TRANSMUTATION_SOUND = SOUND_EVENTS.register("arcanum_dust_transmutation", () -> SoundEvent.createVariableRangeEvent(new ResourceLocation(MOD_ID, "arcanum_dust_transmutation")));
+
+    public static final RegistryObject<SoundEvent> WISSEN_ALTAR_BURST_SOUND = SOUND_EVENTS.register("wissen_altar_burst", () -> SoundEvent.createVariableRangeEvent(new ResourceLocation(MOD_ID, "wissen_altar_burst")));
+
+    public static final RegistryObject<SoundEvent> WISSEN_CRYSTALLIZER_START_SOUND = SOUND_EVENTS.register("wissen_crystallizer_start", () -> SoundEvent.createVariableRangeEvent(new ResourceLocation(MOD_ID, "wissen_crystallizer_start")));
+    public static final RegistryObject<SoundEvent> WISSEN_CRYSTALLIZER_END_SOUND = SOUND_EVENTS.register("wissen_crystallizer_end", () -> SoundEvent.createVariableRangeEvent(new ResourceLocation(MOD_ID, "wissen_crystallizer_end")));
+    public static final RegistryObject<SoundEvent> WISSEN_CRYSTALLIZER_LOOP_SOUND = SOUND_EVENTS.register("wissen_crystallizer_loop", () -> SoundEvent.createVariableRangeEvent(new ResourceLocation(MOD_ID, "wissen_crystallizer_loop")));
+
+    public static final RegistryObject<SoundEvent> ARCANE_WORKBENCH_START_SOUND = SOUND_EVENTS.register("arcane_workbench_start", () -> SoundEvent.createVariableRangeEvent(new ResourceLocation(MOD_ID, "arcane_workbench_start")));
+    public static final RegistryObject<SoundEvent> ARCANE_WORKBENCH_END_SOUND = SOUND_EVENTS.register("arcane_workbench_end", () -> SoundEvent.createVariableRangeEvent(new ResourceLocation(MOD_ID, "arcane_workbench_end")));
+    public static final RegistryObject<SoundEvent> ARCANE_WORKBENCH_LOOP_SOUND = SOUND_EVENTS.register("arcane_workbench_loop", () -> SoundEvent.createVariableRangeEvent(new ResourceLocation(MOD_ID, "arcane_workbench_loop")));
+
+    public static final RegistryObject<SoundEvent> TOTEM_OF_EXPERIENCE_ABSORPTION_LOOP_SOUND = SOUND_EVENTS.register("totem_of_experience_absorption_loop", () -> SoundEvent.createVariableRangeEvent(new ResourceLocation(MOD_ID, "totem_of_experience_absorption_loop")));
+
+    public static final RegistryObject<SoundEvent> TOTEM_OF_DISENCHANT_START_SOUND = SOUND_EVENTS.register("totem_of_disenchant_start", () -> SoundEvent.createVariableRangeEvent(new ResourceLocation(MOD_ID, "totem_of_disenchant_start")));
+    public static final RegistryObject<SoundEvent> TOTEM_OF_DISENCHANT_END_SOUND = SOUND_EVENTS.register("totem_of_disenchant_end", () -> SoundEvent.createVariableRangeEvent(new ResourceLocation(MOD_ID, "totem_of_disenchant_end")));
+    public static final RegistryObject<SoundEvent> TOTEM_OF_DISENCHANT_LOOP_SOUND = SOUND_EVENTS.register("totem_of_disenchant_loop", () -> SoundEvent.createVariableRangeEvent(new ResourceLocation(MOD_ID, "totem_of_disenchant_loop")));
+
+    public static final RegistryObject<SoundEvent> ALTAR_OF_DROUGHT_SOUND = SOUND_EVENTS.register("altar_of_drought_burst", () -> SoundEvent.createVariableRangeEvent(new ResourceLocation(MOD_ID, "altar_of_drought_burst")));
+
+    public static final RegistryObject<SoundEvent> ARCANE_ITERATOR_START_SOUND = SOUND_EVENTS.register("arcane_iterator_start", () -> SoundEvent.createVariableRangeEvent(new ResourceLocation(MOD_ID, "arcane_iterator_start")));
+    public static final RegistryObject<SoundEvent> ARCANE_ITERATOR_END_SOUND = SOUND_EVENTS.register("arcane_iterator_end", () -> SoundEvent.createVariableRangeEvent(new ResourceLocation(MOD_ID, "arcane_iterator_end")));
+    public static final RegistryObject<SoundEvent> ARCANE_ITERATOR_LOOP_SOUND = SOUND_EVENTS.register("arcane_iterator_loop", () -> SoundEvent.createVariableRangeEvent(new ResourceLocation(MOD_ID, "arcane_iterator_loop")));
+
+    public static final RegistryObject<SoundEvent> CRYSTAL_RITUAL_START_SOUND = SOUND_EVENTS.register("crystal_ritual_start", () -> SoundEvent.createVariableRangeEvent(new ResourceLocation(MOD_ID, "crystal_ritual_start")));
+    public static final RegistryObject<SoundEvent> CRYSTAL_RITUAL_END_SOUND = SOUND_EVENTS.register("crystal_ritual_end", () -> SoundEvent.createVariableRangeEvent(new ResourceLocation(MOD_ID, "crystal_ritual_end")));
 
     public static final RegistryObject<ArgumentTypeInfo<?, ?>> KNOWLEDGE_ARG = ARG_TYPES.register("knowledge", () -> ArgumentTypeInfos.registerByClass(KnowledgeArgument.class, SingletonArgumentInfo.contextFree(KnowledgeArgument::knowledges)));
     public static final RegistryObject<ArgumentTypeInfo<?, ?>> SPELLS_ARG = ARG_TYPES.register("spell", () -> ArgumentTypeInfos.registerByClass(SpellArgument.class, SingletonArgumentInfo.contextFree(SpellArgument::spells)));

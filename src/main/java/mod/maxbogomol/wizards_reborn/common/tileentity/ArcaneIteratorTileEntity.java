@@ -8,6 +8,7 @@ import mod.maxbogomol.wizards_reborn.api.crystalritual.CrystalRitualUtils;
 import mod.maxbogomol.wizards_reborn.api.wissen.*;
 import mod.maxbogomol.wizards_reborn.client.particle.ArcaneIteratorBurst;
 import mod.maxbogomol.wizards_reborn.client.particle.Particles;
+import mod.maxbogomol.wizards_reborn.client.sound.ArcaneIteratorSoundInstance;
 import mod.maxbogomol.wizards_reborn.common.config.Config;
 import mod.maxbogomol.wizards_reborn.common.network.PacketHandler;
 import mod.maxbogomol.wizards_reborn.common.network.tileentity.ArcaneIteratorBurstEffectPacket;
@@ -113,6 +114,11 @@ public class ArcaneIteratorTileEntity extends BlockEntity implements TickableBlo
                 }
 
                 if ((wissenInCraft > 0) && (wissen > 0) && (startCraft) && canCraft) {
+                    if (wissenIsCraft == 0) {
+                        level.playSound(WizardsReborn.proxy.getPlayer(), getBlockPos(), WizardsReborn.ARCANE_ITERATOR_START_SOUND.get(), SoundSource.BLOCKS, 1f, 1f);
+                        ArcaneIteratorSoundInstance.playSound(this);
+                    }
+
                     int addRemainCraft = WissenUtils.getAddWissenRemain(wissenIsCraft, getWissenPerTick(), wissenInCraft);
                     int removeRemain = WissenUtils.getRemoveWissenRemain(getWissen(), getWissenPerTick() - addRemainCraft);
 
@@ -212,7 +218,7 @@ public class ArcaneIteratorTileEntity extends BlockEntity implements TickableBlo
                         PacketUtils.SUpdateTileEntityPacket(getMainPedestal());
 
                         PacketHandler.sendToTracking(level, getBlockPos(), new ArcaneIteratorBurstEffectPacket(tagPos));
-                        level.playSound(WizardsReborn.proxy.getPlayer(), getBlockPos(), WizardsReborn.WISSEN_BURST_SOUND.get(), SoundSource.BLOCKS, 0.25f, (float) (1f + ((random.nextFloat() - 0.5D) / 4)));
+                        level.playSound(WizardsReborn.proxy.getPlayer(), getBlockPos(), WizardsReborn.ARCANE_ITERATOR_END_SOUND.get(), SoundSource.BLOCKS, 1f, 1f);
                     }
                 }
             } else {

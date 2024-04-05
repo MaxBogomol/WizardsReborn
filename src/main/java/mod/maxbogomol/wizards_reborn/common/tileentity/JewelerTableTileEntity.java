@@ -15,6 +15,7 @@ import net.minecraft.core.RegistryAccess;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.Connection;
 import net.minecraft.network.protocol.game.ClientboundBlockEntityDataPacket;
+import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.SimpleContainer;
 import net.minecraft.world.item.ItemStack;
@@ -98,6 +99,10 @@ public class JewelerTableTileEntity extends BlockEntity implements TickableBlock
                     removeWissen(getWissenPerTick() - addRemainCraft - removeRemain);
 
                     update = true;
+
+                    if (random.nextFloat() < 0.05) {
+                        level.playSound(WizardsReborn.proxy.getPlayer(), getBlockPos(), SoundEvents.GRINDSTONE_USE, SoundSource.BLOCKS, 0.3f, (float) (0.5f + ((random.nextFloat() - 0.5D) / 4)));
+                    }
                 }
             }
 
@@ -136,7 +141,8 @@ public class JewelerTableTileEntity extends BlockEntity implements TickableBlock
                         } else {
                             PacketHandler.sendToTracking(level, getBlockPos(), new JewelerTableBurstEffectPacket(getBlockPos(), (float) pos.x(), (float) pos.y(), (float) pos.z()));
                         }
-                        level.playSound(WizardsReborn.proxy.getPlayer(), getBlockPos(), WizardsReborn.WISSEN_BURST_SOUND.get(), SoundSource.BLOCKS, 0.25f, (float) (1f + ((random.nextFloat() - 0.5D) / 4)));
+                        level.playSound(WizardsReborn.proxy.getPlayer(), getBlockPos(), SoundEvents.GRINDSTONE_USE, SoundSource.BLOCKS, 0.5f, (float) (1f + ((random.nextFloat() - 0.5D) / 4)));
+                        level.playSound(WizardsReborn.proxy.getPlayer(), getBlockPos(), WizardsReborn.CRYSTAL_BREAK_SOUND.get(), SoundSource.BLOCKS, 1f, (float) (1f + ((random.nextFloat() - 0.5D) / 4)));
                     }
                 }
             }

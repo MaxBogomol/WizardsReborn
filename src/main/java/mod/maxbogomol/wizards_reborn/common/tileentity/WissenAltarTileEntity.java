@@ -72,6 +72,9 @@ public class WissenAltarTileEntity extends ExposedTileSimpleInventory implements
 
                 wissenIsCraft = wissenIsCraft + (getWissenPerTick() - addRemainCraft - addRemain);
                 addWissen(getWissenPerTick() - addRemainCraft - addRemain);
+                if (random.nextFloat() < 0.05) {
+                    level.playSound(WizardsReborn.proxy.getPlayer(), getBlockPos(), WizardsReborn.WISSEN_BURST_SOUND.get(), SoundSource.BLOCKS, 0.15f, (float) (0.5f + ((random.nextFloat() - 0.5D) / 4)));
+                }
 
                 update = true;
             }
@@ -85,7 +88,7 @@ public class WissenAltarTileEntity extends ExposedTileSimpleInventory implements
                     update = true;
 
                     PacketHandler.sendToTracking(level, getBlockPos(), new WissenAltarBurstEffectPacket(getBlockPos()));
-                    level.playSound(WizardsReborn.proxy.getPlayer(), getBlockPos(), WizardsReborn.WISSEN_BURST_SOUND.get(), SoundSource.BLOCKS, 0.25f, (float) (1f + ((random.nextFloat() - 0.5D) / 4)));
+                    level.playSound(WizardsReborn.proxy.getPlayer(), getBlockPos(), WizardsReborn.WISSEN_ALTAR_BURST_SOUND.get(), SoundSource.BLOCKS, 0.25f, (float) (1f + ((random.nextFloat() - 0.5D) / 4)));
                 }
             }
 
@@ -104,6 +107,9 @@ public class WissenAltarTileEntity extends ExposedTileSimpleInventory implements
                             wissen = wissen - wissenRemain;
                             if (random.nextFloat() < 0.5) {
                                 PacketHandler.sendToTracking(level, getBlockPos(), new WissenAltarSendEffectPacket(getBlockPos()));
+                            }
+                            if (random.nextFloat() < 0.1) {
+                                level.playSound(WizardsReborn.proxy.getPlayer(), getBlockPos(), WizardsReborn.WISSEN_BURST_SOUND.get(), SoundSource.BLOCKS, 0.15f, (float) (0.5f + ((random.nextFloat() - 0.5D) / 4)));
                             }
 
                             update = true;

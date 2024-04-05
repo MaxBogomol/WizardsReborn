@@ -7,6 +7,7 @@ import mod.maxbogomol.wizards_reborn.api.light.LightUtils;
 import mod.maxbogomol.wizards_reborn.api.wissen.IWissenTileEntity;
 import mod.maxbogomol.wizards_reborn.api.wissen.IWissenWandControlledTileEntity;
 import mod.maxbogomol.wizards_reborn.client.particle.Particles;
+import mod.maxbogomol.wizards_reborn.client.sound.LightEmitterSoundInstance;
 import mod.maxbogomol.wizards_reborn.common.block.ArcaneLumosBlock;
 import mod.maxbogomol.wizards_reborn.common.config.Config;
 import mod.maxbogomol.wizards_reborn.common.item.equipment.WissenWandItem;
@@ -43,6 +44,8 @@ public class LightEmitterTileEntity extends ExposedTileSimpleInventory implement
     public int light = 0;
 
     public Random random = new Random();
+
+    public LightEmitterSoundInstance sound;
 
     public LightEmitterTileEntity(BlockEntityType<?> type, BlockPos pos, BlockState state) {
         super(type, pos, state);
@@ -124,6 +127,14 @@ public class LightEmitterTileEntity extends ExposedTileSimpleInventory implement
                     lightEffect(new Vec3(0.8125f, 0.5f, 0.1875f), new Vec3(0.5f, 0.8125f, 0.5), 0.4f);
                     lightEffect(new Vec3(0.1875f, 0.5f, 0.8125f), new Vec3(0.5f, 0.8125f, 0.5), 0.4f);
                     lightEffect(new Vec3(0.8125f, 0.5f, 0.8125f), new Vec3(0.5f, 0.8125f, 0.5), 0.4f);
+                }
+            }
+
+            if (getLight() > 0) {
+                if (sound == null) {
+                    sound = LightEmitterSoundInstance.playSound(this);
+                } else if (sound.isStopped()) {
+                    sound = LightEmitterSoundInstance.playSound(this);
                 }
             }
         }
