@@ -719,7 +719,8 @@ public class WizardsReborn {
     public static final RegistryObject<Block> INNOCENT_PEDESTAL = BLOCKS.register("innocent_pedestal", () -> new ArcanePedestalBlock(BlockBehaviour.Properties.copy(INNOCENT_WOOD_PLANKS.get())));
     public static final RegistryObject<Block> INNOCENT_HOVERING_TOME_STAND = BLOCKS.register("innocent_hovering_tome_stand", () -> new HoveringTomeStandBlock(BlockBehaviour.Properties.copy(INNOCENT_WOOD_PLANKS.get())));
 
-    public static final RegistryObject<Block> ARCANE_LEVER = BLOCKS.register("arcane_lever", () -> new WaterloggableLeverBlock(BlockBehaviour.Properties.copy(Blocks.LEVER)));
+    public static final RegistryObject<Block> ARCANE_LEVER = BLOCKS.register("arcane_lever", () -> new WaterloggableLeverBlock(BlockBehaviour.Properties.copy(Blocks.LEVER).sound(ARCANE_WOOD_SOUNDS)));
+    public static final RegistryObject<Block> ARCANE_HOPPER = BLOCKS.register("arcane_hopper", () -> new ArcaneHopperBlock(BlockBehaviour.Properties.copy(Blocks.HOPPER).sound(ARCANE_WOOD_SOUNDS)));
     public static final RegistryObject<Block> REDSTONE_SENSOR = BLOCKS.register("redstone_sensor", () -> new RedstoneSensorBlock(BlockBehaviour.Properties.copy(ARCANE_WOOD_PLANKS.get())));
     public static final RegistryObject<Block> WISSEN_SENSOR = BLOCKS.register("wissen_sensor", () -> new WissenSensorBlock(BlockBehaviour.Properties.copy(ARCANE_WOOD_PLANKS.get())));
     public static final RegistryObject<Block> COOLDOWN_SENSOR = BLOCKS.register("cooldown_sensor", () -> new CooldownSensorBlock(BlockBehaviour.Properties.copy(ARCANE_WOOD_PLANKS.get())));
@@ -1019,6 +1020,7 @@ public class WizardsReborn {
     public static final RegistryObject<Item> INNOCENT_HOVERING_TOME_STAND_ITEM = ITEMS.register("innocent_hovering_tome_stand", () -> new BlockItem(INNOCENT_HOVERING_TOME_STAND.get(), new Item.Properties()));
 
     public static final RegistryObject<Item> ARCANE_LEVER_ITEM = ITEMS.register("arcane_lever", () -> new BlockItem(ARCANE_LEVER.get(), new Item.Properties()));
+    public static final RegistryObject<Item> ARCANE_HOPPER_ITEM = ITEMS.register("arcane_hopper", () -> new BlockItem(ARCANE_HOPPER.get(), new Item.Properties()));
     public static final RegistryObject<Item> REDSTONE_SENSOR_ITEM = ITEMS.register("redstone_sensor", () -> new BlockItem(REDSTONE_SENSOR.get(), new Item.Properties()));
     public static final RegistryObject<Item> WISSEN_SENSOR_ITEM = ITEMS.register("wissen_sensor", () -> new BlockItem(WISSEN_SENSOR.get(), new Item.Properties()));
     public static final RegistryObject<Item> COOLDOWN_SENSOR_ITEM = ITEMS.register("cooldown_sensor", () -> new BlockItem(COOLDOWN_SENSOR.get(), new Item.Properties()));
@@ -1195,6 +1197,7 @@ public class WizardsReborn {
     public static RegistryObject<BlockEntityType<LightTransferLensTileEntity>> LIGHT_TRANSFER_LENS_TILE_ENTITY = TILE_ENTITIES.register("light_transfer_lens", () -> BlockEntityType.Builder.of(LightTransferLensTileEntity::new, LIGHT_TRANSFER_LENS.get()).build(null));
     public static RegistryObject<BlockEntityType<RunicPedestalTileEntity>> RUNIC_PEDESTAL_TILE_ENTITY = TILE_ENTITIES.register("runic_pedestal", () -> BlockEntityType.Builder.of(RunicPedestalTileEntity::new, RUNIC_PEDESTAL.get()).build(null));
 
+    public static RegistryObject<BlockEntityType<ArcaneHopperTileEntity>> ARCANE_HOPPER_TILE_ENTITY = TILE_ENTITIES.register("arcane_hopper", () -> BlockEntityType.Builder.of(ArcaneHopperTileEntity::new, ARCANE_HOPPER.get()).build(null));
     public static RegistryObject<BlockEntityType<SensorTileEntity>> SENSOR_TILE_ENTITY = TILE_ENTITIES.register("sensor", () -> BlockEntityType.Builder.of(SensorTileEntity::new, REDSTONE_SENSOR.get(), WISSEN_SENSOR.get(), COOLDOWN_SENSOR.get(), LIGHT_SENSOR.get(), EXPERIENCE_SENSOR.get(), HEAT_SENSOR.get(), STEAM_SENSOR.get()).build(null));
     public static RegistryObject<BlockEntityType<FluidSensorTileEntity>> FLUID_SENSOR_TILE_ENTITY = TILE_ENTITIES.register("fluid_sensor", () -> BlockEntityType.Builder.of(FluidSensorTileEntity::new, FLUID_SENSOR.get()).build(null));
     public static RegistryObject<BlockEntityType<WissenActivatorTileEntity>> WISSEN_ACTIVATOR_TILE_ENTITY = TILE_ENTITIES.register("wissen_activator", () -> BlockEntityType.Builder.of(WissenActivatorTileEntity::new, WISSEN_ACTIVATOR.get()).build(null));
@@ -1295,6 +1298,14 @@ public class WizardsReborn {
                 BlockPos pos = data.readBlockPos();
                 Level world = inv.player.getCommandSenderWorld();
                 return new AlchemyMachineContainer(windowId, world, pos, inv, inv.player);
+            })));
+
+    public static final RegistryObject<MenuType<ArcaneHopperContainer>> ARCANE_HOPPER_CONTAINER
+            = CONTAINERS.register("arcane_hopper",
+            () -> IForgeMenuType.create(((windowId, inv, data) -> {
+                BlockPos pos = data.readBlockPos();
+                Level world = inv.player.getCommandSenderWorld();
+                return new ArcaneHopperContainer(windowId, world, pos, inv, inv.player);
             })));
 
     public static final RegistryObject<MenuType<ItemSorterContainer>> ITEM_SORTER_CONTAINER
@@ -1658,6 +1669,7 @@ public class WizardsReborn {
             MenuScreens.register(JEWELER_TABLE_CONTAINER.get(), JewelerTableScreen::new);
             MenuScreens.register(ALCHEMY_FURNACE_CONTAINER.get(), AlchemyFurnaceScreen::new);
             MenuScreens.register(ALCHEMY_MACHINE_CONTAINER.get(), AlchemyMachineScreen::new);
+            MenuScreens.register(ARCANE_HOPPER_CONTAINER.get(), ArcaneHopperScreen::new);
             MenuScreens.register(ITEM_SORTER_CONTAINER.get(), ItemSorterScreen::new);
             MenuScreens.register(TOTEM_OF_DISENCHANT_CONTAINER.get(), TotemOfDisenchantScreen::new);
             MenuScreens.register(RUNIC_PEDESTAL_CONTAINER.get(), RunicPedestalScreen::new);

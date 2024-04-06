@@ -19,6 +19,9 @@
 
   "arcanum_dust_transmutation": { "sounds": ["wizards_reborn:arcanum_dust_transmutation"], "subtitle": "sounds.wizards_reborn.arcanum_dust_transmutation"},
 
+  "pedestal_insert": { "sounds": [{ "name": "wizards_reborn:pedestal/insert1", "volume": 0.75}, { "name": "wizards_reborn:pedestal/insert2", "volume": 0.75}, { "name": "wizards_reborn:pedestal/insert3", "volume": 0.75}], "subtitle": "sounds.wizards_reborn.pedestal_insert"},
+  "pedestal_remove": { "sounds": [{ "name": "wizards_reborn:pedestal/remove1", "volume": 0.75}, { "name": "wizards_reborn:pedestal/remove2", "volume": 0.75}, { "name": "wizards_reborn:pedestal/remove3", "volume": 0.75}], "subtitle": "sounds.wizards_reborn.pedestal_remove"},
+
   "wissen_altar_burst": { "sounds": ["wizards_reborn:wissen_altar/burst"], "subtitle": "sounds.wizards_reborn.wissen_altar_burst"},
 
   "wissen_crystallizer_start": { "sounds": ["wizards_reborn:wissen_crystallizer/start"], "subtitle": "sounds.wizards_reborn.wissen_crystallizer_start"},
@@ -212,8 +215,5 @@
   "crystal_hit": { "sounds": ["wizards_reborn:blocks/crystal/step1", "wizards_reborn:blocks/crystal/step2", "wizards_reborn:blocks/crystal/step3", "wizards_reborn:blocks/crystal/step4", "wizards_reborn:blocks/crystal/step5", "wizards_reborn:blocks/crystal/step6", "wizards_reborn:blocks/crystal/step7", "wizards_reborn:blocks/crystal/step8", "wizards_reborn:blocks/crystal/step9", "wizards_reborn:blocks/crystal/step10", "wizards_reborn:blocks/crystal/step11", "wizards_reborn:blocks/crystal/step12", "wizards_reborn:blocks/crystal/step13", "wizards_reborn:blocks/crystal/step14"], "subtitle": "subtitles.block.generic.hit"},
 
   "crystal_resonate": { "sounds": ["wizards_reborn:blocks/crystal/resonate1", "wizards_reborn:blocks/crystal/resonate2", "wizards_reborn:blocks/crystal/resonate3", "wizards_reborn:blocks/crystal/resonate4"], "subtitle": "sounds.wizards_reborn.crystal_resonate"},
-  "crystal_shimmer": { "sounds": ["wizards_reborn:blocks/crystal/shimmer"], "subtitle": "sounds.wizards_reborn.crystal_shimmer"},
-
-  "pedestal_insert": { "sounds": [{ "name": "wizards_reborn:blocks/pedestal/insert1", "volume": 0.75}, { "name": "wizards_reborn:blocks/pedestal/insert2", "volume": 0.75}, { "name": "wizards_reborn:blocks/pedestal/insert3", "volume": 0.75}], "subtitle": "sounds.wizards_reborn.pedestal_insert"},
-  "pedestal_remove": { "sounds": [{ "name": "wizards_reborn:blocks/pedestal/remove1", "volume": 0.75}, { "name": "wizards_reborn:blocks/pedestal/remove2", "volume": 0.75}, { "name": "wizards_reborn:blocks/pedestal/remove3", "volume": 0.75}], "subtitle": "sounds.wizards_reborn.pedestal_remove"}
+  "crystal_shimmer": { "sounds": ["wizards_reborn:blocks/crystal/shimmer"], "subtitle": "sounds.wizards_reborn.crystal_shimmer"}
 }

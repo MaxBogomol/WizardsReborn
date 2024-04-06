@@ -285,6 +285,7 @@ public class WizardsRebornItemGroup {
             event.accept(WizardsReborn.INNOCENT_HOVERING_TOME_STAND_ITEM);
 
             event.accept(WizardsReborn.ARCANE_LEVER_ITEM);
+            event.accept(WizardsReborn.ARCANE_HOPPER_ITEM);
             event.accept(WizardsReborn.REDSTONE_SENSOR_ITEM);
             event.accept(WizardsReborn.WISSEN_SENSOR_ITEM);
             event.accept(WizardsReborn.COOLDOWN_SENSOR_ITEM);

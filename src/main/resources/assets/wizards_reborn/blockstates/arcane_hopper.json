@@ -1,0 +1,22 @@
+{
+  "variants": {
+    "facing=down": {
+      "model": "wizards_reborn:block/arcane_hopper"
+    },
+    "facing=east": {
+      "model": "wizards_reborn:block/arcane_hopper_side",
+      "y": 90
+    },
+    "facing=north": {
+      "model": "wizards_reborn:block/arcane_hopper_side"
+    },
+    "facing=south": {
+      "model": "wizards_reborn:block/arcane_hopper_side",
+      "y": 180
+    },
+    "facing=west": {
+      "model": "wizards_reborn:block/arcane_hopper_side",
+      "y": 270
+    }
+  }
+}
