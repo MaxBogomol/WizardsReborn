@@ -45,8 +45,6 @@ public class SetCrystalPacket {
                 ItemStack stack = player.getItemInHand(InteractionHand.MAIN_HAND);
                 if (!msg.hand) {
                     stack = player.getItemInHand(InteractionHand.OFF_HAND);
-                } else {
-                    player.startUsingItem(InteractionHand.MAIN_HAND);
                 }
 
                 SimpleContainer stack_inv = ArcaneWandItem.getInventory(stack);

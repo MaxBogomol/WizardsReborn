@@ -35,8 +35,6 @@ public class SetSpellPacket {
                 ItemStack stack = player.getItemInHand(InteractionHand.MAIN_HAND);
                 if (!msg.hand) {
                     stack = player.getItemInHand(InteractionHand.OFF_HAND);
-                } else {
-                    player.startUsingItem(InteractionHand.MAIN_HAND);
                 }
 
                 CompoundTag nbt = stack.getTag();

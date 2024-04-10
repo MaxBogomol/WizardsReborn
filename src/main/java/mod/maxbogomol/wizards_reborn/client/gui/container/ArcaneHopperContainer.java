@@ -1,6 +1,7 @@
 package mod.maxbogomol.wizards_reborn.client.gui.container;
 
 import mod.maxbogomol.wizards_reborn.WizardsReborn;
+import mod.maxbogomol.wizards_reborn.common.tileentity.ArcaneHopperTileEntity;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
@@ -11,7 +12,6 @@ import net.minecraft.world.inventory.Slot;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntity;
-import net.minecraftforge.common.capabilities.ForgeCapabilities;
 import net.minecraftforge.items.IItemHandler;
 import net.minecraftforge.items.SlotItemHandler;
 import net.minecraftforge.items.wrapper.InvWrapper;
@@ -36,14 +36,14 @@ public class ArcaneHopperContainer extends AbstractContainerMenu {
         this.playerInventory = new InvWrapper(playerInventory);
         this.layoutPlayerInventorySlots(8, 58);
 
-        if (tileEntity != null) {
-            tileEntity.getCapability(ForgeCapabilities.ITEM_HANDLER).ifPresent(h -> {
-                int c = 0;
-                for (int ii = 0; ii < 7; ii++) {
-                    addSlot(new SlotItemHandler(h, c, 26 + (ii * 18), 18));
-                    c++;
-                }
-            });
+        if (tileEntity instanceof ArcaneHopperTileEntity hopperTile) {
+            hopperTile.startOpen(playerInventory.player);
+            checkContainerSize(hopperTile, 5);
+            int c = 0;
+            for (int ii = 0; ii < 7; ii++) {
+                addSlot(new Slot(hopperTile, c, 26 + (ii * 18), 18));
+                c++;
+            }
         }
     }
 
@@ -117,5 +117,13 @@ public class ArcaneHopperContainer extends AbstractContainerMenu {
         }
         sourceSlot.onTake(playerEntity, sourceStack);
         return copyOfSourceStack;
+    }
+
+    @Override
+    public void removed(Player pPlayer) {
+        super.removed(pPlayer);
+        if (tileEntity instanceof ArcaneHopperTileEntity hopperTile) {
+            hopperTile.stopOpen(playerEntity);
+        }
     }
 }

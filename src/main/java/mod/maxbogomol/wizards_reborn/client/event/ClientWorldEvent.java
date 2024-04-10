@@ -1,6 +1,7 @@
 package mod.maxbogomol.wizards_reborn.client.event;
 
 import com.mojang.blaze3d.vertex.PoseStack;
+import mod.maxbogomol.wizards_reborn.api.alchemy.ISteamTileEntity;
 import mod.maxbogomol.wizards_reborn.api.light.ILightTileEntity;
 import mod.maxbogomol.wizards_reborn.api.light.LightUtils;
 import mod.maxbogomol.wizards_reborn.api.wissen.IWissenTileEntity;
@@ -8,6 +9,7 @@ import mod.maxbogomol.wizards_reborn.common.item.equipment.WissenWandItem;
 import mod.maxbogomol.wizards_reborn.utils.RenderUtils;
 import net.minecraft.client.Minecraft;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
@@ -18,7 +20,10 @@ import net.minecraft.world.phys.Vec3;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.client.event.RenderLevelStageEvent;
+import net.minecraftforge.common.capabilities.ForgeCapabilities;
+import net.minecraftforge.energy.IEnergyStorage;
 import net.minecraftforge.event.TickEvent;
+import net.minecraftforge.fluids.capability.IFluidHandler;
 
 import java.awt.*;
 import java.util.Random;
@@ -110,6 +115,57 @@ public class ClientWorldEvent {
                                     }
                                 }
                             }
+                        }
+                    }
+
+                    if (!(WissenWandItem.getMode(stack) == 1 || WissenWandItem.getMode(stack) == 2)) {
+                        boolean renderSide = false;
+                        boolean renderFluidSide = false;
+                        boolean renderSteamSide = false;
+                        boolean renderEnergySide = false;
+                        Direction direction = Direction.UP;
+                        BlockPos blockpos = BlockPos.ZERO;
+
+                        if (hitresult.getType() == HitResult.Type.BLOCK) {
+                            blockpos = ((BlockHitResult) hitresult).getBlockPos();
+                            direction = ((BlockHitResult) hitresult).getDirection();
+                            if (player.level().getBlockEntity(blockpos) != null) {
+                                IFluidHandler fluidHandler = player.level().getBlockEntity(blockpos).getCapability(ForgeCapabilities.FLUID_HANDLER, direction).orElse(null);
+                                IEnergyStorage energyHandler = player.level().getBlockEntity(blockpos).getCapability(ForgeCapabilities.ENERGY, direction).orElse(null);
+                                if (fluidHandler != null) {
+                                    renderSide = true;
+                                    renderFluidSide = true;
+                                }
+                                if (energyHandler != null) {
+                                    renderSide = true;
+                                    renderEnergySide = true;
+                                }
+                                if (player.level().getBlockEntity(blockpos) instanceof ISteamTileEntity steamTile) {
+                                    renderSide = true;
+                                    renderSteamSide = steamTile.canSteamConnection(direction);
+                                }
+                            }
+                        }
+
+                        if (renderSide) {
+                            ms.pushPose();
+                            double dX = blockpos.getX() - camera.x();
+                            double dY = blockpos.getY() - camera.y();
+                            double dZ = blockpos.getZ() - camera.z();
+                            ms.translate(dX, dY, dZ);
+                            if (renderFluidSide) {
+                                Color color = RenderUtils.colorFluidSide;
+                                RenderUtils.renderSide(direction, new Color(color.getRed() / 255f, color.getGreen() / 255f, color.getBlue() / 255f, alpha), partialTicks, ms);
+                            }
+                            if (renderSteamSide) {
+                                Color color = RenderUtils.colorSteamSide;
+                                RenderUtils.renderSide(direction, new Color(color.getRed() / 255f, color.getGreen() / 255f, color.getBlue() / 255f, alpha), partialTicks, ms);
+                            }
+                            if (renderEnergySide) {
+                                Color color = RenderUtils.colorEnergySide;
+                                RenderUtils.renderSide(direction, new Color(color.getRed() / 255f, color.getGreen() / 255f, color.getBlue() / 255f, alpha), partialTicks, ms);
+                            }
+                            ms.popPose();
                         }
                     }
                 }

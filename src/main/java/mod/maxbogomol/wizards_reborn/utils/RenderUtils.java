@@ -23,6 +23,7 @@ import net.minecraft.client.renderer.texture.TextureAtlas;
 import net.minecraft.client.resources.model.BakedModel;
 import net.minecraft.client.resources.model.ModelResourceLocation;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
 import net.minecraft.util.Mth;
 import net.minecraft.world.item.ItemDisplayContext;
 import net.minecraft.world.item.ItemStack;
@@ -381,6 +382,9 @@ public class RenderUtils {
     public static Color colorArea = new Color(191, 201, 104);
     public static Color colorMissing = new Color(214, 118, 132);
     public static Color colorSelected = new Color(255, 255, 255);
+    public static Color colorFluidSide = new Color(59, 104, 153);
+    public static Color colorSteamSide = new Color(141, 156, 179);
+    public static Color colorEnergySide = new Color(24, 147, 25);
 
     public static void renderConnectLine(BlockPos posFrom, BlockPos posTo, Color color, float partialTicks, PoseStack ms) {
         renderConnectLine(posFrom.getCenter(), posTo.getCenter(), color, partialTicks, ms);
@@ -430,6 +434,23 @@ public class RenderUtils {
         renderConnectLineOffset(new Vec3(size.x(), size.y(), 0), new Vec3(size.x() , size.y(), size.z()), color, partialTicks, ms);
         renderConnectLineOffset(new Vec3(size.x(), size.y(), size.z()), new Vec3(0, size.y(), size.z()), color, partialTicks, ms);
         renderConnectLineOffset(new Vec3(0, size.y(), size.z()), new Vec3(0, size.y(), 0), color, partialTicks, ms);
+    }
+
+    public static void renderSideLines(Vec3 size, Color color, float partialTicks, PoseStack ms) {
+        renderConnectLineOffset(new Vec3(0, 0, 0), new Vec3(size.x() , 0, 0), color, partialTicks, ms);
+        renderConnectLineOffset(new Vec3(size.x(), 0, 0), new Vec3(size.x(), 0, size.z()), color, partialTicks, ms);
+        renderConnectLineOffset(new Vec3(size.x(), 0, size.z()), new Vec3(0, 0, size.z()), color, partialTicks, ms);
+        renderConnectLineOffset(new Vec3(0, 0, size.z()), new Vec3(0, 0, 0), color, partialTicks, ms);
+    }
+
+    public static void renderSide(Direction side, Color color, float partialTicks, PoseStack ms) {
+        Vec3 size = new Vec3(1, 1, 1);
+        ms.pushPose();
+        ms.translate(0.5f, 0.5f, 0.5f);
+        ms.mulPose(side.getOpposite().getRotation());
+        ms.translate(-size.x() / 2f, -size.y() / 2f, -size.z() / 2f);
+        renderSideLines(size, color, partialTicks, ms);
+        ms.popPose();
     }
 
     public static void renderTrail(PoseStack mStack, VertexConsumer builder, Vec3 center, List<Vec3> trailList, float startWidth, float endWidth, float startAlpha, float endAlpha, float scale, Color color, int segments, boolean renderSphere) {

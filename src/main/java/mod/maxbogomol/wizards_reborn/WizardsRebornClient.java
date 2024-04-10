@@ -53,7 +53,7 @@ import java.util.Map;
 
 public class WizardsRebornClient {
     private static final String CATEGORY_KEY = "key.category."+WizardsReborn.MOD_ID+".general";
-    public static final KeyMapping OPEN_WAND_SELECTION_KEY = new KeyMapping("key."+WizardsReborn.MOD_ID+".selection_hud", KeyConflictContext.IN_GAME, InputConstants.Type.KEYSYM, GLFW.GLFW_KEY_V, CATEGORY_KEY);
+    public static final KeyMapping OPEN_SELECTION_HUD_KEY = new KeyMapping("key."+WizardsReborn.MOD_ID+".selection_hud", KeyConflictContext.IN_GAME, InputConstants.Type.KEYSYM, GLFW.GLFW_KEY_V, CATEGORY_KEY);
     public static final KeyMapping OPEN_CRYSTAL_BAG_KEY = new KeyMapping("key."+WizardsReborn.MOD_ID+".crystal_bag", KeyConflictContext.IN_GAME, InputConstants.Type.KEYSYM, GLFW.GLFW_KEY_UNKNOWN, CATEGORY_KEY);
     public static final KeyMapping OPEN_ALCHEMY_BAG_KEY = new KeyMapping("key."+WizardsReborn.MOD_ID+".alchemy_bag", KeyConflictContext.IN_GAME, InputConstants.Type.KEYSYM, GLFW.GLFW_KEY_UNKNOWN, CATEGORY_KEY);
 
@@ -361,7 +361,7 @@ public class WizardsRebornClient {
 
         @SubscribeEvent
         public static void registerKeyBindings(RegisterKeyMappingsEvent event) {
-            event.register(WizardsRebornClient.OPEN_WAND_SELECTION_KEY);
+            event.register(WizardsRebornClient.OPEN_SELECTION_HUD_KEY);
             event.register(WizardsRebornClient.OPEN_CRYSTAL_BAG_KEY);
             event.register(WizardsRebornClient.OPEN_ALCHEMY_BAG_KEY);
         }

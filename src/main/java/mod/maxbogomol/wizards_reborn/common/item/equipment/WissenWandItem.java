@@ -222,19 +222,25 @@ public class WissenWandItem extends Item {
         CompoundTag nbt = stack.getTag();
         if (nbt != null) {
             if (nbt.contains("mode")) {
-                switch (nbt.getInt("mode")) {
-                    case 0:
-                        return "lore.wizards_reborn.wissen_wand_mode.functional";
-                    case 1:
-                        return "lore.wizards_reborn.wissen_wand_mode.receive_connect";
-                    case 2:
-                        return "lore.wizards_reborn.wissen_wand_mode.send_connect";
-                    case 3:
-                        return "lore.wizards_reborn.wissen_wand_mode.reload";
-                    case 4:
-                        return "lore.wizards_reborn.wissen_wand_mode.off";
-                }
+                return getModeString(nbt.getInt("mode"));
             }
+        }
+
+        return "lore.wizards_reborn.wissen_wand_mode.functional";
+    }
+
+    public static String getModeString(int mode) {
+        switch (mode) {
+            case 0:
+                return "lore.wizards_reborn.wissen_wand_mode.functional";
+            case 1:
+                return "lore.wizards_reborn.wissen_wand_mode.receive_connect";
+            case 2:
+                return "lore.wizards_reborn.wissen_wand_mode.send_connect";
+            case 3:
+                return "lore.wizards_reborn.wissen_wand_mode.reload";
+            case 4:
+                return "lore.wizards_reborn.wissen_wand_mode.off";
         }
 
         return "lore.wizards_reborn.wissen_wand_mode.functional";
@@ -244,19 +250,25 @@ public class WissenWandItem extends Item {
         CompoundTag nbt = stack.getTag();
         if (nbt != null) {
             if (nbt.contains("mode")) {
-                switch (nbt.getInt("mode")) {
-                    case 0:
-                        return ChatFormatting.DARK_AQUA;
-                    case 1:
-                        return ChatFormatting.GREEN;
-                    case 2:
-                        return ChatFormatting.AQUA;
-                    case 3:
-                        return ChatFormatting.YELLOW;
-                    case 4:
-                        return ChatFormatting.GRAY;
-                }
+                return getModeColor(nbt.getInt("mode"));
             }
+        }
+
+        return ChatFormatting.DARK_AQUA;
+    }
+
+    public static ChatFormatting getModeColor(int mode) {
+        switch (mode) {
+            case 0:
+                return ChatFormatting.DARK_AQUA;
+            case 1:
+                return ChatFormatting.GREEN;
+            case 2:
+                return ChatFormatting.AQUA;
+            case 3:
+                return ChatFormatting.YELLOW;
+            case 4:
+                return ChatFormatting.GRAY;
         }
 
         return ChatFormatting.DARK_AQUA;

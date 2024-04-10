@@ -2,6 +2,7 @@ package mod.maxbogomol.wizards_reborn.common.tileentity;
 
 import mod.maxbogomol.wizards_reborn.WizardsReborn;
 import mod.maxbogomol.wizards_reborn.api.alchemy.ISteamTileEntity;
+import mod.maxbogomol.wizards_reborn.api.wissen.ICooldownTileEntity;
 import mod.maxbogomol.wizards_reborn.client.particle.Particles;
 import mod.maxbogomol.wizards_reborn.common.network.PacketHandler;
 import mod.maxbogomol.wizards_reborn.common.network.SmokeEffectPacket;
@@ -34,7 +35,7 @@ import java.util.List;
 import java.util.Optional;
 import java.util.Random;
 
-public class ArcaneCenserTileEntity extends ExposedTileSimpleInventory implements TickableBlockEntity, ISteamTileEntity {
+public class ArcaneCenserTileEntity extends ExposedTileSimpleInventory implements TickableBlockEntity, ISteamTileEntity, ICooldownTileEntity {
     public int steam = 0;
     public int cooldown = 0;
 
@@ -312,5 +313,13 @@ public class ArcaneCenserTileEntity extends ExposedTileSimpleInventory implement
     @Override
     public boolean canTakeItemThroughFace(int index, @NotNull ItemStack stack, @Nullable Direction direction) {
         return false;
+    }
+
+    @Override
+    public float getCooldown() {
+        if (cooldown > 0) {
+            return (float) 100 / cooldown;
+        }
+        return 0;
     }
 }

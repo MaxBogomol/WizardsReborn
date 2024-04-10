@@ -192,6 +192,9 @@ public class WizardsReborn {
     public static final TagKey<Block> EXTRACTOR_LEAVER_CONNECTION_BLOCK_TAG = TagKey.create(Registries.BLOCK, new ResourceLocation(MOD_ID, "extractor_leaver_connection"));
     public static final TagKey<Block> ALTAR_OF_DROUGHT_TARGET_BLOCK_TAG  = TagKey.create(Registries.BLOCK, new ResourceLocation(MOD_ID, "altar_of_drought_target"));
 
+    public static final TagKey<Fluid> STEAM_SOURCE_FLUID_TAG = TagKey.create(Registries.FLUID, new ResourceLocation(MOD_ID, "steam_source"));
+    public static final TagKey<Fluid> HEAT_SOURCE_FLUID_TAG = TagKey.create(Registries.FLUID, new ResourceLocation(MOD_ID, "heat_source"));
+
     public static final TagKey<BannerPattern> VIOLENCE_BANNER_PATTERN_TAG = TagKey.create(Registries.BANNER_PATTERN, new ResourceLocation(MOD_ID, "pattern_item/violence"));
     public static final TagKey<BannerPattern> REPRODUCTION_BANNER_PATTERN_TAG = TagKey.create(Registries.BANNER_PATTERN, new ResourceLocation(MOD_ID, "pattern_item/reproduction"));
     public static final TagKey<BannerPattern> COOPERATION_BANNER_PATTERN_TAG = TagKey.create(Registries.BANNER_PATTERN, new ResourceLocation(MOD_ID, "pattern_item/cooperation"));

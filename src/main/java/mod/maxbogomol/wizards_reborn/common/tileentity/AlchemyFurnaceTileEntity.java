@@ -28,7 +28,6 @@ import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
-import net.minecraft.world.level.material.Fluids;
 import net.minecraft.world.phys.Vec3;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.capabilities.ForgeCapabilities;
@@ -144,7 +143,7 @@ public class AlchemyFurnaceTileEntity extends BlockEntity implements TickableBlo
                 }
             }
 
-            if (getTank().getFluid().getFluid() == Fluids.WATER) {
+            if (getTank().getFluid().getFluid().is(WizardsReborn.STEAM_SOURCE_FLUID_TAG)) {
                 for (int i = 0; i < 5; i++) {
                     if (steam < getMaxSteam() && heat > 0 && getFluidAmount() > 0) {
                         getTank().drain(1, IFluidHandler.FluidAction.EXECUTE);
@@ -161,6 +160,15 @@ public class AlchemyFurnaceTileEntity extends BlockEntity implements TickableBlo
                 if (heat <= 0) {
                     cookMaxTime = 0;
                     cookTime = 0;
+                    update = true;
+                }
+            }
+
+            if (getTank().getFluid().getFluid().is(WizardsReborn.HEAT_SOURCE_FLUID_TAG)) {
+                if (steam < getMaxSteam() && heat - 20 < getMaxHeat() && getFluidAmount() > 0) {
+                    getTank().drain(1, IFluidHandler.FluidAction.EXECUTE);
+                    heat = heat + 20;
+                    heatLastTime = 10 * 20;
                     update = true;
                 }
             }
