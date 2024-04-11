@@ -13,7 +13,7 @@ public class WaterCrystalType extends CrystalType {
     }
 
     public Color getColor() {
-        return new Color(152, 180, 223);
+        return WizardsReborn.waterCrystalColor;
     }
 
     public ResourceLocation getMiniIcon() {

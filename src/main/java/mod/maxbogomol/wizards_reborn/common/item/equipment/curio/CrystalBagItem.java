@@ -3,6 +3,7 @@ package mod.maxbogomol.wizards_reborn.common.item.equipment.curio;
 import mod.maxbogomol.wizards_reborn.WizardsReborn;
 import mod.maxbogomol.wizards_reborn.client.gui.container.CrystalBagContainer;
 import mod.maxbogomol.wizards_reborn.common.item.ItemBackedInventory;
+import mod.maxbogomol.wizards_reborn.common.item.equipment.IBagItem;
 import net.minecraft.core.Direction;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
@@ -35,10 +36,12 @@ import top.theillusivec4.curios.api.type.capability.ICurio;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
+import java.awt.*;
 import java.util.Iterator;
 import java.util.stream.Stream;
 
-public class CrystalBagItem extends BaseCurioItem implements ICurioItemTexture {
+public class CrystalBagItem extends BaseCurioItem implements ICurioItemTexture, IBagItem {
+    public static Color color = new Color(153, 246, 146);
 
     private static final ResourceLocation BELT_TEXTURE = new ResourceLocation(WizardsReborn.MOD_ID,"textures/entity/curio/crystal_bag.png");
 
@@ -90,12 +93,7 @@ public class CrystalBagItem extends BaseCurioItem implements ICurioItemTexture {
     public InteractionResultHolder<ItemStack> use(Level world, Player player, InteractionHand hand) {
         ItemStack stack = player.getItemInHand(hand);
         player.awardStat(Stats.ITEM_USED.get(this));
-
-        if (!world.isClientSide) {
-            MenuProvider containerProvider = createContainerProvider(world, stack);
-            NetworkHooks.openScreen(((ServerPlayer) player), containerProvider, b -> b.writeItem(stack));
-            world.playSound(WizardsReborn.proxy.getPlayer(), player.getX(), player.getY(), player.getZ(), SoundEvents.ARMOR_EQUIP_LEATHER, SoundSource.PLAYERS, 1f, 1f);
-        }
+        openBag(world, player, stack);
 
         return InteractionResultHolder.success(stack);
     }
@@ -133,5 +131,19 @@ public class CrystalBagItem extends BaseCurioItem implements ICurioItemTexture {
         };
 
         ItemUtils.onContainerDestroyed(pItemEntity, Stream.iterate(iter.next(), t -> iter.hasNext(), t -> iter.next()));
+    }
+
+    @Override
+    public Color getColor(ItemStack stack) {
+        return color;
+    }
+
+    @Override
+    public void openBag(Level world, Player player, ItemStack stack) {
+        if (!world.isClientSide) {
+            MenuProvider containerProvider = createContainerProvider(world, stack);
+            NetworkHooks.openScreen(((ServerPlayer) player), containerProvider, b -> b.writeItem(stack));
+            world.playSound(WizardsReborn.proxy.getPlayer(), player.getX(), player.getY(), player.getZ(), SoundEvents.ARMOR_EQUIP_LEATHER, SoundSource.PLAYERS, 1f, 1f);
+        }
     }
 }

@@ -440,6 +440,22 @@ public class WizardsReborn {
             INNOCENT_WOOD_SOUNDS, INNOCENT_WOOD_HANGING_SIGN_SOUNDS,
             INNOCENT_WOOD_FENCE_GATE_CLOSE_SOUND.get(), INNOCENT_WOOD_FENCE_GATE_OPEN_SOUND.get())));
 
+    //COLORS
+    public static Color earthCrystalColor = new Color(138, 201, 123);
+    public static Color waterCrystalColor = new Color(152, 180, 223);
+    public static Color airCrystalColor = new Color(230, 173, 134);
+    public static Color fireCrystalColor = new Color(225, 127, 103);
+    public static Color voidCrystalColor = new Color(175, 140, 194);
+
+    public static Color earthSpellColor = new Color(138, 201, 123);
+    public static Color waterSpellColor = new Color(152, 180, 223);
+    public static Color airSpellColor = new Color(230, 173, 134);
+    public static Color fireSpellColor = new Color(225, 127, 103);
+    public static Color voidSpellColor = new Color(175, 140, 194);
+    public static Color frostSpellColor = new Color(221, 243, 254);
+    public static Color holySpellColor = new Color(255, 248, 194);
+    public static Color curseSpellColor = new Color(203, 194, 255);
+
     //CRYSTAL_STATS
     public static CrystalStat FOCUS_CRYSTAL_STAT = new CrystalStat(MOD_ID+":focus", 3);
     public static CrystalStat BALANCE_CRYSTAL_STAT = new CrystalStat(MOD_ID+":balance", 3);
@@ -447,18 +463,18 @@ public class WizardsReborn {
     public static CrystalStat RESONANCE_CRYSTAL_STAT = new CrystalStat(MOD_ID+":resonance", 3);
 
     //POLISHING_TYPES
-    public static final PolishingType CRYSTAL_POLISHING_TYPE  = new CrystalPolishingType(MOD_ID+":crystal");
-    public static final PolishingType FACETED_POLISHING_TYPE  = new FacetedPolishingType(MOD_ID+":faceted");
-    public static final PolishingType ADVANCED_POLISHING_TYPE  = new AdvancedPolishingType(MOD_ID+":advanced");
-    public static final PolishingType MASTERFUL_POLISHING_TYPE  = new MasterfulPolishingType(MOD_ID+":masterful");
-    public static final PolishingType PURE_POLISHING_TYPE  = new PurePolishingType(MOD_ID+":pure");
+    public static final PolishingType CRYSTAL_POLISHING_TYPE = new CrystalPolishingType(MOD_ID+":crystal");
+    public static final PolishingType FACETED_POLISHING_TYPE = new FacetedPolishingType(MOD_ID+":faceted");
+    public static final PolishingType ADVANCED_POLISHING_TYPE = new AdvancedPolishingType(MOD_ID+":advanced");
+    public static final PolishingType MASTERFUL_POLISHING_TYPE = new MasterfulPolishingType(MOD_ID+":masterful");
+    public static final PolishingType PURE_POLISHING_TYPE = new PurePolishingType(MOD_ID+":pure");
 
     //CRYSTAL_TYPES
-    public static final CrystalType EARTH_CRYSTAL_TYPE  = new EarthCrystalType(MOD_ID+":earth");
-    public static final CrystalType WATER_CRYSTAL_TYPE  = new WaterCrystalType(MOD_ID+":water");
-    public static final CrystalType AIR_CRYSTAL_TYPE  = new AirCrystalType(MOD_ID+":air");
-    public static final CrystalType FIRE_CRYSTAL_TYPE  = new FireCrystalType(MOD_ID+":fire");
-    public static final CrystalType VOID_CRYSTAL_TYPE  = new VoidCrystalType(MOD_ID+":void");
+    public static final CrystalType EARTH_CRYSTAL_TYPE = new EarthCrystalType(MOD_ID+":earth");
+    public static final CrystalType WATER_CRYSTAL_TYPE = new WaterCrystalType(MOD_ID+":water");
+    public static final CrystalType AIR_CRYSTAL_TYPE = new AirCrystalType(MOD_ID+":air");
+    public static final CrystalType FIRE_CRYSTAL_TYPE = new FireCrystalType(MOD_ID+":fire");
+    public static final CrystalType VOID_CRYSTAL_TYPE = new VoidCrystalType(MOD_ID+":void");
 
     //MONOGRAMS
     public static Monogram LUNAM_MONOGRAM = new Monogram(MOD_ID+":lunam", new Color(177, 211, 251));

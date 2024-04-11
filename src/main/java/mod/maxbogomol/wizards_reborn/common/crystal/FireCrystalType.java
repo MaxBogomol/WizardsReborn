@@ -13,7 +13,7 @@ public class FireCrystalType extends CrystalType {
     }
 
     public Color getColor() {
-        return new Color(225, 127, 103);
+        return WizardsReborn.fireCrystalColor;
     }
 
     public ResourceLocation getMiniIcon() {

@@ -30,7 +30,7 @@ public class HolyRaySpell extends RaySpell {
 
     @Override
     public Color getColor() {
-        return new Color(255, 248, 194);
+        return WizardsReborn.holySpellColor;
     }
 
     @Override

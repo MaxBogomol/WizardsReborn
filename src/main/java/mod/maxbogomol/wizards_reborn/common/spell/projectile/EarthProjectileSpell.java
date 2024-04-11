@@ -21,7 +21,7 @@ public class EarthProjectileSpell extends ProjectileSpell {
 
     @Override
     public Color getColor() {
-        return new Color(138, 201, 123);
+        return WizardsReborn.earthSpellColor;
     }
 
     @Override

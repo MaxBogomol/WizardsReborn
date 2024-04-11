@@ -30,7 +30,7 @@ public class CurseRaySpell extends RaySpell {
 
     @Override
     public Color getColor() {
-        return new Color(203, 194, 255);
+        return WizardsReborn.curseSpellColor;
     }
 
     @Override

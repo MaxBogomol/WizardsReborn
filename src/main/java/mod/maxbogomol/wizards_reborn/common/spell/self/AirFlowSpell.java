@@ -25,7 +25,7 @@ public class AirFlowSpell extends SelfSpell {
 
     @Override
     public Color getColor() {
-        return new Color(230, 173, 134);
+        return WizardsReborn.airSpellColor;
     }
 
     public int getCooldown() {

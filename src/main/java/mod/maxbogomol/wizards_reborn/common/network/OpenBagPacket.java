@@ -1,35 +1,32 @@
 package mod.maxbogomol.wizards_reborn.common.network;
 
-import mod.maxbogomol.wizards_reborn.WizardsReborn;
-import mod.maxbogomol.wizards_reborn.common.item.equipment.curio.CrystalBagItem;
+import mod.maxbogomol.wizards_reborn.common.item.equipment.IBagItem;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.server.level.ServerPlayer;
-import net.minecraft.sounds.SoundEvents;
-import net.minecraft.sounds.SoundSource;
-import net.minecraft.world.MenuProvider;
 import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.network.NetworkEvent;
-import net.minecraftforge.network.NetworkHooks;
 import top.theillusivec4.curios.api.CuriosApi;
 import top.theillusivec4.curios.api.SlotResult;
 
 import java.util.List;
 import java.util.function.Supplier;
 
-public class OpenCrystalBagPacket {
-    public OpenCrystalBagPacket() {
+public class OpenBagPacket {
+    private final ItemStack bag;
 
+    public OpenBagPacket(ItemStack bag) {
+        this.bag = bag;
     }
 
-    public static OpenCrystalBagPacket decode(FriendlyByteBuf buf) {
-        return new OpenCrystalBagPacket();
+    public static OpenBagPacket decode(FriendlyByteBuf buf) {
+        return new OpenBagPacket( buf.readItem());
     }
 
     public void encode(FriendlyByteBuf buf) {
-
+        buf.writeItem(bag);
     }
 
-    public static void handle(OpenCrystalBagPacket msg, Supplier<NetworkEvent.Context> ctx) {
+    public static void handle(OpenBagPacket msg, Supplier<NetworkEvent.Context> ctx) {
         if (ctx.get().getDirection().getReceptionSide().isServer()) {
             ctx.get().enqueueWork(() -> {
                 ServerPlayer player = ctx.get().getSender();
@@ -43,11 +40,13 @@ public class OpenCrystalBagPacket {
                 }
 
                 for (ItemStack item : items) {
-                    if (item.getItem() instanceof CrystalBagItem stack) {
-                        MenuProvider containerProvider = stack.createContainerProvider(player.level(), item);
-                        NetworkHooks.openScreen(((ServerPlayer) player), containerProvider, b -> b.writeItem(item));
-                        player.serverLevel().playSound(WizardsReborn.proxy.getPlayer(), player.getX(), player.getY(), player.getZ(), SoundEvents.ARMOR_EQUIP_LEATHER, SoundSource.PLAYERS, 1f, 1f);
-                        break;
+                    if (item.getItem() instanceof IBagItem bag) {
+                        if (item.equals(msg.bag, false)) {
+                            if (item.getOrCreateTag().toString().equals(msg.bag.getOrCreateTag().toString())) {
+                                bag.openBag(player.serverLevel(), player, item);
+                                break;
+                            }
+                        }
                     }
                 }
             });

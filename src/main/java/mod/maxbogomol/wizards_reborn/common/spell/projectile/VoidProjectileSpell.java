@@ -20,7 +20,7 @@ public class VoidProjectileSpell extends ProjectileSpell {
 
     @Override
     public Color getColor() {
-        return new Color(175, 140, 194);
+        return WizardsReborn.voidSpellColor;
     }
 
     @Override

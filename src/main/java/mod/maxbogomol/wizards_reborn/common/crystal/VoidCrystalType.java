@@ -13,7 +13,7 @@ public class VoidCrystalType extends CrystalType {
     }
 
     public Color getColor() {
-        return new Color(175, 140, 194);
+        return WizardsReborn.voidCrystalColor;
     }
 
     public ResourceLocation getMiniIcon() {

@@ -5,6 +5,8 @@ import mod.maxbogomol.wizards_reborn.api.crystal.PolishingType;
 import java.awt.*;
 
 public class PurePolishingType extends PolishingType {
+    public static Color color = new Color(147, 208, 212);
+
     public PurePolishingType(String id) {
         super(id, 4);
     }
@@ -14,6 +16,6 @@ public class PurePolishingType extends PolishingType {
     }
 
     public Color getColor() {
-        return new Color(147, 208, 212);
+        return color;
     }
 }

@@ -13,7 +13,7 @@ public class AirCrystalType extends CrystalType {
     }
 
     public Color getColor() {
-        return new Color(230, 173, 134);
+        return WizardsReborn.airCrystalColor;
     }
 
     public ResourceLocation getMiniIcon() {

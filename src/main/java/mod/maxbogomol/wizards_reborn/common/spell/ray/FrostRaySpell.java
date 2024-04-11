@@ -37,7 +37,7 @@ public class FrostRaySpell extends RaySpell {
 
     @Override
     public Color getColor() {
-        return new Color(221, 243, 254);
+        return WizardsReborn.frostSpellColor;
     }
 
     @Override

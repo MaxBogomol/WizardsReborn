@@ -13,7 +13,7 @@ public class EarthCrystalType extends CrystalType {
     }
 
     public Color getColor() {
-        return new Color(138, 201, 123);
+        return WizardsReborn.earthCrystalColor;
     }
 
     public ResourceLocation getMiniIcon() {

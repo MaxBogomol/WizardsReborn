@@ -23,7 +23,7 @@ public class FireShieldSpell extends SelfSpell {
 
     @Override
     public Color getColor() {
-        return new Color(225, 127, 103);
+        return WizardsReborn.fireSpellColor;
     }
 
     public int getCooldown() {

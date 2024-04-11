@@ -2,13 +2,12 @@ package mod.maxbogomol.wizards_reborn.client.event;
 
 import mod.maxbogomol.wizards_reborn.WizardsReborn;
 import mod.maxbogomol.wizards_reborn.WizardsRebornClient;
+import mod.maxbogomol.wizards_reborn.client.gui.screen.BagMenuScreen;
 import mod.maxbogomol.wizards_reborn.client.gui.screen.CrystalChooseScreen;
 import mod.maxbogomol.wizards_reborn.client.gui.screen.WissenWandChooseScreen;
 import mod.maxbogomol.wizards_reborn.common.item.equipment.ArcaneWandItem;
 import mod.maxbogomol.wizards_reborn.common.item.equipment.WissenWandItem;
 import mod.maxbogomol.wizards_reborn.common.network.DeleteCrystalPacket;
-import mod.maxbogomol.wizards_reborn.common.network.OpenAlchemyBagPacket;
-import mod.maxbogomol.wizards_reborn.common.network.OpenCrystalBagPacket;
 import mod.maxbogomol.wizards_reborn.common.network.PacketHandler;
 import net.minecraft.client.Minecraft;
 import net.minecraft.nbt.CompoundTag;
@@ -29,16 +28,12 @@ public class KeyBindHandler {
     @SubscribeEvent
     public static void onKeyPress(InputEvent event) {
 
-        if (WizardsRebornClient.OPEN_SELECTION_HUD_KEY.isDown()) {
+        if (WizardsRebornClient.OPEN_SELECTION_MENU_KEY.isDown()) {
             chooseMenus();
         }
 
-        if (WizardsRebornClient.OPEN_CRYSTAL_BAG_KEY.isDown()) {
-            PacketHandler.sendToServer(new OpenCrystalBagPacket());
-        }
-
-        if (WizardsRebornClient.OPEN_ALCHEMY_BAG_KEY.isDown()) {
-            PacketHandler.sendToServer(new OpenAlchemyBagPacket());
+        if (WizardsRebornClient.OPEN_BAG_MENU_KEY.isDown()) {
+            Minecraft.getInstance().setScreen(new BagMenuScreen(Component.empty()));
         }
     }
 

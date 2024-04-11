@@ -20,7 +20,7 @@ public class AirProjectileSpell extends ProjectileSpell {
 
     @Override
     public Color getColor() {
-        return new Color(230, 173, 134);
+        return WizardsReborn.airSpellColor;
     }
 
     @Override

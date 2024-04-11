@@ -40,7 +40,7 @@ public class FireRaySpell extends RaySpell {
 
     @Override
     public Color getColor() {
-        return new Color(225, 127, 103);
+        return WizardsReborn.fireSpellColor;
     }
 
     @Override
