@@ -39,7 +39,10 @@ public class ArcanemiconGui extends Screen {
         super(Component.translatable("gui.wizards_reborn.arcanemicon.title"));
         if (currentChapter == null) {
             currentChapter = ArcanemiconChapters.ARCANE_NATURE_INDEX;
-            historyEntries.add(new ChapterHistoryEntry(currentChapter, 0));
+        }
+        if (historyEntries.isEmpty()) {
+            changeChapter(currentChapter);
+            currentHistory = 1;
         }
         for (Category category : ArcanemiconChapters.categories) {
             category.reset();

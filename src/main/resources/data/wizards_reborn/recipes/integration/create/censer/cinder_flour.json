@@ -1,0 +1,36 @@
+{
+  "type": "forge:conditional",
+  "recipes": [
+    {
+      "conditions": [
+        {
+          "type": "forge:mod_loaded",
+          "modid": "embers"
+        }
+      ],
+      "recipe": {
+        "type": "wizards_reborn:censer",
+        "ingredient": {
+          "item": "embers:cinder_flour"
+        },
+        "effects": [
+          {
+            "effect": "minecraft:fire_resistance",
+            "duration": 1000,
+            "amplifier": 0
+          },
+          {
+            "effect": "minecraft:slowness",
+            "duration": 100,
+            "amplifier": 0
+          },
+          {
+            "effect": "minecraft:nausea",
+            "duration": 200,
+            "amplifier": 0
+          }
+        ]
+      }
+    }
+  ]
+}

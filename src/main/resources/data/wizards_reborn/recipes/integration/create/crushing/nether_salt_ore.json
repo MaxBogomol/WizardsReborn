@@ -25,6 +25,10 @@
             "chance": 0.25
           },
           {
+            "item": "minecraft:quartz",
+            "chance": 0.05
+          },
+          {
             "item": "create:experience_nugget",
             "chance": 0.75
           },

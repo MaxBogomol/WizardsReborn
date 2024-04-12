@@ -56,6 +56,7 @@
     "wizards_reborn:arcane_iterator",
     "wizards_reborn:innocent_pedestal",
     "wizards_reborn:innocent_hovering_tome_stand",
+    "wizards_reborn:arcane_hopper",
     "wizards_reborn:redstone_sensor",
     "wizards_reborn:wissen_sensor",
     "wizards_reborn:cooldown_sensor",
@@ -81,6 +82,10 @@
     "wizards_reborn:innocent_wood_fluid_casing",
     "wizards_reborn:innocent_wood_steam_casing",
     "wizards_reborn:creative_wissen_storage",
-    "wizards_reborn:creative_light_storage"
+    "wizards_reborn:creative_light_storage",
+    "wizards_reborn:arcane_salt_lantern",
+    "wizards_reborn:innocent_salt_lantern",
+    "wizards_reborn:arcane_salt_campfire",
+    "wizards_reborn:innocent_salt_campfire"
   ]
 }

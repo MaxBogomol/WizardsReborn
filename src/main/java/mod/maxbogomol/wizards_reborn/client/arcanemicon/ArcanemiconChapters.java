@@ -41,8 +41,8 @@ public class ArcanemiconChapters {
     public static List<Category> categories = new ArrayList<>();
     public static Category ARCANE_NATURE, SPELLS, CRYSTAL_RITUALS, ALCHEMY;
     public static Chapter ARCANE_NATURE_INDEX, SPELLS_INDEX, CRYSTAL_RITUALS_INDEX, ALCHEMY_INDEX,
-            ARCANUM, ARCANUM_DUST_TRANSMUTATION, ARCANE_WOOD, ARCANE_GOLD, SCYTHES, TRINKETS, ARCANE_WOOD_BOW, BANNER_PATTERNS, WISSEN, WISSEN_TRANSLATOR, ARCANE_PEDESTAL, WISSEN_ALTAR, WISSEN_CRYSTALLIZER, ARCANE_WORKBENCH, ARCANE_LUMOS, CRYSTALS, ARCANE_WAND, AUTOMATION, WISSEN_CELL, CRYSTAL_BAG, TOTEM_OF_FLAMES, EXPERIENCE_TOTEM, TOTEM_OF_EXPERIENCE_ABSORPTION, TOTEM_OF_DISENCHANT, ALTAR_OF_DROUGHT, VOID_CRYSTAL, ARCANE_FORTRESS_ARMOR, INVENTOR_WIZARD_ARMOR, ARCANE_WOOD_CANE, ARCANE_ITERATOR, ARCANUM_LENS, WISSEN_KEYCHAIN, WISSEN_RING, JEWELER_TABLE, MUSIC_DISC_REBORN,
-            ARCANE_LEVER, REDSTONE_SENSOR, WISSEN_SENSOR, COOLDOWN_SENSOR, EXPERIENCE_SENSOR, LIGHT_SENSOR, HEAT_SENSOR, FLUID_SENSOR, STEAM_SENSOR, WISSEN_ACTIVATOR, ITEM_SORTER, ARCANE_WOOD_FRAME, WISSEN_CASING, WISESTONE_CASING, FLUID_CASING, STEAM_CASING, GLASS_FRAME, LIGHT_CASING, INNOCENT_CASING,
+            ARCANUM, ARCANUM_DUST_TRANSMUTATION, ARCANE_WOOD, ARCANE_GOLD, SCYTHES, TRINKETS, ARCANE_WOOD_BOW, BANNER_PATTERNS, WISSEN, WISSEN_TRANSLATOR, ARCANE_PEDESTAL, WISSEN_ALTAR, WISSEN_CRYSTALLIZER, ARCANE_WORKBENCH, ARCANE_LUMOS, CRYSTALS, ARCANE_WAND, AUTOMATION, WISSEN_CELL, CRYSTAL_BAG, TOTEM_OF_FLAMES, EXPERIENCE_TOTEM, TOTEM_OF_EXPERIENCE_ABSORPTION, TOTEM_OF_DISENCHANT, ALTAR_OF_DROUGHT, VOID_CRYSTAL, ARCANE_FORTRESS_ARMOR, INVENTOR_WIZARD_ARMOR, ARCANE_WOOD_CANE, ARCANE_ITERATOR, ARCANUM_LENS, WISSEN_KEYCHAIN, WISSEN_RING, JEWELER_TABLE, MUSIC_DISC_REBORN, MUSIC_DISC_PANACHE,
+            ARCANE_LEVER, ARCANE_HOPPER, REDSTONE_SENSOR, WISSEN_SENSOR, COOLDOWN_SENSOR, EXPERIENCE_SENSOR, LIGHT_SENSOR, HEAT_SENSOR, FLUID_SENSOR, STEAM_SENSOR, WISSEN_ACTIVATOR, ITEM_SORTER, ARCANE_WOOD_FRAME, WISSEN_CASING, WISESTONE_CASING, FLUID_CASING, STEAM_CASING, GLASS_FRAME, LIGHT_CASING, INNOCENT_CASING,
             ALL_SPELLS, EARTH_SPELLS, WATER_SPELLS, AIR_SPELLS, FIRE_SPELLS, VOID_SPELLS,
             EARTH_PROJECTILE, WATER_PROJECTILE, AIR_PROJECTILE, FIRE_PROJECTILE, VOID_PROJECTILE, FROST_PROJECTILE, HOLY_PROJECTILE, CURSE_PROJECTILE,
             EARTH_RAY, WATER_RAY, AIR_RAY, FIRE_RAY, VOID_RAY, FROST_RAY, HOLY_RAY, CURSE_RAY,
@@ -50,14 +50,14 @@ public class ArcanemiconChapters {
             HEART_OF_NATURE, WATER_BREATHING, AIR_FLOW, FIRE_SHIELD, MAGIC_SPROUT,
             MONOGRAMS, RESEARCHES, RESEARCH, LUNAM_MONOGRAM, VITA_MONOGRAM, SOLEM_MONOGRAM, MORS_MONOGRAM, MIRACULUM_MONOGRAM, TEMPUS_MONOGRAM, STATERA_MONOGRAM, ECLIPSIS_MONOGRAM, SICCITAS_MONOGRAM, SOLSTITIUM_MONOGRAM, FAMES_MONOGRAM, RENAISSANCE_MONOGRAM, BELLUM_MONOGRAM, LUX_MONOGRAM, KARA_MONOGRAM, DEGRADATIO_MONOGRAM, PRAEDICTIONEM_MONOGRAM, EVOLUTIONIS_MONOGRAM, TENEBRIS_MONOGRAM, UNIVERSUM_MONOGRAM,
             LIGHT_RAYS, LIGHT_EMITTER, LIGHT_TRANSFER_LENS, RUNIC_PEDESTAL, CRYSTALS_RITUALS, ARTIFICIAL_FERTILITY, RITUAL_BREEDING, CRYSTAL_GROWTH_ACCELERATION, CRYSTAL_INFUSION, ARCANUM_SEED, INNOCENT_WOOD,
-            MOR, MORTAR, ARCANE_LINEN, MUSHROOM_CAPS, WISESTONE, WISESTONE_PEDESTAL, FLUID_PIPES, STEAM_PIPES, ORBITAL_FLUID_RETAINER, ALCHEMY_FURNACE, STEAM_THERMAL_STORAGE, ALCHEMY_MACHINE, ALCHEMY_OIL, MUSIC_DISC_ARCANUM, MUSIC_DISC_MOR, ALCHEMY_CALX, ALCHEMY_GLASS, ALCHEMY_BAG, ALCHEMY_POTIONS, TEA, ALCHEMY_BREWS, ADVANCED_CALX, ALCHEMY_TRANSMUTATION, ARCANE_CENSER, SMOKING_PIPE, ARCACITE, ARCACITE_POLISHING_MIXTURE;
+            MOR, MORTAR, ARCANE_LINEN, MUSHROOM_CAPS, WISESTONE, WISESTONE_PEDESTAL, FLUID_PIPES, STEAM_PIPES, ORBITAL_FLUID_RETAINER, ALCHEMY_FURNACE, STEAM_THERMAL_STORAGE, ALCHEMY_MACHINE, ALCHEMY_OIL, MUSIC_DISC_ARCANUM, MUSIC_DISC_MOR, NETHER_SALT, ALCHEMY_CALX, ALCHEMY_GLASS, ALCHEMY_BAG, ALCHEMY_POTIONS, TEA, ALCHEMY_BREWS, ADVANCED_CALX, ALCHEMY_TRANSMUTATION, ARCANE_CENSER, SMOKING_PIPE, ARCACITE, ARCACITE_POLISHING_MIXTURE;
     public static ResearchPage RESEARCH_MAIN, RESEARCH_LIST;
 
     public static ItemStack EMPTY_ITEM, 
             ARCANE_PEDESTAL_ITEM, TOTEM_BASE_ITEM, WISESTONE_PEDESTAL_ITEM, RUNIC_PEDESTAL_ITEM, INNOCENT_PEDESTAL_ITEM, 
             ARCANE_GOLD_INGOT_ITEM, ARCANE_GOLD_NUGGET_ITEM, ARCANUM_ITEM, ARCANUM_DUST_ITEM, ARCACITE_ITEM, ARCANE_WOOD_BRANCH_ITEM,
             ARCANE_WOOD_PLANKS_ITEM, ARCANE_WOOD_SLAB_ITEM, INNOCENT_WOOD_PLANKS_ITEM, INNOCENT_WOOD_SLAB_ITEM, POLISHED_WISESTONE_ITEM, POLISHED_WISESTONE_SLAB_ITEM,
-            ALCHEMY_CALX_ITEM, NATURAL_CALX_ITEM, SCORCHED_CALX_ITEM, DISTANT_CALX_ITEM, ENCHANTED_CALX_ITEM, ARCANUM_LENS_ITEM;
+            NETHER_SALT_ITEM, ALCHEMY_CALX_ITEM, NATURAL_CALX_ITEM, SCORCHED_CALX_ITEM, DISTANT_CALX_ITEM, ENCHANTED_CALX_ITEM, ARCANUM_LENS_ITEM;
 
     public static void itemsInit() {
         EMPTY_ITEM = ItemStack.EMPTY;
@@ -78,6 +78,7 @@ public class ArcanemiconChapters {
         INNOCENT_WOOD_SLAB_ITEM = new ItemStack(WizardsReborn.INNOCENT_WOOD_SLAB_ITEM.get());
         POLISHED_WISESTONE_ITEM = new ItemStack(WizardsReborn.POLISHED_WISESTONE_ITEM.get());
         POLISHED_WISESTONE_SLAB_ITEM = new ItemStack(WizardsReborn.POLISHED_WISESTONE_SLAB_ITEM.get());
+        NETHER_SALT_ITEM = new ItemStack(WizardsReborn.NETHER_SALT.get());
         ALCHEMY_CALX_ITEM = new ItemStack(WizardsReborn.ALCHEMY_CALX.get());
         NATURAL_CALX_ITEM = new ItemStack(WizardsReborn.NATURAL_CALX.get());
         SCORCHED_CALX_ITEM = new ItemStack(WizardsReborn.SCORCHED_CALX.get());
@@ -103,6 +104,8 @@ public class ArcanemiconChapters {
                         ARCANUM_ITEM, ARCANUM_ITEM, ARCANUM_ITEM
                 ),
                 new CraftingTablePage(new ItemStack(WizardsReborn.ARCANUM.get(), 9), new ItemStack(WizardsReborn.ARCANUM_BLOCK_ITEM.get())),
+                new SmeltingPage(ARCANUM_ITEM, new ItemStack(WizardsReborn.ARCANUM_ORE_ITEM.get())),
+                new SmeltingPage(ARCANUM_ITEM, new ItemStack(WizardsReborn.DEEPSLATE_ARCANUM_ORE_ITEM.get())),
                 new CraftingTablePage(new ItemStack(WizardsReborn.ARCANUM_DUST_BLOCK_ITEM.get()),
                         ARCANUM_DUST_ITEM, ARCANUM_DUST_ITEM, ARCANUM_DUST_ITEM,
                         ARCANUM_DUST_ITEM, ARCANUM_DUST_ITEM, ARCANUM_DUST_ITEM,
@@ -630,6 +633,18 @@ public class ArcanemiconChapters {
                 )
         );
 
+        ARCANE_HOPPER = new Chapter(
+                "wizards_reborn.arcanemicon.chapter.arcane_hopper",
+                new TitledBlockPage("wizards_reborn.arcanemicon.page.arcane_hopper",
+                        new BlockEntry(ARCANE_PEDESTAL_ITEM, new ItemStack(WizardsReborn.ARCANE_HOPPER_ITEM.get()))
+                ),
+                new ArcaneWorkbenchPage(new ItemStack(WizardsReborn.ARCANE_HOPPER_ITEM.get()),
+                        EMPTY_ITEM, ARCANE_GOLD_INGOT_ITEM, EMPTY_ITEM,
+                        ARCANE_WOOD_PLANKS_ITEM, new ItemStack(Items.HOPPER), ARCANE_WOOD_PLANKS_ITEM,
+                        ARCANE_WOOD_PLANKS_ITEM, new ItemStack(WizardsReborn.ARCANE_WOOD_FRAME_ITEM.get()), ARCANE_WOOD_PLANKS_ITEM
+                )
+        );
+
         REDSTONE_SENSOR = new Chapter(
                 "wizards_reborn.arcanemicon.chapter.redstone_sensor",
                 new TitledBlockPage("wizards_reborn.arcanemicon.page.redstone_sensor",
@@ -945,23 +960,24 @@ public class ArcanemiconChapters {
                 new TitledBlockPage("wizards_reborn.arcanemicon.page.automation"),
                 new IndexPage(
                         new IndexEntry(ARCANE_LEVER, new ItemStack(WizardsReborn.ARCANE_LEVER_ITEM.get()), RegisterKnowledges.WISESTONE),
+                        new IndexEntry(ARCANE_HOPPER, new ItemStack(WizardsReborn.ARCANE_HOPPER_ITEM.get())),
                         new IndexEntry(REDSTONE_SENSOR, new ItemStack(WizardsReborn.REDSTONE_SENSOR_ITEM.get())),
                         new IndexEntry(WISSEN_SENSOR, new ItemStack(WizardsReborn.WISSEN_SENSOR_ITEM.get())),
                         new IndexEntry(COOLDOWN_SENSOR, new ItemStack(WizardsReborn.COOLDOWN_SENSOR_ITEM.get())),
                         new IndexEntry(EXPERIENCE_SENSOR, new ItemStack(WizardsReborn.EXPERIENCE_SENSOR_ITEM.get())),
-                        new IndexEntry(LIGHT_SENSOR, new ItemStack(WizardsReborn.LIGHT_SENSOR_ITEM.get())),
-                        new IndexEntry(HEAT_SENSOR, new ItemStack(WizardsReborn.HEAT_SENSOR_ITEM.get()), RegisterKnowledges.ALCHEMY_FURNACE)
+                        new IndexEntry(LIGHT_SENSOR, new ItemStack(WizardsReborn.LIGHT_SENSOR_ITEM.get()))
                 ),
                 new IndexPage(
+                        new IndexEntry(HEAT_SENSOR, new ItemStack(WizardsReborn.HEAT_SENSOR_ITEM.get()), RegisterKnowledges.ALCHEMY_FURNACE),
                         new IndexEntry(FLUID_SENSOR, new ItemStack(WizardsReborn.FLUID_SENSOR_ITEM.get()), RegisterKnowledges.FLUID_PIPE),
                         new IndexEntry(STEAM_SENSOR, new ItemStack(WizardsReborn.STEAM_SENSOR_ITEM.get()), RegisterKnowledges.STEAM_PIPE),
                         new IndexEntry(WISSEN_ACTIVATOR, new ItemStack(WizardsReborn.WISSEN_ACTIVATOR_ITEM.get())),
                         new IndexEntry(ITEM_SORTER, new ItemStack(WizardsReborn.ITEM_SORTER_ITEM.get()), RegisterKnowledges.ALCHEMY_GLASS),
                         new IndexEntry(ARCANE_WOOD_FRAME, new ItemStack(WizardsReborn.ARCANE_WOOD_FRAME_ITEM.get())),
-                        new IndexEntry(WISSEN_CASING, new ItemStack(WizardsReborn.ARCANE_WOOD_WISSEN_CASING_ITEM.get())),
-                        new IndexEntry(WISESTONE_CASING, new ItemStack(WizardsReborn.WISESTONE_CASING_ITEM.get()), RegisterKnowledges.WISESTONE)
+                        new IndexEntry(WISSEN_CASING, new ItemStack(WizardsReborn.ARCANE_WOOD_WISSEN_CASING_ITEM.get()))
                 ),
                 new IndexPage(
+                        new IndexEntry(WISESTONE_CASING, new ItemStack(WizardsReborn.WISESTONE_CASING_ITEM.get()), RegisterKnowledges.WISESTONE),
                         new IndexEntry(FLUID_CASING, new ItemStack(WizardsReborn.ARCANE_WOOD_FLUID_CASING_ITEM.get()), RegisterKnowledges.FLUID_PIPE),
                         new IndexEntry(STEAM_CASING, new ItemStack(WizardsReborn.ARCANE_WOOD_STEAM_CASING_ITEM.get()), RegisterKnowledges.STEAM_PIPE),
                         new IndexEntry(GLASS_FRAME, new ItemStack(WizardsReborn.ARCANE_WOOD_GLASS_FRAME_ITEM.get()), RegisterKnowledges.ALCHEMY_GLASS),
@@ -1427,6 +1443,16 @@ public class ArcanemiconChapters {
                 )
         );
 
+        MUSIC_DISC_PANACHE = new Chapter(
+                "wizards_reborn.arcanemicon.chapter.music_disc_panache",
+                new TitledBlockPage("wizards_reborn.arcanemicon.page.music_disc_panache",
+                        new BlockEntry(WISESTONE_PEDESTAL_ITEM, new ItemStack(WizardsReborn.MUSIC_DISC_PANACHE.get()))
+                ),
+                new ArcaneIteratorPage(new ItemStack(WizardsReborn.MUSIC_DISC_PANACHE.get()), 0, 0,
+                        new ItemStack(Items.MUSIC_DISC_13), ARCANE_WOOD_PLANKS_ITEM, new ItemStack(WizardsReborn.RAW_ARCANE_GOLD.get())
+                )
+        );
+
         ARCANE_NATURE_INDEX = new Chapter(
                 "wizards_reborn.arcanemicon.chapter.arcane_nature_index",
                 new TitledIndexPage("wizards_reborn.arcanemicon.page.arcane_nature_index",
@@ -1474,7 +1500,8 @@ public class ArcanemiconChapters {
                         new IndexEntry(JEWELER_TABLE, new ItemStack(WizardsReborn.JEWELER_TABLE_ITEM.get()), RegisterKnowledges.ARCACITE_POLISHING_MIXTURE)
                 ),
                 new IndexPage(
-                        new IndexEntry(MUSIC_DISC_REBORN, new ItemStack(WizardsReborn.MUSIC_DISC_REBORN.get()), RegisterKnowledges.ARCANE_ITERATOR)
+                        new IndexEntry(MUSIC_DISC_REBORN, new ItemStack(WizardsReborn.MUSIC_DISC_REBORN.get()), RegisterKnowledges.ARCANE_ITERATOR),
+                        new IndexEntry(MUSIC_DISC_PANACHE, new ItemStack(WizardsReborn.MUSIC_DISC_PANACHE.get()), RegisterKnowledges.ARCANE_ITERATOR)
                 )
         );
     }
@@ -2189,14 +2216,14 @@ public class ArcanemiconChapters {
                         new ItemStack(WizardsReborn.INNOCENT_WOOD_LOG_ITEM.get())
                 ),
                 new TitledBlockPage("wizards_reborn.arcanemicon.page.innocent_wood_mortar",
-                        new BlockEntry(ARCANE_PEDESTAL_ITEM, new ItemStack(WizardsReborn.INNOCENT_WOOD_MORTAR.get()))
+                        new BlockEntry(new ItemStack(WizardsReborn.INNOCENT_PEDESTAL_ITEM.get()), new ItemStack(WizardsReborn.INNOCENT_WOOD_MORTAR.get()))
                 ),
                 new CraftingTablePage(new ItemStack(WizardsReborn.INNOCENT_WOOD_MORTAR.get()),
                         new ItemStack(WizardsReborn.INNOCENT_WOOD_PLANKS.get()), new ItemStack(WizardsReborn.INNOCENT_WOOD_BRANCH.get()), new ItemStack(WizardsReborn.INNOCENT_WOOD_PLANKS.get()),
                         EMPTY_ITEM, new ItemStack(WizardsReborn.INNOCENT_WOOD_PLANKS.get())
                 ),
                 new TitledBlockPage("wizards_reborn.arcanemicon.page.innocent_pedestal",
-                        new BlockEntry(ARCANE_PEDESTAL_ITEM, INNOCENT_PEDESTAL_ITEM)
+                        new BlockEntry(new ItemStack(WizardsReborn.INNOCENT_PEDESTAL_ITEM.get()), INNOCENT_PEDESTAL_ITEM)
                 ),
                 new CraftingTablePage(INNOCENT_PEDESTAL_ITEM,
                         INNOCENT_WOOD_SLAB_ITEM, INNOCENT_WOOD_PLANKS_ITEM, INNOCENT_WOOD_SLAB_ITEM,
@@ -2204,10 +2231,29 @@ public class ArcanemiconChapters {
                         INNOCENT_WOOD_SLAB_ITEM, INNOCENT_WOOD_PLANKS_ITEM, INNOCENT_WOOD_SLAB_ITEM
                 ),
                 new TitledBlockPage("wizards_reborn.arcanemicon.page.innocent_hovering_tome_stand",
-                        new BlockEntry(ARCANE_PEDESTAL_ITEM, new ItemStack(WizardsReborn.INNOCENT_HOVERING_TOME_STAND.get()))
+                        new BlockEntry(new ItemStack(WizardsReborn.INNOCENT_PEDESTAL_ITEM.get()), new ItemStack(WizardsReborn.INNOCENT_HOVERING_TOME_STAND.get()))
                 ),
                 new CraftingTablePage(new ItemStack(WizardsReborn.INNOCENT_HOVERING_TOME_STAND.get()),
                         INNOCENT_PEDESTAL_ITEM, new ItemStack(WizardsReborn.ARCANEMICON.get())
+                ),
+                new TitledBlockPage("wizards_reborn.arcanemicon.page.innocent_fire",
+                        new BlockEntry(new ItemStack(WizardsReborn.INNOCENT_PEDESTAL_ITEM.get()), new ItemStack(WizardsReborn.INNOCENT_SALT_TORCH_ITEM.get())),
+                        new BlockEntry(new ItemStack(WizardsReborn.INNOCENT_PEDESTAL_ITEM.get()), new ItemStack(WizardsReborn.INNOCENT_SALT_LANTERN_ITEM.get())),
+                        new BlockEntry(new ItemStack(WizardsReborn.INNOCENT_PEDESTAL_ITEM.get()), new ItemStack(WizardsReborn.INNOCENT_SALT_CAMPFIRE_ITEM.get()))
+                ),
+                new CraftingTablePage(new ItemStack(WizardsReborn.INNOCENT_SALT_TORCH_ITEM.get(), 4),
+                        EMPTY_ITEM, NETHER_SALT_ITEM, EMPTY_ITEM,
+                        EMPTY_ITEM, INNOCENT_WOOD_PLANKS_ITEM
+                ),
+                new CraftingTablePage(new ItemStack(WizardsReborn.INNOCENT_SALT_LANTERN_ITEM.get()),
+                        EMPTY_ITEM, new ItemStack(Items.CHAIN), EMPTY_ITEM,
+                        ARCANE_GOLD_NUGGET_ITEM, new ItemStack(WizardsReborn.ARCANE_SALT_TORCH_ITEM.get()), ARCANE_GOLD_NUGGET_ITEM,
+                        INNOCENT_WOOD_SLAB_ITEM, INNOCENT_WOOD_SLAB_ITEM, INNOCENT_WOOD_SLAB_ITEM
+                ),
+                new CraftingTablePage(new ItemStack(WizardsReborn.ARCANE_SALT_CAMPFIRE_ITEM.get()),
+                        EMPTY_ITEM, new ItemStack(Items.STICK), EMPTY_ITEM,
+                        new ItemStack(Items.STICK), NETHER_SALT_ITEM, new ItemStack(Items.STICK),
+                        new ItemStack(WizardsReborn.INNOCENT_WOOD_LOG.get()), new ItemStack(WizardsReborn.INNOCENT_WOOD_LOG.get()), new ItemStack(WizardsReborn.INNOCENT_WOOD_LOG.get())
                 )
         );
 
@@ -2625,6 +2671,62 @@ public class ArcanemiconChapters {
                 new AlchemyMachinePage(new ItemStack(WizardsReborn.MUSIC_DISC_MOR.get()), FluidStack.EMPTY, true, true,
                         new FluidStack(WizardsReborn.ALCHEMY_OIL_FLUID.get(), 1000), FluidStack.EMPTY, FluidStack.EMPTY,
                         new ItemStack(Items.MUSIC_DISC_13), new ItemStack(WizardsReborn.MOR.get())
+                )
+        );
+
+        NETHER_SALT = new Chapter(
+                "wizards_reborn.arcanemicon.chapter.nether_salt",
+                new TitledBlockPage("wizards_reborn.arcanemicon.page.nether_salt",
+                        new BlockEntry(WISESTONE_PEDESTAL_ITEM, NETHER_SALT_ITEM),
+                        new BlockEntry(WISESTONE_PEDESTAL_ITEM, new ItemStack(WizardsReborn.NETHER_SALT_BLOCK_ITEM.get())),
+                        new BlockEntry(WISESTONE_PEDESTAL_ITEM, new ItemStack(WizardsReborn.NETHER_SALT_ORE_ITEM.get()))
+                ),
+                new CraftingTablePage(new ItemStack(WizardsReborn.NETHER_SALT_BLOCK_ITEM.get()),
+                        NETHER_SALT_ITEM, NETHER_SALT_ITEM, NETHER_SALT_ITEM,
+                        NETHER_SALT_ITEM, NETHER_SALT_ITEM, NETHER_SALT_ITEM,
+                        NETHER_SALT_ITEM, NETHER_SALT_ITEM, NETHER_SALT_ITEM
+                ),
+                new CraftingTablePage(new ItemStack(WizardsReborn.NETHER_SALT.get(), 9), new ItemStack(WizardsReborn.NETHER_SALT_BLOCK_ITEM.get())),
+                new SmeltingPage(NETHER_SALT_ITEM, new ItemStack(WizardsReborn.NETHER_SALT_ORE_ITEM.get())),
+                new TitledBlockPage("wizards_reborn.arcanemicon.page.salt_torch",
+                        new BlockEntry(WISESTONE_PEDESTAL_ITEM, new ItemStack(WizardsReborn.ARCANE_SALT_TORCH_ITEM.get())),
+                        new BlockEntry(WISESTONE_PEDESTAL_ITEM, new ItemStack(WizardsReborn.WISESTONE_SALT_TORCH_ITEM.get()))
+                ),
+                new CraftingTablePage(new ItemStack(WizardsReborn.ARCANE_SALT_TORCH_ITEM.get(), 4),
+                        EMPTY_ITEM, NETHER_SALT_ITEM, EMPTY_ITEM,
+                        EMPTY_ITEM, ARCANE_WOOD_PLANKS_ITEM
+                ),
+                new CraftingTablePage(new ItemStack(WizardsReborn.WISESTONE_SALT_TORCH_ITEM.get(), 4),
+                        EMPTY_ITEM, NETHER_SALT_ITEM, EMPTY_ITEM,
+                        EMPTY_ITEM, POLISHED_WISESTONE_ITEM
+                ),
+                new TitledBlockPage("wizards_reborn.arcanemicon.page.salt_lantern",
+                        new BlockEntry(WISESTONE_PEDESTAL_ITEM, new ItemStack(WizardsReborn.ARCANE_SALT_LANTERN_ITEM.get())),
+                        new BlockEntry(WISESTONE_PEDESTAL_ITEM, new ItemStack(WizardsReborn.WISESTONE_SALT_LANTERN_ITEM.get()))
+                ),
+                new CraftingTablePage(new ItemStack(WizardsReborn.ARCANE_SALT_LANTERN_ITEM.get()),
+                        EMPTY_ITEM, new ItemStack(Items.CHAIN), EMPTY_ITEM,
+                        ARCANE_GOLD_NUGGET_ITEM, new ItemStack(WizardsReborn.ARCANE_SALT_TORCH_ITEM.get()), ARCANE_GOLD_NUGGET_ITEM,
+                        ARCANE_WOOD_SLAB_ITEM, ARCANE_WOOD_SLAB_ITEM, ARCANE_WOOD_SLAB_ITEM
+                ),
+                new CraftingTablePage(new ItemStack(WizardsReborn.WISESTONE_SALT_LANTERN_ITEM.get()),
+                        EMPTY_ITEM, new ItemStack(Items.CHAIN), EMPTY_ITEM,
+                        ARCANE_GOLD_NUGGET_ITEM, new ItemStack(WizardsReborn.WISESTONE_SALT_TORCH_ITEM.get()), ARCANE_GOLD_NUGGET_ITEM,
+                        POLISHED_WISESTONE_SLAB_ITEM, POLISHED_WISESTONE_SLAB_ITEM, POLISHED_WISESTONE_SLAB_ITEM
+                ),
+                new TitledBlockPage("wizards_reborn.arcanemicon.page.salt_campfire",
+                        new BlockEntry(WISESTONE_PEDESTAL_ITEM, new ItemStack(WizardsReborn.ARCANE_SALT_CAMPFIRE_ITEM.get())),
+                        new BlockEntry(WISESTONE_PEDESTAL_ITEM, new ItemStack(WizardsReborn.WISESTONE_SALT_CAMPFIRE_ITEM.get()))
+                ),
+                new CraftingTablePage(new ItemStack(WizardsReborn.ARCANE_SALT_CAMPFIRE_ITEM.get()),
+                        EMPTY_ITEM, new ItemStack(Items.STICK), EMPTY_ITEM,
+                        new ItemStack(Items.STICK), NETHER_SALT_ITEM, new ItemStack(Items.STICK),
+                        new ItemStack(WizardsReborn.ARCANE_WOOD_LOG.get()), new ItemStack(WizardsReborn.ARCANE_WOOD_LOG.get()), new ItemStack(WizardsReborn.ARCANE_WOOD_LOG.get())
+                ),
+                new CraftingTablePage(new ItemStack(WizardsReborn.WISESTONE_SALT_CAMPFIRE_ITEM.get()),
+                        EMPTY_ITEM, new ItemStack(Items.STICK), EMPTY_ITEM,
+                        new ItemStack(Items.STICK), NETHER_SALT_ITEM, new ItemStack(Items.STICK),
+                        POLISHED_WISESTONE_ITEM, POLISHED_WISESTONE_ITEM, POLISHED_WISESTONE_ITEM
                 )
         );
 
@@ -3150,19 +3252,22 @@ public class ArcanemiconChapters {
                 new IndexPage(
                         new IndexEntry(MUSIC_DISC_ARCANUM, new ItemStack(WizardsReborn.MUSIC_DISC_ARCANUM.get()), RegisterKnowledges.ALCHEMY_OIL),
                         new IndexEntry(MUSIC_DISC_MOR, new ItemStack(WizardsReborn.MUSIC_DISC_MOR.get()), RegisterKnowledges.ALCHEMY_OIL),
+                        new IndexEntry(NETHER_SALT, NETHER_SALT_ITEM, RegisterKnowledges.ALCHEMY_OIL),
                         new IndexEntry(ALCHEMY_CALX, ALCHEMY_CALX_ITEM, RegisterKnowledges.ALCHEMY_OIL),
                         new IndexEntry(ALCHEMY_GLASS, new ItemStack(WizardsReborn.ALCHEMY_GLASS_ITEM.get()), RegisterKnowledges.ALCHEMY_CALX),
                         new IndexEntry(ALCHEMY_BAG, new ItemStack(WizardsReborn.ALCHEMY_BAG.get()), RegisterKnowledges.ALCHEMY_GLASS),
-                        new IndexEntry(ALCHEMY_POTIONS, vialPotions.get(RegisterAlchemyPotions.MUNDANE_BREW), RegisterKnowledges.ALCHEMY_GLASS),
-                        new IndexEntry(TEA, vialPotions.get(RegisterAlchemyPotions.WISSEN_TEA), RegisterKnowledges.ALCHEMY_GLASS)
+                        new IndexEntry(ALCHEMY_POTIONS, vialPotions.get(RegisterAlchemyPotions.MUNDANE_BREW), RegisterKnowledges.ALCHEMY_GLASS)
                 ),
                 new IndexPage(
+                        new IndexEntry(TEA, vialPotions.get(RegisterAlchemyPotions.WISSEN_TEA), RegisterKnowledges.ALCHEMY_GLASS),
                         new IndexEntry(ALCHEMY_BREWS, new ItemStack(WizardsReborn.MOR_BREW_BUCKET.get()), RegisterKnowledges.ALCHEMY_GLASS),
                         new IndexEntry(ADVANCED_CALX, NATURAL_CALX_ITEM, RegisterKnowledges.ALCHEMY_GLASS),
                         new IndexEntry(ALCHEMY_TRANSMUTATION, new ItemStack(WizardsReborn.RAW_ARCANE_GOLD.get()), RegisterKnowledges.ALCHEMY_GLASS),
                         new IndexEntry(ARCANE_CENSER, new ItemStack(WizardsReborn.ARCANE_CENSER_ITEM.get()), RegisterKnowledges.ALCHEMY_GLASS),
                         new IndexEntry(SMOKING_PIPE, new ItemStack(WizardsReborn.ARCANE_WOOD_SMOKING_PIPE.get()), RegisterKnowledges.ARCANE_CENSER),
-                        new IndexEntry(ARCACITE, ARCACITE_ITEM, RegisterKnowledges.ALCHEMY_OIL),
+                        new IndexEntry(ARCACITE, ARCACITE_ITEM, RegisterKnowledges.ALCHEMY_OIL)
+                ),
+                new IndexPage(
                         new IndexEntry(ARCACITE_POLISHING_MIXTURE, new ItemStack(WizardsReborn.ARCACITE_POLISHING_MIXTURE.get()), RegisterKnowledges.ARCACITE)
                 )
         );
@@ -3217,13 +3322,11 @@ public class ArcanemiconChapters {
         integrationCreateInit();
         integrationFarmersDelightInit();
         integrationEmbersInit();
-        integrationEidolonInit();
-        integrationMalumInit();
+        //integrationEidolonInit();
+        //integrationMalumInit();
     }
 
     public static void integrationCreateInit() {
-        List<MobEffectInstance> noEffects = new ArrayList<>();
-
         if (ModList.get().isLoaded("create")) {
             ItemStack experienceNugget = new ItemStack(IntegrationUtils.getItem("create", "experience_nugget"));
             ItemStack experienceNuggetTwo = new ItemStack(IntegrationUtils.getItem("create", "experience_nugget"), 2);
@@ -3266,9 +3369,25 @@ public class ArcanemiconChapters {
                     new ItemStack(WizardsReborn.ARCANUM_DUST.get(), 4), ARCANUM_DUST_ITEM
             ));
 
+            NETHER_SALT.addPage(new CrushingPage(new ItemStack(WizardsReborn.NETHER_SALT_ORE_ITEM.get()),
+                    new ItemStack(WizardsReborn.NETHER_SALT.get(), 2), NETHER_SALT_ITEM, new ItemStack(Items.QUARTZ), experienceNugget, new ItemStack(Items.NETHERRACK)
+            ));
+
+            List<MobEffectInstance> noEffects = new ArrayList<>();
+            List<MobEffectInstance> cinderFlourEffects = new ArrayList<>();
+            List<MobEffectInstance> powderedObsidianEffects = new ArrayList<>();
+
+            cinderFlourEffects.add(new MobEffectInstance(MobEffects.FIRE_RESISTANCE, 1000, 0));
+            cinderFlourEffects.add(new MobEffectInstance(MobEffects.MOVEMENT_SLOWDOWN, 100, 0));
+            cinderFlourEffects.add(new MobEffectInstance(MobEffects.CONFUSION, 200, 0));
+
+            powderedObsidianEffects.add(new MobEffectInstance(MobEffects.DAMAGE_RESISTANCE, 800, 0));
+            powderedObsidianEffects.add(new MobEffectInstance(MobEffects.MOVEMENT_SLOWDOWN, 500, 0));
+
+
             SMOKING_PIPE.addPage(new CenserPage(noEffects, new ItemStack(IntegrationUtils.getItem("create", "wheat_flour"))));
-            SMOKING_PIPE.addPage(new CenserPage(noEffects, new ItemStack(IntegrationUtils.getItem("create", "cinder_flour"))));
-            SMOKING_PIPE.addPage(new CenserPage(noEffects, new ItemStack(IntegrationUtils.getItem("create", "powdered_obsidian"))));
+            SMOKING_PIPE.addPage(new CenserPage(cinderFlourEffects, new ItemStack(IntegrationUtils.getItem("create", "cinder_flour"))));
+            SMOKING_PIPE.addPage(new CenserPage(powderedObsidianEffects, new ItemStack(IntegrationUtils.getItem("create", "powdered_obsidian"))));
 
             ALCHEMY_TRANSMUTATION.addPage(new AlchemyMachinePage(new ItemStack(CreateIntegration.CRUSHED_RAW_ARCANE_GOLD.get(), 2), FluidStack.EMPTY, true, true,
                     new FluidStack(WizardsReborn.ALCHEMY_OIL_FLUID.get(), 100), new FluidStack(WizardsReborn.WISSEN_TEA_FLUID.get(), 200), FluidStack.EMPTY,
@@ -3278,8 +3397,6 @@ public class ArcanemiconChapters {
     }
 
     public static void integrationFarmersDelightInit() {
-        List<MobEffectInstance> noEffects = new ArrayList<>();
-
         if (ModList.get().isLoaded("farmersdelight")) {
             ARCANE_GOLD.addPage(new TitledBlockPage("wizards_reborn.arcanemicon.page.arcane_gold_knife",
                     new BlockEntry(ARCANE_PEDESTAL_ITEM, new ItemStack(FarmersDelightIntegration.ARCANE_GOLD_KNIFE.get()))
@@ -3289,6 +3406,8 @@ public class ArcanemiconChapters {
                     EMPTY_ITEM, ARCANE_WOOD_BRANCH_ITEM
             ));
 
+            List<MobEffectInstance> noEffects = new ArrayList<>();
+
             SMOKING_PIPE.addPage(new CenserPage(noEffects, new ItemStack(IntegrationUtils.getItem("farmersdelight", "cabbage_seeds"))));
             SMOKING_PIPE.addPage(new CenserPage(noEffects, new ItemStack(IntegrationUtils.getItem("farmersdelight", "tomato_seeds"))));
             SMOKING_PIPE.addPage(new CenserPage(noEffects, new ItemStack(IntegrationUtils.getItem("farmersdelight", "rice"))));
@@ -3296,17 +3415,20 @@ public class ArcanemiconChapters {
     }
 
     public static void integrationEmbersInit() {
-        List<MobEffectInstance> noEffects = new ArrayList<>();
-
         if (ModList.get().isLoaded("embers")) {
-            SMOKING_PIPE.addPage(new CenserPage(noEffects, new ItemStack(IntegrationUtils.getItem("embers", "ember_grit"))));
+            List<MobEffectInstance> emberGritEffects = new ArrayList<>();
+            emberGritEffects.add(new MobEffectInstance(MobEffects.FIRE_RESISTANCE, 8000, 0));
+            emberGritEffects.add(new MobEffectInstance(MobEffects.MOVEMENT_SLOWDOWN, 100, 0));
+            emberGritEffects.add(new MobEffectInstance(MobEffects.CONFUSION, 200, 0));
+
+            SMOKING_PIPE.addPage(new CenserPage(emberGritEffects, new ItemStack(IntegrationUtils.getItem("embers", "ember_grit"))));
         }
     }
 
     public static void integrationEidolonInit() {
-        List<MobEffectInstance> noEffects = new ArrayList<>();
-
         if (ModList.get().isLoaded("eidolon")) {
+            List<MobEffectInstance> noEffects = new ArrayList<>();
+
             SMOKING_PIPE.addPage(new CenserPage(noEffects, new ItemStack(IntegrationUtils.getItem("eidolon", "death_essence"))));
             SMOKING_PIPE.addPage(new CenserPage(noEffects, new ItemStack(IntegrationUtils.getItem("eidolon", "crimson_essence"))));
             SMOKING_PIPE.addPage(new CenserPage(noEffects, new ItemStack(IntegrationUtils.getItem("eidolon", "fungus_sprouts"))));
@@ -3316,9 +3438,9 @@ public class ArcanemiconChapters {
     }
 
     public static void integrationMalumInit() {
-        List<MobEffectInstance> noEffects = new ArrayList<>();
-
         if (ModList.get().isLoaded("malum")) {
+            List<MobEffectInstance> noEffects = new ArrayList<>();
+
             SMOKING_PIPE.addPage(new CenserPage(noEffects, new ItemStack(IntegrationUtils.getItem("malum", "rotting_essence"))));
             SMOKING_PIPE.addPage(new CenserPage(noEffects, new ItemStack(IntegrationUtils.getItem("malum", "hex_ash"))));
             SMOKING_PIPE.addPage(new CenserPage(noEffects, new ItemStack(IntegrationUtils.getItem("malum", "alchemical_calx"))));

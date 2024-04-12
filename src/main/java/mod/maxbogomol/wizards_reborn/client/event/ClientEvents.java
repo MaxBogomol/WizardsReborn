@@ -2,6 +2,8 @@ package mod.maxbogomol.wizards_reborn.client.event;
 
 import mod.maxbogomol.wizards_reborn.WizardsReborn;
 import mod.maxbogomol.wizards_reborn.WizardsRebornClient;
+import mod.maxbogomol.wizards_reborn.client.arcanemicon.ArcanemiconChapters;
+import mod.maxbogomol.wizards_reborn.client.arcanemicon.ArcanemiconGui;
 import mod.maxbogomol.wizards_reborn.client.config.ClientConfig;
 import mod.maxbogomol.wizards_reborn.client.gui.components.CustomLogoRenderer;
 import net.minecraft.client.gui.screens.TitleScreen;
@@ -9,6 +11,7 @@ import net.minecraft.client.renderer.CubeMap;
 import net.minecraft.client.renderer.PanoramaRenderer;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraftforge.client.event.ScreenEvent;
+import net.minecraftforge.event.entity.player.PlayerEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 
 public class ClientEvents {
@@ -38,5 +41,10 @@ public class ClientEvents {
                 }
             }
         }
+    }
+
+    @SubscribeEvent
+    public void loggedPlayer(PlayerEvent.PlayerLoggedInEvent event) {
+        ArcanemiconGui.currentChapter = ArcanemiconChapters.ARCANE_NATURE_INDEX;
     }
 }

@@ -1,0 +1,28 @@
+{
+  "type": "wizards_reborn:censer",
+  "ingredient": {
+    "item": "wizards_reborn:nether_salt"
+  },
+  "effects": [
+    {
+      "effect": "minecraft:slowness",
+      "duration": 600,
+      "amplifier": 0
+    },
+    {
+      "effect": "minecraft:nausea",
+      "duration": 1000,
+      "amplifier": 0
+    },
+    {
+      "effect": "minecraft:blindness",
+      "duration": 200,
+      "amplifier": 0
+    },
+    {
+      "effect": "minecraft:darkness",
+      "duration": 100,
+      "amplifier": 0
+    }
+  ]
+}

@@ -1,0 +1,22 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    " S ",
+    "SXS",
+    "###"
+  ],
+  "key": {
+    "#": {
+      "item": "wizards_reborn:innocent_wood_log"
+    },
+    "X": {
+      "item": "wizards_reborn:nether_salt"
+    },
+    "S": {
+      "item": "minecraft:stick"
+    }
+  },
+  "result": {
+    "item": "wizards_reborn:innocent_salt_campfire"
+  }
+}

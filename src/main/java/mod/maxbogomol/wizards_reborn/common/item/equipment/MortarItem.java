@@ -1,6 +1,7 @@
 package mod.maxbogomol.wizards_reborn.common.item.equipment;
 
 import mod.maxbogomol.wizards_reborn.WizardsReborn;
+import mod.maxbogomol.wizards_reborn.common.item.FuelItem;
 import mod.maxbogomol.wizards_reborn.common.recipe.MortarRecipe;
 import net.minecraft.core.RegistryAccess;
 import net.minecraft.sounds.SoundEvents;
@@ -19,12 +20,12 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-public class MortarItem extends Item {
+public class MortarItem extends FuelItem {
 
     public static List<Item> mortarList = new ArrayList<>();
 
-    public MortarItem(Properties properties) {
-        super(properties);
+    public MortarItem(Properties properties, int fuel) {
+        super(properties, fuel);
     }
 
     @Override

@@ -3,16 +3,15 @@ package mod.maxbogomol.wizards_reborn.common.item;
 import mod.maxbogomol.wizards_reborn.WizardsReborn;
 import mod.maxbogomol.wizards_reborn.client.particle.Particles;
 import net.minecraft.world.entity.item.ItemEntity;
-import net.minecraft.world.item.Item;
 import net.minecraft.world.level.Level;
 
 import java.util.Random;
 
-public class NetherSaltItem extends Item implements IParticleItem {
+public class NetherSaltItem extends FuelItem implements IParticleItem {
     private static Random random = new Random();
 
-    public NetherSaltItem(Properties properties) {
-        super(properties);
+    public NetherSaltItem(Properties properties, int fuel) {
+        super(properties, fuel);
     }
 
     @Override

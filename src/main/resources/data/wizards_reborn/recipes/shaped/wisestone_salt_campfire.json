@@ -1,0 +1,22 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    " S ",
+    "SXS",
+    "###"
+  ],
+  "key": {
+    "#": {
+      "item": "wizards_reborn:polished_wisestone"
+    },
+    "X": {
+      "item": "wizards_reborn:nether_salt"
+    },
+    "S": {
+      "item": "minecraft:stick"
+    }
+  },
+  "result": {
+    "item": "wizards_reborn:wisestone_salt_campfire"
+  }
+}

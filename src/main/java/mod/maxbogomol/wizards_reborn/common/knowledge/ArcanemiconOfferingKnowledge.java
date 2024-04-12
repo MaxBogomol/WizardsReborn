@@ -3,12 +3,15 @@ package mod.maxbogomol.wizards_reborn.common.knowledge;
 import mod.maxbogomol.wizards_reborn.WizardsReborn;
 import mod.maxbogomol.wizards_reborn.api.knowledge.Knowledge;
 import mod.maxbogomol.wizards_reborn.api.knowledge.KnowledgeUtils;
+import mod.maxbogomol.wizards_reborn.common.config.ServerConfig;
 import mod.maxbogomol.wizards_reborn.common.network.ArcanemiconOfferingEffectPacket;
 import mod.maxbogomol.wizards_reborn.common.network.PacketHandler;
 import mod.maxbogomol.wizards_reborn.utils.ColorUtils;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.Style;
+import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundSource;
+import net.minecraft.stats.Stats;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 
@@ -31,8 +34,14 @@ public class ArcanemiconOfferingKnowledge extends Knowledge {
     }
 
     public boolean canReceived(Player player, List<ItemStack> items) {
-        if (super.canReceived()) {
-            return player.getInventory().getFreeSlot() > -1;
+        if (!player.level().isClientSide()) {
+            if (ServerConfig.ARCANEMICON_OFFERING.get()) {
+                if (player instanceof ServerPlayer serverPlayer) {
+                    if (serverPlayer.getStats().getValue(Stats.CUSTOM, Stats.PLAY_TIME) > ServerConfig.ARCANEMICON_OFFERING_TICKS.get()) {
+                        return player.getInventory().getFreeSlot() > -1;
+                    }
+                }
+            }
         }
 
         return false;

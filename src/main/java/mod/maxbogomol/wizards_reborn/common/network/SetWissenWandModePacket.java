@@ -41,6 +41,10 @@ public class SetWissenWandModePacket {
                 }
 
                 WissenWandItem.setMode(stack, msg.mode);
+                WissenWandItem.setBlock(stack, false);
+                if (msg.mode == 3 || msg.mode == 0) {
+                    WissenWandItem.setBlock(stack, true);
+                }
 
                 player.awardStat(Stats.ITEM_USED.get(stack.getItem()));
                 player.serverLevel().playSound(WizardsReborn.proxy.getPlayer(), player.blockPosition(), WizardsReborn.CRYSTAL_RESONATE_SOUND.get(), SoundSource.PLAYERS, 1.0f, 1.2f);

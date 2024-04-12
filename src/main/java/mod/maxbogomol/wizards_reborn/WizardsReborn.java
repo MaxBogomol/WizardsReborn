@@ -40,6 +40,7 @@ import mod.maxbogomol.wizards_reborn.common.command.ArcaneEnchantmentArgument;
 import mod.maxbogomol.wizards_reborn.common.command.KnowledgeArgument;
 import mod.maxbogomol.wizards_reborn.common.command.SpellArgument;
 import mod.maxbogomol.wizards_reborn.common.config.Config;
+import mod.maxbogomol.wizards_reborn.common.config.ServerConfig;
 import mod.maxbogomol.wizards_reborn.common.crystal.*;
 import mod.maxbogomol.wizards_reborn.common.crystalritual.ArtificialFertilityCrystalRitual;
 import mod.maxbogomol.wizards_reborn.common.crystalritual.CrystalGrowthAccelerationCrystalRitual;
@@ -842,7 +843,7 @@ public class WizardsReborn {
     public static final RegistryObject<Item> PRECISION_CRYSTAL = ITEMS.register("precision_crystal", () -> new PrecisionCrystalItem(new Item.Properties()));
     public static final RegistryObject<Item> PRECISION_CRYSTAL_BLOCK_ITEM = ITEMS.register("precision_crystal_block", () -> new BlockItem(PRECISION_CRYSTAL_BLOCK.get(), new Item.Properties()));
 
-    public static final RegistryObject<Item> NETHER_SALT = ITEMS.register("nether_salt", () -> new NetherSaltItem(new Item.Properties()));
+    public static final RegistryObject<Item> NETHER_SALT = ITEMS.register("nether_salt", () -> new NetherSaltItem(new Item.Properties(), 3200));
     public static final RegistryObject<Item> NETHER_SALT_BLOCK_ITEM = ITEMS.register("nether_salt_block", () -> new BlockItem(NETHER_SALT_BLOCK.get(), new Item.Properties()));
     public static final RegistryObject<Item> NETHER_SALT_ORE_ITEM = ITEMS.register("nether_salt_ore", () -> new BlockItem(NETHER_SALT_ORE.get(), new Item.Properties()));
 
@@ -863,8 +864,8 @@ public class WizardsReborn {
     public static final RegistryObject<Item> ARCANE_WOOD_HANGING_SIGN_ITEM = ITEMS.register("arcane_wood_hanging_sign", () -> new HangingSignItem(ARCANE_WOOD_HANGING_SIGN.get(), ARCANE_WOOD_WALL_HANGING_SIGN.get(), new Item.Properties().stacksTo(16)));
     public static final RegistryObject<Item> ARCANE_WOOD_BOAT_ITEM = ITEMS.register("arcane_wood_boat", () -> new CustomBoatItem(false, CustomBoatEntity.Type.ARCANE_WOOD, new Item.Properties().stacksTo(1)));
     public static final RegistryObject<Item> ARCANE_WOOD_CHEST_BOAT_ITEM = ITEMS.register("arcane_wood_chest_boat", () -> new CustomBoatItem(true, CustomBoatEntity.Type.ARCANE_WOOD, new Item.Properties().stacksTo(1)));
-    public static final RegistryObject<Item> ARCANE_WOOD_BRANCH = ITEMS.register("arcane_wood_branch", () -> new Item(new Item.Properties()));
-    public static final RegistryObject<Item> ARCANE_WOOD_MORTAR = ITEMS.register("arcane_wood_mortar", () -> new MortarItem(new Item.Properties().stacksTo(1)));
+    public static final RegistryObject<Item> ARCANE_WOOD_BRANCH = ITEMS.register("arcane_wood_branch", () -> new FuelItem(new Item.Properties(), 200));
+    public static final RegistryObject<Item> ARCANE_WOOD_MORTAR = ITEMS.register("arcane_wood_mortar", () -> new MortarItem(new Item.Properties().stacksTo(1), 400));
     public static final RegistryObject<Item> ARCANE_WOOD_LEAVES_ITEM = ITEMS.register("arcane_wood_leaves", () -> new BlockItem(ARCANE_WOOD_LEAVES.get(), new Item.Properties()));
     public static final RegistryObject<Item> ARCANE_WOOD_SAPLING_ITEM = ITEMS.register("arcane_wood_sapling", () -> new BlockItem(ARCANE_WOOD_SAPLING.get(), new Item.Properties()));
 
@@ -885,8 +886,8 @@ public class WizardsReborn {
     public static final RegistryObject<Item> INNOCENT_WOOD_HANGING_SIGN_ITEM = ITEMS.register("innocent_wood_hanging_sign", () -> new HangingSignItem(INNOCENT_WOOD_HANGING_SIGN.get(), INNOCENT_WOOD_WALL_HANGING_SIGN.get(), new Item.Properties().stacksTo(16)));
     public static final RegistryObject<Item> INNOCENT_WOOD_BOAT_ITEM = ITEMS.register("innocent_wood_boat", () -> new CustomBoatItem(false, CustomBoatEntity.Type.INNOCENT_WOOD, new Item.Properties().stacksTo(1)));
     public static final RegistryObject<Item> INNOCENT_WOOD_CHEST_BOAT_ITEM = ITEMS.register("innocent_wood_chest_boat", () -> new CustomBoatItem(true, CustomBoatEntity.Type.INNOCENT_WOOD, new Item.Properties().stacksTo(1)));
-    public static final RegistryObject<Item> INNOCENT_WOOD_BRANCH = ITEMS.register("innocent_wood_branch", () -> new Item(new Item.Properties()));
-    public static final RegistryObject<Item> INNOCENT_WOOD_MORTAR = ITEMS.register("innocent_wood_mortar", () -> new MortarItem(new Item.Properties().stacksTo(1)));
+    public static final RegistryObject<Item> INNOCENT_WOOD_BRANCH = ITEMS.register("innocent_wood_branch", () -> new FuelItem(new Item.Properties(), 200));
+    public static final RegistryObject<Item> INNOCENT_WOOD_MORTAR = ITEMS.register("innocent_wood_mortar", () -> new MortarItem(new Item.Properties().stacksTo(1), 400));
     public static final RegistryObject<Item> INNOCENT_WOOD_LEAVES_ITEM = ITEMS.register("innocent_wood_leaves", () -> new BlockItem(INNOCENT_WOOD_LEAVES.get(), new Item.Properties()));
     public static final RegistryObject<Item> INNOCENT_WOOD_SAPLING_ITEM = ITEMS.register("innocent_wood_sapling", () -> new BlockItem(INNOCENT_WOOD_SAPLING.get(), new Item.Properties()));
     public static final RegistryObject<Item> PETALS_OF_INNOCENCE_ITEM = ITEMS.register("petals_of_innocence", () -> new BlockItem(PETALS_OF_INNOCENCE.get(), new Item.Properties()));
@@ -1560,6 +1561,7 @@ public class WizardsReborn {
 
         ModLoadingContext.get().registerConfig(ModConfig.Type.CLIENT, ClientConfig.SPEC);
         ModLoadingContext.get().registerConfig(ModConfig.Type.COMMON, Config.SPEC);
+        ModLoadingContext.get().registerConfig(ModConfig.Type.SERVER, ServerConfig.SPEC);
 
         DistExecutor.unsafeCallWhenOn(Dist.CLIENT, () -> () -> {
             setupWandCrystalsModels();

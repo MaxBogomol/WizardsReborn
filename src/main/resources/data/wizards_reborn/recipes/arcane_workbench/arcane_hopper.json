@@ -1,0 +1,27 @@
+{
+  "type": "wizards_reborn:arcane_workbench",
+  "pattern": [
+    "_G_",
+    "WHW",
+    "W#W",
+    "____"
+  ],
+  "key": {
+    "#": {
+      "item": "wizards_reborn:arcane_wood_frame"
+    },
+    "H": {
+      "item": "minecraft:hopper"
+    },
+    "G": {
+      "tag": "wizards_reborn:arcane_gold_ingot"
+    },
+    "W": {
+      "item": "wizards_reborn:arcane_wood_planks"
+    }
+  },
+  "output": {
+    "item": "wizards_reborn:arcane_hopper"
+  },
+  "wissen": 100
+}

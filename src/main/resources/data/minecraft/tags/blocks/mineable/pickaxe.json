@@ -98,6 +98,8 @@
     "wizards_reborn:wisestone_fluid_casing",
     "wizards_reborn:wisestone_steam_casing",
     "wizards_reborn:creative_fluid_storage",
-    "wizards_reborn:creative_steam_storage"
+    "wizards_reborn:creative_steam_storage",
+    "wizards_reborn:wisestone_salt_lantern",
+    "wizards_reborn:wisestone_salt_campfire"
   ]
 }

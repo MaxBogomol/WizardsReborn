@@ -68,37 +68,37 @@ public class Events {
 
             for (Knowledge knowledge : Knowledges.getKnowledges()) {
                 if (knowledge instanceof ArcanemiconKnowledge arcanemiconKnowledge) {
-                    if (arcanemiconKnowledge.canReceived(items)) {
+                    if (!KnowledgeUtils.isKnowledge(player, knowledge) && arcanemiconKnowledge.canReceived(items)) {
                         KnowledgeUtils.addKnowledge(player, knowledge);
                     }
                 }
 
                 if (knowledge instanceof ArcanemiconOfferingKnowledge arcanemiconOfferingKnowledge) {
-                    if (arcanemiconOfferingKnowledge.canReceived(player, items)) {
+                    if (!KnowledgeUtils.isKnowledge(player, knowledge) && arcanemiconOfferingKnowledge.canReceived(player, items)) {
                         KnowledgeUtils.addKnowledge(player, knowledge);
                     }
                 }
 
                 if (knowledge instanceof ArcanumKnowledge arcanumKnowledge) {
-                    if (arcanumKnowledge.canReceived(items)) {
+                    if (!KnowledgeUtils.isKnowledge(player, knowledge) && arcanumKnowledge.canReceived(items)) {
                         KnowledgeUtils.addKnowledge(player, knowledge);
                     }
                 }
 
                 if (knowledge instanceof ItemKnowledge itemKnowledge) {
-                    if (itemKnowledge.canReceived(items)) {
+                    if (!KnowledgeUtils.isKnowledge(player, knowledge) && itemKnowledge.canReceived(items)) {
                         KnowledgeUtils.addKnowledge(player, knowledge);
                     }
                 }
 
                 if (knowledge instanceof ItemTagKnowledge itemKnowledge) {
-                    if (itemKnowledge.canReceived(items)) {
+                    if (!KnowledgeUtils.isKnowledge(player, knowledge) && itemKnowledge.canReceived(items)) {
                         KnowledgeUtils.addKnowledge(player, knowledge);
                     }
                 }
 
                 if (knowledge instanceof CrystalRitualKnowledge crystalRitualKnowledge) {
-                    if (crystalRitualKnowledge.canReceived(items)) {
+                    if (!KnowledgeUtils.isKnowledge(player, knowledge) && crystalRitualKnowledge.canReceived(items)) {
                         KnowledgeUtils.addKnowledge(player, knowledge);
                     }
                 }
