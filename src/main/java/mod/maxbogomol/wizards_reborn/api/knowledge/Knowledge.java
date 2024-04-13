@@ -16,7 +16,7 @@ public class Knowledge {
         this.articles = articles;
     }
 
-    public boolean canReceived() {
+    public boolean canReceived(Player player) {
         return false;
     }
 
@@ -42,6 +42,14 @@ public class Knowledge {
 
     public void award(Player player) {
 
+    }
+
+    public boolean addTick(Player player) {
+        if (!KnowledgeUtils.isKnowledge(player, this) && canReceived(player)) {
+            KnowledgeUtils.addKnowledge(player, this);
+            return true;
+        }
+        return false;
     }
 
     @OnlyIn(Dist.CLIENT)

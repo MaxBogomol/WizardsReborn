@@ -15,8 +15,6 @@ import net.minecraft.stats.Stats;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 
-import java.util.List;
-
 public class ArcanemiconOfferingKnowledge extends Knowledge {
 
     public ArcanemiconOfferingKnowledge(String id, boolean articles, int points) {
@@ -33,7 +31,8 @@ public class ArcanemiconOfferingKnowledge extends Knowledge {
         return false;
     }
 
-    public boolean canReceived(Player player, List<ItemStack> items) {
+    @Override
+    public boolean canReceived(Player player) {
         if (!player.level().isClientSide()) {
             if (ServerConfig.ARCANEMICON_OFFERING.get()) {
                 if (player instanceof ServerPlayer serverPlayer) {

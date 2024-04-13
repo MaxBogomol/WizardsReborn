@@ -5,6 +5,7 @@ import mod.maxbogomol.wizards_reborn.api.crystalritual.CrystalRitual;
 import mod.maxbogomol.wizards_reborn.api.crystalritual.CrystalRitualUtils;
 import mod.maxbogomol.wizards_reborn.api.knowledge.Knowledge;
 import mod.maxbogomol.wizards_reborn.common.item.equipment.RunicWisestonePlateItem;
+import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
@@ -19,7 +20,9 @@ public class CrystalRitualKnowledge extends Knowledge {
         this.ritual = ritual;
     }
 
-    public boolean canReceived(List<ItemStack> items) {
+    @Override
+    public boolean canReceived(Player player) {
+        List<ItemStack> items = player.inventoryMenu.getItems();
         for (ItemStack stack : items) {
             if (stack.getItem() instanceof RunicWisestonePlateItem plate) {
                 if (CrystalRitualUtils.getCrystalRitual(stack) == ritual) {

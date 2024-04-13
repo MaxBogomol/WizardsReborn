@@ -8,10 +8,10 @@ import mod.maxbogomol.wizards_reborn.api.crystalritual.CrystalRitualUtils;
 import mod.maxbogomol.wizards_reborn.api.wissen.*;
 import mod.maxbogomol.wizards_reborn.client.particle.ArcaneIteratorBurst;
 import mod.maxbogomol.wizards_reborn.client.particle.Particles;
-import mod.maxbogomol.wizards_reborn.client.sound.ArcaneIteratorSoundInstance;
 import mod.maxbogomol.wizards_reborn.common.config.Config;
 import mod.maxbogomol.wizards_reborn.common.network.PacketHandler;
 import mod.maxbogomol.wizards_reborn.common.network.tileentity.ArcaneIteratorBurstEffectPacket;
+import mod.maxbogomol.wizards_reborn.common.network.tileentity.ArcaneIteratorSoundPacket;
 import mod.maxbogomol.wizards_reborn.common.recipe.ArcaneIteratorRecipe;
 import mod.maxbogomol.wizards_reborn.utils.PacketUtils;
 import net.minecraft.core.BlockPos;
@@ -116,7 +116,7 @@ public class ArcaneIteratorTileEntity extends BlockEntity implements TickableBlo
                 if ((wissenInCraft > 0) && (wissen > 0) && (startCraft) && canCraft) {
                     if (wissenIsCraft == 0) {
                         level.playSound(WizardsReborn.proxy.getPlayer(), getBlockPos(), WizardsReborn.ARCANE_ITERATOR_START_SOUND.get(), SoundSource.BLOCKS, 1f, 1f);
-                        ArcaneIteratorSoundInstance.playSound(this);
+                        PacketHandler.sendToTracking(level, getBlockPos(), new ArcaneIteratorSoundPacket(getBlockPos()));
                     }
 
                     int addRemainCraft = WissenUtils.getAddWissenRemain(wissenIsCraft, getWissenPerTick(), wissenInCraft);

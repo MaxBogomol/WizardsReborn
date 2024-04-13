@@ -1,6 +1,7 @@
 package mod.maxbogomol.wizards_reborn.common.knowledge;
 
 import mod.maxbogomol.wizards_reborn.api.knowledge.Knowledge;
+import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.api.distmarker.Dist;
@@ -17,7 +18,9 @@ public class ItemKnowledge extends Knowledge {
         this.item = item;
     }
 
-    public boolean canReceived(List<ItemStack> items) {
+    @Override
+    public boolean canReceived(Player player) {
+        List<ItemStack> items = player.inventoryMenu.getItems();
         for (ItemStack stack : items) {
             if (stack.getItem().equals(item)) {
                 return true;

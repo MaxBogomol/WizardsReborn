@@ -4,10 +4,10 @@ import mod.maxbogomol.wizards_reborn.WizardsReborn;
 import mod.maxbogomol.wizards_reborn.api.crystal.CrystalUtils;
 import mod.maxbogomol.wizards_reborn.api.wissen.*;
 import mod.maxbogomol.wizards_reborn.client.particle.Particles;
-import mod.maxbogomol.wizards_reborn.client.sound.WissenCrystallizerSoundInstance;
 import mod.maxbogomol.wizards_reborn.common.config.Config;
 import mod.maxbogomol.wizards_reborn.common.network.PacketHandler;
 import mod.maxbogomol.wizards_reborn.common.network.tileentity.WissenCrystallizerBurstEffectPacket;
+import mod.maxbogomol.wizards_reborn.common.network.tileentity.WissenCrystallizerSoundPacket;
 import mod.maxbogomol.wizards_reborn.common.recipe.WissenCrystallizerRecipe;
 import mod.maxbogomol.wizards_reborn.utils.PacketUtils;
 import net.minecraft.core.BlockPos;
@@ -64,7 +64,7 @@ public class WissenCrystallizerTileEntity extends ExposedTileSimpleInventory imp
             if ((wissenInCraft > 0) && (wissen > 0) && (startCraft)) {
                 if (wissenIsCraft == 0) {
                     level.playSound(WizardsReborn.proxy.getPlayer(), getBlockPos(), WizardsReborn.WISSEN_CRYSTALLIZER_START_SOUND.get(), SoundSource.BLOCKS, 1f, 1f);
-                    WissenCrystallizerSoundInstance.playSound(this);
+                    PacketHandler.sendToTracking(level, getBlockPos(), new WissenCrystallizerSoundPacket(getBlockPos()));
                 }
                 int addRemainCraft = WissenUtils.getAddWissenRemain(wissenIsCraft, getWissenPerTick(), wissenInCraft);
                 int removeRemain = WissenUtils.getRemoveWissenRemain(getWissen(), getWissenPerTick() - addRemainCraft);

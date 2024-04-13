@@ -6,8 +6,8 @@ import net.minecraft.world.item.ItemStack;
 
 public class RegisterKnowledges {
     //START
-    public static ArcanemiconOfferingKnowledge ARCANEMICON_OFFERING = new ArcanemiconOfferingKnowledge(WizardsReborn.MOD_ID+":arcanemicon_offering", false, 0);
     public static ArcanemiconKnowledge ARCANEMICON = new ArcanemiconKnowledge(WizardsReborn.MOD_ID+":arcanemicon", false, 0, WizardsReborn.ARCANEMICON.get());
+    public static ArcanemiconOfferingKnowledge ARCANEMICON_OFFERING = new ArcanemiconOfferingKnowledge(WizardsReborn.MOD_ID+":arcanemicon_offering", false, 0);
     public static ArcanumKnowledge ARCANUM = new ArcanumKnowledge(WizardsReborn.MOD_ID+":arcanum", false, 0, WizardsReborn.ARCANUM.get());
 
     //ARCANE NATURE
@@ -67,8 +67,8 @@ public class RegisterKnowledges {
 
     public static void init() {
         //START
-        Knowledges.register(ARCANEMICON_OFFERING);
         Knowledges.register(ARCANEMICON);
+        Knowledges.register(ARCANEMICON_OFFERING);
         Knowledges.register(ARCANUM);
 
         //ARCANE NATURE

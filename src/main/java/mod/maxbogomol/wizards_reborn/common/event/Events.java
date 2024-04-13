@@ -3,13 +3,11 @@ package mod.maxbogomol.wizards_reborn.common.event;
 import mod.maxbogomol.wizards_reborn.WizardsReborn;
 import mod.maxbogomol.wizards_reborn.api.arcaneenchantment.ArcaneEnchantmentUtils;
 import mod.maxbogomol.wizards_reborn.api.knowledge.Knowledge;
-import mod.maxbogomol.wizards_reborn.api.knowledge.KnowledgeUtils;
 import mod.maxbogomol.wizards_reborn.api.knowledge.Knowledges;
 import mod.maxbogomol.wizards_reborn.common.capability.IKnowledge;
 import mod.maxbogomol.wizards_reborn.common.capability.KnowledgeProvider;
 import mod.maxbogomol.wizards_reborn.common.command.WizardsRebornCommand;
 import mod.maxbogomol.wizards_reborn.common.entity.SpellProjectileEntity;
-import mod.maxbogomol.wizards_reborn.common.knowledge.*;
 import mod.maxbogomol.wizards_reborn.common.network.KnowledgeUpdatePacket;
 import mod.maxbogomol.wizards_reborn.common.network.PacketHandler;
 import net.minecraft.nbt.CompoundTag;
@@ -20,7 +18,6 @@ import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.ai.attributes.AttributeInstance;
 import net.minecraft.world.entity.npc.VillagerTrades;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.util.INBTSerializable;
 import net.minecraftforge.event.AttachCapabilitiesEvent;
@@ -31,8 +28,6 @@ import net.minecraftforge.event.entity.living.LivingDamageEvent;
 import net.minecraftforge.event.entity.player.PlayerEvent;
 import net.minecraftforge.event.village.WandererTradesEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
-
-import java.util.List;
 
 public class Events {
     @SubscribeEvent
@@ -64,44 +59,9 @@ public class Events {
     public void playerTick(TickEvent.PlayerTickEvent event) {
         if (!event.player.level().isClientSide) {
             Player player = event.player;
-            List<ItemStack> items = player.inventoryMenu.getItems();
 
             for (Knowledge knowledge : Knowledges.getKnowledges()) {
-                if (knowledge instanceof ArcanemiconKnowledge arcanemiconKnowledge) {
-                    if (!KnowledgeUtils.isKnowledge(player, knowledge) && arcanemiconKnowledge.canReceived(items)) {
-                        KnowledgeUtils.addKnowledge(player, knowledge);
-                    }
-                }
-
-                if (knowledge instanceof ArcanemiconOfferingKnowledge arcanemiconOfferingKnowledge) {
-                    if (!KnowledgeUtils.isKnowledge(player, knowledge) && arcanemiconOfferingKnowledge.canReceived(player, items)) {
-                        KnowledgeUtils.addKnowledge(player, knowledge);
-                    }
-                }
-
-                if (knowledge instanceof ArcanumKnowledge arcanumKnowledge) {
-                    if (!KnowledgeUtils.isKnowledge(player, knowledge) && arcanumKnowledge.canReceived(items)) {
-                        KnowledgeUtils.addKnowledge(player, knowledge);
-                    }
-                }
-
-                if (knowledge instanceof ItemKnowledge itemKnowledge) {
-                    if (!KnowledgeUtils.isKnowledge(player, knowledge) && itemKnowledge.canReceived(items)) {
-                        KnowledgeUtils.addKnowledge(player, knowledge);
-                    }
-                }
-
-                if (knowledge instanceof ItemTagKnowledge itemKnowledge) {
-                    if (!KnowledgeUtils.isKnowledge(player, knowledge) && itemKnowledge.canReceived(items)) {
-                        KnowledgeUtils.addKnowledge(player, knowledge);
-                    }
-                }
-
-                if (knowledge instanceof CrystalRitualKnowledge crystalRitualKnowledge) {
-                    if (!KnowledgeUtils.isKnowledge(player, knowledge) && crystalRitualKnowledge.canReceived(items)) {
-                        KnowledgeUtils.addKnowledge(player, knowledge);
-                    }
-                }
+                knowledge.addTick(player);
             }
         }
     }
