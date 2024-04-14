@@ -985,24 +985,24 @@ public class WizardsReborn {
     public static final RegistryObject<Item> PURE_FIRE_CRYSTAL = ITEMS.register("pure_fire_crystal", () -> new CrystalItem(PURE_FIRE_CRYSTAL_BLOCK.get(), new Item.Properties().stacksTo(1)));
     public static final RegistryObject<Item> PURE_VOID_CRYSTAL = ITEMS.register("pure_void_crystal", () -> new CrystalItem(PURE_VOID_CRYSTAL_BLOCK.get(), new Item.Properties().stacksTo(1)));
 
-    public static final RegistryObject<Item> WHITE_ARCANE_LUMOS_ITEM = ITEMS.register("white_arcane_lumos", () -> new BlockItem(WHITE_ARCANE_LUMOS.get(), new Item.Properties()));
-    public static final RegistryObject<Item> ORANGE_ARCANE_LUMOS_ITEM = ITEMS.register("orange_arcane_lumos", () -> new BlockItem(ORANGE_ARCANE_LUMOS.get(), new Item.Properties()));
-    public static final RegistryObject<Item> MAGENTA_ARCANE_LUMOS_ITEM = ITEMS.register("magenta_arcane_lumos", () -> new BlockItem(MAGENTA_ARCANE_LUMOS.get(), new Item.Properties()));
-    public static final RegistryObject<Item> LIGHT_BLUE_ARCANE_LUMOS_ITEM = ITEMS.register("light_blue_arcane_lumos", () -> new BlockItem(LIGHT_BLUE_ARCANE_LUMOS.get(), new Item.Properties()));
-    public static final RegistryObject<Item> YELLOW_ARCANE_LUMOS_ITEM = ITEMS.register("yellow_arcane_lumos", () -> new BlockItem(YELLOW_ARCANE_LUMOS.get(), new Item.Properties()));
-    public static final RegistryObject<Item> LIME_ARCANE_LUMOS_ITEM = ITEMS.register("lime_arcane_lumos", () -> new BlockItem(LIME_ARCANE_LUMOS.get(), new Item.Properties()));
-    public static final RegistryObject<Item> PINK_ARCANE_LUMOS_ITEM = ITEMS.register("pink_arcane_lumos", () -> new BlockItem(PINK_ARCANE_LUMOS.get(), new Item.Properties()));
-    public static final RegistryObject<Item> GRAY_ARCANE_LUMOS_ITEM = ITEMS.register("gray_arcane_lumos", () -> new BlockItem(GRAY_ARCANE_LUMOS.get(), new Item.Properties()));
-    public static final RegistryObject<Item> LIGHT_GRAY_ARCANE_LUMOS_ITEM = ITEMS.register("light_gray_arcane_lumos", () -> new BlockItem(LIGHT_GRAY_ARCANE_LUMOS.get(), new Item.Properties()));
-    public static final RegistryObject<Item> CYAN_ARCANE_LUMOS_ITEM = ITEMS.register("cyan_arcane_lumos", () -> new BlockItem(CYAN_ARCANE_LUMOS.get(), new Item.Properties()));
-    public static final RegistryObject<Item> PURPLE_ARCANE_LUMOS_ITEM = ITEMS.register("purple_arcane_lumos", () -> new BlockItem(PURPLE_ARCANE_LUMOS.get(), new Item.Properties()));
-    public static final RegistryObject<Item> BLUE_ARCANE_LUMOS_ITEM = ITEMS.register("blue_arcane_lumos", () -> new BlockItem(BLUE_ARCANE_LUMOS.get(), new Item.Properties()));
-    public static final RegistryObject<Item> BROWN_ARCANE_LUMOS_ITEM = ITEMS.register("brown_arcane_lumos", () -> new BlockItem(BROWN_ARCANE_LUMOS.get(), new Item.Properties()));
-    public static final RegistryObject<Item> GREEN_ARCANE_LUMOS_ITEM = ITEMS.register("green_arcane_lumos", () -> new BlockItem(GREEN_ARCANE_LUMOS.get(), new Item.Properties()));
-    public static final RegistryObject<Item> RED_ARCANE_LUMOS_ITEM = ITEMS.register("red_arcane_lumos", () -> new BlockItem(RED_ARCANE_LUMOS.get(), new Item.Properties()));
-    public static final RegistryObject<Item> BLACK_ARCANE_LUMOS_ITEM = ITEMS.register("black_arcane_lumos", () -> new BlockItem(BLACK_ARCANE_LUMOS.get(), new Item.Properties()));
-    public static final RegistryObject<Item> RAINBOW_ARCANE_LUMOS_ITEM = ITEMS.register("rainbow_arcane_lumos", () -> new BlockItem(RAINBOW_ARCANE_LUMOS.get(), new Item.Properties()));
-    public static final RegistryObject<Item> COSMIC_ARCANE_LUMOS_ITEM = ITEMS.register("cosmic_arcane_lumos", () -> new BlockItem(COSMIC_ARCANE_LUMOS.get(), new Item.Properties()));
+    public static final RegistryObject<Item> WHITE_ARCANE_LUMOS_ITEM = ITEMS.register("white_arcane_lumos", () -> new ArcaneLumosItem(WHITE_ARCANE_LUMOS.get(), new Item.Properties()));
+    public static final RegistryObject<Item> ORANGE_ARCANE_LUMOS_ITEM = ITEMS.register("orange_arcane_lumos", () -> new ArcaneLumosItem(ORANGE_ARCANE_LUMOS.get(), new Item.Properties()));
+    public static final RegistryObject<Item> MAGENTA_ARCANE_LUMOS_ITEM = ITEMS.register("magenta_arcane_lumos", () -> new ArcaneLumosItem(MAGENTA_ARCANE_LUMOS.get(), new Item.Properties()));
+    public static final RegistryObject<Item> LIGHT_BLUE_ARCANE_LUMOS_ITEM = ITEMS.register("light_blue_arcane_lumos", () -> new ArcaneLumosItem(LIGHT_BLUE_ARCANE_LUMOS.get(), new Item.Properties()));
+    public static final RegistryObject<Item> YELLOW_ARCANE_LUMOS_ITEM = ITEMS.register("yellow_arcane_lumos", () -> new ArcaneLumosItem(YELLOW_ARCANE_LUMOS.get(), new Item.Properties()));
+    public static final RegistryObject<Item> LIME_ARCANE_LUMOS_ITEM = ITEMS.register("lime_arcane_lumos", () -> new ArcaneLumosItem(LIME_ARCANE_LUMOS.get(), new Item.Properties()));
+    public static final RegistryObject<Item> PINK_ARCANE_LUMOS_ITEM = ITEMS.register("pink_arcane_lumos", () -> new ArcaneLumosItem(PINK_ARCANE_LUMOS.get(), new Item.Properties()));
+    public static final RegistryObject<Item> GRAY_ARCANE_LUMOS_ITEM = ITEMS.register("gray_arcane_lumos", () -> new ArcaneLumosItem(GRAY_ARCANE_LUMOS.get(), new Item.Properties()));
+    public static final RegistryObject<Item> LIGHT_GRAY_ARCANE_LUMOS_ITEM = ITEMS.register("light_gray_arcane_lumos", () -> new ArcaneLumosItem(LIGHT_GRAY_ARCANE_LUMOS.get(), new Item.Properties()));
+    public static final RegistryObject<Item> CYAN_ARCANE_LUMOS_ITEM = ITEMS.register("cyan_arcane_lumos", () -> new ArcaneLumosItem(CYAN_ARCANE_LUMOS.get(), new Item.Properties()));
+    public static final RegistryObject<Item> PURPLE_ARCANE_LUMOS_ITEM = ITEMS.register("purple_arcane_lumos", () -> new ArcaneLumosItem(PURPLE_ARCANE_LUMOS.get(), new Item.Properties()));
+    public static final RegistryObject<Item> BLUE_ARCANE_LUMOS_ITEM = ITEMS.register("blue_arcane_lumos", () -> new ArcaneLumosItem(BLUE_ARCANE_LUMOS.get(), new Item.Properties()));
+    public static final RegistryObject<Item> BROWN_ARCANE_LUMOS_ITEM = ITEMS.register("brown_arcane_lumos", () -> new ArcaneLumosItem(BROWN_ARCANE_LUMOS.get(), new Item.Properties()));
+    public static final RegistryObject<Item> GREEN_ARCANE_LUMOS_ITEM = ITEMS.register("green_arcane_lumos", () -> new ArcaneLumosItem(GREEN_ARCANE_LUMOS.get(), new Item.Properties()));
+    public static final RegistryObject<Item> RED_ARCANE_LUMOS_ITEM = ITEMS.register("red_arcane_lumos", () -> new ArcaneLumosItem(RED_ARCANE_LUMOS.get(), new Item.Properties()));
+    public static final RegistryObject<Item> BLACK_ARCANE_LUMOS_ITEM = ITEMS.register("black_arcane_lumos", () -> new ArcaneLumosItem(BLACK_ARCANE_LUMOS.get(), new Item.Properties()));
+    public static final RegistryObject<Item> RAINBOW_ARCANE_LUMOS_ITEM = ITEMS.register("rainbow_arcane_lumos", () -> new ArcaneLumosItem(RAINBOW_ARCANE_LUMOS.get(), new Item.Properties()));
+    public static final RegistryObject<Item> COSMIC_ARCANE_LUMOS_ITEM = ITEMS.register("cosmic_arcane_lumos", () -> new ArcaneLumosItem(COSMIC_ARCANE_LUMOS.get(), new Item.Properties()));
 
     public static final RegistryObject<Item> ARCANE_PEDESTAL_ITEM = ITEMS.register("arcane_pedestal", () -> new BlockItem(ARCANE_PEDESTAL.get(), new Item.Properties()));
     public static final RegistryObject<Item> HOVERING_TOME_STAND_ITEM = ITEMS.register("hovering_tome_stand", () -> new BlockItem(HOVERING_TOME_STAND.get(), new Item.Properties()));
@@ -1079,15 +1079,15 @@ public class WizardsReborn {
     public static final RegistryObject<Item> CREATIVE_FLUID_STORAGE_ITEM = ITEMS.register("creative_fluid_storage", () -> new BlockItem(CREATIVE_FLUID_STORAGE.get(), new Item.Properties()));
     public static final RegistryObject<Item> CREATIVE_STEAM_STORAGE_ITEM = ITEMS.register("creative_steam_storage", () -> new BlockItem(CREATIVE_STEAM_STORAGE.get(), new Item.Properties()));
 
-    public static final RegistryObject<Item> ARCANE_SALT_TORCH_ITEM = ITEMS.register("arcane_salt_torch", () -> new StandingAndWallBlockItem(ARCANE_SALT_TORCH.get(), ARCANE_SALT_WALL_TORCH.get(), new Item.Properties(), Direction.DOWN));
-    public static final RegistryObject<Item> INNOCENT_SALT_TORCH_ITEM = ITEMS.register("innocent_salt_torch", () -> new StandingAndWallBlockItem(INNOCENT_SALT_TORCH.get(), INNOCENT_SALT_WALL_TORCH.get(), new Item.Properties(), Direction.DOWN));
-    public static final RegistryObject<Item> WISESTONE_SALT_TORCH_ITEM = ITEMS.register("wisestone_salt_torch", () -> new StandingAndWallBlockItem(WISESTONE_SALT_TORCH.get(), WISESTONE_SALT_WALL_TORCH.get(), new Item.Properties(), Direction.DOWN));
-    public static final RegistryObject<Item> ARCANE_SALT_LANTERN_ITEM = ITEMS.register("arcane_salt_lantern", () -> new BlockItem(ARCANE_SALT_LANTERN.get(), new Item.Properties()));
-    public static final RegistryObject<Item> INNOCENT_SALT_LANTERN_ITEM = ITEMS.register("innocent_salt_lantern", () -> new BlockItem(INNOCENT_SALT_LANTERN.get(), new Item.Properties()));
-    public static final RegistryObject<Item> WISESTONE_SALT_LANTERN_ITEM = ITEMS.register("wisestone_salt_lantern", () -> new BlockItem(WISESTONE_SALT_LANTERN.get(), new Item.Properties()));
-    public static final RegistryObject<Item> ARCANE_SALT_CAMPFIRE_ITEM = ITEMS.register("arcane_salt_campfire", () -> new BlockItem(ARCANE_SALT_CAMPFIRE.get(), new Item.Properties()));
-    public static final RegistryObject<Item> INNOCENT_SALT_CAMPFIRE_ITEM = ITEMS.register("innocent_salt_campfire", () -> new BlockItem(INNOCENT_SALT_CAMPFIRE.get(), new Item.Properties()));
-    public static final RegistryObject<Item> WISESTONE_SALT_CAMPFIRE_ITEM = ITEMS.register("wisestone_salt_campfire", () -> new BlockItem(WISESTONE_SALT_CAMPFIRE.get(), new Item.Properties()));
+    public static final RegistryObject<Item> ARCANE_SALT_TORCH_ITEM = ITEMS.register("arcane_salt_torch", () -> new SaltTorchItem(ARCANE_SALT_TORCH.get(), ARCANE_SALT_WALL_TORCH.get(), new Item.Properties(), Direction.DOWN));
+    public static final RegistryObject<Item> INNOCENT_SALT_TORCH_ITEM = ITEMS.register("innocent_salt_torch", () -> new SaltTorchItem(INNOCENT_SALT_TORCH.get(), INNOCENT_SALT_WALL_TORCH.get(), new Item.Properties(), Direction.DOWN));
+    public static final RegistryObject<Item> WISESTONE_SALT_TORCH_ITEM = ITEMS.register("wisestone_salt_torch", () -> new SaltTorchItem(WISESTONE_SALT_TORCH.get(), WISESTONE_SALT_WALL_TORCH.get(), new Item.Properties(), Direction.DOWN));
+    public static final RegistryObject<Item> ARCANE_SALT_LANTERN_ITEM = ITEMS.register("arcane_salt_lantern", () -> new SaltLanternItem(ARCANE_SALT_LANTERN.get(), new Item.Properties()));
+    public static final RegistryObject<Item> INNOCENT_SALT_LANTERN_ITEM = ITEMS.register("innocent_salt_lantern", () -> new SaltLanternItem(INNOCENT_SALT_LANTERN.get(), new Item.Properties()));
+    public static final RegistryObject<Item> WISESTONE_SALT_LANTERN_ITEM = ITEMS.register("wisestone_salt_lantern", () -> new SaltLanternItem(WISESTONE_SALT_LANTERN.get(), new Item.Properties()));
+    public static final RegistryObject<Item> ARCANE_SALT_CAMPFIRE_ITEM = ITEMS.register("arcane_salt_campfire", () -> new SaltCampfireItem(ARCANE_SALT_CAMPFIRE.get(), new Item.Properties()));
+    public static final RegistryObject<Item> INNOCENT_SALT_CAMPFIRE_ITEM = ITEMS.register("innocent_salt_campfire", () -> new SaltCampfireItem(INNOCENT_SALT_CAMPFIRE.get(), new Item.Properties()));
+    public static final RegistryObject<Item> WISESTONE_SALT_CAMPFIRE_ITEM = ITEMS.register("wisestone_salt_campfire", () -> new SaltCampfireItem(WISESTONE_SALT_CAMPFIRE.get(), new Item.Properties()));
 
     public static final RegistryObject<Item> ALCHEMY_GLASS_ITEM = ITEMS.register("alchemy_glass", () -> new BlockItem(ALCHEMY_GLASS.get(), new Item.Properties()));
     public static final RegistryObject<Item> ALCHEMY_VIAL = ITEMS.register("alchemy_vial", () -> new VialItem(new Item.Properties(), 3));

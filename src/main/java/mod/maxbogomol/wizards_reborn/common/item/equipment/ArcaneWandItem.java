@@ -1,7 +1,10 @@
 package mod.maxbogomol.wizards_reborn.common.item.equipment;
 
+import com.mojang.blaze3d.platform.GlStateManager;
 import com.mojang.blaze3d.systems.RenderSystem;
+import com.mojang.blaze3d.vertex.PoseStack;
 import mod.maxbogomol.wizards_reborn.WizardsReborn;
+import mod.maxbogomol.wizards_reborn.WizardsRebornClient;
 import mod.maxbogomol.wizards_reborn.api.crystal.CrystalStat;
 import mod.maxbogomol.wizards_reborn.api.crystal.CrystalType;
 import mod.maxbogomol.wizards_reborn.api.knowledge.KnowledgeUtils;
@@ -14,12 +17,16 @@ import mod.maxbogomol.wizards_reborn.client.animation.ItemAnimation;
 import mod.maxbogomol.wizards_reborn.client.config.ClientConfig;
 import mod.maxbogomol.wizards_reborn.common.item.CrystalItem;
 import mod.maxbogomol.wizards_reborn.common.item.ICustomAnimationItem;
+import mod.maxbogomol.wizards_reborn.common.item.IGuiParticleItem;
 import mod.maxbogomol.wizards_reborn.common.item.ItemBackedInventory;
 import mod.maxbogomol.wizards_reborn.utils.ColorUtils;
 import mod.maxbogomol.wizards_reborn.utils.NumericalUtils;
+import mod.maxbogomol.wizards_reborn.utils.RenderUtils;
 import net.minecraft.ChatFormatting;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
+import net.minecraft.client.renderer.GameRenderer;
+import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.core.Direction;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
@@ -54,7 +61,7 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.stream.Stream;
 
-public class ArcaneWandItem extends Item implements IWissenItem, ICustomAnimationItem {
+public class ArcaneWandItem extends Item implements IWissenItem, ICustomAnimationItem, IGuiParticleItem {
     public ArcaneWandItem(Properties properties) {
         super(properties);
     }
@@ -427,5 +434,51 @@ public class ArcaneWandItem extends Item implements IWissenItem, ICustomAnimatio
 
         RenderSystem.defaultBlendFunc();
         RenderSystem.setShaderColor(1F, 1F, 1F, 1F);
+    }
+
+    @Override
+    public void renderParticle(PoseStack pose, LivingEntity entity, Level level, ItemStack stack, int x, int y, int seed, int guiOffset) {
+        SimpleContainer inv = ArcaneWandItem.getInventory(stack);
+
+        if (inv.getItem(0).getItem() instanceof CrystalItem crystal) {
+            if (crystal.getPolishing().getPolishingLevel() > 0) {
+                int polishingLevel = crystal.getPolishing().getPolishingLevel();
+                if (polishingLevel > 4) {
+                    polishingLevel = 4;
+                }
+                Color color = crystal.getType().getColor();
+                int seedI = this.getDescriptionId().length();
+
+                RenderSystem.enableBlend();
+                RenderSystem.blendFunc(GlStateManager.SourceFactor.SRC_ALPHA, GlStateManager.DestFactor.ONE);
+                MultiBufferSource.BufferSource buffersource = Minecraft.getInstance().renderBuffers().bufferSource();
+                RenderSystem.depthMask(false);
+                RenderSystem.setShader(WizardsRebornClient::getGlowingShader);
+                RenderSystem.setShaderColor(1F, 1F, 1F, 1F);
+
+                pose.pushPose();
+                pose.translate(x, y, 100);
+                RenderSystem.setShaderColor(color.getRed() / 255f, color.getGreen() / 255f, color.getBlue() / 255f, 0.75F * (polishingLevel / 4f));
+                RenderUtils.dragon(pose, buffersource, 12, 4, 0, 7f, Minecraft.getInstance().getPartialTick(), 1, 1, 1, seedI);
+                buffersource.endBatch();
+                pose.popPose();
+
+                if (crystal.getPolishing().hasParticle()) {
+                    Color polishingColor = crystal.getPolishing().getColor();
+                    pose.pushPose();
+                    pose.translate(x, y, 100);
+                    RenderSystem.setShaderColor(polishingColor.getRed() / 255f, polishingColor.getGreen() / 255f, polishingColor.getBlue() / 255f, 0.5F);
+                    RenderUtils.dragon(pose, buffersource, 12, 4, 0, 6f, Minecraft.getInstance().getPartialTick(), 1, 1, 1, seedI + 1f);
+                    buffersource.endBatch();
+                    pose.popPose();
+                }
+
+                RenderSystem.disableBlend();
+                RenderSystem.depthMask(true);
+                RenderSystem.blendFunc(GlStateManager.SourceFactor.SRC_ALPHA, GlStateManager.DestFactor.ONE_MINUS_SRC_ALPHA);
+                RenderSystem.setShader(GameRenderer::getPositionTexShader);
+                RenderSystem.setShaderColor(1F, 1F, 1F, 1F);
+            }
+        }
     }
 }

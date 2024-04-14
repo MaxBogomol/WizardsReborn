@@ -6,8 +6,10 @@ import mod.maxbogomol.wizards_reborn.client.gui.screen.BagMenuScreen;
 import mod.maxbogomol.wizards_reborn.client.gui.screen.CrystalChooseScreen;
 import mod.maxbogomol.wizards_reborn.client.gui.screen.WissenWandChooseScreen;
 import mod.maxbogomol.wizards_reborn.common.item.equipment.ArcaneWandItem;
+import mod.maxbogomol.wizards_reborn.common.item.equipment.IBagItem;
 import mod.maxbogomol.wizards_reborn.common.item.equipment.WissenWandItem;
 import mod.maxbogomol.wizards_reborn.common.network.DeleteCrystalPacket;
+import mod.maxbogomol.wizards_reborn.common.network.OpenBagPacket;
 import mod.maxbogomol.wizards_reborn.common.network.PacketHandler;
 import net.minecraft.client.Minecraft;
 import net.minecraft.nbt.CompoundTag;
@@ -19,6 +21,11 @@ import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.client.event.InputEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
+import top.theillusivec4.curios.api.CuriosApi;
+import top.theillusivec4.curios.api.SlotResult;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @OnlyIn(Dist.CLIENT)
 public class KeyBindHandler {
@@ -33,7 +40,7 @@ public class KeyBindHandler {
         }
 
         if (WizardsRebornClient.OPEN_BAG_MENU_KEY.isDown()) {
-            Minecraft.getInstance().setScreen(new BagMenuScreen(Component.empty()));
+            bagMenu();
         }
     }
 
@@ -102,5 +109,32 @@ public class KeyBindHandler {
         }
 
         return false;
+    }
+
+    public static void bagMenu() {
+        Minecraft mc = Minecraft.getInstance();
+        List<ItemStack> items = mc.player.inventoryMenu.getItems();
+        List<SlotResult> curioSlots = CuriosApi.getCuriosHelper().findCurios(mc.player, (i) -> {return true;});
+        for (SlotResult slot : curioSlots) {
+            if (slot.stack() != null) {
+                items.add(slot.stack());
+            }
+        }
+
+        ArrayList<ItemStack> bags = new ArrayList<ItemStack>();
+
+        for (ItemStack stack : items) {
+            if (stack.getItem() instanceof IBagItem) {
+                bags.add(stack);
+            }
+        }
+
+        if (!bags.isEmpty()) {
+            if (bags.size() == 1) {
+                PacketHandler.sendToServer(new OpenBagPacket(bags.get(0)));
+            } else {
+                Minecraft.getInstance().setScreen(new BagMenuScreen(Component.empty()));
+            }
+        }
     }
 }

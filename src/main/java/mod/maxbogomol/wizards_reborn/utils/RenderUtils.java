@@ -372,6 +372,16 @@ public class RenderUtils {
         builder.vertex(mat, x1, y1, z1 + z2).color(r, g, b, a).endVertex();
     }
 
+    public static void spriteGlowQuad(PoseStack mStack, MultiBufferSource buf, float x, float y, float width, float height, float u0, float u1, float v0, float v1, float r, float g, float b, float a) {
+        VertexConsumer builder = buf.getBuffer(GLOWING_SPRITE);
+
+        Matrix4f mat = mStack.last().pose();
+        builder.vertex(mat, x, y + height, 0).uv(u0, v1).uv2(0).color(r, g, b, a).endVertex();
+        builder.vertex(mat, x + width, y + height, 0).uv(u1, v1).uv2(0).color(r, g, b, a).endVertex();
+        builder.vertex(mat, x + width, y, 0).uv(u1, v0).uv2(0).color(r, g, b, a).endVertex();
+        builder.vertex(mat, x, y, 0).color(r, g, b, a).uv(u0, v0).uv2(0).endVertex();
+    }
+
     public static void renderCustomModel(ModelResourceLocation model, ItemDisplayContext diplayContext, boolean leftHand, PoseStack poseStack, MultiBufferSource buffer, int combinedLight, int combinedOverlay) {
         BakedModel bakedmodel = Minecraft.getInstance().getItemRenderer().getItemModelShaper().getModelManager().getModel(model);
         Minecraft.getInstance().getItemRenderer().render(new ItemStack(Items.DIRT), diplayContext, leftHand, poseStack, buffer, combinedLight, combinedOverlay, bakedmodel);

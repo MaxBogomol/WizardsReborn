@@ -26,8 +26,8 @@ import java.util.Random;
 public class SaltTorchTileEntity extends ExposedTileSimpleInventory implements TickableBlockEntity {
 
     public Random random = new Random();
-    public Color colorFirst = new Color(255, 170, 65);
-    public Color colorSecond = new Color(231, 71, 101);
+    public static Color colorFirst = new Color(255, 170, 65);
+    public static Color colorSecond = new Color(231, 71, 101);
 
     public SaltTorchTileEntity(BlockEntityType<?> type, BlockPos pos, BlockState state) {
         super(type, pos, state);

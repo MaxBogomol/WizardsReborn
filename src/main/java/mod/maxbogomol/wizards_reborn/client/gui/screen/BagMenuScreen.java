@@ -98,11 +98,6 @@ public class BagMenuScreen extends Screen {
         }
     }
 
-    public ItemStack getSelectedItem(double X, double Y) {
-        List<ItemStack> crystals = getPlayerBags();
-        return getSelectedItem(crystals, X, Y);
-    }
-
     public ItemStack getSelectedItem(List<ItemStack> bags, double X, double Y) {
         double step = (float) 360 / bags.size();
         double x = width / 2;

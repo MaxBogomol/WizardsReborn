@@ -19,7 +19,8 @@
     "client.RabbitRendererMixin",
     "client.FoxRendererMixin",
     "client.ClientMusicChoiceMixin",
-    "client.AbstractClientPlayerMixin"
+    "client.AbstractClientPlayerMixin",
+    "client.GuiGraphicsMixin"
   ],
   "minVersion": "0.8",
   "injectors": {

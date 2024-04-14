@@ -37,8 +37,8 @@ import java.util.Random;
 public class SaltCampfireTileEntity extends ExposedTileSimpleInventory implements TickableBlockEntity {
 
     public Random random = new Random();
-    public Color colorFirst = new Color(255, 170, 65);
-    public Color colorSecond = new Color(231, 71, 101);
+    public static Color colorFirst = new Color(255, 170, 65);
+    public static Color colorSecond = new Color(231, 71, 101);
 
     public static final int BURN_COOL_SPEED = 2;
     public static final int NUM_SLOTS = 4;

@@ -1,0 +1,12 @@
+{
+  "sources": [
+    {
+      "type": "single",
+      "resource": "wizards_reborn:particle/wisp"
+    },
+    {
+      "type": "single",
+      "resource": "wizards_reborn:particle/sparkle"
+    }
+  ]
+}
