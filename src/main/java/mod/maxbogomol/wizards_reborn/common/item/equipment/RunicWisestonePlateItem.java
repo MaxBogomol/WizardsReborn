@@ -104,8 +104,8 @@ public class RunicWisestonePlateItem extends Item implements IGuiParticleItem {
             int i = CrystalRituals.getCrystalRituals().indexOf(ritual);
 
             float a = (float) Math.abs(Math.sin((ClientTickHandler.ticksInGame + Minecraft.getInstance().getPartialTick() + (i * 10)) / 15));
-            float ticks = ClientTickHandler.ticksInGame + Minecraft.getInstance().getPartialTick() + (i * 10) * 0.2f;
-            float alpha = (float) (0.35f + Math.abs(Math.sin(Math.toRadians(ticks) + (i * 10)) * 0.25f));
+            float ticks = ClientTickHandler.ticksInGame + Minecraft.getInstance().getPartialTick() * 0.2f + (i * 10);
+            float alpha = (float) (0.35f + Math.abs(Math.sin(Math.toRadians(ticks)) * 0.25f));
             float r = Mth.lerpInt(a, 173, color.getRed()) / 255f;
             float g = Mth.lerpInt(a, 237, color.getGreen()) / 255f;
             float b = Mth.lerpInt(a, 205, color.getBlue()) / 255f;

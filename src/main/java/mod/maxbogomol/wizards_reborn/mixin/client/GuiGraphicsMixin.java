@@ -1,5 +1,8 @@
 package mod.maxbogomol.wizards_reborn.mixin.client;
 
+import mod.maxbogomol.wizards_reborn.api.arcaneenchantment.ArcaneEnchantment;
+import mod.maxbogomol.wizards_reborn.api.arcaneenchantment.ArcaneEnchantmentUtils;
+import mod.maxbogomol.wizards_reborn.api.arcaneenchantment.ArcaneEnchantments;
 import mod.maxbogomol.wizards_reborn.common.item.IGuiParticleItem;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.world.entity.LivingEntity;
@@ -17,6 +20,16 @@ public abstract class GuiGraphicsMixin {
         if (pStack.getItem() instanceof IGuiParticleItem guiParticleItem) {
             GuiGraphics self = (GuiGraphics) ((Object) this);
             guiParticleItem.renderParticle(self.pose(), pEntity, pLevel, pStack, pX, pY, pSeed, pGuiOffset);
+        }
+
+        if (ArcaneEnchantmentUtils.isArcaneItem(pStack)) {
+            for (ArcaneEnchantment enchantment : ArcaneEnchantments.getArcaneEnchantments()) {
+                int levelEnchantment = ArcaneEnchantmentUtils.getArcaneEnchantment(pStack, enchantment);
+                if (levelEnchantment > 0) {
+                    GuiGraphics self = (GuiGraphics) ((Object) this);
+                    enchantment.renderParticle(self.pose(), pEntity, pLevel, pStack, pX, pY, pSeed, pGuiOffset);
+                }
+            }
         }
     }
 }

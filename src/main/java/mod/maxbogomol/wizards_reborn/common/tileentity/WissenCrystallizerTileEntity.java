@@ -98,7 +98,7 @@ public class WissenCrystallizerTileEntity extends ExposedTileSimpleInventory imp
                     }
 
                     for (int i = 0; i < count; i++) {
-                        getItemHandler().setItem(i, stack);
+                        getItemHandler().setItem(i, stack.copy());
                     }
 
                     update = true;

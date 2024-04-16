@@ -94,7 +94,7 @@ public class ArcaneLumosItem extends BlockItem implements IParticleItem, IGuiPar
 
             int seedI = this.getDescriptionId().length();
             Random randomI = new Random(seedI);
-            float ticks = ClientTickHandler.ticksInGame + Minecraft.getInstance().getPartialTick() * 0.1f;
+            float ticks = ClientTickHandler.ticksInGame + Minecraft.getInstance().getPartialTick() + (seedI * 100f) * 0.1f;
             float angle = (randomI.nextFloat() * 360f) + ticks;
             float offset = (float) (0.75f + Math.abs(Math.sin(Math.toRadians(randomI.nextFloat() * 360f + ticks * 0.4f)) * 0.25f));
 
