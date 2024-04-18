@@ -77,7 +77,7 @@ public class WissenWandChooseScreen extends Screen {
         int choosedRay = getSelectedMode(mouseX, mouseY);
         gui.renderTooltip(Minecraft.getInstance().font, Component.translatable(WissenWandItem.getModeString(choosedRay)).withStyle(WissenWandItem.getModeColor(choosedRay)), mouseX, mouseY);
         for (int i = 0; i < 5; i++) {
-            renderRays(WissenWandItem.getModeColor(i), gui, partialTicks, i, 72, 1f, i == choosedRay);
+            renderRays(WissenWandItem.getModeColor(i), gui, partialTicks, i, 72, i == choosedRay);
         }
         RenderUtils.renderItemModelInGui(getWand(), x - 16, y - 16, 32, 32, 32);
     }
@@ -116,7 +116,7 @@ public class WissenWandChooseScreen extends Screen {
         return ItemStack.EMPTY;
     }
 
-    public void renderRays(ChatFormatting color, GuiGraphics gui, float partialTicks, float i, float step, float scale, boolean choosed) {
+    public void renderRays(ChatFormatting color, GuiGraphics gui, float partialTicks, float i, float step, boolean choosed) {
         float r = ColorUtils.getRed(color.getColor()) / 255f;
         float g = ColorUtils.getGreen(color.getColor()) / 255f;
         float b = ColorUtils.getBlue(color.getColor()) / 255f;

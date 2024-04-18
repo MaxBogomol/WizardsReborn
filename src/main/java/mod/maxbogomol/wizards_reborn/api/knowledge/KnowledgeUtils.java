@@ -9,7 +9,10 @@ import mod.maxbogomol.wizards_reborn.common.network.PacketHandler;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.player.Player;
 
+import java.util.ArrayList;
 import java.util.concurrent.atomic.AtomicBoolean;
+import java.util.concurrent.atomic.AtomicInteger;
+import java.util.concurrent.atomic.AtomicReference;
 
 public class KnowledgeUtils {
 
@@ -114,6 +117,96 @@ public class KnowledgeUtils {
         if (!(entity instanceof Player)) return;
         entity.getCapability(IKnowledge.INSTANCE, null).ifPresent((s) -> {
             s.removeAllSpell();
+
+            PacketHandler.sendTo((Player) entity, new KnowledgeUpdatePacket((Player) entity));
+        });
+    }
+
+    public static ArrayList<ArrayList<Spell>> getSpellSets(Entity entity) {
+        if (!(entity instanceof Player)) return null;
+        AtomicReference<ArrayList<ArrayList<Spell>>> sets = new AtomicReference<>();
+        entity.getCapability(IKnowledge.INSTANCE, null).ifPresent((s) -> {
+            sets.set(s.getSpellSets());
+        });
+        return sets.get();
+    }
+
+    public static ArrayList<Spell> getSpellSet(Entity entity, int id) {
+        if (!(entity instanceof Player)) return null;
+        AtomicReference<ArrayList<Spell>> set = new AtomicReference<>();
+        entity.getCapability(IKnowledge.INSTANCE, null).ifPresent((s) -> {
+            set.set(s.getSpellSet(id));
+        });
+        return set.get();
+    }
+
+    public static void removeSpellSet(Entity entity, int id) {
+        if (!(entity instanceof Player)) return;
+        entity.getCapability(IKnowledge.INSTANCE, null).ifPresent((s) -> {
+            s.removeSpellSet(id);
+
+            PacketHandler.sendTo((Player) entity, new KnowledgeUpdatePacket((Player) entity));
+        });
+    }
+
+    public static void removeSpellSets(Entity entity) {
+        if (!(entity instanceof Player)) return;
+        entity.getCapability(IKnowledge.INSTANCE, null).ifPresent((s) -> {
+            s.removeAllSpellSets();
+
+            PacketHandler.sendTo((Player) entity, new KnowledgeUpdatePacket((Player) entity));
+        });
+    }
+
+    public static boolean isSpellInSet(Entity entity, int id, int spellId) {
+        if (!(entity instanceof Player)) return false;
+        AtomicBoolean isSpell = new AtomicBoolean(false);
+        entity.getCapability(IKnowledge.INSTANCE, null).ifPresent((s) -> {
+            isSpell.set(s.isSpellInSet(id, spellId));
+        });
+        return isSpell.get();
+    }
+
+    public static Spell getSpellFromSet(Entity entity, int id, int spellId) {
+        if (!(entity instanceof Player)) return null;
+        AtomicReference<Spell> spell = new AtomicReference<>();
+        entity.getCapability(IKnowledge.INSTANCE, null).ifPresent((s) -> {
+            spell.set(s.getSpellFromSet(id, spellId));
+        });
+        return spell.get();
+    }
+
+    public static void addSpellInSet(Entity entity, int id, int spellId, Spell spell) {
+        if (!(entity instanceof Player)) return;
+        entity.getCapability(IKnowledge.INSTANCE, null).ifPresent((s) -> {
+            s.addSpellInSet(id, spellId, spell);
+
+            PacketHandler.sendTo((Player) entity, new KnowledgeUpdatePacket((Player) entity));
+        });
+    }
+
+    public static void removeSpellFromSet(Entity entity, int id, int spellId) {
+        if (!(entity instanceof Player)) return;
+        entity.getCapability(IKnowledge.INSTANCE, null).ifPresent((s) -> {
+            s.removeSpellFromSet(id, spellId);
+
+            PacketHandler.sendTo((Player) entity, new KnowledgeUpdatePacket((Player) entity));
+        });
+    }
+
+    public static int getCurrentSpellSet(Entity entity) {
+        if (!(entity instanceof Player)) return 0;
+        AtomicInteger current = new AtomicInteger();
+        entity.getCapability(IKnowledge.INSTANCE, null).ifPresent((s) -> {
+            current.set(s.getCurrentSpellSet());
+        });
+        return current.get();
+    }
+
+    public static void setCurrentSpellSet(Entity entity, int id) {
+        if (!(entity instanceof Player)) return;
+        entity.getCapability(IKnowledge.INSTANCE, null).ifPresent((s) -> {
+            s.setCurrentSpellSet(id);
 
             PacketHandler.sendTo((Player) entity, new KnowledgeUpdatePacket((Player) entity));
         });

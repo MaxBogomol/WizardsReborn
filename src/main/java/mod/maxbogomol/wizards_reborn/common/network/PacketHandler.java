@@ -33,6 +33,9 @@ public final class PacketHandler {
         HANDLER.registerMessage(id++, SetCrystalPacket.class, SetCrystalPacket::encode, SetCrystalPacket::decode, SetCrystalPacket::handle);
         HANDLER.registerMessage(id++, DeleteCrystalPacket.class, DeleteCrystalPacket::encode, DeleteCrystalPacket::decode, DeleteCrystalPacket::handle);
         HANDLER.registerMessage(id++, SetSpellPacket.class, SetSpellPacket::encode, SetSpellPacket::decode, SetSpellPacket::handle);
+        HANDLER.registerMessage(id++, SetSpellInSetPacket.class, SetSpellInSetPacket::encode, SetSpellInSetPacket::decode, SetSpellInSetPacket::handle);
+        HANDLER.registerMessage(id++, RemoveSpellSetPacket.class, RemoveSpellSetPacket::encode, RemoveSpellSetPacket::decode, RemoveSpellSetPacket::handle);
+        HANDLER.registerMessage(id++, SetCurrentSpellSetPacket.class, SetCurrentSpellSetPacket::encode, SetCurrentSpellSetPacket::decode, SetCurrentSpellSetPacket::handle);
         HANDLER.registerMessage(id++, SetWissenWandModePacket.class, SetWissenWandModePacket::encode, SetWissenWandModePacket::decode, SetWissenWandModePacket::handle);
         HANDLER.registerMessage(id++, OpenBagPacket.class, OpenBagPacket::encode, OpenBagPacket::decode, OpenBagPacket::handle);
 
@@ -87,10 +90,6 @@ public final class PacketHandler {
         HANDLER.registerMessage(id++, FireShieldSpellEffectPacket.class, FireShieldSpellEffectPacket::encode, FireShieldSpellEffectPacket::decode, FireShieldSpellEffectPacket::handle);
 
         HANDLER.registerMessage(id++, MagicBladeEffectPacket.class, MagicBladeEffectPacket::encode, MagicBladeEffectPacket::decode, MagicBladeEffectPacket::handle);
-
-        HANDLER.registerMessage(id++, WissenCrystallizerSoundPacket.class, WissenCrystallizerSoundPacket::encode, WissenCrystallizerSoundPacket::decode, WissenCrystallizerSoundPacket::handle);
-        HANDLER.registerMessage(id++, ArcaneWorkbenchSoundPacket.class, ArcaneWorkbenchSoundPacket::encode, ArcaneWorkbenchSoundPacket::decode, ArcaneWorkbenchSoundPacket::handle);
-        HANDLER.registerMessage(id++, ArcaneIteratorSoundPacket.class, ArcaneIteratorSoundPacket::encode, ArcaneIteratorSoundPacket::decode, ArcaneIteratorSoundPacket::handle);
     }
 
     private static final PacketDistributor<Pair<Level, BlockPos>> TRACKING_CHUNK_AND_NEAR = new PacketDistributor<>(

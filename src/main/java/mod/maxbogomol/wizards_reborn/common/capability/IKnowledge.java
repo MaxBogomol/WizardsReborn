@@ -6,6 +6,7 @@ import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.capabilities.CapabilityManager;
 import net.minecraftforge.common.capabilities.CapabilityToken;
 
+import java.util.ArrayList;
 import java.util.Set;
 
 public interface IKnowledge {
@@ -24,4 +25,17 @@ public interface IKnowledge {
     void addAllSpell();
     void removeAllSpell();
     Set<Spell> getSpells();
+
+    ArrayList<ArrayList<Spell>> getSpellSets();
+    ArrayList<Spell> getSpellSet(int id);
+    void removeSpellSet(int id);
+    void removeAllSpellSets();
+    boolean isSpellSetCustomName(int id);
+    void setSpellSetCustomName(int id, String name);
+    boolean isSpellInSet(int id, int spellId);
+    Spell getSpellFromSet(int id, int spellId);
+    void addSpellInSet(int id, int spellId, Spell spell);
+    void removeSpellFromSet(int id, int spellId);
+    int getCurrentSpellSet();
+    void setCurrentSpellSet(int id);
 }

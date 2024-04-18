@@ -15,10 +15,7 @@ import mod.maxbogomol.wizards_reborn.client.event.ClientTickHandler;
 import mod.maxbogomol.wizards_reborn.common.item.CrystalItem;
 import mod.maxbogomol.wizards_reborn.common.item.equipment.ArcaneWandItem;
 import mod.maxbogomol.wizards_reborn.common.item.equipment.curio.CrystalBagItem;
-import mod.maxbogomol.wizards_reborn.common.network.DeleteCrystalPacket;
-import mod.maxbogomol.wizards_reborn.common.network.PacketHandler;
-import mod.maxbogomol.wizards_reborn.common.network.SetCrystalPacket;
-import mod.maxbogomol.wizards_reborn.common.network.SetSpellPacket;
+import mod.maxbogomol.wizards_reborn.common.network.*;
 import mod.maxbogomol.wizards_reborn.utils.RenderUtils;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
@@ -33,6 +30,7 @@ import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.SimpleContainer;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
+import org.lwjgl.glfw.GLFW;
 import top.theillusivec4.curios.api.CuriosApi;
 import top.theillusivec4.curios.api.SlotResult;
 
@@ -50,7 +48,9 @@ public class CrystalChooseScreen extends Screen {
     public enum Mode {
         CHOOSE,
         CRYSTAL,
-        SPELL
+        SPELL,
+        SPELL_SETS,
+        SPELL_SET
     }
 
     public ItemStack selectedItem;
@@ -64,6 +64,8 @@ public class CrystalChooseScreen extends Screen {
     public CrystalType selectedCrystalType;
     public boolean isSelectedCrystalType = false;
     public int page = 0;
+    public boolean isSpellSet = false;
+    public int idSpellSet = 0;
 
     public static Map<CrystalType, ArrayList<Spell>> spellsList = new HashMap<CrystalType, ArrayList<Spell>>();
 
@@ -161,6 +163,57 @@ public class CrystalChooseScreen extends Screen {
                 }
                 if (selectedSpell != null) {
                     if (KnowledgeUtils.isSpell(Minecraft.getInstance().player, selectedSpell)) {
+                        if (!isSpellSet) {
+                            hover = false;
+
+                            if (!main.isEmpty() && main.getItem() instanceof ArcaneWandItem) {
+                                PacketHandler.sendToServer(new SetSpellPacket(true, selectedSpell.getId()));
+                                Minecraft.getInstance().player.playNotifySound(WizardsReborn.CRYSTAL_RESONATE_SOUND.get(), SoundSource.NEUTRAL, 1.0f, 1.5f);
+                            } else {
+                                if (!offhand.isEmpty() && offhand.getItem() instanceof ArcaneWandItem) {
+                                    PacketHandler.sendToServer(new SetSpellPacket(false, selectedSpell.getId()));
+                                    Minecraft.getInstance().player.playNotifySound(WizardsReborn.CRYSTAL_RESONATE_SOUND.get(), SoundSource.NEUTRAL, 1.0f, 1.5f);
+                                }
+                            }
+                            return true;
+                        } else {
+                            hoveramount = 0;
+                            mode = Mode.SPELL_SET;
+                            isSpellSet = false;
+                            int currentSpellSet = KnowledgeUtils.getCurrentSpellSet(minecraft.player);
+                            PacketHandler.sendToServer(new SetSpellInSetPacket(selectedSpell.getId(), currentSpellSet, idSpellSet));
+                            Minecraft.getInstance().player.playNotifySound(WizardsReborn.CRYSTAL_RESONATE_SOUND.get(), SoundSource.NEUTRAL, 1.0f, 1.5f);
+                            return true;
+                        }
+                    }
+                }
+            }
+        }
+
+        if (mode == Mode.SPELL_SETS) {
+            int choosed = getSelectedSpell(mouseX, mouseY);
+            if (button == GLFW.GLFW_MOUSE_BUTTON_RIGHT) {
+                PacketHandler.sendToServer(new RemoveSpellSetPacket(choosed));
+                return true;
+            } else {
+                PacketHandler.sendToServer(new SetCurrentSpellSetPacket(choosed));
+                hoveramount = 0;
+                mode = Mode.SPELL_SET;
+                return true;
+            }
+        }
+
+        if (mode == Mode.SPELL_SET) {
+            int choosed = getSelectedSpell(mouseX, mouseY);
+            int currentSpellSet = KnowledgeUtils.getCurrentSpellSet(minecraft.player);
+            if (button == GLFW.GLFW_MOUSE_BUTTON_RIGHT) {
+                PacketHandler.sendToServer(new SetSpellInSetPacket("", currentSpellSet, choosed));
+                return true;
+            } else {
+                selectedSpell = KnowledgeUtils.getSpellFromSet(minecraft.player, currentSpellSet, choosed);
+
+                if (selectedSpell != null) {
+                    if (KnowledgeUtils.isSpell(Minecraft.getInstance().player, selectedSpell)) {
                         hover = false;
 
                         if (!main.isEmpty() && main.getItem() instanceof ArcaneWandItem) {
@@ -172,18 +225,27 @@ public class CrystalChooseScreen extends Screen {
                                 Minecraft.getInstance().player.playNotifySound(WizardsReborn.CRYSTAL_RESONATE_SOUND.get(), SoundSource.NEUTRAL, 1.0f, 1.5f);
                             }
                         }
+                        return true;
                     }
                 }
+
+                idSpellSet = choosed;
+                isSpellSet = true;
+                isSelectedCrystalType = false;
+                page = 0;
+                mode = Mode.SPELL;
+                return true;
             }
         }
 
         if (mode == Mode.CHOOSE) {
             hoveramount = 0;
-            double x = width / 2;
-            if (x > mouseX) {
-                mode = Mode.CRYSTAL;
-            } else {
-                mode = Mode.SPELL;
+            int choosed = getSelectedMode(mouseX, mouseY, 45);
+            switch (choosed) {
+                case 0 -> mode = Mode.SPELL_SET;
+                case 1 -> mode = Mode.CRYSTAL;
+                case 2 -> mode = Mode.SPELL_SETS;
+                case 3 -> mode = Mode.SPELL;
             }
         }
 
@@ -209,9 +271,104 @@ public class CrystalChooseScreen extends Screen {
             int x = width / 2;
             int y = height / 2;
 
-            RenderUtils.renderItemModelInGui(new ItemStack(WizardsReborn.EARTH_CRYSTAL.get()), x - 48, y - 16, 32, 32, 32);
+            int choosedRay = getSelectedMode(mouseX, mouseY, 45);
+            int currentSpellSet = KnowledgeUtils.getCurrentSpellSet(minecraft.player);
+            for (int i = 0; i < 4; i++) {
+                double dst = Math.toRadians((i * 90) + 90);
+                int X = (int) (Math.cos(dst) * (100 * Math.sin(Math.toRadians(90 * hoveramount))));
+                int Y = (int) (Math.sin(dst) * (100 * Math.sin(Math.toRadians(90 * hoveramount))));
 
-            gui.blit(WizardsReborn.EARTH_PROJECTILE_SPELL.getIcon(), x + 16, y - 16, 0, 0, 32, 32, 32, 32);
+                float r = 1f;
+                float g = 1f;
+                float b = 1f;
+                ResourceLocation icon = new ResourceLocation(WizardsReborn.MOD_ID, "textures/gui/arcanemicon/research.png");
+
+                if (i == 1) {
+                    ItemStack stack = getWandCrystal();
+                    if (stack.isEmpty()) {
+                        stack = new ItemStack(WizardsReborn.EARTH_CRYSTAL.get());
+                    }
+                    if (i == choosedRay) {
+                        RenderUtils.renderItemModelInGui(stack, x + X - 24, y + Y - 24, 48, 48, 48);
+                    } else {
+                        RenderUtils.renderItemModelInGui(stack, x + X - 16, y + Y - 16, 32, 32, 32);
+                    }
+                }
+
+                if (i == 3) {
+                    if (getWand().getItem() instanceof ArcaneWandItem wand) {
+                        CompoundTag nbt = getWand().getTag();
+                        if (nbt.contains("spell")) {
+                            if (nbt.getString("spell") != "") {
+                                Spell spell = Spells.getSpell(nbt.getString("spell"));
+                                if (KnowledgeUtils.isSpell(Minecraft.getInstance().player, spell)) {
+                                    r = spell.getColor().getRed() / 255f;
+                                    g = spell.getColor().getGreen() / 255f;
+                                    b = spell.getColor().getBlue() / 255f;
+                                    icon = spell.getIcon();
+                                } else {
+                                    icon = new ResourceLocation(WizardsReborn.MOD_ID, "textures/gui/arcanemicon/unknown.png");
+                                }
+                            }
+                        }
+                    }
+                }
+
+                if (i == 2) {
+                    Spell spell = null;
+                    ArrayList<ArrayList<Spell>> set = KnowledgeUtils.getSpellSets(minecraft.player);
+                    for (int ii = 0; ii < 10; ii++) {
+                        for (int iii = 0; iii < 10; iii++) {
+                            if (set.get(ii).get(iii) != null) {
+                                spell = set.get(ii).get(iii);
+                                break;
+                            }
+                        }
+                        if (spell != null) break;
+                    }
+                    if (spell != null) {
+                        r = spell.getColor().getRed() / 255f;
+                        g = spell.getColor().getGreen() / 255f;
+                        b = spell.getColor().getBlue() / 255f;
+                        icon = spell.getIcon();
+                    }
+                }
+
+                if (i == 0) {
+                    Spell spell = null;
+                    ArrayList<Spell> set = KnowledgeUtils.getSpellSet(minecraft.player, currentSpellSet);
+                    for (int ii = 0; ii < 10; ii++) {
+                        if (set.get(ii) != null) {
+                            spell = set.get(ii);
+                            break;
+                        }
+                    }
+                    if (spell != null) {
+                        r = spell.getColor().getRed() / 255f;
+                        g = spell.getColor().getGreen() / 255f;
+                        b = spell.getColor().getBlue() / 255f;
+                        icon = spell.getIcon();
+                    }
+                }
+
+                if (i == 1) {
+                    if (getWandCrystal().getItem() instanceof CrystalItem crystal) {
+                        r = crystal.getType().getColor().getRed() / 255f;
+                        g = crystal.getType().getColor().getGreen() / 255f;
+                        b = crystal.getType().getColor().getBlue() / 255f;
+                    }
+                }
+
+                renderRays(r, g, b, gui, partialTicks, i, 90, 45, i == choosedRay);
+
+                if (i != 1) {
+                    if (i == choosedRay) {
+                        gui.blit(icon, x + X - 24, y + Y - 24, 0, 0, 48, 48, 48, 48);
+                    } else {
+                        gui.blit(icon, x + X - 16, y + Y - 16, 0, 0, 32, 32, 32, 32);
+                    }
+                }
+            }
         }
 
         if (mode == Mode.CRYSTAL) {
@@ -483,7 +640,6 @@ public class CrystalChooseScreen extends Screen {
                     gui.pose().popPose();
                 }
 
-
                 RenderSystem.disableBlend();
                 RenderSystem.depthMask(true);
                 RenderSystem.blendFunc(GlStateManager.SourceFactor.SRC_ALPHA, GlStateManager.DestFactor.ONE_MINUS_SRC_ALPHA);
@@ -511,6 +667,111 @@ public class CrystalChooseScreen extends Screen {
                         gui.blit(new ResourceLocation(WizardsReborn.MOD_ID + ":textures/gui/arcane_wand_frame.png"), mouseX + 7, mouseY - 70, 0, 36, 36, 36, 128, 128);
                     }
                     gui.renderTooltip(Minecraft.getInstance().font, Component.translatable(spellWand.getTranslatedName()), mouseX, mouseY - 18);
+                }
+            }
+        }
+
+        if (mode == Mode.SPELL_SETS) {
+            int x = width / 2;
+            int y = height / 2;
+
+            int choosedRay = getSelectedSpell(mouseX, mouseY);
+            int currentSpellSet = KnowledgeUtils.getCurrentSpellSet(minecraft.player);
+            for (int i = 0; i < 10; i++) {
+                double dst = Math.toRadians((i * 36) + 18 - 108);
+                int X = (int) (Math.cos(dst) * (100 * Math.sin(Math.toRadians(90 * hoveramount))));
+                int Y = (int) (Math.sin(dst) * (100 * Math.sin(Math.toRadians(90 * hoveramount))));
+
+                float r = 1f;
+                float g = 1f;
+                float b = 1f;
+                boolean standard = currentSpellSet == i;
+
+                ResourceLocation resource = new ResourceLocation(WizardsReborn.MOD_ID, "textures/gui/arcanemicon/research.png");
+                Spell spell = null;
+                ArrayList<Spell> set = KnowledgeUtils.getSpellSet(minecraft.player, i);
+                for (int ii = 0; ii < 10; ii++) {
+                    if (set.get(ii) != null) {
+                        spell = set.get(ii);
+                        break;
+                    }
+                }
+                if (spell != null) {
+                    if (!KnowledgeUtils.isSpell(minecraft.player, spell)) {
+                        resource = new ResourceLocation(WizardsReborn.MOD_ID, "textures/gui/arcanemicon/unknown.png");
+                    } else {
+                        resource = spell.getIcon();
+                        r = spell.getColor().getRed() / 255f;
+                        g = spell.getColor().getGreen() / 255f;
+                        b = spell.getColor().getBlue() / 255f;
+                    }
+                }
+
+                renderRays(r, g, b, gui, partialTicks, i, 36, -108, i == choosedRay, standard);
+
+                if (i == choosedRay) {
+                    gui.blit(resource, x + X - 24, y + Y - 24, 0, 0, 48, 48, 48, 48);
+                } else {
+                    gui.blit(resource, x + X - 16, y + Y - 16, 0, 0, 32, 32, 32, 32);
+                }
+            }
+        }
+
+        if (mode == Mode.SPELL_SET) {
+            int x = width / 2;
+            int y = height / 2;
+
+            int choosedRay = getSelectedSpell(mouseX, mouseY);
+            int currentSpellSet = KnowledgeUtils.getCurrentSpellSet(minecraft.player);
+            for (int i = 0; i < 10; i++) {
+                double dst = Math.toRadians((i * 36) + 18 - 108);
+                int X = (int) (Math.cos(dst) * (100 * Math.sin(Math.toRadians(90 * hoveramount))));
+                int Y = (int) (Math.sin(dst) * (100 * Math.sin(Math.toRadians(90 * hoveramount))));
+
+                float r = 1f;
+                float g = 1f;
+                float b = 1f;
+                boolean standard = false;
+
+                Spell spellWand = null;
+                if (getWand().getItem() instanceof ArcaneWandItem wand) {
+                    CompoundTag nbt = getWand().getTag();
+                    if (nbt.contains("spell")) {
+                        if (nbt.getString("spell") != "") {
+                            spellWand = Spells.getSpell(nbt.getString("spell"));
+                        }
+                    }
+                }
+
+                ResourceLocation resource = new ResourceLocation(WizardsReborn.MOD_ID, "textures/gui/arcanemicon/research.png");
+                Spell spell = KnowledgeUtils.getSpellFromSet(minecraft.player, currentSpellSet, i);
+                if (spell != null) {
+                    if (!KnowledgeUtils.isSpell(minecraft.player, spell)) {
+                        resource = new ResourceLocation(WizardsReborn.MOD_ID, "textures/gui/arcanemicon/unknown.png");
+                    } else {
+                        resource = spell.getIcon();
+                        r = spell.getColor().getRed() / 255f;
+                        g = spell.getColor().getGreen() / 255f;
+                        b = spell.getColor().getBlue() / 255f;
+                    }
+
+                    if (spellWand != null && spell == spellWand) standard = true;
+                }
+
+                renderRays(r, g, b, gui, partialTicks, i, 36, -108, i == choosedRay, standard);
+
+                if (i == choosedRay) {
+                    gui.blit(resource, x + X - 24, y + Y - 24, 0, 0, 48, 48, 48, 48);
+                } else {
+                    gui.blit(resource, x + X - 16, y + Y - 16, 0, 0, 32, 32, 32, 32);
+                }
+            }
+
+            for (int i = 0; i < 10; i++) {
+                Spell spell = KnowledgeUtils.getSpellFromSet(minecraft.player, currentSpellSet, i);
+
+                if (spell != null && i == choosedRay) {
+                    gui.renderTooltip(Minecraft.getInstance().font, Component.translatable(spell.getTranslatedName()), mouseX, mouseY);
                 }
             }
         }
@@ -569,24 +830,40 @@ public class CrystalChooseScreen extends Screen {
         return null;
     }
 
-    public Spell getSelectedSpell(double X, double Y) {
-        List<Spell> spells = Spells.getSpells();
-
-        double step = (float) 360 / spells.size();
+    public int getSelectedSpell(double X, double Y) {
+        double step = (float) 36;
         double x = width / 2;
         double y = height / 2;
 
-        double angle =  Math.toDegrees(Math.atan2(Y-y,X-x));
+        double angle =  Math.toDegrees(Math.atan2(Y-y,X-x)) + 108;
         if (angle < 0D) {
             angle += 360D;
         }
 
-        for (int i = 1; i <= spells.size(); i += 1) {
+        for (int i = 1; i <= 10; i += 1) {
             if ((((i-1) * step) <= angle) && (((i * step)) > angle)) {
-                return spells.get(i - 1);
+                return i - 1;
             }
         }
-        return null;
+        return 0;
+    }
+
+    public int getSelectedMode(double X, double Y, float offset) {
+        double step = (float) 360 / 4;
+        double x = width / 2;
+        double y = height / 2;
+
+        double angle =  Math.toDegrees(Math.atan2(Y-y,X-x)) - offset;
+        if (angle < 0D) {
+            angle += 360D;
+        }
+
+        for (int i = 1; i <= 4; i += 1) {
+            if ((((i-1) * step) <= angle) && (((i * step)) > angle)) {
+                return i - 1;
+            }
+        }
+        return 0;
     }
 
     public float getMouseAngle(double X, double Y) {
@@ -688,6 +965,53 @@ public class CrystalChooseScreen extends Screen {
             buffersource.endBatch();
             gui.pose().popPose();
         }
+
+        RenderSystem.disableBlend();
+        RenderSystem.depthMask(true);
+        RenderSystem.blendFunc(GlStateManager.SourceFactor.SRC_ALPHA, GlStateManager.DestFactor.ONE_MINUS_SRC_ALPHA);
+        RenderSystem.setShader(GameRenderer::getPositionTexShader);
+    }
+
+    public void renderRays(float r, float g, float b, GuiGraphics gui, float partialTicks, float i, float step, float offset, boolean choosed) {
+        float chooseRay = (choosed) ? 1.2f : 0.8f;
+
+        RenderSystem.enableBlend();
+        RenderSystem.blendFunc(GlStateManager.SourceFactor.SRC_ALPHA, GlStateManager.DestFactor.ONE);
+        MultiBufferSource.BufferSource buffersource = Minecraft.getInstance().renderBuffers().bufferSource();
+        RenderSystem.depthMask(false);
+        RenderSystem.setShader(WizardsRebornClient::getGlowingShader);
+
+        gui.pose().pushPose();
+        gui.pose().translate(width / 2,  height / 2, 0);
+        gui.pose().mulPose(Axis.ZP.rotationDegrees(i * step + (step / 2) + offset));
+        gui.pose().mulPose(Axis.XP.rotationDegrees((ClientTickHandler.ticksInGame + partialTicks + (i * 10) * 5)));
+        RenderUtils.ray(gui.pose(), buffersource, 1f, (100 * hoveramount) * chooseRay, 30f, r, g, b, 1, r, g, b, 0F);
+        buffersource.endBatch();
+        gui.pose().popPose();
+
+        RenderSystem.disableBlend();
+        RenderSystem.depthMask(true);
+        RenderSystem.blendFunc(GlStateManager.SourceFactor.SRC_ALPHA, GlStateManager.DestFactor.ONE_MINUS_SRC_ALPHA);
+        RenderSystem.setShader(GameRenderer::getPositionTexShader);
+    }
+
+    public void renderRays(float r, float g, float b, GuiGraphics gui, float partialTicks, float i, float step, float offset, boolean choosed, boolean standard) {
+        float chooseRay = (choosed) ? 1.2f : 0.8f;
+        float alpha = (standard) ? 1f : 0.5f;
+
+        RenderSystem.enableBlend();
+        RenderSystem.blendFunc(GlStateManager.SourceFactor.SRC_ALPHA, GlStateManager.DestFactor.ONE);
+        MultiBufferSource.BufferSource buffersource = Minecraft.getInstance().renderBuffers().bufferSource();
+        RenderSystem.depthMask(false);
+        RenderSystem.setShader(WizardsRebornClient::getGlowingShader);
+
+        gui.pose().pushPose();
+        gui.pose().translate(width / 2,  height / 2, 0);
+        gui.pose().mulPose(Axis.ZP.rotationDegrees(i * step + (step / 2) + offset));
+        gui.pose().mulPose(Axis.XP.rotationDegrees((ClientTickHandler.ticksInGame + partialTicks + (i * 10) * 5)));
+        RenderUtils.ray(gui.pose(), buffersource, 1f, (100 * hoveramount) * chooseRay, 10f, r, g, b, alpha, r, g, b, 0F);
+        buffersource.endBatch();
+        gui.pose().popPose();
 
         RenderSystem.disableBlend();
         RenderSystem.depthMask(true);

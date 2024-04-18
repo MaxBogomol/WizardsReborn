@@ -3,10 +3,10 @@ package mod.maxbogomol.wizards_reborn.common.tileentity;
 import mod.maxbogomol.wizards_reborn.WizardsReborn;
 import mod.maxbogomol.wizards_reborn.api.wissen.*;
 import mod.maxbogomol.wizards_reborn.client.particle.Particles;
+import mod.maxbogomol.wizards_reborn.client.sound.ArcaneWorkbenchSoundInstance;
 import mod.maxbogomol.wizards_reborn.common.config.Config;
 import mod.maxbogomol.wizards_reborn.common.network.PacketHandler;
 import mod.maxbogomol.wizards_reborn.common.network.tileentity.ArcaneWorkbenchBurstEffectPacket;
-import mod.maxbogomol.wizards_reborn.common.network.tileentity.ArcaneWorkbenchSoundPacket;
 import mod.maxbogomol.wizards_reborn.common.recipe.ArcaneWorkbenchRecipe;
 import mod.maxbogomol.wizards_reborn.utils.PacketUtils;
 import net.minecraft.core.BlockPos;
@@ -54,6 +54,8 @@ public class ArcaneWorkbenchTileEntity extends BlockEntity implements TickableBl
 
     public Random random = new Random();
 
+    public ArcaneWorkbenchSoundInstance sound;
+
     public ArcaneWorkbenchTileEntity(BlockEntityType<?> type, BlockPos pos, BlockState state) {
         super(type, pos, state);
     }
@@ -88,7 +90,6 @@ public class ArcaneWorkbenchTileEntity extends BlockEntity implements TickableBl
                 if (isCanCraft(inv, output)) {
                     if (wissenIsCraft == 0) {
                         level.playSound(WizardsReborn.proxy.getPlayer(), getBlockPos(), WizardsReborn.ARCANE_WORKBENCH_START_SOUND.get(), SoundSource.BLOCKS, 1f, 1f);
-                        PacketHandler.sendToTracking(level, getBlockPos(), new ArcaneWorkbenchSoundPacket(getBlockPos()));
                     }
 
                     int addRemainCraft = WissenUtils.getAddWissenRemain(wissenIsCraft, getWissenPerTick(), wissenInCraft);
@@ -191,6 +192,12 @@ public class ArcaneWorkbenchTileEntity extends BlockEntity implements TickableBl
                             .setColor(0.733f, 0.564f, 0.937f)
                             .setLifetime(15)
                             .spawn(level, worldPosition.getX() + 0.5F + X, worldPosition.getY() + 1F, worldPosition.getZ() + 0.5F + Z);
+                }
+
+                if (sound == null) {
+                    sound = ArcaneWorkbenchSoundInstance.playSound(this);
+                } else if (sound.isStopped()) {
+                    sound = ArcaneWorkbenchSoundInstance.playSound(this);
                 }
             }
         }

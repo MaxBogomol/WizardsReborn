@@ -20,7 +20,9 @@ public class ArcaneIteratorSoundInstance extends TileEntitySoundInstance<ArcaneI
         super.tick();
     }
 
-    public static void playSound(ArcaneIteratorTileEntity tileEntity) {
-        Minecraft.getInstance().getSoundManager().queueTickingSound(new ArcaneIteratorSoundInstance(tileEntity, 1, 1));
+    public static ArcaneIteratorSoundInstance playSound(ArcaneIteratorTileEntity tileEntity) {
+        ArcaneIteratorSoundInstance sound = new ArcaneIteratorSoundInstance(tileEntity, 1, 1);
+        Minecraft.getInstance().getSoundManager().queueTickingSound(sound);
+        return sound;
     }
 }
