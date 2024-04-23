@@ -4,7 +4,6 @@ import mod.maxbogomol.wizards_reborn.WizardsReborn;
 import mod.maxbogomol.wizards_reborn.api.crystal.CrystalUtils;
 import mod.maxbogomol.wizards_reborn.common.item.equipment.arcane.ArcaneArmorItem;
 import mod.maxbogomol.wizards_reborn.common.network.PacketHandler;
-import mod.maxbogomol.wizards_reborn.common.network.spell.AirFlowEffectSpellPuchPacket;
 import mod.maxbogomol.wizards_reborn.common.network.spell.AirFlowSpellEffectPacket;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.world.InteractionHand;
@@ -57,7 +56,7 @@ public class AirFlowSpell extends SelfSpell {
         }
 
         player.push(vel.x(), vel.y(), vel.z());
-        PacketHandler.sendTo(player, new AirFlowEffectSpellPuchPacket((float) vel.x(), (float) vel.y(), (float) vel.z()));
+        player.hurtMarked = true;
         if (magicModifier > 0) {
             player.addEffect(new MobEffectInstance(MobEffects.SLOW_FALLING, (int) (50 * magicModifier), 0));
         }

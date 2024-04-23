@@ -5,13 +5,13 @@
       "conditions": [
         {
           "type": "forge:mod_loaded",
-          "modid": "embers"
+          "modid": "create"
         }
       ],
       "recipe": {
         "type": "wizards_reborn:censer",
         "ingredient": {
-          "item": "embers:cinder_flour"
+          "item": "create:cinder_flour"
         },
         "effects": [
           {

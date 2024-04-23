@@ -68,6 +68,7 @@ import mod.maxbogomol.wizards_reborn.common.proxy.ISidedProxy;
 import mod.maxbogomol.wizards_reborn.common.proxy.ServerProxy;
 import mod.maxbogomol.wizards_reborn.common.recipe.*;
 import mod.maxbogomol.wizards_reborn.common.spell.MagicSproutSpell;
+import mod.maxbogomol.wizards_reborn.common.spell.aura.*;
 import mod.maxbogomol.wizards_reborn.common.spell.charge.*;
 import mod.maxbogomol.wizards_reborn.common.spell.projectile.*;
 import mod.maxbogomol.wizards_reborn.common.spell.ray.*;
@@ -524,6 +525,14 @@ public class WizardsReborn {
     public static Spell FROST_CHARGE_SPELL = new FrostChargeSpell(MOD_ID+":frost_charge", 10);
     public static Spell HOLY_CHARGE_SPELL = new HolyChargeSpell(MOD_ID+":holy_charge", 10);
     public static Spell CURSE_CHARGE_SPELL = new CurseChargeSpell(MOD_ID+":curse_charge", 10);
+    public static Spell EARTH_AURA_SPELL = new EarthAuraSpell(MOD_ID+":earth_aura", 10);
+    public static Spell WATER_AURA_SPELL = new WaterAuraSpell(MOD_ID+":water_aura", 10);
+    public static Spell AIR_AURA_SPELL = new AirAuraSpell(MOD_ID+":air_aura", 10);
+    public static Spell FIRE_AURA_SPELL = new FireAuraSpell(MOD_ID+":fire_aura", 10);
+    public static Spell VOID_AURA_SPELL = new VoidAuraSpell(MOD_ID+":void_aura", 10);
+    public static Spell FROST_AURA_SPELL = new FrostAuraSpell(MOD_ID+":frost_aura", 10);
+    public static Spell HOLY_AURA_SPELL = new HolyAuraSpell(MOD_ID+":holy_aura", 10);
+    public static Spell CURSE_AURA_SPELL = new CurseAuraSpell(MOD_ID+":curse_aura", 10);
     public static Spell HEART_OF_NATURE_SPELL = new HeartOfNatureSpell(MOD_ID+":heart_of_nature", 15);
     public static Spell WATER_BREATHING_SPELL = new WaterBreathingSpell(MOD_ID+":water_breathing", 15);
     public static Spell AIR_FLOW_SPELL = new AirFlowSpell(MOD_ID+":air_flow", 15);
@@ -815,7 +824,7 @@ public class WizardsReborn {
     public static final RegistryObject<Item> ARCANE_GOLD_AXE = ITEMS.register("arcane_gold_axe", () -> new ArcaneAxeItem(CustomItemTier.ARCANE_GOLD, 6, -3.1f, new Item.Properties()));
     public static final RegistryObject<Item> ARCANE_GOLD_SHOVEL = ITEMS.register("arcane_gold_shovel", () -> new ArcaneShovelItem(CustomItemTier.ARCANE_GOLD, 1.5f, -3f, new Item.Properties()));
     public static final RegistryObject<Item> ARCANE_GOLD_HOE = ITEMS.register("arcane_gold_hoe", () -> new ArcaneHoeItem(CustomItemTier.ARCANE_GOLD, -2, -1f, new Item.Properties()));
-    public static final RegistryObject<Item> ARCANE_GOLD_SCYTHE = ITEMS.register("arcane_gold_scythe", () -> new ArcaneScytheItem(CustomItemTier.ARCANE_GOLD, 4, -2.8f, new Item.Properties(), 1));
+    public static final RegistryObject<Item> ARCANE_GOLD_SCYTHE = ITEMS.register("arcane_gold_scythe", () -> new ArcaneScytheItem(CustomItemTier.ARCANE_GOLD, 4, -2.8f, new Item.Properties(), 1, 1));
 
     public static final RegistryObject<Item> ARCANE_GOLD_HELMET = ITEMS.register("arcane_gold_helmet", () -> new ArcaneArmorItem(CustomArmorMaterial.ARCANE_GOLD, ArmorItem.Type.HELMET, new Item.Properties()));
     public static final RegistryObject<Item> ARCANE_GOLD_CHESTPLATE = ITEMS.register("arcane_gold_chestplate", () -> new ArcaneArmorItem(CustomArmorMaterial.ARCANE_GOLD, ArmorItem.Type.CHESTPLATE, new Item.Properties()));
@@ -1455,8 +1464,8 @@ public class WizardsReborn {
     public static final RegistryObject<LiquidBlock> MUNDANE_BREW_FLUID_BLOCK = BLOCKS.register("mundane_brew_block", () -> new LiquidBlock(WizardsReborn.MUNDANE_BREW_FLUID, BlockBehaviour.Properties.copy(Blocks.WATER)));
     public static final RegistryObject<LiquidBlock> ALCHEMY_OIL_FLUID_BLOCK = BLOCKS.register("alchemy_oil_block", () -> new LiquidBlock(WizardsReborn.ALCHEMY_OIL_FLUID, BlockBehaviour.Properties.copy(Blocks.WATER)));
     public static final RegistryObject<LiquidBlock> OIL_TEA_FLUID_BLOCK = BLOCKS.register("oil_tea_block", () -> new LiquidBlock(WizardsReborn.OIL_TEA_FLUID, BlockBehaviour.Properties.copy(Blocks.WATER)));
-    public static final RegistryObject<LiquidBlock> WISSEN_TEA_FLUID_BLOCK = BLOCKS.register("wissen_tea_block", () -> new LiquidBlock(WizardsReborn.MUNDANE_BREW_FLUID, BlockBehaviour.Properties.copy(Blocks.WATER)));
-    public static final RegistryObject<LiquidBlock> MUSHROOM_BREW_FLUID_BLOCK = BLOCKS.register("mushroom_brew_block", () -> new LiquidBlock(WizardsReborn.WISSEN_TEA_FLUID, BlockBehaviour.Properties.copy(Blocks.WATER)));
+    public static final RegistryObject<LiquidBlock> WISSEN_TEA_FLUID_BLOCK = BLOCKS.register("wissen_tea_block", () -> new LiquidBlock(WizardsReborn.WISSEN_TEA_FLUID, BlockBehaviour.Properties.copy(Blocks.WATER)));
+    public static final RegistryObject<LiquidBlock> MUSHROOM_BREW_FLUID_BLOCK = BLOCKS.register("mushroom_brew_block", () -> new LiquidBlock(WizardsReborn.MUSHROOM_BREW_FLUID, BlockBehaviour.Properties.copy(Blocks.WATER)));
     public static final RegistryObject<LiquidBlock> HELLISH_MUSHROOM_BREW_FLUID_BLOCK = BLOCKS.register("hellish_mushroom_brew_block", () -> new LiquidBlock(WizardsReborn.HELLISH_MUSHROOM_BREW_FLUID, BlockBehaviour.Properties.copy(Blocks.WATER)));
     public static final RegistryObject<LiquidBlock> MOR_BREW_FLUID_BLOCK = BLOCKS.register("mor_brew_block", () -> new LiquidBlock(WizardsReborn.MOR_BREW_FLUID, BlockBehaviour.Properties.copy(Blocks.WATER)));
     public static final RegistryObject<LiquidBlock> FLOWER_BREW_FLUID_BLOCK = BLOCKS.register("flower_brew_block", () -> new LiquidBlock(WizardsReborn.FLOWER_BREW_FLUID, BlockBehaviour.Properties.copy(Blocks.WATER)));
@@ -1791,6 +1800,14 @@ public class WizardsReborn {
         Spells.register(FROST_CHARGE_SPELL);
         Spells.register(HOLY_CHARGE_SPELL);
         Spells.register(CURSE_CHARGE_SPELL);
+        Spells.register(EARTH_AURA_SPELL);
+        Spells.register(WATER_AURA_SPELL);
+        Spells.register(AIR_AURA_SPELL);
+        Spells.register(FIRE_AURA_SPELL);
+        Spells.register(VOID_AURA_SPELL);
+        Spells.register(FROST_AURA_SPELL);
+        Spells.register(HOLY_AURA_SPELL);
+        Spells.register(CURSE_AURA_SPELL);
         Spells.register(HEART_OF_NATURE_SPELL);
         Spells.register(WATER_BREATHING_SPELL);
         Spells.register(AIR_FLOW_SPELL);

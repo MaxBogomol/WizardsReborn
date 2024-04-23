@@ -14,6 +14,7 @@ import mod.maxbogomol.wizards_reborn.common.item.CrystalItem;
 import mod.maxbogomol.wizards_reborn.common.item.FracturedCrystalItem;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.network.chat.Component;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.event.BuildCreativeModeTabContentsEvent;
@@ -29,7 +30,10 @@ public class WizardsRebornItemGroup {
 
     public static final RegistryObject<CreativeModeTab> WIZARDS_REBORN_GROUP = CREATIVE_MODE_TABS.register("tab",
             () -> CreativeModeTab.builder().icon(() -> new ItemStack(WizardsReborn.FACETED_EARTH_CRYSTAL.get()))
-                    .title(Component.translatable("itemGroup.wizards_reborn_mod_tab")).build());
+                    .title(Component.translatable("itemGroup.wizards_reborn_mod_tab"))
+                    .withBackgroundLocation(new ResourceLocation(WizardsReborn.MOD_ID, "textures/gui/wizards_reborn_item_tab.png"))
+                    .withTabsImage(new ResourceLocation(WizardsReborn.MOD_ID, "textures/gui/wizards_reborn_tabs.png"))
+                    .build());
 
     public static void register(IEventBus eventBus) {
         CREATIVE_MODE_TABS.register(eventBus);

@@ -81,7 +81,7 @@ public class RaySpell extends Spell {
 
             player.startUsingItem(hand);
             awardStat(player, stack);
-            world.playSound(WizardsReborn.proxy.getPlayer(), player.getX(), player.getY(), player.getZ(), WizardsReborn.SPELL_CAST_SOUND.get(), SoundSource.PLAYERS, 0.25f, (float) (1f + ((random.nextFloat() - 0.5D) / 4)));
+            spellSound(player, world);
         }
     }
 
@@ -287,6 +287,8 @@ public class RaySpell extends Spell {
                 }
             }
         }
+        if (width > 1f) width = 1f;
+        if (width < 0f) width = 0f;
 
         float distance = (float) Math.sqrt(Math.pow(entity.getX() - ray.getLocation().x, 2) + Math.pow(entity.getY() - ray.getLocation().y, 2) + Math.pow(entity.getZ() - ray.getLocation().z, 2));
         RenderUtils.ray(stack, bufferDelayed, 0.1f * width, (distance - offset) * width, Mth.lerp(distance / 25f, 1f, 0.5f), r, g, b, 1, r, g, b, 0.1F);

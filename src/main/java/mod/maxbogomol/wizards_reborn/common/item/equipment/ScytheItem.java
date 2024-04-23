@@ -34,9 +34,11 @@ import java.util.UUID;
 public class ScytheItem extends SwordItem {
     public static final UUID BASE_ENTITY_REACH_UUID = UUID.fromString("DB0F1F0B-7DF7-4D45-BA75-9BA60DABCCCD");
     public final int radius;
+    public final float distance;
 
-    public ScytheItem(Tier tier, int attackDamageModifier, float attackSpeedModifier, Properties properties, int radius) {
+    public ScytheItem(Tier tier, int attackDamageModifier, float attackSpeedModifier, Properties properties, float distance, int radius) {
         super(tier, attackDamageModifier, attackSpeedModifier, properties);
+        this.distance = distance;
         this.radius = radius;
     }
 
@@ -44,7 +46,7 @@ public class ScytheItem extends SwordItem {
     public Multimap<Attribute, AttributeModifier> getDefaultAttributeModifiers(EquipmentSlot slot) {
         ImmutableMultimap.Builder<Attribute, AttributeModifier> atts = ImmutableMultimap.builder();
         atts.putAll(super.getDefaultAttributeModifiers(slot));
-        atts.put(ForgeMod.ENTITY_REACH.get(), new AttributeModifier(BASE_ENTITY_REACH_UUID, "bonus", 1, AttributeModifier.Operation.ADDITION));
+        atts.put(ForgeMod.ENTITY_REACH.get(), new AttributeModifier(BASE_ENTITY_REACH_UUID, "bonus", distance, AttributeModifier.Operation.ADDITION));
         return slot == EquipmentSlot.MAINHAND ? atts.build() : super.getDefaultAttributeModifiers(slot);
     }
 

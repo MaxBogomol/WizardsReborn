@@ -2583,7 +2583,8 @@ public class ArcanemiconChapters {
                 new ArcaneWorkbenchPage(new ItemStack(WizardsReborn.ORBITAL_FLUID_RETAINER_ITEM.get()),
                         ARCANUM_ITEM, ARCANUM_ITEM,  ARCANUM_ITEM,
                         POLISHED_WISESTONE_ITEM, WISESTONE_PEDESTAL_ITEM,  POLISHED_WISESTONE_ITEM,
-                        EMPTY_ITEM, POLISHED_WISESTONE_ITEM, EMPTY_ITEM
+                        EMPTY_ITEM, POLISHED_WISESTONE_ITEM, EMPTY_ITEM,
+                        ARCANE_GOLD_INGOT_ITEM
                 )
         );
 

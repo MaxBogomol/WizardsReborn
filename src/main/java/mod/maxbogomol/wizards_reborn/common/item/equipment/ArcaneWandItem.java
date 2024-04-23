@@ -188,17 +188,18 @@ public class ArcaneWandItem extends Item implements IWissenItem, ICustomAnimatio
                 }
             }
         }
-
         return InteractionResultHolder.fail(stack);
     }
 
     @Override
-    public InteractionResult onItemUseFirst(ItemStack stack, UseOnContext context) {
+    public InteractionResult useOn(UseOnContext context) {
+        ItemStack stack = context.getItemInHand();
+
         CompoundTag nbt = stack.getTag();
         if (canSpell(stack, context.getPlayer())) {
             Spell spell = Spells.getSpell(nbt.getString("spell"));
             if (spell.canWandWithCrystal(stack)) {
-                return spell.onWandUseFirst(stack, context);
+                return spell.onWandUseOn(stack, context);
             }
         }
 

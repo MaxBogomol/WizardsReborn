@@ -9,7 +9,6 @@ import mod.maxbogomol.wizards_reborn.common.network.PacketHandler;
 import mod.maxbogomol.wizards_reborn.common.network.spell.MagicSproutSpellEffectPacket;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
-import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.player.Player;
@@ -47,7 +46,7 @@ public class MagicSproutSpell extends Spell {
     }
 
     @Override
-    public InteractionResult onWandUseFirst(ItemStack stack, UseOnContext context) {
+    public InteractionResult onWandUseOn(ItemStack stack, UseOnContext context) {
         if (canSpell(context.getLevel(), context.getPlayer(), context.getHand()) && !context.getPlayer().level().isClientSide()) {
             Color color = getColor();
             float r = color.getRed() / 255f;
@@ -111,6 +110,6 @@ public class MagicSproutSpell extends Spell {
         setCooldown(stack, stats, (int) (getCooldown() * cooldownModifier));
         removeWissen(stack, stats, player, (int) (getWissenCost() * costModifier));
         awardStat(player, stack);
-        context.getLevel().playSound(WizardsReborn.proxy.getPlayer(), player.getX(), player.getY(), player.getZ(), WizardsReborn.SPELL_CAST_SOUND.get(), SoundSource.PLAYERS, 0.25f, (float) (1f + ((random.nextFloat() - 0.5D) / 4)));
+        spellSound(player, context.getLevel());
     }
 }

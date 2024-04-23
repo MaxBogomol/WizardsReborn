@@ -210,7 +210,7 @@ public class SmokingPipeItem extends Item implements ICustomAnimationItem {
                 stacks.add(getInventory(stack).getItem(i).copy());
             }
         }
-        for (int i = 0; i < 8; i++) {
+        for (int i = 0; i < 6; i++) {
             getInventory(stack).removeItem(i, 1);
         }
 

@@ -17,8 +17,8 @@ import java.util.List;
 import java.util.function.Consumer;
 
 public class ArcaneScytheItem extends ScytheItem implements IArcaneItem {
-    public ArcaneScytheItem(Tier tier, int attackDamageModifier, float attackSpeedModifier, Properties properties, int radius) {
-        super(tier, attackDamageModifier, attackSpeedModifier, properties, radius);
+    public ArcaneScytheItem(Tier tier, int attackDamageModifier, float attackSpeedModifier, Properties properties, float distance, int radius) {
+        super(tier, attackDamageModifier, attackSpeedModifier, properties, distance, radius);
     }
 
     @OnlyIn(Dist.CLIENT)
