@@ -1,0 +1,21 @@
+{
+  "type": "wizards_reborn:arcane_workbench",
+  "pattern": [
+    "_A_",
+    "_#_",
+    "___",
+    "____"
+  ],
+  "key": {
+    "#": {
+      "item": "wizards_reborn:redstone_sensor"
+    },
+    "A": {
+      "item": "wizards_reborn:light_transfer_lens"
+    }
+  },
+  "output": {
+    "item": "wizards_reborn:light_sensor"
+  },
+  "wissen": 100
+}

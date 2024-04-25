@@ -1053,7 +1053,7 @@ public class ArcanemiconChapters {
                         EMPTY_ITEM, ARCANE_GOLD_NUGGET_ITEM, EMPTY_ITEM,
                         ARCANE_GOLD_NUGGET_ITEM, ARCANE_WOOD_BRANCH_ITEM, ARCANE_GOLD_NUGGET_ITEM,
                         ARCANE_WOOD_PLANKS_ITEM, ARCANE_GOLD_INGOT_ITEM, ARCANE_WOOD_PLANKS_ITEM,
-                        NATURAL_CALX_ITEM, EMPTY_ITEM, NATURAL_CALX_ITEM
+                        ENCHANTED_CALX_ITEM, EMPTY_ITEM, ENCHANTED_CALX_ITEM
                 )
         );
 
@@ -1064,9 +1064,9 @@ public class ArcanemiconChapters {
                 ),
                 new ArcaneWorkbenchPage(new ItemStack(WizardsReborn.TOTEM_OF_EXPERIENCE_ABSORPTION_ITEM.get()),
                         ARCANE_WOOD_PLANKS_ITEM, ARCANE_GOLD_INGOT_ITEM, ARCANE_WOOD_PLANKS_ITEM,
-                        ARCACITE_ITEM, ARCANE_WOOD_BRANCH_ITEM, ARCACITE_ITEM,
+                        ARCACITE_ITEM, EMPTY_ITEM, ARCACITE_ITEM,
                         ARCANE_WOOD_PLANKS_ITEM, ARCANE_GOLD_INGOT_ITEM, ARCANE_WOOD_PLANKS_ITEM,
-                        ARCACITE_ITEM, NATURAL_CALX_ITEM, NATURAL_CALX_ITEM, NATURAL_CALX_ITEM
+                        ARCACITE_ITEM, ENCHANTED_CALX_ITEM, ENCHANTED_CALX_ITEM, ENCHANTED_CALX_ITEM
                 )
         );
 
@@ -1136,7 +1136,7 @@ public class ArcanemiconChapters {
                 new ArcaneWorkbenchPage(new ItemStack(WizardsReborn.ARCANE_FORTRESS_LEGGINGS.get()),
                         ARCANE_GOLD_NUGGET_ITEM, EMPTY_ITEM, ARCANE_GOLD_NUGGET_ITEM,
                         ARCANE_GOLD_INGOT_ITEM, new ItemStack(WizardsReborn.ARCANE_GOLD_LEGGINGS.get()), ARCANE_GOLD_INGOT_ITEM,
-                        ARCANE_GOLD_INGOT_ITEM, EMPTY_ITEM, ARCANE_GOLD_INGOT_ITEM,
+                        ARCANE_GOLD_NUGGET_ITEM, EMPTY_ITEM, ARCANE_GOLD_NUGGET_ITEM,
                         ARCACITE_ITEM, EMPTY_ITEM, ARCACITE_ITEM
                 ),
                 new ArcaneWorkbenchPage(new ItemStack(WizardsReborn.ARCANE_FORTRESS_BOOTS.get()),
@@ -1404,7 +1404,7 @@ public class ArcanemiconChapters {
                 new TitledBlockPage("wizards_reborn.arcanemicon.page.wissen_ring",
                         new BlockEntry(ARCANE_PEDESTAL_ITEM, new ItemStack(WizardsReborn.WISSEN_RING.get()))
                 ),
-                new ArcaneIteratorPage(new ItemStack(WizardsReborn.WISSEN_RING.get()), 0, 0, new ItemStack(WizardsReborn.ARCANUM_AMULET.get()),
+                new ArcaneIteratorPage(new ItemStack(WizardsReborn.WISSEN_RING.get()), 0, 0, new ItemStack(WizardsReborn.ARCANUM_RING.get()),
                         ARCANUM_LENS_ITEM, ARCACITE_ITEM, ARCANUM_LENS_ITEM, ARCANE_GOLD_INGOT_ITEM, ARCACITE_ITEM, ARCANE_GOLD_INGOT_ITEM, ARCANUM_LENS_ITEM, ARCACITE_ITEM
                 )
         );
@@ -2022,7 +2022,7 @@ public class ArcanemiconChapters {
                 ),
                 new ArcaneIteratorPage(crystalRituals.get(WizardsReborn.ARTIFICIAL_FERTILITY_CRYSTAL_RITUAL), 0, 0, new ItemStack(WizardsReborn.WISESTONE_PLATE.get()),
                         new ItemStack(WizardsReborn.FLOWER_FERTILIZER.get()), new ItemStack(WizardsReborn.FLOWER_FERTILIZER.get()), new ItemStack(WizardsReborn.FLOWER_FERTILIZER.get()),
-                        NATURAL_CALX_ITEM, NATURAL_CALX_ITEM, NATURAL_CALX_ITEM, new ItemStack(Items.HAY_BLOCK), new ItemStack(Items.WATER_BUCKET)
+                        NATURAL_CALX_ITEM, NATURAL_CALX_ITEM, NATURAL_CALX_ITEM, NATURAL_CALX_ITEM, new ItemStack(Items.HAY_BLOCK), new ItemStack(Items.WATER_BUCKET)
                 )
         );
 
@@ -2085,23 +2085,23 @@ public class ArcanemiconChapters {
                 ),
                 new ArcaneIteratorPage(crystalRituals.get(WizardsReborn.CRYSTAL_GROWTH_ACCELERATION_CRYSTAL_RITUAL), 0, 0, new ItemStack(WizardsReborn.WISESTONE_PLATE.get()),
                         new ItemStack(WizardsReborn.WATER_CRYSTAL.get()),
-                        ARCANE_GOLD_INGOT_ITEM, ARCANE_GOLD_INGOT_ITEM, ARCANE_GOLD_INGOT_ITEM, ARCANE_GOLD_INGOT_ITEM,
-                        ARCANUM_ITEM, ARCANUM_ITEM, ARCANUM_ITEM, ARCANUM_ITEM
+                        ENCHANTED_CALX_ITEM, ENCHANTED_CALX_ITEM, ENCHANTED_CALX_ITEM,
+                        ARCANE_GOLD_INGOT_ITEM, ARCANE_GOLD_INGOT_ITEM, ARCANUM_LENS_ITEM, ARCANUM_LENS_ITEM
                 ),
                 new ArcaneIteratorPage(crystalRituals.get(WizardsReborn.CRYSTAL_GROWTH_ACCELERATION_CRYSTAL_RITUAL), 0, 0, new ItemStack(WizardsReborn.WISESTONE_PLATE.get()),
                         new ItemStack(WizardsReborn.AIR_CRYSTAL.get()),
-                        ARCANE_GOLD_INGOT_ITEM, ARCANE_GOLD_INGOT_ITEM, ARCANE_GOLD_INGOT_ITEM, ARCANE_GOLD_INGOT_ITEM,
-                        ARCANUM_ITEM, ARCANUM_ITEM, ARCANUM_ITEM, ARCANUM_ITEM
+                        ENCHANTED_CALX_ITEM, ENCHANTED_CALX_ITEM, ENCHANTED_CALX_ITEM,
+                        ARCANE_GOLD_INGOT_ITEM, ARCANE_GOLD_INGOT_ITEM, ARCANUM_LENS_ITEM, ARCANUM_LENS_ITEM
                 ),
                 new ArcaneIteratorPage(crystalRituals.get(WizardsReborn.CRYSTAL_GROWTH_ACCELERATION_CRYSTAL_RITUAL), 0, 0, new ItemStack(WizardsReborn.WISESTONE_PLATE.get()),
                         new ItemStack(WizardsReborn.FIRE_CRYSTAL.get()),
-                        ARCANE_GOLD_INGOT_ITEM, ARCANE_GOLD_INGOT_ITEM, ARCANE_GOLD_INGOT_ITEM, ARCANE_GOLD_INGOT_ITEM,
-                        ARCANUM_ITEM, ARCANUM_ITEM, ARCANUM_ITEM, ARCANUM_ITEM
+                        ENCHANTED_CALX_ITEM, ENCHANTED_CALX_ITEM, ENCHANTED_CALX_ITEM,
+                        ARCANE_GOLD_INGOT_ITEM, ARCANE_GOLD_INGOT_ITEM, ARCANUM_LENS_ITEM, ARCANUM_LENS_ITEM
                 ),
                 new ArcaneIteratorPage(crystalRituals.get(WizardsReborn.CRYSTAL_GROWTH_ACCELERATION_CRYSTAL_RITUAL), 0, 0, new ItemStack(WizardsReborn.WISESTONE_PLATE.get()),
                         new ItemStack(WizardsReborn.VOID_CRYSTAL.get()),
-                        ARCANE_GOLD_INGOT_ITEM, ARCANE_GOLD_INGOT_ITEM, ARCANE_GOLD_INGOT_ITEM, ARCANE_GOLD_INGOT_ITEM,
-                        ARCANUM_ITEM, ARCANUM_ITEM, ARCANUM_ITEM, ARCANUM_ITEM
+                        ENCHANTED_CALX_ITEM, ENCHANTED_CALX_ITEM, ENCHANTED_CALX_ITEM,
+                        ARCANE_GOLD_INGOT_ITEM, ARCANE_GOLD_INGOT_ITEM, ARCANUM_LENS_ITEM, ARCANUM_LENS_ITEM
                 )
         );
 
@@ -2248,7 +2248,7 @@ public class ArcanemiconChapters {
                 ),
                 new CraftingTablePage(new ItemStack(WizardsReborn.INNOCENT_SALT_LANTERN_ITEM.get()),
                         EMPTY_ITEM, new ItemStack(Items.CHAIN), EMPTY_ITEM,
-                        ARCANE_GOLD_NUGGET_ITEM, new ItemStack(WizardsReborn.ARCANE_SALT_TORCH_ITEM.get()), ARCANE_GOLD_NUGGET_ITEM,
+                        ARCANE_GOLD_NUGGET_ITEM, new ItemStack(WizardsReborn.INNOCENT_SALT_TORCH_ITEM.get()), ARCANE_GOLD_NUGGET_ITEM,
                         INNOCENT_WOOD_SLAB_ITEM, INNOCENT_WOOD_SLAB_ITEM, INNOCENT_WOOD_SLAB_ITEM
                 ),
                 new CraftingTablePage(new ItemStack(WizardsReborn.ARCANE_SALT_CAMPFIRE_ITEM.get()),
@@ -2508,10 +2508,10 @@ public class ArcanemiconChapters {
                 ),
                 new CraftingTablePage(new ItemStack(WizardsReborn.WISESTONE_PILLAR_ITEM.get(), 2),
                         POLISHED_WISESTONE_ITEM, EMPTY_ITEM, EMPTY_ITEM,
-                        new ItemStack(WizardsReborn.CHISELED_WISESTONE_ITEM.get())
+                        POLISHED_WISESTONE_ITEM
                 ),
                 new CraftingTablePage(new ItemStack(WizardsReborn.POLISHED_WISESTONE_PRESSURE_PLATE_ITEM.get(), 1),
-                        POLISHED_WISESTONE_ITEM, new ItemStack(WizardsReborn.CHISELED_WISESTONE_ITEM.get())
+                        POLISHED_WISESTONE_ITEM, POLISHED_WISESTONE_ITEM
                 ),
                 new CraftingTablePage(new ItemStack(WizardsReborn.POLISHED_WISESTONE_BUTTON_ITEM.get(), 1),
                         POLISHED_WISESTONE_ITEM
@@ -2633,7 +2633,7 @@ public class ArcanemiconChapters {
                         POLISHED_WISESTONE_ITEM, POLISHED_WISESTONE_ITEM,  POLISHED_WISESTONE_ITEM,
                         POLISHED_WISESTONE_ITEM, POLISHED_WISESTONE_ITEM,  POLISHED_WISESTONE_ITEM,
                         EMPTY_ITEM, new ItemStack(WizardsReborn.WISSEN_ALTAR_ITEM.get()),  EMPTY_ITEM,
-                        ARCANE_GOLD_INGOT_ITEM, new ItemStack(WizardsReborn.FLUID_PIPE_ITEM.get()), ARCANE_GOLD_INGOT_ITEM, new ItemStack(WizardsReborn.FLUID_PIPE_ITEM.get())
+                        ARCANE_GOLD_INGOT_ITEM, new ItemStack(WizardsReborn.STEAM_PIPE_ITEM.get()), ARCANE_GOLD_INGOT_ITEM, new ItemStack(WizardsReborn.FLUID_PIPE_ITEM.get())
                 ),
                 new ImagePage(new ResourceLocation(WizardsReborn.MOD_ID, "textures/gui/arcanemicon/alchemy_machine_image_page.png")),
                 new AlchemyMachinePage(EMPTY_ITEM, new FluidStack(Fluids.LAVA, 750), false, true,

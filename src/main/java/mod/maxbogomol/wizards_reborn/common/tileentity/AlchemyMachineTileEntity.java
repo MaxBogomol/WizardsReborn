@@ -114,8 +114,8 @@ public class AlchemyMachineTileEntity extends PipeBaseTileEntity implements Tick
                 }
                 inv.setItem(6, itemOutputHandler.getStackInSlot(0));
 
-                AlchemyMachineContext conext = new AlchemyMachineContext(inv, fluidTank1, fluidTank2, fluidTank3);
-                Optional<AlchemyMachineRecipe> recipe = level.getRecipeManager().getRecipeFor(WizardsReborn.ALCHEMY_MACHINE_RECIPE.get(), conext, level);
+                AlchemyMachineContext context = new AlchemyMachineContext(inv, fluidTank1, fluidTank2, fluidTank3);
+                Optional<AlchemyMachineRecipe> recipe = level.getRecipeManager().getRecipeFor(WizardsReborn.ALCHEMY_MACHINE_RECIPE.get(), context, level);
                 wissenInCraft = recipe.map(AlchemyMachineRecipe::getRecipeWissen).orElse(0);
                 steamInCraft = recipe.map(AlchemyMachineRecipe::getRecipeSteam).orElse(0);
 
@@ -531,17 +531,14 @@ public class AlchemyMachineTileEntity extends PipeBaseTileEntity implements Tick
         }
         inv.setItem(6, itemOutputHandler.getStackInSlot(0));
 
-        AlchemyMachineContext conext = new AlchemyMachineContext(inv, fluidTank1, fluidTank2, fluidTank3);
-        Optional<AlchemyMachineRecipe> recipe = level.getRecipeManager().getRecipeFor(WizardsReborn.ALCHEMY_MACHINE_RECIPE.get(), conext, level);
+        AlchemyMachineContext context = new AlchemyMachineContext(inv, fluidTank1, fluidTank2, fluidTank3);
+        Optional<AlchemyMachineRecipe> recipe = level.getRecipeManager().getRecipeFor(WizardsReborn.ALCHEMY_MACHINE_RECIPE.get(), context, level);
         if (recipe.isPresent()) {
             ItemStack stack = recipe.get().getResultItem(RegistryAccess.EMPTY).copy();
 
             if (level.getBlockEntity(getBlockPos().above()) instanceof AlchemyBoilerTileEntity boiler) {
                 int filled = boiler.getTank().fill(recipe.get().getResultFluid(), IFluidHandler.FluidAction.SIMULATE);
-                boolean isCanFluid = true;
-                if (filled != recipe.get().getResultFluid().getAmount()) {
-                    isCanFluid = false;
-                }
+                boolean isCanFluid = filled == recipe.get().getResultFluid().getAmount();
 
                 if (isCanCraft(inv, stack, recipe.get(), isCanFluid)) {
                     if (!stack.isEmpty()) {

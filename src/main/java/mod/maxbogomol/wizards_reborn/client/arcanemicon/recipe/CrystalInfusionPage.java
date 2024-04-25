@@ -2,15 +2,20 @@ package mod.maxbogomol.wizards_reborn.client.arcanemicon.recipe;
 
 import mod.maxbogomol.wizards_reborn.WizardsReborn;
 import mod.maxbogomol.wizards_reborn.client.arcanemicon.ArcanemiconGui;
-import mod.maxbogomol.wizards_reborn.client.arcanemicon.Page;
+import mod.maxbogomol.wizards_reborn.common.recipe.CrystalInfusionRecipe;
+import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
+import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.SimpleContainer;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.phys.Vec2;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 
-public class CrystalInfusionPage extends Page {
+import java.util.Optional;
+
+public class CrystalInfusionPage extends RecipePage {
     public static final ResourceLocation BACKGROUND = new ResourceLocation(WizardsReborn.MOD_ID, "textures/gui/arcanemicon/crystal_infusion_page.png");
     public ItemStack result;
     public ItemStack[] inputs;
@@ -38,6 +43,8 @@ public class CrystalInfusionPage extends Page {
             point = rotatePointAbout(point, center, angleBetweenEach);
         }
         drawItem(book, gui, result,x + 56, y + 128, mouseX, mouseY);
+
+        renderChanged(book, gui, x, y, mouseX, mouseY);
     }
 
     public static Vec2 rotatePointAbout(Vec2 in, Vec2 about, double degrees) {
@@ -45,5 +52,23 @@ public class CrystalInfusionPage extends Page {
         double newX = Math.cos(rad) * (in.x - about.x) - Math.sin(rad) * (in.y - about.y) + about.x;
         double newY = Math.sin(rad) * (in.x - about.x) + Math.cos(rad) * (in.y - about.y) + about.y;
         return new Vec2((float) newX, (float) newY);
+    }
+
+    @Override
+    @OnlyIn(Dist.CLIENT)
+    public boolean isChanged(ArcanemiconGui book, GuiGraphics gui, int x, int y, int mouseX, int mouseY) {
+        ClientLevel level = Minecraft.getInstance().level;
+
+        if (level != null) {
+            SimpleContainer inv = new SimpleContainer(inputs.length);
+            for (int i = 0; i < inputs.length; i++) {
+                inv.setItem(i, inputs[i]);
+            }
+
+            Optional<CrystalInfusionRecipe> recipe = level.getRecipeManager().getRecipeFor(WizardsReborn.CRYSTAL_INFUSION_RECIPE.get(), inv, level);
+            return !recipe.isPresent();
+        }
+
+        return false;
     }
 }

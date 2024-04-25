@@ -4,15 +4,20 @@ import mod.maxbogomol.wizards_reborn.WizardsReborn;
 import mod.maxbogomol.wizards_reborn.api.crystalritual.CrystalRitual;
 import mod.maxbogomol.wizards_reborn.api.crystalritual.CrystalRitualUtils;
 import mod.maxbogomol.wizards_reborn.client.arcanemicon.ArcanemiconGui;
-import mod.maxbogomol.wizards_reborn.client.arcanemicon.Page;
+import mod.maxbogomol.wizards_reborn.common.recipe.CrystalRitualRecipe;
+import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
+import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.SimpleContainer;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.phys.Vec2;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 
-public class CrystalRitualPage extends Page {
+import java.util.Optional;
+
+public class CrystalRitualPage extends RecipePage {
     public static final ResourceLocation BACKGROUND = new ResourceLocation(WizardsReborn.MOD_ID, "textures/gui/arcanemicon/crystal_ritual_page.png");
     public CrystalRitual crystalRitual;
     public ItemStack[] inputs;
@@ -39,6 +44,8 @@ public class CrystalRitualPage extends Page {
             index += 1;
             point = rotatePointAbout(point, center, angleBetweenEach);
         }
+
+        renderChanged(book, gui, x, y, mouseX, mouseY);
     }
 
     public static Vec2 rotatePointAbout(Vec2 in, Vec2 about, double degrees) {
@@ -46,5 +53,23 @@ public class CrystalRitualPage extends Page {
         double newX = Math.cos(rad) * (in.x - about.x) - Math.sin(rad) * (in.y - about.y) + about.x;
         double newY = Math.sin(rad) * (in.x - about.x) + Math.cos(rad) * (in.y - about.y) + about.y;
         return new Vec2((float) newX, (float) newY);
+    }
+
+    @Override
+    @OnlyIn(Dist.CLIENT)
+    public boolean isChanged(ArcanemiconGui book, GuiGraphics gui, int x, int y, int mouseX, int mouseY) {
+        ClientLevel level = Minecraft.getInstance().level;
+
+        if (level != null) {
+            SimpleContainer inv = new SimpleContainer(inputs.length);
+            for (int i = 0; i < inputs.length; i++) {
+                inv.setItem(i, inputs[i]);
+            }
+
+            Optional<CrystalRitualRecipe> recipe = level.getRecipeManager().getRecipeFor(WizardsReborn.CRYSTAL_RITUAL_RECIPE.get(), inv, level);
+            return !recipe.isPresent();
+        }
+
+        return false;
     }
 }

@@ -2,14 +2,19 @@ package mod.maxbogomol.wizards_reborn.client.arcanemicon.recipe;
 
 import mod.maxbogomol.wizards_reborn.WizardsReborn;
 import mod.maxbogomol.wizards_reborn.client.arcanemicon.ArcanemiconGui;
-import mod.maxbogomol.wizards_reborn.client.arcanemicon.Page;
+import mod.maxbogomol.wizards_reborn.common.recipe.ArcanumDustTransmutationRecipe;
+import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
-import net.minecraft.world.item.ItemStack;
+import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.SimpleContainer;
+import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 
-public class ArcanumDustTransmutationPage extends Page {
+import java.util.Optional;
+
+public class ArcanumDustTransmutationPage extends RecipePage {
     public static final ResourceLocation BACKGROUND = new ResourceLocation(WizardsReborn.MOD_ID, "textures/gui/arcanemicon/arcanum_dust_transmutation_page.png");
     public ItemStack result;
     public ItemStack input;
@@ -26,5 +31,22 @@ public class ArcanumDustTransmutationPage extends Page {
         drawItem(book, gui, new ItemStack(WizardsReborn.ARCANUM_DUST.get()),x + 56, y + 18, mouseX, mouseY);
         drawItem(book, gui, input,x + 56, y + 69, mouseX, mouseY);
         drawItem(book, gui, result,x + 56, y + 123, mouseX, mouseY);
+        renderChanged(book, gui, x, y, mouseX, mouseY);
+    }
+
+    @Override
+    @OnlyIn(Dist.CLIENT)
+    public boolean isChanged(ArcanemiconGui book, GuiGraphics gui, int x, int y, int mouseX, int mouseY) {
+        ClientLevel level = Minecraft.getInstance().level;
+
+        if (level != null) {
+            SimpleContainer inv = new SimpleContainer(1);
+            inv.setItem(0, input);
+
+            Optional<ArcanumDustTransmutationRecipe> recipe = level.getRecipeManager().getRecipeFor(WizardsReborn.ARCANUM_DUST_TRANSMUTATION_RECIPE.get(), inv, level);
+            return !recipe.isPresent();
+        }
+
+        return false;
     }
 }

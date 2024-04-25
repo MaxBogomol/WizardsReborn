@@ -1,20 +1,32 @@
 package mod.maxbogomol.wizards_reborn.client.arcanemicon.recipe;
 
 import mod.maxbogomol.wizards_reborn.WizardsReborn;
+import mod.maxbogomol.wizards_reborn.api.alchemy.AlchemyPotionUtils;
 import mod.maxbogomol.wizards_reborn.client.arcanemicon.ArcanemiconGui;
-import mod.maxbogomol.wizards_reborn.client.arcanemicon.Page;
 import mod.maxbogomol.wizards_reborn.client.config.ClientConfig;
+import mod.maxbogomol.wizards_reborn.common.item.equipment.AlchemyBottleItem;
+import mod.maxbogomol.wizards_reborn.common.item.equipment.AlchemyPotionItem;
+import mod.maxbogomol.wizards_reborn.common.recipe.AlchemyMachineContext;
+import mod.maxbogomol.wizards_reborn.common.recipe.AlchemyMachineRecipe;
 import mod.maxbogomol.wizards_reborn.utils.NumericalUtils;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
+import net.minecraft.client.multiplayer.ClientLevel;
+import net.minecraft.core.RegistryAccess;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.SimpleContainer;
 import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.fluids.FluidStack;
+import net.minecraftforge.fluids.capability.templates.FluidTank;
 
-public class AlchemyMachinePage extends Page {
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Optional;
+
+public class AlchemyMachinePage extends RecipePage {
     public static final ResourceLocation BACKGROUND = new ResourceLocation(WizardsReborn.MOD_ID, "textures/gui/arcanemicon/alchemy_machine_page.png");
     public ItemStack result;
     public ItemStack[] inputs;
@@ -132,5 +144,88 @@ public class AlchemyMachinePage extends Page {
                 gui.renderTooltip(Minecraft.getInstance().font, NumericalUtils.getSteamName(), mouseX, mouseY);
             }
         }
+
+        renderChanged(book, gui, x, y, mouseX, mouseY);
+    }
+
+    protected FluidTank fluidTank1 = new FluidTank(Integer.MAX_VALUE);
+    protected FluidTank fluidTank2 = new FluidTank(Integer.MAX_VALUE);
+    protected FluidTank fluidTank3 = new FluidTank(Integer.MAX_VALUE);
+
+    @Override
+    @OnlyIn(Dist.CLIENT)
+    public boolean isChanged(ArcanemiconGui book, GuiGraphics gui, int x, int y, int mouseX, int mouseY) {
+        ClientLevel level = Minecraft.getInstance().level;
+
+        if (level != null) {
+            SimpleContainer inv = new SimpleContainer(7);
+            for (int i = 0; i < inputs.length; i++) {
+                inv.setItem(i, inputs[i]);
+            }
+            inv.setItem(6, ItemStack.EMPTY);
+            fluidTank1.setFluid(fluidInputs1);
+            fluidTank2.setFluid(fluidInputs2);
+            fluidTank3.setFluid(fluidInputs3);
+            AlchemyMachineContext context = new AlchemyMachineContext(inv, fluidTank1, fluidTank2, fluidTank3);
+
+            List<ItemStack> list = new ArrayList<>();
+
+            Optional<AlchemyMachineRecipe> recipe = level.getRecipeManager().getRecipeFor(WizardsReborn.ALCHEMY_MACHINE_RECIPE.get(), context, level);
+            if (recipe.isPresent()) {
+                ItemStack stack = recipe.get().getResultItem(RegistryAccess.EMPTY).copy();
+
+                if (!stack.isEmpty()) {
+                    list.add(stack);
+                } else {
+                    if (!AlchemyPotionUtils.isEmpty(recipe.get().getRecipeAlchemyPotion())) {
+                        ItemStack bottle = getAlchemyBottle();
+                        AlchemyPotionUtils.setPotion(bottle, recipe.get().getRecipeAlchemyPotion());
+                        list.add(bottle);
+                    }
+                }
+
+                if (!recipe.get().getResultFluid().isEmpty()) {
+                    list.add(recipe.get().getResultFluid().getFluid().getBucket().getDefaultInstance().copy());
+                }
+
+                boolean ft1 = false;
+                boolean ft2 = false;
+                boolean ft3 = false;
+
+                for (int i = 0; i < recipe.get().getFluidIngredients().size(); i++) {
+                    for (FluidStack fluidStack : recipe.get().getFluidIngredients().get(i).getFluids()) {
+                        if (fluidInputs1.isFluidEqual(fluidStack) & !ft1) ft1 = true;
+                        if (fluidInputs2.isFluidEqual(fluidStack) & !ft2) ft2 = true;
+                        if (fluidInputs3.isFluidEqual(fluidStack) & !ft3) ft3 = true;
+
+                    }
+                }
+
+                if (!ft1 && !fluidInputs1.isEmpty()) return true;
+                if (!ft2 && !fluidInputs2.isEmpty()) return true;
+                if (!ft3 && !fluidInputs3.isEmpty()) return true;
+            } else {
+                return true;
+            }
+
+            return list.isEmpty();
+        }
+
+        return false;
+    }
+
+    public ItemStack getAlchemyBottle() {
+        ItemStack stack = ItemStack.EMPTY;
+
+        for (int i = 0; i < inputs.length; i++) {
+            if (inputs[i].getItem() instanceof AlchemyBottleItem item) {
+                stack = item.getPotionItem();
+            }
+            if (inputs[i].getItem() instanceof AlchemyPotionItem item) {
+                stack = inputs[i].copy();
+            }
+        }
+
+        return stack;
     }
 }

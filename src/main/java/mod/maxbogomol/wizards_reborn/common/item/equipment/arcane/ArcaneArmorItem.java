@@ -109,10 +109,12 @@ public class ArcaneArmorItem extends ArmorItem implements IArcaneItem {
     }
 
     public static float getPlayerMagicModifier(Player player) {
-        if (player.getItemBySlot(EquipmentSlot.HEAD).getItem() instanceof ArcaneArmorItem armor) {
-            if (armor.hasArmorSet()) {
-                if (armor.hasArmorSetPlayer(player)) {
-                    return armor.getMagicModifier();
+        if (player != null) {
+            if (player.getItemBySlot(EquipmentSlot.HEAD).getItem() instanceof ArcaneArmorItem armor) {
+                if (armor.hasArmorSet()) {
+                    if (armor.hasArmorSetPlayer(player)) {
+                        return armor.getMagicModifier();
+                    }
                 }
             }
         }
