@@ -130,6 +130,6 @@ public class FrostRaySpell extends RaySpell {
             }
         }
 
-        return getHitResultStandart(pProjectile, pStartVec, pEndVecOffset, pLevel, pFilter);
+        return getHitResultStandard(pProjectile, pStartVec, pEndVecOffset, pLevel, pFilter);
     }
 }

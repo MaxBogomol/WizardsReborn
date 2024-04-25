@@ -300,10 +300,10 @@ public class RaySpell extends Spell {
     }
 
     public HitResult getHitResult(SpellProjectileEntity pProjectile, Vec3 pStartVec, Vec3 pEndVecOffset, Level pLevel, Predicate<Entity> pFilter) {
-        return getHitResultStandart(pProjectile, pStartVec, pEndVecOffset, pLevel, pFilter);
+        return getHitResultStandard(pProjectile, pStartVec, pEndVecOffset, pLevel, pFilter);
     }
 
-    public static HitResult getHitResultStandart(Entity pProjectile, Vec3 pStartVec, Vec3 pEndVecOffset, Level pLevel, Predicate<Entity> pFilter) {
+    public static HitResult getHitResultStandard(Entity pProjectile, Vec3 pStartVec, Vec3 pEndVecOffset, Level pLevel, Predicate<Entity> pFilter) {
         Vec3 vec3 = pStartVec.add(pEndVecOffset);
         HitResult hitresult = pLevel.clip(new ClipContext(pStartVec, vec3, ClipContext.Block.COLLIDER, ClipContext.Fluid.NONE, pProjectile));
         if (hitresult.getType() != HitResult.Type.MISS) {

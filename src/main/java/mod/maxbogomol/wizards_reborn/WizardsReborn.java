@@ -538,6 +538,7 @@ public class WizardsReborn {
     public static Spell AIR_FLOW_SPELL = new AirFlowSpell(MOD_ID+":air_flow", 15);
     public static Spell FIRE_SHIELD_SPELL = new FireShieldSpell(MOD_ID+":fire_shield", 15);
     public static Spell MAGIC_SPROUT_SPELL = new MagicSproutSpell(MOD_ID+":magic_sprout", 15);
+    public static Spell ICICLE_SPELL = new IcicleSpell(MOD_ID+":icicle", 15);
 
     //ARCANE ENCHANTMENT
     public static ArcaneEnchantment WISSEN_MENDING_ARCANE_ENCHANTMENT = new WissenMendingArcaneEnchantment(MOD_ID+":wissen_mending", 3);
@@ -1813,6 +1814,7 @@ public class WizardsReborn {
         Spells.register(AIR_FLOW_SPELL);
         Spells.register(FIRE_SHIELD_SPELL);
         Spells.register(MAGIC_SPROUT_SPELL);
+        Spells.register(ICICLE_SPELL);
     }
 
     public static void setupArcaneEnchantments() {

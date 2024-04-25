@@ -48,7 +48,7 @@ public class AirFlowSpell extends SelfSpell {
         int focusLevel = CrystalUtils.getStatLevel(stats, WizardsReborn.FOCUS_CRYSTAL_STAT);
         float magicModifier = ArcaneArmorItem.getPlayerMagicModifier(player);
 
-        float scale = 0.45f + (focusLevel * 0.15f);
+        float scale = 0.55f + (focusLevel * 0.15f);
 
         Vec3 vel = player.getViewVector(0).scale(scale);
         if (player.isFallFlying()) {

@@ -248,7 +248,7 @@ public class Spell {
 
     }
 
-    public void spawnSpellStandart(Level world, Player player, CompoundTag stats) {
+    public void spawnSpellStandard(Level world, Player player, CompoundTag stats) {
         if (!world.isClientSide) {
             Vec3 pos = player.getEyePosition(0);
             Vec3 vel = player.getEyePosition(0).add(player.getLookAngle().scale(40)).subtract(pos).scale(1.0 / 30);
