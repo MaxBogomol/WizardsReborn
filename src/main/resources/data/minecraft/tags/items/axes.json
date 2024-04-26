@@ -1,6 +1,8 @@
 {
   "replace": false,
   "values": [
-    "wizards_reborn:arcane_gold_axe"
+    "wizards_reborn:arcane_gold_axe",
+    "wizards_reborn:arcane_wood_axe",
+    "wizards_reborn:innocent_wood_axe"
   ]
 }

@@ -1,6 +1,8 @@
 {
   "replace": false,
   "values": [
-    "wizards_reborn:arcane_gold_pickaxe"
+    "wizards_reborn:arcane_gold_pickaxe",
+    "wizards_reborn:arcane_wood_pickaxe",
+    "wizards_reborn:innocent_wood_pickaxe"
   ]
 }

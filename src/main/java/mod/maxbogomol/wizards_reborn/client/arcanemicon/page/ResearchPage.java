@@ -169,6 +169,7 @@ public class ResearchPage extends Page {
                 gui.blit(BACKGROUND, x + 95, y + 132, 146, 80, 18, 18);
                 if (mouseX >= x + 95 && mouseY >= y + 132 && mouseX <= x + 95 + 18 && mouseY <= y + 132 + 18) {
                     gui.blit(BACKGROUND, x + 95, y + 132, 164, 80, 18, 18);
+                    gui.renderTooltip(Minecraft.getInstance().font, Component.translatable("wizards_reborn.arcanemicon.research"), mouseX, mouseY);
                 }
             }
 

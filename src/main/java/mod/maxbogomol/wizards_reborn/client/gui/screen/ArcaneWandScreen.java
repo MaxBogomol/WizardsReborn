@@ -40,8 +40,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class CrystalChooseScreen extends Screen {
-    public CrystalChooseScreen(Component titleIn) {
+public class ArcaneWandScreen extends Screen {
+    public ArcaneWandScreen(Component titleIn) {
         super(titleIn);
     }
 
@@ -369,6 +369,16 @@ public class CrystalChooseScreen extends Screen {
                     }
                 }
             }
+            Component name = Component.empty();
+
+            switch (choosedRay) {
+                case 0 -> name = Component.translatable("gui.wizards_reborn.wand.spell_set");
+                case 1 -> name = Component.translatable("gui.wizards_reborn.wand.crystal");
+                case 2 -> name = Component.translatable("gui.wizards_reborn.wand.spell_sets");
+                case 3 -> name = Component.translatable("gui.wizards_reborn.wand.spell");
+            }
+
+            gui.renderTooltip(Minecraft.getInstance().font, name, mouseX, mouseY);
         }
 
         if (mode == Mode.CRYSTAL) {
@@ -715,6 +725,20 @@ public class CrystalChooseScreen extends Screen {
                     gui.blit(resource, x + X - 16, y + Y - 16, 0, 0, 32, 32, 32, 32);
                 }
             }
+
+            boolean empty = true;
+            ArrayList<Spell> set = KnowledgeUtils.getSpellSet(minecraft.player, choosedRay);
+            for (int ii = 0; ii < 10; ii++) {
+                if (set.get(ii) != null) {
+                    empty = false;
+                    break;
+                }
+            }
+            if (empty) {
+                gui.renderTooltip(Minecraft.getInstance().font, Component.translatable("gui.wizards_reborn.wand.add_spell_set"), mouseX, mouseY);
+            } else {
+                gui.renderTooltip(Minecraft.getInstance().font, Component.translatable("gui.wizards_reborn.wand.spell_set").append(" ").append(String.valueOf(choosedRay + 1)), mouseX, mouseY);
+            }
         }
 
         if (mode == Mode.SPELL_SET) {
@@ -772,6 +796,8 @@ public class CrystalChooseScreen extends Screen {
 
                 if (spell != null && i == choosedRay) {
                     gui.renderTooltip(Minecraft.getInstance().font, Component.translatable(spell.getTranslatedName()), mouseX, mouseY);
+                } else if (i == choosedRay) {
+                    gui.renderTooltip(Minecraft.getInstance().font, Component.translatable("gui.wizards_reborn.wand.add_spell"), mouseX, mouseY);
                 }
             }
         }

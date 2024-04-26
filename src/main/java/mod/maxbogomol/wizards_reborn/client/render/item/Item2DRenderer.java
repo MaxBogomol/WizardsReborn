@@ -24,7 +24,7 @@ import java.util.Map;
 
 @OnlyIn(Dist.CLIENT)
 public class Item2DRenderer {
-    public static final String[] HAND_MODEL_ITEMS = new String[]{"arcane_gold_scythe", "blaze_reap"};
+    public static final String[] HAND_MODEL_ITEMS = new String[]{"arcane_gold_scythe", "arcane_wood_scythe", "innocent_wood_scythe", "blaze_reap"};
 
     @SubscribeEvent
     public static void onModelBakeEvent(ModelEvent.ModifyBakingResult event) {

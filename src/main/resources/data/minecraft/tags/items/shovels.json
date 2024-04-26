@@ -1,6 +1,8 @@
 {
   "replace": false,
   "values": [
-    "wizards_reborn:arcane_gold_shovel"
+    "wizards_reborn:arcane_gold_shovel",
+    "wizards_reborn:arcane_wood_shovel",
+    "wizards_reborn:innocent_wood_shovel"
   ]
 }

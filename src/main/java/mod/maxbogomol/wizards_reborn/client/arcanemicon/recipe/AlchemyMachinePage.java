@@ -204,6 +204,8 @@ public class AlchemyMachinePage extends RecipePage {
                 if (!ft1 && !fluidInputs1.isEmpty()) return true;
                 if (!ft2 && !fluidInputs2.isEmpty()) return true;
                 if (!ft3 && !fluidInputs3.isEmpty()) return true;
+
+                if (!fluidResult.isFluidEqual(recipe.get().getResultFluid())) return true;
             } else {
                 return true;
             }

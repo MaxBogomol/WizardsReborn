@@ -2,8 +2,8 @@ package mod.maxbogomol.wizards_reborn.client.event;
 
 import mod.maxbogomol.wizards_reborn.WizardsReborn;
 import mod.maxbogomol.wizards_reborn.WizardsRebornClient;
+import mod.maxbogomol.wizards_reborn.client.gui.screen.ArcaneWandScreen;
 import mod.maxbogomol.wizards_reborn.client.gui.screen.BagMenuScreen;
-import mod.maxbogomol.wizards_reborn.client.gui.screen.CrystalChooseScreen;
 import mod.maxbogomol.wizards_reborn.client.gui.screen.WissenWandChooseScreen;
 import mod.maxbogomol.wizards_reborn.common.item.equipment.ArcaneWandItem;
 import mod.maxbogomol.wizards_reborn.common.item.equipment.IBagItem;
@@ -72,7 +72,7 @@ public class KeyBindHandler {
         }
 
         if (open && !player.isShiftKeyDown()) {
-            Minecraft.getInstance().setScreen(new CrystalChooseScreen(Component.empty()));
+            Minecraft.getInstance().setScreen(new ArcaneWandScreen(Component.empty()));
             return true;
         } else if (open && player.isShiftKeyDown()) {
             CompoundTag nbt = stack.getOrCreateTag();

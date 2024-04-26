@@ -34,6 +34,6 @@ public class RecipePage extends Page {
     }
 
     public String getChangedText() {
-        return "Recipe has been changed";
+        return "wizards_reborn.arcanemicon.recipe_changed";
     }
 }

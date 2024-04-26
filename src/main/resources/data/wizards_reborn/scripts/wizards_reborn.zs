@@ -39,8 +39,8 @@
 <recipetype:wizards_reborn:arcane_iterator>.addRecipe("zs_test_21", <item:minecraft:diamond_sword>, <enchantment:minecraft:sharpness>, null, null, 100, 1, 1, false, [<item:minecraft:diamond_block>, <item:minecraft:diamond_block>, <item:minecraft:diamond_block>]);
 <recipetype:wizards_reborn:arcane_iterator>.addRecipe("zs_test_22", <item:wizards_reborn:arcane_gold_scythe>, null, "wizards_reborn:magic_blade", null, 100, 1, 1, false, [<item:minecraft:diamond_block>, <item:minecraft:diamond_block>, <item:minecraft:diamond_block>, <item:minecraft:diamond_block>]);
 <recipetype:wizards_reborn:arcane_iterator>.addRecipe("zs_test_23", <item:wizards_reborn:runic_wisestone_plate>, null, null, "wizards_reborn:artificial_fertility", 100, 1, 1, false, [<item:minecraft:diamond_block>, <item:minecraft:dirt>]);
-//<recipetype:wizards_reborn:arcane_iterator>.remove("wizards_reborn:magic_blade");
-//<recipetype:wizards_reborn:arcane_iterator>.remove(<enchantment:minecraft:sharpness>);
+//<recipetype:wizards_reborn:arcane_iterator>.removeArcaneEnchantment("wizards_reborn:magic_blade");
+//<recipetype:wizards_reborn:arcane_iterator>.removeEnchantment(<enchantment:minecraft:sharpness>);
 
 <recipetype:wizards_reborn:arcane_workbench>.addRecipe("zs_test_24", <item:minecraft:diamond_sword>, 2000, 0, <item:minecraft:wooden_sword>);
 <recipetype:wizards_reborn:wissen_crystallizer>.addRecipe("zs_test_25", <item:minecraft:diamond_sword>, 100, false, true, <item:minecraft:wooden_sword>, <item:minecraft:diamond>);

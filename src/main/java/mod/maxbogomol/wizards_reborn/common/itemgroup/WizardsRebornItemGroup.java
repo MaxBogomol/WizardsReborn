@@ -122,6 +122,12 @@ public class WizardsRebornItemGroup {
             event.accept(WizardsReborn.ARCANE_WOOD_BOAT_ITEM);
             event.accept(WizardsReborn.ARCANE_WOOD_CHEST_BOAT_ITEM);
             event.accept(WizardsReborn.ARCANE_WOOD_BRANCH);
+            event.accept(WizardsReborn.ARCANE_WOOD_SWORD);
+            event.accept(WizardsReborn.ARCANE_WOOD_PICKAXE);
+            event.accept(WizardsReborn.ARCANE_WOOD_AXE);
+            event.accept(WizardsReborn.ARCANE_WOOD_SHOVEL);
+            event.accept(WizardsReborn.ARCANE_WOOD_HOE);
+            event.accept(WizardsReborn.ARCANE_WOOD_SCYTHE);
             event.accept(WizardsReborn.ARCANE_WOOD_MORTAR);
             event.accept(WizardsReborn.ARCANE_WOOD_LEAVES_ITEM);
             event.accept(WizardsReborn.ARCANE_WOOD_SAPLING_ITEM);
@@ -144,6 +150,12 @@ public class WizardsRebornItemGroup {
             event.accept(WizardsReborn.INNOCENT_WOOD_BOAT_ITEM);
             event.accept(WizardsReborn.INNOCENT_WOOD_CHEST_BOAT_ITEM);
             event.accept(WizardsReborn.INNOCENT_WOOD_BRANCH);
+            event.accept(WizardsReborn.INNOCENT_WOOD_SWORD);
+            event.accept(WizardsReborn.INNOCENT_WOOD_PICKAXE);
+            event.accept(WizardsReborn.INNOCENT_WOOD_AXE);
+            event.accept(WizardsReborn.INNOCENT_WOOD_SHOVEL);
+            event.accept(WizardsReborn.INNOCENT_WOOD_HOE);
+            event.accept(WizardsReborn.INNOCENT_WOOD_SCYTHE);
             event.accept(WizardsReborn.INNOCENT_WOOD_MORTAR);
             event.accept(WizardsReborn.INNOCENT_WOOD_LEAVES_ITEM);
             event.accept(WizardsReborn.INNOCENT_WOOD_SAPLING_ITEM);

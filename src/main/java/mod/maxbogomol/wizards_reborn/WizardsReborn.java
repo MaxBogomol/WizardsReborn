@@ -875,6 +875,12 @@ public class WizardsReborn {
     public static final RegistryObject<Item> ARCANE_WOOD_BOAT_ITEM = ITEMS.register("arcane_wood_boat", () -> new CustomBoatItem(false, CustomBoatEntity.Type.ARCANE_WOOD, new Item.Properties().stacksTo(1)));
     public static final RegistryObject<Item> ARCANE_WOOD_CHEST_BOAT_ITEM = ITEMS.register("arcane_wood_chest_boat", () -> new CustomBoatItem(true, CustomBoatEntity.Type.ARCANE_WOOD, new Item.Properties().stacksTo(1)));
     public static final RegistryObject<Item> ARCANE_WOOD_BRANCH = ITEMS.register("arcane_wood_branch", () -> new FuelItem(new Item.Properties(), 200));
+    public static final RegistryObject<Item> ARCANE_WOOD_SWORD = ITEMS.register("arcane_wood_sword", () -> new ArcaneSwordItem(CustomItemTier.ARCANE_WOOD, 3, -2.4f, new Item.Properties()));
+    public static final RegistryObject<Item> ARCANE_WOOD_PICKAXE = ITEMS.register("arcane_wood_pickaxe", () -> new ArcanePickaxeItem(CustomItemTier.ARCANE_WOOD, 1, -2.8f, new Item.Properties()));
+    public static final RegistryObject<Item> ARCANE_WOOD_AXE = ITEMS.register("arcane_wood_axe", () -> new ArcaneAxeItem(CustomItemTier.ARCANE_WOOD, 6, -3.1f, new Item.Properties()));
+    public static final RegistryObject<Item> ARCANE_WOOD_SHOVEL = ITEMS.register("arcane_wood_shovel", () -> new ArcaneShovelItem(CustomItemTier.ARCANE_WOOD, 1.5f, -3f, new Item.Properties()));
+    public static final RegistryObject<Item> ARCANE_WOOD_HOE = ITEMS.register("arcane_wood_hoe", () -> new ArcaneHoeItem(CustomItemTier.ARCANE_WOOD, -2, -1f, new Item.Properties()));
+    public static final RegistryObject<Item> ARCANE_WOOD_SCYTHE = ITEMS.register("arcane_wood_scythe", () -> new ArcaneScytheItem(CustomItemTier.ARCANE_WOOD, 4, -2.8f, new Item.Properties(), 0.5f, 0));
     public static final RegistryObject<Item> ARCANE_WOOD_MORTAR = ITEMS.register("arcane_wood_mortar", () -> new MortarItem(new Item.Properties().stacksTo(1), 400));
     public static final RegistryObject<Item> ARCANE_WOOD_LEAVES_ITEM = ITEMS.register("arcane_wood_leaves", () -> new BlockItem(ARCANE_WOOD_LEAVES.get(), new Item.Properties()));
     public static final RegistryObject<Item> ARCANE_WOOD_SAPLING_ITEM = ITEMS.register("arcane_wood_sapling", () -> new BlockItem(ARCANE_WOOD_SAPLING.get(), new Item.Properties()));
@@ -897,6 +903,12 @@ public class WizardsReborn {
     public static final RegistryObject<Item> INNOCENT_WOOD_BOAT_ITEM = ITEMS.register("innocent_wood_boat", () -> new CustomBoatItem(false, CustomBoatEntity.Type.INNOCENT_WOOD, new Item.Properties().stacksTo(1)));
     public static final RegistryObject<Item> INNOCENT_WOOD_CHEST_BOAT_ITEM = ITEMS.register("innocent_wood_chest_boat", () -> new CustomBoatItem(true, CustomBoatEntity.Type.INNOCENT_WOOD, new Item.Properties().stacksTo(1)));
     public static final RegistryObject<Item> INNOCENT_WOOD_BRANCH = ITEMS.register("innocent_wood_branch", () -> new FuelItem(new Item.Properties(), 200));
+    public static final RegistryObject<Item> INNOCENT_WOOD_SWORD = ITEMS.register("innocent_wood_sword", () -> new ArcaneSwordItem(CustomItemTier.INNOCENT_WOOD, 3, -2.4f, new Item.Properties()));
+    public static final RegistryObject<Item> INNOCENT_WOOD_PICKAXE = ITEMS.register("innocent_wood_pickaxe", () -> new ArcanePickaxeItem(CustomItemTier.INNOCENT_WOOD, 1, -2.8f, new Item.Properties()));
+    public static final RegistryObject<Item> INNOCENT_WOOD_AXE = ITEMS.register("innocent_wood_axe", () -> new ArcaneAxeItem(CustomItemTier.INNOCENT_WOOD, 6, -3.1f, new Item.Properties()));
+    public static final RegistryObject<Item> INNOCENT_WOOD_SHOVEL = ITEMS.register("innocent_wood_shovel", () -> new ArcaneShovelItem(CustomItemTier.INNOCENT_WOOD, 1.5f, -3f, new Item.Properties()));
+    public static final RegistryObject<Item> INNOCENT_WOOD_HOE = ITEMS.register("innocent_wood_hoe", () -> new ArcaneHoeItem(CustomItemTier.INNOCENT_WOOD, -2, -1f, new Item.Properties()));
+    public static final RegistryObject<Item> INNOCENT_WOOD_SCYTHE = ITEMS.register("innocent_wood_scythe", () -> new ArcaneScytheItem(CustomItemTier.INNOCENT_WOOD, 4, -2.8f, new Item.Properties(), 0.5f, 0));
     public static final RegistryObject<Item> INNOCENT_WOOD_MORTAR = ITEMS.register("innocent_wood_mortar", () -> new MortarItem(new Item.Properties().stacksTo(1), 400));
     public static final RegistryObject<Item> INNOCENT_WOOD_LEAVES_ITEM = ITEMS.register("innocent_wood_leaves", () -> new BlockItem(INNOCENT_WOOD_LEAVES.get(), new Item.Properties()));
     public static final RegistryObject<Item> INNOCENT_WOOD_SAPLING_ITEM = ITEMS.register("innocent_wood_sapling", () -> new BlockItem(INNOCENT_WOOD_SAPLING.get(), new Item.Properties()));
@@ -1694,7 +1706,7 @@ public class WizardsReborn {
 
         event.enqueueWork(() -> {
             ArcanemiconChapters.init();
-            CrystalChooseScreen.initSpells();
+            ArcaneWandScreen.initSpells();
 
             MenuScreens.register(ARCANE_WORKBENCH_CONTAINER.get(), ArcaneWorkbenchScreen::new);
             MenuScreens.register(JEWELER_TABLE_CONTAINER.get(), JewelerTableScreen::new);
