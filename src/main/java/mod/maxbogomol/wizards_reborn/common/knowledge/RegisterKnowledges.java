@@ -1,10 +1,17 @@
 package mod.maxbogomol.wizards_reborn.common.knowledge;
 
 import mod.maxbogomol.wizards_reborn.WizardsReborn;
+import mod.maxbogomol.wizards_reborn.api.knowledge.Knowledge;
 import mod.maxbogomol.wizards_reborn.api.knowledge.Knowledges;
 import net.minecraft.world.item.ItemStack;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class RegisterKnowledges {
+    //PROGRESSION
+    public static List<Knowledge> progression = new ArrayList<>();
+
     //START
     public static ArcanemiconKnowledge ARCANEMICON = new ArcanemiconKnowledge(WizardsReborn.MOD_ID+":arcanemicon", false, 0, WizardsReborn.ARCANEMICON.get());
     public static ArcanemiconOfferingKnowledge ARCANEMICON_OFFERING = new ArcanemiconOfferingKnowledge(WizardsReborn.MOD_ID+":arcanemicon_offering", false, 0);
@@ -44,7 +51,7 @@ public class RegisterKnowledges {
     public static ItemKnowledge WISSEN_ACTIVATOR = new ItemKnowledge(WizardsReborn.MOD_ID+":wissen_activator", false, 4, WizardsReborn.WISSEN_ACTIVATOR_ITEM.get());
     public static ItemKnowledge ITEM_SORTER = new ItemKnowledge(WizardsReborn.MOD_ID+":item_sorter", false, 4, WizardsReborn.ITEM_SORTER_ITEM.get());
 
-    //CRYSTAl RITUALS
+    //CRYSTAL RITUALS
     public static ItemKnowledge LIGHT_EMITTER = new ItemKnowledge(WizardsReborn.MOD_ID+":light_emitter", true, 10, WizardsReborn.LIGHT_EMITTER_ITEM.get());
     public static ItemKnowledge RUNIC_PEDESTAL = new ItemKnowledge(WizardsReborn.MOD_ID+":runic_pedestal", true, 10, WizardsReborn.RUNIC_PEDESTAL_ITEM.get());
     public static CrystalRitualKnowledge CRYSTAL_INFUSION = new CrystalRitualKnowledge(WizardsReborn.MOD_ID+":crystal_infusion", true, 10, WizardsReborn.CRYSTAL_INFUSION_CRYSTAL_RITUAL);
@@ -105,7 +112,7 @@ public class RegisterKnowledges {
         Knowledges.register(WISSEN_ACTIVATOR);
         Knowledges.register(ITEM_SORTER);
 
-        //CRYSTAl RITUALS
+        //CRYSTAL RITUALS
         Knowledges.register(LIGHT_EMITTER);
         Knowledges.register(RUNIC_PEDESTAL);
         Knowledges.register(CRYSTAL_INFUSION);
@@ -125,5 +132,38 @@ public class RegisterKnowledges {
         Knowledges.register(ARCANE_WOOD_SMOKING_PIPE);
         Knowledges.register(ARCACITE);
         Knowledges.register(ARCACITE_POLISHING_MIXTURE);
+
+        initProgression();
+    }
+
+    public static void initProgression() {
+        progression.add(ARCANEMICON);
+        progression.add(ARCANUM_DUST);
+        addProgression(ARCANE_WOOD, ARCANUM_DUST);
+        addProgression(ARCANE_GOLD, ARCANUM_DUST);
+        addProgression(WISSEN_CRYSTALLIZER, ARCANE_GOLD);
+        addProgression(ARCANE_WORKBENCH, ARCANE_GOLD);
+        addProgression(ARCANE_WAND, ARCANE_WORKBENCH);
+        addProgression(WISESTONE, ARCANE_WORKBENCH);
+        addProgression(ALCHEMY_FURNACE, ORBITAL_FLUID_RETAINER);
+        addProgression(ALCHEMY_MACHINE, ALCHEMY_FURNACE);
+        addProgression(ALCHEMY_OIL, ALCHEMY_MACHINE);
+        addProgression(ALCHEMY_CALX, ALCHEMY_OIL);
+        addProgression(ALCHEMY_GLASS, ALCHEMY_CALX);
+        addProgression(ARCANE_CENSER, ALCHEMY_GLASS);
+        addProgression(ARCACITE, ALCHEMY_GLASS);
+        addProgression(VOID_CRYSTAL, ARCACITE);
+        addProgression(ARCACITE_POLISHING_MIXTURE, ARCACITE);
+        addProgression(FACETED_CRYSTALS, ARCACITE_POLISHING_MIXTURE);
+        addProgression(ARCANE_ITERATOR, ARCACITE);
+        addProgression(ARCANUM_LENS, ARCANE_ITERATOR);
+        addProgression(LIGHT_EMITTER, ARCANUM_LENS);
+        addProgression(RUNIC_PEDESTAL, ARCANUM_LENS);
+        addProgression(CRYSTAL_INFUSION, RUNIC_PEDESTAL);
+    }
+
+    public static void addProgression(Knowledge knowledge, Knowledge knowledgePrevious) {
+        progression.add(knowledge);
+        knowledge.addPrevious(knowledgePrevious);
     }
 }

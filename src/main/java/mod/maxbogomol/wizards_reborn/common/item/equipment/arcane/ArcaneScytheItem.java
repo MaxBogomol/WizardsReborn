@@ -36,4 +36,10 @@ public class ArcaneScytheItem extends ScytheItem implements IArcaneItem {
     public <T extends LivingEntity> int damageItem(ItemStack stack, int amount, T entity, Consumer<T> onBroken) {
         return ArcaneEnchantmentUtils.damageItem(stack, amount, entity);
     }
+
+    @Override
+    public boolean hurtEnemy(ItemStack stack, LivingEntity target, LivingEntity attacker) {
+        ArcaneEnchantmentUtils.hurtEnemy(stack, target, attacker);
+        return super.hurtEnemy(stack, target, attacker);
+    }
 }

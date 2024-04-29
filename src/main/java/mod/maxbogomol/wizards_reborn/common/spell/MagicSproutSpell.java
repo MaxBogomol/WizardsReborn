@@ -36,11 +36,6 @@ public class MagicSproutSpell extends Spell {
     }
 
     @Override
-    public int getMinimumPolishingLevel() {
-        return 1;
-    }
-
-    @Override
     public boolean canSpellAir(Level world, Player player, InteractionHand hand) {
         return false;
     }

@@ -38,4 +38,6 @@ public interface IKnowledge {
     void removeSpellFromSet(int id, int spellId);
     int getCurrentSpellSet();
     void setCurrentSpellSet(int id);
+    int getCurrentSpellInSet();
+    void setCurrentSpellInSet(int id);
 }

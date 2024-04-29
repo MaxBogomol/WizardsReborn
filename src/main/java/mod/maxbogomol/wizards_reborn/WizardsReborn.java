@@ -72,10 +72,7 @@ import mod.maxbogomol.wizards_reborn.common.spell.aura.*;
 import mod.maxbogomol.wizards_reborn.common.spell.charge.*;
 import mod.maxbogomol.wizards_reborn.common.spell.projectile.*;
 import mod.maxbogomol.wizards_reborn.common.spell.ray.*;
-import mod.maxbogomol.wizards_reborn.common.spell.self.AirFlowSpell;
-import mod.maxbogomol.wizards_reborn.common.spell.self.FireShieldSpell;
-import mod.maxbogomol.wizards_reborn.common.spell.self.HeartOfNatureSpell;
-import mod.maxbogomol.wizards_reborn.common.spell.self.WaterBreathingSpell;
+import mod.maxbogomol.wizards_reborn.common.spell.self.*;
 import mod.maxbogomol.wizards_reborn.common.tileentity.*;
 import mod.maxbogomol.wizards_reborn.common.world.tree.ArcaneWoodTree;
 import mod.maxbogomol.wizards_reborn.common.world.tree.ArcaneWoodTrunkPlacer;
@@ -517,6 +514,12 @@ public class WizardsReborn {
     public static Spell FROST_RAY_SPELL = new FrostRaySpell(MOD_ID+":frost_ray", 7);
     public static Spell HOLY_RAY_SPELL = new HolyRaySpell(MOD_ID+":holy_ray", 7);
     public static Spell CURSE_RAY_SPELL = new CurseRaySpell(MOD_ID+":curse_ray", 7);
+    public static Spell HEART_OF_NATURE_SPELL = new HeartOfNatureSpell(MOD_ID+":heart_of_nature", 12);
+    public static Spell WATER_BREATHING_SPELL = new WaterBreathingSpell(MOD_ID+":water_breathing", 12);
+    public static Spell AIR_FLOW_SPELL = new AirFlowSpell(MOD_ID+":air_flow", 12);
+    public static Spell FIRE_SHIELD_SPELL = new FireShieldSpell(MOD_ID+":fire_shield", 12);
+    public static Spell BLINK_SPELL = new BlinkSpell(MOD_ID+":blink", 12);
+    public static Spell MAGIC_SPROUT_SPELL = new MagicSproutSpell(MOD_ID+":magic_sprout", 12);
     public static Spell EARTH_CHARGE_SPELL = new EarthChargeSpell(MOD_ID+":earth_charge", 10);
     public static Spell WATER_CHARGE_SPELL = new WaterChargeSpell(MOD_ID+":water_charge", 10);
     public static Spell AIR_CHARGE_SPELL = new AirChargeSpell(MOD_ID+":air_charge", 10);
@@ -533,12 +536,8 @@ public class WizardsReborn {
     public static Spell FROST_AURA_SPELL = new FrostAuraSpell(MOD_ID+":frost_aura", 10);
     public static Spell HOLY_AURA_SPELL = new HolyAuraSpell(MOD_ID+":holy_aura", 10);
     public static Spell CURSE_AURA_SPELL = new CurseAuraSpell(MOD_ID+":curse_aura", 10);
-    public static Spell HEART_OF_NATURE_SPELL = new HeartOfNatureSpell(MOD_ID+":heart_of_nature", 15);
-    public static Spell WATER_BREATHING_SPELL = new WaterBreathingSpell(MOD_ID+":water_breathing", 15);
-    public static Spell AIR_FLOW_SPELL = new AirFlowSpell(MOD_ID+":air_flow", 15);
-    public static Spell FIRE_SHIELD_SPELL = new FireShieldSpell(MOD_ID+":fire_shield", 15);
-    public static Spell MAGIC_SPROUT_SPELL = new MagicSproutSpell(MOD_ID+":magic_sprout", 15);
     public static Spell ICICLE_SPELL = new IcicleSpell(MOD_ID+":icicle", 15);
+    public static Spell SHARP_BLINK_SPELL = new BlinkSpell(MOD_ID+":sharp_blink", 12);
 
     //ARCANE ENCHANTMENT
     public static ArcaneEnchantment WISSEN_MENDING_ARCANE_ENCHANTMENT = new WissenMendingArcaneEnchantment(MOD_ID+":wissen_mending", 3);
@@ -1594,7 +1593,9 @@ public class WizardsReborn {
             forgeBus.addListener(ClientWorldEvent::onRender);
             forgeBus.addListener(HUDEventHandler::onDrawScreenPost);
             forgeBus.addListener(TooltipEventHandler::onPostTooltipEvent);
-            forgeBus.addListener(KeyBindHandler::onKeyPress);
+            forgeBus.addListener(KeyBindHandler::onInput);
+            forgeBus.addListener(KeyBindHandler::onKey);
+            forgeBus.addListener(KeyBindHandler::onMouseKey);
             MinecraftForge.EVENT_BUS.register(new ClientEvents());
             return new Object();
         });
@@ -1805,6 +1806,12 @@ public class WizardsReborn {
         Spells.register(FROST_RAY_SPELL);
         Spells.register(HOLY_RAY_SPELL);
         Spells.register(CURSE_RAY_SPELL);
+        Spells.register(HEART_OF_NATURE_SPELL);
+        Spells.register(WATER_BREATHING_SPELL);
+        Spells.register(AIR_FLOW_SPELL);
+        Spells.register(FIRE_SHIELD_SPELL);
+        Spells.register(BLINK_SPELL);
+        Spells.register(MAGIC_SPROUT_SPELL);
         Spells.register(EARTH_CHARGE_SPELL);
         Spells.register(WATER_CHARGE_SPELL);
         Spells.register(AIR_CHARGE_SPELL);
@@ -1821,12 +1828,8 @@ public class WizardsReborn {
         Spells.register(FROST_AURA_SPELL);
         Spells.register(HOLY_AURA_SPELL);
         Spells.register(CURSE_AURA_SPELL);
-        Spells.register(HEART_OF_NATURE_SPELL);
-        Spells.register(WATER_BREATHING_SPELL);
-        Spells.register(AIR_FLOW_SPELL);
-        Spells.register(FIRE_SHIELD_SPELL);
-        Spells.register(MAGIC_SPROUT_SPELL);
         Spells.register(ICICLE_SPELL);
+        Spells.register(SHARP_BLINK_SPELL);
     }
 
     public static void setupArcaneEnchantments() {

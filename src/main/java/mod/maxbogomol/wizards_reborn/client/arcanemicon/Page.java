@@ -90,6 +90,11 @@ public abstract class Page {
     }
 
     @OnlyIn(Dist.CLIENT)
+    public boolean mouseScrolled(ArcanemiconGui book, int x, int y, int mouseX, int mouseY, int delta) {
+        return false;
+    }
+
+    @OnlyIn(Dist.CLIENT)
     public void render(ArcanemiconGui book, GuiGraphics gui, int x, int y, int mouseX, int mouseY) {}
 
     @OnlyIn(Dist.CLIENT)

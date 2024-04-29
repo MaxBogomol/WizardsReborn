@@ -76,7 +76,7 @@ public class WizardsRebornJei implements IModPlugin {
         registration.addRecipes(CrystalInfusionRecipeCategory.TYPE, sortRecipes(WizardsReborn.CRYSTAL_INFUSION_RECIPE.get(), BY_ID));
 
         if (FarmersDelightIntegration.isLoaded()) {
-            FarmersDelightIntegration.LoadedOnly.addArcaneGoldKnifeJEIInfo(registration);
+            FarmersDelightIntegration.LoadedOnly.addKnifeJEIInfo(registration);
         }
     }
 

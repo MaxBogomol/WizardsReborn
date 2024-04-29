@@ -55,6 +55,9 @@ public class WizardsRebornClient {
     private static final String CATEGORY_KEY = "key.category."+WizardsReborn.MOD_ID+".general";
     public static final KeyMapping OPEN_SELECTION_MENU_KEY = new KeyMapping("key."+WizardsReborn.MOD_ID+".selection_menu", KeyConflictContext.IN_GAME, InputConstants.Type.KEYSYM, GLFW.GLFW_KEY_V, CATEGORY_KEY);
     public static final KeyMapping OPEN_BAG_MENU_KEY = new KeyMapping("key."+WizardsReborn.MOD_ID+".bag_menu", KeyConflictContext.IN_GAME, InputConstants.Type.KEYSYM, GLFW.GLFW_KEY_UNKNOWN, CATEGORY_KEY);
+    public static final KeyMapping NEXT_SPELL_KEY = new KeyMapping("key."+WizardsReborn.MOD_ID+".next_spell", KeyConflictContext.IN_GAME, InputConstants.Type.KEYSYM, GLFW.GLFW_KEY_X, CATEGORY_KEY);
+    public static final KeyMapping PREVIOUS_SPELL_KEY = new KeyMapping("key."+WizardsReborn.MOD_ID+".previous_spell", KeyConflictContext.IN_GAME, InputConstants.Type.KEYSYM, GLFW.GLFW_KEY_Z, CATEGORY_KEY);
+    public static final KeyMapping SPELL_SETS_TOGGLE_KEY = new KeyMapping("key."+WizardsReborn.MOD_ID+".spell_sets_toggle", KeyConflictContext.IN_GAME, InputConstants.Type.KEYSYM, GLFW.GLFW_KEY_LEFT_ALT, CATEGORY_KEY);
 
     public static ModelLayerLocation BELT_LAYER = new ModelLayerLocation(new ResourceLocation(WizardsReborn.MOD_ID, "belt"), "main");
     public static ModelLayerLocation BAG_LAYER = new ModelLayerLocation(new ResourceLocation(WizardsReborn.MOD_ID, "bag"), "main");
@@ -362,6 +365,9 @@ public class WizardsRebornClient {
         public static void registerKeyBindings(RegisterKeyMappingsEvent event) {
             event.register(WizardsRebornClient.OPEN_SELECTION_MENU_KEY);
             event.register(WizardsRebornClient.OPEN_BAG_MENU_KEY);
+            event.register(WizardsRebornClient.NEXT_SPELL_KEY);
+            event.register(WizardsRebornClient.PREVIOUS_SPELL_KEY);
+            event.register(WizardsRebornClient.SPELL_SETS_TOGGLE_KEY);
         }
 
         @SubscribeEvent

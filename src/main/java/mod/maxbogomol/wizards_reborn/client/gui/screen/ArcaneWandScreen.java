@@ -218,10 +218,12 @@ public class ArcaneWandScreen extends Screen {
 
                         if (!main.isEmpty() && main.getItem() instanceof ArcaneWandItem) {
                             PacketHandler.sendToServer(new SetSpellPacket(true, selectedSpell.getId()));
+                            PacketHandler.sendToServer(new SetCurrentSpellInSetPacket(choosed));
                             Minecraft.getInstance().player.playNotifySound(WizardsReborn.CRYSTAL_RESONATE_SOUND.get(), SoundSource.NEUTRAL, 1.0f, 1.5f);
                         } else {
                             if (!offhand.isEmpty() && offhand.getItem() instanceof ArcaneWandItem) {
                                 PacketHandler.sendToServer(new SetSpellPacket(false, selectedSpell.getId()));
+                                PacketHandler.sendToServer(new SetCurrentSpellInSetPacket(choosed));
                                 Minecraft.getInstance().player.playNotifySound(WizardsReborn.CRYSTAL_RESONATE_SOUND.get(), SoundSource.NEUTRAL, 1.0f, 1.5f);
                             }
                         }
@@ -672,11 +674,16 @@ public class ArcaneWandScreen extends Screen {
                     gui.renderTooltip(Minecraft.getInstance().font, wandCrystal, mouseX, mouseY);
                 }
                 if (spellWand != null) {
-                    gui.blit(spellWand.getIcon(), mouseX + 9, mouseY - 68, 0, 0, 32, 32, 32, 32);
+                    if ((KnowledgeUtils.isSpell(Minecraft.getInstance().player, spellWand))) {
+                        gui.blit(spellWand.getIcon(), mouseX + 9, mouseY - 68, 0, 0, 32, 32, 32, 32);
+                        gui.renderTooltip(Minecraft.getInstance().font, Component.translatable(spellWand.getTranslatedName()), mouseX, mouseY - 18);
+                    } else {
+                        gui.blit(new ResourceLocation(WizardsReborn.MOD_ID, "textures/gui/arcanemicon/unknown.png"), mouseX + 9, mouseY - 68, 0, 0, 32, 32, 32, 32);
+                        gui.renderTooltip(Minecraft.getInstance().font, Component.translatable("wizards_reborn.arcanemicon.unknown"), mouseX, mouseY - 18);
+                    }
                     if (!spellWand.canWandWithCrystal(getWand())) {
                         gui.blit(new ResourceLocation(WizardsReborn.MOD_ID + ":textures/gui/arcane_wand_frame.png"), mouseX + 7, mouseY - 70, 0, 36, 36, 36, 128, 128);
                     }
-                    gui.renderTooltip(Minecraft.getInstance().font, Component.translatable(spellWand.getTranslatedName()), mouseX, mouseY - 18);
                 }
             }
         }
@@ -783,6 +790,9 @@ public class ArcaneWandScreen extends Screen {
                 }
 
                 renderRays(r, g, b, gui, partialTicks, i, 36, -108, i == choosedRay, standard);
+                if (!(KnowledgeUtils.isSpell(Minecraft.getInstance().player, spell)) && spell != null) {
+                    resource = new ResourceLocation(WizardsReborn.MOD_ID, "textures/gui/arcanemicon/unknown.png");
+                }
 
                 if (i == choosedRay) {
                     gui.blit(resource, x + X - 24, y + Y - 24, 0, 0, 48, 48, 48, 48);
@@ -795,7 +805,11 @@ public class ArcaneWandScreen extends Screen {
                 Spell spell = KnowledgeUtils.getSpellFromSet(minecraft.player, currentSpellSet, i);
 
                 if (spell != null && i == choosedRay) {
-                    gui.renderTooltip(Minecraft.getInstance().font, Component.translatable(spell.getTranslatedName()), mouseX, mouseY);
+                    if ((KnowledgeUtils.isSpell(Minecraft.getInstance().player, spell))) {
+                        gui.renderTooltip(Minecraft.getInstance().font, Component.translatable(spell.getTranslatedName()), mouseX, mouseY);
+                    } else {
+                        gui.renderTooltip(Minecraft.getInstance().font, Component.translatable("wizards_reborn.arcanemicon.unknown"), mouseX, mouseY);
+                    }
                 } else if (i == choosedRay) {
                     gui.renderTooltip(Minecraft.getInstance().font, Component.translatable("gui.wizards_reborn.wand.add_spell"), mouseX, mouseY);
                 }

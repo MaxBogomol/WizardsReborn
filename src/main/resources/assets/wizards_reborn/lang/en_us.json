@@ -76,6 +76,7 @@
   "item.wizards_reborn.arcane_wood_shovel": "Arcane Wood Shovel",
   "item.wizards_reborn.arcane_wood_hoe": "Arcane Wood Hoe",
   "item.wizards_reborn.arcane_wood_scythe": "Arcane Wood Scythe",
+  "item.wizards_reborn.arcane_wood_knife": "Arcane Wood Knife",
   "item.wizards_reborn.arcane_wood_mortar": "Arcane Wood Mortar",
   "block.wizards_reborn.arcane_wood_leaves": "Arcane Wood Leaves",
   "block.wizards_reborn.arcane_wood_sapling": "Arcane Wood Sapling",
@@ -107,6 +108,7 @@
   "item.wizards_reborn.innocent_wood_shovel": "Innocent Wood Shovel",
   "item.wizards_reborn.innocent_wood_hoe": "Innocent Wood Hoe",
   "item.wizards_reborn.innocent_wood_scythe": "Innocent Wood Scythe",
+  "item.wizards_reborn.innocent_wood_knife": "Innocent Wood Knife",
   "item.wizards_reborn.innocent_wood_mortar": "Innocent Wood Mortar",
   "block.wizards_reborn.innocent_wood_leaves": "Innocent Wood Leaves",
   "block.wizards_reborn.innocent_wood_sapling": "Innocent Wood Sapling",
@@ -672,6 +674,9 @@
   "key.category.wizards_reborn.general": "Wizard's Reborn",
   "key.wizards_reborn.selection_menu": "Selection Menu",
   "key.wizards_reborn.bag_menu": "Bag Menu",
+  "key.wizards_reborn.next_spell": "Next Spell",
+  "key.wizards_reborn.previous_spell": "Previous Spell",
+  "key.wizards_reborn.spell_sets_toggle": "Spell Sets Toggle",
 
   "crystal_stat.wizards_reborn.focus": "Focus",
   "crystal_stat.wizards_reborn.balance": "Balance",
@@ -1038,7 +1043,7 @@
     "wizards_reborn.arcanemicon.page.wissen_keychain": "Large portable wissen storage. Gradually fills active accessories and items with wissen.",
   "wizards_reborn.arcanemicon.chapter.wissen_ring": "Wissen Ring",
     "wizards_reborn.arcanemicon.page.wissen_ring.title": "Wissen Ring",
-    "wizards_reborn.arcanemicon.page.wissen_ring": "Passively generates small amounts of wissen. Gradually fills accessories and objects with wissen.",
+    "wizards_reborn.arcanemicon.page.wissen_ring": "Passively generates small amounts of wissen. Gradually fills accessories and item with wissen.",
   "wizards_reborn.arcanemicon.chapter.jeweler_table": "Jeweler Table",
     "wizards_reborn.arcanemicon.page.jeweler_table.title": "Jeweler Table",
     "wizards_reborn.arcanemicon.page.jeweler_table": "The fast rotating arcacite grindstone is capable of polishing items quickly and easily",
@@ -1183,6 +1188,9 @@
     "wizards_reborn.arcanemicon.page.magic_sprout.title": "Magic Sprout",
     "wizards_reborn.arcanemicon.page.magic_sprout": "Grows plants. Hold the [minecraft:sneak] button for an area effect.",
     "wizards_reborn.arcanemicon.page.magic_sprout.char": " ",
+  "wizards_reborn.arcanemicon.chapter.progression": "Progression",
+    "wizards_reborn.arcanemicon.page.progression.title": "Progression",
+    "wizards_reborn.arcanemicon.page.progression": "Progression: %s \n Knowledge: %s \n Points: %s",
   "wizards_reborn.arcanemicon.chapter.researches": "Researches",
     "wizards_reborn.arcanemicon.page.researches.0.title": "Researches",
     "wizards_reborn.arcanemicon.page.researches.0": "To research a spell, you need to lay out a chain of monograms of a certain length.  To complete the chain and consider it as finished, all monograms must be connected. The connection is counted clockwise.",
@@ -1424,5 +1432,13 @@
 
   "wizards_reborn.arcanemicon.unknown": "Unknown",
   "wizards_reborn.arcanemicon.research": "Research",
-  "wizards_reborn.arcanemicon.recipe_changed": "Recipe has been changed"
+  "wizards_reborn.arcanemicon.recipe_changed": "Recipe has been changed",
+  "wizards_reborn.arcanemicon.knowledge_required": "Knowledge Required:",
+  "wizards_reborn.arcanemicon.points": "Points",
+  "wizards_reborn.arcanemicon.knowledge_points": "Points:",
+
+  "knowledge.wizards_reborn.arcane_wood": "Arcane Wood",
+  "knowledge.wizards_reborn.faceted_crystals": "Faceted Crystals",
+  "knowledge.wizards_reborn.arcane_lumos": "Arcane Lumos",
+  "knowledge.wizards_reborn.crystal_seeds": "Crystal Seeds"
 }

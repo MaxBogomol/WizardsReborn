@@ -36,6 +36,7 @@ public final class PacketHandler {
         HANDLER.registerMessage(id++, SetSpellInSetPacket.class, SetSpellInSetPacket::encode, SetSpellInSetPacket::decode, SetSpellInSetPacket::handle);
         HANDLER.registerMessage(id++, RemoveSpellSetPacket.class, RemoveSpellSetPacket::encode, RemoveSpellSetPacket::decode, RemoveSpellSetPacket::handle);
         HANDLER.registerMessage(id++, SetCurrentSpellSetPacket.class, SetCurrentSpellSetPacket::encode, SetCurrentSpellSetPacket::decode, SetCurrentSpellSetPacket::handle);
+        HANDLER.registerMessage(id++, SetCurrentSpellInSetPacket.class, SetCurrentSpellInSetPacket::encode, SetCurrentSpellInSetPacket::decode, SetCurrentSpellInSetPacket::handle);
         HANDLER.registerMessage(id++, SetWissenWandModePacket.class, SetWissenWandModePacket::encode, SetWissenWandModePacket::decode, SetWissenWandModePacket::handle);
         HANDLER.registerMessage(id++, OpenBagPacket.class, OpenBagPacket::encode, OpenBagPacket::decode, OpenBagPacket::handle);
 

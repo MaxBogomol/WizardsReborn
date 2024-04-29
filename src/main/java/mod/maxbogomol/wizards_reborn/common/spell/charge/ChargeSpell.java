@@ -86,7 +86,7 @@ public class ChargeSpell extends Spell {
 
             player.startUsingItem(hand);
             awardStat(player, stack);
-            spellSound(player, world);
+            world.playSound(WizardsReborn.proxy.getPlayer(), player.getX(), player.getY(), player.getZ(), WizardsReborn.WISSEN_BURST_SOUND.get(), SoundSource.PLAYERS, 0.5f, (float) (1f + ((random.nextFloat() - 0.5D) / 4)));
         }
     }
 

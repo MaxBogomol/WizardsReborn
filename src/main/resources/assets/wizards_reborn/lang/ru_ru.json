@@ -76,6 +76,7 @@
   "item.wizards_reborn.arcane_wood_shovel": "Арканово-древесная лопата",
   "item.wizards_reborn.arcane_wood_hoe": "Арканово-древесная мотыга",
   "item.wizards_reborn.arcane_wood_scythe": "Арканово-древесная коса",
+  "item.wizards_reborn.arcane_wood_knife": "Арканово-древесный нож",
   "item.wizards_reborn.arcane_wood_mortar": "Арканово-древесная ступка",
   "block.wizards_reborn.arcane_wood_leaves": "Арканово-древесная листва",
   "block.wizards_reborn.arcane_wood_sapling": "Саженец арканового дерева",
@@ -107,6 +108,7 @@
   "item.wizards_reborn.innocent_wood_shovel": "Невинно-древесная лопата",
   "item.wizards_reborn.innocent_wood_hoe": "Невинно-древесная мотыга",
   "item.wizards_reborn.innocent_wood_scythe": "Невинно-древесная коса",
+  "item.wizards_reborn.innocent_wood_knife": "Невинно-древесный нож",
   "item.wizards_reborn.innocent_wood_mortar": "Невинно-древесная ступка",
   "block.wizards_reborn.innocent_wood_leaves": "Невинно-древесная листва",
   "block.wizards_reborn.innocent_wood_sapling": "Саженец невинного дерева",
@@ -391,6 +393,9 @@
   "key.category.wizards_reborn.general": "Wizard's Reborn",
   "key.wizards_reborn.selection_menu": "Меню выбора",
   "key.wizards_reborn.bag_menu": "Меню сумок",
+  "key.wizards_reborn.next_spell": "Следующее заклинание",
+  "key.wizards_reborn.previous_spell": "Предыдущее заклинание",
+  "key.wizards_reborn.spell_sets_toggle": "Переключение наборов заклинаний",
 
   "item.wizards_reborn.violence_banner_pattern": "Узор флага",
   "item.wizards_reborn.reproduction_banner_pattern": "Узор флага",
@@ -1424,5 +1429,13 @@
 
   "wizards_reborn.arcanemicon.unknown": "Неизвестно",
   "wizards_reborn.arcanemicon.research": "Исследование",
-  "wizards_reborn.arcanemicon.recipe_changed": "Рецепт изменён"
+  "wizards_reborn.arcanemicon.recipe_changed": "Рецепт изменён",
+  "wizards_reborn.arcanemicon.knowledge_required": "Требуется знание:",
+  "wizards_reborn.arcanemicon.points": "Очки",
+  "wizards_reborn.arcanemicon.knowledge_points": "Очков:",
+
+  "knowledge.wizards_reborn.arcane_wood": "Аркановая древесина",
+  "knowledge.wizards_reborn.faceted_crystals": "Огранённые кристаллы",
+  "knowledge.wizards_reborn.arcane_lumos": "Aркановый люмос",
+  "knowledge.wizards_reborn.crystal_seeds": "Кристальные семена"
 }

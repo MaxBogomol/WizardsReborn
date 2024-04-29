@@ -17,14 +17,26 @@ public class FarmersDelightIntegration {
     public static final DeferredRegister<Item> ITEMS = DeferredRegister.create(ForgeRegistries.ITEMS, WizardsReborn.MOD_ID);
 
     public static final RegistryObject<Item> ARCANE_GOLD_KNIFE = ITEMS.register("arcane_gold_knife", () -> isLoaded() ? LoadedOnly.makeArcaneGoldKnife() : new Item(new Item.Properties()));
+    public static final RegistryObject<Item> ARCANE_WOOD_KNIFE = ITEMS.register("arcane_wood_knife", () -> isLoaded() ? LoadedOnly.makeArcaneWoodKnife() : new Item(new Item.Properties()));
+    public static final RegistryObject<Item> INNOCENT_WOOD_KNIFE = ITEMS.register("innocent_wood_knife", () -> isLoaded() ? LoadedOnly.makeInnocentWoodKnife() : new Item(new Item.Properties()));
 
     public static class LoadedOnly {
         public static Item makeArcaneGoldKnife() {
             return new ArcaneKnifeItem(CustomItemTier.ARCANE_GOLD, 0.5F, -2.0F, new Item.Properties());
         }
 
-        public static void addArcaneGoldKnifeJEIInfo(IRecipeRegistration registration) {
+        public static Item makeArcaneWoodKnife() {
+            return new ArcaneKnifeItem(CustomItemTier.ARCANE_WOOD, 0.5F, -2.0F, new Item.Properties());
+        }
+
+        public static Item makeInnocentWoodKnife() {
+            return new ArcaneKnifeItem(CustomItemTier.INNOCENT_WOOD, 0.5F, -2.0F, new Item.Properties());
+        }
+
+        public static void addKnifeJEIInfo(IRecipeRegistration registration) {
             registration.addIngredientInfo(new ItemStack(ARCANE_GOLD_KNIFE.get()), VanillaTypes.ITEM_STACK, TextUtils.getTranslation("jei.info.knife"));
+            registration.addIngredientInfo(new ItemStack(ARCANE_WOOD_KNIFE.get()), VanillaTypes.ITEM_STACK, TextUtils.getTranslation("jei.info.knife"));
+            registration.addIngredientInfo(new ItemStack(INNOCENT_WOOD_KNIFE.get()), VanillaTypes.ITEM_STACK, TextUtils.getTranslation("jei.info.knife"));
         }
 
         public static boolean canMagicBladeEnchant(Item item) {

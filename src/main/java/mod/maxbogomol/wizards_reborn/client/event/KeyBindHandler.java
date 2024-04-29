@@ -1,16 +1,17 @@
 package mod.maxbogomol.wizards_reborn.client.event;
 
+import com.mojang.blaze3d.platform.InputConstants;
 import mod.maxbogomol.wizards_reborn.WizardsReborn;
 import mod.maxbogomol.wizards_reborn.WizardsRebornClient;
+import mod.maxbogomol.wizards_reborn.api.knowledge.KnowledgeUtils;
+import mod.maxbogomol.wizards_reborn.api.spell.Spell;
 import mod.maxbogomol.wizards_reborn.client.gui.screen.ArcaneWandScreen;
 import mod.maxbogomol.wizards_reborn.client.gui.screen.BagMenuScreen;
 import mod.maxbogomol.wizards_reborn.client.gui.screen.WissenWandChooseScreen;
 import mod.maxbogomol.wizards_reborn.common.item.equipment.ArcaneWandItem;
 import mod.maxbogomol.wizards_reborn.common.item.equipment.IBagItem;
 import mod.maxbogomol.wizards_reborn.common.item.equipment.WissenWandItem;
-import mod.maxbogomol.wizards_reborn.common.network.DeleteCrystalPacket;
-import mod.maxbogomol.wizards_reborn.common.network.OpenBagPacket;
-import mod.maxbogomol.wizards_reborn.common.network.PacketHandler;
+import mod.maxbogomol.wizards_reborn.common.network.*;
 import net.minecraft.client.Minecraft;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
@@ -33,14 +34,27 @@ public class KeyBindHandler {
     private KeyBindHandler() {}
 
     @SubscribeEvent
-    public static void onKeyPress(InputEvent event) {
-
+    public static void onInput(InputEvent event) {
         if (WizardsRebornClient.OPEN_SELECTION_MENU_KEY.isDown()) {
             chooseMenus();
         }
 
         if (WizardsRebornClient.OPEN_BAG_MENU_KEY.isDown()) {
             bagMenu();
+        }
+    }
+
+    @SubscribeEvent
+    public static void onKey(InputEvent.Key event) {
+        if (event.getAction() == InputConstants.PRESS) {
+            spellsToggle(event.getKey());
+        }
+    }
+
+    @SubscribeEvent
+    public static void onMouseKey(InputEvent.MouseButton event) {
+        if (event.getAction() == InputConstants.PRESS) {
+            spellsToggle(event.getButton());
         }
     }
 
@@ -134,6 +148,89 @@ public class KeyBindHandler {
                 PacketHandler.sendToServer(new OpenBagPacket(bags.get(0)));
             } else {
                 Minecraft.getInstance().setScreen(new BagMenuScreen(Component.empty()));
+            }
+        }
+    }
+
+    public static void spellsToggle(int key) {
+        Minecraft mc = Minecraft.getInstance();
+        Player player = mc.player;
+
+        if (player != null) {
+            ItemStack main = mc.player.getMainHandItem();
+            ItemStack offhand = mc.player.getOffhandItem();
+            boolean open = false;
+            boolean hand = true;
+            ItemStack stack = mc.player.getMainHandItem();
+
+            if (!main.isEmpty() && main.getItem() instanceof ArcaneWandItem) {
+                open = true;
+            } else {
+                if (!offhand.isEmpty() && offhand.getItem() instanceof ArcaneWandItem) {
+                    open = true;
+                    hand = false;
+                    stack = offhand;
+                }
+            }
+
+            if (open) {
+                int current = 0;
+                int currentSet = 0;
+                boolean set = false;
+
+                if (WizardsRebornClient.SPELL_SETS_TOGGLE_KEY.isDown()) {
+                    if (key == WizardsRebornClient.NEXT_SPELL_KEY.getKey().getValue()) {
+                        current = (KnowledgeUtils.getCurrentSpellSet(player) + 1) % 10;
+                        if (current < 0) current = 9;
+                        PacketHandler.sendToServer(new SetCurrentSpellSetPacket(current));
+                        PacketHandler.sendToServer(new SetCurrentSpellInSetPacket(0));
+                        set = true;
+                        currentSet = current;
+                        current = 0;
+                    }
+                    if (key == WizardsRebornClient.PREVIOUS_SPELL_KEY.getKey().getValue()) {
+                        current = (KnowledgeUtils.getCurrentSpellSet(player) - 1) % 10;
+                        if (current < 0) current = 9;
+                        PacketHandler.sendToServer(new SetCurrentSpellSetPacket(current));
+                        PacketHandler.sendToServer(new SetCurrentSpellInSetPacket(0));
+                        set = true;
+                        currentSet = current;
+                        current = 0;
+                    }
+                } else {
+                    if (key == WizardsRebornClient.NEXT_SPELL_KEY.getKey().getValue()) {
+                        current = (KnowledgeUtils.getCurrentSpellInSet(player) + 1) % 10;
+                        if (current < 0) current = 9;
+                        PacketHandler.sendToServer(new SetCurrentSpellInSetPacket(current));
+                        set = true;
+                        currentSet = KnowledgeUtils.getCurrentSpellSet(player);
+                    }
+                    if (key == WizardsRebornClient.PREVIOUS_SPELL_KEY.getKey().getValue()) {
+                        current = (KnowledgeUtils.getCurrentSpellInSet(player) - 1) % 10;
+                        if (current < 0) current = 9;
+                        PacketHandler.sendToServer(new SetCurrentSpellInSetPacket(current));
+                        set = true;
+                        currentSet = KnowledgeUtils.getCurrentSpellSet(player);
+                    }
+                }
+
+                if (set) {
+                    if (!main.isEmpty() && main.getItem() instanceof ArcaneWandItem) {
+                        Spell spell = KnowledgeUtils.getSpellFromSet(player, currentSet, current);
+                        String string = "";
+                        if (spell != null) string = spell.getId();
+                        PacketHandler.sendToServer(new SetSpellPacket(true, string));
+                        Minecraft.getInstance().player.playNotifySound(WizardsReborn.CRYSTAL_RESONATE_SOUND.get(), SoundSource.NEUTRAL, 1.0f, 1.5f);
+                    } else {
+                        if (!offhand.isEmpty() && offhand.getItem() instanceof ArcaneWandItem) {
+                            Spell spell = KnowledgeUtils.getSpellFromSet(player, KnowledgeUtils.getCurrentSpellSet(player), current);
+                            String string = "";
+                            if (spell != null) string = spell.getId();
+                            PacketHandler.sendToServer(new SetSpellPacket(false, string));
+                            Minecraft.getInstance().player.playNotifySound(WizardsReborn.CRYSTAL_RESONATE_SOUND.get(), SoundSource.NEUTRAL, 1.0f, 1.5f);
+                        }
+                    }
+                }
             }
         }
     }

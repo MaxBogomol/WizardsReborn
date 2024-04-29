@@ -178,6 +178,10 @@ public class ArcaneEnchantmentUtils {
     }
 
     public static void onLivingDamage(LivingDamageEvent event) {
-        MagicBladeArcaneEnchantment.onLivingDamage(event);
+
+    }
+
+    public static void hurtEnemy(ItemStack stack, LivingEntity target, LivingEntity attacker) {
+        MagicBladeArcaneEnchantment.hurtEnemy(stack, target, attacker);
     }
 }

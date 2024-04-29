@@ -36,11 +36,6 @@ public class AirFlowSpell extends SelfSpell {
     }
 
     @Override
-    public int getMinimumPolishingLevel() {
-        return 1;
-    }
-
-    @Override
     public void selfSpell(Level world, Player player, InteractionHand hand) {
         ItemStack stack = player.getItemInHand(hand);
         CompoundTag stats = getStats(stack);

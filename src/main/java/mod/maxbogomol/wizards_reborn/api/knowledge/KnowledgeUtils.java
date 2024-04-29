@@ -212,6 +212,24 @@ public class KnowledgeUtils {
         });
     }
 
+    public static int getCurrentSpellInSet(Entity entity) {
+        if (!(entity instanceof Player)) return 0;
+        AtomicInteger current = new AtomicInteger();
+        entity.getCapability(IKnowledge.INSTANCE, null).ifPresent((s) -> {
+            current.set(s.getCurrentSpellInSet());
+        });
+        return current.get();
+    }
+
+    public static void setCurrentSpellInSet(Entity entity, int id) {
+        if (!(entity instanceof Player)) return;
+        entity.getCapability(IKnowledge.INSTANCE, null).ifPresent((s) -> {
+            s.setCurrentSpellInSet(id);
+
+            PacketHandler.sendTo((Player) entity, new KnowledgeUpdatePacket((Player) entity));
+        });
+    }
+
     public static int getKnowledgePoints(Entity entity) {
         int points = 0;
 

@@ -38,22 +38,26 @@ public class EarthAuraSpell extends AuraSpell {
             float magicModifier = ArcaneArmorItem.getPlayerMagicModifier(player);
             float damage = (float) (1.0f + (focusLevel * 0.5)) + magicModifier;
             for (Entity target : targets) {
-                if (target instanceof LivingEntity livingEntity && !target.equals(player)) {
-                    DamageSource damageSource = new DamageSource(target.damageSources().generic().typeHolder());
-                    livingEntity.lastHurtByPlayerTime = livingEntity.tickCount;
-                    livingEntity.hurt(damageSource, damage);
-                    livingEntity.addEffect(new MobEffectInstance(MobEffects.POISON, (int) (100 + (50 * (focusLevel + magicModifier))), 0));
-                    if (target instanceof Player targetPlayer) {
-                        targetPlayer.getInventory().hurtArmor(damageSource, damage, Inventory.ALL_ARMOR_SLOTS);
-                        livingEntity.addEffect(new MobEffectInstance(MobEffects.HUNGER, (int) (200 + (150 * (focusLevel + magicModifier))), 0));
+                if (target instanceof LivingEntity livingEntity) {
+                    if (!target.equals(player)) {
+                        DamageSource damageSource = new DamageSource(target.damageSources().generic().typeHolder());
+                        livingEntity.lastHurtByPlayerTime = livingEntity.tickCount;
+                        livingEntity.hurt(damageSource, damage);
+                        livingEntity.addEffect(new MobEffectInstance(MobEffects.POISON, (int) (100 + (50 * (focusLevel + magicModifier))), 0));
+                        if (target instanceof Player targetPlayer) {
+                            targetPlayer.getInventory().hurtArmor(damageSource, damage, Inventory.ALL_ARMOR_SLOTS);
+                            livingEntity.addEffect(new MobEffectInstance(MobEffects.HUNGER, (int) (200 + (150 * (focusLevel + magicModifier))), 0));
+                        }
+
+                        Color color = getColor();
+                        float r = color.getRed() / 255f;
+                        float g = color.getGreen() / 255f;
+                        float b = color.getBlue() / 255f;
+
+                        PacketHandler.sendToTracking(world, player.getOnPos(), new AuraSpellBurstEffectPacket((float) target.getX(), (float) target.getY() + (target.getBbHeight() / 2), (float) target.getZ(), r, g, b));
+                    } else {
+                        livingEntity.addEffect(new MobEffectInstance(MobEffects.DAMAGE_RESISTANCE, 200, 0, true, false, true));
                     }
-
-                    Color color = getColor();
-                    float r = color.getRed() / 255f;
-                    float g = color.getGreen() / 255f;
-                    float b = color.getBlue() / 255f;
-
-                    PacketHandler.sendToTracking(world, player.getOnPos(), new AuraSpellBurstEffectPacket((float) target.getX(), (float) target.getY() + (target.getBbHeight() / 2), (float) target.getZ(), r, g, b));
                 }
             }
         }

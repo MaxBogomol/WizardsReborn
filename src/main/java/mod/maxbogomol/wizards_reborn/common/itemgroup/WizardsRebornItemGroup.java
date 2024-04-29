@@ -61,7 +61,6 @@ public class WizardsRebornItemGroup {
             event.accept(WizardsReborn.ARCANE_GOLD_SHOVEL);
             event.accept(WizardsReborn.ARCANE_GOLD_HOE);
             event.accept(WizardsReborn.ARCANE_GOLD_SCYTHE);
-
             if (FarmersDelightIntegration.isLoaded()) {
                 event.accept(FarmersDelightIntegration.ARCANE_GOLD_KNIFE);
             }
@@ -74,7 +73,6 @@ public class WizardsRebornItemGroup {
             event.accept(WizardsReborn.SARCON_INGOT);
             event.accept(WizardsReborn.SARCON_NUGGET);
             event.accept(WizardsReborn.SARCON_BLOCK_ITEM);
-
             if (CreateIntegration.isLoaded()) {
                 event.accept(CreateIntegration.SARCON_SHEET);
             }
@@ -82,7 +80,6 @@ public class WizardsRebornItemGroup {
             event.accept(WizardsReborn.VILENIUM_INGOT);
             event.accept(WizardsReborn.VILENIUM_NUGGET);
             event.accept(WizardsReborn.VILENIUM_BLOCK_ITEM);
-
             if (CreateIntegration.isLoaded()) {
                 event.accept(CreateIntegration.VILENIUM_SHEET);
             }
@@ -128,6 +125,9 @@ public class WizardsRebornItemGroup {
             event.accept(WizardsReborn.ARCANE_WOOD_SHOVEL);
             event.accept(WizardsReborn.ARCANE_WOOD_HOE);
             event.accept(WizardsReborn.ARCANE_WOOD_SCYTHE);
+            if (FarmersDelightIntegration.isLoaded()) {
+                event.accept(FarmersDelightIntegration.ARCANE_WOOD_KNIFE);
+            }
             event.accept(WizardsReborn.ARCANE_WOOD_MORTAR);
             event.accept(WizardsReborn.ARCANE_WOOD_LEAVES_ITEM);
             event.accept(WizardsReborn.ARCANE_WOOD_SAPLING_ITEM);
@@ -156,6 +156,9 @@ public class WizardsRebornItemGroup {
             event.accept(WizardsReborn.INNOCENT_WOOD_SHOVEL);
             event.accept(WizardsReborn.INNOCENT_WOOD_HOE);
             event.accept(WizardsReborn.INNOCENT_WOOD_SCYTHE);
+            if (FarmersDelightIntegration.isLoaded()) {
+                event.accept(FarmersDelightIntegration.INNOCENT_WOOD_KNIFE);
+            }
             event.accept(WizardsReborn.INNOCENT_WOOD_MORTAR);
             event.accept(WizardsReborn.INNOCENT_WOOD_LEAVES_ITEM);
             event.accept(WizardsReborn.INNOCENT_WOOD_SAPLING_ITEM);

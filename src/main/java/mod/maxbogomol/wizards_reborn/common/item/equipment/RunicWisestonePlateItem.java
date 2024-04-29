@@ -90,7 +90,7 @@ public class RunicWisestonePlateItem extends Item implements IGuiParticleItem {
         }
     }
 
-    public Component getRitualName(CrystalRitual ritual) {
+    public static Component getRitualName(CrystalRitual ritual) {
         Color color = ritual.getColor();
 
         return Component.translatable(ritual.getTranslatedName()).withStyle(Style.EMPTY.withColor(ColorUtils.packColor(255, color.getRed(), color.getGreen(), color.getBlue())));

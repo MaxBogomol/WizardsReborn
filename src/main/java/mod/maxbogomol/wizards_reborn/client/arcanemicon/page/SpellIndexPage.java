@@ -5,14 +5,20 @@ import mod.maxbogomol.wizards_reborn.api.knowledge.KnowledgeUtils;
 import mod.maxbogomol.wizards_reborn.client.arcanemicon.ArcanemiconGui;
 import mod.maxbogomol.wizards_reborn.client.arcanemicon.Page;
 import mod.maxbogomol.wizards_reborn.client.arcanemicon.index.SpellIndexEntry;
+import net.minecraft.ChatFormatting;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.resources.language.I18n;
+import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Optional;
 
 public class SpellIndexPage extends Page {
     public static final ResourceLocation BACKGROUND = new ResourceLocation(WizardsReborn.MOD_ID, "textures/gui/arcanemicon/spell_index_page.png");
@@ -56,6 +62,21 @@ public class SpellIndexPage extends Page {
             } else {
                 gui.blit(new ResourceLocation(WizardsReborn.MOD_ID, "textures/gui/arcanemicon/unknown.png"), x + 3, y + 8 + i * 20, 0, 0, 16, 16, 16, 16);
                 drawText(book, gui, I18n.get("wizards_reborn.arcanemicon.unknown"), x + 24, y + 20 + i * 20 - Minecraft.getInstance().font.lineHeight);
+                if (mouseX >= x + 2 && mouseX <= x + 124 && mouseY >= y + 8 + i * 20 && mouseY <= y + 26 + i * 20) {
+                    if (entries[i].hasKnowledge()) {
+                        List<Component> list = new ArrayList<>();
+                        list.add(Component.translatable("wizards_reborn.arcanemicon.knowledge_required").withStyle(ChatFormatting.GRAY).withStyle(ChatFormatting.ITALIC));
+                        boolean unknown = false;
+                        if (entries[i].getKnowledge().hasPrevious()) {
+                            if (!KnowledgeUtils.isKnowledge(Minecraft.getInstance().player, entries[i].getKnowledge().getPrevious())) {
+                                list.add(Component.translatable("wizards_reborn.arcanemicon.unknown").withStyle(ChatFormatting.GRAY));
+                                unknown = true;
+                            }
+                        }
+                        if (!unknown) list.add(Component.empty().append(entries[i].getKnowledgeName()).withStyle(ChatFormatting.GRAY));
+                        gui.renderTooltip(Minecraft.getInstance().font, list, Optional.empty(), mouseX, mouseY);
+                    }
+                }
             }
         }
     }

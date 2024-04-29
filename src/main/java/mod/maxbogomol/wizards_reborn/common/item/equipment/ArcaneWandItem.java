@@ -428,6 +428,36 @@ public class ArcaneWandItem extends Item implements IWissenItem, ICustomAnimatio
                         gui.blit(new ResourceLocation(WizardsReborn.MOD_ID, "textures/gui/arcanemicon/unknown.png"), x + 28, y + 1, 0, 0, 16, 16, 16, 16);
                     }
                 }
+
+                int currentSpellSet = KnowledgeUtils.getCurrentSpellSet(mc.player);
+                int currentSpellInSet = KnowledgeUtils.getCurrentSpellInSet(mc.player);
+
+                gui.blit(new ResourceLocation(WizardsReborn.MOD_ID + ":textures/gui/arcane_wand_frame.png"), x + 1, y + 42, 18, 18, 16, 6, 64, 64);
+                gui.blit(new ResourceLocation(WizardsReborn.MOD_ID + ":textures/gui/arcane_wand_frame.png"), x + 1, y + 228, 18, 24, 16, 6, 64, 64);
+
+                for (int i = 0; i < 10; i++) {
+                    ResourceLocation resource = new ResourceLocation(WizardsReborn.MOD_ID, "textures/gui/arcanemicon/research.png");
+                    Spell spellI = KnowledgeUtils.getSpellFromSet(mc.player, currentSpellSet, i);
+                    if (spellI != null) {
+                        if (!KnowledgeUtils.isSpell(mc.player, spellI)) {
+                            resource = new ResourceLocation(WizardsReborn.MOD_ID, "textures/gui/arcanemicon/unknown.png");
+                        } else {
+                            resource = spellI.getIcon();
+                        }
+                    }
+
+                    if (!(KnowledgeUtils.isSpell(Minecraft.getInstance().player, spellI)) && spellI != null) {
+                        resource = new ResourceLocation(WizardsReborn.MOD_ID, "textures/gui/arcanemicon/unknown.png");
+                    }
+
+                    int xOffset = 0;
+                    if (currentSpellInSet == i) {
+                        xOffset = 8;
+                        gui.blit(new ResourceLocation(WizardsReborn.MOD_ID + ":textures/gui/arcane_wand_frame.png"), x + 1 , y + 49 + (i * 18), 34, 18, 8, 16, 64, 64);
+                    }
+
+                    gui.blit(resource, x + 1 + xOffset, y + 49 + (i * 18), 0, 0, 16, 16, 16, 16);
+                }
             }
         }
 

@@ -19,6 +19,7 @@ public class KnowledgeImpl implements IKnowledge, INBTSerializable<CompoundTag> 
     Set<Spell> spells = new HashSet<>();
     ArrayList<ArrayList<Spell>> spellSets = new ArrayList<>();
     int currentSpellSet = 0;
+    int currentSpellInSet = 0;
 
     @Override
     public boolean isKnowledge(Knowledge knowledge) {
@@ -151,6 +152,16 @@ public class KnowledgeImpl implements IKnowledge, INBTSerializable<CompoundTag> 
     }
 
     @Override
+    public int getCurrentSpellInSet() {
+        return currentSpellInSet;
+    }
+
+    @Override
+    public void setCurrentSpellInSet(int id) {
+        currentSpellInSet = id;
+    }
+
+    @Override
     public CompoundTag serializeNBT() {
         ListTag knowledges = new ListTag();
         for (Knowledge knowledge : getKnowledges()) {
@@ -180,6 +191,7 @@ public class KnowledgeImpl implements IKnowledge, INBTSerializable<CompoundTag> 
         wrapper.put("spells", spells);
         wrapper.put("spellsSets", spellSets);
         wrapper.putInt("currentSpellSet", getCurrentSpellSet());
+        wrapper.putInt("currentSpellInSet", getCurrentSpellInSet());
 
         return wrapper;
     }
@@ -221,6 +233,9 @@ public class KnowledgeImpl implements IKnowledge, INBTSerializable<CompoundTag> 
 
         if ((nbt).contains("currentSpellSet")) {
             setCurrentSpellSet(nbt.getInt("currentSpellSet"));
+        }
+        if ((nbt).contains("currentSpellInSet")) {
+            setCurrentSpellInSet(nbt.getInt("currentSpellInSet"));
         }
     }
 }

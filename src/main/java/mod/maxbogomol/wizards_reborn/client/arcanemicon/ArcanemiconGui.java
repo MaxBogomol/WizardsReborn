@@ -212,6 +212,20 @@ public class ArcanemiconGui extends Screen {
         return false;
     }
 
+    @Override
+    public boolean mouseScrolled(double mouseX, double mouseY, double delta) {
+        Minecraft mc = Minecraft.getInstance();
+        this.width = mc.getWindow().getGuiScaledWidth();
+        this.height = mc.getWindow().getGuiScaledHeight();
+        int guiLeft = (width - xSize) / 2, guiTop = (height - ySize) / 2;
+
+        Page left = currentChapter.getPage(currentPage), right = currentChapter.getPage(currentPage + 1);
+        if (left != null) if (left.mouseScrolled(this,guiLeft + 11, guiTop + 9, (int)mouseX, (int)mouseY, (int)delta)) return true;
+        if (right != null) if (right.mouseScrolled(this,guiLeft + 175, guiTop + 9, (int)mouseX, (int)mouseY, (int)delta)) return true;
+
+        return false;
+    }
+
     public void renderTooltip(GuiGraphics gui, ItemStack stack, int x, int y) {
         if (!stack.isEmpty()) gui.renderTooltip(Minecraft.getInstance().font, stack, x, y);
     }

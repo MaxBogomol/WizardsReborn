@@ -37,10 +37,11 @@ All aspects of the mod are described in the "Arcanemicon" book. Thanks to it, yo
 The mod is in very early alpha, with a lot of different content planned for the future!  
 You can visit our **[Discord Server](https://discord.gg/cKf55qNugw)** to suggest your ideas or receive news about development.
 
-The mod is translated into 5 languages:  
+The mod is translated into 6 languages:  
 English and Russian (original) - by MaxBogomol  
 Ukrainian - by FoxPlane and iDark  
 Belarusian - by Kekqupap  
 French - by ishi_sama  
+Simplified Chinese - by FalAut
 
 As well as a wonderful original soundtrack by Onjerlay

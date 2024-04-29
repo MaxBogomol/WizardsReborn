@@ -5,6 +5,7 @@ import mod.maxbogomol.wizards_reborn.api.knowledge.KnowledgeUtils;
 import mod.maxbogomol.wizards_reborn.api.spell.Spell;
 import mod.maxbogomol.wizards_reborn.client.arcanemicon.Chapter;
 import net.minecraft.client.Minecraft;
+import net.minecraft.network.chat.Component;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 
@@ -31,5 +32,23 @@ public class SpellIndexEntry {
         } else {
             return (KnowledgeUtils.isKnowledge(Minecraft.getInstance().player, knowledge));
         }
+    }
+
+    @OnlyIn(Dist.CLIENT)
+    public boolean hasKnowledge() {
+        return knowledge != null;
+    }
+
+    @OnlyIn(Dist.CLIENT)
+    public Knowledge getKnowledge() {
+        return knowledge;
+    }
+
+    @OnlyIn(Dist.CLIENT)
+    public Component getKnowledgeName() {
+        if (knowledge == null) {
+            return Component.empty();
+        }
+        return knowledge.getName();
     }
 }
