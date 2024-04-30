@@ -26,6 +26,11 @@ public class ArcanemiconKnowledge extends ItemKnowledge {
     }
 
     @Override
+    public boolean hasScrollAward() {
+        return false;
+    }
+
+    @Override
     public void award(Player player) {
         if (!KnowledgeUtils.isKnowledge(player, RegisterKnowledges.ARCANEMICON_OFFERING)) {
             player.sendSystemMessage(Component.literal("<").append(

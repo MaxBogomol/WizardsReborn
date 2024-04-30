@@ -5,7 +5,6 @@ import mod.maxbogomol.wizards_reborn.api.knowledge.Knowledge;
 import mod.maxbogomol.wizards_reborn.api.knowledge.KnowledgeUtils;
 import mod.maxbogomol.wizards_reborn.client.arcanemicon.ArcanemiconGui;
 import mod.maxbogomol.wizards_reborn.client.arcanemicon.Page;
-import mod.maxbogomol.wizards_reborn.utils.RenderUtils;
 import net.minecraft.ChatFormatting;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
@@ -152,7 +151,8 @@ public class ProgressionPage extends Page {
                         gui.blit(BACKGROUND, x + X + 58, y + Y + 130, 140, 0, 12, 12);
                     } else {
                         gui.blit(BACKGROUND, x + X + 58, y + Y + 130, 152, 0, 12, 12);
-                        RenderUtils.renderItemModelInGui(knowledges.get(c).getIcon(), x + X + 56, y + Y + 128, 16, 16, 16);
+                        gui.renderItem(knowledges.get(c).getIcon(),x + X + 56, y + Y + 128);
+                        gui.renderItemDecorations(Minecraft.getInstance().font, knowledges.get(c).getIcon(),x + X + 56, y + Y + 128);
                     }
                     list.add(Component.empty().append(knowledges.get(c).getName()).withStyle(ChatFormatting.GRAY));
                     int points = knowledges.get(c).getPoints();

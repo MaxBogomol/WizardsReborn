@@ -1,0 +1,14 @@
+{
+  "parent": "item/generated",
+  "textures": {
+    "layer0": "wizards_reborn:item/knowledge_scroll"
+  },
+  "overrides": [
+    {
+      "predicate": {
+        "knowledge": 1
+      },
+      "model": "wizards_reborn:item/knowledge_scroll_active"
+    }
+  ]
+}

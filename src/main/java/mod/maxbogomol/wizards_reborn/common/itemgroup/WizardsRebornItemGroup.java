@@ -415,6 +415,11 @@ public class WizardsRebornItemGroup {
             event.accept(WizardsReborn.ARCANE_WOOD_BOW);
 
             event.accept(WizardsReborn.ARCANEMICON);
+            event.accept(WizardsReborn.KNOWLEDGE_SCROLL);
+            event.accept(WizardsReborn.CREATIVE_KNOWLEDGE_SCROLL);
+            event.accept(WizardsReborn.CREATIVE_KKNOWLEDGE_ANCIENT_SCROLL);
+            event.accept(WizardsReborn.CREATIVE_SPELL_SCROLL);
+            event.accept(WizardsReborn.CREATIVE_SPELL_ANCIENT_SCROLL);
 
             event.accept(WizardsReborn.VIOLENCE_BANNER_PATTERN_ITEM);
             event.accept(WizardsReborn.REPRODUCTION_BANNER_PATTERN_ITEM);

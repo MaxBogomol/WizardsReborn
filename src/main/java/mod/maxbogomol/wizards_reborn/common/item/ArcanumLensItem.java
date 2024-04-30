@@ -38,6 +38,7 @@ public class ArcanumLensItem extends ArcanumItem implements IGuiParticleItem {
         super(properties);
     }
 
+    @Override
     public InteractionResultHolder<ItemStack> use(Level world, Player player, InteractionHand hand) {
         ItemStack stack = player.getItemInHand(hand);
 

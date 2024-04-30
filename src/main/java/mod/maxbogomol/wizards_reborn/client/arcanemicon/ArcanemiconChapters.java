@@ -966,8 +966,8 @@ public class ArcanemiconChapters {
                         new IndexEntry(REDSTONE_SENSOR, new ItemStack(WizardsReborn.REDSTONE_SENSOR_ITEM.get())),
                         new IndexEntry(WISSEN_SENSOR, new ItemStack(WizardsReborn.WISSEN_SENSOR_ITEM.get())),
                         new IndexEntry(COOLDOWN_SENSOR, new ItemStack(WizardsReborn.COOLDOWN_SENSOR_ITEM.get())),
-                        new IndexEntry(EXPERIENCE_SENSOR, new ItemStack(WizardsReborn.EXPERIENCE_SENSOR_ITEM.get())),
-                        new IndexEntry(LIGHT_SENSOR, new ItemStack(WizardsReborn.LIGHT_SENSOR_ITEM.get()))
+                        new IndexEntry(EXPERIENCE_SENSOR, new ItemStack(WizardsReborn.EXPERIENCE_SENSOR_ITEM.get()), RegisterKnowledges.ALCHEMY_GLASS),
+                        new IndexEntry(LIGHT_SENSOR, new ItemStack(WizardsReborn.LIGHT_SENSOR_ITEM.get()), RegisterKnowledges.LIGHT_EMITTER)
                 ),
                 new IndexPage(
                         new IndexEntry(HEAT_SENSOR, new ItemStack(WizardsReborn.HEAT_SENSOR_ITEM.get()), RegisterKnowledges.ALCHEMY_FURNACE),
@@ -1951,7 +1951,9 @@ public class ArcanemiconChapters {
 
         PROGRESSION = new Chapter(
                 "wizards_reborn.arcanemicon.chapter.progression",
-                new ProgressionPage("wizards_reborn.arcanemicon.page.progression", RegisterKnowledges.progression)
+                new ProgressionPage("wizards_reborn.arcanemicon.page.progression", RegisterKnowledges.progression),
+                new ProgressionPage("wizards_reborn.arcanemicon.page.additional_progression", RegisterKnowledges.additionalProgression),
+                new StatisticPage("wizards_reborn.arcanemicon.page.statistic", RegisterKnowledges.progression, RegisterKnowledges.additionalProgression)
         );
 
         RESEARCH_MAIN = new ResearchPage(true);

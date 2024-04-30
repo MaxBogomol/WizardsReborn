@@ -389,6 +389,11 @@
 
   "item.wizards_reborn.arcane_enchanted_book": "Arcane Enchanted Book",
   "item.wizards_reborn.arcanemicon": "Arcanemicon",
+  "item.wizards_reborn.knowledge_scroll": "Knowledge Scroll",
+  "item.wizards_reborn.creative_knowledge_scroll": "Creative Knowledge Scroll",
+  "item.wizards_reborn.creative_knowledge_ancient_scroll": "Creative Knowledge Ancient Scroll",
+  "item.wizards_reborn.creative_spell_scroll": "Creative Spell Scroll",
+  "item.wizards_reborn.creative_spell_ancient_scroll": "Creative Spell Ancient Scroll",
 
   "item.wizards_reborn.violence_banner_pattern": "Banner Pattern",
   "item.wizards_reborn.reproduction_banner_pattern": "Banner Pattern",
@@ -427,6 +432,8 @@
   "lore.wizards_reborn.arcane_enchantments": "Arcane Enchantments:",
 
   "lore.wizards_reborn.inventor_wizard_armor": "Wissen Nature",
+
+  "lore.wizards_reborn.knowledge_scroll": "Stores %s knowledge",
 
   "lore.wizards_reborn.violence_banner_pattern": "Paint this canvas scarlet!",
   "lore.wizards_reborn.reproduction_banner_pattern": "The chains of constant lust have shrouded this world...",
@@ -636,6 +643,7 @@
   "message.wizards_reborn.someone": "Someone",
   "message.wizards_reborn.arcanemicon_offering": "My strength is fading... I give you this book for you to revive lost knowledge! Accomplish this great goal, for I have not...",
   "message.wizards_reborn.arcanemicon": "The zeal for ancient knowledge begins to blossom inside you! You know what you should do.",
+  "message.wizards_reborn.knowledge_scroll": "You received knowledge from %s",
 
   "attribute.name.wizards_reborn.wissen_discount": "Wissen Discount",
   "attribute.name.wizards_reborn.magic_armor": "Magic Armor",
@@ -1191,6 +1199,10 @@
   "wizards_reborn.arcanemicon.chapter.progression": "Progression",
     "wizards_reborn.arcanemicon.page.progression.title": "Progression",
     "wizards_reborn.arcanemicon.page.progression": "Progression: %s \n Knowledge: %s \n Points: %s",
+    "wizards_reborn.arcanemicon.page.additional_progression.title": "Progression",
+    "wizards_reborn.arcanemicon.page.additional_progression": "Additional \n Progression: %s \n Knowledge: %s \n Points: %s",
+    "wizards_reborn.arcanemicon.page.statistic.title": "Statistic",
+    "wizards_reborn.arcanemicon.page.statistic": "Progression: %s \n Knowledge: %s \n Points: %s \n Spells: %s \n Health: %s \n Food: %s \n Armor: %s \n Magic Armor: %s \n Wissen Discount: %s \n Experience: %s",
   "wizards_reborn.arcanemicon.chapter.researches": "Researches",
     "wizards_reborn.arcanemicon.page.researches.0.title": "Researches",
     "wizards_reborn.arcanemicon.page.researches.0": "To research a spell, you need to lay out a chain of monograms of a certain length.  To complete the chain and consider it as finished, all monograms must be connected. The connection is counted clockwise.",
@@ -1418,7 +1430,7 @@
     "wizards_reborn.arcanemicon.page.arcane_censer": "The heating element of the censer turns items into smoke with effects using a little steam.",
   "wizards_reborn.arcanemicon.chapter.smoking_pipe": "Smoking Pipe",
     "wizards_reborn.arcanemicon.page.smoking_pipe.title": "Smoking Pipe",
-    "wizards_reborn.arcanemicon.page.smoking_pipe": "Portable censer that does not use steam. However, the smoke effect is much shorter. Hold item and tube in both hands to place item.",
+    "wizards_reborn.arcanemicon.page.smoking_pipe": "Portable censer that does not use steam. However, the smoke effect is much shorter. Hold item and pipe in both hands to place item.",
     "wizards_reborn.arcanemicon.page.smoke_warning.title": "!WARNING!",
     "wizards_reborn.arcanemicon.page.smoke_warning": "!SMOKING IS BAD FOR YOUR HEALTH!",
   "wizards_reborn.arcanemicon.chapter.arcacite": "Arcacite",
@@ -1438,6 +1450,11 @@
   "wizards_reborn.arcanemicon.knowledge_points": "Points:",
 
   "knowledge.wizards_reborn.arcane_wood": "Arcane Wood",
+  "knowledge.wizards_reborn.innocent_wood": "Innocent Wood",
+  "knowledge.wizards_reborn.arcane_wood_tools": "Arcane Wood Tools",
+  "knowledge.wizards_reborn.innocent_wood_tools": "Innocent Wood Tools",
+  "knowledge.wizards_reborn.arcane_gold_tools": "Arcane Gold Tools",
+  "knowledge.wizards_reborn.scythes": "Scythes",
   "knowledge.wizards_reborn.faceted_crystals": "Faceted Crystals",
   "knowledge.wizards_reborn.arcane_lumos": "Arcane Lumos",
   "knowledge.wizards_reborn.crystal_seeds": "Crystal Seeds"

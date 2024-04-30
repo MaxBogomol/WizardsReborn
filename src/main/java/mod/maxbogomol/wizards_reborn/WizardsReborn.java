@@ -173,7 +173,12 @@ public class WizardsReborn {
     public static final DeferredRegister<FluidType> FLUID_TYPES = DeferredRegister.create(ForgeRegistries.Keys.FLUID_TYPES, MOD_ID);
     public static final DeferredRegister<Fluid> FLUIDS = DeferredRegister.create(ForgeRegistries.FLUIDS, MOD_ID);
 
+    public static final TagKey<Item> SCYTHES_ITEM_TAG = TagKey.create(Registries.ITEM, new ResourceLocation(MOD_ID, "scythes"));
+    public static final TagKey<Item> ARCANE_GOLD_TOOLS_ITEM_TAG = TagKey.create(Registries.ITEM, new ResourceLocation(MOD_ID, "arcane_gold_tools"));
     public static final TagKey<Item> ARCANE_WOOD_LOGS_ITEM_TAG = TagKey.create(Registries.ITEM, new ResourceLocation(MOD_ID, "arcane_wood_logs"));
+    public static final TagKey<Item> ARCANE_WOOD_TOOLS_ITEM_TAG = TagKey.create(Registries.ITEM, new ResourceLocation(MOD_ID, "arcane_wood_tools"));
+    public static final TagKey<Item> INNOCENT_WOOD_LOGS_ITEM_TAG = TagKey.create(Registries.ITEM, new ResourceLocation(MOD_ID, "innocent_wood_logs"));
+    public static final TagKey<Item> INNOCENT_WOOD_TOOLS_ITEM_TAG = TagKey.create(Registries.ITEM, new ResourceLocation(MOD_ID, "innocent_wood_tools"));
     public static final TagKey<Item> ARCANE_LUMOS_ITEM_TAG = TagKey.create(Registries.ITEM, new ResourceLocation(MOD_ID, "arcane_lumos"));
     public static final TagKey<Item> CRYSTALS_SEEDS_ITEM_TAG = TagKey.create(Registries.ITEM, new ResourceLocation(MOD_ID, "crystal_seeds"));
     public static final TagKey<Item> FRACTURED_CRYSTALS_ITEM_TAG = TagKey.create(Registries.ITEM, new ResourceLocation(MOD_ID, "fractured_crystals"));
@@ -183,6 +188,10 @@ public class WizardsReborn {
     public static final TagKey<Item> MASTERFUL_CRYSTALS_ITEM_TAG = TagKey.create(Registries.ITEM, new ResourceLocation(MOD_ID, "masterful_crystals"));
     public static final TagKey<Item> PURE_CRYSTALS_ITEM_TAG = TagKey.create(Registries.ITEM, new ResourceLocation(MOD_ID, "pure_crystals"));
     public static final TagKey<Item> ALL_CRYSTALS_ITEM_TAG = TagKey.create(Registries.ITEM, new ResourceLocation(MOD_ID, "all_crystals"));
+    public static final TagKey<Item> WISSEN_CASINGS_ITEM_TAG  = TagKey.create(Registries.ITEM, new ResourceLocation(MOD_ID, "wissen_casings"));
+    public static final TagKey<Item> LIGHT_CASINGS_ITEM_TAG  = TagKey.create(Registries.ITEM, new ResourceLocation(MOD_ID, "light_casings"));
+    public static final TagKey<Item> FLUID_CASINGS_ITEM_TAG  = TagKey.create(Registries.ITEM, new ResourceLocation(MOD_ID, "fluid_casings"));
+    public static final TagKey<Item> STEAM_CASINGS_ITEM_TAG  = TagKey.create(Registries.ITEM, new ResourceLocation(MOD_ID, "steam_casings"));
 
     public static final TagKey<Block> FLUID_PIPE_CONNECTION_BLOCK_TAG = TagKey.create(Registries.BLOCK, new ResourceLocation(MOD_ID, "fluid_pipe_connection"));
     public static final TagKey<Block> FLUID_PIPE_CONNECTION_TOGGLE_BLOCK_TAG = TagKey.create(Registries.BLOCK, new ResourceLocation(MOD_ID, "fluid_pipe_connection_toggle"));
@@ -1173,6 +1182,11 @@ public class WizardsReborn {
 
     public static final RegistryObject<Item> ARCANE_ENCHANTED_BOOK = ITEMS.register("arcane_enchanted_book", () -> new ArcaneEnchantedBookItem(new Item.Properties().stacksTo(1).rarity(Rarity.UNCOMMON)));
     public static final RegistryObject<Item> ARCANEMICON = ITEMS.register("arcanemicon", () -> new ArcanemiconItem(new Item.Properties().stacksTo(1)));
+    public static final RegistryObject<Item> KNOWLEDGE_SCROLL = ITEMS.register("knowledge_scroll", () -> new KnowledgeSrollItem(new Item.Properties().stacksTo(1).rarity(Rarity.UNCOMMON)));
+    public static final RegistryObject<Item> CREATIVE_KNOWLEDGE_SCROLL = ITEMS.register("creative_knowledge_scroll", () -> new CreativeKnowledgeSrollItem(new Item.Properties().stacksTo(1).rarity(Rarity.EPIC), false));
+    public static final RegistryObject<Item> CREATIVE_KKNOWLEDGE_ANCIENT_SCROLL = ITEMS.register("creative_knowledge_ancient_scroll", () -> new CreativeKnowledgeSrollItem(new Item.Properties().stacksTo(1).rarity(Rarity.EPIC), true));
+    public static final RegistryObject<Item> CREATIVE_SPELL_SCROLL = ITEMS.register("creative_spell_scroll", () -> new CreativeSpellSrollItem(new Item.Properties().stacksTo(1).rarity(Rarity.EPIC), false));
+    public static final RegistryObject<Item> CREATIVE_SPELL_ANCIENT_SCROLL = ITEMS.register("creative_spell_ancient_scroll", () -> new CreativeSpellSrollItem(new Item.Properties().stacksTo(1).rarity(Rarity.EPIC), true));
 
     public static final RegistryObject<Item> VIOLENCE_BANNER_PATTERN_ITEM = ITEMS.register("violence_banner_pattern", () -> new RainBannerPatternItem(RainBannerPatternItem.Types.VIOLENCE, VIOLENCE_BANNER_PATTERN_TAG, (new Item.Properties()).stacksTo(1).rarity(Rarity.UNCOMMON)));
     public static final RegistryObject<Item> REPRODUCTION_BANNER_PATTERN_ITEM = ITEMS.register("reproduction_banner_pattern", () -> new RainBannerPatternItem(RainBannerPatternItem.Types.REPRODUCTION, REPRODUCTION_BANNER_PATTERN_TAG, (new Item.Properties()).stacksTo(1).rarity(Rarity.UNCOMMON)));

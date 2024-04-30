@@ -75,6 +75,23 @@ public class KnowledgeUtils {
         });
     }
 
+    public static void addKnowledgeFromScroll(Entity entity, Knowledge knowledge) {
+        if (!(entity instanceof Player)) return;
+        entity.getCapability(IKnowledge.INSTANCE, null).ifPresent((k) -> {
+            if (k.isKnowledge(knowledge)) return;
+            k.addKnowledge(knowledge);
+
+            if (knowledge.hasScrollAward()) {
+                knowledge.award((Player) entity);
+            }
+
+            PacketHandler.sendTo((Player) entity, new KnowledgeUpdatePacket((Player) entity));
+            if (knowledge.hasToast()) {
+                PacketHandler.sendTo((Player) entity, new KnowledgeToastPacket((Player) entity, knowledge.getId(), false));
+            }
+        });
+    }
+
     public static boolean isSpell(Entity entity, Spell spell) {
         if (!(entity instanceof Player)) return false;
         AtomicBoolean isKnow = new AtomicBoolean(false);

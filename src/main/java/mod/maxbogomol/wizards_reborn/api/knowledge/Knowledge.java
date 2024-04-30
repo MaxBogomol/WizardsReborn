@@ -43,6 +43,10 @@ public class Knowledge {
         return true;
     }
 
+    public boolean hasScrollAward() {
+        return true;
+    }
+
     public void award(Player player) {
 
     }

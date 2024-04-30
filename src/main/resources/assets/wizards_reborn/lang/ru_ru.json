@@ -389,6 +389,11 @@
 
   "item.wizards_reborn.arcane_enchanted_book": "Аркановая чародейская книга",
   "item.wizards_reborn.arcanemicon": "Аркейномикон",
+  "item.wizards_reborn.knowledge_scroll": "Свиток знаний",
+  "item.wizards_reborn.creative_knowledge_scroll": "Креативный свиток знаний",
+  "item.wizards_reborn.creative_knowledge_ancient_scroll": "Креативный древний свиток знаний",
+  "item.wizards_reborn.creative_spell_scroll": "Креативный свиток заклинаний",
+  "item.wizards_reborn.creative_spell_ancient_scroll": "Креативный древний свиток заклинаний",
 
   "key.category.wizards_reborn.general": "Wizard's Reborn",
   "key.wizards_reborn.selection_menu": "Меню выбора",
@@ -434,6 +439,8 @@
   "lore.wizards_reborn.arcane_enchantments": "Аркановые зачарования:",
 
   "lore.wizards_reborn.inventor_wizard_armor": "Виссен природа",
+
+  "lore.wizards_reborn.knowledge_scroll": "Хранит знания %s",
 
   "lore.wizards_reborn.violence_banner_pattern": "Окрась этот холст алым цветом!",
   "lore.wizards_reborn.reproduction_banner_pattern": "Цепи постоянной похоти окутали этот мир...",
@@ -643,6 +650,7 @@
   "message.wizards_reborn.someone": "Нечто",
   "message.wizards_reborn.arcanemicon_offering": "Мои силы угасают... Я дарую тебе эту книгу, дабы ты возродил потерянные знания! Достигни этой великой цели, ибо я не смог...",
   "message.wizards_reborn.arcanemicon": "Рвение к древним знаниям начало расцветать в тебе! Ты знаешь что должен делать.",
+  "message.wizards_reborn.knowledge_scroll": "Вы получили знания от %s",
 
   "attribute.name.wizards_reborn.wissen_discount": "Скидка виссена",
   "attribute.name.wizards_reborn.magic_armor": "Магическая броня",
@@ -1188,6 +1196,13 @@
     "wizards_reborn.arcanemicon.page.magic_sprout.title": "Магический росток",
     "wizards_reborn.arcanemicon.page.magic_sprout": "Взращивает растения. Зажмите кнопку [minecraft:sneak] для эффекта по площади.",
     "wizards_reborn.arcanemicon.page.magic_sprout.char": " ",
+  "wizards_reborn.arcanemicon.chapter.progression": "Прогрессия",
+    "wizards_reborn.arcanemicon.page.progression.title": "Прогрессия",
+    "wizards_reborn.arcanemicon.page.progression": "Прогрессия: %s \n Знания: %s \n Очки: %s",
+    "wizards_reborn.arcanemicon.page.additional_progression.title": "Прогрессия",
+    "wizards_reborn.arcanemicon.page.additional_progression": "Дополнительная Прогрессия: %s \n Знания: %s \n Очки: %s",
+    "wizards_reborn.arcanemicon.page.statistic.title": "Статистика",
+    "wizards_reborn.arcanemicon.page.statistic": "Прогрессия: %s \n Знания: %s \n Очки: %s \n Заклинания: %s \n Здоровье: %s \n Голод: %s \n Броня: %s \n Магическая броня: %s \n Виссен скидка: %s \n Опыт: %s",
   "wizards_reborn.arcanemicon.chapter.researches": "Исследования",
     "wizards_reborn.arcanemicon.page.researches.0.title": "Исследования",
     "wizards_reborn.arcanemicon.page.researches.0": "Чтобы исследовать заклинание, нужно выложить цепочку из монограмм, определённой длинны. Чтобы цепочка считалась завершённой, все монограммы должны быть соединены. Соединение считается по часовой стрелке.",
@@ -1435,6 +1450,11 @@
   "wizards_reborn.arcanemicon.knowledge_points": "Очков:",
 
   "knowledge.wizards_reborn.arcane_wood": "Аркановая древесина",
+  "knowledge.wizards_reborn.innocent_wood": "Невинная древесина",
+  "knowledge.wizards_reborn.arcane_wood_tools": "Арканово-древесные инструменты",
+  "knowledge.wizards_reborn.innocent_wood_tools": "Невинно-древесные инструменты",
+  "knowledge.wizards_reborn.arcane_gold_tools": "Аркановые золотые инструменты",
+  "knowledge.wizards_reborn.scythes": "Косы",
   "knowledge.wizards_reborn.faceted_crystals": "Огранённые кристаллы",
   "knowledge.wizards_reborn.arcane_lumos": "Aркановый люмос",
   "knowledge.wizards_reborn.crystal_seeds": "Кристальные семена"

@@ -1,0 +1,11 @@
+{
+  "replace": false,
+  "values": [
+    "wizards_reborn:arcane_gold_sword",
+    "wizards_reborn:arcane_gold_pickaxe",
+    "wizards_reborn:arcane_gold_axe",
+    "wizards_reborn:arcane_gold_shovel",
+    "wizards_reborn:arcane_gold_hoe",
+    "wizards_reborn:arcane_gold_scythe"
+  ]
+}

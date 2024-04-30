@@ -41,6 +41,10 @@ public class KnowledgeToast implements Toast {
             guiGraphics.drawString(toastComponent.getMinecraft().font, Component.translatable("knowledge.toast.wizards_reborn.new_articles"), 30, 18, -1, false);
         }
 
+        if (all) {
+            return (double)timeSinceLastVisible >= 5000.0D * toastComponent.getNotificationDisplayTimeMultiplier() ? Toast.Visibility.HIDE : Toast.Visibility.SHOW;
+        }
+
         return (double)timeSinceLastVisible >= 5000.0D * toastComponent.getNotificationDisplayTimeMultiplier() + (count * 100.0D) ? Toast.Visibility.HIDE : Toast.Visibility.SHOW;
     }
 

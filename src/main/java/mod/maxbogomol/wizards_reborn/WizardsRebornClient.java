@@ -18,6 +18,7 @@ import mod.maxbogomol.wizards_reborn.client.render.tileentity.*;
 import mod.maxbogomol.wizards_reborn.common.block.CustomBlockColor;
 import mod.maxbogomol.wizards_reborn.common.entity.CustomBoatEntity;
 import mod.maxbogomol.wizards_reborn.common.item.equipment.AlchemyPotionItem;
+import mod.maxbogomol.wizards_reborn.common.item.equipment.KnowledgeSrollItem;
 import mod.maxbogomol.wizards_reborn.common.item.equipment.RunicWisestonePlateItem;
 import net.minecraft.client.KeyMapping;
 import net.minecraft.client.Minecraft;
@@ -243,6 +244,8 @@ public class WizardsRebornClient {
 
             ItemProperties.register(WizardsReborn.ALCHEMY_VIAL_POTION.get(), new ResourceLocation("uses"), (stack, world, living, count) -> AlchemyPotionItem.getUses(stack));
             ItemProperties.register(WizardsReborn.ALCHEMY_FLASK_POTION.get(), new ResourceLocation("uses"), (stack, world, living, count) -> AlchemyPotionItem.getUses(stack));
+
+            ItemProperties.register(WizardsReborn.KNOWLEDGE_SCROLL.get(), new ResourceLocation("knowledge"), (stack, world, living, count) -> KnowledgeSrollItem.hasKnowledge(stack) ? 1 : 0);
         }
 
         @SubscribeEvent

@@ -32,6 +32,11 @@ public class ArcanemiconOfferingKnowledge extends Knowledge {
     }
 
     @Override
+    public boolean hasScrollAward() {
+        return false;
+    }
+
+    @Override
     public boolean canReceived(Player player) {
         if (!player.level().isClientSide()) {
             if (ServerConfig.ARCANEMICON_OFFERING.get()) {
