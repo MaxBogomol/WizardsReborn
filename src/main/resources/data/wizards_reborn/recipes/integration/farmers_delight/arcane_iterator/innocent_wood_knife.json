@@ -12,7 +12,7 @@
         "type": "minecraft:crafting_shaped",
         "key": {
           "m": {
-            "tag": "wizards_reborn:arcane_gold_ingot"
+            "item": "wizards_reborn:arcane_wood_planks"
           },
           "s": {
             "item": "wizards_reborn:arcane_wood_branch"
@@ -23,7 +23,7 @@
           "s"
         ],
         "result": {
-          "item": "wizards_reborn:arcane_gold_knife"
+          "item": "wizards_reborn:arcane_wood_knife"
         }
       }
     }

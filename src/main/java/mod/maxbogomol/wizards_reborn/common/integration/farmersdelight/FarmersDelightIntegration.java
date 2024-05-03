@@ -26,7 +26,7 @@ public class FarmersDelightIntegration {
         }
 
         public static Item makeArcaneWoodKnife() {
-            return new ArcaneKnifeItem(CustomItemTier.ARCANE_WOOD, 0.5F, -2.0F, new Item.Properties());
+            return new ArcaneWoodKnifeItem(CustomItemTier.ARCANE_WOOD, 0.5F, -2.0F, new Item.Properties(), WizardsReborn.ARCANE_WOOD_BRANCH.get());
         }
 
         public static Item makeInnocentWoodKnife() {

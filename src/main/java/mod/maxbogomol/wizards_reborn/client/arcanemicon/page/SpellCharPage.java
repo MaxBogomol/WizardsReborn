@@ -54,7 +54,7 @@ public class SpellCharPage extends Page {
     @Override
     @OnlyIn(Dist.CLIENT)
     public void render(ArcanemiconGui book, GuiGraphics gui, int x, int y, int mouseX, int mouseY) {
-        drawWrappingText(book, gui, I18n.get(text), x + 4, y + 4, 124);
+        if (I18n.exists(text)) drawWrappingText(book, gui, I18n.get(text), x + 4, y + 4, 124);
 
         if (!KnowledgeUtils.isSpell(Minecraft.getInstance().player, spell)) {
             int points = KnowledgeUtils.getKnowledgePoints(Minecraft.getInstance().player) - KnowledgeUtils.getSpellPoints(Minecraft.getInstance().player);

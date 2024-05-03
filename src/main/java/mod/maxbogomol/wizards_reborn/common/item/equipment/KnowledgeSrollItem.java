@@ -44,7 +44,7 @@ public class KnowledgeSrollItem extends ArcanumItem {
                 }
                 nbt.put("knowledges", knowledges);
                 nbt.putUUID("player", player.getUUID());
-                world.playSound(null, player.getX(), player.getY(), player.getZ(), SoundEvents.ENCHANTMENT_TABLE_USE, SoundSource.BLOCKS, 1.0f, 1.2f);
+                world.playSound(null, player.getX(), player.getY(), player.getZ(), SoundEvents.ENCHANTMENT_TABLE_USE, SoundSource.PLAYERS, 1.0f, 1.2f);
             } else {
                 ListTag knowledges = nbt.getList("knowledges", Tag.TAG_STRING);
                 for (int i = 0; i < knowledges.size(); i++) {
@@ -62,7 +62,7 @@ public class KnowledgeSrollItem extends ArcanumItem {
                         player.sendSystemMessage(Component.translatable("message.wizards_reborn.knowledge_scroll", playerFrom.getName()).withStyle(ChatFormatting.GRAY));
                     }
                 }
-                world.playSound(null, player.getX(), player.getY(), player.getZ(), SoundEvents.ENCHANTMENT_TABLE_USE, SoundSource.BLOCKS, 1.0f, 1.5f);
+                world.playSound(null, player.getX(), player.getY(), player.getZ(), SoundEvents.ENCHANTMENT_TABLE_USE, SoundSource.PLAYERS, 1.0f, 1.5f);
             }
         }
 

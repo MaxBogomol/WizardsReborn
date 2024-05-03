@@ -1,0 +1,32 @@
+{
+  "type": "wizards_reborn:arcane_iterator",
+  "output": {
+    "item": "wizards_reborn:innocent_wood_sword",
+    "count": 1
+  },
+  "wissen": 2000,
+  "saveNBT": true,
+  "ingredients": [
+    {
+      "item": "wizards_reborn:arcane_wood_sword"
+    },
+    {
+      "item": "wizards_reborn:innocent_wood_branch"
+    },
+    {
+      "item": "wizards_reborn:innocent_wood_branch"
+    },
+    {
+      "item": "wizards_reborn:innocent_wood_branch"
+    },
+    {
+      "item": "wizards_reborn:arcacite"
+    },
+    {
+      "item": "wizards_reborn:arcacite"
+    },
+    {
+      "item": "wizards_reborn:natural_calx"
+    }
+  ]
+}

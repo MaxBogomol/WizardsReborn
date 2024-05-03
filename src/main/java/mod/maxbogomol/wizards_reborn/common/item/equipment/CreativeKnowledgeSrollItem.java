@@ -32,7 +32,7 @@ public class CreativeKnowledgeSrollItem extends ArcanumItem {
             if (!player.isCreative()) {
                 stack.setCount(stack.getCount() - 1);
             }
-            world.playSound(null, player.getX(), player.getY(), player.getZ(), SoundEvents.ENCHANTMENT_TABLE_USE, SoundSource.BLOCKS, 1.0f, 1.5f);
+            world.playSound(null, player.getX(), player.getY(), player.getZ(), SoundEvents.ENCHANTMENT_TABLE_USE, SoundSource.PLAYERS, 1.0f, 1.5f);
         }
 
         return InteractionResultHolder.success(stack);
