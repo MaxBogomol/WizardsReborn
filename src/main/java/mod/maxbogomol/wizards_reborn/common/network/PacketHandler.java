@@ -70,6 +70,7 @@ public final class PacketHandler {
         HANDLER.registerMessage(id++, WissenDustBurstEffectPacket.class, WissenDustBurstEffectPacket::encode, WissenDustBurstEffectPacket::decode, WissenDustBurstEffectPacket::handle);
         HANDLER.registerMessage(id++, ArcanumLensBurstEffectPacket.class, ArcanumLensBurstEffectPacket::encode, ArcanumLensBurstEffectPacket::decode, ArcanumLensBurstEffectPacket::handle);
         HANDLER.registerMessage(id++, SmokeEffectPacket.class, SmokeEffectPacket::encode, SmokeEffectPacket::decode, SmokeEffectPacket::handle);
+        HANDLER.registerMessage(id++, InnocentWoodToolsEffectPacket.class, InnocentWoodToolsEffectPacket::encode, InnocentWoodToolsEffectPacket::decode, InnocentWoodToolsEffectPacket::handle);
 
         HANDLER.registerMessage(id++, KnowledgeUpdatePacket.class, KnowledgeUpdatePacket::encode, KnowledgeUpdatePacket::decode, KnowledgeUpdatePacket::handle);
         HANDLER.registerMessage(id++, KnowledgeToastPacket.class, KnowledgeToastPacket::encode, KnowledgeToastPacket::decode, KnowledgeToastPacket::handle);

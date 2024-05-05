@@ -32,6 +32,7 @@ import mod.maxbogomol.wizards_reborn.client.render.curio.BeltRenderer;
 import mod.maxbogomol.wizards_reborn.client.render.curio.MushroomCapRenderer;
 import mod.maxbogomol.wizards_reborn.client.render.item.WandCrystalsModels;
 import mod.maxbogomol.wizards_reborn.common.alchemypotion.RegisterAlchemyPotions;
+import mod.maxbogomol.wizards_reborn.common.arcaneenchantment.LifeRootsArcaneEnchantment;
 import mod.maxbogomol.wizards_reborn.common.arcaneenchantment.MagicBladeArcaneEnchantment;
 import mod.maxbogomol.wizards_reborn.common.arcaneenchantment.WissenMendingArcaneEnchantment;
 import mod.maxbogomol.wizards_reborn.common.block.*;
@@ -60,6 +61,7 @@ import mod.maxbogomol.wizards_reborn.common.item.equipment.*;
 import mod.maxbogomol.wizards_reborn.common.item.equipment.arcane.*;
 import mod.maxbogomol.wizards_reborn.common.item.equipment.arcanewood.*;
 import mod.maxbogomol.wizards_reborn.common.item.equipment.curio.*;
+import mod.maxbogomol.wizards_reborn.common.item.equipment.innocentwood.*;
 import mod.maxbogomol.wizards_reborn.common.itemgroup.WizardsRebornItemGroup;
 import mod.maxbogomol.wizards_reborn.common.knowledge.RegisterKnowledges;
 import mod.maxbogomol.wizards_reborn.common.knowledge.Researches;
@@ -552,6 +554,7 @@ public class WizardsReborn {
     //ARCANE ENCHANTMENT
     public static ArcaneEnchantment WISSEN_MENDING_ARCANE_ENCHANTMENT = new WissenMendingArcaneEnchantment(MOD_ID+":wissen_mending", 3);
     public static ArcaneEnchantment MAGIC_BLADE_ARCANE_ENCHANTMENT = new MagicBladeArcaneEnchantment(MOD_ID+":magic_blade", 5);
+    public static ArcaneEnchantment LIFE_ROOTS_ARCANE_ENCHANTMENT = new LifeRootsArcaneEnchantment(MOD_ID+":life_roots", 2);
 
     //CRYSTAL RITUALS
     public static CrystalRitual EMPTY_CRYSTAL_RITUAL = new CrystalRitual(MOD_ID+":empty");
@@ -912,12 +915,12 @@ public class WizardsReborn {
     public static final RegistryObject<Item> INNOCENT_WOOD_BOAT_ITEM = ITEMS.register("innocent_wood_boat", () -> new CustomBoatItem(false, CustomBoatEntity.Type.INNOCENT_WOOD, new Item.Properties().stacksTo(1)));
     public static final RegistryObject<Item> INNOCENT_WOOD_CHEST_BOAT_ITEM = ITEMS.register("innocent_wood_chest_boat", () -> new CustomBoatItem(true, CustomBoatEntity.Type.INNOCENT_WOOD, new Item.Properties().stacksTo(1)));
     public static final RegistryObject<Item> INNOCENT_WOOD_BRANCH = ITEMS.register("innocent_wood_branch", () -> new FuelItem(new Item.Properties(), 200));
-    public static final RegistryObject<Item> INNOCENT_WOOD_SWORD = ITEMS.register("innocent_wood_sword", () -> new ArcaneWoodSwordItem(CustomItemTier.INNOCENT_WOOD, 3, -2.4f, new Item.Properties(), INNOCENT_WOOD_BRANCH.get()));
-    public static final RegistryObject<Item> INNOCENT_WOOD_PICKAXE = ITEMS.register("innocent_wood_pickaxe", () -> new ArcaneWoodPickaxeItem(CustomItemTier.INNOCENT_WOOD, 1, -2.8f, new Item.Properties(), INNOCENT_WOOD_BRANCH.get()));
-    public static final RegistryObject<Item> INNOCENT_WOOD_AXE = ITEMS.register("innocent_wood_axe", () -> new ArcaneWoodAxeItem(CustomItemTier.INNOCENT_WOOD, 6, -3.1f, new Item.Properties(), INNOCENT_WOOD_BRANCH.get()));
-    public static final RegistryObject<Item> INNOCENT_WOOD_SHOVEL = ITEMS.register("innocent_wood_shovel", () -> new ArcaneWoodShovelItem(CustomItemTier.INNOCENT_WOOD, 1.5f, -3f, new Item.Properties(), INNOCENT_WOOD_BRANCH.get()));
-    public static final RegistryObject<Item> INNOCENT_WOOD_HOE = ITEMS.register("innocent_wood_hoe", () -> new ArcaneWoodHoeItem(CustomItemTier.INNOCENT_WOOD, -2, -1f, new Item.Properties(), INNOCENT_WOOD_BRANCH.get()));
-    public static final RegistryObject<Item> INNOCENT_WOOD_SCYTHE = ITEMS.register("innocent_wood_scythe", () -> new ArcaneWoodScytheItem(CustomItemTier.INNOCENT_WOOD, 4, -2.8f, new Item.Properties(), 0.5f, 0, INNOCENT_WOOD_BRANCH.get()));
+    public static final RegistryObject<Item> INNOCENT_WOOD_SWORD = ITEMS.register("innocent_wood_sword", () -> new InnocentWoodSwordItem(CustomItemTier.INNOCENT_WOOD, 3, -2.4f, new Item.Properties(), INNOCENT_WOOD_BRANCH.get()));
+    public static final RegistryObject<Item> INNOCENT_WOOD_PICKAXE = ITEMS.register("innocent_wood_pickaxe", () -> new InnocentWoodPickaxeItem(CustomItemTier.INNOCENT_WOOD, 1, -2.8f, new Item.Properties(), INNOCENT_WOOD_BRANCH.get()));
+    public static final RegistryObject<Item> INNOCENT_WOOD_AXE = ITEMS.register("innocent_wood_axe", () -> new InnocentWoodAxeItem(CustomItemTier.INNOCENT_WOOD, 6, -3.1f, new Item.Properties(), INNOCENT_WOOD_BRANCH.get()));
+    public static final RegistryObject<Item> INNOCENT_WOOD_SHOVEL = ITEMS.register("innocent_wood_shovel", () -> new InnocentWoodShovelItem(CustomItemTier.INNOCENT_WOOD, 1.5f, -3f, new Item.Properties(), INNOCENT_WOOD_BRANCH.get()));
+    public static final RegistryObject<Item> INNOCENT_WOOD_HOE = ITEMS.register("innocent_wood_hoe", () -> new InnocentWoodHoeItem(CustomItemTier.INNOCENT_WOOD, -2, -1f, new Item.Properties(), INNOCENT_WOOD_BRANCH.get()));
+    public static final RegistryObject<Item> INNOCENT_WOOD_SCYTHE = ITEMS.register("innocent_wood_scythe", () -> new InnocentWoodScytheItem(CustomItemTier.INNOCENT_WOOD, 4, -2.8f, new Item.Properties(), 0.5f, 0, INNOCENT_WOOD_BRANCH.get()));
     public static final RegistryObject<Item> INNOCENT_WOOD_MORTAR = ITEMS.register("innocent_wood_mortar", () -> new MortarItem(new Item.Properties().stacksTo(1), 400));
     public static final RegistryObject<Item> INNOCENT_WOOD_LEAVES_ITEM = ITEMS.register("innocent_wood_leaves", () -> new BlockItem(INNOCENT_WOOD_LEAVES.get(), new Item.Properties()));
     public static final RegistryObject<Item> INNOCENT_WOOD_SAPLING_ITEM = ITEMS.register("innocent_wood_sapling", () -> new BlockItem(INNOCENT_WOOD_SAPLING.get(), new Item.Properties()));
@@ -1850,6 +1853,7 @@ public class WizardsReborn {
     public static void setupArcaneEnchantments() {
         ArcaneEnchantments.register(WISSEN_MENDING_ARCANE_ENCHANTMENT);
         ArcaneEnchantments.register(MAGIC_BLADE_ARCANE_ENCHANTMENT);
+        ArcaneEnchantments.register(LIFE_ROOTS_ARCANE_ENCHANTMENT);
     }
 
     public static void setupCrystalRituals() {

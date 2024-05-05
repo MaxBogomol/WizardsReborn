@@ -1,7 +1,9 @@
 package mod.maxbogomol.wizards_reborn.common.item.equipment.arcanewood;
 
 import mod.maxbogomol.wizards_reborn.WizardsReborn;
+import mod.maxbogomol.wizards_reborn.api.arcaneenchantment.ArcaneEnchantmentUtils;
 import mod.maxbogomol.wizards_reborn.common.item.equipment.arcane.ArcaneSwordItem;
+import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResultHolder;
@@ -25,13 +27,29 @@ public class ArcaneWoodSwordItem extends ArcaneSwordItem {
         return 800;
     }
 
+    public int getRepairTick(ItemStack stack, Level world, Entity entity) {
+        int tick = repairTick(stack, world, entity) - (150 * getLifeRoots(stack));
+        if (tick < 50) tick = 50;
+        return tick;
+    }
+
+    public int getLifeRoots(ItemStack stack) {
+        return ArcaneEnchantmentUtils.getArcaneEnchantment(stack, WizardsReborn.LIFE_ROOTS_ARCANE_ENCHANTMENT);
+    }
+
+    public SoundEvent getRepairSound(ItemStack stack, Level world, Entity entity) {
+        return WizardsReborn.ARCANE_WOOD_PLACE_SOUND.get();
+    }
+
     @Override
     public void inventoryTick(ItemStack stack, Level world, Entity entity, int slot, boolean isSelected) {
         if (!world.isClientSide) {
-            if (entity.tickCount % repairTick(stack, world, entity) == 0 && stack.getDamageValue() > 0) {
+            if (entity.tickCount % getRepairTick(stack, world, entity) == 0 && stack.getDamageValue() > 0) {
                 stack.setDamageValue(stack.getDamageValue() - 1);
+                world.playSound(null, entity.getX(), entity.getY(), entity.getZ(), getRepairSound(stack, world, entity), SoundSource.PLAYERS, 0.05f, 2f);
             }
         }
+        super.inventoryTick(stack, world, entity, slot, isSelected);
     }
 
     @Override
@@ -48,7 +66,7 @@ public class ArcaneWoodSwordItem extends ArcaneSwordItem {
                 if (offStack.getItem().equals(repairItem)) {
                     offStack.setCount(offStack.getCount() - 1);
                     stack.setDamageValue(0);
-                    world.playSound(null, player.getX(), player.getY(), player.getZ(), WizardsReborn.ARCANE_WOOD_PLACE_SOUND.get(), SoundSource.PLAYERS, 1.0f, 1.5f);
+                    world.playSound(null, player.getX(), player.getY(), player.getZ(), getRepairSound(stack, world, player), SoundSource.PLAYERS, 1.0f, 1.5f);
                     return InteractionResultHolder.success(stack);
                 }
             }

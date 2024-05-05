@@ -11,7 +11,7 @@ public enum CustomItemTier implements Tier {
 
     ARCANE_GOLD(3, 450, 8f, 2f, 25, () -> Ingredient.of(WizardsReborn.ARCANE_GOLD_INGOT.get())),
     ARCANE_WOOD(2, 175, 5f, 0.5f, 15, () -> Ingredient.of(WizardsReborn.ARCANE_WOOD_BRANCH.get())),
-    INNOCENT_WOOD(2, 225, 5f, 1f, 20, () -> Ingredient.of(WizardsReborn.INNOCENT_WOOD_BRANCH.get()));
+    INNOCENT_WOOD(3, 225, 6.5f, 1f, 20, () -> Ingredient.of(WizardsReborn.INNOCENT_WOOD_BRANCH.get()));
 
     private final int harvestLevel;
     private final int maxUses;
