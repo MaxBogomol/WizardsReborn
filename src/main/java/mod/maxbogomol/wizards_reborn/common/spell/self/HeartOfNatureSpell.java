@@ -26,10 +26,12 @@ public class HeartOfNatureSpell extends SelfSpell {
         return WizardsReborn.earthSpellColor;
     }
 
+    @Override
     public int getCooldown() {
-        return 150;
+        return 250;
     }
 
+    @Override
     public int getWissenCost() {
         return 200;
     }

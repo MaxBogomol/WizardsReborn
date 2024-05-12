@@ -39,6 +39,8 @@ public final class PacketHandler {
         HANDLER.registerMessage(id++, SetCurrentSpellInSetPacket.class, SetCurrentSpellInSetPacket::encode, SetCurrentSpellInSetPacket::decode, SetCurrentSpellInSetPacket::handle);
         HANDLER.registerMessage(id++, SetWissenWandModePacket.class, SetWissenWandModePacket::encode, SetWissenWandModePacket::decode, SetWissenWandModePacket::handle);
         HANDLER.registerMessage(id++, OpenBagPacket.class, OpenBagPacket::encode, OpenBagPacket::decode, OpenBagPacket::handle);
+        HANDLER.registerMessage(id++, SetAdditionalFovPacket.class, SetAdditionalFovPacket::encode, SetAdditionalFovPacket::decode, SetAdditionalFovPacket::handle);
+        HANDLER.registerMessage(id++, AddScreenshakePacket.class, AddScreenshakePacket::encode, AddScreenshakePacket::decode, AddScreenshakePacket::handle);
 
         HANDLER.registerMessage(id++, WissenAltarBurstEffectPacket.class, WissenAltarBurstEffectPacket::encode, WissenAltarBurstEffectPacket::decode, WissenAltarBurstEffectPacket::handle);
         HANDLER.registerMessage(id++, WissenCrystallizerBurstEffectPacket.class, WissenCrystallizerBurstEffectPacket::encode, WissenCrystallizerBurstEffectPacket::decode, WissenCrystallizerBurstEffectPacket::handle);
@@ -89,6 +91,7 @@ public final class PacketHandler {
         HANDLER.registerMessage(id++, WaterBreathingSpellEffectPacket.class, WaterBreathingSpellEffectPacket::encode, WaterBreathingSpellEffectPacket::decode, WaterBreathingSpellEffectPacket::handle);
         HANDLER.registerMessage(id++, AirFlowSpellEffectPacket.class, AirFlowSpellEffectPacket::encode, AirFlowSpellEffectPacket::decode, AirFlowSpellEffectPacket::handle);
         HANDLER.registerMessage(id++, FireShieldSpellEffectPacket.class, FireShieldSpellEffectPacket::encode, FireShieldSpellEffectPacket::decode, FireShieldSpellEffectPacket::handle);
+        HANDLER.registerMessage(id++, BlinkSpellEffectPacket.class, BlinkSpellEffectPacket::encode, BlinkSpellEffectPacket::decode, BlinkSpellEffectPacket::handle);
         HANDLER.registerMessage(id++, AuraSpellCastEffectPacket.class, AuraSpellCastEffectPacket::encode, AuraSpellCastEffectPacket::decode, AuraSpellCastEffectPacket::handle);
         HANDLER.registerMessage(id++, AuraSpellBurstEffectPacket.class, AuraSpellBurstEffectPacket::encode, AuraSpellBurstEffectPacket::decode, AuraSpellBurstEffectPacket::handle);
         HANDLER.registerMessage(id++, FrostAuraSpellBurstEffectPacket.class, FrostAuraSpellBurstEffectPacket::encode, FrostAuraSpellBurstEffectPacket::decode, FrostAuraSpellBurstEffectPacket::handle);

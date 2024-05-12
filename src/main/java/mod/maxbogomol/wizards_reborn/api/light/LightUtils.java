@@ -15,6 +15,8 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.phys.HitResult;
 import net.minecraft.world.phys.Vec3;
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.api.distmarker.OnlyIn;
 
 import java.awt.*;
 
@@ -84,6 +86,7 @@ public class LightUtils {
         return new LightRayHitResult(end, distance, hitTile);
     }
 
+    @OnlyIn(Dist.CLIENT)
     public static void renderLightRay(Vec3 from, Vec3 to, float rayDistance, float maxRayDistance, Color color, float partialTicks, PoseStack ms) {
         MultiBufferSource bufferDelayed = WorldRenderHandler.getDelayedRender();
 

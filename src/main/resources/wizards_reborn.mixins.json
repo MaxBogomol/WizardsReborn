@@ -20,7 +20,8 @@
     "client.FoxRendererMixin",
     "client.ClientMusicChoiceMixin",
     "client.AbstractClientPlayerMixin",
-    "client.GuiGraphicsMixin"
+    "client.GuiGraphicsMixin",
+    "client.CameraMixin"
   ],
   "minVersion": "0.8",
   "injectors": {

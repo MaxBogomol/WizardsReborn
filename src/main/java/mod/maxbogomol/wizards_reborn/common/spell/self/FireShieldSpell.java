@@ -26,10 +26,12 @@ public class FireShieldSpell extends SelfSpell {
         return WizardsReborn.fireSpellColor;
     }
 
+    @Override
     public int getCooldown() {
         return 150;
     }
 
+    @Override
     public int getWissenCost() {
         return 200;
     }
@@ -50,5 +52,6 @@ public class FireShieldSpell extends SelfSpell {
         float b = color.getBlue() / 255f;
 
         PacketHandler.sendToTracking(player.level(), player.getOnPos(), new FireShieldSpellEffectPacket((float) player.getX(), (float) player.getY() + (player.getBbHeight() / 2), (float) player.getZ(), r, g, b));
+        player.setTicksFrozen(0);
     }
 }

@@ -27,10 +27,12 @@ public class AirFlowSpell extends SelfSpell {
         return WizardsReborn.airSpellColor;
     }
 
+    @Override
     public int getCooldown() {
         return 150;
     }
 
+    @Override
     public int getWissenCost() {
         return 80;
     }
@@ -48,6 +50,9 @@ public class AirFlowSpell extends SelfSpell {
         Vec3 vel = player.getViewVector(0).scale(scale);
         if (player.isFallFlying()) {
             vel = vel.scale(0.65f);
+        }
+        if (player.getTicksFrozen() > 0) {
+            vel = vel.scale(0.50f);
         }
 
         player.push(vel.x(), vel.y(), vel.z());

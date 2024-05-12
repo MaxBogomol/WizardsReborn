@@ -9,9 +9,10 @@ import net.minecraftforge.event.TickEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 
-public class FogRendererHandler {
+public class ViewHandler {
     public static int morEffectRoll = 0;
     public static float morEffectFov = 0;
+    public static float additionalFov = 0;
 
     @Mod.EventBusSubscriber(bus=Mod.EventBusSubscriber.Bus.FORGE, value = Dist.CLIENT)
     public static class RegistryEvents {
@@ -41,13 +42,22 @@ public class FogRendererHandler {
 
         @SubscribeEvent
         public static void onFov(ViewportEvent.ComputeFov event) {
+            double fov = event.getFOV();
+            boolean changed = false;
+
+            if (additionalFov > 0) {
+                fov = fov + (additionalFov - (Minecraft.getInstance().getPartialTick()));
+                changed = true;
+            }
+
             if (hasMorEffect() || morEffectFov > 0) {
-                float fov = (float) (event.getFOV() - (20f * gerMorEffectFovTicks((float) event.getPartialTick())));
+                fov = (float) (fov - (20f * gerMorEffectFovTicks((float) event.getPartialTick())));
                 if (fov < 5f) {
                     fov = 5f;
                 }
-                event.setFOV(fov);
+                changed = true;
             }
+            if (changed) event.setFOV(fov);
         }
 
         @SubscribeEvent
@@ -76,6 +86,13 @@ public class FogRendererHandler {
                     if (morEffectFov < 0) {
                         morEffectFov = 0;
                     }
+                }
+
+                if (additionalFov > 0) {
+                    additionalFov = additionalFov - 1f;
+                }
+                if (additionalFov < 0) {
+                    additionalFov = 0;
                 }
             }
         }

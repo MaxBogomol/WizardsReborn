@@ -103,7 +103,7 @@ public class RaySpell extends Spell {
                         projectile.hurtMarked = true;
 
                         if (WissenItemUtils.canRemoveWissen(stack, 1)) {
-                            if (projectile.tickCount % 7 == 0) {
+                            if (projectile.tickCount % tickCost() == 0) {
                                 WissenItemUtils.removeWissen(stack, 1);
                             }
                         } else {
@@ -159,6 +159,8 @@ public class RaySpell extends Spell {
                 }
             }
 
+            rayTick(entity);
+
             if (spellData.getInt("ticks") <= 0) {
                 if (spellData.getInt("ticks_left") <= 0) {
                     entity.remove();
@@ -179,23 +181,37 @@ public class RaySpell extends Spell {
                 updatePos(entity);
                 updateRot(entity);
 
-                float distance = (float) Math.sqrt(Math.pow(entity.getX() - ray.getLocation().x, 2) + Math.pow(entity.getY() - ray.getLocation().y, 2) + Math.pow(entity.getZ() - ray.getLocation().z, 2));
-                Vec3 pos = entity.position();
-                Vec3 posStart = entity.getLookAngle().add(entity.position());
-                Vec3 posEnd = entity.getLookAngle().scale(distance).add(entity.position());
+                if (hasBurst(entity)) {
+                    float distance = (float) Math.sqrt(Math.pow(entity.getX() - ray.getLocation().x, 2) + Math.pow(entity.getY() - ray.getLocation().y, 2) + Math.pow(entity.getZ() - ray.getLocation().z, 2));
+                    Vec3 pos = entity.position();
+                    Vec3 posStart = entity.getLookAngle().add(entity.position());
+                    Vec3 posEnd = entity.getLookAngle().scale(distance).add(entity.position());
 
-                Color color = getColor();
-                float r = color.getRed() / 255f;
-                float g = color.getGreen() / 255f;
-                float b = color.getBlue() / 255f;
+                    Color color = getColor();
+                    float r = color.getRed() / 255f;
+                    float g = color.getGreen() / 255f;
+                    float b = color.getBlue() / 255f;
 
-                PacketHandler.sendToTracking(entity.level(), new BlockPos((int) pos.x, (int) pos.y, (int) pos.z), new RaySpellEffectPacket((float) posStart.x, (float) posStart.y + 0.2F, (float) posStart.z, (float) posEnd.x, (float) posEnd.y + 0.4F, (float) posEnd.z, r, g, b, burst));
+                    PacketHandler.sendToTracking(entity.level(), new BlockPos((int) pos.x, (int) pos.y, (int) pos.z), new RaySpellEffectPacket((float) posStart.x, (float) posStart.y + 0.2F, (float) posStart.z, (float) posEnd.x, (float) posEnd.y + 0.4F, (float) posEnd.z, r, g, b, burst));
+                }
             }
 
-            if (random.nextFloat() < 0.5) {
+            if (random.nextFloat() < 0.5 && hasSound(entity)) {
                 entity.level().playSound(WizardsReborn.proxy.getPlayer(), entity.getX(), entity.getY(), entity.getZ(), WizardsReborn.SPELL_BURST_SOUND.get(), SoundSource.PLAYERS, 0.25f, (float) (0.5f + ((random.nextFloat() - 0.5D) / 4)));
             }
         }
+    }
+
+    public void rayTick(SpellProjectileEntity entity) {
+
+    }
+
+    public boolean hasBurst(SpellProjectileEntity entity) {
+        return true;
+    }
+
+    public boolean hasSound(SpellProjectileEntity entity) {
+        return true;
     }
 
     public void updatePos(SpellProjectileEntity entity) {
@@ -248,6 +264,10 @@ public class RaySpell extends Spell {
         return animation;
     }
 
+    public int tickCost() {
+        return 7;
+    }
+
     @Override
     @OnlyIn(Dist.CLIENT)
     public void render(SpellProjectileEntity entity, float entityYaw, float partialTicks, PoseStack stack, MultiBufferSource buffer, int light) {
@@ -291,10 +311,10 @@ public class RaySpell extends Spell {
         if (width < 0f) width = 0f;
 
         float distance = (float) Math.sqrt(Math.pow(entity.getX() - ray.getLocation().x, 2) + Math.pow(entity.getY() - ray.getLocation().y, 2) + Math.pow(entity.getZ() - ray.getLocation().z, 2));
-        RenderUtils.ray(stack, bufferDelayed, 0.1f * width, (distance - offset) * width, Mth.lerp(distance / 25f, 1f, 0.5f), r, g, b, 1, r, g, b, 0.1F);
+        RenderUtils.ray(stack, bufferDelayed, 0.1f * width, (distance - offset) * width, Mth.lerp(distance / getRayDistance(), 1f, 0.5f), r, g, b, 1, r, g, b, 0.1F);
         stack.translate(-0.05f, 0, 0);
         stack.mulPose(Axis.XP.rotationDegrees(-(entity.tickCount + partialTicks) * 10f));
-        RenderUtils.ray(stack, bufferDelayed, 0.15f * width, (distance - offset + 0.1f) * width, Mth.lerp(distance / 25f, 1f, 0.5f), r, g, b, 0.5F, r, g, b, 0.05F);
+        RenderUtils.ray(stack, bufferDelayed, 0.15f * width, (distance - offset + 0.1f) * width, Mth.lerp(distance / getRayDistance(), 1f, 0.5f), r, g, b, 0.5F, r, g, b, 0.05F);
 
         stack.popPose();
     }

@@ -418,7 +418,6 @@ public class WissenTranslatorTileEntity extends ExposedTileSimpleInventory imple
             }
 
             if (level.isLoaded(new BlockPos(Mth.floor(blockX), Mth.floor(blockY), Mth.floor(blockZ)))) {
-
                 tag.putFloat("blockX", X);
                 tag.putFloat("blockY", Y);
                 tag.putFloat("blockZ", Z);

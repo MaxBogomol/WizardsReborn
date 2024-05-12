@@ -1,6 +1,8 @@
 package mod.maxbogomol.wizards_reborn.client.event;
 
+import net.minecraft.client.Camera;
 import net.minecraft.client.Minecraft;
+import net.minecraft.util.RandomSource;
 import net.minecraftforge.event.TickEvent;
 
 public class ClientTickHandler {
@@ -13,6 +15,8 @@ public class ClientTickHandler {
     public static int wissenCountOld = 0;
     public static int wissenCountMax = 0;
     public static int wissenTick = 0;
+
+    private static RandomSource RANDOM = RandomSource.create();
 
     public static void clientTickEnd(TickEvent.ClientTickEvent event) {
         if (event.phase == TickEvent.Phase.START) {
@@ -27,7 +31,6 @@ public class ClientTickHandler {
         }
 
         if (event.phase == TickEvent.Phase.END) {
-
             if (!Minecraft.getInstance().isPaused()) {
                 ticksInGame++;
                 partialTicks = 0;
@@ -38,6 +41,9 @@ public class ClientTickHandler {
                     wissenTick--;
                 }
             }
+
+            Camera camera = Minecraft.getInstance().gameRenderer.getMainCamera();
+            ScreenshakeHandler.clientTick(camera, RANDOM);
         }
     }
 }

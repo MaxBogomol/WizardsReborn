@@ -36,5 +36,6 @@ public class FireProjectileSpell extends ProjectileSpell {
             fire = 10;
         }
         target.setSecondsOnFire(fire);
+        target.setTicksFrozen(0);
     }
 }

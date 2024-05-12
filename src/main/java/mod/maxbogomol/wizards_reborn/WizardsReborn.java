@@ -73,6 +73,7 @@ import mod.maxbogomol.wizards_reborn.common.recipe.*;
 import mod.maxbogomol.wizards_reborn.common.spell.MagicSproutSpell;
 import mod.maxbogomol.wizards_reborn.common.spell.aura.*;
 import mod.maxbogomol.wizards_reborn.common.spell.charge.*;
+import mod.maxbogomol.wizards_reborn.common.spell.look.BlinkSpell;
 import mod.maxbogomol.wizards_reborn.common.spell.projectile.*;
 import mod.maxbogomol.wizards_reborn.common.spell.ray.*;
 import mod.maxbogomol.wizards_reborn.common.spell.self.*;
@@ -530,7 +531,7 @@ public class WizardsReborn {
     public static Spell WATER_BREATHING_SPELL = new WaterBreathingSpell(MOD_ID+":water_breathing", 12);
     public static Spell AIR_FLOW_SPELL = new AirFlowSpell(MOD_ID+":air_flow", 12);
     public static Spell FIRE_SHIELD_SPELL = new FireShieldSpell(MOD_ID+":fire_shield", 12);
-    public static Spell BLINK_SPELL = new BlinkSpell(MOD_ID+":blink", 12);
+    public static Spell BLINK_SPELL = new BlinkSpell(MOD_ID+":blink", 12, false);
     public static Spell MAGIC_SPROUT_SPELL = new MagicSproutSpell(MOD_ID+":magic_sprout", 12);
     public static Spell EARTH_CHARGE_SPELL = new EarthChargeSpell(MOD_ID+":earth_charge", 10);
     public static Spell WATER_CHARGE_SPELL = new WaterChargeSpell(MOD_ID+":water_charge", 10);
@@ -549,7 +550,10 @@ public class WizardsReborn {
     public static Spell HOLY_AURA_SPELL = new HolyAuraSpell(MOD_ID+":holy_aura", 10);
     public static Spell CURSE_AURA_SPELL = new CurseAuraSpell(MOD_ID+":curse_aura", 10);
     public static Spell ICICLE_SPELL = new IcicleSpell(MOD_ID+":icicle", 15);
-    public static Spell SHARP_BLINK_SPELL = new BlinkSpell(MOD_ID+":sharp_blink", 12);
+    public static Spell SHARP_BLINK_SPELL = new BlinkSpell(MOD_ID+":sharp_blink", 12, true);
+    public static Spell LIGHT_RAY_SPELL = new LightRaySpell(MOD_ID+":light_ray", 15);
+    public static Spell REPENTANCE_SPELL = new LightRaySpell(MOD_ID+":repentance", 15);
+    public static Spell RENUNCIATION_SPELL = new LightRaySpell(MOD_ID+":renunciation", 15);
 
     //ARCANE ENCHANTMENT
     public static ArcaneEnchantment WISSEN_MENDING_ARCANE_ENCHANTMENT = new WissenMendingArcaneEnchantment(MOD_ID+":wissen_mending", 3);
@@ -956,8 +960,8 @@ public class WizardsReborn {
 
     public static final RegistryObject<Item> MOR_ITEM = ITEMS.register("mor", () -> new MorItem(MOR.get(), new Item.Properties().food(MOR_FOOD), 1500, 1800));
     public static final RegistryObject<Item> MOR_BLOCK_ITEM = ITEMS.register("mor_block", () -> new BlockItem(MOR_BLOCK.get(), new Item.Properties()));
-    public static final RegistryObject<Item> ELDER_MOR_ITEM = ITEMS.register("elder_mor", () -> new BlockItem(ELDER_MOR.get(), new Item.Properties().food(MOR_FOOD)));
-    public static final RegistryObject<Item> ELDER_MOR_BLOCK_ITEM = ITEMS.register("elder_mor_block", () -> new MorItem(ELDER_MOR_BLOCK.get(), new Item.Properties(), 1700, 2100));
+    public static final RegistryObject<Item> ELDER_MOR_ITEM = ITEMS.register("elder_mor", () -> new MorItem(ELDER_MOR.get(), new Item.Properties().food(MOR_FOOD), 1700, 2100));
+    public static final RegistryObject<Item> ELDER_MOR_BLOCK_ITEM = ITEMS.register("elder_mor_block", () -> new BlockItem(ELDER_MOR_BLOCK.get(), new Item.Properties()));
 
     public static final RegistryObject<Item> PETALS = ITEMS.register("petals", () -> new Item(new Item.Properties()));
     public static final RegistryObject<Item> FLOWER_FERTILIZER = ITEMS.register("flower_fertilizer", () -> new BoneMealItem(new Item.Properties()));
@@ -1848,6 +1852,9 @@ public class WizardsReborn {
         Spells.register(CURSE_AURA_SPELL);
         Spells.register(ICICLE_SPELL);
         Spells.register(SHARP_BLINK_SPELL);
+        Spells.register(LIGHT_RAY_SPELL);
+        Spells.register(REPENTANCE_SPELL);
+        Spells.register(RENUNCIATION_SPELL);
     }
 
     public static void setupArcaneEnchantments() {

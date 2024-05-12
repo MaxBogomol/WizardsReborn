@@ -26,10 +26,12 @@ public class WaterBreathingSpell extends SelfSpell {
         return WizardsReborn.waterSpellColor;
     }
 
+    @Override
     public int getCooldown() {
         return 150;
     }
 
+    @Override
     public int getWissenCost() {
         return 200;
     }

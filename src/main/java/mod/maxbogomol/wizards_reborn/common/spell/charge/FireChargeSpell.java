@@ -42,5 +42,6 @@ public class FireChargeSpell extends ChargeSpell {
             fire = 10;
         }
         target.setSecondsOnFire(fire);
+        target.setTicksFrozen(0);
     }
 }

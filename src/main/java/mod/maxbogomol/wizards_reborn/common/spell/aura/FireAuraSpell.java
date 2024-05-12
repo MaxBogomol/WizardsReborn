@@ -47,6 +47,7 @@ public class FireAuraSpell extends AuraSpell {
                             fire = 100;
                         }
                         target.setSecondsOnFire(fire);
+                        target.setTicksFrozen(0);
 
                         Color color = getColor();
                         float r = color.getRed() / 255f;
@@ -56,6 +57,7 @@ public class FireAuraSpell extends AuraSpell {
                         PacketHandler.sendToTracking(world, player.getOnPos(), new FireRaySpellEffectPacket((float) target.getX(), (float) target.getY() + (target.getBbHeight() / 2), (float) target.getZ(), r, g, b));
                     } else {
                         livingEntity.addEffect(new MobEffectInstance(MobEffects.FIRE_RESISTANCE, 200, 0, true, false, true));
+                        livingEntity.setTicksFrozen(0);
                     }
                 }
             }

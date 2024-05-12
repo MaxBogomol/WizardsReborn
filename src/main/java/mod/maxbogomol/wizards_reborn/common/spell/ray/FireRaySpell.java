@@ -61,6 +61,7 @@ public class FireRaySpell extends RaySpell {
                         fire = 10;
                     }
                     target.setSecondsOnFire(fire);
+                    target.setTicksFrozen(0);
                 }
             }
         }
