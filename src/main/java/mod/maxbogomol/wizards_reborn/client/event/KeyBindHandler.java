@@ -47,14 +47,18 @@ public class KeyBindHandler {
     @SubscribeEvent
     public static void onKey(InputEvent.Key event) {
         if (event.getAction() == InputConstants.PRESS) {
-            spellsToggle(event.getKey());
+            if (!Minecraft.getInstance().isPaused()) {
+                spellsToggle(event.getKey());
+            }
         }
     }
 
     @SubscribeEvent
     public static void onMouseKey(InputEvent.MouseButton event) {
         if (event.getAction() == InputConstants.PRESS) {
-            spellsToggle(event.getButton());
+            if (!Minecraft.getInstance().isPaused()) {
+                spellsToggle(event.getButton());
+            }
         }
     }
 

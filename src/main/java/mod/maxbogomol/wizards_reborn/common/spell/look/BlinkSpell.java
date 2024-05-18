@@ -59,7 +59,7 @@ public class BlinkSpell extends LookSpell {
 
     @Override
     public void lookSpell(Level world, Player player, InteractionHand hand) {
-        Vec3 pos = getHitPos(world, player, hand);
+        Vec3 pos = getHitPos(world, player, hand).getPosHit();
 
         Color color = getColor();
         float r = color.getRed() / 255f;

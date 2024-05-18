@@ -14,6 +14,8 @@ import net.minecraftforge.registries.RegistryObject;
 import vectorwing.farmersdelight.common.utility.TextUtils;
 
 public class FarmersDelightIntegration {
+    public static boolean LOADED;
+
     public static final DeferredRegister<Item> ITEMS = DeferredRegister.create(ForgeRegistries.ITEMS, WizardsReborn.MOD_ID);
 
     public static final RegistryObject<Item> ARCANE_GOLD_KNIFE = ITEMS.register("arcane_gold_knife", () -> isLoaded() ? LoadedOnly.makeArcaneGoldKnife() : new Item(new Item.Properties()));
@@ -33,23 +35,29 @@ public class FarmersDelightIntegration {
             return new InnocentWoodKnifeItem(CustomItemTier.INNOCENT_WOOD, 0.5F, -2.0F, new Item.Properties(), WizardsReborn.INNOCENT_WOOD_BRANCH.get());
         }
 
-        public static void addKnifeJEIInfo(IRecipeRegistration registration) {
-            registration.addIngredientInfo(new ItemStack(ARCANE_GOLD_KNIFE.get()), VanillaTypes.ITEM_STACK, TextUtils.getTranslation("jei.info.knife"));
-            registration.addIngredientInfo(new ItemStack(ARCANE_WOOD_KNIFE.get()), VanillaTypes.ITEM_STACK, TextUtils.getTranslation("jei.info.knife"));
-            registration.addIngredientInfo(new ItemStack(INNOCENT_WOOD_KNIFE.get()), VanillaTypes.ITEM_STACK, TextUtils.getTranslation("jei.info.knife"));
-        }
-
         public static boolean canMagicBladeEnchant(Item item) {
             return (item instanceof ArcaneKnifeItem);
         }
     }
 
+    public static class JeiLoadedOnly {
+        public static void addKnifeJEIInfo(IRecipeRegistration registration) {
+            registration.addIngredientInfo(new ItemStack(ARCANE_GOLD_KNIFE.get()), VanillaTypes.ITEM_STACK, TextUtils.getTranslation("jei.info.knife"));
+            registration.addIngredientInfo(new ItemStack(ARCANE_WOOD_KNIFE.get()), VanillaTypes.ITEM_STACK, TextUtils.getTranslation("jei.info.knife"));
+            registration.addIngredientInfo(new ItemStack(INNOCENT_WOOD_KNIFE.get()), VanillaTypes.ITEM_STACK, TextUtils.getTranslation("jei.info.knife"));
+        }
+    }
+
     public static void init(IEventBus eventBus) {
-        ITEMS.register(eventBus);
+        LOADED = ModList.get().isLoaded("farmersdelight");
+
+        if (isLoaded()) {
+            ITEMS.register(eventBus);
+        }
     }
 
     public static boolean isLoaded() {
-        return ModList.get().isLoaded("farmersdelight");
+        return LOADED;
     }
 
     public static boolean canMagicBladeEnchant(Item item) {

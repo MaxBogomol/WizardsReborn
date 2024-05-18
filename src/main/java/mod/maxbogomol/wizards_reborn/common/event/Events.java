@@ -8,6 +8,7 @@ import mod.maxbogomol.wizards_reborn.common.capability.IKnowledge;
 import mod.maxbogomol.wizards_reborn.common.capability.KnowledgeProvider;
 import mod.maxbogomol.wizards_reborn.common.command.WizardsRebornCommand;
 import mod.maxbogomol.wizards_reborn.common.entity.SpellProjectileEntity;
+import mod.maxbogomol.wizards_reborn.common.item.equipment.ArcaneFortressArmorItem;
 import mod.maxbogomol.wizards_reborn.common.network.KnowledgeUpdatePacket;
 import mod.maxbogomol.wizards_reborn.common.network.PacketHandler;
 import net.minecraft.nbt.CompoundTag;
@@ -63,6 +64,8 @@ public class Events {
             for (Knowledge knowledge : Knowledges.getKnowledges()) {
                 knowledge.addTick(player);
             }
+
+            ArcaneFortressArmorItem.playerTick(event);
         }
     }
 

@@ -14,7 +14,7 @@ public class SelfSpell extends Spell {
 
     @Override
     public void useSpell(Level world, Player player, InteractionHand hand) {
-        if (!world.isClientSide && canSelfSpell(world, player, hand)) {
+        if (!world.isClientSide) {
             ItemStack stack = player.getItemInHand(hand);
 
             CompoundTag stats = getStats(stack);
@@ -24,6 +24,13 @@ public class SelfSpell extends Spell {
             spellSound(player, world);
             selfSpell(world, player, hand);
         }
+    }
+
+    public boolean canSpell(Level world, Player player, InteractionHand hand) {
+        if (super.canSpell(world, player, hand)) {
+            return canSelfSpell(world, player, hand);
+        }
+        return false;
     }
 
     public boolean canSelfSpell(Level world, Player player, InteractionHand hand) {

@@ -1168,6 +1168,7 @@ public class ArcanemiconChapters {
                         new BlockEntry(ARCANE_PEDESTAL_ITEM, new ItemStack(WizardsReborn.ARCANE_FORTRESS_LEGGINGS.get())),
                         new BlockEntry(ARCANE_PEDESTAL_ITEM, new ItemStack(WizardsReborn.ARCANE_FORTRESS_BOOTS.get()))
                 ),
+                new TitlePage("wizards_reborn.arcanemicon.page.arcane_fortress_armor.arcane_bastion"),
                 new ArcaneWorkbenchPage(new ItemStack(WizardsReborn.ARCANE_FORTRESS_HELMET.get()),
                         ARCANE_GOLD_NUGGET_ITEM, ARCANE_GOLD_NUGGET_ITEM, ARCANE_GOLD_NUGGET_ITEM,
                         ARCANE_GOLD_NUGGET_ITEM, new ItemStack(WizardsReborn.ARCANE_GOLD_HELMET.get()), ARCANE_GOLD_NUGGET_ITEM,
@@ -2023,7 +2024,9 @@ public class ArcanemiconChapters {
                 new TextPage("wizards_reborn.arcanemicon.page.special_thanks.6"),
                 new TextPage("wizards_reborn.arcanemicon.page.special_thanks.7"),
                 new ThanksHeadPage("wizards_reborn.arcanemicon.page.special_thanks.8", new ResourceLocation(WizardsReborn.MOD_ID, "textures/gui/arcanemicon/heads/onixthecat_head.png")),
-                new ThanksHeadPage("wizards_reborn.arcanemicon.page.special_thanks.9", new ResourceLocation(WizardsReborn.MOD_ID, "textures/gui/arcanemicon/heads/idark_head.png"))
+                new ThanksHeadPage("wizards_reborn.arcanemicon.page.special_thanks.9", new ResourceLocation(WizardsReborn.MOD_ID, "textures/gui/arcanemicon/heads/idark_head.png")),
+                new ThanksHeadPage("wizards_reborn.arcanemicon.page.special_thanks.10", new ResourceLocation(WizardsReborn.MOD_ID, "textures/gui/arcanemicon/heads/ishi_sama_head.png")),
+                new ThanksHeadPage("wizards_reborn.arcanemicon.page.special_thanks.11", new ResourceLocation(WizardsReborn.MOD_ID, "textures/gui/arcanemicon/heads/falaut_head.png"))
         );
 
         PROGRESSION = new Chapter(
@@ -2171,7 +2174,8 @@ public class ArcanemiconChapters {
                 new TitledBlockPage("wizards_reborn.arcanemicon.page.crystal_rituals.0",
                         new BlockEntry(RUNIC_PEDESTAL_ITEM, new ItemStack(WizardsReborn.EARTH_CRYSTAL.get()))
                 ),
-                new TextPage("wizards_reborn.arcanemicon.page.crystal_rituals.1")
+                new TextPage("wizards_reborn.arcanemicon.page.crystal_rituals.1"),
+                new TitlePage("wizards_reborn.arcanemicon.page.arcane_wand.resonance")
         );
 
         ARTIFICIAL_FERTILITY = new Chapter(

@@ -8,6 +8,7 @@ import net.minecraft.world.InteractionHand;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.phys.Vec3;
 
 public class BlockLookSpell extends LookSpell {
     public BlockLookSpell(String id, int points) {
@@ -27,6 +28,16 @@ public class BlockLookSpell extends LookSpell {
         CompoundTag stats = getStats(stack);
 
         int focusLevel = CrystalUtils.getStatLevel(stats, WizardsReborn.FOCUS_CRYSTAL_STAT);
-        return getLookDistance() + (getLookAdditionalDistance() * focusLevel);
+        return getBlockDistance() + (getBlockAdditionalDistance() * focusLevel);
+    }
+
+    @Override
+    public boolean canLookSpell(Level world, Player player, InteractionHand hand) {
+        return getBlockHit(world, player, hand).hasBlockHit();
+    }
+
+    public HitResult getBlockHit(Level world, Player player, InteractionHand hand) {
+        Vec3 lookPos = getHitPos(world, player, hand).getPosHit();
+        return getHitPos(world, player, hand, lookPos, new Vec3(lookPos.x(), lookPos.y() - getBlockDistance(world, player, hand), lookPos.z()));
     }
 }

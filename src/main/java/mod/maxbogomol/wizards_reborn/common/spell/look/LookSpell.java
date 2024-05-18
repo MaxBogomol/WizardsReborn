@@ -25,7 +25,7 @@ public class LookSpell extends Spell {
 
     @Override
     public void useSpell(Level world, Player player, InteractionHand hand) {
-        if (!world.isClientSide && canLookSpell(world, player, hand)) {
+        if (!world.isClientSide) {
             ItemStack stack = player.getItemInHand(hand);
 
             CompoundTag stats = getStats(stack);
@@ -35,6 +35,13 @@ public class LookSpell extends Spell {
             spellSound(player, world);
             lookSpell(world, player, hand);
         }
+    }
+
+    public boolean canSpell(Level world, Player player, InteractionHand hand) {
+        if (super.canSpell(world, player, hand)) {
+            return canLookSpell(world, player, hand);
+        }
+        return false;
     }
 
     public float getLookDistance() {
@@ -53,7 +60,7 @@ public class LookSpell extends Spell {
         return getLookDistance() + (getLookAdditionalDistance() * focusLevel);
     }
 
-    public Vec3 getHitPos(Level world, Player player, InteractionHand hand, Vec3 start, Vec3 endPos) {
+    public HitResult getHitPos(Level world, Player player, InteractionHand hand, Vec3 start, Vec3 endPos) {
         float distance = (float) Math.sqrt(Math.pow(start.x() - endPos.x, 2) + Math.pow(start.y() - endPos.y, 2) + Math.pow(start.z() - endPos.z, 2));
         float X = (float) start.x();
         float Y = (float) start.y();
@@ -61,8 +68,8 @@ public class LookSpell extends Spell {
         float oldX = X;
         float oldY = Y;
         float oldZ = Z;
-        for (float i = 0; i < distance * 10; i++) {
-            float dst = (distance * 10);
+        for (float i = 0; i < distance * 16; i++) {
+            float dst = (distance * 16);
 
             double dX = start.x() - endPos.x();
             double dY = start.y() - endPos.y();
@@ -80,10 +87,11 @@ public class LookSpell extends Spell {
 
             BlockHitResult blockHitResult = world.getBlockState(blockPos).getShape(world, blockPos).clip(start, endPos, blockPos);
             if (blockHitResult != null) {
+                boolean isBlock = !world.getBlockState(blockHitResult.getBlockPos()).isAir();
                 if (canHitSpell(world, player, hand, new Vec3(X, Y, Z))) {
-                    return blockHitResult.getLocation();
+                    return new HitResult(blockHitResult.getLocation(), isBlock);
                 } else {
-                    return new Vec3(oldX, oldY, oldZ);
+                    return new HitResult(new Vec3(oldX, oldY, oldZ), isBlock);
                 }
             }
 
@@ -91,10 +99,10 @@ public class LookSpell extends Spell {
             oldY = Y;
             oldZ = Z;
         }
-        return new Vec3(X, Y, Z);
+        return new HitResult(new Vec3(X, Y, Z), false);
     }
 
-    public Vec3 getHitPos(Level world, Player player, InteractionHand hand) {
+    public HitResult getHitPos(Level world, Player player, InteractionHand hand) {
         float distance = getLookDistance(world, player, hand);
         return getHitPos(world, player, hand, player.getEyePosition(), player.getEyePosition().add(player.getLookAngle().scale(distance)));
     }
@@ -137,5 +145,23 @@ public class LookSpell extends Spell {
             }
         }
         return list;
+    }
+
+    public static class HitResult {
+        public Vec3 posHit;
+        public boolean blockHit;
+
+        public HitResult(Vec3 posHit, boolean blockHit) {
+            this.posHit = posHit;
+            this.blockHit = blockHit;
+        }
+
+        public Vec3 getPosHit() {
+            return posHit;
+        }
+
+        public boolean hasBlockHit() {
+            return blockHit;
+        }
     }
 }

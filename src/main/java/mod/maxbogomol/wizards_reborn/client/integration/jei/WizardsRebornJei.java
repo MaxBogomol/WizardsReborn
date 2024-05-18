@@ -21,6 +21,7 @@ import net.minecraft.world.item.crafting.Recipe;
 import net.minecraft.world.item.crafting.RecipeType;
 import org.jetbrains.annotations.NotNull;
 
+import javax.annotation.Nonnull;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Comparator;
@@ -30,6 +31,7 @@ import java.util.List;
 public class WizardsRebornJei implements IModPlugin {
     private static final Comparator<Recipe<?>> BY_ID = Comparator.comparing(Recipe::getId);
 
+    @Nonnull
     @Override
     public ResourceLocation getPluginUid() {
         return new ResourceLocation(WizardsReborn.MOD_ID, "jei_plugin");
@@ -76,7 +78,7 @@ public class WizardsRebornJei implements IModPlugin {
         registration.addRecipes(CrystalInfusionRecipeCategory.TYPE, sortRecipes(WizardsReborn.CRYSTAL_INFUSION_RECIPE.get(), BY_ID));
 
         if (FarmersDelightIntegration.isLoaded()) {
-            FarmersDelightIntegration.LoadedOnly.addKnifeJEIInfo(registration);
+            FarmersDelightIntegration.JeiLoadedOnly.addKnifeJEIInfo(registration);
         }
     }
 

@@ -74,9 +74,14 @@ import mod.maxbogomol.wizards_reborn.common.spell.MagicSproutSpell;
 import mod.maxbogomol.wizards_reborn.common.spell.aura.*;
 import mod.maxbogomol.wizards_reborn.common.spell.charge.*;
 import mod.maxbogomol.wizards_reborn.common.spell.look.BlinkSpell;
+import mod.maxbogomol.wizards_reborn.common.spell.look.strike.RenunciationSpell;
+import mod.maxbogomol.wizards_reborn.common.spell.look.strike.RepentanceSpell;
 import mod.maxbogomol.wizards_reborn.common.spell.projectile.*;
 import mod.maxbogomol.wizards_reborn.common.spell.ray.*;
-import mod.maxbogomol.wizards_reborn.common.spell.self.*;
+import mod.maxbogomol.wizards_reborn.common.spell.self.AirFlowSpell;
+import mod.maxbogomol.wizards_reborn.common.spell.self.FireShieldSpell;
+import mod.maxbogomol.wizards_reborn.common.spell.self.HeartOfNatureSpell;
+import mod.maxbogomol.wizards_reborn.common.spell.self.WaterBreathingSpell;
 import mod.maxbogomol.wizards_reborn.common.tileentity.*;
 import mod.maxbogomol.wizards_reborn.common.world.tree.ArcaneWoodTree;
 import mod.maxbogomol.wizards_reborn.common.world.tree.ArcaneWoodTrunkPlacer;
@@ -552,8 +557,8 @@ public class WizardsReborn {
     public static Spell ICICLE_SPELL = new IcicleSpell(MOD_ID+":icicle", 15);
     public static Spell SHARP_BLINK_SPELL = new BlinkSpell(MOD_ID+":sharp_blink", 12, true);
     public static Spell LIGHT_RAY_SPELL = new LightRaySpell(MOD_ID+":light_ray", 15);
-    public static Spell REPENTANCE_SPELL = new LightRaySpell(MOD_ID+":repentance", 15);
-    public static Spell RENUNCIATION_SPELL = new LightRaySpell(MOD_ID+":renunciation", 15);
+    public static Spell REPENTANCE_SPELL = new RepentanceSpell(MOD_ID+":repentance", 15);
+    public static Spell RENUNCIATION_SPELL = new RenunciationSpell(MOD_ID+":renunciation", 15);
 
     //ARCANE ENCHANTMENT
     public static ArcaneEnchantment WISSEN_MENDING_ARCANE_ENCHANTMENT = new WissenMendingArcaneEnchantment(MOD_ID+":wissen_mending", 3);
@@ -1591,8 +1596,8 @@ public class WizardsReborn {
         FLUID_TYPES.register(eventBus);
         FLUIDS.register(eventBus);
 
-        if (CreateIntegration.isLoaded()) CreateIntegration.init(eventBus);
-        if (FarmersDelightIntegration.isLoaded()) FarmersDelightIntegration.init(eventBus);
+        CreateIntegration.init(eventBus);
+        FarmersDelightIntegration.init(eventBus);
 
         setupCrystals();
         setupMonograms();
