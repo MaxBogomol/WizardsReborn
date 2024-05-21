@@ -98,6 +98,9 @@ public class Events {
 
                 if (scale < 1) {
                     event.setAmount(event.getAmount() * scale);
+                    System.out.println(event.getAmount());
+                    System.out.println(scale);
+                    System.out.println(event.getAmount() * scale);
                 }
             }
         }

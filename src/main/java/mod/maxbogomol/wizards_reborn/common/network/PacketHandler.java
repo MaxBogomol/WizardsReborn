@@ -97,6 +97,9 @@ public final class PacketHandler {
         HANDLER.registerMessage(id++, FrostAuraSpellBurstEffectPacket.class, FrostAuraSpellBurstEffectPacket::encode, FrostAuraSpellBurstEffectPacket::decode, FrostAuraSpellBurstEffectPacket::handle);
         HANDLER.registerMessage(id++, IcicleRayEffectPacket.class, IcicleRayEffectPacket::encode, IcicleRayEffectPacket::decode, IcicleRayEffectPacket::handle);
         HANDLER.registerMessage(id++, StrikeSpellEffectPacket.class, StrikeSpellEffectPacket::encode, StrikeSpellEffectPacket::decode, StrikeSpellEffectPacket::handle);
+        HANDLER.registerMessage(id++, PoisonSpellEffectPacket.class, PoisonSpellEffectPacket::encode, PoisonSpellEffectPacket::decode, PoisonSpellEffectPacket::handle);
+        HANDLER.registerMessage(id++, WitheringSpellEffectPacket.class, WitheringSpellEffectPacket::encode, WitheringSpellEffectPacket::decode, WitheringSpellEffectPacket::handle);
+        HANDLER.registerMessage(id++, HolyCrossSpellEffectPacket.class, HolyCrossSpellEffectPacket::encode, HolyCrossSpellEffectPacket::decode, HolyCrossSpellEffectPacket::handle);
 
         HANDLER.registerMessage(id++, MagicBladeEffectPacket.class, MagicBladeEffectPacket::encode, MagicBladeEffectPacket::decode, MagicBladeEffectPacket::handle);
     }

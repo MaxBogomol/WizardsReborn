@@ -2,6 +2,7 @@ package mod.maxbogomol.wizards_reborn.common.spell.look;
 
 import mod.maxbogomol.wizards_reborn.WizardsReborn;
 import mod.maxbogomol.wizards_reborn.api.crystal.CrystalUtils;
+import mod.maxbogomol.wizards_reborn.common.damage.DamageSourceRegistry;
 import mod.maxbogomol.wizards_reborn.common.item.equipment.arcane.ArcaneArmorItem;
 import mod.maxbogomol.wizards_reborn.common.network.PacketHandler;
 import mod.maxbogomol.wizards_reborn.common.network.SetAdditionalFovPacket;
@@ -79,7 +80,7 @@ public class BlinkSpell extends LookSpell {
         if (isSharp) {
             for (Entity entity : getHitEntities(world, player.getEyePosition(), pos, 0.5f)) {
                 if (!entity.equals(player) && entity instanceof LivingEntity) {
-                    entity.hurt(new DamageSource(entity.damageSources().magic().typeHolder(), player), damage);
+                    entity.hurt(new DamageSource(DamageSourceRegistry.create(entity.level(), DamageSourceRegistry.ARCANE_MAGIC).typeHolder(), player), damage);
                 }
             }
         }

@@ -70,21 +70,19 @@ public class TotemOfExperienceAbsorptionTileEntity extends BlockEntity implement
             if (getExperience() < getMaxExperience() && cooldown <= 0) {
                 List<ExperienceOrb> orbs = level.getEntitiesOfClass(ExperienceOrb.class, new AABB(getBlockPos().getX() - 1, getBlockPos().getY() - 1, getBlockPos().getZ() - 1, getBlockPos().getX() + 2, getBlockPos().getY() + 2, getBlockPos().getZ() + 2));
                 for (ExperienceOrb orb : orbs) {
-                    if (orb.tickCount > 50) {
-                        int remain = WissenUtils.getRemoveWissenRemain(orb.value, 100);
-                        remain = 100 - remain;
-                        int remainAdd = WissenUtils.getAddWissenRemain(getExperience(), remain, getMaxExperience());
-                        remainAdd = remain - remainAdd;
-                        if (remainAdd > 0 && remain > 0) {
-                            addExperience(remainAdd);
-                            orb.value = orb.value - remainAdd;
-                            if (orb.value <= 0) {
-                                orb.kill();
-                            }
-                            level.playSound(null, orb.getOnPos(), SoundEvents.EXPERIENCE_ORB_PICKUP, SoundSource.BLOCKS, 0.5f, 1.2f);
-                            PacketHandler.sendToTracking(level, getBlockPos(), new ExperienceTotemBurstEffectPacket(getBlockPos(), orb.getPosition(0)));
-                            update = true;
+                    int remain = WissenUtils.getRemoveWissenRemain(orb.value, 100);
+                    remain = 100 - remain;
+                    int remainAdd = WissenUtils.getAddWissenRemain(getExperience(), remain, getMaxExperience());
+                    remainAdd = remain - remainAdd;
+                    if (remainAdd > 0 && remain > 0) {
+                        addExperience(remainAdd);
+                        orb.value = orb.value - remainAdd;
+                        if (orb.value <= 0) {
+                            orb.kill();
                         }
+                        level.playSound(null, orb.getOnPos(), SoundEvents.EXPERIENCE_ORB_PICKUP, SoundSource.BLOCKS, 0.5f, 1.2f);
+                        PacketHandler.sendToTracking(level, getBlockPos(), new ExperienceTotemBurstEffectPacket(getBlockPos(), orb.getPosition(0)));
+                        update = true;
                     }
                 }
                 cooldown = 20;
@@ -164,6 +162,9 @@ public class TotemOfExperienceAbsorptionTileEntity extends BlockEntity implement
             } else {
                 if (tick > 0) {
                     tick--;
+                    if (tick <= 0) {
+                        getLevel().playSound(WizardsReborn.proxy.getPlayer(), getBlockPos(), SoundEvents.EXPERIENCE_ORB_PICKUP, SoundSource.BLOCKS, 0.5f, 0.2f);
+                    }
                 }
             }
         }

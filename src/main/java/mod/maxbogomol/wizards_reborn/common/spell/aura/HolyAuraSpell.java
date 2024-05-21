@@ -2,12 +2,12 @@ package mod.maxbogomol.wizards_reborn.common.spell.aura;
 
 import mod.maxbogomol.wizards_reborn.WizardsReborn;
 import mod.maxbogomol.wizards_reborn.api.crystal.CrystalUtils;
+import mod.maxbogomol.wizards_reborn.common.damage.DamageSourceRegistry;
 import mod.maxbogomol.wizards_reborn.common.entity.SpellProjectileEntity;
 import mod.maxbogomol.wizards_reborn.common.item.equipment.arcane.ArcaneArmorItem;
 import mod.maxbogomol.wizards_reborn.common.network.PacketHandler;
 import mod.maxbogomol.wizards_reborn.common.network.spell.AuraSpellBurstEffectPacket;
 import mod.maxbogomol.wizards_reborn.common.network.spell.HolyRaySpellEffectPacket;
-import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.MobType;
@@ -43,7 +43,7 @@ public class HolyAuraSpell extends AuraSpell {
                     boolean effectHurt = false;
                     if (livingEntity.getMobType() == MobType.UNDEAD) {
                         livingEntity.lastHurtByPlayerTime = livingEntity.tickCount;
-                        target.hurt(new DamageSource(target.damageSources().magic().typeHolder()), damage);
+                        target.hurt(DamageSourceRegistry.create(target.level(), DamageSourceRegistry.ARCANE_MAGIC), damage);
                         effectHurt = true;
                     } else {
                         if (livingEntity.getHealth() != livingEntity.getMaxHealth()) {

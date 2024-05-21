@@ -78,7 +78,7 @@ public class MagicSproutSpell extends Spell {
         return InteractionResult.PASS;
     }
 
-    public InteractionResult growCrop(ItemStack stack, UseOnContext context, BlockPos blockPos) {
+    public static InteractionResult growCrop(ItemStack stack, UseOnContext context, BlockPos blockPos) {
         BlockEvent.EntityPlaceEvent placeEv = new BlockEvent.EntityPlaceEvent(
                 BlockSnapshot.create(context.getLevel().dimension(), context.getLevel(), blockPos),
                 context.getLevel().getBlockState(blockPos.below()),

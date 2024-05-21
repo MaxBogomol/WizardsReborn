@@ -74,6 +74,13 @@ import mod.maxbogomol.wizards_reborn.common.spell.MagicSproutSpell;
 import mod.maxbogomol.wizards_reborn.common.spell.aura.*;
 import mod.maxbogomol.wizards_reborn.common.spell.charge.*;
 import mod.maxbogomol.wizards_reborn.common.spell.look.BlinkSpell;
+import mod.maxbogomol.wizards_reborn.common.spell.look.WisdomSpell;
+import mod.maxbogomol.wizards_reborn.common.spell.look.cloud.RainCloudSpell;
+import mod.maxbogomol.wizards_reborn.common.spell.look.cloud.ToxicRainSpell;
+import mod.maxbogomol.wizards_reborn.common.spell.look.entity.CurseCrossSpell;
+import mod.maxbogomol.wizards_reborn.common.spell.look.entity.HolyCrossSpell;
+import mod.maxbogomol.wizards_reborn.common.spell.look.entity.PoisonSpell;
+import mod.maxbogomol.wizards_reborn.common.spell.look.entity.WitheringSpell;
 import mod.maxbogomol.wizards_reborn.common.spell.look.strike.RenunciationSpell;
 import mod.maxbogomol.wizards_reborn.common.spell.look.strike.RepentanceSpell;
 import mod.maxbogomol.wizards_reborn.common.spell.projectile.*;
@@ -472,6 +479,9 @@ public class WizardsReborn {
     public static Color frostSpellColor = new Color(221, 243, 254);
     public static Color holySpellColor = new Color(255, 248, 194);
     public static Color curseSpellColor = new Color(203, 194, 255);
+    public static Color poisonSpellColor = new Color(149, 255, 115);
+    public static Color witheringSpellColor = new Color(64, 50, 41);
+    public static Color experienceSpellColor = new Color(245, 255, 143);
 
     //CRYSTAL_STATS
     public static CrystalStat FOCUS_CRYSTAL_STAT = new CrystalStat(MOD_ID+":focus", 3);
@@ -537,7 +547,10 @@ public class WizardsReborn {
     public static Spell AIR_FLOW_SPELL = new AirFlowSpell(MOD_ID+":air_flow", 12);
     public static Spell FIRE_SHIELD_SPELL = new FireShieldSpell(MOD_ID+":fire_shield", 12);
     public static Spell BLINK_SPELL = new BlinkSpell(MOD_ID+":blink", 12, false);
+    public static Spell HOLY_CROSS_SPELL = new HolyCrossSpell(MOD_ID+":holy_cross", 7);
+    public static Spell CURSE_CROSS_SPELL = new CurseCrossSpell(MOD_ID+":curse_cross", 7);
     public static Spell MAGIC_SPROUT_SPELL = new MagicSproutSpell(MOD_ID+":magic_sprout", 12);
+    public static Spell POISON_SPELL = new PoisonSpell(MOD_ID+":poison", 15);
     public static Spell EARTH_CHARGE_SPELL = new EarthChargeSpell(MOD_ID+":earth_charge", 10);
     public static Spell WATER_CHARGE_SPELL = new WaterChargeSpell(MOD_ID+":water_charge", 10);
     public static Spell AIR_CHARGE_SPELL = new AirChargeSpell(MOD_ID+":air_charge", 10);
@@ -554,8 +567,13 @@ public class WizardsReborn {
     public static Spell FROST_AURA_SPELL = new FrostAuraSpell(MOD_ID+":frost_aura", 10);
     public static Spell HOLY_AURA_SPELL = new HolyAuraSpell(MOD_ID+":holy_aura", 10);
     public static Spell CURSE_AURA_SPELL = new CurseAuraSpell(MOD_ID+":curse_aura", 10);
+    public static Spell RAIN_CLOUD_SPELL = new RainCloudSpell(MOD_ID+":rain_cloud", 15);
     public static Spell ICICLE_SPELL = new IcicleSpell(MOD_ID+":icicle", 15);
     public static Spell SHARP_BLINK_SPELL = new BlinkSpell(MOD_ID+":sharp_blink", 12, true);
+    public static Spell TOXIC_RAIN_SPELL = new ToxicRainSpell(MOD_ID+":toxic_rain", 15);
+    public static Spell MOR_SWARM_SPELL = new LightRaySpell(MOD_ID+":mor_swarm", 15);
+    public static Spell WITHERING_SPELL = new WitheringSpell(MOD_ID+":withering", 15);
+    public static Spell WISDOM_SPELL = new WisdomSpell(MOD_ID+":wisdom", 15);
     public static Spell LIGHT_RAY_SPELL = new LightRaySpell(MOD_ID+":light_ray", 15);
     public static Spell REPENTANCE_SPELL = new RepentanceSpell(MOD_ID+":repentance", 15);
     public static Spell RENUNCIATION_SPELL = new RenunciationSpell(MOD_ID+":renunciation", 15);
@@ -1838,7 +1856,10 @@ public class WizardsReborn {
         Spells.register(AIR_FLOW_SPELL);
         Spells.register(FIRE_SHIELD_SPELL);
         Spells.register(BLINK_SPELL);
+        Spells.register(HOLY_CROSS_SPELL);
+        Spells.register(CURSE_CROSS_SPELL);
         Spells.register(MAGIC_SPROUT_SPELL);
+        Spells.register(POISON_SPELL);
         Spells.register(EARTH_CHARGE_SPELL);
         Spells.register(WATER_CHARGE_SPELL);
         Spells.register(AIR_CHARGE_SPELL);
@@ -1855,8 +1876,13 @@ public class WizardsReborn {
         Spells.register(FROST_AURA_SPELL);
         Spells.register(HOLY_AURA_SPELL);
         Spells.register(CURSE_AURA_SPELL);
+        Spells.register(RAIN_CLOUD_SPELL);
         Spells.register(ICICLE_SPELL);
         Spells.register(SHARP_BLINK_SPELL);
+        Spells.register(TOXIC_RAIN_SPELL);
+        Spells.register(MOR_SWARM_SPELL);
+        Spells.register(WITHERING_SPELL);
+        Spells.register(WISDOM_SPELL);
         Spells.register(LIGHT_RAY_SPELL);
         Spells.register(REPENTANCE_SPELL);
         Spells.register(RENUNCIATION_SPELL);

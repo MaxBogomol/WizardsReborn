@@ -19,6 +19,7 @@ import net.minecraft.nbt.CompoundTag;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.util.Mth;
 import net.minecraft.world.InteractionHand;
+import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
@@ -53,6 +54,16 @@ public class StrikeSpell extends BlockLookSpell {
     @Override
     public float getBlockDistance() {
         return 25f;
+    }
+
+    @Override
+    public int getCooldown() {
+        return 300;
+    }
+
+    @Override
+    public int getWissenCost() {
+        return 500;
     }
 
     @Override
@@ -123,6 +134,7 @@ public class StrikeSpell extends BlockLookSpell {
                     if (40f - distanceToPlayer > 0) PacketHandler.sendToTracking(entity.level(), entity.getOnPos(), new AddScreenshakePacket(1f - (distanceToPlayer / distance / 2)));
                 }
 
+                strikeDamage(entity, entity.getSender());
                 strikeEffect(entity);
 
                 for (int i = 0; i < 8; i++) {
@@ -136,6 +148,14 @@ public class StrikeSpell extends BlockLookSpell {
                 }
             }
         }
+    }
+
+    public List<Entity> getTargets(SpellProjectileEntity entity, float distance) {
+        return entity.level().getEntitiesOfClass(Entity.class, new AABB(entity.getX() - distance, entity.getY() - 1, entity.getZ() - distance, entity.getX() + distance, entity.getY() + 3, entity.getZ() + distance));
+    }
+
+    public void strikeDamage(SpellProjectileEntity entity, Player player) {
+
     }
 
     public void strikeEffect(SpellProjectileEntity entity) {

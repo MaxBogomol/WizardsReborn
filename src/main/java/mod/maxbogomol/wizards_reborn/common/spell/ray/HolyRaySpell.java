@@ -3,6 +3,7 @@ package mod.maxbogomol.wizards_reborn.common.spell.ray;
 import mod.maxbogomol.wizards_reborn.WizardsReborn;
 import mod.maxbogomol.wizards_reborn.api.crystal.CrystalUtils;
 import mod.maxbogomol.wizards_reborn.api.wissen.WissenItemUtils;
+import mod.maxbogomol.wizards_reborn.common.damage.DamageSourceRegistry;
 import mod.maxbogomol.wizards_reborn.common.entity.SpellProjectileEntity;
 import mod.maxbogomol.wizards_reborn.common.item.equipment.arcane.ArcaneArmorItem;
 import mod.maxbogomol.wizards_reborn.common.network.PacketHandler;
@@ -48,7 +49,7 @@ public class HolyRaySpell extends RaySpell {
                             float damage = (float) (1.0f + (focusLevel * 0.5)) + magicModifier;
                             boolean effect = false;
                             if (livingEntity.getMobType() == MobType.UNDEAD) {
-                                target.hurt(new DamageSource(target.damageSources().magic().typeHolder(), projectile, player), damage);
+                                target.hurt(new DamageSource(DamageSourceRegistry.create(target.level(), DamageSourceRegistry.ARCANE_MAGIC).typeHolder(), projectile, player), damage);
                                 removeWissen(stack, projectile.getStats(), player);
                                 effect = true;
                             } else {

@@ -3,8 +3,6 @@ package mod.maxbogomol.wizards_reborn.client.sound;
 import mod.maxbogomol.wizards_reborn.WizardsReborn;
 import mod.maxbogomol.wizards_reborn.common.tileentity.TotemOfExperienceAbsorptionTileEntity;
 import net.minecraft.client.Minecraft;
-import net.minecraft.sounds.SoundEvents;
-import net.minecraft.sounds.SoundSource;
 
 public class TotemOfExperienceAbsorptionSoundInstance extends TileEntitySoundInstance<TotemOfExperienceAbsorptionTileEntity> {
     public TotemOfExperienceAbsorptionSoundInstance(TotemOfExperienceAbsorptionTileEntity blockEntity, float volume, float pitch) {
@@ -18,7 +16,6 @@ public class TotemOfExperienceAbsorptionSoundInstance extends TileEntitySoundIns
     public void tick() {
         if (!(blockEntity.getExperience() > 0 && blockEntity.getWissen() < blockEntity.getMaxWissen())) {
             stop();
-            blockEntity.getLevel().playSound(WizardsReborn.proxy.getPlayer(), blockEntity.getBlockPos(), SoundEvents.EXPERIENCE_ORB_PICKUP, SoundSource.BLOCKS, 0.5f, 0.2f);
         }
         super.tick();
     }

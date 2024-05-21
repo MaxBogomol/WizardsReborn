@@ -10,6 +10,7 @@ import mod.maxbogomol.wizards_reborn.client.particle.ArcaneIteratorBurst;
 import mod.maxbogomol.wizards_reborn.client.particle.Particles;
 import mod.maxbogomol.wizards_reborn.client.sound.ArcaneIteratorSoundInstance;
 import mod.maxbogomol.wizards_reborn.common.config.Config;
+import mod.maxbogomol.wizards_reborn.common.damage.DamageSourceRegistry;
 import mod.maxbogomol.wizards_reborn.common.network.PacketHandler;
 import mod.maxbogomol.wizards_reborn.common.network.tileentity.ArcaneIteratorBurstEffectPacket;
 import mod.maxbogomol.wizards_reborn.common.recipe.ArcaneIteratorRecipe;
@@ -144,7 +145,7 @@ public class ArcaneIteratorTileEntity extends BlockEntity implements TickableBlo
                             if (player.getHealth() > 0) {
                                 healthIsCraft++;
                                 healthTick = 10;
-                                player.hurt(new DamageSource(player.damageSources().magic().typeHolder()), 1f);
+                                player.hurt(new DamageSource(DamageSourceRegistry.create(player.level(), DamageSourceRegistry.ARCANE_MAGIC).typeHolder()), 1f);
                             }
                         }
                     }

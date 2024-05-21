@@ -38,6 +38,6 @@ public class BlockLookSpell extends LookSpell {
 
     public HitResult getBlockHit(Level world, Player player, InteractionHand hand) {
         Vec3 lookPos = getHitPos(world, player, hand).getPosHit();
-        return getHitPos(world, player, hand, lookPos, new Vec3(lookPos.x(), lookPos.y() - getBlockDistance(world, player, hand), lookPos.z()));
+        return getHitPos(world, lookPos, new Vec3(lookPos.x(), lookPos.y() - getBlockDistance(world, player, hand), lookPos.z()));
     }
 }

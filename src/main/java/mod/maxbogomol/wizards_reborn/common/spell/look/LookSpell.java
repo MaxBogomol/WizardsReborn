@@ -14,9 +14,11 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.Vec3;
+import net.minecraft.world.phys.shapes.CollisionContext;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.function.Predicate;
 
 public class LookSpell extends Spell {
     public LookSpell(String id, int points) {
@@ -60,7 +62,7 @@ public class LookSpell extends Spell {
         return getLookDistance() + (getLookAdditionalDistance() * focusLevel);
     }
 
-    public HitResult getHitPos(Level world, Player player, InteractionHand hand, Vec3 start, Vec3 endPos) {
+    public static HitResult getHitPos(Level world, Vec3 start, Vec3 endPos, Predicate<Entity> entityFilter, int entityCount, float size, boolean endE) {
         float distance = (float) Math.sqrt(Math.pow(start.x() - endPos.x, 2) + Math.pow(start.y() - endPos.y, 2) + Math.pow(start.z() - endPos.z, 2));
         float X = (float) start.x();
         float Y = (float) start.y();
@@ -68,6 +70,9 @@ public class LookSpell extends Spell {
         float oldX = X;
         float oldY = Y;
         float oldZ = Z;
+        int count = 0;
+        List<Entity> entities = new ArrayList<>();
+
         for (float i = 0; i < distance * 16; i++) {
             float dst = (distance * 16);
 
@@ -83,32 +88,47 @@ public class LookSpell extends Spell {
             Y = (float) (start.y() + y);
             Z = (float) (start.z() + z);
 
+            if (entityCount > 0 && count < entityCount) {
+                List<Entity> entityList = world.getEntitiesOfClass(Entity.class, new AABB(X - size, Y - size, Z - size, X + size, Y + size, Z + size));
+                for (Entity entity : entityList) {
+                    if (entityFilter.test(entity) && !entities.contains(entity)) {
+                        entities.add(entity);
+                        count++;
+
+                        if (endE && count >= entityCount) {
+                            return new HitResult(new Vec3(X, Y, Z), false, entities);
+                        }
+                    }
+                }
+            }
+
             BlockPos blockPos = new BlockPos(Mth.floor(X), Mth.floor(Y), Mth.floor(Z));
 
-            BlockHitResult blockHitResult = world.getBlockState(blockPos).getShape(world, blockPos).clip(start, endPos, blockPos);
+            BlockHitResult blockHitResult = world.getBlockState(blockPos).getVisualShape(world, blockPos, CollisionContext.empty()).clip(start, endPos, blockPos);
             if (blockHitResult != null) {
                 boolean isBlock = !world.getBlockState(blockHitResult.getBlockPos()).isAir();
-                if (canHitSpell(world, player, hand, new Vec3(X, Y, Z))) {
-                    return new HitResult(blockHitResult.getLocation(), isBlock);
-                } else {
-                    return new HitResult(new Vec3(oldX, oldY, oldZ), isBlock);
-                }
+                return new HitResult(new Vec3(oldX, oldY, oldZ), isBlock, entities);
             }
 
             oldX = X;
             oldY = Y;
             oldZ = Z;
         }
-        return new HitResult(new Vec3(X, Y, Z), false);
+        return new HitResult(new Vec3(X, Y, Z), false, entities);
+    }
+
+    public static HitResult getHitPos(Level world, Vec3 start, Vec3 endPos) {
+        return getHitPos(world, start, endPos, (e) -> {return false;}, 0, 0, false);
+    }
+
+    public HitResult getHitPos(Level world, Player player, InteractionHand hand, Predicate<Entity> entityFilter, int entityCount, float size, boolean endE) {
+        float distance = getLookDistance(world, player, hand);
+        return getHitPos(world, player.getEyePosition(), player.getEyePosition().add(player.getLookAngle().scale(distance)), entityFilter, entityCount, size, endE);
     }
 
     public HitResult getHitPos(Level world, Player player, InteractionHand hand) {
         float distance = getLookDistance(world, player, hand);
-        return getHitPos(world, player, hand, player.getEyePosition(), player.getEyePosition().add(player.getLookAngle().scale(distance)));
-    }
-
-    public boolean canHitSpell(Level world, Player player, InteractionHand hand, Vec3 pos) {
-        return true;
+        return getHitPos(world, player.getEyePosition(), player.getEyePosition().add(player.getLookAngle().scale(distance)));
     }
 
     public boolean canLookSpell(Level world, Player player, InteractionHand hand) {
@@ -150,10 +170,17 @@ public class LookSpell extends Spell {
     public static class HitResult {
         public Vec3 posHit;
         public boolean blockHit;
+        public List<Entity> entities;
 
         public HitResult(Vec3 posHit, boolean blockHit) {
             this.posHit = posHit;
             this.blockHit = blockHit;
+        }
+
+        public HitResult(Vec3 posHit, boolean blockHit, List<Entity> entities) {
+            this.posHit = posHit;
+            this.blockHit = blockHit;
+            this.entities = entities;
         }
 
         public Vec3 getPosHit() {
@@ -162,6 +189,14 @@ public class LookSpell extends Spell {
 
         public boolean hasBlockHit() {
             return blockHit;
+        }
+
+        public List<Entity> getEntities() {
+            return entities;
+        }
+
+        public boolean hasEntities() {
+            return !entities.isEmpty();
         }
     }
 }

@@ -2,6 +2,7 @@ package mod.maxbogomol.wizards_reborn.common.spell.aura;
 
 import mod.maxbogomol.wizards_reborn.WizardsReborn;
 import mod.maxbogomol.wizards_reborn.api.crystal.CrystalUtils;
+import mod.maxbogomol.wizards_reborn.common.damage.DamageSourceRegistry;
 import mod.maxbogomol.wizards_reborn.common.entity.SpellProjectileEntity;
 import mod.maxbogomol.wizards_reborn.common.item.equipment.arcane.ArcaneArmorItem;
 import mod.maxbogomol.wizards_reborn.common.network.PacketHandler;
@@ -36,7 +37,7 @@ public class VoidAuraSpell extends AuraSpell {
             float damage = (float) (1.75f + (focusLevel * 0.5)) + magicModifier;
             for (Entity target : targets) {
                 if (target instanceof LivingEntity livingEntity && !target.equals(player)) {
-                    DamageSource damageSource = new DamageSource(target.damageSources().magic().typeHolder());
+                    DamageSource damageSource = DamageSourceRegistry.create(target.level(), DamageSourceRegistry.ARCANE_MAGIC);
                     livingEntity.lastHurtByPlayerTime = livingEntity.tickCount;
                     livingEntity.hurt(damageSource, damage);
 

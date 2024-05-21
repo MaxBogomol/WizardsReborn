@@ -107,7 +107,7 @@ public class ArtificialFertilityCrystalRitual extends CrystalRitual {
         }
     }
 
-    public boolean growCrop(Level level, BlockPos blockPos) {
+    public static boolean growCrop(Level level, BlockPos blockPos) {
         if (BoneMealItem.growCrop(ItemStack.EMPTY, level, blockPos)) {
             return true;
         } else {
