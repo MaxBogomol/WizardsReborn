@@ -100,6 +100,8 @@ public final class PacketHandler {
         HANDLER.registerMessage(id++, PoisonSpellEffectPacket.class, PoisonSpellEffectPacket::encode, PoisonSpellEffectPacket::decode, PoisonSpellEffectPacket::handle);
         HANDLER.registerMessage(id++, WitheringSpellEffectPacket.class, WitheringSpellEffectPacket::encode, WitheringSpellEffectPacket::decode, WitheringSpellEffectPacket::handle);
         HANDLER.registerMessage(id++, HolyCrossSpellEffectPacket.class, HolyCrossSpellEffectPacket::encode, HolyCrossSpellEffectPacket::decode, HolyCrossSpellEffectPacket::handle);
+        HANDLER.registerMessage(id++, NecroticRaySpellEffectPacket.class, NecroticRaySpellEffectPacket::encode, NecroticRaySpellEffectPacket::decode, NecroticRaySpellEffectPacket::handle);
+        HANDLER.registerMessage(id++, AirImpactSpellEffectPacket.class, AirImpactSpellEffectPacket::encode, AirImpactSpellEffectPacket::decode, AirImpactSpellEffectPacket::handle);
 
         HANDLER.registerMessage(id++, MagicBladeEffectPacket.class, MagicBladeEffectPacket::encode, MagicBladeEffectPacket::decode, MagicBladeEffectPacket::handle);
     }

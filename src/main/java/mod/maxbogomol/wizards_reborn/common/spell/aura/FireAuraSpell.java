@@ -39,15 +39,14 @@ public class FireAuraSpell extends AuraSpell {
             for (Entity target : targets) {
                 if (target instanceof LivingEntity livingEntity) {
                     if (!target.equals(player)) {
+                        int fire = target.getRemainingFireTicks() + 30;
+                        if (fire > 100) fire = 100;
+                        target.setSecondsOnFire(fire);
+                        target.setTicksFrozen(0);
+
                         DamageSource damageSource = new DamageSource(target.damageSources().onFire().typeHolder());
                         livingEntity.lastHurtByPlayerTime = livingEntity.tickCount;
                         livingEntity.hurt(damageSource, damage);
-                        int fire = target.getRemainingFireTicks() + 10;
-                        if (fire > 100) {
-                            fire = 100;
-                        }
-                        target.setSecondsOnFire(fire);
-                        target.setTicksFrozen(0);
 
                         Color color = getColor();
                         float r = color.getRed() / 255f;

@@ -36,12 +36,11 @@ public class WaterChargeSpell extends ChargeSpell {
             damage = damage * charge;
         }
 
-        target.hurt(new DamageSource(target.damageSources().drown().typeHolder(), projectile, player), damage);
         target.clearFire();
         int frost = target.getTicksFrozen() + 10;
-        if (frost > 250) {
-            frost = 250;
-        }
+        if (frost > 250) frost = 250;
         target.setTicksFrozen(frost);
+
+        target.hurt(new DamageSource(target.damageSources().drown().typeHolder(), projectile, player), damage);
     }
 }

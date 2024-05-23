@@ -140,10 +140,20 @@ public class StrikeSpell extends BlockLookSpell {
                 for (int i = 0; i < 8; i++) {
                     BlockPos blockPos = entity.getOnPos();
                     BlockState blockState = entity.level().getBlockState(blockPos);
+                    boolean blockSound = false;
                     if (!blockState.isAir()) {
+                        blockSound = true;
+                    } else {
+                        blockPos = entity.getOnPos().below();
+                        blockState = entity.level().getBlockState(blockPos);
+                        if (!blockState.isAir()) blockSound = true;
+                    }
+
+                    if (blockSound) {
                         SoundType soundType = blockState.getBlock().getSoundType(blockState);
                         entity.level().playSound(WizardsReborn.proxy.getPlayer(), entity.getX() + ((random.nextDouble() - 0.5D) * 5f), entity.getY() + ((random.nextDouble() - 0.5D) * 5f), entity.getZ() + ((random.nextDouble() - 0.5D) * 5f), soundType.getBreakSound(), SoundSource.PLAYERS, 1f, 1f);
                     }
+
                     entity.level().playSound(WizardsReborn.proxy.getPlayer(), entity.getX() + ((random.nextDouble() - 0.5D) * 5f), entity.getY() + ((random.nextDouble() - 0.5D) * 5f), entity.getZ() + ((random.nextDouble() - 0.5D) * 5f), WizardsReborn.SPELL_BURST_SOUND.get(), SoundSource.PLAYERS, 1f, (float) (1f + ((random.nextFloat() - 0.5D) / 4)));
                 }
             }
@@ -232,7 +242,7 @@ public class StrikeSpell extends BlockLookSpell {
         stack.pushPose();
         stack.mulPose(Axis.XP.rotationDegrees(yRot));
         RenderUtils.raySided(stack, bufferDelayed, 0.2f * alpha, 100 * size, 0.4f, r, g, b, 0.4f * alpha, r, g, b, 0F);
-        RenderUtils.raySided(stack, bufferDelayed, 0.5f * alpha, 100 * size, 0.4f, r, g, b, 0.2f * alpha, sr, sg, sb, 0F);
+        RenderUtils.raySided(stack, bufferDelayed, 0.5f * alpha, 100 * size, 0.4f, sr, sg, sb, 0.2f * alpha, sr, sg, sb, 0F);
         stack.popPose();
 
         stack.pushPose();

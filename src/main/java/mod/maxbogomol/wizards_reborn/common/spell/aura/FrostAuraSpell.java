@@ -37,15 +37,14 @@ public class FrostAuraSpell extends AuraSpell {
             for (Entity target : targets) {
                 if (target instanceof LivingEntity livingEntity) {
                     if (!target.equals(player)) {
+                        target.clearFire();
+                        int frost = target.getTicksFrozen() + 150;
+                        if (frost > 550) frost = 550;
+                        target.setTicksFrozen(frost);
+
                         DamageSource damageSource = new DamageSource(target.damageSources().freeze().typeHolder());
                         livingEntity.lastHurtByPlayerTime = livingEntity.tickCount;
                         livingEntity.hurt(damageSource, damage);
-                        target.clearFire();
-                        int frost = target.getTicksFrozen() + 150;
-                        if (frost > 550) {
-                            frost = 550;
-                        }
-                        target.setTicksFrozen(frost);
 
                         Color color = getColor();
                         float r = color.getRed() / 255f;

@@ -10,6 +10,7 @@ import mod.maxbogomol.wizards_reborn.utils.PacketUtils;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.world.level.block.entity.BlockEntity;
+import net.minecraft.world.phys.HitResult;
 import net.minecraft.world.phys.Vec3;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
@@ -45,7 +46,7 @@ public class LightRaySpell extends RaySpell {
     }
 
     @Override
-    public void rayTick(SpellProjectileEntity entity) {
+    public void rayTick(SpellProjectileEntity entity, HitResult ray) {
         Vec3 offset = entity.getLookAngle().scale(1f);
         Vec3 from = entity.position().add(offset).add(0, 0.2f, 0);
         Vec3 to = entity.getLookAngle().scale(getRayDistance() + 1).add(from);

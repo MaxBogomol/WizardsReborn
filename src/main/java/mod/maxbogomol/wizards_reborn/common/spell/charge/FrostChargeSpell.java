@@ -36,12 +36,11 @@ public class FrostChargeSpell extends ChargeSpell {
             damage = damage * charge;
         }
 
-        target.hurt(new DamageSource(target.damageSources().freeze().typeHolder(), projectile, player), damage);
         target.clearFire();
         int frost = target.getTicksFrozen() + 75;
-        if (frost > 250) {
-            frost = 250;
-        }
+        if (frost > 250) frost = 250;
         target.setTicksFrozen(frost);
+
+        target.hurt(new DamageSource(target.damageSources().freeze().typeHolder(), projectile, player), damage);
     }
 }

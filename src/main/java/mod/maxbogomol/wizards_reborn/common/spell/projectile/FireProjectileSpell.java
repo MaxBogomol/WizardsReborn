@@ -30,12 +30,12 @@ public class FireProjectileSpell extends ProjectileSpell {
         int focusLevel = CrystalUtils.getStatLevel(projectile.getStats(), WizardsReborn.FOCUS_CRYSTAL_STAT);
         float magicModifier = ArcaneArmorItem.getPlayerMagicModifier(player);
         float damage = (float) (3.5f + (focusLevel * 0.5)) + magicModifier;
-        target.hurt(new DamageSource(target.damageSources().onFire().typeHolder(), projectile, player), damage);
+
         int fire = target.getRemainingFireTicks() + 5;
-        if (fire > 10) {
-            fire = 10;
-        }
+        if (fire > 10) fire = 10;
         target.setSecondsOnFire(fire);
         target.setTicksFrozen(0);
+
+        target.hurt(new DamageSource(target.damageSources().onFire().typeHolder(), projectile, player), damage);
     }
 }

@@ -88,7 +88,10 @@ public class LookSpell extends Spell {
             Y = (float) (start.y() + y);
             Z = (float) (start.z() + z);
 
-            if (entityCount > 0 && count < entityCount) {
+            boolean canEntity = true;
+            if (endE) canEntity = (entityCount > 0);
+
+            if (canEntity) {
                 List<Entity> entityList = world.getEntitiesOfClass(Entity.class, new AABB(X - size, Y - size, Z - size, X + size, Y + size, Z + size));
                 for (Entity entity : entityList) {
                     if (entityFilter.test(entity) && !entities.contains(entity)) {
@@ -139,7 +142,7 @@ public class LookSpell extends Spell {
 
     }
 
-    public List<Entity> getHitEntities(Level world, Vec3 start, Vec3 endPos, float distance) {
+    public static List<Entity> getHitEntities(Level world, Vec3 start, Vec3 endPos, float distance) {
         List<Entity> list = new ArrayList<>();
         float ds = (float) Math.sqrt(Math.pow(start.x() - endPos.x, 2) + Math.pow(start.y() - endPos.y, 2) + Math.pow(start.z() - endPos.z, 2));
         for (float i = 0; i < ds * 10; i++) {

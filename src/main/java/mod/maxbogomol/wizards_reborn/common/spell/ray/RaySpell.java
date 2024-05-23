@@ -53,6 +53,10 @@ public class RaySpell extends Spell {
         return 25f;
     }
 
+    public Color getSecondColor() {
+        return getColor();
+    }
+
     @Override
     public void useSpell(Level world, Player player, InteractionHand hand) {
         if (!world.isClientSide) {
@@ -159,7 +163,7 @@ public class RaySpell extends Spell {
                 }
             }
 
-            rayTick(entity);
+            rayTick(entity, ray);
 
             if (spellData.getInt("ticks") <= 0) {
                 if (spellData.getInt("ticks_left") <= 0) {
@@ -199,10 +203,16 @@ public class RaySpell extends Spell {
             if (random.nextFloat() < 0.5 && hasSound(entity)) {
                 entity.level().playSound(WizardsReborn.proxy.getPlayer(), entity.getX(), entity.getY(), entity.getZ(), WizardsReborn.SPELL_BURST_SOUND.get(), SoundSource.PLAYERS, 0.25f, (float) (0.5f + ((random.nextFloat() - 0.5D) / 4)));
             }
+
+            rayEndTick(entity, ray);
         }
     }
 
-    public void rayTick(SpellProjectileEntity entity) {
+    public void rayTick(SpellProjectileEntity entity, HitResult ray) {
+
+    }
+
+    public void rayEndTick(SpellProjectileEntity entity, HitResult ray) {
 
     }
 
@@ -280,6 +290,11 @@ public class RaySpell extends Spell {
         float g = color.getGreen() / 255f;
         float b = color.getBlue() / 255f;
 
+        Color secondColor = getSecondColor();
+        float sr = secondColor.getRed() / 255f;
+        float sg = secondColor.getGreen() / 255f;
+        float sb = secondColor.getBlue() / 255f;
+
         float offset = 1.0f;
         updateRot(entity);
 
@@ -311,7 +326,7 @@ public class RaySpell extends Spell {
         if (width < 0f) width = 0f;
 
         float distance = (float) Math.sqrt(Math.pow(entity.getX() - ray.getLocation().x, 2) + Math.pow(entity.getY() - ray.getLocation().y, 2) + Math.pow(entity.getZ() - ray.getLocation().z, 2));
-        RenderUtils.ray(stack, bufferDelayed, 0.1f * width, (distance - offset) * width, Mth.lerp(distance / getRayDistance(), 1f, 0.5f), r, g, b, 1, r, g, b, 0.1F);
+        RenderUtils.ray(stack, bufferDelayed, 0.1f * width, (distance - offset) * width, Mth.lerp(distance / getRayDistance(), 1f, 0.5f), sr, sg, sb, 1, sr, sg, sb, 0.1F);
         stack.translate(-0.05f, 0, 0);
         stack.mulPose(Axis.XP.rotationDegrees(-(entity.tickCount + partialTicks) * 10f));
         RenderUtils.ray(stack, bufferDelayed, 0.15f * width, (distance - offset + 0.1f) * width, Mth.lerp(distance / getRayDistance(), 1f, 0.5f), r, g, b, 0.5F, r, g, b, 0.05F);

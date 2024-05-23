@@ -7,10 +7,13 @@ import mod.maxbogomol.wizards_reborn.common.entity.SpellProjectileEntity;
 import mod.maxbogomol.wizards_reborn.common.item.equipment.arcane.ArcaneArmorItem;
 import net.minecraft.core.BlockPos;
 import net.minecraft.util.Mth;
+import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.Vec3;
 
 import java.awt.*;
+import java.util.List;
 
 public class RainCloudSpell extends CloudSpell {
     public RainCloudSpell(String id, int points) {
@@ -39,6 +42,14 @@ public class RainCloudSpell extends CloudSpell {
             BlockPos blockPos = new BlockPos(Mth.floor(hit.getPosHit().x()), Mth.floor(hit.getPosHit().y()), Mth.floor(hit.getPosHit().z()));
             ArtificialFertilityCrystalRitual.growCrop(entity.level(), blockPos);
             ArtificialFertilityCrystalRitual.growCrop(entity.level(), blockPos.below());
+        }
+
+        List<LivingEntity> list = entity.level().getEntitiesOfClass(LivingEntity.class, new AABB(entity.getX() - size, entity.getY() - 30, entity.getZ() - size, entity.getX() + size, entity.getY() + 0.5f, entity.getZ() + size));
+
+        for (LivingEntity target : list) {
+            if (isValidPos(entity, target.position())) {
+                target.clearFire();
+            }
         }
     }
 }

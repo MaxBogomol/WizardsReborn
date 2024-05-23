@@ -47,6 +47,10 @@
   "crystal_ritual_start": { "sounds": ["wizards_reborn:crystal_rituals/start"], "subtitle": "sounds.wizards_reborn.crystal_ritual_start"},
   "crystal_ritual_end": { "sounds": ["wizards_reborn:crystal_rituals/end"], "subtitle": "sounds.wizards_reborn.crystal_ritual_end"},
 
+  "pipe": { "sounds": ["wizards_reborn:pipe"], "subtitle": "sounds.wizards_reborn.pipe"},
+  "boom": { "sounds": ["wizards_reborn:boom"], "subtitle": "sounds.wizards_reborn.boom"},
+  "moai": { "sounds": ["wizards_reborn:moai"], "subtitle": "sounds.wizards_reborn.moai"},
+
   "arcane_gold_break": { "sounds": ["wizards_reborn:blocks/arcane_gold/break1", "wizards_reborn:blocks/arcane_gold/break2", "wizards_reborn:blocks/arcane_gold/break3", "wizards_reborn:blocks/arcane_gold/break4"], "subtitle": "subtitles.block.generic.break"},
   "arcane_gold_step": { "sounds": ["wizards_reborn:blocks/arcane_gold/step1", "wizards_reborn:blocks/arcane_gold/step2", "wizards_reborn:blocks/arcane_gold/step3", "wizards_reborn:blocks/arcane_gold/step4", "wizards_reborn:blocks/arcane_gold/step5"], "subtitle": "subtitles.block.generic.footsteps"},
   "arcane_gold_place": { "sounds": ["wizards_reborn:blocks/arcane_gold/break1", "wizards_reborn:blocks/arcane_gold/break2", "wizards_reborn:blocks/arcane_gold/break3", "wizards_reborn:blocks/arcane_gold/break4"], "subtitle": "subtitles.block.generic.place"},

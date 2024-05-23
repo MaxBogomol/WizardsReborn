@@ -46,13 +46,13 @@ public class WaterRaySpell extends RaySpell {
                     int focusLevel = CrystalUtils.getStatLevel(projectile.getStats(), WizardsReborn.FOCUS_CRYSTAL_STAT);
                     float magicModifier = ArcaneArmorItem.getPlayerMagicModifier(player);
                     float damage = (float) (1.0f + (focusLevel * 0.5)) + magicModifier;
-                    target.hurt(new DamageSource(target.damageSources().drown().typeHolder(), projectile, player), damage);
+
                     target.clearFire();
                     int frost = target.getTicksFrozen() + 1;
-                    if (frost > 250) {
-                        frost = 250;
-                    }
+                    if (frost > 250) frost = 250;
                     target.setTicksFrozen(frost);
+
+                    target.hurt(new DamageSource(target.damageSources().drown().typeHolder(), projectile, player), damage);
                 }
             }
         }
@@ -80,7 +80,7 @@ public class WaterRaySpell extends RaySpell {
                 for (int x = -radius; x <= radius; x++) {
                     for (int y = -radius; y <= radius; y++) {
                         for (int z = -radius; z <= radius; z++) {
-                            if (WissenItemUtils.canRemoveWissen(stack, getWissenCostWithStat(projectile.getStats(), player))) {
+                            if (WissenItemUtils.canRemoveWissen(stack, 5)) {
                                 BlockPos pos = blockPos.relative(Direction.Axis.X, x).relative(Direction.Axis.Y, y).relative(Direction.Axis.Z, z);
 
                                 BlockEvent.BreakEvent breakEv = new BlockEvent.BreakEvent(world, blockPos, world.getBlockState(pos), player);
@@ -88,7 +88,7 @@ public class WaterRaySpell extends RaySpell {
                                 if (!world.getBlockState(pos).isAir() && !MinecraftForge.EVENT_BUS.post(breakEv)) {
                                     if (world.getBlockState(pos).getBlock() instanceof FireBlock) {
                                         world.destroyBlock(pos, false);
-                                        removeWissen(stack, projectile.getStats(), player);
+                                        removeWissen(stack, projectile.getStats(), player, 5);
                                         PacketHandler.sendToTracking(world, player.getOnPos(), new WaterRaySpellEffectPacket((float) pos.getX() + 0.5f, (float) pos.getY() + 0.5f, (float) pos.getZ() + 0.5f, r, g, b));
                                     }
                                 }

@@ -55,13 +55,13 @@ public class FireRaySpell extends RaySpell {
                     int focusLevel = CrystalUtils.getStatLevel(projectile.getStats(), WizardsReborn.FOCUS_CRYSTAL_STAT);
                     float magicModifier = ArcaneArmorItem.getPlayerMagicModifier(player);
                     float damage = (float) (1.5f + (focusLevel * 0.5)) + magicModifier;
-                    target.hurt(new DamageSource(target.damageSources().onFire().typeHolder(), projectile, player), damage);
+
                     int fire = target.getRemainingFireTicks() + 5;
-                    if (fire > 10) {
-                        fire = 10;
-                    }
+                    if (fire > 10) fire = 10;
                     target.setSecondsOnFire(fire);
                     target.setTicksFrozen(0);
+
+                    target.hurt(new DamageSource(target.damageSources().onFire().typeHolder(), projectile, player), damage);
                 }
             }
         }
@@ -81,8 +81,8 @@ public class FireRaySpell extends RaySpell {
                 float g = color.getGreen() / 255f;
                 float b = color.getBlue() / 255f;
 
-                if (projectile.tickCount % (15 - (focusLevel * 3)) == 0) {
-                    if (WissenItemUtils.canRemoveWissen(stack, getWissenCostWithStat(projectile.getStats(), player))) {
+                if (projectile.tickCount % getBlockTicks(projectile, focusLevel) == 0) {
+                    if (WissenItemUtils.canRemoveWissen(stack, getWissenCostWithStat(projectile.getStats(), player, getBlockWissen(projectile, focusLevel)))) {
                         Vec3 vec = getBlockHitOffset(ray, projectile, -0.1f);
                         BlockPos blockPos = new BlockPos(Mth.floor(vec.x()), Mth.floor(vec.y()), Mth.floor(vec.z()));
                         BlockState blockState = world.getBlockState(blockPos);
@@ -98,7 +98,7 @@ public class FireRaySpell extends RaySpell {
                                 BlockState blockstate1 = BaseFireBlock.getState(world, blockPos);
                                 world.setBlock(blockPos, blockstate1, 11);
 
-                                removeWissen(stack, projectile.getStats(), player);
+                                removeWissen(stack, projectile.getStats(), player, getBlockWissen(projectile, focusLevel));
 
                                 PacketHandler.sendToTracking(world, player.getOnPos(), new FireRaySpellEffectPacket((float) blockPos.getX() + 0.5f, (float) blockPos.getY() + 0.2f, (float) blockPos.getZ() + 0.5f, r, g, b));
                             }
@@ -114,7 +114,7 @@ public class FireRaySpell extends RaySpell {
                                 world.setBlock(blockPos, blockState.setValue(BlockStateProperties.LIT, Boolean.valueOf(true)), 11);
                                 world.gameEvent(player, GameEvent.BLOCK_CHANGE, blockPos);
 
-                                removeWissen(stack, projectile.getStats(), player);
+                                removeWissen(stack, projectile.getStats(), player, getBlockWissen(projectile, focusLevel));
 
                                 PacketHandler.sendToTracking(world, player.getOnPos(), new FireRaySpellEffectPacket((float) blockPos.getX() + 0.5f, (float) blockPos.getY() + 0.5f, (float) blockPos.getZ() + 0.5f, r, g, b));
                             }
@@ -123,5 +123,13 @@ public class FireRaySpell extends RaySpell {
                 }
             }
         }
+    }
+
+    public int getBlockTicks(SpellProjectileEntity projectile, int focusLevel) {
+        return (15 - (focusLevel * 3));
+    }
+
+    public int getBlockWissen(SpellProjectileEntity projectile, int focusLevel) {
+        return getWissenCost();
     }
 }

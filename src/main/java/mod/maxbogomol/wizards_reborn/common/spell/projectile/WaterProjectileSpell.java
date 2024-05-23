@@ -31,12 +31,11 @@ public class WaterProjectileSpell extends ProjectileSpell {
         float magicModifier = ArcaneArmorItem.getPlayerMagicModifier(player);
         float damage = (float) (2.0f + (focusLevel * 0.5)) + magicModifier;
 
-        target.hurt(new DamageSource(target.damageSources().drown().typeHolder(), projectile, player), damage);
         target.clearFire();
         int frost = target.getTicksFrozen() + 10;
-        if (frost > 250) {
-            frost = 250;
-        }
+        if (frost > 250) frost = 250;
         target.setTicksFrozen(frost);
+
+        target.hurt(new DamageSource(target.damageSources().drown().typeHolder(), projectile, player), damage);
     }
 }

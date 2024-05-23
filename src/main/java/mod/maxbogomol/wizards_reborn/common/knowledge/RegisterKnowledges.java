@@ -183,7 +183,7 @@ public class RegisterKnowledges {
         addProgression(LIGHT_EMITTER, ARCANUM_LENS);
         addProgression(RUNIC_PEDESTAL, ARCANUM_LENS);
         addProgression(CRYSTAL_INFUSION, RUNIC_PEDESTAL);
-        addProgression(ARCANE_WOOD, CRYSTAL_INFUSION);
+        addProgression(INNOCENT_WOOD, CRYSTAL_INFUSION);
     }
 
     public static void initAdditionalProgression() {

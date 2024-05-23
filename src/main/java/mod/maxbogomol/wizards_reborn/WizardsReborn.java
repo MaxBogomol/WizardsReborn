@@ -73,14 +73,13 @@ import mod.maxbogomol.wizards_reborn.common.recipe.*;
 import mod.maxbogomol.wizards_reborn.common.spell.MagicSproutSpell;
 import mod.maxbogomol.wizards_reborn.common.spell.aura.*;
 import mod.maxbogomol.wizards_reborn.common.spell.charge.*;
+import mod.maxbogomol.wizards_reborn.common.spell.look.AirImpactSpell;
 import mod.maxbogomol.wizards_reborn.common.spell.look.BlinkSpell;
 import mod.maxbogomol.wizards_reborn.common.spell.look.WisdomSpell;
 import mod.maxbogomol.wizards_reborn.common.spell.look.cloud.RainCloudSpell;
 import mod.maxbogomol.wizards_reborn.common.spell.look.cloud.ToxicRainSpell;
-import mod.maxbogomol.wizards_reborn.common.spell.look.entity.CurseCrossSpell;
-import mod.maxbogomol.wizards_reborn.common.spell.look.entity.HolyCrossSpell;
-import mod.maxbogomol.wizards_reborn.common.spell.look.entity.PoisonSpell;
-import mod.maxbogomol.wizards_reborn.common.spell.look.entity.WitheringSpell;
+import mod.maxbogomol.wizards_reborn.common.spell.look.entity.*;
+import mod.maxbogomol.wizards_reborn.common.spell.look.strike.IncinerationSpell;
 import mod.maxbogomol.wizards_reborn.common.spell.look.strike.RenunciationSpell;
 import mod.maxbogomol.wizards_reborn.common.spell.look.strike.RepentanceSpell;
 import mod.maxbogomol.wizards_reborn.common.spell.projectile.*;
@@ -89,6 +88,9 @@ import mod.maxbogomol.wizards_reborn.common.spell.self.AirFlowSpell;
 import mod.maxbogomol.wizards_reborn.common.spell.self.FireShieldSpell;
 import mod.maxbogomol.wizards_reborn.common.spell.self.HeartOfNatureSpell;
 import mod.maxbogomol.wizards_reborn.common.spell.self.WaterBreathingSpell;
+import mod.maxbogomol.wizards_reborn.common.spell.sound.BoomSoundSpell;
+import mod.maxbogomol.wizards_reborn.common.spell.sound.MoaiSoundSpell;
+import mod.maxbogomol.wizards_reborn.common.spell.sound.PipeSoundSpell;
 import mod.maxbogomol.wizards_reborn.common.tileentity.*;
 import mod.maxbogomol.wizards_reborn.common.world.tree.ArcaneWoodTree;
 import mod.maxbogomol.wizards_reborn.common.world.tree.ArcaneWoodTrunkPlacer;
@@ -481,7 +483,9 @@ public class WizardsReborn {
     public static Color curseSpellColor = new Color(203, 194, 255);
     public static Color poisonSpellColor = new Color(149, 255, 115);
     public static Color witheringSpellColor = new Color(64, 50, 41);
+    public static Color necroticSpellColor = new Color(255, 119, 167);
     public static Color experienceSpellColor = new Color(245, 255, 143);
+    public static Color soundSpellColor = new Color(250, 242, 242);
 
     //CRYSTAL_STATS
     public static CrystalStat FOCUS_CRYSTAL_STAT = new CrystalStat(MOD_ID+":focus", 3);
@@ -547,10 +551,12 @@ public class WizardsReborn {
     public static Spell AIR_FLOW_SPELL = new AirFlowSpell(MOD_ID+":air_flow", 12);
     public static Spell FIRE_SHIELD_SPELL = new FireShieldSpell(MOD_ID+":fire_shield", 12);
     public static Spell BLINK_SPELL = new BlinkSpell(MOD_ID+":blink", 12, false);
+    public static Spell SNOWFLAKE_SPELL = new SnowflakeSpell(MOD_ID+":snowflake", 12);
     public static Spell HOLY_CROSS_SPELL = new HolyCrossSpell(MOD_ID+":holy_cross", 7);
     public static Spell CURSE_CROSS_SPELL = new CurseCrossSpell(MOD_ID+":curse_cross", 7);
-    public static Spell MAGIC_SPROUT_SPELL = new MagicSproutSpell(MOD_ID+":magic_sprout", 12);
     public static Spell POISON_SPELL = new PoisonSpell(MOD_ID+":poison", 15);
+    public static Spell MAGIC_SPROUT_SPELL = new MagicSproutSpell(MOD_ID+":magic_sprout", 12);
+    public static Spell AIR_IMPACT_SPELL = new AirImpactSpell(MOD_ID+":air_impact", 15);
     public static Spell EARTH_CHARGE_SPELL = new EarthChargeSpell(MOD_ID+":earth_charge", 10);
     public static Spell WATER_CHARGE_SPELL = new WaterChargeSpell(MOD_ID+":water_charge", 10);
     public static Spell AIR_CHARGE_SPELL = new AirChargeSpell(MOD_ID+":air_charge", 10);
@@ -573,10 +579,17 @@ public class WizardsReborn {
     public static Spell TOXIC_RAIN_SPELL = new ToxicRainSpell(MOD_ID+":toxic_rain", 15);
     public static Spell MOR_SWARM_SPELL = new LightRaySpell(MOD_ID+":mor_swarm", 15);
     public static Spell WITHERING_SPELL = new WitheringSpell(MOD_ID+":withering", 15);
-    public static Spell WISDOM_SPELL = new WisdomSpell(MOD_ID+":wisdom", 15);
     public static Spell LIGHT_RAY_SPELL = new LightRaySpell(MOD_ID+":light_ray", 15);
+    public static Spell INCINERATION_SPELL = new IncinerationSpell(MOD_ID+":incineration", 15);
     public static Spell REPENTANCE_SPELL = new RepentanceSpell(MOD_ID+":repentance", 15);
     public static Spell RENUNCIATION_SPELL = new RenunciationSpell(MOD_ID+":renunciation", 15);
+    public static Spell EMBER_RAY_SPELL = new EmberRaySpell(MOD_ID+":ember_ray", 15);
+    public static Spell NECROTIC_RAY_SPELL = new NecroticRaySpell(MOD_ID+":necrotic_ray", 15);
+    public static Spell WISDOM_SPELL = new WisdomSpell(MOD_ID+":wisdom", 15);
+
+    public static Spell PIPE_SOUND_SPELL = new PipeSoundSpell(MOD_ID+":pipe_sound", 15);
+    public static Spell BOOM_SOUND_SPELL = new BoomSoundSpell(MOD_ID+":boom_sound", 15);
+    public static Spell MOAI_SOUND_SPELL = new MoaiSoundSpell(MOD_ID+":moai_sound", 15);
 
     //ARCANE ENCHANTMENT
     public static ArcaneEnchantment WISSEN_MENDING_ARCANE_ENCHANTMENT = new WissenMendingArcaneEnchantment(MOD_ID+":wissen_mending", 3);
@@ -1479,6 +1492,10 @@ public class WizardsReborn {
     public static final RegistryObject<SoundEvent> CRYSTAL_RITUAL_START_SOUND = SOUND_EVENTS.register("crystal_ritual_start", () -> SoundEvent.createVariableRangeEvent(new ResourceLocation(MOD_ID, "crystal_ritual_start")));
     public static final RegistryObject<SoundEvent> CRYSTAL_RITUAL_END_SOUND = SOUND_EVENTS.register("crystal_ritual_end", () -> SoundEvent.createVariableRangeEvent(new ResourceLocation(MOD_ID, "crystal_ritual_end")));
 
+    public static final RegistryObject<SoundEvent> PIPE_SOUND = SOUND_EVENTS.register("pipe", () -> SoundEvent.createVariableRangeEvent(new ResourceLocation(MOD_ID, "pipe")));
+    public static final RegistryObject<SoundEvent> BOOM_SOUND = SOUND_EVENTS.register("boom", () -> SoundEvent.createVariableRangeEvent(new ResourceLocation(MOD_ID, "boom")));
+    public static final RegistryObject<SoundEvent> MOAI_SOUND = SOUND_EVENTS.register("moai", () -> SoundEvent.createVariableRangeEvent(new ResourceLocation(MOD_ID, "moai")));
+
     public static final RegistryObject<ArgumentTypeInfo<?, ?>> KNOWLEDGE_ARG = ARG_TYPES.register("knowledge", () -> ArgumentTypeInfos.registerByClass(KnowledgeArgument.class, SingletonArgumentInfo.contextFree(KnowledgeArgument::knowledges)));
     public static final RegistryObject<ArgumentTypeInfo<?, ?>> SPELLS_ARG = ARG_TYPES.register("spell", () -> ArgumentTypeInfos.registerByClass(SpellArgument.class, SingletonArgumentInfo.contextFree(SpellArgument::spells)));
     public static final RegistryObject<ArgumentTypeInfo<?, ?>> ARCANE_ENCHANTMENT_ARG = ARG_TYPES.register("arcane_enchantment", () -> ArgumentTypeInfos.registerByClass(ArcaneEnchantmentArgument.class, SingletonArgumentInfo.contextFree(ArcaneEnchantmentArgument::arcaneEnchantments)));
@@ -1856,10 +1873,12 @@ public class WizardsReborn {
         Spells.register(AIR_FLOW_SPELL);
         Spells.register(FIRE_SHIELD_SPELL);
         Spells.register(BLINK_SPELL);
+        Spells.register(SNOWFLAKE_SPELL);
         Spells.register(HOLY_CROSS_SPELL);
         Spells.register(CURSE_CROSS_SPELL);
-        Spells.register(MAGIC_SPROUT_SPELL);
         Spells.register(POISON_SPELL);
+        Spells.register(MAGIC_SPROUT_SPELL);
+        Spells.register(AIR_IMPACT_SPELL);
         Spells.register(EARTH_CHARGE_SPELL);
         Spells.register(WATER_CHARGE_SPELL);
         Spells.register(AIR_CHARGE_SPELL);
@@ -1882,10 +1901,17 @@ public class WizardsReborn {
         Spells.register(TOXIC_RAIN_SPELL);
         Spells.register(MOR_SWARM_SPELL);
         Spells.register(WITHERING_SPELL);
-        Spells.register(WISDOM_SPELL);
         Spells.register(LIGHT_RAY_SPELL);
+        Spells.register(INCINERATION_SPELL);
         Spells.register(REPENTANCE_SPELL);
         Spells.register(RENUNCIATION_SPELL);
+        Spells.register(EMBER_RAY_SPELL);
+        Spells.register(NECROTIC_RAY_SPELL);
+        Spells.register(WISDOM_SPELL);
+
+        Spells.register(PIPE_SOUND_SPELL);
+        Spells.register(BOOM_SOUND_SPELL);
+        Spells.register(MOAI_SOUND_SPELL);
     }
 
     public static void setupArcaneEnchantments() {

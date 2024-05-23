@@ -39,15 +39,14 @@ public class WaterAuraSpell extends AuraSpell {
             for (Entity target : targets) {
                 if (target instanceof LivingEntity livingEntity) {
                     if (!target.equals(player)) {
+                        target.clearFire();
+                        int frost = target.getTicksFrozen() + 10;
+                        if (frost > 250) frost = 250;
+                        target.setTicksFrozen(frost);
+
                         DamageSource damageSource = new DamageSource(target.damageSources().drown().typeHolder());
                         livingEntity.lastHurtByPlayerTime = livingEntity.tickCount;
                         livingEntity.hurt(damageSource, damage);
-                        target.clearFire();
-                        int frost = target.getTicksFrozen() + 10;
-                        if (frost > 250) {
-                            frost = 250;
-                        }
-                        target.setTicksFrozen(frost);
 
                         Color color = getColor();
                         float r = color.getRed() / 255f;

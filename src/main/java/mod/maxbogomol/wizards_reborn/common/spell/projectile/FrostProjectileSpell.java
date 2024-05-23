@@ -30,12 +30,12 @@ public class FrostProjectileSpell extends ProjectileSpell {
         int focusLevel = CrystalUtils.getStatLevel(projectile.getStats(), WizardsReborn.FOCUS_CRYSTAL_STAT);
         float magicModifier = ArcaneArmorItem.getPlayerMagicModifier(player);
         float damage = (float) (3.5f + (focusLevel * 0.5)) + magicModifier;
-        target.hurt(new DamageSource(target.damageSources().freeze().typeHolder(), projectile, player), damage);
+
         target.clearFire();
         int frost = target.getTicksFrozen() + 75;
-        if (frost > 250) {
-            frost = 250;
-        }
+        if (frost > 250) frost = 250;
         target.setTicksFrozen(frost);
+
+        target.hurt(new DamageSource(target.damageSources().freeze().typeHolder(), projectile, player), damage);
     }
 }

@@ -20,7 +20,12 @@ public class EntityLookSpell extends LookSpell {
     }
 
     public float getReachDistance(Level world, Player player, InteractionHand hand) {
-        return  (float) (player.getAttributeValue(ForgeMod.BLOCK_REACH.get()) + getLookDistance(world, player, hand));
+        if (hasReachDistance(world, player, hand)) return (float) (player.getAttributeValue(ForgeMod.ENTITY_REACH.get()) + getLookDistance(world, player, hand));
+        return (getLookDistance(world, player, hand));
+    }
+
+    public boolean hasReachDistance(Level world, Player player, InteractionHand hand) {
+        return true;
     }
 
     @Override
@@ -28,7 +33,7 @@ public class EntityLookSpell extends LookSpell {
         return getEntityHit(world, player, hand).hasEntities();
     }
 
-    public HitResult getEntityHit(Level world, Player player, InteractionHand hand, Predicate<Entity> entityFilter, int entityCount, int size, boolean endE) {
+    public HitResult getEntityHit(Level world, Player player, InteractionHand hand, Predicate<Entity> entityFilter, int entityCount, float size, boolean endE) {
         float distance = getReachDistance(world, player, hand);
         return getHitPos(world, player.getEyePosition(), player.getEyePosition().add(player.getLookAngle().scale(distance)), entityFilter, entityCount, size, endE);
     }
@@ -53,6 +58,16 @@ public class EntityLookSpell extends LookSpell {
                 return e instanceof LivingEntity;
             }
             return false;
+        };
+    }
+
+    public static Predicate<Entity> getAllFilter() {
+        return (e) -> {return true;};
+    }
+
+    public static Predicate<Entity> getAllFilter(Player player) {
+        return (e) -> {
+            return !e.equals(player);
         };
     }
 }
