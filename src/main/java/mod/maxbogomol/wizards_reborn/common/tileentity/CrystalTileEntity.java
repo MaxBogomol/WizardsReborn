@@ -337,7 +337,7 @@ public class CrystalTileEntity extends TileSimpleInventory implements TickableBl
     }
 
     @Override
-    public void wissenWandFuction() {
+    public void wissenWandFunction() {
         startRitual = true;
     }
 

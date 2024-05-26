@@ -10,6 +10,7 @@ import mod.maxbogomol.wizards_reborn.api.crystalritual.CrystalRitual;
 import mod.maxbogomol.wizards_reborn.api.crystalritual.CrystalRitualUtils;
 import mod.maxbogomol.wizards_reborn.api.crystalritual.CrystalRituals;
 import mod.maxbogomol.wizards_reborn.client.event.ClientTickHandler;
+import mod.maxbogomol.wizards_reborn.client.render.WorldRenderHandler;
 import mod.maxbogomol.wizards_reborn.common.item.IGuiParticleItem;
 import mod.maxbogomol.wizards_reborn.utils.ColorUtils;
 import mod.maxbogomol.wizards_reborn.utils.RenderUtils;
@@ -112,7 +113,7 @@ public class RunicWisestonePlateItem extends Item implements IGuiParticleItem {
 
             RenderSystem.enableBlend();
             RenderSystem.blendFunc(GlStateManager.SourceFactor.SRC_ALPHA, GlStateManager.DestFactor.ONE);
-            MultiBufferSource.BufferSource buffersource = Minecraft.getInstance().renderBuffers().bufferSource();
+            MultiBufferSource.BufferSource buffersource = WorldRenderHandler.getDelayedRender();
             RenderSystem.depthMask(false);
             RenderSystem.setShader(WizardsRebornClient::getGlowingShader);
             RenderSystem.setShaderColor(1F, 1F, 1F, 1F);
@@ -123,16 +124,14 @@ public class RunicWisestonePlateItem extends Item implements IGuiParticleItem {
             pose.pushPose();
             pose.translate(x + 8, y + 8, 100);
             pose.mulPose(Axis.ZP.rotationDegrees(-ticks * 0.55f));
-            pose.translate(-8, -8, 0);
-            RenderUtils.spriteGlowQuad(pose, buffersource, 0, 0, 16f, 16f, wisp.getU0(), wisp.getU1(), wisp.getV0(), wisp.getV1(), r, g, b, alpha);
+            RenderUtils.spriteGlowQuadCenter(pose, buffersource, 0, 0, 16f, 16f, wisp.getU0(), wisp.getU1(), wisp.getV0(), wisp.getV1(), r, g, b, alpha);
             buffersource.endBatch();
             pose.popPose();
 
             pose.pushPose();
             pose.translate(x + 8, y + 8, 100);
             pose.mulPose(Axis.ZP.rotationDegrees(ticks));
-            pose.translate(-9, -9, 0);
-            RenderUtils.spriteGlowQuad(pose, buffersource, 0, 0, 18f, 18f, sparkle.getU0(), sparkle.getU1(), sparkle.getV0(), sparkle.getV1(), r, g, b, alpha);
+            RenderUtils.spriteGlowQuadCenter(pose, buffersource, 0, 0, 18f, 18f, sparkle.getU0(), sparkle.getU1(), sparkle.getV0(), sparkle.getV1(), r, g, b, alpha);
             buffersource.endBatch();
             pose.popPose();
 

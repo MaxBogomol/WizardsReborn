@@ -46,6 +46,11 @@ public class WitheringSpell extends EntityLookSpell {
     }
 
     @Override
+    public int getMinimumPolishingLevel() {
+        return 1;
+    }
+
+    @Override
     public void lookSpell(Level world, Player player, InteractionHand hand) {
         ItemStack stack = player.getItemInHand(hand);
         CompoundTag stats = getStats(stack);

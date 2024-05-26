@@ -48,10 +48,13 @@ public class ArcanemiconChapters {
             ALL_SPELLS, EARTH_SPELLS, WATER_SPELLS, AIR_SPELLS, FIRE_SPELLS, VOID_SPELLS,
             EARTH_PROJECTILE, WATER_PROJECTILE, AIR_PROJECTILE, FIRE_PROJECTILE, VOID_PROJECTILE, FROST_PROJECTILE, HOLY_PROJECTILE, CURSE_PROJECTILE,
             EARTH_RAY, WATER_RAY, AIR_RAY, FIRE_RAY, VOID_RAY, FROST_RAY, HOLY_RAY, CURSE_RAY,
-            HEART_OF_NATURE, WATER_BREATHING, AIR_FLOW, FIRE_SHIELD, BLINK, SNOWFLAKE, HOLY_CROSS, CURSE_CROSS, POISON, MAGIC_SPROUT,
+            HEART_OF_NATURE, WATER_BREATHING, AIR_FLOW, FIRE_SHIELD, BLINK, SNOWFLAKE, HOLY_CROSS, CURSE_CROSS, POISON,
+            MAGIC_SPROUT, DIRT_BLOCK, WATER_BLOCK, AIR_IMPACT, ICE_BLOCK,
             EARTH_CHARGE, WATER_CHARGE, AIR_CHARGE, FIRE_CHARGE, VOID_CHARGE, FROST_CHARGE, HOLY_CHARGE, CURSE_CHARGE,
             EARTH_AURA, WATER_AURA, AIR_AURA, FIRE_AURA, VOID_AURA, FROST_AURA, HOLY_AURA, CURSE_AURA,
+            RAIN_CLOUD, LAVA_BLOCK, ICICLE, SHARP_BLINK, CRYSTAL_CRUSHING, TOXIC_RAIN, MOR_SWARM, WITHERING, WHAT, NECROTIC_RAY, LIGHT_RAY,
             INCINERATION, REPENTANCE, RENUNCIATION,
+            EMBER_RAY, WISDOM,
             PROGRESSION, SPECIAL_THANKS, RESEARCHES, MONOGRAMS, RESEARCH, LUNAM_MONOGRAM, VITA_MONOGRAM, SOLEM_MONOGRAM, MORS_MONOGRAM, MIRACULUM_MONOGRAM, TEMPUS_MONOGRAM, STATERA_MONOGRAM, ECLIPSIS_MONOGRAM, SICCITAS_MONOGRAM, SOLSTITIUM_MONOGRAM, FAMES_MONOGRAM, RENAISSANCE_MONOGRAM, BELLUM_MONOGRAM, LUX_MONOGRAM, KARA_MONOGRAM, DEGRADATIO_MONOGRAM, PRAEDICTIONEM_MONOGRAM, EVOLUTIONIS_MONOGRAM, TENEBRIS_MONOGRAM, UNIVERSUM_MONOGRAM,
             LIGHT_RAYS, LIGHT_EMITTER, LIGHT_TRANSFER_LENS, RUNIC_PEDESTAL, CRYSTALS_RITUALS, ARTIFICIAL_FERTILITY, RITUAL_BREEDING, CRYSTAL_GROWTH_ACCELERATION, CRYSTAL_INFUSION, ARCANUM_SEED, INNOCENT_WOOD, INNOCENT_WOOD_TOOLS,
             MOR, MORTAR, ARCANE_LINEN, MUSHROOM_CAPS, WISESTONE, WISESTONE_PEDESTAL, FLUID_PIPES, STEAM_PIPES, ORBITAL_FLUID_RETAINER, ALCHEMY_FURNACE, STEAM_THERMAL_STORAGE, ALCHEMY_MACHINE, ALCHEMY_OIL, MUSIC_DISC_ARCANUM, MUSIC_DISC_MOR, NETHER_SALT, ALCHEMY_CALX, ALCHEMY_GLASS, ALCHEMY_BAG, ALCHEMY_POTIONS, TEA, ALCHEMY_BREWS, ADVANCED_CALX, ALCHEMY_TRANSMUTATION, ARCANE_CENSER, SMOKING_PIPE, ARCACITE, ARCACITE_POLISHING_MIXTURE;
@@ -1707,6 +1710,26 @@ public class ArcanemiconChapters {
                 new TitledSpellPage("wizards_reborn.arcanemicon.page.magic_sprout", WizardsReborn.MAGIC_SPROUT_SPELL),
                 new SpellCharPage("wizards_reborn.arcanemicon.page.magic_sprout.char", WizardsReborn.MAGIC_SPROUT_SPELL)
         );
+        DIRT_BLOCK = new Chapter(
+                "wizards_reborn.arcanemicon.chapter.dirt_block",
+                new TitledSpellPage("wizards_reborn.arcanemicon.page.dirt_block", WizardsReborn.DIRT_BLOCK_SPELL),
+                new SpellCharPage("wizards_reborn.arcanemicon.page.dirt_block.char", WizardsReborn.DIRT_BLOCK_SPELL)
+        );
+        WATER_BLOCK = new Chapter(
+                "wizards_reborn.arcanemicon.chapter.water_block",
+                new TitledSpellPage("wizards_reborn.arcanemicon.page.water_block", WizardsReborn.WATER_BLOCK_SPELL),
+                new SpellCharPage("wizards_reborn.arcanemicon.page.water_block.char", WizardsReborn.WATER_BLOCK_SPELL)
+        );
+        AIR_IMPACT = new Chapter(
+                "wizards_reborn.arcanemicon.chapter.air_impact",
+                new TitledSpellPage("wizards_reborn.arcanemicon.page.air_impact", WizardsReborn.AIR_IMPACT_SPELL),
+                new SpellCharPage("wizards_reborn.arcanemicon.page.air_impact.char", WizardsReborn.AIR_IMPACT_SPELL)
+        );
+        ICE_BLOCK = new Chapter(
+                "wizards_reborn.arcanemicon.chapter.ice_block",
+                new TitledSpellPage("wizards_reborn.arcanemicon.page.ice_block", WizardsReborn.ICE_BLOCK_SPELL),
+                new SpellCharPage("wizards_reborn.arcanemicon.page.ice_block.char", WizardsReborn.ICE_BLOCK_SPELL)
+        );
 
         EARTH_CHARGE = new Chapter(
                 "wizards_reborn.arcanemicon.chapter.earth_charge",
@@ -1790,6 +1813,67 @@ public class ArcanemiconChapters {
                 new SpellCharPage("wizards_reborn.arcanemicon.page.curse_aura.char", WizardsReborn.CURSE_AURA_SPELL)
         );
 
+        RAIN_CLOUD = new Chapter(
+                "wizards_reborn.arcanemicon.chapter.rain_cloud",
+                new TitledSpellPage("wizards_reborn.arcanemicon.page.rain_cloud", WizardsReborn.RAIN_CLOUD_SPELL),
+                new SpellCharPage("wizards_reborn.arcanemicon.page.rain_cloud.char", WizardsReborn.RAIN_CLOUD_SPELL)
+        );
+        LAVA_BLOCK = new Chapter(
+                "wizards_reborn.arcanemicon.chapter.rain_cloud",
+                new TitledSpellPage("wizards_reborn.arcanemicon.page.rain_cloud", WizardsReborn.LAVA_BLOCK_SPELL),
+                new SpellCharPage("wizards_reborn.arcanemicon.page.rain_cloud.char", WizardsReborn.LAVA_BLOCK_SPELL)
+        );
+        ICICLE = new Chapter(
+                "wizards_reborn.arcanemicon.chapter.icicle",
+                new TitledSpellPage("wizards_reborn.arcanemicon.page.icicle", WizardsReborn.ICICLE_SPELL),
+                new SpellCharPage("wizards_reborn.arcanemicon.page.icicle.char", WizardsReborn.ICICLE_SPELL)
+        );
+        SHARP_BLINK = new Chapter(
+                "wizards_reborn.arcanemicon.chapter.sharp_blink",
+                new TitledSpellPage("wizards_reborn.arcanemicon.page.sharp_blink", WizardsReborn.SHARP_BLINK_SPELL),
+                new SpellCharPage("wizards_reborn.arcanemicon.page.sharp_blink.char", WizardsReborn.SHARP_BLINK_SPELL)
+        );
+        CRYSTAL_CRUSHING = new Chapter(
+                "wizards_reborn.arcanemicon.chapter.crystal_crushing",
+                new TitledSpellPage("wizards_reborn.arcanemicon.page.crystal_crushing", WizardsReborn.CRYSTAL_CRUSHING_SPELL),
+                new SpellCharPage("wizards_reborn.arcanemicon.page.crystal_crushing.char", WizardsReborn.CRYSTAL_CRUSHING_SPELL)
+        );
+        TOXIC_RAIN = new Chapter(
+                "wizards_reborn.arcanemicon.chapter.toxic_rain",
+                new TitledSpellPage("wizards_reborn.arcanemicon.page.toxic_rain", WizardsReborn.TOXIC_RAIN_SPELL),
+                new SpellCharPage("wizards_reborn.arcanemicon.page.toxic_rain.char", WizardsReborn.TOXIC_RAIN_SPELL)
+        );
+        MOR_SWARM = new Chapter(
+                "wizards_reborn.arcanemicon.chapter.mor_swarm",
+                new TitledSpellPage("wizards_reborn.arcanemicon.page.mor_swarm", WizardsReborn.MOR_SWARM_SPELL),
+                new SpellCharPage("wizards_reborn.arcanemicon.page.mor_swarm.char", WizardsReborn.MOR_SWARM_SPELL)
+        );
+        WITHERING = new Chapter(
+                "wizards_reborn.arcanemicon.chapter.withering",
+                new TitledSpellPage("wizards_reborn.arcanemicon.page.withering", WizardsReborn.WITHERING_SPELL),
+                new SpellCharPage("wizards_reborn.arcanemicon.page.withering.char", WizardsReborn.WITHERING_SPELL)
+        );
+        WITHERING = new Chapter(
+                "wizards_reborn.arcanemicon.chapter.withering",
+                new TitledSpellPage("wizards_reborn.arcanemicon.page.withering", WizardsReborn.WITHERING_SPELL),
+                new SpellCharPage("wizards_reborn.arcanemicon.page.withering.char", WizardsReborn.WITHERING_SPELL)
+        );
+        WHAT = new Chapter(
+                "wizards_reborn.arcanemicon.chapter.what",
+                new TitledSpellPage("wizards_reborn.arcanemicon.page.what", WizardsReborn.WHAT_SPELL),
+                new SpellCharPage("wizards_reborn.arcanemicon.page.what.char", WizardsReborn.WHAT_SPELL)
+        );
+        NECROTIC_RAY = new Chapter(
+                "wizards_reborn.arcanemicon.chapter.necrotic_ray",
+                new TitledSpellPage("wizards_reborn.arcanemicon.page.necrotic_ray", WizardsReborn.NECROTIC_RAY_SPELL),
+                new SpellCharPage("wizards_reborn.arcanemicon.page.necrotic_ray.char", WizardsReborn.NECROTIC_RAY_SPELL)
+        );
+        LIGHT_RAY = new Chapter(
+                "wizards_reborn.arcanemicon.chapter.light_ray",
+                new TitledSpellPage("wizards_reborn.arcanemicon.page.light_ray", WizardsReborn.LIGHT_RAY_SPELL),
+                new SpellCharPage("wizards_reborn.arcanemicon.page.light_ray.char", WizardsReborn.LIGHT_RAY_SPELL)
+        );
+
         INCINERATION = new Chapter(
                 "wizards_reborn.arcanemicon.chapter.incineration",
                 new TitledSpellPage("wizards_reborn.arcanemicon.page.incineration", WizardsReborn.INCINERATION_SPELL),
@@ -1804,6 +1888,17 @@ public class ArcanemiconChapters {
                 "wizards_reborn.arcanemicon.chapter.renunciation",
                 new TitledSpellPage("wizards_reborn.arcanemicon.page.renunciation", WizardsReborn.RENUNCIATION_SPELL),
                 new SpellCharPage("wizards_reborn.arcanemicon.page.renunciation.char", WizardsReborn.RENUNCIATION_SPELL)
+        );
+
+        EMBER_RAY = new Chapter(
+                "wizards_reborn.arcanemicon.chapter.ember_ray",
+                new TitledSpellPage("wizards_reborn.arcanemicon.page.ember_ray", WizardsReborn.EMBER_RAY_SPELL),
+                new SpellCharPage("wizards_reborn.arcanemicon.page.ember_ray.char", WizardsReborn.EMBER_RAY_SPELL)
+        );
+        WISDOM = new Chapter(
+                "wizards_reborn.arcanemicon.chapter.wisdom",
+                new TitledSpellPage("wizards_reborn.arcanemicon.page.wisdom", WizardsReborn.WISDOM_SPELL),
+                new SpellCharPage("wizards_reborn.arcanemicon.page.wisdom.char", WizardsReborn.WISDOM_SPELL)
         );
 
         LUNAM_MONOGRAM = new Chapter(
@@ -1941,7 +2036,13 @@ public class ArcanemiconChapters {
                         new SpellIndexEntry(HOLY_CROSS, WizardsReborn.HOLY_CROSS_SPELL, RegisterKnowledges.ARCANE_WAND),
                         new SpellIndexEntry(CURSE_CROSS, WizardsReborn.CURSE_CROSS_SPELL, RegisterKnowledges.ARCANE_WAND),
                         new SpellIndexEntry(POISON, WizardsReborn.POISON_SPELL, RegisterKnowledges.ARCANE_WAND),
-                        new SpellIndexEntry(MAGIC_SPROUT, WizardsReborn.MAGIC_SPROUT_SPELL, RegisterKnowledges.ARCANE_WAND)
+                        new SpellIndexEntry(MAGIC_SPROUT, WizardsReborn.MAGIC_SPROUT_SPELL, RegisterKnowledges.ARCANE_WAND),
+                        new SpellIndexEntry(DIRT_BLOCK, WizardsReborn.DIRT_BLOCK_SPELL, RegisterKnowledges.ARCANE_WAND)
+                ),
+                new SpellIndexPage(
+                        new SpellIndexEntry(WATER_BLOCK, WizardsReborn.WATER_BLOCK_SPELL, RegisterKnowledges.ARCANE_WAND),
+                        new SpellIndexEntry(AIR_IMPACT, WizardsReborn.AIR_IMPACT_SPELL, RegisterKnowledges.ARCANE_WAND),
+                        new SpellIndexEntry(ICE_BLOCK, WizardsReborn.ICE_BLOCK_SPELL, RegisterKnowledges.ARCANE_WAND)
                 ),
                 new SpellIndexPage(
                         new SpellIndexEntry(EARTH_CHARGE, WizardsReborn.EARTH_CHARGE_SPELL, RegisterKnowledges.FACETED_CRYSTALS),
@@ -1963,12 +2064,26 @@ public class ArcanemiconChapters {
                 ),
                 new SpellIndexPage(
                         new SpellIndexEntry(HOLY_AURA, WizardsReborn.HOLY_AURA_SPELL, RegisterKnowledges.FACETED_CRYSTALS),
-                        new SpellIndexEntry(CURSE_AURA, WizardsReborn.CURSE_AURA_SPELL, RegisterKnowledges.FACETED_CRYSTALS)
+                        new SpellIndexEntry(CURSE_AURA, WizardsReborn.CURSE_AURA_SPELL, RegisterKnowledges.FACETED_CRYSTALS),
+                        new SpellIndexEntry(LAVA_BLOCK, WizardsReborn.LAVA_BLOCK_SPELL, RegisterKnowledges.FACETED_CRYSTALS),
+                        new SpellIndexEntry(ICICLE, WizardsReborn.ICICLE_SPELL, RegisterKnowledges.FACETED_CRYSTALS),
+                        new SpellIndexEntry(SHARP_BLINK, WizardsReborn.SHARP_BLINK_SPELL, RegisterKnowledges.FACETED_CRYSTALS),
+                        new SpellIndexEntry(CRYSTAL_CRUSHING, WizardsReborn.CRYSTAL_CRUSHING_SPELL, RegisterKnowledges.FACETED_CRYSTALS),
+                        new SpellIndexEntry(TOXIC_RAIN, WizardsReborn.TOXIC_RAIN_SPELL, RegisterKnowledges.FACETED_CRYSTALS)
+                ),
+                new SpellIndexPage(
+                        new SpellIndexEntry(MOR_SWARM, WizardsReborn.MOR_SWARM_SPELL, RegisterKnowledges.FACETED_CRYSTALS),
+                        new SpellIndexEntry(WITHERING, WizardsReborn.WITHERING_SPELL, RegisterKnowledges.FACETED_CRYSTALS),
+                        new SpellIndexEntry(WHAT, WizardsReborn.WHAT_SPELL, RegisterKnowledges.FACETED_CRYSTALS),
+                        new SpellIndexEntry(NECROTIC_RAY, WizardsReborn.NECROTIC_RAY_SPELL, RegisterKnowledges.FACETED_CRYSTALS),
+                        new SpellIndexEntry(LIGHT_RAY, WizardsReborn.LIGHT_RAY_SPELL, RegisterKnowledges.FACETED_CRYSTALS)
                 ),
                 new SpellIndexPage(
                         new SpellIndexEntry(INCINERATION, WizardsReborn.INCINERATION_SPELL, RegisterKnowledges.FACETED_CRYSTALS),
                         new SpellIndexEntry(REPENTANCE, WizardsReborn.REPENTANCE_SPELL, RegisterKnowledges.FACETED_CRYSTALS),
-                        new SpellIndexEntry(RENUNCIATION, WizardsReborn.RENUNCIATION_SPELL, RegisterKnowledges.FACETED_CRYSTALS)
+                        new SpellIndexEntry(RENUNCIATION, WizardsReborn.RENUNCIATION_SPELL, RegisterKnowledges.FACETED_CRYSTALS),
+                        new SpellIndexEntry(EMBER_RAY, WizardsReborn.EMBER_RAY_SPELL, RegisterKnowledges.FACETED_CRYSTALS),
+                        new SpellIndexEntry(WISDOM, WizardsReborn.WISDOM_SPELL, RegisterKnowledges.FACETED_CRYSTALS)
                 )
         );
 
@@ -1984,13 +2099,16 @@ public class ArcanemiconChapters {
                 ),
                 new SpellIndexPage(
                         new SpellIndexEntry(POISON, WizardsReborn.POISON_SPELL, RegisterKnowledges.ARCANE_WAND),
-                        new SpellIndexEntry(MAGIC_SPROUT, WizardsReborn.MAGIC_SPROUT_SPELL, RegisterKnowledges.ARCANE_WAND)
+                        new SpellIndexEntry(MAGIC_SPROUT, WizardsReborn.MAGIC_SPROUT_SPELL, RegisterKnowledges.ARCANE_WAND),
+                        new SpellIndexEntry(DIRT_BLOCK, WizardsReborn.DIRT_BLOCK_SPELL, RegisterKnowledges.ARCANE_WAND)
                 ),
                 new SpellIndexPage(
                         new SpellIndexEntry(EARTH_CHARGE, WizardsReborn.EARTH_CHARGE_SPELL, RegisterKnowledges.FACETED_CRYSTALS),
                         new SpellIndexEntry(HOLY_CHARGE, WizardsReborn.HOLY_CHARGE_SPELL, RegisterKnowledges.FACETED_CRYSTALS),
                         new SpellIndexEntry(EARTH_AURA, WizardsReborn.EARTH_AURA_SPELL, RegisterKnowledges.FACETED_CRYSTALS),
-                        new SpellIndexEntry(HOLY_AURA, WizardsReborn.HOLY_AURA_SPELL, RegisterKnowledges.FACETED_CRYSTALS)
+                        new SpellIndexEntry(HOLY_AURA, WizardsReborn.HOLY_AURA_SPELL, RegisterKnowledges.FACETED_CRYSTALS),
+                        new SpellIndexEntry(TOXIC_RAIN, WizardsReborn.TOXIC_RAIN_SPELL, RegisterKnowledges.FACETED_CRYSTALS),
+                        new SpellIndexEntry(MOR_SWARM, WizardsReborn.MOR_SWARM_SPELL, RegisterKnowledges.FACETED_CRYSTALS)
                 ),
                 new SpellIndexPage(
                         new SpellIndexEntry(REPENTANCE, WizardsReborn.REPENTANCE_SPELL, RegisterKnowledges.FACETED_CRYSTALS)
@@ -2009,13 +2127,21 @@ public class ArcanemiconChapters {
                 ),
                 new SpellIndexPage(
                         new SpellIndexEntry(POISON, WizardsReborn.POISON_SPELL, RegisterKnowledges.ARCANE_WAND),
-                        new SpellIndexEntry(MAGIC_SPROUT, WizardsReborn.MAGIC_SPROUT_SPELL, RegisterKnowledges.ARCANE_WAND)
+                        new SpellIndexEntry(MAGIC_SPROUT, WizardsReborn.MAGIC_SPROUT_SPELL, RegisterKnowledges.ARCANE_WAND),
+                        new SpellIndexEntry(WATER_BLOCK, WizardsReborn.WATER_BLOCK_SPELL, RegisterKnowledges.ARCANE_WAND),
+                        new SpellIndexEntry(ICE_BLOCK, WizardsReborn.ICE_BLOCK_SPELL, RegisterKnowledges.ARCANE_WAND)
                 ),
                 new SpellIndexPage(
                         new SpellIndexEntry(WATER_CHARGE, WizardsReborn.WATER_CHARGE_SPELL, RegisterKnowledges.FACETED_CRYSTALS),
                         new SpellIndexEntry(FROST_CHARGE, WizardsReborn.FROST_CHARGE_SPELL, RegisterKnowledges.FACETED_CRYSTALS),
                         new SpellIndexEntry(WATER_AURA, WizardsReborn.WATER_AURA_SPELL, RegisterKnowledges.FACETED_CRYSTALS),
-                        new SpellIndexEntry(FROST_AURA, WizardsReborn.FROST_AURA_SPELL, RegisterKnowledges.FACETED_CRYSTALS)
+                        new SpellIndexEntry(FROST_AURA, WizardsReborn.FROST_AURA_SPELL, RegisterKnowledges.FACETED_CRYSTALS),
+                        new SpellIndexEntry(RAIN_CLOUD, WizardsReborn.RAIN_CLOUD_SPELL, RegisterKnowledges.FACETED_CRYSTALS),
+                        new SpellIndexEntry(ICICLE, WizardsReborn.ICICLE_SPELL, RegisterKnowledges.FACETED_CRYSTALS),
+                        new SpellIndexEntry(TOXIC_RAIN, WizardsReborn.TOXIC_RAIN_SPELL, RegisterKnowledges.FACETED_CRYSTALS)
+                ),
+                new SpellIndexPage(
+                        new SpellIndexEntry(MOR_SWARM, WizardsReborn.MOR_SWARM_SPELL, RegisterKnowledges.FACETED_CRYSTALS)
                 )
         );
 
@@ -2030,10 +2156,14 @@ public class ArcanemiconChapters {
                         new SpellIndexEntry(HOLY_CROSS, WizardsReborn.HOLY_CROSS_SPELL, RegisterKnowledges.ARCANE_WAND)
                 ),
                 new SpellIndexPage(
+                        new SpellIndexEntry(AIR_IMPACT, WizardsReborn.AIR_IMPACT_SPELL, RegisterKnowledges.ARCANE_WAND)
+                ),
+                new SpellIndexPage(
                         new SpellIndexEntry(AIR_CHARGE, WizardsReborn.AIR_CHARGE_SPELL, RegisterKnowledges.FACETED_CRYSTALS),
                         new SpellIndexEntry(HOLY_CHARGE, WizardsReborn.HOLY_CHARGE_SPELL, RegisterKnowledges.FACETED_CRYSTALS),
                         new SpellIndexEntry(AIR_AURA, WizardsReborn.AIR_AURA_SPELL, RegisterKnowledges.FACETED_CRYSTALS),
-                        new SpellIndexEntry(HOLY_AURA, WizardsReborn.HOLY_AURA_SPELL, RegisterKnowledges.FACETED_CRYSTALS)
+                        new SpellIndexEntry(HOLY_AURA, WizardsReborn.HOLY_AURA_SPELL, RegisterKnowledges.FACETED_CRYSTALS),
+                        new SpellIndexEntry(WITHERING, WizardsReborn.WITHERING_SPELL, RegisterKnowledges.FACETED_CRYSTALS)
                 ),
                 new SpellIndexPage(
                         new SpellIndexEntry(REPENTANCE, WizardsReborn.REPENTANCE_SPELL, RegisterKnowledges.FACETED_CRYSTALS)
@@ -2054,7 +2184,10 @@ public class ArcanemiconChapters {
                         new SpellIndexEntry(FIRE_CHARGE, WizardsReborn.FIRE_CHARGE_SPELL, RegisterKnowledges.FACETED_CRYSTALS),
                         new SpellIndexEntry(CURSE_CHARGE, WizardsReborn.CURSE_CHARGE_SPELL, RegisterKnowledges.FACETED_CRYSTALS),
                         new SpellIndexEntry(FIRE_AURA, WizardsReborn.FIRE_AURA_SPELL, RegisterKnowledges.FACETED_CRYSTALS),
-                        new SpellIndexEntry(CURSE_AURA, WizardsReborn.CURSE_AURA_SPELL, RegisterKnowledges.FACETED_CRYSTALS)
+                        new SpellIndexEntry(CURSE_AURA, WizardsReborn.CURSE_AURA_SPELL, RegisterKnowledges.FACETED_CRYSTALS),
+                        new SpellIndexEntry(LAVA_BLOCK, WizardsReborn.LAVA_BLOCK_SPELL, RegisterKnowledges.FACETED_CRYSTALS),
+                        new SpellIndexEntry(WITHERING, WizardsReborn.WITHERING_SPELL, RegisterKnowledges.FACETED_CRYSTALS),
+                        new SpellIndexEntry(LIGHT_RAY, WizardsReborn.LIGHT_RAY_SPELL, RegisterKnowledges.FACETED_CRYSTALS)
                 ),
                 new SpellIndexPage(
                         new SpellIndexEntry(INCINERATION, WizardsReborn.INCINERATION_SPELL, RegisterKnowledges.FACETED_CRYSTALS),
@@ -2076,7 +2209,13 @@ public class ArcanemiconChapters {
                         new SpellIndexEntry(VOID_CHARGE, WizardsReborn.VOID_CHARGE_SPELL, RegisterKnowledges.FACETED_CRYSTALS),
                         new SpellIndexEntry(CURSE_CHARGE, WizardsReborn.CURSE_CHARGE_SPELL, RegisterKnowledges.FACETED_CRYSTALS),
                         new SpellIndexEntry(VOID_AURA, WizardsReborn.VOID_AURA_SPELL, RegisterKnowledges.FACETED_CRYSTALS),
-                        new SpellIndexEntry(CURSE_AURA, WizardsReborn.CURSE_AURA_SPELL, RegisterKnowledges.FACETED_CRYSTALS)
+                        new SpellIndexEntry(CURSE_AURA, WizardsReborn.CURSE_AURA_SPELL, RegisterKnowledges.FACETED_CRYSTALS),
+                        new SpellIndexEntry(SHARP_BLINK, WizardsReborn.SHARP_BLINK_SPELL, RegisterKnowledges.FACETED_CRYSTALS),
+                        new SpellIndexEntry(CRYSTAL_CRUSHING, WizardsReborn.CRYSTAL_CRUSHING_SPELL, RegisterKnowledges.FACETED_CRYSTALS),
+                        new SpellIndexEntry(WHAT, WizardsReborn.WHAT_SPELL, RegisterKnowledges.FACETED_CRYSTALS)
+                ),
+                new SpellIndexPage(
+                        new SpellIndexEntry(NECROTIC_RAY, WizardsReborn.NECROTIC_RAY_SPELL, RegisterKnowledges.FACETED_CRYSTALS)
                 ),
                 new SpellIndexPage(
                         new SpellIndexEntry(RENUNCIATION, WizardsReborn.RENUNCIATION_SPELL, RegisterKnowledges.FACETED_CRYSTALS)

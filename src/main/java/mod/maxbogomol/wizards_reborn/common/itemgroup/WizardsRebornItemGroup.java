@@ -300,6 +300,29 @@ public class WizardsRebornItemGroup {
             event.accept(WizardsReborn.LIGHT_EMITTER_ITEM);
             event.accept(WizardsReborn.LIGHT_TRANSFER_LENS_ITEM);
             event.accept(WizardsReborn.RUNIC_PEDESTAL_ITEM);
+
+            event.accept(WizardsReborn.ENGRAVED_WISESTONE_ITEM);
+            event.accept(WizardsReborn.ENGRAVED_WISESTONE_LUNAM_ITEM);
+            event.accept(WizardsReborn.ENGRAVED_WISESTONE_VITA_ITEM);
+            event.accept(WizardsReborn.ENGRAVED_WISESTONE_SOLEM_ITEM);
+            event.accept(WizardsReborn.ENGRAVED_WISESTONE_MORS_ITEM);
+            event.accept(WizardsReborn.ENGRAVED_WISESTONE_MIRACULUM_ITEM);
+            event.accept(WizardsReborn.ENGRAVED_WISESTONE_TEMPUS_ITEM);
+            event.accept(WizardsReborn.ENGRAVED_WISESTONE_STATERA_ITEM);
+            event.accept(WizardsReborn.ENGRAVED_WISESTONE_ECLIPSIS_ITEM);
+            event.accept(WizardsReborn.ENGRAVED_WISESTONE_SICCITAS_ITEM);
+            event.accept(WizardsReborn.ENGRAVED_WISESTONE_SOLSTITIUM_ITEM);
+            event.accept(WizardsReborn.ENGRAVED_WISESTONE_FAMES_ITEM);
+            event.accept(WizardsReborn.ENGRAVED_WISESTONE_RENAISSANCE_ITEM);
+            event.accept(WizardsReborn.ENGRAVED_WISESTONE_BELLUM_ITEM);
+            event.accept(WizardsReborn.ENGRAVED_WISESTONE_LUX_ITEM);
+            event.accept(WizardsReborn.ENGRAVED_WISESTONE_KARA_ITEM);
+            event.accept(WizardsReborn.ENGRAVED_WISESTONE_DEGRADATIO_ITEM);
+            event.accept(WizardsReborn.ENGRAVED_WISESTONE_PRAEDICTIONEM_ITEM);
+            event.accept(WizardsReborn.ENGRAVED_WISESTONE_EVOLUTIONIS_ITEM);
+            event.accept(WizardsReborn.ENGRAVED_WISESTONE_TENEBRIS_ITEM);
+            event.accept(WizardsReborn.ENGRAVED_WISESTONE_UNIVERSUM_ITEM);
+
             event.accept(WizardsReborn.INNOCENT_PEDESTAL_ITEM);
             event.accept(WizardsReborn.INNOCENT_HOVERING_TOME_STAND_ITEM);
 

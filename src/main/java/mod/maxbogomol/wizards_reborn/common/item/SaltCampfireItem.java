@@ -7,6 +7,7 @@ import com.mojang.math.Axis;
 import mod.maxbogomol.wizards_reborn.WizardsReborn;
 import mod.maxbogomol.wizards_reborn.WizardsRebornClient;
 import mod.maxbogomol.wizards_reborn.client.event.ClientTickHandler;
+import mod.maxbogomol.wizards_reborn.client.render.WorldRenderHandler;
 import mod.maxbogomol.wizards_reborn.common.tileentity.SaltCampfireTileEntity;
 import mod.maxbogomol.wizards_reborn.utils.RenderUtils;
 import net.minecraft.client.Minecraft;
@@ -45,7 +46,7 @@ public class SaltCampfireItem extends BlockItem implements IGuiParticleItem {
 
         RenderSystem.enableBlend();
         RenderSystem.blendFunc(GlStateManager.SourceFactor.SRC_ALPHA, GlStateManager.DestFactor.ONE);
-        MultiBufferSource.BufferSource buffersource = Minecraft.getInstance().renderBuffers().bufferSource();
+        MultiBufferSource.BufferSource buffersource = WorldRenderHandler.getDelayedRender();
         RenderSystem.depthMask(false);
         RenderSystem.setShader(WizardsRebornClient::getGlowingShader);
         RenderSystem.setShaderColor(1F, 1F, 1F, 1F);
@@ -56,32 +57,28 @@ public class SaltCampfireItem extends BlockItem implements IGuiParticleItem {
         pose.pushPose();
         pose.translate(x + 8, y + 6.5f, 100);
         pose.mulPose(Axis.ZP.rotationDegrees(ticks));
-        pose.translate(-7 * offset, -7 * offset, 0);
-        RenderUtils.spriteGlowQuad(pose, buffersource, 0, 0, 14f * offset, 14f * offset, sparkle.getU0(), sparkle.getU1(), sparkle.getV0(), sparkle.getV1(), r1, g1, b1, 0.5F);
+        RenderUtils.spriteGlowQuadCenter(pose, buffersource, 0, 0, 14f * offset, 14f * offset, sparkle.getU0(), sparkle.getU1(), sparkle.getV0(), sparkle.getV1(), r1, g1, b1, 0.5F);
         buffersource.endBatch();
         pose.popPose();
 
         pose.pushPose();
         pose.translate(x + 8, y + 6.5f, 100);
         pose.mulPose(Axis.ZP.rotationDegrees(ticks + 45));
-        pose.translate(-7 * offset, -7 * offset, 0);
-        RenderUtils.spriteGlowQuad(pose, buffersource, 0, 0, 14f * offset, 14f * offset, sparkle.getU0(), sparkle.getU1(), sparkle.getV0(), sparkle.getV1(), r2, g2, b2, 0.5F);
+        RenderUtils.spriteGlowQuadCenter(pose, buffersource, 0, 0, 14f * offset, 14f * offset, sparkle.getU0(), sparkle.getU1(), sparkle.getV0(), sparkle.getV1(), r2, g2, b2, 0.5F);
         buffersource.endBatch();
         pose.popPose();
 
         pose.pushPose();
         pose.translate(x + 8, y + 6.5f, 100);
         pose.mulPose(Axis.ZP.rotationDegrees(ticks));
-        pose.translate(-6 * offsetW, -6 * offsetW, 0);
-        RenderUtils.spriteGlowQuad(pose, buffersource, 0, 0, 12f * offsetW, 12f * offsetW, wisp.getU0(), wisp.getU1(), wisp.getV0(), wisp.getV1(), r1, g1, b1, 0.15F);
+        RenderUtils.spriteGlowQuadCenter(pose, buffersource, 0, 0, 12f * offsetW, 12f * offsetW, wisp.getU0(), wisp.getU1(), wisp.getV0(), wisp.getV1(), r1, g1, b1, 0.15F);
         buffersource.endBatch();
         pose.popPose();
 
         pose.pushPose();
         pose.translate(x + 8, y + 6.5f, 100);
         pose.mulPose(Axis.ZP.rotationDegrees(ticks + 45));
-        pose.translate(-6 * offsetW, -6 * offsetW, 0);
-        RenderUtils.spriteGlowQuad(pose, buffersource, 0, 0, 12f * offsetW, 12f * offsetW, wisp.getU0(), wisp.getU1(), wisp.getV0(), wisp.getV1(), r2, g2, b2, 0.15F);
+        RenderUtils.spriteGlowQuadCenter(pose, buffersource, 0, 0, 12f * offsetW, 12f * offsetW, wisp.getU0(), wisp.getU1(), wisp.getV0(), wisp.getV1(), r2, g2, b2, 0.15F);
         buffersource.endBatch();
         pose.popPose();
 

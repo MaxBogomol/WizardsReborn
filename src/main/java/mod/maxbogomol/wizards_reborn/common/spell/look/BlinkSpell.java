@@ -54,6 +54,12 @@ public class BlinkSpell extends LookSpell {
     }
 
     @Override
+    public int getMinimumPolishingLevel() {
+        if (isSharp) return 1;
+        return 0;
+    }
+
+    @Override
     public float getLookAdditionalDistance() {
         return 0.5f;
     }

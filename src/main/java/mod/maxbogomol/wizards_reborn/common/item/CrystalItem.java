@@ -10,6 +10,7 @@ import mod.maxbogomol.wizards_reborn.api.crystal.CrystalType;
 import mod.maxbogomol.wizards_reborn.api.crystal.CrystalUtils;
 import mod.maxbogomol.wizards_reborn.api.crystal.PolishingType;
 import mod.maxbogomol.wizards_reborn.client.particle.Particles;
+import mod.maxbogomol.wizards_reborn.client.render.WorldRenderHandler;
 import mod.maxbogomol.wizards_reborn.common.block.CrystalBlock;
 import mod.maxbogomol.wizards_reborn.utils.ColorUtils;
 import mod.maxbogomol.wizards_reborn.utils.RenderUtils;
@@ -176,7 +177,7 @@ public class CrystalItem extends BlockItem implements IParticleItem, IGuiParticl
 
             RenderSystem.enableBlend();
             RenderSystem.blendFunc(GlStateManager.SourceFactor.SRC_ALPHA, GlStateManager.DestFactor.ONE);
-            MultiBufferSource.BufferSource buffersource = Minecraft.getInstance().renderBuffers().bufferSource();
+            MultiBufferSource.BufferSource buffersource = WorldRenderHandler.getDelayedRender();
             RenderSystem.depthMask(false);
             RenderSystem.setShader(WizardsRebornClient::getGlowingShader);
             RenderSystem.setShaderColor(1F, 1F, 1F, 1F);

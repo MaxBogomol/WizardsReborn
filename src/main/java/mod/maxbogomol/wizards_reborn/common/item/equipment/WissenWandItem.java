@@ -108,7 +108,7 @@ public class WissenWandItem extends Item {
 
                 if (tileentity instanceof IWissenWandFunctionalTileEntity functionalTile) {
                     if (nbt.getInt("mode") == 0) {
-                        functionalTile.wissenWandFuction();
+                        functionalTile.wissenWandFunction();
                     }
                     stack.setTag(nbt);
                     result = InteractionResult.SUCCESS;

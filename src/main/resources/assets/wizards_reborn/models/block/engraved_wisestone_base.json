@@ -1,0 +1,12 @@
+{
+  "parent": "block/cube",
+  "textures": {
+    "particle": "wizards_reborn:block/engraved_wisestone",
+    "up": "wizards_reborn:block/engraved_wisestone_side",
+    "north": "wizards_reborn:block/engraved_wisestone_side",
+    "south": "wizards_reborn:block/engraved_wisestone_side",
+    "east": "wizards_reborn:block/engraved_wisestone_side",
+    "west": "wizards_reborn:block/engraved_wisestone_side",
+    "down": "wizards_reborn:block/engraved_wisestone_side"
+  }
+}

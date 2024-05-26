@@ -25,6 +25,21 @@ public class CloudSpell extends BlockLookSpell {
     }
 
     @Override
+    public int getMinimumPolishingLevel() {
+        return 1;
+    }
+
+    @Override
+    public int getCooldown() {
+        return 60;
+    }
+
+    @Override
+    public int getWissenCost() {
+        return 110;
+    }
+
+    @Override
     public void lookSpell(Level world, Player player, InteractionHand hand) {
         CompoundTag stats = getStats(player.getItemInHand(hand));
         Vec3 pos = getBlockHit(world, player, hand).getPosHit();

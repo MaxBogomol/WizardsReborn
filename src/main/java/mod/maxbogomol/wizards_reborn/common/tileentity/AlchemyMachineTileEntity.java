@@ -460,7 +460,7 @@ public class AlchemyMachineTileEntity extends PipeBaseTileEntity implements Tick
     }
 
     @Override
-    public void wissenWandFuction() {
+    public void wissenWandFunction() {
         startCraft = true;
     }
 

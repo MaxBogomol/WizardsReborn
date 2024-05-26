@@ -216,6 +216,7 @@ public class WizardsRebornClient {
             BlockEntityRenderers.register(WizardsReborn.LIGHT_EMITTER_TILE_ENTITY.get(), (trd) -> new LightEmitterBlockTileEntityRenderer());
             BlockEntityRenderers.register(WizardsReborn.LIGHT_TRANSFER_LENS_TILE_ENTITY.get(), (trd) -> new LightTransferLensTileEntityRenderer());
             BlockEntityRenderers.register(WizardsReborn.RUNIC_PEDESTAL_TILE_ENTITY.get(), (trd) -> new RunicPedestalTileEntityRenderer());
+            BlockEntityRenderers.register(WizardsReborn.ENGRAVED_WISESTONE_TILE_ENTITY.get(), (trd) -> new EngravedWisestoneTileEntityRenderer());
 
             BlockEntityRenderers.register(WizardsReborn.SENSOR_TILE_ENTITY.get(), (trd) -> new SensorTileEntityRenderer());
             BlockEntityRenderers.register(WizardsReborn.FLUID_SENSOR_TILE_ENTITY.get(), (trd) -> new FluidSensorTileEntityRenderer());

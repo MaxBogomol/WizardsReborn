@@ -556,7 +556,10 @@ public class WizardsReborn {
     public static Spell CURSE_CROSS_SPELL = new CurseCrossSpell(MOD_ID+":curse_cross", 7);
     public static Spell POISON_SPELL = new PoisonSpell(MOD_ID+":poison", 15);
     public static Spell MAGIC_SPROUT_SPELL = new MagicSproutSpell(MOD_ID+":magic_sprout", 12);
+    public static Spell DIRT_BLOCK_SPELL = new MagicSproutSpell(MOD_ID+":dirt_block", 12);
+    public static Spell WATER_BLOCK_SPELL = new MagicSproutSpell(MOD_ID+":water_block", 12);
     public static Spell AIR_IMPACT_SPELL = new AirImpactSpell(MOD_ID+":air_impact", 15);
+    public static Spell ICE_BLOCK_SPELL = new AirImpactSpell(MOD_ID+":ice_block", 15);
     public static Spell EARTH_CHARGE_SPELL = new EarthChargeSpell(MOD_ID+":earth_charge", 10);
     public static Spell WATER_CHARGE_SPELL = new WaterChargeSpell(MOD_ID+":water_charge", 10);
     public static Spell AIR_CHARGE_SPELL = new AirChargeSpell(MOD_ID+":air_charge", 10);
@@ -574,17 +577,20 @@ public class WizardsReborn {
     public static Spell HOLY_AURA_SPELL = new HolyAuraSpell(MOD_ID+":holy_aura", 10);
     public static Spell CURSE_AURA_SPELL = new CurseAuraSpell(MOD_ID+":curse_aura", 10);
     public static Spell RAIN_CLOUD_SPELL = new RainCloudSpell(MOD_ID+":rain_cloud", 15);
+    public static Spell LAVA_BLOCK_SPELL = new MagicSproutSpell(MOD_ID+":lava_block", 12);
     public static Spell ICICLE_SPELL = new IcicleSpell(MOD_ID+":icicle", 15);
     public static Spell SHARP_BLINK_SPELL = new BlinkSpell(MOD_ID+":sharp_blink", 12, true);
+    public static Spell CRYSTAL_CRUSHING_SPELL = new MagicSproutSpell(MOD_ID+":crystal_crushing", 12);
     public static Spell TOXIC_RAIN_SPELL = new ToxicRainSpell(MOD_ID+":toxic_rain", 15);
-    public static Spell MOR_SWARM_SPELL = new LightRaySpell(MOD_ID+":mor_swarm", 15);
+    public static Spell MOR_SWARM_SPELL = new ToxicRainSpell(MOD_ID+":mor_swarm", 15);
     public static Spell WITHERING_SPELL = new WitheringSpell(MOD_ID+":withering", 15);
+    public static Spell WHAT_SPELL = new NecroticRaySpell(MOD_ID+":what", 15);
+    public static Spell NECROTIC_RAY_SPELL = new NecroticRaySpell(MOD_ID+":necrotic_ray", 15);
     public static Spell LIGHT_RAY_SPELL = new LightRaySpell(MOD_ID+":light_ray", 15);
     public static Spell INCINERATION_SPELL = new IncinerationSpell(MOD_ID+":incineration", 15);
     public static Spell REPENTANCE_SPELL = new RepentanceSpell(MOD_ID+":repentance", 15);
     public static Spell RENUNCIATION_SPELL = new RenunciationSpell(MOD_ID+":renunciation", 15);
     public static Spell EMBER_RAY_SPELL = new EmberRaySpell(MOD_ID+":ember_ray", 15);
-    public static Spell NECROTIC_RAY_SPELL = new NecroticRaySpell(MOD_ID+":necrotic_ray", 15);
     public static Spell WISDOM_SPELL = new WisdomSpell(MOD_ID+":wisdom", 15);
 
     public static Spell PIPE_SOUND_SPELL = new PipeSoundSpell(MOD_ID+":pipe_sound", 15);
@@ -798,6 +804,29 @@ public class WizardsReborn {
     public static final RegistryObject<Block> LIGHT_EMITTER = BLOCKS.register("light_emitter", () -> new LightEmitterBlock(BlockBehaviour.Properties.copy(POLISHED_WISESTONE.get())));
     public static final RegistryObject<Block> LIGHT_TRANSFER_LENS = BLOCKS.register("light_transfer_lens", () -> new LightTransferLensBlock(BlockBehaviour.Properties.copy(POLISHED_WISESTONE.get())));
     public static final RegistryObject<Block> RUNIC_PEDESTAL = BLOCKS.register("runic_pedestal", () -> new RunicPedestalBlock(BlockBehaviour.Properties.copy(POLISHED_WISESTONE.get())));
+
+    public static final RegistryObject<Block> ENGRAVED_WISESTONE = BLOCKS.register("engraved_wisestone", () -> new EngravedWisestoneBlock(BlockBehaviour.Properties.copy(POLISHED_WISESTONE.get())));
+    public static final RegistryObject<Block> ENGRAVED_WISESTONE_LUNAM = BLOCKS.register("engraved_wisestone_lunam", () -> new EngravedWisestoneBlock(BlockBehaviour.Properties.copy(POLISHED_WISESTONE.get()), LUNAM_MONOGRAM));
+    public static final RegistryObject<Block> ENGRAVED_WISESTONE_VITA = BLOCKS.register("engraved_wisestone_vita", () -> new EngravedWisestoneBlock(BlockBehaviour.Properties.copy(POLISHED_WISESTONE.get()), VITA_MONOGRAM));
+    public static final RegistryObject<Block> ENGRAVED_WISESTONE_SOLEM = BLOCKS.register("engraved_wisestone_solem", () -> new EngravedWisestoneBlock(BlockBehaviour.Properties.copy(POLISHED_WISESTONE.get()), SOLEM_MONOGRAM));
+    public static final RegistryObject<Block> ENGRAVED_WISESTONE_MORS = BLOCKS.register("engraved_wisestone_mors", () -> new EngravedWisestoneBlock(BlockBehaviour.Properties.copy(POLISHED_WISESTONE.get()), MORS_MONOGRAM));
+    public static final RegistryObject<Block> ENGRAVED_WISESTONE_MIRACULUM = BLOCKS.register("engraved_wisestone_miraculum", () -> new EngravedWisestoneBlock(BlockBehaviour.Properties.copy(POLISHED_WISESTONE.get()), MIRACULUM_MONOGRAM));
+    public static final RegistryObject<Block> ENGRAVED_WISESTONE_TEMPUS = BLOCKS.register("engraved_wisestone_tempus", () -> new EngravedWisestoneBlock(BlockBehaviour.Properties.copy(POLISHED_WISESTONE.get()), TEMPUS_MONOGRAM));
+    public static final RegistryObject<Block> ENGRAVED_WISESTONE_STATERA = BLOCKS.register("engraved_wisestone_statera", () -> new EngravedWisestoneBlock(BlockBehaviour.Properties.copy(POLISHED_WISESTONE.get()), STATERA_MONOGRAM));
+    public static final RegistryObject<Block> ENGRAVED_WISESTONE_ECLIPSIS = BLOCKS.register("engraved_wisestone_eclipsis", () -> new EngravedWisestoneBlock(BlockBehaviour.Properties.copy(POLISHED_WISESTONE.get()), ECLIPSIS_MONOGRAM));
+    public static final RegistryObject<Block> ENGRAVED_WISESTONE_SICCITAS = BLOCKS.register("engraved_wisestone_siccitas", () -> new EngravedWisestoneBlock(BlockBehaviour.Properties.copy(POLISHED_WISESTONE.get()), SICCITAS_MONOGRAM));
+    public static final RegistryObject<Block> ENGRAVED_WISESTONE_SOLSTITIUM = BLOCKS.register("engraved_wisestone_solstitium", () -> new EngravedWisestoneBlock(BlockBehaviour.Properties.copy(POLISHED_WISESTONE.get()), SOLSTITIUM_MONOGRAM));
+    public static final RegistryObject<Block> ENGRAVED_WISESTONE_FAMES = BLOCKS.register("engraved_wisestone_fames", () -> new EngravedWisestoneBlock(BlockBehaviour.Properties.copy(POLISHED_WISESTONE.get()), FAMES_MONOGRAM));
+    public static final RegistryObject<Block> ENGRAVED_WISESTONE_RENAISSANCE = BLOCKS.register("engraved_wisestone_renaissance", () -> new EngravedWisestoneBlock(BlockBehaviour.Properties.copy(POLISHED_WISESTONE.get()), RENAISSANCE_MONOGRAM));
+    public static final RegistryObject<Block> ENGRAVED_WISESTONE_BELLUM = BLOCKS.register("engraved_wisestone_bellum", () -> new EngravedWisestoneBlock(BlockBehaviour.Properties.copy(POLISHED_WISESTONE.get()), BELLUM_MONOGRAM));
+    public static final RegistryObject<Block> ENGRAVED_WISESTONE_LUX = BLOCKS.register("engraved_wisestone_lux", () -> new EngravedWisestoneBlock(BlockBehaviour.Properties.copy(POLISHED_WISESTONE.get()), LUX_MONOGRAM));
+    public static final RegistryObject<Block> ENGRAVED_WISESTONE_KARA = BLOCKS.register("engraved_wisestone_kara", () -> new EngravedWisestoneBlock(BlockBehaviour.Properties.copy(POLISHED_WISESTONE.get()), KARA_MONOGRAM));
+    public static final RegistryObject<Block> ENGRAVED_WISESTONE_DEGRADATIO = BLOCKS.register("engraved_wisestone_degradatio", () -> new EngravedWisestoneBlock(BlockBehaviour.Properties.copy(POLISHED_WISESTONE.get()), DEGRADATIO_MONOGRAM));
+    public static final RegistryObject<Block> ENGRAVED_WISESTONE_PRAEDICTIONEM = BLOCKS.register("engraved_wisestone_praedictionem", () -> new EngravedWisestoneBlock(BlockBehaviour.Properties.copy(POLISHED_WISESTONE.get()), PRAEDICTIONEM_MONOGRAM));
+    public static final RegistryObject<Block> ENGRAVED_WISESTONE_EVOLUTIONIS = BLOCKS.register("engraved_wisestone_evolutionis", () -> new EngravedWisestoneBlock(BlockBehaviour.Properties.copy(POLISHED_WISESTONE.get()), EVOLUTIONIS_MONOGRAM));
+    public static final RegistryObject<Block> ENGRAVED_WISESTONE_TENEBRIS = BLOCKS.register("engraved_wisestone_tenebris", () -> new EngravedWisestoneBlock(BlockBehaviour.Properties.copy(POLISHED_WISESTONE.get()), TENEBRIS_MONOGRAM));
+    public static final RegistryObject<Block> ENGRAVED_WISESTONE_UNIVERSUM = BLOCKS.register("engraved_wisestone_universum", () -> new EngravedWisestoneBlock(BlockBehaviour.Properties.copy(POLISHED_WISESTONE.get()), UNIVERSUM_MONOGRAM));
+
     public static final RegistryObject<Block> INNOCENT_PEDESTAL = BLOCKS.register("innocent_pedestal", () -> new ArcanePedestalBlock(BlockBehaviour.Properties.copy(INNOCENT_WOOD_PLANKS.get())));
     public static final RegistryObject<Block> INNOCENT_HOVERING_TOME_STAND = BLOCKS.register("innocent_hovering_tome_stand", () -> new HoveringTomeStandBlock(BlockBehaviour.Properties.copy(INNOCENT_WOOD_PLANKS.get())));
 
@@ -1110,6 +1139,29 @@ public class WizardsReborn {
     public static final RegistryObject<Item> LIGHT_EMITTER_ITEM = ITEMS.register("light_emitter", () -> new BlockItem(LIGHT_EMITTER.get(), new Item.Properties()));
     public static final RegistryObject<Item> LIGHT_TRANSFER_LENS_ITEM = ITEMS.register("light_transfer_lens", () -> new BlockItem(LIGHT_TRANSFER_LENS.get(), new Item.Properties()));
     public static final RegistryObject<Item> RUNIC_PEDESTAL_ITEM = ITEMS.register("runic_pedestal", () -> new BlockItem(RUNIC_PEDESTAL.get(), new Item.Properties()));
+
+    public static final RegistryObject<Item> ENGRAVED_WISESTONE_ITEM = ITEMS.register("engraved_wisestone", () -> new EngravedWisestoneItem(ENGRAVED_WISESTONE.get(), new Item.Properties()));
+    public static final RegistryObject<Item> ENGRAVED_WISESTONE_LUNAM_ITEM = ITEMS.register("engraved_wisestone_lunam", () -> new EngravedWisestoneItem(ENGRAVED_WISESTONE_LUNAM.get(), new Item.Properties()));
+    public static final RegistryObject<Item> ENGRAVED_WISESTONE_VITA_ITEM = ITEMS.register("engraved_wisestone_vita", () -> new EngravedWisestoneItem(ENGRAVED_WISESTONE_VITA.get(), new Item.Properties()));
+    public static final RegistryObject<Item> ENGRAVED_WISESTONE_SOLEM_ITEM = ITEMS.register("engraved_wisestone_solem", () -> new EngravedWisestoneItem(ENGRAVED_WISESTONE_SOLEM.get(), new Item.Properties()));
+    public static final RegistryObject<Item> ENGRAVED_WISESTONE_MORS_ITEM = ITEMS.register("engraved_wisestone_mors", () -> new EngravedWisestoneItem(ENGRAVED_WISESTONE_MORS.get(), new Item.Properties()));
+    public static final RegistryObject<Item> ENGRAVED_WISESTONE_MIRACULUM_ITEM = ITEMS.register("engraved_wisestone_miraculum", () -> new EngravedWisestoneItem(ENGRAVED_WISESTONE_MIRACULUM.get(), new Item.Properties()));
+    public static final RegistryObject<Item> ENGRAVED_WISESTONE_TEMPUS_ITEM = ITEMS.register("engraved_wisestone_tempus", () -> new EngravedWisestoneItem(ENGRAVED_WISESTONE_TEMPUS.get(), new Item.Properties()));
+    public static final RegistryObject<Item> ENGRAVED_WISESTONE_STATERA_ITEM = ITEMS.register("engraved_wisestone_statera", () -> new EngravedWisestoneItem(ENGRAVED_WISESTONE_STATERA.get(), new Item.Properties()));
+    public static final RegistryObject<Item> ENGRAVED_WISESTONE_ECLIPSIS_ITEM = ITEMS.register("engraved_wisestone_eclipsis", () -> new EngravedWisestoneItem(ENGRAVED_WISESTONE_ECLIPSIS.get(), new Item.Properties()));
+    public static final RegistryObject<Item> ENGRAVED_WISESTONE_SICCITAS_ITEM = ITEMS.register("engraved_wisestone_siccitas", () -> new EngravedWisestoneItem(ENGRAVED_WISESTONE_SICCITAS.get(), new Item.Properties()));
+    public static final RegistryObject<Item> ENGRAVED_WISESTONE_SOLSTITIUM_ITEM = ITEMS.register("engraved_wisestone_solstitium", () -> new EngravedWisestoneItem(ENGRAVED_WISESTONE_SOLSTITIUM.get(), new Item.Properties()));
+    public static final RegistryObject<Item> ENGRAVED_WISESTONE_FAMES_ITEM = ITEMS.register("engraved_wisestone_fames", () -> new EngravedWisestoneItem(ENGRAVED_WISESTONE_FAMES.get(), new Item.Properties()));
+    public static final RegistryObject<Item> ENGRAVED_WISESTONE_RENAISSANCE_ITEM = ITEMS.register("engraved_wisestone_renaissance", () -> new EngravedWisestoneItem(ENGRAVED_WISESTONE_RENAISSANCE.get(), new Item.Properties()));
+    public static final RegistryObject<Item> ENGRAVED_WISESTONE_BELLUM_ITEM = ITEMS.register("engraved_wisestone_bellum", () -> new EngravedWisestoneItem(ENGRAVED_WISESTONE_BELLUM.get(), new Item.Properties()));
+    public static final RegistryObject<Item> ENGRAVED_WISESTONE_LUX_ITEM = ITEMS.register("engraved_wisestone_lux", () -> new EngravedWisestoneItem(ENGRAVED_WISESTONE_LUX.get(), new Item.Properties()));
+    public static final RegistryObject<Item> ENGRAVED_WISESTONE_KARA_ITEM = ITEMS.register("engraved_wisestone_kara", () -> new EngravedWisestoneItem(ENGRAVED_WISESTONE_KARA.get(), new Item.Properties()));
+    public static final RegistryObject<Item> ENGRAVED_WISESTONE_DEGRADATIO_ITEM = ITEMS.register("engraved_wisestone_degradatio", () -> new EngravedWisestoneItem(ENGRAVED_WISESTONE_DEGRADATIO.get(), new Item.Properties()));
+    public static final RegistryObject<Item> ENGRAVED_WISESTONE_PRAEDICTIONEM_ITEM = ITEMS.register("engraved_wisestone_praedictionem", () -> new EngravedWisestoneItem(ENGRAVED_WISESTONE_PRAEDICTIONEM.get(), new Item.Properties()));
+    public static final RegistryObject<Item> ENGRAVED_WISESTONE_EVOLUTIONIS_ITEM = ITEMS.register("engraved_wisestone_evolutionis", () -> new EngravedWisestoneItem(ENGRAVED_WISESTONE_EVOLUTIONIS.get(), new Item.Properties()));
+    public static final RegistryObject<Item> ENGRAVED_WISESTONE_TENEBRIS_ITEM = ITEMS.register("engraved_wisestone_tenebris", () -> new EngravedWisestoneItem(ENGRAVED_WISESTONE_TENEBRIS.get(), new Item.Properties()));
+    public static final RegistryObject<Item> ENGRAVED_WISESTONE_UNIVERSUM_ITEM = ITEMS.register("engraved_wisestone_universum", () -> new EngravedWisestoneItem(ENGRAVED_WISESTONE_UNIVERSUM.get(), new Item.Properties()));
+
     public static final RegistryObject<Item> INNOCENT_PEDESTAL_ITEM = ITEMS.register("innocent_pedestal", () -> new BlockItem(INNOCENT_PEDESTAL.get(), new Item.Properties()));
     public static final RegistryObject<Item> INNOCENT_HOVERING_TOME_STAND_ITEM = ITEMS.register("innocent_hovering_tome_stand", () -> new BlockItem(INNOCENT_HOVERING_TOME_STAND.get(), new Item.Properties()));
 
@@ -1295,6 +1347,12 @@ public class WizardsReborn {
     public static RegistryObject<BlockEntityType<LightEmitterTileEntity>> LIGHT_EMITTER_TILE_ENTITY = TILE_ENTITIES.register("light_emitter", () -> BlockEntityType.Builder.of(LightEmitterTileEntity::new, LIGHT_EMITTER.get()).build(null));
     public static RegistryObject<BlockEntityType<LightTransferLensTileEntity>> LIGHT_TRANSFER_LENS_TILE_ENTITY = TILE_ENTITIES.register("light_transfer_lens", () -> BlockEntityType.Builder.of(LightTransferLensTileEntity::new, LIGHT_TRANSFER_LENS.get()).build(null));
     public static RegistryObject<BlockEntityType<RunicPedestalTileEntity>> RUNIC_PEDESTAL_TILE_ENTITY = TILE_ENTITIES.register("runic_pedestal", () -> BlockEntityType.Builder.of(RunicPedestalTileEntity::new, RUNIC_PEDESTAL.get()).build(null));
+    public static RegistryObject<BlockEntityType<EngravedWisestoneTileEntity>> ENGRAVED_WISESTONE_TILE_ENTITY = TILE_ENTITIES.register("engraved_wisestone", () -> BlockEntityType.Builder.of(EngravedWisestoneTileEntity::new, ENGRAVED_WISESTONE.get(),
+                    ENGRAVED_WISESTONE_LUNAM.get(), ENGRAVED_WISESTONE_VITA.get(), ENGRAVED_WISESTONE_SOLEM.get(), ENGRAVED_WISESTONE_MORS.get(), ENGRAVED_WISESTONE_MIRACULUM.get(),
+                    ENGRAVED_WISESTONE_TEMPUS.get(), ENGRAVED_WISESTONE_STATERA.get(), ENGRAVED_WISESTONE_ECLIPSIS.get(), ENGRAVED_WISESTONE_SICCITAS.get(), ENGRAVED_WISESTONE_SOLSTITIUM.get(),
+                    ENGRAVED_WISESTONE_FAMES.get(), ENGRAVED_WISESTONE_RENAISSANCE.get(), ENGRAVED_WISESTONE_BELLUM.get(), ENGRAVED_WISESTONE_LUX.get(), ENGRAVED_WISESTONE_KARA.get(),
+                    ENGRAVED_WISESTONE_DEGRADATIO.get(), ENGRAVED_WISESTONE_PRAEDICTIONEM.get(), ENGRAVED_WISESTONE_EVOLUTIONIS.get(), ENGRAVED_WISESTONE_TENEBRIS.get(), ENGRAVED_WISESTONE_UNIVERSUM.get())
+            .build(null));
 
     public static RegistryObject<BlockEntityType<ArcaneHopperTileEntity>> ARCANE_HOPPER_TILE_ENTITY = TILE_ENTITIES.register("arcane_hopper", () -> BlockEntityType.Builder.of(ArcaneHopperTileEntity::new, ARCANE_HOPPER.get()).build(null));
     public static RegistryObject<BlockEntityType<SensorTileEntity>> SENSOR_TILE_ENTITY = TILE_ENTITIES.register("sensor", () -> BlockEntityType.Builder.of(SensorTileEntity::new, REDSTONE_SENSOR.get(), WISSEN_SENSOR.get(), COOLDOWN_SENSOR.get(), LIGHT_SENSOR.get(), EXPERIENCE_SENSOR.get(), HEAT_SENSOR.get(), STEAM_SENSOR.get()).build(null));
@@ -1878,7 +1936,10 @@ public class WizardsReborn {
         Spells.register(CURSE_CROSS_SPELL);
         Spells.register(POISON_SPELL);
         Spells.register(MAGIC_SPROUT_SPELL);
+        Spells.register(DIRT_BLOCK_SPELL);
+        Spells.register(WATER_BLOCK_SPELL);
         Spells.register(AIR_IMPACT_SPELL);
+        Spells.register(ICE_BLOCK_SPELL);
         Spells.register(EARTH_CHARGE_SPELL);
         Spells.register(WATER_CHARGE_SPELL);
         Spells.register(AIR_CHARGE_SPELL);
@@ -1896,17 +1957,20 @@ public class WizardsReborn {
         Spells.register(HOLY_AURA_SPELL);
         Spells.register(CURSE_AURA_SPELL);
         Spells.register(RAIN_CLOUD_SPELL);
+        Spells.register(LAVA_BLOCK_SPELL);
         Spells.register(ICICLE_SPELL);
         Spells.register(SHARP_BLINK_SPELL);
+        Spells.register(CRYSTAL_CRUSHING_SPELL);
         Spells.register(TOXIC_RAIN_SPELL);
         Spells.register(MOR_SWARM_SPELL);
         Spells.register(WITHERING_SPELL);
+        Spells.register(WHAT_SPELL);
+        Spells.register(NECROTIC_RAY_SPELL);
         Spells.register(LIGHT_RAY_SPELL);
         Spells.register(INCINERATION_SPELL);
         Spells.register(REPENTANCE_SPELL);
         Spells.register(RENUNCIATION_SPELL);
         Spells.register(EMBER_RAY_SPELL);
-        Spells.register(NECROTIC_RAY_SPELL);
         Spells.register(WISDOM_SPELL);
 
         Spells.register(PIPE_SOUND_SPELL);

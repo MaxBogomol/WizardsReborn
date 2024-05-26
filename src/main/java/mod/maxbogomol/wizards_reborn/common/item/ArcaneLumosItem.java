@@ -8,6 +8,7 @@ import mod.maxbogomol.wizards_reborn.WizardsReborn;
 import mod.maxbogomol.wizards_reborn.WizardsRebornClient;
 import mod.maxbogomol.wizards_reborn.client.event.ClientTickHandler;
 import mod.maxbogomol.wizards_reborn.client.particle.Particles;
+import mod.maxbogomol.wizards_reborn.client.render.WorldRenderHandler;
 import mod.maxbogomol.wizards_reborn.common.block.ArcaneLumosBlock;
 import mod.maxbogomol.wizards_reborn.utils.RenderUtils;
 import net.minecraft.client.Minecraft;
@@ -100,7 +101,7 @@ public class ArcaneLumosItem extends BlockItem implements IParticleItem, IGuiPar
 
             RenderSystem.enableBlend();
             RenderSystem.blendFunc(GlStateManager.SourceFactor.SRC_ALPHA, GlStateManager.DestFactor.ONE);
-            MultiBufferSource.BufferSource buffersource = Minecraft.getInstance().renderBuffers().bufferSource();
+            MultiBufferSource.BufferSource buffersource = WorldRenderHandler.getDelayedRender();
             RenderSystem.depthMask(false);
             RenderSystem.setShader(WizardsRebornClient::getGlowingShader);
             RenderSystem.setShaderColor(1F, 1F, 1F, 1F);
@@ -110,8 +111,7 @@ public class ArcaneLumosItem extends BlockItem implements IParticleItem, IGuiPar
             pose.pushPose();
             pose.translate(x + 8, y + 9, 100);
             pose.mulPose(Axis.ZP.rotationDegrees(angle));
-            pose.translate(-7 * offset, -7 * offset, 0);
-            RenderUtils.spriteGlowQuad(pose, buffersource, 0, 0, 14f * offset, 14f * offset, sparkle.getU0(), sparkle.getU1(), sparkle.getV0(), sparkle.getV1(), r, g, b, 1F);
+            RenderUtils.spriteGlowQuadCenter(pose, buffersource, 0, 0, 14f * offset, 14f * offset, sparkle.getU0(), sparkle.getU1(), sparkle.getV0(), sparkle.getV1(), r, g, b, 1F);
             buffersource.endBatch();
             pose.popPose();
 
@@ -119,8 +119,7 @@ public class ArcaneLumosItem extends BlockItem implements IParticleItem, IGuiPar
                 pose.pushPose();
                 pose.translate(x + 8, y + 9, 100);
                 pose.mulPose(Axis.ZP.rotationDegrees(angle + 45f));
-                pose.translate(-7 * offset, -7 * offset, 0);
-                RenderUtils.spriteGlowQuad(pose, buffersource, 0, 0, 14f * offset, 14f * offset, sparkle.getU0(), sparkle.getU1(), sparkle.getV0(), sparkle.getV1(), 1f, 1f, 1f, 0.75F);
+                RenderUtils.spriteGlowQuadCenter(pose, buffersource, 0, 0, 14f * offset, 14f * offset, sparkle.getU0(), sparkle.getU1(), sparkle.getV0(), sparkle.getV1(), 1f, 1f, 1f, 0.75F);
                 buffersource.endBatch();
                 pose.popPose();
             }

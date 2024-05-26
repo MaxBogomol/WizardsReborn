@@ -45,6 +45,11 @@ public class NecroticRaySpell extends RaySpell {
     }
 
     @Override
+    public int getMinimumPolishingLevel() {
+        return 1;
+    }
+
+    @Override
     public void onImpact(HitResult ray, Level world, SpellProjectileEntity projectile, Player player, Entity target) {
         super.onImpact(ray, world, projectile, player, target);
 

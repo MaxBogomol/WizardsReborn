@@ -38,7 +38,7 @@ public class WissenActivatorTileEntity extends SensorTileEntity {
                 }
 
                 if (level.getBlockEntity(blockpos) instanceof IWissenWandFunctionalTileEntity functionalTile) {
-                    functionalTile.wissenWandFuction();
+                    functionalTile.wissenWandFunction();
                 }
             }
         }

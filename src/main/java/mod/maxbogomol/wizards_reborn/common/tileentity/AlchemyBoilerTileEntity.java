@@ -277,7 +277,7 @@ public class AlchemyBoilerTileEntity extends PipeBaseTileEntity implements Ticka
     }
 
     @Override
-    public void wissenWandFuction() {
+    public void wissenWandFunction() {
         if (level.getBlockEntity(getBlockPos().below()) instanceof AlchemyMachineTileEntity machine) {
             machine.startCraft = true;
         }

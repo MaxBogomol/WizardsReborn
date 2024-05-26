@@ -7,6 +7,86 @@
     {
       "type": "single",
       "resource": "wizards_reborn:particle/sparkle"
+    },
+    {
+      "type": "single",
+      "resource": "wizards_reborn:monogram/lunam"
+    },
+    {
+      "type": "single",
+      "resource": "wizards_reborn:monogram/vita"
+    },
+    {
+      "type": "single",
+      "resource": "wizards_reborn:monogram/solem"
+    },
+    {
+      "type": "single",
+      "resource": "wizards_reborn:monogram/mors"
+    },
+    {
+      "type": "single",
+      "resource": "wizards_reborn:monogram/miraculum"
+    },
+    {
+      "type": "single",
+      "resource": "wizards_reborn:monogram/tempus"
+    },
+    {
+      "type": "single",
+      "resource": "wizards_reborn:monogram/statera"
+    },
+    {
+      "type": "single",
+      "resource": "wizards_reborn:monogram/eclipsis"
+    },
+    {
+      "type": "single",
+      "resource": "wizards_reborn:monogram/siccitas"
+    },
+    {
+      "type": "single",
+      "resource": "wizards_reborn:monogram/solstitium"
+    },
+    {
+      "type": "single",
+      "resource": "wizards_reborn:monogram/fames"
+    },
+    {
+      "type": "single",
+      "resource": "wizards_reborn:monogram/renaissance"
+    },
+    {
+      "type": "single",
+      "resource": "wizards_reborn:monogram/bellum"
+    },
+    {
+      "type": "single",
+      "resource": "wizards_reborn:monogram/lux"
+    },
+    {
+      "type": "single",
+      "resource": "wizards_reborn:monogram/kara"
+    },
+    {
+      "type": "single",
+      "resource": "wizards_reborn:monogram/degradatio"
+    },
+    {
+      "type": "single",
+      "resource": "wizards_reborn:monogram/praedictionem"
+    },
+    {
+      "type": "single",
+      "resource": "wizards_reborn:monogram/evolutionis"
+    },
+    {
+      "type": "single",
+      "resource": "wizards_reborn:monogram/tenebris"
+    },
+    {
+      "type": "single",
+      "resource": "wizards_reborn:monogram/universum"
     }
   ]
 }

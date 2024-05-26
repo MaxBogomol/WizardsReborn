@@ -47,6 +47,11 @@ public class EmberRaySpell extends FireRaySpell {
     }
 
     @Override
+    public int getMinimumPolishingLevel() {
+        return 1;
+    }
+
+    @Override
     public void rayTick(SpellProjectileEntity entity, HitResult ray) {
         Player player = entity.getSender();
 

@@ -395,7 +395,7 @@ public class ArcaneWorkbenchTileEntity extends BlockEntity implements TickableBl
     }
 
     @Override
-    public void wissenWandFuction() {
+    public void wissenWandFunction() {
         startCraft = true;
     }
 

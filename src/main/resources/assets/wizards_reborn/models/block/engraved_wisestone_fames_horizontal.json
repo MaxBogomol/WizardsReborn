@@ -1,0 +1,6 @@
+{
+  "parent": "wizards_reborn:block/engraved_wisestone_base",
+  "textures": {
+    "north": "wizards_reborn:block/engraved_wisestone_fames"
+  }
+}

@@ -1,0 +1,16 @@
+{
+  "variants": {
+    "face=floor,facing=east":  { "model": "wizards_reborn:block/engraved_wisestone_evolutionis", "y": 90 },
+    "face=floor,facing=west":  { "model": "wizards_reborn:block/engraved_wisestone_evolutionis", "y": 270 },
+    "face=floor,facing=south": { "model": "wizards_reborn:block/engraved_wisestone_evolutionis", "y": 180 },
+    "face=floor,facing=north": { "model": "wizards_reborn:block/engraved_wisestone_evolutionis" },
+    "face=wall,facing=east":  { "model": "wizards_reborn:block/engraved_wisestone_evolutionis_horizontal", "y": 90 },
+    "face=wall,facing=west":  { "model": "wizards_reborn:block/engraved_wisestone_evolutionis_horizontal", "y": 270 },
+    "face=wall,facing=south": { "model": "wizards_reborn:block/engraved_wisestone_evolutionis_horizontal", "y": 180 },
+    "face=wall,facing=north": { "model": "wizards_reborn:block/engraved_wisestone_evolutionis_horizontal" },
+    "face=ceiling,facing=east":  { "model": "wizards_reborn:block/engraved_wisestone_evolutionis", "x": 180, "y": 90  },
+    "face=ceiling,facing=west":  { "model": "wizards_reborn:block/engraved_wisestone_evolutionis", "x": 180, "y": 270 },
+    "face=ceiling,facing=south": { "model": "wizards_reborn:block/engraved_wisestone_evolutionis", "x": 180, "y": 180 },
+    "face=ceiling,facing=north": { "model": "wizards_reborn:block/engraved_wisestone_evolutionis", "x": 180 }
+  }
+}

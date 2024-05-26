@@ -569,7 +569,7 @@ public class ArcaneIteratorTileEntity extends BlockEntity implements TickableBlo
     }
 
     @Override
-    public void wissenWandFuction() {
+    public void wissenWandFunction() {
         if (isWorks()) {
             if (!startCraft) {
                 angleA = random.nextDouble() * Math.PI * 2;

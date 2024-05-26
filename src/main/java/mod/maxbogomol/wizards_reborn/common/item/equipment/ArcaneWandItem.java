@@ -15,6 +15,7 @@ import mod.maxbogomol.wizards_reborn.api.wissen.WissenItemType;
 import mod.maxbogomol.wizards_reborn.api.wissen.WissenItemUtils;
 import mod.maxbogomol.wizards_reborn.client.animation.ItemAnimation;
 import mod.maxbogomol.wizards_reborn.client.config.ClientConfig;
+import mod.maxbogomol.wizards_reborn.client.render.WorldRenderHandler;
 import mod.maxbogomol.wizards_reborn.common.item.CrystalItem;
 import mod.maxbogomol.wizards_reborn.common.item.ICustomAnimationItem;
 import mod.maxbogomol.wizards_reborn.common.item.IGuiParticleItem;
@@ -482,7 +483,7 @@ public class ArcaneWandItem extends Item implements IWissenItem, ICustomAnimatio
 
                 RenderSystem.enableBlend();
                 RenderSystem.blendFunc(GlStateManager.SourceFactor.SRC_ALPHA, GlStateManager.DestFactor.ONE);
-                MultiBufferSource.BufferSource buffersource = Minecraft.getInstance().renderBuffers().bufferSource();
+                MultiBufferSource.BufferSource buffersource = WorldRenderHandler.getDelayedRender();
                 RenderSystem.depthMask(false);
                 RenderSystem.setShader(WizardsRebornClient::getGlowingShader);
                 RenderSystem.setShaderColor(1F, 1F, 1F, 1F);

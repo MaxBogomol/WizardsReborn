@@ -453,7 +453,7 @@ public class JewelerTableTileEntity extends BlockEntity implements TickableBlock
     }
 
     @Override
-    public void wissenWandFuction() {
+    public void wissenWandFunction() {
         startCraft = true;
     }
 

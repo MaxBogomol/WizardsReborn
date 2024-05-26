@@ -56,6 +56,10 @@ public class Monogram {
         return getTranslatedLoreName(id);
     }
 
+    public ResourceLocation getTexture() {
+        return getTexture(id);
+    }
+
     public static ResourceLocation getIcon(String id) {
         int i = id.indexOf(":");
         String modId = id.substring(0, i);
@@ -68,6 +72,13 @@ public class Monogram {
         String modId = id.substring(0, i);
         String monogramId = id.substring(i + 1);
         return "monogram."  + modId + "." + monogramId;
+    }
+
+    public static ResourceLocation getTexture(String id) {
+        int i = id.indexOf(":");
+        String modId = id.substring(0, i);
+        String monogramId = id.substring(i + 1);
+        return new ResourceLocation(modId, "monogram/" + monogramId);
     }
 
     public static String getTranslatedLoreName(String id) {

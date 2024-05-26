@@ -10,6 +10,7 @@ import mod.maxbogomol.wizards_reborn.api.wissen.IWissenItem;
 import mod.maxbogomol.wizards_reborn.api.wissen.WissenItemUtils;
 import mod.maxbogomol.wizards_reborn.api.wissen.WissenUtils;
 import mod.maxbogomol.wizards_reborn.client.event.ClientTickHandler;
+import mod.maxbogomol.wizards_reborn.client.render.WorldRenderHandler;
 import mod.maxbogomol.wizards_reborn.common.config.Config;
 import mod.maxbogomol.wizards_reborn.common.network.ArcanumLensBurstEffectPacket;
 import mod.maxbogomol.wizards_reborn.common.network.PacketHandler;
@@ -81,7 +82,7 @@ public class ArcanumLensItem extends ArcanumItem implements IGuiParticleItem {
 
         RenderSystem.enableBlend();
         RenderSystem.blendFunc(GlStateManager.SourceFactor.SRC_ALPHA, GlStateManager.DestFactor.ONE);
-        MultiBufferSource.BufferSource buffersource = Minecraft.getInstance().renderBuffers().bufferSource();
+        MultiBufferSource.BufferSource buffersource = WorldRenderHandler.getDelayedRender();
         RenderSystem.depthMask(false);
         RenderSystem.setShader(WizardsRebornClient::getGlowingShader);
         RenderSystem.setShaderColor(1F, 1F, 1F, 1F);
@@ -91,8 +92,7 @@ public class ArcanumLensItem extends ArcanumItem implements IGuiParticleItem {
         pose.pushPose();
         pose.translate(x + 8, y + 8, 100);
         pose.mulPose(Axis.ZP.rotationDegrees(ticks));
-        pose.translate(-10 * offset, -10 * offset, 0);
-        RenderUtils.spriteGlowQuad(pose, buffersource, 0, 0, 20f * offset, 20f * offset, sparkle.getU0(), sparkle.getU1(), sparkle.getV0(), sparkle.getV1(), Config.wissenColorR(), Config.wissenColorG(), Config.wissenColorB(), 1F);
+        RenderUtils.spriteGlowQuadCenter(pose, buffersource, 0, 0, 20f * offset, 20f * offset, sparkle.getU0(), sparkle.getU1(), sparkle.getV0(), sparkle.getV1(), Config.wissenColorR(), Config.wissenColorG(), Config.wissenColorB(), 1F);
         buffersource.endBatch();
         pose.popPose();
 

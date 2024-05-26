@@ -43,6 +43,11 @@ public class WisdomSpell extends LookSpell {
     }
 
     @Override
+    public int getMinimumPolishingLevel() {
+        return 1;
+    }
+
+    @Override
     public void useSpell(Level world, Player player, InteractionHand hand) {
         if (!world.isClientSide) {
             player.startUsingItem(hand);
