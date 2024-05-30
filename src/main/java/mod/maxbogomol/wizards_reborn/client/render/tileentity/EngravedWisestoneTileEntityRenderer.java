@@ -13,6 +13,7 @@ import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.blockentity.BlockEntityRenderer;
 import net.minecraft.client.renderer.texture.TextureAtlas;
 import net.minecraft.client.renderer.texture.TextureAtlasSprite;
+import net.minecraft.world.phys.Vec3;
 
 import java.awt.*;
 import java.util.Random;
@@ -70,5 +71,15 @@ public class EngravedWisestoneTileEntityRenderer implements BlockEntityRenderer<
 
             ms.popPose();
         }
+    }
+
+    @Override
+    public boolean shouldRenderOffScreen(EngravedWisestoneTileEntity pBlockEntity) {
+        return true;
+    }
+
+    @Override
+    public boolean shouldRender(EngravedWisestoneTileEntity pBlockEntity, Vec3 pCameraPos) {
+        return true;
     }
 }

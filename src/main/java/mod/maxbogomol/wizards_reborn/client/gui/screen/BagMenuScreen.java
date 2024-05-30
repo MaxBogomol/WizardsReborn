@@ -59,8 +59,8 @@ public class BagMenuScreen extends Screen {
     public void render(GuiGraphics gui, int mouseX, int mouseY, float partialTicks) {
         super.render(gui, mouseX, mouseY, partialTicks);
 
-        if (hover && hoveramount < 1) hoveramount += Minecraft.getInstance().getFrameTime() / 10;
-        else if (!hover && hoveramount > 0) hoveramount -= Minecraft.getInstance().getFrameTime() / 5;
+        if (hover && hoveramount < 1) hoveramount += Minecraft.getInstance().getDeltaFrameTime() / 4;
+        else if (!hover && hoveramount > 0) hoveramount -= Minecraft.getInstance().getDeltaFrameTime();
         if (hoveramount > 1) {
             hoveramount = 1;
         }
@@ -89,9 +89,9 @@ public class BagMenuScreen extends Screen {
             }
 
             if (stack == selectedItem) {
-                RenderUtils.renderItemModelInGui(stack, x + X - 24, y + Y - 24, 48, 48, 48);
+                RenderUtils.renderItemModelInGui(stack, x + X - 24, y + Y - 24, 48, 48, 48, 45f * (1f - hoveramount), 45f * (1f - hoveramount), 0);
             } else {
-                RenderUtils.renderItemModelInGui(stack, x + X - 16, y + Y - 16, 32, 32, 32);
+                RenderUtils.renderItemModelInGui(stack, x + X - 16, y + Y - 16, 32, 32, 32, 45f * (1f - hoveramount), 45f * (1f - hoveramount), 0);
             }
 
             i = i + 1F;

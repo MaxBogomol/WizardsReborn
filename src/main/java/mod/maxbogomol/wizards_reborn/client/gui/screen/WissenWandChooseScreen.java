@@ -62,8 +62,8 @@ public class WissenWandChooseScreen extends Screen {
     public void render(GuiGraphics gui, int mouseX, int mouseY, float partialTicks) {
         super.render(gui, mouseX, mouseY, partialTicks);
 
-        if (hover && hoveramount < 1) hoveramount += Minecraft.getInstance().getFrameTime() / 10;
-        else if (!hover && hoveramount > 0) hoveramount -= Minecraft.getInstance().getFrameTime() / 5;
+        if (hover && hoveramount < 1) hoveramount += Minecraft.getInstance().getDeltaFrameTime() / 4;
+        else if (!hover && hoveramount > 0) hoveramount -= Minecraft.getInstance().getDeltaFrameTime();
         if (hoveramount > 1) {
             hoveramount = 1;
         }
@@ -79,7 +79,7 @@ public class WissenWandChooseScreen extends Screen {
         for (int i = 0; i < 5; i++) {
             renderRays(WissenWandItem.getModeColor(i), gui, partialTicks, i, 72, i == choosedRay);
         }
-        RenderUtils.renderItemModelInGui(getWand(), x - 16, y - 16, 32, 32, 32);
+        RenderUtils.renderItemModelInGui(getWand(), x - 16, y - 16, 32, 32, 32, 45f * (1f - hoveramount), 45f * (1f - hoveramount), 0);
     }
 
     public int getSelectedMode(double X, double Y) {

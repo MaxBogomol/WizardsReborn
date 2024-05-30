@@ -9,9 +9,11 @@ public class ClientConfig {
             LARGE_ITEM_MODEL, SPELLS_ANIMATIONS, SPELLS_ITEM_ANIMATIONS, SPELLS_FIRST_PERSON_ITEM_ANIMATIONS,
             OLD_RESEARCH_MONOGRAM_OUTLINE, BRIGHT_RESEARCH_MONOGRAM_OUTLINE, RESEARCH_MONOGRAM_CONNECTS, MONOGRAM_GLOW, MONOGRAM_GLOW_COLOR, MONOGRAM_COLOR, MONOGRAM_RAYS,
             NUMERICAL_WISSEN, NUMERICAL_COOLDOWN, SHOW_LIGHT_NAME, NUMERICAL_EXPERIENCE, NUMERICAL_HEAT, NUMERICAL_FLUID, NUMERICAL_STEAM,
+            ARCANE_WAND_OVERLAY_UP, ARCANE_WAND_OVERLAY_RIGHT, ARCANE_WAND_OVERLAY_SIDE_HUD, ARCANE_WAND_OVERLAY_SIDE_BAR, ARCANE_WAND_OVERLAY_HORIZONTAL_BAR, ARCANE_WAND_OVERLAY_SECOND_HUD_FREE, ARCANE_WAND_OVERLAY_BAR_FREE, ARCANE_WAND_OVERLAY_COOLDOWN_TEXT, ARCANE_WAND_OVERLAY_WISSEN_TEXT, ARCANE_WAND_OVERLAY_REVERSE_BAR, ARCANE_WAND_OVERLAY_SHOW_EMPTY,
             CUSTOM_PANORAMA;
     public static ForgeConfigSpec.ConfigValue<Integer>
-            WISSEN_RAYS_LIMIT;
+            WISSEN_RAYS_LIMIT,
+            ARCANE_WAND_OVERLAY_X_OFFSET, ARCANE_WAND_OVERLAY_Y_OFFSET, ARCANE_WAND_OVERLAY_SECOND_X_OFFSET, ARCANE_WAND_OVERLAY_SECOND_Y_OFFSET, ARCANE_WAND_OVERLAY_BAR_X_OFFSET, ARCANE_WAND_OVERLAY_BAR_Y_OFFSET;
 
     public ClientConfig(ForgeConfigSpec.Builder builder) {
         builder.comment("Graphics").push("graphics");
@@ -56,19 +58,58 @@ public class ClientConfig {
 
         builder.comment("Numerical").push("numerical");
         NUMERICAL_WISSEN = builder.comment("Enable numerical wissen.")
-                .define("numericalWissen", false);
+                .define("wissen", false);
         NUMERICAL_COOLDOWN = builder.comment("Enable numerical cooldown.")
-                .define("numericalCooldown", false);
+                .define("cooldown", false);
         SHOW_LIGHT_NAME = builder.comment("Enable show light name.")
-                .define("showLightName", false);
+                .define("name", false);
         NUMERICAL_EXPERIENCE = builder.comment("Enable numerical experience.")
-                .define("numericalExperience", false);
+                .define("experience", false);
         NUMERICAL_HEAT = builder.comment("Enable numerical heat.")
-                .define("numericalHeat", false);
+                .define("heat", false);
         NUMERICAL_FLUID = builder.comment("Enable numerical fluid.")
-                .define("numericalFluid", true);
+                .define("fluid", true);
         NUMERICAL_STEAM = builder.comment("Enable numerical steam.")
-                .define("numericalSteam", false);
+                .define("steam", false);
+        builder.pop();
+
+        builder.comment("Overlay").push("overlay");
+        builder.comment("Arcane Wand").push("arcaneWand");
+        ARCANE_WAND_OVERLAY_UP = builder.comment("1")
+                .define("up", true);
+        ARCANE_WAND_OVERLAY_RIGHT = builder.comment("1")
+                .define("right", false);
+        ARCANE_WAND_OVERLAY_SIDE_HUD = builder.comment("1")
+                .define("sideHud", false);
+        ARCANE_WAND_OVERLAY_SIDE_BAR = builder.comment("1")
+                .define("sideBar", false);
+        ARCANE_WAND_OVERLAY_HORIZONTAL_BAR = builder.comment("1")
+                .define("horizontalBar", false);
+        ARCANE_WAND_OVERLAY_X_OFFSET = builder.comment("1")
+                .define("xOffset", 0);
+        ARCANE_WAND_OVERLAY_Y_OFFSET = builder.comment("1")
+                .define("yOffset", 0);
+        ARCANE_WAND_OVERLAY_SECOND_X_OFFSET = builder.comment("1")
+                .define("secondXOffset", 0);
+        ARCANE_WAND_OVERLAY_SECOND_Y_OFFSET = builder.comment("1")
+                .define("secondYOffset", 0);
+        ARCANE_WAND_OVERLAY_BAR_X_OFFSET = builder.comment("1")
+                .define("barXOffset", 0);
+        ARCANE_WAND_OVERLAY_BAR_Y_OFFSET = builder.comment("1")
+                .define("barYOffset", 0);
+        ARCANE_WAND_OVERLAY_SECOND_HUD_FREE = builder.comment("1")
+                .define("secondHudFree", false);
+        ARCANE_WAND_OVERLAY_BAR_FREE = builder.comment("1")
+                .define("barFree", false);
+        ARCANE_WAND_OVERLAY_COOLDOWN_TEXT = builder.comment("1")
+                .define("cooldownText", false);
+        ARCANE_WAND_OVERLAY_WISSEN_TEXT = builder.comment("1")
+                .define("wissenText", false);
+        ARCANE_WAND_OVERLAY_REVERSE_BAR = builder.comment("1")
+                .define("reverseBar", false);
+        ARCANE_WAND_OVERLAY_SHOW_EMPTY = builder.comment("1")
+                .define("showEmptySpells", true);
+        builder.pop();
         builder.pop();
 
         CUSTOM_PANORAMA = builder.comment("Enable custom panorama.")

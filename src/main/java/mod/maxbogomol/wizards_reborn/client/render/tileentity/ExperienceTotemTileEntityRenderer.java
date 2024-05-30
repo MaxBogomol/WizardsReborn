@@ -60,4 +60,14 @@ public class ExperienceTotemTileEntityRenderer implements BlockEntityRenderer<Ex
             ms.popPose();
         }
     }
+
+    @Override
+    public boolean shouldRenderOffScreen(ExperienceTotemTileEntity pBlockEntity) {
+        return true;
+    }
+
+    @Override
+    public boolean shouldRender(ExperienceTotemTileEntity pBlockEntity, Vec3 pCameraPos) {
+        return true;
+    }
 }

@@ -16,6 +16,7 @@ import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.AABB;
+import net.minecraftforge.common.extensions.IForgeBlockEntity;
 import org.jetbrains.annotations.NotNull;
 
 import java.awt.*;
@@ -24,6 +25,7 @@ import java.util.Random;
 public class EngravedWisestoneTileEntity extends BlockEntity implements TickableBlockEntity, IWissenWandFunctionalTileEntity {
 
     public boolean glow = false;
+    public int cooldown = 0;
 
     public int glowTicks = 0;
 
@@ -40,12 +42,14 @@ public class EngravedWisestoneTileEntity extends BlockEntity implements Tickable
     @Override
     public void tick() {
         if (!level.isClientSide()) {
-            if (!(getBlockState().getBlock() instanceof EngravedWisestoneBlock block && block.hasMonogram())) {
-                if (glow && glowTicks >= 20) {
-                    level.playSound(WizardsReborn.proxy.getPlayer(), getBlockPos(), WizardsReborn.WISSEN_BURST_SOUND.get(), SoundSource.BLOCKS, 0.5f, 0.5f);
-                    glow = false;
-                    PacketUtils.SUpdateTileEntityPacket(this);
-                }
+            boolean update = false;
+            if (cooldown > 0) {
+                cooldown--;
+                update = true;
+            }
+
+            if (update) {
+                PacketUtils.SUpdateTileEntityPacket(this);
             }
         }
 
@@ -120,18 +124,19 @@ public class EngravedWisestoneTileEntity extends BlockEntity implements Tickable
     public void saveAdditional(CompoundTag tag) {
         super.saveAdditional(tag);
         tag.putBoolean("glow", glow);
+        tag.putInt("cooldown", cooldown);
     }
 
     @Override
     public void load(CompoundTag tag) {
         super.load(tag);
         glow = tag.getBoolean("glow");
+        cooldown = tag.getInt("cooldown");
     }
 
     @Override
     public AABB getRenderBoundingBox() {
-        BlockPos pos = getBlockPos();
-        return new AABB(pos.getX() - 0.5f, pos.getY() - 0.5f, pos.getZ() - 0.5f, pos.getX() + 1.5f, pos.getY() + 1.5f, pos.getZ() + 1.5f);
+        return IForgeBlockEntity.INFINITE_EXTENT_AABB;
     }
 
     public float getHorizontalBlockRotate() {
@@ -164,8 +169,13 @@ public class EngravedWisestoneTileEntity extends BlockEntity implements Tickable
 
     @Override
     public void wissenWandFunction() {
-        glow = !glow;
-        PacketUtils.SUpdateTileEntityPacket(this);
-        level.playSound(WizardsReborn.proxy.getPlayer(), getBlockPos(), WizardsReborn.WISSEN_BURST_SOUND.get(), SoundSource.BLOCKS, 0.5f, glow ? 2f : 0.5f);
+        if (getBlockState().getBlock() instanceof EngravedWisestoneBlock block && block.hasMonogram()) {
+            if (cooldown <= 0) {
+                glow = !glow;
+                PacketUtils.SUpdateTileEntityPacket(this);
+                level.playSound(WizardsReborn.proxy.getPlayer(), getBlockPos(), WizardsReborn.WISSEN_BURST_SOUND.get(), SoundSource.BLOCKS, 0.5f, glow ? 2f : 0.5f);
+                cooldown = 20;
+            }
+        }
     }
 }

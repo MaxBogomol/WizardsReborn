@@ -69,4 +69,14 @@ public class TotemOfExperienceAbsorptionTileEntityRenderer implements BlockEntit
             ms.popPose();
         }
     }
+
+    @Override
+    public boolean shouldRenderOffScreen(TotemOfExperienceAbsorptionTileEntity pBlockEntity) {
+        return true;
+    }
+
+    @Override
+    public boolean shouldRender(TotemOfExperienceAbsorptionTileEntity pBlockEntity, Vec3 pCameraPos) {
+        return true;
+    }
 }

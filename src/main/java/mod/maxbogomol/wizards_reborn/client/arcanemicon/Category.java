@@ -48,8 +48,8 @@ public class Category {
         if (!right) x -= hoveramount * 18;
 
         boolean hover = mouseX >= x && mouseY >= y && mouseX <= x + w && mouseY <= y + 18;
-        if (hover && hoveramount < 1) hoveramount += Minecraft.getInstance().getFrameTime() / 8;
-        else if (!hover && hoveramount > 0) hoveramount -= Minecraft.getInstance().getFrameTime() / 8;
+        if (hover && hoveramount < 1) hoveramount += Minecraft.getInstance().getDeltaFrameTime();
+        else if (!hover && hoveramount > 0) hoveramount -= Minecraft.getInstance().getDeltaFrameTime();
         hoveramount = Mth.clamp(hoveramount, 0, 1);
 
         if (right) {

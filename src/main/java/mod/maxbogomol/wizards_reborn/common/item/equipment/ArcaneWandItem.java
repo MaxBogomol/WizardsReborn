@@ -25,6 +25,7 @@ import mod.maxbogomol.wizards_reborn.utils.NumericalUtils;
 import mod.maxbogomol.wizards_reborn.utils.RenderUtils;
 import net.minecraft.ChatFormatting;
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.gui.Font;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.renderer.GameRenderer;
 import net.minecraft.client.renderer.MultiBufferSource;
@@ -58,6 +59,7 @@ import org.lwjgl.opengl.GL11;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import java.awt.*;
+import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 import java.util.stream.Stream;
@@ -363,17 +365,16 @@ public class ArcaneWandItem extends Item implements IWissenItem, ICustomAnimatio
         ItemStack main = mc.player.getMainHandItem();
         ItemStack offhand = mc.player.getOffhandItem();
 
+        boolean isMain = false;
+        boolean isOff = false;
         boolean render = false;
-        ItemStack stack = ItemStack.EMPTY;
-
         if (!main.isEmpty() && main.getItem() instanceof ArcaneWandItem) {
-            stack = main;
             render = true;
-        } else {
-            if (!offhand.isEmpty() && offhand.getItem() instanceof ArcaneWandItem) {
-                stack = offhand;
-                render = true;
-            }
+            isMain = true;
+        }
+        if (!offhand.isEmpty() && offhand.getItem() instanceof ArcaneWandItem) {
+            render = true;
+            isOff = true;
         }
 
         RenderSystem.blendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
@@ -383,82 +384,117 @@ public class ArcaneWandItem extends Item implements IWissenItem, ICustomAnimatio
 
         if (render) {
             if (!player.isSpectator()) {
-                ArcaneWandItem wand = (ArcaneWandItem) stack.getItem();
-                CompoundTag nbt = stack.getOrCreateTag();
-                existTags(stack);
-                WissenItemUtils.existWissen(stack);
-                Spell spell = null;
+                boolean up = ClientConfig.ARCANE_WAND_OVERLAY_UP.get();
+                boolean right = ClientConfig.ARCANE_WAND_OVERLAY_RIGHT.get();
+                boolean sideHud = ClientConfig.ARCANE_WAND_OVERLAY_SIDE_HUD.get();
+                boolean sideBar = ClientConfig.ARCANE_WAND_OVERLAY_SIDE_BAR.get();
+                boolean horizontalBar = ClientConfig.ARCANE_WAND_OVERLAY_HORIZONTAL_BAR.get();
 
-                if (nbt.contains("spell")) {
-                    if (nbt.getString("spell") != "") {
-                        spell = Spells.getSpell(nbt.getString("spell"));
-                    }
+                int xOff = ClientConfig.ARCANE_WAND_OVERLAY_X_OFFSET.get();
+                int yOff = ClientConfig.ARCANE_WAND_OVERLAY_Y_OFFSET.get();
+                int xTwoOff = ClientConfig.ARCANE_WAND_OVERLAY_SECOND_X_OFFSET.get();
+                int yTwoOff = ClientConfig.ARCANE_WAND_OVERLAY_SECOND_Y_OFFSET.get();
+                int xBarOff = ClientConfig.ARCANE_WAND_OVERLAY_BAR_X_OFFSET.get();
+                int yBarOff = ClientConfig.ARCANE_WAND_OVERLAY_BAR_Y_OFFSET.get();
+
+                boolean twoHudFree = ClientConfig.ARCANE_WAND_OVERLAY_SECOND_HUD_FREE.get();
+                boolean barFree = ClientConfig.ARCANE_WAND_OVERLAY_BAR_FREE.get();
+
+                boolean drawCooldown = ClientConfig.ARCANE_WAND_OVERLAY_COOLDOWN_TEXT.get();
+                boolean drawWissen = ClientConfig.ARCANE_WAND_OVERLAY_WISSEN_TEXT.get();
+                boolean reverseBar = ClientConfig.ARCANE_WAND_OVERLAY_REVERSE_BAR.get();
+                boolean showEmpty = ClientConfig.ARCANE_WAND_OVERLAY_SHOW_EMPTY.get();
+
+                boolean rightBar = right;
+                if (up && horizontalBar) {
+                    rightBar = false;
                 }
+                if (!up && horizontalBar) {
+                    rightBar = true;
+                }
+
+                List<Spell> spells = getSpellSet(showEmpty, reverseBar);
+                int spellsOffset = (spells.size() * 18);
 
                 int x = 1;
                 int y = 1;
 
-                gui.blit(new ResourceLocation(WizardsReborn.MOD_ID + ":textures/gui/arcane_wand_frame.png"), x, y, 0, 0, 52, 18, 64, 64);
-                gui.blit(new ResourceLocation(WizardsReborn.MOD_ID + ":textures/gui/cooldown_frame.png"), x + 2, y + 19, 0, 0, 48, 10, 64, 64);
-                gui.blit(new ResourceLocation(WizardsReborn.MOD_ID + ":textures/gui/wissen_frame.png"), x + 2, y + 30, 0, 0, 48, 10, 64, 64);
+                int width = gui.guiWidth();
+                int height = gui.guiHeight();
 
-                int width = 32;
-                if (spell != null && nbt.getInt("cooldown") > 0) {
-                    width /= (double) nbt.getInt("maxCooldown") / (double) nbt.getInt("cooldown");
-                } else {
-                    width = -32;
-                }
-                gui.blit(new ResourceLocation(WizardsReborn.MOD_ID + ":textures/gui/cooldown_frame.png"), x + 10, y + 20, 0, 10, 32 - width, 8, 64, 64);
+                int xOffset = xOff;
+                int yOffset = yOff;
 
-                width = 32;
-                width /= (double) wand.getMaxWissen() / (double) WissenItemUtils.getWissen(stack);
-                gui.blit(new ResourceLocation(WizardsReborn.MOD_ID + ":textures/gui/wissen_frame.png"), x + 10, y + 31, 0, 10, width, 8, 64, 64);
-
-                if (nbt.getBoolean("crystal")) {
-                    SimpleContainer stack_inv = ArcaneWandItem.getInventory(stack);
-                    gui.renderItem(stack_inv.getItem(0), x + 8, y);
+                if (!up) {
+                    y = height - 43;
                 }
 
-                if (spell != null) {
-                    if (KnowledgeUtils.isSpell(Minecraft.getInstance().player, spell)) {
-                        gui.blit(spell.getIcon(), x + 28, y + 1, 0, 0, 16, 16, 16, 16);
-                        if (!spell.canWandWithCrystal(stack)) {
-                            gui.blit(new ResourceLocation(WizardsReborn.MOD_ID + ":textures/gui/arcane_wand_frame.png"), x + 27, y, 0, 18, 18, 18, 64, 64);
-                        }
+                if (right) {
+                    x = width - 53;
+                }
+
+                if (isMain) {
+                    drawWandHUD(gui, x + xOffset, y + yOffset, main, drawCooldown, drawWissen);
+                    if (sideHud) {
+                        xOffset = xOffset + (right ? -54 : 54);
                     } else {
-                        gui.blit(new ResourceLocation(WizardsReborn.MOD_ID, "textures/gui/arcanemicon/unknown.png"), x + 28, y + 1, 0, 0, 16, 16, 16, 16);
+                        yOffset = yOffset - (up ? -43 : 43);
                     }
-                }
-
-                int currentSpellSet = KnowledgeUtils.getCurrentSpellSet(mc.player);
-                int currentSpellInSet = KnowledgeUtils.getCurrentSpellInSet(mc.player);
-
-                gui.blit(new ResourceLocation(WizardsReborn.MOD_ID + ":textures/gui/arcane_wand_frame.png"), x + 1, y + 42, 18, 18, 16, 6, 64, 64);
-                gui.blit(new ResourceLocation(WizardsReborn.MOD_ID + ":textures/gui/arcane_wand_frame.png"), x + 1, y + 228, 18, 24, 16, 6, 64, 64);
-
-                for (int i = 0; i < 10; i++) {
-                    ResourceLocation resource = new ResourceLocation(WizardsReborn.MOD_ID, "textures/gui/arcanemicon/research.png");
-                    Spell spellI = KnowledgeUtils.getSpellFromSet(mc.player, currentSpellSet, i);
-                    if (spellI != null) {
-                        if (!KnowledgeUtils.isSpell(mc.player, spellI)) {
-                            resource = new ResourceLocation(WizardsReborn.MOD_ID, "textures/gui/arcanemicon/unknown.png");
-                        } else {
-                            resource = spellI.getIcon();
+                    if (isOff) {
+                        if (twoHudFree) {
+                            xOffset = 0;
+                            yOffset = 0;
                         }
+                        xOffset = xOffset + xTwoOff;
+                        yOffset = yOffset + yTwoOff;
                     }
-
-                    if (!(KnowledgeUtils.isSpell(Minecraft.getInstance().player, spellI)) && spellI != null) {
-                        resource = new ResourceLocation(WizardsReborn.MOD_ID, "textures/gui/arcanemicon/unknown.png");
-                    }
-
-                    int xOffset = 0;
-                    if (currentSpellInSet == i) {
-                        xOffset = 8;
-                        gui.blit(new ResourceLocation(WizardsReborn.MOD_ID + ":textures/gui/arcane_wand_frame.png"), x + 1 , y + 49 + (i * 18), 34, 18, 8, 16, 64, 64);
-                    }
-
-                    gui.blit(resource, x + 1 + xOffset, y + 49 + (i * 18), 0, 0, 16, 16, 16, 16);
                 }
+                if (isOff) {
+                    drawWandHUD(gui, x + xOffset, y + yOffset, offhand, drawCooldown, drawWissen);
+                    if (sideHud) {
+                        xOffset = xOffset + (right ? -54 : 54);
+                    } else {
+                        yOffset = yOffset - (up ? -43 : 43);
+                    }
+                }
+
+                if (!sideBar && sideHud) {
+                    xOffset = xOff;
+                    yOffset = yOff;
+                    yOffset = yOffset - (up ? -43 : 43);
+                }
+                if (sideBar && !sideHud) {
+                    xOffset = xOff;
+                    yOffset = yOff;
+                    xOffset = xOffset + (right ? -54 : 54);
+                }
+
+                if (barFree) {
+                    xOffset = 0;
+                    yOffset = 0;
+                }
+
+                if (up) {
+                    if (horizontalBar && right) {
+                       xOffset = xOffset - spellsOffset + 4;
+                    }
+                } else {
+                    if (horizontalBar) {
+                        if (right) xOffset = xOffset - spellsOffset + 4;
+                        yOffset = yOffset + 25;
+                    } else {
+                        yOffset = yOffset - spellsOffset + 28;
+                    }
+                }
+
+                if (right) {
+                    xOffset = xOffset + 34;
+                }
+
+                xOffset = xOffset + xBarOff;
+                yOffset = yOffset + yBarOff;
+
+                drawBar(gui, x + xOffset, y + yOffset, horizontalBar, rightBar, showEmpty, reverseBar);
             }
         }
 
@@ -466,6 +502,243 @@ public class ArcaneWandItem extends Item implements IWissenItem, ICustomAnimatio
 
         RenderSystem.defaultBlendFunc();
         RenderSystem.setShaderColor(1F, 1F, 1F, 1F);
+    }
+
+    @OnlyIn(Dist.CLIENT)
+    public static void drawWandHUD(GuiGraphics gui, int x, int y, ItemStack stack, boolean drawCooldown, boolean drawWissen) {
+        if (stack.getItem() instanceof ArcaneWandItem wand) {
+            CompoundTag nbt = stack.getOrCreateTag();
+            existTags(stack);
+            WissenItemUtils.existWissen(stack);
+            Spell spell = null;
+
+            if (nbt.contains("spell")) {
+                if (nbt.getString("spell") != "") {
+                    spell = Spells.getSpell(nbt.getString("spell"));
+                }
+            }
+
+            int cooldown = nbt.getInt("cooldown");
+            int maxCooldown = nbt.getInt("maxCooldown");
+            int wissen = WissenItemUtils.getWissen(stack);
+            int maxWissen = wand.getMaxWissen();
+
+
+            gui.blit(new ResourceLocation(WizardsReborn.MOD_ID + ":textures/gui/arcane_wand_frame.png"), x, y, 0, 0, 52, 18, 64, 64);
+            gui.blit(new ResourceLocation(WizardsReborn.MOD_ID + ":textures/gui/cooldown_frame.png"), x + 2, y + 19, 0, 0, 48, 10, 64, 64);
+            gui.blit(new ResourceLocation(WizardsReborn.MOD_ID + ":textures/gui/wissen_frame.png"), x + 2, y + 30, 0, 0, 48, 10, 64, 64);
+
+            int width = 32;
+            if (spell != null && cooldown > 0) {
+                width /= (double) maxCooldown / (double) cooldown;
+            } else {
+                width = -32;
+            }
+            gui.blit(new ResourceLocation(WizardsReborn.MOD_ID + ":textures/gui/cooldown_frame.png"), x + 10, y + 20, 0, 10, 32 - width, 8, 64, 64);
+
+            width = 32;
+            width /= (double) maxWissen / (double) wissen;
+            gui.blit(new ResourceLocation(WizardsReborn.MOD_ID + ":textures/gui/wissen_frame.png"), x + 10, y + 31, 0, 10, width, 8, 64, 64);
+
+            if (nbt.getBoolean("crystal")) {
+                SimpleContainer stack_inv = ArcaneWandItem.getInventory(stack);
+                gui.renderItem(stack_inv.getItem(0), x + 8, y);
+            }
+
+            if (spell != null) {
+                if (KnowledgeUtils.isSpell(Minecraft.getInstance().player, spell)) {
+                    gui.blit(spell.getIcon(), x + 28, y + 1, 0, 0, 16, 16, 16, 16);
+                    if (!spell.canWandWithCrystal(stack)) {
+                        gui.blit(new ResourceLocation(WizardsReborn.MOD_ID + ":textures/gui/arcane_wand_frame.png"), x + 27, y, 0, 18, 18, 18, 64, 64);
+                    }
+                } else {
+                    gui.blit(new ResourceLocation(WizardsReborn.MOD_ID, "textures/gui/arcanemicon/unknown.png"), x + 28, y + 1, 0, 0, 16, 16, 16, 16);
+                }
+            }
+
+            Font font_renderer = Minecraft.getInstance().font;
+            if (drawCooldown) {
+                String textCooldown = Integer.toString(cooldown);
+                int cooldownStringWidth = font_renderer.width(textCooldown);
+
+                gui.drawString(Minecraft.getInstance().font, textCooldown, x + 26 - (cooldownStringWidth / 2), y + 20, 0xffffff);
+            }
+
+            if (drawWissen) {
+                String textWissen = Integer.toString(wissen);
+                int wissenStringWidth = font_renderer.width(textWissen);
+
+                gui.drawString(Minecraft.getInstance().font, textWissen, x + 26 - (wissenStringWidth / 2), y + 31, 0xffffff);
+            }
+        }
+    }
+
+    @OnlyIn(Dist.CLIENT)
+    public static void drawBar(GuiGraphics gui, int x, int y, boolean horizontal, boolean right, boolean showEmpty, boolean reverse) {
+        Minecraft mc = Minecraft.getInstance();
+        int currentSpellInSet = getCurrentSpellInSet(showEmpty, reverse);
+
+        int x1 = 18;
+        int y1 = 18;
+        int x2 = 18;
+        int y2 = 24;
+        int x3 = 42;
+        int y3 = 18;
+
+        int u1 = 16;
+        int v1 = 6;
+        int u3 = 8;
+        int v3 = 16;
+
+        int xOffset = 0;
+        int yOffset = 1;
+
+        int xo = 1;
+        int yo = 0;
+
+        if (horizontal) {
+            x1 = 20;
+            y1 = 30;
+            x2 = 26;
+            y2 = 30;
+            x3 = 34;
+            y3 = 42;
+
+            u1 = 6;
+            v1 = 16;
+            u3 = 16;
+            v3 = 8;
+
+            xOffset = -1;
+            yOffset = 0;
+
+            xo = 1;
+            yo = 0;
+
+            if (right) {
+                x3 = 34;
+                y3 = 34;
+            }
+        } else if (right) {
+            x3 = 34;
+            y3 = 18;
+        }
+
+        gui.blit(new ResourceLocation(WizardsReborn.MOD_ID + ":textures/gui/arcane_wand_frame.png"), x + xOffset + xo, y + yOffset + yo, x1, y1, u1, v1, 64, 64);
+
+        if (horizontal) {
+            xOffset = xOffset + 7;
+        } else {
+            yOffset = yOffset + 7;
+        }
+
+        List<Spell> spells = getSpellSet(showEmpty, reverse);
+
+        int i = 0;
+        for (Spell spellI : spells) {
+            ResourceLocation resource = new ResourceLocation(WizardsReborn.MOD_ID, "textures/gui/arcanemicon/research.png");
+            if (spellI != null) {
+                if (!KnowledgeUtils.isSpell(mc.player, spellI)) {
+                    resource = new ResourceLocation(WizardsReborn.MOD_ID, "textures/gui/arcanemicon/unknown.png");
+                } else {
+                    resource = spellI.getIcon();
+                }
+            }
+
+            if (!(KnowledgeUtils.isSpell(Minecraft.getInstance().player, spellI)) && spellI != null) {
+                resource = new ResourceLocation(WizardsReborn.MOD_ID, "textures/gui/arcanemicon/unknown.png");
+            }
+
+            int xof = 0;
+            int yof = 0;
+            int xc = 0;
+            int yc = 0;
+            if (currentSpellInSet == i) {
+                if (horizontal) {
+                    if (right) {
+                        yof = -8;
+                        yc = 7;
+                    } else {
+                        yof = 8;
+                    }
+                } else {
+                    if (right) {
+                        xof = -8;
+                        xc = 8;
+                    } else {
+                        xof = 8;
+                    }
+                }
+                gui.blit(new ResourceLocation(WizardsReborn.MOD_ID + ":textures/gui/arcane_wand_frame.png"), x + xOffset + xo + xc, y + yOffset + yo + yc, x3, y3, u3, v3, 64, 64);
+            }
+
+            gui.blit(resource, x + 1 + xOffset + xof, y + yOffset + yof, 0, 0, 16, 16, 16, 16);
+            if (horizontal) {
+                xOffset = xOffset + 18;
+            } else {
+                yOffset = yOffset + 18;
+            }
+            i++;
+        }
+
+        if (horizontal) {
+            xOffset = xOffset - 1;
+        } else {
+            yOffset = yOffset - 1;
+        }
+
+        gui.blit(new ResourceLocation(WizardsReborn.MOD_ID + ":textures/gui/arcane_wand_frame.png"), x + xOffset + xo, y + yOffset + yo, x2, y2, u1, v1, 64, 64);
+    }
+
+    @OnlyIn(Dist.CLIENT)
+    public static List<Spell> getSpellSet(boolean showEmpty, boolean reverse) {
+        Minecraft mc = Minecraft.getInstance();
+
+        int currentSpellSet = KnowledgeUtils.getCurrentSpellSet(mc.player);
+        int currentSpellInSet = KnowledgeUtils.getCurrentSpellInSet(mc.player);
+
+        List<Spell> spells = KnowledgeUtils.getSpellSet(mc.player, currentSpellSet);
+        List<Spell> spellSet = new ArrayList<>();
+
+        int ii = 0;
+        if (reverse) ii = 9;
+        for (int i = 0; i < 10; i++) {
+            Spell spell = spells.get(ii);
+            boolean add = showEmpty || spell != null || currentSpellInSet == ii;
+            if (add) spellSet.add(spell);
+            if (reverse) {
+                ii--;
+            } else {
+                ii++;
+            }
+        }
+
+        return spellSet;
+    }
+
+    @OnlyIn(Dist.CLIENT)
+    public static int getCurrentSpellInSet(boolean showEmpty, boolean reverse) {
+        Minecraft mc = Minecraft.getInstance();
+
+        int currentSpellSet = KnowledgeUtils.getCurrentSpellSet(mc.player);
+        int currentSpellInSet = KnowledgeUtils.getCurrentSpellInSet(mc.player);
+
+        List<Spell> spells = KnowledgeUtils.getSpellSet(mc.player, currentSpellSet);
+
+        int ii = 0;
+        if (reverse) ii = 9;
+        for (int i = 0; i < 10; i++) {
+            Spell spell = spells.get(ii);
+            boolean add = (!showEmpty && spell == null) || currentSpellInSet == ii;
+            if (add) return i;
+            if (reverse) {
+                ii--;
+            } else {
+                ii++;
+            }
+        }
+
+        return currentSpellInSet;
     }
 
     @Override

@@ -188,8 +188,8 @@
   "chiseled_wisestone_place": { "sounds": [{ "name": "wizards_reborn:blocks/wisestone/place1", "pitch": 0.85}, { "name": "wizards_reborn:blocks/wisestone/place2", "pitch": 0.85}, { "name": "wizards_reborn:blocks/wisestone/place3", "pitch": 0.85}, { "name": "wizards_reborn:blocks/wisestone/place4", "pitch": 0.85}, { "name": "wizards_reborn:blocks/wisestone/place5", "pitch": 0.85}], "subtitle": "subtitles.block.generic.place"},
   "chiseled_wisestone_hit": { "sounds": [{ "name": "wizards_reborn:blocks/wisestone/step1", "pitch": 0.9}, { "name": "wizards_reborn:blocks/wisestone/step2", "pitch": 0.9}, { "name": "wizards_reborn:blocks/wisestone/step3", "pitch": 0.9}, { "name": "wizards_reborn:blocks/wisestone/step4", "pitch": 0.9}, { "name": "wizards_reborn:blocks/wisestone/step5", "pitch": 0.9}], "subtitle": "subtitles.block.generic.hit"},
 
-  "wisestone_button_click_off": { "sounds": [{ "name": "wizards_reborn:blocks/wisestone/button/wisestone_button", "pitch": 0.5, "volume": 0.6}], "subtitle": "sounds.wizards_reborn.wisestone_button_click_off"},
-  "wisestone_button_click_on": { "sounds": [{ "name": "wizards_reborn:blocks/wisestone/button/wisestone_button", "pitch": 0.6, "volume": 0.6}], "subtitle": "sounds.wizards_reborn.wisestone_button_click_on"},
+  "wisestone_button_click_off": { "sounds": [{ "name": "wizards_reborn:blocks/wisestone/button/wisestone_button", "pitch": 0.5, "volume": 0.6}], "subtitle": "subtitles.block.button.click"},
+  "wisestone_button_click_on": { "sounds": [{ "name": "wizards_reborn:blocks/wisestone/button/wisestone_button", "pitch": 0.6, "volume": 0.6}], "subtitle": "subtitles.block.button.click"},
   "wisestone_pressure_plate_click_off": { "sounds": [{ "name": "wizards_reborn:blocks/wisestone/button/wisestone_button", "pitch": 0.5, "volume": 0.6}], "subtitle": "sounds.wizards_reborn.wisestone_pressure_plate_click_off"},
   "wisestone_pressure_plate_click_on": { "sounds": [{ "name": "wizards_reborn:blocks/wisestone/button/wisestone_button", "pitch": 0.6, "volume": 0.6}], "subtitle": "sounds.wizards_reborn.wisestone_pressure_plate_click_on"},
 
