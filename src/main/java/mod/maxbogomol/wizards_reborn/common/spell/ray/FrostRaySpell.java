@@ -82,7 +82,7 @@ public class FrostRaySpell extends RaySpell {
                 if (projectile.tickCount % (4 - focusLevel) == 0) {
                     if (WissenItemUtils.canRemoveWissen(stack, 1)) {
                         Vec3 vec = getBlockHitOffset(ray, projectile, 0.1f);
-                        BlockPos blockPos = new BlockPos(Mth.floor(vec.x()), Mth.floor(vec.y()), Mth.floor(vec.z()));
+                        BlockPos blockPos = BlockPos.containing(vec.x(), vec.y(), vec.z());
                         BlockState blockState = world.getBlockState(blockPos);
                         BlockState blockStateIce = Blocks.FROSTED_ICE.defaultBlockState();
 

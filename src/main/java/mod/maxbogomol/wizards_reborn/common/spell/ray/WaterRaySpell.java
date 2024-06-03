@@ -65,7 +65,7 @@ public class WaterRaySpell extends RaySpell {
         if (player != null) {
             if (player.isShiftKeyDown()) {
                 Vec3 vec = getBlockHitOffset(ray, projectile, -0.1f);
-                BlockPos blockPos = new BlockPos(Mth.floor(vec.x()), Mth.floor(vec.y()), Mth.floor(vec.z()));
+                BlockPos blockPos = BlockPos.containing(vec.x(), vec.y(), vec.z());
 
                 int focusLevel = CrystalUtils.getStatLevel(projectile.getStats(), WizardsReborn.FOCUS_CRYSTAL_STAT);
                 int radius = focusLevel + 1;

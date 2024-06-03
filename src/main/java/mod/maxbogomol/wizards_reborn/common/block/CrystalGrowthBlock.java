@@ -256,7 +256,7 @@ public class CrystalGrowthBlock extends Block implements EntityBlock, SimpleWate
         if (state.getBlock() != newState.getBlock()) {
             if (random.nextFloat() < getAge(state) * 0.05) {
                 ItemStack crystalItem = type.getFracturedCrystal();
-                CrystalUtils.createCrystalItemStats(crystalItem, type, world, 4);
+                CrystalUtils.createCrystalItemStats(crystalItem, type, world, 6);
                 Containers.dropItemStack(world, pos.getX(), pos.getY(), pos.getZ(), crystalItem);
             }
 

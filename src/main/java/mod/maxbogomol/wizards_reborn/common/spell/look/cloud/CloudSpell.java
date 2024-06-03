@@ -31,12 +31,12 @@ public class CloudSpell extends BlockLookSpell {
 
     @Override
     public int getCooldown() {
-        return 60;
+        return 350;
     }
 
     @Override
     public int getWissenCost() {
-        return 110;
+        return 200;
     }
 
     @Override

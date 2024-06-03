@@ -136,7 +136,7 @@ public class StrikeSpell extends BlockLookSpell {
                 List<Player> players = entity.level().getEntitiesOfClass(Player.class, new AABB(entity.getX() - distance, entity.getY() - distance, entity.getZ() - distance, entity.getX() + distance, entity.getY() + distance, entity.getZ() + distance));
                 for (Player player : players) {
                     float distanceToPlayer = (float) Math.sqrt(Math.pow(entity.getX() - player.getX(), 2) + Math.pow(entity.getY() - player.getY(), 2) + Math.pow(entity.getZ() - player.getZ(), 2));
-                    if (40f - distanceToPlayer > 0) PacketHandler.sendToTracking(entity.level(), entity.getOnPos(), new AddScreenshakePacket(1f - (distanceToPlayer / distance / 2)));
+                    if (40f - distanceToPlayer > 0) PacketHandler.sendTo(player, new AddScreenshakePacket(1f - (distanceToPlayer / distance / 2)));
                 }
 
                 strikeDamage(entity, entity.getSender());

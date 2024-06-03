@@ -16,6 +16,7 @@ import mod.maxbogomol.wizards_reborn.common.network.UnlockSpellPacket;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Font;
 import net.minecraft.client.gui.GuiGraphics;
+import net.minecraft.client.resources.language.I18n;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.sounds.SoundEvents;
@@ -132,6 +133,8 @@ public class ResearchPage extends Page {
     @Override
     @OnlyIn(Dist.CLIENT)
     public void render(ArcanemiconGui book, GuiGraphics gui, int x, int y, int mouseX, int mouseY) {
+        boolean hardmode = false;
+        if (Minecraft.getInstance().level.getLevelData().isHardcore()) hardmode = true;
         if (main) {
             setActives();
             gui.blit(BACKGROUND, x + 3, y + 3, 188, 60, 15, 15);
@@ -202,7 +205,7 @@ public class ResearchPage extends Page {
                 if (monogramMapEntry.isActive()) {
                     gui.blit(BACKGROUND, x + 59 - (int) size + (int) point.x - 2, y + 59 - (int) size + (int) point.y - 2, 158 + outlineXOffset, 40 + outlineYOffset, 14, 14);
                 }
-                if (currentMonogram != null) {
+                if (currentMonogram != null && !hardmode) {
                     if (isCanConnect(monogramMapEntry.getMonogram())) {
                         gui.blit(BACKGROUND, x + 59 - (int) size + (int) point.x - 1, y + 59 - (int) size + (int) point.y - 1, 172, 40, 12, 12);
                     }
@@ -248,9 +251,15 @@ public class ResearchPage extends Page {
                 drawText(book, gui, String.valueOf(ArcanemiconChapters.RESEARCH_MAIN.monograms.get(monogramsSet[i])), x + 11 + X, y + 9 + (ii * 15));
             }
 
-            if (ArcanemiconChapters.RESEARCH_MAIN.currentMonogram != null) {
-                recipeList.monogram = ArcanemiconChapters.RESEARCH_MAIN.currentMonogram;
-                recipeList.render(book, gui, x, y + (ii * 20) + 10, mouseX, mouseY);
+            if (hardmode) {
+                String title = I18n.get(getHardmodeText());
+                int titleWidth = Minecraft.getInstance().font.width(title);
+                drawText(book, gui, title, x + 64 - titleWidth / 2, y + 145 - Minecraft.getInstance().font.lineHeight);
+            } else {
+                if (ArcanemiconChapters.RESEARCH_MAIN.currentMonogram != null) {
+                    recipeList.monogram = ArcanemiconChapters.RESEARCH_MAIN.currentMonogram;
+                    recipeList.render(book, gui, x, y + (ii * 20) + 10, mouseX, mouseY);
+                }
             }
         }
     }
@@ -393,5 +402,9 @@ public class ResearchPage extends Page {
         }
 
         return i;
+    }
+
+    public String getHardmodeText() {
+        return "wizards_reborn.arcanemicon.hardmode_research";
     }
 }

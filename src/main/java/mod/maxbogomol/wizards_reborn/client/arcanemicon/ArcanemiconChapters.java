@@ -1281,6 +1281,12 @@ public class ArcanemiconChapters {
                         new ItemStack(Items.QUARTZ), new ItemStack(Items.QUARTZ), new ItemStack(Items.QUARTZ),
                         ARCANUM_ITEM, ARCANUM_ITEM, ARCANUM_ITEM
                 ),
+                new TitlePage("wizards_reborn.arcanemicon.page.life_roots"),
+                new ArcaneIteratorPage(new ItemStack(WizardsReborn.ARCANE_GOLD_SWORD.get()), 5, 0, WizardsReborn.LIFE_ROOTS_ARCANE_ENCHANTMENT,
+                        new ItemStack(WizardsReborn.ARCANE_GOLD_SWORD.get()), new ItemStack(Items.LAPIS_LAZULI), new ItemStack(Items.LAPIS_LAZULI),
+                        new ItemStack(Items.QUARTZ), new ItemStack(Items.QUARTZ), new ItemStack(Items.QUARTZ),
+                        ARCANUM_ITEM, ARCANUM_ITEM, ARCANUM_ITEM
+                ),
                 new TitlePage("wizards_reborn.arcanemicon.page.arcane_iterator_enchantments"),
                 new ArcaneIteratorPage(new ItemStack(Items.ENCHANTED_BOOK), 5, 0, Enchantments.ALL_DAMAGE_PROTECTION,
                         new ItemStack(Items.BOOK), new ItemStack(Items.LAPIS_LAZULI), new ItemStack(Items.LAPIS_LAZULI),
@@ -1819,9 +1825,9 @@ public class ArcanemiconChapters {
                 new SpellCharPage("wizards_reborn.arcanemicon.page.rain_cloud.char", WizardsReborn.RAIN_CLOUD_SPELL)
         );
         LAVA_BLOCK = new Chapter(
-                "wizards_reborn.arcanemicon.chapter.rain_cloud",
-                new TitledSpellPage("wizards_reborn.arcanemicon.page.rain_cloud", WizardsReborn.LAVA_BLOCK_SPELL),
-                new SpellCharPage("wizards_reborn.arcanemicon.page.rain_cloud.char", WizardsReborn.LAVA_BLOCK_SPELL)
+                "wizards_reborn.arcanemicon.chapter.lava_block",
+                new TitledSpellPage("wizards_reborn.arcanemicon.page.lava_block", WizardsReborn.LAVA_BLOCK_SPELL),
+                new SpellCharPage("wizards_reborn.arcanemicon.page.lava_block.char", WizardsReborn.LAVA_BLOCK_SPELL)
         );
         ICICLE = new Chapter(
                 "wizards_reborn.arcanemicon.chapter.icicle",
@@ -2076,7 +2082,7 @@ public class ArcanemiconChapters {
                         new SpellIndexEntry(WITHERING, WizardsReborn.WITHERING_SPELL, RegisterKnowledges.FACETED_CRYSTALS),
                         new SpellIndexEntry(WHAT, WizardsReborn.WHAT_SPELL, RegisterKnowledges.FACETED_CRYSTALS),
                         new SpellIndexEntry(NECROTIC_RAY, WizardsReborn.NECROTIC_RAY_SPELL, RegisterKnowledges.FACETED_CRYSTALS),
-                        new SpellIndexEntry(LIGHT_RAY, WizardsReborn.LIGHT_RAY_SPELL, RegisterKnowledges.FACETED_CRYSTALS)
+                        new SpellIndexEntry(LIGHT_RAY, WizardsReborn.LIGHT_RAY_SPELL, RegisterKnowledges.LIGHT_EMITTER)
                 ),
                 new SpellIndexPage(
                         new SpellIndexEntry(INCINERATION, WizardsReborn.INCINERATION_SPELL, RegisterKnowledges.FACETED_CRYSTALS),
@@ -2187,7 +2193,7 @@ public class ArcanemiconChapters {
                         new SpellIndexEntry(CURSE_AURA, WizardsReborn.CURSE_AURA_SPELL, RegisterKnowledges.FACETED_CRYSTALS),
                         new SpellIndexEntry(LAVA_BLOCK, WizardsReborn.LAVA_BLOCK_SPELL, RegisterKnowledges.FACETED_CRYSTALS),
                         new SpellIndexEntry(WITHERING, WizardsReborn.WITHERING_SPELL, RegisterKnowledges.FACETED_CRYSTALS),
-                        new SpellIndexEntry(LIGHT_RAY, WizardsReborn.LIGHT_RAY_SPELL, RegisterKnowledges.FACETED_CRYSTALS)
+                        new SpellIndexEntry(LIGHT_RAY, WizardsReborn.LIGHT_RAY_SPELL, RegisterKnowledges.LIGHT_EMITTER)
                 ),
                 new SpellIndexPage(
                         new SpellIndexEntry(INCINERATION, WizardsReborn.INCINERATION_SPELL, RegisterKnowledges.FACETED_CRYSTALS),

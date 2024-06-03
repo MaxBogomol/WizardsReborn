@@ -6,7 +6,6 @@ import mod.maxbogomol.wizards_reborn.common.crystalritual.ArtificialFertilityCry
 import mod.maxbogomol.wizards_reborn.common.entity.SpellProjectileEntity;
 import mod.maxbogomol.wizards_reborn.common.item.equipment.arcane.ArcaneArmorItem;
 import net.minecraft.core.BlockPos;
-import net.minecraft.util.Mth;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.phys.AABB;
@@ -39,7 +38,7 @@ public class RainCloudSpell extends CloudSpell {
             float z = (float) (entity.getZ() + ((random.nextFloat() - 0.5F) * 2 * size));
             HitResult hit = getHitPos(entity.level(), new Vec3(x, entity.getY(), z), new Vec3(x, entity.getY() - 30, z));
 
-            BlockPos blockPos = new BlockPos(Mth.floor(hit.getPosHit().x()), Mth.floor(hit.getPosHit().y()), Mth.floor(hit.getPosHit().z()));
+            BlockPos blockPos = BlockPos.containing(hit.getPosHit().x(), hit.getPosHit().y(), hit.getPosHit().z());
             ArtificialFertilityCrystalRitual.growCrop(entity.level(), blockPos);
             ArtificialFertilityCrystalRitual.growCrop(entity.level(), blockPos.below());
         }

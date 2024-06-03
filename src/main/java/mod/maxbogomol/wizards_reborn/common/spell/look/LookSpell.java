@@ -5,7 +5,6 @@ import mod.maxbogomol.wizards_reborn.api.crystal.CrystalUtils;
 import mod.maxbogomol.wizards_reborn.api.spell.Spell;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
-import net.minecraft.util.Mth;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.player.Player;
@@ -105,7 +104,7 @@ public class LookSpell extends Spell {
                 }
             }
 
-            BlockPos blockPos = new BlockPos(Mth.floor(X), Mth.floor(Y), Mth.floor(Z));
+            BlockPos blockPos = BlockPos.containing(X, Y, Z);
 
             BlockHitResult blockHitResult = world.getBlockState(blockPos).getVisualShape(world, blockPos, CollisionContext.empty()).clip(start, endPos, blockPos);
             if (blockHitResult != null) {

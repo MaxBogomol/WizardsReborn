@@ -1,4 +1,4 @@
-package mod.maxbogomol.wizards_reborn.common.spell;
+package mod.maxbogomol.wizards_reborn.common.spell.block;
 
 import mod.maxbogomol.wizards_reborn.WizardsReborn;
 import mod.maxbogomol.wizards_reborn.api.crystal.CrystalUtils;

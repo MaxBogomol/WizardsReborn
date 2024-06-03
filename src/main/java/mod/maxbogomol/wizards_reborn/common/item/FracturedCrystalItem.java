@@ -59,7 +59,7 @@ public class FracturedCrystalItem extends Item implements IParticleItem {
             CompoundTag nbt = stack.getOrCreateTag();
             if (nbt.contains("random_stats")) {
                 nbt.remove("random_stats");
-                CrystalUtils.createCrystalItemStats(stack, type, world, 4);
+                CrystalUtils.createCrystalItemStats(stack, type, world, 6);
                 stack.setTag(nbt);
             }
         }

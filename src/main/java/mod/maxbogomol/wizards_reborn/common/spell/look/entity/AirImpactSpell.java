@@ -1,4 +1,4 @@
-package mod.maxbogomol.wizards_reborn.common.spell.look;
+package mod.maxbogomol.wizards_reborn.common.spell.look.entity;
 
 import mod.maxbogomol.wizards_reborn.WizardsReborn;
 import mod.maxbogomol.wizards_reborn.api.crystal.CrystalUtils;
@@ -6,7 +6,6 @@ import mod.maxbogomol.wizards_reborn.client.animation.StrikeSpellItemAnimation;
 import mod.maxbogomol.wizards_reborn.common.item.equipment.arcane.ArcaneArmorItem;
 import mod.maxbogomol.wizards_reborn.common.network.PacketHandler;
 import mod.maxbogomol.wizards_reborn.common.network.spell.AirImpactSpellEffectPacket;
-import mod.maxbogomol.wizards_reborn.common.spell.look.entity.EntityLookSpell;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.entity.Entity;

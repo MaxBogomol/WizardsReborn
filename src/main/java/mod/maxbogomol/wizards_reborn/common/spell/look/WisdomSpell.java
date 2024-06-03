@@ -88,6 +88,7 @@ public class WisdomSpell extends LookSpell {
         }
     }
 
+    @Override
     public void releaseUsing(ItemStack stack, Level world, LivingEntity entityLiving, int timeLeft) {
         if (!world.isClientSide) {
             CompoundTag stats = getStats(stack);

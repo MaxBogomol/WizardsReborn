@@ -62,7 +62,7 @@ public class CrystalUtils {
 
         CompoundTag nbt = stack.getOrCreateTag();
         for (CrystalStat stat : intStats.keySet()) {
-            int statLevel = (int) Math.floor(intStats.get(stat) / ((float) fracturedCount / 2));
+            int statLevel = Mth.ceil(intStats.get(stat) / ((float) fracturedCount));
             if (statLevel > stat.getMaxLevel()) {
                 statLevel = stat.getMaxLevel();
             }

@@ -413,11 +413,11 @@ public class WissenTranslatorTileEntity extends ExposedTileSimpleInventory imple
             float Y = tag.getFloat("velocityY") + blockY;
             float Z = tag.getFloat("velocityZ") + blockZ;
 
-            if (level.isOutsideBuildHeight(new BlockPos(Mth.floor(blockX), Mth.floor(blockY), Mth.floor(blockZ)))) {
+            if (level.isOutsideBuildHeight(BlockPos.containing(blockX, blockY, blockZ))) {
                 deleteRays.add(i);
             }
 
-            if (level.isLoaded(new BlockPos(Mth.floor(blockX), Mth.floor(blockY), Mth.floor(blockZ)))) {
+            if (level.isLoaded(BlockPos.containing(blockX, blockY, blockZ))) {
                 tag.putFloat("blockX", X);
                 tag.putFloat("blockY", Y);
                 tag.putFloat("blockZ", Z);
@@ -430,7 +430,7 @@ public class WissenTranslatorTileEntity extends ExposedTileSimpleInventory imple
                     PacketHandler.sendToTracking(level, getBlockPos(), new WissenTranslatorBurstEffectPacket(X, Y, Z, (float) color.getRed() / 255, (float) color.getGreen() / 255, (float) color.getBlue() / 255));
                     deleteRays.add(i);
                 } else if ((blockFromX != Mth.floor(blockX)) || blockFromY != Mth.floor(blockY) || (blockFromZ != Mth.floor(blockZ))) {
-                    BlockEntity tileentity = level.getBlockEntity(new BlockPos(Mth.floor(blockX), Mth.floor(blockY), Mth.floor(blockZ)));
+                    BlockEntity tileentity = level.getBlockEntity(BlockPos.containing(blockX, blockY, blockZ));
                     if (tileentity instanceof IWissenTileEntity) {
                         if ((Math.abs(blockX) % 1F > 0.15F && Math.abs(blockX) % 1F <= 0.85F) &&
                                 (Math.abs(blockY) % 1F > 0.15F && Math.abs(blockY) % 1F <= 0.85F) &&
@@ -444,12 +444,12 @@ public class WissenTranslatorTileEntity extends ExposedTileSimpleInventory imple
                             PacketUtils.SUpdateTileEntityPacket(tileentity);
 
                             PacketHandler.sendToTracking(level, getBlockPos(), new WissenTranslatorBurstEffectPacket(X, Y, Z, (float) color.getRed() / 255, (float) color.getGreen() / 255, (float) color.getBlue() / 255));
-                            PacketHandler.sendToTracking(level, getBlockPos(), new WissenTranslatorSendEffectPacket(new BlockPos(Mth.floor(X), Mth.floor(Y), Mth.floor(Z))));
+                            PacketHandler.sendToTracking(level, getBlockPos(), new WissenTranslatorSendEffectPacket(BlockPos.containing(X, Y, Z)));
 
                             deleteRays.add(i);
                         }
                     } else {
-                        BlockPos blockpos = new BlockPos(Mth.floor(blockX), Mth.floor(blockY), Mth.floor(blockZ));
+                        BlockPos blockpos = BlockPos.containing(blockX, blockY, blockZ);
                         if (level.getBlockState(blockpos).isCollisionShapeFullBlock(level, blockpos)) {
                             tag.putInt("wissen", tag.getInt("wissen") - 1);
                         }

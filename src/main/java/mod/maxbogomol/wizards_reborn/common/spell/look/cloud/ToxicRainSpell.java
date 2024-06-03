@@ -28,6 +28,16 @@ public class ToxicRainSpell extends CloudSpell {
     }
 
     @Override
+    public int getCooldown() {
+        return 450;
+    }
+
+    @Override
+    public int getWissenCost() {
+        return 300;
+    }
+
+    @Override
     public boolean hasTrails(SpellProjectileEntity entity) {
         return true;
     }
