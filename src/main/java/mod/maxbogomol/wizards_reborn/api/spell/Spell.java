@@ -4,6 +4,7 @@ import com.mojang.blaze3d.vertex.PoseStack;
 import mod.maxbogomol.wizards_reborn.WizardsReborn;
 import mod.maxbogomol.wizards_reborn.api.crystal.CrystalType;
 import mod.maxbogomol.wizards_reborn.api.crystal.CrystalUtils;
+import mod.maxbogomol.wizards_reborn.api.crystal.Crystals;
 import mod.maxbogomol.wizards_reborn.api.knowledge.Research;
 import mod.maxbogomol.wizards_reborn.api.wissen.WissenItemUtils;
 import mod.maxbogomol.wizards_reborn.api.wissen.WissenUtils;
@@ -89,6 +90,10 @@ public class Spell {
         return crystalTypes;
     }
 
+    public void addAllCrystalType() {
+        crystalTypes.addAll(Crystals.getTypes());
+    }
+
     public int getCooldown() {
         return 20;
     }
@@ -130,6 +135,10 @@ public class Spell {
             return 1;
         }
         return (int) (cost * modifier);
+    }
+
+    public boolean isSecret() {
+        return false;
     }
 
     public boolean canWandWithCrystal(ItemStack stack) {

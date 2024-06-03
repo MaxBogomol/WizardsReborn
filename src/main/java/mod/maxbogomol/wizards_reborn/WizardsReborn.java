@@ -1827,7 +1827,6 @@ public class WizardsReborn {
 
         event.enqueueWork(() -> {
             ArcanemiconChapters.init();
-            ArcaneWandScreen.initSpells();
 
             MenuScreens.register(ARCANE_WORKBENCH_CONTAINER.get(), ArcaneWorkbenchScreen::new);
             MenuScreens.register(JEWELER_TABLE_CONTAINER.get(), JewelerTableScreen::new);
@@ -1976,6 +1975,9 @@ public class WizardsReborn {
         Spells.register(PIPE_SOUND_SPELL);
         Spells.register(BOOM_SOUND_SPELL);
         Spells.register(MOAI_SOUND_SPELL);
+        PIPE_SOUND_SPELL.addAllCrystalType();
+        BOOM_SOUND_SPELL.addAllCrystalType();
+        MOAI_SOUND_SPELL.addAllCrystalType();
     }
 
     public static void setupArcaneEnchantments() {

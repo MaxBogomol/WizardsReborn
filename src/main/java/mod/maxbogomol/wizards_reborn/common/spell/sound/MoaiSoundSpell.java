@@ -6,12 +6,11 @@ import net.minecraft.world.InteractionHand;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
 
-public class MoaiSoundSpell extends SoundSpell {
+public class MoaiSoundSpell extends SecretSoundSpell {
     public SoundEvent sound;
 
     public MoaiSoundSpell(String id, int points) {
         super(id, points);
-        addCrystalType(WizardsReborn.VOID_CRYSTAL_TYPE);
     }
 
     @Override

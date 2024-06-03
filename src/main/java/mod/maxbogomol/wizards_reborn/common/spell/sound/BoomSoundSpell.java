@@ -6,12 +6,11 @@ import net.minecraft.world.InteractionHand;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
 
-public class BoomSoundSpell extends SoundSpell {
+public class BoomSoundSpell extends SecretSoundSpell {
     public SoundEvent sound;
 
     public BoomSoundSpell(String id, int points) {
         super(id, points);
-        addCrystalType(WizardsReborn.VOID_CRYSTAL_TYPE);
     }
 
     @Override

@@ -43,6 +43,7 @@ import java.util.Map;
 public class ArcaneWandScreen extends Screen {
     public ArcaneWandScreen(Component titleIn) {
         super(titleIn);
+        ArcaneWandScreen.initSpells();
     }
 
     public enum Mode {
@@ -1079,7 +1080,9 @@ public class ArcaneWandScreen extends Screen {
 
         for (Spell spell : Spells.getSpells()) {
             for (CrystalType type : spell.getCrystalTypes()) {
-                spellsList.get(type).add(spell);
+                boolean add = true;
+                if (spell.isSecret()) add = (KnowledgeUtils.isSpell(Minecraft.getInstance().player, spell));
+                if (add) spellsList.get(type).add(spell);
             }
         }
     }

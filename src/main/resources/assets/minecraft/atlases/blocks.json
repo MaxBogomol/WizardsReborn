@@ -87,6 +87,10 @@
     {
       "type": "single",
       "resource": "wizards_reborn:monogram/universum"
+    },
+    {
+      "type": "single",
+      "resource": "wizards_reborn:spell/baller"
     }
   ]
 }

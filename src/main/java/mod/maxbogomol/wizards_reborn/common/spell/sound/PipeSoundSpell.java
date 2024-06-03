@@ -6,12 +6,11 @@ import net.minecraft.world.InteractionHand;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
 
-public class PipeSoundSpell extends SoundSpell {
+public class PipeSoundSpell extends SecretSoundSpell {
     public SoundEvent sound;
 
     public PipeSoundSpell(String id, int points) {
         super(id, points);
-        addCrystalType(WizardsReborn.VOID_CRYSTAL_TYPE);
     }
 
     @Override
