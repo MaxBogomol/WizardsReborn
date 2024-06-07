@@ -20,9 +20,11 @@ public class WissenCrystallizerSoundInstance extends TileEntitySoundInstance<Wis
         super.tick();
     }
 
-    public static WissenCrystallizerSoundInstance playSound(WissenCrystallizerTileEntity tileEntity) {
-        WissenCrystallizerSoundInstance sound = new WissenCrystallizerSoundInstance(tileEntity, 1, 1);
-        Minecraft.getInstance().getSoundManager().queueTickingSound(sound);
-        return sound;
+    public static WissenCrystallizerSoundInstance getSound(WissenCrystallizerTileEntity tileEntity) {
+        return new WissenCrystallizerSoundInstance(tileEntity, 1, 1);
+    }
+
+    public void playSound() {
+        Minecraft.getInstance().getSoundManager().queueTickingSound(this);
     }
 }

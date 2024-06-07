@@ -21,8 +21,10 @@ public class LightTransferLensSoundInstance extends TileEntitySoundInstance<Ligh
     }
 
     public static LightTransferLensSoundInstance playSound(LightTransferLensTileEntity tileEntity) {
-        LightTransferLensSoundInstance sound = new LightTransferLensSoundInstance(tileEntity, 1, 1);
-        Minecraft.getInstance().getSoundManager().queueTickingSound(sound);
-        return sound;
+        return new LightTransferLensSoundInstance(tileEntity, 1, 1);
+    }
+
+    public void playSound() {
+        Minecraft.getInstance().getSoundManager().queueTickingSound(this);
     }
 }

@@ -323,9 +323,11 @@ public class ArcaneIteratorTileEntity extends BlockEntity implements TickableBlo
                     }
 
                     if (sound == null) {
-                        sound = ArcaneIteratorSoundInstance.playSound(this);
+                        sound = ArcaneIteratorSoundInstance.getSound(this);
+                        sound.playSound();
                     } else if (sound.isStopped()) {
-                        sound = ArcaneIteratorSoundInstance.playSound(this);
+                        sound = ArcaneIteratorSoundInstance.getSound(this);
+                        sound.playSound();
                     }
                 } else {
                     if (offset > 0) {

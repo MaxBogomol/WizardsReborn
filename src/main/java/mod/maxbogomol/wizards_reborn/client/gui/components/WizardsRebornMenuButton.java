@@ -105,34 +105,40 @@ public class WizardsRebornMenuButton extends Button {
     public static class OpenConfigButtonHandler {
         @SubscribeEvent
         public static void onGuiInit(ScreenEvent.Init event) {
-            Screen gui = event.getScreen();
+            if (ClientConfig.PANORAMA_BUTTON.get()) {
+                Screen gui = event.getScreen();
 
-            MenuRows menu = null;
-            int rowIdx = 0, offsetX = 0;
-            if (gui instanceof TitleScreen) {
-                menu = MenuRows.MAIN_MENU;
-                rowIdx = 3;
-                offsetX = 4;
-            }
+                MenuRows menu = null;
+                int rowIdx = 0, offsetX = 0, offsetFreeX = 0, offsetFreeY = 0;
+                if (gui instanceof TitleScreen) {
+                    menu = MenuRows.MAIN_MENU;
+                    rowIdx = ClientConfig.PANORAMA_BUTTON_ROW.get();
+                    offsetX = ClientConfig.PANORAMA_BUTTON_ROW_X_OFFSET.get();
+                    offsetFreeX = ClientConfig.PANORAMA_BUTTON_X_OFFSET.get();
+                    offsetFreeY = ClientConfig.PANORAMA_BUTTON_Y_OFFSET.get();
+                }
 
-            if (rowIdx != 0 && menu != null) {
-                boolean onLeft = offsetX < 0;
-                String target = (onLeft ? menu.leftButtons : menu.rightButtons).get(rowIdx - 1);
+                if (rowIdx != 0 && menu != null) {
+                    boolean onLeft = offsetX < 0;
+                    String target = (onLeft ? menu.leftButtons : menu.rightButtons).get(rowIdx - 1);
 
-                int offsetX_ = offsetX;
-                MutableObject<GuiEventListener> toAdd = new MutableObject<>(null);
-                event.getListenersList()
-                        .stream()
-                        .filter(w -> w instanceof AbstractWidget)
-                        .map(w -> (AbstractWidget) w)
-                        .filter(w -> w.getMessage()
-                                .getString()
-                                .equals(target))
-                        .findFirst()
-                        .ifPresent(w -> toAdd
-                                .setValue(new WizardsRebornMenuButton(w.getX() + offsetX_ + (onLeft ? -20 : w.getWidth()), w.getY())));
-                if (toAdd.getValue() != null)
-                    event.addListener(toAdd.getValue());
+                    int offsetX_ = offsetX;
+                    int offsetFreeX_ = offsetFreeX;
+                    int offsetFreeY_ = offsetFreeY;
+                    MutableObject<GuiEventListener> toAdd = new MutableObject<>(null);
+                    event.getListenersList()
+                            .stream()
+                            .filter(w -> w instanceof AbstractWidget)
+                            .map(w -> (AbstractWidget) w)
+                            .filter(w -> w.getMessage()
+                                    .getString()
+                                    .equals(target))
+                            .findFirst()
+                            .ifPresent(w -> toAdd
+                                    .setValue(new WizardsRebornMenuButton(w.getX() + offsetX_ + (onLeft ? -20 : w.getWidth()) + offsetFreeX_, w.getY() + offsetFreeY_)));
+                    if (toAdd.getValue() != null)
+                        event.addListener(toAdd.getValue());
+                }
             }
         }
     }

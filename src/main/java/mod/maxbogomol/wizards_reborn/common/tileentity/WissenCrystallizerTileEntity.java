@@ -164,9 +164,11 @@ public class WissenCrystallizerTileEntity extends ExposedTileSimpleInventory imp
                 }
 
                 if (sound == null) {
-                    sound = WissenCrystallizerSoundInstance.playSound(this);
+                    sound = WissenCrystallizerSoundInstance.getSound(this);
+                    sound.playSound();
                 } else if (sound.isStopped()) {
-                    sound = WissenCrystallizerSoundInstance.playSound(this);
+                    sound = WissenCrystallizerSoundInstance.getSound(this);
+                    sound.playSound();
                 }
             }
         }

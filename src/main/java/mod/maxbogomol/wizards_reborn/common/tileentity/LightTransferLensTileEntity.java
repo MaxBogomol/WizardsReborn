@@ -90,8 +90,10 @@ public class LightTransferLensTileEntity extends ExposedTileSimpleInventory impl
             if (getLight() > 0 && isToBlock) {
                 if (sound == null) {
                     sound = LightTransferLensSoundInstance.playSound(this);
+                    sound.playSound();
                 } else if (sound.isStopped()) {
                     sound = LightTransferLensSoundInstance.playSound(this);
+                    sound.playSound();
                 }
             }
         }

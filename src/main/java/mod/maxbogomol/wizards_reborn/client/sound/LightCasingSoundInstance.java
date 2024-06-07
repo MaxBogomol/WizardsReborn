@@ -16,6 +16,7 @@ public class LightCasingSoundInstance extends TileEntitySoundInstance<LightCasin
     @Override
     public void tick() {
         if (blockEntity.getLight() <= 0) {
+            System.out.println(123);
             stop();
         }
 
@@ -33,9 +34,11 @@ public class LightCasingSoundInstance extends TileEntitySoundInstance<LightCasin
         super.tick();
     }
 
-    public static LightCasingSoundInstance playSound(LightCasingTileEntity tileEntity) {
-        LightCasingSoundInstance sound = new LightCasingSoundInstance(tileEntity, 1, 1);
-        Minecraft.getInstance().getSoundManager().queueTickingSound(sound);
-        return sound;
+    public static LightCasingSoundInstance getSound(LightCasingTileEntity tileEntity) {
+        return new LightCasingSoundInstance(tileEntity, 1, 1);
+    }
+
+    public void playSound() {
+        Minecraft.getInstance().getSoundManager().queueTickingSound(this);
     }
 }

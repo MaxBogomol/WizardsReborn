@@ -73,6 +73,11 @@ public class ResearchPage extends Page {
                             Minecraft.getInstance().player.playNotifySound(SoundEvents.ITEM_PICKUP, SoundSource.NEUTRAL, 1.0f, 1.0f);
                             currentMonogram = null;
                             return true;
+                        } else {
+                            map.add(new MonogramMapEntry(currentMonogram));
+                            Minecraft.getInstance().player.playNotifySound(SoundEvents.ITEM_PICKUP, SoundSource.NEUTRAL, 1.0f, 1.0f);
+                            currentMonogram = null;
+                            return true;
                         }
                     } else {
                         int index = getSelectedMonogram(x, y, mouseX, mouseY);
@@ -133,7 +138,7 @@ public class ResearchPage extends Page {
     @Override
     @OnlyIn(Dist.CLIENT)
     public void render(ArcanemiconGui book, GuiGraphics gui, int x, int y, int mouseX, int mouseY) {
-        boolean hardmode = false;
+        boolean hardmode = ClientConfig.RESEARCH_HARDMODE.get();
         if (Minecraft.getInstance().level.getLevelData().isHardcore()) hardmode = true;
         if (main) {
             setActives();

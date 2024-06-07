@@ -155,9 +155,11 @@ public class CrystalTileEntity extends TileSimpleInventory implements TickableBl
         if (level.isClientSide()) {
             if (getLight() > 0 && isToBlock || startRitual) {
                 if (sound == null) {
-                    sound = CrystalSoundInstance.playSound(this);
+                    sound = CrystalSoundInstance.getSound(this);
+                    sound.playSound();
                 } else if (sound.isStopped()) {
-                    sound = CrystalSoundInstance.playSound(this);
+                    sound = CrystalSoundInstance.getSound(this);
+                    sound.playSound();
                 }
             }
         }

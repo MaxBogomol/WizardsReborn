@@ -1,0 +1,19 @@
+{
+  "type": "wizards_reborn:wissen_crystallizer",
+  "output": {
+    "item": "wizards_reborn:music_disc_shimmer",
+    "count": 1
+  },
+  "wissen": 1000,
+  "ingredients": [
+    {
+      "tag": "minecraft:music_discs"
+    },
+    {
+      "item": "minecraft:cobbled_deepslate"
+    },
+    {
+      "item": "wizards_reborn:arcanum"
+    }
+  ]
+}

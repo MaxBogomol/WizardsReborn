@@ -132,9 +132,11 @@ public class LightEmitterTileEntity extends ExposedTileSimpleInventory implement
 
             if (getLight() > 0) {
                 if (sound == null) {
-                    sound = LightEmitterSoundInstance.playSound(this);
+                    sound = LightEmitterSoundInstance.getSound(this);
+                    sound.playSound();
                 } else if (sound.isStopped()) {
-                    sound = LightEmitterSoundInstance.playSound(this);
+                    sound = LightEmitterSoundInstance.getSound(this);
+                    sound.playSound();
                 }
             }
         }

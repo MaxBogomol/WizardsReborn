@@ -20,9 +20,11 @@ public class LightEmitterSoundInstance extends TileEntitySoundInstance<LightEmit
         super.tick();
     }
 
-    public static LightEmitterSoundInstance playSound(LightEmitterTileEntity tileEntity) {
-        LightEmitterSoundInstance sound = new LightEmitterSoundInstance(tileEntity, 1, 1);
-        Minecraft.getInstance().getSoundManager().queueTickingSound(sound);
-        return sound;
+    public static LightEmitterSoundInstance getSound(LightEmitterTileEntity tileEntity) {
+        return new LightEmitterSoundInstance(tileEntity, 1, 1);
+    }
+
+    public void playSound() {
+        Minecraft.getInstance().getSoundManager().queueTickingSound(this);
     }
 }

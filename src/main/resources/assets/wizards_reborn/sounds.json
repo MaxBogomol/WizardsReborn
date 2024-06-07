@@ -3,6 +3,7 @@
   "mor_marsh": { "sounds": [{"name": "wizards_reborn:music/mor_marsh", "stream": true}]},
   "reborn": { "sounds": [{"name": "wizards_reborn:music/reborn", "stream": true}]},
   "magical_panache": { "sounds": [{"name": "wizards_reborn:music/magical_panache", "stream": true}]},
+  "blue_shimmer": { "sounds": [{"name": "wizards_reborn:music/blue_shimmer", "stream": true}]},
 
   "wissen_burst": { "sounds": ["wizards_reborn:wissen/burst"], "subtitle": "sounds.wizards_reborn.wissen_burst"},
   "wissen_transfer": { "sounds": ["wizards_reborn:wissen/transfer"], "subtitle": "sounds.wizards_reborn.wissen_transfer"},

@@ -20,9 +20,11 @@ public class CrystalSoundInstance extends TileEntitySoundInstance<CrystalTileEnt
         super.tick();
     }
 
-    public static CrystalSoundInstance playSound(CrystalTileEntity tileEntity) {
-        CrystalSoundInstance sound = new CrystalSoundInstance(tileEntity, 1, 1);
-        Minecraft.getInstance().getSoundManager().queueTickingSound(sound);
-        return sound;
+    public static CrystalSoundInstance getSound(CrystalTileEntity tileEntity) {
+        return new CrystalSoundInstance(tileEntity, 1, 1);
+    }
+
+    public void playSound() {
+        Minecraft.getInstance().getSoundManager().queueTickingSound(this);
     }
 }

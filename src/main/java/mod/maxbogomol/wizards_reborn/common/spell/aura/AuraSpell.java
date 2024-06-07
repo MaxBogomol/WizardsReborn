@@ -73,7 +73,7 @@ public class AuraSpell extends Spell {
             setCooldown(stack, stats);
             removeWissen(stack, stats, player);
             awardStat(player, stack);
-            world.playSound(WizardsReborn.proxy.getPlayer(), player.getX(), player.getY(), player.getZ(), WizardsReborn.SPELL_CAST_SOUND.get(), SoundSource.PLAYERS, 0.25f, (float) (1f + ((random.nextFloat() - 0.5D) / 4)));
+            spellSound(player, context.getLevel());
 
             Color color = getColor();
             float r = color.getRed() / 255f;

@@ -104,6 +104,7 @@ public final class PacketHandler {
         HANDLER.registerMessage(id++, AirImpactSpellEffectPacket.class, AirImpactSpellEffectPacket::encode, AirImpactSpellEffectPacket::decode, AirImpactSpellEffectPacket::handle);
         HANDLER.registerMessage(id++, BlockPlaceSpellEffectPacket.class, BlockPlaceSpellEffectPacket::encode, BlockPlaceSpellEffectPacket::decode, BlockPlaceSpellEffectPacket::handle);
         HANDLER.registerMessage(id++, CrystalCrushingSpellEffectPacket.class, CrystalCrushingSpellEffectPacket::encode, CrystalCrushingSpellEffectPacket::decode, CrystalCrushingSpellEffectPacket::handle);
+        HANDLER.registerMessage(id++, IrritationSpellEffectPacket.class, IrritationSpellEffectPacket::encode, IrritationSpellEffectPacket::decode, IrritationSpellEffectPacket::handle);
 
         HANDLER.registerMessage(id++, MagicBladeEffectPacket.class, MagicBladeEffectPacket::encode, MagicBladeEffectPacket::decode, MagicBladeEffectPacket::handle);
     }

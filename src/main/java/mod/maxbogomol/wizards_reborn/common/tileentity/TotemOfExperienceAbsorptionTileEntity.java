@@ -151,9 +151,11 @@ public class TotemOfExperienceAbsorptionTileEntity extends BlockEntity implement
                 }
 
                 if (sound == null) {
-                    sound = TotemOfExperienceAbsorptionSoundInstance.playSound(this);
+                    sound = TotemOfExperienceAbsorptionSoundInstance.getSound(this);
+                    sound.playSound();
                 } else if (sound.isStopped()) {
-                    sound = TotemOfExperienceAbsorptionSoundInstance.playSound(this);
+                    sound = TotemOfExperienceAbsorptionSoundInstance.getSound(this);
+                    sound.playSound();
                 }
 
                 if (tick < 20) {

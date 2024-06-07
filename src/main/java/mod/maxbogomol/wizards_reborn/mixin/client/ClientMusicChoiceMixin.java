@@ -58,8 +58,15 @@ public class ClientMusicChoiceMixin {
             Holder<Biome> holder = this.player.level().getBiome(this.player.blockPosition());
             final Music biomeMusic = holder.value().getBackgroundMusic().orElse(null);
             if (holder.is(Tags.Biomes.IS_SWAMP)) {
-                if (random.nextFloat() < 0.8) {
+                if (random.nextFloat() < 0.8f) {
                     cir.setReturnValue(WizardsRebornClient.MOR_MUSIC);
+                }
+            }
+            if (holder.is(Tags.Biomes.IS_CAVE)) {
+                if (player.getY() >= -40 && player.getY() <= 30) {
+                    if (random.nextFloat() < 0.6f) {
+                        cir.setReturnValue(WizardsRebornClient.SHIMMER_MUSIC);
+                    }
                 }
             }
         }

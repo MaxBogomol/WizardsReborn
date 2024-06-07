@@ -61,9 +61,11 @@ public class LightCasingTileEntity extends LightTransferLensTileEntity {
                 for (Direction direction : Direction.values()) {
                     if (isConnection(direction)) {
                         if (sound == null) {
-                            sound = LightCasingSoundInstance.playSound(this);
+                            sound = LightCasingSoundInstance.getSound(this);
+                            sound.playSound();
                         } else if (sound.isStopped()) {
-                            sound = LightCasingSoundInstance.playSound(this);
+                            sound = LightCasingSoundInstance.getSound(this);
+                            sound.playSound();
                         }
                     }
                 }

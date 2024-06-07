@@ -20,9 +20,11 @@ public class TotemOfExperienceAbsorptionSoundInstance extends TileEntitySoundIns
         super.tick();
     }
 
-    public static TotemOfExperienceAbsorptionSoundInstance playSound(TotemOfExperienceAbsorptionTileEntity tileEntity) {
-        TotemOfExperienceAbsorptionSoundInstance sound = new TotemOfExperienceAbsorptionSoundInstance(tileEntity, 1, 1);
-        Minecraft.getInstance().getSoundManager().queueTickingSound(sound);
-        return sound;
+    public static TotemOfExperienceAbsorptionSoundInstance getSound(TotemOfExperienceAbsorptionTileEntity tileEntity) {
+        return new TotemOfExperienceAbsorptionSoundInstance(tileEntity, 1, 1);
+    }
+
+    public void playSound() {
+        Minecraft.getInstance().getSoundManager().queueTickingSound(this);
     }
 }

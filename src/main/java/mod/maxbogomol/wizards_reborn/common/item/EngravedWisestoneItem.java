@@ -61,7 +61,7 @@ public class EngravedWisestoneItem extends BlockItem implements IGuiParticleItem
     }
 
     @OnlyIn(Dist.CLIENT)
-    public Component getMonogramComponent(Monogram monogram) {
+    public static Component getMonogramComponent(Monogram monogram) {
         Color color = monogram.getColor();
         float ticks = ClientTickHandler.ticksInGame + Minecraft.getInstance().getPartialTick() * 5f;
         MutableComponent component = Component.empty();

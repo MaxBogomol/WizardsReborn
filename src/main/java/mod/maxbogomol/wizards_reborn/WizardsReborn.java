@@ -47,6 +47,7 @@ import mod.maxbogomol.wizards_reborn.common.crystalritual.ArtificialFertilityCry
 import mod.maxbogomol.wizards_reborn.common.crystalritual.CrystalGrowthAccelerationCrystalRitual;
 import mod.maxbogomol.wizards_reborn.common.crystalritual.CrystalInfusionCrystalRitual;
 import mod.maxbogomol.wizards_reborn.common.crystalritual.RitualBreedingCrystalRitual;
+import mod.maxbogomol.wizards_reborn.common.effect.IrritationEffect;
 import mod.maxbogomol.wizards_reborn.common.effect.MorSporesEffect;
 import mod.maxbogomol.wizards_reborn.common.effect.WissenAuraEffect;
 import mod.maxbogomol.wizards_reborn.common.entity.CustomBoatEntity;
@@ -73,6 +74,7 @@ import mod.maxbogomol.wizards_reborn.common.recipe.*;
 import mod.maxbogomol.wizards_reborn.common.spell.aura.*;
 import mod.maxbogomol.wizards_reborn.common.spell.block.*;
 import mod.maxbogomol.wizards_reborn.common.spell.charge.*;
+import mod.maxbogomol.wizards_reborn.common.spell.fog.MorSwarmSpell;
 import mod.maxbogomol.wizards_reborn.common.spell.look.BlinkSpell;
 import mod.maxbogomol.wizards_reborn.common.spell.look.CrystalCrushingSpell;
 import mod.maxbogomol.wizards_reborn.common.spell.look.WisdomSpell;
@@ -170,6 +172,7 @@ import java.awt.*;
 @Mod("wizards_reborn")
 public class WizardsReborn {
     public static final String MOD_ID = "wizards_reborn";
+    public static final int VERSION_NUMBER = 16;
 
     public static final ISidedProxy proxy = DistExecutor.unsafeRunForDist(() -> ClientProxy::new, () -> ServerProxy::new);
 
@@ -233,6 +236,7 @@ public class WizardsReborn {
     public static final RegistryObject<SoundEvent> MUSIC_DISC_ARCANUM_SOUND = SOUND_EVENTS.register("arcanum_swinging", () -> SoundEvent.createVariableRangeEvent(new ResourceLocation(MOD_ID, "arcanum_swinging")));
     public static final RegistryObject<SoundEvent> MUSIC_DISC_MOR_SOUND = SOUND_EVENTS.register("mor_marsh", () -> SoundEvent.createVariableRangeEvent(new ResourceLocation(MOD_ID, "mor_marsh")));
     public static final RegistryObject<SoundEvent> MUSIC_DISC_REBORN_SOUND = SOUND_EVENTS.register("reborn", () -> SoundEvent.createVariableRangeEvent(new ResourceLocation(MOD_ID, "reborn")));
+    public static final RegistryObject<SoundEvent> MUSIC_DISC_SHIMMER_SOUND = SOUND_EVENTS.register("blue_shimmer", () -> SoundEvent.createVariableRangeEvent(new ResourceLocation(MOD_ID, "blue_shimmer")));
     public static final RegistryObject<SoundEvent> MUSIC_DISC_PANACHE_SOUND = SOUND_EVENTS.register("magical_panache", () -> SoundEvent.createVariableRangeEvent(new ResourceLocation(MOD_ID, "magical_panache")));
 
     public static final RegistryObject<SoundEvent> ARCANE_GOLD_BREAK_SOUND = SOUND_EVENTS.register("arcane_gold_break", () -> SoundEvent.createVariableRangeEvent(new ResourceLocation(MOD_ID, "arcane_gold_break")));
@@ -578,24 +582,24 @@ public class WizardsReborn {
     public static Spell CURSE_AURA_SPELL = new CurseAuraSpell(MOD_ID+":curse_aura", 12);
     public static Spell RAIN_CLOUD_SPELL = new RainCloudSpell(MOD_ID+":rain_cloud", 15);
     public static Spell LAVA_BLOCK_SPELL = new LavaBlockSpell(MOD_ID+":lava_block", 12);
-    public static Spell ICICLE_SPELL = new IcicleSpell(MOD_ID+":icicle", 15);
-    public static Spell SHARP_BLINK_SPELL = new BlinkSpell(MOD_ID+":sharp_blink", 12, true);
-    public static Spell CRYSTAL_CRUSHING_SPELL = new CrystalCrushingSpell(MOD_ID+":crystal_crushing", 12);
-    public static Spell TOXIC_RAIN_SPELL = new ToxicRainSpell(MOD_ID+":toxic_rain", 15);
-    public static Spell MOR_SWARM_SPELL = new ToxicRainSpell(MOD_ID+":mor_swarm", 15);
-    public static Spell WITHERING_SPELL = new WitheringSpell(MOD_ID+":withering", 15);
-    public static Spell WHAT_SPELL = new NecroticRaySpell(MOD_ID+":what", 15);
-    public static Spell NECROTIC_RAY_SPELL = new NecroticRaySpell(MOD_ID+":necrotic_ray", 15);
-    public static Spell LIGHT_RAY_SPELL = new LightRaySpell(MOD_ID+":light_ray", 15);
+    public static Spell ICICLE_SPELL = new IcicleSpell(MOD_ID+":icicle", 10);
+    public static Spell SHARP_BLINK_SPELL = new BlinkSpell(MOD_ID+":sharp_blink", 10, true);
+    public static Spell CRYSTAL_CRUSHING_SPELL = new CrystalCrushingSpell(MOD_ID+":crystal_crushing", 8);
+    public static Spell TOXIC_RAIN_SPELL = new ToxicRainSpell(MOD_ID+":toxic_rain", 8);
+    public static Spell MOR_SWARM_SPELL = new MorSwarmSpell(MOD_ID+":mor_swarm", 8);
+    public static Spell WITHERING_SPELL = new WitheringSpell(MOD_ID+":withering", 8);
+    public static Spell IRRITATION_SPELL = new IrritationSpell(MOD_ID+":irritation", 8);
+    public static Spell NECROTIC_RAY_SPELL = new NecroticRaySpell(MOD_ID+":necrotic_ray", 8);
+    public static Spell LIGHT_RAY_SPELL = new LightRaySpell(MOD_ID+":light_ray", 8);
     public static Spell INCINERATION_SPELL = new IncinerationSpell(MOD_ID+":incineration", 15);
     public static Spell REPENTANCE_SPELL = new RepentanceSpell(MOD_ID+":repentance", 15);
     public static Spell RENUNCIATION_SPELL = new RenunciationSpell(MOD_ID+":renunciation", 15);
     public static Spell EMBER_RAY_SPELL = new EmberRaySpell(MOD_ID+":ember_ray", 15);
-    public static Spell WISDOM_SPELL = new WisdomSpell(MOD_ID+":wisdom", 15);
+    public static Spell WISDOM_SPELL = new WisdomSpell(MOD_ID+":wisdom", 20);
 
-    public static Spell PIPE_SOUND_SPELL = new PipeSoundSpell(MOD_ID+":pipe_sound", 15);
-    public static Spell BOOM_SOUND_SPELL = new BoomSoundSpell(MOD_ID+":boom_sound", 15);
-    public static Spell MOAI_SOUND_SPELL = new MoaiSoundSpell(MOD_ID+":moai_sound", 15);
+    public static Spell PIPE_SOUND_SPELL = new PipeSoundSpell(MOD_ID+":pipe_sound", 0);
+    public static Spell BOOM_SOUND_SPELL = new BoomSoundSpell(MOD_ID+":boom_sound", 0);
+    public static Spell MOAI_SOUND_SPELL = new MoaiSoundSpell(MOD_ID+":moai_sound", 0);
 
     //ARCANE ENCHANTMENT
     public static ArcaneEnchantment WISSEN_MENDING_ARCANE_ENCHANTMENT = new WissenMendingArcaneEnchantment(MOD_ID+":wissen_mending", 3);
@@ -1294,6 +1298,7 @@ public class WizardsReborn {
     public static final RegistryObject<Item> MUSIC_DISC_ARCANUM = ITEMS.register("music_disc_arcanum", () -> new RecordItem(6, MUSIC_DISC_ARCANUM_SOUND.get(), new Item.Properties().stacksTo(1).rarity(Rarity.RARE), 122));
     public static final RegistryObject<Item> MUSIC_DISC_MOR = ITEMS.register("music_disc_mor", () -> new RecordItem(6, MUSIC_DISC_MOR_SOUND.get(), new Item.Properties().stacksTo(1).rarity(Rarity.RARE), 305));
     public static final RegistryObject<Item> MUSIC_DISC_REBORN = ITEMS.register("music_disc_reborn", () -> new RecordItem(6, MUSIC_DISC_REBORN_SOUND.get(), new Item.Properties().stacksTo(1).rarity(Rarity.RARE), 211));
+    public static final RegistryObject<Item> MUSIC_DISC_SHIMMER = ITEMS.register("music_disc_shimmer", () -> new RecordItem(6, MUSIC_DISC_SHIMMER_SOUND.get(), new Item.Properties().stacksTo(1).rarity(Rarity.RARE), 234));
     public static final RegistryObject<Item> MUSIC_DISC_PANACHE = ITEMS.register("music_disc_panache", () -> new RecordItem(6, MUSIC_DISC_PANACHE_SOUND.get(), new Item.Properties().stacksTo(1).rarity(Rarity.RARE), 91));
 
     //TILE_ENTITIES
@@ -1563,6 +1568,7 @@ public class WizardsReborn {
 
     public static final RegistryObject<MobEffect> MOR_SPORES_EFFECT = EFFECTS.register("mor_spores", MorSporesEffect::new);
     public static final RegistryObject<MobEffect> WISSEN_AURA_EFFECT = EFFECTS.register("wissen_aura", WissenAuraEffect::new);
+    public static final RegistryObject<MobEffect> IRRITATION_EFFECT = EFFECTS.register("irritation", IrritationEffect::new);
 
     public static final RegistryObject<TrunkPlacerType<ArcaneWoodTrunkPlacer>> ARCANE_WOOD_TRUNK_PLACER = TRUNK_PLACER_TYPES.register("arcane_wood_trunk_placer", () -> new TrunkPlacerType<>(ArcaneWoodTrunkPlacer.CODEC));
 
@@ -1963,7 +1969,7 @@ public class WizardsReborn {
         Spells.register(TOXIC_RAIN_SPELL);
         Spells.register(MOR_SWARM_SPELL);
         Spells.register(WITHERING_SPELL);
-        Spells.register(WHAT_SPELL);
+        Spells.register(IRRITATION_SPELL);
         Spells.register(NECROTIC_RAY_SPELL);
         Spells.register(LIGHT_RAY_SPELL);
         Spells.register(INCINERATION_SPELL);

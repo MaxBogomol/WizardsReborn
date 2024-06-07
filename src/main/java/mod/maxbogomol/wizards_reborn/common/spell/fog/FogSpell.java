@@ -1,12 +1,26 @@
 package mod.maxbogomol.wizards_reborn.common.spell.fog;
 
+import mod.maxbogomol.wizards_reborn.WizardsReborn;
+import mod.maxbogomol.wizards_reborn.api.crystal.CrystalUtils;
 import mod.maxbogomol.wizards_reborn.api.spell.Spell;
+import mod.maxbogomol.wizards_reborn.client.particle.Particles;
+import mod.maxbogomol.wizards_reborn.common.entity.SpellProjectileEntity;
+import net.minecraft.core.BlockPos;
+import net.minecraft.nbt.CompoundTag;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
+import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.context.UseOnContext;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.phys.AABB;
+import net.minecraft.world.phys.Vec3;
+
+import java.awt.*;
+import java.util.ArrayList;
+import java.util.List;
 
 public class FogSpell extends Spell {
     public FogSpell(String id, int points) {
@@ -20,10 +34,144 @@ public class FogSpell extends Spell {
 
     @Override
     public InteractionResult onWandUseOn(ItemStack stack, UseOnContext context) {
-        if (canSpell(context.getLevel(), context.getPlayer(), context.getHand()) && !context.getPlayer().level().isClientSide()) {
+        Level world = context.getLevel();
+        Player player = context.getPlayer();
 
+        if (!world.isClientSide && canSpell(world, player, context.getHand())) {
+            CompoundTag stats = getStats(stack);
+
+            Vec3 pos = context.getClickedPos().getCenter();
+            SpellProjectileEntity entity = new SpellProjectileEntity(WizardsReborn.SPELL_PROJECTILE.get(), world).shoot(
+                    pos.x, pos.y + 0.5, pos.z, 0, 0, 0, player.getUUID(), this.getId(), stats
+            );
+            world.addFreshEntity(entity);
+
+            setCooldown(stack, stats);
+            removeWissen(stack, stats, player);
+            awardStat(player, stack);
+            spellSound(player, context.getLevel());
+            return InteractionResult.SUCCESS;
         }
 
         return InteractionResult.PASS;
+    }
+
+    @Override
+    public void entityTick(SpellProjectileEntity entity) {
+        if (!entity.level().isClientSide) {
+            if (entity.tickCount > getLifeTime(entity)) {
+                entity.remove();
+            }
+            fog(entity, entity.getSender());
+        } else {
+            fogEffect(entity);
+        }
+    }
+
+    public int getLifeTime(SpellProjectileEntity entity) {
+        return 200;
+    }
+
+    public int getHeight(SpellProjectileEntity entity) {
+        return 2;
+    }
+
+    public int getSize(SpellProjectileEntity entity) {
+        return 1;
+    }
+
+    public int getAdditionalSize(SpellProjectileEntity entity) {
+        return 1;
+    }
+
+    public boolean isCircle(SpellProjectileEntity entity) {
+        return true;
+    }
+
+    public void fog(SpellProjectileEntity entity, Player player) {
+
+    }
+
+    public void fogEffect(SpellProjectileEntity entity) {
+        Color color = getColor();
+        float r = color.getRed() / 255f;
+        float g = color.getGreen() / 255f;
+        float b = color.getBlue() / 255f;
+
+        float alpha = 1;
+        int lifeTime = getLifeTime(entity);
+
+        if (entity.tickCount < 20) {
+            alpha = (entity.tickCount) / 20f;
+        }
+        if (entity.tickCount > lifeTime - 20) {
+            alpha = ((lifeTime - entity.tickCount) / 20f);
+        }
+        if (alpha > 1f) alpha = 1f;
+        if (alpha < 0f) alpha = 0f;
+
+        int focusLevel = CrystalUtils.getStatLevel(entity.getStats(), WizardsReborn.FOCUS_CRYSTAL_STAT);
+        int size = getSize(entity) + (getSize(entity) * focusLevel);
+        List<BlockPos> blocks = getBlocks(entity.level(), entity.getOnPos(), (int) (size * alpha), 4, isCircle(entity));
+
+        for (BlockPos pos : blocks) {
+            if (random.nextFloat() < 0.2f) {
+                Particles.create(WizardsReborn.STEAM_PARTICLE)
+                        .addVelocity(((random.nextDouble() - 0.5D) / 70), ((random.nextDouble() - 0.5D) / 70), ((random.nextDouble() - 0.5D) / 70))
+                        .setAlpha(0.45f, 0).setScale(0.5f)
+                        .setColor(r, g, b)
+                        .setLifetime(20)
+                        .setSpin((0.1f * (float) ((random.nextDouble() - 0.5D) * 2)))
+                        .spawn(entity.level(), pos.getX() + 0.5f + (random.nextDouble() - 0.5D), pos.getY() + 0.1f, pos.getZ() + 0.5f + (random.nextDouble() - 0.5D));
+            }
+            if (random.nextFloat() < 0.4f) {
+                Particles.create(WizardsReborn.SMOKE_PARTICLE)
+                        .addVelocity(((random.nextDouble() - 0.5D) / 70), ((random.nextDouble() - 0.5D) / 70), ((random.nextDouble() - 0.5D) / 70))
+                        .setAlpha(0.35f, 0).setScale(0.5f)
+                        .setColor(r, g, b)
+                        .setLifetime(20)
+                        .setSpin((0.1f * (float) ((random.nextDouble() - 0.5D) * 2)))
+                        .spawn(entity.level(), pos.getX() + 0.5f + (random.nextDouble() - 0.5D), pos.getY() + 0.1f, pos.getZ() + 0.5f + (random.nextDouble() - 0.5D));
+            }
+        }
+    }
+
+    public List<BlockPos> getBlocks(Level level, BlockPos startPos, int size, int height, boolean circle) {
+        List<BlockPos> list = new ArrayList<>();
+
+        for (int x = -size; x <= size; x++) {
+            for (int z = -size; z <= size; z++) {
+                for (int y = height; y > -height; y--) {
+                    if (circle) {
+                        float dst = (float) Math.sqrt(Math.pow(x, 2) + Math.pow(z, 2));
+                        if (dst > size) break;
+                    }
+
+                    BlockPos blockPos = new BlockPos(startPos.getX() + x, startPos.getY() + y, startPos.getZ() + z);
+                    BlockState blockState = level.getBlockState(blockPos);
+                    if (!blockState.isAir()) {
+                        list.add(blockPos.above());
+                        break;
+                    }
+                }
+            }
+        }
+
+        return list;
+    }
+
+    public List<Entity> getEntities(Level level, List<BlockPos> blockList) {
+        List<Entity> list = new ArrayList<>();
+
+        for (BlockPos pos : blockList) {
+            List<Entity> entities = level.getEntitiesOfClass(Entity.class, new AABB(pos.getX(), pos.getY(), pos.getZ(), pos.getX() + 1, pos.getY() + 0.5f, pos.getZ() + 1));
+            for (Entity entity : entities) {
+                if (!list.contains(entity)) {
+                    list.add(entity);
+                }
+            }
+        }
+
+        return list;
     }
 }

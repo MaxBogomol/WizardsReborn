@@ -43,7 +43,7 @@ public class ArcanemiconChapters {
     public static List<Category> categories = new ArrayList<>();
     public static Category ARCANE_NATURE, SPELLS, CRYSTAL_RITUALS, ALCHEMY;
     public static Chapter ARCANE_NATURE_INDEX, SPELLS_INDEX, CRYSTAL_RITUALS_INDEX, ALCHEMY_INDEX,
-            ARCANUM, ARCANUM_DUST_TRANSMUTATION, ARCANE_WOOD, ARCANE_GOLD, SCYTHES, TRINKETS, ARCANE_WOOD_BOW, BANNER_PATTERNS, WISSEN, WISSEN_TRANSLATOR, ARCANE_PEDESTAL, WISSEN_ALTAR, WISSEN_CRYSTALLIZER, ARCANE_WORKBENCH, ARCANE_LUMOS, CRYSTALS, ARCANE_WAND, AUTOMATION, WISSEN_CELL, CRYSTAL_BAG, TOTEM_OF_FLAMES, EXPERIENCE_TOTEM, TOTEM_OF_EXPERIENCE_ABSORPTION, TOTEM_OF_DISENCHANT, ALTAR_OF_DROUGHT, VOID_CRYSTAL, ARCANE_FORTRESS_ARMOR, INVENTOR_WIZARD_ARMOR, ARCANE_WOOD_CANE, ARCANE_ITERATOR, KNOWLEDGE_SCROLL, ARCANUM_LENS, WISSEN_KEYCHAIN, WISSEN_RING, JEWELER_TABLE, MUSIC_DISC_REBORN, MUSIC_DISC_PANACHE,
+            ARCANUM, ARCANUM_DUST_TRANSMUTATION, ARCANE_WOOD, ARCANE_GOLD, SCYTHES, TRINKETS, ARCANE_WOOD_BOW, BANNER_PATTERNS, WISSEN, WISSEN_TRANSLATOR, ARCANE_PEDESTAL, WISSEN_ALTAR, WISSEN_CRYSTALLIZER, ARCANE_WORKBENCH, MUSIC_DISC_SHIMMER, ARCANE_LUMOS, CRYSTALS, ARCANE_WAND, AUTOMATION, WISSEN_CELL, CRYSTAL_BAG, TOTEM_OF_FLAMES, EXPERIENCE_TOTEM, TOTEM_OF_EXPERIENCE_ABSORPTION, TOTEM_OF_DISENCHANT, ALTAR_OF_DROUGHT, VOID_CRYSTAL, ARCANE_FORTRESS_ARMOR, INVENTOR_WIZARD_ARMOR, ARCANE_WOOD_CANE, ARCANE_ITERATOR, KNOWLEDGE_SCROLL, ARCANUM_LENS, WISSEN_KEYCHAIN, WISSEN_RING, JEWELER_TABLE, MUSIC_DISC_REBORN, MUSIC_DISC_PANACHE,
             ARCANE_LEVER, ARCANE_HOPPER, REDSTONE_SENSOR, WISSEN_SENSOR, COOLDOWN_SENSOR, EXPERIENCE_SENSOR, LIGHT_SENSOR, HEAT_SENSOR, FLUID_SENSOR, STEAM_SENSOR, WISSEN_ACTIVATOR, ITEM_SORTER, ARCANE_WOOD_FRAME, WISSEN_CASING, WISESTONE_CASING, FLUID_CASING, STEAM_CASING, GLASS_FRAME, LIGHT_CASING, INNOCENT_CASING,
             ALL_SPELLS, EARTH_SPELLS, WATER_SPELLS, AIR_SPELLS, FIRE_SPELLS, VOID_SPELLS,
             EARTH_PROJECTILE, WATER_PROJECTILE, AIR_PROJECTILE, FIRE_PROJECTILE, VOID_PROJECTILE, FROST_PROJECTILE, HOLY_PROJECTILE, CURSE_PROJECTILE,
@@ -52,7 +52,7 @@ public class ArcanemiconChapters {
             MAGIC_SPROUT, DIRT_BLOCK, WATER_BLOCK, AIR_IMPACT, ICE_BLOCK,
             EARTH_CHARGE, WATER_CHARGE, AIR_CHARGE, FIRE_CHARGE, VOID_CHARGE, FROST_CHARGE, HOLY_CHARGE, CURSE_CHARGE,
             EARTH_AURA, WATER_AURA, AIR_AURA, FIRE_AURA, VOID_AURA, FROST_AURA, HOLY_AURA, CURSE_AURA,
-            RAIN_CLOUD, LAVA_BLOCK, ICICLE, SHARP_BLINK, CRYSTAL_CRUSHING, TOXIC_RAIN, MOR_SWARM, WITHERING, WHAT, NECROTIC_RAY, LIGHT_RAY,
+            RAIN_CLOUD, LAVA_BLOCK, ICICLE, SHARP_BLINK, CRYSTAL_CRUSHING, TOXIC_RAIN, MOR_SWARM, WITHERING, IRRITATION, NECROTIC_RAY, LIGHT_RAY,
             INCINERATION, REPENTANCE, RENUNCIATION,
             EMBER_RAY, WISDOM,
             PROGRESSION, SPECIAL_THANKS, RESEARCHES, MONOGRAMS, RESEARCH, LUNAM_MONOGRAM, VITA_MONOGRAM, SOLEM_MONOGRAM, MORS_MONOGRAM, MIRACULUM_MONOGRAM, TEMPUS_MONOGRAM, STATERA_MONOGRAM, ECLIPSIS_MONOGRAM, SICCITAS_MONOGRAM, SOLSTITIUM_MONOGRAM, FAMES_MONOGRAM, RENAISSANCE_MONOGRAM, BELLUM_MONOGRAM, LUX_MONOGRAM, KARA_MONOGRAM, DEGRADATIO_MONOGRAM, PRAEDICTIONEM_MONOGRAM, EVOLUTIONIS_MONOGRAM, TENEBRIS_MONOGRAM, UNIVERSUM_MONOGRAM,
@@ -547,6 +547,17 @@ public class ArcanemiconChapters {
                         new ItemStack(Items.RED_WOOL), new ItemStack(Items.RED_WOOL), new ItemStack(Items.RED_WOOL),
                         ARCANE_GOLD_INGOT_ITEM, ARCANUM_ITEM, ARCANE_GOLD_INGOT_ITEM,
                         ARCANE_WOOD_PLANKS_ITEM, ARCANE_WOOD_PLANKS_ITEM, ARCANE_WOOD_PLANKS_ITEM
+                )
+        );
+
+        MUSIC_DISC_SHIMMER = new Chapter(
+                "wizards_reborn.arcanemicon.chapter.music_disc_shimmer",
+                new TitledBlockPage("wizards_reborn.arcanemicon.page.music_disc_shimmer.0",
+                        new BlockEntry(WISESTONE_PEDESTAL_ITEM, new ItemStack(WizardsReborn.MUSIC_DISC_SHIMMER.get()))
+                ),
+                new TextPage("wizards_reborn.arcanemicon.page.music_disc_shimmer.1"),
+                new WissenCrystallizerPage(new ItemStack(WizardsReborn.MUSIC_DISC_SHIMMER.get()),
+                        new ItemStack(Items.MUSIC_DISC_13), new ItemStack(Items.COBBLED_DEEPSLATE), ARCANUM_ITEM
                 )
         );
 
@@ -1282,10 +1293,11 @@ public class ArcanemiconChapters {
                         ARCANUM_ITEM, ARCANUM_ITEM, ARCANUM_ITEM
                 ),
                 new TitlePage("wizards_reborn.arcanemicon.page.life_roots"),
-                new ArcaneIteratorPage(new ItemStack(WizardsReborn.ARCANE_GOLD_SWORD.get()), 5, 0, WizardsReborn.LIFE_ROOTS_ARCANE_ENCHANTMENT,
-                        new ItemStack(WizardsReborn.ARCANE_GOLD_SWORD.get()), new ItemStack(Items.LAPIS_LAZULI), new ItemStack(Items.LAPIS_LAZULI),
-                        new ItemStack(Items.QUARTZ), new ItemStack(Items.QUARTZ), new ItemStack(Items.QUARTZ),
-                        ARCANUM_ITEM, ARCANUM_ITEM, ARCANUM_ITEM
+                new ArcaneIteratorPage(new ItemStack(WizardsReborn.ARCANE_WOOD_PICKAXE.get()), 5, 5, WizardsReborn.LIFE_ROOTS_ARCANE_ENCHANTMENT,
+                        new ItemStack(WizardsReborn.ARCANE_WOOD_PICKAXE.get()), new ItemStack(Items.LAPIS_LAZULI), new ItemStack(Items.LAPIS_LAZULI),
+                        ARCANUM_ITEM, ARCANUM_ITEM, ARCANUM_ITEM,
+                        NATURAL_CALX_ITEM, NATURAL_CALX_ITEM, NATURAL_CALX_ITEM,
+                        new ItemStack(WizardsReborn.PETALS.get()), new ItemStack(WizardsReborn.PETALS.get()), new ItemStack(WizardsReborn.PETALS.get())
                 ),
                 new TitlePage("wizards_reborn.arcanemicon.page.arcane_iterator_enchantments"),
                 new ArcaneIteratorPage(new ItemStack(Items.ENCHANTED_BOOK), 5, 0, Enchantments.ALL_DAMAGE_PROTECTION,
@@ -1549,32 +1561,33 @@ public class ArcanemiconChapters {
                 ),
                 new IndexPage(
                         new IndexEntry(ARCANE_WORKBENCH, new ItemStack(WizardsReborn.ARCANE_WORKBENCH_ITEM.get()), RegisterKnowledges.ARCANE_GOLD),
+                        new IndexEntry(MUSIC_DISC_SHIMMER, new ItemStack(WizardsReborn.MUSIC_DISC_SHIMMER.get()), RegisterKnowledges.WISSEN_CRYSTALLIZER),
                         new IndexEntry(ARCANE_LUMOS, new ItemStack(WizardsReborn.WHITE_ARCANE_LUMOS_ITEM.get()), RegisterKnowledges.WISSEN_CRYSTALLIZER),
                         new IndexEntry(CRYSTALS, new ItemStack(WizardsReborn.EARTH_CRYSTAL.get()), RegisterKnowledges.WISSEN_CRYSTALLIZER),
                         new IndexEntry(ARCANE_WAND, new ItemStack(WizardsReborn.ARCANE_WAND.get()), RegisterKnowledges.ARCANE_WORKBENCH),
                         new IndexEntry(AUTOMATION, new ItemStack(WizardsReborn.REDSTONE_SENSOR_ITEM.get()), RegisterKnowledges.ARCANE_WORKBENCH),
-                        new IndexEntry(WISSEN_CELL, new ItemStack(WizardsReborn.WISSEN_CELL_ITEM.get()), RegisterKnowledges.ARCANE_WORKBENCH),
-                        new IndexEntry(CRYSTAL_BAG, new ItemStack(WizardsReborn.CRYSTAL_BAG.get()), RegisterKnowledges.ALCHEMY_GLASS)
+                        new IndexEntry(WISSEN_CELL, new ItemStack(WizardsReborn.WISSEN_CELL_ITEM.get()), RegisterKnowledges.ARCANE_WORKBENCH)
                 ),
                 new IndexPage(
+                        new IndexEntry(CRYSTAL_BAG, new ItemStack(WizardsReborn.CRYSTAL_BAG.get()), RegisterKnowledges.ALCHEMY_GLASS),
                         new IndexEntry(TOTEM_OF_FLAMES, new ItemStack(WizardsReborn.TOTEM_OF_FLAMES_ITEM.get()), RegisterKnowledges.ALCHEMY_CALX),
                         new IndexEntry(EXPERIENCE_TOTEM, new ItemStack(WizardsReborn.EXPERIENCE_TOTEM_ITEM.get()), RegisterKnowledges.ALCHEMY_CALX),
                         new IndexEntry(TOTEM_OF_EXPERIENCE_ABSORPTION, new ItemStack(WizardsReborn.TOTEM_OF_EXPERIENCE_ABSORPTION_ITEM.get()), RegisterKnowledges.ARCACITE),
                         new IndexEntry(TOTEM_OF_DISENCHANT, new ItemStack(WizardsReborn.TOTEM_OF_DISENCHANT_ITEM.get()), RegisterKnowledges.ARCACITE),
                         new IndexEntry(ALTAR_OF_DROUGHT, new ItemStack(WizardsReborn.ALTAR_OF_DROUGHT_ITEM.get()), RegisterKnowledges.ARCACITE),
-                        new IndexEntry(VOID_CRYSTAL, new ItemStack(WizardsReborn.VOID_CRYSTAL.get()), RegisterKnowledges.ARCACITE),
-                        new IndexEntry(ARCANE_FORTRESS_ARMOR, new ItemStack(WizardsReborn.ARCANE_FORTRESS_CHESTPLATE.get()), RegisterKnowledges.ARCACITE)
+                        new IndexEntry(VOID_CRYSTAL, new ItemStack(WizardsReborn.VOID_CRYSTAL.get()), RegisterKnowledges.ARCACITE)
                 ),
                 new IndexPage(
+                        new IndexEntry(ARCANE_FORTRESS_ARMOR, new ItemStack(WizardsReborn.ARCANE_FORTRESS_CHESTPLATE.get()), RegisterKnowledges.ARCACITE),
                         new IndexEntry(INVENTOR_WIZARD_ARMOR, new ItemStack(WizardsReborn.INVENTOR_WIZARD_HAT.get()), RegisterKnowledges.ARCACITE),
                         new IndexEntry(ARCANE_WOOD_CANE, new ItemStack(WizardsReborn.ARCANE_WOOD_CANE.get()), RegisterKnowledges.ARCACITE),
                         new IndexEntry(ARCANE_ITERATOR, new ItemStack(WizardsReborn.ARCANE_ITERATOR_ITEM.get()), RegisterKnowledges.ARCACITE),
                         new IndexEntry(KNOWLEDGE_SCROLL, knowledgeScroll, RegisterKnowledges.ARCANE_ITERATOR),
                         new IndexEntry(ARCANUM_LENS, ARCANUM_LENS_ITEM, RegisterKnowledges.ARCANE_ITERATOR),
-                        new IndexEntry(WISSEN_KEYCHAIN, new ItemStack(WizardsReborn.WISSEN_KEYCHAIN.get()), RegisterKnowledges.ARCANE_ITERATOR),
-                        new IndexEntry(WISSEN_RING, new ItemStack(WizardsReborn.WISSEN_RING.get()), RegisterKnowledges.ARCANUM_LENS)
+                        new IndexEntry(WISSEN_KEYCHAIN, new ItemStack(WizardsReborn.WISSEN_KEYCHAIN.get()), RegisterKnowledges.ARCANE_ITERATOR)
                 ),
                 new IndexPage(
+                        new IndexEntry(WISSEN_RING, new ItemStack(WizardsReborn.WISSEN_RING.get()), RegisterKnowledges.ARCANUM_LENS),
                         new IndexEntry(JEWELER_TABLE, new ItemStack(WizardsReborn.JEWELER_TABLE_ITEM.get()), RegisterKnowledges.ARCACITE_POLISHING_MIXTURE),
                         new IndexEntry(MUSIC_DISC_REBORN, new ItemStack(WizardsReborn.MUSIC_DISC_REBORN.get()), RegisterKnowledges.ARCANE_ITERATOR),
                         new IndexEntry(MUSIC_DISC_PANACHE, new ItemStack(WizardsReborn.MUSIC_DISC_PANACHE.get()), RegisterKnowledges.ARCANE_ITERATOR)
@@ -1864,10 +1877,10 @@ public class ArcanemiconChapters {
                 new TitledSpellPage("wizards_reborn.arcanemicon.page.withering", WizardsReborn.WITHERING_SPELL),
                 new SpellCharPage("wizards_reborn.arcanemicon.page.withering.char", WizardsReborn.WITHERING_SPELL)
         );
-        WHAT = new Chapter(
-                "wizards_reborn.arcanemicon.chapter.what",
-                new TitledSpellPage("wizards_reborn.arcanemicon.page.what", WizardsReborn.WHAT_SPELL),
-                new SpellCharPage("wizards_reborn.arcanemicon.page.what.char", WizardsReborn.WHAT_SPELL)
+        IRRITATION = new Chapter(
+                "wizards_reborn.arcanemicon.chapter.irritation",
+                new TitledSpellPage("wizards_reborn.arcanemicon.page.irritation", WizardsReborn.IRRITATION_SPELL),
+                new SpellCharPage("wizards_reborn.arcanemicon.page.irritation.char", WizardsReborn.IRRITATION_SPELL)
         );
         NECROTIC_RAY = new Chapter(
                 "wizards_reborn.arcanemicon.chapter.necrotic_ray",
@@ -2071,16 +2084,17 @@ public class ArcanemiconChapters {
                 new SpellIndexPage(
                         new SpellIndexEntry(HOLY_AURA, WizardsReborn.HOLY_AURA_SPELL, RegisterKnowledges.FACETED_CRYSTALS),
                         new SpellIndexEntry(CURSE_AURA, WizardsReborn.CURSE_AURA_SPELL, RegisterKnowledges.FACETED_CRYSTALS),
+                        new SpellIndexEntry(RAIN_CLOUD, WizardsReborn.RAIN_CLOUD_SPELL, RegisterKnowledges.FACETED_CRYSTALS),
                         new SpellIndexEntry(LAVA_BLOCK, WizardsReborn.LAVA_BLOCK_SPELL, RegisterKnowledges.FACETED_CRYSTALS),
                         new SpellIndexEntry(ICICLE, WizardsReborn.ICICLE_SPELL, RegisterKnowledges.FACETED_CRYSTALS),
                         new SpellIndexEntry(SHARP_BLINK, WizardsReborn.SHARP_BLINK_SPELL, RegisterKnowledges.FACETED_CRYSTALS),
-                        new SpellIndexEntry(CRYSTAL_CRUSHING, WizardsReborn.CRYSTAL_CRUSHING_SPELL, RegisterKnowledges.FACETED_CRYSTALS),
-                        new SpellIndexEntry(TOXIC_RAIN, WizardsReborn.TOXIC_RAIN_SPELL, RegisterKnowledges.FACETED_CRYSTALS)
+                        new SpellIndexEntry(CRYSTAL_CRUSHING, WizardsReborn.CRYSTAL_CRUSHING_SPELL, RegisterKnowledges.FACETED_CRYSTALS)
                 ),
                 new SpellIndexPage(
+                        new SpellIndexEntry(TOXIC_RAIN, WizardsReborn.TOXIC_RAIN_SPELL, RegisterKnowledges.FACETED_CRYSTALS),
                         new SpellIndexEntry(MOR_SWARM, WizardsReborn.MOR_SWARM_SPELL, RegisterKnowledges.FACETED_CRYSTALS),
                         new SpellIndexEntry(WITHERING, WizardsReborn.WITHERING_SPELL, RegisterKnowledges.FACETED_CRYSTALS),
-                        new SpellIndexEntry(WHAT, WizardsReborn.WHAT_SPELL, RegisterKnowledges.FACETED_CRYSTALS),
+                        new SpellIndexEntry(IRRITATION, WizardsReborn.IRRITATION_SPELL, RegisterKnowledges.FACETED_CRYSTALS),
                         new SpellIndexEntry(NECROTIC_RAY, WizardsReborn.NECROTIC_RAY_SPELL, RegisterKnowledges.FACETED_CRYSTALS),
                         new SpellIndexEntry(LIGHT_RAY, WizardsReborn.LIGHT_RAY_SPELL, RegisterKnowledges.LIGHT_EMITTER)
                 ),
@@ -2197,7 +2211,8 @@ public class ArcanemiconChapters {
                 ),
                 new SpellIndexPage(
                         new SpellIndexEntry(INCINERATION, WizardsReborn.INCINERATION_SPELL, RegisterKnowledges.FACETED_CRYSTALS),
-                        new SpellIndexEntry(RENUNCIATION, WizardsReborn.RENUNCIATION_SPELL, RegisterKnowledges.FACETED_CRYSTALS)
+                        new SpellIndexEntry(RENUNCIATION, WizardsReborn.RENUNCIATION_SPELL, RegisterKnowledges.FACETED_CRYSTALS),
+                        new SpellIndexEntry(EMBER_RAY, WizardsReborn.EMBER_RAY_SPELL, RegisterKnowledges.FACETED_CRYSTALS)
                 )
         );
 
@@ -2218,13 +2233,14 @@ public class ArcanemiconChapters {
                         new SpellIndexEntry(CURSE_AURA, WizardsReborn.CURSE_AURA_SPELL, RegisterKnowledges.FACETED_CRYSTALS),
                         new SpellIndexEntry(SHARP_BLINK, WizardsReborn.SHARP_BLINK_SPELL, RegisterKnowledges.FACETED_CRYSTALS),
                         new SpellIndexEntry(CRYSTAL_CRUSHING, WizardsReborn.CRYSTAL_CRUSHING_SPELL, RegisterKnowledges.FACETED_CRYSTALS),
-                        new SpellIndexEntry(WHAT, WizardsReborn.WHAT_SPELL, RegisterKnowledges.FACETED_CRYSTALS)
+                        new SpellIndexEntry(IRRITATION, WizardsReborn.IRRITATION_SPELL, RegisterKnowledges.FACETED_CRYSTALS)
                 ),
                 new SpellIndexPage(
                         new SpellIndexEntry(NECROTIC_RAY, WizardsReborn.NECROTIC_RAY_SPELL, RegisterKnowledges.FACETED_CRYSTALS)
                 ),
                 new SpellIndexPage(
-                        new SpellIndexEntry(RENUNCIATION, WizardsReborn.RENUNCIATION_SPELL, RegisterKnowledges.FACETED_CRYSTALS)
+                        new SpellIndexEntry(RENUNCIATION, WizardsReborn.RENUNCIATION_SPELL, RegisterKnowledges.FACETED_CRYSTALS),
+                        new SpellIndexEntry(WISDOM, WizardsReborn.WISDOM_SPELL, RegisterKnowledges.FACETED_CRYSTALS)
                 )
         );
 
@@ -2249,7 +2265,7 @@ public class ArcanemiconChapters {
                 new ProgressionPage("wizards_reborn.arcanemicon.page.progression", RegisterKnowledges.progression),
                 new ProgressionPage("wizards_reborn.arcanemicon.page.additional_progression", RegisterKnowledges.additionalProgression),
                 new StatisticPage("wizards_reborn.arcanemicon.page.statistic", RegisterKnowledges.progression, RegisterKnowledges.additionalProgression),
-                new IndexPage(
+                new EditionPage(
                         new IndexEntry(SPECIAL_THANKS, new ItemStack(WizardsReborn.ARCANEMICON.get()))
                 )
         );

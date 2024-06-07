@@ -195,9 +195,11 @@ public class ArcaneWorkbenchTileEntity extends BlockEntity implements TickableBl
                 }
 
                 if (sound == null) {
-                    sound = ArcaneWorkbenchSoundInstance.playSound(this);
+                    sound = ArcaneWorkbenchSoundInstance.getSound(this);
+                    sound.playSound();
                 } else if (sound.isStopped()) {
-                    sound = ArcaneWorkbenchSoundInstance.playSound(this);
+                    sound = ArcaneWorkbenchSoundInstance.getSound(this);
+                    sound.playSound();
                 }
             }
         }

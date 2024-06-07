@@ -1,0 +1,44 @@
+{
+  "type": "wizards_reborn:arcane_iterator",
+  "arcane_enchantment": {
+    "arcane_enchantment": "wizards_reborn:life_roots"
+  },
+  "wissen": 1500,
+  "experience": 5,
+  "health": 5,
+  "ingredients": [
+    {
+      "item": "minecraft:lapis_lazuli"
+    },
+    {
+      "item": "minecraft:lapis_lazuli"
+    },
+    {
+      "item": "wizards_reborn:arcanum"
+    },
+    {
+      "item": "wizards_reborn:arcanum"
+    },
+    {
+      "item": "wizards_reborn:arcanum"
+    },
+    {
+      "item": "wizards_reborn:natural_calx"
+    },
+    {
+      "item": "wizards_reborn:natural_calx"
+    },
+    {
+      "item": "wizards_reborn:natural_calx"
+    },
+    {
+      "item": "wizards_reborn:petals"
+    },
+    {
+      "item": "wizards_reborn:petals"
+    },
+    {
+      "item": "wizards_reborn:petals"
+    }
+  ]
+}
