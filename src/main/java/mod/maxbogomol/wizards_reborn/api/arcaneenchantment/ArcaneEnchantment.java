@@ -20,6 +20,8 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.api.distmarker.OnlyIn;
 
 import java.awt.*;
 
@@ -72,6 +74,7 @@ public class ArcaneEnchantment {
         return component;
     }
 
+    @OnlyIn(Dist.CLIENT)
     public void renderParticle(PoseStack pose, LivingEntity entity, Level level, ItemStack stack, int x, int y, int seed, int guiOffset) {
         int i = ArcaneEnchantments.getArcaneEnchantments().indexOf(this);
         int levelEnchantment = ArcaneEnchantmentUtils.getArcaneEnchantment(stack, this);

@@ -50,20 +50,14 @@ public class SaltLanternBlock extends Block implements EntityBlock, SimpleWaterl
 
     private static final VoxelShape SHAPE = Stream.of(
             Block.box(5, 0, 5, 11, 2, 11),
-            Block.box(10, 2, 10, 11, 7, 11),
-            Block.box(5, 2, 10, 6, 7, 11),
-            Block.box(10, 2, 5, 11, 7, 6),
-            Block.box(5, 2, 5, 6, 7, 6),
+            Block.box(5, 2, 5, 11, 7, 11),
             Block.box(5, 7, 5, 11, 8, 11),
             Block.box(6, 8, 6, 10, 10, 10)
     ).reduce((v1, v2) -> Shapes.join(v1, v2, BooleanOp.OR)).get();
 
     private static final VoxelShape HANGING_SHAPE = Stream.of(
             Block.box(5, 3, 5, 11, 5, 11),
-            Block.box(10, 5, 10, 11, 10, 11),
-            Block.box(5, 5, 10, 6, 10, 11),
-            Block.box(10, 5, 5, 11, 10, 6),
-            Block.box(5, 5, 5, 6, 10, 6),
+            Block.box(5, 5, 5, 11, 10, 11),
             Block.box(5, 10, 5, 11, 11, 11),
             Block.box(6, 11, 6, 10, 13, 10)
     ).reduce((v1, v2) -> Shapes.join(v1, v2, BooleanOp.OR)).get();

@@ -71,7 +71,7 @@ public class MorSwarmSpell extends FogSpell {
                     target.lastHurtByPlayerTime = target.tickCount;
                     target.hurt(new DamageSource(DamageSourceRegistry.create(target.level(), DamageSourceRegistry.ARCANE_MAGIC).typeHolder()), damage);
                 }
-                target.addEffect(new MobEffectInstance(MobEffects.POISON, (int) (20 + (10 * (focusLevel + magicModifier))), 1));
+                target.addEffect(new MobEffectInstance(MobEffects.POISON, (int) (60 + (20 * (focusLevel + magicModifier))), 1));
                 target.addEffect(new MobEffectInstance(MobEffects.HUNGER, (int) (20 + (20 * (focusLevel + magicModifier))), 0));
                 target.addEffect(new MobEffectInstance(MobEffects.CONFUSION, (int) (100 + (40 * (focusLevel + magicModifier))), 0));
                 target.addEffect(new MobEffectInstance(WizardsReborn.MOR_SPORES_EFFECT.get(), (int) (100 + (40 * (focusLevel + magicModifier))), 0));
