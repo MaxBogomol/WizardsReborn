@@ -98,6 +98,7 @@ public class RunicWisestonePlateItem extends Item implements IGuiParticleItem {
     }
 
     @Override
+    @OnlyIn(Dist.CLIENT)
     public void renderParticle(PoseStack pose, LivingEntity entity, Level level, ItemStack stack, int x, int y, int seed, int guiOffset) {
         CrystalRitual ritual = CrystalRitualUtils.getCrystalRitual(stack);
         if (!CrystalRitualUtils.isEmpty(ritual)) {

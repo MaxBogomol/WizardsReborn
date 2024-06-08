@@ -82,6 +82,7 @@ public class EngravedWisestoneItem extends BlockItem implements IGuiParticleItem
     }
 
     @Override
+    @OnlyIn(Dist.CLIENT)
     public void renderParticle(PoseStack pose, LivingEntity entity, Level level, ItemStack stack, int x, int y, int seed, int guiOffset) {
         if (getBlock() instanceof EngravedWisestoneBlock block && block.hasMonogram()) {
             float ticks = ClientTickHandler.ticksInGame + Minecraft.getInstance().getPartialTick();

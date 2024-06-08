@@ -166,6 +166,7 @@ public class CrystalItem extends BlockItem implements IParticleItem, IGuiParticl
     }
 
     @Override
+    @OnlyIn(Dist.CLIENT)
     public void renderParticle(PoseStack pose, LivingEntity entity, Level level, ItemStack stack, int x, int y, int seed, int guiOffset) {
         if (getPolishing().getPolishingLevel() > 0) {
             int polishingLevel = getPolishing().getPolishingLevel();

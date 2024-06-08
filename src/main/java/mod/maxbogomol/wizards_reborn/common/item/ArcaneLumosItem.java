@@ -23,6 +23,8 @@ import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.api.distmarker.OnlyIn;
 
 import java.awt.*;
 import java.util.Random;
@@ -82,6 +84,7 @@ public class ArcaneLumosItem extends BlockItem implements IParticleItem, IGuiPar
     }
 
     @Override
+    @OnlyIn(Dist.CLIENT)
     public void renderParticle(PoseStack pose, LivingEntity entity, Level level, ItemStack stack, int x, int y, int seed, int guiOffset) {
         if (getBlock() instanceof ArcaneLumosBlock lumos) {
             Color color = ArcaneLumosBlock.getColor(lumos.color);

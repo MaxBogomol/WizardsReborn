@@ -23,6 +23,8 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.StandingAndWallBlockItem;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.api.distmarker.OnlyIn;
 
 import java.awt.*;
 
@@ -32,6 +34,7 @@ public class SaltTorchItem extends StandingAndWallBlockItem implements IGuiParti
     }
 
     @Override
+    @OnlyIn(Dist.CLIENT)
     public void renderParticle(PoseStack pose, LivingEntity entity, Level level, ItemStack stack, int x, int y, int seed, int guiOffset) {
         float ticks = ClientTickHandler.ticksInGame + Minecraft.getInstance().getPartialTick();
         float offset = (float) (0.85f + Math.abs(Math.sin(Math.toRadians(ticks * 1.6f)) * 0.15f));

@@ -742,6 +742,7 @@ public class ArcaneWandItem extends Item implements IWissenItem, ICustomAnimatio
     }
 
     @Override
+    @OnlyIn(Dist.CLIENT)
     public void renderParticle(PoseStack pose, LivingEntity entity, Level level, ItemStack stack, int x, int y, int seed, int guiOffset) {
         SimpleContainer inv = ArcaneWandItem.getInventory(stack);
 
