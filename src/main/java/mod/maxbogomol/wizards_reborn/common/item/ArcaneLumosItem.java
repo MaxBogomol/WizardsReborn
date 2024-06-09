@@ -8,7 +8,6 @@ import mod.maxbogomol.wizards_reborn.WizardsReborn;
 import mod.maxbogomol.wizards_reborn.WizardsRebornClient;
 import mod.maxbogomol.wizards_reborn.client.event.ClientTickHandler;
 import mod.maxbogomol.wizards_reborn.client.particle.Particles;
-import mod.maxbogomol.wizards_reborn.client.render.WorldRenderHandler;
 import mod.maxbogomol.wizards_reborn.common.block.ArcaneLumosBlock;
 import mod.maxbogomol.wizards_reborn.utils.RenderUtils;
 import net.minecraft.client.Minecraft;
@@ -104,7 +103,7 @@ public class ArcaneLumosItem extends BlockItem implements IParticleItem, IGuiPar
 
             RenderSystem.enableBlend();
             RenderSystem.blendFunc(GlStateManager.SourceFactor.SRC_ALPHA, GlStateManager.DestFactor.ONE);
-            MultiBufferSource.BufferSource buffersource = WorldRenderHandler.getDelayedRender();
+            MultiBufferSource.BufferSource buffersource = Minecraft.getInstance().renderBuffers().bufferSource();
             RenderSystem.depthMask(false);
             RenderSystem.setShader(WizardsRebornClient::getGlowingShader);
             RenderSystem.setShaderColor(1F, 1F, 1F, 1F);

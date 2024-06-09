@@ -402,7 +402,7 @@ public class RenderUtils {
         builder.vertex(mat, x - (width / 2), y + (height / 2), 0).uv(u0, v1).uv2(0).color(r, g, b, a).endVertex();
         builder.vertex(mat, x + (width / 2), y + (height / 2), 0).uv(u1, v1).uv2(0).color(r, g, b, a).endVertex();
         builder.vertex(mat, x + (width / 2), y - (height / 2), 0).uv(u1, v0).uv2(0).color(r, g, b, a).endVertex();
-        builder.vertex(mat, x - (width / 2), y - (height / 2), 0).color(r, g, b, a).uv(u0, v0).uv2(0).endVertex();
+        builder.vertex(mat, x - (width / 2), y - (height / 2), 0).uv(u0, v0).uv2(0).color(r, g, b, a).endVertex();
     }
 
     public static void renderCustomModel(ModelResourceLocation model, ItemDisplayContext diplayContext, boolean leftHand, PoseStack poseStack, MultiBufferSource buffer, int combinedLight, int combinedOverlay) {

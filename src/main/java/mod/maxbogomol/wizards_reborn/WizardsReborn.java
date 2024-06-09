@@ -172,7 +172,7 @@ import java.awt.*;
 @Mod("wizards_reborn")
 public class WizardsReborn {
     public static final String MOD_ID = "wizards_reborn";
-    public static final int VERSION_NUMBER = 16;
+    public static final int VERSION_NUMBER = 17;
 
     public static final ISidedProxy proxy = DistExecutor.unsafeRunForDist(() -> ClientProxy::new, () -> ServerProxy::new);
 

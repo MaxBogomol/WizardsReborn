@@ -1,6 +1,7 @@
 package mod.maxbogomol.wizards_reborn.mixin.client;
 
 import mod.maxbogomol.wizards_reborn.WizardsReborn;
+import mod.maxbogomol.wizards_reborn.client.config.ClientConfig;
 import mod.maxbogomol.wizards_reborn.common.item.IParticleItem;
 import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.item.ItemStack;
@@ -19,9 +20,11 @@ public abstract class ItemEntityMixin {
     public void addParticles(CallbackInfo ci) {
         ItemEntity self = (ItemEntity) ((Object) this);
         if (self.level().isClientSide) {
-            if (self.getItem().getItem() instanceof IParticleItem) {
-                IParticleItem item = (IParticleItem) self.getItem().getItem();
-                item.addParticles(WizardsReborn.proxy.getWorld(), self);
+            if (ClientConfig.ITEM_PARTICLE.get()) {
+                if (self.getItem().getItem() instanceof IParticleItem) {
+                    IParticleItem item = (IParticleItem) self.getItem().getItem();
+                    item.addParticles(WizardsReborn.proxy.getWorld(), self);
+                }
             }
         }
     }

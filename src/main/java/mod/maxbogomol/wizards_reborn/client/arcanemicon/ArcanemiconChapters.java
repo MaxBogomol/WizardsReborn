@@ -2259,7 +2259,9 @@ public class ArcanemiconChapters {
                 "wizards_reborn.arcanemicon.chapter.particles_configs",
                 new TitlePage("wizards_reborn.arcanemicon.page.particles_configs"),
                 new ConfigPage(
-                        new ConfigIndexEntry().setIntegerConfig(ClientConfig.WISSEN_RAYS_LIMIT)
+                        new ConfigIndexEntry().setIntegerConfig(ClientConfig.WISSEN_RAYS_LIMIT),
+                        new ConfigIndexEntry().setBooleanConfig(ClientConfig.ITEM_PARTICLE),
+                        new ConfigIndexEntry().setBooleanConfig(ClientConfig.ITEM_GUI_PARTICLE)
                 )
         );
 

@@ -51,7 +51,7 @@ public class SaltTorchItem extends StandingAndWallBlockItem implements IGuiParti
 
         RenderSystem.enableBlend();
         RenderSystem.blendFunc(GlStateManager.SourceFactor.SRC_ALPHA, GlStateManager.DestFactor.ONE);
-        MultiBufferSource.BufferSource buffersource = WorldRenderHandler.getDelayedRender();
+        MultiBufferSource.BufferSource buffersource = Minecraft.getInstance().renderBuffers().bufferSource();
         RenderSystem.depthMask(false);
         RenderSystem.setShader(WizardsRebornClient::getGlowingShader);
         RenderSystem.setShaderColor(1F, 1F, 1F, 1F);
