@@ -46,6 +46,15 @@ public abstract class Page {
         if (text.contains("wizards_reborn:bagMenu")) {
             text = text.replace("wizards_reborn:bagMenu", WizardsRebornClient.OPEN_BAG_MENU_KEY.getTranslatedKeyMessage().getString());
         }
+        if (text.contains("wizards_reborn:nextSpell")) {
+            text = text.replace("wizards_reborn:nextSpell", WizardsRebornClient.NEXT_SPELL_KEY.getTranslatedKeyMessage().getString());
+        }
+        if (text.contains("wizards_reborn:previousSpell")) {
+            text = text.replace("wizards_reborn:previousSpell", WizardsRebornClient.PREVIOUS_SPELL_KEY.getTranslatedKeyMessage().getString());
+        }
+        if (text.contains("wizards_reborn:spellSetsToggle")) {
+            text = text.replace("wizards_reborn:spellSetsToggle", WizardsRebornClient.SPELL_SETS_TOGGLE_KEY.getTranslatedKeyMessage().getString());
+        }
         if (text.contains("minecraft:sneak")) {
             text = text.replace("minecraft:sneak", Minecraft.getInstance().options.keyShift.getTranslatedKeyMessage().getString());
         }

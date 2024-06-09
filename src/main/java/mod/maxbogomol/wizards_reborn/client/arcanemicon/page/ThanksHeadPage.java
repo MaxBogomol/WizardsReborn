@@ -36,9 +36,8 @@ public class ThanksHeadPage extends Page {
     @Override
     @OnlyIn(Dist.CLIENT)
     public void render(ArcanemiconGui book, GuiGraphics gui, int x, int y, int mouseX, int mouseY) {
-        drawWrappingText(book, gui, I18n.get(text), x + 4, y + 4, 124);
-
         gui.blit(head, x + 4, y + 108, 0, 0, 24, 24, 32, 32);
+        drawWrappingText(book, gui, I18n.get(text), x + 4, y + 4, 124);
         drawText(book, gui, "- " + I18n.get(name), x + 30, y + 116);
         drawText(book, gui, "      " + I18n.get(date), x + 30, y + 128);
         if (mouseX >= x + 4 && mouseY >= y + 108 && mouseX <= x + 4 + 24 && mouseY <= y + 108 + 24) {

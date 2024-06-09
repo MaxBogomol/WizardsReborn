@@ -1,6 +1,5 @@
 package mod.maxbogomol.wizards_reborn.client.gui.components;
 
-import com.electronwill.nightconfig.core.UnmodifiableConfig;
 import mod.maxbogomol.wizards_reborn.WizardsReborn;
 import mod.maxbogomol.wizards_reborn.client.config.ClientConfig;
 import net.minecraft.client.Minecraft;
@@ -19,7 +18,6 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.client.event.ScreenEvent;
-import net.minecraftforge.common.ForgeConfigSpec;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod.EventBusSubscriber;
 import org.apache.commons.lang3.mutable.MutableObject;
@@ -64,9 +62,7 @@ public class WizardsRebornMenuButton extends Button {
     }
 
     public static void setPanorama(boolean panorama) {
-        UnmodifiableConfig values = ClientConfig.SPEC.getValues();
-        ForgeConfigSpec.ConfigValue<Object> configValue = values.get(ClientConfig.CUSTOM_PANORAMA.getPath());
-        configValue.set(panorama);
+        ClientConfig.CUSTOM_PANORAMA.set(panorama);
     }
 
     @Override

@@ -7,7 +7,7 @@ public class ClientConfig {
     public static ForgeConfigSpec.ConfigValue<Boolean>
             BETTER_LAYERING,
             LARGE_ITEM_MODEL, SPELLS_ANIMATIONS, SPELLS_ITEM_ANIMATIONS, SPELLS_FIRST_PERSON_ITEM_ANIMATIONS,
-            RESEARCH_HARDMODE, OLD_RESEARCH_MONOGRAM_OUTLINE, BRIGHT_RESEARCH_MONOGRAM_OUTLINE, RESEARCH_MONOGRAM_CONNECTS, MONOGRAM_GLOW, MONOGRAM_GLOW_COLOR, MONOGRAM_COLOR, MONOGRAM_RAYS,
+            RESEARCH_HARDMODE, OLD_RESEARCH_MONOGRAM_OUTLINE, BRIGHT_RESEARCH_MONOGRAM_OUTLINE, RESEARCH_MONOGRAM_CONNECTS, MONOGRAM_GLOW, MONOGRAM_GLOW_COLOR, MONOGRAM_COLOR, MONOGRAM_RAYS, CONFIG_CENTER,
             NUMERICAL_WISSEN, NUMERICAL_COOLDOWN, SHOW_LIGHT_NAME, NUMERICAL_EXPERIENCE, NUMERICAL_HEAT, NUMERICAL_FLUID, NUMERICAL_STEAM,
             ARCANE_WAND_OVERLAY_UP, ARCANE_WAND_OVERLAY_RIGHT, ARCANE_WAND_OVERLAY_SIDE_HUD, ARCANE_WAND_OVERLAY_SIDE_BAR, ARCANE_WAND_OVERLAY_HORIZONTAL_BAR, ARCANE_WAND_OVERLAY_SECOND_HUD_FREE, ARCANE_WAND_OVERLAY_BAR_FREE, ARCANE_WAND_OVERLAY_COOLDOWN_TEXT, ARCANE_WAND_OVERLAY_WISSEN_TEXT, ARCANE_WAND_OVERLAY_REVERSE_BAR, ARCANE_WAND_OVERLAY_SHOW_EMPTY,
             CUSTOM_PANORAMA, PANORAMA_BUTTON;
@@ -42,13 +42,14 @@ public class ClientConfig {
 
         builder.comment("Arcanemicon").push("arcanemicon");
         RESEARCH_HARDMODE = builder.comment("Enable hard mode in research.")
+                .comment("NOTE: Always on in hardcore.")
                 .define("researchHardMode", false);
         OLD_RESEARCH_MONOGRAM_OUTLINE = builder.comment("Enable old type of monogram outline in research.")
                 .define("oldResearchMonogramOutline", false);
         BRIGHT_RESEARCH_MONOGRAM_OUTLINE = builder.comment("Enable bright type of monogram outline in research.")
                 .define("brightResearchMonogramOutline", false);
         RESEARCH_MONOGRAM_CONNECTS = builder.comment("Enable connects with monogram in research.")
-                .define("brightResearchMonogramOutline", true);
+                .define("researchMonogramConnects", true);
         MONOGRAM_GLOW = builder.comment("Enable monogram glow.")
                 .define("monogramGlow", true);
         MONOGRAM_GLOW_COLOR = builder.comment("Enable monogram glow color.")
@@ -57,6 +58,8 @@ public class ClientConfig {
                 .define("monogramColor", false);
         MONOGRAM_RAYS = builder.comment("Enable monogram glow rays.")
                 .define("monogramRays", true);
+        CONFIG_CENTER = builder.comment("Enable centered value in config.")
+                .define("configCenter", true);
         builder.pop();
 
         builder.comment("Numerical").push("numerical");
@@ -100,7 +103,7 @@ public class ClientConfig {
                 .define("barXOffset", 0);
         ARCANE_WAND_OVERLAY_BAR_Y_OFFSET = builder.comment("Bar Y offset.")
                 .define("barYOffset", 0);
-        ARCANE_WAND_OVERLAY_SECOND_HUD_FREE = builder.comment("Enable second hud free offset.")
+        ARCANE_WAND_OVERLAY_SECOND_HUD_FREE = builder.comment("Enable second HUD free offset.")
                 .define("secondHudFree", false);
         ARCANE_WAND_OVERLAY_BAR_FREE = builder.comment("Enable bar free offset.")
                 .define("barFree", false);
@@ -124,7 +127,7 @@ public class ClientConfig {
                 .defineInRange("panoramaButtonRow", 3, 0, 4);
         PANORAMA_BUTTON_ROW_X_OFFSET = builder.comment("Custom panorama button X offset with row.")
                 .define("panoramaButtonRowXOffset", 4);
-        PANORAMA_BUTTON_X_OFFSET = builder.comment("Custom panorama button X offset")
+        PANORAMA_BUTTON_X_OFFSET = builder.comment("Custom panorama button X offset.")
                 .define("panoramaButtonXOffset", 0);
         PANORAMA_BUTTON_Y_OFFSET = builder.comment("Custom panorama button Y offset.")
                 .define("panoramaButtonYOffset", 0);

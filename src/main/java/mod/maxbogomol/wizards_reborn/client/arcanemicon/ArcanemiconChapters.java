@@ -7,14 +7,12 @@ import mod.maxbogomol.wizards_reborn.api.alchemy.AlchemyPotions;
 import mod.maxbogomol.wizards_reborn.api.crystalritual.CrystalRitual;
 import mod.maxbogomol.wizards_reborn.api.crystalritual.CrystalRitualUtils;
 import mod.maxbogomol.wizards_reborn.api.crystalritual.CrystalRituals;
-import mod.maxbogomol.wizards_reborn.client.arcanemicon.index.BlockEntry;
-import mod.maxbogomol.wizards_reborn.client.arcanemicon.index.IndexEntry;
-import mod.maxbogomol.wizards_reborn.client.arcanemicon.index.MonogramIndexEntry;
-import mod.maxbogomol.wizards_reborn.client.arcanemicon.index.SpellIndexEntry;
+import mod.maxbogomol.wizards_reborn.client.arcanemicon.index.*;
 import mod.maxbogomol.wizards_reborn.client.arcanemicon.integration.CrushingPage;
 import mod.maxbogomol.wizards_reborn.client.arcanemicon.page.*;
 import mod.maxbogomol.wizards_reborn.client.arcanemicon.recipe.*;
 import mod.maxbogomol.wizards_reborn.client.arcanemicon.titledpage.*;
+import mod.maxbogomol.wizards_reborn.client.config.ClientConfig;
 import mod.maxbogomol.wizards_reborn.common.alchemypotion.RegisterAlchemyPotions;
 import mod.maxbogomol.wizards_reborn.common.integration.create.CreateIntegration;
 import mod.maxbogomol.wizards_reborn.common.integration.farmersdelight.FarmersDelightIntegration;
@@ -55,7 +53,9 @@ public class ArcanemiconChapters {
             RAIN_CLOUD, LAVA_BLOCK, ICICLE, SHARP_BLINK, CRYSTAL_CRUSHING, TOXIC_RAIN, MOR_SWARM, WITHERING, IRRITATION, NECROTIC_RAY, LIGHT_RAY,
             INCINERATION, REPENTANCE, RENUNCIATION,
             EMBER_RAY, WISDOM,
-            PROGRESSION, SPECIAL_THANKS, RESEARCHES, MONOGRAMS, RESEARCH, LUNAM_MONOGRAM, VITA_MONOGRAM, SOLEM_MONOGRAM, MORS_MONOGRAM, MIRACULUM_MONOGRAM, TEMPUS_MONOGRAM, STATERA_MONOGRAM, ECLIPSIS_MONOGRAM, SICCITAS_MONOGRAM, SOLSTITIUM_MONOGRAM, FAMES_MONOGRAM, RENAISSANCE_MONOGRAM, BELLUM_MONOGRAM, LUX_MONOGRAM, KARA_MONOGRAM, DEGRADATIO_MONOGRAM, PRAEDICTIONEM_MONOGRAM, EVOLUTIONIS_MONOGRAM, TENEBRIS_MONOGRAM, UNIVERSUM_MONOGRAM,
+            PROGRESSION, CONFIGS, GRAPHICS_CONFIGS, ANIMATIONS_CONFIGS, PARTICLES_CONFIGS, ARCANEMICON_CONFIGS, NUMERICAL_CONFIGS, OVERLAY_CONFIGS, ARCANE_WAND_OVERLAY_CONFIGS, MENU_CONFIGS,
+            SPECIAL_THANKS, RESEARCHES, MONOGRAMS, RESEARCH,
+            LUNAM_MONOGRAM, VITA_MONOGRAM, SOLEM_MONOGRAM, MORS_MONOGRAM, MIRACULUM_MONOGRAM, TEMPUS_MONOGRAM, STATERA_MONOGRAM, ECLIPSIS_MONOGRAM, SICCITAS_MONOGRAM, SOLSTITIUM_MONOGRAM, FAMES_MONOGRAM, RENAISSANCE_MONOGRAM, BELLUM_MONOGRAM, LUX_MONOGRAM, KARA_MONOGRAM, DEGRADATIO_MONOGRAM, PRAEDICTIONEM_MONOGRAM, EVOLUTIONIS_MONOGRAM, TENEBRIS_MONOGRAM, UNIVERSUM_MONOGRAM,
             LIGHT_RAYS, LIGHT_EMITTER, LIGHT_TRANSFER_LENS, RUNIC_PEDESTAL, CRYSTALS_RITUALS, ARTIFICIAL_FERTILITY, RITUAL_BREEDING, CRYSTAL_GROWTH_ACCELERATION, CRYSTAL_INFUSION, ARCANUM_SEED, INNOCENT_WOOD, INNOCENT_WOOD_TOOLS,
             MOR, MORTAR, ARCANE_LINEN, MUSHROOM_CAPS, WISESTONE, WISESTONE_PEDESTAL, FLUID_PIPES, STEAM_PIPES, ORBITAL_FLUID_RETAINER, ALCHEMY_FURNACE, STEAM_THERMAL_STORAGE, ALCHEMY_MACHINE, ALCHEMY_OIL, MUSIC_DISC_ARCANUM, MUSIC_DISC_MOR, NETHER_SALT, ALCHEMY_CALX, ALCHEMY_GLASS, ALCHEMY_BAG, ALCHEMY_POTIONS, TEA, ALCHEMY_BREWS, ADVANCED_CALX, ALCHEMY_TRANSMUTATION, ARCANE_CENSER, SMOKING_PIPE, ARCACITE, ARCACITE_POLISHING_MIXTURE;
     public static ResearchPage RESEARCH_MAIN, RESEARCH_LIST;
@@ -2244,6 +2244,132 @@ public class ArcanemiconChapters {
                 )
         );
 
+        ANIMATIONS_CONFIGS = new Chapter(
+                "wizards_reborn.arcanemicon.chapter.animations_configs",
+                new TitlePage("wizards_reborn.arcanemicon.page.animations_configs"),
+                new ConfigPage(
+                        new ConfigIndexEntry().setBooleanConfig(ClientConfig.LARGE_ITEM_MODEL),
+                        new ConfigIndexEntry().setBooleanConfig(ClientConfig.SPELLS_ANIMATIONS),
+                        new ConfigIndexEntry().setBooleanConfig(ClientConfig.SPELLS_ITEM_ANIMATIONS),
+                        new ConfigIndexEntry().setBooleanConfig(ClientConfig.SPELLS_FIRST_PERSON_ITEM_ANIMATIONS)
+                )
+        );
+
+        PARTICLES_CONFIGS = new Chapter(
+                "wizards_reborn.arcanemicon.chapter.particles_configs",
+                new TitlePage("wizards_reborn.arcanemicon.page.particles_configs"),
+                new ConfigPage(
+                        new ConfigIndexEntry().setIntegerConfig(ClientConfig.WISSEN_RAYS_LIMIT)
+                )
+        );
+
+        GRAPHICS_CONFIGS = new Chapter(
+                "wizards_reborn.arcanemicon.chapter.graphics_configs",
+                new TitlePage("wizards_reborn.arcanemicon.page.graphics_configs"),
+                new IndexPage(
+                        new IndexEntry(ANIMATIONS_CONFIGS, new ItemStack(WizardsReborn.ARCANE_GOLD_SCYTHE.get())),
+                        new IndexEntry(PARTICLES_CONFIGS, new ItemStack(WizardsReborn.ARCANUM_DUST.get()))
+                ),
+                new ConfigPage(
+                        new ConfigIndexEntry().setBooleanConfig(ClientConfig.BETTER_LAYERING)
+                )
+        );
+
+        NUMERICAL_CONFIGS = new Chapter(
+                "wizards_reborn.arcanemicon.chapter.numerical_configs",
+                new TitlePage("wizards_reborn.arcanemicon.page.numerical_configs"),
+                new ConfigPage(
+                        new ConfigIndexEntry().setBooleanConfig(ClientConfig.NUMERICAL_WISSEN),
+                        new ConfigIndexEntry().setBooleanConfig(ClientConfig.NUMERICAL_COOLDOWN),
+                        new ConfigIndexEntry().setBooleanConfig(ClientConfig.SHOW_LIGHT_NAME),
+                        new ConfigIndexEntry().setBooleanConfig(ClientConfig.NUMERICAL_EXPERIENCE),
+                        new ConfigIndexEntry().setBooleanConfig(ClientConfig.NUMERICAL_HEAT),
+                        new ConfigIndexEntry().setBooleanConfig(ClientConfig.NUMERICAL_FLUID)
+                ),
+                new ConfigPage(
+                        new ConfigIndexEntry().setBooleanConfig(ClientConfig.NUMERICAL_STEAM)
+                )
+        );
+
+        ARCANEMICON_CONFIGS = new Chapter(
+                "wizards_reborn.arcanemicon.chapter.arcanemicon_configs",
+                new TitlePage("wizards_reborn.arcanemicon.page.arcanemicon_configs"),
+                new ConfigPage(
+                        new ConfigIndexEntry().setBooleanConfig(ClientConfig.RESEARCH_HARDMODE),
+                        new ConfigIndexEntry().setBooleanConfig(ClientConfig.OLD_RESEARCH_MONOGRAM_OUTLINE),
+                        new ConfigIndexEntry().setBooleanConfig(ClientConfig.BRIGHT_RESEARCH_MONOGRAM_OUTLINE),
+                        new ConfigIndexEntry().setBooleanConfig(ClientConfig.RESEARCH_MONOGRAM_CONNECTS),
+                        new ConfigIndexEntry().setBooleanConfig(ClientConfig.MONOGRAM_GLOW),
+                        new ConfigIndexEntry().setBooleanConfig(ClientConfig.MONOGRAM_GLOW_COLOR)
+                ),
+                new ConfigPage(
+                        new ConfigIndexEntry().setBooleanConfig(ClientConfig.MONOGRAM_COLOR),
+                        new ConfigIndexEntry().setBooleanConfig(ClientConfig.MONOGRAM_RAYS),
+                        new ConfigIndexEntry().setBooleanConfig(ClientConfig.CONFIG_CENTER)
+                )
+        );
+
+        ARCANE_WAND_OVERLAY_CONFIGS = new Chapter(
+                "wizards_reborn.arcanemicon.chapter.arcane_wand_overlay_configs",
+                new TitlePage("wizards_reborn.arcanemicon.page.arcane_wand_overlay_configs"),
+                new ConfigPage(
+                        new ConfigIndexEntry().setBooleanConfig(ClientConfig.ARCANE_WAND_OVERLAY_UP),
+                        new ConfigIndexEntry().setBooleanConfig(ClientConfig.ARCANE_WAND_OVERLAY_RIGHT),
+                        new ConfigIndexEntry().setBooleanConfig(ClientConfig.ARCANE_WAND_OVERLAY_SIDE_HUD),
+                        new ConfigIndexEntry().setBooleanConfig(ClientConfig.ARCANE_WAND_OVERLAY_SIDE_BAR),
+                        new ConfigIndexEntry().setBooleanConfig(ClientConfig.ARCANE_WAND_OVERLAY_HORIZONTAL_BAR),
+                        new ConfigIndexEntry().setIntegerConfig(ClientConfig.ARCANE_WAND_OVERLAY_X_OFFSET)
+                ),
+                new ConfigPage(
+                        new ConfigIndexEntry().setIntegerConfig(ClientConfig.ARCANE_WAND_OVERLAY_Y_OFFSET),
+                        new ConfigIndexEntry().setIntegerConfig(ClientConfig.ARCANE_WAND_OVERLAY_SECOND_X_OFFSET),
+                        new ConfigIndexEntry().setIntegerConfig(ClientConfig.ARCANE_WAND_OVERLAY_SECOND_Y_OFFSET),
+                        new ConfigIndexEntry().setIntegerConfig(ClientConfig.ARCANE_WAND_OVERLAY_BAR_X_OFFSET),
+                        new ConfigIndexEntry().setIntegerConfig(ClientConfig.ARCANE_WAND_OVERLAY_BAR_Y_OFFSET),
+                        new ConfigIndexEntry().setBooleanConfig(ClientConfig.ARCANE_WAND_OVERLAY_SECOND_HUD_FREE)
+                ),
+                new ConfigPage(
+                        new ConfigIndexEntry().setBooleanConfig(ClientConfig.ARCANE_WAND_OVERLAY_BAR_FREE),
+                        new ConfigIndexEntry().setBooleanConfig(ClientConfig.ARCANE_WAND_OVERLAY_COOLDOWN_TEXT),
+                        new ConfigIndexEntry().setBooleanConfig(ClientConfig.ARCANE_WAND_OVERLAY_WISSEN_TEXT),
+                        new ConfigIndexEntry().setBooleanConfig(ClientConfig.ARCANE_WAND_OVERLAY_REVERSE_BAR),
+                        new ConfigIndexEntry().setBooleanConfig(ClientConfig.ARCANE_WAND_OVERLAY_SHOW_EMPTY)
+                )
+        );
+
+        OVERLAY_CONFIGS = new Chapter(
+                "wizards_reborn.arcanemicon.chapter.overlay_configs",
+                new TitlePage("wizards_reborn.arcanemicon.page.overlay_configs"),
+                new IndexPage(
+                        new IndexEntry(ARCANE_WAND_OVERLAY_CONFIGS, new ItemStack(WizardsReborn.ARCANE_WAND.get()), RegisterKnowledges.ARCANE_WAND)
+                )
+        );
+
+        MENU_CONFIGS = new Chapter(
+                "wizards_reborn.arcanemicon.chapter.menu_configs",
+                new TitlePage("wizards_reborn.arcanemicon.page.menu_configs"),
+                new ConfigPage(
+                        new ConfigIndexEntry().setBooleanConfig(ClientConfig.CUSTOM_PANORAMA),
+                        new ConfigIndexEntry().setBooleanConfig(ClientConfig.PANORAMA_BUTTON),
+                        new ConfigIndexEntry().setIntegerConfig(ClientConfig.PANORAMA_BUTTON_ROW),
+                        new ConfigIndexEntry().setIntegerConfig(ClientConfig.PANORAMA_BUTTON_ROW_X_OFFSET),
+                        new ConfigIndexEntry().setIntegerConfig(ClientConfig.PANORAMA_BUTTON_X_OFFSET),
+                        new ConfigIndexEntry().setIntegerConfig(ClientConfig.PANORAMA_BUTTON_Y_OFFSET)
+                )
+        );
+
+        CONFIGS = new Chapter(
+                "wizards_reborn.arcanemicon.chapter.configs",
+                new TitlePage("wizards_reborn.arcanemicon.page.configs"),
+                new IndexPage(
+                        new IndexEntry(GRAPHICS_CONFIGS, new ItemStack(WizardsReborn.LIME_ARCANE_LUMOS_ITEM.get())),
+                        new IndexEntry(NUMERICAL_CONFIGS, new ItemStack(WizardsReborn.WISSEN_WAND.get()), RegisterKnowledges.ARCANUM_DUST),
+                        new IndexEntry(ARCANEMICON_CONFIGS, new ItemStack(WizardsReborn.ARCANEMICON.get())),
+                        new IndexEntry(OVERLAY_CONFIGS, new ItemStack(WizardsReborn.ARCANE_WAND.get())),
+                        new IndexEntry(MENU_CONFIGS, new ItemStack(WizardsReborn.ARCANUM.get()))
+                )
+        );
+
         SPECIAL_THANKS = new Chapter(
                 "wizards_reborn.arcanemicon.chapter.special_thanks",
                 new TitlePage("wizards_reborn.arcanemicon.page.special_thanks.0"),
@@ -2266,7 +2392,8 @@ public class ArcanemiconChapters {
                 new ProgressionPage("wizards_reborn.arcanemicon.page.additional_progression", RegisterKnowledges.additionalProgression),
                 new StatisticPage("wizards_reborn.arcanemicon.page.statistic", RegisterKnowledges.progression, RegisterKnowledges.additionalProgression),
                 new EditionPage(
-                        new IndexEntry(SPECIAL_THANKS, new ItemStack(WizardsReborn.ARCANEMICON.get()))
+                        new IndexEntry(CONFIGS, new ItemStack(WizardsReborn.WISSEN_WAND.get())),
+                        new IndexEntry(SPECIAL_THANKS, new ItemStack(WizardsReborn.INNOCENT_WOOD_SAPLING_ITEM.get()))
                 )
         );
 
@@ -2326,7 +2453,7 @@ public class ArcanemiconChapters {
                         new IndexEntry(VOID_SPELLS, new ItemStack(WizardsReborn.FACETED_VOID_CRYSTAL.get()), RegisterKnowledges.VOID_CRYSTAL)
                 ),
                 new IndexPage(
-                        new IndexEntry(PROGRESSION, new ItemStack(WizardsReborn.ARCANEMICON.get())),
+                        new IndexEntry(PROGRESSION, new ItemStack(WizardsReborn.KNOWLEDGE_SCROLL.get())),
                         new IndexEntry(RESEARCHES, new ItemStack(WizardsReborn.ARCANEMICON.get()), RegisterKnowledges.ARCANE_WAND),
                         new IndexEntry(MONOGRAMS, new ItemStack(WizardsReborn.ARCANEMICON.get()), RegisterKnowledges.ARCANE_WAND)
                 )
