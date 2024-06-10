@@ -6,7 +6,9 @@
   "mixins": [
     "LivingEntityMixin",
     "PlayerMixin",
-    "BlocksMixin"
+    "BlocksMixin",
+    "CreeperMixin",
+    "PhantomMixin"
   ],
   "client": [
     "client.ItemEntityMixin",

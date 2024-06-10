@@ -12,11 +12,6 @@ import javax.annotation.Nullable;
 
 public class WandModelOverrideList extends CustomModelOverrideList {
 
-    public WandModelOverrideList()
-    {
-        super();
-    }
-
     @Override
     public BakedModel resolve(BakedModel originalModel, ItemStack stack, @Nullable ClientLevel world, @Nullable LivingEntity entity, int pSeed)
     {

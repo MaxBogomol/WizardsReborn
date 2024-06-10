@@ -17,6 +17,7 @@ import mod.maxbogomol.wizards_reborn.common.entity.CustomBoatEntity;
 import mod.maxbogomol.wizards_reborn.common.item.equipment.AlchemyPotionItem;
 import mod.maxbogomol.wizards_reborn.common.item.equipment.KnowledgeSrollItem;
 import mod.maxbogomol.wizards_reborn.common.item.equipment.RunicWisestonePlateItem;
+import mod.maxbogomol.wizards_reborn.common.item.equipment.curio.LeatherCollarItem;
 import net.minecraft.client.KeyMapping;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.model.BoatModel;
@@ -260,6 +261,10 @@ public class WizardsRebornClient {
                 }
             }
 
+            for (String skin : LeatherCollarItem.skins.values()) {
+                event.register(new ModelResourceLocation(new ResourceLocation(WizardsReborn.MOD_ID, "collar/" + skin), "inventory"));
+            }
+
             event.register(JEWELER_TABLE_STONE_MODEl);
             event.register(ALTAR_OF_DROUGHT_FRAME_MODEl);
             event.register(TOTEM_OF_EXPERIENCE_ABSORPTION_PIECE_MODEl);
@@ -310,6 +315,14 @@ public class WizardsRebornClient {
             if (ClientConfig.LARGE_ITEM_MODEL.get()) {
                 Item2DRenderer.onModelBakeEvent(event);
             }
+
+            for (String skin : LeatherCollarItem.skins.keySet()) {
+                BakedModel model = map.get( new ModelResourceLocation(new ResourceLocation(WizardsReborn.MOD_ID, "collar/" + LeatherCollarItem.skins.get(skin)), "inventory"));
+                CollarModelOverrideList.skins.put(skin, model);
+            }
+            BakedModel collarModel = map.get(new ModelResourceLocation(WizardsReborn.LEATHER_COLLAR.getId(), "inventory"));
+            CustomModel collarNewModel = new CustomModel(collarModel, new CollarModelOverrideList());
+            map.replace(new ModelResourceLocation(WizardsReborn.LEATHER_COLLAR.getId(), "inventory"), collarNewModel);
 
             fluidPipe = new PipeModel(map.get(FLUID_CENTER), "fluid_pipe");
             steamPipe = new PipeModel(map.get(STEAM_CENTER), "steam_pipe");
