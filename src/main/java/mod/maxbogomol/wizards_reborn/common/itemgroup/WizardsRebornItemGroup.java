@@ -423,6 +423,8 @@ public class WizardsRebornItemGroup {
             event.accept(WizardsReborn.MOR_CAP);
             event.accept(WizardsReborn.ELDER_MOR_CAP);
 
+            event.accept(WizardsReborn.LEATHER_COLLAR);
+
             event.accept(WizardsReborn.ARCANE_FORTRESS_HELMET);
             event.accept(WizardsReborn.ARCANE_FORTRESS_CHESTPLATE);
             event.accept(WizardsReborn.ARCANE_FORTRESS_LEGGINGS);

@@ -52,7 +52,7 @@ public class AlchemyMachineScreen extends AbstractContainerScreen<AlchemyMachine
                 width /= (double) machine.getMaxCapacity() / (double) machine.getTank(ii).getFluidAmount();
                 gui.blit(GUI, i + 39, j + 65 + (ii * 15), 176, 0, width, 8, 256, 256);
 
-                if (x >= i + 39 && y >= j + 65 + (ii * 15) && x <= i + 39 + 32 && y <= j + 59 + (ii * 15) + 8) {
+                if (x >= i + 39 && y >= j + 65 + (ii * 15) && x <= i + 39 + 32 && y <= j + 65 + (ii * 15) + 8) {
                     gui.renderTooltip(Minecraft.getInstance().font, NumericalUtils.getFluidName(machine.getFluidStack(ii), 5000), x, y);
                 }
             }

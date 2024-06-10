@@ -8,7 +8,6 @@ import mod.maxbogomol.wizards_reborn.WizardsReborn;
 import mod.maxbogomol.wizards_reborn.WizardsRebornClient;
 import mod.maxbogomol.wizards_reborn.api.monogram.Monogram;
 import mod.maxbogomol.wizards_reborn.client.event.ClientTickHandler;
-import mod.maxbogomol.wizards_reborn.client.render.WorldRenderHandler;
 import mod.maxbogomol.wizards_reborn.common.block.EngravedWisestoneBlock;
 import mod.maxbogomol.wizards_reborn.utils.ColorUtils;
 import mod.maxbogomol.wizards_reborn.utils.RenderUtils;
@@ -63,7 +62,7 @@ public class EngravedWisestoneItem extends BlockItem implements IGuiParticleItem
     @OnlyIn(Dist.CLIENT)
     public static Component getMonogramComponent(Monogram monogram) {
         Color color = monogram.getColor();
-        float ticks = ClientTickHandler.ticksInGame + Minecraft.getInstance().getPartialTick() * 5f;
+        float ticks = (ClientTickHandler.ticksInGame + Minecraft.getInstance().getPartialTick()) * 1.2f;
         MutableComponent component = Component.empty();
 
         int i = 0;

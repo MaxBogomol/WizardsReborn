@@ -100,8 +100,7 @@ public class ArcaneEnchantment {
         pose.pushPose();
         pose.translate(x + 8, y + 8, 100);
         pose.mulPose(Axis.ZP.rotationDegrees(ticks));
-        pose.translate(-9 * size, -9 * size, 0);
-        RenderUtils.spriteGlowQuad(pose, buffersource, 0, 0, 18f * size, 18f * size, sparkle.getU0(), sparkle.getU1(), sparkle.getV0(), sparkle.getV1(), r, g, b, 0.25f + (0.5f * size));
+        RenderUtils.spriteGlowQuadCenter(pose, buffersource, 0, 0, 18f * size, 18f * size, sparkle.getU0(), sparkle.getU1(), sparkle.getV0(), sparkle.getV1(), r, g, b, 0.25f + (0.5f * size));
         buffersource.endBatch();
         pose.popPose();
 

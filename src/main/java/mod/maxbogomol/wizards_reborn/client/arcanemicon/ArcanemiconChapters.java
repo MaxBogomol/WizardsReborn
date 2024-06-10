@@ -3483,11 +3483,11 @@ public class ArcanemiconChapters {
                         new BlockEntry(WISESTONE_PEDESTAL_ITEM, new ItemStack(WizardsReborn.MOR_BREW_BUCKET.get())),
                         new BlockEntry(WISESTONE_PEDESTAL_ITEM, new ItemStack(WizardsReborn.FLOWER_BREW_BUCKET.get()))
                 ),
-                new AlchemyMachinePage(EMPTY_ITEM, new FluidStack(WizardsReborn.MUNDANE_BREW_FLUID.get(), 1000), false, true,
+                new AlchemyMachinePage(EMPTY_ITEM, new FluidStack(WizardsReborn.MUSHROOM_BREW_FLUID.get(), 1000), false, true,
                         new FluidStack(Fluids.WATER, 1000), FluidStack.EMPTY, FluidStack.EMPTY,
                         new ItemStack(Items.NETHER_WART), new ItemStack(WizardsReborn.GROUND_BROWN_MUSHROOM.get()), new ItemStack(WizardsReborn.GROUND_BROWN_MUSHROOM.get()), new ItemStack(WizardsReborn.GROUND_BROWN_MUSHROOM.get())
                 ),
-                new AlchemyMachinePage(EMPTY_ITEM, new FluidStack(WizardsReborn.MUNDANE_BREW_FLUID.get(), 1000), false, true,
+                new AlchemyMachinePage(EMPTY_ITEM, new FluidStack(WizardsReborn.HELLISH_MUSHROOM_BREW_FLUID.get(), 1000), false, true,
                         new FluidStack(Fluids.WATER, 1000), FluidStack.EMPTY, FluidStack.EMPTY,
                         new ItemStack(Items.NETHER_WART), new ItemStack(WizardsReborn.GROUND_RED_MUSHROOM.get()), new ItemStack(WizardsReborn.GROUND_RED_MUSHROOM.get()), new ItemStack(WizardsReborn.GROUND_RED_MUSHROOM.get())
                 ),

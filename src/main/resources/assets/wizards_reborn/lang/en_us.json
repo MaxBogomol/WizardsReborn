@@ -389,6 +389,8 @@
   "item.wizards_reborn.mor_cap": "Mor Cap",
   "item.wizards_reborn.elder_mor_cap": "Elder Mor Cap",
 
+  "item.wizards_reborn.leather_collar": "Leather Collar",
+
   "item.wizards_reborn.arcane_fortress_helmet": "Arcane Fortress Helmet",
   "item.wizards_reborn.arcane_fortress_chestplate": "Arcane Fortress Chestplate",
   "item.wizards_reborn.arcane_fortress_leggings": "Arcane Fortress Leggings",
@@ -453,7 +455,8 @@
   "lore.wizards_reborn.arcane_wand.crystal": "Crystal:",
   "lore.wizards_reborn.arcane_wand.spell": "Spell:",
 
-  "lore.wizards_reborn.arcane_enchantments": "Arcane Enchantments:",
+  "lore.wizards_reborn.leather_collar.0": "Meow :3",
+  "lore.wizards_reborn.leather_collar.1": "Prrr~~",
 
   "lore.wizards_reborn.inventor_wizard_armor": "Wissen Nature",
   "lore.wizards_reborn.arcane_fortress_armor": "Arcane Bastion",
@@ -466,6 +469,8 @@
   "lore.wizards_reborn.hunger_banner_pattern": "The hunter cannot become the hunted.",
   "lore.wizards_reborn.survival_banner_pattern": "Kill or be killed!",
   "lore.wizards_reborn.elevation_banner_pattern": "Leave everything... Cleanse your soul...",
+
+  "lore.wizards_reborn.arcane_enchantments": "Arcane Enchantments:",
 
   "trim_material.wizards_reborn.arcane_gold": "Arcane Gold Material",
   "trim_material.wizards_reborn.sarcon": "Sarcon Material",

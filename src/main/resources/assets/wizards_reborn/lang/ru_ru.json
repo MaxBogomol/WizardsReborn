@@ -389,6 +389,8 @@
   "item.wizards_reborn.mor_cap": "Моровая шляпка",
   "item.wizards_reborn.elder_mor_cap": "Древне-моровая шляпка",
 
+  "item.wizards_reborn.leather_collar": "Кожаный ошейник",
+
   "item.wizards_reborn.arcane_fortress_helmet": "Аркановый штурмовой шлем",
   "item.wizards_reborn.arcane_fortress_chestplate": "Аркановый штурмовой нагрудник",
   "item.wizards_reborn.arcane_fortress_leggings": "Аркановые штурмовые поножи",
@@ -460,7 +462,8 @@
   "lore.wizards_reborn.arcane_wand.crystal": "Кристалл:",
   "lore.wizards_reborn.arcane_wand.spell": "Заклинание:",
 
-  "lore.wizards_reborn.arcane_enchantments": "Аркановые зачарования:",
+  "lore.wizards_reborn.leather_collar.0": "Мяу :3",
+  "lore.wizards_reborn.leather_collar.1": "Мррр~~",
 
   "lore.wizards_reborn.inventor_wizard_armor": "Виссен природа",
   "lore.wizards_reborn.arcane_fortress_armor": "Аркановый бастион",
@@ -473,6 +476,8 @@
   "lore.wizards_reborn.hunger_banner_pattern": "Охотник не может стать добычей.",
   "lore.wizards_reborn.survival_banner_pattern": "Убей или будь убитым!",
   "lore.wizards_reborn.elevation_banner_pattern": "Отбрось всё... Очисти свою душу...",
+
+  "lore.wizards_reborn.arcane_enchantments": "Аркановые зачарования:",
 
   "trim_material.wizards_reborn.arcane_gold": "Аркановый золотой материал",
   "trim_material.wizards_reborn.sarcon": "Сарконовый материал",

@@ -5,10 +5,7 @@ import com.mojang.blaze3d.vertex.DefaultVertexFormat;
 import mod.maxbogomol.wizards_reborn.client.config.ClientConfig;
 import mod.maxbogomol.wizards_reborn.client.model.armor.ArcaneFortressArmorModel;
 import mod.maxbogomol.wizards_reborn.client.model.armor.InventorWizardArmorModel;
-import mod.maxbogomol.wizards_reborn.client.model.curio.AmuletModel;
-import mod.maxbogomol.wizards_reborn.client.model.curio.BagModel;
-import mod.maxbogomol.wizards_reborn.client.model.curio.BeltModel;
-import mod.maxbogomol.wizards_reborn.client.model.curio.MushroomCapModel;
+import mod.maxbogomol.wizards_reborn.client.model.curio.*;
 import mod.maxbogomol.wizards_reborn.client.particle.*;
 import mod.maxbogomol.wizards_reborn.client.render.block.PipeModel;
 import mod.maxbogomol.wizards_reborn.client.render.entity.CustomBoatModel;
@@ -63,6 +60,7 @@ public class WizardsRebornClient {
     public static ModelLayerLocation BELT_LAYER = new ModelLayerLocation(new ResourceLocation(WizardsReborn.MOD_ID, "belt"), "main");
     public static ModelLayerLocation BAG_LAYER = new ModelLayerLocation(new ResourceLocation(WizardsReborn.MOD_ID, "bag"), "main");
     public static ModelLayerLocation AMULET_LAYER = new ModelLayerLocation(new ResourceLocation(WizardsReborn.MOD_ID, "amulet"), "main");
+    public static ModelLayerLocation COLLAR_LAYER = new ModelLayerLocation(new ResourceLocation(WizardsReborn.MOD_ID, "collar"), "main");
     public static ModelLayerLocation MUSHROOM_CAP_LAYER = new ModelLayerLocation(new ResourceLocation(WizardsReborn.MOD_ID, "mushroom_cap"), "main");
 
     public static final ModelLayerLocation INVENTOR_WIZARD_ARMOR_LAYER = new ModelLayerLocation(new ResourceLocation(WizardsReborn.MOD_ID, "inventor_wizard_armor"), "main");
@@ -412,6 +410,7 @@ public class WizardsRebornClient {
             event.registerLayerDefinition(WizardsRebornClient.BELT_LAYER, BeltModel::createBodyLayer);
             event.registerLayerDefinition(WizardsRebornClient.BAG_LAYER, BagModel::createBodyLayer);
             event.registerLayerDefinition(WizardsRebornClient.AMULET_LAYER, AmuletModel::createBodyLayer);
+            event.registerLayerDefinition(WizardsRebornClient.COLLAR_LAYER, CollarModel::createBodyLayer);
             event.registerLayerDefinition(WizardsRebornClient.MUSHROOM_CAP_LAYER, MushroomCapModel::createBodyLayer);
 
             event.registerLayerDefinition(INVENTOR_WIZARD_ARMOR_LAYER, InventorWizardArmorModel::createBodyLayer);

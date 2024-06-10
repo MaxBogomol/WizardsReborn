@@ -26,10 +26,7 @@ import mod.maxbogomol.wizards_reborn.client.gui.container.*;
 import mod.maxbogomol.wizards_reborn.client.gui.screen.*;
 import mod.maxbogomol.wizards_reborn.client.particle.*;
 import mod.maxbogomol.wizards_reborn.client.render.WorldRenderHandler;
-import mod.maxbogomol.wizards_reborn.client.render.curio.AmuletRenderer;
-import mod.maxbogomol.wizards_reborn.client.render.curio.BagRenderer;
-import mod.maxbogomol.wizards_reborn.client.render.curio.BeltRenderer;
-import mod.maxbogomol.wizards_reborn.client.render.curio.MushroomCapRenderer;
+import mod.maxbogomol.wizards_reborn.client.render.curio.*;
 import mod.maxbogomol.wizards_reborn.client.render.item.WandCrystalsModels;
 import mod.maxbogomol.wizards_reborn.common.alchemypotion.RegisterAlchemyPotions;
 import mod.maxbogomol.wizards_reborn.common.arcaneenchantment.LifeRootsArcaneEnchantment;
@@ -172,7 +169,7 @@ import java.awt.*;
 @Mod("wizards_reborn")
 public class WizardsReborn {
     public static final String MOD_ID = "wizards_reborn";
-    public static final int VERSION_NUMBER = 17;
+    public static final int VERSION_NUMBER = 18;
 
     public static final ISidedProxy proxy = DistExecutor.unsafeRunForDist(() -> ClientProxy::new, () -> ServerProxy::new);
 
@@ -1264,6 +1261,8 @@ public class WizardsReborn {
     public static final RegistryObject<Item> MOR_CAP = ITEMS.register("mor_cap", () -> new MushroomCapItem(new Item.Properties().stacksTo(1), "mor_cap"));
     public static final RegistryObject<Item> ELDER_MOR_CAP = ITEMS.register("elder_mor_cap", () -> new MushroomCapItem(new Item.Properties().stacksTo(1), "elder_mor_cap"));
 
+    public static final RegistryObject<Item> LEATHER_COLLAR = ITEMS.register("leather_collar", () -> new LeatherCollarItem(new Item.Properties().stacksTo(1)));
+
     public static final RegistryObject<Item> ARCANE_FORTRESS_HELMET = ITEMS.register("arcane_fortress_helmet", () -> new ArcaneFortressArmorItem(CustomArmorMaterial.ARCANE_FORTRESS, ArmorItem.Type.HELMET, new Item.Properties()));
     public static final RegistryObject<Item> ARCANE_FORTRESS_CHESTPLATE = ITEMS.register("arcane_fortress_chestplate", () -> new ArcaneFortressArmorItem(CustomArmorMaterial.ARCANE_FORTRESS, ArmorItem.Type.CHESTPLATE, new Item.Properties()));
     public static final RegistryObject<Item> ARCANE_FORTRESS_LEGGINGS = ITEMS.register("arcane_fortress_leggings", () -> new ArcaneFortressArmorItem(CustomArmorMaterial.ARCANE_FORTRESS, ArmorItem.Type.LEGGINGS, new Item.Properties()));
@@ -1857,6 +1856,7 @@ public class WizardsReborn {
             CuriosRendererRegistry.register(WARPED_FUNGUS_CAP.get(), MushroomCapRenderer::new);
             CuriosRendererRegistry.register(MOR_CAP.get(), MushroomCapRenderer::new);
             CuriosRendererRegistry.register(ELDER_MOR_CAP.get(), MushroomCapRenderer::new);
+            CuriosRendererRegistry.register(LEATHER_COLLAR.get(), CollarRenderer::new);
         });
     }
 
