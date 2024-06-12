@@ -3,14 +3,12 @@ package mod.maxbogomol.wizards_reborn.common.item.equipment;
 import com.mojang.blaze3d.platform.GlStateManager;
 import com.mojang.blaze3d.systems.RenderSystem;
 import com.mojang.blaze3d.vertex.PoseStack;
-import com.mojang.math.Axis;
 import mod.maxbogomol.wizards_reborn.WizardsReborn;
 import mod.maxbogomol.wizards_reborn.WizardsRebornClient;
 import mod.maxbogomol.wizards_reborn.api.crystalritual.CrystalRitual;
 import mod.maxbogomol.wizards_reborn.api.crystalritual.CrystalRitualUtils;
 import mod.maxbogomol.wizards_reborn.api.crystalritual.CrystalRituals;
 import mod.maxbogomol.wizards_reborn.client.event.ClientTickHandler;
-import mod.maxbogomol.wizards_reborn.client.render.WorldRenderHandler;
 import mod.maxbogomol.wizards_reborn.common.item.IGuiParticleItem;
 import mod.maxbogomol.wizards_reborn.utils.ColorUtils;
 import mod.maxbogomol.wizards_reborn.utils.RenderUtils;
@@ -103,14 +101,13 @@ public class RunicWisestonePlateItem extends Item implements IGuiParticleItem {
         CrystalRitual ritual = CrystalRitualUtils.getCrystalRitual(stack);
         if (!CrystalRitualUtils.isEmpty(ritual)) {
             Color color = ritual.getColor();
-            int i = CrystalRituals.getCrystalRituals().indexOf(ritual);
+            int ii = CrystalRituals.getCrystalRituals().indexOf(ritual);
 
-            float a = (float) Math.abs(Math.sin((ClientTickHandler.ticksInGame + Minecraft.getInstance().getPartialTick() + (i * 10)) / 15));
-            float ticks = ClientTickHandler.ticksInGame + Minecraft.getInstance().getPartialTick() * 0.2f + (i * 10);
-            float alpha = (float) (0.35f + Math.abs(Math.sin(Math.toRadians(ticks)) * 0.25f));
-            float r = Mth.lerpInt(a, 173, color.getRed()) / 255f;
-            float g = Mth.lerpInt(a, 237, color.getGreen()) / 255f;
-            float b = Mth.lerpInt(a, 205, color.getBlue()) / 255f;
+            float ticks = (ClientTickHandler.ticksInGame + Minecraft.getInstance().getPartialTick()) + (ii * 10);
+            float alpha = (float) (0.1f + Math.abs(Math.sin(Math.toRadians(ticks)) * 0.15f));
+            float r = color.getRed() / 255f;
+            float g = color.getGreen() / 255f;
+            float b = color.getBlue() / 255f;
 
             RenderSystem.enableBlend();
             RenderSystem.blendFunc(GlStateManager.SourceFactor.SRC_ALPHA, GlStateManager.DestFactor.ONE);
@@ -119,22 +116,18 @@ public class RunicWisestonePlateItem extends Item implements IGuiParticleItem {
             RenderSystem.setShader(WizardsRebornClient::getGlowingShader);
             RenderSystem.setShaderColor(1F, 1F, 1F, 1F);
 
-            TextureAtlasSprite sparkle = Minecraft.getInstance().getTextureAtlas(TextureAtlas.LOCATION_BLOCKS).apply(new ResourceLocation(WizardsReborn.MOD_ID, "particle/sparkle"));
             TextureAtlasSprite wisp = Minecraft.getInstance().getTextureAtlas(TextureAtlas.LOCATION_BLOCKS).apply(new ResourceLocation(WizardsReborn.MOD_ID, "particle/wisp"));
 
-            pose.pushPose();
-            pose.translate(x + 8, y + 8, 100);
-            pose.mulPose(Axis.ZP.rotationDegrees(-ticks * 0.55f));
-            RenderUtils.spriteGlowQuadCenter(pose, buffersource, 0, 0, 16f, 16f, wisp.getU0(), wisp.getU1(), wisp.getV0(), wisp.getV1(), r, g, b, alpha);
-            buffersource.endBatch();
-            pose.popPose();
-
-            pose.pushPose();
-            pose.translate(x + 8, y + 8, 100);
-            pose.mulPose(Axis.ZP.rotationDegrees(ticks));
-            RenderUtils.spriteGlowQuadCenter(pose, buffersource, 0, 0, 18f, 18f, sparkle.getU0(), sparkle.getU1(), sparkle.getV0(), sparkle.getV1(), r, g, b, alpha);
-            buffersource.endBatch();
-            pose.popPose();
+            for (int i = 0; i < 45; i++) {
+                pose.pushPose();
+                float offset = (float) (Math.abs(Math.sin(Math.toRadians(i * 4 + (ticks * 2f)))));
+                offset = (offset - 0.25f) * (1 / 0.75f);
+                if (offset < 0) offset = 0;
+                pose.translate(x + 8.5 + (Math.sin(Math.toRadians(i * 8)) * 7.5), y + 8 + (Math.cos(Math.toRadians(i * 8)) * 2) + (Math.sin(Math.toRadians(i * 8 * 2 + ticks)) * 2), 100 + (100 * Math.cos(Math.toRadians(i * 8))));
+                RenderUtils.spriteGlowQuadCenter(pose, buffersource, 0, 0, 4f * offset, 4f * offset, wisp.getU0(), wisp.getU1(), wisp.getV0(), wisp.getV1(), r, g, b, alpha);
+                buffersource.endBatch();
+                pose.popPose();
+            }
 
             RenderSystem.disableBlend();
             RenderSystem.depthMask(true);

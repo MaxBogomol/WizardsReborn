@@ -28,6 +28,7 @@ public class CollarModel extends HumanoidModel {
         PartDefinition model1 = body.addOrReplaceChild("model1", CubeListBuilder.create().texOffs(0, 8).addBox(-4.0F, 0.0F, -2.0F, 8, 4, 4, new CubeDeformation(0.4F)), PartPose.ZERO);
         PartDefinition model2 = model.addOrReplaceChild("model2", CubeListBuilder.create().texOffs(0, 16).addBox(-0.5F, 2F, -2.75F, 1, 1, 1, new CubeDeformation(0.15F)), PartPose.ZERO);
         PartDefinition model3 = model.addOrReplaceChild("model3", CubeListBuilder.create().texOffs(0, 18).addBox(-1.5F, 2F, -2F, 3, 3, 1, new CubeDeformation(0.35F)), PartPose.ZERO);
+        PartDefinition model4 = model.addOrReplaceChild("model4", CubeListBuilder.create().texOffs(8, 18).addBox(-2F, 2F, -2F, 4, 5, 1, new CubeDeformation(0.35F)), PartPose.ZERO);
 
         return LayerDefinition.create(mesh, 32, 32);
     }

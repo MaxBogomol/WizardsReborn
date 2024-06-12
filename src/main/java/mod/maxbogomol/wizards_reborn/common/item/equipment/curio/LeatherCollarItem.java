@@ -45,6 +45,7 @@ public class LeatherCollarItem extends BaseCurioItem implements ICurioItemTextur
         skins.put("SammySemicolon", "sammysemicolon");
         skins.put("mlekpi", "mlekpi");
         skins.put("Purplik", "purplik");
+        skins.put("Onjerlay", "onjerlay");
         skins.put("Kekqupap", "kekqupap");
         skins.put("ZeeCamcan", "zeecamcan");
         skins.put("Swaped_meow", "swaped_meow");

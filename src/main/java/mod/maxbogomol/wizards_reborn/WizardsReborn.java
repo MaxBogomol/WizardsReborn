@@ -1254,14 +1254,14 @@ public class WizardsReborn {
     public static final RegistryObject<Item> CRYSTAL_BAG = ITEMS.register("crystal_bag", () -> new CrystalBagItem(new Item.Properties().stacksTo(1)));
     public static final RegistryObject<Item> ALCHEMY_BAG = ITEMS.register("alchemy_bag", () -> new AlchemyBagItem(new Item.Properties().stacksTo(1)));
 
+    public static final RegistryObject<Item> LEATHER_COLLAR = ITEMS.register("leather_collar", () -> new LeatherCollarItem(new Item.Properties().stacksTo(1)));
+
     public static final RegistryObject<Item> BROWN_MUSHROOM_CAP = ITEMS.register("brown_mushroom_cap", () -> new MushroomCapItem(new Item.Properties().stacksTo(1), "brown_mushroom_cap"));
     public static final RegistryObject<Item> RED_MUSHROOM_CAP = ITEMS.register("red_mushroom_cap", () -> new MushroomCapItem(new Item.Properties().stacksTo(1), "red_mushroom_cap"));
     public static final RegistryObject<Item> CRIMSON_FUNGUS_CAP = ITEMS.register("crimson_fungus_cap", () -> new MushroomCapItem(new Item.Properties().stacksTo(1), "crimson_fungus_cap"));
     public static final RegistryObject<Item> WARPED_FUNGUS_CAP = ITEMS.register("warped_fungus_cap", () -> new MushroomCapItem(new Item.Properties().stacksTo(1), "warped_fungus_cap"));
     public static final RegistryObject<Item> MOR_CAP = ITEMS.register("mor_cap", () -> new MushroomCapItem(new Item.Properties().stacksTo(1), "mor_cap"));
     public static final RegistryObject<Item> ELDER_MOR_CAP = ITEMS.register("elder_mor_cap", () -> new MushroomCapItem(new Item.Properties().stacksTo(1), "elder_mor_cap"));
-
-    public static final RegistryObject<Item> LEATHER_COLLAR = ITEMS.register("leather_collar", () -> new LeatherCollarItem(new Item.Properties().stacksTo(1)));
 
     public static final RegistryObject<Item> ARCANE_FORTRESS_HELMET = ITEMS.register("arcane_fortress_helmet", () -> new ArcaneFortressArmorItem(CustomArmorMaterial.ARCANE_FORTRESS, ArmorItem.Type.HELMET, new Item.Properties()));
     public static final RegistryObject<Item> ARCANE_FORTRESS_CHESTPLATE = ITEMS.register("arcane_fortress_chestplate", () -> new ArcaneFortressArmorItem(CustomArmorMaterial.ARCANE_FORTRESS, ArmorItem.Type.CHESTPLATE, new Item.Properties()));
@@ -1850,13 +1850,13 @@ public class WizardsReborn {
             CuriosRendererRegistry.register(ARCANE_FORTRESS_BELT.get(), BeltRenderer::new);
             CuriosRendererRegistry.register(CRYSTAL_BAG.get(), BagRenderer::new);
             CuriosRendererRegistry.register(ALCHEMY_BAG.get(), BagRenderer::new);
+            CuriosRendererRegistry.register(LEATHER_COLLAR.get(), CollarRenderer::new);
             CuriosRendererRegistry.register(BROWN_MUSHROOM_CAP.get(), MushroomCapRenderer::new);
             CuriosRendererRegistry.register(RED_MUSHROOM_CAP.get(), MushroomCapRenderer::new);
             CuriosRendererRegistry.register(CRIMSON_FUNGUS_CAP.get(), MushroomCapRenderer::new);
             CuriosRendererRegistry.register(WARPED_FUNGUS_CAP.get(), MushroomCapRenderer::new);
             CuriosRendererRegistry.register(MOR_CAP.get(), MushroomCapRenderer::new);
             CuriosRendererRegistry.register(ELDER_MOR_CAP.get(), MushroomCapRenderer::new);
-            CuriosRendererRegistry.register(LEATHER_COLLAR.get(), CollarRenderer::new);
         });
     }
 

@@ -397,9 +397,11 @@ public class WizardsRebornItemGroup {
             event.accept(WizardsReborn.ARCANUM_LENS);
             event.accept(WizardsReborn.WISESTONE_PLATE);
             for (CrystalRitual ritual : CrystalRituals.getCrystalRituals()) {
-                ItemStack stack = new ItemStack(WizardsReborn.RUNIC_WISESTONE_PLATE.get());
-                CrystalRitualUtils.setCrystalRitual(stack, ritual);
-                event.accept(stack);
+                if (ritual != WizardsReborn.EMPTY_CRYSTAL_RITUAL) {
+                    ItemStack stack = new ItemStack(WizardsReborn.RUNIC_WISESTONE_PLATE.get());
+                    CrystalRitualUtils.setCrystalRitual(stack, ritual);
+                    event.accept(stack);
+                }
             }
 
             event.accept(WizardsReborn.ARCANE_WAND);
@@ -416,14 +418,14 @@ public class WizardsRebornItemGroup {
             event.accept(WizardsReborn.CRYSTAL_BAG);
             event.accept(WizardsReborn.ALCHEMY_BAG);
 
+            event.accept(WizardsReborn.LEATHER_COLLAR);
+
             event.accept(WizardsReborn.BROWN_MUSHROOM_CAP);
             event.accept(WizardsReborn.RED_MUSHROOM_CAP);
             event.accept(WizardsReborn.CRIMSON_FUNGUS_CAP);
             event.accept(WizardsReborn.WARPED_FUNGUS_CAP);
             event.accept(WizardsReborn.MOR_CAP);
             event.accept(WizardsReborn.ELDER_MOR_CAP);
-
-            event.accept(WizardsReborn.LEATHER_COLLAR);
 
             event.accept(WizardsReborn.ARCANE_FORTRESS_HELMET);
             event.accept(WizardsReborn.ARCANE_FORTRESS_CHESTPLATE);
