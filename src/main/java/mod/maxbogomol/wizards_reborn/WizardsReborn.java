@@ -12,6 +12,8 @@ import mod.maxbogomol.wizards_reborn.api.crystalritual.CrystalRituals;
 import mod.maxbogomol.wizards_reborn.api.monogram.Monogram;
 import mod.maxbogomol.wizards_reborn.api.monogram.MonogramRecipe;
 import mod.maxbogomol.wizards_reborn.api.monogram.Monograms;
+import mod.maxbogomol.wizards_reborn.api.skin.Skin;
+import mod.maxbogomol.wizards_reborn.api.skin.Skins;
 import mod.maxbogomol.wizards_reborn.api.spell.Spell;
 import mod.maxbogomol.wizards_reborn.api.spell.Spells;
 import mod.maxbogomol.wizards_reborn.client.arcanemicon.ArcanemiconChapters;
@@ -68,6 +70,9 @@ import mod.maxbogomol.wizards_reborn.common.proxy.ClientProxy;
 import mod.maxbogomol.wizards_reborn.common.proxy.ISidedProxy;
 import mod.maxbogomol.wizards_reborn.common.proxy.ServerProxy;
 import mod.maxbogomol.wizards_reborn.common.recipe.*;
+import mod.maxbogomol.wizards_reborn.common.skin.ImplosionSkin;
+import mod.maxbogomol.wizards_reborn.common.skin.SoulHunterSkin;
+import mod.maxbogomol.wizards_reborn.common.skin.TopHatSkin;
 import mod.maxbogomol.wizards_reborn.common.spell.aura.*;
 import mod.maxbogomol.wizards_reborn.common.spell.block.*;
 import mod.maxbogomol.wizards_reborn.common.spell.charge.*;
@@ -598,7 +603,12 @@ public class WizardsReborn {
     public static Spell BOOM_SOUND_SPELL = new BoomSoundSpell(MOD_ID+":boom_sound", 0);
     public static Spell MOAI_SOUND_SPELL = new MoaiSoundSpell(MOD_ID+":moai_sound", 0);
 
-    //ARCANE ENCHANTMENT
+    //SKINS
+    public static Skin TOP_HAT_SKIN = new TopHatSkin(MOD_ID+":top_hat", new Color(54, 60, 81));
+    public static Skin SOUL_HUNTER_SKIN = new SoulHunterSkin(MOD_ID+":soul_hunter", new Color(225, 99, 226));
+    public static Skin IMPLOSION_SKIN = new ImplosionSkin(MOD_ID+":implosion", new Color(149, 237, 255));
+
+    //ARCANE ENCHANTMENTS
     public static ArcaneEnchantment WISSEN_MENDING_ARCANE_ENCHANTMENT = new WissenMendingArcaneEnchantment(MOD_ID+":wissen_mending", 3);
     public static ArcaneEnchantment MAGIC_BLADE_ARCANE_ENCHANTMENT = new MagicBladeArcaneEnchantment(MOD_ID+":magic_blade", 5);
     public static ArcaneEnchantment LIFE_ROOTS_ARCANE_ENCHANTMENT = new LifeRootsArcaneEnchantment(MOD_ID+":life_roots", 2);
@@ -1300,6 +1310,13 @@ public class WizardsReborn {
     public static final RegistryObject<Item> MUSIC_DISC_SHIMMER = ITEMS.register("music_disc_shimmer", () -> new RecordItem(6, MUSIC_DISC_SHIMMER_SOUND.get(), new Item.Properties().stacksTo(1).rarity(Rarity.RARE), 234));
     public static final RegistryObject<Item> MUSIC_DISC_PANACHE = ITEMS.register("music_disc_panache", () -> new RecordItem(6, MUSIC_DISC_PANACHE_SOUND.get(), new Item.Properties().stacksTo(1).rarity(Rarity.RARE), 91));
 
+    public static final RegistryObject<Item> ARCANE_WOOD_TRIM = ITEMS.register("arcane_wood_trim", () -> new Item(new Item.Properties()));
+    public static final RegistryObject<Item> WISESTONE_TRIM = ITEMS.register("wisestone_trim", () -> new Item(new Item.Properties()));
+    public static final RegistryObject<Item> INNOCENT_WOOD_TRIM = ITEMS.register("innocent_wood_trim", () -> new Item(new Item.Properties()));
+    public static final RegistryObject<Item> TOP_HAT_TRIM = ITEMS.register("top_hat_trim", () -> new SkinTrimItem(new Item.Properties(), TOP_HAT_SKIN));
+    public static final RegistryObject<Item> SOUL_HUNTER_TRIM = ITEMS.register("soul_hunter_trim", () -> new SkinTrimItem(new Item.Properties(), SOUL_HUNTER_SKIN));
+    public static final RegistryObject<Item> IMPLOSION_TRIM = ITEMS.register("implosion_trim", () -> new SkinTrimItem(new Item.Properties(), IMPLOSION_SKIN));
+
     //TILE_ENTITIES
     public static final RegistryObject<BlockEntityType<CustomSignTileEntity>> SIGN_TILE_ENTITY = TILE_ENTITIES.register("sign", () -> BlockEntityType.Builder.of(CustomSignTileEntity::new,
             ARCANE_WOOD_SIGN.get(), ARCANE_WOOD_WALL_SIGN.get(),
@@ -1700,6 +1717,7 @@ public class WizardsReborn {
         setupCrystals();
         setupMonograms();
         setupSpells();
+        setupSkins();
         setupArcaneEnchantments();
         setupCrystalRituals();
 
@@ -1984,6 +2002,12 @@ public class WizardsReborn {
         PIPE_SOUND_SPELL.addAllCrystalType();
         BOOM_SOUND_SPELL.addAllCrystalType();
         MOAI_SOUND_SPELL.addAllCrystalType();
+    }
+
+    public static void setupSkins() {
+        Skins.register(TOP_HAT_SKIN);
+        Skins.register(SOUL_HUNTER_SKIN);
+        Skins.register(IMPLOSION_SKIN);
     }
 
     public static void setupArcaneEnchantments() {

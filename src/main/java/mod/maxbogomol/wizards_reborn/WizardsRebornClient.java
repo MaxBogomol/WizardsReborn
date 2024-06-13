@@ -5,6 +5,8 @@ import com.mojang.blaze3d.vertex.DefaultVertexFormat;
 import mod.maxbogomol.wizards_reborn.client.config.ClientConfig;
 import mod.maxbogomol.wizards_reborn.client.model.armor.ArcaneFortressArmorModel;
 import mod.maxbogomol.wizards_reborn.client.model.armor.InventorWizardArmorModel;
+import mod.maxbogomol.wizards_reborn.client.model.armor.SoulHunterArmorModel;
+import mod.maxbogomol.wizards_reborn.client.model.armor.TopHatArmorModel;
 import mod.maxbogomol.wizards_reborn.client.model.curio.*;
 import mod.maxbogomol.wizards_reborn.client.particle.*;
 import mod.maxbogomol.wizards_reborn.client.render.block.PipeModel;
@@ -67,8 +69,14 @@ public class WizardsRebornClient {
     public static final ModelLayerLocation INVENTOR_WIZARD_ARMOR_LAYER = new ModelLayerLocation(new ResourceLocation(WizardsReborn.MOD_ID, "inventor_wizard_armor"), "main");
     public static final ModelLayerLocation ARCANE_FORTRESS_ARMOR_LAYER = new ModelLayerLocation(new ResourceLocation(WizardsReborn.MOD_ID, "arcane_fortress_armor"), "main");
 
+    public static final ModelLayerLocation TOP_HAT_ARMOR_LAYER = new ModelLayerLocation(new ResourceLocation(WizardsReborn.MOD_ID, "top_hat_armor"), "main");
+    public static final ModelLayerLocation SOUL_HUNTER_ARMOR_LAYER = new ModelLayerLocation(new ResourceLocation(WizardsReborn.MOD_ID, "soul_hunter_armor"), "main");
+
     public static InventorWizardArmorModel INVENTOR_WIZARD_ARMOR_MODEL = null;
     public static ArcaneFortressArmorModel ARCANE_FORTRESS_ARMOR_MODEL = null;
+
+    public static TopHatArmorModel TOP_HAT_ARMOR_MODEL = null;
+    public static SoulHunterArmorModel SOUL_HUNTER_ARMOR_MODEL = null;
 
     public static ModelResourceLocation JEWELER_TABLE_STONE_MODEl = new ModelResourceLocation(WizardsReborn.MOD_ID, "jeweler_table_stone", "");
     public static ModelResourceLocation ALTAR_OF_DROUGHT_FRAME_MODEl = new ModelResourceLocation(WizardsReborn.MOD_ID, "altar_of_drought_frame", "");
@@ -251,6 +259,10 @@ public class WizardsRebornClient {
 
         @SubscribeEvent
         public static void onModelRegistryEvent(ModelEvent.RegisterAdditional event) {
+            WandCrystalsModels.addWand(WizardsReborn.ARCANE_WAND.getId().toString());
+            WandCrystalsModels.addWand(WizardsReborn.MOD_ID+":skin/soul_hunter_arcane_wand");
+            WandCrystalsModels.addWand(WizardsReborn.MOD_ID+":skin/implosion_arcane_wand");
+
             for (String crystal : WandCrystalsModels.getCrystals()) {
                 event.register(WandCrystalsModels.getModelLocationCrystal(crystal));
             }
@@ -263,6 +275,25 @@ public class WizardsRebornClient {
 
             for (String skin : LeatherCollarItem.skins.values()) {
                 event.register(new ModelResourceLocation(new ResourceLocation(WizardsReborn.MOD_ID, "collar/" + skin), "inventory"));
+            }
+
+            ItemSkinsModels.addSkin(WizardsReborn.MOD_ID+":top_hat");
+            ItemSkinsModels.addSkin(WizardsReborn.MOD_ID+":soul_hunter_hood");
+            ItemSkinsModels.addSkin(WizardsReborn.MOD_ID+":soul_hunter_costume");
+            ItemSkinsModels.addSkin(WizardsReborn.MOD_ID+":soul_hunter_trousers");
+            ItemSkinsModels.addSkin(WizardsReborn.MOD_ID+":soul_hunter_boots");
+            ItemSkinsModels.addSkin(WizardsReborn.MOD_ID+":soul_hunter_scythe");
+            ItemSkinsModels.addSkin(WizardsReborn.MOD_ID+":soul_hunter_arcane_wand");
+            ItemSkinsModels.addSkin(WizardsReborn.MOD_ID+":implosion_sword");
+            ItemSkinsModels.addSkin(WizardsReborn.MOD_ID+":implosion_pickaxe");
+            ItemSkinsModels.addSkin(WizardsReborn.MOD_ID+":implosion_axe");
+            ItemSkinsModels.addSkin(WizardsReborn.MOD_ID+":implosion_shovel");
+            ItemSkinsModels.addSkin(WizardsReborn.MOD_ID+":implosion_hoe");
+            ItemSkinsModels.addSkin(WizardsReborn.MOD_ID+":implosion_scythe");
+            ItemSkinsModels.addSkin(WizardsReborn.MOD_ID+":implosion_arcane_wand");
+
+            for (String skin : ItemSkinsModels.getSkins()) {
+                event.register(ItemSkinsModels.getModelLocationSkin(skin));
             }
 
             event.register(JEWELER_TABLE_STONE_MODEl);
@@ -301,28 +332,50 @@ public class WizardsRebornClient {
         @SubscribeEvent
         public static void onModelBakeEvent(ModelEvent.ModifyBakingResult event) {
             Map<ResourceLocation, BakedModel> map = event.getModels();
-            BakedModel existingModel = map.get(new ModelResourceLocation(WizardsReborn.ARCANE_WAND.getId(), "inventory"));
 
-            for (String crystal : WandCrystalsModels.getCrystals()) {
-                BakedModel model = map.get(WandCrystalsModels.getModelLocationCrystal(crystal));
-                WandCrystalsModels.addModelCrystals(crystal, model);
-                model = new CustomFinalisedModel(existingModel, WandCrystalsModels.getModelCrystals(crystal));
-                WandCrystalsModels.addModel(crystal, model);
-            }
-            CustomModel customModel = new CustomModel(existingModel, new WandModelOverrideList());
-            map.replace(new ModelResourceLocation(WizardsReborn.ARCANE_WAND.getId(), "inventory"), customModel);
+            WandCrystalsModels.addWandItem(map, WizardsReborn.ARCANE_WAND.getId());
+            WandCrystalsModels.addWandItem(map, new ResourceLocation(WizardsReborn.MOD_ID, "skin/soul_hunter_arcane_wand"));
+            WandCrystalsModels.addWandItem(map, new ResourceLocation(WizardsReborn.MOD_ID, "skin/implosion_arcane_wand"));
 
             if (ClientConfig.LARGE_ITEM_MODEL.get()) {
                 Item2DRenderer.onModelBakeEvent(event);
             }
 
             for (String skin : LeatherCollarItem.skins.keySet()) {
-                BakedModel model = map.get( new ModelResourceLocation(new ResourceLocation(WizardsReborn.MOD_ID, "collar/" + LeatherCollarItem.skins.get(skin)), "inventory"));
+                BakedModel model = map.get(new ModelResourceLocation(new ResourceLocation(WizardsReborn.MOD_ID, "collar/" + LeatherCollarItem.skins.get(skin)), "inventory"));
                 CollarModelOverrideList.skins.put(skin, model);
             }
             BakedModel collarModel = map.get(new ModelResourceLocation(WizardsReborn.LEATHER_COLLAR.getId(), "inventory"));
             CustomModel collarNewModel = new CustomModel(collarModel, new CollarModelOverrideList());
             map.replace(new ModelResourceLocation(WizardsReborn.LEATHER_COLLAR.getId(), "inventory"), collarNewModel);
+
+            for (String skin : ItemSkinsModels.getSkins()) {
+                BakedModel model = map.get(ItemSkinsModels.getModelLocationSkin(skin));
+                ItemSkinsModels.addModelSkins(skin, model);
+            }
+
+            addSkinModel(map, WizardsReborn.ARCANE_WOOD_SWORD.getId());
+            addSkinModel(map, WizardsReborn.INNOCENT_WOOD_SWORD.getId());
+            addSkinModel(map, WizardsReborn.ARCANE_GOLD_SWORD.getId());
+            addSkinModel(map, WizardsReborn.ARCANE_WOOD_PICKAXE.getId());
+            addSkinModel(map, WizardsReborn.INNOCENT_WOOD_PICKAXE.getId());
+            addSkinModel(map, WizardsReborn.ARCANE_GOLD_PICKAXE.getId());
+            addSkinModel(map, WizardsReborn.ARCANE_WOOD_AXE.getId());
+            addSkinModel(map, WizardsReborn.INNOCENT_WOOD_AXE.getId());
+            addSkinModel(map, WizardsReborn.ARCANE_GOLD_AXE.getId());
+            addSkinModel(map, WizardsReborn.ARCANE_WOOD_SHOVEL.getId());
+            addSkinModel(map, WizardsReborn.INNOCENT_WOOD_SHOVEL.getId());
+            addSkinModel(map, WizardsReborn.ARCANE_GOLD_SHOVEL.getId());
+            addSkinModel(map, WizardsReborn.ARCANE_WOOD_HOE.getId());
+            addSkinModel(map, WizardsReborn.INNOCENT_WOOD_HOE.getId());
+            addSkinModel(map, WizardsReborn.ARCANE_GOLD_HOE.getId());
+            Item2DRenderer.bakeModel(map, WizardsReborn.MOD_ID, "arcane_wood_scythe", new SkinModelOverrideList());
+            Item2DRenderer.bakeModel(map, WizardsReborn.MOD_ID, "innocent_wood_scythe", new SkinModelOverrideList());
+            Item2DRenderer.bakeModel(map, WizardsReborn.MOD_ID, "arcane_gold_scythe", new SkinModelOverrideList());
+            addSkinModel(map, WizardsReborn.INVENTOR_WIZARD_HAT.getId());
+            addSkinModel(map, WizardsReborn.INVENTOR_WIZARD_COSTUME.getId());
+            addSkinModel(map, WizardsReborn.INVENTOR_WIZARD_TROUSERS.getId());
+            addSkinModel(map, WizardsReborn.INVENTOR_WIZARD_BOOTS.getId());
 
             fluidPipe = new PipeModel(map.get(FLUID_CENTER), "fluid_pipe");
             steamPipe = new PipeModel(map.get(STEAM_CENTER), "steam_pipe");
@@ -428,12 +481,18 @@ public class WizardsRebornClient {
 
             event.registerLayerDefinition(INVENTOR_WIZARD_ARMOR_LAYER, InventorWizardArmorModel::createBodyLayer);
             event.registerLayerDefinition(ARCANE_FORTRESS_ARMOR_LAYER, ArcaneFortressArmorModel::createBodyLayer);
+
+            event.registerLayerDefinition(TOP_HAT_ARMOR_LAYER, TopHatArmorModel::createBodyLayer);
+            event.registerLayerDefinition(SOUL_HUNTER_ARMOR_LAYER, SoulHunterArmorModel::createBodyLayer);
         }
 
         @SubscribeEvent
         public static void onRegisterLayers(EntityRenderersEvent.AddLayers event) {
             INVENTOR_WIZARD_ARMOR_MODEL = new InventorWizardArmorModel(event.getEntityModels().bakeLayer(INVENTOR_WIZARD_ARMOR_LAYER));
             ARCANE_FORTRESS_ARMOR_MODEL = new ArcaneFortressArmorModel(event.getEntityModels().bakeLayer(ARCANE_FORTRESS_ARMOR_LAYER));
+
+            TOP_HAT_ARMOR_MODEL = new TopHatArmorModel(event.getEntityModels().bakeLayer(TOP_HAT_ARMOR_LAYER));
+            SOUL_HUNTER_ARMOR_MODEL = new SoulHunterArmorModel(event.getEntityModels().bakeLayer(SOUL_HUNTER_ARMOR_LAYER));
         }
 
         @SubscribeEvent
@@ -492,5 +551,11 @@ public class WizardsRebornClient {
         for (PipeModel model : pipes) {
             model.init(manager);
         }
+    }
+
+    public static void addSkinModel(Map<ResourceLocation, BakedModel> map, ResourceLocation id) {
+        BakedModel model = map.get(new ModelResourceLocation(id, "inventory"));
+        CustomModel newModel = new CustomModel(model, new SkinModelOverrideList());
+        map.replace(new ModelResourceLocation(id, "inventory"), newModel);
     }
 }

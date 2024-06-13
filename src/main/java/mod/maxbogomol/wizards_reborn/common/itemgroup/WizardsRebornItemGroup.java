@@ -461,6 +461,13 @@ public class WizardsRebornItemGroup {
             event.accept(WizardsReborn.MUSIC_DISC_SHIMMER);
             event.accept(WizardsReborn.MUSIC_DISC_PANACHE);
 
+            event.accept(WizardsReborn.ARCANE_WOOD_TRIM);
+            event.accept(WizardsReborn.WISESTONE_TRIM);
+            event.accept(WizardsReborn.INNOCENT_WOOD_TRIM);
+            event.accept(WizardsReborn.TOP_HAT_TRIM);
+            event.accept(WizardsReborn.SOUL_HUNTER_TRIM);
+            event.accept(WizardsReborn.IMPLOSION_TRIM);
+
             for (AlchemyPotion potion : AlchemyPotions.getAlchemyPotions()) {
                 if (potion != RegisterAlchemyPotions.EMPTY && potion != RegisterAlchemyPotions.COMBINED) {
                     ItemStack stack = new ItemStack(WizardsReborn.ALCHEMY_VIAL_POTION.get());

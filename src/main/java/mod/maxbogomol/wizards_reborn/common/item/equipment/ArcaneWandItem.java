@@ -8,6 +8,7 @@ import mod.maxbogomol.wizards_reborn.WizardsRebornClient;
 import mod.maxbogomol.wizards_reborn.api.crystal.CrystalStat;
 import mod.maxbogomol.wizards_reborn.api.crystal.CrystalType;
 import mod.maxbogomol.wizards_reborn.api.knowledge.KnowledgeUtils;
+import mod.maxbogomol.wizards_reborn.api.skin.Skin;
 import mod.maxbogomol.wizards_reborn.api.spell.Spell;
 import mod.maxbogomol.wizards_reborn.api.spell.Spells;
 import mod.maxbogomol.wizards_reborn.api.wissen.IWissenItem;
@@ -15,7 +16,6 @@ import mod.maxbogomol.wizards_reborn.api.wissen.WissenItemType;
 import mod.maxbogomol.wizards_reborn.api.wissen.WissenItemUtils;
 import mod.maxbogomol.wizards_reborn.client.animation.ItemAnimation;
 import mod.maxbogomol.wizards_reborn.client.config.ClientConfig;
-import mod.maxbogomol.wizards_reborn.client.render.WorldRenderHandler;
 import mod.maxbogomol.wizards_reborn.common.item.CrystalItem;
 import mod.maxbogomol.wizards_reborn.common.item.ICustomAnimationItem;
 import mod.maxbogomol.wizards_reborn.common.item.IGuiParticleItem;
@@ -318,6 +318,9 @@ public class ArcaneWandItem extends Item implements IWissenItem, ICustomAnimatio
     @OnlyIn(Dist.CLIENT)
     @Override
     public void appendHoverText(ItemStack stack, Level world, List<Component> list, TooltipFlag flags) {
+        Skin skin = Skin.getSkinFromItem(stack);
+        if (skin != null) list.add(skin.getSkinComponent());
+
         if (ClientConfig.NUMERICAL_WISSEN.get()) {
             WissenItemUtils.existWissen(stack);
             list.add(NumericalUtils.getWissenName(WissenItemUtils.getWissen(stack), getMaxWissen()).copy().withStyle(ChatFormatting.GRAY));

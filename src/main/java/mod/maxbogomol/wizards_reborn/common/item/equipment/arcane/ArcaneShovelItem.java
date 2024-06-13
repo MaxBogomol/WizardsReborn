@@ -2,6 +2,7 @@ package mod.maxbogomol.wizards_reborn.common.item.equipment.arcane;
 
 import mod.maxbogomol.wizards_reborn.api.arcaneenchantment.ArcaneEnchantmentUtils;
 import mod.maxbogomol.wizards_reborn.api.arcaneenchantment.IArcaneItem;
+import mod.maxbogomol.wizards_reborn.api.skin.Skin;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
@@ -21,6 +22,8 @@ public class ArcaneShovelItem extends ShovelItem implements IArcaneItem {
     @OnlyIn(Dist.CLIENT)
     @Override
     public void appendHoverText(ItemStack stack, Level world, List<Component> list, TooltipFlag flags) {
+        Skin skin = Skin.getSkinFromItem(stack);
+        if (skin != null) list.add(skin.getSkinComponent());
         list.addAll(ArcaneEnchantmentUtils.appendHoverText(stack, world, flags));
     }
 

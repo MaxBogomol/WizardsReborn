@@ -2,6 +2,7 @@ package mod.maxbogomol.wizards_reborn.common.item.equipment.arcane;
 
 import mod.maxbogomol.wizards_reborn.api.arcaneenchantment.ArcaneEnchantmentUtils;
 import mod.maxbogomol.wizards_reborn.api.arcaneenchantment.IArcaneItem;
+import mod.maxbogomol.wizards_reborn.api.skin.Skin;
 import net.minecraft.ChatFormatting;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.screens.Screen;
@@ -72,6 +73,9 @@ public class ArcaneArmorItem extends ArmorItem implements IArcaneItem {
     @OnlyIn(Dist.CLIENT)
     @Override
     public void appendHoverText(ItemStack stack, Level world, List<Component> list, TooltipFlag flags) {
+        Skin skin = Skin.getSkinFromItem(stack);
+        if (skin != null) list.add(skin.getSkinComponent());
+
         if (hasArmorSet()) {
             Player player = Minecraft.getInstance().player;
             list.add(Component.empty());

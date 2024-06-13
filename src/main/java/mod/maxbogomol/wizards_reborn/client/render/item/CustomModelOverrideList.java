@@ -16,8 +16,7 @@ public class CustomModelOverrideList extends ItemOverrides {
     }
 
     @Override
-    public BakedModel resolve(BakedModel originalModel, ItemStack stack, @Nullable ClientLevel world, @Nullable LivingEntity entity, int pSeed)
-    {
+    public BakedModel resolve(BakedModel originalModel, ItemStack stack, @Nullable ClientLevel world, @Nullable LivingEntity entity, int pSeed) {
         return originalModel;
     }
 }

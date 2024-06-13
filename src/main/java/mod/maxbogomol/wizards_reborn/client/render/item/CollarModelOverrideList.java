@@ -14,8 +14,7 @@ public class CollarModelOverrideList extends CustomModelOverrideList {
     public static Map<String, BakedModel> skins = new HashMap<>();
 
     @Override
-    public BakedModel resolve(BakedModel originalModel, ItemStack stack, @Nullable ClientLevel world, @Nullable LivingEntity entity, int pSeed)
-    {
+    public BakedModel resolve(BakedModel originalModel, ItemStack stack, @Nullable ClientLevel world, @Nullable LivingEntity entity, int pSeed) {
         String skin = LeatherCollarItem.getSkin(stack);
         if (skin != null) {
             return skins.get(skin);

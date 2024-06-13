@@ -77,7 +77,7 @@ public class LeatherCollarItem extends BaseCurioItem implements ICurioItemTextur
 
         String name1 = "lore.wizards_reborn.leather_collar.0";
         String name2 = "lore.wizards_reborn.leather_collar.1";
-        String hearts = "❤ ❤ ❤";
+        String hearts = "lore.wizards_reborn.leather_collar.2";
 
         double ticks = (ClientTickHandler.ticksInGame + Minecraft.getInstance().getPartialTick()) * 0.05f;
         float ticksF = (ClientTickHandler.ticksInGame + Minecraft.getInstance().getPartialTick()) * 2f;
@@ -112,7 +112,7 @@ public class LeatherCollarItem extends BaseCurioItem implements ICurioItemTextur
         String skin = LeatherCollarItem.getSkin(stack);
         if (skin != null) {
             list.add(Component.literal(skin).withStyle(Style.EMPTY.withColor(ColorUtils.packColor(255, 255, 173, 186)))
-                    .append(" ").append(Component.literal(hearts).withStyle(ChatFormatting.RED)));
+                    .append(" ").append(Component.translatable(hearts).withStyle(ChatFormatting.RED)));
         }
     }
 

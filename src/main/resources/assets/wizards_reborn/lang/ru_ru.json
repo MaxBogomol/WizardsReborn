@@ -401,12 +401,6 @@
   "item.wizards_reborn.inventor_wizard_trousers": "Штаны мага-изобретателя",
   "item.wizards_reborn.inventor_wizard_boots": "Ботинки мага-изобретателя",
 
-  "item.wizards_reborn.music_disc_arcanum": "Аркановая пластинка",
-  "item.wizards_reborn.music_disc_mor": "Аркановая пластинка",
-  "item.wizards_reborn.music_disc_reborn": "Аркановая пластинка",
-  "item.wizards_reborn.music_disc_shimmer": "Аркановая пластинка",
-  "item.wizards_reborn.music_disc_panache": "Аркановая кассета",
-
   "item.wizards_reborn.arcane_wood_smoking_pipe": "Арканово-древесная курительная трубка",
   "item.wizards_reborn.arcane_wood_cane": "Арканово-древесная трость",
   "item.wizards_reborn.arcane_wood_bow": "Арканово-древесный лук",
@@ -421,19 +415,25 @@
   "item.wizards_reborn.creative_spell_scroll": "Креативный свиток заклинаний",
   "item.wizards_reborn.creative_spell_ancient_scroll": "Креативный древний свиток заклинаний",
 
-  "key.category.wizards_reborn.general": "Wizard's Reborn",
-  "key.wizards_reborn.selection_menu": "Меню выбора",
-  "key.wizards_reborn.bag_menu": "Меню сумок",
-  "key.wizards_reborn.next_spell": "Следующее заклинание",
-  "key.wizards_reborn.previous_spell": "Предыдущее заклинание",
-  "key.wizards_reborn.spell_sets_toggle": "Переключение наборов заклинаний",
-
   "item.wizards_reborn.violence_banner_pattern": "Узор флага",
   "item.wizards_reborn.reproduction_banner_pattern": "Узор флага",
   "item.wizards_reborn.cooperation_banner_pattern": "Узор флага",
   "item.wizards_reborn.hunger_banner_pattern": "Узор флага",
   "item.wizards_reborn.survival_banner_pattern": "Узор флага",
   "item.wizards_reborn.elevation_banner_pattern": "Узор флага",
+
+  "item.wizards_reborn.music_disc_arcanum": "Аркановая пластинка",
+  "item.wizards_reborn.music_disc_mor": "Аркановая пластинка",
+  "item.wizards_reborn.music_disc_reborn": "Аркановая пластинка",
+  "item.wizards_reborn.music_disc_shimmer": "Аркановая пластинка",
+  "item.wizards_reborn.music_disc_panache": "Аркановая кассета",
+
+  "item.wizards_reborn.arcane_wood_trim": "Арканово-древесная отделка",
+  "item.wizards_reborn.wisestone_trim": "Мудро-каменная отделка",
+  "item.wizards_reborn.innocent_wood_trim": "Невинно-древесная отделка",
+  "item.wizards_reborn.top_hat_trim": "Арканово-древесная отделка",
+  "item.wizards_reborn.soul_hunter_trim": "Мудро-каменная отделка",
+  "item.wizards_reborn.implosion_trim": "Мудро-каменная отделка",
 
   "item.wizards_reborn.mundane_brew_bucket": "Ведро мутного варева",
   "item.wizards_reborn.alchemy_oil_bucket": "Ведро алхимического масла",
@@ -464,6 +464,7 @@
 
   "lore.wizards_reborn.leather_collar.0": "Мяу :3",
   "lore.wizards_reborn.leather_collar.1": "Мррр~~",
+  "lore.wizards_reborn.leather_collar.2": "❤ ❤ ❤",
 
   "lore.wizards_reborn.inventor_wizard_armor": "Виссен природа",
   "lore.wizards_reborn.arcane_fortress_armor": "Аркановый бастион",
@@ -477,6 +478,7 @@
   "lore.wizards_reborn.survival_banner_pattern": "Убей или будь убитым!",
   "lore.wizards_reborn.elevation_banner_pattern": "Отбрось всё... Очисти свою душу...",
 
+  "lore.wizards_reborn.skin": "Облик:",
   "lore.wizards_reborn.arcane_enchantments": "Аркановые зачарования:",
 
   "trim_material.wizards_reborn.arcane_gold": "Аркановый золотой материал",
@@ -718,6 +720,13 @@
   "commands.wizards_reborn.remove_wissen.multiple": "Удалено значение виссена%s на предмет у %s игроков",
   "commands.wizards_reborn.remove_wissen.single": "Удалено значение виссена %s на предмет %s",
 
+  "key.category.wizards_reborn.general": "Wizard's Reborn",
+  "key.wizards_reborn.selection_menu": "Меню выбора",
+  "key.wizards_reborn.bag_menu": "Меню сумок",
+  "key.wizards_reborn.next_spell": "Следующее заклинание",
+  "key.wizards_reborn.previous_spell": "Предыдущее заклинание",
+  "key.wizards_reborn.spell_sets_toggle": "Переключение наборов заклинаний",
+
   "death.attack.arcane_magic": "%s умер от аркановой магии",
   "death.attack.arcane_magic.player": "%s умер от аркановой магии с помощью %s",
   "death.attack.ritual": "%s умер во время ритуала",
@@ -842,6 +851,10 @@
   "monogram.wizards_reborn.evolutionis.lore": "Эволюция",
   "monogram.wizards_reborn.tenebris.lore": "Тьма",
   "monogram.wizards_reborn.universum.lore": "Вселенная",
+
+  "skin.wizards_reborn.top_hat": "Цилиндр",
+  "skin.wizards_reborn.soul_hunter": "Охотник за душами",
+  "skin.wizards_reborn.implosion": "Имплозия",
 
   "arcane_enchantment.wizards_reborn.wissen_mending": "Виссен починка",
   "arcane_enchantment.wizards_reborn.magic_blade": "Магическое лезвие",

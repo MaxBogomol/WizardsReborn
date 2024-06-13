@@ -1,0 +1,6 @@
+{
+  "parent": "item/handheld",
+  "textures": {
+    "layer0": "wizards_reborn:item/skin/soul_hunter_arcane_wand"
+  }
+}

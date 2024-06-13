@@ -1,10 +1,12 @@
 package mod.maxbogomol.wizards_reborn.common.tileentity;
 
 import mod.maxbogomol.wizards_reborn.WizardsReborn;
+import mod.maxbogomol.wizards_reborn.api.skin.Skin;
 import mod.maxbogomol.wizards_reborn.api.wissen.*;
 import mod.maxbogomol.wizards_reborn.client.particle.Particles;
 import mod.maxbogomol.wizards_reborn.common.config.Config;
 import mod.maxbogomol.wizards_reborn.common.item.CrystalItem;
+import mod.maxbogomol.wizards_reborn.common.item.SkinTrimItem;
 import mod.maxbogomol.wizards_reborn.common.network.PacketHandler;
 import mod.maxbogomol.wizards_reborn.common.network.tileentity.JewelerTableBurstEffectPacket;
 import mod.maxbogomol.wizards_reborn.common.recipe.JewelerTableRecipe;
@@ -81,6 +83,9 @@ public class JewelerTableTileEntity extends BlockEntity implements TickableBlock
             Optional<JewelerTableRecipe> recipe = level.getRecipeManager().getRecipeFor(WizardsReborn.JEWELER_TABLE_RECIPE.get(), inv, level);
             wissenInCraft = recipe.map(JewelerTableRecipe::getRecipeWissen).orElse(0);
 
+            Skin skin = getSkin();
+            if (skin != null) wissenInCraft = 250;
+
             if (wissenInCraft <= 0 && (wissenIsCraft > 0 || startCraft)) {
                 wissenIsCraft = 0;
                 startCraft = false;
@@ -89,9 +94,10 @@ public class JewelerTableTileEntity extends BlockEntity implements TickableBlock
             }
 
             if ((wissenInCraft > 0) && (wissen > 0) && (startCraft)) {
-                ItemStack output = recipe.get().getResultItem(RegistryAccess.EMPTY);
+                ItemStack output = ItemStack.EMPTY;
+                if (recipe.isPresent()) output = recipe.get().getResultItem(RegistryAccess.EMPTY);
 
-                if (isCanCraft(inv, output)) {
+                if (isCanCraft(inv, output) || skin != null) {
                     int addRemainCraft = WissenUtils.getAddWissenRemain(wissenIsCraft, getWissenPerTick(), wissenInCraft);
                     int removeRemain = WissenUtils.getRemoveWissenRemain(getWissen(), getWissenPerTick() - addRemainCraft);
 
@@ -108,39 +114,77 @@ public class JewelerTableTileEntity extends BlockEntity implements TickableBlock
 
             if (wissenInCraft > 0 && startCraft) {
                 if (wissenInCraft <= wissenIsCraft) {
-                    ItemStack output = recipe.get().getResultItem(RegistryAccess.EMPTY).copy();
+                    boolean particles = false;
+                    if (recipe.isPresent()) {
+                        ItemStack output = recipe.get().getResultItem(RegistryAccess.EMPTY).copy();
 
-                    if (isCanCraft(inv, output)) {
-                        wissenInCraft = 0;
-                        wissenIsCraft = 0;
-                        startCraft = false;
+                        if (isCanCraft(inv, output)) {
+                            wissenInCraft = 0;
+                            wissenIsCraft = 0;
+                            startCraft = false;
 
-                        output.setCount(itemOutputHandler.getStackInSlot(0).getCount() + output.getCount());
-                        if (recipe.get().getRecipeIsSaveNBT()) {
+                            output.setCount(itemOutputHandler.getStackInSlot(0).getCount() + output.getCount());
+                            if (recipe.get().getRecipeIsSaveNBT()) {
+                                output.setTag(itemHandler.getStackInSlot(0).getOrCreateTag());
+                            }
+
+                            itemOutputHandler.setStackInSlot(0, output);
+
+                            for (int i = 0; i < 2; i++) {
+                                itemHandler.extractItem(i, 1, false);
+                            }
+
+                            update = true;
+                            particles = true;
+                        }
+                    } else {
+                        if (skin != null) {
+                            wissenInCraft = 0;
+                            wissenIsCraft = 0;
+                            startCraft = false;
+
+                            ItemStack output = itemHandler.getStackInSlot(0).copy();
+
+                            output.setCount(itemOutputHandler.getStackInSlot(0).getCount() + output.getCount());
                             output.setTag(itemHandler.getStackInSlot(0).getOrCreateTag());
+                            skin.applyOnItem(output);
+
+                            itemOutputHandler.setStackInSlot(0, output);
+
+                            for (int i = 0; i < 2; i++) {
+                                itemHandler.extractItem(i, 1, false);
+                            }
+
+                            update = true;
+                            particles = true;
                         }
+                    }
 
-                        itemOutputHandler.setStackInSlot(0, output);
-
-                        for (int i = 0; i < 2; i++) {
-                            itemHandler.extractItem(i, 1, false);
-                        }
-
-                        update = true;
-
+                    if (particles) {
                         Vec3 pos = getBlockRotatePos();
                         Vec2 vel = getBlockRotateParticle();
 
-                        if (itemOutputHandler.getStackInSlot(0).getItem() instanceof CrystalItem crystalItem) {
-                            Color color = crystalItem.getType().getColor();
+                        Color color = Color.WHITE;
+                        boolean isColor = false;
+
+                        if (skin != null) {
+                            color = skin.getColor();
+                            isColor = true;
+                        } else if (itemOutputHandler.getStackInSlot(0).getItem() instanceof CrystalItem crystalItem) {
+                            color = crystalItem.getType().getColor();
+                            isColor = true;
+                        }
+
+                        if (isColor) {
                             float r = color.getRed() / 255f;
                             float g = color.getGreen() / 255f;
                             float b = color.getBlue() / 255f;
 
-                            PacketHandler.sendToTracking(level, getBlockPos(), new JewelerTableBurstEffectPacket(getBlockPos(), (float) pos.x(), (float) pos.y(), (float) pos.z(), vel.x , vel.y, r, g, b));
+                            PacketHandler.sendToTracking(level, getBlockPos(), new JewelerTableBurstEffectPacket(getBlockPos(), (float) pos.x(), (float) pos.y(), (float) pos.z(), vel.x, vel.y, r, g, b));
                         } else {
                             PacketHandler.sendToTracking(level, getBlockPos(), new JewelerTableBurstEffectPacket(getBlockPos(), (float) pos.x(), (float) pos.y(), (float) pos.z()));
                         }
+
                         level.playSound(WizardsReborn.proxy.getPlayer(), getBlockPos(), SoundEvents.GRINDSTONE_USE, SoundSource.BLOCKS, 0.5f, (float) (1f + ((random.nextFloat() - 0.5D) / 4)));
                         level.playSound(WizardsReborn.proxy.getPlayer(), getBlockPos(), WizardsReborn.CRYSTAL_BREAK_SOUND.get(), SoundSource.BLOCKS, 1f, (float) (1f + ((random.nextFloat() - 0.5D) / 4)));
                     }
@@ -188,9 +232,19 @@ public class JewelerTableTileEntity extends BlockEntity implements TickableBlock
                 stoneRotate = stoneRotate + stoneSpeed;
                 stoneRotate = stoneRotate % 360;
 
-                if (itemHandler.getStackInSlot(0).getItem() instanceof CrystalItem crystalItem) {
+                Color color = Color.WHITE;
+                boolean isColor = false;
 
-                    Color color = crystalItem.getType().getColor();
+                Skin skin = getSkin();
+                if (skin != null) {
+                    color = skin.getColor();
+                    isColor = true;
+                } else if (itemOutputHandler.getStackInSlot(0).getItem() instanceof CrystalItem crystalItem) {
+                    color = crystalItem.getType().getColor();
+                    isColor = true;
+                }
+
+                if (isColor) {
                     float r = color.getRed() / 255f;
                     float g = color.getGreen() / 255f;
                     float b = color.getBlue() / 255f;
@@ -459,6 +513,8 @@ public class JewelerTableTileEntity extends BlockEntity implements TickableBlock
 
     @Override
     public float getCooldown() {
+        Skin skin = getSkin();
+        if (skin != null) wissenInCraft = 250;
         if (wissenInCraft > 0) {
             return (float) wissenInCraft / wissenIsCraft;
         }
@@ -486,6 +542,25 @@ public class JewelerTableTileEntity extends BlockEntity implements TickableBlock
             list.add(stack);
         }
 
+        Skin skin = getSkin();
+        if (skin != null) list.add(skin.applyOnItem(itemHandler.getStackInSlot(0).copy()));
+
         return list;
+    }
+
+    public Skin getSkin() {
+        if (itemOutputHandler.getStackInSlot(0).isEmpty() && !itemHandler.getStackInSlot(0).isEmpty() && !itemHandler.getStackInSlot(1).isEmpty()) {
+            if (itemHandler.getStackInSlot(1).getItem() instanceof SkinTrimItem trim) {
+                if (trim.getSkin().canApplyOnItem(itemHandler.getStackInSlot(0))) {
+                    Skin skin = Skin.getSkinFromItem(itemHandler.getStackInSlot(0));
+                    if (skin != null) {
+                        if (skin == trim.getSkin()) return null;
+                    }
+
+                    return trim.getSkin();
+                }
+            }
+        }
+        return null;
     }
 }

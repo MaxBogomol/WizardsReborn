@@ -2,7 +2,8 @@ package mod.maxbogomol.wizards_reborn.common.item.equipment;
 
 import mod.maxbogomol.wizards_reborn.WizardsReborn;
 import mod.maxbogomol.wizards_reborn.WizardsRebornClient;
-import mod.maxbogomol.wizards_reborn.client.model.armor.ArcaneFortressArmorModel;
+import mod.maxbogomol.wizards_reborn.api.skin.Skin;
+import mod.maxbogomol.wizards_reborn.client.model.armor.ArmorModel;
 import mod.maxbogomol.wizards_reborn.common.item.equipment.arcane.ArcaneArmorItem;
 import net.minecraft.ChatFormatting;
 import net.minecraft.client.Minecraft;
@@ -39,16 +40,22 @@ public class ArcaneFortressArmorItem extends ArcaneArmorItem implements IForgeIt
     public void initializeClient(java.util.function.Consumer<IClientItemExtensions> consumer) {
         consumer.accept(new IClientItemExtensions() {
             @Override
-            public ArcaneFortressArmorModel getHumanoidArmorModel(LivingEntity entity, ItemStack itemStack, EquipmentSlot armorSlot, HumanoidModel _default) {
+            public ArmorModel getHumanoidArmorModel(LivingEntity entity, ItemStack itemStack, EquipmentSlot armorSlot, HumanoidModel _default) {
                 float pticks = Minecraft.getInstance().getFrameTime();
                 float f = Mth.rotLerp(pticks, entity.yBodyRotO, entity.yBodyRot);
                 float f1 = Mth.rotLerp(pticks, entity.yHeadRotO, entity.yHeadRot);
                 float netHeadYaw = f1 - f;
                 float netHeadPitch = Mth.lerp(pticks, entity.xRotO, entity.getXRot());
-                WizardsRebornClient.ARCANE_FORTRESS_ARMOR_MODEL.slot = type.getSlot();
-                WizardsRebornClient.ARCANE_FORTRESS_ARMOR_MODEL.copyFromDefault(_default);
-                WizardsRebornClient.ARCANE_FORTRESS_ARMOR_MODEL.setupAnim(entity, entity.walkAnimation.position(pticks), entity.walkAnimation.speed(pticks), entity.tickCount + pticks, netHeadYaw, netHeadPitch);
-                return WizardsRebornClient.ARCANE_FORTRESS_ARMOR_MODEL;
+
+                ArmorModel model = WizardsRebornClient.ARCANE_FORTRESS_ARMOR_MODEL;
+
+                Skin skin = Skin.getSkinFromItem(itemStack);
+                if (skin != null) model = skin.getArmorModel(entity, itemStack, armorSlot, _default);
+
+                model.slot = type.getSlot();
+                model.copyFromDefault(_default);
+                model.setupAnim(entity, entity.walkAnimation.position(pticks), entity.walkAnimation.speed(pticks), entity.tickCount + pticks, netHeadYaw, netHeadPitch);
+                return model;
             }
         });
     }
@@ -56,6 +63,8 @@ public class ArcaneFortressArmorItem extends ArcaneArmorItem implements IForgeIt
     @OnlyIn(Dist.CLIENT)
     @Override
     public String getArmorTexture(ItemStack stack, Entity entity, EquipmentSlot slot, String type) {
+        Skin skin = Skin.getSkinFromItem(stack);
+        if (skin != null) return skin.getArmorTexture(stack, entity, slot, type);
         return WizardsReborn.MOD_ID + ":textures/models/armor/arcane_fortress.png";
     }
 

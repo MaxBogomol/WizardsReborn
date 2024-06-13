@@ -1,22 +1,18 @@
 package mod.maxbogomol.wizards_reborn.client.render.item;
 
-import net.minecraft.util.RandomSource;
-import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.client.renderer.texture.TextureAtlasSprite;
-import net.minecraft.core.Direction;
-
-import javax.annotation.Nullable;
-import java.util.List;
-import java.util.Random;
-
 import net.minecraft.client.renderer.block.model.BakedQuad;
 import net.minecraft.client.renderer.block.model.ItemOverrides;
 import net.minecraft.client.renderer.block.model.ItemTransforms;
+import net.minecraft.client.renderer.texture.TextureAtlasSprite;
 import net.minecraft.client.resources.model.BakedModel;
+import net.minecraft.core.Direction;
+import net.minecraft.util.RandomSource;
+import net.minecraft.world.level.block.state.BlockState;
+
+import java.util.List;
 
 public class CustomModel implements BakedModel {
-    public CustomModel(BakedModel i_baseModel, CustomModelOverrideList i_itemOverrideList)
-    {
+    public CustomModel(BakedModel i_baseModel, CustomModelOverrideList i_itemOverrideList) {
         baseModel = i_baseModel;
         itemOverrideList = i_itemOverrideList;
     }
@@ -63,5 +59,4 @@ public class CustomModel implements BakedModel {
 
     private BakedModel baseModel;
     private CustomModelOverrideList itemOverrideList;
-
 }

@@ -27,7 +27,7 @@ public class ArcaneFortressArmorModel extends ArmorModel {
 
         PartDefinition head_armor = head.addOrReplaceChild("head_armor", CubeListBuilder.create().texOffs(0, 0)
                 .addBox(-4.0F, -8.0F, -4.0F, 8.0F, 8.0F, 8.0F, new CubeDeformation(1.02F)), PartPose.ZERO);
-        PartDefinition hea_layerd_armor = head_armor.addOrReplaceChild("hat_layer_edge", CubeListBuilder.create().texOffs(0, 16)
+        PartDefinition head_layer_armor = head_armor.addOrReplaceChild("hat_layer_edge", CubeListBuilder.create().texOffs(0, 16)
                 .addBox(-4.0F, -8.0F, -4.0F, 8.0F, 8.0F, 8.0F, new CubeDeformation(1.22F)), PartPose.ZERO);
 
         PartDefinition body_armor = body.addOrReplaceChild("body_armor", CubeListBuilder.create().texOffs(32, 0)
