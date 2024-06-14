@@ -6,6 +6,7 @@ import mod.maxbogomol.wizards_reborn.api.skin.Skin;
 import mod.maxbogomol.wizards_reborn.client.model.armor.ArmorModel;
 import mod.maxbogomol.wizards_reborn.common.item.equipment.ArcaneWandItem;
 import mod.maxbogomol.wizards_reborn.common.item.equipment.InventorWizardArmorItem;
+import mod.maxbogomol.wizards_reborn.common.item.equipment.WissenWandItem;
 import mod.maxbogomol.wizards_reborn.common.item.equipment.arcane.ArcaneScytheItem;
 import net.minecraft.client.model.HumanoidModel;
 import net.minecraft.world.entity.Entity;
@@ -25,7 +26,8 @@ public class SoulHunterSkin extends Skin {
 
     @Override
     public boolean canApplyOnItem(ItemStack itemStack) {
-        return ((itemStack.getItem() instanceof InventorWizardArmorItem) || (itemStack.getItem() instanceof ArcaneScytheItem) || (itemStack.getItem() instanceof ArcaneWandItem));
+        return ((itemStack.getItem() instanceof InventorWizardArmorItem) || (itemStack.getItem() instanceof ArcaneScytheItem)
+                || (itemStack.getItem() instanceof ArcaneWandItem) || (itemStack.getItem() instanceof WissenWandItem));
     }
 
     @Override
@@ -56,6 +58,9 @@ public class SoulHunterSkin extends Skin {
         }
         if (stack.getItem() instanceof ArcaneWandItem) {
             return WizardsReborn.MOD_ID+":skin/soul_hunter_arcane_wand";
+        }
+        if (stack.getItem() instanceof WissenWandItem) {
+            return WizardsReborn.MOD_ID+":soul_hunter_wissen_wand";
         }
 
         return WizardsReborn.MOD_ID+":soul_hunter_hood";

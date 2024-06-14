@@ -247,6 +247,44 @@ public class ArcanemiconGui extends Screen {
             this.onClose();
             return true;
         }
+        if (this.minecraft.options.keyLeft.matches(keyCode, scanCode)) {
+            if (currentPage > 0) {
+                currentPage -= 2;
+                historyEntries.set(currentHistory - 1, new ChapterHistoryEntry(currentChapter, currentPage));
+                Minecraft.getInstance().player.playNotifySound(SoundEvents.BOOK_PAGE_TURN, SoundSource.NEUTRAL, 1.0f, 1.0f);
+                return true;
+            }
+        }
+        if (this.minecraft.options.keyRight.matches(keyCode, scanCode)) {
+            if (currentPage + 2 < currentChapter.size()) {
+                currentPage += 2;
+                historyEntries.set(currentHistory - 1, new ChapterHistoryEntry(currentChapter, currentPage));
+                Minecraft.getInstance().player.playNotifySound(SoundEvents.BOOK_PAGE_TURN, SoundSource.NEUTRAL, 1.0f, 1.0f);
+                return true;
+            }
+        }
+        if (currentChapter != ArcanemiconChapters.RESEARCH) {
+            if (this.minecraft.options.keyDown.matches(keyCode, scanCode)) {
+                if (currentHistory > 1) {
+                    currentHistory = currentHistory - 1;
+                    currentChapter = historyEntries.get(currentHistory - 1).chapter;
+                    currentPage = historyEntries.get(currentHistory - 1).page;
+
+                    Minecraft.getInstance().player.playNotifySound(SoundEvents.BOOK_PAGE_TURN, SoundSource.NEUTRAL, 1.0f, 1.0f);
+                    return true;
+                }
+            }
+            if (this.minecraft.options.keyUp.matches(keyCode, scanCode)) {
+                if (currentHistory < historyEntries.size()) {
+                    currentHistory = currentHistory + 1;
+                    currentChapter = historyEntries.get(currentHistory - 1).chapter;
+                    currentPage = historyEntries.get(currentHistory - 1).page;
+
+                    Minecraft.getInstance().player.playNotifySound(SoundEvents.BOOK_PAGE_TURN, SoundSource.NEUTRAL, 1.0f, 1.0f);
+                    return true;
+                }
+            }
+        }
 
         return (super.keyPressed(keyCode, scanCode, modifiers));
     }

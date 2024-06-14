@@ -1729,6 +1729,7 @@ public class WizardsReborn {
 
         DistExecutor.unsafeCallWhenOn(Dist.CLIENT, () -> () -> {
             setupWandCrystalsModels();
+            WissenWandItem.setupTooltips();
 
             forgeBus.addListener(ClientTickHandler::clientTickEnd);
             forgeBus.addListener(WorldRenderHandler::onRenderWorldLast);

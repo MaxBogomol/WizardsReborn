@@ -6,6 +6,7 @@ import mod.maxbogomol.wizards_reborn.api.alchemy.IFluidTileEntity;
 import mod.maxbogomol.wizards_reborn.api.alchemy.IHeatTileEntity;
 import mod.maxbogomol.wizards_reborn.api.alchemy.ISteamTileEntity;
 import mod.maxbogomol.wizards_reborn.api.light.ILightTileEntity;
+import mod.maxbogomol.wizards_reborn.api.skin.Skin;
 import mod.maxbogomol.wizards_reborn.api.wissen.*;
 import mod.maxbogomol.wizards_reborn.client.config.ClientConfig;
 import mod.maxbogomol.wizards_reborn.common.tileentity.AlchemyMachineTileEntity;
@@ -37,9 +38,12 @@ import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import org.lwjgl.opengl.GL11;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class WissenWandItem extends Item {
+    public static List<Tooltip> tooltips = new ArrayList<>();
+
     public WissenWandItem(Properties properties) {
         super(properties);
     }
@@ -209,6 +213,9 @@ public class WissenWandItem extends Item {
     @OnlyIn(Dist.CLIENT)
     @Override
     public void appendHoverText(ItemStack stack, Level world, List<Component> list, TooltipFlag flags) {
+        Skin skin = Skin.getSkinFromItem(stack);
+        if (skin != null) list.add(skin.getSkinComponent());
+
         list.add(Component.translatable(getModeString(stack)).withStyle(getModeColor(stack)));
     }
 
@@ -324,215 +331,12 @@ public class WissenWandItem extends Item {
                 HitResult pos = mc.hitResult;
                 if (pos != null) {
                     BlockPos bpos = pos.getType() == HitResult.Type.BLOCK ? ((BlockHitResult) pos).getBlockPos() : null;
-                    BlockEntity tileentity = bpos != null ? mc.level.getBlockEntity(bpos) : null;
 
-                    if (tileentity != null) {
-                        if (tileentity instanceof IItemResultTileEntity tile) {
-                            List<ItemStack> list = tile.getItemsResult();
-                            int i = 0;
-                            for (ItemStack item : list) {
-                                int x = mc.getWindow().getGuiScaledWidth() / 2 - 8 + (i * 16) - ((list.size() - 1) * 8);
-                                int y = mc.getWindow().getGuiScaledHeight() / 2 - 26;
-                                gui.renderItem(item, x, y);
-                                gui.renderItemDecorations(Minecraft.getInstance().font, item, x, y);
-                                i++;
-                            }
-                        }
-
-                        int i = 0;
-                        if (tileentity instanceof IWissenTileEntity wissenTile) {
-                            if (player.isShiftKeyDown() && ClientConfig.NUMERICAL_WISSEN.get()) {
-                                int x = mc.getWindow().getGuiScaledWidth() / 2;
-                                int y = mc.getWindow().getGuiScaledHeight() / 2 + 32 - 10 - 10 + i;
-                                Component wissenName = NumericalUtils.getWissenName(wissenTile.getWissen(), wissenTile.getMaxWissen());
-                                String string = wissenName.getString();
-                                int stringWidth = Minecraft.getInstance().font.width(string);
-
-                                gui.drawString(Minecraft.getInstance().font, string, x - (stringWidth / 2), y, 0xffffff);
-                                i = i + 11;
-                            }
-
-                            int x = mc.getWindow().getGuiScaledWidth() / 2 - (48 / 2);
-                            int y = mc.getWindow().getGuiScaledHeight() / 2 + 32 - 10 - 11 + i;
-
-                            gui.blit(new ResourceLocation(WizardsReborn.MOD_ID + ":textures/gui/wissen_frame.png"), x, y, 0, 0, 48, 10, 64, 64);
-                            int width = 32;
-                            width /= (double) wissenTile.getMaxWissen() / (double) wissenTile.getWissen();
-                            gui.blit(new ResourceLocation(WizardsReborn.MOD_ID + ":textures/gui/wissen_frame.png"), x + 8, y + 1, 0, 10, width, 8, 64, 64);
-                            i = i + 11;
-                        }
-
-                        if (tileentity instanceof ICooldownTileEntity cooldownTile) {
-                            if (player.isShiftKeyDown() && ClientConfig.NUMERICAL_COOLDOWN.get()) {
-                                int x = mc.getWindow().getGuiScaledWidth() / 2;
-                                int y = mc.getWindow().getGuiScaledHeight() / 2 + 32 - 10 - 10 + i;
-
-                                Component cooldownName = NumericalUtils.getCooldownName(cooldownTile.getCooldown());
-                                String string = cooldownName.getString();
-                                int stringWidth = Minecraft.getInstance().font.width(string);
-
-                                gui.drawString(Minecraft.getInstance().font, string, x - (stringWidth / 2), y, 0xffffff);
-                                i = i + 11;
-                            }
-
-                            int x = mc.getWindow().getGuiScaledWidth() / 2 - (48 / 2);
-                            int y = mc.getWindow().getGuiScaledHeight() / 2 + 32 - 10 - 11 + i;
-
-                            gui.blit(new ResourceLocation(WizardsReborn.MOD_ID + ":textures/gui/cooldown_frame.png"), x, y, 0, 0, 48, 10, 64, 64);
-                            int width = 32;
-                            width /= (double) cooldownTile.getCooldown();
-                            gui.blit(new ResourceLocation(WizardsReborn.MOD_ID + ":textures/gui/cooldown_frame.png"), x + 8, y + 1, 0, 10, width, 8, 64, 64);
-                            i = i + 11;
-                        }
-
-                        if (tileentity instanceof ILightTileEntity lightTile) {
-                            if (player.isShiftKeyDown() && ClientConfig.SHOW_LIGHT_NAME.get()) {
-                                int x = mc.getWindow().getGuiScaledWidth() / 2;
-                                int y = mc.getWindow().getGuiScaledHeight() / 2 + 32 - 10 - 10 + i;
-
-                                Component lightName = NumericalUtils.getLightName();
-                                String string = lightName.getString();
-                                int stringWidth = Minecraft.getInstance().font.width(string);
-
-                                gui.drawString(Minecraft.getInstance().font, string, x - (stringWidth / 2), y, 0xffffff);
-                                i = i + 11;
-                            }
-                            int x = mc.getWindow().getGuiScaledWidth() / 2 - (48 / 2);
-                            int y = mc.getWindow().getGuiScaledHeight() / 2 + 32 - 10 - 11 + i;
-
-                            gui.blit(new ResourceLocation(WizardsReborn.MOD_ID + ":textures/gui/light_frame.png"), x, y, 0, 0, 48, 10, 64, 64);
-                            int width = 32;
-                            if (lightTile.getLight() <= 0) {
-                                width = 0;
-                            }
-                            gui.blit(new ResourceLocation(WizardsReborn.MOD_ID + ":textures/gui/light_frame.png"), x + 8, y + 1, 0, 10, width, 8, 64, 64);
-                            i = i + 11;
-                        }
-
-                        if (tileentity instanceof IFluidTileEntity fluidTile) {
-                            if (player.isShiftKeyDown()) {
-                                int x = mc.getWindow().getGuiScaledWidth() / 2;
-                                int y = mc.getWindow().getGuiScaledHeight() / 2 + 32 - 10 - 10 + i;
-
-                                Component fluidName = NumericalUtils.getFluidName(fluidTile.getFluidStack(), fluidTile.getFluidMaxAmount());
-                                if (!ClientConfig.NUMERICAL_FLUID.get()) {
-                                    fluidName = NumericalUtils.getFluidName(fluidTile.getFluidStack());
-                                }
-
-                                String string = fluidName.getString();
-                                int stringWidth = Minecraft.getInstance().font.width(string);
-
-                                gui.drawString(Minecraft.getInstance().font, string, x - (stringWidth / 2), y, 0xffffff);
-                                i = i + 11;
-                            }
-
-                            int x = mc.getWindow().getGuiScaledWidth() / 2 - (48 / 2);
-                            int y = mc.getWindow().getGuiScaledHeight() / 2 + 32 - 10 - 11 + i;
-
-                            gui.blit(new ResourceLocation(WizardsReborn.MOD_ID + ":textures/gui/fluid_frame.png"), x, y, 0, 0, 48, 10, 64, 64);
-                            int width = 32;
-                            width /= (double) fluidTile.getFluidMaxAmount() / (double) fluidTile.getFluidAmount();
-                            gui.blit(new ResourceLocation(WizardsReborn.MOD_ID + ":textures/gui/fluid_frame.png"), x + 8, y + 1, 0, 10, width, 8, 64, 64);
-                            i = i + 11;
-                        }
-
-                        if (tileentity instanceof IExperienceTileEntity experienceTile) {
-                            if (player.isShiftKeyDown() && ClientConfig.NUMERICAL_EXPERIENCE.get()) {
-                                int x = mc.getWindow().getGuiScaledWidth() / 2;
-                                int y = mc.getWindow().getGuiScaledHeight() / 2 + 32 - 10 - 10 + i;
-
-                                Component experienceName = NumericalUtils.getExperienceName(experienceTile.getExperience(), experienceTile.getMaxExperience());
-                                String string = experienceName.getString();
-                                int stringWidth = Minecraft.getInstance().font.width(string);
-
-                                gui.drawString(Minecraft.getInstance().font, string, x - (stringWidth / 2), y, 0xffffff);
-                                i = i + 11;
-                            }
-
-                            int x = mc.getWindow().getGuiScaledWidth() / 2 - (48 / 2);
-                            int y = mc.getWindow().getGuiScaledHeight() / 2 + 32 - 10 - 11 + i;
-
-                            gui.blit(new ResourceLocation(WizardsReborn.MOD_ID + ":textures/gui/experience_frame.png"), x, y, 0, 0, 48, 10, 64, 64);
-                            int width = 32;
-                            width /= (double) experienceTile.getMaxExperience() / (double) experienceTile.getExperience();
-                            gui.blit(new ResourceLocation(WizardsReborn.MOD_ID + ":textures/gui/experience_frame.png"), x + 8, y + 1, 0, 10, width, 8, 64, 64);
-                            i = i + 11;
-                        }
-
-                        if (tileentity instanceof IHeatTileEntity heatTile) {
-                            if (player.isShiftKeyDown() && ClientConfig.NUMERICAL_HEAT.get()) {
-                                int x = mc.getWindow().getGuiScaledWidth() / 2;
-                                int y = mc.getWindow().getGuiScaledHeight() / 2 + 32 - 10 - 10 + i;
-
-                                Component heatName = NumericalUtils.getHeatName(heatTile.getHeat(), heatTile.getMaxHeat());
-                                String string = heatName.getString();
-                                int stringWidth = Minecraft.getInstance().font.width(string);
-
-                                gui.drawString(Minecraft.getInstance().font, string, x - (stringWidth / 2), y, 0xffffff);
-                                i = i + 11;
-                            }
-
-                            int x = mc.getWindow().getGuiScaledWidth() / 2 - (48 / 2);
-                            int y = mc.getWindow().getGuiScaledHeight() / 2 + 32 - 10 - 11 + i;
-
-                            gui.blit(new ResourceLocation(WizardsReborn.MOD_ID + ":textures/gui/heat_frame.png"), x, y, 0, 0, 48, 10, 64, 64);
-                            int width = 32;
-                            width /= (double) heatTile.getMaxHeat() / (double) heatTile.getHeat();
-                            gui.blit(new ResourceLocation(WizardsReborn.MOD_ID + ":textures/gui/heat_frame.png"), x + 8, y + 1, 0, 10, width, 8, 64, 64);
-                            i = i + 11;
-                        }
-
-                        if (tileentity instanceof ISteamTileEntity steamTile) {
-                            if (player.isShiftKeyDown() && ClientConfig.NUMERICAL_STEAM.get()) {
-                                int x = mc.getWindow().getGuiScaledWidth() / 2;
-                                int y = mc.getWindow().getGuiScaledHeight() / 2 + 32 - 10 - 10 + i;
-
-                                Component steamName = NumericalUtils.getSteamName(steamTile.getSteam(), steamTile.getMaxSteam());
-                                String string = steamName.getString();
-                                int stringWidth = Minecraft.getInstance().font.width(string);
-
-                                gui.drawString(Minecraft.getInstance().font, string, x - (stringWidth / 2), y, 0xffffff);
-                                i = i + 11;
-                            }
-
-                            int x = mc.getWindow().getGuiScaledWidth() / 2 - (48 / 2);
-                            int y = mc.getWindow().getGuiScaledHeight() / 2 + 32 - 10 - 11 + i;
-
-                            gui.blit(new ResourceLocation(WizardsReborn.MOD_ID + ":textures/gui/steam_frame.png"), x, y, 0, 0, 48, 10, 64, 64);
-                            int width = 32;
-                            width /= (double) steamTile.getMaxSteam() / (double) steamTile.getSteam();
-                            gui.blit(new ResourceLocation(WizardsReborn.MOD_ID + ":textures/gui/steam_frame.png"), x + 8, y + 1, 0, 10, width, 8, 64, 64);
-                            i = i + 11;
-                        }
-
-                        if (tileentity instanceof AlchemyMachineTileEntity machine) {
-                            for (int ii = 0; ii <= 2; ii++) {
-                                if (player.isShiftKeyDown()) {
-                                    int x = mc.getWindow().getGuiScaledWidth() / 2;
-                                    int y = mc.getWindow().getGuiScaledHeight() / 2 + 32 - 10 - 10 + i;
-
-                                    Component fluidName = NumericalUtils.getFluidName(machine.getFluidStack(ii), machine.getMaxCapacity());
-                                    if (!ClientConfig.NUMERICAL_FLUID.get()) {
-                                        fluidName = NumericalUtils.getFluidName(machine.getFluidStack(ii));
-                                    }
-                                    String string = fluidName.getString();
-                                    int stringWidth = Minecraft.getInstance().font.width(string);
-
-                                    gui.drawString(Minecraft.getInstance().font, string, x - (stringWidth / 2), y, 0xffffff);
-                                    i = i + 11;
-                                }
-
-                                int x = mc.getWindow().getGuiScaledWidth() / 2 - (48 / 2);
-                                int y = mc.getWindow().getGuiScaledHeight() / 2 + 32 - 10 - 11 + i;
-
-                                gui.blit(new ResourceLocation(WizardsReborn.MOD_ID + ":textures/gui/steam_frame.png"), x, y, 0, 0, 48, 10, 64, 64);
-                                int width = 32;
-                                width /= (double) machine.getMaxCapacity() / (double) machine.getTank(ii).getFluidAmount();
-                                gui.blit(new ResourceLocation(WizardsReborn.MOD_ID + ":textures/gui/fluid_frame.png"), x + 8, y + 1, 0, 10, width, 8, 64, 64);
-
-                                i = i + 11;
-                            }
-                        }
+                    int i = 0;
+                    for (Tooltip tooltip : tooltips) {
+                        tooltip.setYOffset(i);
+                        tooltip.draw(gui, bpos);
+                        i = tooltip.getYOffset();
                     }
                 }
             }
@@ -542,5 +346,372 @@ public class WissenWandItem extends Item {
 
         RenderSystem.defaultBlendFunc();
         RenderSystem.setShaderColor(1F, 1F, 1F, 1F);
+    }
+
+    public static void setupTooltips() {
+        addTooltip(new ItemResultTooltip());
+        addTooltip(new WissenTooltip());
+        addTooltip(new CooldownTooltip());
+        addTooltip(new LightTooltip());
+        addTooltip(new FluidTooltip());
+        addTooltip(new ExperienceTooltip());
+        addTooltip(new HeatTooltip());
+        addTooltip(new SteamTooltip());
+        addTooltip(new AlchemyMachineTooltip());
+    }
+
+    public static void addTooltip(Tooltip tooltip) {
+        tooltips.add(tooltip);
+    }
+
+    public static class Tooltip {
+        public int yOffset = 0;
+
+        public void setYOffset(int offset) {
+            yOffset = offset;
+        }
+
+        public void addYOffset(int offset) {
+            yOffset = yOffset + offset;
+        }
+
+        public int getYOffset() {
+            return yOffset;
+        }
+
+        @OnlyIn(Dist.CLIENT)
+        public void drawCenteredText(GuiGraphics gui, String string, int x, int y) {
+            int stringWidth = Minecraft.getInstance().font.width(string);
+            gui.drawString(Minecraft.getInstance().font, string, x - (stringWidth / 2), y, 0xffffff);
+        }
+
+        @OnlyIn(Dist.CLIENT)
+        public void drawBar(GuiGraphics gui, ResourceLocation barTexture, int x, int y, float value, float maxValue) {
+            gui.blit(barTexture, x, y, 0, 0, 48, 10, 64, 64);
+            int width = 32;
+            width /= (double) maxValue / (double) value;
+            gui.blit(barTexture, x + 8, y + 1, 0, 10, width, 8, 64, 64);
+        }
+
+        @OnlyIn(Dist.CLIENT)
+        public void drawBar(GuiGraphics gui, ResourceLocation barTexture, int x, int y, float value) {
+            gui.blit(barTexture, x, y, 0, 0, 48, 10, 64, 64);
+            gui.blit(barTexture, x + 8, y + 1, 0, 10, (int) value, 8, 64, 64);
+        }
+
+        @OnlyIn(Dist.CLIENT)
+        public ResourceLocation getBarTexture() {
+            return new ResourceLocation(WizardsReborn.MOD_ID + ":textures/gui/wissen_frame.png");
+        }
+
+        @OnlyIn(Dist.CLIENT)
+        public void draw(GuiGraphics gui, BlockPos pos) {
+
+        }
+    }
+
+    public static class ItemResultTooltip extends Tooltip {
+        @Override
+        @OnlyIn(Dist.CLIENT)
+        public void draw(GuiGraphics gui, BlockPos pos) {
+            Minecraft mc = Minecraft.getInstance();
+            BlockEntity tileentity = pos != null ? mc.level.getBlockEntity(pos) : null;
+
+            if (tileentity != null) {
+                if (tileentity instanceof IItemResultTileEntity tile) {
+                    List<ItemStack> list = tile.getItemsResult();
+                    int i = 0;
+                    for (ItemStack item : list) {
+                        int x = mc.getWindow().getGuiScaledWidth() / 2 - 8 + (i * 16) - ((list.size() - 1) * 8);
+                        int y = mc.getWindow().getGuiScaledHeight() / 2 - 26;
+                        gui.renderItem(item, x, y);
+                        gui.renderItemDecorations(Minecraft.getInstance().font, item, x, y);
+                        i++;
+                    }
+                }
+            }
+        }
+    }
+
+    public static class WissenTooltip extends Tooltip {
+        @Override
+        @OnlyIn(Dist.CLIENT)
+        public ResourceLocation getBarTexture() {
+            return new ResourceLocation(WizardsReborn.MOD_ID + ":textures/gui/wissen_frame.png");
+        }
+
+        @Override
+        @OnlyIn(Dist.CLIENT)
+        public void draw(GuiGraphics gui, BlockPos pos) {
+            Minecraft mc = Minecraft.getInstance();
+            Player player = mc.player;
+            BlockEntity tileentity = pos != null ? mc.level.getBlockEntity(pos) : null;
+
+            if (tileentity != null) {
+                if (tileentity instanceof IWissenTileEntity tile) {
+                    if (player.isShiftKeyDown() && ClientConfig.NUMERICAL_WISSEN.get()) {
+                        int x = mc.getWindow().getGuiScaledWidth() / 2;
+                        int y = mc.getWindow().getGuiScaledHeight() / 2 + 12 + getYOffset();
+                        Component name = NumericalUtils.getWissenName(tile.getWissen(), tile.getMaxWissen());
+                        drawCenteredText(gui, name.getString(), x, y);
+                        addYOffset(11);
+                    }
+
+                    int x = mc.getWindow().getGuiScaledWidth() / 2 - (48 / 2);
+                    int y = mc.getWindow().getGuiScaledHeight() / 2 + 11 + getYOffset();
+
+                    drawBar(gui, getBarTexture(), x, y, tile.getWissen(), tile.getMaxWissen());
+                    addYOffset(11);
+                }
+            }
+        }
+    }
+
+    public static class CooldownTooltip extends Tooltip {
+        @Override
+        @OnlyIn(Dist.CLIENT)
+        public ResourceLocation getBarTexture() {
+            return new ResourceLocation(WizardsReborn.MOD_ID + ":textures/gui/cooldown_frame.png");
+        }
+
+        @Override
+        @OnlyIn(Dist.CLIENT)
+        public void draw(GuiGraphics gui, BlockPos pos) {
+            Minecraft mc = Minecraft.getInstance();
+            Player player = mc.player;
+            BlockEntity tileentity = pos != null ? mc.level.getBlockEntity(pos) : null;
+
+            if (tileentity != null) {
+                if (tileentity instanceof ICooldownTileEntity tile) {
+                    if (player.isShiftKeyDown() && ClientConfig.NUMERICAL_COOLDOWN.get()) {
+                        int x = mc.getWindow().getGuiScaledWidth() / 2;
+                        int y = mc.getWindow().getGuiScaledHeight() / 2 + 12 + getYOffset();
+                        Component name = NumericalUtils.getCooldownName(tile.getCooldown());
+                        drawCenteredText(gui, name.getString(), x, y);
+                        addYOffset(11);
+                    }
+
+                    int x = mc.getWindow().getGuiScaledWidth() / 2 - (48 / 2);
+                    int y = mc.getWindow().getGuiScaledHeight() / 2 + 11 + getYOffset();
+
+                    drawBar(gui, getBarTexture(), x, y, 32 / tile.getCooldown());
+                    addYOffset(11);
+                }
+            }
+        }
+    }
+
+    public static class LightTooltip extends Tooltip {
+        @Override
+        @OnlyIn(Dist.CLIENT)
+        public ResourceLocation getBarTexture() {
+            return new ResourceLocation(WizardsReborn.MOD_ID + ":textures/gui/light_frame.png");
+        }
+
+        @Override
+        @OnlyIn(Dist.CLIENT)
+        public void draw(GuiGraphics gui, BlockPos pos) {
+            Minecraft mc = Minecraft.getInstance();
+            Player player = mc.player;
+            BlockEntity tileentity = pos != null ? mc.level.getBlockEntity(pos) : null;
+
+            if (tileentity != null) {
+                if (tileentity instanceof ILightTileEntity tile) {
+                    if (player.isShiftKeyDown() && ClientConfig.SHOW_LIGHT_NAME.get()) {
+                        int x = mc.getWindow().getGuiScaledWidth() / 2;
+                        int y = mc.getWindow().getGuiScaledHeight() / 2 + 12 + getYOffset();
+                        Component name = NumericalUtils.getLightName();
+                        drawCenteredText(gui, name.getString(), x, y);
+                        addYOffset(11);
+                    }
+
+                    int x = mc.getWindow().getGuiScaledWidth() / 2 - (48 / 2);
+                    int y = mc.getWindow().getGuiScaledHeight() / 2 + 11 + getYOffset();
+
+                    int width = 32;
+                    if (tile.getLight() <= 0) width = 0;
+                    drawBar(gui, getBarTexture(), x, y, width);
+                    addYOffset(11);
+                }
+            }
+        }
+    }
+
+    public static class FluidTooltip extends Tooltip {
+        @Override
+        @OnlyIn(Dist.CLIENT)
+        public ResourceLocation getBarTexture() {
+            return new ResourceLocation(WizardsReborn.MOD_ID + ":textures/gui/fluid_frame.png");
+        }
+
+        @Override
+        @OnlyIn(Dist.CLIENT)
+        public void draw(GuiGraphics gui, BlockPos pos) {
+            Minecraft mc = Minecraft.getInstance();
+            Player player = mc.player;
+            BlockEntity tileentity = pos != null ? mc.level.getBlockEntity(pos) : null;
+
+            if (tileentity != null) {
+                if (tileentity instanceof IFluidTileEntity tile) {
+                    int x = mc.getWindow().getGuiScaledWidth() / 2;
+                    int y = mc.getWindow().getGuiScaledHeight() / 2 + 12 + getYOffset();
+
+                    Component name = NumericalUtils.getFluidName(tile.getFluidStack(), tile.getFluidMaxAmount());
+                    if (!ClientConfig.NUMERICAL_FLUID.get()) {
+                        name = NumericalUtils.getFluidName(tile.getFluidStack());
+                    }
+                    drawCenteredText(gui, name.getString(), x, y);
+                    addYOffset(11);
+
+                    x = mc.getWindow().getGuiScaledWidth() / 2 - (48 / 2);
+                    y = mc.getWindow().getGuiScaledHeight() / 2 + 11 + getYOffset();
+
+                    drawBar(gui, getBarTexture(), x, y, tile.getFluidAmount(), tile.getFluidMaxAmount());
+                    addYOffset(11);
+                }
+            }
+        }
+    }
+
+    public static class ExperienceTooltip extends Tooltip {
+        @Override
+        @OnlyIn(Dist.CLIENT)
+        public ResourceLocation getBarTexture() {
+            return new ResourceLocation(WizardsReborn.MOD_ID + ":textures/gui/experience_frame.png");
+        }
+
+        @Override
+        @OnlyIn(Dist.CLIENT)
+        public void draw(GuiGraphics gui, BlockPos pos) {
+            Minecraft mc = Minecraft.getInstance();
+            Player player = mc.player;
+            BlockEntity tileentity = pos != null ? mc.level.getBlockEntity(pos) : null;
+
+            if (tileentity != null) {
+                if (tileentity instanceof IExperienceTileEntity tile) {
+                    if (player.isShiftKeyDown() && ClientConfig.NUMERICAL_EXPERIENCE.get()) {
+                        int x = mc.getWindow().getGuiScaledWidth() / 2;
+                        int y = mc.getWindow().getGuiScaledHeight() / 2 + 12 + getYOffset();
+                        Component name = NumericalUtils.getExperienceName(tile.getExperience(), tile.getMaxExperience());
+                        drawCenteredText(gui, name.getString(), x, y);
+                        addYOffset(11);
+                    }
+
+                    int x = mc.getWindow().getGuiScaledWidth() / 2 - (48 / 2);
+                    int y = mc.getWindow().getGuiScaledHeight() / 2 + 11 + getYOffset();
+
+                    drawBar(gui, getBarTexture(), x, y, tile.getExperience(), tile.getMaxExperience());
+                    addYOffset(11);
+                }
+            }
+        }
+    }
+
+    public static class HeatTooltip extends Tooltip {
+        @Override
+        @OnlyIn(Dist.CLIENT)
+        public ResourceLocation getBarTexture() {
+            return new ResourceLocation(WizardsReborn.MOD_ID + ":textures/gui/heat_frame.png");
+        }
+
+        @Override
+        @OnlyIn(Dist.CLIENT)
+        public void draw(GuiGraphics gui, BlockPos pos) {
+            Minecraft mc = Minecraft.getInstance();
+            Player player = mc.player;
+            BlockEntity tileentity = pos != null ? mc.level.getBlockEntity(pos) : null;
+
+            if (tileentity != null) {
+                if (tileentity instanceof IHeatTileEntity tile) {
+                    if (player.isShiftKeyDown() && ClientConfig.NUMERICAL_HEAT.get()) {
+                        int x = mc.getWindow().getGuiScaledWidth() / 2;
+                        int y = mc.getWindow().getGuiScaledHeight() / 2 + 12 + getYOffset();
+                        Component name = NumericalUtils.getHeatName(tile.getHeat(), tile.getMaxHeat());
+                        drawCenteredText(gui, name.getString(), x, y);
+                        addYOffset(11);
+                    }
+
+                    int x = mc.getWindow().getGuiScaledWidth() / 2 - (48 / 2);
+                    int y = mc.getWindow().getGuiScaledHeight() / 2 + 11 + getYOffset();
+
+                    drawBar(gui, getBarTexture(), x, y, tile.getHeat(), tile.getMaxHeat());
+                    addYOffset(11);
+                }
+            }
+        }
+    }
+
+    public static class SteamTooltip extends Tooltip {
+        @Override
+        @OnlyIn(Dist.CLIENT)
+        public ResourceLocation getBarTexture() {
+            return new ResourceLocation(WizardsReborn.MOD_ID + ":textures/gui/steam_frame.png");
+        }
+
+        @Override
+        @OnlyIn(Dist.CLIENT)
+        public void draw(GuiGraphics gui, BlockPos pos) {
+            Minecraft mc = Minecraft.getInstance();
+            Player player = mc.player;
+            BlockEntity tileentity = pos != null ? mc.level.getBlockEntity(pos) : null;
+
+            if (tileentity != null) {
+                if (tileentity instanceof ISteamTileEntity tile) {
+                    if (player.isShiftKeyDown() && ClientConfig.NUMERICAL_STEAM.get()) {
+                        int x = mc.getWindow().getGuiScaledWidth() / 2;
+                        int y = mc.getWindow().getGuiScaledHeight() / 2 + 12 + getYOffset();
+                        Component name = NumericalUtils.getHeatName(tile.getSteam(), tile.getMaxSteam());
+                        drawCenteredText(gui, name.getString(), x, y);
+                        addYOffset(11);
+                    }
+
+                    int x = mc.getWindow().getGuiScaledWidth() / 2 - (48 / 2);
+                    int y = mc.getWindow().getGuiScaledHeight() / 2 + 11 + getYOffset();
+
+                    drawBar(gui, getBarTexture(), x, y, tile.getSteam(), tile.getMaxSteam());
+                    addYOffset(11);
+                }
+            }
+        }
+    }
+
+    public static class AlchemyMachineTooltip extends Tooltip {
+        @Override
+        @OnlyIn(Dist.CLIENT)
+        public ResourceLocation getBarTexture() {
+            return new ResourceLocation(WizardsReborn.MOD_ID + ":textures/gui/fluid_frame.png");
+        }
+
+        @Override
+        @OnlyIn(Dist.CLIENT)
+        public void draw(GuiGraphics gui, BlockPos pos) {
+            Minecraft mc = Minecraft.getInstance();
+            Player player = mc.player;
+            BlockEntity tileentity = pos != null ? mc.level.getBlockEntity(pos) : null;
+
+            if (tileentity != null) {
+                if (tileentity instanceof AlchemyMachineTileEntity machine) {
+                    for (int ii = 0; ii <= 2; ii++) {
+                        if (player.isShiftKeyDown()) {
+                            int x = mc.getWindow().getGuiScaledWidth() / 2;
+                            int y = mc.getWindow().getGuiScaledHeight() / 2 + 12 + getYOffset();
+
+                            Component name = NumericalUtils.getFluidName(machine.getFluidStack(ii), machine.getMaxCapacity());
+                            if (!ClientConfig.NUMERICAL_FLUID.get()) {
+                                name = NumericalUtils.getFluidName(machine.getFluidStack(ii));
+                            }
+                            drawCenteredText(gui, name.getString(), x, y);
+                            addYOffset(11);
+                        }
+
+                        int x = mc.getWindow().getGuiScaledWidth() / 2 - (48 / 2);
+                        int y = mc.getWindow().getGuiScaledHeight() / 2 + 11 + getYOffset();
+
+                        drawBar(gui, getBarTexture(), x, y, machine.getTank(ii).getFluidAmount(), machine.getMaxCapacity());
+                        addYOffset(11);
+                    }
+                }
+            }
+        }
     }
 }

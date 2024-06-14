@@ -3,6 +3,7 @@ package mod.maxbogomol.wizards_reborn.common.skin;
 import mod.maxbogomol.wizards_reborn.WizardsReborn;
 import mod.maxbogomol.wizards_reborn.api.skin.Skin;
 import mod.maxbogomol.wizards_reborn.common.item.equipment.ArcaneWandItem;
+import mod.maxbogomol.wizards_reborn.common.item.equipment.WissenWandItem;
 import mod.maxbogomol.wizards_reborn.common.item.equipment.arcane.*;
 import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.api.distmarker.Dist;
@@ -19,7 +20,7 @@ public class ImplosionSkin extends Skin {
     public boolean canApplyOnItem(ItemStack itemStack) {
         return ((itemStack.getItem() instanceof ArcaneSwordItem) || (itemStack.getItem() instanceof ArcanePickaxeItem) ||(itemStack.getItem() instanceof ArcaneAxeItem)
                 || (itemStack.getItem() instanceof ArcaneShovelItem) || (itemStack.getItem() instanceof ArcaneHoeItem) ||(itemStack.getItem() instanceof ArcaneScytheItem)
-                || (itemStack.getItem() instanceof ArcaneWandItem));
+                || (itemStack.getItem() instanceof ArcaneWandItem) || (itemStack.getItem() instanceof WissenWandItem));
     }
 
     @OnlyIn(Dist.CLIENT)
@@ -44,6 +45,9 @@ public class ImplosionSkin extends Skin {
         }
         if (stack.getItem() instanceof ArcaneWandItem) {
             return WizardsReborn.MOD_ID+":skin/implosion_arcane_wand";
+        }
+        if (stack.getItem() instanceof WissenWandItem) {
+            return WizardsReborn.MOD_ID+":implosion_wissen_wand";
         }
         return WizardsReborn.MOD_ID+":implosion_sword";
     }

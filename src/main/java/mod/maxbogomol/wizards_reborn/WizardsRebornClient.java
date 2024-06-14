@@ -284,6 +284,7 @@ public class WizardsRebornClient {
             ItemSkinsModels.addSkin(WizardsReborn.MOD_ID+":soul_hunter_boots");
             ItemSkinsModels.addSkin(WizardsReborn.MOD_ID+":soul_hunter_scythe");
             ItemSkinsModels.addSkin(WizardsReborn.MOD_ID+":soul_hunter_arcane_wand");
+            ItemSkinsModels.addSkin(WizardsReborn.MOD_ID+":soul_hunter_wissen_wand");
             ItemSkinsModels.addSkin(WizardsReborn.MOD_ID+":implosion_sword");
             ItemSkinsModels.addSkin(WizardsReborn.MOD_ID+":implosion_pickaxe");
             ItemSkinsModels.addSkin(WizardsReborn.MOD_ID+":implosion_axe");
@@ -291,6 +292,7 @@ public class WizardsRebornClient {
             ItemSkinsModels.addSkin(WizardsReborn.MOD_ID+":implosion_hoe");
             ItemSkinsModels.addSkin(WizardsReborn.MOD_ID+":implosion_scythe");
             ItemSkinsModels.addSkin(WizardsReborn.MOD_ID+":implosion_arcane_wand");
+            ItemSkinsModels.addSkin(WizardsReborn.MOD_ID+":implosion_wissen_wand");
 
             for (String skin : ItemSkinsModels.getSkins()) {
                 event.register(ItemSkinsModels.getModelLocationSkin(skin));
@@ -354,6 +356,7 @@ public class WizardsRebornClient {
                 ItemSkinsModels.addModelSkins(skin, model);
             }
 
+            addSkinModel(map, WizardsReborn.WISSEN_WAND.getId());
             addSkinModel(map, WizardsReborn.ARCANE_WOOD_SWORD.getId());
             addSkinModel(map, WizardsReborn.INNOCENT_WOOD_SWORD.getId());
             addSkinModel(map, WizardsReborn.ARCANE_GOLD_SWORD.getId());
