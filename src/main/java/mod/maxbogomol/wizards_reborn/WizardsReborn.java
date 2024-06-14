@@ -1714,6 +1714,7 @@ public class WizardsReborn {
         CreateIntegration.init(eventBus);
         FarmersDelightIntegration.init(eventBus);
 
+        WissenWandItem.setupControlTypes();
         setupCrystals();
         setupMonograms();
         setupSpells();

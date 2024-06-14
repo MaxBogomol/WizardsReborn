@@ -65,11 +65,10 @@ public class StatisticPage extends Page {
             }
             totalSpells++;
         }
-        //Minecraft.getInstance().player.getFoodData().getFoodLevel();
         Player player = Minecraft.getInstance().player;
 
         String progressionText = String.valueOf(Math.round((float) currentKnowledges / totalKnowledges * 1000) / 10f) + "%";
-        String knowledgeText = String.valueOf(totalKnowledges) + "/" + String.valueOf(currentKnowledges);
+        String knowledgeText = String.valueOf(currentKnowledges) + "/" + String.valueOf(totalKnowledges);
         String pointsText = String.valueOf(currentPoints) + "/" + String.valueOf(totalPoints) + " (" + String.valueOf(points) + ")";
         String spellsText = String.valueOf(currentSpells) + "/" + String.valueOf(totalSpells);
         String healthText = String.valueOf(Math.round((player.getHealth() + player.getAbsorptionAmount()) * 10) / 10f) + "/" + String.valueOf(Math.round(player.getMaxHealth() * 10) / 10f);

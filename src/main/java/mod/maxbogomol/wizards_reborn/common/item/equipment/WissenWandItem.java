@@ -43,6 +43,7 @@ import java.util.List;
 
 public class WissenWandItem extends Item {
     public static List<Tooltip> tooltips = new ArrayList<>();
+    public static List<ControlType> controlTypes = new ArrayList<>();
 
     public WissenWandItem(Properties properties) {
         super(properties);
@@ -131,24 +132,8 @@ public class WissenWandItem extends Item {
     public boolean controlled(ItemStack stack, UseOnContext context, BlockEntity tile) {
         int mode = getMode(stack);
 
-        if (tile instanceof IWissenTileEntity wissenTile) {
-            if (!getBlock(stack)) {
-                if ((mode == 1 && wissenTile.canConnectReceiveWissen()) || (mode == 2 && wissenTile.canConnectSendWissen())) {
-                    setBlockPos(stack, context.getClickedPos());
-                    setBlock(stack, true);
-                    return true;
-                }
-            }
-        }
-
-        if (tile instanceof ILightTileEntity lightTile) {
-            if (!getBlock(stack)) {
-                if ((mode == 1 && lightTile.canConnectReceiveLight()) || (mode == 2 && lightTile.canConnectSendLight())) {
-                    setBlockPos(stack, context.getClickedPos());
-                    setBlock(stack, true);
-                    return true;
-                }
-            }
+        for (ControlType controlType : controlTypes) {
+            if (controlType.controlled(stack, context, tile)) return true;
         }
 
         if (tile instanceof IWissenWandControlledTileEntity controlledTile) {
@@ -712,6 +697,57 @@ public class WissenWandItem extends Item {
                     }
                 }
             }
+        }
+    }
+
+    public static void setupControlTypes() {
+        addControlType(new WissenControlType());
+        addControlType(new LightControlType());
+    }
+
+    public static void addControlType(ControlType controlType) {
+        controlTypes.add(controlType);
+    }
+
+    public static class ControlType {
+        public boolean controlled(ItemStack stack, UseOnContext context, BlockEntity tile) {
+            return false;
+        }
+    }
+
+    public static class WissenControlType extends ControlType {
+        @Override
+        public boolean controlled(ItemStack stack, UseOnContext context, BlockEntity tile) {
+            int mode = getMode(stack);
+
+            if (tile instanceof IWissenTileEntity wissenTile) {
+                if (!getBlock(stack)) {
+                    if ((mode == 1 && wissenTile.canConnectReceiveWissen()) || (mode == 2 && wissenTile.canConnectSendWissen())) {
+                        setBlockPos(stack, context.getClickedPos());
+                        setBlock(stack, true);
+                        return true;
+                    }
+                }
+            }
+            return false;
+        }
+    }
+
+    public static class LightControlType extends ControlType {
+        @Override
+        public boolean controlled(ItemStack stack, UseOnContext context, BlockEntity tile) {
+            int mode = getMode(stack);
+
+            if (tile instanceof ILightTileEntity lightTile) {
+                if (!getBlock(stack)) {
+                    if ((mode == 1 && lightTile.canConnectReceiveLight()) || (mode == 2 && lightTile.canConnectSendLight())) {
+                        setBlockPos(stack, context.getClickedPos());
+                        setBlock(stack, true);
+                        return true;
+                    }
+                }
+            }
+            return false;
         }
     }
 }
