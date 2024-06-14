@@ -22,13 +22,14 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.ChestBlock;
 import net.minecraft.world.level.block.HopperBlock;
-import net.minecraft.world.level.block.entity.*;
+import net.minecraft.world.level.block.entity.BlockEntity;
+import net.minecraft.world.level.block.entity.ChestBlockEntity;
+import net.minecraft.world.level.block.entity.Hopper;
+import net.minecraft.world.level.block.entity.RandomizableContainerBlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.shapes.BooleanOp;
 import net.minecraft.world.phys.shapes.Shapes;
-import net.minecraftforge.items.wrapper.InvWrapper;
-import org.jetbrains.annotations.NotNull;
 
 import javax.annotation.Nullable;
 import java.util.List;
@@ -89,7 +90,6 @@ public class ArcaneHopperTileEntity extends RandomizableContainerBlockEntity imp
         if (pStack.getCount() > this.getMaxStackSize()) {
             pStack.setCount(this.getMaxStackSize());
         }
-
     }
 
     protected Component getDefaultName() {
@@ -105,7 +105,6 @@ public class ArcaneHopperTileEntity extends RandomizableContainerBlockEntity imp
                 return suckInItems(pLevel, pBlockEntity);
             });
         }
-
     }
 
     private static boolean tryMoveItems(Level pLevel, BlockPos pPos, BlockState pState, ArcaneHopperTileEntity pBlockEntity, BooleanSupplier pValidator) {
@@ -144,6 +143,7 @@ public class ArcaneHopperTileEntity extends RandomizableContainerBlockEntity imp
     }
 
     private static boolean ejectItems(Level pLevel, BlockPos pPos, BlockState pState, ArcaneHopperTileEntity pSourceContainer) {
+        if (ArcaneHopperInventoryCodeHooks.insertHook(pSourceContainer)) return true;
         Container container = getAttachedContainer(pLevel, pPos, pState);
         if (container == null) {
             return false;
@@ -430,48 +430,10 @@ public class ArcaneHopperTileEntity extends RandomizableContainerBlockEntity imp
 
     @Override
     protected net.minecraftforge.items.IItemHandler createUnSidedHandler() {
-       return new ArcaneHopperItemHandler(this);
+        return new ArcaneHopperItemHandler(this);
     }
 
     public long getLastUpdateTime() {
         return this.tickedGameTime;
     }
-
-    public class ArcaneHopperItemHandler extends InvWrapper {
-        private final ArcaneHopperTileEntity hopper;
-
-        public ArcaneHopperItemHandler(ArcaneHopperTileEntity hopper)
-        {
-            super(hopper);
-            this.hopper = hopper;
-        }
-
-        @Override
-        @NotNull
-        public ItemStack insertItem(int slot, @NotNull ItemStack stack, boolean simulate)
-        {
-            if (simulate)
-            {
-                return super.insertItem(slot, stack, simulate);
-            }
-            else
-            {
-                boolean wasEmpty = getInv().isEmpty();
-
-                int originalStackSize = stack.getCount();
-                stack = super.insertItem(slot, stack, simulate);
-
-                if (wasEmpty && originalStackSize > stack.getCount())
-                {
-                    if (!hopper.isOnCustomCooldown())
-                    {
-                        hopper.setCooldown(8);
-                    }
-                }
-
-                return stack;
-            }
-        }
-    }
-
 }

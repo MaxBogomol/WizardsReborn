@@ -293,7 +293,8 @@ public class AlchemyFurnaceTileEntity extends BlockEntity implements TickableBlo
 
             if (side == Direction.DOWN) {
                 return outputHandler.cast();
-            } else if (getBlockState().getValue(BlockStateProperties.HORIZONTAL_FACING).getClockWise() == side) {
+            } else if (getBlockState().getValue(BlockStateProperties.HORIZONTAL_FACING).getClockWise() == side ||
+                    getBlockState().getValue(BlockStateProperties.HORIZONTAL_FACING).getClockWise().getOpposite() == side) {
                 return fuelHandler.cast();
             } else {
                 return handler.cast();
@@ -340,6 +341,7 @@ public class AlchemyFurnaceTileEntity extends BlockEntity implements TickableBlo
     public void saveAdditional(CompoundTag tag) {
         super.saveAdditional(tag);
         tag.put("inv", itemHandler.serializeNBT());
+        tag.put("fuel", itemFuelHandler.serializeNBT());
         tag.put("output", itemOutputHandler.serializeNBT());
 
         tag.putInt("burnLastTime", burnLastTime);
@@ -360,6 +362,7 @@ public class AlchemyFurnaceTileEntity extends BlockEntity implements TickableBlo
     public void load(CompoundTag tag) {
         super.load(tag);
         itemHandler.deserializeNBT(tag.getCompound("inv"));
+        itemFuelHandler.deserializeNBT(tag.getCompound("fuel"));
         itemOutputHandler.deserializeNBT(tag.getCompound("output"));
 
         burnLastTime = tag.getInt("burnLastTime");
