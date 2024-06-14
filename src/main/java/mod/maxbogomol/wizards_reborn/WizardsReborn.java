@@ -1722,6 +1722,10 @@ public class WizardsReborn {
         setupArcaneEnchantments();
         setupCrystalRituals();
 
+        for (Skin skin : Skins.getSkins()) {
+            skin.setupSkinEntries();
+        }
+
         IEventBus forgeBus = MinecraftForge.EVENT_BUS;
 
         ModLoadingContext.get().registerConfig(ModConfig.Type.CLIENT, ClientConfig.SPEC);

@@ -259,10 +259,6 @@ public class WizardsRebornClient {
 
         @SubscribeEvent
         public static void onModelRegistryEvent(ModelEvent.RegisterAdditional event) {
-            WandCrystalsModels.addWand(WizardsReborn.ARCANE_WAND.getId().toString());
-            WandCrystalsModels.addWand(WizardsReborn.MOD_ID+":skin/soul_hunter_arcane_wand");
-            WandCrystalsModels.addWand(WizardsReborn.MOD_ID+":skin/implosion_arcane_wand");
-
             for (String crystal : WandCrystalsModels.getCrystals()) {
                 event.register(WandCrystalsModels.getModelLocationCrystal(crystal));
             }

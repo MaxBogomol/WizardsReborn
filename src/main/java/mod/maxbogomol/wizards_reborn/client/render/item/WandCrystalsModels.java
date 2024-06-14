@@ -18,6 +18,7 @@ public class WandCrystalsModels {
     }
 
     public static void addModel(String wand, String id, BakedModel model) {
+        if (models.get(wand) == null) addWand(wand);
         models.get(wand).put(id, model);
     }
 
@@ -42,6 +43,7 @@ public class WandCrystalsModels {
     }
 
     public static BakedModel getModel(String wand, String id) {
+        if (models.get(wand) == null) addWand(wand);
         return models.get(wand).get(id);
     }
 

@@ -16,10 +16,13 @@ import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 
 import java.awt.*;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Skin {
     public String id;
     public Color color;
+    public List<SkinEntry> skinEntries = new ArrayList<>();
 
     public Skin(String id) {
         this.id = id;
@@ -78,7 +81,10 @@ public class Skin {
     }
 
     public boolean canApplyOnItem(ItemStack itemStack) {
-        return true;
+        for (SkinEntry skinEntry : getSkinEntries()) {
+            if (skinEntry.canApplyOnItem(itemStack)) return true;
+        }
+        return false;
     }
 
     public ItemStack applyOnItem(ItemStack itemStack) {
@@ -97,16 +103,38 @@ public class Skin {
 
     @OnlyIn(Dist.CLIENT)
     public ArmorModel getArmorModel(LivingEntity entity, ItemStack itemStack, EquipmentSlot armorSlot, HumanoidModel _default) {
+        for (SkinEntry skinEntry : getSkinEntries()) {
+            if (skinEntry.canApplyOnItem(itemStack)) return skinEntry.getArmorModel(entity, itemStack, armorSlot, _default);
+        }
         return WizardsRebornClient.INVENTOR_WIZARD_ARMOR_MODEL;
     }
 
     @OnlyIn(Dist.CLIENT)
     public String getArmorTexture(ItemStack stack, Entity entity, EquipmentSlot slot, String type) {
-        return WizardsReborn.MOD_ID + ":textures/models/armor/inventor_wizard.png";
+        for (SkinEntry skinEntry : getSkinEntries()) {
+            if (skinEntry.canApplyOnItem(stack)) return skinEntry.getArmorTexture(stack, entity, slot, type);
+        }
+        return WizardsReborn.MOD_ID + ":textures/models/armor/skin/empty.png";
     }
 
     @OnlyIn(Dist.CLIENT)
     public String getItemModelName(ItemStack stack) {
+        for (SkinEntry skinEntry : getSkinEntries()) {
+            if (skinEntry.canApplyOnItem(stack)) return skinEntry.getItemModelName(stack);
+        }
         return "";
+    }
+
+    public List<SkinEntry> getSkinEntries() {
+        return skinEntries;
+    }
+
+    public SkinEntry addSkinEntry(SkinEntry skinEntry) {
+        skinEntries.add(skinEntry);
+        return skinEntry;
+    }
+
+    public void setupSkinEntries() {
+
     }
 }

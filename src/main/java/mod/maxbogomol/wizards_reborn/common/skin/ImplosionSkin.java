@@ -5,9 +5,6 @@ import mod.maxbogomol.wizards_reborn.api.skin.Skin;
 import mod.maxbogomol.wizards_reborn.common.item.equipment.ArcaneWandItem;
 import mod.maxbogomol.wizards_reborn.common.item.equipment.WissenWandItem;
 import mod.maxbogomol.wizards_reborn.common.item.equipment.arcane.*;
-import net.minecraft.world.item.ItemStack;
-import net.minecraftforge.api.distmarker.Dist;
-import net.minecraftforge.api.distmarker.OnlyIn;
 
 import java.awt.*;
 
@@ -17,38 +14,14 @@ public class ImplosionSkin extends Skin {
     }
 
     @Override
-    public boolean canApplyOnItem(ItemStack itemStack) {
-        return ((itemStack.getItem() instanceof ArcaneSwordItem) || (itemStack.getItem() instanceof ArcanePickaxeItem) ||(itemStack.getItem() instanceof ArcaneAxeItem)
-                || (itemStack.getItem() instanceof ArcaneShovelItem) || (itemStack.getItem() instanceof ArcaneHoeItem) ||(itemStack.getItem() instanceof ArcaneScytheItem)
-                || (itemStack.getItem() instanceof ArcaneWandItem) || (itemStack.getItem() instanceof WissenWandItem));
-    }
-
-    @OnlyIn(Dist.CLIENT)
-    public String getItemModelName(ItemStack stack) {
-        if (stack.getItem() instanceof ArcaneSwordItem) {
-            return WizardsReborn.MOD_ID+":implosion_sword";
-        }
-        if (stack.getItem() instanceof ArcanePickaxeItem) {
-            return WizardsReborn.MOD_ID+":implosion_pickaxe";
-        }
-        if (stack.getItem() instanceof ArcaneAxeItem) {
-            return WizardsReborn.MOD_ID+":implosion_axe";
-        }
-        if (stack.getItem() instanceof ArcaneShovelItem) {
-            return WizardsReborn.MOD_ID+":implosion_shovel";
-        }
-        if (stack.getItem() instanceof ArcaneHoeItem) {
-            return WizardsReborn.MOD_ID+":implosion_hoe";
-        }
-        if (stack.getItem() instanceof ArcaneScytheItem) {
-            return WizardsReborn.MOD_ID+":implosion_scythe";
-        }
-        if (stack.getItem() instanceof ArcaneWandItem) {
-            return WizardsReborn.MOD_ID+":skin/implosion_arcane_wand";
-        }
-        if (stack.getItem() instanceof WissenWandItem) {
-            return WizardsReborn.MOD_ID+":implosion_wissen_wand";
-        }
-        return WizardsReborn.MOD_ID+":implosion_sword";
+    public void setupSkinEntries() {
+        addSkinEntry(new ItemClassSkinEntry(ArcaneSwordItem.class, WizardsReborn.MOD_ID+":implosion_sword"));
+        addSkinEntry(new ItemClassSkinEntry(ArcanePickaxeItem.class, WizardsReborn.MOD_ID+":implosion_pickaxe"));
+        addSkinEntry(new ItemClassSkinEntry(ArcaneAxeItem.class, WizardsReborn.MOD_ID+":implosion_axe"));
+        addSkinEntry(new ItemClassSkinEntry(ArcaneShovelItem.class, WizardsReborn.MOD_ID+":implosion_shovel"));
+        addSkinEntry(new ItemClassSkinEntry(ArcaneHoeItem.class, WizardsReborn.MOD_ID+":implosion_hoe"));
+        addSkinEntry(new ItemClassSkinEntry(ArcaneScytheItem.class, WizardsReborn.MOD_ID+":implosion_scythe"));
+        addSkinEntry(new ItemClassSkinEntry(ArcaneWandItem.class, WizardsReborn.MOD_ID+":skin/implosion_arcane_wand"));
+        addSkinEntry(new ItemClassSkinEntry(WissenWandItem.class, WizardsReborn.MOD_ID+":implosion_wissen_wand"));
     }
 }

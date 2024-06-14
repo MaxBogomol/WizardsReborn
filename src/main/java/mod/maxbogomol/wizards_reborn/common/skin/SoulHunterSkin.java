@@ -9,10 +9,8 @@ import mod.maxbogomol.wizards_reborn.common.item.equipment.InventorWizardArmorIt
 import mod.maxbogomol.wizards_reborn.common.item.equipment.WissenWandItem;
 import mod.maxbogomol.wizards_reborn.common.item.equipment.arcane.ArcaneScytheItem;
 import net.minecraft.client.model.HumanoidModel;
-import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.world.item.ArmorItem;
 import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
@@ -25,44 +23,27 @@ public class SoulHunterSkin extends Skin {
     }
 
     @Override
-    public boolean canApplyOnItem(ItemStack itemStack) {
-        return ((itemStack.getItem() instanceof InventorWizardArmorItem) || (itemStack.getItem() instanceof ArcaneScytheItem)
-                || (itemStack.getItem() instanceof ArcaneWandItem) || (itemStack.getItem() instanceof WissenWandItem));
+    public void setupSkinEntries() {
+        addSkinEntry(new SoulHunterArmorSkinEntry(InventorWizardArmorItem.class,
+                WizardsReborn.MOD_ID+":textures/models/armor/skin/soul_hunter.png")
+                .addArmorSkin(EquipmentSlot.HEAD, WizardsReborn.MOD_ID + ":soul_hunter_hood")
+                .addArmorSkin(EquipmentSlot.CHEST, WizardsReborn.MOD_ID + ":soul_hunter_costume")
+                .addArmorSkin(EquipmentSlot.LEGS, WizardsReborn.MOD_ID + ":soul_hunter_trousers")
+                .addArmorSkin(EquipmentSlot.FEET, WizardsReborn.MOD_ID + ":soul_hunter_boots"));
+        addSkinEntry(new ItemClassSkinEntry(ArcaneScytheItem.class, WizardsReborn.MOD_ID+":soul_hunter_scythe"));
+        addSkinEntry(new ItemClassSkinEntry(ArcaneWandItem.class, WizardsReborn.MOD_ID+":skin/soul_hunter_arcane_wand"));
+        addSkinEntry(new ItemClassSkinEntry(WissenWandItem.class, WizardsReborn.MOD_ID+":soul_hunter_wissen_wand"));
     }
 
-    @Override
-    @OnlyIn(Dist.CLIENT)
-    public ArmorModel getArmorModel(LivingEntity entity, ItemStack itemStack, EquipmentSlot armorSlot, HumanoidModel _default) {
-        return WizardsRebornClient.SOUL_HUNTER_ARMOR_MODEL;
-    }
-
-    @Override
-    @OnlyIn(Dist.CLIENT)
-    public String getArmorTexture(ItemStack stack, Entity entity, EquipmentSlot slot, String type) {
-        return WizardsReborn.MOD_ID + ":textures/models/armor/skin/soul_hunter.png";
-    }
-
-    @OnlyIn(Dist.CLIENT)
-    public String getItemModelName(ItemStack stack) {
-        if (stack.getItem() instanceof ArmorItem armor) {
-            return switch (armor.getEquipmentSlot()) {
-                case HEAD -> WizardsReborn.MOD_ID + ":soul_hunter_hood";
-                case CHEST -> WizardsReborn.MOD_ID + ":soul_hunter_costume";
-                case LEGS -> WizardsReborn.MOD_ID + ":soul_hunter_trousers";
-                case FEET -> WizardsReborn.MOD_ID + ":soul_hunter_boots";
-                default -> WizardsReborn.MOD_ID + ":soul_hunter_hood";
-            };
-        }
-        if (stack.getItem() instanceof ArcaneScytheItem) {
-            return WizardsReborn.MOD_ID+":soul_hunter_scythe";
-        }
-        if (stack.getItem() instanceof ArcaneWandItem) {
-            return WizardsReborn.MOD_ID+":skin/soul_hunter_arcane_wand";
-        }
-        if (stack.getItem() instanceof WissenWandItem) {
-            return WizardsReborn.MOD_ID+":soul_hunter_wissen_wand";
+    public static class SoulHunterArmorSkinEntry extends ArmorClassSkinEntry {
+        public SoulHunterArmorSkinEntry(Class item, String skin) {
+            super(item, skin);
         }
 
-        return WizardsReborn.MOD_ID+":soul_hunter_hood";
+        @Override
+        @OnlyIn(Dist.CLIENT)
+        public ArmorModel getArmorModel(LivingEntity entity, ItemStack itemStack, EquipmentSlot armorSlot, HumanoidModel _default) {
+            return WizardsRebornClient.SOUL_HUNTER_ARMOR_MODEL;
+        }
     }
 }
