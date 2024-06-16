@@ -18,7 +18,7 @@ public class SkinEntry {
 
     @OnlyIn(Dist.CLIENT)
     public ArmorModel getArmorModel(LivingEntity entity, ItemStack itemStack, EquipmentSlot armorSlot, HumanoidModel _default) {
-        return WizardsRebornClient.INVENTOR_WIZARD_ARMOR_MODEL;
+        return WizardsRebornClient.EMPTY_ARMOR_MODEL;
     }
 
     @OnlyIn(Dist.CLIENT)
@@ -28,6 +28,6 @@ public class SkinEntry {
 
     @OnlyIn(Dist.CLIENT)
     public String getItemModelName(ItemStack stack) {
-        return "";
+        return null;
     }
 }

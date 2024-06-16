@@ -14,7 +14,8 @@ public class SkinModelOverrideList extends CustomModelOverrideList {
     {
         Skin skin = Skin.getSkinFromItem(stack);
         if (skin != null) {
-            return ItemSkinsModels.getModelSkins(skin.getItemModelName(stack));
+            String skinStr = skin.getItemModelName(stack);
+            if (skinStr != null) return ItemSkinsModels.getModelSkins(skinStr);
         }
         return originalModel;
     }

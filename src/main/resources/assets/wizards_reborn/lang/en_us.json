@@ -432,8 +432,11 @@
   "item.wizards_reborn.wisestone_trim": "Wisestone Trim",
   "item.wizards_reborn.innocent_wood_trim": "Innocent Wood Trim",
   "item.wizards_reborn.top_hat_trim": "Arcane Wood Trim",
+  "item.wizards_reborn.magnificent_maid_trim": "Arcane Wood Trim",
+  "item.wizards_reborn.summer_love_trim": "Arcane Wood Trim",
   "item.wizards_reborn.soul_hunter_trim": "Wisestone Trim",
   "item.wizards_reborn.implosion_trim": "Wisestone Trim",
+  "item.wizards_reborn.phantom_ink_trim": "Innocent Wood Trim",
 
   "item.wizards_reborn.mundane_brew_bucket": "Mundane Brew Bucket",
   "item.wizards_reborn.alchemy_oil_bucket": "Alchemy Oil Bucket",
@@ -855,6 +858,9 @@
   "skin.wizards_reborn.top_hat": "Top Hat",
   "skin.wizards_reborn.soul_hunter": "Soul Hunter",
   "skin.wizards_reborn.implosion": "Implosion",
+  "skin.wizards_reborn.phantom_ink": "Phantom Ink",
+  "skin.wizards_reborn.magnificent_maid": "Magnificent Maid",
+  "skin.wizards_reborn.summer_love": "Summer Love",
 
   "arcane_enchantment.wizards_reborn.wissen_mending": "Wissen Mending",
   "arcane_enchantment.wizards_reborn.magic_blade": "Magic Blade",

@@ -70,9 +70,7 @@ import mod.maxbogomol.wizards_reborn.common.proxy.ClientProxy;
 import mod.maxbogomol.wizards_reborn.common.proxy.ISidedProxy;
 import mod.maxbogomol.wizards_reborn.common.proxy.ServerProxy;
 import mod.maxbogomol.wizards_reborn.common.recipe.*;
-import mod.maxbogomol.wizards_reborn.common.skin.ImplosionSkin;
-import mod.maxbogomol.wizards_reborn.common.skin.SoulHunterSkin;
-import mod.maxbogomol.wizards_reborn.common.skin.TopHatSkin;
+import mod.maxbogomol.wizards_reborn.common.skin.*;
 import mod.maxbogomol.wizards_reborn.common.spell.aura.*;
 import mod.maxbogomol.wizards_reborn.common.spell.block.*;
 import mod.maxbogomol.wizards_reborn.common.spell.charge.*;
@@ -607,6 +605,9 @@ public class WizardsReborn {
     public static Skin TOP_HAT_SKIN = new TopHatSkin(MOD_ID+":top_hat", new Color(54, 60, 81));
     public static Skin SOUL_HUNTER_SKIN = new SoulHunterSkin(MOD_ID+":soul_hunter", new Color(225, 99, 226));
     public static Skin IMPLOSION_SKIN = new ImplosionSkin(MOD_ID+":implosion", new Color(149, 237, 255));
+    public static Skin PHANTOM_INK_SKIN = new PhantomInkSkin(MOD_ID+":phantom_ink", new Color(189, 237, 255));
+    public static Skin MAGNIFICENT_MAID_SKIN = new MagnificentMaidSkin(MOD_ID+":magnificent_maid", new Color(153, 168, 184));
+    public static Skin SUMMER_LOVE_SKIN = new SummerLoveSkin(MOD_ID+":summer_love", new Color(243, 181, 127));
 
     //ARCANE ENCHANTMENTS
     public static ArcaneEnchantment WISSEN_MENDING_ARCANE_ENCHANTMENT = new WissenMendingArcaneEnchantment(MOD_ID+":wissen_mending", 3);
@@ -1314,8 +1315,11 @@ public class WizardsReborn {
     public static final RegistryObject<Item> WISESTONE_TRIM = ITEMS.register("wisestone_trim", () -> new Item(new Item.Properties()));
     public static final RegistryObject<Item> INNOCENT_WOOD_TRIM = ITEMS.register("innocent_wood_trim", () -> new Item(new Item.Properties()));
     public static final RegistryObject<Item> TOP_HAT_TRIM = ITEMS.register("top_hat_trim", () -> new SkinTrimItem(new Item.Properties(), TOP_HAT_SKIN));
+    public static final RegistryObject<Item> MAGNIFICENT_MAID_TRIM = ITEMS.register("magnificent_maid_trim", () -> new SkinTrimItem(new Item.Properties(), MAGNIFICENT_MAID_SKIN));
+    public static final RegistryObject<Item> SUMMER_LOVE_TRIM = ITEMS.register("summer_love_trim", () -> new SkinTrimItem(new Item.Properties(), SUMMER_LOVE_SKIN));
     public static final RegistryObject<Item> SOUL_HUNTER_TRIM = ITEMS.register("soul_hunter_trim", () -> new SkinTrimItem(new Item.Properties(), SOUL_HUNTER_SKIN));
     public static final RegistryObject<Item> IMPLOSION_TRIM = ITEMS.register("implosion_trim", () -> new SkinTrimItem(new Item.Properties(), IMPLOSION_SKIN));
+    public static final RegistryObject<Item> PHANTOM_INK_TRIM = ITEMS.register("phantom_ink_trim", () -> new SkinTrimItem(new Item.Properties(), PHANTOM_INK_SKIN));
 
     //TILE_ENTITIES
     public static final RegistryObject<BlockEntityType<CustomSignTileEntity>> SIGN_TILE_ENTITY = TILE_ENTITIES.register("sign", () -> BlockEntityType.Builder.of(CustomSignTileEntity::new,
@@ -2014,6 +2018,9 @@ public class WizardsReborn {
         Skins.register(TOP_HAT_SKIN);
         Skins.register(SOUL_HUNTER_SKIN);
         Skins.register(IMPLOSION_SKIN);
+        Skins.register(PHANTOM_INK_SKIN);
+        Skins.register(MAGNIFICENT_MAID_SKIN);
+        Skins.register(SUMMER_LOVE_SKIN);
     }
 
     public static void setupArcaneEnchantments() {

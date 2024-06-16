@@ -147,4 +147,8 @@ public class ArcaneArmorItem extends ArmorItem implements IArcaneItem {
     public <T extends LivingEntity> int damageItem(ItemStack stack, int amount, T entity, Consumer<T> onBroken) {
         return ArcaneEnchantmentUtils.damageItem(stack, amount, entity);
     }
+
+    public boolean hasCustomModel() {
+        return false;
+    }
 }

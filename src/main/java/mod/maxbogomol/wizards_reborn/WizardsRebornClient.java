@@ -3,10 +3,7 @@ package mod.maxbogomol.wizards_reborn;
 import com.mojang.blaze3d.platform.InputConstants;
 import com.mojang.blaze3d.vertex.DefaultVertexFormat;
 import mod.maxbogomol.wizards_reborn.client.config.ClientConfig;
-import mod.maxbogomol.wizards_reborn.client.model.armor.ArcaneFortressArmorModel;
-import mod.maxbogomol.wizards_reborn.client.model.armor.InventorWizardArmorModel;
-import mod.maxbogomol.wizards_reborn.client.model.armor.SoulHunterArmorModel;
-import mod.maxbogomol.wizards_reborn.client.model.armor.TopHatArmorModel;
+import mod.maxbogomol.wizards_reborn.client.model.armor.*;
 import mod.maxbogomol.wizards_reborn.client.model.curio.*;
 import mod.maxbogomol.wizards_reborn.client.particle.*;
 import mod.maxbogomol.wizards_reborn.client.render.block.PipeModel;
@@ -69,14 +66,20 @@ public class WizardsRebornClient {
     public static final ModelLayerLocation INVENTOR_WIZARD_ARMOR_LAYER = new ModelLayerLocation(new ResourceLocation(WizardsReborn.MOD_ID, "inventor_wizard_armor"), "main");
     public static final ModelLayerLocation ARCANE_FORTRESS_ARMOR_LAYER = new ModelLayerLocation(new ResourceLocation(WizardsReborn.MOD_ID, "arcane_fortress_armor"), "main");
 
+    public static final ModelLayerLocation EMPTY_ARMOR_LAYER = new ModelLayerLocation(new ResourceLocation(WizardsReborn.MOD_ID, "empty_armor"), "main");
     public static final ModelLayerLocation TOP_HAT_ARMOR_LAYER = new ModelLayerLocation(new ResourceLocation(WizardsReborn.MOD_ID, "top_hat_armor"), "main");
     public static final ModelLayerLocation SOUL_HUNTER_ARMOR_LAYER = new ModelLayerLocation(new ResourceLocation(WizardsReborn.MOD_ID, "soul_hunter_armor"), "main");
+    public static final ModelLayerLocation MAGNIFICENT_MAID_ARMOR_LAYER = new ModelLayerLocation(new ResourceLocation(WizardsReborn.MOD_ID, "magnificent_maid_armor"), "main");
+    public static final ModelLayerLocation MAGNIFICENT_MAID_SLIM_ARMOR_LAYER = new ModelLayerLocation(new ResourceLocation(WizardsReborn.MOD_ID, "magnificent_maid_slim_armor"), "main");
 
     public static InventorWizardArmorModel INVENTOR_WIZARD_ARMOR_MODEL = null;
     public static ArcaneFortressArmorModel ARCANE_FORTRESS_ARMOR_MODEL = null;
 
+    public static EmptyArmorModel EMPTY_ARMOR_MODEL = null;
     public static TopHatArmorModel TOP_HAT_ARMOR_MODEL = null;
     public static SoulHunterArmorModel SOUL_HUNTER_ARMOR_MODEL = null;
+    public static MagnificentMaidArmorModel MAGNIFICENT_MAID_ARMOR_MODEL = null;
+    public static MagnificentMaidSlimArmorModel MAGNIFICENT_MAID_SLIM_ARMOR_MODEL = null;
 
     public static ModelResourceLocation JEWELER_TABLE_STONE_MODEl = new ModelResourceLocation(WizardsReborn.MOD_ID, "jeweler_table_stone", "");
     public static ModelResourceLocation ALTAR_OF_DROUGHT_FRAME_MODEl = new ModelResourceLocation(WizardsReborn.MOD_ID, "altar_of_drought_frame", "");
@@ -289,6 +292,17 @@ public class WizardsRebornClient {
             ItemSkinsModels.addSkin(WizardsReborn.MOD_ID+":implosion_scythe");
             ItemSkinsModels.addSkin(WizardsReborn.MOD_ID+":implosion_arcane_wand");
             ItemSkinsModels.addSkin(WizardsReborn.MOD_ID+":implosion_wissen_wand");
+            ItemSkinsModels.addSkin(WizardsReborn.MOD_ID+":magnificent_maid_headwear");
+            ItemSkinsModels.addSkin(WizardsReborn.MOD_ID+":magnificent_maid_suit");
+            ItemSkinsModels.addSkin(WizardsReborn.MOD_ID+":magnificent_maid_stockings");
+            ItemSkinsModels.addSkin(WizardsReborn.MOD_ID+":magnificent_maid_boots");
+            ItemSkinsModels.addSkin(WizardsReborn.MOD_ID+":magnificent_maid_arcane_wand");
+            ItemSkinsModels.addSkin(WizardsReborn.MOD_ID+":magnificent_maid_wissen_wand");
+            ItemSkinsModels.addSkin(WizardsReborn.MOD_ID+":summer_love_flower");
+            ItemSkinsModels.addSkin(WizardsReborn.MOD_ID+":summer_love_dress");
+            ItemSkinsModels.addSkin(WizardsReborn.MOD_ID+":summer_love_boots");
+            ItemSkinsModels.addSkin(WizardsReborn.MOD_ID+":summer_love_arcane_wand");
+            ItemSkinsModels.addSkin(WizardsReborn.MOD_ID+":summer_love_wissen_wand");
 
             for (String skin : ItemSkinsModels.getSkins()) {
                 event.register(ItemSkinsModels.getModelLocationSkin(skin));
@@ -334,6 +348,8 @@ public class WizardsRebornClient {
             WandCrystalsModels.addWandItem(map, WizardsReborn.ARCANE_WAND.getId());
             WandCrystalsModels.addWandItem(map, new ResourceLocation(WizardsReborn.MOD_ID, "skin/soul_hunter_arcane_wand"));
             WandCrystalsModels.addWandItem(map, new ResourceLocation(WizardsReborn.MOD_ID, "skin/implosion_arcane_wand"));
+            WandCrystalsModels.addWandItem(map, new ResourceLocation(WizardsReborn.MOD_ID, "skin/magnificent_maid_arcane_wand"));
+            WandCrystalsModels.addWandItem(map, new ResourceLocation(WizardsReborn.MOD_ID, "skin/summer_love_arcane_wand"));
 
             if (ClientConfig.LARGE_ITEM_MODEL.get()) {
                 Item2DRenderer.onModelBakeEvent(event);
@@ -371,6 +387,10 @@ public class WizardsRebornClient {
             Item2DRenderer.bakeModel(map, WizardsReborn.MOD_ID, "arcane_wood_scythe", new SkinModelOverrideList());
             Item2DRenderer.bakeModel(map, WizardsReborn.MOD_ID, "innocent_wood_scythe", new SkinModelOverrideList());
             Item2DRenderer.bakeModel(map, WizardsReborn.MOD_ID, "arcane_gold_scythe", new SkinModelOverrideList());
+            addSkinModel(map, WizardsReborn.ARCANE_FORTRESS_HELMET.getId());
+            addSkinModel(map, WizardsReborn.ARCANE_FORTRESS_CHESTPLATE.getId());
+            addSkinModel(map, WizardsReborn.ARCANE_FORTRESS_LEGGINGS.getId());
+            addSkinModel(map, WizardsReborn.ARCANE_FORTRESS_BOOTS.getId());
             addSkinModel(map, WizardsReborn.INVENTOR_WIZARD_HAT.getId());
             addSkinModel(map, WizardsReborn.INVENTOR_WIZARD_COSTUME.getId());
             addSkinModel(map, WizardsReborn.INVENTOR_WIZARD_TROUSERS.getId());
@@ -481,8 +501,11 @@ public class WizardsRebornClient {
             event.registerLayerDefinition(INVENTOR_WIZARD_ARMOR_LAYER, InventorWizardArmorModel::createBodyLayer);
             event.registerLayerDefinition(ARCANE_FORTRESS_ARMOR_LAYER, ArcaneFortressArmorModel::createBodyLayer);
 
+            event.registerLayerDefinition(EMPTY_ARMOR_LAYER, EmptyArmorModel::createBodyLayer);
             event.registerLayerDefinition(TOP_HAT_ARMOR_LAYER, TopHatArmorModel::createBodyLayer);
             event.registerLayerDefinition(SOUL_HUNTER_ARMOR_LAYER, SoulHunterArmorModel::createBodyLayer);
+            event.registerLayerDefinition(MAGNIFICENT_MAID_ARMOR_LAYER, MagnificentMaidArmorModel::createBodyLayer);
+            event.registerLayerDefinition(MAGNIFICENT_MAID_SLIM_ARMOR_LAYER, MagnificentMaidSlimArmorModel::createBodyLayer);
         }
 
         @SubscribeEvent
@@ -490,8 +513,11 @@ public class WizardsRebornClient {
             INVENTOR_WIZARD_ARMOR_MODEL = new InventorWizardArmorModel(event.getEntityModels().bakeLayer(INVENTOR_WIZARD_ARMOR_LAYER));
             ARCANE_FORTRESS_ARMOR_MODEL = new ArcaneFortressArmorModel(event.getEntityModels().bakeLayer(ARCANE_FORTRESS_ARMOR_LAYER));
 
+            EMPTY_ARMOR_MODEL = new EmptyArmorModel(event.getEntityModels().bakeLayer(EMPTY_ARMOR_LAYER));
             TOP_HAT_ARMOR_MODEL = new TopHatArmorModel(event.getEntityModels().bakeLayer(TOP_HAT_ARMOR_LAYER));
             SOUL_HUNTER_ARMOR_MODEL = new SoulHunterArmorModel(event.getEntityModels().bakeLayer(SOUL_HUNTER_ARMOR_LAYER));
+            MAGNIFICENT_MAID_ARMOR_MODEL = new MagnificentMaidArmorModel(event.getEntityModels().bakeLayer(MAGNIFICENT_MAID_ARMOR_LAYER));
+            MAGNIFICENT_MAID_SLIM_ARMOR_MODEL = new MagnificentMaidSlimArmorModel(event.getEntityModels().bakeLayer(MAGNIFICENT_MAID_SLIM_ARMOR_LAYER));
         }
 
         @SubscribeEvent

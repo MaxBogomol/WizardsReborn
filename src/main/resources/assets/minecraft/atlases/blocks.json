@@ -91,6 +91,14 @@
     {
       "type": "single",
       "resource": "wizards_reborn:spell/baller"
+    },
+    {
+      "type": "single",
+      "resource": "wizards_reborn:spell/silly_mlem"
+    },
+    {
+      "type": "single",
+      "resource": "wizards_reborn:spell/fat_loaf"
     }
   ]
 }

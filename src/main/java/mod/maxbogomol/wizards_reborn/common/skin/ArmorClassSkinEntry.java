@@ -2,11 +2,11 @@ package mod.maxbogomol.wizards_reborn.common.skin;
 
 import mod.maxbogomol.wizards_reborn.WizardsRebornClient;
 import mod.maxbogomol.wizards_reborn.client.model.armor.ArmorModel;
+import mod.maxbogomol.wizards_reborn.common.item.equipment.arcane.ArcaneArmorItem;
 import net.minecraft.client.model.HumanoidModel;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.world.item.ArmorItem;
 import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
@@ -29,7 +29,7 @@ public class ArmorClassSkinEntry extends ItemClassSkinEntry {
     @Override
     public boolean canApplyOnItem(ItemStack itemStack) {
         if (item.isInstance(itemStack.getItem())) {
-            if (itemStack.getItem() instanceof ArmorItem armor) {
+            if (itemStack.getItem() instanceof ArcaneArmorItem armor && armor.hasCustomModel()) {
                 return skins.containsKey(armor.getEquipmentSlot());
             }
         }
@@ -38,16 +38,16 @@ public class ArmorClassSkinEntry extends ItemClassSkinEntry {
 
     @OnlyIn(Dist.CLIENT)
     public String getItemModelName(ItemStack stack) {
-        if (stack.getItem() instanceof ArmorItem armor) {
+        if (stack.getItem() instanceof ArcaneArmorItem armor) {
             return skins.get(armor.getEquipmentSlot());
         }
-        return "";
+        return null;
     }
 
     @Override
     @OnlyIn(Dist.CLIENT)
     public ArmorModel getArmorModel(LivingEntity entity, ItemStack itemStack, EquipmentSlot armorSlot, HumanoidModel _default) {
-        return WizardsRebornClient.INVENTOR_WIZARD_ARMOR_MODEL;
+        return WizardsRebornClient.EMPTY_ARMOR_MODEL;
     }
 
     @Override

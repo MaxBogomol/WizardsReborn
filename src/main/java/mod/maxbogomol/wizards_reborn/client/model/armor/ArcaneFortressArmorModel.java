@@ -62,9 +62,4 @@ public class ArcaneFortressArmorModel extends ArmorModel {
 
         return LayerDefinition.create(mesh, 128, 64);
     }
-
-    @Override
-    public void setupAnim(LivingEntity entity, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch) {
-
-    }
 }

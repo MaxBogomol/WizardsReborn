@@ -465,8 +465,11 @@ public class WizardsRebornItemGroup {
             event.accept(WizardsReborn.WISESTONE_TRIM);
             event.accept(WizardsReborn.INNOCENT_WOOD_TRIM);
             event.accept(WizardsReborn.TOP_HAT_TRIM);
+            event.accept(WizardsReborn.MAGNIFICENT_MAID_TRIM);
+            event.accept(WizardsReborn.SUMMER_LOVE_TRIM);
             event.accept(WizardsReborn.SOUL_HUNTER_TRIM);
             event.accept(WizardsReborn.IMPLOSION_TRIM);
+            event.accept(WizardsReborn.PHANTOM_INK_TRIM);
 
             for (AlchemyPotion potion : AlchemyPotions.getAlchemyPotions()) {
                 if (potion != RegisterAlchemyPotions.EMPTY && potion != RegisterAlchemyPotions.COMBINED) {

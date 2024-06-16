@@ -28,7 +28,8 @@ public class WandModelOverrideList extends CustomModelOverrideList {
 
             Skin skin = Skin.getSkinFromItem(stack);
             if (skin != null) {
-                return WandCrystalsModels.getModel(skin.getItemModelName(stack), modId + ":" + crystalId);
+                BakedModel model = WandCrystalsModels.getModel(skin.getItemModelName(stack), modId + ":" + crystalId);
+                if (model != null) return model;
             } else {
                 string = stack.getDescriptionId();
                 i = string.indexOf(".");
@@ -37,13 +38,15 @@ public class WandModelOverrideList extends CustomModelOverrideList {
                 String modIdW = string.substring(0, i);
                 String wandId = string.substring(i + 1);
 
-                return WandCrystalsModels.getModel(modIdW + ":" + wandId, modId + ":" + crystalId);
+                BakedModel model = WandCrystalsModels.getModel(modIdW + ":" + wandId, modId + ":" + crystalId);
+                if (model != null) return model;
             }
         }
 
         Skin skin = Skin.getSkinFromItem(stack);
         if (skin != null) {
-            return WandCrystalsModels.getModel(skin.getItemModelName(stack), "");
+            BakedModel model = WandCrystalsModels.getModel(skin.getItemModelName(stack), "");
+            if (model != null) return model;
         }
 
         return originalModel;

@@ -5,6 +5,7 @@ import mod.maxbogomol.wizards_reborn.WizardsRebornClient;
 import mod.maxbogomol.wizards_reborn.client.model.armor.ArmorModel;
 import mod.maxbogomol.wizards_reborn.utils.ColorUtils;
 import net.minecraft.client.model.HumanoidModel;
+import net.minecraft.client.player.AbstractClientPlayer;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.Style;
@@ -106,7 +107,7 @@ public class Skin {
         for (SkinEntry skinEntry : getSkinEntries()) {
             if (skinEntry.canApplyOnItem(itemStack)) return skinEntry.getArmorModel(entity, itemStack, armorSlot, _default);
         }
-        return WizardsRebornClient.INVENTOR_WIZARD_ARMOR_MODEL;
+        return WizardsRebornClient.EMPTY_ARMOR_MODEL;
     }
 
     @OnlyIn(Dist.CLIENT)
@@ -122,19 +123,27 @@ public class Skin {
         for (SkinEntry skinEntry : getSkinEntries()) {
             if (skinEntry.canApplyOnItem(stack)) return skinEntry.getItemModelName(stack);
         }
-        return "";
+        return null;
     }
 
     public List<SkinEntry> getSkinEntries() {
         return skinEntries;
     }
 
-    public SkinEntry addSkinEntry(SkinEntry skinEntry) {
+    public void addSkinEntry(SkinEntry skinEntry) {
         skinEntries.add(skinEntry);
-        return skinEntry;
     }
 
     public void setupSkinEntries() {
 
+    }
+
+    @OnlyIn(Dist.CLIENT)
+    public static boolean isDefaultModel(Entity entity) {
+        if(entity instanceof AbstractClientPlayer player) {
+            return player.getModelName().equals("default");
+        }
+
+        return false;
     }
 }

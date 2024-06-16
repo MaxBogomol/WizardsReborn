@@ -96,6 +96,11 @@ public class InventorWizardArmorItem extends ArcaneArmorItem implements IForgeIt
     }
 
     @Override
+    public boolean hasCustomModel() {
+        return true;
+    }
+
+    @Override
     public boolean hasArmorSet() {
         return true;
     }

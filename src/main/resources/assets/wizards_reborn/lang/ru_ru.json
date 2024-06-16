@@ -432,8 +432,11 @@
   "item.wizards_reborn.wisestone_trim": "Мудро-каменная отделка",
   "item.wizards_reborn.innocent_wood_trim": "Невинно-древесная отделка",
   "item.wizards_reborn.top_hat_trim": "Арканово-древесная отделка",
+  "item.wizards_reborn.magnificent_maid_trim": "Арканово-древесная отделка",
+  "item.wizards_reborn.summer_love_trim": "Арканово-древесная отделка",
   "item.wizards_reborn.soul_hunter_trim": "Мудро-каменная отделка",
   "item.wizards_reborn.implosion_trim": "Мудро-каменная отделка",
+  "item.wizards_reborn.phantom_ink_trim": "Невинно-древесная отделка",
 
   "item.wizards_reborn.mundane_brew_bucket": "Ведро мутного варева",
   "item.wizards_reborn.alchemy_oil_bucket": "Ведро алхимического масла",
@@ -855,6 +858,9 @@
   "skin.wizards_reborn.top_hat": "Цилиндр",
   "skin.wizards_reborn.soul_hunter": "Охотник за душами",
   "skin.wizards_reborn.implosion": "Имплозия",
+  "skin.wizards_reborn.phantom_ink": "Фантомные чернила",
+  "skin.wizards_reborn.magnificent_maid": "Великолепная горничная",
+  "skin.wizards_reborn.summer_love": "Летняя любовь",
 
   "arcane_enchantment.wizards_reborn.wissen_mending": "Виссен починка",
   "arcane_enchantment.wizards_reborn.magic_blade": "Магическое лезвие",
