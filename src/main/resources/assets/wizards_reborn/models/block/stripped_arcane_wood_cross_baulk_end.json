@@ -1,0 +1,7 @@
+{
+  "parent": "wizards_reborn:block/cross_baulk_end",
+  "textures": {
+    "particle": "wizards_reborn:block/stripped_arcane_wood_log",
+    "pipe": "wizards_reborn:block/stripped_arcane_wood_baulk"
+  }
+}

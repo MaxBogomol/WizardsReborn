@@ -14,7 +14,7 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraftforge.common.capabilities.ForgeCapabilities;
 import org.jetbrains.annotations.NotNull;
 
-public class CrossBalkBlock extends CrossBalkBaseBlock {
+public class CrossBalkBlock extends CrossBaulkBaseBlock {
     public CrossBalkBlock(Properties pProperties) {
         super(pProperties);
     }
@@ -46,7 +46,7 @@ public class CrossBalkBlock extends CrossBalkBaseBlock {
 
     @Override
     public BlockEntity newBlockEntity(BlockPos pPos, BlockState pState) {
-        return WizardsReborn.CROSS_BALK_TILE_ENTITY.get().create(pPos, pState);
+        return WizardsReborn.CROSS_BAULK_TILE_ENTITY.get().create(pPos, pState);
     }
 
     @Override

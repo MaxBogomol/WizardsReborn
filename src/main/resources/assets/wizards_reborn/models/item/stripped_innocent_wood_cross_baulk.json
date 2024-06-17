@@ -1,0 +1,7 @@
+{
+  "parent": "wizards_reborn:block/cross_baulk_inventory",
+  "textures": {
+    "block": "wizards_reborn:block/stripped_innocent_wood_baulk",
+    "particle": "wizards_reborn:block/stripped_innocent_wood_log"
+  }
+}

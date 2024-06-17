@@ -1,7 +1,0 @@
-{
-  "parent": "wizards_reborn:block/cross_balk_end_alt",
-  "textures": {
-    "particle": "wizards_reborn:block/innocent_wood_log",
-    "pipe": "wizards_reborn:block/innocent_wood_balk"
-  }
-}

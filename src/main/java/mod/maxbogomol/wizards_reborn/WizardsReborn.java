@@ -648,12 +648,12 @@ public class WizardsReborn {
     public static final RegistryObject<Block> ARCANE_WOOD_PLANKS = BLOCKS.register("arcane_wood_planks", () -> new Block(BlockBehaviour.Properties.copy(Blocks.OAK_PLANKS).mapColor(MapColor.PODZOL).sound(ARCANE_WOOD_SOUNDS)));
     public static final RegistryObject<Block> ARCANE_WOOD_STAIRS = BLOCKS.register("arcane_wood_stairs", () -> new StairBlock(() -> ARCANE_WOOD_PLANKS.get().defaultBlockState(), BlockBehaviour.Properties.copy(ARCANE_WOOD_PLANKS.get())));
     public static final RegistryObject<Block> ARCANE_WOOD_SLAB = BLOCKS.register("arcane_wood_slab", () -> new SlabBlock(BlockBehaviour.Properties.copy(ARCANE_WOOD_PLANKS.get())));
-    public static final RegistryObject<Block> ARCANE_WOOD_BALK = BLOCKS.register("arcane_wood_balk", () -> new BalkBlock(BlockBehaviour.Properties.copy(ARCANE_WOOD_LOG.get())));
-    public static final RegistryObject<Block> ARCANE_WOOD_CROSS_BALK = BLOCKS.register("arcane_wood_cross_balk", () -> new CrossBalkBlock(BlockBehaviour.Properties.copy(ARCANE_WOOD_LOG.get())));
-    public static final RegistryObject<Block> STRIPPED_ARCANE_WOOD_BALK = BLOCKS.register("stripped_arcane_wood_balk", () -> new BalkBlock(BlockBehaviour.Properties.copy(STRIPPED_ARCANE_WOOD_LOG.get())));
-    public static final RegistryObject<Block> STRIPPED_ARCANE_WOOD_CROSS_BALK = BLOCKS.register("stripped_arcane_wood_cross_balk", () -> new CrossBalkBlock(BlockBehaviour.Properties.copy(STRIPPED_ARCANE_WOOD_LOG.get())));
-    public static final RegistryObject<Block> ARCANE_WOOD_PLANKS_BALK = BLOCKS.register("arcane_wood_planks_balk", () -> new BalkBlock(BlockBehaviour.Properties.copy(ARCANE_WOOD_PLANKS.get())));
-    public static final RegistryObject<Block> ARCANE_WOOD_PLANKS_CROSS_BALK = BLOCKS.register("arcane_wood_planks_cross_balk", () -> new CrossBalkBlock(BlockBehaviour.Properties.copy(ARCANE_WOOD_PLANKS.get())));
+    public static final RegistryObject<Block> ARCANE_WOOD_BAULK = BLOCKS.register("arcane_wood_baulk", () -> new BaulkBlock(BlockBehaviour.Properties.copy(ARCANE_WOOD_LOG.get())));
+    public static final RegistryObject<Block> ARCANE_WOOD_CROSS_BAULK = BLOCKS.register("arcane_wood_cross_baulk", () -> new CrossBalkBlock(BlockBehaviour.Properties.copy(ARCANE_WOOD_LOG.get())));
+    public static final RegistryObject<Block> STRIPPED_ARCANE_WOOD_BAULK = BLOCKS.register("stripped_arcane_wood_baulk", () -> new BaulkBlock(BlockBehaviour.Properties.copy(STRIPPED_ARCANE_WOOD_LOG.get())));
+    public static final RegistryObject<Block> STRIPPED_ARCANE_WOOD_CROSS_BAULK = BLOCKS.register("stripped_arcane_wood_cross_baulk", () -> new CrossBalkBlock(BlockBehaviour.Properties.copy(STRIPPED_ARCANE_WOOD_LOG.get())));
+    public static final RegistryObject<Block> ARCANE_WOOD_PLANKS_BAULK = BLOCKS.register("arcane_wood_planks_baulk", () -> new BaulkBlock(BlockBehaviour.Properties.copy(ARCANE_WOOD_PLANKS.get())));
+    public static final RegistryObject<Block> ARCANE_WOOD_PLANKS_CROSS_BAULK = BLOCKS.register("arcane_wood_planks_cross_baulk", () -> new CrossBalkBlock(BlockBehaviour.Properties.copy(ARCANE_WOOD_PLANKS.get())));
     public static final RegistryObject<Block> ARCANE_WOOD_FENCE = BLOCKS.register("arcane_wood_fence", () -> new FenceBlock(BlockBehaviour.Properties.copy(ARCANE_WOOD_PLANKS.get())));
     public static final RegistryObject<Block> ARCANE_WOOD_FENCE_GATE = BLOCKS.register("arcane_wood_fence_gate", () -> new FenceGateBlock(BlockBehaviour.Properties.copy(ARCANE_WOOD_PLANKS.get()), ARCANE_WOOD_TYPE.resolve().get()));
     public static final RegistryObject<Block> ARCANE_WOOD_DOOR = BLOCKS.register("arcane_wood_door", () -> new DoorBlock(BlockBehaviour.Properties.copy(ARCANE_WOOD_PLANKS.get()).noOcclusion(), ARCANE_WOOD_BLOCK_SET.resolve().get()));
@@ -675,12 +675,12 @@ public class WizardsReborn {
     public static final RegistryObject<Block> INNOCENT_WOOD_PLANKS = BLOCKS.register("innocent_wood_planks", () -> new Block(BlockBehaviour.Properties.copy(Blocks.CHERRY_PLANKS).mapColor(MapColor.TERRACOTTA_GRAY).sound(INNOCENT_WOOD_SOUNDS)));
     public static final RegistryObject<Block> INNOCENT_WOOD_STAIRS = BLOCKS.register("innocent_wood_stairs", () -> new StairBlock(() -> INNOCENT_WOOD_PLANKS.get().defaultBlockState(), BlockBehaviour.Properties.copy(INNOCENT_WOOD_PLANKS.get())));
     public static final RegistryObject<Block> INNOCENT_WOOD_SLAB = BLOCKS.register("innocent_wood_slab", () -> new SlabBlock(BlockBehaviour.Properties.copy(INNOCENT_WOOD_PLANKS.get())));
-    public static final RegistryObject<Block> INNOCENT_WOOD_BALK = BLOCKS.register("innocent_wood_balk", () -> new BalkBlock(BlockBehaviour.Properties.copy(INNOCENT_WOOD_LOG.get())));
-    public static final RegistryObject<Block> INNOCENT_WOOD_CROSS_BALK = BLOCKS.register("innocent_wood_cross_balk", () -> new CrossBalkBlock(BlockBehaviour.Properties.copy(INNOCENT_WOOD_LOG.get())));
-    public static final RegistryObject<Block> STRIPPED_INNOCENT_WOOD_BALK = BLOCKS.register("stripped_innocent_wood_balk", () -> new BalkBlock(BlockBehaviour.Properties.copy(STRIPPED_INNOCENT_WOOD_LOG.get())));
-    public static final RegistryObject<Block> STRIPPED_INNOCENT_WOOD_CROSS_BALK = BLOCKS.register("stripped_innocent_wood_cross_balk", () -> new CrossBalkBlock(BlockBehaviour.Properties.copy(STRIPPED_INNOCENT_WOOD_LOG.get())));
-    public static final RegistryObject<Block> INNOCENT_WOOD_PLANKS_BALK = BLOCKS.register("innocent_wood_planks_balk", () -> new BalkBlock(BlockBehaviour.Properties.copy(INNOCENT_WOOD_PLANKS.get())));
-    public static final RegistryObject<Block> INNOCENT_WOOD_PLANKS_CROSS_BALK = BLOCKS.register("innocent_wood_planks_cross_balk", () -> new CrossBalkBlock(BlockBehaviour.Properties.copy(INNOCENT_WOOD_PLANKS.get())));
+    public static final RegistryObject<Block> INNOCENT_WOOD_BAULK = BLOCKS.register("innocent_wood_baulk", () -> new BaulkBlock(BlockBehaviour.Properties.copy(INNOCENT_WOOD_LOG.get())));
+    public static final RegistryObject<Block> INNOCENT_WOOD_CROSS_BAULK = BLOCKS.register("innocent_wood_cross_baulk", () -> new CrossBalkBlock(BlockBehaviour.Properties.copy(INNOCENT_WOOD_LOG.get())));
+    public static final RegistryObject<Block> STRIPPED_INNOCENT_WOOD_BAULK = BLOCKS.register("stripped_innocent_wood_baulk", () -> new BaulkBlock(BlockBehaviour.Properties.copy(STRIPPED_INNOCENT_WOOD_LOG.get())));
+    public static final RegistryObject<Block> STRIPPED_INNOCENT_WOOD_CROSS_BAULK = BLOCKS.register("stripped_innocent_wood_cross_baulk", () -> new CrossBalkBlock(BlockBehaviour.Properties.copy(STRIPPED_INNOCENT_WOOD_LOG.get())));
+    public static final RegistryObject<Block> INNOCENT_WOOD_PLANKS_BAULK = BLOCKS.register("innocent_wood_planks_baulk", () -> new BaulkBlock(BlockBehaviour.Properties.copy(INNOCENT_WOOD_PLANKS.get())));
+    public static final RegistryObject<Block> INNOCENT_WOOD_PLANKS_CROSS_BAULK = BLOCKS.register("innocent_wood_planks_cross_baulk", () -> new CrossBalkBlock(BlockBehaviour.Properties.copy(INNOCENT_WOOD_PLANKS.get())));
     public static final RegistryObject<Block> INNOCENT_WOOD_FENCE = BLOCKS.register("innocent_wood_fence", () -> new FenceBlock(BlockBehaviour.Properties.copy(INNOCENT_WOOD_PLANKS.get())));
     public static final RegistryObject<Block> INNOCENT_WOOD_FENCE_GATE = BLOCKS.register("innocent_wood_fence_gate", () -> new FenceGateBlock(BlockBehaviour.Properties.copy(INNOCENT_WOOD_PLANKS.get()), INNOCENT_WOOD_TYPE.resolve().get()));
     public static final RegistryObject<Block> INNOCENT_WOOD_DOOR = BLOCKS.register("innocent_wood_door", () -> new DoorBlock(BlockBehaviour.Properties.copy(INNOCENT_WOOD_PLANKS.get()).noOcclusion(), ARCANE_WOOD_BLOCK_SET.resolve().get()));
@@ -969,12 +969,12 @@ public class WizardsReborn {
     public static final RegistryObject<Item> ARCANE_WOOD_PLANKS_ITEM = ITEMS.register("arcane_wood_planks", () -> new BlockItem(ARCANE_WOOD_PLANKS.get(), new Item.Properties()));
     public static final RegistryObject<Item> ARCANE_WOOD_STAIRS_ITEM = ITEMS.register("arcane_wood_stairs", () -> new BlockItem(ARCANE_WOOD_STAIRS.get(), new Item.Properties()));
     public static final RegistryObject<Item> ARCANE_WOOD_SLAB_ITEM = ITEMS.register("arcane_wood_slab", () -> new BlockItem(ARCANE_WOOD_SLAB.get(), new Item.Properties()));
-    public static final RegistryObject<Item> ARCANE_WOOD_BALK_ITEM = ITEMS.register("arcane_wood_balk", () -> new BlockItem(ARCANE_WOOD_BALK.get(), new Item.Properties()));
-    public static final RegistryObject<Item> ARCANE_WOOD_CROSS_BALK_ITEM = ITEMS.register("arcane_wood_cross_balk", () -> new BlockItem(ARCANE_WOOD_CROSS_BALK.get(), new Item.Properties()));
-    public static final RegistryObject<Item> STRIPPED_ARCANE_WOOD_BALK_ITEM = ITEMS.register("stripped_arcane_wood_balk", () -> new BlockItem(STRIPPED_ARCANE_WOOD_BALK.get(), new Item.Properties()));
-    public static final RegistryObject<Item> STRIPPED_ARCANE_WOOD_CROSS_BALK_ITEM = ITEMS.register("stripped_arcane_wood_cross_balk", () -> new BlockItem(STRIPPED_ARCANE_WOOD_CROSS_BALK.get(), new Item.Properties()));
-    public static final RegistryObject<Item> ARCANE_WOOD_PLANKS_BALK_ITEM = ITEMS.register("arcane_wood_planks_balk", () -> new BlockItem(ARCANE_WOOD_PLANKS_BALK.get(), new Item.Properties()));
-    public static final RegistryObject<Item> ARCANE_WOOD_PLANKS_CROSS_BALK_ITEM = ITEMS.register("arcane_wood_planks_cross_balk", () -> new BlockItem(ARCANE_WOOD_PLANKS_CROSS_BALK.get(), new Item.Properties()));
+    public static final RegistryObject<Item> ARCANE_WOOD_BAULK_ITEM = ITEMS.register("arcane_wood_baulk", () -> new BlockItem(ARCANE_WOOD_BAULK.get(), new Item.Properties()));
+    public static final RegistryObject<Item> ARCANE_WOOD_CROSS_BAULK_ITEM = ITEMS.register("arcane_wood_cross_baulk", () -> new BlockItem(ARCANE_WOOD_CROSS_BAULK.get(), new Item.Properties()));
+    public static final RegistryObject<Item> STRIPPED_ARCANE_WOOD_BAULK_ITEM = ITEMS.register("stripped_arcane_wood_baulk", () -> new BlockItem(STRIPPED_ARCANE_WOOD_BAULK.get(), new Item.Properties()));
+    public static final RegistryObject<Item> STRIPPED_ARCANE_WOOD_CROSS_BAULK_ITEM = ITEMS.register("stripped_arcane_wood_cross_baulk", () -> new BlockItem(STRIPPED_ARCANE_WOOD_CROSS_BAULK.get(), new Item.Properties()));
+    public static final RegistryObject<Item> ARCANE_WOOD_PLANKS_BAULK_ITEM = ITEMS.register("arcane_wood_planks_baulk", () -> new BlockItem(ARCANE_WOOD_PLANKS_BAULK.get(), new Item.Properties()));
+    public static final RegistryObject<Item> ARCANE_WOOD_PLANKS_CROSS_BAULK_ITEM = ITEMS.register("arcane_wood_planks_cross_baulk", () -> new BlockItem(ARCANE_WOOD_PLANKS_CROSS_BAULK.get(), new Item.Properties()));
     public static final RegistryObject<Item> ARCANE_WOOD_FENCE_ITEM = ITEMS.register("arcane_wood_fence", () -> new BlockItem(ARCANE_WOOD_FENCE.get(), new Item.Properties()));
     public static final RegistryObject<Item> ARCANE_WOOD_FENCE_GATE_ITEM = ITEMS.register("arcane_wood_fence_gate", () -> new BlockItem(ARCANE_WOOD_FENCE_GATE.get(), new Item.Properties()));
     public static final RegistryObject<Item> ARCANE_WOOD_DOOR_ITEM = ITEMS.register("arcane_wood_door", () -> new BlockItem(ARCANE_WOOD_DOOR.get(), new Item.Properties()));
@@ -1003,12 +1003,12 @@ public class WizardsReborn {
     public static final RegistryObject<Item> INNOCENT_WOOD_PLANKS_ITEM = ITEMS.register("innocent_wood_planks", () -> new BlockItem(INNOCENT_WOOD_PLANKS.get(), new Item.Properties()));
     public static final RegistryObject<Item> INNOCENT_WOOD_STAIRS_ITEM = ITEMS.register("innocent_wood_stairs", () -> new BlockItem(INNOCENT_WOOD_STAIRS.get(), new Item.Properties()));
     public static final RegistryObject<Item> INNOCENT_WOOD_SLAB_ITEM = ITEMS.register("innocent_wood_slab", () -> new BlockItem(INNOCENT_WOOD_SLAB.get(), new Item.Properties()));
-    public static final RegistryObject<Item> INNOCENT_WOOD_BALK_ITEM = ITEMS.register("innocent_wood_balk", () -> new BlockItem(INNOCENT_WOOD_BALK.get(), new Item.Properties()));
-    public static final RegistryObject<Item> INNOCENT_WOOD_CROSS_BALK_ITEM = ITEMS.register("innocent_wood_cross_balk", () -> new BlockItem(INNOCENT_WOOD_CROSS_BALK.get(), new Item.Properties()));
-    public static final RegistryObject<Item> STRIPPED_INNOCENT_WOOD_BALK_ITEM = ITEMS.register("stripped_innocent_wood_balk", () -> new BlockItem(STRIPPED_INNOCENT_WOOD_BALK.get(), new Item.Properties()));
-    public static final RegistryObject<Item> STRIPPED_INNOCENT_WOOD_CROSS_BALK_ITEM = ITEMS.register("stripped_innocent_wood_cross_balk", () -> new BlockItem(STRIPPED_INNOCENT_WOOD_CROSS_BALK.get(), new Item.Properties()));
-    public static final RegistryObject<Item> INNOCENT_WOOD_PLANKS_BALK_ITEM = ITEMS.register("innocent_wood_planks_balk", () -> new BlockItem(INNOCENT_WOOD_PLANKS_BALK.get(), new Item.Properties()));
-    public static final RegistryObject<Item> INNOCENT_WOOD_PLANKS_CROSS_BALK_ITEM = ITEMS.register("innocent_wood_planks_cross_balk", () -> new BlockItem(INNOCENT_WOOD_PLANKS_CROSS_BALK.get(), new Item.Properties()));
+    public static final RegistryObject<Item> INNOCENT_WOOD_BAULK_ITEM = ITEMS.register("innocent_wood_baulk", () -> new BlockItem(INNOCENT_WOOD_BAULK.get(), new Item.Properties()));
+    public static final RegistryObject<Item> INNOCENT_WOOD_CROSS_BAULK_ITEM = ITEMS.register("innocent_wood_cross_baulk", () -> new BlockItem(INNOCENT_WOOD_CROSS_BAULK.get(), new Item.Properties()));
+    public static final RegistryObject<Item> STRIPPED_INNOCENT_WOOD_BAULK_ITEM = ITEMS.register("stripped_innocent_wood_baulk", () -> new BlockItem(STRIPPED_INNOCENT_WOOD_BAULK.get(), new Item.Properties()));
+    public static final RegistryObject<Item> STRIPPED_INNOCENT_WOOD_CROSS_BAULK_ITEM = ITEMS.register("stripped_innocent_wood_cross_baulk", () -> new BlockItem(STRIPPED_INNOCENT_WOOD_CROSS_BAULK.get(), new Item.Properties()));
+    public static final RegistryObject<Item> INNOCENT_WOOD_PLANKS_BAULK_ITEM = ITEMS.register("innocent_wood_planks_baulk", () -> new BlockItem(INNOCENT_WOOD_PLANKS_BAULK.get(), new Item.Properties()));
+    public static final RegistryObject<Item> INNOCENT_WOOD_PLANKS_CROSS_BAULK_ITEM = ITEMS.register("innocent_wood_planks_cross_baulk", () -> new BlockItem(INNOCENT_WOOD_PLANKS_CROSS_BAULK.get(), new Item.Properties()));
     public static final RegistryObject<Item> INNOCENT_WOOD_FENCE_ITEM = ITEMS.register("innocent_wood_fence", () -> new BlockItem(INNOCENT_WOOD_FENCE.get(), new Item.Properties()));
     public static final RegistryObject<Item> INNOCENT_WOOD_FENCE_GATE_ITEM = ITEMS.register("innocent_wood_fence_gate", () -> new BlockItem(INNOCENT_WOOD_FENCE_GATE.get(), new Item.Properties()));
     public static final RegistryObject<Item> INNOCENT_WOOD_DOOR_ITEM = ITEMS.register("innocent_wood_door", () -> new BlockItem(INNOCENT_WOOD_DOOR.get(), new Item.Properties()));
@@ -1423,7 +1423,7 @@ public class WizardsReborn {
     public static RegistryObject<BlockEntityType<SaltLanternTileEntity>> SALT_LANTERN_TILE_ENTITY = TILE_ENTITIES.register("salt_lantern", () -> BlockEntityType.Builder.of(SaltLanternTileEntity::new, ARCANE_SALT_LANTERN.get(), INNOCENT_SALT_LANTERN.get(), WISESTONE_SALT_LANTERN.get()).build(null));
     public static RegistryObject<BlockEntityType<SaltCampfireTileEntity>> SALT_CAMPFIRE_TILE_ENTITY = TILE_ENTITIES.register("salt_campfire", () -> BlockEntityType.Builder.of(SaltCampfireTileEntity::new, ARCANE_SALT_CAMPFIRE.get(), INNOCENT_SALT_CAMPFIRE.get(), WISESTONE_SALT_CAMPFIRE.get()).build(null));
 
-    public static RegistryObject<BlockEntityType<CrossBalkTileEntity>> CROSS_BALK_TILE_ENTITY = TILE_ENTITIES.register("cross_balk", () -> BlockEntityType.Builder.of(CrossBalkTileEntity::new, ARCANE_WOOD_CROSS_BALK.get()).build(null));
+    public static RegistryObject<BlockEntityType<CrossBalkTileEntity>> CROSS_BAULK_TILE_ENTITY = TILE_ENTITIES.register("cross_baulk", () -> BlockEntityType.Builder.of(CrossBalkTileEntity::new, ARCANE_WOOD_CROSS_BAULK.get()).build(null));
 
     //ENTITIES
     public static final RegistryObject<EntityType<CustomBoatEntity>> BOAT = ENTITIES.register("boat", () -> EntityType.Builder.<CustomBoatEntity>of(CustomBoatEntity::new, MobCategory.MISC).sized(1.375f, 0.5625f).build(new ResourceLocation(MOD_ID, "boat").toString()));
@@ -1801,10 +1801,10 @@ public class WizardsReborn {
             AxeItem.STRIPPABLES = new ImmutableMap.Builder<Block, Block>().putAll(AxeItem.STRIPPABLES)
                     .put(ARCANE_WOOD_LOG.get(), STRIPPED_ARCANE_WOOD_LOG.get())
                     .put(ARCANE_WOOD.get(), STRIPPED_ARCANE_WOOD.get())
-                    .put(ARCANE_WOOD_BALK.get(), STRIPPED_ARCANE_WOOD_BALK.get())
+                    .put(ARCANE_WOOD_BAULK.get(), STRIPPED_ARCANE_WOOD_BAULK.get())
                     .put(INNOCENT_WOOD_LOG.get(), STRIPPED_INNOCENT_WOOD_LOG.get())
                     .put(INNOCENT_WOOD.get(), STRIPPED_INNOCENT_WOOD.get())
-                    .put(INNOCENT_WOOD_BALK.get(), STRIPPED_INNOCENT_WOOD_BALK.get()).build();
+                    .put(INNOCENT_WOOD_BAULK.get(), STRIPPED_INNOCENT_WOOD_BAULK.get()).build();
 
             ArcanePedestalBlock.blocksList.put(ARCANE_PEDESTAL.get(), HOVERING_TOME_STAND.get());
             ArcanePedestalBlock.blocksList.put(WISESTONE_PEDESTAL.get(), WISESTONE_HOVERING_TOME_STAND.get());
@@ -1827,12 +1827,12 @@ public class WizardsReborn {
             fireblock.setFlammable(ARCANE_WOOD_PLANKS.get(), 5, 20);
             fireblock.setFlammable(ARCANE_WOOD_STAIRS.get(), 5, 20);
             fireblock.setFlammable(ARCANE_WOOD_SLAB.get(), 5, 20);
-            fireblock.setFlammable(ARCANE_WOOD_BALK.get(), 5, 20);
-            fireblock.setFlammable(ARCANE_WOOD_CROSS_BALK.get(), 5, 20);
-            fireblock.setFlammable(STRIPPED_ARCANE_WOOD_BALK.get(), 5, 20);
-            fireblock.setFlammable(STRIPPED_ARCANE_WOOD_CROSS_BALK.get(), 5, 20);
-            fireblock.setFlammable(ARCANE_WOOD_PLANKS_BALK.get(), 5, 20);
-            fireblock.setFlammable(ARCANE_WOOD_PLANKS_CROSS_BALK.get(), 5, 20);
+            fireblock.setFlammable(ARCANE_WOOD_BAULK.get(), 5, 20);
+            fireblock.setFlammable(ARCANE_WOOD_CROSS_BAULK.get(), 5, 20);
+            fireblock.setFlammable(STRIPPED_ARCANE_WOOD_BAULK.get(), 5, 20);
+            fireblock.setFlammable(STRIPPED_ARCANE_WOOD_CROSS_BAULK.get(), 5, 20);
+            fireblock.setFlammable(ARCANE_WOOD_PLANKS_BAULK.get(), 5, 20);
+            fireblock.setFlammable(ARCANE_WOOD_PLANKS_CROSS_BAULK.get(), 5, 20);
             fireblock.setFlammable(ARCANE_WOOD_FENCE.get(), 5, 20);
             fireblock.setFlammable(ARCANE_WOOD_FENCE_GATE.get(), 5, 20);
             fireblock.setFlammable(ARCANE_WOOD_LEAVES.get(), 30, 60);
@@ -1843,12 +1843,12 @@ public class WizardsReborn {
             fireblock.setFlammable(INNOCENT_WOOD_PLANKS.get(), 5, 20);
             fireblock.setFlammable(INNOCENT_WOOD_STAIRS.get(), 5, 20);
             fireblock.setFlammable(INNOCENT_WOOD_SLAB.get(), 5, 20);
-            fireblock.setFlammable(INNOCENT_WOOD_BALK.get(), 5, 20);
-            fireblock.setFlammable(INNOCENT_WOOD_CROSS_BALK.get(), 5, 20);
-            fireblock.setFlammable(STRIPPED_INNOCENT_WOOD_BALK.get(), 5, 20);
-            fireblock.setFlammable(STRIPPED_INNOCENT_WOOD_CROSS_BALK.get(), 5, 20);
-            fireblock.setFlammable(INNOCENT_WOOD_PLANKS_BALK.get(), 5, 20);
-            fireblock.setFlammable(INNOCENT_WOOD_PLANKS_CROSS_BALK.get(), 5, 20);
+            fireblock.setFlammable(INNOCENT_WOOD_BAULK.get(), 5, 20);
+            fireblock.setFlammable(INNOCENT_WOOD_CROSS_BAULK.get(), 5, 20);
+            fireblock.setFlammable(STRIPPED_INNOCENT_WOOD_BAULK.get(), 5, 20);
+            fireblock.setFlammable(STRIPPED_INNOCENT_WOOD_CROSS_BAULK.get(), 5, 20);
+            fireblock.setFlammable(INNOCENT_WOOD_PLANKS_BAULK.get(), 5, 20);
+            fireblock.setFlammable(INNOCENT_WOOD_PLANKS_CROSS_BAULK.get(), 5, 20);
             fireblock.setFlammable(INNOCENT_WOOD_FENCE.get(), 5, 20);
             fireblock.setFlammable(INNOCENT_WOOD_FENCE_GATE.get(), 5, 20);
             fireblock.setFlammable(INNOCENT_WOOD_LEAVES.get(), 30, 60);

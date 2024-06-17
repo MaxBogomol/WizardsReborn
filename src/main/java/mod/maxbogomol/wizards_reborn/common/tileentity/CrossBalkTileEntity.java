@@ -13,7 +13,7 @@ public class CrossBalkTileEntity extends PipeBaseTileEntity implements TickableB
     }
 
     public CrossBalkTileEntity(BlockPos pos, BlockState state) {
-        this(WizardsReborn.CROSS_BALK_TILE_ENTITY.get(), pos, state);
+        this(WizardsReborn.CROSS_BAULK_TILE_ENTITY.get(), pos, state);
     }
 
     @Override
