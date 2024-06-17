@@ -1,0 +1,7 @@
+{
+  "parent": "wizards_reborn:block/balk",
+  "textures": {
+    "block": "wizards_reborn:block/stripped_arcane_wood_balk",
+    "particle": "wizards_reborn:block/stripped_arcane_wood_log"
+  }
+}

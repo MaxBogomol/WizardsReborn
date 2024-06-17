@@ -124,19 +124,60 @@ public class WizardsRebornClient {
     public static ArrayList<PipeModel> creativeFluidStorage = new ArrayList<PipeModel>();
     public static ArrayList<PipeModel> creativeSteamStorage = new ArrayList<PipeModel>();
 
+    public static PipeModel arcaneWoodCrossBalk;
+    public static PipeModel strippedArcaneWoodCrossBalk;
+    public static PipeModel arcaneWoodPlanksCrossBalk;
+    public static PipeModel innocentWoodCrossBalk;
+    public static PipeModel strippedInnocentWoodCrossBalk;
+    public static PipeModel innocentWoodPlanksCrossBalk;
+
     public static final ModelResourceLocation FLUID_CENTER = new ModelResourceLocation(new ResourceLocation(WizardsReborn.MOD_ID, "fluid_pipe_center"), "");
-    public static final ModelResourceLocation FLUID_EXTRACTOR = new ModelResourceLocation(new ResourceLocation(WizardsReborn.MOD_ID, "fluid_extractor_center"), "");
     public static final ModelResourceLocation FLUID_CONNECTION = new ModelResourceLocation(new ResourceLocation(WizardsReborn.MOD_ID, "fluid_pipe_connection"), "");
     public static final ModelResourceLocation FLUID_END = new ModelResourceLocation(new ResourceLocation(WizardsReborn.MOD_ID, "fluid_pipe_end"), "");
     public static final ModelResourceLocation FLUID_CONNECTION_2 = new ModelResourceLocation(new ResourceLocation(WizardsReborn.MOD_ID, "fluid_pipe_connection_opposite"), "");
     public static final ModelResourceLocation FLUID_END_2 = new ModelResourceLocation(new ResourceLocation(WizardsReborn.MOD_ID, "fluid_pipe_end_opposite"), "");
 
     public static final ModelResourceLocation STEAM_CENTER = new ModelResourceLocation(new ResourceLocation(WizardsReborn.MOD_ID, "steam_pipe_center"), "");
-    public static final ModelResourceLocation STEAM_EXTRACTOR = new ModelResourceLocation(new ResourceLocation(WizardsReborn.MOD_ID, "steam_extractor_center"), "");
     public static final ModelResourceLocation STEAM_CONNECTION = new ModelResourceLocation(new ResourceLocation(WizardsReborn.MOD_ID, "steam_pipe_connection"), "");
     public static final ModelResourceLocation STEAM_END = new ModelResourceLocation(new ResourceLocation(WizardsReborn.MOD_ID, "steam_pipe_end"), "");
     public static final ModelResourceLocation STEAM_CONNECTION_2 = new ModelResourceLocation(new ResourceLocation(WizardsReborn.MOD_ID, "steam_pipe_connection_opposite"), "");
     public static final ModelResourceLocation STEAM_END_2 = new ModelResourceLocation(new ResourceLocation(WizardsReborn.MOD_ID, "steam_pipe_end_opposite"), "");
+
+    public static final ModelResourceLocation ARCANE_WOOD_CROSS_BALK_CENTER = new ModelResourceLocation(new ResourceLocation(WizardsReborn.MOD_ID, "arcane_wood_cross_balk_center"), "");
+    public static final ModelResourceLocation ARCANE_WOOD_CROSS_BALK_CONNECTION = new ModelResourceLocation(new ResourceLocation(WizardsReborn.MOD_ID, "arcane_wood_cross_balk_connection"), "");
+    public static final ModelResourceLocation ARCANE_WOOD_CROSS_BALK_END = new ModelResourceLocation(new ResourceLocation(WizardsReborn.MOD_ID, "arcane_wood_cross_balk_end"), "");
+    public static final ModelResourceLocation ARCANE_WOOD_CROSS_BALK_CONNECTION_2 = new ModelResourceLocation(new ResourceLocation(WizardsReborn.MOD_ID, "arcane_wood_cross_balk_connection_opposite"), "");
+    public static final ModelResourceLocation ARCANE_WOOD_CROSS_BALK_END_2 = new ModelResourceLocation(new ResourceLocation(WizardsReborn.MOD_ID, "arcane_wood_cross_balk_end_opposite"), "");
+
+    public static final ModelResourceLocation STRIPPED_ARCANE_WOOD_CROSS_BALK_CENTER = new ModelResourceLocation(new ResourceLocation(WizardsReborn.MOD_ID, "stripped_arcane_wood_cross_balk_center"), "");
+    public static final ModelResourceLocation STRIPPED_ARCANE_WOOD_CROSS_BALK_CONNECTION = new ModelResourceLocation(new ResourceLocation(WizardsReborn.MOD_ID, "stripped_arcane_wood_cross_balk_connection"), "");
+    public static final ModelResourceLocation STRIPPED_ARCANE_WOOD_CROSS_BALK_END = new ModelResourceLocation(new ResourceLocation(WizardsReborn.MOD_ID, "stripped_arcane_wood_cross_balk_end"), "");
+    public static final ModelResourceLocation STRIPPED_ARCANE_WOOD_CROSS_BALK_CONNECTION_2 = new ModelResourceLocation(new ResourceLocation(WizardsReborn.MOD_ID, "stripped_arcane_wood_cross_balk_connection_opposite"), "");
+    public static final ModelResourceLocation STRIPPED_ARCANE_WOOD_CROSS_BALK_END_2 = new ModelResourceLocation(new ResourceLocation(WizardsReborn.MOD_ID, "stripped_arcane_wood_cross_balk_end_opposite"), "");
+
+    public static final ModelResourceLocation ARCANE_WOOD_PLANKS_CROSS_BALK_CENTER = new ModelResourceLocation(new ResourceLocation(WizardsReborn.MOD_ID, "arcane_wood_planks_cross_balk_center"), "");
+    public static final ModelResourceLocation ARCANE_WOOD_PLANKS_CROSS_BALK_CONNECTION = new ModelResourceLocation(new ResourceLocation(WizardsReborn.MOD_ID, "arcane_wood_planks_cross_balk_connection"), "");
+    public static final ModelResourceLocation ARCANE_WOOD_PLANKS_CROSS_BALK_END = new ModelResourceLocation(new ResourceLocation(WizardsReborn.MOD_ID, "arcane_wood_planks_cross_balk_end"), "");
+    public static final ModelResourceLocation ARCANE_WOOD_PLANKS_CROSS_BALK_CONNECTION_2 = new ModelResourceLocation(new ResourceLocation(WizardsReborn.MOD_ID, "arcane_wood_planks_cross_balk_connection_opposite"), "");
+    public static final ModelResourceLocation ARCANE_WOOD_PLANKS_CROSS_BALK_END_2 = new ModelResourceLocation(new ResourceLocation(WizardsReborn.MOD_ID, "arcane_wood_planks_cross_balk_end_opposite"), "");
+
+    public static final ModelResourceLocation INNOCENT_WOOD_CROSS_BALK_CENTER = new ModelResourceLocation(new ResourceLocation(WizardsReborn.MOD_ID, "innocent_wood_cross_balk_center"), "");
+    public static final ModelResourceLocation INNOCENT_WOOD_CROSS_BALK_CONNECTION = new ModelResourceLocation(new ResourceLocation(WizardsReborn.MOD_ID, "innocent_wood_cross_balk_connection"), "");
+    public static final ModelResourceLocation INNOCENT_WOOD_CROSS_BALK_END = new ModelResourceLocation(new ResourceLocation(WizardsReborn.MOD_ID, "innocent_wood_cross_balk_end"), "");
+    public static final ModelResourceLocation INNOCENT_WOOD_CROSS_BALK_CONNECTION_2 = new ModelResourceLocation(new ResourceLocation(WizardsReborn.MOD_ID, "innocent_wood_cross_balk_connection_opposite"), "");
+    public static final ModelResourceLocation INNOCENT_WOOD_CROSS_BALK_END_2 = new ModelResourceLocation(new ResourceLocation(WizardsReborn.MOD_ID, "innocent_wood_cross_balk_end_opposite"), "");
+
+    public static final ModelResourceLocation STRIPPED_INNOCENT_WOOD_CROSS_BALK_CENTER = new ModelResourceLocation(new ResourceLocation(WizardsReborn.MOD_ID, "stripped_innocent_wood_cross_balk_center"), "");
+    public static final ModelResourceLocation STRIPPED_INNOCENT_WOOD_CROSS_BALK_CONNECTION = new ModelResourceLocation(new ResourceLocation(WizardsReborn.MOD_ID, "stripped_innocent_wood_cross_balk_connection"), "");
+    public static final ModelResourceLocation STRIPPED_INNOCENT_WOOD_CROSS_BALK_END = new ModelResourceLocation(new ResourceLocation(WizardsReborn.MOD_ID, "stripped_innocent_wood_cross_balk_end"), "");
+    public static final ModelResourceLocation STRIPPED_INNOCENT_WOOD_CROSS_BALK_CONNECTION_2 = new ModelResourceLocation(new ResourceLocation(WizardsReborn.MOD_ID, "stripped_innocent_wood_cross_balk_connection_opposite"), "");
+    public static final ModelResourceLocation STRIPPED_INNOCENT_WOOD_CROSS_BALK_END_2 = new ModelResourceLocation(new ResourceLocation(WizardsReborn.MOD_ID, "stripped_innocent_wood_cross_balk_end_opposite"), "");
+
+    public static final ModelResourceLocation INNOCENT_WOOD_PLANKS_CROSS_BALK_CENTER = new ModelResourceLocation(new ResourceLocation(WizardsReborn.MOD_ID, "innocent_wood_planks_cross_balk_center"), "");
+    public static final ModelResourceLocation INNOCENT_WOOD_PLANKS_CROSS_BALK_CONNECTION = new ModelResourceLocation(new ResourceLocation(WizardsReborn.MOD_ID, "innocent_wood_planks_cross_balk_connection"), "");
+    public static final ModelResourceLocation INNOCENT_WOOD_PLANKS_CROSS_BALK_END = new ModelResourceLocation(new ResourceLocation(WizardsReborn.MOD_ID, "innocent_wood_planks_cross_balk_end"), "");
+    public static final ModelResourceLocation INNOCENT_WOOD_PLANKS_CROSS_BALK_CONNECTION_2 = new ModelResourceLocation(new ResourceLocation(WizardsReborn.MOD_ID, "innocent_wood_planks_cross_balk_connection_opposite"), "");
+    public static final ModelResourceLocation INNOCENT_WOOD_PLANKS_CROSS_BALK_END_2 = new ModelResourceLocation(new ResourceLocation(WizardsReborn.MOD_ID, "innocent_wood_planks_cross_balk_end_opposite"), "");
 
     public static final Music MOR_MUSIC = new Music(WizardsReborn.MUSIC_DISC_MOR_SOUND.getHolder().get(), 6000, 12000, true);
     public static final Music REBORN_MUSIC = new Music(WizardsReborn.MUSIC_DISC_REBORN_SOUND.getHolder().get(), 400, 1200, true);
@@ -327,18 +368,52 @@ public class WizardsRebornClient {
             event.register(ITEM_SORTER_PIECE_MODEl);
 
             event.register(FLUID_CENTER);
-            event.register(FLUID_EXTRACTOR);
             event.register(FLUID_CONNECTION);
             event.register(FLUID_END);
             event.register(FLUID_CONNECTION_2);
             event.register(FLUID_END_2);
 
             event.register(STEAM_CENTER);
-            event.register(STEAM_EXTRACTOR);
             event.register(STEAM_CONNECTION);
             event.register(STEAM_END);
             event.register(STEAM_CONNECTION_2);
             event.register(STEAM_END_2);
+
+            event.register(ARCANE_WOOD_CROSS_BALK_CENTER);
+            event.register(ARCANE_WOOD_CROSS_BALK_CONNECTION);
+            event.register(ARCANE_WOOD_CROSS_BALK_END);
+            event.register(ARCANE_WOOD_CROSS_BALK_CONNECTION_2);
+            event.register(ARCANE_WOOD_CROSS_BALK_END_2);
+
+            event.register(STRIPPED_ARCANE_WOOD_CROSS_BALK_CENTER);
+            event.register(STRIPPED_ARCANE_WOOD_CROSS_BALK_CONNECTION);
+            event.register(STRIPPED_ARCANE_WOOD_CROSS_BALK_END);
+            event.register(STRIPPED_ARCANE_WOOD_CROSS_BALK_CONNECTION_2);
+            event.register(STRIPPED_ARCANE_WOOD_CROSS_BALK_END_2);
+
+            event.register(ARCANE_WOOD_PLANKS_CROSS_BALK_CENTER);
+            event.register(ARCANE_WOOD_PLANKS_CROSS_BALK_CONNECTION);
+            event.register(ARCANE_WOOD_PLANKS_CROSS_BALK_END);
+            event.register(ARCANE_WOOD_PLANKS_CROSS_BALK_CONNECTION_2);
+            event.register(ARCANE_WOOD_PLANKS_CROSS_BALK_END_2);
+
+            event.register(INNOCENT_WOOD_CROSS_BALK_CENTER);
+            event.register(INNOCENT_WOOD_CROSS_BALK_CONNECTION);
+            event.register(INNOCENT_WOOD_CROSS_BALK_END);
+            event.register(INNOCENT_WOOD_CROSS_BALK_CONNECTION_2);
+            event.register(INNOCENT_WOOD_CROSS_BALK_END_2);
+
+            event.register(STRIPPED_INNOCENT_WOOD_CROSS_BALK_CENTER);
+            event.register(STRIPPED_INNOCENT_WOOD_CROSS_BALK_CONNECTION);
+            event.register(STRIPPED_INNOCENT_WOOD_CROSS_BALK_END);
+            event.register(STRIPPED_INNOCENT_WOOD_CROSS_BALK_CONNECTION_2);
+            event.register(STRIPPED_INNOCENT_WOOD_CROSS_BALK_END_2);
+
+            event.register(INNOCENT_WOOD_PLANKS_CROSS_BALK_CENTER);
+            event.register(INNOCENT_WOOD_PLANKS_CROSS_BALK_CONNECTION);
+            event.register(INNOCENT_WOOD_PLANKS_CROSS_BALK_END);
+            event.register(INNOCENT_WOOD_PLANKS_CROSS_BALK_CONNECTION_2);
+            event.register(INNOCENT_WOOD_PLANKS_CROSS_BALK_END_2);
         }
 
         @SubscribeEvent
@@ -430,6 +505,26 @@ public class WizardsRebornClient {
             addPipeModel(map, WizardsReborn.MOD_ID, "wisestone_steam_casing", "powered=true", "steam_pipe", wisestoneSteamCasing, true);
             addPipeModel(map, WizardsReborn.MOD_ID, "creative_fluid_storage", "", "fluid_pipe", creativeFluidStorage, true);
             addPipeModel(map, WizardsReborn.MOD_ID, "creative_steam_storage", "", "steam_pipe", creativeSteamStorage, true);
+
+            arcaneWoodCrossBalk = new PipeModel(map.get(ARCANE_WOOD_CROSS_BALK_CENTER), "arcane_wood_cross_balk");
+            strippedArcaneWoodCrossBalk = new PipeModel(map.get(STRIPPED_ARCANE_WOOD_CROSS_BALK_CENTER), "stripped_arcane_wood_cross_balk");
+            arcaneWoodPlanksCrossBalk = new PipeModel(map.get(ARCANE_WOOD_PLANKS_CROSS_BALK_CENTER), "arcane_wood_planks_cross_balk");
+            innocentWoodCrossBalk = new PipeModel(map.get(INNOCENT_WOOD_CROSS_BALK_CENTER), "innocent_wood_cross_balk");
+            strippedInnocentWoodCrossBalk = new PipeModel(map.get(STRIPPED_INNOCENT_WOOD_CROSS_BALK_CENTER), "stripped_innocent_wood_cross_balk");
+            innocentWoodPlanksCrossBalk = new PipeModel(map.get(INNOCENT_WOOD_PLANKS_CROSS_BALK_CENTER), "innocent_wood_planks_cross_balk");
+
+            addPipeModel(map, WizardsReborn.MOD_ID, "arcane_wood_cross_balk", "waterlogged=false", arcaneWoodCrossBalk);
+            addPipeModel(map, WizardsReborn.MOD_ID, "arcane_wood_cross_balk", "waterlogged=true", arcaneWoodCrossBalk);
+            addPipeModel(map, WizardsReborn.MOD_ID, "stripped_arcane_wood_cross_balk", "waterlogged=false", strippedArcaneWoodCrossBalk);
+            addPipeModel(map, WizardsReborn.MOD_ID, "stripped_arcane_wood_cross_balk", "waterlogged=true", strippedArcaneWoodCrossBalk);
+            addPipeModel(map, WizardsReborn.MOD_ID, "arcane_wood_planks_cross_balk", "waterlogged=false", arcaneWoodPlanksCrossBalk);
+            addPipeModel(map, WizardsReborn.MOD_ID, "arcane_wood_planks_cross_balk", "waterlogged=true", arcaneWoodPlanksCrossBalk);
+            addPipeModel(map, WizardsReborn.MOD_ID, "innocent_wood_cross_balk", "waterlogged=false", innocentWoodCrossBalk);
+            addPipeModel(map, WizardsReborn.MOD_ID, "innocent_wood_cross_balk", "waterlogged=true", innocentWoodCrossBalk);
+            addPipeModel(map, WizardsReborn.MOD_ID, "stripped_innocent_wood_cross_balk", "waterlogged=false", strippedInnocentWoodCrossBalk);
+            addPipeModel(map, WizardsReborn.MOD_ID, "stripped_innocent_wood_cross_balk", "waterlogged=true", strippedInnocentWoodCrossBalk);
+            addPipeModel(map, WizardsReborn.MOD_ID, "innocent_wood_planks_cross_balk", "waterlogged=false", innocentWoodPlanksCrossBalk);
+            addPipeModel(map, WizardsReborn.MOD_ID, "innocent_wood_planks_cross_balk", "waterlogged=true", innocentWoodPlanksCrossBalk);
         }
 
         @SubscribeEvent
@@ -447,6 +542,13 @@ public class WizardsRebornClient {
             bakePipeModel(wisestoneSteamCasing, event.getModelManager());
             bakePipeModel(creativeFluidStorage, event.getModelManager());
             bakePipeModel(creativeSteamStorage, event.getModelManager());
+
+            arcaneWoodCrossBalk.init(event.getModelManager());
+            strippedArcaneWoodCrossBalk.init(event.getModelManager());
+            arcaneWoodPlanksCrossBalk.init(event.getModelManager());
+            innocentWoodCrossBalk.init(event.getModelManager());
+            strippedInnocentWoodCrossBalk.init(event.getModelManager());
+            innocentWoodPlanksCrossBalk.init(event.getModelManager());
         }
 
         @SubscribeEvent

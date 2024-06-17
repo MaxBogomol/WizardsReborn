@@ -1,0 +1,19 @@
+{
+	"credit": "Made with Blockbench",
+	"parent": "block/block",
+	"elements": [
+		{
+			"name": "Cube",
+			"from": [4, 4, 4],
+			"to": [12, 12, 12],
+			"faces": {
+				"north": {"uv": [8, 8, 16, 16], "texture": "#pipe"},
+				"east": {"uv": [8, 8, 16, 16], "texture": "#pipe"},
+				"south": {"uv": [8, 8, 16, 16], "texture": "#pipe"},
+				"west": {"uv": [8, 8, 16, 16], "texture": "#pipe"},
+				"up": {"uv": [8, 8, 16, 16], "texture": "#pipe"},
+				"down": {"uv": [8, 8, 16, 16], "texture": "#pipe"}
+			}
+		}
+	]
+}

@@ -1,0 +1,7 @@
+{
+  "parent": "wizards_reborn:block/cross_balk_center",
+  "textures": {
+    "particle": "wizards_reborn:block/innocent_wood_planks",
+    "pipe": "wizards_reborn:block/innocent_wood_planks_balk"
+  }
+}
