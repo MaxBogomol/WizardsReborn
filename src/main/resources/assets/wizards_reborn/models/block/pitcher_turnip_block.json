@@ -1,0 +1,51 @@
+{
+	"credit": "Made with Blockbench",
+	"parent": "block/cube",
+	"textures": {
+		"0": "wizards_reborn:block/pitcher_turnip_block_top",
+		"1": "wizards_reborn:block/pitcher_turnip_block_side",
+		"2": "wizards_reborn:block/pitcher_turnip_block_bottom",
+		"3": "wizards_reborn:block/pitcher_turnip_block_sprout",
+		"particle": "wizards_reborn:block/pitcher_turnip_block_side"
+	},
+	"elements": [
+		{
+			"from": [0, 0, 0],
+			"to": [16, 16, 16],
+			"faces": {
+				"north": {"uv": [0, 0, 16, 16], "texture": "#1"},
+				"east": {"uv": [0, 0, 16, 16], "texture": "#1"},
+				"south": {"uv": [0, 0, 16, 16], "texture": "#1"},
+				"west": {"uv": [0, 0, 16, 16], "texture": "#1"},
+				"up": {"uv": [0, 0, 16, 16], "texture": "#0"},
+				"down": {"uv": [0, 0, 16, 16], "texture": "#2"}
+			}
+		},
+		{
+			"from": [6, 16, 8],
+			"to": [10, 21, 8],
+			"rotation": {"angle": -45, "axis": "y", "origin": [8, 16, 8]},
+			"faces": {
+				"north": {"uv": [0, 0, 4, 5], "texture": "#3"},
+				"east": {"uv": [0, 0, 0, 1], "texture": "#missing"},
+				"south": {"uv": [0, 0, 4, 5], "texture": "#3"},
+				"west": {"uv": [0, 0, 0, 1], "texture": "#missing"},
+				"up": {"uv": [0, 0, 2, 0], "texture": "#missing"},
+				"down": {"uv": [0, 0, 2, 0], "texture": "#missing"}
+			}
+		},
+		{
+			"from": [8, 16, 6],
+			"to": [8, 21, 10],
+			"rotation": {"angle": -45, "axis": "y", "origin": [8, 16, 8]},
+			"faces": {
+				"north": {"uv": [0, 0, 0, 1], "texture": "#missing"},
+				"east": {"uv": [0, 0, 4, 5], "texture": "#3"},
+				"south": {"uv": [0, 0, 0, 1], "texture": "#missing"},
+				"west": {"uv": [0, 0, 4, 5], "texture": "#3"},
+				"up": {"uv": [0, 0, 2, 0], "rotation": 90, "texture": "#missing"},
+				"down": {"uv": [0, 0, 2, 0], "rotation": 270, "texture": "#missing"}
+			}
+		}
+	]
+}

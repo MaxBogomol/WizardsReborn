@@ -1,6 +1,7 @@
 package mod.maxbogomol.wizards_reborn;
 
 import com.google.common.collect.ImmutableMap;
+import com.mojang.serialization.Codec;
 import mod.maxbogomol.wizards_reborn.api.arcaneenchantment.ArcaneEnchantment;
 import mod.maxbogomol.wizards_reborn.api.arcaneenchantment.ArcaneEnchantments;
 import mod.maxbogomol.wizards_reborn.api.crystal.CrystalStat;
@@ -65,6 +66,7 @@ import mod.maxbogomol.wizards_reborn.common.item.equipment.innocentwood.*;
 import mod.maxbogomol.wizards_reborn.common.itemgroup.WizardsRebornItemGroup;
 import mod.maxbogomol.wizards_reborn.common.knowledge.RegisterKnowledges;
 import mod.maxbogomol.wizards_reborn.common.knowledge.Researches;
+import mod.maxbogomol.wizards_reborn.common.loot.AddItemLootModifier;
 import mod.maxbogomol.wizards_reborn.common.network.PacketHandler;
 import mod.maxbogomol.wizards_reborn.common.proxy.ClientProxy;
 import mod.maxbogomol.wizards_reborn.common.proxy.ISidedProxy;
@@ -144,6 +146,7 @@ import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.SoundActions;
 import net.minecraftforge.common.capabilities.RegisterCapabilitiesEvent;
 import net.minecraftforge.common.extensions.IForgeMenuType;
+import net.minecraftforge.common.loot.IGlobalLootModifier;
 import net.minecraftforge.common.util.ForgeSoundType;
 import net.minecraftforge.common.util.LazyOptional;
 import net.minecraftforge.eventbus.api.IEventBus;
@@ -193,6 +196,7 @@ public class WizardsReborn {
     public static final DeferredRegister<MobEffect> EFFECTS = DeferredRegister.create(ForgeRegistries.MOB_EFFECTS, MOD_ID);
     public static final DeferredRegister<FluidType> FLUID_TYPES = DeferredRegister.create(ForgeRegistries.Keys.FLUID_TYPES, MOD_ID);
     public static final DeferredRegister<Fluid> FLUIDS = DeferredRegister.create(ForgeRegistries.FLUIDS, MOD_ID);
+    public static final DeferredRegister<Codec<? extends IGlobalLootModifier>> LOOT_MODIFIERS = DeferredRegister.create(ForgeRegistries.Keys.GLOBAL_LOOT_MODIFIER_SERIALIZERS, MOD_ID);
 
     public static final TagKey<Item> SCYTHES_ITEM_TAG = TagKey.create(Registries.ITEM, new ResourceLocation(MOD_ID, "scythes"));
     public static final TagKey<Item> ARCANE_GOLD_TOOLS_ITEM_TAG = TagKey.create(Registries.ITEM, new ResourceLocation(MOD_ID, "arcane_gold_tools"));
@@ -623,6 +627,7 @@ public class WizardsReborn {
     //public static CrystalRitual STONE_CALENDAR_CRYSTAL_RITUAL = new CrystalRitual(MOD_ID+":stone_calendar");
 
     public static final FoodProperties MOR_FOOD = (new FoodProperties.Builder()).nutrition(1).saturationMod(0.6F).effect(new MobEffectInstance(MobEffects.POISON, 450, 0), 1.0F).effect(new MobEffectInstance(MobEffects.CONFUSION, 350, 0), 1.0F).effect(new MobEffectInstance(MobEffects.BLINDNESS, 250, 0), 1.0F).effect(new MobEffectInstance(MobEffects.WEAKNESS, 550, 1), 1.0F).build();
+    public static final FoodProperties PITCHER_TURNIP_FOOD = (new FoodProperties.Builder()).nutrition(2).saturationMod(0.8F).build();
 
     //BLOCKS
     public static final RegistryObject<Block> ARCANE_GOLD_BLOCK = BLOCKS.register("arcane_gold_block", () -> new Block(BlockBehaviour.Properties.copy(Blocks.GOLD_BLOCK).sound(ARCANE_GOLD_SOUNDS)));
@@ -731,6 +736,9 @@ public class WizardsReborn {
     public static final RegistryObject<Block> ELDER_MOR = BLOCKS.register("elder_mor", () -> new MorBlock(BlockBehaviour.Properties.copy(Blocks.RED_MUSHROOM).mapColor(MapColor.COLOR_BLACK).sound(ELDER_MOR_SOUNDS)));
     public static final RegistryObject<Block> POTTED_ELDER_MOR = BLOCKS.register("potted_elder_mor", () -> new FlowerPotBlock(ELDER_MOR.get(), BlockBehaviour.Properties.copy(Blocks.FLOWER_POT).instabreak().noOcclusion()));
     public static final RegistryObject<Block> ELDER_MOR_BLOCK = BLOCKS.register("elder_mor_block", () -> new HugeMushroomBlock(BlockBehaviour.Properties.copy(Blocks.BROWN_MUSHROOM_BLOCK).mapColor(MapColor.COLOR_BLACK).sound(ELDER_MOR_BLOCK_SOUNDS)));
+
+    public static final RegistryObject<Block> PITCHER_TURNIP = BLOCKS.register("pitcher_turnip", () -> new PitcherTurnipBlock(BlockBehaviour.Properties.of().strength(0.5F).mapColor(MapColor.COLOR_ORANGE).sound(SoundType.CROP).noOcclusion()));
+    public static final RegistryObject<Block> PITCHER_TURNIP_BLOCK = BLOCKS.register("pitcher_turnip_block", () -> new Block(BlockBehaviour.Properties.copy(Blocks.PUMPKIN)));
 
     public static final RegistryObject<Block> ARCANUM_SEED_BLOCK = BLOCKS.register("arcanum_seed", () -> new CrystalSeedBlock(BlockBehaviour.Properties.copy(Blocks.AMETHYST_CLUSTER).mapColor(MapColor.COLOR_LIGHT_BLUE).sound(CRYSTAL_SOUNDS)));
     public static final RegistryObject<Block> ARCANUM_GROWTH = BLOCKS.register("arcanum_growth", () -> new ArcanumGrowthBlock(BlockBehaviour.Properties.copy(Blocks.AMETHYST_CLUSTER).mapColor(MapColor.COLOR_LIGHT_BLUE).sound(CRYSTAL_SOUNDS)));
@@ -1063,6 +1071,9 @@ public class WizardsReborn {
     public static final RegistryObject<Item> MOR_BLOCK_ITEM = ITEMS.register("mor_block", () -> new BlockItem(MOR_BLOCK.get(), new Item.Properties()));
     public static final RegistryObject<Item> ELDER_MOR_ITEM = ITEMS.register("elder_mor", () -> new MorItem(ELDER_MOR.get(), new Item.Properties().food(MOR_FOOD), 1700, 2100));
     public static final RegistryObject<Item> ELDER_MOR_BLOCK_ITEM = ITEMS.register("elder_mor_block", () -> new BlockItem(ELDER_MOR_BLOCK.get(), new Item.Properties()));
+
+    public static final RegistryObject<Item> PITCHER_TURNIP_ITEM = ITEMS.register("pitcher_turnip", () -> new BlockItem(PITCHER_TURNIP.get(), new Item.Properties().food(PITCHER_TURNIP_FOOD)));
+    public static final RegistryObject<Item> PITCHER_TURNIP_BLOCK_ITEM = ITEMS.register("pitcher_turnip_block", () -> new BlockItem(PITCHER_TURNIP_BLOCK.get(), new Item.Properties()));
 
     public static final RegistryObject<Item> PETALS = ITEMS.register("petals", () -> new Item(new Item.Properties()));
     public static final RegistryObject<Item> FLOWER_FERTILIZER = ITEMS.register("flower_fertilizer", () -> new BoneMealItem(new Item.Properties()));
@@ -1620,6 +1631,8 @@ public class WizardsReborn {
 
     public static final RegistryObject<BlockStateProviderType<?>> AN_STATEPROVIDER = BLOCK_STATE_PROVIDER_TYPE.register("an_stateprovider", () -> new BlockStateProviderType<>(SupplierBlockStateProvider.CODEC));
 
+    public static final RegistryObject<Codec<? extends IGlobalLootModifier>> ADD_ITEM = LOOT_MODIFIERS.register("add_item", AddItemLootModifier.CODEC);
+
     //FLUIDS
     public static final RegistryObject<FlowingFluid> MUNDANE_BREW_FLUID = FLUIDS.register("mundane_brew", () -> new ForgeFlowingFluid.Source(WizardsReborn.MUNDANE_BREW_FLUID_PROPERTIES));
     public static final RegistryObject<FlowingFluid> FLOWING_MUNDANE_BREW_FLUID = FLUIDS.register("flowing_mundane_brew", () -> new ForgeFlowingFluid.Flowing(WizardsReborn.MUNDANE_BREW_FLUID_PROPERTIES));
@@ -1740,6 +1753,7 @@ public class WizardsReborn {
         EFFECTS.register(eventBus);
         FLUID_TYPES.register(eventBus);
         FLUIDS.register(eventBus);
+        LOOT_MODIFIERS.register(eventBus);
 
         CreateIntegration.init(eventBus);
         FarmersDelightIntegration.init(eventBus);
