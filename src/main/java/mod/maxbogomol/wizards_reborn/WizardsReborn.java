@@ -740,6 +740,7 @@ public class WizardsReborn {
 
     public static final RegistryObject<Block> PITCHER_TURNIP = BLOCKS.register("pitcher_turnip", () -> new PitcherTurnipBlock(BlockBehaviour.Properties.of().strength(0.5F).mapColor(MapColor.COLOR_ORANGE).sound(SoundType.CROP).noOcclusion()));
     public static final RegistryObject<Block> PITCHER_TURNIP_BLOCK = BLOCKS.register("pitcher_turnip_block", () -> new Block(BlockBehaviour.Properties.copy(Blocks.PUMPKIN)));
+    public static final RegistryObject<Block> POTTED_PITCHER_TURNIP = BLOCKS.register("potted_pitcher_turnip", () -> new FlowerPotBlock(PITCHER_TURNIP.get(), BlockBehaviour.Properties.copy(Blocks.FLOWER_POT).instabreak().noOcclusion()));
     public static final RegistryObject<Block> SHINY_CLOVER_CROP = BLOCKS.register("shiny_clover_crop", () -> new ShinyCloverCropBlock(BlockBehaviour.Properties.of().mapColor(MapColor.PLANT).noCollission().randomTicks().instabreak().sound(SoundType.PINK_PETALS).pushReaction(PushReaction.DESTROY)));
     public static final RegistryObject<Block> SHINY_CLOVER = BLOCKS.register("shiny_clover", () -> new ShinyCloverBlock(BlockBehaviour.Properties.of().mapColor(MapColor.PLANT).noCollission().sound(SoundType.PINK_PETALS).pushReaction(PushReaction.DESTROY)));
     public static final RegistryObject<Block> POTTED_SHINY_CLOVER = BLOCKS.register("potted_shiny_clover", () -> new FlowerPotBlock(SHINY_CLOVER.get(), BlockBehaviour.Properties.copy(Blocks.FLOWER_POT).instabreak().noOcclusion()));

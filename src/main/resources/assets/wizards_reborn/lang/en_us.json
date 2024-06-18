@@ -158,11 +158,6 @@
   "item.wizards_reborn.arcane_linen": "Arcane Linen",
   "block.wizards_reborn.arcane_linen_hay": "Arcane Linen Hay",
 
-  "block.wizards_reborn.shiny_clover_crop": "Shiny Clover Crop",
-  "item.wizards_reborn.shiny_clover_seed": "Shiny Clover Seed",
-  "block.wizards_reborn.shiny_clover": "Shiny Clover",
-  "block.wizards_reborn.potted_shiny_clover": "Potted Shiny Clover",
-
   "block.wizards_reborn.mor": "Mor",
   "block.wizards_reborn.potted_mor": "Potted Mor",
   "block.wizards_reborn.mor_block": "Mor Block",
@@ -172,6 +167,11 @@
 
   "block.wizards_reborn.pitcher_turnip": "Pitcher Turnip",
   "block.wizards_reborn.pitcher_turnip_block": "Pitcher Turnip Block",
+  "block.wizards_reborn.potted_pitcher_turnip": "Comically not fitting in the pot Pitcher Turnip",
+  "block.wizards_reborn.shiny_clover_crop": "Shiny Clover Crop",
+  "item.wizards_reborn.shiny_clover_seed": "Shiny Clover Seed",
+  "block.wizards_reborn.shiny_clover": "Shiny Clover",
+  "block.wizards_reborn.potted_shiny_clover": "Potted Shiny Clover",
 
   "item.wizards_reborn.petals": "Petals",
   "item.wizards_reborn.flower_fertilizer": "Flower Fertilizer",
@@ -181,8 +181,6 @@
   "item.wizards_reborn.ground_warped_fungus": "Ground Warped Fungus",
   "item.wizards_reborn.ground_mor": "Ground Mor",
   "item.wizards_reborn.ground_elder_mor": "Ground Elder Mor",
-
-  "item.wizards_reborn.petals_of_innocence": "Petals of Innocence",
 
   "block.wizards_reborn.arcanum_seed": "Arcanum Seed",
   "block.wizards_reborn.arcanum_growth": "Arcanum Growth",
