@@ -17,6 +17,8 @@ import net.minecraft.world.phys.shapes.VoxelShape;
 import javax.annotation.Nonnull;
 
 public class PitcherTurnipBlock extends Block implements SimpleWaterloggedBlock {
+    private static final VoxelShape SHAPE = Block.box(3, 0, 3, 13, 6, 13);
+
     public PitcherTurnipBlock(Properties pProperties) {
         super(pProperties);
         registerDefaultState(defaultBlockState().setValue(BlockStateProperties.WATERLOGGED, false));
@@ -26,8 +28,6 @@ public class PitcherTurnipBlock extends Block implements SimpleWaterloggedBlock 
     protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {
         builder.add(BlockStateProperties.WATERLOGGED);
     }
-
-    private static final VoxelShape SHAPE = Block.box(3, 0, 3, 13, 6, 13);
 
     @Nonnull
     @Override

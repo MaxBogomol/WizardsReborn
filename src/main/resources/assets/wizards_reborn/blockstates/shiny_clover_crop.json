@@ -1,0 +1,10 @@
+{
+  "variants": {
+    "age=0": {
+      "model": "wizards_reborn:block/shiny_clover_crop_stage_0"
+    },
+    "age=1": {
+      "model": "wizards_reborn:block/shiny_clover_crop_stage_1"
+    }
+  }
+}

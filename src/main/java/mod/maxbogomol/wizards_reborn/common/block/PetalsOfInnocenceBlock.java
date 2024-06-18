@@ -10,15 +10,11 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 
-import java.util.Random;
-
 public class PetalsOfInnocenceBlock extends PinkPetalsBlock {
 
     public PetalsOfInnocenceBlock(Properties properties) {
         super(properties);
     }
-
-    private static Random random = new Random();
 
     @OnlyIn(Dist.CLIENT)
     public void animateTick(BlockState state, Level world, BlockPos pos, RandomSource random) {

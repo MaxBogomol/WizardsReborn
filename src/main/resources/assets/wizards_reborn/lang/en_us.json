@@ -153,9 +153,15 @@
   "block.wizards_reborn.polished_wisestone_pressure_plate": "Polished Wisestone Pressure Plate",
   "block.wizards_reborn.polished_wisestone_button": "Polished Wisestone Button",
 
-  "block.wizards_reborn.arcane_linen": "Arcane Linen Seeds",
+  "block.wizards_reborn.arcane_linen": "Arcane Linen Crop",
+  "item.wizards_reborn.arcane_linen_seeds": "Arcane Linen Seeds",
   "item.wizards_reborn.arcane_linen": "Arcane Linen",
   "block.wizards_reborn.arcane_linen_hay": "Arcane Linen Hay",
+
+  "block.wizards_reborn.shiny_clover_crop": "Shiny Clover Crop",
+  "item.wizards_reborn.shiny_clover_seed": "Shiny Clover Seed",
+  "block.wizards_reborn.shiny_clover": "Shiny Clover",
+  "block.wizards_reborn.potted_shiny_clover": "Potted Shiny Clover",
 
   "block.wizards_reborn.mor": "Mor",
   "block.wizards_reborn.potted_mor": "Potted Mor",

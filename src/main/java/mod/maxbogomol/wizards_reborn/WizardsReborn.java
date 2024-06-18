@@ -141,6 +141,7 @@ import net.minecraft.world.level.levelgen.feature.trunkplacers.TrunkPlacerType;
 import net.minecraft.world.level.material.FlowingFluid;
 import net.minecraft.world.level.material.Fluid;
 import net.minecraft.world.level.material.MapColor;
+import net.minecraft.world.level.material.PushReaction;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.SoundActions;
@@ -739,6 +740,9 @@ public class WizardsReborn {
 
     public static final RegistryObject<Block> PITCHER_TURNIP = BLOCKS.register("pitcher_turnip", () -> new PitcherTurnipBlock(BlockBehaviour.Properties.of().strength(0.5F).mapColor(MapColor.COLOR_ORANGE).sound(SoundType.CROP).noOcclusion()));
     public static final RegistryObject<Block> PITCHER_TURNIP_BLOCK = BLOCKS.register("pitcher_turnip_block", () -> new Block(BlockBehaviour.Properties.copy(Blocks.PUMPKIN)));
+    public static final RegistryObject<Block> SHINY_CLOVER_CROP = BLOCKS.register("shiny_clover_crop", () -> new ShinyCloverCropBlock(BlockBehaviour.Properties.of().mapColor(MapColor.PLANT).noCollission().randomTicks().instabreak().sound(SoundType.PINK_PETALS).pushReaction(PushReaction.DESTROY)));
+    public static final RegistryObject<Block> SHINY_CLOVER = BLOCKS.register("shiny_clover", () -> new ShinyCloverBlock(BlockBehaviour.Properties.of().mapColor(MapColor.PLANT).noCollission().sound(SoundType.PINK_PETALS).pushReaction(PushReaction.DESTROY)));
+    public static final RegistryObject<Block> POTTED_SHINY_CLOVER = BLOCKS.register("potted_shiny_clover", () -> new FlowerPotBlock(SHINY_CLOVER.get(), BlockBehaviour.Properties.copy(Blocks.FLOWER_POT).instabreak().noOcclusion()));
 
     public static final RegistryObject<Block> ARCANUM_SEED_BLOCK = BLOCKS.register("arcanum_seed", () -> new CrystalSeedBlock(BlockBehaviour.Properties.copy(Blocks.AMETHYST_CLUSTER).mapColor(MapColor.COLOR_LIGHT_BLUE).sound(CRYSTAL_SOUNDS)));
     public static final RegistryObject<Block> ARCANUM_GROWTH = BLOCKS.register("arcanum_growth", () -> new ArcanumGrowthBlock(BlockBehaviour.Properties.copy(Blocks.AMETHYST_CLUSTER).mapColor(MapColor.COLOR_LIGHT_BLUE).sound(CRYSTAL_SOUNDS)));
@@ -1063,7 +1067,7 @@ public class WizardsReborn {
     public static final RegistryObject<Item> POLISHED_WISESTONE_PRESSURE_PLATE_ITEM = ITEMS.register("polished_wisestone_pressure_plate", () -> new BlockItem(POLISHED_WISESTONE_PRESSURE_PLATE.get(), new Item.Properties()));
     public static final RegistryObject<Item> POLISHED_WISESTONE_BUTTON_ITEM = ITEMS.register("polished_wisestone_button", () -> new BlockItem(POLISHED_WISESTONE_BUTTON.get(), new Item.Properties()));
 
-    public static final RegistryObject<Item> ARCANE_LINEN_SEEDS = ITEMS.register("arcane_linen_seeds", () -> new BlockItem(ARCANE_LINEN.get(), new Item.Properties()));
+    public static final RegistryObject<Item> ARCANE_LINEN_SEEDS = ITEMS.register("arcane_linen_seeds", () -> new ItemNameBlockItem(ARCANE_LINEN.get(), new Item.Properties()));
     public static final RegistryObject<Item> ARCANE_LINEN_ITEM = ITEMS.register("arcane_linen", () -> new Item(new Item.Properties()));
     public static final RegistryObject<Item> ARCANE_LINEN_HAY_ITEM = ITEMS.register("arcane_linen_hay", () -> new BlockItem(ARCANE_LINEN_HAY.get(), new Item.Properties()));
 
@@ -1074,6 +1078,8 @@ public class WizardsReborn {
 
     public static final RegistryObject<Item> PITCHER_TURNIP_ITEM = ITEMS.register("pitcher_turnip", () -> new BlockItem(PITCHER_TURNIP.get(), new Item.Properties().food(PITCHER_TURNIP_FOOD)));
     public static final RegistryObject<Item> PITCHER_TURNIP_BLOCK_ITEM = ITEMS.register("pitcher_turnip_block", () -> new BlockItem(PITCHER_TURNIP_BLOCK.get(), new Item.Properties()));
+    public static final RegistryObject<Item> SHINY_CLOVER_SEED = ITEMS.register("shiny_clover_seed", () -> new ItemNameBlockItem(SHINY_CLOVER_CROP.get(), new Item.Properties()));
+    public static final RegistryObject<Item> SHINY_CLOVER_ITEM = ITEMS.register("shiny_clover", () -> new BlockItem(SHINY_CLOVER.get(), new Item.Properties()));
 
     public static final RegistryObject<Item> PETALS = ITEMS.register("petals", () -> new Item(new Item.Properties()));
     public static final RegistryObject<Item> FLOWER_FERTILIZER = ITEMS.register("flower_fertilizer", () -> new BoneMealItem(new Item.Properties()));
@@ -1434,7 +1440,7 @@ public class WizardsReborn {
     public static RegistryObject<BlockEntityType<SaltLanternTileEntity>> SALT_LANTERN_TILE_ENTITY = TILE_ENTITIES.register("salt_lantern", () -> BlockEntityType.Builder.of(SaltLanternTileEntity::new, ARCANE_SALT_LANTERN.get(), INNOCENT_SALT_LANTERN.get(), WISESTONE_SALT_LANTERN.get()).build(null));
     public static RegistryObject<BlockEntityType<SaltCampfireTileEntity>> SALT_CAMPFIRE_TILE_ENTITY = TILE_ENTITIES.register("salt_campfire", () -> BlockEntityType.Builder.of(SaltCampfireTileEntity::new, ARCANE_SALT_CAMPFIRE.get(), INNOCENT_SALT_CAMPFIRE.get(), WISESTONE_SALT_CAMPFIRE.get()).build(null));
 
-    public static RegistryObject<BlockEntityType<CrossBalkTileEntity>> CROSS_BAULK_TILE_ENTITY = TILE_ENTITIES.register("cross_baulk", () -> BlockEntityType.Builder.of(CrossBalkTileEntity::new, ARCANE_WOOD_CROSS_BAULK.get()).build(null));
+    public static RegistryObject<BlockEntityType<CrossBalkTileEntity>> CROSS_BAULK_TILE_ENTITY = TILE_ENTITIES.register("cross_baulk", () -> BlockEntityType.Builder.of(CrossBalkTileEntity::new, ARCANE_WOOD_CROSS_BAULK.get(), STRIPPED_ARCANE_WOOD_CROSS_BAULK.get(), ARCANE_WOOD_PLANKS_CROSS_BAULK.get(), INNOCENT_WOOD_CROSS_BAULK.get(), STRIPPED_INNOCENT_WOOD_CROSS_BAULK.get(), INNOCENT_WOOD_PLANKS_CROSS_BAULK.get()).build(null));
 
     //ENTITIES
     public static final RegistryObject<EntityType<CustomBoatEntity>> BOAT = ENTITIES.register("boat", () -> EntityType.Builder.<CustomBoatEntity>of(CustomBoatEntity::new, MobCategory.MISC).sized(1.375f, 0.5625f).build(new ResourceLocation(MOD_ID, "boat").toString()));
@@ -1868,6 +1874,8 @@ public class WizardsReborn {
             fireblock.setFlammable(INNOCENT_WOOD_LEAVES.get(), 30, 60);
             fireblock.setFlammable(PETALS_OF_INNOCENCE.get(), 60, 100);
             fireblock.setFlammable(ARCANE_LINEN_HAY.get(), 60, 20);
+            fireblock.setFlammable(SHINY_CLOVER_CROP.get(), 60, 100);
+            fireblock.setFlammable(SHINY_CLOVER.get(), 60, 100);
 
             ComposterBlock.add(0.3F, ARCANE_WOOD_LEAVES_ITEM.get());
             ComposterBlock.add(0.3F, ARCANE_WOOD_SAPLING_ITEM.get());
@@ -1881,6 +1889,8 @@ public class WizardsReborn {
             ComposterBlock.add(0.65F, ELDER_MOR_ITEM.get());
             ComposterBlock.add(0.85F, MOR_BLOCK_ITEM.get());
             ComposterBlock.add(0.85F, ELDER_MOR_BLOCK_ITEM.get());
+            ComposterBlock.add(0.9F, PITCHER_TURNIP_ITEM.get());
+            ComposterBlock.add(0.9F, SHINY_CLOVER_ITEM.get());
             ComposterBlock.add(0.2F, PETALS.get());
             ComposterBlock.add(0.2F, GROUND_BROWN_MUSHROOM.get());
             ComposterBlock.add(0.2F, GROUND_RED_MUSHROOM.get());

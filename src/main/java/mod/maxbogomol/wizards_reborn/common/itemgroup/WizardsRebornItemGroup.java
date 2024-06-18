@@ -211,6 +211,8 @@ public class WizardsRebornItemGroup {
 
             event.accept(WizardsReborn.PITCHER_TURNIP_ITEM);
             event.accept(WizardsReborn.PITCHER_TURNIP_BLOCK_ITEM);
+            event.accept(WizardsReborn.SHINY_CLOVER_SEED);
+            event.accept(WizardsReborn.SHINY_CLOVER_ITEM);
 
             event.accept(WizardsReborn.PETALS);
             event.accept(WizardsReborn.FLOWER_FERTILIZER);

@@ -153,9 +153,15 @@
   "block.wizards_reborn.polished_wisestone_pressure_plate": "Полированная мудро-каменная нажимная плита",
   "block.wizards_reborn.polished_wisestone_button": "Полированная мудро-каменная кнопка",
 
-  "block.wizards_reborn.arcane_linen": "Семена арканового льна",
+  "block.wizards_reborn.arcane_linen": "Ростки арканового льна",
+  "item.wizards_reborn.arcane_linen_seeds": "Семена арканового льна",
   "item.wizards_reborn.arcane_linen": "Аркановый лён",
   "block.wizards_reborn.arcane_linen_hay": "Сноп арканового льна",
+
+  "block.wizards_reborn.shiny_clover_crop": "Росток сверкающего клевера",
+  "item.wizards_reborn.shiny_clover_seed": "Семечко сверкающего клевера",
+  "block.wizards_reborn.shiny_clover": "Сверкающий клевер",
+  "block.wizards_reborn.potted_shiny_clover": "Сверкающий клевер в горшке",
 
   "block.wizards_reborn.mor": "Мор",
   "block.wizards_reborn.potted_mor": "Мор в горшке",
