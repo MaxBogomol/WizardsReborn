@@ -140,10 +140,10 @@ public class Skin {
 
     @OnlyIn(Dist.CLIENT)
     public static boolean isDefaultModel(Entity entity) {
-        if(entity instanceof AbstractClientPlayer player) {
+        if (entity instanceof AbstractClientPlayer player) {
             return player.getModelName().equals("default");
         }
 
-        return false;
+        return true;
     }
 }

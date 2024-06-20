@@ -28,7 +28,7 @@ public class RegisterKnowledges {
     public static ItemKnowledge VOID_CRYSTAL = new ItemKnowledge(WizardsReborn.MOD_ID+":void_crystal", true, 20, WizardsReborn.VOID_CRYSTAL.get());
     public static ItemKnowledge ARCANE_ITERATOR = new ItemKnowledge(WizardsReborn.MOD_ID+":arcane_iterator", true, 10, WizardsReborn.ARCANE_ITERATOR_ITEM.get());
     public static ItemKnowledge ARCANUM_LENS = new ItemKnowledge(WizardsReborn.MOD_ID+":arcanum_lens", true, 10, WizardsReborn.ARCANUM_LENS.get());
-    public static ItemKnowledge JEWELER_TABLE = new ItemKnowledge(WizardsReborn.MOD_ID+":jeweler_table", false, 8, WizardsReborn.JEWELER_TABLE_ITEM.get());
+    public static ItemKnowledge JEWELER_TABLE = new ItemKnowledge(WizardsReborn.MOD_ID+":jeweler_table", true, 10, WizardsReborn.JEWELER_TABLE_ITEM.get());
     public static ItemTagKnowledge FACETED_CRYSTALS = new ItemTagKnowledge(WizardsReborn.MOD_ID+":faceted_crystals", true, 20, WizardsReborn.FACETED_CRYSTALS_ITEM_TAG, new ItemStack(WizardsReborn.FACETED_EARTH_CRYSTAL.get()));
 
     public static ItemTagKnowledge ARCANE_WOOD_TOOLS = new ItemTagKnowledge(WizardsReborn.MOD_ID+":arcane_wood_tools", false, 5, WizardsReborn.ARCANE_WOOD_TOOLS_ITEM_TAG, new ItemStack(WizardsReborn.ARCANE_WOOD_PICKAXE.get()));
@@ -219,6 +219,7 @@ public class RegisterKnowledges {
         addProgression(ARCACITE_POLISHING_MIXTURE, ARCACITE);
         addProgression(FACETED_CRYSTALS, ARCACITE_POLISHING_MIXTURE);
         addProgression(ARCANE_ITERATOR, ARCACITE);
+        addProgression(JEWELER_TABLE, ARCANE_ITERATOR);
         addProgression(ARCANUM_LENS, ARCANE_ITERATOR);
         addProgression(LIGHT_EMITTER, ARCANUM_LENS);
         addProgression(RUNIC_PEDESTAL, ARCANUM_LENS);
@@ -272,7 +273,6 @@ public class RegisterKnowledges {
         addAdditionalProgression(KNOWLEDGE_SCROLL, ARCANE_ITERATOR);
         addAdditionalProgression(WISSEN_KEYCHAIN, ARCANE_ITERATOR);
         addAdditionalProgression(WISSEN_RING, ARCANE_ITERATOR);
-        addAdditionalProgression(JEWELER_TABLE, ARCACITE_POLISHING_MIXTURE);
         addAdditionalProgression(MUSIC_DISC_REBORN, ARCANE_ITERATOR);
         addAdditionalProgression(MUSIC_DISC_PANACHE, ARCANE_ITERATOR);
         addAdditionalProgression(LIGHT_SENSOR, LIGHT_EMITTER);

@@ -1,0 +1,12 @@
+{
+  "type": "wizards_reborn:add_item_list",
+  "conditions": [
+    {
+      "condition": "forge:loot_table_id",
+      "loot_table_id": "minecraft:gameplay/sniffer_digging"
+    }
+  ],
+  "items": [
+    "wizards_reborn:shiny_clover_seed"
+  ]
+}

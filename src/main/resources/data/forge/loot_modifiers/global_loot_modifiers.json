@@ -1,6 +1,7 @@
 {
   "replace": false,
   "entries": [
-    "wizards_reborn:pitcher_turnip"
+    "wizards_reborn:pitcher_turnip",
+    "wizards_reborn:sniffer_digging"
   ]
 }

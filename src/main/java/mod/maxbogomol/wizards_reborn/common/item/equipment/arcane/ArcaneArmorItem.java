@@ -6,6 +6,7 @@ import mod.maxbogomol.wizards_reborn.api.skin.Skin;
 import net.minecraft.ChatFormatting;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.screens.Screen;
+import net.minecraft.client.player.AbstractClientPlayer;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.network.chat.Style;
@@ -150,5 +151,14 @@ public class ArcaneArmorItem extends ArmorItem implements IArcaneItem {
 
     public boolean hasCustomModel() {
         return false;
+    }
+
+    @OnlyIn(Dist.CLIENT)
+    public static boolean isDefaultModel(Entity entity) {
+        if (entity instanceof AbstractClientPlayer player) {
+            return player.getModelName().equals("default");
+        }
+
+        return true;
     }
 }

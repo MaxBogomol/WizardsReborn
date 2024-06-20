@@ -48,6 +48,9 @@ public class ArcaneFortressArmorItem extends ArcaneArmorItem implements IForgeIt
                 float netHeadPitch = Mth.lerp(pticks, entity.xRotO, entity.getXRot());
 
                 ArmorModel model = WizardsRebornClient.ARCANE_FORTRESS_ARMOR_MODEL;
+                if (!isDefaultModel(entity)) {
+                    model = WizardsRebornClient.ARCANE_FORTRESS_SLIM_ARMOR_MODEL;
+                }
 
                 Skin skin = Skin.getSkinFromItem(itemStack);
                 if (skin != null) model = skin.getArmorModel(entity, itemStack, armorSlot, _default);
@@ -65,6 +68,9 @@ public class ArcaneFortressArmorItem extends ArcaneArmorItem implements IForgeIt
     public String getArmorTexture(ItemStack stack, Entity entity, EquipmentSlot slot, String type) {
         Skin skin = Skin.getSkinFromItem(stack);
         if (skin != null) return skin.getArmorTexture(stack, entity, slot, type);
+        if (!isDefaultModel(entity)) {
+            return WizardsReborn.MOD_ID + ":textures/models/armor/arcane_fortress_slim.png";
+        }
         return WizardsReborn.MOD_ID + ":textures/models/armor/arcane_fortress.png";
     }
 

@@ -16,15 +16,10 @@ import javax.annotation.Nonnull;
 import java.util.function.Supplier;
 
 public class AddItemLootModifier extends LootModifier {
-    public static final Supplier<Codec<AddItemLootModifier>> CODEC = Suppliers.memoize(() -> {
-        return RecordCodecBuilder.create((inst) -> {
-            return codecStart(inst).and(inst.group(ForgeRegistries.ITEMS.getCodec().fieldOf("item").forGetter((m) -> {
-                return m.addedItem;
-            }), Codec.INT.optionalFieldOf("count", 1).forGetter((m) -> {
-                return m.count;
-            }))).apply(inst, AddItemLootModifier::new);
-        });
-    });
+    public static final Supplier<Codec<AddItemLootModifier>> CODEC = Suppliers.memoize(()
+            -> RecordCodecBuilder.create((inst) -> codecStart(inst).and(inst.group(ForgeRegistries.ITEMS.getCodec().
+            fieldOf("item").forGetter((m) -> m.addedItem), Codec.INT.optionalFieldOf("count", 1).forGetter((m) -> m.count)))
+            .apply(inst, AddItemLootModifier::new)));
     private final Item addedItem;
     private final int count;
 
@@ -54,6 +49,6 @@ public class AddItemLootModifier extends LootModifier {
     }
 
     public Codec<? extends IGlobalLootModifier> codec() {
-        return (Codec)CODEC.get();
+        return CODEC.get();
     }
 }

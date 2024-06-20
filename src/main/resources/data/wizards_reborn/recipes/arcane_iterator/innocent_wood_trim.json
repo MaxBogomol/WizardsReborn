@@ -1,0 +1,28 @@
+{
+  "type": "wizards_reborn:arcane_iterator",
+  "output": {
+    "item": "wizards_reborn:innocent_wood_trim",
+    "count": 1
+  },
+  "wissen": 400,
+  "ingredients": [
+    {
+      "tag": "wizards_reborn:arcane_gold_nugget"
+    },
+    {
+      "item": "minecraft:string"
+    },
+    {
+      "item": "wizards_reborn:innocent_wood_planks"
+    },
+    {
+      "item": "wizards_reborn:innocent_wood_planks"
+    },
+    {
+      "item": "wizards_reborn:innocent_wood_planks"
+    },
+    {
+      "item": "wizards_reborn:innocent_wood_planks"
+    }
+  ]
+}

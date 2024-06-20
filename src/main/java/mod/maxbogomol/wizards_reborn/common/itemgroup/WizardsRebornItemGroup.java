@@ -512,6 +512,8 @@ public class WizardsRebornItemGroup {
             event.accept(WizardsReborn.HELLISH_MUSHROOM_BREW_BUCKET);
             event.accept(WizardsReborn.MOR_BREW_BUCKET);
             event.accept(WizardsReborn.FLOWER_BREW_BUCKET);
+
+            event.accept(WizardsReborn.SNIFFALO_SPAWN_EGG);
         }
     }
 }

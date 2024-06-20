@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "#",
+    "#",
+    "#"
+  ],
+  "key": {
+    "#": {
+      "item": "wizards_reborn:stripped_arcane_wood_log"
+    }
+  },
+  "result": {
+    "item": "wizards_reborn:stripped_arcane_wood_baulk",
+    "count": 3
+  }
+}

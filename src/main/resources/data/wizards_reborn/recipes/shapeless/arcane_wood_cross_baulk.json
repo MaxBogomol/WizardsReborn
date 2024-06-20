@@ -1,0 +1,14 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "wizards_reborn:arcane_wood_baulk"
+    },
+    {
+      "item": "wizards_reborn:arcane_linen"
+    }
+  ],
+  "result": {
+    "item": "wizards_reborn:arcane_wood_cross_baulk"
+  }
+}

@@ -8,11 +8,13 @@ import mod.maxbogomol.wizards_reborn.client.model.curio.*;
 import mod.maxbogomol.wizards_reborn.client.particle.*;
 import mod.maxbogomol.wizards_reborn.client.render.block.PipeModel;
 import mod.maxbogomol.wizards_reborn.client.render.entity.CustomBoatModel;
+import mod.maxbogomol.wizards_reborn.client.render.entity.SniffaloRenderer;
 import mod.maxbogomol.wizards_reborn.client.render.entity.SpellProjectileRenderer;
 import mod.maxbogomol.wizards_reborn.client.render.item.*;
 import mod.maxbogomol.wizards_reborn.client.render.tileentity.*;
 import mod.maxbogomol.wizards_reborn.common.block.CustomBlockColor;
 import mod.maxbogomol.wizards_reborn.common.entity.CustomBoatEntity;
+import mod.maxbogomol.wizards_reborn.common.integration.farmersdelight.FarmersDelightIntegration;
 import mod.maxbogomol.wizards_reborn.common.item.equipment.AlchemyPotionItem;
 import mod.maxbogomol.wizards_reborn.common.item.equipment.KnowledgeSrollItem;
 import mod.maxbogomol.wizards_reborn.common.item.equipment.RunicWisestonePlateItem;
@@ -65,6 +67,7 @@ public class WizardsRebornClient {
 
     public static final ModelLayerLocation INVENTOR_WIZARD_ARMOR_LAYER = new ModelLayerLocation(new ResourceLocation(WizardsReborn.MOD_ID, "inventor_wizard_armor"), "main");
     public static final ModelLayerLocation ARCANE_FORTRESS_ARMOR_LAYER = new ModelLayerLocation(new ResourceLocation(WizardsReborn.MOD_ID, "arcane_fortress_armor"), "main");
+    public static final ModelLayerLocation ARCANE_FORTRESS_SLIM_ARMOR_LAYER = new ModelLayerLocation(new ResourceLocation(WizardsReborn.MOD_ID, "arcane_fortress_slim_armor"), "main");
 
     public static final ModelLayerLocation EMPTY_ARMOR_LAYER = new ModelLayerLocation(new ResourceLocation(WizardsReborn.MOD_ID, "empty_armor"), "main");
     public static final ModelLayerLocation TOP_HAT_ARMOR_LAYER = new ModelLayerLocation(new ResourceLocation(WizardsReborn.MOD_ID, "top_hat_armor"), "main");
@@ -74,6 +77,7 @@ public class WizardsRebornClient {
 
     public static InventorWizardArmorModel INVENTOR_WIZARD_ARMOR_MODEL = null;
     public static ArcaneFortressArmorModel ARCANE_FORTRESS_ARMOR_MODEL = null;
+    public static ArcaneFortressArmorModel ARCANE_FORTRESS_SLIM_ARMOR_MODEL = null;
 
     public static EmptyArmorModel EMPTY_ARMOR_MODEL = null;
     public static TopHatArmorModel TOP_HAT_ARMOR_MODEL = null;
@@ -298,6 +302,7 @@ public class WizardsRebornClient {
             EntityRenderers.register(WizardsReborn.BOAT.get(), m -> new CustomBoatModel(m, false));
             EntityRenderers.register(WizardsReborn.CHEST_BOAT.get(), m -> new CustomBoatModel(m, true));
             EntityRenderers.register(WizardsReborn.SPELL_PROJECTILE.get(), SpellProjectileRenderer::new);
+            EntityRenderers.register(WizardsReborn.SNIFFALO.get(), SniffaloRenderer::new);
 
             makeBow(WizardsReborn.ARCANE_WOOD_BOW.get());
 
@@ -337,6 +342,7 @@ public class WizardsRebornClient {
             ItemSkinsModels.addSkin(WizardsReborn.MOD_ID+":implosion_shovel");
             ItemSkinsModels.addSkin(WizardsReborn.MOD_ID+":implosion_hoe");
             ItemSkinsModels.addSkin(WizardsReborn.MOD_ID+":implosion_scythe");
+            ItemSkinsModels.addSkin(WizardsReborn.MOD_ID+":implosion_knife");
             ItemSkinsModels.addSkin(WizardsReborn.MOD_ID+":implosion_arcane_wand");
             ItemSkinsModels.addSkin(WizardsReborn.MOD_ID+":implosion_wissen_wand");
             ItemSkinsModels.addSkin(WizardsReborn.MOD_ID+":magnificent_maid_headwear");
@@ -477,6 +483,12 @@ public class WizardsRebornClient {
             addSkinModel(map, WizardsReborn.INVENTOR_WIZARD_TROUSERS.getId());
             addSkinModel(map, WizardsReborn.INVENTOR_WIZARD_BOOTS.getId());
 
+            if (FarmersDelightIntegration.isLoaded()) {
+                addSkinModel(map, FarmersDelightIntegration.ARCANE_GOLD_KNIFE.getId());
+                addSkinModel(map, FarmersDelightIntegration.ARCANE_WOOD_KNIFE.getId());
+                addSkinModel(map, FarmersDelightIntegration.INNOCENT_WOOD_KNIFE.getId());
+            }
+
             fluidPipe = new PipeModel(map.get(FLUID_CENTER), "fluid_pipe");
             steamPipe = new PipeModel(map.get(STEAM_CENTER), "steam_pipe");
 
@@ -608,6 +620,7 @@ public class WizardsRebornClient {
 
             event.registerLayerDefinition(INVENTOR_WIZARD_ARMOR_LAYER, InventorWizardArmorModel::createBodyLayer);
             event.registerLayerDefinition(ARCANE_FORTRESS_ARMOR_LAYER, ArcaneFortressArmorModel::createBodyLayer);
+            event.registerLayerDefinition(ARCANE_FORTRESS_SLIM_ARMOR_LAYER, ArcaneFortressSlimArmorModel::createBodyLayer);
 
             event.registerLayerDefinition(EMPTY_ARMOR_LAYER, EmptyArmorModel::createBodyLayer);
             event.registerLayerDefinition(TOP_HAT_ARMOR_LAYER, TopHatArmorModel::createBodyLayer);
@@ -620,6 +633,7 @@ public class WizardsRebornClient {
         public static void onRegisterLayers(EntityRenderersEvent.AddLayers event) {
             INVENTOR_WIZARD_ARMOR_MODEL = new InventorWizardArmorModel(event.getEntityModels().bakeLayer(INVENTOR_WIZARD_ARMOR_LAYER));
             ARCANE_FORTRESS_ARMOR_MODEL = new ArcaneFortressArmorModel(event.getEntityModels().bakeLayer(ARCANE_FORTRESS_ARMOR_LAYER));
+            ARCANE_FORTRESS_SLIM_ARMOR_MODEL = new ArcaneFortressSlimArmorModel(event.getEntityModels().bakeLayer(ARCANE_FORTRESS_SLIM_ARMOR_LAYER));
 
             EMPTY_ARMOR_MODEL = new EmptyArmorModel(event.getEntityModels().bakeLayer(EMPTY_ARMOR_LAYER));
             TOP_HAT_ARMOR_MODEL = new TopHatArmorModel(event.getEntityModels().bakeLayer(TOP_HAT_ARMOR_LAYER));

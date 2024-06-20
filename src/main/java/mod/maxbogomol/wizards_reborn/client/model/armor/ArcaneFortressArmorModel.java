@@ -4,7 +4,6 @@ import net.minecraft.client.model.HumanoidModel;
 import net.minecraft.client.model.geom.ModelPart;
 import net.minecraft.client.model.geom.PartPose;
 import net.minecraft.client.model.geom.builders.*;
-import net.minecraft.world.entity.LivingEntity;
 
 public class ArcaneFortressArmorModel extends ArmorModel {
     public ArcaneFortressArmorModel(ModelPart root) {
@@ -15,10 +14,15 @@ public class ArcaneFortressArmorModel extends ArmorModel {
         MeshDefinition mesh = HumanoidModel.createMesh(new CubeDeformation(0), 0);
         PartDefinition root = createHumanoidAlias(mesh);
 
+        rootNormalBodyLayer(root);
+        rootArmsBodyLayer(root);
+
+        return LayerDefinition.create(mesh, 128, 64);
+    }
+
+    public static void rootNormalBodyLayer(PartDefinition root) {
         PartDefinition body = root.getChild("body");
         PartDefinition pelvis = root.getChild("pelvis");
-        PartDefinition right_arm = root.getChild("right_arm");
-        PartDefinition left_arm = root.getChild("left_arm");
         PartDefinition right_legging = root.getChild("right_legging");
         PartDefinition left_legging = root.getChild("left_legging");
         PartDefinition right_foot = root.getChild("right_foot");
@@ -32,16 +36,6 @@ public class ArcaneFortressArmorModel extends ArmorModel {
 
         PartDefinition body_armor = body.addOrReplaceChild("body_armor", CubeListBuilder.create().texOffs(32, 0)
                 .addBox(-4.0F, 0.0F, -2.0F, 8.0F, 12.0F, 4.0F, new CubeDeformation(1.02F)), PartPose.ZERO);
-
-        PartDefinition right_arm_armor = right_arm.addOrReplaceChild("right_arm_armor", CubeListBuilder.create().texOffs(0, 32)
-                .addBox(-3.0F, -2.0F, -2.0F, 4.0F, 12.0F, 4.0F, new CubeDeformation(0.72F)), PartPose.ZERO);
-        PartDefinition right_arm_layer_armor = right_arm_armor.addOrReplaceChild("right_arm_layer_armor", CubeListBuilder.create().texOffs(16, 32)
-                .addBox(-3.0F, -2.0F, -2.0F, 4.0F, 12.0F, 4.0F, new CubeDeformation(1.02F)), PartPose.ZERO);
-
-        PartDefinition left_arm_armor = left_arm.addOrReplaceChild("left_arm_armor", CubeListBuilder.create().texOffs(0, 48)
-                .addBox(-1.0F, -2.0F, -2.0F, 4.0F, 12.0F, 4.0F, new CubeDeformation(0.72F)), PartPose.ZERO);
-        PartDefinition left_arm_layer_armor = left_arm_armor.addOrReplaceChild("left_arm_layer_armor", CubeListBuilder.create().texOffs(16, 48)
-                .addBox(-1.0F, -2.0F, -2.0F, 4.0F, 12.0F, 4.0F, new CubeDeformation(1.02F)), PartPose.ZERO);
 
         PartDefinition right_legging_armor = right_legging.addOrReplaceChild("right_legging_armor", CubeListBuilder.create().texOffs(32, 32)
                 .addBox(-2.0F, 0.0F, -2.0F, 4.0F, 12.0F, 4.0F, new CubeDeformation(0.75F)), PartPose.ZERO);
@@ -59,7 +53,30 @@ public class ArcaneFortressArmorModel extends ArmorModel {
                 .addBox(-2.0F, 0.0F, -2.0F, 4.0F, 12.0F, 4.0F, new CubeDeformation(1.02F)), PartPose.ZERO);
 
         PartDefinition codpiece = pelvis.addOrReplaceChild("codpiece", CubeListBuilder.create().texOffs(32, 16).addBox(-4.0F, 0.0F, -2.0F, 8.0F, 5.0F, 4.0F, new CubeDeformation(0.5F)), PartPose.offset(0.0F, 7.0F, 0.0F));
+    }
 
-        return LayerDefinition.create(mesh, 128, 64);
+    public static void rootArmsBodyLayer(PartDefinition root) {
+        PartDefinition right_arm = root.getChild("right_arm");
+        PartDefinition left_arm = root.getChild("left_arm");
+
+        PartDefinition right_arm_armor = right_arm.addOrReplaceChild("right_arm_armor", CubeListBuilder.create().texOffs(0, 32)
+                .addBox(-3.0F, -2.0F, -2.0F, 4.0F, 12.0F, 4.0F, new CubeDeformation(0.72F)), PartPose.ZERO);
+        PartDefinition right_arm_layer_armor = right_arm_armor.addOrReplaceChild("right_arm_layer_armor", CubeListBuilder.create().texOffs(16, 32)
+                .addBox(-3.0F, -2.0F, -2.0F, 4.0F, 12.0F, 4.0F, new CubeDeformation(1.02F)), PartPose.ZERO);
+
+        PartDefinition left_arm_armor = left_arm.addOrReplaceChild("left_arm_armor", CubeListBuilder.create().texOffs(0, 48)
+                .addBox(-1.0F, -2.0F, -2.0F, 4.0F, 12.0F, 4.0F, new CubeDeformation(0.72F)), PartPose.ZERO);
+        PartDefinition left_arm_layer_armor = left_arm_armor.addOrReplaceChild("left_arm_layer_armor", CubeListBuilder.create().texOffs(16, 48)
+                .addBox(-1.0F, -2.0F, -2.0F, 4.0F, 12.0F, 4.0F, new CubeDeformation(1.02F)), PartPose.ZERO);
+
+        PartDefinition right_arm_bracer_armor = right_arm.addOrReplaceChild("right_arm_bracer_armor", CubeListBuilder.create().texOffs(80, 32)
+                .addBox(-3.0F, -2.0F, -2.0F, 4.0F, 12.0F, 4.0F, new CubeDeformation(0.72F)), PartPose.ZERO);
+        PartDefinition right_arm_bracer_layer_armor = right_arm_bracer_armor.addOrReplaceChild("right_arm_bracer_layer_armor", CubeListBuilder.create().texOffs(96, 32)
+                .addBox(-3.0F, -2.0F, -2.0F, 4.0F, 12.0F, 4.0F, new CubeDeformation(1.02F)), PartPose.ZERO);
+
+        PartDefinition left_arm_bracer_armor = left_arm.addOrReplaceChild("left_arm_bracer_armor", CubeListBuilder.create().texOffs(80, 48)
+                .addBox(-1.0F, -2.0F, -2.0F, 4.0F, 12.0F, 4.0F, new CubeDeformation(0.72F)), PartPose.ZERO);
+        PartDefinition left_arm_bracer_layer_armor = left_arm_bracer_armor.addOrReplaceChild("left_arm_bracer_layer_armor", CubeListBuilder.create().texOffs(96, 48)
+                .addBox(-1.0F, -2.0F, -2.0F, 4.0F, 12.0F, 4.0F, new CubeDeformation(1.02F)), PartPose.ZERO);
     }
 }

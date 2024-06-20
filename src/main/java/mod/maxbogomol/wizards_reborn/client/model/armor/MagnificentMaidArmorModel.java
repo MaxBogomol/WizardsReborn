@@ -25,15 +25,22 @@ public class MagnificentMaidArmorModel extends ArmorModel {
         MeshDefinition mesh = HumanoidModel.createMesh(new CubeDeformation(0), 0);
         PartDefinition root = createHumanoidAlias(mesh);
 
+        rootAdditional(root);
+        rootNormalBodyLayer(root);
+        rootArmsBodyLayer(root);
+
+        return LayerDefinition.create(mesh, 128, 64);
+    }
+
+    public static void rootAdditional(PartDefinition root) {
         root.addOrReplaceChild("left_skirt", new CubeListBuilder(), PartPose.ZERO);
         root.addOrReplaceChild("right_skirt", new CubeListBuilder(), PartPose.ZERO);
         root.addOrReplaceChild("left_stocking", new CubeListBuilder(), PartPose.ZERO);
         root.addOrReplaceChild("right_stocking", new CubeListBuilder(), PartPose.ZERO);
+    }
 
+    public static void rootNormalBodyLayer(PartDefinition root) {
         PartDefinition body = root.getChild("body");
-        PartDefinition pelvis = root.getChild("pelvis");
-        PartDefinition right_arm = root.getChild("right_arm");
-        PartDefinition left_arm = root.getChild("left_arm");
         PartDefinition right_skirt = root.getChild("right_skirt");
         PartDefinition left_skirt = root.getChild("left_skirt");
         PartDefinition right_legging = root.getChild("right_stocking");
@@ -51,16 +58,6 @@ public class MagnificentMaidArmorModel extends ArmorModel {
                 .addBox(-4.0F, 0.0F, -2.0F, 8.0F, 12.0F, 4.0F, new CubeDeformation(0.62F)), PartPose.ZERO);
         PartDefinition body_layer_armor = body_armor.addOrReplaceChild("body_layer_armor", CubeListBuilder.create().texOffs(32, 16)
                 .addBox(-4.0F, 0.0F, -2.0F, 8.0F, 12.0F, 4.0F, new CubeDeformation(0.82F)), PartPose.ZERO);
-
-        PartDefinition right_arm_armor = right_arm.addOrReplaceChild("right_arm_armor", CubeListBuilder.create().texOffs(56, 0)
-                .addBox(-3.0F, -2.0F, -2.0F, 4.0F, 12.0F, 4.0F, new CubeDeformation(0.52F)), PartPose.ZERO);
-        PartDefinition right_arm_layer_armor = right_arm_armor.addOrReplaceChild("right_arm_layer_armor", CubeListBuilder.create().texOffs(72, 0)
-                .addBox(-3.0F, -2.0F, -2.0F, 4.0F, 12.0F, 4.0F, new CubeDeformation(0.72F)), PartPose.ZERO);
-
-        PartDefinition left_arm_armor = left_arm.addOrReplaceChild("left_arm_armor", CubeListBuilder.create().texOffs(56, 16)
-                .addBox(-1.0F, -2.0F, -2.0F, 4.0F, 12.0F, 4.0F, new CubeDeformation(0.52F)), PartPose.ZERO);
-        PartDefinition left_arm_layer_armor = left_arm_armor.addOrReplaceChild("left_arm_layer_armor", CubeListBuilder.create().texOffs(72, 16)
-                .addBox(-1.0F, -2.0F, -2.0F, 4.0F, 12.0F, 4.0F, new CubeDeformation(0.72F)), PartPose.ZERO);
 
         PartDefinition right_skirt_armor = right_skirt.addOrReplaceChild("right_skirt_armor", CubeListBuilder.create().texOffs(32, 32)
                 .addBox(-2.0F, 0.0F, -2.0F, 4.0F, 12.0F, 4.0F, new CubeDeformation(0.75F)), PartPose.ZERO);
@@ -91,9 +88,21 @@ public class MagnificentMaidArmorModel extends ArmorModel {
                 .addBox(-2.0F, 0.0F, -2.0F, 4.0F, 12.0F, 4.0F, new CubeDeformation(0.55F)), PartPose.ZERO);
         PartDefinition left_foot_layer_armor = left_foot_armor.addOrReplaceChild("left_foot_layer_armor", CubeListBuilder.create().texOffs(104, 16)
                 .addBox(-2.0F, 0.0F, -2.0F, 4.0F, 12.0F, 4.0F, new CubeDeformation(0.75F)), PartPose.ZERO);
+    }
 
+    public static void rootArmsBodyLayer(PartDefinition root) {
+        PartDefinition right_arm = root.getChild("right_arm");
+        PartDefinition left_arm = root.getChild("left_arm");
 
-        return LayerDefinition.create(mesh, 128, 64);
+        PartDefinition right_arm_armor = right_arm.addOrReplaceChild("right_arm_armor", CubeListBuilder.create().texOffs(56, 0)
+                .addBox(-3.0F, -2.0F, -2.0F, 4.0F, 12.0F, 4.0F, new CubeDeformation(0.52F)), PartPose.ZERO);
+        PartDefinition right_arm_layer_armor = right_arm_armor.addOrReplaceChild("right_arm_layer_armor", CubeListBuilder.create().texOffs(72, 0)
+                .addBox(-3.0F, -2.0F, -2.0F, 4.0F, 12.0F, 4.0F, new CubeDeformation(0.72F)), PartPose.ZERO);
+
+        PartDefinition left_arm_armor = left_arm.addOrReplaceChild("left_arm_armor", CubeListBuilder.create().texOffs(56, 16)
+                .addBox(-1.0F, -2.0F, -2.0F, 4.0F, 12.0F, 4.0F, new CubeDeformation(0.52F)), PartPose.ZERO);
+        PartDefinition left_arm_layer_armor = left_arm_armor.addOrReplaceChild("left_arm_layer_armor", CubeListBuilder.create().texOffs(72, 16)
+                .addBox(-1.0F, -2.0F, -2.0F, 4.0F, 12.0F, 4.0F, new CubeDeformation(0.72F)), PartPose.ZERO);
     }
 
     @Override

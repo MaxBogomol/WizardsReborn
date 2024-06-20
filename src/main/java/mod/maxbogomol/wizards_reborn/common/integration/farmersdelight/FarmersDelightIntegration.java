@@ -3,7 +3,9 @@ package mod.maxbogomol.wizards_reborn.common.integration.farmersdelight;
 import mezz.jei.api.constants.VanillaTypes;
 import mezz.jei.api.registration.IRecipeRegistration;
 import mod.maxbogomol.wizards_reborn.WizardsReborn;
+import mod.maxbogomol.wizards_reborn.api.skin.Skin;
 import mod.maxbogomol.wizards_reborn.common.item.equipment.CustomItemTier;
+import mod.maxbogomol.wizards_reborn.common.skin.ItemClassSkinEntry;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.eventbus.api.IEventBus;
@@ -37,6 +39,10 @@ public class FarmersDelightIntegration {
 
         public static boolean canMagicBladeEnchant(Item item) {
             return (item instanceof ArcaneKnifeItem);
+        }
+
+        public static void addKnifeSkin(Skin skin, String item) {
+            skin.addSkinEntry(new ItemClassSkinEntry(ArcaneKnifeItem.class, item));
         }
     }
 
