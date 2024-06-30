@@ -1,0 +1,13 @@
+{
+  "variants": {
+    "hatch=0": {
+      "model": "wizards_reborn:block/sniffalo_egg_not_cracked"
+    },
+    "hatch=1": {
+      "model": "wizards_reborn:block/sniffalo_egg_slightly_cracked"
+    },
+    "hatch=2": {
+      "model": "wizards_reborn:block/sniffalo_egg_very_cracked"
+    }
+  }
+}

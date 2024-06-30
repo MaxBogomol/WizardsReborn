@@ -199,40 +199,48 @@ public class AlchemyFurnaceTileEntity extends BlockEntity implements TickableBlo
             SimpleContainer inv = new SimpleContainer(1);
             inv.setItem(0, itemHandler.getStackInSlot(0));
 
-            Optional<SmeltingRecipe> recipe = level.getRecipeManager().getRecipeFor(RecipeType.SMELTING, inv, level);
-            cookMaxTime = recipe.map(SmeltingRecipe::getCookingTime).orElse(200);
+            if (!inv.isEmpty()) {
+                Optional<SmeltingRecipe> recipe = level.getRecipeManager().getRecipeFor(RecipeType.SMELTING, inv, level);
+                cookMaxTime = recipe.map(SmeltingRecipe::getCookingTime).orElse(200);
 
-            if (recipe.isPresent()) {
-                if (lastRecipe != null) {
-                    if (lastRecipe.isPresent()) {
-                        if (recipe.get().getId() != lastRecipe.get().getId()) {
-                            cookMaxTime = 0;
-                            cookTime = 0;
-                            update = true;
-                        }
-                    }
-                }
-
-                if (canBurn(RegistryAccess.EMPTY, recipe.get(), 64)) {
-                    if (cookMaxTime > 0 && heat > 0) {
-                        cookTime = cookTime + 1;
-                        heat = heat - 1;
-                        heatLastTime = 10 * 20;
-                        update = true;
-                    }
-
-                    if (cookMaxTime > 0) {
-                        if (cookTime >= cookMaxTime) {
-                            if (burn(RegistryAccess.EMPTY, recipe.get(), 64)) {
+                if (recipe.isPresent()) {
+                    if (lastRecipe != null) {
+                        if (lastRecipe.isPresent()) {
+                            if (recipe.get().getId() != lastRecipe.get().getId()) {
                                 cookMaxTime = 0;
-                                cookTime = 1;
-                                exp = exp + recipe.get().getExperience();
+                                cookTime = 0;
                                 update = true;
                             }
                         }
                     }
+
+                    if (canBurn(RegistryAccess.EMPTY, recipe.get(), 64)) {
+                        if (cookMaxTime > 0 && heat > 0) {
+                            cookTime = cookTime + 1;
+                            heat = heat - 1;
+                            heatLastTime = 10 * 20;
+                            update = true;
+                        }
+
+                        if (cookMaxTime > 0) {
+                            if (cookTime >= cookMaxTime) {
+                                if (burn(RegistryAccess.EMPTY, recipe.get(), 64)) {
+                                    cookMaxTime = 0;
+                                    cookTime = 1;
+                                    exp = exp + recipe.get().getExperience();
+                                    update = true;
+                                }
+                            }
+                        }
+                    }
+
+                    lastRecipe = recipe;
+                } else {
+                    cookMaxTime = 0;
+                    cookTime = 0;
+                    update = true;
                 }
-            } else {
+            } else if (cookMaxTime != 0 || cookTime != 0) {
                 cookMaxTime = 0;
                 cookTime = 0;
                 update = true;
@@ -243,8 +251,6 @@ public class AlchemyFurnaceTileEntity extends BlockEntity implements TickableBlo
                 level.setBlock(getBlockPos(), blockState, 3);
                 update = true;
             }
-
-            lastRecipe = recipe;
 
             if (update) {
                 PacketUtils.SUpdateTileEntityPacket(this);

@@ -1,0 +1,11 @@
+{
+  "parent": "minecraft:block/sniffer_egg",
+  "textures": {
+    "bottom": "wizards_reborn:block/sniffalo_egg_not_cracked_bottom",
+    "east": "wizards_reborn:block/sniffalo_egg_not_cracked_east",
+    "north": "wizards_reborn:block/sniffalo_egg_not_cracked_north",
+    "south": "wizards_reborn:block/sniffalo_egg_not_cracked_south",
+    "top": "wizards_reborn:block/sniffalo_egg_not_cracked_top",
+    "west": "wizards_reborn:block/sniffalo_egg_not_cracked_west"
+  }
+}

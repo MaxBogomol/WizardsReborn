@@ -83,25 +83,20 @@ public class Events {
     public void magicArmor(LivingDamageEvent event) {
         if (!event.getEntity().level().isClientSide) {
             float scale = 1;
-            if (event.getEntity() instanceof Player player) {
-                AttributeInstance attr = player.getAttribute(WizardsReborn.MAGIC_ARMOR.get());
+            AttributeInstance attr = event.getEntity().getAttribute(WizardsReborn.MAGIC_ARMOR.get());
 
-                if (event.getSource().is(WizardsReborn.MAGIC_DAMAGE_TYPE_TAG)) {
-                    scale = (float) (1f - (attr.getValue() / 100f));
-                }
-                if (scale == 1 && event.getSource().getDirectEntity() instanceof SpellProjectileEntity) {
-                    scale = (float) (1f - ((attr.getValue() / 2) / 100f));
-                }
-                if (scale < 0) {
-                    scale = 0;
-                }
+            if (event.getSource().is(WizardsReborn.MAGIC_DAMAGE_TYPE_TAG)) {
+                scale = (float) (1f - (attr.getValue() / 100f));
+            }
+            if (scale == 1 && event.getSource().getDirectEntity() instanceof SpellProjectileEntity) {
+                scale = (float) (1f - ((attr.getValue() / 2) / 100f));
+            }
+            if (scale < 0) {
+                scale = 0;
+            }
 
-                if (scale < 1) {
-                    event.setAmount(event.getAmount() * scale);
-                    System.out.println(event.getAmount());
-                    System.out.println(scale);
-                    System.out.println(event.getAmount() * scale);
-                }
+            if (scale < 1) {
+                event.setAmount(event.getAmount() * scale);
             }
         }
     }

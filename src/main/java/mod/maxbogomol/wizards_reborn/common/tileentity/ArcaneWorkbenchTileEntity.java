@@ -74,68 +74,75 @@ public class ArcaneWorkbenchTileEntity extends BlockEntity implements TickableBl
             }
             inv.setItem(13, itemOutputHandler.getStackInSlot(0));
 
-            Optional<ArcaneWorkbenchRecipe> recipe = level.getRecipeManager().getRecipeFor(WizardsReborn.ARCANE_WORKBENCH_RECIPE.get(), inv, level);
-            wissenInCraft = recipe.map(ArcaneWorkbenchRecipe::getRecipeWissen).orElse(0);
+            if (!inv.isEmpty()) {
+                Optional<ArcaneWorkbenchRecipe> recipe = level.getRecipeManager().getRecipeFor(WizardsReborn.ARCANE_WORKBENCH_RECIPE.get(), inv, level);
+                wissenInCraft = recipe.map(ArcaneWorkbenchRecipe::getRecipeWissen).orElse(0);
 
-            if (wissenInCraft <= 0 && (wissenIsCraft > 0 || startCraft)) {
-                wissenIsCraft = 0;
-                startCraft = false;
-
-                update = true;
-            }
-
-            if ((wissenInCraft > 0) && (wissen > 0) && (startCraft)) {
-                ItemStack output = recipe.get().getResultItem(RegistryAccess.EMPTY);
-
-                if (isCanCraft(inv, output)) {
-                    if (wissenIsCraft == 0) {
-                        level.playSound(WizardsReborn.proxy.getPlayer(), getBlockPos(), WizardsReborn.ARCANE_WORKBENCH_START_SOUND.get(), SoundSource.BLOCKS, 1f, 1f);
-                    }
-
-                    int addRemainCraft = WissenUtils.getAddWissenRemain(wissenIsCraft, getWissenPerTick(), wissenInCraft);
-                    int removeRemain = WissenUtils.getRemoveWissenRemain(getWissen(), getWissenPerTick() - addRemainCraft);
-
-                    wissenIsCraft = wissenIsCraft + (getWissenPerTick() - addRemainCraft - removeRemain);
-                    removeWissen(getWissenPerTick() - addRemainCraft - removeRemain);
+                if (wissenInCraft <= 0 && (wissenIsCraft > 0 || startCraft)) {
+                    wissenIsCraft = 0;
+                    startCraft = false;
 
                     update = true;
                 }
-            }
 
-            if (wissenInCraft > 0 && startCraft) {
-                if (wissenInCraft <= wissenIsCraft) {
-                    ItemStack output = recipe.get().getResultItem(RegistryAccess.EMPTY).copy();
+                if ((wissenInCraft > 0) && (wissen > 0) && (startCraft)) {
+                    ItemStack output = recipe.get().getResultItem(RegistryAccess.EMPTY);
 
                     if (isCanCraft(inv, output)) {
-                        wissenInCraft = 0;
-                        wissenIsCraft = 0;
-                        startCraft = false;
-
-                        CompoundTag tag = new CompoundTag();
-                        if (recipe.get().getRecipeSaveNBT() >= 0) {
-                            tag = itemHandler.getStackInSlot(recipe.get().getRecipeSaveNBT()).getOrCreateTag();
-                        }
-                        output.setCount(itemOutputHandler.getStackInSlot(0).getCount() + output.getCount());
-
-                        itemOutputHandler.setStackInSlot(0, output);
-                        if (!tag.isEmpty()) {
-                            itemOutputHandler.getStackInSlot(0).setTag(tag);
+                        if (wissenIsCraft == 0) {
+                            level.playSound(WizardsReborn.proxy.getPlayer(), getBlockPos(), WizardsReborn.ARCANE_WORKBENCH_START_SOUND.get(), SoundSource.BLOCKS, 1f, 1f);
                         }
 
-                        for (int i = 0; i < 13; i++) {
-                            if (itemHandler.getStackInSlot(0).hasCraftingRemainingItem()) {
-                                itemHandler.setStackInSlot(0, itemHandler.getStackInSlot(0).getCraftingRemainingItem());
-                            } else {
-                                itemHandler.extractItem(i, 1, false);
-                            }
-                        }
+                        int addRemainCraft = WissenUtils.getAddWissenRemain(wissenIsCraft, getWissenPerTick(), wissenInCraft);
+                        int removeRemain = WissenUtils.getRemoveWissenRemain(getWissen(), getWissenPerTick() - addRemainCraft);
+
+                        wissenIsCraft = wissenIsCraft + (getWissenPerTick() - addRemainCraft - removeRemain);
+                        removeWissen(getWissenPerTick() - addRemainCraft - removeRemain);
 
                         update = true;
-
-                        PacketHandler.sendToTracking(level, getBlockPos(), new ArcaneWorkbenchBurstEffectPacket(getBlockPos()));
-                        level.playSound(WizardsReborn.proxy.getPlayer(), getBlockPos(), WizardsReborn.ARCANE_WORKBENCH_END_SOUND.get(), SoundSource.BLOCKS, 1f, (float) (1f + ((random.nextFloat() - 0.5D) / 4)));
                     }
                 }
+
+                if (wissenInCraft > 0 && startCraft) {
+                    if (wissenInCraft <= wissenIsCraft) {
+                        ItemStack output = recipe.get().getResultItem(RegistryAccess.EMPTY).copy();
+
+                        if (isCanCraft(inv, output)) {
+                            wissenInCraft = 0;
+                            wissenIsCraft = 0;
+                            startCraft = false;
+
+                            CompoundTag tag = new CompoundTag();
+                            if (recipe.get().getRecipeSaveNBT() >= 0) {
+                                tag = itemHandler.getStackInSlot(recipe.get().getRecipeSaveNBT()).getOrCreateTag();
+                            }
+                            output.setCount(itemOutputHandler.getStackInSlot(0).getCount() + output.getCount());
+
+                            itemOutputHandler.setStackInSlot(0, output);
+                            if (!tag.isEmpty()) {
+                                itemOutputHandler.getStackInSlot(0).setTag(tag);
+                            }
+
+                            for (int i = 0; i < 13; i++) {
+                                if (itemHandler.getStackInSlot(0).hasCraftingRemainingItem()) {
+                                    itemHandler.setStackInSlot(0, itemHandler.getStackInSlot(0).getCraftingRemainingItem());
+                                } else {
+                                    itemHandler.extractItem(i, 1, false);
+                                }
+                            }
+
+                            update = true;
+
+                            PacketHandler.sendToTracking(level, getBlockPos(), new ArcaneWorkbenchBurstEffectPacket(getBlockPos()));
+                            level.playSound(WizardsReborn.proxy.getPlayer(), getBlockPos(), WizardsReborn.ARCANE_WORKBENCH_END_SOUND.get(), SoundSource.BLOCKS, 1f, (float) (1f + ((random.nextFloat() - 0.5D) / 4)));
+                        }
+                    }
+                }
+            } else if (wissenInCraft != 0 || startCraft) {
+                wissenInCraft = 0;
+                wissenIsCraft = 0;
+                startCraft = false;
+                update = true;
             }
 
             if (update) {

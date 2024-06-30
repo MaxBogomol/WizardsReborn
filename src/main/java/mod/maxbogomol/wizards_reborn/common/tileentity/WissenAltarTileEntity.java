@@ -61,61 +61,67 @@ public class WissenAltarTileEntity extends ExposedTileSimpleInventory implements
 
             SimpleContainer inv = new SimpleContainer(1);
             inv.setItem(0, getItemHandler().getItem(2));
-            wissenInItem = 0;
-            wissenInItem = level.getRecipeManager().getRecipeFor(WizardsReborn.WISSEN_ALTAR_RECIPE.get(), inv, level)
-                    .map(WissenAltarRecipe::getRecipeWissen)
-                    .orElse(0);
+            if (inv.isEmpty()) {
+                wissenInItem = 0;
+                wissenInItem = level.getRecipeManager().getRecipeFor(WizardsReborn.WISSEN_ALTAR_RECIPE.get(), inv, level)
+                        .map(WissenAltarRecipe::getRecipeWissen)
+                        .orElse(0);
 
-            if ((wissenInItem > 0) && (wissen < getMaxWissen())) {
-                int addRemainCraft = WissenUtils.getAddWissenRemain(wissenIsCraft, getWissenPerTick(), wissenInItem);
-                int addRemain = WissenUtils.getAddWissenRemain(getWissen(), getWissenPerTick() - addRemainCraft, getMaxWissen());
+                if ((wissenInItem > 0) && (wissen < getMaxWissen())) {
+                    int addRemainCraft = WissenUtils.getAddWissenRemain(wissenIsCraft, getWissenPerTick(), wissenInItem);
+                    int addRemain = WissenUtils.getAddWissenRemain(getWissen(), getWissenPerTick() - addRemainCraft, getMaxWissen());
 
-                wissenIsCraft = wissenIsCraft + (getWissenPerTick() - addRemainCraft - addRemain);
-                addWissen(getWissenPerTick() - addRemainCraft - addRemain);
-                if (random.nextFloat() < 0.05) {
-                    level.playSound(WizardsReborn.proxy.getPlayer(), getBlockPos(), WizardsReborn.WISSEN_BURST_SOUND.get(), SoundSource.BLOCKS, 0.15f, (float) (0.5f + ((random.nextFloat() - 0.5D) / 4)));
-                }
-
-                update = true;
-            }
-
-            if (wissenInItem > 0) {
-                if (wissenInItem <= wissenIsCraft) {
-                    getItemHandler().removeItemNoUpdate(2);
-                    wissenInItem = 0;
-                    wissenIsCraft = 0;
+                    wissenIsCraft = wissenIsCraft + (getWissenPerTick() - addRemainCraft - addRemain);
+                    addWissen(getWissenPerTick() - addRemainCraft - addRemain);
+                    if (random.nextFloat() < 0.05) {
+                        level.playSound(WizardsReborn.proxy.getPlayer(), getBlockPos(), WizardsReborn.WISSEN_BURST_SOUND.get(), SoundSource.BLOCKS, 0.15f, (float) (0.5f + ((random.nextFloat() - 0.5D) / 4)));
+                    }
 
                     update = true;
-
-                    PacketHandler.sendToTracking(level, getBlockPos(), new WissenAltarBurstEffectPacket(getBlockPos()));
-                    level.playSound(WizardsReborn.proxy.getPlayer(), getBlockPos(), WizardsReborn.WISSEN_ALTAR_BURST_SOUND.get(), SoundSource.BLOCKS, 0.25f, (float) (1f + ((random.nextFloat() - 0.5D) / 4)));
                 }
-            }
 
-            if (wissen > 0) {
-                if (!getItemHandler().getItem(0).isEmpty()) {
-                    ItemStack stack = getItemHandler().getItem(0);
-                    if (stack.getItem() instanceof IWissenItem) {
-                        IWissenItem item = (IWissenItem) stack.getItem();
-                        int wissenRemain = WissenUtils.getRemoveWissenRemain(wissen, getWissenPerReceive());
-                        wissenRemain = getWissenPerReceive() - wissenRemain;
-                        WissenItemUtils.existWissen(stack);
-                        int itemWissenRemain = WissenItemUtils.getAddWissenRemain(stack, wissenRemain, item.getMaxWissen());
-                        wissenRemain = wissenRemain - itemWissenRemain;
-                        if (wissenRemain > 0) {
-                            WissenItemUtils.addWissen(stack, wissenRemain, item.getMaxWissen());
-                            wissen = wissen - wissenRemain;
-                            if (random.nextFloat() < 0.5) {
-                                PacketHandler.sendToTracking(level, getBlockPos(), new WissenAltarSendEffectPacket(getBlockPos()));
-                            }
-                            if (random.nextFloat() < 0.1) {
-                                level.playSound(WizardsReborn.proxy.getPlayer(), getBlockPos(), WizardsReborn.WISSEN_BURST_SOUND.get(), SoundSource.BLOCKS, 0.15f, (float) (0.5f + ((random.nextFloat() - 0.5D) / 4)));
-                            }
+                if (wissenInItem > 0) {
+                    if (wissenInItem <= wissenIsCraft) {
+                        getItemHandler().removeItemNoUpdate(2);
+                        wissenInItem = 0;
+                        wissenIsCraft = 0;
 
-                            update = true;
+                        update = true;
+
+                        PacketHandler.sendToTracking(level, getBlockPos(), new WissenAltarBurstEffectPacket(getBlockPos()));
+                        level.playSound(WizardsReborn.proxy.getPlayer(), getBlockPos(), WizardsReborn.WISSEN_ALTAR_BURST_SOUND.get(), SoundSource.BLOCKS, 0.25f, (float) (1f + ((random.nextFloat() - 0.5D) / 4)));
+                    }
+                }
+
+                if (wissen > 0) {
+                    if (!getItemHandler().getItem(0).isEmpty()) {
+                        ItemStack stack = getItemHandler().getItem(0);
+                        if (stack.getItem() instanceof IWissenItem) {
+                            IWissenItem item = (IWissenItem) stack.getItem();
+                            int wissenRemain = WissenUtils.getRemoveWissenRemain(wissen, getWissenPerReceive());
+                            wissenRemain = getWissenPerReceive() - wissenRemain;
+                            WissenItemUtils.existWissen(stack);
+                            int itemWissenRemain = WissenItemUtils.getAddWissenRemain(stack, wissenRemain, item.getMaxWissen());
+                            wissenRemain = wissenRemain - itemWissenRemain;
+                            if (wissenRemain > 0) {
+                                WissenItemUtils.addWissen(stack, wissenRemain, item.getMaxWissen());
+                                wissen = wissen - wissenRemain;
+                                if (random.nextFloat() < 0.5) {
+                                    PacketHandler.sendToTracking(level, getBlockPos(), new WissenAltarSendEffectPacket(getBlockPos()));
+                                }
+                                if (random.nextFloat() < 0.1) {
+                                    level.playSound(WizardsReborn.proxy.getPlayer(), getBlockPos(), WizardsReborn.WISSEN_BURST_SOUND.get(), SoundSource.BLOCKS, 0.15f, (float) (0.5f + ((random.nextFloat() - 0.5D) / 4)));
+                                }
+
+                                update = true;
+                            }
                         }
                     }
                 }
+            } else if (wissenInItem != 0) {
+                wissenInItem = 0;
+                wissenIsCraft = 0;
+                update = true;
             }
 
             if (update) {

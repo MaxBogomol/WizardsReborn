@@ -88,142 +88,149 @@ public class ArcaneIteratorTileEntity extends BlockEntity implements TickableBlo
                     inv.setItem(i, items.get(i));
                 }
 
-                Optional<ArcaneIteratorRecipe> recipe = level.getRecipeManager().getRecipeFor(WizardsReborn.ARCANE_ITERATOR_RECIPE.get(), inv, level);
-                wissenInCraft = recipe.map(ArcaneIteratorRecipe::getRecipeWissen).orElse(0);
-                experienceInCraft = recipe.map(ArcaneIteratorRecipe::getRecipeExperience).orElse(0);
-                healthInCraft = recipe.map(ArcaneIteratorRecipe::getRecipeHealth).orElse(0);
+                if (!inv.isEmpty()) {
+                    Optional<ArcaneIteratorRecipe> recipe = level.getRecipeManager().getRecipeFor(WizardsReborn.ARCANE_ITERATOR_RECIPE.get(), inv, level);
+                    wissenInCraft = recipe.map(ArcaneIteratorRecipe::getRecipeWissen).orElse(0);
+                    experienceInCraft = recipe.map(ArcaneIteratorRecipe::getRecipeExperience).orElse(0);
+                    healthInCraft = recipe.map(ArcaneIteratorRecipe::getRecipeHealth).orElse(0);
 
-                boolean canCraft = canCraft(recipe);
+                    boolean canCraft = canCraft(recipe);
 
-                if (wissenInCraft <= 0 && (wissenIsCraft > 0 || startCraft) || !canCraft) {
-                    wissenIsCraft = 0;
-                    experienceIsCraft = 0;
-                    healthIsCraft = 0;
-                    startCraft = false;
-
-                    update = true;
-                }
-
-                if (experienceTick > 0) {
-                    experienceTick--;
-
-                    update = true;
-                }
-
-                if (healthTick > 0) {
-                    healthTick--;
-
-                    update = true;
-                }
-
-                if ((wissenInCraft > 0) && (wissen > 0) && (startCraft) && canCraft) {
-                    if (wissenIsCraft == 0) {
-                        level.playSound(WizardsReborn.proxy.getPlayer(), getBlockPos(), WizardsReborn.ARCANE_ITERATOR_START_SOUND.get(), SoundSource.BLOCKS, 1f, 1f);
-                    }
-
-                    int addRemainCraft = WissenUtils.getAddWissenRemain(wissenIsCraft, getWissenPerTick(), wissenInCraft);
-                    int removeRemain = WissenUtils.getRemoveWissenRemain(getWissen(), getWissenPerTick() - addRemainCraft);
-
-                    wissenIsCraft = wissenIsCraft + (getWissenPerTick() - addRemainCraft - removeRemain);
-                    removeWissen(getWissenPerTick() - addRemainCraft - removeRemain);
-
-                    if (experienceInCraft > 0 && experienceIsCraft < experienceInCraft && experienceTick == 0) {
-                        Player player = getPlayer();
-                        if (player != null) {
-                            if (player.experienceLevel > 0) {
-                                experienceIsCraft++;
-                                experienceTick = 10;
-                                getPlayer().giveExperienceLevels(-1);
-                                level.playSound(WizardsReborn.proxy.getPlayer(), player.getOnPos(), SoundEvents.EXPERIENCE_ORB_PICKUP, SoundSource.BLOCKS, 1f, 1f);
-                            }
-                        }
-                    }
-
-                    if (healthInCraft > 0 && healthIsCraft < healthInCraft && healthTick == 0 && experienceTick == 0) {
-                        Player player = getPlayer();
-                        if (player != null) {
-                            if (player.getHealth() > 0) {
-                                healthIsCraft++;
-                                healthTick = 10;
-                                player.hurt(new DamageSource(DamageSourceRegistry.create(player.level(), DamageSourceRegistry.ARCANE_MAGIC).typeHolder()), 1f);
-                            }
-                        }
-                    }
-
-                    update = true;
-                }
-
-                if (wissenInCraft > 0 && startCraft && canCraft) {
-                    if (wissenInCraft <= wissenIsCraft && experienceInCraft <= experienceIsCraft) {
-                        wissenInCraft = 0;
+                    if (wissenInCraft <= 0 && (wissenIsCraft > 0 || startCraft) || !canCraft) {
                         wissenIsCraft = 0;
                         experienceIsCraft = 0;
                         healthIsCraft = 0;
                         startCraft = false;
 
-                        CompoundTag tagPos = new CompoundTag();
-                        ItemStack stack = recipe.get().getResultItem(RegistryAccess.EMPTY).copy();
-                        if (!stack.isEmpty()) {
-                            if (recipe.get().getRecipeIsSaveNBT()) {
-                                stack.setTag(items.get(0).getOrCreateTag());
-                            }
-                        } else {
-                            stack = getMainPedestal().getItem(0).copy();
-                        }
-
-                        if (recipe.get().hasRecipeEnchantment()) {
-                            Enchantment enchantment = recipe.get().getRecipeEnchantment();
-                            if (canEnchant(stack, enchantment)) {
-                                enchant(stack, enchantment);
-                            }
-
-                            int bookEnchant = canEnchantBook(stack, enchantment);
-                            if (bookEnchant >= 0) {
-                                if (stack.getItem().equals(Items.BOOK)) {
-                                    stack = new ItemStack(Items.ENCHANTED_BOOK);
-                                    EnchantedBookItem.addEnchantment(stack, new EnchantmentInstance(enchantment, bookEnchant + 1));
-                                } else if (stack.getItem().equals(Items.ENCHANTED_BOOK)) {
-                                    EnchantedBookItem.addEnchantment(stack, new EnchantmentInstance(enchantment, bookEnchant + 1));
-                                }
-                            }
-                        }
-
-                        if (recipe.get().hasRecipeArcaneEnchantment()) {
-                            ArcaneEnchantment enchantment = recipe.get().getRecipeArcaneEnchantment();
-                            ArcaneEnchantmentUtils.addItemArcaneEnchantment(stack, enchantment);
-                        }
-
-                        if (recipe.get().hasRecipeCrystalRitual()) {
-                            CrystalRitual crystalRitual = recipe.get().getRecipeCrystalRitual();
-                            CrystalRitualUtils.setCrystalRitual(stack, crystalRitual);
-                        }
-
-                        int ii = 0;
-                        for (int i = 0; i < pedestals.size(); i++) {
-                            if (!pedestals.get(i).getItemHandler().getItem(0).isEmpty()) {
-                                if (pedestals.get(i).getItemHandler().getItem(0).hasCraftingRemainingItem()) {
-                                    pedestals.get(i).getItemHandler().setItem(0, pedestals.get(i).getItemHandler().getItem(0).getCraftingRemainingItem());
-                                } else {
-                                    pedestals.get(i).getItemHandler().removeItemNoUpdate(0);
-                                }
-                                PacketUtils.SUpdateTileEntityPacket(pedestals.get(i));
-                                CompoundTag tagBlock = new CompoundTag();
-                                tagBlock.putInt("x", pedestals.get(i).getBlockPos().getX());
-                                tagBlock.putInt("y", pedestals.get(i).getBlockPos().getY());
-                                tagBlock.putInt("z", pedestals.get(i).getBlockPos().getZ());
-                                tagPos.put(String.valueOf(ii), tagBlock);
-                                ii++;
-                                level.playSound(WizardsReborn.proxy.getPlayer(), pedestals.get(i).getBlockPos(), WizardsReborn.WISSEN_TRANSFER_SOUND.get(), SoundSource.BLOCKS, 0.25f, (float) (1f + ((random.nextFloat() - 0.5D) / 4)));
-                            }
-                        }
-                        getMainPedestal().setItem(0, stack);
-                        PacketUtils.SUpdateTileEntityPacket(getMainPedestal());
-
-                        PacketHandler.sendToTracking(level, getBlockPos(), new ArcaneIteratorBurstEffectPacket(tagPos));
-                        level.playSound(WizardsReborn.proxy.getPlayer(), getBlockPos(), WizardsReborn.ARCANE_ITERATOR_END_SOUND.get(), SoundSource.BLOCKS, 1f, 1f);
+                        update = true;
                     }
+
+                    if (experienceTick > 0) {
+                        experienceTick--;
+
+                        update = true;
+                    }
+
+                    if (healthTick > 0) {
+                        healthTick--;
+
+                        update = true;
+                    }
+
+                    if ((wissenInCraft > 0) && (wissen > 0) && (startCraft) && canCraft) {
+                        if (wissenIsCraft == 0) {
+                            level.playSound(WizardsReborn.proxy.getPlayer(), getBlockPos(), WizardsReborn.ARCANE_ITERATOR_START_SOUND.get(), SoundSource.BLOCKS, 1f, 1f);
+                        }
+
+                        int addRemainCraft = WissenUtils.getAddWissenRemain(wissenIsCraft, getWissenPerTick(), wissenInCraft);
+                        int removeRemain = WissenUtils.getRemoveWissenRemain(getWissen(), getWissenPerTick() - addRemainCraft);
+
+                        wissenIsCraft = wissenIsCraft + (getWissenPerTick() - addRemainCraft - removeRemain);
+                        removeWissen(getWissenPerTick() - addRemainCraft - removeRemain);
+
+                        if (experienceInCraft > 0 && experienceIsCraft < experienceInCraft && experienceTick == 0) {
+                            Player player = getPlayer();
+                            if (player != null) {
+                                if (player.experienceLevel > 0) {
+                                    experienceIsCraft++;
+                                    experienceTick = 10;
+                                    getPlayer().giveExperienceLevels(-1);
+                                    level.playSound(WizardsReborn.proxy.getPlayer(), player.getOnPos(), SoundEvents.EXPERIENCE_ORB_PICKUP, SoundSource.BLOCKS, 1f, 1f);
+                                }
+                            }
+                        }
+
+                        if (healthInCraft > 0 && healthIsCraft < healthInCraft && healthTick == 0 && experienceTick == 0) {
+                            Player player = getPlayer();
+                            if (player != null) {
+                                if (player.getHealth() > 0) {
+                                    healthIsCraft++;
+                                    healthTick = 10;
+                                    player.hurt(new DamageSource(DamageSourceRegistry.create(player.level(), DamageSourceRegistry.ARCANE_MAGIC).typeHolder()), 1f);
+                                }
+                            }
+                        }
+
+                        update = true;
+                    }
+
+                    if (wissenInCraft > 0 && startCraft && canCraft) {
+                        if (wissenInCraft <= wissenIsCraft && experienceInCraft <= experienceIsCraft) {
+                            wissenInCraft = 0;
+                            wissenIsCraft = 0;
+                            experienceIsCraft = 0;
+                            healthIsCraft = 0;
+                            startCraft = false;
+
+                            CompoundTag tagPos = new CompoundTag();
+                            ItemStack stack = recipe.get().getResultItem(RegistryAccess.EMPTY).copy();
+                            if (!stack.isEmpty()) {
+                                if (recipe.get().getRecipeIsSaveNBT()) {
+                                    stack.setTag(items.get(0).getOrCreateTag());
+                                }
+                            } else {
+                                stack = getMainPedestal().getItem(0).copy();
+                            }
+
+                            if (recipe.get().hasRecipeEnchantment()) {
+                                Enchantment enchantment = recipe.get().getRecipeEnchantment();
+                                if (canEnchant(stack, enchantment)) {
+                                    enchant(stack, enchantment);
+                                }
+
+                                int bookEnchant = canEnchantBook(stack, enchantment);
+                                if (bookEnchant >= 0) {
+                                    if (stack.getItem().equals(Items.BOOK)) {
+                                        stack = new ItemStack(Items.ENCHANTED_BOOK);
+                                        EnchantedBookItem.addEnchantment(stack, new EnchantmentInstance(enchantment, bookEnchant + 1));
+                                    } else if (stack.getItem().equals(Items.ENCHANTED_BOOK)) {
+                                        EnchantedBookItem.addEnchantment(stack, new EnchantmentInstance(enchantment, bookEnchant + 1));
+                                    }
+                                }
+                            }
+
+                            if (recipe.get().hasRecipeArcaneEnchantment()) {
+                                ArcaneEnchantment enchantment = recipe.get().getRecipeArcaneEnchantment();
+                                ArcaneEnchantmentUtils.addItemArcaneEnchantment(stack, enchantment);
+                            }
+
+                            if (recipe.get().hasRecipeCrystalRitual()) {
+                                CrystalRitual crystalRitual = recipe.get().getRecipeCrystalRitual();
+                                CrystalRitualUtils.setCrystalRitual(stack, crystalRitual);
+                            }
+
+                            int ii = 0;
+                            for (int i = 0; i < pedestals.size(); i++) {
+                                if (!pedestals.get(i).getItemHandler().getItem(0).isEmpty()) {
+                                    if (pedestals.get(i).getItemHandler().getItem(0).hasCraftingRemainingItem()) {
+                                        pedestals.get(i).getItemHandler().setItem(0, pedestals.get(i).getItemHandler().getItem(0).getCraftingRemainingItem());
+                                    } else {
+                                        pedestals.get(i).getItemHandler().removeItemNoUpdate(0);
+                                    }
+                                    PacketUtils.SUpdateTileEntityPacket(pedestals.get(i));
+                                    CompoundTag tagBlock = new CompoundTag();
+                                    tagBlock.putInt("x", pedestals.get(i).getBlockPos().getX());
+                                    tagBlock.putInt("y", pedestals.get(i).getBlockPos().getY());
+                                    tagBlock.putInt("z", pedestals.get(i).getBlockPos().getZ());
+                                    tagPos.put(String.valueOf(ii), tagBlock);
+                                    ii++;
+                                    level.playSound(WizardsReborn.proxy.getPlayer(), pedestals.get(i).getBlockPos(), WizardsReborn.WISSEN_TRANSFER_SOUND.get(), SoundSource.BLOCKS, 0.25f, (float) (1f + ((random.nextFloat() - 0.5D) / 4)));
+                                }
+                            }
+                            getMainPedestal().setItem(0, stack);
+                            PacketUtils.SUpdateTileEntityPacket(getMainPedestal());
+
+                            PacketHandler.sendToTracking(level, getBlockPos(), new ArcaneIteratorBurstEffectPacket(tagPos));
+                            level.playSound(WizardsReborn.proxy.getPlayer(), getBlockPos(), WizardsReborn.ARCANE_ITERATOR_END_SOUND.get(), SoundSource.BLOCKS, 1f, 1f);
+                        }
+                    }
+                } else if (wissenInCraft != 0 || startCraft) {
+                    wissenIsCraft = 0;
+                    startCraft = false;
+
+                    update = true;
                 }
-            } else {
+            } else if (wissenInCraft != 0 || startCraft) {
                 wissenIsCraft = 0;
                 startCraft = false;
 

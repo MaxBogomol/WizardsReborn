@@ -5,6 +5,9 @@ import com.mojang.blaze3d.vertex.DefaultVertexFormat;
 import mod.maxbogomol.wizards_reborn.client.config.ClientConfig;
 import mod.maxbogomol.wizards_reborn.client.model.armor.*;
 import mod.maxbogomol.wizards_reborn.client.model.curio.*;
+import mod.maxbogomol.wizards_reborn.client.model.sniffalo.SniffaloArcaneArmorModel;
+import mod.maxbogomol.wizards_reborn.client.model.sniffalo.SniffaloCarpetArmorModel;
+import mod.maxbogomol.wizards_reborn.client.model.sniffalo.SniffaloSaddleArmorModel;
 import mod.maxbogomol.wizards_reborn.client.particle.*;
 import mod.maxbogomol.wizards_reborn.client.render.block.PipeModel;
 import mod.maxbogomol.wizards_reborn.client.render.entity.CustomBoatModel;
@@ -75,6 +78,10 @@ public class WizardsRebornClient {
     public static final ModelLayerLocation MAGNIFICENT_MAID_ARMOR_LAYER = new ModelLayerLocation(new ResourceLocation(WizardsReborn.MOD_ID, "magnificent_maid_armor"), "main");
     public static final ModelLayerLocation MAGNIFICENT_MAID_SLIM_ARMOR_LAYER = new ModelLayerLocation(new ResourceLocation(WizardsReborn.MOD_ID, "magnificent_maid_slim_armor"), "main");
 
+    public static final ModelLayerLocation SNIFFALO_SADDLE_ARMOR_LAYER = new ModelLayerLocation(new ResourceLocation(WizardsReborn.MOD_ID, "sniffalo_saddle_armor"), "main");
+    public static final ModelLayerLocation SNIFFALO_CARPET_ARMOR_LAYER = new ModelLayerLocation(new ResourceLocation(WizardsReborn.MOD_ID, "sniffalo_carpet_armor"), "main");
+    public static final ModelLayerLocation SNIFFALO_ARCANE_ARMOR_LAYER = new ModelLayerLocation(new ResourceLocation(WizardsReborn.MOD_ID, "sniffalo_arcane_armor"), "main");
+
     public static InventorWizardArmorModel INVENTOR_WIZARD_ARMOR_MODEL = null;
     public static ArcaneFortressArmorModel ARCANE_FORTRESS_ARMOR_MODEL = null;
     public static ArcaneFortressArmorModel ARCANE_FORTRESS_SLIM_ARMOR_MODEL = null;
@@ -84,6 +91,10 @@ public class WizardsRebornClient {
     public static SoulHunterArmorModel SOUL_HUNTER_ARMOR_MODEL = null;
     public static MagnificentMaidArmorModel MAGNIFICENT_MAID_ARMOR_MODEL = null;
     public static MagnificentMaidSlimArmorModel MAGNIFICENT_MAID_SLIM_ARMOR_MODEL = null;
+
+    public static SniffaloSaddleArmorModel SNIFFALO_SADDLE_ARMOR_MODEL = null;
+    public static SniffaloCarpetArmorModel SNIFFALO_CARPET_ARMOR_MODEL = null;
+    public static SniffaloArcaneArmorModel SNIFFALO_ARCANE_ARMOR_MODEL = null;
 
     public static ModelResourceLocation JEWELER_TABLE_STONE_MODEl = new ModelResourceLocation(WizardsReborn.MOD_ID, "jeweler_table_stone", "");
     public static ModelResourceLocation ALTAR_OF_DROUGHT_FRAME_MODEl = new ModelResourceLocation(WizardsReborn.MOD_ID, "altar_of_drought_frame", "");
@@ -221,6 +232,24 @@ public class WizardsRebornClient {
             ItemBlockRenderTypes.setRenderLayer(WizardsReborn.STEAM_THERMAL_STORAGE.get(), RenderType.cutout());
             ItemBlockRenderTypes.setRenderLayer(WizardsReborn.ARCANE_CENSER.get(), RenderType.cutout());
             ItemBlockRenderTypes.setRenderLayer(WizardsReborn.ALCHEMY_GLASS.get(), RenderType.translucent());
+            ItemBlockRenderTypes.setRenderLayer(WizardsReborn.WHITE_LUMINAL_GLASS.get(), RenderType.translucent());
+            ItemBlockRenderTypes.setRenderLayer(WizardsReborn.LIGHT_GRAY_LUMINAL_GLASS.get(), RenderType.translucent());
+            ItemBlockRenderTypes.setRenderLayer(WizardsReborn.GRAY_LUMINAL_GLASS.get(), RenderType.translucent());
+            ItemBlockRenderTypes.setRenderLayer(WizardsReborn.BLACK_LUMINAL_GLASS.get(), RenderType.translucent());
+            ItemBlockRenderTypes.setRenderLayer(WizardsReborn.BROWN_LUMINAL_GLASS.get(), RenderType.translucent());
+            ItemBlockRenderTypes.setRenderLayer(WizardsReborn.RED_LUMINAL_GLASS.get(), RenderType.translucent());
+            ItemBlockRenderTypes.setRenderLayer(WizardsReborn.ORANGE_LUMINAL_GLASS.get(), RenderType.translucent());
+            ItemBlockRenderTypes.setRenderLayer(WizardsReborn.YELLOW_LUMINAL_GLASS.get(), RenderType.translucent());
+            ItemBlockRenderTypes.setRenderLayer(WizardsReborn.LIME_LUMINAL_GLASS.get(), RenderType.translucent());
+            ItemBlockRenderTypes.setRenderLayer(WizardsReborn.GREEN_LUMINAL_GLASS.get(), RenderType.translucent());
+            ItemBlockRenderTypes.setRenderLayer(WizardsReborn.CYAN_LUMINAL_GLASS.get(), RenderType.translucent());
+            ItemBlockRenderTypes.setRenderLayer(WizardsReborn.LIGHT_BLUE_LUMINAL_GLASS.get(), RenderType.translucent());
+            ItemBlockRenderTypes.setRenderLayer(WizardsReborn.BLUE_LUMINAL_GLASS.get(), RenderType.translucent());
+            ItemBlockRenderTypes.setRenderLayer(WizardsReborn.PURPLE_LUMINAL_GLASS.get(), RenderType.translucent());
+            ItemBlockRenderTypes.setRenderLayer(WizardsReborn.MAGENTA_LUMINAL_GLASS.get(), RenderType.translucent());
+            ItemBlockRenderTypes.setRenderLayer(WizardsReborn.PINK_LUMINAL_GLASS.get(), RenderType.translucent());
+            ItemBlockRenderTypes.setRenderLayer(WizardsReborn.RAINBOW_LUMINAL_GLASS.get(), RenderType.translucent());
+            ItemBlockRenderTypes.setRenderLayer(WizardsReborn.COSMIS_LUMINAL_GLASS.get(), RenderType.translucent());
 
             ItemBlockRenderTypes.setRenderLayer(WizardsReborn.FLUID_SENSOR.get(), RenderType.translucent());
             ItemBlockRenderTypes.setRenderLayer(WizardsReborn.WISSEN_ACTIVATOR.get(), RenderType.translucent());
@@ -627,6 +656,10 @@ public class WizardsRebornClient {
             event.registerLayerDefinition(SOUL_HUNTER_ARMOR_LAYER, SoulHunterArmorModel::createBodyLayer);
             event.registerLayerDefinition(MAGNIFICENT_MAID_ARMOR_LAYER, MagnificentMaidArmorModel::createBodyLayer);
             event.registerLayerDefinition(MAGNIFICENT_MAID_SLIM_ARMOR_LAYER, MagnificentMaidSlimArmorModel::createBodyLayer);
+
+            event.registerLayerDefinition(SNIFFALO_SADDLE_ARMOR_LAYER, SniffaloSaddleArmorModel::createBodyLayer);
+            event.registerLayerDefinition(SNIFFALO_CARPET_ARMOR_LAYER, SniffaloCarpetArmorModel::createBodyLayer);
+            event.registerLayerDefinition(SNIFFALO_ARCANE_ARMOR_LAYER, SniffaloArcaneArmorModel::createBodyLayer);
         }
 
         @SubscribeEvent
@@ -640,6 +673,10 @@ public class WizardsRebornClient {
             SOUL_HUNTER_ARMOR_MODEL = new SoulHunterArmorModel(event.getEntityModels().bakeLayer(SOUL_HUNTER_ARMOR_LAYER));
             MAGNIFICENT_MAID_ARMOR_MODEL = new MagnificentMaidArmorModel(event.getEntityModels().bakeLayer(MAGNIFICENT_MAID_ARMOR_LAYER));
             MAGNIFICENT_MAID_SLIM_ARMOR_MODEL = new MagnificentMaidSlimArmorModel(event.getEntityModels().bakeLayer(MAGNIFICENT_MAID_SLIM_ARMOR_LAYER));
+
+            SNIFFALO_SADDLE_ARMOR_MODEL = new SniffaloSaddleArmorModel(event.getEntityModels().bakeLayer(SNIFFALO_SADDLE_ARMOR_LAYER));
+            SNIFFALO_CARPET_ARMOR_MODEL = new SniffaloCarpetArmorModel(event.getEntityModels().bakeLayer(SNIFFALO_CARPET_ARMOR_LAYER));
+            SNIFFALO_ARCANE_ARMOR_MODEL = new SniffaloArcaneArmorModel(event.getEntityModels().bakeLayer(SNIFFALO_ARCANE_ARMOR_LAYER));
         }
 
         @SubscribeEvent

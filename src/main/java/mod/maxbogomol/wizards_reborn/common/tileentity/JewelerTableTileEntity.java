@@ -80,115 +80,122 @@ public class JewelerTableTileEntity extends BlockEntity implements TickableBlock
             }
             inv.setItem(2, itemOutputHandler.getStackInSlot(0));
 
-            Optional<JewelerTableRecipe> recipe = level.getRecipeManager().getRecipeFor(WizardsReborn.JEWELER_TABLE_RECIPE.get(), inv, level);
-            wissenInCraft = recipe.map(JewelerTableRecipe::getRecipeWissen).orElse(0);
+            if (!inv.isEmpty()) {
+                Optional<JewelerTableRecipe> recipe = level.getRecipeManager().getRecipeFor(WizardsReborn.JEWELER_TABLE_RECIPE.get(), inv, level);
+                wissenInCraft = recipe.map(JewelerTableRecipe::getRecipeWissen).orElse(0);
 
-            Skin skin = getSkin();
-            if (skin != null) wissenInCraft = 250;
+                Skin skin = getSkin();
+                if (skin != null) wissenInCraft = 250;
 
-            if (wissenInCraft <= 0 && (wissenIsCraft > 0 || startCraft)) {
-                wissenIsCraft = 0;
-                startCraft = false;
-
-                update = true;
-            }
-
-            if ((wissenInCraft > 0) && (wissen > 0) && (startCraft)) {
-                ItemStack output = ItemStack.EMPTY;
-                if (recipe.isPresent()) output = recipe.get().getResultItem(RegistryAccess.EMPTY);
-
-                if (isCanCraft(inv, output) || skin != null) {
-                    int addRemainCraft = WissenUtils.getAddWissenRemain(wissenIsCraft, getWissenPerTick(), wissenInCraft);
-                    int removeRemain = WissenUtils.getRemoveWissenRemain(getWissen(), getWissenPerTick() - addRemainCraft);
-
-                    wissenIsCraft = wissenIsCraft + (getWissenPerTick() - addRemainCraft - removeRemain);
-                    removeWissen(getWissenPerTick() - addRemainCraft - removeRemain);
+                if (wissenInCraft <= 0 && (wissenIsCraft > 0 || startCraft)) {
+                    wissenIsCraft = 0;
+                    startCraft = false;
 
                     update = true;
+                }
 
-                    if (random.nextFloat() < 0.05) {
-                        level.playSound(WizardsReborn.proxy.getPlayer(), getBlockPos(), SoundEvents.GRINDSTONE_USE, SoundSource.BLOCKS, 0.3f, (float) (0.5f + ((random.nextFloat() - 0.5D) / 4)));
+                if ((wissenInCraft > 0) && (wissen > 0) && (startCraft)) {
+                    ItemStack output = ItemStack.EMPTY;
+                    if (recipe.isPresent()) output = recipe.get().getResultItem(RegistryAccess.EMPTY);
+
+                    if (isCanCraft(inv, output) || skin != null) {
+                        int addRemainCraft = WissenUtils.getAddWissenRemain(wissenIsCraft, getWissenPerTick(), wissenInCraft);
+                        int removeRemain = WissenUtils.getRemoveWissenRemain(getWissen(), getWissenPerTick() - addRemainCraft);
+
+                        wissenIsCraft = wissenIsCraft + (getWissenPerTick() - addRemainCraft - removeRemain);
+                        removeWissen(getWissenPerTick() - addRemainCraft - removeRemain);
+
+                        update = true;
+
+                        if (random.nextFloat() < 0.05) {
+                            level.playSound(WizardsReborn.proxy.getPlayer(), getBlockPos(), SoundEvents.GRINDSTONE_USE, SoundSource.BLOCKS, 0.3f, (float) (0.5f + ((random.nextFloat() - 0.5D) / 4)));
+                        }
                     }
                 }
-            }
 
-            if (wissenInCraft > 0 && startCraft) {
-                if (wissenInCraft <= wissenIsCraft) {
-                    boolean particles = false;
-                    if (recipe.isPresent()) {
-                        ItemStack output = recipe.get().getResultItem(RegistryAccess.EMPTY).copy();
+                if (wissenInCraft > 0 && startCraft) {
+                    if (wissenInCraft <= wissenIsCraft) {
+                        boolean particles = false;
+                        if (recipe.isPresent()) {
+                            ItemStack output = recipe.get().getResultItem(RegistryAccess.EMPTY).copy();
 
-                        if (isCanCraft(inv, output)) {
-                            wissenInCraft = 0;
-                            wissenIsCraft = 0;
-                            startCraft = false;
+                            if (isCanCraft(inv, output)) {
+                                wissenInCraft = 0;
+                                wissenIsCraft = 0;
+                                startCraft = false;
 
-                            output.setCount(itemOutputHandler.getStackInSlot(0).getCount() + output.getCount());
-                            if (recipe.get().getRecipeIsSaveNBT()) {
-                                output.setTag(itemHandler.getStackInSlot(0).getOrCreateTag());
+                                output.setCount(itemOutputHandler.getStackInSlot(0).getCount() + output.getCount());
+                                if (recipe.get().getRecipeIsSaveNBT()) {
+                                    output.setTag(itemHandler.getStackInSlot(0).getOrCreateTag());
+                                }
+
+                                itemOutputHandler.setStackInSlot(0, output);
+
+                                for (int i = 0; i < 2; i++) {
+                                    itemHandler.extractItem(i, 1, false);
+                                }
+
+                                update = true;
+                                particles = true;
                             }
-
-                            itemOutputHandler.setStackInSlot(0, output);
-
-                            for (int i = 0; i < 2; i++) {
-                                itemHandler.extractItem(i, 1, false);
-                            }
-
-                            update = true;
-                            particles = true;
-                        }
-                    } else {
-                        if (skin != null) {
-                            wissenInCraft = 0;
-                            wissenIsCraft = 0;
-                            startCraft = false;
-
-                            ItemStack output = itemHandler.getStackInSlot(0).copy();
-
-                            output.setCount(itemOutputHandler.getStackInSlot(0).getCount() + output.getCount());
-                            output.setTag(itemHandler.getStackInSlot(0).getOrCreateTag());
-                            skin.applyOnItem(output);
-
-                            itemOutputHandler.setStackInSlot(0, output);
-
-                            for (int i = 0; i < 2; i++) {
-                                itemHandler.extractItem(i, 1, false);
-                            }
-
-                            update = true;
-                            particles = true;
-                        }
-                    }
-
-                    if (particles) {
-                        Vec3 pos = getBlockRotatePos();
-                        Vec2 vel = getBlockRotateParticle();
-
-                        Color color = Color.WHITE;
-                        boolean isColor = false;
-
-                        if (skin != null) {
-                            color = skin.getColor();
-                            isColor = true;
-                        } else if (itemOutputHandler.getStackInSlot(0).getItem() instanceof CrystalItem crystalItem) {
-                            color = crystalItem.getType().getColor();
-                            isColor = true;
-                        }
-
-                        if (isColor) {
-                            float r = color.getRed() / 255f;
-                            float g = color.getGreen() / 255f;
-                            float b = color.getBlue() / 255f;
-
-                            PacketHandler.sendToTracking(level, getBlockPos(), new JewelerTableBurstEffectPacket(getBlockPos(), (float) pos.x(), (float) pos.y(), (float) pos.z(), vel.x, vel.y, r, g, b));
                         } else {
-                            PacketHandler.sendToTracking(level, getBlockPos(), new JewelerTableBurstEffectPacket(getBlockPos(), (float) pos.x(), (float) pos.y(), (float) pos.z()));
+                            if (skin != null) {
+                                wissenInCraft = 0;
+                                wissenIsCraft = 0;
+                                startCraft = false;
+
+                                ItemStack output = itemHandler.getStackInSlot(0).copy();
+
+                                output.setCount(itemOutputHandler.getStackInSlot(0).getCount() + output.getCount());
+                                output.setTag(itemHandler.getStackInSlot(0).getOrCreateTag());
+                                skin.applyOnItem(output);
+
+                                itemOutputHandler.setStackInSlot(0, output);
+
+                                for (int i = 0; i < 2; i++) {
+                                    itemHandler.extractItem(i, 1, false);
+                                }
+
+                                update = true;
+                                particles = true;
+                            }
                         }
 
-                        level.playSound(WizardsReborn.proxy.getPlayer(), getBlockPos(), SoundEvents.GRINDSTONE_USE, SoundSource.BLOCKS, 0.5f, (float) (1f + ((random.nextFloat() - 0.5D) / 4)));
-                        level.playSound(WizardsReborn.proxy.getPlayer(), getBlockPos(), WizardsReborn.CRYSTAL_BREAK_SOUND.get(), SoundSource.BLOCKS, 1f, (float) (1f + ((random.nextFloat() - 0.5D) / 4)));
+                        if (particles) {
+                            Vec3 pos = getBlockRotatePos();
+                            Vec2 vel = getBlockRotateParticle();
+
+                            Color color = Color.WHITE;
+                            boolean isColor = false;
+
+                            if (skin != null) {
+                                color = skin.getColor();
+                                isColor = true;
+                            } else if (itemOutputHandler.getStackInSlot(0).getItem() instanceof CrystalItem crystalItem) {
+                                color = crystalItem.getType().getColor();
+                                isColor = true;
+                            }
+
+                            if (isColor) {
+                                float r = color.getRed() / 255f;
+                                float g = color.getGreen() / 255f;
+                                float b = color.getBlue() / 255f;
+
+                                PacketHandler.sendToTracking(level, getBlockPos(), new JewelerTableBurstEffectPacket(getBlockPos(), (float) pos.x(), (float) pos.y(), (float) pos.z(), vel.x, vel.y, r, g, b));
+                            } else {
+                                PacketHandler.sendToTracking(level, getBlockPos(), new JewelerTableBurstEffectPacket(getBlockPos(), (float) pos.x(), (float) pos.y(), (float) pos.z()));
+                            }
+
+                            level.playSound(WizardsReborn.proxy.getPlayer(), getBlockPos(), SoundEvents.GRINDSTONE_USE, SoundSource.BLOCKS, 0.5f, (float) (1f + ((random.nextFloat() - 0.5D) / 4)));
+                            level.playSound(WizardsReborn.proxy.getPlayer(), getBlockPos(), WizardsReborn.CRYSTAL_BREAK_SOUND.get(), SoundSource.BLOCKS, 1f, (float) (1f + ((random.nextFloat() - 0.5D) / 4)));
+                        }
                     }
                 }
+            } else if (wissenInCraft != 0 || startCraft) {
+                wissenInCraft = 0;
+                wissenIsCraft = 0;
+                startCraft = false;
+                update = true;
             }
 
             if (update) {

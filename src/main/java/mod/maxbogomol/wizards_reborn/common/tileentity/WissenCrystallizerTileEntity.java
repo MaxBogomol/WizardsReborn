@@ -16,6 +16,7 @@ import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.Connection;
 import net.minecraft.network.protocol.game.ClientboundBlockEntityDataPacket;
 import net.minecraft.sounds.SoundSource;
+import net.minecraft.world.Container;
 import net.minecraft.world.SimpleContainer;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.entity.BlockEntityType;
@@ -52,61 +53,69 @@ public class WissenCrystallizerTileEntity extends ExposedTileSimpleInventory imp
     public void tick() {
         if (!level.isClientSide()) {
             boolean update = false;
-            Optional<WissenCrystallizerRecipe> recipe = level.getRecipeManager().getRecipeFor(WizardsReborn.WISSEN_CRYSTALLIZER_RECIPE.get(), getItemHandler(), level);
-            wissenInCraft =  recipe.map(WissenCrystallizerRecipe::getRecipeWissen).orElse(0);
+            Container container = getItemHandler();
+            if (!container.isEmpty()) {
+                Optional<WissenCrystallizerRecipe> recipe = level.getRecipeManager().getRecipeFor(WizardsReborn.WISSEN_CRYSTALLIZER_RECIPE.get(), getItemHandler(), level);
+                wissenInCraft = recipe.map(WissenCrystallizerRecipe::getRecipeWissen).orElse(0);
 
-            if (sortItems()) update = true;
+                if (sortItems()) update = true;
 
-            if (wissenInCraft <= 0) {
+                if (wissenInCraft <= 0) {
+                    wissenIsCraft = 0;
+                    startCraft = false;
+                    update = true;
+                }
+
+                if ((wissenInCraft > 0) && (wissen > 0) && (startCraft)) {
+                    if (wissenIsCraft == 0) {
+                        level.playSound(WizardsReborn.proxy.getPlayer(), getBlockPos(), WizardsReborn.WISSEN_CRYSTALLIZER_START_SOUND.get(), SoundSource.BLOCKS, 1f, 1f);
+                    }
+                    int addRemainCraft = WissenUtils.getAddWissenRemain(wissenIsCraft, getWissenPerTick(), wissenInCraft);
+                    int removeRemain = WissenUtils.getRemoveWissenRemain(getWissen(), getWissenPerTick() - addRemainCraft);
+
+                    wissenIsCraft = wissenIsCraft + (getWissenPerTick() - addRemainCraft - removeRemain);
+                    removeWissen(getWissenPerTick() - addRemainCraft - removeRemain);
+                    update = true;
+                }
+
+                if (wissenInCraft > 0 && startCraft) {
+                    if (wissenInCraft <= wissenIsCraft) {
+                        wissenInCraft = 0;
+                        wissenIsCraft = 0;
+                        startCraft = false;
+
+                        ItemStack stack = recipe.get().getResultItem(RegistryAccess.EMPTY).copy();
+                        if (recipe.get().getRecipeIsNBTCrystal()) {
+                            CrystalUtils.createCrystalFromFractured(stack, getItemHandler());
+                        }
+                        if (recipe.get().getRecipeIsSaveNBT()) {
+                            stack.setTag(getItemHandler().getItem(0).getOrCreateTag());
+                        }
+
+                        for (int i = 0; i < getItemHandler().getContainerSize(); i++) {
+                            getItemHandler().removeItem(i, 1);
+                        }
+
+                        int count = recipe.get().getResultItem(RegistryAccess.EMPTY).getCount();
+                        if (count > getItemHandler().getContainerSize()) {
+                            count = getItemHandler().getContainerSize();
+                        }
+
+                        for (int i = 0; i < count; i++) {
+                            getItemHandler().setItem(i, stack.copy());
+                        }
+
+                        update = true;
+
+                        PacketHandler.sendToTracking(level, getBlockPos(), new WissenCrystallizerBurstEffectPacket(getBlockPos()));
+                        level.playSound(WizardsReborn.proxy.getPlayer(), getBlockPos(), WizardsReborn.WISSEN_CRYSTALLIZER_END_SOUND.get(), SoundSource.BLOCKS, 1f, (float) (1f + ((random.nextFloat() - 0.5D) / 4)));
+                    }
+                }
+            } else if (wissenInCraft != 0 || startCraft) {
+                wissenInCraft = 0;
                 wissenIsCraft = 0;
                 startCraft = false;
                 update = true;
-            }
-            
-            if ((wissenInCraft > 0) && (wissen > 0) && (startCraft)) {
-                if (wissenIsCraft == 0) {
-                    level.playSound(WizardsReborn.proxy.getPlayer(), getBlockPos(), WizardsReborn.WISSEN_CRYSTALLIZER_START_SOUND.get(), SoundSource.BLOCKS, 1f, 1f);
-                }
-                int addRemainCraft = WissenUtils.getAddWissenRemain(wissenIsCraft, getWissenPerTick(), wissenInCraft);
-                int removeRemain = WissenUtils.getRemoveWissenRemain(getWissen(), getWissenPerTick() - addRemainCraft);
-
-                wissenIsCraft = wissenIsCraft + (getWissenPerTick() - addRemainCraft - removeRemain);
-                removeWissen(getWissenPerTick() - addRemainCraft - removeRemain);
-                update = true;
-            }
-
-            if (wissenInCraft > 0 && startCraft) {
-                if (wissenInCraft <= wissenIsCraft) {
-                    wissenInCraft = 0;
-                    wissenIsCraft = 0;
-                    startCraft = false;
-
-                    ItemStack stack = recipe.get().getResultItem(RegistryAccess.EMPTY).copy();
-                    if (recipe.get().getRecipeIsNBTCrystal()) {
-                        CrystalUtils.createCrystalFromFractured(stack, getItemHandler());
-                    }
-                    if (recipe.get().getRecipeIsSaveNBT()) {
-                        stack.setTag(getItemHandler().getItem(0).getOrCreateTag());
-                    }
-
-                    for (int i = 0; i < getItemHandler().getContainerSize(); i++) {
-                        getItemHandler().removeItem(i, 1);
-                    }
-
-                    int count = recipe.get().getResultItem(RegistryAccess.EMPTY).getCount();
-                    if (count > getItemHandler().getContainerSize()) {
-                        count = getItemHandler().getContainerSize();
-                    }
-
-                    for (int i = 0; i < count; i++) {
-                        getItemHandler().setItem(i, stack.copy());
-                    }
-
-                    update = true;
-
-                    PacketHandler.sendToTracking(level, getBlockPos(), new WissenCrystallizerBurstEffectPacket(getBlockPos()));
-                    level.playSound(WizardsReborn.proxy.getPlayer(), getBlockPos(), WizardsReborn.WISSEN_CRYSTALLIZER_END_SOUND.get(), SoundSource.BLOCKS, 1f, (float) (1f + ((random.nextFloat() - 0.5D) / 4)));
-                }
             }
 
             if (update) {

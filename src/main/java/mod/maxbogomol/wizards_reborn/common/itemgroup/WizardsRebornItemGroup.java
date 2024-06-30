@@ -41,6 +41,8 @@ public class WizardsRebornItemGroup {
 
     public static void addCreative(BuildCreativeModeTabContentsEvent event) {
         if (event.getTabKey() == WizardsRebornItemGroup.WIZARDS_REBORN_GROUP.getKey()) {
+            event.accept(WizardsReborn.ARCANEMICON);
+
             event.accept(WizardsReborn.ARCANE_GOLD_INGOT);
             event.accept(WizardsReborn.ARCANE_GOLD_NUGGET);
             event.accept(WizardsReborn.RAW_ARCANE_GOLD);
@@ -267,21 +269,21 @@ public class WizardsRebornItemGroup {
             event.accept(CrystalItem.creativeTabRandomStats(WizardsReborn.PURE_VOID_CRYSTAL.get()));
 
             event.accept(WizardsReborn.WHITE_ARCANE_LUMOS_ITEM);
+            event.accept(WizardsReborn.LIGHT_GRAY_ARCANE_LUMOS_ITEM);
+            event.accept(WizardsReborn.GRAY_ARCANE_LUMOS_ITEM);
+            event.accept(WizardsReborn.BLACK_ARCANE_LUMOS_ITEM);
+            event.accept(WizardsReborn.BROWN_ARCANE_LUMOS_ITEM);
+            event.accept(WizardsReborn.RED_ARCANE_LUMOS_ITEM);
             event.accept(WizardsReborn.ORANGE_ARCANE_LUMOS_ITEM);
-            event.accept(WizardsReborn.MAGENTA_ARCANE_LUMOS_ITEM);
-            event.accept(WizardsReborn.LIGHT_BLUE_ARCANE_LUMOS_ITEM);
             event.accept(WizardsReborn.YELLOW_ARCANE_LUMOS_ITEM);
             event.accept(WizardsReborn.LIME_ARCANE_LUMOS_ITEM);
-            event.accept(WizardsReborn.PINK_ARCANE_LUMOS_ITEM);
-            event.accept(WizardsReborn.GRAY_ARCANE_LUMOS_ITEM);
-            event.accept(WizardsReborn.LIGHT_GRAY_ARCANE_LUMOS_ITEM);
-            event.accept(WizardsReborn.CYAN_ARCANE_LUMOS_ITEM);
-            event.accept(WizardsReborn.PURPLE_ARCANE_LUMOS_ITEM);
-            event.accept(WizardsReborn.BLUE_ARCANE_LUMOS_ITEM);
-            event.accept(WizardsReborn.BROWN_ARCANE_LUMOS_ITEM);
             event.accept(WizardsReborn.GREEN_ARCANE_LUMOS_ITEM);
-            event.accept(WizardsReborn.RED_ARCANE_LUMOS_ITEM);
-            event.accept(WizardsReborn.BLACK_ARCANE_LUMOS_ITEM);
+            event.accept(WizardsReborn.CYAN_ARCANE_LUMOS_ITEM);
+            event.accept(WizardsReborn.LIGHT_BLUE_ARCANE_LUMOS_ITEM);
+            event.accept(WizardsReborn.BLUE_ARCANE_LUMOS_ITEM);
+            event.accept(WizardsReborn.PURPLE_ARCANE_LUMOS_ITEM);
+            event.accept(WizardsReborn.MAGENTA_ARCANE_LUMOS_ITEM);
+            event.accept(WizardsReborn.PINK_ARCANE_LUMOS_ITEM);
             event.accept(WizardsReborn.RAINBOW_ARCANE_LUMOS_ITEM);
             event.accept(WizardsReborn.COSMIC_ARCANE_LUMOS_ITEM);
 
@@ -397,6 +399,25 @@ public class WizardsRebornItemGroup {
             event.accept(WizardsReborn.ALCHEMY_VIAL);
             event.accept(WizardsReborn.ALCHEMY_FLASK);
 
+            event.accept(WizardsReborn.WHITE_LUMINAL_GLASS_ITEM);
+            event.accept(WizardsReborn.LIGHT_GRAY_LUMINAL_GLASS_ITEM);
+            event.accept(WizardsReborn.GRAY_LUMINAL_GLASS_ITEM);
+            event.accept(WizardsReborn.BLACK_LUMINAL_GLASS_ITEM);
+            event.accept(WizardsReborn.BROWN_LUMINAL_GLASS_ITEM);
+            event.accept(WizardsReborn.RED_LUMINAL_GLASS_ITEM);
+            event.accept(WizardsReborn.ORANGE_LUMINAL_GLASS_ITEM);
+            event.accept(WizardsReborn.YELLOW_LUMINAL_GLASS_ITEM);
+            event.accept(WizardsReborn.LIME_LUMINAL_GLASS_ITEM);
+            event.accept(WizardsReborn.GREEN_LUMINAL_GLASS_ITEM);
+            event.accept(WizardsReborn.CYAN_LUMINAL_GLASS_ITEM);
+            event.accept(WizardsReborn.LIGHT_BLUE_LUMINAL_GLASS_ITEM);
+            event.accept(WizardsReborn.BLUE_LUMINAL_GLASS_ITEM);
+            event.accept(WizardsReborn.PURPLE_LUMINAL_GLASS_ITEM);
+            event.accept(WizardsReborn.MAGENTA_LUMINAL_GLASS_ITEM);
+            event.accept(WizardsReborn.PINK_LUMINAL_GLASS_ITEM);
+            event.accept(WizardsReborn.RAINBOW_LUMINAL_GLASS_ITEM);
+            event.accept(WizardsReborn.COSMIS_LUMINAL_GLASS_ITEM);
+
             event.accept(WizardsReborn.ALCHEMY_CALX);
             event.accept(WizardsReborn.NATURAL_CALX);
             event.accept(WizardsReborn.SCORCHED_CALX);
@@ -411,6 +432,8 @@ public class WizardsRebornItemGroup {
 
             event.accept(WizardsReborn.ARCACITE_POLISHING_MIXTURE);
 
+            event.accept(WizardsReborn.SNIFFALO_EGG_ITEM);
+
             event.accept(WizardsReborn.ARCANUM_LENS);
             event.accept(WizardsReborn.WISESTONE_PLATE);
             for (CrystalRitual ritual : CrystalRituals.getCrystalRituals()) {
@@ -420,9 +443,6 @@ public class WizardsRebornItemGroup {
                     event.accept(stack);
                 }
             }
-
-            event.accept(WizardsReborn.ARCANE_WAND);
-            event.accept(WizardsReborn.WISSEN_WAND);
 
             event.accept(WizardsReborn.ARCANUM_AMULET);
             event.accept(WizardsReborn.ARCANUM_RING);
@@ -454,11 +474,31 @@ public class WizardsRebornItemGroup {
             event.accept(WizardsReborn.INVENTOR_WIZARD_TROUSERS);
             event.accept(WizardsReborn.INVENTOR_WIZARD_BOOTS);
 
+            event.accept(WizardsReborn.ARCANE_WAND);
+            event.accept(WizardsReborn.WISSEN_WAND);
             event.accept(WizardsReborn.ARCANE_WOOD_SMOKING_PIPE);
             event.accept(WizardsReborn.ARCANE_WOOD_CANE);
             event.accept(WizardsReborn.ARCANE_WOOD_BOW);
 
-            event.accept(WizardsReborn.ARCANEMICON);
+            event.accept(WizardsReborn.CARGO_CARPET);
+            event.accept(WizardsReborn.WHITE_CARGO_CARPET);
+            event.accept(WizardsReborn.LIGHT_GRAY_CARGO_CARPET);
+            event.accept(WizardsReborn.GRAY_CARGO_CARPET);
+            event.accept(WizardsReborn.BLACK_CARGO_CARPET);
+            event.accept(WizardsReborn.BROWN_CARGO_CARPET);
+            event.accept(WizardsReborn.RED_CARGO_CARPET);
+            event.accept(WizardsReborn.ORANGE_CARGO_CARPET);
+            event.accept(WizardsReborn.YELLOW_CARGO_CARPET);
+            event.accept(WizardsReborn.LIME_CARGO_CARPET);
+            event.accept(WizardsReborn.GREEN_CARGO_CARPET);
+            event.accept(WizardsReborn.CYAN_CARGO_CARPET);
+            event.accept(WizardsReborn.LIGHT_BLUE_CARGO_CARPET);
+            event.accept(WizardsReborn.BLUE_CARGO_CARPET);
+            event.accept(WizardsReborn.PURPLE_CARGO_CARPET);
+            event.accept(WizardsReborn.MAGENTA_CARGO_CARPET);
+            event.accept(WizardsReborn.PINK_CARGO_CARPET);
+            event.accept(WizardsReborn.RAINBOW_CARGO_CARPET);
+
             event.accept(WizardsReborn.KNOWLEDGE_SCROLL);
             event.accept(WizardsReborn.CREATIVE_KNOWLEDGE_SCROLL);
             event.accept(WizardsReborn.CREATIVE_KKNOWLEDGE_ANCIENT_SCROLL);

@@ -123,6 +123,7 @@ import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.MobCategory;
 import net.minecraft.world.entity.ai.attributes.Attribute;
 import net.minecraft.world.entity.ai.attributes.RangedAttribute;
@@ -155,6 +156,7 @@ import net.minecraftforge.common.loot.IGlobalLootModifier;
 import net.minecraftforge.common.util.ForgeSoundType;
 import net.minecraftforge.common.util.LazyOptional;
 import net.minecraftforge.event.entity.EntityAttributeCreationEvent;
+import net.minecraftforge.event.entity.EntityAttributeModificationEvent;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fluids.FluidType;
@@ -223,6 +225,7 @@ public class WizardsReborn {
     public static final TagKey<Item> LIGHT_CASINGS_ITEM_TAG  = TagKey.create(Registries.ITEM, new ResourceLocation(MOD_ID, "light_casings"));
     public static final TagKey<Item> FLUID_CASINGS_ITEM_TAG  = TagKey.create(Registries.ITEM, new ResourceLocation(MOD_ID, "fluid_casings"));
     public static final TagKey<Item> STEAM_CASINGS_ITEM_TAG  = TagKey.create(Registries.ITEM, new ResourceLocation(MOD_ID, "steam_casings"));
+    public static final TagKey<Item> SNIFFALO_FOOD_ITEM_TAG  = TagKey.create(Registries.ITEM, new ResourceLocation(MOD_ID, "sniffalo_food"));
 
     public static final TagKey<Block> FLUID_PIPE_CONNECTION_BLOCK_TAG = TagKey.create(Registries.BLOCK, new ResourceLocation(MOD_ID, "fluid_pipe_connection"));
     public static final TagKey<Block> FLUID_PIPE_CONNECTION_TOGGLE_BLOCK_TAG = TagKey.create(Registries.BLOCK, new ResourceLocation(MOD_ID, "fluid_pipe_connection_toggle"));
@@ -798,21 +801,21 @@ public class WizardsReborn {
     public static final RegistryObject<Block> PURE_VOID_CRYSTAL_BLOCK = BLOCKS.register("pure_void_crystal", () -> new CrystalBlock(VOID_CRYSTAL_TYPE, PURE_POLISHING_TYPE, BlockBehaviour.Properties.copy(VOID_CRYSTAL_BLOCK.get())));
 
     public static final RegistryObject<Block> WHITE_ARCANE_LUMOS = BLOCKS.register("white_arcane_lumos", () -> new ArcaneLumosBlock(ArcaneLumosBlock.Colors.WHITE, BlockBehaviour.Properties.copy(Blocks.WHITE_WOOL).lightLevel((state) -> 15).noOcclusion().noCollission().instabreak()));
+    public static final RegistryObject<Block> LIGHT_GRAY_ARCANE_LUMOS = BLOCKS.register("light_gray_arcane_lumos", () -> new ArcaneLumosBlock(ArcaneLumosBlock.Colors.LIGHT_GRAY, BlockBehaviour.Properties.copy(Blocks.LIGHT_GRAY_WOOL).lightLevel((state) -> 15).noOcclusion().noCollission().instabreak()));
+    public static final RegistryObject<Block> GRAY_ARCANE_LUMOS = BLOCKS.register("gray_arcane_lumos", () -> new ArcaneLumosBlock(ArcaneLumosBlock.Colors.GRAY, BlockBehaviour.Properties.copy(Blocks.GRAY_WOOL).lightLevel((state) -> 15).noOcclusion().noCollission().instabreak()));
+    public static final RegistryObject<Block> BLACK_ARCANE_LUMOS = BLOCKS.register("black_arcane_lumos", () -> new ArcaneLumosBlock(ArcaneLumosBlock.Colors.BLACK, BlockBehaviour.Properties.copy(Blocks.BLACK_WOOL).lightLevel((state) -> 15).noOcclusion().noCollission().instabreak()));
+    public static final RegistryObject<Block> BROWN_ARCANE_LUMOS = BLOCKS.register("brown_arcane_lumos", () -> new ArcaneLumosBlock(ArcaneLumosBlock.Colors.BROWN, BlockBehaviour.Properties.copy(Blocks.BROWN_WOOL).lightLevel((state) -> 15).noOcclusion().noCollission().instabreak()));
+    public static final RegistryObject<Block> RED_ARCANE_LUMOS = BLOCKS.register("red_arcane_lumos", () -> new ArcaneLumosBlock(ArcaneLumosBlock.Colors.RED, BlockBehaviour.Properties.copy(Blocks.RED_WOOL).lightLevel((state) -> 15).noOcclusion().noCollission().instabreak()));
     public static final RegistryObject<Block> ORANGE_ARCANE_LUMOS = BLOCKS.register("orange_arcane_lumos", () -> new ArcaneLumosBlock(ArcaneLumosBlock.Colors.ORANGE, BlockBehaviour.Properties.copy(Blocks.ORANGE_WOOL).lightLevel((state) -> 15).noOcclusion().noCollission().instabreak()));
-    public static final RegistryObject<Block> MAGENTA_ARCANE_LUMOS = BLOCKS.register("magenta_arcane_lumos", () -> new ArcaneLumosBlock(ArcaneLumosBlock.Colors.MAGENTA, BlockBehaviour.Properties.copy(Blocks.MAGENTA_WOOL).lightLevel((state) -> 15).noOcclusion().noCollission().instabreak()));
-    public static final RegistryObject<Block> LIGHT_BLUE_ARCANE_LUMOS = BLOCKS.register("light_blue_arcane_lumos", () -> new ArcaneLumosBlock(ArcaneLumosBlock.Colors.LIGHT_BLUE, BlockBehaviour.Properties.copy(Blocks.LIGHT_BLUE_WOOL).lightLevel((state) -> 15).noOcclusion().noCollission().instabreak()));
     public static final RegistryObject<Block> YELLOW_ARCANE_LUMOS = BLOCKS.register("yellow_arcane_lumos", () -> new ArcaneLumosBlock(ArcaneLumosBlock.Colors.YELLOW, BlockBehaviour.Properties.copy(Blocks.YELLOW_WOOL).lightLevel((state) -> 15).noOcclusion().noCollission().instabreak()));
     public static final RegistryObject<Block> LIME_ARCANE_LUMOS = BLOCKS.register("lime_arcane_lumos", () -> new ArcaneLumosBlock(ArcaneLumosBlock.Colors.LIME, BlockBehaviour.Properties.copy(Blocks.LIME_WOOL).lightLevel((state) -> 15).noOcclusion().noCollission().instabreak()));
-    public static final RegistryObject<Block> PINK_ARCANE_LUMOS = BLOCKS.register("pink_arcane_lumos", () -> new ArcaneLumosBlock(ArcaneLumosBlock.Colors.PINK, BlockBehaviour.Properties.copy(Blocks.PINK_WOOL).lightLevel((state) -> 15).noOcclusion().noCollission().instabreak()));
-    public static final RegistryObject<Block> GRAY_ARCANE_LUMOS = BLOCKS.register("gray_arcane_lumos", () -> new ArcaneLumosBlock(ArcaneLumosBlock.Colors.GRAY, BlockBehaviour.Properties.copy(Blocks.GRAY_WOOL).lightLevel((state) -> 15).noOcclusion().noCollission().instabreak()));
-    public static final RegistryObject<Block> LIGHT_GRAY_ARCANE_LUMOS = BLOCKS.register("light_gray_arcane_lumos", () -> new ArcaneLumosBlock(ArcaneLumosBlock.Colors.LIGHT_GRAY, BlockBehaviour.Properties.copy(Blocks.LIGHT_GRAY_WOOL).lightLevel((state) -> 15).noOcclusion().noCollission().instabreak()));
-    public static final RegistryObject<Block> CYAN_ARCANE_LUMOS = BLOCKS.register("cyan_arcane_lumos", () -> new ArcaneLumosBlock(ArcaneLumosBlock.Colors.CYAN, BlockBehaviour.Properties.copy(Blocks.CYAN_WOOL).lightLevel((state) -> 15).noOcclusion().noCollission().instabreak()));
-    public static final RegistryObject<Block> PURPLE_ARCANE_LUMOS = BLOCKS.register("purple_arcane_lumos", () -> new ArcaneLumosBlock(ArcaneLumosBlock.Colors.PURPLE, BlockBehaviour.Properties.copy(Blocks.PURPLE_WOOL).lightLevel((state) -> 15).noOcclusion().noCollission().instabreak()));
-    public static final RegistryObject<Block> BLUE_ARCANE_LUMOS = BLOCKS.register("blue_arcane_lumos", () -> new ArcaneLumosBlock(ArcaneLumosBlock.Colors.BLUE, BlockBehaviour.Properties.copy(Blocks.BLUE_WOOL).lightLevel((state) -> 15).noOcclusion().noCollission().instabreak()));
-    public static final RegistryObject<Block> BROWN_ARCANE_LUMOS = BLOCKS.register("brown_arcane_lumos", () -> new ArcaneLumosBlock(ArcaneLumosBlock.Colors.BROWN, BlockBehaviour.Properties.copy(Blocks.BROWN_WOOL).lightLevel((state) -> 15).noOcclusion().noCollission().instabreak()));
     public static final RegistryObject<Block> GREEN_ARCANE_LUMOS = BLOCKS.register("green_arcane_lumos", () -> new ArcaneLumosBlock(ArcaneLumosBlock.Colors.GREEN, BlockBehaviour.Properties.copy(Blocks.GREEN_WOOL).lightLevel((state) -> 15).noOcclusion().noCollission().instabreak()));
-    public static final RegistryObject<Block> RED_ARCANE_LUMOS = BLOCKS.register("red_arcane_lumos", () -> new ArcaneLumosBlock(ArcaneLumosBlock.Colors.RED, BlockBehaviour.Properties.copy(Blocks.RED_WOOL).lightLevel((state) -> 15).noOcclusion().noCollission().instabreak()));
-    public static final RegistryObject<Block> BLACK_ARCANE_LUMOS = BLOCKS.register("black_arcane_lumos", () -> new ArcaneLumosBlock(ArcaneLumosBlock.Colors.BLACK, BlockBehaviour.Properties.copy(Blocks.BLACK_WOOL).lightLevel((state) -> 15).noOcclusion().noCollission().instabreak()));
+    public static final RegistryObject<Block> CYAN_ARCANE_LUMOS = BLOCKS.register("cyan_arcane_lumos", () -> new ArcaneLumosBlock(ArcaneLumosBlock.Colors.CYAN, BlockBehaviour.Properties.copy(Blocks.CYAN_WOOL).lightLevel((state) -> 15).noOcclusion().noCollission().instabreak()));
+    public static final RegistryObject<Block> LIGHT_BLUE_ARCANE_LUMOS = BLOCKS.register("light_blue_arcane_lumos", () -> new ArcaneLumosBlock(ArcaneLumosBlock.Colors.LIGHT_BLUE, BlockBehaviour.Properties.copy(Blocks.LIGHT_BLUE_WOOL).lightLevel((state) -> 15).noOcclusion().noCollission().instabreak()));
+    public static final RegistryObject<Block> BLUE_ARCANE_LUMOS = BLOCKS.register("blue_arcane_lumos", () -> new ArcaneLumosBlock(ArcaneLumosBlock.Colors.BLUE, BlockBehaviour.Properties.copy(Blocks.BLUE_WOOL).lightLevel((state) -> 15).noOcclusion().noCollission().instabreak()));
+    public static final RegistryObject<Block> PURPLE_ARCANE_LUMOS = BLOCKS.register("purple_arcane_lumos", () -> new ArcaneLumosBlock(ArcaneLumosBlock.Colors.PURPLE, BlockBehaviour.Properties.copy(Blocks.PURPLE_WOOL).lightLevel((state) -> 15).noOcclusion().noCollission().instabreak()));
+    public static final RegistryObject<Block> MAGENTA_ARCANE_LUMOS = BLOCKS.register("magenta_arcane_lumos", () -> new ArcaneLumosBlock(ArcaneLumosBlock.Colors.MAGENTA, BlockBehaviour.Properties.copy(Blocks.MAGENTA_WOOL).lightLevel((state) -> 15).noOcclusion().noCollission().instabreak()));
+    public static final RegistryObject<Block> PINK_ARCANE_LUMOS = BLOCKS.register("pink_arcane_lumos", () -> new ArcaneLumosBlock(ArcaneLumosBlock.Colors.PINK, BlockBehaviour.Properties.copy(Blocks.PINK_WOOL).lightLevel((state) -> 15).noOcclusion().noCollission().instabreak()));
     public static final RegistryObject<Block> RAINBOW_ARCANE_LUMOS = BLOCKS.register("rainbow_arcane_lumos", () -> new ArcaneLumosBlock(ArcaneLumosBlock.Colors.RAINBOW, BlockBehaviour.Properties.copy(Blocks.PINK_WOOL).lightLevel((state) -> 15).noOcclusion().noCollission().instabreak()));
     public static final RegistryObject<Block> COSMIC_ARCANE_LUMOS = BLOCKS.register("cosmic_arcane_lumos", () -> new ArcaneLumosBlock(ArcaneLumosBlock.Colors.COSMIC, BlockBehaviour.Properties.copy(Blocks.MAGENTA_WOOL).lightLevel((state) -> 15).noOcclusion().noCollission().instabreak()));
 
@@ -928,12 +931,32 @@ public class WizardsReborn {
     public static final RegistryObject<Block> WISESTONE_SALT_CAMPFIRE = BLOCKS.register("wisestone_salt_campfire", () -> new SaltCampfireBlock(BlockBehaviour.Properties.copy(Blocks.CAMPFIRE).lightLevel((state) -> 15).mapColor(MapColor.TERRACOTTA_BLACK).sound(POLISHED_WISESTONE_SOUNDS)));
 
     public static final RegistryObject<Block> ALCHEMY_GLASS = BLOCKS.register("alchemy_glass", () -> new TintedGlassBlock(BlockBehaviour.Properties.copy(Blocks.TINTED_GLASS).mapColor(MapColor.COLOR_LIGHT_GRAY).noOcclusion()));
+    public static final RegistryObject<Block> WHITE_LUMINAL_GLASS = BLOCKS.register("white_luminal_glass", () -> new LuminalGlassBlock(BlockBehaviour.Properties.copy(Blocks.GLASS).mapColor(MapColor.TERRACOTTA_WHITE).noOcclusion().lightLevel((state) -> 8)));
+    public static final RegistryObject<Block> LIGHT_GRAY_LUMINAL_GLASS = BLOCKS.register("light_gray_luminal_glass", () -> new LuminalGlassBlock(BlockBehaviour.Properties.copy(Blocks.GLASS).mapColor(MapColor.TERRACOTTA_LIGHT_GRAY).noOcclusion().lightLevel((state) -> 8)));
+    public static final RegistryObject<Block> GRAY_LUMINAL_GLASS = BLOCKS.register("gray_luminal_glass", () -> new LuminalGlassBlock(BlockBehaviour.Properties.copy(Blocks.GLASS).mapColor(MapColor.TERRACOTTA_GRAY).noOcclusion().lightLevel((state) -> 8)));
+    public static final RegistryObject<Block> BLACK_LUMINAL_GLASS = BLOCKS.register("black_luminal_glass", () -> new LuminalGlassBlock(BlockBehaviour.Properties.copy(Blocks.GLASS).mapColor(MapColor.TERRACOTTA_BLACK).noOcclusion().lightLevel((state) -> 8)));
+    public static final RegistryObject<Block> BROWN_LUMINAL_GLASS = BLOCKS.register("brown_luminal_glass", () -> new LuminalGlassBlock(BlockBehaviour.Properties.copy(Blocks.GLASS).mapColor(MapColor.TERRACOTTA_BROWN).noOcclusion().lightLevel((state) -> 8)));
+    public static final RegistryObject<Block> RED_LUMINAL_GLASS = BLOCKS.register("red_luminal_glass", () -> new LuminalGlassBlock(BlockBehaviour.Properties.copy(Blocks.GLASS).mapColor(MapColor.TERRACOTTA_RED).noOcclusion().lightLevel((state) -> 8)));
+    public static final RegistryObject<Block> ORANGE_LUMINAL_GLASS = BLOCKS.register("orange_luminal_glass", () -> new LuminalGlassBlock(BlockBehaviour.Properties.copy(Blocks.GLASS).mapColor(MapColor.TERRACOTTA_ORANGE).noOcclusion().lightLevel((state) -> 8)));
+    public static final RegistryObject<Block> YELLOW_LUMINAL_GLASS = BLOCKS.register("yellow_luminal_glass", () -> new LuminalGlassBlock(BlockBehaviour.Properties.copy(Blocks.GLASS).mapColor(MapColor.TERRACOTTA_YELLOW).noOcclusion().lightLevel((state) -> 8)));
+    public static final RegistryObject<Block> LIME_LUMINAL_GLASS = BLOCKS.register("lime_luminal_glass", () -> new LuminalGlassBlock(BlockBehaviour.Properties.copy(Blocks.GLASS).mapColor(MapColor.TERRACOTTA_LIGHT_GREEN).noOcclusion().lightLevel((state) -> 8)));
+    public static final RegistryObject<Block> GREEN_LUMINAL_GLASS = BLOCKS.register("green_luminal_glass", () -> new LuminalGlassBlock(BlockBehaviour.Properties.copy(Blocks.GLASS).mapColor(MapColor.TERRACOTTA_GREEN).noOcclusion().lightLevel((state) -> 8)));
+    public static final RegistryObject<Block> CYAN_LUMINAL_GLASS = BLOCKS.register("cyan_luminal_glass", () -> new LuminalGlassBlock(BlockBehaviour.Properties.copy(Blocks.GLASS).mapColor(MapColor.TERRACOTTA_CYAN).noOcclusion().lightLevel((state) -> 8)));
+    public static final RegistryObject<Block> LIGHT_BLUE_LUMINAL_GLASS = BLOCKS.register("light_blue_luminal_glass", () -> new LuminalGlassBlock(BlockBehaviour.Properties.copy(Blocks.GLASS).mapColor(MapColor.TERRACOTTA_LIGHT_BLUE).noOcclusion().lightLevel((state) -> 8)));
+    public static final RegistryObject<Block> BLUE_LUMINAL_GLASS = BLOCKS.register("blue_luminal_glass", () -> new LuminalGlassBlock(BlockBehaviour.Properties.copy(Blocks.GLASS).mapColor(MapColor.TERRACOTTA_BLUE).noOcclusion().lightLevel((state) -> 8)));
+    public static final RegistryObject<Block> PURPLE_LUMINAL_GLASS = BLOCKS.register("purple_luminal_glass", () -> new LuminalGlassBlock(BlockBehaviour.Properties.copy(Blocks.GLASS).mapColor(MapColor.TERRACOTTA_PURPLE).noOcclusion().lightLevel((state) -> 8)));
+    public static final RegistryObject<Block> MAGENTA_LUMINAL_GLASS = BLOCKS.register("magenta_luminal_glass", () -> new LuminalGlassBlock(BlockBehaviour.Properties.copy(Blocks.GLASS).mapColor(MapColor.TERRACOTTA_MAGENTA).noOcclusion().lightLevel((state) -> 8)));
+    public static final RegistryObject<Block> PINK_LUMINAL_GLASS = BLOCKS.register("pink_luminal_glass", () -> new LuminalGlassBlock(BlockBehaviour.Properties.copy(Blocks.GLASS).mapColor(MapColor.TERRACOTTA_PINK).noOcclusion().lightLevel((state) -> 8)));
+    public static final RegistryObject<Block> RAINBOW_LUMINAL_GLASS = BLOCKS.register("rainbow_luminal_glass", () -> new LuminalGlassBlock(BlockBehaviour.Properties.copy(Blocks.GLASS).mapColor(MapColor.TERRACOTTA_PINK).noOcclusion().lightLevel((state) -> 8)));
+    public static final RegistryObject<Block> COSMIS_LUMINAL_GLASS = BLOCKS.register("cosmic_luminal_glass", () -> new LuminalGlassBlock(BlockBehaviour.Properties.copy(Blocks.GLASS).mapColor(MapColor.TERRACOTTA_MAGENTA).noOcclusion().lightLevel((state) -> 8)));
 
     public static final RegistryObject<Block> ALCHEMY_CALX_BLOCK = BLOCKS.register("alchemy_calx_block", () -> new FallingBlock(BlockBehaviour.Properties.copy(Blocks.WHITE_CONCRETE_POWDER)));
     public static final RegistryObject<Block> NATURAL_CALX_BLOCK = BLOCKS.register("natural_calx_block", () -> new FallingBlock(BlockBehaviour.Properties.copy(Blocks.GREEN_CONCRETE_POWDER)));
     public static final RegistryObject<Block> SCORCHED_CALX_BLOCK = BLOCKS.register("scorched_calx_block", () -> new FallingBlock(BlockBehaviour.Properties.copy(Blocks.RED_CONCRETE_POWDER)));
     public static final RegistryObject<Block> DISTANT_CALX_BLOCK = BLOCKS.register("distant_calx_block", () -> new FallingBlock(BlockBehaviour.Properties.copy(Blocks.CYAN_CONCRETE_POWDER)));
     public static final RegistryObject<Block> ENCHANTED_CALX_BLOCK = BLOCKS.register("enchanted_calx_block", () -> new FallingBlock(BlockBehaviour.Properties.copy(Blocks.LIME_CONCRETE_POWDER)));
+
+    public static final RegistryObject<Block> SNIFFALO_EGG = BLOCKS.register("sniffalo_egg", () -> new SniffaloEggBlock(BlockBehaviour.Properties.copy(Blocks.SNIFFER_EGG).mapColor(MapColor.COLOR_BROWN)));
 
     //ITEMS
     public static final RegistryObject<Item> ARCANE_GOLD_INGOT = ITEMS.register("arcane_gold_ingot", () -> new Item(new Item.Properties()));
@@ -1150,21 +1173,21 @@ public class WizardsReborn {
     public static final RegistryObject<Item> PURE_VOID_CRYSTAL = ITEMS.register("pure_void_crystal", () -> new CrystalItem(PURE_VOID_CRYSTAL_BLOCK.get(), new Item.Properties().stacksTo(1)));
 
     public static final RegistryObject<Item> WHITE_ARCANE_LUMOS_ITEM = ITEMS.register("white_arcane_lumos", () -> new ArcaneLumosItem(WHITE_ARCANE_LUMOS.get(), new Item.Properties()));
+    public static final RegistryObject<Item> LIGHT_GRAY_ARCANE_LUMOS_ITEM = ITEMS.register("light_gray_arcane_lumos", () -> new ArcaneLumosItem(LIGHT_GRAY_ARCANE_LUMOS.get(), new Item.Properties()));
+    public static final RegistryObject<Item> GRAY_ARCANE_LUMOS_ITEM = ITEMS.register("gray_arcane_lumos", () -> new ArcaneLumosItem(GRAY_ARCANE_LUMOS.get(), new Item.Properties()));
+    public static final RegistryObject<Item> BLACK_ARCANE_LUMOS_ITEM = ITEMS.register("black_arcane_lumos", () -> new ArcaneLumosItem(BLACK_ARCANE_LUMOS.get(), new Item.Properties()));
+    public static final RegistryObject<Item> BROWN_ARCANE_LUMOS_ITEM = ITEMS.register("brown_arcane_lumos", () -> new ArcaneLumosItem(BROWN_ARCANE_LUMOS.get(), new Item.Properties()));
+    public static final RegistryObject<Item> RED_ARCANE_LUMOS_ITEM = ITEMS.register("red_arcane_lumos", () -> new ArcaneLumosItem(RED_ARCANE_LUMOS.get(), new Item.Properties()));
     public static final RegistryObject<Item> ORANGE_ARCANE_LUMOS_ITEM = ITEMS.register("orange_arcane_lumos", () -> new ArcaneLumosItem(ORANGE_ARCANE_LUMOS.get(), new Item.Properties()));
-    public static final RegistryObject<Item> MAGENTA_ARCANE_LUMOS_ITEM = ITEMS.register("magenta_arcane_lumos", () -> new ArcaneLumosItem(MAGENTA_ARCANE_LUMOS.get(), new Item.Properties()));
-    public static final RegistryObject<Item> LIGHT_BLUE_ARCANE_LUMOS_ITEM = ITEMS.register("light_blue_arcane_lumos", () -> new ArcaneLumosItem(LIGHT_BLUE_ARCANE_LUMOS.get(), new Item.Properties()));
     public static final RegistryObject<Item> YELLOW_ARCANE_LUMOS_ITEM = ITEMS.register("yellow_arcane_lumos", () -> new ArcaneLumosItem(YELLOW_ARCANE_LUMOS.get(), new Item.Properties()));
     public static final RegistryObject<Item> LIME_ARCANE_LUMOS_ITEM = ITEMS.register("lime_arcane_lumos", () -> new ArcaneLumosItem(LIME_ARCANE_LUMOS.get(), new Item.Properties()));
-    public static final RegistryObject<Item> PINK_ARCANE_LUMOS_ITEM = ITEMS.register("pink_arcane_lumos", () -> new ArcaneLumosItem(PINK_ARCANE_LUMOS.get(), new Item.Properties()));
-    public static final RegistryObject<Item> GRAY_ARCANE_LUMOS_ITEM = ITEMS.register("gray_arcane_lumos", () -> new ArcaneLumosItem(GRAY_ARCANE_LUMOS.get(), new Item.Properties()));
-    public static final RegistryObject<Item> LIGHT_GRAY_ARCANE_LUMOS_ITEM = ITEMS.register("light_gray_arcane_lumos", () -> new ArcaneLumosItem(LIGHT_GRAY_ARCANE_LUMOS.get(), new Item.Properties()));
-    public static final RegistryObject<Item> CYAN_ARCANE_LUMOS_ITEM = ITEMS.register("cyan_arcane_lumos", () -> new ArcaneLumosItem(CYAN_ARCANE_LUMOS.get(), new Item.Properties()));
-    public static final RegistryObject<Item> PURPLE_ARCANE_LUMOS_ITEM = ITEMS.register("purple_arcane_lumos", () -> new ArcaneLumosItem(PURPLE_ARCANE_LUMOS.get(), new Item.Properties()));
-    public static final RegistryObject<Item> BLUE_ARCANE_LUMOS_ITEM = ITEMS.register("blue_arcane_lumos", () -> new ArcaneLumosItem(BLUE_ARCANE_LUMOS.get(), new Item.Properties()));
-    public static final RegistryObject<Item> BROWN_ARCANE_LUMOS_ITEM = ITEMS.register("brown_arcane_lumos", () -> new ArcaneLumosItem(BROWN_ARCANE_LUMOS.get(), new Item.Properties()));
     public static final RegistryObject<Item> GREEN_ARCANE_LUMOS_ITEM = ITEMS.register("green_arcane_lumos", () -> new ArcaneLumosItem(GREEN_ARCANE_LUMOS.get(), new Item.Properties()));
-    public static final RegistryObject<Item> RED_ARCANE_LUMOS_ITEM = ITEMS.register("red_arcane_lumos", () -> new ArcaneLumosItem(RED_ARCANE_LUMOS.get(), new Item.Properties()));
-    public static final RegistryObject<Item> BLACK_ARCANE_LUMOS_ITEM = ITEMS.register("black_arcane_lumos", () -> new ArcaneLumosItem(BLACK_ARCANE_LUMOS.get(), new Item.Properties()));
+    public static final RegistryObject<Item> CYAN_ARCANE_LUMOS_ITEM = ITEMS.register("cyan_arcane_lumos", () -> new ArcaneLumosItem(CYAN_ARCANE_LUMOS.get(), new Item.Properties()));
+    public static final RegistryObject<Item> LIGHT_BLUE_ARCANE_LUMOS_ITEM = ITEMS.register("light_blue_arcane_lumos", () -> new ArcaneLumosItem(LIGHT_BLUE_ARCANE_LUMOS.get(), new Item.Properties()));
+    public static final RegistryObject<Item> BLUE_ARCANE_LUMOS_ITEM = ITEMS.register("blue_arcane_lumos", () -> new ArcaneLumosItem(BLUE_ARCANE_LUMOS.get(), new Item.Properties()));
+    public static final RegistryObject<Item> PURPLE_ARCANE_LUMOS_ITEM = ITEMS.register("purple_arcane_lumos", () -> new ArcaneLumosItem(PURPLE_ARCANE_LUMOS.get(), new Item.Properties()));
+    public static final RegistryObject<Item> MAGENTA_ARCANE_LUMOS_ITEM = ITEMS.register("magenta_arcane_lumos", () -> new ArcaneLumosItem(MAGENTA_ARCANE_LUMOS.get(), new Item.Properties()));
+    public static final RegistryObject<Item> PINK_ARCANE_LUMOS_ITEM = ITEMS.register("pink_arcane_lumos", () -> new ArcaneLumosItem(PINK_ARCANE_LUMOS.get(), new Item.Properties()));
     public static final RegistryObject<Item> RAINBOW_ARCANE_LUMOS_ITEM = ITEMS.register("rainbow_arcane_lumos", () -> new ArcaneLumosItem(RAINBOW_ARCANE_LUMOS.get(), new Item.Properties()));
     public static final RegistryObject<Item> COSMIC_ARCANE_LUMOS_ITEM = ITEMS.register("cosmic_arcane_lumos", () -> new ArcaneLumosItem(COSMIC_ARCANE_LUMOS.get(), new Item.Properties()));
 
@@ -1282,6 +1305,25 @@ public class WizardsReborn {
     public static final RegistryObject<Item> ALCHEMY_VIAL_POTION = ITEMS.register("alchemy_vial_potion", () -> new AlchemyPotionItem(new Item.Properties().stacksTo(1), 3, ALCHEMY_VIAL.get()));
     public static final RegistryObject<Item> ALCHEMY_FLASK_POTION = ITEMS.register("alchemy_flask_potion", () -> new AlchemyPotionItem(new Item.Properties().stacksTo(1), 6, ALCHEMY_FLASK.get()));
 
+    public static final RegistryObject<Item> WHITE_LUMINAL_GLASS_ITEM = ITEMS.register("white_luminal_glass", () -> new BlockItem(WHITE_LUMINAL_GLASS.get(), new Item.Properties()));
+    public static final RegistryObject<Item> LIGHT_GRAY_LUMINAL_GLASS_ITEM = ITEMS.register("light_gray_luminal_glass", () -> new BlockItem(LIGHT_GRAY_LUMINAL_GLASS.get(), new Item.Properties()));
+    public static final RegistryObject<Item> GRAY_LUMINAL_GLASS_ITEM = ITEMS.register("gray_luminal_glass", () -> new BlockItem(GRAY_LUMINAL_GLASS.get(), new Item.Properties()));
+    public static final RegistryObject<Item> BLACK_LUMINAL_GLASS_ITEM = ITEMS.register("black_luminal_glass", () -> new BlockItem(BLACK_LUMINAL_GLASS.get(), new Item.Properties()));
+    public static final RegistryObject<Item> BROWN_LUMINAL_GLASS_ITEM = ITEMS.register("brown_luminal_glass", () -> new BlockItem(BROWN_LUMINAL_GLASS.get(), new Item.Properties()));
+    public static final RegistryObject<Item> RED_LUMINAL_GLASS_ITEM = ITEMS.register("red_luminal_glass", () -> new BlockItem(RED_LUMINAL_GLASS.get(), new Item.Properties()));
+    public static final RegistryObject<Item> ORANGE_LUMINAL_GLASS_ITEM = ITEMS.register("orange_luminal_glass", () -> new BlockItem(ORANGE_LUMINAL_GLASS.get(), new Item.Properties()));
+    public static final RegistryObject<Item> YELLOW_LUMINAL_GLASS_ITEM = ITEMS.register("yellow_luminal_glass", () -> new BlockItem(YELLOW_LUMINAL_GLASS.get(), new Item.Properties()));
+    public static final RegistryObject<Item> LIME_LUMINAL_GLASS_ITEM = ITEMS.register("lime_luminal_glass", () -> new BlockItem(LIME_LUMINAL_GLASS.get(), new Item.Properties()));
+    public static final RegistryObject<Item> GREEN_LUMINAL_GLASS_ITEM = ITEMS.register("green_luminal_glass", () -> new BlockItem(GREEN_LUMINAL_GLASS.get(), new Item.Properties()));
+    public static final RegistryObject<Item> CYAN_LUMINAL_GLASS_ITEM = ITEMS.register("cyan_luminal_glass", () -> new BlockItem(CYAN_LUMINAL_GLASS.get(), new Item.Properties()));
+    public static final RegistryObject<Item> LIGHT_BLUE_LUMINAL_GLASS_ITEM = ITEMS.register("light_blue_luminal_glass", () -> new BlockItem(LIGHT_BLUE_LUMINAL_GLASS.get(), new Item.Properties()));
+    public static final RegistryObject<Item> BLUE_LUMINAL_GLASS_ITEM = ITEMS.register("blue_luminal_glass", () -> new BlockItem(BLUE_LUMINAL_GLASS.get(), new Item.Properties()));
+    public static final RegistryObject<Item> PURPLE_LUMINAL_GLASS_ITEM = ITEMS.register("purple_luminal_glass", () -> new BlockItem(PURPLE_LUMINAL_GLASS.get(), new Item.Properties()));
+    public static final RegistryObject<Item> MAGENTA_LUMINAL_GLASS_ITEM = ITEMS.register("magenta_luminal_glass", () -> new BlockItem(MAGENTA_LUMINAL_GLASS.get(), new Item.Properties()));
+    public static final RegistryObject<Item> PINK_LUMINAL_GLASS_ITEM = ITEMS.register("pink_luminal_glass", () -> new BlockItem(PINK_LUMINAL_GLASS.get(), new Item.Properties()));
+    public static final RegistryObject<Item> RAINBOW_LUMINAL_GLASS_ITEM = ITEMS.register("rainbow_luminal_glass", () -> new BlockItem(RAINBOW_LUMINAL_GLASS.get(), new Item.Properties()));
+    public static final RegistryObject<Item> COSMIS_LUMINAL_GLASS_ITEM = ITEMS.register("cosmic_luminal_glass", () -> new BlockItem(COSMIS_LUMINAL_GLASS.get(), new Item.Properties()));
+
     public static final RegistryObject<Item> ALCHEMY_CALX = ITEMS.register("alchemy_calx", () -> new Item(new Item.Properties()));
     public static final RegistryObject<Item> NATURAL_CALX = ITEMS.register("natural_calx", () -> new Item(new Item.Properties()));
     public static final RegistryObject<Item> SCORCHED_CALX = ITEMS.register("scorched_calx", () -> new Item(new Item.Properties()));
@@ -1296,12 +1338,11 @@ public class WizardsReborn {
 
     public static final RegistryObject<Item> ARCACITE_POLISHING_MIXTURE = ITEMS.register("arcacite_polishing_mixture", () -> new Item(new Item.Properties()));
 
+    public static final RegistryObject<Item> SNIFFALO_EGG_ITEM = ITEMS.register("sniffalo_egg", () -> new BlockItem(SNIFFALO_EGG.get(), new Item.Properties()));
+
     public static final RegistryObject<Item> ARCANUM_LENS = ITEMS.register("arcanum_lens", () -> new ArcanumLensItem(new Item.Properties()));
     public static final RegistryObject<Item> WISESTONE_PLATE = ITEMS.register("wisestone_plate", () -> new Item(new Item.Properties().stacksTo(1)));
     public static final RegistryObject<Item> RUNIC_WISESTONE_PLATE = ITEMS.register("runic_wisestone_plate", () -> new RunicWisestonePlateItem(new Item.Properties().stacksTo(1)));
-
-    public static final RegistryObject<Item> ARCANE_WAND = ITEMS.register("arcane_wand", () -> new ArcaneWandItem(new Item.Properties().stacksTo(1)));
-    public static final RegistryObject<Item> WISSEN_WAND = ITEMS.register("wissen_wand", () -> new WissenWandItem(new Item.Properties().stacksTo(1)));
 
     public static final RegistryObject<Item> ARCANUM_AMULET = ITEMS.register("arcanum_amulet", () -> new ArcanumAmuletItem(new Item.Properties().stacksTo(1)));
     public static final RegistryObject<Item> ARCANUM_RING = ITEMS.register("arcanum_ring", () -> new ArcanumRingItem(new Item.Properties().stacksTo(1)));
@@ -1333,11 +1374,32 @@ public class WizardsReborn {
     public static final RegistryObject<Item> INVENTOR_WIZARD_TROUSERS = ITEMS.register("inventor_wizard_trousers", () -> new InventorWizardArmorItem(CustomArmorMaterial.INVENTOR_WIZARD, ArmorItem.Type.LEGGINGS, new Item.Properties()));
     public static final RegistryObject<Item> INVENTOR_WIZARD_BOOTS = ITEMS.register("inventor_wizard_boots", () -> new InventorWizardArmorItem(CustomArmorMaterial.INVENTOR_WIZARD, ArmorItem.Type.BOOTS, new Item.Properties()));
 
+    public static final RegistryObject<Item> ARCANE_WAND = ITEMS.register("arcane_wand", () -> new ArcaneWandItem(new Item.Properties().stacksTo(1)));
+    public static final RegistryObject<Item> WISSEN_WAND = ITEMS.register("wissen_wand", () -> new WissenWandItem(new Item.Properties().stacksTo(1)));
     public static final RegistryObject<Item> ARCANE_WOOD_SMOKING_PIPE = ITEMS.register("arcane_wood_smoking_pipe", () -> new SmokingPipeItem(new Item.Properties().stacksTo(1)));
     public static final RegistryObject<Item> ARCANE_WOOD_CANE = ITEMS.register("arcane_wood_cane", () -> new CaneItem(new Item.Properties().stacksTo(1)));
     public static final RegistryObject<Item> ARCANE_WOOD_BOW = ITEMS.register("arcane_wood_bow", () -> new ArcaneBowItem(new Item.Properties().durability(576)));
 
     public static final RegistryObject<Item> BLAZE_REAP = ITEMS.register("blaze_reap", () -> new ArcanePickaxeItem(CustomItemTier.ARCANE_GOLD, 1, -2.8f, new Item.Properties().rarity(Rarity.EPIC)));
+
+    public static final RegistryObject<Item> CARGO_CARPET = ITEMS.register("cargo_carpet", () -> new CargoCarpetItem(CargoCarpetItem.Colors.CARPET, new Item.Properties()));
+    public static final RegistryObject<Item> WHITE_CARGO_CARPET = ITEMS.register("white_cargo_carpet", () -> new CargoCarpetItem(CargoCarpetItem.Colors.WHITE, new Item.Properties()));
+    public static final RegistryObject<Item> ORANGE_CARGO_CARPET = ITEMS.register("orange_cargo_carpet", () -> new CargoCarpetItem(CargoCarpetItem.Colors.ORANGE, new Item.Properties()));
+    public static final RegistryObject<Item> MAGENTA_CARGO_CARPET = ITEMS.register("magenta_cargo_carpet", () -> new CargoCarpetItem(CargoCarpetItem.Colors.MAGENTA, new Item.Properties()));
+    public static final RegistryObject<Item> LIGHT_BLUE_CARGO_CARPET = ITEMS.register("light_blue_cargo_carpet", () -> new CargoCarpetItem(CargoCarpetItem.Colors.LIGHT_BLUE, new Item.Properties()));
+    public static final RegistryObject<Item> YELLOW_CARGO_CARPET = ITEMS.register("yellow_cargo_carpet", () -> new CargoCarpetItem(CargoCarpetItem.Colors.YELLOW, new Item.Properties()));
+    public static final RegistryObject<Item> LIME_CARGO_CARPET = ITEMS.register("lime_cargo_carpet", () -> new CargoCarpetItem(CargoCarpetItem.Colors.LIME, new Item.Properties()));
+    public static final RegistryObject<Item> PINK_CARGO_CARPET = ITEMS.register("pink_cargo_carpet", () -> new CargoCarpetItem(CargoCarpetItem.Colors.PINK, new Item.Properties()));
+    public static final RegistryObject<Item> GRAY_CARGO_CARPET = ITEMS.register("gray_cargo_carpet", () -> new CargoCarpetItem(CargoCarpetItem.Colors.GRAY, new Item.Properties()));
+    public static final RegistryObject<Item> LIGHT_GRAY_CARGO_CARPET = ITEMS.register("light_gray_cargo_carpet", () -> new CargoCarpetItem(CargoCarpetItem.Colors.LIGHT_GRAY, new Item.Properties()));
+    public static final RegistryObject<Item> CYAN_CARGO_CARPET = ITEMS.register("cyan_cargo_carpet", () -> new CargoCarpetItem(CargoCarpetItem.Colors.CYAN, new Item.Properties()));
+    public static final RegistryObject<Item> PURPLE_CARGO_CARPET = ITEMS.register("purple_cargo_carpet", () -> new CargoCarpetItem(CargoCarpetItem.Colors.PURPLE, new Item.Properties()));
+    public static final RegistryObject<Item> BLUE_CARGO_CARPET = ITEMS.register("blue_cargo_carpet", () -> new CargoCarpetItem(CargoCarpetItem.Colors.BLUE, new Item.Properties()));
+    public static final RegistryObject<Item> BROWN_CARGO_CARPET = ITEMS.register("brown_cargo_carpet", () -> new CargoCarpetItem(CargoCarpetItem.Colors.BROWN, new Item.Properties()));
+    public static final RegistryObject<Item> GREEN_CARGO_CARPET = ITEMS.register("green_cargo_carpet", () -> new CargoCarpetItem(CargoCarpetItem.Colors.GREEN, new Item.Properties()));
+    public static final RegistryObject<Item> RED_CARGO_CARPET = ITEMS.register("red_cargo_carpet", () -> new CargoCarpetItem(CargoCarpetItem.Colors.RED, new Item.Properties()));
+    public static final RegistryObject<Item> BLACK_CARGO_CARPET = ITEMS.register("black_cargo_carpet", () -> new CargoCarpetItem(CargoCarpetItem.Colors.BLACK, new Item.Properties()));
+    public static final RegistryObject<Item> RAINBOW_CARGO_CARPET = ITEMS.register("rainbow_cargo_carpet", () -> new CargoCarpetItem(CargoCarpetItem.Colors.RAINBOW, new Item.Properties()));
 
     public static final RegistryObject<Item> ARCANE_ENCHANTED_BOOK = ITEMS.register("arcane_enchanted_book", () -> new ArcaneEnchantedBookItem(new Item.Properties().stacksTo(1).rarity(Rarity.UNCOMMON)));
     public static final RegistryObject<Item> ARCANEMICON = ITEMS.register("arcanemicon", () -> new ArcanemiconItem(new Item.Properties().stacksTo(1)));
@@ -1639,6 +1701,7 @@ public class WizardsReborn {
 
     public static final RegistryObject<Attribute> WISSEN_DISCOUNT = ATTRIBUTES.register("wissen_discount", () -> new RangedAttribute("attribute.name.wizards_reborn.wissen_discount", 0, 0, 75).setSyncable(true));
     public static final RegistryObject<Attribute> MAGIC_ARMOR = ATTRIBUTES.register("magic_armor", () -> new RangedAttribute("attribute.name.wizards_reborn.magic_armor", 0, 0, 100).setSyncable(true));
+    public static final RegistryObject<Attribute> MAGIC_MODIFIER = ATTRIBUTES.register("magic_modifier", () -> new RangedAttribute("attribute.name.wizards_reborn.magic_modifier", 0, 0, 100).setSyncable(true));
 
     public static final RegistryObject<MobEffect> MOR_SPORES_EFFECT = EFFECTS.register("mor_spores", MorSporesEffect::new);
     public static final RegistryObject<MobEffect> WISSEN_AURA_EFFECT = EFFECTS.register("wissen_aura", WissenAuraEffect::new);
@@ -2188,6 +2251,15 @@ public class WizardsReborn {
         @SubscribeEvent
         public static void registerAttributes(EntityAttributeCreationEvent event) {
             event.put(WizardsReborn.SNIFFALO.get(), SniffaloEntity.createAttributes().build());
+        }
+
+        @SubscribeEvent
+        public static void registerAttributes(EntityAttributeModificationEvent event) {
+            for (EntityType<? extends LivingEntity> livingEntity : event.getTypes()) {
+                event.add(livingEntity, MAGIC_ARMOR.get());
+            }
+            event.add(EntityType.PLAYER, WISSEN_DISCOUNT.get());
+            event.add(EntityType.PLAYER, MAGIC_MODIFIER.get());
         }
     }
 }

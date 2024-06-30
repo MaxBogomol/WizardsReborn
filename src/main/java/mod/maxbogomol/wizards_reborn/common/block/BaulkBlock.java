@@ -27,7 +27,7 @@ import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import java.util.List;
 
-public class BaulkBlock extends RotatedPillarBlock implements SimpleWaterloggedBlock  {
+public class BaulkBlock extends RotatedPillarBlock implements SimpleWaterloggedBlock {
 
     private static final VoxelShape SHAPE_X = Block.box(0, 4, 4, 16, 12, 12);
     private static final VoxelShape SHAPE_Y = Block.box(4, 0, 4, 12, 16, 12);
