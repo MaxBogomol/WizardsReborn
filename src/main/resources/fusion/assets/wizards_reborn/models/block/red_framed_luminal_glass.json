@@ -1,0 +1,83 @@
+{
+  "parent": "minecraft:block/cube_all",
+  "render_type": "minecraft:translucent",
+  "textures": {
+    "all": "wizards_reborn:block/red_framed_luminal_glass"
+  },
+  "connections": [
+    {
+      "type": "match_block",
+      "block": "wizards_reborn:white_framed_luminal_glass"
+    },
+    {
+      "type": "match_block",
+      "block": "wizards_reborn:light_gray_framed_luminal_glass"
+    },
+    {
+      "type": "match_block",
+      "block": "wizards_reborn:gray_framed_luminal_glass"
+    },
+    {
+      "type": "match_block",
+      "block": "wizards_reborn:black_framed_luminal_glass"
+    },
+    {
+      "type": "match_block",
+      "block": "wizards_reborn:brown_framed_luminal_glass"
+    },
+    {
+      "type": "match_block",
+      "block": "wizards_reborn:red_framed_luminal_glass"
+    },
+    {
+      "type": "match_block",
+      "block": "wizards_reborn:orange_framed_luminal_glass"
+    },
+    {
+      "type": "match_block",
+      "block": "wizards_reborn:yellow_framed_luminal_glass"
+    },
+    {
+      "type": "match_block",
+      "block": "wizards_reborn:lime_framed_luminal_glass"
+    },
+    {
+      "type": "match_block",
+      "block": "wizards_reborn:green_framed_luminal_glass"
+    },
+    {
+      "type": "match_block",
+      "block": "wizards_reborn:cyan_framed_luminal_glass"
+    },
+    {
+      "type": "match_block",
+      "block": "wizards_reborn:light_blue_framed_luminal_glass"
+    },
+    {
+      "type": "match_block",
+      "block": "wizards_reborn:blue_framed_luminal_glass"
+    },
+    {
+      "type": "match_block",
+      "block": "wizards_reborn:purple_framed_luminal_glass"
+    },
+    {
+      "type": "match_block",
+      "block": "wizards_reborn:magenta_framed_luminal_glass"
+    },
+    {
+      "type": "match_block",
+      "block": "wizards_reborn:pink_framed_luminal_glass"
+    },
+    {
+      "type": "match_block",
+      "block": "wizards_reborn:rainbow_framed_luminal_glass"
+    },
+    {
+      "type": "match_block",
+      "block": "wizards_reborn:cosmic_framed_luminal_glass"
+    }
+  ],
+  "loader": "fusion:model",
+  "type": "fusion:connecting"
+}

@@ -418,6 +418,25 @@ public class WizardsRebornItemGroup {
             event.accept(WizardsReborn.RAINBOW_LUMINAL_GLASS_ITEM);
             event.accept(WizardsReborn.COSMIS_LUMINAL_GLASS_ITEM);
 
+            event.accept(WizardsReborn.WHITE_FRAMED_LUMINAL_GLASS_ITEM);
+            event.accept(WizardsReborn.LIGHT_GRAY_FRAMED_LUMINAL_GLASS_ITEM);
+            event.accept(WizardsReborn.GRAY_FRAMED_LUMINAL_GLASS_ITEM);
+            event.accept(WizardsReborn.BLACK_FRAMED_LUMINAL_GLASS_ITEM);
+            event.accept(WizardsReborn.BROWN_FRAMED_LUMINAL_GLASS_ITEM);
+            event.accept(WizardsReborn.RED_FRAMED_LUMINAL_GLASS_ITEM);
+            event.accept(WizardsReborn.ORANGE_FRAMED_LUMINAL_GLASS_ITEM);
+            event.accept(WizardsReborn.YELLOW_FRAMED_LUMINAL_GLASS_ITEM);
+            event.accept(WizardsReborn.LIME_FRAMED_LUMINAL_GLASS_ITEM);
+            event.accept(WizardsReborn.GREEN_FRAMED_LUMINAL_GLASS_ITEM);
+            event.accept(WizardsReborn.CYAN_FRAMED_LUMINAL_GLASS_ITEM);
+            event.accept(WizardsReborn.LIGHT_BLUE_FRAMED_LUMINAL_GLASS_ITEM);
+            event.accept(WizardsReborn.BLUE_FRAMED_LUMINAL_GLASS_ITEM);
+            event.accept(WizardsReborn.PURPLE_FRAMED_LUMINAL_GLASS_ITEM);
+            event.accept(WizardsReborn.MAGENTA_FRAMED_LUMINAL_GLASS_ITEM);
+            event.accept(WizardsReborn.PINK_FRAMED_LUMINAL_GLASS_ITEM);
+            event.accept(WizardsReborn.RAINBOW_FRAMED_LUMINAL_GLASS_ITEM);
+            event.accept(WizardsReborn.COSMIS_FRAMED_LUMINAL_GLASS_ITEM);
+
             event.accept(WizardsReborn.ALCHEMY_CALX);
             event.accept(WizardsReborn.NATURAL_CALX);
             event.accept(WizardsReborn.SCORCHED_CALX);

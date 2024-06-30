@@ -249,7 +249,25 @@ public class WizardsRebornClient {
             ItemBlockRenderTypes.setRenderLayer(WizardsReborn.MAGENTA_LUMINAL_GLASS.get(), RenderType.translucent());
             ItemBlockRenderTypes.setRenderLayer(WizardsReborn.PINK_LUMINAL_GLASS.get(), RenderType.translucent());
             ItemBlockRenderTypes.setRenderLayer(WizardsReborn.RAINBOW_LUMINAL_GLASS.get(), RenderType.translucent());
-            ItemBlockRenderTypes.setRenderLayer(WizardsReborn.COSMIS_LUMINAL_GLASS.get(), RenderType.translucent());
+            ItemBlockRenderTypes.setRenderLayer(WizardsReborn.COSMIC_LUMINAL_GLASS.get(), RenderType.translucent());
+            ItemBlockRenderTypes.setRenderLayer(WizardsReborn.WHITE_FRAMED_LUMINAL_GLASS.get(), RenderType.translucent());
+            ItemBlockRenderTypes.setRenderLayer(WizardsReborn.LIGHT_GRAY_FRAMED_LUMINAL_GLASS.get(), RenderType.translucent());
+            ItemBlockRenderTypes.setRenderLayer(WizardsReborn.GRAY_FRAMED_LUMINAL_GLASS.get(), RenderType.translucent());
+            ItemBlockRenderTypes.setRenderLayer(WizardsReborn.BLACK_FRAMED_LUMINAL_GLASS.get(), RenderType.translucent());
+            ItemBlockRenderTypes.setRenderLayer(WizardsReborn.BROWN_FRAMED_LUMINAL_GLASS.get(), RenderType.translucent());
+            ItemBlockRenderTypes.setRenderLayer(WizardsReborn.RED_FRAMED_LUMINAL_GLASS.get(), RenderType.translucent());
+            ItemBlockRenderTypes.setRenderLayer(WizardsReborn.ORANGE_FRAMED_LUMINAL_GLASS.get(), RenderType.translucent());
+            ItemBlockRenderTypes.setRenderLayer(WizardsReborn.YELLOW_FRAMED_LUMINAL_GLASS.get(), RenderType.translucent());
+            ItemBlockRenderTypes.setRenderLayer(WizardsReborn.LIME_FRAMED_LUMINAL_GLASS.get(), RenderType.translucent());
+            ItemBlockRenderTypes.setRenderLayer(WizardsReborn.GREEN_FRAMED_LUMINAL_GLASS.get(), RenderType.translucent());
+            ItemBlockRenderTypes.setRenderLayer(WizardsReborn.CYAN_FRAMED_LUMINAL_GLASS.get(), RenderType.translucent());
+            ItemBlockRenderTypes.setRenderLayer(WizardsReborn.LIGHT_BLUE_FRAMED_LUMINAL_GLASS.get(), RenderType.translucent());
+            ItemBlockRenderTypes.setRenderLayer(WizardsReborn.BLUE_FRAMED_LUMINAL_GLASS.get(), RenderType.translucent());
+            ItemBlockRenderTypes.setRenderLayer(WizardsReborn.PURPLE_FRAMED_LUMINAL_GLASS.get(), RenderType.translucent());
+            ItemBlockRenderTypes.setRenderLayer(WizardsReborn.MAGENTA_FRAMED_LUMINAL_GLASS.get(), RenderType.translucent());
+            ItemBlockRenderTypes.setRenderLayer(WizardsReborn.PINK_FRAMED_LUMINAL_GLASS.get(), RenderType.translucent());
+            ItemBlockRenderTypes.setRenderLayer(WizardsReborn.RAINBOW_FRAMED_LUMINAL_GLASS.get(), RenderType.translucent());
+            ItemBlockRenderTypes.setRenderLayer(WizardsReborn.COSMIC_FRAMED_LUMINAL_GLASS.get(), RenderType.translucent());
 
             ItemBlockRenderTypes.setRenderLayer(WizardsReborn.FLUID_SENSOR.get(), RenderType.translucent());
             ItemBlockRenderTypes.setRenderLayer(WizardsReborn.WISSEN_ACTIVATOR.get(), RenderType.translucent());
