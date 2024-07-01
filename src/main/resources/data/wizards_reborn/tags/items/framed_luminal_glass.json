@@ -1,0 +1,23 @@
+{
+  "replace": false,
+  "values": [
+    "wizards_reborn:white_framed_luminal_glass",
+    "wizards_reborn:light_gray_framed_luminal_glass",
+    "wizards_reborn:gray_framed_luminal_glass",
+    "wizards_reborn:black_framed_luminal_glass",
+    "wizards_reborn:brown_framed_luminal_glass",
+    "wizards_reborn:red_framed_luminal_glass",
+    "wizards_reborn:orange_framed_luminal_glass",
+    "wizards_reborn:yellow_framed_luminal_glass",
+    "wizards_reborn:lime_framed_luminal_glass",
+    "wizards_reborn:green_framed_luminal_glass",
+    "wizards_reborn:cyan_framed_luminal_glass",
+    "wizards_reborn:light_blue_framed_luminal_glass",
+    "wizards_reborn:blue_framed_luminal_glass",
+    "wizards_reborn:purple_framed_luminal_glass",
+    "wizards_reborn:magenta_framed_luminal_glass",
+    "wizards_reborn:pink_framed_luminal_glass",
+    "wizards_reborn:rainbow_framed_luminal_glass",
+    "wizards_reborn:cosmic_framed_luminal_glass"
+  ]
+}

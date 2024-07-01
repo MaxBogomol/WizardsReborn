@@ -64,7 +64,7 @@ public class ArcanemiconChapters {
             ARCANE_PEDESTAL_ITEM, TOTEM_BASE_ITEM, WISESTONE_PEDESTAL_ITEM, RUNIC_PEDESTAL_ITEM, INNOCENT_PEDESTAL_ITEM, 
             ARCANE_GOLD_INGOT_ITEM, ARCANE_GOLD_NUGGET_ITEM, ARCANUM_ITEM, ARCANUM_DUST_ITEM, ARCACITE_ITEM, ARCANE_WOOD_BRANCH_ITEM, INNOCENT_WOOD_BRANCH_ITEM,
             ARCANE_WOOD_PLANKS_ITEM, ARCANE_WOOD_SLAB_ITEM, INNOCENT_WOOD_PLANKS_ITEM, INNOCENT_WOOD_SLAB_ITEM, WISESTONE_ITEM, POLISHED_WISESTONE_ITEM, POLISHED_WISESTONE_SLAB_ITEM,
-            NETHER_SALT_ITEM, ALCHEMY_CALX_ITEM, NATURAL_CALX_ITEM, SCORCHED_CALX_ITEM, DISTANT_CALX_ITEM, ENCHANTED_CALX_ITEM, ARCANUM_LENS_ITEM;
+            NETHER_SALT_ITEM, ACLHEMY_GLASS, ALCHEMY_CALX_ITEM, NATURAL_CALX_ITEM, SCORCHED_CALX_ITEM, DISTANT_CALX_ITEM, ENCHANTED_CALX_ITEM, ARCANUM_LENS_ITEM;
 
     public static void itemsInit() {
         EMPTY_ITEM = ItemStack.EMPTY;
@@ -88,6 +88,7 @@ public class ArcanemiconChapters {
         POLISHED_WISESTONE_ITEM = new ItemStack(WizardsReborn.POLISHED_WISESTONE_ITEM.get());
         POLISHED_WISESTONE_SLAB_ITEM = new ItemStack(WizardsReborn.POLISHED_WISESTONE_SLAB_ITEM.get());
         NETHER_SALT_ITEM = new ItemStack(WizardsReborn.NETHER_SALT.get());
+        ACLHEMY_GLASS = new ItemStack(WizardsReborn.ALCHEMY_GLASS_ITEM.get());
         ALCHEMY_CALX_ITEM = new ItemStack(WizardsReborn.ALCHEMY_CALX.get());
         NATURAL_CALX_ITEM = new ItemStack(WizardsReborn.NATURAL_CALX.get());
         SCORCHED_CALX_ITEM = new ItemStack(WizardsReborn.SCORCHED_CALX.get());
@@ -840,7 +841,7 @@ public class ArcanemiconChapters {
                 ),
                 new ArcaneWorkbenchPage(new ItemStack(WizardsReborn.ITEM_SORTER_ITEM.get()),
                         EMPTY_ITEM, new ItemStack(Items.CHEST), EMPTY_ITEM,
-                        new ItemStack(WizardsReborn.ALCHEMY_GLASS_ITEM.get()), new ItemStack(WizardsReborn.REDSTONE_SENSOR_ITEM.get()), new ItemStack(WizardsReborn.ALCHEMY_GLASS_ITEM.get()),
+                        ACLHEMY_GLASS, new ItemStack(WizardsReborn.REDSTONE_SENSOR_ITEM.get()), ACLHEMY_GLASS,
                         EMPTY_ITEM, new ItemStack(Items.REDSTONE_BLOCK)
                 )
         );
@@ -949,14 +950,14 @@ public class ArcanemiconChapters {
                         new BlockEntry(ARCANE_PEDESTAL_ITEM, new ItemStack(WizardsReborn.ARCANE_WOOD_GLASS_FRAME_ITEM.get()))
                 ),
                 new ArcaneWorkbenchPage(new ItemStack(WizardsReborn.ARCANE_WOOD_GLASS_FRAME_ITEM.get()),
-                        EMPTY_ITEM, new ItemStack(WizardsReborn.ALCHEMY_GLASS_ITEM.get()), EMPTY_ITEM,
+                        EMPTY_ITEM, ACLHEMY_GLASS, EMPTY_ITEM,
                         EMPTY_ITEM, new ItemStack(WizardsReborn.WISESTONE_FRAME_ITEM.get())
                 ),
                 new TitledBlockPage("wizards_reborn.arcanemicon.page.wisestone_glass_frame",
                         new BlockEntry(ARCANE_PEDESTAL_ITEM, new ItemStack(WizardsReborn.WISESTONE_GLASS_FRAME_ITEM.get()))
                 ),
                 new ArcaneWorkbenchPage(new ItemStack(WizardsReborn.WISESTONE_GLASS_FRAME_ITEM.get()),
-                        EMPTY_ITEM, new ItemStack(WizardsReborn.ALCHEMY_GLASS_ITEM.get()), EMPTY_ITEM,
+                        EMPTY_ITEM, ACLHEMY_GLASS, EMPTY_ITEM,
                         EMPTY_ITEM, new ItemStack(WizardsReborn.WISESTONE_FRAME_ITEM.get())
                 )
         );
@@ -1026,7 +1027,7 @@ public class ArcanemiconChapters {
                         new BlockEntry(ARCANE_PEDESTAL_ITEM, new ItemStack(WizardsReborn.INNOCENT_WOOD_GLASS_FRAME_ITEM.get()))
                 ),
                 new ArcaneWorkbenchPage(new ItemStack(WizardsReborn.INNOCENT_WOOD_GLASS_FRAME_ITEM.get()),
-                        EMPTY_ITEM, new ItemStack(WizardsReborn.ALCHEMY_GLASS_ITEM.get()), EMPTY_ITEM,
+                        EMPTY_ITEM, ACLHEMY_GLASS, EMPTY_ITEM,
                         EMPTY_ITEM, new ItemStack(WizardsReborn.INNOCENT_WOOD_FRAME_ITEM.get())
                 ),
                 new TitledBlockPage("wizards_reborn.arcanemicon.page.innocent_wood_light_casing",
@@ -1503,7 +1504,7 @@ public class ArcanemiconChapters {
                 new TitledBlockPage("wizards_reborn.arcanemicon.page.arcanum_lens",
                         new BlockEntry(ARCANE_PEDESTAL_ITEM, ARCANUM_LENS_ITEM)
                 ),
-                new ArcaneIteratorPage(ARCANUM_LENS_ITEM, 0, 0, new ItemStack(WizardsReborn.ALCHEMY_GLASS_ITEM.get()),
+                new ArcaneIteratorPage(ARCANUM_LENS_ITEM, 0, 0, ACLHEMY_GLASS,
                         ARCANUM_ITEM, ARCANUM_ITEM, ARCANUM_ITEM, ARCANUM_DUST_ITEM,
                         ALCHEMY_CALX_ITEM, ALCHEMY_CALX_ITEM
                 )
@@ -2633,7 +2634,7 @@ public class ArcanemiconChapters {
                 new ArcaneIteratorPage(crystalRituals.get(WizardsReborn.CRYSTAL_GROWTH_ACCELERATION_CRYSTAL_RITUAL), 0, 0, new ItemStack(WizardsReborn.WISESTONE_PLATE.get()),
                         ARCANUM_LENS_ITEM, ARCANUM_LENS_ITEM, ARCANUM_LENS_ITEM, ARCANUM_LENS_ITEM,
                         new ItemStack(Items.REDSTONE_BLOCK), new ItemStack(Items.REDSTONE_BLOCK),
-                        new ItemStack(WizardsReborn.ALCHEMY_GLASS_ITEM.get()), new ItemStack(WizardsReborn.ALCHEMY_GLASS_ITEM.get()), new ItemStack(WizardsReborn.ALCHEMY_GLASS_ITEM.get())
+                        ACLHEMY_GLASS, ACLHEMY_GLASS, ACLHEMY_GLASS
                 )
         );
 
@@ -3414,7 +3415,7 @@ public class ArcanemiconChapters {
         ALCHEMY_GLASS = new Chapter(
                 "wizards_reborn.arcanemicon.chapter.alchemy_glass",
                 new TitledBlockPage("wizards_reborn.arcanemicon.page.alchemy_glass",
-                        new BlockEntry(WISESTONE_PEDESTAL_ITEM, new ItemStack(WizardsReborn.ALCHEMY_GLASS_ITEM.get()))
+                        new BlockEntry(WISESTONE_PEDESTAL_ITEM, ACLHEMY_GLASS)
                 ),
                 new AlchemyMachinePage(new ItemStack(WizardsReborn.ALCHEMY_GLASS_ITEM.get(), 4), FluidStack.EMPTY, true, true,
                         new FluidStack(WizardsReborn.ALCHEMY_OIL_FLUID.get(), 500), FluidStack.EMPTY, FluidStack.EMPTY,
@@ -3426,14 +3427,162 @@ public class ArcanemiconChapters {
                 ),
                 new ArcaneWorkbenchPage(new ItemStack(WizardsReborn.ALCHEMY_VIAL.get()),
                         EMPTY_ITEM, new ItemStack(WizardsReborn.ARCANE_WOOD_PLANKS.get()),  EMPTY_ITEM,
-                        new ItemStack(WizardsReborn.ALCHEMY_GLASS_ITEM.get()), EMPTY_ITEM,  new ItemStack(WizardsReborn.ALCHEMY_GLASS_ITEM.get()),
-                        new ItemStack(WizardsReborn.ALCHEMY_GLASS_ITEM.get()), new ItemStack(WizardsReborn.ALCHEMY_GLASS_ITEM.get()),  new ItemStack(WizardsReborn.ALCHEMY_GLASS_ITEM.get())
+                        ACLHEMY_GLASS, EMPTY_ITEM,  ACLHEMY_GLASS,
+                        ACLHEMY_GLASS, ACLHEMY_GLASS,  ACLHEMY_GLASS
                 ),
                 new AlchemyMachinePage(vialPotions.get(RegisterAlchemyPotions.ALCHEMY_OIL), FluidStack.EMPTY, false, true,
                         FluidStack.EMPTY, FluidStack.EMPTY, FluidStack.EMPTY,
                         new ItemStack(WizardsReborn.ARCANE_LINEN_ITEM.get()), new ItemStack(WizardsReborn.ARCANE_LINEN_ITEM.get()), new ItemStack(WizardsReborn.ARCANE_LINEN_ITEM.get()),
                         new ItemStack(WizardsReborn.PETALS.get()), new ItemStack(WizardsReborn.ALCHEMY_VIAL.get())
-                )
+                ),
+                new TitledBlockPage("wizards_reborn.arcanemicon.page.luminal_glass",
+                        new BlockEntry(new ItemStack(WizardsReborn.WHITE_LUMINAL_GLASS_ITEM.get())),
+                        new BlockEntry(new ItemStack(WizardsReborn.LIGHT_GRAY_LUMINAL_GLASS_ITEM.get())),
+                        new BlockEntry(new ItemStack(WizardsReborn.GRAY_LUMINAL_GLASS_ITEM.get())),
+                        new BlockEntry(new ItemStack(WizardsReborn.BLACK_LUMINAL_GLASS_ITEM.get())),
+                        new BlockEntry(new ItemStack(WizardsReborn.BROWN_LUMINAL_GLASS_ITEM.get())),
+                        new BlockEntry(new ItemStack(WizardsReborn.RED_LUMINAL_GLASS_ITEM.get())),
+                        new BlockEntry(new ItemStack(WizardsReborn.ORANGE_LUMINAL_GLASS_ITEM.get())),
+                        new BlockEntry(new ItemStack(WizardsReborn.YELLOW_LUMINAL_GLASS_ITEM.get())),
+                        new BlockEntry(new ItemStack(WizardsReborn.LIME_LUMINAL_GLASS_ITEM.get())),
+                        new BlockEntry(new ItemStack(WizardsReborn.GREEN_LUMINAL_GLASS_ITEM.get())),
+                        new BlockEntry(new ItemStack(WizardsReborn.CYAN_LUMINAL_GLASS_ITEM.get())),
+                        new BlockEntry(new ItemStack(WizardsReborn.LIGHT_BLUE_LUMINAL_GLASS_ITEM.get())),
+                        new BlockEntry(new ItemStack(WizardsReborn.BLUE_LUMINAL_GLASS_ITEM.get())),
+                        new BlockEntry(new ItemStack(WizardsReborn.PURPLE_LUMINAL_GLASS_ITEM.get())),
+                        new BlockEntry(new ItemStack(WizardsReborn.MAGENTA_LUMINAL_GLASS_ITEM.get())),
+                        new BlockEntry(new ItemStack(WizardsReborn.PINK_LUMINAL_GLASS_ITEM.get())),
+                        new BlockEntry(new ItemStack(WizardsReborn.RAINBOW_LUMINAL_GLASS_ITEM.get())),
+                        new BlockEntry(new ItemStack(WizardsReborn.COSMIC_LUMINAL_GLASS_ITEM.get()))
+                ),
+                new ArcaneWorkbenchPage(new ItemStack(WizardsReborn.WHITE_LUMINAL_GLASS_ITEM.get()),
+                        ACLHEMY_GLASS, ACLHEMY_GLASS,  ACLHEMY_GLASS,
+                        ACLHEMY_GLASS, new ItemStack(WizardsReborn.WHITE_ARCANE_LUMOS_ITEM.get()),  ACLHEMY_GLASS,
+                        ACLHEMY_GLASS, ACLHEMY_GLASS,  ACLHEMY_GLASS
+                ),
+                new ArcaneWorkbenchPage(new ItemStack(WizardsReborn.LIGHT_GRAY_LUMINAL_GLASS_ITEM.get()),
+                        ACLHEMY_GLASS, ACLHEMY_GLASS,  ACLHEMY_GLASS,
+                        ACLHEMY_GLASS, new ItemStack(WizardsReborn.LIGHT_GRAY_ARCANE_LUMOS_ITEM.get()),  ACLHEMY_GLASS,
+                        ACLHEMY_GLASS, ACLHEMY_GLASS,  ACLHEMY_GLASS
+                ),
+                new ArcaneWorkbenchPage(new ItemStack(WizardsReborn.GRAY_LUMINAL_GLASS_ITEM.get()),
+                        ACLHEMY_GLASS, ACLHEMY_GLASS,  ACLHEMY_GLASS,
+                        ACLHEMY_GLASS, new ItemStack(WizardsReborn.GRAY_ARCANE_LUMOS_ITEM.get()),  ACLHEMY_GLASS,
+                        ACLHEMY_GLASS, ACLHEMY_GLASS,  ACLHEMY_GLASS
+                ),
+                new ArcaneWorkbenchPage(new ItemStack(WizardsReborn.BLACK_LUMINAL_GLASS_ITEM.get()),
+                        ACLHEMY_GLASS, ACLHEMY_GLASS,  ACLHEMY_GLASS,
+                        ACLHEMY_GLASS, new ItemStack(WizardsReborn.BLACK_ARCANE_LUMOS_ITEM.get()),  ACLHEMY_GLASS,
+                        ACLHEMY_GLASS, ACLHEMY_GLASS,  ACLHEMY_GLASS
+                ),
+                new ArcaneWorkbenchPage(new ItemStack(WizardsReborn.BROWN_LUMINAL_GLASS_ITEM.get()),
+                        ACLHEMY_GLASS, ACLHEMY_GLASS,  ACLHEMY_GLASS,
+                        ACLHEMY_GLASS, new ItemStack(WizardsReborn.BROWN_ARCANE_LUMOS_ITEM.get()),  ACLHEMY_GLASS,
+                        ACLHEMY_GLASS, ACLHEMY_GLASS,  ACLHEMY_GLASS
+                ),
+                new ArcaneWorkbenchPage(new ItemStack(WizardsReborn.RED_LUMINAL_GLASS_ITEM.get()),
+                        ACLHEMY_GLASS, ACLHEMY_GLASS,  ACLHEMY_GLASS,
+                        ACLHEMY_GLASS, new ItemStack(WizardsReborn.RED_ARCANE_LUMOS_ITEM.get()),  ACLHEMY_GLASS,
+                        ACLHEMY_GLASS, ACLHEMY_GLASS,  ACLHEMY_GLASS
+                ),
+                new ArcaneWorkbenchPage(new ItemStack(WizardsReborn.ORANGE_LUMINAL_GLASS_ITEM.get()),
+                        ACLHEMY_GLASS, ACLHEMY_GLASS,  ACLHEMY_GLASS,
+                        ACLHEMY_GLASS, new ItemStack(WizardsReborn.ORANGE_ARCANE_LUMOS_ITEM.get()),  ACLHEMY_GLASS,
+                        ACLHEMY_GLASS, ACLHEMY_GLASS,  ACLHEMY_GLASS
+                ),
+                new ArcaneWorkbenchPage(new ItemStack(WizardsReborn.YELLOW_LUMINAL_GLASS_ITEM.get()),
+                        ACLHEMY_GLASS, ACLHEMY_GLASS,  ACLHEMY_GLASS,
+                        ACLHEMY_GLASS, new ItemStack(WizardsReborn.YELLOW_ARCANE_LUMOS_ITEM.get()),  ACLHEMY_GLASS,
+                        ACLHEMY_GLASS, ACLHEMY_GLASS,  ACLHEMY_GLASS
+                ),
+                new ArcaneWorkbenchPage(new ItemStack(WizardsReborn.LIME_LUMINAL_GLASS_ITEM.get()),
+                        ACLHEMY_GLASS, ACLHEMY_GLASS,  ACLHEMY_GLASS,
+                        ACLHEMY_GLASS, new ItemStack(WizardsReborn.LIME_ARCANE_LUMOS_ITEM.get()),  ACLHEMY_GLASS,
+                        ACLHEMY_GLASS, ACLHEMY_GLASS,  ACLHEMY_GLASS
+                ),
+                new ArcaneWorkbenchPage(new ItemStack(WizardsReborn.GREEN_LUMINAL_GLASS_ITEM.get()),
+                        ACLHEMY_GLASS, ACLHEMY_GLASS,  ACLHEMY_GLASS,
+                        ACLHEMY_GLASS, new ItemStack(WizardsReborn.GREEN_ARCANE_LUMOS_ITEM.get()),  ACLHEMY_GLASS,
+                        ACLHEMY_GLASS, ACLHEMY_GLASS,  ACLHEMY_GLASS
+                ),
+                new ArcaneWorkbenchPage(new ItemStack(WizardsReborn.CYAN_LUMINAL_GLASS_ITEM.get()),
+                        ACLHEMY_GLASS, ACLHEMY_GLASS,  ACLHEMY_GLASS,
+                        ACLHEMY_GLASS, new ItemStack(WizardsReborn.CYAN_ARCANE_LUMOS_ITEM.get()),  ACLHEMY_GLASS,
+                        ACLHEMY_GLASS, ACLHEMY_GLASS,  ACLHEMY_GLASS
+                ),
+                new ArcaneWorkbenchPage(new ItemStack(WizardsReborn.LIGHT_BLUE_LUMINAL_GLASS_ITEM.get()),
+                        ACLHEMY_GLASS, ACLHEMY_GLASS,  ACLHEMY_GLASS,
+                        ACLHEMY_GLASS, new ItemStack(WizardsReborn.LIGHT_BLUE_ARCANE_LUMOS_ITEM.get()),  ACLHEMY_GLASS,
+                        ACLHEMY_GLASS, ACLHEMY_GLASS,  ACLHEMY_GLASS
+                ),
+                new ArcaneWorkbenchPage(new ItemStack(WizardsReborn.BLUE_LUMINAL_GLASS_ITEM.get()),
+                        ACLHEMY_GLASS, ACLHEMY_GLASS,  ACLHEMY_GLASS,
+                        ACLHEMY_GLASS, new ItemStack(WizardsReborn.BLUE_ARCANE_LUMOS_ITEM.get()),  ACLHEMY_GLASS,
+                        ACLHEMY_GLASS, ACLHEMY_GLASS,  ACLHEMY_GLASS
+                ),
+                new ArcaneWorkbenchPage(new ItemStack(WizardsReborn.PURPLE_LUMINAL_GLASS_ITEM.get()),
+                        ACLHEMY_GLASS, ACLHEMY_GLASS,  ACLHEMY_GLASS,
+                        ACLHEMY_GLASS, new ItemStack(WizardsReborn.PURPLE_ARCANE_LUMOS_ITEM.get()),  ACLHEMY_GLASS,
+                        ACLHEMY_GLASS, ACLHEMY_GLASS,  ACLHEMY_GLASS
+                ),
+                new ArcaneWorkbenchPage(new ItemStack(WizardsReborn.MAGENTA_LUMINAL_GLASS_ITEM.get()),
+                        ACLHEMY_GLASS, ACLHEMY_GLASS,  ACLHEMY_GLASS,
+                        ACLHEMY_GLASS, new ItemStack(WizardsReborn.MAGENTA_ARCANE_LUMOS_ITEM.get()),  ACLHEMY_GLASS,
+                        ACLHEMY_GLASS, ACLHEMY_GLASS,  ACLHEMY_GLASS
+                ),
+                new ArcaneWorkbenchPage(new ItemStack(WizardsReborn.PINK_LUMINAL_GLASS_ITEM.get()),
+                        ACLHEMY_GLASS, ACLHEMY_GLASS,  ACLHEMY_GLASS,
+                        ACLHEMY_GLASS, new ItemStack(WizardsReborn.PINK_ARCANE_LUMOS_ITEM.get()),  ACLHEMY_GLASS,
+                        ACLHEMY_GLASS, ACLHEMY_GLASS,  ACLHEMY_GLASS
+                ),
+                new ArcaneWorkbenchPage(new ItemStack(WizardsReborn.RAINBOW_LUMINAL_GLASS_ITEM.get()),
+                        ACLHEMY_GLASS, ACLHEMY_GLASS,  ACLHEMY_GLASS,
+                        ACLHEMY_GLASS, new ItemStack(WizardsReborn.RAINBOW_ARCANE_LUMOS_ITEM.get()),  ACLHEMY_GLASS,
+                        ACLHEMY_GLASS, ACLHEMY_GLASS,  ACLHEMY_GLASS
+                ),
+                new ArcaneWorkbenchPage(new ItemStack(WizardsReborn.COSMIC_LUMINAL_GLASS_ITEM.get()),
+                        ACLHEMY_GLASS, ACLHEMY_GLASS,  ACLHEMY_GLASS,
+                        ACLHEMY_GLASS, new ItemStack(WizardsReborn.COSMIC_ARCANE_LUMOS_ITEM.get()),  ACLHEMY_GLASS,
+                        ACLHEMY_GLASS, ACLHEMY_GLASS,  ACLHEMY_GLASS
+                ),
+                new TitledBlockPage("wizards_reborn.arcanemicon.page.framed_luminal_glass",
+                        new BlockEntry(new ItemStack(WizardsReborn.WHITE_FRAMED_LUMINAL_GLASS_ITEM.get())),
+                        new BlockEntry(new ItemStack(WizardsReborn.LIGHT_GRAY_FRAMED_LUMINAL_GLASS_ITEM.get())),
+                        new BlockEntry(new ItemStack(WizardsReborn.GRAY_FRAMED_LUMINAL_GLASS_ITEM.get())),
+                        new BlockEntry(new ItemStack(WizardsReborn.BLACK_FRAMED_LUMINAL_GLASS_ITEM.get())),
+                        new BlockEntry(new ItemStack(WizardsReborn.BROWN_FRAMED_LUMINAL_GLASS_ITEM.get())),
+                        new BlockEntry(new ItemStack(WizardsReborn.RED_FRAMED_LUMINAL_GLASS_ITEM.get())),
+                        new BlockEntry(new ItemStack(WizardsReborn.ORANGE_FRAMED_LUMINAL_GLASS_ITEM.get())),
+                        new BlockEntry(new ItemStack(WizardsReborn.YELLOW_FRAMED_LUMINAL_GLASS_ITEM.get())),
+                        new BlockEntry(new ItemStack(WizardsReborn.LIME_FRAMED_LUMINAL_GLASS_ITEM.get())),
+                        new BlockEntry(new ItemStack(WizardsReborn.GREEN_FRAMED_LUMINAL_GLASS_ITEM.get())),
+                        new BlockEntry(new ItemStack(WizardsReborn.CYAN_FRAMED_LUMINAL_GLASS_ITEM.get())),
+                        new BlockEntry(new ItemStack(WizardsReborn.LIGHT_BLUE_FRAMED_LUMINAL_GLASS_ITEM.get())),
+                        new BlockEntry(new ItemStack(WizardsReborn.BLUE_FRAMED_LUMINAL_GLASS_ITEM.get())),
+                        new BlockEntry(new ItemStack(WizardsReborn.PURPLE_FRAMED_LUMINAL_GLASS_ITEM.get())),
+                        new BlockEntry(new ItemStack(WizardsReborn.MAGENTA_FRAMED_LUMINAL_GLASS_ITEM.get())),
+                        new BlockEntry(new ItemStack(WizardsReborn.PINK_FRAMED_LUMINAL_GLASS_ITEM.get())),
+                        new BlockEntry(new ItemStack(WizardsReborn.RAINBOW_FRAMED_LUMINAL_GLASS_ITEM.get())),
+                        new BlockEntry(new ItemStack(WizardsReborn.COSMIC_FRAMED_LUMINAL_GLASS_ITEM.get()))
+                ),
+                new CraftingTablePage(new ItemStack(WizardsReborn.WHITE_FRAMED_LUMINAL_GLASS_ITEM.get()), new ItemStack(WizardsReborn.WHITE_LUMINAL_GLASS_ITEM.get()), new ItemStack(Items.IRON_NUGGET)),
+                new CraftingTablePage(new ItemStack(WizardsReborn.LIGHT_GRAY_FRAMED_LUMINAL_GLASS_ITEM.get()), new ItemStack(WizardsReborn.LIGHT_GRAY_LUMINAL_GLASS_ITEM.get()), new ItemStack(Items.IRON_NUGGET)),
+                new CraftingTablePage(new ItemStack(WizardsReborn.GRAY_FRAMED_LUMINAL_GLASS_ITEM.get()), new ItemStack(WizardsReborn.GRAY_LUMINAL_GLASS_ITEM.get()), new ItemStack(Items.IRON_NUGGET)),
+                new CraftingTablePage(new ItemStack(WizardsReborn.BLACK_FRAMED_LUMINAL_GLASS_ITEM.get()), new ItemStack(WizardsReborn.BLACK_LUMINAL_GLASS_ITEM.get()), new ItemStack(Items.IRON_NUGGET)),
+                new CraftingTablePage(new ItemStack(WizardsReborn.BROWN_FRAMED_LUMINAL_GLASS_ITEM.get()), new ItemStack(WizardsReborn.BROWN_LUMINAL_GLASS_ITEM.get()), new ItemStack(Items.IRON_NUGGET)),
+                new CraftingTablePage(new ItemStack(WizardsReborn.RED_FRAMED_LUMINAL_GLASS_ITEM.get()), new ItemStack(WizardsReborn.RED_LUMINAL_GLASS_ITEM.get()), new ItemStack(Items.IRON_NUGGET)),
+                new CraftingTablePage(new ItemStack(WizardsReborn.ORANGE_FRAMED_LUMINAL_GLASS_ITEM.get()), new ItemStack(WizardsReborn.ORANGE_LUMINAL_GLASS_ITEM.get()), new ItemStack(Items.IRON_NUGGET)),
+                new CraftingTablePage(new ItemStack(WizardsReborn.YELLOW_FRAMED_LUMINAL_GLASS_ITEM.get()), new ItemStack(WizardsReborn.YELLOW_LUMINAL_GLASS_ITEM.get()), new ItemStack(Items.IRON_NUGGET)),
+                new CraftingTablePage(new ItemStack(WizardsReborn.LIME_FRAMED_LUMINAL_GLASS_ITEM.get()), new ItemStack(WizardsReborn.LIME_LUMINAL_GLASS_ITEM.get()), new ItemStack(Items.IRON_NUGGET)),
+                new CraftingTablePage(new ItemStack(WizardsReborn.GREEN_FRAMED_LUMINAL_GLASS_ITEM.get()), new ItemStack(WizardsReborn.GREEN_LUMINAL_GLASS_ITEM.get()), new ItemStack(Items.IRON_NUGGET)),
+                new CraftingTablePage(new ItemStack(WizardsReborn.CYAN_FRAMED_LUMINAL_GLASS_ITEM.get()), new ItemStack(WizardsReborn.CYAN_LUMINAL_GLASS_ITEM.get()), new ItemStack(Items.IRON_NUGGET)),
+                new CraftingTablePage(new ItemStack(WizardsReborn.LIGHT_BLUE_FRAMED_LUMINAL_GLASS_ITEM.get()), new ItemStack(WizardsReborn.LIGHT_BLUE_LUMINAL_GLASS_ITEM.get()), new ItemStack(Items.IRON_NUGGET)),
+                new CraftingTablePage(new ItemStack(WizardsReborn.BLUE_FRAMED_LUMINAL_GLASS_ITEM.get()), new ItemStack(WizardsReborn.BLUE_LUMINAL_GLASS_ITEM.get()), new ItemStack(Items.IRON_NUGGET)),
+                new CraftingTablePage(new ItemStack(WizardsReborn.PURPLE_FRAMED_LUMINAL_GLASS_ITEM.get()), new ItemStack(WizardsReborn.PURPLE_LUMINAL_GLASS_ITEM.get()), new ItemStack(Items.IRON_NUGGET)),
+                new CraftingTablePage(new ItemStack(WizardsReborn.MAGENTA_FRAMED_LUMINAL_GLASS_ITEM.get()), new ItemStack(WizardsReborn.MAGENTA_LUMINAL_GLASS_ITEM.get()), new ItemStack(Items.IRON_NUGGET)),
+                new CraftingTablePage(new ItemStack(WizardsReborn.PINK_FRAMED_LUMINAL_GLASS_ITEM.get()), new ItemStack(WizardsReborn.PINK_LUMINAL_GLASS_ITEM.get()), new ItemStack(Items.IRON_NUGGET)),
+                new CraftingTablePage(new ItemStack(WizardsReborn.RAINBOW_FRAMED_LUMINAL_GLASS_ITEM.get()), new ItemStack(WizardsReborn.RAINBOW_LUMINAL_GLASS_ITEM.get()), new ItemStack(Items.IRON_NUGGET)),
+                new CraftingTablePage(new ItemStack(WizardsReborn.COSMIC_FRAMED_LUMINAL_GLASS_ITEM.get()), new ItemStack(WizardsReborn.COSMIC_LUMINAL_GLASS_ITEM.get()), new ItemStack(Items.IRON_NUGGET))
         );
 
         ALCHEMY_BAG = new Chapter(
@@ -3870,13 +4019,20 @@ public class ArcanemiconChapters {
         ARCACITE_POLISHING_MIXTURE = new Chapter(
                 "wizards_reborn.arcanemicon.chapter.arcacite_polishing_mixture",
                 new TitledBlockPage("wizards_reborn.arcanemicon.page.arcacite_polishing_mixture",
-                        new BlockEntry(WISESTONE_PEDESTAL_ITEM, new ItemStack(WizardsReborn.ARCACITE_POLISHING_MIXTURE.get()))
+                        new BlockEntry(WISESTONE_PEDESTAL_ITEM, new ItemStack(WizardsReborn.ARCACITE_POLISHING_MIXTURE.get())),
+                        new BlockEntry(WISESTONE_PEDESTAL_ITEM, new ItemStack(WizardsReborn.ARCACITE_POLISHING_MIXTURE_BLOCK_ITEM.get()))
                 ),
                 new AlchemyMachinePage(new ItemStack(WizardsReborn.ARCACITE_POLISHING_MIXTURE.get()), FluidStack.EMPTY, true, true,
                         new FluidStack(WizardsReborn.ALCHEMY_OIL_FLUID.get(), 2000), FluidStack.EMPTY, FluidStack.EMPTY,
                         ARCACITE_ITEM, ARCACITE_ITEM,
                         ARCANUM_DUST_ITEM, ARCANUM_DUST_ITEM, ARCANUM_DUST_ITEM, ALCHEMY_CALX_ITEM
-                )
+                ),
+                new CraftingTablePage(new ItemStack(WizardsReborn.ARCACITE_POLISHING_MIXTURE_BLOCK_ITEM.get()),
+                        new ItemStack(WizardsReborn.ARCACITE_POLISHING_MIXTURE.get()), new ItemStack(WizardsReborn.ARCACITE_POLISHING_MIXTURE.get()), new ItemStack(WizardsReborn.ARCACITE_POLISHING_MIXTURE.get()),
+                        new ItemStack(WizardsReborn.ARCACITE_POLISHING_MIXTURE.get()), new ItemStack(WizardsReborn.ARCACITE_POLISHING_MIXTURE.get()), new ItemStack(WizardsReborn.ARCACITE_POLISHING_MIXTURE.get()),
+                        new ItemStack(WizardsReborn.ARCACITE_POLISHING_MIXTURE.get()), new ItemStack(WizardsReborn.ARCACITE_POLISHING_MIXTURE.get()), new ItemStack(WizardsReborn.ARCACITE_POLISHING_MIXTURE.get())
+                ),
+                new CraftingTablePage(new ItemStack(WizardsReborn.ARCACITE_POLISHING_MIXTURE.get(), 9), new ItemStack(WizardsReborn.ARCACITE_POLISHING_MIXTURE_BLOCK_ITEM.get()))
         );
 
         ALCHEMY_INDEX = new Chapter(
@@ -3903,7 +4059,7 @@ public class ArcanemiconChapters {
                         new IndexEntry(MUSIC_DISC_MOR, new ItemStack(WizardsReborn.MUSIC_DISC_MOR.get()), RegisterKnowledges.ALCHEMY_OIL),
                         new IndexEntry(NETHER_SALT, NETHER_SALT_ITEM, RegisterKnowledges.ALCHEMY_OIL),
                         new IndexEntry(ALCHEMY_CALX, ALCHEMY_CALX_ITEM, RegisterKnowledges.ALCHEMY_OIL),
-                        new IndexEntry(ALCHEMY_GLASS, new ItemStack(WizardsReborn.ALCHEMY_GLASS_ITEM.get()), RegisterKnowledges.ALCHEMY_CALX),
+                        new IndexEntry(ALCHEMY_GLASS, ACLHEMY_GLASS, RegisterKnowledges.ALCHEMY_CALX),
                         new IndexEntry(ALCHEMY_BAG, new ItemStack(WizardsReborn.ALCHEMY_BAG.get()), RegisterKnowledges.ALCHEMY_GLASS),
                         new IndexEntry(ALCHEMY_POTIONS, vialPotions.get(RegisterAlchemyPotions.MUNDANE_BREW), RegisterKnowledges.ALCHEMY_GLASS)
                 ),

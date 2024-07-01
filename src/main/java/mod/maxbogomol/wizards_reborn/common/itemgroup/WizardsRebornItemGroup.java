@@ -416,7 +416,7 @@ public class WizardsRebornItemGroup {
             event.accept(WizardsReborn.MAGENTA_LUMINAL_GLASS_ITEM);
             event.accept(WizardsReborn.PINK_LUMINAL_GLASS_ITEM);
             event.accept(WizardsReborn.RAINBOW_LUMINAL_GLASS_ITEM);
-            event.accept(WizardsReborn.COSMIS_LUMINAL_GLASS_ITEM);
+            event.accept(WizardsReborn.COSMIC_LUMINAL_GLASS_ITEM);
 
             event.accept(WizardsReborn.WHITE_FRAMED_LUMINAL_GLASS_ITEM);
             event.accept(WizardsReborn.LIGHT_GRAY_FRAMED_LUMINAL_GLASS_ITEM);
@@ -435,7 +435,7 @@ public class WizardsRebornItemGroup {
             event.accept(WizardsReborn.MAGENTA_FRAMED_LUMINAL_GLASS_ITEM);
             event.accept(WizardsReborn.PINK_FRAMED_LUMINAL_GLASS_ITEM);
             event.accept(WizardsReborn.RAINBOW_FRAMED_LUMINAL_GLASS_ITEM);
-            event.accept(WizardsReborn.COSMIS_FRAMED_LUMINAL_GLASS_ITEM);
+            event.accept(WizardsReborn.COSMIC_FRAMED_LUMINAL_GLASS_ITEM);
 
             event.accept(WizardsReborn.ALCHEMY_CALX);
             event.accept(WizardsReborn.NATURAL_CALX);
@@ -450,6 +450,7 @@ public class WizardsRebornItemGroup {
             event.accept(WizardsReborn.ENCHANTED_CALX_BLOCK_ITEM);
 
             event.accept(WizardsReborn.ARCACITE_POLISHING_MIXTURE);
+            event.accept(WizardsReborn.ARCACITE_POLISHING_MIXTURE_BLOCK_ITEM);
 
             event.accept(WizardsReborn.SNIFFALO_EGG_ITEM);
 

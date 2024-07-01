@@ -416,6 +416,11 @@ public class WizardsReborn {
     public static final RegistryObject<SoundEvent> ELDER_MOR_BLOCK_PLACE_SOUND = SOUND_EVENTS.register("elder_mor_block_place", () -> SoundEvent.createVariableRangeEvent(new ResourceLocation(MOD_ID, "elder_mor_block_place")));
     public static final RegistryObject<SoundEvent> ELDER_MOR_BLOCK_HIT_SOUND = SOUND_EVENTS.register("elder_mor_block_hit", () -> SoundEvent.createVariableRangeEvent(new ResourceLocation(MOD_ID, "elder_mor_block_hit")));
 
+    public static final RegistryObject<SoundEvent> MIXTURE_BREAK_SOUND = SOUND_EVENTS.register("mixture_break", () -> SoundEvent.createVariableRangeEvent(new ResourceLocation(MOD_ID, "mixture_break")));
+    public static final RegistryObject<SoundEvent> MIXTURE_STEP_SOUND = SOUND_EVENTS.register("mixture_step", () -> SoundEvent.createVariableRangeEvent(new ResourceLocation(MOD_ID, "mixture_step")));
+    public static final RegistryObject<SoundEvent> MIXTURE_PLACE_SOUND = SOUND_EVENTS.register("mixture_place", () -> SoundEvent.createVariableRangeEvent(new ResourceLocation(MOD_ID, "mixture_place")));
+    public static final RegistryObject<SoundEvent> MIXTURE_HIT_SOUND = SOUND_EVENTS.register("mixture_hit", () -> SoundEvent.createVariableRangeEvent(new ResourceLocation(MOD_ID, "mixture_hit")));
+
     public static final RegistryObject<SoundEvent> CRYSTAL_BREAK_SOUND = SOUND_EVENTS.register("crystal_break", () -> SoundEvent.createVariableRangeEvent(new ResourceLocation(MOD_ID, "crystal_break")));
     public static final RegistryObject<SoundEvent> CRYSTAL_STEP_SOUND = SOUND_EVENTS.register("crystal_step", () -> SoundEvent.createVariableRangeEvent(new ResourceLocation(MOD_ID, "crystal_step")));
     public static final RegistryObject<SoundEvent> CRYSTAL_PLACE_SOUND = SOUND_EVENTS.register("crystal_place", () -> SoundEvent.createVariableRangeEvent(new ResourceLocation(MOD_ID, "crystal_place")));
@@ -454,6 +459,7 @@ public class WizardsReborn {
     public static final ForgeSoundType ELDER_MOR_SOUNDS = new ForgeSoundType(1f, 1f, ELDER_MOR_BREAK_SOUND, ELDER_MOR_STEP_SOUND, ELDER_MOR_PLACE_SOUND, ELDER_MOR_HIT_SOUND, () -> SoundEvents.FUNGUS_FALL);
     public static final ForgeSoundType MOR_BLOCK_SOUNDS = new ForgeSoundType(1f, 1f, MOR_BLOCK_BREAK_SOUND, MOR_BLOCK_STEP_SOUND, MOR_BLOCK_PLACE_SOUND, MOR_BLOCK_HIT_SOUND, () -> SoundEvents.MUDDY_MANGROVE_ROOTS_FALL);
     public static final ForgeSoundType ELDER_MOR_BLOCK_SOUNDS = new ForgeSoundType(1f, 1f, ELDER_MOR_BLOCK_BREAK_SOUND, ELDER_MOR_BLOCK_STEP_SOUND, ELDER_MOR_BLOCK_PLACE_SOUND, ELDER_MOR_BLOCK_HIT_SOUND, () -> SoundEvents.MUDDY_MANGROVE_ROOTS_FALL);
+    public static final ForgeSoundType MIXTURE_SOUNDS = new ForgeSoundType(1f, 1f, MIXTURE_BREAK_SOUND, MIXTURE_STEP_SOUND, MIXTURE_PLACE_SOUND, MIXTURE_HIT_SOUND, () -> SoundEvents.BONE_BLOCK_FALL);
     public static final ForgeSoundType CRYSTAL_SOUNDS = new ForgeSoundType(1f, 1f, CRYSTAL_BREAK_SOUND, CRYSTAL_STEP_SOUND, CRYSTAL_PLACE_SOUND, CRYSTAL_HIT_SOUND, () -> SoundEvents.AMETHYST_CLUSTER_FALL);
 
     public static final LazyOptional<BlockSetType> ARCANE_WOOD_BLOCK_SET = LazyOptional.of(() -> BlockSetType.register(
@@ -976,6 +982,8 @@ public class WizardsReborn {
     public static final RegistryObject<Block> DISTANT_CALX_BLOCK = BLOCKS.register("distant_calx_block", () -> new FallingBlock(BlockBehaviour.Properties.copy(Blocks.CYAN_CONCRETE_POWDER)));
     public static final RegistryObject<Block> ENCHANTED_CALX_BLOCK = BLOCKS.register("enchanted_calx_block", () -> new FallingBlock(BlockBehaviour.Properties.copy(Blocks.LIME_CONCRETE_POWDER)));
 
+    public static final RegistryObject<Block> ARCACITE_POLISHING_MIXTURE_BLOCK = BLOCKS.register("arcacite_polishing_mixture_block", () -> new Block(BlockBehaviour.Properties.copy(Blocks.RAW_GOLD_BLOCK).mapColor(MapColor.TERRACOTTA_RED).sound(MIXTURE_SOUNDS)));
+
     public static final RegistryObject<Block> SNIFFALO_EGG = BLOCKS.register("sniffalo_egg", () -> new SniffaloEggBlock(BlockBehaviour.Properties.copy(Blocks.SNIFFER_EGG).mapColor(MapColor.COLOR_BROWN)));
 
     //ITEMS
@@ -1342,7 +1350,7 @@ public class WizardsReborn {
     public static final RegistryObject<Item> MAGENTA_LUMINAL_GLASS_ITEM = ITEMS.register("magenta_luminal_glass", () -> new BlockItem(MAGENTA_LUMINAL_GLASS.get(), new Item.Properties()));
     public static final RegistryObject<Item> PINK_LUMINAL_GLASS_ITEM = ITEMS.register("pink_luminal_glass", () -> new BlockItem(PINK_LUMINAL_GLASS.get(), new Item.Properties()));
     public static final RegistryObject<Item> RAINBOW_LUMINAL_GLASS_ITEM = ITEMS.register("rainbow_luminal_glass", () -> new BlockItem(RAINBOW_LUMINAL_GLASS.get(), new Item.Properties()));
-    public static final RegistryObject<Item> COSMIS_LUMINAL_GLASS_ITEM = ITEMS.register("cosmic_luminal_glass", () -> new BlockItem(COSMIC_LUMINAL_GLASS.get(), new Item.Properties()));
+    public static final RegistryObject<Item> COSMIC_LUMINAL_GLASS_ITEM = ITEMS.register("cosmic_luminal_glass", () -> new BlockItem(COSMIC_LUMINAL_GLASS.get(), new Item.Properties()));
 
     public static final RegistryObject<Item> WHITE_FRAMED_LUMINAL_GLASS_ITEM = ITEMS.register("white_framed_luminal_glass", () -> new BlockItem(WHITE_FRAMED_LUMINAL_GLASS.get(), new Item.Properties()));
     public static final RegistryObject<Item> LIGHT_GRAY_FRAMED_LUMINAL_GLASS_ITEM = ITEMS.register("light_gray_framed_luminal_glass", () -> new BlockItem(LIGHT_GRAY_FRAMED_LUMINAL_GLASS.get(), new Item.Properties()));
@@ -1361,7 +1369,7 @@ public class WizardsReborn {
     public static final RegistryObject<Item> MAGENTA_FRAMED_LUMINAL_GLASS_ITEM = ITEMS.register("magenta_framed_luminal_glass", () -> new BlockItem(MAGENTA_FRAMED_LUMINAL_GLASS.get(), new Item.Properties()));
     public static final RegistryObject<Item> PINK_FRAMED_LUMINAL_GLASS_ITEM = ITEMS.register("pink_framed_luminal_glass", () -> new BlockItem(PINK_FRAMED_LUMINAL_GLASS.get(), new Item.Properties()));
     public static final RegistryObject<Item> RAINBOW_FRAMED_LUMINAL_GLASS_ITEM = ITEMS.register("rainbow_framed_luminal_glass", () -> new BlockItem(RAINBOW_FRAMED_LUMINAL_GLASS.get(), new Item.Properties()));
-    public static final RegistryObject<Item> COSMIS_FRAMED_LUMINAL_GLASS_ITEM = ITEMS.register("cosmic_framed_luminal_glass", () -> new BlockItem(COSMIC_FRAMED_LUMINAL_GLASS.get(), new Item.Properties()));
+    public static final RegistryObject<Item> COSMIC_FRAMED_LUMINAL_GLASS_ITEM = ITEMS.register("cosmic_framed_luminal_glass", () -> new BlockItem(COSMIC_FRAMED_LUMINAL_GLASS.get(), new Item.Properties()));
 
     public static final RegistryObject<Item> ALCHEMY_CALX = ITEMS.register("alchemy_calx", () -> new Item(new Item.Properties()));
     public static final RegistryObject<Item> NATURAL_CALX = ITEMS.register("natural_calx", () -> new Item(new Item.Properties()));
@@ -1376,6 +1384,7 @@ public class WizardsReborn {
     public static final RegistryObject<Item> ENCHANTED_CALX_BLOCK_ITEM = ITEMS.register("enchanted_calx_block", () -> new BlockItem(ENCHANTED_CALX_BLOCK.get(), new Item.Properties()));
 
     public static final RegistryObject<Item> ARCACITE_POLISHING_MIXTURE = ITEMS.register("arcacite_polishing_mixture", () -> new Item(new Item.Properties()));
+    public static final RegistryObject<Item> ARCACITE_POLISHING_MIXTURE_BLOCK_ITEM = ITEMS.register("arcacite_polishing_mixture_block", () -> new BlockItem(ARCACITE_POLISHING_MIXTURE_BLOCK.get(), new Item.Properties()));
 
     public static final RegistryObject<Item> SNIFFALO_EGG_ITEM = ITEMS.register("sniffalo_egg", () -> new BlockItem(SNIFFALO_EGG.get(), new Item.Properties()));
 

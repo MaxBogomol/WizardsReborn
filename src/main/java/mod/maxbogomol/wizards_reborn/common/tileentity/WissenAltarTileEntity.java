@@ -61,7 +61,7 @@ public class WissenAltarTileEntity extends ExposedTileSimpleInventory implements
 
             SimpleContainer inv = new SimpleContainer(1);
             inv.setItem(0, getItemHandler().getItem(2));
-            if (inv.isEmpty()) {
+            if (!inv.isEmpty()) {
                 wissenInItem = 0;
                 wissenInItem = level.getRecipeManager().getRecipeFor(WizardsReborn.WISSEN_ALTAR_RECIPE.get(), inv, level)
                         .map(WissenAltarRecipe::getRecipeWissen)

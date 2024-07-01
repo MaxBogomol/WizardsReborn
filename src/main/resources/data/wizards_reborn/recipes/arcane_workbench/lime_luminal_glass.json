@@ -1,0 +1,22 @@
+{
+  "type": "wizards_reborn:arcane_workbench",
+  "pattern": [
+    "###",
+    "#A#",
+    "###",
+    "____"
+  ],
+  "key": {
+    "#": {
+      "item": "wizards_reborn:alchemy_glass"
+    },
+    "A": {
+      "item": "wizards_reborn:lime_arcane_lumos"
+    }
+  },
+  "output": {
+    "item": "wizards_reborn:lime_luminal_glass",
+    "count": 8
+  },
+  "wissen": 100
+}

@@ -129,26 +129,24 @@ public class AlchemyBoilerBlock extends HorizontalDirectionalBlock implements En
 
     @Override
     public InteractionResult use(BlockState state, Level world, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hit) {
-        if (world.isClientSide) {
-            return InteractionResult.SUCCESS;
-        } else {
-            ItemStack stack = player.getItemInHand(hand).copy();
-            boolean isWand = false;
+        ItemStack stack = player.getItemInHand(hand).copy();
+        boolean isWand = false;
 
-            if (stack.getItem() instanceof WissenWandItem) {
-                if (WissenWandItem.getMode(stack) != 4) {
-                    isWand = true;
-                }
+        if (stack.getItem() instanceof WissenWandItem) {
+            if (WissenWandItem.getMode(stack) != 4) {
+                isWand = true;
             }
+        }
 
-            if (!isWand) {
-                BlockEntity tileEntity = world.getBlockEntity(pos.below());
+        if (!isWand) {
+            BlockEntity tileEntity = world.getBlockEntity(pos.below());
 
-                if (world.getBlockState(pos.below()).getBlock() instanceof AlchemyMachineBlock block) {
+            if (world.getBlockState(pos.below()).getBlock() instanceof AlchemyMachineBlock block) {
+                if (!world.isClientSide) {
                     MenuProvider containerProvider = block.createContainerProvider(world, pos.below());
                     NetworkHooks.openScreen(((ServerPlayer) player), containerProvider, tileEntity.getBlockPos());
-                    return InteractionResult.CONSUME;
                 }
+                return InteractionResult.SUCCESS;
             }
         }
 
