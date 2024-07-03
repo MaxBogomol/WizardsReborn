@@ -13,7 +13,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 public abstract class PlayerRendererMixin<T extends LivingEntity>  {
 
     @Inject(at = @At("RETURN"), method = "<init>")
-    public void setupLayers(EntityRendererProvider.Context pContext, boolean pUseSlimModel, CallbackInfo ci) {
+    public void wizards_reborn$setupLayers(EntityRendererProvider.Context pContext, boolean pUseSlimModel, CallbackInfo ci) {
         PlayerRenderer self = (PlayerRenderer) ((Object) this);
         self.addLayer(new ExtraLayer<>(self));
     }

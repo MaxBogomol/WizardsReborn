@@ -241,4 +241,14 @@ public class ArcanumGrowthBlock extends Block implements EntityBlock, SimpleWate
     public <T extends BlockEntity> BlockEntityTicker<T> getTicker(@NotNull Level level, @NotNull BlockState state, @NotNull BlockEntityType<T> type) {
         return TickableBlockEntity.getTickerHelper();
     }
+
+    @Override
+    public boolean hasAnalogOutputSignal(BlockState state) {
+        return true;
+    }
+
+    @Override
+    public int getAnalogOutputSignal(BlockState blockState, Level level, BlockPos pos) {
+        return (getAge(blockState) / getMaxAge()) * 14;
+    }
 }

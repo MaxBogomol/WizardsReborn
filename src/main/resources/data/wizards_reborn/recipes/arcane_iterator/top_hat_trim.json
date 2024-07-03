@@ -1,0 +1,23 @@
+{
+  "type": "wizards_reborn:arcane_iterator",
+  "output": {
+    "item": "wizards_reborn:top_hat_trim",
+    "count": 1
+  },
+  "wissen": 500,
+  "experience": 10,
+  "ingredients": [
+    {
+      "item": "wizards_reborn:arcane_wood_trim"
+    },
+    {
+      "item": "minecraft:black_wool"
+    },
+    {
+      "item": "minecraft:black_wool"
+    },
+    {
+      "item": "minecraft:black_wool"
+    }
+  ]
+}

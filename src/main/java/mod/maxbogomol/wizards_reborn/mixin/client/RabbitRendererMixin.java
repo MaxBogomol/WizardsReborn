@@ -17,7 +17,7 @@ public abstract class RabbitRendererMixin {
     private static final ResourceLocation RABBIT_NANACHI_LOCATION = new ResourceLocation(WizardsReborn.MOD_ID,"textures/entity/rabbit/nanachi.png");
 
     @Inject(at = @At("HEAD"), method = "getTextureLocation", cancellable = true)
-    public void getTextureLocation(Rabbit entity, CallbackInfoReturnable<ResourceLocation> ci) {
+    public void wizards_reborn$getTextureLocation(Rabbit entity, CallbackInfoReturnable<ResourceLocation> ci) {
         String s = ChatFormatting.stripFormatting(entity.getName().getString());
         if ("Nanachi".equals(s)) {
             ci.setReturnValue(RABBIT_NANACHI_LOCATION);

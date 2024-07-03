@@ -10,13 +10,20 @@ import mod.maxbogomol.wizards_reborn.common.item.equipment.arcane.ArcaneScytheIt
 import mod.maxbogomol.wizards_reborn.common.item.equipment.arcane.ArcaneSwordItem;
 import mod.maxbogomol.wizards_reborn.common.network.MagicBladeEffectPacket;
 import mod.maxbogomol.wizards_reborn.common.network.PacketHandler;
+import net.minecraft.ChatFormatting;
+import net.minecraft.network.chat.Component;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.TooltipFlag;
+import net.minecraft.world.level.Level;
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.api.distmarker.OnlyIn;
 
 import java.awt.*;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
@@ -43,11 +50,11 @@ public class MagicBladeArcaneEnchantment extends ArcaneEnchantment {
                 if (ArcaneEnchantmentUtils.isArcaneItem(stack)) {
                     int enchantmentLevel = ArcaneEnchantmentUtils.getArcaneEnchantment(stack, WizardsReborn.MAGIC_BLADE_ARCANE_ENCHANTMENT);
 
-                    if (enchantmentLevel > 0 && random.nextFloat() < (0.35F + ((enchantmentLevel - 1) * 0.025F))) {
+                    if (enchantmentLevel > 0 && random.nextFloat() < (getChanceDefault(stack) + ((enchantmentLevel - 1) * getChancePerLevel(stack)))) {
                         float costModifier = WissenUtils.getWissenCostModifierWithDiscount(player);
                         List<ItemStack> items = WissenUtils.getWissenItemsNoneAndStorage(WissenUtils.getWissenItemsCurios(player));
                         int wissen = WissenUtils.getWissenInItems(items);
-                        int cost = (int) (60 * (1 - costModifier));
+                        int cost = (int) (40 + ((enchantmentLevel - 1) * 20) * (1 - costModifier));
                         if (cost <= 0) {
                             cost = 1;
                         }
@@ -63,5 +70,24 @@ public class MagicBladeArcaneEnchantment extends ArcaneEnchantment {
                 }
             }
         }
+    }
+
+    public static float getChanceDefault(ItemStack stack) {
+        return 0.35F;
+    }
+
+    public static float getChancePerLevel(ItemStack stack) {
+        return 0.025F;
+    }
+
+    @OnlyIn(Dist.CLIENT)
+    public List<Component> modifierAppendHoverText(ItemStack stack, Level world, TooltipFlag flags) {
+        List<Component> list = new ArrayList<>();
+        int enchantmentLevel = ArcaneEnchantmentUtils.getArcaneEnchantment(stack, this);
+        list.add(Component.literal(" +").append(String.valueOf(enchantmentLevel))
+                .append(" ").append(Component.translatable("attribute.name.wizards_reborn.arcane_damage"))
+                .append(" (").append(String.valueOf((getChanceDefault(stack) + ((enchantmentLevel - 1) * getChancePerLevel(stack))) * 100)).append("%)")
+                .withStyle(ChatFormatting.DARK_GREEN));
+        return list;
     }
 }

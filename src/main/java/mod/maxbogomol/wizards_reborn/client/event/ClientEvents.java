@@ -2,6 +2,7 @@ package mod.maxbogomol.wizards_reborn.client.event;
 
 import mod.maxbogomol.wizards_reborn.WizardsReborn;
 import mod.maxbogomol.wizards_reborn.WizardsRebornClient;
+import mod.maxbogomol.wizards_reborn.api.arcaneenchantment.ArcaneEnchantmentUtils;
 import mod.maxbogomol.wizards_reborn.client.arcanemicon.ArcanemiconChapters;
 import mod.maxbogomol.wizards_reborn.client.arcanemicon.ArcanemiconGui;
 import mod.maxbogomol.wizards_reborn.client.config.ClientConfig;
@@ -11,6 +12,7 @@ import net.minecraft.client.renderer.CubeMap;
 import net.minecraft.client.renderer.PanoramaRenderer;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraftforge.client.event.ScreenEvent;
+import net.minecraftforge.event.entity.player.ItemTooltipEvent;
 import net.minecraftforge.event.entity.player.PlayerEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 
@@ -46,5 +48,18 @@ public class ClientEvents {
     @SubscribeEvent
     public void loggedPlayer(PlayerEvent.PlayerLoggedInEvent event) {
         ArcanemiconGui.currentChapter = ArcanemiconChapters.ARCANE_NATURE_INDEX;
+    }
+
+    @SubscribeEvent
+    public void onTooltip(ItemTooltipEvent event) {
+        if (ArcaneEnchantmentUtils.isArcaneItem(event.getItemStack()) && event.getEntity() != null) {
+            int i = event.getToolTip().size();
+            if (event.getFlags().isAdvanced()) {
+                i--;
+                if (event.getItemStack().isDamaged()) i--;
+                if (event.getItemStack().hasTag()) i--;
+            }
+            event.getToolTip().addAll(i, ArcaneEnchantmentUtils.modifiersAppendHoverText(event.getItemStack(), event.getEntity().level(), event.getFlags()));
+        }
     }
 }

@@ -1,0 +1,26 @@
+{
+  "type": "wizards_reborn:alchemy_machine",
+  "outputItem": {
+    "item": "wizards_reborn:soul_hunter_trim",
+    "count": 1
+  },
+  "wissen": 300,
+  "steam": 100,
+  "ingredients": [
+    {
+      "item": "wizards_reborn:wisestone_trim"
+    },
+    {
+      "item": "minecraft:purple_wool"
+    },
+    {
+      "item": "minecraft:purple_wool"
+    },
+    {
+      "item": "minecraft:black_wool"
+    },
+    {
+      "item": "minecraft:black_wool"
+    }
+  ]
+}

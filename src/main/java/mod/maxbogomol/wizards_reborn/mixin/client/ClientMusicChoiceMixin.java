@@ -41,7 +41,7 @@ public class ClientMusicChoiceMixin {
     public Gui gui;
 
     @Inject(method = "getSituationalMusic", at = @At("HEAD"), cancellable = true)
-    private void biomemusic$musicChoice(final CallbackInfoReturnable<Music> cir) {
+    private void wizards_reborn$biomemusic$musicChoice(final CallbackInfoReturnable<Music> cir) {
         if (screen instanceof WinScreen) {
             return;
         }

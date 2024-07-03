@@ -17,7 +17,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 public abstract class LevelRendererMixin {
 
     @Inject(at = @At("HEAD"), method = "renderEntity")
-    public <E extends Entity> void render(Entity pEntity, double pCamX, double pCamY, double pCamZ, float pPartialTick, PoseStack pPoseStack, MultiBufferSource pBufferSource, CallbackInfo ci) {
+    public <E extends Entity> void wizards_reborn$render(Entity pEntity, double pCamX, double pCamY, double pCamZ, float pPartialTick, PoseStack pPoseStack, MultiBufferSource pBufferSource, CallbackInfo ci) {
         if (pEntity instanceof SpellProjectileEntity projectile) {
             if (projectile.getSpell() instanceof RaySpell spell) {
                 CompoundTag spellData = projectile.getSpellData();

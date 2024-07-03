@@ -1,0 +1,29 @@
+{
+  "type": "wizards_reborn:alchemy_machine",
+  "outputItem": {
+    "item": "wizards_reborn:implosion_trim",
+    "count": 1
+  },
+  "wissen": 100,
+  "steam": 100,
+  "ingredients": [
+    {
+      "item": "wizards_reborn:wisestone_trim"
+    },
+    {
+      "item": "minecraft:blue_ice"
+    },
+    {
+      "item": "minecraft:blue_ice"
+    },
+    {
+      "item": "minecraft:blue_ice"
+    }
+  ],
+  "fluidIngredients": [
+    {
+      "name": "minecraft:lava",
+      "amount" : 1000
+    }
+  ]
+}

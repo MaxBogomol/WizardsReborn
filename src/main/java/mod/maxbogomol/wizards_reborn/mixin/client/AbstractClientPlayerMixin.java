@@ -12,7 +12,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 public abstract class AbstractClientPlayerMixin {
 
     @Inject(at = @At("RETURN"), method = "getFieldOfViewModifier", cancellable = true)
-    private void evaluateWhichHandsToRender(CallbackInfoReturnable<Float> cir) {
+    private void wizards_reborn$evaluateWhichHandsToRender(CallbackInfoReturnable<Float> cir) {
         AbstractClientPlayer self = (AbstractClientPlayer) ((Object) this);
         ItemStack itemstack = self.getUseItem();
         if (self.isUsingItem()) {

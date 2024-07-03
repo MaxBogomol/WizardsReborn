@@ -1,0 +1,28 @@
+{
+  "type": "wizards_reborn:crystal_infusion",
+  "output": {
+    "item": "wizards_reborn:phantom_ink_trim",
+    "count": 1
+  },
+  "light": 200,
+  "ingredients": [
+    {
+      "item": "wizards_reborn:innocent_wood_trim"
+    },
+    {
+      "item": "minecraft:glow_ink_sac"
+    },
+    {
+      "item": "minecraft:ender_pearl"
+    },
+    {
+      "item": "wizards_reborn:arcanum"
+    },
+    {
+      "item": "wizards_reborn:arcanum"
+    },
+    {
+      "item": "wizards_reborn:enchanted_calx"
+    }
+  ]
+}

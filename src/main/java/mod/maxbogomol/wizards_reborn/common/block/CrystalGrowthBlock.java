@@ -268,4 +268,14 @@ public class CrystalGrowthBlock extends Block implements EntityBlock, SimpleWate
             super.onRemove(state, world, pos, newState, isMoving);
         }
     }
+
+    @Override
+    public boolean hasAnalogOutputSignal(BlockState state) {
+        return true;
+    }
+
+    @Override
+    public int getAnalogOutputSignal(BlockState blockState, Level level, BlockPos pos) {
+        return (getAge(blockState) / getMaxAge()) * 14;
+    }
 }

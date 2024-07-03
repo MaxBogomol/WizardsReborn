@@ -20,7 +20,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 public abstract class HumanoidModelMixin<T extends LivingEntity>  {
 
     @Inject(at = @At("RETURN"), method = "setupAnim")
-    public void setupAnim(T pEntity, float pLimbSwing, float pLimbSwingAmount, float pAgeInTicks, float pNetHeadYaw, float pHeadPitch, CallbackInfo ci) {
+    public void wizards_reborn$setupAnim(T pEntity, float pLimbSwing, float pLimbSwingAmount, float pAgeInTicks, float pNetHeadYaw, float pHeadPitch, CallbackInfo ci) {
         HumanoidModel self = (HumanoidModel) ((Object) this);
         if (pEntity instanceof Player player) {
             if (pEntity.isUsingItem() && pEntity.getUseItemRemainingTicks() > 0) {

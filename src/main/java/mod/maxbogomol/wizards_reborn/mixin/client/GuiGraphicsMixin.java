@@ -17,7 +17,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 @Mixin(GuiGraphics.class)
 public abstract class GuiGraphicsMixin {
     @Inject(at = @At(value = "TAIL"), method = "renderItem(Lnet/minecraft/world/entity/LivingEntity;Lnet/minecraft/world/level/Level;Lnet/minecraft/world/item/ItemStack;IIII)V")
-    private void renderItem(LivingEntity pEntity, Level pLevel, ItemStack pStack, int pX, int pY, int pSeed, int pGuiOffset, CallbackInfo ci) {
+    private void wizards_reborn$renderItem(LivingEntity pEntity, Level pLevel, ItemStack pStack, int pX, int pY, int pSeed, int pGuiOffset, CallbackInfo ci) {
         if (ClientConfig.ITEM_GUI_PARTICLE.get()) {
             if (pStack.getItem() instanceof IGuiParticleItem guiParticleItem) {
                 GuiGraphics self = (GuiGraphics) ((Object) this);

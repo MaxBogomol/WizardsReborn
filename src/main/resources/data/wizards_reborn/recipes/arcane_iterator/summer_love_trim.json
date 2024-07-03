@@ -1,0 +1,28 @@
+{
+  "type": "wizards_reborn:arcane_iterator",
+  "output": {
+    "item": "wizards_reborn:summer_love_trim",
+    "count": 1
+  },
+  "wissen": 100,
+  "ingredients": [
+    {
+      "item": "wizards_reborn:arcane_wood_trim"
+    },
+    {
+      "item": "minecraft:white_wool"
+    },
+    {
+      "item": "minecraft:orange_wool"
+    },
+    {
+      "item": "minecraft:light_blue_wool"
+    },
+    {
+      "item": "minecraft:light_blue_wool"
+    },
+    {
+      "item": "wizards_reborn:petals_of_innocence"
+    }
+  ]
+}

@@ -1,0 +1,28 @@
+{
+  "type": "wizards_reborn:arcane_iterator",
+  "output": {
+    "item": "wizards_reborn:magnificent_maid_trim",
+    "count": 1
+  },
+  "wissen": 100,
+  "ingredients": [
+    {
+      "item": "wizards_reborn:arcane_wood_trim"
+    },
+    {
+      "item": "minecraft:black_wool"
+    },
+    {
+      "item": "minecraft:black_wool"
+    },
+    {
+      "item": "minecraft:white_wool"
+    },
+    {
+      "item": "minecraft:white_wool"
+    },
+    {
+      "item": "wizards_reborn:arcanum"
+    }
+  ]
+}

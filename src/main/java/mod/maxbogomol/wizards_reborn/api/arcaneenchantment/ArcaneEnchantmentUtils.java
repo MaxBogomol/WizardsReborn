@@ -169,6 +169,21 @@ public class ArcaneEnchantmentUtils {
         return list;
     }
 
+    @OnlyIn(Dist.CLIENT)
+    public static List<Component> modifiersAppendHoverText(ItemStack stack, Level world, TooltipFlag flags) {
+        Map<ArcaneEnchantment, Integer> arcaneEnchantments = getAllArcaneEnchantments(stack);
+        List<Component> list = new ArrayList<>();
+
+        if (!arcaneEnchantments.isEmpty()) {
+            for (ArcaneEnchantment arcaneEnchantment : arcaneEnchantments.keySet()) {
+                List<Component> newList = arcaneEnchantment.modifierAppendHoverText(stack, world, flags);
+                if (newList != null && !newList.isEmpty()) list.addAll(newList);
+            }
+        }
+
+        return list;
+    }
+
     public static void inventoryTick(ItemStack stack, Level world, Entity entity, int slot, boolean isSelected) {
         WissenMendingArcaneEnchantment.inventoryTick(stack, world, entity, slot, isSelected);
     }

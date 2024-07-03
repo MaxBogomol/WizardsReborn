@@ -17,7 +17,7 @@ public abstract class ItemEntityMixin {
     @Shadow public abstract ItemStack getItem();
 
     @Inject(at = @At("RETURN"), method = "tick")
-    public void addParticles(CallbackInfo ci) {
+    public void wizards_reborn$addParticles(CallbackInfo ci) {
         ItemEntity self = (ItemEntity) ((Object) this);
         if (self.level().isClientSide) {
             if (ClientConfig.ITEM_PARTICLE.get()) {

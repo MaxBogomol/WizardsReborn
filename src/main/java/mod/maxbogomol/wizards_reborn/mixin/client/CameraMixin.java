@@ -15,7 +15,7 @@ public class CameraMixin {
     private static RandomSource RANDOM = RandomSource.create();
 
     @Inject(method = "setup", at = @At("RETURN"))
-    private void screenshake(BlockGetter area, Entity focusedEntity, boolean thirdPerson, boolean inverseView, float tickDelta, CallbackInfo ci) {
+    private void wizards_reborn$screenshake(BlockGetter area, Entity focusedEntity, boolean thirdPerson, boolean inverseView, float tickDelta, CallbackInfo ci) {
         ScreenshakeHandler.cameraTick((Camera) (Object) this, RANDOM);
     }
 }

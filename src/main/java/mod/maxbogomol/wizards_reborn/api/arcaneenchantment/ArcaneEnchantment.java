@@ -19,11 +19,13 @@ import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.level.Level;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 
 import java.awt.*;
+import java.util.List;
 
 public class ArcaneEnchantment {
     public String id;
@@ -72,6 +74,11 @@ public class ArcaneEnchantment {
         }
 
         return component;
+    }
+
+    @OnlyIn(Dist.CLIENT)
+    public List<Component> modifierAppendHoverText(ItemStack stack, Level world, TooltipFlag flags) {
+        return null;
     }
 
     @OnlyIn(Dist.CLIENT)

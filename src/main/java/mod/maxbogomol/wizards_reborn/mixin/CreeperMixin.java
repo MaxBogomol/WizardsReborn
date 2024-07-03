@@ -17,7 +17,7 @@ public class CreeperMixin extends Monster {
     }
 
     @Inject(method = "registerGoals", at = @At("TAIL"))
-    private void addCollarGoal(CallbackInfo ci) {
+    private void wizards_reborn$addCollarGoal(CallbackInfo ci) {
         goalSelector.addGoal(0, new LeatherCollarItem.CreeperAvoidPlayerGoal((Creeper) (Object) this));
     }
 }

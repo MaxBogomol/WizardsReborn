@@ -16,7 +16,7 @@ import java.util.List;
 @Mixin(Phantom.class)
 public class PhantomMixin {
     @Inject(method = "tick", at = @At("HEAD"))
-    private void addCollarGoal(CallbackInfo ci) {
+    private void wizards_reborn$addCollarGoal(CallbackInfo ci) {
         Phantom self = (Phantom) ((Object) this);
         GoalSelector targetSelector = self.goalSelector;
         for (WrappedGoal pg : targetSelector.getAvailableGoals()) {

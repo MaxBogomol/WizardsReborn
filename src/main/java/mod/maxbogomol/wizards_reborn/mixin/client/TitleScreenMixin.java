@@ -15,7 +15,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 public abstract class TitleScreenMixin {
 
     @Inject(at = @At("RETURN"), method = "render")
-    public void render(GuiGraphics guiGraphics, int mouseX, int mouseY, float partialTick, CallbackInfo ci) {
+    public void wizards_reborn$render(GuiGraphics guiGraphics, int mouseX, int mouseY, float partialTick, CallbackInfo ci) {
         if (WizardsRebornClient.optifinePresent) {
             TitleScreen self = (TitleScreen) ((Object) this);
             Font font = Minecraft.getInstance().font;

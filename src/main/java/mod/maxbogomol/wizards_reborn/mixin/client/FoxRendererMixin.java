@@ -19,7 +19,7 @@ public abstract class FoxRendererMixin {
     private static final ResourceLocation FOX_FOXPLANE_SLEEP_LOCATION = new ResourceLocation(WizardsReborn.MOD_ID,"textures/entity/fox/foxplane_sleep.png");
 
     @Inject(at = @At("HEAD"), method = "getTextureLocation", cancellable = true)
-    public void getTextureLocation(Fox entity, CallbackInfoReturnable<ResourceLocation> ci) {
+    public void wizards_reborn$getTextureLocation(Fox entity, CallbackInfoReturnable<ResourceLocation> ci) {
         String s = ChatFormatting.stripFormatting(entity.getName().getString());
         if ("FoxPlane".equals(s)) {
             if (entity.isSleeping()) {

@@ -9,7 +9,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 @Mixin(LivingEntity.class)
 public class LivingEntityMixin {
     @Inject(method = "isFallFlying", at = @At("HEAD"))
-    public void isFallFlying(CallbackInfoReturnable<Boolean> ci) {
+    public void wizards_reborn$isFallFlying(CallbackInfoReturnable<Boolean> ci) {
         //if ((LivingEntity)(Object)this instanceof Player p) {
         //    ci.setReturnValue(true);
         //}

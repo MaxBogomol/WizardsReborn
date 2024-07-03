@@ -8,7 +8,8 @@
     "PlayerMixin",
     "BlocksMixin",
     "CreeperMixin",
-    "PhantomMixin"
+    "PhantomMixin",
+    "ItemStackMixin"
   ],
   "client": [
     "client.ItemEntityMixin",
@@ -23,7 +24,8 @@
     "client.ClientMusicChoiceMixin",
     "client.AbstractClientPlayerMixin",
     "client.GuiGraphicsMixin",
-    "client.CameraMixin"
+    "client.CameraMixin",
+    "client.CurioTooltipMixin"
   ],
   "minVersion": "0.8",
   "injectors": {

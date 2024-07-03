@@ -1750,6 +1750,7 @@ public class WizardsReborn {
     public static final RegistryObject<Attribute> WISSEN_DISCOUNT = ATTRIBUTES.register("wissen_discount", () -> new RangedAttribute("attribute.name.wizards_reborn.wissen_discount", 0, 0, 75).setSyncable(true));
     public static final RegistryObject<Attribute> MAGIC_ARMOR = ATTRIBUTES.register("magic_armor", () -> new RangedAttribute("attribute.name.wizards_reborn.magic_armor", 0, 0, 100).setSyncable(true));
     public static final RegistryObject<Attribute> MAGIC_MODIFIER = ATTRIBUTES.register("magic_modifier", () -> new RangedAttribute("attribute.name.wizards_reborn.magic_modifier", 0, 0, 100).setSyncable(true));
+    public static final RegistryObject<Attribute> ARCANE_DAMAGE = ATTRIBUTES.register("arcane_damage", () -> new RangedAttribute("attribute.name.wizards_reborn.arcane_damage", 0, 0, 1000).setSyncable(true));
 
     public static final RegistryObject<MobEffect> MOR_SPORES_EFFECT = EFFECTS.register("mor_spores", MorSporesEffect::new);
     public static final RegistryObject<MobEffect> WISSEN_AURA_EFFECT = EFFECTS.register("wissen_aura", WissenAuraEffect::new);
