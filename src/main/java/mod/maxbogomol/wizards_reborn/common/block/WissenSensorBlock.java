@@ -46,6 +46,6 @@ public class WissenSensorBlock extends SensorBaseBlock {
     @Override
     @OnlyIn(Dist.CLIENT)
     public ModelResourceLocation getModel(BlockState state) {
-        return WizardsRebornClient.WISSEN_SENSOR_PIECE_MODEl;
+        return WizardsRebornClient.WISSEN_SENSOR_PIECE_MODEL;
     }
 }

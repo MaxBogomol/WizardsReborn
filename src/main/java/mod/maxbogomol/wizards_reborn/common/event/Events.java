@@ -7,6 +7,7 @@ import mod.maxbogomol.wizards_reborn.api.knowledge.Knowledges;
 import mod.maxbogomol.wizards_reborn.common.capability.IKnowledge;
 import mod.maxbogomol.wizards_reborn.common.capability.KnowledgeProvider;
 import mod.maxbogomol.wizards_reborn.common.command.WizardsRebornCommand;
+import mod.maxbogomol.wizards_reborn.common.damage.DamageSourceRegistry;
 import mod.maxbogomol.wizards_reborn.common.entity.SpellProjectileEntity;
 import mod.maxbogomol.wizards_reborn.common.item.equipment.ArcaneFortressArmorItem;
 import mod.maxbogomol.wizards_reborn.common.network.KnowledgeUpdatePacket;
@@ -14,6 +15,7 @@ import mod.maxbogomol.wizards_reborn.common.network.PacketHandler;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.ai.attributes.AttributeInstance;
@@ -78,6 +80,7 @@ public class Events {
     public void onLivingDamage(LivingDamageEvent event) {
         magicArmor(event);
         ArcaneEnchantmentUtils.onLivingDamage(event);
+        arcaneDamage(event);
     }
 
     public void magicArmor(LivingDamageEvent event) {
@@ -85,18 +88,32 @@ public class Events {
             float scale = 1;
             AttributeInstance attr = event.getEntity().getAttribute(WizardsReborn.MAGIC_ARMOR.get());
 
-            if (event.getSource().is(WizardsReborn.MAGIC_DAMAGE_TYPE_TAG)) {
-                scale = (float) (1f - (attr.getValue() / 100f));
-            }
-            if (scale == 1 && event.getSource().getDirectEntity() instanceof SpellProjectileEntity) {
-                scale = (float) (1f - ((attr.getValue() / 2) / 100f));
-            }
-            if (scale < 0) {
-                scale = 0;
-            }
+            if (attr != null) {
+                if (event.getSource().is(WizardsReborn.MAGIC_DAMAGE_TYPE_TAG)) {
+                    scale = (float) (1f - (attr.getValue() / 100f));
+                }
+                if (scale == 1 && event.getSource().getDirectEntity() instanceof SpellProjectileEntity) {
+                    scale = (float) (1f - ((attr.getValue() / 2) / 100f));
+                }
+                if (scale < 0) {
+                    scale = 0;
+                }
 
-            if (scale < 1) {
-                event.setAmount(event.getAmount() * scale);
+                if (scale < 1) {
+                    event.setAmount(event.getAmount() * scale);
+                }
+            }
+        }
+    }
+
+    public void arcaneDamage(LivingDamageEvent event) {
+        if (event.getSource().getEntity() instanceof LivingEntity attacker) {
+            if (!event.getSource().is(WizardsReborn.ARCANE_MAGIC_DAMAGE_TYPE_TAG)) {
+                AttributeInstance attr = attacker.getAttribute(WizardsReborn.ARCANE_DAMAGE.get());
+                if (attr != null && attr.getValue() > 0) {
+                    event.getEntity().invulnerableTime = 0;
+                    event.getEntity().hurt(new DamageSource(DamageSourceRegistry.create(event.getEntity().level(), DamageSourceRegistry.ARCANE_MAGIC).typeHolder(), attacker), (float) attr.getValue());
+                }
             }
         }
     }

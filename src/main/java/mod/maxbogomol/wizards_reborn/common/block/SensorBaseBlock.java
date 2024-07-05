@@ -269,6 +269,6 @@ public class SensorBaseBlock extends DiodeBlock implements EntityBlock, SimpleWa
 
     @OnlyIn(Dist.CLIENT)
     public ModelResourceLocation getModel(BlockState state) {
-        return WizardsRebornClient.REDSTONE_SENSOR_PIECE_MODEl;
+        return WizardsRebornClient.REDSTONE_SENSOR_PIECE_MODEL;
     }
 }

@@ -4,6 +4,7 @@ import mod.maxbogomol.wizards_reborn.WizardsReborn;
 import mod.maxbogomol.wizards_reborn.api.arcaneenchantment.ArcaneEnchantment;
 import mod.maxbogomol.wizards_reborn.api.arcaneenchantment.ArcaneEnchantmentUtils;
 import mod.maxbogomol.wizards_reborn.api.wissen.WissenUtils;
+import mod.maxbogomol.wizards_reborn.common.damage.DamageSourceRegistry;
 import mod.maxbogomol.wizards_reborn.common.integration.farmersdelight.FarmersDelightIntegration;
 import mod.maxbogomol.wizards_reborn.common.item.equipment.arcane.ArcaneAxeItem;
 import mod.maxbogomol.wizards_reborn.common.item.equipment.arcane.ArcaneScytheItem;
@@ -15,6 +16,7 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.ai.attributes.AttributeInstance;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
@@ -54,15 +56,16 @@ public class MagicBladeArcaneEnchantment extends ArcaneEnchantment {
                         float costModifier = WissenUtils.getWissenCostModifierWithDiscount(player);
                         List<ItemStack> items = WissenUtils.getWissenItemsNoneAndStorage(WissenUtils.getWissenItemsCurios(player));
                         int wissen = WissenUtils.getWissenInItems(items);
-                        int cost = (int) (40 + ((enchantmentLevel - 1) * 20) * (1 - costModifier));
+                        int cost = (int) (40 + ((enchantmentLevel - 1) * 15) * (1 - costModifier));
                         if (cost <= 0) {
                             cost = 1;
                         }
 
                         if (WissenUtils.canRemoveWissen(wissen, cost)) {
+                            AttributeInstance attr = attacker.getAttribute(WizardsReborn.ARCANE_DAMAGE.get());
                             WissenUtils.removeWissenFromWissenItems(items, cost);
                             target.invulnerableTime = 0;
-                            target.hurt(new DamageSource(target.damageSources().magic().typeHolder(), player), (1.0f * enchantmentLevel));
+                            target.hurt(new DamageSource(DamageSourceRegistry.create(target.level(), DamageSourceRegistry.ARCANE_MAGIC).typeHolder(), player), (1.0f * enchantmentLevel) + (float) attr.getValue());
                             target.level().playSound(WizardsReborn.proxy.getPlayer(), target.getOnPos(), WizardsReborn.CRYSTAL_HIT_SOUND.get(), SoundSource.PLAYERS, 1.3f, (float) (1.0f + ((random.nextFloat() - 0.5D) / 3)));
                             PacketHandler.sendToTracking(target.level(), target.getOnPos(), new MagicBladeEffectPacket((float) target.getX(), (float) target.getY() + (target.getBbHeight() / 2), (float) target.getZ()));
                         }

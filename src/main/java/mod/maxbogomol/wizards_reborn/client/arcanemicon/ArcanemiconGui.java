@@ -47,6 +47,9 @@ public class ArcanemiconGui extends Screen {
         for (Category category : ArcanemiconChapters.categories) {
             category.reset();
         }
+        for (Category category : ArcanemiconChapters.additionalCategories) {
+            category.reset();
+        }
         blockPos = null;
     }
 
@@ -100,7 +103,12 @@ public class ArcanemiconGui extends Screen {
 
         for (int i = 0; i < ArcanemiconChapters.categories.size(); i ++) {
             int y = guiTop + 12 + (i % 8) * 20;
+            if (i >= 8) y = y + (ArcanemiconChapters.additionalCategories.size() * 20);
             ArcanemiconChapters.categories.get(i).draw(this, gui, guiLeft + (i >= 8 ? 301 : 10), y, i >= 8, mouseX, mouseY);
+        }
+        for (int i = 0; i < ArcanemiconChapters.additionalCategories.size(); i ++) {
+            int y = guiTop + 12 + (i % 8) * 20;
+            ArcanemiconChapters.additionalCategories.get(i).draw(this, gui, guiLeft + 301, y, true, mouseX, mouseY);
         }
 
         gui.blit(BACKGROUND, guiLeft, guiTop, 0, 0, xSize, ySize, 512, 512);
@@ -141,7 +149,12 @@ public class ArcanemiconGui extends Screen {
 
         for (int i = 0; i < ArcanemiconChapters.categories.size(); i ++) {
             int y = guiTop + 12 + (i % 8) * 20;
+            if (i >= 8) y = y + (ArcanemiconChapters.additionalCategories.size() * 20);
             ArcanemiconChapters.categories.get(i).drawTooltip(this, gui, guiLeft + (i >= 8 ? 301 : 10), y, i >= 8, mouseX, mouseY);
+        }
+        for (int i = 0; i < ArcanemiconChapters.additionalCategories.size(); i ++) {
+            int y = guiTop + 12 + (i % 8) * 20;
+            ArcanemiconChapters.additionalCategories.get(i).drawTooltip(this, gui, guiLeft + 301, y, true, mouseX, mouseY);
         }
 
         renderTooltip(gui, currentItem, mouseX, mouseY);
@@ -202,7 +215,12 @@ public class ArcanemiconGui extends Screen {
 
             for (int i = 0; i < ArcanemiconChapters.categories.size(); i ++) {
                 int y = guiTop + 12 + (i % 8) * 20;
+                if (i >= 8) y = y + ArcanemiconChapters.additionalCategories.size() * 20;
                 if (ArcanemiconChapters.categories.get(i).click(this, guiLeft + (i >= 8 ? 301 : 10), y, i >= 8, (int)mouseX, (int)mouseY)) return true;
+            }
+            for (int i = 0; i < ArcanemiconChapters.additionalCategories.size(); i ++) {
+                int y = guiTop + 12 + (i % 8) * 20;
+                if (ArcanemiconChapters.additionalCategories.get(i).click(this, guiLeft + 301, y, true, (int)mouseX, (int)mouseY)) return true;
             }
 
             Page left = currentChapter.getPage(currentPage), right = currentChapter.getPage(currentPage + 1);

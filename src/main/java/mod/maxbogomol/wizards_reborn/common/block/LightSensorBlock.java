@@ -45,6 +45,6 @@ public class LightSensorBlock extends SensorBaseBlock {
     @Override
     @OnlyIn(Dist.CLIENT)
     public ModelResourceLocation getModel(BlockState state) {
-        return WizardsRebornClient.LIGHT_SENSOR_PIECE_MODEl;
+        return WizardsRebornClient.LIGHT_SENSOR_PIECE_MODEL;
     }
 }

@@ -143,8 +143,8 @@ public class FluidSensorBlock extends SensorBaseBlock {
     @OnlyIn(Dist.CLIENT)
     public ModelResourceLocation getModel(BlockState state) {
         if (state.getValue(BlockStateProperties.LIT)) {
-            return WizardsRebornClient.FLUID_SENSOR_PIECE_ON_MODEl;
+            return WizardsRebornClient.FLUID_SENSOR_PIECE_ON_MODEL;
         }
-        return WizardsRebornClient.FLUID_SENSOR_PIECE_MODEl;
+        return WizardsRebornClient.FLUID_SENSOR_PIECE_MODEL;
     }
 }

@@ -42,7 +42,7 @@ public class AltarOfDroughtTileEntityRenderer implements BlockEntityRenderer<Alt
         ms.mulPose(Axis.YP.rotationDegrees((float) ((Math.sin(Math.toRadians(random.nextFloat() * 360) + ticks))) * 5F));
         ms.mulPose(Axis.XP.rotationDegrees((float) ((Math.sin(Math.toRadians(random.nextFloat() * 360) + ticks))) * 5F));
         ms.mulPose(Axis.ZP.rotationDegrees((float) ((Math.sin(Math.toRadians(random.nextFloat() * 360) + ticks))) * 5F));
-        RenderUtils.renderCustomModel(WizardsRebornClient.ALTAR_OF_DROUGHT_FRAME_MODEl, ItemDisplayContext.FIXED, false, ms, buffers, light, overlay);
+        RenderUtils.renderCustomModel(WizardsRebornClient.ALTAR_OF_DROUGHT_FRAME_MODEL, ItemDisplayContext.FIXED, false, ms, buffers, light, overlay);
         ms.popPose();
 
         if (WissenUtils.isCanRenderWissenWand()) {

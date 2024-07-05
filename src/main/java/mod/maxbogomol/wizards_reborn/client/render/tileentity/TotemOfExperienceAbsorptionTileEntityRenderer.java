@@ -57,7 +57,7 @@ public class TotemOfExperienceAbsorptionTileEntityRenderer implements BlockEntit
             ms.translate(t, 0F, t);
             ms.scale(size, size, size);
             ms.mulPose(Axis.YP.rotationDegrees(180F));
-            RenderUtils.renderCustomModel(WizardsRebornClient.TOTEM_OF_EXPERIENCE_ABSORPTION_PIECE_MODEl, ItemDisplayContext.FIXED, false, ms, buffers, light, overlay);
+            RenderUtils.renderCustomModel(WizardsRebornClient.TOTEM_OF_EXPERIENCE_ABSORPTION_PIECE_MODEL, ItemDisplayContext.FIXED, false, ms, buffers, light, overlay);
             ms.popPose();
         }
         ms.popPose();

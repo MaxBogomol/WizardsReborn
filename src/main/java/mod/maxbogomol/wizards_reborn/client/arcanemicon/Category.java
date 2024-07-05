@@ -26,11 +26,13 @@ public class Category {
 
     public boolean click(ArcanemiconGui gui, int x, int y, boolean right, int mouseX, int mouseY) {
         int w = 20;
+        int xx = x;
         if (!right) x -= 20;
         w += hoveramount * 18;
         if (!right) x -= hoveramount * 18;
 
-        boolean hover = mouseX >= x && mouseY >= y && mouseX <= x + w && mouseY <= y + 18;
+        boolean hover = mouseX >= x && mouseY >= y && mouseX <= xx && mouseY <= y + 18;
+        if (right)  hover = mouseX >= x && mouseY >= y && mouseX <= x + w && mouseY <= y + 18;
         if (hover) {
             ArcanemiconGui.historyEntries.clear();
             ArcanemiconGui.currentHistory = 0;
@@ -43,11 +45,13 @@ public class Category {
 
     public void draw(ArcanemiconGui book, GuiGraphics gui, int x, int y, boolean right, int mouseX, int mouseY) {
         int w = 20;
+        int xx = x;
         if (!right) x -= 20;
         w += hoveramount * 18;
         if (!right) x -= hoveramount * 18;
 
-        boolean hover = mouseX >= x && mouseY >= y && mouseX <= x + w && mouseY <= y + 18;
+        boolean hover = mouseX >= x && mouseY >= y && mouseX <= xx && mouseY <= y + 18;
+        if (right)  hover = mouseX >= x && mouseY >= y && mouseX <= x + w && mouseY <= y + 18;
         if (hover && hoveramount < 1) hoveramount += Minecraft.getInstance().getDeltaFrameTime();
         else if (!hover && hoveramount > 0) hoveramount -= Minecraft.getInstance().getDeltaFrameTime();
         hoveramount = Mth.clamp(hoveramount, 0, 1);
@@ -64,11 +68,13 @@ public class Category {
 
     public void drawTooltip(ArcanemiconGui book, GuiGraphics gui, int x, int y, boolean right, int mouseX, int mouseY) {
         int w = 20;
+        int xx = x;
         if (!right) x -= 20;
         w += hoveramount * 18;
         if (!right) x -= hoveramount * 18;
 
-        boolean hover = mouseX >= x && mouseY >= y && mouseX <= x + w && mouseY <= y + 18;
+        boolean hover = mouseX >= x && mouseY >= y && mouseX <= xx && mouseY <= y + 18;
+        if (right)  hover = mouseX >= x && mouseY >= y && mouseX <= x + w && mouseY <= y + 18;
         if (hover) book.renderTooltip(gui, Component.translatable("wizards_reborn.arcanemicon.category." + key), mouseX, mouseY);
     }
 }

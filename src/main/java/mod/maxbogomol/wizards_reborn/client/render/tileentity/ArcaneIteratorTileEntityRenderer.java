@@ -146,7 +146,7 @@ public class ArcaneIteratorTileEntityRenderer implements BlockEntityRenderer<Arc
         ms.mulPose(Axis.YP.rotationDegrees(yRot));
         ms.mulPose(Axis.ZP.rotationDegrees(-zRot));
         ms.scale(size, size, size);
-        RenderUtils.renderCustomModel(WizardsRebornClient.ARCANE_ITERATOR_PIECE_MODEl, ItemDisplayContext.FIXED, false, ms, buffers, light, overlay);
+        RenderUtils.renderCustomModel(WizardsRebornClient.ARCANE_ITERATOR_PIECE_MODEL, ItemDisplayContext.FIXED, false, ms, buffers, light, overlay);
         ms.popPose();
     }
 

@@ -244,7 +244,8 @@ public class WizardsReborn {
     public static final TagKey<BannerPattern> SURVIVAL_BANNER_PATTERN_TAG = TagKey.create(Registries.BANNER_PATTERN, new ResourceLocation(MOD_ID, "pattern_item/survival"));
     public static final TagKey<BannerPattern> ELEVATION_BANNER_PATTERN_TAG = TagKey.create(Registries.BANNER_PATTERN, new ResourceLocation(MOD_ID, "pattern_item/elevation"));
 
-    public static final TagKey<DamageType> MAGIC_DAMAGE_TYPE_TAG = TagKey.create(Registries.DAMAGE_TYPE, new ResourceLocation(MOD_ID, "magic"));
+    public static final TagKey<DamageType> MAGIC_DAMAGE_TYPE_TAG = TagKey.create(Registries.DAMAGE_TYPE, new ResourceLocation("forge", "is_magic"));
+    public static final TagKey<DamageType> ARCANE_MAGIC_DAMAGE_TYPE_TAG = TagKey.create(Registries.DAMAGE_TYPE, new ResourceLocation(MOD_ID, "is_arcane_magic"));
 
     public static final ResourceLocation SNIFFALO_DIGGING_LOOT_TABLE = new ResourceLocation(MOD_ID, "gameplay/sniffalo_digging");
 
@@ -2306,6 +2307,7 @@ public class WizardsReborn {
         public static void registerAttributes(EntityAttributeModificationEvent event) {
             for (EntityType<? extends LivingEntity> livingEntity : event.getTypes()) {
                 event.add(livingEntity, MAGIC_ARMOR.get());
+                event.add(EntityType.PLAYER, ARCANE_DAMAGE.get());
             }
             event.add(EntityType.PLAYER, WISSEN_DISCOUNT.get());
             event.add(EntityType.PLAYER, MAGIC_MODIFIER.get());

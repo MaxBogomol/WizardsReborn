@@ -46,6 +46,6 @@ public class ExperienceSensorBlock extends SensorBaseBlock {
     @Override
     @OnlyIn(Dist.CLIENT)
     public ModelResourceLocation getModel(BlockState state) {
-        return WizardsRebornClient.EXPERIENCE_SENSOR_PIECE_MODEl;
+        return WizardsRebornClient.EXPERIENCE_SENSOR_PIECE_MODEL;
     }
 }

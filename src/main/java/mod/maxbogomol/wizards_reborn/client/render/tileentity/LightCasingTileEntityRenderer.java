@@ -38,7 +38,7 @@ public class LightCasingTileEntityRenderer implements BlockEntityRenderer<LightC
             BlockPos pos = new BlockPos(0, 0, 0).relative(direction);
             ms.translate(pos.getX() * casing.getLightLensOffset(), pos.getY() * casing.getLightLensOffset(), pos.getZ() * casing.getLightLensOffset());
 
-            RenderUtils.renderCustomModel(WizardsRebornClient.HOVERING_LENS_MODEl, ItemDisplayContext.FIXED, false, ms, buffers, light, overlay);
+            RenderUtils.renderCustomModel(WizardsRebornClient.HOVERING_LENS_MODEL, ItemDisplayContext.FIXED, false, ms, buffers, light, overlay);
 
             if (casing.isConnection(direction)) {
                 RenderUtils.ray(ms, bufferDelayed, 0.075f, 0.075f, 1f, 0.564f, 0.682f, 0.705f, alpha, 0.564f, 0.682f, 0.705f, alpha);

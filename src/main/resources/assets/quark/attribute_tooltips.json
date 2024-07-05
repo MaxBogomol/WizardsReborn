@@ -22,5 +22,29 @@
       "potion": "flat"
     },
     "texture": "wizards_reborn:attribute/magic_armor"
+  },
+  "wizards_reborn:magic_modifier": {
+    "display": {
+      "mainhand": "flat",
+      "offhand": "flat",
+      "feet": "flat",
+      "legs": "flat",
+      "chest": "flat",
+      "head": "flat",
+      "potion": "flat"
+    },
+    "texture": "wizards_reborn:attribute/magic_modifier"
+  },
+  "wizards_reborn:arcane_damage": {
+    "display": {
+      "mainhand": "flat",
+      "offhand": "flat",
+      "feet": "flat",
+      "legs": "flat",
+      "chest": "flat",
+      "head": "flat",
+      "potion": "flat"
+    },
+    "texture": "wizards_reborn:attribute/arcane_damage"
   }
 }

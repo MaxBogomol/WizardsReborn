@@ -96,23 +96,23 @@ public class WizardsRebornClient {
     public static SniffaloCarpetArmorModel SNIFFALO_CARPET_ARMOR_MODEL = null;
     public static SniffaloArcaneArmorModel SNIFFALO_ARCANE_ARMOR_MODEL = null;
 
-    public static ModelResourceLocation JEWELER_TABLE_STONE_MODEl = new ModelResourceLocation(WizardsReborn.MOD_ID, "jeweler_table_stone", "");
-    public static ModelResourceLocation ALTAR_OF_DROUGHT_FRAME_MODEl = new ModelResourceLocation(WizardsReborn.MOD_ID, "altar_of_drought_frame", "");
-    public static ModelResourceLocation TOTEM_OF_EXPERIENCE_ABSORPTION_PIECE_MODEl = new ModelResourceLocation(WizardsReborn.MOD_ID, "totem_of_experience_absorption_piece", "");
-    public static ModelResourceLocation ARCANE_ITERATOR_PIECE_MODEl = new ModelResourceLocation(WizardsReborn.MOD_ID, "arcane_iterator_piece", "");
-    public static ModelResourceLocation HOVERING_LENS_MODEl = new ModelResourceLocation(WizardsReborn.MOD_ID, "hovering_lens", "");
-    public static ModelResourceLocation REDSTONE_SENSOR_PIECE_MODEl = new ModelResourceLocation(WizardsReborn.MOD_ID, "redstone_sensor_piece", "");
-    public static ModelResourceLocation REDSTONE_SENSOR_PIECE_ON_MODEl = new ModelResourceLocation(WizardsReborn.MOD_ID, "redstone_sensor_piece_on", "");
-    public static ModelResourceLocation WISSEN_SENSOR_PIECE_MODEl = new ModelResourceLocation(WizardsReborn.MOD_ID, "wissen_sensor_piece", "");
-    public static ModelResourceLocation COOLDOWN_SENSOR_PIECE_MODEl = new ModelResourceLocation(WizardsReborn.MOD_ID, "cooldown_sensor_piece", "");
-    public static ModelResourceLocation LIGHT_SENSOR_PIECE_MODEl = new ModelResourceLocation(WizardsReborn.MOD_ID, "light_sensor_piece", "");
-    public static ModelResourceLocation EXPERIENCE_SENSOR_PIECE_MODEl = new ModelResourceLocation(WizardsReborn.MOD_ID, "experience_sensor_piece", "");
-    public static ModelResourceLocation HEAT_SENSOR_PIECE_MODEl = new ModelResourceLocation(WizardsReborn.MOD_ID, "heat_sensor_piece", "");
-    public static ModelResourceLocation FLUID_SENSOR_PIECE_MODEl = new ModelResourceLocation(WizardsReborn.MOD_ID, "fluid_sensor_piece", "");
-    public static ModelResourceLocation FLUID_SENSOR_PIECE_ON_MODEl = new ModelResourceLocation(WizardsReborn.MOD_ID, "fluid_sensor_piece_on", "");
-    public static ModelResourceLocation STEAM_SENSOR_PIECE_MODEl = new ModelResourceLocation(WizardsReborn.MOD_ID, "steam_sensor_piece", "");
-    public static ModelResourceLocation WISSEN_ACTIVATOR_PIECE_MODEl = new ModelResourceLocation(WizardsReborn.MOD_ID, "wissen_activator_piece", "");
-    public static ModelResourceLocation ITEM_SORTER_PIECE_MODEl = new ModelResourceLocation(WizardsReborn.MOD_ID, "item_sorter_piece", "");
+    public static ModelResourceLocation JEWELER_TABLE_STONE_MODEL = new ModelResourceLocation(WizardsReborn.MOD_ID, "jeweler_table_stone", "");
+    public static ModelResourceLocation ALTAR_OF_DROUGHT_FRAME_MODEL = new ModelResourceLocation(WizardsReborn.MOD_ID, "altar_of_drought_frame", "");
+    public static ModelResourceLocation TOTEM_OF_EXPERIENCE_ABSORPTION_PIECE_MODEL = new ModelResourceLocation(WizardsReborn.MOD_ID, "totem_of_experience_absorption_piece", "");
+    public static ModelResourceLocation ARCANE_ITERATOR_PIECE_MODEL = new ModelResourceLocation(WizardsReborn.MOD_ID, "arcane_iterator_piece", "");
+    public static ModelResourceLocation HOVERING_LENS_MODEL = new ModelResourceLocation(WizardsReborn.MOD_ID, "hovering_lens", "");
+    public static ModelResourceLocation REDSTONE_SENSOR_PIECE_MODEL = new ModelResourceLocation(WizardsReborn.MOD_ID, "redstone_sensor_piece", "");
+    public static ModelResourceLocation REDSTONE_SENSOR_PIECE_ON_MODEL = new ModelResourceLocation(WizardsReborn.MOD_ID, "redstone_sensor_piece_on", "");
+    public static ModelResourceLocation WISSEN_SENSOR_PIECE_MODEL = new ModelResourceLocation(WizardsReborn.MOD_ID, "wissen_sensor_piece", "");
+    public static ModelResourceLocation COOLDOWN_SENSOR_PIECE_MODEL = new ModelResourceLocation(WizardsReborn.MOD_ID, "cooldown_sensor_piece", "");
+    public static ModelResourceLocation LIGHT_SENSOR_PIECE_MODEL = new ModelResourceLocation(WizardsReborn.MOD_ID, "light_sensor_piece", "");
+    public static ModelResourceLocation EXPERIENCE_SENSOR_PIECE_MODEL = new ModelResourceLocation(WizardsReborn.MOD_ID, "experience_sensor_piece", "");
+    public static ModelResourceLocation HEAT_SENSOR_PIECE_MODEL = new ModelResourceLocation(WizardsReborn.MOD_ID, "heat_sensor_piece", "");
+    public static ModelResourceLocation FLUID_SENSOR_PIECE_MODEL = new ModelResourceLocation(WizardsReborn.MOD_ID, "fluid_sensor_piece", "");
+    public static ModelResourceLocation FLUID_SENSOR_PIECE_ON_MODEL = new ModelResourceLocation(WizardsReborn.MOD_ID, "fluid_sensor_piece_on", "");
+    public static ModelResourceLocation STEAM_SENSOR_PIECE_MODEL = new ModelResourceLocation(WizardsReborn.MOD_ID, "steam_sensor_piece", "");
+    public static ModelResourceLocation WISSEN_ACTIVATOR_PIECE_MODEL = new ModelResourceLocation(WizardsReborn.MOD_ID, "wissen_activator_piece", "");
+    public static ModelResourceLocation ITEM_SORTER_PIECE_MODEL = new ModelResourceLocation(WizardsReborn.MOD_ID, "item_sorter_piece", "");
 
     public static ShaderInstance GLOWING_SHADER, GLOWING_SPRITE_SHADER, GLOWING_PARTICLE_SHADER, SPRITE_PARTICLE_SHADER, FLUID_SHADER;
 
@@ -408,23 +408,23 @@ public class WizardsRebornClient {
                 event.register(ItemSkinsModels.getModelLocationSkin(skin));
             }
 
-            event.register(JEWELER_TABLE_STONE_MODEl);
-            event.register(ALTAR_OF_DROUGHT_FRAME_MODEl);
-            event.register(TOTEM_OF_EXPERIENCE_ABSORPTION_PIECE_MODEl);
-            event.register(ARCANE_ITERATOR_PIECE_MODEl);
-            event.register(HOVERING_LENS_MODEl);
-            event.register(REDSTONE_SENSOR_PIECE_MODEl);
-            event.register(REDSTONE_SENSOR_PIECE_ON_MODEl);
-            event.register(WISSEN_SENSOR_PIECE_MODEl);
-            event.register(COOLDOWN_SENSOR_PIECE_MODEl);
-            event.register(LIGHT_SENSOR_PIECE_MODEl);
-            event.register(EXPERIENCE_SENSOR_PIECE_MODEl);
-            event.register(HEAT_SENSOR_PIECE_MODEl);
-            event.register(FLUID_SENSOR_PIECE_MODEl);
-            event.register(FLUID_SENSOR_PIECE_ON_MODEl);
-            event.register(STEAM_SENSOR_PIECE_MODEl);
-            event.register(WISSEN_ACTIVATOR_PIECE_MODEl);
-            event.register(ITEM_SORTER_PIECE_MODEl);
+            event.register(JEWELER_TABLE_STONE_MODEL);
+            event.register(ALTAR_OF_DROUGHT_FRAME_MODEL);
+            event.register(TOTEM_OF_EXPERIENCE_ABSORPTION_PIECE_MODEL);
+            event.register(ARCANE_ITERATOR_PIECE_MODEL);
+            event.register(HOVERING_LENS_MODEL);
+            event.register(REDSTONE_SENSOR_PIECE_MODEL);
+            event.register(REDSTONE_SENSOR_PIECE_ON_MODEL);
+            event.register(WISSEN_SENSOR_PIECE_MODEL);
+            event.register(COOLDOWN_SENSOR_PIECE_MODEL);
+            event.register(LIGHT_SENSOR_PIECE_MODEL);
+            event.register(EXPERIENCE_SENSOR_PIECE_MODEL);
+            event.register(HEAT_SENSOR_PIECE_MODEL);
+            event.register(FLUID_SENSOR_PIECE_MODEL);
+            event.register(FLUID_SENSOR_PIECE_ON_MODEL);
+            event.register(STEAM_SENSOR_PIECE_MODEL);
+            event.register(WISSEN_ACTIVATOR_PIECE_MODEL);
+            event.register(ITEM_SORTER_PIECE_MODEL);
 
             event.register(FLUID_CENTER);
             event.register(FLUID_CONNECTION);

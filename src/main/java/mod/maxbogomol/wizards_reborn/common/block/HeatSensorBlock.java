@@ -46,6 +46,6 @@ public class HeatSensorBlock extends SensorBaseBlock {
     @Override
     @OnlyIn(Dist.CLIENT)
     public ModelResourceLocation getModel(BlockState state) {
-        return WizardsRebornClient.HEAT_SENSOR_PIECE_MODEl;
+        return WizardsRebornClient.HEAT_SENSOR_PIECE_MODEL;
     }
 }

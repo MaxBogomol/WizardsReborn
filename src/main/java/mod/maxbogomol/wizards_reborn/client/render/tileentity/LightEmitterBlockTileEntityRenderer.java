@@ -39,7 +39,7 @@ public class LightEmitterBlockTileEntityRenderer implements BlockEntityRenderer<
         ms.mulPose(Axis.YP.rotationDegrees((float) (random.nextFloat() * 360 + ticks)));
         ms.mulPose(Axis.XP.rotationDegrees((float) (random.nextFloat() * 360 + ticks)));
         ms.mulPose(Axis.ZP.rotationDegrees((float) (random.nextFloat() * 360 + ticks)));
-        RenderUtils.renderCustomModel(WizardsRebornClient.HOVERING_LENS_MODEl, ItemDisplayContext.FIXED, false, ms, buffers, light, overlay);
+        RenderUtils.renderCustomModel(WizardsRebornClient.HOVERING_LENS_MODEL, ItemDisplayContext.FIXED, false, ms, buffers, light, overlay);
         RenderUtils.ray(ms, bufferDelayed, 0.075f, 0.075f, 1f, 0.564f, 0.682f, 0.705f, alpha, 0.564f, 0.682f, 0.705f, alpha);
         ms.popPose();
 

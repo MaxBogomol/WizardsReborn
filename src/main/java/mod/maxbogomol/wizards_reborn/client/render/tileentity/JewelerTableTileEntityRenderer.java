@@ -34,7 +34,7 @@ public class JewelerTableTileEntityRenderer implements BlockEntityRenderer<Jewel
         ms.translate(pos.x(), pos.y(), pos.z());
         ms.mulPose(Axis.YP.rotationDegrees(table.getBlockRotate()));
         ms.mulPose(Axis.XP.rotationDegrees((float) ticksStone));
-        RenderUtils.renderCustomModel(WizardsRebornClient.JEWELER_TABLE_STONE_MODEl, ItemDisplayContext.FIXED, false, ms, buffers, light, overlay);
+        RenderUtils.renderCustomModel(WizardsRebornClient.JEWELER_TABLE_STONE_MODEL, ItemDisplayContext.FIXED, false, ms, buffers, light, overlay);
         ms.popPose();
 
         ms.pushPose();

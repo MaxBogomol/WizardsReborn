@@ -31,7 +31,7 @@ public class ItemSorterBlock extends SensorBaseBlock {
     @Override
     @OnlyIn(Dist.CLIENT)
     public ModelResourceLocation getModel(BlockState state) {
-        return WizardsRebornClient.ITEM_SORTER_PIECE_MODEl;
+        return WizardsRebornClient.ITEM_SORTER_PIECE_MODEL;
     }
 
     @Nullable

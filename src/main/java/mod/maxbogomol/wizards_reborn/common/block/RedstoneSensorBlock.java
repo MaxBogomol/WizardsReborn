@@ -83,8 +83,8 @@ public class RedstoneSensorBlock extends SensorBaseBlock {
     @OnlyIn(Dist.CLIENT)
     public ModelResourceLocation getModel(BlockState state) {
         if (state.getValue(MODE) == ComparatorMode.SUBTRACT) {
-            return WizardsRebornClient.REDSTONE_SENSOR_PIECE_ON_MODEl;
+            return WizardsRebornClient.REDSTONE_SENSOR_PIECE_ON_MODEL;
         }
-        return WizardsRebornClient.REDSTONE_SENSOR_PIECE_MODEl;
+        return WizardsRebornClient.REDSTONE_SENSOR_PIECE_MODEL;
     }
 }
