@@ -2,7 +2,9 @@ package mod.maxbogomol.wizards_reborn.common.arcaneenchantment;
 
 import mod.maxbogomol.wizards_reborn.WizardsReborn;
 import mod.maxbogomol.wizards_reborn.api.arcaneenchantment.ArcaneEnchantment;
+import mod.maxbogomol.wizards_reborn.api.arcaneenchantment.ArcaneEnchantmentType;
 import mod.maxbogomol.wizards_reborn.api.arcaneenchantment.ArcaneEnchantmentUtils;
+import mod.maxbogomol.wizards_reborn.api.arcaneenchantment.IArcaneItem;
 import mod.maxbogomol.wizards_reborn.api.wissen.WissenUtils;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
@@ -21,6 +23,13 @@ public class WissenMendingArcaneEnchantment extends ArcaneEnchantment {
 
     public Color getColor() {
         return new Color(87, 127, 184);
+    }
+
+    public boolean canEnchantItem(ItemStack stack) {
+        if (stack.getItem() instanceof IArcaneItem item) {
+            return item.getArcaneEnchantmentTypes().contains(ArcaneEnchantmentType.BREAKABLE);
+        }
+        return false;
     }
 
     public static void inventoryTick(ItemStack stack, Level world, Entity entity, int slot, boolean isSelected) {

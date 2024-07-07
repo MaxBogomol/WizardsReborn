@@ -2,13 +2,11 @@ package mod.maxbogomol.wizards_reborn.common.arcaneenchantment;
 
 import mod.maxbogomol.wizards_reborn.WizardsReborn;
 import mod.maxbogomol.wizards_reborn.api.arcaneenchantment.ArcaneEnchantment;
+import mod.maxbogomol.wizards_reborn.api.arcaneenchantment.ArcaneEnchantmentType;
 import mod.maxbogomol.wizards_reborn.api.arcaneenchantment.ArcaneEnchantmentUtils;
+import mod.maxbogomol.wizards_reborn.api.arcaneenchantment.IArcaneItem;
 import mod.maxbogomol.wizards_reborn.api.wissen.WissenUtils;
 import mod.maxbogomol.wizards_reborn.common.damage.DamageSourceRegistry;
-import mod.maxbogomol.wizards_reborn.common.integration.farmersdelight.FarmersDelightIntegration;
-import mod.maxbogomol.wizards_reborn.common.item.equipment.arcane.ArcaneAxeItem;
-import mod.maxbogomol.wizards_reborn.common.item.equipment.arcane.ArcaneScytheItem;
-import mod.maxbogomol.wizards_reborn.common.item.equipment.arcane.ArcaneSwordItem;
 import mod.maxbogomol.wizards_reborn.common.network.MagicBladeEffectPacket;
 import mod.maxbogomol.wizards_reborn.common.network.PacketHandler;
 import net.minecraft.ChatFormatting;
@@ -41,8 +39,10 @@ public class MagicBladeArcaneEnchantment extends ArcaneEnchantment {
     }
 
     public boolean canEnchantItem(ItemStack stack) {
-        return ((stack.getItem() instanceof ArcaneSwordItem) || (stack.getItem() instanceof ArcaneAxeItem) || (stack.getItem() instanceof ArcaneScytheItem) ||
-                (FarmersDelightIntegration.canMagicBladeEnchant(stack.getItem())));
+        if (stack.getItem() instanceof IArcaneItem item) {
+            return item.getArcaneEnchantmentTypes().contains(ArcaneEnchantmentType.MELEE_WEAPON);
+        }
+        return false;
     }
 
     public static void hurtEnemy(ItemStack stack, LivingEntity target, LivingEntity attacker) {

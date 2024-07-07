@@ -1,5 +1,6 @@
 package mod.maxbogomol.wizards_reborn.common.item.equipment.arcane;
 
+import mod.maxbogomol.wizards_reborn.api.arcaneenchantment.ArcaneEnchantmentType;
 import mod.maxbogomol.wizards_reborn.api.arcaneenchantment.ArcaneEnchantmentUtils;
 import mod.maxbogomol.wizards_reborn.api.arcaneenchantment.IArcaneItem;
 import mod.maxbogomol.wizards_reborn.api.skin.Skin;
@@ -14,12 +15,29 @@ import net.minecraft.world.level.Level;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Consumer;
 
 public class ArcaneSwordItem extends SwordItem implements IArcaneItem {
+    public List<ArcaneEnchantmentType> arcaneEnchantmentTypes = new ArrayList<>();
+
     public ArcaneSwordItem(Tier tier, int attackDamageModifier, float attackSpeedModifier, Properties properties) {
         super(tier, attackDamageModifier, attackSpeedModifier, properties);
+        arcaneEnchantmentTypes.add(ArcaneEnchantmentType.BREAKABLE);
+        arcaneEnchantmentTypes.add(ArcaneEnchantmentType.SWORD);
+        arcaneEnchantmentTypes.add(ArcaneEnchantmentType.WEAPON);
+        arcaneEnchantmentTypes.add(ArcaneEnchantmentType.MELEE_WEAPON);
+    }
+
+    @Override
+    public List<ArcaneEnchantmentType> getArcaneEnchantmentTypes() {
+        return arcaneEnchantmentTypes;
+    }
+
+    public ArcaneSwordItem addArcaneEnchantmentType(ArcaneEnchantmentType type) {
+        arcaneEnchantmentTypes.add(type);
+        return this;
     }
 
     @OnlyIn(Dist.CLIENT)

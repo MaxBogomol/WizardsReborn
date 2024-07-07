@@ -4,6 +4,7 @@ import com.google.common.collect.ImmutableMultimap;
 import com.google.common.collect.Multimap;
 import mod.maxbogomol.wizards_reborn.WizardsReborn;
 import mod.maxbogomol.wizards_reborn.WizardsRebornClient;
+import mod.maxbogomol.wizards_reborn.api.arcaneenchantment.ArcaneEnchantmentType;
 import mod.maxbogomol.wizards_reborn.api.skin.Skin;
 import mod.maxbogomol.wizards_reborn.client.model.armor.ArmorModel;
 import mod.maxbogomol.wizards_reborn.common.item.equipment.arcane.ArcaneArmorItem;
@@ -29,6 +30,7 @@ import net.minecraftforge.common.extensions.IForgeItem;
 public class InventorWizardArmorItem extends ArcaneArmorItem implements IForgeItem {
     public InventorWizardArmorItem(ArmorMaterial material, ArmorItem.Type type, Properties properties) {
         super(material, type, properties);
+        arcaneEnchantmentTypes.add(ArcaneEnchantmentType.MAGIC_ARMOR);
     }
 
     @Override

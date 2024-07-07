@@ -1,5 +1,6 @@
 package mod.maxbogomol.wizards_reborn.common.item.equipment.arcane;
 
+import mod.maxbogomol.wizards_reborn.api.arcaneenchantment.ArcaneEnchantmentType;
 import mod.maxbogomol.wizards_reborn.api.arcaneenchantment.ArcaneEnchantmentUtils;
 import mod.maxbogomol.wizards_reborn.api.arcaneenchantment.IArcaneItem;
 import mod.maxbogomol.wizards_reborn.api.skin.Skin;
@@ -11,12 +12,28 @@ import net.minecraft.world.level.Level;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Consumer;
 
 public class ArcaneShovelItem extends ShovelItem implements IArcaneItem {
+    public List<ArcaneEnchantmentType> arcaneEnchantmentTypes = new ArrayList<>();
+
     public ArcaneShovelItem(Tier tier, float attackDamageModifier, float attackSpeedModifier, Properties properties) {
         super(tier, attackDamageModifier, attackSpeedModifier, properties);
+        arcaneEnchantmentTypes.add(ArcaneEnchantmentType.BREAKABLE);
+        arcaneEnchantmentTypes.add(ArcaneEnchantmentType.SHOVEL);
+        arcaneEnchantmentTypes.add(ArcaneEnchantmentType.TOOL);
+    }
+
+    @Override
+    public List<ArcaneEnchantmentType> getArcaneEnchantmentTypes() {
+        return arcaneEnchantmentTypes;
+    }
+
+    public ArcaneShovelItem addArcaneEnchantmentType(ArcaneEnchantmentType type) {
+        arcaneEnchantmentTypes.add(type);
+        return this;
     }
 
     @OnlyIn(Dist.CLIENT)

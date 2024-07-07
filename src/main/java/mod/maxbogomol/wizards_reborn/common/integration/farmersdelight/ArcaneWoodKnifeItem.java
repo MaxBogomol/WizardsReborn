@@ -1,6 +1,7 @@
 package mod.maxbogomol.wizards_reborn.common.integration.farmersdelight;
 
 import mod.maxbogomol.wizards_reborn.WizardsReborn;
+import mod.maxbogomol.wizards_reborn.api.arcaneenchantment.ArcaneEnchantmentType;
 import mod.maxbogomol.wizards_reborn.api.arcaneenchantment.ArcaneEnchantmentUtils;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundSource;
@@ -20,6 +21,7 @@ public class ArcaneWoodKnifeItem extends ArcaneKnifeItem {
     public ArcaneWoodKnifeItem(Tier tier, float attackDamageModifier, float attackSpeedModifier, Properties properties, Item repairItem) {
         super(tier, attackDamageModifier, attackSpeedModifier, properties);
         this.repairItem = repairItem;
+        arcaneEnchantmentTypes.add(ArcaneEnchantmentType.WOODEN);
     }
 
     public int repairTick(ItemStack stack, Level world, Entity entity) {

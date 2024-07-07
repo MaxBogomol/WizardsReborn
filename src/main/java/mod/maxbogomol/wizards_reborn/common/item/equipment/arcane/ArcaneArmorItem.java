@@ -1,6 +1,7 @@
 package mod.maxbogomol.wizards_reborn.common.item.equipment.arcane;
 
 import mod.maxbogomol.wizards_reborn.WizardsReborn;
+import mod.maxbogomol.wizards_reborn.api.arcaneenchantment.ArcaneEnchantmentType;
 import mod.maxbogomol.wizards_reborn.api.arcaneenchantment.ArcaneEnchantmentUtils;
 import mod.maxbogomol.wizards_reborn.api.arcaneenchantment.IArcaneItem;
 import mod.maxbogomol.wizards_reborn.api.skin.Skin;
@@ -24,6 +25,7 @@ import net.minecraft.world.level.Level;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 import java.util.function.Consumer;
@@ -41,8 +43,22 @@ public class ArcaneArmorItem extends ArmorItem implements IArcaneItem {
     public static final UUID LEGS_MAGIC_ARMOR_UUID = UUID.fromString("3A052206-9C1B-11EE-8C90-0242AC120002");
     public static final UUID FEET_MAGIC_ARMOR_UUID = UUID.fromString("3CC51e4C-9C1B-11EE-8C90-0242AC120002");
 
+    public List<ArcaneEnchantmentType> arcaneEnchantmentTypes = new ArrayList<>();
+
     public ArcaneArmorItem(ArmorMaterial material, Type type, Properties properties) {
         super(material, type, properties);
+        arcaneEnchantmentTypes.add(ArcaneEnchantmentType.BREAKABLE);
+        arcaneEnchantmentTypes.add(ArcaneEnchantmentType.ARMOR);
+    }
+
+    @Override
+    public List<ArcaneEnchantmentType> getArcaneEnchantmentTypes() {
+        return arcaneEnchantmentTypes;
+    }
+
+    public ArcaneArmorItem addArcaneEnchantmentType(ArcaneEnchantmentType type) {
+        arcaneEnchantmentTypes.add(type);
+        return this;
     }
 
     public int getWissenDiscountForSlot(EquipmentSlot slot) {

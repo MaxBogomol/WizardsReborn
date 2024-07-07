@@ -3,6 +3,7 @@ package mod.maxbogomol.wizards_reborn.common.integration.farmersdelight;
 import mezz.jei.api.constants.VanillaTypes;
 import mezz.jei.api.registration.IRecipeRegistration;
 import mod.maxbogomol.wizards_reborn.WizardsReborn;
+import mod.maxbogomol.wizards_reborn.api.arcaneenchantment.ArcaneEnchantmentType;
 import mod.maxbogomol.wizards_reborn.api.skin.Skin;
 import mod.maxbogomol.wizards_reborn.common.item.equipment.CustomItemTier;
 import mod.maxbogomol.wizards_reborn.common.skin.ItemClassSkinEntry;
@@ -26,19 +27,15 @@ public class FarmersDelightIntegration {
 
     public static class LoadedOnly {
         public static Item makeArcaneGoldKnife() {
-            return new ArcaneKnifeItem(CustomItemTier.ARCANE_GOLD, 0.5F, -2.0F, new Item.Properties());
+            return new ArcaneKnifeItem(CustomItemTier.ARCANE_GOLD, 0.5F, -2.0F, new Item.Properties()).addArcaneEnchantmentType(ArcaneEnchantmentType.ARCANE_COLD);
         }
 
         public static Item makeArcaneWoodKnife() {
-            return new ArcaneWoodKnifeItem(CustomItemTier.ARCANE_WOOD, 0.5F, -2.0F, new Item.Properties(), WizardsReborn.ARCANE_WOOD_BRANCH.get());
+            return new ArcaneWoodKnifeItem(CustomItemTier.ARCANE_WOOD, 0.5F, -2.0F, new Item.Properties(), WizardsReborn.ARCANE_WOOD_BRANCH.get()).addArcaneEnchantmentType(ArcaneEnchantmentType.ARCANE_WOOD);
         }
 
         public static Item makeInnocentWoodKnife() {
-            return new InnocentWoodKnifeItem(CustomItemTier.INNOCENT_WOOD, 0.5F, -2.0F, new Item.Properties(), WizardsReborn.INNOCENT_WOOD_BRANCH.get());
-        }
-
-        public static boolean canMagicBladeEnchant(Item item) {
-            return (item instanceof ArcaneKnifeItem);
+            return new InnocentWoodKnifeItem(CustomItemTier.INNOCENT_WOOD, 0.5F, -2.0F, new Item.Properties(), WizardsReborn.INNOCENT_WOOD_BRANCH.get()).addArcaneEnchantmentType(ArcaneEnchantmentType.INNOCENT_WOOD);
         }
 
         public static void addKnifeSkin(Skin skin, String item) {
@@ -64,9 +61,5 @@ public class FarmersDelightIntegration {
 
     public static boolean isLoaded() {
         return LOADED;
-    }
-
-    public static boolean canMagicBladeEnchant(Item item) {
-        return isLoaded() && LoadedOnly.canMagicBladeEnchant(item);
     }
 }
