@@ -2,6 +2,7 @@ package mod.maxbogomol.wizards_reborn.api.arcaneenchantment;
 
 import com.google.common.collect.Maps;
 import mod.maxbogomol.wizards_reborn.common.arcaneenchantment.MagicBladeArcaneEnchantment;
+import mod.maxbogomol.wizards_reborn.common.arcaneenchantment.WissenChargeArcaneEnchantment;
 import mod.maxbogomol.wizards_reborn.common.arcaneenchantment.WissenMendingArcaneEnchantment;
 import mod.maxbogomol.wizards_reborn.utils.ColorUtils;
 import net.minecraft.ChatFormatting;
@@ -193,10 +194,14 @@ public class ArcaneEnchantmentUtils {
     }
 
     public static void onLivingDamage(LivingDamageEvent event) {
-
+        WissenChargeArcaneEnchantment.onLivingDamage(event);
     }
 
     public static void hurtEnemy(ItemStack stack, LivingEntity target, LivingEntity attacker) {
         MagicBladeArcaneEnchantment.hurtEnemy(stack, target, attacker);
+    }
+
+    public static void onUseTick(Level level, LivingEntity livingEntity, ItemStack stack, int remainingUseDuration) {
+        WissenChargeArcaneEnchantment.onUseTick(level, livingEntity, stack, remainingUseDuration);
     }
 }

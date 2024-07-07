@@ -1,4 +1,4 @@
-package mod.maxbogomol.wizards_reborn.mixin.client;
+package mod.maxbogomol.wizards_reborn.mixin;
 
 import mod.maxbogomol.wizards_reborn.WizardsReborn;
 import mod.maxbogomol.wizards_reborn.client.config.ClientConfig;

@@ -24,6 +24,8 @@ public enum ArcaneEnchantmentType {
     BOOTS,
     WOODEN,
     ARCANE_COLD,
+    SARCON,
+    VILENIUM,
     ARCANE_WOOD,
     INNOCENT_WOOD,
     MAGIC_ARMOR,

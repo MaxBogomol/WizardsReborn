@@ -35,6 +35,7 @@ import mod.maxbogomol.wizards_reborn.client.render.item.WandCrystalsModels;
 import mod.maxbogomol.wizards_reborn.common.alchemypotion.RegisterAlchemyPotions;
 import mod.maxbogomol.wizards_reborn.common.arcaneenchantment.LifeRootsArcaneEnchantment;
 import mod.maxbogomol.wizards_reborn.common.arcaneenchantment.MagicBladeArcaneEnchantment;
+import mod.maxbogomol.wizards_reborn.common.arcaneenchantment.WissenChargeArcaneEnchantment;
 import mod.maxbogomol.wizards_reborn.common.arcaneenchantment.WissenMendingArcaneEnchantment;
 import mod.maxbogomol.wizards_reborn.common.block.*;
 import mod.maxbogomol.wizards_reborn.common.capability.IKnowledge;
@@ -636,6 +637,7 @@ public class WizardsReborn {
     public static ArcaneEnchantment WISSEN_MENDING_ARCANE_ENCHANTMENT = new WissenMendingArcaneEnchantment(MOD_ID+":wissen_mending", 3);
     public static ArcaneEnchantment MAGIC_BLADE_ARCANE_ENCHANTMENT = new MagicBladeArcaneEnchantment(MOD_ID+":magic_blade", 5);
     public static ArcaneEnchantment LIFE_ROOTS_ARCANE_ENCHANTMENT = new LifeRootsArcaneEnchantment(MOD_ID+":life_roots", 2);
+    public static ArcaneEnchantment WISSEN_CHARGE_ARCANE_ENCHANTMENT = new WissenChargeArcaneEnchantment(MOD_ID+":wissen_charge", 2);
 
     //CRYSTAL RITUALS
     public static CrystalRitual EMPTY_CRYSTAL_RITUAL = new CrystalRitual(MOD_ID+":empty");
@@ -2217,6 +2219,7 @@ public class WizardsReborn {
         ArcaneEnchantments.register(WISSEN_MENDING_ARCANE_ENCHANTMENT);
         ArcaneEnchantments.register(MAGIC_BLADE_ARCANE_ENCHANTMENT);
         ArcaneEnchantments.register(LIFE_ROOTS_ARCANE_ENCHANTMENT);
+        ArcaneEnchantments.register(WISSEN_CHARGE_ARCANE_ENCHANTMENT);
     }
 
     public static void setupCrystalRituals() {

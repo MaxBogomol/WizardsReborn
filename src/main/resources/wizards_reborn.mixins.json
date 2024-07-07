@@ -4,15 +4,17 @@
   "compatibilityLevel": "JAVA_17",
   "refmap": "wizards_reborn.refmap.json",
   "mixins": [
+    "ItemEntityMixin",
     "LivingEntityMixin",
     "PlayerMixin",
     "BlocksMixin",
     "CreeperMixin",
     "PhantomMixin",
-    "ItemStackMixin"
+    "ItemStackMixin",
+    "BowItemMixin",
+    "AbstractArrowMixin"
   ],
   "client": [
-    "client.ItemEntityMixin",
     "client.TitleScreenMixin",
     "client.LevelRendererMixin",
     "client.HumanoidModelMixin",

@@ -108,6 +108,7 @@ public final class PacketHandler {
         HANDLER.registerMessage(id++, IrritationSpellEffectPacket.class, IrritationSpellEffectPacket::encode, IrritationSpellEffectPacket::decode, IrritationSpellEffectPacket::handle);
 
         HANDLER.registerMessage(id++, MagicBladeEffectPacket.class, MagicBladeEffectPacket::encode, MagicBladeEffectPacket::decode, MagicBladeEffectPacket::handle);
+        HANDLER.registerMessage(id++, WissenChargeBurstEffectPacket.class, WissenChargeBurstEffectPacket::encode, WissenChargeBurstEffectPacket::decode, WissenChargeBurstEffectPacket::handle);
     }
 
     private static final PacketDistributor<Pair<Level, BlockPos>> TRACKING_CHUNK_AND_NEAR = new PacketDistributor<>(
