@@ -41,7 +41,7 @@ public class HolyChargeSpell extends ChargeSpell {
                 damage = damage * charge;
             }
 
-            if (livingEntity.getMobType() == MobType.UNDEAD) {
+            if (livingEntity.isInvertedHealAndHarm()) {
                 target.hurt(new DamageSource(DamageSourceRegistry.create(target.level(), DamageSourceRegistry.ARCANE_MAGIC).typeHolder(), projectile, player), damage);
             } else {
                 livingEntity.heal(damage);

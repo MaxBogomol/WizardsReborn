@@ -2,12 +2,12 @@ package mod.maxbogomol.wizards_reborn.mixin.client;
 
 import mod.maxbogomol.wizards_reborn.api.spell.Spell;
 import mod.maxbogomol.wizards_reborn.api.spell.Spells;
+import mod.maxbogomol.wizards_reborn.client.animation.ItemAnimation;
 import mod.maxbogomol.wizards_reborn.client.config.ClientConfig;
 import mod.maxbogomol.wizards_reborn.common.item.ICustomAnimationItem;
 import mod.maxbogomol.wizards_reborn.common.item.equipment.ArcaneWandItem;
 import net.minecraft.client.model.HumanoidModel;
 import net.minecraft.nbt.CompoundTag;
-import net.minecraft.world.InteractionHand;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
@@ -34,7 +34,7 @@ public abstract class HumanoidModelMixin<T extends LivingEntity>  {
                             if (nbt.getString("spell") != "") {
                                 Spell spell = Spells.getSpell(nbt.getString("spell"));
                                 if (spell.hasCustomAnimation(stack) && spell.getAnimation(stack) != null) {
-                                    if (player.getUsedItemHand() == InteractionHand.MAIN_HAND) {
+                                    if (ItemAnimation.isRightHand(player, player.getUsedItemHand())) {
                                         spell.getAnimation(stack).setupAnimRight(self, pEntity, pLimbSwing, pLimbSwingAmount, pAgeInTicks, pNetHeadYaw, pHeadPitch);
                                     } else {
                                         spell.getAnimation(stack).setupAnimLeft(self, pEntity, pLimbSwing, pLimbSwingAmount, pAgeInTicks, pNetHeadYaw, pHeadPitch);
@@ -49,7 +49,7 @@ public abstract class HumanoidModelMixin<T extends LivingEntity>  {
                     if (player.getItemInHand(player.getUsedItemHand()).getItem() instanceof ICustomAnimationItem item) {
                         ItemStack stack = player.getItemInHand(player.getUsedItemHand());
                         if (item.getAnimation(stack) != null) {
-                            if (player.getUsedItemHand() == InteractionHand.MAIN_HAND) {
+                            if (ItemAnimation.isRightHand(player, player.getUsedItemHand())) {
                                 item.getAnimation(stack).setupAnimRight(self, pEntity, pLimbSwing, pLimbSwingAmount, pAgeInTicks, pNetHeadYaw, pHeadPitch);
                             } else {
                                 item.getAnimation(stack).setupAnimLeft(self, pEntity, pLimbSwing, pLimbSwingAmount, pAgeInTicks, pNetHeadYaw, pHeadPitch);

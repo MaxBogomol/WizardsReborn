@@ -74,7 +74,7 @@ public class ScytheThrowItemAnimation extends ItemAnimation {
     @Override
     @OnlyIn(Dist.CLIENT)
     public void renderArmWithItem(AbstractClientPlayer player, float partialTicks, float pitch, InteractionHand hand, float swingProgress, ItemStack stack, float equippedProgress, PoseStack poseStack, MultiBufferSource buffer, int combinedLight) {
-        boolean flag = hand == InteractionHand.MAIN_HAND;
+        boolean flag = isRightHand(player, hand);
         int i = flag ? 1 : -1;
         poseStack.translate((float)i * 0.56F, -0.52F + (equippedProgress * -0.6f), -0.72F);
 

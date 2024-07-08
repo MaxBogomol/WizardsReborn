@@ -48,7 +48,7 @@ public class HolyRaySpell extends RaySpell {
                             float magicModifier = ArcaneArmorItem.getPlayerMagicModifier(player);
                             float damage = (float) (1.0f + (focusLevel * 0.5)) + magicModifier;
                             boolean effect = false;
-                            if (livingEntity.getMobType() == MobType.UNDEAD) {
+                            if (livingEntity.isInvertedHealAndHarm()) {
                                 target.hurt(new DamageSource(DamageSourceRegistry.create(target.level(), DamageSourceRegistry.ARCANE_MAGIC).typeHolder(), projectile, player), damage);
                                 removeWissen(stack, projectile.getStats(), player);
                                 effect = true;
@@ -98,7 +98,7 @@ public class HolyRaySpell extends RaySpell {
                 if (WissenItemUtils.canRemoveWissen(stack, getWissenCostWithStat(projectile.getStats(), player))) {
                     if (entity instanceof LivingEntity livingEntity) {
                         boolean effect = false;
-                        if (livingEntity.getMobType() == MobType.UNDEAD) {
+                        if (livingEntity.isInvertedHealAndHarm()) {
                             entity.hurt(new DamageSource(entity.damageSources().magic().typeHolder(), projectile, player), 1);
                             removeWissen(stack, projectile.getStats(), player);
                             effect = true;

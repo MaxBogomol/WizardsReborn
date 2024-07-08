@@ -27,7 +27,7 @@ public class CreativeWissenKeychainItem extends WissenKeychainItem {
 
     @Override
     public int getWissenTransfer() {
-        return Integer.MAX_VALUE;
+        return 1000000;
     }
 
     @Override

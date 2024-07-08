@@ -35,7 +35,7 @@ public class HolyProjectileSpell extends ProjectileSpell {
             int focusLevel = CrystalUtils.getStatLevel(projectile.getStats(), WizardsReborn.FOCUS_CRYSTAL_STAT);
             float magicModifier = ArcaneArmorItem.getPlayerMagicModifier(player);
             float damage = (float) (1.5f + (focusLevel * 0.5)) + magicModifier;
-            if (livingEntity.getMobType() == MobType.UNDEAD) {
+            if (livingEntity.isInvertedHealAndHarm()) {
                 target.hurt(new DamageSource(DamageSourceRegistry.create(target.level(), DamageSourceRegistry.ARCANE_MAGIC).typeHolder(), projectile, player), damage);
             } else {
                 livingEntity.heal(damage);

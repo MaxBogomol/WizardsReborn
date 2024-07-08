@@ -40,11 +40,11 @@ public class SmokingPipeItemAnimation extends ItemAnimation {
     @Override
     @OnlyIn(Dist.CLIENT)
     public void renderArmWithItem(AbstractClientPlayer player, float partialTicks, float pitch, InteractionHand hand, float swingProgress, ItemStack stack, float equippedProgress, PoseStack poseStack, MultiBufferSource buffer, int combinedLight) {
-        boolean flag = hand == InteractionHand.MAIN_HAND;
+        boolean flag = isRightHand(player, hand);
         int i = flag ? 1 : -1;
         poseStack.translate((float)i * 0.56F, -0.52F + (equippedProgress * -0.6f), -0.72F);
 
-        poseStack.translate(0, 0.8f, 0);
+        poseStack.translate(0, 0.2f, 0);
         poseStack.translate(-0.3 * i, -0.125F + (-1 / 16.0F), 0);
 
         poseStack.mulPose(Axis.ZP.rotationDegrees(25 * i));

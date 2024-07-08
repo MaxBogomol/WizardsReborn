@@ -49,6 +49,7 @@ public class ThrowedScytheEntity extends ThrowableItemProjectile {
     public static final EntityDataAccessor<Float> endPointXId = SynchedEntityData.defineId(ThrowedScytheEntity.class, EntityDataSerializers.FLOAT);
     public static final EntityDataAccessor<Float> endPointYId = SynchedEntityData.defineId(ThrowedScytheEntity.class, EntityDataSerializers.FLOAT);
     public static final EntityDataAccessor<Float> endPointZId = SynchedEntityData.defineId(ThrowedScytheEntity.class, EntityDataSerializers.FLOAT);
+    public static final EntityDataAccessor<Boolean> isRightId = SynchedEntityData.defineId(ThrowedScytheEntity.class, EntityDataSerializers.BOOLEAN);
 
     public List<Vec3> trail = new ArrayList<>();
     public Map<UUID, Integer> damagedEntities = new HashMap<>();
@@ -68,12 +69,13 @@ public class ThrowedScytheEntity extends ThrowableItemProjectile {
         noPhysics = false;
     }
 
-    public void setData(Entity owner, float baseDamage, float magicDamage, int slot) {
+    public void setData(Entity owner, float baseDamage, float magicDamage, int slot, boolean isRight) {
         setOwner(owner);
         getEntityData().set(ownerId, Optional.of(owner.getUUID()));
         setBaseDamage(baseDamage);
         setMagicDamage(magicDamage);
         setSlot(slot);
+        setIsRight(isRight);
     }
 
     @Override
@@ -143,7 +145,8 @@ public class ThrowedScytheEntity extends ThrowableItemProjectile {
                     trail.remove(0);
                 }
 
-                float yaw = (float) -tickCount * 0.8f + 0.3f + (float) Math.toRadians(-getYRot());
+                int right = getIsRight() ? 1 : -1;
+                float yaw = (float) -tickCount * right * 0.8f + (getIsRight() ? 0.3f : -0.3f) + (float) Math.toRadians(-getYRot()) + (getIsRight() ? 0 : (float) Math.PI);
                 float pitch = (float) (Math.PI / 2f);
 
                 float x = (float) Math.sin(pitch) * (float) Math.cos(yaw);
@@ -290,7 +293,8 @@ public class ThrowedScytheEntity extends ThrowableItemProjectile {
                     double lerpY = Mth.lerp(i / 30.0f, getY(), getSender().getY() + getSender().getBbHeight() / 2f);
                     double lerpZ = Mth.lerp(i / 30.0f, getZ(), getSender().getZ());
 
-                    float yaw = (float) -tickCount - (i * 10) * 0.8f + 0.3f + (float) Math.toRadians(-getYRot());
+                    int right = getIsRight() ? 1 : -1;
+                    float yaw = (float) -tickCount - (i * 10) * right * 0.8f + (getIsRight() ? 0.3f : -0.3f) + (float) Math.toRadians(-getYRot()) + (getIsRight() ? 0 : (float) Math.PI);
                     float pitch = (float) (Math.PI / 2f);
 
                     float x = (float) Math.sin(pitch) * (float) Math.cos(yaw);
@@ -370,6 +374,7 @@ public class ThrowedScytheEntity extends ThrowableItemProjectile {
         getEntityData().define(endPointXId, 0f);
         getEntityData().define(endPointYId, 0f);
         getEntityData().define(endPointZId, 0f);
+        getEntityData().define(isRightId, true);
     }
 
     @Override
@@ -389,6 +394,7 @@ public class ThrowedScytheEntity extends ThrowableItemProjectile {
         getEntityData().set(endPointXId, compound.getFloat("endPointX"));
         getEntityData().set(endPointYId, compound.getFloat("endPointY"));
         getEntityData().set(endPointZId, compound.getFloat("endPointZ"));
+        getEntityData().set(isRightId, compound.getBoolean("isRight"));
 
         damagedEntities.clear();
         ListTag tagList = compound.getList("damagedEntities", Tag.TAG_COMPOUND);
@@ -417,6 +423,7 @@ public class ThrowedScytheEntity extends ThrowableItemProjectile {
         compound.putFloat("endPointX", getEntityData().get(endPointXId));
         compound.putFloat("endPointY", getEntityData().get(endPointYId));
         compound.putFloat("endPointZ", getEntityData().get(endPointZId));
+        compound.putBoolean("isRight", getEntityData().get(isRightId));
 
         ListTag nbtTagList = new ListTag();
         for (UUID uuid : damagedEntities.keySet()) {
@@ -522,5 +529,13 @@ public class ThrowedScytheEntity extends ThrowableItemProjectile {
 
     public Vec3 getEndPoint() {
         return new Vec3(getEntityData().get(endPointXId), getEntityData().get(endPointYId), getEntityData().get(endPointZId));
+    }
+
+    public void setIsRight(boolean isRight) {
+        getEntityData().set(isRightId, isRight);
+    }
+
+    public boolean getIsRight() {
+        return getEntityData().get(isRightId);
     }
 }

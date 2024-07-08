@@ -41,7 +41,7 @@ public class HolyAuraSpell extends AuraSpell {
                 if (target instanceof LivingEntity livingEntity) {
                     boolean effect = false;
                     boolean effectHurt = false;
-                    if (livingEntity.getMobType() == MobType.UNDEAD) {
+                    if (livingEntity.isInvertedHealAndHarm()) {
                         livingEntity.lastHurtByPlayerTime = livingEntity.tickCount;
                         target.hurt(DamageSourceRegistry.create(target.level(), DamageSourceRegistry.ARCANE_MAGIC), damage);
                         effectHurt = true;

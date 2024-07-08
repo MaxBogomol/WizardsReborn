@@ -35,7 +35,7 @@ public class RepentanceSpell extends StrikeSpell {
 
         for (Entity target : getTargets(entity, distance)) {
             if (target instanceof LivingEntity livingEntity) {
-                if (livingEntity.getMobType() == MobType.UNDEAD) {
+                if (livingEntity.isInvertedHealAndHarm()) {
                     target.hurt(new DamageSource(DamageSourceRegistry.create(target.level(), DamageSourceRegistry.ARCANE_MAGIC).typeHolder(), entity, player), damage);
                 } else {
                     livingEntity.heal(heal);

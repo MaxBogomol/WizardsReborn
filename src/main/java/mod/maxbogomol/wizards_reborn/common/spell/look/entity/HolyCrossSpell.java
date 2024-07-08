@@ -59,7 +59,7 @@ public class HolyCrossSpell extends EntityLookSpell {
         if (hit.hasEntities()) {
             for (Entity entity : hit.getEntities()) {
                 if (entity instanceof LivingEntity livingEntity) {
-                    if (livingEntity.getMobType() == MobType.UNDEAD) {
+                    if (livingEntity.isInvertedHealAndHarm()) {
                         entity.hurt(new DamageSource(DamageSourceRegistry.create(entity.level(), DamageSourceRegistry.ARCANE_MAGIC).typeHolder(), player), damage);
                     } else {
                         if (livingEntity.getHealth() != livingEntity.getMaxHealth()) {

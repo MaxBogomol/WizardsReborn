@@ -80,11 +80,12 @@ public class ThrowedScytheRenderer<T extends ThrowedScytheEntity> extends Entity
 
         if (!entity.getFade()) {
             float tick = (entity.tickCount + partialTicks);
+            int right = entity.getIsRight() ? 1 : -1;
 
             stack.pushPose();
             stack.translate(0f, 0.1f, 0f);
             stack.mulPose(Axis.YP.rotationDegrees(Mth.lerp(partialTicks, entity.yRotO, entity.getYRot()) - 90.0F));
-            stack.mulPose(Axis.XP.rotationDegrees(-90f));
+            stack.mulPose(Axis.XP.rotationDegrees(-90f * right));
             stack.mulPose(Axis.ZP.rotation(tick * 0.8f));
             stack.scale(2, 2f, 1f);
             stack.translate(0.25f, 0.25f, 0f);
