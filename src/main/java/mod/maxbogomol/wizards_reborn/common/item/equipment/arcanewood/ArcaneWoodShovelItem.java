@@ -74,6 +74,6 @@ public class ArcaneWoodShovelItem  extends ArcaneShovelItem {
             }
         }
 
-        return InteractionResultHolder.pass(stack);
+        return super.use(world, player, hand);
     }
 }

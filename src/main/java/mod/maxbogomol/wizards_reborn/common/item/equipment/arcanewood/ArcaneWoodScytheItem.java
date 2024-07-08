@@ -74,6 +74,6 @@ public class ArcaneWoodScytheItem  extends ArcaneScytheItem {
             }
         }
 
-        return InteractionResultHolder.pass(stack);
+        return super.use(world, player, hand);
     }
 }

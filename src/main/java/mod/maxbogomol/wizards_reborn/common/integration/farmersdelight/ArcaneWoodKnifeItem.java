@@ -72,6 +72,6 @@ public class ArcaneWoodKnifeItem extends ArcaneKnifeItem {
             }
         }
 
-        return InteractionResultHolder.pass(stack);
+        return super.use(world, player, hand);
     }
 }

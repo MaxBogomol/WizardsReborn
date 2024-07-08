@@ -33,10 +33,7 @@ import mod.maxbogomol.wizards_reborn.client.render.WorldRenderHandler;
 import mod.maxbogomol.wizards_reborn.client.render.curio.*;
 import mod.maxbogomol.wizards_reborn.client.render.item.WandCrystalsModels;
 import mod.maxbogomol.wizards_reborn.common.alchemypotion.RegisterAlchemyPotions;
-import mod.maxbogomol.wizards_reborn.common.arcaneenchantment.LifeRootsArcaneEnchantment;
-import mod.maxbogomol.wizards_reborn.common.arcaneenchantment.MagicBladeArcaneEnchantment;
-import mod.maxbogomol.wizards_reborn.common.arcaneenchantment.WissenChargeArcaneEnchantment;
-import mod.maxbogomol.wizards_reborn.common.arcaneenchantment.WissenMendingArcaneEnchantment;
+import mod.maxbogomol.wizards_reborn.common.arcaneenchantment.*;
 import mod.maxbogomol.wizards_reborn.common.block.*;
 import mod.maxbogomol.wizards_reborn.common.capability.IKnowledge;
 import mod.maxbogomol.wizards_reborn.common.command.ArcaneEnchantmentArgument;
@@ -52,10 +49,7 @@ import mod.maxbogomol.wizards_reborn.common.crystalritual.RitualBreedingCrystalR
 import mod.maxbogomol.wizards_reborn.common.effect.IrritationEffect;
 import mod.maxbogomol.wizards_reborn.common.effect.MorSporesEffect;
 import mod.maxbogomol.wizards_reborn.common.effect.WissenAuraEffect;
-import mod.maxbogomol.wizards_reborn.common.entity.CustomBoatEntity;
-import mod.maxbogomol.wizards_reborn.common.entity.CustomChestBoatEntity;
-import mod.maxbogomol.wizards_reborn.common.entity.SniffaloEntity;
-import mod.maxbogomol.wizards_reborn.common.entity.SpellProjectileEntity;
+import mod.maxbogomol.wizards_reborn.common.entity.*;
 import mod.maxbogomol.wizards_reborn.common.event.Events;
 import mod.maxbogomol.wizards_reborn.common.fluid.CustomFluidType;
 import mod.maxbogomol.wizards_reborn.common.integration.create.CreateIntegration;
@@ -638,6 +632,7 @@ public class WizardsReborn {
     public static ArcaneEnchantment MAGIC_BLADE_ARCANE_ENCHANTMENT = new MagicBladeArcaneEnchantment(MOD_ID+":magic_blade", 5);
     public static ArcaneEnchantment LIFE_ROOTS_ARCANE_ENCHANTMENT = new LifeRootsArcaneEnchantment(MOD_ID+":life_roots", 2);
     public static ArcaneEnchantment WISSEN_CHARGE_ARCANE_ENCHANTMENT = new WissenChargeArcaneEnchantment(MOD_ID+":wissen_charge", 2);
+    public static ArcaneEnchantment THROW_ARCANE_ENCHANTMENT = new ThrowArcaneEnchantment(MOD_ID+":throw", 1);
 
     //CRYSTAL RITUALS
     public static CrystalRitual EMPTY_CRYSTAL_RITUAL = new CrystalRitual(MOD_ID+":empty");
@@ -1568,6 +1563,7 @@ public class WizardsReborn {
     public static final RegistryObject<EntityType<CustomBoatEntity>> BOAT = ENTITIES.register("boat", () -> EntityType.Builder.<CustomBoatEntity>of(CustomBoatEntity::new, MobCategory.MISC).sized(1.375f, 0.5625f).build(new ResourceLocation(MOD_ID, "boat").toString()));
     public static final RegistryObject<EntityType<CustomChestBoatEntity>> CHEST_BOAT = ENTITIES.register("chest_boat", () -> EntityType.Builder.<CustomChestBoatEntity>of(CustomChestBoatEntity::new, MobCategory.MISC).sized(1.375f, 0.5625f).build(new ResourceLocation(MOD_ID, "chest_boat").toString()));
     public static final RegistryObject<EntityType<SpellProjectileEntity>> SPELL_PROJECTILE = ENTITIES.register("spell_projectile", () -> EntityType.Builder.<SpellProjectileEntity>of(SpellProjectileEntity::new, MobCategory.MISC).sized(0.4f, 0.4f).build(new ResourceLocation(MOD_ID, "spell_projectile").toString()));
+    public static final RegistryObject<EntityType<ThrowedScytheEntity>> THROWED_SCYTHE_PROJECTILE = ENTITIES.register("throwed_scythe", () -> EntityType.Builder.<ThrowedScytheEntity>of(ThrowedScytheEntity::new, MobCategory.MISC).sized(1.75f, 0.2f).build(new ResourceLocation(MOD_ID, "throwed_scythe").toString()));
     public static final RegistryObject<EntityType<SniffaloEntity>> SNIFFALO = ENTITIES.register("sniffalo", () -> EntityType.Builder.<SniffaloEntity>of(SniffaloEntity::new, MobCategory.CREATURE).sized(1.9F, 1.75F).clientTrackingRange(10).build(new ResourceLocation(MOD_ID, "sniffalo").toString()));
 
     public static final RegistryObject<ForgeSpawnEggItem> SNIFFALO_SPAWN_EGG = ITEMS.register("sniffalo_spawn_egg", () -> new ForgeSpawnEggItem(SNIFFALO, ColorUtils.packColor(255, 96, 58, 62), ColorUtils.packColor(255, 181, 139, 117), new Item.Properties()));
@@ -2220,6 +2216,7 @@ public class WizardsReborn {
         ArcaneEnchantments.register(MAGIC_BLADE_ARCANE_ENCHANTMENT);
         ArcaneEnchantments.register(LIFE_ROOTS_ARCANE_ENCHANTMENT);
         ArcaneEnchantments.register(WISSEN_CHARGE_ARCANE_ENCHANTMENT);
+        ArcaneEnchantments.register(THROW_ARCANE_ENCHANTMENT);
     }
 
     public static void setupCrystalRituals() {

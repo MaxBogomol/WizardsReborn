@@ -706,7 +706,6 @@ public class RenderUtils {
         }
     }
 
-
     public static void auraPiece(PoseStack mStack, VertexConsumer builder, float radius, float size, float angle, float r, float g, float b, float alpha) {
         mStack.pushPose();
         mStack.mulPose(Axis.YP.rotationDegrees((float) Math.toDegrees(angle)));
@@ -714,5 +713,31 @@ public class RenderUtils {
         Matrix4f mat = mStack.last().pose();
         builder.vertex(mat, 0, size, 0).color(r, g, b, alpha).endVertex();
         mStack.popPose();
+    }
+
+    public static void scytheTrail(PoseStack mStack, MultiBufferSource buf, float width, float height, float endOffset, float r1, float g1, float b1, float a1, float r2, float g2, float b2, float a2) {
+        VertexConsumer builder = buf.getBuffer(GLOWING);
+
+        Matrix4f mat = mStack.last().pose();
+
+        builder.vertex(mat, 0, 0, width * endOffset).color(r1, g1, b1, a1).endVertex();
+        builder.vertex(mat, height, 0, width).color(r2, g2, b2, 0).endVertex();
+        builder.vertex(mat, height, 0, 0).color(r2, g2, b2, a2 / 10f).endVertex();
+        builder.vertex(mat, 0, 0, 0).color(r1, g1, b1, a1).endVertex();
+
+        builder.vertex(mat, 0, 0, 0).color(r1, g1, b1, a1).endVertex();
+        builder.vertex(mat, height, 0, 0).color(r2, g2, b2, a2 / 10f).endVertex();
+        builder.vertex(mat, height, 0, -width).color(r2, g2, b2, 0).endVertex();
+        builder.vertex(mat, 0, 0, -width * endOffset).color(r1, g1, b1, a1).endVertex();
+
+        builder.vertex(mat, 0, 0, 0).color(r1, g1, b1, a1).endVertex();
+        builder.vertex(mat, height, 0, 0).color(r2, g2, b2, a2 / 10f).endVertex();
+        builder.vertex(mat, height, 0, width).color(r2, g2, b2, 0).endVertex();
+        builder.vertex(mat, 0, 0, width  * endOffset).color(r1, g1, b1, a1).endVertex();
+
+        builder.vertex(mat, 0, 0, -width * endOffset).color(r1, g1, b1, a1).endVertex();
+        builder.vertex(mat, height, 0, -width).color(r2, g2, b2, 0).endVertex();
+        builder.vertex(mat, height, 0, 0).color(r2, g2, b2, a2 / 10f).endVertex();
+        builder.vertex(mat, 0, 0, 0).color(r1, g1, b1, a1).endVertex();
     }
 }

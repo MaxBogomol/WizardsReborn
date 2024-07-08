@@ -2,6 +2,7 @@ package mod.maxbogomol.wizards_reborn.api.arcaneenchantment;
 
 import com.google.common.collect.Maps;
 import mod.maxbogomol.wizards_reborn.common.arcaneenchantment.MagicBladeArcaneEnchantment;
+import mod.maxbogomol.wizards_reborn.common.arcaneenchantment.ThrowArcaneEnchantment;
 import mod.maxbogomol.wizards_reborn.common.arcaneenchantment.WissenChargeArcaneEnchantment;
 import mod.maxbogomol.wizards_reborn.common.arcaneenchantment.WissenMendingArcaneEnchantment;
 import mod.maxbogomol.wizards_reborn.utils.ColorUtils;
@@ -203,5 +204,6 @@ public class ArcaneEnchantmentUtils {
 
     public static void onUseTick(Level level, LivingEntity livingEntity, ItemStack stack, int remainingUseDuration) {
         WissenChargeArcaneEnchantment.onUseTick(level, livingEntity, stack, remainingUseDuration);
+        ThrowArcaneEnchantment.onUseTick(level, livingEntity, stack, remainingUseDuration);
     }
 }

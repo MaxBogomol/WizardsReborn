@@ -74,6 +74,6 @@ public class ArcaneWoodAxeItem  extends ArcaneAxeItem {
             }
         }
 
-        return InteractionResultHolder.pass(stack);
+        return super.use(world, player, hand);
     }
 }

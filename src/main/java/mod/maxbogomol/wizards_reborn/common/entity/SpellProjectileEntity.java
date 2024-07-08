@@ -112,8 +112,10 @@ public class SpellProjectileEntity extends Entity {
 
     @Override
     protected void readAdditionalSaveData(CompoundTag compound) {
-        getEntityData().set(casterId, Optional.of(compound.getUUID("caster")));
-        getEntityData().set(spellId, compound.getString("spelll"));
+        if (compound.contains("caster")) {
+            getEntityData().set(casterId, Optional.of(compound.getUUID("caster")));
+        }
+        getEntityData().set(spellId, compound.getString("spell"));
         getEntityData().set(crystalStats, compound.getCompound("stats"));
         getEntityData().set(spellData, compound.getCompound("spell_data"));
         getEntityData().set(fadeId, compound.getBoolean("fade"));
@@ -122,8 +124,10 @@ public class SpellProjectileEntity extends Entity {
 
     @Override
     protected void addAdditionalSaveData(CompoundTag compound) {
-        compound.putUUID("caster", getEntityData().get(casterId).get());
-        compound.putString("spelll", getEntityData().get(spellId));
+        if (getEntityData().get(casterId).isPresent()) {
+            compound.putUUID("caster", getEntityData().get(casterId).get());
+        }
+        compound.putString("spell", getEntityData().get(spellId));
         compound.put("stats", getEntityData().get(crystalStats));
         compound.put("spell_data", getEntityData().get(spellData));
         compound.putBoolean("fade", getEntityData().get(fadeId));
@@ -202,7 +206,11 @@ public class SpellProjectileEntity extends Entity {
     }
 
     public Player getSender() {
-        return level().getPlayerByUUID(getEntityData().get(casterId).get());
+        return (getEntityData().get(casterId).isPresent()) ? level().getPlayerByUUID(getEntityData().get(casterId).get()) : null;
+    }
+
+    public UUID getSenderUUID() {
+        return (getEntityData().get(casterId).isPresent()) ? getEntityData().get(casterId).get() : null;
     }
 
     public boolean getFade() {

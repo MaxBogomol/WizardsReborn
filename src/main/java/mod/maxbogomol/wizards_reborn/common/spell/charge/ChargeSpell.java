@@ -158,7 +158,7 @@ public class ChargeSpell extends Spell {
                 CompoundTag spellData = entity.getSpellData();
                 if (spellData.getBoolean("throw")) {
                     HitResult ray = ProjectileUtil.getHitResultOnMoveVector(entity, (e) -> {
-                        return !e.isSpectator() && e.isPickable() && (!e.getUUID().equals(entity.getEntityData().get(entity.casterId).get()) || (spellData.getInt("ticks") > 5));
+                        return !e.isSpectator() && e.isPickable() && (!e.getUUID().equals(entity.getSenderUUID()) || (spellData.getInt("ticks") > 5));
                     });
                     if (ray.getType() == HitResult.Type.ENTITY) {
                         entity.onImpact(ray, ((EntityHitResult) ray).getEntity());
@@ -360,14 +360,12 @@ public class ChargeSpell extends Spell {
 
         List<Vec3> trailList = new ArrayList<>(entity.trail);
         if (trailList.size() > 1 && spellData.getInt("ticks") >= 20) {
-            for (int i = 0; i < trailList.size() - 2; i++) {
-                Vec3 position = trailList.get(i);
-                Vec3 nextPosition = trailList.get(i + 1);
-                float x = (float) Mth.lerp(partialTicks, position.x, nextPosition.x);
-                float y = (float) Mth.lerp(partialTicks, position.y, nextPosition.y);
-                float z = (float) Mth.lerp(partialTicks, position.z, nextPosition.z);
-                trailList.set(i, new Vec3(x, y, z));
-            }
+            Vec3 position = trailList.get(0);
+            Vec3 nextPosition = trailList.get(1);
+            float x = (float) Mth.lerp(partialTicks, position.x, nextPosition.x);
+            float y = (float) Mth.lerp(partialTicks, position.y, nextPosition.y);
+            float z = (float) Mth.lerp(partialTicks, position.z, nextPosition.z);
+            trailList.set(0, new Vec3(x, y, z));
         }
 
         float x = (float) Mth.lerp(partialTicks, entity.xOld, entity.getX());

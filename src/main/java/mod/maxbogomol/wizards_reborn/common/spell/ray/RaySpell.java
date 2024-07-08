@@ -151,7 +151,7 @@ public class RaySpell extends Spell {
             boolean burst = false;
             CompoundTag spellData = entity.getSpellData();
             HitResult ray = getHitResult(entity, entity.position().add(0, 0.3F, 0), entity.getLookAngle().scale(getRayDistance()), entity.level(), (e) -> {
-                return !e.isSpectator() && e.isPickable() && !e.getUUID().equals(entity.getEntityData().get(entity.casterId).get());
+                return !e.isSpectator() && e.isPickable() && !e.getUUID().equals(entity.getSenderUUID());
             });
             if (spellData.getInt("tick_left") <= 0) {
                 if (ray.getType() == HitResult.Type.ENTITY) {
@@ -282,7 +282,7 @@ public class RaySpell extends Spell {
     @OnlyIn(Dist.CLIENT)
     public void render(SpellProjectileEntity entity, float entityYaw, float partialTicks, PoseStack stack, MultiBufferSource buffer, int light) {
         HitResult ray = getHitResult(entity, entity.position().add(0, 0.3F, 0), entity.getLookAngle().scale(getRayDistance()), entity.level(), (e) -> {
-            return !e.isSpectator() && e.isPickable() && !e.getUUID().equals(entity.getEntityData().get(entity.casterId).get());
+            return !e.isSpectator() && e.isPickable() && !e.getUUID().equals(entity.getSenderUUID());
         });
 
         Color color = getColor();

@@ -13,7 +13,9 @@ import mod.maxbogomol.wizards_reborn.common.network.PacketHandler;
 import mod.maxbogomol.wizards_reborn.common.network.WissenChargeBurstEffectPacket;
 import mod.maxbogomol.wizards_reborn.common.network.spell.ChargeSpellProjectileRayEffectPacket;
 import net.minecraft.core.BlockPos;
+import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.damagesource.DamageSource;
+import net.minecraft.world.damagesource.DamageTypes;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
@@ -130,15 +132,18 @@ public class WissenChargeArcaneEnchantment extends ArcaneEnchantment {
     }
 
     public static void onLivingDamage(LivingDamageEvent event) {
-        AbstractArrow arrow = null;
-        if (event.getSource().getDirectEntity() instanceof AbstractArrow arrow1) {
-            arrow = arrow1;
+        if (event.getSource().is(DamageTypes.ARROW)) {
+            AbstractArrow arrow = null;
+            if (event.getSource().getDirectEntity() instanceof AbstractArrow arrow1) {
+                arrow = arrow1;
+            }
+            if (event.getSource().getEntity() instanceof AbstractArrow arrow1) {
+                arrow = arrow1;
+            }
+            LivingEntity target = event.getEntity();
+            if (arrow != null)
+                onHit(new Vec3(target.getX(), target.getY() + (target.getBbHeight() / 2), target.getZ()), arrow);
         }
-        if (event.getSource().getEntity() instanceof AbstractArrow arrow1) {
-            arrow = arrow1;
-        }
-        LivingEntity target = event.getEntity();
-        if (arrow != null) onHit(new Vec3(target.getX(), target.getY() + (target.getBbHeight() / 2), target.getZ()), arrow);
     }
 
     public static void onHitBlock(BlockHitResult result, AbstractArrow arrow) {
@@ -156,6 +161,7 @@ public class WissenChargeArcaneEnchantment extends ArcaneEnchantment {
                 float charge = getCharge(arrow) / 100f;
 
                 PacketHandler.sendToTracking(arrow.level(), new BlockPos((int) pos.x, (int) pos.y, (int) pos.z), new WissenChargeBurstEffectPacket((float) pos.x, (float) pos.y, (float) pos.z, r, g, b, charge));
+                arrow.level().playSound(WizardsReborn.proxy.getPlayer(), pos.x, pos.y, pos.z, WizardsReborn.SPELL_BURST_SOUND.get(), SoundSource.PLAYERS, 1f, (float) (1f + ((random.nextFloat() - 0.5D) / 4)));
 
                 float additionalDamage = 0;
                 if (arrow.getOwner() instanceof Player player) {
@@ -167,7 +173,7 @@ public class WissenChargeArcaneEnchantment extends ArcaneEnchantment {
                 List<LivingEntity> entityList = arrow.level().getEntitiesOfClass(LivingEntity.class, new AABB(pos.x() - distance, pos.y() - distance, pos.z() - distance, pos.x() + distance, pos.y() + distance, pos.z() + distance));
                 for (LivingEntity target : entityList) {
                     target.invulnerableTime = 0;
-                    target.hurt(new DamageSource(DamageSourceRegistry.create(target.level(), DamageSourceRegistry.ARCANE_MAGIC).typeHolder(), arrow, arrow.getOwner()), damage + additionalDamage);
+                    target.hurt(new DamageSource(DamageSourceRegistry.create(target.level(), DamageSourceRegistry.ARCANE_MAGIC).typeHolder(), arrow.getOwner(), arrow), damage + additionalDamage);
                 }
 
                 setCharge(arrow,0);

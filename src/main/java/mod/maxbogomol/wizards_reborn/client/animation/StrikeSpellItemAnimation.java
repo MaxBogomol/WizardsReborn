@@ -59,7 +59,7 @@ public class StrikeSpellItemAnimation extends ItemAnimation {
 
         float ticks = (player.getTicksUsingItem() + partialTicks) * 20;
 
-        poseStack.translate((float)i * 0.56F, -0.52F + 1 * -0.6F, -0.72F);
+        poseStack.translate((float)i * 0.56F, -0.52F + (equippedProgress * -0.6f), -0.72F);
 
         poseStack.translate(0, 0.8f, 0);
         poseStack.translate(-0.1 * i, -0.125F + (-1 / 16.0F), 0);

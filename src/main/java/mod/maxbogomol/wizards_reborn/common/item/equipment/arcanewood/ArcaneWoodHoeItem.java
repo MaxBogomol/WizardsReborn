@@ -74,6 +74,6 @@ public class ArcaneWoodHoeItem  extends ArcaneHoeItem {
             }
         }
 
-        return InteractionResultHolder.pass(stack);
+        return super.use(world, player, hand);
     }
 }

@@ -1,0 +1,455 @@
+package mod.maxbogomol.wizards_reborn.common.entity;
+
+import mod.maxbogomol.wizards_reborn.WizardsReborn;
+import mod.maxbogomol.wizards_reborn.client.particle.Particles;
+import mod.maxbogomol.wizards_reborn.common.damage.DamageSourceRegistry;
+import mod.maxbogomol.wizards_reborn.common.network.AddScreenshakePacket;
+import mod.maxbogomol.wizards_reborn.common.network.PacketHandler;
+import net.minecraft.nbt.CompoundTag;
+import net.minecraft.network.protocol.Packet;
+import net.minecraft.network.protocol.game.ClientGamePacketListener;
+import net.minecraft.network.syncher.EntityDataAccessor;
+import net.minecraft.network.syncher.EntityDataSerializers;
+import net.minecraft.network.syncher.SynchedEntityData;
+import net.minecraft.sounds.SoundEvents;
+import net.minecraft.sounds.SoundSource;
+import net.minecraft.util.Mth;
+import net.minecraft.world.damagesource.DamageSource;
+import net.minecraft.world.entity.*;
+import net.minecraft.world.entity.item.ItemEntity;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.entity.projectile.ProjectileUtil;
+import net.minecraft.world.entity.projectile.ThrowableItemProjectile;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.enchantment.EnchantmentHelper;
+import net.minecraft.world.item.enchantment.Enchantments;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.phys.AABB;
+import net.minecraft.world.phys.EntityHitResult;
+import net.minecraft.world.phys.HitResult;
+import net.minecraft.world.phys.Vec3;
+import net.minecraftforge.network.NetworkHooks;
+
+import java.awt.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Optional;
+import java.util.UUID;
+
+public class ThrowedScytheEntity extends ThrowableItemProjectile {
+    public static final EntityDataAccessor<Optional<UUID>> ownerId = SynchedEntityData.defineId(ThrowedScytheEntity.class, EntityDataSerializers.OPTIONAL_UUID);
+    public static final EntityDataAccessor<Integer> endTickId = SynchedEntityData.defineId(ThrowedScytheEntity.class, EntityDataSerializers.INT);
+    public static final EntityDataAccessor<Boolean> blockId = SynchedEntityData.defineId(ThrowedScytheEntity.class, EntityDataSerializers.BOOLEAN);
+    public static final EntityDataAccessor<Integer> blockTickId = SynchedEntityData.defineId(ThrowedScytheEntity.class, EntityDataSerializers.INT);
+    public static final EntityDataAccessor<Boolean> fadeId = SynchedEntityData.defineId(ThrowedScytheEntity.class, EntityDataSerializers.BOOLEAN);
+    public static final EntityDataAccessor<Integer> fadeTickId = SynchedEntityData.defineId(ThrowedScytheEntity.class, EntityDataSerializers.INT);
+    public static final EntityDataAccessor<Float> baseDamageId = SynchedEntityData.defineId(ThrowedScytheEntity.class, EntityDataSerializers.FLOAT);
+    public static final EntityDataAccessor<Float> magicDamageId = SynchedEntityData.defineId(ThrowedScytheEntity.class, EntityDataSerializers.FLOAT);
+    public static final EntityDataAccessor<Integer> slotId = SynchedEntityData.defineId(ThrowedScytheEntity.class, EntityDataSerializers.INT);
+
+    public List<Vec3> trail = new ArrayList<>();
+    public Vec3 endPoint = Vec3.ZERO;
+
+    public ThrowedScytheEntity(EntityType<?> entityTypeIn, Level worldIn) {
+        super(WizardsReborn.THROWED_SCYTHE_PROJECTILE.get(), worldIn);
+        noPhysics = false;
+    }
+
+    public ThrowedScytheEntity(Level level) {
+        super(WizardsReborn.THROWED_SCYTHE_PROJECTILE.get(), level);
+        noPhysics = false;
+    }
+
+    public ThrowedScytheEntity(Level level, double pX, double pY, double pZ) {
+        super(WizardsReborn.THROWED_SCYTHE_PROJECTILE.get(), pX, pY, pZ, level);
+        noPhysics = false;
+    }
+
+    public void setData(Entity owner, float baseDamage, float magicDamage, int slot) {
+        setOwner(owner);
+        getEntityData().set(ownerId, Optional.of(owner.getUUID()));
+        setBaseDamage(baseDamage);
+        setMagicDamage(magicDamage);
+        setSlot(slot);
+    }
+
+    @Override
+    public void tick() {
+        if (!getFade()) {
+            HitResult ray = ProjectileUtil.getHitResultOnMoveVector(this, (e) -> {
+                return !e.isSpectator() && e.isPickable() && (!e.getUUID().equals(this.getSenderUUID()) || this.tickCount > 5);
+            });
+            if (ray.getType() == HitResult.Type.ENTITY) {
+                hitEntity(((EntityHitResult) ray).getEntity());
+            } else if (ray.getType() == HitResult.Type.BLOCK) {
+                setBlock(true);
+                setBlockTick(30);
+                setDeltaMovement(0, 0, 0);
+            }
+
+            Vec3 motion = getDeltaMovement();
+            if (motion.distanceTo(Vec3.ZERO) < 0.02f && !getBlock()) {
+                setFade(true);
+                setFadeTick(30);
+                refund();
+            } else if (!getBlock()) {
+                setDeltaMovement(motion.x * 0.95, motion.y * 0.95, motion.z * 0.95);
+
+                Vec3 pos = position();
+                xo = pos.x;
+                yo = pos.y;
+                zo = pos.z;
+                setPos(pos.x + motion.x, pos.y + motion.y, pos.z + motion.z);
+            }
+
+
+            if (level().isClientSide()) {
+                if (trail.size() > 30) {
+                    trail.remove(0);
+                }
+
+                float yaw = (float) -tickCount * 0.8f + 0.3f + (float) Math.toRadians(-getYRot());
+                float pitch = (float) (Math.PI / 2f);
+
+                float x = (float) Math.sin(pitch) * (float) Math.cos(yaw);
+                float y = (float) Math.cos(pitch);
+                float z = (float) Math.sin(pitch) * (float) Math.sin(yaw);
+
+                addTrail(new Vec3(position().toVector3f()).add(x, y, z));
+
+                Color color = WizardsReborn.THROW_ARCANE_ENCHANTMENT.getColor();
+                float r = color.getRed() / 255f;
+                float g = color.getGreen() / 255f;
+                float b = color.getBlue() / 255f;
+
+                Vec3 pos = new Vec3(getPosition(0.5f).toVector3f()).add(x, y, z);
+
+                if (random.nextFloat() < 0.8f) {
+                    Particles.create(WizardsReborn.CUBE_PARTICLE)
+                            .addVelocity(((random.nextDouble() - 0.5D) / 25), ((random.nextDouble() - 0.5D) / 25), ((random.nextDouble() - 0.5D) / 25))
+                            .setAlpha(0.3f, 0).setScale(0.05f, 0)
+                            .setColor(r, g, b)
+                            .setLifetime(40)
+                            .spawn(level(), pos.x(), pos.y(), pos.z());
+                }
+
+                int i = EnchantmentHelper.getItemEnchantmentLevel(Enchantments.FIRE_ASPECT, getItem());
+                if (i > 0) {
+                    if (random.nextFloat() < 0.8f) {
+                        Particles.create(WizardsReborn.CUBE_PARTICLE)
+                                .addVelocity(((random.nextDouble() - 0.5D) / 25), ((random.nextDouble() - 0.5D) / 25) + 0.02f, ((random.nextDouble() - 0.5D) / 25))
+                                .setAlpha(0.3f, 0).setScale(0.1f, 0)
+                                .setColor(0.882f, 0.498f, 0.404f, 0.979f, 0.912f, 0.585f)
+                                .setLifetime(40)
+                                .spawn(level(), pos.x(), pos.y(), pos.z());
+                    }
+                }
+            } else {
+                if (!getFade()) {
+                    if ((!getBlock() && tickCount % 4 == 0) || (getBlock() && tickCount % 8 == 0)) {
+                        level().playSound(null, blockPosition(), SoundEvents.PLAYER_ATTACK_SWEEP, SoundSource.PLAYERS, 0.5f, 1.3f);
+                    }
+                }
+            }
+
+            Vec3 vec3 = getDeltaMovement();
+            double d0 = vec3.horizontalDistance();
+            setYRot((float)(Mth.atan2(vec3.x, vec3.z) * (double)(180F / (float)Math.PI)));
+            setXRot((float)(Mth.atan2(vec3.y, d0) * (double)(180F / (float)Math.PI)));
+            yRotO = getYRot();
+            xRotO = getXRot();
+            endPoint = getSender().position().add(0, getSender().getBbHeight() / 2f, 0);
+        } else {
+            if (level().isClientSide()) {
+                if (trail.size() > 0) {
+                    trail.remove(0);
+                }
+            } else {
+                if (getFadeTick() <= 0) {
+                    discard();
+                } else {
+                    setFadeTick(getFadeTick() - 1);
+                }
+            }
+        }
+
+        if (getBlock()) {
+            setDeltaMovement(0, 0, 0);
+            if (getBlockTick() <= 0) {
+                setBlock(false);
+                setFade(true);
+                setFadeTick(30);
+                refund();
+            } else {
+                setBlockTick(getBlockTick() - 1);
+            }
+        } else {
+            if (tickCount > 200 && !getFade()) {
+                setBlock(true);
+                setBlockTick(30);
+            }
+        }
+    }
+
+    public void refund() {
+        if (!level().isClientSide()) {
+            boolean dist = false;
+            if (getOwner() instanceof Player player) {
+                if (distanceTo(getOwner()) < 100) {
+                    PacketHandler.sendTo(player, new AddScreenshakePacket(0.55f));
+                    player.knockback(1f, getX() - player.getX(), getZ() - player.getZ());
+                    player.hurtMarked = true;
+
+                    level().playSound(null, blockPosition(), SoundEvents.PLAYER_ATTACK_SWEEP, SoundSource.PLAYERS, 0.75f, 1.5f);
+                    level().playSound(null, player.getX(), player.getY(), player.getZ(), SoundEvents.PLAYER_ATTACK_SWEEP, SoundSource.PLAYERS, 0.75f, 1.5f);
+                    setEndTick(tickCount);
+
+                    List<LivingEntity> entities = new ArrayList<>();
+
+                    int dst = (int) distanceTo(player);
+                    for (int i = 0; i < dst; i++) {
+                        double lerpX = Mth.lerp((double) i / dst, getX(), player.getX());
+                        double lerpY = Mth.lerp((double) i / dst, getY(), player.getY() + player.getBbHeight() / 2f);
+                        double lerpZ = Mth.lerp((double) i / dst, getZ(), player.getZ());
+                        List<LivingEntity> entityList = level().getEntitiesOfClass(LivingEntity.class, new AABB(lerpX - 1, lerpY - 0.1f, lerpZ - 1, lerpX + 1, lerpY + 0.1f, lerpZ + 1));
+                        for (LivingEntity target : entityList) {
+                            if (!entities.contains(target) && !target.equals(player)) {
+                                entities.add(target);
+                            }
+                        }
+                    }
+
+                    for (LivingEntity target : entities) {
+                        hitEntity(target);
+                    }
+
+                    if (player.getInventory().getFreeSlot() > -1) {
+                        if (player.getInventory().getItem(getSlot()).isEmpty()) {
+                            player.getInventory().setItem(getSlot(), getItem());
+                        } else {
+                            player.getInventory().add(getItem());
+                        }
+                    } else {
+                        ItemEntity itemEntity = new ItemEntity(level(), player.getX(), player.getY() + 0.5f, player.getZ(), getItem());
+                        itemEntity.setPickUpDelay(40);
+                        level().addFreshEntity(itemEntity);
+                    }
+                } else {
+                    dist = true;
+                }
+            }
+            if (getOwner() != null && dist) {
+                ItemEntity itemEntity = new ItemEntity(level(), getX(), getY() + 0.1f, getZ(), getItem());
+                itemEntity.setPickUpDelay(40);
+                level().addFreshEntity(itemEntity);
+            }
+        } else {
+            if (getSender() != null && distanceTo(getSender()) < 100) {
+                setEndTick(tickCount);
+                endPoint = getSender().position().add(0, getSender().getBbHeight() / 2f, 0);
+
+                Color color = WizardsReborn.THROW_ARCANE_ENCHANTMENT.getColor();
+                float r = color.getRed() / 255f;
+                float g = color.getGreen() / 255f;
+                float b = color.getBlue() / 255f;
+
+                for (int i = 0; i < 30; i++) {
+                    double lerpX = Mth.lerp(i / 30.0f, getX(), getSender().getX());
+                    double lerpY = Mth.lerp(i / 30.0f, getY(), getSender().getY() + getSender().getBbHeight() / 2f);
+                    double lerpZ = Mth.lerp(i / 30.0f, getZ(), getSender().getZ());
+
+                    float yaw = (float) -tickCount - (i * 10) * 0.8f + 0.3f + (float) Math.toRadians(-getYRot());
+                    float pitch = (float) (Math.PI / 2f);
+
+                    float x = (float) Math.sin(pitch) * (float) Math.cos(yaw);
+                    float y = (float) Math.cos(pitch);
+                    float z = (float) Math.sin(pitch) * (float) Math.sin(yaw);
+
+                    Vec3 pos = new Vec3(lerpX, lerpY, lerpZ).add(x, y, z);
+
+                    Particles.create(WizardsReborn.CUBE_PARTICLE)
+                            .addVelocity(((random.nextDouble() - 0.5D) / 25), ((random.nextDouble() - 0.5D) / 25), ((random.nextDouble() - 0.5D) / 25))
+                            .setAlpha(0.3f, 0).setScale(0.1f, 0)
+                            .setColor(r, g, b)
+                            .setLifetime(40)
+                            .spawn(level(), pos.x(), pos.y(), pos.z());
+                }
+
+                for (int i = 0; i < 5; i++) {
+                    Particles.create(WizardsReborn.SPARKLE_PARTICLE)
+                            .addVelocity(((random.nextDouble() - 0.5D) / 15), ((random.nextDouble() - 0.5D) / 15) + 0.05, ((random.nextDouble() - 0.5D) / 15))
+                            .setAlpha(0.3f, 0).setScale(0.4f, 0)
+                            .setColor(r, g, b)
+                            .setLifetime(30)
+                            .setSpin((0.5f * (float) ((random.nextDouble() - 0.5D) * 2)))
+                            .spawn(level(), getX(), getY(), getZ());
+                    Particles.create(WizardsReborn.SPARKLE_PARTICLE)
+                            .addVelocity(((random.nextDouble() - 0.5D) / 15), ((random.nextDouble() - 0.5D) / 15) - 0.05, ((random.nextDouble() - 0.5D) / 15))
+                            .setAlpha(0.3f, 0).setScale(0.4f, 0)
+                            .setColor(r, g, b)
+                            .setLifetime(30)
+                            .setSpin((0.5f * (float) ((random.nextDouble() - 0.5D) * 2)))
+                            .spawn(level(), getX(), getY(), getZ());
+                }
+            }
+        }
+    }
+
+    public void hitEntity(Entity target) {
+        if (!level().isClientSide() && getOwner() instanceof LivingEntity owner) {
+            DamageSource source = target.damageSources().mobProjectile(this, owner);
+            boolean success = target.hurt(source, getBaseDamage());
+            if (success && target instanceof LivingEntity livingEntity) {
+                ItemStack scythe = getItem();
+                scythe.hurtAndBreak(1, owner, (e) -> remove(RemovalReason.KILLED));
+                int i = EnchantmentHelper.getItemEnchantmentLevel(Enchantments.FIRE_ASPECT, scythe);
+                if (i > 0) {
+                    livingEntity.setSecondsOnFire(i * 4);
+                }
+
+                if (getMagicDamage() > 0) {
+                    target.invulnerableTime = 0;
+                    target.hurt(new DamageSource(DamageSourceRegistry.create(target.level(), DamageSourceRegistry.ARCANE_MAGIC).typeHolder(), this, owner), getMagicDamage());
+                }
+
+                level().playSound(null, blockPosition(), SoundEvents.PLAYER_ATTACK_SWEEP, SoundSource.PLAYERS, 0.75f, 1.5f);
+            }
+        }
+    }
+
+    @Override
+    protected Item getDefaultItem() {
+        return WizardsReborn.ARCANE_GOLD_SCYTHE.get();
+    }
+
+    @Override
+    protected void defineSynchedData() {
+        super.defineSynchedData();
+        getEntityData().define(ownerId, Optional.empty());
+        getEntityData().define(endTickId, 0);
+        getEntityData().define(blockId, false);
+        getEntityData().define(blockTickId, 0);
+        getEntityData().define(fadeId, false);
+        getEntityData().define(fadeTickId, 0);
+        getEntityData().define(baseDamageId, 0f);
+        getEntityData().define(magicDamageId, 0f);
+        getEntityData().define(slotId, 0);
+    }
+
+    @Override
+    public void readAdditionalSaveData(CompoundTag compound) {
+        if (compound.contains("owner")) {
+            getEntityData().set(ownerId, Optional.of(compound.getUUID("owner")));
+        }
+        getEntityData().set(endTickId, compound.getInt("endTick"));
+        getEntityData().set(blockId, compound.getBoolean("block"));
+        getEntityData().set(blockTickId, compound.getInt("blockTick"));
+        getEntityData().set(fadeId, compound.getBoolean("fade"));
+        getEntityData().set(fadeTickId, compound.getInt("fadeTick"));
+        getEntityData().set(baseDamageId, compound.getFloat("baseDamage"));
+        getEntityData().set(magicDamageId, compound.getFloat("magicDamage"));
+        getEntityData().set(slotId, compound.getInt("slot"));
+    }
+
+    @Override
+    public void addAdditionalSaveData(CompoundTag compound) {
+        if (getEntityData().get(ownerId).isPresent()) {
+            compound.putUUID("owner", getEntityData().get(ownerId).get());
+        }
+        compound.putInt("endTick", getEntityData().get(endTickId));
+        compound.putBoolean("block", getEntityData().get(blockId));
+        compound.putInt("blockTick", getEntityData().get(blockTickId));
+        compound.putBoolean("fade", getEntityData().get(fadeId));
+        compound.putInt("fadeTick", getEntityData().get(fadeTickId));
+        compound.putFloat("baseDamage", getEntityData().get(baseDamageId));
+        compound.putFloat("magicDamage", getEntityData().get(magicDamageId));
+        compound.putInt("slot", getEntityData().get(slotId));
+    }
+
+    @Override
+    public Packet<ClientGamePacketListener> getAddEntityPacket() {
+        return NetworkHooks.getEntitySpawningPacket(this);
+    }
+
+    @Override
+    public float getEyeHeight(Pose pPose, EntityDimensions pSize) {
+        return 0.1F;
+    }
+
+    public int getEndTick() {
+        return getEntityData().get(endTickId);
+    }
+
+    public void setEndTick(int endTick) {
+        getEntityData().set(endTickId, endTick);
+    }
+
+    public boolean getBlock() {
+        return getEntityData().get(blockId);
+    }
+
+    public void setBlock(boolean block) {
+        getEntityData().set(blockId, block);
+    }
+
+    public int getBlockTick() {
+        return getEntityData().get(blockTickId);
+    }
+
+    public void setBlockTick(int blockTick) {
+        getEntityData().set(blockTickId, blockTick);
+    }
+
+    public boolean getFade() {
+        return getEntityData().get(fadeId);
+    }
+
+    public void setFade(boolean fade) {
+        getEntityData().set(fadeId, fade);
+    }
+
+    public int getFadeTick() {
+        return getEntityData().get(fadeTickId);
+    }
+
+    public void setFadeTick(int fadeTick) {
+        getEntityData().set(fadeTickId, fadeTick);
+    }
+
+    public void addTrail(Vec3 pos) {
+        trail.add(pos);
+    }
+
+    public Player getSender() {
+        return (getEntityData().get(ownerId).isPresent()) ? level().getPlayerByUUID(getEntityData().get(ownerId).get()) : null;
+    }
+
+    public UUID getSenderUUID() {
+        return (getEntityData().get(ownerId).isPresent()) ? getEntityData().get(ownerId).get() : null;
+    }
+
+    public float getBaseDamage() {
+        return getEntityData().get(baseDamageId);
+    }
+
+    public void setBaseDamage(float damage) {
+        getEntityData().set(baseDamageId, damage);
+    }
+
+    public float getMagicDamage() {
+        return getEntityData().get(magicDamageId);
+    }
+
+    public void setMagicDamage(float damage) {
+        getEntityData().set(magicDamageId, damage);
+    }
+
+    public int getSlot() {
+        return getEntityData().get(slotId);
+    }
+
+    public void setSlot(int slot) {
+        getEntityData().set(slotId, slot);
+    }
+}
