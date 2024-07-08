@@ -74,6 +74,15 @@ public class ThrowArcaneEnchantment extends ArcaneEnchantment {
 
                             baseDamage = baseDamage + EnchantmentHelper.getDamageBonus(stack, MobType.UNDEFINED);
 
+                            int bladeLevel = ArcaneEnchantmentUtils.getArcaneEnchantment(stack, WizardsReborn.MAGIC_BLADE_ARCANE_ENCHANTMENT);
+                            if (bladeLevel > 0) {
+                                int additionalCost = (int) ((5 * bladeLevel) * (1 - costModifier));
+                                if (WissenUtils.canRemoveWissen(wissen, cost + additionalCost)) {
+                                    WissenUtils.removeWissenFromWissenItems(items, additionalCost);
+                                    magicDamage = magicDamage + (2f * (bladeLevel / 5f));
+                                }
+                            }
+
                             ThrowedScytheEntity entity = new ThrowedScytheEntity(level, player.position().x, player.position().y + player.getBbHeight() / 2f, player.position().z);
                             entity.setData(livingEntity, baseDamage, magicDamage, slot);
                             entity.setItem(stack);

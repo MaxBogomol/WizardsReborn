@@ -1,6 +1,7 @@
 {
   "replace": false,
   "values": [
-    "wizards_reborn:wissen_keychain"
+    "wizards_reborn:wissen_keychain",
+    "wizards_reborn:creative_wissen_keychain"
   ]
 }

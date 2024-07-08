@@ -173,7 +173,7 @@ public class WissenChargeArcaneEnchantment extends ArcaneEnchantment {
                 List<LivingEntity> entityList = arrow.level().getEntitiesOfClass(LivingEntity.class, new AABB(pos.x() - distance, pos.y() - distance, pos.z() - distance, pos.x() + distance, pos.y() + distance, pos.z() + distance));
                 for (LivingEntity target : entityList) {
                     target.invulnerableTime = 0;
-                    target.hurt(new DamageSource(DamageSourceRegistry.create(target.level(), DamageSourceRegistry.ARCANE_MAGIC).typeHolder(), arrow.getOwner(), arrow), damage + additionalDamage);
+                    target.hurt(new DamageSource(DamageSourceRegistry.create(target.level(), DamageSourceRegistry.ARCANE_MAGIC).typeHolder(), arrow.getOwner()), damage + additionalDamage);
                 }
 
                 setCharge(arrow,0);

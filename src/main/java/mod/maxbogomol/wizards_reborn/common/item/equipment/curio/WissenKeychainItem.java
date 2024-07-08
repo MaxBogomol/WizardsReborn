@@ -53,8 +53,8 @@ public class WissenKeychainItem extends BaseWissenCurioItem {
 
                 for (ItemStack item : itemsUsing) {
                     if (item.getItem() instanceof IWissenItem wissenItem) {
-                        int wissenRemain = WissenUtils.getRemoveWissenRemain(WissenItemUtils.getWissen(stack), 10);
-                        wissenRemain = 10 - wissenRemain;
+                        int wissenRemain = WissenUtils.getRemoveWissenRemain(WissenItemUtils.getWissen(stack), getWissenTransfer());
+                        wissenRemain = getWissenTransfer() - wissenRemain;
                         WissenItemUtils.existWissen(item);
                         int itemWissenRemain = WissenItemUtils.getAddWissenRemain(item, wissenRemain, wissenItem.getMaxWissen());
                         wissenRemain = wissenRemain - itemWissenRemain;
@@ -66,5 +66,9 @@ public class WissenKeychainItem extends BaseWissenCurioItem {
                 }
             }
         }
+    }
+
+    public int getWissenTransfer() {
+        return 10;
     }
 }

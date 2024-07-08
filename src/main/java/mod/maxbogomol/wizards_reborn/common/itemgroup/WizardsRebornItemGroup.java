@@ -470,8 +470,10 @@ public class WizardsRebornItemGroup {
             event.accept(WizardsReborn.ARCACITE_RING);
             event.accept(WizardsReborn.WISSEN_KEYCHAIN);
             event.accept(WizardsReborn.WISSEN_RING);
+            event.accept(WizardsReborn.CREATIVE_WISSEN_KEYCHAIN);
             event.accept(WizardsReborn.LEATHER_BELT);
             event.accept(WizardsReborn.ARCANE_FORTRESS_BELT);
+            event.accept(WizardsReborn.INVENTOR_WIZARD_BELT);
             event.accept(WizardsReborn.CRYSTAL_BAG);
             event.accept(WizardsReborn.ALCHEMY_BAG);
 

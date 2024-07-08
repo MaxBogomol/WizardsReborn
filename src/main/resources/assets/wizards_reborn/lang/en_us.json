@@ -433,9 +433,11 @@
   "item.wizards_reborn.arcacite_amulet": "Arcacite Amulet",
   "item.wizards_reborn.arcacite_ring": "Arcacite Ring",
   "item.wizards_reborn.wissen_keychain": "Wissen Keychain",
+  "item.wizards_reborn.creative_wissen_keychain": "Creative Wissen Keychain",
   "item.wizards_reborn.wissen_ring": "Wissen Ring",
   "item.wizards_reborn.leather_belt": "Leather Belt",
   "item.wizards_reborn.arcane_fortress_belt": "Arcane Fortress Belt",
+  "item.wizards_reborn.inventor_wizard_belt": "Inventor Wizard Belt",
   "item.wizards_reborn.crystal_bag": "Crystal Bag",
   "item.wizards_reborn.alchemy_bag": "Alchemy Bag",
 
@@ -724,6 +726,7 @@
   "entity.wizards_reborn.boat": "Boat",
   "entity.wizards_reborn.chest_boat": "Boat with Chest",
   "entity.wizards_reborn.spell_projectile": "Spell Projectile",
+  "entity.wizards_reborn.throwed_scythe": "Throwed Scythe",
   "entity.wizards_reborn.sniffalo": "Sniffalo",
 
   "effect.wizards_reborn.mor_spores": "Mor Spores",

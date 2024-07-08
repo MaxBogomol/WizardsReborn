@@ -57,9 +57,10 @@ public class ThrowedScytheRenderer<T extends ThrowedScytheEntity> extends Entity
         if (entity.getFade() && entity.getFadeTick() <= 30 && entity.getEndTick() > 0) {
             stack.pushPose();
             stack.translate(0, 0.1f, 0);
-            double dX = entity.endPoint.x() - entity.getX();
-            double dY = entity.endPoint.y() - entity.getY();
-            double dZ = entity.endPoint.z() - entity.getZ();
+            Vec3 endPoint = entity.getEndPoint();
+            double dX = endPoint.x() - entity.getX();
+            double dY = endPoint.y() - entity.getY();
+            double dZ = endPoint.z() - entity.getZ();
 
             float distance = (float) Math.sqrt(Math.pow(dX, 2) + Math.pow(dY, 2) + Math.pow(dZ, 2));
 

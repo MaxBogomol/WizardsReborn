@@ -1397,8 +1397,10 @@ public class WizardsReborn {
     public static final RegistryObject<Item> ARCACITE_RING = ITEMS.register("arcacite_ring", () -> new ArcaciteRingItem(new Item.Properties().stacksTo(1)));
     public static final RegistryObject<Item> WISSEN_KEYCHAIN = ITEMS.register("wissen_keychain", () -> new WissenKeychainItem(new Item.Properties().stacksTo(1)));
     public static final RegistryObject<Item> WISSEN_RING = ITEMS.register("wissen_ring", () -> new WissenRingItem(new Item.Properties().stacksTo(1)));
+    public static final RegistryObject<Item> CREATIVE_WISSEN_KEYCHAIN = ITEMS.register("creative_wissen_keychain", () -> new CreativeWissenKeychainItem(new Item.Properties().stacksTo(1)));
     public static final RegistryObject<Item> LEATHER_BELT = ITEMS.register("leather_belt", () -> new LeatherBeltItem(new Item.Properties().stacksTo(1)));
     public static final RegistryObject<Item> ARCANE_FORTRESS_BELT = ITEMS.register("arcane_fortress_belt", () -> new ArcaneFortressBeltItem(new Item.Properties().stacksTo(1)));
+    public static final RegistryObject<Item> INVENTOR_WIZARD_BELT = ITEMS.register("inventor_wizard_belt", () -> new InventorWizardBeltItem(new Item.Properties().stacksTo(1)));
     public static final RegistryObject<Item> CRYSTAL_BAG = ITEMS.register("crystal_bag", () -> new CrystalBagItem(new Item.Properties().stacksTo(1)));
     public static final RegistryObject<Item> ALCHEMY_BAG = ITEMS.register("alchemy_bag", () -> new AlchemyBagItem(new Item.Properties().stacksTo(1)));
 
@@ -2064,6 +2066,7 @@ public class WizardsReborn {
             CuriosRendererRegistry.register(ARCACITE_AMULET.get(), AmuletRenderer::new);
             CuriosRendererRegistry.register(LEATHER_BELT.get(), BeltRenderer::new);
             CuriosRendererRegistry.register(ARCANE_FORTRESS_BELT.get(), BeltRenderer::new);
+            CuriosRendererRegistry.register(INVENTOR_WIZARD_BELT.get(), BeltRenderer::new);
             CuriosRendererRegistry.register(CRYSTAL_BAG.get(), BagRenderer::new);
             CuriosRendererRegistry.register(ALCHEMY_BAG.get(), BagRenderer::new);
             CuriosRendererRegistry.register(LEATHER_COLLAR.get(), CollarRenderer::new);

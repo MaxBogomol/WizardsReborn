@@ -6,6 +6,8 @@ import mod.maxbogomol.wizards_reborn.common.damage.DamageSourceRegistry;
 import mod.maxbogomol.wizards_reborn.common.network.AddScreenshakePacket;
 import mod.maxbogomol.wizards_reborn.common.network.PacketHandler;
 import net.minecraft.nbt.CompoundTag;
+import net.minecraft.nbt.ListTag;
+import net.minecraft.nbt.Tag;
 import net.minecraft.network.protocol.Packet;
 import net.minecraft.network.protocol.game.ClientGamePacketListener;
 import net.minecraft.network.syncher.EntityDataAccessor;
@@ -26,16 +28,13 @@ import net.minecraft.world.item.enchantment.EnchantmentHelper;
 import net.minecraft.world.item.enchantment.Enchantments;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.AABB;
-import net.minecraft.world.phys.EntityHitResult;
 import net.minecraft.world.phys.HitResult;
 import net.minecraft.world.phys.Vec3;
 import net.minecraftforge.network.NetworkHooks;
 
 import java.awt.*;
-import java.util.ArrayList;
+import java.util.*;
 import java.util.List;
-import java.util.Optional;
-import java.util.UUID;
 
 public class ThrowedScytheEntity extends ThrowableItemProjectile {
     public static final EntityDataAccessor<Optional<UUID>> ownerId = SynchedEntityData.defineId(ThrowedScytheEntity.class, EntityDataSerializers.OPTIONAL_UUID);
@@ -47,9 +46,12 @@ public class ThrowedScytheEntity extends ThrowableItemProjectile {
     public static final EntityDataAccessor<Float> baseDamageId = SynchedEntityData.defineId(ThrowedScytheEntity.class, EntityDataSerializers.FLOAT);
     public static final EntityDataAccessor<Float> magicDamageId = SynchedEntityData.defineId(ThrowedScytheEntity.class, EntityDataSerializers.FLOAT);
     public static final EntityDataAccessor<Integer> slotId = SynchedEntityData.defineId(ThrowedScytheEntity.class, EntityDataSerializers.INT);
+    public static final EntityDataAccessor<Float> endPointXId = SynchedEntityData.defineId(ThrowedScytheEntity.class, EntityDataSerializers.FLOAT);
+    public static final EntityDataAccessor<Float> endPointYId = SynchedEntityData.defineId(ThrowedScytheEntity.class, EntityDataSerializers.FLOAT);
+    public static final EntityDataAccessor<Float> endPointZId = SynchedEntityData.defineId(ThrowedScytheEntity.class, EntityDataSerializers.FLOAT);
 
     public List<Vec3> trail = new ArrayList<>();
-    public Vec3 endPoint = Vec3.ZERO;
+    public Map<UUID, Integer> damagedEntities = new HashMap<>();
 
     public ThrowedScytheEntity(EntityType<?> entityTypeIn, Level worldIn) {
         super(WizardsReborn.THROWED_SCYTHE_PROJECTILE.get(), worldIn);
@@ -80,9 +82,41 @@ public class ThrowedScytheEntity extends ThrowableItemProjectile {
             HitResult ray = ProjectileUtil.getHitResultOnMoveVector(this, (e) -> {
                 return !e.isSpectator() && e.isPickable() && (!e.getUUID().equals(this.getSenderUUID()) || this.tickCount > 5);
             });
-            if (ray.getType() == HitResult.Type.ENTITY) {
-                hitEntity(((EntityHitResult) ray).getEntity());
-            } else if (ray.getType() == HitResult.Type.BLOCK) {
+
+            if (!level().isClientSide()) {
+                Vec3 mov = getDeltaMovement();
+                for (int i = 0; i < 5; i++) {
+                    double lerpX = Mth.lerp((double) i / 5f, getX(), mov.x());
+                    double lerpY = Mth.lerp((double) i / 5f, getY(), mov.y());
+                    double lerpZ = Mth.lerp((double) i / 5f, getZ(), mov.z());
+                    List<LivingEntity> entityList = level().getEntitiesOfClass(LivingEntity.class, new AABB(lerpX - 1, lerpY - 0.1f, lerpZ - 1, lerpX + 1, lerpY + 0.1f, lerpZ + 1));
+                    if (tickCount < 5) {
+                        if (getOwner() instanceof LivingEntity living) {
+                            if (entityList.contains(living)) {
+                                entityList.remove(living);
+                            }
+                        }
+                    }
+                    for (LivingEntity target : entityList) {
+                        if (!damagedEntities.keySet().contains(target.getUUID())) {
+                            hitEntity(target);
+                            damagedEntities.put(target.getUUID(), 20);
+                        }
+                    }
+                }
+                List<UUID> remove = new ArrayList<>();
+                for (UUID uuid : damagedEntities.keySet()) {
+                    damagedEntities.put(uuid, damagedEntities.get(uuid) - 1);
+                    if (damagedEntities.get(uuid) <= 0) {
+                        remove.add(uuid);
+                    }
+                }
+                for (UUID uuid : remove) {
+                    damagedEntities.remove(uuid);
+                }
+            }
+
+            if (ray.getType() == HitResult.Type.BLOCK) {
                 setBlock(true);
                 setBlockTick(30);
                 setDeltaMovement(0, 0, 0);
@@ -159,7 +193,6 @@ public class ThrowedScytheEntity extends ThrowableItemProjectile {
             setXRot((float)(Mth.atan2(vec3.y, d0) * (double)(180F / (float)Math.PI)));
             yRotO = getYRot();
             xRotO = getXRot();
-            endPoint = getSender().position().add(0, getSender().getBbHeight() / 2f, 0);
         } else {
             if (level().isClientSide()) {
                 if (trail.size() > 0) {
@@ -196,7 +229,7 @@ public class ThrowedScytheEntity extends ThrowableItemProjectile {
         if (!level().isClientSide()) {
             boolean dist = false;
             if (getOwner() instanceof Player player) {
-                if (distanceTo(getOwner()) < 100) {
+                if (distanceTo(getOwner()) < 150) {
                     PacketHandler.sendTo(player, new AddScreenshakePacket(0.55f));
                     player.knockback(1f, getX() - player.getX(), getZ() - player.getZ());
                     player.hurtMarked = true;
@@ -204,6 +237,7 @@ public class ThrowedScytheEntity extends ThrowableItemProjectile {
                     level().playSound(null, blockPosition(), SoundEvents.PLAYER_ATTACK_SWEEP, SoundSource.PLAYERS, 0.75f, 1.5f);
                     level().playSound(null, player.getX(), player.getY(), player.getZ(), SoundEvents.PLAYER_ATTACK_SWEEP, SoundSource.PLAYERS, 0.75f, 1.5f);
                     setEndTick(tickCount);
+                    setEndPoint(getSender().position().add(0, getSender().getBbHeight() / 2f, 0));
 
                     List<LivingEntity> entities = new ArrayList<>();
 
@@ -245,10 +279,7 @@ public class ThrowedScytheEntity extends ThrowableItemProjectile {
                 level().addFreshEntity(itemEntity);
             }
         } else {
-            if (getSender() != null && distanceTo(getSender()) < 100) {
-                setEndTick(tickCount);
-                endPoint = getSender().position().add(0, getSender().getBbHeight() / 2f, 0);
-
+            if (getSender() != null && distanceTo(getSender()) < 150) {
                 Color color = WizardsReborn.THROW_ARCANE_ENCHANTMENT.getColor();
                 float r = color.getRed() / 255f;
                 float g = color.getGreen() / 255f;
@@ -311,6 +342,7 @@ public class ThrowedScytheEntity extends ThrowableItemProjectile {
                 if (getMagicDamage() > 0) {
                     target.invulnerableTime = 0;
                     target.hurt(new DamageSource(DamageSourceRegistry.create(target.level(), DamageSourceRegistry.ARCANE_MAGIC).typeHolder(), this, owner), getMagicDamage());
+                    target.invulnerableTime = 30;
                 }
 
                 level().playSound(null, blockPosition(), SoundEvents.PLAYER_ATTACK_SWEEP, SoundSource.PLAYERS, 0.75f, 1.5f);
@@ -335,10 +367,14 @@ public class ThrowedScytheEntity extends ThrowableItemProjectile {
         getEntityData().define(baseDamageId, 0f);
         getEntityData().define(magicDamageId, 0f);
         getEntityData().define(slotId, 0);
+        getEntityData().define(endPointXId, 0f);
+        getEntityData().define(endPointYId, 0f);
+        getEntityData().define(endPointZId, 0f);
     }
 
     @Override
     public void readAdditionalSaveData(CompoundTag compound) {
+        super.readAdditionalSaveData(compound);
         if (compound.contains("owner")) {
             getEntityData().set(ownerId, Optional.of(compound.getUUID("owner")));
         }
@@ -350,10 +386,23 @@ public class ThrowedScytheEntity extends ThrowableItemProjectile {
         getEntityData().set(baseDamageId, compound.getFloat("baseDamage"));
         getEntityData().set(magicDamageId, compound.getFloat("magicDamage"));
         getEntityData().set(slotId, compound.getInt("slot"));
+        getEntityData().set(endPointXId, compound.getFloat("endPointX"));
+        getEntityData().set(endPointYId, compound.getFloat("endPointY"));
+        getEntityData().set(endPointZId, compound.getFloat("endPointZ"));
+
+        damagedEntities.clear();
+        ListTag tagList = compound.getList("damagedEntities", Tag.TAG_COMPOUND);
+        for (int i = 0; i < tagList.size(); i++) {
+            CompoundTag itemTags = tagList.getCompound(i);
+            int tick = itemTags.getInt("tick");
+            UUID uuid = itemTags.getUUID("uuid");
+            damagedEntities.put(uuid, tick);
+        }
     }
 
     @Override
     public void addAdditionalSaveData(CompoundTag compound) {
+        super.addAdditionalSaveData(compound);
         if (getEntityData().get(ownerId).isPresent()) {
             compound.putUUID("owner", getEntityData().get(ownerId).get());
         }
@@ -365,6 +414,18 @@ public class ThrowedScytheEntity extends ThrowableItemProjectile {
         compound.putFloat("baseDamage", getEntityData().get(baseDamageId));
         compound.putFloat("magicDamage", getEntityData().get(magicDamageId));
         compound.putInt("slot", getEntityData().get(slotId));
+        compound.putFloat("endPointX", getEntityData().get(endPointXId));
+        compound.putFloat("endPointY", getEntityData().get(endPointYId));
+        compound.putFloat("endPointZ", getEntityData().get(endPointZId));
+
+        ListTag nbtTagList = new ListTag();
+        for (UUID uuid : damagedEntities.keySet()) {
+            CompoundTag itemTag = new CompoundTag();
+            itemTag.putInt("tick", damagedEntities.get(uuid));
+            itemTag.putUUID("uuid", uuid);
+            nbtTagList.add(itemTag);
+        }
+        compound.put("damagedEntities", nbtTagList);
     }
 
     @Override
@@ -451,5 +512,15 @@ public class ThrowedScytheEntity extends ThrowableItemProjectile {
 
     public void setSlot(int slot) {
         getEntityData().set(slotId, slot);
+    }
+
+    public void setEndPoint(Vec3 vec) {
+        getEntityData().set(endPointXId, (float) vec.x);
+        getEntityData().set(endPointYId, (float) vec.y);
+        getEntityData().set(endPointZId, (float) vec.z);
+    }
+
+    public Vec3 getEndPoint() {
+        return new Vec3(getEntityData().get(endPointXId), getEntityData().get(endPointYId), getEntityData().get(endPointZId));
     }
 }

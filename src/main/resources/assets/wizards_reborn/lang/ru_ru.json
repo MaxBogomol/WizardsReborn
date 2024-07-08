@@ -433,9 +433,11 @@
   "item.wizards_reborn.arcacite_amulet": "Аркацитовый амулет",
   "item.wizards_reborn.arcacite_ring": "Аркацитовое кольцо",
   "item.wizards_reborn.wissen_keychain": "Виссен брелок",
+  "item.wizards_reborn.creative_wissen_keychain": "Креативный виссен брелок",
   "item.wizards_reborn.wissen_ring": "Виссен кольцо",
   "item.wizards_reborn.leather_belt": "Кожаный пояс",
   "item.wizards_reborn.arcane_fortress_belt": "Аркановый штурмовой пояс",
+  "item.wizards_reborn.inventor_wizard_belt": "Пояс мага-изобретателя",
   "item.wizards_reborn.crystal_bag": "Кристальная сумка",
   "item.wizards_reborn.alchemy_bag": "Алхимическая сумка",
 
@@ -724,6 +726,7 @@
   "entity.wizards_reborn.boat": "Лодка",
   "entity.wizards_reborn.chest_boat": "Грузовая лодка",
   "entity.wizards_reborn.spell_projectile": "Снаряд заклинания",
+  "entity.wizards_reborn.throwed_scythe": "Брошенная коса",
   "entity.wizards_reborn.sniffalo": "Нюхало",
 
   "effect.wizards_reborn.mor_spores": "Моровые споры",
