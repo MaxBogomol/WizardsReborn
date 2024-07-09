@@ -1,6 +1,7 @@
 package mod.maxbogomol.wizards_reborn.mixin;
 
 import mod.maxbogomol.wizards_reborn.common.arcaneenchantment.EagleShotArcaneEnchantment;
+import mod.maxbogomol.wizards_reborn.common.arcaneenchantment.SplitArcaneEnchantment;
 import mod.maxbogomol.wizards_reborn.common.arcaneenchantment.WissenChargeArcaneEnchantment;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.projectile.AbstractArrow;
@@ -30,5 +31,6 @@ public class BowItemMixin {
     @Inject(at = @At(value = "INVOKE", target = "Lnet/minecraft/world/level/Level;addFreshEntity(Lnet/minecraft/world/entity/Entity;)Z"), method = "releaseUsing")
     public void wizards_reborn$releaseUsing(ItemStack stack, Level level, LivingEntity entityLiving, int timeLeft, CallbackInfo ci) {
         EagleShotArcaneEnchantment.onBowShot(this.wizards_reborn$abstractArrow, stack, level, entityLiving, timeLeft);
+        SplitArcaneEnchantment.onBowShot(this.wizards_reborn$abstractArrow, stack, level, entityLiving, timeLeft);
     }
 }

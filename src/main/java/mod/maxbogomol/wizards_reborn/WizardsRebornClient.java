@@ -10,10 +10,7 @@ import mod.maxbogomol.wizards_reborn.client.model.sniffalo.SniffaloCarpetArmorMo
 import mod.maxbogomol.wizards_reborn.client.model.sniffalo.SniffaloSaddleArmorModel;
 import mod.maxbogomol.wizards_reborn.client.particle.*;
 import mod.maxbogomol.wizards_reborn.client.render.block.PipeModel;
-import mod.maxbogomol.wizards_reborn.client.render.entity.CustomBoatModel;
-import mod.maxbogomol.wizards_reborn.client.render.entity.SniffaloRenderer;
-import mod.maxbogomol.wizards_reborn.client.render.entity.SpellProjectileRenderer;
-import mod.maxbogomol.wizards_reborn.client.render.entity.ThrowedScytheRenderer;
+import mod.maxbogomol.wizards_reborn.client.render.entity.*;
 import mod.maxbogomol.wizards_reborn.client.render.item.*;
 import mod.maxbogomol.wizards_reborn.client.render.tileentity.*;
 import mod.maxbogomol.wizards_reborn.common.block.CustomBlockColor;
@@ -351,6 +348,7 @@ public class WizardsRebornClient {
             EntityRenderers.register(WizardsReborn.CHEST_BOAT.get(), m -> new CustomBoatModel(m, true));
             EntityRenderers.register(WizardsReborn.SPELL_PROJECTILE.get(), SpellProjectileRenderer::new);
             EntityRenderers.register(WizardsReborn.THROWED_SCYTHE_PROJECTILE.get(), ThrowedScytheRenderer::new);
+            EntityRenderers.register(WizardsReborn.SPLIT_ARROW_PROJECTILE.get(), SplitArrowRenderer::new);
             EntityRenderers.register(WizardsReborn.SNIFFALO.get(), SniffaloRenderer::new);
 
             makeBow(WizardsReborn.ARCANE_WOOD_BOW.get());

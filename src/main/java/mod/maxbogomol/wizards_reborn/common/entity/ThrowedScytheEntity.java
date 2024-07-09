@@ -61,12 +61,10 @@ public class ThrowedScytheEntity extends ThrowableItemProjectile {
 
     public ThrowedScytheEntity(Level level) {
         super(WizardsReborn.THROWED_SCYTHE_PROJECTILE.get(), level);
-        noPhysics = false;
     }
 
     public ThrowedScytheEntity(Level level, double pX, double pY, double pZ) {
         super(WizardsReborn.THROWED_SCYTHE_PROJECTILE.get(), pX, pY, pZ, level);
-        noPhysics = false;
     }
 
     public void setData(Entity owner, float baseDamage, float magicDamage, int slot, boolean isRight) {
