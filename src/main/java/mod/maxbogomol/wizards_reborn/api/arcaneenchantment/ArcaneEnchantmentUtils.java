@@ -186,6 +186,7 @@ public class ArcaneEnchantmentUtils {
     public static void inventoryTick(ItemStack stack, Level world, Entity entity, int slot, boolean isSelected) {
         LifeMendingArcaneEnchantment.inventoryTick(stack, world, entity, slot, isSelected);
         WissenMendingArcaneEnchantment.inventoryTick(stack, world, entity, slot, isSelected);
+        SonarArcaneEnchantment.inventoryTick(stack, world, entity, slot, isSelected);
     }
 
     public static int damageItem(ItemStack stack, int amount, LivingEntity entity) {

@@ -208,6 +208,7 @@ public class RegisterKnowledges {
         addProgression(ARCANE_WORKBENCH, ARCANE_GOLD);
         addProgression(ARCANE_WAND, ARCANE_WORKBENCH);
         addProgression(WISESTONE, ARCANE_WORKBENCH);
+        addProgression(ORBITAL_FLUID_RETAINER, WISESTONE);
         addProgression(ALCHEMY_FURNACE, ORBITAL_FLUID_RETAINER);
         addProgression(ALCHEMY_MACHINE, ALCHEMY_FURNACE);
         addProgression(ALCHEMY_OIL, ALCHEMY_MACHINE);

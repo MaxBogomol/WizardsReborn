@@ -229,6 +229,7 @@ public class WizardsReborn {
     public static final TagKey<Block> STEAM_PIPE_CONNECTION_TOGGLE_BLOCK_TAG = TagKey.create(Registries.BLOCK, new ResourceLocation(MOD_ID, "steam_pipe_connection_toggle"));
     public static final TagKey<Block> EXTRACTOR_LEAVER_CONNECTION_BLOCK_TAG = TagKey.create(Registries.BLOCK, new ResourceLocation(MOD_ID, "extractor_leaver_connection"));
     public static final TagKey<Block> ALTAR_OF_DROUGHT_TARGET_BLOCK_TAG  = TagKey.create(Registries.BLOCK, new ResourceLocation(MOD_ID, "altar_of_drought_target"));
+    public static final TagKey<Block> ORES_BLOCK_TAG  = TagKey.create(Registries.BLOCK, new ResourceLocation("forge", "ores"));
 
     public static final TagKey<Fluid> STEAM_SOURCE_FLUID_TAG = TagKey.create(Registries.FLUID, new ResourceLocation(MOD_ID, "steam_source"));
     public static final TagKey<Fluid> HEAT_SOURCE_FLUID_TAG = TagKey.create(Registries.FLUID, new ResourceLocation(MOD_ID, "heat_source"));
@@ -636,6 +637,7 @@ public class WizardsReborn {
     public static ArcaneEnchantment WISSEN_CHARGE_ARCANE_ENCHANTMENT = new WissenChargeArcaneEnchantment(MOD_ID+":wissen_charge", 2);
     public static ArcaneEnchantment EAGLE_SHOT_ARCANE_ENCHANTMENT = new EagleShotArcaneEnchantment(MOD_ID+":eagle_shot", 4);
     public static ArcaneEnchantment SPLIT_ARCANE_ENCHANTMENT = new SplitArcaneEnchantment(MOD_ID+":split", 4);
+    public static ArcaneEnchantment SONAR_ARCANE_ENCHANTMENT = new SonarArcaneEnchantment(MOD_ID+":sonar", 3);
 
     //CRYSTAL RITUALS
     public static CrystalRitual EMPTY_CRYSTAL_RITUAL = new CrystalRitual(MOD_ID+":empty");
@@ -2227,6 +2229,7 @@ public class WizardsReborn {
         ArcaneEnchantments.register(WISSEN_CHARGE_ARCANE_ENCHANTMENT);
         ArcaneEnchantments.register(EAGLE_SHOT_ARCANE_ENCHANTMENT);
         ArcaneEnchantments.register(SPLIT_ARCANE_ENCHANTMENT);
+        ArcaneEnchantments.register(SONAR_ARCANE_ENCHANTMENT);
     }
 
     public static void setupCrystalRituals() {

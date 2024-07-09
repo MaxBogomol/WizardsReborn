@@ -230,7 +230,7 @@ public class ThrowedScytheEntity extends ThrowableItemProjectile {
         if (!level().isClientSide()) {
             boolean dist = false;
             if (getOwner() instanceof Player player) {
-                if (distanceTo(getOwner()) < 150) {
+                if (distanceTo(getOwner()) < 150 && player.isAlive()) {
                     PacketHandler.sendTo(player, new AddScreenshakePacket(0.55f));
                     player.knockback(1f, getX() - player.getX(), getZ() - player.getZ());
                     player.hurtMarked = true;
@@ -280,7 +280,7 @@ public class ThrowedScytheEntity extends ThrowableItemProjectile {
                 level().addFreshEntity(itemEntity);
             }
         } else {
-            if (getSender() != null && distanceTo(getSender()) < 150) {
+            if (getSender() != null && distanceTo(getSender()) < 150 && getSender().isAlive()) {
                 Color color = WizardsReborn.THROW_ARCANE_ENCHANTMENT.getColor();
                 float r = color.getRed() / 255f;
                 float g = color.getGreen() / 255f;
