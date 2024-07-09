@@ -629,10 +629,13 @@ public class WizardsReborn {
 
     //ARCANE ENCHANTMENTS
     public static ArcaneEnchantment WISSEN_MENDING_ARCANE_ENCHANTMENT = new WissenMendingArcaneEnchantment(MOD_ID+":wissen_mending", 3);
+    public static ArcaneEnchantment LIFE_MENDING_ARCANE_ENCHANTMENT = new LifeMendingArcaneEnchantment(MOD_ID+":life_mending", 3);
     public static ArcaneEnchantment MAGIC_BLADE_ARCANE_ENCHANTMENT = new MagicBladeArcaneEnchantment(MOD_ID+":magic_blade", 5);
+    public static ArcaneEnchantment THROW_ARCANE_ENCHANTMENT = new ThrowArcaneEnchantment(MOD_ID+":throw", 1);
     public static ArcaneEnchantment LIFE_ROOTS_ARCANE_ENCHANTMENT = new LifeRootsArcaneEnchantment(MOD_ID+":life_roots", 2);
     public static ArcaneEnchantment WISSEN_CHARGE_ARCANE_ENCHANTMENT = new WissenChargeArcaneEnchantment(MOD_ID+":wissen_charge", 2);
-    public static ArcaneEnchantment THROW_ARCANE_ENCHANTMENT = new ThrowArcaneEnchantment(MOD_ID+":throw", 1);
+    public static ArcaneEnchantment EAGLE_SHOT_ARCANE_ENCHANTMENT = new EagleShotArcaneEnchantment(MOD_ID+":eagle_shot", 4);
+    public static ArcaneEnchantment SPLIT_ARCANE_ENCHANTMENT = new WissenChargeArcaneEnchantment(MOD_ID+":split", 2);
 
     //CRYSTAL RITUALS
     public static CrystalRitual EMPTY_CRYSTAL_RITUAL = new CrystalRitual(MOD_ID+":empty");
@@ -1454,7 +1457,7 @@ public class WizardsReborn {
     public static final RegistryObject<Item> ARCANEMICON = ITEMS.register("arcanemicon", () -> new ArcanemiconItem(new Item.Properties().stacksTo(1)));
     public static final RegistryObject<Item> KNOWLEDGE_SCROLL = ITEMS.register("knowledge_scroll", () -> new KnowledgeSrollItem(new Item.Properties().stacksTo(1).rarity(Rarity.UNCOMMON)));
     public static final RegistryObject<Item> CREATIVE_KNOWLEDGE_SCROLL = ITEMS.register("creative_knowledge_scroll", () -> new CreativeKnowledgeSrollItem(new Item.Properties().stacksTo(1).rarity(Rarity.EPIC), false));
-    public static final RegistryObject<Item> CREATIVE_KKNOWLEDGE_ANCIENT_SCROLL = ITEMS.register("creative_knowledge_ancient_scroll", () -> new CreativeKnowledgeSrollItem(new Item.Properties().stacksTo(1).rarity(Rarity.EPIC), true));
+    public static final RegistryObject<Item> CREATIVE_KNOWLEDGE_ANCIENT_SCROLL = ITEMS.register("creative_knowledge_ancient_scroll", () -> new CreativeKnowledgeSrollItem(new Item.Properties().stacksTo(1).rarity(Rarity.EPIC), true));
     public static final RegistryObject<Item> CREATIVE_SPELL_SCROLL = ITEMS.register("creative_spell_scroll", () -> new CreativeSpellSrollItem(new Item.Properties().stacksTo(1).rarity(Rarity.EPIC), false));
     public static final RegistryObject<Item> CREATIVE_SPELL_ANCIENT_SCROLL = ITEMS.register("creative_spell_ancient_scroll", () -> new CreativeSpellSrollItem(new Item.Properties().stacksTo(1).rarity(Rarity.EPIC), true));
 
@@ -2216,10 +2219,13 @@ public class WizardsReborn {
 
     public static void setupArcaneEnchantments() {
         ArcaneEnchantments.register(WISSEN_MENDING_ARCANE_ENCHANTMENT);
+        ArcaneEnchantments.register(LIFE_MENDING_ARCANE_ENCHANTMENT);
         ArcaneEnchantments.register(MAGIC_BLADE_ARCANE_ENCHANTMENT);
+        ArcaneEnchantments.register(THROW_ARCANE_ENCHANTMENT);
         ArcaneEnchantments.register(LIFE_ROOTS_ARCANE_ENCHANTMENT);
         ArcaneEnchantments.register(WISSEN_CHARGE_ARCANE_ENCHANTMENT);
-        ArcaneEnchantments.register(THROW_ARCANE_ENCHANTMENT);
+        ArcaneEnchantments.register(EAGLE_SHOT_ARCANE_ENCHANTMENT);
+        ArcaneEnchantments.register(SPLIT_ARCANE_ENCHANTMENT);
     }
 
     public static void setupCrystalRituals() {

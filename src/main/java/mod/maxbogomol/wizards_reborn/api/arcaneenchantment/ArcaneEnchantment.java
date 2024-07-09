@@ -48,6 +48,10 @@ public class ArcaneEnchantment {
         return maxLevel;
     }
 
+    public boolean isCurse() {
+        return false;
+    }
+
     public String getTranslatedName() {
         return getTranslatedName(id);
     }
@@ -94,6 +98,8 @@ public class ArcaneEnchantment {
         float r = getColor().getRed() / 255f;
         float g = getColor().getGreen() / 255f;
         float b = getColor().getBlue() / 255f;
+
+        if (isCurse()) ticks = -ticks;
 
         RenderSystem.enableBlend();
         RenderSystem.blendFunc(GlStateManager.SourceFactor.SRC_ALPHA, GlStateManager.DestFactor.ONE);

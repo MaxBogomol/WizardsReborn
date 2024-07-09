@@ -1,6 +1,6 @@
 {
   "parent": "item/generated",
   "textures": {
-    "layer0": "wizards_reborn:item/arcanemicon"
+    "layer0": "wizards_reborn:item/arcane_enchanted_book"
   }
 }

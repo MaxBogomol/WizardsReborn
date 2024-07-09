@@ -1,6 +1,7 @@
 package mod.maxbogomol.wizards_reborn.mixin.client;
 
 import mod.maxbogomol.wizards_reborn.WizardsReborn;
+import mod.maxbogomol.wizards_reborn.common.arcaneenchantment.EagleShotArcaneEnchantment;
 import net.minecraft.client.player.AbstractClientPlayer;
 import net.minecraft.world.item.ItemStack;
 import org.spongepowered.asm.mixin.Mixin;
@@ -27,9 +28,9 @@ public abstract class AbstractClientPlayerMixin {
                 }
 
                 f *= 1.0F - f1 * 0.15F;
+                f = EagleShotArcaneEnchantment.getFOW(self, itemstack, f);
                 cir.setReturnValue(net.minecraftforge.client.ForgeHooksClient.getFieldOfViewModifier(self, f));
             }
-
         }
     }
 }

@@ -131,7 +131,7 @@ public class TotemOfDisenchantTileEntity extends BlockEntity implements Tickable
                     }
 
                     ArcaneEnchantment arcaneEnchantmentP = ArcaneEnchantments.getArcaneEnchantment(arcaneEnchantment);
-                    if (arcaneEnchantmentP != null && ArcaneEnchantmentUtils.isArcaneItem(itemHandler.getStackInSlot(0))) {
+                    if (arcaneEnchantmentP != null && ArcaneEnchantmentUtils.isArcaneItem(itemHandler.getStackInSlot(0))  && !arcaneEnchantmentP.isCurse()) {
                         ArcaneEnchantmentUtils.removeArcaneEnchantment(itemHandler.getStackInSlot(0), arcaneEnchantmentP);
                         addWissen(enchantmentLevel * 1000);
                     }

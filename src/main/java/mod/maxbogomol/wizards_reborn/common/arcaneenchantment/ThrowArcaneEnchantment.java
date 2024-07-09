@@ -34,10 +34,12 @@ public class ThrowArcaneEnchantment extends ArcaneEnchantment {
         super(id, maxLevel);
     }
 
+    @Override
     public Color getColor() {
         return new Color(234, 129, 210);
     }
 
+    @Override
     public boolean canEnchantItem(ItemStack stack) {
         if (stack.getItem() instanceof IArcaneItem item) {
             return item.getArcaneEnchantmentTypes().contains(ArcaneEnchantmentType.SCYTHE);

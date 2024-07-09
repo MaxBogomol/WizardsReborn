@@ -1,55 +1,34 @@
 package mod.maxbogomol.wizards_reborn.mixin;
 
-import mod.maxbogomol.wizards_reborn.WizardsReborn;
-import mod.maxbogomol.wizards_reborn.api.arcaneenchantment.ArcaneEnchantmentUtils;
-import mod.maxbogomol.wizards_reborn.api.wissen.WissenUtils;
-import mod.maxbogomol.wizards_reborn.common.capability.IWissenCharge;
+import mod.maxbogomol.wizards_reborn.common.arcaneenchantment.EagleShotArcaneEnchantment;
+import mod.maxbogomol.wizards_reborn.common.arcaneenchantment.WissenChargeArcaneEnchantment;
 import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.entity.projectile.AbstractArrow;
 import net.minecraft.world.item.BowItem;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import org.spongepowered.asm.mixin.Mixin;
+import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
+import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.ModifyVariable;
-
-import java.util.List;
+import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 @Mixin(BowItem.class)
 public class BowItemMixin {
 
+    @Unique
+    public AbstractArrow wizards_reborn$abstractArrow;
+
     @ModifyVariable(method = "releaseUsing", at = @At("STORE"))
-    public AbstractArrow wizards_reborn$getTooltip(AbstractArrow abstractarrow, ItemStack stack, Level level, LivingEntity entityLiving, int timeLeft) {
-        if (entityLiving instanceof Player player && ArcaneEnchantmentUtils.isArcaneItem(stack)) {
-            int enchantmentLevel = ArcaneEnchantmentUtils.getArcaneEnchantment(stack, WizardsReborn.WISSEN_CHARGE_ARCANE_ENCHANTMENT);
-            if (enchantmentLevel > 0) {
-                if (BowItem.getPowerForTime(stack.getUseDuration() - timeLeft) >= 1f) {
-                    abstractarrow.getCapability(IWissenCharge.INSTANCE, null).ifPresent((w) -> {
-                        int time = stack.getUseDuration() - timeLeft;
-                        if (time > 100) {
-                            time = 100;
-                        }
-                        if (time > 50 && enchantmentLevel == 1) {
-                            time = 50;
-                        }
-
-                        float costModifier = WissenUtils.getWissenCostModifierWithDiscount(player);
-                        List<ItemStack> items = WissenUtils.getWissenItemsNoneAndStorage(WissenUtils.getWissenItemsCurios(player));
-                        int wissen = WissenUtils.getWissenInItems(items);
-                        int cost = (int) ((30 + time) * (1 - costModifier));
-                        if (cost <= 0) {
-                            cost = 1;
-                        }
-
-                        if (WissenUtils.canRemoveWissen(wissen, cost)) {
-                            WissenUtils.removeWissenFromWissenItems(items, cost);
-                            w.setCharge(time);
-                        }
-                    });
-                }
-            }
-        }
+    public AbstractArrow wizards_reborn$releaseUsing(AbstractArrow abstractarrow, ItemStack stack, Level level, LivingEntity entityLiving, int timeLeft) {
+        this.wizards_reborn$abstractArrow = abstractarrow;
+        WissenChargeArcaneEnchantment.onBowShot(abstractarrow, stack, level, entityLiving, timeLeft);
         return abstractarrow;
+    }
+
+    @Inject(at = @At(value = "INVOKE", target = "Lnet/minecraft/world/level/Level;addFreshEntity(Lnet/minecraft/world/entity/Entity;)Z"), method = "releaseUsing")
+    public void wizards_reborn$releaseUsing(ItemStack stack, Level level, LivingEntity entityLiving, int timeLeft, CallbackInfo ci) {
+        EagleShotArcaneEnchantment.onBowShot(this.wizards_reborn$abstractArrow, stack, level, entityLiving, timeLeft);
     }
 }

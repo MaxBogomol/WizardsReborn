@@ -1,10 +1,7 @@
 package mod.maxbogomol.wizards_reborn.api.arcaneenchantment;
 
 import com.google.common.collect.Maps;
-import mod.maxbogomol.wizards_reborn.common.arcaneenchantment.MagicBladeArcaneEnchantment;
-import mod.maxbogomol.wizards_reborn.common.arcaneenchantment.ThrowArcaneEnchantment;
-import mod.maxbogomol.wizards_reborn.common.arcaneenchantment.WissenChargeArcaneEnchantment;
-import mod.maxbogomol.wizards_reborn.common.arcaneenchantment.WissenMendingArcaneEnchantment;
+import mod.maxbogomol.wizards_reborn.common.arcaneenchantment.*;
 import mod.maxbogomol.wizards_reborn.utils.ColorUtils;
 import net.minecraft.ChatFormatting;
 import net.minecraft.nbt.CompoundTag;
@@ -163,7 +160,7 @@ public class ArcaneEnchantmentUtils {
                     int G = (int) Mth.lerp(((float) enchantmentLevel / maxEnchantmentLevel), 100, color.getGreen());
                     int B = (int) Mth.lerp(((float) enchantmentLevel / maxEnchantmentLevel), 100, color.getBlue());
 
-                    list.add(Component.literal(" ").append(arcaneEnchantment.getFullname(enchantmentLevel)).withStyle(Style.EMPTY.withColor(ColorUtils.packColor(255, R, G, B))));
+                    list.add(Component.literal(" ").append(arcaneEnchantment.getFullname(enchantmentLevel)).withStyle(Style.EMPTY.withColor(ColorUtils.packColor(255, R, G, B)).withBold(arcaneEnchantment.isCurse())));
                 }
             }
         }
@@ -187,10 +184,12 @@ public class ArcaneEnchantmentUtils {
     }
 
     public static void inventoryTick(ItemStack stack, Level world, Entity entity, int slot, boolean isSelected) {
+        LifeMendingArcaneEnchantment.inventoryTick(stack, world, entity, slot, isSelected);
         WissenMendingArcaneEnchantment.inventoryTick(stack, world, entity, slot, isSelected);
     }
 
     public static int damageItem(ItemStack stack, int amount, LivingEntity entity) {
+        amount = LifeMendingArcaneEnchantment.damageItem(stack, amount, entity);
         return WissenMendingArcaneEnchantment.damageItem(stack, amount, entity);
     }
 

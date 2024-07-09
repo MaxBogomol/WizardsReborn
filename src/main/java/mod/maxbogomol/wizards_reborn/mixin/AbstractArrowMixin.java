@@ -18,7 +18,7 @@ public class AbstractArrowMixin {
     }
 
     @Inject(method = "onHitBlock", at = @At("RETURN"))
-    private void wizards_reborn$onHitEntity(BlockHitResult result, CallbackInfo ci) {
+    private void wizards_reborn$onHitBlock(BlockHitResult result, CallbackInfo ci) {
         AbstractArrow self = (AbstractArrow) ((Object) this);
         WissenChargeArcaneEnchantment.onHitBlock(result, self);
     }

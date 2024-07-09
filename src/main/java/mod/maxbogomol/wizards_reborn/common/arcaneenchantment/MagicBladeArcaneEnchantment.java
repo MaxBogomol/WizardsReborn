@@ -34,10 +34,12 @@ public class MagicBladeArcaneEnchantment extends ArcaneEnchantment {
         super(id, maxLevel);
     }
 
+    @Override
     public Color getColor() {
         return new Color(110, 78, 169);
     }
 
+    @Override
     public boolean canEnchantItem(ItemStack stack) {
         if (stack.getItem() instanceof IArcaneItem item) {
             return item.getArcaneEnchantmentTypes().contains(ArcaneEnchantmentType.MELEE_WEAPON);

@@ -7,7 +7,7 @@ import mod.maxbogomol.wizards_reborn.api.arcaneenchantment.ArcaneEnchantmentUtil
 import mod.maxbogomol.wizards_reborn.api.arcaneenchantment.IArcaneItem;
 import mod.maxbogomol.wizards_reborn.api.wissen.WissenUtils;
 import mod.maxbogomol.wizards_reborn.client.particle.Particles;
-import mod.maxbogomol.wizards_reborn.common.capability.IWissenCharge;
+import mod.maxbogomol.wizards_reborn.common.capability.IArrowModifier;
 import mod.maxbogomol.wizards_reborn.common.damage.DamageSourceRegistry;
 import mod.maxbogomol.wizards_reborn.common.network.PacketHandler;
 import mod.maxbogomol.wizards_reborn.common.network.WissenChargeBurstEffectPacket;
@@ -41,10 +41,12 @@ public class WissenChargeArcaneEnchantment extends ArcaneEnchantment {
         super(id, maxLevel);
     }
 
+    @Override
     public Color getColor() {
         return new Color(87, 127, 184);
     }
 
+    @Override
     public boolean canEnchantItem(ItemStack stack) {
         if (stack.getItem() instanceof IArcaneItem item) {
             return item.getArcaneEnchantmentTypes().contains(ArcaneEnchantmentType.BOW);
@@ -107,6 +109,38 @@ public class WissenChargeArcaneEnchantment extends ArcaneEnchantment {
                             }
                         }
                     }
+                }
+            }
+        }
+    }
+
+    public static void onBowShot(AbstractArrow abstractarrow, ItemStack stack, Level level, LivingEntity entityLiving, int timeLeft) {
+        if (entityLiving instanceof Player player && ArcaneEnchantmentUtils.isArcaneItem(stack)) {
+            int enchantmentLevel = ArcaneEnchantmentUtils.getArcaneEnchantment(stack, WizardsReborn.WISSEN_CHARGE_ARCANE_ENCHANTMENT);
+            if (enchantmentLevel > 0) {
+                if (BowItem.getPowerForTime(stack.getUseDuration() - timeLeft) >= 1f) {
+                    abstractarrow.getCapability(IArrowModifier.INSTANCE, null).ifPresent((w) -> {
+                        int time = stack.getUseDuration() - timeLeft;
+                        if (time > 100) {
+                            time = 100;
+                        }
+                        if (time > 50 && enchantmentLevel == 1) {
+                            time = 50;
+                        }
+
+                        float costModifier = WissenUtils.getWissenCostModifierWithDiscount(player);
+                        List<ItemStack> items = WissenUtils.getWissenItemsNoneAndStorage(WissenUtils.getWissenItemsCurios(player));
+                        int wissen = WissenUtils.getWissenInItems(items);
+                        int cost = (int) ((30 + time) * (1 - costModifier));
+                        if (cost <= 0) {
+                            cost = 1;
+                        }
+
+                        if (WissenUtils.canRemoveWissen(wissen, cost)) {
+                            WissenUtils.removeWissenFromWissenItems(items, cost);
+                            w.setCharge(time);
+                        }
+                    });
                 }
             }
         }
@@ -184,7 +218,7 @@ public class WissenChargeArcaneEnchantment extends ArcaneEnchantment {
     public static boolean isCharged(Entity entity) {
         if (!(entity instanceof AbstractArrow)) return false;
         AtomicBoolean isCharged = new AtomicBoolean(false);
-        entity.getCapability(IWissenCharge.INSTANCE, null).ifPresent((w) -> {
+        entity.getCapability(IArrowModifier.INSTANCE, null).ifPresent((w) -> {
             isCharged.set(w.isCharged());
         });
         return isCharged.get();
@@ -193,7 +227,7 @@ public class WissenChargeArcaneEnchantment extends ArcaneEnchantment {
     public static int getCharge(Entity entity) {
         if (!(entity instanceof AbstractArrow)) return 0;
         AtomicInteger charge = new AtomicInteger(0);
-        entity.getCapability(IWissenCharge.INSTANCE, null).ifPresent((w) -> {
+        entity.getCapability(IArrowModifier.INSTANCE, null).ifPresent((w) -> {
             charge.set(w.getCharge());
         });
         return charge.get();
@@ -201,7 +235,7 @@ public class WissenChargeArcaneEnchantment extends ArcaneEnchantment {
 
     public static void setCharge(Entity entity, int charge) {
         if (!(entity instanceof AbstractArrow)) return;
-        entity.getCapability(IWissenCharge.INSTANCE, null).ifPresent((w) -> {
+        entity.getCapability(IArrowModifier.INSTANCE, null).ifPresent((w) -> {
             w.setCharge(charge);
         });
     }

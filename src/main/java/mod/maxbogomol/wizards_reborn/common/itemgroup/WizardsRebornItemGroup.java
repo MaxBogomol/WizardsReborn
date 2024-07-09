@@ -4,6 +4,9 @@ import mod.maxbogomol.wizards_reborn.WizardsReborn;
 import mod.maxbogomol.wizards_reborn.api.alchemy.AlchemyPotion;
 import mod.maxbogomol.wizards_reborn.api.alchemy.AlchemyPotionUtils;
 import mod.maxbogomol.wizards_reborn.api.alchemy.AlchemyPotions;
+import mod.maxbogomol.wizards_reborn.api.arcaneenchantment.ArcaneEnchantment;
+import mod.maxbogomol.wizards_reborn.api.arcaneenchantment.ArcaneEnchantmentUtils;
+import mod.maxbogomol.wizards_reborn.api.arcaneenchantment.ArcaneEnchantments;
 import mod.maxbogomol.wizards_reborn.api.crystalritual.CrystalRitual;
 import mod.maxbogomol.wizards_reborn.api.crystalritual.CrystalRitualUtils;
 import mod.maxbogomol.wizards_reborn.api.crystalritual.CrystalRituals;
@@ -523,7 +526,7 @@ public class WizardsRebornItemGroup {
 
             event.accept(WizardsReborn.KNOWLEDGE_SCROLL);
             event.accept(WizardsReborn.CREATIVE_KNOWLEDGE_SCROLL);
-            event.accept(WizardsReborn.CREATIVE_KKNOWLEDGE_ANCIENT_SCROLL);
+            event.accept(WizardsReborn.CREATIVE_KNOWLEDGE_ANCIENT_SCROLL);
             event.accept(WizardsReborn.CREATIVE_SPELL_SCROLL);
             event.accept(WizardsReborn.CREATIVE_SPELL_ANCIENT_SCROLL);
 
@@ -549,6 +552,14 @@ public class WizardsRebornItemGroup {
             event.accept(WizardsReborn.SOUL_HUNTER_TRIM);
             event.accept(WizardsReborn.IMPLOSION_TRIM);
             event.accept(WizardsReborn.PHANTOM_INK_TRIM);
+
+            for (ArcaneEnchantment enchantment : ArcaneEnchantments.getArcaneEnchantments()) {
+                for (int i = 0; i < enchantment.getMaxLevel(); i++) {
+                    ItemStack stack = new ItemStack(WizardsReborn.ARCANE_ENCHANTED_BOOK.get());
+                    ArcaneEnchantmentUtils.addArcaneEnchantment(stack, enchantment, i + 1);
+                    event.accept(stack);
+                }
+            }
 
             for (AlchemyPotion potion : AlchemyPotions.getAlchemyPotions()) {
                 if (potion != RegisterAlchemyPotions.EMPTY && potion != RegisterAlchemyPotions.COMBINED) {

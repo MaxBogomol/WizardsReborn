@@ -187,7 +187,7 @@ public class TotemOfDisenchantScreen extends AbstractContainerScreen<TotemOfDise
                 for (ArcaneEnchantment enchantment : arcaneEnchantments.keySet()) {
                     ItemStack book = new ItemStack(WizardsReborn.ARCANE_ENCHANTED_BOOK.get());
                     ArcaneEnchantmentUtils.addArcaneEnchantment(book, enchantment, arcaneEnchantments.get(enchantment));
-                    if (x >= i + 44 + (xx * 18) && y >= j + 18 + (yy * 18) && x <= i + 44 + (xx * 18) + 16 && y <= j + 18 + (yy * 18) + 16 && !totem.isStart) {
+                    if (x >= i + 44 + (xx * 18) && y >= j + 18 + (yy * 18) && x <= i + 44 + (xx * 18) + 16 && y <= j + 18 + (yy * 18) + 16 && !totem.isStart && !enchantment.isCurse()) {
                         currentBook = book;
                         Minecraft.getInstance().player.playNotifySound(SoundEvents.BOOK_PAGE_TURN, SoundSource.NEUTRAL, 1.0f, 1.0f);
                         return true;

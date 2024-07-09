@@ -3,7 +3,7 @@ package mod.maxbogomol.wizards_reborn.common.capability;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraftforge.common.util.INBTSerializable;
 
-public class WissenChargeImpl implements IWissenCharge, INBTSerializable<CompoundTag> {
+public class ArrowModifierImpl implements IArrowModifier, INBTSerializable<CompoundTag> {
     int charge = 0;
 
     @Override

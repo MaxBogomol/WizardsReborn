@@ -13,10 +13,12 @@ public class LifeRootsArcaneEnchantment extends ArcaneEnchantment {
         super(id, maxLevel);
     }
 
+    @Override
     public Color getColor() {
         return new Color(164, 201, 167);
     }
 
+    @Override
     public boolean canEnchantItem(ItemStack stack) {
         if (stack.getItem() instanceof IArcaneItem item) {
             return item.getArcaneEnchantmentTypes().contains(ArcaneEnchantmentType.WOODEN);

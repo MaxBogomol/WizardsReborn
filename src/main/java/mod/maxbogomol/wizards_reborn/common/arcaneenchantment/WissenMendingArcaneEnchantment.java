@@ -21,12 +21,15 @@ public class WissenMendingArcaneEnchantment extends ArcaneEnchantment {
         super(id, maxLevel);
     }
 
+    @Override
     public Color getColor() {
         return new Color(87, 127, 184);
     }
 
+    @Override
     public boolean canEnchantItem(ItemStack stack) {
         if (stack.getItem() instanceof IArcaneItem item) {
+            if (ArcaneEnchantmentUtils.getArcaneEnchantment(stack, WizardsReborn.LIFE_MENDING_ARCANE_ENCHANTMENT) > 0) return false;
             return item.getArcaneEnchantmentTypes().contains(ArcaneEnchantmentType.BREAKABLE);
         }
         return false;

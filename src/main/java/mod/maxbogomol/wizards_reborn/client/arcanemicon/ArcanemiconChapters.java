@@ -2392,7 +2392,7 @@ public class ArcanemiconChapters {
                         new IndexEntry(VOID_SPELLS, new ItemStack(WizardsReborn.FACETED_VOID_CRYSTAL.get()), RegisterKnowledges.VOID_CRYSTAL)
                 ),
                 new IndexPage(
-                        new IndexEntry(RESEARCHES, new ItemStack(WizardsReborn.ARCANEMICON.get()), RegisterKnowledges.ARCANE_WAND),
+                        new IndexEntry(RESEARCHES, new ItemStack(WizardsReborn.ARCANE_ENCHANTED_BOOK.get()), RegisterKnowledges.ARCANE_WAND),
                         new IndexEntry(MONOGRAMS, new ItemStack(WizardsReborn.ARCANEMICON.get()), RegisterKnowledges.ARCANE_WAND)
                 )
         );
@@ -4174,7 +4174,7 @@ public class ArcanemiconChapters {
         ADDITIONAL_INDEX = new Chapter(
                 "wizards_reborn.arcanemicon.chapter.additional_index",
                 new TitledIndexPage("wizards_reborn.arcanemicon.page.additional_index",
-                        new IndexEntry(PROGRESSION, new ItemStack(WizardsReborn.KNOWLEDGE_SCROLL.get())),
+                        new IndexEntry(PROGRESSION, new ItemStack(WizardsReborn.CREATIVE_KNOWLEDGE_SCROLL.get())),
                         new IndexEntry(STATISTIC, new ItemStack(WizardsReborn.KNOWLEDGE_SCROLL.get())),
                         new IndexEntry(CONFIGS, new ItemStack(WizardsReborn.WISSEN_WAND.get())),
                         new IndexEntry(SPECIAL_THANKS, new ItemStack(WizardsReborn.INNOCENT_WOOD_SAPLING_ITEM.get()))

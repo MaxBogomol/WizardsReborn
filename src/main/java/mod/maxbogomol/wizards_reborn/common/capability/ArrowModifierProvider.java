@@ -7,12 +7,12 @@ import net.minecraftforge.common.capabilities.ICapabilityProvider;
 import net.minecraftforge.common.util.INBTSerializable;
 import net.minecraftforge.common.util.LazyOptional;
 
-public class WissenChargeProvider implements ICapabilityProvider, INBTSerializable<CompoundTag> {
-    WissenChargeImpl impl = new WissenChargeImpl();
+public class ArrowModifierProvider implements ICapabilityProvider, INBTSerializable<CompoundTag> {
+    ArrowModifierImpl impl = new ArrowModifierImpl();
 
     @Override
     public <T> LazyOptional<T> getCapability(Capability<T> cap, Direction side) {
-        if (cap == WissenChargeImpl.INSTANCE) return (LazyOptional<T>) LazyOptional.of(() -> impl);
+        if (cap == ArrowModifierImpl.INSTANCE) return (LazyOptional<T>) LazyOptional.of(() -> impl);
         else return LazyOptional.empty();
     }
 

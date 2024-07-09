@@ -4,8 +4,8 @@ import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.capabilities.CapabilityManager;
 import net.minecraftforge.common.capabilities.CapabilityToken;
 
-public interface IWissenCharge {
-    Capability<IWissenCharge> INSTANCE = CapabilityManager.get(new CapabilityToken<>() {});
+public interface IArrowModifier {
+    Capability<IArrowModifier> INSTANCE = CapabilityManager.get(new CapabilityToken<>() {});
 
     boolean isCharged();
     void addCharge(int charge);
