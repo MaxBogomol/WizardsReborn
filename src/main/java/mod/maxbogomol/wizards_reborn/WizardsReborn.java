@@ -1034,7 +1034,7 @@ public class WizardsReborn {
     public static final RegistryObject<Item> PRECISION_CRYSTAL_BLOCK_ITEM = ITEMS.register("precision_crystal_block", () -> new BlockItem(PRECISION_CRYSTAL_BLOCK.get(), new Item.Properties()));
 
     public static final RegistryObject<Item> NETHER_SALT = ITEMS.register("nether_salt", () -> new NetherSaltItem(new Item.Properties(), 3200));
-    public static final RegistryObject<Item> NETHER_SALT_BLOCK_ITEM = ITEMS.register("nether_salt_block", () -> new BlockItem(NETHER_SALT_BLOCK.get(), new Item.Properties()));
+    public static final RegistryObject<Item> NETHER_SALT_BLOCK_ITEM = ITEMS.register("nether_salt_block", () -> new FuelBlockItem(NETHER_SALT_BLOCK.get(), new Item.Properties(), 32000));
     public static final RegistryObject<Item> NETHER_SALT_ORE_ITEM = ITEMS.register("nether_salt_ore", () -> new BlockItem(NETHER_SALT_ORE.get(), new Item.Properties()));
 
     public static final RegistryObject<Item> ARCANE_WOOD_LOG_ITEM = ITEMS.register("arcane_wood_log", () -> new BlockItem(ARCANE_WOOD_LOG.get(), new Item.Properties()));

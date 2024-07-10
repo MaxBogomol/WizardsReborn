@@ -59,7 +59,7 @@ public class ArcanePickaxeItem extends PickaxeItem implements IArcaneItem {
             float costModifier = WissenUtils.getWissenCostModifierWithDiscount(player);
             List<ItemStack> items = WissenUtils.getWissenItemsNoneAndStorage(WissenUtils.getWissenItemsCurios(player));
             int wissen = WissenUtils.getWissenInItems(items);
-            int cost = (int) (200 * (1 - costModifier));
+            int cost = (int) (60 * (1 - costModifier));
 
             if (WissenUtils.canRemoveWissen(wissen, cost)) {
                 if (SonarArcaneEnchantment.getCooldown(stack) <= 0 && SonarArcaneEnchantment.getOres(stack).isEmpty()) {
