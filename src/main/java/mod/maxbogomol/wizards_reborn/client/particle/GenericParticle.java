@@ -57,4 +57,9 @@ public class GenericParticle extends TextureSheetParticle {
     public ParticleRenderType getRenderType() {
         return SpriteParticleRenderType.INSTANCE;
     }
+
+    @Override
+    public boolean shouldCull() {
+        return false;
+    }
 }

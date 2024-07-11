@@ -405,6 +405,16 @@ public class RenderUtils {
         builder.vertex(mat, x - (width / 2), y - (height / 2), 0).uv(u0, v0).uv2(0).color(r, g, b, a).endVertex();
     }
 
+    public static void spriteWaveQuad(PoseStack mStack, MultiBufferSource buf, float x, float y, float width, float height, float wave, float tick1, float tick2, float tick3, float tick4, float u0, float u1, float v0, float v1, float r, float g, float b, float a) {
+        VertexConsumer builder = buf.getBuffer(GLOWING_SPRITE);
+
+        Matrix4f mat = mStack.last().pose();
+        builder.vertex(mat, x - (width / 2) + (wave * (float) Math.sin(Math.toRadians(tick1))), y + (height / 2) + (wave * (float) Math.cos(Math.toRadians(tick1))), 0).uv(u0, v1).uv2(0).color(r, g, b, a).endVertex();
+        builder.vertex(mat, x + (width / 2) + (wave * (float) Math.sin(Math.toRadians(tick2))), y + (height / 2) + (wave * (float) Math.cos(Math.toRadians(tick2))), 0).uv(u1, v1).uv2(0).color(r, g, b, a).endVertex();
+        builder.vertex(mat, x + (width / 2) + (wave * (float) Math.sin(Math.toRadians(tick3))), y - (height / 2) + (wave * (float) Math.cos(Math.toRadians(tick3))), 0).uv(u1, v0).uv2(0).color(r, g, b, a).endVertex();
+        builder.vertex(mat, x - (width / 2) + (wave * (float) Math.sin(Math.toRadians(tick4))), y - (height / 2) + (wave * (float) Math.cos(Math.toRadians(tick4))), 0).uv(u0, v0).uv2(0).color(r, g, b, a).endVertex();
+    }
+
     public static void renderCustomModel(ModelResourceLocation model, ItemDisplayContext diplayContext, boolean leftHand, PoseStack poseStack, MultiBufferSource buffer, int combinedLight, int combinedOverlay) {
         BakedModel bakedmodel = Minecraft.getInstance().getItemRenderer().getItemModelShaper().getModelManager().getModel(model);
         Minecraft.getInstance().getItemRenderer().render(new ItemStack(Items.DIRT), diplayContext, leftHand, poseStack, buffer, combinedLight, combinedOverlay, bakedmodel);

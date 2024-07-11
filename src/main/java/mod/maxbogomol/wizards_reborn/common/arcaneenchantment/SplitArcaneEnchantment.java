@@ -75,7 +75,7 @@ public class SplitArcaneEnchantment extends ArcaneEnchantment {
                             arrow.setBaseDamage(abstractarrow.getBaseDamage());
                             arrow.setKnockback(abstractarrow.getKnockback());
                             arrow.setSecondsOnFire(abstractarrow.getRemainingFireTicks());
-                            arrow.pickup = abstractarrow.pickup;
+                            arrow.pickup = AbstractArrow.Pickup.DISALLOWED;
 
                             if (charge > 0) {
                                 WissenChargeArcaneEnchantment.setCharge(arrow, charge);

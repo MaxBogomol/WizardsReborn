@@ -647,8 +647,10 @@ public class WizardsReborn {
     public static CrystalRitual CRYSTAL_INFUSION_CRYSTAL_RITUAL = new CrystalInfusionCrystalRitual(MOD_ID+":crystal_infusion");
     //public static CrystalRitual STONE_CALENDAR_CRYSTAL_RITUAL = new CrystalRitual(MOD_ID+":stone_calendar");
 
-    public static final FoodProperties MOR_FOOD = (new FoodProperties.Builder()).nutrition(1).saturationMod(0.6F).effect(new MobEffectInstance(MobEffects.POISON, 450, 0), 1.0F).effect(new MobEffectInstance(MobEffects.CONFUSION, 350, 0), 1.0F).effect(new MobEffectInstance(MobEffects.BLINDNESS, 250, 0), 1.0F).effect(new MobEffectInstance(MobEffects.WEAKNESS, 550, 1), 1.0F).build();
-    public static final FoodProperties PITCHER_TURNIP_FOOD = (new FoodProperties.Builder()).nutrition(2).saturationMod(0.8F).build();
+    public static final FoodProperties MOR_FOOD = (new FoodProperties.Builder()).nutrition(1).saturationMod(0.2F).effect(new MobEffectInstance(MobEffects.POISON, 450, 0), 1.0F).effect(new MobEffectInstance(MobEffects.CONFUSION, 350, 0), 1.0F).effect(new MobEffectInstance(MobEffects.BLINDNESS, 250, 0), 1.0F).effect(new MobEffectInstance(MobEffects.WEAKNESS, 550, 1), 1.0F).build();
+    public static final FoodProperties PITCHER_TURNIP_FOOD = (new FoodProperties.Builder()).nutrition(2).saturationMod(0.4F).build();
+    public static final FoodProperties SHRIMP_FOOD = (new FoodProperties.Builder()).nutrition(4).saturationMod(0.25F).build();
+    public static final FoodProperties FRIED_SHRIMP_FOOD = (new FoodProperties.Builder()).nutrition(8).saturationMod(0.6F).build();
 
     //BLOCKS
     public static final RegistryObject<Block> ARCANE_GOLD_BLOCK = BLOCKS.register("arcane_gold_block", () -> new Block(BlockBehaviour.Properties.copy(Blocks.GOLD_BLOCK).sound(ARCANE_GOLD_SOUNDS)));
@@ -1485,6 +1487,9 @@ public class WizardsReborn {
     public static final RegistryObject<Item> SOUL_HUNTER_TRIM = ITEMS.register("soul_hunter_trim", () -> new SkinTrimItem(new Item.Properties(), SOUL_HUNTER_SKIN));
     public static final RegistryObject<Item> IMPLOSION_TRIM = ITEMS.register("implosion_trim", () -> new SkinTrimItem(new Item.Properties(), IMPLOSION_SKIN));
     public static final RegistryObject<Item> PHANTOM_INK_TRIM = ITEMS.register("phantom_ink_trim", () -> new SkinTrimItem(new Item.Properties(), PHANTOM_INK_SKIN));
+
+    public static final RegistryObject<Item> SHRIMP = ITEMS.register("shrimp", () -> new ShrimpItem(new Item.Properties().food(SHRIMP_FOOD), false));
+    public static final RegistryObject<Item> FRIED_SHRIMP = ITEMS.register("fried_shrimp", () -> new ShrimpItem(new Item.Properties().food(FRIED_SHRIMP_FOOD), true));
 
     //TILE_ENTITIES
     public static final RegistryObject<BlockEntityType<CustomSignTileEntity>> SIGN_TILE_ENTITY = TILE_ENTITIES.register("sign", () -> BlockEntityType.Builder.of(CustomSignTileEntity::new,

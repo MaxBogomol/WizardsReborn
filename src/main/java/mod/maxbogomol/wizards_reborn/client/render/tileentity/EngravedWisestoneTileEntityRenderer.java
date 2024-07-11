@@ -45,6 +45,7 @@ public class EngravedWisestoneTileEntityRenderer implements BlockEntityRenderer<
             if (alpha > 1f) alpha = 1f;
             if (alpha < 0f) alpha = 0f;
             float offset = 1f + ((1f - alpha) * 10f);
+            float rotateOffset = offset / 2f;
 
             ms.pushPose();
             ms.translate(0.5f, 0.5f, 0.5f);
@@ -56,14 +57,20 @@ public class EngravedWisestoneTileEntityRenderer implements BlockEntityRenderer<
 
             for (int i = 0; i < 5; i++) {
                 ms.translate(0, 0, -0.005f * offset);
-                ms.mulPose(Axis.ZP.rotationDegrees((float) Math.sin(Math.toRadians(((random.nextFloat() * 360) + ticks))) * offset));
-                ms.mulPose(Axis.XP.rotationDegrees((float) Math.sin(Math.toRadians(((random.nextFloat() * 360) + ticks))) * offset));
-                ms.mulPose(Axis.YP.rotationDegrees((float) Math.sin(Math.toRadians(((random.nextFloat() * 360) + ticks))) * offset));
-                RenderUtils.spriteGlowQuadCenter(ms, buffersource, 0, 0, 0.5f * width, 0.5f * width, sprite.getU0(), sprite.getU1(), sprite.getV0(), sprite.getV1(), r, g, b, 0.2f * alpha);
+                ms.mulPose(Axis.ZP.rotationDegrees((float) Math.sin(Math.toRadians(((random.nextFloat() * 360) + ticks))) * rotateOffset));
+                ms.mulPose(Axis.XP.rotationDegrees((float) Math.sin(Math.toRadians(((random.nextFloat() * 360) + ticks))) * rotateOffset));
+                ms.mulPose(Axis.YP.rotationDegrees((float) Math.sin(Math.toRadians(((random.nextFloat() * 360) + ticks))) * rotateOffset));
+
+                float tick1 = (random.nextFloat() * 360) + ticks;
+                float tick2 = (random.nextFloat() * 360) + ticks;
+                float tick3 = (random.nextFloat() * 360) + ticks;
+                float tick4 = (random.nextFloat() * 360) + ticks;
+
+                RenderUtils.spriteWaveQuad(ms, buffersource, 0, 0, 0.5f * width, 0.5f * width, 0.01f, tick1, tick2, tick3, tick4, sprite.getU0(), sprite.getU1(), sprite.getV0(), sprite.getV1(), r, g, b, 0.2f * alpha);
 
                 ms.pushPose();
                 ms.mulPose(Axis.YP.rotationDegrees(180f));
-                RenderUtils.spriteGlowQuadCenter(ms, buffersource, 0, 0, 0.5f * width, 0.5f * width, sprite.getU1(), sprite.getU0(), sprite.getV0(), sprite.getV1(), r, g, b, 0.2f * alpha);
+                RenderUtils.spriteWaveQuad(ms, buffersource, 0, 0, 0.5f * width, 0.5f * width, 0.1f, tick4, tick3, tick2, tick1, sprite.getU1(), sprite.getU0(), sprite.getV0(), sprite.getV1(), r, g, b, 0.2f * alpha);
                 ms.popPose();
 
                 width = width + 0.1f;

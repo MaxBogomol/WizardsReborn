@@ -518,6 +518,9 @@
   "item.wizards_reborn.implosion_trim": "Wisestone Trim",
   "item.wizards_reborn.phantom_ink_trim": "Innocent Wood Trim",
 
+  "item.wizards_reborn.shrimp": "Shrimp",
+  "item.wizards_reborn.fried_shrimp": "Fried Shrimp",
+
   "item.wizards_reborn.mundane_brew_bucket": "Mundane Brew Bucket",
   "item.wizards_reborn.alchemy_oil_bucket": "Alchemy Oil Bucket",
   "item.wizards_reborn.oil_tea_bucket": "Oil Tea Bucket",
@@ -562,6 +565,9 @@
   "lore.wizards_reborn.hunger_banner_pattern": "The hunter cannot become the hunted.",
   "lore.wizards_reborn.survival_banner_pattern": "Kill or be killed!",
   "lore.wizards_reborn.elevation_banner_pattern": "Leave everything... Cleanse your soul...",
+
+  "lore.wizards_reborn.shrimp": "Can a shrimp become your pet?",
+  "lore.wizards_reborn.fried_shrimp": "You are cruel,,,,",
 
   "lore.wizards_reborn.skin": "Skin:",
   "lore.wizards_reborn.arcane_enchantments": "Arcane Enchantments:",

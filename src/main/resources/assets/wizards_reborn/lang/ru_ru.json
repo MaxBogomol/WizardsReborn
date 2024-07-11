@@ -518,6 +518,9 @@
   "item.wizards_reborn.implosion_trim": "Мудро-каменная отделка",
   "item.wizards_reborn.phantom_ink_trim": "Невинно-древесная отделка",
 
+  "item.wizards_reborn.shrimp": "Креветка",
+  "item.wizards_reborn.fried_shrimp": "Жаренная креветка",
+
   "item.wizards_reborn.mundane_brew_bucket": "Ведро мутного варева",
   "item.wizards_reborn.alchemy_oil_bucket": "Ведро алхимического масла",
   "item.wizards_reborn.oil_tea_bucket": "Ведро масляного чая",
@@ -562,6 +565,9 @@
   "lore.wizards_reborn.hunger_banner_pattern": "Охотник не может стать добычей.",
   "lore.wizards_reborn.survival_banner_pattern": "Убей или будь убитым!",
   "lore.wizards_reborn.elevation_banner_pattern": "Отбрось всё... Очисти свою душу...",
+
+  "lore.wizards_reborn.shrimp": "Может ли креветка стать вашим домашним питомцем?",
+  "lore.wizards_reborn.fried_shrimp": "Ты жестокий,,,,",
 
   "lore.wizards_reborn.skin": "Облик:",
   "lore.wizards_reborn.arcane_enchantments": "Аркановые зачарования:",
