@@ -14,6 +14,7 @@ import mod.maxbogomol.wizards_reborn.api.alchemy.AlchemyPotionUtils;
 import mod.maxbogomol.wizards_reborn.api.arcaneenchantment.ArcaneEnchantmentUtils;
 import mod.maxbogomol.wizards_reborn.api.crystalritual.CrystalRitualUtils;
 import mod.maxbogomol.wizards_reborn.common.integration.farmersdelight.FarmersDelightIntegration;
+import mod.maxbogomol.wizards_reborn.common.item.equipment.DrinkBottleItem;
 import net.minecraft.client.Minecraft;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.Container;
@@ -119,6 +120,38 @@ public class WizardsRebornJei implements IModPlugin {
 
         IIngredientSubtypeInterpreter<ItemStack> interpreterArcaneEnchantment = (stack, ctx) -> String.valueOf(ArcaneEnchantmentUtils.getAllArcaneEnchantments(stack).toString());
         registry.registerSubtypeInterpreter(VanillaTypes.ITEM_STACK, WizardsReborn.ARCANE_ENCHANTED_BOOK.get(), interpreterArcaneEnchantment);
+
+        IIngredientSubtypeInterpreter<ItemStack> interpreterDrinks = (stack, ctx) -> String.valueOf(DrinkBottleItem.getStage(stack));
+        registry.registerSubtypeInterpreter(VanillaTypes.ITEM_STACK, WizardsReborn.VODKA_BOTTLE.get(), interpreterDrinks);
+        registry.registerSubtypeInterpreter(VanillaTypes.ITEM_STACK, WizardsReborn.BOURBON_BOTTLE.get(), interpreterDrinks);
+        registry.registerSubtypeInterpreter(VanillaTypes.ITEM_STACK, WizardsReborn.WHISKEY_BOTTLE.get(), interpreterDrinks);
+        registry.registerSubtypeInterpreter(VanillaTypes.ITEM_STACK, WizardsReborn.WHITE_WINE_BOTTLE.get(), interpreterDrinks);
+        registry.registerSubtypeInterpreter(VanillaTypes.ITEM_STACK, WizardsReborn.RED_WINE_BOTTLE.get(), interpreterDrinks);
+        registry.registerSubtypeInterpreter(VanillaTypes.ITEM_STACK, WizardsReborn.PORT_WINE_BOTTLE.get(), interpreterDrinks);
+        registry.registerSubtypeInterpreter(VanillaTypes.ITEM_STACK, WizardsReborn.PALM_LIQUEUR_BOTTLE.get(), interpreterDrinks);
+        registry.registerSubtypeInterpreter(VanillaTypes.ITEM_STACK, WizardsReborn.MEAD_BOTTLE.get(), interpreterDrinks);
+        registry.registerSubtypeInterpreter(VanillaTypes.ITEM_STACK, WizardsReborn.SBITEN_BOTTLE.get(), interpreterDrinks);
+        registry.registerSubtypeInterpreter(VanillaTypes.ITEM_STACK, WizardsReborn.SLIVOVITZ_BOTTLE.get(), interpreterDrinks);
+        registry.registerSubtypeInterpreter(VanillaTypes.ITEM_STACK, WizardsReborn.SAKE_BOTTLE.get(), interpreterDrinks);
+        registry.registerSubtypeInterpreter(VanillaTypes.ITEM_STACK, WizardsReborn.SOJU_BOTTLE.get(), interpreterDrinks);
+        registry.registerSubtypeInterpreter(VanillaTypes.ITEM_STACK, WizardsReborn.CHICHA_BOTTLE.get(), interpreterDrinks);
+        registry.registerSubtypeInterpreter(VanillaTypes.ITEM_STACK, WizardsReborn.CHACHA_BOTTLE.get(), interpreterDrinks);
+        registry.registerSubtypeInterpreter(VanillaTypes.ITEM_STACK, WizardsReborn.APPLEJACK_BOTTLE.get(), interpreterDrinks);
+        registry.registerSubtypeInterpreter(VanillaTypes.ITEM_STACK, WizardsReborn.RAKIA_BOTTLE.get(), interpreterDrinks);
+        registry.registerSubtypeInterpreter(VanillaTypes.ITEM_STACK, WizardsReborn.KIRSCH_BOTTLE.get(), interpreterDrinks);
+        registry.registerSubtypeInterpreter(VanillaTypes.ITEM_STACK, WizardsReborn.BOROVICHKA_BOTTLE.get(), interpreterDrinks);
+        registry.registerSubtypeInterpreter(VanillaTypes.ITEM_STACK, WizardsReborn.PALINKA_BOTTLE.get(), interpreterDrinks);
+        registry.registerSubtypeInterpreter(VanillaTypes.ITEM_STACK, WizardsReborn.TEQUILA_BOTTLE.get(), interpreterDrinks);
+        registry.registerSubtypeInterpreter(VanillaTypes.ITEM_STACK, WizardsReborn.PULQUE_BOTTLE.get(), interpreterDrinks);
+        registry.registerSubtypeInterpreter(VanillaTypes.ITEM_STACK, WizardsReborn.ARKHI_BOTTLE.get(), interpreterDrinks);
+        registry.registerSubtypeInterpreter(VanillaTypes.ITEM_STACK, WizardsReborn.TEJ_BOTTLE.get(), interpreterDrinks);
+        registry.registerSubtypeInterpreter(VanillaTypes.ITEM_STACK, WizardsReborn.WISSEN_BEER_BOTTLE.get(), interpreterDrinks);
+        registry.registerSubtypeInterpreter(VanillaTypes.ITEM_STACK, WizardsReborn.MOR_TINCTURE_BOTTLE.get(), interpreterDrinks);
+        registry.registerSubtypeInterpreter(VanillaTypes.ITEM_STACK, WizardsReborn.INNOCENT_WINE_BOTTLE.get(), interpreterDrinks);
+        registry.registerSubtypeInterpreter(VanillaTypes.ITEM_STACK, WizardsReborn.TARKHUNA_BOTTLE.get(), interpreterDrinks);
+        registry.registerSubtypeInterpreter(VanillaTypes.ITEM_STACK, WizardsReborn.BAIKAL_BOTTLE.get(), interpreterDrinks);
+        registry.registerSubtypeInterpreter(VanillaTypes.ITEM_STACK, WizardsReborn.KVASS_BOTTLE.get(), interpreterDrinks);
+        registry.registerSubtypeInterpreter(VanillaTypes.ITEM_STACK, WizardsReborn.KISSEL_BOTTLE.get(), interpreterDrinks);
     }
 
     private static <T extends Recipe<C>, C extends Container> List<T> sortRecipes(RecipeType<T> type, Comparator<? super T> comparator) {

@@ -15,6 +15,7 @@ import mod.maxbogomol.wizards_reborn.common.integration.create.CreateIntegration
 import mod.maxbogomol.wizards_reborn.common.integration.farmersdelight.FarmersDelightIntegration;
 import mod.maxbogomol.wizards_reborn.common.item.CrystalItem;
 import mod.maxbogomol.wizards_reborn.common.item.FracturedCrystalItem;
+import mod.maxbogomol.wizards_reborn.common.item.equipment.DrinkBottleItem;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
@@ -401,6 +402,7 @@ public class WizardsRebornItemGroup {
             event.accept(WizardsReborn.ALCHEMY_GLASS_ITEM);
             event.accept(WizardsReborn.ALCHEMY_VIAL);
             event.accept(WizardsReborn.ALCHEMY_FLASK);
+            event.accept(WizardsReborn.ALCHEMY_BOTTLE);
 
             event.accept(WizardsReborn.WHITE_LUMINAL_GLASS_ITEM);
             event.accept(WizardsReborn.LIGHT_GRAY_LUMINAL_GLASS_ITEM);
@@ -576,6 +578,37 @@ public class WizardsRebornItemGroup {
                     event.accept(stack);
                 }
             }
+
+            event.acceptAll(DrinkBottleItem.getItemsForTab(WizardsReborn.VODKA_BOTTLE.get()));
+            event.acceptAll(DrinkBottleItem.getItemsForTab(WizardsReborn.BOURBON_BOTTLE.get()));
+            event.acceptAll(DrinkBottleItem.getItemsForTab(WizardsReborn.WHISKEY_BOTTLE.get()));
+            event.acceptAll(DrinkBottleItem.getItemsForTab(WizardsReborn.WHITE_WINE_BOTTLE.get()));
+            event.acceptAll(DrinkBottleItem.getItemsForTab(WizardsReborn.RED_WINE_BOTTLE.get()));
+            event.acceptAll(DrinkBottleItem.getItemsForTab(WizardsReborn.PORT_WINE_BOTTLE.get()));
+            event.acceptAll(DrinkBottleItem.getItemsForTab(WizardsReborn.PALM_LIQUEUR_BOTTLE.get()));
+            event.acceptAll(DrinkBottleItem.getItemsForTab(WizardsReborn.MEAD_BOTTLE.get()));
+            event.acceptAll(DrinkBottleItem.getItemsForTab(WizardsReborn.SBITEN_BOTTLE.get()));
+            event.acceptAll(DrinkBottleItem.getItemsForTab(WizardsReborn.SLIVOVITZ_BOTTLE.get()));
+            event.acceptAll(DrinkBottleItem.getItemsForTab(WizardsReborn.SAKE_BOTTLE.get()));
+            event.acceptAll(DrinkBottleItem.getItemsForTab(WizardsReborn.SOJU_BOTTLE.get()));
+            event.acceptAll(DrinkBottleItem.getItemsForTab(WizardsReborn.CHICHA_BOTTLE.get()));
+            event.acceptAll(DrinkBottleItem.getItemsForTab(WizardsReborn.CHACHA_BOTTLE.get()));
+            event.acceptAll(DrinkBottleItem.getItemsForTab(WizardsReborn.APPLEJACK_BOTTLE.get()));
+            event.acceptAll(DrinkBottleItem.getItemsForTab(WizardsReborn.RAKIA_BOTTLE.get()));
+            event.acceptAll(DrinkBottleItem.getItemsForTab(WizardsReborn.KIRSCH_BOTTLE.get()));
+            event.acceptAll(DrinkBottleItem.getItemsForTab(WizardsReborn.BOROVICHKA_BOTTLE.get()));
+            event.acceptAll(DrinkBottleItem.getItemsForTab(WizardsReborn.PALINKA_BOTTLE.get()));
+            event.acceptAll(DrinkBottleItem.getItemsForTab(WizardsReborn.TEQUILA_BOTTLE.get()));
+            event.acceptAll(DrinkBottleItem.getItemsForTab(WizardsReborn.PULQUE_BOTTLE.get()));
+            event.acceptAll(DrinkBottleItem.getItemsForTab(WizardsReborn.ARKHI_BOTTLE.get()));
+            event.acceptAll(DrinkBottleItem.getItemsForTab(WizardsReborn.TEJ_BOTTLE.get()));
+            event.acceptAll(DrinkBottleItem.getItemsForTab(WizardsReborn.WISSEN_BEER_BOTTLE.get()));
+            event.acceptAll(DrinkBottleItem.getItemsForTab(WizardsReborn.MOR_TINCTURE_BOTTLE.get()));
+            event.acceptAll(DrinkBottleItem.getItemsForTab(WizardsReborn.INNOCENT_WINE_BOTTLE.get()));
+            event.acceptAll(DrinkBottleItem.getItemsForTab(WizardsReborn.TARKHUNA_BOTTLE.get()));
+            event.acceptAll(DrinkBottleItem.getItemsForTab(WizardsReborn.BAIKAL_BOTTLE.get()));
+            event.acceptAll(DrinkBottleItem.getItemsForTab(WizardsReborn.KVASS_BOTTLE.get()));
+            event.acceptAll(DrinkBottleItem.getItemsForTab(WizardsReborn.KISSEL_BOTTLE.get()));
 
             event.accept(WizardsReborn.MUNDANE_BREW_BUCKET);
             event.accept(WizardsReborn.ALCHEMY_OIL_BUCKET);

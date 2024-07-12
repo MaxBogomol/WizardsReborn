@@ -8,6 +8,7 @@ import mod.maxbogomol.wizards_reborn.client.arcanemicon.ArcanemiconChapters;
 import mod.maxbogomol.wizards_reborn.client.arcanemicon.ArcanemiconGui;
 import mod.maxbogomol.wizards_reborn.client.config.ClientConfig;
 import mod.maxbogomol.wizards_reborn.client.gui.components.CustomLogoRenderer;
+import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.screens.TitleScreen;
 import net.minecraft.client.renderer.CubeMap;
 import net.minecraft.client.renderer.PanoramaRenderer;
@@ -17,6 +18,7 @@ import net.minecraft.world.entity.ai.attributes.Attribute;
 import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
+import net.minecraftforge.client.event.MovementInputUpdateEvent;
 import net.minecraftforge.client.event.ScreenEvent;
 import net.minecraftforge.event.entity.player.ItemTooltipEvent;
 import net.minecraftforge.event.entity.player.PlayerEvent;
@@ -79,6 +81,16 @@ public class ClientEvents {
                     if (i > event.getToolTip().size()) attributeModifierTooltip = event.getToolTip().size();
                     event.getToolTip().addAll(i, ArcaneEnchantmentUtils.modifiersAppendHoverText(stack, player.level(), event.getFlags()));
                 }
+            }
+        }
+    }
+
+    @SubscribeEvent
+    public void input(MovementInputUpdateEvent event) {
+        if (Minecraft.getInstance().player != null) {
+            if (Minecraft.getInstance().player.hasEffect(WizardsReborn.TIPSY_EFFECT.get())) {
+                //event.getInput().right = true;
+                event.getInput().forwardImpulse = 1f;
             }
         }
     }

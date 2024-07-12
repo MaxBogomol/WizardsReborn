@@ -408,6 +408,10 @@ public class WizardsRebornClient {
                 event.register(ItemSkinsModels.getModelLocationSkin(skin));
             }
 
+            for (int i = 0; i < 4; i++) {
+                event.register(DrinksModels.getModelLocationStage(i + 1));
+            }
+
             event.register(JEWELER_TABLE_STONE_MODEL);
             event.register(ALTAR_OF_DROUGHT_FRAME_MODEL);
             event.register(TOTEM_OF_EXPERIENCE_ABSORPTION_PIECE_MODEL);
@@ -535,6 +539,37 @@ public class WizardsRebornClient {
                 addSkinModel(map, FarmersDelightIntegration.ARCANE_WOOD_KNIFE.getId());
                 addSkinModel(map, FarmersDelightIntegration.INNOCENT_WOOD_KNIFE.getId());
             }
+
+            DrinksModels.addDrinkItem(map, WizardsReborn.VODKA_BOTTLE.getId());
+            DrinksModels.addDrinkItem(map, WizardsReborn.BOURBON_BOTTLE.getId());
+            DrinksModels.addDrinkItem(map, WizardsReborn.WHISKEY_BOTTLE.getId());
+            DrinksModels.addDrinkItem(map, WizardsReborn.WHITE_WINE_BOTTLE.getId());
+            DrinksModels.addDrinkItem(map, WizardsReborn.RED_WINE_BOTTLE.getId());
+            DrinksModels.addDrinkItem(map, WizardsReborn.PORT_WINE_BOTTLE.getId());
+            DrinksModels.addDrinkItem(map, WizardsReborn.PALM_LIQUEUR_BOTTLE.getId());
+            DrinksModels.addDrinkItem(map, WizardsReborn.MEAD_BOTTLE.getId());
+            DrinksModels.addDrinkItem(map, WizardsReborn.SBITEN_BOTTLE.getId());
+            DrinksModels.addDrinkItem(map, WizardsReborn.SLIVOVITZ_BOTTLE.getId());
+            DrinksModels.addDrinkItem(map, WizardsReborn.SAKE_BOTTLE.getId());
+            DrinksModels.addDrinkItem(map, WizardsReborn.SOJU_BOTTLE.getId());
+            DrinksModels.addDrinkItem(map, WizardsReborn.CHICHA_BOTTLE.getId());
+            DrinksModels.addDrinkItem(map, WizardsReborn.CHACHA_BOTTLE.getId());
+            DrinksModels.addDrinkItem(map, WizardsReborn.APPLEJACK_BOTTLE.getId());
+            DrinksModels.addDrinkItem(map, WizardsReborn.RAKIA_BOTTLE.getId());
+            DrinksModels.addDrinkItem(map, WizardsReborn.KIRSCH_BOTTLE.getId());
+            DrinksModels.addDrinkItem(map, WizardsReborn.BOROVICHKA_BOTTLE.getId());
+            DrinksModels.addDrinkItem(map, WizardsReborn.PALINKA_BOTTLE.getId());
+            DrinksModels.addDrinkItem(map, WizardsReborn.TEQUILA_BOTTLE.getId());
+            DrinksModels.addDrinkItem(map, WizardsReborn.PULQUE_BOTTLE.getId());
+            DrinksModels.addDrinkItem(map, WizardsReborn.ARKHI_BOTTLE.getId());
+            DrinksModels.addDrinkItem(map, WizardsReborn.TEJ_BOTTLE.getId());
+            DrinksModels.addDrinkItem(map, WizardsReborn.WISSEN_BEER_BOTTLE.getId());
+            DrinksModels.addDrinkItem(map, WizardsReborn.MOR_TINCTURE_BOTTLE.getId());
+            DrinksModels.addDrinkItem(map, WizardsReborn.INNOCENT_WINE_BOTTLE.getId());
+            DrinksModels.addDrinkItem(map, WizardsReborn.TARKHUNA_BOTTLE.getId());
+            DrinksModels.addDrinkItem(map, WizardsReborn.BAIKAL_BOTTLE.getId());
+            DrinksModels.addDrinkItem(map, WizardsReborn.KVASS_BOTTLE.getId());
+            DrinksModels.addDrinkItem(map, WizardsReborn.KISSEL_BOTTLE.getId());
 
             fluidPipe = new PipeModel(map.get(FLUID_CENTER), "fluid_pipe");
             steamPipe = new PipeModel(map.get(STEAM_CENTER), "steam_pipe");

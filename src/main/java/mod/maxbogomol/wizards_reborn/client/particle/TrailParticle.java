@@ -79,13 +79,6 @@ public class TrailParticle extends GenericParticle implements ICustomRenderParti
                 stack.popPose();
 
                 stack.pushPose();
-                stack.translate(-(Mth.lerp(partialTicks, this.xo, this.x) - sX), -(Mth.lerp(partialTicks, this.yo, this.y) - sY), -(Mth.lerp(partialTicks, this.zo, this.z) - sZ));
-                mat = stack.last().pose();
-                builder.vertex(mat, 0, 0, 0).color(rCol, gCol, bCol, alpha).endVertex();
-                builder.vertex(mat, 0, 0, 0).color(rCol, gCol, bCol, alpha).endVertex();
-                stack.popPose();
-
-                stack.pushPose();
                 stack.translate(X, Y, Z);
                 stack.mulPose(Axis.YP.rotationDegrees((float) Math.toDegrees(-yaw)));
                 stack.mulPose(Axis.ZP.rotationDegrees((float) Math.toDegrees(-pitch) - 90f));
@@ -93,6 +86,13 @@ public class TrailParticle extends GenericParticle implements ICustomRenderParti
                 stack.mulPose(Axis.YP.rotationDegrees((float) Math.toDegrees(un)));
                 stack.translate(width, 0, 0);
                 mat = stack.last().pose();
+                builder.vertex(mat, 0, 0, 0).color(rCol, gCol, bCol, alpha).endVertex();
+                stack.popPose();
+
+                stack.pushPose();
+                stack.translate(-(Mth.lerp(partialTicks, this.xo, this.x) - sX), -(Mth.lerp(partialTicks, this.yo, this.y) - sY), -(Mth.lerp(partialTicks, this.zo, this.z) - sZ));
+                mat = stack.last().pose();
+                builder.vertex(mat, 0, 0, 0).color(rCol, gCol, bCol, alpha).endVertex();
                 builder.vertex(mat, 0, 0, 0).color(rCol, gCol, bCol, alpha).endVertex();
                 stack.popPose();
 
@@ -108,6 +108,12 @@ public class TrailParticle extends GenericParticle implements ICustomRenderParti
                 stack.popPose();
 
                 stack.pushPose();
+                mat = stack.last().pose();
+                builder.vertex(mat, 0, 0, 0).color(rCol, gCol, bCol, alpha).endVertex();
+                builder.vertex(mat, 0, 0, 0).color(rCol, gCol, bCol, alpha).endVertex();
+                stack.popPose();
+
+                stack.pushPose();
                 stack.translate(X, Y, Z);
                 stack.mulPose(Axis.YP.rotationDegrees((float) Math.toDegrees(-yaw)));
                 stack.mulPose(Axis.ZP.rotationDegrees((float) Math.toDegrees(-pitch) - 90f));
@@ -115,12 +121,6 @@ public class TrailParticle extends GenericParticle implements ICustomRenderParti
                 stack.mulPose(Axis.YP.rotationDegrees((float) Math.toDegrees(un)));
                 stack.translate(width, 0, 0);
                 mat = stack.last().pose();
-                builder.vertex(mat, 0, 0, 0).color(rCol, gCol, bCol, alpha).endVertex();
-                stack.popPose();
-
-                stack.pushPose();
-                mat = stack.last().pose();
-                builder.vertex(mat, 0, 0, 0).color(rCol, gCol, bCol, alpha).endVertex();
                 builder.vertex(mat, 0, 0, 0).color(rCol, gCol, bCol, alpha).endVertex();
                 stack.popPose();
             }

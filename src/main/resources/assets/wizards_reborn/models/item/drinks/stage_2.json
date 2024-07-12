@@ -1,0 +1,6 @@
+{
+  "parent": "wizards_reborn:item/drinks/stage",
+  "textures": {
+    "stage": "wizards_reborn:item/drinks/stage_2"
+  }
+}

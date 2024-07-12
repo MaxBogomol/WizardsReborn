@@ -3705,10 +3705,6 @@ public class ArcanemiconChapters {
                         new FluidStack(WizardsReborn.MUSHROOM_BREW_FLUID.get(), 1000), FluidStack.EMPTY, FluidStack.EMPTY,
                         vialPotions.get(RegisterAlchemyPotions.MUNDANE_BREW), new ItemStack(Items.OBSIDIAN), new ItemStack(Items.OBSIDIAN), new ItemStack(Items.REDSTONE), new ItemStack(Items.GLOWSTONE_DUST)
                 ),
-                new AlchemyMachinePage(vialPotions.get(RegisterAlchemyPotions.MAGICAL_ATTUNEMENT), FluidStack.EMPTY, false, true,
-                        new FluidStack(WizardsReborn.MOR_BREW_FLUID.get(), 1000), FluidStack.EMPTY, FluidStack.EMPTY,
-                        vialPotions.get(RegisterAlchemyPotions.WISSEN_TEA), ARCANUM_ITEM, ARCANUM_ITEM, ARCACITE_ITEM, new ItemStack(Items.REDSTONE), new ItemStack(Items.REDSTONE)
-                ),
                 new AlchemyMachinePage(vialPotions.get(RegisterAlchemyPotions.DARKNESS), FluidStack.EMPTY, false, true,
                         new FluidStack(WizardsReborn.MUSHROOM_BREW_FLUID.get(), 2000),  new FluidStack(WizardsReborn.HELLISH_MUSHROOM_BREW_FLUID.get(), 1000), FluidStack.EMPTY,
                         vialPotions.get(RegisterAlchemyPotions.MUNDANE_BREW), new ItemStack(Items.SCULK), new ItemStack(Items.SCULK), new ItemStack(Items.SCULK), new ItemStack(Items.SCULK), new ItemStack(Items.REDSTONE)
@@ -3923,6 +3919,10 @@ public class ArcanemiconChapters {
                         ARCACITE_ITEM, ARCANE_GOLD_INGOT_ITEM, EMPTY_ITEM,
                         ARCANE_GOLD_INGOT_ITEM, EMPTY_ITEM, ARCANE_GOLD_NUGGET_ITEM,
                         EMPTY_ITEM, ARCANE_GOLD_NUGGET_ITEM, EMPTY_ITEM
+                ),
+                new AlchemyMachinePage(vialPotions.get(RegisterAlchemyPotions.MAGICAL_ATTUNEMENT), FluidStack.EMPTY, false, true,
+                        new FluidStack(WizardsReborn.MOR_BREW_FLUID.get(), 1000), FluidStack.EMPTY, FluidStack.EMPTY,
+                        vialPotions.get(RegisterAlchemyPotions.WISSEN_TEA), ARCANUM_ITEM, ARCANUM_ITEM, ARCACITE_ITEM, new ItemStack(Items.REDSTONE), new ItemStack(Items.REDSTONE)
                 )
         );
 
