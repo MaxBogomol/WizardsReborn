@@ -5,7 +5,7 @@ import net.minecraft.client.model.geom.ModelPart;
 import net.minecraft.client.model.geom.PartPose;
 import net.minecraft.client.model.geom.builders.*;
 
-public class BagModel extends BeltModel  {
+public class BagModel extends BeltModel {
     public ModelPart root, model;
 
     public BagModel(ModelPart root) {

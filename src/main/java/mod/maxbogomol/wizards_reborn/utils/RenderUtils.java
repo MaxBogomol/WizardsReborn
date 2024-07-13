@@ -339,6 +339,49 @@ public class RenderUtils {
         builder.vertex(mat, -width, -width, width).color(r1, g1, b1, a1).endVertex();
     }
 
+    public static void beam(PoseStack mStack, MultiBufferSource buf, float width, float height, float endOffset, float r, float g, float b, float a) {
+        beam(mStack, buf, width, height, endOffset, r, g, b, a, r, g, b, a);
+    }
+
+    public static void beamSided(PoseStack mStack, MultiBufferSource buf, float width, float height, float endOffset, float r, float g, float b, float a) {
+        beamSided(mStack, buf, width, height, endOffset, r, g, b, a, r, g, b, a);
+    }
+
+    public static void beamSided(PoseStack mStack, MultiBufferSource buf, float width, float height, float endOffset, float r1, float g1, float b1, float a1, float r2, float g2, float b2, float a2) {
+        beam(mStack, buf, width, height, endOffset, r1, g1, b1, a1, r2, g2, b2, a2);
+        mStack.pushPose();
+        mStack.scale(-1, -1, -1);
+        mStack.mulPose(Axis.ZP.rotationDegrees(180f));
+        beam(mStack, buf, width, height, endOffset, r1, g1, b1, a1, r2, g2, b2, a2);
+        mStack.popPose();
+    }
+
+    public static void beam(PoseStack mStack, MultiBufferSource buf, float width, float height, float endOffset, float r1, float g1, float b1, float a1, float r2, float g2, float b2, float a2) {
+        VertexConsumer builder = buf.getBuffer(GLOWING);
+
+        Matrix4f mat = mStack.last().pose();
+
+        builder.vertex(mat, 0, width, -width).color(r1, g1, b1, a1).endVertex();
+        builder.vertex(mat, height, width * endOffset, -width * endOffset).color(r2, g2, b2, a2).endVertex();
+        builder.vertex(mat, height, -width * endOffset, -width * endOffset).color(r2, g2, b2, a2).endVertex();
+        builder.vertex(mat, 0, -width, -width).color(r1, g1, b1, a1).endVertex();
+
+        builder.vertex(mat, height, width * endOffset, width * endOffset).color(r2, g2, b2, a2).endVertex();
+        builder.vertex(mat, 0, width, width).color(r1, g1, b1, a1).endVertex();
+        builder.vertex(mat, 0, -width, width).color(r1, g1, b1, a1).endVertex();
+        builder.vertex(mat, height, -width * endOffset, width * endOffset).color(r2, g2, b2, a2).endVertex();
+
+        builder.vertex(mat, 0, width, width).color(r1, g1, b1, a1).endVertex();
+        builder.vertex(mat, height, width * endOffset, width * endOffset).color(r2, g2, b2, a2).endVertex();
+        builder.vertex(mat, height, width * endOffset, -width * endOffset).color(r2, g2, b2, a2).endVertex();
+        builder.vertex(mat, 0, width, -width).color(r1, g1, b1, a1).endVertex();
+
+        builder.vertex(mat, 0, -width, -width).color(r1, g1, b1, a1).endVertex();
+        builder.vertex(mat, height, -width * endOffset, -width * endOffset).color(r2, g2, b2, a2).endVertex();
+        builder.vertex(mat, height, -width * endOffset, width * endOffset).color(r2, g2, b2, a2).endVertex();
+        builder.vertex(mat, 0, -width, width).color(r1, g1, b1, a1).endVertex();
+    }
+
     public static void litQuad(PoseStack mStack, MultiBufferSource buf, float x, float y, float width, float height, float r, float g, float b, float a) {
         VertexConsumer builder = buf.getBuffer(GLOWING);
 

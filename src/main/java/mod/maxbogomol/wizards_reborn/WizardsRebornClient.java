@@ -4,13 +4,17 @@ import com.mojang.blaze3d.platform.InputConstants;
 import com.mojang.blaze3d.vertex.DefaultVertexFormat;
 import mod.maxbogomol.wizards_reborn.client.config.ClientConfig;
 import mod.maxbogomol.wizards_reborn.client.model.armor.*;
+import mod.maxbogomol.wizards_reborn.client.model.block.AlchemyBottleModel;
+import mod.maxbogomol.wizards_reborn.client.model.block.AlchemyFlaskModel;
+import mod.maxbogomol.wizards_reborn.client.model.block.AlchemyVialModel;
+import mod.maxbogomol.wizards_reborn.client.model.block.PipeModel;
 import mod.maxbogomol.wizards_reborn.client.model.curio.*;
 import mod.maxbogomol.wizards_reborn.client.model.sniffalo.SniffaloArcaneArmorModel;
 import mod.maxbogomol.wizards_reborn.client.model.sniffalo.SniffaloCarpetArmorModel;
 import mod.maxbogomol.wizards_reborn.client.model.sniffalo.SniffaloSaddleArmorModel;
 import mod.maxbogomol.wizards_reborn.client.particle.*;
-import mod.maxbogomol.wizards_reborn.client.render.block.PipeModel;
 import mod.maxbogomol.wizards_reborn.client.render.entity.*;
+import mod.maxbogomol.wizards_reborn.client.render.fluid.FluidCuboid;
 import mod.maxbogomol.wizards_reborn.client.render.item.*;
 import mod.maxbogomol.wizards_reborn.client.render.tileentity.*;
 import mod.maxbogomol.wizards_reborn.common.block.CustomBlockColor;
@@ -46,6 +50,7 @@ import net.minecraftforge.client.settings.KeyConflictContext;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
+import org.joml.Vector3f;
 import org.lwjgl.glfw.GLFW;
 
 import java.io.IOException;
@@ -80,6 +85,10 @@ public class WizardsRebornClient {
     public static final ModelLayerLocation SNIFFALO_CARPET_ARMOR_LAYER = new ModelLayerLocation(new ResourceLocation(WizardsReborn.MOD_ID, "sniffalo_carpet_armor"), "main");
     public static final ModelLayerLocation SNIFFALO_ARCANE_ARMOR_LAYER = new ModelLayerLocation(new ResourceLocation(WizardsReborn.MOD_ID, "sniffalo_arcane_armor"), "main");
 
+    public static final ModelLayerLocation ALCHEMY_VIAL_LAYER = new ModelLayerLocation(new ResourceLocation(WizardsReborn.MOD_ID, "alchemy_vial"), "main");
+    public static final ModelLayerLocation ALCHEMY_FLASK_LAYER = new ModelLayerLocation(new ResourceLocation(WizardsReborn.MOD_ID, "alchemy_flask"), "main");
+    public static final ModelLayerLocation ALCHEMY_BOTTLE_LAYER = new ModelLayerLocation(new ResourceLocation(WizardsReborn.MOD_ID, "alchemy_bottle"), "main");
+
     public static InventorWizardArmorModel INVENTOR_WIZARD_ARMOR_MODEL = null;
     public static ArcaneFortressArmorModel ARCANE_FORTRESS_ARMOR_MODEL = null;
     public static ArcaneFortressArmorModel ARCANE_FORTRESS_SLIM_ARMOR_MODEL = null;
@@ -93,6 +102,14 @@ public class WizardsRebornClient {
     public static SniffaloSaddleArmorModel SNIFFALO_SADDLE_ARMOR_MODEL = null;
     public static SniffaloCarpetArmorModel SNIFFALO_CARPET_ARMOR_MODEL = null;
     public static SniffaloArcaneArmorModel SNIFFALO_ARCANE_ARMOR_MODEL = null;
+
+    public static AlchemyVialModel ALCHEMY_VIAL_MODEL = null;
+    public static AlchemyFlaskModel ALCHEMY_FLASK_MODEL = null;
+    public static AlchemyBottleModel ALCHEMY_BOTTLE_MODEL = null;
+
+    public static FluidCuboid VIAL_FLUID_CUBE_0 = new FluidCuboid(new Vector3f(0, 0, 0), new Vector3f(4, 3, 4), FluidCuboid.DEFAULT_FACES);
+    public static FluidCuboid VIAL_FLUID_CUBE_1 = new FluidCuboid(new Vector3f(0, 0, 0), new Vector3f(2, 2, 2), FluidCuboid.DEFAULT_FACES);
+    public static FluidCuboid FLASK_FLUID_CUBE = new FluidCuboid(new Vector3f(0, 0, 0), new Vector3f(4, 5, 4), FluidCuboid.DEFAULT_FACES);
 
     public static ModelResourceLocation JEWELER_TABLE_STONE_MODEL = new ModelResourceLocation(WizardsReborn.MOD_ID, "jeweler_table_stone", "");
     public static ModelResourceLocation ALTAR_OF_DROUGHT_FRAME_MODEL = new ModelResourceLocation(WizardsReborn.MOD_ID, "altar_of_drought_frame", "");
@@ -343,6 +360,8 @@ public class WizardsRebornClient {
             BlockEntityRenderers.register(WizardsReborn.ARCANUM_GROWTH_TILE_ENTITY.get(), (trd) -> new ArcanumGrowthTileEntityRenderer());
             BlockEntityRenderers.register(WizardsReborn.CRYSTAL_GROWTH_TILE_ENTITY.get(), (trd) -> new CrystalGrowthTileEntityRenderer());
             BlockEntityRenderers.register(WizardsReborn.CRYSTAL_TILE_ENTITY.get(), (trd) -> new CrystalTileEntityRenderer());
+
+            BlockEntityRenderers.register(WizardsReborn.PLACED_ITEMS_TILE_ENTITY.get(), (trd) -> new PlacedItemsTileEntityRenderer());
 
             EntityRenderers.register(WizardsReborn.BOAT.get(), m -> new CustomBoatModel(m, false));
             EntityRenderers.register(WizardsReborn.CHEST_BOAT.get(), m -> new CustomBoatModel(m, true));
@@ -713,6 +732,10 @@ public class WizardsRebornClient {
             event.registerLayerDefinition(SNIFFALO_SADDLE_ARMOR_LAYER, SniffaloSaddleArmorModel::createBodyLayer);
             event.registerLayerDefinition(SNIFFALO_CARPET_ARMOR_LAYER, SniffaloCarpetArmorModel::createBodyLayer);
             event.registerLayerDefinition(SNIFFALO_ARCANE_ARMOR_LAYER, SniffaloArcaneArmorModel::createBodyLayer);
+
+            event.registerLayerDefinition(ALCHEMY_VIAL_LAYER, AlchemyVialModel::createBodyLayer);
+            event.registerLayerDefinition(ALCHEMY_FLASK_LAYER, AlchemyFlaskModel::createBodyLayer);
+            event.registerLayerDefinition(ALCHEMY_BOTTLE_LAYER, AlchemyBottleModel::createBodyLayer);
         }
 
         @SubscribeEvent
@@ -730,6 +753,10 @@ public class WizardsRebornClient {
             SNIFFALO_SADDLE_ARMOR_MODEL = new SniffaloSaddleArmorModel(event.getEntityModels().bakeLayer(SNIFFALO_SADDLE_ARMOR_LAYER));
             SNIFFALO_CARPET_ARMOR_MODEL = new SniffaloCarpetArmorModel(event.getEntityModels().bakeLayer(SNIFFALO_CARPET_ARMOR_LAYER));
             SNIFFALO_ARCANE_ARMOR_MODEL = new SniffaloArcaneArmorModel(event.getEntityModels().bakeLayer(SNIFFALO_ARCANE_ARMOR_LAYER));
+
+            ALCHEMY_VIAL_MODEL = new AlchemyVialModel(event.getEntityModels().bakeLayer(ALCHEMY_VIAL_LAYER));
+            ALCHEMY_FLASK_MODEL = new AlchemyFlaskModel(event.getEntityModels().bakeLayer(ALCHEMY_FLASK_LAYER));
+            ALCHEMY_BOTTLE_MODEL = new AlchemyBottleModel(event.getEntityModels().bakeLayer(ALCHEMY_BOTTLE_LAYER));
         }
 
         @SubscribeEvent

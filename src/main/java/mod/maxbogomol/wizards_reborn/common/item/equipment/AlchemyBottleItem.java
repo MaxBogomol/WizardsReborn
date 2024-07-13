@@ -4,17 +4,18 @@ import com.google.common.base.Preconditions;
 import mod.maxbogomol.wizards_reborn.WizardsReborn;
 import mod.maxbogomol.wizards_reborn.api.alchemy.AlchemyPotion;
 import mod.maxbogomol.wizards_reborn.api.alchemy.AlchemyPotionUtils;
+import mod.maxbogomol.wizards_reborn.common.item.ICustomBlockEntityDataItem;
+import mod.maxbogomol.wizards_reborn.common.item.PlacedItem;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.capability.IFluidHandler;
 import org.jetbrains.annotations.NotNull;
 
-public class AlchemyBottleItem extends Item {
+public class AlchemyBottleItem extends PlacedItem implements ICustomBlockEntityDataItem {
     public int maxUses;
 
     public AlchemyBottleItem(Properties properties, int maxUses) {
@@ -26,8 +27,7 @@ public class AlchemyBottleItem extends Item {
         return new ItemStack(WizardsReborn.ALCHEMY_VIAL_POTION.get());
     }
 
-    public static boolean interactWithFluidHandler(@NotNull Player player, @NotNull InteractionHand hand, @NotNull IFluidHandler handler)
-    {
+    public static boolean interactWithFluidHandler(@NotNull Player player, @NotNull InteractionHand hand, @NotNull IFluidHandler handler) {
         Preconditions.checkNotNull(player);
         Preconditions.checkNotNull(hand);
         Preconditions.checkNotNull(handler);

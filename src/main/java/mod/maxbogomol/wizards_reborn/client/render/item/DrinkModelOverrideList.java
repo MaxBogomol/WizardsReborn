@@ -12,7 +12,7 @@ public class DrinkModelOverrideList extends CustomModelOverrideList {
 
     @Override
     public BakedModel resolve(BakedModel originalModel, ItemStack stack, @Nullable ClientLevel world, @Nullable LivingEntity entity, int pSeed) {
-        int stage = DrinkBottleItem.getStage(stack);
+        int stage = DrinkBottleItem.getStageS(stack);
         if (stage > 0) {
             String string = stack.getDescriptionId();
             int i = string.indexOf(".");

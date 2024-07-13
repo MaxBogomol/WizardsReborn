@@ -9,13 +9,16 @@ import net.minecraft.client.renderer.blockentity.BlockEntityRenderer;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.phys.Vec3;
 
+import java.util.Optional;
+
 public class SteamCasingTileEntityRenderer implements BlockEntityRenderer<SteamCasingTileEntity> {
 
     public SteamCasingTileEntityRenderer() {}
 
     @Override
     public void render(SteamCasingTileEntity casing, float partialTicks, PoseStack ms, MultiBufferSource buffers, int light, int overlay) {
-        if (!casing.getLevel().getBlockState(casing.getBlockPos()).isAir() && casing.getLevel().getBlockState(casing.getBlockPos()).getValue(BlockStateProperties.POWERED) && WissenUtils.isCanRenderWissenWand()) {
+        Optional<Boolean> powered = casing.getLevel().getBlockState(casing.getBlockPos()).getOptionalValue(BlockStateProperties.POWERED);
+        if (powered.isPresent() && powered.get() && WissenUtils.isCanRenderWissenWand()) {
             ms.pushPose();
             RenderUtils.renderBoxLines(new Vec3(1f, 1f, 1f), RenderUtils.colorArea, partialTicks, ms);
             ms.popPose();

@@ -10,14 +10,12 @@ import mod.maxbogomol.wizards_reborn.api.crystal.CrystalType;
 import mod.maxbogomol.wizards_reborn.api.crystal.CrystalUtils;
 import mod.maxbogomol.wizards_reborn.api.crystal.PolishingType;
 import mod.maxbogomol.wizards_reborn.client.particle.Particles;
-import mod.maxbogomol.wizards_reborn.client.render.WorldRenderHandler;
 import mod.maxbogomol.wizards_reborn.common.block.CrystalBlock;
 import mod.maxbogomol.wizards_reborn.utils.ColorUtils;
 import mod.maxbogomol.wizards_reborn.utils.RenderUtils;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.GameRenderer;
 import net.minecraft.client.renderer.MultiBufferSource;
-import net.minecraft.core.BlockPos;
 import net.minecraft.core.NonNullList;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
@@ -27,23 +25,20 @@ import net.minecraft.world.ContainerHelper;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.item.ItemEntity;
-import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.state.BlockState;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 
-import javax.annotation.Nullable;
 import java.awt.*;
 import java.util.List;
 import java.util.Random;
 
-public class CrystalItem extends BlockItem implements IParticleItem, IGuiParticleItem {
+public class CrystalItem extends BlockItem implements IParticleItem, IGuiParticleItem, ICustomBlockEntityDataItem {
     private static Random random = new Random();
 
     public CrystalItem(Block blockIn, Properties properties) {
@@ -114,17 +109,14 @@ public class CrystalItem extends BlockItem implements IParticleItem, IGuiParticl
     }
 
     @Override
-    protected boolean updateCustomBlockEntityTag(BlockPos pos, Level level, @Nullable Player player, ItemStack stack, BlockState state) {
-        CompoundTag nbt = stack.getOrCreateTag();
-        if (!nbt.contains("BlockEntityTag")) {
-            CompoundTag tileNbt = new CompoundTag();
+    public CompoundTag getCustomBlockEntityData(ItemStack stack, CompoundTag tileNbt) {
+        if (!tileNbt.contains("Items")) {
             NonNullList<ItemStack> ret = NonNullList.withSize(1, ItemStack.EMPTY);
             ret.set(0, stack);
             ContainerHelper.saveAllItems(tileNbt, ret);
-            nbt.put("BlockEntityTag", tileNbt);
         }
 
-        return BlockItem.updateCustomBlockEntityTag(level, player, pos, stack);
+        return tileNbt;
     }
 
     @Override

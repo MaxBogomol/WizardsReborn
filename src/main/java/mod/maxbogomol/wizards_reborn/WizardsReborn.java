@@ -768,6 +768,8 @@ public class WizardsReborn {
     public static final RegistryObject<Block> SHINY_CLOVER = BLOCKS.register("shiny_clover", () -> new ShinyCloverBlock(BlockBehaviour.Properties.of().mapColor(MapColor.PLANT).noCollission().sound(SoundType.PINK_PETALS).pushReaction(PushReaction.DESTROY)));
     public static final RegistryObject<Block> POTTED_SHINY_CLOVER = BLOCKS.register("potted_shiny_clover", () -> new FlowerPotBlock(SHINY_CLOVER.get(), BlockBehaviour.Properties.copy(Blocks.FLOWER_POT).instabreak().noOcclusion()));
 
+    public static final RegistryObject<Block> PLACED_ITEMS_BLOCK = BLOCKS.register("placed_items", () -> new PlacedItemsBlock(BlockBehaviour.Properties.of().strength(0.25F).mapColor(MapColor.COLOR_BROWN).sound(SoundType.CROP).noOcclusion()));
+
     public static final RegistryObject<Block> ARCANUM_SEED_BLOCK = BLOCKS.register("arcanum_seed", () -> new CrystalSeedBlock(BlockBehaviour.Properties.copy(Blocks.AMETHYST_CLUSTER).mapColor(MapColor.COLOR_LIGHT_BLUE).sound(CRYSTAL_SOUNDS)));
     public static final RegistryObject<Block> ARCANUM_GROWTH = BLOCKS.register("arcanum_growth", () -> new ArcanumGrowthBlock(BlockBehaviour.Properties.copy(Blocks.AMETHYST_CLUSTER).mapColor(MapColor.COLOR_LIGHT_BLUE).sound(CRYSTAL_SOUNDS)));
 
@@ -1149,6 +1151,7 @@ public class WizardsReborn {
 
     public static final RegistryObject<Item> PETALS = ITEMS.register("petals", () -> new Item(new Item.Properties()));
     public static final RegistryObject<Item> FLOWER_FERTILIZER = ITEMS.register("flower_fertilizer", () -> new BoneMealItem(new Item.Properties()));
+    public static final RegistryObject<Item> BUNCH_OF_THINGS = ITEMS.register("bunch_of_things", () -> new BunchOfThingsItem(new Item.Properties()));
     public static final RegistryObject<Item> GROUND_BROWN_MUSHROOM = ITEMS.register("ground_brown_mushroom", () -> new Item(new Item.Properties()));
     public static final RegistryObject<Item> GROUND_RED_MUSHROOM = ITEMS.register("ground_red_mushroom", () -> new Item(new Item.Properties()));
     public static final RegistryObject<Item> GROUND_CRIMSON_FUNGUS = ITEMS.register("ground_crimson_fungus", () -> new Item(new Item.Properties()));
@@ -1335,11 +1338,11 @@ public class WizardsReborn {
     public static final RegistryObject<Item> WISESTONE_SALT_CAMPFIRE_ITEM = ITEMS.register("wisestone_salt_campfire", () -> new SaltCampfireItem(WISESTONE_SALT_CAMPFIRE.get(), new Item.Properties()));
 
     public static final RegistryObject<Item> ALCHEMY_GLASS_ITEM = ITEMS.register("alchemy_glass", () -> new BlockItem(ALCHEMY_GLASS.get(), new Item.Properties()));
-    public static final RegistryObject<Item> ALCHEMY_VIAL = ITEMS.register("alchemy_vial", () -> new VialItem(new Item.Properties(), 3));
-    public static final RegistryObject<Item> ALCHEMY_FLASK = ITEMS.register("alchemy_flask", () -> new FlaskItem(new Item.Properties(), 6));
-    public static final RegistryObject<Item> ALCHEMY_BOTTLE = ITEMS.register("alchemy_bottle", () -> new Item(new Item.Properties()));
-    public static final RegistryObject<Item> ALCHEMY_VIAL_POTION = ITEMS.register("alchemy_vial_potion", () -> new AlchemyPotionItem(new Item.Properties().stacksTo(1), 3, ALCHEMY_VIAL.get()));
-    public static final RegistryObject<Item> ALCHEMY_FLASK_POTION = ITEMS.register("alchemy_flask_potion", () -> new AlchemyPotionItem(new Item.Properties().stacksTo(1), 6, ALCHEMY_FLASK.get()));
+    public static final RegistryObject<Item> ALCHEMY_VIAL = ITEMS.register("alchemy_vial", () -> new VialItem(new Item.Properties()));
+    public static final RegistryObject<Item> ALCHEMY_FLASK = ITEMS.register("alchemy_flask", () -> new FlaskItem(new Item.Properties()));
+    public static final RegistryObject<Item> ALCHEMY_BOTTLE = ITEMS.register("alchemy_bottle", () -> new AlchemyDrinkBottleItem(new Item.Properties()));
+    public static final RegistryObject<Item> ALCHEMY_VIAL_POTION = ITEMS.register("alchemy_vial_potion", () -> new VialPotionItem(new Item.Properties().stacksTo(1)));
+    public static final RegistryObject<Item> ALCHEMY_FLASK_POTION = ITEMS.register("alchemy_flask_potion", () -> new FlaskPotionItem(new Item.Properties().stacksTo(1)));
 
     public static final RegistryObject<Item> WHITE_LUMINAL_GLASS_ITEM = ITEMS.register("white_luminal_glass", () -> new BlockItem(WHITE_LUMINAL_GLASS.get(), new Item.Properties()));
     public static final RegistryObject<Item> LIGHT_GRAY_LUMINAL_GLASS_ITEM = ITEMS.register("light_gray_luminal_glass", () -> new BlockItem(LIGHT_GRAY_LUMINAL_GLASS.get(), new Item.Properties()));
@@ -1490,36 +1493,36 @@ public class WizardsReborn {
     public static final RegistryObject<Item> IMPLOSION_TRIM = ITEMS.register("implosion_trim", () -> new SkinTrimItem(new Item.Properties(), IMPLOSION_SKIN));
     public static final RegistryObject<Item> PHANTOM_INK_TRIM = ITEMS.register("phantom_ink_trim", () -> new SkinTrimItem(new Item.Properties(), PHANTOM_INK_SKIN));
 
-    public static final RegistryObject<Item> VODKA_BOTTLE = ITEMS.register("vodka_bottle", () -> new DrinkBottleItem(new Item.Properties().stacksTo(1)));
-    public static final RegistryObject<Item> BOURBON_BOTTLE = ITEMS.register("bourbon_bottle", () -> new DrinkBottleItem(new Item.Properties().stacksTo(1)));
-    public static final RegistryObject<Item> WHISKEY_BOTTLE = ITEMS.register("whiskey_bottle", () -> new DrinkBottleItem(new Item.Properties().stacksTo(1)));
-    public static final RegistryObject<Item> WHITE_WINE_BOTTLE = ITEMS.register("white_wine_bottle", () -> new DrinkBottleItem(new Item.Properties().stacksTo(1)));
-    public static final RegistryObject<Item> RED_WINE_BOTTLE = ITEMS.register("red_wine_bottle", () -> new DrinkBottleItem(new Item.Properties().stacksTo(1)));
-    public static final RegistryObject<Item> PORT_WINE_BOTTLE = ITEMS.register("port_wine_bottle", () -> new DrinkBottleItem(new Item.Properties().stacksTo(1)));
-    public static final RegistryObject<Item> PALM_LIQUEUR_BOTTLE = ITEMS.register("palm_liqueur_bottle", () -> new DrinkBottleItem(new Item.Properties().stacksTo(1)));
-    public static final RegistryObject<Item> MEAD_BOTTLE = ITEMS.register("mead_bottle", () -> new DrinkBottleItem(new Item.Properties().stacksTo(1)));
-    public static final RegistryObject<Item> SBITEN_BOTTLE = ITEMS.register("sbiten_bottle", () -> new DrinkBottleItem(new Item.Properties().stacksTo(1)));
-    public static final RegistryObject<Item> SLIVOVITZ_BOTTLE = ITEMS.register("slivovitz_bottle", () -> new DrinkBottleItem(new Item.Properties().stacksTo(1)));
-    public static final RegistryObject<Item> SAKE_BOTTLE = ITEMS.register("sake_bottle", () -> new DrinkBottleItem(new Item.Properties().stacksTo(1)));
-    public static final RegistryObject<Item> SOJU_BOTTLE = ITEMS.register("soju_bottle", () -> new DrinkBottleItem(new Item.Properties().stacksTo(1)));
-    public static final RegistryObject<Item> CHICHA_BOTTLE = ITEMS.register("chicha_bottle", () -> new DrinkBottleItem(new Item.Properties().stacksTo(1)));
-    public static final RegistryObject<Item> CHACHA_BOTTLE = ITEMS.register("chacha_bottle", () -> new DrinkBottleItem(new Item.Properties().stacksTo(1)));
-    public static final RegistryObject<Item> APPLEJACK_BOTTLE = ITEMS.register("applejack_bottle", () -> new DrinkBottleItem(new Item.Properties().stacksTo(1)));
-    public static final RegistryObject<Item> RAKIA_BOTTLE = ITEMS.register("rakia_bottle", () -> new DrinkBottleItem(new Item.Properties().stacksTo(1)));
-    public static final RegistryObject<Item> KIRSCH_BOTTLE = ITEMS.register("kirsch_bottle", () -> new DrinkBottleItem(new Item.Properties().stacksTo(1)));
-    public static final RegistryObject<Item> BOROVICHKA_BOTTLE = ITEMS.register("borovichka_bottle", () -> new DrinkBottleItem(new Item.Properties().stacksTo(1)));
-    public static final RegistryObject<Item> PALINKA_BOTTLE = ITEMS.register("palinka_bottle", () -> new DrinkBottleItem(new Item.Properties().stacksTo(1)));
-    public static final RegistryObject<Item> TEQUILA_BOTTLE = ITEMS.register("tequila_bottle", () -> new DrinkBottleItem(new Item.Properties().stacksTo(1)));
-    public static final RegistryObject<Item> PULQUE_BOTTLE = ITEMS.register("pulque_bottle", () -> new DrinkBottleItem(new Item.Properties().stacksTo(1)));
-    public static final RegistryObject<Item> ARKHI_BOTTLE = ITEMS.register("arkhi_bottle", () -> new DrinkBottleItem(new Item.Properties().stacksTo(1)));
-    public static final RegistryObject<Item> TEJ_BOTTLE = ITEMS.register("tej_bottle", () -> new DrinkBottleItem(new Item.Properties().stacksTo(1)));
-    public static final RegistryObject<Item> WISSEN_BEER_BOTTLE = ITEMS.register("wissen_beer_bottle", () -> new DrinkBottleItem(new Item.Properties().stacksTo(1)));
-    public static final RegistryObject<Item> MOR_TINCTURE_BOTTLE = ITEMS.register("mor_tincture_bottle", () -> new DrinkBottleItem(new Item.Properties().stacksTo(1)));
-    public static final RegistryObject<Item> INNOCENT_WINE_BOTTLE = ITEMS.register("innocent_wine_bottle", () -> new DrinkBottleItem(new Item.Properties().stacksTo(1)));
-    public static final RegistryObject<Item> TARKHUNA_BOTTLE = ITEMS.register("tarkhuna_bottle", () -> new DrinkBottleItem(new Item.Properties().stacksTo(1)));
-    public static final RegistryObject<Item> BAIKAL_BOTTLE = ITEMS.register("baikal_bottle", () -> new DrinkBottleItem(new Item.Properties().stacksTo(1)));
-    public static final RegistryObject<Item> KVASS_BOTTLE = ITEMS.register("kvass_bottle", () -> new DrinkBottleItem(new Item.Properties().stacksTo(1)));
-    public static final RegistryObject<Item> KISSEL_BOTTLE = ITEMS.register("kissel_bottle", () -> new DrinkBottleItem(new Item.Properties().stacksTo(1)));
+    public static final RegistryObject<DrinkBottleItem> VODKA_BOTTLE = ITEMS.register("vodka_bottle", () -> new DrinkBottleItem(new Item.Properties().stacksTo(1)));
+    public static final RegistryObject<DrinkBottleItem> BOURBON_BOTTLE = ITEMS.register("bourbon_bottle", () -> new DrinkBottleItem(new Item.Properties().stacksTo(1)));
+    public static final RegistryObject<DrinkBottleItem> WHISKEY_BOTTLE = ITEMS.register("whiskey_bottle", () -> new DrinkBottleItem(new Item.Properties().stacksTo(1)));
+    public static final RegistryObject<DrinkBottleItem> WHITE_WINE_BOTTLE = ITEMS.register("white_wine_bottle", () -> new DrinkBottleItem(new Item.Properties().stacksTo(1)));
+    public static final RegistryObject<DrinkBottleItem> RED_WINE_BOTTLE = ITEMS.register("red_wine_bottle", () -> new DrinkBottleItem(new Item.Properties().stacksTo(1)));
+    public static final RegistryObject<DrinkBottleItem> PORT_WINE_BOTTLE = ITEMS.register("port_wine_bottle", () -> new DrinkBottleItem(new Item.Properties().stacksTo(1)));
+    public static final RegistryObject<DrinkBottleItem> PALM_LIQUEUR_BOTTLE = ITEMS.register("palm_liqueur_bottle", () -> new DrinkBottleItem(new Item.Properties().stacksTo(1)));
+    public static final RegistryObject<DrinkBottleItem> MEAD_BOTTLE = ITEMS.register("mead_bottle", () -> new DrinkBottleItem(new Item.Properties().stacksTo(1)));
+    public static final RegistryObject<DrinkBottleItem> SBITEN_BOTTLE = ITEMS.register("sbiten_bottle", () -> new DrinkBottleItem(new Item.Properties().stacksTo(1)));
+    public static final RegistryObject<DrinkBottleItem> SLIVOVITZ_BOTTLE = ITEMS.register("slivovitz_bottle", () -> new DrinkBottleItem(new Item.Properties().stacksTo(1)));
+    public static final RegistryObject<DrinkBottleItem> SAKE_BOTTLE = ITEMS.register("sake_bottle", () -> new DrinkBottleItem(new Item.Properties().stacksTo(1)));
+    public static final RegistryObject<DrinkBottleItem> SOJU_BOTTLE = ITEMS.register("soju_bottle", () -> new DrinkBottleItem(new Item.Properties().stacksTo(1)));
+    public static final RegistryObject<DrinkBottleItem> CHICHA_BOTTLE = ITEMS.register("chicha_bottle", () -> new DrinkBottleItem(new Item.Properties().stacksTo(1)));
+    public static final RegistryObject<DrinkBottleItem> CHACHA_BOTTLE = ITEMS.register("chacha_bottle", () -> new DrinkBottleItem(new Item.Properties().stacksTo(1)));
+    public static final RegistryObject<DrinkBottleItem> APPLEJACK_BOTTLE = ITEMS.register("applejack_bottle", () -> new DrinkBottleItem(new Item.Properties().stacksTo(1)));
+    public static final RegistryObject<DrinkBottleItem> RAKIA_BOTTLE = ITEMS.register("rakia_bottle", () -> new DrinkBottleItem(new Item.Properties().stacksTo(1)));
+    public static final RegistryObject<DrinkBottleItem> KIRSCH_BOTTLE = ITEMS.register("kirsch_bottle", () -> new DrinkBottleItem(new Item.Properties().stacksTo(1)));
+    public static final RegistryObject<DrinkBottleItem> BOROVICHKA_BOTTLE = ITEMS.register("borovichka_bottle", () -> new DrinkBottleItem(new Item.Properties().stacksTo(1)));
+    public static final RegistryObject<DrinkBottleItem> PALINKA_BOTTLE = ITEMS.register("palinka_bottle", () -> new DrinkBottleItem(new Item.Properties().stacksTo(1)));
+    public static final RegistryObject<DrinkBottleItem> TEQUILA_BOTTLE = ITEMS.register("tequila_bottle", () -> new DrinkBottleItem(new Item.Properties().stacksTo(1)));
+    public static final RegistryObject<DrinkBottleItem> PULQUE_BOTTLE = ITEMS.register("pulque_bottle", () -> new DrinkBottleItem(new Item.Properties().stacksTo(1)));
+    public static final RegistryObject<DrinkBottleItem> ARKHI_BOTTLE = ITEMS.register("arkhi_bottle", () -> new DrinkBottleItem(new Item.Properties().stacksTo(1)));
+    public static final RegistryObject<DrinkBottleItem> TEJ_BOTTLE = ITEMS.register("tej_bottle", () -> new DrinkBottleItem(new Item.Properties().stacksTo(1)));
+    public static final RegistryObject<DrinkBottleItem> WISSEN_BEER_BOTTLE = ITEMS.register("wissen_beer_bottle", () -> new DrinkBottleItem(new Item.Properties().stacksTo(1)));
+    public static final RegistryObject<DrinkBottleItem> MOR_TINCTURE_BOTTLE = ITEMS.register("mor_tincture_bottle", () -> new DrinkBottleItem(new Item.Properties().stacksTo(1)));
+    public static final RegistryObject<DrinkBottleItem> INNOCENT_WINE_BOTTLE = ITEMS.register("innocent_wine_bottle", () -> new DrinkBottleItem(new Item.Properties().stacksTo(1)));
+    public static final RegistryObject<DrinkBottleItem> TARKHUNA_BOTTLE = ITEMS.register("tarkhuna_bottle", () -> new DrinkBottleItem(new Item.Properties().stacksTo(1)));
+    public static final RegistryObject<DrinkBottleItem> BAIKAL_BOTTLE = ITEMS.register("baikal_bottle", () -> new DrinkBottleItem(new Item.Properties().stacksTo(1)));
+    public static final RegistryObject<DrinkBottleItem> KVASS_BOTTLE = ITEMS.register("kvass_bottle", () -> new DrinkBottleItem(new Item.Properties().stacksTo(1)));
+    public static final RegistryObject<DrinkBottleItem> KISSEL_BOTTLE = ITEMS.register("kissel_bottle", () -> new DrinkBottleItem(new Item.Properties().stacksTo(1)));
 
     public static final RegistryObject<Item> SHRIMP = ITEMS.register("shrimp", () -> new ShrimpItem(new Item.Properties().food(SHRIMP_FOOD), false));
     public static final RegistryObject<Item> FRIED_SHRIMP = ITEMS.register("fried_shrimp", () -> new ShrimpItem(new Item.Properties().food(FRIED_SHRIMP_FOOD), true));
@@ -1603,6 +1606,7 @@ public class WizardsReborn {
     public static RegistryObject<BlockEntityType<SaltCampfireTileEntity>> SALT_CAMPFIRE_TILE_ENTITY = TILE_ENTITIES.register("salt_campfire", () -> BlockEntityType.Builder.of(SaltCampfireTileEntity::new, ARCANE_SALT_CAMPFIRE.get(), INNOCENT_SALT_CAMPFIRE.get(), WISESTONE_SALT_CAMPFIRE.get()).build(null));
 
     public static RegistryObject<BlockEntityType<CrossBalkTileEntity>> CROSS_BAULK_TILE_ENTITY = TILE_ENTITIES.register("cross_baulk", () -> BlockEntityType.Builder.of(CrossBalkTileEntity::new, ARCANE_WOOD_CROSS_BAULK.get(), STRIPPED_ARCANE_WOOD_CROSS_BAULK.get(), ARCANE_WOOD_PLANKS_CROSS_BAULK.get(), INNOCENT_WOOD_CROSS_BAULK.get(), STRIPPED_INNOCENT_WOOD_CROSS_BAULK.get(), INNOCENT_WOOD_PLANKS_CROSS_BAULK.get()).build(null));
+    public static RegistryObject<BlockEntityType<PlacedItemsTileEntity>> PLACED_ITEMS_TILE_ENTITY = TILE_ENTITIES.register("placed_items", () -> BlockEntityType.Builder.of(PlacedItemsTileEntity::new, PLACED_ITEMS_BLOCK.get()).build(null));
 
     //ENTITIES
     public static final RegistryObject<EntityType<CustomBoatEntity>> BOAT = ENTITIES.register("boat", () -> EntityType.Builder.<CustomBoatEntity>of(CustomBoatEntity::new, MobCategory.MISC).sized(1.375f, 0.5625f).build(new ResourceLocation(MOD_ID, "boat").toString()));
@@ -1935,7 +1939,6 @@ public class WizardsReborn {
         CreateIntegration.init(eventBus);
         FarmersDelightIntegration.init(eventBus);
 
-        WissenWandItem.setupControlTypes();
         setupCrystals();
         setupMonograms();
         setupSpells();
@@ -1985,8 +1988,10 @@ public class WizardsReborn {
         RegisterAlchemyPotions.init();
         RegisterKnowledges.init();
         Researches.init();
+        WissenWandItem.setupControlTypes();
 
         setupCrystalsItems();
+        setupDrinksItems();
 
         event.enqueueWork(() -> {
             AxeItem.STRIPPABLES = new ImmutableMap.Builder<Block, Block>().putAll(AxeItem.STRIPPABLES)
@@ -2342,6 +2347,16 @@ public class WizardsReborn {
         Crystals.addItem(PURE_AIR_CRYSTAL.get());
         Crystals.addItem(PURE_FIRE_CRYSTAL.get());
         Crystals.addItem(PURE_VOID_CRYSTAL.get());
+    }
+
+    public static void setupDrinksItems() {
+        int day = 24000;
+        VODKA_BOTTLE.get().setAged(day * 24000, 24000);
+        INNOCENT_WINE_BOTTLE.get().setAlcoholic(false);
+        TARKHUNA_BOTTLE.get().setAlcoholic(false);
+        BAIKAL_BOTTLE.get().setAlcoholic(false);
+        KVASS_BOTTLE.get().setAlcoholic(false).setStageForAcl(4);
+        KISSEL_BOTTLE.get().setAlcoholic(false);
     }
 
     @Mod.EventBusSubscriber(bus=Mod.EventBusSubscriber.Bus.MOD)

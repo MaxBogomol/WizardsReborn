@@ -1,4 +1,4 @@
-package mod.maxbogomol.wizards_reborn.client.render.block;
+package mod.maxbogomol.wizards_reborn.client.model.block;
 
 import mod.maxbogomol.wizards_reborn.WizardsReborn;
 import mod.maxbogomol.wizards_reborn.common.tileentity.PipeBaseTileEntity;

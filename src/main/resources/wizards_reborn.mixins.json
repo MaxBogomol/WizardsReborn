@@ -12,7 +12,8 @@
     "PhantomMixin",
     "ItemStackMixin",
     "BowItemMixin",
-    "AbstractArrowMixin"
+    "AbstractArrowMixin",
+    "BlockItemMixin"
   ],
   "client": [
     "client.TitleScreenMixin",

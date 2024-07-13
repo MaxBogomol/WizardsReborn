@@ -303,6 +303,12 @@ public class FluidRenderer {
      * @param flipGas   If true, flips gas cubes
      */
     public static void renderScaledCuboid(PoseStack matrices, MultiBufferSource buffer, FluidCuboid cube, FluidStack fluid, float offset, int capacity, int light, boolean flipGas) {
+        FluidType type = fluid.getFluid().getFluidType();
+        IClientFluidTypeExtensions clientType = IClientFluidTypeExtensions.of(type);
+        renderScaledCuboid(matrices, buffer, cube, fluid, clientType.getTintColor(fluid), offset, capacity, light, flipGas);
+    }
+
+    public static void renderScaledCuboid(PoseStack matrices, MultiBufferSource buffer, FluidCuboid cube, FluidStack fluid, int color, float offset, int capacity, int light, boolean flipGas) {
         // nothing to render
         if (fluid.isEmpty() || capacity <= 0) {
             return;
@@ -332,10 +338,18 @@ public class FluidRenderer {
         }
 
         // draw cuboid
-        renderCuboid(matrices, buffer.getBuffer(RenderUtils.FLUID), cube, still, flowing, from, to, clientType.getTintColor(fluid), light, isGas && flipGas);
+        renderCuboid(matrices, buffer.getBuffer(RenderUtils.FLUID), cube, still, flowing, from, to, color, light, isGas && flipGas);
     }
 
+
+
     public static void renderCuboid(PoseStack matrices, MultiBufferSource buffer, FluidCuboid cube, FluidStack fluid, int capacity, int light, boolean flipGas) {
+        FluidType type = fluid.getFluid().getFluidType();
+        IClientFluidTypeExtensions clientType = IClientFluidTypeExtensions.of(type);
+        renderCuboid(matrices, buffer, cube, fluid, clientType.getTintColor(fluid), capacity, light, flipGas);
+    }
+
+    public static void renderCuboid(PoseStack matrices, MultiBufferSource buffer, FluidCuboid cube, FluidStack fluid, int color, int capacity, int light, boolean flipGas) {
         // nothing to render
         if (fluid.isEmpty() || capacity <= 0) {
             return;
@@ -364,6 +378,6 @@ public class FluidRenderer {
         }
 
         // draw cuboid
-        renderCuboid(matrices, buffer.getBuffer(RenderUtils.FLUID), cube, still, flowing, from, to, clientType.getTintColor(fluid), light, isGas && flipGas);
+        renderCuboid(matrices, buffer.getBuffer(RenderUtils.FLUID), cube, still, flowing, from, to, color, light, isGas && flipGas);
     }
 }

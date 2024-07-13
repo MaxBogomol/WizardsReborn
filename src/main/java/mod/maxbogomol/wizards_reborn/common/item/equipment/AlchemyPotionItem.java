@@ -6,6 +6,7 @@ import mod.maxbogomol.wizards_reborn.api.alchemy.AlchemyPotion;
 import mod.maxbogomol.wizards_reborn.api.alchemy.AlchemyPotionUtils;
 import mod.maxbogomol.wizards_reborn.common.alchemypotion.FluidAlchemyPotion;
 import mod.maxbogomol.wizards_reborn.common.alchemypotion.RegisterAlchemyPotions;
+import mod.maxbogomol.wizards_reborn.common.item.PlacedItem;
 import mod.maxbogomol.wizards_reborn.utils.ColorUtils;
 import net.minecraft.advancements.CriteriaTriggers;
 import net.minecraft.client.color.item.ItemColor;
@@ -35,7 +36,7 @@ import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class AlchemyPotionItem extends Item {
+public class AlchemyPotionItem extends PlacedItem {
     public int maxUses;
     public static List<Item> potionList = new ArrayList<>();
 

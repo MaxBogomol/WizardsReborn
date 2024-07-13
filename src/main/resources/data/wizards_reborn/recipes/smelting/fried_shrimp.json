@@ -1,0 +1,9 @@
+{
+  "type": "minecraft:smelting",
+  "ingredient": {
+    "item": "wizards_reborn:shrimp"
+  },
+  "result": "wizards_reborn:fried_shrimp",
+  "experience": 0.2,
+  "cookingtime": 200
+}

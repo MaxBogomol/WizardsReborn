@@ -175,6 +175,8 @@
 
   "item.wizards_reborn.petals": "Petals",
   "item.wizards_reborn.flower_fertilizer": "Flower Fertilizer",
+  "block.wizards_reborn.placed_items": "Placed Things",
+  "item.wizards_reborn.bunch_of_things": "Bunch of Things",
   "item.wizards_reborn.ground_brown_mushroom": "Ground Brown Mushroom",
   "item.wizards_reborn.ground_red_mushroom": "Ground Red Mushroom",
   "item.wizards_reborn.ground_crimson_fungus": "Ground Crimson Fungus",
@@ -597,6 +599,10 @@
   "lore.wizards_reborn.hunger_banner_pattern": "The hunter cannot become the hunted.",
   "lore.wizards_reborn.survival_banner_pattern": "Kill or be killed!",
   "lore.wizards_reborn.elevation_banner_pattern": "Leave everything... Cleanse your soul...",
+
+  "lore.wizards_reborn.drinks.alcoholic": "Alcoholic",
+  "lore.wizards_reborn.drinks.non_alcoholic": "Non-alcoholic",
+  "lore.wizards_reborn.drinks.days_aged": "days aged",
 
   "lore.wizards_reborn.shrimp": "Can a shrimp become your pet?",
   "lore.wizards_reborn.fried_shrimp": "You are cruel,,,,",

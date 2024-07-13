@@ -10,8 +10,7 @@ import javax.annotation.Nullable;
 
 public class SkinModelOverrideList extends CustomModelOverrideList {
     @Override
-    public BakedModel resolve(BakedModel originalModel, ItemStack stack, @Nullable ClientLevel world, @Nullable LivingEntity entity, int pSeed)
-    {
+    public BakedModel resolve(BakedModel originalModel, ItemStack stack, @Nullable ClientLevel world, @Nullable LivingEntity entity, int pSeed) {
         Skin skin = Skin.getSkinFromItem(stack);
         if (skin != null) {
             String skinStr = skin.getItemModelName(stack);

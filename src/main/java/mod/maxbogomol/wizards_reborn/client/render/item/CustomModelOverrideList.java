@@ -10,8 +10,7 @@ import javax.annotation.Nullable;
 
 public class CustomModelOverrideList extends ItemOverrides {
 
-    public CustomModelOverrideList()
-    {
+    public CustomModelOverrideList() {
         super();
     }
 
