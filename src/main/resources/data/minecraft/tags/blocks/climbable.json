@@ -1,8 +1,6 @@
 {
   "replace": false,
   "values": [
-    "wizards_reborn:arcane_linen",
-    "wizards_reborn:shiny_clover_crop",
     "wizards_reborn:underground_grape_vines",
     "wizards_reborn:underground_grape_vines_plant"
   ]

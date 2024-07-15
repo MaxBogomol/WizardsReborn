@@ -74,6 +74,7 @@ public final class PacketHandler {
         HANDLER.registerMessage(id++, ArcanumLensBurstEffectPacket.class, ArcanumLensBurstEffectPacket::encode, ArcanumLensBurstEffectPacket::decode, ArcanumLensBurstEffectPacket::handle);
         HANDLER.registerMessage(id++, SmokeEffectPacket.class, SmokeEffectPacket::encode, SmokeEffectPacket::decode, SmokeEffectPacket::handle);
         HANDLER.registerMessage(id++, InnocentWoodToolsEffectPacket.class, InnocentWoodToolsEffectPacket::encode, InnocentWoodToolsEffectPacket::decode, InnocentWoodToolsEffectPacket::handle);
+        HANDLER.registerMessage(id++, FlowerFertilizerEffectPacket.class, FlowerFertilizerEffectPacket::encode, FlowerFertilizerEffectPacket::decode, FlowerFertilizerEffectPacket::handle);
 
         HANDLER.registerMessage(id++, KnowledgeUpdatePacket.class, KnowledgeUpdatePacket::encode, KnowledgeUpdatePacket::decode, KnowledgeUpdatePacket::handle);
         HANDLER.registerMessage(id++, KnowledgeToastPacket.class, KnowledgeToastPacket::encode, KnowledgeToastPacket::decode, KnowledgeToastPacket::handle);
@@ -143,7 +144,6 @@ public final class PacketHandler {
     }
 
     public static void sendToTracking(Level world, BlockPos pos, Object msg) {
-        //HANDLER.send(PacketDistributor.TRACKING_CHUNK.with(() -> world.getChunkAt(pos)), msg);
         HANDLER.send(TRACKING_CHUNK_AND_NEAR.with(() -> Pair.of(world, pos)), msg);
     }
 

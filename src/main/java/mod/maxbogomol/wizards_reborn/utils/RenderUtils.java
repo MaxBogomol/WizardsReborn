@@ -15,6 +15,7 @@ import mod.maxbogomol.wizards_reborn.client.render.WorldRenderHandler;
 import mod.maxbogomol.wizards_reborn.client.render.item.CustomItemRenderer;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
+import net.minecraft.client.renderer.GameRenderer;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.RenderStateShard;
 import net.minecraft.client.renderer.RenderType;
@@ -792,5 +793,21 @@ public class RenderUtils {
         builder.vertex(mat, height, 0, -width).color(r2, g2, b2, 0).endVertex();
         builder.vertex(mat, height, 0, 0).color(r2, g2, b2, a2 / 10f).endVertex();
         builder.vertex(mat, 0, 0, 0).color(r1, g1, b1, a1).endVertex();
+    }
+
+    public static void startGuiParticle() {
+        RenderSystem.enableBlend();
+        RenderSystem.blendFunc(GlStateManager.SourceFactor.SRC_ALPHA, GlStateManager.DestFactor.ONE);
+        RenderSystem.depthMask(false);
+        RenderSystem.setShader(WizardsRebornClient::getGlowingShader);
+        RenderSystem.setShaderColor(1F, 1F, 1F, 1F);
+    }
+
+    public static void endGuiParticle() {
+        RenderSystem.disableBlend();
+        RenderSystem.depthMask(true);
+        RenderSystem.blendFunc(GlStateManager.SourceFactor.SRC_ALPHA, GlStateManager.DestFactor.ONE_MINUS_SRC_ALPHA);
+        RenderSystem.setShader(GameRenderer::getPositionTexShader);
+        RenderSystem.setShaderColor(1F, 1F, 1F, 1F);
     }
 }

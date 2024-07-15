@@ -228,7 +228,7 @@ public class WizardsReborn {
     public static final TagKey<Block> FLUID_PIPE_CONNECTION_TOGGLE_BLOCK_TAG = TagKey.create(Registries.BLOCK, new ResourceLocation(MOD_ID, "fluid_pipe_connection_toggle"));
     public static final TagKey<Block> STEAM_PIPE_CONNECTION_BLOCK_TAG = TagKey.create(Registries.BLOCK, new ResourceLocation(MOD_ID, "steam_pipe_connection"));
     public static final TagKey<Block> STEAM_PIPE_CONNECTION_TOGGLE_BLOCK_TAG = TagKey.create(Registries.BLOCK, new ResourceLocation(MOD_ID, "steam_pipe_connection_toggle"));
-    public static final TagKey<Block> EXTRACTOR_LEAVER_CONNECTION_BLOCK_TAG = TagKey.create(Registries.BLOCK, new ResourceLocation(MOD_ID, "extractor_leaver_connection"));
+    public static final TagKey<Block> EXTRACTOR_LEVER_CONNECTION_BLOCK_TAG = TagKey.create(Registries.BLOCK, new ResourceLocation(MOD_ID, "extractor_lever_connection"));
     public static final TagKey<Block> ALTAR_OF_DROUGHT_TARGET_BLOCK_TAG  = TagKey.create(Registries.BLOCK, new ResourceLocation(MOD_ID, "altar_of_drought_target"));
     public static final TagKey<Block> ORES_BLOCK_TAG  = TagKey.create(Registries.BLOCK, new ResourceLocation("forge", "ores"));
 
@@ -650,6 +650,7 @@ public class WizardsReborn {
 
     public static final FoodProperties MOR_FOOD = (new FoodProperties.Builder()).nutrition(1).saturationMod(0.2F).effect(new MobEffectInstance(MobEffects.POISON, 450, 0), 1.0F).effect(new MobEffectInstance(MobEffects.CONFUSION, 350, 0), 1.0F).effect(new MobEffectInstance(MobEffects.BLINDNESS, 250, 0), 1.0F).effect(new MobEffectInstance(MobEffects.WEAKNESS, 550, 1), 1.0F).build();
     public static final FoodProperties PITCHER_TURNIP_FOOD = (new FoodProperties.Builder()).nutrition(2).saturationMod(0.4F).build();
+    public static final FoodProperties UNDERGROUND_GRAPE_FOOD = (new FoodProperties.Builder()).nutrition(2).saturationMod(0.2F).build();
     public static final FoodProperties SHRIMP_FOOD = (new FoodProperties.Builder()).nutrition(4).saturationMod(0.25F).build();
     public static final FoodProperties FRIED_SHRIMP_FOOD = (new FoodProperties.Builder()).nutrition(8).saturationMod(0.6F).build();
 
@@ -767,6 +768,8 @@ public class WizardsReborn {
     public static final RegistryObject<Block> SHINY_CLOVER_CROP = BLOCKS.register("shiny_clover_crop", () -> new ShinyCloverCropBlock(BlockBehaviour.Properties.of().mapColor(MapColor.PLANT).noCollission().randomTicks().instabreak().sound(SoundType.PINK_PETALS).pushReaction(PushReaction.DESTROY)));
     public static final RegistryObject<Block> SHINY_CLOVER = BLOCKS.register("shiny_clover", () -> new ShinyCloverBlock(BlockBehaviour.Properties.of().mapColor(MapColor.PLANT).noCollission().sound(SoundType.PINK_PETALS).pushReaction(PushReaction.DESTROY)));
     public static final RegistryObject<Block> POTTED_SHINY_CLOVER = BLOCKS.register("potted_shiny_clover", () -> new FlowerPotBlock(SHINY_CLOVER.get(), BlockBehaviour.Properties.copy(Blocks.FLOWER_POT).instabreak().noOcclusion()));
+    public static final RegistryObject<Block> UNDERGROUND_GRAPE_VINES = BLOCKS.register("underground_grape_vines", () -> new UndergroundGrapeVinesBlock(BlockBehaviour.Properties.of().mapColor(MapColor.PLANT).randomTicks().noCollission().instabreak().sound(SoundType.CAVE_VINES).pushReaction(PushReaction.DESTROY)));
+    public static final RegistryObject<Block> UNDERGROUND_GRAPE_VINES_PLANT = BLOCKS.register("underground_grape_vines_plant", () -> new UndergroundGrapeVinesPlantBlock(BlockBehaviour.Properties.of().mapColor(MapColor.PLANT).randomTicks().noCollission().instabreak().sound(SoundType.CAVE_VINES).pushReaction(PushReaction.DESTROY)));
 
     public static final RegistryObject<Block> PLACED_ITEMS_BLOCK = BLOCKS.register("placed_items", () -> new PlacedItemsBlock(BlockBehaviour.Properties.of().strength(0.25F).mapColor(MapColor.COLOR_BROWN).sound(SoundType.CROP).noOcclusion()));
 
@@ -1148,9 +1151,11 @@ public class WizardsReborn {
     public static final RegistryObject<Item> PITCHER_TURNIP_BLOCK_ITEM = ITEMS.register("pitcher_turnip_block", () -> new BlockItem(PITCHER_TURNIP_BLOCK.get(), new Item.Properties()));
     public static final RegistryObject<Item> SHINY_CLOVER_SEED = ITEMS.register("shiny_clover_seed", () -> new ItemNameBlockItem(SHINY_CLOVER_CROP.get(), new Item.Properties()));
     public static final RegistryObject<Item> SHINY_CLOVER_ITEM = ITEMS.register("shiny_clover", () -> new BlockItem(SHINY_CLOVER.get(), new Item.Properties()));
+    public static final RegistryObject<Item> UNDERGROUND_GRAPE_VINE = ITEMS.register("underground_grape_vine", () -> new ItemNameBlockItem(UNDERGROUND_GRAPE_VINES.get(), new Item.Properties()));
+    public static final RegistryObject<Item> UNDERGROUND_GRAPE = ITEMS.register("underground_grape", () -> new Item(new Item.Properties().food(UNDERGROUND_GRAPE_FOOD)));
 
     public static final RegistryObject<Item> PETALS = ITEMS.register("petals", () -> new Item(new Item.Properties()));
-    public static final RegistryObject<Item> FLOWER_FERTILIZER = ITEMS.register("flower_fertilizer", () -> new BoneMealItem(new Item.Properties()));
+    public static final RegistryObject<Item> FLOWER_FERTILIZER = ITEMS.register("flower_fertilizer", () -> new FlowerFertilizerItem(new Item.Properties()));
     public static final RegistryObject<Item> BUNCH_OF_THINGS = ITEMS.register("bunch_of_things", () -> new BunchOfThingsItem(new Item.Properties()));
     public static final RegistryObject<Item> GROUND_BROWN_MUSHROOM = ITEMS.register("ground_brown_mushroom", () -> new Item(new Item.Properties()));
     public static final RegistryObject<Item> GROUND_RED_MUSHROOM = ITEMS.register("ground_red_mushroom", () -> new Item(new Item.Properties()));
@@ -1477,11 +1482,11 @@ public class WizardsReborn {
     public static final RegistryObject<Item> SURVIVAL_BANNER_PATTERN_ITEM = ITEMS.register("survival_banner_pattern", () -> new RainBannerPatternItem(RainBannerPatternItem.Types.SURVIVAL, SURVIVAL_BANNER_PATTERN_TAG, (new Item.Properties()).stacksTo(1).rarity(Rarity.UNCOMMON)));
     public static final RegistryObject<Item> ELEVATION_BANNER_PATTERN_ITEM = ITEMS.register("elevation_banner_pattern", () -> new RainBannerPatternItem(RainBannerPatternItem.Types.ELEVATION, ELEVATION_BANNER_PATTERN_TAG, (new Item.Properties()).stacksTo(1).rarity(Rarity.UNCOMMON)));
 
-    public static final RegistryObject<Item> MUSIC_DISC_ARCANUM = ITEMS.register("music_disc_arcanum", () -> new RecordItem(6, MUSIC_DISC_ARCANUM_SOUND.get(), new Item.Properties().stacksTo(1).rarity(Rarity.RARE), 122));
-    public static final RegistryObject<Item> MUSIC_DISC_MOR = ITEMS.register("music_disc_mor", () -> new RecordItem(6, MUSIC_DISC_MOR_SOUND.get(), new Item.Properties().stacksTo(1).rarity(Rarity.RARE), 305));
-    public static final RegistryObject<Item> MUSIC_DISC_REBORN = ITEMS.register("music_disc_reborn", () -> new RecordItem(6, MUSIC_DISC_REBORN_SOUND.get(), new Item.Properties().stacksTo(1).rarity(Rarity.RARE), 211));
-    public static final RegistryObject<Item> MUSIC_DISC_SHIMMER = ITEMS.register("music_disc_shimmer", () -> new RecordItem(6, MUSIC_DISC_SHIMMER_SOUND.get(), new Item.Properties().stacksTo(1).rarity(Rarity.RARE), 234));
-    public static final RegistryObject<Item> MUSIC_DISC_PANACHE = ITEMS.register("music_disc_panache", () -> new RecordItem(6, MUSIC_DISC_PANACHE_SOUND.get(), new Item.Properties().stacksTo(1).rarity(Rarity.RARE), 91));
+    public static final RegistryObject<Item> MUSIC_DISC_ARCANUM = ITEMS.register("music_disc_arcanum", () -> new ArcaneRecordItem(6, MUSIC_DISC_ARCANUM_SOUND.get(), new Item.Properties().stacksTo(1).rarity(Rarity.RARE), 122, new Color(203, 234, 251)));
+    public static final RegistryObject<Item> MUSIC_DISC_MOR = ITEMS.register("music_disc_mor", () -> new ArcaneRecordItem(6, MUSIC_DISC_MOR_SOUND.get(), new Item.Properties().stacksTo(1).rarity(Rarity.RARE), 305, new Color(244, 245, 230)));
+    public static final RegistryObject<Item> MUSIC_DISC_REBORN = ITEMS.register("music_disc_reborn", () -> new ArcaneRecordItem(6, MUSIC_DISC_REBORN_SOUND.get(), new Item.Properties().stacksTo(1).rarity(Rarity.RARE), 211, new Color(252, 240, 175)));
+    public static final RegistryObject<Item> MUSIC_DISC_SHIMMER = ITEMS.register("music_disc_shimmer", () -> new ArcaneRecordItem(6, MUSIC_DISC_SHIMMER_SOUND.get(), new Item.Properties().stacksTo(1).rarity(Rarity.RARE), 234, new Color(203, 234, 251)));
+    public static final RegistryObject<Item> MUSIC_DISC_PANACHE = ITEMS.register("music_disc_panache", () -> new ArcaneRecordItem(6, MUSIC_DISC_PANACHE_SOUND.get(), new Item.Properties().stacksTo(1).rarity(Rarity.RARE), 91, new Color(252, 240, 175)).setCassette());
 
     public static final RegistryObject<Item> ARCANE_WOOD_TRIM = ITEMS.register("arcane_wood_trim", () -> new Item(new Item.Properties()));
     public static final RegistryObject<Item> WISESTONE_TRIM = ITEMS.register("wisestone_trim", () -> new Item(new Item.Properties()));

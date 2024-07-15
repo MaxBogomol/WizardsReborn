@@ -22,7 +22,6 @@ import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.gameevent.GameEvent;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.shapes.CollisionContext;
-import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
 
 public abstract class ExtractorBaseBlock extends PipeBaseBlock {
@@ -55,7 +54,7 @@ public abstract class ExtractorBaseBlock extends PipeBaseBlock {
 
     @Override
     public boolean connected(Direction direction, BlockState state) {
-        if (!state.is(WizardsReborn.EXTRACTOR_LEAVER_CONNECTION_BLOCK_TAG)) {
+        if (!state.is(WizardsReborn.EXTRACTOR_LEVER_CONNECTION_BLOCK_TAG)) {
             return false;
         }
 
@@ -73,11 +72,6 @@ public abstract class ExtractorBaseBlock extends PipeBaseBlock {
 
         return facingConnected(direction, state, BlockStateProperties.HORIZONTAL_FACING)
                 && facingConnected(direction, state, BlockStateProperties.FACING);
-    }
-
-    @Override
-    public VoxelShape getBlockSupportShape(BlockState pState, BlockGetter pLevel, BlockPos pPos) {
-        return Shapes.block();
     }
 
     @Override

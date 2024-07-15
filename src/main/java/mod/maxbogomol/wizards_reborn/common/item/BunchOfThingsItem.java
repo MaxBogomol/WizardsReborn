@@ -2,6 +2,7 @@ package mod.maxbogomol.wizards_reborn.common.item;
 
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.context.BlockPlaceContext;
 
 public class BunchOfThingsItem extends PlacedItem {
 
@@ -16,5 +17,10 @@ public class BunchOfThingsItem extends PlacedItem {
         }
 
         return tileNbt;
+    }
+
+    @Override
+    public boolean canPlaceBlock(BlockPlaceContext context) {
+        return true;
     }
 }

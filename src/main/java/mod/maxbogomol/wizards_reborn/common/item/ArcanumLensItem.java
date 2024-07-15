@@ -1,11 +1,8 @@
 package mod.maxbogomol.wizards_reborn.common.item;
 
-import com.mojang.blaze3d.platform.GlStateManager;
-import com.mojang.blaze3d.systems.RenderSystem;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.math.Axis;
 import mod.maxbogomol.wizards_reborn.WizardsReborn;
-import mod.maxbogomol.wizards_reborn.WizardsRebornClient;
 import mod.maxbogomol.wizards_reborn.api.wissen.IWissenItem;
 import mod.maxbogomol.wizards_reborn.api.wissen.WissenItemUtils;
 import mod.maxbogomol.wizards_reborn.api.wissen.WissenUtils;
@@ -15,7 +12,6 @@ import mod.maxbogomol.wizards_reborn.common.network.ArcanumLensBurstEffectPacket
 import mod.maxbogomol.wizards_reborn.common.network.PacketHandler;
 import mod.maxbogomol.wizards_reborn.utils.RenderUtils;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.renderer.GameRenderer;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.texture.TextureAtlas;
 import net.minecraft.client.renderer.texture.TextureAtlasSprite;
@@ -81,12 +77,8 @@ public class ArcanumLensItem extends ArcanumItem implements IGuiParticleItem {
     public void renderParticle(PoseStack pose, LivingEntity entity, Level level, ItemStack stack, int x, int y, int seed, int guiOffset) {
         float ticks = (ClientTickHandler.ticksInGame + Minecraft.getInstance().getPartialTick());
 
-        RenderSystem.enableBlend();
-        RenderSystem.blendFunc(GlStateManager.SourceFactor.SRC_ALPHA, GlStateManager.DestFactor.ONE);
+        RenderUtils.startGuiParticle();
         MultiBufferSource.BufferSource buffersource = Minecraft.getInstance().renderBuffers().bufferSource();
-        RenderSystem.depthMask(false);
-        RenderSystem.setShader(WizardsRebornClient::getGlowingShader);
-        RenderSystem.setShaderColor(1F, 1F, 1F, 1F);
 
         TextureAtlasSprite sparkle = Minecraft.getInstance().getTextureAtlas(TextureAtlas.LOCATION_BLOCKS).apply(new ResourceLocation(WizardsReborn.MOD_ID, "particle/sparkle"));
 
@@ -102,10 +94,6 @@ public class ArcanumLensItem extends ArcanumItem implements IGuiParticleItem {
             pose.popPose();
         }
 
-        RenderSystem.disableBlend();
-        RenderSystem.depthMask(true);
-        RenderSystem.blendFunc(GlStateManager.SourceFactor.SRC_ALPHA, GlStateManager.DestFactor.ONE_MINUS_SRC_ALPHA);
-        RenderSystem.setShader(GameRenderer::getPositionTexShader);
-        RenderSystem.setShaderColor(1F, 1F, 1F, 1F);
+        RenderUtils.endGuiParticle();
     }
 }

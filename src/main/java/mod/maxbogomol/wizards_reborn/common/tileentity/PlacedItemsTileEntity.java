@@ -1,6 +1,7 @@
 package mod.maxbogomol.wizards_reborn.common.tileentity;
 
 import mod.maxbogomol.wizards_reborn.WizardsReborn;
+import mod.maxbogomol.wizards_reborn.api.wissen.IWissenWandFunctionalTileEntity;
 import mod.maxbogomol.wizards_reborn.utils.PacketUtils;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
@@ -12,8 +13,9 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.AABB;
 import org.jetbrains.annotations.NotNull;
 
-public class PlacedItemsTileEntity extends TileSimpleInventory {
+public class PlacedItemsTileEntity extends TileSimpleInventory implements IWissenWandFunctionalTileEntity {
     public boolean things = false;
+    public boolean isRotate = true;
 
     public PlacedItemsTileEntity(BlockEntityType<?> type, BlockPos pos, BlockState state) {
         super(type, pos, state);
@@ -64,12 +66,14 @@ public class PlacedItemsTileEntity extends TileSimpleInventory {
     public void saveAdditional(CompoundTag tag) {
         super.saveAdditional(tag);
         tag.putBoolean("things", things);
+        tag.putBoolean("isRotate", isRotate);
     }
 
     @Override
     public void load(CompoundTag tag) {
         super.load(tag);
         things = tag.getBoolean("things");
+        isRotate = tag.getBoolean("isRotate");
     }
 
     @Override
@@ -88,5 +92,11 @@ public class PlacedItemsTileEntity extends TileSimpleInventory {
         }
 
         return size;
+    }
+
+    @Override
+    public void wissenWandFunction() {
+        isRotate = !isRotate;
+        PacketUtils.SUpdateTileEntityPacket(this);
     }
 }

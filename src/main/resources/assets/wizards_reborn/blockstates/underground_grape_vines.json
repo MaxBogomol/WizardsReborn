@@ -1,0 +1,10 @@
+{
+  "variants": {
+    "berries=false": {
+      "model": "wizards_reborn:block/underground_grape_vines"
+    },
+    "berries=true": {
+      "model": "wizards_reborn:block/underground_grape_vines_lit"
+    }
+  }
+}

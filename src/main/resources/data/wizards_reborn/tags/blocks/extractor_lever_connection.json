@@ -1,6 +1,7 @@
 {
   "replace": false,
   "values": [
+    "#minecraft:buttons",
     "minecraft:lever",
     "wizards_reborn:arcane_lever"
   ]

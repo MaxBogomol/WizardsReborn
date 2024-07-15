@@ -1,17 +1,13 @@
 package mod.maxbogomol.wizards_reborn.common.item;
 
-import com.mojang.blaze3d.platform.GlStateManager;
-import com.mojang.blaze3d.systems.RenderSystem;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.math.Axis;
 import mod.maxbogomol.wizards_reborn.WizardsReborn;
-import mod.maxbogomol.wizards_reborn.WizardsRebornClient;
 import mod.maxbogomol.wizards_reborn.client.event.ClientTickHandler;
 import mod.maxbogomol.wizards_reborn.client.particle.Particles;
 import mod.maxbogomol.wizards_reborn.common.block.ArcaneLumosBlock;
 import mod.maxbogomol.wizards_reborn.utils.RenderUtils;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.renderer.GameRenderer;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.texture.TextureAtlas;
 import net.minecraft.client.renderer.texture.TextureAtlasSprite;
@@ -101,12 +97,8 @@ public class ArcaneLumosItem extends BlockItem implements IParticleItem, IGuiPar
             float angle = (randomI.nextFloat() * 360f) + ticks;
             float offset = (float) (0.75f + Math.abs(Math.sin(Math.toRadians(randomI.nextFloat() * 360f + ticks * 0.4f)) * 0.25f));
 
-            RenderSystem.enableBlend();
-            RenderSystem.blendFunc(GlStateManager.SourceFactor.SRC_ALPHA, GlStateManager.DestFactor.ONE);
+            RenderUtils.startGuiParticle();
             MultiBufferSource.BufferSource buffersource = Minecraft.getInstance().renderBuffers().bufferSource();
-            RenderSystem.depthMask(false);
-            RenderSystem.setShader(WizardsRebornClient::getGlowingShader);
-            RenderSystem.setShaderColor(1F, 1F, 1F, 1F);
 
             TextureAtlasSprite sparkle = Minecraft.getInstance().getTextureAtlas(TextureAtlas.LOCATION_BLOCKS).apply(new ResourceLocation(WizardsReborn.MOD_ID, "particle/sparkle"));
 
@@ -126,11 +118,7 @@ public class ArcaneLumosItem extends BlockItem implements IParticleItem, IGuiPar
                 pose.popPose();
             }
 
-            RenderSystem.disableBlend();
-            RenderSystem.depthMask(true);
-            RenderSystem.blendFunc(GlStateManager.SourceFactor.SRC_ALPHA, GlStateManager.DestFactor.ONE_MINUS_SRC_ALPHA);
-            RenderSystem.setShader(GameRenderer::getPositionTexShader);
-            RenderSystem.setShaderColor(1F, 1F, 1F, 1F);
+            RenderUtils.endGuiParticle();
         }
     }
 }

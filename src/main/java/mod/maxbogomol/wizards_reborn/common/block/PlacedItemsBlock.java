@@ -2,6 +2,7 @@ package mod.maxbogomol.wizards_reborn.common.block;
 
 import mod.maxbogomol.wizards_reborn.WizardsReborn;
 import mod.maxbogomol.wizards_reborn.common.item.IPlacedItem;
+import mod.maxbogomol.wizards_reborn.common.item.equipment.WissenWandItem;
 import mod.maxbogomol.wizards_reborn.common.tileentity.PlacedItemsTileEntity;
 import mod.maxbogomol.wizards_reborn.common.tileentity.TileSimpleInventory;
 import mod.maxbogomol.wizards_reborn.utils.PacketUtils;
@@ -97,6 +98,14 @@ public class PlacedItemsBlock extends Block implements EntityBlock, SimpleWaterl
         ItemStack stack = player.getItemInHand(hand).copy();
 
         int invSize = tile.getInventorySize();
+
+        if (stack.getItem() instanceof WissenWandItem) {
+            if (WissenWandItem.getMode(stack) != 4) {
+                world.updateNeighbourForOutputSignal(pos, this);
+                PacketUtils.SUpdateTileEntityPacket(tile);
+                return InteractionResult.SUCCESS;
+            }
+        }
 
         if (!player.isShiftKeyDown()) {
             if (invSize < 4) {

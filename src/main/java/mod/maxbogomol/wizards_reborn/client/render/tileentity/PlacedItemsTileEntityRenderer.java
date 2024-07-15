@@ -67,10 +67,15 @@ public class PlacedItemsTileEntityRenderer implements BlockEntityRenderer<Placed
                 double ticksUp = (ClientTickHandler.ticksInGame + partialTicks) * 4;
                 ticksUp = (ticksUp) % 360;
 
+                float rotateTicks = (random.nextFloat() * 360f) + (rotate * -22.5f);
+                if (items.isRotate) {
+                    rotateTicks = (float) (rotateTicks + ticks);
+                }
+
                 ms.pushPose();
                 ms.translate(0F, 0.2875F, 0F);
                 ms.translate(0F, (float) (Math.sin(Math.toRadians(ticksUp)) * 0.03125F), 0F);
-                ms.mulPose(Axis.YP.rotationDegrees((float) ticks + (random.nextFloat() * 360f) + (rotate * -22.5f)));
+                ms.mulPose(Axis.YP.rotationDegrees(rotateTicks));
                 ms.scale(0.5F, 0.5F, 0.5F);
                 Minecraft.getInstance().getItemRenderer().renderStatic(items.getItemHandler().getItem(i), ItemDisplayContext.FIXED, light, overlay, ms, buffers, items.getLevel(), 0);
                 ms.popPose();

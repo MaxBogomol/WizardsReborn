@@ -13,7 +13,8 @@
     "ItemStackMixin",
     "BowItemMixin",
     "AbstractArrowMixin",
-    "BlockItemMixin"
+    "BlockItemMixin",
+    "FaceAttachedHorizontalDirectionalBlockMixin"
   ],
   "client": [
     "client.TitleScreenMixin",

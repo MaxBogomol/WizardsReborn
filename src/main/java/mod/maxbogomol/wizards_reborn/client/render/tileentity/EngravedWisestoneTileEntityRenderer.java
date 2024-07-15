@@ -70,7 +70,7 @@ public class EngravedWisestoneTileEntityRenderer implements BlockEntityRenderer<
 
                 ms.pushPose();
                 ms.mulPose(Axis.YP.rotationDegrees(180f));
-                RenderUtils.spriteWaveQuad(ms, buffersource, 0, 0, 0.5f * width, 0.5f * width, 0.1f, tick4, tick3, tick2, tick1, sprite.getU1(), sprite.getU0(), sprite.getV0(), sprite.getV1(), r, g, b, 0.2f * alpha);
+                RenderUtils.spriteWaveQuad(ms, buffersource, 0, 0, 0.5f * width, 0.5f * width, 0.01f, tick4, tick3, tick2, tick1, sprite.getU1(), sprite.getU0(), sprite.getV0(), sprite.getV1(), r, g, b, 0.2f * alpha);
                 ms.popPose();
 
                 width = width + 0.1f;

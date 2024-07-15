@@ -1,6 +1,7 @@
 {
   "replace": false,
   "values": [
-    "wizards_reborn:arcanemicon"
+    "wizards_reborn:arcanemicon",
+    "wizards_reborn:arcane_enchanted_book"
   ]
 }

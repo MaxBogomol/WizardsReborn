@@ -1,10 +1,8 @@
 package mod.maxbogomol.wizards_reborn.common.item;
 
-import com.mojang.blaze3d.platform.GlStateManager;
 import com.mojang.blaze3d.systems.RenderSystem;
 import com.mojang.blaze3d.vertex.PoseStack;
 import mod.maxbogomol.wizards_reborn.WizardsReborn;
-import mod.maxbogomol.wizards_reborn.WizardsRebornClient;
 import mod.maxbogomol.wizards_reborn.api.crystal.CrystalStat;
 import mod.maxbogomol.wizards_reborn.api.crystal.CrystalType;
 import mod.maxbogomol.wizards_reborn.api.crystal.CrystalUtils;
@@ -14,7 +12,6 @@ import mod.maxbogomol.wizards_reborn.common.block.CrystalBlock;
 import mod.maxbogomol.wizards_reborn.utils.ColorUtils;
 import mod.maxbogomol.wizards_reborn.utils.RenderUtils;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.renderer.GameRenderer;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.core.NonNullList;
 import net.minecraft.nbt.CompoundTag;
@@ -168,12 +165,8 @@ public class CrystalItem extends BlockItem implements IParticleItem, IGuiParticl
             Color color = getType().getColor();
             int seedI = this.getDescriptionId().length();
 
-            RenderSystem.enableBlend();
-            RenderSystem.blendFunc(GlStateManager.SourceFactor.SRC_ALPHA, GlStateManager.DestFactor.ONE);
+            RenderUtils.startGuiParticle();
             MultiBufferSource.BufferSource buffersource = Minecraft.getInstance().renderBuffers().bufferSource();
-            RenderSystem.depthMask(false);
-            RenderSystem.setShader(WizardsRebornClient::getGlowingShader);
-            RenderSystem.setShaderColor(1F, 1F, 1F, 1F);
 
             pose.pushPose();
             pose.translate(x, y, 100);
@@ -192,11 +185,7 @@ public class CrystalItem extends BlockItem implements IParticleItem, IGuiParticl
                 pose.popPose();
             }
 
-            RenderSystem.disableBlend();
-            RenderSystem.depthMask(true);
-            RenderSystem.blendFunc(GlStateManager.SourceFactor.SRC_ALPHA, GlStateManager.DestFactor.ONE_MINUS_SRC_ALPHA);
-            RenderSystem.setShader(GameRenderer::getPositionTexShader);
-            RenderSystem.setShaderColor(1F, 1F, 1F, 1F);
+            RenderUtils.endGuiParticle();
         }
     }
 }

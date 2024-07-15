@@ -1,15 +1,11 @@
 package mod.maxbogomol.wizards_reborn.api.arcaneenchantment;
 
-import com.mojang.blaze3d.platform.GlStateManager;
-import com.mojang.blaze3d.systems.RenderSystem;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.math.Axis;
 import mod.maxbogomol.wizards_reborn.WizardsReborn;
-import mod.maxbogomol.wizards_reborn.WizardsRebornClient;
 import mod.maxbogomol.wizards_reborn.client.event.ClientTickHandler;
 import mod.maxbogomol.wizards_reborn.utils.RenderUtils;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.renderer.GameRenderer;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.texture.TextureAtlas;
 import net.minecraft.client.renderer.texture.TextureAtlasSprite;
@@ -86,27 +82,22 @@ public class ArcaneEnchantment {
     }
 
     @OnlyIn(Dist.CLIENT)
-    public void renderParticle(PoseStack pose, LivingEntity entity, Level level, ItemStack stack, int x, int y, int seed, int guiOffset) {
-        int i = ArcaneEnchantments.getArcaneEnchantments().indexOf(this);
+    public void renderParticle(PoseStack pose, LivingEntity entity, Level level, ItemStack stack, int x, int y, int seed, int guiOffset, int index) {
         int levelEnchantment = ArcaneEnchantmentUtils.getArcaneEnchantment(stack, this);
         if (levelEnchantment > getMaxLevel()) {
             levelEnchantment = getMaxLevel();
         }
         float size = 0.5f + (((float) levelEnchantment / getMaxLevel()) * 0.5f);
 
-        float ticks = (ClientTickHandler.ticksInGame + Minecraft.getInstance().getPartialTick()) * 0.4f + (i * 35);
+        float ticks = (ClientTickHandler.ticksInGame + Minecraft.getInstance().getPartialTick()) * 0.4f + (index * 35);
         float r = getColor().getRed() / 255f;
         float g = getColor().getGreen() / 255f;
         float b = getColor().getBlue() / 255f;
 
         if (isCurse()) ticks = -ticks;
 
-        RenderSystem.enableBlend();
-        RenderSystem.blendFunc(GlStateManager.SourceFactor.SRC_ALPHA, GlStateManager.DestFactor.ONE);
+        RenderUtils.startGuiParticle();
         MultiBufferSource.BufferSource buffersource = Minecraft.getInstance().renderBuffers().bufferSource();
-        RenderSystem.depthMask(false);
-        RenderSystem.setShader(WizardsRebornClient::getGlowingShader);
-        RenderSystem.setShaderColor(1F, 1F, 1F, 1F);
 
         TextureAtlasSprite sparkle = Minecraft.getInstance().getTextureAtlas(TextureAtlas.LOCATION_BLOCKS).apply(new ResourceLocation(WizardsReborn.MOD_ID, "particle/sparkle"));
 
@@ -117,10 +108,6 @@ public class ArcaneEnchantment {
         buffersource.endBatch();
         pose.popPose();
 
-        RenderSystem.disableBlend();
-        RenderSystem.depthMask(true);
-        RenderSystem.blendFunc(GlStateManager.SourceFactor.SRC_ALPHA, GlStateManager.DestFactor.ONE_MINUS_SRC_ALPHA);
-        RenderSystem.setShader(GameRenderer::getPositionTexShader);
-        RenderSystem.setShaderColor(1F, 1F, 1F, 1F);
+        RenderUtils.endGuiParticle();
     }
 }

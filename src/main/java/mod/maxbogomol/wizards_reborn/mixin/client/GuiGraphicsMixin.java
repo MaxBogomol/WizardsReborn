@@ -25,11 +25,13 @@ public abstract class GuiGraphicsMixin {
             }
 
             if (ArcaneEnchantmentUtils.isArcaneItem(pStack)) {
+                int i = 0;
                 for (ArcaneEnchantment enchantment : ArcaneEnchantments.getArcaneEnchantments()) {
                     int levelEnchantment = ArcaneEnchantmentUtils.getArcaneEnchantment(pStack, enchantment);
                     if (levelEnchantment > 0) {
                         GuiGraphics self = (GuiGraphics) ((Object) this);
-                        enchantment.renderParticle(self.pose(), pEntity, pLevel, pStack, pX, pY, pSeed, pGuiOffset);
+                        enchantment.renderParticle(self.pose(), pEntity, pLevel, pStack, pX, pY, pSeed, pGuiOffset, i);
+                        i++;
                     }
                 }
             }
