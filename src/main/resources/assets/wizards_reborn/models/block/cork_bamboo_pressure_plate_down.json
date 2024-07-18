@@ -1,0 +1,6 @@
+{
+  "parent": "block/pressure_plate_down",
+  "textures": {
+    "texture": "wizards_reborn:block/cork_bamboo_planks"
+  }
+}

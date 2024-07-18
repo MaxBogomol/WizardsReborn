@@ -1,0 +1,7 @@
+{
+  "parent": "wizards_reborn:block/frame_block",
+  "textures": {
+    "case": "wizards_reborn:block/cork_bamboo_casing",
+    "particle": "wizards_reborn:block/cork_bamboo_casing"
+  }
+}

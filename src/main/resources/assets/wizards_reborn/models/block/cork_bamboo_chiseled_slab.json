@@ -1,0 +1,8 @@
+{
+  "parent": "minecraft:block/slab",
+  "textures": {
+    "bottom": "wizards_reborn:block/cork_bamboo_chiseled_planks",
+    "top": "wizards_reborn:block/cork_bamboo_chiseled_planks",
+    "side": "wizards_reborn:block/cork_bamboo_chiseled_planks"
+  }
+}

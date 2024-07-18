@@ -1,0 +1,7 @@
+{
+  "parent": "minecraft:block/potted_bamboo",
+  "textures": {
+    "bamboo": "wizards_reborn:block/cork_bamboo_stalk",
+    "leaf": "wizards_reborn:block/cork_bamboo_singleleaf"
+  }
+}

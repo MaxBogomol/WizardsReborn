@@ -1,0 +1,6 @@
+{
+  "parent": "block/button_pressed",
+  "textures": {
+    "texture": "wizards_reborn:block/cork_bamboo_planks"
+  }
+}

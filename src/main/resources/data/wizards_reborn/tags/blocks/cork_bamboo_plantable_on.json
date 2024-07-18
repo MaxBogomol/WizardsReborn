@@ -1,0 +1,10 @@
+{
+  "replace": false,
+  "values": [
+    "#minecraft:sand",
+    "#minecraft:dirt",
+    "wizards_reborn:cork_bamboo",
+    "wizards_reborn:cork_bamboo_sapling",
+    "minecraft:gravel"
+  ]
+}

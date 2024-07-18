@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:block/custom_fence_inventory",
+  "textures": {
+    "texture": "wizards_reborn:block/cork_bamboo_fence"
+  }
+}

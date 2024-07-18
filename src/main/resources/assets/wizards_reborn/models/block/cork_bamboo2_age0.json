@@ -1,0 +1,7 @@
+{
+	"parent": "minecraft:block/bamboo2_age0",
+	"textures": {
+		"all": "wizards_reborn:block/cork_bamboo_stalk",
+		"particle": "wizards_reborn:block/cork_bamboo_stalk"
+	}
+}

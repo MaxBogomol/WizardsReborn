@@ -1,0 +1,7 @@
+{
+  "parent": "minecraft:block/template_custom_fence_gate_open",
+  "textures": {
+    "texture": "wizards_reborn:block/cork_bamboo_fence_gate",
+    "particle": "wizards_reborn:block/cork_bamboo_planks"
+  }
+}

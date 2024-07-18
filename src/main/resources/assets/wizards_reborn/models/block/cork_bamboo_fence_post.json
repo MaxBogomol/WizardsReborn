@@ -1,0 +1,7 @@
+{
+  "parent": "minecraft:block/custom_fence_post",
+  "textures": {
+    "texture": "wizards_reborn:block/cork_bamboo_fence",
+    "particle": "wizards_reborn:block/cork_bamboo_planks"
+  }
+}

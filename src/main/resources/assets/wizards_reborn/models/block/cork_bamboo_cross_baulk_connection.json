@@ -1,0 +1,7 @@
+{
+  "parent": "wizards_reborn:block/cross_baulk_connection",
+  "textures": {
+    "particle": "wizards_reborn:block/cork_bamboo_block",
+    "pipe": "wizards_reborn:block/cork_bamboo_baulk"
+  }
+}

@@ -41,7 +41,7 @@ public class ArcaneRecordItem extends RecordItem implements IGuiParticleItem {
     public void renderParticle(PoseStack pose, LivingEntity entity, Level level, ItemStack stack, int x, int y, int seed, int guiOffset) {
         int ii = lengthInSeconds;
 
-        float ticks = (ClientTickHandler.ticksInGame + Minecraft.getInstance().getPartialTick()) + (ii * 10);
+        float ticks = ((ClientTickHandler.ticksInGame + Minecraft.getInstance().getPartialTick()) + (ii * 10)) * 0.6f;
         float alpha = (float) (0.1f + Math.abs(Math.sin(Math.toRadians(ticks)) * 0.15f));
         float r = color.getRed() / 255f;
         float g = color.getGreen() / 255f;
@@ -57,7 +57,7 @@ public class ArcaneRecordItem extends RecordItem implements IGuiParticleItem {
             float offset = (float) (Math.abs(Math.sin(Math.toRadians(i * 6 + (ticks * 2f)))));
             offset = (offset - 0.25f) * (1 / 0.75f);
             if (offset < 0) offset = 0;
-            pose.translate(x + 7.5 + (Math.sin(Math.toRadians(i * 12)) * (isCassette ? 7 : 8)), y + 8 + (Math.cos(Math.toRadians(i * 12)) * (isCassette ? 3 : 4)), 100);
+            pose.translate(x + 7.5 + (Math.sin(Math.toRadians(i * 12)) * (isCassette ? 6 : 7)), y + 8 + (Math.cos(Math.toRadians(i * 12)) * (isCassette ? 3 : 4)), 100);
             pose.mulPose(Axis.ZP.rotationDegrees(ticks + (i * 2f)));
             RenderUtils.spriteGlowQuadCenter(pose, buffersource, 0, 0, 6f * offset, 6f * offset, sparkle.getU0(), sparkle.getU1(), sparkle.getV0(), sparkle.getV1(), r, g, b, alpha);
             buffersource.endBatch();

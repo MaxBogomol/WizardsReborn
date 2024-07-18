@@ -7,8 +7,7 @@ import com.mojang.datafixers.util.Pair;
 import com.mojang.math.Axis;
 import mod.maxbogomol.wizards_reborn.WizardsReborn;
 import mod.maxbogomol.wizards_reborn.common.entity.CustomBoatEntity;
-import net.minecraft.client.model.BoatModel;
-import net.minecraft.client.model.ChestBoatModel;
+import net.minecraft.client.model.*;
 import net.minecraft.client.model.geom.ModelLayerLocation;
 import net.minecraft.client.model.geom.ModelPart;
 import net.minecraft.client.renderer.MultiBufferSource;
@@ -18,25 +17,30 @@ import net.minecraft.client.renderer.entity.EntityRendererProvider;
 import net.minecraft.client.renderer.texture.OverlayTexture;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.Mth;
+import net.minecraft.world.entity.vehicle.Boat;
 import org.joml.Quaternionf;
 
 import java.util.Map;
 import java.util.stream.Stream;
 
-public class CustomBoatModel extends EntityRenderer<CustomBoatEntity> {
+public class CustomBoatRenderer extends EntityRenderer<CustomBoatEntity> {
 
-    private final Map<CustomBoatEntity.Type, Pair<ResourceLocation, BoatModel>> boatResources;
+    private final Map<CustomBoatEntity.Type, Pair<ResourceLocation, ListModel<Boat>>> boatResources;
 
-    public CustomBoatModel(EntityRendererProvider.Context context, boolean chest) {
+    public CustomBoatRenderer(EntityRendererProvider.Context context, boolean chest) {
         super(context);
         this.shadowRadius = 0.8F;
         this.boatResources = Stream.of(CustomBoatEntity.Type.values()).collect(ImmutableMap.toImmutableMap(type -> type, type -> Pair.of(new ResourceLocation(WizardsReborn.MOD_ID, getTextureLocation(type, chest)), this.createBoatModel(context, type, chest))));
     }
 
-    private BoatModel createBoatModel(EntityRendererProvider.Context context, CustomBoatEntity.Type type, boolean chest) {
+    private ListModel<Boat> createBoatModel(EntityRendererProvider.Context context, CustomBoatEntity.Type type, boolean chest) {
         ModelLayerLocation modellayerlocation = chest ? createChestBoatModelName(type) : createBoatModelName(type);
         ModelPart modelpart = context.bakeLayer(modellayerlocation);
-        return chest ? new ChestBoatModel(modelpart) : new BoatModel(modelpart);
+        if (type == CustomBoatEntity.Type.CORK_BAMBOO) {
+            return chest ? new ChestRaftModel(modelpart) : new RaftModel(modelpart);
+        } else {
+            return chest ? new ChestBoatModel(modelpart) : new BoatModel(modelpart);
+        }
     }
 
     private static ModelLayerLocation createLocation(String path) {
@@ -75,9 +79,9 @@ public class CustomBoatModel extends EntityRenderer<CustomBoatEntity> {
             stack.mulPose((new Quaternionf()).setAngleAxis(boat.getBubbleAngle(partialTicks) * ((float)Math.PI / 180F), 1.0F, 0.0F, 1.0F));
         }
 
-        Pair<ResourceLocation, BoatModel> pair = this.getModelWithLocation(boat);
+        Pair<ResourceLocation, ListModel<Boat>> pair = this.getModelWithLocation(boat);
         ResourceLocation resourcelocation = pair.getFirst();
-        BoatModel model = pair.getSecond();
+        ListModel<Boat> model = pair.getSecond();
         stack.scale(-1.0F, -1.0F, 1.0F);
         stack.mulPose(Axis.YP.rotationDegrees(90.0F));
         model.setupAnim(boat, partialTicks, 0.0F, -0.1F, 0.0F, 0.0F);
@@ -85,7 +89,9 @@ public class CustomBoatModel extends EntityRenderer<CustomBoatEntity> {
         model.renderToBuffer(stack, vertexconsumer, light, OverlayTexture.NO_OVERLAY, 1.0F, 1.0F, 1.0F, 1.0F);
         if (!boat.isUnderWater()) {
             VertexConsumer vertexconsumer1 = buffer.getBuffer(RenderType.waterMask());
-            model.waterPatch().render(stack, vertexconsumer1, light, OverlayTexture.NO_OVERLAY);
+            if (model instanceof WaterPatchModel waterpatchmodel) {
+                waterpatchmodel.waterPatch().render(stack, vertexconsumer1, light, OverlayTexture.NO_OVERLAY);
+            }
         }
 
         stack.popPose();
@@ -97,7 +103,7 @@ public class CustomBoatModel extends EntityRenderer<CustomBoatEntity> {
         return this.getModelWithLocation(boat).getFirst();
     }
 
-    public Pair<ResourceLocation, BoatModel> getModelWithLocation(CustomBoatEntity boat) {
+    public Pair<ResourceLocation, ListModel<Boat>> getModelWithLocation(CustomBoatEntity boat) {
         return this.boatResources.get(boat.getCustomBoatEntityType());
     }
 }

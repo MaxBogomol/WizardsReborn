@@ -39,6 +39,7 @@ public class CustomBoatEntity extends Boat {
         return switch (this.getCustomBoatEntityType()) {
             case ARCANE_WOOD -> WizardsReborn.ARCANE_WOOD_BOAT_ITEM.get();
             case INNOCENT_WOOD -> WizardsReborn.INNOCENT_WOOD_BOAT_ITEM.get();
+            case CORK_BAMBOO -> WizardsReborn.CORK_BAMBOO_RAFT_ITEM.get();
         };
     }
 
@@ -65,13 +66,19 @@ public class CustomBoatEntity extends Boat {
     }
 
     @Override
+    public double getPassengersRidingOffset() {
+        return this.getCustomBoatEntityType() == Type.CORK_BAMBOO ? 0.25D : -0.1D;
+    }
+
+    @Override
     public Packet<ClientGamePacketListener> getAddEntityPacket() {
         return NetworkHooks.getEntitySpawningPacket(this);
     }
 
     public enum Type {
         ARCANE_WOOD(WizardsReborn.ARCANE_WOOD_PLANKS.get(), "arcane_wood"),
-        INNOCENT_WOOD(WizardsReborn.INNOCENT_WOOD_PLANKS.get(), "innocent_wood");
+        INNOCENT_WOOD(WizardsReborn.INNOCENT_WOOD_PLANKS.get(), "innocent_wood"),
+        CORK_BAMBOO(WizardsReborn.INNOCENT_WOOD_PLANKS.get(), "cork_bamboo");
 
         private final String name;
         private final Block block;

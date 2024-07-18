@@ -222,6 +222,32 @@ public class WizardsRebornItemGroup {
             event.accept(WizardsReborn.UNDERGROUND_GRAPE_VINE);
             event.accept(WizardsReborn.UNDERGROUND_GRAPE);
 
+            event.accept(WizardsReborn.CORK_BAMBOO_SEED);
+            event.accept(WizardsReborn.CORK_BAMBOO_ITEM);
+            event.accept(WizardsReborn.CORK_BAMBOO_BLOCK_ITEM);
+            event.accept(WizardsReborn.CORK_BAMBOO_PLANKS_ITEM);
+            event.accept(WizardsReborn.CORK_BAMBOO_CHISELED_PLANKS_ITEM);
+            event.accept(WizardsReborn.CORK_BAMBOO_STAIRS_ITEM);
+            event.accept(WizardsReborn.CORK_BAMBOO_CHISELED_STAIRS_ITEM);
+            event.accept(WizardsReborn.CORK_BAMBOO_SLAB_ITEM);
+            event.accept(WizardsReborn.CORK_BAMBOO_CHISELED_SLAB_ITEM);
+            event.accept(WizardsReborn.CORK_BAMBOO_BAULK_ITEM);
+            event.accept(WizardsReborn.CORK_BAMBOO_CROSS_BAULK_ITEM);
+            event.accept(WizardsReborn.CORK_BAMBOO_PLANKS_BAULK_ITEM);
+            event.accept(WizardsReborn.CORK_BAMBOO_PLANKS_CROSS_BAULK_ITEM);
+            event.accept(WizardsReborn.CORK_BAMBOO_CHISELED_PLANKS_BAULK_ITEM);
+            event.accept(WizardsReborn.CORK_BAMBOO_CHISELED_PLANKS_CROSS_BAULK_ITEM);
+            event.accept(WizardsReborn.CORK_BAMBOO_FENCE_ITEM);
+            event.accept(WizardsReborn.CORK_BAMBOO_FENCE_GATE_ITEM);
+            event.accept(WizardsReborn.CORK_BAMBOO_DOOR_ITEM);
+            event.accept(WizardsReborn.CORK_BAMBOO_TRAPDOOR_ITEM);
+            event.accept(WizardsReborn.CORK_BAMBOO_PRESSURE_PLATE_ITEM);
+            event.accept(WizardsReborn.CORK_BAMBOO_BUTTON_ITEM);
+            event.accept(WizardsReborn.CORK_BAMBOO_SIGN_ITEM);
+            event.accept(WizardsReborn.CORK_BAMBOO_HANGING_SIGN_ITEM);
+            event.accept(WizardsReborn.CORK_BAMBOO_RAFT_ITEM);
+            event.accept(WizardsReborn.CORK_BAMBOO_CHEST_RAFT_ITEM);
+
             event.accept(WizardsReborn.PETALS);
             event.accept(WizardsReborn.FLOWER_FERTILIZER);
             event.accept(WizardsReborn.BUNCH_OF_THINGS);
@@ -323,6 +349,9 @@ public class WizardsRebornItemGroup {
             event.accept(WizardsReborn.ALCHEMY_BOILER_ITEM);
             event.accept(WizardsReborn.ARCANE_CENSER_ITEM);
 
+            event.accept(WizardsReborn.CORK_BAMBOO_PEDESTAL_ITEM);
+            event.accept(WizardsReborn.CORK_BAMBOO_HOVERING_TOME_STAND_ITEM);
+
             event.accept(WizardsReborn.LIGHT_EMITTER_ITEM);
             event.accept(WizardsReborn.LIGHT_TRANSFER_LENS_ITEM);
             event.accept(WizardsReborn.RUNIC_PEDESTAL_ITEM);
@@ -379,6 +408,13 @@ public class WizardsRebornItemGroup {
             event.accept(WizardsReborn.INNOCENT_WOOD_LIGHT_CASING_ITEM);
             event.accept(WizardsReborn.INNOCENT_WOOD_FLUID_CASING_ITEM);
             event.accept(WizardsReborn.INNOCENT_WOOD_STEAM_CASING_ITEM);
+            event.accept(WizardsReborn.CORK_BAMBOO_FRAME_ITEM);
+            event.accept(WizardsReborn.CORK_BAMBOO_GLASS_FRAME_ITEM);
+            event.accept(WizardsReborn.CORK_BAMBOO_CASING_ITEM);
+            event.accept(WizardsReborn.CORK_BAMBOO_WISSEN_CASING_ITEM);
+            event.accept(WizardsReborn.CORK_BAMBOO_LIGHT_CASING_ITEM);
+            event.accept(WizardsReborn.CORK_BAMBOO_FLUID_CASING_ITEM);
+            event.accept(WizardsReborn.CORK_BAMBOO_STEAM_CASING_ITEM);
             event.accept(WizardsReborn.WISESTONE_FRAME_ITEM);
             event.accept(WizardsReborn.WISESTONE_GLASS_FRAME_ITEM);
             event.accept(WizardsReborn.WISESTONE_CASING_ITEM);
@@ -546,6 +582,7 @@ public class WizardsRebornItemGroup {
             event.accept(WizardsReborn.MUSIC_DISC_MOR);
             event.accept(WizardsReborn.MUSIC_DISC_REBORN);
             event.accept(WizardsReborn.MUSIC_DISC_SHIMMER);
+            event.accept(WizardsReborn.MUSIC_DISC_CAPITALISM);
             event.accept(WizardsReborn.MUSIC_DISC_PANACHE);
 
             event.accept(WizardsReborn.ARCANE_WOOD_TRIM);

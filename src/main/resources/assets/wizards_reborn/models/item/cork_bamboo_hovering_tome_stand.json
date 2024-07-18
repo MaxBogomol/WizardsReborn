@@ -1,0 +1,10 @@
+{
+	"parent": "wizards_reborn:item/hovering_tome_stand",
+	"textures": {
+		"0": "wizards_reborn:block/cork_bamboo_pedestal_mid",
+		"1": "wizards_reborn:block/cork_bamboo_pedestal_bottom",
+		"2": "wizards_reborn:block/cork_bamboo_pedestal_top",
+		"4": "wizards_reborn:item/hovering_tome_stand",
+		"particle": "wizards_reborn:block/cork_bamboo_planks"
+	}
+}

@@ -1,0 +1,6 @@
+{
+  "variants": {
+    "powered=false": { "model": "wizards_reborn:block/cork_bamboo_pressure_plate" },
+    "powered=true": { "model": "wizards_reborn:block/cork_bamboo_pressure_plate_down" }
+  }
+}

@@ -1,0 +1,13 @@
+{
+  "variants": {
+    "type=bottom": {
+      "model": "wizards_reborn:block/cork_bamboo_chiseled_slab"
+    },
+    "type=double": {
+      "model": "wizards_reborn:block/cork_bamboo_chiseled_planks"
+    },
+    "type=top": {
+      "model": "wizards_reborn:block/cork_bamboo_chiseled_slab_top"
+    }
+  }
+}

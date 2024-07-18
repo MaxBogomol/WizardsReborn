@@ -1,0 +1,7 @@
+{
+  "parent": "wizards_reborn:block/baulk",
+  "textures": {
+    "block": "wizards_reborn:block/cork_bamboo_chiseled_planks_baulk",
+    "particle": "wizards_reborn:block/cork_bamboo_chiseled_planks"
+  }
+}

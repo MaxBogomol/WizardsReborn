@@ -1,0 +1,9 @@
+{
+	"parent": "wizards_reborn:block/arcane_pedestal",
+	"textures": {
+		"0": "wizards_reborn:block/cork_bamboo_pedestal_mid",
+		"1": "wizards_reborn:block/cork_bamboo_pedestal_bottom",
+		"2": "wizards_reborn:block/cork_bamboo_pedestal_top",
+		"particle": "wizards_reborn:block/cork_bamboo_planks"
+	}
+}
