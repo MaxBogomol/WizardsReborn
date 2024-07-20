@@ -1,0 +1,14 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "wizards_reborn:cork_bamboo_pedestal"
+    },
+    {
+      "item": "wizards_reborn:arcanemicon"
+    }
+  ],
+  "result": {
+    "item": "wizards_reborn:cork_bamboo_hovering_tome_stand"
+  }
+}

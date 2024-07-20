@@ -1,0 +1,21 @@
+{
+  "type": "wizards_reborn:arcane_workbench",
+  "pattern": [
+    "_G_",
+    "_#_",
+    "___",
+    "____"
+  ],
+  "key": {
+    "#": {
+      "item": "wizards_reborn:cork_bamboo_frame"
+    },
+    "G": {
+      "tag": "wizards_reborn:cork_bamboo_planks"
+    }
+  },
+  "output": {
+    "item": "wizards_reborn:cork_bamboo_casing"
+  },
+  "wissen": 100
+}

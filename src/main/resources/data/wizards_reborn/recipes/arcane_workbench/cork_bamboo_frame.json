@@ -1,0 +1,21 @@
+{
+  "type": "wizards_reborn:arcane_workbench",
+  "pattern": [
+    "#G#",
+    "G_G",
+    "#G#",
+    "____"
+  ],
+  "key": {
+    "#": {
+      "tag": "wizards_reborn:cork_bamboo_slabs"
+    },
+    "G": {
+      "tag": "wizards_reborn:arcane_gold_nugget"
+    }
+  },
+  "output": {
+    "item": "wizards_reborn:cork_bamboo_frame"
+  },
+  "wissen": 100
+}

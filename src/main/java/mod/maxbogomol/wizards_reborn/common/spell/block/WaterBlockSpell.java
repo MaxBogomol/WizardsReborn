@@ -28,4 +28,13 @@ public class WaterBlockSpell extends BlockPlaceSpell {
         setBlock(level, blockPos1, Blocks.WATER.defaultBlockState(), context.getPlayer());
         return InteractionResult.SUCCESS;
     }
+
+    @Override
+    public boolean canPlaceBlock(ItemStack stack, UseOnContext context, BlockPos blockPos) {
+        if (super.canPlaceBlock(stack, context, blockPos)) {
+            return !context.getLevel().dimensionType().ultraWarm();
+        }
+
+        return false;
+    }
 }

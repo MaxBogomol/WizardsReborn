@@ -1,0 +1,21 @@
+{
+  "type": "wizards_reborn:arcane_workbench",
+  "pattern": [
+    "GGG",
+    "_#_",
+    "GGG",
+    "____"
+  ],
+  "key": {
+    "#": {
+      "item": "wizards_reborn:cork_bamboo_casing"
+    },
+    "G": {
+      "item": "wizards_reborn:fluid_pipe"
+    }
+  },
+  "output": {
+    "item": "wizards_reborn:cork_bamboo_fluid_casing"
+  },
+  "wissen": 100
+}
