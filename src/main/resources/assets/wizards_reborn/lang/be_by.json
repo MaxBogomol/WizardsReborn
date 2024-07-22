@@ -193,7 +193,7 @@
   "block.wizards_reborn.cork_bamboo_planks_baulk": "Бэлька з дошак з коркавага бамбуку",
   "block.wizards_reborn.cork_bamboo_planks_cross_baulk": "Папярочная бэлька з дошак з коркавага бамбуку",
   "block.wizards_reborn.cork_bamboo_chiseled_planks_baulk": "Разная бэлька з дошак з коркавага бамбуку",
-  "block.wizards_reborn.cork_bamboo_chiseled_planks_cross_baulk": "Папярочная разная бэльказ з дошак з коркавага бамбуку",
+  "block.wizards_reborn.cork_bamboo_chiseled_planks_cross_baulk": "Папярочная разная бэлька з дошак з коркавага бамбуку",
   "block.wizards_reborn.cork_bamboo_fence": "Плот з коркавага бамбуку",
   "block.wizards_reborn.cork_bamboo_fence_gate": "Брамка з коркавага бамбуку",
   "block.wizards_reborn.cork_bamboo_door": "Дзверы з коркавага бамбуку",
@@ -598,7 +598,7 @@
   "item.wizards_reborn.kissel_bottle": "Бутэлька кіселю",
 
   "item.wizards_reborn.shrimp": "Крэветка",
-  "item.wizards_reborn.fried_shrimp": "Смажаная крэвекта",
+  "item.wizards_reborn.fried_shrimp": "Смажаная крэветка",
 
   "item.wizards_reborn.mundane_brew_bucket": "Вядро нязграбнага зелля",
   "item.wizards_reborn.alchemy_oil_bucket": "Вядро алхімічнага алея",
@@ -647,7 +647,7 @@
 
   "lore.wizards_reborn.drinks.alcoholic": "Алкагольны",
   "lore.wizards_reborn.drinks.non_alcoholic": "Безалкагольны",
-  "lore.wizards_reborn.drinks.days_aged": "дзён вытрамана",
+  "lore.wizards_reborn.drinks.days_aged": "дзён вытрымана",
 
   "lore.wizards_reborn.shrimp": "Ці можа крэветка стаць тваім гадаванцам?",
   "lore.wizards_reborn.fried_shrimp": "Ты выблядак,,,,",
