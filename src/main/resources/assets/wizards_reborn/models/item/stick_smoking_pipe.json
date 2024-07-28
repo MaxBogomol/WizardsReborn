@@ -1,0 +1,49 @@
+{
+	"credit": "Made with Blockbench",
+	"parent": "minecraft:block/block",
+	"elements": [
+		{
+			"from": [0, 6.5, 6.5],
+			"to": [16, 9.5, 9.5],
+			"faces": {
+				"north": {"uv": [16, 0, 0, 3], "texture": "#pipe"},
+				"east": {"uv": [3, 3, 6, 6], "texture": "#pipe"},
+				"south": {"uv": [0, 0, 16, 3], "texture": "#pipe"},
+				"west": {"uv": [0, 3, 3, 6], "texture": "#pipe"},
+				"up": {"uv": [16, 0, 0, 3], "rotation": 180, "texture": "#pipe"},
+				"down": {"uv": [16, 0, 0, 3], "rotation": 180, "texture": "#pipe"}
+			}
+		}
+	],
+	"display": {
+		"thirdperson_righthand": {
+			"rotation": [75, 60, 20],
+			"translation": [0, 2.5, 1.25],
+			"scale": [0.5, 0.5, 0.5]
+		},
+		"thirdperson_lefthand": {
+			"rotation": [75, -120, -20],
+			"translation": [0, 2.5, 1.25],
+			"scale": [0.5, 0.5, 0.5]
+		},
+		"firstperson_righthand": {
+			"rotation": [0, 45, 0],
+			"scale": [0.5, 0.5, 0.5]
+		},
+		"firstperson_lefthand": {
+			"rotation": [0, 225, 0],
+			"scale": [0.5, 0.5, 0.5]
+		},
+		"ground": {
+			"translation": [0, 3, 0],
+			"scale": [0.5, 0.5, 0.5]
+		},
+		"gui": {
+			"rotation": [30, 225, 0],
+			"scale": [0.75, 0.75, 0.75]
+		},
+		"fixed": {
+			"scale": [0.75, 0.75, 0.75]
+		}
+	}
+}

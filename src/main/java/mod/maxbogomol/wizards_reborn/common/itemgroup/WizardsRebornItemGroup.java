@@ -542,7 +542,12 @@ public class WizardsRebornItemGroup {
 
             event.accept(WizardsReborn.ARCANE_WAND);
             event.accept(WizardsReborn.WISSEN_WAND);
+
             event.accept(WizardsReborn.ARCANE_WOOD_SMOKING_PIPE);
+            event.accept(WizardsReborn.INNOCENT_WOOD_SMOKING_PIPE);
+            event.accept(WizardsReborn.BAMBOO_WOOD_SMOKING_PIPE);
+            event.accept(WizardsReborn.CORK_BAMBOO_WOOD_SMOKING_PIPE);
+            
             event.accept(WizardsReborn.ARCANE_WOOD_CANE);
             event.accept(WizardsReborn.ARCANE_WOOD_BOW);
 

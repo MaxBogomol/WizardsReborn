@@ -1,5 +1,5 @@
 {
-	"parent": "wizards_reborn:block/arcane_pedestal",
+	"parent": "wizards_reborn:block/pedestal",
 	"textures": {
 		"0": "wizards_reborn:block/innocent_pedestal_mid",
 		"1": "wizards_reborn:block/innocent_pedestal_bottom",

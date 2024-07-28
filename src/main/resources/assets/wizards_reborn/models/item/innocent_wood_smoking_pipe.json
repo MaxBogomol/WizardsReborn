@@ -1,0 +1,7 @@
+{
+	"parent": "wizards_reborn:item/smoking_pipe",
+	"textures": {
+		"pipe": "wizards_reborn:item/innocent_wood_smoking_pipe",
+		"particle": "wizards_reborn:item/innocent_wood_smoking_pipe"
+	}
+}

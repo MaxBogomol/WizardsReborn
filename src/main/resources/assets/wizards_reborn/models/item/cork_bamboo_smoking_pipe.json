@@ -1,0 +1,7 @@
+{
+	"parent": "wizards_reborn:item/stick_smoking_pipe",
+	"textures": {
+		"pipe": "wizards_reborn:item/cork_bamboo_smoking_pipe",
+		"particle": "wizards_reborn:item/cork_bamboo_smoking_pipe"
+	}
+}

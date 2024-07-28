@@ -3,22 +3,22 @@ loaderVersion="[47,)"
 license="GPL-2.0"
 
 [[mods]]
-modId="wizards_reborn"
-version="1.20.1-0.1.5"
-displayName="Wizard's Reborn"
-logoFile="wizards_reborn.png"
-authors='''
-MaxBogomol - Developer
-FoxPlane and iDark - Ukrainian localization
-Kekqupap - Belarusian localization
-ishi_sama - French localization
-FalAut - Simplified Chinese localization
-Onjerlay - OST
-OnixTheCat - Deer
-'''
-description='''
-Adds magical things
-'''
+    modId="wizards_reborn"
+    version="${file.jarVersion}"
+    displayName="Wizard's Reborn"
+    logoFile="wizards_reborn.png"
+    authors='''
+    MaxBogomol - Developer
+    FoxPlane and iDark - Ukrainian localization
+    Kekqupap - Belarusian localization
+    ishi_sama - French localization
+    FalAut - Simplified Chinese localization
+    OnixTheCat - Deer
+    Onjerlay - OST
+    '''
+    description='''
+    Adds magical things
+    '''
 
 [[dependencies.wizards_reborn]]
     modId="forge"

@@ -5,29 +5,21 @@ buildscript {
         maven { url = 'https://maven.parchmentmc.org' }
         mavenCentral()
     }
+
     dependencies {
         classpath group: 'net.minecraftforge.gradle', name: 'ForgeGradle', version: '5.1.+', changing: true
         classpath group: 'org.spongepowered', name: 'mixingradle', version: '0.7-SNAPSHOT'
         classpath 'org.parchmentmc:librarian:1.+'
     }
 }
+
 repositories {
-    maven {
-        url = "https://maven.theillusivec4.top/"
-    }
-    maven {
-        url = "https://maven.tterrag.com/"
-    }
-    maven {
-        name = "ModMaven"
-        url = "https://modmaven.k-4u.nl"
-    }
-    maven {
-        url "https://cursemaven.com"
-    }
-    maven {
-        url "https://maven.blamejared.com"
-    }
+    maven { url = "https://maven.theillusivec4.top/" }
+    maven { url = "https://maven.tterrag.com/" }
+    maven { url = "https://modmaven.k-4u.nl"}
+    maven { url = "https://cursemaven.com" }
+    maven { url = "https://maven.blamejared.com" }
+    maven { url = 'https://maven.saps.dev/releases' }
 }
 
 apply plugin: 'net.minecraftforge.gradle'
@@ -36,8 +28,8 @@ apply plugin: 'eclipse'
 apply plugin: 'maven-publish'
 apply plugin: 'org.parchmentmc.librarian.forgegradle'
 
-version = '1.20.1-0.1.5'
-group = 'mod.maxbogomol.wizards_reborn'
+version = "${minecraft_version}-${mod_version}"
+group = 'mod.maxbogomol'
 archivesBaseName = 'wizards_reborn'
 
 java.toolchain.languageVersion = JavaLanguageVersion.of(17)
@@ -56,11 +48,7 @@ minecraft {
             property 'forge.logging.markers', 'REGISTRIES'
             property 'forge.logging.console.level', 'debug'
 
-            mods {
-                wizards_reborn {
-                    source sourceSets.main
-                }
-            }
+            mods { wizards_reborn { source sourceSets.main } }
         }
 
         server {
@@ -70,11 +58,7 @@ minecraft {
             property 'forge.logging.markers', 'REGISTRIES'
             property 'forge.logging.console.level', 'debug'
 
-            mods {
-                wizards_reborn {
-                    source sourceSets.main
-                }
-            }
+            mods { wizards_reborn { source sourceSets.main } }
         }
 
         data {
@@ -85,11 +69,7 @@ minecraft {
             property 'forge.logging.console.level', 'debug'
             args '--mod', 'wizards_reborn', '--all', '--output', file('src/generated/resources/'), '--existing', file('src/main/resources/')
 
-            mods {
-                wizards_reborn {
-                    source sourceSets.main
-                }
-            }
+            mods { wizards_reborn { source sourceSets.main } }
         }
     }
 }
@@ -135,14 +115,25 @@ jar {
 jar.finalizedBy('reobfJar')
 
 publishing {
-    publications {
-        mavenJava(MavenPublication) {
-            artifact jar
+    repositories {
+        def token = providers.environmentVariable("SAPS_TOKEN") // This is exposed from your github secrets & workflows env: section
+        if (token.isPresent()) {
+            maven {
+                url "https://maven.saps.dev/releases" // Use snapshots if you ever start working with snapshots
+                credentials {
+                    username = "maxbogomol"
+                    password = token.get()
+                }
+            }
         }
     }
-    repositories {
-        maven {
-            url "file:///${project.projectDir}/mcmodsrepo"
+
+    publications {
+        maven(MavenPublication) {
+            groupId project.group
+            artifactId base.archivesName.get()
+            version project.version
+            from components.java
         }
     }
 }
