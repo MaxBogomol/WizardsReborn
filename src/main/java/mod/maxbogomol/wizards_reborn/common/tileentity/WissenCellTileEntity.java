@@ -78,7 +78,7 @@ public class WissenCellTileEntity extends ExposedTileSimpleInventory implements 
             if (getWissen() > 0) {
                 if (random.nextFloat() < 0.5) {
                     Particles.create(WizardsReborn.WISP_PARTICLE)
-                            .addVelocity(((random.nextDouble() - 0.5D) / 30) * getStage(), ((random.nextDouble() - 0.5D) / 30) * getStage(), ((random.nextDouble() - 0.5D) / 30) * getStage())
+                            .randomVelocity(0.025f * getStage(), 0.025f * getStage(), 0.025f * getStage())
                             .setAlpha(0.25f, 0).setScale(0.3f * getStage(), 0)
                             .setColor(Config.wissenColorR(), Config.wissenColorG(), Config.wissenColorB())
                             .setLifetime(20)
@@ -86,11 +86,11 @@ public class WissenCellTileEntity extends ExposedTileSimpleInventory implements 
                 }
                 if (random.nextFloat() < 0.4) {
                     Particles.create(WizardsReborn.SPARKLE_PARTICLE)
-                            .addVelocity(((random.nextDouble() - 0.5D) / 40) * getStage(), ((random.nextDouble() - 0.5D) / 40) * getStage(), ((random.nextDouble() - 0.5D) / 40) * getStage())
+                            .randomVelocity(0.025f * getStage(), 0.025f * getStage(), 0.025f * getStage())
                             .setAlpha(0.25f, 0).setScale(0.2f * getStage(), 0)
                             .setColor(Config.wissenColorR(), Config.wissenColorG(), Config.wissenColorB(), 0.5f, 0.5f, 0)
                             .setLifetime(100)
-                            .setSpin((0.1f * (float) ((random.nextDouble() - 0.5D) * 2)))
+                            .randomSpin(0.1f)
                             .spawn(level, worldPosition.getX() + 0.5F, worldPosition.getY() + 0.9375F, worldPosition.getZ() + 0.5F);
                 }
             }

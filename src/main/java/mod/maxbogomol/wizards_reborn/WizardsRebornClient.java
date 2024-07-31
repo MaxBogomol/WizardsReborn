@@ -329,10 +329,13 @@ public class WizardsRebornClient {
             ItemBlockRenderTypes.setRenderLayer(WizardsReborn.ARCANE_SALT_WALL_TORCH.get(), RenderType.cutout());
             ItemBlockRenderTypes.setRenderLayer(WizardsReborn.INNOCENT_SALT_TORCH.get(), RenderType.cutout());
             ItemBlockRenderTypes.setRenderLayer(WizardsReborn.INNOCENT_SALT_WALL_TORCH.get(), RenderType.cutout());
+            ItemBlockRenderTypes.setRenderLayer(WizardsReborn.CORK_BAMBOO_SALT_TORCH.get(), RenderType.cutout());
+            ItemBlockRenderTypes.setRenderLayer(WizardsReborn.CORK_BAMBOO_SALT_WALL_TORCH.get(), RenderType.cutout());
             ItemBlockRenderTypes.setRenderLayer(WizardsReborn.WISESTONE_SALT_TORCH.get(), RenderType.cutout());
             ItemBlockRenderTypes.setRenderLayer(WizardsReborn.WISESTONE_SALT_WALL_TORCH.get(), RenderType.cutout());
             ItemBlockRenderTypes.setRenderLayer(WizardsReborn.ARCANE_SALT_LANTERN.get(), RenderType.cutout());
             ItemBlockRenderTypes.setRenderLayer(WizardsReborn.INNOCENT_SALT_LANTERN.get(), RenderType.cutout());
+            ItemBlockRenderTypes.setRenderLayer(WizardsReborn.CORK_BAMBOO_SALT_LANTERN.get(), RenderType.cutout());
             ItemBlockRenderTypes.setRenderLayer(WizardsReborn.WISESTONE_SALT_LANTERN.get(), RenderType.cutout());
 
             ItemBlockRenderTypes.setRenderLayer(WizardsReborn.MUNDANE_BREW_FLUID.get(), RenderType.translucent());

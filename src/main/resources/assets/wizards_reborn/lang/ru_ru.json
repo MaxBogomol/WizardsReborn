@@ -204,8 +204,8 @@
   "block.wizards_reborn.cork_bamboo_wall_sign": "Пробково-бамбуковая настенная табличка",
   "block.wizards_reborn.cork_bamboo_hanging_sign": "Пробково-бамбуковая подвесная табличка",
   "block.wizards_reborn.cork_bamboo_hanging_wall_sign": "Пробково-бамбуковая настенная подвесная табличка",
-  "block.wizards_reborn.cork_bamboo_raft": "Пробково-бамбуковый плот",
-  "block.wizards_reborn.cork_bamboo_chest_raft": "Пробково-бамбуковый грузовой плот",
+  "item.wizards_reborn.cork_bamboo_raft": "Пробково-бамбуковый плот",
+  "item.wizards_reborn.cork_bamboo_chest_raft": "Пробково-бамбуковый грузовой плот",
 
   "item.wizards_reborn.petals": "Лепестки",
   "item.wizards_reborn.flower_fertilizer": "Цветочное удобрение",
@@ -400,14 +400,18 @@
   "block.wizards_reborn.arcane_salt_wall_torch": "Аркановый солевой настенный факел",
   "block.wizards_reborn.innocent_salt_torch": "Невинный солевой факел",
   "block.wizards_reborn.innocent_salt_wall_torch": "Невинный солевой настенный факел",
+  "block.wizards_reborn.cork_bamboo_salt_torch": "Пробково-бамбуковый солевой факел",
+  "block.wizards_reborn.cork_bamboo_salt_wall_torch": "Пробково-бамбуковый солевой настенный факел",
   "block.wizards_reborn.wisestone_salt_torch": "Мудро-каменный солевой факел",
   "block.wizards_reborn.wisestone_salt_wall_torch": "Мудро-каменный солевой настенный факел",
   "block.wizards_reborn.arcane_salt_lantern": "Аркановый солевой фонарь",
   "block.wizards_reborn.innocent_salt_lantern": "Невинный солевой фонарь",
+  "block.wizards_reborn.cork_bamboo_salt_lantern": "Пробково-бамбуковый солевой фонарь",
   "block.wizards_reborn.wisestone_salt_lantern": "Мудро-каменный солевой фонарь",
   "block.wizards_reborn.arcane_salt_campfire": "Аркановый солевой костёр",
   "block.wizards_reborn.innocent_salt_campfire": "Невинный солевой костёр",
-  "block.wizards_reborn.wisestone_salt_campfire": "Мудро-каменный солевой костёр",
+  "block.wizards_reborn.cork_bamboo_salt_campfire": "Пробково-бамбуковый Salt Campfire",
+  "block.wizards_reborn.wisestone_salt_campfire": "Мудро-каменный Salt Campfire",
 
   "block.wizards_reborn.alchemy_glass": "Алхимическое стекло",
   "item.wizards_reborn.alchemy_vial": "Алхимический флакон",
@@ -509,7 +513,12 @@
 
   "item.wizards_reborn.arcane_wand": "Аркановый жезл",
   "item.wizards_reborn.wissen_wand": "Виссен жезл",
+
   "item.wizards_reborn.arcane_wood_smoking_pipe": "Арканово-древесная курительная трубка",
+  "item.wizards_reborn.innocent_wood_smoking_pipe": "Невинно-древесная курительная трубка",
+  "item.wizards_reborn.bamboo_smoking_pipe": "Бамбуковая курительная трубка",
+  "item.wizards_reborn.cork_bamboo_smoking_pipe": "Пробково-бамбуковая курительная трубка",
+
   "item.wizards_reborn.arcane_wood_cane": "Арканово-древесная трость",
   "item.wizards_reborn.arcane_wood_bow": "Арканово-древесный лук",
 

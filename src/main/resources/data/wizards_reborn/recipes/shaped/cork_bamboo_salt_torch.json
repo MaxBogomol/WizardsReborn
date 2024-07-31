@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "X",
+    "#"
+  ],
+  "key": {
+    "#": {
+      "tag": "wizards_reborn:cork_bamboo_planks"
+    },
+    "X": {
+      "item": "wizards_reborn:nether_salt"
+    }
+  },
+  "result": {
+    "item": "wizards_reborn:cork_bamboo_salt_torch",
+    "count": 4
+  }
+}

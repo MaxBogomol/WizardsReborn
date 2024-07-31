@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "#",
+    "#",
+    "#"
+  ],
+  "key": {
+    "#": {
+      "item": "wizards_reborn:cork_bamboo_chiseled_planks"
+    }
+  },
+  "result": {
+    "item": "wizards_reborn:cork_bamboo_chiseled_planks_baulk",
+    "count": 3
+  }
+}

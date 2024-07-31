@@ -1,0 +1,14 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "wizards_reborn:cork_bamboo_planks_baulk"
+    },
+    {
+      "item": "wizards_reborn:arcane_linen"
+    }
+  ],
+  "result": {
+    "item": "wizards_reborn:cork_bamboo_planks_cross_baulk"
+  }
+}

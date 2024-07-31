@@ -1,0 +1,25 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    " C ",
+    "GXG",
+    "###"
+  ],
+  "key": {
+    "#": {
+      "tag": "wizards_reborn:arcane_wood_slabs"
+    },
+    "X": {
+      "item": "wizards_reborn:cork_bamboo_salt_torch"
+    },
+    "G": {
+      "tag": "wizards_reborn:arcane_gold_nugget"
+    },
+    "C": {
+      "item": "minecraft:chain"
+    }
+  },
+  "result": {
+    "item": "wizards_reborn:cork_bamboo_salt_lantern"
+  }
+}

@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "group": "boat",
+  "pattern": [
+    "# #",
+    "###"
+  ],
+  "key": {
+    "#": {
+      "tag": "wizards_reborn:cork_bamboo_planks"
+    }
+  },
+  "result": {
+    "item": "wizards_reborn:cork_bamboo_raft"
+  }
+}

@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "group": "wooden_button",
+  "ingredients": [
+    {
+      "tag": "wizards_reborn:cork_bamboo_planks"
+    }
+  ],
+  "result": {
+    "item": "wizards_reborn:cork_bamboo_button"
+  }
+}

@@ -81,21 +81,22 @@ dependencies {
 
     annotationProcessor 'org.spongepowered:mixin:0.8.5:processor'
 
-    compileOnly fg.deobf("top.theillusivec4.curios:curios-forge:5.2.0-beta.3+1.20.1")
-    runtimeOnly fg.deobf("top.theillusivec4.curios:curios-forge:5.2.0-beta.3+1.20.1")
+    compileOnly fg.deobf("top.theillusivec4.curios:curios-forge:5.9.1+1.20.1")
+    runtimeOnly fg.deobf("top.theillusivec4.curios:curios-forge:5.9.1+1.20.1")
 
-    compileOnly fg.deobf("com.blamejared.crafttweaker:CraftTweaker-forge-1.20.1:14.0.13")
-    runtimeOnly fg.deobf("com.blamejared.crafttweaker:CraftTweaker-forge-1.20.1:14.0.13")
+    compileOnly fg.deobf("com.blamejared.crafttweaker:CraftTweaker-forge-1.20.1:14.0.39")
+    runtimeOnly fg.deobf("com.blamejared.crafttweaker:CraftTweaker-forge-1.20.1:14.0.39")
 
-    implementation fg.deobf("mezz.jei:jei-1.20.1-forge:15.0.0.14")
+    implementation fg.deobf("mezz.jei:jei-1.20.1-forge:15.8.2.25")
 
     compileOnly fg.deobf("curse.maven:farmers-delight-398521:5051242")
 
-    implementation fg.deobf("curse.maven:fusion-connected-textures-854949:5005130")
-    implementation fg.deobf("curse.maven:config-menus-forge-544048:4672356")
-    implementation fg.deobf("curse.maven:model-gap-fix-676136:4607206")
-    implementation fg.deobf("curse.maven:embeddium-908741:5105564")
-    implementation fg.deobf("curse.maven:jade-324717:4986594")
+    implementation fg.deobf("curse.maven:fusion-connected-textures-854949:5129294")
+    implementation fg.deobf("curse.maven:configured-457570:5180900")
+    implementation fg.deobf("curse.maven:model-gap-fix-676136:5200949")
+    implementation fg.deobf("curse.maven:embeddium-908741:5566632")
+    implementation fg.deobf("curse.maven:oculus-581495:5299671")
+    implementation fg.deobf("curse.maven:jade-324717:5493390")
 }
 
 jar {

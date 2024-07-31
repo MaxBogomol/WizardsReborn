@@ -45,7 +45,7 @@ public class WissenTranslatorTileEntity extends ExposedTileSimpleInventory imple
     public boolean isFromBlock = false;
 
     public int blockToX = 0;
-    public int blockToY =0 ;
+    public int blockToY = 0;
     public int blockToZ = 0;
     public boolean isToBlock = false;
 

@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "wizards_reborn:cork_bamboo_block"
+    }
+  ],
+  "result": {
+    "item": "wizards_reborn:cork_bamboo_planks",
+    "count": 2
+  }
+}

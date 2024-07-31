@@ -1,0 +1,15 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "group": "planks",
+  "ingredients": [
+    {
+      "item": "minecraft:chest"
+    },
+    {
+      "item": "wizards_reborn:cork_bamboo_raft"
+    }
+  ],
+  "result": {
+    "item": "wizards_reborn:cork_bamboo_chest_raft"
+  }
+}

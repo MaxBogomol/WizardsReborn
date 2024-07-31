@@ -133,7 +133,7 @@ public class WissenAltarTileEntity extends ExposedTileSimpleInventory implements
             if (getWissen() > 0) {
                 if (random.nextFloat() < 0.5) {
                     Particles.create(WizardsReborn.WISP_PARTICLE)
-                            .addVelocity(((random.nextDouble() - 0.5D) / 30) * getStage(), ((random.nextDouble() - 0.5D) / 30) * getStage(), ((random.nextDouble() - 0.5D) / 30) * getStage())
+                            .randomVelocity(0.035f * getStage(), 0.035f * getStage(), 0.035f * getStage())
                             .setAlpha(0.25f, 0).setScale(0.3f * getStage(), 0)
                             .setColor(Config.wissenColorR(), Config.wissenColorG(), Config.wissenColorB())
                             .setLifetime(20)
@@ -141,11 +141,11 @@ public class WissenAltarTileEntity extends ExposedTileSimpleInventory implements
                 }
                 if (random.nextFloat() < 0.1) {
                     Particles.create(WizardsReborn.SPARKLE_PARTICLE)
-                            .addVelocity(((random.nextDouble() - 0.5D) / 30) * getStage(), ((random.nextDouble() - 0.5D) / 30) * getStage(), ((random.nextDouble() - 0.5D) / 30) * getStage())
+                            .randomVelocity(0.035f * getStage(), 0.035f * getStage(), 0.035f * getStage())
                             .setAlpha(0.25f, 0).setScale(0.1f * getStage(), 0)
                             .setColor(Config.wissenColorR(), Config.wissenColorG(), Config.wissenColorB())
                             .setLifetime(30)
-                            .setSpin((0.5f * (float) ((random.nextDouble() - 0.5D) * 2)))
+                            .randomSpin(0.5f)
                             .spawn(level, worldPosition.getX() + 0.5F, worldPosition.getY() + 1.3125F, worldPosition.getZ() + 0.5F);
                 }
             }
@@ -153,11 +153,11 @@ public class WissenAltarTileEntity extends ExposedTileSimpleInventory implements
             if (wissenInItem > 0) {
                 if (random.nextFloat() < 0.2) {
                     Particles.create(WizardsReborn.SPARKLE_PARTICLE)
-                            .addVelocity(((random.nextDouble() - 0.5D) / 20), ((random.nextDouble() - 0.5D) / 20), ((random.nextDouble() - 0.5D) / 20))
+                            .randomVelocity(0.05f, 0.05f, 0.05f)
                             .setAlpha(0.25f, 0).setScale(0.1f * getStage(), 0)
                             .setColor(Config.wissenColorR(), Config.wissenColorG(), Config.wissenColorB())
                             .setLifetime(30)
-                            .setSpin((0.5f * (float) ((random.nextDouble() - 0.5D) * 2)))
+                            .randomSpin(0.5f)
                             .spawn(level, worldPosition.getX() + 0.5F, worldPosition.getY() + 1.3125F, worldPosition.getZ() + 0.5F);
                 }
             }

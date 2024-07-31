@@ -204,8 +204,8 @@
   "block.wizards_reborn.cork_bamboo_wall_sign": "Cork Bamboo Wall Sign",
   "block.wizards_reborn.cork_bamboo_hanging_sign": "Cork Bamboo Hanging Sign",
   "block.wizards_reborn.cork_bamboo_hanging_wall_sign": "Cork Bamboo Hanging Wall Sign",
-  "block.wizards_reborn.cork_bamboo_raft": "Cork Bamboo Raft",
-  "block.wizards_reborn.cork_bamboo_chest_raft": "Cork Bamboo Chest Raft",
+  "item.wizards_reborn.cork_bamboo_raft": "Cork Bamboo Raft",
+  "item.wizards_reborn.cork_bamboo_chest_raft": "Cork Bamboo Chest Raft",
 
   "item.wizards_reborn.petals": "Petals",
   "item.wizards_reborn.flower_fertilizer": "Flower Fertilizer",
@@ -400,13 +400,17 @@
   "block.wizards_reborn.arcane_salt_wall_torch": "Arcane Salt Wall Torch",
   "block.wizards_reborn.innocent_salt_torch": "Innocent Salt Torch",
   "block.wizards_reborn.innocent_salt_wall_torch": "Innocent Salt Wall Torch",
+  "block.wizards_reborn.cork_bamboo_salt_torch": "Cork Bamboo Salt Torch",
+  "block.wizards_reborn.cork_bamboo_salt_wall_torch": "Cork Bamboo Salt Wall Torch",
   "block.wizards_reborn.wisestone_salt_torch": "Wisestone Salt Torch",
   "block.wizards_reborn.wisestone_salt_wall_torch": "Wisestone Salt Wall Torch",
   "block.wizards_reborn.arcane_salt_lantern": "Arcane Salt Lantern",
   "block.wizards_reborn.innocent_salt_lantern": "Innocent Salt Lantern",
+  "block.wizards_reborn.cork_bamboo_salt_lantern": "Cork Bamboo Salt Lantern",
   "block.wizards_reborn.wisestone_salt_lantern": "Wisestone Salt Lantern",
   "block.wizards_reborn.arcane_salt_campfire": "Arcane Salt Campfire",
   "block.wizards_reborn.innocent_salt_campfire": "Innocent Salt Campfire",
+  "block.wizards_reborn.cork_bamboo_salt_campfire": "Cork Bamboo Salt Campfire",
   "block.wizards_reborn.wisestone_salt_campfire": "Wisestone Salt Campfire",
 
   "block.wizards_reborn.alchemy_glass": "Alchemy Glass",
@@ -509,7 +513,12 @@
 
   "item.wizards_reborn.arcane_wand": "Arcane Wand",
   "item.wizards_reborn.wissen_wand": "Wissen Wand",
+
   "item.wizards_reborn.arcane_wood_smoking_pipe": "Arcane Wood Smoking Pipe",
+  "item.wizards_reborn.innocent_wood_smoking_pipe": "Innocent Wood Smoking Pipe",
+  "item.wizards_reborn.bamboo_smoking_pipe": "Bamboo Smoking Pipe",
+  "item.wizards_reborn.cork_bamboo_smoking_pipe": "Cork Bamboo Wood Smoking Pipe",
+
   "item.wizards_reborn.arcane_wood_cane": "Arcane Wood Cane",
   "item.wizards_reborn.arcane_wood_bow": "Arcane Wood Bow",
 

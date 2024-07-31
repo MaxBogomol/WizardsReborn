@@ -430,12 +430,15 @@ public class WizardsRebornItemGroup {
 
             event.accept(WizardsReborn.ARCANE_SALT_TORCH_ITEM);
             event.accept(WizardsReborn.INNOCENT_SALT_TORCH_ITEM);
+            event.accept(WizardsReborn.CORK_BAMBOO_SALT_TORCH_ITEM);
             event.accept(WizardsReborn.WISESTONE_SALT_TORCH_ITEM);
             event.accept(WizardsReborn.ARCANE_SALT_LANTERN_ITEM);
             event.accept(WizardsReborn.INNOCENT_SALT_LANTERN_ITEM);
+            event.accept(WizardsReborn.CORK_BAMBOO_SALT_LANTERN_ITEM);
             event.accept(WizardsReborn.WISESTONE_SALT_LANTERN_ITEM);
             event.accept(WizardsReborn.ARCANE_SALT_CAMPFIRE_ITEM);
             event.accept(WizardsReborn.INNOCENT_SALT_CAMPFIRE_ITEM);
+            event.accept(WizardsReborn.CORK_BAMBOO_SALT_CAMPFIRE_ITEM);
             event.accept(WizardsReborn.WISESTONE_SALT_CAMPFIRE_ITEM);
 
             event.accept(WizardsReborn.ALCHEMY_GLASS_ITEM);

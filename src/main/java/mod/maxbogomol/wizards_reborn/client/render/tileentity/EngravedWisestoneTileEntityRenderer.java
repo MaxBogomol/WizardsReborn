@@ -52,7 +52,7 @@ public class EngravedWisestoneTileEntityRenderer implements BlockEntityRenderer<
             ms.mulPose(Axis.YP.rotationDegrees(tile.getHorizontalBlockRotate()));
             ms.mulPose(Axis.XP.rotationDegrees(tile.getVerticalBlockRotate()));
             if (tile.getVerticalBlockRotate() == 0) ms.mulPose(Axis.ZP.rotationDegrees(180f));
-            ms.translate(0f, 0f, -0.501f);
+            ms.translate(0f, 0f, -0.505f);
             RenderUtils.spriteGlowQuadCenter(ms, buffersource, 0, 0, 0.5f, 0.5f, sprite.getU0(), sprite.getU1(), sprite.getV0(), sprite.getV1(), 1, 1, 1, 0.5f * alpha);
 
             for (int i = 0; i < 5; i++) {

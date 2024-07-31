@@ -1,0 +1,24 @@
+{
+  "type": "wizards_reborn:arcane_workbench",
+  "pattern": [
+    "#__",
+    "###",
+    "___",
+    "C_A_"
+  ],
+  "key": {
+    "#": {
+      "item": "wizards_reborn:innocent_wood_planks"
+    },
+    "A": {
+      "item": "wizards_reborn:alchemy_calx"
+    },
+    "C": {
+      "item": "wizards_reborn:natural_calx"
+    }
+  },
+  "output": {
+    "item": "wizards_reborn:innocent_wood_smoking_pipe"
+  },
+  "wissen": 1000
+}

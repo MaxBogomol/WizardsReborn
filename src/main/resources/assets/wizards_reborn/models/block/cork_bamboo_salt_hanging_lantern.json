@@ -1,0 +1,8 @@
+{
+	"credit": "Made with Blockbench",
+	"parent": "wizards_reborn:block/salt_hanging_lantern",
+	"textures": {
+		"lantern": "wizards_reborn:block/cork_bamboo_salt_lantern",
+		"particle": "wizards_reborn:block/cork_bamboo_planks"
+	}
+}
