@@ -132,7 +132,7 @@ public class KeyBindHandler {
     public static void bagMenu() {
         Minecraft mc = Minecraft.getInstance();
         List<ItemStack> items = mc.player.inventoryMenu.getItems();
-        List<SlotResult> curioSlots = CuriosApi.getCuriosHelper().findCurios(mc.player, (i) -> {return true;});
+        List<SlotResult> curioSlots = CuriosApi.getCuriosInventory(mc.player).resolve().get().findCurios();
         for (SlotResult slot : curioSlots) {
             if (slot.stack() != null) {
                 items.add(slot.stack());

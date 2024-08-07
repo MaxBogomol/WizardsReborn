@@ -214,6 +214,8 @@ public class WizardsReborn {
     public static final TagKey<Item> MASTERFUL_CRYSTALS_ITEM_TAG = TagKey.create(Registries.ITEM, new ResourceLocation(MOD_ID, "masterful_crystals"));
     public static final TagKey<Item> PURE_CRYSTALS_ITEM_TAG = TagKey.create(Registries.ITEM, new ResourceLocation(MOD_ID, "pure_crystals"));
     public static final TagKey<Item> ALL_CRYSTALS_ITEM_TAG = TagKey.create(Registries.ITEM, new ResourceLocation(MOD_ID, "all_crystals"));
+    public static final TagKey<Item> CRYSTAL_BAG_SLOTS_ITEM_TAG = TagKey.create(Registries.ITEM, new ResourceLocation(MOD_ID, "crystal_bag_slots"));
+    public static final TagKey<Item> ALCHEMY_BAG_SLOTS_ITEM_TAG = TagKey.create(Registries.ITEM, new ResourceLocation(MOD_ID, "alchemy_bag_slots"));
     public static final TagKey<Item> WISSEN_CASINGS_ITEM_TAG  = TagKey.create(Registries.ITEM, new ResourceLocation(MOD_ID, "wissen_casings"));
     public static final TagKey<Item> LIGHT_CASINGS_ITEM_TAG  = TagKey.create(Registries.ITEM, new ResourceLocation(MOD_ID, "light_casings"));
     public static final TagKey<Item> FLUID_CASINGS_ITEM_TAG  = TagKey.create(Registries.ITEM, new ResourceLocation(MOD_ID, "fluid_casings"));
@@ -1533,8 +1535,8 @@ public class WizardsReborn {
 
     public static final RegistryObject<Item> ARCANE_WOOD_SMOKING_PIPE = ITEMS.register("arcane_wood_smoking_pipe", () -> new SmokingPipeItem(new Item.Properties().stacksTo(1)));
     public static final RegistryObject<Item> INNOCENT_WOOD_SMOKING_PIPE = ITEMS.register("innocent_wood_smoking_pipe", () -> new SmokingPipeItem(new Item.Properties().stacksTo(1)));
-    public static final RegistryObject<Item> BAMBOO_WOOD_SMOKING_PIPE = ITEMS.register("bamboo_smoking_pipe", () -> new SmokingPipeItem(new Item.Properties().stacksTo(1)));
-    public static final RegistryObject<Item> CORK_BAMBOO_WOOD_SMOKING_PIPE = ITEMS.register("cork_bamboo_smoking_pipe", () -> new SmokingPipeItem(new Item.Properties().stacksTo(1)));
+    public static final RegistryObject<Item> BAMBOO_SMOKING_PIPE = ITEMS.register("bamboo_smoking_pipe", () -> new SmokingPipeItem(new Item.Properties().stacksTo(1)));
+    public static final RegistryObject<Item> CORK_BAMBOO_SMOKING_PIPE = ITEMS.register("cork_bamboo_smoking_pipe", () -> new SmokingPipeItem(new Item.Properties().stacksTo(1)));
 
     public static final RegistryObject<Item> ARCANE_WOOD_CANE = ITEMS.register("arcane_wood_cane", () -> new CaneItem(new Item.Properties().stacksTo(1)));
     public static final RegistryObject<Item> ARCANE_WOOD_BOW = ITEMS.register("arcane_wood_bow", () -> new ArcaneBowItem(new Item.Properties().durability(576)));
@@ -2446,8 +2448,11 @@ public class WizardsReborn {
     }
 
     public static void setupDrinksItems() {
+        int second = 20;
+        int minute = 1200;
         int day = 24000;
         VODKA_BOTTLE.get().setAged(day * 24000, 24000);
+        RED_WINE_BOTTLE.get().setAged(day * 10, day).addEffect(new DrinkBottleItem.EffectInstance(MobEffects.REGENERATION, minute, minute * 10, 0, 2));
         INNOCENT_WINE_BOTTLE.get().setAlcoholic(false);
         TARKHUNA_BOTTLE.get().setAlcoholic(false);
         BAIKAL_BOTTLE.get().setAlcoholic(false);

@@ -208,7 +208,7 @@ public class WissenUtils {
 
     public static List<ItemStack> getWissenItemsCurios(Player player) {
         List<ItemStack> items = new ArrayList<>();
-        List<SlotResult> curioSlots = CuriosApi.getCuriosHelper().findCurios(player, (i) -> {return true;});
+        List<SlotResult> curioSlots = CuriosApi.getCuriosInventory(player).resolve().get().findCurios((i) -> {return true;});
         for (SlotResult slot : curioSlots) {
             if (slot.stack().getItem() instanceof IWissenItem) {
                 items.add(slot.stack());

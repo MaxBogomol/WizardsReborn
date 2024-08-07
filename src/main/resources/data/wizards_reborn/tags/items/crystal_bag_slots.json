@@ -1,0 +1,8 @@
+{
+  "replace": false,
+  "values": [
+    "#wizards_reborn:all_crystals",
+    "#wizards_reborn:crystal_seeds",
+    "wizards_reborn:arcane_wand"
+  ]
+}

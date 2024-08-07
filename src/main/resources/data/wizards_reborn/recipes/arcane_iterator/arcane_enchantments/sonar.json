@@ -1,0 +1,31 @@
+{
+  "type": "wizards_reborn:arcane_iterator",
+  "arcane_enchantment": {
+    "arcane_enchantment": "wizards_reborn:sonar"
+  },
+  "wissen": 1500,
+  "experience": 5,
+  "ingredients": [
+    {
+      "item": "minecraft:lapis_lazuli"
+    },
+    {
+      "item": "minecraft:lapis_lazuli"
+    },
+    {
+      "item": "wizards_reborn:arcanum"
+    },
+    {
+      "item": "minecraft:raw_iron"
+    },
+    {
+      "item": "minecraft:raw_copper"
+    },
+    {
+      "item": "minecraft:raw_gold"
+    },
+    {
+      "tag": "wizards_reborn:raw_arcane_gold"
+    }
+  ]
+}

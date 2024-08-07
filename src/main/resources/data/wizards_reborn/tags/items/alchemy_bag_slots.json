@@ -1,0 +1,12 @@
+{
+  "replace": false,
+  "values": [
+    "minecraft:potion",
+    "minecraft:splash_potion",
+    "minecraft:lingering_potion",
+    "#wizards_reborn:alchemy_bottles",
+    "#wizards_reborn:alchemy_potions",
+    "wizards_reborn:alchemy_bottle",
+    "#wizards_reborn:drinks"
+  ]
+}

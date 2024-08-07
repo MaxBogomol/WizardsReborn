@@ -42,7 +42,7 @@ public class ArcanemiconChapters {
     public static List<Category> additionalCategories = new ArrayList<>();
     public static Category ARCANE_NATURE, SPELLS, CRYSTAL_RITUALS, ALCHEMY, ADDITIONAL;
     public static Chapter ARCANE_NATURE_INDEX, SPELLS_INDEX, CRYSTAL_RITUALS_INDEX, ALCHEMY_INDEX, ADDITIONAL_INDEX,
-            ARCANUM, ARCANUM_DUST_TRANSMUTATION, ARCANE_WOOD, ARCANE_GOLD, SCYTHES, TRINKETS, ARCANE_WOOD_BOW, BANNER_PATTERNS, WISSEN, WISSEN_TRANSLATOR, ARCANE_PEDESTAL, WISSEN_ALTAR, WISSEN_CRYSTALLIZER, ARCANE_WORKBENCH, MUSIC_DISC_SHIMMER, ARCANE_LUMOS, CRYSTALS, ARCANE_WAND, AUTOMATION, WISSEN_CELL, CRYSTAL_BAG, TOTEM_OF_FLAMES, EXPERIENCE_TOTEM, TOTEM_OF_EXPERIENCE_ABSORPTION, TOTEM_OF_DISENCHANT, ALTAR_OF_DROUGHT, VOID_CRYSTAL, ARCANE_FORTRESS_ARMOR, INVENTOR_WIZARD_ARMOR, ARCANE_WOOD_CANE, ARCANE_ITERATOR, KNOWLEDGE_SCROLL, MUSIC_DISC_REBORN, MUSIC_DISC_PANACHE, ARCANUM_LENS, WISSEN_KEYCHAIN, WISSEN_RING, LEATHER_COLLAR, JEWELER_TABLE, FACETED_CRYSTALS, TRIMS, TOP_HAT_TRIM, MAGNIFICENT_MAID_TRIM, SUMMER_LOVE_TRIM,
+            ARCANUM, ARCANUM_DUST_TRANSMUTATION, ARCANE_WOOD, ARCANE_GOLD, SCYTHES, TRINKETS, ARCANE_WOOD_BOW, BANNER_PATTERNS, WISSEN, WISSEN_TRANSLATOR, ARCANE_PEDESTAL, WISSEN_ALTAR, WISSEN_CRYSTALLIZER, ARCANE_WORKBENCH, MUSIC_DISC_SHIMMER, ARCANE_LUMOS, CRYSTALS, ARCANE_WAND, AUTOMATION, WISSEN_CELL, CRYSTAL_BAG, TOTEM_OF_FLAMES, EXPERIENCE_TOTEM, TOTEM_OF_EXPERIENCE_ABSORPTION, TOTEM_OF_DISENCHANT, ALTAR_OF_DROUGHT, VOID_CRYSTAL, ARCANE_FORTRESS_ARMOR, INVENTOR_WIZARD_ARMOR, ARCANE_WOOD_CANE, ARCANE_ITERATOR, KNOWLEDGE_SCROLL, MUSIC_DISC_REBORN, MUSIC_DISC_PANACHE, ARCANUM_LENS, WISSEN_KEYCHAIN, WISSEN_RING, LEATHER_COLLAR, JEWELER_TABLE, FACETED_CRYSTALS, TRIMS, TOP_HAT_TRIM, MAGNIFICENT_MAID_TRIM, SUMMER_LOVE_TRIM, MUSIC_DISC_CAPITALISM,
             ARCANE_LEVER, ARCANE_HOPPER, REDSTONE_SENSOR, WISSEN_SENSOR, COOLDOWN_SENSOR, EXPERIENCE_SENSOR, LIGHT_SENSOR, HEAT_SENSOR, FLUID_SENSOR, STEAM_SENSOR, WISSEN_ACTIVATOR, ITEM_SORTER, ARCANE_WOOD_FRAME, WISSEN_CASING, WISESTONE_CASING, FLUID_CASING, STEAM_CASING, GLASS_FRAME, LIGHT_CASING, INNOCENT_CASING,
             ALL_SPELLS, EARTH_SPELLS, WATER_SPELLS, AIR_SPELLS, FIRE_SPELLS, VOID_SPELLS,
             EARTH_PROJECTILE, WATER_PROJECTILE, AIR_PROJECTILE, FIRE_PROJECTILE, VOID_PROJECTILE, FROST_PROJECTILE, HOLY_PROJECTILE, CURSE_PROJECTILE,
@@ -226,17 +226,17 @@ public class ArcanemiconChapters {
                         new BlockEntry(ARCANE_PEDESTAL_ITEM, new ItemStack(WizardsReborn.STRIPPED_ARCANE_WOOD_BAULK_ITEM.get())),
                         new BlockEntry(ARCANE_PEDESTAL_ITEM, new ItemStack(WizardsReborn.ARCANE_WOOD_PLANKS_BAULK_ITEM.get()))
                 ),
-                new CraftingTablePage(new ItemStack(WizardsReborn.ARCANE_WOOD_BAULK_ITEM.get()),
+                new CraftingTablePage(new ItemStack(WizardsReborn.ARCANE_WOOD_BAULK_ITEM.get(), 6),
                         EMPTY_ITEM, new ItemStack(WizardsReborn.ARCANE_WOOD_LOG_ITEM.get()), EMPTY_ITEM,
                         EMPTY_ITEM, new ItemStack(WizardsReborn.ARCANE_WOOD_LOG_ITEM.get()), EMPTY_ITEM,
                         EMPTY_ITEM, new ItemStack(WizardsReborn.ARCANE_WOOD_LOG_ITEM.get()), EMPTY_ITEM
                 ),
-                new CraftingTablePage(new ItemStack(WizardsReborn.STRIPPED_ARCANE_WOOD_BAULK_ITEM.get()),
+                new CraftingTablePage(new ItemStack(WizardsReborn.STRIPPED_ARCANE_WOOD_BAULK_ITEM.get(), 6),
                         EMPTY_ITEM, new ItemStack(WizardsReborn.STRIPPED_ARCANE_WOOD_LOG_ITEM.get()), EMPTY_ITEM,
                         EMPTY_ITEM, new ItemStack(WizardsReborn.STRIPPED_ARCANE_WOOD_LOG_ITEM.get()), EMPTY_ITEM,
                         EMPTY_ITEM, new ItemStack(WizardsReborn.STRIPPED_ARCANE_WOOD_LOG_ITEM.get()), EMPTY_ITEM
                 ),
-                new CraftingTablePage(new ItemStack(WizardsReborn.ARCANE_WOOD_PLANKS_BAULK_ITEM.get()),
+                new CraftingTablePage(new ItemStack(WizardsReborn.ARCANE_WOOD_PLANKS_BAULK_ITEM.get(), 6),
                         EMPTY_ITEM, ARCANE_WOOD_PLANKS_ITEM, EMPTY_ITEM,
                         EMPTY_ITEM, ARCANE_WOOD_PLANKS_ITEM, EMPTY_ITEM,
                         EMPTY_ITEM, ARCANE_WOOD_PLANKS_ITEM, EMPTY_ITEM
@@ -1274,6 +1274,15 @@ public class ArcanemiconChapters {
                         new ItemStack(Items.LEATHER), new ItemStack(WizardsReborn.ARCANE_GOLD_BOOTS.get()), new ItemStack(Items.LEATHER),
                         new ItemStack(Items.LEATHER), EMPTY_ITEM, new ItemStack(Items.LEATHER),
                         ARCACITE_ITEM, EMPTY_ITEM, ARCACITE_ITEM
+                ),
+                new TitledBlockPage("wizards_reborn.arcanemicon.page.inventor_wizard_belt",
+                        new BlockEntry(ARCANE_PEDESTAL_ITEM, new ItemStack(WizardsReborn.INVENTOR_WIZARD_BELT.get()))
+                ),
+                new ArcaneWorkbenchPage(new ItemStack(WizardsReborn.INVENTOR_WIZARD_BELT.get()),
+                        EMPTY_ITEM,  new ItemStack(WizardsReborn.LEATHER_BELT.get()), EMPTY_ITEM,
+                        ARCANE_GOLD_INGOT_ITEM, ARCANUM_ITEM, ARCANE_GOLD_INGOT_ITEM,
+                        EMPTY_ITEM, EMPTY_ITEM, EMPTY_ITEM,
+                        ALCHEMY_CALX_ITEM, EMPTY_ITEM, ENCHANTED_CALX_ITEM
                 )
         );
 
@@ -1315,12 +1324,47 @@ public class ArcanemiconChapters {
                         new ItemStack(Items.QUARTZ), new ItemStack(Items.QUARTZ), new ItemStack(Items.QUARTZ),
                         ARCANUM_ITEM, ARCANUM_ITEM, ARCANUM_ITEM
                 ),
+                new TitlePage("wizards_reborn.arcanemicon.page.throw"),
+                new ArcaneIteratorPage(new ItemStack(WizardsReborn.ARCANE_GOLD_SCYTHE.get()), 10, 0, WizardsReborn.THROW_ARCANE_ENCHANTMENT,
+                        new ItemStack(WizardsReborn.ARCANE_GOLD_SCYTHE.get()), new ItemStack(Items.LAPIS_LAZULI), new ItemStack(Items.LAPIS_LAZULI),
+                        ARCANUM_ITEM, ARCANUM_ITEM,
+                        new ItemStack(Items.DIAMOND), new ItemStack(Items.DIAMOND), ARCANE_GOLD_INGOT_ITEM
+                ),
                 new TitlePage("wizards_reborn.arcanemicon.page.life_roots"),
                 new ArcaneIteratorPage(new ItemStack(WizardsReborn.ARCANE_WOOD_PICKAXE.get()), 5, 5, WizardsReborn.LIFE_ROOTS_ARCANE_ENCHANTMENT,
                         new ItemStack(WizardsReborn.ARCANE_WOOD_PICKAXE.get()), new ItemStack(Items.LAPIS_LAZULI), new ItemStack(Items.LAPIS_LAZULI),
                         ARCANUM_ITEM, ARCANUM_ITEM, ARCANUM_ITEM,
                         NATURAL_CALX_ITEM, NATURAL_CALX_ITEM, NATURAL_CALX_ITEM,
                         new ItemStack(WizardsReborn.PETALS.get()), new ItemStack(WizardsReborn.PETALS.get()), new ItemStack(WizardsReborn.PETALS.get())
+                ),
+                new TitlePage("wizards_reborn.arcanemicon.page.wissen_charge"),
+                new ArcaneIteratorPage(new ItemStack(WizardsReborn.ARCANE_WOOD_BOW.get()), 5, 0, WizardsReborn.WISSEN_CHARGE_ARCANE_ENCHANTMENT,
+                        new ItemStack(WizardsReborn.ARCANE_WOOD_BOW.get()), new ItemStack(Items.LAPIS_LAZULI), new ItemStack(Items.LAPIS_LAZULI),
+                        ARCANUM_ITEM, ARCANUM_ITEM,
+                        new ItemStack(Items.ARROW), new ItemStack(Items.ARROW), new ItemStack(Items.ARROW)
+                ),
+                new TitlePage("wizards_reborn.arcanemicon.page.eagle_shot"),
+                new ArcaneIteratorPage(new ItemStack(WizardsReborn.ARCANE_WOOD_BOW.get()), 5, 0, WizardsReborn.EAGLE_SHOT_ARCANE_ENCHANTMENT,
+                        new ItemStack(WizardsReborn.ARCANE_WOOD_BOW.get()), new ItemStack(Items.LAPIS_LAZULI), new ItemStack(Items.LAPIS_LAZULI),
+                        ARCANUM_ITEM, new ItemStack(Items.PRISMARINE_SHARD), new ItemStack(Items.PRISMARINE_SHARD),
+                        new ItemStack(Items.DIAMOND), new ItemStack(Items.ARROW)
+                ),
+                new TitlePage("wizards_reborn.arcanemicon.page.split"),
+                new ArcaneIteratorPage(new ItemStack(WizardsReborn.ARCANE_WOOD_BOW.get()), 5, 0, WizardsReborn.SPLIT_ARCANE_ENCHANTMENT,
+                        new ItemStack(WizardsReborn.ARCANE_WOOD_BOW.get()), new ItemStack(Items.LAPIS_LAZULI), new ItemStack(Items.LAPIS_LAZULI),
+                        ARCANUM_ITEM, new ItemStack(Items.BLAZE_ROD), new ItemStack(Items.BLAZE_ROD),
+                        new ItemStack(Items.PRISMARINE_SHARD), new ItemStack(Items.PRISMARINE_SHARD), new ItemStack(Items.ARROW)
+                ),
+                new TitlePage("wizards_reborn.arcanemicon.page.sonar"),
+                new ArcaneIteratorPage(new ItemStack(WizardsReborn.ARCANE_GOLD_PICKAXE.get()), 5, 0, WizardsReborn.SONAR_ARCANE_ENCHANTMENT,
+                        new ItemStack(WizardsReborn.ARCANE_GOLD_PICKAXE.get()), new ItemStack(Items.LAPIS_LAZULI), new ItemStack(Items.LAPIS_LAZULI),
+                        ARCANUM_ITEM, new ItemStack(Items.RAW_IRON), new ItemStack(Items.RAW_COPPER), new ItemStack(Items.RAW_GOLD), new ItemStack(WizardsReborn.RAW_ARCANE_GOLD.get())
+                ),
+                new TitlePage("wizards_reborn.arcanemicon.page.curse_arcane_enchantments"),
+                new TitlePage("wizards_reborn.arcanemicon.page.life_mending"),
+                new ArcaneIteratorPage(new ItemStack(WizardsReborn.ARCANE_GOLD_PICKAXE.get()), 5, 5, WizardsReborn.LIFE_MENDING_ARCANE_ENCHANTMENT,
+                        new ItemStack(WizardsReborn.ARCANE_GOLD_PICKAXE.get()), new ItemStack(Items.LAPIS_LAZULI), new ItemStack(Items.LAPIS_LAZULI),
+                        ARCACITE_ITEM, ARCACITE_ITEM, ARCACITE_ITEM, ARCACITE_ITEM
                 ),
                 new TitlePage("wizards_reborn.arcanemicon.page.arcane_iterator_enchantments"),
                 new ArcaneIteratorPage(new ItemStack(Items.ENCHANTED_BOOK), 5, 0, Enchantments.ALL_DAMAGE_PROTECTION,
@@ -1619,6 +1663,16 @@ public class ArcanemiconChapters {
                 )
         );
 
+        MUSIC_DISC_CAPITALISM = new Chapter(
+                "wizards_reborn.arcanemicon.chapter.music_disc_capitalism",
+                new TitledBlockPage("wizards_reborn.arcanemicon.page.music_disc_capitalism",
+                        new BlockEntry(WISESTONE_PEDESTAL_ITEM, new ItemStack(WizardsReborn.MUSIC_DISC_CAPITALISM.get()))
+                ),
+                new ArcaneIteratorPage(new ItemStack(WizardsReborn.MUSIC_DISC_CAPITALISM.get()), 0, 0,
+                        new ItemStack(WizardsReborn.MUSIC_DISC_PANACHE.get()), ARCANE_WOOD_PLANKS_ITEM, ARCANE_GOLD_INGOT_ITEM
+                )
+        );
+
         ItemStack knowledgeScroll = new ItemStack(WizardsReborn.KNOWLEDGE_SCROLL.get());
         CompoundTag knowledgeScrollNbt = knowledgeScroll.getOrCreateTag();
         ListTag knowledgeScrollList = new ListTag();
@@ -1682,7 +1736,8 @@ public class ArcanemiconChapters {
                 new IndexPage(
                         new IndexEntry(TOP_HAT_TRIM, new ItemStack(WizardsReborn.TOP_HAT_TRIM.get()), RegisterKnowledges.JEWELER_TABLE),
                         new IndexEntry(MAGNIFICENT_MAID_TRIM, new ItemStack(WizardsReborn.MAGNIFICENT_MAID_TRIM.get()), RegisterKnowledges.JEWELER_TABLE),
-                        new IndexEntry(SUMMER_LOVE_TRIM, new ItemStack(WizardsReborn.SUMMER_LOVE_TRIM.get()), RegisterKnowledges.JEWELER_TABLE)
+                        new IndexEntry(SUMMER_LOVE_TRIM, new ItemStack(WizardsReborn.SUMMER_LOVE_TRIM.get()), RegisterKnowledges.JEWELER_TABLE),
+                        new IndexEntry(MUSIC_DISC_CAPITALISM, new ItemStack(WizardsReborn.MUSIC_DISC_CAPITALISM.get()), RegisterKnowledges.ARCANE_ITERATOR)
                 )
         );
     }
@@ -2683,17 +2738,17 @@ public class ArcanemiconChapters {
                         new BlockEntry(INNOCENT_PEDESTAL_ITEM, new ItemStack(WizardsReborn.STRIPPED_INNOCENT_WOOD_CROSS_BAULK_ITEM.get())),
                         new BlockEntry(INNOCENT_PEDESTAL_ITEM, new ItemStack(WizardsReborn.INNOCENT_WOOD_PLANKS_CROSS_BAULK_ITEM.get()))
                 ),
-                new CraftingTablePage(new ItemStack(WizardsReborn.INNOCENT_WOOD_BAULK_ITEM.get()),
+                new CraftingTablePage(new ItemStack(WizardsReborn.INNOCENT_WOOD_BAULK_ITEM.get(), 6),
                         EMPTY_ITEM, new ItemStack(WizardsReborn.INNOCENT_WOOD_LOG_ITEM.get()), EMPTY_ITEM,
                         EMPTY_ITEM, new ItemStack(WizardsReborn.INNOCENT_WOOD_LOG_ITEM.get()), EMPTY_ITEM,
                         EMPTY_ITEM, new ItemStack(WizardsReborn.INNOCENT_WOOD_LOG_ITEM.get()), EMPTY_ITEM
                 ),
-                new CraftingTablePage(new ItemStack(WizardsReborn.STRIPPED_INNOCENT_WOOD_BAULK_ITEM.get()),
+                new CraftingTablePage(new ItemStack(WizardsReborn.STRIPPED_INNOCENT_WOOD_BAULK_ITEM.get(), 6),
                         EMPTY_ITEM, new ItemStack(WizardsReborn.STRIPPED_INNOCENT_WOOD_LOG_ITEM.get()), EMPTY_ITEM,
                         EMPTY_ITEM, new ItemStack(WizardsReborn.STRIPPED_INNOCENT_WOOD_LOG_ITEM.get()), EMPTY_ITEM,
                         EMPTY_ITEM, new ItemStack(WizardsReborn.STRIPPED_INNOCENT_WOOD_LOG_ITEM.get()), EMPTY_ITEM
                 ),
-                new CraftingTablePage(new ItemStack(WizardsReborn.INNOCENT_WOOD_PLANKS_BAULK_ITEM.get()),
+                new CraftingTablePage(new ItemStack(WizardsReborn.INNOCENT_WOOD_PLANKS_BAULK_ITEM.get(), 6),
                         EMPTY_ITEM, INNOCENT_WOOD_PLANKS_ITEM, EMPTY_ITEM,
                         EMPTY_ITEM, INNOCENT_WOOD_PLANKS_ITEM, EMPTY_ITEM,
                         EMPTY_ITEM, INNOCENT_WOOD_PLANKS_ITEM, EMPTY_ITEM
@@ -2710,9 +2765,14 @@ public class ArcanemiconChapters {
                 new TitledBlockPage("wizards_reborn.arcanemicon.page.innocent_wood_mortar",
                         new BlockEntry(new ItemStack(WizardsReborn.INNOCENT_PEDESTAL_ITEM.get()), new ItemStack(WizardsReborn.INNOCENT_WOOD_MORTAR.get()))
                 ),
-                new CraftingTablePage(new ItemStack(WizardsReborn.INNOCENT_WOOD_MORTAR.get()),
-                        new ItemStack(WizardsReborn.INNOCENT_WOOD_PLANKS.get()), INNOCENT_WOOD_BRANCH_ITEM, new ItemStack(WizardsReborn.INNOCENT_WOOD_PLANKS.get()),
-                        EMPTY_ITEM, new ItemStack(WizardsReborn.INNOCENT_WOOD_PLANKS.get())
+                new TitledBlockPage("wizards_reborn.arcanemicon.page.innocent_wood_smoking_pipe",
+                        new BlockEntry(new ItemStack(WizardsReborn.INNOCENT_PEDESTAL_ITEM.get()), new ItemStack(WizardsReborn.INNOCENT_WOOD_SMOKING_PIPE.get()))
+                ),
+                new ArcaneWorkbenchPage(new ItemStack(WizardsReborn.INNOCENT_WOOD_SMOKING_PIPE.get()),
+                        INNOCENT_WOOD_PLANKS_ITEM, EMPTY_ITEM, EMPTY_ITEM,
+                        INNOCENT_WOOD_PLANKS_ITEM, INNOCENT_WOOD_PLANKS_ITEM, INNOCENT_WOOD_PLANKS_ITEM,
+                        EMPTY_ITEM, EMPTY_ITEM, EMPTY_ITEM,
+                        NATURAL_CALX_ITEM, EMPTY_ITEM, ALCHEMY_CALX_ITEM
                 ),
                 new TitledBlockPage("wizards_reborn.arcanemicon.page.innocent_pedestal",
                         new BlockEntry(new ItemStack(WizardsReborn.INNOCENT_PEDESTAL_ITEM.get()), INNOCENT_PEDESTAL_ITEM)
@@ -2742,7 +2802,7 @@ public class ArcanemiconChapters {
                         ARCANE_GOLD_NUGGET_ITEM, new ItemStack(WizardsReborn.INNOCENT_SALT_TORCH_ITEM.get()), ARCANE_GOLD_NUGGET_ITEM,
                         INNOCENT_WOOD_SLAB_ITEM, INNOCENT_WOOD_SLAB_ITEM, INNOCENT_WOOD_SLAB_ITEM
                 ),
-                new CraftingTablePage(new ItemStack(WizardsReborn.ARCANE_SALT_CAMPFIRE_ITEM.get()),
+                new CraftingTablePage(new ItemStack(WizardsReborn.INNOCENT_SALT_CAMPFIRE_ITEM.get()),
                         EMPTY_ITEM, new ItemStack(Items.STICK), EMPTY_ITEM,
                         new ItemStack(Items.STICK), NETHER_SALT_ITEM, new ItemStack(Items.STICK),
                         new ItemStack(WizardsReborn.INNOCENT_WOOD_LOG.get()), new ItemStack(WizardsReborn.INNOCENT_WOOD_LOG.get()), new ItemStack(WizardsReborn.INNOCENT_WOOD_LOG.get())
@@ -2845,6 +2905,9 @@ public class ArcanemiconChapters {
                 new TitledBlockPage("wizards_reborn.arcanemicon.page.flower_fertilizer",
                         new BlockEntry(ARCANE_PEDESTAL_ITEM, new ItemStack(WizardsReborn.FLOWER_FERTILIZER.get()))
                 ),
+                new TitledBlockPage("wizards_reborn.arcanemicon.page.bunch_of_things",
+                        new BlockEntry(ARCANE_PEDESTAL_ITEM, new ItemStack(WizardsReborn.BUNCH_OF_THINGS.get()))
+                ),
                 new TitledBlockPage("wizards_reborn.arcanemicon.page.ground_mushrooms",
                         new BlockEntry(ARCANE_PEDESTAL_ITEM, new ItemStack(WizardsReborn.GROUND_BROWN_MUSHROOM.get())),
                         new BlockEntry(ARCANE_PEDESTAL_ITEM, new ItemStack(WizardsReborn.GROUND_RED_MUSHROOM.get())),
@@ -2859,6 +2922,7 @@ public class ArcanemiconChapters {
                 ),
                 new MortarPage(new ItemStack(WizardsReborn.PETALS.get()), new ItemStack(Items.DANDELION)),
                 new CraftingTablePage(new ItemStack(WizardsReborn.FLOWER_FERTILIZER.get()), new ItemStack(Items.BONE_MEAL), new ItemStack(WizardsReborn.PETALS.get()), EMPTY_ITEM, new ItemStack(WizardsReborn.PETALS.get()), new ItemStack(WizardsReborn.PETALS.get())),
+                new CraftingTablePage(new ItemStack(WizardsReborn.BUNCH_OF_THINGS.get()), ARCANE_WOOD_BRANCH_ITEM, ARCANE_WOOD_BRANCH_ITEM, EMPTY_ITEM, new ItemStack(WizardsReborn.PETALS.get()), new ItemStack(WizardsReborn.PETALS.get())),
                 new MortarPage(new ItemStack(WizardsReborn.GROUND_BROWN_MUSHROOM.get()), new ItemStack(Items.BROWN_MUSHROOM)),
                 new MortarPage(new ItemStack(WizardsReborn.GROUND_RED_MUSHROOM.get()), new ItemStack(Items.RED_MUSHROOM)),
                 new MortarPage(new ItemStack(WizardsReborn.GROUND_CRIMSON_FUNGUS.get()), new ItemStack(Items.CRIMSON_FUNGUS)),
@@ -3862,12 +3926,19 @@ public class ArcanemiconChapters {
         SMOKING_PIPE = new Chapter(
                 "wizards_reborn.arcanemicon.chapter.smoking_pipe",
                 new TitledBlockPage("wizards_reborn.arcanemicon.page.smoking_pipe",
-                        new BlockEntry(WISESTONE_PEDESTAL_ITEM, new ItemStack(WizardsReborn.ARCANE_WOOD_SMOKING_PIPE.get()))
+                        new BlockEntry(WISESTONE_PEDESTAL_ITEM, new ItemStack(WizardsReborn.ARCANE_WOOD_SMOKING_PIPE.get())),
+                        new BlockEntry(WISESTONE_PEDESTAL_ITEM, new ItemStack(WizardsReborn.BAMBOO_SMOKING_PIPE.get()))
                 ),
                 new TitlePage("wizards_reborn.arcanemicon.page.smoke_warning"),
                 new ArcaneWorkbenchPage(new ItemStack(WizardsReborn.ARCANE_WOOD_SMOKING_PIPE.get()),
-                        new ItemStack(WizardsReborn.ARCANE_WOOD_PLANKS.get()), EMPTY_ITEM, EMPTY_ITEM,
-                        new ItemStack(WizardsReborn.ARCANE_WOOD_PLANKS.get()), new ItemStack(WizardsReborn.ARCANE_WOOD_PLANKS.get()), new ItemStack(WizardsReborn.ARCANE_WOOD_PLANKS.get()),
+                        ARCANE_WOOD_PLANKS_ITEM, EMPTY_ITEM, EMPTY_ITEM,
+                        ARCANE_WOOD_PLANKS_ITEM, ARCANE_WOOD_PLANKS_ITEM, ARCANE_WOOD_PLANKS_ITEM,
+                        EMPTY_ITEM, EMPTY_ITEM, EMPTY_ITEM,
+                        NATURAL_CALX_ITEM, EMPTY_ITEM, ALCHEMY_CALX_ITEM
+                ),
+                new ArcaneWorkbenchPage(new ItemStack(WizardsReborn.BAMBOO_SMOKING_PIPE.get()),
+                        new ItemStack(Items.BAMBOO_BLOCK), EMPTY_ITEM, EMPTY_ITEM,
+                        new ItemStack(Items.BAMBOO_BLOCK), new ItemStack(Items.BAMBOO_BLOCK), new ItemStack(Items.BAMBOO_BLOCK),
                         EMPTY_ITEM, EMPTY_ITEM, EMPTY_ITEM,
                         NATURAL_CALX_ITEM, EMPTY_ITEM, ALCHEMY_CALX_ITEM
                 ),

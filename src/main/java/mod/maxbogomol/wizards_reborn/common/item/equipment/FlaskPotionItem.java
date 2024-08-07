@@ -6,6 +6,7 @@ import mod.maxbogomol.wizards_reborn.WizardsReborn;
 import mod.maxbogomol.wizards_reborn.WizardsRebornClient;
 import mod.maxbogomol.wizards_reborn.api.alchemy.AlchemyPotion;
 import mod.maxbogomol.wizards_reborn.api.alchemy.AlchemyPotionUtils;
+import mod.maxbogomol.wizards_reborn.client.render.WorldRenderHandler;
 import mod.maxbogomol.wizards_reborn.client.render.fluid.FluidRenderer;
 import mod.maxbogomol.wizards_reborn.common.alchemypotion.FluidAlchemyPotion;
 import mod.maxbogomol.wizards_reborn.common.tileentity.PlacedItemsTileEntity;
@@ -57,7 +58,8 @@ public class FlaskPotionItem extends AlchemyPotionItem {
                 fluidStack = new FluidStack(fluid, 6 - uses);
                 colorI = clientType.getTintColor(fluidStack);
             }
-            FluidRenderer.renderScaledCuboid(ms, buffers, WizardsRebornClient.FLASK_FLUID_CUBE, fluidStack, colorI, 0, 6, light, false);
+            MultiBufferSource bufferDelayed = WorldRenderHandler.getDelayedRender();
+            FluidRenderer.renderScaledCuboid(ms, bufferDelayed, WizardsRebornClient.FLASK_FLUID_CUBE, fluidStack, colorI, 0, 6, light, false);
         }
         ms.popPose();
     }

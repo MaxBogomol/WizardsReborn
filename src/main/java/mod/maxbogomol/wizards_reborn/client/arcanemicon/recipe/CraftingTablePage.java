@@ -5,6 +5,7 @@ import mod.maxbogomol.wizards_reborn.client.arcanemicon.ArcanemiconGui;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.multiplayer.ClientLevel;
+import net.minecraft.core.RegistryAccess;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.AbstractContainerMenu;
@@ -65,7 +66,7 @@ public class CraftingTablePage extends RecipePage {
             }
 
             Optional<CraftingRecipe> recipe = level.getRecipeManager().getRecipeFor(RecipeType.CRAFTING, craftingcontainer, level);
-            return !recipe.isPresent();
+            return !(recipe.isPresent() && recipe.get().getResultItem(RegistryAccess.EMPTY).getItem().equals(result.getItem()));
         }
 
         return false;

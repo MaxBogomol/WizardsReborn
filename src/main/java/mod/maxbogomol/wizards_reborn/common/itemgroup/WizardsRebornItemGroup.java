@@ -15,7 +15,6 @@ import mod.maxbogomol.wizards_reborn.common.integration.create.CreateIntegration
 import mod.maxbogomol.wizards_reborn.common.integration.farmersdelight.FarmersDelightIntegration;
 import mod.maxbogomol.wizards_reborn.common.item.CrystalItem;
 import mod.maxbogomol.wizards_reborn.common.item.FracturedCrystalItem;
-import mod.maxbogomol.wizards_reborn.common.item.equipment.DrinkBottleItem;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
@@ -444,7 +443,7 @@ public class WizardsRebornItemGroup {
             event.accept(WizardsReborn.ALCHEMY_GLASS_ITEM);
             event.accept(WizardsReborn.ALCHEMY_VIAL);
             event.accept(WizardsReborn.ALCHEMY_FLASK);
-            event.accept(WizardsReborn.ALCHEMY_BOTTLE);
+            //event.accept(WizardsReborn.ALCHEMY_BOTTLE);
 
             event.accept(WizardsReborn.WHITE_LUMINAL_GLASS_ITEM);
             event.accept(WizardsReborn.LIGHT_GRAY_LUMINAL_GLASS_ITEM);
@@ -548,12 +547,13 @@ public class WizardsRebornItemGroup {
 
             event.accept(WizardsReborn.ARCANE_WOOD_SMOKING_PIPE);
             event.accept(WizardsReborn.INNOCENT_WOOD_SMOKING_PIPE);
-            event.accept(WizardsReborn.BAMBOO_WOOD_SMOKING_PIPE);
-            event.accept(WizardsReborn.CORK_BAMBOO_WOOD_SMOKING_PIPE);
+            event.accept(WizardsReborn.BAMBOO_SMOKING_PIPE);
+            event.accept(WizardsReborn.CORK_BAMBOO_SMOKING_PIPE);
             
             event.accept(WizardsReborn.ARCANE_WOOD_CANE);
             event.accept(WizardsReborn.ARCANE_WOOD_BOW);
 
+            /*
             event.accept(WizardsReborn.CARGO_CARPET);
             event.accept(WizardsReborn.WHITE_CARGO_CARPET);
             event.accept(WizardsReborn.LIGHT_GRAY_CARGO_CARPET);
@@ -571,7 +571,7 @@ public class WizardsRebornItemGroup {
             event.accept(WizardsReborn.PURPLE_CARGO_CARPET);
             event.accept(WizardsReborn.MAGENTA_CARGO_CARPET);
             event.accept(WizardsReborn.PINK_CARGO_CARPET);
-            event.accept(WizardsReborn.RAINBOW_CARGO_CARPET);
+            event.accept(WizardsReborn.RAINBOW_CARGO_CARPET);*/
 
             event.accept(WizardsReborn.KNOWLEDGE_SCROLL);
             event.accept(WizardsReborn.CREATIVE_KNOWLEDGE_SCROLL);
@@ -627,6 +627,7 @@ public class WizardsRebornItemGroup {
                 }
             }
 
+            /*
             event.acceptAll(DrinkBottleItem.getItemsForTab(WizardsReborn.VODKA_BOTTLE.get()));
             event.acceptAll(DrinkBottleItem.getItemsForTab(WizardsReborn.BOURBON_BOTTLE.get()));
             event.acceptAll(DrinkBottleItem.getItemsForTab(WizardsReborn.WHISKEY_BOTTLE.get()));
@@ -656,7 +657,7 @@ public class WizardsRebornItemGroup {
             event.acceptAll(DrinkBottleItem.getItemsForTab(WizardsReborn.TARKHUNA_BOTTLE.get()));
             event.acceptAll(DrinkBottleItem.getItemsForTab(WizardsReborn.BAIKAL_BOTTLE.get()));
             event.acceptAll(DrinkBottleItem.getItemsForTab(WizardsReborn.KVASS_BOTTLE.get()));
-            event.acceptAll(DrinkBottleItem.getItemsForTab(WizardsReborn.KISSEL_BOTTLE.get()));
+            event.acceptAll(DrinkBottleItem.getItemsForTab(WizardsReborn.KISSEL_BOTTLE.get()));*/
 
             event.accept(WizardsReborn.MUNDANE_BREW_BUCKET);
             event.accept(WizardsReborn.ALCHEMY_OIL_BUCKET);
@@ -667,7 +668,7 @@ public class WizardsRebornItemGroup {
             event.accept(WizardsReborn.MOR_BREW_BUCKET);
             event.accept(WizardsReborn.FLOWER_BREW_BUCKET);
 
-            event.accept(WizardsReborn.SNIFFALO_SPAWN_EGG);
+            //event.accept(WizardsReborn.SNIFFALO_SPAWN_EGG);
         }
     }
 }

@@ -1,6 +1,5 @@
 package mod.maxbogomol.wizards_reborn.client.arcanemicon.index;
 
-import com.mojang.blaze3d.vertex.PoseStack;
 import mod.maxbogomol.wizards_reborn.client.arcanemicon.ArcanemiconGui;
 import mod.maxbogomol.wizards_reborn.client.event.ClientTickHandler;
 import mod.maxbogomol.wizards_reborn.utils.RenderUtils;

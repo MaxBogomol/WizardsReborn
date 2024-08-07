@@ -6,6 +6,7 @@ import mod.maxbogomol.wizards_reborn.common.recipe.MortarRecipe;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.multiplayer.ClientLevel;
+import net.minecraft.core.RegistryAccess;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.SimpleContainer;
 import net.minecraft.world.item.ItemStack;
@@ -44,7 +45,7 @@ public class MortarPage extends RecipePage {
             inv.setItem(0, input);
 
             Optional<MortarRecipe> recipe = level.getRecipeManager().getRecipeFor(WizardsReborn.MORTAR_RECIPE.get(), inv, level);
-            return !recipe.isPresent();
+            return !(recipe.isPresent() && recipe.get().getResultItem(RegistryAccess.EMPTY).getItem().equals(result.getItem()));
         }
 
         return false;

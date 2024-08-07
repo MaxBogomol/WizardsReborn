@@ -1,0 +1,31 @@
+{
+  "type": "wizards_reborn:arcane_workbench",
+  "pattern": [
+    "_#_",
+    "GAG",
+    "___",
+    "C_N_"
+  ],
+  "key": {
+    "#": {
+      "item": "wizards_reborn:leather_belt"
+    },
+    "G": {
+      "tag": "wizards_reborn:arcane_gold_ingot"
+    },
+    "A": {
+      "item": "wizards_reborn:arcanum"
+    },
+    "C": {
+      "item": "wizards_reborn:alchemy_calx"
+    },
+    "N": {
+      "item": "wizards_reborn:enchanted_calx"
+    }
+  },
+  "output": {
+    "item": "wizards_reborn:inventor_wizard_belt"
+  },
+  "wissen": 2500,
+  "saveNBT": 1
+}

@@ -19,9 +19,12 @@ import net.minecraft.stats.Stats;
 import net.minecraft.util.Mth;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResultHolder;
+import net.minecraft.world.effect.MobEffect;
+import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.*;
+import net.minecraft.world.item.alchemy.PotionUtils;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.gameevent.GameEvent;
 import net.minecraftforge.api.distmarker.Dist;
@@ -39,6 +42,8 @@ public class DrinkBottleItem extends PlacedItem {
     int ticksAged = 24000;
     int ticksAgedOverexpose = 24000;
 
+    public List<EffectInstance> effects = new ArrayList<>();
+
     public DrinkBottleItem(Properties properties) {
         super(properties);
     }
@@ -48,7 +53,17 @@ public class DrinkBottleItem extends PlacedItem {
         super.finishUsingItem(stack, level, livingEntity);
 
         if (!level.isClientSide()) {
+            int ticks = getTicks(stack);
+
             if (livingEntity instanceof Player player) {
+                for (MobEffectInstance mobeffectinstance : getMobEffects(ticks)) {
+                    if (mobeffectinstance.getEffect().isInstantenous()) {
+                        mobeffectinstance.getEffect().applyInstantenousEffect(player, player, livingEntity, mobeffectinstance.getAmplifier(), 1.0D);
+                    } else {
+                        livingEntity.addEffect(new MobEffectInstance(mobeffectinstance));
+                    }
+                }
+
                 player.awardStat(Stats.ITEM_USED.get(this));
 
                 if (!player.getAbilities().instabuild) {
@@ -73,12 +88,19 @@ public class DrinkBottleItem extends PlacedItem {
     @OnlyIn(Dist.CLIENT)
     @Override
     public void appendHoverText(ItemStack stack, Level world, List<Component> list, TooltipFlag flags) {
+        int ticks = getTicks(stack);
+
         if (getAlcoholicWithItem(stack)) {
             list.add(Component.translatable("lore.wizards_reborn.drinks.alcoholic").withStyle(ChatFormatting.GRAY));
         } else {
             list.add(Component.translatable("lore.wizards_reborn.drinks.non_alcoholic").withStyle(ChatFormatting.GRAY));
         }
-        list.add(Component.literal(dayFromTick(getTicks(stack))).append(" ").append(Component.translatable("lore.wizards_reborn.drinks.days_aged")).withStyle(ChatFormatting.GRAY));
+        list.add(Component.literal(dayFromTick(ticks)).append(" ").append(Component.translatable("lore.wizards_reborn.drinks.days_aged")).withStyle(ChatFormatting.GRAY));
+
+        list.add(Component.empty());
+
+        List<MobEffectInstance> effectInstances = getMobEffects(ticks);
+        PotionUtils.addPotionTooltip(effectInstances, list, 1.0f);
     }
 
     @Override
@@ -202,6 +224,24 @@ public class DrinkBottleItem extends PlacedItem {
         return this;
     }
 
+    public DrinkBottleItem addEffect(EffectInstance instance) {
+        effects.add(instance);
+        return this;
+    }
+
+    public List<EffectInstance> getEffects() {
+        return effects;
+    }
+
+    public List<MobEffectInstance> getMobEffects(int ticks) {
+        List<MobEffectInstance> mobEffects = new ArrayList<>();
+        for (EffectInstance effectInstance : getEffects()) {
+            mobEffects.add(effectInstance.getEffectPerTick(ticks, ticksAged, ticksAgedOverexpose));
+        }
+
+        return mobEffects;
+    }
+
     public boolean getAlcoholicWithItem(ItemStack stack) {
         if (getStageForAcl() >= 0) {
             if (getStage(stack) >= getStageForAcl()) {
@@ -235,6 +275,35 @@ public class DrinkBottleItem extends PlacedItem {
 
     public static String dayFromTick(int ticks) {
         return String.valueOf((Math.round((ticks / 24000f) * 100)) / 100f);
+    }
+
+    public static class EffectInstance {
+        public MobEffect effect;
+        public int minDuration;
+        public int maxDuration;
+        public int minAmplifier;
+        public int maxAmplifier;
+
+        public EffectInstance(MobEffect effect, int minDuration, int maxDuration, int minAmplifier, int maxAmplifier) {
+            this.effect = effect;
+            this.minDuration = minDuration;
+            this.maxDuration = maxDuration;
+            this.minAmplifier = minAmplifier;
+            this.maxAmplifier = maxAmplifier;
+        }
+
+        public MobEffectInstance getEffectPerTick(int ticks, int ticksAged, int ticksAgedOverexpose) {
+            float lerp = (float) ticks / ticksAged;
+            if (lerp > 1f) lerp = 1f;
+            int duration = Mth.lerpInt(lerp, minDuration, maxDuration);
+            int amplifier = Mth.lerpInt(lerp, minAmplifier, maxAmplifier);
+
+            if (ticks >= ticksAged + ticksAgedOverexpose) {
+
+            }
+
+            return new MobEffectInstance(effect, duration, amplifier);
+        }
     }
 
     public static ResourceLocation getModelTexture(ItemStack stack) {

@@ -32,7 +32,7 @@ public class OpenBagPacket {
                 ServerPlayer player = ctx.get().getSender();
 
                 List<ItemStack> items = player.inventoryMenu.getItems();
-                List<SlotResult> curioSlots = CuriosApi.getCuriosHelper().findCurios(player, (i) -> {return true;});
+                List<SlotResult> curioSlots = CuriosApi.getCuriosInventory(player).resolve().get().findCurios((i) -> {return true;});
                 for (SlotResult slot : curioSlots) {
                     if (slot.stack() != null) {
                         items.add(slot.stack());

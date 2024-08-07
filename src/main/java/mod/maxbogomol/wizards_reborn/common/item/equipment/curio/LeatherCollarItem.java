@@ -139,7 +139,7 @@ public class LeatherCollarItem extends BaseCurioItem implements ICurioItemTextur
     }
 
     public static boolean isWearCollar(Player player) {
-        List<SlotResult> curioSlots = CuriosApi.getCuriosHelper().findCurios(player, (i) -> {
+        List<SlotResult> curioSlots = CuriosApi.getCuriosInventory(player).resolve().get().findCurios((i) -> {
             return i.getItem() instanceof LeatherCollarItem;
         });
         return !curioSlots.isEmpty();

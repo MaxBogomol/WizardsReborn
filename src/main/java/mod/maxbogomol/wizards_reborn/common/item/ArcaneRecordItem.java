@@ -51,17 +51,32 @@ public class ArcaneRecordItem extends RecordItem implements IGuiParticleItem {
         MultiBufferSource.BufferSource buffersource = Minecraft.getInstance().renderBuffers().bufferSource();
 
         TextureAtlasSprite sparkle = Minecraft.getInstance().getTextureAtlas(TextureAtlas.LOCATION_BLOCKS).apply(new ResourceLocation(WizardsReborn.MOD_ID, "particle/sparkle"));
+        TextureAtlasSprite wisp = Minecraft.getInstance().getTextureAtlas(TextureAtlas.LOCATION_BLOCKS).apply(new ResourceLocation(WizardsReborn.MOD_ID, "particle/wisp"));
 
-        for (int i = 0; i < 30; i++) {
-            pose.pushPose();
-            float offset = (float) (Math.abs(Math.sin(Math.toRadians(i * 6 + (ticks * 2f)))));
-            offset = (offset - 0.25f) * (1 / 0.75f);
-            if (offset < 0) offset = 0;
-            pose.translate(x + 7.5 + (Math.sin(Math.toRadians(i * 12)) * (isCassette ? 6 : 7)), y + 8 + (Math.cos(Math.toRadians(i * 12)) * (isCassette ? 3 : 4)), 100);
-            pose.mulPose(Axis.ZP.rotationDegrees(ticks + (i * 2f)));
-            RenderUtils.spriteGlowQuadCenter(pose, buffersource, 0, 0, 6f * offset, 6f * offset, sparkle.getU0(), sparkle.getU1(), sparkle.getV0(), sparkle.getV1(), r, g, b, alpha);
-            buffersource.endBatch();
-            pose.popPose();
+        if (!isCassette) {
+            for (int i = 0; i < 30; i++) {
+                pose.pushPose();
+                float offset = (float) (Math.abs(Math.sin(Math.toRadians(i * 6 + (ticks * 2f)))));
+                offset = (offset - 0.25f) * (1 / 0.75f);
+                if (offset < 0) offset = 0;
+                pose.translate(x + 7.5 + (Math.sin(Math.toRadians(i * 12)) * 7), y + 8 + (Math.cos(Math.toRadians(i * 12)) * 4), 100);
+                pose.mulPose(Axis.ZP.rotationDegrees(ticks + (i * 2f)));
+                RenderUtils.spriteGlowQuadCenter(pose, buffersource, 0, 0, 6f * offset, 6f * offset, sparkle.getU0(), sparkle.getU1(), sparkle.getV0(), sparkle.getV1(), r, g, b, alpha);
+                buffersource.endBatch();
+                pose.popPose();
+            }
+        } else {
+            for (int i = 0; i < 30; i++) {
+                pose.pushPose();
+                float offset = (float) (Math.abs(Math.sin(Math.toRadians(i * 6 + (ticks * 2f)))));
+                offset = (offset - 0.25f) * (1 / 0.75f);
+                if (offset < 0) offset = 0;
+                pose.translate(x + 7.5 + (Math.sin(Math.toRadians(i * 12)) * 4), y + 8.5f, 100);
+                pose.mulPose(Axis.ZP.rotationDegrees(ticks + (i * 2f)));
+                RenderUtils.spriteGlowQuadCenter(pose, buffersource, 0, 0, 10f * offset, 10f * offset, wisp.getU0(), wisp.getU1(), wisp.getV0(), wisp.getV1(), r, g, b, alpha);
+                buffersource.endBatch();
+                pose.popPose();
+            }
         }
 
         RenderUtils.endGuiParticle();

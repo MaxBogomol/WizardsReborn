@@ -1,10 +1,7 @@
 package mod.maxbogomol.wizards_reborn.client.gui.container;
 
-import mod.maxbogomol.wizards_reborn.common.item.equipment.AlchemyBottleItem;
-import mod.maxbogomol.wizards_reborn.common.item.equipment.AlchemyPotionItem;
-import net.minecraft.world.item.BottleItem;
+import mod.maxbogomol.wizards_reborn.WizardsReborn;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.PotionItem;
 import net.minecraftforge.items.IItemHandler;
 import net.minecraftforge.items.SlotItemHandler;
 
@@ -13,7 +10,7 @@ public class AlchemyBagSlot extends SlotItemHandler {
         super(itemHandler, pSlot, pXPosition, pYPosition);
     }
 
-    public boolean mayPlace(ItemStack pStack) {
-        return (pStack.getItem() instanceof PotionItem || pStack.getItem() instanceof BottleItem || pStack.getItem() instanceof AlchemyPotionItem || pStack.getItem() instanceof AlchemyBottleItem);
+    public boolean mayPlace(ItemStack stack) {
+        return stack.is(WizardsReborn.ALCHEMY_BAG_SLOTS_ITEM_TAG);
     }
 }

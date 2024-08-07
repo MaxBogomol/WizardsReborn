@@ -3,6 +3,7 @@ package mod.maxbogomol.wizards_reborn.client.render.tileentity;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.math.Axis;
 import mod.maxbogomol.wizards_reborn.client.event.ClientTickHandler;
+import mod.maxbogomol.wizards_reborn.client.render.WorldRenderHandler;
 import mod.maxbogomol.wizards_reborn.client.render.fluid.FluidCuboid;
 import mod.maxbogomol.wizards_reborn.client.render.fluid.FluidRenderer;
 import mod.maxbogomol.wizards_reborn.common.tileentity.OrbitalFluidRetainerTileEntity;
@@ -28,6 +29,7 @@ public class OrbitalFluidRetainerTileEntityRenderer implements BlockEntityRender
         random.setSeed(retainer.getBlockPos().asLong());
 
         FluidStack fluidStack = retainer.getFluidStack();
+        MultiBufferSource bufferDelayed = WorldRenderHandler.getDelayedRender();
 
         double ticks = (ClientTickHandler.ticksInGame + partialTicks) * 2;
         double ticksSub = (ClientTickHandler.ticksInGame + partialTicks) * 1;
@@ -48,7 +50,7 @@ public class OrbitalFluidRetainerTileEntityRenderer implements BlockEntityRender
         ms.mulPose(Axis.ZP.rotationDegrees((float) ((random.nextFloat() * 360) + ticksSub)));
         ms.scale(amount, amount, amount);
         ms.translate(-0.25F, -0.25F, -0.25F);
-        FluidRenderer.renderCuboid(ms, buffers, cube, fluidStack, retainer.getCapacity(), light, false);
+        FluidRenderer.renderCuboid(ms, bufferDelayed, cube, fluidStack, retainer.getCapacity(), light, false);
         ms.popPose();
 
         for (int i = 0; i < amount * 25; i++) {
@@ -72,7 +74,7 @@ public class OrbitalFluidRetainerTileEntityRenderer implements BlockEntityRender
                 subCube = cube_large;
             }
 
-            FluidRenderer.renderCuboid(ms, buffers, subCube, fluidStack, retainer.getCapacity(), light, false);
+            FluidRenderer.renderCuboid(ms, bufferDelayed, subCube, fluidStack, retainer.getCapacity(), light, false);
             ms.popPose();
         }
     }

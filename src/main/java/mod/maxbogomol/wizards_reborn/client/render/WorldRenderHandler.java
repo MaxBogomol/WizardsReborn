@@ -58,6 +58,7 @@ public class WorldRenderHandler {
 
                 getDelayedRender().endBatch(RenderUtils.GLOWING_SPRITE);
                 getDelayedRender().endBatch(RenderUtils.GLOWING);
+                getDelayedRender().endBatch(RenderUtils.FLUID);
             }
         }
     }
@@ -70,8 +71,9 @@ public class WorldRenderHandler {
             for (RenderType type : new RenderType[]{
                     RenderUtils.DELAYED_PARTICLE,
                     RenderUtils.GLOWING_PARTICLE,
+                    RenderUtils.GLOWING_SPRITE,
                     RenderUtils.GLOWING,
-                    RenderUtils.GLOWING_SPRITE}) {
+                    RenderUtils.FLUID}) {
                 buffers.put(type, new BufferBuilder(ModList.get().isLoaded("rubidium") ? 32768 : type.bufferSize()));
             }
             DELAYED_RENDER = MultiBufferSource.immediateWithBuffers(buffers, new BufferBuilder(128));

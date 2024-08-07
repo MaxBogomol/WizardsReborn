@@ -97,8 +97,8 @@ public class WizardsRebornJei implements IModPlugin {
         registration.addRecipeCatalyst(new ItemStack(WizardsReborn.ARCANE_CENSER_ITEM.get()), CenserRecipeCategory.TYPE);
         registration.addRecipeCatalyst(new ItemStack(WizardsReborn.ARCANE_WOOD_SMOKING_PIPE.get()), CenserRecipeCategory.TYPE);
         registration.addRecipeCatalyst(new ItemStack(WizardsReborn.INNOCENT_WOOD_SMOKING_PIPE.get()), CenserRecipeCategory.TYPE);
-        registration.addRecipeCatalyst(new ItemStack(WizardsReborn.BAMBOO_WOOD_SMOKING_PIPE.get()), CenserRecipeCategory.TYPE);
-        registration.addRecipeCatalyst(new ItemStack(WizardsReborn.CORK_BAMBOO_WOOD_SMOKING_PIPE.get()), CenserRecipeCategory.TYPE);
+        registration.addRecipeCatalyst(new ItemStack(WizardsReborn.BAMBOO_SMOKING_PIPE.get()), CenserRecipeCategory.TYPE);
+        registration.addRecipeCatalyst(new ItemStack(WizardsReborn.CORK_BAMBOO_SMOKING_PIPE.get()), CenserRecipeCategory.TYPE);
         registration.addRecipeCatalyst(new ItemStack(WizardsReborn.ARCANE_ITERATOR_ITEM.get()), ArcaneIteratorRecipeCategory.TYPE);
         registration.addRecipeCatalyst(new ItemStack(WizardsReborn.JEWELER_TABLE_ITEM.get()), JewelerTableRecipeCategory.TYPE);
         registration.addRecipeCatalyst(new ItemStack(WizardsReborn.RUNIC_PEDESTAL_ITEM.get()), CrystalRitualRecipeCategory.TYPE);

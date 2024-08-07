@@ -1,0 +1,20 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "wizards_reborn:arcane_wood_branch"
+    },
+    {
+      "item": "wizards_reborn:arcane_wood_branch"
+    },
+    {
+      "item": "wizards_reborn:petals"
+    },
+    {
+      "item": "wizards_reborn:petals"
+    }
+  ],
+  "result": {
+    "item": "wizards_reborn:bunch_of_things"
+  }
+}

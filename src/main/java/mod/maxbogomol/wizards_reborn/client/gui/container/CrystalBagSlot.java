@@ -1,9 +1,6 @@
 package mod.maxbogomol.wizards_reborn.client.gui.container;
 
-import mod.maxbogomol.wizards_reborn.common.block.CrystalSeedBlock;
-import mod.maxbogomol.wizards_reborn.common.item.CrystalItem;
-import mod.maxbogomol.wizards_reborn.common.item.FracturedCrystalItem;
-import net.minecraft.world.item.BlockItem;
+import mod.maxbogomol.wizards_reborn.WizardsReborn;
 import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.items.IItemHandler;
 import net.minecraftforge.items.SlotItemHandler;
@@ -13,16 +10,7 @@ public class CrystalBagSlot extends SlotItemHandler {
         super(itemHandler, pSlot, pXPosition, pYPosition);
     }
 
-    public boolean mayPlace(ItemStack pStack) {
-        if (pStack.getItem() instanceof FracturedCrystalItem || pStack.getItem() instanceof CrystalItem) {
-            return true;
-        }
-        if (pStack.getItem() instanceof BlockItem blockItem) {
-            if (blockItem.getBlock() instanceof CrystalSeedBlock) {
-                return true;
-            }
-        }
-
-        return false;
+    public boolean mayPlace(ItemStack stack) {
+        return stack.is(WizardsReborn.CRYSTAL_BAG_SLOTS_ITEM_TAG);
     }
 }

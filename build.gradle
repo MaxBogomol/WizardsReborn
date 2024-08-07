@@ -95,7 +95,6 @@ dependencies {
     implementation fg.deobf("curse.maven:configured-457570:5180900")
     implementation fg.deobf("curse.maven:model-gap-fix-676136:5200949")
     implementation fg.deobf("curse.maven:embeddium-908741:5566632")
-    implementation fg.deobf("curse.maven:oculus-581495:5299671")
     implementation fg.deobf("curse.maven:jade-324717:5493390")
 }
 

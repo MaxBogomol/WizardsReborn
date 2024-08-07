@@ -49,6 +49,7 @@ public class RegisterKnowledges {
     public static ItemKnowledge WISSEN_RING = new ItemKnowledge(WizardsReborn.MOD_ID+":wissen_ring", false, 5, WizardsReborn.WISSEN_RING.get());
     public static ItemKnowledge MUSIC_DISC_REBORN = new MusicDiscKnowledge(WizardsReborn.MOD_ID+":music_disc_reborn", false, 8, WizardsReborn.MUSIC_DISC_REBORN.get());
     public static ItemKnowledge MUSIC_DISC_PANACHE = new MusicDiscKnowledge(WizardsReborn.MOD_ID+":music_disc_panache", false, 8, WizardsReborn.MUSIC_DISC_PANACHE.get());
+    public static ItemKnowledge MUSIC_DISC_CAPITALISM = new MusicDiscKnowledge(WizardsReborn.MOD_ID+":music_disc_capitalism", false, 8, WizardsReborn.MUSIC_DISC_CAPITALISM.get());
 
     //AUTOMATION
     public static ItemKnowledge ARCANE_LEVER = new ItemKnowledge(WizardsReborn.MOD_ID+":arcane_lever", false, 4, WizardsReborn.ARCANE_LEVER_ITEM.get());
@@ -139,6 +140,7 @@ public class RegisterKnowledges {
         Knowledges.register(WISSEN_KEYCHAIN);
         Knowledges.register(WISSEN_RING);
         Knowledges.register(MUSIC_DISC_REBORN);
+        Knowledges.register(MUSIC_DISC_CAPITALISM);
         Knowledges.register(MUSIC_DISC_PANACHE);
 
         //AUTOMATION
@@ -276,6 +278,7 @@ public class RegisterKnowledges {
         addAdditionalProgression(WISSEN_RING, ARCANE_ITERATOR);
         addAdditionalProgression(MUSIC_DISC_REBORN, ARCANE_ITERATOR);
         addAdditionalProgression(MUSIC_DISC_PANACHE, ARCANE_ITERATOR);
+        addAdditionalProgression(MUSIC_DISC_CAPITALISM, ARCANE_ITERATOR);
         addAdditionalProgression(LIGHT_SENSOR, LIGHT_EMITTER);
         addAdditionalProgression(LIGHT_CASING, LIGHT_EMITTER);
         addAdditionalProgression(INNOCENT_WOOD_TOOLS, INNOCENT_WOOD);

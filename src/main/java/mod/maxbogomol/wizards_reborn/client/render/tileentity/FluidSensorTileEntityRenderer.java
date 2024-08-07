@@ -3,6 +3,7 @@ package mod.maxbogomol.wizards_reborn.client.render.tileentity;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.math.Axis;
 import mod.maxbogomol.wizards_reborn.client.event.ClientTickHandler;
+import mod.maxbogomol.wizards_reborn.client.render.WorldRenderHandler;
 import mod.maxbogomol.wizards_reborn.client.render.fluid.FluidCuboid;
 import mod.maxbogomol.wizards_reborn.client.render.fluid.FluidRenderer;
 import mod.maxbogomol.wizards_reborn.common.block.SensorBaseBlock;
@@ -25,6 +26,8 @@ public class FluidSensorTileEntityRenderer implements BlockEntityRenderer<FluidS
     public void render(FluidSensorTileEntity sensor, float partialTicks, PoseStack ms, MultiBufferSource buffers, int light, int overlay) {
         Random random = new Random();
         random.setSeed(sensor.getBlockPos().asLong());
+
+        MultiBufferSource bufferDelayed = WorldRenderHandler.getDelayedRender();
 
         double ticks = (ClientTickHandler.ticksInGame + partialTicks) * 0.1F;
 
@@ -62,7 +65,7 @@ public class FluidSensorTileEntityRenderer implements BlockEntityRenderer<FluidS
             ms.mulPose(Axis.ZP.rotationDegrees((float) ((random.nextFloat() * 360) + ticks)));
             ms.translate(-0.25F / 2, -0.25F / 2, -0.25F / 2);
 
-            FluidRenderer.renderCuboid(ms, buffers, CUBE, sensor.getTank().getFluid(), 1, light, false);
+            FluidRenderer.renderCuboid(ms, bufferDelayed, CUBE, sensor.getTank().getFluid(), 1, light, false);
             ms.popPose();
         }
     }
