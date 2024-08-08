@@ -78,8 +78,9 @@ public class ClientEvents {
 
                 if (draw) {
                     int i = attributeModifierTooltip + 1;
-                    if (i > event.getToolTip().size()) attributeModifierTooltip = event.getToolTip().size();
-                    event.getToolTip().addAll(i, ArcaneEnchantmentUtils.modifiersAppendHoverText(stack, player.level(), event.getFlags()));
+                    if (i < event.getToolTip().size()) {
+                        event.getToolTip().addAll(i, ArcaneEnchantmentUtils.modifiersAppendHoverText(stack, player.level(), event.getFlags()));
+                    }
                 }
             }
         }
