@@ -3,7 +3,7 @@ package mod.maxbogomol.wizards_reborn.client.gui.screen;
 import com.mojang.blaze3d.systems.RenderSystem;
 import mod.maxbogomol.wizards_reborn.WizardsReborn;
 import mod.maxbogomol.wizards_reborn.client.gui.container.ArcaneWorkbenchContainer;
-import mod.maxbogomol.wizards_reborn.common.tileentity.ArcaneWorkbenchTileEntity;
+import mod.maxbogomol.wizards_reborn.common.block.arcane_workbench.ArcaneWorkbenchBlockEntity;
 import mod.maxbogomol.wizards_reborn.utils.ColorUtils;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
@@ -44,7 +44,7 @@ public class ArcaneWorkbenchScreen extends AbstractContainerScreen<ArcaneWorkben
         int j = this.topPos;
         gui.blit(GUI, i, j, 0, 0, this.imageWidth, this.imageHeight);
 
-        if (menu.tileEntity instanceof ArcaneWorkbenchTileEntity workbench) {
+        if (menu.tileEntity instanceof ArcaneWorkbenchBlockEntity workbench) {
             List<ItemStack> items = workbench.getItemsResult();
 
             if (items.size() > 0 && workbench.itemOutputHandler.getStackInSlot(0).isEmpty()) {

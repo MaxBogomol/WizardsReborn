@@ -2,6 +2,7 @@ package mod.maxbogomol.wizards_reborn.client.animation;
 
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.math.Axis;
+import mod.maxbogomol.fluffy_fur.client.animation.ItemAnimation;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.model.HumanoidModel;
 import net.minecraft.client.player.AbstractClientPlayer;

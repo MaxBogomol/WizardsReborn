@@ -3,7 +3,7 @@ package mod.maxbogomol.wizards_reborn.client.gui.screen;
 import com.mojang.blaze3d.systems.RenderSystem;
 import mod.maxbogomol.wizards_reborn.WizardsReborn;
 import mod.maxbogomol.wizards_reborn.client.gui.container.AlchemyMachineContainer;
-import mod.maxbogomol.wizards_reborn.common.tileentity.AlchemyMachineTileEntity;
+import mod.maxbogomol.wizards_reborn.common.block.alchemy_machine.AlchemyMachineBlockEntity;
 import mod.maxbogomol.wizards_reborn.utils.ColorUtils;
 import mod.maxbogomol.wizards_reborn.utils.NumericalUtils;
 import net.minecraft.client.Minecraft;
@@ -46,7 +46,7 @@ public class AlchemyMachineScreen extends AbstractContainerScreen<AlchemyMachine
         int j = this.topPos;
         gui.blit(GUI, i, j, 0, 0, this.imageWidth, this.imageHeight);
 
-        if (menu.tileEntity instanceof AlchemyMachineTileEntity machine) {
+        if (menu.tileEntity instanceof AlchemyMachineBlockEntity machine) {
             for (int ii = 0; ii <= 2; ii++) {
                 int width = 32;
                 width /= (double) machine.getMaxCapacity() / (double) machine.getTank(ii).getFluidAmount();

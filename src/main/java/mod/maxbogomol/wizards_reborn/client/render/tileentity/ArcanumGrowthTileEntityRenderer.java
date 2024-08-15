@@ -5,9 +5,9 @@ import com.mojang.math.Axis;
 import mod.maxbogomol.wizards_reborn.api.wissen.WissenUtils;
 import mod.maxbogomol.wizards_reborn.client.event.ClientTickHandler;
 import mod.maxbogomol.wizards_reborn.client.render.WorldRenderHandler;
-import mod.maxbogomol.wizards_reborn.common.block.ArcanumGrowthBlock;
+import mod.maxbogomol.wizards_reborn.common.block.arcanum_growth.ArcanumGrowthBlock;
 import mod.maxbogomol.wizards_reborn.common.config.Config;
-import mod.maxbogomol.wizards_reborn.common.tileentity.ArcanumGrowthTileEntity;
+import mod.maxbogomol.wizards_reborn.common.block.arcanum_growth.ArcanumGrowthBlockEntity;
 import mod.maxbogomol.wizards_reborn.utils.RenderUtils;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.blockentity.BlockEntityRenderer;
@@ -16,12 +16,12 @@ import net.minecraft.world.phys.Vec3;
 import java.awt.*;
 import java.util.Random;
 
-public class ArcanumGrowthTileEntityRenderer implements BlockEntityRenderer<ArcanumGrowthTileEntity> {
+public class ArcanumGrowthTileEntityRenderer implements BlockEntityRenderer<ArcanumGrowthBlockEntity> {
 
     public ArcanumGrowthTileEntityRenderer() {}
 
     @Override
-    public void render(ArcanumGrowthTileEntity crystal, float partialTicks, PoseStack ms, MultiBufferSource buffers, int light, int overlay) {
+    public void render(ArcanumGrowthBlockEntity crystal, float partialTicks, PoseStack ms, MultiBufferSource buffers, int light, int overlay) {
         Random random = new Random();
         random.setSeed(crystal.getBlockPos().asLong());
 

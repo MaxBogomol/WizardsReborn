@@ -1,8 +1,8 @@
 package mod.maxbogomol.wizards_reborn.common.spell.look;
 
+import mod.maxbogomol.fluffy_fur.client.animation.ItemAnimation;
 import mod.maxbogomol.wizards_reborn.WizardsReborn;
 import mod.maxbogomol.wizards_reborn.api.crystal.CrystalUtils;
-import mod.maxbogomol.wizards_reborn.client.animation.ItemAnimation;
 import mod.maxbogomol.wizards_reborn.client.animation.StrikeSpellItemAnimation;
 import mod.maxbogomol.wizards_reborn.client.particle.Particles;
 import net.minecraft.nbt.CompoundTag;

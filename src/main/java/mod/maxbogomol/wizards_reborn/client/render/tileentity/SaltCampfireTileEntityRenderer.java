@@ -2,8 +2,8 @@ package mod.maxbogomol.wizards_reborn.client.render.tileentity;
 
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.math.Axis;
-import mod.maxbogomol.wizards_reborn.common.block.SaltCampfireBlock;
-import mod.maxbogomol.wizards_reborn.common.tileentity.SaltCampfireTileEntity;
+import mod.maxbogomol.wizards_reborn.common.block.salt_campfire.SaltCampfireBlock;
+import mod.maxbogomol.wizards_reborn.common.block.salt_campfire.SaltCampfireBlockEntity;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.blockentity.BlockEntityRenderer;
@@ -12,12 +12,12 @@ import net.minecraft.core.NonNullList;
 import net.minecraft.world.item.ItemDisplayContext;
 import net.minecraft.world.item.ItemStack;
 
-public class SaltCampfireTileEntityRenderer implements BlockEntityRenderer<SaltCampfireTileEntity> {
+public class SaltCampfireTileEntityRenderer implements BlockEntityRenderer<SaltCampfireBlockEntity> {
 
     public SaltCampfireTileEntityRenderer() {}
 
     @Override
-    public void render(SaltCampfireTileEntity campfire, float partialTicks, PoseStack ms, MultiBufferSource buffers, int light, int overlay) {
+    public void render(SaltCampfireBlockEntity campfire, float partialTicks, PoseStack ms, MultiBufferSource buffers, int light, int overlay) {
         Direction direction = campfire.getBlockState().getValue(SaltCampfireBlock.FACING);
         NonNullList<ItemStack> nonnulllist = campfire.getItems();
         int i = (int)campfire.getBlockPos().asLong();

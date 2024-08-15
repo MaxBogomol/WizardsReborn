@@ -3,7 +3,7 @@ package mod.maxbogomol.wizards_reborn.client.gui.screen;
 import com.mojang.blaze3d.systems.RenderSystem;
 import mod.maxbogomol.wizards_reborn.WizardsReborn;
 import mod.maxbogomol.wizards_reborn.client.gui.container.JewelerTableContainer;
-import mod.maxbogomol.wizards_reborn.common.tileentity.JewelerTableTileEntity;
+import mod.maxbogomol.wizards_reborn.common.block.jeweler_table.JewelerTableBlockEntity;
 import mod.maxbogomol.wizards_reborn.utils.ColorUtils;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
@@ -44,7 +44,7 @@ public class JewelerTableScreen extends AbstractContainerScreen<JewelerTableCont
         int j = this.topPos;
         gui.blit(GUI, i, j, 0, 0, this.imageWidth, this.imageHeight);
 
-        if (menu.tileEntity instanceof JewelerTableTileEntity table) {
+        if (menu.tileEntity instanceof JewelerTableBlockEntity table) {
             List<ItemStack> items = table.getItemsResult();
 
             if (items.size() > 0 && table.itemOutputHandler.getStackInSlot(0).isEmpty()) {

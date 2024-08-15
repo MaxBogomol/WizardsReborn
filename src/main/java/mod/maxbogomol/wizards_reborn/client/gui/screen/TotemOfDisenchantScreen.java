@@ -7,7 +7,7 @@ import mod.maxbogomol.wizards_reborn.api.arcaneenchantment.ArcaneEnchantmentUtil
 import mod.maxbogomol.wizards_reborn.client.gui.container.TotemOfDisenchantContainer;
 import mod.maxbogomol.wizards_reborn.common.network.PacketHandler;
 import mod.maxbogomol.wizards_reborn.common.network.tileentity.TotemOfDisenchantStartEffectPacket;
-import mod.maxbogomol.wizards_reborn.common.tileentity.TotemOfDisenchantTileEntity;
+import mod.maxbogomol.wizards_reborn.common.block.totem.disenchant.TotemOfDisenchantBlockEntity;
 import mod.maxbogomol.wizards_reborn.utils.ColorUtils;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
@@ -61,7 +61,7 @@ public class TotemOfDisenchantScreen extends AbstractContainerScreen<TotemOfDise
         int j = this.topPos;
         gui.blit(GUI, i, j, 0, 0, this.imageWidth, this.imageHeight);
 
-        if (menu.tileEntity instanceof TotemOfDisenchantTileEntity totem) {
+        if (menu.tileEntity instanceof TotemOfDisenchantBlockEntity totem) {
             int buttonOffset = 0;
 
             if (x >= i + 141 && y >= j + 73 && x <= i + 141 + 16 && y <= j + 73 + 16 && !totem.isStart) {
@@ -162,7 +162,7 @@ public class TotemOfDisenchantScreen extends AbstractContainerScreen<TotemOfDise
         int i = this.leftPos;
         int j = this.topPos;
 
-        if (menu.tileEntity instanceof TotemOfDisenchantTileEntity totem) {
+        if (menu.tileEntity instanceof TotemOfDisenchantBlockEntity totem) {
             ItemStack stack = totem.itemHandler.getStackInSlot(0);
 
             if (!stack.isEmpty()) {

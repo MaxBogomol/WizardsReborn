@@ -1,8 +1,8 @@
 package mod.maxbogomol.wizards_reborn.common.item.equipment.curio;
 
+import mod.maxbogomol.fluffy_fur.common.item.ItemBackedInventory;
 import mod.maxbogomol.wizards_reborn.WizardsReborn;
 import mod.maxbogomol.wizards_reborn.client.gui.container.CrystalBagContainer;
-import mod.maxbogomol.wizards_reborn.common.item.ItemBackedInventory;
 import mod.maxbogomol.wizards_reborn.common.item.equipment.IBagItem;
 import net.minecraft.core.Direction;
 import net.minecraft.nbt.CompoundTag;

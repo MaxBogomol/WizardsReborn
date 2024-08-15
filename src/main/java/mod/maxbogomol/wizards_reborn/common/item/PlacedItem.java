@@ -2,9 +2,10 @@ package mod.maxbogomol.wizards_reborn.common.item;
 
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.math.Axis;
+import mod.maxbogomol.fluffy_fur.common.item.ICustomBlockEntityDataItem;
 import mod.maxbogomol.wizards_reborn.WizardsReborn;
 import mod.maxbogomol.wizards_reborn.client.event.ClientTickHandler;
-import mod.maxbogomol.wizards_reborn.common.tileentity.PlacedItemsTileEntity;
+import mod.maxbogomol.wizards_reborn.common.block.placed_items.PlacedItemsBlockEntity;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.core.NonNullList;
@@ -52,7 +53,7 @@ public class PlacedItem extends ItemNameBlockItem implements ICustomBlockEntityD
 
     @Override
     @OnlyIn(Dist.CLIENT)
-    public void renderPlacedItem(ItemStack stack, int rotation, float rotate, PlacedItemsTileEntity items, float partialTicks, PoseStack ms, MultiBufferSource buffers, int light, int overlay) {
+    public void renderPlacedItem(ItemStack stack, int rotation, float rotate, PlacedItemsBlockEntity items, float partialTicks, PoseStack ms, MultiBufferSource buffers, int light, int overlay) {
         double ticks = (ClientTickHandler.ticksInGame + partialTicks) * 2;
         double ticksUp = (ClientTickHandler.ticksInGame + partialTicks) * 4;
         ticksUp = (ticksUp) % 360;

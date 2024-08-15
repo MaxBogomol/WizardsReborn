@@ -2,9 +2,10 @@ package mod.maxbogomol.wizards_reborn.common.item;
 
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.math.Axis;
+import mod.maxbogomol.fluffy_fur.common.item.IGuiParticleItem;
 import mod.maxbogomol.wizards_reborn.WizardsReborn;
 import mod.maxbogomol.wizards_reborn.client.event.ClientTickHandler;
-import mod.maxbogomol.wizards_reborn.common.tileentity.SaltCampfireTileEntity;
+import mod.maxbogomol.wizards_reborn.common.block.salt_campfire.SaltCampfireBlockEntity;
 import mod.maxbogomol.wizards_reborn.utils.RenderUtils;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.MultiBufferSource;
@@ -33,11 +34,11 @@ public class SaltCampfireItem extends BlockItem implements IGuiParticleItem {
         float offset = (float) (0.85f + Math.abs(Math.sin(Math.toRadians(ticks * 1.6f)) * 0.15f));
         float offsetW = (float) (0.75f + Math.abs(Math.sin(Math.toRadians(ticks * 0.6f)) * 0.25f));
 
-        Color color1 = SaltCampfireTileEntity.colorFirst;
+        Color color1 = SaltCampfireBlockEntity.colorFirst;
         float r1 = color1.getRed() / 255f;
         float g1 = color1.getGreen() / 255f;
         float b1 = color1.getBlue() / 255f;
-        Color color2 = SaltCampfireTileEntity.colorSecond;
+        Color color2 = SaltCampfireBlockEntity.colorSecond;
         float r2 = color2.getRed() / 255f;
         float g2 = color2.getGreen() / 255f;
         float b2 = color2.getBlue() / 255f;

@@ -20,6 +20,7 @@ repositories {
     maven { url = "https://cursemaven.com" }
     maven { url = "https://maven.blamejared.com" }
     maven { url = 'https://maven.saps.dev/releases' }
+    mavenLocal()
 }
 
 apply plugin: 'net.minecraftforge.gradle'
@@ -29,12 +30,13 @@ apply plugin: 'maven-publish'
 apply plugin: 'org.parchmentmc.librarian.forgegradle'
 
 version = "${minecraft_version}-${mod_version}"
-group = 'mod.maxbogomol'
+group = 'mod.maxbogomol.wizards_reborn'
 archivesBaseName = 'wizards_reborn'
 
 java.toolchain.languageVersion = JavaLanguageVersion.of(17)
 
 println('Java: ' + System.getProperty('java.version') + ' JVM: ' + System.getProperty('java.vm.version') + '(' + System.getProperty('java.vendor') + ') Arch: ' + System.getProperty('os.arch'))
+
 minecraft {
     mappings channel: 'parchment', version: '2023.06.26-1.20.1'
     
@@ -77,9 +79,11 @@ minecraft {
 sourceSets.main.resources { srcDir 'src/generated/resources' }
 
 dependencies {
-    minecraft 'net.minecraftforge:forge:1.20.1-47.2.0'
+    minecraft "net.minecraftforge:forge:${minecraft_version}-${forge_version}"
 
     annotationProcessor 'org.spongepowered:mixin:0.8.5:processor'
+
+    implementation fg.deobf("mod.maxbogomol.fluffy_fur:fluffy_fur:${minecraft_version}-${fluffy_fur_version}")
 
     compileOnly fg.deobf("top.theillusivec4.curios:curios-forge:5.9.1+1.20.1")
     runtimeOnly fg.deobf("top.theillusivec4.curios:curios-forge:5.9.1+1.20.1")
@@ -130,10 +134,11 @@ publishing {
 
     publications {
         maven(MavenPublication) {
-            groupId project.group
-            artifactId base.archivesName.get()
-            version project.version
+            artifactId = archivesBaseName
+
             from components.java
+            fg.component(it)
+            jarJar.component(it)
         }
     }
 }

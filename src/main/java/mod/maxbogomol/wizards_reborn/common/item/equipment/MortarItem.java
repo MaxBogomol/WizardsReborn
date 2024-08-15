@@ -1,7 +1,7 @@
 package mod.maxbogomol.wizards_reborn.common.item.equipment;
 
+import mod.maxbogomol.fluffy_fur.common.item.FuelItem;
 import mod.maxbogomol.wizards_reborn.WizardsReborn;
-import mod.maxbogomol.wizards_reborn.common.item.FuelItem;
 import mod.maxbogomol.wizards_reborn.common.recipe.MortarRecipe;
 import net.minecraft.core.RegistryAccess;
 import net.minecraft.sounds.SoundEvents;

@@ -2,19 +2,19 @@ package mod.maxbogomol.wizards_reborn.client.render.tileentity;
 
 import com.mojang.blaze3d.vertex.PoseStack;
 import mod.maxbogomol.wizards_reborn.api.wissen.WissenUtils;
-import mod.maxbogomol.wizards_reborn.common.tileentity.WissenTranslatorTileEntity;
+import mod.maxbogomol.wizards_reborn.common.block.wissen_translator.WissenTranslatorBlockEntity;
 import mod.maxbogomol.wizards_reborn.utils.RenderUtils;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.blockentity.BlockEntityRenderer;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.phys.Vec3;
 
-public class WissenTranslatorTileEntityRenderer implements BlockEntityRenderer<WissenTranslatorTileEntity> {
+public class WissenTranslatorTileEntityRenderer implements BlockEntityRenderer<WissenTranslatorBlockEntity> {
 
     public WissenTranslatorTileEntityRenderer() {}
 
     @Override
-    public void render(WissenTranslatorTileEntity translator, float partialTicks, PoseStack ms, MultiBufferSource buffers, int light, int overlay) {
+    public void render(WissenTranslatorBlockEntity translator, float partialTicks, PoseStack ms, MultiBufferSource buffers, int light, int overlay) {
         if (WissenUtils.isCanRenderWissenWand()) {
             if (translator.isToBlock) {
                 ms.pushPose();
@@ -32,12 +32,12 @@ public class WissenTranslatorTileEntityRenderer implements BlockEntityRenderer<W
     }
 
     @Override
-    public boolean shouldRenderOffScreen(WissenTranslatorTileEntity pBlockEntity) {
+    public boolean shouldRenderOffScreen(WissenTranslatorBlockEntity pBlockEntity) {
         return true;
     }
 
     @Override
-    public boolean shouldRender(WissenTranslatorTileEntity pBlockEntity, Vec3 pCameraPos) {
+    public boolean shouldRender(WissenTranslatorBlockEntity pBlockEntity, Vec3 pCameraPos) {
         return true;
     }
 }

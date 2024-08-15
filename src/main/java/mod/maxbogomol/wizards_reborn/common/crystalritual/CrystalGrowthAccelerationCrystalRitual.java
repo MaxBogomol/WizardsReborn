@@ -4,7 +4,7 @@ import mod.maxbogomol.wizards_reborn.WizardsReborn;
 import mod.maxbogomol.wizards_reborn.api.crystalritual.CrystalRitual;
 import mod.maxbogomol.wizards_reborn.api.crystalritual.IGrowableCrystal;
 import mod.maxbogomol.wizards_reborn.api.light.LightRayHitResult;
-import mod.maxbogomol.wizards_reborn.common.tileentity.CrystalTileEntity;
+import mod.maxbogomol.wizards_reborn.common.block.crystal.CrystalBlockEntity;
 import mod.maxbogomol.wizards_reborn.utils.PacketUtils;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.level.Level;
@@ -22,22 +22,22 @@ public class CrystalGrowthAccelerationCrystalRitual extends CrystalRitual {
     }
 
     @Override
-    public boolean hasArea(CrystalTileEntity crystal) {
+    public boolean hasArea(CrystalBlockEntity crystal) {
         return false;
     }
 
     @Override
-    public boolean hasLightRay(CrystalTileEntity crystal) {
+    public boolean hasLightRay(CrystalBlockEntity crystal) {
         return true;
     }
 
     @Override
-    public int getMaxRitualCooldown(CrystalTileEntity crystal) {
+    public int getMaxRitualCooldown(CrystalBlockEntity crystal) {
         return 400;
     }
 
     @Override
-    public void start(CrystalTileEntity crystal) {
+    public void start(CrystalBlockEntity crystal) {
         if (!crystal.getLevel().isClientSide()) {
             setMaxCooldown(crystal, getMaxRitualCooldownWithStat(crystal));
             setCooldown(crystal, getMaxCooldown(crystal));
@@ -45,7 +45,7 @@ public class CrystalGrowthAccelerationCrystalRitual extends CrystalRitual {
     }
 
     @Override
-    public void tick(CrystalTileEntity crystal) {
+    public void tick(CrystalBlockEntity crystal) {
         Level level = crystal.getLevel();
         BlockPos blockPos = crystal.getBlockPos();
 

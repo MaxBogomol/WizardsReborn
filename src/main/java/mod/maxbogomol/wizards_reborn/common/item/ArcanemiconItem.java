@@ -3,8 +3,8 @@ package mod.maxbogomol.wizards_reborn.common.item;
 import mod.maxbogomol.wizards_reborn.WizardsReborn;
 import mod.maxbogomol.wizards_reborn.client.arcanemicon.ArcanemiconGui;
 import mod.maxbogomol.wizards_reborn.client.event.ClientTickHandler;
-import mod.maxbogomol.wizards_reborn.common.block.ArcanePedestalBlock;
-import mod.maxbogomol.wizards_reborn.common.tileentity.ArcanePedestalTileEntity;
+import mod.maxbogomol.wizards_reborn.common.block.arcane_pedestal.ArcanePedestalBlock;
+import mod.maxbogomol.wizards_reborn.common.block.arcane_pedestal.ArcanePedestalBlockEntity;
 import mod.maxbogomol.wizards_reborn.utils.ColorUtils;
 import net.minecraft.client.Minecraft;
 import net.minecraft.core.BlockPos;
@@ -46,7 +46,7 @@ public class ArcanemiconItem extends Item {
         if (player.isShiftKeyDown()) {
             Block block = ArcanePedestalBlock.blocksList.get(world.getBlockState(blockpos).getBlock());
             if (block != null) {
-                if (world.getBlockEntity(blockpos) instanceof ArcanePedestalTileEntity pedestal) {
+                if (world.getBlockEntity(blockpos) instanceof ArcanePedestalBlockEntity pedestal) {
                     if (pedestal.getItemHandler().getItem(0).isEmpty()) {
                         world.setBlockAndUpdate(blockpos, block.defaultBlockState());
                         player.getInventory().removeItem(player.getItemInHand(context.getHand()));

@@ -5,7 +5,7 @@ import com.mojang.math.Axis;
 import mod.maxbogomol.wizards_reborn.WizardsRebornClient;
 import mod.maxbogomol.wizards_reborn.api.wissen.WissenUtils;
 import mod.maxbogomol.wizards_reborn.client.event.ClientTickHandler;
-import mod.maxbogomol.wizards_reborn.common.tileentity.TotemOfExperienceAbsorptionTileEntity;
+import mod.maxbogomol.wizards_reborn.common.block.totem.experience_absorption.TotemOfExperienceAbsorptionBlockEntity;
 import mod.maxbogomol.wizards_reborn.utils.RenderUtils;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.MultiBufferSource;
@@ -16,12 +16,12 @@ import net.minecraft.world.phys.Vec3;
 
 import java.util.Random;
 
-public class TotemOfExperienceAbsorptionTileEntityRenderer implements BlockEntityRenderer<TotemOfExperienceAbsorptionTileEntity> {
+public class TotemOfExperienceAbsorptionTileEntityRenderer implements BlockEntityRenderer<TotemOfExperienceAbsorptionBlockEntity> {
 
     public TotemOfExperienceAbsorptionTileEntityRenderer() {}
 
     @Override
-    public void render(TotemOfExperienceAbsorptionTileEntity totem, float partialTicks, PoseStack ms, MultiBufferSource buffers, int light, int overlay) {
+    public void render(TotemOfExperienceAbsorptionBlockEntity totem, float partialTicks, PoseStack ms, MultiBufferSource buffers, int light, int overlay) {
         Random random = new Random();
         random.setSeed(totem.getBlockPos().asLong());
 
@@ -71,12 +71,12 @@ public class TotemOfExperienceAbsorptionTileEntityRenderer implements BlockEntit
     }
 
     @Override
-    public boolean shouldRenderOffScreen(TotemOfExperienceAbsorptionTileEntity pBlockEntity) {
+    public boolean shouldRenderOffScreen(TotemOfExperienceAbsorptionBlockEntity pBlockEntity) {
         return true;
     }
 
     @Override
-    public boolean shouldRender(TotemOfExperienceAbsorptionTileEntity pBlockEntity, Vec3 pCameraPos) {
+    public boolean shouldRender(TotemOfExperienceAbsorptionBlockEntity pBlockEntity, Vec3 pCameraPos) {
         return true;
     }
 }

@@ -2,7 +2,7 @@ package mod.maxbogomol.wizards_reborn.client.render.tileentity;
 
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.math.Axis;
-import mod.maxbogomol.wizards_reborn.common.tileentity.ArcaneCenserTileEntity;
+import mod.maxbogomol.wizards_reborn.common.block.arcane_censer.ArcaneCenserBlockEntity;
 import mod.maxbogomol.wizards_reborn.utils.ColorUtils;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.MultiBufferSource;
@@ -12,12 +12,12 @@ import net.minecraft.world.item.ItemDisplayContext;
 
 import java.util.Random;
 
-public class ArcaneCenserTileEntityRenderer implements BlockEntityRenderer<ArcaneCenserTileEntity> {
+public class ArcaneCenserTileEntityRenderer implements BlockEntityRenderer<ArcaneCenserBlockEntity> {
 
     public ArcaneCenserTileEntityRenderer() {}
 
     @Override
-    public void render(ArcaneCenserTileEntity censer, float partialTicks, PoseStack ms, MultiBufferSource buffers, int light, int overlay) {
+    public void render(ArcaneCenserBlockEntity censer, float partialTicks, PoseStack ms, MultiBufferSource buffers, int light, int overlay) {
         Random random = new Random();
         random.setSeed(censer.getBlockPos().asLong());
         Minecraft mc = Minecraft.getInstance();
@@ -26,7 +26,7 @@ public class ArcaneCenserTileEntityRenderer implements BlockEntityRenderer<Arcan
 
         for (int i = 0; i < size; i++) {
             int newLight = light;
-            int burn = ArcaneCenserTileEntity.getItemBurnCenser(censer.getItemHandler().getItem(i));
+            int burn = ArcaneCenserBlockEntity.getItemBurnCenser(censer.getItemHandler().getItem(i));
             if (burn > 0) {
                 int R = (int) Mth.lerp(((float) burn / 3), ColorUtils.getRed(light), 0) / 2;
                 int G = (int) Mth.lerp(((float) burn / 3), ColorUtils.getGreen(light), 0) / 2;

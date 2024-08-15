@@ -1,11 +1,11 @@
 package mod.maxbogomol.wizards_reborn.client.sound;
 
 import mod.maxbogomol.wizards_reborn.WizardsReborn;
-import mod.maxbogomol.wizards_reborn.common.tileentity.ArcaneIteratorTileEntity;
+import mod.maxbogomol.wizards_reborn.common.block.arcane_iterator.ArcaneIteratorBlockEntity;
 import net.minecraft.client.Minecraft;
 
-public class ArcaneIteratorSoundInstance extends TileEntitySoundInstance<ArcaneIteratorTileEntity> {
-    public ArcaneIteratorSoundInstance(ArcaneIteratorTileEntity blockEntity, float volume, float pitch) {
+public class ArcaneIteratorSoundInstance extends TileEntitySoundInstance<ArcaneIteratorBlockEntity> {
+    public ArcaneIteratorSoundInstance(ArcaneIteratorBlockEntity blockEntity, float volume, float pitch) {
         super(blockEntity, WizardsReborn.ARCANE_ITERATOR_LOOP_SOUND.get(), volume, pitch);
         this.x = blockEntity.getBlockPos().getX() + 0.5f;
         this.y = blockEntity.getBlockPos().getY() + 0.5f;
@@ -20,7 +20,7 @@ public class ArcaneIteratorSoundInstance extends TileEntitySoundInstance<ArcaneI
         super.tick();
     }
 
-    public static ArcaneIteratorSoundInstance getSound(ArcaneIteratorTileEntity tileEntity) {
+    public static ArcaneIteratorSoundInstance getSound(ArcaneIteratorBlockEntity tileEntity) {
         return new ArcaneIteratorSoundInstance(tileEntity, 1, 1);
     }
 

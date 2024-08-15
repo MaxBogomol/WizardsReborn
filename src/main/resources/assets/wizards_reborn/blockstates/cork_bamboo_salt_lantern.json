@@ -4,7 +4,7 @@
       "model": "wizards_reborn:block/cork_bamboo_salt_lantern"
     },
     "hanging=true": {
-      "model": "wizards_reborn:block/cork_bamboo_hanging_lantern"
+      "model": "wizards_reborn:block/cork_bamboo_salt_hanging_lantern"
     }
   }
 }

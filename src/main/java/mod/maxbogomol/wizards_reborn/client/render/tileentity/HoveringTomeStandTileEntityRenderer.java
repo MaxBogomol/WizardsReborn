@@ -4,7 +4,7 @@ import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
 import com.mojang.math.Axis;
 import mod.maxbogomol.wizards_reborn.WizardsReborn;
-import mod.maxbogomol.wizards_reborn.common.tileentity.HoveringTomeStandTileEntity;
+import mod.maxbogomol.wizards_reborn.common.block.hovering_tome_stand.HoveringTomeStandBlockEntity;
 import net.minecraft.client.model.BookModel;
 import net.minecraft.client.model.geom.ModelLayers;
 import net.minecraft.client.renderer.MultiBufferSource;
@@ -16,7 +16,7 @@ import net.minecraft.client.resources.model.Material;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.Mth;
 
-public class HoveringTomeStandTileEntityRenderer implements BlockEntityRenderer<HoveringTomeStandTileEntity> {
+public class HoveringTomeStandTileEntityRenderer implements BlockEntityRenderer<HoveringTomeStandBlockEntity> {
     public static final Material BOOK_LOCATION = new Material(TextureAtlas.LOCATION_BLOCKS, new ResourceLocation(WizardsReborn.MOD_ID, "block/hovering_tome_stand"));
     private final BookModel bookModel;
 
@@ -25,7 +25,7 @@ public class HoveringTomeStandTileEntityRenderer implements BlockEntityRenderer<
     }
 
     @Override
-    public void render(HoveringTomeStandTileEntity stand, float partialTicks, PoseStack ms, MultiBufferSource buffers, int light, int overlay) {
+    public void render(HoveringTomeStandBlockEntity stand, float partialTicks, PoseStack ms, MultiBufferSource buffers, int light, int overlay) {
         ms.pushPose();
         ms.translate(0.5F, 0.85F, 0.5F);
         float f = (float)stand.time + partialTicks;

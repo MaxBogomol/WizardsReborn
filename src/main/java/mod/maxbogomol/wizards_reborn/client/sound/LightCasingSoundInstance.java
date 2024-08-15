@@ -1,7 +1,7 @@
 package mod.maxbogomol.wizards_reborn.client.sound;
 
 import mod.maxbogomol.wizards_reborn.WizardsReborn;
-import mod.maxbogomol.wizards_reborn.common.tileentity.LightCasingTileEntity;
+import mod.maxbogomol.wizards_reborn.common.block.casing.light.LightCasingTileEntity;
 import net.minecraft.client.Minecraft;
 import net.minecraft.core.Direction;
 

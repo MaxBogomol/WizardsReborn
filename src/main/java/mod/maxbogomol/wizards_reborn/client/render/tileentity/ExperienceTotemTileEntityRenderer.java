@@ -5,7 +5,7 @@ import com.mojang.math.Axis;
 import mod.maxbogomol.wizards_reborn.api.wissen.WissenUtils;
 import mod.maxbogomol.wizards_reborn.client.event.ClientTickHandler;
 import mod.maxbogomol.wizards_reborn.client.render.WorldRenderHandler;
-import mod.maxbogomol.wizards_reborn.common.tileentity.ExperienceTotemTileEntity;
+import mod.maxbogomol.wizards_reborn.common.block.totem.experience_totem.ExperienceTotemBlockEntity;
 import mod.maxbogomol.wizards_reborn.utils.RenderUtils;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.MultiBufferSource;
@@ -14,12 +14,12 @@ import net.minecraft.world.phys.Vec3;
 
 import java.util.Random;
 
-public class ExperienceTotemTileEntityRenderer implements BlockEntityRenderer<ExperienceTotemTileEntity> {
+public class ExperienceTotemTileEntityRenderer implements BlockEntityRenderer<ExperienceTotemBlockEntity> {
 
     public ExperienceTotemTileEntityRenderer() {}
 
     @Override
-    public void render(ExperienceTotemTileEntity totem, float partialTicks, PoseStack ms, MultiBufferSource buffers, int light, int overlay) {
+    public void render(ExperienceTotemBlockEntity totem, float partialTicks, PoseStack ms, MultiBufferSource buffers, int light, int overlay) {
         Random random = new Random();
         random.setSeed(totem.getBlockPos().asLong());
 
@@ -62,12 +62,12 @@ public class ExperienceTotemTileEntityRenderer implements BlockEntityRenderer<Ex
     }
 
     @Override
-    public boolean shouldRenderOffScreen(ExperienceTotemTileEntity pBlockEntity) {
+    public boolean shouldRenderOffScreen(ExperienceTotemBlockEntity pBlockEntity) {
         return true;
     }
 
     @Override
-    public boolean shouldRender(ExperienceTotemTileEntity pBlockEntity, Vec3 pCameraPos) {
+    public boolean shouldRender(ExperienceTotemBlockEntity pBlockEntity, Vec3 pCameraPos) {
         return true;
     }
 }

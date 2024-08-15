@@ -6,7 +6,7 @@ import mod.maxbogomol.wizards_reborn.api.crystalritual.CrystalRitual;
 import mod.maxbogomol.wizards_reborn.api.crystalritual.CrystalRitualArea;
 import mod.maxbogomol.wizards_reborn.common.network.PacketHandler;
 import mod.maxbogomol.wizards_reborn.common.network.spell.MagicSproutSpellEffectPacket;
-import mod.maxbogomol.wizards_reborn.common.tileentity.CrystalTileEntity;
+import mod.maxbogomol.wizards_reborn.common.block.crystal.CrystalBlockEntity;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.sounds.SoundEvents;
@@ -33,7 +33,7 @@ public class ArtificialFertilityCrystalRitual extends CrystalRitual {
     }
 
     @Override
-    public int getMaxRitualCooldown(CrystalTileEntity crystal) {
+    public int getMaxRitualCooldown(CrystalBlockEntity crystal) {
         return 60;
     }
 
@@ -47,7 +47,7 @@ public class ArtificialFertilityCrystalRitual extends CrystalRitual {
     }
 
     @Override
-    public void start(CrystalTileEntity crystal) {
+    public void start(CrystalBlockEntity crystal) {
         if (!crystal.getLevel().isClientSide()) {
             setMaxCooldown(crystal, getMaxRitualCooldownWithStat(crystal));
             setCooldown(crystal, getMaxCooldown(crystal));
@@ -55,7 +55,7 @@ public class ArtificialFertilityCrystalRitual extends CrystalRitual {
     }
 
     @Override
-    public void tick(CrystalTileEntity crystal) {
+    public void tick(CrystalBlockEntity crystal) {
         Level level = crystal.getLevel();
         BlockPos blockPos = crystal.getBlockPos();
 

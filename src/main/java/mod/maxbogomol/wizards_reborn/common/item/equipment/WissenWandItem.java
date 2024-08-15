@@ -9,7 +9,7 @@ import mod.maxbogomol.wizards_reborn.api.light.ILightTileEntity;
 import mod.maxbogomol.wizards_reborn.api.skin.Skin;
 import mod.maxbogomol.wizards_reborn.api.wissen.*;
 import mod.maxbogomol.wizards_reborn.client.config.ClientConfig;
-import mod.maxbogomol.wizards_reborn.common.tileentity.AlchemyMachineTileEntity;
+import mod.maxbogomol.wizards_reborn.common.block.alchemy_machine.AlchemyMachineBlockEntity;
 import mod.maxbogomol.wizards_reborn.utils.ColorUtils;
 import mod.maxbogomol.wizards_reborn.utils.NumericalUtils;
 import net.minecraft.ChatFormatting;
@@ -675,7 +675,7 @@ public class WissenWandItem extends Item {
             BlockEntity tileentity = pos != null ? mc.level.getBlockEntity(pos) : null;
 
             if (tileentity != null) {
-                if (tileentity instanceof AlchemyMachineTileEntity machine) {
+                if (tileentity instanceof AlchemyMachineBlockEntity machine) {
                     for (int ii = 0; ii <= 2; ii++) {
                         if (player.isShiftKeyDown()) {
                             int x = mc.getWindow().getGuiScaledWidth() / 2;

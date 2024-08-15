@@ -3,19 +3,18 @@ package mod.maxbogomol.wizards_reborn.client.render.tileentity;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.math.Axis;
 import mod.maxbogomol.wizards_reborn.client.event.ClientTickHandler;
-import mod.maxbogomol.wizards_reborn.common.tileentity.WissenCrystallizerTileEntity;
+import mod.maxbogomol.wizards_reborn.common.block.wissen_crystallizer.WissenCrystallizerBlockEntity;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.MultiBufferSource;
-import net.minecraft.client.renderer.block.model.ItemTransforms;
 import net.minecraft.client.renderer.blockentity.BlockEntityRenderer;
 import net.minecraft.world.item.ItemDisplayContext;
 
-public class WissenCrystallizerTileEntityRenderer implements BlockEntityRenderer<WissenCrystallizerTileEntity> {
+public class WissenCrystallizerTileEntityRenderer implements BlockEntityRenderer<WissenCrystallizerBlockEntity> {
 
     public WissenCrystallizerTileEntityRenderer() {}
 
     @Override
-    public void render(WissenCrystallizerTileEntity crystallizer, float partialTicks, PoseStack ms, MultiBufferSource buffers, int light, int overlay) {
+    public void render(WissenCrystallizerBlockEntity crystallizer, float partialTicks, PoseStack ms, MultiBufferSource buffers, int light, int overlay) {
         Minecraft mc = Minecraft.getInstance();
 
         double ticks = (ClientTickHandler.ticksInGame + partialTicks) * 2;

@@ -1,7 +1,7 @@
 package mod.maxbogomol.wizards_reborn.client.gui.container;
 
 import mod.maxbogomol.wizards_reborn.WizardsReborn;
-import mod.maxbogomol.wizards_reborn.common.tileentity.ArcaneHopperTileEntity;
+import mod.maxbogomol.wizards_reborn.common.block.arcane_hopper.ArcaneHopperBlockEntity;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
@@ -36,7 +36,7 @@ public class ArcaneHopperContainer extends AbstractContainerMenu {
         this.playerInventory = new InvWrapper(playerInventory);
         this.layoutPlayerInventorySlots(8, 58);
 
-        if (tileEntity instanceof ArcaneHopperTileEntity hopperTile) {
+        if (tileEntity instanceof ArcaneHopperBlockEntity hopperTile) {
             hopperTile.startOpen(playerInventory.player);
             checkContainerSize(hopperTile, 5);
             int c = 0;
@@ -122,7 +122,7 @@ public class ArcaneHopperContainer extends AbstractContainerMenu {
     @Override
     public void removed(Player pPlayer) {
         super.removed(pPlayer);
-        if (tileEntity instanceof ArcaneHopperTileEntity hopperTile) {
+        if (tileEntity instanceof ArcaneHopperBlockEntity hopperTile) {
             hopperTile.stopOpen(playerEntity);
         }
     }

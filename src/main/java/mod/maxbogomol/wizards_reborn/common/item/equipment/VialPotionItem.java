@@ -9,7 +9,7 @@ import mod.maxbogomol.wizards_reborn.api.alchemy.AlchemyPotionUtils;
 import mod.maxbogomol.wizards_reborn.client.render.WorldRenderHandler;
 import mod.maxbogomol.wizards_reborn.client.render.fluid.FluidRenderer;
 import mod.maxbogomol.wizards_reborn.common.alchemypotion.FluidAlchemyPotion;
-import mod.maxbogomol.wizards_reborn.common.tileentity.PlacedItemsTileEntity;
+import mod.maxbogomol.wizards_reborn.common.block.placed_items.PlacedItemsBlockEntity;
 import mod.maxbogomol.wizards_reborn.utils.ColorUtils;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.RenderType;
@@ -35,7 +35,7 @@ public class VialPotionItem extends AlchemyPotionItem {
 
     @Override
     @OnlyIn(Dist.CLIENT)
-    public void renderPlacedItem(ItemStack stack, int rotation, float rotate, PlacedItemsTileEntity items, float partialTicks, PoseStack ms, MultiBufferSource buffers, int light, int overlay) {
+    public void renderPlacedItem(ItemStack stack, int rotation, float rotate, PlacedItemsBlockEntity items, float partialTicks, PoseStack ms, MultiBufferSource buffers, int light, int overlay) {
         ms.pushPose();
         ms.translate(0F, 0.0001F, 0F);
         ms.mulPose(Axis.YP.rotationDegrees((rotation * -22.5f) + rotate));

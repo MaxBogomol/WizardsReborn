@@ -1,10 +1,10 @@
 package mod.maxbogomol.wizards_reborn.common.item.equipment;
 
 import com.google.common.base.Preconditions;
+import mod.maxbogomol.fluffy_fur.common.item.ICustomBlockEntityDataItem;
 import mod.maxbogomol.wizards_reborn.WizardsReborn;
 import mod.maxbogomol.wizards_reborn.api.alchemy.AlchemyPotion;
 import mod.maxbogomol.wizards_reborn.api.alchemy.AlchemyPotionUtils;
-import mod.maxbogomol.wizards_reborn.common.item.ICustomBlockEntityDataItem;
 import mod.maxbogomol.wizards_reborn.common.item.PlacedItem;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;

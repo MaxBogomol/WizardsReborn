@@ -1,7 +1,7 @@
 package mod.maxbogomol.wizards_reborn.client.model.block;
 
 import mod.maxbogomol.wizards_reborn.WizardsReborn;
-import mod.maxbogomol.wizards_reborn.common.tileentity.PipeBaseTileEntity;
+import mod.maxbogomol.wizards_reborn.common.block.pipe.PipeBaseTileEntity;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.block.model.BakedQuad;
 import net.minecraft.client.renderer.block.model.ItemOverrides;
@@ -32,19 +32,28 @@ public class PipeModel implements BakedModel {
     @SuppressWarnings("unchecked")
     public final List<BakedQuad>[] QUAD_CACHE = new List[729];
 
+    public String modId;
+
     public PipeModel(BakedModel centerModel, String name) {
         this.name = name;
         this.centerModel = centerModel;
+        this.modId = WizardsReborn.MOD_ID;
+    }
+
+    public PipeModel(BakedModel centerModel, String name, String modId) {
+        this.name = name;
+        this.centerModel = centerModel;
+        this.modId = modId;
     }
 
     public void init(ModelManager manager) {
-        connectionModel = getRotatedModels(manager.getModelBakery(), name + "_connection");
-        endModel = getRotatedModels(manager.getModelBakery(), name + "_end");
+        connectionModel = getRotatedModels(manager.getModelBakery(), name + "_connection", modId);
+        endModel = getRotatedModels(manager.getModelBakery(), name + "_end", modId);
     }
 
-    public static BakedModel[] getRotatedModels(ModelBakery bakery, String name) {
-        ResourceLocation location = new ResourceLocation(WizardsReborn.MOD_ID, "block/" + name);
-        ResourceLocation location2 = new ResourceLocation(WizardsReborn.MOD_ID, "block/" + name + "_alt");
+    public static BakedModel[] getRotatedModels(ModelBakery bakery, String name, String modId) {
+        ResourceLocation location = new ResourceLocation(modId, "block/" + name);
+        ResourceLocation location2 = new ResourceLocation(modId, "block/" + name + "_alt");
 
         ModelBakerImpl bakerImpl = bakery.new ModelBakerImpl((modelLoc, material) -> material.sprite(), location);
 

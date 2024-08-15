@@ -1,16 +1,16 @@
 package mod.maxbogomol.wizards_reborn.common.spell.look;
 
+import mod.maxbogomol.fluffy_fur.client.animation.ItemAnimation;
 import mod.maxbogomol.wizards_reborn.WizardsReborn;
-import mod.maxbogomol.wizards_reborn.client.animation.ItemAnimation;
 import mod.maxbogomol.wizards_reborn.client.animation.StrikeSpellItemAnimation;
 import mod.maxbogomol.wizards_reborn.client.particle.Particles;
+import mod.maxbogomol.wizards_reborn.common.block.crystal.CrystalBlockEntity;
 import mod.maxbogomol.wizards_reborn.common.damage.DamageSourceRegistry;
 import mod.maxbogomol.wizards_reborn.common.item.CrystalItem;
 import mod.maxbogomol.wizards_reborn.common.item.equipment.ArcaneWandItem;
 import mod.maxbogomol.wizards_reborn.common.network.AddScreenshakePacket;
 import mod.maxbogomol.wizards_reborn.common.network.PacketHandler;
 import mod.maxbogomol.wizards_reborn.common.network.spell.CrystalCrushingSpellEffectPacket;
-import mod.maxbogomol.wizards_reborn.common.tileentity.CrystalTileEntity;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.sounds.SoundSource;
@@ -87,7 +87,7 @@ public class CrystalCrushingSpell extends LookSpell {
 
                 BlockPos blockPos = BlockPos.containing(X, Y, Z);
 
-                if (world.getBlockEntity(blockPos) instanceof CrystalTileEntity crystal) {
+                if (world.getBlockEntity(blockPos) instanceof CrystalBlockEntity crystal) {
                     Color color = getColor();
                     float r = color.getRed() / 255f;
                     float g = color.getGreen() / 255f;
@@ -142,7 +142,7 @@ public class CrystalCrushingSpell extends LookSpell {
         BlockEvent.BreakEvent breakEv = new BlockEvent.BreakEvent(world, blockPos, world.getBlockState(blockPos), player);
 
         if (!MinecraftForge.EVENT_BUS.post(breakEv)) {
-            if (world.getBlockEntity(blockPos) instanceof CrystalTileEntity crystal) {
+            if (world.getBlockEntity(blockPos) instanceof CrystalBlockEntity crystal) {
                 if (crystal.getCrystalItem().getItem() instanceof CrystalItem crystalItem) {
                     for (int i = 0; i < 3; i++) {
                         ItemStack fracturedCrystal = crystalItem.getType().getFracturedCrystal();

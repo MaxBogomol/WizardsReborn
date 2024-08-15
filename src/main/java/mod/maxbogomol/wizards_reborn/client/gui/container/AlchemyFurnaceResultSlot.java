@@ -1,11 +1,9 @@
 package mod.maxbogomol.wizards_reborn.client.gui.container;
 
-import mod.maxbogomol.wizards_reborn.common.tileentity.AlchemyFurnaceTileEntity;
+import mod.maxbogomol.wizards_reborn.common.block.alchemy_furnace.AlchemyFurnaceBlockEntity;
 import net.minecraft.server.level.ServerPlayer;
-import net.minecraft.world.Container;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.level.block.entity.AbstractFurnaceBlockEntity;
 import net.minecraftforge.items.IItemHandler;
 import net.minecraftforge.items.SlotItemHandler;
 
@@ -45,7 +43,7 @@ public class AlchemyFurnaceResultSlot extends SlotItemHandler {
         pStack.onCraftedBy(this.player.level(), this.player, this.removeCount);
         Player player = this.player;
         if (player instanceof ServerPlayer serverplayer) {
-            if (menu.tileEntity instanceof AlchemyFurnaceTileEntity furnace) {
+            if (menu.tileEntity instanceof AlchemyFurnaceBlockEntity furnace) {
                 furnace.popExperience(serverplayer);
             }
         }

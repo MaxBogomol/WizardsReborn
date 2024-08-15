@@ -1,7 +1,7 @@
 package mod.maxbogomol.wizards_reborn.client.integration.jade;
 
-import mod.maxbogomol.wizards_reborn.common.block.ArcanumGrowthBlock;
-import mod.maxbogomol.wizards_reborn.common.block.CrystalGrowthBlock;
+import mod.maxbogomol.wizards_reborn.common.block.arcanum_growth.ArcanumGrowthBlock;
+import mod.maxbogomol.wizards_reborn.common.block.crystal_growth.CrystalGrowthBlock;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.block.Block;

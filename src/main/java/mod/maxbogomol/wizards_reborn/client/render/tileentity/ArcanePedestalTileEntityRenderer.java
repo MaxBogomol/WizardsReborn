@@ -3,21 +3,19 @@ package mod.maxbogomol.wizards_reborn.client.render.tileentity;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.math.Axis;
 import mod.maxbogomol.wizards_reborn.client.event.ClientTickHandler;
-import mod.maxbogomol.wizards_reborn.common.tileentity.ArcanePedestalTileEntity;
+import mod.maxbogomol.wizards_reborn.common.block.arcane_pedestal.ArcanePedestalBlockEntity;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.MultiBufferSource;
-import net.minecraft.client.renderer.block.model.ItemTransforms;
 import net.minecraft.client.renderer.blockentity.BlockEntityRenderer;
 import net.minecraft.world.item.ItemDisplayContext;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.level.Level;
 
-public class ArcanePedestalTileEntityRenderer implements BlockEntityRenderer<ArcanePedestalTileEntity> {
+public class ArcanePedestalTileEntityRenderer implements BlockEntityRenderer<ArcanePedestalBlockEntity> {
 
     public ArcanePedestalTileEntityRenderer() {}
 
     @Override
-    public void render(ArcanePedestalTileEntity pedestal, float partialTicks, PoseStack ms, MultiBufferSource buffers, int light, int overlay) {
+    public void render(ArcanePedestalBlockEntity pedestal, float partialTicks, PoseStack ms, MultiBufferSource buffers, int light, int overlay) {
         double ticks = (ClientTickHandler.ticksInGame + partialTicks) * 2;
         double ticksUp = (ClientTickHandler.ticksInGame + partialTicks) * 4;
         ticksUp = (ticksUp) % 360;

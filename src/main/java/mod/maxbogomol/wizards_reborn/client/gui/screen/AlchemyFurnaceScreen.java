@@ -4,7 +4,7 @@ import com.mojang.blaze3d.systems.RenderSystem;
 import mod.maxbogomol.wizards_reborn.WizardsReborn;
 import mod.maxbogomol.wizards_reborn.client.config.ClientConfig;
 import mod.maxbogomol.wizards_reborn.client.gui.container.AlchemyFurnaceContainer;
-import mod.maxbogomol.wizards_reborn.common.tileentity.AlchemyFurnaceTileEntity;
+import mod.maxbogomol.wizards_reborn.common.block.alchemy_furnace.AlchemyFurnaceBlockEntity;
 import mod.maxbogomol.wizards_reborn.utils.ColorUtils;
 import mod.maxbogomol.wizards_reborn.utils.NumericalUtils;
 import net.minecraft.client.Minecraft;
@@ -46,7 +46,7 @@ public class AlchemyFurnaceScreen extends AbstractContainerScreen<AlchemyFurnace
         int j = this.topPos;
         gui.blit(GUI, i, j, 0, 0, this.imageWidth, this.imageHeight);
 
-        if (menu.tileEntity instanceof AlchemyFurnaceTileEntity furnace) {
+        if (menu.tileEntity instanceof AlchemyFurnaceBlockEntity furnace) {
             int width = 32;
             width /= (double) furnace.getFluidMaxAmount() / (double) furnace.getFluidAmount();
             gui.blit(GUI, i + 19, j + 60 - width, 176, 32 - width, 8, width, 256, 256);

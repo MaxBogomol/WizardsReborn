@@ -5,8 +5,8 @@ import com.mojang.math.Axis;
 import mod.maxbogomol.wizards_reborn.api.monogram.Monogram;
 import mod.maxbogomol.wizards_reborn.client.event.ClientTickHandler;
 import mod.maxbogomol.wizards_reborn.client.render.WorldRenderHandler;
-import mod.maxbogomol.wizards_reborn.common.block.EngravedWisestoneBlock;
-import mod.maxbogomol.wizards_reborn.common.tileentity.EngravedWisestoneTileEntity;
+import mod.maxbogomol.wizards_reborn.common.block.engraved_wisestone.EngravedWisestoneBlock;
+import mod.maxbogomol.wizards_reborn.common.block.engraved_wisestone.EngravedWisestoneBlockEntity;
 import mod.maxbogomol.wizards_reborn.utils.RenderUtils;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.MultiBufferSource;
@@ -18,12 +18,12 @@ import net.minecraft.world.phys.Vec3;
 import java.awt.*;
 import java.util.Random;
 
-public class EngravedWisestoneTileEntityRenderer implements BlockEntityRenderer<EngravedWisestoneTileEntity> {
+public class EngravedWisestoneTileEntityRenderer implements BlockEntityRenderer<EngravedWisestoneBlockEntity> {
 
     public EngravedWisestoneTileEntityRenderer() {}
 
     @Override
-    public void render(EngravedWisestoneTileEntity tile, float partialTicks, PoseStack ms, MultiBufferSource buffers, int light, int overlay) {
+    public void render(EngravedWisestoneBlockEntity tile, float partialTicks, PoseStack ms, MultiBufferSource buffers, int light, int overlay) {
         MultiBufferSource.BufferSource buffersource = WorldRenderHandler.getDelayedRender();
         float ticks = ClientTickHandler.ticksInGame + Minecraft.getInstance().getPartialTick() * 0.1f;
 
@@ -81,12 +81,12 @@ public class EngravedWisestoneTileEntityRenderer implements BlockEntityRenderer<
     }
 
     @Override
-    public boolean shouldRenderOffScreen(EngravedWisestoneTileEntity pBlockEntity) {
+    public boolean shouldRenderOffScreen(EngravedWisestoneBlockEntity pBlockEntity) {
         return true;
     }
 
     @Override
-    public boolean shouldRender(EngravedWisestoneTileEntity pBlockEntity, Vec3 pCameraPos) {
+    public boolean shouldRender(EngravedWisestoneBlockEntity pBlockEntity, Vec3 pCameraPos) {
         return true;
     }
 }

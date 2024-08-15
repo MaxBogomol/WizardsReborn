@@ -1,12 +1,12 @@
 package mod.maxbogomol.wizards_reborn.common.item.equipment;
 
 import com.mojang.blaze3d.vertex.PoseStack;
+import mod.maxbogomol.fluffy_fur.common.item.IGuiParticleItem;
 import mod.maxbogomol.wizards_reborn.WizardsReborn;
 import mod.maxbogomol.wizards_reborn.api.crystalritual.CrystalRitual;
 import mod.maxbogomol.wizards_reborn.api.crystalritual.CrystalRitualUtils;
 import mod.maxbogomol.wizards_reborn.api.crystalritual.CrystalRituals;
 import mod.maxbogomol.wizards_reborn.client.event.ClientTickHandler;
-import mod.maxbogomol.wizards_reborn.common.item.IGuiParticleItem;
 import mod.maxbogomol.wizards_reborn.utils.ColorUtils;
 import mod.maxbogomol.wizards_reborn.utils.RenderUtils;
 import net.minecraft.client.Minecraft;

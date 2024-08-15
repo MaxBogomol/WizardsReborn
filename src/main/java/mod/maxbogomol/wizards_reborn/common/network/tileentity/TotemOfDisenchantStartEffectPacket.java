@@ -4,7 +4,7 @@ import mod.maxbogomol.wizards_reborn.WizardsReborn;
 import mod.maxbogomol.wizards_reborn.api.arcaneenchantment.ArcaneEnchantment;
 import mod.maxbogomol.wizards_reborn.api.arcaneenchantment.ArcaneEnchantmentUtils;
 import mod.maxbogomol.wizards_reborn.client.sound.TotemOfDisenchantSoundInstance;
-import mod.maxbogomol.wizards_reborn.common.tileentity.TotemOfDisenchantTileEntity;
+import mod.maxbogomol.wizards_reborn.common.block.totem.disenchant.TotemOfDisenchantBlockEntity;
 import mod.maxbogomol.wizards_reborn.utils.PacketUtils;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
@@ -108,7 +108,7 @@ public class TotemOfDisenchantStartEffectPacket {
                 ServerPlayer player = ctx.get().getSender();
                 ServerLevel level = player.serverLevel();
 
-                if (level.getBlockEntity(msg.pos) instanceof TotemOfDisenchantTileEntity totem) {
+                if (level.getBlockEntity(msg.pos) instanceof TotemOfDisenchantBlockEntity totem) {
                     totem.isStart = true;
                     totem.cooldown = 200;
                     totem.enchantment = msg.enchantment.getString();

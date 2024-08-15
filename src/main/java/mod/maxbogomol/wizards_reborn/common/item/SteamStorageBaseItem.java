@@ -1,5 +1,6 @@
 package mod.maxbogomol.wizards_reborn.common.item;
 
+import mod.maxbogomol.fluffy_fur.common.item.ICustomBlockEntityDataItem;
 import mod.maxbogomol.wizards_reborn.api.alchemy.ISteamItem;
 import mod.maxbogomol.wizards_reborn.api.alchemy.ISteamTileEntity;
 import mod.maxbogomol.wizards_reborn.client.config.ClientConfig;

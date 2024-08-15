@@ -6,8 +6,8 @@ import mod.maxbogomol.wizards_reborn.client.event.ClientTickHandler;
 import mod.maxbogomol.wizards_reborn.client.render.WorldRenderHandler;
 import mod.maxbogomol.wizards_reborn.client.render.fluid.FluidCuboid;
 import mod.maxbogomol.wizards_reborn.client.render.fluid.FluidRenderer;
-import mod.maxbogomol.wizards_reborn.common.block.SensorBaseBlock;
-import mod.maxbogomol.wizards_reborn.common.tileentity.FluidSensorTileEntity;
+import mod.maxbogomol.wizards_reborn.common.block.sensor.SensorBaseBlock;
+import mod.maxbogomol.wizards_reborn.common.block.sensor.fluid.FluidSensorBlockEntity;
 import mod.maxbogomol.wizards_reborn.utils.RenderUtils;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.blockentity.BlockEntityRenderer;
@@ -16,14 +16,14 @@ import org.joml.Vector3f;
 
 import java.util.Random;
 
-public class FluidSensorTileEntityRenderer implements BlockEntityRenderer<FluidSensorTileEntity> {
+public class FluidSensorTileEntityRenderer implements BlockEntityRenderer<FluidSensorBlockEntity> {
 
     FluidCuboid CUBE = new FluidCuboid(new Vector3f(0, 0, 0), new Vector3f(1, 1, 1), FluidCuboid.DEFAULT_FACES);
 
     public FluidSensorTileEntityRenderer() {}
 
     @Override
-    public void render(FluidSensorTileEntity sensor, float partialTicks, PoseStack ms, MultiBufferSource buffers, int light, int overlay) {
+    public void render(FluidSensorBlockEntity sensor, float partialTicks, PoseStack ms, MultiBufferSource buffers, int light, int overlay) {
         Random random = new Random();
         random.setSeed(sensor.getBlockPos().asLong());
 

@@ -2,6 +2,8 @@ package mod.maxbogomol.wizards_reborn.common.item;
 
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.math.Axis;
+import mod.maxbogomol.fluffy_fur.common.item.IGuiParticleItem;
+import mod.maxbogomol.fluffy_fur.common.item.IParticleItem;
 import mod.maxbogomol.wizards_reborn.WizardsReborn;
 import mod.maxbogomol.wizards_reborn.client.event.ClientTickHandler;
 import mod.maxbogomol.wizards_reborn.client.particle.Particles;

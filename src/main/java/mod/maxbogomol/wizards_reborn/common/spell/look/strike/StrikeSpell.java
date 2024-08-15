@@ -2,8 +2,8 @@ package mod.maxbogomol.wizards_reborn.common.spell.look.strike;
 
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.math.Axis;
+import mod.maxbogomol.fluffy_fur.client.animation.ItemAnimation;
 import mod.maxbogomol.wizards_reborn.WizardsReborn;
-import mod.maxbogomol.wizards_reborn.client.animation.ItemAnimation;
 import mod.maxbogomol.wizards_reborn.client.animation.StrikeSpellItemAnimation;
 import mod.maxbogomol.wizards_reborn.client.particle.Particles;
 import mod.maxbogomol.wizards_reborn.client.render.WorldRenderHandler;

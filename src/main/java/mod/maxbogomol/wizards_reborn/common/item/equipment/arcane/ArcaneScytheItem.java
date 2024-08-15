@@ -1,14 +1,14 @@
 package mod.maxbogomol.wizards_reborn.common.item.equipment.arcane;
 
+import mod.maxbogomol.fluffy_fur.client.animation.ItemAnimation;
+import mod.maxbogomol.fluffy_fur.common.item.ICustomAnimationItem;
 import mod.maxbogomol.wizards_reborn.WizardsReborn;
 import mod.maxbogomol.wizards_reborn.api.arcaneenchantment.ArcaneEnchantmentType;
 import mod.maxbogomol.wizards_reborn.api.arcaneenchantment.ArcaneEnchantmentUtils;
 import mod.maxbogomol.wizards_reborn.api.arcaneenchantment.IArcaneItem;
 import mod.maxbogomol.wizards_reborn.api.skin.Skin;
 import mod.maxbogomol.wizards_reborn.api.wissen.WissenUtils;
-import mod.maxbogomol.wizards_reborn.client.animation.ItemAnimation;
 import mod.maxbogomol.wizards_reborn.common.arcaneenchantment.ThrowArcaneEnchantment;
-import mod.maxbogomol.wizards_reborn.common.item.ICustomAnimationItem;
 import mod.maxbogomol.wizards_reborn.common.item.equipment.ScytheItem;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.InteractionHand;

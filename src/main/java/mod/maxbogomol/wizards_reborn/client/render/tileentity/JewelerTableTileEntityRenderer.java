@@ -4,7 +4,7 @@ import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.math.Axis;
 import mod.maxbogomol.wizards_reborn.WizardsRebornClient;
 import mod.maxbogomol.wizards_reborn.client.event.ClientTickHandler;
-import mod.maxbogomol.wizards_reborn.common.tileentity.JewelerTableTileEntity;
+import mod.maxbogomol.wizards_reborn.common.block.jeweler_table.JewelerTableBlockEntity;
 import mod.maxbogomol.wizards_reborn.utils.RenderUtils;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.MultiBufferSource;
@@ -12,12 +12,12 @@ import net.minecraft.client.renderer.blockentity.BlockEntityRenderer;
 import net.minecraft.world.item.ItemDisplayContext;
 import net.minecraft.world.phys.Vec3;
 
-public class JewelerTableTileEntityRenderer implements BlockEntityRenderer<JewelerTableTileEntity> {
+public class JewelerTableTileEntityRenderer implements BlockEntityRenderer<JewelerTableBlockEntity> {
 
     public JewelerTableTileEntityRenderer() {}
 
     @Override
-    public void render(JewelerTableTileEntity table, float partialTicks, PoseStack ms, MultiBufferSource buffers, int light, int overlay) {
+    public void render(JewelerTableBlockEntity table, float partialTicks, PoseStack ms, MultiBufferSource buffers, int light, int overlay) {
         Minecraft mc = Minecraft.getInstance();
         Vec3 pos = table.getBlockRotatePos();
         double ticks = (ClientTickHandler.ticksInGame + partialTicks) * 2;

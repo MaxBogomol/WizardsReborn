@@ -3,20 +3,18 @@ package mod.maxbogomol.wizards_reborn.client.render.tileentity;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.math.Axis;
 import mod.maxbogomol.wizards_reborn.client.event.ClientTickHandler;
-import mod.maxbogomol.wizards_reborn.common.tileentity.ArcaneWorkbenchTileEntity;
+import mod.maxbogomol.wizards_reborn.common.block.arcane_workbench.ArcaneWorkbenchBlockEntity;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.MultiBufferSource;
-import net.minecraft.client.renderer.block.model.ItemTransforms;
 import net.minecraft.client.renderer.blockentity.BlockEntityRenderer;
-import net.minecraft.client.renderer.blockentity.BlockEntityRenderDispatcher;
 import net.minecraft.world.item.ItemDisplayContext;
 
-public class ArcaneWorkbenchTileEntityRenderer implements BlockEntityRenderer<ArcaneWorkbenchTileEntity> {
+public class ArcaneWorkbenchTileEntityRenderer implements BlockEntityRenderer<ArcaneWorkbenchBlockEntity> {
 
     public ArcaneWorkbenchTileEntityRenderer() {}
 
     @Override
-    public void render(ArcaneWorkbenchTileEntity workbench, float partialTicks, PoseStack ms, MultiBufferSource buffers, int light, int overlay) {
+    public void render(ArcaneWorkbenchBlockEntity workbench, float partialTicks, PoseStack ms, MultiBufferSource buffers, int light, int overlay) {
         Minecraft mc = Minecraft.getInstance();
 
         double ticks = (ClientTickHandler.ticksInGame + partialTicks) * 2;

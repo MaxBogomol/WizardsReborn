@@ -4,8 +4,8 @@ import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.math.Axis;
 import mod.maxbogomol.wizards_reborn.api.wissen.WissenUtils;
 import mod.maxbogomol.wizards_reborn.client.event.ClientTickHandler;
-import mod.maxbogomol.wizards_reborn.common.block.SensorBaseBlock;
-import mod.maxbogomol.wizards_reborn.common.tileentity.ItemSorterTileEntity;
+import mod.maxbogomol.wizards_reborn.common.block.sensor.SensorBaseBlock;
+import mod.maxbogomol.wizards_reborn.common.block.sensor.item_sorter.ItemSorterBlockEntity;
 import mod.maxbogomol.wizards_reborn.utils.RenderUtils;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.blockentity.BlockEntityRenderer;
@@ -16,12 +16,12 @@ import net.minecraft.world.phys.Vec3;
 
 import java.util.Random;
 
-public class ItemSorterTileEntityRenderer implements BlockEntityRenderer<ItemSorterTileEntity> {
+public class ItemSorterTileEntityRenderer implements BlockEntityRenderer<ItemSorterBlockEntity> {
 
     public ItemSorterTileEntityRenderer() {}
 
     @Override
-    public void render(ItemSorterTileEntity sensor, float partialTicks, PoseStack ms, MultiBufferSource buffers, int light, int overlay) {
+    public void render(ItemSorterBlockEntity sensor, float partialTicks, PoseStack ms, MultiBufferSource buffers, int light, int overlay) {
         Random random = new Random();
         random.setSeed(sensor.getBlockPos().asLong());
 

@@ -2,18 +2,18 @@ package mod.maxbogomol.wizards_reborn.client.render.tileentity;
 
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.math.Axis;
-import mod.maxbogomol.wizards_reborn.common.tileentity.WissenCellTileEntity;
+import mod.maxbogomol.wizards_reborn.common.block.wissen_cell.WissenCellBlockEntity;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.blockentity.BlockEntityRenderer;
 import net.minecraft.world.item.ItemDisplayContext;
 
-public class WissenCellTileEntityRenderer implements BlockEntityRenderer<WissenCellTileEntity> {
+public class WissenCellTileEntityRenderer implements BlockEntityRenderer<WissenCellBlockEntity> {
 
     public WissenCellTileEntityRenderer() {}
 
     @Override
-    public void render(WissenCellTileEntity cell, float partialTicks, PoseStack ms, MultiBufferSource buffers, int light, int overlay) {
+    public void render(WissenCellBlockEntity cell, float partialTicks, PoseStack ms, MultiBufferSource buffers, int light, int overlay) {
         Minecraft mc = Minecraft.getInstance();
 
         ms.pushPose();

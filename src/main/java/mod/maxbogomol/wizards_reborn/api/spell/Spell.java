@@ -1,6 +1,7 @@
 package mod.maxbogomol.wizards_reborn.api.spell;
 
 import com.mojang.blaze3d.vertex.PoseStack;
+import mod.maxbogomol.fluffy_fur.client.animation.ItemAnimation;
 import mod.maxbogomol.wizards_reborn.WizardsReborn;
 import mod.maxbogomol.wizards_reborn.api.crystal.CrystalType;
 import mod.maxbogomol.wizards_reborn.api.crystal.CrystalUtils;
@@ -8,7 +9,6 @@ import mod.maxbogomol.wizards_reborn.api.crystal.Crystals;
 import mod.maxbogomol.wizards_reborn.api.knowledge.Research;
 import mod.maxbogomol.wizards_reborn.api.wissen.WissenItemUtils;
 import mod.maxbogomol.wizards_reborn.api.wissen.WissenUtils;
-import mod.maxbogomol.wizards_reborn.client.animation.ItemAnimation;
 import mod.maxbogomol.wizards_reborn.common.entity.SpellProjectileEntity;
 import mod.maxbogomol.wizards_reborn.common.item.CrystalItem;
 import mod.maxbogomol.wizards_reborn.common.item.equipment.ArcaneWandItem;

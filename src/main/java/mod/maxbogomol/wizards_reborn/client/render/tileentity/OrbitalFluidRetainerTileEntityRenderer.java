@@ -6,7 +6,7 @@ import mod.maxbogomol.wizards_reborn.client.event.ClientTickHandler;
 import mod.maxbogomol.wizards_reborn.client.render.WorldRenderHandler;
 import mod.maxbogomol.wizards_reborn.client.render.fluid.FluidCuboid;
 import mod.maxbogomol.wizards_reborn.client.render.fluid.FluidRenderer;
-import mod.maxbogomol.wizards_reborn.common.tileentity.OrbitalFluidRetainerTileEntity;
+import mod.maxbogomol.wizards_reborn.common.block.orbital_fluid_retainer.OrbitalFluidRetainerTileEntity;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.blockentity.BlockEntityRenderer;
 import net.minecraft.util.Mth;

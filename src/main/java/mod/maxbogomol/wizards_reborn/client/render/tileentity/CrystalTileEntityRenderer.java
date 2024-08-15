@@ -12,7 +12,7 @@ import mod.maxbogomol.wizards_reborn.api.wissen.WissenUtils;
 import mod.maxbogomol.wizards_reborn.client.event.ClientTickHandler;
 import mod.maxbogomol.wizards_reborn.client.render.WorldRenderHandler;
 import mod.maxbogomol.wizards_reborn.common.item.CrystalItem;
-import mod.maxbogomol.wizards_reborn.common.tileentity.CrystalTileEntity;
+import mod.maxbogomol.wizards_reborn.common.block.crystal.CrystalBlockEntity;
 import mod.maxbogomol.wizards_reborn.utils.RenderUtils;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.blockentity.BlockEntityRenderer;
@@ -22,12 +22,12 @@ import net.minecraft.world.phys.Vec3;
 import java.awt.*;
 import java.util.Random;
 
-public class CrystalTileEntityRenderer implements BlockEntityRenderer<CrystalTileEntity> {
+public class CrystalTileEntityRenderer implements BlockEntityRenderer<CrystalBlockEntity> {
 
     public CrystalTileEntityRenderer() {}
 
     @Override
-    public void render(CrystalTileEntity crystal, float partialTicks, PoseStack ms, MultiBufferSource buffers, int light, int overlay) {
+    public void render(CrystalBlockEntity crystal, float partialTicks, PoseStack ms, MultiBufferSource buffers, int light, int overlay) {
         Random random = new Random();
         random.setSeed(crystal.getBlockPos().asLong());
 
@@ -118,12 +118,12 @@ public class CrystalTileEntityRenderer implements BlockEntityRenderer<CrystalTil
     }
 
     @Override
-    public boolean shouldRenderOffScreen(CrystalTileEntity pBlockEntity) {
+    public boolean shouldRenderOffScreen(CrystalBlockEntity pBlockEntity) {
         return true;
     }
 
     @Override
-    public boolean shouldRender(CrystalTileEntity pBlockEntity, Vec3 pCameraPos) {
+    public boolean shouldRender(CrystalBlockEntity pBlockEntity, Vec3 pCameraPos) {
         return true;
     }
 }

@@ -8,7 +8,7 @@ import mod.maxbogomol.wizards_reborn.api.light.LightUtils;
 import mod.maxbogomol.wizards_reborn.api.wissen.WissenUtils;
 import mod.maxbogomol.wizards_reborn.client.event.ClientTickHandler;
 import mod.maxbogomol.wizards_reborn.client.render.WorldRenderHandler;
-import mod.maxbogomol.wizards_reborn.common.tileentity.LightEmitterTileEntity;
+import mod.maxbogomol.wizards_reborn.common.block.light_emitter.LightEmitterBlockEntity;
 import mod.maxbogomol.wizards_reborn.utils.RenderUtils;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.blockentity.BlockEntityRenderer;
@@ -19,12 +19,12 @@ import net.minecraft.world.phys.Vec3;
 import java.awt.*;
 import java.util.Random;
 
-public class LightEmitterBlockTileEntityRenderer implements BlockEntityRenderer<LightEmitterTileEntity> {
+public class LightEmitterBlockTileEntityRenderer implements BlockEntityRenderer<LightEmitterBlockEntity> {
 
     public LightEmitterBlockTileEntityRenderer() {}
 
     @Override
-    public void render(LightEmitterTileEntity emitter, float partialTicks, PoseStack ms, MultiBufferSource buffers, int light, int overlay) {
+    public void render(LightEmitterBlockEntity emitter, float partialTicks, PoseStack ms, MultiBufferSource buffers, int light, int overlay) {
         Random random = new Random();
         random.setSeed(emitter.getBlockPos().asLong());
 
@@ -73,12 +73,12 @@ public class LightEmitterBlockTileEntityRenderer implements BlockEntityRenderer<
     }
 
     @Override
-    public boolean shouldRenderOffScreen(LightEmitterTileEntity pBlockEntity) {
+    public boolean shouldRenderOffScreen(LightEmitterBlockEntity pBlockEntity) {
         return true;
     }
 
     @Override
-    public boolean shouldRender(LightEmitterTileEntity pBlockEntity, Vec3 pCameraPos) {
+    public boolean shouldRender(LightEmitterBlockEntity pBlockEntity, Vec3 pCameraPos) {
         return true;
     }
 }

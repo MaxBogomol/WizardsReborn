@@ -5,7 +5,7 @@ import com.mojang.blaze3d.systems.RenderSystem;
 import mod.maxbogomol.wizards_reborn.WizardsReborn;
 import mod.maxbogomol.wizards_reborn.client.event.ClientTickHandler;
 import mod.maxbogomol.wizards_reborn.client.gui.container.RunicPedestalContainer;
-import mod.maxbogomol.wizards_reborn.common.tileentity.RunicPedestalTileEntity;
+import mod.maxbogomol.wizards_reborn.common.block.runic_pedestal.RunicPedestalBlockEntity;
 import mod.maxbogomol.wizards_reborn.utils.ColorUtils;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
@@ -46,7 +46,7 @@ public class RunicPedestalScreen extends AbstractContainerScreen<RunicPedestalCo
         int j = this.topPos;
         gui.blit(GUI, i, j, 0, 0, this.imageWidth, this.imageHeight);
 
-        if (menu.tileEntity instanceof RunicPedestalTileEntity table) {
+        if (menu.tileEntity instanceof RunicPedestalBlockEntity table) {
             if (menu.tileEntity.getBlockState().getValue(BlockStateProperties.LIT)) {
                 gui.blit(GUI, i + 72, j + 22, 176, 0, 32, 32);
 

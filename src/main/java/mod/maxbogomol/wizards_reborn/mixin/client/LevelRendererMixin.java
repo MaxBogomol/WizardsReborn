@@ -34,14 +34,4 @@ public abstract class LevelRendererMixin {
             }
         }
     }
-
-    /*@Inject(at = @At("HEAD"), method = "addParticleInternal", cancellable = true)
-    public void addParticleInternal(ParticleOptions pOptions, boolean pForce, boolean pDecreased, double pX, double pY, double pZ, double pXSpeed, double pYSpeed, double pZSpeed, CallbackInfoReturnable<Particle> ci) {
-        if (pOptions instanceof GenericParticleData) {
-            //Camera camera = Minecraft.getInstance().gameRenderer.getMainCamera();
-            //if (camera.getPosition().distanceToSqr(pX, pY, pZ) > 5120.0D) {
-                ci.setReturnValue(null);
-            //}
-        }
-    }*/
 }

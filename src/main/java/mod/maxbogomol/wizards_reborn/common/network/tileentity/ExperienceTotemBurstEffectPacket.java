@@ -1,8 +1,8 @@
 package mod.maxbogomol.wizards_reborn.common.network.tileentity;
 
 import mod.maxbogomol.wizards_reborn.WizardsReborn;
-import mod.maxbogomol.wizards_reborn.common.tileentity.ExperienceTotemTileEntity;
-import mod.maxbogomol.wizards_reborn.common.tileentity.TotemOfExperienceAbsorptionTileEntity;
+import mod.maxbogomol.wizards_reborn.common.block.totem.experience_absorption.TotemOfExperienceAbsorptionBlockEntity;
+import mod.maxbogomol.wizards_reborn.common.block.totem.experience_totem.ExperienceTotemBlockEntity;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.world.level.Level;
@@ -53,10 +53,10 @@ public class ExperienceTotemBurstEffectPacket {
                 public void run() {
                     Level world = WizardsReborn.proxy.getWorld();
 
-                    if (world.getBlockEntity(msg.pos) instanceof ExperienceTotemTileEntity totem) {
+                    if (world.getBlockEntity(msg.pos) instanceof ExperienceTotemBlockEntity totem) {
                         totem.addBurst(new Vec3(msg.X, msg.Y, msg.Z), msg.pos.getCenter());
                     }
-                    if (world.getBlockEntity(msg.pos) instanceof TotemOfExperienceAbsorptionTileEntity totem) {
+                    if (world.getBlockEntity(msg.pos) instanceof TotemOfExperienceAbsorptionBlockEntity totem) {
                         totem.addBurst(new Vec3(msg.X, msg.Y, msg.Z), msg.pos.getCenter());
                     }
 

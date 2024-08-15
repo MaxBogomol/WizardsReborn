@@ -2,18 +2,18 @@ package mod.maxbogomol.wizards_reborn.client.render.tileentity;
 
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.math.Axis;
-import mod.maxbogomol.wizards_reborn.common.tileentity.CreativeWissenStorageTileEntity;
+import mod.maxbogomol.wizards_reborn.common.block.creative.wissen_storage.CreativeWissenStorageBlockEntity;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.blockentity.BlockEntityRenderer;
 import net.minecraft.world.item.ItemDisplayContext;
 
-public class CreativeWissenStorageTileEntityRenderer implements BlockEntityRenderer<CreativeWissenStorageTileEntity> {
+public class CreativeWissenStorageTileEntityRenderer implements BlockEntityRenderer<CreativeWissenStorageBlockEntity> {
 
     public CreativeWissenStorageTileEntityRenderer() {}
 
     @Override
-    public void render(CreativeWissenStorageTileEntity cell, float partialTicks, PoseStack ms, MultiBufferSource buffers, int light, int overlay) {
+    public void render(CreativeWissenStorageBlockEntity cell, float partialTicks, PoseStack ms, MultiBufferSource buffers, int light, int overlay) {
         Minecraft mc = Minecraft.getInstance();
 
         ms.pushPose();

@@ -3,19 +3,19 @@ package mod.maxbogomol.wizards_reborn.client.render.tileentity;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.math.Axis;
 import mod.maxbogomol.wizards_reborn.client.event.ClientTickHandler;
-import mod.maxbogomol.wizards_reborn.common.tileentity.TotemOfDisenchantTileEntity;
+import mod.maxbogomol.wizards_reborn.common.block.totem.disenchant.TotemOfDisenchantBlockEntity;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.blockentity.BlockEntityRenderer;
 import net.minecraft.world.item.ItemDisplayContext;
 import net.minecraft.world.item.ItemStack;
 
-public class TotemOfDisenchantTileEntityRenderer implements BlockEntityRenderer<TotemOfDisenchantTileEntity> {
+public class TotemOfDisenchantTileEntityRenderer implements BlockEntityRenderer<TotemOfDisenchantBlockEntity> {
 
     public TotemOfDisenchantTileEntityRenderer() {}
 
     @Override
-    public void render(TotemOfDisenchantTileEntity totem, float partialTicks, PoseStack ms, MultiBufferSource buffers, int light, int overlay) {
+    public void render(TotemOfDisenchantBlockEntity totem, float partialTicks, PoseStack ms, MultiBufferSource buffers, int light, int overlay) {
         double ticks = (ClientTickHandler.ticksInGame + partialTicks) / 2;
         double ticksUp = (ClientTickHandler.ticksInGame + partialTicks);
         ticksUp = (ticksUp) % 360;

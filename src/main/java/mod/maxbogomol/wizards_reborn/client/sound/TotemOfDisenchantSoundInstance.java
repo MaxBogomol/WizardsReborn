@@ -1,11 +1,11 @@
 package mod.maxbogomol.wizards_reborn.client.sound;
 
 import mod.maxbogomol.wizards_reborn.WizardsReborn;
-import mod.maxbogomol.wizards_reborn.common.tileentity.TotemOfDisenchantTileEntity;
+import mod.maxbogomol.wizards_reborn.common.block.totem.disenchant.TotemOfDisenchantBlockEntity;
 import net.minecraft.client.Minecraft;
 
-public class TotemOfDisenchantSoundInstance extends TileEntitySoundInstance<TotemOfDisenchantTileEntity> {
-    public TotemOfDisenchantSoundInstance(TotemOfDisenchantTileEntity blockEntity, float volume, float pitch) {
+public class TotemOfDisenchantSoundInstance extends TileEntitySoundInstance<TotemOfDisenchantBlockEntity> {
+    public TotemOfDisenchantSoundInstance(TotemOfDisenchantBlockEntity blockEntity, float volume, float pitch) {
         super(blockEntity, WizardsReborn.TOTEM_OF_DISENCHANT_LOOP_SOUND.get(), volume, pitch);
         this.x = blockEntity.getBlockPos().getX() + 0.5f;
         this.y = blockEntity.getBlockPos().getY() + 0.5f;
@@ -20,7 +20,7 @@ public class TotemOfDisenchantSoundInstance extends TileEntitySoundInstance<Tote
         super.tick();
     }
 
-    public static void playSound(TotemOfDisenchantTileEntity tileEntity) {
+    public static void playSound(TotemOfDisenchantBlockEntity tileEntity) {
         Minecraft.getInstance().getSoundManager().queueTickingSound(new TotemOfDisenchantSoundInstance(tileEntity, 1, 1));
     }
 }

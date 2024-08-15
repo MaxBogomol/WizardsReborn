@@ -1,13 +1,13 @@
 package mod.maxbogomol.wizards_reborn.common.arcaneenchantment;
 
 import com.google.common.collect.Multimap;
+import mod.maxbogomol.fluffy_fur.client.animation.ItemAnimation;
 import mod.maxbogomol.wizards_reborn.WizardsReborn;
 import mod.maxbogomol.wizards_reborn.api.arcaneenchantment.ArcaneEnchantment;
 import mod.maxbogomol.wizards_reborn.api.arcaneenchantment.ArcaneEnchantmentType;
 import mod.maxbogomol.wizards_reborn.api.arcaneenchantment.ArcaneEnchantmentUtils;
 import mod.maxbogomol.wizards_reborn.api.arcaneenchantment.IArcaneItem;
 import mod.maxbogomol.wizards_reborn.api.wissen.WissenUtils;
-import mod.maxbogomol.wizards_reborn.client.animation.ItemAnimation;
 import mod.maxbogomol.wizards_reborn.client.animation.ScytheThrowItemAnimation;
 import mod.maxbogomol.wizards_reborn.common.entity.ThrowedScytheEntity;
 import net.minecraft.stats.Stats;

@@ -7,7 +7,7 @@ import mod.maxbogomol.wizards_reborn.api.light.ILightTileEntity;
 import mod.maxbogomol.wizards_reborn.api.wissen.ICooldownTileEntity;
 import mod.maxbogomol.wizards_reborn.api.wissen.IExperienceTileEntity;
 import mod.maxbogomol.wizards_reborn.api.wissen.IWissenTileEntity;
-import mod.maxbogomol.wizards_reborn.common.tileentity.AlchemyMachineTileEntity;
+import mod.maxbogomol.wizards_reborn.common.block.alchemy_machine.AlchemyMachineBlockEntity;
 import mod.maxbogomol.wizards_reborn.utils.NumericalUtils;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
@@ -48,7 +48,7 @@ public enum NumericalProvider implements IBlockComponentProvider {
         if (tile instanceof ISteamTileEntity steamTile) {
             tooltip.add(NumericalUtils.getSteamName(steamTile.getSteam(), steamTile.getMaxSteam()));
         }
-        if (tile instanceof AlchemyMachineTileEntity machine) {
+        if (tile instanceof AlchemyMachineBlockEntity machine) {
             for (int i = 0; i <= 2; i++) {
                 tooltip.add(NumericalUtils.getFluidName(machine.getFluidStack(i), machine.getMaxCapacity()));
             }

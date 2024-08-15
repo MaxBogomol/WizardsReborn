@@ -9,11 +9,11 @@ import mod.maxbogomol.wizards_reborn.api.crystalritual.CrystalRitualArea;
 import mod.maxbogomol.wizards_reborn.client.event.ClientTickHandler;
 import mod.maxbogomol.wizards_reborn.client.particle.Particles;
 import mod.maxbogomol.wizards_reborn.client.render.WorldRenderHandler;
+import mod.maxbogomol.wizards_reborn.common.block.arcane_pedestal.ArcanePedestalBlockEntity;
 import mod.maxbogomol.wizards_reborn.common.network.PacketHandler;
 import mod.maxbogomol.wizards_reborn.common.network.crystalritual.CrystalInfusionBurstEffectPacket;
 import mod.maxbogomol.wizards_reborn.common.recipe.CrystalInfusionRecipe;
-import mod.maxbogomol.wizards_reborn.common.tileentity.ArcanePedestalTileEntity;
-import mod.maxbogomol.wizards_reborn.common.tileentity.CrystalTileEntity;
+import mod.maxbogomol.wizards_reborn.common.block.crystal.CrystalBlockEntity;
 import mod.maxbogomol.wizards_reborn.utils.RenderUtils;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.MultiBufferSource;
@@ -47,12 +47,12 @@ public class CrystalInfusionCrystalRitual extends CrystalRitual {
     }
 
     @Override
-    public CrystalRitualArea getArea(CrystalTileEntity crystal) {
+    public CrystalRitualArea getArea(CrystalBlockEntity crystal) {
         return new CrystalRitualArea(4, 4, 4, 4, 4, 4);
     }
 
     @Override
-    public boolean canStart(CrystalTileEntity crystal) {
+    public boolean canStart(CrystalBlockEntity crystal) {
         if (!crystal.getLevel().isClientSide()) {
             Optional<CrystalInfusionRecipe> recipe = getRecipe(crystal);
             return recipe.isPresent();
@@ -62,7 +62,7 @@ public class CrystalInfusionCrystalRitual extends CrystalRitual {
     }
 
     @Override
-    public void start(CrystalTileEntity crystal) {
+    public void start(CrystalBlockEntity crystal) {
         Level level = crystal.getLevel();
         BlockPos blockPos = crystal.getBlockPos();
 
@@ -77,7 +77,7 @@ public class CrystalInfusionCrystalRitual extends CrystalRitual {
                 setCooldown(crystal, getMaxCooldown(crystal));
 
                 CrystalRitualArea area = getArea(crystal);
-                List<ArcanePedestalTileEntity> pedestals = getPedestalsWithArea(level, crystal.getBlockPos(), area);
+                List<ArcanePedestalBlockEntity> pedestals = getPedestalsWithArea(level, crystal.getBlockPos(), area);
                 List<ItemStack> items = getItemsFromPedestals(pedestals);
                 Container container = getItemHandler(crystal);
                 if (container != null) {
@@ -92,7 +92,7 @@ public class CrystalInfusionCrystalRitual extends CrystalRitual {
     }
 
     @Override
-    public void tick(CrystalTileEntity crystal) {
+    public void tick(CrystalBlockEntity crystal) {
         Level level = crystal.getLevel();
         BlockPos blockPos = crystal.getBlockPos();
 
@@ -211,7 +211,7 @@ public class CrystalInfusionCrystalRitual extends CrystalRitual {
     }
 
     @Override
-    public boolean canEnd(CrystalTileEntity crystal) {
+    public boolean canEnd(CrystalBlockEntity crystal) {
         Level level = crystal.getLevel();
 
         if (!level.isClientSide()) {
@@ -229,7 +229,7 @@ public class CrystalInfusionCrystalRitual extends CrystalRitual {
     }
 
     @Override
-    public void end(CrystalTileEntity crystal) {
+    public void end(CrystalBlockEntity crystal) {
         Level level = crystal.getLevel();
         BlockPos blockPos = crystal.getBlockPos();
 
@@ -245,7 +245,7 @@ public class CrystalInfusionCrystalRitual extends CrystalRitual {
         }
     }
 
-    public Optional<CrystalInfusionRecipe> getRecipe(CrystalTileEntity crystal, List<ItemStack> items) {
+    public Optional<CrystalInfusionRecipe> getRecipe(CrystalBlockEntity crystal, List<ItemStack> items) {
         Level level = crystal.getLevel();
         SimpleContainer inv = new SimpleContainer(items.size());
         for (int i = 0; i < items.size(); i++) {
@@ -256,17 +256,17 @@ public class CrystalInfusionCrystalRitual extends CrystalRitual {
         return recipe;
     }
 
-    public Optional<CrystalInfusionRecipe> getRecipe(CrystalTileEntity crystal) {
+    public Optional<CrystalInfusionRecipe> getRecipe(CrystalBlockEntity crystal) {
         CrystalRitualArea area = getArea(crystal);
         Level level = crystal.getLevel();
-        List<ArcanePedestalTileEntity> pedestals = getPedestalsWithArea(level, crystal.getBlockPos(), area);
+        List<ArcanePedestalBlockEntity> pedestals = getPedestalsWithArea(level, crystal.getBlockPos(), area);
         List<ItemStack> items = getItemsFromPedestals(pedestals);
 
         return getRecipe(crystal, items);
     }
 
     @Override
-    public List<ItemStack> getItemsResult(CrystalTileEntity crystal) {
+    public List<ItemStack> getItemsResult(CrystalBlockEntity crystal) {
         List<ItemStack> list = new ArrayList<>();
         Optional<CrystalInfusionRecipe> recipe = getRecipe(crystal);
 
@@ -280,7 +280,7 @@ public class CrystalInfusionCrystalRitual extends CrystalRitual {
 
     @Override
     @OnlyIn(Dist.CLIENT)
-    public void render(CrystalTileEntity crystal, float partialTicks, PoseStack ms, MultiBufferSource buffers, int light, int overlay) {
+    public void render(CrystalBlockEntity crystal, float partialTicks, PoseStack ms, MultiBufferSource buffers, int light, int overlay) {
         Minecraft mc = Minecraft.getInstance();
         double ticks = (ClientTickHandler.ticksInGame + partialTicks) * 2;
         double ticksUp = (ClientTickHandler.ticksInGame + partialTicks) * 4;

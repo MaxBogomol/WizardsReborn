@@ -2,10 +2,10 @@ package mod.maxbogomol.wizards_reborn.common.spell.ray;
 
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.math.Axis;
+import mod.maxbogomol.fluffy_fur.client.animation.ItemAnimation;
 import mod.maxbogomol.wizards_reborn.WizardsReborn;
 import mod.maxbogomol.wizards_reborn.api.spell.Spell;
 import mod.maxbogomol.wizards_reborn.api.wissen.WissenItemUtils;
-import mod.maxbogomol.wizards_reborn.client.animation.ItemAnimation;
 import mod.maxbogomol.wizards_reborn.client.animation.SpellHandItemAnimation;
 import mod.maxbogomol.wizards_reborn.client.render.WorldRenderHandler;
 import mod.maxbogomol.wizards_reborn.common.entity.SpellProjectileEntity;

@@ -1,5 +1,6 @@
 package mod.maxbogomol.wizards_reborn.common.item;
 
+import mod.maxbogomol.fluffy_fur.common.item.IParticleItem;
 import mod.maxbogomol.wizards_reborn.WizardsReborn;
 import mod.maxbogomol.wizards_reborn.api.crystal.CrystalStat;
 import mod.maxbogomol.wizards_reborn.api.crystal.CrystalType;

@@ -1,5 +1,7 @@
 package mod.maxbogomol.wizards_reborn.common.item;
 
+import mod.maxbogomol.fluffy_fur.common.item.FuelItem;
+import mod.maxbogomol.fluffy_fur.common.item.IParticleItem;
 import mod.maxbogomol.wizards_reborn.WizardsReborn;
 import mod.maxbogomol.wizards_reborn.client.particle.Particles;
 import net.minecraft.world.entity.item.ItemEntity;

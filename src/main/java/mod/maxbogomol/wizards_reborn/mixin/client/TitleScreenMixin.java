@@ -24,14 +24,5 @@ public abstract class TitleScreenMixin {
             string = Component.translatable("gui.wizards_reborn.menu.optifine.1").getString();
             guiGraphics.drawString(font, string, (self.width - font.width(string)) / 2, 2 + font.lineHeight, 16777215);
         }
-
-        /*TitleScreen self = (TitleScreen) ((Object) this);
-        int width = Minecraft.getInstance().getWindow().getGuiScaledWidth();
-        int height = Minecraft.getInstance().getWindow().getGuiScaledHeight();
-        RenderUtils.renderItemModelInGui(new ItemStack(WizardsReborn.MOR_ITEM.get()), self.width / 2f, self.height / 2f, 320, 320, 320, 10, 10, 10);
-
-        RenderUtils.renderItemModelInGui(new ItemStack(WizardsReborn.ALCHEMY_GLASS_ITEM.get()), self.width / 2f - 200, self.height / 2f, 160, 160, 160, 10, 10, -100);
-
-        RenderUtils.renderItemModelInGui(new ItemStack(WizardsReborn.ARCANE_GOLD_SCYTHE.get()), self.width / 2f, self.height / 2f - 200, 160, 160, 160, 100, 0, 110);*/
     }
 }

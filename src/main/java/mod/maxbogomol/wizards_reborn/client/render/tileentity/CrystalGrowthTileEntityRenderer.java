@@ -5,8 +5,8 @@ import com.mojang.math.Axis;
 import mod.maxbogomol.wizards_reborn.api.wissen.WissenUtils;
 import mod.maxbogomol.wizards_reborn.client.event.ClientTickHandler;
 import mod.maxbogomol.wizards_reborn.client.render.WorldRenderHandler;
-import mod.maxbogomol.wizards_reborn.common.block.CrystalGrowthBlock;
-import mod.maxbogomol.wizards_reborn.common.tileentity.CrystalGrowthTileEntity;
+import mod.maxbogomol.wizards_reborn.common.block.crystal_growth.CrystalGrowthBlock;
+import mod.maxbogomol.wizards_reborn.common.block.crystal_growth.CrystalGrowthBlockEntity;
 import mod.maxbogomol.wizards_reborn.utils.RenderUtils;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.blockentity.BlockEntityRenderer;
@@ -15,12 +15,12 @@ import net.minecraft.world.phys.Vec3;
 import java.awt.*;
 import java.util.Random;
 
-public class CrystalGrowthTileEntityRenderer implements BlockEntityRenderer<CrystalGrowthTileEntity> {
+public class CrystalGrowthTileEntityRenderer implements BlockEntityRenderer<CrystalGrowthBlockEntity> {
 
     public CrystalGrowthTileEntityRenderer() {}
 
     @Override
-    public void render(CrystalGrowthTileEntity crystal, float partialTicks, PoseStack ms, MultiBufferSource buffers, int light, int overlay) {
+    public void render(CrystalGrowthBlockEntity crystal, float partialTicks, PoseStack ms, MultiBufferSource buffers, int light, int overlay) {
         Random random = new Random();
         random.setSeed(crystal.getBlockPos().asLong());
 

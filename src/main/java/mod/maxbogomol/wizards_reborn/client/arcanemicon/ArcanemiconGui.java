@@ -3,7 +3,7 @@ package mod.maxbogomol.wizards_reborn.client.arcanemicon;
 import com.mojang.blaze3d.platform.InputConstants;
 import mod.maxbogomol.wizards_reborn.WizardsReborn;
 import mod.maxbogomol.wizards_reborn.client.arcanemicon.index.ChapterHistoryEntry;
-import mod.maxbogomol.wizards_reborn.common.tileentity.HoveringTomeStandTileEntity;
+import mod.maxbogomol.wizards_reborn.common.block.hovering_tome_stand.HoveringTomeStandBlockEntity;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.screens.Screen;
@@ -82,7 +82,7 @@ public class ArcanemiconGui extends Screen {
                 if (distance - 1.5F > player.getAttributeValue(ForgeMod.BLOCK_REACH.get())) {
                     minecraft.player.closeContainer();
                 }
-                if (!(minecraft.level.getBlockEntity(blockPos) instanceof HoveringTomeStandTileEntity)) {
+                if (!(minecraft.level.getBlockEntity(blockPos) instanceof HoveringTomeStandBlockEntity)) {
                     minecraft.player.closeContainer();
                 }
             }

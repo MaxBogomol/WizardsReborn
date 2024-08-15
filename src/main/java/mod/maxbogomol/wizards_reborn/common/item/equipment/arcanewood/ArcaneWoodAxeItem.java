@@ -15,7 +15,7 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Tier;
 import net.minecraft.world.level.Level;
 
-public class ArcaneWoodAxeItem  extends ArcaneAxeItem {
+public class ArcaneWoodAxeItem extends ArcaneAxeItem {
     @Deprecated
     public final Item repairItem;
 

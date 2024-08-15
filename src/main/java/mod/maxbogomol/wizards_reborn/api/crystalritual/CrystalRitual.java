@@ -5,13 +5,13 @@ import mod.maxbogomol.wizards_reborn.WizardsReborn;
 import mod.maxbogomol.wizards_reborn.api.crystal.CrystalStat;
 import mod.maxbogomol.wizards_reborn.api.crystal.CrystalType;
 import mod.maxbogomol.wizards_reborn.api.crystal.PolishingType;
+import mod.maxbogomol.wizards_reborn.common.block.arcane_pedestal.ArcanePedestalBlockEntity;
 import mod.maxbogomol.wizards_reborn.common.item.CrystalItem;
 import mod.maxbogomol.wizards_reborn.common.network.PacketHandler;
 import mod.maxbogomol.wizards_reborn.common.network.crystalritual.CrystalRitualBurstEffectPacket;
 import mod.maxbogomol.wizards_reborn.common.recipe.CrystalRitualRecipe;
-import mod.maxbogomol.wizards_reborn.common.tileentity.ArcanePedestalTileEntity;
-import mod.maxbogomol.wizards_reborn.common.tileentity.CrystalTileEntity;
-import mod.maxbogomol.wizards_reborn.common.tileentity.RunicPedestalTileEntity;
+import mod.maxbogomol.wizards_reborn.common.block.crystal.CrystalBlockEntity;
+import mod.maxbogomol.wizards_reborn.common.block.runic_pedestal.RunicPedestalBlockEntity;
 import mod.maxbogomol.wizards_reborn.utils.PacketUtils;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.core.BlockPos;
@@ -71,19 +71,19 @@ public class CrystalRitual {
         return 0;
     }
 
-    public CrystalRitualArea getArea(CrystalTileEntity crystal) {
+    public CrystalRitualArea getArea(CrystalBlockEntity crystal) {
         return new CrystalRitualArea(3, 3, 3, 3, 3, 3);
     }
 
-    public boolean hasArea(CrystalTileEntity crystal) {
+    public boolean hasArea(CrystalBlockEntity crystal) {
         return true;
     }
 
-    public boolean hasLightRay(CrystalTileEntity crystal) {
+    public boolean hasLightRay(CrystalBlockEntity crystal) {
         return false;
     }
 
-    public int getStatLevel(CrystalTileEntity crystal, CrystalStat stat) {
+    public int getStatLevel(CrystalBlockEntity crystal, CrystalStat stat) {
         ItemStack item = getCrystalItem(crystal);
         if (!item.isEmpty()) {
             return CrystalItem.getStatLevel(item, stat);
@@ -91,7 +91,7 @@ public class CrystalRitual {
         return 0;
     }
 
-    public int getMaxRitualCooldown(CrystalTileEntity crystal) {
+    public int getMaxRitualCooldown(CrystalBlockEntity crystal) {
         return 0;
     }
 
@@ -100,7 +100,7 @@ public class CrystalRitual {
         return (int) (cooldown * (1 - (getCooldownStatModifier() * resonanceLevel)));
     }
 
-    public int getMaxRitualCooldownWithStat(CrystalTileEntity crystal) {
+    public int getMaxRitualCooldownWithStat(CrystalBlockEntity crystal) {
         ItemStack item = getCrystalItem(crystal);
         if (!item.isEmpty()) {
             return getMaxRitualCooldown(getMaxRitualCooldown(crystal), item);
@@ -112,58 +112,58 @@ public class CrystalRitual {
         return 0.15f;
     }
 
-    public void setCooldown(CrystalTileEntity crystal, int cooldown) {
+    public void setCooldown(CrystalBlockEntity crystal, int cooldown) {
         crystal.cooldown = cooldown;
     }
 
-    public int getCooldown(CrystalTileEntity crystal) {
+    public int getCooldown(CrystalBlockEntity crystal) {
         return crystal.cooldown;
     }
 
-    public void setMaxCooldown(CrystalTileEntity crystal, int cooldown) {
+    public void setMaxCooldown(CrystalBlockEntity crystal, int cooldown) {
         crystal.maxCooldown = cooldown;
     }
 
-    public int getMaxCooldown(CrystalTileEntity crystal) {
+    public int getMaxCooldown(CrystalBlockEntity crystal) {
         return crystal.maxCooldown;
     }
 
-    public float getCrystalCooldown(CrystalTileEntity crystal) {
+    public float getCrystalCooldown(CrystalBlockEntity crystal) {
         if (crystal.cooldown > 0) {
             return (float) crystal.maxCooldown / (float) crystal.cooldown;
         }
         return 0;
     }
 
-    public void updateCrystal(CrystalTileEntity crystal) {
+    public void updateCrystal(CrystalBlockEntity crystal) {
         PacketUtils.SUpdateTileEntityPacket(crystal);
     }
 
-    public boolean canStart(CrystalTileEntity crystal) {
+    public boolean canStart(CrystalBlockEntity crystal) {
         return true;
     }
 
-    public boolean canTick(CrystalTileEntity crystal) {
+    public boolean canTick(CrystalBlockEntity crystal) {
         return true;
     }
 
-    public boolean canEnd(CrystalTileEntity crystal) {
+    public boolean canEnd(CrystalBlockEntity crystal) {
         return false;
     }
 
-    public void start(CrystalTileEntity crystal) {
+    public void start(CrystalBlockEntity crystal) {
 
     }
 
-    public void tick(CrystalTileEntity crystal) {
+    public void tick(CrystalBlockEntity crystal) {
 
     }
 
-    public void end(CrystalTileEntity crystal) {
+    public void end(CrystalBlockEntity crystal) {
 
     }
 
-    public ItemStack getCrystalItem(CrystalTileEntity crystal) {
+    public ItemStack getCrystalItem(CrystalBlockEntity crystal) {
         return crystal.getCrystalItem();
     }
 
@@ -237,8 +237,8 @@ public class CrystalRitual {
         return getBlockPosWithArea(level, startPos, area.getSizeFrom(), area.getSizeTo(), filter, hasRandomOffset, hasLimit, limit);
     }
 
-    public static List<ArcanePedestalTileEntity> getPedestalsWithArea(Level level, BlockPos startPos, Vec3 sizeFrom, Vec3 sizeTo) {
-        List<ArcanePedestalTileEntity> pedestals = new ArrayList<>();
+    public static List<ArcanePedestalBlockEntity> getPedestalsWithArea(Level level, BlockPos startPos, Vec3 sizeFrom, Vec3 sizeTo) {
+        List<ArcanePedestalBlockEntity> pedestals = new ArrayList<>();
 
         for (double x = -sizeFrom.x(); x <= sizeTo.x(); x++) {
             for (double y = -sizeFrom.y(); y <= sizeTo.y(); y++) {
@@ -246,7 +246,7 @@ public class CrystalRitual {
                     BlockPos pos = new BlockPos(new BlockPos(startPos.getX() + Mth.floor(x), startPos.getY() + Mth.floor(y), startPos.getZ() + Mth.floor(z)));
                     BlockEntity tile = level.getBlockEntity(pos);
                     if (tile != null) {
-                        if (tile instanceof ArcanePedestalTileEntity pedestal) {
+                        if (tile instanceof ArcanePedestalBlockEntity pedestal) {
                             pedestals.add(pedestal);
                         }
                     }
@@ -257,13 +257,13 @@ public class CrystalRitual {
         return pedestals;
     }
 
-    public static List<ArcanePedestalTileEntity>  getPedestalsWithArea(Level level, BlockPos startPos, CrystalRitualArea area) {
+    public static List<ArcanePedestalBlockEntity>  getPedestalsWithArea(Level level, BlockPos startPos, CrystalRitualArea area) {
         return getPedestalsWithArea(level, startPos, area.getSizeFrom(), area.getSizeTo());
     }
 
-    public static List<ItemStack> getItemsFromPedestals(List<ArcanePedestalTileEntity> pedestals) {
+    public static List<ItemStack> getItemsFromPedestals(List<ArcanePedestalBlockEntity> pedestals) {
         List<ItemStack> items = new ArrayList<>();
-        for (ArcanePedestalTileEntity pedestal : pedestals) {
+        for (ArcanePedestalBlockEntity pedestal : pedestals) {
             if (!pedestal.getItemHandler().getItem(0).isEmpty()) {
                 items.add(pedestal.getItemHandler().getItem(0));
             }
@@ -272,9 +272,9 @@ public class CrystalRitual {
         return items;
     }
 
-    public boolean canActivateWithItems(CrystalTileEntity crystal, CrystalRitualArea area) {
+    public boolean canActivateWithItems(CrystalBlockEntity crystal, CrystalRitualArea area) {
         Level level = crystal.getLevel();
-        List<ArcanePedestalTileEntity> pedestals = getPedestalsWithArea(level, crystal.getBlockPos(), area);
+        List<ArcanePedestalBlockEntity> pedestals = getPedestalsWithArea(level, crystal.getBlockPos(), area);
         List<ItemStack> items = getItemsFromPedestals(pedestals);
         SimpleContainer inv = new SimpleContainer(items.size());
         for (int i = 0; i < items.size(); i++) {
@@ -289,7 +289,7 @@ public class CrystalRitual {
         return false;
     }
 
-    public static void deleteItemsFromPedestals(Level level, BlockPos startPos, List<ArcanePedestalTileEntity> pedestals, boolean hasSound, boolean hasEffect) {
+    public static void deleteItemsFromPedestals(Level level, BlockPos startPos, List<ArcanePedestalBlockEntity> pedestals, boolean hasSound, boolean hasEffect) {
         CompoundTag tagPos = new CompoundTag();
         Random random = new Random();
 
@@ -320,24 +320,24 @@ public class CrystalRitual {
     }
 
     @OnlyIn(Dist.CLIENT)
-    public void render(CrystalTileEntity crystal, float partialTicks, PoseStack ms, MultiBufferSource buffers, int light, int overlay) {
+    public void render(CrystalBlockEntity crystal, float partialTicks, PoseStack ms, MultiBufferSource buffers, int light, int overlay) {
 
     }
 
-    public static Container getItemHandler(CrystalTileEntity crystal) {
-        if (crystal.getLevel().getBlockEntity(crystal.getBlockPos().below()) instanceof RunicPedestalTileEntity pedestal) {
+    public static Container getItemHandler(CrystalBlockEntity crystal) {
+        if (crystal.getLevel().getBlockEntity(crystal.getBlockPos().below()) instanceof RunicPedestalBlockEntity pedestal) {
             return pedestal.getItemHandler();
         }
         return null;
     }
 
-    public static void updateRunicPedestal(CrystalTileEntity crystal) {
+    public static void updateRunicPedestal(CrystalBlockEntity crystal) {
         if (crystal.getLevel().getBlockEntity(crystal.getBlockPos().below()) != null) {
             PacketUtils.SUpdateTileEntityPacket(crystal.getLevel().getBlockEntity(crystal.getBlockPos().below()));
         }
     }
 
-    public static void clearItemHandler(CrystalTileEntity crystal) {
+    public static void clearItemHandler(CrystalBlockEntity crystal) {
         Container container = getItemHandler(crystal);
         if (container != null) {
             for (int i = 0; i < container.getContainerSize(); i++) {
@@ -359,13 +359,13 @@ public class CrystalRitual {
         return size;
     }
 
-    public List<ItemStack> getItemsResult(CrystalTileEntity crystal) {
+    public List<ItemStack> getItemsResult(CrystalBlockEntity crystal) {
         List<ItemStack> list = new ArrayList<>();
 
         return list;
     }
 
-    public boolean canStartWithCrystal(CrystalTileEntity crystal) {
+    public boolean canStartWithCrystal(CrystalBlockEntity crystal) {
         List<CrystalType> list = getCrystalsList();
 
         if (getCrystalsList().isEmpty()) return true;

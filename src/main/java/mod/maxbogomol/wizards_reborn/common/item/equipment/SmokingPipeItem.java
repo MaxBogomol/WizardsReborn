@@ -1,10 +1,10 @@
 package mod.maxbogomol.wizards_reborn.common.item.equipment;
 
+import mod.maxbogomol.fluffy_fur.client.animation.ItemAnimation;
+import mod.maxbogomol.fluffy_fur.common.item.ICustomAnimationItem;
+import mod.maxbogomol.fluffy_fur.common.item.ItemBackedInventory;
 import mod.maxbogomol.wizards_reborn.WizardsReborn;
-import mod.maxbogomol.wizards_reborn.client.animation.ItemAnimation;
 import mod.maxbogomol.wizards_reborn.client.animation.SmokingPipeItemAnimation;
-import mod.maxbogomol.wizards_reborn.common.item.ICustomAnimationItem;
-import mod.maxbogomol.wizards_reborn.common.item.ItemBackedInventory;
 import mod.maxbogomol.wizards_reborn.common.network.PacketHandler;
 import mod.maxbogomol.wizards_reborn.common.network.SmokeEffectPacket;
 import mod.maxbogomol.wizards_reborn.common.recipe.CenserRecipe;

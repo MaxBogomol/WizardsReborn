@@ -4,7 +4,7 @@ import mod.maxbogomol.wizards_reborn.WizardsReborn;
 import mod.maxbogomol.wizards_reborn.api.crystal.CrystalType;
 import mod.maxbogomol.wizards_reborn.api.crystalritual.CrystalRitual;
 import mod.maxbogomol.wizards_reborn.api.crystalritual.CrystalRitualArea;
-import mod.maxbogomol.wizards_reborn.common.tileentity.CrystalTileEntity;
+import mod.maxbogomol.wizards_reborn.common.block.crystal.CrystalBlockEntity;
 import net.minecraft.core.BlockPos;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
@@ -27,7 +27,7 @@ public class RitualBreedingCrystalRitual extends CrystalRitual {
     }
 
     @Override
-    public int getMaxRitualCooldown(CrystalTileEntity crystal) {
+    public int getMaxRitualCooldown(CrystalBlockEntity crystal) {
         return 1000;
     }
 
@@ -40,7 +40,7 @@ public class RitualBreedingCrystalRitual extends CrystalRitual {
     }
 
     @Override
-    public boolean canStart(CrystalTileEntity crystal) {
+    public boolean canStart(CrystalBlockEntity crystal) {
         if (!crystal.getLevel().isClientSide()) {
             CrystalRitualArea area = getArea(crystal);
             return canActivateWithItems(crystal, area);
@@ -50,7 +50,7 @@ public class RitualBreedingCrystalRitual extends CrystalRitual {
     }
 
     @Override
-    public void start(CrystalTileEntity crystal) {
+    public void start(CrystalBlockEntity crystal) {
         if (!crystal.getLevel().isClientSide()) {
             setMaxCooldown(crystal, getMaxRitualCooldownWithStat(crystal));
             setCooldown(crystal, getMaxCooldown(crystal));
@@ -62,7 +62,7 @@ public class RitualBreedingCrystalRitual extends CrystalRitual {
     }
 
     @Override
-    public void tick(CrystalTileEntity crystal) {
+    public void tick(CrystalBlockEntity crystal) {
         Level level = crystal.getLevel();
 
         if (!level.isClientSide()) {
@@ -73,7 +73,7 @@ public class RitualBreedingCrystalRitual extends CrystalRitual {
     }
 
     @Override
-    public boolean canEnd(CrystalTileEntity crystal) {
+    public boolean canEnd(CrystalBlockEntity crystal) {
         Level level = crystal.getLevel();
 
         if (!level.isClientSide()) {
@@ -83,7 +83,7 @@ public class RitualBreedingCrystalRitual extends CrystalRitual {
     }
 
     @Override
-    public void end(CrystalTileEntity crystal) {
+    public void end(CrystalBlockEntity crystal) {
         Level level = crystal.getLevel();
         BlockPos blockPos = crystal.getBlockPos();
 

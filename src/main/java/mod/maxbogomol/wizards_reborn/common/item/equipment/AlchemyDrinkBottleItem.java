@@ -4,8 +4,8 @@ import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.math.Axis;
 import mod.maxbogomol.wizards_reborn.WizardsReborn;
 import mod.maxbogomol.wizards_reborn.WizardsRebornClient;
+import mod.maxbogomol.wizards_reborn.common.block.placed_items.PlacedItemsBlockEntity;
 import mod.maxbogomol.wizards_reborn.common.item.PlacedItem;
-import mod.maxbogomol.wizards_reborn.common.tileentity.PlacedItemsTileEntity;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.texture.OverlayTexture;
@@ -23,7 +23,7 @@ public class AlchemyDrinkBottleItem extends PlacedItem {
 
     @Override
     @OnlyIn(Dist.CLIENT)
-    public void renderPlacedItem(ItemStack stack, int rotation, float rotate, PlacedItemsTileEntity items, float partialTicks, PoseStack ms, MultiBufferSource buffers, int light, int overlay) {
+    public void renderPlacedItem(ItemStack stack, int rotation, float rotate, PlacedItemsBlockEntity items, float partialTicks, PoseStack ms, MultiBufferSource buffers, int light, int overlay) {
         ms.pushPose();
         ms.translate(0F, 0.0001F, 0F);
         ms.mulPose(Axis.YP.rotationDegrees((rotation * -22.5f) + rotate));

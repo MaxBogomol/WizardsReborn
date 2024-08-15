@@ -5,7 +5,7 @@ import com.mojang.math.Axis;
 import mod.maxbogomol.wizards_reborn.WizardsRebornClient;
 import mod.maxbogomol.wizards_reborn.api.wissen.WissenUtils;
 import mod.maxbogomol.wizards_reborn.client.event.ClientTickHandler;
-import mod.maxbogomol.wizards_reborn.common.tileentity.AltarOfDroughtTileEntity;
+import mod.maxbogomol.wizards_reborn.common.block.altar_of_drought.AltarOfDroughtBlockEntity;
 import mod.maxbogomol.wizards_reborn.utils.RenderUtils;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.MultiBufferSource;
@@ -15,12 +15,12 @@ import net.minecraft.world.phys.Vec3;
 
 import java.util.Random;
 
-public class AltarOfDroughtTileEntityRenderer implements BlockEntityRenderer<AltarOfDroughtTileEntity> {
+public class AltarOfDroughtTileEntityRenderer implements BlockEntityRenderer<AltarOfDroughtBlockEntity> {
 
     public AltarOfDroughtTileEntityRenderer() {}
 
     @Override
-    public void render(AltarOfDroughtTileEntity altar, float partialTicks, PoseStack ms, MultiBufferSource buffers, int light, int overlay) {
+    public void render(AltarOfDroughtBlockEntity altar, float partialTicks, PoseStack ms, MultiBufferSource buffers, int light, int overlay) {
         Random random = new Random();
         random.setSeed(altar.getBlockPos().asLong());
 
@@ -54,12 +54,12 @@ public class AltarOfDroughtTileEntityRenderer implements BlockEntityRenderer<Alt
     }
 
     @Override
-    public boolean shouldRenderOffScreen(AltarOfDroughtTileEntity pBlockEntity) {
+    public boolean shouldRenderOffScreen(AltarOfDroughtBlockEntity pBlockEntity) {
         return true;
     }
 
     @Override
-    public boolean shouldRender(AltarOfDroughtTileEntity pBlockEntity, Vec3 pCameraPos) {
+    public boolean shouldRender(AltarOfDroughtBlockEntity pBlockEntity, Vec3 pCameraPos) {
         return true;
     }
 }

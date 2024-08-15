@@ -8,8 +8,8 @@ import mod.maxbogomol.wizards_reborn.api.crystalritual.CrystalRitual;
 import mod.maxbogomol.wizards_reborn.api.crystalritual.CrystalRitualUtils;
 import mod.maxbogomol.wizards_reborn.client.event.ClientTickHandler;
 import mod.maxbogomol.wizards_reborn.client.render.WorldRenderHandler;
-import mod.maxbogomol.wizards_reborn.common.tileentity.CrystalTileEntity;
-import mod.maxbogomol.wizards_reborn.common.tileentity.RunicPedestalTileEntity;
+import mod.maxbogomol.wizards_reborn.common.block.crystal.CrystalBlockEntity;
+import mod.maxbogomol.wizards_reborn.common.block.runic_pedestal.RunicPedestalBlockEntity;
 import mod.maxbogomol.wizards_reborn.utils.RenderUtils;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.MultiBufferSource;
@@ -22,12 +22,12 @@ import java.awt.*;
 import java.util.List;
 import java.util.Random;
 
-public class RunicPedestalTileEntityRenderer implements BlockEntityRenderer<RunicPedestalTileEntity> {
+public class RunicPedestalTileEntityRenderer implements BlockEntityRenderer<RunicPedestalBlockEntity> {
 
     public RunicPedestalTileEntityRenderer() {}
 
     @Override
-    public void render(RunicPedestalTileEntity pedestal, float partialTicks, PoseStack ms, MultiBufferSource buffers, int light, int overlay) {
+    public void render(RunicPedestalBlockEntity pedestal, float partialTicks, PoseStack ms, MultiBufferSource buffers, int light, int overlay) {
         Random random = new Random();
         random.setSeed(pedestal.getBlockPos().asLong());
 
@@ -58,7 +58,7 @@ public class RunicPedestalTileEntityRenderer implements BlockEntityRenderer<Runi
         CrystalRitual ritual = pedestal.getCrystalRitual();
         if (!CrystalRitualUtils.isEmpty(ritual)) {
             boolean isRender = false;
-            if (pedestal.getLevel().getBlockEntity(pedestal.getBlockPos().above()) instanceof CrystalTileEntity crystalTile) {
+            if (pedestal.getLevel().getBlockEntity(pedestal.getBlockPos().above()) instanceof CrystalBlockEntity crystalTile) {
                 if (!ritual.canStartWithCrystal(crystalTile)) isRender = true;
             } else {
                 isRender = true;

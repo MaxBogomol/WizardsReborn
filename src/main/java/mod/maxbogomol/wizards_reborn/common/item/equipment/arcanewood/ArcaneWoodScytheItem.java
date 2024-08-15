@@ -15,7 +15,7 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Tier;
 import net.minecraft.world.level.Level;
 
-public class ArcaneWoodScytheItem  extends ArcaneScytheItem {
+public class ArcaneWoodScytheItem extends ArcaneScytheItem {
     @Deprecated
     public final Item repairItem;
 

@@ -1,6 +1,6 @@
 package mod.maxbogomol.wizards_reborn.client.integration.jade;
 
-import mod.maxbogomol.wizards_reborn.common.tileentity.SaltCampfireTileEntity;
+import mod.maxbogomol.wizards_reborn.common.block.salt_campfire.SaltCampfireBlockEntity;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;
@@ -20,7 +20,7 @@ public enum SaltCampfireProvider implements IBlockComponentProvider {
     public void appendTooltip(ITooltip tooltip, BlockAccessor accessor, IPluginConfig config) {
         BlockEntity tile = accessor.getLevel().getBlockEntity(accessor.getPosition());
 
-        if (tile instanceof SaltCampfireTileEntity campfire) {
+        if (tile instanceof SaltCampfireBlockEntity campfire) {
             IElementHelper elements = tooltip.getElementHelper();
 
             for(int i = 0; i < campfire.cookingTime.length; ++i) {

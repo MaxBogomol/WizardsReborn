@@ -36,8 +36,6 @@ import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.ShaderInstance;
 import net.minecraft.client.renderer.Sheets;
 import net.minecraft.client.renderer.blockentity.BlockEntityRenderers;
-import net.minecraft.client.renderer.blockentity.HangingSignRenderer;
-import net.minecraft.client.renderer.blockentity.SignRenderer;
 import net.minecraft.client.renderer.entity.EntityRenderers;
 import net.minecraft.client.renderer.item.ItemProperties;
 import net.minecraft.client.resources.model.BakedModel;
@@ -355,8 +353,6 @@ public class WizardsRebornClient {
             ItemBlockRenderTypes.setRenderLayer(WizardsReborn.FLOWER_BREW_FLUID.get(), RenderType.translucent());
             ItemBlockRenderTypes.setRenderLayer(WizardsReborn.FLOWING_FLOWER_BREW_FLUID.get(), RenderType.translucent());
 
-            BlockEntityRenderers.register(WizardsReborn.SIGN_TILE_ENTITY.get(), SignRenderer::new);
-            BlockEntityRenderers.register(WizardsReborn.HANGING_SIGN_TILE_ENTITY.get(), HangingSignRenderer::new);
             BlockEntityRenderers.register(WizardsReborn.ARCANE_PEDESTAL_TILE_ENTITY.get(), (trd) -> new ArcanePedestalTileEntityRenderer());
             BlockEntityRenderers.register(WizardsReborn.HOVERING_TOME_STAND_TILE_ENTITY.get(), HoveringTomeStandTileEntityRenderer::new);
             BlockEntityRenderers.register(WizardsReborn.WISSEN_ALTAR_TILE_ENTITY.get(), (trd) -> new WissenAltarTileEntityRenderer());

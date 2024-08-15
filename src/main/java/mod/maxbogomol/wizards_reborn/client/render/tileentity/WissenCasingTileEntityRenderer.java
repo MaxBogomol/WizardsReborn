@@ -2,7 +2,7 @@ package mod.maxbogomol.wizards_reborn.client.render.tileentity;
 
 import com.mojang.blaze3d.vertex.PoseStack;
 import mod.maxbogomol.wizards_reborn.api.wissen.WissenUtils;
-import mod.maxbogomol.wizards_reborn.common.tileentity.WissenCasingTileEntity;
+import mod.maxbogomol.wizards_reborn.common.block.casing.wissen.WissenCasingBlockEntity;
 import mod.maxbogomol.wizards_reborn.utils.RenderUtils;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.blockentity.BlockEntityRenderer;
@@ -10,12 +10,12 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.world.phys.Vec3;
 
-public class WissenCasingTileEntityRenderer implements BlockEntityRenderer<WissenCasingTileEntity> {
+public class WissenCasingTileEntityRenderer implements BlockEntityRenderer<WissenCasingBlockEntity> {
 
     public WissenCasingTileEntityRenderer() {}
 
     @Override
-    public void render(WissenCasingTileEntity casing, float partialTicks, PoseStack ms, MultiBufferSource buffers, int light, int overlay) {
+    public void render(WissenCasingBlockEntity casing, float partialTicks, PoseStack ms, MultiBufferSource buffers, int light, int overlay) {
         for (Direction direction : Direction.values()) {
             ms.pushPose();
             ms.translate(0.5F, 0.5F, 0.5F);
