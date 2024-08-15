@@ -1,5 +1,6 @@
 package mod.maxbogomol.wizards_reborn.client.model.armor;
 
+import mod.maxbogomol.fluffy_fur.client.model.armor.ArmorModel;
 import net.minecraft.client.model.HumanoidModel;
 import net.minecraft.client.model.geom.ModelPart;
 import net.minecraft.client.model.geom.PartPose;

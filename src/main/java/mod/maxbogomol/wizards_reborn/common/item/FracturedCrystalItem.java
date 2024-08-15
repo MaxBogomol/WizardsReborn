@@ -1,12 +1,12 @@
 package mod.maxbogomol.wizards_reborn.common.item;
 
 import mod.maxbogomol.fluffy_fur.common.item.IParticleItem;
+import mod.maxbogomol.fluffy_fur.utils.ColorUtils;
 import mod.maxbogomol.wizards_reborn.WizardsReborn;
 import mod.maxbogomol.wizards_reborn.api.crystal.CrystalStat;
 import mod.maxbogomol.wizards_reborn.api.crystal.CrystalType;
 import mod.maxbogomol.wizards_reborn.api.crystal.CrystalUtils;
 import mod.maxbogomol.wizards_reborn.client.particle.Particles;
-import mod.maxbogomol.wizards_reborn.utils.ColorUtils;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.Style;

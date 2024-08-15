@@ -1,6 +1,6 @@
 package mod.maxbogomol.wizards_reborn.common.item;
 
-import mod.maxbogomol.wizards_reborn.utils.ColorUtils;
+import mod.maxbogomol.fluffy_fur.utils.ColorUtils;
 import net.minecraft.ChatFormatting;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.Style;

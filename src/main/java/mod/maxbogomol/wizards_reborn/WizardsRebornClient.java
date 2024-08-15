@@ -2,6 +2,7 @@ package mod.maxbogomol.wizards_reborn;
 
 import com.mojang.blaze3d.platform.InputConstants;
 import com.mojang.blaze3d.vertex.DefaultVertexFormat;
+import mod.maxbogomol.fluffy_fur.FluffyFurClient;
 import mod.maxbogomol.wizards_reborn.client.config.ClientConfig;
 import mod.maxbogomol.wizards_reborn.client.model.armor.*;
 import mod.maxbogomol.wizards_reborn.client.model.block.AlchemyBottleModel;
@@ -43,7 +44,6 @@ import net.minecraft.client.resources.model.ModelManager;
 import net.minecraft.client.resources.model.ModelResourceLocation;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.sounds.Music;
-import net.minecraft.world.item.Item;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.client.event.*;
 import net.minecraftforge.client.settings.KeyConflictContext;
@@ -75,7 +75,6 @@ public class WizardsRebornClient {
     public static final ModelLayerLocation ARCANE_FORTRESS_ARMOR_LAYER = new ModelLayerLocation(new ResourceLocation(WizardsReborn.MOD_ID, "arcane_fortress_armor"), "main");
     public static final ModelLayerLocation ARCANE_FORTRESS_SLIM_ARMOR_LAYER = new ModelLayerLocation(new ResourceLocation(WizardsReborn.MOD_ID, "arcane_fortress_slim_armor"), "main");
 
-    public static final ModelLayerLocation EMPTY_ARMOR_LAYER = new ModelLayerLocation(new ResourceLocation(WizardsReborn.MOD_ID, "empty_armor"), "main");
     public static final ModelLayerLocation TOP_HAT_ARMOR_LAYER = new ModelLayerLocation(new ResourceLocation(WizardsReborn.MOD_ID, "top_hat_armor"), "main");
     public static final ModelLayerLocation SOUL_HUNTER_ARMOR_LAYER = new ModelLayerLocation(new ResourceLocation(WizardsReborn.MOD_ID, "soul_hunter_armor"), "main");
     public static final ModelLayerLocation MAGNIFICENT_MAID_ARMOR_LAYER = new ModelLayerLocation(new ResourceLocation(WizardsReborn.MOD_ID, "magnificent_maid_armor"), "main");
@@ -93,7 +92,6 @@ public class WizardsRebornClient {
     public static ArcaneFortressArmorModel ARCANE_FORTRESS_ARMOR_MODEL = null;
     public static ArcaneFortressArmorModel ARCANE_FORTRESS_SLIM_ARMOR_MODEL = null;
 
-    public static EmptyArmorModel EMPTY_ARMOR_MODEL = null;
     public static TopHatArmorModel TOP_HAT_ARMOR_MODEL = null;
     public static SoulHunterArmorModel SOUL_HUNTER_ARMOR_MODEL = null;
     public static MagnificentMaidArmorModel MAGNIFICENT_MAID_ARMOR_MODEL = null;
@@ -403,7 +401,7 @@ public class WizardsRebornClient {
             EntityRenderers.register(WizardsReborn.SPLIT_ARROW_PROJECTILE.get(), SplitArrowRenderer::new);
             EntityRenderers.register(WizardsReborn.SNIFFALO.get(), SniffaloRenderer::new);
 
-            makeBow(WizardsReborn.ARCANE_WOOD_BOW.get());
+            FluffyFurClient.makeBow(WizardsReborn.ARCANE_WOOD_BOW.get());
 
             ItemProperties.register(WizardsReborn.ALCHEMY_VIAL_POTION.get(), new ResourceLocation("uses"), (stack, world, living, count) -> AlchemyPotionItem.getUses(stack));
             ItemProperties.register(WizardsReborn.ALCHEMY_FLASK_POTION.get(), new ResourceLocation("uses"), (stack, world, living, count) -> AlchemyPotionItem.getUses(stack));
@@ -803,7 +801,6 @@ public class WizardsRebornClient {
             event.registerLayerDefinition(ARCANE_FORTRESS_ARMOR_LAYER, ArcaneFortressArmorModel::createBodyLayer);
             event.registerLayerDefinition(ARCANE_FORTRESS_SLIM_ARMOR_LAYER, ArcaneFortressSlimArmorModel::createBodyLayer);
 
-            event.registerLayerDefinition(EMPTY_ARMOR_LAYER, EmptyArmorModel::createBodyLayer);
             event.registerLayerDefinition(TOP_HAT_ARMOR_LAYER, TopHatArmorModel::createBodyLayer);
             event.registerLayerDefinition(SOUL_HUNTER_ARMOR_LAYER, SoulHunterArmorModel::createBodyLayer);
             event.registerLayerDefinition(MAGNIFICENT_MAID_ARMOR_LAYER, MagnificentMaidArmorModel::createBodyLayer);
@@ -824,7 +821,6 @@ public class WizardsRebornClient {
             ARCANE_FORTRESS_ARMOR_MODEL = new ArcaneFortressArmorModel(event.getEntityModels().bakeLayer(ARCANE_FORTRESS_ARMOR_LAYER));
             ARCANE_FORTRESS_SLIM_ARMOR_MODEL = new ArcaneFortressSlimArmorModel(event.getEntityModels().bakeLayer(ARCANE_FORTRESS_SLIM_ARMOR_LAYER));
 
-            EMPTY_ARMOR_MODEL = new EmptyArmorModel(event.getEntityModels().bakeLayer(EMPTY_ARMOR_LAYER));
             TOP_HAT_ARMOR_MODEL = new TopHatArmorModel(event.getEntityModels().bakeLayer(TOP_HAT_ARMOR_LAYER));
             SOUL_HUNTER_ARMOR_MODEL = new SoulHunterArmorModel(event.getEntityModels().bakeLayer(SOUL_HUNTER_ARMOR_LAYER));
             MAGNIFICENT_MAID_ARMOR_MODEL = new MagnificentMaidArmorModel(event.getEntityModels().bakeLayer(MAGNIFICENT_MAID_ARMOR_LAYER));
@@ -849,18 +845,6 @@ public class WizardsRebornClient {
         public static void ColorMappingBlocks(RegisterColorHandlersEvent.Block event) {
             event.register((state, world, pos, tintIndex) -> CustomBlockColor.getInstance().getColor(state, world, pos, tintIndex), CustomBlockColor.PLANTS);
         }
-    }
-
-    public static void makeBow(Item item) {
-        ItemProperties.register(item, new ResourceLocation("pull"), (p_174635_, p_174636_, p_174637_, p_174638_) -> {
-            if (p_174637_ == null) {
-                return 0.0F;
-            } else {
-                return p_174637_.getUseItem() != p_174635_ ? 0.0F : (float)(p_174635_.getUseDuration() - p_174637_.getUseItemRemainingTicks()) / 20.0F;
-            }
-        });
-
-        ItemProperties.register(item, new ResourceLocation("pulling"), (p_174630_, p_174631_, p_174632_, p_174633_) -> p_174632_ != null && p_174632_.isUsingItem() && p_174632_.getUseItem() == p_174630_ ? 1.0F : 0.0F);
     }
 
     public static void addPipeModel(Map<ResourceLocation, BakedModel> map, String modId, String modelId, String path, PipeModel pipe) {

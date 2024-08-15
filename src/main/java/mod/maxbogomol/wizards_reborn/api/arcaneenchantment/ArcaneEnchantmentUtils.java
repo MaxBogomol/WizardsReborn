@@ -1,8 +1,8 @@
 package mod.maxbogomol.wizards_reborn.api.arcaneenchantment;
 
 import com.google.common.collect.Maps;
+import mod.maxbogomol.fluffy_fur.utils.ColorUtils;
 import mod.maxbogomol.wizards_reborn.common.arcaneenchantment.*;
-import mod.maxbogomol.wizards_reborn.utils.ColorUtils;
 import net.minecraft.ChatFormatting;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;

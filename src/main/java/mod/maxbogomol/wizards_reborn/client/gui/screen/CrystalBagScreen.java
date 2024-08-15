@@ -1,9 +1,9 @@
 package mod.maxbogomol.wizards_reborn.client.gui.screen;
 
 import com.mojang.blaze3d.systems.RenderSystem;
+import mod.maxbogomol.fluffy_fur.utils.ColorUtils;
 import mod.maxbogomol.wizards_reborn.WizardsReborn;
 import mod.maxbogomol.wizards_reborn.client.gui.container.CrystalBagContainer;
-import mod.maxbogomol.wizards_reborn.utils.ColorUtils;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
 import net.minecraft.network.chat.Component;

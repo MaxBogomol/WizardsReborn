@@ -2,6 +2,7 @@ package mod.maxbogomol.wizards_reborn.common.block.arcane_censer;
 
 import mod.maxbogomol.fluffy_fur.common.block.entity.ExposedBlockSimpleInventory;
 import mod.maxbogomol.fluffy_fur.common.block.entity.TickableBlockEntity;
+import mod.maxbogomol.fluffy_fur.utils.ColorUtils;
 import mod.maxbogomol.wizards_reborn.WizardsReborn;
 import mod.maxbogomol.wizards_reborn.api.alchemy.ISteamTileEntity;
 import mod.maxbogomol.wizards_reborn.api.wissen.ICooldownTileEntity;
@@ -9,7 +10,6 @@ import mod.maxbogomol.wizards_reborn.client.particle.Particles;
 import mod.maxbogomol.wizards_reborn.common.network.PacketHandler;
 import mod.maxbogomol.wizards_reborn.common.network.SmokeEffectPacket;
 import mod.maxbogomol.wizards_reborn.common.recipe.CenserRecipe;
-import mod.maxbogomol.wizards_reborn.utils.ColorUtils;
 import mod.maxbogomol.wizards_reborn.utils.PacketUtils;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;

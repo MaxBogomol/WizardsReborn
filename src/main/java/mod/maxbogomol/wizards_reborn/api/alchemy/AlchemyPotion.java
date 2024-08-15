@@ -1,6 +1,6 @@
 package mod.maxbogomol.wizards_reborn.api.alchemy;
 
-import mod.maxbogomol.wizards_reborn.utils.ColorUtils;
+import mod.maxbogomol.fluffy_fur.utils.ColorUtils;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.item.alchemy.PotionUtils;
 

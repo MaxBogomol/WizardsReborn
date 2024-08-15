@@ -1,6 +1,7 @@
 package mod.maxbogomol.wizards_reborn.common.item.equipment;
 
 import com.mojang.blaze3d.systems.RenderSystem;
+import mod.maxbogomol.fluffy_fur.utils.ColorUtils;
 import mod.maxbogomol.wizards_reborn.WizardsReborn;
 import mod.maxbogomol.wizards_reborn.api.alchemy.IFluidTileEntity;
 import mod.maxbogomol.wizards_reborn.api.alchemy.IHeatTileEntity;
@@ -10,7 +11,6 @@ import mod.maxbogomol.wizards_reborn.api.skin.Skin;
 import mod.maxbogomol.wizards_reborn.api.wissen.*;
 import mod.maxbogomol.wizards_reborn.client.config.ClientConfig;
 import mod.maxbogomol.wizards_reborn.common.block.alchemy_machine.AlchemyMachineBlockEntity;
-import mod.maxbogomol.wizards_reborn.utils.ColorUtils;
 import mod.maxbogomol.wizards_reborn.utils.NumericalUtils;
 import net.minecraft.ChatFormatting;
 import net.minecraft.client.CameraType;

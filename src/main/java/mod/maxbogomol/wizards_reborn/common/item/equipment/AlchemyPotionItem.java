@@ -1,13 +1,13 @@
 package mod.maxbogomol.wizards_reborn.common.item.equipment;
 
 import com.google.common.base.Preconditions;
+import mod.maxbogomol.fluffy_fur.utils.ColorUtils;
 import mod.maxbogomol.wizards_reborn.WizardsReborn;
 import mod.maxbogomol.wizards_reborn.api.alchemy.AlchemyPotion;
 import mod.maxbogomol.wizards_reborn.api.alchemy.AlchemyPotionUtils;
 import mod.maxbogomol.wizards_reborn.common.alchemypotion.FluidAlchemyPotion;
 import mod.maxbogomol.wizards_reborn.common.alchemypotion.RegisterAlchemyPotions;
 import mod.maxbogomol.wizards_reborn.common.item.PlacedItem;
-import mod.maxbogomol.wizards_reborn.utils.ColorUtils;
 import net.minecraft.advancements.CriteriaTriggers;
 import net.minecraft.client.color.item.ItemColor;
 import net.minecraft.nbt.CompoundTag;

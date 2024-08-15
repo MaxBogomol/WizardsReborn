@@ -1,5 +1,5 @@
 {
-  "type": "wizards_reborn:add_item",
+  "type": "fluffy_fur:add_item",
   "conditions": [
     {
       "block": "minecraft:pitcher_crop",

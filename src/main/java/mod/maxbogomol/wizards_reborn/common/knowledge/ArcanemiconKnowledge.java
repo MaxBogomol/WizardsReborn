@@ -1,8 +1,8 @@
 package mod.maxbogomol.wizards_reborn.common.knowledge;
 
+import mod.maxbogomol.fluffy_fur.utils.ColorUtils;
 import mod.maxbogomol.wizards_reborn.WizardsReborn;
 import mod.maxbogomol.wizards_reborn.api.knowledge.KnowledgeUtils;
-import mod.maxbogomol.wizards_reborn.utils.ColorUtils;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.Style;
 import net.minecraft.sounds.SoundSource;
