@@ -7,8 +7,8 @@ import net.minecraft.client.particle.Particle;
 import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.core.particles.ParticleType;
 
-public class ArcaneWoodLeafParticleType extends ParticleType<GenericParticleData> {
-    public ArcaneWoodLeafParticleType() {
+public class ArcaneWoodLeavesParticleType extends ParticleType<GenericParticleData> {
+    public ArcaneWoodLeavesParticleType() {
         super(true, GenericParticleData.DESERIALIZER);
     }
 
@@ -26,7 +26,7 @@ public class ArcaneWoodLeafParticleType extends ParticleType<GenericParticleData
 
         @Override
         public Particle createParticle(GenericParticleData data, ClientLevel world, double x, double y, double z, double mx, double my, double mz) {
-            ArcaneWoodLeafParticle ret = new ArcaneWoodLeafParticle(world, data, x, y, z, mx, my, mz);
+            ArcaneWoodLeavesParticle ret = new ArcaneWoodLeavesParticle(world, data, x, y, z, mx, my, mz);
             ret.pickSprite(sprite);
             return ret;
         }

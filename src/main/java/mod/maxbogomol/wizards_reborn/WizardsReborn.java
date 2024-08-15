@@ -1823,8 +1823,8 @@ public class WizardsReborn {
     public static RegistryObject<WispParticleType> WISP_PARTICLE = PARTICLES.register("wisp", WispParticleType::new);
     public static RegistryObject<SparkleParticleType> SPARKLE_PARTICLE = PARTICLES.register("sparkle", SparkleParticleType::new);
     public static RegistryObject<KarmaParticleType> KARMA_PARTICLE = PARTICLES.register("karma", KarmaParticleType::new);
-    public static RegistryObject<ArcaneWoodLeafParticleType> ARCANE_WOOD_LEAF_PARTICLE = PARTICLES.register("arcane_wood_leaf", ArcaneWoodLeafParticleType::new);
-    public static RegistryObject<InnocenceWoodLeafParticleType> INNOCENT_WOOD_LEAF_PARTICLE = PARTICLES.register("innocence_wood_leaf", InnocenceWoodLeafParticleType::new);
+    public static RegistryObject<ArcaneWoodLeavesParticleType> ARCANE_WOOD_LEAVES_PARTICLE = PARTICLES.register("arcane_wood_leaves", ArcaneWoodLeavesParticleType::new);
+    public static RegistryObject<InnocenceWoodLeavesParticleType> INNOCENT_WOOD_LEAVES_PARTICLE = PARTICLES.register("innocence_wood_leaves", InnocenceWoodLeavesParticleType::new);
     public static RegistryObject<SteamParticleType> STEAM_PARTICLE = PARTICLES.register("steam", SteamParticleType::new);
     public static RegistryObject<SmokeParticleType> SMOKE_PARTICLE = PARTICLES.register("smoke", SmokeParticleType::new);
     public static RegistryObject<CubeParticleType> CUBE_PARTICLE = PARTICLES.register("cube", CubeParticleType::new);

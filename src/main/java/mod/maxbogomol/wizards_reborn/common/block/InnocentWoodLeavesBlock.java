@@ -3,6 +3,7 @@ package mod.maxbogomol.wizards_reborn.common.block;
 import mod.maxbogomol.wizards_reborn.WizardsReborn;
 import mod.maxbogomol.wizards_reborn.client.particle.Particles;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
@@ -41,15 +42,12 @@ public class InnocentWoodLeavesBlock extends LeavesBlock {
 
     @OnlyIn(Dist.CLIENT)
     public void animateTick(BlockState state, Level world, BlockPos pos, RandomSource random) {
-        if (world.getBlockState(new BlockPos(pos.getX(), pos.getY() - 1, pos.getZ())).isAir()) {
-            if (random.nextFloat() < 0.015) {
-                Particles.create(WizardsReborn.INNOCENT_WOOD_LEAF_PARTICLE)
-                        .addVelocity(((random.nextDouble() - 0.5D) / 12), ((random.nextDouble() - 1.1D) / 8), ((random.nextDouble() - 0.5D) / 12))
-                        .setAlpha(1f, 1f).setScale(0.25f, 0f)
-                        .setColor(1f, 1f, 1f)
-                        .setLifetime(150)
-                        .setSpin((0.1f * ((random.nextFloat() - 0.5f) * 2)))
-                        .spawn(world, pos.getX() + 0.5F + ((random.nextFloat() - 0.5f) * 0.9f), pos.getY() - 0.05, pos.getZ() + 0.5F + ((random.nextFloat() - 0.5f * 0.9f)));
+        if (random.nextInt(10) == 0) {
+            BlockPos blockpos = pos.below();
+            BlockState blockstate = world.getBlockState(blockpos);
+            if (!isFaceFull(blockstate.getCollisionShape(world, blockpos), Direction.UP)) {
+                Particles.create(WizardsReborn.INNOCENT_WOOD_LEAVES_PARTICLE)
+                        .spawn(world, pos.getX() + 0.5F + (random.nextFloat() - 0.5f), pos.getY() - 0.05f, pos.getZ() + 0.5F + (random.nextFloat() - 0.5f));
             }
         }
     }

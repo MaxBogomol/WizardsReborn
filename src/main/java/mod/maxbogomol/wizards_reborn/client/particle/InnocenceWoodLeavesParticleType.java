@@ -7,8 +7,8 @@ import net.minecraft.client.particle.ParticleProvider;
 import net.minecraft.client.particle.SpriteSet;
 import net.minecraft.core.particles.ParticleType;
 
-public class InnocenceWoodLeafParticleType extends ParticleType<GenericParticleData> {
-    public InnocenceWoodLeafParticleType() {
+public class InnocenceWoodLeavesParticleType extends ParticleType<GenericParticleData> {
+    public InnocenceWoodLeavesParticleType() {
         super(true, GenericParticleData.DESERIALIZER);
     }
 
@@ -26,7 +26,7 @@ public class InnocenceWoodLeafParticleType extends ParticleType<GenericParticleD
 
         @Override
         public Particle createParticle(GenericParticleData data, ClientLevel world, double x, double y, double z, double mx, double my, double mz) {
-            InnocenceWoodLeafParticle ret = new InnocenceWoodLeafParticle(world, data, x, y, z, mx, my, mz);
+            InnocenceWoodLeavesParticle ret = new InnocenceWoodLeavesParticle(world, data, x, y, z, mx, my, mz);
             ret.pickSprite(sprite);
             return ret;
         }
