@@ -1,7 +1,10 @@
 package mod.maxbogomol.wizards_reborn.common.network.spell;
 
+import mod.maxbogomol.fluffy_fur.FluffyFur;
+import mod.maxbogomol.fluffy_fur.client.particle.ParticleBuilder;
+import mod.maxbogomol.fluffy_fur.client.particle.data.ColorParticleData;
+import mod.maxbogomol.fluffy_fur.client.particle.data.GenericParticleData;
 import mod.maxbogomol.wizards_reborn.WizardsReborn;
-import mod.maxbogomol.wizards_reborn.client.particle.Particles;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.world.level.Level;
 import net.minecraftforge.network.NetworkEvent;
@@ -52,25 +55,23 @@ public class HolyCrossSpellEffectPacket {
                             double y = (random.nextDouble() - 0.5D);
                             double z = (random.nextDouble() - 0.5D);
 
-                            Particles.create(WizardsReborn.KARMA_PARTICLE)
-                                    .addVelocity(-x / 16, -y / 16, -z / 16)
-                                    .setAlpha(0.3f, 0).setScale(0.05f, 0.2f)
-                                    .setColor(msg.colorR, msg.colorG, msg.colorB)
+                            ParticleBuilder.create(FluffyFur.SPARKLE_PARTICLE)
+                                    .setColorData(ColorParticleData.create(msg.colorR, msg.colorG, msg.colorB).build())
+                                    .setTransparencyData(GenericParticleData.create(0.3f, 0).build())
+                                    .setScaleData(GenericParticleData.create(0.05f, 0.2f).build())
                                     .setLifetime(35)
+                                    .addVelocity(-x / 16, -y / 16, -z / 16)
                                     .spawn(world, msg.X + x, msg.Y + y, msg.Z + z);
                         }
                     }
 
-                    for (int i = 0; i < 10; i++) {
-                        if (random.nextFloat() < 0.6f) {
-                            Particles.create(WizardsReborn.SPARKLE_PARTICLE)
-                                    .addVelocity(((random.nextDouble() - 0.5D) / 40), ((random.nextDouble() - 0.5D) / 40), ((random.nextDouble() - 0.5D) / 40))
-                                    .setAlpha(0.3f, 0).setScale(0, 0.3f)
-                                    .setColor(msg.colorR, msg.colorG, msg.colorB)
-                                    .setLifetime(60)
-                                    .spawn(world, msg.X, msg.Y, msg.Z);
-                        }
-                    }
+                    ParticleBuilder.create(FluffyFur.SPARKLE_PARTICLE)
+                            .setColorData(ColorParticleData.create(msg.colorR, msg.colorG, msg.colorB).build())
+                            .setTransparencyData(GenericParticleData.create(0.3f, 0).build())
+                            .setScaleData(GenericParticleData.create(0, 0.3f).build())
+                            .setLifetime(60)
+                            .randomVelocity(0.0125f)
+                            .repeat(world, msg.X, msg.Y, msg.Z, 10, 0.6f);
 
                     ctx.get().setPacketHandled(true);
                 }

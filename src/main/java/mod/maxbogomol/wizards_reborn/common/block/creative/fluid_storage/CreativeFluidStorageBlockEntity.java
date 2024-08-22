@@ -2,9 +2,9 @@ package mod.maxbogomol.wizards_reborn.common.block.creative.fluid_storage;
 
 import mod.maxbogomol.fluffy_fur.common.block.entity.TickableBlockEntity;
 import mod.maxbogomol.wizards_reborn.WizardsReborn;
-import mod.maxbogomol.wizards_reborn.api.alchemy.IFluidTileEntity;
+import mod.maxbogomol.wizards_reborn.api.alchemy.IFluidBlockEntity;
 import mod.maxbogomol.wizards_reborn.api.alchemy.PipeConnection;
-import mod.maxbogomol.wizards_reborn.common.block.pipe.PipeBaseTileEntity;
+import mod.maxbogomol.wizards_reborn.common.block.pipe.PipeBaseBlockEntity;
 import mod.maxbogomol.wizards_reborn.utils.PacketUtils;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -27,7 +27,7 @@ import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import java.util.Random;
 
-public class CreativeFluidStorageBlockEntity extends PipeBaseTileEntity implements TickableBlockEntity, IFluidTileEntity {
+public class CreativeFluidStorageBlockEntity extends PipeBaseBlockEntity implements TickableBlockEntity, IFluidBlockEntity {
     protected FluidTank fluidTank = new FluidTank(getMaxCapacity()) {
         @Override
         public void onContentsChanged() {
@@ -44,7 +44,7 @@ public class CreativeFluidStorageBlockEntity extends PipeBaseTileEntity implemen
     }
 
     public CreativeFluidStorageBlockEntity(BlockPos pos, BlockState state) {
-        this(WizardsReborn.CREATIVE_FLUID_STORAGE_TILE_ENTITY.get(), pos, state);
+        this(WizardsReborn.CREATIVE_FLUID_STORAGE_BLOCK_ENTITY.get(), pos, state);
     }
 
     @Override
@@ -112,7 +112,7 @@ public class CreativeFluidStorageBlockEntity extends PipeBaseTileEntity implemen
             BlockState facingState = level.getBlockState(worldPosition.relative(direction));
             BlockEntity facingBE = level.getBlockEntity(worldPosition.relative(direction));
             if (facingState.is(WizardsReborn.FLUID_PIPE_CONNECTION_BLOCK_TAG)) {
-                if (facingBE instanceof PipeBaseTileEntity && !((PipeBaseTileEntity) facingBE).getConnection(direction.getOpposite()).transfer) {
+                if (facingBE instanceof PipeBaseBlockEntity && !((PipeBaseBlockEntity) facingBE).getConnection(direction.getOpposite()).transfer) {
                     connections[direction.get3DDataValue()] = PipeConnection.NONE;
                 } else {
                     connections[direction.get3DDataValue()] = PipeConnection.PIPE;

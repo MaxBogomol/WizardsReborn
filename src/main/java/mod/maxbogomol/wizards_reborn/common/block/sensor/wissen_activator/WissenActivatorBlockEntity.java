@@ -1,7 +1,7 @@
 package mod.maxbogomol.wizards_reborn.common.block.sensor.wissen_activator;
 
 import mod.maxbogomol.wizards_reborn.WizardsReborn;
-import mod.maxbogomol.wizards_reborn.api.wissen.IWissenWandFunctionalTileEntity;
+import mod.maxbogomol.wizards_reborn.api.wissen.IWissenWandFunctionalBlockEntity;
 import mod.maxbogomol.wizards_reborn.common.block.sensor.SensorBaseBlock;
 import mod.maxbogomol.wizards_reborn.common.block.sensor.SensorBlockEntity;
 import net.minecraft.core.BlockPos;
@@ -15,7 +15,7 @@ public class WissenActivatorBlockEntity extends SensorBlockEntity {
     }
 
     public WissenActivatorBlockEntity(BlockPos pPos, BlockState pBlockState) {
-        super(WizardsReborn.WISSEN_ACTIVATOR_TILE_ENTITY.get(), pPos, pBlockState);
+        super(WizardsReborn.WISSEN_ACTIVATOR_BLOCK_ENTITY.get(), pPos, pBlockState);
     }
 
     @Override
@@ -38,7 +38,7 @@ public class WissenActivatorBlockEntity extends SensorBlockEntity {
                         break;
                 }
 
-                if (level.getBlockEntity(blockpos) instanceof IWissenWandFunctionalTileEntity functionalTile) {
+                if (level.getBlockEntity(blockpos) instanceof IWissenWandFunctionalBlockEntity functionalTile) {
                     functionalTile.wissenWandFunction();
                 }
             }

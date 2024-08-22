@@ -11,11 +11,8 @@ import net.minecraftforge.api.distmarker.OnlyIn;
 
 @OnlyIn(Dist.CLIENT)
 public class ArcanemiconToast implements Toast {
+
     public ResourceLocation TEXTURE = new ResourceLocation(WizardsReborn.MOD_ID, "textures/gui/arcanemicon_toast.png");
-
-    public ArcanemiconToast() {
-
-    }
 
     @Override
     public int width() {

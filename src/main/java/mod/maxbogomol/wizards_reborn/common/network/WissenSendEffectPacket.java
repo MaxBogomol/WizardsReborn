@@ -1,9 +1,12 @@
 package mod.maxbogomol.wizards_reborn.common.network;
 
+import mod.maxbogomol.fluffy_fur.FluffyFur;
+import mod.maxbogomol.fluffy_fur.client.particle.ParticleBuilder;
+import mod.maxbogomol.fluffy_fur.client.particle.data.ColorParticleData;
+import mod.maxbogomol.fluffy_fur.client.particle.data.GenericParticleData;
 import mod.maxbogomol.wizards_reborn.WizardsReborn;
 import mod.maxbogomol.wizards_reborn.client.config.ClientConfig;
 import mod.maxbogomol.wizards_reborn.client.event.ClientTickHandler;
-import mod.maxbogomol.wizards_reborn.client.particle.Particles;
 import mod.maxbogomol.wizards_reborn.common.config.Config;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.world.level.Level;
@@ -135,19 +138,21 @@ public class WissenSendEffectPacket {
 
                     for (int i = 0; i < particlePerBlock; i++) {
                         if (random.nextFloat() < (0.45f * (1f - ((float) wissenCount / ClientConfig.WISSEN_RAYS_LIMIT.get()))) + 0.05f) {
-                            Particles.create(WizardsReborn.WISP_PARTICLE)
-                                    .addVelocity(((random.nextDouble() - 0.5D) / 50), ((random.nextDouble() - 0.5D) / 50), ((random.nextDouble() - 0.5D) / 50))
-                                    .setAlpha(0.3f, 0).setScale(0.15f, 0)
-                                    .setColor(msg.colorR, msg.colorG, msg.colorB)
+                            ParticleBuilder.create(FluffyFur.WISP_PARTICLE)
+                                    .setColorData(ColorParticleData.create(msg.colorR, msg.colorG, msg.colorB).build())
+                                    .setTransparencyData(GenericParticleData.create(0.3f, 0).build())
+                                    .setScaleData(GenericParticleData.create(0.15f, 0).build())
                                     .setLifetime(20)
+                                    .randomVelocity(0.01f)
                                     .spawn(world, msg.posFromX - (x * i), msg.posFromY - (y * i), msg.posFromZ - (z * i));
                             if (random.nextFloat() < 0.1) {
-                                Particles.create(WizardsReborn.SPARKLE_PARTICLE)
-                                        .addVelocity(((random.nextDouble() - 0.5D) / 25), ((random.nextDouble() - 0.5D) / 25), ((random.nextDouble() - 0.5D) / 25))
-                                        .setAlpha(0.125f, 0).setScale(0.2f, 0)
-                                        .setColor(msg.colorR, msg.colorG, msg.colorB)
+                                ParticleBuilder.create(FluffyFur.SPARKLE_PARTICLE)
+                                        .setColorData(ColorParticleData.create(msg.colorR, msg.colorG, msg.colorB).build())
+                                        .setTransparencyData(GenericParticleData.create(0.125f, 0).build())
+                                        .setScaleData(GenericParticleData.create(0.2f, 0).build())
+                                        .randomSpin(0.5f)
                                         .setLifetime(30)
-                                        .setSpin((0.5f * (float) ((random.nextDouble() - 0.5D) * 2)))
+                                        .randomVelocity(0.02f)
                                         .spawn(world, msg.posFromX - (x * i), msg.posFromY - (y * i), msg.posFromZ - (z * i));
                             }
                         }

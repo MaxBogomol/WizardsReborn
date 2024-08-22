@@ -7,7 +7,7 @@ import mod.maxbogomol.wizards_reborn.api.alchemy.PipeConnection;
 import mod.maxbogomol.wizards_reborn.common.block.pipe.PipeBaseBlock;
 import mod.maxbogomol.wizards_reborn.common.item.equipment.AlchemyBottleItem;
 import mod.maxbogomol.wizards_reborn.common.item.equipment.AlchemyPotionItem;
-import mod.maxbogomol.wizards_reborn.common.block.pipe.PipeBaseTileEntity;
+import mod.maxbogomol.wizards_reborn.common.block.pipe.PipeBaseBlockEntity;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.nbt.CompoundTag;
@@ -96,7 +96,7 @@ public class OrbitalFluidRetainerBlock extends Block implements EntityBlock, Sim
     public List<ItemStack> getDrops(BlockState state, LootParams.Builder builder) {
         List<ItemStack> items = super.getDrops(state, builder);
         BlockEntity tile = builder.getOptionalParameter(LootContextParams.BLOCK_ENTITY);
-        if (tile instanceof OrbitalFluidRetainerTileEntity) {
+        if (tile instanceof OrbitalFluidRetainerBlockEntity) {
             CompoundTag nbt = tile.getUpdateTag();
             if (nbt != null) {
                 for (ItemStack stack : items) {
@@ -112,7 +112,7 @@ public class OrbitalFluidRetainerBlock extends Block implements EntityBlock, Sim
 
     @Override
     public InteractionResult use(BlockState state, Level world, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hit) {
-        if (world.getBlockEntity(pos) instanceof OrbitalFluidRetainerTileEntity retainer) {
+        if (world.getBlockEntity(pos) instanceof OrbitalFluidRetainerBlockEntity retainer) {
             ItemStack stack = player.getItemInHand(hand);
             if (!stack.isEmpty()) {
                 IFluidHandler cap = retainer.getCapability(ForgeCapabilities.FLUID_HANDLER).orElse(null);
@@ -147,10 +147,10 @@ public class OrbitalFluidRetainerBlock extends Block implements EntityBlock, Sim
             pLevel.scheduleTick(pCurrentPos, Fluids.WATER, Fluids.WATER.getTickDelay(pLevel));
         }
 
-        if (pLevel.getBlockEntity(pCurrentPos) instanceof PipeBaseTileEntity pipe) {
+        if (pLevel.getBlockEntity(pCurrentPos) instanceof PipeBaseBlockEntity pipe) {
             BlockEntity facingBE = pLevel.getBlockEntity(pCurrentPos);
             if (pNeighborState.is(WizardsReborn.FLUID_PIPE_CONNECTION_BLOCK_TAG)) {
-                if (facingBE instanceof PipeBaseTileEntity && ((PipeBaseTileEntity) facingBE).getConnection(pDirection.getOpposite()) == PipeConnection.DISABLED) {
+                if (facingBE instanceof PipeBaseBlockEntity && ((PipeBaseBlockEntity) facingBE).getConnection(pDirection.getOpposite()) == PipeConnection.DISABLED) {
                     pipe.setConnection(pDirection, PipeConnection.NONE);
                 } else {
                     pipe.setConnection(pDirection, PipeConnection.PIPE);
@@ -173,7 +173,7 @@ public class OrbitalFluidRetainerBlock extends Block implements EntityBlock, Sim
     @Nullable
     @Override
     public BlockEntity newBlockEntity(BlockPos pPos, BlockState pState) {
-        return new OrbitalFluidRetainerTileEntity(pPos, pState);
+        return new OrbitalFluidRetainerBlockEntity(pPos, pState);
     }
 
     @Nullable
@@ -194,7 +194,7 @@ public class OrbitalFluidRetainerBlock extends Block implements EntityBlock, Sim
 
     @Override
     public int getAnalogOutputSignal(BlockState blockState, Level level, BlockPos pos) {
-        OrbitalFluidRetainerTileEntity tile = (OrbitalFluidRetainerTileEntity) level.getBlockEntity(pos);
+        OrbitalFluidRetainerBlockEntity tile = (OrbitalFluidRetainerBlockEntity) level.getBlockEntity(pos);
         return Mth.floor(((float) tile.getTank().getFluidAmount() / tile.getMaxCapacity()) * 14.0F);
     }
 }

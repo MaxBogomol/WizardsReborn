@@ -1,7 +1,10 @@
 package mod.maxbogomol.wizards_reborn.common.network.spell;
 
+import mod.maxbogomol.fluffy_fur.FluffyFur;
+import mod.maxbogomol.fluffy_fur.client.particle.ParticleBuilder;
+import mod.maxbogomol.fluffy_fur.client.particle.data.ColorParticleData;
+import mod.maxbogomol.fluffy_fur.client.particle.data.GenericParticleData;
 import mod.maxbogomol.wizards_reborn.WizardsReborn;
-import mod.maxbogomol.wizards_reborn.client.particle.Particles;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.world.level.Level;
 import net.minecraftforge.network.NetworkEvent;
@@ -48,31 +51,36 @@ public class StrikeSpellEffectPacket {
 
                     for (int i = 0; i < 35; i++) {
                         if (random.nextFloat() < 0.4f) {
-                            Particles.create(WizardsReborn.WISP_PARTICLE)
-                                    .addVelocity(((random.nextDouble() - 0.5D) / 2f), (random.nextDouble() / 6) , ((random.nextDouble() - 0.5D) / 2f))
-                                    .setAlpha(0.5f, 0).setScale(0.3f, 0f)
-                                    .setColor(msg.colorR, msg.colorG, msg.colorB)
+                            ParticleBuilder.create(FluffyFur.WISP_PARTICLE)
+                                    .setColorData(ColorParticleData.create(msg.colorR, msg.colorG, msg.colorB).build())
+                                    .setTransparencyData(GenericParticleData.create(0.5f, 0).build())
+                                    .setScaleData(GenericParticleData.create(0.3f, 0f).build())
+                                    .randomSpin(0.4f)
                                     .setLifetime(60)
-                                    .setSpin((0.4f * (float) ((random.nextDouble() - 0.5D) * 2)))
+                                    .randomVelocity(0.25f, 0, 0.25f)
+                                    .addVelocity(0, random.nextDouble() / 6, 0)
                                     .spawn(world, msg.X, msg.Y, msg.Z);
                         }
                         if (random.nextFloat() < 0.4f) {
-                            Particles.create(WizardsReborn.SPARKLE_PARTICLE)
-                                    .addVelocity(((random.nextDouble() - 0.5D) / 2f), (random.nextDouble() / 6) , ((random.nextDouble() - 0.5D) / 2f))
-                                    .setAlpha(0.5f, 0).setScale(0.3f, 0f)
-                                    .setColor(msg.colorR, msg.colorG, msg.colorB)
+                            ParticleBuilder.create(FluffyFur.SPARKLE_PARTICLE)
+                                    .setColorData(ColorParticleData.create(msg.colorR, msg.colorG, msg.colorB).build())
+                                    .setTransparencyData(GenericParticleData.create(0.5f, 0).build())
+                                    .setScaleData(GenericParticleData.create(0.3f, 0f).build())
+                                    .randomSpin(2f)
                                     .setLifetime(80)
-                                    .setSpin((2f * (float) ((random.nextDouble() - 0.5D) * 2)))
+                                    .randomVelocity(0.25f, 0, 0.25f)
+                                    .addVelocity(0, random.nextDouble() / 6, 0)
                                     .spawn(world, msg.X, msg.Y, msg.Z);
                         }
                         if (random.nextFloat() < 0.2f) {
-                            Particles.create(WizardsReborn.SPARKLE_PARTICLE)
-                                    .addVelocity(((random.nextDouble() - 0.5D) / 3), ((random.nextDouble() - 0.5D) / 5) + 0.5f, ((random.nextDouble() - 0.5D) / 3))
-                                    .setAlpha(0.6f, 0).setScale(0.4f, 0f)
-                                    .setColor(msg.colorR, msg.colorG, msg.colorB)
-                                    .setLifetime(50)
-                                    .setSpin((0.3f * (float) ((random.nextDouble() - 0.5D) * 2)))
-                                    .enableGravity()
+                            ParticleBuilder.create(FluffyFur.SPARKLE_PARTICLE)
+                                    .setColorData(ColorParticleData.create(msg.colorR, msg.colorG, msg.colorB).build())
+                                    .setTransparencyData(GenericParticleData.create(0.6f, 0).build())
+                                    .setScaleData(GenericParticleData.create(0.4f, 0f).build())
+                                    .randomSpin(0.4f)
+                                    .setLifetime(80)
+                                    .randomVelocity(0.125f, 0.1f, 0.125f)
+                                    .addVelocity(0, 0.5f, 0)
                                     .spawn(world, msg.X, msg.Y, msg.Z);
                         }
                     }

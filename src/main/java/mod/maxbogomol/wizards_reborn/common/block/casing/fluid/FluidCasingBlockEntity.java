@@ -25,7 +25,7 @@ public class FluidCasingBlockEntity extends FluidPipeBlockEntity {
     }
 
     public FluidCasingBlockEntity(BlockPos pos, BlockState state) {
-        this(WizardsReborn.FLUID_CASING_TILE_ENTITY.get(), pos, state);
+        this(WizardsReborn.FLUID_CASING_BLOCK_ENTITY.get(), pos, state);
     }
 
     public void tick() {

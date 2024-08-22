@@ -1,9 +1,11 @@
 package mod.maxbogomol.wizards_reborn.common.spell.look;
 
 import mod.maxbogomol.fluffy_fur.client.animation.ItemAnimation;
+import mod.maxbogomol.fluffy_fur.client.particle.ParticleBuilder;
+import mod.maxbogomol.fluffy_fur.client.particle.data.ColorParticleData;
+import mod.maxbogomol.fluffy_fur.client.particle.data.GenericParticleData;
 import mod.maxbogomol.wizards_reborn.WizardsReborn;
 import mod.maxbogomol.wizards_reborn.client.animation.StrikeSpellItemAnimation;
-import mod.maxbogomol.wizards_reborn.client.particle.Particles;
 import mod.maxbogomol.wizards_reborn.common.block.crystal.CrystalBlockEntity;
 import mod.maxbogomol.wizards_reborn.common.damage.DamageSourceRegistry;
 import mod.maxbogomol.wizards_reborn.common.item.CrystalItem;
@@ -89,16 +91,15 @@ public class CrystalCrushingSpell extends LookSpell {
 
                 if (world.getBlockEntity(blockPos) instanceof CrystalBlockEntity crystal) {
                     Color color = getColor();
-                    float r = color.getRed() / 255f;
-                    float g = color.getGreen() / 255f;
-                    float b = color.getBlue() / 255f;
 
                     if (random.nextFloat() < 0.075f) {
-                        Particles.create(WizardsReborn.KARMA_PARTICLE)
-                                .addVelocity(((random.nextDouble() - 0.5D) / 20), (((random.nextDouble() - 0.5D) / 20)) + 0.03f, ((random.nextDouble() - 0.5D) / 20))
-                                .setAlpha(0.25f, 0).setScale(0.1f, 0)
-                                .setColor(r, g, b)
+                        ParticleBuilder.create(WizardsReborn.KARMA_PARTICLE)
+                                .setColorData(ColorParticleData.create(color).build())
+                                .setTransparencyData(GenericParticleData.create(0.25f, 0).build())
+                                .setScaleData(GenericParticleData.create(0.1f, 0).build())
                                 .setLifetime(30)
+                                .randomVelocity(0.025f)
+                                .addVelocity(0, 0.03f, 0)
                                 .spawn(world, pos.x(), pos.y(), pos.z());
                     }
                 }

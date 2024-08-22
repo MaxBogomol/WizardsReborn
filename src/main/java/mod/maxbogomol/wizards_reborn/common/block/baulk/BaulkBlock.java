@@ -1,7 +1,7 @@
 package mod.maxbogomol.wizards_reborn.common.block.baulk;
 
 import mod.maxbogomol.wizards_reborn.WizardsReborn;
-import mod.maxbogomol.wizards_reborn.api.alchemy.ISteamTileEntity;
+import mod.maxbogomol.wizards_reborn.api.alchemy.ISteamBlockEntity;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.nbt.CompoundTag;
@@ -69,7 +69,7 @@ public class BaulkBlock extends RotatedPillarBlock implements SimpleWaterloggedB
     public List<ItemStack> getDrops(BlockState state, LootParams.Builder builder) {
         List<ItemStack> items = super.getDrops(state, builder);
         BlockEntity tile = builder.getOptionalParameter(LootContextParams.BLOCK_ENTITY);
-        if (tile instanceof ISteamTileEntity steamTile) {
+        if (tile instanceof ISteamBlockEntity steamTile) {
             CompoundTag nbt = tile.getUpdateTag();
             if (nbt != null) {
                 for (ItemStack stack : items) {

@@ -155,6 +155,4 @@ public final class PacketHandler {
     public static void sendToServer(Object msg) {
         HANDLER.sendToServer(msg);
     }
-
-    private PacketHandler() {}
 }

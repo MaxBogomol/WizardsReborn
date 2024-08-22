@@ -28,7 +28,7 @@ public class FluidSensorBlockEntity extends SensorBlockEntity {
     }
 
     public FluidSensorBlockEntity(BlockPos pPos, BlockState pBlockState) {
-        super(WizardsReborn.FLUID_SENSOR_TILE_ENTITY.get(), pPos, pBlockState);
+        super(WizardsReborn.FLUID_SENSOR_BLOCK_ENTITY.get(), pPos, pBlockState);
     }
 
     @Override

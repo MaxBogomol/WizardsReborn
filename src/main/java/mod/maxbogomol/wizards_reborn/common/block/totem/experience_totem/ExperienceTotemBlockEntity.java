@@ -2,7 +2,7 @@ package mod.maxbogomol.wizards_reborn.common.block.totem.experience_totem;
 
 import mod.maxbogomol.fluffy_fur.common.block.entity.TickableBlockEntity;
 import mod.maxbogomol.wizards_reborn.WizardsReborn;
-import mod.maxbogomol.wizards_reborn.api.wissen.IExperienceTileEntity;
+import mod.maxbogomol.wizards_reborn.api.wissen.IExperienceBlockEntity;
 import mod.maxbogomol.wizards_reborn.api.wissen.WissenUtils;
 import mod.maxbogomol.wizards_reborn.client.particle.ExperienceTotemBurst;
 import mod.maxbogomol.wizards_reborn.common.network.PacketHandler;
@@ -29,7 +29,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
-public class ExperienceTotemBlockEntity extends BlockEntity implements TickableBlockEntity, IExperienceTileEntity {
+public class ExperienceTotemBlockEntity extends BlockEntity implements TickableBlockEntity, IExperienceBlockEntity {
 
     public int experience = 0;
     public int cooldown = 0;
@@ -43,7 +43,7 @@ public class ExperienceTotemBlockEntity extends BlockEntity implements TickableB
     }
 
     public ExperienceTotemBlockEntity(BlockPos pos, BlockState state) {
-        this(WizardsReborn.EXPERIENCE_TOTEM_TILE_ENTITY.get(), pos, state);
+        this(WizardsReborn.EXPERIENCE_TOTEM_BLOCK_ENTITY.get(), pos, state);
     }
 
     @Override

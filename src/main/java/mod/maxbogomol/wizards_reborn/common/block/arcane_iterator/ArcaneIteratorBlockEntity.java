@@ -1,5 +1,9 @@
 package mod.maxbogomol.wizards_reborn.common.block.arcane_iterator;
 
+import mod.maxbogomol.fluffy_fur.FluffyFur;
+import mod.maxbogomol.fluffy_fur.client.particle.ParticleBuilder;
+import mod.maxbogomol.fluffy_fur.client.particle.data.ColorParticleData;
+import mod.maxbogomol.fluffy_fur.client.particle.data.GenericParticleData;
 import mod.maxbogomol.fluffy_fur.common.block.entity.TickableBlockEntity;
 import mod.maxbogomol.wizards_reborn.WizardsReborn;
 import mod.maxbogomol.wizards_reborn.api.arcaneenchantment.ArcaneEnchantment;
@@ -8,7 +12,6 @@ import mod.maxbogomol.wizards_reborn.api.crystalritual.CrystalRitual;
 import mod.maxbogomol.wizards_reborn.api.crystalritual.CrystalRitualUtils;
 import mod.maxbogomol.wizards_reborn.api.wissen.*;
 import mod.maxbogomol.wizards_reborn.client.particle.ArcaneIteratorBurst;
-import mod.maxbogomol.wizards_reborn.client.particle.Particles;
 import mod.maxbogomol.wizards_reborn.client.sound.ArcaneIteratorSoundInstance;
 import mod.maxbogomol.wizards_reborn.common.block.arcane_pedestal.ArcanePedestalBlockEntity;
 import mod.maxbogomol.wizards_reborn.common.config.Config;
@@ -45,7 +48,7 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.*;
 
-public class ArcaneIteratorBlockEntity extends BlockEntity implements TickableBlockEntity, IWissenTileEntity, ICooldownTileEntity, IWissenWandFunctionalTileEntity, IItemResultTileEntity {
+public class ArcaneIteratorBlockEntity extends BlockEntity implements TickableBlockEntity, IWissenBlockEntity, ICooldownBlockEntity, IWissenWandFunctionalBlockEntity, IItemResultBlockEntity {
     public int wissenInCraft= 0;
     public int wissenIsCraft = 0;
     public int experienceInCraft= 0;
@@ -74,7 +77,7 @@ public class ArcaneIteratorBlockEntity extends BlockEntity implements TickableBl
     }
 
     public ArcaneIteratorBlockEntity(BlockPos pos, BlockState state) {
-        this(WizardsReborn.ARCANE_ITERATOR_TILE_ENTITY.get(), pos, state);
+        this(WizardsReborn.ARCANE_ITERATOR_BLOCK_ENTITY.get(), pos, state);
     }
 
     @Override
@@ -259,21 +262,23 @@ public class ArcaneIteratorBlockEntity extends BlockEntity implements TickableBl
 
                 if (getWissen() > 0) {
                     if (random.nextFloat() < 0.5) {
-                        Particles.create(WizardsReborn.WISP_PARTICLE)
-                                .addVelocity(((random.nextDouble() - 0.5D) / 30) * getStage(), ((random.nextDouble() - 0.5D) / 30) * getStage(), ((random.nextDouble() - 0.5D) / 30) * getStage())
-                                .setAlpha(0.25f, 0).setScale(0.3f * getStage(), 0)
-                                .setColor(Config.wissenColorR(), Config.wissenColorG(), Config.wissenColorB())
+                        ParticleBuilder.create(FluffyFur.WISP_PARTICLE)
+                                .setColorData(ColorParticleData.create(Config.wissenColorR(), Config.wissenColorG(), Config.wissenColorB()).build())
+                                .setTransparencyData(GenericParticleData.create(0.25f, 0).build())
+                                .setScaleData(GenericParticleData.create(0.3f * getStage(), 0).build())
                                 .setLifetime(20)
-                                .spawn(level, worldPosition.getX() + 0.5F, worldPosition.getY() - 0.7F, worldPosition.getZ() + 0.5F);
+                                .randomVelocity(0.015f * getStage())
+                                .spawn(level, getBlockPos().getX() + 0.5F, getBlockPos().getY() - 0.7F, getBlockPos().getZ() + 0.5F);
                     }
                     if (random.nextFloat() < 0.1) {
-                        Particles.create(WizardsReborn.SPARKLE_PARTICLE)
-                                .addVelocity(((random.nextDouble() - 0.5D) / 30) * getStage(), ((random.nextDouble() - 0.5D) / 30) * getStage(), ((random.nextDouble() - 0.5D) / 30) * getStage())
-                                .setAlpha(0.25f, 0).setScale(0.1f * getStage(), 0)
-                                .setColor(Config.wissenColorR(), Config.wissenColorG(), Config.wissenColorB())
-                                .setLifetime(30)
-                                .setSpin((0.5f * (float) ((random.nextDouble() - 0.5D) * 2)))
-                                .spawn(level, worldPosition.getX() + 0.5F, worldPosition.getY() - 0.7F, worldPosition.getZ() + 0.5F);
+                        ParticleBuilder.create(FluffyFur.WISP_PARTICLE)
+                                .setColorData(ColorParticleData.create(Config.wissenColorR(), Config.wissenColorG(), Config.wissenColorB()).build())
+                                .setTransparencyData(GenericParticleData.create(0.25f, 0).build())
+                                .setScaleData(GenericParticleData.create(0.1f * getStage(), 0).build())
+                                .randomSpin(0.5f)
+                                .setLifetime(20)
+                                .randomVelocity(0.015f * getStage())
+                                .spawn(level, getBlockPos().getX() + 0.5F, getBlockPos().getY() - 0.7F, getBlockPos().getZ() + 0.5F);
                     }
                 }
 
@@ -310,13 +315,14 @@ public class ArcaneIteratorBlockEntity extends BlockEntity implements TickableBl
                         particleRay(-0.03f);
                     }
                     if (random.nextFloat() < 0.225) {
-                        Particles.create(WizardsReborn.WISP_PARTICLE)
-                                .addVelocity(((random.nextDouble() - 0.5D) / 40), ((random.nextDouble() - 0.5D) / 40), ((random.nextDouble() - 0.5D) / 40))
-                                .setAlpha(0.3f, 0).setScale(0.5f, 0)
-                                .setColor(0.611f, 0.352f, 0.447f, 0.807f, 0.800f, 0.639f)
-                                .setLifetime(120)
-                                .setSpin((0.25f * (float) ((random.nextDouble() - 0.5D) * 2)))
-                                .spawn(level, worldPosition.getX() + 0.5F, worldPosition.getY() + 0.5F, worldPosition.getZ() + 0.5F);
+                        ParticleBuilder.create(FluffyFur.WISP_PARTICLE)
+                                .setColorData(ColorParticleData.create(0.611f, 0.352f, 0.447f, 0.807f, 0.800f, 0.639f).build())
+                                .setTransparencyData(GenericParticleData.create(0.3f, 0).build())
+                                .setScaleData(GenericParticleData.create(0.5f, 0).build())
+                                .randomSpin(0.25f)
+                                .setLifetime(30)
+                                .randomVelocity(0.0125f)
+                                .spawn(level, getBlockPos().getX() + 0.5F, getBlockPos().getY() + 1F, getBlockPos().getZ() + 0.5F);
                     }
 
                     List<ArcanePedestalBlockEntity> pedestals = getPedestals();
@@ -365,12 +371,13 @@ public class ArcaneIteratorBlockEntity extends BlockEntity implements TickableBl
         float vy = yOffset * speed + random.nextFloat() * speed * 0.1f;
         float vz = zOffset * speed + random.nextFloat() * speed * 0.1f;
 
-        Particles.create(WizardsReborn.STEAM_PARTICLE)
-                .addVelocity(vx, vy, vz)
-                .setAlpha(0.4f, 0).setScale(0.5f, 0)
-                .setColor(0.611f, 0.352f, 0.447f, 0.807f, 0.800f, 0.639f)
+        ParticleBuilder.create(FluffyFur.SMOKE_PARTICLE)
+                .setColorData(ColorParticleData.create(0.611f, 0.352f, 0.447f, 0.807f, 0.800f, 0.639f).build())
+                .setTransparencyData(GenericParticleData.create(0.4f, 0).build())
+                .setScaleData(GenericParticleData.create(0.5f, 0).build())
+                .randomSpin(0.25f)
                 .setLifetime(120)
-                .setSpin((0.25f * (float) ((random.nextDouble() - 0.5D) * 2)))
+                .addVelocity(vx, vy, vz)
                 .spawn(level, worldPosition.getX() + 0.5F, worldPosition.getY() + 0.5F, worldPosition.getZ() + 0.5F);
     }
 

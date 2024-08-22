@@ -1,22 +1,17 @@
 package mod.maxbogomol.wizards_reborn.api.wissen;
 
 import mod.maxbogomol.wizards_reborn.WizardsReborn;
-import mod.maxbogomol.wizards_reborn.client.particle.Particles;
 import mod.maxbogomol.wizards_reborn.common.item.equipment.WissenWandItem;
 import net.minecraft.client.Minecraft;
-import net.minecraft.core.BlockPos;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.entity.ai.attributes.AttributeInstance;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.level.Level;
-import net.minecraft.world.phys.Vec3;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import top.theillusivec4.curios.api.CuriosApi;
 import top.theillusivec4.curios.api.SlotResult;
 
-import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
@@ -67,96 +62,6 @@ public class WissenUtils {
         }
 
         return renderWand;
-    }
-
-    public static void connectBlockEffect(Level level, BlockPos pos, Color color, float particlePerBlock) {
-        connectBlockEffect(level, new Vec3(pos.getX() + 0.5F, pos.getY() + 0.5F, pos.getZ() + 0.5F), color, particlePerBlock);
-    }
-
-    public static void connectEffect(Level level, BlockPos posFrom, BlockPos posTo, Color color, int particlePerBlock) {
-        connectEffect(level, new Vec3(posFrom.getX() + 0.5F, posFrom.getY() + 0.5F, posFrom.getZ() + 0.5F), new Vec3(posTo.getX() + 0.5F, posTo.getY() + 0.5F, posTo.getZ() + 0.5F), color, particlePerBlock);
-    }
-
-    public static void connectBlockEffect(Level level, Vec3 pos, Color color, float particlePerBlock) {
-        float colorR = (color.getRed() / 255f);
-        float colorG = (color.getGreen() / 255f);
-        float colorB = (color.getBlue() / 255f);
-
-        for (int i = 0; i < particlePerBlock; i++) {
-            if (random.nextFloat() < 0.25f) {
-                Particles.create(WizardsReborn.SPARKLE_PARTICLE)
-                        .addVelocity(((random.nextDouble() - 0.5D) / 100), ((random.nextDouble() - 0.5D) / 100), ((random.nextDouble() - 0.5D) / 100))
-                        .setAlpha(0.45f, 0f).setScale(0.1f, 0f)
-                        .setColor(colorR, colorG, colorB)
-                        .setLifetime(5)
-                        .setSpin((0.1f * (float) ((random.nextDouble() - 0.5D) * 2)))
-                        .spawn(level, pos.x() + (random.nextDouble() - 0.5D), pos.y() + (random.nextDouble() - 0.5D), pos.z() + (random.nextDouble() - 0.5D));
-            }
-        }
-    }
-
-    public static void connectEffect(Level level, Vec3 posFrom, Vec3 posTo, Color color, float particlePerBlock) {
-        double distance = Math.sqrt((posTo.x() - posFrom.x()) * (posTo.x() - posFrom.x()) + (posTo.y() - posFrom.y()) * (posTo.y() - posFrom.y()) + (posTo.z() - posFrom.z()) * (posTo.z() - posFrom.z()));
-        int blocks = (int) Math.round(distance);
-
-        double dX = posFrom.x() - posTo.x();
-        double dY = posFrom.y() - posTo.y();
-        double dZ = posFrom.z() - posTo.z();
-
-        float x = (float) (dX / (blocks * particlePerBlock));
-        float y = (float) (dY / (blocks * particlePerBlock));
-        float z = (float) (dZ / (blocks * particlePerBlock));
-
-        float colorR = (color.getRed() / 255f);
-        float colorG = (color.getGreen() / 255f);
-        float colorB = (color.getBlue() / 255f);
-
-        for (int i = 0; i <= blocks * particlePerBlock; i++) {
-            Particles.create(WizardsReborn.SPARKLE_PARTICLE)
-                    .addVelocity(((random.nextDouble() - 0.5D) / 100), ((random.nextDouble() - 0.5D) / 100), ((random.nextDouble() - 0.5D) / 100))
-                    .setAlpha(0.45f, 0f).setScale(0.05f, 0f)
-                    .setColor(colorR, colorG, colorB)
-                    .setLifetime(1)
-                    .setSpin((0.1f * (float) ((random.nextDouble() - 0.5D) * 2)))
-                    .spawn(level, posFrom.x() - (x * i), posFrom.y() - (y * i), posFrom.z() - (z * i));
-        }
-    }
-
-    public static void connectBlockEffect(Level level, BlockPos pos, Color color) {
-        connectBlockEffect(level, pos, color, 4);
-    }
-
-    public static void connectEffect(Level level, BlockPos posFrom, BlockPos posTo, Color color) {
-        connectEffect(level, posFrom, posTo, color, 4);
-    }
-
-    public static void connectBlockEffect(Level level, Vec3 pos, Color color) {
-        connectBlockEffect(level, pos, color, 4);
-    }
-
-    public static void connectEffect(Level level, Vec3 posFrom, Vec3 posTo, Color color) {
-        connectEffect(level, posFrom, posTo, color, 4);
-    }
-
-    public static void connectBoxEffect(Level level, Vec3 posFrom, Vec3 posTo, Color color, float particlePerBlock) {
-        WissenUtils.connectEffect(level, new Vec3(posFrom.x(), posFrom.y(), posFrom.z()), new Vec3(posTo.x() , posFrom.y(), posFrom.z()), color, particlePerBlock);
-        WissenUtils.connectEffect(level, new Vec3(posTo.x(), posFrom.y(), posFrom.z()), new Vec3(posTo.x(), posFrom.y(), posTo.z()), color, particlePerBlock);
-        WissenUtils.connectEffect(level, new Vec3(posTo.x(), posFrom.y(), posTo.z()), new Vec3(posFrom.x(), posFrom.y(), posTo.z()), color, particlePerBlock);
-        WissenUtils.connectEffect(level, new Vec3(posFrom.x(), posFrom.y(), posTo.z()), new Vec3(posFrom.x(), posFrom.y(), posFrom.z()), color, particlePerBlock);
-
-        WissenUtils.connectEffect(level, new Vec3(posFrom.x(), posFrom.y(), posFrom.z()), new Vec3(posFrom.x(), posTo.y(), posFrom.z()), color, particlePerBlock);
-        WissenUtils.connectEffect(level, new Vec3(posTo.x(), posFrom.y(), posFrom.z()), new Vec3(posTo.x(), posTo.y(), posFrom.z()), color, particlePerBlock);
-        WissenUtils.connectEffect(level, new Vec3(posTo.x(), posFrom.y(), posTo.z()), new Vec3(posTo.x(), posTo.y(), posTo.z()), color, particlePerBlock);
-        WissenUtils.connectEffect(level, new Vec3(posFrom.x(), posFrom.y(), posTo.z()), new Vec3(posFrom.x(), posTo.y(), posTo.z()), color, particlePerBlock);
-
-        WissenUtils.connectEffect(level, new Vec3(posFrom.x(), posTo.y(), posFrom.z()), new Vec3(posTo.x(), posTo.y(), posFrom.z()), color, particlePerBlock);
-        WissenUtils.connectEffect(level, new Vec3(posTo.x(), posTo.y(), posFrom.z()), new Vec3(posTo.x() , posTo.y(), posTo.z()), color, particlePerBlock);
-        WissenUtils.connectEffect(level, new Vec3(posTo.x(), posTo.y(), posTo.z()), new Vec3(posFrom.x(), posTo.y(), posTo.z()), color, particlePerBlock);
-        WissenUtils.connectEffect(level, new Vec3(posFrom.x(), posTo.y(), posTo.z()), new Vec3(posFrom.x(), posTo.y(), posFrom.z()), color, particlePerBlock);
-    }
-
-    public static void connectBoxEffect(Level level, Vec3 posFrom, Vec3 posTo, Color color) {
-        connectBoxEffect(level, posFrom, posTo, color, 1);
     }
 
     public static float getWissenCostModifierWithDiscount(Player player) {

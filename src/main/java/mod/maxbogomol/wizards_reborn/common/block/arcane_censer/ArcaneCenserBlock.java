@@ -1,11 +1,14 @@
 package mod.maxbogomol.wizards_reborn.common.block.arcane_censer;
 
+import mod.maxbogomol.fluffy_fur.FluffyFur;
+import mod.maxbogomol.fluffy_fur.client.particle.ParticleBuilder;
+import mod.maxbogomol.fluffy_fur.client.particle.data.ColorParticleData;
+import mod.maxbogomol.fluffy_fur.client.particle.data.GenericParticleData;
 import mod.maxbogomol.fluffy_fur.common.block.entity.BlockSimpleInventory;
 import mod.maxbogomol.fluffy_fur.common.block.entity.TickableBlockEntity;
 import mod.maxbogomol.wizards_reborn.WizardsReborn;
-import mod.maxbogomol.wizards_reborn.api.alchemy.ISteamTileEntity;
+import mod.maxbogomol.wizards_reborn.api.alchemy.ISteamBlockEntity;
 import mod.maxbogomol.wizards_reborn.api.alchemy.SteamUtils;
-import mod.maxbogomol.wizards_reborn.client.particle.Particles;
 import mod.maxbogomol.wizards_reborn.common.recipe.CenserRecipe;
 import mod.maxbogomol.wizards_reborn.utils.PacketUtils;
 import net.minecraft.core.BlockPos;
@@ -44,6 +47,7 @@ import org.jetbrains.annotations.NotNull;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
+import java.awt.*;
 import java.util.Optional;
 import java.util.Random;
 import java.util.stream.Stream;
@@ -222,18 +226,17 @@ public class ArcaneCenserBlock extends HorizontalDirectionalBlock implements Ent
         if (world.isClientSide()) {
             if (!player.isCreative()) {
                 if (world.getBlockEntity(pos) != null) {
-                    if (world.getBlockEntity(pos) instanceof ISteamTileEntity tile) {
+                    if (world.getBlockEntity(pos) instanceof ISteamBlockEntity tile) {
                         if (tile.getMaxSteam() > 0) {
                             float amount = (float) tile.getSteam() / (float) tile.getMaxSteam();
-                            for (int i = 0; i < 15 * amount; i++) {
-                                Particles.create(WizardsReborn.STEAM_PARTICLE)
-                                        .addVelocity(((random.nextDouble() - 0.5D) / 30), (random.nextDouble() / 30) + 0.001, ((random.nextDouble() - 0.5D) / 30))
-                                        .setAlpha(0.4f, 0).setScale(0.1f, 0.5f)
-                                        .setColor(1f, 1f, 1f)
-                                        .setLifetime(30)
-                                        .setSpin((0.1f * (float) ((random.nextDouble() - 0.5D) * 2)))
-                                        .spawn(world, pos.getX() + 0.5F, pos.getY() + 0.5F, pos.getZ() + 0.5F);
-                            }
+                            ParticleBuilder.create(FluffyFur.SMOKE_PARTICLE)
+                                    .setColorData(ColorParticleData.create(Color.WHITE).build())
+                                    .setTransparencyData(GenericParticleData.create(0.4f, 0).build())
+                                    .setScaleData(GenericParticleData.create(0.1f, 0.5f).build())
+                                    .randomSpin(0.1f)
+                                    .setLifetime(30)
+                                    .randomVelocity(0.015f)
+                                    .repeat(world, pos.getX() + 0.5F, pos.getY() + 0.5F, pos.getZ() + 0.5F, (int) (15 * amount));
                         }
                     }
                 }

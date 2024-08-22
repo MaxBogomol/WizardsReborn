@@ -1,7 +1,10 @@
 package mod.maxbogomol.wizards_reborn.common.network.spell;
 
+import mod.maxbogomol.fluffy_fur.FluffyFur;
+import mod.maxbogomol.fluffy_fur.client.particle.ParticleBuilder;
+import mod.maxbogomol.fluffy_fur.client.particle.data.ColorParticleData;
+import mod.maxbogomol.fluffy_fur.client.particle.data.GenericParticleData;
 import mod.maxbogomol.wizards_reborn.WizardsReborn;
-import mod.maxbogomol.wizards_reborn.client.particle.Particles;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.world.level.Level;
 import net.minecraftforge.network.NetworkEvent;
@@ -52,12 +55,14 @@ public class EarthRaySpellEffectPacket {
                             double y = ((random.nextDouble() - 0.5D) * 2);
                             double z = ((random.nextDouble() - 0.5D) * 2);
 
-                            Particles.create(WizardsReborn.WISP_PARTICLE)
-                                    .addVelocity(-x / 8, -y / 8, -z / 8)
-                                    .setAlpha(0.3f, 0).setScale(0.1f, 0.3f)
-                                    .setColor(msg.colorR, msg.colorG, msg.colorB)
+                            ParticleBuilder.create(FluffyFur.WISP_PARTICLE)
+                                    .setColorData(ColorParticleData.create(msg.colorR, msg.colorG, msg.colorB).build())
+                                    .setTransparencyData(GenericParticleData.create(0.3f, 0).build())
+                                    .setScaleData(GenericParticleData.create(0.1f, 0.3f).build())
                                     .setLifetime(40)
-                                    .spawn(world, msg.X + (x * 1.5f), msg.Y + (y * 1.5f), msg.Z + (z * 1.5f));
+                                    .addVelocity(-x / 8, -y / 8, -z / 8)
+                                    .flatRandomOffset(0.75f, 0.75f, 0.75f)
+                                    .spawn(world, msg.X, msg.Y, msg.Z);
                         }
                     }
 

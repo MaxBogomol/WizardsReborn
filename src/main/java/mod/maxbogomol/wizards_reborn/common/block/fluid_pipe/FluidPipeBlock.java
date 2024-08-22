@@ -56,7 +56,7 @@ public class FluidPipeBlock extends PipeBaseBlock {
 
     @Override
     public BlockEntity newBlockEntity(BlockPos pPos, BlockState pState) {
-        return WizardsReborn.FLUID_PIPE_TILE_ENTITY.get().create(pPos, pState);
+        return WizardsReborn.FLUID_PIPE_BLOCK_ENTITY.get().create(pPos, pState);
     }
 
     @Override

@@ -1,7 +1,10 @@
 package mod.maxbogomol.wizards_reborn.common.network.spell;
 
+import mod.maxbogomol.fluffy_fur.FluffyFur;
+import mod.maxbogomol.fluffy_fur.client.particle.ParticleBuilder;
+import mod.maxbogomol.fluffy_fur.client.particle.data.ColorParticleData;
+import mod.maxbogomol.fluffy_fur.client.particle.data.GenericParticleData;
 import mod.maxbogomol.wizards_reborn.WizardsReborn;
-import mod.maxbogomol.wizards_reborn.client.particle.Particles;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.world.level.Level;
 import net.minecraftforge.network.NetworkEvent;
@@ -45,18 +48,15 @@ public class WaterRaySpellEffectPacket {
                 @Override
                 public void run() {
                     Level world = WizardsReborn.proxy.getWorld();
-
-                    for (int i = 0; i < 15; i++) {
-                        if (random.nextFloat() < 0.6f) {
-                            Particles.create(WizardsReborn.WISP_PARTICLE)
-                                    .addVelocity(((random.nextDouble() - 0.5D) / 6), ((random.nextDouble() - 0.5D) / 8) + 0.3D, ((random.nextDouble() - 0.5D) / 6))
-                                    .setAlpha(0.4f, 0).setScale(0.2f, 0)
-                                    .setColor(msg.colorR, msg.colorG, msg.colorB)
-                                    .setLifetime(60)
-                                    .enableGravity()
-                                    .spawn(world, msg.X, msg.Y, msg.Z);
-                        }
-                    }
+                    ParticleBuilder.create(FluffyFur.WISP_PARTICLE)
+                            .setColorData(ColorParticleData.create(msg.colorR, msg.colorG, msg.colorB).build())
+                            .setTransparencyData(GenericParticleData.create(0.4f, 0).build())
+                            .setScaleData(GenericParticleData.create(0.2f, 0).build())
+                            .setLifetime(60)
+                            .setGravity(1f)
+                            .randomVelocity(0.085f, 0.0625f, 0.085f)
+                            .addVelocity(0, 0.3f, 0)
+                            .repeat(world, msg.X, msg.Y, msg.Z, 15, 0.6f);
 
                     ctx.get().setPacketHandled(true);
                 }

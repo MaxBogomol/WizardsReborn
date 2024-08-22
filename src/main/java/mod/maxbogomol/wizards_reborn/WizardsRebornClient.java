@@ -3,6 +3,7 @@ package mod.maxbogomol.wizards_reborn;
 import com.mojang.blaze3d.platform.InputConstants;
 import com.mojang.blaze3d.vertex.DefaultVertexFormat;
 import mod.maxbogomol.fluffy_fur.FluffyFurClient;
+import mod.maxbogomol.fluffy_fur.client.particle.GenericParticleType;
 import mod.maxbogomol.wizards_reborn.client.config.ClientConfig;
 import mod.maxbogomol.wizards_reborn.client.model.armor.*;
 import mod.maxbogomol.wizards_reborn.client.model.block.AlchemyBottleModel;
@@ -17,7 +18,7 @@ import mod.maxbogomol.wizards_reborn.client.particle.*;
 import mod.maxbogomol.wizards_reborn.client.render.entity.*;
 import mod.maxbogomol.wizards_reborn.client.render.fluid.FluidCuboid;
 import mod.maxbogomol.wizards_reborn.client.render.item.*;
-import mod.maxbogomol.wizards_reborn.client.render.tileentity.*;
+import mod.maxbogomol.wizards_reborn.client.render.block.*;
 import mod.maxbogomol.wizards_reborn.common.block.CustomBlockColor;
 import mod.maxbogomol.wizards_reborn.common.entity.CustomBoatEntity;
 import mod.maxbogomol.wizards_reborn.common.integration.farmersdelight.FarmersDelightIntegration;
@@ -134,9 +135,6 @@ public class WizardsRebornClient {
     public static ShaderInstance getGlowingParticleShader() { return GLOWING_PARTICLE_SHADER; }
     public static ShaderInstance getSpriteParticleShader() { return SPRITE_PARTICLE_SHADER; }
     public static ShaderInstance getFluidShader() { return FLUID_SHADER; }
-
-    public static boolean optifinePresent = false;
-    public static boolean firstScreen = true;
 
     public static PipeModel fluidPipe;
     public static PipeModel steamPipe;
@@ -351,48 +349,48 @@ public class WizardsRebornClient {
             ItemBlockRenderTypes.setRenderLayer(WizardsReborn.FLOWER_BREW_FLUID.get(), RenderType.translucent());
             ItemBlockRenderTypes.setRenderLayer(WizardsReborn.FLOWING_FLOWER_BREW_FLUID.get(), RenderType.translucent());
 
-            BlockEntityRenderers.register(WizardsReborn.ARCANE_PEDESTAL_TILE_ENTITY.get(), (trd) -> new ArcanePedestalTileEntityRenderer());
-            BlockEntityRenderers.register(WizardsReborn.HOVERING_TOME_STAND_TILE_ENTITY.get(), HoveringTomeStandTileEntityRenderer::new);
-            BlockEntityRenderers.register(WizardsReborn.WISSEN_ALTAR_TILE_ENTITY.get(), (trd) -> new WissenAltarTileEntityRenderer());
-            BlockEntityRenderers.register(WizardsReborn.WISSEN_TRANSLATOR_TILE_ENTITY.get(), (trd) -> new WissenTranslatorTileEntityRenderer());
-            BlockEntityRenderers.register(WizardsReborn.WISSEN_CRYSTALLIZER_TILE_ENTITY.get(), (trd) -> new WissenCrystallizerTileEntityRenderer());
-            BlockEntityRenderers.register(WizardsReborn.ARCANE_WORKBENCH_TILE_ENTITY.get(), (trd) -> new ArcaneWorkbenchTileEntityRenderer());
-            BlockEntityRenderers.register(WizardsReborn.WISSEN_CELL_TILE_ENTITY.get(), (trd) -> new WissenCellTileEntityRenderer());
-            BlockEntityRenderers.register(WizardsReborn.JEWELER_TABLE_TILE_ENTITY.get(), (trd) -> new JewelerTableTileEntityRenderer());
-            BlockEntityRenderers.register(WizardsReborn.ORBITAL_FLUID_RETAINER_TILE_ENTITY.get(), (trd) -> new OrbitalFluidRetainerTileEntityRenderer());
-            BlockEntityRenderers.register(WizardsReborn.ALTAR_OF_DROUGHT_TILE_ENTITY.get(), (trd) -> new AltarOfDroughtTileEntityRenderer());
-            BlockEntityRenderers.register(WizardsReborn.ALCHEMY_MACHINE_TILE_ENTITY.get(), (trd) -> new AlchemyMachineTileEntityRenderer());
-            BlockEntityRenderers.register(WizardsReborn.ALCHEMY_BOILER_TILE_ENTITY.get(), (trd) -> new AlchemyBoilerTileEntityRenderer());
-            BlockEntityRenderers.register(WizardsReborn.ARCANE_CENSER_TILE_ENTITY.get(), (trd) -> new ArcaneCenserTileEntityRenderer());
-            BlockEntityRenderers.register(WizardsReborn.EXPERIENCE_TOTEM_TILE_ENTITY.get(), (trd) -> new ExperienceTotemTileEntityRenderer());
-            BlockEntityRenderers.register(WizardsReborn.TOTEM_OF_EXPERIENCE_ABSORPTION_TILE_ENTITY.get(), (trd) -> new TotemOfExperienceAbsorptionTileEntityRenderer());
-            BlockEntityRenderers.register(WizardsReborn.TOTEM_OF_DISENCHANT_TILE_ENTITY.get(), (trd) -> new TotemOfDisenchantTileEntityRenderer());
-            BlockEntityRenderers.register(WizardsReborn.ARCANE_ITERATOR_TILE_ENTITY.get(), (trd) -> new ArcaneIteratorTileEntityRenderer());
-            BlockEntityRenderers.register(WizardsReborn.LIGHT_EMITTER_TILE_ENTITY.get(), (trd) -> new LightEmitterBlockTileEntityRenderer());
-            BlockEntityRenderers.register(WizardsReborn.LIGHT_TRANSFER_LENS_TILE_ENTITY.get(), (trd) -> new LightTransferLensTileEntityRenderer());
-            BlockEntityRenderers.register(WizardsReborn.RUNIC_PEDESTAL_TILE_ENTITY.get(), (trd) -> new RunicPedestalTileEntityRenderer());
-            BlockEntityRenderers.register(WizardsReborn.ENGRAVED_WISESTONE_TILE_ENTITY.get(), (trd) -> new EngravedWisestoneTileEntityRenderer());
+            BlockEntityRenderers.register(WizardsReborn.ARCANE_PEDESTAL_BLOCK_ENTITY.get(), (trd) -> new ArcanePedestalRenderer());
+            BlockEntityRenderers.register(WizardsReborn.HOVERING_TOME_STAND_BLOCK_ENTITY.get(), HoveringTomeStandRenderer::new);
+            BlockEntityRenderers.register(WizardsReborn.WISSEN_ALTAR_BLOCK_ENTITY.get(), (trd) -> new WissenAltarRenderer());
+            BlockEntityRenderers.register(WizardsReborn.WISSEN_TRANSLATOR_BLOCK_ENTITY.get(), (trd) -> new WissenTranslatorRenderer());
+            BlockEntityRenderers.register(WizardsReborn.WISSEN_CRYSTALLIZER_BLOCK_ENTITY.get(), (trd) -> new WissenCrystallizerRenderer());
+            BlockEntityRenderers.register(WizardsReborn.ARCANE_WORKBENCH_BLOCK_ENTITY.get(), (trd) -> new ArcaneWorkbenchRenderer());
+            BlockEntityRenderers.register(WizardsReborn.WISSEN_CELL_BLOCK_ENTITY.get(), (trd) -> new WissenCellRenderer());
+            BlockEntityRenderers.register(WizardsReborn.JEWELER_TABLE_BLOCK_ENTITY.get(), (trd) -> new JewelerTableRenderer());
+            BlockEntityRenderers.register(WizardsReborn.ORBITAL_FLUID_RETAINER_BLOCK_ENTITY.get(), (trd) -> new OrbitalFluidRetainerRenderer());
+            BlockEntityRenderers.register(WizardsReborn.ALTAR_OF_DROUGHT_BLOCK_ENTITY.get(), (trd) -> new AltarOfDroughtRenderer());
+            BlockEntityRenderers.register(WizardsReborn.ALCHEMY_MACHINE_BLOCK_ENTITY.get(), (trd) -> new AlchemyMachineRenderer());
+            BlockEntityRenderers.register(WizardsReborn.ALCHEMY_BOILER_BLOCK_ENTITY.get(), (trd) -> new AlchemyBoilerRenderer());
+            BlockEntityRenderers.register(WizardsReborn.ARCANE_CENSER_BLOCK_ENTITY.get(), (trd) -> new ArcaneCenserRenderer());
+            BlockEntityRenderers.register(WizardsReborn.EXPERIENCE_TOTEM_BLOCK_ENTITY.get(), (trd) -> new ExperienceTotemRenderer());
+            BlockEntityRenderers.register(WizardsReborn.TOTEM_OF_EXPERIENCE_ABSORPTION_BLOCK_ENTITY.get(), (trd) -> new TotemOfExperienceAbsorptionRenderer());
+            BlockEntityRenderers.register(WizardsReborn.TOTEM_OF_DISENCHANT_BLOCK_ENTITY.get(), (trd) -> new TotemOfDisenchantRenderer());
+            BlockEntityRenderers.register(WizardsReborn.ARCANE_ITERATOR_BLOCK_ENTITY.get(), (trd) -> new ArcaneIteratorRenderer());
+            BlockEntityRenderers.register(WizardsReborn.LIGHT_EMITTER_BLOCK_ENTITY.get(), (trd) -> new LightEmitterBlockRenderer());
+            BlockEntityRenderers.register(WizardsReborn.LIGHT_TRANSFER_LENS_BLOCK_ENTITY.get(), (trd) -> new LightTransferLensRenderer());
+            BlockEntityRenderers.register(WizardsReborn.RUNIC_PEDESTAL_BLOCK_ENTITY.get(), (trd) -> new RunicPedestalRenderer());
+            BlockEntityRenderers.register(WizardsReborn.ENGRAVED_WISESTONE_BLOCK_ENTITY.get(), (trd) -> new EngravedWisestoneRenderer());
 
-            BlockEntityRenderers.register(WizardsReborn.SENSOR_TILE_ENTITY.get(), (trd) -> new SensorTileEntityRenderer());
-            BlockEntityRenderers.register(WizardsReborn.FLUID_SENSOR_TILE_ENTITY.get(), (trd) -> new FluidSensorTileEntityRenderer());
-            BlockEntityRenderers.register(WizardsReborn.WISSEN_ACTIVATOR_TILE_ENTITY.get(), (trd) -> new SensorTileEntityRenderer());
-            BlockEntityRenderers.register(WizardsReborn.ITEM_SORTER_TILE_ENTITY.get(), (trd) -> new ItemSorterTileEntityRenderer());
+            BlockEntityRenderers.register(WizardsReborn.SENSOR_BLOCK_ENTITY.get(), (trd) -> new SensorRenderer());
+            BlockEntityRenderers.register(WizardsReborn.FLUID_SENSOR_BLOCK_ENTITY.get(), (trd) -> new FluidSensorRenderer());
+            BlockEntityRenderers.register(WizardsReborn.WISSEN_ACTIVATOR_BLOCK_ENTITY.get(), (trd) -> new SensorRenderer());
+            BlockEntityRenderers.register(WizardsReborn.ITEM_SORTER_BLOCK_ENTITY.get(), (trd) -> new ItemSorterRenderer());
 
-            BlockEntityRenderers.register(WizardsReborn.WISSEN_CASING_TILE_ENTITY.get(), (trd) -> new WissenCasingTileEntityRenderer());
-            BlockEntityRenderers.register(WizardsReborn.LIGHT_CASING_TILE_ENTITY.get(), (trd) -> new LightCasingTileEntityRenderer());
-            BlockEntityRenderers.register(WizardsReborn.FLUID_CASING_TILE_ENTITY.get(), (trd) -> new FluidCasingTileEntityRenderer());
-            BlockEntityRenderers.register(WizardsReborn.STEAM_CASING_TILE_ENTITY.get(), (trd) -> new SteamCasingTileEntityRenderer());
+            BlockEntityRenderers.register(WizardsReborn.WISSEN_CASING_BLOCK_ENTITY.get(), (trd) -> new WissenCasingRenderer());
+            BlockEntityRenderers.register(WizardsReborn.LIGHT_CASING_BLOCK_ENTITY.get(), (trd) -> new LightCasingRenderer());
+            BlockEntityRenderers.register(WizardsReborn.FLUID_CASING_BLOCK_ENTITY.get(), (trd) -> new FluidCasingRenderer());
+            BlockEntityRenderers.register(WizardsReborn.STEAM_CASING_BLOCK_ENTITY.get(), (trd) -> new SteamCasingRenderer());
 
-            BlockEntityRenderers.register(WizardsReborn.CREATIVE_WISSEN_STORAGE_TILE_ENTITY.get(), (trd) -> new CreativeWissenStorageTileEntityRenderer());
-            BlockEntityRenderers.register(WizardsReborn.CREATIVE_LIGHT_STORAGE_TILE_ENTITY.get(), (trd) -> new LightCasingTileEntityRenderer());
+            BlockEntityRenderers.register(WizardsReborn.CREATIVE_WISSEN_STORAGE_BLOCK_ENTITY.get(), (trd) -> new CreativeWissenStorageRenderer());
+            BlockEntityRenderers.register(WizardsReborn.CREATIVE_LIGHT_STORAGE_BLOCK_ENTITY.get(), (trd) -> new LightCasingRenderer());
 
-            BlockEntityRenderers.register(WizardsReborn.SALT_CAMPFIRE_TILE_ENTITY.get(), (trd) -> new SaltCampfireTileEntityRenderer());
+            BlockEntityRenderers.register(WizardsReborn.SALT_CAMPFIRE_BLOCK_ENTITY.get(), (trd) -> new SaltCampfireRenderer());
 
-            BlockEntityRenderers.register(WizardsReborn.ARCANUM_GROWTH_TILE_ENTITY.get(), (trd) -> new ArcanumGrowthTileEntityRenderer());
-            BlockEntityRenderers.register(WizardsReborn.CRYSTAL_GROWTH_TILE_ENTITY.get(), (trd) -> new CrystalGrowthTileEntityRenderer());
-            BlockEntityRenderers.register(WizardsReborn.CRYSTAL_TILE_ENTITY.get(), (trd) -> new CrystalTileEntityRenderer());
+            BlockEntityRenderers.register(WizardsReborn.ARCANUM_GROWTH_BLOCK_ENTITY.get(), (trd) -> new ArcanumGrowthRenderer());
+            BlockEntityRenderers.register(WizardsReborn.CRYSTAL_GROWTH_BLOCK_ENTITY.get(), (trd) -> new CrystalGrowthRenderer());
+            BlockEntityRenderers.register(WizardsReborn.CRYSTAL_BLOCK_ENTITY.get(), (trd) -> new CrystalRenderer());
 
-            BlockEntityRenderers.register(WizardsReborn.PLACED_ITEMS_TILE_ENTITY.get(), (trd) -> new PlacedItemsTileEntityRenderer());
+            BlockEntityRenderers.register(WizardsReborn.PLACED_ITEMS_BLOCK_ENTITY.get(), (trd) -> new PlacedItemsRenderer());
 
             EntityRenderers.register(WizardsReborn.BOAT.get(), m -> new CustomBoatRenderer(m, false));
             EntityRenderers.register(WizardsReborn.CHEST_BOAT.get(), m -> new CustomBoatRenderer(m, true));
@@ -754,15 +752,9 @@ public class WizardsRebornClient {
 
         @SubscribeEvent
         public static void registerFactories(RegisterParticleProvidersEvent event) {
-            Minecraft.getInstance().particleEngine.register(WizardsReborn.WISP_PARTICLE.get(), WispParticleType.Factory::new);
-            Minecraft.getInstance().particleEngine.register(WizardsReborn.SPARKLE_PARTICLE.get(), SparkleParticleType.Factory::new);
-            Minecraft.getInstance().particleEngine.register(WizardsReborn.KARMA_PARTICLE.get(), KarmaParticleType.Factory::new);
-            Minecraft.getInstance().particleEngine.register(WizardsReborn.ARCANE_WOOD_LEAVES_PARTICLE.get(), ArcaneWoodLeavesParticleType.Factory::new);
-            Minecraft.getInstance().particleEngine.register(WizardsReborn.INNOCENT_WOOD_LEAVES_PARTICLE.get(), InnocenceWoodLeavesParticleType.Factory::new);
-            Minecraft.getInstance().particleEngine.register(WizardsReborn.STEAM_PARTICLE.get(), SteamParticleType.Factory::new);
-            Minecraft.getInstance().particleEngine.register(WizardsReborn.SMOKE_PARTICLE.get(), SmokeParticleType.Factory::new);
-            Minecraft.getInstance().particleEngine.register(WizardsReborn.CUBE_PARTICLE.get(), CubeParticleType.Factory::new);
-            Minecraft.getInstance().particleEngine.register(WizardsReborn.TRAIL_PARTICLE.get(), TrailParticleType.Factory::new);
+            Minecraft.getInstance().particleEngine.register(WizardsReborn.KARMA_PARTICLE.get(), GenericParticleType.Factory::new);
+            Minecraft.getInstance().particleEngine.register(WizardsReborn.ARCANE_WOOD_LEAVES_PARTICLE.get(), LeavesParticleType.Factory::new);
+            Minecraft.getInstance().particleEngine.register(WizardsReborn.INNOCENT_WOOD_LEAVES_PARTICLE.get(), LeavesParticleType.Factory::new);
         }
 
         @SubscribeEvent

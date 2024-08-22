@@ -12,7 +12,6 @@
     "common.FaceAttachedHorizontalDirectionalBlockMixin"
   ],
   "client": [
-    "client.TitleScreenMixin",
     "client.LevelRendererMixin",
     "client.ItemInHandRendererMixin",
     "client.RabbitRendererMixin",

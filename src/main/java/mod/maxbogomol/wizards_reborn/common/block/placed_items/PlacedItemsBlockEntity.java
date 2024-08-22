@@ -2,7 +2,7 @@ package mod.maxbogomol.wizards_reborn.common.block.placed_items;
 
 import mod.maxbogomol.fluffy_fur.common.block.entity.BlockSimpleInventory;
 import mod.maxbogomol.wizards_reborn.WizardsReborn;
-import mod.maxbogomol.wizards_reborn.api.wissen.IWissenWandFunctionalTileEntity;
+import mod.maxbogomol.wizards_reborn.api.wissen.IWissenWandFunctionalBlockEntity;
 import mod.maxbogomol.wizards_reborn.utils.PacketUtils;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
@@ -14,7 +14,7 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.AABB;
 import org.jetbrains.annotations.NotNull;
 
-public class PlacedItemsBlockEntity extends BlockSimpleInventory implements IWissenWandFunctionalTileEntity {
+public class PlacedItemsBlockEntity extends BlockSimpleInventory implements IWissenWandFunctionalBlockEntity {
     public boolean things = false;
     public boolean isRotate = true;
 
@@ -23,7 +23,7 @@ public class PlacedItemsBlockEntity extends BlockSimpleInventory implements IWis
     }
 
     public PlacedItemsBlockEntity(BlockPos pos, BlockState state) {
-        this(WizardsReborn.PLACED_ITEMS_TILE_ENTITY.get(), pos, state);
+        this(WizardsReborn.PLACED_ITEMS_BLOCK_ENTITY.get(), pos, state);
     }
 
     @Override

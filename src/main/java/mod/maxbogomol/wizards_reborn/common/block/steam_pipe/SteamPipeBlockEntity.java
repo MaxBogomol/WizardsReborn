@@ -14,7 +14,7 @@ public class SteamPipeBlockEntity extends SteamPipeBaseBlockEntity implements Ti
     }
 
     public SteamPipeBlockEntity(BlockPos pos, BlockState state) {
-        this(WizardsReborn.STEAM_PIPE_TILE_ENTITY.get(), pos, state);
+        this(WizardsReborn.STEAM_PIPE_BLOCK_ENTITY.get(), pos, state);
     }
 
     public void tick() {

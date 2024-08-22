@@ -2,8 +2,8 @@ package mod.maxbogomol.wizards_reborn.common.item;
 
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.math.Axis;
+import mod.maxbogomol.fluffy_fur.FluffyFur;
 import mod.maxbogomol.fluffy_fur.common.item.IGuiParticleItem;
-import mod.maxbogomol.wizards_reborn.WizardsReborn;
 import mod.maxbogomol.wizards_reborn.client.event.ClientTickHandler;
 import mod.maxbogomol.wizards_reborn.common.block.salt_torch.SaltTorchBlockEntity;
 import mod.maxbogomol.wizards_reborn.utils.RenderUtils;
@@ -46,8 +46,8 @@ public class SaltLanternItem extends BlockItem implements IGuiParticleItem {
         RenderUtils.startGuiParticle();
         MultiBufferSource.BufferSource buffersource = Minecraft.getInstance().renderBuffers().bufferSource();
 
-        TextureAtlasSprite sparkle = Minecraft.getInstance().getTextureAtlas(TextureAtlas.LOCATION_BLOCKS).apply(new ResourceLocation(WizardsReborn.MOD_ID, "particle/sparkle"));
-        TextureAtlasSprite wisp = Minecraft.getInstance().getTextureAtlas(TextureAtlas.LOCATION_BLOCKS).apply(new ResourceLocation(WizardsReborn.MOD_ID, "particle/wisp"));
+        TextureAtlasSprite sparkle = Minecraft.getInstance().getTextureAtlas(TextureAtlas.LOCATION_BLOCKS).apply(new ResourceLocation(FluffyFur.MOD_ID, "particle/sparkle"));
+        TextureAtlasSprite wisp = Minecraft.getInstance().getTextureAtlas(TextureAtlas.LOCATION_BLOCKS).apply(new ResourceLocation(FluffyFur.MOD_ID, "particle/wisp"));
 
         pose.pushPose();
         pose.translate(x + 8, y + 10, 100);

@@ -8,8 +8,8 @@ import mod.maxbogomol.wizards_reborn.api.alchemy.IPipeConnection;
 import mod.maxbogomol.wizards_reborn.api.alchemy.PipeConnection;
 import mod.maxbogomol.wizards_reborn.common.alchemypotion.FluidAlchemyPotion;
 import mod.maxbogomol.wizards_reborn.common.block.pipe.PipeBaseBlock;
+import mod.maxbogomol.wizards_reborn.common.block.pipe.PipeBaseBlockEntity;
 import mod.maxbogomol.wizards_reborn.common.item.equipment.AlchemyPotionItem;
-import mod.maxbogomol.wizards_reborn.common.block.pipe.PipeBaseTileEntity;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.sounds.SoundEvent;
@@ -129,10 +129,10 @@ public class CreativeFluidStorageBlock extends Block implements EntityBlock, Sim
             pLevel.scheduleTick(pCurrentPos, Fluids.WATER, Fluids.WATER.getTickDelay(pLevel));
         }
 
-        if (pLevel.getBlockEntity(pCurrentPos) instanceof PipeBaseTileEntity pipe) {
+        if (pLevel.getBlockEntity(pCurrentPos) instanceof PipeBaseBlockEntity pipe) {
             BlockEntity facingBE = pLevel.getBlockEntity(pCurrentPos);
             if (pNeighborState.is(WizardsReborn.FLUID_PIPE_CONNECTION_BLOCK_TAG)) {
-                if (facingBE instanceof PipeBaseTileEntity && ((PipeBaseTileEntity) facingBE).getConnection(pDirection.getOpposite()) == PipeConnection.DISABLED) {
+                if (facingBE instanceof PipeBaseBlockEntity && ((PipeBaseBlockEntity) facingBE).getConnection(pDirection.getOpposite()) == PipeConnection.DISABLED) {
                     pipe.setConnection(pDirection, PipeConnection.NONE);
                 } else {
                     pipe.setConnection(pDirection, PipeConnection.PIPE);

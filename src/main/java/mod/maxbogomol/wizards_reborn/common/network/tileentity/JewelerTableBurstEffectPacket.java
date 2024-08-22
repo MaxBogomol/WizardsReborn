@@ -1,7 +1,10 @@
 package mod.maxbogomol.wizards_reborn.common.network.tileentity;
 
+import mod.maxbogomol.fluffy_fur.FluffyFur;
+import mod.maxbogomol.fluffy_fur.client.particle.ParticleBuilder;
+import mod.maxbogomol.fluffy_fur.client.particle.data.ColorParticleData;
+import mod.maxbogomol.fluffy_fur.client.particle.data.GenericParticleData;
 import mod.maxbogomol.wizards_reborn.WizardsReborn;
-import mod.maxbogomol.wizards_reborn.client.particle.Particles;
 import mod.maxbogomol.wizards_reborn.common.config.Config;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.FriendlyByteBuf;
@@ -97,22 +100,21 @@ public class JewelerTableBurstEffectPacket {
                 @Override
                 public void run() {
                     Level world = WizardsReborn.proxy.getWorld();
-
-                    for (int i = 0; i < 20; i++) {
-                        Particles.create(WizardsReborn.WISP_PARTICLE)
-                                .addVelocity(((random.nextDouble() - 0.5D) / 20), ((random.nextDouble() - 0.5D) / 20), ((random.nextDouble() - 0.5D) / 20))
-                                .setAlpha(0.125f, 0).setScale(0.25f, 0)
-                                .setColor(Config.wissenColorR(), Config.wissenColorG(), Config.wissenColorB())
-                                .setLifetime(20)
-                                .spawn(world, msg.X, msg.Y, msg.Z);
-                        Particles.create(WizardsReborn.SPARKLE_PARTICLE)
-                                .addVelocity(((random.nextDouble() - 0.5D) / 20), ((random.nextDouble() - 0.5D) / 20), ((random.nextDouble() - 0.5D) / 20))
-                                .setAlpha(0.25f, 0).setScale(0.1f, 0)
-                                .setColor(Config.wissenColorR(), Config.wissenColorG(), Config.wissenColorB())
-                                .setLifetime(30)
-                                .setSpin((0.5f * (float) ((random.nextDouble() - 0.5D) * 2)))
-                                .spawn(world, msg.pos.getX() + msg.X, msg.pos.getY() + msg.Y + 0.1875F, msg.pos.getZ() + msg.Z);
-                    }
+                    ParticleBuilder.create(FluffyFur.WISP_PARTICLE)
+                            .setColorData(ColorParticleData.create(Config.wissenColorR(), Config.wissenColorG(), Config.wissenColorB()).build())
+                            .setTransparencyData(GenericParticleData.create(0.125f, 0).build())
+                            .setScaleData(GenericParticleData.create(0.2f, 0).build())
+                            .setLifetime(20)
+                            .randomVelocity(0.05f)
+                            .repeat(world, msg.pos.getX() + msg.X, msg.pos.getY() + msg.Y + 0.1875F, msg.pos.getZ() + msg.Z, 20);
+                    ParticleBuilder.create(FluffyFur.WISP_PARTICLE)
+                            .setColorData(ColorParticleData.create(Config.wissenColorR(), Config.wissenColorG(), Config.wissenColorB()).build())
+                            .setTransparencyData(GenericParticleData.create(0.25f, 0).build())
+                            .setScaleData(GenericParticleData.create(0.1f, 0).build())
+                            .randomSpin(0.5f)
+                            .setLifetime(30)
+                            .randomVelocity(0.05f)
+                            .repeat(world, msg.pos.getX() + msg.X, msg.pos.getY() + msg.Y + 0.1875F, msg.pos.getZ() + msg.Z, 20);
 
                     if (msg.isParticle) {
                         for (int i = 0; i < 25; i++) {
@@ -132,12 +134,13 @@ public class JewelerTableBurstEffectPacket {
                                     y = (float) ((random.nextDouble() / 20) * msg.velY);
                                 }
 
-                                Particles.create(WizardsReborn.SPARKLE_PARTICLE)
-                                        .addVelocity(x, (random.nextDouble() / 30), y)
-                                        .setAlpha(0.35f, 0).setScale(0.2f, 0)
-                                        .setColor(msg.colorR, msg.colorG, msg.colorB)
+                                ParticleBuilder.create(FluffyFur.WISP_PARTICLE)
+                                        .setColorData(ColorParticleData.create(msg.colorR, msg.colorG, msg.colorB).build())
+                                        .setTransparencyData(GenericParticleData.create(0.35f, 0).build())
+                                        .setScaleData(GenericParticleData.create(0.2f, 0).build())
+                                        .randomSpin(0.5f)
                                         .setLifetime(30)
-                                        .setSpin((0.5f * (float) ((random.nextDouble() - 0.5D) * 2)))
+                                        .addVelocity(x, (random.nextDouble() / 30), y)
                                         .spawn(world, msg.pos.getX() + msg.X, msg.pos.getY() + msg.Y - 0.125F, msg.pos.getZ() + msg.Z);
                             }
                         }

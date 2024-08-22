@@ -1,7 +1,12 @@
 package mod.maxbogomol.wizards_reborn.common.network.spell;
 
+import mod.maxbogomol.fluffy_fur.FluffyFur;
+import mod.maxbogomol.fluffy_fur.client.particle.ParticleBuilder;
+import mod.maxbogomol.fluffy_fur.client.particle.data.ColorParticleData;
+import mod.maxbogomol.fluffy_fur.client.particle.data.GenericParticleData;
+import mod.maxbogomol.fluffy_fur.client.particle.data.LightParticleData;
+import mod.maxbogomol.fluffy_fur.utils.RenderUtils;
 import mod.maxbogomol.wizards_reborn.WizardsReborn;
-import mod.maxbogomol.wizards_reborn.client.particle.Particles;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.world.level.Level;
 import net.minecraftforge.network.NetworkEvent;
@@ -45,27 +50,26 @@ public class PoisonSpellEffectPacket {
                 @Override
                 public void run() {
                     Level world = WizardsReborn.proxy.getWorld();
-
-                    for (int i = 0; i < 10; i++) {
-                        if (random.nextFloat() < 0.3f) {
-                            Particles.create(WizardsReborn.STEAM_PARTICLE)
-                                    .addVelocity(((random.nextDouble() - 0.5D) / 70), ((random.nextDouble() - 0.5D) / 70), ((random.nextDouble() - 0.5D) / 70))
-                                    .setAlpha(0.15f, 0).setScale(0.1f, 1.5f)
-                                    .setColor(msg.colorR, msg.colorG, msg.colorB)
-                                    .setLifetime(80)
-                                    .setSpin((0.1f * (float) ((random.nextDouble() - 0.5D) * 2)))
-                                    .spawn(world, msg.X + ((random.nextDouble() - 0.5D) / 2), msg.Y + ((random.nextDouble() - 0.5D) / 2), msg.Z + ((random.nextDouble() - 0.5D) / 2));
-                        }
-                        if (random.nextFloat() < 0.3f) {
-                            Particles.create(WizardsReborn.SMOKE_PARTICLE)
-                                    .addVelocity(((random.nextDouble() - 0.5D) / 60), ((random.nextDouble() - 0.5D) / 60), ((random.nextDouble() - 0.5D) / 60))
-                                    .setAlpha(0.25f, 0).setScale(0.1f, 1.5f)
-                                    .setColor(msg.colorR, msg.colorG, msg.colorB)
-                                    .setLifetime(80)
-                                    .setSpin((0.1f * (float) ((random.nextDouble() - 0.5D) * 2)))
-                                    .spawn(world, msg.X + ((random.nextDouble() - 0.5D) / 2), msg.Y + ((random.nextDouble() - 0.5D) / 2), msg.Z + ((random.nextDouble() - 0.5D) / 2));
-                        }
-                    }
+                    ParticleBuilder.create(FluffyFur.SMOKE_PARTICLE)
+                            .setColorData(ColorParticleData.create(msg.colorR, msg.colorG, msg.colorB).build())
+                            .setTransparencyData(GenericParticleData.create(0.15f, 0).build())
+                            .setScaleData(GenericParticleData.create(0.1f, 1.5f).build())
+                            .randomSpin(0.1f)
+                            .setLifetime(80)
+                            .randomVelocity(0.007f)
+                            .randomOffset(0.25f)
+                            .repeat(world, msg.X, msg.Y, msg.Z, 10, 0.3f);
+                    ParticleBuilder.create(FluffyFur.SMOKE_PARTICLE)
+                            .setRenderType(RenderUtils.DELAYED_PARTICLE)
+                            .setColorData(ColorParticleData.create(msg.colorR, msg.colorG, msg.colorB).build())
+                            .setTransparencyData(GenericParticleData.create(0.25f, 0).build())
+                            .setScaleData(GenericParticleData.create(0.1f, 1.5f).build())
+                            .setLightData(LightParticleData.DEFAULT)
+                            .randomSpin(0.1f)
+                            .setLifetime(80)
+                            .randomVelocity(0.0085f)
+                            .randomOffset(0.25f)
+                            .repeat(world, msg.X, msg.Y, msg.Z, 10, 0.3f);
 
                     ctx.get().setPacketHandled(true);
                 }

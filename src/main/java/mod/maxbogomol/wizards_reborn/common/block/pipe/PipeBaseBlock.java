@@ -3,7 +3,6 @@ package mod.maxbogomol.wizards_reborn.common.block.pipe;
 import mod.maxbogomol.wizards_reborn.api.alchemy.IPipeConnection;
 import mod.maxbogomol.wizards_reborn.api.alchemy.PipeConnection;
 import mod.maxbogomol.wizards_reborn.common.item.equipment.WissenWandItem;
-import mod.maxbogomol.wizards_reborn.common.block.pipe.PipeBaseTileEntity;
 import mod.maxbogomol.wizards_reborn.utils.PacketUtils;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -100,7 +99,7 @@ public abstract class PipeBaseBlock extends Block implements EntityBlock, Simple
             }
 
             BlockEntity BE = level.getBlockEntity(pos);
-            if (BE instanceof PipeBaseTileEntity pipe) {
+            if (BE instanceof PipeBaseBlockEntity pipe) {
                 double reach = player.getBlockReach();
                 Vec3 eyePosition = player.getEyePosition();
                 Vec3 lookVector = player.getLookAngle().multiply(reach, reach, reach).add(eyePosition);
@@ -139,7 +138,7 @@ public abstract class PipeBaseBlock extends Block implements EntityBlock, Simple
                     BlockPos facingPos = pos.relative(face);
                     BlockState facingState = level.getBlockState(facingPos);
 
-                    if (facingState.is(getToggleConnectionTag()) && level.getBlockEntity(facingPos) instanceof PipeBaseTileEntity facingPipe) {
+                    if (facingState.is(getToggleConnectionTag()) && level.getBlockEntity(facingPos) instanceof PipeBaseBlockEntity facingPipe) {
                         pipe.setConnection(face, PipeConnection.PIPE);
                         facingPipe.setConnection(face.getOpposite(), PipeConnection.PIPE);
                         level.updateNeighbourForOutputSignal(pos, this);
@@ -168,7 +167,7 @@ public abstract class PipeBaseBlock extends Block implements EntityBlock, Simple
                     BlockPos facingPos = pos.relative(direction);
                     BlockState facingState = level.getBlockState(facingPos);
 
-                    if (pipe.getConnection(direction) == PipeConnection.PIPE && facingState.is(getToggleConnectionTag()) && level.getBlockEntity(facingPos) instanceof PipeBaseTileEntity facingPipe) {
+                    if (pipe.getConnection(direction) == PipeConnection.PIPE && facingState.is(getToggleConnectionTag()) && level.getBlockEntity(facingPos) instanceof PipeBaseBlockEntity facingPipe) {
                         pipe.setConnection(direction, PipeConnection.DISABLED);
                         facingPipe.setConnection(direction.getOpposite(), PipeConnection.DISABLED);
                         level.updateNeighbourForOutputSignal(pos, this);
@@ -247,7 +246,7 @@ public abstract class PipeBaseBlock extends Block implements EntityBlock, Simple
 
     public static VoxelShape getShapeWithConnection(BlockState state, BlockGetter level, BlockPos pos, CollisionContext context, VoxelShape[] shapes) {
         BlockEntity BE = level.getBlockEntity(pos);
-        if (BE instanceof PipeBaseTileEntity pipe) {
+        if (BE instanceof PipeBaseBlockEntity pipe) {
             return shapes[getShapeIndex(pipe.connections[0], pipe.connections[1], pipe.connections[2], pipe.connections[3], pipe.connections[4], pipe.connections[5])];
         }
         return CENTER_AABB;
@@ -271,12 +270,12 @@ public abstract class PipeBaseBlock extends Block implements EntityBlock, Simple
         }
 
         BlockEntity BE = pLevel.getBlockEntity(pCurrentPos);
-        if (BE instanceof PipeBaseTileEntity pipe) {
+        if (BE instanceof PipeBaseBlockEntity pipe) {
             BlockEntity facingBE = pLevel.getBlockEntity(pFacingPos);
-            if (!(facingBE instanceof PipeBaseTileEntity) || ((PipeBaseTileEntity) facingBE).getConnection(pFacing.getOpposite()) != PipeConnection.DISABLED) {
+            if (!(facingBE instanceof PipeBaseBlockEntity) || ((PipeBaseBlockEntity) facingBE).getConnection(pFacing.getOpposite()) != PipeConnection.DISABLED) {
                 boolean enabled = pipe.getConnection(pFacing) != PipeConnection.DISABLED;
                 if (pFacingState.is(getConnectionTag()) && enabled) {
-                    if (facingBE instanceof PipeBaseTileEntity && ((PipeBaseTileEntity) facingBE).getConnection(pFacing.getOpposite()) == PipeConnection.DISABLED) {
+                    if (facingBE instanceof PipeBaseBlockEntity && ((PipeBaseBlockEntity) facingBE).getConnection(pFacing.getOpposite()) == PipeConnection.DISABLED) {
                         pipe.setConnection(pFacing, PipeConnection.DISABLED);
                     } else {
                         pipe.setConnection(pFacing, PipeConnection.PIPE);

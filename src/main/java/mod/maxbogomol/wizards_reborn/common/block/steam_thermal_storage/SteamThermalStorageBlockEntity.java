@@ -1,10 +1,12 @@
 package mod.maxbogomol.wizards_reborn.common.block.steam_thermal_storage;
 
+import mod.maxbogomol.fluffy_fur.FluffyFur;
+import mod.maxbogomol.fluffy_fur.client.particle.ParticleBuilder;
+import mod.maxbogomol.fluffy_fur.client.particle.data.ColorParticleData;
+import mod.maxbogomol.fluffy_fur.client.particle.data.GenericParticleData;
 import mod.maxbogomol.fluffy_fur.common.block.entity.TickableBlockEntity;
 import mod.maxbogomol.wizards_reborn.WizardsReborn;
-import mod.maxbogomol.wizards_reborn.api.alchemy.ISteamTileEntity;
-import mod.maxbogomol.wizards_reborn.client.particle.Particles;
-import mod.maxbogomol.wizards_reborn.common.block.steam_thermal_storage.SteamThermalStorageBlock;
+import mod.maxbogomol.wizards_reborn.api.alchemy.ISteamBlockEntity;
 import mod.maxbogomol.wizards_reborn.utils.PacketUtils;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -17,9 +19,10 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.Vec3;
 import org.jetbrains.annotations.NotNull;
 
+import java.awt.*;
 import java.util.Random;
 
-public class SteamThermalStorageBlockEntity extends BlockEntity implements TickableBlockEntity, ISteamTileEntity {
+public class SteamThermalStorageBlockEntity extends BlockEntity implements TickableBlockEntity, ISteamBlockEntity {
     public int steam = 0;
 
     public Random random = new Random();
@@ -29,7 +32,7 @@ public class SteamThermalStorageBlockEntity extends BlockEntity implements Ticka
     }
 
     public SteamThermalStorageBlockEntity(BlockPos pos, BlockState state) {
-        this(WizardsReborn.STEAM_THERMAL_STORAGE_TILE_ENTITY.get(), pos, state);
+        this(WizardsReborn.STEAM_THERMAL_STORAGE_BLOCK_ENTITY.get(), pos, state);
     }
 
     @Override
@@ -55,13 +58,15 @@ public class SteamThermalStorageBlockEntity extends BlockEntity implements Ticka
 
             for (int i = 0; i < 2 * amount; i++) {
                 if (random.nextFloat() < amount) {
-                    Particles.create(WizardsReborn.STEAM_PARTICLE)
-                            .addVelocity(((random.nextDouble() - 0.5D) / 30), ((random.nextDouble() - 0.5D) / 30), ((random.nextDouble() - 0.5D) / 30))
-                            .setAlpha(0.4f, 0).setScale(0f, 0.3f)
-                            .setColor(1f, 1f, 1f)
+                    ParticleBuilder.create(FluffyFur.SMOKE_PARTICLE)
+                            .setColorData(ColorParticleData.create(Color.WHITE).build())
+                            .setTransparencyData(GenericParticleData.create(0.4f, 0).build())
+                            .setScaleData(GenericParticleData.create(0f, 0.3f).build())
+                            .randomSpin(0.1f)
                             .setLifetime(30)
-                            .setSpin((0.1f * (float) ((random.nextDouble() - 0.5D) * 2)))
-                            .spawn(level, getBlockPos().getX() + 0.5F + ((random.nextDouble() - 0.5D) * posSteam.x()), getBlockPos().getY() + 0.5F + ((random.nextDouble() - 0.5D) * posSteam.y()), getBlockPos().getZ() + 0.5F + ((random.nextDouble() - 0.5D) * posSteam.z()));
+                            .randomVelocity(0.015f)
+                            .flatRandomOffset(0.5f * posSteam.x(), 0.5f * posSteam.y(), 0.5f * posSteam.z())
+                            .spawn(level, getBlockPos().getX() + 0.5F, getBlockPos().getY() + 0.5F, getBlockPos().getZ() + 0.5F);
                 }
             }
         }

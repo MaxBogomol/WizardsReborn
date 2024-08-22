@@ -1,7 +1,10 @@
 package mod.maxbogomol.wizards_reborn.common.network.spell;
 
+import mod.maxbogomol.fluffy_fur.FluffyFur;
+import mod.maxbogomol.fluffy_fur.client.particle.ParticleBuilder;
+import mod.maxbogomol.fluffy_fur.client.particle.data.ColorParticleData;
+import mod.maxbogomol.fluffy_fur.client.particle.data.GenericParticleData;
 import mod.maxbogomol.wizards_reborn.WizardsReborn;
-import mod.maxbogomol.wizards_reborn.client.particle.Particles;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.util.Mth;
 import net.minecraft.world.level.Level;
@@ -70,19 +73,21 @@ public class RaySpellEffectPacket {
                     Level world = WizardsReborn.proxy.getWorld();
 
                     if (random.nextFloat() < 0.2f) {
-                        Particles.create(WizardsReborn.WISP_PARTICLE)
-                                .addVelocity(((random.nextDouble() - 0.5D) / 20), ((random.nextDouble() - 0.5D) / 20), ((random.nextDouble() - 0.5D) / 20))
-                                .setAlpha(0.2f, 0).setScale(0.15f, 0)
-                                .setColor(msg.colorR, msg.colorG, msg.colorB)
+                        ParticleBuilder.create(FluffyFur.WISP_PARTICLE)
+                                .setColorData(ColorParticleData.create(msg.colorR, msg.colorG, msg.colorB).build())
+                                .setTransparencyData(GenericParticleData.create(0.2f, 0).build())
+                                .setScaleData(GenericParticleData.create(0.15f, 0).build())
                                 .setLifetime(25)
+                                .randomVelocity(0.025f)
                                 .spawn(world, msg.posFromX, msg.posFromY, msg.posFromZ);
 
                         if (random.nextFloat() < 0.1f) {
-                            Particles.create(WizardsReborn.SPARKLE_PARTICLE)
-                                    .addVelocity(((random.nextDouble() - 0.5D) / 20), ((random.nextDouble() - 0.5D) / 20), ((random.nextDouble() - 0.5D) / 20))
-                                    .setAlpha(0.125f, 0).setScale(0.2f, 0)
-                                    .setColor(msg.colorR, msg.colorG, msg.colorB)
+                            ParticleBuilder.create(FluffyFur.WISP_PARTICLE)
+                                    .setColorData(ColorParticleData.create(msg.colorR, msg.colorG, msg.colorB).build())
+                                    .setTransparencyData(GenericParticleData.create(0.125f, 0).build())
+                                    .setScaleData(GenericParticleData.create(0.2f, 0).build())
                                     .setLifetime(20)
+                                    .randomVelocity(0.025f)
                                     .spawn(world, msg.posFromX, msg.posFromY, msg.posFromZ);
                         }
                     }
@@ -95,42 +100,42 @@ public class RaySpellEffectPacket {
                             double lerpY = Mth.lerp(lerp, msg.posFromY, pos.y);
                             double lerpZ = Mth.lerp(lerp, msg.posFromZ, pos.z);
 
-                            Particles.create(WizardsReborn.WISP_PARTICLE)
-                                    .addVelocity(((random.nextDouble() - 0.5D) / 30), ((random.nextDouble() - 0.5D) / 30), ((random.nextDouble() - 0.5D) / 30))
-                                    .setAlpha(0.2f, 0).setScale(0.15f, 0)
-                                    .setColor(msg.colorR, msg.colorG, msg.colorB)
+                            ParticleBuilder.create(FluffyFur.WISP_PARTICLE)
+                                    .setColorData(ColorParticleData.create(msg.colorR, msg.colorG, msg.colorB).build())
+                                    .setTransparencyData(GenericParticleData.create(0.2f, 0).build())
+                                    .setScaleData(GenericParticleData.create(0.15f, 0).build())
                                     .setLifetime(10)
+                                    .randomVelocity(0.015f)
                                     .spawn(world, lerpX, lerpY, lerpZ);
 
                             if (random.nextFloat() < 0.1f) {
-                                Particles.create(WizardsReborn.SPARKLE_PARTICLE)
-                                        .addVelocity(((random.nextDouble() - 0.5D) / 30), ((random.nextDouble() - 0.5D) / 30), ((random.nextDouble() - 0.5D) / 30))
-                                        .setAlpha(0.125f, 0).setScale(0.2f, 0)
-                                        .setColor(msg.colorR, msg.colorG, msg.colorB)
+                                ParticleBuilder.create(FluffyFur.SPARKLE_PARTICLE)
+                                        .setColorData(ColorParticleData.create(msg.colorR, msg.colorG, msg.colorB).build())
+                                        .setTransparencyData(GenericParticleData.create(0.125f, 0).build())
+                                        .setScaleData(GenericParticleData.create(0.2f, 0).build())
                                         .setLifetime(5)
+                                        .randomVelocity(0.015f)
                                         .spawn(world, lerpX, lerpY, lerpZ);
                             }
                         }
                     }
 
                     if (msg.burst) {
-                        for (int i = 0; i < 5; i++) {
-                            if (random.nextFloat() < 0.1) {
-                                Particles.create(WizardsReborn.WISP_PARTICLE)
-                                        .addVelocity(((random.nextDouble() - 0.5D) / 15), ((random.nextDouble() - 0.5D) / 15), ((random.nextDouble() - 0.5D) / 15))
-                                        .setAlpha(0.125f, 0).setScale(0.2f, 0)
-                                        .setColor(msg.colorR, msg.colorG, msg.colorB)
-                                        .setLifetime(40)
-                                        .spawn(world, msg.posToX, msg.posToY, msg.posToZ);
-                                Particles.create(WizardsReborn.SPARKLE_PARTICLE)
-                                        .addVelocity(((random.nextDouble() - 0.5D) / 15), ((random.nextDouble() - 0.5D) / 15), ((random.nextDouble() - 0.5D) / 15))
-                                        .setAlpha(0.25f, 0).setScale(0.075f, 0)
-                                        .setColor(msg.colorR, msg.colorG, msg.colorB)
-                                        .setLifetime(50)
-                                        .setSpin((0.5f * (float) ((random.nextDouble() - 0.5D) * 2)))
-                                        .spawn(world, msg.posToX, msg.posToY, msg.posToZ);
-                            }
-                        }
+                        ParticleBuilder.create(FluffyFur.WISP_PARTICLE)
+                                .setColorData(ColorParticleData.create(msg.colorR, msg.colorG, msg.colorB).build())
+                                .setTransparencyData(GenericParticleData.create(0.125f, 0).build())
+                                .setScaleData(GenericParticleData.create(0.2f, 0).build())
+                                .setLifetime(40)
+                                .randomVelocity(0.035f)
+                                .repeat(world, msg.posToX, msg.posToY, msg.posToZ, 5, 0.1f);
+                        ParticleBuilder.create(FluffyFur.SPARKLE_PARTICLE)
+                                .setColorData(ColorParticleData.create(msg.colorR, msg.colorG, msg.colorB).build())
+                                .setTransparencyData(GenericParticleData.create(0.25f, 0).build())
+                                .setScaleData(GenericParticleData.create(0.075f, 0).build())
+                                .randomSpin(0.5f)
+                                .setLifetime(50)
+                                .randomVelocity(0.035f)
+                                .repeat(world, msg.posToX, msg.posToY, msg.posToZ, 5, 0.1f);
                     }
                     ctx.get().setPacketHandled(true);
                 }

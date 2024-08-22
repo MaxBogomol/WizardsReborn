@@ -1,13 +1,16 @@
 package mod.maxbogomol.wizards_reborn.common.block.wissen_translator;
 
+import mod.maxbogomol.fluffy_fur.FluffyFur;
+import mod.maxbogomol.fluffy_fur.client.particle.ParticleBuilder;
+import mod.maxbogomol.fluffy_fur.client.particle.data.ColorParticleData;
+import mod.maxbogomol.fluffy_fur.client.particle.data.GenericParticleData;
 import mod.maxbogomol.fluffy_fur.common.block.entity.ExposedBlockSimpleInventory;
 import mod.maxbogomol.fluffy_fur.common.block.entity.TickableBlockEntity;
 import mod.maxbogomol.wizards_reborn.WizardsReborn;
-import mod.maxbogomol.wizards_reborn.api.wissen.ICooldownTileEntity;
-import mod.maxbogomol.wizards_reborn.api.wissen.IWissenTileEntity;
-import mod.maxbogomol.wizards_reborn.api.wissen.IWissenWandControlledTileEntity;
+import mod.maxbogomol.wizards_reborn.api.wissen.ICooldownBlockEntity;
+import mod.maxbogomol.wizards_reborn.api.wissen.IWissenBlockEntity;
+import mod.maxbogomol.wizards_reborn.api.wissen.IWissenWandControlledBlockEntity;
 import mod.maxbogomol.wizards_reborn.api.wissen.WissenUtils;
-import mod.maxbogomol.wizards_reborn.client.particle.Particles;
 import mod.maxbogomol.wizards_reborn.common.block.ArcaneLumosBlock;
 import mod.maxbogomol.wizards_reborn.common.config.Config;
 import mod.maxbogomol.wizards_reborn.common.item.equipment.WissenWandItem;
@@ -39,7 +42,7 @@ import java.awt.*;
 import java.util.ArrayList;
 import java.util.Random;
 
-public class WissenTranslatorBlockEntity extends ExposedBlockSimpleInventory implements TickableBlockEntity, IWissenTileEntity, ICooldownTileEntity, IWissenWandControlledTileEntity {
+public class WissenTranslatorBlockEntity extends ExposedBlockSimpleInventory implements TickableBlockEntity, IWissenBlockEntity, ICooldownBlockEntity, IWissenWandControlledBlockEntity {
 
     public int blockFromX = 0;
     public int blockFromY = 0;
@@ -63,7 +66,7 @@ public class WissenTranslatorBlockEntity extends ExposedBlockSimpleInventory imp
     }
 
     public WissenTranslatorBlockEntity(BlockPos pos, BlockState state) {
-        this(WizardsReborn.WISSEN_TRANSLATOR_TILE_ENTITY.get(), pos, state);
+        this(WizardsReborn.WISSEN_TRANSLATOR_BLOCK_ENTITY.get(), pos, state);
     }
 
     @Override
@@ -88,7 +91,7 @@ public class WissenTranslatorBlockEntity extends ExposedBlockSimpleInventory imp
             if (isToBlock) {
                 if (level.isLoaded(new BlockPos(blockToX, blockToY, blockToZ))) {
                     BlockEntity tileentity = level.getBlockEntity(new BlockPos(blockToX, blockToY, blockToZ));
-                    if (tileentity instanceof IWissenTileEntity wissenTileEntity) {
+                    if (tileentity instanceof IWissenBlockEntity wissenTileEntity) {
                         if (wissenTileEntity.canReceiveWissen() && (cooldown <= 0) && canWork()) {
                             int removeRemain = WissenUtils.getRemoveWissenRemain(getWissen(), getWissenPerReceive());
                             int addRemain = WissenUtils.getAddWissenRemain(wissenTileEntity.getWissen(), getWissenPerReceive() - removeRemain, wissenTileEntity.getMaxWissen());
@@ -116,7 +119,7 @@ public class WissenTranslatorBlockEntity extends ExposedBlockSimpleInventory imp
             if (isFromBlock) {
                 if (level.isLoaded(new BlockPos(blockFromX, blockFromY, blockFromZ))) {
                     BlockEntity tileentity = level.getBlockEntity(new BlockPos(blockFromX, blockFromY, blockFromZ));
-                    if (tileentity instanceof IWissenTileEntity wissenTileEntity) {
+                    if (tileentity instanceof IWissenBlockEntity wissenTileEntity) {
                         if (wissenTileEntity.canSendWissen() && (cooldown <= 0) && canWork()) {
                             int addRemain = WissenUtils.getAddWissenRemain(getWissen(), getWissenPerReceive(), getMaxWissen());
                             int removeRemain = WissenUtils.getRemoveWissenRemain(wissenTileEntity.getWissen(), getWissenPerReceive() - addRemain);
@@ -158,20 +161,22 @@ public class WissenTranslatorBlockEntity extends ExposedBlockSimpleInventory imp
                 Color color = getColor();
 
                 if (random.nextFloat() < 0.5) {
-                    Particles.create(WizardsReborn.WISP_PARTICLE)
-                            .addVelocity(((random.nextDouble() - 0.5D) / 30) * getStage(), ((random.nextDouble() - 0.5D) / 30) * getStage(), ((random.nextDouble() - 0.5D) / 30) * getStage())
-                            .setAlpha(0.25f, 0).setScale(0.2f * getStage(), 0)
-                            .setColor((float) color.getRed() / 255, (float) color.getGreen()/ 255, (float) color.getBlue() / 255)
+                    ParticleBuilder.create(FluffyFur.WISP_PARTICLE)
+                            .setColorData(ColorParticleData.create(color).build())
+                            .setTransparencyData(GenericParticleData.create(0.25f, 0).build())
+                            .setScaleData(GenericParticleData.create(0.2f * getStage(), 0).build())
                             .setLifetime(20)
+                            .randomVelocity(0.015f)
                             .spawn(level, worldPosition.getX() + 0.5F, worldPosition.getY() + 0.5F, worldPosition.getZ() + 0.5F);
                 }
                 if (random.nextFloat() < 0.1) {
-                    Particles.create(WizardsReborn.SPARKLE_PARTICLE)
-                            .addVelocity(((random.nextDouble() - 0.5D) / 30) * getStage(), ((random.nextDouble() - 0.5D) / 30) * getStage(), ((random.nextDouble() - 0.5D) / 30) * getStage())
-                            .setAlpha(0.25f, 0).setScale(0.075f * getStage(), 0)
-                            .setColor((float) color.getRed() / 255, (float) color.getGreen()/ 255, (float) color.getBlue() / 255)
+                    ParticleBuilder.create(FluffyFur.SPARKLE_PARTICLE)
+                            .setColorData(ColorParticleData.create(color).build())
+                            .setTransparencyData(GenericParticleData.create(0.25f, 0).build())
+                            .setScaleData(GenericParticleData.create(0.075f * getStage(), 0).build())
+                            .randomSpin(0.5f)
                             .setLifetime(30)
-                            .setSpin((0.5f * (float) ((random.nextDouble() - 0.5D) * 2)))
+                            .randomVelocity(0.015f)
                             .spawn(level, worldPosition.getX() + 0.5F, worldPosition.getY() + 0.5F, worldPosition.getZ() + 0.5F);
                 }
             }
@@ -433,11 +438,11 @@ public class WissenTranslatorBlockEntity extends ExposedBlockSimpleInventory imp
                     deleteRays.add(i);
                 } else if ((blockFromX != Mth.floor(blockX)) || blockFromY != Mth.floor(blockY) || (blockFromZ != Mth.floor(blockZ))) {
                     BlockEntity tileentity = level.getBlockEntity(BlockPos.containing(blockX, blockY, blockZ));
-                    if (tileentity instanceof IWissenTileEntity) {
+                    if (tileentity instanceof IWissenBlockEntity) {
                         if ((Math.abs(blockX) % 1F > 0.15F && Math.abs(blockX) % 1F <= 0.85F) &&
                                 (Math.abs(blockY) % 1F > 0.15F && Math.abs(blockY) % 1F <= 0.85F) &&
                                 (Math.abs(blockZ) % 1F > 0.15F && Math.abs(blockZ) % 1F <= 0.85F)) {
-                            IWissenTileEntity wissenTileEntity = (IWissenTileEntity) tileentity;
+                            IWissenBlockEntity wissenTileEntity = (IWissenBlockEntity) tileentity;
 
                             int addRemain = WissenUtils.getAddWissenRemain(wissenTileEntity.getWissen(), tag.getInt("wissen"), wissenTileEntity.getMaxWissen());
                             wissenTileEntity.addWissen(tag.getInt("wissen") - addRemain);
@@ -503,7 +508,7 @@ public class WissenTranslatorBlockEntity extends ExposedBlockSimpleInventory imp
         BlockPos oldBlockPos = WissenWandItem.getBlockPos(stack);
         BlockEntity oldTile = level.getBlockEntity(oldBlockPos);
 
-        if (oldTile instanceof IWissenTileEntity wissenTile) {
+        if (oldTile instanceof IWissenBlockEntity wissenTile) {
             if ((!isSameFromAndTo(getBlockPos(), oldBlockPos)) && (wissenTile.canConnectReceiveWissen())) {
                 blockFromX = oldBlockPos.getX();
                 blockFromY = oldBlockPos.getY();
@@ -523,7 +528,7 @@ public class WissenTranslatorBlockEntity extends ExposedBlockSimpleInventory imp
         BlockPos oldBlockPos = WissenWandItem.getBlockPos(stack);
         BlockEntity oldTile = level.getBlockEntity(oldBlockPos);
 
-        if (oldTile instanceof IWissenTileEntity wissenTile) {
+        if (oldTile instanceof IWissenBlockEntity wissenTile) {
             if ((!isSameFromAndTo(getBlockPos(), oldBlockPos)) && (wissenTile.canConnectSendWissen())) {
                 blockToX = oldBlockPos.getX();
                 blockToY = oldBlockPos.getY();

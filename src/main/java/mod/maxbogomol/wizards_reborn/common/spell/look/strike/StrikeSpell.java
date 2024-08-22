@@ -2,10 +2,13 @@ package mod.maxbogomol.wizards_reborn.common.spell.look.strike;
 
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.math.Axis;
+import mod.maxbogomol.fluffy_fur.FluffyFur;
 import mod.maxbogomol.fluffy_fur.client.animation.ItemAnimation;
+import mod.maxbogomol.fluffy_fur.client.particle.ParticleBuilder;
+import mod.maxbogomol.fluffy_fur.client.particle.data.ColorParticleData;
+import mod.maxbogomol.fluffy_fur.client.particle.data.GenericParticleData;
 import mod.maxbogomol.wizards_reborn.WizardsReborn;
 import mod.maxbogomol.wizards_reborn.client.animation.StrikeSpellItemAnimation;
-import mod.maxbogomol.wizards_reborn.client.particle.Particles;
 import mod.maxbogomol.wizards_reborn.client.render.WorldRenderHandler;
 import mod.maxbogomol.wizards_reborn.common.entity.SpellProjectileEntity;
 import mod.maxbogomol.wizards_reborn.common.network.AddScreenshakePacket;
@@ -99,15 +102,14 @@ public class StrikeSpell extends BlockLookSpell {
                 Vec3 pos = getBlockHit(world, player, player.getUsedItemHand()).getPosHit();
                 float stage = (float) player.getTicksUsingItem() / getUseTime(world, livingEntity, stack, remainingUseDuration);
                 Color color = getColor();
-                float r = color.getRed() / 255f;
-                float g = color.getGreen() / 255f;
-                float b = color.getBlue() / 255f;
 
-                Particles.create(WizardsReborn.WISP_PARTICLE)
-                        .addVelocity(((random.nextDouble() - 0.5D) / 20), (((random.nextDouble() - 0.5D) / 20)) + 0.03f, ((random.nextDouble() - 0.5D) / 20))
-                        .setAlpha(0.25f, 0).setScale(0.2f * stage, 0)
-                        .setColor(r, g, b)
+                ParticleBuilder.create(FluffyFur.WISP_PARTICLE)
+                        .setColorData(ColorParticleData.create(color).build())
+                        .setTransparencyData(GenericParticleData.create(0.25f, 0).build())
+                        .setScaleData(GenericParticleData.create(0.2f * stage, 0).build())
                         .setLifetime(30)
+                        .randomVelocity(0.025f)
+                        .addVelocity(0, 0.03f, 0)
                         .spawn(world, pos.x(), pos.y(), pos.z());
             }
         }

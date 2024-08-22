@@ -1,12 +1,12 @@
 package mod.maxbogomol.wizards_reborn.client.sound;
 
 import mod.maxbogomol.wizards_reborn.WizardsReborn;
-import mod.maxbogomol.wizards_reborn.common.block.casing.light.LightCasingTileEntity;
+import mod.maxbogomol.wizards_reborn.common.block.casing.light.LightCasingBlockEntity;
 import net.minecraft.client.Minecraft;
 import net.minecraft.core.Direction;
 
-public class LightCasingSoundInstance extends TileEntitySoundInstance<LightCasingTileEntity> {
-    public LightCasingSoundInstance(LightCasingTileEntity blockEntity, float volume, float pitch) {
+public class LightCasingSoundInstance extends TileEntitySoundInstance<LightCasingBlockEntity> {
+    public LightCasingSoundInstance(LightCasingBlockEntity blockEntity, float volume, float pitch) {
         super(blockEntity, WizardsReborn.ARCANUM_LENS_RESONATE_SOUND.get(), volume, pitch);
         this.x = blockEntity.getBlockPos().getX() + 0.5f;
         this.y = blockEntity.getBlockPos().getY() + 0.5f;
@@ -34,7 +34,7 @@ public class LightCasingSoundInstance extends TileEntitySoundInstance<LightCasin
         super.tick();
     }
 
-    public static LightCasingSoundInstance getSound(LightCasingTileEntity tileEntity) {
+    public static LightCasingSoundInstance getSound(LightCasingBlockEntity tileEntity) {
         return new LightCasingSoundInstance(tileEntity, 1, 1);
     }
 

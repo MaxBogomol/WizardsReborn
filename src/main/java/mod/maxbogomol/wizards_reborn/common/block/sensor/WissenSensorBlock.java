@@ -1,7 +1,7 @@
 package mod.maxbogomol.wizards_reborn.common.block.sensor;
 
 import mod.maxbogomol.wizards_reborn.WizardsRebornClient;
-import mod.maxbogomol.wizards_reborn.api.wissen.IWissenTileEntity;
+import mod.maxbogomol.wizards_reborn.api.wissen.IWissenBlockEntity;
 import net.minecraft.client.resources.model.ModelResourceLocation;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -36,7 +36,7 @@ public class WissenSensorBlock extends SensorBaseBlock {
         }
 
         BlockEntity tile = pLevel.getBlockEntity(blockpos);
-        if (tile instanceof IWissenTileEntity wissenTile) {
+        if (tile instanceof IWissenBlockEntity wissenTile) {
             i = Mth.floor(((float) wissenTile.getWissen() / wissenTile.getMaxWissen()) * 14.0F);
         }
 

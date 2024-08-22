@@ -117,7 +117,7 @@ public class RenderUtils {
     public static final RenderType FLUID = RenderType.create(
             WizardsReborn.MOD_ID + ":fluid",
             DefaultVertexFormat.POSITION_COLOR_TEX_LIGHTMAP,
-            VertexFormat.Mode.QUADS, 256, false, true,
+            VertexFormat.Mode.QUADS, 256, true, true,
             RenderType.CompositeState.builder()
                     .setLightmapState(new RenderStateShard.LightmapStateShard(true))
                     .setTransparencyState(TRANSLUCENT_TRANSPARENCY)

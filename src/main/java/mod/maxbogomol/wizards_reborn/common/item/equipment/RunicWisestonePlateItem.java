@@ -1,6 +1,7 @@
 package mod.maxbogomol.wizards_reborn.common.item.equipment;
 
 import com.mojang.blaze3d.vertex.PoseStack;
+import mod.maxbogomol.fluffy_fur.FluffyFur;
 import mod.maxbogomol.fluffy_fur.common.item.IGuiParticleItem;
 import mod.maxbogomol.fluffy_fur.utils.ColorUtils;
 import mod.maxbogomol.wizards_reborn.WizardsReborn;
@@ -108,7 +109,7 @@ public class RunicWisestonePlateItem extends Item implements IGuiParticleItem {
             RenderUtils.startGuiParticle();
             MultiBufferSource.BufferSource buffersource = Minecraft.getInstance().renderBuffers().bufferSource();
 
-            TextureAtlasSprite wisp = Minecraft.getInstance().getTextureAtlas(TextureAtlas.LOCATION_BLOCKS).apply(new ResourceLocation(WizardsReborn.MOD_ID, "particle/wisp"));
+            TextureAtlasSprite wisp = Minecraft.getInstance().getTextureAtlas(TextureAtlas.LOCATION_BLOCKS).apply(new ResourceLocation(FluffyFur.MOD_ID, "particle/wisp"));
 
             for (int i = 0; i < 45; i++) {
                 pose.pushPose();

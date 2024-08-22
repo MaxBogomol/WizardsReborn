@@ -1,12 +1,15 @@
 package mod.maxbogomol.wizards_reborn.common.block.arcane_censer;
 
+import mod.maxbogomol.fluffy_fur.FluffyFur;
+import mod.maxbogomol.fluffy_fur.client.particle.ParticleBuilder;
+import mod.maxbogomol.fluffy_fur.client.particle.data.ColorParticleData;
+import mod.maxbogomol.fluffy_fur.client.particle.data.GenericParticleData;
 import mod.maxbogomol.fluffy_fur.common.block.entity.ExposedBlockSimpleInventory;
 import mod.maxbogomol.fluffy_fur.common.block.entity.TickableBlockEntity;
 import mod.maxbogomol.fluffy_fur.utils.ColorUtils;
 import mod.maxbogomol.wizards_reborn.WizardsReborn;
-import mod.maxbogomol.wizards_reborn.api.alchemy.ISteamTileEntity;
-import mod.maxbogomol.wizards_reborn.api.wissen.ICooldownTileEntity;
-import mod.maxbogomol.wizards_reborn.client.particle.Particles;
+import mod.maxbogomol.wizards_reborn.api.alchemy.ISteamBlockEntity;
+import mod.maxbogomol.wizards_reborn.api.wissen.ICooldownBlockEntity;
 import mod.maxbogomol.wizards_reborn.common.network.PacketHandler;
 import mod.maxbogomol.wizards_reborn.common.network.SmokeEffectPacket;
 import mod.maxbogomol.wizards_reborn.common.recipe.CenserRecipe;
@@ -32,12 +35,13 @@ import net.minecraft.world.phys.Vec3;
 import org.jetbrains.annotations.NotNull;
 
 import javax.annotation.Nullable;
+import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.Random;
 
-public class ArcaneCenserBlockEntity extends ExposedBlockSimpleInventory implements TickableBlockEntity, ISteamTileEntity, ICooldownTileEntity {
+public class ArcaneCenserBlockEntity extends ExposedBlockSimpleInventory implements TickableBlockEntity, ISteamBlockEntity, ICooldownBlockEntity {
     public int steam = 0;
     public int cooldown = 0;
 
@@ -48,7 +52,7 @@ public class ArcaneCenserBlockEntity extends ExposedBlockSimpleInventory impleme
     }
 
     public ArcaneCenserBlockEntity(BlockPos pos, BlockState state) {
-        this(WizardsReborn.ARCANE_CENSER_TILE_ENTITY.get(), pos, state);
+        this(WizardsReborn.ARCANE_CENSER_BLOCK_ENTITY.get(), pos, state);
     }
 
     @Override
@@ -69,12 +73,13 @@ public class ArcaneCenserBlockEntity extends ExposedBlockSimpleInventory impleme
         if (level.isClientSide()) {
             if (cooldown > 0) {
                 if (random.nextFloat() < 0.2F) {
-                    Particles.create(WizardsReborn.STEAM_PARTICLE)
-                            .addVelocity(((random.nextDouble() - 0.5D) / 15), ((random.nextDouble() - 0.5D) / 15) + 0.05, ((random.nextDouble() - 0.5D) / 15))
-                            .setAlpha(0.1f, 0).setScale(0.1f, 3)
-                            .setColor(1f, 1f, 1f)
-                            .setLifetime(200 + random.nextInt(100))
-                            .setSpin((0.1f * (float) ((random.nextDouble() - 0.5D) * 2)))
+                    ParticleBuilder.create(FluffyFur.SMOKE_PARTICLE)
+                            .setColorData(ColorParticleData.create(Color.WHITE).build())
+                            .setTransparencyData(GenericParticleData.create(0.1f, 0).build())
+                            .setScaleData(GenericParticleData.create(0.1f, 3f).build())
+                            .randomSpin(0.1f)
+                            .setLifetime(200, 100)
+                            .randomVelocity(0.035f)
                             .spawn(level, getBlockPos().getX() + 0.5F, getBlockPos().getY() + 1F, getBlockPos().getZ() + 0.5F);
                 }
             }
@@ -83,13 +88,15 @@ public class ArcaneCenserBlockEntity extends ExposedBlockSimpleInventory impleme
 
             for (int i = 0; i < 2 * amount; i++) {
                 if (random.nextFloat() < amount) {
-                    Particles.create(WizardsReborn.STEAM_PARTICLE)
-                            .addVelocity(((random.nextDouble() - 0.5D) / 30), ((random.nextDouble() - 0.5D) / 30), ((random.nextDouble() - 0.5D) / 30))
-                            .setAlpha(0.4f, 0).setScale(0f, 0.3f)
-                            .setColor(1f, 1f, 1f)
+                    ParticleBuilder.create(FluffyFur.SMOKE_PARTICLE)
+                            .setColorData(ColorParticleData.create(Color.WHITE).build())
+                            .setTransparencyData(GenericParticleData.create(0.4f, 0).build())
+                            .setScaleData(GenericParticleData.create(0, 0.3f).build())
+                            .randomSpin(0.1f)
                             .setLifetime(30)
-                            .setSpin((0.1f * (float) ((random.nextDouble() - 0.5D) * 2)))
-                            .spawn(level, getBlockPos().getX() + 0.5F + ((random.nextDouble() - 0.5D) * 0.05), getBlockPos().getY() + 0.375F + ((random.nextDouble() - 0.5D) * 0.15), getBlockPos().getZ() + 0.5F + ((random.nextDouble() - 0.5D) * 0.05));
+                            .randomVelocity(0.015f)
+                            .flatRandomOffset(0.025f, 0.075f, 0.025f)
+                            .spawn(level, getBlockPos().getX() + 0.5F, getBlockPos().getY() + 0.375F, getBlockPos().getZ() + 0.5F);
                 }
             }
         }

@@ -1,7 +1,10 @@
 package mod.maxbogomol.wizards_reborn.common.network.spell;
 
+import mod.maxbogomol.fluffy_fur.FluffyFur;
+import mod.maxbogomol.fluffy_fur.client.particle.ParticleBuilder;
+import mod.maxbogomol.fluffy_fur.client.particle.data.ColorParticleData;
+import mod.maxbogomol.fluffy_fur.client.particle.data.GenericParticleData;
 import mod.maxbogomol.wizards_reborn.WizardsReborn;
-import mod.maxbogomol.wizards_reborn.client.particle.Particles;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.world.level.Level;
 import net.minecraftforge.network.NetworkEvent;
@@ -54,16 +57,15 @@ public class AirImpactSpellEffectPacket {
                 @Override
                 public void run() {
                     Level world = WizardsReborn.proxy.getWorld();
-
-                    for (int i = 0; i < 20; i++) {
-                        Particles.create(WizardsReborn.WISP_PARTICLE)
-                                .addVelocity(msg.velX + ((random.nextDouble() - 0.5D) / 40), msg.velY + ((random.nextDouble() - 0.5D) / 40), msg.velZ + ((random.nextDouble() - 0.5D) / 40))
-                                .setAlpha(0.05f, 0).setScale(0.1f, 1.0f)
-                                .setColor(msg.colorR, msg.colorG, msg.colorB)
-                                .setLifetime(15)
-                                .setSpin(3f)
-                                .spawn(world, msg.X, msg.Y, msg.Z);
-                    }
+                    ParticleBuilder.create(FluffyFur.WISP_PARTICLE)
+                            .setColorData(ColorParticleData.create(msg.colorR, msg.colorG, msg.colorB).build())
+                            .setTransparencyData(GenericParticleData.create(0.05f, 0).build())
+                            .setScaleData(GenericParticleData.create(0.1f, 1.0f).build())
+                            .randomSpin(3f)
+                            .setLifetime(15)
+                            .randomVelocity(0.0125f)
+                            .addVelocity(msg.velX, msg.velY, msg.velZ)
+                            .repeat(world, msg.X, msg.Y, msg.Z, 20);
 
                     ctx.get().setPacketHandled(true);
                 }

@@ -46,7 +46,7 @@ public class CrossBaulkBlock extends CrossBaulkBaseBlock {
 
     @Override
     public BlockEntity newBlockEntity(BlockPos pPos, BlockState pState) {
-        return WizardsReborn.CROSS_BAULK_TILE_ENTITY.get().create(pPos, pState);
+        return WizardsReborn.CROSS_BAULK_BLOCK_ENTITY.get().create(pPos, pState);
     }
 
     @Override

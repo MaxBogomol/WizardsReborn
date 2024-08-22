@@ -2,10 +2,10 @@ package mod.maxbogomol.wizards_reborn.common.block.alchemy_furnace;
 
 import mod.maxbogomol.fluffy_fur.common.block.entity.TickableBlockEntity;
 import mod.maxbogomol.wizards_reborn.WizardsReborn;
-import mod.maxbogomol.wizards_reborn.api.alchemy.IFluidTileEntity;
+import mod.maxbogomol.wizards_reborn.api.alchemy.IFluidBlockEntity;
 import mod.maxbogomol.wizards_reborn.api.alchemy.IHeatTileEntity;
-import mod.maxbogomol.wizards_reborn.api.alchemy.ISteamTileEntity;
-import mod.maxbogomol.wizards_reborn.api.wissen.IItemResultTileEntity;
+import mod.maxbogomol.wizards_reborn.api.alchemy.ISteamBlockEntity;
+import mod.maxbogomol.wizards_reborn.api.wissen.IItemResultBlockEntity;
 import mod.maxbogomol.wizards_reborn.utils.PacketUtils;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -50,7 +50,7 @@ import java.util.Random;
 
 import static net.minecraft.world.level.block.state.properties.BlockStateProperties.HORIZONTAL_FACING;
 
-public class AlchemyFurnaceBlockEntity extends BlockEntity implements TickableBlockEntity, IFluidTileEntity, ISteamTileEntity, IHeatTileEntity, IItemResultTileEntity {
+public class AlchemyFurnaceBlockEntity extends BlockEntity implements TickableBlockEntity, IFluidBlockEntity, ISteamBlockEntity, IHeatTileEntity, IItemResultBlockEntity {
     public final ItemStackHandler itemHandler = createHandler(1);
     public final LazyOptional<IItemHandler> handler = LazyOptional.of(() -> itemHandler);
     public final ItemStackHandler itemFuelHandler = createHandler(1);
@@ -86,7 +86,7 @@ public class AlchemyFurnaceBlockEntity extends BlockEntity implements TickableBl
     }
 
     public AlchemyFurnaceBlockEntity(BlockPos pos, BlockState state) {
-        this(WizardsReborn.ALCHEMY_FURNACE_TILE_ENTITY.get(), pos, state);
+        this(WizardsReborn.ALCHEMY_FURNACE_BLOCK_ENTITY.get(), pos, state);
     }
 
     @Override

@@ -12,7 +12,7 @@ public class CreativeWissenStorageBlockEntity extends WissenCellBlockEntity {
     }
 
     public CreativeWissenStorageBlockEntity(BlockPos pos, BlockState state) {
-        this(WizardsReborn.CREATIVE_WISSEN_STORAGE_TILE_ENTITY.get(), pos, state);
+        this(WizardsReborn.CREATIVE_WISSEN_STORAGE_BLOCK_ENTITY.get(), pos, state);
     }
 
     @Override

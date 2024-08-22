@@ -52,7 +52,7 @@ public class FluidExtractorBlock extends ExtractorBaseBlock {
 
     @Override
     public BlockEntity newBlockEntity(BlockPos pPos, BlockState pState) {
-        return WizardsReborn.FLUID_EXTRACTOR_TILE_ENTITY.get().create(pPos, pState);
+        return WizardsReborn.FLUID_EXTRACTOR_BLOCK_ENTITY.get().create(pPos, pState);
     }
 
     @Override

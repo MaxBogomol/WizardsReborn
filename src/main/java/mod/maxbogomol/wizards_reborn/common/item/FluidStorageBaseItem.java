@@ -2,7 +2,7 @@ package mod.maxbogomol.wizards_reborn.common.item;
 
 import mod.maxbogomol.fluffy_fur.common.item.ICustomBlockEntityDataItem;
 import mod.maxbogomol.wizards_reborn.api.alchemy.IFluidItem;
-import mod.maxbogomol.wizards_reborn.api.alchemy.IFluidTileEntity;
+import mod.maxbogomol.wizards_reborn.api.alchemy.IFluidBlockEntity;
 import mod.maxbogomol.wizards_reborn.client.config.ClientConfig;
 import mod.maxbogomol.wizards_reborn.utils.NumericalUtils;
 import net.minecraft.ChatFormatting;
@@ -42,7 +42,7 @@ public class FluidStorageBaseItem extends BlockItem implements IFluidItem, ICust
     public int getMaxFluid(ItemStack stack) {
         if (getBlock() instanceof EntityBlock tileBlock) {
             BlockEntity tile = tileBlock.newBlockEntity(new BlockPos(0, 0, 0), getBlock().defaultBlockState());
-            if (tile instanceof IFluidTileEntity fluidTile) {
+            if (tile instanceof IFluidBlockEntity fluidTile) {
                 return fluidTile.getFluidMaxAmount();
             }
         }
@@ -54,7 +54,7 @@ public class FluidStorageBaseItem extends BlockItem implements IFluidItem, ICust
     public void appendHoverText(ItemStack stack, Level world, List<Component> list, TooltipFlag flags) {
         if (getBlock() instanceof EntityBlock tileBlock) {
             BlockEntity tile = tileBlock.newBlockEntity(new BlockPos(0, 0, 0), getBlock().defaultBlockState());
-            if (tile instanceof IFluidTileEntity fluidTile) {
+            if (tile instanceof IFluidBlockEntity fluidTile) {
                 CompoundTag nbt = stack.getOrCreateTag();
                 if (nbt.contains("fluidTank")) {
                     FluidStack fluid = FluidStack.loadFluidStackFromNBT(nbt.getCompound("fluidTank"));

@@ -1,7 +1,10 @@
 package mod.maxbogomol.wizards_reborn.common.network.spell;
 
+import mod.maxbogomol.fluffy_fur.FluffyFur;
+import mod.maxbogomol.fluffy_fur.client.particle.ParticleBuilder;
+import mod.maxbogomol.fluffy_fur.client.particle.data.ColorParticleData;
+import mod.maxbogomol.fluffy_fur.client.particle.data.GenericParticleData;
 import mod.maxbogomol.wizards_reborn.WizardsReborn;
-import mod.maxbogomol.wizards_reborn.client.particle.Particles;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.util.Mth;
@@ -87,12 +90,15 @@ public class IcicleRayEffectPacket {
                         double lerpZ = Mth.lerp(i / 10.0f, msg.posFromZ, pos.z);
 
                         if (random.nextFloat() < 0.05f) {
-                            Particles.create(WizardsReborn.WISP_PARTICLE)
-                                    .addVelocity(-norm.x + ((random.nextDouble() - 0.5D) / 500), -norm.y + ((random.nextDouble() - 0.5D) / 500), -norm.z + ((random.nextDouble() - 0.5D) / 500))
-                                    .setAlpha(0.2f, 0).setScale(0.15f, 0)
-                                    .setColor(msg.r, msg.g, msg.b)
+                            ParticleBuilder.create(FluffyFur.WISP_PARTICLE)
+                                    .setColorData(ColorParticleData.create(msg.r, msg.g, msg.b).build())
+                                    .setTransparencyData(GenericParticleData.create(0.2f, 0).build())
+                                    .setScaleData(GenericParticleData.create(0.15f, 0).build())
+                                    .randomSpin(0.4f)
                                     .setLifetime(20)
-                                    .setSpin((0.4f * (float) ((random.nextDouble() - 0.5D) * 2)))
+                                    .randomVelocity(0.001f)
+                                    .addVelocity(-norm.x, -norm.y, -norm.z)
+                                    .randomOffset(0.15f)
                                     .spawn(world, lerpX, lerpY, lerpZ);
                         }
 

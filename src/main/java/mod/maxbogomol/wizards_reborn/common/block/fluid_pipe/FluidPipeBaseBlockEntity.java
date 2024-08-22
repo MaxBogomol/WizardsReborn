@@ -1,13 +1,15 @@
 package mod.maxbogomol.wizards_reborn.common.block.fluid_pipe;
 
+import mod.maxbogomol.fluffy_fur.FluffyFur;
+import mod.maxbogomol.fluffy_fur.client.particle.ParticleBuilder;
+import mod.maxbogomol.fluffy_fur.client.particle.data.ColorParticleData;
+import mod.maxbogomol.fluffy_fur.client.particle.data.GenericParticleData;
 import mod.maxbogomol.fluffy_fur.common.block.entity.TickableBlockEntity;
-import mod.maxbogomol.wizards_reborn.WizardsReborn;
+import mod.maxbogomol.wizards_reborn.api.alchemy.IFluidBlockEntity;
 import mod.maxbogomol.wizards_reborn.api.alchemy.IFluidPipePriority;
-import mod.maxbogomol.wizards_reborn.api.alchemy.IFluidTileEntity;
 import mod.maxbogomol.wizards_reborn.api.alchemy.PipePriorityMap;
-import mod.maxbogomol.wizards_reborn.client.particle.Particles;
+import mod.maxbogomol.wizards_reborn.common.block.pipe.PipeBaseBlockEntity;
 import mod.maxbogomol.wizards_reborn.common.item.equipment.WissenWandItem;
-import mod.maxbogomol.wizards_reborn.common.block.pipe.PipeBaseTileEntity;
 import net.minecraft.client.Minecraft;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -34,7 +36,7 @@ import net.minecraftforge.fluids.capability.templates.FluidTank;
 import java.util.ArrayList;
 import java.util.Random;
 
-public abstract class FluidPipeBaseBlockEntity extends PipeBaseTileEntity implements IFluidPipePriority, TickableBlockEntity, IFluidTileEntity {
+public abstract class FluidPipeBaseBlockEntity extends PipeBaseBlockEntity implements IFluidPipePriority, TickableBlockEntity, IFluidBlockEntity {
 
     public static final int PRIORITY_BLOCK = 0;
     public static final int PRIORITY_PIPE = PRIORITY_BLOCK;
@@ -220,15 +222,14 @@ public abstract class FluidPipeBaseBlockEntity extends PipeBaseTileEntity implem
             float r = clogged ? 255f : 16f;
             float g = clogged ? 16f : 255f;
             float b = 16f;
-            for(int i = 0; i < 2; i++) {
-                Particles.create(WizardsReborn.SPARKLE_PARTICLE)
-                        .addVelocity(vx / 10f, vy / 10f, vz / 10f)
-                        .setAlpha(0.3f, 0f).setScale(0.1f, 0f)
-                        .setColor(r / 255f, g / 255f, b / 255f)
-                        .setLifetime(10)
-                        .setSpin((0.1f * (float) ((random.nextDouble() - 0.5D) * 2)))
-                        .spawn(level,  x,  y, z);
-            }
+            ParticleBuilder.create(FluffyFur.SPARKLE_PARTICLE)
+                    .setColorData(ColorParticleData.create(r / 255f, g / 255f, b / 255f).build())
+                    .setTransparencyData(GenericParticleData.create(0.3f, 0f).build())
+                    .setScaleData(GenericParticleData.create(0.1f, 0f).build())
+                    .randomSpin(0.1f)
+                    .setLifetime(10)
+                    .addVelocity(vx / 10f, vy / 10f, vz / 10f)
+                    .repeat(level, x, y, z, 2);
         }
     }
 

@@ -1,7 +1,11 @@
 package mod.maxbogomol.wizards_reborn.common.entity;
 
+import mod.maxbogomol.fluffy_fur.FluffyFur;
+import mod.maxbogomol.fluffy_fur.client.particle.ParticleBuilder;
+import mod.maxbogomol.fluffy_fur.client.particle.data.ColorParticleData;
+import mod.maxbogomol.fluffy_fur.client.particle.data.GenericParticleData;
+import mod.maxbogomol.fluffy_fur.common.easing.Easing;
 import mod.maxbogomol.wizards_reborn.WizardsReborn;
-import mod.maxbogomol.wizards_reborn.client.particle.Particles;
 import mod.maxbogomol.wizards_reborn.common.damage.DamageSourceRegistry;
 import mod.maxbogomol.wizards_reborn.common.network.AddScreenshakePacket;
 import mod.maxbogomol.wizards_reborn.common.network.PacketHandler;
@@ -33,8 +37,8 @@ import net.minecraft.world.phys.Vec3;
 import net.minecraftforge.network.NetworkHooks;
 
 import java.awt.*;
-import java.util.*;
 import java.util.List;
+import java.util.*;
 
 public class ThrowedScytheEntity extends ThrowableItemProjectile {
     public static final EntityDataAccessor<Optional<UUID>> ownerId = SynchedEntityData.defineId(ThrowedScytheEntity.class, EntityDataSerializers.OPTIONAL_UUID);
@@ -161,23 +165,27 @@ public class ThrowedScytheEntity extends ThrowableItemProjectile {
                 Vec3 pos = new Vec3(getPosition(0.5f).toVector3f()).add(x, y, z);
 
                 if (random.nextFloat() < 0.8f) {
-                    Particles.create(WizardsReborn.CUBE_PARTICLE)
-                            .addVelocity(((random.nextDouble() - 0.5D) / 25), ((random.nextDouble() - 0.5D) / 25), ((random.nextDouble() - 0.5D) / 25))
-                            .setAlpha(0.3f, 0).setScale(0.05f, 0)
-                            .setColor(r, g, b)
+                    ParticleBuilder.create(FluffyFur.CUBE_PARTICLE)
+                            .setColorData(ColorParticleData.create(r, g, b).build())
+                            .setTransparencyData(GenericParticleData.create(0.3f, 0).build())
+                            .setScaleData(GenericParticleData.create(0.05f, 0).setEasing(Easing.QUINTIC_IN_OUT).build())
+                            .randomSpin(0.3f)
                             .setLifetime(40)
-                            .spawn(level(), pos.x(), pos.y(), pos.z());
+                            .randomVelocity(0.02f, 0.02f, 0.02f)
+                            .spawn(level(), pos.x(), pos.y() + 0.1, pos.z());
                 }
 
                 int i = EnchantmentHelper.getItemEnchantmentLevel(Enchantments.FIRE_ASPECT, getItem());
                 if (i > 0) {
                     if (random.nextFloat() < 0.8f) {
-                        Particles.create(WizardsReborn.CUBE_PARTICLE)
-                                .addVelocity(((random.nextDouble() - 0.5D) / 25), ((random.nextDouble() - 0.5D) / 25) + 0.02f, ((random.nextDouble() - 0.5D) / 25))
-                                .setAlpha(0.3f, 0).setScale(0.1f, 0)
-                                .setColor(0.882f, 0.498f, 0.404f, 0.979f, 0.912f, 0.585f)
+                        ParticleBuilder.create(FluffyFur.CUBE_PARTICLE)
+                                .setColorData(ColorParticleData.create(0.882f, 0.498f, 0.404f, 0.979f, 0.912f, 0.585f).build())
+                                .setTransparencyData(GenericParticleData.create(0.3f, 0).build())
+                                .setScaleData(GenericParticleData.create(0.05f, 0).setEasing(Easing.QUINTIC_IN_OUT).build())
+                                .randomSpin(0.3f)
                                 .setLifetime(40)
-                                .spawn(level(), pos.x(), pos.y(), pos.z());
+                                .randomVelocity(0.02f, 0.02f, 0.02f)
+                                .spawn(level(), pos.x(), pos.y() + 0.1, pos.z());
                     }
                 }
             } else {
@@ -301,30 +309,34 @@ public class ThrowedScytheEntity extends ThrowableItemProjectile {
 
                     Vec3 pos = new Vec3(lerpX, lerpY, lerpZ).add(x, y, z);
 
-                    Particles.create(WizardsReborn.CUBE_PARTICLE)
-                            .addVelocity(((random.nextDouble() - 0.5D) / 25), ((random.nextDouble() - 0.5D) / 25), ((random.nextDouble() - 0.5D) / 25))
-                            .setAlpha(0.3f, 0).setScale(0.1f, 0)
-                            .setColor(r, g, b)
+                    ParticleBuilder.create(FluffyFur.CUBE_PARTICLE)
+                            .setColorData(ColorParticleData.create(r, g, b).build())
+                            .setTransparencyData(GenericParticleData.create(0.3f, 0).build())
+                            .setScaleData(GenericParticleData.create(0.1f, 0).setEasing(Easing.QUINTIC_IN_OUT).build())
+                            .randomSpin(0.3f)
                             .setLifetime(40)
-                            .spawn(level(), pos.x(), pos.y(), pos.z());
+                            .randomVelocity(0.02f, 0.02f, 0.02f)
+                            .spawn(level(), pos.x(), pos.y() + 0.1, pos.z());
                 }
 
-                for (int i = 0; i < 5; i++) {
-                    Particles.create(WizardsReborn.SPARKLE_PARTICLE)
-                            .addVelocity(((random.nextDouble() - 0.5D) / 15), ((random.nextDouble() - 0.5D) / 15) + 0.05, ((random.nextDouble() - 0.5D) / 15))
-                            .setAlpha(0.3f, 0).setScale(0.4f, 0)
-                            .setColor(r, g, b)
-                            .setLifetime(30)
-                            .setSpin((0.5f * (float) ((random.nextDouble() - 0.5D) * 2)))
-                            .spawn(level(), getX(), getY(), getZ());
-                    Particles.create(WizardsReborn.SPARKLE_PARTICLE)
-                            .addVelocity(((random.nextDouble() - 0.5D) / 15), ((random.nextDouble() - 0.5D) / 15) - 0.05, ((random.nextDouble() - 0.5D) / 15))
-                            .setAlpha(0.3f, 0).setScale(0.4f, 0)
-                            .setColor(r, g, b)
-                            .setLifetime(30)
-                            .setSpin((0.5f * (float) ((random.nextDouble() - 0.5D) * 2)))
-                            .spawn(level(), getX(), getY(), getZ());
-                }
+                ParticleBuilder.create(FluffyFur.TINY_STAR_PARTICLE)
+                        .setColorData(ColorParticleData.create(r, g, b).build())
+                        .setTransparencyData(GenericParticleData.create(0.3f, 0).build())
+                        .setScaleData(GenericParticleData.create(0.4f, 0).setEasing(Easing.SINE_IN_OUT).build())
+                        .randomSpin(0.5f)
+                        .setLifetime(30)
+                        .addVelocity(0f, 0.05, 0f)
+                        .randomVelocity(0.03f, 0.03f, 0.03f)
+                        .repeat(level(), getX(), getY() + 0.1, getZ(), 5);
+                ParticleBuilder.create(FluffyFur.TINY_STAR_PARTICLE)
+                        .setColorData(ColorParticleData.create(r, g, b).build())
+                        .setTransparencyData(GenericParticleData.create(0.3f, 0).build())
+                        .setScaleData(GenericParticleData.create(0.4f, 0).setEasing(Easing.SINE_IN_OUT).build())
+                        .randomSpin(0.5f)
+                        .setLifetime(30)
+                        .addVelocity(0f, -0.05, 0f)
+                        .randomVelocity(0.03f, 0.03f, 0.03f)
+                        .repeat(level(), getX(), getY() + 0.1, getZ(), 5);
             }
         }
     }

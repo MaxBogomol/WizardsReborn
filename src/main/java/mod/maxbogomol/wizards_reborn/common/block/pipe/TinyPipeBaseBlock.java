@@ -1,8 +1,6 @@
 package mod.maxbogomol.wizards_reborn.common.block.pipe;
 
 import mod.maxbogomol.wizards_reborn.api.alchemy.PipeConnection;
-import mod.maxbogomol.wizards_reborn.common.block.pipe.PipeBaseBlock;
-import mod.maxbogomol.wizards_reborn.common.block.pipe.PipeBaseTileEntity;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.block.Block;
@@ -100,7 +98,7 @@ public abstract class TinyPipeBaseBlock extends PipeBaseBlock {
     @Override
     public VoxelShape getShape(BlockState state, BlockGetter level, BlockPos pos, CollisionContext context) {
         BlockEntity BE = level.getBlockEntity(pos);
-        if (BE instanceof PipeBaseTileEntity pipe) {
+        if (BE instanceof PipeBaseBlockEntity pipe) {
             return SHAPES[getShapeIndex(pipe.connections[0], pipe.connections[1], pipe.connections[2], pipe.connections[3], pipe.connections[4], pipe.connections[5])];
         }
         return CENTER_AABB;

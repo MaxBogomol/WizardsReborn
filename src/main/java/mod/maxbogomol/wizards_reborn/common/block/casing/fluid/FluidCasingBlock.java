@@ -44,7 +44,7 @@ public class FluidCasingBlock extends FluidPipeBlock {
 
     @Override
     public BlockEntity newBlockEntity(BlockPos pPos, BlockState pState) {
-        return WizardsReborn.FLUID_CASING_TILE_ENTITY.get().create(pPos, pState);
+        return WizardsReborn.FLUID_CASING_BLOCK_ENTITY.get().create(pPos, pState);
     }
 
     public InteractionResult use(BlockState pState, Level pLevel, BlockPos pPos, Player pPlayer, InteractionHand pHand, BlockHitResult pHit) {

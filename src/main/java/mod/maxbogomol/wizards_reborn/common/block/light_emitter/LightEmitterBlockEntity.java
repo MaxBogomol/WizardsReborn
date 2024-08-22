@@ -1,14 +1,17 @@
 package mod.maxbogomol.wizards_reborn.common.block.light_emitter;
 
+import mod.maxbogomol.fluffy_fur.FluffyFur;
+import mod.maxbogomol.fluffy_fur.client.particle.ParticleBuilder;
+import mod.maxbogomol.fluffy_fur.client.particle.data.ColorParticleData;
+import mod.maxbogomol.fluffy_fur.client.particle.data.GenericParticleData;
 import mod.maxbogomol.fluffy_fur.common.block.entity.ExposedBlockSimpleInventory;
 import mod.maxbogomol.fluffy_fur.common.block.entity.TickableBlockEntity;
 import mod.maxbogomol.wizards_reborn.WizardsReborn;
-import mod.maxbogomol.wizards_reborn.api.light.ILightTileEntity;
+import mod.maxbogomol.wizards_reborn.api.light.ILightBlockEntity;
 import mod.maxbogomol.wizards_reborn.api.light.LightRayHitResult;
 import mod.maxbogomol.wizards_reborn.api.light.LightUtils;
-import mod.maxbogomol.wizards_reborn.api.wissen.IWissenTileEntity;
-import mod.maxbogomol.wizards_reborn.api.wissen.IWissenWandControlledTileEntity;
-import mod.maxbogomol.wizards_reborn.client.particle.Particles;
+import mod.maxbogomol.wizards_reborn.api.wissen.IWissenBlockEntity;
+import mod.maxbogomol.wizards_reborn.api.wissen.IWissenWandControlledBlockEntity;
 import mod.maxbogomol.wizards_reborn.client.sound.LightEmitterSoundInstance;
 import mod.maxbogomol.wizards_reborn.common.block.ArcaneLumosBlock;
 import mod.maxbogomol.wizards_reborn.common.config.Config;
@@ -35,7 +38,7 @@ import javax.annotation.Nullable;
 import java.awt.*;
 import java.util.Random;
 
-public class LightEmitterBlockEntity extends ExposedBlockSimpleInventory implements TickableBlockEntity, IWissenTileEntity, ILightTileEntity, IWissenWandControlledTileEntity {
+public class LightEmitterBlockEntity extends ExposedBlockSimpleInventory implements TickableBlockEntity, IWissenBlockEntity, ILightBlockEntity, IWissenWandControlledBlockEntity {
 
     public int blockToX = 0;
     public int blockToY =0 ;
@@ -54,7 +57,7 @@ public class LightEmitterBlockEntity extends ExposedBlockSimpleInventory impleme
     }
 
     public LightEmitterBlockEntity(BlockPos pos, BlockState state) {
-        this(WizardsReborn.LIGHT_EMITTER_TILE_ENTITY.get(), pos, state);
+        this(WizardsReborn.LIGHT_EMITTER_BLOCK_ENTITY.get(), pos, state);
     }
 
     @Override
@@ -71,7 +74,7 @@ public class LightEmitterBlockEntity extends ExposedBlockSimpleInventory impleme
                 BlockPos pos = new BlockPos(blockToX, blockToY, blockToZ);
                 if (level.isLoaded(pos)) {
                     BlockEntity tileentity = level.getBlockEntity(pos);
-                    if (tileentity instanceof ILightTileEntity lightTileEntity) {
+                    if (tileentity instanceof ILightBlockEntity lightTileEntity) {
                         if (canWork()) {
                             if (getWissen() > 0) {
                                 removeWissen(1);
@@ -102,20 +105,22 @@ public class LightEmitterBlockEntity extends ExposedBlockSimpleInventory impleme
                 Color color = getColor();
 
                 if (random.nextFloat() < 0.5) {
-                    Particles.create(WizardsReborn.WISP_PARTICLE)
-                            .addVelocity(((random.nextDouble() - 0.5D) / 100) * getStage(), ((random.nextDouble() - 0.5D) / 100) * getStage(), ((random.nextDouble() - 0.5D) / 100) * getStage())
-                            .setAlpha(0.25f, 0).setScale(0.2f * getStage(), 0)
-                            .setColor((float) color.getRed() / 255, (float) color.getGreen()/ 255, (float) color.getBlue() / 255)
+                    ParticleBuilder.create(FluffyFur.WISP_PARTICLE)
+                            .setColorData(ColorParticleData.create(color).build())
+                            .setTransparencyData(GenericParticleData.create(0.25f, 0).build())
+                            .setScaleData(GenericParticleData.create(0.2f * getStage(), 0).build())
                             .setLifetime(20)
+                            .randomVelocity(0.005f * getStage())
                             .spawn(level, worldPosition.getX() + 0.5F, worldPosition.getY() + 0.5625F, worldPosition.getZ() + 0.5F);
                 }
                 if (random.nextFloat() < 0.1) {
-                    Particles.create(WizardsReborn.SPARKLE_PARTICLE)
-                            .addVelocity(((random.nextDouble() - 0.5D) / 100) * getStage(), ((random.nextDouble() - 0.5D) / 100) * getStage(), ((random.nextDouble() - 0.5D) / 100) * getStage())
-                            .setAlpha(0.25f, 0).setScale(0.075f * getStage(), 0)
-                            .setColor((float) color.getRed() / 255, (float) color.getGreen()/ 255, (float) color.getBlue() / 255)
+                    ParticleBuilder.create(FluffyFur.SPARKLE_PARTICLE)
+                            .setColorData(ColorParticleData.create(color).build())
+                            .setTransparencyData(GenericParticleData.create(0.25f, 0).build())
+                            .setScaleData(GenericParticleData.create(0.075f * getStage(), 0).build())
+                            .randomSpin(0.5f)
                             .setLifetime(30)
-                            .setSpin((0.5f * (float) ((random.nextDouble() - 0.5D) * 2)))
+                            .randomVelocity(0.005f * getStage())
                             .spawn(level, worldPosition.getX() + 0.5F, worldPosition.getY() + 0.5625F, worldPosition.getZ() + 0.5F);
                 }
 
@@ -272,20 +277,22 @@ public class LightEmitterBlockEntity extends ExposedBlockSimpleInventory impleme
         Color color = getColor();
 
         if (random.nextFloat() < chance) {
-            Particles.create(WizardsReborn.WISP_PARTICLE)
-                    .addVelocity((to.x() - from.x()) / 20, (to.y() - from.y()) / 20, (to.z() - from.z()) / 20)
-                    .setAlpha(0.35f, 0).setScale(0.1f, 0)
-                    .setColor((float) color.getRed() / 255, (float) color.getGreen()/ 255, (float) color.getBlue() / 255)
+            ParticleBuilder.create(FluffyFur.WISP_PARTICLE)
+                    .setColorData(ColorParticleData.create(color).build())
+                    .setTransparencyData(GenericParticleData.create(0.35f, 0).build())
+                    .setScaleData(GenericParticleData.create(0.1f, 0).build())
                     .setLifetime(20)
+                    .addVelocity((to.x() - from.x()) / 20, (to.y() - from.y()) / 20, (to.z() - from.z()) / 20)
                     .spawn(level, worldPosition.getX() + from.x(), worldPosition.getY() + from.y(), worldPosition.getZ() + from.z());
         }
         if (random.nextFloat() < chance / 2) {
-            Particles.create(WizardsReborn.SPARKLE_PARTICLE)
-                    .addVelocity((to.x() - from.x()) / 40, (to.y() - from.y()) / 40, (to.z() - from.z()) / 40)
-                    .setAlpha(0.35f, 0).setScale(0.05f, 0)
-                    .setColor((float) color.getRed() / 255, (float) color.getGreen()/ 255, (float) color.getBlue() / 255)
+            ParticleBuilder.create(FluffyFur.SPARKLE_PARTICLE)
+                    .setColorData(ColorParticleData.create(color).build())
+                    .setTransparencyData(GenericParticleData.create(0.35f, 0).build())
+                    .setScaleData(GenericParticleData.create(0.1f, 0).build())
+                    .randomSpin(0.5f)
                     .setLifetime(30)
-                    .setSpin((0.5f * (float) ((random.nextDouble() - 0.5D) * 2)))
+                    .addVelocity((to.x() - from.x()) / 20, (to.y() - from.y()) / 20, (to.z() - from.z()) / 20)
                     .spawn(level, worldPosition.getX() + from.x(), worldPosition.getY() + from.y(), worldPosition.getZ() + from.z());
         }
     }
@@ -412,7 +419,7 @@ public class LightEmitterBlockEntity extends ExposedBlockSimpleInventory impleme
         BlockPos oldBlockPos = WissenWandItem.getBlockPos(stack);
         BlockEntity oldTile = level.getBlockEntity(oldBlockPos);
 
-        if (oldTile instanceof ILightTileEntity lightTile) {
+        if (oldTile instanceof ILightBlockEntity lightTile) {
             if (lightTile.canConnectSendLight()) {
                 blockToX = oldBlockPos.getX();
                 blockToY = oldBlockPos.getY();

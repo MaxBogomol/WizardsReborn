@@ -1,7 +1,7 @@
 package mod.maxbogomol.wizards_reborn.common.block.sensor;
 
 import mod.maxbogomol.wizards_reborn.WizardsRebornClient;
-import mod.maxbogomol.wizards_reborn.api.wissen.IExperienceTileEntity;
+import mod.maxbogomol.wizards_reborn.api.wissen.IExperienceBlockEntity;
 import net.minecraft.client.resources.model.ModelResourceLocation;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -36,7 +36,7 @@ public class ExperienceSensorBlock extends SensorBaseBlock {
         }
 
         BlockEntity tile = pLevel.getBlockEntity(blockpos);
-        if (tile instanceof IExperienceTileEntity experienceTile) {
+        if (tile instanceof IExperienceBlockEntity experienceTile) {
             i = Mth.floor(((float) experienceTile.getExperience() / experienceTile.getMaxExperience()) * 14.0F);
         }
 

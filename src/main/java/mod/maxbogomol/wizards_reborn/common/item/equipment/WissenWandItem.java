@@ -3,10 +3,10 @@ package mod.maxbogomol.wizards_reborn.common.item.equipment;
 import com.mojang.blaze3d.systems.RenderSystem;
 import mod.maxbogomol.fluffy_fur.utils.ColorUtils;
 import mod.maxbogomol.wizards_reborn.WizardsReborn;
-import mod.maxbogomol.wizards_reborn.api.alchemy.IFluidTileEntity;
+import mod.maxbogomol.wizards_reborn.api.alchemy.IFluidBlockEntity;
 import mod.maxbogomol.wizards_reborn.api.alchemy.IHeatTileEntity;
-import mod.maxbogomol.wizards_reborn.api.alchemy.ISteamTileEntity;
-import mod.maxbogomol.wizards_reborn.api.light.ILightTileEntity;
+import mod.maxbogomol.wizards_reborn.api.alchemy.ISteamBlockEntity;
+import mod.maxbogomol.wizards_reborn.api.light.ILightBlockEntity;
 import mod.maxbogomol.wizards_reborn.api.skin.Skin;
 import mod.maxbogomol.wizards_reborn.api.wissen.*;
 import mod.maxbogomol.wizards_reborn.client.config.ClientConfig;
@@ -62,11 +62,7 @@ public class WissenWandItem extends Item {
         ItemStack stack = player.getItemInHand(hand);
 
         if (player.isShiftKeyDown()) {
-            CompoundTag nbt = stack.getTag();
-            if (nbt==null) {
-                nbt = new CompoundTag();
-                stack.setTag(nbt);
-            }
+            CompoundTag nbt = stack.getOrCreateTag();
 
             if (!nbt.contains("mode")) {
                 nbt.putInt("mode", 0);
@@ -111,7 +107,7 @@ public class WissenWandItem extends Item {
                 boolean control = controlled(stack, context, tileentity);
                 if (control) result = InteractionResult.SUCCESS;
 
-                if (tileentity instanceof IWissenWandFunctionalTileEntity functionalTile) {
+                if (tileentity instanceof IWissenWandFunctionalBlockEntity functionalTile) {
                     if (nbt.getInt("mode") == 0) {
                         functionalTile.wissenWandFunction();
                     }
@@ -136,7 +132,7 @@ public class WissenWandItem extends Item {
             if (controlType.controlled(stack, context, tile)) return true;
         }
 
-        if (tile instanceof IWissenWandControlledTileEntity controlledTile) {
+        if (tile instanceof IWissenWandControlledBlockEntity controlledTile) {
             if (mode == 1) {
                 return controlledTile.wissenWandReceiveConnect(stack, context, tile);
             }
@@ -403,7 +399,7 @@ public class WissenWandItem extends Item {
             BlockEntity tileentity = pos != null ? mc.level.getBlockEntity(pos) : null;
 
             if (tileentity != null) {
-                if (tileentity instanceof IItemResultTileEntity tile) {
+                if (tileentity instanceof IItemResultBlockEntity tile) {
                     List<ItemStack> list = tile.getItemsResult();
                     int i = 0;
                     for (ItemStack item : list) {
@@ -433,7 +429,7 @@ public class WissenWandItem extends Item {
             BlockEntity tileentity = pos != null ? mc.level.getBlockEntity(pos) : null;
 
             if (tileentity != null) {
-                if (tileentity instanceof IWissenTileEntity tile) {
+                if (tileentity instanceof IWissenBlockEntity tile) {
                     if (player.isShiftKeyDown() && ClientConfig.NUMERICAL_WISSEN.get()) {
                         int x = mc.getWindow().getGuiScaledWidth() / 2;
                         int y = mc.getWindow().getGuiScaledHeight() / 2 + 12 + getYOffset();
@@ -467,7 +463,7 @@ public class WissenWandItem extends Item {
             BlockEntity tileentity = pos != null ? mc.level.getBlockEntity(pos) : null;
 
             if (tileentity != null) {
-                if (tileentity instanceof ICooldownTileEntity tile) {
+                if (tileentity instanceof ICooldownBlockEntity tile) {
                     if (player.isShiftKeyDown() && ClientConfig.NUMERICAL_COOLDOWN.get()) {
                         int x = mc.getWindow().getGuiScaledWidth() / 2;
                         int y = mc.getWindow().getGuiScaledHeight() / 2 + 12 + getYOffset();
@@ -501,7 +497,7 @@ public class WissenWandItem extends Item {
             BlockEntity tileentity = pos != null ? mc.level.getBlockEntity(pos) : null;
 
             if (tileentity != null) {
-                if (tileentity instanceof ILightTileEntity tile) {
+                if (tileentity instanceof ILightBlockEntity tile) {
                     if (player.isShiftKeyDown() && ClientConfig.SHOW_LIGHT_NAME.get()) {
                         int x = mc.getWindow().getGuiScaledWidth() / 2;
                         int y = mc.getWindow().getGuiScaledHeight() / 2 + 12 + getYOffset();
@@ -537,7 +533,7 @@ public class WissenWandItem extends Item {
             BlockEntity tileentity = pos != null ? mc.level.getBlockEntity(pos) : null;
 
             if (tileentity != null) {
-                if (tileentity instanceof IFluidTileEntity tile) {
+                if (tileentity instanceof IFluidBlockEntity tile) {
                     int x = mc.getWindow().getGuiScaledWidth() / 2;
                     int y = mc.getWindow().getGuiScaledHeight() / 2 + 12 + getYOffset();
 
@@ -573,7 +569,7 @@ public class WissenWandItem extends Item {
             BlockEntity tileentity = pos != null ? mc.level.getBlockEntity(pos) : null;
 
             if (tileentity != null) {
-                if (tileentity instanceof IExperienceTileEntity tile) {
+                if (tileentity instanceof IExperienceBlockEntity tile) {
                     if (player.isShiftKeyDown() && ClientConfig.NUMERICAL_EXPERIENCE.get()) {
                         int x = mc.getWindow().getGuiScaledWidth() / 2;
                         int y = mc.getWindow().getGuiScaledHeight() / 2 + 12 + getYOffset();
@@ -641,7 +637,7 @@ public class WissenWandItem extends Item {
             BlockEntity tileentity = pos != null ? mc.level.getBlockEntity(pos) : null;
 
             if (tileentity != null) {
-                if (tileentity instanceof ISteamTileEntity tile) {
+                if (tileentity instanceof ISteamBlockEntity tile) {
                     if (player.isShiftKeyDown() && ClientConfig.NUMERICAL_STEAM.get()) {
                         int x = mc.getWindow().getGuiScaledWidth() / 2;
                         int y = mc.getWindow().getGuiScaledHeight() / 2 + 12 + getYOffset();
@@ -720,7 +716,7 @@ public class WissenWandItem extends Item {
         public boolean controlled(ItemStack stack, UseOnContext context, BlockEntity tile) {
             int mode = getMode(stack);
 
-            if (tile instanceof IWissenTileEntity wissenTile) {
+            if (tile instanceof IWissenBlockEntity wissenTile) {
                 if (!getBlock(stack)) {
                     if ((mode == 1 && wissenTile.canConnectReceiveWissen()) || (mode == 2 && wissenTile.canConnectSendWissen())) {
                         setBlockPos(stack, context.getClickedPos());
@@ -738,7 +734,7 @@ public class WissenWandItem extends Item {
         public boolean controlled(ItemStack stack, UseOnContext context, BlockEntity tile) {
             int mode = getMode(stack);
 
-            if (tile instanceof ILightTileEntity lightTile) {
+            if (tile instanceof ILightBlockEntity lightTile) {
                 if (!getBlock(stack)) {
                     if ((mode == 1 && lightTile.canConnectReceiveLight()) || (mode == 2 && lightTile.canConnectSendLight())) {
                         setBlockPos(stack, context.getClickedPos());

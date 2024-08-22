@@ -2,7 +2,7 @@ package mod.maxbogomol.wizards_reborn.common.item;
 
 import mod.maxbogomol.fluffy_fur.common.item.ICustomBlockEntityDataItem;
 import mod.maxbogomol.wizards_reborn.api.alchemy.ISteamItem;
-import mod.maxbogomol.wizards_reborn.api.alchemy.ISteamTileEntity;
+import mod.maxbogomol.wizards_reborn.api.alchemy.ISteamBlockEntity;
 import mod.maxbogomol.wizards_reborn.client.config.ClientConfig;
 import mod.maxbogomol.wizards_reborn.utils.NumericalUtils;
 import net.minecraft.ChatFormatting;
@@ -41,7 +41,7 @@ public class SteamStorageBaseItem extends BlockItem implements ISteamItem, ICust
     public int getMaxSteam() {
         if (getBlock() instanceof EntityBlock tileBlock) {
             BlockEntity tile = tileBlock.newBlockEntity(new BlockPos(0, 0, 0), getBlock().defaultBlockState());
-            if (tile instanceof ISteamTileEntity steamTile) {
+            if (tile instanceof ISteamBlockEntity steamTile) {
                 return steamTile.getMaxSteam();
             }
         }

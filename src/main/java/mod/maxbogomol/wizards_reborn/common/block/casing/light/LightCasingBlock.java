@@ -60,7 +60,7 @@ public class LightCasingBlock extends CasingBlock implements EntityBlock, Simple
 
     @Override
     public InteractionResult use(BlockState state, Level world, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hit) {
-        LightCasingTileEntity tile = (LightCasingTileEntity) world.getBlockEntity(pos);
+        LightCasingBlockEntity tile = (LightCasingBlockEntity) world.getBlockEntity(pos);
         ItemStack stack = player.getItemInHand(hand).copy();
 
         if (stack.getItem() instanceof WissenWandItem) {
@@ -140,7 +140,7 @@ public class LightCasingBlock extends CasingBlock implements EntityBlock, Simple
     @Nullable
     @Override
     public BlockEntity newBlockEntity(BlockPos pPos, BlockState pState) {
-        return new LightCasingTileEntity(pPos, pState);
+        return new LightCasingBlockEntity(pPos, pState);
     }
 
     @Nullable

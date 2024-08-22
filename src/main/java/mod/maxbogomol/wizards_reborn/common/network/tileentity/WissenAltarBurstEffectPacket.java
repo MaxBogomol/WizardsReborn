@@ -1,7 +1,10 @@
 package mod.maxbogomol.wizards_reborn.common.network.tileentity;
 
+import mod.maxbogomol.fluffy_fur.FluffyFur;
+import mod.maxbogomol.fluffy_fur.client.particle.ParticleBuilder;
+import mod.maxbogomol.fluffy_fur.client.particle.data.ColorParticleData;
+import mod.maxbogomol.fluffy_fur.client.particle.data.GenericParticleData;
 import mod.maxbogomol.wizards_reborn.WizardsReborn;
-import mod.maxbogomol.wizards_reborn.client.particle.Particles;
 import mod.maxbogomol.wizards_reborn.common.config.Config;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.FriendlyByteBuf;
@@ -27,19 +30,20 @@ public class WissenAltarBurstEffectPacket extends PositionEffectPacket {
     @Override
     public void execute(Supplier<NetworkEvent.Context> context) {
         Level level = WizardsReborn.proxy.getWorld();
-
-        Particles.create(WizardsReborn.WISP_PARTICLE)
-                .randomVelocity(0.05f, 0.05f, 0.05f)
-                .setAlpha(0.125f, 0).setScale(0.3f, 0)
-                .setColor(Config.wissenColorR(), Config.wissenColorG(), Config.wissenColorB())
+        ParticleBuilder.create(FluffyFur.WISP_PARTICLE)
+                .setColorData(ColorParticleData.create(Config.wissenColorR(), Config.wissenColorG(), Config.wissenColorB()).build())
+                .setTransparencyData(GenericParticleData.create(0.125f, 0).build())
+                .setScaleData(GenericParticleData.create(0.3f, 0).build())
                 .setLifetime(20)
+                .randomVelocity(0.05f)
                 .repeat(level, posX + 0.5F, posY + 1.3125F, posZ + 0.5F, 20);
-        Particles.create(WizardsReborn.SPARKLE_PARTICLE)
-                .randomVelocity(0.05f, 0.05f, 0.05f)
-                .setAlpha(0.25f, 0).setScale(0.1f, 0)
-                .setColor(Config.wissenColorR(), Config.wissenColorG(), Config.wissenColorB())
-                .setLifetime(30)
+        ParticleBuilder.create(FluffyFur.WISP_PARTICLE)
+                .setColorData(ColorParticleData.create(Config.wissenColorR(), Config.wissenColorG(), Config.wissenColorB()).build())
+                .setTransparencyData(GenericParticleData.create(0.25f, 0).build())
+                .setScaleData(GenericParticleData.create(0.1f, 0).build())
                 .randomSpin(0.5f)
+                .setLifetime(30)
+                .randomVelocity(0.05f)
                 .repeat(level, posX + 0.5F, posY + 1.3125F, posZ + 0.5F, 20);
     }
 

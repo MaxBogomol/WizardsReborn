@@ -1,7 +1,7 @@
 package mod.maxbogomol.wizards_reborn.client.model.block;
 
 import mod.maxbogomol.wizards_reborn.WizardsReborn;
-import mod.maxbogomol.wizards_reborn.common.block.pipe.PipeBaseTileEntity;
+import mod.maxbogomol.wizards_reborn.common.block.pipe.PipeBaseBlockEntity;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.block.model.BakedQuad;
 import net.minecraft.client.renderer.block.model.ItemOverrides;
@@ -78,7 +78,7 @@ public class PipeModel implements BakedModel {
     public List<BakedQuad> getQuads(BlockState state, Direction side, RandomSource rand, ModelData data, RenderType renderType) {
         if (side != null)
             return EMPTY;
-        int[] sides = data.get(PipeBaseTileEntity.DATA_TYPE);
+        int[] sides = data.get(PipeBaseBlockEntity.DATA_TYPE);
 
         if (sides != null) {
             List<BakedQuad> quads = QUAD_CACHE[getCacheIndex(sides)];

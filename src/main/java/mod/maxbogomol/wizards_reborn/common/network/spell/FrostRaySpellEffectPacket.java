@@ -1,7 +1,10 @@
 package mod.maxbogomol.wizards_reborn.common.network.spell;
 
+import mod.maxbogomol.fluffy_fur.FluffyFur;
+import mod.maxbogomol.fluffy_fur.client.particle.ParticleBuilder;
+import mod.maxbogomol.fluffy_fur.client.particle.data.ColorParticleData;
+import mod.maxbogomol.fluffy_fur.client.particle.data.GenericParticleData;
 import mod.maxbogomol.wizards_reborn.WizardsReborn;
-import mod.maxbogomol.wizards_reborn.client.particle.Particles;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.world.level.Level;
@@ -46,18 +49,17 @@ public class FrostRaySpellEffectPacket {
                 @Override
                 public void run() {
                     Level world = WizardsReborn.proxy.getWorld();
+                    ParticleBuilder.create(FluffyFur.SPARKLE_PARTICLE)
+                            .setColorData(ColorParticleData.create(msg.colorR, msg.colorG, msg.colorB).build())
+                            .setTransparencyData(GenericParticleData.create(0.3f, 0).build())
+                            .setScaleData(GenericParticleData.create(0.3f, 0).build())
+                            .randomSpin(0.1f)
+                            .setLifetime(40)
+                            .randomVelocity(0.05f)
+                            .addVelocity(0, 0.05f, 0)
+                            .repeat(world, msg.X, msg.Y, msg.Z, 10, 0.6f);
 
                     for (int i = 0; i < 10; i++) {
-                        if (random.nextFloat() < 0.6f) {
-                            Particles.create(WizardsReborn.SPARKLE_PARTICLE)
-                                    .addVelocity(((random.nextDouble() - 0.5D) / 10), ((random.nextDouble() - 0.5D) / 10) + 0.05f, ((random.nextDouble() - 0.5D) / 10))
-                                    .setAlpha(0.3f, 0).setScale(0.3f, 0)
-                                    .setColor(msg.colorR, msg.colorG, msg.colorB)
-                                    .setLifetime(40)
-                                    .setSpin((0.1f * (float) ((random.nextDouble() - 0.5D) * 2)))
-                                    .spawn(world, msg.X, msg.Y, msg.Z);
-                        }
-
                         if (random.nextFloat() < 0.8f) {
                             world.addParticle(ParticleTypes.SNOWFLAKE,
                                     msg.X + ((random.nextDouble() - 0.5D) / 2), msg.Y + ((random.nextDouble() - 0.5D) / 2), msg.Z + ((random.nextDouble() - 0.5D) / 2),

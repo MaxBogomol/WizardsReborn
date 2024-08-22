@@ -1,7 +1,7 @@
 package mod.maxbogomol.wizards_reborn.common.block.sensor.item_sorter;
 
 import mod.maxbogomol.wizards_reborn.WizardsReborn;
-import mod.maxbogomol.wizards_reborn.api.wissen.ICooldownTileEntity;
+import mod.maxbogomol.wizards_reborn.api.wissen.ICooldownBlockEntity;
 import mod.maxbogomol.wizards_reborn.common.block.sensor.SensorBaseBlock;
 import mod.maxbogomol.wizards_reborn.common.block.sensor.SensorBlockEntity;
 import mod.maxbogomol.wizards_reborn.utils.PacketUtils;
@@ -25,7 +25,7 @@ import org.jetbrains.annotations.NotNull;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
-public class ItemSorterBlockEntity extends SensorBlockEntity implements ICooldownTileEntity {
+public class ItemSorterBlockEntity extends SensorBlockEntity implements ICooldownBlockEntity {
     public final ItemStackHandler itemHandler = createHandler(27);
     public final LazyOptional<IItemHandler> handler = LazyOptional.of(() -> itemHandler);
 
@@ -36,7 +36,7 @@ public class ItemSorterBlockEntity extends SensorBlockEntity implements ICooldow
     }
 
     public ItemSorterBlockEntity(BlockPos pPos, BlockState pBlockState) {
-        super(WizardsReborn.ITEM_SORTER_TILE_ENTITY.get(), pPos, pBlockState);
+        super(WizardsReborn.ITEM_SORTER_BLOCK_ENTITY.get(), pPos, pBlockState);
     }
 
     @Override

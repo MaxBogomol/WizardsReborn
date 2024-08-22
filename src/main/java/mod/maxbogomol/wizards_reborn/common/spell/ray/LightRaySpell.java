@@ -2,7 +2,7 @@ package mod.maxbogomol.wizards_reborn.common.spell.ray;
 
 import com.mojang.blaze3d.vertex.PoseStack;
 import mod.maxbogomol.wizards_reborn.WizardsReborn;
-import mod.maxbogomol.wizards_reborn.api.light.ILightTileEntity;
+import mod.maxbogomol.wizards_reborn.api.light.ILightBlockEntity;
 import mod.maxbogomol.wizards_reborn.api.light.LightRayHitResult;
 import mod.maxbogomol.wizards_reborn.api.light.LightUtils;
 import mod.maxbogomol.wizards_reborn.common.entity.SpellProjectileEntity;
@@ -54,7 +54,7 @@ public class LightRaySpell extends RaySpell {
         LightRayHitResult hitResult = LightUtils.getLightRayHitResult(entity.level(), entity.getOnPos(), from, to, getRayDistance());
         BlockEntity hitTile = hitResult.getTile();
         if (hitTile != null) {
-            if (hitTile instanceof ILightTileEntity toLight) {
+            if (hitTile instanceof ILightBlockEntity toLight) {
                 int max = 10;
                 if (max < toLight.getLight()) {
                     max = toLight.getLight();

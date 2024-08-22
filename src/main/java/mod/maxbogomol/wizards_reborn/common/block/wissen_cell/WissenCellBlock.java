@@ -4,7 +4,7 @@ import mod.maxbogomol.fluffy_fur.common.block.entity.BlockSimpleInventory;
 import mod.maxbogomol.fluffy_fur.common.block.entity.TickableBlockEntity;
 import mod.maxbogomol.wizards_reborn.WizardsReborn;
 import mod.maxbogomol.wizards_reborn.api.wissen.IWissenItem;
-import mod.maxbogomol.wizards_reborn.api.wissen.IWissenTileEntity;
+import mod.maxbogomol.wizards_reborn.api.wissen.IWissenBlockEntity;
 import mod.maxbogomol.wizards_reborn.api.wissen.WissenItemUtils;
 import mod.maxbogomol.wizards_reborn.common.item.equipment.WissenWandItem;
 import mod.maxbogomol.wizards_reborn.utils.PacketUtils;
@@ -96,7 +96,7 @@ public class WissenCellBlock extends HorizontalDirectionalBlock implements Entit
     public List<ItemStack> getDrops(BlockState state, LootParams.Builder builder) {
         List<ItemStack> items = super.getDrops(state, builder);
         BlockEntity tile = builder.getOptionalParameter(LootContextParams.BLOCK_ENTITY);
-        if (tile instanceof IWissenTileEntity wissenTile) {
+        if (tile instanceof IWissenBlockEntity wissenTile) {
             CompoundTag nbt = tile.getUpdateTag();
             if (nbt != null) {
                 for (ItemStack stack : items) {

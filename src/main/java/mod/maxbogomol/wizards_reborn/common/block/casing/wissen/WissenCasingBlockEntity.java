@@ -24,7 +24,7 @@ public class WissenCasingBlockEntity extends WissenTranslatorBlockEntity {
     }
 
     public WissenCasingBlockEntity(BlockPos pos, BlockState state) {
-        this(WizardsReborn.WISSEN_CASING_TILE_ENTITY.get(), pos, state);
+        this(WizardsReborn.WISSEN_CASING_BLOCK_ENTITY.get(), pos, state);
     }
 
     public void tick() {

@@ -133,7 +133,7 @@ public class ArcaneHopperBlock extends HopperBlock implements SimpleWaterloggedB
     @Override
     @Nullable
     public <T extends BlockEntity> BlockEntityTicker<T> getTicker(Level pLevel, BlockState pState, BlockEntityType<T> pBlockEntityType) {
-        return pLevel.isClientSide ? null : createTickerHelper(pBlockEntityType, WizardsReborn.ARCANE_HOPPER_TILE_ENTITY.get(), ArcaneHopperBlockEntity::pushItemsTick);
+        return pLevel.isClientSide ? null : createTickerHelper(pBlockEntityType, WizardsReborn.ARCANE_HOPPER_BLOCK_ENTITY.get(), ArcaneHopperBlockEntity::pushItemsTick);
     }
 
     @Override

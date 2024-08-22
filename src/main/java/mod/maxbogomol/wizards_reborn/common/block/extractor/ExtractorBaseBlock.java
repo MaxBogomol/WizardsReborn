@@ -2,7 +2,7 @@ package mod.maxbogomol.wizards_reborn.common.block.extractor;
 
 import mod.maxbogomol.wizards_reborn.WizardsReborn;
 import mod.maxbogomol.wizards_reborn.common.block.pipe.PipeBaseBlock;
-import mod.maxbogomol.wizards_reborn.common.block.pipe.PipeBaseTileEntity;
+import mod.maxbogomol.wizards_reborn.common.block.pipe.PipeBaseBlockEntity;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.server.level.ServerLevel;
@@ -47,7 +47,7 @@ public abstract class ExtractorBaseBlock extends PipeBaseBlock {
     @Override
     public VoxelShape getShape(BlockState state, BlockGetter level, BlockPos pos, CollisionContext context) {
         BlockEntity BE = level.getBlockEntity(pos);
-        if (BE instanceof PipeBaseTileEntity pipe) {
+        if (BE instanceof PipeBaseBlockEntity pipe) {
             return EXTRACTOR_SHAPES[getShapeIndex(pipe.connections[0], pipe.connections[1], pipe.connections[2], pipe.connections[3], pipe.connections[4], pipe.connections[5])];
         }
         return CENTER_AABB;

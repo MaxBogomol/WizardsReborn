@@ -1,7 +1,7 @@
 package mod.maxbogomol.wizards_reborn.common.block.sensor;
 
 import mod.maxbogomol.wizards_reborn.WizardsRebornClient;
-import mod.maxbogomol.wizards_reborn.api.wissen.ICooldownTileEntity;
+import mod.maxbogomol.wizards_reborn.api.wissen.ICooldownBlockEntity;
 import net.minecraft.client.resources.model.ModelResourceLocation;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -36,7 +36,7 @@ public class CooldownSensorBlock extends SensorBaseBlock {
         }
 
         BlockEntity tile = pLevel.getBlockEntity(blockpos);
-        if (tile instanceof ICooldownTileEntity cooldownTile) {
+        if (tile instanceof ICooldownBlockEntity cooldownTile) {
             i = Mth.floor((1f / cooldownTile.getCooldown()) * 14.0F);
             if (cooldownTile.getCooldown() <= 0) {
                 i = 0;

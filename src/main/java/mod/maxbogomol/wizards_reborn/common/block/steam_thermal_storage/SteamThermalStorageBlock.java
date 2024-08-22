@@ -2,7 +2,7 @@ package mod.maxbogomol.wizards_reborn.common.block.steam_thermal_storage;
 
 import mod.maxbogomol.fluffy_fur.common.block.entity.TickableBlockEntity;
 import mod.maxbogomol.wizards_reborn.WizardsReborn;
-import mod.maxbogomol.wizards_reborn.api.alchemy.ISteamTileEntity;
+import mod.maxbogomol.wizards_reborn.api.alchemy.ISteamBlockEntity;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.nbt.CompoundTag;
@@ -114,7 +114,7 @@ public class SteamThermalStorageBlock extends RotatedPillarBlock implements Enti
     public List<ItemStack> getDrops(BlockState state, LootParams.Builder builder) {
         List<ItemStack> items = super.getDrops(state, builder);
         BlockEntity tile = builder.getOptionalParameter(LootContextParams.BLOCK_ENTITY);
-        if (tile instanceof ISteamTileEntity steamTile) {
+        if (tile instanceof ISteamBlockEntity steamTile) {
             CompoundTag nbt = tile.getUpdateTag();
             if (nbt != null) {
                 for (ItemStack stack : items) {
@@ -173,7 +173,7 @@ public class SteamThermalStorageBlock extends RotatedPillarBlock implements Enti
 
     @Override
     public int getAnalogOutputSignal(BlockState blockState, Level level, BlockPos pos) {
-        ISteamTileEntity tile = (ISteamTileEntity) level.getBlockEntity(pos);
+        ISteamBlockEntity tile = (ISteamBlockEntity) level.getBlockEntity(pos);
         return Mth.floor(((float) tile.getSteam() / tile.getMaxSteam()) * 14.0F);
     }
 }

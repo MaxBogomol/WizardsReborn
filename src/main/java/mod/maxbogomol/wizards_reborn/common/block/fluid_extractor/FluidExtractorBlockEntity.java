@@ -27,7 +27,7 @@ public class FluidExtractorBlockEntity extends FluidPipeBaseBlockEntity {
     }
 
     public FluidExtractorBlockEntity(BlockPos pos, BlockState state) {
-        this(WizardsReborn.FLUID_EXTRACTOR_TILE_ENTITY.get(), pos, state);
+        this(WizardsReborn.FLUID_EXTRACTOR_BLOCK_ENTITY.get(), pos, state);
     }
 
     @Override

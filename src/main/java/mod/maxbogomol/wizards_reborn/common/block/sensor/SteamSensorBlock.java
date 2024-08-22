@@ -1,7 +1,7 @@
 package mod.maxbogomol.wizards_reborn.common.block.sensor;
 
 import mod.maxbogomol.wizards_reborn.WizardsRebornClient;
-import mod.maxbogomol.wizards_reborn.api.alchemy.ISteamTileEntity;
+import mod.maxbogomol.wizards_reborn.api.alchemy.ISteamBlockEntity;
 import net.minecraft.client.resources.model.ModelResourceLocation;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -36,7 +36,7 @@ public class SteamSensorBlock extends SensorBaseBlock {
         }
 
         BlockEntity tile = pLevel.getBlockEntity(blockpos);
-        if (tile instanceof ISteamTileEntity steamTile) {
+        if (tile instanceof ISteamBlockEntity steamTile) {
             i = Mth.floor(((float) steamTile.getSteam() / steamTile.getMaxSteam()) * 14.0F);
         }
 

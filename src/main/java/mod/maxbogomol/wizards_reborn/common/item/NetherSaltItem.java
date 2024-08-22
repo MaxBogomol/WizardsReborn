@@ -1,12 +1,17 @@
 package mod.maxbogomol.wizards_reborn.common.item;
 
+import mod.maxbogomol.fluffy_fur.FluffyFur;
+import mod.maxbogomol.fluffy_fur.client.particle.ParticleBuilder;
+import mod.maxbogomol.fluffy_fur.client.particle.data.ColorParticleData;
+import mod.maxbogomol.fluffy_fur.client.particle.data.GenericParticleData;
+import mod.maxbogomol.fluffy_fur.client.particle.data.LightParticleData;
 import mod.maxbogomol.fluffy_fur.common.item.FuelItem;
 import mod.maxbogomol.fluffy_fur.common.item.IParticleItem;
-import mod.maxbogomol.wizards_reborn.WizardsReborn;
-import mod.maxbogomol.wizards_reborn.client.particle.Particles;
+import mod.maxbogomol.fluffy_fur.utils.RenderUtils;
 import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.level.Level;
 
+import java.awt.*;
 import java.util.Random;
 
 public class NetherSaltItem extends FuelItem implements IParticleItem {
@@ -19,13 +24,17 @@ public class NetherSaltItem extends FuelItem implements IParticleItem {
     @Override
     public void addParticles(Level level, ItemEntity entity) {
         if (random.nextFloat() < 0.1) {
-            Particles.create(WizardsReborn.SMOKE_PARTICLE)
-                    .addVelocity(((random.nextDouble() - 0.5D) / 80), ((random.nextDouble() - 0.5D) / 50) + 0.02f, ((random.nextDouble() - 0.5D) / 80))
-                    .setAlpha(1f, 0).setScale(0.15f, 0)
-                    .setColor(0, 0, 0)
+            ParticleBuilder.create(FluffyFur.SMOKE_PARTICLE)
+                    .setRenderType(RenderUtils.DELAYED_PARTICLE)
+                    .setColorData(ColorParticleData.create(Color.BLACK).build())
+                    .setTransparencyData(GenericParticleData.create(1f, 0).build())
+                    .setScaleData(GenericParticleData.create(0.15f, 0).build())
+                    .setLightData(LightParticleData.DEFAULT)
+                    .randomSpin(0.1f)
                     .setLifetime(100)
-                    .setSpin((0.1f * (float) ((random.nextDouble() - 0.5D) * 2)))
-                    .spawn(level, entity.getX() + ((random.nextDouble() - 0.5D) * 0.125), entity.getY() + 0.25F + ((random.nextDouble() - 0.5D) * 0.125), entity.getZ() + ((random.nextDouble() - 0.5D) * 0.125));
+                    .randomVelocity(0.00625f)
+                    .randomOffset(0.0625f)
+                    .spawn(level, entity.getX(), entity.getY() + 0.25F, entity.getZ());
         }
     }
 }

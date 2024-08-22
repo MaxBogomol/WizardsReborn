@@ -1,10 +1,13 @@
 package mod.maxbogomol.wizards_reborn.common.spell.look;
 
+import mod.maxbogomol.fluffy_fur.FluffyFur;
 import mod.maxbogomol.fluffy_fur.client.animation.ItemAnimation;
+import mod.maxbogomol.fluffy_fur.client.particle.ParticleBuilder;
+import mod.maxbogomol.fluffy_fur.client.particle.data.ColorParticleData;
+import mod.maxbogomol.fluffy_fur.client.particle.data.GenericParticleData;
 import mod.maxbogomol.wizards_reborn.WizardsReborn;
 import mod.maxbogomol.wizards_reborn.api.crystal.CrystalUtils;
 import mod.maxbogomol.wizards_reborn.client.animation.StrikeSpellItemAnimation;
-import mod.maxbogomol.wizards_reborn.client.particle.Particles;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.entity.ExperienceOrb;
@@ -67,20 +70,16 @@ public class WisdomSpell extends LookSpell {
                 } else {
                     Vec3 pos = getHitPos(world, player, player.getUsedItemHand()).getPosHit();
                     Color color = getColor();
-                    float r = color.getRed() / 255f;
-                    float g = color.getGreen() / 255f;
-                    float b = color.getBlue() / 255f;
-
-                    Particles.create(WizardsReborn.WISP_PARTICLE)
-                            .addVelocity(0, 0, 0)
-                            .setAlpha(0.5f).setScale(0.2f, 0f)
-                            .setColor(r, g, b)
+                    ParticleBuilder.create(FluffyFur.SPARKLE_PARTICLE)
+                            .setColorData(ColorParticleData.create(color).build())
+                            .setTransparencyData(GenericParticleData.create(0.5f).build())
+                            .setScaleData(GenericParticleData.create(0.2f, 0f).build())
                             .setLifetime(15)
                             .spawn(world, pos.x(), pos.y(), pos.z());
-                    Particles.create(WizardsReborn.SPARKLE_PARTICLE)
-                            .addVelocity(0, 0, 0)
-                            .setAlpha(0.5f).setScale(0.2f, 0f)
-                            .setColor(r, g, b)
+                    ParticleBuilder.create(FluffyFur.SPARKLE_PARTICLE)
+                            .setColorData(ColorParticleData.create(color).build())
+                            .setTransparencyData(GenericParticleData.create(0.5f).build())
+                            .setScaleData(GenericParticleData.create(0.2f, 0f).build())
                             .setLifetime(10)
                             .spawn(world, pos.x(), pos.y(), pos.z());
                 }

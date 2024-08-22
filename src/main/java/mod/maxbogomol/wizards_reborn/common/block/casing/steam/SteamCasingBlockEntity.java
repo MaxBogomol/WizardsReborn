@@ -2,7 +2,7 @@ package mod.maxbogomol.wizards_reborn.common.block.casing.steam;
 
 import mod.maxbogomol.wizards_reborn.WizardsReborn;
 import mod.maxbogomol.wizards_reborn.api.alchemy.ISteamPipePriority;
-import mod.maxbogomol.wizards_reborn.api.alchemy.ISteamTileEntity;
+import mod.maxbogomol.wizards_reborn.api.alchemy.ISteamBlockEntity;
 import mod.maxbogomol.wizards_reborn.api.alchemy.PipePriorityMap;
 import mod.maxbogomol.wizards_reborn.common.block.steam_pipe.SteamPipeBlockEntity;
 import net.minecraft.core.BlockPos;
@@ -22,7 +22,7 @@ public class SteamCasingBlockEntity extends SteamPipeBlockEntity {
     }
 
     public SteamCasingBlockEntity(BlockPos pos, BlockState state) {
-        this(WizardsReborn.STEAM_CASING_TILE_ENTITY.get(), pos, state);
+        this(WizardsReborn.STEAM_CASING_BLOCK_ENTITY.get(), pos, state);
     }
 
     public void tick() {
@@ -44,7 +44,7 @@ public class SteamCasingBlockEntity extends SteamPipeBlockEntity {
                                 continue;
                             BlockEntity tile = level.getBlockEntity(getBlockPos().relative(facing));
                             if (tile != null) {
-                                if (tile instanceof ISteamTileEntity steamTileEntity) {
+                                if (tile instanceof ISteamBlockEntity steamTileEntity) {
                                     if (steamTileEntity.canSteamTransfer(facing.getOpposite())) {
                                         int priority = PRIORITY_BLOCK;
                                         if (tile instanceof ISteamPipePriority)

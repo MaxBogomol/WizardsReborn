@@ -1,7 +1,11 @@
 package mod.maxbogomol.wizards_reborn.common.block;
 
-import mod.maxbogomol.wizards_reborn.WizardsReborn;
-import mod.maxbogomol.wizards_reborn.client.particle.Particles;
+import mod.maxbogomol.fluffy_fur.FluffyFur;
+import mod.maxbogomol.fluffy_fur.client.particle.ParticleBuilder;
+import mod.maxbogomol.fluffy_fur.client.particle.data.ColorParticleData;
+import mod.maxbogomol.fluffy_fur.client.particle.data.GenericParticleData;
+import mod.maxbogomol.fluffy_fur.client.particle.data.LightParticleData;
+import mod.maxbogomol.fluffy_fur.utils.RenderUtils;
 import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.util.Mth;
@@ -12,6 +16,7 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockState;
 
+import java.awt.*;
 import java.util.Random;
 
 public class NetherSaltOreBlock extends Block {
@@ -38,14 +43,16 @@ public class NetherSaltOreBlock extends Block {
     public void playerWillDestroy(Level world, BlockPos pos, BlockState state, Player player) {
         if (world.isClientSide()) {
             if (!player.isCreative()) {
-                for (int i = 0; i < 25; i++) {
-                    Particles.create(WizardsReborn.SMOKE_PARTICLE)
-                            .addVelocity(((random.nextDouble() - 0.5D) / 20), ((random.nextDouble() - 0.5D) / 20) + 0.02f, ((random.nextDouble() - 0.5D) / 20))
-                            .setAlpha(1f, 0).setScale(0.2f, 0)
-                            .setColor(0, 0, 0)
-                            .setLifetime(40)
-                            .spawn(world, pos.getX() + 0.5F + ((random.nextDouble() - 0.5D) * 0.5), pos.getY() + 0.5F + ((random.nextDouble() - 0.5D) * 0.5), pos.getZ() + 0.5F + ((random.nextDouble() - 0.5D) * 0.5));
-                }
+                ParticleBuilder.create(FluffyFur.WISP_PARTICLE)
+                        .setRenderType(RenderUtils.DELAYED_PARTICLE)
+                        .setColorData(ColorParticleData.create(Color.BLACK).build())
+                        .setTransparencyData(GenericParticleData.create(1f, 0).build())
+                        .setScaleData(GenericParticleData.create(0.2f, 0).build())
+                        .setLightData(LightParticleData.DEFAULT)
+                        .setLifetime(40)
+                        .randomVelocity(0.025f)
+                        .randomOffset(0.25f)
+                        .repeat(world, pos.getX() + 0.5F, pos.getY() + 0.5F, pos.getZ() + 0.5F, 25);
             }
         }
 

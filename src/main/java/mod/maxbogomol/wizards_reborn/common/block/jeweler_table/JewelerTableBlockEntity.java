@@ -1,10 +1,13 @@
 package mod.maxbogomol.wizards_reborn.common.block.jeweler_table;
 
+import mod.maxbogomol.fluffy_fur.FluffyFur;
+import mod.maxbogomol.fluffy_fur.client.particle.ParticleBuilder;
+import mod.maxbogomol.fluffy_fur.client.particle.data.ColorParticleData;
+import mod.maxbogomol.fluffy_fur.client.particle.data.GenericParticleData;
 import mod.maxbogomol.fluffy_fur.common.block.entity.TickableBlockEntity;
 import mod.maxbogomol.wizards_reborn.WizardsReborn;
 import mod.maxbogomol.wizards_reborn.api.skin.Skin;
 import mod.maxbogomol.wizards_reborn.api.wissen.*;
-import mod.maxbogomol.wizards_reborn.client.particle.Particles;
 import mod.maxbogomol.wizards_reborn.common.config.Config;
 import mod.maxbogomol.wizards_reborn.common.item.CrystalItem;
 import mod.maxbogomol.wizards_reborn.common.item.SkinTrimItem;
@@ -47,7 +50,7 @@ import java.util.Random;
 
 import static net.minecraft.world.level.block.state.properties.BlockStateProperties.HORIZONTAL_FACING;
 
-public class JewelerTableBlockEntity extends BlockEntity implements TickableBlockEntity, IWissenTileEntity, ICooldownTileEntity, IWissenWandFunctionalTileEntity, IItemResultTileEntity {
+public class JewelerTableBlockEntity extends BlockEntity implements TickableBlockEntity, IWissenBlockEntity, ICooldownBlockEntity, IWissenWandFunctionalBlockEntity, IItemResultBlockEntity {
     public final ItemStackHandler itemHandler = createHandler(2);
     public final LazyOptional<IItemHandler> handler = LazyOptional.of(() -> itemHandler);
     public final ItemStackHandler itemOutputHandler = createHandler(1);
@@ -68,7 +71,7 @@ public class JewelerTableBlockEntity extends BlockEntity implements TickableBloc
     }
 
     public JewelerTableBlockEntity(BlockPos pos, BlockState state) {
-        this(WizardsReborn.JEWELER_TABLE_TILE_ENTITY.get(), pos, state);
+        this(WizardsReborn.JEWELER_TABLE_BLOCK_ENTITY.get(), pos, state);
     }
 
     @Override
@@ -210,20 +213,22 @@ public class JewelerTableBlockEntity extends BlockEntity implements TickableBloc
                 pos = new Vec3(worldPosition.getX() + pos.x(), worldPosition.getY() + pos.y() + 0.1875F, worldPosition.getZ() + pos.z());
 
                 if (random.nextFloat() < 0.5) {
-                    Particles.create(WizardsReborn.WISP_PARTICLE)
-                            .addVelocity(((random.nextDouble() - 0.5D) / 30) * getStage(), ((random.nextDouble() - 0.5D) / 30) * getStage(), ((random.nextDouble() - 0.5D) / 30) * getStage())
-                            .setAlpha(0.25f, 0).setScale(0.2f * getStage(), 0)
-                            .setColor(Config.wissenColorR(), Config.wissenColorG(), Config.wissenColorB())
+                    ParticleBuilder.create(FluffyFur.WISP_PARTICLE)
+                            .setColorData(ColorParticleData.create(Config.wissenColorR(), Config.wissenColorG(), Config.wissenColorB()).build())
+                            .setTransparencyData(GenericParticleData.create(0.25f, 0).build())
+                            .setScaleData(GenericParticleData.create(0.2f * getStage(), 0).build())
                             .setLifetime(20)
+                            .randomVelocity(0.015f)
                             .spawn(level, pos.x(), pos.y(), pos.z());
                 }
                 if (random.nextFloat() < 0.1) {
-                    Particles.create(WizardsReborn.SPARKLE_PARTICLE)
-                            .addVelocity(((random.nextDouble() - 0.5D) / 30) * getStage(), ((random.nextDouble() - 0.5D) / 30) * getStage(), ((random.nextDouble() - 0.5D) / 30) * getStage())
-                            .setAlpha(0.25f, 0).setScale(0.05f * getStage(), 0)
-                            .setColor(Config.wissenColorR(), Config.wissenColorG(), Config.wissenColorB())
+                    ParticleBuilder.create(FluffyFur.SPARKLE_PARTICLE)
+                            .setColorData(ColorParticleData.create(Config.wissenColorR(), Config.wissenColorG(), Config.wissenColorB()).build())
+                            .setTransparencyData(GenericParticleData.create(0.25f, 0).build())
+                            .setScaleData(GenericParticleData.create(0.05f * getStage(), 0).build())
+                            .randomSpin(0.5f)
                             .setLifetime(30)
-                            .setSpin((0.5f * (float) ((random.nextDouble() - 0.5D) * 2)))
+                            .randomVelocity(0.015f)
                             .spawn(level, pos.x(), pos.y(), pos.z());
                 }
             }
@@ -273,12 +278,13 @@ public class JewelerTableBlockEntity extends BlockEntity implements TickableBloc
                             y = (float) ((random.nextDouble() / 20) * vel.y);
                         }
 
-                        Particles.create(WizardsReborn.SPARKLE_PARTICLE)
-                                .addVelocity(x, (random.nextDouble() / 30), y)
-                                .setAlpha(0.35f, 0).setScale(0.2f, 0)
-                                .setColor(r, g, b)
+                        ParticleBuilder.create(FluffyFur.SPARKLE_PARTICLE)
+                                .setColorData(ColorParticleData.create(r, g, b).build())
+                                .setTransparencyData(GenericParticleData.create(0.35f, 0).build())
+                                .setScaleData(GenericParticleData.create(0.2f, 0).build())
+                                .randomSpin(0.5f)
                                 .setLifetime(30)
-                                .setSpin((0.5f * (float) ((random.nextDouble() - 0.5D) * 2)))
+                                .addVelocity(x, (random.nextDouble() / 30), y)
                                 .spawn(level, pos.x(), pos.y(), pos.z());
                     }
                 }

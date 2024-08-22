@@ -1,6 +1,9 @@
 package mod.maxbogomol.wizards_reborn.client.particle;
 
-import mod.maxbogomol.wizards_reborn.WizardsReborn;
+import mod.maxbogomol.fluffy_fur.FluffyFur;
+import mod.maxbogomol.fluffy_fur.client.particle.ParticleBuilder;
+import mod.maxbogomol.fluffy_fur.client.particle.data.ColorParticleData;
+import mod.maxbogomol.fluffy_fur.client.particle.data.GenericParticleData;
 import net.minecraft.util.Mth;
 import net.minecraft.world.level.Level;
 
@@ -44,15 +47,14 @@ public class ExperienceTotemBurst {
 
         this.end = false;
 
-        for (int i = 0; i < 4; i++) {
-            Particles.create(WizardsReborn.SPARKLE_PARTICLE)
-                    .addVelocity(((random.nextDouble() - 0.5D) / 20), ((random.nextDouble() - 0.5D) / 20), ((random.nextDouble() - 0.5D) / 20))
-                    .setAlpha(0.25f, 0).setScale(0.2f, 0)
-                    .setColor(R, G, B)
-                    .setLifetime(30)
-                    .setSpin((0.5f * (float) ((random.nextDouble() - 0.5D) * 2)))
-                    .spawn(level, x, y, z);
-        }
+        ParticleBuilder.create(FluffyFur.SPARKLE_PARTICLE)
+                .setColorData(ColorParticleData.create(R, G, B).build())
+                .setTransparencyData(GenericParticleData.create(0.25f, 0).build())
+                .setScaleData(GenericParticleData.create(0.2f, 0).build())
+                .randomSpin(0.5f)
+                .setLifetime(30)
+                .randomVelocity(0.025f)
+                .repeat(level, x, y, z, 4);
     }
 
     public void tick() {
@@ -87,20 +89,22 @@ public class ExperienceTotemBurst {
             float Y = Mth.lerp(i / 4F, y, y + velY);
             float Z = Mth.lerp(i / 4F, z, z + velZ);
             if (random.nextFloat() < 0.25) {
-                Particles.create(WizardsReborn.WISP_PARTICLE)
-                        .addVelocity(((random.nextDouble() - 0.5D) / 60), ((random.nextDouble() - 0.5D) / 60), ((random.nextDouble() - 0.5D) / 60))
-                        .setAlpha(0.25f, 0).setScale(0.2f, 0)
-                        .setColor(R, G, B)
+                ParticleBuilder.create(FluffyFur.WISP_PARTICLE)
+                        .setColorData(ColorParticleData.create(R, G, B).build())
+                        .setTransparencyData(GenericParticleData.create(0.25f, 0).build())
+                        .setScaleData(GenericParticleData.create(0.2f, 0).build())
                         .setLifetime(20)
+                        .randomVelocity(0.0085f)
                         .spawn(level, X, Y, Z);
             }
             if (random.nextFloat() < 0.05) {
-                Particles.create(WizardsReborn.SPARKLE_PARTICLE)
-                        .addVelocity(((random.nextDouble() - 0.5D) / 40), ((random.nextDouble() - 0.5D) / 40), ((random.nextDouble() - 0.5D) / 40))
-                        .setAlpha(0.25f, 0).setScale(0.05f, 0)
-                        .setColor(R, G, B)
+                ParticleBuilder.create(FluffyFur.SPARKLE_PARTICLE)
+                        .setColorData(ColorParticleData.create(R, G, B).build())
+                        .setTransparencyData(GenericParticleData.create(0.25f, 0).build())
+                        .setScaleData(GenericParticleData.create(0.05f, 0).build())
+                        .randomSpin(0.5f)
                         .setLifetime(30)
-                        .setSpin((0.5f * (float) ((random.nextDouble() - 0.5D) * 2)))
+                        .randomVelocity(0.0125f)
                         .spawn(level, X, Y, Z);
             }
         }

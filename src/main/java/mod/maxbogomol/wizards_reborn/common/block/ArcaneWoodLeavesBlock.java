@@ -1,7 +1,10 @@
 package mod.maxbogomol.wizards_reborn.common.block;
 
+import mod.maxbogomol.fluffy_fur.FluffyFur;
+import mod.maxbogomol.fluffy_fur.client.particle.ParticleBuilder;
+import mod.maxbogomol.fluffy_fur.client.particle.data.ColorParticleData;
+import mod.maxbogomol.fluffy_fur.client.particle.data.GenericParticleData;
 import mod.maxbogomol.wizards_reborn.WizardsReborn;
-import mod.maxbogomol.wizards_reborn.client.particle.Particles;
 import mod.maxbogomol.wizards_reborn.common.config.Config;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -26,21 +29,23 @@ public class ArcaneWoodLeavesBlock extends LeavesBlock {
     public void playerWillDestroy(Level world, BlockPos pos, BlockState state, Player player) {
         if (world.isClientSide()) {
             if (!player.isCreative()) {
-                for (int i = 0; i < 5; i++) {
-                    Particles.create(WizardsReborn.WISP_PARTICLE)
-                            .addVelocity(((random.nextDouble() - 0.5D) / 5), ((random.nextDouble() - 0.5D) / 5), ((random.nextDouble() - 0.5D) / 5))
-                            .setAlpha(0.125f, 0).setScale(0.2f, 0)
-                            .setColor(Config.wissenColorR(), Config.wissenColorG(), Config.wissenColorB())
-                            .setLifetime(20)
-                            .spawn(world, pos.getX() + 0.5F + ((random.nextDouble() - 0.5D) * 0.1), pos.getY() + 0.5F + ((random.nextDouble() - 0.5D) * 0.1), pos.getZ() + 0.5F + ((random.nextDouble() - 0.5D) * 0.1));
-                    Particles.create(WizardsReborn.SPARKLE_PARTICLE)
-                            .addVelocity(((random.nextDouble() - 0.5D) / 15), ((random.nextDouble() - 0.5D) / 15), ((random.nextDouble() - 0.5D) / 15))
-                            .setAlpha(0.25f, 0).setScale(0.2f, 0)
-                            .setColor(Config.wissenColorR(), Config.wissenColorG(), Config.wissenColorB())
-                            .setLifetime(30)
-                            .setSpin((0.5f * (float) ((random.nextDouble() - 0.5D) * 2)))
-                            .spawn(world, pos.getX() + 0.5F + ((random.nextDouble() - 0.5D) * 0.5), pos.getY() + 0.5F + ((random.nextDouble() - 0.5D) * 0.5), pos.getZ() + 0.5F + ((random.nextDouble() - 0.5D) * 0.5));
-                }
+                ParticleBuilder.create(FluffyFur.WISP_PARTICLE)
+                        .setColorData(ColorParticleData.create(Config.wissenColorR(), Config.wissenColorG(), Config.wissenColorB()).build())
+                        .setTransparencyData(GenericParticleData.create(0.125f, 0).build())
+                        .setScaleData(GenericParticleData.create(0.2f, 0).build())
+                        .setLifetime(20)
+                        .randomVelocity(0.05f)
+                        .randomOffset(0.05)
+                        .repeat(world, pos.getX() + 0.5F, pos.getY() + 0.5F, pos.getZ() + 0.5F, 5);
+                ParticleBuilder.create(FluffyFur.SPARKLE_PARTICLE)
+                        .setColorData(ColorParticleData.create(Config.wissenColorR(), Config.wissenColorG(), Config.wissenColorB()).build())
+                        .setTransparencyData(GenericParticleData.create(0.25f, 0).build())
+                        .setScaleData(GenericParticleData.create(0.2f, 0).build())
+                        .randomSpin(0.5f)
+                        .setLifetime(30)
+                        .randomVelocity(0.035f)
+                        .randomOffset(0.25f)
+                        .repeat(world, pos.getX() + 0.5F, pos.getY() + 0.5F, pos.getZ() + 0.5F, 5);
             }
         }
 
@@ -53,8 +58,9 @@ public class ArcaneWoodLeavesBlock extends LeavesBlock {
             BlockPos blockpos = pos.below();
             BlockState blockstate = world.getBlockState(blockpos);
             if (!isFaceFull(blockstate.getCollisionShape(world, blockpos), Direction.UP)) {
-                Particles.create(WizardsReborn.ARCANE_WOOD_LEAVES_PARTICLE)
-                        .spawn(world, pos.getX() + 0.5F + (random.nextFloat() - 0.5f), pos.getY() - 0.05f, pos.getZ() + 0.5F + (random.nextFloat() - 0.5f));
+                ParticleBuilder.create(WizardsReborn.ARCANE_WOOD_LEAVES_PARTICLE)
+                        .flatRandomOffset(1f, 0, 1f)
+                        .spawn(world, pos.getX() + 0.5F, pos.getY() - 0.05f, pos.getZ() + 0.5F);
             }
         }
     }

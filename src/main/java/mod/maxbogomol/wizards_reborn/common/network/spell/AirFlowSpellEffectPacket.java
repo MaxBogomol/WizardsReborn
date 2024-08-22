@@ -1,7 +1,10 @@
 package mod.maxbogomol.wizards_reborn.common.network.spell;
 
+import mod.maxbogomol.fluffy_fur.FluffyFur;
+import mod.maxbogomol.fluffy_fur.client.particle.ParticleBuilder;
+import mod.maxbogomol.fluffy_fur.client.particle.data.ColorParticleData;
+import mod.maxbogomol.fluffy_fur.client.particle.data.GenericParticleData;
 import mod.maxbogomol.wizards_reborn.WizardsReborn;
-import mod.maxbogomol.wizards_reborn.client.particle.Particles;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.world.level.Level;
 import net.minecraftforge.network.NetworkEvent;
@@ -54,23 +57,26 @@ public class AirFlowSpellEffectPacket {
                 @Override
                 public void run() {
                     Level world = WizardsReborn.proxy.getWorld();
-
-                    for (int i = 0; i < 20; i++) {
-                        Particles.create(WizardsReborn.STEAM_PARTICLE)
-                                .addVelocity(msg.velX + ((random.nextDouble() - 0.5D) / 20), msg.velY + ((random.nextDouble() - 0.5D) / 20), msg.velZ + ((random.nextDouble() - 0.5D) / 20))
-                                .setAlpha(0.3f, 0).setScale(0.1f, 1.0f)
-                                .setColor(msg.colorR, msg.colorG, msg.colorB)
-                                .setLifetime(70)
-                                .setSpin((0.1f * (float) ((random.nextDouble() - 0.5D) * 2)))
-                                .spawn(world, msg.X + ((random.nextDouble() - 0.5D) / 2), msg.Y + ((random.nextDouble() - 0.5D) / 2), msg.Z + ((random.nextDouble() - 0.5D) / 2));
-                        Particles.create(WizardsReborn.SPARKLE_PARTICLE)
-                                .addVelocity(msg.velX + ((random.nextDouble() - 0.5D) / 10), msg.velY + ((random.nextDouble() - 0.5D) / 10), msg.velZ + ((random.nextDouble() - 0.5D) / 10))
-                                .setAlpha(0.125f, 0).setScale(0.2f, 0)
-                                .setColor(msg.colorR, msg.colorG, msg.colorB)
-                                .setLifetime(20)
-                                .setSpin((0.5f * (float) ((random.nextDouble() - 0.5D) * 2)))
-                                .spawn(world, msg.X + ((random.nextDouble() - 0.5D) / 2), msg.Y + ((random.nextDouble() - 0.5D) / 2), msg.Z + ((random.nextDouble() - 0.5D) / 2));
-                    }
+                    ParticleBuilder.create(FluffyFur.SMOKE_PARTICLE)
+                            .setColorData(ColorParticleData.create(msg.colorR, msg.colorG, msg.colorB).build())
+                            .setTransparencyData(GenericParticleData.create(0.3f, 0).build())
+                            .setScaleData(GenericParticleData.create(0.1f, 1.0f).build())
+                            .randomSpin(0.1f)
+                            .setLifetime(70)
+                            .randomVelocity(0.025f)
+                            .addVelocity(msg.velX, msg.velY, msg.velZ)
+                            .randomOffset(0.25f)
+                            .repeat(world, msg.X, msg.Y, msg.Z, 20);
+                    ParticleBuilder.create(FluffyFur.SPARKLE_PARTICLE)
+                            .setColorData(ColorParticleData.create(msg.colorR, msg.colorG, msg.colorB).build())
+                            .setTransparencyData(GenericParticleData.create(0.125f, 0).build())
+                            .setScaleData(GenericParticleData.create(0.2f, 0).build())
+                            .randomSpin(0.5f)
+                            .setLifetime(20)
+                            .randomVelocity(0.025f)
+                            .addVelocity(msg.velX, msg.velY, msg.velZ)
+                            .randomOffset(0.25f)
+                            .repeat(world, msg.X, msg.Y, msg.Z, 20);
 
                     ctx.get().setPacketHandled(true);
                 }

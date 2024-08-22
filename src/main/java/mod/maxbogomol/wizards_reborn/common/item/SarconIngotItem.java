@@ -1,8 +1,10 @@
 package mod.maxbogomol.wizards_reborn.common.item;
 
+import mod.maxbogomol.fluffy_fur.FluffyFur;
+import mod.maxbogomol.fluffy_fur.client.particle.ParticleBuilder;
+import mod.maxbogomol.fluffy_fur.client.particle.data.ColorParticleData;
+import mod.maxbogomol.fluffy_fur.client.particle.data.GenericParticleData;
 import mod.maxbogomol.fluffy_fur.common.item.IParticleItem;
-import mod.maxbogomol.wizards_reborn.WizardsReborn;
-import mod.maxbogomol.wizards_reborn.client.particle.Particles;
 import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.Level;
@@ -19,13 +21,15 @@ public class SarconIngotItem extends Item implements IParticleItem {
     @Override
     public void addParticles(Level level, ItemEntity entity) {
         if (random.nextFloat() < 0.07) {
-            Particles.create(WizardsReborn.WISP_PARTICLE)
-                    .addVelocity(((random.nextDouble() - 0.5D) / 50), ((random.nextDouble() - 0.5D) / 50), ((random.nextDouble() - 0.5D) / 50))
-                    .setAlpha(0.5f, 0).setScale(0.1f, 0)
-                    .setColor(0.627f, 0.525f, 0.721f)
+            ParticleBuilder.create(FluffyFur.WISP_PARTICLE)
+                    .setColorData(ColorParticleData.create(0.627f, 0.525f, 0.721f).build())
+                    .setTransparencyData(GenericParticleData.create(0.5f, 0).build())
+                    .setScaleData(GenericParticleData.create(0.1f, 0).build())
+                    .randomSpin(0.5f)
                     .setLifetime(30)
-                    .setSpin((0.5f * (float) ((random.nextDouble() - 0.5D) * 2)))
-                    .spawn(level, entity.getX() + ((random.nextDouble() - 0.5D) * 0.25), entity.getY() + 0.25F + ((random.nextDouble() - 0.5D) * 0.25), entity.getZ() + ((random.nextDouble() - 0.5D) * 0.25));
+                    .randomVelocity(0.01f)
+                    .randomOffset(0.125f)
+                    .spawn(level, entity.getX(), entity.getY() + 0.25F, entity.getZ());
         }
     }
 }

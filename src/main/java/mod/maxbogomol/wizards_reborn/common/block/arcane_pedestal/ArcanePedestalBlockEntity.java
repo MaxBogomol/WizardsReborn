@@ -19,7 +19,7 @@ public class ArcanePedestalBlockEntity extends ExposedBlockSimpleInventory {
     }
 
     public ArcanePedestalBlockEntity(BlockPos pos, BlockState state) {
-        this(WizardsReborn.ARCANE_PEDESTAL_TILE_ENTITY.get(), pos, state);
+        this(WizardsReborn.ARCANE_PEDESTAL_BLOCK_ENTITY.get(), pos, state);
     }
 
     @Override

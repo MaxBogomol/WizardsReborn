@@ -29,7 +29,7 @@ public class HoveringTomeStandBlockEntity extends BlockEntity implements Tickabl
     }
 
     public HoveringTomeStandBlockEntity(BlockPos pos, BlockState state) {
-        this(WizardsReborn.HOVERING_TOME_STAND_TILE_ENTITY.get(), pos, state);
+        this(WizardsReborn.HOVERING_TOME_STAND_BLOCK_ENTITY.get(), pos, state);
     }
 
     @Override

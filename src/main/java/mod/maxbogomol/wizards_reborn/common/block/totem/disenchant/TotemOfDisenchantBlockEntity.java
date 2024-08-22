@@ -1,14 +1,17 @@
 package mod.maxbogomol.wizards_reborn.common.block.totem.disenchant;
 
+import mod.maxbogomol.fluffy_fur.FluffyFur;
+import mod.maxbogomol.fluffy_fur.client.particle.ParticleBuilder;
+import mod.maxbogomol.fluffy_fur.client.particle.data.ColorParticleData;
+import mod.maxbogomol.fluffy_fur.client.particle.data.GenericParticleData;
 import mod.maxbogomol.fluffy_fur.common.block.entity.TickableBlockEntity;
 import mod.maxbogomol.wizards_reborn.WizardsReborn;
 import mod.maxbogomol.wizards_reborn.api.arcaneenchantment.ArcaneEnchantment;
 import mod.maxbogomol.wizards_reborn.api.arcaneenchantment.ArcaneEnchantmentUtils;
 import mod.maxbogomol.wizards_reborn.api.arcaneenchantment.ArcaneEnchantments;
-import mod.maxbogomol.wizards_reborn.api.wissen.ICooldownTileEntity;
-import mod.maxbogomol.wizards_reborn.api.wissen.IWissenTileEntity;
+import mod.maxbogomol.wizards_reborn.api.wissen.ICooldownBlockEntity;
+import mod.maxbogomol.wizards_reborn.api.wissen.IWissenBlockEntity;
 import mod.maxbogomol.wizards_reborn.client.event.ClientTickHandler;
-import mod.maxbogomol.wizards_reborn.client.particle.Particles;
 import mod.maxbogomol.wizards_reborn.common.config.Config;
 import mod.maxbogomol.wizards_reborn.common.network.PacketHandler;
 import mod.maxbogomol.wizards_reborn.common.network.tileentity.TotemOfDisenchantBurstEffectPacket;
@@ -44,7 +47,7 @@ import javax.annotation.Nullable;
 import java.util.Map;
 import java.util.Random;
 
-public class TotemOfDisenchantBlockEntity extends BlockEntity implements TickableBlockEntity, IWissenTileEntity, ICooldownTileEntity {
+public class TotemOfDisenchantBlockEntity extends BlockEntity implements TickableBlockEntity, IWissenBlockEntity, ICooldownBlockEntity {
     public final ItemStackHandler itemHandler = createHandler(1);
     public final LazyOptional<IItemHandler> handler = LazyOptional.of(() -> itemHandler);
 
@@ -63,7 +66,7 @@ public class TotemOfDisenchantBlockEntity extends BlockEntity implements Tickabl
     }
 
     public TotemOfDisenchantBlockEntity(BlockPos pos, BlockState state) {
-        this(WizardsReborn.TOTEM_OF_DISENCHANT_TILE_ENTITY.get(), pos, state);
+        this(WizardsReborn.TOTEM_OF_DISENCHANT_BLOCK_ENTITY.get(), pos, state);
     }
 
     @Override
@@ -166,20 +169,22 @@ public class TotemOfDisenchantBlockEntity extends BlockEntity implements Tickabl
         if (level.isClientSide()) {
             if (getWissen() > 0) {
                 if (random.nextFloat() < 0.3) {
-                    Particles.create(WizardsReborn.WISP_PARTICLE)
-                            .addVelocity(((random.nextDouble() - 0.5D) / 30) * getStage(), ((random.nextDouble() - 0.5D) / 30) * getStage(), ((random.nextDouble() - 0.5D) / 30) * getStage())
-                            .setAlpha(0.25f, 0).setScale(0.2f * getStage(), 0)
-                            .setColor(Config.wissenColorR(), Config.wissenColorG(), Config.wissenColorB())
+                    ParticleBuilder.create(FluffyFur.WISP_PARTICLE)
+                            .setColorData(ColorParticleData.create(Config.wissenColorR(), Config.wissenColorG(), Config.wissenColorB()).build())
+                            .setTransparencyData(GenericParticleData.create(0.25f, 0).build())
+                            .setScaleData(GenericParticleData.create(0.2f * getStage(), 0).build())
                             .setLifetime(20)
+                            .randomVelocity(0.015f)
                             .spawn(level, worldPosition.getX() + 0.5F, worldPosition.getY() + 0.5F, worldPosition.getZ() + 0.5F);
                 }
                 if (random.nextFloat() < 0.1) {
-                    Particles.create(WizardsReborn.SPARKLE_PARTICLE)
-                            .addVelocity(((random.nextDouble() - 0.5D) / 30) * getStage(), ((random.nextDouble() - 0.5D) / 30) * getStage(), ((random.nextDouble() - 0.5D) / 30) * getStage())
-                            .setAlpha(0.25f, 0).setScale(0.075f * getStage(), 0)
-                            .setColor(Config.wissenColorR(), Config.wissenColorG(), Config.wissenColorB())
-                            .setLifetime(30)
-                            .setSpin((0.5f * (float) ((random.nextDouble() - 0.5D) * 2)))
+                    ParticleBuilder.create(FluffyFur.SPARKLE_PARTICLE)
+                            .setColorData(ColorParticleData.create(Config.wissenColorR(), Config.wissenColorG(), Config.wissenColorB()).build())
+                            .setTransparencyData(GenericParticleData.create(0.25f, 0).build())
+                            .setScaleData(GenericParticleData.create(0.075f * getStage(), 0).build())
+                            .randomSpin(0.5f)
+                            .setLifetime(20)
+                            .randomVelocity(0.015f)
                             .spawn(level, worldPosition.getX() + 0.5F, worldPosition.getY() + 0.5F, worldPosition.getZ() + 0.5F);
                 }
             }
@@ -207,12 +212,13 @@ public class TotemOfDisenchantBlockEntity extends BlockEntity implements Tickabl
                             b = Config.wissenColorB();
                         }
 
-                        Particles.create(WizardsReborn.SPARKLE_PARTICLE)
-                                .addVelocity(-X / 20, Y / 100, -Z / 20)
-                                .setAlpha(0.75f, 0).setScale(0.1f, 0)
-                                .setColor(r, g, b)
+                        ParticleBuilder.create(FluffyFur.SPARKLE_PARTICLE)
+                                .setColorData(ColorParticleData.create(r, g, b).build())
+                                .setTransparencyData(GenericParticleData.create(0.75f, 0).build())
+                                .setScaleData(GenericParticleData.create(0.1f, 0).build())
+                                .randomSpin(0.1f)
                                 .setLifetime(30)
-                                .setSpin(0.1f)
+                                .addVelocity(-X / 20, Y / 100, -Z / 20)
                                 .spawn(level, getBlockPos().getX() + 0.5F + X, getBlockPos().getY() + 0.725F, getBlockPos().getZ() + 0.5F + Z);
                     }
                 }

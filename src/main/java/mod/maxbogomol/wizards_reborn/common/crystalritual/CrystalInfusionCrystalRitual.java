@@ -3,11 +3,14 @@ package mod.maxbogomol.wizards_reborn.common.crystalritual;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
 import com.mojang.math.Axis;
+import mod.maxbogomol.fluffy_fur.FluffyFur;
+import mod.maxbogomol.fluffy_fur.client.particle.ParticleBuilder;
+import mod.maxbogomol.fluffy_fur.client.particle.data.ColorParticleData;
+import mod.maxbogomol.fluffy_fur.client.particle.data.GenericParticleData;
 import mod.maxbogomol.wizards_reborn.WizardsReborn;
 import mod.maxbogomol.wizards_reborn.api.crystalritual.CrystalRitual;
 import mod.maxbogomol.wizards_reborn.api.crystalritual.CrystalRitualArea;
 import mod.maxbogomol.wizards_reborn.client.event.ClientTickHandler;
-import mod.maxbogomol.wizards_reborn.client.particle.Particles;
 import mod.maxbogomol.wizards_reborn.client.render.WorldRenderHandler;
 import mod.maxbogomol.wizards_reborn.common.block.arcane_pedestal.ArcanePedestalBlockEntity;
 import mod.maxbogomol.wizards_reborn.common.network.PacketHandler;
@@ -176,34 +179,39 @@ public class CrystalInfusionCrystalRitual extends CrystalRitual {
                     double v = Math.sin(Math.toRadians(ticksUp + (rotate * i))) * 0.0625F;
 
                     if (random.nextFloat() < 0.25f) {
-                        Particles.create(WizardsReborn.WISP_PARTICLE)
-                                .addVelocity(-X / 20, -Y / 10, -Z / 20)
-                                .setAlpha(0.35f, 0).setScale(0.3f, 0)
-                                .setColor(r, g, b)
+                        ParticleBuilder.create(FluffyFur.WISP_PARTICLE)
+                                .setColorData(ColorParticleData.create(r, g, b).build())
+                                .setTransparencyData(GenericParticleData.create(0.35f, 0).build())
+                                .setScaleData(GenericParticleData.create(0.3f, 0).build())
+                                .randomSpin(0.5f)
                                 .setLifetime(30)
-                                .setSpin((0.5f * (float) ((random.nextDouble() - 0.5D) * 2)))
+                                .addVelocity(-X / 20, -Y / 10, -Z / 20)
                                 .spawn(level, blockPos.getX() + 0.5F + X, blockPos.getY() + 0.5F + v, blockPos.getZ() + 0.5F + Z);
                     }
 
                     if (random.nextFloat() < 0.125) {
-                        Particles.create(WizardsReborn.SPARKLE_PARTICLE)
-                                .addVelocity(-X / 20, -Y / 10, -Z / 20)
-                                .setAlpha(0.25f, 0).setScale(0.3f, 0)
-                                .setColor(r, g, b)
+                        ParticleBuilder.create(FluffyFur.SPARKLE_PARTICLE)
+                                .setColorData(ColorParticleData.create(r, g, b).build())
+                                .setTransparencyData(GenericParticleData.create(0.25f, 0).build())
+                                .setScaleData(GenericParticleData.create(0.3f, 0).build())
+                                .randomSpin(0.5f)
                                 .setLifetime(30)
-                                .setSpin((0.5f * (float) ((random.nextDouble() - 0.5D) * 2)))
-                                .spawn(level, blockPos.getX() + 0.5F + X + ((random.nextDouble() - 0.5D) / 10), blockPos.getY() + 0.5F + v + ((random.nextDouble() - 0.5D) / 10), blockPos.getZ() + 0.5F + Z + ((random.nextDouble() - 0.5D) / 10));
+                                .randomOffset(0.05f)
+                                .addVelocity(-X / 20, -Y / 10, -Z / 20)
+                                .spawn(level, blockPos.getX() + 0.5F + X, blockPos.getY() + 0.5F + v, blockPos.getZ() + 0.5F + Z);
                     }
                 }
 
                 if (random.nextFloat() < 0.3) {
                     double X = ((random.nextDouble() - 0.5D) * 0.5);
                     double Z = ((random.nextDouble() - 0.5D) * 0.5);
-                    Particles.create(WizardsReborn.KARMA_PARTICLE)
-                            .addVelocity(-(X / 100), (random.nextDouble() / 20), -(Z / 100))
-                            .setAlpha(0.5f, 0).setScale(0.1f, 0.025f)
-                            .setColor(0.733f, 0.564f, 0.937f)
+                    ParticleBuilder.create(WizardsReborn.KARMA_PARTICLE)
+                            .setColorData(ColorParticleData.create(0.733f, 0.564f, 0.937f).build())
+                            .setTransparencyData(GenericParticleData.create(0.5f, 0).build())
+                            .setScaleData(GenericParticleData.create(0.1f, 0.025f).build())
                             .setLifetime(15)
+                            .randomOffset(0.05f)
+                            .addVelocity(-(X / 100), (random.nextDouble() / 20), -(Z / 100))
                             .spawn(level, blockPos.getX() + 0.5F + X, blockPos.getY() + 0.5625F, blockPos.getZ() + 0.5F + Z);
                 }
             }

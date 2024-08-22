@@ -1,9 +1,14 @@
 package mod.maxbogomol.wizards_reborn.common.spell.fog;
 
+import mod.maxbogomol.fluffy_fur.FluffyFur;
+import mod.maxbogomol.fluffy_fur.client.particle.ParticleBuilder;
+import mod.maxbogomol.fluffy_fur.client.particle.data.ColorParticleData;
+import mod.maxbogomol.fluffy_fur.client.particle.data.GenericParticleData;
+import mod.maxbogomol.fluffy_fur.client.particle.data.LightParticleData;
+import mod.maxbogomol.fluffy_fur.utils.RenderUtils;
 import mod.maxbogomol.wizards_reborn.WizardsReborn;
 import mod.maxbogomol.wizards_reborn.api.crystal.CrystalUtils;
 import mod.maxbogomol.wizards_reborn.api.spell.Spell;
-import mod.maxbogomol.wizards_reborn.client.particle.Particles;
 import mod.maxbogomol.wizards_reborn.common.entity.SpellProjectileEntity;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
@@ -116,22 +121,28 @@ public class FogSpell extends Spell {
 
         for (BlockPos pos : blocks) {
             if (random.nextFloat() < 0.2f) {
-                Particles.create(WizardsReborn.STEAM_PARTICLE)
-                        .addVelocity(((random.nextDouble() - 0.5D) / 70), ((random.nextDouble() - 0.5D) / 70), ((random.nextDouble() - 0.5D) / 70))
-                        .setAlpha(0.45f, 0).setScale(0.5f)
-                        .setColor(r, g, b)
+                ParticleBuilder.create(FluffyFur.SMOKE_PARTICLE)
+                        .setColorData(ColorParticleData.create(color).build())
+                        .setTransparencyData(GenericParticleData.create(0.45f, 0).build())
+                        .setScaleData(GenericParticleData.create(0.5f).build())
+                        .randomSpin(0.1f)
                         .setLifetime(20)
-                        .setSpin((0.1f * (float) ((random.nextDouble() - 0.5D) * 2)))
-                        .spawn(entity.level(), pos.getX() + 0.5f + (random.nextDouble() - 0.5D), pos.getY() + 0.1f, pos.getZ() + 0.5f + (random.nextDouble() - 0.5D));
+                        .randomVelocity(0.007f)
+                        .flatRandomOffset(0.5f, 0, 0.5f)
+                        .spawn(entity.level(), pos.getX() + 0.5f, pos.getY() + 0.1f, pos.getZ() + 0.5f);
             }
             if (random.nextFloat() < 0.4f) {
-                Particles.create(WizardsReborn.SMOKE_PARTICLE)
-                        .addVelocity(((random.nextDouble() - 0.5D) / 70), ((random.nextDouble() - 0.5D) / 70), ((random.nextDouble() - 0.5D) / 70))
-                        .setAlpha(0.35f, 0).setScale(0.5f)
-                        .setColor(r, g, b)
+                ParticleBuilder.create(FluffyFur.SMOKE_PARTICLE)
+                        .setRenderType(RenderUtils.DELAYED_PARTICLE)
+                        .setColorData(ColorParticleData.create(color).build())
+                        .setTransparencyData(GenericParticleData.create(0.35f, 0).build())
+                        .setScaleData(GenericParticleData.create(0.5f).build())
+                        .setLightData(LightParticleData.DEFAULT)
+                        .randomSpin(0.1f)
                         .setLifetime(20)
-                        .setSpin((0.1f * (float) ((random.nextDouble() - 0.5D) * 2)))
-                        .spawn(entity.level(), pos.getX() + 0.5f + (random.nextDouble() - 0.5D), pos.getY() + 0.1f, pos.getZ() + 0.5f + (random.nextDouble() - 0.5D));
+                        .randomVelocity(0.007f)
+                        .flatRandomOffset(0.5f, 0, 0.5f)
+                        .spawn(entity.level(), pos.getX() + 0.5f, pos.getY() + 0.1f, pos.getZ() + 0.5f);
             }
         }
     }

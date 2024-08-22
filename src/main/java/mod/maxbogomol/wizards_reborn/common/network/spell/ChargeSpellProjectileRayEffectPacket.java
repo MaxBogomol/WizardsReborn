@@ -1,7 +1,10 @@
 package mod.maxbogomol.wizards_reborn.common.network.spell;
 
+import mod.maxbogomol.fluffy_fur.FluffyFur;
+import mod.maxbogomol.fluffy_fur.client.particle.ParticleBuilder;
+import mod.maxbogomol.fluffy_fur.client.particle.data.ColorParticleData;
+import mod.maxbogomol.fluffy_fur.client.particle.data.GenericParticleData;
 import mod.maxbogomol.wizards_reborn.WizardsReborn;
-import mod.maxbogomol.wizards_reborn.client.particle.Particles;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.util.Mth;
 import net.minecraft.world.level.Level;
@@ -92,22 +95,26 @@ public class ChargeSpellProjectileRayEffectPacket {
                         double lerpZ = Mth.lerp(i / 15.0f, msg.posFromZ, pos.z);
 
                         if (random.nextFloat() < 0.25f) {
-                            Particles.create(WizardsReborn.WISP_PARTICLE)
-                                    .addVelocity(-norm.x + ((random.nextDouble() - 0.5D) / 250), -norm.y + ((random.nextDouble() - 0.5D) / 250), -norm.z + ((random.nextDouble() - 0.5D) / 250))
-                                    .setAlpha(0.2f * msg.charge, 0).setScale(0.15f * msg.charge, 0)
-                                    .setColor(msg.r, msg.g, msg.b)
+                            ParticleBuilder.create(FluffyFur.WISP_PARTICLE)
+                                    .setColorData(ColorParticleData.create(msg.r, msg.g, msg.b).build())
+                                    .setTransparencyData(GenericParticleData.create(0.2f * msg.charge, 0).build())
+                                    .setScaleData(GenericParticleData.create(0.15f * msg.charge, 0).build())
+                                    .randomSpin(0.3f)
                                     .setLifetime(20)
-                                    .setSpin((0.3f * (float) ((random.nextDouble() - 0.5D) * 2)) * msg.charge)
+                                    .randomVelocity(0.002f)
+                                    .addVelocity(-norm.x, -norm.y, -norm.z)
                                     .spawn(world, lerpX, lerpY, lerpZ);
                         }
 
                         if (random.nextFloat() < 0.1f) {
-                            Particles.create(WizardsReborn.SPARKLE_PARTICLE)
-                                    .addVelocity(-norm.x + ((random.nextDouble() - 0.5D) / 100), -norm.y + ((random.nextDouble() - 0.5D) / 100), -norm.z + ((random.nextDouble() - 0.5D) / 100))
-                                    .setAlpha(0.125f * msg.charge, 0).setScale(0.2f * msg.charge, 0)
-                                    .setColor(msg.r, msg.g, msg.b)
+                            ParticleBuilder.create(FluffyFur.SPARKLE_PARTICLE)
+                                    .setColorData(ColorParticleData.create(msg.r, msg.g, msg.b).build())
+                                    .setTransparencyData(GenericParticleData.create(0.125f * msg.charge, 0).build())
+                                    .setScaleData(GenericParticleData.create(0.2f * msg.charge, 0).build())
+                                    .randomSpin(0.3f)
                                     .setLifetime(30)
-                                    .setSpin((0.3f * (float) ((random.nextDouble() - 0.5D) * 2)) * msg.charge)
+                                    .randomVelocity(0.005f)
+                                    .addVelocity(-norm.x, -norm.y, -norm.z)
                                     .spawn(world, lerpX, lerpY, lerpZ);
                         }
                     }

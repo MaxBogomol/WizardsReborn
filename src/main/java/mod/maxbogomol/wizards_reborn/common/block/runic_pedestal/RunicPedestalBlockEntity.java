@@ -40,7 +40,7 @@ public class RunicPedestalBlockEntity extends BlockSimpleInventory implements Ti
     }
 
     public RunicPedestalBlockEntity(BlockPos pos, BlockState state) {
-        this(WizardsReborn.RUNIC_PEDESTAL_TILE_ENTITY.get(), pos, state);
+        this(WizardsReborn.RUNIC_PEDESTAL_BLOCK_ENTITY.get(), pos, state);
     }
 
     @Override

@@ -1,12 +1,15 @@
 package mod.maxbogomol.wizards_reborn.common.arcaneenchantment;
 
+import mod.maxbogomol.fluffy_fur.FluffyFur;
+import mod.maxbogomol.fluffy_fur.client.particle.ParticleBuilder;
+import mod.maxbogomol.fluffy_fur.client.particle.data.ColorParticleData;
+import mod.maxbogomol.fluffy_fur.client.particle.data.GenericParticleData;
 import mod.maxbogomol.wizards_reborn.WizardsReborn;
 import mod.maxbogomol.wizards_reborn.api.arcaneenchantment.ArcaneEnchantment;
 import mod.maxbogomol.wizards_reborn.api.arcaneenchantment.ArcaneEnchantmentType;
 import mod.maxbogomol.wizards_reborn.api.arcaneenchantment.ArcaneEnchantmentUtils;
 import mod.maxbogomol.wizards_reborn.api.arcaneenchantment.IArcaneItem;
 import mod.maxbogomol.wizards_reborn.api.wissen.WissenUtils;
-import mod.maxbogomol.wizards_reborn.client.particle.Particles;
 import mod.maxbogomol.wizards_reborn.common.capability.IArrowModifier;
 import mod.maxbogomol.wizards_reborn.common.damage.DamageSourceRegistry;
 import mod.maxbogomol.wizards_reborn.common.network.PacketHandler;
@@ -63,9 +66,6 @@ public class WissenChargeArcaneEnchantment extends ArcaneEnchantment {
 
                         if (enchantmentLevel > 0) {
                             Color color = WizardsReborn.WISSEN_CHARGE_ARCANE_ENCHANTMENT.getColor();
-                            float r = color.getRed() / 255f;
-                            float g = color.getGreen() / 255f;
-                            float b = color.getBlue() / 255f;
 
                             int time = stack.getUseDuration() - remainingUseDuration;
                             if (time > 100) {
@@ -88,22 +88,26 @@ public class WissenChargeArcaneEnchantment extends ArcaneEnchantment {
 
                             if (WissenUtils.canRemoveWissen(wissen, cost)) {
                                 if (random.nextFloat() < 0.45f) {
-                                    Particles.create(WizardsReborn.WISP_PARTICLE)
-                                            .addVelocity(((random.nextDouble() - 0.5D) / 25), ((random.nextDouble() - 0.5D) / 25) + 0.02f, ((random.nextDouble() - 0.5D) / 25))
-                                            .setAlpha(0.3f * charge, 0).setScale(0.15f * charge, 0)
-                                            .setColor(r, g, b)
+                                    ParticleBuilder.create(FluffyFur.WISP_PARTICLE)
+                                            .setColorData(ColorParticleData.create(color).build())
+                                            .setTransparencyData(GenericParticleData.create(0.3f * charge, 0).build())
+                                            .setScaleData(GenericParticleData.create(0.15f * charge, 0).build())
+                                            .randomSpin(0.3f)
                                             .setLifetime(20)
-                                            .setSpin((0.3f * (float) ((random.nextDouble() - 0.5D) * 2)) * charge)
+                                            .randomVelocity(0.02f)
+                                            .addVelocity(0, 0.02f, 0)
                                             .spawn(level, pos.x(), pos.y(), pos.z());
                                 }
 
                                 if (random.nextFloat() < 0.3f) {
-                                    Particles.create(WizardsReborn.SPARKLE_PARTICLE)
-                                            .addVelocity(((random.nextDouble() - 0.5D) / 25), ((random.nextDouble() - 0.5D) / 25) + 0.02f, ((random.nextDouble() - 0.5D) / 25))
-                                            .setAlpha(0.3f * charge, 0).setScale(0.15f * charge, 0)
-                                            .setColor(r, g, b)
+                                    ParticleBuilder.create(FluffyFur.SPARKLE_PARTICLE)
+                                            .setColorData(ColorParticleData.create(color).build())
+                                            .setTransparencyData(GenericParticleData.create(0.3f * charge, 0).build())
+                                            .setScaleData(GenericParticleData.create(0.15f * charge, 0).build())
+                                            .randomSpin(0.3f)
                                             .setLifetime(30)
-                                            .setSpin((0.3f * (float) ((random.nextDouble() - 0.5D) * 2)) * charge)
+                                            .randomVelocity(0.02f)
+                                            .addVelocity(0, 0.02f, 0)
                                             .spawn(level, pos.x(), pos.y(), pos.z());
                                 }
                             }

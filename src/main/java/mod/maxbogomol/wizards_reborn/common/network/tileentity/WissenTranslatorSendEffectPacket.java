@@ -1,9 +1,12 @@
 package mod.maxbogomol.wizards_reborn.common.network.tileentity;
 
+import mod.maxbogomol.fluffy_fur.FluffyFur;
+import mod.maxbogomol.fluffy_fur.client.particle.ParticleBuilder;
+import mod.maxbogomol.fluffy_fur.client.particle.data.ColorParticleData;
+import mod.maxbogomol.fluffy_fur.client.particle.data.GenericParticleData;
 import mod.maxbogomol.wizards_reborn.WizardsReborn;
 import mod.maxbogomol.wizards_reborn.client.config.ClientConfig;
 import mod.maxbogomol.wizards_reborn.client.event.ClientTickHandler;
-import mod.maxbogomol.wizards_reborn.client.particle.Particles;
 import mod.maxbogomol.wizards_reborn.common.config.Config;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.FriendlyByteBuf;
@@ -46,13 +49,15 @@ public class WissenTranslatorSendEffectPacket {
 
                     for (int i = 0; i < 15; i++) {
                         if (random.nextFloat() < (0.75f * (1f - ((float) wissenCount / ClientConfig.WISSEN_RAYS_LIMIT.get()))) + 0.05f) {
-                            Particles.create(WizardsReborn.SPARKLE_PARTICLE)
-                                    .addVelocity(((random.nextDouble() - 0.5D) / 30), ((random.nextDouble() - 0.5D) / 30), ((random.nextDouble() - 0.5D) / 30))
-                                    .setAlpha(0.25f, 0).setScale(0.15f, 0)
-                                    .setColor(Config.wissenColorR(), Config.wissenColorG(), Config.wissenColorB())
+                            ParticleBuilder.create(FluffyFur.SPARKLE_PARTICLE)
+                                    .setColorData(ColorParticleData.create(Config.wissenColorR(), Config.wissenColorG(), Config.wissenColorB()).build())
+                                    .setTransparencyData(GenericParticleData.create(0.25f, 0).build())
+                                    .setScaleData(GenericParticleData.create(0.15f, 0).build())
+                                    .randomSpin(0.5f)
                                     .setLifetime(30)
-                                    .setSpin((0.5f * (float) ((random.nextDouble() - 0.5D) * 2)))
-                                    .spawn(world, msg.pos.getX() + 0.5F + ((random.nextDouble() - 0.5D) * 0.75), msg.pos.getY() + 0.5F + ((random.nextDouble() - 0.5D) * 0.75), msg.pos.getZ() + 0.5F + ((random.nextDouble() - 0.5D) * 0.75));
+                                    .randomVelocity(0.015f)
+                                    .flatRandomOffset(0.375f, 0.375f, 0.375f)
+                                    .spawn(world, msg.pos.getX() + 0.5F, msg.pos.getY() + 0.5F, msg.pos.getZ() + 0.5F);
                         }
                     }
                     ctx.get().setPacketHandled(true);

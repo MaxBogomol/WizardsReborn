@@ -7,7 +7,7 @@ import mod.maxbogomol.wizards_reborn.api.alchemy.PipeConnection;
 import mod.maxbogomol.wizards_reborn.client.gui.container.AlchemyMachineContainer;
 import mod.maxbogomol.wizards_reborn.common.block.pipe.PipeBaseBlock;
 import mod.maxbogomol.wizards_reborn.common.item.equipment.WissenWandItem;
-import mod.maxbogomol.wizards_reborn.common.block.pipe.PipeBaseTileEntity;
+import mod.maxbogomol.wizards_reborn.common.block.pipe.PipeBaseBlockEntity;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.network.chat.Component;
@@ -181,10 +181,10 @@ public class AlchemyMachineBlock extends HorizontalDirectionalBlock implements E
             pLevel.scheduleTick(pCurrentPos, Fluids.WATER, Fluids.WATER.getTickDelay(pLevel));
         }
 
-        if (pLevel.getBlockEntity(pCurrentPos) instanceof PipeBaseTileEntity pipe) {
+        if (pLevel.getBlockEntity(pCurrentPos) instanceof PipeBaseBlockEntity pipe) {
             BlockEntity facingBE = pLevel.getBlockEntity(pCurrentPos);
             if (pNeighborState.is(WizardsReborn.FLUID_PIPE_CONNECTION_BLOCK_TAG)) {
-                if (facingBE instanceof PipeBaseTileEntity && ((PipeBaseTileEntity) facingBE).getConnection(pDirection.getOpposite()) == PipeConnection.DISABLED) {
+                if (facingBE instanceof PipeBaseBlockEntity && ((PipeBaseBlockEntity) facingBE).getConnection(pDirection.getOpposite()) == PipeConnection.DISABLED) {
                     pipe.setConnection(pDirection, PipeConnection.NONE);
                 } else {
                     pipe.setConnection(pDirection, PipeConnection.PIPE);

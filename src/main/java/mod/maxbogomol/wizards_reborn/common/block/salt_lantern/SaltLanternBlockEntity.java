@@ -1,7 +1,13 @@
 package mod.maxbogomol.wizards_reborn.common.block.salt_lantern;
 
+import mod.maxbogomol.fluffy_fur.FluffyFur;
+import mod.maxbogomol.fluffy_fur.client.particle.ParticleBuilder;
+import mod.maxbogomol.fluffy_fur.client.particle.data.ColorParticleData;
+import mod.maxbogomol.fluffy_fur.client.particle.data.GenericParticleData;
+import mod.maxbogomol.fluffy_fur.client.particle.data.LightParticleData;
+import mod.maxbogomol.fluffy_fur.common.easing.Easing;
+import mod.maxbogomol.fluffy_fur.utils.RenderUtils;
 import mod.maxbogomol.wizards_reborn.WizardsReborn;
-import mod.maxbogomol.wizards_reborn.client.particle.Particles;
 import mod.maxbogomol.wizards_reborn.common.block.ArcaneLumosBlock;
 import mod.maxbogomol.wizards_reborn.common.block.salt_torch.SaltTorchBlockEntity;
 import net.minecraft.core.BlockPos;
@@ -18,7 +24,7 @@ public class SaltLanternBlockEntity extends SaltTorchBlockEntity {
     }
 
     public SaltLanternBlockEntity(BlockPos pos, BlockState state) {
-        this(WizardsReborn.SALT_LANTERN_TILE_ENTITY.get(), pos, state);
+        this(WizardsReborn.SALT_LANTERN_BLOCK_ENTITY.get(), pos, state);
     }
 
     @Override
@@ -61,56 +67,71 @@ public class SaltLanternBlockEntity extends SaltTorchBlockEntity {
             }
 
             if (random.nextFloat() < 0.5) {
-                Particles.create(WizardsReborn.SPARKLE_PARTICLE)
-                        .setAlpha(0.25f, 0).setScale(0.45f, 0)
-                        .setColor(colorF.getRed() / 255f, colorF.getGreen()/ 255f, colorF.getBlue() / 255f, color.getRed() / 255f, color.getGreen()/ 255f, color.getBlue() / 255f)
+                ParticleBuilder.create(FluffyFur.SPARKLE_PARTICLE)
+                        .setColorData(ColorParticleData.create(colorF, color).build())
+                        .setTransparencyData(GenericParticleData.create(0.25f, 0).build())
+                        .setScaleData(GenericParticleData.create(0.45f, 0).setEasing(Easing.CUBIC_IN_OUT).build())
+                        .randomSpin(0.005f)
                         .setLifetime(30)
                         .spawn(level, worldPosition.getX() + pos.x(), worldPosition.getY() + pos.y(), worldPosition.getZ() + pos.z());
             }
             if (random.nextFloat() < 0.45) {
-                Particles.create(WizardsReborn.SPARKLE_PARTICLE)
-                        .addVelocity(((random.nextDouble() - 0.5D) / 80), ((random.nextDouble() - 0.5D) / 80), ((random.nextDouble() - 0.5D) / 80))
-                        .setAlpha(0.35f, 0).setScale(0f, 0.35f)
-                        .setColor(colorF.getRed() / 255f, colorF.getGreen()/ 255f, colorF.getBlue() / 255f, color.getRed() / 255f, color.getGreen()/ 255f, color.getBlue() / 255f)
+                ParticleBuilder.create(random.nextFloat() < 0.3 ? FluffyFur.TINY_STAR_PARTICLE : FluffyFur.SPARKLE_PARTICLE)
+                        .setColorData(ColorParticleData.create(colorF, color).build())
+                        .setTransparencyData(GenericParticleData.create(0.35f, 0).build())
+                        .setScaleData(GenericParticleData.create(0f, 0.35f).setEasing(Easing.SINE_IN_OUT).build())
+                        .randomSpin(0.01f)
                         .setLifetime(60)
-                        .setSpin((0.01f * (float) ((random.nextDouble() - 0.5D) * 2)))
+                        .randomVelocity(0.00625f)
                         .spawn(level, worldPosition.getX() + pos.x(), worldPosition.getY() + pos.y(), worldPosition.getZ() + pos.z());
             }
             if (random.nextFloat() < 0.45) {
-                Particles.create(WizardsReborn.WISP_PARTICLE)
-                        .addVelocity(((random.nextDouble() - 0.5D) / 150), ((random.nextDouble() - 0.5D) / 150), ((random.nextDouble() - 0.5D) / 150))
-                        .setAlpha(0.35f, 0).setScale(0.15f, 0)
-                        .setColor(colorF.getRed() / 255f, colorF.getGreen()/ 255f, colorF.getBlue() / 255f, color.getRed() / 255f, color.getGreen()/ 255f, color.getBlue() / 255f)
+                ParticleBuilder.create(FluffyFur.TINY_WISP_PARTICLE)
+                        .setColorData(ColorParticleData.create(colorF, color).build())
+                        .setTransparencyData(GenericParticleData.create(0.35f, 0).build())
+                        .setScaleData(GenericParticleData.create(0.15f, 0).setEasing(Easing.SINE_OUT).build())
                         .setLifetime(30)
+                        .randomVelocity(0.015f)
                         .spawn(level, worldPosition.getX() + pos.x(), worldPosition.getY() + pos.y(), worldPosition.getZ() + pos.z());
             }
             if (random.nextFloat() < 0.3) {
-                Particles.create(WizardsReborn.SMOKE_PARTICLE)
-                        .addVelocity(((random.nextDouble() - 0.5D) / 150), ((random.nextDouble() - 0.5D) / 150) + 0.02f, ((random.nextDouble() - 0.5D) / 150))
-                        .setAlpha(0.4f, 0).setScale(0.15f, 0.35f)
-                        .setColor(0, 0, 0)
-                        .setSpin((0.1f * (float) ((random.nextDouble() - 0.5D) * 2)))
+                ParticleBuilder.create(FluffyFur.SMOKE_PARTICLE)
+                        .setRenderType(RenderUtils.DELAYED_PARTICLE)
+                        .setColorData(ColorParticleData.create(Color.BLACK).build())
+                        .setTransparencyData(GenericParticleData.create(0.4f, 0).build())
+                        .setScaleData(GenericParticleData.create(0.15f, 0.35f).build())
+                        .setLightData(LightParticleData.DEFAULT)
+                        .randomSpin(0.1f)
                         .setLifetime(60)
+                        .randomVelocity(0.0035f)
+                        .addVelocity(0, 0.02f, 0)
                         .spawn(level, worldPosition.getX() + pos.x(), worldPosition.getY() + pos.y(), worldPosition.getZ() + pos.z());
             }
 
             if (isCosmic) {
                 if (random.nextFloat() < 0.1) {
-                    Particles.create(WizardsReborn.SPARKLE_PARTICLE)
-                            .addVelocity(((random.nextDouble() - 0.5D) / 150), ((random.nextDouble() - 0.5D) / 150) + 0.025f, ((random.nextDouble() - 0.5D) / 150))
-                            .setAlpha(0.75f, 0).setScale(0.1f, 0)
-                            .setColor((float) color.getRed() / 255, (float) color.getGreen()/ 255, (float) color.getBlue() / 255)
+                    ParticleBuilder.create(FluffyFur.STAR_PARTICLE)
+                            .setColorData(ColorParticleData.create(color).build())
+                            .setTransparencyData(GenericParticleData.create(0.75f, 0).build())
+                            .setScaleData(GenericParticleData.create(0, 0.1f, 0).setEasing(Easing.SINE_IN_OUT).build())
+                            .randomSpin(0.1f)
                             .setLifetime(10)
-                            .setSpin((0.1f * (float) ((random.nextDouble() - 0.5D) * 2)))
-                            .spawn(level, worldPosition.getX() + pos.x() + ((random.nextDouble() - 0.5D) / 3), worldPosition.getY() + pos.y() + ((random.nextDouble() - 0.5D) / 3), worldPosition.getZ() + pos.z() + ((random.nextDouble() - 0.5D) / 3));
+                            .randomVelocity(0.015f)
+                            .flatRandomOffset(0.2f, 0.2f, 0.2f)
+                            .addVelocity(0, 0.025f, 0)
+                            .spawn(level, worldPosition.getX() + pos.x(), worldPosition.getY() + pos.y() + 0.1f, worldPosition.getZ() + pos.z());
                 }
                 if (random.nextFloat() < 0.1) {
-                    Particles.create(WizardsReborn.SPARKLE_PARTICLE)
-                            .addVelocity(((random.nextDouble() - 0.5D) / 150), ((random.nextDouble() - 0.5D) / 150) + 0.025f, ((random.nextDouble() - 0.5D) / 150))
-                            .setAlpha(0.75f, 0).setScale(0.1f, 0)
-                            .setColor(1f, 1f, 1f)
+                    ParticleBuilder.create(FluffyFur.STAR_PARTICLE)
+                            .setColorData(ColorParticleData.create(Color.WHITE).build())
+                            .setTransparencyData(GenericParticleData.create(0.75f, 0).build())
+                            .setScaleData(GenericParticleData.create(0, 0.1f, 0).setEasing(Easing.SINE_IN_OUT).build())
+                            .randomSpin(0.1f)
                             .setLifetime(10)
-                            .spawn(level, worldPosition.getX() + pos.x() + ((random.nextDouble() - 0.5D) / 3), worldPosition.getY() + pos.y() + ((random.nextDouble() - 0.5D) / 3), worldPosition.getZ() + pos.z() + ((random.nextDouble() - 0.5D) / 3));
+                            .randomVelocity(0.015f)
+                            .flatRandomOffset(0.2f, 0.2f, 0.2f)
+                            .addVelocity(0, 0.025f, 0)
+                            .spawn(level, worldPosition.getX() + pos.x(), worldPosition.getY() + pos.y() + 0.1f, worldPosition.getZ() + pos.z());
                 }
             }
         }

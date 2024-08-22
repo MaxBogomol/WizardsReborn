@@ -1,14 +1,17 @@
 package mod.maxbogomol.wizards_reborn.common.block.steam_pipe;
 
+import mod.maxbogomol.fluffy_fur.FluffyFur;
+import mod.maxbogomol.fluffy_fur.client.particle.ParticleBuilder;
+import mod.maxbogomol.fluffy_fur.client.particle.data.ColorParticleData;
+import mod.maxbogomol.fluffy_fur.client.particle.data.GenericParticleData;
 import mod.maxbogomol.fluffy_fur.common.block.entity.TickableBlockEntity;
 import mod.maxbogomol.wizards_reborn.WizardsReborn;
 import mod.maxbogomol.wizards_reborn.api.alchemy.ISteamPipePriority;
-import mod.maxbogomol.wizards_reborn.api.alchemy.ISteamTileEntity;
+import mod.maxbogomol.wizards_reborn.api.alchemy.ISteamBlockEntity;
 import mod.maxbogomol.wizards_reborn.api.alchemy.PipePriorityMap;
 import mod.maxbogomol.wizards_reborn.api.alchemy.SteamUtils;
 import mod.maxbogomol.wizards_reborn.api.wissen.WissenUtils;
-import mod.maxbogomol.wizards_reborn.client.particle.Particles;
-import mod.maxbogomol.wizards_reborn.common.block.pipe.PipeBaseTileEntity;
+import mod.maxbogomol.wizards_reborn.common.block.pipe.PipeBaseBlockEntity;
 import mod.maxbogomol.wizards_reborn.common.item.equipment.WissenWandItem;
 import mod.maxbogomol.wizards_reborn.utils.PacketUtils;
 import net.minecraft.client.Minecraft;
@@ -30,7 +33,7 @@ import net.minecraftforge.api.distmarker.OnlyIn;
 import java.util.ArrayList;
 import java.util.Random;
 
-public abstract class SteamPipeBaseBlockEntity extends PipeBaseTileEntity implements ISteamPipePriority, TickableBlockEntity, ISteamTileEntity {
+public abstract class SteamPipeBaseBlockEntity extends PipeBaseBlockEntity implements ISteamPipePriority, TickableBlockEntity, ISteamBlockEntity {
 
     public static final int PRIORITY_BLOCK = 0;
     public static final int PRIORITY_PIPE = PRIORITY_BLOCK;
@@ -116,7 +119,7 @@ public abstract class SteamPipeBaseBlockEntity extends PipeBaseTileEntity implem
                         continue;
                     BlockEntity tile = level.getBlockEntity(getBlockPos().relative(facing));
                     if (tile != null) {
-                        if (tile instanceof ISteamTileEntity steamTileEntity) {
+                        if (tile instanceof ISteamBlockEntity steamTileEntity) {
                             if (steamTileEntity.canSteamTransfer(facing.getOpposite())) {
                                 int priority = PRIORITY_BLOCK;
                                 if (tile instanceof ISteamPipePriority)
@@ -202,21 +205,20 @@ public abstract class SteamPipeBaseBlockEntity extends PipeBaseTileEntity implem
             float r = clogged ? 255f : 16f;
             float g = clogged ? 16f : 255f;
             float b = 16f;
-            for(int i = 0; i < 2; i++) {
-                Particles.create(WizardsReborn.SPARKLE_PARTICLE)
-                        .addVelocity(vx / 10f, vy / 10f, vz / 10f)
-                        .setAlpha(0.3f, 0f).setScale(0.1f, 0f)
-                        .setColor(r / 255f, g / 255f, b / 255f)
-                        .setLifetime(10)
-                        .setSpin((0.1f * (float) ((random.nextDouble() - 0.5D) * 2)))
-                        .spawn(level,  x,  y, z);
-            }
+            ParticleBuilder.create(FluffyFur.SPARKLE_PARTICLE)
+                    .setColorData(ColorParticleData.create(r / 255f, g / 255f, b / 255f).build())
+                    .setTransparencyData(GenericParticleData.create(0.3f, 0f).build())
+                    .setScaleData(GenericParticleData.create(0.1f, 0f).build())
+                    .randomSpin(0.1f)
+                    .setLifetime(10)
+                    .addVelocity(vx / 10f, vy / 10f, vz / 10f)
+                    .repeat(level, x, y, z, 2);
         }
     }
 
     public boolean pushSteam(int amount, Direction facing) {
         BlockEntity tile = level.getBlockEntity(getBlockPos().relative(facing));
-        if (tile instanceof ISteamTileEntity steamTileEntity) {
+        if (tile instanceof ISteamBlockEntity steamTileEntity) {
             int steam_remain = WissenUtils.getRemoveWissenRemain(steam, amount);
             steam_remain = amount - steam_remain;
             int addRemain = SteamUtils.getAddSteamRemain(steamTileEntity.getSteam(), steam_remain, steamTileEntity.getMaxSteam());

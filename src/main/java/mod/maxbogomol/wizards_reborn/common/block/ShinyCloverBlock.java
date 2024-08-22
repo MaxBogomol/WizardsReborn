@@ -1,7 +1,9 @@
 package mod.maxbogomol.wizards_reborn.common.block;
 
-import mod.maxbogomol.wizards_reborn.WizardsReborn;
-import mod.maxbogomol.wizards_reborn.client.particle.Particles;
+import mod.maxbogomol.fluffy_fur.FluffyFur;
+import mod.maxbogomol.fluffy_fur.client.particle.ParticleBuilder;
+import mod.maxbogomol.fluffy_fur.client.particle.data.ColorParticleData;
+import mod.maxbogomol.fluffy_fur.client.particle.data.GenericParticleData;
 import net.minecraft.core.BlockPos;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.level.BlockGetter;
@@ -34,12 +36,13 @@ public class ShinyCloverBlock extends BushBlock {
         if (random.nextFloat() < 0.1f) {
             double X = (random.nextDouble() - 0.5D) * 0.75f;
             double Z = (random.nextDouble() - 0.5D) * 0.75f;
-            Particles.create(WizardsReborn.SPARKLE_PARTICLE)
-                    .addVelocity(-(X / 100), (random.nextDouble() / 20), -(Z / 100))
-                    .setAlpha(0.5f, 0).setScale(0.1f, 0)
-                    .setColor(0.427f, 0.612f, 0.423f, 0.968f, 0.941f, 0.549f)
+            ParticleBuilder.create(FluffyFur.SPARKLE_PARTICLE)
+                    .setColorData(ColorParticleData.create(0.427f, 0.612f, 0.423f, 0.968f, 0.941f, 0.549f).build())
+                    .setTransparencyData(GenericParticleData.create(0.5f, 0).build())
+                    .setScaleData(GenericParticleData.create(0.1f, 0).build())
                     .setLifetime(10)
-                    .spawn(world, pos.getX() + 0.5F + X, pos.getY() + 0.05F, pos.getZ() + 0.5F + Z);
+                    .addVelocity(-(X / 100), (random.nextDouble() / 20), -(Z / 100))
+                    .spawn(world, pos.getX() + 0.5F, pos.getY() + 0.5F, pos.getZ() + 0.5F);
         }
     }
 }

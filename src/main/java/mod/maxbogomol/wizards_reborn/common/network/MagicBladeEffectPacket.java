@@ -1,7 +1,10 @@
 package mod.maxbogomol.wizards_reborn.common.network;
 
+import mod.maxbogomol.fluffy_fur.FluffyFur;
+import mod.maxbogomol.fluffy_fur.client.particle.ParticleBuilder;
+import mod.maxbogomol.fluffy_fur.client.particle.data.ColorParticleData;
+import mod.maxbogomol.fluffy_fur.client.particle.data.GenericParticleData;
 import mod.maxbogomol.wizards_reborn.WizardsReborn;
-import mod.maxbogomol.wizards_reborn.client.particle.Particles;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.world.level.Level;
 import net.minecraftforge.network.NetworkEvent;
@@ -38,16 +41,15 @@ public class MagicBladeEffectPacket {
                 @Override
                 public void run() {
                     Level world = WizardsReborn.proxy.getWorld();
-
-                    for (int i = 0; i < 15; i++) {
-                        Particles.create(WizardsReborn.SPARKLE_PARTICLE)
-                                .addVelocity(((random.nextDouble() - 0.5D) / 10), ((random.nextDouble() - 0.5D) / 10), ((random.nextDouble() - 0.5D) / 10))
-                                .setAlpha(0.4f, 0).setScale(0.1f, 0.5f)
-                                .setColor(0.431F, 0.305F, 0.662F)
-                                .setLifetime(30)
-                                .setSpin((0.1f * (float) ((random.nextDouble() - 0.5D) * 2)))
-                                .spawn(world, msg.posX + ((random.nextDouble() - 0.5D) / 10), msg.posY + ((random.nextDouble() - 0.5D) / 10), msg.posZ + ((random.nextDouble() - 0.5D) / 10));
-                    }
+                    ParticleBuilder.create(FluffyFur.SPARKLE_PARTICLE)
+                            .setColorData(ColorParticleData.create(0.431F, 0.305F, 0.662F).build())
+                            .setTransparencyData(GenericParticleData.create(0.4f, 0).build())
+                            .setScaleData(GenericParticleData.create(0.1f, 0.5f).build())
+                            .randomSpin(0.0f)
+                            .setLifetime(30)
+                            .randomVelocity(0.05f)
+                            .randomOffset(0.05f)
+                            .repeat(world, msg.posX, msg.posY, msg.posZ, 15);
                     ctx.get().setPacketHandled(true);
                 }
             });

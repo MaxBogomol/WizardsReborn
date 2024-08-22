@@ -1,13 +1,18 @@
 package mod.maxbogomol.wizards_reborn;
 
 import com.google.common.collect.ImmutableMap;
+import mod.maxbogomol.fluffy_fur.client.particle.GenericParticleType;
 import mod.maxbogomol.fluffy_fur.common.block.WaterloggableLeverBlock;
 import mod.maxbogomol.fluffy_fur.common.block.sign.CustomCeilingHangingSignBlock;
 import mod.maxbogomol.fluffy_fur.common.block.sign.CustomStandingSignBlock;
 import mod.maxbogomol.fluffy_fur.common.block.sign.CustomWallHangingSignBlock;
 import mod.maxbogomol.fluffy_fur.common.block.sign.CustomWallSignBlock;
+import mod.maxbogomol.fluffy_fur.common.fluid.CustomFluidType;
 import mod.maxbogomol.fluffy_fur.common.item.FuelBlockItem;
 import mod.maxbogomol.fluffy_fur.common.item.FuelItem;
+import mod.maxbogomol.fluffy_fur.common.proxy.ClientProxy;
+import mod.maxbogomol.fluffy_fur.common.proxy.ISidedProxy;
+import mod.maxbogomol.fluffy_fur.common.proxy.ServerProxy;
 import mod.maxbogomol.fluffy_fur.utils.ColorUtils;
 import mod.maxbogomol.wizards_reborn.api.arcaneenchantment.ArcaneEnchantment;
 import mod.maxbogomol.wizards_reborn.api.arcaneenchantment.ArcaneEnchantmentType;
@@ -35,7 +40,7 @@ import mod.maxbogomol.wizards_reborn.client.gui.HUDEventHandler;
 import mod.maxbogomol.wizards_reborn.client.gui.TooltipEventHandler;
 import mod.maxbogomol.wizards_reborn.client.gui.container.*;
 import mod.maxbogomol.wizards_reborn.client.gui.screen.*;
-import mod.maxbogomol.wizards_reborn.client.particle.*;
+import mod.maxbogomol.wizards_reborn.client.particle.LeavesParticleType;
 import mod.maxbogomol.wizards_reborn.client.render.WorldRenderHandler;
 import mod.maxbogomol.wizards_reborn.client.render.curio.*;
 import mod.maxbogomol.wizards_reborn.client.render.item.WandCrystalsModels;
@@ -71,7 +76,7 @@ import mod.maxbogomol.wizards_reborn.common.block.casing.GlassFrameBlock;
 import mod.maxbogomol.wizards_reborn.common.block.casing.fluid.FluidCasingBlock;
 import mod.maxbogomol.wizards_reborn.common.block.casing.fluid.FluidCasingBlockEntity;
 import mod.maxbogomol.wizards_reborn.common.block.casing.light.LightCasingBlock;
-import mod.maxbogomol.wizards_reborn.common.block.casing.light.LightCasingTileEntity;
+import mod.maxbogomol.wizards_reborn.common.block.casing.light.LightCasingBlockEntity;
 import mod.maxbogomol.wizards_reborn.common.block.casing.steam.SteamCasingBlock;
 import mod.maxbogomol.wizards_reborn.common.block.casing.steam.SteamCasingBlockEntity;
 import mod.maxbogomol.wizards_reborn.common.block.casing.wissen.WissenCasingBlock;
@@ -105,7 +110,7 @@ import mod.maxbogomol.wizards_reborn.common.block.light_emitter.LightEmitterBloc
 import mod.maxbogomol.wizards_reborn.common.block.light_transfer_lens.LightTransferLensBlock;
 import mod.maxbogomol.wizards_reborn.common.block.light_transfer_lens.LightTransferLensBlockEntity;
 import mod.maxbogomol.wizards_reborn.common.block.orbital_fluid_retainer.OrbitalFluidRetainerBlock;
-import mod.maxbogomol.wizards_reborn.common.block.orbital_fluid_retainer.OrbitalFluidRetainerTileEntity;
+import mod.maxbogomol.wizards_reborn.common.block.orbital_fluid_retainer.OrbitalFluidRetainerBlockEntity;
 import mod.maxbogomol.wizards_reborn.common.block.placed_items.PlacedItemsBlock;
 import mod.maxbogomol.wizards_reborn.common.block.placed_items.PlacedItemsBlockEntity;
 import mod.maxbogomol.wizards_reborn.common.block.runic_pedestal.RunicPedestalBlock;
@@ -167,7 +172,6 @@ import mod.maxbogomol.wizards_reborn.common.effect.TipsyEffect;
 import mod.maxbogomol.wizards_reborn.common.effect.WissenAuraEffect;
 import mod.maxbogomol.wizards_reborn.common.entity.*;
 import mod.maxbogomol.wizards_reborn.common.event.Events;
-import mod.maxbogomol.wizards_reborn.common.fluid.CustomFluidType;
 import mod.maxbogomol.wizards_reborn.common.integration.create.CreateIntegration;
 import mod.maxbogomol.wizards_reborn.common.integration.farmersdelight.FarmersDelightIntegration;
 import mod.maxbogomol.wizards_reborn.common.item.*;
@@ -180,9 +184,6 @@ import mod.maxbogomol.wizards_reborn.common.itemgroup.WizardsRebornItemGroup;
 import mod.maxbogomol.wizards_reborn.common.knowledge.RegisterKnowledges;
 import mod.maxbogomol.wizards_reborn.common.knowledge.Researches;
 import mod.maxbogomol.wizards_reborn.common.network.PacketHandler;
-import mod.maxbogomol.wizards_reborn.common.proxy.ClientProxy;
-import mod.maxbogomol.wizards_reborn.common.proxy.ISidedProxy;
-import mod.maxbogomol.wizards_reborn.common.proxy.ServerProxy;
 import mod.maxbogomol.wizards_reborn.common.recipe.*;
 import mod.maxbogomol.wizards_reborn.common.skin.*;
 import mod.maxbogomol.wizards_reborn.common.spell.aura.*;
@@ -286,13 +287,14 @@ import java.awt.*;
 @Mod("wizards_reborn")
 public class WizardsReborn {
     public static final String MOD_ID = "wizards_reborn";
+    public static final String VERSION = "0.2";
     public static final int VERSION_NUMBER = 20;
 
     public static final ISidedProxy proxy = DistExecutor.unsafeRunForDist(() -> ClientProxy::new, () -> ServerProxy::new);
 
     public static final DeferredRegister<Item> ITEMS = DeferredRegister.create(ForgeRegistries.ITEMS, MOD_ID);
     public static final DeferredRegister<Block> BLOCKS = DeferredRegister.create(ForgeRegistries.BLOCKS, MOD_ID);
-    public static final DeferredRegister<BlockEntityType<?>> TILE_ENTITIES = DeferredRegister.create(ForgeRegistries.BLOCK_ENTITY_TYPES, MOD_ID);
+    public static final DeferredRegister<BlockEntityType<?>> BLOCK_ENTITIES = DeferredRegister.create(ForgeRegistries.BLOCK_ENTITY_TYPES, MOD_ID);
     public static final DeferredRegister<EntityType<?>> ENTITIES = DeferredRegister.create(ForgeRegistries.ENTITY_TYPES, MOD_ID);
     public static final DeferredRegister<ParticleType<?>> PARTICLES = DeferredRegister.create(ForgeRegistries.PARTICLE_TYPES, MOD_ID);
     public static final DeferredRegister<RecipeSerializer<?>> RECIPE_SERIALIZERS = DeferredRegister.create(ForgeRegistries.RECIPE_SERIALIZERS, MOD_ID);
@@ -1737,77 +1739,77 @@ public class WizardsReborn {
     public static final RegistryObject<Item> SHRIMP = ITEMS.register("shrimp", () -> new ShrimpItem(new Item.Properties().food(SHRIMP_FOOD), false));
     public static final RegistryObject<Item> FRIED_SHRIMP = ITEMS.register("fried_shrimp", () -> new ShrimpItem(new Item.Properties().food(FRIED_SHRIMP_FOOD), true));
 
-    //TILE_ENTITIES
-    public static RegistryObject<BlockEntityType<ArcanumGrowthBlockEntity>> ARCANUM_GROWTH_TILE_ENTITY = TILE_ENTITIES.register("arcanum_growth", () -> BlockEntityType.Builder.of(ArcanumGrowthBlockEntity::new, ARCANUM_GROWTH.get()).build(null));
-    public static RegistryObject<BlockEntityType<CrystalBlockEntity>> CRYSTAL_TILE_ENTITY = TILE_ENTITIES.register("crystal", () -> BlockEntityType.Builder.of(CrystalBlockEntity::new,
+    //BLOCK_ENTITIES
+    public static RegistryObject<BlockEntityType<ArcanumGrowthBlockEntity>> ARCANUM_GROWTH_BLOCK_ENTITY = BLOCK_ENTITIES.register("arcanum_growth", () -> BlockEntityType.Builder.of(ArcanumGrowthBlockEntity::new, ARCANUM_GROWTH.get()).build(null));
+    public static RegistryObject<BlockEntityType<CrystalBlockEntity>> CRYSTAL_BLOCK_ENTITY = BLOCK_ENTITIES.register("crystal", () -> BlockEntityType.Builder.of(CrystalBlockEntity::new,
             EARTH_CRYSTAL_BLOCK.get(), WATER_CRYSTAL_BLOCK.get(), AIR_CRYSTAL_BLOCK.get(), FIRE_CRYSTAL_BLOCK.get(), VOID_CRYSTAL_BLOCK.get(),
             FACETED_EARTH_CRYSTAL_BLOCK.get(), FACETED_WATER_CRYSTAL_BLOCK.get(), FACETED_AIR_CRYSTAL_BLOCK.get(), FACETED_FIRE_CRYSTAL_BLOCK.get(), FACETED_VOID_CRYSTAL_BLOCK.get(),
             ADVANCED_EARTH_CRYSTAL_BLOCK.get(), ADVANCED_WATER_CRYSTAL_BLOCK.get(), ADVANCED_AIR_CRYSTAL_BLOCK.get(), ADVANCED_FIRE_CRYSTAL_BLOCK.get(), ADVANCED_VOID_CRYSTAL_BLOCK.get(),
             MASTERFUL_EARTH_CRYSTAL_BLOCK.get(), MASTERFUL_WATER_CRYSTAL_BLOCK.get(), MASTERFUL_AIR_CRYSTAL_BLOCK.get(), MASTERFUL_FIRE_CRYSTAL_BLOCK.get(), MASTERFUL_VOID_CRYSTAL_BLOCK.get(),
             PURE_EARTH_CRYSTAL_BLOCK.get(), PURE_WATER_CRYSTAL_BLOCK.get(), PURE_AIR_CRYSTAL_BLOCK.get(), PURE_FIRE_CRYSTAL_BLOCK.get(), PURE_VOID_CRYSTAL_BLOCK.get())
             .build(null));
-    public static RegistryObject<BlockEntityType<CrystalGrowthBlockEntity>> CRYSTAL_GROWTH_TILE_ENTITY = TILE_ENTITIES.register("crystal_growth", () -> BlockEntityType.Builder.of(CrystalGrowthBlockEntity::new,
+    public static RegistryObject<BlockEntityType<CrystalGrowthBlockEntity>> CRYSTAL_GROWTH_BLOCK_ENTITY = BLOCK_ENTITIES.register("crystal_growth", () -> BlockEntityType.Builder.of(CrystalGrowthBlockEntity::new,
             EARTH_CRYSTAL_GROWTH.get(), WATER_CRYSTAL_GROWTH.get(), AIR_CRYSTAL_GROWTH.get(), FIRE_CRYSTAL_GROWTH.get(), VOID_CRYSTAL_GROWTH.get())
             .build(null));
 
-    public static RegistryObject<BlockEntityType<ArcanePedestalBlockEntity>> ARCANE_PEDESTAL_TILE_ENTITY = TILE_ENTITIES.register("arcane_pedestal", () -> BlockEntityType.Builder.of(ArcanePedestalBlockEntity::new, ARCANE_PEDESTAL.get(), INNOCENT_PEDESTAL.get(), CORK_BAMBOO_PEDESTAL.get(), WISESTONE_PEDESTAL.get()).build(null));
-    public static RegistryObject<BlockEntityType<HoveringTomeStandBlockEntity>> HOVERING_TOME_STAND_TILE_ENTITY = TILE_ENTITIES.register("hovering_tome_stand", () -> BlockEntityType.Builder.of(HoveringTomeStandBlockEntity::new, HOVERING_TOME_STAND.get(), INNOCENT_HOVERING_TOME_STAND.get(), CORK_BAMBOO_HOVERING_TOME_STAND.get(), WISESTONE_HOVERING_TOME_STAND.get()).build(null));
-    public static RegistryObject<BlockEntityType<WissenAltarBlockEntity>> WISSEN_ALTAR_TILE_ENTITY = TILE_ENTITIES.register("wissen_altar", () -> BlockEntityType.Builder.of(WissenAltarBlockEntity::new, WISSEN_ALTAR.get()).build(null));
-    public static RegistryObject<BlockEntityType<WissenTranslatorBlockEntity>> WISSEN_TRANSLATOR_TILE_ENTITY = TILE_ENTITIES.register("wissen_translator", () -> BlockEntityType.Builder.of(WissenTranslatorBlockEntity::new, WISSEN_TRANSLATOR.get()).build(null));
-    public static RegistryObject<BlockEntityType<WissenCrystallizerBlockEntity>> WISSEN_CRYSTALLIZER_TILE_ENTITY = TILE_ENTITIES.register("wissen_crystallizer", () -> BlockEntityType.Builder.of(WissenCrystallizerBlockEntity::new, WISSEN_CRYSTALLIZER.get()).build(null));
-    public static RegistryObject<BlockEntityType<ArcaneWorkbenchBlockEntity>> ARCANE_WORKBENCH_TILE_ENTITY = TILE_ENTITIES.register("arcane_workbench", () -> BlockEntityType.Builder.of(ArcaneWorkbenchBlockEntity::new, ARCANE_WORKBENCH.get()).build(null));
-    public static RegistryObject<BlockEntityType<WissenCellBlockEntity>> WISSEN_CELL_TILE_ENTITY = TILE_ENTITIES.register("wissen_cell", () -> BlockEntityType.Builder.of(WissenCellBlockEntity::new, WISSEN_CELL.get()).build(null));
-    public static RegistryObject<BlockEntityType<JewelerTableBlockEntity>> JEWELER_TABLE_TILE_ENTITY = TILE_ENTITIES.register("jeweler_table", () -> BlockEntityType.Builder.of(JewelerTableBlockEntity::new, JEWELER_TABLE.get()).build(null));
-    public static RegistryObject<BlockEntityType<AltarOfDroughtBlockEntity>> ALTAR_OF_DROUGHT_TILE_ENTITY = TILE_ENTITIES.register("altar_of_drought", () -> BlockEntityType.Builder.of(AltarOfDroughtBlockEntity::new, ALTAR_OF_DROUGHT.get()).build(null));
-    public static RegistryObject<BlockEntityType<TotemOfFlamesBlockEntity>> TOTEM_OF_FLAMES_TILE_ENTITY = TILE_ENTITIES.register("totem_of_flames", () -> BlockEntityType.Builder.of(TotemOfFlamesBlockEntity::new, TOTEM_OF_FLAMES.get()).build(null));
-    public static RegistryObject<BlockEntityType<ExperienceTotemBlockEntity>> EXPERIENCE_TOTEM_TILE_ENTITY = TILE_ENTITIES.register("experience_totem", () -> BlockEntityType.Builder.of(ExperienceTotemBlockEntity::new, EXPERIENCE_TOTEM.get()).build(null));
-    public static RegistryObject<BlockEntityType<TotemOfExperienceAbsorptionBlockEntity>> TOTEM_OF_EXPERIENCE_ABSORPTION_TILE_ENTITY = TILE_ENTITIES.register("totem_of_experience_absorption", () -> BlockEntityType.Builder.of(TotemOfExperienceAbsorptionBlockEntity::new, TOTEM_OF_EXPERIENCE_ABSORPTION.get()).build(null));
-    public static RegistryObject<BlockEntityType<TotemOfDisenchantBlockEntity>> TOTEM_OF_DISENCHANT_TILE_ENTITY = TILE_ENTITIES.register("totem_of_disenchant", () -> BlockEntityType.Builder.of(TotemOfDisenchantBlockEntity::new, TOTEM_OF_DISENCHANT.get()).build(null));
-    public static RegistryObject<BlockEntityType<ArcaneIteratorBlockEntity>> ARCANE_ITERATOR_TILE_ENTITY = TILE_ENTITIES.register("arcane_iterator", () -> BlockEntityType.Builder.of(ArcaneIteratorBlockEntity::new, ARCANE_ITERATOR.get()).build(null));
+    public static RegistryObject<BlockEntityType<ArcanePedestalBlockEntity>> ARCANE_PEDESTAL_BLOCK_ENTITY = BLOCK_ENTITIES.register("arcane_pedestal", () -> BlockEntityType.Builder.of(ArcanePedestalBlockEntity::new, ARCANE_PEDESTAL.get(), INNOCENT_PEDESTAL.get(), CORK_BAMBOO_PEDESTAL.get(), WISESTONE_PEDESTAL.get()).build(null));
+    public static RegistryObject<BlockEntityType<HoveringTomeStandBlockEntity>> HOVERING_TOME_STAND_BLOCK_ENTITY = BLOCK_ENTITIES.register("hovering_tome_stand", () -> BlockEntityType.Builder.of(HoveringTomeStandBlockEntity::new, HOVERING_TOME_STAND.get(), INNOCENT_HOVERING_TOME_STAND.get(), CORK_BAMBOO_HOVERING_TOME_STAND.get(), WISESTONE_HOVERING_TOME_STAND.get()).build(null));
+    public static RegistryObject<BlockEntityType<WissenAltarBlockEntity>> WISSEN_ALTAR_BLOCK_ENTITY = BLOCK_ENTITIES.register("wissen_altar", () -> BlockEntityType.Builder.of(WissenAltarBlockEntity::new, WISSEN_ALTAR.get()).build(null));
+    public static RegistryObject<BlockEntityType<WissenTranslatorBlockEntity>> WISSEN_TRANSLATOR_BLOCK_ENTITY = BLOCK_ENTITIES.register("wissen_translator", () -> BlockEntityType.Builder.of(WissenTranslatorBlockEntity::new, WISSEN_TRANSLATOR.get()).build(null));
+    public static RegistryObject<BlockEntityType<WissenCrystallizerBlockEntity>> WISSEN_CRYSTALLIZER_BLOCK_ENTITY = BLOCK_ENTITIES.register("wissen_crystallizer", () -> BlockEntityType.Builder.of(WissenCrystallizerBlockEntity::new, WISSEN_CRYSTALLIZER.get()).build(null));
+    public static RegistryObject<BlockEntityType<ArcaneWorkbenchBlockEntity>> ARCANE_WORKBENCH_BLOCK_ENTITY = BLOCK_ENTITIES.register("arcane_workbench", () -> BlockEntityType.Builder.of(ArcaneWorkbenchBlockEntity::new, ARCANE_WORKBENCH.get()).build(null));
+    public static RegistryObject<BlockEntityType<WissenCellBlockEntity>> WISSEN_CELL_BLOCK_ENTITY = BLOCK_ENTITIES.register("wissen_cell", () -> BlockEntityType.Builder.of(WissenCellBlockEntity::new, WISSEN_CELL.get()).build(null));
+    public static RegistryObject<BlockEntityType<JewelerTableBlockEntity>> JEWELER_TABLE_BLOCK_ENTITY = BLOCK_ENTITIES.register("jeweler_table", () -> BlockEntityType.Builder.of(JewelerTableBlockEntity::new, JEWELER_TABLE.get()).build(null));
+    public static RegistryObject<BlockEntityType<AltarOfDroughtBlockEntity>> ALTAR_OF_DROUGHT_BLOCK_ENTITY = BLOCK_ENTITIES.register("altar_of_drought", () -> BlockEntityType.Builder.of(AltarOfDroughtBlockEntity::new, ALTAR_OF_DROUGHT.get()).build(null));
+    public static RegistryObject<BlockEntityType<TotemOfFlamesBlockEntity>> TOTEM_OF_FLAMES_BLOCK_ENTITY = BLOCK_ENTITIES.register("totem_of_flames", () -> BlockEntityType.Builder.of(TotemOfFlamesBlockEntity::new, TOTEM_OF_FLAMES.get()).build(null));
+    public static RegistryObject<BlockEntityType<ExperienceTotemBlockEntity>> EXPERIENCE_TOTEM_BLOCK_ENTITY = BLOCK_ENTITIES.register("experience_totem", () -> BlockEntityType.Builder.of(ExperienceTotemBlockEntity::new, EXPERIENCE_TOTEM.get()).build(null));
+    public static RegistryObject<BlockEntityType<TotemOfExperienceAbsorptionBlockEntity>> TOTEM_OF_EXPERIENCE_ABSORPTION_BLOCK_ENTITY = BLOCK_ENTITIES.register("totem_of_experience_absorption", () -> BlockEntityType.Builder.of(TotemOfExperienceAbsorptionBlockEntity::new, TOTEM_OF_EXPERIENCE_ABSORPTION.get()).build(null));
+    public static RegistryObject<BlockEntityType<TotemOfDisenchantBlockEntity>> TOTEM_OF_DISENCHANT_BLOCK_ENTITY = BLOCK_ENTITIES.register("totem_of_disenchant", () -> BlockEntityType.Builder.of(TotemOfDisenchantBlockEntity::new, TOTEM_OF_DISENCHANT.get()).build(null));
+    public static RegistryObject<BlockEntityType<ArcaneIteratorBlockEntity>> ARCANE_ITERATOR_BLOCK_ENTITY = BLOCK_ENTITIES.register("arcane_iterator", () -> BlockEntityType.Builder.of(ArcaneIteratorBlockEntity::new, ARCANE_ITERATOR.get()).build(null));
 
-    public static RegistryObject<BlockEntityType<FluidPipeBlockEntity>> FLUID_PIPE_TILE_ENTITY = TILE_ENTITIES.register("fluid_pipe", () -> BlockEntityType.Builder.of(FluidPipeBlockEntity::new, FLUID_PIPE.get()).build(null));
-    public static RegistryObject<BlockEntityType<FluidExtractorBlockEntity>> FLUID_EXTRACTOR_TILE_ENTITY = TILE_ENTITIES.register("fluid_extractor", () -> BlockEntityType.Builder.of(FluidExtractorBlockEntity::new, FLUID_EXTRACTOR.get()).build(null));
-    public static RegistryObject<BlockEntityType<SteamPipeBlockEntity>> STEAM_PIPE_TILE_ENTITY = TILE_ENTITIES.register("steam_pipe", () -> BlockEntityType.Builder.of(SteamPipeBlockEntity::new, STEAM_PIPE.get()).build(null));
-    public static RegistryObject<BlockEntityType<SteamExtractorBlockEntity>> STEAM_EXTRACTOR_TILE_ENTITY = TILE_ENTITIES.register("steam_extractor", () -> BlockEntityType.Builder.of(SteamExtractorBlockEntity::new, STEAM_EXTRACTOR.get()).build(null));
-    public static RegistryObject<BlockEntityType<AlchemyFurnaceBlockEntity>> ALCHEMY_FURNACE_TILE_ENTITY = TILE_ENTITIES.register("alchemy_furnace", () -> BlockEntityType.Builder.of(AlchemyFurnaceBlockEntity::new, ALCHEMY_FURNACE.get()).build(null));
-    public static RegistryObject<BlockEntityType<OrbitalFluidRetainerTileEntity>> ORBITAL_FLUID_RETAINER_TILE_ENTITY = TILE_ENTITIES.register("orbital_fluid_retainer", () -> BlockEntityType.Builder.of(OrbitalFluidRetainerTileEntity::new, ORBITAL_FLUID_RETAINER.get()).build(null));
-    public static RegistryObject<BlockEntityType<SteamThermalStorageBlockEntity>> STEAM_THERMAL_STORAGE_TILE_ENTITY = TILE_ENTITIES.register("steam_thermal_storage", () -> BlockEntityType.Builder.of(SteamThermalStorageBlockEntity::new, STEAM_THERMAL_STORAGE.get()).build(null));
-    public static RegistryObject<BlockEntityType<AlchemyMachineBlockEntity>> ALCHEMY_MACHINE_TILE_ENTITY = TILE_ENTITIES.register("alchemy_machine", () -> BlockEntityType.Builder.of(AlchemyMachineBlockEntity::new, ALCHEMY_MACHINE.get()).build(null));
-    public static RegistryObject<BlockEntityType<AlchemyBoilerBlockEntity>> ALCHEMY_BOILER_TILE_ENTITY = TILE_ENTITIES.register("alchemy_boiler", () -> BlockEntityType.Builder.of(AlchemyBoilerBlockEntity::new, ALCHEMY_BOILER.get()).build(null));
-    public static RegistryObject<BlockEntityType<ArcaneCenserBlockEntity>> ARCANE_CENSER_TILE_ENTITY = TILE_ENTITIES.register("arcane_censer", () -> BlockEntityType.Builder.of(ArcaneCenserBlockEntity::new, ARCANE_CENSER.get()).build(null));
+    public static RegistryObject<BlockEntityType<FluidPipeBlockEntity>> FLUID_PIPE_BLOCK_ENTITY = BLOCK_ENTITIES.register("fluid_pipe", () -> BlockEntityType.Builder.of(FluidPipeBlockEntity::new, FLUID_PIPE.get()).build(null));
+    public static RegistryObject<BlockEntityType<FluidExtractorBlockEntity>> FLUID_EXTRACTOR_BLOCK_ENTITY = BLOCK_ENTITIES.register("fluid_extractor", () -> BlockEntityType.Builder.of(FluidExtractorBlockEntity::new, FLUID_EXTRACTOR.get()).build(null));
+    public static RegistryObject<BlockEntityType<SteamPipeBlockEntity>> STEAM_PIPE_BLOCK_ENTITY = BLOCK_ENTITIES.register("steam_pipe", () -> BlockEntityType.Builder.of(SteamPipeBlockEntity::new, STEAM_PIPE.get()).build(null));
+    public static RegistryObject<BlockEntityType<SteamExtractorBlockEntity>> STEAM_EXTRACTOR_BLOCK_ENTITY = BLOCK_ENTITIES.register("steam_extractor", () -> BlockEntityType.Builder.of(SteamExtractorBlockEntity::new, STEAM_EXTRACTOR.get()).build(null));
+    public static RegistryObject<BlockEntityType<AlchemyFurnaceBlockEntity>> ALCHEMY_FURNACE_BLOCK_ENTITY = BLOCK_ENTITIES.register("alchemy_furnace", () -> BlockEntityType.Builder.of(AlchemyFurnaceBlockEntity::new, ALCHEMY_FURNACE.get()).build(null));
+    public static RegistryObject<BlockEntityType<OrbitalFluidRetainerBlockEntity>> ORBITAL_FLUID_RETAINER_BLOCK_ENTITY = BLOCK_ENTITIES.register("orbital_fluid_retainer", () -> BlockEntityType.Builder.of(OrbitalFluidRetainerBlockEntity::new, ORBITAL_FLUID_RETAINER.get()).build(null));
+    public static RegistryObject<BlockEntityType<SteamThermalStorageBlockEntity>> STEAM_THERMAL_STORAGE_BLOCK_ENTITY = BLOCK_ENTITIES.register("steam_thermal_storage", () -> BlockEntityType.Builder.of(SteamThermalStorageBlockEntity::new, STEAM_THERMAL_STORAGE.get()).build(null));
+    public static RegistryObject<BlockEntityType<AlchemyMachineBlockEntity>> ALCHEMY_MACHINE_BLOCK_ENTITY = BLOCK_ENTITIES.register("alchemy_machine", () -> BlockEntityType.Builder.of(AlchemyMachineBlockEntity::new, ALCHEMY_MACHINE.get()).build(null));
+    public static RegistryObject<BlockEntityType<AlchemyBoilerBlockEntity>> ALCHEMY_BOILER_BLOCK_ENTITY = BLOCK_ENTITIES.register("alchemy_boiler", () -> BlockEntityType.Builder.of(AlchemyBoilerBlockEntity::new, ALCHEMY_BOILER.get()).build(null));
+    public static RegistryObject<BlockEntityType<ArcaneCenserBlockEntity>> ARCANE_CENSER_BLOCK_ENTITY = BLOCK_ENTITIES.register("arcane_censer", () -> BlockEntityType.Builder.of(ArcaneCenserBlockEntity::new, ARCANE_CENSER.get()).build(null));
 
-    public static RegistryObject<BlockEntityType<LightEmitterBlockEntity>> LIGHT_EMITTER_TILE_ENTITY = TILE_ENTITIES.register("light_emitter", () -> BlockEntityType.Builder.of(LightEmitterBlockEntity::new, LIGHT_EMITTER.get()).build(null));
-    public static RegistryObject<BlockEntityType<LightTransferLensBlockEntity>> LIGHT_TRANSFER_LENS_TILE_ENTITY = TILE_ENTITIES.register("light_transfer_lens", () -> BlockEntityType.Builder.of(LightTransferLensBlockEntity::new, LIGHT_TRANSFER_LENS.get()).build(null));
-    public static RegistryObject<BlockEntityType<RunicPedestalBlockEntity>> RUNIC_PEDESTAL_TILE_ENTITY = TILE_ENTITIES.register("runic_pedestal", () -> BlockEntityType.Builder.of(RunicPedestalBlockEntity::new, RUNIC_PEDESTAL.get()).build(null));
-    public static RegistryObject<BlockEntityType<EngravedWisestoneBlockEntity>> ENGRAVED_WISESTONE_TILE_ENTITY = TILE_ENTITIES.register("engraved_wisestone", () -> BlockEntityType.Builder.of(EngravedWisestoneBlockEntity::new, ENGRAVED_WISESTONE.get(),
+    public static RegistryObject<BlockEntityType<LightEmitterBlockEntity>> LIGHT_EMITTER_BLOCK_ENTITY = BLOCK_ENTITIES.register("light_emitter", () -> BlockEntityType.Builder.of(LightEmitterBlockEntity::new, LIGHT_EMITTER.get()).build(null));
+    public static RegistryObject<BlockEntityType<LightTransferLensBlockEntity>> LIGHT_TRANSFER_LENS_BLOCK_ENTITY = BLOCK_ENTITIES.register("light_transfer_lens", () -> BlockEntityType.Builder.of(LightTransferLensBlockEntity::new, LIGHT_TRANSFER_LENS.get()).build(null));
+    public static RegistryObject<BlockEntityType<RunicPedestalBlockEntity>> RUNIC_PEDESTAL_BLOCK_ENTITY = BLOCK_ENTITIES.register("runic_pedestal", () -> BlockEntityType.Builder.of(RunicPedestalBlockEntity::new, RUNIC_PEDESTAL.get()).build(null));
+    public static RegistryObject<BlockEntityType<EngravedWisestoneBlockEntity>> ENGRAVED_WISESTONE_BLOCK_ENTITY = BLOCK_ENTITIES.register("engraved_wisestone", () -> BlockEntityType.Builder.of(EngravedWisestoneBlockEntity::new, ENGRAVED_WISESTONE.get(),
                     ENGRAVED_WISESTONE_LUNAM.get(), ENGRAVED_WISESTONE_VITA.get(), ENGRAVED_WISESTONE_SOLEM.get(), ENGRAVED_WISESTONE_MORS.get(), ENGRAVED_WISESTONE_MIRACULUM.get(),
                     ENGRAVED_WISESTONE_TEMPUS.get(), ENGRAVED_WISESTONE_STATERA.get(), ENGRAVED_WISESTONE_ECLIPSIS.get(), ENGRAVED_WISESTONE_SICCITAS.get(), ENGRAVED_WISESTONE_SOLSTITIUM.get(),
                     ENGRAVED_WISESTONE_FAMES.get(), ENGRAVED_WISESTONE_RENAISSANCE.get(), ENGRAVED_WISESTONE_BELLUM.get(), ENGRAVED_WISESTONE_LUX.get(), ENGRAVED_WISESTONE_KARA.get(),
                     ENGRAVED_WISESTONE_DEGRADATIO.get(), ENGRAVED_WISESTONE_PRAEDICTIONEM.get(), ENGRAVED_WISESTONE_EVOLUTIONIS.get(), ENGRAVED_WISESTONE_TENEBRIS.get(), ENGRAVED_WISESTONE_UNIVERSUM.get())
             .build(null));
 
-    public static RegistryObject<BlockEntityType<ArcaneHopperBlockEntity>> ARCANE_HOPPER_TILE_ENTITY = TILE_ENTITIES.register("arcane_hopper", () -> BlockEntityType.Builder.of(ArcaneHopperBlockEntity::new, ARCANE_HOPPER.get()).build(null));
-    public static RegistryObject<BlockEntityType<SensorBlockEntity>> SENSOR_TILE_ENTITY = TILE_ENTITIES.register("sensor", () -> BlockEntityType.Builder.of(SensorBlockEntity::new, REDSTONE_SENSOR.get(), WISSEN_SENSOR.get(), COOLDOWN_SENSOR.get(), LIGHT_SENSOR.get(), EXPERIENCE_SENSOR.get(), HEAT_SENSOR.get(), STEAM_SENSOR.get()).build(null));
-    public static RegistryObject<BlockEntityType<FluidSensorBlockEntity>> FLUID_SENSOR_TILE_ENTITY = TILE_ENTITIES.register("fluid_sensor", () -> BlockEntityType.Builder.of(FluidSensorBlockEntity::new, FLUID_SENSOR.get()).build(null));
-    public static RegistryObject<BlockEntityType<WissenActivatorBlockEntity>> WISSEN_ACTIVATOR_TILE_ENTITY = TILE_ENTITIES.register("wissen_activator", () -> BlockEntityType.Builder.of(WissenActivatorBlockEntity::new, WISSEN_ACTIVATOR.get()).build(null));
-    public static RegistryObject<BlockEntityType<ItemSorterBlockEntity>> ITEM_SORTER_TILE_ENTITY = TILE_ENTITIES.register("item_sorter", () -> BlockEntityType.Builder.of(ItemSorterBlockEntity::new, ITEM_SORTER.get()).build(null));
+    public static RegistryObject<BlockEntityType<ArcaneHopperBlockEntity>> ARCANE_HOPPER_BLOCK_ENTITY = BLOCK_ENTITIES.register("arcane_hopper", () -> BlockEntityType.Builder.of(ArcaneHopperBlockEntity::new, ARCANE_HOPPER.get()).build(null));
+    public static RegistryObject<BlockEntityType<SensorBlockEntity>> SENSOR_BLOCK_ENTITY = BLOCK_ENTITIES.register("sensor", () -> BlockEntityType.Builder.of(SensorBlockEntity::new, REDSTONE_SENSOR.get(), WISSEN_SENSOR.get(), COOLDOWN_SENSOR.get(), LIGHT_SENSOR.get(), EXPERIENCE_SENSOR.get(), HEAT_SENSOR.get(), STEAM_SENSOR.get()).build(null));
+    public static RegistryObject<BlockEntityType<FluidSensorBlockEntity>> FLUID_SENSOR_BLOCK_ENTITY = BLOCK_ENTITIES.register("fluid_sensor", () -> BlockEntityType.Builder.of(FluidSensorBlockEntity::new, FLUID_SENSOR.get()).build(null));
+    public static RegistryObject<BlockEntityType<WissenActivatorBlockEntity>> WISSEN_ACTIVATOR_BLOCK_ENTITY = BLOCK_ENTITIES.register("wissen_activator", () -> BlockEntityType.Builder.of(WissenActivatorBlockEntity::new, WISSEN_ACTIVATOR.get()).build(null));
+    public static RegistryObject<BlockEntityType<ItemSorterBlockEntity>> ITEM_SORTER_BLOCK_ENTITY = BLOCK_ENTITIES.register("item_sorter", () -> BlockEntityType.Builder.of(ItemSorterBlockEntity::new, ITEM_SORTER.get()).build(null));
 
-    public static RegistryObject<BlockEntityType<WissenCasingBlockEntity>> WISSEN_CASING_TILE_ENTITY = TILE_ENTITIES.register("wissen_casing", () -> BlockEntityType.Builder.of(WissenCasingBlockEntity::new, ARCANE_WOOD_WISSEN_CASING.get(), INNOCENT_WOOD_WISSEN_CASING.get(), CORK_BAMBOO_WISSEN_CASING.get(), WISESTONE_WISSEN_CASING.get()).build(null));
-    public static RegistryObject<BlockEntityType<LightCasingTileEntity>> LIGHT_CASING_TILE_ENTITY = TILE_ENTITIES.register("light_casing", () -> BlockEntityType.Builder.of(LightCasingTileEntity::new, ARCANE_WOOD_LIGHT_CASING.get(), INNOCENT_WOOD_LIGHT_CASING.get(), CORK_BAMBOO_LIGHT_CASING.get(), WISESTONE_LIGHT_CASING.get()).build(null));
-    public static RegistryObject<BlockEntityType<FluidCasingBlockEntity>> FLUID_CASING_TILE_ENTITY = TILE_ENTITIES.register("fluid_casing", () -> BlockEntityType.Builder.of(FluidCasingBlockEntity::new, ARCANE_WOOD_FLUID_CASING.get(), INNOCENT_WOOD_FLUID_CASING.get(), CORK_BAMBOO_FLUID_CASING.get(), WISESTONE_FLUID_CASING.get()).build(null));
-    public static RegistryObject<BlockEntityType<SteamCasingBlockEntity>> STEAM_CASING_TILE_ENTITY = TILE_ENTITIES.register("steam_casing", () -> BlockEntityType.Builder.of(SteamCasingBlockEntity::new, ARCANE_WOOD_STEAM_CASING.get(), INNOCENT_WOOD_STEAM_CASING.get(), CORK_BAMBOO_STEAM_CASING.get(), WISESTONE_STEAM_CASING.get()).build(null));
+    public static RegistryObject<BlockEntityType<WissenCasingBlockEntity>> WISSEN_CASING_BLOCK_ENTITY = BLOCK_ENTITIES.register("wissen_casing", () -> BlockEntityType.Builder.of(WissenCasingBlockEntity::new, ARCANE_WOOD_WISSEN_CASING.get(), INNOCENT_WOOD_WISSEN_CASING.get(), CORK_BAMBOO_WISSEN_CASING.get(), WISESTONE_WISSEN_CASING.get()).build(null));
+    public static RegistryObject<BlockEntityType<LightCasingBlockEntity>> LIGHT_CASING_BLOCK_ENTITY = BLOCK_ENTITIES.register("light_casing", () -> BlockEntityType.Builder.of(LightCasingBlockEntity::new, ARCANE_WOOD_LIGHT_CASING.get(), INNOCENT_WOOD_LIGHT_CASING.get(), CORK_BAMBOO_LIGHT_CASING.get(), WISESTONE_LIGHT_CASING.get()).build(null));
+    public static RegistryObject<BlockEntityType<FluidCasingBlockEntity>> FLUID_CASING_BLOCK_ENTITY = BLOCK_ENTITIES.register("fluid_casing", () -> BlockEntityType.Builder.of(FluidCasingBlockEntity::new, ARCANE_WOOD_FLUID_CASING.get(), INNOCENT_WOOD_FLUID_CASING.get(), CORK_BAMBOO_FLUID_CASING.get(), WISESTONE_FLUID_CASING.get()).build(null));
+    public static RegistryObject<BlockEntityType<SteamCasingBlockEntity>> STEAM_CASING_BLOCK_ENTITY = BLOCK_ENTITIES.register("steam_casing", () -> BlockEntityType.Builder.of(SteamCasingBlockEntity::new, ARCANE_WOOD_STEAM_CASING.get(), INNOCENT_WOOD_STEAM_CASING.get(), CORK_BAMBOO_STEAM_CASING.get(), WISESTONE_STEAM_CASING.get()).build(null));
 
-    public static RegistryObject<BlockEntityType<CreativeWissenStorageBlockEntity>> CREATIVE_WISSEN_STORAGE_TILE_ENTITY = TILE_ENTITIES.register("creative_wissen_storage", () -> BlockEntityType.Builder.of(CreativeWissenStorageBlockEntity::new, CREATIVE_WISSEN_STORAGE.get()).build(null));
-    public static RegistryObject<BlockEntityType<CreativeLightStorageBlockEntity>> CREATIVE_LIGHT_STORAGE_TILE_ENTITY = TILE_ENTITIES.register("creative_light_storage", () -> BlockEntityType.Builder.of(CreativeLightStorageBlockEntity::new, CREATIVE_LIGHT_STORAGE.get()).build(null));
-    public static RegistryObject<BlockEntityType<CreativeFluidStorageBlockEntity>> CREATIVE_FLUID_STORAGE_TILE_ENTITY = TILE_ENTITIES.register("creative_fluid_storage", () -> BlockEntityType.Builder.of(CreativeFluidStorageBlockEntity::new, CREATIVE_FLUID_STORAGE.get()).build(null));
-    public static RegistryObject<BlockEntityType<CreativeSteamStorageBlockEntity>> CREATIVE_STEAM_STORAGE_TILE_ENTITY = TILE_ENTITIES.register("creative_steam_storage", () -> BlockEntityType.Builder.of(CreativeSteamStorageBlockEntity::new, CREATIVE_STEAM_STORAGE.get()).build(null));
+    public static RegistryObject<BlockEntityType<CreativeWissenStorageBlockEntity>> CREATIVE_WISSEN_STORAGE_BLOCK_ENTITY = BLOCK_ENTITIES.register("creative_wissen_storage", () -> BlockEntityType.Builder.of(CreativeWissenStorageBlockEntity::new, CREATIVE_WISSEN_STORAGE.get()).build(null));
+    public static RegistryObject<BlockEntityType<CreativeLightStorageBlockEntity>> CREATIVE_LIGHT_STORAGE_BLOCK_ENTITY = BLOCK_ENTITIES.register("creative_light_storage", () -> BlockEntityType.Builder.of(CreativeLightStorageBlockEntity::new, CREATIVE_LIGHT_STORAGE.get()).build(null));
+    public static RegistryObject<BlockEntityType<CreativeFluidStorageBlockEntity>> CREATIVE_FLUID_STORAGE_BLOCK_ENTITY = BLOCK_ENTITIES.register("creative_fluid_storage", () -> BlockEntityType.Builder.of(CreativeFluidStorageBlockEntity::new, CREATIVE_FLUID_STORAGE.get()).build(null));
+    public static RegistryObject<BlockEntityType<CreativeSteamStorageBlockEntity>> CREATIVE_STEAM_STORAGE_BLOCK_ENTITY = BLOCK_ENTITIES.register("creative_steam_storage", () -> BlockEntityType.Builder.of(CreativeSteamStorageBlockEntity::new, CREATIVE_STEAM_STORAGE.get()).build(null));
 
-    public static RegistryObject<BlockEntityType<SaltTorchBlockEntity>> SALT_TORCH_TILE_ENTITY = TILE_ENTITIES.register("salt_torch", () -> BlockEntityType.Builder.of(SaltTorchBlockEntity::new, ARCANE_SALT_TORCH.get(), ARCANE_SALT_WALL_TORCH.get(), INNOCENT_SALT_TORCH.get(), INNOCENT_SALT_WALL_TORCH.get(), CORK_BAMBOO_SALT_TORCH.get(), CORK_BAMBOO_SALT_WALL_TORCH.get(), WISESTONE_SALT_TORCH.get(), WISESTONE_SALT_WALL_TORCH.get()).build(null));
-    public static RegistryObject<BlockEntityType<SaltLanternBlockEntity>> SALT_LANTERN_TILE_ENTITY = TILE_ENTITIES.register("salt_lantern", () -> BlockEntityType.Builder.of(SaltLanternBlockEntity::new, ARCANE_SALT_LANTERN.get(), INNOCENT_SALT_LANTERN.get(), CORK_BAMBOO_SALT_LANTERN.get(), WISESTONE_SALT_LANTERN.get()).build(null));
-    public static RegistryObject<BlockEntityType<SaltCampfireBlockEntity>> SALT_CAMPFIRE_TILE_ENTITY = TILE_ENTITIES.register("salt_campfire", () -> BlockEntityType.Builder.of(SaltCampfireBlockEntity::new, ARCANE_SALT_CAMPFIRE.get(), INNOCENT_SALT_CAMPFIRE.get(), CORK_BAMBOO_SALT_CAMPFIRE.get(), WISESTONE_SALT_CAMPFIRE.get()).build(null));
+    public static RegistryObject<BlockEntityType<SaltTorchBlockEntity>> SALT_TORCH_BLOCK_ENTITY = BLOCK_ENTITIES.register("salt_torch", () -> BlockEntityType.Builder.of(SaltTorchBlockEntity::new, ARCANE_SALT_TORCH.get(), ARCANE_SALT_WALL_TORCH.get(), INNOCENT_SALT_TORCH.get(), INNOCENT_SALT_WALL_TORCH.get(), CORK_BAMBOO_SALT_TORCH.get(), CORK_BAMBOO_SALT_WALL_TORCH.get(), WISESTONE_SALT_TORCH.get(), WISESTONE_SALT_WALL_TORCH.get()).build(null));
+    public static RegistryObject<BlockEntityType<SaltLanternBlockEntity>> SALT_LANTERN_BLOCK_ENTITY = BLOCK_ENTITIES.register("salt_lantern", () -> BlockEntityType.Builder.of(SaltLanternBlockEntity::new, ARCANE_SALT_LANTERN.get(), INNOCENT_SALT_LANTERN.get(), CORK_BAMBOO_SALT_LANTERN.get(), WISESTONE_SALT_LANTERN.get()).build(null));
+    public static RegistryObject<BlockEntityType<SaltCampfireBlockEntity>> SALT_CAMPFIRE_BLOCK_ENTITY = BLOCK_ENTITIES.register("salt_campfire", () -> BlockEntityType.Builder.of(SaltCampfireBlockEntity::new, ARCANE_SALT_CAMPFIRE.get(), INNOCENT_SALT_CAMPFIRE.get(), CORK_BAMBOO_SALT_CAMPFIRE.get(), WISESTONE_SALT_CAMPFIRE.get()).build(null));
 
-    public static RegistryObject<BlockEntityType<CrossBaulkBlockEntity>> CROSS_BAULK_TILE_ENTITY = TILE_ENTITIES.register("cross_baulk", () -> BlockEntityType.Builder.of(CrossBaulkBlockEntity::new, ARCANE_WOOD_CROSS_BAULK.get(), STRIPPED_ARCANE_WOOD_CROSS_BAULK.get(), ARCANE_WOOD_PLANKS_CROSS_BAULK.get(), INNOCENT_WOOD_CROSS_BAULK.get(), STRIPPED_INNOCENT_WOOD_CROSS_BAULK.get(), INNOCENT_WOOD_PLANKS_CROSS_BAULK.get(), CORK_BAMBOO_CROSS_BAULK.get(), CORK_BAMBOO_PLANKS_CROSS_BAULK.get(), CORK_BAMBOO_CHISELED_PLANKS_CROSS_BAULK.get()).build(null));
-    public static RegistryObject<BlockEntityType<PlacedItemsBlockEntity>> PLACED_ITEMS_TILE_ENTITY = TILE_ENTITIES.register("placed_items", () -> BlockEntityType.Builder.of(PlacedItemsBlockEntity::new, PLACED_ITEMS_BLOCK.get()).build(null));
+    public static RegistryObject<BlockEntityType<CrossBaulkBlockEntity>> CROSS_BAULK_BLOCK_ENTITY = BLOCK_ENTITIES.register("cross_baulk", () -> BlockEntityType.Builder.of(CrossBaulkBlockEntity::new, ARCANE_WOOD_CROSS_BAULK.get(), STRIPPED_ARCANE_WOOD_CROSS_BAULK.get(), ARCANE_WOOD_PLANKS_CROSS_BAULK.get(), INNOCENT_WOOD_CROSS_BAULK.get(), STRIPPED_INNOCENT_WOOD_CROSS_BAULK.get(), INNOCENT_WOOD_PLANKS_CROSS_BAULK.get(), CORK_BAMBOO_CROSS_BAULK.get(), CORK_BAMBOO_PLANKS_CROSS_BAULK.get(), CORK_BAMBOO_CHISELED_PLANKS_CROSS_BAULK.get()).build(null));
+    public static RegistryObject<BlockEntityType<PlacedItemsBlockEntity>> PLACED_ITEMS_BLOCK_ENTITY = BLOCK_ENTITIES.register("placed_items", () -> BlockEntityType.Builder.of(PlacedItemsBlockEntity::new, PLACED_ITEMS_BLOCK.get()).build(null));
 
     //ENTITIES
     public static final RegistryObject<EntityType<CustomBoatEntity>> BOAT = ENTITIES.register("boat", () -> EntityType.Builder.<CustomBoatEntity>of(CustomBoatEntity::new, MobCategory.MISC).sized(1.375f, 0.5625f).build(new ResourceLocation(MOD_ID, "boat").toString()));
@@ -1820,15 +1822,9 @@ public class WizardsReborn {
     public static final RegistryObject<ForgeSpawnEggItem> SNIFFALO_SPAWN_EGG = ITEMS.register("sniffalo_spawn_egg", () -> new ForgeSpawnEggItem(SNIFFALO, ColorUtils.packColor(255, 96, 58, 62), ColorUtils.packColor(255, 181, 139, 117), new Item.Properties()));
 
     //PARTICLES
-    public static RegistryObject<WispParticleType> WISP_PARTICLE = PARTICLES.register("wisp", WispParticleType::new);
-    public static RegistryObject<SparkleParticleType> SPARKLE_PARTICLE = PARTICLES.register("sparkle", SparkleParticleType::new);
-    public static RegistryObject<KarmaParticleType> KARMA_PARTICLE = PARTICLES.register("karma", KarmaParticleType::new);
-    public static RegistryObject<ArcaneWoodLeavesParticleType> ARCANE_WOOD_LEAVES_PARTICLE = PARTICLES.register("arcane_wood_leaves", ArcaneWoodLeavesParticleType::new);
-    public static RegistryObject<InnocenceWoodLeavesParticleType> INNOCENT_WOOD_LEAVES_PARTICLE = PARTICLES.register("innocence_wood_leaves", InnocenceWoodLeavesParticleType::new);
-    public static RegistryObject<SteamParticleType> STEAM_PARTICLE = PARTICLES.register("steam", SteamParticleType::new);
-    public static RegistryObject<SmokeParticleType> SMOKE_PARTICLE = PARTICLES.register("smoke", SmokeParticleType::new);
-    public static RegistryObject<CubeParticleType> CUBE_PARTICLE = PARTICLES.register("cube", CubeParticleType::new);
-    public static RegistryObject<TrailParticleType> TRAIL_PARTICLE = PARTICLES.register("trail", TrailParticleType::new);
+    public static RegistryObject<GenericParticleType> KARMA_PARTICLE = PARTICLES.register("karma", GenericParticleType::new);
+    public static RegistryObject<LeavesParticleType> ARCANE_WOOD_LEAVES_PARTICLE = PARTICLES.register("arcane_wood_leaves", LeavesParticleType::new);
+    public static RegistryObject<LeavesParticleType> INNOCENT_WOOD_LEAVES_PARTICLE = PARTICLES.register("innocence_wood_leaves", LeavesParticleType::new);
 
     //RECIPES
     public static final RegistryObject<ArcanumDustTransmutationRecipe.Serializer> ARCANUM_DUST_TRANSMUTATION_SERIALIZER = RECIPE_SERIALIZERS.register("arcanum_dust_transmutation", ArcanumDustTransmutationRecipe.Serializer::new);
@@ -2110,7 +2106,7 @@ public class WizardsReborn {
 
         ITEMS.register(eventBus);
         BLOCKS.register(eventBus);
-        TILE_ENTITIES.register(eventBus);
+        BLOCK_ENTITIES.register(eventBus);
         ENTITIES.register(eventBus);
         PARTICLES.register(eventBus);
         RECIPE_SERIALIZERS.register(eventBus);
@@ -2283,13 +2279,6 @@ public class WizardsReborn {
     }
 
     private void clientSetup(final FMLClientSetupEvent event) {
-        try {
-            Class.forName("net.optifine.Config");
-            WizardsRebornClient.optifinePresent = true;
-        } catch (ClassNotFoundException e) {
-            WizardsRebornClient.optifinePresent = false;
-        }
-
         event.enqueueWork(() -> {
             ArcanemiconChapters.init();
 

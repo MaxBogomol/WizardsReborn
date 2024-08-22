@@ -3,10 +3,10 @@ package mod.maxbogomol.wizards_reborn.common.block.light_transfer_lens;
 import mod.maxbogomol.fluffy_fur.common.block.entity.ExposedBlockSimpleInventory;
 import mod.maxbogomol.fluffy_fur.common.block.entity.TickableBlockEntity;
 import mod.maxbogomol.wizards_reborn.WizardsReborn;
-import mod.maxbogomol.wizards_reborn.api.light.ILightTileEntity;
+import mod.maxbogomol.wizards_reborn.api.light.ILightBlockEntity;
 import mod.maxbogomol.wizards_reborn.api.light.LightRayHitResult;
 import mod.maxbogomol.wizards_reborn.api.light.LightUtils;
-import mod.maxbogomol.wizards_reborn.api.wissen.IWissenWandControlledTileEntity;
+import mod.maxbogomol.wizards_reborn.api.wissen.IWissenWandControlledBlockEntity;
 import mod.maxbogomol.wizards_reborn.client.sound.LightTransferLensSoundInstance;
 import mod.maxbogomol.wizards_reborn.common.block.ArcaneLumosBlock;
 import mod.maxbogomol.wizards_reborn.common.item.equipment.WissenWandItem;
@@ -32,7 +32,7 @@ import javax.annotation.Nullable;
 import java.awt.*;
 import java.util.Random;
 
-public class LightTransferLensBlockEntity extends ExposedBlockSimpleInventory implements TickableBlockEntity, ILightTileEntity, IWissenWandControlledTileEntity {
+public class LightTransferLensBlockEntity extends ExposedBlockSimpleInventory implements TickableBlockEntity, ILightBlockEntity, IWissenWandControlledBlockEntity {
 
     public int blockToX = 0;
     public int blockToY =0 ;
@@ -50,7 +50,7 @@ public class LightTransferLensBlockEntity extends ExposedBlockSimpleInventory im
     }
 
     public LightTransferLensBlockEntity(BlockPos pos, BlockState state) {
-        this(WizardsReborn.LIGHT_TRANSFER_LENS_TILE_ENTITY.get(), pos, state);
+        this(WizardsReborn.LIGHT_TRANSFER_LENS_BLOCK_ENTITY.get(), pos, state);
     }
 
     @Override
@@ -67,7 +67,7 @@ public class LightTransferLensBlockEntity extends ExposedBlockSimpleInventory im
                 BlockPos pos = new BlockPos(blockToX, blockToY, blockToZ);
                 if (level.isLoaded(pos)) {
                     BlockEntity tileentity = level.getBlockEntity(pos);
-                    if (tileentity instanceof ILightTileEntity lightTileEntity) {
+                    if (tileentity instanceof ILightBlockEntity lightTileEntity) {
                         if (canWork()) {
                             Vec3 from = LightUtils.getLightLensPos(getBlockPos(), getLightLensPos());
                             Vec3 to = LightUtils.getLightLensPos(pos, lightTileEntity.getLightLensPos());
@@ -279,7 +279,7 @@ public class LightTransferLensBlockEntity extends ExposedBlockSimpleInventory im
         BlockPos oldBlockPos = WissenWandItem.getBlockPos(stack);
         BlockEntity oldTile = level.getBlockEntity(oldBlockPos);
 
-        if (oldTile instanceof ILightTileEntity lightTile) {
+        if (oldTile instanceof ILightBlockEntity lightTile) {
             if (lightTile.canConnectSendLight()) {
                 blockToX = oldBlockPos.getX();
                 blockToY = oldBlockPos.getY();

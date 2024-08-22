@@ -1,7 +1,7 @@
 package mod.maxbogomol.wizards_reborn.common.block.steam_extractor;
 
 import mod.maxbogomol.wizards_reborn.WizardsReborn;
-import mod.maxbogomol.wizards_reborn.api.alchemy.ISteamTileEntity;
+import mod.maxbogomol.wizards_reborn.api.alchemy.ISteamBlockEntity;
 import mod.maxbogomol.wizards_reborn.api.alchemy.SteamUtils;
 import mod.maxbogomol.wizards_reborn.api.wissen.WissenUtils;
 import mod.maxbogomol.wizards_reborn.common.block.steam_pipe.SteamPipeBaseBlockEntity;
@@ -22,7 +22,7 @@ public class SteamExtractorBlockEntity extends SteamPipeBaseBlockEntity {
     }
 
     public SteamExtractorBlockEntity(BlockPos pos, BlockState state) {
-        this(WizardsReborn.STEAM_EXTRACTOR_TILE_ENTITY.get(), pos, state);
+        this(WizardsReborn.STEAM_EXTRACTOR_BLOCK_ENTITY.get(), pos, state);
     }
 
     public void tick() {
@@ -34,7 +34,7 @@ public class SteamExtractorBlockEntity extends SteamPipeBaseBlockEntity {
                 BlockEntity tile = level.getBlockEntity(getBlockPos().relative(facing));
                 if (tile != null && !(tile instanceof SteamPipeBaseBlockEntity)) {
                     if (active) {
-                        if (tile instanceof ISteamTileEntity steamTileEntity) {
+                        if (tile instanceof ISteamBlockEntity steamTileEntity) {
                             if (steamTileEntity.canSteamTransfer(facing.getOpposite())) {
                                 int steam_remain = WissenUtils.getAddWissenRemain(steam, MAX_DRAIN, getMaxSteam());
                                 steam_remain = MAX_DRAIN - steam_remain;

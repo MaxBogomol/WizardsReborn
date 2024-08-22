@@ -18,7 +18,7 @@ public class SensorBlockEntity extends BlockEntity implements TickableBlockEntit
     }
 
     public SensorBlockEntity(BlockPos pPos, BlockState pBlockState) {
-        super(WizardsReborn.SENSOR_TILE_ENTITY.get(), pPos, pBlockState);
+        super(WizardsReborn.SENSOR_BLOCK_ENTITY.get(), pPos, pBlockState);
     }
 
     @Override

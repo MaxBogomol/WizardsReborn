@@ -53,7 +53,7 @@ public class ArcaneHopperBlockEntity extends RandomizableContainerBlockEntity im
     }
 
     public ArcaneHopperBlockEntity(BlockPos pPos, BlockState pBlockState) {
-        super(WizardsReborn.ARCANE_HOPPER_TILE_ENTITY.get(), pPos, pBlockState);
+        super(WizardsReborn.ARCANE_HOPPER_BLOCK_ENTITY.get(), pPos, pBlockState);
     }
 
     public void load(CompoundTag pTag) {

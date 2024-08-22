@@ -1,11 +1,14 @@
 package mod.maxbogomol.wizards_reborn.common.block.engraved_wisestone;
 
+import mod.maxbogomol.fluffy_fur.FluffyFur;
+import mod.maxbogomol.fluffy_fur.client.particle.ParticleBuilder;
+import mod.maxbogomol.fluffy_fur.client.particle.data.ColorParticleData;
+import mod.maxbogomol.fluffy_fur.client.particle.data.GenericParticleData;
 import mod.maxbogomol.fluffy_fur.common.block.entity.TickableBlockEntity;
 import mod.maxbogomol.wizards_reborn.WizardsReborn;
 import mod.maxbogomol.wizards_reborn.api.monogram.Monogram;
-import mod.maxbogomol.wizards_reborn.api.wissen.IWissenWandFunctionalTileEntity;
+import mod.maxbogomol.wizards_reborn.api.wissen.IWissenWandFunctionalBlockEntity;
 import mod.maxbogomol.wizards_reborn.client.event.ClientTickHandler;
-import mod.maxbogomol.wizards_reborn.client.particle.Particles;
 import mod.maxbogomol.wizards_reborn.utils.PacketUtils;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
@@ -22,7 +25,7 @@ import org.jetbrains.annotations.NotNull;
 import java.awt.*;
 import java.util.Random;
 
-public class EngravedWisestoneBlockEntity extends BlockEntity implements TickableBlockEntity, IWissenWandFunctionalTileEntity {
+public class EngravedWisestoneBlockEntity extends BlockEntity implements TickableBlockEntity, IWissenWandFunctionalBlockEntity {
 
     public boolean glow = false;
     public int cooldown = 0;
@@ -36,7 +39,7 @@ public class EngravedWisestoneBlockEntity extends BlockEntity implements Tickabl
     }
 
     public EngravedWisestoneBlockEntity(BlockPos pos, BlockState state) {
-        this(WizardsReborn.ENGRAVED_WISESTONE_TILE_ENTITY.get(), pos, state);
+        this(WizardsReborn.ENGRAVED_WISESTONE_BLOCK_ENTITY.get(), pos, state);
     }
 
     @Override
@@ -74,19 +77,21 @@ public class EngravedWisestoneBlockEntity extends BlockEntity implements Tickabl
                     float g = color.getGreen() / 255f;
                     float b = color.getBlue() / 255f;
 
-                    Particles.create(WizardsReborn.CUBE_PARTICLE)
-                            .addVelocity(((random.nextDouble() - 0.5D) / 100), (random.nextDouble() / 200) + 0.01f, ((random.nextDouble() - 0.5D) / 100))
-                            .setAlpha(0.75f, 0).setScale(0.1f, 0)
-                            .setColor(r, g, b, random.nextFloat(), random.nextFloat(), random.nextFloat())
+                    ParticleBuilder.create(FluffyFur.CUBE_PARTICLE)
+                            .setColorData(ColorParticleData.create(r, g, b, random.nextFloat(), random.nextFloat(), random.nextFloat()).build())
+                            .setTransparencyData(GenericParticleData.create(0.75f, 0).build())
+                            .setScaleData(GenericParticleData.create(0.1f, 0).build())
+                            .randomSpin(0.1f)
                             .setLifetime(30)
-                            .setSpin(0.1f)
+                            .randomVelocity(0.005f)
                             .spawn(level, getBlockPos().getX() + 0.5F + X, getBlockPos().getY() + (glowTicks / 20f), getBlockPos().getZ() + 0.5F + Z);
-                    Particles.create(WizardsReborn.WISP_PARTICLE)
-                            .addVelocity(((random.nextDouble() - 0.5D) / 100), (random.nextDouble() / 200) + 0.01f, ((random.nextDouble() - 0.5D) / 100))
-                            .setAlpha(0.75f, 0).setScale(0.1f, 0)
-                            .setColor(r, g, b, random.nextFloat(), random.nextFloat(), random.nextFloat())
+                    ParticleBuilder.create(FluffyFur.WISP_PARTICLE)
+                            .setColorData(ColorParticleData.create(r, g, b, random.nextFloat(), random.nextFloat(), random.nextFloat()).build())
+                            .setTransparencyData(GenericParticleData.create(0.75f, 0).build())
+                            .setScaleData(GenericParticleData.create(0.1f, 0).build())
+                            .randomSpin(0.1f)
                             .setLifetime(40)
-                            .setSpin(0.1f)
+                            .randomVelocity(0.005f)
                             .spawn(level, getBlockPos().getX() + 0.5F + X, getBlockPos().getY() + (glowTicks / 20f), getBlockPos().getZ() + 0.5F + Z);
                 }
             }

@@ -2,7 +2,7 @@ package mod.maxbogomol.wizards_reborn.common.item;
 
 import mod.maxbogomol.fluffy_fur.common.item.ICustomBlockEntityDataItem;
 import mod.maxbogomol.wizards_reborn.api.wissen.IWissenItem;
-import mod.maxbogomol.wizards_reborn.api.wissen.IWissenTileEntity;
+import mod.maxbogomol.wizards_reborn.api.wissen.IWissenBlockEntity;
 import mod.maxbogomol.wizards_reborn.api.wissen.WissenItemType;
 import mod.maxbogomol.wizards_reborn.api.wissen.WissenItemUtils;
 import mod.maxbogomol.wizards_reborn.client.config.ClientConfig;
@@ -43,7 +43,7 @@ public class WissenStorageBaseItem extends BlockItem implements IWissenItem, ICu
     public int getMaxWissen() {
         if (getBlock() instanceof EntityBlock tileBlock) {
             BlockEntity tile = tileBlock.newBlockEntity(new BlockPos(0, 0, 0), getBlock().defaultBlockState());
-            if (tile instanceof IWissenTileEntity wissenTile) {
+            if (tile instanceof IWissenBlockEntity wissenTile) {
                 return wissenTile.getMaxWissen();
             }
         }

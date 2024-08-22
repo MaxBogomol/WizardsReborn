@@ -1,10 +1,10 @@
 package mod.maxbogomol.wizards_reborn.client.event;
 
 import com.mojang.blaze3d.vertex.PoseStack;
-import mod.maxbogomol.wizards_reborn.api.alchemy.ISteamTileEntity;
-import mod.maxbogomol.wizards_reborn.api.light.ILightTileEntity;
+import mod.maxbogomol.wizards_reborn.api.alchemy.ISteamBlockEntity;
+import mod.maxbogomol.wizards_reborn.api.light.ILightBlockEntity;
 import mod.maxbogomol.wizards_reborn.api.light.LightUtils;
-import mod.maxbogomol.wizards_reborn.api.wissen.IWissenTileEntity;
+import mod.maxbogomol.wizards_reborn.api.wissen.IWissenBlockEntity;
 import mod.maxbogomol.wizards_reborn.common.item.equipment.WissenWandItem;
 import mod.maxbogomol.wizards_reborn.utils.RenderUtils;
 import net.minecraft.client.Minecraft;
@@ -140,7 +140,7 @@ public class ClientWorldEvent {
                                     renderSide = true;
                                     renderEnergySide = true;
                                 }
-                                if (player.level().getBlockEntity(blockpos) instanceof ISteamTileEntity steamTile) {
+                                if (player.level().getBlockEntity(blockpos) instanceof ISteamBlockEntity steamTile) {
                                     renderSide = true;
                                     renderSteamSide = steamTile.canSteamConnection(direction);
                                 }
@@ -175,15 +175,15 @@ public class ClientWorldEvent {
 
     public static boolean canEffect(BlockPos pos, Level world) {
         BlockEntity blockEntity = world.getBlockEntity(pos);
-        if (blockEntity instanceof IWissenTileEntity) return true;
-        if (blockEntity instanceof ILightTileEntity) return true;
+        if (blockEntity instanceof IWissenBlockEntity) return true;
+        if (blockEntity instanceof ILightBlockEntity) return true;
 
         return false;
     }
 
     public static Vec3 getEffectPos(BlockPos pos, Level world) {
         BlockEntity blockEntity = world.getBlockEntity(pos);
-        if (blockEntity instanceof ILightTileEntity lightTile) return lightTile.getLightLensPos();
+        if (blockEntity instanceof ILightBlockEntity lightTile) return lightTile.getLightLensPos();
 
         return new Vec3(0.5f, 0.5f, 0.5f);
     }

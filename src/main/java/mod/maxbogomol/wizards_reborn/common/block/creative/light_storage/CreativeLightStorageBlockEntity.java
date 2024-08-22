@@ -1,18 +1,18 @@
 package mod.maxbogomol.wizards_reborn.common.block.creative.light_storage;
 
 import mod.maxbogomol.wizards_reborn.WizardsReborn;
-import mod.maxbogomol.wizards_reborn.common.block.casing.light.LightCasingTileEntity;
+import mod.maxbogomol.wizards_reborn.common.block.casing.light.LightCasingBlockEntity;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 
-public class CreativeLightStorageBlockEntity extends LightCasingTileEntity {
+public class CreativeLightStorageBlockEntity extends LightCasingBlockEntity {
     public CreativeLightStorageBlockEntity(BlockEntityType<?> pType, BlockPos pPos, BlockState pBlockState) {
         super(pType, pPos, pBlockState);
     }
 
     public CreativeLightStorageBlockEntity(BlockPos pos, BlockState state) {
-        this(WizardsReborn.CREATIVE_LIGHT_STORAGE_TILE_ENTITY.get(), pos, state);
+        this(WizardsReborn.CREATIVE_LIGHT_STORAGE_BLOCK_ENTITY.get(), pos, state);
     }
 
     @Override

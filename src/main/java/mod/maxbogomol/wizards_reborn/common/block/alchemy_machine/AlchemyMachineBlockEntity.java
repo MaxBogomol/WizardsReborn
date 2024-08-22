@@ -1,21 +1,24 @@
 package mod.maxbogomol.wizards_reborn.common.block.alchemy_machine;
 
+import mod.maxbogomol.fluffy_fur.FluffyFur;
+import mod.maxbogomol.fluffy_fur.client.particle.ParticleBuilder;
+import mod.maxbogomol.fluffy_fur.client.particle.data.ColorParticleData;
+import mod.maxbogomol.fluffy_fur.client.particle.data.GenericParticleData;
 import mod.maxbogomol.fluffy_fur.common.block.entity.TickableBlockEntity;
 import mod.maxbogomol.wizards_reborn.WizardsReborn;
 import mod.maxbogomol.wizards_reborn.api.alchemy.AlchemyPotionUtils;
 import mod.maxbogomol.wizards_reborn.api.alchemy.PipeConnection;
 import mod.maxbogomol.wizards_reborn.api.alchemy.SteamUtils;
-import mod.maxbogomol.wizards_reborn.api.wissen.ICooldownTileEntity;
-import mod.maxbogomol.wizards_reborn.api.wissen.IItemResultTileEntity;
-import mod.maxbogomol.wizards_reborn.api.wissen.IWissenWandFunctionalTileEntity;
+import mod.maxbogomol.wizards_reborn.api.wissen.ICooldownBlockEntity;
+import mod.maxbogomol.wizards_reborn.api.wissen.IItemResultBlockEntity;
+import mod.maxbogomol.wizards_reborn.api.wissen.IWissenWandFunctionalBlockEntity;
 import mod.maxbogomol.wizards_reborn.api.wissen.WissenUtils;
-import mod.maxbogomol.wizards_reborn.client.particle.Particles;
 import mod.maxbogomol.wizards_reborn.common.block.alchemy_boiler.AlchemyBoilerBlockEntity;
+import mod.maxbogomol.wizards_reborn.common.block.pipe.PipeBaseBlockEntity;
 import mod.maxbogomol.wizards_reborn.common.item.equipment.AlchemyBottleItem;
 import mod.maxbogomol.wizards_reborn.common.item.equipment.AlchemyPotionItem;
 import mod.maxbogomol.wizards_reborn.common.recipe.AlchemyMachineContext;
 import mod.maxbogomol.wizards_reborn.common.recipe.AlchemyMachineRecipe;
-import mod.maxbogomol.wizards_reborn.common.block.pipe.PipeBaseTileEntity;
 import mod.maxbogomol.wizards_reborn.utils.PacketUtils;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -47,12 +50,13 @@ import org.jetbrains.annotations.NotNull;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
+import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.Random;
 
-public class AlchemyMachineBlockEntity extends PipeBaseTileEntity implements TickableBlockEntity, IWissenWandFunctionalTileEntity, ICooldownTileEntity, IItemResultTileEntity {
+public class AlchemyMachineBlockEntity extends PipeBaseBlockEntity implements TickableBlockEntity, IWissenWandFunctionalBlockEntity, ICooldownBlockEntity, IItemResultBlockEntity {
     protected FluidTank fluidTank1 = new FluidTank(getMaxCapacity()) {
         @Override
         public void onContentsChanged() {
@@ -100,7 +104,7 @@ public class AlchemyMachineBlockEntity extends PipeBaseTileEntity implements Tic
     }
 
     public AlchemyMachineBlockEntity(BlockPos pos, BlockState state) {
-        this(WizardsReborn.ALCHEMY_MACHINE_TILE_ENTITY.get(), pos, state);
+        this(WizardsReborn.ALCHEMY_MACHINE_BLOCK_ENTITY.get(), pos, state);
     }
 
     @Override
@@ -262,12 +266,15 @@ public class AlchemyMachineBlockEntity extends PipeBaseTileEntity implements Tic
             if (level.getBlockEntity(getBlockPos().above()) instanceof AlchemyBoilerBlockEntity boiler) {
                 if (wissenIsCraft > 0 || steamIsCraft > 0) {
                     if (random.nextFloat() < 0.6F) {
-                        Particles.create(WizardsReborn.STEAM_PARTICLE)
-                                .addVelocity(((random.nextDouble() - 0.5D) / 40), (random.nextDouble() / 20) + 0.005, ((random.nextDouble() - 0.5D) / 40))
-                                .setAlpha(0.4f, 0).setScale(0.1f, 0.5f)
-                                .setColor(1f, 1f, 1f)
+                        ParticleBuilder.create(FluffyFur.SMOKE_PARTICLE)
+                                .setColorData(ColorParticleData.create(Color.WHITE).build())
+                                .setTransparencyData(GenericParticleData.create(0.4f, 0).build())
+                                .setScaleData(GenericParticleData.create(0.1f, 0.5f).build())
+                                .randomSpin(0.5f)
                                 .setLifetime(30)
-                                .setSpin((0.1f * (float) ((random.nextDouble() - 0.5D) * 2)))
+                                .randomVelocity(0.0125f, 0, 0.0125f)
+                                .flatRandomVelocity(0, 0.025f, 0)
+                                .addVelocity(0,  0.005, 0)
                                 .spawn(level, getBlockPos().getX() + 0.5F, getBlockPos().getY() + 2F, getBlockPos().getZ() + 0.5F);
                     }
                 }
@@ -414,7 +421,7 @@ public class AlchemyMachineBlockEntity extends PipeBaseTileEntity implements Tic
             BlockState facingState = level.getBlockState(worldPosition.relative(direction));
             BlockEntity facingBE = level.getBlockEntity(worldPosition.relative(direction));
             if (facingState.is(WizardsReborn.FLUID_PIPE_CONNECTION_BLOCK_TAG)) {
-                if (facingBE instanceof PipeBaseTileEntity && !((PipeBaseTileEntity) facingBE).getConnection(direction.getOpposite()).transfer) {
+                if (facingBE instanceof PipeBaseBlockEntity && !((PipeBaseBlockEntity) facingBE).getConnection(direction.getOpposite()).transfer) {
                     connections[direction.get3DDataValue()] = PipeConnection.NONE;
                 } else {
                     connections[direction.get3DDataValue()] = PipeConnection.PIPE;

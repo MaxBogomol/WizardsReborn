@@ -6,13 +6,13 @@ import mod.maxbogomol.wizards_reborn.WizardsReborn;
 import mod.maxbogomol.wizards_reborn.api.crystal.CrystalType;
 import mod.maxbogomol.wizards_reborn.api.crystalritual.CrystalRitual;
 import mod.maxbogomol.wizards_reborn.api.crystalritual.CrystalRitualUtils;
-import mod.maxbogomol.wizards_reborn.api.light.ILightTileEntity;
+import mod.maxbogomol.wizards_reborn.api.light.ILightBlockEntity;
 import mod.maxbogomol.wizards_reborn.api.light.LightRayHitResult;
 import mod.maxbogomol.wizards_reborn.api.light.LightUtils;
-import mod.maxbogomol.wizards_reborn.api.wissen.ICooldownTileEntity;
-import mod.maxbogomol.wizards_reborn.api.wissen.IItemResultTileEntity;
-import mod.maxbogomol.wizards_reborn.api.wissen.IWissenWandControlledTileEntity;
-import mod.maxbogomol.wizards_reborn.api.wissen.IWissenWandFunctionalTileEntity;
+import mod.maxbogomol.wizards_reborn.api.wissen.ICooldownBlockEntity;
+import mod.maxbogomol.wizards_reborn.api.wissen.IItemResultBlockEntity;
+import mod.maxbogomol.wizards_reborn.api.wissen.IWissenWandControlledBlockEntity;
+import mod.maxbogomol.wizards_reborn.api.wissen.IWissenWandFunctionalBlockEntity;
 import mod.maxbogomol.wizards_reborn.client.sound.CrystalSoundInstance;
 import mod.maxbogomol.wizards_reborn.common.item.CrystalItem;
 import mod.maxbogomol.wizards_reborn.common.item.equipment.WissenWandItem;
@@ -39,7 +39,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
-public class CrystalBlockEntity extends BlockSimpleInventory implements TickableBlockEntity, ILightTileEntity, ICooldownTileEntity, IWissenWandFunctionalTileEntity, IWissenWandControlledTileEntity, IItemResultTileEntity {
+public class CrystalBlockEntity extends BlockSimpleInventory implements TickableBlockEntity, ILightBlockEntity, ICooldownBlockEntity, IWissenWandFunctionalBlockEntity, IWissenWandControlledBlockEntity, IItemResultBlockEntity {
 
     public int blockToX = 0;
     public int blockToY =0 ;
@@ -63,7 +63,7 @@ public class CrystalBlockEntity extends BlockSimpleInventory implements Tickable
     }
 
     public CrystalBlockEntity(BlockPos pos, BlockState state) {
-        this(WizardsReborn.CRYSTAL_TILE_ENTITY.get(), pos, state);
+        this(WizardsReborn.CRYSTAL_BLOCK_ENTITY.get(), pos, state);
     }
 
     @Override
@@ -316,7 +316,7 @@ public class CrystalBlockEntity extends BlockSimpleInventory implements Tickable
         BlockPos oldBlockPos = WissenWandItem.getBlockPos(stack);
         BlockEntity oldTile = level.getBlockEntity(oldBlockPos);
 
-        if (oldTile instanceof ILightTileEntity lightTile) {
+        if (oldTile instanceof ILightBlockEntity lightTile) {
             if (lightTile.canConnectSendLight()) {
                 blockToX = oldBlockPos.getX();
                 blockToY = oldBlockPos.getY();
@@ -397,7 +397,7 @@ public class CrystalBlockEntity extends BlockSimpleInventory implements Tickable
 
         if (level.isLoaded(pos)) {
             BlockEntity tileentity = level.getBlockEntity(pos);
-            if (tileentity instanceof ILightTileEntity lightTileEntity) {
+            if (tileentity instanceof ILightBlockEntity lightTileEntity) {
                 Vec3 from = LightUtils.getLightLensPos(getBlockPos(), getLightLensPos());
                 Vec3 to = LightUtils.getLightLensPos(pos, lightTileEntity.getLightLensPos());
 

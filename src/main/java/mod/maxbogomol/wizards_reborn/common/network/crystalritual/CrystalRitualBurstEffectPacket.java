@@ -1,7 +1,10 @@
 package mod.maxbogomol.wizards_reborn.common.network.crystalritual;
 
+import mod.maxbogomol.fluffy_fur.FluffyFur;
+import mod.maxbogomol.fluffy_fur.client.particle.ParticleBuilder;
+import mod.maxbogomol.fluffy_fur.client.particle.data.ColorParticleData;
+import mod.maxbogomol.fluffy_fur.client.particle.data.GenericParticleData;
 import mod.maxbogomol.wizards_reborn.WizardsReborn;
-import mod.maxbogomol.wizards_reborn.client.particle.Particles;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.world.level.Level;
@@ -36,14 +39,15 @@ public class CrystalRitualBurstEffectPacket {
                     for (int i = 0; i < msg.tag.size(); i++) {
                         for (int ii = 0; ii < 20; ii++) {
                             CompoundTag pos = msg.tag.getCompound(String.valueOf(i));
-
-                            Particles.create(WizardsReborn.SPARKLE_PARTICLE)
-                                    .addVelocity(((random.nextDouble() - 0.5D) / 300), (random.nextDouble() / 15), ((random.nextDouble() - 0.5D) / 300))
-                                    .setAlpha(0.3f, 0).setScale(0.25f, 0)
-                                    .setColor(random.nextFloat(), random.nextFloat(), random.nextFloat())
+                            ParticleBuilder.create(FluffyFur.SPARKLE_PARTICLE)
+                                    .setColorData(ColorParticleData.create(random.nextFloat(), random.nextFloat(), random.nextFloat()).build())
+                                    .setTransparencyData(GenericParticleData.create(0.3f, 0).build())
+                                    .setScaleData(GenericParticleData.create(0.25f, 0).build())
+                                    .randomSpin(0.5f)
                                     .setLifetime(40)
-                                    .setSpin((0.5f * (float) ((random.nextDouble() - 0.5D) * 2)))
-                                    .spawn(world, pos.getFloat("x") + 0.5F + ((random.nextDouble() - 0.5D) / 2), pos.getFloat("y") + 1.3F + ((random.nextDouble() - 0.5D) / 2), pos.getFloat("z") + 0.5F + ((random.nextDouble() - 0.5D) / 2));
+                                    .randomVelocity(0.0016f, 0.035f, 0.0016f)
+                                    .randomOffset(0.25f)
+                                    .spawn(world, pos.getFloat("x") + 0.5F, pos.getFloat("y") + 1.3F, pos.getFloat("z") + 0.5F);
                         }
                     }
                     ctx.get().setPacketHandled(true);

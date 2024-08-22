@@ -71,7 +71,7 @@ public class FluidPipeBlockEntity extends FluidPipeBaseBlockEntity {
     }
 
     public FluidPipeBlockEntity(BlockPos pos, BlockState state) {
-        this(WizardsReborn.FLUID_PIPE_TILE_ENTITY.get(), pos, state);
+        this(WizardsReborn.FLUID_PIPE_BLOCK_ENTITY.get(), pos, state);
     }
 
     public void tick() {

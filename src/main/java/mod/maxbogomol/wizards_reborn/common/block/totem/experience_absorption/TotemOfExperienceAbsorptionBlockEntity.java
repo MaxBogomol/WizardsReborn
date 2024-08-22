@@ -1,12 +1,15 @@
 package mod.maxbogomol.wizards_reborn.common.block.totem.experience_absorption;
 
+import mod.maxbogomol.fluffy_fur.FluffyFur;
+import mod.maxbogomol.fluffy_fur.client.particle.ParticleBuilder;
+import mod.maxbogomol.fluffy_fur.client.particle.data.ColorParticleData;
+import mod.maxbogomol.fluffy_fur.client.particle.data.GenericParticleData;
 import mod.maxbogomol.fluffy_fur.common.block.entity.TickableBlockEntity;
 import mod.maxbogomol.wizards_reborn.WizardsReborn;
-import mod.maxbogomol.wizards_reborn.api.wissen.IExperienceTileEntity;
-import mod.maxbogomol.wizards_reborn.api.wissen.IWissenTileEntity;
+import mod.maxbogomol.wizards_reborn.api.wissen.IExperienceBlockEntity;
+import mod.maxbogomol.wizards_reborn.api.wissen.IWissenBlockEntity;
 import mod.maxbogomol.wizards_reborn.api.wissen.WissenUtils;
 import mod.maxbogomol.wizards_reborn.client.particle.ExperienceTotemBurst;
-import mod.maxbogomol.wizards_reborn.client.particle.Particles;
 import mod.maxbogomol.wizards_reborn.client.sound.TotemOfExperienceAbsorptionSoundInstance;
 import mod.maxbogomol.wizards_reborn.common.config.Config;
 import mod.maxbogomol.wizards_reborn.common.network.PacketHandler;
@@ -33,7 +36,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
-public class TotemOfExperienceAbsorptionBlockEntity extends BlockEntity implements TickableBlockEntity, IWissenTileEntity, IExperienceTileEntity {
+public class TotemOfExperienceAbsorptionBlockEntity extends BlockEntity implements TickableBlockEntity, IWissenBlockEntity, IExperienceBlockEntity {
 
     public int wissen = 0;
     public int experience = 0;
@@ -51,7 +54,7 @@ public class TotemOfExperienceAbsorptionBlockEntity extends BlockEntity implemen
     }
 
     public TotemOfExperienceAbsorptionBlockEntity(BlockPos pos, BlockState state) {
-        this(WizardsReborn.TOTEM_OF_EXPERIENCE_ABSORPTION_TILE_ENTITY.get(), pos, state);
+        this(WizardsReborn.TOTEM_OF_EXPERIENCE_ABSORPTION_BLOCK_ENTITY.get(), pos, state);
     }
 
     @Override
@@ -110,44 +113,49 @@ public class TotemOfExperienceAbsorptionBlockEntity extends BlockEntity implemen
 
             if (getWissen() > 0) {
                 if (random.nextFloat() < 0.3) {
-                    Particles.create(WizardsReborn.WISP_PARTICLE)
-                            .addVelocity(((random.nextDouble() - 0.5D) / 30) * getStage(), ((random.nextDouble() - 0.5D) / 30) * getStage(), ((random.nextDouble() - 0.5D) / 30) * getStage())
-                            .setAlpha(0.25f, 0).setScale(0.2f * getStage(), 0)
-                            .setColor(Config.wissenColorR(), Config.wissenColorG(), Config.wissenColorB())
+                    ParticleBuilder.create(FluffyFur.WISP_PARTICLE)
+                            .setColorData(ColorParticleData.create(Config.wissenColorR(), Config.wissenColorG(), Config.wissenColorB()).build())
+                            .setTransparencyData(GenericParticleData.create(0.25f, 0).build())
+                            .setScaleData(GenericParticleData.create(0.2f * getStage(), 0).build())
                             .setLifetime(20)
+                            .randomVelocity(0.015f * getStage())
                             .spawn(level, worldPosition.getX() + 0.5F, worldPosition.getY() + 0.5F, worldPosition.getZ() + 0.5F);
                 }
                 if (random.nextFloat() < 0.1) {
-                    Particles.create(WizardsReborn.SPARKLE_PARTICLE)
-                            .addVelocity(((random.nextDouble() - 0.5D) / 30) * getStage(), ((random.nextDouble() - 0.5D) / 30) * getStage(), ((random.nextDouble() - 0.5D) / 30) * getStage())
-                            .setAlpha(0.25f, 0).setScale(0.075f * getStage(), 0)
-                            .setColor(Config.wissenColorR(), Config.wissenColorG(), Config.wissenColorB())
+                    ParticleBuilder.create(FluffyFur.SPARKLE_PARTICLE)
+                            .setColorData(ColorParticleData.create(Config.wissenColorR(), Config.wissenColorG(), Config.wissenColorB()).build())
+                            .setTransparencyData(GenericParticleData.create(0.25f, 0).build())
+                            .setScaleData(GenericParticleData.create(0.075f * getStage(), 0).build())
+                            .randomSpin(0.5f)
                             .setLifetime(30)
-                            .setSpin((0.5f * (float) ((random.nextDouble() - 0.5D) * 2)))
+                            .randomVelocity(0.015f * getStage())
                             .spawn(level, worldPosition.getX() + 0.5F, worldPosition.getY() + 0.5F, worldPosition.getZ() + 0.5F);
                 }
             }
 
             if (getExperience() > 0) {
                 if (random.nextFloat() < 0.1) {
-                    Particles.create(WizardsReborn.SPARKLE_PARTICLE)
-                            .addVelocity(((random.nextDouble() - 0.5D) / 6), (((random.nextDouble() - 0.5D) / 10)) + 0.2f, ((random.nextDouble() - 0.5D) / 6))
-                            .setAlpha(0.25f, 0).setScale(0.05f, 0)
-                            .setColor(0.784f, 1f, 0.560f)
+                    ParticleBuilder.create(FluffyFur.SPARKLE_PARTICLE)
+                            .setColorData(ColorParticleData.create(0.784f, 1f, 0.560f).build())
+                            .setTransparencyData(GenericParticleData.create(0.25f, 0).build())
+                            .setScaleData(GenericParticleData.create(0.05f, 0).build())
+                            .randomSpin(0.1f)
                             .setLifetime(40)
-                            .setSpin((0.1f * (float) ((random.nextDouble() - 0.5D) * 2)))
-                            .enableGravity()
+                            .randomVelocity(0.085f, 0.05f, 0.085f)
+                            .addVelocity(0, 0.2f, 0)
                             .spawn(level, worldPosition.getX() + 0.5F, worldPosition.getY() + 0.5F, worldPosition.getZ() + 0.5F);
                 }
             }
 
             if (getExperience() > 0 && getWissen() < getMaxWissen()) {
                 if (random.nextFloat() < 0.5) {
-                    Particles.create(WizardsReborn.WISP_PARTICLE)
-                            .addVelocity(((random.nextDouble() - 0.5D) / 30) * getStage(), (((random.nextDouble() - 0.5D) / 30) + 0.05f) * getStage(), ((random.nextDouble() - 0.5D) / 30) * getStage())
-                            .setAlpha(0.25f, 0).setScale(0.2f * getStage(), 0)
-                            .setColor(Config.wissenColorR(), Config.wissenColorG(), Config.wissenColorB(), 0.784f, 1f, 0.560f)
+                    ParticleBuilder.create(FluffyFur.WISP_PARTICLE)
+                            .setColorData(ColorParticleData.create(Config.wissenColorR(), Config.wissenColorG(), Config.wissenColorB(), 0.784f, 1f, 0.560f).build())
+                            .setTransparencyData(GenericParticleData.create(0.25f, 0).build())
+                            .setScaleData(GenericParticleData.create(0.05f, 0).build())
                             .setLifetime(60)
+                            .randomVelocity(0.015f * getStage())
+                            .addVelocity(0, 0.05f * getStage(), 0)
                             .spawn(level, worldPosition.getX() + 0.5F, worldPosition.getY() + 0.5F, worldPosition.getZ() + 0.5F);
                 }
 
