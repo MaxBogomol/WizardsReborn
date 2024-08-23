@@ -4,6 +4,7 @@ import mod.maxbogomol.fluffy_fur.FluffyFur;
 import mod.maxbogomol.fluffy_fur.client.particle.ParticleBuilder;
 import mod.maxbogomol.fluffy_fur.client.particle.data.ColorParticleData;
 import mod.maxbogomol.fluffy_fur.client.particle.data.GenericParticleData;
+import mod.maxbogomol.fluffy_fur.common.easing.Easing;
 import mod.maxbogomol.wizards_reborn.WizardsReborn;
 import mod.maxbogomol.wizards_reborn.common.config.Config;
 import net.minecraft.core.BlockPos;
@@ -107,14 +108,22 @@ public class JewelerTableBurstEffectPacket {
                             .setLifetime(20)
                             .randomVelocity(0.05f)
                             .repeat(world, msg.pos.getX() + msg.X, msg.pos.getY() + msg.Y + 0.1875F, msg.pos.getZ() + msg.Z, 20);
-                    ParticleBuilder.create(FluffyFur.WISP_PARTICLE)
+                    ParticleBuilder.create(FluffyFur.SPARKLE_PARTICLE)
                             .setColorData(ColorParticleData.create(Config.wissenColorR(), Config.wissenColorG(), Config.wissenColorB()).build())
                             .setTransparencyData(GenericParticleData.create(0.25f, 0).build())
                             .setScaleData(GenericParticleData.create(0.1f, 0).build())
                             .randomSpin(0.5f)
                             .setLifetime(30)
                             .randomVelocity(0.05f)
-                            .repeat(world, msg.pos.getX() + msg.X, msg.pos.getY() + msg.Y + 0.1875F, msg.pos.getZ() + msg.Z, 20);
+                            .repeat(world, msg.pos.getX() + msg.X, msg.pos.getY() + msg.Y + 0.1875F, msg.pos.getZ() + msg.Z, 10);
+                    ParticleBuilder.create(FluffyFur.SQUARE_PARTICLE)
+                            .setColorData(ColorParticleData.create(Config.wissenColorR(), Config.wissenColorG(), Config.wissenColorB()).build())
+                            .setTransparencyData(GenericParticleData.create(0.25f, 0).build())
+                            .setScaleData(GenericParticleData.create(0, 0.1f, 0).setEasing(Easing.QUINTIC_IN_OUT).build())
+                            .randomSpin(0.5f)
+                            .setLifetime(30)
+                            .randomVelocity(0.05f)
+                            .repeat(world, msg.pos.getX() + msg.X, msg.pos.getY() + msg.Y + 0.1875F, msg.pos.getZ() + msg.Z, 10);
 
                     if (msg.isParticle) {
                         for (int i = 0; i < 25; i++) {
@@ -134,7 +143,7 @@ public class JewelerTableBurstEffectPacket {
                                     y = (float) ((random.nextDouble() / 20) * msg.velY);
                                 }
 
-                                ParticleBuilder.create(FluffyFur.WISP_PARTICLE)
+                                ParticleBuilder.create(FluffyFur.SPARKLE_PARTICLE)
                                         .setColorData(ColorParticleData.create(msg.colorR, msg.colorG, msg.colorB).build())
                                         .setTransparencyData(GenericParticleData.create(0.35f, 0).build())
                                         .setScaleData(GenericParticleData.create(0.2f, 0).build())

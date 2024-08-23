@@ -4,7 +4,9 @@ import mod.maxbogomol.fluffy_fur.FluffyFur;
 import mod.maxbogomol.fluffy_fur.client.particle.ParticleBuilder;
 import mod.maxbogomol.fluffy_fur.client.particle.data.ColorParticleData;
 import mod.maxbogomol.fluffy_fur.client.particle.data.GenericParticleData;
+import mod.maxbogomol.fluffy_fur.client.particle.data.SpinParticleData;
 import mod.maxbogomol.fluffy_fur.common.block.entity.TickableBlockEntity;
+import mod.maxbogomol.fluffy_fur.common.easing.Easing;
 import mod.maxbogomol.wizards_reborn.WizardsReborn;
 import mod.maxbogomol.wizards_reborn.api.arcaneenchantment.ArcaneEnchantment;
 import mod.maxbogomol.wizards_reborn.api.arcaneenchantment.ArcaneEnchantmentUtils;
@@ -178,10 +180,10 @@ public class TotemOfDisenchantBlockEntity extends BlockEntity implements Tickabl
                             .spawn(level, worldPosition.getX() + 0.5F, worldPosition.getY() + 0.5F, worldPosition.getZ() + 0.5F);
                 }
                 if (random.nextFloat() < 0.1) {
-                    ParticleBuilder.create(FluffyFur.SPARKLE_PARTICLE)
+                    ParticleBuilder.create(random.nextBoolean() ? FluffyFur.SQUARE_PARTICLE : FluffyFur.SPARKLE_PARTICLE)
                             .setColorData(ColorParticleData.create(Config.wissenColorR(), Config.wissenColorG(), Config.wissenColorB()).build())
                             .setTransparencyData(GenericParticleData.create(0.25f, 0).build())
-                            .setScaleData(GenericParticleData.create(0.075f * getStage(), 0).build())
+                            .setScaleData(GenericParticleData.create(0, 0.075f * getStage(), 0).setEasing(Easing.QUINTIC_IN_OUT).build())
                             .randomSpin(0.5f)
                             .setLifetime(20)
                             .randomVelocity(0.015f)
@@ -216,7 +218,7 @@ public class TotemOfDisenchantBlockEntity extends BlockEntity implements Tickabl
                                 .setColorData(ColorParticleData.create(r, g, b).build())
                                 .setTransparencyData(GenericParticleData.create(0.75f, 0).build())
                                 .setScaleData(GenericParticleData.create(0.1f, 0).build())
-                                .randomSpin(0.1f)
+                                .setSpinData(SpinParticleData.create(0.1f).build())
                                 .setLifetime(30)
                                 .addVelocity(-X / 20, Y / 100, -Z / 20)
                                 .spawn(level, getBlockPos().getX() + 0.5F + X, getBlockPos().getY() + 0.725F, getBlockPos().getZ() + 0.5F + Z);

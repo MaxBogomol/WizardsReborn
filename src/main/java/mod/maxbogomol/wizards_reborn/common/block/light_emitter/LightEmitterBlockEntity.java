@@ -6,6 +6,7 @@ import mod.maxbogomol.fluffy_fur.client.particle.data.ColorParticleData;
 import mod.maxbogomol.fluffy_fur.client.particle.data.GenericParticleData;
 import mod.maxbogomol.fluffy_fur.common.block.entity.ExposedBlockSimpleInventory;
 import mod.maxbogomol.fluffy_fur.common.block.entity.TickableBlockEntity;
+import mod.maxbogomol.fluffy_fur.common.easing.Easing;
 import mod.maxbogomol.wizards_reborn.WizardsReborn;
 import mod.maxbogomol.wizards_reborn.api.light.ILightBlockEntity;
 import mod.maxbogomol.wizards_reborn.api.light.LightRayHitResult;
@@ -114,10 +115,10 @@ public class LightEmitterBlockEntity extends ExposedBlockSimpleInventory impleme
                             .spawn(level, worldPosition.getX() + 0.5F, worldPosition.getY() + 0.5625F, worldPosition.getZ() + 0.5F);
                 }
                 if (random.nextFloat() < 0.1) {
-                    ParticleBuilder.create(FluffyFur.SPARKLE_PARTICLE)
+                    ParticleBuilder.create(random.nextBoolean() ? FluffyFur.SQUARE_PARTICLE : FluffyFur.SPARKLE_PARTICLE)
                             .setColorData(ColorParticleData.create(color).build())
                             .setTransparencyData(GenericParticleData.create(0.25f, 0).build())
-                            .setScaleData(GenericParticleData.create(0.075f * getStage(), 0).build())
+                            .setScaleData(GenericParticleData.create(0.0375f * getStage(), 0.075f * getStage(), 0).setEasing(Easing.QUINTIC_IN_OUT).build())
                             .randomSpin(0.5f)
                             .setLifetime(30)
                             .randomVelocity(0.005f * getStage())
@@ -286,10 +287,12 @@ public class LightEmitterBlockEntity extends ExposedBlockSimpleInventory impleme
                     .spawn(level, worldPosition.getX() + from.x(), worldPosition.getY() + from.y(), worldPosition.getZ() + from.z());
         }
         if (random.nextFloat() < chance / 2) {
-            ParticleBuilder.create(FluffyFur.SPARKLE_PARTICLE)
+            boolean square = random.nextBoolean();
+            float i = square ? 0.5f : 1f;
+            ParticleBuilder.create(square ? FluffyFur.SQUARE_PARTICLE : FluffyFur.SPARKLE_PARTICLE)
                     .setColorData(ColorParticleData.create(color).build())
                     .setTransparencyData(GenericParticleData.create(0.35f, 0).build())
-                    .setScaleData(GenericParticleData.create(0.1f, 0).build())
+                    .setScaleData(GenericParticleData.create(0.05f * i, 0.1f * i, 0).setEasing(Easing.QUINTIC_IN_OUT).build())
                     .randomSpin(0.5f)
                     .setLifetime(30)
                     .addVelocity((to.x() - from.x()) / 20, (to.y() - from.y()) / 20, (to.z() - from.z()) / 20)

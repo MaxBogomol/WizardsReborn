@@ -45,7 +45,7 @@ public class MagicBladeEffectPacket {
                             .setColorData(ColorParticleData.create(0.431F, 0.305F, 0.662F).build())
                             .setTransparencyData(GenericParticleData.create(0.4f, 0).build())
                             .setScaleData(GenericParticleData.create(0.1f, 0.5f).build())
-                            .randomSpin(0.0f)
+                            .randomSpin(0.1f)
                             .setLifetime(30)
                             .randomVelocity(0.05f)
                             .randomOffset(0.05f)

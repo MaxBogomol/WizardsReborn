@@ -25,6 +25,9 @@ public class NumericalUtils {
     }
 
     public static Component getFluidName(FluidStack fluid, int maxAmount) {
+        if (fluid.isEmpty()) {
+            return Component.translatable("gui.wizards_reborn.empty");
+        }
         return getName(fluid.getDisplayName(), fluid.getAmount(), maxAmount);
     }
 

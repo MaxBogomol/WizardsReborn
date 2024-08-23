@@ -4,6 +4,7 @@ import mod.maxbogomol.fluffy_fur.FluffyFur;
 import mod.maxbogomol.fluffy_fur.client.particle.ParticleBuilder;
 import mod.maxbogomol.fluffy_fur.client.particle.data.ColorParticleData;
 import mod.maxbogomol.fluffy_fur.client.particle.data.GenericParticleData;
+import mod.maxbogomol.fluffy_fur.common.easing.Easing;
 import mod.maxbogomol.wizards_reborn.WizardsReborn;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.world.level.Level;
@@ -72,11 +73,21 @@ public class WissenChargeBurstEffectPacket {
                     ParticleBuilder.create(FluffyFur.SPARKLE_PARTICLE)
                             .setColorData(ColorParticleData.create(msg.r, msg.g, msg.b).build())
                             .setTransparencyData(GenericParticleData.create(0.3f * msg.charge, 0).build())
-                            .setScaleData(GenericParticleData.create(0.3f * msg.charge, 0).build())
+                            .setScaleData(GenericParticleData.create(0.15f * msg.charge, 0.3f * msg.charge, 0).setEasing(Easing.QUINTIC_IN_OUT).build())
+                            .randomSpin(0.3f)
                             .setLifetime(40)
                             .randomVelocity(0.035f)
                             .randomOffset(0.025f)
-                            .repeat(world, msg.posX, msg.posY, msg.posZ, 30, 0.6f);
+                            .repeat(world, msg.posX, msg.posY, msg.posZ, 15, 0.6f);
+                    ParticleBuilder.create(FluffyFur.SQUARE_PARTICLE)
+                            .setColorData(ColorParticleData.create(msg.r, msg.g, msg.b).build())
+                            .setTransparencyData(GenericParticleData.create(0.3f * msg.charge, 0).build())
+                            .setScaleData(GenericParticleData.create(0.05f * msg.charge, 0.1f * msg.charge, 0).setEasing(Easing.QUINTIC_IN_OUT).build())
+                            .randomSpin(0.3f)
+                            .setLifetime(40)
+                            .randomVelocity(0.035f)
+                            .randomOffset(0.025f)
+                            .repeat(world, msg.posX, msg.posY, msg.posZ, 15, 0.6f);
                     ParticleBuilder.create(FluffyFur.SMOKE_PARTICLE)
                             .setColorData(ColorParticleData.create(msg.r, msg.g, msg.b).build())
                             .setTransparencyData(GenericParticleData.create(0.3f * msg.charge, 0).build())

@@ -80,6 +80,7 @@ public class ArcaneCenserBlockEntity extends ExposedBlockSimpleInventory impleme
                             .randomSpin(0.1f)
                             .setLifetime(200, 100)
                             .randomVelocity(0.035f)
+                            .addVelocity(0, 0.05f, 0)
                             .spawn(level, getBlockPos().getX() + 0.5F, getBlockPos().getY() + 1F, getBlockPos().getZ() + 0.5F);
                 }
             }

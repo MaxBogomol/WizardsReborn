@@ -5,6 +5,7 @@ import mod.maxbogomol.fluffy_fur.client.particle.ParticleBuilder;
 import mod.maxbogomol.fluffy_fur.client.particle.data.ColorParticleData;
 import mod.maxbogomol.fluffy_fur.client.particle.data.GenericParticleData;
 import mod.maxbogomol.fluffy_fur.common.block.entity.TickableBlockEntity;
+import mod.maxbogomol.fluffy_fur.common.easing.Easing;
 import mod.maxbogomol.wizards_reborn.WizardsReborn;
 import mod.maxbogomol.wizards_reborn.api.wissen.*;
 import mod.maxbogomol.wizards_reborn.client.sound.ArcaneWorkbenchSoundInstance;
@@ -166,10 +167,10 @@ public class ArcaneWorkbenchBlockEntity extends BlockEntity implements TickableB
                             .spawn(level, getBlockPos().getX() + 0.5F, getBlockPos().getY() + 1.5F, getBlockPos().getZ() + 0.5F);
                 }
                 if (random.nextFloat() < 0.1) {
-                    ParticleBuilder.create(FluffyFur.SPARKLE_PARTICLE)
+                    ParticleBuilder.create(random.nextBoolean() ? FluffyFur.SQUARE_PARTICLE : FluffyFur.SPARKLE_PARTICLE)
                             .setColorData(ColorParticleData.create(Config.wissenColorR(), Config.wissenColorG(), Config.wissenColorB()).build())
                             .setTransparencyData(GenericParticleData.create(0.25f, 0).build())
-                            .setScaleData(GenericParticleData.create(0.1f * getStage(), 0).build())
+                            .setScaleData(GenericParticleData.create(0.05f * getStage(), 0.1f * getStage(), 0).setEasing(Easing.QUINTIC_IN_OUT).build())
                             .randomSpin(0.5f)
                             .setLifetime(30)
                             .randomVelocity(0.015f * getStage())
@@ -189,10 +190,10 @@ public class ArcaneWorkbenchBlockEntity extends BlockEntity implements TickableB
                             .spawn(level, getBlockPos().getX() + 0.5F, getBlockPos().getY() + 1.5F, getBlockPos().getZ() + 0.5F);
                 }
                 if (random.nextFloat() < 0.1) {
-                    ParticleBuilder.create(FluffyFur.SPARKLE_PARTICLE)
+                    ParticleBuilder.create(random.nextBoolean() ? FluffyFur.SQUARE_PARTICLE : FluffyFur.SPARKLE_PARTICLE)
                             .setColorData(ColorParticleData.create(Config.wissenColorR(), Config.wissenColorG(), Config.wissenColorB()).build())
                             .setTransparencyData(GenericParticleData.create(0.75f, 0).build())
-                            .setScaleData(GenericParticleData.create(0.1f * getStage(), 0).build())
+                            .setScaleData(GenericParticleData.create(0.05f * getStage(), 0.1f * getStage(), 0).setEasing(Easing.QUINTIC_IN_OUT).build())
                             .randomSpin(0.1f)
                             .setLifetime(65)
                             .randomVelocity(0.0125f)

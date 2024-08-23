@@ -147,7 +147,7 @@ public class WissenAltarBlockEntity extends ExposedBlockSimpleInventory implemen
                             .spawn(level, worldPosition.getX() + 0.5F, worldPosition.getY() + 1.3125F, worldPosition.getZ() + 0.5F);
                 }
                 if (random.nextFloat() < 0.1) {
-                    ParticleBuilder.create(FluffyFur.SPARKLE_PARTICLE)
+                    ParticleBuilder.create(random.nextBoolean() ? FluffyFur.SQUARE_PARTICLE : FluffyFur.SPARKLE_PARTICLE)
                             .setColorData(ColorParticleData.create(Config.wissenColorR(), Config.wissenColorG(), Config.wissenColorB()).build())
                             .setTransparencyData(GenericParticleData.create(0.25f, 0).build())
                             .setScaleData(GenericParticleData.create(0.05f * getStage(), 0.1f * getStage(), 0).setEasing(Easing.QUINTIC_IN_OUT).build())
@@ -158,12 +158,12 @@ public class WissenAltarBlockEntity extends ExposedBlockSimpleInventory implemen
                 }
             }
 
-            if (wissenInItem > 0) {
+            if (wissenInItem > 0 && getWissen() < getMaxWissen()) {
                 if (random.nextFloat() < 0.2) {
-                    ParticleBuilder.create(FluffyFur.SPARKLE_PARTICLE)
+                    ParticleBuilder.create(random.nextBoolean() ? FluffyFur.SQUARE_PARTICLE : FluffyFur.SPARKLE_PARTICLE)
                             .setColorData(ColorParticleData.create(Config.wissenColorR(), Config.wissenColorG(), Config.wissenColorB()).build())
                             .setTransparencyData(GenericParticleData.create(0.25f, 0).build())
-                            .setScaleData(GenericParticleData.create(0.1f * getStage(), 0).build())
+                            .setScaleData(GenericParticleData.create(0.05f * getStage(), 0.1f * getStage(), 0).setEasing(Easing.QUINTIC_IN_OUT).build())
                             .randomSpin(0.5f)
                             .setLifetime(20)
                             .randomVelocity(0.05f)

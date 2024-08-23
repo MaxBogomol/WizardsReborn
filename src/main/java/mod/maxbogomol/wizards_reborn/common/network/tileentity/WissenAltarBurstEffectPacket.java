@@ -4,6 +4,7 @@ import mod.maxbogomol.fluffy_fur.FluffyFur;
 import mod.maxbogomol.fluffy_fur.client.particle.ParticleBuilder;
 import mod.maxbogomol.fluffy_fur.client.particle.data.ColorParticleData;
 import mod.maxbogomol.fluffy_fur.client.particle.data.GenericParticleData;
+import mod.maxbogomol.fluffy_fur.common.easing.Easing;
 import mod.maxbogomol.wizards_reborn.WizardsReborn;
 import mod.maxbogomol.wizards_reborn.common.config.Config;
 import net.minecraft.core.BlockPos;
@@ -37,14 +38,22 @@ public class WissenAltarBurstEffectPacket extends PositionEffectPacket {
                 .setLifetime(20)
                 .randomVelocity(0.05f)
                 .repeat(level, posX + 0.5F, posY + 1.3125F, posZ + 0.5F, 20);
-        ParticleBuilder.create(FluffyFur.WISP_PARTICLE)
+        ParticleBuilder.create(FluffyFur.SPARKLE_PARTICLE)
                 .setColorData(ColorParticleData.create(Config.wissenColorR(), Config.wissenColorG(), Config.wissenColorB()).build())
                 .setTransparencyData(GenericParticleData.create(0.25f, 0).build())
-                .setScaleData(GenericParticleData.create(0.1f, 0).build())
+                .setScaleData(GenericParticleData.create(0.05f, 0.1f, 0).setEasing(Easing.QUINTIC_IN_OUT).build())
                 .randomSpin(0.5f)
                 .setLifetime(30)
                 .randomVelocity(0.05f)
-                .repeat(level, posX + 0.5F, posY + 1.3125F, posZ + 0.5F, 20);
+                .repeat(level, posX + 0.5F, posY + 1.3125F, posZ + 0.5F, 10);
+        ParticleBuilder.create(FluffyFur.SQUARE_PARTICLE)
+                .setColorData(ColorParticleData.create(Config.wissenColorR(), Config.wissenColorG(), Config.wissenColorB()).build())
+                .setTransparencyData(GenericParticleData.create(0.25f, 0).build())
+                .setScaleData(GenericParticleData.create(0.05f, 0.1f, 0).setEasing(Easing.QUINTIC_IN_OUT).build())
+                .randomSpin(0.5f)
+                .setLifetime(30)
+                .randomVelocity(0.05f)
+                .repeat(level, posX + 0.5F, posY + 1.3125F, posZ + 0.5F, 10);
     }
 
     public static void register(SimpleChannel instance, int index) {

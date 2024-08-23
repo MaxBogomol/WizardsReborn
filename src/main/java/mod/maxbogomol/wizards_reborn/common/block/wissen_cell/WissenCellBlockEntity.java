@@ -92,13 +92,15 @@ public class WissenCellBlockEntity extends ExposedBlockSimpleInventory implement
                             .spawn(level, getBlockPos().getX() + 0.5F, getBlockPos().getY() + 0.9375F, getBlockPos().getZ() + 0.5F);
                 }
                 if (random.nextFloat() < 0.4) {
-                    ParticleBuilder.create(FluffyFur.SPARKLE_PARTICLE)
+                    boolean square = random.nextFloat() < 0.2;
+                    float i = square ? 0.5f : 1f;
+                    ParticleBuilder.create(square ? FluffyFur.SQUARE_PARTICLE : FluffyFur.SPARKLE_PARTICLE)
                             .setColorData(ColorParticleData.create(Config.wissenColorR(), Config.wissenColorG(), Config.wissenColorB(), 0.5f, 0.5f, 0).build())
                             .setTransparencyData(GenericParticleData.create(0.25f, 0).build())
-                            .setScaleData(GenericParticleData.create(0.1f * getStage(), 0.2f * getStage(), 0).setEasing(Easing.QUINTIC_IN_OUT).build())
+                            .setScaleData(GenericParticleData.create(0.1f * getStage() * i, 0.2f * getStage() * i, 0).setEasing(Easing.QUINTIC_IN_OUT).build())
                             .randomSpin(0.1f)
                             .setLifetime(100)
-                            .randomVelocity(0.025f * getStage(), 0.025f * getStage(), 0.025f * getStage())
+                            .randomVelocity(0.025f * getStage() * i)
                             .spawn(level, getBlockPos().getX() + 0.5F, getBlockPos().getY() + 0.9375F, getBlockPos().getZ() + 0.5F);
                 }
             }

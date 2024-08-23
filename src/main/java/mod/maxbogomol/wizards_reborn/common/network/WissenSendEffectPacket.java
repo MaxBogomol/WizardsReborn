@@ -4,6 +4,7 @@ import mod.maxbogomol.fluffy_fur.FluffyFur;
 import mod.maxbogomol.fluffy_fur.client.particle.ParticleBuilder;
 import mod.maxbogomol.fluffy_fur.client.particle.data.ColorParticleData;
 import mod.maxbogomol.fluffy_fur.client.particle.data.GenericParticleData;
+import mod.maxbogomol.fluffy_fur.common.easing.Easing;
 import mod.maxbogomol.wizards_reborn.WizardsReborn;
 import mod.maxbogomol.wizards_reborn.client.config.ClientConfig;
 import mod.maxbogomol.wizards_reborn.client.event.ClientTickHandler;
@@ -149,7 +150,17 @@ public class WissenSendEffectPacket {
                                 ParticleBuilder.create(FluffyFur.SPARKLE_PARTICLE)
                                         .setColorData(ColorParticleData.create(msg.colorR, msg.colorG, msg.colorB).build())
                                         .setTransparencyData(GenericParticleData.create(0.125f, 0).build())
-                                        .setScaleData(GenericParticleData.create(0.2f, 0).build())
+                                        .setScaleData(GenericParticleData.create(0.1f, 0.2f, 0).setEasing(Easing.QUINTIC_IN_OUT).build())
+                                        .randomSpin(0.5f)
+                                        .setLifetime(30)
+                                        .randomVelocity(0.02f)
+                                        .spawn(world, msg.posFromX - (x * i), msg.posFromY - (y * i), msg.posFromZ - (z * i));
+                            }
+                            if (random.nextFloat() < 0.1) {
+                                ParticleBuilder.create(FluffyFur.SQUARE_PARTICLE)
+                                        .setColorData(ColorParticleData.create(msg.colorR, msg.colorG, msg.colorB).build())
+                                        .setTransparencyData(GenericParticleData.create(0.125f, 0).build())
+                                        .setScaleData(GenericParticleData.create(0.05f, 0.1f, 0).setEasing(Easing.QUINTIC_IN_OUT).build())
                                         .randomSpin(0.5f)
                                         .setLifetime(30)
                                         .randomVelocity(0.02f)

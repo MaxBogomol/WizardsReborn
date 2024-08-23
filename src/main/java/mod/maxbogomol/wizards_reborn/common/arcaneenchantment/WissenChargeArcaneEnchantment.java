@@ -4,6 +4,7 @@ import mod.maxbogomol.fluffy_fur.FluffyFur;
 import mod.maxbogomol.fluffy_fur.client.particle.ParticleBuilder;
 import mod.maxbogomol.fluffy_fur.client.particle.data.ColorParticleData;
 import mod.maxbogomol.fluffy_fur.client.particle.data.GenericParticleData;
+import mod.maxbogomol.fluffy_fur.common.easing.Easing;
 import mod.maxbogomol.wizards_reborn.WizardsReborn;
 import mod.maxbogomol.wizards_reborn.api.arcaneenchantment.ArcaneEnchantment;
 import mod.maxbogomol.wizards_reborn.api.arcaneenchantment.ArcaneEnchantmentType;
@@ -100,10 +101,12 @@ public class WissenChargeArcaneEnchantment extends ArcaneEnchantment {
                                 }
 
                                 if (random.nextFloat() < 0.3f) {
-                                    ParticleBuilder.create(FluffyFur.SPARKLE_PARTICLE)
+                                    boolean square = random.nextBoolean();
+                                    float i = square ? 0.5f : 1f;
+                                    ParticleBuilder.create(square ? FluffyFur.SQUARE_PARTICLE : FluffyFur.SPARKLE_PARTICLE)
                                             .setColorData(ColorParticleData.create(color).build())
                                             .setTransparencyData(GenericParticleData.create(0.3f * charge, 0).build())
-                                            .setScaleData(GenericParticleData.create(0.15f * charge, 0).build())
+                                            .setScaleData(GenericParticleData.create(0.075f * charge * i, 0.15f * charge * i, 0).setEasing(Easing.QUINTIC_IN_OUT).build())
                                             .randomSpin(0.3f)
                                             .setLifetime(30)
                                             .randomVelocity(0.02f)

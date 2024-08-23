@@ -44,7 +44,7 @@ public class AltarOfDroughtBreakEffectPacket {
                             .randomVelocity(0.1f)
                             .randomOffset(0.05f)
                             .repeat(world, msg.pos.getX() + 0.5F, msg.pos.getY() + 0.5F, msg.pos.getZ() + 0.5F, 5);
-                    ParticleBuilder.create(FluffyFur.WISP_PARTICLE)
+                    ParticleBuilder.create(FluffyFur.SPARKLE_PARTICLE)
                             .setColorData(ColorParticleData.create(Config.wissenColorR(), Config.wissenColorG(), Config.wissenColorB()).build())
                             .setTransparencyData(GenericParticleData.create(0.25f, 0).build())
                             .setScaleData(GenericParticleData.create(0.2f, 0).build())

@@ -4,7 +4,9 @@ import mod.maxbogomol.fluffy_fur.FluffyFur;
 import mod.maxbogomol.fluffy_fur.client.particle.ParticleBuilder;
 import mod.maxbogomol.fluffy_fur.client.particle.data.ColorParticleData;
 import mod.maxbogomol.fluffy_fur.client.particle.data.GenericParticleData;
+import mod.maxbogomol.fluffy_fur.client.particle.data.SpinParticleData;
 import mod.maxbogomol.fluffy_fur.common.block.entity.TickableBlockEntity;
+import mod.maxbogomol.fluffy_fur.common.easing.Easing;
 import mod.maxbogomol.wizards_reborn.WizardsReborn;
 import mod.maxbogomol.wizards_reborn.api.monogram.Monogram;
 import mod.maxbogomol.wizards_reborn.api.wissen.IWissenWandFunctionalBlockEntity;
@@ -80,15 +82,15 @@ public class EngravedWisestoneBlockEntity extends BlockEntity implements Tickabl
                     ParticleBuilder.create(FluffyFur.CUBE_PARTICLE)
                             .setColorData(ColorParticleData.create(r, g, b, random.nextFloat(), random.nextFloat(), random.nextFloat()).build())
                             .setTransparencyData(GenericParticleData.create(0.75f, 0).build())
-                            .setScaleData(GenericParticleData.create(0.1f, 0).build())
-                            .randomSpin(0.1f)
+                            .setScaleData(GenericParticleData.create(0, 0.1f, 0).setEasing(Easing.SINE_IN_OUT).build())
+                            .setSpinData(SpinParticleData.create(0.1f, 0).setSpinOffset(0.1f * (float) ticks).build())
                             .setLifetime(30)
                             .randomVelocity(0.005f)
                             .spawn(level, getBlockPos().getX() + 0.5F + X, getBlockPos().getY() + (glowTicks / 20f), getBlockPos().getZ() + 0.5F + Z);
                     ParticleBuilder.create(FluffyFur.WISP_PARTICLE)
                             .setColorData(ColorParticleData.create(r, g, b, random.nextFloat(), random.nextFloat(), random.nextFloat()).build())
                             .setTransparencyData(GenericParticleData.create(0.75f, 0).build())
-                            .setScaleData(GenericParticleData.create(0.1f, 0).build())
+                            .setScaleData(GenericParticleData.create(0, 0.1f, 0).setEasing(Easing.SINE_IN_OUT).build())
                             .randomSpin(0.1f)
                             .setLifetime(40)
                             .randomVelocity(0.005f)
