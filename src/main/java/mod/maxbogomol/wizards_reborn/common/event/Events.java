@@ -54,16 +54,14 @@ public class Events {
 
     @SubscribeEvent
     public void registerCustomAI(EntityJoinLevelEvent event) {
-        if (event.getEntity() instanceof LivingEntity && !event.getLevel().isClientSide) {
-            if (event.getEntity() instanceof Player) {
-                PacketHandler.sendTo((ServerPlayer) event.getEntity(), new KnowledgeUpdatePacket((Player)event.getEntity()));
-            }
+        if (event.getEntity() instanceof Player player && !event.getLevel().isClientSide()) {
+            PacketHandler.sendTo(player, new KnowledgeUpdatePacket(player));
         }
     }
 
     @SubscribeEvent
     public void playerTick(TickEvent.PlayerTickEvent event) {
-        if (!event.player.level().isClientSide) {
+        if (!event.player.level().isClientSide()) {
             Player player = event.player;
 
             for (Knowledge knowledge : Knowledges.getKnowledges()) {
@@ -87,7 +85,7 @@ public class Events {
     }
 
     public void magicArmor(LivingDamageEvent event) {
-        if (!event.getEntity().level().isClientSide) {
+        if (!event.getEntity().level().isClientSide()) {
             float scale = 1;
             AttributeInstance attr = event.getEntity().getAttribute(WizardsReborn.MAGIC_ARMOR.get());
 

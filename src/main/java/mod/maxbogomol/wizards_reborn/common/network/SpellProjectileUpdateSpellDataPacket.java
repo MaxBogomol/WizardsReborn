@@ -35,7 +35,7 @@ public class SpellProjectileUpdateSpellDataPacket {
             ctx.get().enqueueWork(new Runnable() {
                 @Override
                 public void run() {
-                    Level world = WizardsReborn.proxy.getWorld();
+                    Level world = WizardsReborn.proxy.getLevel();
 
                     Entity entity = ((ClientLevel) world).entityStorage.getEntityGetter().get(packet.uuid);
                     if (entity instanceof SpellProjectileEntity projectile) {

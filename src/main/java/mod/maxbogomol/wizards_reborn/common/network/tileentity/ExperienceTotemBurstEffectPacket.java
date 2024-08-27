@@ -51,7 +51,7 @@ public class ExperienceTotemBurstEffectPacket {
             ctx.get().enqueueWork(new Runnable() {
                 @Override
                 public void run() {
-                    Level world = WizardsReborn.proxy.getWorld();
+                    Level world = WizardsReborn.proxy.getLevel();
 
                     if (world.getBlockEntity(msg.pos) instanceof ExperienceTotemBlockEntity totem) {
                         totem.addBurst(new Vec3(msg.X, msg.Y, msg.Z), msg.pos.getCenter());

@@ -1,6 +1,7 @@
 package mod.maxbogomol.wizards_reborn;
 
 import com.google.common.collect.ImmutableMap;
+import mod.maxbogomol.fluffy_fur.FluffyFur;
 import mod.maxbogomol.fluffy_fur.client.particle.GenericParticleType;
 import mod.maxbogomol.fluffy_fur.common.block.WaterloggableLeverBlock;
 import mod.maxbogomol.fluffy_fur.common.block.sign.CustomCeilingHangingSignBlock;
@@ -30,20 +31,9 @@ import mod.maxbogomol.wizards_reborn.api.skin.Skin;
 import mod.maxbogomol.wizards_reborn.api.skin.Skins;
 import mod.maxbogomol.wizards_reborn.api.spell.Spell;
 import mod.maxbogomol.wizards_reborn.api.spell.Spells;
-import mod.maxbogomol.wizards_reborn.client.arcanemicon.ArcanemiconChapters;
 import mod.maxbogomol.wizards_reborn.client.config.ClientConfig;
-import mod.maxbogomol.wizards_reborn.client.event.ClientEvents;
-import mod.maxbogomol.wizards_reborn.client.event.ClientTickHandler;
-import mod.maxbogomol.wizards_reborn.client.event.ClientWorldEvent;
-import mod.maxbogomol.wizards_reborn.client.event.KeyBindHandler;
-import mod.maxbogomol.wizards_reborn.client.gui.HUDEventHandler;
-import mod.maxbogomol.wizards_reborn.client.gui.TooltipEventHandler;
 import mod.maxbogomol.wizards_reborn.client.gui.container.*;
-import mod.maxbogomol.wizards_reborn.client.gui.screen.*;
 import mod.maxbogomol.wizards_reborn.client.particle.LeavesParticleType;
-import mod.maxbogomol.wizards_reborn.client.render.WorldRenderHandler;
-import mod.maxbogomol.wizards_reborn.client.render.curio.*;
-import mod.maxbogomol.wizards_reborn.client.render.item.WandCrystalsModels;
 import mod.maxbogomol.wizards_reborn.common.alchemypotion.RegisterAlchemyPotions;
 import mod.maxbogomol.wizards_reborn.common.arcaneenchantment.*;
 import mod.maxbogomol.wizards_reborn.common.block.*;
@@ -212,7 +202,6 @@ import mod.maxbogomol.wizards_reborn.common.world.tree.ArcaneWoodTree;
 import mod.maxbogomol.wizards_reborn.common.world.tree.ArcaneWoodTrunkPlacer;
 import mod.maxbogomol.wizards_reborn.common.world.tree.InnocentWoodTree;
 import mod.maxbogomol.wizards_reborn.common.world.tree.SupplierBlockStateProvider;
-import net.minecraft.client.gui.screens.MenuScreens;
 import net.minecraft.commands.synchronization.ArgumentTypeInfo;
 import net.minecraft.commands.synchronization.ArgumentTypeInfos;
 import net.minecraft.commands.synchronization.SingletonArgumentInfo;
@@ -273,14 +262,14 @@ import net.minecraftforge.fml.DistExecutor;
 import net.minecraftforge.fml.ModLoadingContext;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.config.ModConfig;
-import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.joml.Vector3f;
-import top.theillusivec4.curios.api.client.CuriosRendererRegistry;
 
 import java.awt.*;
 
@@ -291,6 +280,7 @@ public class WizardsReborn {
     public static final int VERSION_NUMBER = 20;
 
     public static final ISidedProxy proxy = DistExecutor.unsafeRunForDist(() -> ClientProxy::new, () -> ServerProxy::new);
+    public static final Logger LOGGER = LogManager.getLogger();
 
     public static final DeferredRegister<Item> ITEMS = DeferredRegister.create(ForgeRegistries.ITEMS, MOD_ID);
     public static final DeferredRegister<Block> BLOCKS = DeferredRegister.create(ForgeRegistries.BLOCKS, MOD_ID);
@@ -2143,24 +2133,12 @@ public class WizardsReborn {
         ModLoadingContext.get().registerConfig(ModConfig.Type.SERVER, ServerConfig.SPEC);
 
         DistExecutor.unsafeCallWhenOn(Dist.CLIENT, () -> () -> {
-            setupWandCrystalsModels();
-            WissenWandItem.setupTooltips();
-
-            forgeBus.addListener(ClientTickHandler::clientTickEnd);
-            forgeBus.addListener(WorldRenderHandler::onRenderWorldLast);
-            forgeBus.addListener(ClientWorldEvent::onTick);
-            forgeBus.addListener(ClientWorldEvent::onRender);
-            forgeBus.addListener(HUDEventHandler::onDrawScreenPost);
-            forgeBus.addListener(TooltipEventHandler::onPostTooltipEvent);
-            forgeBus.addListener(KeyBindHandler::onInput);
-            forgeBus.addListener(KeyBindHandler::onKey);
-            forgeBus.addListener(KeyBindHandler::onMouseKey);
-            MinecraftForge.EVENT_BUS.register(new ClientEvents());
+            WizardsRebornClient.ClientOnly.clientInit();
             return new Object();
         });
 
         eventBus.addListener(this::setup);
-        eventBus.addListener(this::clientSetup);
+        eventBus.addListener(WizardsRebornClient::clientSetup);
 
         WizardsRebornItemGroup.register(eventBus);
         eventBus.addListener(WizardsRebornItemGroup::addCreative);
@@ -2170,6 +2148,7 @@ public class WizardsReborn {
     }
 
     private void setup(final FMLCommonSetupEvent event) {
+        hi();
         PacketHandler.init();
         RegisterAlchemyPotions.init();
         RegisterKnowledges.init();
@@ -2278,36 +2257,9 @@ public class WizardsReborn {
         });
     }
 
-    private void clientSetup(final FMLClientSetupEvent event) {
-        event.enqueueWork(() -> {
-            ArcanemiconChapters.init();
-
-            MenuScreens.register(ARCANE_WORKBENCH_CONTAINER.get(), ArcaneWorkbenchScreen::new);
-            MenuScreens.register(JEWELER_TABLE_CONTAINER.get(), JewelerTableScreen::new);
-            MenuScreens.register(ALCHEMY_FURNACE_CONTAINER.get(), AlchemyFurnaceScreen::new);
-            MenuScreens.register(ALCHEMY_MACHINE_CONTAINER.get(), AlchemyMachineScreen::new);
-            MenuScreens.register(ARCANE_HOPPER_CONTAINER.get(), ArcaneHopperScreen::new);
-            MenuScreens.register(ITEM_SORTER_CONTAINER.get(), ItemSorterScreen::new);
-            MenuScreens.register(TOTEM_OF_DISENCHANT_CONTAINER.get(), TotemOfDisenchantScreen::new);
-            MenuScreens.register(RUNIC_PEDESTAL_CONTAINER.get(), RunicPedestalScreen::new);
-            MenuScreens.register(CRYSTAL_BAG_CONTAINER.get(), CrystalBagScreen::new);
-            MenuScreens.register(ALCHEMY_BAG_CONTAINER.get(), AlchemyBagScreen::new);
-
-            CuriosRendererRegistry.register(ARCANUM_AMULET.get(), AmuletRenderer::new);
-            CuriosRendererRegistry.register(ARCACITE_AMULET.get(), AmuletRenderer::new);
-            CuriosRendererRegistry.register(LEATHER_BELT.get(), BeltRenderer::new);
-            CuriosRendererRegistry.register(ARCANE_FORTRESS_BELT.get(), BeltRenderer::new);
-            CuriosRendererRegistry.register(INVENTOR_WIZARD_BELT.get(), BeltRenderer::new);
-            CuriosRendererRegistry.register(CRYSTAL_BAG.get(), BagRenderer::new);
-            CuriosRendererRegistry.register(ALCHEMY_BAG.get(), BagRenderer::new);
-            CuriosRendererRegistry.register(LEATHER_COLLAR.get(), CollarRenderer::new);
-            CuriosRendererRegistry.register(BROWN_MUSHROOM_CAP.get(), MushroomCapRenderer::new);
-            CuriosRendererRegistry.register(RED_MUSHROOM_CAP.get(), MushroomCapRenderer::new);
-            CuriosRendererRegistry.register(CRIMSON_FUNGUS_CAP.get(), MushroomCapRenderer::new);
-            CuriosRendererRegistry.register(WARPED_FUNGUS_CAP.get(), MushroomCapRenderer::new);
-            CuriosRendererRegistry.register(MOR_CAP.get(), MushroomCapRenderer::new);
-            CuriosRendererRegistry.register(ELDER_MOR_CAP.get(), MushroomCapRenderer::new);
-        });
+    public static void hi() {
+        FluffyFur.LOGGER.info("Hi Wizard's Reborn :3");
+        LOGGER.info("Hi Fluffy Fur :3");
     }
 
     public static void setupCrystals() {
@@ -2464,38 +2416,6 @@ public class WizardsReborn {
         CrystalRituals.register(CRYSTAL_GROWTH_ACCELERATION_CRYSTAL_RITUAL);
         CrystalRituals.register(CRYSTAL_INFUSION_CRYSTAL_RITUAL);
         //CrystalRituals.register(STONE_CALENDAR_CRYSTAL_RITUAL);
-    }
-
-    public static void setupWandCrystalsModels() {
-        WandCrystalsModels.addCrystal(MOD_ID+":earth_crystal");
-        WandCrystalsModels.addCrystal(MOD_ID+":water_crystal");
-        WandCrystalsModels.addCrystal(MOD_ID+":air_crystal");
-        WandCrystalsModels.addCrystal(MOD_ID+":fire_crystal");
-        WandCrystalsModels.addCrystal(MOD_ID+":void_crystal");
-
-        WandCrystalsModels.addCrystal(MOD_ID+":faceted_earth_crystal");
-        WandCrystalsModels.addCrystal(MOD_ID+":faceted_water_crystal");
-        WandCrystalsModels.addCrystal(MOD_ID+":faceted_air_crystal");
-        WandCrystalsModels.addCrystal(MOD_ID+":faceted_fire_crystal");
-        WandCrystalsModels.addCrystal(MOD_ID+":faceted_void_crystal");
-
-        WandCrystalsModels.addCrystal(MOD_ID+":advanced_earth_crystal");
-        WandCrystalsModels.addCrystal(MOD_ID+":advanced_water_crystal");
-        WandCrystalsModels.addCrystal(MOD_ID+":advanced_air_crystal");
-        WandCrystalsModels.addCrystal(MOD_ID+":advanced_fire_crystal");
-        WandCrystalsModels.addCrystal(MOD_ID+":advanced_void_crystal");
-
-        WandCrystalsModels.addCrystal(MOD_ID+":masterful_earth_crystal");
-        WandCrystalsModels.addCrystal(MOD_ID+":masterful_water_crystal");
-        WandCrystalsModels.addCrystal(MOD_ID+":masterful_air_crystal");
-        WandCrystalsModels.addCrystal(MOD_ID+":masterful_fire_crystal");
-        WandCrystalsModels.addCrystal(MOD_ID+":masterful_void_crystal");
-
-        WandCrystalsModels.addCrystal(MOD_ID+":pure_earth_crystal");
-        WandCrystalsModels.addCrystal(MOD_ID+":pure_water_crystal");
-        WandCrystalsModels.addCrystal(MOD_ID+":pure_air_crystal");
-        WandCrystalsModels.addCrystal(MOD_ID+":pure_fire_crystal");
-        WandCrystalsModels.addCrystal(MOD_ID+":pure_void_crystal");
     }
 
     public static void setupCrystalsItems() {

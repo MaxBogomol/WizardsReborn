@@ -40,7 +40,7 @@ public class FlowerFertilizerEffectPacket {
             ctx.get().enqueueWork(new Runnable() {
                 @Override
                 public void run() {
-                    Level world = WizardsReborn.proxy.getWorld();
+                    Level world = WizardsReborn.proxy.getLevel();
                     ParticleBuilder.create(FluffyFur.WISP_PARTICLE)
                             .setColorData(ColorParticleData.create(0.545F, 0.875F, 0.522F).build())
                             .setTransparencyData(GenericParticleData.create(0.4f, 0).build())

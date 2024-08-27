@@ -30,7 +30,7 @@ public class WissenAltarBurstEffectPacket extends PositionEffectPacket {
     @OnlyIn(Dist.CLIENT)
     @Override
     public void execute(Supplier<NetworkEvent.Context> context) {
-        Level level = WizardsReborn.proxy.getWorld();
+        Level level = WizardsReborn.proxy.getLevel();
         ParticleBuilder.create(FluffyFur.WISP_PARTICLE)
                 .setColorData(ColorParticleData.create(Config.wissenColorR(), Config.wissenColorG(), Config.wissenColorB()).build())
                 .setTransparencyData(GenericParticleData.create(0.125f, 0).build())

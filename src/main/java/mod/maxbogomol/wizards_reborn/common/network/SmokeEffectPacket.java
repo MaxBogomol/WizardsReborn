@@ -62,7 +62,7 @@ public class SmokeEffectPacket {
             ctx.get().enqueueWork(new Runnable() {
                 @Override
                 public void run() {
-                    Level world = WizardsReborn.proxy.getWorld();
+                    Level world = WizardsReborn.proxy.getLevel();
 
                     for (int i = 0; i < 40; i++) {
                         ParticleBuilder.create(FluffyFur.SMOKE_PARTICLE)

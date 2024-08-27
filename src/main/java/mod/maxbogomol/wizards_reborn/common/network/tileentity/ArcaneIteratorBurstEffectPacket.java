@@ -34,7 +34,7 @@ public class ArcaneIteratorBurstEffectPacket {
             ctx.get().enqueueWork(new Runnable() {
                 @Override
                 public void run() {
-                    Level world = WizardsReborn.proxy.getWorld();
+                    Level world = WizardsReborn.proxy.getLevel();
 
                     for (int i = 0; i < msg.tag.size(); i++) {
                         for (int ii = 0; ii < 20; ii++) {

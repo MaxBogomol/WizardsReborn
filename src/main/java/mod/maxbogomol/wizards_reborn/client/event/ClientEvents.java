@@ -1,6 +1,7 @@
 package mod.maxbogomol.wizards_reborn.client.event;
 
 import com.google.common.collect.Multimap;
+import mod.maxbogomol.fluffy_fur.client.tooltip.TooltipModifierHandler;
 import mod.maxbogomol.wizards_reborn.WizardsReborn;
 import mod.maxbogomol.wizards_reborn.api.arcaneenchantment.ArcaneEnchantmentUtils;
 import mod.maxbogomol.wizards_reborn.client.arcanemicon.ArcanemiconChapters;
@@ -18,7 +19,6 @@ import net.minecraftforge.eventbus.api.EventPriority;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 
 public class ClientEvents {
-    public static int attributeModifierTooltip = 0;
 
     @SubscribeEvent
     public void loggedPlayer(PlayerEvent.PlayerLoggedInEvent event) {
@@ -42,7 +42,7 @@ public class ClientEvents {
                 }
 
                 if (draw) {
-                    int i = attributeModifierTooltip + 1;
+                    int i = TooltipModifierHandler.getAttributeTooltipSize() + 1;
                     if (i < event.getToolTip().size()) {
                         event.getToolTip().addAll(i, ArcaneEnchantmentUtils.modifiersAppendHoverText(stack, player.level(), event.getFlags()));
                     }

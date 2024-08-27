@@ -40,7 +40,7 @@ public class InnocentWoodToolsEffectPacket {
             ctx.get().enqueueWork(new Runnable() {
                 @Override
                 public void run() {
-                    Level world = WizardsReborn.proxy.getWorld();
+                    Level world = WizardsReborn.proxy.getLevel();
                     ParticleBuilder.create(FluffyFur.SMOKE_PARTICLE)
                             .setColorData(ColorParticleData.create(0.694F, 0.274F, 0.309F).build())
                             .setTransparencyData(GenericParticleData.create(0, 0.5f).build())

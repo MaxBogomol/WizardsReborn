@@ -47,7 +47,7 @@ public class HolyCrossSpellEffectPacket {
             ctx.get().enqueueWork(new Runnable() {
                 @Override
                 public void run() {
-                    Level world = WizardsReborn.proxy.getWorld();
+                    Level world = WizardsReborn.proxy.getLevel();
 
                     for (int i = 0; i < 4; i++) {
                         if (random.nextFloat() < 0.6f) {

@@ -37,7 +37,7 @@ public class WissenTranslatorSendEffectPacket {
             ctx.get().enqueueWork(new Runnable() {
                 @Override
                 public void run() {
-                    Level world = WizardsReborn.proxy.getWorld();
+                    Level world = WizardsReborn.proxy.getLevel();
 
                     ClientTickHandler.wissenCount++;
 

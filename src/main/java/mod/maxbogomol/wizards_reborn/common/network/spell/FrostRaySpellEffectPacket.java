@@ -48,7 +48,7 @@ public class FrostRaySpellEffectPacket {
             ctx.get().enqueueWork(new Runnable() {
                 @Override
                 public void run() {
-                    Level world = WizardsReborn.proxy.getWorld();
+                    Level world = WizardsReborn.proxy.getLevel();
                     ParticleBuilder.create(FluffyFur.SPARKLE_PARTICLE)
                             .setColorData(ColorParticleData.create(msg.colorR, msg.colorG, msg.colorB).build())
                             .setTransparencyData(GenericParticleData.create(0.3f, 0).build())

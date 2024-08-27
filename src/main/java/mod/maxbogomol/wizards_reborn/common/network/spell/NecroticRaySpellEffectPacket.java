@@ -61,7 +61,7 @@ public class NecroticRaySpellEffectPacket {
             ctx.get().enqueueWork(new Runnable() {
                 @Override
                 public void run() {
-                    Level world = WizardsReborn.proxy.getWorld();
+                    Level world = WizardsReborn.proxy.getLevel();
 
                     Vec3 pos = new Vec3(msg.posToX, msg.posToY, msg.posToZ);
                     for (int i = 0; i < 10; i++) {

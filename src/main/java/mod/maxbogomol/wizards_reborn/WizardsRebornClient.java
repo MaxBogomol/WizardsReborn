@@ -4,7 +4,17 @@ import com.mojang.blaze3d.platform.InputConstants;
 import com.mojang.blaze3d.vertex.DefaultVertexFormat;
 import mod.maxbogomol.fluffy_fur.FluffyFurClient;
 import mod.maxbogomol.fluffy_fur.client.particle.GenericParticleType;
+import mod.maxbogomol.fluffy_fur.client.tooltip.AttributeTooltipModifier;
+import mod.maxbogomol.fluffy_fur.client.tooltip.TooltipModifierHandler;
+import mod.maxbogomol.wizards_reborn.client.arcanemicon.ArcanemiconChapters;
 import mod.maxbogomol.wizards_reborn.client.config.ClientConfig;
+import mod.maxbogomol.wizards_reborn.client.event.ClientEvents;
+import mod.maxbogomol.wizards_reborn.client.event.ClientTickHandler;
+import mod.maxbogomol.wizards_reborn.client.event.ClientWorldEvent;
+import mod.maxbogomol.wizards_reborn.client.event.KeyBindHandler;
+import mod.maxbogomol.wizards_reborn.client.gui.HUDEventHandler;
+import mod.maxbogomol.wizards_reborn.client.gui.TooltipEventHandler;
+import mod.maxbogomol.wizards_reborn.client.gui.screen.*;
 import mod.maxbogomol.wizards_reborn.client.model.armor.*;
 import mod.maxbogomol.wizards_reborn.client.model.block.AlchemyBottleModel;
 import mod.maxbogomol.wizards_reborn.client.model.block.AlchemyFlaskModel;
@@ -14,25 +24,27 @@ import mod.maxbogomol.wizards_reborn.client.model.curio.*;
 import mod.maxbogomol.wizards_reborn.client.model.sniffalo.SniffaloArcaneArmorModel;
 import mod.maxbogomol.wizards_reborn.client.model.sniffalo.SniffaloCarpetArmorModel;
 import mod.maxbogomol.wizards_reborn.client.model.sniffalo.SniffaloSaddleArmorModel;
-import mod.maxbogomol.wizards_reborn.client.particle.*;
+import mod.maxbogomol.wizards_reborn.client.particle.LeavesParticleType;
+import mod.maxbogomol.wizards_reborn.client.render.WorldRenderHandler;
+import mod.maxbogomol.wizards_reborn.client.render.block.*;
+import mod.maxbogomol.wizards_reborn.client.render.curio.*;
 import mod.maxbogomol.wizards_reborn.client.render.entity.*;
 import mod.maxbogomol.wizards_reborn.client.render.fluid.FluidCuboid;
 import mod.maxbogomol.wizards_reborn.client.render.item.*;
-import mod.maxbogomol.wizards_reborn.client.render.block.*;
 import mod.maxbogomol.wizards_reborn.common.block.CustomBlockColor;
 import mod.maxbogomol.wizards_reborn.common.entity.CustomBoatEntity;
 import mod.maxbogomol.wizards_reborn.common.integration.farmersdelight.FarmersDelightIntegration;
-import mod.maxbogomol.wizards_reborn.common.item.equipment.AlchemyPotionItem;
-import mod.maxbogomol.wizards_reborn.common.item.equipment.KnowledgeSrollItem;
-import mod.maxbogomol.wizards_reborn.common.item.equipment.RunicWisestonePlateItem;
+import mod.maxbogomol.wizards_reborn.common.item.equipment.*;
 import mod.maxbogomol.wizards_reborn.common.item.equipment.curio.LeatherCollarItem;
 import net.minecraft.client.KeyMapping;
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.gui.screens.MenuScreens;
 import net.minecraft.client.model.BoatModel;
 import net.minecraft.client.model.ChestBoatModel;
 import net.minecraft.client.model.ChestRaftModel;
 import net.minecraft.client.model.RaftModel;
 import net.minecraft.client.model.geom.ModelLayerLocation;
+import net.minecraft.client.particle.ParticleEngine;
 import net.minecraft.client.renderer.ItemBlockRenderTypes;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.ShaderInstance;
@@ -45,14 +57,21 @@ import net.minecraft.client.resources.model.ModelManager;
 import net.minecraft.client.resources.model.ModelResourceLocation;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.sounds.Music;
+import net.minecraft.world.entity.ai.attributes.Attribute;
+import net.minecraft.world.entity.ai.attributes.AttributeModifier;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.TooltipFlag;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.client.event.*;
 import net.minecraftforge.client.settings.KeyConflictContext;
+import net.minecraftforge.common.MinecraftForge;
+import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import org.joml.Vector3f;
 import org.lwjgl.glfw.GLFW;
+import top.theillusivec4.curios.api.client.CuriosRendererRegistry;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -81,8 +100,8 @@ public class WizardsRebornClient {
     public static final ModelLayerLocation MAGNIFICENT_MAID_ARMOR_LAYER = new ModelLayerLocation(new ResourceLocation(WizardsReborn.MOD_ID, "magnificent_maid_armor"), "main");
     public static final ModelLayerLocation MAGNIFICENT_MAID_SLIM_ARMOR_LAYER = new ModelLayerLocation(new ResourceLocation(WizardsReborn.MOD_ID, "magnificent_maid_slim_armor"), "main");
 
-    public static final ModelLayerLocation SNIFFALO_SADDLE_ARMOR_LAYER = new ModelLayerLocation(new ResourceLocation(WizardsReborn.MOD_ID, "sniffalo_saddle_armor"), "main");
-    public static final ModelLayerLocation SNIFFALO_CARPET_ARMOR_LAYER = new ModelLayerLocation(new ResourceLocation(WizardsReborn.MOD_ID, "sniffalo_carpet_armor"), "main");
+    public static final ModelLayerLocation SNIFFALO_SADDLE_LAYER = new ModelLayerLocation(new ResourceLocation(WizardsReborn.MOD_ID, "sniffalo_saddle"), "main");
+    public static final ModelLayerLocation SNIFFALO_CARPET_LAYER = new ModelLayerLocation(new ResourceLocation(WizardsReborn.MOD_ID, "sniffalo_carpet"), "main");
     public static final ModelLayerLocation SNIFFALO_ARCANE_ARMOR_LAYER = new ModelLayerLocation(new ResourceLocation(WizardsReborn.MOD_ID, "sniffalo_arcane_armor"), "main");
 
     public static final ModelLayerLocation ALCHEMY_VIAL_LAYER = new ModelLayerLocation(new ResourceLocation(WizardsReborn.MOD_ID, "alchemy_vial"), "main");
@@ -98,8 +117,8 @@ public class WizardsRebornClient {
     public static MagnificentMaidArmorModel MAGNIFICENT_MAID_ARMOR_MODEL = null;
     public static MagnificentMaidSlimArmorModel MAGNIFICENT_MAID_SLIM_ARMOR_MODEL = null;
 
-    public static SniffaloSaddleArmorModel SNIFFALO_SADDLE_ARMOR_MODEL = null;
-    public static SniffaloCarpetArmorModel SNIFFALO_CARPET_ARMOR_MODEL = null;
+    public static SniffaloSaddleArmorModel SNIFFALO_SADDLE_MODEL = null;
+    public static SniffaloCarpetArmorModel SNIFFALO_CARPET_MODEL = null;
     public static SniffaloArcaneArmorModel SNIFFALO_ARCANE_ARMOR_MODEL = null;
 
     public static AlchemyVialModel ALCHEMY_VIAL_MODEL = null;
@@ -233,6 +252,90 @@ public class WizardsRebornClient {
     public static final Music MOR_MUSIC = new Music(WizardsReborn.MUSIC_DISC_MOR_SOUND.getHolder().get(), 6000, 12000, true);
     public static final Music REBORN_MUSIC = new Music(WizardsReborn.MUSIC_DISC_REBORN_SOUND.getHolder().get(), 400, 1200, true);
     public static final Music SHIMMER_MUSIC = new Music(WizardsReborn.MUSIC_DISC_SHIMMER_SOUND.getHolder().get(), 6000, 12000, true);
+
+    public static class ClientOnly {
+        public static void clientInit() {
+            IEventBus forgeBus = MinecraftForge.EVENT_BUS;
+            setupWandCrystalsModels();
+            WissenWandItem.setupTooltips();
+
+            forgeBus.addListener(ClientTickHandler::clientTickEnd);
+            forgeBus.addListener(WorldRenderHandler::onRenderWorldLast);
+            forgeBus.addListener(ClientWorldEvent::onTick);
+            forgeBus.addListener(ClientWorldEvent::onRender);
+            forgeBus.addListener(HUDEventHandler::onDrawScreenPost);
+            forgeBus.addListener(TooltipEventHandler::onPostTooltipEvent);
+            forgeBus.addListener(KeyBindHandler::onInput);
+            forgeBus.addListener(KeyBindHandler::onKey);
+            forgeBus.addListener(KeyBindHandler::onMouseKey);
+            forgeBus.register(new ClientEvents());
+        }
+
+        public static void setupWandCrystalsModels() {
+            WandCrystalsModels.addCrystal(WizardsReborn.MOD_ID+":earth_crystal");
+            WandCrystalsModels.addCrystal(WizardsReborn.MOD_ID+":water_crystal");
+            WandCrystalsModels.addCrystal(WizardsReborn.MOD_ID+":air_crystal");
+            WandCrystalsModels.addCrystal(WizardsReborn.MOD_ID+":fire_crystal");
+            WandCrystalsModels.addCrystal(WizardsReborn.MOD_ID+":void_crystal");
+
+            WandCrystalsModels.addCrystal(WizardsReborn.MOD_ID+":faceted_earth_crystal");
+            WandCrystalsModels.addCrystal(WizardsReborn.MOD_ID+":faceted_water_crystal");
+            WandCrystalsModels.addCrystal(WizardsReborn.MOD_ID+":faceted_air_crystal");
+            WandCrystalsModels.addCrystal(WizardsReborn.MOD_ID+":faceted_fire_crystal");
+            WandCrystalsModels.addCrystal(WizardsReborn.MOD_ID+":faceted_void_crystal");
+
+            WandCrystalsModels.addCrystal(WizardsReborn.MOD_ID+":advanced_earth_crystal");
+            WandCrystalsModels.addCrystal(WizardsReborn.MOD_ID+":advanced_water_crystal");
+            WandCrystalsModels.addCrystal(WizardsReborn.MOD_ID+":advanced_air_crystal");
+            WandCrystalsModels.addCrystal(WizardsReborn.MOD_ID+":advanced_fire_crystal");
+            WandCrystalsModels.addCrystal(WizardsReborn.MOD_ID+":advanced_void_crystal");
+
+            WandCrystalsModels.addCrystal(WizardsReborn.MOD_ID+":masterful_earth_crystal");
+            WandCrystalsModels.addCrystal(WizardsReborn.MOD_ID+":masterful_water_crystal");
+            WandCrystalsModels.addCrystal(WizardsReborn.MOD_ID+":masterful_air_crystal");
+            WandCrystalsModels.addCrystal(WizardsReborn.MOD_ID+":masterful_fire_crystal");
+            WandCrystalsModels.addCrystal(WizardsReborn.MOD_ID+":masterful_void_crystal");
+
+            WandCrystalsModels.addCrystal(WizardsReborn.MOD_ID+":pure_earth_crystal");
+            WandCrystalsModels.addCrystal(WizardsReborn.MOD_ID+":pure_water_crystal");
+            WandCrystalsModels.addCrystal(WizardsReborn.MOD_ID+":pure_air_crystal");
+            WandCrystalsModels.addCrystal(WizardsReborn.MOD_ID+":pure_fire_crystal");
+            WandCrystalsModels.addCrystal(WizardsReborn.MOD_ID+":pure_void_crystal");
+        }
+    }
+
+    public static void clientSetup(final FMLClientSetupEvent event) {
+        event.enqueueWork(() -> {
+            setupTooltipModifiers();
+            ArcanemiconChapters.init();
+
+            MenuScreens.register(WizardsReborn.ARCANE_WORKBENCH_CONTAINER.get(), ArcaneWorkbenchScreen::new);
+            MenuScreens.register(WizardsReborn.JEWELER_TABLE_CONTAINER.get(), JewelerTableScreen::new);
+            MenuScreens.register(WizardsReborn.ALCHEMY_FURNACE_CONTAINER.get(), AlchemyFurnaceScreen::new);
+            MenuScreens.register(WizardsReborn.ALCHEMY_MACHINE_CONTAINER.get(), AlchemyMachineScreen::new);
+            MenuScreens.register(WizardsReborn.ARCANE_HOPPER_CONTAINER.get(), ArcaneHopperScreen::new);
+            MenuScreens.register(WizardsReborn.ITEM_SORTER_CONTAINER.get(), ItemSorterScreen::new);
+            MenuScreens.register(WizardsReborn.TOTEM_OF_DISENCHANT_CONTAINER.get(), TotemOfDisenchantScreen::new);
+            MenuScreens.register(WizardsReborn.RUNIC_PEDESTAL_CONTAINER.get(), RunicPedestalScreen::new);
+            MenuScreens.register(WizardsReborn.CRYSTAL_BAG_CONTAINER.get(), CrystalBagScreen::new);
+            MenuScreens.register(WizardsReborn.ALCHEMY_BAG_CONTAINER.get(), AlchemyBagScreen::new);
+
+            CuriosRendererRegistry.register(WizardsReborn.ARCANUM_AMULET.get(), AmuletRenderer::new);
+            CuriosRendererRegistry.register(WizardsReborn.ARCACITE_AMULET.get(), AmuletRenderer::new);
+            CuriosRendererRegistry.register(WizardsReborn.LEATHER_BELT.get(), BeltRenderer::new);
+            CuriosRendererRegistry.register(WizardsReborn.ARCANE_FORTRESS_BELT.get(), BeltRenderer::new);
+            CuriosRendererRegistry.register(WizardsReborn.INVENTOR_WIZARD_BELT.get(), BeltRenderer::new);
+            CuriosRendererRegistry.register(WizardsReborn.CRYSTAL_BAG.get(), BagRenderer::new);
+            CuriosRendererRegistry.register(WizardsReborn.ALCHEMY_BAG.get(), BagRenderer::new);
+            CuriosRendererRegistry.register(WizardsReborn.LEATHER_COLLAR.get(), CollarRenderer::new);
+            CuriosRendererRegistry.register(WizardsReborn.BROWN_MUSHROOM_CAP.get(), MushroomCapRenderer::new);
+            CuriosRendererRegistry.register(WizardsReborn.RED_MUSHROOM_CAP.get(), MushroomCapRenderer::new);
+            CuriosRendererRegistry.register(WizardsReborn.CRIMSON_FUNGUS_CAP.get(), MushroomCapRenderer::new);
+            CuriosRendererRegistry.register(WizardsReborn.WARPED_FUNGUS_CAP.get(), MushroomCapRenderer::new);
+            CuriosRendererRegistry.register(WizardsReborn.MOR_CAP.get(), MushroomCapRenderer::new);
+            CuriosRendererRegistry.register(WizardsReborn.ELDER_MOR_CAP.get(), MushroomCapRenderer::new);
+        });
+    }
 
     @Mod.EventBusSubscriber(bus=Mod.EventBusSubscriber.Bus.MOD, value = Dist.CLIENT)
     public static class RegistryEvents {
@@ -401,10 +504,10 @@ public class WizardsRebornClient {
 
             FluffyFurClient.makeBow(WizardsReborn.ARCANE_WOOD_BOW.get());
 
-            ItemProperties.register(WizardsReborn.ALCHEMY_VIAL_POTION.get(), new ResourceLocation("uses"), (stack, world, living, count) -> AlchemyPotionItem.getUses(stack));
-            ItemProperties.register(WizardsReborn.ALCHEMY_FLASK_POTION.get(), new ResourceLocation("uses"), (stack, world, living, count) -> AlchemyPotionItem.getUses(stack));
+            ItemProperties.register(WizardsReborn.ALCHEMY_VIAL_POTION.get(), new ResourceLocation("uses"), (stack, level, entity, seed) -> AlchemyPotionItem.getUses(stack));
+            ItemProperties.register(WizardsReborn.ALCHEMY_FLASK_POTION.get(), new ResourceLocation("uses"), (stack, level, entity, seed) -> AlchemyPotionItem.getUses(stack));
 
-            ItemProperties.register(WizardsReborn.KNOWLEDGE_SCROLL.get(), new ResourceLocation("knowledge"), (stack, world, living, count) -> KnowledgeSrollItem.hasKnowledge(stack) ? 1 : 0);
+            ItemProperties.register(WizardsReborn.KNOWLEDGE_SCROLL.get(), new ResourceLocation("knowledge"), (stack, level, entity, seed) -> KnowledgeSrollItem.hasKnowledge(stack) ? 1 : 0);
         }
 
         @SubscribeEvent
@@ -752,9 +855,10 @@ public class WizardsRebornClient {
 
         @SubscribeEvent
         public static void registerFactories(RegisterParticleProvidersEvent event) {
-            Minecraft.getInstance().particleEngine.register(WizardsReborn.KARMA_PARTICLE.get(), GenericParticleType.Factory::new);
-            Minecraft.getInstance().particleEngine.register(WizardsReborn.ARCANE_WOOD_LEAVES_PARTICLE.get(), LeavesParticleType.Factory::new);
-            Minecraft.getInstance().particleEngine.register(WizardsReborn.INNOCENT_WOOD_LEAVES_PARTICLE.get(), LeavesParticleType.Factory::new);
+            ParticleEngine particleEngine = Minecraft.getInstance().particleEngine;
+            particleEngine.register(WizardsReborn.KARMA_PARTICLE.get(), GenericParticleType.Factory::new);
+            particleEngine.register(WizardsReborn.ARCANE_WOOD_LEAVES_PARTICLE.get(), LeavesParticleType.Factory::new);
+            particleEngine.register(WizardsReborn.INNOCENT_WOOD_LEAVES_PARTICLE.get(), LeavesParticleType.Factory::new);
         }
 
         @SubscribeEvent
@@ -798,8 +902,8 @@ public class WizardsRebornClient {
             event.registerLayerDefinition(MAGNIFICENT_MAID_ARMOR_LAYER, MagnificentMaidArmorModel::createBodyLayer);
             event.registerLayerDefinition(MAGNIFICENT_MAID_SLIM_ARMOR_LAYER, MagnificentMaidSlimArmorModel::createBodyLayer);
 
-            event.registerLayerDefinition(SNIFFALO_SADDLE_ARMOR_LAYER, SniffaloSaddleArmorModel::createBodyLayer);
-            event.registerLayerDefinition(SNIFFALO_CARPET_ARMOR_LAYER, SniffaloCarpetArmorModel::createBodyLayer);
+            event.registerLayerDefinition(SNIFFALO_SADDLE_LAYER, SniffaloSaddleArmorModel::createBodyLayer);
+            event.registerLayerDefinition(SNIFFALO_CARPET_LAYER, SniffaloCarpetArmorModel::createBodyLayer);
             event.registerLayerDefinition(SNIFFALO_ARCANE_ARMOR_LAYER, SniffaloArcaneArmorModel::createBodyLayer);
 
             event.registerLayerDefinition(ALCHEMY_VIAL_LAYER, AlchemyVialModel::createBodyLayer);
@@ -818,8 +922,8 @@ public class WizardsRebornClient {
             MAGNIFICENT_MAID_ARMOR_MODEL = new MagnificentMaidArmorModel(event.getEntityModels().bakeLayer(MAGNIFICENT_MAID_ARMOR_LAYER));
             MAGNIFICENT_MAID_SLIM_ARMOR_MODEL = new MagnificentMaidSlimArmorModel(event.getEntityModels().bakeLayer(MAGNIFICENT_MAID_SLIM_ARMOR_LAYER));
 
-            SNIFFALO_SADDLE_ARMOR_MODEL = new SniffaloSaddleArmorModel(event.getEntityModels().bakeLayer(SNIFFALO_SADDLE_ARMOR_LAYER));
-            SNIFFALO_CARPET_ARMOR_MODEL = new SniffaloCarpetArmorModel(event.getEntityModels().bakeLayer(SNIFFALO_CARPET_ARMOR_LAYER));
+            SNIFFALO_SADDLE_MODEL = new SniffaloSaddleArmorModel(event.getEntityModels().bakeLayer(SNIFFALO_SADDLE_LAYER));
+            SNIFFALO_CARPET_MODEL = new SniffaloCarpetArmorModel(event.getEntityModels().bakeLayer(SNIFFALO_CARPET_LAYER));
             SNIFFALO_ARCANE_ARMOR_MODEL = new SniffaloArcaneArmorModel(event.getEntityModels().bakeLayer(SNIFFALO_ARCANE_ARMOR_LAYER));
 
             ALCHEMY_VIAL_MODEL = new AlchemyVialModel(event.getEntityModels().bakeLayer(ALCHEMY_VIAL_LAYER));
@@ -837,6 +941,36 @@ public class WizardsRebornClient {
         public static void ColorMappingBlocks(RegisterColorHandlersEvent.Block event) {
             event.register((state, world, pos, tintIndex) -> CustomBlockColor.getInstance().getColor(state, world, pos, tintIndex), CustomBlockColor.PLANTS);
         }
+    }
+
+    public static void setupTooltipModifiers() {
+        TooltipModifierHandler.register(new AttributeTooltipModifier() {
+            public boolean isToolBase(AttributeModifier modifier, Player player, TooltipFlag flag) {
+                return modifier.getId().equals(ScytheItem.BASE_ENTITY_REACH_UUID);
+            }
+        });
+        TooltipModifierHandler.register(new AttributeTooltipModifier() {
+            public boolean isModifiable(Attribute key, AttributeModifier modifier, Player player, TooltipFlag flag) {
+                return key.equals(WizardsReborn.WISSEN_DISCOUNT.get());
+            }
+
+            public ModifyResult modify(AttributeModifier modifier, double amount, AttributeModifier.Operation operation) {
+                operation = AttributeModifier.Operation.MULTIPLY_BASE;
+                amount = amount / 100f;
+                return new ModifyResult(modifier, amount, operation);
+            }
+        });
+        TooltipModifierHandler.register(new AttributeTooltipModifier() {
+            public boolean isModifiable(Attribute key, AttributeModifier modifier, Player player, TooltipFlag flag) {
+                return key.equals(WizardsReborn.MAGIC_ARMOR.get());
+            }
+
+            public ModifyResult modify(AttributeModifier modifier, double amount, AttributeModifier.Operation operation) {
+                operation = AttributeModifier.Operation.MULTIPLY_BASE;
+                amount = amount / 100f;
+                return new ModifyResult(modifier, amount, operation);
+            }
+        });
     }
 
     public static void addPipeModel(Map<ResourceLocation, BakedModel> map, String modId, String modelId, String path, PipeModel pipe) {

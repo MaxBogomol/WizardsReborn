@@ -47,7 +47,7 @@ public class EarthRaySpellEffectPacket {
             ctx.get().enqueueWork(new Runnable() {
                 @Override
                 public void run() {
-                    Level world = WizardsReborn.proxy.getWorld();
+                    Level world = WizardsReborn.proxy.getLevel();
 
                     for (int i = 0; i < 15; i++) {
                         if (random.nextFloat() < 0.6f) {

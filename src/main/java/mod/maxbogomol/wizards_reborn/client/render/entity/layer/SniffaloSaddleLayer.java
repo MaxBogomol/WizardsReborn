@@ -28,7 +28,7 @@ public class SniffaloSaddleLayer extends RenderLayer<SniffaloEntity, SnifferMode
     @Override
     public void render(PoseStack ms, MultiBufferSource buffer, int packedLight, SniffaloEntity livingEntity, float limbSwing, float limbSwingAmount, float partialTicks, float ageInTicks, float betHeadYaw, float headPitch) {
         if (livingEntity.isSaddled()) {
-            SniffaloSaddleArmorModel model = WizardsRebornClient.SNIFFALO_SADDLE_ARMOR_MODEL;
+            SniffaloSaddleArmorModel model = WizardsRebornClient.SNIFFALO_SADDLE_MODEL;
             model.young = livingEntity.isBaby();
             model.copyFromDefault(defaultModel);
             model.setupAnim(livingEntity, livingEntity.walkAnimation.position(partialTicks), livingEntity.walkAnimation.speed(partialTicks), livingEntity.tickCount + partialTicks, betHeadYaw, headPitch);

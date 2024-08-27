@@ -56,7 +56,7 @@ public class AirFlowSpellEffectPacket {
             ctx.get().enqueueWork(new Runnable() {
                 @Override
                 public void run() {
-                    Level world = WizardsReborn.proxy.getWorld();
+                    Level world = WizardsReborn.proxy.getLevel();
                     ParticleBuilder.create(FluffyFur.SMOKE_PARTICLE)
                             .setColorData(ColorParticleData.create(msg.colorR, msg.colorG, msg.colorB).build())
                             .setTransparencyData(GenericParticleData.create(0.3f, 0).build())

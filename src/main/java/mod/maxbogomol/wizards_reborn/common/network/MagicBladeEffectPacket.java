@@ -40,7 +40,7 @@ public class MagicBladeEffectPacket {
             ctx.get().enqueueWork(new Runnable() {
                 @Override
                 public void run() {
-                    Level world = WizardsReborn.proxy.getWorld();
+                    Level world = WizardsReborn.proxy.getLevel();
                     ParticleBuilder.create(FluffyFur.SPARKLE_PARTICLE)
                             .setColorData(ColorParticleData.create(0.431F, 0.305F, 0.662F).build())
                             .setTransparencyData(GenericParticleData.create(0.4f, 0).build())

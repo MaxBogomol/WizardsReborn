@@ -117,7 +117,7 @@ public class WissenSendEffectPacket {
             ctx.get().enqueueWork(new Runnable() {
                 @Override
                 public void run() {
-                    Level world = WizardsReborn.proxy.getWorld();
+                    Level world = WizardsReborn.proxy.getLevel();
 
                     int particlePerBlock = msg.particlePerBlock;
 

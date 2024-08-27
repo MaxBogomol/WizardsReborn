@@ -44,7 +44,7 @@ public class SniffaloCarpetLayer extends RenderLayer<SniffaloEntity, SnifferMode
                 texture = carpet.getCarpetTexture(livingEntity.getCarpetClient(), livingEntity);
             }
 
-            SniffaloCarpetArmorModel model = WizardsRebornClient.SNIFFALO_CARPET_ARMOR_MODEL;
+            SniffaloCarpetArmorModel model = WizardsRebornClient.SNIFFALO_CARPET_MODEL;
             model.young = livingEntity.isBaby();
             model.copyFromDefault(defaultModel);
             model.setupAnim(livingEntity, livingEntity.walkAnimation.position(partialTicks), livingEntity.walkAnimation.speed(partialTicks), livingEntity.tickCount + partialTicks, betHeadYaw, headPitch);

@@ -52,7 +52,7 @@ public class SplitArrowBurstEffectPacket {
             ctx.get().enqueueWork(new Runnable() {
                 @Override
                 public void run() {
-                    Level world = WizardsReborn.proxy.getWorld();
+                    Level world = WizardsReborn.proxy.getLevel();
                     ParticleBuilder.create(FluffyFur.WISP_PARTICLE)
                             .setColorData(ColorParticleData.create(msg.r, msg.g, msg.b).build())
                             .setTransparencyData(GenericParticleData.create(0.2f, 0).build())

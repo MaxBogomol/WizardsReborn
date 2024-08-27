@@ -41,7 +41,7 @@ public class ArcanemiconOfferingEffectPacket {
             ctx.get().enqueueWork(new Runnable() {
                 @Override
                 public void run() {
-                    Level world = WizardsReborn.proxy.getWorld();
+                    Level world = WizardsReborn.proxy.getLevel();
 
                     for (int i = 0; i < 36; i++) {
                         float distance = 0.5f + (0.25f * random.nextFloat());

@@ -6,7 +6,6 @@
   "mixins": [
     "common.CreeperMixin",
     "common.PhantomMixin",
-    "common.ItemStackMixin",
     "common.BowItemMixin",
     "common.AbstractArrowMixin",
     "common.FaceAttachedHorizontalDirectionalBlockMixin"
@@ -19,8 +18,7 @@
     "client.ClientMusicChoiceMixin",
     "client.AbstractClientPlayerMixin",
     "client.GuiGraphicsMixin",
-    "client.CameraMixin",
-    "client.CurioTooltipMixin"
+    "client.CameraMixin"
   ],
   "minVersion": "0.8",
   "injectors": {

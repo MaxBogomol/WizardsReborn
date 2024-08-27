@@ -42,7 +42,7 @@ public class KnowledgeUpdatePacket {
         ctx.get().enqueueWork(() -> {
             assert ctx.get().getDirection() == NetworkDirection.PLAY_TO_CLIENT;
 
-            Level world = WizardsReborn.proxy.getWorld();
+            Level world = WizardsReborn.proxy.getLevel();
             Player player = world.getPlayerByUUID(packet.uuid);
             if (player != null) {
                 player.getCapability(IKnowledge.INSTANCE, null).ifPresent((k) -> {
