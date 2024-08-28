@@ -1,6 +1,5 @@
 package mod.maxbogomol.wizards_reborn;
 
-import com.google.common.collect.ImmutableMap;
 import mod.maxbogomol.fluffy_fur.FluffyFur;
 import mod.maxbogomol.fluffy_fur.client.particle.GenericParticleType;
 import mod.maxbogomol.fluffy_fur.common.block.WaterloggableLeverBlock;
@@ -1851,84 +1850,65 @@ public class WizardsReborn {
     public static final RegistryObject<RecipeType<CrystalInfusionRecipe>> CRYSTAL_INFUSION_RECIPE = RECIPES.register("crystal_infusion", () -> RecipeType.simple(CrystalInfusionRecipe.TYPE_ID));
 
     //CONTAINERS
-    public static final RegistryObject<MenuType<ArcaneWorkbenchContainer>> ARCANE_WORKBENCH_CONTAINER
-            = CONTAINERS.register("arcane_workbench",
+    public static final RegistryObject<MenuType<ArcaneWorkbenchContainer>> ARCANE_WORKBENCH_CONTAINER = CONTAINERS.register("arcane_workbench",
             () -> IForgeMenuType.create(((windowId, inv, data) -> {
                 BlockPos pos = data.readBlockPos();
                 Level world = inv.player.getCommandSenderWorld();
-                return new ArcaneWorkbenchContainer(windowId, world, pos, inv, inv.player);
-            })));
+                return new ArcaneWorkbenchContainer(windowId, world, pos, inv, inv.player);})));
 
-    public static final RegistryObject<MenuType<JewelerTableContainer>> JEWELER_TABLE_CONTAINER
-            = CONTAINERS.register("jeweler_table",
+    public static final RegistryObject<MenuType<JewelerTableContainer>> JEWELER_TABLE_CONTAINER = CONTAINERS.register("jeweler_table",
             () -> IForgeMenuType.create(((windowId, inv, data) -> {
                 BlockPos pos = data.readBlockPos();
                 Level world = inv.player.getCommandSenderWorld();
-                return new JewelerTableContainer(windowId, world, pos, inv, inv.player);
-            })));
+                return new JewelerTableContainer(windowId, world, pos, inv, inv.player);})));
 
-    public static final RegistryObject<MenuType<AlchemyFurnaceContainer>> ALCHEMY_FURNACE_CONTAINER
-            = CONTAINERS.register("alchemy_furnace",
+    public static final RegistryObject<MenuType<AlchemyFurnaceContainer>> ALCHEMY_FURNACE_CONTAINER = CONTAINERS.register("alchemy_furnace",
             () -> IForgeMenuType.create(((windowId, inv, data) -> {
                 BlockPos pos = data.readBlockPos();
                 Level world = inv.player.getCommandSenderWorld();
-                return new AlchemyFurnaceContainer(windowId, world, pos, inv, inv.player);
-            })));
+                return new AlchemyFurnaceContainer(windowId, world, pos, inv, inv.player);})));
 
-    public static final RegistryObject<MenuType<AlchemyMachineContainer>> ALCHEMY_MACHINE_CONTAINER
-            = CONTAINERS.register("alchemy_machine",
+    public static final RegistryObject<MenuType<AlchemyMachineContainer>> ALCHEMY_MACHINE_CONTAINER = CONTAINERS.register("alchemy_machine",
             () -> IForgeMenuType.create(((windowId, inv, data) -> {
                 BlockPos pos = data.readBlockPos();
                 Level world = inv.player.getCommandSenderWorld();
-                return new AlchemyMachineContainer(windowId, world, pos, inv, inv.player);
-            })));
+                return new AlchemyMachineContainer(windowId, world, pos, inv, inv.player);})));
 
-    public static final RegistryObject<MenuType<ArcaneHopperContainer>> ARCANE_HOPPER_CONTAINER
-            = CONTAINERS.register("arcane_hopper",
+    public static final RegistryObject<MenuType<ArcaneHopperContainer>> ARCANE_HOPPER_CONTAINER = CONTAINERS.register("arcane_hopper",
             () -> IForgeMenuType.create(((windowId, inv, data) -> {
                 BlockPos pos = data.readBlockPos();
                 Level world = inv.player.getCommandSenderWorld();
-                return new ArcaneHopperContainer(windowId, world, pos, inv, inv.player);
-            })));
+                return new ArcaneHopperContainer(windowId, world, pos, inv, inv.player);})));
 
-    public static final RegistryObject<MenuType<ItemSorterContainer>> ITEM_SORTER_CONTAINER
-            = CONTAINERS.register("item_sorter",
+    public static final RegistryObject<MenuType<ItemSorterContainer>> ITEM_SORTER_CONTAINER = CONTAINERS.register("item_sorter",
             () -> IForgeMenuType.create(((windowId, inv, data) -> {
                 BlockPos pos = data.readBlockPos();
                 Level world = inv.player.getCommandSenderWorld();
-                return new ItemSorterContainer(windowId, world, pos, inv, inv.player);
-            })));
+                return new ItemSorterContainer(windowId, world, pos, inv, inv.player);})));
 
-    public static final RegistryObject<MenuType<TotemOfDisenchantContainer>> TOTEM_OF_DISENCHANT_CONTAINER
-            = CONTAINERS.register("totem_of_disenchant",
+    public static final RegistryObject<MenuType<TotemOfDisenchantContainer>> TOTEM_OF_DISENCHANT_CONTAINER = CONTAINERS.register("totem_of_disenchant",
             () -> IForgeMenuType.create(((windowId, inv, data) -> {
                 BlockPos pos = data.readBlockPos();
                 Level world = inv.player.getCommandSenderWorld();
-                return new TotemOfDisenchantContainer(windowId, world, pos, inv, inv.player);
-            })));
+                return new TotemOfDisenchantContainer(windowId, world, pos, inv, inv.player);})));
 
-    public static final RegistryObject<MenuType<RunicPedestalContainer>> RUNIC_PEDESTAL_CONTAINER
-            = CONTAINERS.register("runic_pedestal",
+    public static final RegistryObject<MenuType<RunicPedestalContainer>> RUNIC_PEDESTAL_CONTAINER = CONTAINERS.register("runic_pedestal",
             () -> IForgeMenuType.create(((windowId, inv, data) -> {
                 BlockPos pos = data.readBlockPos();
                 Level world = inv.player.getCommandSenderWorld();
-                return new RunicPedestalContainer(windowId, world, pos, inv, inv.player);
-            })));
+                return new RunicPedestalContainer(windowId, world, pos, inv, inv.player);})));
 
-    public static final RegistryObject<MenuType<CrystalBagContainer>> CRYSTAL_BAG_CONTAINER
-            = CONTAINERS.register("crystal_bag",
+    public static final RegistryObject<MenuType<CrystalBagContainer>> CRYSTAL_BAG_CONTAINER = CONTAINERS.register("crystal_bag",
             () -> IForgeMenuType.create(((windowId, inv, data) -> {
                 Level world = inv.player.getCommandSenderWorld();
-                return new CrystalBagContainer(windowId, world, data.readItem(), inv, inv.player);
-            })));
+                return new CrystalBagContainer(windowId, world, data.readItem(), inv, inv.player);})));
 
-    public static final RegistryObject<MenuType<AlchemyBagContainer>> ALCHEMY_BAG_CONTAINER
-            = CONTAINERS.register("alchemy_bag",
+    public static final RegistryObject<MenuType<AlchemyBagContainer>> ALCHEMY_BAG_CONTAINER = CONTAINERS.register("alchemy_bag",
             () -> IForgeMenuType.create(((windowId, inv, data) -> {
                 Level world = inv.player.getCommandSenderWorld();
-                return new AlchemyBagContainer(windowId, world, data.readItem(), inv, inv.player);
-            })));
+                return new AlchemyBagContainer(windowId, world, data.readItem(), inv, inv.player);})));
 
+    //BANNER PATTERNS
     public static final RegistryObject<BannerPattern> VIOLENCE_BANNER_PATTERN = BANNER_PATTERNS.register("violence", () -> new BannerPattern("wrv"));
     public static final RegistryObject<BannerPattern> REPRODUCTION_BANNER_PATTERN = BANNER_PATTERNS.register("reproduction", () -> new BannerPattern("wrr"));
     public static final RegistryObject<BannerPattern> COOPERATION_BANNER_PATTERN = BANNER_PATTERNS.register("cooperation", () -> new BannerPattern("wrc"));
@@ -2159,13 +2139,71 @@ public class WizardsReborn {
         setupDrinksItems();
 
         event.enqueueWork(() -> {
-            AxeItem.STRIPPABLES = new ImmutableMap.Builder<Block, Block>().putAll(AxeItem.STRIPPABLES)
-                    .put(ARCANE_WOOD_LOG.get(), STRIPPED_ARCANE_WOOD_LOG.get())
-                    .put(ARCANE_WOOD.get(), STRIPPED_ARCANE_WOOD.get())
-                    .put(ARCANE_WOOD_BAULK.get(), STRIPPED_ARCANE_WOOD_BAULK.get())
-                    .put(INNOCENT_WOOD_LOG.get(), STRIPPED_INNOCENT_WOOD_LOG.get())
-                    .put(INNOCENT_WOOD.get(), STRIPPED_INNOCENT_WOOD.get())
-                    .put(INNOCENT_WOOD_BAULK.get(), STRIPPED_INNOCENT_WOOD_BAULK.get()).build();
+            FluffyFur.axeStrippables(ARCANE_WOOD_LOG.get(), STRIPPED_ARCANE_WOOD_LOG.get());
+            FluffyFur.axeStrippables(ARCANE_WOOD.get(), STRIPPED_ARCANE_WOOD.get());
+            FluffyFur.axeStrippables(ARCANE_WOOD_BAULK.get(), STRIPPED_ARCANE_WOOD_BAULK.get());
+            FluffyFur.axeStrippables(INNOCENT_WOOD_LOG.get(), STRIPPED_INNOCENT_WOOD_LOG.get());
+            FluffyFur.axeStrippables(INNOCENT_WOOD.get(), STRIPPED_INNOCENT_WOOD.get());
+            FluffyFur.axeStrippables(INNOCENT_WOOD_BAULK.get(), STRIPPED_INNOCENT_WOOD_BAULK.get());
+            
+            FluffyFur.fireBlock(ARCANE_WOOD_LOG.get(), 5, 20);
+            FluffyFur.fireBlock(ARCANE_WOOD.get(), 5, 20);
+            FluffyFur.fireBlock(STRIPPED_ARCANE_WOOD_LOG.get(), 5, 20);
+            FluffyFur.fireBlock(STRIPPED_ARCANE_WOOD.get(), 5, 20);
+            FluffyFur.fireBlock(ARCANE_WOOD_PLANKS.get(), 5, 20);
+            FluffyFur.fireBlock(ARCANE_WOOD_STAIRS.get(), 5, 20);
+            FluffyFur.fireBlock(ARCANE_WOOD_SLAB.get(), 5, 20);
+            FluffyFur.fireBlock(ARCANE_WOOD_BAULK.get(), 5, 20);
+            FluffyFur.fireBlock(ARCANE_WOOD_CROSS_BAULK.get(), 5, 20);
+            FluffyFur.fireBlock(STRIPPED_ARCANE_WOOD_BAULK.get(), 5, 20);
+            FluffyFur.fireBlock(STRIPPED_ARCANE_WOOD_CROSS_BAULK.get(), 5, 20);
+            FluffyFur.fireBlock(ARCANE_WOOD_PLANKS_BAULK.get(), 5, 20);
+            FluffyFur.fireBlock(ARCANE_WOOD_PLANKS_CROSS_BAULK.get(), 5, 20);
+            FluffyFur.fireBlock(ARCANE_WOOD_FENCE.get(), 5, 20);
+            FluffyFur.fireBlock(ARCANE_WOOD_FENCE_GATE.get(), 5, 20);
+            FluffyFur.fireBlock(ARCANE_WOOD_LEAVES.get(), 30, 60);
+            FluffyFur.fireBlock(INNOCENT_WOOD_LOG.get(), 5, 20);
+            FluffyFur.fireBlock(INNOCENT_WOOD.get(), 5, 20);
+            FluffyFur.fireBlock(STRIPPED_INNOCENT_WOOD_LOG.get(), 5, 20);
+            FluffyFur.fireBlock(STRIPPED_INNOCENT_WOOD.get(), 5, 20);
+            FluffyFur.fireBlock(INNOCENT_WOOD_PLANKS.get(), 5, 20);
+            FluffyFur.fireBlock(INNOCENT_WOOD_STAIRS.get(), 5, 20);
+            FluffyFur.fireBlock(INNOCENT_WOOD_SLAB.get(), 5, 20);
+            FluffyFur.fireBlock(INNOCENT_WOOD_BAULK.get(), 5, 20);
+            FluffyFur.fireBlock(INNOCENT_WOOD_CROSS_BAULK.get(), 5, 20);
+            FluffyFur.fireBlock(STRIPPED_INNOCENT_WOOD_BAULK.get(), 5, 20);
+            FluffyFur.fireBlock(STRIPPED_INNOCENT_WOOD_CROSS_BAULK.get(), 5, 20);
+            FluffyFur.fireBlock(INNOCENT_WOOD_PLANKS_BAULK.get(), 5, 20);
+            FluffyFur.fireBlock(INNOCENT_WOOD_PLANKS_CROSS_BAULK.get(), 5, 20);
+            FluffyFur.fireBlock(INNOCENT_WOOD_FENCE.get(), 5, 20);
+            FluffyFur.fireBlock(INNOCENT_WOOD_FENCE_GATE.get(), 5, 20);
+            FluffyFur.fireBlock(INNOCENT_WOOD_LEAVES.get(), 30, 60);
+            FluffyFur.fireBlock(PETALS_OF_INNOCENCE.get(), 60, 100);
+            FluffyFur.fireBlock(ARCANE_LINEN_HAY.get(), 60, 20);
+            FluffyFur.fireBlock(SHINY_CLOVER_CROP.get(), 60, 100);
+            FluffyFur.fireBlock(SHINY_CLOVER.get(), 60, 100);
+
+            FluffyFur.composterBlock(0.3F, ARCANE_WOOD_LEAVES_ITEM.get());
+            FluffyFur.composterBlock(0.3F, ARCANE_WOOD_SAPLING_ITEM.get());
+            FluffyFur.composterBlock(0.3F, INNOCENT_WOOD_LEAVES_ITEM.get());
+            FluffyFur.composterBlock(0.3F, INNOCENT_WOOD_SAPLING_ITEM.get());
+            FluffyFur.composterBlock(0.3F, PETALS_OF_INNOCENCE_ITEM.get());
+            FluffyFur.composterBlock(0.3F, ARCANE_LINEN_SEEDS.get());
+            FluffyFur.composterBlock(0.65F, ARCANE_LINEN_ITEM.get());
+            FluffyFur.composterBlock(0.85F, ARCANE_LINEN_HAY_ITEM.get());
+            FluffyFur.composterBlock(0.65F, MOR_ITEM.get());
+            FluffyFur.composterBlock(0.65F, ELDER_MOR_ITEM.get());
+            FluffyFur.composterBlock(0.85F, MOR_BLOCK_ITEM.get());
+            FluffyFur.composterBlock(0.85F, ELDER_MOR_BLOCK_ITEM.get());
+            FluffyFur.composterBlock(0.9F, PITCHER_TURNIP_ITEM.get());
+            FluffyFur.composterBlock(0.9F, SHINY_CLOVER_ITEM.get());
+            FluffyFur.composterBlock(0.2F, PETALS.get());
+            FluffyFur.composterBlock(0.2F, GROUND_BROWN_MUSHROOM.get());
+            FluffyFur.composterBlock(0.2F, GROUND_RED_MUSHROOM.get());
+            FluffyFur.composterBlock(0.2F, GROUND_CRIMSON_FUNGUS.get());
+            FluffyFur.composterBlock(0.2F, GROUND_WARPED_FUNGUS.get());
+            FluffyFur.composterBlock(0.2F, GROUND_MOR.get());
+            FluffyFur.composterBlock(0.2F, GROUND_ELDER_MOR.get());
 
             ArcanePedestalBlock.blocksList.put(ARCANE_PEDESTAL.get(), HOVERING_TOME_STAND.get());
             ArcanePedestalBlock.blocksList.put(INNOCENT_PEDESTAL.get(), INNOCENT_HOVERING_TOME_STAND.get());
@@ -2181,66 +2219,6 @@ public class WizardsReborn {
 
             AlchemyPotionItem.potionList.add(WizardsReborn.ALCHEMY_VIAL_POTION.get());
             AlchemyPotionItem.potionList.add(WizardsReborn.ALCHEMY_FLASK_POTION.get());
-
-            FireBlock fireblock = (FireBlock) Blocks.FIRE;
-            fireblock.setFlammable(ARCANE_WOOD_LOG.get(), 5, 20);
-            fireblock.setFlammable(ARCANE_WOOD.get(), 5, 20);
-            fireblock.setFlammable(STRIPPED_ARCANE_WOOD_LOG.get(), 5, 20);
-            fireblock.setFlammable(STRIPPED_ARCANE_WOOD.get(), 5, 20);
-            fireblock.setFlammable(ARCANE_WOOD_PLANKS.get(), 5, 20);
-            fireblock.setFlammable(ARCANE_WOOD_STAIRS.get(), 5, 20);
-            fireblock.setFlammable(ARCANE_WOOD_SLAB.get(), 5, 20);
-            fireblock.setFlammable(ARCANE_WOOD_BAULK.get(), 5, 20);
-            fireblock.setFlammable(ARCANE_WOOD_CROSS_BAULK.get(), 5, 20);
-            fireblock.setFlammable(STRIPPED_ARCANE_WOOD_BAULK.get(), 5, 20);
-            fireblock.setFlammable(STRIPPED_ARCANE_WOOD_CROSS_BAULK.get(), 5, 20);
-            fireblock.setFlammable(ARCANE_WOOD_PLANKS_BAULK.get(), 5, 20);
-            fireblock.setFlammable(ARCANE_WOOD_PLANKS_CROSS_BAULK.get(), 5, 20);
-            fireblock.setFlammable(ARCANE_WOOD_FENCE.get(), 5, 20);
-            fireblock.setFlammable(ARCANE_WOOD_FENCE_GATE.get(), 5, 20);
-            fireblock.setFlammable(ARCANE_WOOD_LEAVES.get(), 30, 60);
-            fireblock.setFlammable(INNOCENT_WOOD_LOG.get(), 5, 20);
-            fireblock.setFlammable(INNOCENT_WOOD.get(), 5, 20);
-            fireblock.setFlammable(STRIPPED_INNOCENT_WOOD_LOG.get(), 5, 20);
-            fireblock.setFlammable(STRIPPED_INNOCENT_WOOD.get(), 5, 20);
-            fireblock.setFlammable(INNOCENT_WOOD_PLANKS.get(), 5, 20);
-            fireblock.setFlammable(INNOCENT_WOOD_STAIRS.get(), 5, 20);
-            fireblock.setFlammable(INNOCENT_WOOD_SLAB.get(), 5, 20);
-            fireblock.setFlammable(INNOCENT_WOOD_BAULK.get(), 5, 20);
-            fireblock.setFlammable(INNOCENT_WOOD_CROSS_BAULK.get(), 5, 20);
-            fireblock.setFlammable(STRIPPED_INNOCENT_WOOD_BAULK.get(), 5, 20);
-            fireblock.setFlammable(STRIPPED_INNOCENT_WOOD_CROSS_BAULK.get(), 5, 20);
-            fireblock.setFlammable(INNOCENT_WOOD_PLANKS_BAULK.get(), 5, 20);
-            fireblock.setFlammable(INNOCENT_WOOD_PLANKS_CROSS_BAULK.get(), 5, 20);
-            fireblock.setFlammable(INNOCENT_WOOD_FENCE.get(), 5, 20);
-            fireblock.setFlammable(INNOCENT_WOOD_FENCE_GATE.get(), 5, 20);
-            fireblock.setFlammable(INNOCENT_WOOD_LEAVES.get(), 30, 60);
-            fireblock.setFlammable(PETALS_OF_INNOCENCE.get(), 60, 100);
-            fireblock.setFlammable(ARCANE_LINEN_HAY.get(), 60, 20);
-            fireblock.setFlammable(SHINY_CLOVER_CROP.get(), 60, 100);
-            fireblock.setFlammable(SHINY_CLOVER.get(), 60, 100);
-
-            ComposterBlock.add(0.3F, ARCANE_WOOD_LEAVES_ITEM.get());
-            ComposterBlock.add(0.3F, ARCANE_WOOD_SAPLING_ITEM.get());
-            ComposterBlock.add(0.3F, INNOCENT_WOOD_LEAVES_ITEM.get());
-            ComposterBlock.add(0.3F, INNOCENT_WOOD_SAPLING_ITEM.get());
-            ComposterBlock.add(0.3F, PETALS_OF_INNOCENCE_ITEM.get());
-            ComposterBlock.add(0.3F, ARCANE_LINEN_SEEDS.get());
-            ComposterBlock.add(0.65F, ARCANE_LINEN_ITEM.get());
-            ComposterBlock.add(0.85F, ARCANE_LINEN_HAY_ITEM.get());
-            ComposterBlock.add(0.65F, MOR_ITEM.get());
-            ComposterBlock.add(0.65F, ELDER_MOR_ITEM.get());
-            ComposterBlock.add(0.85F, MOR_BLOCK_ITEM.get());
-            ComposterBlock.add(0.85F, ELDER_MOR_BLOCK_ITEM.get());
-            ComposterBlock.add(0.9F, PITCHER_TURNIP_ITEM.get());
-            ComposterBlock.add(0.9F, SHINY_CLOVER_ITEM.get());
-            ComposterBlock.add(0.2F, PETALS.get());
-            ComposterBlock.add(0.2F, GROUND_BROWN_MUSHROOM.get());
-            ComposterBlock.add(0.2F, GROUND_RED_MUSHROOM.get());
-            ComposterBlock.add(0.2F, GROUND_CRIMSON_FUNGUS.get());
-            ComposterBlock.add(0.2F, GROUND_WARPED_FUNGUS.get());
-            ComposterBlock.add(0.2F, GROUND_MOR.get());
-            ComposterBlock.add(0.2F, GROUND_ELDER_MOR.get());
 
             DispenserBlock.registerBehavior(ARCANUM_DUST.get(), new OptionalDispenseItemBehavior() {
                 protected ItemStack execute(BlockSource blockSource, ItemStack itemStack) {
