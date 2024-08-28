@@ -91,11 +91,19 @@ dependencies {
     implementation fg.deobf("curse.maven:jade-324717:5493390")
 
     compileOnly fg.deobf("curse.maven:farmers-delight-398521:5051242")
+}
 
-    runtimeOnly fg.deobf("curse.maven:fusion-connected-textures-854949:5129294")
-    runtimeOnly fg.deobf("curse.maven:configured-457570:5180900")
-    runtimeOnly fg.deobf("curse.maven:model-gap-fix-676136:5200949")
-    runtimeOnly fg.deobf("curse.maven:embeddium-908741:5566632")
+task customRun {
+    dependencies {
+        runtimeOnly fg.deobf("curse.maven:fusion-connected-textures-854949:5129294")
+        runtimeOnly fg.deobf("curse.maven:configured-457570:5180900")
+        runtimeOnly fg.deobf("curse.maven:model-gap-fix-676136:5200949")
+        runtimeOnly fg.deobf("curse.maven:embeddium-908741:5566632")
+        runtimeOnly fg.deobf("curse.maven:oculus-581495:5299671")
+        runtimeOnly fg.deobf("curse.maven:free-cam-557076:4643128")
+    }
+
+    finalizedBy 'runClient'
 }
 
 jar {

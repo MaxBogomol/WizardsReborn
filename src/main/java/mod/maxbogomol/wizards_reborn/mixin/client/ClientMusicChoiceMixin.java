@@ -1,7 +1,6 @@
 package mod.maxbogomol.wizards_reborn.mixin.client;
 
 import mod.maxbogomol.wizards_reborn.WizardsRebornClient;
-import mod.maxbogomol.wizards_reborn.client.config.ClientConfig;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Gui;
 import net.minecraft.client.gui.screens.Screen;
@@ -47,9 +46,9 @@ public class ClientMusicChoiceMixin {
         }
 
         if (screen instanceof TitleScreen) {
-            if (ClientConfig.CUSTOM_PANORAMA.get()) {
-                cir.setReturnValue(WizardsRebornClient.REBORN_MUSIC);
-            }
+            //if (ClientConfig.CUSTOM_PANORAMA.get()) {
+            //    cir.setReturnValue(WizardsRebornClient.REBORN_MUSIC);
+            //}
         }
 
         List<Music> possibleTracks = new ArrayList<>();

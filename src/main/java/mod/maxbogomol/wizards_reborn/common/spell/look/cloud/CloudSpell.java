@@ -116,7 +116,7 @@ public class CloudSpell extends BlockLookSpell {
         boolean trails = hasTrails(entity);
 
         if (random.nextFloat() < (trails ? 0.5f : 0.8f)) {
-            ParticleBuilder.create(FluffyFur.SMOKE_PARTICLE)
+            ParticleBuilder.create(FluffyFur.WISP_PARTICLE)
                     .setColorData(ColorParticleData.create(color).build())
                     .setTransparencyData(GenericParticleData.create(0.4f, 0).build())
                     .setScaleData(GenericParticleData.create(0.2f, 0).build())

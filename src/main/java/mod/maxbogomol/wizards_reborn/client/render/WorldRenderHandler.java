@@ -2,7 +2,6 @@ package mod.maxbogomol.wizards_reborn.client.render;
 
 import com.mojang.blaze3d.systems.RenderSystem;
 import com.mojang.blaze3d.vertex.BufferBuilder;
-import mod.maxbogomol.wizards_reborn.client.config.ClientConfig;
 import mod.maxbogomol.wizards_reborn.utils.RenderUtils;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.RenderType;
@@ -21,23 +20,21 @@ public class WorldRenderHandler {
     public static Matrix4f particleMVMatrix = null;
 
     public static void onRenderWorldLast(RenderLevelStageEvent event) {
-        if (ClientConfig.BETTER_LAYERING.get()) {
-            if (event.getStage() == RenderLevelStageEvent.Stage.AFTER_LEVEL) {
-                RenderSystem.getModelViewStack().pushPose();
-                RenderSystem.getModelViewStack().setIdentity();
-                if (particleMVMatrix != null) RenderSystem.getModelViewStack().mulPoseMatrix(particleMVMatrix);
-                RenderSystem.applyModelViewMatrix();
-                RenderSystem.blendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
-                getDelayedRender().endBatch(RenderUtils.DELAYED_PARTICLE);
-                RenderSystem.blendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE);
-                getDelayedRender().endBatch(RenderUtils.GLOWING_PARTICLE);
-                RenderSystem.getModelViewStack().popPose();
-                RenderSystem.applyModelViewMatrix();
+        if (event.getStage() == RenderLevelStageEvent.Stage.AFTER_LEVEL) {
+            RenderSystem.getModelViewStack().pushPose();
+            RenderSystem.getModelViewStack().setIdentity();
+            if (particleMVMatrix != null) RenderSystem.getModelViewStack().mulPoseMatrix(particleMVMatrix);
+            RenderSystem.applyModelViewMatrix();
+            RenderSystem.blendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
+            getDelayedRender().endBatch(RenderUtils.DELAYED_PARTICLE);
+            RenderSystem.blendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE);
+            getDelayedRender().endBatch(RenderUtils.GLOWING_PARTICLE);
+            RenderSystem.getModelViewStack().popPose();
+            RenderSystem.applyModelViewMatrix();
 
-                getDelayedRender().endBatch(RenderUtils.GLOWING_SPRITE);
-                getDelayedRender().endBatch(RenderUtils.GLOWING);
-                getDelayedRender().endBatch(RenderUtils.FLUID);
-            }
+            getDelayedRender().endBatch(RenderUtils.GLOWING_SPRITE);
+            getDelayedRender().endBatch(RenderUtils.GLOWING);
+            getDelayedRender().endBatch(RenderUtils.FLUID);
         }
     }
 

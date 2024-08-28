@@ -55,7 +55,7 @@ public class HolyCrossSpellEffectPacket {
                             double y = (random.nextDouble() - 0.5D);
                             double z = (random.nextDouble() - 0.5D);
 
-                            ParticleBuilder.create(FluffyFur.SPARKLE_PARTICLE)
+                            ParticleBuilder.create(WizardsReborn.KARMA_PARTICLE)
                                     .setColorData(ColorParticleData.create(msg.colorR, msg.colorG, msg.colorB).build())
                                     .setTransparencyData(GenericParticleData.create(0.3f, 0).build())
                                     .setScaleData(GenericParticleData.create(0.05f, 0.2f).build())

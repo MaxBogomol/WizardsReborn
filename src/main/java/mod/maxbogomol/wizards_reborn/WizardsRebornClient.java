@@ -3,11 +3,12 @@ package mod.maxbogomol.wizards_reborn;
 import com.mojang.blaze3d.platform.InputConstants;
 import com.mojang.blaze3d.vertex.DefaultVertexFormat;
 import mod.maxbogomol.fluffy_fur.FluffyFurClient;
+import mod.maxbogomol.fluffy_fur.client.model.item.CustomModel;
 import mod.maxbogomol.fluffy_fur.client.particle.GenericParticleType;
+import mod.maxbogomol.fluffy_fur.client.render.item.LargeItemRenderer;
 import mod.maxbogomol.fluffy_fur.client.tooltip.AttributeTooltipModifier;
 import mod.maxbogomol.fluffy_fur.client.tooltip.TooltipModifierHandler;
 import mod.maxbogomol.wizards_reborn.client.arcanemicon.ArcanemiconChapters;
-import mod.maxbogomol.wizards_reborn.client.config.ClientConfig;
 import mod.maxbogomol.wizards_reborn.client.event.ClientEvents;
 import mod.maxbogomol.wizards_reborn.client.event.ClientTickHandler;
 import mod.maxbogomol.wizards_reborn.client.event.ClientWorldEvent;
@@ -21,6 +22,7 @@ import mod.maxbogomol.wizards_reborn.client.model.block.AlchemyFlaskModel;
 import mod.maxbogomol.wizards_reborn.client.model.block.AlchemyVialModel;
 import mod.maxbogomol.wizards_reborn.client.model.block.PipeModel;
 import mod.maxbogomol.wizards_reborn.client.model.curio.*;
+import mod.maxbogomol.wizards_reborn.client.model.item.*;
 import mod.maxbogomol.wizards_reborn.client.model.sniffalo.SniffaloArcaneArmorModel;
 import mod.maxbogomol.wizards_reborn.client.model.sniffalo.SniffaloCarpetArmorModel;
 import mod.maxbogomol.wizards_reborn.client.model.sniffalo.SniffaloSaddleArmorModel;
@@ -30,7 +32,6 @@ import mod.maxbogomol.wizards_reborn.client.render.block.*;
 import mod.maxbogomol.wizards_reborn.client.render.curio.*;
 import mod.maxbogomol.wizards_reborn.client.render.entity.*;
 import mod.maxbogomol.wizards_reborn.client.render.fluid.FluidCuboid;
-import mod.maxbogomol.wizards_reborn.client.render.item.*;
 import mod.maxbogomol.wizards_reborn.common.block.CustomBlockColor;
 import mod.maxbogomol.wizards_reborn.common.entity.CustomBoatEntity;
 import mod.maxbogomol.wizards_reborn.common.integration.farmersdelight.FarmersDelightIntegration;
@@ -516,11 +517,12 @@ public class WizardsRebornClient {
                 event.register(WandCrystalsModels.getModelLocationCrystal(crystal));
             }
 
-            if (ClientConfig.LARGE_ITEM_MODEL.get()) {
-                for (String item : Item2DRenderer.HAND_MODEL_ITEMS) {
-                    event.register(new ModelResourceLocation(new ResourceLocation(WizardsReborn.MOD_ID, item + "_in_hand"), "inventory"));
-                }
-            }
+            event.register(LargeItemRenderer.getModelResourceLocation(WizardsReborn.MOD_ID, "arcane_gold_scythe"));
+            event.register(LargeItemRenderer.getModelResourceLocation(WizardsReborn.MOD_ID, "arcane_wood_scythe"));
+            event.register(LargeItemRenderer.getModelResourceLocation(WizardsReborn.MOD_ID, "innocent_wood_scythe"));
+            event.register(LargeItemRenderer.getModelResourceLocation(WizardsReborn.MOD_ID, "blaze_reap"));
+            event.register(LargeItemRenderer.getModelResourceLocation(WizardsReborn.MOD_ID, "skin/implosion_scythe"));
+            event.register(LargeItemRenderer.getModelResourceLocation(WizardsReborn.MOD_ID, "skin/soul_hunter_scythe"));
 
             for (String skin : LeatherCollarItem.skins.values()) {
                 event.register(new ModelResourceLocation(new ResourceLocation(WizardsReborn.MOD_ID, "collar/" + skin), "inventory"));
@@ -658,16 +660,19 @@ public class WizardsRebornClient {
             WandCrystalsModels.addWandItem(map, new ResourceLocation(WizardsReborn.MOD_ID, "skin/magnificent_maid_arcane_wand"));
             WandCrystalsModels.addWandItem(map, new ResourceLocation(WizardsReborn.MOD_ID, "skin/summer_love_arcane_wand"));
 
-            if (ClientConfig.LARGE_ITEM_MODEL.get()) {
-                Item2DRenderer.onModelBakeEvent(event);
-            }
+            LargeItemRenderer.bakeModel(map, WizardsReborn.MOD_ID, "arcane_gold_scythe");
+            LargeItemRenderer.bakeModel(map, WizardsReborn.MOD_ID, "arcane_wood_scythe");
+            LargeItemRenderer.bakeModel(map, WizardsReborn.MOD_ID, "innocent_wood_scythe");
+            LargeItemRenderer.bakeModel(map, WizardsReborn.MOD_ID, "blaze_reap");
+            LargeItemRenderer.bakeModel(map, WizardsReborn.MOD_ID, "skin/soul_hunter_scythe");
+            LargeItemRenderer.bakeModel(map, WizardsReborn.MOD_ID, "skin/implosion_scythe");
 
             for (String skin : LeatherCollarItem.skins.keySet()) {
                 BakedModel model = map.get(new ModelResourceLocation(new ResourceLocation(WizardsReborn.MOD_ID, "collar/" + LeatherCollarItem.skins.get(skin)), "inventory"));
-                CollarModelOverrideList.skins.put(skin, model);
+                CollarItemOverrides.skins.put(skin, model);
             }
             BakedModel collarModel = map.get(new ModelResourceLocation(WizardsReborn.LEATHER_COLLAR.getId(), "inventory"));
-            CustomModel collarNewModel = new CustomModel(collarModel, new CollarModelOverrideList());
+            CustomModel collarNewModel = new CustomModel(collarModel, new CollarItemOverrides());
             map.replace(new ModelResourceLocation(WizardsReborn.LEATHER_COLLAR.getId(), "inventory"), collarNewModel);
 
             for (String skin : ItemSkinsModels.getSkins()) {
@@ -691,9 +696,9 @@ public class WizardsRebornClient {
             addSkinModel(map, WizardsReborn.ARCANE_WOOD_HOE.getId());
             addSkinModel(map, WizardsReborn.INNOCENT_WOOD_HOE.getId());
             addSkinModel(map, WizardsReborn.ARCANE_GOLD_HOE.getId());
-            Item2DRenderer.bakeModel(map, WizardsReborn.MOD_ID, "arcane_wood_scythe", new SkinModelOverrideList());
-            Item2DRenderer.bakeModel(map, WizardsReborn.MOD_ID, "innocent_wood_scythe", new SkinModelOverrideList());
-            Item2DRenderer.bakeModel(map, WizardsReborn.MOD_ID, "arcane_gold_scythe", new SkinModelOverrideList());
+            LargeItemRenderer.bakeModel(map, WizardsReborn.MOD_ID, "arcane_wood_scythe", new SkinItemOverrides());
+            LargeItemRenderer.bakeModel(map, WizardsReborn.MOD_ID, "innocent_wood_scythe", new SkinItemOverrides());
+            LargeItemRenderer.bakeModel(map, WizardsReborn.MOD_ID, "arcane_gold_scythe", new SkinItemOverrides());
             addSkinModel(map, WizardsReborn.ARCANE_FORTRESS_HELMET.getId());
             addSkinModel(map, WizardsReborn.ARCANE_FORTRESS_CHESTPLATE.getId());
             addSkinModel(map, WizardsReborn.ARCANE_FORTRESS_LEGGINGS.getId());
@@ -1009,7 +1014,7 @@ public class WizardsRebornClient {
 
     public static void addSkinModel(Map<ResourceLocation, BakedModel> map, ResourceLocation id) {
         BakedModel model = map.get(new ModelResourceLocation(id, "inventory"));
-        CustomModel newModel = new CustomModel(model, new SkinModelOverrideList());
+        CustomModel newModel = new CustomModel(model, new SkinItemOverrides());
         map.replace(new ModelResourceLocation(id, "inventory"), newModel);
     }
 }

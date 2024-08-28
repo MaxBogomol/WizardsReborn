@@ -1,9 +1,9 @@
 package mod.maxbogomol.wizards_reborn.mixin.client;
 
+import mod.maxbogomol.fluffy_fur.client.config.ClientConfig;
 import mod.maxbogomol.wizards_reborn.api.arcaneenchantment.ArcaneEnchantment;
 import mod.maxbogomol.wizards_reborn.api.arcaneenchantment.ArcaneEnchantmentUtils;
 import mod.maxbogomol.wizards_reborn.api.arcaneenchantment.ArcaneEnchantments;
-import mod.maxbogomol.wizards_reborn.client.config.ClientConfig;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.ItemStack;

@@ -1,5 +1,7 @@
-package mod.maxbogomol.wizards_reborn.client.render.item;
+package mod.maxbogomol.wizards_reborn.client.model.item;
 
+import mod.maxbogomol.fluffy_fur.client.model.item.CustomFinalisedModel;
+import mod.maxbogomol.fluffy_fur.client.model.item.CustomModel;
 import mod.maxbogomol.wizards_reborn.WizardsReborn;
 import net.minecraft.client.resources.model.BakedModel;
 import net.minecraft.client.resources.model.ModelResourceLocation;
@@ -48,7 +50,7 @@ public class DrinksModels {
             model = new CustomFinalisedModel(existingModel, model);
             DrinksModels.addModel(resourceLocation.toString(), i + 1, model);
         }
-        CustomModel customModel = new CustomModel(existingModel, new DrinkModelOverrideList());
+        CustomModel customModel = new CustomModel(existingModel, new DrinkItemOverrides());
         map.replace(new ModelResourceLocation(resourceLocation, "inventory"), customModel);
     }
 }

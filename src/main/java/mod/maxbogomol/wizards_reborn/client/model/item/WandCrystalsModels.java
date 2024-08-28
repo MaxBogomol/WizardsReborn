@@ -1,5 +1,7 @@
-package mod.maxbogomol.wizards_reborn.client.render.item;
+package mod.maxbogomol.wizards_reborn.client.model.item;
 
+import mod.maxbogomol.fluffy_fur.client.model.item.CustomFinalisedModel;
+import mod.maxbogomol.fluffy_fur.client.model.item.CustomModel;
 import net.minecraft.client.resources.model.BakedModel;
 import net.minecraft.client.resources.model.ModelResourceLocation;
 import net.minecraft.resources.ResourceLocation;
@@ -72,7 +74,7 @@ public class WandCrystalsModels {
             model = new CustomFinalisedModel(existingModel, WandCrystalsModels.getModelCrystals(crystal));
             WandCrystalsModels.addModel(resourceLocation.toString(), crystal, model);
         }
-        CustomModel customModel = new CustomModel(existingModel, new WandModelOverrideList());
+        CustomModel customModel = new CustomModel(existingModel, new WandItemOverrides());
         map.replace(new ModelResourceLocation(resourceLocation, "inventory"), customModel);
     }
 }

@@ -1,4 +1,4 @@
-package mod.maxbogomol.wizards_reborn.client.render.item;
+package mod.maxbogomol.wizards_reborn.client.model.item;
 
 import net.minecraft.client.resources.model.BakedModel;
 import net.minecraft.client.resources.model.ModelResourceLocation;

@@ -15,6 +15,7 @@ import java.util.List;
 
 @Mixin(Phantom.class)
 public class PhantomMixin {
+
     @Inject(method = "tick", at = @At("HEAD"))
     private void wizards_reborn$addCollarGoal(CallbackInfo ci) {
         Phantom self = (Phantom) ((Object) this);
