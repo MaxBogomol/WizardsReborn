@@ -7,10 +7,18 @@ buildscript {
     }
 
     dependencies {
-        classpath group: 'net.minecraftforge.gradle', name: 'ForgeGradle', version: '5.1.+', changing: true
+        classpath group: 'net.minecraftforge.gradle', name: 'ForgeGradle', version: '6.0.+', changing: true
         classpath group: 'org.spongepowered', name: 'mixingradle', version: '0.7-SNAPSHOT'
         classpath 'org.parchmentmc:librarian:1.+'
     }
+}
+
+plugins {
+    id 'eclipse'
+    id 'maven-publish'
+    id 'net.minecraftforge.gradle' version '[6.0,6.2)'
+    id 'org.spongepowered.mixin' version '[0.7,0.8)'
+    id 'org.parchmentmc.librarian.forgegradle' version '1.+'
 }
 
 repositories {
@@ -22,12 +30,6 @@ repositories {
     maven { url = 'https://maven.saps.dev/releases' }
     mavenLocal()
 }
-
-apply plugin: 'net.minecraftforge.gradle'
-apply plugin: 'org.spongepowered.mixin'
-apply plugin: 'eclipse'
-apply plugin: 'maven-publish'
-apply plugin: 'org.parchmentmc.librarian.forgegradle'
 
 version = "${minecraft_version}-${mod_version}"
 group = 'mod.maxbogomol.wizards_reborn'
@@ -43,35 +45,32 @@ minecraft {
     accessTransformer = file('src/main/resources/META-INF/accesstransformer.cfg')
 
     runs {
-        client {
+        configureEach {
             workingDirectory project.file('run')
             jvmArg "-Dmixin.env.disableRefMap=true"
             arg "-mixin.config=wizards_reborn.mixins.json"
             property 'forge.logging.markers', 'REGISTRIES'
             property 'forge.logging.console.level', 'debug'
-
             mods { wizards_reborn { source sourceSets.main } }
+        }
+
+        client {
+            args "--username", "Dev"
+            property 'forge.enabledGameTestNamespaces', "fluffy_fur"
         }
 
         server {
-            workingDirectory project.file('run')
-            jvmArg "-Dmixin.env.disableRefMap=true"
-            arg "-mixin.config=wizards_reborn.mixins.json"
-            property 'forge.logging.markers', 'REGISTRIES'
-            property 'forge.logging.console.level', 'debug'
+            property 'forge.enabledGameTestNamespaces', "fluffy_fur"
+            args '--nogui'
+        }
 
-            mods { wizards_reborn { source sourceSets.main } }
+        gameTestServer {
+            property 'forge.enabledGameTestNamespaces', "fluffy_fur"
         }
 
         data {
-            workingDirectory project.file('run')
-            jvmArg "-Dmixin.env.disableRefMap=true"
-            arg "-mixin.config=wizards_reborn.mixins.json"
-            property 'forge.logging.markers', 'REGISTRIES'
-            property 'forge.logging.console.level', 'debug'
+            workingDirectory project.file('run-data')
             args '--mod', 'wizards_reborn', '--all', '--output', file('src/generated/resources/'), '--existing', file('src/main/resources/')
-
-            mods { wizards_reborn { source sourceSets.main } }
         }
     }
 }

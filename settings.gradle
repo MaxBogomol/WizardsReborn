@@ -1,0 +1,13 @@
+pluginManagement {
+    repositories {
+        gradlePluginPortal()
+        maven { url = 'https://maven.parchmentmc.org' }
+        maven { url = 'https://repo.spongepowered.org/maven' }
+        maven {
+            name = 'MinecraftForge'
+            url = 'https://maven.minecraftforge.net/'
+        }
+    }
+}
+
+rootProject.name = "WizardsReborn"
