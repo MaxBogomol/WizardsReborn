@@ -40,17 +40,15 @@ java.toolchain.languageVersion = JavaLanguageVersion.of(17)
 println('Java: ' + System.getProperty('java.version') + ' JVM: ' + System.getProperty('java.vm.version') + '(' + System.getProperty('java.vendor') + ') Arch: ' + System.getProperty('os.arch'))
 
 minecraft {
-    mappings channel: 'parchment', version: '2023.06.26-1.20.1'
-    
+    mappings channel: 'parchment', version: '2023.09.03-1.20.1'
+    copyIdeResources = true
     accessTransformer = file('src/main/resources/META-INF/accesstransformer.cfg')
-
     runs {
         configureEach {
             workingDirectory project.file('run')
-            jvmArg "-Dmixin.env.disableRefMap=true"
-            arg "-mixin.config=wizards_reborn.mixins.json"
             property 'forge.logging.markers', 'REGISTRIES'
             property 'forge.logging.console.level', 'debug'
+            jvmArg "-Dmixin.env.disableRefMap=true"
             mods { wizards_reborn { source sourceSets.main } }
         }
 
@@ -90,19 +88,11 @@ dependencies {
     implementation fg.deobf("curse.maven:jade-324717:5493390")
 
     compileOnly fg.deobf("curse.maven:farmers-delight-398521:5051242")
-}
 
-task customRun {
-    dependencies {
-        runtimeOnly fg.deobf("curse.maven:fusion-connected-textures-854949:5129294")
-        runtimeOnly fg.deobf("curse.maven:configured-457570:5180900")
-        runtimeOnly fg.deobf("curse.maven:model-gap-fix-676136:5200949")
-        runtimeOnly fg.deobf("curse.maven:embeddium-908741:5566632")
-        runtimeOnly fg.deobf("curse.maven:oculus-581495:5299671")
-        runtimeOnly fg.deobf("curse.maven:free-cam-557076:4643128")
-    }
-
-    finalizedBy 'runClient'
+    runtimeOnly fg.deobf("curse.maven:fusion-connected-textures-854949:5129294")
+    runtimeOnly fg.deobf("curse.maven:configured-457570:5180900")
+    runtimeOnly fg.deobf("curse.maven:model-gap-fix-676136:5200949")
+    runtimeOnly fg.deobf("curse.maven:embeddium-908741:5566632")
 }
 
 jar {
