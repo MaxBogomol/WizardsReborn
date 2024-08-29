@@ -1,11 +1,11 @@
 package mod.maxbogomol.wizards_reborn.client.render.block;
 
 import com.mojang.blaze3d.vertex.PoseStack;
+import mod.maxbogomol.fluffy_fur.client.render.LevelRenderHandler;
 import mod.maxbogomol.wizards_reborn.WizardsRebornClient;
 import mod.maxbogomol.wizards_reborn.api.light.LightUtils;
 import mod.maxbogomol.wizards_reborn.api.wissen.WissenUtils;
 import mod.maxbogomol.wizards_reborn.client.event.ClientTickHandler;
-import mod.maxbogomol.wizards_reborn.client.render.WorldRenderHandler;
 import mod.maxbogomol.wizards_reborn.common.block.casing.light.LightCasingBlockEntity;
 import mod.maxbogomol.wizards_reborn.utils.RenderUtils;
 import net.minecraft.client.renderer.MultiBufferSource;
@@ -30,7 +30,7 @@ public class LightCasingRenderer implements BlockEntityRenderer<LightCasingBlock
         double ticksAlpha = (ClientTickHandler.ticksInGame + partialTicks);
         float alpha = (float) (0.35f + Math.abs(Math.sin(Math.toRadians(random.nextFloat() * 360f + ticksAlpha)) * 0.3f));
 
-        MultiBufferSource bufferDelayed = WorldRenderHandler.getDelayedRender();
+        MultiBufferSource bufferDelayed = LevelRenderHandler.getDelayedRender();
 
         for (Direction direction : Direction.values()) {
             ms.pushPose();

@@ -3,8 +3,8 @@ package mod.maxbogomol.wizards_reborn.client.render.entity;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
 import com.mojang.math.Axis;
+import mod.maxbogomol.fluffy_fur.client.render.LevelRenderHandler;
 import mod.maxbogomol.wizards_reborn.WizardsReborn;
-import mod.maxbogomol.wizards_reborn.client.render.WorldRenderHandler;
 import mod.maxbogomol.wizards_reborn.common.entity.ThrowedScytheEntity;
 import mod.maxbogomol.wizards_reborn.utils.RenderUtils;
 import net.minecraft.client.Minecraft;
@@ -30,7 +30,7 @@ public class ThrowedScytheRenderer<T extends ThrowedScytheEntity> extends Entity
 
     @Override
     public void render(ThrowedScytheEntity entity, float entityYaw, float partialTicks, PoseStack stack, MultiBufferSource buffer, int light) {
-        MultiBufferSource bufferDelayed = WorldRenderHandler.getDelayedRender();
+        MultiBufferSource bufferDelayed = LevelRenderHandler.getDelayedRender();
         VertexConsumer builder = bufferDelayed.getBuffer(RenderUtils.GLOWING);
         Color color = WizardsReborn.THROW_ARCANE_ENCHANTMENT.getColor();
 

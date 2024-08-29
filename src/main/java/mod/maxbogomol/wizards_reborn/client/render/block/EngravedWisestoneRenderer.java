@@ -2,9 +2,9 @@ package mod.maxbogomol.wizards_reborn.client.render.block;
 
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.math.Axis;
+import mod.maxbogomol.fluffy_fur.client.render.LevelRenderHandler;
 import mod.maxbogomol.wizards_reborn.api.monogram.Monogram;
 import mod.maxbogomol.wizards_reborn.client.event.ClientTickHandler;
-import mod.maxbogomol.wizards_reborn.client.render.WorldRenderHandler;
 import mod.maxbogomol.wizards_reborn.common.block.engraved_wisestone.EngravedWisestoneBlock;
 import mod.maxbogomol.wizards_reborn.common.block.engraved_wisestone.EngravedWisestoneBlockEntity;
 import mod.maxbogomol.wizards_reborn.utils.RenderUtils;
@@ -24,7 +24,7 @@ public class EngravedWisestoneRenderer implements BlockEntityRenderer<EngravedWi
 
     @Override
     public void render(EngravedWisestoneBlockEntity tile, float partialTicks, PoseStack ms, MultiBufferSource buffers, int light, int overlay) {
-        MultiBufferSource.BufferSource buffersource = WorldRenderHandler.getDelayedRender();
+        MultiBufferSource bufferDelayed = LevelRenderHandler.getDelayedRender();
         float ticks = ClientTickHandler.ticksInGame + Minecraft.getInstance().getPartialTick() * 0.1f;
 
         Random random = new Random();
@@ -53,7 +53,7 @@ public class EngravedWisestoneRenderer implements BlockEntityRenderer<EngravedWi
             ms.mulPose(Axis.XP.rotationDegrees(tile.getVerticalBlockRotate()));
             if (tile.getVerticalBlockRotate() == 0) ms.mulPose(Axis.ZP.rotationDegrees(180f));
             ms.translate(0f, 0f, -0.505f);
-            RenderUtils.spriteGlowQuadCenter(ms, buffersource, 0, 0, 0.5f, 0.5f, sprite.getU0(), sprite.getU1(), sprite.getV0(), sprite.getV1(), 1, 1, 1, 0.5f * alpha);
+            RenderUtils.spriteGlowQuadCenter(ms, bufferDelayed, 0, 0, 0.5f, 0.5f, sprite.getU0(), sprite.getU1(), sprite.getV0(), sprite.getV1(), 1, 1, 1, 0.5f * alpha);
 
             for (int i = 0; i < 5; i++) {
                 ms.translate(0, 0, -0.005f * offset);
@@ -66,11 +66,11 @@ public class EngravedWisestoneRenderer implements BlockEntityRenderer<EngravedWi
                 float tick3 = (random.nextFloat() * 360) + ticks;
                 float tick4 = (random.nextFloat() * 360) + ticks;
 
-                RenderUtils.spriteWaveQuad(ms, buffersource, 0, 0, 0.5f * width, 0.5f * width, 0.01f, tick1, tick2, tick3, tick4, sprite.getU0(), sprite.getU1(), sprite.getV0(), sprite.getV1(), r, g, b, 0.2f * alpha);
+                RenderUtils.spriteWaveQuad(ms, bufferDelayed, 0, 0, 0.5f * width, 0.5f * width, 0.01f, tick1, tick2, tick3, tick4, sprite.getU0(), sprite.getU1(), sprite.getV0(), sprite.getV1(), r, g, b, 0.2f * alpha);
 
                 ms.pushPose();
                 ms.mulPose(Axis.YP.rotationDegrees(180f));
-                RenderUtils.spriteWaveQuad(ms, buffersource, 0, 0, 0.5f * width, 0.5f * width, 0.01f, tick4, tick3, tick2, tick1, sprite.getU1(), sprite.getU0(), sprite.getV0(), sprite.getV1(), r, g, b, 0.2f * alpha);
+                RenderUtils.spriteWaveQuad(ms, bufferDelayed, 0, 0, 0.5f * width, 0.5f * width, 0.01f, tick4, tick3, tick2, tick1, sprite.getU1(), sprite.getU0(), sprite.getV0(), sprite.getV1(), r, g, b, 0.2f * alpha);
                 ms.popPose();
 
                 width = width + 0.1f;

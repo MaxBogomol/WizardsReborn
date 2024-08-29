@@ -673,20 +673,18 @@ public class WissenWandItem extends Item {
             if (tileentity != null) {
                 if (tileentity instanceof AlchemyMachineBlockEntity machine) {
                     for (int ii = 0; ii <= 2; ii++) {
-                        if (player.isShiftKeyDown()) {
-                            int x = mc.getWindow().getGuiScaledWidth() / 2;
-                            int y = mc.getWindow().getGuiScaledHeight() / 2 + 12 + getYOffset();
+                        int x = mc.getWindow().getGuiScaledWidth() / 2;
+                        int y = mc.getWindow().getGuiScaledHeight() / 2 + 12 + getYOffset();
 
-                            Component name = NumericalUtils.getFluidName(machine.getFluidStack(ii), machine.getMaxCapacity());
-                            if (!ClientConfig.NUMERICAL_FLUID.get()) {
-                                name = NumericalUtils.getFluidName(machine.getFluidStack(ii));
-                            }
-                            drawCenteredText(gui, name.getString(), x, y);
-                            addYOffset(11);
+                        Component name = NumericalUtils.getFluidName(machine.getFluidStack(ii), machine.getMaxCapacity());
+                        if (!ClientConfig.NUMERICAL_FLUID.get()) {
+                            name = NumericalUtils.getFluidName(machine.getFluidStack(ii));
                         }
+                        drawCenteredText(gui, name.getString(), x, y);
+                        addYOffset(11);
 
-                        int x = mc.getWindow().getGuiScaledWidth() / 2 - (48 / 2);
-                        int y = mc.getWindow().getGuiScaledHeight() / 2 + 11 + getYOffset();
+                        x = mc.getWindow().getGuiScaledWidth() / 2 - (48 / 2);
+                        y = mc.getWindow().getGuiScaledHeight() / 2 + 11 + getYOffset();
 
                         drawBar(gui, getBarTexture(), x, y, machine.getTank(ii).getFluidAmount(), machine.getMaxCapacity());
                         addYOffset(11);

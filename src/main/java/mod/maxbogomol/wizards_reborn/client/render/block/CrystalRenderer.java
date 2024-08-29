@@ -2,6 +2,7 @@ package mod.maxbogomol.wizards_reborn.client.render.block;
 
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.math.Axis;
+import mod.maxbogomol.fluffy_fur.client.render.LevelRenderHandler;
 import mod.maxbogomol.wizards_reborn.api.crystalritual.CrystalRitual;
 import mod.maxbogomol.wizards_reborn.api.crystalritual.CrystalRitualArea;
 import mod.maxbogomol.wizards_reborn.api.crystalritual.CrystalRitualUtils;
@@ -10,9 +11,8 @@ import mod.maxbogomol.wizards_reborn.api.light.LightRayHitResult;
 import mod.maxbogomol.wizards_reborn.api.light.LightUtils;
 import mod.maxbogomol.wizards_reborn.api.wissen.WissenUtils;
 import mod.maxbogomol.wizards_reborn.client.event.ClientTickHandler;
-import mod.maxbogomol.wizards_reborn.client.render.WorldRenderHandler;
-import mod.maxbogomol.wizards_reborn.common.item.CrystalItem;
 import mod.maxbogomol.wizards_reborn.common.block.crystal.CrystalBlockEntity;
+import mod.maxbogomol.wizards_reborn.common.item.CrystalItem;
 import mod.maxbogomol.wizards_reborn.utils.RenderUtils;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.blockentity.BlockEntityRenderer;
@@ -34,7 +34,7 @@ public class CrystalRenderer implements BlockEntityRenderer<CrystalBlockEntity> 
         double ticksAlpha = (ClientTickHandler.ticksInGame + partialTicks);
         float alpha = (float) (0.15f + Math.abs(Math.sin(Math.toRadians(random.nextFloat() * 360f + ticksAlpha)) * 0.05f));
 
-        MultiBufferSource bufferDelayed = WorldRenderHandler.getDelayedRender();
+        MultiBufferSource bufferDelayed = LevelRenderHandler.getDelayedRender();
 
         CrystalRitual ritual = crystal.getCrystalRitual();
 

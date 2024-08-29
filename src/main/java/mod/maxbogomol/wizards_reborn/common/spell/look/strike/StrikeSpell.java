@@ -7,9 +7,9 @@ import mod.maxbogomol.fluffy_fur.client.animation.ItemAnimation;
 import mod.maxbogomol.fluffy_fur.client.particle.ParticleBuilder;
 import mod.maxbogomol.fluffy_fur.client.particle.data.ColorParticleData;
 import mod.maxbogomol.fluffy_fur.client.particle.data.GenericParticleData;
+import mod.maxbogomol.fluffy_fur.client.render.LevelRenderHandler;
 import mod.maxbogomol.wizards_reborn.WizardsReborn;
 import mod.maxbogomol.wizards_reborn.client.animation.StrikeSpellItemAnimation;
-import mod.maxbogomol.wizards_reborn.client.render.WorldRenderHandler;
 import mod.maxbogomol.wizards_reborn.common.entity.SpellProjectileEntity;
 import mod.maxbogomol.wizards_reborn.common.network.AddScreenshakePacket;
 import mod.maxbogomol.wizards_reborn.common.network.PacketHandler;
@@ -211,7 +211,7 @@ public class StrikeSpell extends BlockLookSpell {
     @Override
     @OnlyIn(Dist.CLIENT)
     public void render(SpellProjectileEntity entity, float entityYaw, float partialTicks, PoseStack stack, MultiBufferSource buffer, int light) {
-        MultiBufferSource bufferDelayed = WorldRenderHandler.getDelayedRender();
+        MultiBufferSource bufferDelayed = LevelRenderHandler.getDelayedRender();
         Color color = getColor();
         float r = color.getRed() / 255f;
         float g = color.getGreen() / 255f;

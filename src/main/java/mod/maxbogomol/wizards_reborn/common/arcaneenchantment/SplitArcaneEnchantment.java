@@ -9,7 +9,6 @@ import mod.maxbogomol.wizards_reborn.api.wissen.WissenUtils;
 import mod.maxbogomol.wizards_reborn.common.entity.SplitArrowEntity;
 import mod.maxbogomol.wizards_reborn.common.network.AddScreenshakePacket;
 import mod.maxbogomol.wizards_reborn.common.network.PacketHandler;
-import net.minecraft.client.player.AbstractClientPlayer;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.entity.LivingEntity;
@@ -97,7 +96,7 @@ public class SplitArcaneEnchantment extends ArcaneEnchantment {
     }
 
     @OnlyIn(Dist.CLIENT)
-    public static float getFOW(AbstractClientPlayer player, ItemStack stack, float fow) {
+    public static float getFOW(Player player, ItemStack stack, float fow) {
         int enchantmentLevel = ArcaneEnchantmentUtils.getArcaneEnchantment(stack, WizardsReborn.SPLIT_ARCANE_ENCHANTMENT);
         if (enchantmentLevel > 0) {
             if (player.getTicksUsingItem() > 35) {

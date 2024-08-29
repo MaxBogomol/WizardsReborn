@@ -2,7 +2,7 @@
 
 Status: **Alpha**
 
-Requires: **[Curios API](https://modrinth.com/mod/curios)**
+Requires: **[Fluffy Fur](https://github.com/MaxBogomol/FluffyFur)** and **[Curios API](https://modrinth.com/mod/curios)**
 
 # About:
 

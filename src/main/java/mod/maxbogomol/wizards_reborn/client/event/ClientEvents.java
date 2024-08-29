@@ -6,12 +6,16 @@ import mod.maxbogomol.wizards_reborn.WizardsReborn;
 import mod.maxbogomol.wizards_reborn.api.arcaneenchantment.ArcaneEnchantmentUtils;
 import mod.maxbogomol.wizards_reborn.client.arcanemicon.ArcanemiconChapters;
 import mod.maxbogomol.wizards_reborn.client.arcanemicon.ArcanemiconGui;
+import mod.maxbogomol.wizards_reborn.common.arcaneenchantment.EagleShotArcaneEnchantment;
+import mod.maxbogomol.wizards_reborn.common.arcaneenchantment.SplitArcaneEnchantment;
+import mod.maxbogomol.wizards_reborn.common.item.equipment.arcane.ArcaneBowItem;
 import net.minecraft.client.Minecraft;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.ai.attributes.Attribute;
 import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
+import net.minecraftforge.client.event.ComputeFovModifierEvent;
 import net.minecraftforge.client.event.MovementInputUpdateEvent;
 import net.minecraftforge.event.entity.player.ItemTooltipEvent;
 import net.minecraftforge.event.entity.player.PlayerEvent;
@@ -47,6 +51,18 @@ public class ClientEvents {
                         event.getToolTip().addAll(i, ArcaneEnchantmentUtils.modifiersAppendHoverText(stack, player.level(), event.getFlags()));
                     }
                 }
+            }
+        }
+    }
+
+    @SubscribeEvent
+    public void getFovModifier(ComputeFovModifierEvent event) {
+        Player player = event.getPlayer();
+        ItemStack itemStack = player.getUseItem();
+        if (player.isUsingItem()) {
+            if (itemStack.getItem() instanceof ArcaneBowItem) {
+                event.setNewFovModifier(EagleShotArcaneEnchantment.getFOW(player, itemStack, event.getNewFovModifier()));
+                event.setNewFovModifier(SplitArcaneEnchantment.getFOW(player, itemStack, event.getNewFovModifier()));
             }
         }
     }

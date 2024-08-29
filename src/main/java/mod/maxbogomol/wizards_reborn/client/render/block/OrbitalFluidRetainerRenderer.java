@@ -2,8 +2,8 @@ package mod.maxbogomol.wizards_reborn.client.render.block;
 
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.math.Axis;
+import mod.maxbogomol.fluffy_fur.client.render.LevelRenderHandler;
 import mod.maxbogomol.wizards_reborn.client.event.ClientTickHandler;
-import mod.maxbogomol.wizards_reborn.client.render.WorldRenderHandler;
 import mod.maxbogomol.wizards_reborn.client.render.fluid.FluidCuboid;
 import mod.maxbogomol.wizards_reborn.client.render.fluid.FluidRenderer;
 import mod.maxbogomol.wizards_reborn.common.block.orbital_fluid_retainer.OrbitalFluidRetainerBlockEntity;
@@ -29,7 +29,7 @@ public class OrbitalFluidRetainerRenderer implements BlockEntityRenderer<Orbital
         random.setSeed(retainer.getBlockPos().asLong());
 
         FluidStack fluidStack = retainer.getFluidStack();
-        MultiBufferSource bufferDelayed = WorldRenderHandler.getDelayedRender();
+        MultiBufferSource bufferDelayed = LevelRenderHandler.getDelayedRender();
 
         double ticks = (ClientTickHandler.ticksInGame + partialTicks) * 2;
         double ticksSub = (ClientTickHandler.ticksInGame + partialTicks) * 1;

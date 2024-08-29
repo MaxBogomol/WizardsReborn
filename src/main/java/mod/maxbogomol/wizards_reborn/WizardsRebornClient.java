@@ -3,6 +3,7 @@ package mod.maxbogomol.wizards_reborn;
 import com.mojang.blaze3d.platform.InputConstants;
 import com.mojang.blaze3d.vertex.DefaultVertexFormat;
 import mod.maxbogomol.fluffy_fur.FluffyFurClient;
+import mod.maxbogomol.fluffy_fur.client.event.BowHandler;
 import mod.maxbogomol.fluffy_fur.client.model.item.CustomModel;
 import mod.maxbogomol.fluffy_fur.client.particle.GenericParticleType;
 import mod.maxbogomol.fluffy_fur.client.render.item.LargeItemRenderer;
@@ -27,7 +28,6 @@ import mod.maxbogomol.wizards_reborn.client.model.sniffalo.SniffaloArcaneArmorMo
 import mod.maxbogomol.wizards_reborn.client.model.sniffalo.SniffaloCarpetArmorModel;
 import mod.maxbogomol.wizards_reborn.client.model.sniffalo.SniffaloSaddleArmorModel;
 import mod.maxbogomol.wizards_reborn.client.particle.LeavesParticleType;
-import mod.maxbogomol.wizards_reborn.client.render.WorldRenderHandler;
 import mod.maxbogomol.wizards_reborn.client.render.block.*;
 import mod.maxbogomol.wizards_reborn.client.render.curio.*;
 import mod.maxbogomol.wizards_reborn.client.render.entity.*;
@@ -261,7 +261,6 @@ public class WizardsRebornClient {
             WissenWandItem.setupTooltips();
 
             forgeBus.addListener(ClientTickHandler::clientTickEnd);
-            forgeBus.addListener(WorldRenderHandler::onRenderWorldLast);
             forgeBus.addListener(ClientWorldEvent::onTick);
             forgeBus.addListener(ClientWorldEvent::onRender);
             forgeBus.addListener(HUDEventHandler::onDrawScreenPost);
@@ -307,6 +306,7 @@ public class WizardsRebornClient {
 
     public static void clientSetup(final FMLClientSetupEvent event) {
         event.enqueueWork(() -> {
+            setupBows();
             setupTooltipModifiers();
             ArcanemiconChapters.init();
 
@@ -946,6 +946,10 @@ public class WizardsRebornClient {
         public static void ColorMappingBlocks(RegisterColorHandlersEvent.Block event) {
             event.register((state, world, pos, tintIndex) -> CustomBlockColor.getInstance().getColor(state, world, pos, tintIndex), CustomBlockColor.PLANTS);
         }
+    }
+
+    public static void setupBows() {
+        BowHandler.addBow(WizardsReborn.ARCANE_WOOD_BOW.get());
     }
 
     public static void setupTooltipModifiers() {

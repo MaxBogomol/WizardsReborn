@@ -2,9 +2,9 @@ package mod.maxbogomol.wizards_reborn.client.render.block;
 
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.math.Axis;
+import mod.maxbogomol.fluffy_fur.client.render.LevelRenderHandler;
 import mod.maxbogomol.wizards_reborn.api.wissen.WissenUtils;
 import mod.maxbogomol.wizards_reborn.client.event.ClientTickHandler;
-import mod.maxbogomol.wizards_reborn.client.render.WorldRenderHandler;
 import mod.maxbogomol.wizards_reborn.common.block.totem.experience_totem.ExperienceTotemBlockEntity;
 import mod.maxbogomol.wizards_reborn.utils.RenderUtils;
 import net.minecraft.client.Minecraft;
@@ -37,7 +37,7 @@ public class ExperienceTotemRenderer implements BlockEntityRenderer<ExperienceTo
         if (totem.getExperience() > 0) {
             float size = (0.85f + (0.15f * globalOffset)) * ((float) totem.getExperience() / totem.getMaxExperience());
 
-            MultiBufferSource bufferDelayed = WorldRenderHandler.getDelayedRender();
+            MultiBufferSource bufferDelayed = LevelRenderHandler.getDelayedRender();
 
             ms.pushPose();
             ms.translate(0.5F, 0.75F, 0.5F);

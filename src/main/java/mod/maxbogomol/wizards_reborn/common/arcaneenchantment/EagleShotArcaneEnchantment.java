@@ -9,7 +9,6 @@ import mod.maxbogomol.wizards_reborn.api.wissen.WissenUtils;
 import mod.maxbogomol.wizards_reborn.common.network.AddScreenshakePacket;
 import mod.maxbogomol.wizards_reborn.common.network.EagleShotRayEffectPacket;
 import mod.maxbogomol.wizards_reborn.common.network.PacketHandler;
-import net.minecraft.client.player.AbstractClientPlayer;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.entity.Entity;
@@ -124,7 +123,7 @@ public class EagleShotArcaneEnchantment extends ArcaneEnchantment {
     }
 
     @OnlyIn(Dist.CLIENT)
-    public static float getFOW(AbstractClientPlayer player, ItemStack stack, float fow) {
+    public static float getFOW(Player player, ItemStack stack, float fow) {
         int enchantmentLevel = ArcaneEnchantmentUtils.getArcaneEnchantment(stack, WizardsReborn.EAGLE_SHOT_ARCANE_ENCHANTMENT);
         if (enchantmentLevel > 0) {
             fow = fow - (BowItem.getPowerForTime(player.getTicksUsingItem()) * 0.4f) - 0.3f;

@@ -2,11 +2,11 @@ package mod.maxbogomol.wizards_reborn.client.render.block;
 
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.math.Axis;
+import mod.maxbogomol.fluffy_fur.client.render.LevelRenderHandler;
 import mod.maxbogomol.wizards_reborn.client.event.ClientTickHandler;
-import mod.maxbogomol.wizards_reborn.client.render.WorldRenderHandler;
 import mod.maxbogomol.wizards_reborn.common.block.placed_items.PlacedItemsBlock;
-import mod.maxbogomol.wizards_reborn.common.item.IPlacedItem;
 import mod.maxbogomol.wizards_reborn.common.block.placed_items.PlacedItemsBlockEntity;
+import mod.maxbogomol.wizards_reborn.common.item.IPlacedItem;
 import mod.maxbogomol.wizards_reborn.utils.RenderUtils;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.MultiBufferSource;
@@ -83,7 +83,7 @@ public class PlacedItemsRenderer implements BlockEntityRenderer<PlacedItemsBlock
             ms.popPose();
         }
 
-        MultiBufferSource bufferDelayed = WorldRenderHandler.getDelayedRender();
+        MultiBufferSource bufferDelayed = LevelRenderHandler.getDelayedRender();
         if (size <= 0 && items.things) {
             float addTick = random.nextFloat() * 360f;
             double ticks = (ClientTickHandler.ticksInGame + partialTicks) * 0.05f + addTick;

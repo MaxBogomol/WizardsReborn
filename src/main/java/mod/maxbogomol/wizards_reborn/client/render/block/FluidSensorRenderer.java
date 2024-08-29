@@ -2,8 +2,8 @@ package mod.maxbogomol.wizards_reborn.client.render.block;
 
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.math.Axis;
+import mod.maxbogomol.fluffy_fur.client.render.LevelRenderHandler;
 import mod.maxbogomol.wizards_reborn.client.event.ClientTickHandler;
-import mod.maxbogomol.wizards_reborn.client.render.WorldRenderHandler;
 import mod.maxbogomol.wizards_reborn.client.render.fluid.FluidCuboid;
 import mod.maxbogomol.wizards_reborn.client.render.fluid.FluidRenderer;
 import mod.maxbogomol.wizards_reborn.common.block.sensor.SensorBaseBlock;
@@ -27,7 +27,7 @@ public class FluidSensorRenderer implements BlockEntityRenderer<FluidSensorBlock
         Random random = new Random();
         random.setSeed(sensor.getBlockPos().asLong());
 
-        MultiBufferSource bufferDelayed = WorldRenderHandler.getDelayedRender();
+        MultiBufferSource bufferDelayed = LevelRenderHandler.getDelayedRender();
 
         double ticks = (ClientTickHandler.ticksInGame + partialTicks) * 0.1F;
 

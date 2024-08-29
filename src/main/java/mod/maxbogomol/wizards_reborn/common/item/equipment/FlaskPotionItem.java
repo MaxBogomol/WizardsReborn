@@ -2,12 +2,12 @@ package mod.maxbogomol.wizards_reborn.common.item.equipment;
 
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.math.Axis;
+import mod.maxbogomol.fluffy_fur.client.render.LevelRenderHandler;
 import mod.maxbogomol.fluffy_fur.utils.ColorUtils;
 import mod.maxbogomol.wizards_reborn.WizardsReborn;
 import mod.maxbogomol.wizards_reborn.WizardsRebornClient;
 import mod.maxbogomol.wizards_reborn.api.alchemy.AlchemyPotion;
 import mod.maxbogomol.wizards_reborn.api.alchemy.AlchemyPotionUtils;
-import mod.maxbogomol.wizards_reborn.client.render.WorldRenderHandler;
 import mod.maxbogomol.wizards_reborn.client.render.fluid.FluidRenderer;
 import mod.maxbogomol.wizards_reborn.common.alchemypotion.FluidAlchemyPotion;
 import mod.maxbogomol.wizards_reborn.common.block.placed_items.PlacedItemsBlockEntity;
@@ -58,7 +58,7 @@ public class FlaskPotionItem extends AlchemyPotionItem {
                 fluidStack = new FluidStack(fluid, 6 - uses);
                 colorI = clientType.getTintColor(fluidStack);
             }
-            MultiBufferSource bufferDelayed = WorldRenderHandler.getDelayedRender();
+            MultiBufferSource bufferDelayed = LevelRenderHandler.getDelayedRender();
             FluidRenderer.renderScaledCuboid(ms, bufferDelayed, WizardsRebornClient.FLASK_FLUID_CUBE, fluidStack, colorI, 0, 6, light, false);
         }
         ms.popPose();
