@@ -100,7 +100,17 @@ public class SplitArcaneEnchantment extends ArcaneEnchantment {
         int enchantmentLevel = ArcaneEnchantmentUtils.getArcaneEnchantment(stack, WizardsReborn.SPLIT_ARCANE_ENCHANTMENT);
         if (enchantmentLevel > 0) {
             if (player.getTicksUsingItem() > 35) {
-                fow = fow + 0.2f;
+                float costModifier = WissenUtils.getWissenCostModifierWithDiscount(player);
+                List<ItemStack> items = WissenUtils.getWissenItemsNoneAndStorage(WissenUtils.getWissenItemsCurios(player));
+                int wissen = WissenUtils.getWissenInItems(items);
+                int cost = (int) ((30 + (enchantmentLevel * 25)) * (1 - costModifier));
+                if (cost <= 0) {
+                    cost = 1;
+                }
+
+                if (WissenUtils.canRemoveWissen(wissen, cost)) {
+                    fow = fow + 0.2f;
+                }
             }
         }
         return fow;

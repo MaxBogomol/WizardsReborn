@@ -126,8 +126,18 @@ public class EagleShotArcaneEnchantment extends ArcaneEnchantment {
     public static float getFOW(Player player, ItemStack stack, float fow) {
         int enchantmentLevel = ArcaneEnchantmentUtils.getArcaneEnchantment(stack, WizardsReborn.EAGLE_SHOT_ARCANE_ENCHANTMENT);
         if (enchantmentLevel > 0) {
-            fow = fow - (BowItem.getPowerForTime(player.getTicksUsingItem()) * 0.4f) - 0.3f;
-            if (fow < 0) fow = 0;
+            float costModifier = WissenUtils.getWissenCostModifierWithDiscount(player);
+            List<ItemStack> items = WissenUtils.getWissenItemsNoneAndStorage(WissenUtils.getWissenItemsCurios(player));
+            int wissen = WissenUtils.getWissenInItems(items);
+            int cost = (int) ((30 + (enchantmentLevel * 20)) * (1 - costModifier));
+            if (cost <= 0) {
+                cost = 1;
+            }
+
+            if (WissenUtils.canRemoveWissen(wissen, cost)) {
+                fow = fow - (BowItem.getPowerForTime(player.getTicksUsingItem()) * 0.4f) - 0.3f;
+                if (fow < 0) fow = 0;
+            }
         }
         return fow;
     }

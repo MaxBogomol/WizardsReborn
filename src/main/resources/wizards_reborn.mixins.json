@@ -15,7 +15,6 @@
     "client.ItemInHandRendererMixin",
     "client.RabbitRendererMixin",
     "client.FoxRendererMixin",
-    "client.ClientMusicChoiceMixin",
     "client.GuiGraphicsMixin",
     "client.CameraMixin"
   ],

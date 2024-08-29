@@ -7,6 +7,8 @@ import mod.maxbogomol.fluffy_fur.client.event.BowHandler;
 import mod.maxbogomol.fluffy_fur.client.model.item.CustomModel;
 import mod.maxbogomol.fluffy_fur.client.particle.GenericParticleType;
 import mod.maxbogomol.fluffy_fur.client.render.item.LargeItemRenderer;
+import mod.maxbogomol.fluffy_fur.client.sound.MusicHandler;
+import mod.maxbogomol.fluffy_fur.client.sound.MusicModifier;
 import mod.maxbogomol.fluffy_fur.client.tooltip.AttributeTooltipModifier;
 import mod.maxbogomol.fluffy_fur.client.tooltip.TooltipModifierHandler;
 import mod.maxbogomol.wizards_reborn.client.arcanemicon.ArcanemiconChapters;
@@ -66,6 +68,7 @@ import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.client.event.*;
 import net.minecraftforge.client.settings.KeyConflictContext;
 import net.minecraftforge.common.MinecraftForge;
+import net.minecraftforge.common.Tags;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
@@ -77,6 +80,7 @@ import top.theillusivec4.curios.api.client.CuriosRendererRegistry;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Map;
+import java.util.Random;
 
 public class WizardsRebornClient {
     private static final String CATEGORY_KEY = "key.category."+WizardsReborn.MOD_ID+".general";
@@ -250,9 +254,11 @@ public class WizardsRebornClient {
     public static final ModelResourceLocation CORK_BAMBOO_CHISELED_PLANKS_CROSS_BAULK_CONNECTION_2 = new ModelResourceLocation(new ResourceLocation(WizardsReborn.MOD_ID, "cork_bamboo_chiseled_planks_cross_baulk_connection_opposite"), "");
     public static final ModelResourceLocation CORK_BAMBOO_CHISELED_PLANKS_CROSS_BAULK_END_2 = new ModelResourceLocation(new ResourceLocation(WizardsReborn.MOD_ID, "cork_bamboo_chiseled_planks_cross_baulk_end_opposite"), "");
 
-    public static final Music MOR_MUSIC = new Music(WizardsReborn.MUSIC_DISC_MOR_SOUND.getHolder().get(), 6000, 12000, true);
-    public static final Music REBORN_MUSIC = new Music(WizardsReborn.MUSIC_DISC_REBORN_SOUND.getHolder().get(), 400, 1200, true);
-    public static final Music SHIMMER_MUSIC = new Music(WizardsReborn.MUSIC_DISC_SHIMMER_SOUND.getHolder().get(), 6000, 12000, true);
+    public static final Music REBORN_MUSIC = new Music(WizardsReborn.MUSIC_DISC_REBORN_SOUND.getHolder().get(), 20, 600, true);
+    public static final Music MOR_MUSIC = new Music(WizardsReborn.MUSIC_DISC_MOR_SOUND.getHolder().get(), 3600, 9600, false);
+    public static final Music SHIMMER_MUSIC = new Music(WizardsReborn.MUSIC_DISC_SHIMMER_SOUND.getHolder().get(), 3600, 9600, false);
+
+    public static Random random = new Random();
 
     public static class ClientOnly {
         public static void clientInit() {
@@ -308,6 +314,7 @@ public class WizardsRebornClient {
         event.enqueueWork(() -> {
             setupBows();
             setupTooltipModifiers();
+            setupMusic();
             ArcanemiconChapters.init();
 
             MenuScreens.register(WizardsReborn.ARCANE_WORKBENCH_CONTAINER.get(), ArcaneWorkbenchScreen::new);
@@ -978,6 +985,44 @@ public class WizardsRebornClient {
                 operation = AttributeModifier.Operation.MULTIPLY_BASE;
                 amount = amount / 100f;
                 return new ModifyResult(modifier, amount, operation);
+            }
+        });
+    }
+
+    public static void setupMusic() {
+        MusicHandler.register(new MusicModifier() {
+            public boolean isMenu(Music defaultMisic, Minecraft minecraft) {
+                return true;
+            }
+
+            public Music play(Music defaultMisic, Minecraft minecraft) {
+                return REBORN_MUSIC;
+            }
+        });
+        MusicHandler.register(new MusicModifier() {
+            public boolean isCanPlay(Music defaultMisic, Minecraft minecraft) {
+                if (isBiome(Tags.Biomes.IS_SWAMP, minecraft)) {
+                    return (random.nextFloat() < 0.8f);
+                }
+                return false;
+            }
+
+            public Music play(Music defaultMisic, Minecraft minecraft) {
+                return MOR_MUSIC;
+            }
+        });
+        MusicHandler.register(new MusicModifier() {
+            public boolean isCanPlay(Music defaultMisic, Minecraft minecraft) {
+                if (isBiome(Tags.Biomes.IS_CAVE, minecraft)) {
+                    if (minecraft.player.getY() >= -40 && minecraft.player.getY() <= 30) {
+                        return (random.nextFloat() < 0.6f);
+                    }
+                }
+                return false;
+            }
+
+            public Music play(Music defaultMisic, Minecraft minecraft) {
+                return SHIMMER_MUSIC;
             }
         });
     }
