@@ -23,10 +23,8 @@ import net.minecraft.world.level.block.state.BlockState;
 import org.jetbrains.annotations.NotNull;
 
 import java.awt.*;
-import java.util.Random;
 
 public class SteamPipeBlock extends TinyPipeBaseBlock {
-    private static Random random = new Random();
 
     public SteamPipeBlock(Properties pProperties) {
         super(pProperties);

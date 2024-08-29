@@ -1,28 +1,21 @@
 package mod.maxbogomol.wizards_reborn.common.block.crystal_growth;
 
+import mod.maxbogomol.fluffy_fur.common.block.entity.BlockEntityBase;
 import mod.maxbogomol.fluffy_fur.common.block.entity.TickableBlockEntity;
 import mod.maxbogomol.wizards_reborn.WizardsReborn;
 import mod.maxbogomol.wizards_reborn.api.crystalritual.IGrowableCrystal;
 import mod.maxbogomol.wizards_reborn.api.light.ILightBlockEntity;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
-import net.minecraft.network.Connection;
-import net.minecraft.network.protocol.game.ClientboundBlockEntityDataPacket;
-import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.Vec3;
-import org.jetbrains.annotations.NotNull;
 
-import java.util.Random;
-
-public class CrystalGrowthBlockEntity extends BlockEntity implements TickableBlockEntity, ILightBlockEntity, IGrowableCrystal {
+public class CrystalGrowthBlockEntity extends BlockEntityBase implements TickableBlockEntity, ILightBlockEntity, IGrowableCrystal {
 
     public int light = 0;
     public int growingTicks = 0;
     public float growingPower = 0;
-
-    public Random random = new Random();
 
     public CrystalGrowthBlockEntity(BlockEntityType<?> type, BlockPos pos, BlockState state) {
         super(type, pos, state);
@@ -52,25 +45,6 @@ public class CrystalGrowthBlockEntity extends BlockEntity implements TickableBlo
 
             if (update) setChanged();
         }
-    }
-
-    @Override
-    public ClientboundBlockEntityDataPacket getUpdatePacket() {
-        return ClientboundBlockEntityDataPacket.create(this, (e) -> e.getUpdateTag());
-    }
-
-    @Override
-    public void onDataPacket(Connection net, ClientboundBlockEntityDataPacket pkt) {
-        super.onDataPacket(net, pkt);
-        handleUpdateTag(pkt.getTag());
-    }
-
-    @NotNull
-    @Override
-    public final CompoundTag getUpdateTag() {
-        var tag = new CompoundTag();
-        saveAdditional(tag);
-        return tag;
     }
 
     @Override

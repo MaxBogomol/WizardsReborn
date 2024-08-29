@@ -20,8 +20,6 @@ import mod.maxbogomol.wizards_reborn.common.item.CrystalItem;
 import mod.maxbogomol.wizards_reborn.common.item.equipment.WissenWandItem;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
-import net.minecraft.network.Connection;
-import net.minecraft.network.protocol.game.ClientboundBlockEntityDataPacket;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.SimpleContainer;
 import net.minecraft.world.item.ItemStack;
@@ -32,12 +30,10 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.Vec3;
 import net.minecraftforge.common.extensions.IForgeBlockEntity;
-import org.jetbrains.annotations.NotNull;
 
 import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Random;
 
 public class CrystalBlockEntity extends BlockSimpleInventory implements TickableBlockEntity, ILightBlockEntity, ICooldownBlockEntity, IWissenWandFunctionalBlockEntity, IWissenWandControlledBlockEntity, IItemResultBlockEntity {
 
@@ -53,8 +49,6 @@ public class CrystalBlockEntity extends BlockSimpleInventory implements Tickable
     public boolean startRitual = false;
     public int tickRitual = 0;
     public CompoundTag tagRitual = new CompoundTag();
-
-    public Random random = new Random();
 
     public CrystalSoundInstance sound;
 
@@ -174,25 +168,6 @@ public class CrystalBlockEntity extends BlockSimpleInventory implements Tickable
                 return 1;
             }
         };
-    }
-
-    @Override
-    public ClientboundBlockEntityDataPacket getUpdatePacket() {
-        return ClientboundBlockEntityDataPacket.create(this, (e) -> e.getUpdateTag());
-    }
-
-    @Override
-    public void onDataPacket(Connection net, ClientboundBlockEntityDataPacket pkt) {
-        super.onDataPacket(net, pkt);
-        handleUpdateTag(pkt.getTag());
-    }
-
-    @NotNull
-    @Override
-    public final CompoundTag getUpdateTag() {
-        var tag = new CompoundTag();
-        saveAdditional(tag);
-        return tag;
     }
 
     @Override

@@ -21,8 +21,6 @@ import mod.maxbogomol.wizards_reborn.common.item.equipment.WissenWandItem;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.nbt.CompoundTag;
-import net.minecraft.network.Connection;
-import net.minecraft.network.protocol.game.ClientboundBlockEntityDataPacket;
 import net.minecraft.world.SimpleContainer;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.ItemStack;
@@ -37,7 +35,6 @@ import org.jetbrains.annotations.NotNull;
 
 import javax.annotation.Nullable;
 import java.awt.*;
-import java.util.Random;
 
 public class LightEmitterBlockEntity extends ExposedBlockSimpleInventory implements TickableBlockEntity, IWissenBlockEntity, ILightBlockEntity, IWissenWandControlledBlockEntity {
 
@@ -48,8 +45,6 @@ public class LightEmitterBlockEntity extends ExposedBlockSimpleInventory impleme
 
     public int wissen = 0;
     public int light = 0;
-
-    public Random random = new Random();
 
     public LightEmitterSoundInstance sound;
 
@@ -156,33 +151,6 @@ public class LightEmitterBlockEntity extends ExposedBlockSimpleInventory impleme
                 return 1;
             }
         };
-    }
-
-    @Override
-    public ClientboundBlockEntityDataPacket getUpdatePacket() {
-        return ClientboundBlockEntityDataPacket.create(this, (e) -> e.getUpdateTag());
-    }
-
-    @Override
-    public void onDataPacket(Connection net, ClientboundBlockEntityDataPacket pkt) {
-        super.onDataPacket(net, pkt);
-        handleUpdateTag(pkt.getTag());
-    }
-
-    @NotNull
-    @Override
-    public final CompoundTag getUpdateTag() {
-        var tag = new CompoundTag();
-        saveAdditional(tag);
-        return tag;
-    }
-
-    @Override
-    public void setChanged() {
-        super.setChanged();
-        if (level != null && !level.isClientSide) {
-            BlockEntityUpdate.packet(this);
-        }
     }
 
     @Override

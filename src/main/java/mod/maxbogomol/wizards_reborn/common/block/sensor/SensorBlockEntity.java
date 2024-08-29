@@ -1,16 +1,16 @@
 package mod.maxbogomol.wizards_reborn.common.block.sensor;
 
+import mod.maxbogomol.fluffy_fur.common.block.entity.BlockEntityBase;
 import mod.maxbogomol.fluffy_fur.common.block.entity.TickableBlockEntity;
 import mod.maxbogomol.wizards_reborn.WizardsReborn;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
-import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.phys.AABB;
 
-public class SensorBlockEntity extends BlockEntity implements TickableBlockEntity {
+public class SensorBlockEntity extends BlockEntityBase implements TickableBlockEntity {
     private int output;
 
     public SensorBlockEntity(BlockEntityType<?> type, BlockPos pos, BlockState state) {

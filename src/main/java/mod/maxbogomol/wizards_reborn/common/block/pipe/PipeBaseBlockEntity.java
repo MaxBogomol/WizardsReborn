@@ -4,6 +4,7 @@ import mod.maxbogomol.fluffy_fur.FluffyFur;
 import mod.maxbogomol.fluffy_fur.client.particle.ParticleBuilder;
 import mod.maxbogomol.fluffy_fur.client.particle.data.ColorParticleData;
 import mod.maxbogomol.fluffy_fur.client.particle.data.GenericParticleData;
+import mod.maxbogomol.fluffy_fur.common.block.entity.BlockEntityBase;
 import mod.maxbogomol.wizards_reborn.api.alchemy.IPipeConnection;
 import mod.maxbogomol.wizards_reborn.api.alchemy.PipeConnection;
 import net.minecraft.core.BlockPos;
@@ -21,7 +22,7 @@ import net.minecraftforge.client.model.data.ModelProperty;
 import java.awt.*;
 import java.util.Random;
 
-public class PipeBaseBlockEntity extends BlockEntity {
+public class PipeBaseBlockEntity extends BlockEntityBase {
     public PipeConnection[] connections = {
             PipeConnection.NONE,
             PipeConnection.NONE,
@@ -104,14 +105,8 @@ public class PipeBaseBlockEntity extends BlockEntity {
     }
 
     @Override
-    public ClientboundBlockEntityDataPacket getUpdatePacket() {
-        return ClientboundBlockEntityDataPacket.create(this, (e) -> e.getUpdateTag());
-    }
-
-    @Override
     public void onDataPacket(Connection net, ClientboundBlockEntityDataPacket pkt) {
         super.onDataPacket(net, pkt);
-        handleUpdateTag(pkt.getTag());
         if (level.isClientSide()) {
             level.sendBlockUpdated(worldPosition, getBlockState(), getBlockState(), Block.UPDATE_ALL);
         }
@@ -150,8 +145,6 @@ public class PipeBaseBlockEntity extends BlockEntity {
             nbt.putInt("connection" + direction.get3DDataValue(), getConnection(direction).index);
         }
     }
-
-    static Random random = new Random();
 
     public void cloggedEffect() {
         Random posRand = new Random(getBlockPos().asLong());
