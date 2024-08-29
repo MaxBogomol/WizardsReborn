@@ -7,6 +7,7 @@ import mod.maxbogomol.fluffy_fur.client.particle.data.GenericParticleData;
 import mod.maxbogomol.fluffy_fur.common.block.entity.ExposedBlockSimpleInventory;
 import mod.maxbogomol.fluffy_fur.common.block.entity.TickableBlockEntity;
 import mod.maxbogomol.fluffy_fur.common.easing.Easing;
+import mod.maxbogomol.fluffy_fur.common.network.BlockEntityUpdate;
 import mod.maxbogomol.wizards_reborn.WizardsReborn;
 import mod.maxbogomol.wizards_reborn.api.wissen.ICooldownBlockEntity;
 import mod.maxbogomol.wizards_reborn.api.wissen.IWissenBlockEntity;
@@ -19,7 +20,6 @@ import mod.maxbogomol.wizards_reborn.common.network.PacketHandler;
 import mod.maxbogomol.wizards_reborn.common.network.WissenSendEffectPacket;
 import mod.maxbogomol.wizards_reborn.common.network.tileentity.WissenTranslatorBurstEffectPacket;
 import mod.maxbogomol.wizards_reborn.common.network.tileentity.WissenTranslatorSendEffectPacket;
-import mod.maxbogomol.wizards_reborn.utils.PacketUtils;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.nbt.CompoundTag;
@@ -128,7 +128,7 @@ public class WissenTranslatorBlockEntity extends ExposedBlockSimpleInventory imp
                             if ((getWissenPerReceive() - removeRemain - addRemain) > 0) {
                                 wissenTileEntity.removeWissen(getWissenPerReceive() - removeRemain - addRemain);
                                 addWissenRay(new BlockPos(blockFromX, blockFromY, blockFromZ), getBlockPos(), getWissenPerReceive() - removeRemain - addRemain);
-                                PacketUtils.SUpdateTileEntityPacket(tileentity);
+                                BlockEntityUpdate.packet(tileentity);
 
                                 setCooldown = true;
                                 update = true;
@@ -152,9 +152,7 @@ public class WissenTranslatorBlockEntity extends ExposedBlockSimpleInventory imp
                 cooldown = getSendWissenCooldown();
             }
 
-            if (update) {
-                PacketUtils.SUpdateTileEntityPacket(this);
-            }
+            if (update) setChanged();
         }
 
         if (level.isClientSide()) {
@@ -217,7 +215,7 @@ public class WissenTranslatorBlockEntity extends ExposedBlockSimpleInventory imp
     public void setChanged() {
         super.setChanged();
         if (level != null && !level.isClientSide) {
-            PacketUtils.SUpdateTileEntityPacket(this);
+            BlockEntityUpdate.packet(this);
         }
     }
 
@@ -449,7 +447,7 @@ public class WissenTranslatorBlockEntity extends ExposedBlockSimpleInventory imp
                             wissenTileEntity.addWissen(tag.getInt("wissen") - addRemain);
                             level.playSound(WizardsReborn.proxy.getPlayer(), X, Y, Z, WizardsReborn.WISSEN_TRANSFER_SOUND.get(), SoundSource.BLOCKS, 0.1f, (float) (1f + ((random.nextFloat() - 0.5D) / 2)));
 
-                            PacketUtils.SUpdateTileEntityPacket(tileentity);
+                            BlockEntityUpdate.packet(tileentity);
 
                             PacketHandler.sendToTracking(level, getBlockPos(), new WissenTranslatorBurstEffectPacket(X, Y, Z, (float) color.getRed() / 255, (float) color.getGreen() / 255, (float) color.getBlue() / 255));
                             PacketHandler.sendToTracking(level, getBlockPos(), new WissenTranslatorSendEffectPacket(BlockPos.containing(X, Y, Z)));
@@ -516,7 +514,7 @@ public class WissenTranslatorBlockEntity extends ExposedBlockSimpleInventory imp
                 blockFromZ = oldBlockPos.getZ();
                 isFromBlock = true;
                 WissenWandItem.setBlock(stack, false);
-                PacketUtils.SUpdateTileEntityPacket(this);
+                BlockEntityUpdate.packet(this);
                 return true;
             }
         }
@@ -536,7 +534,7 @@ public class WissenTranslatorBlockEntity extends ExposedBlockSimpleInventory imp
                 blockToZ = oldBlockPos.getZ();
                 isToBlock = true;
                 WissenWandItem.setBlock(stack, false);
-                PacketUtils.SUpdateTileEntityPacket(this);
+                BlockEntityUpdate.packet(this);
                 return true;
             }
         }
@@ -548,7 +546,7 @@ public class WissenTranslatorBlockEntity extends ExposedBlockSimpleInventory imp
     public boolean wissenWandReload(ItemStack stack, UseOnContext context, BlockEntity tile) {
         isFromBlock = false;
         isToBlock = false;
-        PacketUtils.SUpdateTileEntityPacket(this);
+        BlockEntityUpdate.packet(this);
         return true;
     }
 }

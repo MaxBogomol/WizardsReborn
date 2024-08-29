@@ -2,9 +2,9 @@ package mod.maxbogomol.wizards_reborn.common.block.salt_torch;
 
 import mod.maxbogomol.fluffy_fur.common.block.entity.BlockSimpleInventory;
 import mod.maxbogomol.fluffy_fur.common.block.entity.TickableBlockEntity;
+import mod.maxbogomol.fluffy_fur.common.network.BlockEntityUpdate;
 import mod.maxbogomol.wizards_reborn.WizardsReborn;
 import mod.maxbogomol.wizards_reborn.common.item.equipment.WissenWandItem;
-import mod.maxbogomol.wizards_reborn.utils.PacketUtils;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.sounds.SoundSource;
@@ -87,7 +87,7 @@ public class SaltTorchBlock extends Block implements EntityBlock, SimpleWaterlog
         if (stack.getItem() instanceof WissenWandItem) {
             if (WissenWandItem.getMode(stack) != 4) {
                 world.updateNeighbourForOutputSignal(pos, this);
-                PacketUtils.SUpdateTileEntityPacket(tile);
+                BlockEntityUpdate.packet(tile);
                 return InteractionResult.SUCCESS;
             }
         }
@@ -106,7 +106,7 @@ public class SaltTorchBlock extends Block implements EntityBlock, SimpleWaterlog
                             player.getInventory().removeItem(player.getItemInHand(hand));
                         }
                         world.updateNeighbourForOutputSignal(pos, this);
-                        PacketUtils.SUpdateTileEntityPacket(tile);
+                        BlockEntityUpdate.packet(tile);
                         world.playSound(null, pos, WizardsReborn.PEDESTAL_INSERT_SOUND.get(), SoundSource.BLOCKS, 1.0f, 1.0f);
                         return InteractionResult.SUCCESS;
                     }
@@ -123,7 +123,7 @@ public class SaltTorchBlock extends Block implements EntityBlock, SimpleWaterlog
                     }
                     tile.getItemHandler().removeItem(slot, 1);
                     world.updateNeighbourForOutputSignal(pos, this);
-                    PacketUtils.SUpdateTileEntityPacket(tile);
+                    BlockEntityUpdate.packet(tile);
                     world.playSound(null, pos, WizardsReborn.PEDESTAL_REMOVE_SOUND.get(), SoundSource.BLOCKS, 1.0f, 1.0f);
                     return InteractionResult.SUCCESS;
                 }

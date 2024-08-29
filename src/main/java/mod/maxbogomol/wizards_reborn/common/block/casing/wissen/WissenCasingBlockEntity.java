@@ -1,9 +1,9 @@
 package mod.maxbogomol.wizards_reborn.common.block.casing.wissen;
 
+import mod.maxbogomol.fluffy_fur.common.network.BlockEntityUpdate;
 import mod.maxbogomol.wizards_reborn.WizardsReborn;
 import mod.maxbogomol.wizards_reborn.api.wissen.WissenUtils;
 import mod.maxbogomol.wizards_reborn.common.block.wissen_translator.WissenTranslatorBlockEntity;
-import mod.maxbogomol.wizards_reborn.utils.PacketUtils;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.nbt.CompoundTag;
@@ -75,9 +75,7 @@ public class WissenCasingBlockEntity extends WissenTranslatorBlockEntity {
                 level.playSound(WizardsReborn.proxy.getPlayer(), getBlockPos(), WizardsReborn.WISSEN_TRANSFER_SOUND.get(), SoundSource.BLOCKS, 0.1f, (float) (1.1f + ((random.nextFloat() - 0.5D) / 2)));
             }
 
-            if (update) {
-                PacketUtils.SUpdateTileEntityPacket(this);
-            }
+            if (update) setChanged();
         }
     }
 
@@ -130,7 +128,7 @@ public class WissenCasingBlockEntity extends WissenTranslatorBlockEntity {
     @Override
     public boolean wissenWandReload(ItemStack stack, UseOnContext context, BlockEntity tile) {
         resetsConnections();
-        PacketUtils.SUpdateTileEntityPacket(this);
+        BlockEntityUpdate.packet(this);
         return true;
     }
 

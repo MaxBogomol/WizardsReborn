@@ -1,10 +1,10 @@
 package mod.maxbogomol.wizards_reborn.common.block.sensor.item_sorter;
 
+import mod.maxbogomol.fluffy_fur.common.network.BlockEntityUpdate;
 import mod.maxbogomol.wizards_reborn.WizardsReborn;
 import mod.maxbogomol.wizards_reborn.api.wissen.ICooldownBlockEntity;
 import mod.maxbogomol.wizards_reborn.common.block.sensor.SensorBaseBlock;
 import mod.maxbogomol.wizards_reborn.common.block.sensor.SensorBlockEntity;
-import mod.maxbogomol.wizards_reborn.utils.PacketUtils;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.nbt.CompoundTag;
@@ -115,9 +115,7 @@ public class ItemSorterBlockEntity extends SensorBlockEntity implements ICooldow
                 }
             }
 
-            if (update) {
-                PacketUtils.SUpdateTileEntityPacket(this);
-            }
+            if (update) setChanged();
         }
     }
 
@@ -184,7 +182,7 @@ public class ItemSorterBlockEntity extends SensorBlockEntity implements ICooldow
     public void setChanged() {
         super.setChanged();
         if (level != null && !level.isClientSide) {
-            PacketUtils.SUpdateTileEntityPacket(this);
+            BlockEntityUpdate.packet(this);
         }
     }
 

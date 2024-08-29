@@ -1,9 +1,9 @@
 package mod.maxbogomol.wizards_reborn.common.block.placed_items;
 
 import mod.maxbogomol.fluffy_fur.common.block.entity.BlockSimpleInventory;
+import mod.maxbogomol.fluffy_fur.common.network.BlockEntityUpdate;
 import mod.maxbogomol.wizards_reborn.WizardsReborn;
 import mod.maxbogomol.wizards_reborn.api.wissen.IWissenWandFunctionalBlockEntity;
-import mod.maxbogomol.wizards_reborn.utils.PacketUtils;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.Connection;
@@ -59,7 +59,7 @@ public class PlacedItemsBlockEntity extends BlockSimpleInventory implements IWis
     public void setChanged() {
         super.setChanged();
         if (level != null && !level.isClientSide) {
-            PacketUtils.SUpdateTileEntityPacket(this);
+            BlockEntityUpdate.packet(this);
         }
     }
 
@@ -98,6 +98,6 @@ public class PlacedItemsBlockEntity extends BlockSimpleInventory implements IWis
     @Override
     public void wissenWandFunction() {
         isRotate = !isRotate;
-        PacketUtils.SUpdateTileEntityPacket(this);
+        BlockEntityUpdate.packet(this);
     }
 }

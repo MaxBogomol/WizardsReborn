@@ -6,6 +6,7 @@ import mod.maxbogomol.fluffy_fur.client.particle.data.ColorParticleData;
 import mod.maxbogomol.fluffy_fur.client.particle.data.GenericParticleData;
 import mod.maxbogomol.fluffy_fur.common.block.entity.ExposedBlockSimpleInventory;
 import mod.maxbogomol.fluffy_fur.common.block.entity.TickableBlockEntity;
+import mod.maxbogomol.fluffy_fur.common.network.BlockEntityUpdate;
 import mod.maxbogomol.fluffy_fur.utils.ColorUtils;
 import mod.maxbogomol.wizards_reborn.WizardsReborn;
 import mod.maxbogomol.wizards_reborn.api.alchemy.ISteamBlockEntity;
@@ -13,7 +14,6 @@ import mod.maxbogomol.wizards_reborn.api.wissen.ICooldownBlockEntity;
 import mod.maxbogomol.wizards_reborn.common.network.PacketHandler;
 import mod.maxbogomol.wizards_reborn.common.network.SmokeEffectPacket;
 import mod.maxbogomol.wizards_reborn.common.recipe.CenserRecipe;
-import mod.maxbogomol.wizards_reborn.utils.PacketUtils;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.nbt.CompoundTag;
@@ -65,9 +65,7 @@ public class ArcaneCenserBlockEntity extends ExposedBlockSimpleInventory impleme
                 update = true;
             }
 
-            if (update) {
-                PacketUtils.SUpdateTileEntityPacket(this);
-            }
+            if (update) setChanged();
         }
 
         if (level.isClientSide()) {
@@ -158,7 +156,7 @@ public class ArcaneCenserBlockEntity extends ExposedBlockSimpleInventory impleme
         PacketHandler.sendToTracking(level, player.getOnPos(), new SmokeEffectPacket((float) posSmoke.x, (float) posSmoke.y, (float) posSmoke.z, (float) vel.x, (float) vel.y, (float) vel.z, R, G, B));
         level.playSound(null, player.getOnPos(), WizardsReborn.STEAM_BURST_SOUND.get(), SoundSource.PLAYERS, 0.1f, 2.0f);
 
-        PacketUtils.SUpdateTileEntityPacket(this);
+        BlockEntityUpdate.packet(this);
     }
 
     public void sortItems() {
@@ -210,7 +208,7 @@ public class ArcaneCenserBlockEntity extends ExposedBlockSimpleInventory impleme
     public void setChanged() {
         super.setChanged();
         if (level != null && !level.isClientSide) {
-            PacketUtils.SUpdateTileEntityPacket(this);
+            BlockEntityUpdate.packet(this);
         }
     }
 

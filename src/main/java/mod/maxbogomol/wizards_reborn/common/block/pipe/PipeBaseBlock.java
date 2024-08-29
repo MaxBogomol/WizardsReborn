@@ -1,9 +1,9 @@
 package mod.maxbogomol.wizards_reborn.common.block.pipe;
 
+import mod.maxbogomol.fluffy_fur.common.network.BlockEntityUpdate;
 import mod.maxbogomol.wizards_reborn.api.alchemy.IPipeConnection;
 import mod.maxbogomol.wizards_reborn.api.alchemy.PipeConnection;
 import mod.maxbogomol.wizards_reborn.common.item.equipment.WissenWandItem;
-import mod.maxbogomol.wizards_reborn.utils.PacketUtils;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.sounds.SoundEvents;
@@ -17,7 +17,10 @@ import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelAccessor;
-import net.minecraft.world.level.block.*;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.EntityBlock;
+import net.minecraft.world.level.block.RenderShape;
+import net.minecraft.world.level.block.SimpleWaterloggedBlock;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
@@ -144,7 +147,7 @@ public abstract class PipeBaseBlock extends Block implements EntityBlock, Simple
                         level.updateNeighbourForOutputSignal(pos, this);
                         level.updateNeighbourForOutputSignal(facingPos, this);
                         level.playSound(null, pos.getX() + 0.5 + face.getStepX() * 0.5, pos.getY() + 0.5 + face.getStepY() * 0.5, pos.getZ() + 0.5 + face.getStepZ() * 0.5, SoundEvents.DEEPSLATE_HIT, SoundSource.BLOCKS, 1.0f, 1.0f);
-                        PacketUtils.SUpdateTileEntityPacket(pipe);
+                        BlockEntityUpdate.packet(pipe);
                         return InteractionResult.SUCCESS;
                     }
                     BlockEntity blockEntity = level.getBlockEntity(facingPos);
@@ -157,7 +160,7 @@ public abstract class PipeBaseBlock extends Block implements EntityBlock, Simple
                         level.updateNeighbourForOutputSignal(pos, this);
                         facingState.updateShape(face.getOpposite(), state, level, facingPos, pos);
                         level.playSound(null, pos.getX() + 0.5 + face.getStepX() * 0.4, pos.getY() + 0.5 + face.getStepY() * 0.4, pos.getZ() + 0.5 + face.getStepZ() * 0.4, SoundEvents.DEEPSLATE_HIT, SoundSource.BLOCKS, 1.0f, 1.0f);
-                        PacketUtils.SUpdateTileEntityPacket(pipe);
+                        BlockEntityUpdate.packet(pipe);
                         return InteractionResult.SUCCESS;
                     }
                 } else {
@@ -173,7 +176,7 @@ public abstract class PipeBaseBlock extends Block implements EntityBlock, Simple
                         level.updateNeighbourForOutputSignal(pos, this);
                         level.updateNeighbourForOutputSignal(facingPos, this);
                         level.playSound(null, pos.getX() + 0.5 + direction.getStepX() * 0.5, pos.getY() + 0.5 + direction.getStepY() * 0.5, pos.getZ() + 0.5 + direction.getStepZ() * 0.5, SoundEvents.DEEPSLATE_HIT, SoundSource.BLOCKS, 1.0f, 1.0f);
-                        PacketUtils.SUpdateTileEntityPacket(pipe);
+                        BlockEntityUpdate.packet(pipe);
                         return InteractionResult.SUCCESS;
                     }
                     if (pipe.getConnection(direction).transfer && !facingState.is(getConnectionTag()) && !connected(direction, facingState)) {
@@ -181,7 +184,7 @@ public abstract class PipeBaseBlock extends Block implements EntityBlock, Simple
                         level.updateNeighbourForOutputSignal(pos, this);
                         facingState.updateShape(direction.getOpposite(), state, level, facingPos, pos);
                         level.playSound(null, pos.getX() + 0.5 + direction.getStepX() * 0.4, pos.getY() + 0.5 + direction.getStepY() * 0.4, pos.getZ() + 0.5 + direction.getStepZ() * 0.4, SoundEvents.DEEPSLATE_HIT, SoundSource.BLOCKS, 1.0f, 1.0f);
-                        PacketUtils.SUpdateTileEntityPacket(pipe);
+                        BlockEntityUpdate.packet(pipe);
                         return InteractionResult.SUCCESS;
                     }
                 }

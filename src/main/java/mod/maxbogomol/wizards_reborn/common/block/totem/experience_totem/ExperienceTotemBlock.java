@@ -1,11 +1,11 @@
 package mod.maxbogomol.wizards_reborn.common.block.totem.experience_totem;
 
 import mod.maxbogomol.fluffy_fur.common.block.entity.TickableBlockEntity;
+import mod.maxbogomol.fluffy_fur.common.network.BlockEntityUpdate;
 import mod.maxbogomol.wizards_reborn.WizardsReborn;
 import mod.maxbogomol.wizards_reborn.api.wissen.ITotemBlock;
 import mod.maxbogomol.wizards_reborn.api.wissen.WissenUtils;
 import mod.maxbogomol.wizards_reborn.common.item.equipment.WissenWandItem;
-import mod.maxbogomol.wizards_reborn.utils.PacketUtils;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.sounds.SoundEvents;
@@ -99,7 +99,7 @@ public class ExperienceTotemBlock extends Block implements EntityBlock, SimpleWa
         if (stack.getItem() instanceof WissenWandItem) {
             if (WissenWandItem.getMode(stack) != 4) {
                 world.updateNeighbourForOutputSignal(pos, this);
-                PacketUtils.SUpdateTileEntityPacket(tile);
+                BlockEntityUpdate.packet(tile);
                 return InteractionResult.SUCCESS;
             }
         }
@@ -116,7 +116,7 @@ public class ExperienceTotemBlock extends Block implements EntityBlock, SimpleWa
                         tile.addBurst(pos.getCenter().add(0, 0.25f, 0), player.getPosition(0).add(0, player.getEyeHeight() / 2, 0));
                     }
                     world.updateNeighbourForOutputSignal(pos, this);
-                    PacketUtils.SUpdateTileEntityPacket(tile);
+                    BlockEntityUpdate.packet(tile);
                     return InteractionResult.SUCCESS;
                 }
             }
@@ -134,7 +134,7 @@ public class ExperienceTotemBlock extends Block implements EntityBlock, SimpleWa
                         tile.addBurst(player.getPosition(0).add(0, player.getEyeHeight() / 2, 0), pos.getCenter().add(0, 0.25f, 0));
                     }
                     world.updateNeighbourForOutputSignal(pos, this);
-                    PacketUtils.SUpdateTileEntityPacket(tile);
+                    BlockEntityUpdate.packet(tile);
                     return InteractionResult.SUCCESS;
                 }
             }

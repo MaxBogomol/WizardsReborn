@@ -2,11 +2,11 @@ package mod.maxbogomol.wizards_reborn.common.block.runic_pedestal;
 
 import mod.maxbogomol.fluffy_fur.common.block.entity.BlockSimpleInventory;
 import mod.maxbogomol.fluffy_fur.common.block.entity.TickableBlockEntity;
+import mod.maxbogomol.fluffy_fur.common.network.BlockEntityUpdate;
 import mod.maxbogomol.wizards_reborn.WizardsReborn;
 import mod.maxbogomol.wizards_reborn.api.crystalritual.CrystalRitual;
 import mod.maxbogomol.wizards_reborn.api.crystalritual.CrystalRitualUtils;
 import mod.maxbogomol.wizards_reborn.common.item.equipment.RunicWisestonePlateItem;
-import mod.maxbogomol.wizards_reborn.utils.PacketUtils;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.nbt.CompoundTag;
@@ -58,9 +58,7 @@ public class RunicPedestalBlockEntity extends BlockSimpleInventory implements Ti
                 level.setBlock(getBlockPos(), blockState, 3);
             }
 
-            if (update) {
-                PacketUtils.SUpdateTileEntityPacket(this);
-            }
+            if (update) setChanged();
         }
     }
 
@@ -136,7 +134,7 @@ public class RunicPedestalBlockEntity extends BlockSimpleInventory implements Ti
     public void setChanged() {
         super.setChanged();
         if (level != null && !level.isClientSide) {
-            PacketUtils.SUpdateTileEntityPacket(this);
+            BlockEntityUpdate.packet(this);
         }
     }
 

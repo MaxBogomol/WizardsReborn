@@ -5,15 +5,15 @@ import mod.maxbogomol.fluffy_fur.client.particle.ParticleBuilder;
 import mod.maxbogomol.fluffy_fur.client.particle.data.ColorParticleData;
 import mod.maxbogomol.fluffy_fur.client.particle.data.GenericParticleData;
 import mod.maxbogomol.fluffy_fur.common.block.entity.TickableBlockEntity;
+import mod.maxbogomol.fluffy_fur.common.network.BlockEntityUpdate;
 import mod.maxbogomol.wizards_reborn.WizardsReborn;
-import mod.maxbogomol.wizards_reborn.api.alchemy.ISteamPipePriority;
 import mod.maxbogomol.wizards_reborn.api.alchemy.ISteamBlockEntity;
+import mod.maxbogomol.wizards_reborn.api.alchemy.ISteamPipePriority;
 import mod.maxbogomol.wizards_reborn.api.alchemy.PipePriorityMap;
 import mod.maxbogomol.wizards_reborn.api.alchemy.SteamUtils;
 import mod.maxbogomol.wizards_reborn.api.wissen.WissenUtils;
 import mod.maxbogomol.wizards_reborn.common.block.pipe.PipeBaseBlockEntity;
 import mod.maxbogomol.wizards_reborn.common.item.equipment.WissenWandItem;
-import mod.maxbogomol.wizards_reborn.utils.PacketUtils;
 import net.minecraft.client.Minecraft;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -226,8 +226,8 @@ public abstract class SteamPipeBaseBlockEntity extends PipeBaseBlockEntity imple
             if (steam_remain > 0) {
                 steamTileEntity.addSteam(steam_remain);
                 removeSteam(steam_remain);
-                PacketUtils.SUpdateTileEntityPacket(this);
-                PacketUtils.SUpdateTileEntityPacket(tile);
+                BlockEntityUpdate.packet(this);
+                BlockEntityUpdate.packet(tile);
                 if (tile instanceof SteamPipeBaseBlockEntity steamPipe) {
                     steamPipe.setFrom(facing.getOpposite(), true);
                 }

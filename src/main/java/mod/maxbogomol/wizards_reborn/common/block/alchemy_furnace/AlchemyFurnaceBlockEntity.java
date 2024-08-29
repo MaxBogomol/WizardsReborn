@@ -1,12 +1,12 @@
 package mod.maxbogomol.wizards_reborn.common.block.alchemy_furnace;
 
 import mod.maxbogomol.fluffy_fur.common.block.entity.TickableBlockEntity;
+import mod.maxbogomol.fluffy_fur.common.network.BlockEntityUpdate;
 import mod.maxbogomol.wizards_reborn.WizardsReborn;
 import mod.maxbogomol.wizards_reborn.api.alchemy.IFluidBlockEntity;
 import mod.maxbogomol.wizards_reborn.api.alchemy.IHeatTileEntity;
 import mod.maxbogomol.wizards_reborn.api.alchemy.ISteamBlockEntity;
 import mod.maxbogomol.wizards_reborn.api.wissen.IItemResultBlockEntity;
-import mod.maxbogomol.wizards_reborn.utils.PacketUtils;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.RegistryAccess;
@@ -253,9 +253,7 @@ public class AlchemyFurnaceBlockEntity extends BlockEntity implements TickableBl
                 update = true;
             }
 
-            if (update) {
-                PacketUtils.SUpdateTileEntityPacket(this);
-            }
+            if (update) setChanged();
         }
     }
 
@@ -340,7 +338,7 @@ public class AlchemyFurnaceBlockEntity extends BlockEntity implements TickableBl
     public void setChanged() {
         super.setChanged();
         if (level != null && !level.isClientSide) {
-            PacketUtils.SUpdateTileEntityPacket(this);
+            BlockEntityUpdate.packet(this);
         }
     }
 
@@ -452,13 +450,13 @@ public class AlchemyFurnaceBlockEntity extends BlockEntity implements TickableBl
     public void popExperience(ServerPlayer pPlayer) {
         createExperience(pPlayer.serverLevel(), pPlayer.getPosition(0), (int) exp);
         exp = exp - ((int) exp);
-        PacketUtils.SUpdateTileEntityPacket(this);
+        BlockEntityUpdate.packet(this);
     }
 
     public void popExperience(ServerLevel pLevel, Vec3 pPopVec) {
         createExperience(pLevel, pPopVec, (int) exp);
         exp = exp - ((int) exp);
-        PacketUtils.SUpdateTileEntityPacket(this);
+        BlockEntityUpdate.packet(this);
     }
 
     public static void createExperience(ServerLevel pLevel, Vec3 pPopVec, int pExperience) {

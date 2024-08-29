@@ -5,10 +5,10 @@ import mod.maxbogomol.fluffy_fur.client.particle.ParticleBuilder;
 import mod.maxbogomol.fluffy_fur.client.particle.data.ColorParticleData;
 import mod.maxbogomol.fluffy_fur.client.particle.data.GenericParticleData;
 import mod.maxbogomol.fluffy_fur.common.block.entity.TickableBlockEntity;
+import mod.maxbogomol.fluffy_fur.common.network.BlockEntityUpdate;
 import mod.maxbogomol.wizards_reborn.WizardsReborn;
 import mod.maxbogomol.wizards_reborn.api.alchemy.ISteamBlockEntity;
 import mod.maxbogomol.wizards_reborn.common.block.pipe.TinyPipeBaseBlock;
-import mod.maxbogomol.wizards_reborn.utils.PacketUtils;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.tags.TagKey;
@@ -63,7 +63,7 @@ public class SteamPipeBlock extends TinyPipeBaseBlock {
         if (blockEntity instanceof SteamPipeBaseBlockEntity pipeEntity && pipeEntity.clogged) {
             pipeEntity.setSteam(0);
             level.updateNeighbourForOutputSignal(pos, this);
-            PacketUtils.SUpdateTileEntityPacket(pipeEntity);
+            BlockEntityUpdate.packet(pipeEntity);
             return true;
         }
 

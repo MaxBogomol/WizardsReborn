@@ -1,18 +1,18 @@
 package mod.maxbogomol.wizards_reborn.api.crystalritual;
 
 import com.mojang.blaze3d.vertex.PoseStack;
+import mod.maxbogomol.fluffy_fur.common.network.BlockEntityUpdate;
 import mod.maxbogomol.wizards_reborn.WizardsReborn;
 import mod.maxbogomol.wizards_reborn.api.crystal.CrystalStat;
 import mod.maxbogomol.wizards_reborn.api.crystal.CrystalType;
 import mod.maxbogomol.wizards_reborn.api.crystal.PolishingType;
 import mod.maxbogomol.wizards_reborn.common.block.arcane_pedestal.ArcanePedestalBlockEntity;
+import mod.maxbogomol.wizards_reborn.common.block.crystal.CrystalBlockEntity;
+import mod.maxbogomol.wizards_reborn.common.block.runic_pedestal.RunicPedestalBlockEntity;
 import mod.maxbogomol.wizards_reborn.common.item.CrystalItem;
 import mod.maxbogomol.wizards_reborn.common.network.PacketHandler;
 import mod.maxbogomol.wizards_reborn.common.network.crystalritual.CrystalRitualBurstEffectPacket;
 import mod.maxbogomol.wizards_reborn.common.recipe.CrystalRitualRecipe;
-import mod.maxbogomol.wizards_reborn.common.block.crystal.CrystalBlockEntity;
-import mod.maxbogomol.wizards_reborn.common.block.runic_pedestal.RunicPedestalBlockEntity;
-import mod.maxbogomol.wizards_reborn.utils.PacketUtils;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
@@ -136,7 +136,7 @@ public class CrystalRitual {
     }
 
     public void updateCrystal(CrystalBlockEntity crystal) {
-        PacketUtils.SUpdateTileEntityPacket(crystal);
+        BlockEntityUpdate.packet(crystal);
     }
 
     public boolean canStart(CrystalBlockEntity crystal) {
@@ -297,7 +297,7 @@ public class CrystalRitual {
         for (int i = 0; i < pedestals.size(); i++) {
             if (!pedestals.get(i).getItemHandler().getItem(0).isEmpty()) {
                 pedestals.get(i).getItemHandler().removeItemNoUpdate(0);
-                PacketUtils.SUpdateTileEntityPacket(pedestals.get(i));
+                BlockEntityUpdate.packet(pedestals.get(i));
 
                 if (hasSound) {
                     level.playSound(WizardsReborn.proxy.getPlayer(), pedestals.get(i).getBlockPos(), WizardsReborn.WISSEN_TRANSFER_SOUND.get(), SoundSource.BLOCKS, 0.25f, (float) (1f + ((random.nextFloat() - 0.5D) / 4)));
@@ -333,7 +333,7 @@ public class CrystalRitual {
 
     public static void updateRunicPedestal(CrystalBlockEntity crystal) {
         if (crystal.getLevel().getBlockEntity(crystal.getBlockPos().below()) != null) {
-            PacketUtils.SUpdateTileEntityPacket(crystal.getLevel().getBlockEntity(crystal.getBlockPos().below()));
+            BlockEntityUpdate.packet(crystal.getLevel().getBlockEntity(crystal.getBlockPos().below()));
         }
     }
 

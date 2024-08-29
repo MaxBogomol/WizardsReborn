@@ -1,11 +1,11 @@
 package mod.maxbogomol.wizards_reborn.common.block.casing.light;
 
+import mod.maxbogomol.fluffy_fur.common.network.BlockEntityUpdate;
 import mod.maxbogomol.wizards_reborn.WizardsReborn;
 import mod.maxbogomol.wizards_reborn.api.light.LightRayHitResult;
 import mod.maxbogomol.wizards_reborn.api.light.LightUtils;
 import mod.maxbogomol.wizards_reborn.client.sound.LightCasingSoundInstance;
 import mod.maxbogomol.wizards_reborn.common.block.light_transfer_lens.LightTransferLensBlockEntity;
-import mod.maxbogomol.wizards_reborn.utils.PacketUtils;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.nbt.CompoundTag;
@@ -52,9 +52,7 @@ public class LightCasingBlockEntity extends LightTransferLensBlockEntity {
                 }
             }
 
-            if (update) {
-                PacketUtils.SUpdateTileEntityPacket(this);
-            }
+            if (update) setChanged();
         }
 
         if (level.isClientSide()) {
@@ -125,7 +123,7 @@ public class LightCasingBlockEntity extends LightTransferLensBlockEntity {
     @Override
     public boolean wissenWandReload(ItemStack stack, UseOnContext context, BlockEntity tile) {
         resetsConnections();
-        PacketUtils.SUpdateTileEntityPacket(this);
+        BlockEntityUpdate.packet(this);
         return true;
     }
 }

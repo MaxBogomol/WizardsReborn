@@ -7,6 +7,7 @@ import mod.maxbogomol.fluffy_fur.client.particle.data.GenericParticleData;
 import mod.maxbogomol.fluffy_fur.common.block.entity.ExposedBlockSimpleInventory;
 import mod.maxbogomol.fluffy_fur.common.block.entity.TickableBlockEntity;
 import mod.maxbogomol.fluffy_fur.common.easing.Easing;
+import mod.maxbogomol.fluffy_fur.common.network.BlockEntityUpdate;
 import mod.maxbogomol.wizards_reborn.WizardsReborn;
 import mod.maxbogomol.wizards_reborn.api.light.ILightBlockEntity;
 import mod.maxbogomol.wizards_reborn.api.light.LightRayHitResult;
@@ -17,7 +18,6 @@ import mod.maxbogomol.wizards_reborn.client.sound.LightEmitterSoundInstance;
 import mod.maxbogomol.wizards_reborn.common.block.ArcaneLumosBlock;
 import mod.maxbogomol.wizards_reborn.common.config.Config;
 import mod.maxbogomol.wizards_reborn.common.item.equipment.WissenWandItem;
-import mod.maxbogomol.wizards_reborn.utils.PacketUtils;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.nbt.CompoundTag;
@@ -96,9 +96,7 @@ public class LightEmitterBlockEntity extends ExposedBlockSimpleInventory impleme
                 }
             }
 
-            if (update) {
-                PacketUtils.SUpdateTileEntityPacket(this);
-            }
+            if (update) setChanged();
         }
 
         if (level.isClientSide()) {
@@ -183,7 +181,7 @@ public class LightEmitterBlockEntity extends ExposedBlockSimpleInventory impleme
     public void setChanged() {
         super.setChanged();
         if (level != null && !level.isClientSide) {
-            PacketUtils.SUpdateTileEntityPacket(this);
+            BlockEntityUpdate.packet(this);
         }
     }
 
@@ -429,7 +427,7 @@ public class LightEmitterBlockEntity extends ExposedBlockSimpleInventory impleme
                 blockToZ = oldBlockPos.getZ();
                 isToBlock = true;
                 WissenWandItem.setBlock(stack, false);
-                PacketUtils.SUpdateTileEntityPacket(this);
+                BlockEntityUpdate.packet(this);
                 return true;
             }
         }
@@ -440,7 +438,7 @@ public class LightEmitterBlockEntity extends ExposedBlockSimpleInventory impleme
     @Override
     public boolean wissenWandReload(ItemStack stack, UseOnContext context, BlockEntity tile) {
         isToBlock = false;
-        PacketUtils.SUpdateTileEntityPacket(this);
+        BlockEntityUpdate.packet(this);
         return true;
     }
 }

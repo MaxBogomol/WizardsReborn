@@ -6,11 +6,11 @@ import mod.maxbogomol.fluffy_fur.client.particle.data.ColorParticleData;
 import mod.maxbogomol.fluffy_fur.client.particle.data.GenericParticleData;
 import mod.maxbogomol.fluffy_fur.common.block.entity.BlockSimpleInventory;
 import mod.maxbogomol.fluffy_fur.common.block.entity.TickableBlockEntity;
+import mod.maxbogomol.fluffy_fur.common.network.BlockEntityUpdate;
 import mod.maxbogomol.wizards_reborn.WizardsReborn;
 import mod.maxbogomol.wizards_reborn.api.alchemy.ISteamBlockEntity;
 import mod.maxbogomol.wizards_reborn.api.alchemy.SteamUtils;
 import mod.maxbogomol.wizards_reborn.common.recipe.CenserRecipe;
-import mod.maxbogomol.wizards_reborn.utils.PacketUtils;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.sounds.SoundSource;
@@ -130,14 +130,14 @@ public class ArcaneCenserBlock extends HorizontalDirectionalBlock implements Ent
                             stack.setCount(1);
                             tile.getItemHandler().setItem(slot, stack);
                             world.updateNeighbourForOutputSignal(pos, this);
-                            PacketUtils.SUpdateTileEntityPacket(tile);
+                            BlockEntityUpdate.packet(tile);
                             world.playSound(null, pos, WizardsReborn.PEDESTAL_INSERT_SOUND.get(), SoundSource.BLOCKS, 1.0f, 1.0f);
                             return InteractionResult.SUCCESS;
                         } else {
                             tile.getItemHandler().setItem(slot, stack);
                             player.getInventory().removeItem(player.getItemInHand(hand));
                             world.updateNeighbourForOutputSignal(pos, this);
-                            PacketUtils.SUpdateTileEntityPacket(tile);
+                            BlockEntityUpdate.packet(tile);
                             world.playSound(null, pos, WizardsReborn.PEDESTAL_INSERT_SOUND.get(), SoundSource.BLOCKS, 1.0f, 1.0f);
                             return InteractionResult.SUCCESS;
                         }
@@ -158,7 +158,7 @@ public class ArcaneCenserBlock extends HorizontalDirectionalBlock implements Ent
                             tile.getItemHandler().removeItem(slot, 1);
                             world.updateNeighbourForOutputSignal(pos, this);
                             tile.sortItems();
-                            PacketUtils.SUpdateTileEntityPacket(tile);
+                            BlockEntityUpdate.packet(tile);
                             world.playSound(null, pos, WizardsReborn.PEDESTAL_REMOVE_SOUND.get(), SoundSource.BLOCKS, 1.0f, 1.0f);
                             return InteractionResult.SUCCESS;
                         }

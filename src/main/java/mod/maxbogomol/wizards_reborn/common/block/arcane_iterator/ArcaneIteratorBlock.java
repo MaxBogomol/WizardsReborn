@@ -1,8 +1,8 @@
 package mod.maxbogomol.wizards_reborn.common.block.arcane_iterator;
 
 import mod.maxbogomol.fluffy_fur.common.block.entity.TickableBlockEntity;
+import mod.maxbogomol.fluffy_fur.common.network.BlockEntityUpdate;
 import mod.maxbogomol.wizards_reborn.common.item.equipment.WissenWandItem;
-import mod.maxbogomol.wizards_reborn.utils.PacketUtils;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.world.InteractionHand;
@@ -69,7 +69,7 @@ public class ArcaneIteratorBlock extends HorizontalDirectionalBlock implements E
         if (stack.getItem() instanceof WissenWandItem) {
             if (WissenWandItem.getMode(stack) != 4) {
                 world.updateNeighbourForOutputSignal(pos, this);
-                PacketUtils.SUpdateTileEntityPacket(iterator);
+                BlockEntityUpdate.packet(iterator);
                 return InteractionResult.SUCCESS;
             }
         }

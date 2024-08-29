@@ -2,6 +2,7 @@ package mod.maxbogomol.wizards_reborn.common.block.crystal;
 
 import mod.maxbogomol.fluffy_fur.common.block.entity.BlockSimpleInventory;
 import mod.maxbogomol.fluffy_fur.common.block.entity.TickableBlockEntity;
+import mod.maxbogomol.fluffy_fur.common.network.BlockEntityUpdate;
 import mod.maxbogomol.wizards_reborn.WizardsReborn;
 import mod.maxbogomol.wizards_reborn.api.crystal.CrystalType;
 import mod.maxbogomol.wizards_reborn.api.crystalritual.CrystalRitual;
@@ -14,10 +15,9 @@ import mod.maxbogomol.wizards_reborn.api.wissen.IItemResultBlockEntity;
 import mod.maxbogomol.wizards_reborn.api.wissen.IWissenWandControlledBlockEntity;
 import mod.maxbogomol.wizards_reborn.api.wissen.IWissenWandFunctionalBlockEntity;
 import mod.maxbogomol.wizards_reborn.client.sound.CrystalSoundInstance;
+import mod.maxbogomol.wizards_reborn.common.block.runic_pedestal.RunicPedestalBlockEntity;
 import mod.maxbogomol.wizards_reborn.common.item.CrystalItem;
 import mod.maxbogomol.wizards_reborn.common.item.equipment.WissenWandItem;
-import mod.maxbogomol.wizards_reborn.common.block.runic_pedestal.RunicPedestalBlockEntity;
-import mod.maxbogomol.wizards_reborn.utils.PacketUtils;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.Connection;
@@ -134,7 +134,7 @@ public class CrystalBlockEntity extends BlockSimpleInventory implements Tickable
                     if (hitResult != null) {
                         BlockEntity hitTile = hitResult.getTile();
                         LightUtils.transferLight(this, hitTile);
-                        PacketUtils.SUpdateTileEntityPacket(hitTile);
+                        BlockEntityUpdate.packet(hitTile);
                     }
                 }
                 update = true;
@@ -150,9 +150,7 @@ public class CrystalBlockEntity extends BlockSimpleInventory implements Tickable
         }
 
         if (!level.isClientSide()) {
-            if (update) {
-                PacketUtils.SUpdateTileEntityPacket(this);
-            }
+            if (update) setChanged();
         }
 
         if (level.isClientSide()) {
@@ -323,7 +321,7 @@ public class CrystalBlockEntity extends BlockSimpleInventory implements Tickable
                 blockToZ = oldBlockPos.getZ();
                 isToBlock = true;
                 WissenWandItem.setBlock(stack, false);
-                PacketUtils.SUpdateTileEntityPacket(this);
+                BlockEntityUpdate.packet(this);
                 return true;
             }
         }
@@ -336,7 +334,7 @@ public class CrystalBlockEntity extends BlockSimpleInventory implements Tickable
     public boolean wissenWandReload(ItemStack stack, UseOnContext context, BlockEntity tile) {
         isToBlock = false;
         reload();
-        PacketUtils.SUpdateTileEntityPacket(this);
+        BlockEntityUpdate.packet(this);
         level.playSound(WizardsReborn.proxy.getPlayer(), getBlockPos(), WizardsReborn.CRYSTAL_RITUAL_END_SOUND.get(), SoundSource.BLOCKS, 1f, 1f);
         return true;
     }

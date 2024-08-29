@@ -6,6 +6,7 @@ import mod.maxbogomol.fluffy_fur.client.particle.data.ColorParticleData;
 import mod.maxbogomol.fluffy_fur.client.particle.data.GenericParticleData;
 import mod.maxbogomol.fluffy_fur.common.block.entity.TickableBlockEntity;
 import mod.maxbogomol.fluffy_fur.common.easing.Easing;
+import mod.maxbogomol.fluffy_fur.common.network.BlockEntityUpdate;
 import mod.maxbogomol.wizards_reborn.WizardsReborn;
 import mod.maxbogomol.wizards_reborn.api.arcaneenchantment.ArcaneEnchantment;
 import mod.maxbogomol.wizards_reborn.api.arcaneenchantment.ArcaneEnchantmentUtils;
@@ -20,7 +21,6 @@ import mod.maxbogomol.wizards_reborn.common.damage.DamageSourceRegistry;
 import mod.maxbogomol.wizards_reborn.common.network.PacketHandler;
 import mod.maxbogomol.wizards_reborn.common.network.tileentity.ArcaneIteratorBurstEffectPacket;
 import mod.maxbogomol.wizards_reborn.common.recipe.ArcaneIteratorRecipe;
-import mod.maxbogomol.wizards_reborn.utils.PacketUtils;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.RegistryAccess;
 import net.minecraft.nbt.CompoundTag;
@@ -213,7 +213,7 @@ public class ArcaneIteratorBlockEntity extends BlockEntity implements TickableBl
                                     } else {
                                         pedestals.get(i).getItemHandler().removeItemNoUpdate(0);
                                     }
-                                    PacketUtils.SUpdateTileEntityPacket(pedestals.get(i));
+                                    BlockEntityUpdate.packet(pedestals.get(i));
                                     CompoundTag tagBlock = new CompoundTag();
                                     tagBlock.putInt("x", pedestals.get(i).getBlockPos().getX());
                                     tagBlock.putInt("y", pedestals.get(i).getBlockPos().getY());
@@ -224,7 +224,7 @@ public class ArcaneIteratorBlockEntity extends BlockEntity implements TickableBl
                                 }
                             }
                             getMainPedestal().setItem(0, stack);
-                            PacketUtils.SUpdateTileEntityPacket(getMainPedestal());
+                            BlockEntityUpdate.packet(getMainPedestal());
 
                             PacketHandler.sendToTracking(level, getBlockPos(), new ArcaneIteratorBurstEffectPacket(tagPos));
                             level.playSound(WizardsReborn.proxy.getPlayer(), getBlockPos(), WizardsReborn.ARCANE_ITERATOR_END_SOUND.get(), SoundSource.BLOCKS, 1f, 1f);
@@ -243,9 +243,7 @@ public class ArcaneIteratorBlockEntity extends BlockEntity implements TickableBl
                 update = true;
             }
 
-            if (update) {
-                PacketUtils.SUpdateTileEntityPacket(this);
-            }
+            if (update) setChanged();
         }
 
         if (level.isClientSide()) {
@@ -489,7 +487,7 @@ public class ArcaneIteratorBlockEntity extends BlockEntity implements TickableBl
     public void setChanged() {
         super.setChanged();
         if (level != null && !level.isClientSide) {
-            PacketUtils.SUpdateTileEntityPacket(this);
+            BlockEntityUpdate.packet(this);
         }
     }
 

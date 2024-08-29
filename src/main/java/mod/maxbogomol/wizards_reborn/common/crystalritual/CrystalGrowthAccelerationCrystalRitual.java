@@ -1,11 +1,11 @@
 package mod.maxbogomol.wizards_reborn.common.crystalritual;
 
+import mod.maxbogomol.fluffy_fur.common.network.BlockEntityUpdate;
 import mod.maxbogomol.wizards_reborn.WizardsReborn;
 import mod.maxbogomol.wizards_reborn.api.crystalritual.CrystalRitual;
 import mod.maxbogomol.wizards_reborn.api.crystalritual.IGrowableCrystal;
 import mod.maxbogomol.wizards_reborn.api.light.LightRayHitResult;
 import mod.maxbogomol.wizards_reborn.common.block.crystal.CrystalBlockEntity;
-import mod.maxbogomol.wizards_reborn.utils.PacketUtils;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.level.Level;
 
@@ -57,7 +57,7 @@ public class CrystalGrowthAccelerationCrystalRitual extends CrystalRitual {
                 if (getCooldown(crystal) <= 0) {
                     growable.addGrowing();
                 }
-                PacketUtils.SUpdateTileEntityPacket(hitResult.getTile());
+                BlockEntityUpdate.packet(hitResult.getTile());
             }
             if (getCooldown(crystal) <= 0) {
                 setMaxCooldown(crystal, getMaxRitualCooldownWithStat(crystal));

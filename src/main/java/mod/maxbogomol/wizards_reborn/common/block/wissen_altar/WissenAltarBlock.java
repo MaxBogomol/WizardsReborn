@@ -2,11 +2,11 @@ package mod.maxbogomol.wizards_reborn.common.block.wissen_altar;
 
 import mod.maxbogomol.fluffy_fur.common.block.entity.BlockSimpleInventory;
 import mod.maxbogomol.fluffy_fur.common.block.entity.TickableBlockEntity;
+import mod.maxbogomol.fluffy_fur.common.network.BlockEntityUpdate;
 import mod.maxbogomol.wizards_reborn.WizardsReborn;
 import mod.maxbogomol.wizards_reborn.api.wissen.IWissenItem;
 import mod.maxbogomol.wizards_reborn.common.item.equipment.WissenWandItem;
 import mod.maxbogomol.wizards_reborn.common.recipe.WissenAltarRecipe;
-import mod.maxbogomol.wizards_reborn.utils.PacketUtils;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.sounds.SoundSource;
@@ -102,7 +102,7 @@ public class WissenAltarBlock extends HorizontalDirectionalBlock implements Enti
         if (stack.getItem() instanceof WissenWandItem) {
             if (WissenWandItem.getMode(stack) != 4) {
                 world.updateNeighbourForOutputSignal(pos, this);
-                PacketUtils.SUpdateTileEntityPacket(altar);
+                BlockEntityUpdate.packet(altar);
                 return InteractionResult.SUCCESS;
             }
         }
@@ -112,7 +112,7 @@ public class WissenAltarBlock extends HorizontalDirectionalBlock implements Enti
                 altar.getItemHandler().setItem(0, stack);
                 player.getInventory().removeItem(player.getItemInHand(hand));
                 world.updateNeighbourForOutputSignal(pos, this);
-                PacketUtils.SUpdateTileEntityPacket(altar);
+                BlockEntityUpdate.packet(altar);
                 world.playSound(null, pos, WizardsReborn.PEDESTAL_INSERT_SOUND.get(), SoundSource.BLOCKS, 1.0f, 1.0f);
                 return InteractionResult.SUCCESS;
             }
@@ -128,7 +128,7 @@ public class WissenAltarBlock extends HorizontalDirectionalBlock implements Enti
                 altar.getItemHandler().setItem(1, stack.copy());
                 player.getInventory().removeItem(player.getItemInHand(hand));
                 world.updateNeighbourForOutputSignal(pos, this);
-                PacketUtils.SUpdateTileEntityPacket(altar);
+                BlockEntityUpdate.packet(altar);
                 world.playSound(null, pos, WizardsReborn.PEDESTAL_INSERT_SOUND.get(), SoundSource.BLOCKS, 1.0f, 1.0f);
                 return InteractionResult.SUCCESS;
             } else {
@@ -136,7 +136,7 @@ public class WissenAltarBlock extends HorizontalDirectionalBlock implements Enti
                         && altar.getItemHandler().getItem(1).getCount() + stack.getCount() <= altar.getItemHandler().getItem(1).getMaxStackSize()) {
                     altar.getItemHandler().getItem(1).setCount(altar.getItemHandler().getItem(1).getCount() + stack.getCount());
                     world.updateNeighbourForOutputSignal(pos, this);
-                    PacketUtils.SUpdateTileEntityPacket(altar);
+                    BlockEntityUpdate.packet(altar);
                     world.playSound(null, pos, WizardsReborn.PEDESTAL_INSERT_SOUND.get(), SoundSource.BLOCKS, 1.0f, 1.0f);
                     return InteractionResult.SUCCESS;
                 }
@@ -151,7 +151,7 @@ public class WissenAltarBlock extends HorizontalDirectionalBlock implements Enti
             }
             altar.getItemHandler().removeItem(0, 1);
             world.updateNeighbourForOutputSignal(pos, this);
-            PacketUtils.SUpdateTileEntityPacket(altar);
+            BlockEntityUpdate.packet(altar);
             world.playSound(null, pos, WizardsReborn.PEDESTAL_REMOVE_SOUND.get(), SoundSource.BLOCKS, 1.0f, 1.0f);
             return InteractionResult.SUCCESS;
         } else {
@@ -163,7 +163,7 @@ public class WissenAltarBlock extends HorizontalDirectionalBlock implements Enti
                 }
                 altar.getItemHandler().removeItem(1, 64);
                 world.updateNeighbourForOutputSignal(pos, this);
-                PacketUtils.SUpdateTileEntityPacket(altar);
+                BlockEntityUpdate.packet(altar);
                 world.playSound(null, pos, WizardsReborn.PEDESTAL_REMOVE_SOUND.get(), SoundSource.BLOCKS, 1.0f, 1.0f);
                 return InteractionResult.SUCCESS;
             }

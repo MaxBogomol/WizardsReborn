@@ -1,9 +1,9 @@
 package mod.maxbogomol.wizards_reborn.common.block.baulk;
 
+import mod.maxbogomol.fluffy_fur.common.network.BlockEntityUpdate;
 import mod.maxbogomol.wizards_reborn.api.alchemy.PipeConnection;
-import mod.maxbogomol.wizards_reborn.common.item.equipment.WissenWandItem;
 import mod.maxbogomol.wizards_reborn.common.block.pipe.PipeBaseBlockEntity;
-import mod.maxbogomol.wizards_reborn.utils.PacketUtils;
+import mod.maxbogomol.wizards_reborn.common.item.equipment.WissenWandItem;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.sounds.SoundEvents;
@@ -143,7 +143,7 @@ public abstract class CrossBaulkBaseBlock extends Block implements EntityBlock, 
                     level.updateNeighbourForOutputSignal(pos, this);
                     facingState.updateShape(face.getOpposite(), state, level, facingPos, pos);
                     level.playSound(null, pos.getX() + 0.5 + face.getStepX() * 0.4, pos.getY() + 0.5 + face.getStepY() * 0.4, pos.getZ() + 0.5 + face.getStepZ() * 0.4, SoundEvents.DEEPSLATE_HIT, SoundSource.BLOCKS, 1.0f, 1.0f);
-                    PacketUtils.SUpdateTileEntityPacket(pipe);
+                    BlockEntityUpdate.packet(pipe);
                     return InteractionResult.SUCCESS;
                 } else {
                     Direction direction = Direction.from3DDataValue(closestHit);
@@ -158,7 +158,7 @@ public abstract class CrossBaulkBaseBlock extends Block implements EntityBlock, 
                         level.updateNeighbourForOutputSignal(pos, this);
                         level.updateNeighbourForOutputSignal(facingPos, this);
                         level.playSound(null, pos.getX() + 0.5 + direction.getStepX() * 0.5, pos.getY() + 0.5 + direction.getStepY() * 0.5, pos.getZ() + 0.5 + direction.getStepZ() * 0.5, SoundEvents.DEEPSLATE_HIT, SoundSource.BLOCKS, 1.0f, 1.0f);
-                        PacketUtils.SUpdateTileEntityPacket(pipe);
+                        BlockEntityUpdate.packet(pipe);
                         return InteractionResult.SUCCESS;
                     }
                     if (pipe.getConnection(direction).transfer && !facingState.is(getConnectionTag()) && !connected(direction, facingState)) {
@@ -166,7 +166,7 @@ public abstract class CrossBaulkBaseBlock extends Block implements EntityBlock, 
                         level.updateNeighbourForOutputSignal(pos, this);
                         facingState.updateShape(direction.getOpposite(), state, level, facingPos, pos);
                         level.playSound(null, pos.getX() + 0.5 + direction.getStepX() * 0.4, pos.getY() + 0.5 + direction.getStepY() * 0.4, pos.getZ() + 0.5 + direction.getStepZ() * 0.4, SoundEvents.DEEPSLATE_HIT, SoundSource.BLOCKS, 1.0f, 1.0f);
-                        PacketUtils.SUpdateTileEntityPacket(pipe);
+                        BlockEntityUpdate.packet(pipe);
                         return InteractionResult.SUCCESS;
                     }
                 }
