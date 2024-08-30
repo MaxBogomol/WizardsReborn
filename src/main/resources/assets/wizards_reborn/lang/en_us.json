@@ -833,6 +833,10 @@
   "effect.wizards_reborn.irritation": "Irritation",
   "effect.wizards_reborn.tipsy": "Tipsy",
 
+  "mod_description.wizards_reborn": "Wizard's reborn - a mod about magic in the style of alternative 1930s.",
+
+  "panorama.wizards_reborn.magical_origins": "Magical Origins",
+
   "gui.wizards_reborn.arcanemicon.title": "Arcanemicon",
   "gui.wizards_reborn.arcane_workbench.title": "Arcane Workbench",
   "gui.wizards_reborn.jeweler_table.title": "Jeweler Table",
@@ -850,9 +854,6 @@
   "config.jade.plugin_wizards_reborn.crystal_growth": "Crystal Growth",
   "config.jade.plugin_wizards_reborn.numerical": "Numerical",
   "config.jade.plugin_wizards_reborn.salt_campfire": "Salt Campfire",
-
-  "gui.wizards_reborn.menu.optifine.0": "ATTENTION! It seems you have Optifine installed",
-  "gui.wizards_reborn.menu.optifine.1": "Optifine can break the render of particles in Wizard's Reborn",
 
   "gui.wizards_reborn.wissen": "Wissen",
   "gui.wizards_reborn.cooldown": "Cooldown",

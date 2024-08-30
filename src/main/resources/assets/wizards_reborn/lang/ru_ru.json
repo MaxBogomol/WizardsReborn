@@ -833,6 +833,10 @@
   "effect.wizards_reborn.irritation": "Раздражение",
   "effect.wizards_reborn.tipsy": "Опьянение",
 
+  "mod_description.wizards_reborn": "Wizard's reborn - мод о магии в стиле альтернативных 1930-х.",
+
+  "panorama.wizards_reborn.magical_origins": "Магические Истоки",
+
   "gui.wizards_reborn.arcanemicon.title": "Аркейномикон",
   "gui.wizards_reborn.arcane_workbench.title": "Аркановый верстак",
   "gui.wizards_reborn.jeweler_table.title": "Ювелирный стол",
@@ -850,9 +854,6 @@
   "config.jade.plugin_wizards_reborn.crystal_growth": "Рост кристаллов",
   "config.jade.plugin_wizards_reborn.numerical": "Числовые значения",
   "config.jade.plugin_wizards_reborn.salt_campfire": "Солевой костёр",
-
-  "gui.wizards_reborn.menu.optifine.0": "ВНИМАНИЕ! Кажется, у вас установлен Optifine",
-  "gui.wizards_reborn.menu.optifine.1": "Optifine может сломать рендеринг частиц в Wizard's Reborn",
 
   "gui.wizards_reborn.wissen": "Виссен",
   "gui.wizards_reborn.cooldown": "Перезаряд",

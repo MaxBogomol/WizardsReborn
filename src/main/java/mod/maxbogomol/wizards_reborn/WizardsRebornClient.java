@@ -4,6 +4,8 @@ import com.mojang.blaze3d.platform.InputConstants;
 import com.mojang.blaze3d.vertex.DefaultVertexFormat;
 import mod.maxbogomol.fluffy_fur.FluffyFurClient;
 import mod.maxbogomol.fluffy_fur.client.event.BowHandler;
+import mod.maxbogomol.fluffy_fur.client.gui.screen.FluffyFurMod;
+import mod.maxbogomol.fluffy_fur.client.gui.screen.FluffyFurPanorama;
 import mod.maxbogomol.fluffy_fur.client.model.item.CustomModel;
 import mod.maxbogomol.fluffy_fur.client.particle.GenericParticleType;
 import mod.maxbogomol.fluffy_fur.client.render.item.LargeItemRenderer;
@@ -58,11 +60,13 @@ import net.minecraft.client.renderer.item.ItemProperties;
 import net.minecraft.client.resources.model.BakedModel;
 import net.minecraft.client.resources.model.ModelManager;
 import net.minecraft.client.resources.model.ModelResourceLocation;
+import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.sounds.Music;
 import net.minecraft.world.entity.ai.attributes.Attribute;
 import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.client.event.*;
@@ -77,6 +81,7 @@ import org.joml.Vector3f;
 import org.lwjgl.glfw.GLFW;
 import top.theillusivec4.curios.api.client.CuriosRendererRegistry;
 
+import java.awt.*;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Map;
@@ -312,6 +317,7 @@ public class WizardsRebornClient {
 
     public static void clientSetup(final FMLClientSetupEvent event) {
         event.enqueueWork(() -> {
+            setupMenu();
             setupBows();
             setupTooltipModifiers();
             setupMusic();
@@ -953,6 +959,25 @@ public class WizardsRebornClient {
         public static void ColorMappingBlocks(RegisterColorHandlersEvent.Block event) {
             event.register((state, world, pos, tintIndex) -> CustomBlockColor.getInstance().getColor(state, world, pos, tintIndex), CustomBlockColor.PLANTS);
         }
+    }
+
+    public static FluffyFurMod MOD_INSTANCE;
+    public static FluffyFurPanorama PANORAMA;
+
+    public static void setupMenu() {
+        MOD_INSTANCE = new FluffyFurMod(WizardsReborn.MOD_ID, WizardsReborn.NAME, WizardsReborn.VERSION).setDev("MaxBogomol").setItem(new ItemStack(WizardsReborn.ARCANUM.get()))
+                .setEdition(WizardsReborn.VERSION_NUMBER).setNameColor(new Color(205, 237, 254)).setVersionColor(new Color(255, 243, 177))
+                .setDescription(Component.translatable("mod_description.wizards_reborn"))
+                .addGithubLink("https://github.com/MaxBogomol/WizardsReborn")
+                .addCurseForgeLink("https://www.curseforge.com/minecraft/mc-mods/wizards-reborn")
+                .addModrinthLink("https://modrinth.com/mod/wizards-reborn");
+        PANORAMA = new FluffyFurPanorama(WizardsReborn.MOD_ID + ":fluffy_zone", Component.translatable("panorama.wizards_reborn.magical_origins"))
+                .setMod(MOD_INSTANCE).setItem(new ItemStack(WizardsReborn.WISSEN_ALTAR_ITEM.get())).setSort(0)
+                .setTexture(new ResourceLocation(WizardsReborn.MOD_ID, "textures/gui/title/background/panorama"))
+                .setLogo(new ResourceLocation(WizardsReborn.MOD_ID, "textures/gui/title/wizards_reborn.png"));
+
+        FluffyFurClient.registerMod(MOD_INSTANCE);
+        FluffyFurClient.registerPanorama(PANORAMA);
     }
 
     public static void setupBows() {
