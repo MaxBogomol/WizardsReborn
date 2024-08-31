@@ -18,7 +18,6 @@ import mod.maxbogomol.wizards_reborn.client.event.ClientEvents;
 import mod.maxbogomol.wizards_reborn.client.event.ClientTickHandler;
 import mod.maxbogomol.wizards_reborn.client.event.ClientWorldEvent;
 import mod.maxbogomol.wizards_reborn.client.event.KeyBindHandler;
-import mod.maxbogomol.wizards_reborn.client.gui.HUDEventHandler;
 import mod.maxbogomol.wizards_reborn.client.gui.TooltipEventHandler;
 import mod.maxbogomol.wizards_reborn.client.gui.screen.*;
 import mod.maxbogomol.wizards_reborn.client.model.armor.*;
@@ -274,7 +273,6 @@ public class WizardsRebornClient {
             forgeBus.addListener(ClientTickHandler::clientTickEnd);
             forgeBus.addListener(ClientWorldEvent::onTick);
             forgeBus.addListener(ClientWorldEvent::onRender);
-            forgeBus.addListener(HUDEventHandler::onDrawScreenPost);
             forgeBus.addListener(TooltipEventHandler::onPostTooltipEvent);
             forgeBus.addListener(KeyBindHandler::onInput);
             forgeBus.addListener(KeyBindHandler::onKey);

@@ -1,4 +1,4 @@
-package mod.maxbogomol.wizards_reborn.common.itemgroup;
+package mod.maxbogomol.wizards_reborn.common.creativetab;
 
 import mod.maxbogomol.wizards_reborn.WizardsReborn;
 import mod.maxbogomol.wizards_reborn.api.alchemy.AlchemyPotion;
@@ -27,13 +27,12 @@ import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.RegistryObject;
 
 @Mod.EventBusSubscriber(modid = WizardsReborn.MOD_ID, bus = Mod.EventBusSubscriber.Bus.MOD)
-public class WizardsRebornItemGroup {
-    public static final DeferredRegister<CreativeModeTab> CREATIVE_MODE_TABS =
-            DeferredRegister.create(Registries.CREATIVE_MODE_TAB, WizardsReborn.MOD_ID);
+public class WizardsRebornCreativeTab {
+    public static final DeferredRegister<CreativeModeTab> CREATIVE_MODE_TABS = DeferredRegister.create(Registries.CREATIVE_MODE_TAB, WizardsReborn.MOD_ID);
 
-    public static final RegistryObject<CreativeModeTab> WIZARDS_REBORN_GROUP = CREATIVE_MODE_TABS.register("tab",
+    public static final RegistryObject<CreativeModeTab> WIZARDS_REBORN_CREATIVE_TAB = CREATIVE_MODE_TABS.register("tab",
             () -> CreativeModeTab.builder().icon(() -> new ItemStack(WizardsReborn.FACETED_EARTH_CRYSTAL.get()))
-                    .title(Component.translatable("itemGroup.wizards_reborn_mod_tab"))
+                    .title(Component.translatable("creative_tab.wizards_reborn"))
                     .withBackgroundLocation(new ResourceLocation(WizardsReborn.MOD_ID, "textures/gui/wizards_reborn_item_tab.png"))
                     .withTabsImage(new ResourceLocation(WizardsReborn.MOD_ID, "textures/gui/wizards_reborn_tabs.png"))
                     .build());
@@ -43,7 +42,7 @@ public class WizardsRebornItemGroup {
     }
 
     public static void addCreative(BuildCreativeModeTabContentsEvent event) {
-        if (event.getTabKey() == WizardsRebornItemGroup.WIZARDS_REBORN_GROUP.getKey()) {
+        if (event.getTabKey() == WizardsRebornCreativeTab.WIZARDS_REBORN_CREATIVE_TAB.getKey()) {
             event.accept(WizardsReborn.ARCANEMICON);
 
             event.accept(WizardsReborn.ARCANE_GOLD_INGOT);

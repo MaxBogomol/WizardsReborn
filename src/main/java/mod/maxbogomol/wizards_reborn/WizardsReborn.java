@@ -169,7 +169,7 @@ import mod.maxbogomol.wizards_reborn.common.item.equipment.arcane.*;
 import mod.maxbogomol.wizards_reborn.common.item.equipment.arcanewood.*;
 import mod.maxbogomol.wizards_reborn.common.item.equipment.curio.*;
 import mod.maxbogomol.wizards_reborn.common.item.equipment.innocentwood.*;
-import mod.maxbogomol.wizards_reborn.common.itemgroup.WizardsRebornItemGroup;
+import mod.maxbogomol.wizards_reborn.common.creativetab.WizardsRebornCreativeTab;
 import mod.maxbogomol.wizards_reborn.common.knowledge.RegisterKnowledges;
 import mod.maxbogomol.wizards_reborn.common.knowledge.Researches;
 import mod.maxbogomol.wizards_reborn.common.network.PacketHandler;
@@ -2121,8 +2121,8 @@ public class WizardsReborn {
         eventBus.addListener(this::setup);
         eventBus.addListener(WizardsRebornClient::clientSetup);
 
-        WizardsRebornItemGroup.register(eventBus);
-        eventBus.addListener(WizardsRebornItemGroup::addCreative);
+        WizardsRebornCreativeTab.register(eventBus);
+        eventBus.addListener(WizardsRebornCreativeTab::addCreative);
 
         MinecraftForge.EVENT_BUS.register(this);
         MinecraftForge.EVENT_BUS.register(new Events());

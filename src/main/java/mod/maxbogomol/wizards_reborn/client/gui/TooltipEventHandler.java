@@ -14,7 +14,6 @@ import net.minecraftforge.client.event.RenderTooltipEvent;
 import org.lwjgl.opengl.GL11;
 
 public class TooltipEventHandler {
-    private TooltipEventHandler() {}
 
     public static void onPostTooltipEvent(RenderTooltipEvent.Color event) {
         ItemStack stack = event.getItemStack();

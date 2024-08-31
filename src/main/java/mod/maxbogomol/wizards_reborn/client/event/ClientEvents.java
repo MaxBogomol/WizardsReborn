@@ -8,6 +8,8 @@ import mod.maxbogomol.wizards_reborn.client.arcanemicon.ArcanemiconChapters;
 import mod.maxbogomol.wizards_reborn.client.arcanemicon.ArcanemiconGui;
 import mod.maxbogomol.wizards_reborn.common.arcaneenchantment.EagleShotArcaneEnchantment;
 import mod.maxbogomol.wizards_reborn.common.arcaneenchantment.SplitArcaneEnchantment;
+import mod.maxbogomol.wizards_reborn.common.item.equipment.ArcaneWandItem;
+import mod.maxbogomol.wizards_reborn.common.item.equipment.WissenWandItem;
 import mod.maxbogomol.wizards_reborn.common.item.equipment.arcane.ArcaneBowItem;
 import net.minecraft.client.Minecraft;
 import net.minecraft.world.entity.EquipmentSlot;
@@ -17,6 +19,8 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.client.event.ComputeFovModifierEvent;
 import net.minecraftforge.client.event.MovementInputUpdateEvent;
+import net.minecraftforge.client.event.RenderGuiOverlayEvent;
+import net.minecraftforge.client.gui.overlay.VanillaGuiOverlay;
 import net.minecraftforge.event.entity.player.ItemTooltipEvent;
 import net.minecraftforge.event.entity.player.PlayerEvent;
 import net.minecraftforge.eventbus.api.EventPriority;
@@ -27,6 +31,14 @@ public class ClientEvents {
     @SubscribeEvent
     public void loggedPlayer(PlayerEvent.PlayerLoggedInEvent event) {
         ArcanemiconGui.currentChapter = ArcanemiconChapters.ARCANE_NATURE_INDEX;
+    }
+
+    @SubscribeEvent
+    public void onDrawScreenPost(RenderGuiOverlayEvent.Pre event) {
+        if (event.getOverlay().id() == VanillaGuiOverlay.CROSSHAIR.id()) {
+            WissenWandItem.drawWissenGui(event.getGuiGraphics());
+            ArcaneWandItem.drawWandGui(event.getGuiGraphics());
+        }
     }
 
     @SubscribeEvent(priority = EventPriority.LOW)
