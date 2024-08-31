@@ -3,11 +3,11 @@ package mod.maxbogomol.wizards_reborn.common.item.equipment;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.math.Axis;
 import mod.maxbogomol.fluffy_fur.client.render.LevelRenderHandler;
-import mod.maxbogomol.fluffy_fur.utils.ColorUtils;
+import mod.maxbogomol.fluffy_fur.util.ColorUtil;
 import mod.maxbogomol.wizards_reborn.WizardsReborn;
 import mod.maxbogomol.wizards_reborn.WizardsRebornClient;
 import mod.maxbogomol.wizards_reborn.api.alchemy.AlchemyPotion;
-import mod.maxbogomol.wizards_reborn.api.alchemy.AlchemyPotionUtils;
+import mod.maxbogomol.wizards_reborn.api.alchemy.AlchemyPotionUtil;
 import mod.maxbogomol.wizards_reborn.client.render.fluid.FluidRenderer;
 import mod.maxbogomol.wizards_reborn.common.alchemypotion.FluidAlchemyPotion;
 import mod.maxbogomol.wizards_reborn.common.block.placed_items.PlacedItemsBlockEntity;
@@ -44,10 +44,10 @@ public class FlaskPotionItem extends AlchemyPotionItem {
         ms.mulPose(Axis.XP.rotationDegrees(-180f));
         ms.scale(1.25F, 1.25F, 1.25F);
         ms.translate(-0.125F, 0.015625F, -0.125F);
-        AlchemyPotion potion = AlchemyPotionUtils.getPotion(stack);
-        if (!AlchemyPotionUtils.isEmpty(potion)) {
+        AlchemyPotion potion = AlchemyPotionUtil.getPotion(stack);
+        if (!AlchemyPotionUtil.isEmpty(potion)) {
             Color color = potion.getColor();
-            int colorI = ColorUtils.packColor(255, color.getRed(), color.getGreen(), color.getBlue());
+            int colorI = ColorUtil.packColor(255, color.getRed(), color.getGreen(), color.getBlue());
             int uses = AlchemyPotionItem.getUses(stack);
             Fluid fluid = Fluids.WATER;
             FluidStack fluidStack = new FluidStack(fluid, 6 - uses);

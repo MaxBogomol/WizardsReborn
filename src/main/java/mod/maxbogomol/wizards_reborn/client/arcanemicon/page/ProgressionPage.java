@@ -2,7 +2,7 @@ package mod.maxbogomol.wizards_reborn.client.arcanemicon.page;
 
 import mod.maxbogomol.wizards_reborn.WizardsReborn;
 import mod.maxbogomol.wizards_reborn.api.knowledge.Knowledge;
-import mod.maxbogomol.wizards_reborn.api.knowledge.KnowledgeUtils;
+import mod.maxbogomol.wizards_reborn.api.knowledge.KnowledgeUtil;
 import mod.maxbogomol.wizards_reborn.client.arcanemicon.ArcanemiconGui;
 import mod.maxbogomol.wizards_reborn.client.arcanemicon.Page;
 import net.minecraft.ChatFormatting;
@@ -99,7 +99,7 @@ public class ProgressionPage extends Page {
         int currentPoints = 0;
         int totalPoints = 0;
         for (Knowledge knowledge : knowledges) {
-            if ((KnowledgeUtils.isKnowledge(Minecraft.getInstance().player, knowledge))) {
+            if ((KnowledgeUtil.isKnowledge(Minecraft.getInstance().player, knowledge))) {
                 totalKnowledges++;
                 currentPoints += knowledge.getPoints();
             }
@@ -137,12 +137,12 @@ public class ProgressionPage extends Page {
                 double dst = Math.toRadians((i * step) + (step / 2));
                 int X = (int) (Math.cos(Mth.PI + dst) * (55 * Math.sin(Math.toRadians(90))));
                 int Y = (int) (Math.sin(Mth.PI + dst) * (55 * Math.sin(Math.toRadians(90))));
-                boolean canKnow = (KnowledgeUtils.isKnowledge(Minecraft.getInstance().player, knowledges.get(c)));
+                boolean canKnow = (KnowledgeUtil.isKnowledge(Minecraft.getInstance().player, knowledges.get(c)));
                 boolean canKnowPrevious = false;
                 List<Component> list = new ArrayList<>();
 
                 if (knowledges.get(c).hasPrevious()) {
-                    if ((KnowledgeUtils.isKnowledge(Minecraft.getInstance().player, knowledges.get(c).getPrevious())) && !canKnow) {
+                    if ((KnowledgeUtil.isKnowledge(Minecraft.getInstance().player, knowledges.get(c).getPrevious())) && !canKnow) {
                         canKnowPrevious = true;
                     }
                 }

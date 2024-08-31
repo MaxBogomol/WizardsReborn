@@ -6,7 +6,7 @@ import mod.maxbogomol.fluffy_fur.common.network.BlockEntityUpdate;
 import mod.maxbogomol.wizards_reborn.WizardsReborn;
 import mod.maxbogomol.wizards_reborn.api.wissen.IWissenBlockEntity;
 import mod.maxbogomol.wizards_reborn.api.wissen.IWissenItem;
-import mod.maxbogomol.wizards_reborn.api.wissen.WissenItemUtils;
+import mod.maxbogomol.wizards_reborn.api.wissen.WissenItemUtil;
 import mod.maxbogomol.wizards_reborn.common.item.equipment.WissenWandItem;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -102,8 +102,8 @@ public class WissenCellBlock extends HorizontalDirectionalBlock implements Entit
                 for (ItemStack stack : items) {
                     if (stack.getItem() == WizardsReborn.WISSEN_CELL_ITEM.get()) {
                         if (stack.getItem() instanceof IWissenItem) {
-                            WissenItemUtils.existWissen(stack);
-                            WissenItemUtils.setWissen(stack, wissenTile.getWissen());
+                            WissenItemUtil.existWissen(stack);
+                            WissenItemUtil.setWissen(stack, wissenTile.getWissen());
                         }
                     }
                 }

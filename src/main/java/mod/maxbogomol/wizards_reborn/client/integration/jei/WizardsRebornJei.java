@@ -10,9 +10,9 @@ import mezz.jei.api.registration.IRecipeCategoryRegistration;
 import mezz.jei.api.registration.IRecipeRegistration;
 import mezz.jei.api.registration.ISubtypeRegistration;
 import mod.maxbogomol.wizards_reborn.WizardsReborn;
-import mod.maxbogomol.wizards_reborn.api.alchemy.AlchemyPotionUtils;
-import mod.maxbogomol.wizards_reborn.api.arcaneenchantment.ArcaneEnchantmentUtils;
-import mod.maxbogomol.wizards_reborn.api.crystalritual.CrystalRitualUtils;
+import mod.maxbogomol.wizards_reborn.api.alchemy.AlchemyPotionUtil;
+import mod.maxbogomol.wizards_reborn.api.arcaneenchantment.ArcaneEnchantmentUtil;
+import mod.maxbogomol.wizards_reborn.api.crystalritual.CrystalRitualUtil;
 import mod.maxbogomol.wizards_reborn.common.integration.farmersdelight.FarmersDelightIntegration;
 import mod.maxbogomol.wizards_reborn.common.item.equipment.DrinkBottleItem;
 import net.minecraft.client.Minecraft;
@@ -115,14 +115,14 @@ public class WizardsRebornJei implements IModPlugin {
 
     @Override
     public void registerItemSubtypes(@NotNull ISubtypeRegistration registry) {
-        IIngredientSubtypeInterpreter<ItemStack> interpreterPotion = (stack, ctx) -> String.valueOf(AlchemyPotionUtils.getPotion(stack).getId());
+        IIngredientSubtypeInterpreter<ItemStack> interpreterPotion = (stack, ctx) -> String.valueOf(AlchemyPotionUtil.getPotion(stack).getId());
         registry.registerSubtypeInterpreter(VanillaTypes.ITEM_STACK, WizardsReborn.ALCHEMY_VIAL_POTION.get(), interpreterPotion);
         registry.registerSubtypeInterpreter(VanillaTypes.ITEM_STACK, WizardsReborn.ALCHEMY_FLASK_POTION.get(), interpreterPotion);
 
-        IIngredientSubtypeInterpreter<ItemStack> interpreterRitual = (stack, ctx) -> String.valueOf(CrystalRitualUtils.getCrystalRitual(stack).getId());
+        IIngredientSubtypeInterpreter<ItemStack> interpreterRitual = (stack, ctx) -> String.valueOf(CrystalRitualUtil.getCrystalRitual(stack).getId());
         registry.registerSubtypeInterpreter(VanillaTypes.ITEM_STACK, WizardsReborn.RUNIC_WISESTONE_PLATE.get(), interpreterRitual);
 
-        IIngredientSubtypeInterpreter<ItemStack> interpreterArcaneEnchantment = (stack, ctx) -> String.valueOf(ArcaneEnchantmentUtils.getAllArcaneEnchantments(stack).toString());
+        IIngredientSubtypeInterpreter<ItemStack> interpreterArcaneEnchantment = (stack, ctx) -> String.valueOf(ArcaneEnchantmentUtil.getAllArcaneEnchantments(stack).toString());
         registry.registerSubtypeInterpreter(VanillaTypes.ITEM_STACK, WizardsReborn.ARCANE_ENCHANTED_BOOK.get(), interpreterArcaneEnchantment);
 
         IIngredientSubtypeInterpreter<ItemStack> interpreterDrinks = (stack, ctx) -> String.valueOf(DrinkBottleItem.getStageS(stack));

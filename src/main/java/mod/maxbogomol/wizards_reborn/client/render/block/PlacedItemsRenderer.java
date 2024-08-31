@@ -7,7 +7,7 @@ import mod.maxbogomol.wizards_reborn.client.event.ClientTickHandler;
 import mod.maxbogomol.wizards_reborn.common.block.placed_items.PlacedItemsBlock;
 import mod.maxbogomol.wizards_reborn.common.block.placed_items.PlacedItemsBlockEntity;
 import mod.maxbogomol.wizards_reborn.common.item.IPlacedItem;
-import mod.maxbogomol.wizards_reborn.utils.RenderUtils;
+import mod.maxbogomol.wizards_reborn.util.RenderUtils;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.blockentity.BlockEntityRenderer;

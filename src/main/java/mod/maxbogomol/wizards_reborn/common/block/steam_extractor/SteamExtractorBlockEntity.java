@@ -3,7 +3,7 @@ package mod.maxbogomol.wizards_reborn.common.block.steam_extractor;
 import mod.maxbogomol.fluffy_fur.common.network.BlockEntityUpdate;
 import mod.maxbogomol.wizards_reborn.WizardsReborn;
 import mod.maxbogomol.wizards_reborn.api.alchemy.ISteamBlockEntity;
-import mod.maxbogomol.wizards_reborn.api.alchemy.SteamUtils;
+import mod.maxbogomol.wizards_reborn.api.alchemy.SteamUtil;
 import mod.maxbogomol.wizards_reborn.api.wissen.WissenUtils;
 import mod.maxbogomol.wizards_reborn.common.block.steam_pipe.SteamPipeBaseBlockEntity;
 import net.minecraft.core.BlockPos;
@@ -38,7 +38,7 @@ public class SteamExtractorBlockEntity extends SteamPipeBaseBlockEntity {
                             if (steamTileEntity.canSteamTransfer(facing.getOpposite())) {
                                 int steam_remain = WissenUtils.getAddWissenRemain(steam, MAX_DRAIN, getMaxSteam());
                                 steam_remain = MAX_DRAIN - steam_remain;
-                                int removeRemain = SteamUtils.getRemoveSteamRemain(steamTileEntity.getSteam(), steam_remain);
+                                int removeRemain = SteamUtil.getRemoveSteamRemain(steamTileEntity.getSteam(), steam_remain);
                                 steam_remain = steam_remain - removeRemain;
                                 if (steam_remain > 0) {
                                     steamTileEntity.removeSteam(steam_remain);

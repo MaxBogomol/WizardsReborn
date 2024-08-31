@@ -1,7 +1,7 @@
 package mod.maxbogomol.wizards_reborn.common.event;
 
 import mod.maxbogomol.wizards_reborn.WizardsReborn;
-import mod.maxbogomol.wizards_reborn.api.arcaneenchantment.ArcaneEnchantmentUtils;
+import mod.maxbogomol.wizards_reborn.api.arcaneenchantment.ArcaneEnchantmentUtil;
 import mod.maxbogomol.wizards_reborn.api.knowledge.Knowledge;
 import mod.maxbogomol.wizards_reborn.api.knowledge.Knowledges;
 import mod.maxbogomol.wizards_reborn.common.capability.ArrowModifierProvider;
@@ -80,7 +80,7 @@ public class Events {
     @SubscribeEvent
     public void onLivingDamage(LivingDamageEvent event) {
         magicArmor(event);
-        ArcaneEnchantmentUtils.onLivingDamage(event);
+        ArcaneEnchantmentUtil.onLivingDamage(event);
         arcaneDamage(event);
     }
 

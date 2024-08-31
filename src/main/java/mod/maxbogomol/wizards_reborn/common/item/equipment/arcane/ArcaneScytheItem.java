@@ -4,7 +4,7 @@ import mod.maxbogomol.fluffy_fur.client.animation.ItemAnimation;
 import mod.maxbogomol.fluffy_fur.common.item.ICustomAnimationItem;
 import mod.maxbogomol.wizards_reborn.WizardsReborn;
 import mod.maxbogomol.wizards_reborn.api.arcaneenchantment.ArcaneEnchantmentType;
-import mod.maxbogomol.wizards_reborn.api.arcaneenchantment.ArcaneEnchantmentUtils;
+import mod.maxbogomol.wizards_reborn.api.arcaneenchantment.ArcaneEnchantmentUtil;
 import mod.maxbogomol.wizards_reborn.api.arcaneenchantment.IArcaneItem;
 import mod.maxbogomol.wizards_reborn.api.skin.Skin;
 import mod.maxbogomol.wizards_reborn.api.wissen.WissenUtils;
@@ -55,22 +55,22 @@ public class ArcaneScytheItem extends ScytheItem implements IArcaneItem, ICustom
     public void appendHoverText(ItemStack stack, Level world, List<Component> list, TooltipFlag flags) {
         Skin skin = Skin.getSkinFromItem(stack);
         if (skin != null) list.add(skin.getSkinComponent());
-        list.addAll(ArcaneEnchantmentUtils.appendHoverText(stack, world, flags));
+        list.addAll(ArcaneEnchantmentUtil.appendHoverText(stack, world, flags));
     }
 
     @Override
     public void inventoryTick(ItemStack stack, Level world, Entity entity, int slot, boolean isSelected) {
-        ArcaneEnchantmentUtils.inventoryTick(stack, world, entity, slot, isSelected);
+        ArcaneEnchantmentUtil.inventoryTick(stack, world, entity, slot, isSelected);
     }
 
     @Override
     public <T extends LivingEntity> int damageItem(ItemStack stack, int amount, T entity, Consumer<T> onBroken) {
-        return ArcaneEnchantmentUtils.damageItem(stack, amount, entity);
+        return ArcaneEnchantmentUtil.damageItem(stack, amount, entity);
     }
 
     @Override
     public boolean hurtEnemy(ItemStack stack, LivingEntity target, LivingEntity attacker) {
-        ArcaneEnchantmentUtils.hurtEnemy(stack, target, attacker);
+        ArcaneEnchantmentUtil.hurtEnemy(stack, target, attacker);
         return super.hurtEnemy(stack, target, attacker);
     }
 
@@ -79,7 +79,7 @@ public class ArcaneScytheItem extends ScytheItem implements IArcaneItem, ICustom
     public InteractionResultHolder<ItemStack> use(Level world, Player player, InteractionHand hand) {
         ItemStack stack = player.getItemInHand(hand);
 
-        if (ArcaneEnchantmentUtils.getArcaneEnchantment(stack, WizardsReborn.THROW_ARCANE_ENCHANTMENT) > 0) {
+        if (ArcaneEnchantmentUtil.getArcaneEnchantment(stack, WizardsReborn.THROW_ARCANE_ENCHANTMENT) > 0) {
             float costModifier = WissenUtils.getWissenCostModifierWithDiscount(player);
             List<ItemStack> items = WissenUtils.getWissenItemsNoneAndStorage(WissenUtils.getWissenItemsCurios(player));
             int wissen = WissenUtils.getWissenInItems(items);
@@ -96,12 +96,12 @@ public class ArcaneScytheItem extends ScytheItem implements IArcaneItem, ICustom
     @Override
     public void onUseTick(Level level, LivingEntity livingEntity, ItemStack stack, int remainingUseDuration) {
         super.onUseTick(level, livingEntity, stack, remainingUseDuration);
-        ArcaneEnchantmentUtils.onUseTick(level, livingEntity, stack, remainingUseDuration);
+        ArcaneEnchantmentUtil.onUseTick(level, livingEntity, stack, remainingUseDuration);
     }
 
     @Override
     public ItemAnimation getAnimation(ItemStack stack) {
-        if (ArcaneEnchantmentUtils.getArcaneEnchantment(stack, WizardsReborn.THROW_ARCANE_ENCHANTMENT) > 0) {
+        if (ArcaneEnchantmentUtil.getArcaneEnchantment(stack, WizardsReborn.THROW_ARCANE_ENCHANTMENT) > 0) {
             return ThrowArcaneEnchantment.animation;
         }
         return null;
@@ -109,7 +109,7 @@ public class ArcaneScytheItem extends ScytheItem implements IArcaneItem, ICustom
 
     @Override
     public UseAnim getUseAnimation(ItemStack stack) {
-        if (ArcaneEnchantmentUtils.getArcaneEnchantment(stack, WizardsReborn.THROW_ARCANE_ENCHANTMENT) > 0) {
+        if (ArcaneEnchantmentUtil.getArcaneEnchantment(stack, WizardsReborn.THROW_ARCANE_ENCHANTMENT) > 0) {
             return UseAnim.CUSTOM;
         }
         return UseAnim.NONE;

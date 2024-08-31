@@ -6,7 +6,7 @@ import mod.maxbogomol.wizards_reborn.WizardsReborn;
 import mod.maxbogomol.wizards_reborn.api.alchemy.IFluidItem;
 import mod.maxbogomol.wizards_reborn.api.alchemy.ISteamItem;
 import mod.maxbogomol.wizards_reborn.api.wissen.IWissenItem;
-import mod.maxbogomol.wizards_reborn.api.wissen.WissenItemUtils;
+import mod.maxbogomol.wizards_reborn.api.wissen.WissenItemUtil;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.resources.ResourceLocation;
@@ -36,7 +36,7 @@ public class TooltipEventHandler {
             if (nbt!=null) {
                 if (nbt.contains("wissen")) {
                     int width_wissen = 32;
-                    width_wissen /= (double) item.getMaxWissen() / (double) WissenItemUtils.getWissen(stack);
+                    width_wissen /= (double) item.getMaxWissen() / (double) WissenItemUtil.getWissen(stack);
                     event.getGraphics().blit(new ResourceLocation(WizardsReborn.MOD_ID + ":textures/gui/wissen_frame.png"), x + 4, y - 14, 0, 10, width_wissen, 8, 64, 64);
                 }
             }

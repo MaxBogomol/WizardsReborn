@@ -7,22 +7,22 @@ import mod.maxbogomol.fluffy_fur.client.animation.ItemAnimation;
 import mod.maxbogomol.fluffy_fur.common.item.ICustomAnimationItem;
 import mod.maxbogomol.fluffy_fur.common.item.IGuiParticleItem;
 import mod.maxbogomol.fluffy_fur.common.item.ItemBackedInventory;
-import mod.maxbogomol.fluffy_fur.utils.ColorUtils;
+import mod.maxbogomol.fluffy_fur.util.ColorUtil;
 import mod.maxbogomol.wizards_reborn.WizardsReborn;
 import mod.maxbogomol.wizards_reborn.WizardsRebornClient;
 import mod.maxbogomol.wizards_reborn.api.crystal.CrystalStat;
 import mod.maxbogomol.wizards_reborn.api.crystal.CrystalType;
-import mod.maxbogomol.wizards_reborn.api.knowledge.KnowledgeUtils;
+import mod.maxbogomol.wizards_reborn.api.knowledge.KnowledgeUtil;
 import mod.maxbogomol.wizards_reborn.api.skin.Skin;
 import mod.maxbogomol.wizards_reborn.api.spell.Spell;
 import mod.maxbogomol.wizards_reborn.api.spell.Spells;
 import mod.maxbogomol.wizards_reborn.api.wissen.IWissenItem;
 import mod.maxbogomol.wizards_reborn.api.wissen.WissenItemType;
-import mod.maxbogomol.wizards_reborn.api.wissen.WissenItemUtils;
+import mod.maxbogomol.wizards_reborn.api.wissen.WissenItemUtil;
 import mod.maxbogomol.wizards_reborn.client.config.ClientConfig;
 import mod.maxbogomol.wizards_reborn.common.item.CrystalItem;
-import mod.maxbogomol.wizards_reborn.utils.NumericalUtils;
-import mod.maxbogomol.wizards_reborn.utils.RenderUtils;
+import mod.maxbogomol.wizards_reborn.util.NumericalUtil;
+import mod.maxbogomol.wizards_reborn.util.RenderUtils;
 import net.minecraft.ChatFormatting;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Font;
@@ -116,7 +116,7 @@ public class ArcaneWandItem extends Item implements IWissenItem, ICustomAnimatio
     @Override
     public ItemStack getDefaultInstance() {
         ItemStack stack = super.getDefaultInstance();
-        WissenItemUtils.existWissen(stack);
+        WissenItemUtil.existWissen(stack);
         return stack;
     }
 
@@ -141,7 +141,7 @@ public class ArcaneWandItem extends Item implements IWissenItem, ICustomAnimatio
 
     @Override
     public void inventoryTick(ItemStack stack, Level world, Entity entity, int slot, boolean isSelected) {
-        WissenItemUtils.existWissen(stack);
+        WissenItemUtil.existWissen(stack);
         existTags(stack);
         CompoundTag nbt = stack.getOrCreateTag();
 
@@ -286,7 +286,7 @@ public class ArcaneWandItem extends Item implements IWissenItem, ICustomAnimatio
         if (nbt.getBoolean("crystal")) {
             if (!nbt.getString("spell").isEmpty()) {
                 Spell spell = Spells.getSpell(nbt.getString("spell"));
-                return (KnowledgeUtils.isSpell(player, spell));
+                return (KnowledgeUtil.isSpell(player, spell));
             }
         }
         return false;
@@ -322,8 +322,8 @@ public class ArcaneWandItem extends Item implements IWissenItem, ICustomAnimatio
         if (skin != null) list.add(skin.getSkinComponent());
 
         if (ClientConfig.NUMERICAL_WISSEN.get()) {
-            WissenItemUtils.existWissen(stack);
-            list.add(NumericalUtils.getWissenName(WissenItemUtils.getWissen(stack), getMaxWissen()).copy().withStyle(ChatFormatting.GRAY));
+            WissenItemUtil.existWissen(stack);
+            list.add(NumericalUtil.getWissenName(WissenItemUtil.getWissen(stack), getMaxWissen()).copy().withStyle(ChatFormatting.GRAY));
         }
 
         list.add(Component.empty());
@@ -340,7 +340,7 @@ public class ArcaneWandItem extends Item implements IWissenItem, ICustomAnimatio
                     int green = (int) Mth.lerp((float) statlevel / stat.getMaxLevel(), Color.GRAY.getGreen(), color.getGreen());
                     int blue = (int) Mth.lerp((float) statlevel / stat.getMaxLevel(), Color.GRAY.getBlue(), color.getBlue());
 
-                    int packColor = ColorUtils.packColor(255, red, green, blue);
+                    int packColor = ColorUtil.packColor(255, red, green, blue);
                     list.add(Component.literal(" ").append(Component.translatable(stat.getTranslatedName()).append(": " + statlevel).withStyle(Style.EMPTY.withColor(packColor))));
                 }
             }
@@ -351,7 +351,7 @@ public class ArcaneWandItem extends Item implements IWissenItem, ICustomAnimatio
         if (nbt.getString("spell") != "") {
             Spell spell = Spells.getSpell(nbt.getString("spell"));
             Color color = spell.getColor();
-            int packColor = ColorUtils.packColor(255, color.getRed(), color.getGreen(), color.getBlue());
+            int packColor = ColorUtil.packColor(255, color.getRed(), color.getGreen(), color.getBlue());
             list.add(Component.literal(" ").append(Component.translatable(spell.getTranslatedName()).withStyle(Style.EMPTY.withColor(packColor))));
         }
     }
@@ -512,7 +512,7 @@ public class ArcaneWandItem extends Item implements IWissenItem, ICustomAnimatio
         if (stack.getItem() instanceof ArcaneWandItem wand) {
             CompoundTag nbt = stack.getOrCreateTag();
             existTags(stack);
-            WissenItemUtils.existWissen(stack);
+            WissenItemUtil.existWissen(stack);
             Spell spell = null;
 
             if (nbt.contains("spell")) {
@@ -523,7 +523,7 @@ public class ArcaneWandItem extends Item implements IWissenItem, ICustomAnimatio
 
             int cooldown = nbt.getInt("cooldown");
             int maxCooldown = nbt.getInt("maxCooldown");
-            int wissen = WissenItemUtils.getWissen(stack);
+            int wissen = WissenItemUtil.getWissen(stack);
             int maxWissen = wand.getMaxWissen();
 
 
@@ -549,7 +549,7 @@ public class ArcaneWandItem extends Item implements IWissenItem, ICustomAnimatio
             }
 
             if (spell != null) {
-                if (KnowledgeUtils.isSpell(Minecraft.getInstance().player, spell)) {
+                if (KnowledgeUtil.isSpell(Minecraft.getInstance().player, spell)) {
                     gui.blit(spell.getIcon(), x + 28, y + 1, 0, 0, 16, 16, 16, 16);
                     if (!spell.canWandWithCrystal(stack)) {
                         gui.blit(new ResourceLocation(WizardsReborn.MOD_ID + ":textures/gui/arcane_wand_frame.png"), x + 27, y, 0, 18, 18, 18, 64, 64);
@@ -641,14 +641,14 @@ public class ArcaneWandItem extends Item implements IWissenItem, ICustomAnimatio
         for (Spell spellI : spells) {
             ResourceLocation resource = new ResourceLocation(WizardsReborn.MOD_ID, "textures/gui/arcanemicon/research.png");
             if (spellI != null) {
-                if (!KnowledgeUtils.isSpell(mc.player, spellI)) {
+                if (!KnowledgeUtil.isSpell(mc.player, spellI)) {
                     resource = new ResourceLocation(WizardsReborn.MOD_ID, "textures/gui/arcanemicon/unknown.png");
                 } else {
                     resource = spellI.getIcon();
                 }
             }
 
-            if (!(KnowledgeUtils.isSpell(Minecraft.getInstance().player, spellI)) && spellI != null) {
+            if (!(KnowledgeUtil.isSpell(Minecraft.getInstance().player, spellI)) && spellI != null) {
                 resource = new ResourceLocation(WizardsReborn.MOD_ID, "textures/gui/arcanemicon/unknown.png");
             }
 
@@ -697,10 +697,10 @@ public class ArcaneWandItem extends Item implements IWissenItem, ICustomAnimatio
     public static List<Spell> getSpellSet(boolean showEmpty, boolean reverse) {
         Minecraft mc = Minecraft.getInstance();
 
-        int currentSpellSet = KnowledgeUtils.getCurrentSpellSet(mc.player);
-        int currentSpellInSet = KnowledgeUtils.getCurrentSpellInSet(mc.player);
+        int currentSpellSet = KnowledgeUtil.getCurrentSpellSet(mc.player);
+        int currentSpellInSet = KnowledgeUtil.getCurrentSpellInSet(mc.player);
 
-        List<Spell> spells = KnowledgeUtils.getSpellSet(mc.player, currentSpellSet);
+        List<Spell> spells = KnowledgeUtil.getSpellSet(mc.player, currentSpellSet);
         List<Spell> spellSet = new ArrayList<>();
 
         int ii = 0;
@@ -723,10 +723,10 @@ public class ArcaneWandItem extends Item implements IWissenItem, ICustomAnimatio
     public static int getCurrentSpellInSet(boolean showEmpty, boolean reverse) {
         Minecraft mc = Minecraft.getInstance();
 
-        int currentSpellSet = KnowledgeUtils.getCurrentSpellSet(mc.player);
-        int currentSpellInSet = KnowledgeUtils.getCurrentSpellInSet(mc.player);
+        int currentSpellSet = KnowledgeUtil.getCurrentSpellSet(mc.player);
+        int currentSpellInSet = KnowledgeUtil.getCurrentSpellInSet(mc.player);
 
-        List<Spell> spells = KnowledgeUtils.getSpellSet(mc.player, currentSpellSet);
+        List<Spell> spells = KnowledgeUtil.getSpellSet(mc.player, currentSpellSet);
 
         int ii = 0;
         if (reverse) ii = 9;

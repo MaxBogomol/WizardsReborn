@@ -8,7 +8,7 @@ import mod.maxbogomol.wizards_reborn.api.wissen.ICooldownBlockEntity;
 import mod.maxbogomol.wizards_reborn.api.wissen.IExperienceBlockEntity;
 import mod.maxbogomol.wizards_reborn.api.wissen.IWissenBlockEntity;
 import mod.maxbogomol.wizards_reborn.common.block.alchemy_machine.AlchemyMachineBlockEntity;
-import mod.maxbogomol.wizards_reborn.utils.NumericalUtils;
+import mod.maxbogomol.wizards_reborn.util.NumericalUtil;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.block.entity.BlockEntity;
@@ -24,33 +24,33 @@ public enum NumericalProvider implements IBlockComponentProvider {
         BlockEntity tile = accessor.getLevel().getBlockEntity(accessor.getPosition());
 
         if (tile instanceof IWissenBlockEntity wissenTile) {
-            tooltip.add(NumericalUtils.getWissenName(wissenTile.getWissen(), wissenTile.getMaxWissen()));
+            tooltip.add(NumericalUtil.getWissenName(wissenTile.getWissen(), wissenTile.getMaxWissen()));
         }
         if (tile instanceof ICooldownBlockEntity cooldownTile) {
-            tooltip.add(NumericalUtils.getCooldownName(cooldownTile.getCooldown()));
+            tooltip.add(NumericalUtil.getCooldownName(cooldownTile.getCooldown()));
         }
         if (tile instanceof ILightBlockEntity lightTile) {
             if (lightTile.getLight() > 0) {
-                tooltip.add(NumericalUtils.getLightName().copy().append(Component.literal(": ").append(Component.translatable("tooltip.jade.state_on"))));
+                tooltip.add(NumericalUtil.getLightName().copy().append(Component.literal(": ").append(Component.translatable("tooltip.jade.state_on"))));
             } else {
-                tooltip.add(NumericalUtils.getLightName().copy().append(Component.literal(": ").append(Component.translatable("tooltip.jade.state_off"))));
+                tooltip.add(NumericalUtil.getLightName().copy().append(Component.literal(": ").append(Component.translatable("tooltip.jade.state_off"))));
             }
         }
         if (tile instanceof IFluidBlockEntity fluidTile) {
-            tooltip.add(NumericalUtils.getFluidName(fluidTile.getFluidStack(), fluidTile.getFluidMaxAmount()));
+            tooltip.add(NumericalUtil.getFluidName(fluidTile.getFluidStack(), fluidTile.getFluidMaxAmount()));
         }
         if (tile instanceof IExperienceBlockEntity experienceTile) {
-            tooltip.add(NumericalUtils.getExperienceName(experienceTile.getExperience(), experienceTile.getMaxExperience()));
+            tooltip.add(NumericalUtil.getExperienceName(experienceTile.getExperience(), experienceTile.getMaxExperience()));
         }
         if (tile instanceof IHeatTileEntity heatTile) {
-            tooltip.add(NumericalUtils.getHeatName(heatTile.getHeat(), heatTile.getMaxHeat()));
+            tooltip.add(NumericalUtil.getHeatName(heatTile.getHeat(), heatTile.getMaxHeat()));
         }
         if (tile instanceof ISteamBlockEntity steamTile) {
-            tooltip.add(NumericalUtils.getSteamName(steamTile.getSteam(), steamTile.getMaxSteam()));
+            tooltip.add(NumericalUtil.getSteamName(steamTile.getSteam(), steamTile.getMaxSteam()));
         }
         if (tile instanceof AlchemyMachineBlockEntity machine) {
             for (int i = 0; i <= 2; i++) {
-                tooltip.add(NumericalUtils.getFluidName(machine.getFluidStack(i), machine.getMaxCapacity()));
+                tooltip.add(NumericalUtil.getFluidName(machine.getFluidStack(i), machine.getMaxCapacity()));
             }
         }
     }

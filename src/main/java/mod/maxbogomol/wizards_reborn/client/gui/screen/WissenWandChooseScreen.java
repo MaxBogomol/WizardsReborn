@@ -4,13 +4,13 @@ import com.mojang.blaze3d.platform.GlStateManager;
 import com.mojang.blaze3d.platform.InputConstants;
 import com.mojang.blaze3d.systems.RenderSystem;
 import com.mojang.math.Axis;
-import mod.maxbogomol.fluffy_fur.utils.ColorUtils;
+import mod.maxbogomol.fluffy_fur.util.ColorUtil;
 import mod.maxbogomol.wizards_reborn.WizardsRebornClient;
 import mod.maxbogomol.wizards_reborn.client.event.ClientTickHandler;
 import mod.maxbogomol.wizards_reborn.common.item.equipment.WissenWandItem;
 import mod.maxbogomol.wizards_reborn.common.network.PacketHandler;
 import mod.maxbogomol.wizards_reborn.common.network.SetWissenWandModePacket;
-import mod.maxbogomol.wizards_reborn.utils.RenderUtils;
+import mod.maxbogomol.wizards_reborn.util.RenderUtils;
 import net.minecraft.ChatFormatting;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
@@ -117,9 +117,9 @@ public class WissenWandChooseScreen extends Screen {
     }
 
     public void renderRays(ChatFormatting color, GuiGraphics gui, float partialTicks, float i, float step, boolean choosed) {
-        float r = ColorUtils.getRed(color.getColor()) / 255f;
-        float g = ColorUtils.getGreen(color.getColor()) / 255f;
-        float b = ColorUtils.getBlue(color.getColor()) / 255f;
+        float r = ColorUtil.getRed(color.getColor()) / 255f;
+        float g = ColorUtil.getGreen(color.getColor()) / 255f;
+        float b = ColorUtil.getBlue(color.getColor()) / 255f;
 
         float chooseRay = (choosed) ? 1.2f : 0.8f;
 

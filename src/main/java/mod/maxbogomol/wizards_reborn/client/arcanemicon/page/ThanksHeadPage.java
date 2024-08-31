@@ -1,6 +1,6 @@
 package mod.maxbogomol.wizards_reborn.client.arcanemicon.page;
 
-import mod.maxbogomol.fluffy_fur.utils.ColorUtils;
+import mod.maxbogomol.fluffy_fur.util.ColorUtil;
 import mod.maxbogomol.wizards_reborn.WizardsReborn;
 import mod.maxbogomol.wizards_reborn.client.arcanemicon.ArcanemiconGui;
 import mod.maxbogomol.wizards_reborn.client.arcanemicon.Page;
@@ -45,7 +45,7 @@ public class ThanksHeadPage extends Page {
             int r = (int)(Math.sin(ticks) * 127 + 128);
             int g = (int)(Math.sin(ticks + Math.PI/2) * 127 + 128);
             int b = (int)(Math.sin(ticks + Math.PI) * 127 + 128);
-            int packColor = ColorUtils.packColor(255, r, g, b);
+            int packColor = ColorUtil.packColor(255, r, g, b);
 
             List<Component> list = new ArrayList<>();
             list.add(Component.translatable(name).withStyle(Style.EMPTY.withColor(packColor)));

@@ -1,7 +1,7 @@
 package mod.maxbogomol.wizards_reborn.common.item.equipment;
 
 import mod.maxbogomol.wizards_reborn.api.knowledge.Knowledge;
-import mod.maxbogomol.wizards_reborn.api.knowledge.KnowledgeUtils;
+import mod.maxbogomol.wizards_reborn.api.knowledge.KnowledgeUtil;
 import mod.maxbogomol.wizards_reborn.api.knowledge.Knowledges;
 import mod.maxbogomol.wizards_reborn.common.item.ArcanumItem;
 import net.minecraft.ChatFormatting;
@@ -38,7 +38,7 @@ public class KnowledgeSrollItem extends ArcanumItem {
             if (!nbt.contains("knowledges")) {
                 ListTag knowledges = new ListTag();
                 for (Knowledge knowledge : Knowledges.getKnowledges()) {
-                    if (KnowledgeUtils.isKnowledge(player, knowledge)) {
+                    if (KnowledgeUtil.isKnowledge(player, knowledge)) {
                         knowledges.add(StringTag.valueOf(knowledge.getId()));
                     }
                 }
@@ -49,7 +49,7 @@ public class KnowledgeSrollItem extends ArcanumItem {
                 ListTag knowledges = nbt.getList("knowledges", Tag.TAG_STRING);
                 for (int i = 0; i < knowledges.size(); i++) {
                     Knowledge knowledge = Knowledges.getKnowledge(knowledges.getString(i));
-                    if (knowledge != null) KnowledgeUtils.addKnowledgeFromScroll(player, knowledge);
+                    if (knowledge != null) KnowledgeUtil.addKnowledgeFromScroll(player, knowledge);
                 }
 
                 if (!player.isCreative()) {

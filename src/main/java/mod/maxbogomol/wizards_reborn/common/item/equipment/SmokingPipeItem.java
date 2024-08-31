@@ -3,7 +3,7 @@ package mod.maxbogomol.wizards_reborn.common.item.equipment;
 import mod.maxbogomol.fluffy_fur.client.animation.ItemAnimation;
 import mod.maxbogomol.fluffy_fur.common.item.ICustomAnimationItem;
 import mod.maxbogomol.fluffy_fur.common.item.ItemBackedInventory;
-import mod.maxbogomol.fluffy_fur.utils.ColorUtils;
+import mod.maxbogomol.fluffy_fur.util.ColorUtil;
 import mod.maxbogomol.wizards_reborn.WizardsReborn;
 import mod.maxbogomol.wizards_reborn.client.animation.SmokingPipeItemAnimation;
 import mod.maxbogomol.wizards_reborn.common.network.PacketHandler;
@@ -127,9 +127,9 @@ public class SmokingPipeItem extends Item implements ICustomAnimationItem {
                         }
 
                         int color = PotionUtils.getColor(effects);
-                        R = ColorUtils.getRed(color) / 255F;
-                        G = ColorUtils.getGreen(color) / 255F;
-                        B = ColorUtils.getBlue(color) / 255F;
+                        R = ColorUtil.getRed(color) / 255F;
+                        G = ColorUtil.getGreen(color) / 255F;
+                        B = ColorUtil.getBlue(color) / 255F;
                     }
 
                     Vec3 posSmoke = player.getEyePosition().add(player.getLookAngle().scale(0.75f));
@@ -272,7 +272,7 @@ public class SmokingPipeItem extends Item implements ICustomAnimationItem {
             int R = (int) Mth.lerp(((float) burn / 5), 255, 0);
             int G = (int) Mth.lerp(((float) burn / 5), 255, 0);
             int B = (int) Mth.lerp(((float) burn / 5), 255, 0);
-            list.add(Component.translatable(getInventory(stack).getItem(i).getDescriptionId()).withStyle(Style.EMPTY.withColor(ColorUtils.packColor(255, R, G, B))));
+            list.add(Component.translatable(getInventory(stack).getItem(i).getDescriptionId()).withStyle(Style.EMPTY.withColor(ColorUtil.packColor(255, R, G, B))));
         }
 
         if (invSize > 0) list.add(Component.empty());

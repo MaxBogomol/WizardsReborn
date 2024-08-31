@@ -5,15 +5,15 @@ import com.mojang.math.Axis;
 import mod.maxbogomol.fluffy_fur.client.render.LevelRenderHandler;
 import mod.maxbogomol.wizards_reborn.api.crystalritual.CrystalRitual;
 import mod.maxbogomol.wizards_reborn.api.crystalritual.CrystalRitualArea;
-import mod.maxbogomol.wizards_reborn.api.crystalritual.CrystalRitualUtils;
+import mod.maxbogomol.wizards_reborn.api.crystalritual.CrystalRitualUtil;
 import mod.maxbogomol.wizards_reborn.api.light.ILightBlockEntity;
 import mod.maxbogomol.wizards_reborn.api.light.LightRayHitResult;
-import mod.maxbogomol.wizards_reborn.api.light.LightUtils;
+import mod.maxbogomol.wizards_reborn.api.light.LightUtil;
 import mod.maxbogomol.wizards_reborn.api.wissen.WissenUtils;
 import mod.maxbogomol.wizards_reborn.client.event.ClientTickHandler;
 import mod.maxbogomol.wizards_reborn.common.block.crystal.CrystalBlockEntity;
 import mod.maxbogomol.wizards_reborn.common.item.CrystalItem;
-import mod.maxbogomol.wizards_reborn.utils.RenderUtils;
+import mod.maxbogomol.wizards_reborn.util.RenderUtils;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.blockentity.BlockEntityRenderer;
 import net.minecraft.core.BlockPos;
@@ -54,11 +54,11 @@ public class CrystalRenderer implements BlockEntityRenderer<CrystalBlockEntity> 
                 }
             }
 
-            if (crystal.isToBlock && !CrystalRitualUtils.isEmpty(ritual) && ritual.hasLightRay(crystal)) {
+            if (crystal.isToBlock && !CrystalRitualUtil.isEmpty(ritual) && ritual.hasLightRay(crystal)) {
                 BlockPos pos = new BlockPos(crystal.blockToX, crystal.blockToY, crystal.blockToZ);
                 if (crystal.getLevel().getBlockEntity(pos) instanceof ILightBlockEntity lightTile) {
-                    Vec3 from = LightUtils.getLightLensPos(crystal.getBlockPos(), crystal.getLightLensPos());
-                    Vec3 to = LightUtils.getLightLensPos(pos, lightTile.getLightLensPos());
+                    Vec3 from = LightUtil.getLightLensPos(crystal.getBlockPos(), crystal.getLightLensPos());
+                    Vec3 to = LightUtil.getLightLensPos(pos, lightTile.getLightLensPos());
 
                     double dX = to.x() - from.x();
                     double dY = to.y() - from.y();
@@ -78,19 +78,19 @@ public class CrystalRenderer implements BlockEntityRenderer<CrystalBlockEntity> 
                     ms.pushPose();
                     ms.translate(0.5F, 0.3125F, 0.5F);
                     Color color = new Color(0.886f, 0.811f, 0.549f);
-                    LightRayHitResult hitResult = LightUtils.getLightRayHitResult(crystal.getLevel(), crystal.getBlockPos(), from, to, 25f);
-                    LightUtils.renderLightRay(from, hitResult.getPosHit(), hitResult.getDistance() + rayDistance, 25f, color, partialTicks, ms);
+                    LightRayHitResult hitResult = LightUtil.getLightRayHitResult(crystal.getLevel(), crystal.getBlockPos(), from, to, 25f);
+                    LightUtil.renderLightRay(from, hitResult.getPosHit(), hitResult.getDistance() + rayDistance, 25f, color, partialTicks, ms);
                     ms.popPose();
                 }
             }
         }
 
-        if (!CrystalRitualUtils.isEmpty(ritual) && ritual.canStartWithCrystal(crystal)) {
+        if (!CrystalRitualUtil.isEmpty(ritual) && ritual.canStartWithCrystal(crystal)) {
             ritual.render(crystal, partialTicks, ms, buffers, light, overlay);
         }
 
         if (WissenUtils.isCanRenderWissenWand()) {
-            if (!CrystalRitualUtils.isEmpty(ritual)) {
+            if (!CrystalRitualUtil.isEmpty(ritual)) {
                 CrystalRitualArea area = ritual.getArea(crystal);
                 ms.pushPose();
                 ms.translate(-area.getSizeFrom().x(), -area.getSizeFrom().y(), -area.getSizeFrom().z());
@@ -110,7 +110,7 @@ public class CrystalRenderer implements BlockEntityRenderer<CrystalBlockEntity> 
                 ms.translate(lensPos.x(), lensPos.y(), lensPos.z());
                 BlockPos pos = new BlockPos(crystal.blockToX, crystal.blockToY, crystal.blockToZ);
                 if (crystal.getLevel().getBlockEntity(pos) instanceof ILightBlockEntity lightTile) {
-                    RenderUtils.renderConnectLine(LightUtils.getLightLensPos(crystal.getBlockPos(), crystal.getLightLensPos()), LightUtils.getLightLensPos(pos, lightTile.getLightLensPos()), RenderUtils.colorConnectTo, partialTicks, ms);
+                    RenderUtils.renderConnectLine(LightUtil.getLightLensPos(crystal.getBlockPos(), crystal.getLightLensPos()), LightUtil.getLightLensPos(pos, lightTile.getLightLensPos()), RenderUtils.colorConnectTo, partialTicks, ms);
                 }
                 ms.popPose();
             }

@@ -2,7 +2,7 @@ package mod.maxbogomol.wizards_reborn.common.item.equipment.arcane;
 
 import mod.maxbogomol.wizards_reborn.WizardsReborn;
 import mod.maxbogomol.wizards_reborn.api.arcaneenchantment.ArcaneEnchantmentType;
-import mod.maxbogomol.wizards_reborn.api.arcaneenchantment.ArcaneEnchantmentUtils;
+import mod.maxbogomol.wizards_reborn.api.arcaneenchantment.ArcaneEnchantmentUtil;
 import mod.maxbogomol.wizards_reborn.api.arcaneenchantment.IArcaneItem;
 import mod.maxbogomol.wizards_reborn.api.skin.Skin;
 import net.minecraft.ChatFormatting;
@@ -108,7 +108,7 @@ public class ArcaneArmorItem extends ArmorItem implements IArcaneItem {
             }
         }
 
-        list.addAll(ArcaneEnchantmentUtils.appendHoverText(stack, world, flags));
+        list.addAll(ArcaneEnchantmentUtil.appendHoverText(stack, world, flags));
     }
 
     public boolean hasArmorSet() {
@@ -161,12 +161,12 @@ public class ArcaneArmorItem extends ArmorItem implements IArcaneItem {
 
     @Override
     public void inventoryTick(ItemStack stack, Level world, Entity entity, int slot, boolean isSelected) {
-        ArcaneEnchantmentUtils.inventoryTick(stack, world, entity, slot, isSelected);
+        ArcaneEnchantmentUtil.inventoryTick(stack, world, entity, slot, isSelected);
     }
 
     @Override
     public <T extends LivingEntity> int damageItem(ItemStack stack, int amount, T entity, Consumer<T> onBroken) {
-        return ArcaneEnchantmentUtils.damageItem(stack, amount, entity);
+        return ArcaneEnchantmentUtil.damageItem(stack, amount, entity);
     }
 
     public boolean hasCustomModel() {

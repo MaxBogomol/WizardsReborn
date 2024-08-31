@@ -3,7 +3,7 @@ package mod.maxbogomol.wizards_reborn.common.block.casing.light;
 import mod.maxbogomol.fluffy_fur.common.network.BlockEntityUpdate;
 import mod.maxbogomol.wizards_reborn.WizardsReborn;
 import mod.maxbogomol.wizards_reborn.api.light.LightRayHitResult;
-import mod.maxbogomol.wizards_reborn.api.light.LightUtils;
+import mod.maxbogomol.wizards_reborn.api.light.LightUtil;
 import mod.maxbogomol.wizards_reborn.client.sound.LightCasingSoundInstance;
 import mod.maxbogomol.wizards_reborn.common.block.light_transfer_lens.LightTransferLensBlockEntity;
 import net.minecraft.core.BlockPos;
@@ -43,11 +43,11 @@ public class LightCasingBlockEntity extends LightTransferLensBlockEntity {
                     if (isConnection(direction)) {
                         BlockPos pos = new BlockPos(0, 0, 0).relative(direction);
                         Vec3 from = new Vec3(getBlockPos().getX() + 0.5f + (pos.getX() * getLightLensOffset()), getBlockPos().getY() + 0.5f + (pos.getY() * getLightLensOffset()), getBlockPos().getZ() + 0.5f + (pos.getZ() * getLightLensOffset()));
-                        Vec3 to = LightUtils.getLightLensPos(getBlockPos().relative(direction), getLightLensPos());
+                        Vec3 to = LightUtil.getLightLensPos(getBlockPos().relative(direction), getLightLensPos());
 
-                        LightRayHitResult hitResult = LightUtils.getLightRayHitResult(level, getBlockPos(), from, to, 25);
+                        LightRayHitResult hitResult = LightUtil.getLightRayHitResult(level, getBlockPos(), from, to, 25);
                         BlockEntity hitTile = hitResult.getTile();
-                        LightUtils.transferLight(this, hitTile);
+                        LightUtil.transferLight(this, hitTile);
                     }
                 }
             }

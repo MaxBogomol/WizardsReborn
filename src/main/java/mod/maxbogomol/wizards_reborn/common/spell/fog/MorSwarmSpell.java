@@ -1,7 +1,7 @@
 package mod.maxbogomol.wizards_reborn.common.spell.fog;
 
 import mod.maxbogomol.wizards_reborn.WizardsReborn;
-import mod.maxbogomol.wizards_reborn.api.crystal.CrystalUtils;
+import mod.maxbogomol.wizards_reborn.api.crystal.CrystalUtil;
 import mod.maxbogomol.wizards_reborn.common.damage.DamageSourceRegistry;
 import mod.maxbogomol.wizards_reborn.common.entity.SpellProjectileEntity;
 import mod.maxbogomol.wizards_reborn.common.item.equipment.arcane.ArcaneArmorItem;
@@ -57,7 +57,7 @@ public class MorSwarmSpell extends FogSpell {
         if (alpha > 1f) alpha = 1f;
         if (alpha < 0f) alpha = 0f;
 
-        int focusLevel = CrystalUtils.getStatLevel(entity.getStats(), WizardsReborn.FOCUS_CRYSTAL_STAT);
+        int focusLevel = CrystalUtil.getStatLevel(entity.getStats(), WizardsReborn.FOCUS_CRYSTAL_STAT);
         int size = getSize(entity) + (getSize(entity) * focusLevel);
         List<BlockPos> blocks = getBlocks(entity.level(), entity.getOnPos(), (int) (size * alpha), 4, isCircle(entity));
         List<Entity> entities = getEntities(entity.level(), blocks);

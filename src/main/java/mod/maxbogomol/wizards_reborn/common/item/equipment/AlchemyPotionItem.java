@@ -1,10 +1,10 @@
 package mod.maxbogomol.wizards_reborn.common.item.equipment;
 
 import com.google.common.base.Preconditions;
-import mod.maxbogomol.fluffy_fur.utils.ColorUtils;
+import mod.maxbogomol.fluffy_fur.util.ColorUtil;
 import mod.maxbogomol.wizards_reborn.WizardsReborn;
 import mod.maxbogomol.wizards_reborn.api.alchemy.AlchemyPotion;
-import mod.maxbogomol.wizards_reborn.api.alchemy.AlchemyPotionUtils;
+import mod.maxbogomol.wizards_reborn.api.alchemy.AlchemyPotionUtil;
 import mod.maxbogomol.wizards_reborn.common.alchemypotion.FluidAlchemyPotion;
 import mod.maxbogomol.wizards_reborn.common.alchemypotion.RegisterAlchemyPotions;
 import mod.maxbogomol.wizards_reborn.common.item.PlacedItem;
@@ -54,11 +54,11 @@ public class AlchemyPotionItem extends PlacedItem {
         @Override
         public int getColor(ItemStack stack, int tintIndex) {
             if (tintIndex == 1) {
-                AlchemyPotion potion = AlchemyPotionUtils.getPotion(stack);
-                if (!AlchemyPotionUtils.isEmpty(potion)) {
+                AlchemyPotion potion = AlchemyPotionUtil.getPotion(stack);
+                if (!AlchemyPotionUtil.isEmpty(potion)) {
                     Color color = potion.getColor();
 
-                    return ColorUtils.packColor(255, color.getRed(), color.getGreen(), color.getBlue());
+                    return ColorUtil.packColor(255, color.getRed(), color.getGreen(), color.getBlue());
                 }
             }
             return 0xFFFFFF;
@@ -68,7 +68,7 @@ public class AlchemyPotionItem extends PlacedItem {
     @Override
     public ItemStack getDefaultInstance() {
         ItemStack stack = super.getDefaultInstance();;
-        AlchemyPotionUtils.setPotion(stack, RegisterAlchemyPotions.WATER);
+        AlchemyPotionUtil.setPotion(stack, RegisterAlchemyPotions.WATER);
         return stack;
     }
 
@@ -80,8 +80,8 @@ public class AlchemyPotionItem extends PlacedItem {
         }
 
         if (!level.isClientSide) {
-            AlchemyPotion potion = AlchemyPotionUtils.getPotion(stack);
-            if (!AlchemyPotionUtils.isEmpty(potion)) {
+            AlchemyPotion potion = AlchemyPotionUtil.getPotion(stack);
+            if (!AlchemyPotionUtil.isEmpty(potion)) {
                 for (MobEffectInstance mobeffectinstance : potion.getEffects()) {
                     if (mobeffectinstance.getEffect().isInstantenous()) {
                         mobeffectinstance.getEffect().applyInstantenousEffect(player, player, entityLiving, mobeffectinstance.getAmplifier(), 1.0D);
@@ -118,8 +118,8 @@ public class AlchemyPotionItem extends PlacedItem {
 
     @Override
     public Component getHighlightTip(ItemStack stack, Component displayName) {
-        AlchemyPotion potion = AlchemyPotionUtils.getPotion(stack);
-        if (!AlchemyPotionUtils.isEmpty(potion)) {
+        AlchemyPotion potion = AlchemyPotionUtil.getPotion(stack);
+        if (!AlchemyPotionUtil.isEmpty(potion)) {
             return displayName.copy().append(Component.literal(" (")).append(getPotionName(potion)).append(Component.literal(")"));
         }
 
@@ -129,8 +129,8 @@ public class AlchemyPotionItem extends PlacedItem {
     @OnlyIn(Dist.CLIENT)
     @Override
     public void appendHoverText(ItemStack stack, Level world, List<Component> list, TooltipFlag flags) {
-        AlchemyPotion potion = AlchemyPotionUtils.getPotion(stack);
-        if (!AlchemyPotionUtils.isEmpty(potion)) {
+        AlchemyPotion potion = AlchemyPotionUtil.getPotion(stack);
+        if (!AlchemyPotionUtil.isEmpty(potion)) {
             list.add(getPotionName(potion));
             PotionUtils.addPotionTooltip(potion.getEffects(), list, 1.0f);
         }
@@ -139,7 +139,7 @@ public class AlchemyPotionItem extends PlacedItem {
     public Component getPotionName(AlchemyPotion potion) {
         Color color = potion.getColor();
 
-        return Component.translatable(potion.getTranslatedName()).withStyle(Style.EMPTY.withColor(ColorUtils.packColor(255, color.getRed(), color.getGreen(), color.getBlue())));
+        return Component.translatable(potion.getTranslatedName()).withStyle(Style.EMPTY.withColor(ColorUtil.packColor(255, color.getRed(), color.getGreen(), color.getBlue())));
     }
 
     @Override
@@ -157,8 +157,8 @@ public class AlchemyPotionItem extends PlacedItem {
     public InteractionResultHolder<ItemStack> use(Level world, Player player, InteractionHand hand) {
         ItemStack stack = player.getItemInHand(hand);
 
-        AlchemyPotion potion = AlchemyPotionUtils.getPotion(stack);
-        if (!AlchemyPotionUtils.isEmpty(potion)) {
+        AlchemyPotion potion = AlchemyPotionUtil.getPotion(stack);
+        if (!AlchemyPotionUtil.isEmpty(potion)) {
             return ItemUtils.startUsingInstantly(world, player, hand);
         }
 
@@ -180,8 +180,8 @@ public class AlchemyPotionItem extends PlacedItem {
     }
 
     public static boolean hasPotion(ItemStack stack) {
-        AlchemyPotion potion = AlchemyPotionUtils.getPotion(stack);
-        return (!AlchemyPotionUtils.isEmpty(potion));
+        AlchemyPotion potion = AlchemyPotionUtil.getPotion(stack);
+        return (!AlchemyPotionUtil.isEmpty(potion));
     }
 
     public static boolean interactWithFluidHandler(@NotNull Player player, @NotNull InteractionHand hand, @NotNull IFluidHandler handler)
@@ -194,8 +194,8 @@ public class AlchemyPotionItem extends PlacedItem {
 
         if (!stack.isEmpty()) {
             if (stack.getItem() instanceof AlchemyPotionItem vial) {
-                AlchemyPotion potion = AlchemyPotionUtils.getPotion(stack);
-                if (!AlchemyPotionUtils.isEmpty(potion)) {
+                AlchemyPotion potion = AlchemyPotionUtil.getPotion(stack);
+                if (!AlchemyPotionUtil.isEmpty(potion)) {
                     if (potion instanceof FluidAlchemyPotion fluidPotion) {
                         FluidStack fluid = new FluidStack(fluidPotion.fluid, 250 * (vial.maxUses - getUses(stack)));
                         int added = handler.fill(fluid, IFluidHandler.FluidAction.SIMULATE);

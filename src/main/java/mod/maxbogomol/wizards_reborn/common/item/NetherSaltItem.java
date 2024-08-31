@@ -7,7 +7,7 @@ import mod.maxbogomol.fluffy_fur.client.particle.data.GenericParticleData;
 import mod.maxbogomol.fluffy_fur.client.particle.data.LightParticleData;
 import mod.maxbogomol.fluffy_fur.common.item.FuelItem;
 import mod.maxbogomol.fluffy_fur.common.item.IParticleItem;
-import mod.maxbogomol.fluffy_fur.utils.RenderUtils;
+import mod.maxbogomol.fluffy_fur.util.RenderUtils;
 import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.level.Level;
 

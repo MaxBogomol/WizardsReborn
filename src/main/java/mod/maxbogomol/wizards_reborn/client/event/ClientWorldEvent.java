@@ -3,10 +3,10 @@ package mod.maxbogomol.wizards_reborn.client.event;
 import com.mojang.blaze3d.vertex.PoseStack;
 import mod.maxbogomol.wizards_reborn.api.alchemy.ISteamBlockEntity;
 import mod.maxbogomol.wizards_reborn.api.light.ILightBlockEntity;
-import mod.maxbogomol.wizards_reborn.api.light.LightUtils;
+import mod.maxbogomol.wizards_reborn.api.light.LightUtil;
 import mod.maxbogomol.wizards_reborn.api.wissen.IWissenBlockEntity;
 import mod.maxbogomol.wizards_reborn.common.item.equipment.WissenWandItem;
-import mod.maxbogomol.wizards_reborn.utils.RenderUtils;
+import mod.maxbogomol.wizards_reborn.util.RenderUtils;
 import net.minecraft.client.Minecraft;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -110,7 +110,7 @@ public class ClientWorldEvent {
                                         ms.pushPose();
                                         ms.translate(dX, dY, dZ);
                                         ms.translate(offset.x(), offset.y(), offset.z());
-                                        RenderUtils.renderConnectLine(LightUtils.getLightLensPos(blockPos, offset), LightUtils.getLightLensPos(blockpos, newOffset), new Color(color.getRed() / 255f, color.getGreen() / 255f, color.getBlue() / 255f, alpha), partialTicks, ms);
+                                        RenderUtils.renderConnectLine(LightUtil.getLightLensPos(blockPos, offset), LightUtil.getLightLensPos(blockpos, newOffset), new Color(color.getRed() / 255f, color.getGreen() / 255f, color.getBlue() / 255f, alpha), partialTicks, ms);
                                         ms.popPose();
                                     }
                                 }

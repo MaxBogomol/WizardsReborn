@@ -9,7 +9,7 @@ import mod.maxbogomol.fluffy_fur.common.block.entity.TickableBlockEntity;
 import mod.maxbogomol.fluffy_fur.common.network.BlockEntityUpdate;
 import mod.maxbogomol.wizards_reborn.WizardsReborn;
 import mod.maxbogomol.wizards_reborn.api.alchemy.ISteamBlockEntity;
-import mod.maxbogomol.wizards_reborn.api.alchemy.SteamUtils;
+import mod.maxbogomol.wizards_reborn.api.alchemy.SteamUtil;
 import mod.maxbogomol.wizards_reborn.common.recipe.CenserRecipe;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -167,7 +167,7 @@ public class ArcaneCenserBlock extends HorizontalDirectionalBlock implements Ent
             }
         }
 
-        if (tile.cooldown <= 0 && SteamUtils.canRemoveSteam(tile.steam, 150) && player.getItemInHand(InteractionHand.MAIN_HAND).isEmpty() && !player.isShiftKeyDown()) {
+        if (tile.cooldown <= 0 && SteamUtil.canRemoveSteam(tile.steam, 150) && player.getItemInHand(InteractionHand.MAIN_HAND).isEmpty() && !player.isShiftKeyDown()) {
             if (!world.isClientSide) {
                 tile.smoke(player);
             }

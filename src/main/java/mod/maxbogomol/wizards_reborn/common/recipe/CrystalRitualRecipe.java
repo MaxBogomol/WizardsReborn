@@ -5,7 +5,7 @@ import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import mod.maxbogomol.wizards_reborn.WizardsReborn;
 import mod.maxbogomol.wizards_reborn.api.crystalritual.CrystalRitual;
-import mod.maxbogomol.wizards_reborn.utils.RecipeUtils;
+import mod.maxbogomol.wizards_reborn.api.crystalritual.CrystalRitualUtil;
 import net.minecraft.core.NonNullList;
 import net.minecraft.core.RegistryAccess;
 import net.minecraft.core.registries.BuiltInRegistries;
@@ -117,7 +117,7 @@ public class CrystalRitualRecipe implements Recipe<Container> {
                 inputs.add(Ingredient.fromJson(e));
             }
 
-            CrystalRitual crystalRitual = RecipeUtils.deserializeCrystalRitual(GsonHelper.getAsJsonObject(json, "crystal_ritual"));
+            CrystalRitual crystalRitual = CrystalRitualUtil.deserializeCrystalRitual(GsonHelper.getAsJsonObject(json, "crystal_ritual"));
 
             return new CrystalRitualRecipe(recipeId, crystalRitual, inputs.toArray(new Ingredient[0]));
         }
@@ -129,7 +129,7 @@ public class CrystalRitualRecipe implements Recipe<Container> {
             for (int i = 0; i < inputs.length; i++) {
                 inputs[i] = Ingredient.fromNetwork(buffer);
             }
-            CrystalRitual crystalRitual = RecipeUtils.crystalRitualFromNetwork(buffer);
+            CrystalRitual crystalRitual = CrystalRitualUtil.crystalRitualFromNetwork(buffer);
             return new CrystalRitualRecipe(recipeId, crystalRitual, inputs);
         }
 
@@ -139,7 +139,7 @@ public class CrystalRitualRecipe implements Recipe<Container> {
             for (Ingredient input : recipe.getIngredients()) {
                 input.toNetwork(buffer);
             }
-            RecipeUtils.crystalRitualToNetwork(recipe.getRecipeRitual(), buffer);
+            CrystalRitualUtil.crystalRitualToNetwork(recipe.getRecipeRitual(), buffer);
         }
     }
 

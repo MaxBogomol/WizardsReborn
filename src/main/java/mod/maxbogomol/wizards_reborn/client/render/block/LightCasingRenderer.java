@@ -3,11 +3,11 @@ package mod.maxbogomol.wizards_reborn.client.render.block;
 import com.mojang.blaze3d.vertex.PoseStack;
 import mod.maxbogomol.fluffy_fur.client.render.LevelRenderHandler;
 import mod.maxbogomol.wizards_reborn.WizardsRebornClient;
-import mod.maxbogomol.wizards_reborn.api.light.LightUtils;
+import mod.maxbogomol.wizards_reborn.api.light.LightUtil;
 import mod.maxbogomol.wizards_reborn.api.wissen.WissenUtils;
 import mod.maxbogomol.wizards_reborn.client.event.ClientTickHandler;
 import mod.maxbogomol.wizards_reborn.common.block.casing.light.LightCasingBlockEntity;
-import mod.maxbogomol.wizards_reborn.utils.RenderUtils;
+import mod.maxbogomol.wizards_reborn.util.RenderUtils;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.blockentity.BlockEntityRenderer;
 import net.minecraft.core.BlockPos;
@@ -45,11 +45,11 @@ public class LightCasingRenderer implements BlockEntityRenderer<LightCasingBlock
 
                 if (casing.canWork() && casing.getLight() > 0) {
                     Vec3 from = new Vec3(casing.getBlockPos().getX() + 0.5f + (pos.getX() * casing.getLightLensOffset()), casing.getBlockPos().getY() + 0.5f + (pos.getY() * casing.getLightLensOffset()), casing.getBlockPos().getZ() + 0.5f + (pos.getZ() * casing.getLightLensOffset()));
-                    Vec3 to = LightUtils.getLightLensPos(casing.getBlockPos().relative(direction), casing.getLightLensPos());
+                    Vec3 to = LightUtil.getLightLensPos(casing.getBlockPos().relative(direction), casing.getLightLensPos());
 
-                    Color color = LightUtils.getRayColorFromLumos(casing.getColor(), casing.getLumos(), casing.getBlockPos(), partialTicks);
+                    Color color = LightUtil.getRayColorFromLumos(casing.getColor(), casing.getLumos(), casing.getBlockPos(), partialTicks);
                     ms.pushPose();
-                    LightUtils.renderLightRay(casing.getLevel(), casing.getBlockPos(), from, to, 25f, color, partialTicks, ms);
+                    LightUtil.renderLightRay(casing.getLevel(), casing.getBlockPos(), from, to, 25f, color, partialTicks, ms);
                     ms.popPose();
                 }
 

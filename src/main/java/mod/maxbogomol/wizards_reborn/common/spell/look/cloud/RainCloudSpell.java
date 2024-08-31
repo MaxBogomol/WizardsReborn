@@ -1,7 +1,7 @@
 package mod.maxbogomol.wizards_reborn.common.spell.look.cloud;
 
 import mod.maxbogomol.wizards_reborn.WizardsReborn;
-import mod.maxbogomol.wizards_reborn.api.crystal.CrystalUtils;
+import mod.maxbogomol.wizards_reborn.api.crystal.CrystalUtil;
 import mod.maxbogomol.wizards_reborn.common.crystalritual.ArtificialFertilityCrystalRitual;
 import mod.maxbogomol.wizards_reborn.common.entity.SpellProjectileEntity;
 import mod.maxbogomol.wizards_reborn.common.item.equipment.arcane.ArcaneArmorItem;
@@ -29,7 +29,7 @@ public class RainCloudSpell extends CloudSpell {
     public void rain(SpellProjectileEntity entity, Player player) {
         float size = getCloudSize(entity);
 
-        int focusLevel = CrystalUtils.getStatLevel(entity.getStats(), WizardsReborn.FOCUS_CRYSTAL_STAT);
+        int focusLevel = CrystalUtil.getStatLevel(entity.getStats(), WizardsReborn.FOCUS_CRYSTAL_STAT);
         float magicModifier = ArcaneArmorItem.getPlayerMagicModifier(entity.getSender());
         float chance = (0.1f + ((focusLevel + magicModifier) * 0.025f));
 

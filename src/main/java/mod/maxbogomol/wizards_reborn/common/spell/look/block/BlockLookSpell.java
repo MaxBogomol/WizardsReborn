@@ -1,7 +1,7 @@
 package mod.maxbogomol.wizards_reborn.common.spell.look.block;
 
 import mod.maxbogomol.wizards_reborn.WizardsReborn;
-import mod.maxbogomol.wizards_reborn.api.crystal.CrystalUtils;
+import mod.maxbogomol.wizards_reborn.api.crystal.CrystalUtil;
 import mod.maxbogomol.wizards_reborn.common.spell.look.LookSpell;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.world.InteractionHand;
@@ -27,7 +27,7 @@ public class BlockLookSpell extends LookSpell {
         ItemStack stack = player.getItemInHand(hand);
         CompoundTag stats = getStats(stack);
 
-        int focusLevel = CrystalUtils.getStatLevel(stats, WizardsReborn.FOCUS_CRYSTAL_STAT);
+        int focusLevel = CrystalUtil.getStatLevel(stats, WizardsReborn.FOCUS_CRYSTAL_STAT);
         return getBlockDistance() + (getBlockAdditionalDistance() * focusLevel);
     }
 

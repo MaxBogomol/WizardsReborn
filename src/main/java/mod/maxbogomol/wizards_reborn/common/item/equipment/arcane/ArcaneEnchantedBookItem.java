@@ -1,7 +1,7 @@
 package mod.maxbogomol.wizards_reborn.common.item.equipment.arcane;
 
 import mod.maxbogomol.wizards_reborn.api.arcaneenchantment.ArcaneEnchantmentType;
-import mod.maxbogomol.wizards_reborn.api.arcaneenchantment.ArcaneEnchantmentUtils;
+import mod.maxbogomol.wizards_reborn.api.arcaneenchantment.ArcaneEnchantmentUtil;
 import mod.maxbogomol.wizards_reborn.api.arcaneenchantment.IArcaneItem;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.item.Item;
@@ -26,7 +26,7 @@ public class ArcaneEnchantedBookItem extends Item implements IArcaneItem {
     @OnlyIn(Dist.CLIENT)
     @Override
     public void appendHoverText(ItemStack stack, Level world, List<Component> list, TooltipFlag flags) {
-        list.addAll(ArcaneEnchantmentUtils.appendHoverText(stack, world, flags));
+        list.addAll(ArcaneEnchantmentUtil.appendHoverText(stack, world, flags));
     }
 
     @Override

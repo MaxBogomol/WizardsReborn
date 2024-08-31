@@ -14,7 +14,7 @@ import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.concurrent.atomic.AtomicReference;
 
-public class KnowledgeUtils {
+public class KnowledgeUtil {
 
     public static boolean isKnowledge(Entity entity, Knowledge knowledge) {
         if (!(entity instanceof Player)) return false;

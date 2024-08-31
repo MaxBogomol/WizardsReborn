@@ -10,7 +10,7 @@ import mod.maxbogomol.fluffy_fur.common.block.entity.TickableBlockEntity;
 import mod.maxbogomol.fluffy_fur.common.easing.Easing;
 import mod.maxbogomol.wizards_reborn.WizardsReborn;
 import mod.maxbogomol.wizards_reborn.api.arcaneenchantment.ArcaneEnchantment;
-import mod.maxbogomol.wizards_reborn.api.arcaneenchantment.ArcaneEnchantmentUtils;
+import mod.maxbogomol.wizards_reborn.api.arcaneenchantment.ArcaneEnchantmentUtil;
 import mod.maxbogomol.wizards_reborn.api.arcaneenchantment.ArcaneEnchantments;
 import mod.maxbogomol.wizards_reborn.api.wissen.ICooldownBlockEntity;
 import mod.maxbogomol.wizards_reborn.api.wissen.IWissenBlockEntity;
@@ -133,8 +133,8 @@ public class TotemOfDisenchantBlockEntity extends BlockEntityBase implements Tic
                     }
 
                     ArcaneEnchantment arcaneEnchantmentP = ArcaneEnchantments.getArcaneEnchantment(arcaneEnchantment);
-                    if (arcaneEnchantmentP != null && ArcaneEnchantmentUtils.isArcaneItem(itemHandler.getStackInSlot(0))  && !arcaneEnchantmentP.isCurse()) {
-                        ArcaneEnchantmentUtils.removeArcaneEnchantment(itemHandler.getStackInSlot(0), arcaneEnchantmentP);
+                    if (arcaneEnchantmentP != null && ArcaneEnchantmentUtil.isArcaneItem(itemHandler.getStackInSlot(0))  && !arcaneEnchantmentP.isCurse()) {
+                        ArcaneEnchantmentUtil.removeArcaneEnchantment(itemHandler.getStackInSlot(0), arcaneEnchantmentP);
                         addWissen(enchantmentLevel * 1000);
                     }
 

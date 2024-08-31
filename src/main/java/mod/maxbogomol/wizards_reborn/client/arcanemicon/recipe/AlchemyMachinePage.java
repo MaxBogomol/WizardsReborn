@@ -1,14 +1,14 @@
 package mod.maxbogomol.wizards_reborn.client.arcanemicon.recipe;
 
 import mod.maxbogomol.wizards_reborn.WizardsReborn;
-import mod.maxbogomol.wizards_reborn.api.alchemy.AlchemyPotionUtils;
+import mod.maxbogomol.wizards_reborn.api.alchemy.AlchemyPotionUtil;
 import mod.maxbogomol.wizards_reborn.client.arcanemicon.ArcanemiconGui;
 import mod.maxbogomol.wizards_reborn.client.config.ClientConfig;
 import mod.maxbogomol.wizards_reborn.common.item.equipment.AlchemyBottleItem;
 import mod.maxbogomol.wizards_reborn.common.item.equipment.AlchemyPotionItem;
 import mod.maxbogomol.wizards_reborn.common.recipe.AlchemyMachineContext;
 import mod.maxbogomol.wizards_reborn.common.recipe.AlchemyMachineRecipe;
-import mod.maxbogomol.wizards_reborn.utils.NumericalUtils;
+import mod.maxbogomol.wizards_reborn.util.NumericalUtil;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.multiplayer.ClientLevel;
@@ -72,9 +72,9 @@ public class AlchemyMachinePage extends RecipePage {
             gui.blit(BACKGROUND, x + 38 + 4, y + 76 + 32 - width, 128, 32 - width, 8, width, 256, 256);
 
             if (mouseX >= x + 38 + 4 && mouseY >= y + 76 && mouseX <= x + 38 + 4 + 8 && mouseY <= y + 76 + 32) {
-                Component component = NumericalUtils.getFluidName(fluidInputs1, 5000);
+                Component component = NumericalUtil.getFluidName(fluidInputs1, 5000);
                 if (!ClientConfig.NUMERICAL_FLUID.get()) {
-                    component = NumericalUtils.getFluidName(fluidInputs1);
+                    component = NumericalUtil.getFluidName(fluidInputs1);
                 }
                 gui.renderTooltip(Minecraft.getInstance().font, component, mouseX, mouseY);
             }
@@ -89,9 +89,9 @@ public class AlchemyMachinePage extends RecipePage {
             gui.blit(BACKGROUND, x + 56 + 4, y + 76 + 32 - width, 128, 32 - width, 8, width, 256, 256);
 
             if (mouseX >= x + 56 + 4 && mouseY >= y + 76 && mouseX <= x + 56 + 4 + 8 && mouseY <= y + 76 + 32) {
-                Component component = NumericalUtils.getFluidName(fluidInputs2, 5000);
+                Component component = NumericalUtil.getFluidName(fluidInputs2, 5000);
                 if (!ClientConfig.NUMERICAL_FLUID.get()) {
-                    component = NumericalUtils.getFluidName(fluidInputs2);
+                    component = NumericalUtil.getFluidName(fluidInputs2);
                 }
                 gui.renderTooltip(Minecraft.getInstance().font, component, mouseX, mouseY);
             }
@@ -106,9 +106,9 @@ public class AlchemyMachinePage extends RecipePage {
             gui.blit(BACKGROUND, x + 74 + 4, y + 76 + 32 - width, 128, 32 - width, 8, width, 256, 256);
 
             if (mouseX >= x + 74 + 4 && mouseY >= y + 76 && mouseX <= x + 74 + 4 + 8 && mouseY <= y + 76 + 32) {
-                Component component = NumericalUtils.getFluidName(fluidInputs3, 5000);
+                Component component = NumericalUtil.getFluidName(fluidInputs3, 5000);
                 if (!ClientConfig.NUMERICAL_FLUID.get()) {
-                    component = NumericalUtils.getFluidName(fluidInputs3);
+                    component = NumericalUtil.getFluidName(fluidInputs3);
                 }
                 gui.renderTooltip(Minecraft.getInstance().font, component, mouseX, mouseY);
             }
@@ -124,7 +124,7 @@ public class AlchemyMachinePage extends RecipePage {
             gui.blit(BACKGROUND, x + 60, y + 120 + 32 - width, 128, 32 - width, 8, width, 256, 256);
 
             if (mouseX >= x + 60 && mouseY >= y + 120 && mouseX <= x + 60 + 8 && mouseY <= y + 120 + 32) {
-                gui.renderTooltip(Minecraft.getInstance().font, NumericalUtils.getFluidName(fluidResult, 5000), mouseX, mouseY);
+                gui.renderTooltip(Minecraft.getInstance().font, NumericalUtil.getFluidName(fluidResult, 5000), mouseX, mouseY);
             }
         } else {
             gui.blit(BACKGROUND, x + 56, y + 120 + 8, 136, 0, 16, 16, 256, 256);
@@ -134,14 +134,14 @@ public class AlchemyMachinePage extends RecipePage {
             gui.blit(BACKGROUND, x + 14, y + 76 + 8, 136, 0, 16, 16, 256, 256);
         } else {
             if (mouseX >= x + 14 && mouseY >= y + 76 + 8 && mouseX <= x + 14 + 16 && mouseY <= y + 76 + 8 + 16) {
-                gui.renderTooltip(Minecraft.getInstance().font, NumericalUtils.getWissenName(), mouseX, mouseY);
+                gui.renderTooltip(Minecraft.getInstance().font, NumericalUtil.getWissenName(), mouseX, mouseY);
             }
         }
         if (!isSteam) {
             gui.blit(BACKGROUND, x + 98, y + 76 + 8, 136, 0, 16, 16, 256, 256);
         } else {
             if (mouseX >= x + 98 && mouseY >= y + 76 + 8 && mouseX <= x + 98 + 16 && mouseY <= y + 76 + 8 + 16) {
-                gui.renderTooltip(Minecraft.getInstance().font, NumericalUtils.getSteamName(), mouseX, mouseY);
+                gui.renderTooltip(Minecraft.getInstance().font, NumericalUtil.getSteamName(), mouseX, mouseY);
             }
         }
 
@@ -177,9 +177,9 @@ public class AlchemyMachinePage extends RecipePage {
                 if (!stack.isEmpty()) {
                     list.add(stack);
                 } else {
-                    if (!AlchemyPotionUtils.isEmpty(recipe.get().getRecipeAlchemyPotion())) {
+                    if (!AlchemyPotionUtil.isEmpty(recipe.get().getRecipeAlchemyPotion())) {
                         ItemStack bottle = getAlchemyBottle();
-                        AlchemyPotionUtils.setPotion(bottle, recipe.get().getRecipeAlchemyPotion());
+                        AlchemyPotionUtil.setPotion(bottle, recipe.get().getRecipeAlchemyPotion());
                         list.add(bottle);
                     }
                 }

@@ -3,13 +3,13 @@ package mod.maxbogomol.wizards_reborn.common.item.equipment;
 import com.mojang.blaze3d.vertex.PoseStack;
 import mod.maxbogomol.fluffy_fur.FluffyFur;
 import mod.maxbogomol.fluffy_fur.common.item.IGuiParticleItem;
-import mod.maxbogomol.fluffy_fur.utils.ColorUtils;
+import mod.maxbogomol.fluffy_fur.util.ColorUtil;
 import mod.maxbogomol.wizards_reborn.WizardsReborn;
 import mod.maxbogomol.wizards_reborn.api.crystalritual.CrystalRitual;
-import mod.maxbogomol.wizards_reborn.api.crystalritual.CrystalRitualUtils;
+import mod.maxbogomol.wizards_reborn.api.crystalritual.CrystalRitualUtil;
 import mod.maxbogomol.wizards_reborn.api.crystalritual.CrystalRituals;
 import mod.maxbogomol.wizards_reborn.client.event.ClientTickHandler;
-import mod.maxbogomol.wizards_reborn.utils.RenderUtils;
+import mod.maxbogomol.wizards_reborn.util.RenderUtils;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.color.item.ItemColor;
 import net.minecraft.client.renderer.MultiBufferSource;
@@ -39,7 +39,7 @@ public class RunicWisestonePlateItem extends Item implements IGuiParticleItem {
     @Override
     public ItemStack getDefaultInstance() {
         ItemStack stack = super.getDefaultInstance();
-        CrystalRitualUtils.setCrystalRitual(stack, WizardsReborn.EMPTY_CRYSTAL_RITUAL);
+        CrystalRitualUtil.setCrystalRitual(stack, WizardsReborn.EMPTY_CRYSTAL_RITUAL);
         return stack;
     }
 
@@ -48,8 +48,8 @@ public class RunicWisestonePlateItem extends Item implements IGuiParticleItem {
         @Override
         public int getColor(ItemStack stack, int tintIndex) {
             if (tintIndex == 1) {
-                CrystalRitual ritual = CrystalRitualUtils.getCrystalRitual(stack);
-                if (!CrystalRitualUtils.isEmpty(ritual)) {
+                CrystalRitual ritual = CrystalRitualUtil.getCrystalRitual(stack);
+                if (!CrystalRitualUtil.isEmpty(ritual)) {
                     Color color = ritual.getColor();
 
                     int i = CrystalRituals.getCrystalRituals().indexOf(ritual);
@@ -60,7 +60,7 @@ public class RunicWisestonePlateItem extends Item implements IGuiParticleItem {
                     int g = Mth.lerpInt(a, 237, color.getGreen());
                     int b = Mth.lerpInt(a, 205, color.getBlue());
 
-                    return ColorUtils.packColor(255, r, g, b);
+                    return ColorUtil.packColor(255, r, g, b);
                 }
             }
             return 0xFFFFFF;
@@ -69,8 +69,8 @@ public class RunicWisestonePlateItem extends Item implements IGuiParticleItem {
 
     @Override
     public Component getHighlightTip(ItemStack stack, Component displayName) {
-        CrystalRitual ritual = CrystalRitualUtils.getCrystalRitual(stack);
-        if (!CrystalRitualUtils.isEmpty(ritual)) {
+        CrystalRitual ritual = CrystalRitualUtil.getCrystalRitual(stack);
+        if (!CrystalRitualUtil.isEmpty(ritual)) {
             return displayName.copy().append(Component.literal(" (")).append(getRitualName(ritual)).append(Component.literal(")"));
         }
 
@@ -80,8 +80,8 @@ public class RunicWisestonePlateItem extends Item implements IGuiParticleItem {
     @OnlyIn(Dist.CLIENT)
     @Override
     public void appendHoverText(ItemStack stack, Level world, List<Component> list, TooltipFlag flags) {
-        CrystalRitual ritual = CrystalRitualUtils.getCrystalRitual(stack);
-        if (!CrystalRitualUtils.isEmpty(ritual)) {
+        CrystalRitual ritual = CrystalRitualUtil.getCrystalRitual(stack);
+        if (!CrystalRitualUtil.isEmpty(ritual)) {
             list.add(getRitualName(ritual));
         }
     }
@@ -89,14 +89,14 @@ public class RunicWisestonePlateItem extends Item implements IGuiParticleItem {
     public static Component getRitualName(CrystalRitual ritual) {
         Color color = ritual.getColor();
 
-        return Component.translatable(ritual.getTranslatedName()).withStyle(Style.EMPTY.withColor(ColorUtils.packColor(255, color.getRed(), color.getGreen(), color.getBlue())));
+        return Component.translatable(ritual.getTranslatedName()).withStyle(Style.EMPTY.withColor(ColorUtil.packColor(255, color.getRed(), color.getGreen(), color.getBlue())));
     }
 
     @Override
     @OnlyIn(Dist.CLIENT)
     public void renderParticle(PoseStack pose, LivingEntity entity, Level level, ItemStack stack, int x, int y, int seed, int guiOffset) {
-        CrystalRitual ritual = CrystalRitualUtils.getCrystalRitual(stack);
-        if (!CrystalRitualUtils.isEmpty(ritual)) {
+        CrystalRitual ritual = CrystalRitualUtil.getCrystalRitual(stack);
+        if (!CrystalRitualUtil.isEmpty(ritual)) {
             Color color = ritual.getColor();
             int ii = CrystalRituals.getCrystalRituals().indexOf(ritual);
 

@@ -2,7 +2,7 @@ package mod.maxbogomol.wizards_reborn.client.arcanemicon.recipe;
 
 import mod.maxbogomol.wizards_reborn.WizardsReborn;
 import mod.maxbogomol.wizards_reborn.api.arcaneenchantment.ArcaneEnchantment;
-import mod.maxbogomol.wizards_reborn.api.arcaneenchantment.ArcaneEnchantmentUtils;
+import mod.maxbogomol.wizards_reborn.api.arcaneenchantment.ArcaneEnchantmentUtil;
 import mod.maxbogomol.wizards_reborn.client.arcanemicon.ArcanemiconGui;
 import mod.maxbogomol.wizards_reborn.common.recipe.ArcaneIteratorRecipe;
 import net.minecraft.client.Minecraft;
@@ -101,8 +101,8 @@ public class ArcaneIteratorPage extends RecipePage {
             stack.enchant(enchantment, 1);
         }
         if (arcaneEnchantment != null) {
-            if (ArcaneEnchantmentUtils.canAddItemArcaneEnchantment(stack, arcaneEnchantment)) {
-                ArcaneEnchantmentUtils.addItemArcaneEnchantment(stack, arcaneEnchantment);
+            if (ArcaneEnchantmentUtil.canAddItemArcaneEnchantment(stack, arcaneEnchantment)) {
+                ArcaneEnchantmentUtil.addItemArcaneEnchantment(stack, arcaneEnchantment);
             }
         }
 

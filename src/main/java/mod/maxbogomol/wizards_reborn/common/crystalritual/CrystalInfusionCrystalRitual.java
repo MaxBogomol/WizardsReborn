@@ -17,7 +17,7 @@ import mod.maxbogomol.wizards_reborn.common.network.PacketHandler;
 import mod.maxbogomol.wizards_reborn.common.network.crystalritual.CrystalInfusionBurstEffectPacket;
 import mod.maxbogomol.wizards_reborn.common.recipe.CrystalInfusionRecipe;
 import mod.maxbogomol.wizards_reborn.common.block.crystal.CrystalBlockEntity;
-import mod.maxbogomol.wizards_reborn.utils.RenderUtils;
+import mod.maxbogomol.wizards_reborn.util.RenderUtils;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.core.BlockPos;

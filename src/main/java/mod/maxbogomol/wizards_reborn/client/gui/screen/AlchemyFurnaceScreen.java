@@ -1,12 +1,12 @@
 package mod.maxbogomol.wizards_reborn.client.gui.screen;
 
 import com.mojang.blaze3d.systems.RenderSystem;
-import mod.maxbogomol.fluffy_fur.utils.ColorUtils;
+import mod.maxbogomol.fluffy_fur.util.ColorUtil;
 import mod.maxbogomol.wizards_reborn.WizardsReborn;
 import mod.maxbogomol.wizards_reborn.client.config.ClientConfig;
 import mod.maxbogomol.wizards_reborn.client.gui.container.AlchemyFurnaceContainer;
 import mod.maxbogomol.wizards_reborn.common.block.alchemy_furnace.AlchemyFurnaceBlockEntity;
-import mod.maxbogomol.wizards_reborn.utils.NumericalUtils;
+import mod.maxbogomol.wizards_reborn.util.NumericalUtil;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
@@ -35,7 +35,7 @@ public class AlchemyFurnaceScreen extends AbstractContainerScreen<AlchemyFurnace
 
     @Override
     protected void renderLabels(GuiGraphics guiGraphics, int mouseX, int mouseY) {
-        guiGraphics.drawString(this.font, this.title, this.titleLabelX, this.titleLabelY, ColorUtils.packColor(255, 237, 201, 146), false);
+        guiGraphics.drawString(this.font, this.title, this.titleLabelX, this.titleLabelY, ColorUtil.packColor(255, 237, 201, 146), false);
         guiGraphics.drawString(this.font, this.playerInventoryTitle, this.inventoryLabelX, this.inventoryLabelY, 4210752, false);
     }
 
@@ -72,25 +72,25 @@ public class AlchemyFurnaceScreen extends AbstractContainerScreen<AlchemyFurnace
             }
 
             if (x >= i + 19 && y >= j + 28 && x <= i + 19 + 8 && y <= j + 28 + 32) {
-                Component component = NumericalUtils.getFluidName(furnace.getTank().getFluid(), 10000);
+                Component component = NumericalUtil.getFluidName(furnace.getTank().getFluid(), 10000);
                 if (!ClientConfig.NUMERICAL_FLUID.get()) {
-                    component = NumericalUtils.getFluidName(furnace.getTank().getFluid());
+                    component = NumericalUtil.getFluidName(furnace.getTank().getFluid());
                 }
                 gui.renderTooltip(Minecraft.getInstance().font, component, x, y);
             }
 
             if (x >= i + 19 + 15 && y >= j + 28 && x <= i + 19 + 15 + 8 && y <= j + 28 + 32) {
-                Component component = NumericalUtils.getHeatName(furnace.getHeat(), furnace.getMaxSteam());
+                Component component = NumericalUtil.getHeatName(furnace.getHeat(), furnace.getMaxSteam());
                 if (!ClientConfig.NUMERICAL_HEAT.get()) {
-                    component = NumericalUtils.getHeatName();
+                    component = NumericalUtil.getHeatName();
                 }
                 gui.renderTooltip(Minecraft.getInstance().font, component, x, y);
             }
 
             if (x >= i + 19 + 30 && y >= j + 28 && x <= i + 19 + 30 + 8 && y <= j + 28 + 32) {
-                Component component = NumericalUtils.getSteamName(furnace.getSteam(), furnace.getMaxSteam());
+                Component component = NumericalUtil.getSteamName(furnace.getSteam(), furnace.getMaxSteam());
                 if (!ClientConfig.NUMERICAL_STEAM.get()) {
-                    component = NumericalUtils.getSteamName();
+                    component = NumericalUtil.getSteamName();
                 }
                 gui.renderTooltip(Minecraft.getInstance().font, component, x, y);
             }

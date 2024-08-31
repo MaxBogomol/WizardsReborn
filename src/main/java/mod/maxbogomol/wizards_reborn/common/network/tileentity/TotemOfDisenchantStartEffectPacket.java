@@ -3,7 +3,7 @@ package mod.maxbogomol.wizards_reborn.common.network.tileentity;
 import mod.maxbogomol.fluffy_fur.common.network.BlockEntityUpdate;
 import mod.maxbogomol.wizards_reborn.WizardsReborn;
 import mod.maxbogomol.wizards_reborn.api.arcaneenchantment.ArcaneEnchantment;
-import mod.maxbogomol.wizards_reborn.api.arcaneenchantment.ArcaneEnchantmentUtils;
+import mod.maxbogomol.wizards_reborn.api.arcaneenchantment.ArcaneEnchantmentUtil;
 import mod.maxbogomol.wizards_reborn.client.sound.TotemOfDisenchantSoundInstance;
 import mod.maxbogomol.wizards_reborn.common.block.totem.disenchant.TotemOfDisenchantBlockEntity;
 import net.minecraft.core.BlockPos;
@@ -42,8 +42,8 @@ public class TotemOfDisenchantStartEffectPacket {
         Map<Enchantment, Integer> enchantments = stack.getAllEnchantments();
         Map<ArcaneEnchantment, Integer> arcaneEnchantments = new HashMap<>();
 
-        if (ArcaneEnchantmentUtils.isArcaneItem(stack)) {
-            arcaneEnchantments = ArcaneEnchantmentUtils.getAllArcaneEnchantments(stack);
+        if (ArcaneEnchantmentUtil.isArcaneItem(stack)) {
+            arcaneEnchantments = ArcaneEnchantmentUtil.getAllArcaneEnchantments(stack);
         }
 
         if (stack.getItem().equals(Items.ENCHANTED_BOOK)) {

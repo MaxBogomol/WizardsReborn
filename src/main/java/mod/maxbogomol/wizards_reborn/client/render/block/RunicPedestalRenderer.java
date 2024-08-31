@@ -6,11 +6,11 @@ import mod.maxbogomol.fluffy_fur.client.render.LevelRenderHandler;
 import mod.maxbogomol.wizards_reborn.api.crystal.CrystalType;
 import mod.maxbogomol.wizards_reborn.api.crystal.Crystals;
 import mod.maxbogomol.wizards_reborn.api.crystalritual.CrystalRitual;
-import mod.maxbogomol.wizards_reborn.api.crystalritual.CrystalRitualUtils;
+import mod.maxbogomol.wizards_reborn.api.crystalritual.CrystalRitualUtil;
 import mod.maxbogomol.wizards_reborn.client.event.ClientTickHandler;
 import mod.maxbogomol.wizards_reborn.common.block.crystal.CrystalBlockEntity;
 import mod.maxbogomol.wizards_reborn.common.block.runic_pedestal.RunicPedestalBlockEntity;
-import mod.maxbogomol.wizards_reborn.utils.RenderUtils;
+import mod.maxbogomol.wizards_reborn.util.RenderUtils;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.blockentity.BlockEntityRenderer;
@@ -56,7 +56,7 @@ public class RunicPedestalRenderer implements BlockEntityRenderer<RunicPedestalB
         }
 
         CrystalRitual ritual = pedestal.getCrystalRitual();
-        if (!CrystalRitualUtils.isEmpty(ritual)) {
+        if (!CrystalRitualUtil.isEmpty(ritual)) {
             boolean isRender = false;
             if (pedestal.getLevel().getBlockEntity(pedestal.getBlockPos().above()) instanceof CrystalBlockEntity crystalTile) {
                 if (!ritual.canStartWithCrystal(crystalTile)) isRender = true;

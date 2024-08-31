@@ -10,7 +10,7 @@ import mod.maxbogomol.wizards_reborn.WizardsReborn;
 import mod.maxbogomol.wizards_reborn.api.alchemy.ISteamBlockEntity;
 import mod.maxbogomol.wizards_reborn.api.alchemy.ISteamPipePriority;
 import mod.maxbogomol.wizards_reborn.api.alchemy.PipePriorityMap;
-import mod.maxbogomol.wizards_reborn.api.alchemy.SteamUtils;
+import mod.maxbogomol.wizards_reborn.api.alchemy.SteamUtil;
 import mod.maxbogomol.wizards_reborn.api.wissen.WissenUtils;
 import mod.maxbogomol.wizards_reborn.common.block.pipe.PipeBaseBlockEntity;
 import mod.maxbogomol.wizards_reborn.common.item.equipment.WissenWandItem;
@@ -221,7 +221,7 @@ public abstract class SteamPipeBaseBlockEntity extends PipeBaseBlockEntity imple
         if (tile instanceof ISteamBlockEntity steamTileEntity) {
             int steam_remain = WissenUtils.getRemoveWissenRemain(steam, amount);
             steam_remain = amount - steam_remain;
-            int addRemain = SteamUtils.getAddSteamRemain(steamTileEntity.getSteam(), steam_remain, steamTileEntity.getMaxSteam());
+            int addRemain = SteamUtil.getAddSteamRemain(steamTileEntity.getSteam(), steam_remain, steamTileEntity.getMaxSteam());
             steam_remain = steam_remain - addRemain;
             if (steam_remain > 0) {
                 steamTileEntity.addSteam(steam_remain);

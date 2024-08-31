@@ -11,7 +11,7 @@ import mod.maxbogomol.fluffy_fur.common.network.BlockEntityUpdate;
 import mod.maxbogomol.wizards_reborn.WizardsReborn;
 import mod.maxbogomol.wizards_reborn.api.light.ILightBlockEntity;
 import mod.maxbogomol.wizards_reborn.api.light.LightRayHitResult;
-import mod.maxbogomol.wizards_reborn.api.light.LightUtils;
+import mod.maxbogomol.wizards_reborn.api.light.LightUtil;
 import mod.maxbogomol.wizards_reborn.api.wissen.IWissenBlockEntity;
 import mod.maxbogomol.wizards_reborn.api.wissen.IWissenWandControlledBlockEntity;
 import mod.maxbogomol.wizards_reborn.client.sound.LightEmitterSoundInstance;
@@ -76,12 +76,12 @@ public class LightEmitterBlockEntity extends ExposedBlockSimpleInventory impleme
                                 removeWissen(1);
                                 addLight(2);
                                 update = true;
-                                Vec3 from = LightUtils.getLightLensPos(getBlockPos(), getLightLensPos());
-                                Vec3 to = LightUtils.getLightLensPos(pos, lightTileEntity.getLightLensPos());
+                                Vec3 from = LightUtil.getLightLensPos(getBlockPos(), getLightLensPos());
+                                Vec3 to = LightUtil.getLightLensPos(pos, lightTileEntity.getLightLensPos());
 
-                                LightRayHitResult hitResult = LightUtils.getLightRayHitResult(level, getBlockPos(), from, to, 25);
+                                LightRayHitResult hitResult = LightUtil.getLightRayHitResult(level, getBlockPos(), from, to, 25);
                                 BlockEntity hitTile = hitResult.getTile();
-                                LightUtils.transferLight(this, hitTile);
+                                LightUtil.transferLight(this, hitTile);
                             }
                         }
                     } else {

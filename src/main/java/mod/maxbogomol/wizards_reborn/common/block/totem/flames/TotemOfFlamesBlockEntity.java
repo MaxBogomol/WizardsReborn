@@ -7,7 +7,7 @@ import mod.maxbogomol.fluffy_fur.client.particle.data.GenericParticleData;
 import mod.maxbogomol.fluffy_fur.client.particle.data.LightParticleData;
 import mod.maxbogomol.fluffy_fur.common.block.entity.ExposedBlockSimpleInventory;
 import mod.maxbogomol.fluffy_fur.common.block.entity.TickableBlockEntity;
-import mod.maxbogomol.fluffy_fur.utils.RenderUtils;
+import mod.maxbogomol.fluffy_fur.util.RenderUtils;
 import mod.maxbogomol.wizards_reborn.WizardsReborn;
 import mod.maxbogomol.wizards_reborn.common.block.ArcaneLumosBlock;
 import net.minecraft.core.BlockPos;

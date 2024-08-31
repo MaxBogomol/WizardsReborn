@@ -4,10 +4,10 @@ import com.mojang.blaze3d.vertex.PoseStack;
 import mod.maxbogomol.fluffy_fur.client.animation.ItemAnimation;
 import mod.maxbogomol.wizards_reborn.WizardsReborn;
 import mod.maxbogomol.wizards_reborn.api.crystal.CrystalType;
-import mod.maxbogomol.wizards_reborn.api.crystal.CrystalUtils;
+import mod.maxbogomol.wizards_reborn.api.crystal.CrystalUtil;
 import mod.maxbogomol.wizards_reborn.api.crystal.Crystals;
 import mod.maxbogomol.wizards_reborn.api.knowledge.Research;
-import mod.maxbogomol.wizards_reborn.api.wissen.WissenItemUtils;
+import mod.maxbogomol.wizards_reborn.api.wissen.WissenItemUtil;
 import mod.maxbogomol.wizards_reborn.api.wissen.WissenUtils;
 import mod.maxbogomol.wizards_reborn.common.entity.SpellProjectileEntity;
 import mod.maxbogomol.wizards_reborn.common.item.CrystalItem;
@@ -115,12 +115,12 @@ public class Spell {
     }
 
     public int getCooldownWithStat(CompoundTag nbt, int cost) {
-        int absorptionLevel = CrystalUtils.getStatLevel(nbt, WizardsReborn.ABSORPTION_CRYSTAL_STAT);
+        int absorptionLevel = CrystalUtil.getStatLevel(nbt, WizardsReborn.ABSORPTION_CRYSTAL_STAT);
         return (int) (cost * (1 - (getCooldownStatModifier() * absorptionLevel)));
     }
 
     public int getWissenCostWithStat(CompoundTag nbt) {
-        int balanceLevel = CrystalUtils.getStatLevel(nbt, WizardsReborn.BALANCE_CRYSTAL_STAT);
+        int balanceLevel = CrystalUtil.getStatLevel(nbt, WizardsReborn.BALANCE_CRYSTAL_STAT);
         return (int) (getWissenCost() * (1 - (getWissenStatModifier() * balanceLevel)));
     }
 
@@ -129,7 +129,7 @@ public class Spell {
     }
 
     public int getWissenCostWithStat(CompoundTag nbt, Player player, int cost) {
-        int balanceLevel = CrystalUtils.getStatLevel(nbt, WizardsReborn.BALANCE_CRYSTAL_STAT);
+        int balanceLevel = CrystalUtil.getStatLevel(nbt, WizardsReborn.BALANCE_CRYSTAL_STAT);
         float modifier = (1 - (getWissenStatModifier() * balanceLevel) - WissenUtils.getWissenCostModifierWithDiscount(player));
         if (modifier <= 0) {
             return 1;
@@ -160,7 +160,7 @@ public class Spell {
         ItemStack stack = player.getItemInHand(hand);
 
         CompoundTag nbt = stack.getTag();
-        if (nbt.getBoolean("crystal") && nbt.getInt("cooldown") <= 0 && WissenItemUtils.canRemoveWissen(stack, getWissenCostWithStat(getStats(stack), player))) {
+        if (nbt.getBoolean("crystal") && nbt.getInt("cooldown") <= 0 && WissenItemUtil.canRemoveWissen(stack, getWissenCostWithStat(getStats(stack), player))) {
             return true;
         }
 
@@ -186,15 +186,15 @@ public class Spell {
     }
 
     public void removeWissen(ItemStack stack, CompoundTag stats) {
-        WissenItemUtils.removeWissen(stack, getWissenCostWithStat(stats));
+        WissenItemUtil.removeWissen(stack, getWissenCostWithStat(stats));
     }
 
     public void removeWissen(ItemStack stack, CompoundTag stats, Player player) {
-        WissenItemUtils.removeWissen(stack, getWissenCostWithStat(stats, player));
+        WissenItemUtil.removeWissen(stack, getWissenCostWithStat(stats, player));
     }
 
     public void removeWissen(ItemStack stack, CompoundTag stats, Player player, int cost) {
-        WissenItemUtils.removeWissen(stack, getWissenCostWithStat(stats, player, cost));
+        WissenItemUtil.removeWissen(stack, getWissenCostWithStat(stats, player, cost));
     }
 
     public CompoundTag getStats(ItemStack stack) {

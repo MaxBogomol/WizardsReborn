@@ -1,7 +1,7 @@
 package mod.maxbogomol.wizards_reborn.common.spell.aura;
 
 import mod.maxbogomol.wizards_reborn.WizardsReborn;
-import mod.maxbogomol.wizards_reborn.api.crystal.CrystalUtils;
+import mod.maxbogomol.wizards_reborn.api.crystal.CrystalUtil;
 import mod.maxbogomol.wizards_reborn.common.damage.DamageSourceRegistry;
 import mod.maxbogomol.wizards_reborn.common.entity.SpellProjectileEntity;
 import mod.maxbogomol.wizards_reborn.common.item.equipment.arcane.ArcaneArmorItem;
@@ -34,7 +34,7 @@ public class CurseAuraSpell extends AuraSpell {
         super.onAura(world, projectile, player, targets);
 
         if (projectile.tickCount % 20 == 0) {
-            int focusLevel = CrystalUtils.getStatLevel(projectile.getStats(), WizardsReborn.FOCUS_CRYSTAL_STAT);
+            int focusLevel = CrystalUtil.getStatLevel(projectile.getStats(), WizardsReborn.FOCUS_CRYSTAL_STAT);
             float magicModifier = ArcaneArmorItem.getPlayerMagicModifier(player);
             float damage = (float) (0.5f + (focusLevel * 0.5)) + magicModifier;
             for (Entity target : targets) {

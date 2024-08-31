@@ -1,8 +1,8 @@
 package mod.maxbogomol.wizards_reborn.common.spell.ray;
 
 import mod.maxbogomol.wizards_reborn.WizardsReborn;
-import mod.maxbogomol.wizards_reborn.api.crystal.CrystalUtils;
-import mod.maxbogomol.wizards_reborn.api.wissen.WissenItemUtils;
+import mod.maxbogomol.wizards_reborn.api.crystal.CrystalUtil;
+import mod.maxbogomol.wizards_reborn.api.wissen.WissenItemUtil;
 import mod.maxbogomol.wizards_reborn.common.damage.DamageSourceRegistry;
 import mod.maxbogomol.wizards_reborn.common.entity.SpellProjectileEntity;
 import mod.maxbogomol.wizards_reborn.common.item.equipment.arcane.ArcaneArmorItem;
@@ -33,9 +33,9 @@ public class VoidRaySpell extends RaySpell {
         if (player != null) {
             if (target.tickCount % 10 == 0) {
                 ItemStack stack = player.getItemInHand(player.getUsedItemHand());
-                if (WissenItemUtils.canRemoveWissen(stack, getWissenCostWithStat(projectile.getStats(), player))) {
+                if (WissenItemUtil.canRemoveWissen(stack, getWissenCostWithStat(projectile.getStats(), player))) {
                     removeWissen(stack, projectile.getStats(), player);
-                    int focusLevel = CrystalUtils.getStatLevel(projectile.getStats(), WizardsReborn.FOCUS_CRYSTAL_STAT);
+                    int focusLevel = CrystalUtil.getStatLevel(projectile.getStats(), WizardsReborn.FOCUS_CRYSTAL_STAT);
                     float magicModifier = ArcaneArmorItem.getPlayerMagicModifier(player);
                     float damage = (float) (2.5f + (focusLevel * 1.0)) + magicModifier;
                     target.hurt(new DamageSource(DamageSourceRegistry.create(target.level(), DamageSourceRegistry.ARCANE_MAGIC).typeHolder(), projectile, player), damage);

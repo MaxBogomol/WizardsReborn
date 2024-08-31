@@ -13,7 +13,7 @@ import mod.maxbogomol.fluffy_fur.common.item.FuelItem;
 import mod.maxbogomol.fluffy_fur.common.proxy.ClientProxy;
 import mod.maxbogomol.fluffy_fur.common.proxy.ISidedProxy;
 import mod.maxbogomol.fluffy_fur.common.proxy.ServerProxy;
-import mod.maxbogomol.fluffy_fur.utils.ColorUtils;
+import mod.maxbogomol.fluffy_fur.util.ColorUtil;
 import mod.maxbogomol.wizards_reborn.api.arcaneenchantment.ArcaneEnchantment;
 import mod.maxbogomol.wizards_reborn.api.arcaneenchantment.ArcaneEnchantmentType;
 import mod.maxbogomol.wizards_reborn.api.arcaneenchantment.ArcaneEnchantments;
@@ -1809,7 +1809,7 @@ public class WizardsReborn {
     public static final RegistryObject<EntityType<SplitArrowEntity>> SPLIT_ARROW_PROJECTILE = ENTITIES.register("split_arrow", () -> EntityType.Builder.<SplitArrowEntity>of(SplitArrowEntity::new, MobCategory.MISC).sized(0.2f, 0.2f).build(new ResourceLocation(MOD_ID, "split_arrow").toString()));
     public static final RegistryObject<EntityType<SniffaloEntity>> SNIFFALO = ENTITIES.register("sniffalo", () -> EntityType.Builder.<SniffaloEntity>of(SniffaloEntity::new, MobCategory.CREATURE).sized(1.9F, 1.75F).clientTrackingRange(10).build(new ResourceLocation(MOD_ID, "sniffalo").toString()));
 
-    public static final RegistryObject<ForgeSpawnEggItem> SNIFFALO_SPAWN_EGG = ITEMS.register("sniffalo_spawn_egg", () -> new ForgeSpawnEggItem(SNIFFALO, ColorUtils.packColor(255, 96, 58, 62), ColorUtils.packColor(255, 181, 139, 117), new Item.Properties()));
+    public static final RegistryObject<ForgeSpawnEggItem> SNIFFALO_SPAWN_EGG = ITEMS.register("sniffalo_spawn_egg", () -> new ForgeSpawnEggItem(SNIFFALO, ColorUtil.packColor(255, 96, 58, 62), ColorUtil.packColor(255, 181, 139, 117), new Item.Properties()));
 
     //PARTICLES
     public static RegistryObject<GenericParticleType> KARMA_PARTICLE = PARTICLES.register("karma", GenericParticleType::new);

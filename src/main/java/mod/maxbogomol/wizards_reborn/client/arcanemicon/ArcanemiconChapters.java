@@ -1,11 +1,12 @@
 package mod.maxbogomol.wizards_reborn.client.arcanemicon;
 
+import mod.maxbogomol.fluffy_fur.util.IntegrationUtil;
 import mod.maxbogomol.wizards_reborn.WizardsReborn;
 import mod.maxbogomol.wizards_reborn.api.alchemy.AlchemyPotion;
-import mod.maxbogomol.wizards_reborn.api.alchemy.AlchemyPotionUtils;
+import mod.maxbogomol.wizards_reborn.api.alchemy.AlchemyPotionUtil;
 import mod.maxbogomol.wizards_reborn.api.alchemy.AlchemyPotions;
 import mod.maxbogomol.wizards_reborn.api.crystalritual.CrystalRitual;
-import mod.maxbogomol.wizards_reborn.api.crystalritual.CrystalRitualUtils;
+import mod.maxbogomol.wizards_reborn.api.crystalritual.CrystalRitualUtil;
 import mod.maxbogomol.wizards_reborn.api.crystalritual.CrystalRituals;
 import mod.maxbogomol.wizards_reborn.client.arcanemicon.index.*;
 import mod.maxbogomol.wizards_reborn.client.arcanemicon.integration.CrushingPage;
@@ -18,7 +19,6 @@ import mod.maxbogomol.wizards_reborn.common.integration.create.CreateIntegration
 import mod.maxbogomol.wizards_reborn.common.integration.farmersdelight.FarmersDelightIntegration;
 import mod.maxbogomol.wizards_reborn.common.item.equipment.ArcaneWandItem;
 import mod.maxbogomol.wizards_reborn.common.knowledge.RegisterKnowledges;
-import mod.maxbogomol.wizards_reborn.utils.IntegrationUtils;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.ListTag;
 import net.minecraft.resources.ResourceLocation;
@@ -2516,7 +2516,7 @@ public class ArcanemiconChapters {
 
         for (CrystalRitual ritual : CrystalRituals.getCrystalRituals()) {
             ItemStack stack = new ItemStack(WizardsReborn.RUNIC_WISESTONE_PLATE.get());
-            CrystalRitualUtils.setCrystalRitual(stack, ritual);
+            CrystalRitualUtil.setCrystalRitual(stack, ritual);
             crystalRituals.put(ritual, stack);
         }
 
@@ -3378,11 +3378,11 @@ public class ArcanemiconChapters {
 
         for (AlchemyPotion potion : AlchemyPotions.getAlchemyPotions()) {
             ItemStack stack = new ItemStack(WizardsReborn.ALCHEMY_VIAL_POTION.get());
-            AlchemyPotionUtils.setPotion(stack, potion);
+            AlchemyPotionUtil.setPotion(stack, potion);
             vialPotions.put(potion, stack);
 
             stack = new ItemStack(WizardsReborn.ALCHEMY_FLASK_POTION.get());
-            AlchemyPotionUtils.setPotion(stack, potion);
+            AlchemyPotionUtil.setPotion(stack, potion);
             flaskPotions.put(potion, stack);
         }
 
@@ -4299,9 +4299,9 @@ public class ArcanemiconChapters {
 
     public static void integrationCreateInit() {
         if (ModList.get().isLoaded("create")) {
-            ItemStack experienceNugget = new ItemStack(IntegrationUtils.getItem("create", "experience_nugget"));
-            ItemStack experienceNuggetTwo = new ItemStack(IntegrationUtils.getItem("create", "experience_nugget"), 2);
-            ItemStack experienceNuggetBig = new ItemStack(IntegrationUtils.getItem("create", "experience_nugget"), 18);
+            ItemStack experienceNugget = new ItemStack(IntegrationUtil.getItem("create", "experience_nugget"));
+            ItemStack experienceNuggetTwo = new ItemStack(IntegrationUtil.getItem("create", "experience_nugget"), 2);
+            ItemStack experienceNuggetBig = new ItemStack(IntegrationUtil.getItem("create", "experience_nugget"), 18);
 
             ARCANUM.addPage(new CrushingPage(ARCANUM_ITEM,
                     new ItemStack(WizardsReborn.ARCANUM_DUST.get(), 3), ARCANUM_DUST_ITEM
@@ -4355,13 +4355,13 @@ public class ArcanemiconChapters {
             powderedObsidianEffects.add(new MobEffectInstance(MobEffects.DAMAGE_RESISTANCE, 800, 0));
             powderedObsidianEffects.add(new MobEffectInstance(MobEffects.MOVEMENT_SLOWDOWN, 500, 0));
 
-            SMOKING_PIPE.addPage(new CenserPage(noEffects, new ItemStack(IntegrationUtils.getItem("create", "wheat_flour"))));
-            SMOKING_PIPE.addPage(new CenserPage(cinderFlourEffects, new ItemStack(IntegrationUtils.getItem("create", "cinder_flour"))));
-            SMOKING_PIPE.addPage(new CenserPage(powderedObsidianEffects, new ItemStack(IntegrationUtils.getItem("create", "powdered_obsidian"))));
+            SMOKING_PIPE.addPage(new CenserPage(noEffects, new ItemStack(IntegrationUtil.getItem("create", "wheat_flour"))));
+            SMOKING_PIPE.addPage(new CenserPage(cinderFlourEffects, new ItemStack(IntegrationUtil.getItem("create", "cinder_flour"))));
+            SMOKING_PIPE.addPage(new CenserPage(powderedObsidianEffects, new ItemStack(IntegrationUtil.getItem("create", "powdered_obsidian"))));
 
             ALCHEMY_TRANSMUTATION.addPage(new AlchemyMachinePage(new ItemStack(CreateIntegration.CRUSHED_RAW_ARCANE_GOLD.get(), 2), FluidStack.EMPTY, true, true,
                     new FluidStack(WizardsReborn.ALCHEMY_OIL_FLUID.get(), 100), new FluidStack(WizardsReborn.WISSEN_TEA_FLUID.get(), 200), FluidStack.EMPTY,
-                    new ItemStack(IntegrationUtils.getItem("create", "crushed_raw_gold")), new ItemStack(IntegrationUtils.getItem("create", "crushed_raw_gold")), ARCANUM_ITEM, ALCHEMY_CALX_ITEM, NATURAL_CALX_ITEM
+                    new ItemStack(IntegrationUtil.getItem("create", "crushed_raw_gold")), new ItemStack(IntegrationUtil.getItem("create", "crushed_raw_gold")), ARCANUM_ITEM, ALCHEMY_CALX_ITEM, NATURAL_CALX_ITEM
             ));
         }
     }
@@ -4378,9 +4378,9 @@ public class ArcanemiconChapters {
 
             List<MobEffectInstance> noEffects = new ArrayList<>();
 
-            SMOKING_PIPE.addPage(new CenserPage(noEffects, new ItemStack(IntegrationUtils.getItem("farmersdelight", "cabbage_seeds"))));
-            SMOKING_PIPE.addPage(new CenserPage(noEffects, new ItemStack(IntegrationUtils.getItem("farmersdelight", "tomato_seeds"))));
-            SMOKING_PIPE.addPage(new CenserPage(noEffects, new ItemStack(IntegrationUtils.getItem("farmersdelight", "rice"))));
+            SMOKING_PIPE.addPage(new CenserPage(noEffects, new ItemStack(IntegrationUtil.getItem("farmersdelight", "cabbage_seeds"))));
+            SMOKING_PIPE.addPage(new CenserPage(noEffects, new ItemStack(IntegrationUtil.getItem("farmersdelight", "tomato_seeds"))));
+            SMOKING_PIPE.addPage(new CenserPage(noEffects, new ItemStack(IntegrationUtil.getItem("farmersdelight", "rice"))));
         }
     }
 
@@ -4391,7 +4391,7 @@ public class ArcanemiconChapters {
             emberGritEffects.add(new MobEffectInstance(MobEffects.MOVEMENT_SLOWDOWN, 100, 0));
             emberGritEffects.add(new MobEffectInstance(MobEffects.CONFUSION, 200, 0));
 
-            SMOKING_PIPE.addPage(new CenserPage(emberGritEffects, new ItemStack(IntegrationUtils.getItem("embers", "ember_grit"))));
+            SMOKING_PIPE.addPage(new CenserPage(emberGritEffects, new ItemStack(IntegrationUtil.getItem("embers", "ember_grit"))));
         }
     }
 
@@ -4399,11 +4399,11 @@ public class ArcanemiconChapters {
         if (ModList.get().isLoaded("eidolon")) {
             List<MobEffectInstance> noEffects = new ArrayList<>();
 
-            SMOKING_PIPE.addPage(new CenserPage(noEffects, new ItemStack(IntegrationUtils.getItem("eidolon", "death_essence"))));
-            SMOKING_PIPE.addPage(new CenserPage(noEffects, new ItemStack(IntegrationUtils.getItem("eidolon", "crimson_essence"))));
-            SMOKING_PIPE.addPage(new CenserPage(noEffects, new ItemStack(IntegrationUtils.getItem("eidolon", "fungus_sprouts"))));
-            SMOKING_PIPE.addPage(new CenserPage(noEffects, new ItemStack(IntegrationUtils.getItem("eidolon", "warped_sprouts"))));
-            SMOKING_PIPE.addPage(new CenserPage(noEffects, new ItemStack(IntegrationUtils.getItem("eidolon", "ender_calx"))));
+            SMOKING_PIPE.addPage(new CenserPage(noEffects, new ItemStack(IntegrationUtil.getItem("eidolon", "death_essence"))));
+            SMOKING_PIPE.addPage(new CenserPage(noEffects, new ItemStack(IntegrationUtil.getItem("eidolon", "crimson_essence"))));
+            SMOKING_PIPE.addPage(new CenserPage(noEffects, new ItemStack(IntegrationUtil.getItem("eidolon", "fungus_sprouts"))));
+            SMOKING_PIPE.addPage(new CenserPage(noEffects, new ItemStack(IntegrationUtil.getItem("eidolon", "warped_sprouts"))));
+            SMOKING_PIPE.addPage(new CenserPage(noEffects, new ItemStack(IntegrationUtil.getItem("eidolon", "ender_calx"))));
         }
     }
 
@@ -4411,12 +4411,12 @@ public class ArcanemiconChapters {
         if (ModList.get().isLoaded("malum")) {
             List<MobEffectInstance> noEffects = new ArrayList<>();
 
-            SMOKING_PIPE.addPage(new CenserPage(noEffects, new ItemStack(IntegrationUtils.getItem("malum", "rotting_essence"))));
-            SMOKING_PIPE.addPage(new CenserPage(noEffects, new ItemStack(IntegrationUtils.getItem("malum", "hex_ash"))));
-            SMOKING_PIPE.addPage(new CenserPage(noEffects, new ItemStack(IntegrationUtils.getItem("malum", "alchemical_calx"))));
-            SMOKING_PIPE.addPage(new CenserPage(noEffects, new ItemStack(IntegrationUtils.getItem("malum", "cursed_grit"))));
-            SMOKING_PIPE.addPage(new CenserPage(noEffects, new ItemStack(IntegrationUtils.getItem("malum", "void_salts"))));
-            SMOKING_PIPE.addPage(new CenserPage(noEffects, new ItemStack(IntegrationUtils.getItem("malum", "blighted_gunk"))));
+            SMOKING_PIPE.addPage(new CenserPage(noEffects, new ItemStack(IntegrationUtil.getItem("malum", "rotting_essence"))));
+            SMOKING_PIPE.addPage(new CenserPage(noEffects, new ItemStack(IntegrationUtil.getItem("malum", "hex_ash"))));
+            SMOKING_PIPE.addPage(new CenserPage(noEffects, new ItemStack(IntegrationUtil.getItem("malum", "alchemical_calx"))));
+            SMOKING_PIPE.addPage(new CenserPage(noEffects, new ItemStack(IntegrationUtil.getItem("malum", "cursed_grit"))));
+            SMOKING_PIPE.addPage(new CenserPage(noEffects, new ItemStack(IntegrationUtil.getItem("malum", "void_salts"))));
+            SMOKING_PIPE.addPage(new CenserPage(noEffects, new ItemStack(IntegrationUtil.getItem("malum", "blighted_gunk"))));
         }
     }
 }

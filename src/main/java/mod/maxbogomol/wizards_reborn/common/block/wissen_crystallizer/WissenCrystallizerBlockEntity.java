@@ -8,7 +8,7 @@ import mod.maxbogomol.fluffy_fur.common.block.entity.ExposedBlockSimpleInventory
 import mod.maxbogomol.fluffy_fur.common.block.entity.TickableBlockEntity;
 import mod.maxbogomol.fluffy_fur.common.easing.Easing;
 import mod.maxbogomol.wizards_reborn.WizardsReborn;
-import mod.maxbogomol.wizards_reborn.api.crystal.CrystalUtils;
+import mod.maxbogomol.wizards_reborn.api.crystal.CrystalUtil;
 import mod.maxbogomol.wizards_reborn.api.wissen.*;
 import mod.maxbogomol.wizards_reborn.client.sound.WissenCrystallizerSoundInstance;
 import mod.maxbogomol.wizards_reborn.common.config.Config;
@@ -85,7 +85,7 @@ public class WissenCrystallizerBlockEntity extends ExposedBlockSimpleInventory i
 
                         ItemStack stack = recipe.get().getResultItem(RegistryAccess.EMPTY).copy();
                         if (recipe.get().getRecipeIsNBTCrystal()) {
-                            CrystalUtils.createCrystalFromFractured(stack, getItemHandler());
+                            CrystalUtil.createCrystalFromFractured(stack, getItemHandler());
                         }
                         if (recipe.get().getRecipeIsSaveNBT()) {
                             stack.setTag(getItemHandler().getItem(0).getOrCreateTag());

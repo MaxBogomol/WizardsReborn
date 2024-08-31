@@ -4,7 +4,7 @@ import com.google.common.collect.LinkedHashMultimap;
 import com.google.common.collect.Multimap;
 import mod.maxbogomol.wizards_reborn.WizardsReborn;
 import mod.maxbogomol.wizards_reborn.api.wissen.WissenItemType;
-import mod.maxbogomol.wizards_reborn.api.wissen.WissenItemUtils;
+import mod.maxbogomol.wizards_reborn.api.wissen.WissenItemUtil;
 import mod.maxbogomol.wizards_reborn.api.wissen.WissenUtils;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.entity.ai.attributes.Attribute;
@@ -51,14 +51,14 @@ public class ArcaciteRingItem extends BaseWissenCurioItem {
     @Override
     public ItemStack getDefaultInstance() {
         ItemStack stack = super.getDefaultInstance();
-        WissenItemUtils.existWissen(stack);
+        WissenItemUtil.existWissen(stack);
         return stack;
     }
 
     @Override
     public void curioTick(SlotContext slotContext, ItemStack stack) {
         if (!slotContext.entity().level().isClientSide()) {
-            WissenItemUtils.existWissen(stack);
+            WissenItemUtil.existWissen(stack);
 
             if (slotContext.entity() instanceof Player player) {
                 if (slotContext.entity().getHealth() < slotContext.entity().getMaxHealth()) {
@@ -68,9 +68,9 @@ public class ArcaciteRingItem extends BaseWissenCurioItem {
                         if (cost <= 0) {
                             cost = 1;
                         }
-                        if (WissenItemUtils.canRemoveWissen(stack, cost)) {
+                        if (WissenItemUtil.canRemoveWissen(stack, cost)) {
                             slotContext.entity().heal(0.5F);
-                            WissenItemUtils.removeWissen(stack, cost);
+                            WissenItemUtil.removeWissen(stack, cost);
                         }
                     }
                 }

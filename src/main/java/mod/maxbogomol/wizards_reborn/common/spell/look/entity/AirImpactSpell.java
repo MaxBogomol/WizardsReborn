@@ -1,7 +1,7 @@
 package mod.maxbogomol.wizards_reborn.common.spell.look.entity;
 
 import mod.maxbogomol.wizards_reborn.WizardsReborn;
-import mod.maxbogomol.wizards_reborn.api.crystal.CrystalUtils;
+import mod.maxbogomol.wizards_reborn.api.crystal.CrystalUtil;
 import mod.maxbogomol.wizards_reborn.client.animation.StrikeSpellItemAnimation;
 import mod.maxbogomol.wizards_reborn.common.item.equipment.arcane.ArcaneArmorItem;
 import mod.maxbogomol.wizards_reborn.common.network.PacketHandler;
@@ -63,7 +63,7 @@ public class AirImpactSpell extends EntityLookSpell {
     public void lookSpell(Level world, Player player, InteractionHand hand) {
         ItemStack stack = player.getItemInHand(hand);
         CompoundTag stats = getStats(stack);
-        int focusLevel = CrystalUtils.getStatLevel(stats, WizardsReborn.FOCUS_CRYSTAL_STAT);
+        int focusLevel = CrystalUtil.getStatLevel(stats, WizardsReborn.FOCUS_CRYSTAL_STAT);
         float magicModifier = ArcaneArmorItem.getPlayerMagicModifier(player);
         float power = 1.1f + ((focusLevel + magicModifier) * 0.1f);
 

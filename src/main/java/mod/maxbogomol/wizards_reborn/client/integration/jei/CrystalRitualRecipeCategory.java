@@ -9,7 +9,7 @@ import mezz.jei.api.recipe.RecipeIngredientRole;
 import mezz.jei.api.recipe.RecipeType;
 import mezz.jei.api.recipe.category.IRecipeCategory;
 import mod.maxbogomol.wizards_reborn.WizardsReborn;
-import mod.maxbogomol.wizards_reborn.api.crystalritual.CrystalRitualUtils;
+import mod.maxbogomol.wizards_reborn.api.crystalritual.CrystalRitualUtil;
 import mod.maxbogomol.wizards_reborn.common.recipe.CrystalRitualRecipe;
 import net.minecraft.core.RegistryAccess;
 import net.minecraft.network.chat.Component;
@@ -59,7 +59,7 @@ public class CrystalRitualRecipeCategory implements IRecipeCategory<CrystalRitua
         Vec2 point = new Vec2(35, 0), center = new Vec2(35, 36);
 
         ItemStack item = new ItemStack(WizardsReborn.RUNIC_WISESTONE_PLATE.get());
-        CrystalRitualUtils.setCrystalRitual(item, recipe.getRecipeRitual());
+        CrystalRitualUtil.setCrystalRitual(item, recipe.getRecipeRitual());
 
         builder.addSlot(RecipeIngredientRole.INPUT, 35, 36).addItemStack(item);
 

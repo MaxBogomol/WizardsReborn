@@ -11,7 +11,7 @@ import mezz.jei.api.recipe.RecipeType;
 import mezz.jei.api.recipe.category.IRecipeCategory;
 import mod.maxbogomol.wizards_reborn.WizardsReborn;
 import mod.maxbogomol.wizards_reborn.api.crystal.Crystals;
-import mod.maxbogomol.wizards_reborn.api.crystalritual.CrystalRitualUtils;
+import mod.maxbogomol.wizards_reborn.api.crystalritual.CrystalRitualUtil;
 import mod.maxbogomol.wizards_reborn.common.recipe.CrystalInfusionRecipe;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Font;
@@ -38,7 +38,7 @@ public class CrystalInfusionRecipeCategory implements IRecipeCategory<CrystalInf
     public CrystalInfusionRecipeCategory(IGuiHelper helper) {
         background = helper.createDrawable(TEXTURE, 0, 0, 144, 88);
         ItemStack item = new ItemStack(WizardsReborn.RUNIC_WISESTONE_PLATE.get());
-        CrystalRitualUtils.setCrystalRitual(item, WizardsReborn.CRYSTAL_INFUSION_CRYSTAL_RITUAL);
+        CrystalRitualUtil.setCrystalRitual(item, WizardsReborn.CRYSTAL_INFUSION_CRYSTAL_RITUAL);
         icon = helper.createDrawableIngredient(VanillaTypes.ITEM_STACK, item);
     }
 

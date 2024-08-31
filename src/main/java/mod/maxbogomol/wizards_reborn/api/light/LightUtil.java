@@ -6,7 +6,7 @@ import mod.maxbogomol.fluffy_fur.client.render.LevelRenderHandler;
 import mod.maxbogomol.fluffy_fur.common.network.BlockEntityUpdate;
 import mod.maxbogomol.wizards_reborn.client.event.ClientTickHandler;
 import mod.maxbogomol.wizards_reborn.common.block.ArcaneLumosBlock;
-import mod.maxbogomol.wizards_reborn.utils.RenderUtils;
+import mod.maxbogomol.wizards_reborn.util.RenderUtils;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.core.BlockPos;
 import net.minecraft.util.Mth;
@@ -20,7 +20,7 @@ import net.minecraftforge.api.distmarker.OnlyIn;
 
 import java.awt.*;
 
-public class LightUtils {
+public class LightUtil {
     public static Vec3 getLightLensPos(BlockPos pos, Vec3 lensPos) {
         return new Vec3(pos.getX() + lensPos.x(), pos.getY() + lensPos.y(), pos.getZ() + lensPos.z());
     }

@@ -1,6 +1,6 @@
 package mod.maxbogomol.wizards_reborn.common.network;
 
-import mod.maxbogomol.wizards_reborn.api.knowledge.KnowledgeUtils;
+import mod.maxbogomol.wizards_reborn.api.knowledge.KnowledgeUtil;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraftforge.network.NetworkEvent;
@@ -27,7 +27,7 @@ public class SetCurrentSpellSetPacket {
             ctx.get().enqueueWork(() -> {
                 ServerPlayer player = ctx.get().getSender();
 
-                KnowledgeUtils.setCurrentSpellSet(player, msg.setId);
+                KnowledgeUtil.setCurrentSpellSet(player, msg.setId);
             });
         }
         ctx.get().setPacketHandled(true);

@@ -1,7 +1,7 @@
 package mod.maxbogomol.wizards_reborn.common.spell.charge;
 
 import mod.maxbogomol.wizards_reborn.WizardsReborn;
-import mod.maxbogomol.wizards_reborn.api.crystal.CrystalUtils;
+import mod.maxbogomol.wizards_reborn.api.crystal.CrystalUtil;
 import mod.maxbogomol.wizards_reborn.common.entity.SpellProjectileEntity;
 import mod.maxbogomol.wizards_reborn.common.item.equipment.arcane.ArcaneArmorItem;
 import net.minecraft.world.damagesource.DamageSource;
@@ -28,7 +28,7 @@ public class EarthChargeSpell extends ChargeSpell {
     public void onImpact(HitResult ray, Level world, SpellProjectileEntity projectile, Player player, Entity target) {
         super.onImpact(ray, world, projectile, player, target);
 
-        int focusLevel = CrystalUtils.getStatLevel(projectile.getStats(), WizardsReborn.FOCUS_CRYSTAL_STAT);
+        int focusLevel = CrystalUtil.getStatLevel(projectile.getStats(), WizardsReborn.FOCUS_CRYSTAL_STAT);
         float magicModifier = ArcaneArmorItem.getPlayerMagicModifier(player) * 2;
         float damage = (6.0f + (focusLevel * 1.5f)) + magicModifier;
 

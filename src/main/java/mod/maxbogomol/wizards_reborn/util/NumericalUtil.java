@@ -1,9 +1,9 @@
-package mod.maxbogomol.wizards_reborn.utils;
+package mod.maxbogomol.wizards_reborn.util;
 
 import net.minecraft.network.chat.Component;
 import net.minecraftforge.fluids.FluidStack;
 
-public class NumericalUtils {
+public class NumericalUtil {
     public static Component getWissenName(int amount, int maxAmount) {
         return getName(getWissenName(), amount, maxAmount);
     }

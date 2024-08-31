@@ -1,7 +1,7 @@
 package mod.maxbogomol.wizards_reborn.client.arcanemicon.page;
 
 import mod.maxbogomol.wizards_reborn.WizardsReborn;
-import mod.maxbogomol.wizards_reborn.api.knowledge.KnowledgeUtils;
+import mod.maxbogomol.wizards_reborn.api.knowledge.KnowledgeUtil;
 import mod.maxbogomol.wizards_reborn.api.spell.Spell;
 import mod.maxbogomol.wizards_reborn.client.arcanemicon.ArcanemiconGui;
 import mod.maxbogomol.wizards_reborn.client.arcanemicon.Page;
@@ -29,7 +29,7 @@ public class SpellPage extends Page {
     public void render(ArcanemiconGui book, GuiGraphics gui, int x, int y, int mouseX, int mouseY) {
         drawWrappingText(book, gui, I18n.get(text), x + 4, y + 4, 124);
 
-        if (KnowledgeUtils.isSpell(Minecraft.getInstance().player, spell)) {
+        if (KnowledgeUtil.isSpell(Minecraft.getInstance().player, spell)) {
             gui.blit(spell.getIcon(), x + 56, y + 133, 0, 0, 16, 16, 16, 16);
             if (mouseX >= x + 56 && mouseY >= y + 133 && mouseX <= x + 56 + 16 && mouseY <= y + 133 + 16) {
                 gui.renderTooltip(Minecraft.getInstance().font, Component.translatable(spell.getTranslatedName()), mouseX, mouseY);

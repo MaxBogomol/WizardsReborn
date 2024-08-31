@@ -4,7 +4,7 @@ import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.math.Axis;
 import mod.maxbogomol.fluffy_fur.FluffyFur;
 import mod.maxbogomol.wizards_reborn.client.event.ClientTickHandler;
-import mod.maxbogomol.wizards_reborn.utils.RenderUtils;
+import mod.maxbogomol.wizards_reborn.util.RenderUtils;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.texture.TextureAtlas;
@@ -83,7 +83,7 @@ public class ArcaneEnchantment {
 
     @OnlyIn(Dist.CLIENT)
     public void renderParticle(PoseStack pose, LivingEntity entity, Level level, ItemStack stack, int x, int y, int seed, int guiOffset, int index) {
-        int levelEnchantment = ArcaneEnchantmentUtils.getArcaneEnchantment(stack, this);
+        int levelEnchantment = ArcaneEnchantmentUtil.getArcaneEnchantment(stack, this);
         if (levelEnchantment > getMaxLevel()) {
             levelEnchantment = getMaxLevel();
         }

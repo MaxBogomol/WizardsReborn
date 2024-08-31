@@ -10,7 +10,7 @@ import mod.maxbogomol.fluffy_fur.common.easing.Easing;
 import mod.maxbogomol.wizards_reborn.WizardsReborn;
 import mod.maxbogomol.wizards_reborn.api.wissen.IWissenBlockEntity;
 import mod.maxbogomol.wizards_reborn.api.wissen.IWissenItem;
-import mod.maxbogomol.wizards_reborn.api.wissen.WissenItemUtils;
+import mod.maxbogomol.wizards_reborn.api.wissen.WissenItemUtil;
 import mod.maxbogomol.wizards_reborn.api.wissen.WissenUtils;
 import mod.maxbogomol.wizards_reborn.common.config.Config;
 import mod.maxbogomol.wizards_reborn.common.network.PacketHandler;
@@ -50,11 +50,11 @@ public class WissenCellBlockEntity extends ExposedBlockSimpleInventory implement
                         IWissenItem item = (IWissenItem) stack.getItem();
                         int wissenRemain = WissenUtils.getRemoveWissenRemain(wissen, getWissenPerReceive());
                         wissenRemain = getWissenPerReceive() - wissenRemain;
-                        WissenItemUtils.existWissen(stack);
-                        int itemWissenRemain = WissenItemUtils.getAddWissenRemain(stack, wissenRemain, item.getMaxWissen());
+                        WissenItemUtil.existWissen(stack);
+                        int itemWissenRemain = WissenItemUtil.getAddWissenRemain(stack, wissenRemain, item.getMaxWissen());
                         wissenRemain = wissenRemain - itemWissenRemain;
                         if (wissenRemain > 0) {
-                            WissenItemUtils.addWissen(stack, wissenRemain, item.getMaxWissen());
+                            WissenItemUtil.addWissen(stack, wissenRemain, item.getMaxWissen());
                             wissen = wissen - wissenRemain;
                             if (random.nextFloat() < 0.5) {
                                 PacketHandler.sendToTracking(level, getBlockPos(), new WissenCellSendEffectPacket(getBlockPos()));

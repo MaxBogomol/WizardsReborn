@@ -1,6 +1,6 @@
 package mod.maxbogomol.wizards_reborn.api.alchemy;
 
-import mod.maxbogomol.fluffy_fur.utils.ColorUtils;
+import mod.maxbogomol.fluffy_fur.util.ColorUtil;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.item.alchemy.PotionUtils;
 
@@ -27,7 +27,7 @@ public class AlchemyPotion {
 
     public Color getColor() {
         int color = PotionUtils.getColor(effects);
-        return new Color(ColorUtils.getRed(color), ColorUtils.getGreen(color), ColorUtils.getBlue(color));
+        return new Color(ColorUtil.getRed(color), ColorUtil.getGreen(color), ColorUtil.getBlue(color));
     }
 
     public ArrayList<MobEffectInstance> getEffects() {

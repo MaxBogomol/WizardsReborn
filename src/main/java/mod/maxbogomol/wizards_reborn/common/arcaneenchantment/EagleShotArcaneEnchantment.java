@@ -3,7 +3,7 @@ package mod.maxbogomol.wizards_reborn.common.arcaneenchantment;
 import mod.maxbogomol.wizards_reborn.WizardsReborn;
 import mod.maxbogomol.wizards_reborn.api.arcaneenchantment.ArcaneEnchantment;
 import mod.maxbogomol.wizards_reborn.api.arcaneenchantment.ArcaneEnchantmentType;
-import mod.maxbogomol.wizards_reborn.api.arcaneenchantment.ArcaneEnchantmentUtils;
+import mod.maxbogomol.wizards_reborn.api.arcaneenchantment.ArcaneEnchantmentUtil;
 import mod.maxbogomol.wizards_reborn.api.arcaneenchantment.IArcaneItem;
 import mod.maxbogomol.wizards_reborn.api.wissen.WissenUtils;
 import mod.maxbogomol.wizards_reborn.common.network.AddScreenshakePacket;
@@ -47,15 +47,15 @@ public class EagleShotArcaneEnchantment extends ArcaneEnchantment {
     @Override
     public boolean canEnchantItem(ItemStack stack) {
         if (stack.getItem() instanceof IArcaneItem item) {
-            if (ArcaneEnchantmentUtils.getArcaneEnchantment(stack, WizardsReborn.SPLIT_ARCANE_ENCHANTMENT) > 0) return false;
+            if (ArcaneEnchantmentUtil.getArcaneEnchantment(stack, WizardsReborn.SPLIT_ARCANE_ENCHANTMENT) > 0) return false;
             return item.getArcaneEnchantmentTypes().contains(ArcaneEnchantmentType.BOW);
         }
         return false;
     }
 
     public static void onBowShot(AbstractArrow abstractarrow, ItemStack stack, Level level, LivingEntity entityLiving, int timeLeft) {
-        if (entityLiving instanceof Player player && ArcaneEnchantmentUtils.isArcaneItem(stack)) {
-            int enchantmentLevel = ArcaneEnchantmentUtils.getArcaneEnchantment(stack, WizardsReborn.EAGLE_SHOT_ARCANE_ENCHANTMENT);
+        if (entityLiving instanceof Player player && ArcaneEnchantmentUtil.isArcaneItem(stack)) {
+            int enchantmentLevel = ArcaneEnchantmentUtil.getArcaneEnchantment(stack, WizardsReborn.EAGLE_SHOT_ARCANE_ENCHANTMENT);
             if (enchantmentLevel > 0) {
                 if (BowItem.getPowerForTime(stack.getUseDuration() - timeLeft) >= 1f) {
                     float costModifier = WissenUtils.getWissenCostModifierWithDiscount(player);
@@ -124,7 +124,7 @@ public class EagleShotArcaneEnchantment extends ArcaneEnchantment {
 
     @OnlyIn(Dist.CLIENT)
     public static float getFOW(Player player, ItemStack stack, float fow) {
-        int enchantmentLevel = ArcaneEnchantmentUtils.getArcaneEnchantment(stack, WizardsReborn.EAGLE_SHOT_ARCANE_ENCHANTMENT);
+        int enchantmentLevel = ArcaneEnchantmentUtil.getArcaneEnchantment(stack, WizardsReborn.EAGLE_SHOT_ARCANE_ENCHANTMENT);
         if (enchantmentLevel > 0) {
             float costModifier = WissenUtils.getWissenCostModifierWithDiscount(player);
             List<ItemStack> items = WissenUtils.getWissenItemsNoneAndStorage(WissenUtils.getWissenItemsCurios(player));

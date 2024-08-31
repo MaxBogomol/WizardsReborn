@@ -13,11 +13,11 @@ import mezz.jei.api.recipe.RecipeType;
 import mezz.jei.api.recipe.category.IRecipeCategory;
 import mod.maxbogomol.wizards_reborn.WizardsReborn;
 import mod.maxbogomol.wizards_reborn.api.alchemy.AlchemyPotion;
-import mod.maxbogomol.wizards_reborn.api.alchemy.AlchemyPotionUtils;
+import mod.maxbogomol.wizards_reborn.api.alchemy.AlchemyPotionUtil;
 import mod.maxbogomol.wizards_reborn.common.item.equipment.AlchemyPotionItem;
 import mod.maxbogomol.wizards_reborn.common.recipe.AlchemyMachineRecipe;
 import mod.maxbogomol.wizards_reborn.common.recipe.FluidIngredient;
-import mod.maxbogomol.wizards_reborn.utils.NumericalUtils;
+import mod.maxbogomol.wizards_reborn.util.NumericalUtil;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Font;
 import net.minecraft.client.gui.GuiGraphics;
@@ -75,11 +75,11 @@ public class AlchemyMachineRecipeCategory implements IRecipeCategory<AlchemyMach
             IRecipeSlotBuilder slot =  builder.addSlot(RecipeIngredientRole.INPUT, 15 + x, 30 + y);
 
             for (ItemStack stack : items) {
-                if (!AlchemyPotionUtils.isEmpty(recipe.getRecipeAlchemyPotionIngredient())) {
+                if (!AlchemyPotionUtil.isEmpty(recipe.getRecipeAlchemyPotionIngredient())) {
                     if (stack.getItem() instanceof AlchemyPotionItem item) {
                         setIngr = false;
                         ItemStack bottle = stack.copy();
-                        AlchemyPotionUtils.setPotion(bottle, recipe.getRecipeAlchemyPotionIngredient());
+                        AlchemyPotionUtil.setPotion(bottle, recipe.getRecipeAlchemyPotionIngredient());
                         slot.addItemStack(bottle);
                     }
                 }
@@ -109,7 +109,7 @@ public class AlchemyMachineRecipeCategory implements IRecipeCategory<AlchemyMach
                     .addIngredient(ForgeTypes.FLUID_STACK, recipe.getResultFluid());
         }
 
-        if (!AlchemyPotionUtils.isEmpty(recipe.getRecipeAlchemyPotion())) {
+        if (!AlchemyPotionUtil.isEmpty(recipe.getRecipeAlchemyPotion())) {
             builder.addSlot(RecipeIngredientRole.OUTPUT, 144, 70).addItemStacks(getPotionItems(recipe.getRecipeAlchemyPotion()));
         } else {
             builder.addSlot(RecipeIngredientRole.OUTPUT, 144, 70).addItemStack(recipe.getResultItem(RegistryAccess.EMPTY));
@@ -125,7 +125,7 @@ public class AlchemyMachineRecipeCategory implements IRecipeCategory<AlchemyMach
 
             gui.drawString(Minecraft.getInstance().font, text_wissen, 122 - (stringWidth / 2), 95, 0xffffff);
             if (mouseX >= 116 && mouseY >= 68 && mouseX <= 116 + 16 && mouseY <= 68 + 16) {
-                gui.renderTooltip(Minecraft.getInstance().font, NumericalUtils.getWissenName(), (int) mouseX, (int) mouseY);
+                gui.renderTooltip(Minecraft.getInstance().font, NumericalUtil.getWissenName(), (int) mouseX, (int) mouseY);
             }
         } else {
             gui.blit(TEXTURE, 116, 68, 176, 8, 16, 16, 256, 256);
@@ -137,7 +137,7 @@ public class AlchemyMachineRecipeCategory implements IRecipeCategory<AlchemyMach
 
             gui.drawString(Minecraft.getInstance().font, text_steam, 122 - (stringWidth / 2), 15, 0xffffff);
             if (mouseX >= 116 && mouseY >= 28 && mouseX <= 116 + 16 && mouseY <= 28 + 16) {
-                gui.renderTooltip(Minecraft.getInstance().font, NumericalUtils.getSteamName(), (int) mouseX, (int) mouseY);
+                gui.renderTooltip(Minecraft.getInstance().font, NumericalUtil.getSteamName(), (int) mouseX, (int) mouseY);
             }
         } else {
             gui.blit(TEXTURE, 116, 28, 176, 8, 16, 16, 256, 256);
@@ -172,7 +172,7 @@ public class AlchemyMachineRecipeCategory implements IRecipeCategory<AlchemyMach
 
         for (Item item : AlchemyPotionItem.potionList) {
             ItemStack itemStack = new ItemStack(item);
-            AlchemyPotionUtils.setPotion(itemStack, potion);
+            AlchemyPotionUtil.setPotion(itemStack, potion);
             items.add(itemStack);
         }
 

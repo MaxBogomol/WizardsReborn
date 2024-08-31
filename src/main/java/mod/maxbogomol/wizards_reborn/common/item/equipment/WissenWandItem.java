@@ -1,7 +1,7 @@
 package mod.maxbogomol.wizards_reborn.common.item.equipment;
 
 import com.mojang.blaze3d.systems.RenderSystem;
-import mod.maxbogomol.fluffy_fur.utils.ColorUtils;
+import mod.maxbogomol.fluffy_fur.util.ColorUtil;
 import mod.maxbogomol.wizards_reborn.WizardsReborn;
 import mod.maxbogomol.wizards_reborn.api.alchemy.IFluidBlockEntity;
 import mod.maxbogomol.wizards_reborn.api.alchemy.IHeatTileEntity;
@@ -11,7 +11,7 @@ import mod.maxbogomol.wizards_reborn.api.skin.Skin;
 import mod.maxbogomol.wizards_reborn.api.wissen.*;
 import mod.maxbogomol.wizards_reborn.client.config.ClientConfig;
 import mod.maxbogomol.wizards_reborn.common.block.alchemy_machine.AlchemyMachineBlockEntity;
-import mod.maxbogomol.wizards_reborn.utils.NumericalUtils;
+import mod.maxbogomol.wizards_reborn.util.NumericalUtil;
 import net.minecraft.ChatFormatting;
 import net.minecraft.client.CameraType;
 import net.minecraft.client.Minecraft;
@@ -298,9 +298,9 @@ public class WissenWandItem extends Item {
             if (!player.isSpectator()) {
                 ChatFormatting chatFormatting = getModeColor(wand);
                 int color = chatFormatting.getColor().intValue();
-                float r = ColorUtils.getRed(color) / 255f;
-                float g = ColorUtils.getGreen(color) / 255f;
-                float b = ColorUtils.getBlue(color) / 255f;
+                float r = ColorUtil.getRed(color) / 255f;
+                float g = ColorUtil.getGreen(color) / 255f;
+                float b = ColorUtil.getBlue(color) / 255f;
 
                 RenderSystem.setShaderColor(r, g, b, 1F);
 
@@ -433,7 +433,7 @@ public class WissenWandItem extends Item {
                     if (player.isShiftKeyDown() && ClientConfig.NUMERICAL_WISSEN.get()) {
                         int x = mc.getWindow().getGuiScaledWidth() / 2;
                         int y = mc.getWindow().getGuiScaledHeight() / 2 + 12 + getYOffset();
-                        Component name = NumericalUtils.getWissenName(tile.getWissen(), tile.getMaxWissen());
+                        Component name = NumericalUtil.getWissenName(tile.getWissen(), tile.getMaxWissen());
                         drawCenteredText(gui, name.getString(), x, y);
                         addYOffset(11);
                     }
@@ -467,7 +467,7 @@ public class WissenWandItem extends Item {
                     if (player.isShiftKeyDown() && ClientConfig.NUMERICAL_COOLDOWN.get()) {
                         int x = mc.getWindow().getGuiScaledWidth() / 2;
                         int y = mc.getWindow().getGuiScaledHeight() / 2 + 12 + getYOffset();
-                        Component name = NumericalUtils.getCooldownName(tile.getCooldown());
+                        Component name = NumericalUtil.getCooldownName(tile.getCooldown());
                         drawCenteredText(gui, name.getString(), x, y);
                         addYOffset(11);
                     }
@@ -501,7 +501,7 @@ public class WissenWandItem extends Item {
                     if (player.isShiftKeyDown() && ClientConfig.SHOW_LIGHT_NAME.get()) {
                         int x = mc.getWindow().getGuiScaledWidth() / 2;
                         int y = mc.getWindow().getGuiScaledHeight() / 2 + 12 + getYOffset();
-                        Component name = NumericalUtils.getLightName();
+                        Component name = NumericalUtil.getLightName();
                         drawCenteredText(gui, name.getString(), x, y);
                         addYOffset(11);
                     }
@@ -537,9 +537,9 @@ public class WissenWandItem extends Item {
                     int x = mc.getWindow().getGuiScaledWidth() / 2;
                     int y = mc.getWindow().getGuiScaledHeight() / 2 + 12 + getYOffset();
 
-                    Component name = NumericalUtils.getFluidName(tile.getFluidStack(), tile.getFluidMaxAmount());
+                    Component name = NumericalUtil.getFluidName(tile.getFluidStack(), tile.getFluidMaxAmount());
                     if (!ClientConfig.NUMERICAL_FLUID.get()) {
-                        name = NumericalUtils.getFluidName(tile.getFluidStack());
+                        name = NumericalUtil.getFluidName(tile.getFluidStack());
                     }
                     drawCenteredText(gui, name.getString(), x, y);
                     addYOffset(11);
@@ -573,7 +573,7 @@ public class WissenWandItem extends Item {
                     if (player.isShiftKeyDown() && ClientConfig.NUMERICAL_EXPERIENCE.get()) {
                         int x = mc.getWindow().getGuiScaledWidth() / 2;
                         int y = mc.getWindow().getGuiScaledHeight() / 2 + 12 + getYOffset();
-                        Component name = NumericalUtils.getExperienceName(tile.getExperience(), tile.getMaxExperience());
+                        Component name = NumericalUtil.getExperienceName(tile.getExperience(), tile.getMaxExperience());
                         drawCenteredText(gui, name.getString(), x, y);
                         addYOffset(11);
                     }
@@ -607,7 +607,7 @@ public class WissenWandItem extends Item {
                     if (player.isShiftKeyDown() && ClientConfig.NUMERICAL_HEAT.get()) {
                         int x = mc.getWindow().getGuiScaledWidth() / 2;
                         int y = mc.getWindow().getGuiScaledHeight() / 2 + 12 + getYOffset();
-                        Component name = NumericalUtils.getHeatName(tile.getHeat(), tile.getMaxHeat());
+                        Component name = NumericalUtil.getHeatName(tile.getHeat(), tile.getMaxHeat());
                         drawCenteredText(gui, name.getString(), x, y);
                         addYOffset(11);
                     }
@@ -641,7 +641,7 @@ public class WissenWandItem extends Item {
                     if (player.isShiftKeyDown() && ClientConfig.NUMERICAL_STEAM.get()) {
                         int x = mc.getWindow().getGuiScaledWidth() / 2;
                         int y = mc.getWindow().getGuiScaledHeight() / 2 + 12 + getYOffset();
-                        Component name = NumericalUtils.getHeatName(tile.getSteam(), tile.getMaxSteam());
+                        Component name = NumericalUtil.getHeatName(tile.getSteam(), tile.getMaxSteam());
                         drawCenteredText(gui, name.getString(), x, y);
                         addYOffset(11);
                     }
@@ -676,9 +676,9 @@ public class WissenWandItem extends Item {
                         int x = mc.getWindow().getGuiScaledWidth() / 2;
                         int y = mc.getWindow().getGuiScaledHeight() / 2 + 12 + getYOffset();
 
-                        Component name = NumericalUtils.getFluidName(machine.getFluidStack(ii), machine.getMaxCapacity());
+                        Component name = NumericalUtil.getFluidName(machine.getFluidStack(ii), machine.getMaxCapacity());
                         if (!ClientConfig.NUMERICAL_FLUID.get()) {
-                            name = NumericalUtils.getFluidName(machine.getFluidStack(ii));
+                            name = NumericalUtil.getFluidName(machine.getFluidStack(ii));
                         }
                         drawCenteredText(gui, name.getString(), x, y);
                         addYOffset(11);

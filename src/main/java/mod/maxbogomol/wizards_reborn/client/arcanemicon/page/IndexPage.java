@@ -1,7 +1,7 @@
 package mod.maxbogomol.wizards_reborn.client.arcanemicon.page;
 
 import mod.maxbogomol.wizards_reborn.WizardsReborn;
-import mod.maxbogomol.wizards_reborn.api.knowledge.KnowledgeUtils;
+import mod.maxbogomol.wizards_reborn.api.knowledge.KnowledgeUtil;
 import mod.maxbogomol.wizards_reborn.client.arcanemicon.ArcanemiconGui;
 import mod.maxbogomol.wizards_reborn.client.arcanemicon.Page;
 import mod.maxbogomol.wizards_reborn.client.arcanemicon.index.IndexEntry;
@@ -63,7 +63,7 @@ public class IndexPage extends Page {
                         list.add(Component.translatable("wizards_reborn.arcanemicon.knowledge_required").withStyle(ChatFormatting.GRAY).withStyle(ChatFormatting.ITALIC));
                         boolean unknown = false;
                         if (entries[i].getKnowledge().hasPrevious()) {
-                            if (!KnowledgeUtils.isKnowledge(Minecraft.getInstance().player, entries[i].getKnowledge().getPrevious())) {
+                            if (!KnowledgeUtil.isKnowledge(Minecraft.getInstance().player, entries[i].getKnowledge().getPrevious())) {
                                 list.add(Component.translatable("wizards_reborn.arcanemicon.unknown").withStyle(ChatFormatting.GRAY));
                                 unknown = true;
                             }

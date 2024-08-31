@@ -100,11 +100,11 @@ public class WissenAltarBlockEntity extends ExposedBlockSimpleInventory implemen
                             IWissenItem item = (IWissenItem) stack.getItem();
                             int wissenRemain = WissenUtils.getRemoveWissenRemain(wissen, getWissenPerReceive());
                             wissenRemain = getWissenPerReceive() - wissenRemain;
-                            WissenItemUtils.existWissen(stack);
-                            int itemWissenRemain = WissenItemUtils.getAddWissenRemain(stack, wissenRemain, item.getMaxWissen());
+                            WissenItemUtil.existWissen(stack);
+                            int itemWissenRemain = WissenItemUtil.getAddWissenRemain(stack, wissenRemain, item.getMaxWissen());
                             wissenRemain = wissenRemain - itemWissenRemain;
                             if (wissenRemain > 0) {
-                                WissenItemUtils.addWissen(stack, wissenRemain, item.getMaxWissen());
+                                WissenItemUtil.addWissen(stack, wissenRemain, item.getMaxWissen());
                                 wissen = wissen - wissenRemain;
                                 if (random.nextFloat() < 0.5) {
                                     PacketHandler.sendToTracking(level, getBlockPos(), new WissenAltarSendEffectPacket(getBlockPos()));

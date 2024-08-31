@@ -4,11 +4,11 @@ import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.math.Axis;
 import mod.maxbogomol.fluffy_fur.FluffyFur;
 import mod.maxbogomol.fluffy_fur.common.item.IGuiParticleItem;
-import mod.maxbogomol.fluffy_fur.utils.ColorUtils;
+import mod.maxbogomol.fluffy_fur.util.ColorUtil;
 import mod.maxbogomol.wizards_reborn.api.monogram.Monogram;
 import mod.maxbogomol.wizards_reborn.client.event.ClientTickHandler;
 import mod.maxbogomol.wizards_reborn.common.block.engraved_wisestone.EngravedWisestoneBlock;
-import mod.maxbogomol.wizards_reborn.utils.RenderUtils;
+import mod.maxbogomol.wizards_reborn.util.RenderUtils;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.texture.TextureAtlas;
@@ -70,7 +70,7 @@ public class EngravedWisestoneItem extends BlockItem implements IGuiParticleItem
             int green = (int) Mth.lerp(ii, Color.BLACK.getGreen(), color.getGreen());
             int blue = (int) Mth.lerp(ii, Color.BLACK.getBlue(), color.getBlue());
 
-            component.append(Component.literal(String.valueOf(c) + " ").withStyle(Style.EMPTY.withColor(ColorUtils.packColor(255, red, green, blue))));
+            component.append(Component.literal(String.valueOf(c) + " ").withStyle(Style.EMPTY.withColor(ColorUtil.packColor(255, red, green, blue))));
             i++;
         }
 

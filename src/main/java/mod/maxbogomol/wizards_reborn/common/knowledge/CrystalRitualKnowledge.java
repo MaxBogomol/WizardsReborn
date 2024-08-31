@@ -2,7 +2,7 @@ package mod.maxbogomol.wizards_reborn.common.knowledge;
 
 import mod.maxbogomol.wizards_reborn.WizardsReborn;
 import mod.maxbogomol.wizards_reborn.api.crystalritual.CrystalRitual;
-import mod.maxbogomol.wizards_reborn.api.crystalritual.CrystalRitualUtils;
+import mod.maxbogomol.wizards_reborn.api.crystalritual.CrystalRitualUtil;
 import mod.maxbogomol.wizards_reborn.api.knowledge.Knowledge;
 import mod.maxbogomol.wizards_reborn.common.item.equipment.RunicWisestonePlateItem;
 import net.minecraft.network.chat.Component;
@@ -26,7 +26,7 @@ public class CrystalRitualKnowledge extends Knowledge {
         List<ItemStack> items = player.inventoryMenu.getItems();
         for (ItemStack stack : items) {
             if (stack.getItem() instanceof RunicWisestonePlateItem plate) {
-                if (CrystalRitualUtils.getCrystalRitual(stack) == ritual) {
+                if (CrystalRitualUtil.getCrystalRitual(stack) == ritual) {
                     return true;
                 }
             }
@@ -37,14 +37,14 @@ public class CrystalRitualKnowledge extends Knowledge {
     @OnlyIn(Dist.CLIENT)
     public ItemStack getIcon() {
         ItemStack stack = WizardsReborn.RUNIC_WISESTONE_PLATE.get().getDefaultInstance();
-        CrystalRitualUtils.setCrystalRitual(stack, ritual);
+        CrystalRitualUtil.setCrystalRitual(stack, ritual);
         return stack;
     }
 
     @OnlyIn(Dist.CLIENT)
     public Component getName() {
-        CrystalRitual ritual = CrystalRitualUtils.getCrystalRitual(getIcon());
-        if (!CrystalRitualUtils.isEmpty(ritual)) {
+        CrystalRitual ritual = CrystalRitualUtil.getCrystalRitual(getIcon());
+        if (!CrystalRitualUtil.isEmpty(ritual)) {
             return RunicWisestonePlateItem.getRitualName(ritual);
         }
         return Component.empty();

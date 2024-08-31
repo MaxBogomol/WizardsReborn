@@ -5,10 +5,10 @@ import mod.maxbogomol.fluffy_fur.client.particle.ParticleBuilder;
 import mod.maxbogomol.fluffy_fur.client.particle.data.ColorParticleData;
 import mod.maxbogomol.fluffy_fur.client.particle.data.GenericParticleData;
 import mod.maxbogomol.fluffy_fur.common.item.IParticleItem;
-import mod.maxbogomol.fluffy_fur.utils.ColorUtils;
+import mod.maxbogomol.fluffy_fur.util.ColorUtil;
 import mod.maxbogomol.wizards_reborn.api.crystal.CrystalStat;
 import mod.maxbogomol.wizards_reborn.api.crystal.CrystalType;
-import mod.maxbogomol.wizards_reborn.api.crystal.CrystalUtils;
+import mod.maxbogomol.wizards_reborn.api.crystal.CrystalUtil;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.Style;
@@ -62,7 +62,7 @@ public class FracturedCrystalItem extends Item implements IParticleItem {
             CompoundTag nbt = stack.getOrCreateTag();
             if (nbt.contains("random_stats")) {
                 nbt.remove("random_stats");
-                CrystalUtils.createCrystalItemStats(stack, type, world, 6);
+                CrystalUtil.createCrystalItemStats(stack, type, world, 6);
                 stack.setTag(nbt);
             }
         }
@@ -79,7 +79,7 @@ public class FracturedCrystalItem extends Item implements IParticleItem {
             int green = (int) Mth.lerp((float) statlevel / stat.getMaxLevel(), Color.GRAY.getGreen(), color.getGreen());
             int blue = (int) Mth.lerp((float) statlevel / stat.getMaxLevel(), Color.GRAY.getBlue(), color.getBlue());
 
-            int packColor = ColorUtils.packColor(255, red, green, blue);
+            int packColor = ColorUtil.packColor(255, red, green, blue);
             list.add(Component.translatable(stat.getTranslatedName()).append(": " + statlevel).withStyle(Style.EMPTY.withColor(packColor)));
         }
     }

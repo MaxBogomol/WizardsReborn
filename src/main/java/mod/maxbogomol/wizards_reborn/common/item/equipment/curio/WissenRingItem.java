@@ -2,7 +2,7 @@ package mod.maxbogomol.wizards_reborn.common.item.equipment.curio;
 
 import mod.maxbogomol.wizards_reborn.api.wissen.IWissenItem;
 import mod.maxbogomol.wizards_reborn.api.wissen.WissenItemType;
-import mod.maxbogomol.wizards_reborn.api.wissen.WissenItemUtils;
+import mod.maxbogomol.wizards_reborn.api.wissen.WissenItemUtil;
 import mod.maxbogomol.wizards_reborn.api.wissen.WissenUtils;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.entity.player.Player;
@@ -38,18 +38,18 @@ public class WissenRingItem extends BaseWissenCurioItem {
     @Override
     public ItemStack getDefaultInstance() {
         ItemStack stack = super.getDefaultInstance();
-        WissenItemUtils.existWissen(stack);
+        WissenItemUtil.existWissen(stack);
         return stack;
     }
 
     @Override
     public void curioTick(SlotContext slotContext, ItemStack stack) {
         if (!slotContext.entity().level().isClientSide()) {
-            WissenItemUtils.existWissen(stack);
+            WissenItemUtil.existWissen(stack);
 
             if (slotContext.entity() instanceof Player player) {
                 if (player.tickCount % 8 == 0) {
-                    WissenItemUtils.addWissen(stack, 1, getMaxWissen());
+                    WissenItemUtil.addWissen(stack, 1, getMaxWissen());
                 }
 
                 List<ItemStack> itemsAdd = WissenUtils.getWissenItemsActive(player);
@@ -58,14 +58,14 @@ public class WissenRingItem extends BaseWissenCurioItem {
 
                 for (ItemStack item : itemsUsing) {
                     if (item.getItem() instanceof IWissenItem wissenItem) {
-                        int wissenRemain = WissenUtils.getRemoveWissenRemain(WissenItemUtils.getWissen(stack), 1);
+                        int wissenRemain = WissenUtils.getRemoveWissenRemain(WissenItemUtil.getWissen(stack), 1);
                         wissenRemain = 1 - wissenRemain;
-                        WissenItemUtils.existWissen(item);
-                        int itemWissenRemain = WissenItemUtils.getAddWissenRemain(item, wissenRemain, wissenItem.getMaxWissen());
+                        WissenItemUtil.existWissen(item);
+                        int itemWissenRemain = WissenItemUtil.getAddWissenRemain(item, wissenRemain, wissenItem.getMaxWissen());
                         wissenRemain = wissenRemain - itemWissenRemain;
                         if (wissenRemain > 0) {
-                            WissenItemUtils.addWissen(item, wissenRemain, wissenItem.getMaxWissen());
-                            WissenItemUtils.removeWissen(stack, wissenRemain);
+                            WissenItemUtil.addWissen(item, wissenRemain, wissenItem.getMaxWissen());
+                            WissenItemUtil.removeWissen(stack, wissenRemain);
                         }
                     }
                 }

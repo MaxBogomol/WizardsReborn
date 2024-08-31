@@ -1,6 +1,6 @@
 package mod.maxbogomol.wizards_reborn.common.network;
 
-import mod.maxbogomol.wizards_reborn.api.knowledge.KnowledgeUtils;
+import mod.maxbogomol.wizards_reborn.api.knowledge.KnowledgeUtil;
 import mod.maxbogomol.wizards_reborn.api.spell.Spell;
 import mod.maxbogomol.wizards_reborn.api.spell.Spells;
 import net.minecraft.network.FriendlyByteBuf;
@@ -39,7 +39,7 @@ public class UnlockSpellPacket {
                 ServerPlayer player = ctx.get().getSender();
 
                 if (Spells.getSpell(msg.spell.getString()) != null) {
-                    KnowledgeUtils.addSpell(player, Spells.getSpell(msg.spell.getString()));
+                    KnowledgeUtil.addSpell(player, Spells.getSpell(msg.spell.getString()));
                 }
             });
         }

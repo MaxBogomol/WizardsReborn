@@ -3,7 +3,7 @@ package mod.maxbogomol.wizards_reborn.client.event;
 import com.google.common.collect.Multimap;
 import mod.maxbogomol.fluffy_fur.client.tooltip.TooltipModifierHandler;
 import mod.maxbogomol.wizards_reborn.WizardsReborn;
-import mod.maxbogomol.wizards_reborn.api.arcaneenchantment.ArcaneEnchantmentUtils;
+import mod.maxbogomol.wizards_reborn.api.arcaneenchantment.ArcaneEnchantmentUtil;
 import mod.maxbogomol.wizards_reborn.client.arcanemicon.ArcanemiconChapters;
 import mod.maxbogomol.wizards_reborn.client.arcanemicon.ArcanemiconGui;
 import mod.maxbogomol.wizards_reborn.common.arcaneenchantment.EagleShotArcaneEnchantment;
@@ -35,7 +35,7 @@ public class ClientEvents {
         Player player = event.getEntity();
 
         if (player != null) {
-            if (ArcaneEnchantmentUtils.isArcaneItem(stack)) {
+            if (ArcaneEnchantmentUtil.isArcaneItem(stack)) {
                 boolean draw = false;
                 for (EquipmentSlot equipmentslot : EquipmentSlot.values()) {
                     Multimap<Attribute, AttributeModifier> multimap = stack.getAttributeModifiers(equipmentslot);
@@ -48,7 +48,7 @@ public class ClientEvents {
                 if (draw) {
                     int i = TooltipModifierHandler.getAttributeTooltipSize() + 1;
                     if (i < event.getToolTip().size()) {
-                        event.getToolTip().addAll(i, ArcaneEnchantmentUtils.modifiersAppendHoverText(stack, player.level(), event.getFlags()));
+                        event.getToolTip().addAll(i, ArcaneEnchantmentUtil.modifiersAppendHoverText(stack, player.level(), event.getFlags()));
                     }
                 }
             }

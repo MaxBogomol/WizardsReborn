@@ -1,6 +1,6 @@
 package mod.maxbogomol.wizards_reborn.common.item.equipment.curio;
 
-import mod.maxbogomol.wizards_reborn.api.wissen.WissenItemUtils;
+import mod.maxbogomol.wizards_reborn.api.wissen.WissenItemUtil;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
@@ -20,8 +20,8 @@ public class CreativeWissenKeychainItem extends WissenKeychainItem {
     @Override
     public ItemStack getDefaultInstance() {
         ItemStack stack = super.getDefaultInstance();;
-        WissenItemUtils.existWissen(stack);
-        WissenItemUtils.setWissen(stack, Integer.MAX_VALUE);
+        WissenItemUtil.existWissen(stack);
+        WissenItemUtil.setWissen(stack, Integer.MAX_VALUE);
         return stack;
     }
 
@@ -32,14 +32,14 @@ public class CreativeWissenKeychainItem extends WissenKeychainItem {
 
     @Override
     public void inventoryTick(ItemStack stack, Level world, Entity entity, int slot, boolean isSelected) {
-        WissenItemUtils.existWissen(stack);
-        WissenItemUtils.setWissen(stack, Integer.MAX_VALUE);
+        WissenItemUtil.existWissen(stack);
+        WissenItemUtil.setWissen(stack, Integer.MAX_VALUE);
     }
 
     @Override
     public void curioTick(SlotContext slotContext, ItemStack stack) {
         super.curioTick(slotContext, stack);
-        WissenItemUtils.existWissen(stack);
-        WissenItemUtils.setWissen(stack, Integer.MAX_VALUE);
+        WissenItemUtil.existWissen(stack);
+        WissenItemUtil.setWissen(stack, Integer.MAX_VALUE);
     }
 }

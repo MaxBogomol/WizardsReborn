@@ -2,7 +2,7 @@ package mod.maxbogomol.wizards_reborn.common.block.sensor.fluid;
 
 import mod.maxbogomol.wizards_reborn.WizardsRebornClient;
 import mod.maxbogomol.wizards_reborn.api.alchemy.AlchemyPotion;
-import mod.maxbogomol.wizards_reborn.api.alchemy.AlchemyPotionUtils;
+import mod.maxbogomol.wizards_reborn.api.alchemy.AlchemyPotionUtil;
 import mod.maxbogomol.wizards_reborn.api.alchemy.IFluidBlockEntity;
 import mod.maxbogomol.wizards_reborn.common.alchemypotion.FluidAlchemyPotion;
 import mod.maxbogomol.wizards_reborn.common.block.sensor.SensorBaseBlock;
@@ -106,8 +106,8 @@ public class FluidSensorBlock extends SensorBaseBlock {
                         return InteractionResult.SUCCESS;
                     }
                     if (stack.getItem() instanceof AlchemyPotionItem vial) {
-                        AlchemyPotion potion = AlchemyPotionUtils.getPotion(stack);
-                        if (!AlchemyPotionUtils.isEmpty(potion)) {
+                        AlchemyPotion potion = AlchemyPotionUtil.getPotion(stack);
+                        if (!AlchemyPotionUtil.isEmpty(potion)) {
                             if (potion instanceof FluidAlchemyPotion fluidPotion) {
                                 FluidStack fluid = new FluidStack(fluidPotion.fluid, 1);
                                 sensorTile.getTank().setFluid(fluid);

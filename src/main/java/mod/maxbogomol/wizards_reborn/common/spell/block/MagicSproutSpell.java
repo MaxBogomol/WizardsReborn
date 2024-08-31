@@ -1,9 +1,9 @@
 package mod.maxbogomol.wizards_reborn.common.spell.block;
 
 import mod.maxbogomol.wizards_reborn.WizardsReborn;
-import mod.maxbogomol.wizards_reborn.api.crystal.CrystalUtils;
+import mod.maxbogomol.wizards_reborn.api.crystal.CrystalUtil;
 import mod.maxbogomol.wizards_reborn.api.spell.Spell;
-import mod.maxbogomol.wizards_reborn.api.wissen.WissenItemUtils;
+import mod.maxbogomol.wizards_reborn.api.wissen.WissenItemUtil;
 import mod.maxbogomol.wizards_reborn.common.item.equipment.arcane.ArcaneArmorItem;
 import mod.maxbogomol.wizards_reborn.common.network.PacketHandler;
 import mod.maxbogomol.wizards_reborn.common.network.spell.MagicSproutSpellEffectPacket;
@@ -52,9 +52,9 @@ public class MagicSproutSpell extends Spell {
                 if (!context.getPlayer().isShiftKeyDown()) {
                     useGrow(stack, context, 1f, 1f);
                     PacketHandler.sendToTracking(context.getPlayer().level(), context.getClickedPos(), new MagicSproutSpellEffectPacket((float) context.getClickedPos().getX() + 0.5F, (float) context.getClickedPos().getY() + 0.5F, (float) context.getClickedPos().getZ() + 0.5F, r, g, b));
-                } else if (WissenItemUtils.canRemoveWissen(stack, getWissenCostWithStat(getStats(stack), context.getPlayer(), getWissenCost() * 10))) {
+                } else if (WissenItemUtil.canRemoveWissen(stack, getWissenCostWithStat(getStats(stack), context.getPlayer(), getWissenCost() * 10))) {
                     CompoundTag stats = getStats(stack);
-                    int focusLevel = CrystalUtils.getStatLevel(stats, WizardsReborn.FOCUS_CRYSTAL_STAT);
+                    int focusLevel = CrystalUtil.getStatLevel(stats, WizardsReborn.FOCUS_CRYSTAL_STAT);
                     float magicModifier = ArcaneArmorItem.getPlayerMagicModifier(context.getPlayer());
                     int radius = (int) (1 + magicModifier);
                     BlockPos blockPos = context.getClickedPos();

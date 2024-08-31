@@ -6,12 +6,12 @@ import mod.maxbogomol.fluffy_fur.client.animation.ItemAnimation;
 import mod.maxbogomol.fluffy_fur.client.render.LevelRenderHandler;
 import mod.maxbogomol.wizards_reborn.WizardsReborn;
 import mod.maxbogomol.wizards_reborn.api.spell.Spell;
-import mod.maxbogomol.wizards_reborn.api.wissen.WissenItemUtils;
+import mod.maxbogomol.wizards_reborn.api.wissen.WissenItemUtil;
 import mod.maxbogomol.wizards_reborn.client.animation.SpellHandItemAnimation;
 import mod.maxbogomol.wizards_reborn.common.entity.SpellProjectileEntity;
 import mod.maxbogomol.wizards_reborn.common.network.PacketHandler;
 import mod.maxbogomol.wizards_reborn.common.network.spell.RaySpellEffectPacket;
-import mod.maxbogomol.wizards_reborn.utils.RenderUtils;
+import mod.maxbogomol.wizards_reborn.util.RenderUtils;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
@@ -106,9 +106,9 @@ public class RaySpell extends Spell {
                         projectile.updateSpellData();
                         projectile.hurtMarked = true;
 
-                        if (WissenItemUtils.canRemoveWissen(stack, 1)) {
+                        if (WissenItemUtil.canRemoveWissen(stack, 1)) {
                             if (projectile.tickCount % tickCost() == 0) {
-                                WissenItemUtils.removeWissen(stack, 1);
+                                WissenItemUtil.removeWissen(stack, 1);
                             }
                         } else {
                             livingEntity.stopUsingItem();

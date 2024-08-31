@@ -52,8 +52,8 @@ public class Knowledge {
     }
 
     public boolean addTick(Player player) {
-        if (!KnowledgeUtils.isKnowledge(player, this) && canReceived(player)) {
-            KnowledgeUtils.addKnowledge(player, this);
+        if (!KnowledgeUtil.isKnowledge(player, this) && canReceived(player)) {
+            KnowledgeUtil.addKnowledge(player, this);
             return true;
         }
         return false;

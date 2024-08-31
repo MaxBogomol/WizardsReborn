@@ -5,9 +5,9 @@ import mod.maxbogomol.fluffy_fur.client.particle.ParticleBuilder;
 import mod.maxbogomol.fluffy_fur.client.particle.data.ColorParticleData;
 import mod.maxbogomol.fluffy_fur.client.particle.data.GenericParticleData;
 import mod.maxbogomol.fluffy_fur.client.particle.data.LightParticleData;
-import mod.maxbogomol.fluffy_fur.utils.RenderUtils;
+import mod.maxbogomol.fluffy_fur.util.RenderUtils;
 import mod.maxbogomol.wizards_reborn.WizardsReborn;
-import mod.maxbogomol.wizards_reborn.api.crystal.CrystalUtils;
+import mod.maxbogomol.wizards_reborn.api.crystal.CrystalUtil;
 import mod.maxbogomol.wizards_reborn.api.spell.Spell;
 import mod.maxbogomol.wizards_reborn.common.entity.SpellProjectileEntity;
 import net.minecraft.core.BlockPos;
@@ -115,7 +115,7 @@ public class FogSpell extends Spell {
         if (alpha > 1f) alpha = 1f;
         if (alpha < 0f) alpha = 0f;
 
-        int focusLevel = CrystalUtils.getStatLevel(entity.getStats(), WizardsReborn.FOCUS_CRYSTAL_STAT);
+        int focusLevel = CrystalUtil.getStatLevel(entity.getStats(), WizardsReborn.FOCUS_CRYSTAL_STAT);
         int size = getSize(entity) + (getSize(entity) * focusLevel);
         List<BlockPos> blocks = getBlocks(entity.level(), entity.getOnPos(), (int) (size * alpha), 4, isCircle(entity));
 

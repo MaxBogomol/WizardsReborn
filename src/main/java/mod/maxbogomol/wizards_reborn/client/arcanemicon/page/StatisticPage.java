@@ -3,7 +3,7 @@ package mod.maxbogomol.wizards_reborn.client.arcanemicon.page;
 import com.google.common.collect.Lists;
 import mod.maxbogomol.wizards_reborn.WizardsReborn;
 import mod.maxbogomol.wizards_reborn.api.knowledge.Knowledge;
-import mod.maxbogomol.wizards_reborn.api.knowledge.KnowledgeUtils;
+import mod.maxbogomol.wizards_reborn.api.knowledge.KnowledgeUtil;
 import mod.maxbogomol.wizards_reborn.api.spell.Spell;
 import mod.maxbogomol.wizards_reborn.api.spell.Spells;
 import mod.maxbogomol.wizards_reborn.api.wissen.WissenUtils;
@@ -40,7 +40,7 @@ public class StatisticPage extends Page {
         int titleWidth = Minecraft.getInstance().font.width(title);
         drawText(book, gui, title, x + 64 - titleWidth / 2, y + 15 - Minecraft.getInstance().font.lineHeight);
 
-        int points = KnowledgeUtils.getKnowledgePoints(Minecraft.getInstance().player) - KnowledgeUtils.getSpellPoints(Minecraft.getInstance().player);
+        int points = KnowledgeUtil.getKnowledgePoints(Minecraft.getInstance().player) - KnowledgeUtil.getSpellPoints(Minecraft.getInstance().player);
         if (points < 0) points = 0;
 
         int currentKnowledges = 0;
@@ -51,7 +51,7 @@ public class StatisticPage extends Page {
         int totalSpells = 0;
         for (List<Knowledge> list : knowledges) {
             for (Knowledge knowledge : list) {
-                if ((KnowledgeUtils.isKnowledge(Minecraft.getInstance().player, knowledge))) {
+                if ((KnowledgeUtil.isKnowledge(Minecraft.getInstance().player, knowledge))) {
                     currentKnowledges++;
                     currentPoints += knowledge.getPoints();
                 }
@@ -60,7 +60,7 @@ public class StatisticPage extends Page {
             }
         }
         for (Spell spell : Spells.getSpells()) {
-            if (KnowledgeUtils.isSpell(Minecraft.getInstance().player, spell)) {
+            if (KnowledgeUtil.isSpell(Minecraft.getInstance().player, spell)) {
                 currentSpells++;
             }
             totalSpells++;

@@ -3,7 +3,7 @@ package mod.maxbogomol.wizards_reborn.client.event;
 import com.mojang.blaze3d.platform.InputConstants;
 import mod.maxbogomol.wizards_reborn.WizardsReborn;
 import mod.maxbogomol.wizards_reborn.WizardsRebornClient;
-import mod.maxbogomol.wizards_reborn.api.knowledge.KnowledgeUtils;
+import mod.maxbogomol.wizards_reborn.api.knowledge.KnowledgeUtil;
 import mod.maxbogomol.wizards_reborn.api.spell.Spell;
 import mod.maxbogomol.wizards_reborn.client.gui.screen.ArcaneWandScreen;
 import mod.maxbogomol.wizards_reborn.client.gui.screen.BagMenuScreen;
@@ -185,7 +185,7 @@ public class KeyBindHandler {
 
                 if (WizardsRebornClient.SPELL_SETS_TOGGLE_KEY.isDown()) {
                     if (key == WizardsRebornClient.NEXT_SPELL_KEY.getKey().getValue()) {
-                        current = (KnowledgeUtils.getCurrentSpellSet(player) + 1) % 10;
+                        current = (KnowledgeUtil.getCurrentSpellSet(player) + 1) % 10;
                         if (current < 0) current = 9;
                         PacketHandler.sendToServer(new SetCurrentSpellSetPacket(current));
                         PacketHandler.sendToServer(new SetCurrentSpellInSetPacket(0));
@@ -194,7 +194,7 @@ public class KeyBindHandler {
                         current = 0;
                     }
                     if (key == WizardsRebornClient.PREVIOUS_SPELL_KEY.getKey().getValue()) {
-                        current = (KnowledgeUtils.getCurrentSpellSet(player) - 1) % 10;
+                        current = (KnowledgeUtil.getCurrentSpellSet(player) - 1) % 10;
                         if (current < 0) current = 9;
                         PacketHandler.sendToServer(new SetCurrentSpellSetPacket(current));
                         PacketHandler.sendToServer(new SetCurrentSpellInSetPacket(0));
@@ -204,33 +204,33 @@ public class KeyBindHandler {
                     }
                 } else {
                     if (key == WizardsRebornClient.NEXT_SPELL_KEY.getKey().getValue()) {
-                        current = (KnowledgeUtils.getCurrentSpellInSet(player) + 1) % 10;
+                        current = (KnowledgeUtil.getCurrentSpellInSet(player) + 1) % 10;
                         if (current < 0) current = 9;
                         PacketHandler.sendToServer(new SetCurrentSpellInSetPacket(current));
                         set = true;
                         spellSet = true;
-                        currentSet = KnowledgeUtils.getCurrentSpellSet(player);
+                        currentSet = KnowledgeUtil.getCurrentSpellSet(player);
                     }
                     if (key == WizardsRebornClient.PREVIOUS_SPELL_KEY.getKey().getValue()) {
-                        current = (KnowledgeUtils.getCurrentSpellInSet(player) - 1) % 10;
+                        current = (KnowledgeUtil.getCurrentSpellInSet(player) - 1) % 10;
                         if (current < 0) current = 9;
                         PacketHandler.sendToServer(new SetCurrentSpellInSetPacket(current));
                         set = true;
                         spellSet = true;
-                        currentSet = KnowledgeUtils.getCurrentSpellSet(player);
+                        currentSet = KnowledgeUtil.getCurrentSpellSet(player);
                     }
                 }
 
                 if (set) {
                     if (!main.isEmpty() && main.getItem() instanceof ArcaneWandItem) {
-                        Spell spell = KnowledgeUtils.getSpellFromSet(player, currentSet, current);
+                        Spell spell = KnowledgeUtil.getSpellFromSet(player, currentSet, current);
                         String string = "";
                         if (spell != null) string = spell.getId();
                         if (spellSet) PacketHandler.sendToServer(new SetSpellPacket(true, string));
                         Minecraft.getInstance().player.playNotifySound(WizardsReborn.CRYSTAL_RESONATE_SOUND.get(), SoundSource.NEUTRAL, 1.0f, 1.5f);
                     } else {
                         if (!offhand.isEmpty() && offhand.getItem() instanceof ArcaneWandItem) {
-                            Spell spell = KnowledgeUtils.getSpellFromSet(player, KnowledgeUtils.getCurrentSpellSet(player), current);
+                            Spell spell = KnowledgeUtil.getSpellFromSet(player, KnowledgeUtil.getCurrentSpellSet(player), current);
                             String string = "";
                             if (spell != null) string = spell.getId();
                             if (spellSet) PacketHandler.sendToServer(new SetSpellPacket(false, string));

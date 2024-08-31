@@ -10,8 +10,8 @@ import mezz.jei.api.recipe.RecipeIngredientRole;
 import mezz.jei.api.recipe.RecipeType;
 import mezz.jei.api.recipe.category.IRecipeCategory;
 import mod.maxbogomol.wizards_reborn.WizardsReborn;
-import mod.maxbogomol.wizards_reborn.api.arcaneenchantment.ArcaneEnchantmentUtils;
-import mod.maxbogomol.wizards_reborn.api.crystalritual.CrystalRitualUtils;
+import mod.maxbogomol.wizards_reborn.api.arcaneenchantment.ArcaneEnchantmentUtil;
+import mod.maxbogomol.wizards_reborn.api.crystalritual.CrystalRitualUtil;
 import mod.maxbogomol.wizards_reborn.common.recipe.ArcaneIteratorRecipe;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Font;
@@ -84,10 +84,10 @@ public class ArcaneIteratorRecipeCategory implements IRecipeCategory<ArcaneItera
             }
         }
         if (recipe.hasRecipeArcaneEnchantment()) {
-            ArcaneEnchantmentUtils.addItemArcaneEnchantment(bookResult, recipe.getRecipeArcaneEnchantment());
+            ArcaneEnchantmentUtil.addItemArcaneEnchantment(bookResult, recipe.getRecipeArcaneEnchantment());
         }
         if (recipe.hasRecipeCrystalRitual()) {
-            CrystalRitualUtils.setCrystalRitual(bookResult, recipe.getRecipeCrystalRitual());
+            CrystalRitualUtil.setCrystalRitual(bookResult, recipe.getRecipeCrystalRitual());
         }
 
         int index = 1;

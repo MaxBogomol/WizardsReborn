@@ -1,7 +1,7 @@
 package mod.maxbogomol.wizards_reborn.common.spell.self;
 
 import mod.maxbogomol.wizards_reborn.WizardsReborn;
-import mod.maxbogomol.wizards_reborn.api.crystal.CrystalUtils;
+import mod.maxbogomol.wizards_reborn.api.crystal.CrystalUtil;
 import mod.maxbogomol.wizards_reborn.common.item.equipment.arcane.ArcaneArmorItem;
 import mod.maxbogomol.wizards_reborn.common.network.PacketHandler;
 import mod.maxbogomol.wizards_reborn.common.network.spell.AirFlowSpellEffectPacket;
@@ -42,7 +42,7 @@ public class AirFlowSpell extends SelfSpell {
         ItemStack stack = player.getItemInHand(hand);
         CompoundTag stats = getStats(stack);
 
-        int focusLevel = CrystalUtils.getStatLevel(stats, WizardsReborn.FOCUS_CRYSTAL_STAT);
+        int focusLevel = CrystalUtil.getStatLevel(stats, WizardsReborn.FOCUS_CRYSTAL_STAT);
         float magicModifier = ArcaneArmorItem.getPlayerMagicModifier(player);
 
         float scale = 0.55f + (focusLevel * 0.15f);

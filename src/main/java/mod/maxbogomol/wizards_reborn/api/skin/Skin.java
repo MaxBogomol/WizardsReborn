@@ -2,7 +2,7 @@ package mod.maxbogomol.wizards_reborn.api.skin;
 
 import mod.maxbogomol.fluffy_fur.FluffyFurClient;
 import mod.maxbogomol.fluffy_fur.client.model.armor.ArmorModel;
-import mod.maxbogomol.fluffy_fur.utils.ColorUtils;
+import mod.maxbogomol.fluffy_fur.util.ColorUtil;
 import mod.maxbogomol.wizards_reborn.WizardsReborn;
 import net.minecraft.client.model.HumanoidModel;
 import net.minecraft.client.player.AbstractClientPlayer;
@@ -65,11 +65,11 @@ public class Skin {
     public static Component getSkinName(Skin skin) {
         Color color = skin.getColor();
 
-        return Component.translatable(skin.getTranslatedName()).withStyle(Style.EMPTY.withColor(ColorUtils.packColor(255, color.getRed(), color.getGreen(), color.getBlue())));
+        return Component.translatable(skin.getTranslatedName()).withStyle(Style.EMPTY.withColor(ColorUtil.packColor(255, color.getRed(), color.getGreen(), color.getBlue())));
     }
 
     public static Component getSkinComponent(Skin skin) {
-        return Component.translatable("lore.wizards_reborn.skin").withStyle(Style.EMPTY.withColor(ColorUtils.packColor(255, 249, 210, 129)))
+        return Component.translatable("lore.wizards_reborn.skin").withStyle(Style.EMPTY.withColor(ColorUtil.packColor(255, 249, 210, 129)))
                 .append(" ").append(getSkinName(skin));
     }
 

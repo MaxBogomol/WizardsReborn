@@ -6,7 +6,7 @@ import mod.maxbogomol.fluffy_fur.client.particle.data.ColorParticleData;
 import mod.maxbogomol.fluffy_fur.client.particle.data.GenericParticleData;
 import mod.maxbogomol.fluffy_fur.client.particle.data.LightParticleData;
 import mod.maxbogomol.fluffy_fur.common.easing.Easing;
-import mod.maxbogomol.fluffy_fur.utils.RenderUtils;
+import mod.maxbogomol.fluffy_fur.util.RenderUtils;
 import mod.maxbogomol.wizards_reborn.WizardsReborn;
 import mod.maxbogomol.wizards_reborn.common.block.ArcaneLumosBlock;
 import mod.maxbogomol.wizards_reborn.common.block.salt_torch.SaltTorchBlockEntity;

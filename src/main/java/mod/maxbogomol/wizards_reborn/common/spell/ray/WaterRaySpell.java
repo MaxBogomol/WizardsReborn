@@ -1,15 +1,14 @@
 package mod.maxbogomol.wizards_reborn.common.spell.ray;
 
 import mod.maxbogomol.wizards_reborn.WizardsReborn;
-import mod.maxbogomol.wizards_reborn.api.crystal.CrystalUtils;
-import mod.maxbogomol.wizards_reborn.api.wissen.WissenItemUtils;
+import mod.maxbogomol.wizards_reborn.api.crystal.CrystalUtil;
+import mod.maxbogomol.wizards_reborn.api.wissen.WissenItemUtil;
 import mod.maxbogomol.wizards_reborn.common.entity.SpellProjectileEntity;
 import mod.maxbogomol.wizards_reborn.common.item.equipment.arcane.ArcaneArmorItem;
 import mod.maxbogomol.wizards_reborn.common.network.PacketHandler;
 import mod.maxbogomol.wizards_reborn.common.network.spell.WaterRaySpellEffectPacket;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
-import net.minecraft.util.Mth;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.player.Player;
@@ -41,9 +40,9 @@ public class WaterRaySpell extends RaySpell {
         if (player != null) {
             if (target.tickCount % 10 == 0) {
                 ItemStack stack = player.getItemInHand(player.getUsedItemHand());
-                if (WissenItemUtils.canRemoveWissen(stack, getWissenCostWithStat(projectile.getStats(), player))) {
+                if (WissenItemUtil.canRemoveWissen(stack, getWissenCostWithStat(projectile.getStats(), player))) {
                     removeWissen(stack, projectile.getStats(), player);
-                    int focusLevel = CrystalUtils.getStatLevel(projectile.getStats(), WizardsReborn.FOCUS_CRYSTAL_STAT);
+                    int focusLevel = CrystalUtil.getStatLevel(projectile.getStats(), WizardsReborn.FOCUS_CRYSTAL_STAT);
                     float magicModifier = ArcaneArmorItem.getPlayerMagicModifier(player);
                     float damage = (float) (1.0f + (focusLevel * 0.5)) + magicModifier;
 
@@ -67,7 +66,7 @@ public class WaterRaySpell extends RaySpell {
                 Vec3 vec = getBlockHitOffset(ray, projectile, -0.1f);
                 BlockPos blockPos = BlockPos.containing(vec.x(), vec.y(), vec.z());
 
-                int focusLevel = CrystalUtils.getStatLevel(projectile.getStats(), WizardsReborn.FOCUS_CRYSTAL_STAT);
+                int focusLevel = CrystalUtil.getStatLevel(projectile.getStats(), WizardsReborn.FOCUS_CRYSTAL_STAT);
                 int radius = focusLevel + 1;
 
                 Color color = getColor();
@@ -80,7 +79,7 @@ public class WaterRaySpell extends RaySpell {
                 for (int x = -radius; x <= radius; x++) {
                     for (int y = -radius; y <= radius; y++) {
                         for (int z = -radius; z <= radius; z++) {
-                            if (WissenItemUtils.canRemoveWissen(stack, 5)) {
+                            if (WissenItemUtil.canRemoveWissen(stack, 5)) {
                                 BlockPos pos = blockPos.relative(Direction.Axis.X, x).relative(Direction.Axis.Y, y).relative(Direction.Axis.Z, z);
 
                                 BlockEvent.BreakEvent breakEv = new BlockEvent.BreakEvent(world, blockPos, world.getBlockState(pos), player);

@@ -3,10 +3,12 @@ package mod.maxbogomol.wizards_reborn.common.recipe;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
+import mod.maxbogomol.fluffy_fur.util.RecipeUtil;
 import mod.maxbogomol.wizards_reborn.WizardsReborn;
 import mod.maxbogomol.wizards_reborn.api.arcaneenchantment.ArcaneEnchantment;
+import mod.maxbogomol.wizards_reborn.api.arcaneenchantment.ArcaneEnchantmentUtil;
 import mod.maxbogomol.wizards_reborn.api.crystalritual.CrystalRitual;
-import mod.maxbogomol.wizards_reborn.utils.RecipeUtils;
+import mod.maxbogomol.wizards_reborn.api.crystalritual.CrystalRitualUtil;
 import net.minecraft.core.NonNullList;
 import net.minecraft.core.RegistryAccess;
 import net.minecraft.core.registries.BuiltInRegistries;
@@ -192,13 +194,13 @@ public class ArcaneIteratorRecipe implements Recipe<Container> {
                 output = ShapedRecipe.itemStackFromJson(GsonHelper.getAsJsonObject(json, "output"));
             }
             if (json.has("enchantment")) {
-                enchantment = RecipeUtils.deserializeEnchantment(GsonHelper.getAsJsonObject(json, "enchantment"));
+                enchantment = RecipeUtil.deserializeEnchantment(GsonHelper.getAsJsonObject(json, "enchantment"));
             }
             if (json.has("arcane_enchantment")) {
-                arcaneEnchantment = RecipeUtils.deserializeArcaneEnchantment(GsonHelper.getAsJsonObject(json, "arcane_enchantment"));
+                arcaneEnchantment = ArcaneEnchantmentUtil.deserializeArcaneEnchantment(GsonHelper.getAsJsonObject(json, "arcane_enchantment"));
             }
             if (json.has("crystal_ritual")) {
-                crystalRitual = RecipeUtils.deserializeCrystalRitual(GsonHelper.getAsJsonObject(json, "crystal_ritual"));
+                crystalRitual = CrystalRitualUtil.deserializeCrystalRitual(GsonHelper.getAsJsonObject(json, "crystal_ritual"));
             }
 
             if (json.has("health")) {
@@ -230,9 +232,9 @@ public class ArcaneIteratorRecipe implements Recipe<Container> {
                 inputs.add(Ingredient.fromNetwork(buffer));
             }
             ItemStack output = buffer.readItem();
-            Enchantment enchantment = RecipeUtils.enchantmentFromNetwork(buffer);
-            ArcaneEnchantment arcaneEnchantment = RecipeUtils.arcaneEnchantmentFromNetwork(buffer);
-            CrystalRitual crystalRitual = RecipeUtils.crystalRitualFromNetwork(buffer);
+            Enchantment enchantment = RecipeUtil.enchantmentFromNetwork(buffer);
+            ArcaneEnchantment arcaneEnchantment = ArcaneEnchantmentUtil.arcaneEnchantmentFromNetwork(buffer);
+            CrystalRitual crystalRitual = CrystalRitualUtil.crystalRitualFromNetwork(buffer);
             int wissen = buffer.readInt();
             int health = buffer.readInt();
             int experience = buffer.readInt();
@@ -247,9 +249,9 @@ public class ArcaneIteratorRecipe implements Recipe<Container> {
                 input.toNetwork(buffer);
             }
             buffer.writeItemStack(recipe.getResultItem(RegistryAccess.EMPTY), false);
-            RecipeUtils.enchantmentToNetwork(recipe.getRecipeEnchantment(), buffer);
-            RecipeUtils.arcaneEnchantmentToNetwork(recipe.getRecipeArcaneEnchantment(), buffer);
-            RecipeUtils.crystalRitualToNetwork(recipe.getRecipeCrystalRitual(), buffer);
+            RecipeUtil.enchantmentToNetwork(recipe.getRecipeEnchantment(), buffer);
+            ArcaneEnchantmentUtil.arcaneEnchantmentToNetwork(recipe.getRecipeArcaneEnchantment(), buffer);
+            CrystalRitualUtil.crystalRitualToNetwork(recipe.getRecipeCrystalRitual(), buffer);
             buffer.writeInt(recipe.getRecipeWissen());
             buffer.writeInt(recipe.getRecipeHealth());
             buffer.writeInt(recipe.getRecipeExperience());

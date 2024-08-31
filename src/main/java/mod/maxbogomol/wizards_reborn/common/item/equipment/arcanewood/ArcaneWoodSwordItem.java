@@ -2,7 +2,7 @@ package mod.maxbogomol.wizards_reborn.common.item.equipment.arcanewood;
 
 import mod.maxbogomol.wizards_reborn.WizardsReborn;
 import mod.maxbogomol.wizards_reborn.api.arcaneenchantment.ArcaneEnchantmentType;
-import mod.maxbogomol.wizards_reborn.api.arcaneenchantment.ArcaneEnchantmentUtils;
+import mod.maxbogomol.wizards_reborn.api.arcaneenchantment.ArcaneEnchantmentUtil;
 import mod.maxbogomol.wizards_reborn.common.item.equipment.arcane.ArcaneSwordItem;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundSource;
@@ -36,7 +36,7 @@ public class ArcaneWoodSwordItem extends ArcaneSwordItem {
     }
 
     public int getLifeRoots(ItemStack stack) {
-        return ArcaneEnchantmentUtils.getArcaneEnchantment(stack, WizardsReborn.LIFE_ROOTS_ARCANE_ENCHANTMENT);
+        return ArcaneEnchantmentUtil.getArcaneEnchantment(stack, WizardsReborn.LIFE_ROOTS_ARCANE_ENCHANTMENT);
     }
 
     public SoundEvent getRepairSound(ItemStack stack, Level world, Entity entity) {

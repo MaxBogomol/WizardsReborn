@@ -15,7 +15,7 @@ import mod.maxbogomol.wizards_reborn.common.network.AddScreenshakePacket;
 import mod.maxbogomol.wizards_reborn.common.network.PacketHandler;
 import mod.maxbogomol.wizards_reborn.common.network.spell.StrikeSpellEffectPacket;
 import mod.maxbogomol.wizards_reborn.common.spell.look.block.BlockLookSpell;
-import mod.maxbogomol.wizards_reborn.utils.RenderUtils;
+import mod.maxbogomol.wizards_reborn.util.RenderUtils;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;

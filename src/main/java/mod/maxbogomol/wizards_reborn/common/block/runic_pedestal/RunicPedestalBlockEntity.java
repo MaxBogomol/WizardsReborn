@@ -4,7 +4,7 @@ import mod.maxbogomol.fluffy_fur.common.block.entity.BlockSimpleInventory;
 import mod.maxbogomol.fluffy_fur.common.block.entity.TickableBlockEntity;
 import mod.maxbogomol.wizards_reborn.WizardsReborn;
 import mod.maxbogomol.wizards_reborn.api.crystalritual.CrystalRitual;
-import mod.maxbogomol.wizards_reborn.api.crystalritual.CrystalRitualUtils;
+import mod.maxbogomol.wizards_reborn.api.crystalritual.CrystalRitualUtil;
 import mod.maxbogomol.wizards_reborn.common.item.equipment.RunicWisestonePlateItem;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -128,7 +128,7 @@ public class RunicPedestalBlockEntity extends BlockSimpleInventory implements Ti
 
     public CrystalRitual getCrystalRitual() {
         if (hasRunicPlate()) {
-            return CrystalRitualUtils.getCrystalRitual(itemHandler.getStackInSlot(0));
+            return CrystalRitualUtil.getCrystalRitual(itemHandler.getStackInSlot(0));
         }
         return null;
     }

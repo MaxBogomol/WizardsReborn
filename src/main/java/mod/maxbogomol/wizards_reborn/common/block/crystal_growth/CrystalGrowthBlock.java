@@ -6,7 +6,7 @@ import mod.maxbogomol.fluffy_fur.client.particle.data.ColorParticleData;
 import mod.maxbogomol.fluffy_fur.client.particle.data.GenericParticleData;
 import mod.maxbogomol.fluffy_fur.common.block.entity.TickableBlockEntity;
 import mod.maxbogomol.wizards_reborn.api.crystal.CrystalType;
-import mod.maxbogomol.wizards_reborn.api.crystal.CrystalUtils;
+import mod.maxbogomol.wizards_reborn.api.crystal.CrystalUtil;
 import mod.maxbogomol.wizards_reborn.api.crystalritual.IGrowableCrystal;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -253,13 +253,13 @@ public class CrystalGrowthBlock extends Block implements EntityBlock, SimpleWate
         if (state.getBlock() != newState.getBlock()) {
             if (random.nextFloat() < getAge(state) * 0.05) {
                 ItemStack crystalItem = type.getFracturedCrystal();
-                CrystalUtils.createCrystalItemStats(crystalItem, type, world, 6);
+                CrystalUtil.createCrystalItemStats(crystalItem, type, world, 6);
                 Containers.dropItemStack(world, pos.getX(), pos.getY(), pos.getZ(), crystalItem);
             }
 
             if (getAge(state) == getMaxAge()) {
                 ItemStack crystalItem = type.getCrystal();
-                CrystalUtils.createCrystalItemStats(crystalItem, type, world, 6);
+                CrystalUtil.createCrystalItemStats(crystalItem, type, world, 6);
                 Containers.dropItemStack(world, pos.getX(), pos.getY(), pos.getZ(), crystalItem);
             }
             super.onRemove(state, world, pos, newState, isMoving);

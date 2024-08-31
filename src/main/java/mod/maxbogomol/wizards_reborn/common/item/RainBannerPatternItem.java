@@ -1,6 +1,6 @@
 package mod.maxbogomol.wizards_reborn.common.item;
 
-import mod.maxbogomol.fluffy_fur.utils.ColorUtils;
+import mod.maxbogomol.fluffy_fur.util.ColorUtil;
 import net.minecraft.ChatFormatting;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.Style;
@@ -46,7 +46,7 @@ public class RainBannerPatternItem extends BannerPatternItem {
         int g = color.getGreen();
         int b = color.getBlue();
 
-        list.add(Component.empty().append(getLore(type)).withStyle(ChatFormatting.ITALIC).withStyle(Style.EMPTY.withColor(ColorUtils.packColor(255, r, g, b))));
+        list.add(Component.empty().append(getLore(type)).withStyle(ChatFormatting.ITALIC).withStyle(Style.EMPTY.withColor(ColorUtil.packColor(255, r, g, b))));
     }
 
     public static Color getColor(Types type) {

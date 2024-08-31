@@ -8,7 +8,7 @@ import mod.maxbogomol.wizards_reborn.WizardsReborn;
 import mod.maxbogomol.wizards_reborn.WizardsRebornClient;
 import mod.maxbogomol.wizards_reborn.api.crystal.CrystalType;
 import mod.maxbogomol.wizards_reborn.api.crystal.Crystals;
-import mod.maxbogomol.wizards_reborn.api.knowledge.KnowledgeUtils;
+import mod.maxbogomol.wizards_reborn.api.knowledge.KnowledgeUtil;
 import mod.maxbogomol.wizards_reborn.api.spell.Spell;
 import mod.maxbogomol.wizards_reborn.api.spell.Spells;
 import mod.maxbogomol.wizards_reborn.client.event.ClientTickHandler;
@@ -16,7 +16,7 @@ import mod.maxbogomol.wizards_reborn.common.item.CrystalItem;
 import mod.maxbogomol.wizards_reborn.common.item.equipment.ArcaneWandItem;
 import mod.maxbogomol.wizards_reborn.common.item.equipment.curio.CrystalBagItem;
 import mod.maxbogomol.wizards_reborn.common.network.*;
-import mod.maxbogomol.wizards_reborn.utils.RenderUtils;
+import mod.maxbogomol.wizards_reborn.util.RenderUtils;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.screens.Screen;
@@ -163,7 +163,7 @@ public class ArcaneWandScreen extends Screen {
                     }
                 }
                 if (selectedSpell != null) {
-                    if (KnowledgeUtils.isSpell(Minecraft.getInstance().player, selectedSpell)) {
+                    if (KnowledgeUtil.isSpell(Minecraft.getInstance().player, selectedSpell)) {
                         if (!isSpellSet) {
                             hover = false;
 
@@ -181,7 +181,7 @@ public class ArcaneWandScreen extends Screen {
                             hoveramount = 0;
                             mode = Mode.SPELL_SET;
                             isSpellSet = false;
-                            int currentSpellSet = KnowledgeUtils.getCurrentSpellSet(minecraft.player);
+                            int currentSpellSet = KnowledgeUtil.getCurrentSpellSet(minecraft.player);
                             PacketHandler.sendToServer(new SetSpellInSetPacket(selectedSpell.getId(), currentSpellSet, idSpellSet));
                             Minecraft.getInstance().player.playNotifySound(WizardsReborn.CRYSTAL_RESONATE_SOUND.get(), SoundSource.NEUTRAL, 1.0f, 1.5f);
                             return true;
@@ -206,15 +206,15 @@ public class ArcaneWandScreen extends Screen {
 
         if (mode == Mode.SPELL_SET) {
             int choosed = getSelectedSpell(mouseX, mouseY);
-            int currentSpellSet = KnowledgeUtils.getCurrentSpellSet(minecraft.player);
+            int currentSpellSet = KnowledgeUtil.getCurrentSpellSet(minecraft.player);
             if (button == GLFW.GLFW_MOUSE_BUTTON_RIGHT) {
                 PacketHandler.sendToServer(new SetSpellInSetPacket("", currentSpellSet, choosed));
                 return true;
             } else {
-                selectedSpell = KnowledgeUtils.getSpellFromSet(minecraft.player, currentSpellSet, choosed);
+                selectedSpell = KnowledgeUtil.getSpellFromSet(minecraft.player, currentSpellSet, choosed);
 
                 if (selectedSpell != null) {
-                    if (KnowledgeUtils.isSpell(Minecraft.getInstance().player, selectedSpell)) {
+                    if (KnowledgeUtil.isSpell(Minecraft.getInstance().player, selectedSpell)) {
                         hover = false;
 
                         if (!main.isEmpty() && main.getItem() instanceof ArcaneWandItem) {
@@ -275,7 +275,7 @@ public class ArcaneWandScreen extends Screen {
             int y = height / 2;
 
             int choosedRay = getSelectedMode(mouseX, mouseY, 45);
-            int currentSpellSet = KnowledgeUtils.getCurrentSpellSet(minecraft.player);
+            int currentSpellSet = KnowledgeUtil.getCurrentSpellSet(minecraft.player);
             for (int i = 0; i < 4; i++) {
                 double dst = Math.toRadians((i * 90) + 90);
                 int X = (int) (Math.cos(dst) * (100 * Math.sin(Math.toRadians(90 * hoveramount))));
@@ -304,7 +304,7 @@ public class ArcaneWandScreen extends Screen {
                         if (nbt.contains("spell")) {
                             if (nbt.getString("spell") != "") {
                                 Spell spell = Spells.getSpell(nbt.getString("spell"));
-                                if (KnowledgeUtils.isSpell(Minecraft.getInstance().player, spell)) {
+                                if (KnowledgeUtil.isSpell(Minecraft.getInstance().player, spell)) {
                                     r = spell.getColor().getRed() / 255f;
                                     g = spell.getColor().getGreen() / 255f;
                                     b = spell.getColor().getBlue() / 255f;
@@ -319,7 +319,7 @@ public class ArcaneWandScreen extends Screen {
 
                 if (i == 2) {
                     Spell spell = null;
-                    ArrayList<ArrayList<Spell>> set = KnowledgeUtils.getSpellSets(minecraft.player);
+                    ArrayList<ArrayList<Spell>> set = KnowledgeUtil.getSpellSets(minecraft.player);
                     for (int ii = 0; ii < 10; ii++) {
                         for (int iii = 0; iii < 10; iii++) {
                             if (set.get(ii).get(iii) != null) {
@@ -339,7 +339,7 @@ public class ArcaneWandScreen extends Screen {
 
                 if (i == 0) {
                     Spell spell = null;
-                    ArrayList<Spell> set = KnowledgeUtils.getSpellSet(minecraft.player, currentSpellSet);
+                    ArrayList<Spell> set = KnowledgeUtil.getSpellSet(minecraft.player, currentSpellSet);
                     for (int ii = 0; ii < 10; ii++) {
                         if (set.get(ii) != null) {
                             spell = set.get(ii);
@@ -543,7 +543,7 @@ public class ArcaneWandScreen extends Screen {
                             f = 2;
                         }
                     }
-                    boolean isKnow = (KnowledgeUtils.isSpell(Minecraft.getInstance().player, spell));
+                    boolean isKnow = (KnowledgeUtil.isSpell(Minecraft.getInstance().player, spell));
 
                     if (mouseX >= x - 64 && mouseY >= y - h + (i * 34) + 2 && mouseX <= x - 64 + 128 && mouseY <= y - h + (i * 34) + 32 - 2) {
                         w = 16;
@@ -677,7 +677,7 @@ public class ArcaneWandScreen extends Screen {
                     gui.renderTooltip(Minecraft.getInstance().font, wandCrystal, mouseX, mouseY);
                 }
                 if (spellWand != null) {
-                    if ((KnowledgeUtils.isSpell(Minecraft.getInstance().player, spellWand))) {
+                    if ((KnowledgeUtil.isSpell(Minecraft.getInstance().player, spellWand))) {
                         gui.blit(spellWand.getIcon(), mouseX + 9, mouseY - 68, 0, 0, 32, 32, 32, 32);
                         gui.renderTooltip(Minecraft.getInstance().font, Component.translatable(spellWand.getTranslatedName()), mouseX, mouseY - 18);
                     } else {
@@ -696,7 +696,7 @@ public class ArcaneWandScreen extends Screen {
             int y = height / 2;
 
             int choosedRay = getSelectedSpell(mouseX, mouseY);
-            int currentSpellSet = KnowledgeUtils.getCurrentSpellSet(minecraft.player);
+            int currentSpellSet = KnowledgeUtil.getCurrentSpellSet(minecraft.player);
             for (int i = 0; i < 10; i++) {
                 double dst = Math.toRadians((i * 36) + 18 - 108);
                 int X = (int) (Math.cos(dst) * (100 * Math.sin(Math.toRadians(90 * hoveramount))));
@@ -709,7 +709,7 @@ public class ArcaneWandScreen extends Screen {
 
                 ResourceLocation resource = new ResourceLocation(WizardsReborn.MOD_ID, "textures/gui/arcanemicon/research.png");
                 Spell spell = null;
-                ArrayList<Spell> set = KnowledgeUtils.getSpellSet(minecraft.player, i);
+                ArrayList<Spell> set = KnowledgeUtil.getSpellSet(minecraft.player, i);
                 for (int ii = 0; ii < 10; ii++) {
                     if (set.get(ii) != null) {
                         spell = set.get(ii);
@@ -717,7 +717,7 @@ public class ArcaneWandScreen extends Screen {
                     }
                 }
                 if (spell != null) {
-                    if (!KnowledgeUtils.isSpell(minecraft.player, spell)) {
+                    if (!KnowledgeUtil.isSpell(minecraft.player, spell)) {
                         resource = new ResourceLocation(WizardsReborn.MOD_ID, "textures/gui/arcanemicon/unknown.png");
                     } else {
                         resource = spell.getIcon();
@@ -737,7 +737,7 @@ public class ArcaneWandScreen extends Screen {
             }
 
             boolean empty = true;
-            ArrayList<Spell> set = KnowledgeUtils.getSpellSet(minecraft.player, choosedRay);
+            ArrayList<Spell> set = KnowledgeUtil.getSpellSet(minecraft.player, choosedRay);
             for (int ii = 0; ii < 10; ii++) {
                 if (set.get(ii) != null) {
                     empty = false;
@@ -756,7 +756,7 @@ public class ArcaneWandScreen extends Screen {
             int y = height / 2;
 
             int choosedRay = getSelectedSpell(mouseX, mouseY);
-            int currentSpellSet = KnowledgeUtils.getCurrentSpellSet(minecraft.player);
+            int currentSpellSet = KnowledgeUtil.getCurrentSpellSet(minecraft.player);
             for (int i = 0; i < 10; i++) {
                 double dst = Math.toRadians((i * 36) + 18 - 108);
                 int X = (int) (Math.cos(dst) * (100 * Math.sin(Math.toRadians(90 * hoveramount))));
@@ -778,9 +778,9 @@ public class ArcaneWandScreen extends Screen {
                 }
 
                 ResourceLocation resource = new ResourceLocation(WizardsReborn.MOD_ID, "textures/gui/arcanemicon/research.png");
-                Spell spell = KnowledgeUtils.getSpellFromSet(minecraft.player, currentSpellSet, i);
+                Spell spell = KnowledgeUtil.getSpellFromSet(minecraft.player, currentSpellSet, i);
                 if (spell != null) {
-                    if (!KnowledgeUtils.isSpell(minecraft.player, spell)) {
+                    if (!KnowledgeUtil.isSpell(minecraft.player, spell)) {
                         resource = new ResourceLocation(WizardsReborn.MOD_ID, "textures/gui/arcanemicon/unknown.png");
                     } else {
                         resource = spell.getIcon();
@@ -793,7 +793,7 @@ public class ArcaneWandScreen extends Screen {
                 }
 
                 renderRays(r, g, b, gui, partialTicks, i, 36, -108, i == choosedRay, standard);
-                if (!(KnowledgeUtils.isSpell(Minecraft.getInstance().player, spell)) && spell != null) {
+                if (!(KnowledgeUtil.isSpell(Minecraft.getInstance().player, spell)) && spell != null) {
                     resource = new ResourceLocation(WizardsReborn.MOD_ID, "textures/gui/arcanemicon/unknown.png");
                 }
 
@@ -805,10 +805,10 @@ public class ArcaneWandScreen extends Screen {
             }
 
             for (int i = 0; i < 10; i++) {
-                Spell spell = KnowledgeUtils.getSpellFromSet(minecraft.player, currentSpellSet, i);
+                Spell spell = KnowledgeUtil.getSpellFromSet(minecraft.player, currentSpellSet, i);
 
                 if (spell != null && i == choosedRay) {
-                    if ((KnowledgeUtils.isSpell(Minecraft.getInstance().player, spell))) {
+                    if ((KnowledgeUtil.isSpell(Minecraft.getInstance().player, spell))) {
                         gui.renderTooltip(Minecraft.getInstance().font, Component.translatable(spell.getTranslatedName()), mouseX, mouseY);
                     } else {
                         gui.renderTooltip(Minecraft.getInstance().font, Component.translatable("wizards_reborn.arcanemicon.unknown"), mouseX, mouseY);
@@ -1081,7 +1081,7 @@ public class ArcaneWandScreen extends Screen {
         for (Spell spell : Spells.getSpells()) {
             for (CrystalType type : spell.getCrystalTypes()) {
                 boolean add = true;
-                if (spell.isSecret()) add = (KnowledgeUtils.isSpell(Minecraft.getInstance().player, spell));
+                if (spell.isSecret()) add = (KnowledgeUtil.isSpell(Minecraft.getInstance().player, spell));
                 if (add) spellsList.get(type).add(spell);
             }
         }

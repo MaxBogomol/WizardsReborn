@@ -5,7 +5,7 @@ import mod.maxbogomol.fluffy_fur.client.animation.ItemAnimation;
 import mod.maxbogomol.wizards_reborn.WizardsReborn;
 import mod.maxbogomol.wizards_reborn.api.arcaneenchantment.ArcaneEnchantment;
 import mod.maxbogomol.wizards_reborn.api.arcaneenchantment.ArcaneEnchantmentType;
-import mod.maxbogomol.wizards_reborn.api.arcaneenchantment.ArcaneEnchantmentUtils;
+import mod.maxbogomol.wizards_reborn.api.arcaneenchantment.ArcaneEnchantmentUtil;
 import mod.maxbogomol.wizards_reborn.api.arcaneenchantment.IArcaneItem;
 import mod.maxbogomol.wizards_reborn.api.wissen.WissenUtils;
 import mod.maxbogomol.wizards_reborn.client.animation.ScytheThrowItemAnimation;
@@ -50,8 +50,8 @@ public class ThrowArcaneEnchantment extends ArcaneEnchantment {
     public static void onUseTick(Level level, LivingEntity livingEntity, ItemStack stack, int remainingUseDuration) {
         if (!level.isClientSide()) {
             if (livingEntity instanceof Player player) {
-                if (ArcaneEnchantmentUtils.isArcaneItem(stack)) {
-                    if (ArcaneEnchantmentUtils.getArcaneEnchantment(stack, WizardsReborn.THROW_ARCANE_ENCHANTMENT) > 0) {
+                if (ArcaneEnchantmentUtil.isArcaneItem(stack)) {
+                    if (ArcaneEnchantmentUtil.getArcaneEnchantment(stack, WizardsReborn.THROW_ARCANE_ENCHANTMENT) > 0) {
                         float costModifier = WissenUtils.getWissenCostModifierWithDiscount(player);
                         List<ItemStack> items = WissenUtils.getWissenItemsNoneAndStorage(WissenUtils.getWissenItemsCurios(player));
                         int wissen = WissenUtils.getWissenInItems(items);
@@ -77,7 +77,7 @@ public class ThrowArcaneEnchantment extends ArcaneEnchantment {
 
                             baseDamage = baseDamage + EnchantmentHelper.getDamageBonus(stack, MobType.UNDEFINED);
 
-                            int bladeLevel = ArcaneEnchantmentUtils.getArcaneEnchantment(stack, WizardsReborn.MAGIC_BLADE_ARCANE_ENCHANTMENT);
+                            int bladeLevel = ArcaneEnchantmentUtil.getArcaneEnchantment(stack, WizardsReborn.MAGIC_BLADE_ARCANE_ENCHANTMENT);
                             if (bladeLevel > 0) {
                                 int additionalCost = (int) ((5 * bladeLevel) * (1 - costModifier));
                                 if (WissenUtils.canRemoveWissen(wissen, cost + additionalCost)) {

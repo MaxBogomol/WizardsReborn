@@ -1,7 +1,7 @@
 package mod.maxbogomol.wizards_reborn.common.spell.look.strike;
 
 import mod.maxbogomol.wizards_reborn.WizardsReborn;
-import mod.maxbogomol.wizards_reborn.api.crystal.CrystalUtils;
+import mod.maxbogomol.wizards_reborn.api.crystal.CrystalUtil;
 import mod.maxbogomol.wizards_reborn.common.damage.DamageSourceRegistry;
 import mod.maxbogomol.wizards_reborn.common.entity.SpellProjectileEntity;
 import mod.maxbogomol.wizards_reborn.common.item.equipment.arcane.ArcaneArmorItem;
@@ -42,7 +42,7 @@ public class IncinerationSpell extends StrikeSpell {
 
     @Override
     public void strikeDamage(SpellProjectileEntity entity, Player player) {
-        int focusLevel = CrystalUtils.getStatLevel(entity.getStats(), WizardsReborn.FOCUS_CRYSTAL_STAT);
+        int focusLevel = CrystalUtil.getStatLevel(entity.getStats(), WizardsReborn.FOCUS_CRYSTAL_STAT);
         float magicModifier = ArcaneArmorItem.getPlayerMagicModifier(player);
         float distance = (0.75f + ((focusLevel + magicModifier) * 0.25f));
         float damage = (10 + ((focusLevel + magicModifier) * 5f));

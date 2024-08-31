@@ -4,7 +4,7 @@ import mod.maxbogomol.fluffy_fur.common.item.ICustomBlockEntityDataItem;
 import mod.maxbogomol.wizards_reborn.api.alchemy.ISteamItem;
 import mod.maxbogomol.wizards_reborn.api.alchemy.ISteamBlockEntity;
 import mod.maxbogomol.wizards_reborn.client.config.ClientConfig;
-import mod.maxbogomol.wizards_reborn.utils.NumericalUtils;
+import mod.maxbogomol.wizards_reborn.util.NumericalUtil;
 import net.minecraft.ChatFormatting;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
@@ -54,7 +54,7 @@ public class SteamStorageBaseItem extends BlockItem implements ISteamItem, ICust
         if (ClientConfig.NUMERICAL_STEAM.get()) {
             CompoundTag nbt = stack.getTag();
             if (nbt != null && nbt.contains("steam")) {
-                list.add(NumericalUtils.getSteamName(nbt.getInt("steam"), getMaxSteam()).copy().withStyle(ChatFormatting.GRAY));
+                list.add(NumericalUtil.getSteamName(nbt.getInt("steam"), getMaxSteam()).copy().withStyle(ChatFormatting.GRAY));
             }
         }
     }

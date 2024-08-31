@@ -5,11 +5,11 @@ import com.mojang.math.Axis;
 import mod.maxbogomol.fluffy_fur.client.render.LevelRenderHandler;
 import mod.maxbogomol.wizards_reborn.WizardsRebornClient;
 import mod.maxbogomol.wizards_reborn.api.light.ILightBlockEntity;
-import mod.maxbogomol.wizards_reborn.api.light.LightUtils;
+import mod.maxbogomol.wizards_reborn.api.light.LightUtil;
 import mod.maxbogomol.wizards_reborn.api.wissen.WissenUtils;
 import mod.maxbogomol.wizards_reborn.client.event.ClientTickHandler;
 import mod.maxbogomol.wizards_reborn.common.block.light_transfer_lens.LightTransferLensBlockEntity;
-import mod.maxbogomol.wizards_reborn.utils.RenderUtils;
+import mod.maxbogomol.wizards_reborn.util.RenderUtils;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.blockentity.BlockEntityRenderer;
 import net.minecraft.core.BlockPos;
@@ -46,13 +46,13 @@ public class LightTransferLensRenderer implements BlockEntityRenderer<LightTrans
         if (lens.isToBlock && lens.canWork() && lens.getLight() > 0) {
             BlockPos pos = new BlockPos(lens.blockToX, lens.blockToY, lens.blockToZ);
             if (lens.getLevel().getBlockEntity(pos) instanceof ILightBlockEntity lightTile) {
-                Vec3 from = LightUtils.getLightLensPos(lens.getBlockPos(), lens.getLightLensPos());
-                Vec3 to = LightUtils.getLightLensPos(pos, lightTile.getLightLensPos());
+                Vec3 from = LightUtil.getLightLensPos(lens.getBlockPos(), lens.getLightLensPos());
+                Vec3 to = LightUtil.getLightLensPos(pos, lightTile.getLightLensPos());
 
                 ms.pushPose();
                 ms.translate(0.5F, 0.5F, 0.5F);
-                Color color = LightUtils.getRayColorFromLumos(lens.getColor(), lens.getLumos(), lens.getBlockPos(), partialTicks);
-                LightUtils.renderLightRay(lens.getLevel(), lens.getBlockPos(), from, to, 25f, color, partialTicks, ms);
+                Color color = LightUtil.getRayColorFromLumos(lens.getColor(), lens.getLumos(), lens.getBlockPos(), partialTicks);
+                LightUtil.renderLightRay(lens.getLevel(), lens.getBlockPos(), from, to, 25f, color, partialTicks, ms);
                 ms.popPose();
             }
         }
@@ -64,7 +64,7 @@ public class LightTransferLensRenderer implements BlockEntityRenderer<LightTrans
                 ms.translate(lensPos.x(), lensPos.y(), lensPos.z());
                 BlockPos pos = new BlockPos(lens.blockToX, lens.blockToY, lens.blockToZ);
                 if (lens.getLevel().getBlockEntity(pos) instanceof ILightBlockEntity lightTile) {
-                    RenderUtils.renderConnectLine(LightUtils.getLightLensPos(lens.getBlockPos(), lens.getLightLensPos()), LightUtils.getLightLensPos(pos, lightTile.getLightLensPos()), RenderUtils.colorConnectTo, partialTicks, ms);
+                    RenderUtils.renderConnectLine(LightUtil.getLightLensPos(lens.getBlockPos(), lens.getLightLensPos()), LightUtil.getLightLensPos(pos, lightTile.getLightLensPos()), RenderUtils.colorConnectTo, partialTicks, ms);
                 }
                 ms.popPose();
             }

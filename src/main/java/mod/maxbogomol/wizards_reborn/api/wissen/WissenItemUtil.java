@@ -3,7 +3,7 @@ package mod.maxbogomol.wizards_reborn.api.wissen;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.nbt.CompoundTag;
 
-public class WissenItemUtils {
+public class WissenItemUtil {
     public static int getWissen(ItemStack stack) {
         CompoundTag nbt = stack.getTag();
         if (!containsWissen(stack)) return 0;

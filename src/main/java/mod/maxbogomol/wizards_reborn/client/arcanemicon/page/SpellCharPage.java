@@ -1,7 +1,7 @@
 package mod.maxbogomol.wizards_reborn.client.arcanemicon.page;
 
 import mod.maxbogomol.wizards_reborn.WizardsReborn;
-import mod.maxbogomol.wizards_reborn.api.knowledge.KnowledgeUtils;
+import mod.maxbogomol.wizards_reborn.api.knowledge.KnowledgeUtil;
 import mod.maxbogomol.wizards_reborn.api.spell.Spell;
 import mod.maxbogomol.wizards_reborn.client.arcanemicon.ArcanemiconChapters;
 import mod.maxbogomol.wizards_reborn.client.arcanemicon.ArcanemiconGui;
@@ -30,8 +30,8 @@ public class SpellCharPage extends Page {
 
     @OnlyIn(Dist.CLIENT)
     public boolean click(ArcanemiconGui book, int x, int y, int mouseX, int mouseY) {
-        if (!KnowledgeUtils.isSpell(Minecraft.getInstance().player, spell)) {
-            int points = KnowledgeUtils.getKnowledgePoints(Minecraft.getInstance().player) - KnowledgeUtils.getSpellPoints(Minecraft.getInstance().player);
+        if (!KnowledgeUtil.isSpell(Minecraft.getInstance().player, spell)) {
+            int points = KnowledgeUtil.getKnowledgePoints(Minecraft.getInstance().player) - KnowledgeUtil.getSpellPoints(Minecraft.getInstance().player);
             if (points < 0) {
                 points = 0;
             }
@@ -56,8 +56,8 @@ public class SpellCharPage extends Page {
     public void render(ArcanemiconGui book, GuiGraphics gui, int x, int y, int mouseX, int mouseY) {
         if (I18n.exists(text)) drawWrappingText(book, gui, I18n.get(text), x + 4, y + 4, 124);
 
-        if (!KnowledgeUtils.isSpell(Minecraft.getInstance().player, spell)) {
-            int points = KnowledgeUtils.getKnowledgePoints(Minecraft.getInstance().player) - KnowledgeUtils.getSpellPoints(Minecraft.getInstance().player);
+        if (!KnowledgeUtil.isSpell(Minecraft.getInstance().player, spell)) {
+            int points = KnowledgeUtil.getKnowledgePoints(Minecraft.getInstance().player) - KnowledgeUtil.getSpellPoints(Minecraft.getInstance().player);
             if (points < 0) {
                 points = 0;
             }

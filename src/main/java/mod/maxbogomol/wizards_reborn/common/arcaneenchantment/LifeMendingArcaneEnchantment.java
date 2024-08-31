@@ -3,7 +3,7 @@ package mod.maxbogomol.wizards_reborn.common.arcaneenchantment;
 import mod.maxbogomol.wizards_reborn.WizardsReborn;
 import mod.maxbogomol.wizards_reborn.api.arcaneenchantment.ArcaneEnchantment;
 import mod.maxbogomol.wizards_reborn.api.arcaneenchantment.ArcaneEnchantmentType;
-import mod.maxbogomol.wizards_reborn.api.arcaneenchantment.ArcaneEnchantmentUtils;
+import mod.maxbogomol.wizards_reborn.api.arcaneenchantment.ArcaneEnchantmentUtil;
 import mod.maxbogomol.wizards_reborn.api.arcaneenchantment.IArcaneItem;
 import mod.maxbogomol.wizards_reborn.common.damage.DamageSourceRegistry;
 import net.minecraft.world.damagesource.DamageSource;
@@ -29,7 +29,7 @@ public class LifeMendingArcaneEnchantment extends ArcaneEnchantment {
     @Override
     public boolean canEnchantItem(ItemStack stack) {
         if (stack.getItem() instanceof IArcaneItem item) {
-            if (ArcaneEnchantmentUtils.getArcaneEnchantment(stack, WizardsReborn.WISSEN_MENDING_ARCANE_ENCHANTMENT) > 0) return false;
+            if (ArcaneEnchantmentUtil.getArcaneEnchantment(stack, WizardsReborn.WISSEN_MENDING_ARCANE_ENCHANTMENT) > 0) return false;
             return item.getArcaneEnchantmentTypes().contains(ArcaneEnchantmentType.BREAKABLE);
         }
         return false;
@@ -43,7 +43,7 @@ public class LifeMendingArcaneEnchantment extends ArcaneEnchantment {
     public static void inventoryTick(ItemStack stack, Level world, Entity entity, int slot, boolean isSelected) {
         if (!world.isClientSide()) {
             if (entity instanceof Player player) {
-                int enchantmentLevel = ArcaneEnchantmentUtils.getArcaneEnchantment(stack, WizardsReborn.LIFE_MENDING_ARCANE_ENCHANTMENT);
+                int enchantmentLevel = ArcaneEnchantmentUtil.getArcaneEnchantment(stack, WizardsReborn.LIFE_MENDING_ARCANE_ENCHANTMENT);
 
                 if (enchantmentLevel > 0 && stack.getDamageValue() > 0) {
                     int tick = 100 - ((enchantmentLevel - 1) * 50);
@@ -68,7 +68,7 @@ public class LifeMendingArcaneEnchantment extends ArcaneEnchantment {
         if (!entity.level().isClientSide()) {
             if (amount > 0) {
                 if (entity instanceof Player player) {
-                    int enchantmentLevel = ArcaneEnchantmentUtils.getArcaneEnchantment(stack, WizardsReborn.LIFE_MENDING_ARCANE_ENCHANTMENT);
+                    int enchantmentLevel = ArcaneEnchantmentUtil.getArcaneEnchantment(stack, WizardsReborn.LIFE_MENDING_ARCANE_ENCHANTMENT);
 
                     if (enchantmentLevel >= 3) {
                         if (player.getHealth() > 0.25f) {

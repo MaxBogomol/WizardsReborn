@@ -4,7 +4,7 @@ import mod.maxbogomol.fluffy_fur.common.item.ICustomBlockEntityDataItem;
 import mod.maxbogomol.wizards_reborn.api.alchemy.IFluidItem;
 import mod.maxbogomol.wizards_reborn.api.alchemy.IFluidBlockEntity;
 import mod.maxbogomol.wizards_reborn.client.config.ClientConfig;
-import mod.maxbogomol.wizards_reborn.utils.NumericalUtils;
+import mod.maxbogomol.wizards_reborn.util.NumericalUtil;
 import net.minecraft.ChatFormatting;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
@@ -58,9 +58,9 @@ public class FluidStorageBaseItem extends BlockItem implements IFluidItem, ICust
                 CompoundTag nbt = stack.getOrCreateTag();
                 if (nbt.contains("fluidTank")) {
                     FluidStack fluid = FluidStack.loadFluidStackFromNBT(nbt.getCompound("fluidTank"));
-                    Component fluidName = NumericalUtils.getFluidName(fluid, fluidTile.getFluidMaxAmount());
+                    Component fluidName = NumericalUtil.getFluidName(fluid, fluidTile.getFluidMaxAmount());
                     if (!ClientConfig.NUMERICAL_FLUID.get()) {
-                        fluidName = NumericalUtils.getFluidName(fluid);
+                        fluidName = NumericalUtil.getFluidName(fluid);
                     }
                     list.add(Component.empty().append(fluidName).withStyle(ChatFormatting.GRAY));
                 }

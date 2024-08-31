@@ -8,7 +8,7 @@ import mod.maxbogomol.fluffy_fur.common.easing.Easing;
 import mod.maxbogomol.wizards_reborn.WizardsReborn;
 import mod.maxbogomol.wizards_reborn.api.arcaneenchantment.ArcaneEnchantment;
 import mod.maxbogomol.wizards_reborn.api.arcaneenchantment.ArcaneEnchantmentType;
-import mod.maxbogomol.wizards_reborn.api.arcaneenchantment.ArcaneEnchantmentUtils;
+import mod.maxbogomol.wizards_reborn.api.arcaneenchantment.ArcaneEnchantmentUtil;
 import mod.maxbogomol.wizards_reborn.api.arcaneenchantment.IArcaneItem;
 import mod.maxbogomol.wizards_reborn.api.wissen.WissenUtils;
 import mod.maxbogomol.wizards_reborn.common.capability.IArrowModifier;
@@ -62,8 +62,8 @@ public class WissenChargeArcaneEnchantment extends ArcaneEnchantment {
         if (level.isClientSide()) {
             if (livingEntity instanceof Player player) {
                 if (BowItem.getPowerForTime(stack.getUseDuration() - remainingUseDuration) >= 1f) {
-                    if (ArcaneEnchantmentUtils.isArcaneItem(stack)) {
-                        int enchantmentLevel = ArcaneEnchantmentUtils.getArcaneEnchantment(stack, WizardsReborn.WISSEN_CHARGE_ARCANE_ENCHANTMENT);
+                    if (ArcaneEnchantmentUtil.isArcaneItem(stack)) {
+                        int enchantmentLevel = ArcaneEnchantmentUtil.getArcaneEnchantment(stack, WizardsReborn.WISSEN_CHARGE_ARCANE_ENCHANTMENT);
 
                         if (enchantmentLevel > 0) {
                             Color color = WizardsReborn.WISSEN_CHARGE_ARCANE_ENCHANTMENT.getColor();
@@ -122,8 +122,8 @@ public class WissenChargeArcaneEnchantment extends ArcaneEnchantment {
     }
 
     public static void onBowShot(AbstractArrow abstractarrow, ItemStack stack, Level level, LivingEntity entityLiving, int timeLeft) {
-        if (entityLiving instanceof Player player && ArcaneEnchantmentUtils.isArcaneItem(stack)) {
-            int enchantmentLevel = ArcaneEnchantmentUtils.getArcaneEnchantment(stack, WizardsReborn.WISSEN_CHARGE_ARCANE_ENCHANTMENT);
+        if (entityLiving instanceof Player player && ArcaneEnchantmentUtil.isArcaneItem(stack)) {
+            int enchantmentLevel = ArcaneEnchantmentUtil.getArcaneEnchantment(stack, WizardsReborn.WISSEN_CHARGE_ARCANE_ENCHANTMENT);
             if (enchantmentLevel > 0) {
                 if (BowItem.getPowerForTime(stack.getUseDuration() - timeLeft) >= 1f) {
                     abstractarrow.getCapability(IArrowModifier.INSTANCE, null).ifPresent((w) -> {

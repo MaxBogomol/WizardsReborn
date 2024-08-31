@@ -4,9 +4,9 @@ import mod.maxbogomol.fluffy_fur.common.item.ICustomBlockEntityDataItem;
 import mod.maxbogomol.wizards_reborn.api.wissen.IWissenItem;
 import mod.maxbogomol.wizards_reborn.api.wissen.IWissenBlockEntity;
 import mod.maxbogomol.wizards_reborn.api.wissen.WissenItemType;
-import mod.maxbogomol.wizards_reborn.api.wissen.WissenItemUtils;
+import mod.maxbogomol.wizards_reborn.api.wissen.WissenItemUtil;
 import mod.maxbogomol.wizards_reborn.client.config.ClientConfig;
-import mod.maxbogomol.wizards_reborn.utils.NumericalUtils;
+import mod.maxbogomol.wizards_reborn.util.NumericalUtil;
 import net.minecraft.ChatFormatting;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
@@ -32,8 +32,8 @@ public class WissenStorageBaseItem extends BlockItem implements IWissenItem, ICu
     @Override
     public CompoundTag getCustomBlockEntityData(ItemStack stack, CompoundTag tileNbt) {
         if (!tileNbt.contains("wissen")) {
-            WissenItemUtils.existWissen(stack);
-            tileNbt.putInt("wissen", WissenItemUtils.getWissen(stack));
+            WissenItemUtil.existWissen(stack);
+            tileNbt.putInt("wissen", WissenItemUtil.getWissen(stack));
         }
 
         return tileNbt;
@@ -59,8 +59,8 @@ public class WissenStorageBaseItem extends BlockItem implements IWissenItem, ICu
     @Override
     public void appendHoverText(ItemStack stack, Level world, List<Component> list, TooltipFlag flags) {
         if (ClientConfig.NUMERICAL_WISSEN.get()) {
-            WissenItemUtils.existWissen(stack);
-            list.add(NumericalUtils.getWissenName(WissenItemUtils.getWissen(stack), getMaxWissen()).copy().withStyle(ChatFormatting.GRAY));
+            WissenItemUtil.existWissen(stack);
+            list.add(NumericalUtil.getWissenName(WissenItemUtil.getWissen(stack), getMaxWissen()).copy().withStyle(ChatFormatting.GRAY));
         }
     }
 }

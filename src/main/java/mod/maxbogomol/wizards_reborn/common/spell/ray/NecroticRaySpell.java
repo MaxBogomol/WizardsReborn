@@ -1,7 +1,7 @@
 package mod.maxbogomol.wizards_reborn.common.spell.ray;
 
 import mod.maxbogomol.wizards_reborn.WizardsReborn;
-import mod.maxbogomol.wizards_reborn.api.crystal.CrystalUtils;
+import mod.maxbogomol.wizards_reborn.api.crystal.CrystalUtil;
 import mod.maxbogomol.wizards_reborn.common.damage.DamageSourceRegistry;
 import mod.maxbogomol.wizards_reborn.common.entity.SpellProjectileEntity;
 import mod.maxbogomol.wizards_reborn.common.item.equipment.arcane.ArcaneArmorItem;
@@ -53,7 +53,7 @@ public class NecroticRaySpell extends RaySpell {
     public void onImpact(HitResult ray, Level world, SpellProjectileEntity projectile, Player player, Entity target) {
         super.onImpact(ray, world, projectile, player, target);
 
-        int focusLevel = CrystalUtils.getStatLevel(projectile.getStats(), WizardsReborn.FOCUS_CRYSTAL_STAT);
+        int focusLevel = CrystalUtil.getStatLevel(projectile.getStats(), WizardsReborn.FOCUS_CRYSTAL_STAT);
         float magicModifier = ArcaneArmorItem.getPlayerMagicModifier(player);
         float damage = (1f + ((focusLevel + magicModifier) * 0.5f));
         if (target.hurt(new DamageSource(DamageSourceRegistry.create(target.level(), DamageSourceRegistry.RITUAL).typeHolder(), projectile, player), damage)) {

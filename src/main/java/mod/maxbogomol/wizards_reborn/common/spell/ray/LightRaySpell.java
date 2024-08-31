@@ -5,7 +5,7 @@ import mod.maxbogomol.fluffy_fur.common.network.BlockEntityUpdate;
 import mod.maxbogomol.wizards_reborn.WizardsReborn;
 import mod.maxbogomol.wizards_reborn.api.light.ILightBlockEntity;
 import mod.maxbogomol.wizards_reborn.api.light.LightRayHitResult;
-import mod.maxbogomol.wizards_reborn.api.light.LightUtils;
+import mod.maxbogomol.wizards_reborn.api.light.LightUtil;
 import mod.maxbogomol.wizards_reborn.common.entity.SpellProjectileEntity;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.nbt.CompoundTag;
@@ -51,7 +51,7 @@ public class LightRaySpell extends RaySpell {
         Vec3 from = entity.position().add(offset).add(0, 0.2f, 0);
         Vec3 to = entity.getLookAngle().scale(getRayDistance() + 1).add(from);
 
-        LightRayHitResult hitResult = LightUtils.getLightRayHitResult(entity.level(), entity.getOnPos(), from, to, getRayDistance());
+        LightRayHitResult hitResult = LightUtil.getLightRayHitResult(entity.level(), entity.getOnPos(), from, to, getRayDistance());
         BlockEntity hitTile = hitResult.getTile();
         if (hitTile != null) {
             if (hitTile instanceof ILightBlockEntity toLight) {
@@ -89,7 +89,7 @@ public class LightRaySpell extends RaySpell {
         stack.translate(0, 0.2, 0);
         stack.translate(offset.x(), offset.y(), offset.z());
         stack.scale(width, width, width);
-        LightUtils.renderLightRay(entity.level(), entity.getOnPos(), entity.position().add(offset).add(0, 0.2f, 0), to, getRayDistance(), color, partialTicks, stack);
+        LightUtil.renderLightRay(entity.level(), entity.getOnPos(), entity.position().add(offset).add(0, 0.2f, 0), to, getRayDistance(), color, partialTicks, stack);
         stack.popPose();
     }
 }

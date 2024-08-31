@@ -3,7 +3,7 @@ package mod.maxbogomol.wizards_reborn.common.arcaneenchantment;
 import mod.maxbogomol.wizards_reborn.WizardsReborn;
 import mod.maxbogomol.wizards_reborn.api.arcaneenchantment.ArcaneEnchantment;
 import mod.maxbogomol.wizards_reborn.api.arcaneenchantment.ArcaneEnchantmentType;
-import mod.maxbogomol.wizards_reborn.api.arcaneenchantment.ArcaneEnchantmentUtils;
+import mod.maxbogomol.wizards_reborn.api.arcaneenchantment.ArcaneEnchantmentUtil;
 import mod.maxbogomol.wizards_reborn.api.arcaneenchantment.IArcaneItem;
 import mod.maxbogomol.wizards_reborn.api.wissen.WissenUtils;
 import mod.maxbogomol.wizards_reborn.common.damage.DamageSourceRegistry;
@@ -51,8 +51,8 @@ public class MagicBladeArcaneEnchantment extends ArcaneEnchantment {
         if (!attacker.level().isClientSide) {
             if (attacker instanceof Player player) {
 
-                if (ArcaneEnchantmentUtils.isArcaneItem(stack)) {
-                    int enchantmentLevel = ArcaneEnchantmentUtils.getArcaneEnchantment(stack, WizardsReborn.MAGIC_BLADE_ARCANE_ENCHANTMENT);
+                if (ArcaneEnchantmentUtil.isArcaneItem(stack)) {
+                    int enchantmentLevel = ArcaneEnchantmentUtil.getArcaneEnchantment(stack, WizardsReborn.MAGIC_BLADE_ARCANE_ENCHANTMENT);
 
                     if (enchantmentLevel > 0 && random.nextFloat() < (getChanceDefault(stack) + ((enchantmentLevel - 1) * getChancePerLevel(stack)))) {
                         float costModifier = WissenUtils.getWissenCostModifierWithDiscount(player);
@@ -88,7 +88,7 @@ public class MagicBladeArcaneEnchantment extends ArcaneEnchantment {
     @OnlyIn(Dist.CLIENT)
     public List<Component> modifierAppendHoverText(ItemStack stack, Level world, TooltipFlag flags) {
         List<Component> list = new ArrayList<>();
-        int enchantmentLevel = ArcaneEnchantmentUtils.getArcaneEnchantment(stack, this);
+        int enchantmentLevel = ArcaneEnchantmentUtil.getArcaneEnchantment(stack, this);
         list.add(Component.literal(" +").append(String.valueOf(enchantmentLevel))
                 .append(" ").append(Component.translatable("attribute.name.wizards_reborn.arcane_damage"))
                 .append(" (").append(String.valueOf((getChanceDefault(stack) + ((enchantmentLevel - 1) * getChancePerLevel(stack))) * 100)).append("%)")

@@ -1,12 +1,16 @@
 package mod.maxbogomol.wizards_reborn.api.arcaneenchantment;
 
 import com.google.common.collect.Maps;
-import mod.maxbogomol.fluffy_fur.utils.ColorUtils;
+import com.google.gson.JsonObject;
+import com.google.gson.JsonSyntaxException;
+import mod.maxbogomol.fluffy_fur.util.ColorUtil;
 import mod.maxbogomol.wizards_reborn.common.arcaneenchantment.*;
 import net.minecraft.ChatFormatting;
 import net.minecraft.nbt.CompoundTag;
+import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.Style;
+import net.minecraft.util.GsonHelper;
 import net.minecraft.util.Mth;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
@@ -22,7 +26,30 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-public class ArcaneEnchantmentUtils {
+public class ArcaneEnchantmentUtil {
+
+    public static ArcaneEnchantment deserializeArcaneEnchantment(JsonObject json) {
+        String enchantmentName = GsonHelper.getAsString(json, "arcane_enchantment");
+        ArcaneEnchantment enchantment = ArcaneEnchantments.getArcaneEnchantment(enchantmentName);
+        if (enchantment == null) {
+            throw new JsonSyntaxException("Unknown arcane enchantment " + enchantmentName);
+        }
+        return enchantment;
+    }
+
+    public static ArcaneEnchantment arcaneEnchantmentFromNetwork(FriendlyByteBuf buffer) {
+        return !buffer.readBoolean() ? null : ArcaneEnchantments.getArcaneEnchantment(buffer.readComponent().getString());
+    }
+
+    public static void arcaneEnchantmentToNetwork(ArcaneEnchantment enchantment, FriendlyByteBuf buffer) {
+        if (enchantment == null) {
+            buffer.writeBoolean(false);
+        } else {
+            buffer.writeBoolean(true);
+            buffer.writeComponent(Component.literal(enchantment.getId()));
+        }
+    }
+
     public static int getArcaneEnchantment(ItemStack stack, ArcaneEnchantment arcaneEnchantment) {
         existArcaneEnchantments(stack);
         CompoundTag nbt = stack.getTag();
@@ -160,7 +187,7 @@ public class ArcaneEnchantmentUtils {
                     int G = (int) Mth.lerp(((float) enchantmentLevel / maxEnchantmentLevel), 100, color.getGreen());
                     int B = (int) Mth.lerp(((float) enchantmentLevel / maxEnchantmentLevel), 100, color.getBlue());
 
-                    list.add(Component.literal(" ").append(arcaneEnchantment.getFullname(enchantmentLevel)).withStyle(Style.EMPTY.withColor(ColorUtils.packColor(255, R, G, B)).withBold(arcaneEnchantment.isCurse())));
+                    list.add(Component.literal(" ").append(arcaneEnchantment.getFullname(enchantmentLevel)).withStyle(Style.EMPTY.withColor(ColorUtil.packColor(255, R, G, B)).withBold(arcaneEnchantment.isCurse())));
                 }
             }
         }

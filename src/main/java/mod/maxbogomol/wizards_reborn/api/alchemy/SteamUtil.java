@@ -1,6 +1,6 @@
 package mod.maxbogomol.wizards_reborn.api.alchemy;
 
-public class SteamUtils {
+public class SteamUtil {
     public static int getAddSteamRemain(int currentSteam, int steam, int maxSteam) {
         int steamRemain = 0;
         if (maxSteam < (currentSteam + steam)) {

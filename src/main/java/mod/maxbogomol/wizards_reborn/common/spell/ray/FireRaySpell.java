@@ -1,8 +1,8 @@
 package mod.maxbogomol.wizards_reborn.common.spell.ray;
 
 import mod.maxbogomol.wizards_reborn.WizardsReborn;
-import mod.maxbogomol.wizards_reborn.api.crystal.CrystalUtils;
-import mod.maxbogomol.wizards_reborn.api.wissen.WissenItemUtils;
+import mod.maxbogomol.wizards_reborn.api.crystal.CrystalUtil;
+import mod.maxbogomol.wizards_reborn.api.wissen.WissenItemUtil;
 import mod.maxbogomol.wizards_reborn.common.entity.SpellProjectileEntity;
 import mod.maxbogomol.wizards_reborn.common.item.equipment.arcane.ArcaneArmorItem;
 import mod.maxbogomol.wizards_reborn.common.network.PacketHandler;
@@ -49,9 +49,9 @@ public class FireRaySpell extends RaySpell {
         if (player != null) {
             if (target.tickCount % 10 == 0) {
                 ItemStack stack = player.getItemInHand(player.getUsedItemHand());
-                if (WissenItemUtils.canRemoveWissen(stack, getWissenCostWithStat(projectile.getStats(), player))) {
+                if (WissenItemUtil.canRemoveWissen(stack, getWissenCostWithStat(projectile.getStats(), player))) {
                     removeWissen(stack, projectile.getStats(), player);
-                    int focusLevel = CrystalUtils.getStatLevel(projectile.getStats(), WizardsReborn.FOCUS_CRYSTAL_STAT);
+                    int focusLevel = CrystalUtil.getStatLevel(projectile.getStats(), WizardsReborn.FOCUS_CRYSTAL_STAT);
                     float magicModifier = ArcaneArmorItem.getPlayerMagicModifier(player);
                     float damage = (float) (1.5f + (focusLevel * 0.5)) + magicModifier;
 
@@ -72,7 +72,7 @@ public class FireRaySpell extends RaySpell {
 
         if (player != null) {
             if (player.isShiftKeyDown()) {
-                int focusLevel = CrystalUtils.getStatLevel(projectile.getStats(), WizardsReborn.FOCUS_CRYSTAL_STAT);
+                int focusLevel = CrystalUtil.getStatLevel(projectile.getStats(), WizardsReborn.FOCUS_CRYSTAL_STAT);
                 ItemStack stack = player.getItemInHand(player.getUsedItemHand());
 
                 Color color = getColor();
@@ -81,7 +81,7 @@ public class FireRaySpell extends RaySpell {
                 float b = color.getBlue() / 255f;
 
                 if (projectile.tickCount % getBlockTicks(projectile, focusLevel) == 0) {
-                    if (WissenItemUtils.canRemoveWissen(stack, getWissenCostWithStat(projectile.getStats(), player, getBlockWissen(projectile, focusLevel)))) {
+                    if (WissenItemUtil.canRemoveWissen(stack, getWissenCostWithStat(projectile.getStats(), player, getBlockWissen(projectile, focusLevel)))) {
                         Vec3 vec = getBlockHitOffset(ray, projectile, -0.1f);
                         BlockPos blockPos = BlockPos.containing(vec.x(), vec.y(), vec.z());
                         BlockState blockState = world.getBlockState(blockPos);

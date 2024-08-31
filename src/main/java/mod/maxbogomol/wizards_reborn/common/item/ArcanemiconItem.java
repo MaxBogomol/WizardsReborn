@@ -1,6 +1,6 @@
 package mod.maxbogomol.wizards_reborn.common.item;
 
-import mod.maxbogomol.fluffy_fur.utils.ColorUtils;
+import mod.maxbogomol.fluffy_fur.util.ColorUtil;
 import mod.maxbogomol.wizards_reborn.WizardsReborn;
 import mod.maxbogomol.wizards_reborn.client.arcanemicon.ArcanemiconGui;
 import mod.maxbogomol.wizards_reborn.client.event.ClientTickHandler;
@@ -102,7 +102,7 @@ public class ArcanemiconItem extends Item {
             int green = (int) Mth.lerp(ii, color1.getGreen(), color2.getGreen());
             int blue = (int) Mth.lerp(ii, color1.getBlue(), color2.getBlue());
 
-            component.append(Component.literal(String.valueOf(c)).withStyle(Style.EMPTY.withColor(ColorUtils.packColor(255, red, green, blue))));
+            component.append(Component.literal(String.valueOf(c)).withStyle(Style.EMPTY.withColor(ColorUtil.packColor(255, red, green, blue))));
             i++;
         }
 

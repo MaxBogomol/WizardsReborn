@@ -191,8 +191,8 @@ public class WissenUtils {
     public static int getWissenInItems(List<ItemStack> items) {
         int wissen = 0;
         for (ItemStack stack : items) {
-            WissenItemUtils.existWissen(stack);
-            wissen = wissen + WissenItemUtils.getWissen(stack);
+            WissenItemUtil.existWissen(stack);
+            wissen = wissen + WissenItemUtil.getWissen(stack);
         }
 
         return wissen;
@@ -211,14 +211,14 @@ public class WissenUtils {
 
     public static void removeWissenFromWissenItems(List<ItemStack> items, int wissen) {
         for (ItemStack stack : items) {
-            WissenItemUtils.existWissen(stack);
-            int wissenRemain = WissenItemUtils.getRemoveWissenRemain(stack, wissen);
-            if (WissenItemUtils.canRemoveWissen(stack, wissen)) {
-                WissenItemUtils.removeWissen(stack, wissen);
+            WissenItemUtil.existWissen(stack);
+            int wissenRemain = WissenItemUtil.getRemoveWissenRemain(stack, wissen);
+            if (WissenItemUtil.canRemoveWissen(stack, wissen)) {
+                WissenItemUtil.removeWissen(stack, wissen);
             }
             if (wissenRemain > 0) {
                 wissen = wissenRemain;
-                WissenItemUtils.setWissen(stack, 0);
+                WissenItemUtil.setWissen(stack, 0);
             }
         }
     }

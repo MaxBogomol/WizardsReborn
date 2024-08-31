@@ -3,7 +3,7 @@ package mod.maxbogomol.wizards_reborn.common.block.creative.fluid_storage;
 import mod.maxbogomol.fluffy_fur.common.block.entity.TickableBlockEntity;
 import mod.maxbogomol.wizards_reborn.WizardsReborn;
 import mod.maxbogomol.wizards_reborn.api.alchemy.AlchemyPotion;
-import mod.maxbogomol.wizards_reborn.api.alchemy.AlchemyPotionUtils;
+import mod.maxbogomol.wizards_reborn.api.alchemy.AlchemyPotionUtil;
 import mod.maxbogomol.wizards_reborn.api.alchemy.IPipeConnection;
 import mod.maxbogomol.wizards_reborn.api.alchemy.PipeConnection;
 import mod.maxbogomol.wizards_reborn.common.alchemypotion.FluidAlchemyPotion;
@@ -99,8 +99,8 @@ public class CreativeFluidStorageBlock extends Block implements EntityBlock, Sim
                     return InteractionResult.SUCCESS;
                 }
                 if (stack.getItem() instanceof AlchemyPotionItem vial) {
-                    AlchemyPotion potion = AlchemyPotionUtils.getPotion(stack);
-                    if (!AlchemyPotionUtils.isEmpty(potion)) {
+                    AlchemyPotion potion = AlchemyPotionUtil.getPotion(stack);
+                    if (!AlchemyPotionUtil.isEmpty(potion)) {
                         if (potion instanceof FluidAlchemyPotion fluidPotion) {
                             FluidStack fluid = new FluidStack(fluidPotion.fluid, Integer.MAX_VALUE);
                             storage.getTank().setFluid(fluid);

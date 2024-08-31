@@ -9,13 +9,13 @@ import mod.maxbogomol.fluffy_fur.client.particle.data.GenericParticleData;
 import mod.maxbogomol.fluffy_fur.common.item.ICustomBlockEntityDataItem;
 import mod.maxbogomol.fluffy_fur.common.item.IGuiParticleItem;
 import mod.maxbogomol.fluffy_fur.common.item.IParticleItem;
-import mod.maxbogomol.fluffy_fur.utils.ColorUtils;
+import mod.maxbogomol.fluffy_fur.util.ColorUtil;
 import mod.maxbogomol.wizards_reborn.api.crystal.CrystalStat;
 import mod.maxbogomol.wizards_reborn.api.crystal.CrystalType;
-import mod.maxbogomol.wizards_reborn.api.crystal.CrystalUtils;
+import mod.maxbogomol.wizards_reborn.api.crystal.CrystalUtil;
 import mod.maxbogomol.wizards_reborn.api.crystal.PolishingType;
 import mod.maxbogomol.wizards_reborn.common.block.crystal.CrystalBlock;
-import mod.maxbogomol.wizards_reborn.utils.RenderUtils;
+import mod.maxbogomol.wizards_reborn.util.RenderUtils;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.core.NonNullList;
@@ -88,7 +88,7 @@ public class CrystalItem extends BlockItem implements IParticleItem, IGuiParticl
             CompoundTag nbt = stack.getOrCreateTag();
             if (nbt.contains("random_stats")) {
                 nbt.remove("random_stats");
-                CrystalUtils.createCrystalItemStats(stack, getType(), world, 6);
+                CrystalUtil.createCrystalItemStats(stack, getType(), world, 6);
                 stack.setTag(nbt);
             }
         }
@@ -105,7 +105,7 @@ public class CrystalItem extends BlockItem implements IParticleItem, IGuiParticl
             int green = (int) Mth.lerp((float) statlevel / stat.getMaxLevel(), Color.GRAY.getGreen(), color.getGreen());
             int blue = (int) Mth.lerp((float) statlevel / stat.getMaxLevel(), Color.GRAY.getBlue(), color.getBlue());
 
-            int packColor = ColorUtils.packColor(255, red, green, blue);
+            int packColor = ColorUtil.packColor(255, red, green, blue);
             list.add(Component.translatable(stat.getTranslatedName()).append(": " + statlevel).withStyle(Style.EMPTY.withColor(packColor)));
         }
     }

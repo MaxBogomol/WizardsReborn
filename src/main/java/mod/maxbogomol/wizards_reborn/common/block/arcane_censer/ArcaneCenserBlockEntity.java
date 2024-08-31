@@ -7,7 +7,7 @@ import mod.maxbogomol.fluffy_fur.client.particle.data.GenericParticleData;
 import mod.maxbogomol.fluffy_fur.common.block.entity.ExposedBlockSimpleInventory;
 import mod.maxbogomol.fluffy_fur.common.block.entity.TickableBlockEntity;
 import mod.maxbogomol.fluffy_fur.common.network.BlockEntityUpdate;
-import mod.maxbogomol.fluffy_fur.utils.ColorUtils;
+import mod.maxbogomol.fluffy_fur.util.ColorUtil;
 import mod.maxbogomol.wizards_reborn.WizardsReborn;
 import mod.maxbogomol.wizards_reborn.api.alchemy.ISteamBlockEntity;
 import mod.maxbogomol.wizards_reborn.api.wissen.ICooldownBlockEntity;
@@ -141,9 +141,9 @@ public class ArcaneCenserBlockEntity extends ExposedBlockSimpleInventory impleme
             }
 
             int color = PotionUtils.getColor(effects);
-            R = ColorUtils.getRed(color) / 255F;
-            G = ColorUtils.getGreen(color) / 255F;
-            B = ColorUtils.getBlue(color) / 255F;
+            R = ColorUtil.getRed(color) / 255F;
+            G = ColorUtil.getGreen(color) / 255F;
+            B = ColorUtil.getBlue(color) / 255F;
         }
 
         Vec3 posSmoke = player.getEyePosition().add(player.getLookAngle().scale(0.75f));

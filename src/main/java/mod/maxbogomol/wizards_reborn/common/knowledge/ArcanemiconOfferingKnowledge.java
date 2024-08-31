@@ -1,9 +1,9 @@
 package mod.maxbogomol.wizards_reborn.common.knowledge;
 
-import mod.maxbogomol.fluffy_fur.utils.ColorUtils;
+import mod.maxbogomol.fluffy_fur.util.ColorUtil;
 import mod.maxbogomol.wizards_reborn.WizardsReborn;
 import mod.maxbogomol.wizards_reborn.api.knowledge.Knowledge;
-import mod.maxbogomol.wizards_reborn.api.knowledge.KnowledgeUtils;
+import mod.maxbogomol.wizards_reborn.api.knowledge.KnowledgeUtil;
 import mod.maxbogomol.wizards_reborn.common.config.ServerConfig;
 import mod.maxbogomol.wizards_reborn.common.network.ArcanemiconOfferingEffectPacket;
 import mod.maxbogomol.wizards_reborn.common.network.PacketHandler;
@@ -53,11 +53,11 @@ public class ArcanemiconOfferingKnowledge extends Knowledge {
 
     @Override
     public void award(Player player) {
-        if (!KnowledgeUtils.isKnowledge(player, RegisterKnowledges.ARCANEMICON)) {
+        if (!KnowledgeUtil.isKnowledge(player, RegisterKnowledges.ARCANEMICON)) {
             player.sendSystemMessage(Component.literal("<").append(
-                            Component.translatable("message.wizards_reborn.someone").withStyle(Style.EMPTY.withColor(ColorUtils.packColor(255, 123, 73, 109))))
+                            Component.translatable("message.wizards_reborn.someone").withStyle(Style.EMPTY.withColor(ColorUtil.packColor(255, 123, 73, 109))))
                     .append(Component.literal("> "))
-                    .append(Component.translatable("message.wizards_reborn.arcanemicon_offering").withStyle(Style.EMPTY.withColor(ColorUtils.packColor(255, 251, 179, 176)))));
+                    .append(Component.translatable("message.wizards_reborn.arcanemicon_offering").withStyle(Style.EMPTY.withColor(ColorUtil.packColor(255, 251, 179, 176)))));
             player.getInventory().add(new ItemStack(WizardsReborn.ARCANEMICON.get()));
             player.level().playSound(null, player.getX(), player.getY(), player.getZ(), WizardsReborn.ARCANEMICON_OFFERING_SOUND.get(), SoundSource.PLAYERS, 1.0f, 1.0f);
             PacketHandler.sendToTracking(player.level(), player.getOnPos(), new ArcanemiconOfferingEffectPacket((float) player.getX(), (float) player.getY() + 1f, (float) player.getZ()));

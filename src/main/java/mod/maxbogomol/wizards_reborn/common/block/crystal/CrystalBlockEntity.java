@@ -6,10 +6,10 @@ import mod.maxbogomol.fluffy_fur.common.network.BlockEntityUpdate;
 import mod.maxbogomol.wizards_reborn.WizardsReborn;
 import mod.maxbogomol.wizards_reborn.api.crystal.CrystalType;
 import mod.maxbogomol.wizards_reborn.api.crystalritual.CrystalRitual;
-import mod.maxbogomol.wizards_reborn.api.crystalritual.CrystalRitualUtils;
+import mod.maxbogomol.wizards_reborn.api.crystalritual.CrystalRitualUtil;
 import mod.maxbogomol.wizards_reborn.api.light.ILightBlockEntity;
 import mod.maxbogomol.wizards_reborn.api.light.LightRayHitResult;
-import mod.maxbogomol.wizards_reborn.api.light.LightUtils;
+import mod.maxbogomol.wizards_reborn.api.light.LightUtil;
 import mod.maxbogomol.wizards_reborn.api.wissen.ICooldownBlockEntity;
 import mod.maxbogomol.wizards_reborn.api.wissen.IItemResultBlockEntity;
 import mod.maxbogomol.wizards_reborn.api.wissen.IWissenWandControlledBlockEntity;
@@ -72,7 +72,7 @@ public class CrystalBlockEntity extends BlockSimpleInventory implements Tickable
             }
         }
 
-        if (!CrystalRitualUtils.isEmpty(ritual)) {
+        if (!CrystalRitualUtil.isEmpty(ritual)) {
             if (ritual.canStartWithCrystal(this)) {
                 if (getLight() > 0 && startRitual) {
                     if (tickRitual == 0) {
@@ -121,13 +121,13 @@ public class CrystalBlockEntity extends BlockSimpleInventory implements Tickable
 
         if (!level.isClientSide()) {
             if (isToBlock) {
-                if (CrystalRitualUtils.isEmpty(ritual)) {
+                if (CrystalRitualUtil.isEmpty(ritual)) {
                     isToBlock = false;
                 } else if (ritual.hasLightRay(this)) {
                     LightRayHitResult hitResult = setupLightRay();
                     if (hitResult != null) {
                         BlockEntity hitTile = hitResult.getTile();
-                        LightUtils.transferLight(this, hitTile);
+                        LightUtil.transferLight(this, hitTile);
                         BlockEntityUpdate.packet(hitTile);
                     }
                 }
@@ -349,7 +349,7 @@ public class CrystalBlockEntity extends BlockSimpleInventory implements Tickable
 
     public float getRitualCooldown() {
         CrystalRitual ritual = getCrystalRitual();
-        if (!CrystalRitualUtils.isEmpty(ritual)) {
+        if (!CrystalRitualUtil.isEmpty(ritual)) {
             return ritual.getCrystalCooldown(this);
         }
 
@@ -371,8 +371,8 @@ public class CrystalBlockEntity extends BlockSimpleInventory implements Tickable
         if (level.isLoaded(pos)) {
             BlockEntity tileentity = level.getBlockEntity(pos);
             if (tileentity instanceof ILightBlockEntity lightTileEntity) {
-                Vec3 from = LightUtils.getLightLensPos(getBlockPos(), getLightLensPos());
-                Vec3 to = LightUtils.getLightLensPos(pos, lightTileEntity.getLightLensPos());
+                Vec3 from = LightUtil.getLightLensPos(getBlockPos(), getLightLensPos());
+                Vec3 to = LightUtil.getLightLensPos(pos, lightTileEntity.getLightLensPos());
 
                 double dX = to.x() - from.x();
                 double dY = to.y() - from.y();
@@ -389,7 +389,7 @@ public class CrystalBlockEntity extends BlockSimpleInventory implements Tickable
 
                 from = from.add(-X, -Y, -Z);
 
-                return LightUtils.getLightRayHitResult(level, getBlockPos(), from, to, 25);
+                return LightUtil.getLightRayHitResult(level, getBlockPos(), from, to, 25);
             }
         }
 
@@ -401,7 +401,7 @@ public class CrystalBlockEntity extends BlockSimpleInventory implements Tickable
         List<ItemStack> list = new ArrayList<>();
 
         CrystalRitual ritual = getCrystalRitual();
-        if (!CrystalRitualUtils.isEmpty(ritual)) {
+        if (!CrystalRitualUtil.isEmpty(ritual)) {
             return ritual.getItemsResult(this);
         }
         return list;

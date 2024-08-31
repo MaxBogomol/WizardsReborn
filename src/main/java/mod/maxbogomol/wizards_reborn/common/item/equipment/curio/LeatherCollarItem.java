@@ -1,6 +1,6 @@
 package mod.maxbogomol.wizards_reborn.common.item.equipment.curio;
 
-import mod.maxbogomol.fluffy_fur.utils.ColorUtils;
+import mod.maxbogomol.fluffy_fur.util.ColorUtil;
 import mod.maxbogomol.wizards_reborn.WizardsReborn;
 import mod.maxbogomol.wizards_reborn.client.event.ClientTickHandler;
 import net.minecraft.ChatFormatting;
@@ -104,14 +104,14 @@ public class LeatherCollarItem extends BaseCurioItem implements ICurioItemTextur
         int b = (int) (Math.sin(ticks + Math.PI) * 127 + 128);
 
         for (char c : chars) {
-            component.append(Component.literal(String.valueOf(c)).withStyle(Style.EMPTY.withColor(ColorUtils.packColor(255, r, g, b))));
+            component.append(Component.literal(String.valueOf(c)).withStyle(Style.EMPTY.withColor(ColorUtil.packColor(255, r, g, b))));
         }
 
         list.add(component);
 
         String skin = LeatherCollarItem.getSkin(stack);
         if (skin != null) {
-            list.add(Component.literal(skin).withStyle(Style.EMPTY.withColor(ColorUtils.packColor(255, 255, 173, 186)))
+            list.add(Component.literal(skin).withStyle(Style.EMPTY.withColor(ColorUtil.packColor(255, 255, 173, 186)))
                     .append(" ").append(Component.translatable(hearts).withStyle(ChatFormatting.RED)));
         }
     }

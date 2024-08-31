@@ -1,14 +1,13 @@
 package mod.maxbogomol.wizards_reborn.common.spell.projectile;
 
 import mod.maxbogomol.wizards_reborn.WizardsReborn;
-import mod.maxbogomol.wizards_reborn.api.crystal.CrystalUtils;
+import mod.maxbogomol.wizards_reborn.api.crystal.CrystalUtil;
 import mod.maxbogomol.wizards_reborn.common.damage.DamageSourceRegistry;
 import mod.maxbogomol.wizards_reborn.common.entity.SpellProjectileEntity;
 import mod.maxbogomol.wizards_reborn.common.item.equipment.arcane.ArcaneArmorItem;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.world.entity.MobType;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.HitResult;
@@ -32,7 +31,7 @@ public class HolyProjectileSpell extends ProjectileSpell {
         super.onImpact(ray, world, projectile, player, target);
 
         if (target instanceof LivingEntity livingEntity) {
-            int focusLevel = CrystalUtils.getStatLevel(projectile.getStats(), WizardsReborn.FOCUS_CRYSTAL_STAT);
+            int focusLevel = CrystalUtil.getStatLevel(projectile.getStats(), WizardsReborn.FOCUS_CRYSTAL_STAT);
             float magicModifier = ArcaneArmorItem.getPlayerMagicModifier(player);
             float damage = (float) (1.5f + (focusLevel * 0.5)) + magicModifier;
             if (livingEntity.isInvertedHealAndHarm()) {

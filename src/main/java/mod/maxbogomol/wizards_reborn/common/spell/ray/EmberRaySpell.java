@@ -1,8 +1,8 @@
 package mod.maxbogomol.wizards_reborn.common.spell.ray;
 
 import mod.maxbogomol.wizards_reborn.WizardsReborn;
-import mod.maxbogomol.wizards_reborn.api.crystal.CrystalUtils;
-import mod.maxbogomol.wizards_reborn.api.wissen.WissenItemUtils;
+import mod.maxbogomol.wizards_reborn.api.crystal.CrystalUtil;
+import mod.maxbogomol.wizards_reborn.api.wissen.WissenItemUtil;
 import mod.maxbogomol.wizards_reborn.common.damage.DamageSourceRegistry;
 import mod.maxbogomol.wizards_reborn.common.entity.SpellProjectileEntity;
 import mod.maxbogomol.wizards_reborn.common.item.equipment.arcane.ArcaneArmorItem;
@@ -59,7 +59,7 @@ public class EmberRaySpell extends FireRaySpell {
             boolean remove = false;
 
             ItemStack stack = player.getItemInHand(player.getUsedItemHand());
-            int focusLevel = CrystalUtils.getStatLevel(entity.getStats(), WizardsReborn.FOCUS_CRYSTAL_STAT);
+            int focusLevel = CrystalUtil.getStatLevel(entity.getStats(), WizardsReborn.FOCUS_CRYSTAL_STAT);
             float magicModifier = ArcaneArmorItem.getPlayerMagicModifier(player);
             float damage = (1f + (focusLevel * 0.5f)) + magicModifier;
 
@@ -67,7 +67,7 @@ public class EmberRaySpell extends FireRaySpell {
             for (Entity target : LookSpell.getHitEntities(entity.level(), player.getEyePosition(), ray.getLocation(), 0.2f)) {
                 if (!target.equals(player) && target instanceof LivingEntity) {
                     if (target.tickCount % 10 == 0) {
-                        if (WissenItemUtils.canRemoveWissen(stack, getWissenCostWithStat(entity.getStats(), player))) {
+                        if (WissenItemUtil.canRemoveWissen(stack, getWissenCostWithStat(entity.getStats(), player))) {
                             remove = true;
                             int fire = target.getRemainingFireTicks() + 20;
                             if (fire > 1000) fire = 1000;

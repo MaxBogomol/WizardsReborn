@@ -6,7 +6,7 @@ import mod.maxbogomol.fluffy_fur.client.particle.ParticleBuilder;
 import mod.maxbogomol.fluffy_fur.client.particle.data.ColorParticleData;
 import mod.maxbogomol.fluffy_fur.client.particle.data.GenericParticleData;
 import mod.maxbogomol.wizards_reborn.WizardsReborn;
-import mod.maxbogomol.wizards_reborn.api.crystal.CrystalUtils;
+import mod.maxbogomol.wizards_reborn.api.crystal.CrystalUtil;
 import mod.maxbogomol.wizards_reborn.client.animation.StrikeSpellItemAnimation;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.world.InteractionHand;
@@ -101,7 +101,7 @@ public class WisdomSpell extends LookSpell {
 
         ItemStack stack = player.getItemInHand(hand);
         CompoundTag stats = getStats(stack);
-        int focusLevel = CrystalUtils.getStatLevel(stats, WizardsReborn.FOCUS_CRYSTAL_STAT);
+        int focusLevel = CrystalUtil.getStatLevel(stats, WizardsReborn.FOCUS_CRYSTAL_STAT);
         int exp = 5 + focusLevel;
 
         world.addFreshEntity(new ExperienceOrb(world, pos.x, pos.y, pos.z, exp));

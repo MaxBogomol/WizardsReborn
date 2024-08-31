@@ -1,6 +1,6 @@
 package mod.maxbogomol.wizards_reborn.common.network;
 
-import mod.maxbogomol.wizards_reborn.api.knowledge.KnowledgeUtils;
+import mod.maxbogomol.wizards_reborn.api.knowledge.KnowledgeUtil;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraftforge.network.NetworkEvent;
@@ -28,7 +28,7 @@ public class RemoveSpellSetPacket {
                 ServerPlayer player = ctx.get().getSender();
 
                 for (int i = 0; i < 10; i++) {
-                    KnowledgeUtils.addSpellInSet(player, msg.setId, i, null);
+                    KnowledgeUtil.addSpellInSet(player, msg.setId, i, null);
                 }
             });
         }

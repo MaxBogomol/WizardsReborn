@@ -3,8 +3,8 @@ package mod.maxbogomol.wizards_reborn.common.recipe;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
+import mod.maxbogomol.fluffy_fur.util.RecipeUtil;
 import mod.maxbogomol.wizards_reborn.WizardsReborn;
-import mod.maxbogomol.wizards_reborn.utils.RecipeUtils;
 import net.minecraft.core.RegistryAccess;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.network.FriendlyByteBuf;
@@ -18,7 +18,6 @@ import net.minecraft.world.item.crafting.Recipe;
 import net.minecraft.world.item.crafting.RecipeSerializer;
 import net.minecraft.world.item.crafting.RecipeType;
 import net.minecraft.world.level.Level;
-import net.minecraftforge.registries.ForgeRegistries;
 
 import javax.annotation.Nullable;
 import java.util.ArrayList;
@@ -106,7 +105,7 @@ public class CenserRecipe implements Recipe<Container>  {
             if (json.has("effects")) {
                 JsonArray eff = GsonHelper.getAsJsonArray(json, "effects");
                 for (JsonElement e : eff) {
-                    effects.add(RecipeUtils.deserializeMobEffect(e.getAsJsonObject()));
+                    effects.add(RecipeUtil.deserializeMobEffect(e.getAsJsonObject()));
                 }
             }
 
@@ -121,7 +120,7 @@ public class CenserRecipe implements Recipe<Container>  {
             List<MobEffectInstance> effects = new ArrayList<>();
             int effectsSize = buffer.readInt();
             for (int i = 0; i < effectsSize; i++) {
-                effects.add(RecipeUtils.mobEffectFromNetwork(buffer));
+                effects.add(RecipeUtil.mobEffectFromNetwork(buffer));
             }
 
             return new CenserRecipe(recipeId, input, effects);
@@ -133,7 +132,7 @@ public class CenserRecipe implements Recipe<Container>  {
 
             buffer.writeInt(recipe.getEffects().size());
             for (MobEffectInstance effect : recipe.getEffects()) {
-                RecipeUtils.mobEffectToNetwork(effect, buffer);
+                RecipeUtil.mobEffectToNetwork(effect, buffer);
             }
         }
     }

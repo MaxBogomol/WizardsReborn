@@ -2,7 +2,7 @@ package mod.maxbogomol.wizards_reborn.client.arcanemicon.recipe;
 
 import mod.maxbogomol.wizards_reborn.WizardsReborn;
 import mod.maxbogomol.wizards_reborn.api.crystalritual.CrystalRitual;
-import mod.maxbogomol.wizards_reborn.api.crystalritual.CrystalRitualUtils;
+import mod.maxbogomol.wizards_reborn.api.crystalritual.CrystalRitualUtil;
 import mod.maxbogomol.wizards_reborn.client.arcanemicon.ArcanemiconGui;
 import mod.maxbogomol.wizards_reborn.common.recipe.CrystalRitualRecipe;
 import net.minecraft.client.Minecraft;
@@ -36,7 +36,7 @@ public class CrystalRitualPage extends RecipePage {
         Vec2 point = new Vec2(56, 22), center = new Vec2(56, 57);
 
         ItemStack item = new ItemStack(WizardsReborn.RUNIC_WISESTONE_PLATE.get());
-        CrystalRitualUtils.setCrystalRitual(item, crystalRitual);
+        CrystalRitualUtil.setCrystalRitual(item, crystalRitual);
         drawItem(book, gui, item,x + 56, y + 56, mouseX, mouseY);
 
         for (ItemStack o : inputs) {

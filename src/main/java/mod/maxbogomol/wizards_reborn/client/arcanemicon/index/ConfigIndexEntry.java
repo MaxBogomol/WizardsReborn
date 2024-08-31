@@ -2,7 +2,7 @@ package mod.maxbogomol.wizards_reborn.client.arcanemicon.index;
 
 import mod.maxbogomol.wizards_reborn.WizardsReborn;
 import mod.maxbogomol.wizards_reborn.api.knowledge.Knowledge;
-import mod.maxbogomol.wizards_reborn.api.knowledge.KnowledgeUtils;
+import mod.maxbogomol.wizards_reborn.api.knowledge.KnowledgeUtil;
 import mod.maxbogomol.wizards_reborn.client.config.ClientConfig;
 import net.minecraft.client.Minecraft;
 import net.minecraft.network.chat.Component;
@@ -67,7 +67,7 @@ public class ConfigIndexEntry {
         if (knowledge == null) {
             return true;
         } else {
-            return (KnowledgeUtils.isKnowledge(Minecraft.getInstance().player, knowledge));
+            return (KnowledgeUtil.isKnowledge(Minecraft.getInstance().player, knowledge));
         }
     }
 

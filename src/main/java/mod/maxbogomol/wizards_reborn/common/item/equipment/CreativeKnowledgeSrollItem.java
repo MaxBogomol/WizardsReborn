@@ -1,6 +1,6 @@
 package mod.maxbogomol.wizards_reborn.common.item.equipment;
 
-import mod.maxbogomol.wizards_reborn.api.knowledge.KnowledgeUtils;
+import mod.maxbogomol.wizards_reborn.api.knowledge.KnowledgeUtil;
 import mod.maxbogomol.wizards_reborn.common.item.ArcanumItem;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
@@ -24,9 +24,9 @@ public class CreativeKnowledgeSrollItem extends ArcanumItem {
 
         if (!world.isClientSide()) {
             if (isAncient) {
-                KnowledgeUtils.removeAllKnowledge(player);
+                KnowledgeUtil.removeAllKnowledge(player);
             } else {
-                KnowledgeUtils.addAllKnowledge(player);
+                KnowledgeUtil.addAllKnowledge(player);
             }
 
             if (!player.isCreative()) {

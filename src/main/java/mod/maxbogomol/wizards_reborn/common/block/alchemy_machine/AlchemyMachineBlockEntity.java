@@ -7,9 +7,9 @@ import mod.maxbogomol.fluffy_fur.client.particle.data.GenericParticleData;
 import mod.maxbogomol.fluffy_fur.common.block.entity.TickableBlockEntity;
 import mod.maxbogomol.fluffy_fur.common.network.BlockEntityUpdate;
 import mod.maxbogomol.wizards_reborn.WizardsReborn;
-import mod.maxbogomol.wizards_reborn.api.alchemy.AlchemyPotionUtils;
+import mod.maxbogomol.wizards_reborn.api.alchemy.AlchemyPotionUtil;
 import mod.maxbogomol.wizards_reborn.api.alchemy.PipeConnection;
-import mod.maxbogomol.wizards_reborn.api.alchemy.SteamUtils;
+import mod.maxbogomol.wizards_reborn.api.alchemy.SteamUtil;
 import mod.maxbogomol.wizards_reborn.api.wissen.ICooldownBlockEntity;
 import mod.maxbogomol.wizards_reborn.api.wissen.IItemResultBlockEntity;
 import mod.maxbogomol.wizards_reborn.api.wissen.IWissenWandFunctionalBlockEntity;
@@ -157,8 +157,8 @@ public class AlchemyMachineBlockEntity extends PipeBaseBlockEntity implements Ti
                             ItemStack output = recipe.get().getResultItem(RegistryAccess.EMPTY);
 
                             if (isCanCraft(inv, output, recipe.get(), isCanFluid)) {
-                                int addRemainCraft = SteamUtils.getAddSteamRemain(steamIsCraft, 3, steamInCraft);
-                                int removeRemain = SteamUtils.getRemoveSteamRemain(boiler.getSteam(), 3 - addRemainCraft);
+                                int addRemainCraft = SteamUtil.getAddSteamRemain(steamIsCraft, 3, steamInCraft);
+                                int removeRemain = SteamUtil.getRemoveSteamRemain(boiler.getSteam(), 3 - addRemainCraft);
 
                                 steamIsCraft = steamIsCraft + (3 - addRemainCraft - removeRemain);
                                 boiler.removeSteam(3 - addRemainCraft - removeRemain);
@@ -183,9 +183,9 @@ public class AlchemyMachineBlockEntity extends PipeBaseBlockEntity implements Ti
                                     startCraft = false;
 
                                     output.setCount(itemOutputHandler.getStackInSlot(0).getCount() + output.getCount());
-                                    if (!AlchemyPotionUtils.isEmpty(recipe.get().getRecipeAlchemyPotion())) {
+                                    if (!AlchemyPotionUtil.isEmpty(recipe.get().getRecipeAlchemyPotion())) {
                                         output = getAlchemyBottle();
-                                        AlchemyPotionUtils.setPotion(output, recipe.get().getRecipeAlchemyPotion());
+                                        AlchemyPotionUtil.setPotion(output, recipe.get().getRecipeAlchemyPotion());
                                     }
 
                                     itemOutputHandler.setStackInSlot(0, output);
@@ -449,10 +449,10 @@ public class AlchemyMachineBlockEntity extends PipeBaseBlockEntity implements Ti
     }
 
     public boolean isCanCraft(SimpleContainer inv, ItemStack output, AlchemyMachineRecipe recipe, boolean isCanFluid) {
-        if (!AlchemyPotionUtils.isEmpty(recipe.getRecipeAlchemyPotionIngredient())) {
+        if (!AlchemyPotionUtil.isEmpty(recipe.getRecipeAlchemyPotionIngredient())) {
             ItemStack bottle = getAlchemyBottle();
             if (bottle.getItem() instanceof AlchemyPotionItem item) {
-                if (AlchemyPotionUtils.getPotion(bottle) != recipe.getRecipeAlchemyPotionIngredient()) {
+                if (AlchemyPotionUtil.getPotion(bottle) != recipe.getRecipeAlchemyPotionIngredient()) {
                     return false;
                 }
             } else {
@@ -468,7 +468,7 @@ public class AlchemyMachineBlockEntity extends PipeBaseBlockEntity implements Ti
             }
         }
 
-        if (!AlchemyPotionUtils.isEmpty(recipe.getRecipeAlchemyPotion())) {
+        if (!AlchemyPotionUtil.isEmpty(recipe.getRecipeAlchemyPotion())) {
             return true;
         }
 
@@ -528,9 +528,9 @@ public class AlchemyMachineBlockEntity extends PipeBaseBlockEntity implements Ti
                     if (!stack.isEmpty()) {
                         list.add(stack);
                     } else {
-                        if (!AlchemyPotionUtils.isEmpty(recipe.get().getRecipeAlchemyPotion())) {
+                        if (!AlchemyPotionUtil.isEmpty(recipe.get().getRecipeAlchemyPotion())) {
                             ItemStack bottle = getAlchemyBottle();
-                            AlchemyPotionUtils.setPotion(bottle, recipe.get().getRecipeAlchemyPotion());
+                            AlchemyPotionUtil.setPotion(bottle, recipe.get().getRecipeAlchemyPotion());
                             list.add(bottle);
                         }
                     }

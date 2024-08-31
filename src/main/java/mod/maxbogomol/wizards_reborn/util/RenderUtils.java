@@ -1,4 +1,4 @@
-package mod.maxbogomol.wizards_reborn.utils;
+package mod.maxbogomol.wizards_reborn.util;
 
 import com.mojang.blaze3d.platform.GlStateManager;
 import com.mojang.blaze3d.platform.Lighting;

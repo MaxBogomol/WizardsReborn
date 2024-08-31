@@ -1,10 +1,10 @@
 package mod.maxbogomol.wizards_reborn.client.gui.screen;
 
 import com.mojang.blaze3d.systems.RenderSystem;
-import mod.maxbogomol.fluffy_fur.utils.ColorUtils;
+import mod.maxbogomol.fluffy_fur.util.ColorUtil;
 import mod.maxbogomol.wizards_reborn.WizardsReborn;
 import mod.maxbogomol.wizards_reborn.api.arcaneenchantment.ArcaneEnchantment;
-import mod.maxbogomol.wizards_reborn.api.arcaneenchantment.ArcaneEnchantmentUtils;
+import mod.maxbogomol.wizards_reborn.api.arcaneenchantment.ArcaneEnchantmentUtil;
 import mod.maxbogomol.wizards_reborn.client.gui.container.TotemOfDisenchantContainer;
 import mod.maxbogomol.wizards_reborn.common.block.totem.disenchant.TotemOfDisenchantBlockEntity;
 import mod.maxbogomol.wizards_reborn.common.network.PacketHandler;
@@ -50,7 +50,7 @@ public class TotemOfDisenchantScreen extends AbstractContainerScreen<TotemOfDise
 
     @Override
     protected void renderLabels(GuiGraphics guiGraphics, int mouseX, int mouseY) {
-        guiGraphics.drawString(this.font, this.title, this.titleLabelX, this.titleLabelY, ColorUtils.packColor(255, 237, 201, 146), false);
+        guiGraphics.drawString(this.font, this.title, this.titleLabelX, this.titleLabelY, ColorUtil.packColor(255, 237, 201, 146), false);
         guiGraphics.drawString(this.font, this.playerInventoryTitle, this.inventoryLabelX, this.inventoryLabelY, 4210752, false);
     }
 
@@ -77,8 +77,8 @@ public class TotemOfDisenchantScreen extends AbstractContainerScreen<TotemOfDise
                 int xx = 0;
                 int yy = 0;
 
-                if (ArcaneEnchantmentUtils.isArcaneItem(stack)) {
-                    arcaneEnchantments = ArcaneEnchantmentUtils.getAllArcaneEnchantments(stack);
+                if (ArcaneEnchantmentUtil.isArcaneItem(stack)) {
+                    arcaneEnchantments = ArcaneEnchantmentUtil.getAllArcaneEnchantments(stack);
                 }
 
                 if (stack.getItem().equals(Items.ENCHANTED_BOOK)) {
@@ -93,11 +93,11 @@ public class TotemOfDisenchantScreen extends AbstractContainerScreen<TotemOfDise
                 for (ArcaneEnchantment enchantment : arcaneEnchantments.keySet()) {
                     if (enchantment != null) {
                         ItemStack book = new ItemStack(WizardsReborn.ARCANE_ENCHANTED_BOOK.get());
-                        ArcaneEnchantmentUtils.addArcaneEnchantment(book, enchantment, arcaneEnchantments.get(enchantment));
+                        ArcaneEnchantmentUtil.addArcaneEnchantment(book, enchantment, arcaneEnchantments.get(enchantment));
 
                         int of = 0;
                         if (currentBook.getItem().equals(WizardsReborn.ARCANE_ENCHANTED_BOOK.get())) {
-                            if (ArcaneEnchantmentUtils.getArcaneEnchantment(currentBook, enchantment) > 0) {
+                            if (ArcaneEnchantmentUtil.getArcaneEnchantment(currentBook, enchantment) > 0) {
                                 gui.blit(GUI, i + 42 + (xx * 18), j + 16 + (yy * 18), 176, 18, 20, 20, 256, 256);
                                 of = -1;
                             }
@@ -171,8 +171,8 @@ public class TotemOfDisenchantScreen extends AbstractContainerScreen<TotemOfDise
                 int xx = 0;
                 int yy = 0;
 
-                if (ArcaneEnchantmentUtils.isArcaneItem(stack)) {
-                    arcaneEnchantments = ArcaneEnchantmentUtils.getAllArcaneEnchantments(stack);
+                if (ArcaneEnchantmentUtil.isArcaneItem(stack)) {
+                    arcaneEnchantments = ArcaneEnchantmentUtil.getAllArcaneEnchantments(stack);
                 }
 
                 if (stack.getItem().equals(Items.ENCHANTED_BOOK)) {
@@ -186,7 +186,7 @@ public class TotemOfDisenchantScreen extends AbstractContainerScreen<TotemOfDise
 
                 for (ArcaneEnchantment enchantment : arcaneEnchantments.keySet()) {
                     ItemStack book = new ItemStack(WizardsReborn.ARCANE_ENCHANTED_BOOK.get());
-                    ArcaneEnchantmentUtils.addArcaneEnchantment(book, enchantment, arcaneEnchantments.get(enchantment));
+                    ArcaneEnchantmentUtil.addArcaneEnchantment(book, enchantment, arcaneEnchantments.get(enchantment));
                     if (x >= i + 44 + (xx * 18) && y >= j + 18 + (yy * 18) && x <= i + 44 + (xx * 18) + 16 && y <= j + 18 + (yy * 18) + 16 && !totem.isStart && !enchantment.isCurse()) {
                         currentBook = book;
                         Minecraft.getInstance().player.playNotifySound(SoundEvents.BOOK_PAGE_TURN, SoundSource.NEUTRAL, 1.0f, 1.0f);

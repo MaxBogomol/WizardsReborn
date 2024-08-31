@@ -6,15 +6,15 @@ import com.mojang.brigadier.arguments.IntegerArgumentType;
 import com.mojang.brigadier.context.CommandContext;
 import com.mojang.brigadier.exceptions.CommandSyntaxException;
 import mod.maxbogomol.wizards_reborn.api.arcaneenchantment.ArcaneEnchantment;
-import mod.maxbogomol.wizards_reborn.api.arcaneenchantment.ArcaneEnchantmentUtils;
+import mod.maxbogomol.wizards_reborn.api.arcaneenchantment.ArcaneEnchantmentUtil;
 import mod.maxbogomol.wizards_reborn.api.knowledge.Knowledge;
-import mod.maxbogomol.wizards_reborn.api.knowledge.KnowledgeUtils;
+import mod.maxbogomol.wizards_reborn.api.knowledge.KnowledgeUtil;
 import mod.maxbogomol.wizards_reborn.api.monogram.Monogram;
 import mod.maxbogomol.wizards_reborn.api.monogram.MonogramRecipe;
 import mod.maxbogomol.wizards_reborn.api.monogram.Monograms;
 import mod.maxbogomol.wizards_reborn.api.spell.Spell;
 import mod.maxbogomol.wizards_reborn.api.wissen.IWissenItem;
-import mod.maxbogomol.wizards_reborn.api.wissen.WissenItemUtils;
+import mod.maxbogomol.wizards_reborn.api.wissen.WissenItemUtil;
 import net.minecraft.ChatFormatting;
 import net.minecraft.commands.CommandSourceStack;
 import net.minecraft.commands.Commands;
@@ -130,7 +130,7 @@ public class WizardsRebornCommand {
 
     private static int giveKnowledge(CommandContext<CommandSourceStack> command, Collection<ServerPlayer> targetPlayers, Knowledge knowledge) throws CommandSyntaxException {
         for(ServerPlayer player : targetPlayers) {
-            KnowledgeUtils.addKnowledge(player, knowledge);
+            KnowledgeUtil.addKnowledge(player, knowledge);
         }
 
         if (targetPlayers.size() == 1) {
@@ -147,7 +147,7 @@ public class WizardsRebornCommand {
 
     private static int removeKnowledge(CommandContext<CommandSourceStack> command, Collection<ServerPlayer> targetPlayers, Knowledge knowledge) throws CommandSyntaxException {
         for(ServerPlayer player : targetPlayers) {
-            KnowledgeUtils.removeKnowledge(player, knowledge);
+            KnowledgeUtil.removeKnowledge(player, knowledge);
         }
 
         if (targetPlayers.size() == 1) {
@@ -164,7 +164,7 @@ public class WizardsRebornCommand {
 
     private static int giveAllKnowledge(CommandContext<CommandSourceStack> command, Collection<ServerPlayer> targetPlayers) throws CommandSyntaxException {
         for(ServerPlayer player : targetPlayers) {
-            KnowledgeUtils.addAllKnowledge(player);
+            KnowledgeUtil.addAllKnowledge(player);
         }
 
         if (targetPlayers.size() == 1) {
@@ -181,7 +181,7 @@ public class WizardsRebornCommand {
 
     private static int removeAllKnowledge(CommandContext<CommandSourceStack> command, Collection<ServerPlayer> targetPlayers) throws CommandSyntaxException {
         for(ServerPlayer player : targetPlayers) {
-            KnowledgeUtils.removeAllKnowledge(player);
+            KnowledgeUtil.removeAllKnowledge(player);
         }
 
         if (targetPlayers.size() == 1) {
@@ -198,7 +198,7 @@ public class WizardsRebornCommand {
 
     private static int giveSpell(CommandContext<CommandSourceStack> command, Collection<ServerPlayer> targetPlayers, Spell spell) throws CommandSyntaxException {
         for(ServerPlayer player : targetPlayers) {
-            KnowledgeUtils.addSpell(player, spell);
+            KnowledgeUtil.addSpell(player, spell);
         }
 
         if (targetPlayers.size() == 1) {
@@ -215,7 +215,7 @@ public class WizardsRebornCommand {
 
     private static int removeSpell(CommandContext<CommandSourceStack> command, Collection<ServerPlayer> targetPlayers, Spell spell) throws CommandSyntaxException {
         for(ServerPlayer player : targetPlayers) {
-            KnowledgeUtils.removeSpell(player, spell);
+            KnowledgeUtil.removeSpell(player, spell);
         }
 
         if (targetPlayers.size() == 1) {
@@ -232,7 +232,7 @@ public class WizardsRebornCommand {
 
     private static int giveAllSpell(CommandContext<CommandSourceStack> command, Collection<ServerPlayer> targetPlayers) throws CommandSyntaxException {
         for(ServerPlayer player : targetPlayers) {
-            KnowledgeUtils.addAllSpell(player);
+            KnowledgeUtil.addAllSpell(player);
         }
 
         if (targetPlayers.size() == 1) {
@@ -249,7 +249,7 @@ public class WizardsRebornCommand {
 
     private static int removeAllSpell(CommandContext<CommandSourceStack> command, Collection<ServerPlayer> targetPlayers) throws CommandSyntaxException {
         for(ServerPlayer player : targetPlayers) {
-            KnowledgeUtils.removeAllSpell(player);
+            KnowledgeUtil.removeAllSpell(player);
         }
 
         if (targetPlayers.size() == 1) {
@@ -268,10 +268,10 @@ public class WizardsRebornCommand {
         for(ServerPlayer player : targetPlayers) {
             ItemStack stack = player.getMainHandItem();
             if (!stack.isEmpty()) {
-                if (ArcaneEnchantmentUtils.isArcaneItem(stack)) {
-                    int enchantmentLevel = ArcaneEnchantmentUtils.getArcaneEnchantment(stack, arcaneEnchantment) + 1;
-                    if (ArcaneEnchantmentUtils.canAddArcaneEnchantment(stack, arcaneEnchantment, enchantmentLevel)) {
-                        ArcaneEnchantmentUtils.addArcaneEnchantment(stack, arcaneEnchantment, enchantmentLevel);
+                if (ArcaneEnchantmentUtil.isArcaneItem(stack)) {
+                    int enchantmentLevel = ArcaneEnchantmentUtil.getArcaneEnchantment(stack, arcaneEnchantment) + 1;
+                    if (ArcaneEnchantmentUtil.canAddArcaneEnchantment(stack, arcaneEnchantment, enchantmentLevel)) {
+                        ArcaneEnchantmentUtil.addArcaneEnchantment(stack, arcaneEnchantment, enchantmentLevel);
                     }
                 }
             }
@@ -294,8 +294,8 @@ public class WizardsRebornCommand {
         for(ServerPlayer player : targetPlayers) {
             ItemStack stack = player.getMainHandItem();
             if (!stack.isEmpty()) {
-                if (ArcaneEnchantmentUtils.canAddArcaneEnchantment(stack, arcaneEnchantment, enchantmentLevel)) {
-                    ArcaneEnchantmentUtils.addArcaneEnchantment(stack, arcaneEnchantment, enchantmentLevel);
+                if (ArcaneEnchantmentUtil.canAddArcaneEnchantment(stack, arcaneEnchantment, enchantmentLevel)) {
+                    ArcaneEnchantmentUtil.addArcaneEnchantment(stack, arcaneEnchantment, enchantmentLevel);
                 }
             }
         }
@@ -320,8 +320,8 @@ public class WizardsRebornCommand {
             if (!stack.isEmpty()) {
                 if (stack.getItem() instanceof IWissenItem wissenItem) {
                     if (wissen > wissenItem.getMaxWissen()) wissen = wissenItem.getMaxWissen();
-                    WissenItemUtils.existWissen(stack);
-                    WissenItemUtils.setWissen(stack, wissen);
+                    WissenItemUtil.existWissen(stack);
+                    WissenItemUtil.setWissen(stack, wissen);
                 }
             }
         }
@@ -343,8 +343,8 @@ public class WizardsRebornCommand {
             ItemStack stack = player.getMainHandItem();
             if (!stack.isEmpty()) {
                 if (stack.getItem() instanceof IWissenItem wissenItem) {
-                    WissenItemUtils.existWissen(stack);
-                    WissenItemUtils.addWissen(stack, wissen, wissenItem.getMaxWissen());
+                    WissenItemUtil.existWissen(stack);
+                    WissenItemUtil.addWissen(stack, wissen, wissenItem.getMaxWissen());
                 }
             }
         }
@@ -366,8 +366,8 @@ public class WizardsRebornCommand {
             ItemStack stack = player.getMainHandItem();
             if (!stack.isEmpty()) {
                 if (stack.getItem() instanceof IWissenItem wissenItem) {
-                    WissenItemUtils.existWissen(stack);
-                    WissenItemUtils.removeWissen(stack, wissen);
+                    WissenItemUtil.existWissen(stack);
+                    WissenItemUtil.removeWissen(stack, wissen);
                 }
             }
         }
@@ -385,7 +385,7 @@ public class WizardsRebornCommand {
     }
 
     private static int getKnowledgePoints(CommandContext<CommandSourceStack> command, ServerPlayer targetPlayer) throws CommandSyntaxException {
-        int points = KnowledgeUtils.getKnowledgePoints(targetPlayer);
+        int points = KnowledgeUtil.getKnowledgePoints(targetPlayer);
 
         command.getSource().sendSuccess(() -> {
             return Component.literal(String.valueOf(points));
@@ -394,7 +394,7 @@ public class WizardsRebornCommand {
     }
 
     private static int getKnowledgePoints(CommandContext<CommandSourceStack> command) throws CommandSyntaxException {
-        int points = KnowledgeUtils.getAllKnowledgePoints();
+        int points = KnowledgeUtil.getAllKnowledgePoints();
 
         command.getSource().sendSuccess(() -> {
             return Component.literal(String.valueOf(points));
@@ -403,7 +403,7 @@ public class WizardsRebornCommand {
     }
 
     private static int getSpellPoints(CommandContext<CommandSourceStack> command, ServerPlayer targetPlayer) throws CommandSyntaxException {
-        int points = KnowledgeUtils.getSpellPoints(targetPlayer);
+        int points = KnowledgeUtil.getSpellPoints(targetPlayer);
 
         command.getSource().sendSuccess(() -> {
             return Component.literal(String.valueOf(points));
@@ -412,7 +412,7 @@ public class WizardsRebornCommand {
     }
 
     private static int getSpellPoints(CommandContext<CommandSourceStack> command) throws CommandSyntaxException {
-        int points = KnowledgeUtils.getAllSpellPoints();
+        int points = KnowledgeUtil.getAllSpellPoints();
 
         command.getSource().sendSuccess(() -> {
             return Component.literal(String.valueOf(points));

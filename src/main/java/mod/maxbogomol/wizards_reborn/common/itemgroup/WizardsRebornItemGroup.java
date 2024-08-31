@@ -2,13 +2,13 @@ package mod.maxbogomol.wizards_reborn.common.itemgroup;
 
 import mod.maxbogomol.wizards_reborn.WizardsReborn;
 import mod.maxbogomol.wizards_reborn.api.alchemy.AlchemyPotion;
-import mod.maxbogomol.wizards_reborn.api.alchemy.AlchemyPotionUtils;
+import mod.maxbogomol.wizards_reborn.api.alchemy.AlchemyPotionUtil;
 import mod.maxbogomol.wizards_reborn.api.alchemy.AlchemyPotions;
 import mod.maxbogomol.wizards_reborn.api.arcaneenchantment.ArcaneEnchantment;
-import mod.maxbogomol.wizards_reborn.api.arcaneenchantment.ArcaneEnchantmentUtils;
+import mod.maxbogomol.wizards_reborn.api.arcaneenchantment.ArcaneEnchantmentUtil;
 import mod.maxbogomol.wizards_reborn.api.arcaneenchantment.ArcaneEnchantments;
 import mod.maxbogomol.wizards_reborn.api.crystalritual.CrystalRitual;
-import mod.maxbogomol.wizards_reborn.api.crystalritual.CrystalRitualUtils;
+import mod.maxbogomol.wizards_reborn.api.crystalritual.CrystalRitualUtil;
 import mod.maxbogomol.wizards_reborn.api.crystalritual.CrystalRituals;
 import mod.maxbogomol.wizards_reborn.common.alchemypotion.RegisterAlchemyPotions;
 import mod.maxbogomol.wizards_reborn.common.integration.create.CreateIntegration;
@@ -505,7 +505,7 @@ public class WizardsRebornItemGroup {
             for (CrystalRitual ritual : CrystalRituals.getCrystalRituals()) {
                 if (ritual != WizardsReborn.EMPTY_CRYSTAL_RITUAL) {
                     ItemStack stack = new ItemStack(WizardsReborn.RUNIC_WISESTONE_PLATE.get());
-                    CrystalRitualUtils.setCrystalRitual(stack, ritual);
+                    CrystalRitualUtil.setCrystalRitual(stack, ritual);
                     event.accept(stack);
                 }
             }
@@ -606,7 +606,7 @@ public class WizardsRebornItemGroup {
             for (ArcaneEnchantment enchantment : ArcaneEnchantments.getArcaneEnchantments()) {
                 for (int i = 0; i < enchantment.getMaxLevel(); i++) {
                     ItemStack stack = new ItemStack(WizardsReborn.ARCANE_ENCHANTED_BOOK.get());
-                    ArcaneEnchantmentUtils.addArcaneEnchantment(stack, enchantment, i + 1);
+                    ArcaneEnchantmentUtil.addArcaneEnchantment(stack, enchantment, i + 1);
                     event.accept(stack);
                 }
             }
@@ -614,7 +614,7 @@ public class WizardsRebornItemGroup {
             for (AlchemyPotion potion : AlchemyPotions.getAlchemyPotions()) {
                 if (potion != RegisterAlchemyPotions.EMPTY && potion != RegisterAlchemyPotions.COMBINED) {
                     ItemStack stack = new ItemStack(WizardsReborn.ALCHEMY_VIAL_POTION.get());
-                    AlchemyPotionUtils.setPotion(stack, potion);
+                    AlchemyPotionUtil.setPotion(stack, potion);
                     event.accept(stack);
                 }
             }
@@ -622,7 +622,7 @@ public class WizardsRebornItemGroup {
             for (AlchemyPotion potion : AlchemyPotions.getAlchemyPotions()) {
                 if (potion != RegisterAlchemyPotions.EMPTY && potion != RegisterAlchemyPotions.COMBINED) {
                     ItemStack stack = new ItemStack(WizardsReborn.ALCHEMY_FLASK_POTION.get());
-                    AlchemyPotionUtils.setPotion(stack, potion);
+                    AlchemyPotionUtil.setPotion(stack, potion);
                     event.accept(stack);
                 }
             }

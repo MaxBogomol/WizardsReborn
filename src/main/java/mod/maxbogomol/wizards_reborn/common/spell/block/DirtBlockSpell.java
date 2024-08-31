@@ -1,7 +1,7 @@
 package mod.maxbogomol.wizards_reborn.common.spell.block;
 
 import mod.maxbogomol.wizards_reborn.WizardsReborn;
-import mod.maxbogomol.wizards_reborn.api.crystal.CrystalUtils;
+import mod.maxbogomol.wizards_reborn.api.crystal.CrystalUtil;
 import mod.maxbogomol.wizards_reborn.common.item.equipment.arcane.ArcaneArmorItem;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
@@ -42,7 +42,7 @@ public class DirtBlockSpell extends BlockPlaceSpell {
         BlockState blockState = Blocks.DIRT.defaultBlockState();
 
         CompoundTag stats = getStats(stack);
-        int focusLevel = CrystalUtils.getStatLevel(stats, WizardsReborn.FOCUS_CRYSTAL_STAT);
+        int focusLevel = CrystalUtil.getStatLevel(stats, WizardsReborn.FOCUS_CRYSTAL_STAT);
         float magicModifier = ArcaneArmorItem.getPlayerMagicModifier(context.getPlayer());
         if (random.nextFloat() < 0.15f + (0.05f* (focusLevel + magicModifier))) {
             blockState = blockList.get(random.nextInt(blockList.size())).defaultBlockState();

@@ -4,7 +4,7 @@ import com.google.common.base.Preconditions;
 import mod.maxbogomol.fluffy_fur.common.item.ICustomBlockEntityDataItem;
 import mod.maxbogomol.wizards_reborn.WizardsReborn;
 import mod.maxbogomol.wizards_reborn.api.alchemy.AlchemyPotion;
-import mod.maxbogomol.wizards_reborn.api.alchemy.AlchemyPotionUtils;
+import mod.maxbogomol.wizards_reborn.api.alchemy.AlchemyPotionUtil;
 import mod.maxbogomol.wizards_reborn.common.item.PlacedItem;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
@@ -36,9 +36,9 @@ public class AlchemyBottleItem extends PlacedItem implements ICustomBlockEntityD
 
         if (!stack.isEmpty()) {
             if (stack.getItem() instanceof AlchemyBottleItem bottle) {
-                AlchemyPotion potion = AlchemyPotionUtils.getPotionFluid(handler.getFluidInTank(0).getFluid());
+                AlchemyPotion potion = AlchemyPotionUtil.getPotionFluid(handler.getFluidInTank(0).getFluid());
 
-                if (!AlchemyPotionUtils.isEmpty(potion)) {
+                if (!AlchemyPotionUtil.isEmpty(potion)) {
                     FluidStack removeFluid = handler.drain(250 * (bottle.maxUses), IFluidHandler.FluidAction.SIMULATE);
                     int remove = removeFluid.getAmount() - (removeFluid.getAmount() % 250);
                     if (remove >= 250) {
@@ -49,7 +49,7 @@ public class AlchemyBottleItem extends PlacedItem implements ICustomBlockEntityD
                         }
 
                         ItemStack potionItem = bottle.getPotionItem();
-                        AlchemyPotionUtils.setPotion(potionItem, potion);
+                        AlchemyPotionUtil.setPotion(potionItem, potion);
 
                         AlchemyPotionItem.setUses(potionItem, bottle.maxUses - (remove / 250));
 

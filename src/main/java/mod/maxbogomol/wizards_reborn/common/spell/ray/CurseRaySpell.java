@@ -1,8 +1,8 @@
 package mod.maxbogomol.wizards_reborn.common.spell.ray;
 
 import mod.maxbogomol.wizards_reborn.WizardsReborn;
-import mod.maxbogomol.wizards_reborn.api.crystal.CrystalUtils;
-import mod.maxbogomol.wizards_reborn.api.wissen.WissenItemUtils;
+import mod.maxbogomol.wizards_reborn.api.crystal.CrystalUtil;
+import mod.maxbogomol.wizards_reborn.api.wissen.WissenItemUtil;
 import mod.maxbogomol.wizards_reborn.common.damage.DamageSourceRegistry;
 import mod.maxbogomol.wizards_reborn.common.entity.SpellProjectileEntity;
 import mod.maxbogomol.wizards_reborn.common.item.equipment.arcane.ArcaneArmorItem;
@@ -42,9 +42,9 @@ public class CurseRaySpell extends RaySpell {
             if (!player.isShiftKeyDown()) {
                 if (target.tickCount % 10 == 0) {
                     ItemStack stack = player.getItemInHand(player.getUsedItemHand());
-                    if (WissenItemUtils.canRemoveWissen(stack, getWissenCostWithStat(projectile.getStats(), player))) {
+                    if (WissenItemUtil.canRemoveWissen(stack, getWissenCostWithStat(projectile.getStats(), player))) {
                         if (target instanceof LivingEntity livingEntity) {
-                            int focusLevel = CrystalUtils.getStatLevel(projectile.getStats(), WizardsReborn.FOCUS_CRYSTAL_STAT);
+                            int focusLevel = CrystalUtil.getStatLevel(projectile.getStats(), WizardsReborn.FOCUS_CRYSTAL_STAT);
                             float magicModifier = ArcaneArmorItem.getPlayerMagicModifier(player);
                             float damage = (float) (1.0f + (focusLevel * 0.5)) + magicModifier;
                             boolean effect = false;
@@ -72,7 +72,7 @@ public class CurseRaySpell extends RaySpell {
                     }
                 }
             } else {
-                int focusLevel = CrystalUtils.getStatLevel(projectile.getStats(), WizardsReborn.FOCUS_CRYSTAL_STAT);
+                int focusLevel = CrystalUtil.getStatLevel(projectile.getStats(), WizardsReborn.FOCUS_CRYSTAL_STAT);
                 healAura(world, ray.getLocation(), focusLevel + 1, projectile, player);
             }
         }
@@ -84,7 +84,7 @@ public class CurseRaySpell extends RaySpell {
 
         if (player != null) {
             if (player.isShiftKeyDown()) {
-                int focusLevel = CrystalUtils.getStatLevel(projectile.getStats(), WizardsReborn.FOCUS_CRYSTAL_STAT);
+                int focusLevel = CrystalUtil.getStatLevel(projectile.getStats(), WizardsReborn.FOCUS_CRYSTAL_STAT);
                 healAura(world, ray.getLocation(), focusLevel + 1, projectile, player);
             }
         }
@@ -95,7 +95,7 @@ public class CurseRaySpell extends RaySpell {
         List<Entity> entities = world.getEntitiesOfClass(Entity.class,  new AABB(pos.x - radius,pos.y - radius,pos.z - radius,pos.x + radius,pos.y + radius,pos.z + radius));
         for (Entity entity : entities) {
             if (entity.tickCount % 20 == 0) {
-                if (WissenItemUtils.canRemoveWissen(stack, getWissenCostWithStat(projectile.getStats(), player))) {
+                if (WissenItemUtil.canRemoveWissen(stack, getWissenCostWithStat(projectile.getStats(), player))) {
                     if (entity instanceof LivingEntity livingEntity) {
                         boolean effect = false;
                         if (livingEntity.getMobType() != MobType.UNDEAD) {
