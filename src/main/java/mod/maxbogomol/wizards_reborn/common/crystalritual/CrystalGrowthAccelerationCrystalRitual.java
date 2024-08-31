@@ -51,13 +51,13 @@ public class CrystalGrowthAccelerationCrystalRitual extends CrystalRitual {
 
         if (!level.isClientSide()) {
             LightRayHitResult hitResult = crystal.setupLightRay();
-            if (hitResult != null && hitResult.getTile() instanceof IGrowableCrystal growable) {
+            if (hitResult != null && hitResult.getBlockEntity() instanceof IGrowableCrystal growable) {
                 int resonanceLevel = getStatLevel(crystal, WizardsReborn.RESONANCE_CRYSTAL_STAT);
                 growable.setGrowingPower(5 + resonanceLevel);
                 if (getCooldown(crystal) <= 0) {
                     growable.addGrowing();
                 }
-                BlockEntityUpdate.packet(hitResult.getTile());
+                BlockEntityUpdate.packet(hitResult.getBlockEntity());
             }
             if (getCooldown(crystal) <= 0) {
                 setMaxCooldown(crystal, getMaxRitualCooldownWithStat(crystal));

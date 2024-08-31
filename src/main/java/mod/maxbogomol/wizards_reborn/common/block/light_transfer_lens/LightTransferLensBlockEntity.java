@@ -68,7 +68,7 @@ public class LightTransferLensBlockEntity extends ExposedBlockSimpleInventory im
                             Vec3 to = LightUtil.getLightLensPos(pos, lightTileEntity.getLightLensPos());
 
                             LightRayHitResult hitResult = LightUtil.getLightRayHitResult(level, getBlockPos(), from, to, 25);
-                            BlockEntity hitTile = hitResult.getTile();
+                            BlockEntity hitTile = hitResult.getBlockEntity();
                             LightUtil.transferLight(this, hitTile);
                         }
                     } else {

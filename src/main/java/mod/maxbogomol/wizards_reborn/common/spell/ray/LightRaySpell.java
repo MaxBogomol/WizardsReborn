@@ -52,7 +52,7 @@ public class LightRaySpell extends RaySpell {
         Vec3 to = entity.getLookAngle().scale(getRayDistance() + 1).add(from);
 
         LightRayHitResult hitResult = LightUtil.getLightRayHitResult(entity.level(), entity.getOnPos(), from, to, getRayDistance());
-        BlockEntity hitTile = hitResult.getTile();
+        BlockEntity hitTile = hitResult.getBlockEntity();
         if (hitTile != null) {
             if (hitTile instanceof ILightBlockEntity toLight) {
                 int max = 10;
