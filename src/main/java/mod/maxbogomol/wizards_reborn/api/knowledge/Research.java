@@ -8,8 +8,8 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class Research {
-    public ArrayList<MonogramMapEntry> map = new ArrayList<MonogramMapEntry>();
-    public Map<Monogram, Integer> monograms = new HashMap<Monogram, Integer>();
+    public ArrayList<MonogramMapEntry> map = new ArrayList<>();
+    public Map<Monogram, Integer> monograms = new HashMap<>();
     public int mapSize;
 
     public Research(int mapSize, ResearchMapEntry mapEntry, ResearchMonogramEntry... monograms) {

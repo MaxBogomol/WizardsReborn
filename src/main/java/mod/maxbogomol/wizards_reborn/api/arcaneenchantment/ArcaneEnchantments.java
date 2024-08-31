@@ -5,8 +5,8 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class ArcaneEnchantments {
-    public static Map<String, ArcaneEnchantment> arcaneEnchantments = new HashMap<String, ArcaneEnchantment>();
-    public static ArrayList<ArcaneEnchantment> arcaneEnchantmentList = new ArrayList<ArcaneEnchantment>();
+    public static Map<String, ArcaneEnchantment> arcaneEnchantments = new HashMap<>();
+    public static ArrayList<ArcaneEnchantment> arcaneEnchantmentList = new ArrayList<>();
 
     public static void addArcaneEnchantment(String id, ArcaneEnchantment arcaneEnchantment) {
         arcaneEnchantments.put(id, arcaneEnchantment);

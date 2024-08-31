@@ -7,11 +7,11 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class Crystals {
-    public static Map<String, CrystalType> crystalTypes = new HashMap<String, CrystalType>();
-    public static ArrayList<CrystalType> crystalTypesList = new ArrayList<CrystalType>();
-    public static Map<String, PolishingType> crystalPolishing = new HashMap<String, PolishingType>();
-    public static ArrayList<PolishingType> crystalPolishingList = new ArrayList<PolishingType>();
-    public static ArrayList<Item> crystalItems = new ArrayList<Item>();
+    public static Map<String, CrystalType> crystalTypes = new HashMap<>();
+    public static ArrayList<CrystalType> crystalTypesList = new ArrayList<>();
+    public static Map<String, PolishingType> crystalPolishing = new HashMap<>();
+    public static ArrayList<PolishingType> crystalPolishingList = new ArrayList<>();
+    public static ArrayList<Item> crystalItems = new ArrayList<>();
 
     public static void addType(String id, CrystalType type) {
         crystalTypes.put(id, type);

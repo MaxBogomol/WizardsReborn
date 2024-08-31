@@ -5,8 +5,8 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class AlchemyPotions {
-    public static Map<String, AlchemyPotion> alchemyPotions = new HashMap<String, AlchemyPotion>();
-    public static ArrayList<AlchemyPotion> alchemyPotionList = new ArrayList<AlchemyPotion>();
+    public static Map<String, AlchemyPotion> alchemyPotions = new HashMap<>();
+    public static ArrayList<AlchemyPotion> alchemyPotionList = new ArrayList<>();
 
     public static void addAlchemyPotion(String id, AlchemyPotion potion) {
         alchemyPotions.put(id, potion);

@@ -168,7 +168,7 @@ public class ArcaneEnchantmentUtil {
     }
 
     @OnlyIn(Dist.CLIENT)
-    public static List<Component> appendHoverText(ItemStack stack, Level world, TooltipFlag flags) {
+    public static List<Component> appendHoverText(ItemStack stack, Level level, TooltipFlag flags) {
         Map<ArcaneEnchantment, Integer> arcaneEnchantments = getAllArcaneEnchantments(stack);
         List<Component> list = new ArrayList<>();
 
@@ -196,13 +196,13 @@ public class ArcaneEnchantmentUtil {
     }
 
     @OnlyIn(Dist.CLIENT)
-    public static List<Component> modifiersAppendHoverText(ItemStack stack, Level world, TooltipFlag flags) {
+    public static List<Component> modifiersAppendHoverText(ItemStack stack, Level level, TooltipFlag flags) {
         Map<ArcaneEnchantment, Integer> arcaneEnchantments = getAllArcaneEnchantments(stack);
         List<Component> list = new ArrayList<>();
 
         if (!arcaneEnchantments.isEmpty()) {
             for (ArcaneEnchantment arcaneEnchantment : arcaneEnchantments.keySet()) {
-                List<Component> newList = arcaneEnchantment.modifierAppendHoverText(stack, world, flags);
+                List<Component> newList = arcaneEnchantment.modifierAppendHoverText(stack, level, flags);
                 if (newList != null && !newList.isEmpty()) list.addAll(newList);
             }
         }
@@ -210,10 +210,10 @@ public class ArcaneEnchantmentUtil {
         return list;
     }
 
-    public static void inventoryTick(ItemStack stack, Level world, Entity entity, int slot, boolean isSelected) {
-        LifeMendingArcaneEnchantment.inventoryTick(stack, world, entity, slot, isSelected);
-        WissenMendingArcaneEnchantment.inventoryTick(stack, world, entity, slot, isSelected);
-        SonarArcaneEnchantment.inventoryTick(stack, world, entity, slot, isSelected);
+    public static void inventoryTick(ItemStack stack, Level level, Entity entity, int slot, boolean isSelected) {
+        LifeMendingArcaneEnchantment.inventoryTick(stack, level, entity, slot, isSelected);
+        WissenMendingArcaneEnchantment.inventoryTick(stack, level, entity, slot, isSelected);
+        SonarArcaneEnchantment.inventoryTick(stack, level, entity, slot, isSelected);
     }
 
     public static int damageItem(ItemStack stack, int amount, LivingEntity entity) {

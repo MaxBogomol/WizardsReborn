@@ -12,6 +12,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class CrystalUtil {
+
     public static void createCrystalItemStats(ItemStack stack, CrystalType type, Level level, int count) {
         int maxCount = 0;
         Map<CrystalStat, Integer> intStats = new HashMap<CrystalStat, Integer>();

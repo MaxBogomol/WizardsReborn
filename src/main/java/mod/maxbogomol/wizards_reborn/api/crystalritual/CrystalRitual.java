@@ -244,9 +244,9 @@ public class CrystalRitual {
             for (double y = -sizeFrom.y(); y <= sizeTo.y(); y++) {
                 for (double z = -sizeFrom.z(); z <= sizeTo.z(); z++) {
                     BlockPos pos = new BlockPos(new BlockPos(startPos.getX() + Mth.floor(x), startPos.getY() + Mth.floor(y), startPos.getZ() + Mth.floor(z)));
-                    BlockEntity tile = level.getBlockEntity(pos);
-                    if (tile != null) {
-                        if (tile instanceof ArcanePedestalBlockEntity pedestal) {
+                    BlockEntity blockEntity = level.getBlockEntity(pos);
+                    if (blockEntity != null) {
+                        if (blockEntity instanceof ArcanePedestalBlockEntity pedestal) {
                             pedestals.add(pedestal);
                         }
                     }

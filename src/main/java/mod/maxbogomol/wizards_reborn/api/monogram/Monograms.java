@@ -6,9 +6,9 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class Monograms {
-    public static Map<String, Monogram> monograms = new HashMap<String, Monogram>();
-    public static ArrayList<Monogram> monogramList = new ArrayList<Monogram>();
-    public static Map<String, MonogramRecipe> recipes = new HashMap<String, MonogramRecipe>();
+    public static Map<String, Monogram> monograms = new HashMap<>();
+    public static ArrayList<Monogram> monogramList = new ArrayList<>();
+    public static Map<String, MonogramRecipe> recipes = new HashMap<>();
 
     public static void addMonogram(String id, Monogram monogram) {
         monograms.put(id, monogram);

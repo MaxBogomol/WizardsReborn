@@ -1,7 +1,7 @@
 package mod.maxbogomol.wizards_reborn.client.integration.jade;
 
 import mod.maxbogomol.wizards_reborn.api.alchemy.IFluidBlockEntity;
-import mod.maxbogomol.wizards_reborn.api.alchemy.IHeatTileEntity;
+import mod.maxbogomol.wizards_reborn.api.alchemy.IHeatBlockEntity;
 import mod.maxbogomol.wizards_reborn.api.alchemy.ISteamBlockEntity;
 import mod.maxbogomol.wizards_reborn.api.light.ILightBlockEntity;
 import mod.maxbogomol.wizards_reborn.api.wissen.ICooldownBlockEntity;
@@ -42,7 +42,7 @@ public enum NumericalProvider implements IBlockComponentProvider {
         if (tile instanceof IExperienceBlockEntity experienceTile) {
             tooltip.add(NumericalUtil.getExperienceName(experienceTile.getExperience(), experienceTile.getMaxExperience()));
         }
-        if (tile instanceof IHeatTileEntity heatTile) {
+        if (tile instanceof IHeatBlockEntity heatTile) {
             tooltip.add(NumericalUtil.getHeatName(heatTile.getHeat(), heatTile.getMaxHeat()));
         }
         if (tile instanceof ISteamBlockEntity steamTile) {

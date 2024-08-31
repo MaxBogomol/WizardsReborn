@@ -21,6 +21,7 @@ import net.minecraftforge.api.distmarker.OnlyIn;
 import java.awt.*;
 
 public class LightUtil {
+
     public static Vec3 getLightLensPos(BlockPos pos, Vec3 lensPos) {
         return new Vec3(pos.getX() + lensPos.x(), pos.getY() + lensPos.y(), pos.getZ() + lensPos.z());
     }
@@ -43,14 +44,14 @@ public class LightUtil {
         Vec3 end = hitresult.getLocation();
 
         float distance = (float) Math.sqrt(Math.pow(from.x() - end.x, 2) + Math.pow(from.y() - end.y, 2) + Math.pow(from.z() - end.z, 2));
-        BlockEntity hitTile = null;
+        BlockEntity hitBlockEntity = null;
 
         BlockPos blockPosHit = BlockPos.containing(end.x(), end.y(), end.z());
         if (startPos.getX() != blockPosHit.getX() || startPos.getY() != blockPosHit.getY() || startPos.getZ() != blockPosHit.getZ()) {
-            BlockEntity tile = level.getBlockEntity(blockPosHit);
-            if (tile instanceof ILightBlockEntity lightTileHit && lightTileHit.getLightLensSize() == 0) {
+            BlockEntity blockEntity = level.getBlockEntity(blockPosHit);
+            if (blockEntity instanceof ILightBlockEntity lightBlockEntityHit && lightBlockEntityHit.getLightLensSize() == 0) {
                 distance = (float) Math.sqrt(Math.pow(from.x() - end.x, 2) + Math.pow(from.y() - end.y, 2) + Math.pow(from.z() - end.z, 2));
-                hitTile = tile;
+                hitBlockEntity = blockEntity;
             }
         }
 
@@ -63,14 +64,14 @@ public class LightUtil {
             Vec3 posHit = new Vec3(-X, -Y, -Z).add(from);
             blockPosHit = BlockPos.containing(posHit.x(), posHit.y(), posHit.z());
             if (startPos.getX() != blockPosHit.getX() || startPos.getY() != blockPosHit.getY() || startPos.getZ() != blockPosHit.getZ()) {
-                BlockEntity tile = level.getBlockEntity(blockPosHit);
-                if (tile instanceof ILightBlockEntity lightTileHit) {
-                    float hitDistance = (float) Math.sqrt(Math.pow(posHit.x() - tile.getBlockPos().getX() - lightTileHit.getLightLensPos().x(), 2) + Math.pow(posHit.y() - tile.getBlockPos().getY() - lightTileHit.getLightLensPos().y(), 2) + Math.pow(posHit.z() - tile.getBlockPos().getZ() - lightTileHit.getLightLensPos().z(), 2));
+                BlockEntity blockEntity = level.getBlockEntity(blockPosHit);
+                if (blockEntity instanceof ILightBlockEntity lightBlockEntityHit) {
+                    float hitDistance = (float) Math.sqrt(Math.pow(posHit.x() - blockEntity.getBlockPos().getX() - lightBlockEntityHit.getLightLensPos().x(), 2) + Math.pow(posHit.y() - blockEntity.getBlockPos().getY() - lightBlockEntityHit.getLightLensPos().y(), 2) + Math.pow(posHit.z() - blockEntity.getBlockPos().getZ() - lightBlockEntityHit.getLightLensPos().z(), 2));
 
-                    if (hitDistance <= lightTileHit.getLightLensSize()) {
+                    if (hitDistance <= lightBlockEntityHit.getLightLensSize()) {
                         end = posHit;
                         distance = (float) Math.sqrt(Math.pow(from.x() - end.x, 2) + Math.pow(from.y() - end.y, 2) + Math.pow(from.z() - end.z, 2));
-                        hitTile = tile;
+                        hitBlockEntity = blockEntity;
                         break;
                     }
                 }
@@ -80,10 +81,10 @@ public class LightUtil {
         if (distance > rayDistance) {
             distance = rayDistance;
             end = newTo;
-            hitTile = null;
+            hitBlockEntity = null;
         }
 
-        return new LightRayHitResult(end, distance, hitTile);
+        return new LightRayHitResult(end, distance, hitBlockEntity);
     }
 
     @OnlyIn(Dist.CLIENT)

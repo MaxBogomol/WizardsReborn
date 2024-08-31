@@ -1,7 +1,7 @@
 package mod.maxbogomol.wizards_reborn.common.block.sensor;
 
 import mod.maxbogomol.wizards_reborn.WizardsRebornClient;
-import mod.maxbogomol.wizards_reborn.api.alchemy.IHeatTileEntity;
+import mod.maxbogomol.wizards_reborn.api.alchemy.IHeatBlockEntity;
 import net.minecraft.client.resources.model.ModelResourceLocation;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -36,7 +36,7 @@ public class HeatSensorBlock extends SensorBaseBlock {
         }
 
         BlockEntity tile = pLevel.getBlockEntity(blockpos);
-        if (tile instanceof IHeatTileEntity heatTile) {
+        if (tile instanceof IHeatBlockEntity heatTile) {
             i = Mth.floor(((float) heatTile.getHeat() / heatTile.getMaxHeat()) * 14.0F);
         }
 

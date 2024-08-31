@@ -156,7 +156,7 @@ public class Spell {
         return false;
     }
 
-    public boolean canSpell(Level world, Player player, InteractionHand hand) {
+    public boolean canSpell(Level level, Player player, InteractionHand hand) {
         ItemStack stack = player.getItemInHand(hand);
 
         CompoundTag nbt = stack.getTag();
@@ -167,7 +167,7 @@ public class Spell {
         return false;
     }
 
-    public boolean canSpellAir(Level world, Player player, InteractionHand hand) {
+    public boolean canSpellAir(Level level, Player player, InteractionHand hand) {
         return true;
     }
 
@@ -201,8 +201,8 @@ public class Spell {
         return ArcaneWandItem.getInventory(stack).getItem(0).getOrCreateTag();
     }
 
-    public void useSpell(Level world, Player player, InteractionHand hand) {
-        if (!world.isClientSide) {
+    public void useSpell(Level level, Player player, InteractionHand hand) {
+        if (!level.isClientSide()) {
             ItemStack stack = player.getItemInHand(hand);
 
             CompoundTag stats = getStats(stack);
@@ -216,15 +216,15 @@ public class Spell {
         return InteractionResult.PASS;
     }
 
-    public void onUseTick(Level world, LivingEntity livingEntity, ItemStack stack, int remainingUseDuration) {
+    public void onUseTick(Level level, LivingEntity livingEntity, ItemStack stack, int remainingUseDuration) {
 
     }
 
-    public void releaseUsing(ItemStack stack, Level world, LivingEntity entityLiving, int timeLeft) {
+    public void releaseUsing(ItemStack stack, Level level, LivingEntity entityLiving, int timeLeft) {
 
     }
 
-    public void finishUsingItem(ItemStack stack, Level world, LivingEntity entityLiving) {
+    public void finishUsingItem(ItemStack stack, Level level, LivingEntity entityLiving) {
 
     }
 
@@ -249,26 +249,26 @@ public class Spell {
         return null;
     }
 
-    public void onImpact(HitResult ray, Level world, SpellProjectileEntity projectile, Player player, Entity target) {
+    public void onImpact(HitResult ray, Level level, SpellProjectileEntity projectile, Player player, Entity target) {
 
     }
 
-    public void onImpact(HitResult ray, Level world, SpellProjectileEntity projectile, Player player) {
+    public void onImpact(HitResult ray, Level level, SpellProjectileEntity projectile, Player player) {
 
     }
 
-    public void spawnSpellStandard(Level world, Player player, CompoundTag stats) {
-        if (!world.isClientSide) {
+    public void spawnSpellStandard(Level level, Player player, CompoundTag stats) {
+        if (!level.isClientSide()) {
             Vec3 pos = player.getEyePosition(0);
             Vec3 vel = player.getEyePosition(0).add(player.getLookAngle().scale(40)).subtract(pos).scale(1.0 / 30);
-            world.addFreshEntity(new SpellProjectileEntity(WizardsReborn.SPELL_PROJECTILE.get(), world).shoot(
+            level.addFreshEntity(new SpellProjectileEntity(WizardsReborn.SPELL_PROJECTILE.get(), level).shoot(
                     pos.x, pos.y - 0.2f, pos.z, vel.x, vel.y, vel.z, player.getUUID(), this.getId(), stats
             ));
         }
     }
 
-    public void onReload(ItemStack stack, Level world, Entity entity, int slot, boolean isSelected) {
-        world.playSound(WizardsReborn.proxy.getPlayer(), entity.getX(), entity.getY(), entity.getZ(), WizardsReborn.SPELL_RELOAD_SOUND.get(), SoundSource.BLOCKS, 0.1f, (float) (1f + ((random.nextFloat() - 0.5D) / 4)));
+    public void onReload(ItemStack stack, Level level, Entity entity, int slot, boolean isSelected) {
+        level.playSound(WizardsReborn.proxy.getPlayer(), entity.getX(), entity.getY(), entity.getZ(), WizardsReborn.SPELL_RELOAD_SOUND.get(), SoundSource.BLOCKS, 0.1f, (float) (1f + ((random.nextFloat() - 0.5D) / 4)));
     }
 
     @OnlyIn(Dist.CLIENT)
@@ -297,7 +297,7 @@ public class Spell {
         return 0;
     }
 
-    public static void spellSound(Player player, Level world) {
-        world.playSound(WizardsReborn.proxy.getPlayer(), player.getX(), player.getY(), player.getZ(), WizardsReborn.SPELL_CAST_SOUND.get(), SoundSource.PLAYERS, 0.25f, (float) (1f + ((random.nextFloat() - 0.5D) / 4)));
+    public static void spellSound(Player player, Level level) {
+        level.playSound(WizardsReborn.proxy.getPlayer(), player.getX(), player.getY(), player.getZ(), WizardsReborn.SPELL_CAST_SOUND.get(), SoundSource.PLAYERS, 0.25f, (float) (1f + ((random.nextFloat() - 0.5D) / 4)));
     }
 }

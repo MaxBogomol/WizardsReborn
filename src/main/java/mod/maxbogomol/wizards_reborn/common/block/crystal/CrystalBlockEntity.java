@@ -126,9 +126,9 @@ public class CrystalBlockEntity extends BlockSimpleInventory implements Tickable
                 } else if (ritual.hasLightRay(this)) {
                     LightRayHitResult hitResult = setupLightRay();
                     if (hitResult != null) {
-                        BlockEntity hitTile = hitResult.getTile();
-                        LightUtil.transferLight(this, hitTile);
-                        BlockEntityUpdate.packet(hitTile);
+                        BlockEntity hitBlockEntity = hitResult.getBlockEntity();
+                        LightUtil.transferLight(this, hitBlockEntity);
+                        BlockEntityUpdate.packet(hitBlockEntity);
                     }
                 }
                 update = true;
@@ -280,17 +280,17 @@ public class CrystalBlockEntity extends BlockSimpleInventory implements Tickable
     }
 
     @Override
-    public boolean wissenWandReceiveConnect(ItemStack stack, UseOnContext context, BlockEntity tile) {
+    public boolean wissenWandReceiveConnect(ItemStack stack, UseOnContext context, BlockEntity blockEntity) {
         return false;
     }
 
     @Override
-    public boolean wissenWandSendConnect(ItemStack stack, UseOnContext context, BlockEntity tile) {
+    public boolean wissenWandSendConnect(ItemStack stack, UseOnContext context, BlockEntity blockEntity) {
         BlockPos oldBlockPos = WissenWandItem.getBlockPos(stack);
-        BlockEntity oldTile = level.getBlockEntity(oldBlockPos);
+        BlockEntity oldBlockEntity = level.getBlockEntity(oldBlockPos);
 
-        if (oldTile instanceof ILightBlockEntity lightTile) {
-            if (lightTile.canConnectSendLight()) {
+        if (oldBlockEntity instanceof ILightBlockEntity lightBlockEntity) {
+            if (lightBlockEntity.canConnectSendLight()) {
                 blockToX = oldBlockPos.getX();
                 blockToY = oldBlockPos.getY();
                 blockToZ = oldBlockPos.getZ();
@@ -306,7 +306,7 @@ public class CrystalBlockEntity extends BlockSimpleInventory implements Tickable
 
 
     @Override
-    public boolean wissenWandReload(ItemStack stack, UseOnContext context, BlockEntity tile) {
+    public boolean wissenWandReload(ItemStack stack, UseOnContext context, BlockEntity blockEntity) {
         isToBlock = false;
         reload();
         BlockEntityUpdate.packet(this);
@@ -369,10 +369,10 @@ public class CrystalBlockEntity extends BlockSimpleInventory implements Tickable
         BlockPos pos = new BlockPos(blockToX, blockToY, blockToZ);
 
         if (level.isLoaded(pos)) {
-            BlockEntity tileentity = level.getBlockEntity(pos);
-            if (tileentity instanceof ILightBlockEntity lightTileEntity) {
+            BlockEntity blockEntity = level.getBlockEntity(pos);
+            if (blockEntity instanceof ILightBlockEntity lightBlockEntity) {
                 Vec3 from = LightUtil.getLightLensPos(getBlockPos(), getLightLensPos());
-                Vec3 to = LightUtil.getLightLensPos(pos, lightTileEntity.getLightLensPos());
+                Vec3 to = LightUtil.getLightLensPos(pos, lightBlockEntity.getLightLensPos());
 
                 double dX = to.x() - from.x();
                 double dY = to.y() - from.y();

@@ -4,7 +4,7 @@ import com.mojang.blaze3d.systems.RenderSystem;
 import mod.maxbogomol.fluffy_fur.util.ColorUtil;
 import mod.maxbogomol.wizards_reborn.WizardsReborn;
 import mod.maxbogomol.wizards_reborn.api.alchemy.IFluidBlockEntity;
-import mod.maxbogomol.wizards_reborn.api.alchemy.IHeatTileEntity;
+import mod.maxbogomol.wizards_reborn.api.alchemy.IHeatBlockEntity;
 import mod.maxbogomol.wizards_reborn.api.alchemy.ISteamBlockEntity;
 import mod.maxbogomol.wizards_reborn.api.light.ILightBlockEntity;
 import mod.maxbogomol.wizards_reborn.api.skin.Skin;
@@ -603,7 +603,7 @@ public class WissenWandItem extends Item {
             BlockEntity tileentity = pos != null ? mc.level.getBlockEntity(pos) : null;
 
             if (tileentity != null) {
-                if (tileentity instanceof IHeatTileEntity tile) {
+                if (tileentity instanceof IHeatBlockEntity tile) {
                     if (player.isShiftKeyDown() && ClientConfig.NUMERICAL_HEAT.get()) {
                         int x = mc.getWindow().getGuiScaledWidth() / 2;
                         int y = mc.getWindow().getGuiScaledHeight() / 2 + 12 + getYOffset();

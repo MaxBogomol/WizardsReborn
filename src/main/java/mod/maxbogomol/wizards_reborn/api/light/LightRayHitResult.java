@@ -6,12 +6,12 @@ import net.minecraft.world.phys.Vec3;
 public class LightRayHitResult {
     public Vec3 posHit;
     public float distance;
-    public BlockEntity tile;
+    public BlockEntity blockEntity;
 
-    public LightRayHitResult(Vec3 posHit, float distance, BlockEntity tile) {
+    public LightRayHitResult(Vec3 posHit, float distance, BlockEntity blockEntity) {
         this.posHit = posHit;
         this.distance = distance;
-        this.tile = tile;
+        this.blockEntity = blockEntity;
     }
 
     public Vec3 getPosHit() {
@@ -22,11 +22,11 @@ public class LightRayHitResult {
         return distance;
     }
 
-    public BlockEntity getTile() {
-        return tile;
+    public BlockEntity getBlockEntity() {
+        return blockEntity;
     }
 
-    public boolean hasTile() {
-        return tile != null;
+    public boolean hasBlockEntity() {
+        return blockEntity != null;
     }
 }

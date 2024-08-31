@@ -5,7 +5,7 @@ import mod.maxbogomol.fluffy_fur.common.block.entity.TickableBlockEntity;
 import mod.maxbogomol.fluffy_fur.common.network.BlockEntityUpdate;
 import mod.maxbogomol.wizards_reborn.WizardsReborn;
 import mod.maxbogomol.wizards_reborn.api.alchemy.IFluidBlockEntity;
-import mod.maxbogomol.wizards_reborn.api.alchemy.IHeatTileEntity;
+import mod.maxbogomol.wizards_reborn.api.alchemy.IHeatBlockEntity;
 import mod.maxbogomol.wizards_reborn.api.alchemy.ISteamBlockEntity;
 import mod.maxbogomol.wizards_reborn.api.wissen.IItemResultBlockEntity;
 import net.minecraft.core.BlockPos;
@@ -46,7 +46,7 @@ import java.util.Optional;
 
 import static net.minecraft.world.level.block.state.properties.BlockStateProperties.HORIZONTAL_FACING;
 
-public class AlchemyFurnaceBlockEntity extends BlockEntityBase implements TickableBlockEntity, IFluidBlockEntity, ISteamBlockEntity, IHeatTileEntity, IItemResultBlockEntity {
+public class AlchemyFurnaceBlockEntity extends BlockEntityBase implements TickableBlockEntity, IFluidBlockEntity, ISteamBlockEntity, IHeatBlockEntity, IItemResultBlockEntity {
     public final ItemStackHandler itemHandler = createHandler(1);
     public final LazyOptional<IItemHandler> handler = LazyOptional.of(() -> itemHandler);
     public final ItemStackHandler itemFuelHandler = createHandler(1);

@@ -6,7 +6,7 @@ import mod.maxbogomol.wizards_reborn.api.monogram.MonogramMapEntry;
 import java.util.ArrayList;
 
 public class ResearchMapEntry {
-    public ArrayList<MonogramMapEntry> map = new ArrayList<MonogramMapEntry>();
+    public ArrayList<MonogramMapEntry> map = new ArrayList<>();
 
     public ResearchMapEntry(Monogram... entries) {
         for (Monogram entry : entries) {

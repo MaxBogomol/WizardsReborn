@@ -5,8 +5,8 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class Knowledges {
-    public static Map<String, Knowledge> knowledges = new HashMap<String, Knowledge>();
-    public static ArrayList<Knowledge> knowledgeList = new ArrayList<Knowledge>();
+    public static Map<String, Knowledge> knowledges = new HashMap<>();
+    public static ArrayList<Knowledge> knowledgeList = new ArrayList<>();
 
     public static void addKnowledge(String id, Knowledge spell) {
         knowledges.put(id, spell);

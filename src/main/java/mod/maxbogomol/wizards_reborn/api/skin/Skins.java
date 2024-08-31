@@ -5,8 +5,8 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class Skins {
-    public static Map<String, Skin> skins = new HashMap<String, Skin>();
-    public static ArrayList<Skin> skinList = new ArrayList<Skin>();
+    public static Map<String, Skin> skins = new HashMap<>();
+    public static ArrayList<Skin> skinList = new ArrayList<>();
 
     public static void addSkin(String id, Skin skin) {
         skins.put(id, skin);

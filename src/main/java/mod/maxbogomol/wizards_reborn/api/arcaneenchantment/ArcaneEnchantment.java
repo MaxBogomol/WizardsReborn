@@ -77,7 +77,7 @@ public class ArcaneEnchantment {
     }
 
     @OnlyIn(Dist.CLIENT)
-    public List<Component> modifierAppendHoverText(ItemStack stack, Level world, TooltipFlag flags) {
+    public List<Component> modifierAppendHoverText(ItemStack stack, Level level, TooltipFlag flags) {
         return null;
     }
 

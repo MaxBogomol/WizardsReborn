@@ -4,6 +4,7 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.nbt.CompoundTag;
 
 public class WissenItemUtil {
+
     public static int getWissen(ItemStack stack) {
         CompoundTag nbt = stack.getTag();
         if (!containsWissen(stack)) return 0;
@@ -15,26 +16,13 @@ public class WissenItemUtil {
         nbt.putInt("wissen", wissen);
     }
 
-    public static void addWissen(ItemStack stack, int wissen, int max_wissen) {
+    public static void addWissen(ItemStack stack, int wissen, int maxWissen) {
         CompoundTag nbt = stack.getTag();
         if (!containsWissen(stack)) return;
         nbt.putInt("wissen", nbt.getInt("wissen") + wissen);
-        if (max_wissen < nbt.getInt("wissen")) {
-            nbt.putInt("wissen", max_wissen);
+        if (maxWissen < nbt.getInt("wissen")) {
+            nbt.putInt("wissen", maxWissen);
         }
-    }
-
-    public static int addWissenRemain(ItemStack stack, int wissen) {
-        int wissen_remain = 0;
-        CompoundTag nbt = stack.getTag();
-        if (!containsWissen(stack)) return 0;
-        int max_wissen = nbt.getInt("max_wissen");
-        nbt.putInt("wissen", nbt.getInt("wissen") + wissen);
-        if (max_wissen < nbt.getInt("wissen")) {
-            wissen_remain = nbt.getInt("wissen") - max_wissen;
-            nbt.putInt("wissen", max_wissen);
-        }
-        return wissen_remain;
     }
 
     public static void removeWissen(ItemStack stack, int wissen) {
@@ -46,12 +34,12 @@ public class WissenItemUtil {
         }
     }
 
-    public static int getAddWissenRemain(ItemStack stack, int wissen, int max_wissen) {
+    public static int getAddWissenRemain(ItemStack stack, int wissen, int maxWissen) {
         int wissen_remain = 0;
         CompoundTag nbt = stack.getTag();
         if (!containsWissen(stack)) return 0;
-        if (max_wissen < nbt.getInt("wissen") + wissen) {
-            wissen_remain = (nbt.getInt("wissen") + wissen) - max_wissen;
+        if (maxWissen < nbt.getInt("wissen") + wissen) {
+            wissen_remain = (nbt.getInt("wissen") + wissen) - maxWissen;
         }
         return wissen_remain;
     }
@@ -66,10 +54,10 @@ public class WissenItemUtil {
         return wissen_remain;
     }
 
-    public static boolean canAddWissen(ItemStack stack, int wissen, int max_wissen) {
+    public static boolean canAddWissen(ItemStack stack, int wissen, int maxWissen) {
         CompoundTag nbt = stack.getTag();
         if (!containsWissen(stack))return false;
-        return (max_wissen >= nbt.getInt("wissen") + wissen);
+        return (maxWissen >= nbt.getInt("wissen") + wissen);
     }
 
     public static boolean canRemoveWissen(ItemStack stack, int wissen) {

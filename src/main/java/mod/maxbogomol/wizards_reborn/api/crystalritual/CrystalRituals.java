@@ -5,8 +5,8 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class CrystalRituals {
-    public static Map<String, CrystalRitual> crystalRituals = new HashMap<String, CrystalRitual>();
-    public static ArrayList<CrystalRitual> crystalRitualsList = new ArrayList<CrystalRitual>();
+    public static Map<String, CrystalRitual> crystalRituals = new HashMap<>();
+    public static ArrayList<CrystalRitual> crystalRitualsList = new ArrayList<>();
 
     public static void addCrystalRitual(String id, CrystalRitual crystalRitual) {
         crystalRituals.put(id, crystalRitual);

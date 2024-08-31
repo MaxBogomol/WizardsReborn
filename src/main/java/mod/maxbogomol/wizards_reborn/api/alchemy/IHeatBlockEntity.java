@@ -1,6 +1,6 @@
 package mod.maxbogomol.wizards_reborn.api.alchemy;
 
-public interface IHeatTileEntity {
+public interface IHeatBlockEntity {
     int getHeat();
     int getMaxHeat();
 

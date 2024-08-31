@@ -5,8 +5,8 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class Spells {
-    public static Map<String, Spell> spells = new HashMap<String, Spell>();
-    public static ArrayList<Spell> spellList = new ArrayList<Spell>();
+    public static Map<String, Spell> spells = new HashMap<>();
+    public static ArrayList<Spell> spellList = new ArrayList<>();
 
     public static void addSpell(String id, Spell spell) {
         spells.put(id, spell);
