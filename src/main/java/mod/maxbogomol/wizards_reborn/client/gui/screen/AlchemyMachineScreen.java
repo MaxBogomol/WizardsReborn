@@ -46,7 +46,7 @@ public class AlchemyMachineScreen extends AbstractContainerScreen<AlchemyMachine
         int j = this.topPos;
         gui.blit(GUI, i, j, 0, 0, this.imageWidth, this.imageHeight);
 
-        if (menu.tileEntity instanceof AlchemyMachineBlockEntity machine) {
+        if (menu.blockEntity instanceof AlchemyMachineBlockEntity machine) {
             for (int ii = 0; ii <= 2; ii++) {
                 int width = 32;
                 width /= (double) machine.getMaxCapacity() / (double) machine.getTank(ii).getFluidAmount();

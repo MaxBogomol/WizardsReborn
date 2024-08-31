@@ -46,8 +46,8 @@ public class RunicPedestalScreen extends AbstractContainerScreen<RunicPedestalCo
         int j = this.topPos;
         gui.blit(GUI, i, j, 0, 0, this.imageWidth, this.imageHeight);
 
-        if (menu.tileEntity instanceof RunicPedestalBlockEntity table) {
-            if (menu.tileEntity.getBlockState().getValue(BlockStateProperties.LIT)) {
+        if (menu.blockEntity instanceof RunicPedestalBlockEntity table) {
+            if (menu.blockEntity.getBlockState().getValue(BlockStateProperties.LIT)) {
                 gui.blit(GUI, i + 72, j + 22, 176, 0, 32, 32);
 
                 Random random = new Random(table.getBlockPos().asLong());

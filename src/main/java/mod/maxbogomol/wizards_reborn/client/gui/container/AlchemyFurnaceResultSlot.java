@@ -15,10 +15,10 @@ public class AlchemyFurnaceResultSlot extends SlotItemHandler {
 
     private final AlchemyFurnaceContainer menu;
 
-    public AlchemyFurnaceResultSlot(Player player, AlchemyFurnaceContainer pFurnaceMenu, IItemHandler itemHandler, int index, int xPosition, int yPosition) {
+    public AlchemyFurnaceResultSlot(Player player, AlchemyFurnaceContainer furnaceMenu, IItemHandler itemHandler, int index, int xPosition, int yPosition) {
         super(itemHandler, index, xPosition, yPosition);
         this.player = player;
-        this.menu = pFurnaceMenu;
+        this.menu = furnaceMenu;
     }
 
     @Override
@@ -43,7 +43,7 @@ public class AlchemyFurnaceResultSlot extends SlotItemHandler {
         pStack.onCraftedBy(this.player.level(), this.player, this.removeCount);
         Player player = this.player;
         if (player instanceof ServerPlayer serverplayer) {
-            if (menu.tileEntity instanceof AlchemyFurnaceBlockEntity furnace) {
+            if (menu.blockEntity instanceof AlchemyFurnaceBlockEntity furnace) {
                 furnace.popExperience(serverplayer);
             }
         }

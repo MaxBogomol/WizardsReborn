@@ -44,7 +44,7 @@ public class ArcaneWorkbenchScreen extends AbstractContainerScreen<ArcaneWorkben
         int j = this.topPos;
         gui.blit(GUI, i, j, 0, 0, this.imageWidth, this.imageHeight);
 
-        if (menu.tileEntity instanceof ArcaneWorkbenchBlockEntity workbench) {
+        if (menu.blockEntity instanceof ArcaneWorkbenchBlockEntity workbench) {
             List<ItemStack> items = workbench.getItemsResult();
 
             if (items.size() > 0 && workbench.itemOutputHandler.getStackInSlot(0).isEmpty()) {

@@ -6,8 +6,9 @@ import net.minecraftforge.items.IItemHandler;
 import net.minecraftforge.items.SlotItemHandler;
 
 public class AlchemyBagSlot extends SlotItemHandler {
-    public AlchemyBagSlot(IItemHandler itemHandler, int pSlot, int pXPosition, int pYPosition) {
-        super(itemHandler, pSlot, pXPosition, pYPosition);
+
+    public AlchemyBagSlot(IItemHandler itemHandler, int slot, int xPosition, int yPosition) {
+        super(itemHandler, slot, xPosition, yPosition);
     }
 
     public boolean mayPlace(ItemStack stack) {

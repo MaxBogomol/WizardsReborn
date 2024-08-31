@@ -61,7 +61,7 @@ public class TotemOfDisenchantScreen extends AbstractContainerScreen<TotemOfDise
         int j = this.topPos;
         gui.blit(GUI, i, j, 0, 0, this.imageWidth, this.imageHeight);
 
-        if (menu.tileEntity instanceof TotemOfDisenchantBlockEntity totem) {
+        if (menu.blockEntity instanceof TotemOfDisenchantBlockEntity totem) {
             int buttonOffset = 0;
 
             if (x >= i + 141 && y >= j + 73 && x <= i + 141 + 16 && y <= j + 73 + 16 && !totem.isStart) {
@@ -162,7 +162,7 @@ public class TotemOfDisenchantScreen extends AbstractContainerScreen<TotemOfDise
         int i = this.leftPos;
         int j = this.topPos;
 
-        if (menu.tileEntity instanceof TotemOfDisenchantBlockEntity totem) {
+        if (menu.blockEntity instanceof TotemOfDisenchantBlockEntity totem) {
             ItemStack stack = totem.itemHandler.getStackInSlot(0);
 
             if (!stack.isEmpty()) {
@@ -218,7 +218,7 @@ public class TotemOfDisenchantScreen extends AbstractContainerScreen<TotemOfDise
             if (x >= i + 141 && y >= j + 73 && x <= i + 141 + 16 && y <= j + 73 + 16) {
                 if (!currentBook.isEmpty() && !totem.isStart) {
                     Minecraft.getInstance().player.playNotifySound(SoundEvents.UI_BUTTON_CLICK.get(), SoundSource.NEUTRAL, 0.5f, 1.0f);
-                    PacketHandler.sendToServer(new TotemOfDisenchantStartEffectPacket(getMenu().tileEntity.getBlockPos(), currentBook));
+                    PacketHandler.sendToServer(new TotemOfDisenchantStartEffectPacket(getMenu().blockEntity.getBlockPos(), currentBook));
                     this.onClose();
                 }
                 return true;

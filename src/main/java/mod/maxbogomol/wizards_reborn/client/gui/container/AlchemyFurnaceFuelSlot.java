@@ -8,20 +8,20 @@ import net.minecraftforge.items.SlotItemHandler;
 public class AlchemyFurnaceFuelSlot extends SlotItemHandler {
     private final AlchemyFurnaceContainer menu;
 
-    public AlchemyFurnaceFuelSlot(AlchemyFurnaceContainer pFurnaceMenu, IItemHandler itemHandler, int pSlot, int pXPosition, int pYPosition) {
-        super(itemHandler, pSlot, pXPosition, pYPosition);
-        this.menu = pFurnaceMenu;
+    public AlchemyFurnaceFuelSlot(AlchemyFurnaceContainer furnaceMenu, IItemHandler itemHandler, int slot, int xPosition, int yPosition) {
+        super(itemHandler, slot, xPosition, yPosition);
+        this.menu = furnaceMenu;
     }
 
-    public boolean mayPlace(ItemStack pStack) {
-        return this.menu.isFuel(pStack) || isBucket(pStack);
+    public boolean mayPlace(ItemStack stack) {
+        return this.menu.isFuel(stack) || isBucket(stack);
     }
 
-    public int getMaxStackSize(ItemStack pStack) {
-        return isBucket(pStack) ? 1 : super.getMaxStackSize(pStack);
+    public int getMaxStackSize(ItemStack stack) {
+        return isBucket(stack) ? 1 : super.getMaxStackSize(stack);
     }
 
-    public static boolean isBucket(ItemStack pStack) {
-        return pStack.is(Items.BUCKET);
+    public static boolean isBucket(ItemStack stack) {
+        return stack.is(Items.BUCKET);
     }
 }

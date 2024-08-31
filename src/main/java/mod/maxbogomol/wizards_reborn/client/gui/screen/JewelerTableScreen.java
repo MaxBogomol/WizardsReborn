@@ -44,7 +44,7 @@ public class JewelerTableScreen extends AbstractContainerScreen<JewelerTableCont
         int j = this.topPos;
         gui.blit(GUI, i, j, 0, 0, this.imageWidth, this.imageHeight);
 
-        if (menu.tileEntity instanceof JewelerTableBlockEntity table) {
+        if (menu.blockEntity instanceof JewelerTableBlockEntity table) {
             List<ItemStack> items = table.getItemsResult();
 
             if (items.size() > 0 && table.itemOutputHandler.getStackInSlot(0).isEmpty()) {

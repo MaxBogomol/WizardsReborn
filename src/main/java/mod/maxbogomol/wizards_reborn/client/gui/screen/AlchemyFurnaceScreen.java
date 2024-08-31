@@ -46,7 +46,7 @@ public class AlchemyFurnaceScreen extends AbstractContainerScreen<AlchemyFurnace
         int j = this.topPos;
         gui.blit(GUI, i, j, 0, 0, this.imageWidth, this.imageHeight);
 
-        if (menu.tileEntity instanceof AlchemyFurnaceBlockEntity furnace) {
+        if (menu.blockEntity instanceof AlchemyFurnaceBlockEntity furnace) {
             int width = 32;
             width /= (double) furnace.getFluidMaxAmount() / (double) furnace.getFluidAmount();
             gui.blit(GUI, i + 19, j + 60 - width, 176, 32 - width, 8, width, 256, 256);

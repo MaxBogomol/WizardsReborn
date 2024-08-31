@@ -7,11 +7,12 @@ import net.minecraftforge.items.IItemHandler;
 import net.minecraftforge.items.SlotItemHandler;
 
 public class CrystalBagInventorySlot extends SlotItemHandler {
-    public CrystalBagInventorySlot(IItemHandler itemHandler, int pSlot, int pXPosition, int pYPosition) {
-        super(itemHandler, pSlot, pXPosition, pYPosition);
+
+    public CrystalBagInventorySlot(IItemHandler itemHandler, int slot, int xPosition, int yPosition) {
+        super(itemHandler, slot, xPosition, yPosition);
     }
 
-    public boolean mayPlace(ItemStack pStack) {
+    public boolean mayPlace(ItemStack stack) {
         return !(getItem().getItem() instanceof CrystalBagItem);
     }
 

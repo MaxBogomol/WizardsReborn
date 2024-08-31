@@ -962,7 +962,7 @@ public class WizardsRebornClient {
     }
 
     public static FluffyFurMod MOD_INSTANCE;
-    public static FluffyFurPanorama PANORAMA;
+    public static FluffyFurPanorama MAGICAL_ORIGINS_PANORAMA;
 
     public static void setupMenu() {
         MOD_INSTANCE = new FluffyFurMod(WizardsReborn.MOD_ID, WizardsReborn.NAME, WizardsReborn.VERSION).setDev("MaxBogomol").setItem(new ItemStack(WizardsReborn.ARCANUM.get()))
@@ -971,13 +971,13 @@ public class WizardsRebornClient {
                 .addGithubLink("https://github.com/MaxBogomol/WizardsReborn")
                 .addCurseForgeLink("https://www.curseforge.com/minecraft/mc-mods/wizards-reborn")
                 .addModrinthLink("https://modrinth.com/mod/wizards-reborn");
-        PANORAMA = new FluffyFurPanorama(WizardsReborn.MOD_ID + ":fluffy_zone", Component.translatable("panorama.wizards_reborn.magical_origins"))
+        MAGICAL_ORIGINS_PANORAMA = new FluffyFurPanorama(WizardsReborn.MOD_ID + ":magical_origins", Component.translatable("panorama.wizards_reborn.magical_origins"))
                 .setMod(MOD_INSTANCE).setItem(new ItemStack(WizardsReborn.WISSEN_ALTAR_ITEM.get())).setSort(0)
                 .setTexture(new ResourceLocation(WizardsReborn.MOD_ID, "textures/gui/title/background/panorama"))
                 .setLogo(new ResourceLocation(WizardsReborn.MOD_ID, "textures/gui/title/wizards_reborn.png"));
 
         FluffyFurClient.registerMod(MOD_INSTANCE);
-        FluffyFurClient.registerPanorama(PANORAMA);
+        FluffyFurClient.registerPanorama(MAGICAL_ORIGINS_PANORAMA);
     }
 
     public static void setupBows() {
@@ -1015,15 +1015,7 @@ public class WizardsRebornClient {
     }
 
     public static void setupMusic() {
-        MusicHandler.register(new MusicModifier() {
-            public boolean isMenu(Music defaultMisic, Minecraft minecraft) {
-                return true;
-            }
-
-            public Music play(Music defaultMisic, Minecraft minecraft) {
-                return REBORN_MUSIC;
-            }
-        });
+        MusicHandler.register(new MusicModifier.Panorama(REBORN_MUSIC, MAGICAL_ORIGINS_PANORAMA));
         MusicHandler.register(new MusicModifier() {
             public boolean isCanPlay(Music defaultMisic, Minecraft minecraft) {
                 if (isBiome(Tags.Biomes.IS_SWAMP, minecraft)) {
