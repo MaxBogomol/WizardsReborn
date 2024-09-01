@@ -1,5 +1,4 @@
 {
-	"credit": "Made with Blockbench",
 	"parent": "minecraft:block/block",
 	"textures": {
 		"0": "wizards_reborn:block/arcane_workbench_top_1",

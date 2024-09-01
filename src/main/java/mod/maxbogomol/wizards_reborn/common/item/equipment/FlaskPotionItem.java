@@ -5,12 +5,12 @@ import com.mojang.math.Axis;
 import mod.maxbogomol.fluffy_fur.client.render.LevelRenderHandler;
 import mod.maxbogomol.fluffy_fur.util.ColorUtil;
 import mod.maxbogomol.wizards_reborn.WizardsReborn;
-import mod.maxbogomol.wizards_reborn.WizardsRebornClient;
 import mod.maxbogomol.wizards_reborn.api.alchemy.AlchemyPotion;
 import mod.maxbogomol.wizards_reborn.api.alchemy.AlchemyPotionUtil;
 import mod.maxbogomol.wizards_reborn.client.render.fluid.FluidRenderer;
 import mod.maxbogomol.wizards_reborn.common.alchemypotion.FluidAlchemyPotion;
 import mod.maxbogomol.wizards_reborn.common.block.placed_items.PlacedItemsBlockEntity;
+import mod.maxbogomol.wizards_reborn.registry.client.WizardsRebornModels;
 import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornItems;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.RenderType;
@@ -41,7 +41,7 @@ public class FlaskPotionItem extends AlchemyPotionItem {
         ms.translate(0F, 0.0001F, 0F);
         ms.mulPose(Axis.YP.rotationDegrees((rotation * -22.5f) + rotate));
         ms.mulPose(Axis.XP.rotationDegrees(180f));
-        WizardsRebornClient.ALCHEMY_FLASK_MODEL.renderToBuffer(ms, buffers.getBuffer(RenderType.entityCutoutNoCull(FLASK_TEXTURE)), light, OverlayTexture.NO_OVERLAY, 1, 1, 1, 1);
+        WizardsRebornModels.ALCHEMY_FLASK.renderToBuffer(ms, buffers.getBuffer(RenderType.entityCutoutNoCull(FLASK_TEXTURE)), light, OverlayTexture.NO_OVERLAY, 1, 1, 1, 1);
         ms.mulPose(Axis.XP.rotationDegrees(-180f));
         ms.scale(1.25F, 1.25F, 1.25F);
         ms.translate(-0.125F, 0.015625F, -0.125F);
@@ -60,7 +60,7 @@ public class FlaskPotionItem extends AlchemyPotionItem {
                 colorI = clientType.getTintColor(fluidStack);
             }
             MultiBufferSource bufferDelayed = LevelRenderHandler.getDelayedRender();
-            FluidRenderer.renderScaledCuboid(ms, bufferDelayed, WizardsRebornClient.FLASK_FLUID_CUBE, fluidStack, colorI, 0, 6, light, false);
+            FluidRenderer.renderScaledCuboid(ms, bufferDelayed, WizardsRebornModels.FLASK_FLUID_CUBE, fluidStack, colorI, 0, 6, light, false);
         }
         ms.popPose();
     }

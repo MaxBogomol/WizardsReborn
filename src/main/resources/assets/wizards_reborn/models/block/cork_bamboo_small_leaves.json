@@ -1,5 +1,6 @@
 {
 	"parent": "minecraft:block/bamboo_large_leaves",
+	"render_type": "minecraft:cutout",
 	"textures": {
 		"texture": "wizards_reborn:block/cork_bamboo_small_leaves",
 		"particle": "wizards_reborn:block/cork_bamboo_small_leaves"

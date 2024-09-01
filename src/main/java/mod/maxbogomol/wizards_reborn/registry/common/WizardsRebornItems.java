@@ -1,7 +1,5 @@
 package mod.maxbogomol.wizards_reborn.registry.common;
 
-import mod.maxbogomol.fluffy_fur.FluffyFur;
-import mod.maxbogomol.fluffy_fur.FluffyFurClient;
 import mod.maxbogomol.fluffy_fur.client.event.BowHandler;
 import mod.maxbogomol.fluffy_fur.client.model.item.CustomModel;
 import mod.maxbogomol.fluffy_fur.client.render.item.LargeItemRenderer;
@@ -652,29 +650,29 @@ public class WizardsRebornItems {
     public static class ClientRegistryEvents {
         @SubscribeEvent
         public static void registerItems(FMLClientSetupEvent event) {
-            CuriosRendererRegistry.register(WizardsRebornItems.ARCANUM_AMULET.get(), AmuletRenderer::new);
-            CuriosRendererRegistry.register(WizardsRebornItems.ARCACITE_AMULET.get(), AmuletRenderer::new);
-            CuriosRendererRegistry.register(WizardsRebornItems.LEATHER_BELT.get(), BeltRenderer::new);
-            CuriosRendererRegistry.register(WizardsRebornItems.ARCANE_FORTRESS_BELT.get(), BeltRenderer::new);
-            CuriosRendererRegistry.register(WizardsRebornItems.INVENTOR_WIZARD_BELT.get(), BeltRenderer::new);
-            CuriosRendererRegistry.register(WizardsRebornItems.CRYSTAL_BAG.get(), BagRenderer::new);
-            CuriosRendererRegistry.register(WizardsRebornItems.ALCHEMY_BAG.get(), BagRenderer::new);
-            CuriosRendererRegistry.register(WizardsRebornItems.LEATHER_COLLAR.get(), CollarRenderer::new);
-            CuriosRendererRegistry.register(WizardsRebornItems.BROWN_MUSHROOM_CAP.get(), MushroomCapRenderer::new);
-            CuriosRendererRegistry.register(WizardsRebornItems.RED_MUSHROOM_CAP.get(), MushroomCapRenderer::new);
-            CuriosRendererRegistry.register(WizardsRebornItems.CRIMSON_FUNGUS_CAP.get(), MushroomCapRenderer::new);
-            CuriosRendererRegistry.register(WizardsRebornItems.WARPED_FUNGUS_CAP.get(), MushroomCapRenderer::new);
-            CuriosRendererRegistry.register(WizardsRebornItems.MOR_CAP.get(), MushroomCapRenderer::new);
-            CuriosRendererRegistry.register(WizardsRebornItems.ELDER_MOR_CAP.get(), MushroomCapRenderer::new);
+            CuriosRendererRegistry.register(ARCANUM_AMULET.get(), AmuletRenderer::new);
+            CuriosRendererRegistry.register(ARCACITE_AMULET.get(), AmuletRenderer::new);
+            CuriosRendererRegistry.register(LEATHER_BELT.get(), BeltRenderer::new);
+            CuriosRendererRegistry.register(ARCANE_FORTRESS_BELT.get(), BeltRenderer::new);
+            CuriosRendererRegistry.register(INVENTOR_WIZARD_BELT.get(), BeltRenderer::new);
+            CuriosRendererRegistry.register(CRYSTAL_BAG.get(), BagRenderer::new);
+            CuriosRendererRegistry.register(ALCHEMY_BAG.get(), BagRenderer::new);
+            CuriosRendererRegistry.register(LEATHER_COLLAR.get(), CollarRenderer::new);
+            CuriosRendererRegistry.register(BROWN_MUSHROOM_CAP.get(), MushroomCapRenderer::new);
+            CuriosRendererRegistry.register(RED_MUSHROOM_CAP.get(), MushroomCapRenderer::new);
+            CuriosRendererRegistry.register(CRIMSON_FUNGUS_CAP.get(), MushroomCapRenderer::new);
+            CuriosRendererRegistry.register(WARPED_FUNGUS_CAP.get(), MushroomCapRenderer::new);
+            CuriosRendererRegistry.register(MOR_CAP.get(), MushroomCapRenderer::new);
+            CuriosRendererRegistry.register(ELDER_MOR_CAP.get(), MushroomCapRenderer::new);
 
-            FluffyFurClient.makeBow(WizardsRebornItems.ARCANE_WOOD_BOW.get());
+            FluffyFurItems.makeBow(ARCANE_WOOD_BOW.get());
 
-            ItemProperties.register(WizardsRebornItems.ALCHEMY_VIAL_POTION.get(), new ResourceLocation("uses"), (stack, level, entity, seed) -> AlchemyPotionItem.getUses(stack));
-            ItemProperties.register(WizardsRebornItems.ALCHEMY_FLASK_POTION.get(), new ResourceLocation("uses"), (stack, level, entity, seed) -> AlchemyPotionItem.getUses(stack));
+            ItemProperties.register(ALCHEMY_VIAL_POTION.get(), new ResourceLocation("uses"), (stack, level, entity, seed) -> AlchemyPotionItem.getUses(stack));
+            ItemProperties.register(ALCHEMY_FLASK_POTION.get(), new ResourceLocation("uses"), (stack, level, entity, seed) -> AlchemyPotionItem.getUses(stack));
 
-            ItemProperties.register(WizardsRebornItems.KNOWLEDGE_SCROLL.get(), new ResourceLocation("knowledge"), (stack, level, entity, seed) -> KnowledgeSrollItem.hasKnowledge(stack) ? 1 : 0);
+            ItemProperties.register(KNOWLEDGE_SCROLL.get(), new ResourceLocation("knowledge"), (stack, level, entity, seed) -> KnowledgeSrollItem.hasKnowledge(stack) ? 1 : 0);
 
-            BowHandler.addBow(WizardsRebornItems.ARCANE_WOOD_BOW.get());
+            BowHandler.addBow(ARCANE_WOOD_BOW.get());
         }
 
         @SubscribeEvent
@@ -697,7 +695,7 @@ public class WizardsRebornItems {
         public static void modelBakeItems(ModelEvent.ModifyBakingResult event) {
             Map<ResourceLocation, BakedModel> map = event.getModels();
 
-            WandCrystalsModels.addWandItem(map, WizardsRebornItems.ARCANE_WAND.getId());
+            WandCrystalsModels.addWandItem(map, ARCANE_WAND.getId());
 
             LargeItemRenderer.bakeModel(map, WizardsReborn.MOD_ID, "arcane_gold_scythe");
             LargeItemRenderer.bakeModel(map, WizardsReborn.MOD_ID, "arcane_wood_scythe");
@@ -708,46 +706,46 @@ public class WizardsRebornItems {
                 BakedModel model = map.get(new ModelResourceLocation(new ResourceLocation(WizardsReborn.MOD_ID, "collar/" + LeatherCollarItem.skins.get(skin)), "inventory"));
                 CollarItemOverrides.skins.put(skin, model);
             }
-            BakedModel collarModel = map.get(new ModelResourceLocation(WizardsRebornItems.LEATHER_COLLAR.getId(), "inventory"));
+            BakedModel collarModel = map.get(new ModelResourceLocation(LEATHER_COLLAR.getId(), "inventory"));
             CustomModel collarNewModel = new CustomModel(collarModel, new CollarItemOverrides());
-            map.replace(new ModelResourceLocation(WizardsRebornItems.LEATHER_COLLAR.getId(), "inventory"), collarNewModel);
+            map.replace(new ModelResourceLocation(LEATHER_COLLAR.getId(), "inventory"), collarNewModel);
 
-            DrinksModels.addDrinkItem(map, WizardsRebornItems.VODKA_BOTTLE.getId());
-            DrinksModels.addDrinkItem(map, WizardsRebornItems.BOURBON_BOTTLE.getId());
-            DrinksModels.addDrinkItem(map, WizardsRebornItems.WHISKEY_BOTTLE.getId());
-            DrinksModels.addDrinkItem(map, WizardsRebornItems.WHITE_WINE_BOTTLE.getId());
-            DrinksModels.addDrinkItem(map, WizardsRebornItems.RED_WINE_BOTTLE.getId());
-            DrinksModels.addDrinkItem(map, WizardsRebornItems.PORT_WINE_BOTTLE.getId());
-            DrinksModels.addDrinkItem(map, WizardsRebornItems.PALM_LIQUEUR_BOTTLE.getId());
-            DrinksModels.addDrinkItem(map, WizardsRebornItems.MEAD_BOTTLE.getId());
-            DrinksModels.addDrinkItem(map, WizardsRebornItems.SBITEN_BOTTLE.getId());
-            DrinksModels.addDrinkItem(map, WizardsRebornItems.SLIVOVITZ_BOTTLE.getId());
-            DrinksModels.addDrinkItem(map, WizardsRebornItems.SAKE_BOTTLE.getId());
-            DrinksModels.addDrinkItem(map, WizardsRebornItems.SOJU_BOTTLE.getId());
-            DrinksModels.addDrinkItem(map, WizardsRebornItems.CHICHA_BOTTLE.getId());
-            DrinksModels.addDrinkItem(map, WizardsRebornItems.CHACHA_BOTTLE.getId());
-            DrinksModels.addDrinkItem(map, WizardsRebornItems.APPLEJACK_BOTTLE.getId());
-            DrinksModels.addDrinkItem(map, WizardsRebornItems.RAKIA_BOTTLE.getId());
-            DrinksModels.addDrinkItem(map, WizardsRebornItems.KIRSCH_BOTTLE.getId());
-            DrinksModels.addDrinkItem(map, WizardsRebornItems.BOROVICHKA_BOTTLE.getId());
-            DrinksModels.addDrinkItem(map, WizardsRebornItems.PALINKA_BOTTLE.getId());
-            DrinksModels.addDrinkItem(map, WizardsRebornItems.TEQUILA_BOTTLE.getId());
-            DrinksModels.addDrinkItem(map, WizardsRebornItems.PULQUE_BOTTLE.getId());
-            DrinksModels.addDrinkItem(map, WizardsRebornItems.ARKHI_BOTTLE.getId());
-            DrinksModels.addDrinkItem(map, WizardsRebornItems.TEJ_BOTTLE.getId());
-            DrinksModels.addDrinkItem(map, WizardsRebornItems.WISSEN_BEER_BOTTLE.getId());
-            DrinksModels.addDrinkItem(map, WizardsRebornItems.MOR_TINCTURE_BOTTLE.getId());
-            DrinksModels.addDrinkItem(map, WizardsRebornItems.INNOCENT_WINE_BOTTLE.getId());
-            DrinksModels.addDrinkItem(map, WizardsRebornItems.TARKHUNA_BOTTLE.getId());
-            DrinksModels.addDrinkItem(map, WizardsRebornItems.BAIKAL_BOTTLE.getId());
-            DrinksModels.addDrinkItem(map, WizardsRebornItems.KVASS_BOTTLE.getId());
-            DrinksModels.addDrinkItem(map, WizardsRebornItems.KISSEL_BOTTLE.getId());
+            DrinksModels.addDrinkItem(map, VODKA_BOTTLE.getId());
+            DrinksModels.addDrinkItem(map, BOURBON_BOTTLE.getId());
+            DrinksModels.addDrinkItem(map, WHISKEY_BOTTLE.getId());
+            DrinksModels.addDrinkItem(map, WHITE_WINE_BOTTLE.getId());
+            DrinksModels.addDrinkItem(map, RED_WINE_BOTTLE.getId());
+            DrinksModels.addDrinkItem(map, PORT_WINE_BOTTLE.getId());
+            DrinksModels.addDrinkItem(map, PALM_LIQUEUR_BOTTLE.getId());
+            DrinksModels.addDrinkItem(map, MEAD_BOTTLE.getId());
+            DrinksModels.addDrinkItem(map, SBITEN_BOTTLE.getId());
+            DrinksModels.addDrinkItem(map, SLIVOVITZ_BOTTLE.getId());
+            DrinksModels.addDrinkItem(map, SAKE_BOTTLE.getId());
+            DrinksModels.addDrinkItem(map, SOJU_BOTTLE.getId());
+            DrinksModels.addDrinkItem(map, CHICHA_BOTTLE.getId());
+            DrinksModels.addDrinkItem(map, CHACHA_BOTTLE.getId());
+            DrinksModels.addDrinkItem(map, APPLEJACK_BOTTLE.getId());
+            DrinksModels.addDrinkItem(map, RAKIA_BOTTLE.getId());
+            DrinksModels.addDrinkItem(map, KIRSCH_BOTTLE.getId());
+            DrinksModels.addDrinkItem(map, BOROVICHKA_BOTTLE.getId());
+            DrinksModels.addDrinkItem(map, PALINKA_BOTTLE.getId());
+            DrinksModels.addDrinkItem(map, TEQUILA_BOTTLE.getId());
+            DrinksModels.addDrinkItem(map, PULQUE_BOTTLE.getId());
+            DrinksModels.addDrinkItem(map, ARKHI_BOTTLE.getId());
+            DrinksModels.addDrinkItem(map, TEJ_BOTTLE.getId());
+            DrinksModels.addDrinkItem(map, WISSEN_BEER_BOTTLE.getId());
+            DrinksModels.addDrinkItem(map, MOR_TINCTURE_BOTTLE.getId());
+            DrinksModels.addDrinkItem(map, INNOCENT_WINE_BOTTLE.getId());
+            DrinksModels.addDrinkItem(map, TARKHUNA_BOTTLE.getId());
+            DrinksModels.addDrinkItem(map, BAIKAL_BOTTLE.getId());
+            DrinksModels.addDrinkItem(map, KVASS_BOTTLE.getId());
+            DrinksModels.addDrinkItem(map, KISSEL_BOTTLE.getId());
         }
 
         @SubscribeEvent
         public static void registerItemColorHandlers(RegisterColorHandlersEvent.Item event) {
-            event.register(new AlchemyPotionItem.ColorHandler(), WizardsRebornItems.ALCHEMY_VIAL_POTION.get(), WizardsRebornItems.ALCHEMY_FLASK_POTION.get());
-            event.register(new RunicWisestonePlateItem.ColorHandler(), WizardsRebornItems.RUNIC_WISESTONE_PLATE.get());
+            event.register(new AlchemyPotionItem.ColorHandler(), ALCHEMY_VIAL_POTION.get(), ALCHEMY_FLASK_POTION.get());
+            event.register(new RunicWisestonePlateItem.ColorHandler(), RUNIC_WISESTONE_PLATE.get());
         }
     }
 

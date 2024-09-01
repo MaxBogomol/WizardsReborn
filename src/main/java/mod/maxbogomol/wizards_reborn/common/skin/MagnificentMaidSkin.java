@@ -2,11 +2,11 @@ package mod.maxbogomol.wizards_reborn.common.skin;
 
 import mod.maxbogomol.fluffy_fur.client.model.armor.ArmorModel;
 import mod.maxbogomol.wizards_reborn.WizardsReborn;
-import mod.maxbogomol.wizards_reborn.WizardsRebornClient;
 import mod.maxbogomol.wizards_reborn.api.skin.Skin;
 import mod.maxbogomol.wizards_reborn.common.item.equipment.ArcaneWandItem;
 import mod.maxbogomol.wizards_reborn.common.item.equipment.WissenWandItem;
 import mod.maxbogomol.wizards_reborn.common.item.equipment.arcane.ArcaneArmorItem;
+import mod.maxbogomol.wizards_reborn.registry.client.WizardsRebornModels;
 import net.minecraft.client.model.HumanoidModel;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EquipmentSlot;
@@ -43,9 +43,9 @@ public class MagnificentMaidSkin extends Skin {
         @OnlyIn(Dist.CLIENT)
         public ArmorModel getArmorModel(LivingEntity entity, ItemStack itemStack, EquipmentSlot armorSlot, HumanoidModel _default) {
             if (!isDefaultModel(entity)) {
-                return WizardsRebornClient.MAGNIFICENT_MAID_SLIM_ARMOR_MODEL;
+                return WizardsRebornModels.MAGNIFICENT_MAID_SLIM_ARMOR;
             }
-            return WizardsRebornClient.MAGNIFICENT_MAID_ARMOR_MODEL;
+            return WizardsRebornModels.MAGNIFICENT_MAID_ARMOR;
         }
 
         @Override

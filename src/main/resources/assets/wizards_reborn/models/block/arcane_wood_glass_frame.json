@@ -1,5 +1,6 @@
 {
 	"parent": "wizards_reborn:block/glass_frame_block",
+	"render_type": "minecraft:translucent",
 	"textures": {
 		"case": "wizards_reborn:block/arcane_wood_casing",
 		"glass": "wizards_reborn:block/alchemy_glass",

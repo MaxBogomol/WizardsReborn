@@ -1,6 +1,6 @@
 {
-	"credit": "Made with Blockbench",
 	"parent": "wizards_reborn:block/salt_torch",
+	"render_type": "minecraft:cutout",
 	"textures": {
 		"torch": "wizards_reborn:block/cork_bamboo_salt_torch",
 		"particle": "wizards_reborn:block/cork_bamboo_planks"

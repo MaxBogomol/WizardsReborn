@@ -1,5 +1,6 @@
 {
   "parent": "minecraft:block/potted_bamboo",
+  "render_type": "minecraft:cutout",
   "textures": {
     "bamboo": "wizards_reborn:block/cork_bamboo_stalk",
     "leaf": "wizards_reborn:block/cork_bamboo_singleleaf"

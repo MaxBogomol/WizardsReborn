@@ -1,5 +1,4 @@
 {
-	"credit": "Made with Blockbench",
 	"parent": "block/block",
 	"textures": {
 		"particle": "wizards_reborn:block/polished_wisestone",

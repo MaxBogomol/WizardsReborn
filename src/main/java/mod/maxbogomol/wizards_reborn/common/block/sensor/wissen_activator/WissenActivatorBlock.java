@@ -1,7 +1,7 @@
 package mod.maxbogomol.wizards_reborn.common.block.sensor.wissen_activator;
 
-import mod.maxbogomol.wizards_reborn.WizardsRebornClient;
 import mod.maxbogomol.wizards_reborn.common.block.sensor.SensorBaseBlock;
+import mod.maxbogomol.wizards_reborn.registry.client.WizardsRebornModels;
 import net.minecraft.client.resources.model.ModelResourceLocation;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.level.block.entity.BlockEntity;
@@ -20,7 +20,7 @@ public class WissenActivatorBlock extends SensorBaseBlock {
     @Override
     @OnlyIn(Dist.CLIENT)
     public ModelResourceLocation getModel(BlockState state) {
-        return WizardsRebornClient.WISSEN_ACTIVATOR_PIECE_MODEL;
+        return WizardsRebornModels.WISSEN_ACTIVATOR_PIECE;
     }
 
     @Nullable

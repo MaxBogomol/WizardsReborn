@@ -86,16 +86,16 @@ public class WizardsRebornMenuTypes {
     public static class ClientRegistryEvents {
         @SubscribeEvent
         public static void clientSetup(FMLClientSetupEvent event) {
-            MenuScreens.register(WizardsRebornMenuTypes.ARCANE_WORKBENCH_CONTAINER.get(), ArcaneWorkbenchScreen::new);
-            MenuScreens.register(WizardsRebornMenuTypes.JEWELER_TABLE_CONTAINER.get(), JewelerTableScreen::new);
-            MenuScreens.register(WizardsRebornMenuTypes.ALCHEMY_FURNACE_CONTAINER.get(), AlchemyFurnaceScreen::new);
-            MenuScreens.register(WizardsRebornMenuTypes.ALCHEMY_MACHINE_CONTAINER.get(), AlchemyMachineScreen::new);
-            MenuScreens.register(WizardsRebornMenuTypes.ARCANE_HOPPER_CONTAINER.get(), ArcaneHopperScreen::new);
-            MenuScreens.register(WizardsRebornMenuTypes.ITEM_SORTER_CONTAINER.get(), ItemSorterScreen::new);
-            MenuScreens.register(WizardsRebornMenuTypes.TOTEM_OF_DISENCHANT_CONTAINER.get(), TotemOfDisenchantScreen::new);
-            MenuScreens.register(WizardsRebornMenuTypes.RUNIC_PEDESTAL_CONTAINER.get(), RunicPedestalScreen::new);
-            MenuScreens.register(WizardsRebornMenuTypes.CRYSTAL_BAG_CONTAINER.get(), CrystalBagScreen::new);
-            MenuScreens.register(WizardsRebornMenuTypes.ALCHEMY_BAG_CONTAINER.get(), AlchemyBagScreen::new);
+            MenuScreens.register(ARCANE_WORKBENCH_CONTAINER.get(), ArcaneWorkbenchScreen::new);
+            MenuScreens.register(JEWELER_TABLE_CONTAINER.get(), JewelerTableScreen::new);
+            MenuScreens.register(ALCHEMY_FURNACE_CONTAINER.get(), AlchemyFurnaceScreen::new);
+            MenuScreens.register(ALCHEMY_MACHINE_CONTAINER.get(), AlchemyMachineScreen::new);
+            MenuScreens.register(ARCANE_HOPPER_CONTAINER.get(), ArcaneHopperScreen::new);
+            MenuScreens.register(ITEM_SORTER_CONTAINER.get(), ItemSorterScreen::new);
+            MenuScreens.register(TOTEM_OF_DISENCHANT_CONTAINER.get(), TotemOfDisenchantScreen::new);
+            MenuScreens.register(RUNIC_PEDESTAL_CONTAINER.get(), RunicPedestalScreen::new);
+            MenuScreens.register(CRYSTAL_BAG_CONTAINER.get(), CrystalBagScreen::new);
+            MenuScreens.register(ALCHEMY_BAG_CONTAINER.get(), AlchemyBagScreen::new);
         }
     }
 }

@@ -1,6 +1,6 @@
 {
-	"credit": "Made with Blockbench",
 	"parent": "block/block",
+	"render_type": "minecraft:cutout",
 	"ambientocclusion": false,
 	"textures": {
 		"0": "minecraft:block/pitcher_crop_top",

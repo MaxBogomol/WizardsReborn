@@ -2,10 +2,10 @@ package mod.maxbogomol.wizards_reborn.client.render.block;
 
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.math.Axis;
-import mod.maxbogomol.wizards_reborn.WizardsRebornClient;
 import mod.maxbogomol.wizards_reborn.api.wissen.WissenUtils;
 import mod.maxbogomol.wizards_reborn.client.event.ClientTickHandler;
 import mod.maxbogomol.wizards_reborn.common.block.totem.experience_absorption.TotemOfExperienceAbsorptionBlockEntity;
+import mod.maxbogomol.wizards_reborn.registry.client.WizardsRebornModels;
 import mod.maxbogomol.wizards_reborn.util.RenderUtils;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.MultiBufferSource;
@@ -57,7 +57,7 @@ public class TotemOfExperienceAbsorptionRenderer implements BlockEntityRenderer<
             ms.translate(t, 0F, t);
             ms.scale(size, size, size);
             ms.mulPose(Axis.YP.rotationDegrees(180F));
-            RenderUtils.renderCustomModel(WizardsRebornClient.TOTEM_OF_EXPERIENCE_ABSORPTION_PIECE_MODEL, ItemDisplayContext.FIXED, false, ms, buffers, light, overlay);
+            RenderUtils.renderCustomModel(WizardsRebornModels.TOTEM_OF_EXPERIENCE_ABSORPTION_PIECE, ItemDisplayContext.FIXED, false, ms, buffers, light, overlay);
             ms.popPose();
         }
         ms.popPose();

@@ -1,8 +1,7 @@
 package mod.maxbogomol.wizards_reborn.common.skin;
 
-import mod.maxbogomol.fluffy_fur.FluffyFurClient;
 import mod.maxbogomol.fluffy_fur.client.model.armor.ArmorModel;
-import mod.maxbogomol.wizards_reborn.WizardsRebornClient;
+import mod.maxbogomol.fluffy_fur.registry.client.FluffyFurModels;
 import mod.maxbogomol.wizards_reborn.common.item.equipment.arcane.ArcaneArmorItem;
 import net.minecraft.client.model.HumanoidModel;
 import net.minecraft.world.entity.Entity;
@@ -48,7 +47,7 @@ public class ArmorClassSkinEntry extends ItemClassSkinEntry {
     @Override
     @OnlyIn(Dist.CLIENT)
     public ArmorModel getArmorModel(LivingEntity entity, ItemStack itemStack, EquipmentSlot armorSlot, HumanoidModel _default) {
-        return FluffyFurClient.EMPTY_ARMOR_MODEL;
+        return FluffyFurModels.EMPTY_ARMOR;
     }
 
     @Override

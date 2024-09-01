@@ -1,5 +1,4 @@
 {
-	"credit": "Made with Blockbench",
 	"parent": "block/block",
 	"textures": {
 		"pipe": "wizards_reborn:block/fluid_pipe",

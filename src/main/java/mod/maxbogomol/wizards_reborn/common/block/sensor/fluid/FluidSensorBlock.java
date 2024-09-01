@@ -1,12 +1,12 @@
 package mod.maxbogomol.wizards_reborn.common.block.sensor.fluid;
 
-import mod.maxbogomol.wizards_reborn.WizardsRebornClient;
 import mod.maxbogomol.wizards_reborn.api.alchemy.AlchemyPotion;
 import mod.maxbogomol.wizards_reborn.api.alchemy.AlchemyPotionUtil;
 import mod.maxbogomol.wizards_reborn.api.alchemy.IFluidBlockEntity;
 import mod.maxbogomol.wizards_reborn.common.alchemypotion.FluidAlchemyPotion;
 import mod.maxbogomol.wizards_reborn.common.block.sensor.SensorBaseBlock;
 import mod.maxbogomol.wizards_reborn.common.item.equipment.AlchemyPotionItem;
+import mod.maxbogomol.wizards_reborn.registry.client.WizardsRebornModels;
 import net.minecraft.client.resources.model.ModelResourceLocation;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -143,8 +143,8 @@ public class FluidSensorBlock extends SensorBaseBlock {
     @OnlyIn(Dist.CLIENT)
     public ModelResourceLocation getModel(BlockState state) {
         if (state.getValue(BlockStateProperties.LIT)) {
-            return WizardsRebornClient.FLUID_SENSOR_PIECE_ON_MODEL;
+            return WizardsRebornModels.FLUID_SENSOR_PIECE_ON;
         }
-        return WizardsRebornClient.FLUID_SENSOR_PIECE_MODEL;
+        return WizardsRebornModels.FLUID_SENSOR_PIECE;
     }
 }

@@ -2,9 +2,9 @@ package mod.maxbogomol.wizards_reborn.common.skin;
 
 import mod.maxbogomol.fluffy_fur.client.model.armor.ArmorModel;
 import mod.maxbogomol.wizards_reborn.WizardsReborn;
-import mod.maxbogomol.wizards_reborn.WizardsRebornClient;
 import mod.maxbogomol.wizards_reborn.api.skin.Skin;
 import mod.maxbogomol.wizards_reborn.common.item.equipment.InventorWizardArmorItem;
+import mod.maxbogomol.wizards_reborn.registry.client.WizardsRebornModels;
 import net.minecraft.client.model.HumanoidModel;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
@@ -34,7 +34,7 @@ public class TopHatSkin extends Skin {
         @Override
         @OnlyIn(Dist.CLIENT)
         public ArmorModel getArmorModel(LivingEntity entity, ItemStack itemStack, EquipmentSlot armorSlot, HumanoidModel _default) {
-            return WizardsRebornClient.TOP_HAT_ARMOR_MODEL;
+            return WizardsRebornModels.TOP_HAT_ARMOR;
         }
     }
 }

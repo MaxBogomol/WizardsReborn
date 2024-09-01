@@ -2,10 +2,10 @@ package mod.maxbogomol.wizards_reborn.common.item.equipment;
 
 import mod.maxbogomol.fluffy_fur.client.model.armor.ArmorModel;
 import mod.maxbogomol.wizards_reborn.WizardsReborn;
-import mod.maxbogomol.wizards_reborn.WizardsRebornClient;
 import mod.maxbogomol.wizards_reborn.api.arcaneenchantment.ArcaneEnchantmentType;
 import mod.maxbogomol.wizards_reborn.api.skin.Skin;
 import mod.maxbogomol.wizards_reborn.common.item.equipment.arcane.ArcaneArmorItem;
+import mod.maxbogomol.wizards_reborn.registry.client.WizardsRebornModels;
 import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornItems;
 import net.minecraft.ChatFormatting;
 import net.minecraft.client.Minecraft;
@@ -50,9 +50,9 @@ public class ArcaneFortressArmorItem extends ArcaneArmorItem implements IForgeIt
                 float netHeadYaw = f1 - f;
                 float netHeadPitch = Mth.lerp(pticks, entity.xRotO, entity.getXRot());
 
-                ArmorModel model = WizardsRebornClient.ARCANE_FORTRESS_ARMOR_MODEL;
+                ArmorModel model = WizardsRebornModels.ARCANE_FORTRESS_ARMOR;
                 if (!isDefaultModel(entity)) {
-                    model = WizardsRebornClient.ARCANE_FORTRESS_SLIM_ARMOR_MODEL;
+                    model = WizardsRebornModels.ARCANE_FORTRESS_SLIM_ARMOR;
                 }
 
                 Skin skin = Skin.getSkinFromItem(itemStack);

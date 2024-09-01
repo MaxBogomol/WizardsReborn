@@ -3,12 +3,12 @@ package mod.maxbogomol.wizards_reborn.client.render.block;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.math.Axis;
 import mod.maxbogomol.fluffy_fur.client.render.LevelRenderHandler;
-import mod.maxbogomol.wizards_reborn.WizardsRebornClient;
 import mod.maxbogomol.wizards_reborn.api.light.ILightBlockEntity;
 import mod.maxbogomol.wizards_reborn.api.light.LightUtil;
 import mod.maxbogomol.wizards_reborn.api.wissen.WissenUtils;
 import mod.maxbogomol.wizards_reborn.client.event.ClientTickHandler;
 import mod.maxbogomol.wizards_reborn.common.block.light_emitter.LightEmitterBlockEntity;
+import mod.maxbogomol.wizards_reborn.registry.client.WizardsRebornModels;
 import mod.maxbogomol.wizards_reborn.util.RenderUtils;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.blockentity.BlockEntityRenderer;
@@ -39,7 +39,7 @@ public class LightEmitterBlockRenderer implements BlockEntityRenderer<LightEmitt
         ms.mulPose(Axis.YP.rotationDegrees((float) (random.nextFloat() * 360 + ticks)));
         ms.mulPose(Axis.XP.rotationDegrees((float) (random.nextFloat() * 360 + ticks)));
         ms.mulPose(Axis.ZP.rotationDegrees((float) (random.nextFloat() * 360 + ticks)));
-        RenderUtils.renderCustomModel(WizardsRebornClient.HOVERING_LENS_MODEL, ItemDisplayContext.FIXED, false, ms, buffers, light, overlay);
+        RenderUtils.renderCustomModel(WizardsRebornModels.HOVERING_LENS, ItemDisplayContext.FIXED, false, ms, buffers, light, overlay);
         RenderUtils.ray(ms, bufferDelayed, 0.075f, 0.075f, 1f, 0.564f, 0.682f, 0.705f, alpha, 0.564f, 0.682f, 0.705f, alpha);
         ms.popPose();
 

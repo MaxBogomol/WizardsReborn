@@ -1,5 +1,4 @@
 {
-	"credit": "Made with Blockbench",
 	"parent": "wizards_reborn:block/salt_campfire",
 	"textures": {
 		"campfire": "wizards_reborn:block/arcane_salt_campfire",

@@ -3,10 +3,10 @@ package mod.maxbogomol.wizards_reborn.client.render.entity.layer;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.math.Axis;
 import mod.maxbogomol.wizards_reborn.WizardsReborn;
-import mod.maxbogomol.wizards_reborn.WizardsRebornClient;
 import mod.maxbogomol.wizards_reborn.client.model.sniffalo.SniffaloCarpetArmorModel;
 import mod.maxbogomol.wizards_reborn.common.entity.SniffaloEntity;
 import mod.maxbogomol.wizards_reborn.common.item.CargoCarpetItem;
+import mod.maxbogomol.wizards_reborn.registry.client.WizardsRebornModels;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.model.SnifferModel;
 import net.minecraft.client.model.geom.ModelPart;
@@ -44,7 +44,7 @@ public class SniffaloCarpetLayer extends RenderLayer<SniffaloEntity, SnifferMode
                 texture = carpet.getCarpetTexture(livingEntity.getCarpetClient(), livingEntity);
             }
 
-            SniffaloCarpetArmorModel model = WizardsRebornClient.SNIFFALO_CARPET_MODEL;
+            SniffaloCarpetArmorModel model = WizardsRebornModels.SNIFFALO_CARPET;
             model.young = livingEntity.isBaby();
             model.copyFromDefault(defaultModel);
             model.setupAnim(livingEntity, livingEntity.walkAnimation.position(partialTicks), livingEntity.walkAnimation.speed(partialTicks), livingEntity.tickCount + partialTicks, betHeadYaw, headPitch);

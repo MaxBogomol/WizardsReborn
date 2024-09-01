@@ -1,5 +1,6 @@
 {
 	"parent": "minecraft:block/crop",
+	"render_type": "minecraft:cutout",
 	"textures": {
 		"crop": "wizards_reborn:block/arcane_linen_stage_5"
 	}

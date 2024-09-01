@@ -118,10 +118,8 @@ public class WizardsReborn {
             skin.setupSkinEntries();
         }
 
-        event.enqueueWork(() -> {
-            WizardsRebornBlocks.setupBlocks();
-            WizardsRebornItems.setupItems();
-        });
+        WizardsRebornBlocks.setupBlocks();
+        WizardsRebornItems.setupItems();
     }
 
     public static void hi() {

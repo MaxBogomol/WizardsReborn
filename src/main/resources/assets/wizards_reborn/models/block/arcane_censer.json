@@ -1,6 +1,6 @@
 {
-	"credit": "Made with Blockbench",
 	"parent": "block/cube",
+	"render_type": "minecraft:cutout",
 	"textures": {
 		"0": "wizards_reborn:block/arcane_censer",
 		"particle": "wizards_reborn:block/alchemy_block"

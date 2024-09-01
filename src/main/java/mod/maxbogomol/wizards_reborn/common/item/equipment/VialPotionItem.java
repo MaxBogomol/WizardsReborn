@@ -5,12 +5,12 @@ import com.mojang.math.Axis;
 import mod.maxbogomol.fluffy_fur.client.render.LevelRenderHandler;
 import mod.maxbogomol.fluffy_fur.util.ColorUtil;
 import mod.maxbogomol.wizards_reborn.WizardsReborn;
-import mod.maxbogomol.wizards_reborn.WizardsRebornClient;
 import mod.maxbogomol.wizards_reborn.api.alchemy.AlchemyPotion;
 import mod.maxbogomol.wizards_reborn.api.alchemy.AlchemyPotionUtil;
 import mod.maxbogomol.wizards_reborn.client.render.fluid.FluidRenderer;
 import mod.maxbogomol.wizards_reborn.common.alchemypotion.FluidAlchemyPotion;
 import mod.maxbogomol.wizards_reborn.common.block.placed_items.PlacedItemsBlockEntity;
+import mod.maxbogomol.wizards_reborn.registry.client.WizardsRebornModels;
 import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornItems;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.RenderType;
@@ -41,7 +41,7 @@ public class VialPotionItem extends AlchemyPotionItem {
         ms.translate(0F, 0.0001F, 0F);
         ms.mulPose(Axis.YP.rotationDegrees((rotation * -22.5f) + rotate));
         ms.mulPose(Axis.XP.rotationDegrees(180f));
-        WizardsRebornClient.ALCHEMY_VIAL_MODEL.renderToBuffer(ms, buffers.getBuffer(RenderType.entityCutoutNoCull(VIAL_TEXTURE)), light, OverlayTexture.NO_OVERLAY, 1, 1, 1, 1);
+        WizardsRebornModels.ALCHEMY_VIAL.renderToBuffer(ms, buffers.getBuffer(RenderType.entityCutoutNoCull(VIAL_TEXTURE)), light, OverlayTexture.NO_OVERLAY, 1, 1, 1, 1);
         ms.mulPose(Axis.XP.rotationDegrees(-180f));
 
         AlchemyPotion potion = AlchemyPotionUtil.getPotion(stack);
@@ -64,7 +64,7 @@ public class VialPotionItem extends AlchemyPotionItem {
                 colorI = clientType.getTintColor(fluidStack);
             }
             MultiBufferSource bufferDelayed = LevelRenderHandler.getDelayedRender();
-            FluidRenderer.renderScaledCuboid(ms, bufferDelayed, WizardsRebornClient.VIAL_FLUID_CUBE_0, fluidStack, colorI, 0, 2, light, false);
+            FluidRenderer.renderScaledCuboid(ms, bufferDelayed, WizardsRebornModels.VIAL_FLUID_CUBE_0, fluidStack, colorI, 0, 2, light, false);
             ms.popPose();
 
             if (uses == 0) {
@@ -72,7 +72,7 @@ public class VialPotionItem extends AlchemyPotionItem {
                 ms.scale(1.5F, 1.5F, 1.5F);
                 ms.translate(-0.0625F, -0.0078125F, -0.0625F);
                 fluidStack = new FluidStack(fluidStack.getFluid(), 1);
-                FluidRenderer.renderScaledCuboid(ms, bufferDelayed, WizardsRebornClient.VIAL_FLUID_CUBE_1, fluidStack, colorI, 0, 1, light, false);
+                FluidRenderer.renderScaledCuboid(ms, bufferDelayed, WizardsRebornModels.VIAL_FLUID_CUBE_1, fluidStack, colorI, 0, 1, light, false);
             }
         }
 

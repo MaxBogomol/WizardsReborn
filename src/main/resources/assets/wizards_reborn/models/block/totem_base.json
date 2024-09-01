@@ -1,5 +1,4 @@
 {
-	"credit": "Made with Blockbench",
 	"parent": "block/cube",
 	"textures": {
 		"0": "wizards_reborn:block/totem_base_top",

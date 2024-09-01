@@ -4,10 +4,10 @@ import com.google.common.collect.ImmutableMultimap;
 import com.google.common.collect.Multimap;
 import mod.maxbogomol.fluffy_fur.client.model.armor.ArmorModel;
 import mod.maxbogomol.wizards_reborn.WizardsReborn;
-import mod.maxbogomol.wizards_reborn.WizardsRebornClient;
 import mod.maxbogomol.wizards_reborn.api.arcaneenchantment.ArcaneEnchantmentType;
 import mod.maxbogomol.wizards_reborn.api.skin.Skin;
 import mod.maxbogomol.wizards_reborn.common.item.equipment.arcane.ArcaneArmorItem;
+import mod.maxbogomol.wizards_reborn.registry.client.WizardsRebornModels;
 import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornAttributes;
 import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornItems;
 import net.minecraft.ChatFormatting;
@@ -78,7 +78,7 @@ public class InventorWizardArmorItem extends ArcaneArmorItem implements IForgeIt
                 float netHeadYaw = f1 - f;
                 float netHeadPitch = Mth.lerp(pticks, entity.xRotO, entity.getXRot());
 
-                ArmorModel model = WizardsRebornClient.INVENTOR_WIZARD_ARMOR_MODEL;
+                ArmorModel model = WizardsRebornModels.INVENTOR_WIZARD_ARMOR;
 
                 Skin skin = Skin.getSkinFromItem(itemStack);
                 if (skin != null) model = skin.getArmorModel(entity, itemStack, armorSlot, _default);

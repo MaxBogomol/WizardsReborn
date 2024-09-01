@@ -2,9 +2,9 @@ package mod.maxbogomol.wizards_reborn.client.render.curio;
 
 import com.mojang.blaze3d.vertex.PoseStack;
 import mod.maxbogomol.wizards_reborn.WizardsReborn;
-import mod.maxbogomol.wizards_reborn.WizardsRebornClient;
 import mod.maxbogomol.wizards_reborn.client.model.curio.MushroomCapModel;
 import mod.maxbogomol.wizards_reborn.common.item.equipment.curio.ICurioItemTexture;
+import mod.maxbogomol.wizards_reborn.registry.client.WizardsRebornModels;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.model.EntityModel;
 import net.minecraft.client.renderer.MultiBufferSource;
@@ -28,7 +28,7 @@ public class MushroomCapRenderer implements ICurioRenderer {
                                                                           int light, float limbSwing, float limbSwingAmount, float partialTicks,
                                                                           float ageInTicks, float netHeadYaw, float headPitch) {
         if (model == null) {
-            model = new MushroomCapModel(Minecraft.getInstance().getEntityModels().bakeLayer(WizardsRebornClient.MUSHROOM_CAP_LAYER));
+            model = new MushroomCapModel(Minecraft.getInstance().getEntityModels().bakeLayer(WizardsRebornModels.MUSHROOM_CAP_LAYER));
         }
 
         LivingEntity entity = slotContext.entity();

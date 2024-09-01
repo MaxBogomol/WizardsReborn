@@ -1,6 +1,6 @@
 {
-	"credit": "Made with Blockbench",
 	"parent": "block/cube",
+	"render_type": "minecraft:cutout",
 	"textures": {
 		"0": "wizards_reborn:block/pitcher_turnip_block_top",
 		"1": "wizards_reborn:block/pitcher_turnip_block_side",

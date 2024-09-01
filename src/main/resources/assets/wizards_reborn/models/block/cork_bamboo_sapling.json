@@ -1,5 +1,6 @@
 {
   "parent": "minecraft:block/cross",
+  "render_type": "minecraft:cutout",
   "textures": {
     "cross": "wizards_reborn:block/cork_bamboo_sapling"
   }

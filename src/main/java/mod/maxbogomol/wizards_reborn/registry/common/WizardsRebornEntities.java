@@ -29,12 +29,12 @@ import net.minecraftforge.registries.RegistryObject;
 public class WizardsRebornEntities {
     public static final DeferredRegister<EntityType<?>> ENTITIES = DeferredRegister.create(ForgeRegistries.ENTITY_TYPES, WizardsReborn.MOD_ID);
 
-    public static final RegistryObject<EntityType<CustomBoatEntity>> ARCANE_WOOD_BOAT = ENTITIES.register("arcane_wood_boat", () -> EntityType.Builder.<CustomBoatEntity>of((t, l) -> (new CustomBoatEntity(t, l, WizardsRebornItems.ARCANE_WOOD_BOAT)), MobCategory.MISC).sized(1.375f, 0.5625f).build(new ResourceLocation(WizardsReborn.MOD_ID, "arcane_wood_boat").toString()));
-    public static final RegistryObject<EntityType<CustomChestBoatEntity>> ARCANE_WOOD_CHEST_BOAT = ENTITIES.register("arcane_wood_chest_boat", () -> EntityType.Builder.<CustomChestBoatEntity>of((t, l) -> (new CustomChestBoatEntity(t, l, WizardsRebornItems.ARCANE_WOOD_CHEST_BOAT)), MobCategory.MISC).sized(1.375f, 0.5625f).build(new ResourceLocation(WizardsReborn.MOD_ID, "arcane_wood_chest_boat").toString()));
-    public static final RegistryObject<EntityType<CustomBoatEntity>> INNOCENT_WOOD_BOAT = ENTITIES.register("innocent_wood_boat", () -> EntityType.Builder.<CustomBoatEntity>of((t, l) -> (new CustomBoatEntity(t, l, WizardsRebornItems.INNOCENT_WOOD_BOAT)), MobCategory.MISC).sized(1.375f, 0.5625f).build(new ResourceLocation(WizardsReborn.MOD_ID, "innocent_wood_boat").toString()));
-    public static final RegistryObject<EntityType<CustomChestBoatEntity>> INNOCENT_WOOD_CHEST_BOAT = ENTITIES.register("innocent_wood_chest_boat", () -> EntityType.Builder.<CustomChestBoatEntity>of((t, l) -> (new CustomChestBoatEntity(t, l, WizardsRebornItems.INNOCENT_WOOD_CHEST_BOAT)), MobCategory.MISC).sized(1.375f, 0.5625f).build(new ResourceLocation(WizardsReborn.MOD_ID, "innocent_wood_chest_boat").toString()));
-    public static final RegistryObject<EntityType<CustomBoatEntity>> CORK_BAMBOO_RAFT = ENTITIES.register("cork_bamboo_raft", () -> EntityType.Builder.<CustomBoatEntity>of((t, l) -> (new CustomBoatEntity(t, l, WizardsRebornItems.CORK_BAMBOO_RAFT)), MobCategory.MISC).sized(1.375f, 0.5625f).build(new ResourceLocation(WizardsReborn.MOD_ID, "cork_bamboo_boat").toString()));
-    public static final RegistryObject<EntityType<CustomChestBoatEntity>> CORK_BAMBOO_CHEST_RAFT = ENTITIES.register("cork_bamboo_chest_raft", () -> EntityType.Builder.<CustomChestBoatEntity>of((t, l) -> (new CustomChestBoatEntity(t, l, WizardsRebornItems.CORK_BAMBOO_CHEST_RAFT)), MobCategory.MISC).sized(1.375f, 0.5625f).build(new ResourceLocation(WizardsReborn.MOD_ID, "cork_bamboo_chest_boat").toString()));
+    public static final RegistryObject<EntityType<CustomBoatEntity>> ARCANE_WOOD_BOAT = ENTITIES.register("arcane_wood_boat", () -> EntityType.Builder.<CustomBoatEntity>of((t, l) -> (new CustomBoatEntity(t, l, WizardsRebornItems.ARCANE_WOOD_BOAT, false)), MobCategory.MISC).sized(1.375f, 0.5625f).build(new ResourceLocation(WizardsReborn.MOD_ID, "arcane_wood_boat").toString()));
+    public static final RegistryObject<EntityType<CustomChestBoatEntity>> ARCANE_WOOD_CHEST_BOAT = ENTITIES.register("arcane_wood_chest_boat", () -> EntityType.Builder.<CustomChestBoatEntity>of((t, l) -> (new CustomChestBoatEntity(t, l, WizardsRebornItems.ARCANE_WOOD_CHEST_BOAT, false)), MobCategory.MISC).sized(1.375f, 0.5625f).build(new ResourceLocation(WizardsReborn.MOD_ID, "arcane_wood_chest_boat").toString()));
+    public static final RegistryObject<EntityType<CustomBoatEntity>> INNOCENT_WOOD_BOAT = ENTITIES.register("innocent_wood_boat", () -> EntityType.Builder.<CustomBoatEntity>of((t, l) -> (new CustomBoatEntity(t, l, WizardsRebornItems.INNOCENT_WOOD_BOAT, false)), MobCategory.MISC).sized(1.375f, 0.5625f).build(new ResourceLocation(WizardsReborn.MOD_ID, "innocent_wood_boat").toString()));
+    public static final RegistryObject<EntityType<CustomChestBoatEntity>> INNOCENT_WOOD_CHEST_BOAT = ENTITIES.register("innocent_wood_chest_boat", () -> EntityType.Builder.<CustomChestBoatEntity>of((t, l) -> (new CustomChestBoatEntity(t, l, WizardsRebornItems.INNOCENT_WOOD_CHEST_BOAT, false)), MobCategory.MISC).sized(1.375f, 0.5625f).build(new ResourceLocation(WizardsReborn.MOD_ID, "innocent_wood_chest_boat").toString()));
+    public static final RegistryObject<EntityType<CustomBoatEntity>> CORK_BAMBOO_RAFT = ENTITIES.register("cork_bamboo_raft", () -> EntityType.Builder.<CustomBoatEntity>of((t, l) -> (new CustomBoatEntity(t, l, WizardsRebornItems.CORK_BAMBOO_RAFT, true)), MobCategory.MISC).sized(1.375f, 0.5625f).build(new ResourceLocation(WizardsReborn.MOD_ID, "cork_bamboo_boat").toString()));
+    public static final RegistryObject<EntityType<CustomChestBoatEntity>> CORK_BAMBOO_CHEST_RAFT = ENTITIES.register("cork_bamboo_chest_raft", () -> EntityType.Builder.<CustomChestBoatEntity>of((t, l) -> (new CustomChestBoatEntity(t, l, WizardsRebornItems.CORK_BAMBOO_CHEST_RAFT, true)), MobCategory.MISC).sized(1.375f, 0.5625f).build(new ResourceLocation(WizardsReborn.MOD_ID, "cork_bamboo_chest_boat").toString()));
 
     public static final RegistryObject<EntityType<SpellProjectileEntity>> SPELL_PROJECTILE = ENTITIES.register("spell_projectile", () -> EntityType.Builder.<SpellProjectileEntity>of(SpellProjectileEntity::new, MobCategory.MISC).sized(0.4f, 0.4f).build(new ResourceLocation(WizardsReborn.MOD_ID, "spell_projectile").toString()));
     public static final RegistryObject<EntityType<ThrowedScytheEntity>> THROWED_SCYTHE_PROJECTILE = ENTITIES.register("throwed_scythe", () -> EntityType.Builder.<ThrowedScytheEntity>of(ThrowedScytheEntity::new, MobCategory.MISC).sized(1.75f, 0.2f).build(new ResourceLocation(WizardsReborn.MOD_ID, "throwed_scythe").toString()));
@@ -50,7 +50,7 @@ public class WizardsRebornEntities {
     public static class RegistryEvents {
         @SubscribeEvent
         public static void registerAttributes(EntityAttributeCreationEvent event) {
-            event.put(WizardsRebornEntities.SNIFFALO.get(), SniffaloEntity.createAttributes().build());
+            event.put(SNIFFALO.get(), SniffaloEntity.createAttributes().build());
         }
     }
 
@@ -58,16 +58,16 @@ public class WizardsRebornEntities {
     public static class ClientRegistryEvents {
         @SubscribeEvent
         public static void registerEntityRenderers(EntityRenderersEvent.RegisterRenderers event) {
-            EntityRenderers.register(WizardsRebornEntities.ARCANE_WOOD_BOAT.get(), m -> new CustomBoatRenderer(m, WizardsReborn.MOD_ID, "arcane_wood", false, false));
-            EntityRenderers.register(WizardsRebornEntities.ARCANE_WOOD_CHEST_BOAT.get(), m -> new CustomBoatRenderer(m, WizardsReborn.MOD_ID, "arcane_wood", true, false));
-            EntityRenderers.register(WizardsRebornEntities.INNOCENT_WOOD_BOAT.get(), m -> new CustomBoatRenderer(m, WizardsReborn.MOD_ID, "arcane_wood", false, false));
-            EntityRenderers.register(WizardsRebornEntities.INNOCENT_WOOD_CHEST_BOAT.get(), m -> new CustomBoatRenderer(m, WizardsReborn.MOD_ID, "arcane_wood", true, false));
-            EntityRenderers.register(WizardsRebornEntities.CORK_BAMBOO_RAFT.get(), m -> new CustomBoatRenderer(m, WizardsReborn.MOD_ID, "arcane_wood", false, true));
-            EntityRenderers.register(WizardsRebornEntities.CORK_BAMBOO_CHEST_RAFT.get(), m -> new CustomBoatRenderer(m, WizardsReborn.MOD_ID, "arcane_wood", true, true));
-            EntityRenderers.register(WizardsRebornEntities.SPELL_PROJECTILE.get(), SpellProjectileRenderer::new);
-            EntityRenderers.register(WizardsRebornEntities.THROWED_SCYTHE_PROJECTILE.get(), ThrowedScytheRenderer::new);
-            EntityRenderers.register(WizardsRebornEntities.SPLIT_ARROW_PROJECTILE.get(), SplitArrowRenderer::new);
-            EntityRenderers.register(WizardsRebornEntities.SNIFFALO.get(), SniffaloRenderer::new);
+            EntityRenderers.register(ARCANE_WOOD_BOAT.get(), m -> new CustomBoatRenderer(m, WizardsReborn.MOD_ID, "arcane_wood", false, false));
+            EntityRenderers.register(ARCANE_WOOD_CHEST_BOAT.get(), m -> new CustomBoatRenderer(m, WizardsReborn.MOD_ID, "arcane_wood", true, false));
+            EntityRenderers.register(INNOCENT_WOOD_BOAT.get(), m -> new CustomBoatRenderer(m, WizardsReborn.MOD_ID, "innocent_wood", false, false));
+            EntityRenderers.register(INNOCENT_WOOD_CHEST_BOAT.get(), m -> new CustomBoatRenderer(m, WizardsReborn.MOD_ID, "innocent_wood", true, false));
+            EntityRenderers.register(CORK_BAMBOO_RAFT.get(), m -> new CustomBoatRenderer(m, WizardsReborn.MOD_ID, "cork_bamboo", false, true));
+            EntityRenderers.register(CORK_BAMBOO_CHEST_RAFT.get(), m -> new CustomBoatRenderer(m, WizardsReborn.MOD_ID, "cork_bamboo", true, true));
+            EntityRenderers.register(SPELL_PROJECTILE.get(), SpellProjectileRenderer::new);
+            EntityRenderers.register(THROWED_SCYTHE_PROJECTILE.get(), ThrowedScytheRenderer::new);
+            EntityRenderers.register(SPLIT_ARROW_PROJECTILE.get(), SplitArrowRenderer::new);
+            EntityRenderers.register(SNIFFALO.get(), SniffaloRenderer::new);
         }
     }
 }

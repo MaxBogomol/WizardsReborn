@@ -1,5 +1,6 @@
 {
 	"parent": "minecraft:block/bamboo4_age0",
+	"render_type": "minecraft:cutout",
 	"textures": {
 		"all": "wizards_reborn:block/cork_bamboo_stalk",
 		"particle": "wizards_reborn:block/cork_bamboo_stalk"

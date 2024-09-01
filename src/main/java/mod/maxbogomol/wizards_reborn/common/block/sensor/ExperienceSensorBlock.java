@@ -1,7 +1,7 @@
 package mod.maxbogomol.wizards_reborn.common.block.sensor;
 
-import mod.maxbogomol.wizards_reborn.WizardsRebornClient;
 import mod.maxbogomol.wizards_reborn.api.wissen.IExperienceBlockEntity;
+import mod.maxbogomol.wizards_reborn.registry.client.WizardsRebornModels;
 import net.minecraft.client.resources.model.ModelResourceLocation;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -46,6 +46,6 @@ public class ExperienceSensorBlock extends SensorBaseBlock {
     @Override
     @OnlyIn(Dist.CLIENT)
     public ModelResourceLocation getModel(BlockState state) {
-        return WizardsRebornClient.EXPERIENCE_SENSOR_PIECE_MODEL;
+        return WizardsRebornModels.EXPERIENCE_SENSOR_PIECE;
     }
 }

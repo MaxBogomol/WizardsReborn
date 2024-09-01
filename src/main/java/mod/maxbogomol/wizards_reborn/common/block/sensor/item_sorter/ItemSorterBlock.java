@@ -1,8 +1,8 @@
 package mod.maxbogomol.wizards_reborn.common.block.sensor.item_sorter;
 
-import mod.maxbogomol.wizards_reborn.WizardsRebornClient;
 import mod.maxbogomol.wizards_reborn.client.gui.container.ItemSorterContainer;
 import mod.maxbogomol.wizards_reborn.common.block.sensor.SensorBaseBlock;
+import mod.maxbogomol.wizards_reborn.registry.client.WizardsRebornModels;
 import net.minecraft.client.resources.model.ModelResourceLocation;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.chat.Component;
@@ -31,7 +31,7 @@ public class ItemSorterBlock extends SensorBaseBlock {
     @Override
     @OnlyIn(Dist.CLIENT)
     public ModelResourceLocation getModel(BlockState state) {
-        return WizardsRebornClient.ITEM_SORTER_PIECE_MODEL;
+        return WizardsRebornModels.ITEM_SORTER_PIECE;
     }
 
     @Nullable

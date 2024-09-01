@@ -4,10 +4,10 @@ import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
 import com.mojang.math.Axis;
 import mod.maxbogomol.fluffy_fur.client.render.LevelRenderHandler;
-import mod.maxbogomol.wizards_reborn.WizardsRebornClient;
 import mod.maxbogomol.wizards_reborn.api.wissen.WissenUtils;
 import mod.maxbogomol.wizards_reborn.client.event.ClientTickHandler;
 import mod.maxbogomol.wizards_reborn.common.block.arcane_iterator.ArcaneIteratorBlockEntity;
+import mod.maxbogomol.wizards_reborn.registry.client.WizardsRebornModels;
 import mod.maxbogomol.wizards_reborn.util.RenderUtils;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.MultiBufferSource;
@@ -146,7 +146,7 @@ public class ArcaneIteratorRenderer implements BlockEntityRenderer<ArcaneIterato
         ms.mulPose(Axis.YP.rotationDegrees(yRot));
         ms.mulPose(Axis.ZP.rotationDegrees(-zRot));
         ms.scale(size, size, size);
-        RenderUtils.renderCustomModel(WizardsRebornClient.ARCANE_ITERATOR_PIECE_MODEL, ItemDisplayContext.FIXED, false, ms, buffers, light, overlay);
+        RenderUtils.renderCustomModel(WizardsRebornModels.ARCANE_ITERATOR_PIECE, ItemDisplayContext.FIXED, false, ms, buffers, light, overlay);
         ms.popPose();
     }
 

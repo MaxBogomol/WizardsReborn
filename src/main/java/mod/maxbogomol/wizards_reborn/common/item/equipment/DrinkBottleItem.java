@@ -3,9 +3,9 @@ package mod.maxbogomol.wizards_reborn.common.item.equipment;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.math.Axis;
 import mod.maxbogomol.wizards_reborn.WizardsReborn;
-import mod.maxbogomol.wizards_reborn.WizardsRebornClient;
-import mod.maxbogomol.wizards_reborn.common.item.PlacedItem;
 import mod.maxbogomol.wizards_reborn.common.block.placed_items.PlacedItemsBlockEntity;
+import mod.maxbogomol.wizards_reborn.common.item.PlacedItem;
+import mod.maxbogomol.wizards_reborn.registry.client.WizardsRebornModels;
 import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornItems;
 import net.minecraft.ChatFormatting;
 import net.minecraft.client.renderer.MultiBufferSource;
@@ -328,10 +328,10 @@ public class DrinkBottleItem extends PlacedItem {
         ms.translate(0F, 0.0001F, 0F);
         ms.mulPose(Axis.YP.rotationDegrees((rotation * -22.5f) + rotate));
         ms.mulPose(Axis.XP.rotationDegrees(180f));
-        WizardsRebornClient.ALCHEMY_BOTTLE_MODEL.renderToBuffer(ms, buffers.getBuffer(RenderType.entityCutoutNoCull(getModelTexture(stack))), light, OverlayTexture.NO_OVERLAY, 1, 1, 1, 1);
+        WizardsRebornModels.ALCHEMY_BOTTLE.renderToBuffer(ms, buffers.getBuffer(RenderType.entityCutoutNoCull(getModelTexture(stack))), light, OverlayTexture.NO_OVERLAY, 1, 1, 1, 1);
         int stage = getStage(stack);
         if (stage > 0) {
-            WizardsRebornClient.ALCHEMY_BOTTLE_MODEL.renderToBuffer(ms, buffers.getBuffer(RenderType.entityCutoutNoCull(getStageModelTexture(stage))), light, OverlayTexture.NO_OVERLAY, 1, 1, 1, 1);
+            WizardsRebornModels.ALCHEMY_BOTTLE.renderToBuffer(ms, buffers.getBuffer(RenderType.entityCutoutNoCull(getStageModelTexture(stage))), light, OverlayTexture.NO_OVERLAY, 1, 1, 1, 1);
         }
         ms.popPose();
     }

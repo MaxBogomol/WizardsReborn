@@ -57,7 +57,7 @@ public class WizardsRebornAttributes {
             });
             TooltipModifierHandler.register(new AttributeTooltipModifier() {
                 public boolean isModifiable(Attribute key, AttributeModifier modifier, Player player, TooltipFlag flag) {
-                    return key.equals(WizardsRebornAttributes.WISSEN_DISCOUNT.get());
+                    return key.equals(WISSEN_DISCOUNT.get());
                 }
 
                 public ModifyResult modify(AttributeModifier modifier, double amount, AttributeModifier.Operation operation) {
@@ -68,7 +68,7 @@ public class WizardsRebornAttributes {
             });
             TooltipModifierHandler.register(new AttributeTooltipModifier() {
                 public boolean isModifiable(Attribute key, AttributeModifier modifier, Player player, TooltipFlag flag) {
-                    return key.equals(WizardsRebornAttributes.MAGIC_ARMOR.get());
+                    return key.equals(MAGIC_ARMOR.get());
                 }
 
                 public ModifyResult modify(AttributeModifier modifier, double amount, AttributeModifier.Operation operation) {

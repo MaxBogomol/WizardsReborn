@@ -3,8 +3,8 @@ package mod.maxbogomol.wizards_reborn.common.item.equipment;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.math.Axis;
 import mod.maxbogomol.wizards_reborn.WizardsReborn;
-import mod.maxbogomol.wizards_reborn.WizardsRebornClient;
 import mod.maxbogomol.wizards_reborn.common.block.placed_items.PlacedItemsBlockEntity;
+import mod.maxbogomol.wizards_reborn.registry.client.WizardsRebornModels;
 import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornItems;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.RenderType;
@@ -33,7 +33,7 @@ public class FlaskItem extends AlchemyBottleItem {
         ms.translate(0F, 0.0001F, 0F);
         ms.mulPose(Axis.YP.rotationDegrees((rotation * -22.5f) + rotate));
         ms.mulPose(Axis.XP.rotationDegrees(180f));
-        WizardsRebornClient.ALCHEMY_FLASK_MODEL.renderToBuffer(ms, buffers.getBuffer(RenderType.entityCutoutNoCull(FLASK_TEXTURE)), light, OverlayTexture.NO_OVERLAY, 1, 1, 1, 1);
+        WizardsRebornModels.ALCHEMY_FLASK.renderToBuffer(ms, buffers.getBuffer(RenderType.entityCutoutNoCull(FLASK_TEXTURE)), light, OverlayTexture.NO_OVERLAY, 1, 1, 1, 1);
         ms.popPose();
     }
 }

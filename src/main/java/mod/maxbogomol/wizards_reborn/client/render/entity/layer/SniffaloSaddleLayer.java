@@ -2,9 +2,9 @@ package mod.maxbogomol.wizards_reborn.client.render.entity.layer;
 
 import com.mojang.blaze3d.vertex.PoseStack;
 import mod.maxbogomol.wizards_reborn.WizardsReborn;
-import mod.maxbogomol.wizards_reborn.WizardsRebornClient;
 import mod.maxbogomol.wizards_reborn.client.model.sniffalo.SniffaloSaddleArmorModel;
 import mod.maxbogomol.wizards_reborn.common.entity.SniffaloEntity;
+import mod.maxbogomol.wizards_reborn.registry.client.WizardsRebornModels;
 import net.minecraft.client.model.SnifferModel;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.RenderType;
@@ -28,7 +28,7 @@ public class SniffaloSaddleLayer extends RenderLayer<SniffaloEntity, SnifferMode
     @Override
     public void render(PoseStack ms, MultiBufferSource buffer, int packedLight, SniffaloEntity livingEntity, float limbSwing, float limbSwingAmount, float partialTicks, float ageInTicks, float betHeadYaw, float headPitch) {
         if (livingEntity.isSaddled()) {
-            SniffaloSaddleArmorModel model = WizardsRebornClient.SNIFFALO_SADDLE_MODEL;
+            SniffaloSaddleArmorModel model = WizardsRebornModels.SNIFFALO_SADDLE;
             model.young = livingEntity.isBaby();
             model.copyFromDefault(defaultModel);
             model.setupAnim(livingEntity, livingEntity.walkAnimation.position(partialTicks), livingEntity.walkAnimation.speed(partialTicks), livingEntity.tickCount + partialTicks, betHeadYaw, headPitch);

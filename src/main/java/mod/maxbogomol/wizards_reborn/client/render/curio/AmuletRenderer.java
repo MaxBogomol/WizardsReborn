@@ -2,9 +2,9 @@ package mod.maxbogomol.wizards_reborn.client.render.curio;
 
 import com.mojang.blaze3d.vertex.PoseStack;
 import mod.maxbogomol.wizards_reborn.WizardsReborn;
-import mod.maxbogomol.wizards_reborn.WizardsRebornClient;
 import mod.maxbogomol.wizards_reborn.client.model.curio.AmuletModel;
 import mod.maxbogomol.wizards_reborn.common.item.equipment.curio.ICurioItemTexture;
+import mod.maxbogomol.wizards_reborn.registry.client.WizardsRebornModels;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.model.EntityModel;
 import net.minecraft.client.renderer.MultiBufferSource;
@@ -28,7 +28,7 @@ public class AmuletRenderer implements ICurioRenderer {
                                                                           int light, float limbSwing, float limbSwingAmount, float partialTicks,
                                                                           float ageInTicks, float netHeadYaw, float headPitch) {
         if (model == null) {
-            model = new AmuletModel(Minecraft.getInstance().getEntityModels().bakeLayer(WizardsRebornClient.AMULET_LAYER));
+            model = new AmuletModel(Minecraft.getInstance().getEntityModels().bakeLayer(WizardsRebornModels.AMULET_LAYER));
         }
 
         LivingEntity entity = slotContext.entity();

@@ -1,6 +1,6 @@
 package mod.maxbogomol.wizards_reborn.common.block.sensor;
 
-import mod.maxbogomol.wizards_reborn.WizardsRebornClient;
+import mod.maxbogomol.wizards_reborn.registry.client.WizardsRebornModels;
 import net.minecraft.client.resources.model.ModelResourceLocation;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -83,8 +83,8 @@ public class RedstoneSensorBlock extends SensorBaseBlock {
     @OnlyIn(Dist.CLIENT)
     public ModelResourceLocation getModel(BlockState state) {
         if (state.getValue(MODE) == ComparatorMode.SUBTRACT) {
-            return WizardsRebornClient.REDSTONE_SENSOR_PIECE_ON_MODEL;
+            return WizardsRebornModels.REDSTONE_SENSOR_PIECE_ON;
         }
-        return WizardsRebornClient.REDSTONE_SENSOR_PIECE_MODEL;
+        return WizardsRebornModels.REDSTONE_SENSOR_PIECE;
     }
 }

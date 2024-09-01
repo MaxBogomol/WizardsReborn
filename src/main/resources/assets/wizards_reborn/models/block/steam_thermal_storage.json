@@ -1,6 +1,6 @@
 {
-	"credit": "Made with Blockbench",
 	"parent": "block/block",
+	"render_type": "minecraft:cutout",
 	"textures": {
 		"0": "wizards_reborn:block/steam_thermal_storage",
 		"1": "wizards_reborn:block/steam_thermal_storage_ring",

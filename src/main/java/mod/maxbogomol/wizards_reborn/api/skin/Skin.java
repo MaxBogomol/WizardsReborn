@@ -1,7 +1,7 @@
 package mod.maxbogomol.wizards_reborn.api.skin;
 
-import mod.maxbogomol.fluffy_fur.FluffyFurClient;
 import mod.maxbogomol.fluffy_fur.client.model.armor.ArmorModel;
+import mod.maxbogomol.fluffy_fur.registry.client.FluffyFurModels;
 import mod.maxbogomol.fluffy_fur.util.ColorUtil;
 import mod.maxbogomol.wizards_reborn.WizardsReborn;
 import net.minecraft.client.model.HumanoidModel;
@@ -107,7 +107,7 @@ public class Skin {
         for (SkinEntry skinEntry : getSkinEntries()) {
             if (skinEntry.canApplyOnItem(itemStack)) return skinEntry.getArmorModel(entity, itemStack, armorSlot, _default);
         }
-        return FluffyFurClient.EMPTY_ARMOR_MODEL;
+        return FluffyFurModels.EMPTY_ARMOR;
     }
 
     @OnlyIn(Dist.CLIENT)

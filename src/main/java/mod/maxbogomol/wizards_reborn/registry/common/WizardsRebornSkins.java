@@ -1,18 +1,20 @@
 package mod.maxbogomol.wizards_reborn.registry.common;
 
+import mod.maxbogomol.fluffy_fur.client.model.item.CustomModel;
 import mod.maxbogomol.fluffy_fur.client.render.item.LargeItemRenderer;
 import mod.maxbogomol.wizards_reborn.WizardsReborn;
-import mod.maxbogomol.wizards_reborn.WizardsRebornClient;
 import mod.maxbogomol.wizards_reborn.api.skin.Skin;
 import mod.maxbogomol.wizards_reborn.api.skin.Skins;
 import mod.maxbogomol.wizards_reborn.client.model.item.ItemSkinsModels;
 import mod.maxbogomol.wizards_reborn.client.model.item.SkinItemOverrides;
 import mod.maxbogomol.wizards_reborn.client.model.item.WandCrystalsModels;
-import mod.maxbogomol.wizards_reborn.integration.common.farmersdelight.FarmersDelightIntegration;
 import mod.maxbogomol.wizards_reborn.common.skin.*;
+import mod.maxbogomol.wizards_reborn.integration.common.farmersdelight.FarmersDelightIntegration;
 import net.minecraft.client.resources.model.BakedModel;
+import net.minecraft.client.resources.model.ModelResourceLocation;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.client.event.ModelEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
@@ -86,39 +88,46 @@ public class WizardsRebornSkins {
             LargeItemRenderer.bakeModel(map, WizardsReborn.MOD_ID, "skin/soul_hunter_scythe");
             LargeItemRenderer.bakeModel(map, WizardsReborn.MOD_ID, "skin/implosion_scythe");
 
-            WizardsRebornClient.addSkinModel(map, WizardsRebornItems.WISSEN_WAND.getId());
-            WizardsRebornClient.addSkinModel(map, WizardsRebornItems.ARCANE_WOOD_SWORD.getId());
-            WizardsRebornClient.addSkinModel(map, WizardsRebornItems.INNOCENT_WOOD_SWORD.getId());
-            WizardsRebornClient.addSkinModel(map, WizardsRebornItems.ARCANE_GOLD_SWORD.getId());
-            WizardsRebornClient.addSkinModel(map, WizardsRebornItems.ARCANE_WOOD_PICKAXE.getId());
-            WizardsRebornClient.addSkinModel(map, WizardsRebornItems.INNOCENT_WOOD_PICKAXE.getId());
-            WizardsRebornClient.addSkinModel(map, WizardsRebornItems.ARCANE_GOLD_PICKAXE.getId());
-            WizardsRebornClient.addSkinModel(map, WizardsRebornItems.ARCANE_WOOD_AXE.getId());
-            WizardsRebornClient.addSkinModel(map, WizardsRebornItems.INNOCENT_WOOD_AXE.getId());
-            WizardsRebornClient.addSkinModel(map, WizardsRebornItems.ARCANE_GOLD_AXE.getId());
-            WizardsRebornClient.addSkinModel(map, WizardsRebornItems.ARCANE_WOOD_SHOVEL.getId());
-            WizardsRebornClient.addSkinModel(map, WizardsRebornItems.INNOCENT_WOOD_SHOVEL.getId());
-            WizardsRebornClient.addSkinModel(map, WizardsRebornItems.ARCANE_GOLD_SHOVEL.getId());
-            WizardsRebornClient.addSkinModel(map, WizardsRebornItems.ARCANE_WOOD_HOE.getId());
-            WizardsRebornClient.addSkinModel(map, WizardsRebornItems.INNOCENT_WOOD_HOE.getId());
-            WizardsRebornClient.addSkinModel(map, WizardsRebornItems.ARCANE_GOLD_HOE.getId());
+            addSkinModel(map, WizardsRebornItems.WISSEN_WAND.getId());
+            addSkinModel(map, WizardsRebornItems.ARCANE_WOOD_SWORD.getId());
+            addSkinModel(map, WizardsRebornItems.INNOCENT_WOOD_SWORD.getId());
+            addSkinModel(map, WizardsRebornItems.ARCANE_GOLD_SWORD.getId());
+            addSkinModel(map, WizardsRebornItems.ARCANE_WOOD_PICKAXE.getId());
+            addSkinModel(map, WizardsRebornItems.INNOCENT_WOOD_PICKAXE.getId());
+            addSkinModel(map, WizardsRebornItems.ARCANE_GOLD_PICKAXE.getId());
+            addSkinModel(map, WizardsRebornItems.ARCANE_WOOD_AXE.getId());
+            addSkinModel(map, WizardsRebornItems.INNOCENT_WOOD_AXE.getId());
+            addSkinModel(map, WizardsRebornItems.ARCANE_GOLD_AXE.getId());
+            addSkinModel(map, WizardsRebornItems.ARCANE_WOOD_SHOVEL.getId());
+            addSkinModel(map, WizardsRebornItems.INNOCENT_WOOD_SHOVEL.getId());
+            addSkinModel(map, WizardsRebornItems.ARCANE_GOLD_SHOVEL.getId());
+            addSkinModel(map, WizardsRebornItems.ARCANE_WOOD_HOE.getId());
+            addSkinModel(map, WizardsRebornItems.INNOCENT_WOOD_HOE.getId());
+            addSkinModel(map, WizardsRebornItems.ARCANE_GOLD_HOE.getId());
             LargeItemRenderer.bakeModel(map, WizardsReborn.MOD_ID, "arcane_wood_scythe", new SkinItemOverrides());
             LargeItemRenderer.bakeModel(map, WizardsReborn.MOD_ID, "innocent_wood_scythe", new SkinItemOverrides());
             LargeItemRenderer.bakeModel(map, WizardsReborn.MOD_ID, "arcane_gold_scythe", new SkinItemOverrides());
-            WizardsRebornClient.addSkinModel(map, WizardsRebornItems.ARCANE_FORTRESS_HELMET.getId());
-            WizardsRebornClient.addSkinModel(map, WizardsRebornItems.ARCANE_FORTRESS_CHESTPLATE.getId());
-            WizardsRebornClient.addSkinModel(map, WizardsRebornItems.ARCANE_FORTRESS_LEGGINGS.getId());
-            WizardsRebornClient.addSkinModel(map, WizardsRebornItems.ARCANE_FORTRESS_BOOTS.getId());
-            WizardsRebornClient.addSkinModel(map, WizardsRebornItems.INVENTOR_WIZARD_HAT.getId());
-            WizardsRebornClient.addSkinModel(map, WizardsRebornItems.INVENTOR_WIZARD_COSTUME.getId());
-            WizardsRebornClient.addSkinModel(map, WizardsRebornItems.INVENTOR_WIZARD_TROUSERS.getId());
-            WizardsRebornClient.addSkinModel(map, WizardsRebornItems.INVENTOR_WIZARD_BOOTS.getId());
+            addSkinModel(map, WizardsRebornItems.ARCANE_FORTRESS_HELMET.getId());
+            addSkinModel(map, WizardsRebornItems.ARCANE_FORTRESS_CHESTPLATE.getId());
+            addSkinModel(map, WizardsRebornItems.ARCANE_FORTRESS_LEGGINGS.getId());
+            addSkinModel(map, WizardsRebornItems.ARCANE_FORTRESS_BOOTS.getId());
+            addSkinModel(map, WizardsRebornItems.INVENTOR_WIZARD_HAT.getId());
+            addSkinModel(map, WizardsRebornItems.INVENTOR_WIZARD_COSTUME.getId());
+            addSkinModel(map, WizardsRebornItems.INVENTOR_WIZARD_TROUSERS.getId());
+            addSkinModel(map, WizardsRebornItems.INVENTOR_WIZARD_BOOTS.getId());
 
             if (FarmersDelightIntegration.isLoaded()) {
-                WizardsRebornClient.addSkinModel(map, FarmersDelightIntegration.ARCANE_GOLD_KNIFE.getId());
-                WizardsRebornClient.addSkinModel(map, FarmersDelightIntegration.ARCANE_WOOD_KNIFE.getId());
-                WizardsRebornClient.addSkinModel(map, FarmersDelightIntegration.INNOCENT_WOOD_KNIFE.getId());
+                addSkinModel(map, FarmersDelightIntegration.ARCANE_GOLD_KNIFE.getId());
+                addSkinModel(map, FarmersDelightIntegration.ARCANE_WOOD_KNIFE.getId());
+                addSkinModel(map, FarmersDelightIntegration.INNOCENT_WOOD_KNIFE.getId());
             }
         }
+    }
+
+    @OnlyIn(Dist.CLIENT)
+    public static void addSkinModel(Map<ResourceLocation, BakedModel> map, ResourceLocation id) {
+        BakedModel model = map.get(new ModelResourceLocation(id, "inventory"));
+        CustomModel newModel = new CustomModel(model, new SkinItemOverrides());
+        map.replace(new ModelResourceLocation(id, "inventory"), newModel);
     }
 }

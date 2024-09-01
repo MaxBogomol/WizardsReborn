@@ -1,6 +1,6 @@
 {
-	"credit": "Made with Blockbench",
 	"parent": "block/cube",
+	"render_type": "minecraft:cutout",
 	"textures": {
 		"0": "wizards_reborn:block/shiny_clover_stem",
 		"1": "wizards_reborn:block/shiny_clover_stage_2",
