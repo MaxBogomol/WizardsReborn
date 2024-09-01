@@ -1,10 +1,11 @@
 package mod.maxbogomol.wizards_reborn.common.spell.self;
 
-import mod.maxbogomol.wizards_reborn.WizardsReborn;
 import mod.maxbogomol.wizards_reborn.api.crystal.CrystalUtil;
 import mod.maxbogomol.wizards_reborn.common.item.equipment.arcane.ArcaneArmorItem;
 import mod.maxbogomol.wizards_reborn.common.network.PacketHandler;
 import mod.maxbogomol.wizards_reborn.common.network.spell.HeartOfNatureSpellEffectPacket;
+import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornCrystals;
+import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornSpells;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.effect.MobEffectInstance;
@@ -18,12 +19,12 @@ import java.awt.*;
 public class HeartOfNatureSpell extends SelfSpell {
     public HeartOfNatureSpell(String id, int points) {
         super(id, points);
-        addCrystalType(WizardsReborn.EARTH_CRYSTAL_TYPE);
+        addCrystalType(WizardsRebornCrystals.EARTH);
     }
 
     @Override
     public Color getColor() {
-        return WizardsReborn.earthSpellColor;
+        return WizardsRebornSpells.earthSpellColor;
     }
 
     @Override
@@ -41,7 +42,7 @@ public class HeartOfNatureSpell extends SelfSpell {
         ItemStack stack = player.getItemInHand(hand);
         CompoundTag stats = getStats(stack);
 
-        int focusLevel = CrystalUtil.getStatLevel(stats, WizardsReborn.FOCUS_CRYSTAL_STAT);
+        int focusLevel = CrystalUtil.getStatLevel(stats, WizardsRebornCrystals.FOCUS);
         float magicModifier = ArcaneArmorItem.getPlayerMagicModifier(player);
 
         int heal = 0;

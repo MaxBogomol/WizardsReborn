@@ -1,6 +1,7 @@
 package mod.maxbogomol.wizards_reborn.common.block;
 
-import mod.maxbogomol.wizards_reborn.WizardsReborn;
+import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornBlocks;
+import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornItems;
 import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.util.RandomSource;
@@ -46,12 +47,12 @@ public class ShinyCloverCropBlock extends CropBlock {
 
     @Override
     protected ItemLike getBaseSeedId() {
-        return WizardsReborn.SHINY_CLOVER_SEED.get();
+        return WizardsRebornItems.SHINY_CLOVER_SEED.get();
     }
 
     @Override
     public BlockState getStateForAge(int age) {
-        return age == 2 ? WizardsReborn.SHINY_CLOVER.get().defaultBlockState() : super.getStateForAge(age);
+        return age == 2 ? WizardsRebornBlocks.SHINY_CLOVER.get().defaultBlockState() : super.getStateForAge(age);
     }
 
     @Override

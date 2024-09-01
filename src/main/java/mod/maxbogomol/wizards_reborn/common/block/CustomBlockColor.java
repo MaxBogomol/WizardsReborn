@@ -1,6 +1,6 @@
 package mod.maxbogomol.wizards_reborn.common.block;
 
-import mod.maxbogomol.wizards_reborn.WizardsReborn;
+import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornBlocks;
 import net.minecraft.client.color.block.BlockColor;
 import net.minecraft.client.renderer.BiomeColors;
 import net.minecraft.core.BlockPos;
@@ -15,7 +15,7 @@ public class CustomBlockColor implements BlockColor {
     private static final CustomBlockColor INSTANCE = new CustomBlockColor();
 
     public static final Block[] PLANTS = {
-            WizardsReborn.PETALS_OF_INNOCENCE.get()
+            WizardsRebornBlocks.PETALS_OF_INNOCENCE.get()
     };
 
     public static CustomBlockColor getInstance() {
@@ -24,7 +24,7 @@ public class CustomBlockColor implements BlockColor {
 
     @Override
     public int getColor(BlockState state, @Nullable BlockAndTintGetter level, @Nullable BlockPos pos, int tintIndex) {
-        if (state.getBlock() == WizardsReborn.PETALS_OF_INNOCENCE.get() && tintIndex == 1) {
+        if (state.getBlock() == WizardsRebornBlocks.PETALS_OF_INNOCENCE.get() && tintIndex == 1) {
             return level != null && pos != null ? BiomeColors.getAverageGrassColor(level, pos) : -1;
         }
         return -1;

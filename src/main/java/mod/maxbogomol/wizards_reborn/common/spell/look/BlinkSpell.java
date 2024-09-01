@@ -2,11 +2,13 @@ package mod.maxbogomol.wizards_reborn.common.spell.look;
 
 import mod.maxbogomol.wizards_reborn.WizardsReborn;
 import mod.maxbogomol.wizards_reborn.api.crystal.CrystalUtil;
-import mod.maxbogomol.wizards_reborn.common.damage.DamageSourceRegistry;
+import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornCrystals;
+import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornDamage;
 import mod.maxbogomol.wizards_reborn.common.item.equipment.arcane.ArcaneArmorItem;
 import mod.maxbogomol.wizards_reborn.common.network.PacketHandler;
 import mod.maxbogomol.wizards_reborn.common.network.SetAdditionalFovPacket;
 import mod.maxbogomol.wizards_reborn.common.network.spell.BlinkSpellEffectPacket;
+import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornSpells;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
@@ -28,13 +30,13 @@ public class BlinkSpell extends LookSpell {
 
     public BlinkSpell(String id, int points, boolean isSharp) {
         super(id, points);
-        addCrystalType(WizardsReborn.VOID_CRYSTAL_TYPE);
+        addCrystalType(WizardsRebornCrystals.VOID);
         this.isSharp = isSharp;
     }
 
     @Override
     public Color getColor() {
-        return WizardsReborn.voidSpellColor;
+        return WizardsRebornSpells.voidSpellColor;
     }
 
     @Override
@@ -79,14 +81,14 @@ public class BlinkSpell extends LookSpell {
 
         ItemStack stack = player.getItemInHand(hand);
         CompoundTag stats = getStats(stack);
-        int focusLevel = CrystalUtil.getStatLevel(stats, WizardsReborn.FOCUS_CRYSTAL_STAT);
+        int focusLevel = CrystalUtil.getStatLevel(stats, WizardsRebornCrystals.FOCUS);
         float magicModifier = ArcaneArmorItem.getPlayerMagicModifier(player);
         float damage = (3f + (focusLevel)) + magicModifier;
 
         if (isSharp) {
             for (Entity entity : getHitEntities(world, player.getEyePosition(), pos, 0.5f)) {
                 if (!entity.equals(player) && entity instanceof LivingEntity) {
-                    entity.hurt(new DamageSource(DamageSourceRegistry.create(entity.level(), DamageSourceRegistry.ARCANE_MAGIC).typeHolder(), player), damage);
+                    entity.hurt(new DamageSource(WizardsRebornDamage.create(entity.level(), WizardsRebornDamage.ARCANE_MAGIC).typeHolder(), player), damage);
                 }
             }
         }

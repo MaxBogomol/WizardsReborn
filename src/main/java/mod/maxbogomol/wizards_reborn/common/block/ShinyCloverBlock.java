@@ -1,9 +1,9 @@
 package mod.maxbogomol.wizards_reborn.common.block;
 
-import mod.maxbogomol.fluffy_fur.FluffyFur;
 import mod.maxbogomol.fluffy_fur.client.particle.ParticleBuilder;
 import mod.maxbogomol.fluffy_fur.client.particle.data.ColorParticleData;
 import mod.maxbogomol.fluffy_fur.client.particle.data.GenericParticleData;
+import mod.maxbogomol.fluffy_fur.registry.client.FluffyFurParticles;
 import net.minecraft.core.BlockPos;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.level.BlockGetter;
@@ -36,7 +36,7 @@ public class ShinyCloverBlock extends BushBlock {
         if (random.nextFloat() < 0.1f) {
             double X = (random.nextDouble() - 0.5D) * 0.75f;
             double Z = (random.nextDouble() - 0.5D) * 0.75f;
-            ParticleBuilder.create(FluffyFur.SPARKLE_PARTICLE)
+            ParticleBuilder.create(FluffyFurParticles.SPARKLE)
                     .setColorData(ColorParticleData.create(0.427f, 0.612f, 0.423f, 0.968f, 0.941f, 0.549f).build())
                     .setTransparencyData(GenericParticleData.create(0.5f, 0).build())
                     .setScaleData(GenericParticleData.create(0.1f, 0).build())

@@ -1,6 +1,7 @@
 package mod.maxbogomol.wizards_reborn.common.spell.block;
 
-import mod.maxbogomol.wizards_reborn.WizardsReborn;
+import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornCrystals;
+import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornSpells;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.item.ItemStack;
@@ -13,7 +14,7 @@ import java.awt.*;
 public class LavaBlockSpell extends BlockPlaceSpell {
     public LavaBlockSpell(String id, int points) {
         super(id, points);
-        addCrystalType(WizardsReborn.FIRE_CRYSTAL_TYPE);
+        addCrystalType(WizardsRebornCrystals.FIRE);
     }
 
     @Override
@@ -28,7 +29,7 @@ public class LavaBlockSpell extends BlockPlaceSpell {
 
     @Override
     public Color getColor() {
-        return WizardsReborn.fireCrystalColor;
+        return WizardsRebornSpells.fireSpellColor;
     }
 
     @Override

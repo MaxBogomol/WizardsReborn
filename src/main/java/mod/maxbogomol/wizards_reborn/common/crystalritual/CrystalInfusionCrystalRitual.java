@@ -3,20 +3,23 @@ package mod.maxbogomol.wizards_reborn.common.crystalritual;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
 import com.mojang.math.Axis;
-import mod.maxbogomol.fluffy_fur.FluffyFur;
 import mod.maxbogomol.fluffy_fur.client.particle.ParticleBuilder;
 import mod.maxbogomol.fluffy_fur.client.particle.data.ColorParticleData;
 import mod.maxbogomol.fluffy_fur.client.particle.data.GenericParticleData;
 import mod.maxbogomol.fluffy_fur.client.render.LevelRenderHandler;
+import mod.maxbogomol.fluffy_fur.registry.client.FluffyFurParticles;
 import mod.maxbogomol.wizards_reborn.WizardsReborn;
 import mod.maxbogomol.wizards_reborn.api.crystalritual.CrystalRitual;
 import mod.maxbogomol.wizards_reborn.api.crystalritual.CrystalRitualArea;
 import mod.maxbogomol.wizards_reborn.client.event.ClientTickHandler;
 import mod.maxbogomol.wizards_reborn.common.block.arcane_pedestal.ArcanePedestalBlockEntity;
+import mod.maxbogomol.wizards_reborn.common.block.crystal.CrystalBlockEntity;
 import mod.maxbogomol.wizards_reborn.common.network.PacketHandler;
 import mod.maxbogomol.wizards_reborn.common.network.crystalritual.CrystalInfusionBurstEffectPacket;
 import mod.maxbogomol.wizards_reborn.common.recipe.CrystalInfusionRecipe;
-import mod.maxbogomol.wizards_reborn.common.block.crystal.CrystalBlockEntity;
+import mod.maxbogomol.wizards_reborn.registry.client.WizardsRebornParticles;
+import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornRecipes;
+import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornSounds;
 import mod.maxbogomol.wizards_reborn.util.RenderUtils;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.MultiBufferSource;
@@ -110,13 +113,13 @@ public class CrystalInfusionCrystalRitual extends CrystalRitual {
                         inv.setItem(i, container.getItem(i));
                     }
 
-                    Optional<CrystalInfusionRecipe> recipe = level.getRecipeManager().getRecipeFor(WizardsReborn.CRYSTAL_INFUSION_RECIPE.get(), inv, level);
+                    Optional<CrystalInfusionRecipe> recipe = level.getRecipeManager().getRecipeFor(WizardsRebornRecipes.CRYSTAL_INFUSION.get(), inv, level);
 
                     if (recipe.isPresent()) {
                         clearItemHandler(crystal);
                         container.setItem(0, recipe.get().getResultItem(RegistryAccess.EMPTY).copy());
                         updateRunicPedestal(crystal);
-                        level.playSound(WizardsReborn.proxy.getPlayer(), blockPos, WizardsReborn.WISSEN_BURST_SOUND.get(), SoundSource.BLOCKS, 0.25f, (float) (1f + ((random.nextFloat() - 0.5D) / 4)));
+                        level.playSound(WizardsReborn.proxy.getPlayer(), blockPos, WizardsRebornSounds.WISSEN_BURST.get(), SoundSource.BLOCKS, 0.25f, (float) (1f + ((random.nextFloat() - 0.5D) / 4)));
 
                         float r = 1f;
                         float g = 1f;
@@ -138,7 +141,7 @@ public class CrystalInfusionCrystalRitual extends CrystalRitual {
             if (getCooldown(crystal) > 0) {
                 setCooldown(crystal, getCooldown(crystal) - 1);
                 if (random.nextFloat() < 0.5) {
-                    level.playSound(WizardsReborn.proxy.getPlayer(), blockPos, WizardsReborn.SPELL_BURST_SOUND.get(), SoundSource.BLOCKS, 0.25f, (float) (0.5f + ((random.nextFloat() - 0.5D) / 4)));
+                    level.playSound(WizardsReborn.proxy.getPlayer(), blockPos, WizardsRebornSounds.SPELL_BURST.get(), SoundSource.BLOCKS, 0.25f, (float) (0.5f + ((random.nextFloat() - 0.5D) / 4)));
                 }
             }
         }
@@ -179,7 +182,7 @@ public class CrystalInfusionCrystalRitual extends CrystalRitual {
                     double v = Math.sin(Math.toRadians(ticksUp + (rotate * i))) * 0.0625F;
 
                     if (random.nextFloat() < 0.25f) {
-                        ParticleBuilder.create(FluffyFur.WISP_PARTICLE)
+                        ParticleBuilder.create(FluffyFurParticles.WISP)
                                 .setColorData(ColorParticleData.create(r, g, b).build())
                                 .setTransparencyData(GenericParticleData.create(0.35f, 0).build())
                                 .setScaleData(GenericParticleData.create(0.3f, 0).build())
@@ -190,7 +193,7 @@ public class CrystalInfusionCrystalRitual extends CrystalRitual {
                     }
 
                     if (random.nextFloat() < 0.125) {
-                        ParticleBuilder.create(FluffyFur.SPARKLE_PARTICLE)
+                        ParticleBuilder.create(FluffyFurParticles.SPARKLE)
                                 .setColorData(ColorParticleData.create(r, g, b).build())
                                 .setTransparencyData(GenericParticleData.create(0.25f, 0).build())
                                 .setScaleData(GenericParticleData.create(0.3f, 0).build())
@@ -205,7 +208,7 @@ public class CrystalInfusionCrystalRitual extends CrystalRitual {
                 if (random.nextFloat() < 0.3) {
                     double X = ((random.nextDouble() - 0.5D) * 0.5);
                     double Z = ((random.nextDouble() - 0.5D) * 0.5);
-                    ParticleBuilder.create(WizardsReborn.KARMA_PARTICLE)
+                    ParticleBuilder.create(WizardsRebornParticles.KARMA)
                             .setColorData(ColorParticleData.create(0.733f, 0.564f, 0.937f).build())
                             .setTransparencyData(GenericParticleData.create(0.5f, 0).build())
                             .setScaleData(GenericParticleData.create(0.1f, 0.025f).build())
@@ -260,7 +263,7 @@ public class CrystalInfusionCrystalRitual extends CrystalRitual {
             inv.setItem(i, items.get(i));
         }
 
-        Optional<CrystalInfusionRecipe> recipe = level.getRecipeManager().getRecipeFor(WizardsReborn.CRYSTAL_INFUSION_RECIPE.get(), inv, level);
+        Optional<CrystalInfusionRecipe> recipe = level.getRecipeManager().getRecipeFor(WizardsRebornRecipes.CRYSTAL_INFUSION.get(), inv, level);
         return recipe;
     }
 

@@ -1,6 +1,5 @@
 package mod.maxbogomol.wizards_reborn.common.block.light_emitter;
 
-import mod.maxbogomol.fluffy_fur.FluffyFur;
 import mod.maxbogomol.fluffy_fur.client.particle.ParticleBuilder;
 import mod.maxbogomol.fluffy_fur.client.particle.data.ColorParticleData;
 import mod.maxbogomol.fluffy_fur.client.particle.data.GenericParticleData;
@@ -8,7 +7,7 @@ import mod.maxbogomol.fluffy_fur.common.block.entity.ExposedBlockSimpleInventory
 import mod.maxbogomol.fluffy_fur.common.block.entity.TickableBlockEntity;
 import mod.maxbogomol.fluffy_fur.common.easing.Easing;
 import mod.maxbogomol.fluffy_fur.common.network.BlockEntityUpdate;
-import mod.maxbogomol.wizards_reborn.WizardsReborn;
+import mod.maxbogomol.fluffy_fur.registry.client.FluffyFurParticles;
 import mod.maxbogomol.wizards_reborn.api.light.ILightBlockEntity;
 import mod.maxbogomol.wizards_reborn.api.light.LightRayHitResult;
 import mod.maxbogomol.wizards_reborn.api.light.LightUtil;
@@ -18,6 +17,8 @@ import mod.maxbogomol.wizards_reborn.client.sound.LightEmitterSoundInstance;
 import mod.maxbogomol.wizards_reborn.common.block.ArcaneLumosBlock;
 import mod.maxbogomol.wizards_reborn.common.config.Config;
 import mod.maxbogomol.wizards_reborn.common.item.equipment.WissenWandItem;
+import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornBlockEntities;
+import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornTags;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.nbt.CompoundTag;
@@ -53,7 +54,7 @@ public class LightEmitterBlockEntity extends ExposedBlockSimpleInventory impleme
     }
 
     public LightEmitterBlockEntity(BlockPos pos, BlockState state) {
-        this(WizardsReborn.LIGHT_EMITTER_BLOCK_ENTITY.get(), pos, state);
+        this(WizardsRebornBlockEntities.LIGHT_EMITTER.get(), pos, state);
     }
 
     @Override
@@ -99,7 +100,7 @@ public class LightEmitterBlockEntity extends ExposedBlockSimpleInventory impleme
                 Color color = getColor();
 
                 if (random.nextFloat() < 0.5) {
-                    ParticleBuilder.create(FluffyFur.WISP_PARTICLE)
+                    ParticleBuilder.create(FluffyFurParticles.WISP)
                             .setColorData(ColorParticleData.create(color).build())
                             .setTransparencyData(GenericParticleData.create(0.25f, 0).build())
                             .setScaleData(GenericParticleData.create(0.2f * getStage(), 0).build())
@@ -108,7 +109,7 @@ public class LightEmitterBlockEntity extends ExposedBlockSimpleInventory impleme
                             .spawn(level, worldPosition.getX() + 0.5F, worldPosition.getY() + 0.5625F, worldPosition.getZ() + 0.5F);
                 }
                 if (random.nextFloat() < 0.1) {
-                    ParticleBuilder.create(random.nextBoolean() ? FluffyFur.SQUARE_PARTICLE : FluffyFur.SPARKLE_PARTICLE)
+                    ParticleBuilder.create(random.nextBoolean() ? FluffyFurParticles.SQUARE : FluffyFurParticles.SPARKLE)
                             .setColorData(ColorParticleData.create(color).build())
                             .setTransparencyData(GenericParticleData.create(0.25f, 0).build())
                             .setScaleData(GenericParticleData.create(0.0375f * getStage(), 0.075f * getStage(), 0).setEasing(Easing.QUINTIC_IN_OUT).build())
@@ -155,7 +156,7 @@ public class LightEmitterBlockEntity extends ExposedBlockSimpleInventory impleme
 
     @Override
     public boolean canPlaceItemThroughFace(int index, @NotNull ItemStack stack, @Nullable Direction direction) {
-        if (stack.is(WizardsReborn.ARCANE_LUMOS_ITEM_TAG)) {
+        if (stack.is(WizardsRebornTags.ARCANE_LUMOS_ITEM)) {
             return true;
         }
 
@@ -244,7 +245,7 @@ public class LightEmitterBlockEntity extends ExposedBlockSimpleInventory impleme
         Color color = getColor();
 
         if (random.nextFloat() < chance) {
-            ParticleBuilder.create(FluffyFur.WISP_PARTICLE)
+            ParticleBuilder.create(FluffyFurParticles.WISP)
                     .setColorData(ColorParticleData.create(color).build())
                     .setTransparencyData(GenericParticleData.create(0.35f, 0).build())
                     .setScaleData(GenericParticleData.create(0.1f, 0).build())
@@ -255,7 +256,7 @@ public class LightEmitterBlockEntity extends ExposedBlockSimpleInventory impleme
         if (random.nextFloat() < chance / 2) {
             boolean square = random.nextBoolean();
             float i = square ? 0.5f : 1f;
-            ParticleBuilder.create(square ? FluffyFur.SQUARE_PARTICLE : FluffyFur.SPARKLE_PARTICLE)
+            ParticleBuilder.create(square ? FluffyFurParticles.SQUARE : FluffyFurParticles.SPARKLE)
                     .setColorData(ColorParticleData.create(color).build())
                     .setTransparencyData(GenericParticleData.create(0.35f, 0).build())
                     .setScaleData(GenericParticleData.create(0.05f * i, 0.1f * i, 0).setEasing(Easing.QUINTIC_IN_OUT).build())

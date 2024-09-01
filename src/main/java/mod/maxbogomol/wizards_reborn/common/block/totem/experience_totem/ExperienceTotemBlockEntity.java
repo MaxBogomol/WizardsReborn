@@ -2,12 +2,12 @@ package mod.maxbogomol.wizards_reborn.common.block.totem.experience_totem;
 
 import mod.maxbogomol.fluffy_fur.common.block.entity.BlockEntityBase;
 import mod.maxbogomol.fluffy_fur.common.block.entity.TickableBlockEntity;
-import mod.maxbogomol.wizards_reborn.WizardsReborn;
 import mod.maxbogomol.wizards_reborn.api.wissen.IExperienceBlockEntity;
 import mod.maxbogomol.wizards_reborn.api.wissen.WissenUtils;
 import mod.maxbogomol.wizards_reborn.client.particle.ExperienceTotemBurst;
 import mod.maxbogomol.wizards_reborn.common.network.PacketHandler;
 import mod.maxbogomol.wizards_reborn.common.network.tileentity.ExperienceTotemBurstEffectPacket;
+import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornBlockEntities;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.sounds.SoundEvents;
@@ -36,7 +36,7 @@ public class ExperienceTotemBlockEntity extends BlockEntityBase implements Ticka
     }
 
     public ExperienceTotemBlockEntity(BlockPos pos, BlockState state) {
-        this(WizardsReborn.EXPERIENCE_TOTEM_BLOCK_ENTITY.get(), pos, state);
+        this(WizardsRebornBlockEntities.EXPERIENCE_TOTEM.get(), pos, state);
     }
 
     @Override

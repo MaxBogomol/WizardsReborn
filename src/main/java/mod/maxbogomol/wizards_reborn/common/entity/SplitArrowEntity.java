@@ -1,10 +1,12 @@
 package mod.maxbogomol.wizards_reborn.common.entity;
 
-import mod.maxbogomol.wizards_reborn.WizardsReborn;
-import mod.maxbogomol.wizards_reborn.common.damage.DamageSourceRegistry;
 import mod.maxbogomol.wizards_reborn.common.network.PacketHandler;
 import mod.maxbogomol.wizards_reborn.common.network.SplitArrowBurstEffectPacket;
 import mod.maxbogomol.wizards_reborn.common.network.spell.ChargeSpellProjectileRayEffectPacket;
+import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornArcaneEnchantments;
+import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornDamage;
+import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornEntities;
+import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornSounds;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.syncher.EntityDataAccessor;
@@ -39,11 +41,11 @@ public class SplitArrowEntity extends AbstractArrow {
     }
 
     public SplitArrowEntity(Level pLevel, double pX, double pY, double pZ) {
-        super(WizardsReborn.SPLIT_ARROW_PROJECTILE.get(), pX, pY, pZ, pLevel);
+        super(WizardsRebornEntities.SPLIT_ARROW_PROJECTILE.get(), pX, pY, pZ, pLevel);
     }
 
     public SplitArrowEntity(Level pLevel, LivingEntity pShooter) {
-        super(WizardsReborn.SPLIT_ARROW_PROJECTILE.get(), pShooter, pLevel);
+        super(WizardsRebornEntities.SPLIT_ARROW_PROJECTILE.get(), pShooter, pLevel);
     }
 
     @Override
@@ -62,7 +64,7 @@ public class SplitArrowEntity extends AbstractArrow {
                     setFadeTick(11);
                 }
 
-                Color color = WizardsReborn.SPLIT_ARCANE_ENCHANTMENT.getColor();
+                Color color = WizardsRebornArcaneEnchantments.SPLIT.getColor();
                 float r = color.getRed() / 255f;
                 float g = color.getGreen() / 255f;
                 float b = color.getBlue() / 255f;
@@ -111,7 +113,7 @@ public class SplitArrowEntity extends AbstractArrow {
 
                 if (livingEntity.isAlive()) {
                     livingEntity.invulnerableTime = 0;
-                    livingEntity.hurt(new DamageSource(DamageSourceRegistry.create(livingEntity.level(), DamageSourceRegistry.ARCANE_MAGIC).typeHolder(), this, getOwner()), (float) getBaseDamage());
+                    livingEntity.hurt(new DamageSource(WizardsRebornDamage.create(livingEntity.level(), WizardsRebornDamage.ARCANE_MAGIC).typeHolder(), this, getOwner()), (float) getBaseDamage());
                     livingEntity.invulnerableTime = 0;
                 } else {
                     end = false;
@@ -123,7 +125,7 @@ public class SplitArrowEntity extends AbstractArrow {
                 setFadeTick(10);
 
                 Vec3 pos = position();
-                Color color = WizardsReborn.SPLIT_ARCANE_ENCHANTMENT.getColor();
+                Color color = WizardsRebornArcaneEnchantments.SPLIT.getColor();
                 float r = color.getRed() / 255f;
                 float g = color.getGreen() / 255f;
                 float b = color.getBlue() / 255f;
@@ -141,7 +143,7 @@ public class SplitArrowEntity extends AbstractArrow {
 
         if (!level().isClientSide()) {
             Vec3 pos = result.getLocation();
-            Color color = WizardsReborn.SPLIT_ARCANE_ENCHANTMENT.getColor();
+            Color color = WizardsRebornArcaneEnchantments.SPLIT.getColor();
             float r = color.getRed() / 255f;
             float g = color.getGreen() / 255f;
             float b = color.getBlue() / 255f;
@@ -153,7 +155,7 @@ public class SplitArrowEntity extends AbstractArrow {
 
     @Override
     protected SoundEvent getDefaultHitGroundSoundEvent() {
-        return WizardsReborn.SPELL_BURST_SOUND.get();
+        return WizardsRebornSounds.SPELL_BURST.get();
     }
 
     @Override

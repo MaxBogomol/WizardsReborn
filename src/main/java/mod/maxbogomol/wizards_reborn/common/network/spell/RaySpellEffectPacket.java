@@ -1,9 +1,9 @@
 package mod.maxbogomol.wizards_reborn.common.network.spell;
 
-import mod.maxbogomol.fluffy_fur.FluffyFur;
 import mod.maxbogomol.fluffy_fur.client.particle.ParticleBuilder;
 import mod.maxbogomol.fluffy_fur.client.particle.data.ColorParticleData;
 import mod.maxbogomol.fluffy_fur.client.particle.data.GenericParticleData;
+import mod.maxbogomol.fluffy_fur.registry.client.FluffyFurParticles;
 import mod.maxbogomol.wizards_reborn.WizardsReborn;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.util.Mth;
@@ -73,7 +73,7 @@ public class RaySpellEffectPacket {
                     Level world = WizardsReborn.proxy.getLevel();
 
                     if (random.nextFloat() < 0.2f) {
-                        ParticleBuilder.create(FluffyFur.WISP_PARTICLE)
+                        ParticleBuilder.create(FluffyFurParticles.WISP)
                                 .setColorData(ColorParticleData.create(msg.colorR, msg.colorG, msg.colorB).build())
                                 .setTransparencyData(GenericParticleData.create(0.2f, 0).build())
                                 .setScaleData(GenericParticleData.create(0.15f, 0).build())
@@ -82,7 +82,7 @@ public class RaySpellEffectPacket {
                                 .spawn(world, msg.posFromX, msg.posFromY, msg.posFromZ);
 
                         if (random.nextFloat() < 0.1f) {
-                            ParticleBuilder.create(FluffyFur.WISP_PARTICLE)
+                            ParticleBuilder.create(FluffyFurParticles.WISP)
                                     .setColorData(ColorParticleData.create(msg.colorR, msg.colorG, msg.colorB).build())
                                     .setTransparencyData(GenericParticleData.create(0.125f, 0).build())
                                     .setScaleData(GenericParticleData.create(0.2f, 0).build())
@@ -100,7 +100,7 @@ public class RaySpellEffectPacket {
                             double lerpY = Mth.lerp(lerp, msg.posFromY, pos.y);
                             double lerpZ = Mth.lerp(lerp, msg.posFromZ, pos.z);
 
-                            ParticleBuilder.create(FluffyFur.WISP_PARTICLE)
+                            ParticleBuilder.create(FluffyFurParticles.WISP)
                                     .setColorData(ColorParticleData.create(msg.colorR, msg.colorG, msg.colorB).build())
                                     .setTransparencyData(GenericParticleData.create(0.2f, 0).build())
                                     .setScaleData(GenericParticleData.create(0.15f, 0).build())
@@ -109,7 +109,7 @@ public class RaySpellEffectPacket {
                                     .spawn(world, lerpX, lerpY, lerpZ);
 
                             if (random.nextFloat() < 0.1f) {
-                                ParticleBuilder.create(FluffyFur.SPARKLE_PARTICLE)
+                                ParticleBuilder.create(FluffyFurParticles.SPARKLE)
                                         .setColorData(ColorParticleData.create(msg.colorR, msg.colorG, msg.colorB).build())
                                         .setTransparencyData(GenericParticleData.create(0.125f, 0).build())
                                         .setScaleData(GenericParticleData.create(0.2f, 0).build())
@@ -121,14 +121,14 @@ public class RaySpellEffectPacket {
                     }
 
                     if (msg.burst) {
-                        ParticleBuilder.create(FluffyFur.WISP_PARTICLE)
+                        ParticleBuilder.create(FluffyFurParticles.WISP)
                                 .setColorData(ColorParticleData.create(msg.colorR, msg.colorG, msg.colorB).build())
                                 .setTransparencyData(GenericParticleData.create(0.125f, 0).build())
                                 .setScaleData(GenericParticleData.create(0.2f, 0).build())
                                 .setLifetime(40)
                                 .randomVelocity(0.035f)
                                 .repeat(world, msg.posToX, msg.posToY, msg.posToZ, 5, 0.1f);
-                        ParticleBuilder.create(FluffyFur.SPARKLE_PARTICLE)
+                        ParticleBuilder.create(FluffyFurParticles.SPARKLE)
                                 .setColorData(ColorParticleData.create(msg.colorR, msg.colorG, msg.colorB).build())
                                 .setTransparencyData(GenericParticleData.create(0.25f, 0).build())
                                 .setScaleData(GenericParticleData.create(0.075f, 0).build())

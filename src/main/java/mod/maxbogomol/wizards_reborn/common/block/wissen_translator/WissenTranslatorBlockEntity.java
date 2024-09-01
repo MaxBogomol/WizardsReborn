@@ -1,6 +1,5 @@
 package mod.maxbogomol.wizards_reborn.common.block.wissen_translator;
 
-import mod.maxbogomol.fluffy_fur.FluffyFur;
 import mod.maxbogomol.fluffy_fur.client.particle.ParticleBuilder;
 import mod.maxbogomol.fluffy_fur.client.particle.data.ColorParticleData;
 import mod.maxbogomol.fluffy_fur.client.particle.data.GenericParticleData;
@@ -8,6 +7,7 @@ import mod.maxbogomol.fluffy_fur.common.block.entity.ExposedBlockSimpleInventory
 import mod.maxbogomol.fluffy_fur.common.block.entity.TickableBlockEntity;
 import mod.maxbogomol.fluffy_fur.common.easing.Easing;
 import mod.maxbogomol.fluffy_fur.common.network.BlockEntityUpdate;
+import mod.maxbogomol.fluffy_fur.registry.client.FluffyFurParticles;
 import mod.maxbogomol.wizards_reborn.WizardsReborn;
 import mod.maxbogomol.wizards_reborn.api.wissen.ICooldownBlockEntity;
 import mod.maxbogomol.wizards_reborn.api.wissen.IWissenBlockEntity;
@@ -20,6 +20,9 @@ import mod.maxbogomol.wizards_reborn.common.network.PacketHandler;
 import mod.maxbogomol.wizards_reborn.common.network.WissenSendEffectPacket;
 import mod.maxbogomol.wizards_reborn.common.network.tileentity.WissenTranslatorBurstEffectPacket;
 import mod.maxbogomol.wizards_reborn.common.network.tileentity.WissenTranslatorSendEffectPacket;
+import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornBlockEntities;
+import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornSounds;
+import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornTags;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.nbt.CompoundTag;
@@ -62,7 +65,7 @@ public class WissenTranslatorBlockEntity extends ExposedBlockSimpleInventory imp
     }
 
     public WissenTranslatorBlockEntity(BlockPos pos, BlockState state) {
-        this(WizardsReborn.WISSEN_TRANSLATOR_BLOCK_ENTITY.get(), pos, state);
+        this(WizardsRebornBlockEntities.WISSEN_TRANSLATOR.get(), pos, state);
     }
 
     @Override
@@ -102,7 +105,7 @@ public class WissenTranslatorBlockEntity extends ExposedBlockSimpleInventory imp
                                 Color color = getColor();
 
                                 PacketHandler.sendToTracking(level, getBlockPos(), new WissenTranslatorBurstEffectPacket(getBlockPos().getX() + 0.5f, getBlockPos().getY() + 0.5f, getBlockPos().getZ() + 0.5f, (float) color.getRed() / 255, (float) color.getGreen() / 255, (float) color.getBlue() / 255));
-                                level.playSound(WizardsReborn.proxy.getPlayer(), getBlockPos(), WizardsReborn.WISSEN_TRANSFER_SOUND.get(), SoundSource.BLOCKS, 0.1f, (float) (1.1f + ((random.nextFloat() - 0.5D) / 2)));
+                                level.playSound(WizardsReborn.proxy.getPlayer(), getBlockPos(), WizardsRebornSounds.WISSEN_TRANSFER.get(), SoundSource.BLOCKS, 0.1f, (float) (1.1f + ((random.nextFloat() - 0.5D) / 2)));
                             }
                         }
                     } else {
@@ -128,7 +131,7 @@ public class WissenTranslatorBlockEntity extends ExposedBlockSimpleInventory imp
                                 setCooldown = true;
                                 update = true;
 
-                                level.playSound(WizardsReborn.proxy.getPlayer(), tileentity.getBlockPos(), WizardsReborn.WISSEN_TRANSFER_SOUND.get(), SoundSource.BLOCKS, 0.1f, (float) (1.1f + ((random.nextFloat() - 0.5D) / 2)));
+                                level.playSound(WizardsReborn.proxy.getPlayer(), tileentity.getBlockPos(), WizardsRebornSounds.WISSEN_TRANSFER.get(), SoundSource.BLOCKS, 0.1f, (float) (1.1f + ((random.nextFloat() - 0.5D) / 2)));
                             }
                         }
                     } else {
@@ -155,7 +158,7 @@ public class WissenTranslatorBlockEntity extends ExposedBlockSimpleInventory imp
                 Color color = getColor();
 
                 if (random.nextFloat() < 0.5) {
-                    ParticleBuilder.create(FluffyFur.WISP_PARTICLE)
+                    ParticleBuilder.create(FluffyFurParticles.WISP)
                             .setColorData(ColorParticleData.create(color).build())
                             .setTransparencyData(GenericParticleData.create(0.25f, 0).build())
                             .setScaleData(GenericParticleData.create(0.2f * getStage(), 0).build())
@@ -164,7 +167,7 @@ public class WissenTranslatorBlockEntity extends ExposedBlockSimpleInventory imp
                             .spawn(level, worldPosition.getX() + 0.5F, worldPosition.getY() + 0.5F, worldPosition.getZ() + 0.5F);
                 }
                 if (random.nextFloat() < 0.1) {
-                    ParticleBuilder.create(random.nextBoolean() ? FluffyFur.SQUARE_PARTICLE : FluffyFur.SPARKLE_PARTICLE)
+                    ParticleBuilder.create(random.nextBoolean() ? FluffyFurParticles.SQUARE : FluffyFurParticles.SPARKLE)
                             .setColorData(ColorParticleData.create(color).build())
                             .setTransparencyData(GenericParticleData.create(0.25f, 0).build())
                             .setScaleData(GenericParticleData.create(0.0375f * getStage(), 0.075f * getStage(), 0).setEasing(Easing.QUINTIC_IN_OUT).build())
@@ -189,7 +192,7 @@ public class WissenTranslatorBlockEntity extends ExposedBlockSimpleInventory imp
 
     @Override
     public boolean canPlaceItemThroughFace(int index, @NotNull ItemStack stack, @Nullable Direction direction) {
-        if (stack.is(WizardsReborn.ARCANE_LUMOS_ITEM_TAG)) {
+        if (stack.is(WizardsRebornTags.ARCANE_LUMOS_ITEM)) {
             return true;
         }
 
@@ -413,7 +416,7 @@ public class WissenTranslatorBlockEntity extends ExposedBlockSimpleInventory imp
 
                             int addRemain = WissenUtils.getAddWissenRemain(wissenTileEntity.getWissen(), tag.getInt("wissen"), wissenTileEntity.getMaxWissen());
                             wissenTileEntity.addWissen(tag.getInt("wissen") - addRemain);
-                            level.playSound(WizardsReborn.proxy.getPlayer(), X, Y, Z, WizardsReborn.WISSEN_TRANSFER_SOUND.get(), SoundSource.BLOCKS, 0.1f, (float) (1f + ((random.nextFloat() - 0.5D) / 2)));
+                            level.playSound(WizardsReborn.proxy.getPlayer(), X, Y, Z, WizardsRebornSounds.WISSEN_TRANSFER.get(), SoundSource.BLOCKS, 0.1f, (float) (1f + ((random.nextFloat() - 0.5D) / 2)));
 
                             BlockEntityUpdate.packet(tileentity);
 

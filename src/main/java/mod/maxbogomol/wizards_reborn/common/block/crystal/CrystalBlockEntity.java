@@ -18,6 +18,8 @@ import mod.maxbogomol.wizards_reborn.client.sound.CrystalSoundInstance;
 import mod.maxbogomol.wizards_reborn.common.block.runic_pedestal.RunicPedestalBlockEntity;
 import mod.maxbogomol.wizards_reborn.common.item.CrystalItem;
 import mod.maxbogomol.wizards_reborn.common.item.equipment.WissenWandItem;
+import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornBlockEntities;
+import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornSounds;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.sounds.SoundSource;
@@ -57,7 +59,7 @@ public class CrystalBlockEntity extends BlockSimpleInventory implements Tickable
     }
 
     public CrystalBlockEntity(BlockPos pos, BlockState state) {
-        this(WizardsReborn.CRYSTAL_BLOCK_ENTITY.get(), pos, state);
+        this(WizardsRebornBlockEntities.CRYSTAL.get(), pos, state);
     }
 
     @Override
@@ -78,7 +80,7 @@ public class CrystalBlockEntity extends BlockSimpleInventory implements Tickable
                     if (tickRitual == 0) {
                         if (ritual.canStart(this)) {
                             ritual.start(this);
-                            level.playSound(WizardsReborn.proxy.getPlayer(), getBlockPos(), WizardsReborn.CRYSTAL_RITUAL_START_SOUND.get(), SoundSource.BLOCKS, 1f, 1f);
+                            level.playSound(WizardsReborn.proxy.getPlayer(), getBlockPos(), WizardsRebornSounds.CRYSTAL_RITUAL_START.get(), SoundSource.BLOCKS, 1f, 1f);
                             tagRitual = new CompoundTag();
                         } else {
                             reload();
@@ -91,7 +93,7 @@ public class CrystalBlockEntity extends BlockSimpleInventory implements Tickable
 
                         if (ritual.canEnd(this)) {
                             ritual.end(this);
-                            level.playSound(WizardsReborn.proxy.getPlayer(), getBlockPos(), WizardsReborn.CRYSTAL_RITUAL_END_SOUND.get(), SoundSource.BLOCKS, 1f, 1f);
+                            level.playSound(WizardsReborn.proxy.getPlayer(), getBlockPos(), WizardsRebornSounds.CRYSTAL_RITUAL_END.get(), SoundSource.BLOCKS, 1f, 1f);
                             reload();
                         } else {
                             if (!level.isClientSide()) {
@@ -137,7 +139,7 @@ public class CrystalBlockEntity extends BlockSimpleInventory implements Tickable
             if (random.nextFloat() < 0.001f) {
                 if (!getCrystalItem().isEmpty()) {
                     if (getCrystalItem().getItem() instanceof CrystalItem crystalItem && crystalItem.getPolishing().getPolishingLevel() > 0) {
-                        level.playSound(null, getBlockPos(), WizardsReborn.CRYSTAL_SHIMMER_SOUND.get(), SoundSource.BLOCKS, 1.0f, 1.0f + ((random.nextFloat() - 0.5f) / 2));
+                        level.playSound(null, getBlockPos(), WizardsRebornSounds.CRYSTAL_SHIMMER.get(), SoundSource.BLOCKS, 1.0f, 1.0f + ((random.nextFloat() - 0.5f) / 2));
                     }
                 }
             }
@@ -310,7 +312,7 @@ public class CrystalBlockEntity extends BlockSimpleInventory implements Tickable
         isToBlock = false;
         reload();
         BlockEntityUpdate.packet(this);
-        level.playSound(WizardsReborn.proxy.getPlayer(), getBlockPos(), WizardsReborn.CRYSTAL_RITUAL_END_SOUND.get(), SoundSource.BLOCKS, 1f, 1f);
+        level.playSound(WizardsReborn.proxy.getPlayer(), getBlockPos(), WizardsRebornSounds.CRYSTAL_RITUAL_END.get(), SoundSource.BLOCKS, 1f, 1f);
         return true;
     }
 

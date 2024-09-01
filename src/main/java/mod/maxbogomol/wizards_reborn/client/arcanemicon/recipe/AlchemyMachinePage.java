@@ -8,6 +8,7 @@ import mod.maxbogomol.wizards_reborn.common.item.equipment.AlchemyBottleItem;
 import mod.maxbogomol.wizards_reborn.common.item.equipment.AlchemyPotionItem;
 import mod.maxbogomol.wizards_reborn.common.recipe.AlchemyMachineContext;
 import mod.maxbogomol.wizards_reborn.common.recipe.AlchemyMachineRecipe;
+import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornRecipes;
 import mod.maxbogomol.wizards_reborn.util.NumericalUtil;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
@@ -170,7 +171,7 @@ public class AlchemyMachinePage extends RecipePage {
 
             List<ItemStack> list = new ArrayList<>();
 
-            Optional<AlchemyMachineRecipe> recipe = level.getRecipeManager().getRecipeFor(WizardsReborn.ALCHEMY_MACHINE_RECIPE.get(), context, level);
+            Optional<AlchemyMachineRecipe> recipe = level.getRecipeManager().getRecipeFor(WizardsRebornRecipes.ALCHEMY_MACHINE.get(), context, level);
             if (recipe.isPresent()) {
                 ItemStack stack = recipe.get().getResultItem(RegistryAccess.EMPTY).copy();
 

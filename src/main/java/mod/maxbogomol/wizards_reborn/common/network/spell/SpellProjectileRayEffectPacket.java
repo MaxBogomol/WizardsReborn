@@ -1,9 +1,9 @@
 package mod.maxbogomol.wizards_reborn.common.network.spell;
 
-import mod.maxbogomol.fluffy_fur.FluffyFur;
 import mod.maxbogomol.fluffy_fur.client.particle.ParticleBuilder;
 import mod.maxbogomol.fluffy_fur.client.particle.data.ColorParticleData;
 import mod.maxbogomol.fluffy_fur.client.particle.data.GenericParticleData;
+import mod.maxbogomol.fluffy_fur.registry.client.FluffyFurParticles;
 import mod.maxbogomol.wizards_reborn.WizardsReborn;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.util.Mth;
@@ -89,7 +89,7 @@ public class SpellProjectileRayEffectPacket {
                         double lerpZ = Mth.lerp(i / 10.0f, msg.posFromZ, pos.z);
 
                         if (random.nextFloat() < 0.25f) {
-                            ParticleBuilder.create(FluffyFur.WISP_PARTICLE)
+                            ParticleBuilder.create(FluffyFurParticles.WISP)
                                     .setColorData(ColorParticleData.create(msg.r, msg.g, msg.b).build())
                                     .setTransparencyData(GenericParticleData.create(0.2f, 0).build())
                                     .setScaleData(GenericParticleData.create(0.15f, 0).build())
@@ -100,7 +100,7 @@ public class SpellProjectileRayEffectPacket {
                         }
 
                         if (random.nextFloat() < 0.05f) {
-                            ParticleBuilder.create(FluffyFur.SPARKLE_PARTICLE)
+                            ParticleBuilder.create(FluffyFurParticles.SPARKLE)
                                     .setColorData(ColorParticleData.create(msg.r, msg.g, msg.b).build())
                                     .setTransparencyData(GenericParticleData.create(0.125f, 0).build())
                                     .setScaleData(GenericParticleData.create(0.2f, 0).build())

@@ -1,12 +1,13 @@
 package mod.maxbogomol.wizards_reborn.common.spell.ray;
 
-import mod.maxbogomol.wizards_reborn.WizardsReborn;
 import mod.maxbogomol.wizards_reborn.api.crystal.CrystalUtil;
-import mod.maxbogomol.wizards_reborn.common.damage.DamageSourceRegistry;
 import mod.maxbogomol.wizards_reborn.common.entity.SpellProjectileEntity;
 import mod.maxbogomol.wizards_reborn.common.item.equipment.arcane.ArcaneArmorItem;
 import mod.maxbogomol.wizards_reborn.common.network.PacketHandler;
 import mod.maxbogomol.wizards_reborn.common.network.spell.NecroticRaySpellEffectPacket;
+import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornCrystals;
+import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornDamage;
+import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornSpells;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.world.damagesource.DamageSource;
@@ -21,12 +22,12 @@ import java.awt.*;
 public class NecroticRaySpell extends RaySpell {
     public NecroticRaySpell(String id, int points) {
         super(id, points);
-        addCrystalType(WizardsReborn.VOID_CRYSTAL_TYPE);
+        addCrystalType(WizardsRebornCrystals.VOID);
     }
 
     @Override
     public Color getColor() {
-        return WizardsReborn.necroticSpellColor;
+        return WizardsRebornSpells.necroticSpellColor;
     }
 
     @Override
@@ -53,10 +54,10 @@ public class NecroticRaySpell extends RaySpell {
     public void onImpact(HitResult ray, Level world, SpellProjectileEntity projectile, Player player, Entity target) {
         super.onImpact(ray, world, projectile, player, target);
 
-        int focusLevel = CrystalUtil.getStatLevel(projectile.getStats(), WizardsReborn.FOCUS_CRYSTAL_STAT);
+        int focusLevel = CrystalUtil.getStatLevel(projectile.getStats(), WizardsRebornCrystals.FOCUS);
         float magicModifier = ArcaneArmorItem.getPlayerMagicModifier(player);
         float damage = (1f + ((focusLevel + magicModifier) * 0.5f));
-        if (target.hurt(new DamageSource(DamageSourceRegistry.create(target.level(), DamageSourceRegistry.RITUAL).typeHolder(), projectile, player), damage)) {
+        if (target.hurt(new DamageSource(WizardsRebornDamage.create(target.level(), WizardsRebornDamage.RITUAL).typeHolder(), projectile, player), damage)) {
             if (player != null && random.nextFloat() < 0.4f) player.heal(1);
         }
     }

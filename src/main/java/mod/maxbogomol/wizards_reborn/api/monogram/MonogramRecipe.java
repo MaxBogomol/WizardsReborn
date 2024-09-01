@@ -1,6 +1,6 @@
 package mod.maxbogomol.wizards_reborn.api.monogram;
 
-import mod.maxbogomol.wizards_reborn.WizardsReborn;
+import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornMonograms;
 import net.minecraft.core.NonNullList;
 
 import javax.annotation.Nonnull;
@@ -11,7 +11,7 @@ public class MonogramRecipe {
 
     public MonogramRecipe(Monogram output, Monogram... inputs) {
         this.output = output;
-        this.inputs = NonNullList.of(WizardsReborn.LUNAM_MONOGRAM, inputs);
+        this.inputs = NonNullList.of(WizardsRebornMonograms.LUNAM, inputs);
     }
 
     public Monogram getOutput() {

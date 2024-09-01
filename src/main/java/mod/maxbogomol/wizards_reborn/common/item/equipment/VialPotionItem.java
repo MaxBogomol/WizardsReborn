@@ -11,6 +11,7 @@ import mod.maxbogomol.wizards_reborn.api.alchemy.AlchemyPotionUtil;
 import mod.maxbogomol.wizards_reborn.client.render.fluid.FluidRenderer;
 import mod.maxbogomol.wizards_reborn.common.alchemypotion.FluidAlchemyPotion;
 import mod.maxbogomol.wizards_reborn.common.block.placed_items.PlacedItemsBlockEntity;
+import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornItems;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.texture.OverlayTexture;
@@ -30,7 +31,7 @@ public class VialPotionItem extends AlchemyPotionItem {
     public static final ResourceLocation VIAL_TEXTURE = new ResourceLocation(WizardsReborn.MOD_ID, "textures/models/potion/alchemy_vial.png");
 
     public VialPotionItem(Properties properties) {
-        super(properties, 3, WizardsReborn.ALCHEMY_VIAL.get());
+        super(properties, 3, WizardsRebornItems.ALCHEMY_VIAL.get());
     }
 
     @Override

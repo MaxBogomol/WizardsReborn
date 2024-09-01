@@ -1,7 +1,7 @@
 package mod.maxbogomol.wizards_reborn.common.block.creative.wissen_storage;
 
-import mod.maxbogomol.wizards_reborn.WizardsReborn;
 import mod.maxbogomol.wizards_reborn.common.block.wissen_cell.WissenCellBlockEntity;
+import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornBlockEntities;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
@@ -13,7 +13,7 @@ public class CreativeWissenStorageBlockEntity extends WissenCellBlockEntity {
     }
 
     public CreativeWissenStorageBlockEntity(BlockPos pos, BlockState state) {
-        this(WizardsReborn.CREATIVE_WISSEN_STORAGE_BLOCK_ENTITY.get(), pos, state);
+        this(WizardsRebornBlockEntities.CREATIVE_WISSEN_STORAGE.get(), pos, state);
     }
 
     @Override

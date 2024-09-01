@@ -2,12 +2,12 @@ package mod.maxbogomol.wizards_reborn.common.spell.look.strike;
 
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.math.Axis;
-import mod.maxbogomol.fluffy_fur.FluffyFur;
 import mod.maxbogomol.fluffy_fur.client.animation.ItemAnimation;
 import mod.maxbogomol.fluffy_fur.client.particle.ParticleBuilder;
 import mod.maxbogomol.fluffy_fur.client.particle.data.ColorParticleData;
 import mod.maxbogomol.fluffy_fur.client.particle.data.GenericParticleData;
 import mod.maxbogomol.fluffy_fur.client.render.LevelRenderHandler;
+import mod.maxbogomol.fluffy_fur.registry.client.FluffyFurParticles;
 import mod.maxbogomol.wizards_reborn.WizardsReborn;
 import mod.maxbogomol.wizards_reborn.client.animation.StrikeSpellItemAnimation;
 import mod.maxbogomol.wizards_reborn.common.entity.SpellProjectileEntity;
@@ -15,6 +15,8 @@ import mod.maxbogomol.wizards_reborn.common.network.AddScreenshakePacket;
 import mod.maxbogomol.wizards_reborn.common.network.PacketHandler;
 import mod.maxbogomol.wizards_reborn.common.network.spell.StrikeSpellEffectPacket;
 import mod.maxbogomol.wizards_reborn.common.spell.look.block.BlockLookSpell;
+import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornEntities;
+import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornSounds;
 import mod.maxbogomol.wizards_reborn.util.RenderUtils;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.core.BlockPos;
@@ -103,7 +105,7 @@ public class StrikeSpell extends BlockLookSpell {
                 float stage = (float) player.getTicksUsingItem() / getUseTime(world, livingEntity, stack, remainingUseDuration);
                 Color color = getColor();
 
-                ParticleBuilder.create(FluffyFur.WISP_PARTICLE)
+                ParticleBuilder.create(FluffyFurParticles.WISP)
                         .setColorData(ColorParticleData.create(color).build())
                         .setTransparencyData(GenericParticleData.create(0.25f, 0).build())
                         .setScaleData(GenericParticleData.create(0.2f * stage, 0).build())
@@ -120,7 +122,7 @@ public class StrikeSpell extends BlockLookSpell {
         CompoundTag stats = getStats(player.getItemInHand(hand));
         Vec3 pos = getBlockHit(world, player, hand).getPosHit();
 
-        SpellProjectileEntity entity = new SpellProjectileEntity(WizardsReborn.SPELL_PROJECTILE.get(), world).shoot(
+        SpellProjectileEntity entity = new SpellProjectileEntity(WizardsRebornEntities.SPELL_PROJECTILE.get(), world).shoot(
                 pos.x, pos.y, pos.z, 0, 0, 0, player.getUUID(), this.getId(), stats
         );
         entity.setYRot(player.getYRot());
@@ -161,7 +163,7 @@ public class StrikeSpell extends BlockLookSpell {
                         entity.level().playSound(WizardsReborn.proxy.getPlayer(), entity.getX() + ((random.nextDouble() - 0.5D) * 5f), entity.getY() + ((random.nextDouble() - 0.5D) * 5f), entity.getZ() + ((random.nextDouble() - 0.5D) * 5f), soundType.getBreakSound(), SoundSource.PLAYERS, 1f, 1f);
                     }
 
-                    entity.level().playSound(WizardsReborn.proxy.getPlayer(), entity.getX() + ((random.nextDouble() - 0.5D) * 5f), entity.getY() + ((random.nextDouble() - 0.5D) * 5f), entity.getZ() + ((random.nextDouble() - 0.5D) * 5f), WizardsReborn.SPELL_BURST_SOUND.get(), SoundSource.PLAYERS, 1f, (float) (1f + ((random.nextFloat() - 0.5D) / 4)));
+                    entity.level().playSound(WizardsReborn.proxy.getPlayer(), entity.getX() + ((random.nextDouble() - 0.5D) * 5f), entity.getY() + ((random.nextDouble() - 0.5D) * 5f), entity.getZ() + ((random.nextDouble() - 0.5D) * 5f), WizardsRebornSounds.SPELL_BURST.get(), SoundSource.PLAYERS, 1f, (float) (1f + ((random.nextFloat() - 0.5D) / 4)));
                 }
             }
         }

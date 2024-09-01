@@ -3,6 +3,8 @@ package mod.maxbogomol.wizards_reborn.client.arcanemicon.recipe;
 import mod.maxbogomol.wizards_reborn.WizardsReborn;
 import mod.maxbogomol.wizards_reborn.client.arcanemicon.ArcanemiconGui;
 import mod.maxbogomol.wizards_reborn.common.recipe.ArcanumDustTransmutationRecipe;
+import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornItems;
+import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornRecipes;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.multiplayer.ClientLevel;
@@ -29,7 +31,7 @@ public class ArcanumDustTransmutationPage extends RecipePage {
     @Override
     @OnlyIn(Dist.CLIENT)
     public void render(ArcanemiconGui book, GuiGraphics gui, int x, int y, int mouseX, int mouseY) {
-        drawItem(book, gui, new ItemStack(WizardsReborn.ARCANUM_DUST.get()),x + 56, y + 18, mouseX, mouseY);
+        drawItem(book, gui, new ItemStack(WizardsRebornItems.ARCANUM_DUST.get()),x + 56, y + 18, mouseX, mouseY);
         drawItem(book, gui, input,x + 56, y + 69, mouseX, mouseY);
         drawItem(book, gui, result,x + 56, y + 123, mouseX, mouseY);
         renderChanged(book, gui, x, y, mouseX, mouseY);
@@ -44,7 +46,7 @@ public class ArcanumDustTransmutationPage extends RecipePage {
             SimpleContainer inv = new SimpleContainer(1);
             inv.setItem(0, input);
 
-            Optional<ArcanumDustTransmutationRecipe> recipe = level.getRecipeManager().getRecipeFor(WizardsReborn.ARCANUM_DUST_TRANSMUTATION_RECIPE.get(), inv, level);
+            Optional<ArcanumDustTransmutationRecipe> recipe = level.getRecipeManager().getRecipeFor(WizardsRebornRecipes.ARCANUM_DUST_TRANSMUTATION.get(), inv, level);
             return !(recipe.isPresent() && recipe.get().getResultItem(RegistryAccess.EMPTY).getItem().equals(result.getItem()) || recipe.get().getDisplay().getItem().equals(result.getItem()));
         }
 

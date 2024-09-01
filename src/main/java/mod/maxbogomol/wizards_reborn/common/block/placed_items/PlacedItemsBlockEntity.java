@@ -2,8 +2,8 @@ package mod.maxbogomol.wizards_reborn.common.block.placed_items;
 
 import mod.maxbogomol.fluffy_fur.common.block.entity.BlockSimpleInventory;
 import mod.maxbogomol.fluffy_fur.common.network.BlockEntityUpdate;
-import mod.maxbogomol.wizards_reborn.WizardsReborn;
 import mod.maxbogomol.wizards_reborn.api.wissen.IWissenWandFunctionalBlockEntity;
+import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornBlockEntities;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.world.SimpleContainer;
@@ -20,7 +20,7 @@ public class PlacedItemsBlockEntity extends BlockSimpleInventory implements IWis
     }
 
     public PlacedItemsBlockEntity(BlockPos pos, BlockState state) {
-        this(WizardsReborn.PLACED_ITEMS_BLOCK_ENTITY.get(), pos, state);
+        this(WizardsRebornBlockEntities.PLACED_ITEMS.get(), pos, state);
     }
 
     @Override

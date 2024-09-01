@@ -1,16 +1,17 @@
 package mod.maxbogomol.wizards_reborn.common.spell.look.cloud;
 
-import mod.maxbogomol.fluffy_fur.FluffyFur;
 import mod.maxbogomol.fluffy_fur.client.particle.ParticleBuilder;
 import mod.maxbogomol.fluffy_fur.client.particle.data.ColorParticleData;
 import mod.maxbogomol.fluffy_fur.client.particle.data.GenericParticleData;
 import mod.maxbogomol.fluffy_fur.client.particle.data.LightParticleData;
+import mod.maxbogomol.fluffy_fur.registry.client.FluffyFurParticles;
 import mod.maxbogomol.fluffy_fur.util.RenderUtils;
-import mod.maxbogomol.wizards_reborn.WizardsReborn;
 import mod.maxbogomol.wizards_reborn.api.crystal.CrystalUtil;
 import mod.maxbogomol.wizards_reborn.common.entity.SpellProjectileEntity;
 import mod.maxbogomol.wizards_reborn.common.item.equipment.arcane.ArcaneArmorItem;
 import mod.maxbogomol.wizards_reborn.common.spell.look.block.BlockLookSpell;
+import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornCrystals;
+import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornEntities;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.entity.player.Player;
@@ -49,7 +50,7 @@ public class CloudSpell extends BlockLookSpell {
         CompoundTag stats = getStats(player.getItemInHand(hand));
         Vec3 pos = getBlockHit(world, player, hand).getPosHit();
 
-        SpellProjectileEntity entity = new SpellProjectileEntity(WizardsReborn.SPELL_PROJECTILE.get(), world).shoot(
+        SpellProjectileEntity entity = new SpellProjectileEntity(WizardsRebornEntities.SPELL_PROJECTILE.get(), world).shoot(
                 pos.x, pos.y, pos.z, 0, 0, 0, player.getUUID(), this.getId(), stats
         );
         world.addFreshEntity(entity);
@@ -88,7 +89,7 @@ public class CloudSpell extends BlockLookSpell {
 
         for (int i = 0; i < 5; i++) {
             if (random.nextFloat() < 0.4f) {
-                ParticleBuilder.create(FluffyFur.SMOKE_PARTICLE)
+                ParticleBuilder.create(FluffyFurParticles.SMOKE)
                         .setColorData(ColorParticleData.create(color).build())
                         .setTransparencyData(GenericParticleData.create(0.45f, 0).build())
                         .setScaleData(GenericParticleData.create(1.5f).build())
@@ -99,7 +100,7 @@ public class CloudSpell extends BlockLookSpell {
                         .spawn(entity.level(), entity.getX(), entity.getY(), entity.getZ());
             }
             if (random.nextFloat() < 0.8f) {
-                ParticleBuilder.create(FluffyFur.SMOKE_PARTICLE)
+                ParticleBuilder.create(FluffyFurParticles.SMOKE)
                         .setRenderType(RenderUtils.DELAYED_PARTICLE)
                         .setColorData(ColorParticleData.create(color).build())
                         .setTransparencyData(GenericParticleData.create(0.45f, 0).build())
@@ -116,7 +117,7 @@ public class CloudSpell extends BlockLookSpell {
         boolean trails = hasTrails(entity);
 
         if (random.nextFloat() < (trails ? 0.5f : 0.8f)) {
-            ParticleBuilder.create(FluffyFur.WISP_PARTICLE)
+            ParticleBuilder.create(FluffyFurParticles.WISP)
                     .setColorData(ColorParticleData.create(color).build())
                     .setTransparencyData(GenericParticleData.create(0.4f, 0).build())
                     .setScaleData(GenericParticleData.create(0.2f, 0).build())
@@ -127,7 +128,7 @@ public class CloudSpell extends BlockLookSpell {
         }
 
         if (trails && random.nextFloat() < 0.4f) {
-            ParticleBuilder.create(FluffyFur.TRAIL_PARTICLE)
+            ParticleBuilder.create(FluffyFurParticles.TRAIL)
                     .setColorData(ColorParticleData.create(color).build())
                     .setTransparencyData(GenericParticleData.create(0.4f, 0).build())
                     .setScaleData(GenericParticleData.create(0.2f, 0).build())
@@ -155,7 +156,7 @@ public class CloudSpell extends BlockLookSpell {
     }
 
     public float getCloudSize(SpellProjectileEntity entity) {
-        int focusLevel = CrystalUtil.getStatLevel(entity.getStats(), WizardsReborn.FOCUS_CRYSTAL_STAT);
+        int focusLevel = CrystalUtil.getStatLevel(entity.getStats(), WizardsRebornCrystals.FOCUS);
         float magicModifier = ArcaneArmorItem.getPlayerMagicModifier(entity.getSender());
         return (2.25f + ((focusLevel + magicModifier) * 0.25f));
     }

@@ -3,17 +3,20 @@ package mod.maxbogomol.wizards_reborn.common.spell.aura;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
 import com.mojang.math.Axis;
-import mod.maxbogomol.fluffy_fur.FluffyFur;
 import mod.maxbogomol.fluffy_fur.client.particle.ParticleBuilder;
 import mod.maxbogomol.fluffy_fur.client.particle.data.ColorParticleData;
 import mod.maxbogomol.fluffy_fur.client.particle.data.GenericParticleData;
 import mod.maxbogomol.fluffy_fur.client.render.LevelRenderHandler;
+import mod.maxbogomol.fluffy_fur.registry.client.FluffyFurParticles;
 import mod.maxbogomol.wizards_reborn.WizardsReborn;
 import mod.maxbogomol.wizards_reborn.api.crystal.CrystalUtil;
 import mod.maxbogomol.wizards_reborn.api.spell.Spell;
 import mod.maxbogomol.wizards_reborn.common.entity.SpellProjectileEntity;
 import mod.maxbogomol.wizards_reborn.common.network.PacketHandler;
 import mod.maxbogomol.wizards_reborn.common.network.spell.AuraSpellCastEffectPacket;
+import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornCrystals;
+import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornEntities;
+import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornSounds;
 import mod.maxbogomol.wizards_reborn.util.RenderUtils;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.nbt.CompoundTag;
@@ -68,7 +71,7 @@ public class AuraSpell extends Spell {
             CompoundTag stats = getStats(stack);
 
             Vec3 pos = context.getClickedPos().getCenter();
-            SpellProjectileEntity entity = new SpellProjectileEntity(WizardsReborn.SPELL_PROJECTILE.get(), world).shoot(
+            SpellProjectileEntity entity = new SpellProjectileEntity(WizardsRebornEntities.SPELL_PROJECTILE.get(), world).shoot(
                     pos.x, pos.y + 0.5, pos.z, 0, 0, 0, player.getUUID(), this.getId(), stats
             );
             world.addFreshEntity(entity);
@@ -97,7 +100,7 @@ public class AuraSpell extends Spell {
             onAura(entity.level(), entity, entity.getSender(), getTargets(entity));
             if (entity.tickCount > getLifeTime(entity)) {
                 entity.remove();
-                entity.level().playSound(WizardsReborn.proxy.getPlayer(), entity.getX(), entity.getY(), entity.getZ(), WizardsReborn.SPELL_BURST_SOUND.get(), SoundSource.PLAYERS, 1f, (float) (1f + ((random.nextFloat() - 0.5D) / 4)));
+                entity.level().playSound(WizardsReborn.proxy.getPlayer(), entity.getX(), entity.getY(), entity.getZ(), WizardsRebornSounds.SPELL_BURST.get(), SoundSource.PLAYERS, 1f, (float) (1f + ((random.nextFloat() - 0.5D) / 4)));
             }
         }
 
@@ -107,7 +110,7 @@ public class AuraSpell extends Spell {
                 Vec3 pos = entity.position();
 
                 if (random.nextFloat() < 0.35f) {
-                    ParticleBuilder.create(FluffyFur.WISP_PARTICLE)
+                    ParticleBuilder.create(FluffyFurParticles.WISP)
                             .setColorData(ColorParticleData.create(color).build())
                             .setTransparencyData(GenericParticleData.create(0.3f, 0).build())
                             .setScaleData(GenericParticleData.create(0.5f, 0f).build())
@@ -119,7 +122,7 @@ public class AuraSpell extends Spell {
                             .spawn(entity.level(), pos.x(), pos.y() - 0.2f, pos.z());
                 }
                 if (random.nextFloat() < 0.25f) {
-                    ParticleBuilder.create(FluffyFur.SMOKE_PARTICLE)
+                    ParticleBuilder.create(FluffyFurParticles.SMOKE)
                             .setColorData(ColorParticleData.create(color).build())
                             .setTransparencyData(GenericParticleData.create(0.1f, 0).build())
                             .setScaleData(GenericParticleData.create(1f, 0).build())
@@ -131,7 +134,7 @@ public class AuraSpell extends Spell {
                             .spawn(entity.level(), pos.x(), pos.y() - 0.2f, pos.z());
                 }
                 if (random.nextFloat() < 0.5f) {
-                    ParticleBuilder.create(FluffyFur.SPARKLE_PARTICLE)
+                    ParticleBuilder.create(FluffyFurParticles.SPARKLE)
                             .setColorData(ColorParticleData.create(color).build())
                             .setTransparencyData(GenericParticleData.create(0.5f, 0).build())
                             .setScaleData(GenericParticleData.create(0.15f, 0f).build())
@@ -144,7 +147,7 @@ public class AuraSpell extends Spell {
                 }
 
                 if (random.nextFloat() < 0.45f) {
-                    ParticleBuilder.create(FluffyFur.CUBE_PARTICLE)
+                    ParticleBuilder.create(FluffyFurParticles.CUBE)
                             .setColorData(ColorParticleData.create(color).build())
                             .setTransparencyData(GenericParticleData.create(0.5f, 0).build())
                             .setScaleData(GenericParticleData.create(0.15f, 0f).build())
@@ -156,7 +159,7 @@ public class AuraSpell extends Spell {
                             .spawn(entity.level(), pos.x(), pos.y() - 0.2f, pos.z());
                 }
                 if (random.nextFloat() < 0.45f) {
-                    ParticleBuilder.create(FluffyFur.WISP_PARTICLE)
+                    ParticleBuilder.create(FluffyFurParticles.WISP)
                             .setColorData(ColorParticleData.create(color).build())
                             .setTransparencyData(GenericParticleData.create(0.5f, 0).build())
                             .setScaleData(GenericParticleData.create(0.15f, 0f).build())
@@ -180,7 +183,7 @@ public class AuraSpell extends Spell {
     }
 
     public float getSizeStats(SpellProjectileEntity entity) {
-        int focusLevel = CrystalUtil.getStatLevel(entity.getStats(), WizardsReborn.FOCUS_CRYSTAL_STAT);
+        int focusLevel = CrystalUtil.getStatLevel(entity.getStats(), WizardsRebornCrystals.FOCUS);
         return 0.7f + (0.3f * (focusLevel / 3f));
     }
 

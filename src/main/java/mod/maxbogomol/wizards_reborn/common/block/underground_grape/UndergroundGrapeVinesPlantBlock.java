@@ -1,6 +1,7 @@
 package mod.maxbogomol.wizards_reborn.common.block.underground_grape;
 
-import mod.maxbogomol.wizards_reborn.WizardsReborn;
+import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornBlocks;
+import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornItems;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
@@ -21,12 +22,12 @@ public class UndergroundGrapeVinesPlantBlock extends CaveVinesPlantBlock {
 
     @Override
     protected GrowingPlantHeadBlock getHeadBlock() {
-        return (GrowingPlantHeadBlock) WizardsReborn.UNDERGROUND_GRAPE_VINES.get();
+        return (GrowingPlantHeadBlock) WizardsRebornBlocks.UNDERGROUND_GRAPE_VINES.get();
     }
 
     @Override
     public ItemStack getCloneItemStack(BlockGetter blockGetter, BlockPos blockPos, BlockState blockState) {
-        return new ItemStack(WizardsReborn.UNDERGROUND_GRAPE_VINE.get());
+        return new ItemStack(WizardsRebornItems.UNDERGROUND_GRAPE_VINE.get());
     }
 
     @Override

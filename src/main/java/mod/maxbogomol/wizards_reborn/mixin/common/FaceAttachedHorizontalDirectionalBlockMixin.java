@@ -1,8 +1,8 @@
 package mod.maxbogomol.wizards_reborn.mixin.common;
 
-import mod.maxbogomol.wizards_reborn.WizardsReborn;
 import mod.maxbogomol.wizards_reborn.common.block.extractor.ExtractorBaseBlock;
 import mod.maxbogomol.wizards_reborn.common.block.extractor.TinyExtractorBaseBlock;
+import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornTags;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.world.level.LevelReader;
@@ -21,7 +21,7 @@ public abstract class FaceAttachedHorizontalDirectionalBlockMixin {
 
     @Inject(at = @At("RETURN"), method = "canSurvive", cancellable = true)
     private void wizards_reborn$canSurvive(BlockState state, LevelReader level, BlockPos pos, CallbackInfoReturnable<Boolean> cir) {
-        if (state.is(WizardsReborn.EXTRACTOR_LEVER_CONNECTION_BLOCK_TAG)) {
+        if (state.is(WizardsRebornTags.EXTRACTOR_LEVER_CONNECTION_BLOCK)) {
             Block block = level.getBlockState(pos.relative(wizards_reborn$getConnectedDirection(state).getOpposite())).getBlock();
             if (block instanceof ExtractorBaseBlock) {
                 cir.setReturnValue(true);

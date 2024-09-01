@@ -1,7 +1,7 @@
 package mod.maxbogomol.wizards_reborn.common.block.sensor.fluid;
 
-import mod.maxbogomol.wizards_reborn.WizardsReborn;
 import mod.maxbogomol.wizards_reborn.common.block.sensor.SensorBlockEntity;
+import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornBlockEntities;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.world.level.block.entity.BlockEntityType;
@@ -24,7 +24,7 @@ public class FluidSensorBlockEntity extends SensorBlockEntity {
     }
 
     public FluidSensorBlockEntity(BlockPos pPos, BlockState pBlockState) {
-        super(WizardsReborn.FLUID_SENSOR_BLOCK_ENTITY.get(), pPos, pBlockState);
+        super(WizardsRebornBlockEntities.FLUID_SENSOR.get(), pPos, pBlockState);
     }
 
     @Override

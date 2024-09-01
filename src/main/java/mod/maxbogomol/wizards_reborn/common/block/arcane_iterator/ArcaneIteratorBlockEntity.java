@@ -1,6 +1,5 @@
 package mod.maxbogomol.wizards_reborn.common.block.arcane_iterator;
 
-import mod.maxbogomol.fluffy_fur.FluffyFur;
 import mod.maxbogomol.fluffy_fur.client.particle.ParticleBuilder;
 import mod.maxbogomol.fluffy_fur.client.particle.data.ColorParticleData;
 import mod.maxbogomol.fluffy_fur.client.particle.data.GenericParticleData;
@@ -8,6 +7,7 @@ import mod.maxbogomol.fluffy_fur.common.block.entity.BlockEntityBase;
 import mod.maxbogomol.fluffy_fur.common.block.entity.TickableBlockEntity;
 import mod.maxbogomol.fluffy_fur.common.easing.Easing;
 import mod.maxbogomol.fluffy_fur.common.network.BlockEntityUpdate;
+import mod.maxbogomol.fluffy_fur.registry.client.FluffyFurParticles;
 import mod.maxbogomol.wizards_reborn.WizardsReborn;
 import mod.maxbogomol.wizards_reborn.api.arcaneenchantment.ArcaneEnchantment;
 import mod.maxbogomol.wizards_reborn.api.arcaneenchantment.ArcaneEnchantmentUtil;
@@ -18,10 +18,13 @@ import mod.maxbogomol.wizards_reborn.client.particle.ArcaneIteratorBurst;
 import mod.maxbogomol.wizards_reborn.client.sound.ArcaneIteratorSoundInstance;
 import mod.maxbogomol.wizards_reborn.common.block.arcane_pedestal.ArcanePedestalBlockEntity;
 import mod.maxbogomol.wizards_reborn.common.config.Config;
-import mod.maxbogomol.wizards_reborn.common.damage.DamageSourceRegistry;
 import mod.maxbogomol.wizards_reborn.common.network.PacketHandler;
 import mod.maxbogomol.wizards_reborn.common.network.tileentity.ArcaneIteratorBurstEffectPacket;
 import mod.maxbogomol.wizards_reborn.common.recipe.ArcaneIteratorRecipe;
+import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornBlockEntities;
+import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornDamage;
+import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornRecipes;
+import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornSounds;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.RegistryAccess;
 import net.minecraft.nbt.CompoundTag;
@@ -45,7 +48,10 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.AABB;
 import net.minecraftforge.common.extensions.IForgeBlockEntity;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
+import java.util.Optional;
 
 public class ArcaneIteratorBlockEntity extends BlockEntityBase implements TickableBlockEntity, IWissenBlockEntity, ICooldownBlockEntity, IWissenWandFunctionalBlockEntity, IItemResultBlockEntity {
     public int wissenInCraft= 0;
@@ -74,7 +80,7 @@ public class ArcaneIteratorBlockEntity extends BlockEntityBase implements Tickab
     }
 
     public ArcaneIteratorBlockEntity(BlockPos pos, BlockState state) {
-        this(WizardsReborn.ARCANE_ITERATOR_BLOCK_ENTITY.get(), pos, state);
+        this(WizardsRebornBlockEntities.ARCANE_ITERATOR.get(), pos, state);
     }
 
     @Override
@@ -91,7 +97,7 @@ public class ArcaneIteratorBlockEntity extends BlockEntityBase implements Tickab
                 }
 
                 if (!inv.isEmpty()) {
-                    Optional<ArcaneIteratorRecipe> recipe = level.getRecipeManager().getRecipeFor(WizardsReborn.ARCANE_ITERATOR_RECIPE.get(), inv, level);
+                    Optional<ArcaneIteratorRecipe> recipe = level.getRecipeManager().getRecipeFor(WizardsRebornRecipes.ARCANE_ITERATOR.get(), inv, level);
                     wissenInCraft = recipe.map(ArcaneIteratorRecipe::getRecipeWissen).orElse(0);
                     experienceInCraft = recipe.map(ArcaneIteratorRecipe::getRecipeExperience).orElse(0);
                     healthInCraft = recipe.map(ArcaneIteratorRecipe::getRecipeHealth).orElse(0);
@@ -121,7 +127,7 @@ public class ArcaneIteratorBlockEntity extends BlockEntityBase implements Tickab
 
                     if ((wissenInCraft > 0) && (wissen > 0) && (startCraft) && canCraft) {
                         if (wissenIsCraft == 0) {
-                            level.playSound(WizardsReborn.proxy.getPlayer(), getBlockPos(), WizardsReborn.ARCANE_ITERATOR_START_SOUND.get(), SoundSource.BLOCKS, 1f, 1f);
+                            level.playSound(WizardsReborn.proxy.getPlayer(), getBlockPos(), WizardsRebornSounds.ARCANE_ITERATOR_START.get(), SoundSource.BLOCKS, 1f, 1f);
                         }
 
                         int addRemainCraft = WissenUtils.getAddWissenRemain(wissenIsCraft, getWissenPerTick(), wissenInCraft);
@@ -148,7 +154,7 @@ public class ArcaneIteratorBlockEntity extends BlockEntityBase implements Tickab
                                 if (player.getHealth() > 0) {
                                     healthIsCraft++;
                                     healthTick = 10;
-                                    player.hurt(new DamageSource(DamageSourceRegistry.create(player.level(), DamageSourceRegistry.ARCANE_MAGIC).typeHolder()), 1f);
+                                    player.hurt(new DamageSource(WizardsRebornDamage.create(player.level(), WizardsRebornDamage.ARCANE_MAGIC).typeHolder()), 1f);
                                 }
                             }
                         }
@@ -216,14 +222,14 @@ public class ArcaneIteratorBlockEntity extends BlockEntityBase implements Tickab
                                     tagBlock.putInt("z", pedestals.get(i).getBlockPos().getZ());
                                     tagPos.put(String.valueOf(ii), tagBlock);
                                     ii++;
-                                    level.playSound(WizardsReborn.proxy.getPlayer(), pedestals.get(i).getBlockPos(), WizardsReborn.WISSEN_TRANSFER_SOUND.get(), SoundSource.BLOCKS, 0.25f, (float) (1f + ((random.nextFloat() - 0.5D) / 4)));
+                                    level.playSound(WizardsReborn.proxy.getPlayer(), pedestals.get(i).getBlockPos(), WizardsRebornSounds.WISSEN_TRANSFER.get(), SoundSource.BLOCKS, 0.25f, (float) (1f + ((random.nextFloat() - 0.5D) / 4)));
                                 }
                             }
                             getMainPedestal().setItem(0, stack);
                             BlockEntityUpdate.packet(getMainPedestal());
 
                             PacketHandler.sendToTracking(level, getBlockPos(), new ArcaneIteratorBurstEffectPacket(tagPos));
-                            level.playSound(WizardsReborn.proxy.getPlayer(), getBlockPos(), WizardsReborn.ARCANE_ITERATOR_END_SOUND.get(), SoundSource.BLOCKS, 1f, 1f);
+                            level.playSound(WizardsReborn.proxy.getPlayer(), getBlockPos(), WizardsRebornSounds.ARCANE_ITERATOR_END.get(), SoundSource.BLOCKS, 1f, 1f);
                         }
                     }
                 } else if (wissenInCraft != 0 || startCraft) {
@@ -257,7 +263,7 @@ public class ArcaneIteratorBlockEntity extends BlockEntityBase implements Tickab
 
                 if (getWissen() > 0) {
                     if (random.nextFloat() < 0.5) {
-                        ParticleBuilder.create(FluffyFur.WISP_PARTICLE)
+                        ParticleBuilder.create(FluffyFurParticles.WISP)
                                 .setColorData(ColorParticleData.create(Config.wissenColorR(), Config.wissenColorG(), Config.wissenColorB()).build())
                                 .setTransparencyData(GenericParticleData.create(0.25f, 0).build())
                                 .setScaleData(GenericParticleData.create(0.3f * getStage(), 0).build())
@@ -266,7 +272,7 @@ public class ArcaneIteratorBlockEntity extends BlockEntityBase implements Tickab
                                 .spawn(level, getBlockPos().getX() + 0.5F, getBlockPos().getY() - 0.7F, getBlockPos().getZ() + 0.5F);
                     }
                     if (random.nextFloat() < 0.1) {
-                        ParticleBuilder.create(random.nextBoolean() ? FluffyFur.SQUARE_PARTICLE : FluffyFur.SPARKLE_PARTICLE)
+                        ParticleBuilder.create(random.nextBoolean() ? FluffyFurParticles.SQUARE : FluffyFurParticles.SPARKLE)
                                 .setColorData(ColorParticleData.create(Config.wissenColorR(), Config.wissenColorG(), Config.wissenColorB()).build())
                                 .setTransparencyData(GenericParticleData.create(0.25f, 0).build())
                                 .setScaleData(GenericParticleData.create(0.05f * getStage(), 0.1f * getStage(), 0).setEasing(Easing.QUINTIC_IN_OUT).build())
@@ -310,7 +316,7 @@ public class ArcaneIteratorBlockEntity extends BlockEntityBase implements Tickab
                         particleRay(-0.03f);
                     }
                     if (random.nextFloat() < 0.225) {
-                        ParticleBuilder.create(FluffyFur.WISP_PARTICLE)
+                        ParticleBuilder.create(FluffyFurParticles.WISP)
                                 .setColorData(ColorParticleData.create(0.611f, 0.352f, 0.447f, 0.807f, 0.800f, 0.639f).build())
                                 .setTransparencyData(GenericParticleData.create(0.3f, 0).build())
                                 .setScaleData(GenericParticleData.create(0.5f, 0).build())
@@ -327,7 +333,7 @@ public class ArcaneIteratorBlockEntity extends BlockEntityBase implements Tickab
                                 bursts.add(new ArcaneIteratorBurst(level, pedestal.getBlockPos().getX() + 0.5F, pedestal.getBlockPos().getY() + 1.3F, pedestal.getBlockPos().getZ() + 0.5F,
                                         getBlockPos().getX() + 0.5F, getBlockPos().getY() + 0.5F, getBlockPos().getZ() + 0.5F, 0.05f, 20, 200,
                                         random.nextFloat(), random.nextFloat(), random.nextFloat()));
-                                level.playSound(WizardsReborn.proxy.getPlayer(), pedestal.getBlockPos(), WizardsReborn.WISSEN_TRANSFER_SOUND.get(), SoundSource.BLOCKS, 0.25f, (float) (1f + ((random.nextFloat() - 0.5D) / 4)));
+                                level.playSound(WizardsReborn.proxy.getPlayer(), pedestal.getBlockPos(), WizardsRebornSounds.WISSEN_TRANSFER.get(), SoundSource.BLOCKS, 0.25f, (float) (1f + ((random.nextFloat() - 0.5D) / 4)));
                             }
                         }
                     }
@@ -366,7 +372,7 @@ public class ArcaneIteratorBlockEntity extends BlockEntityBase implements Tickab
         float vy = yOffset * speed + random.nextFloat() * speed * 0.1f;
         float vz = zOffset * speed + random.nextFloat() * speed * 0.1f;
 
-        ParticleBuilder.create(FluffyFur.SMOKE_PARTICLE)
+        ParticleBuilder.create(FluffyFurParticles.SMOKE)
                 .setColorData(ColorParticleData.create(0.611f, 0.352f, 0.447f, 0.807f, 0.800f, 0.639f).build())
                 .setTransparencyData(GenericParticleData.create(0.4f, 0).build())
                 .setScaleData(GenericParticleData.create(0.5f, 0).build())
@@ -588,7 +594,7 @@ public class ArcaneIteratorBlockEntity extends BlockEntityBase implements Tickab
                 inv.setItem(i, items.get(i));
             }
 
-            Optional<ArcaneIteratorRecipe> recipe = level.getRecipeManager().getRecipeFor(WizardsReborn.ARCANE_ITERATOR_RECIPE.get(), inv, level);
+            Optional<ArcaneIteratorRecipe> recipe = level.getRecipeManager().getRecipeFor(WizardsRebornRecipes.ARCANE_ITERATOR.get(), inv, level);
             list.addAll(getItemsResult(recipe));
         }
 

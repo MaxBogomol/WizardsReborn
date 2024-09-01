@@ -1,15 +1,16 @@
 package mod.maxbogomol.wizards_reborn.common.block.totem.flames;
 
-import mod.maxbogomol.fluffy_fur.FluffyFur;
 import mod.maxbogomol.fluffy_fur.client.particle.ParticleBuilder;
 import mod.maxbogomol.fluffy_fur.client.particle.data.ColorParticleData;
 import mod.maxbogomol.fluffy_fur.client.particle.data.GenericParticleData;
 import mod.maxbogomol.fluffy_fur.client.particle.data.LightParticleData;
 import mod.maxbogomol.fluffy_fur.common.block.entity.ExposedBlockSimpleInventory;
 import mod.maxbogomol.fluffy_fur.common.block.entity.TickableBlockEntity;
+import mod.maxbogomol.fluffy_fur.registry.client.FluffyFurParticles;
 import mod.maxbogomol.fluffy_fur.util.RenderUtils;
-import mod.maxbogomol.wizards_reborn.WizardsReborn;
 import mod.maxbogomol.wizards_reborn.common.block.ArcaneLumosBlock;
+import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornBlockEntities;
+import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornTags;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.world.SimpleContainer;
@@ -34,7 +35,7 @@ public class TotemOfFlamesBlockEntity extends ExposedBlockSimpleInventory implem
     }
 
     public TotemOfFlamesBlockEntity(BlockPos pos, BlockState state) {
-        this(WizardsReborn.TOTEM_OF_FLAMES_BLOCK_ENTITY.get(), pos, state);
+        this(WizardsRebornBlockEntities.TOTEM_OF_FLAMES.get(), pos, state);
     }
 
     @Override
@@ -60,7 +61,7 @@ public class TotemOfFlamesBlockEntity extends ExposedBlockSimpleInventory implem
                         Color color = ArcaneLumosBlock.getColor(lumos.color);
 
                         if (random.nextFloat() < 0.5) {
-                            ParticleBuilder.create(FluffyFur.WISP_PARTICLE)
+                            ParticleBuilder.create(FluffyFurParticles.WISP)
                                     .setColorData(ColorParticleData.create(color).build())
                                     .setTransparencyData(GenericParticleData.create(0.25f, 0).build())
                                     .setScaleData(GenericParticleData.create(0.25f, 0).build())
@@ -69,7 +70,7 @@ public class TotemOfFlamesBlockEntity extends ExposedBlockSimpleInventory implem
                                     .spawn(level, worldPosition.getX() + 0.5F, worldPosition.getY() + 0.5F, worldPosition.getZ() + 0.5F);
                         }
                         if (random.nextFloat() < 0.75) {
-                            ParticleBuilder.create(FluffyFur.SPARKLE_PARTICLE)
+                            ParticleBuilder.create(FluffyFurParticles.SPARKLE)
                                     .setColorData(ColorParticleData.create(color).build())
                                     .setTransparencyData(GenericParticleData.create(0.35f, 0).build())
                                     .setScaleData(GenericParticleData.create(0.25f, 0).build())
@@ -80,7 +81,7 @@ public class TotemOfFlamesBlockEntity extends ExposedBlockSimpleInventory implem
                                     .spawn(level, worldPosition.getX() + 0.5F, worldPosition.getY() + 0.5F, worldPosition.getZ() + 0.5F);
                         }
                         if (random.nextFloat() < 0.1) {
-                            ParticleBuilder.create(FluffyFur.SMOKE_PARTICLE)
+                            ParticleBuilder.create(FluffyFurParticles.SMOKE)
                                     .setRenderType(RenderUtils.DELAYED_PARTICLE)
                                     .setColorData(ColorParticleData.create(Color.BLACK).build())
                                     .setTransparencyData(GenericParticleData.create(0.35f, 0).build())
@@ -95,7 +96,7 @@ public class TotemOfFlamesBlockEntity extends ExposedBlockSimpleInventory implem
 
                         if (lumos.color == ArcaneLumosBlock.Colors.COSMIC) {
                             if (random.nextFloat() < 0.1) {
-                                ParticleBuilder.create(FluffyFur.SPARKLE_PARTICLE)
+                                ParticleBuilder.create(FluffyFurParticles.SPARKLE)
                                         .setColorData(ColorParticleData.create(color).build())
                                         .setTransparencyData(GenericParticleData.create(0.75f, 0).build())
                                         .setScaleData(GenericParticleData.create(0.1f, 0).build())
@@ -107,7 +108,7 @@ public class TotemOfFlamesBlockEntity extends ExposedBlockSimpleInventory implem
                                         .spawn(level, worldPosition.getX() + 0.5F, worldPosition.getY() + 0.5F, worldPosition.getZ() + 0.5F);
                             }
                             if (random.nextFloat() < 0.1) {
-                                ParticleBuilder.create(FluffyFur.SPARKLE_PARTICLE)
+                                ParticleBuilder.create(FluffyFurParticles.SPARKLE)
                                         .setColorData(ColorParticleData.create(Color.WHITE).build())
                                         .setTransparencyData(GenericParticleData.create(0.75f, 0).build())
                                         .setScaleData(GenericParticleData.create(0.1f, 0).build())
@@ -142,7 +143,7 @@ public class TotemOfFlamesBlockEntity extends ExposedBlockSimpleInventory implem
 
     @Override
     public boolean canPlaceItemThroughFace(int index, @NotNull ItemStack stack, @Nullable Direction direction) {
-        if (stack.is(WizardsReborn.ARCANE_LUMOS_ITEM_TAG)) {
+        if (stack.is(WizardsRebornTags.ARCANE_LUMOS_ITEM)) {
             return true;
         }
 

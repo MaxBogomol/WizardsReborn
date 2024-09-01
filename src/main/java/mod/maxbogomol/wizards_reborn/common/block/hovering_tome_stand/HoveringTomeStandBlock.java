@@ -1,8 +1,9 @@
 package mod.maxbogomol.wizards_reborn.common.block.hovering_tome_stand;
 
 import mod.maxbogomol.fluffy_fur.common.block.entity.TickableBlockEntity;
-import mod.maxbogomol.wizards_reborn.WizardsReborn;
 import mod.maxbogomol.wizards_reborn.client.arcanemicon.ArcanemiconGui;
+import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornItems;
+import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornSounds;
 import net.minecraft.client.Minecraft;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -85,13 +86,13 @@ public class HoveringTomeStandBlock extends Block implements EntityBlock, Simple
             Block block = blocksList.get(world.getBlockState(pos).getBlock());
             if (block != null) {
                 world.setBlockAndUpdate(pos, block.defaultBlockState());
-                ItemStack arcanemicon = new ItemStack(WizardsReborn.ARCANEMICON.get());
+                ItemStack arcanemicon = new ItemStack(WizardsRebornItems.ARCANEMICON.get());
                 if (player.getInventory().getSlotWithRemainingSpace(arcanemicon) != -1 || player.getInventory().getFreeSlot() > -1) {
                     player.getInventory().add(arcanemicon);
                 } else {
                     world.addFreshEntity(new ItemEntity(world, pos.getX() + 0.5F, pos.getY() + 1.0F, pos.getZ() + 0.5F, arcanemicon));
                 }
-                world.playSound(null, pos, WizardsReborn.PEDESTAL_REMOVE_SOUND.get(), SoundSource.BLOCKS, 1.0f, 1.0f);
+                world.playSound(null, pos, WizardsRebornSounds.PEDESTAL_REMOVE.get(), SoundSource.BLOCKS, 1.0f, 1.0f);
                 world.playSound(null, pos, SoundEvents.BOOK_PAGE_TURN, SoundSource.BLOCKS, 1.0f, 1.0f);
                 return InteractionResult.SUCCESS;
             }

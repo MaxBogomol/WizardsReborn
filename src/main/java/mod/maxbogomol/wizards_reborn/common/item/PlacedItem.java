@@ -3,9 +3,9 @@ package mod.maxbogomol.wizards_reborn.common.item;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.math.Axis;
 import mod.maxbogomol.fluffy_fur.common.item.ICustomBlockEntityDataItem;
-import mod.maxbogomol.wizards_reborn.WizardsReborn;
 import mod.maxbogomol.wizards_reborn.client.event.ClientTickHandler;
 import mod.maxbogomol.wizards_reborn.common.block.placed_items.PlacedItemsBlockEntity;
+import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornBlocks;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.core.NonNullList;
@@ -22,7 +22,7 @@ import net.minecraftforge.api.distmarker.OnlyIn;
 public class PlacedItem extends ItemNameBlockItem implements ICustomBlockEntityDataItem, IPlacedItem {
 
     public PlacedItem(Properties properties) {
-        super(WizardsReborn.PLACED_ITEMS_BLOCK.get(), properties);
+        super(WizardsRebornBlocks.PLACED_ITEMS.get(), properties);
     }
 
     @Override

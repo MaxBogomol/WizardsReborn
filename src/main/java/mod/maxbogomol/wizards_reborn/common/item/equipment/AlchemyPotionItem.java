@@ -6,7 +6,7 @@ import mod.maxbogomol.wizards_reborn.WizardsReborn;
 import mod.maxbogomol.wizards_reborn.api.alchemy.AlchemyPotion;
 import mod.maxbogomol.wizards_reborn.api.alchemy.AlchemyPotionUtil;
 import mod.maxbogomol.wizards_reborn.common.alchemypotion.FluidAlchemyPotion;
-import mod.maxbogomol.wizards_reborn.common.alchemypotion.RegisterAlchemyPotions;
+import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornAlchemyPotions;
 import mod.maxbogomol.wizards_reborn.common.item.PlacedItem;
 import net.minecraft.advancements.CriteriaTriggers;
 import net.minecraft.client.color.item.ItemColor;
@@ -68,7 +68,7 @@ public class AlchemyPotionItem extends PlacedItem {
     @Override
     public ItemStack getDefaultInstance() {
         ItemStack stack = super.getDefaultInstance();;
-        AlchemyPotionUtil.setPotion(stack, RegisterAlchemyPotions.WATER);
+        AlchemyPotionUtil.setPotion(stack, WizardsRebornAlchemyPotions.WATER);
         return stack;
     }
 

@@ -4,6 +4,8 @@ import mod.maxbogomol.wizards_reborn.WizardsReborn;
 import mod.maxbogomol.wizards_reborn.common.network.PacketHandler;
 import mod.maxbogomol.wizards_reborn.common.network.WissenDustBurstEffectPacket;
 import mod.maxbogomol.wizards_reborn.common.recipe.ArcanumDustTransmutationRecipe;
+import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornRecipes;
+import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornSounds;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.RegistryAccess;
 import net.minecraft.sounds.SoundSource;
@@ -40,7 +42,7 @@ public class ArcanumDustItem extends ArcanumItem {
             SimpleContainer inv = new SimpleContainer(1);
             inv.setItem(0, world.getBlockState(blockpos).getBlock().asItem().getDefaultInstance());
             Optional<ArcanumDustTransmutationRecipe> recipe = world.getRecipeManager()
-                    .getRecipeFor(WizardsReborn.ARCANUM_DUST_TRANSMUTATION_RECIPE.get(), inv, world);
+                    .getRecipeFor(WizardsRebornRecipes.ARCANUM_DUST_TRANSMUTATION.get(), inv, world);
 
             AtomicBoolean place_block = new AtomicBoolean(true);
             AtomicReference<ItemStack> item = new AtomicReference<>(ItemStack.EMPTY);
@@ -85,7 +87,7 @@ public class ArcanumDustItem extends ArcanumItem {
                     PacketHandler.sendToTracking(world, player.getOnPos(), new WissenDustBurstEffectPacket(blockpos, (float) pos.x, (float) pos.y, (float) pos.z, (float) vel.x, (float) vel.y, (float) vel.z));
 
                     player.awardStat(Stats.ITEM_USED.get(this));
-                    world.playSound(WizardsReborn.proxy.getPlayer(), blockpos, WizardsReborn.ARCANUM_DUST_TRANSMUTATION_SOUND.get(), SoundSource.PLAYERS, 1f, (float) (1.0f + ((random.nextFloat() - 0.5D) / 2)));
+                    world.playSound(WizardsReborn.proxy.getPlayer(), blockpos, WizardsRebornSounds.ARCANUM_DUST_TRANSMUTATION.get(), SoundSource.PLAYERS, 1f, (float) (1.0f + ((random.nextFloat() - 0.5D) / 2)));
 
                     return InteractionResult.SUCCESS;
                 }
@@ -100,7 +102,7 @@ public class ArcanumDustItem extends ArcanumItem {
             SimpleContainer inv = new SimpleContainer(1);
             inv.setItem(0, world.getBlockState(blockpos).getBlock().asItem().getDefaultInstance());
             Optional<ArcanumDustTransmutationRecipe> recipe = world.getRecipeManager()
-                    .getRecipeFor(WizardsReborn.ARCANUM_DUST_TRANSMUTATION_RECIPE.get(), inv, world);
+                    .getRecipeFor(WizardsRebornRecipes.ARCANUM_DUST_TRANSMUTATION.get(), inv, world);
 
             AtomicBoolean place_block = new AtomicBoolean(true);
             AtomicReference<ItemStack> item = new AtomicReference<>(ItemStack.EMPTY);
@@ -138,8 +140,8 @@ public class ArcanumDustItem extends ArcanumItem {
             if (craft) {
                 stack.setCount(stack.getCount() - 1);
                 PacketHandler.sendToTracking(world, blockpos, new WissenDustBurstEffectPacket(blockpos, blockpos.getX() + 0.5F,  blockpos.getY() + 0.5F,  blockpos.getZ() + 0.5F, 0, 0, 0));
-                world.playSound(WizardsReborn.proxy.getPlayer(), blockpos, WizardsReborn.WISSEN_TRANSFER_SOUND.get(), SoundSource.PLAYERS, 0.5f, (float) (1.1f + ((random.nextFloat() - 0.5D) / 2)));
-                world.playSound(WizardsReborn.proxy.getPlayer(), blockpos, WizardsReborn.WISSEN_BURST_SOUND.get(), SoundSource.PLAYERS, 0.5f, (float) (1.3f + ((random.nextFloat() - 0.5D) / 2)));
+                world.playSound(WizardsReborn.proxy.getPlayer(), blockpos, WizardsRebornSounds.WISSEN_TRANSFER.get(), SoundSource.PLAYERS, 0.5f, (float) (1.1f + ((random.nextFloat() - 0.5D) / 2)));
+                world.playSound(WizardsReborn.proxy.getPlayer(), blockpos, WizardsRebornSounds.WISSEN_BURST.get(), SoundSource.PLAYERS, 0.5f, (float) (1.3f + ((random.nextFloat() - 0.5D) / 2)));
 
                 return true;
             }

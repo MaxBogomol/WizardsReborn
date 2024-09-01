@@ -3,6 +3,7 @@ package mod.maxbogomol.wizards_reborn.common.item.equipment.curio;
 import com.google.common.collect.LinkedHashMultimap;
 import com.google.common.collect.Multimap;
 import mod.maxbogomol.wizards_reborn.WizardsReborn;
+import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornAttributes;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.entity.LivingEntity;
@@ -32,8 +33,8 @@ public class InventorWizardBeltItem extends BaseCurioItem {
     @Override
     public Multimap<Attribute, AttributeModifier> getAttributeModifiers(SlotContext slotContext, UUID uuid, ItemStack stack) {
         Multimap<Attribute, AttributeModifier> atts = LinkedHashMultimap.create();
-        atts.put(WizardsReborn.WISSEN_DISCOUNT.get(), new AttributeModifier(uuid, "bonus", 10, AttributeModifier.Operation.ADDITION));
-        atts.put(WizardsReborn.MAGIC_ARMOR.get(), new AttributeModifier(uuid, "bonus", 10, AttributeModifier.Operation.ADDITION));
+        atts.put(WizardsRebornAttributes.WISSEN_DISCOUNT.get(), new AttributeModifier(uuid, "bonus", 10, AttributeModifier.Operation.ADDITION));
+        atts.put(WizardsRebornAttributes.MAGIC_ARMOR.get(), new AttributeModifier(uuid, "bonus", 10, AttributeModifier.Operation.ADDITION));
         return atts;
     }
 

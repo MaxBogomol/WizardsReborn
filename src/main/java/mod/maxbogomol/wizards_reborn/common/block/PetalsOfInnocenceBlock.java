@@ -1,9 +1,9 @@
 package mod.maxbogomol.wizards_reborn.common.block;
 
-import mod.maxbogomol.fluffy_fur.FluffyFur;
 import mod.maxbogomol.fluffy_fur.client.particle.ParticleBuilder;
 import mod.maxbogomol.fluffy_fur.client.particle.data.ColorParticleData;
 import mod.maxbogomol.fluffy_fur.client.particle.data.GenericParticleData;
+import mod.maxbogomol.fluffy_fur.registry.client.FluffyFurParticles;
 import net.minecraft.core.BlockPos;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.level.Level;
@@ -23,7 +23,7 @@ public class PetalsOfInnocenceBlock extends PinkPetalsBlock {
         if (random.nextFloat() < 0.1f) {
             double X = (random.nextDouble() - 0.5D);
             double Z = (random.nextDouble() - 0.5D);
-            ParticleBuilder.create(FluffyFur.WISP_PARTICLE)
+            ParticleBuilder.create(FluffyFurParticles.WISP)
                     .setColorData(ColorParticleData.create(0.968f, 0.968f, 0.968f).build())
                     .setTransparencyData(GenericParticleData.create(0.5f, 0).build())
                     .setScaleData(GenericParticleData.create(0.05f, 0).build())

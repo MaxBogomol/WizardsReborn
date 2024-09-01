@@ -3,8 +3,8 @@ package mod.maxbogomol.wizards_reborn.client.render.entity;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
 import mod.maxbogomol.fluffy_fur.client.render.LevelRenderHandler;
-import mod.maxbogomol.wizards_reborn.WizardsReborn;
 import mod.maxbogomol.wizards_reborn.common.entity.SplitArrowEntity;
+import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornArcaneEnchantments;
 import mod.maxbogomol.wizards_reborn.util.RenderUtils;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.culling.Frustum;
@@ -28,7 +28,7 @@ public class SplitArrowRenderer<T extends SplitArrowEntity> extends EntityRender
     public void render(SplitArrowEntity entity, float entityYaw, float partialTicks, PoseStack stack, MultiBufferSource buffer, int light) {
         MultiBufferSource bufferDelayed = LevelRenderHandler.getDelayedRender();
         VertexConsumer builder = bufferDelayed.getBuffer(RenderUtils.GLOWING);
-        Color color = WizardsReborn.SPLIT_ARCANE_ENCHANTMENT.getColor();
+        Color color = WizardsRebornArcaneEnchantments.SPLIT.getColor();
 
         List<Vec3> trailList = new ArrayList<>(entity.trail);
         if (trailList.size() > 1 && entity.tickCount >= 10) {

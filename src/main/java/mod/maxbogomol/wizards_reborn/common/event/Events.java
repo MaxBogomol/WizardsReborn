@@ -8,11 +8,14 @@ import mod.maxbogomol.wizards_reborn.common.capability.ArrowModifierProvider;
 import mod.maxbogomol.wizards_reborn.common.capability.IKnowledge;
 import mod.maxbogomol.wizards_reborn.common.capability.KnowledgeProvider;
 import mod.maxbogomol.wizards_reborn.common.command.WizardsRebornCommand;
-import mod.maxbogomol.wizards_reborn.common.damage.DamageSourceRegistry;
+import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornAttributes;
+import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornDamage;
 import mod.maxbogomol.wizards_reborn.common.entity.SpellProjectileEntity;
 import mod.maxbogomol.wizards_reborn.common.item.equipment.ArcaneFortressArmorItem;
 import mod.maxbogomol.wizards_reborn.common.network.KnowledgeUpdatePacket;
 import mod.maxbogomol.wizards_reborn.common.network.PacketHandler;
+import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornItems;
+import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornTags;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerPlayer;
@@ -87,10 +90,10 @@ public class Events {
     public void magicArmor(LivingDamageEvent event) {
         if (!event.getEntity().level().isClientSide()) {
             float scale = 1;
-            AttributeInstance attr = event.getEntity().getAttribute(WizardsReborn.MAGIC_ARMOR.get());
+            AttributeInstance attr = event.getEntity().getAttribute(WizardsRebornAttributes.MAGIC_ARMOR.get());
 
             if (attr != null) {
-                if (event.getSource().is(WizardsReborn.MAGIC_DAMAGE_TYPE_TAG)) {
+                if (event.getSource().is(WizardsRebornTags.MAGIC_DAMAGE_TYPE)) {
                     scale = (float) (1f - (attr.getValue() / 100f));
                 }
                 if (scale == 1 && event.getSource().getDirectEntity() instanceof SpellProjectileEntity) {
@@ -109,11 +112,11 @@ public class Events {
 
     public void arcaneDamage(LivingDamageEvent event) {
         if (event.getSource().getEntity() instanceof LivingEntity attacker) {
-            if (!event.getSource().is(WizardsReborn.ARCANE_MAGIC_DAMAGE_TYPE_TAG)) {
-                AttributeInstance attr = attacker.getAttribute(WizardsReborn.ARCANE_DAMAGE.get());
+            if (!event.getSource().is(WizardsRebornTags.ARCANE_MAGIC_DAMAGE_TYPE)) {
+                AttributeInstance attr = attacker.getAttribute(WizardsRebornAttributes.ARCANE_DAMAGE.get());
                 if (attr != null && attr.getValue() > 0) {
                     event.getEntity().invulnerableTime = 0;
-                    event.getEntity().hurt(new DamageSource(DamageSourceRegistry.create(event.getEntity().level(), DamageSourceRegistry.ARCANE_MAGIC).typeHolder(), attacker), (float) attr.getValue());
+                    event.getEntity().hurt(new DamageSource(WizardsRebornDamage.create(event.getEntity().level(), WizardsRebornDamage.ARCANE_MAGIC).typeHolder(), attacker), (float) attr.getValue());
                 }
             }
         }
@@ -121,9 +124,9 @@ public class Events {
 
     @SubscribeEvent
     public void addCustomWandererTrades(WandererTradesEvent event) {
-        event.getGenericTrades().add(new VillagerTrades.ItemsForEmeralds(WizardsReborn.MOR_ITEM.get(), 1, 1, 16, 1));
-        event.getGenericTrades().add(new VillagerTrades.ItemsForEmeralds(WizardsReborn.ELDER_MOR_ITEM.get(), 2, 1, 16, 1));
-        event.getGenericTrades().add(new VillagerTrades.ItemsForEmeralds(WizardsReborn.ARCANUM_DUST.get(), 3, 2, 8, 1));
-        event.getGenericTrades().add(new VillagerTrades.ItemsForEmeralds(WizardsReborn.ARCANUM.get(), 4, 1, 6, 1));
+        event.getGenericTrades().add(new VillagerTrades.ItemsForEmeralds(WizardsRebornItems.MOR.get(), 1, 1, 16, 1));
+        event.getGenericTrades().add(new VillagerTrades.ItemsForEmeralds(WizardsRebornItems.ELDER_MOR.get(), 2, 1, 16, 1));
+        event.getGenericTrades().add(new VillagerTrades.ItemsForEmeralds(WizardsRebornItems.ARCANUM_DUST.get(), 3, 2, 8, 1));
+        event.getGenericTrades().add(new VillagerTrades.ItemsForEmeralds(WizardsRebornItems.ARCANUM.get(), 4, 1, 6, 1));
     }
 }

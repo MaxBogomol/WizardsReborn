@@ -1,10 +1,10 @@
 package mod.maxbogomol.wizards_reborn.common.network;
 
-import mod.maxbogomol.fluffy_fur.FluffyFur;
 import mod.maxbogomol.fluffy_fur.client.particle.ParticleBuilder;
 import mod.maxbogomol.fluffy_fur.client.particle.data.ColorParticleData;
 import mod.maxbogomol.fluffy_fur.client.particle.data.GenericParticleData;
 import mod.maxbogomol.fluffy_fur.common.easing.Easing;
+import mod.maxbogomol.fluffy_fur.registry.client.FluffyFurParticles;
 import mod.maxbogomol.wizards_reborn.WizardsReborn;
 import mod.maxbogomol.wizards_reborn.client.config.ClientConfig;
 import mod.maxbogomol.wizards_reborn.client.event.ClientTickHandler;
@@ -139,7 +139,7 @@ public class WissenSendEffectPacket {
 
                     for (int i = 0; i < particlePerBlock; i++) {
                         if (random.nextFloat() < (0.45f * (1f - ((float) wissenCount / ClientConfig.WISSEN_RAYS_LIMIT.get()))) + 0.05f) {
-                            ParticleBuilder.create(FluffyFur.WISP_PARTICLE)
+                            ParticleBuilder.create(FluffyFurParticles.WISP)
                                     .setColorData(ColorParticleData.create(msg.colorR, msg.colorG, msg.colorB).build())
                                     .setTransparencyData(GenericParticleData.create(0.3f, 0).build())
                                     .setScaleData(GenericParticleData.create(0.15f, 0).build())
@@ -147,7 +147,7 @@ public class WissenSendEffectPacket {
                                     .randomVelocity(0.01f)
                                     .spawn(world, msg.posFromX - (x * i), msg.posFromY - (y * i), msg.posFromZ - (z * i));
                             if (random.nextFloat() < 0.1) {
-                                ParticleBuilder.create(FluffyFur.SPARKLE_PARTICLE)
+                                ParticleBuilder.create(FluffyFurParticles.SPARKLE)
                                         .setColorData(ColorParticleData.create(msg.colorR, msg.colorG, msg.colorB).build())
                                         .setTransparencyData(GenericParticleData.create(0.125f, 0).build())
                                         .setScaleData(GenericParticleData.create(0.1f, 0.2f, 0).setEasing(Easing.QUINTIC_IN_OUT).build())
@@ -157,7 +157,7 @@ public class WissenSendEffectPacket {
                                         .spawn(world, msg.posFromX - (x * i), msg.posFromY - (y * i), msg.posFromZ - (z * i));
                             }
                             if (random.nextFloat() < 0.1) {
-                                ParticleBuilder.create(FluffyFur.SQUARE_PARTICLE)
+                                ParticleBuilder.create(FluffyFurParticles.SQUARE)
                                         .setColorData(ColorParticleData.create(msg.colorR, msg.colorG, msg.colorB).build())
                                         .setTransparencyData(GenericParticleData.create(0.125f, 0).build())
                                         .setScaleData(GenericParticleData.create(0.05f, 0.1f, 0).setEasing(Easing.QUINTIC_IN_OUT).build())

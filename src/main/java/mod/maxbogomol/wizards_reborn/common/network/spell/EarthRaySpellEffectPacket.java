@@ -1,9 +1,9 @@
 package mod.maxbogomol.wizards_reborn.common.network.spell;
 
-import mod.maxbogomol.fluffy_fur.FluffyFur;
 import mod.maxbogomol.fluffy_fur.client.particle.ParticleBuilder;
 import mod.maxbogomol.fluffy_fur.client.particle.data.ColorParticleData;
 import mod.maxbogomol.fluffy_fur.client.particle.data.GenericParticleData;
+import mod.maxbogomol.fluffy_fur.registry.client.FluffyFurParticles;
 import mod.maxbogomol.wizards_reborn.WizardsReborn;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.world.level.Level;
@@ -55,7 +55,7 @@ public class EarthRaySpellEffectPacket {
                             double y = ((random.nextDouble() - 0.5D) * 2);
                             double z = ((random.nextDouble() - 0.5D) * 2);
 
-                            ParticleBuilder.create(FluffyFur.WISP_PARTICLE)
+                            ParticleBuilder.create(FluffyFurParticles.WISP)
                                     .setColorData(ColorParticleData.create(msg.colorR, msg.colorG, msg.colorB).build())
                                     .setTransparencyData(GenericParticleData.create(0.3f, 0).build())
                                     .setScaleData(GenericParticleData.create(0.1f, 0.3f).build())

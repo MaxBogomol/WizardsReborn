@@ -1,12 +1,12 @@
 package mod.maxbogomol.wizards_reborn.common.block.jeweler_table;
 
-import mod.maxbogomol.fluffy_fur.FluffyFur;
 import mod.maxbogomol.fluffy_fur.client.particle.ParticleBuilder;
 import mod.maxbogomol.fluffy_fur.client.particle.data.ColorParticleData;
 import mod.maxbogomol.fluffy_fur.client.particle.data.GenericParticleData;
 import mod.maxbogomol.fluffy_fur.common.block.entity.BlockEntityBase;
 import mod.maxbogomol.fluffy_fur.common.block.entity.TickableBlockEntity;
 import mod.maxbogomol.fluffy_fur.common.easing.Easing;
+import mod.maxbogomol.fluffy_fur.registry.client.FluffyFurParticles;
 import mod.maxbogomol.wizards_reborn.WizardsReborn;
 import mod.maxbogomol.wizards_reborn.api.skin.Skin;
 import mod.maxbogomol.wizards_reborn.api.wissen.*;
@@ -16,6 +16,9 @@ import mod.maxbogomol.wizards_reborn.common.item.SkinTrimItem;
 import mod.maxbogomol.wizards_reborn.common.network.PacketHandler;
 import mod.maxbogomol.wizards_reborn.common.network.tileentity.JewelerTableBurstEffectPacket;
 import mod.maxbogomol.wizards_reborn.common.recipe.JewelerTableRecipe;
+import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornBlockEntities;
+import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornRecipes;
+import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornSounds;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.RegistryAccess;
@@ -65,7 +68,7 @@ public class JewelerTableBlockEntity extends BlockEntityBase implements Tickable
     }
 
     public JewelerTableBlockEntity(BlockPos pos, BlockState state) {
-        this(WizardsReborn.JEWELER_TABLE_BLOCK_ENTITY.get(), pos, state);
+        this(WizardsRebornBlockEntities.JEWELER_TABLE.get(), pos, state);
     }
 
     @Override
@@ -79,7 +82,7 @@ public class JewelerTableBlockEntity extends BlockEntityBase implements Tickable
             inv.setItem(2, itemOutputHandler.getStackInSlot(0));
 
             if (!inv.isEmpty()) {
-                Optional<JewelerTableRecipe> recipe = level.getRecipeManager().getRecipeFor(WizardsReborn.JEWELER_TABLE_RECIPE.get(), inv, level);
+                Optional<JewelerTableRecipe> recipe = level.getRecipeManager().getRecipeFor(WizardsRebornRecipes.JEWELER_TABLE.get(), inv, level);
                 wissenInCraft = recipe.map(JewelerTableRecipe::getRecipeWissen).orElse(0);
 
                 Skin skin = getSkin();
@@ -185,7 +188,7 @@ public class JewelerTableBlockEntity extends BlockEntityBase implements Tickable
                             }
 
                             level.playSound(WizardsReborn.proxy.getPlayer(), getBlockPos(), SoundEvents.GRINDSTONE_USE, SoundSource.BLOCKS, 0.5f, (float) (1f + ((random.nextFloat() - 0.5D) / 4)));
-                            level.playSound(WizardsReborn.proxy.getPlayer(), getBlockPos(), WizardsReborn.CRYSTAL_BREAK_SOUND.get(), SoundSource.BLOCKS, 1f, (float) (1f + ((random.nextFloat() - 0.5D) / 4)));
+                            level.playSound(WizardsReborn.proxy.getPlayer(), getBlockPos(), WizardsRebornSounds.CRYSTAL_BREAK.get(), SoundSource.BLOCKS, 1f, (float) (1f + ((random.nextFloat() - 0.5D) / 4)));
                         }
                     }
                 }
@@ -205,7 +208,7 @@ public class JewelerTableBlockEntity extends BlockEntityBase implements Tickable
                 pos = new Vec3(worldPosition.getX() + pos.x(), worldPosition.getY() + pos.y() + 0.1875F, worldPosition.getZ() + pos.z());
 
                 if (random.nextFloat() < 0.5) {
-                    ParticleBuilder.create(FluffyFur.WISP_PARTICLE)
+                    ParticleBuilder.create(FluffyFurParticles.WISP)
                             .setColorData(ColorParticleData.create(Config.wissenColorR(), Config.wissenColorG(), Config.wissenColorB()).build())
                             .setTransparencyData(GenericParticleData.create(0.25f, 0).build())
                             .setScaleData(GenericParticleData.create(0.2f * getStage(), 0).build())
@@ -214,7 +217,7 @@ public class JewelerTableBlockEntity extends BlockEntityBase implements Tickable
                             .spawn(level, pos.x(), pos.y(), pos.z());
                 }
                 if (random.nextFloat() < 0.1) {
-                    ParticleBuilder.create(random.nextBoolean() ? FluffyFur.SQUARE_PARTICLE : FluffyFur.SPARKLE_PARTICLE)
+                    ParticleBuilder.create(random.nextBoolean() ? FluffyFurParticles.SQUARE : FluffyFurParticles.SPARKLE)
                             .setColorData(ColorParticleData.create(Config.wissenColorR(), Config.wissenColorG(), Config.wissenColorB()).build())
                             .setTransparencyData(GenericParticleData.create(0.25f, 0).build())
                             .setScaleData(GenericParticleData.create(0, 0.05f * getStage(), 0).setEasing(Easing.QUINTIC_IN_OUT).build())
@@ -270,7 +273,7 @@ public class JewelerTableBlockEntity extends BlockEntityBase implements Tickable
                             y = (float) ((random.nextDouble() / 20) * vel.y);
                         }
 
-                        ParticleBuilder.create(FluffyFur.SPARKLE_PARTICLE)
+                        ParticleBuilder.create(FluffyFurParticles.SPARKLE)
                                 .setColorData(ColorParticleData.create(r, g, b).build())
                                 .setTransparencyData(GenericParticleData.create(0.35f, 0).build())
                                 .setScaleData(GenericParticleData.create(0.2f, 0).build())
@@ -510,7 +513,7 @@ public class JewelerTableBlockEntity extends BlockEntityBase implements Tickable
         }
         inv.setItem(2, itemOutputHandler.getStackInSlot(0));
 
-        Optional<JewelerTableRecipe> recipe = level.getRecipeManager().getRecipeFor(WizardsReborn.JEWELER_TABLE_RECIPE.get(), inv, level);
+        Optional<JewelerTableRecipe> recipe = level.getRecipeManager().getRecipeFor(WizardsRebornRecipes.JEWELER_TABLE.get(), inv, level);
         wissenInCraft = recipe.map(JewelerTableRecipe::getRecipeWissen).orElse(0);
 
         if (recipe.isPresent() && wissenInCraft > 0) {

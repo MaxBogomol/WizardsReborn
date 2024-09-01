@@ -1,16 +1,14 @@
 package mod.maxbogomol.wizards_reborn.common.block;
 
-import mod.maxbogomol.wizards_reborn.WizardsReborn;
-import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.level.block.CropBlock;
-import net.minecraft.world.level.ItemLike;
+import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornItems;
 import net.minecraft.core.BlockPos;
+import net.minecraft.world.level.BlockGetter;
+import net.minecraft.world.level.ItemLike;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.CropBlock;
+import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
-import net.minecraft.world.level.BlockGetter;
-
-import net.minecraft.world.level.block.state.BlockBehaviour.Properties;
 
 public class ArcaneLinenBlock extends CropBlock {
     private static final VoxelShape[] SHAPE_BY_AGE = new VoxelShape[]{
@@ -30,7 +28,7 @@ public class ArcaneLinenBlock extends CropBlock {
 
     @Override
     protected ItemLike getBaseSeedId() {
-        return WizardsReborn.ARCANE_LINEN_SEEDS.get();
+        return WizardsRebornItems.ARCANE_LINEN_SEEDS.get();
     }
 
     @Override

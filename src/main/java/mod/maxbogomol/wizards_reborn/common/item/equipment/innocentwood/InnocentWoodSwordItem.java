@@ -1,9 +1,9 @@
 package mod.maxbogomol.wizards_reborn.common.item.equipment.innocentwood;
 
-import mod.maxbogomol.wizards_reborn.WizardsReborn;
 import mod.maxbogomol.wizards_reborn.common.item.equipment.arcanewood.ArcaneWoodSwordItem;
 import mod.maxbogomol.wizards_reborn.common.network.InnocentWoodToolsEffectPacket;
 import mod.maxbogomol.wizards_reborn.common.network.PacketHandler;
+import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornSounds;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.entity.Entity;
@@ -30,7 +30,7 @@ public class InnocentWoodSwordItem extends ArcaneWoodSwordItem {
 
     @Override
     public SoundEvent getRepairSound(ItemStack stack, Level world, Entity entity) {
-        return WizardsReborn.INNOCENT_WOOD_PLACE_SOUND.get();
+        return WizardsRebornSounds.INNOCENT_WOOD_PLACE.get();
     }
 
     @Override

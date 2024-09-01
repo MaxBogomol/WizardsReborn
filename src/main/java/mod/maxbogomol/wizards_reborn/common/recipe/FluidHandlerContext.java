@@ -13,7 +13,6 @@ public class FluidHandlerContext implements Container {
         this.fluid = fluid;
     }
 
-    //useless methods from container that I have to implement to make a recipe
     @Override
     @Deprecated
     public void clearContent() { }

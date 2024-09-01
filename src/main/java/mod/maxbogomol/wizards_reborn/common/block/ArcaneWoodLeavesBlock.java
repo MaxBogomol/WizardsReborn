@@ -1,12 +1,12 @@
 package mod.maxbogomol.wizards_reborn.common.block;
 
-import mod.maxbogomol.fluffy_fur.FluffyFur;
 import mod.maxbogomol.fluffy_fur.client.particle.ParticleBuilder;
 import mod.maxbogomol.fluffy_fur.client.particle.data.ColorParticleData;
 import mod.maxbogomol.fluffy_fur.client.particle.data.GenericParticleData;
+import mod.maxbogomol.fluffy_fur.registry.client.FluffyFurParticles;
 import mod.maxbogomol.fluffy_fur.util.RenderUtils;
-import mod.maxbogomol.wizards_reborn.WizardsReborn;
 import mod.maxbogomol.wizards_reborn.common.config.Config;
+import mod.maxbogomol.wizards_reborn.registry.client.WizardsRebornParticles;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.util.RandomSource;
@@ -30,7 +30,7 @@ public class ArcaneWoodLeavesBlock extends LeavesBlock {
     public void playerWillDestroy(Level world, BlockPos pos, BlockState state, Player player) {
         if (world.isClientSide()) {
             if (!player.isCreative()) {
-                ParticleBuilder.create(FluffyFur.WISP_PARTICLE)
+                ParticleBuilder.create(FluffyFurParticles.WISP)
                         .setColorData(ColorParticleData.create(Config.wissenColorR(), Config.wissenColorG(), Config.wissenColorB()).build())
                         .setTransparencyData(GenericParticleData.create(0.125f, 0).build())
                         .setScaleData(GenericParticleData.create(0.2f, 0).build())
@@ -38,7 +38,7 @@ public class ArcaneWoodLeavesBlock extends LeavesBlock {
                         .randomVelocity(0.05f)
                         .randomOffset(0.05)
                         .repeat(world, pos.getX() + 0.5F, pos.getY() + 0.5F, pos.getZ() + 0.5F, 5);
-                ParticleBuilder.create(FluffyFur.SPARKLE_PARTICLE)
+                ParticleBuilder.create(FluffyFurParticles.SPARKLE)
                         .setColorData(ColorParticleData.create(Config.wissenColorR(), Config.wissenColorG(), Config.wissenColorB()).build())
                         .setTransparencyData(GenericParticleData.create(0.25f, 0).build())
                         .setScaleData(GenericParticleData.create(0.2f, 0).build())
@@ -59,7 +59,7 @@ public class ArcaneWoodLeavesBlock extends LeavesBlock {
             BlockPos blockpos = pos.below();
             BlockState blockstate = world.getBlockState(blockpos);
             if (!isFaceFull(blockstate.getCollisionShape(world, blockpos), Direction.UP)) {
-                ParticleBuilder.create(WizardsReborn.ARCANE_WOOD_LEAVES_PARTICLE)
+                ParticleBuilder.create(WizardsRebornParticles.ARCANE_WOOD_LEAVES)
                         .setRenderType(RenderUtils.DELAYED_PARTICLE)
                         .flatRandomOffset(1f, 0, 1f)
                         .spawn(world, pos.getX() + 0.5F, pos.getY() - 0.05f, pos.getZ() + 0.5F);

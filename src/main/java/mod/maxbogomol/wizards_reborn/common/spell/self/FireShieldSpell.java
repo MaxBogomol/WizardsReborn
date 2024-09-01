@@ -1,10 +1,11 @@
 package mod.maxbogomol.wizards_reborn.common.spell.self;
 
-import mod.maxbogomol.wizards_reborn.WizardsReborn;
 import mod.maxbogomol.wizards_reborn.api.crystal.CrystalUtil;
 import mod.maxbogomol.wizards_reborn.common.item.equipment.arcane.ArcaneArmorItem;
 import mod.maxbogomol.wizards_reborn.common.network.PacketHandler;
 import mod.maxbogomol.wizards_reborn.common.network.spell.FireShieldSpellEffectPacket;
+import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornCrystals;
+import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornSpells;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.effect.MobEffectInstance;
@@ -18,12 +19,12 @@ import java.awt.*;
 public class FireShieldSpell extends SelfSpell {
     public FireShieldSpell(String id, int points) {
         super(id, points);
-        addCrystalType(WizardsReborn.FIRE_CRYSTAL_TYPE);
+        addCrystalType(WizardsRebornCrystals.FIRE);
     }
 
     @Override
     public Color getColor() {
-        return WizardsReborn.fireSpellColor;
+        return WizardsRebornSpells.fireSpellColor;
     }
 
     @Override
@@ -41,7 +42,7 @@ public class FireShieldSpell extends SelfSpell {
         ItemStack stack = player.getItemInHand(hand);
         CompoundTag stats = getStats(stack);
 
-        int focusLevel = CrystalUtil.getStatLevel(stats, WizardsReborn.FOCUS_CRYSTAL_STAT);
+        int focusLevel = CrystalUtil.getStatLevel(stats, WizardsRebornCrystals.FOCUS);
         float magicModifier = ArcaneArmorItem.getPlayerMagicModifier(player);
 
         player.addEffect(new MobEffectInstance(MobEffects.FIRE_RESISTANCE, (int) (2000 + (450 * (focusLevel + magicModifier))), 0));

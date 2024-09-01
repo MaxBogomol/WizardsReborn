@@ -1,10 +1,10 @@
 package mod.maxbogomol.wizards_reborn.common.arcaneenchantment;
 
-import mod.maxbogomol.fluffy_fur.FluffyFur;
 import mod.maxbogomol.fluffy_fur.client.particle.ParticleBuilder;
 import mod.maxbogomol.fluffy_fur.client.particle.data.ColorParticleData;
 import mod.maxbogomol.fluffy_fur.client.particle.data.GenericParticleData;
 import mod.maxbogomol.fluffy_fur.common.easing.Easing;
+import mod.maxbogomol.fluffy_fur.registry.client.FluffyFurParticles;
 import mod.maxbogomol.wizards_reborn.WizardsReborn;
 import mod.maxbogomol.wizards_reborn.api.arcaneenchantment.ArcaneEnchantment;
 import mod.maxbogomol.wizards_reborn.api.arcaneenchantment.ArcaneEnchantmentType;
@@ -12,10 +12,13 @@ import mod.maxbogomol.wizards_reborn.api.arcaneenchantment.ArcaneEnchantmentUtil
 import mod.maxbogomol.wizards_reborn.api.arcaneenchantment.IArcaneItem;
 import mod.maxbogomol.wizards_reborn.api.wissen.WissenUtils;
 import mod.maxbogomol.wizards_reborn.common.capability.IArrowModifier;
-import mod.maxbogomol.wizards_reborn.common.damage.DamageSourceRegistry;
 import mod.maxbogomol.wizards_reborn.common.network.PacketHandler;
 import mod.maxbogomol.wizards_reborn.common.network.WissenChargeBurstEffectPacket;
 import mod.maxbogomol.wizards_reborn.common.network.spell.ChargeSpellProjectileRayEffectPacket;
+import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornArcaneEnchantments;
+import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornAttributes;
+import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornDamage;
+import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornSounds;
 import net.minecraft.core.BlockPos;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.damagesource.DamageSource;
@@ -63,10 +66,10 @@ public class WissenChargeArcaneEnchantment extends ArcaneEnchantment {
             if (livingEntity instanceof Player player) {
                 if (BowItem.getPowerForTime(stack.getUseDuration() - remainingUseDuration) >= 1f) {
                     if (ArcaneEnchantmentUtil.isArcaneItem(stack)) {
-                        int enchantmentLevel = ArcaneEnchantmentUtil.getArcaneEnchantment(stack, WizardsReborn.WISSEN_CHARGE_ARCANE_ENCHANTMENT);
+                        int enchantmentLevel = ArcaneEnchantmentUtil.getArcaneEnchantment(stack, WizardsRebornArcaneEnchantments.WISSEN_CHARGE);
 
                         if (enchantmentLevel > 0) {
-                            Color color = WizardsReborn.WISSEN_CHARGE_ARCANE_ENCHANTMENT.getColor();
+                            Color color = WizardsRebornArcaneEnchantments.WISSEN_CHARGE.getColor();
 
                             int time = stack.getUseDuration() - remainingUseDuration;
                             if (time > 100) {
@@ -89,7 +92,7 @@ public class WissenChargeArcaneEnchantment extends ArcaneEnchantment {
 
                             if (WissenUtils.canRemoveWissen(wissen, cost)) {
                                 if (random.nextFloat() < 0.45f) {
-                                    ParticleBuilder.create(FluffyFur.WISP_PARTICLE)
+                                    ParticleBuilder.create(FluffyFurParticles.WISP)
                                             .setColorData(ColorParticleData.create(color).build())
                                             .setTransparencyData(GenericParticleData.create(0.3f * charge, 0).build())
                                             .setScaleData(GenericParticleData.create(0.15f * charge, 0).build())
@@ -103,7 +106,7 @@ public class WissenChargeArcaneEnchantment extends ArcaneEnchantment {
                                 if (random.nextFloat() < 0.3f) {
                                     boolean square = random.nextBoolean();
                                     float i = square ? 0.5f : 1f;
-                                    ParticleBuilder.create(square ? FluffyFur.SQUARE_PARTICLE : FluffyFur.SPARKLE_PARTICLE)
+                                    ParticleBuilder.create(square ? FluffyFurParticles.SQUARE : FluffyFurParticles.SPARKLE)
                                             .setColorData(ColorParticleData.create(color).build())
                                             .setTransparencyData(GenericParticleData.create(0.3f * charge, 0).build())
                                             .setScaleData(GenericParticleData.create(0.075f * charge * i, 0.15f * charge * i, 0).setEasing(Easing.QUINTIC_IN_OUT).build())
@@ -123,7 +126,7 @@ public class WissenChargeArcaneEnchantment extends ArcaneEnchantment {
 
     public static void onBowShot(AbstractArrow abstractarrow, ItemStack stack, Level level, LivingEntity entityLiving, int timeLeft) {
         if (entityLiving instanceof Player player && ArcaneEnchantmentUtil.isArcaneItem(stack)) {
-            int enchantmentLevel = ArcaneEnchantmentUtil.getArcaneEnchantment(stack, WizardsReborn.WISSEN_CHARGE_ARCANE_ENCHANTMENT);
+            int enchantmentLevel = ArcaneEnchantmentUtil.getArcaneEnchantment(stack, WizardsRebornArcaneEnchantments.WISSEN_CHARGE);
             if (enchantmentLevel > 0) {
                 if (BowItem.getPowerForTime(stack.getUseDuration() - timeLeft) >= 1f) {
                     abstractarrow.getCapability(IArrowModifier.INSTANCE, null).ifPresent((w) -> {
@@ -156,7 +159,7 @@ public class WissenChargeArcaneEnchantment extends ArcaneEnchantment {
     public static void arrowTick(AbstractArrow arrow) {
         if (!arrow.level().isClientSide()) {
             if (isCharged(arrow)) {
-                Color color = WizardsReborn.WISSEN_CHARGE_ARCANE_ENCHANTMENT.getColor();
+                Color color = WizardsRebornArcaneEnchantments.WISSEN_CHARGE.getColor();
                 float r = color.getRed() / 255f;
                 float g = color.getGreen() / 255f;
                 float b = color.getBlue() / 255f;
@@ -194,7 +197,7 @@ public class WissenChargeArcaneEnchantment extends ArcaneEnchantment {
     public static void onHit(Vec3 pos, AbstractArrow arrow) {
         if (!arrow.level().isClientSide()) {
             if (isCharged(arrow)) {
-                Color color = WizardsReborn.WISSEN_CHARGE_ARCANE_ENCHANTMENT.getColor();
+                Color color = WizardsRebornArcaneEnchantments.WISSEN_CHARGE.getColor();
                 float r = color.getRed() / 255f;
                 float g = color.getGreen() / 255f;
                 float b = color.getBlue() / 255f;
@@ -202,11 +205,11 @@ public class WissenChargeArcaneEnchantment extends ArcaneEnchantment {
                 float charge = getCharge(arrow) / 100f;
 
                 PacketHandler.sendToTracking(arrow.level(), new BlockPos((int) pos.x, (int) pos.y, (int) pos.z), new WissenChargeBurstEffectPacket((float) pos.x, (float) pos.y, (float) pos.z, r, g, b, charge));
-                arrow.level().playSound(WizardsReborn.proxy.getPlayer(), pos.x, pos.y, pos.z, WizardsReborn.SPELL_BURST_SOUND.get(), SoundSource.PLAYERS, 1f, (float) (1f + ((random.nextFloat() - 0.5D) / 4)));
+                arrow.level().playSound(WizardsReborn.proxy.getPlayer(), pos.x, pos.y, pos.z, WizardsRebornSounds.SPELL_BURST.get(), SoundSource.PLAYERS, 1f, (float) (1f + ((random.nextFloat() - 0.5D) / 4)));
 
                 float additionalDamage = 0;
                 if (arrow.getOwner() instanceof Player player) {
-                    additionalDamage = (float) player.getAttribute(WizardsReborn.ARCANE_DAMAGE.get()).getValue();
+                    additionalDamage = (float) player.getAttribute(WizardsRebornAttributes.ARCANE_DAMAGE.get()).getValue();
                 }
                 float damage = 2f + (5f * charge);
                 float distance = 0.5f + (1.25f * charge);
@@ -214,7 +217,7 @@ public class WissenChargeArcaneEnchantment extends ArcaneEnchantment {
                 List<LivingEntity> entityList = arrow.level().getEntitiesOfClass(LivingEntity.class, new AABB(pos.x() - distance, pos.y() - distance, pos.z() - distance, pos.x() + distance, pos.y() + distance, pos.z() + distance));
                 for (LivingEntity target : entityList) {
                     target.invulnerableTime = 0;
-                    target.hurt(new DamageSource(DamageSourceRegistry.create(target.level(), DamageSourceRegistry.ARCANE_MAGIC).typeHolder(), arrow.getOwner()), damage + additionalDamage);
+                    target.hurt(new DamageSource(WizardsRebornDamage.create(target.level(), WizardsRebornDamage.ARCANE_MAGIC).typeHolder(), arrow.getOwner()), damage + additionalDamage);
                 }
 
                 setCharge(arrow,0);

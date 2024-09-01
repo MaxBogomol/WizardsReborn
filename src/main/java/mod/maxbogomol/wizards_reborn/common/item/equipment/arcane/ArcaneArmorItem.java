@@ -1,10 +1,10 @@
 package mod.maxbogomol.wizards_reborn.common.item.equipment.arcane;
 
-import mod.maxbogomol.wizards_reborn.WizardsReborn;
 import mod.maxbogomol.wizards_reborn.api.arcaneenchantment.ArcaneEnchantmentType;
 import mod.maxbogomol.wizards_reborn.api.arcaneenchantment.ArcaneEnchantmentUtil;
 import mod.maxbogomol.wizards_reborn.api.arcaneenchantment.IArcaneItem;
 import mod.maxbogomol.wizards_reborn.api.skin.Skin;
+import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornAttributes;
 import net.minecraft.ChatFormatting;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.screens.Screen;
@@ -133,7 +133,7 @@ public class ArcaneArmorItem extends ArmorItem implements IArcaneItem {
 
     public static float getPlayerMagicModifier(Player player) {
         if (player != null) {
-            AttributeInstance attr = player.getAttribute(WizardsReborn.MAGIC_MODIFIER.get());
+            AttributeInstance attr = player.getAttribute(WizardsRebornAttributes.MAGIC_MODIFIER.get());
             if (player.getItemBySlot(EquipmentSlot.HEAD).getItem() instanceof ArcaneArmorItem armor) {
                 if (armor.hasArmorSet()) {
                     if (armor.hasArmorSetPlayer(player)) {

@@ -1,9 +1,9 @@
 package mod.maxbogomol.wizards_reborn.common.block.sensor.item_sorter;
 
-import mod.maxbogomol.wizards_reborn.WizardsReborn;
 import mod.maxbogomol.wizards_reborn.api.wissen.ICooldownBlockEntity;
 import mod.maxbogomol.wizards_reborn.common.block.sensor.SensorBaseBlock;
 import mod.maxbogomol.wizards_reborn.common.block.sensor.SensorBlockEntity;
+import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornBlockEntities;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.nbt.CompoundTag;
@@ -32,7 +32,7 @@ public class ItemSorterBlockEntity extends SensorBlockEntity implements ICooldow
     }
 
     public ItemSorterBlockEntity(BlockPos pPos, BlockState pBlockState) {
-        super(WizardsReborn.ITEM_SORTER_BLOCK_ENTITY.get(), pPos, pBlockState);
+        super(WizardsRebornBlockEntities.ITEM_SORTER.get(), pPos, pBlockState);
     }
 
     @Override

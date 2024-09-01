@@ -1,12 +1,12 @@
 package mod.maxbogomol.wizards_reborn.common.item;
 
-import mod.maxbogomol.fluffy_fur.FluffyFur;
 import mod.maxbogomol.fluffy_fur.client.particle.ParticleBuilder;
 import mod.maxbogomol.fluffy_fur.client.particle.data.ColorParticleData;
 import mod.maxbogomol.fluffy_fur.client.particle.data.GenericParticleData;
 import mod.maxbogomol.fluffy_fur.client.particle.data.LightParticleData;
 import mod.maxbogomol.fluffy_fur.common.item.FuelItem;
 import mod.maxbogomol.fluffy_fur.common.item.IParticleItem;
+import mod.maxbogomol.fluffy_fur.registry.client.FluffyFurParticles;
 import mod.maxbogomol.fluffy_fur.util.RenderUtils;
 import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.level.Level;
@@ -24,7 +24,7 @@ public class NetherSaltItem extends FuelItem implements IParticleItem {
     @Override
     public void addParticles(Level level, ItemEntity entity) {
         if (random.nextFloat() < 0.1) {
-            ParticleBuilder.create(FluffyFur.SMOKE_PARTICLE)
+            ParticleBuilder.create(FluffyFurParticles.SMOKE)
                     .setRenderType(RenderUtils.DELAYED_PARTICLE)
                     .setColorData(ColorParticleData.create(Color.BLACK).build())
                     .setTransparencyData(GenericParticleData.create(1f, 0).build())

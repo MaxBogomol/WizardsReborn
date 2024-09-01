@@ -1,9 +1,10 @@
 package mod.maxbogomol.wizards_reborn.common.knowledge;
 
-import mod.maxbogomol.wizards_reborn.WizardsReborn;
 import mod.maxbogomol.wizards_reborn.api.knowledge.Research;
 import mod.maxbogomol.wizards_reborn.api.knowledge.ResearchMapEntry;
 import mod.maxbogomol.wizards_reborn.api.knowledge.ResearchMonogramEntry;
+import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornMonograms;
+import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornSpells;
 
 public class Researches {
     public static Research
@@ -19,549 +20,549 @@ public class Researches {
 
     public static void init() {
         EARTH_PROJECTILE = new Research(6, new ResearchMapEntry(
-                WizardsReborn.VITA_MONOGRAM, WizardsReborn.VITA_MONOGRAM),
-                new ResearchMonogramEntry(WizardsReborn.VITA_MONOGRAM, 4),
-                new ResearchMonogramEntry(WizardsReborn.MIRACULUM_MONOGRAM, 3),
-                new ResearchMonogramEntry(WizardsReborn.LUNAM_MONOGRAM, 5),
-                new ResearchMonogramEntry(WizardsReborn.DEGRADATIO_MONOGRAM, 3)
+                WizardsRebornMonograms.VITA, WizardsRebornMonograms.VITA),
+                new ResearchMonogramEntry(WizardsRebornMonograms.VITA, 4),
+                new ResearchMonogramEntry(WizardsRebornMonograms.MIRACULUM, 3),
+                new ResearchMonogramEntry(WizardsRebornMonograms.LUNAM, 5),
+                new ResearchMonogramEntry(WizardsRebornMonograms.DEGRADATIO, 3)
         );
         WATER_PROJECTILE = new Research(6, new ResearchMapEntry(
-                WizardsReborn.STATERA_MONOGRAM, WizardsReborn.DEGRADATIO_MONOGRAM),
-                new ResearchMonogramEntry(WizardsReborn.STATERA_MONOGRAM, 5),
-                new ResearchMonogramEntry(WizardsReborn.VITA_MONOGRAM, 5),
-                new ResearchMonogramEntry(WizardsReborn.DEGRADATIO_MONOGRAM, 3),
-                new ResearchMonogramEntry(WizardsReborn.KARA_MONOGRAM, 4)
+                WizardsRebornMonograms.STATERA, WizardsRebornMonograms.DEGRADATIO),
+                new ResearchMonogramEntry(WizardsRebornMonograms.STATERA, 5),
+                new ResearchMonogramEntry(WizardsRebornMonograms.VITA, 5),
+                new ResearchMonogramEntry(WizardsRebornMonograms.DEGRADATIO, 3),
+                new ResearchMonogramEntry(WizardsRebornMonograms.KARA, 4)
         );
         AIR_PROJECTILE = new Research(6, new ResearchMapEntry(
-                WizardsReborn.FAMES_MONOGRAM,  WizardsReborn.TEMPUS_MONOGRAM),
-                new ResearchMonogramEntry(WizardsReborn.SICCITAS_MONOGRAM, 4),
-                new ResearchMonogramEntry(WizardsReborn.RENAISSANCE_MONOGRAM, 4),
-                new ResearchMonogramEntry(WizardsReborn.LUNAM_MONOGRAM, 3),
-                new ResearchMonogramEntry(WizardsReborn.FAMES_MONOGRAM, 3),
-                new ResearchMonogramEntry(WizardsReborn.TEMPUS_MONOGRAM, 5)
+                WizardsRebornMonograms.FAMES,  WizardsRebornMonograms.TEMPUS),
+                new ResearchMonogramEntry(WizardsRebornMonograms.SICCITAS, 4),
+                new ResearchMonogramEntry(WizardsRebornMonograms.RENAISSANCE, 4),
+                new ResearchMonogramEntry(WizardsRebornMonograms.LUNAM, 3),
+                new ResearchMonogramEntry(WizardsRebornMonograms.FAMES, 3),
+                new ResearchMonogramEntry(WizardsRebornMonograms.TEMPUS, 5)
         );
         FIRE_PROJECTILE = new Research(6, new ResearchMapEntry(
-                WizardsReborn.ECLIPSIS_MONOGRAM,  WizardsReborn.LUNAM_MONOGRAM),
-                new ResearchMonogramEntry(WizardsReborn.ECLIPSIS_MONOGRAM, 5),
-                new ResearchMonogramEntry(WizardsReborn.LUNAM_MONOGRAM, 5),
-                new ResearchMonogramEntry(WizardsReborn.SOLEM_MONOGRAM, 4)
+                WizardsRebornMonograms.ECLIPSIS,  WizardsRebornMonograms.LUNAM),
+                new ResearchMonogramEntry(WizardsRebornMonograms.ECLIPSIS, 5),
+                new ResearchMonogramEntry(WizardsRebornMonograms.LUNAM, 5),
+                new ResearchMonogramEntry(WizardsRebornMonograms.SOLEM, 4)
         );
         VOID_PROJECTILE = new Research(6, new ResearchMapEntry(
-                WizardsReborn.SOLSTITIUM_MONOGRAM,  WizardsReborn.LUX_MONOGRAM),
-                new ResearchMonogramEntry(WizardsReborn.VITA_MONOGRAM, 4),
-                new ResearchMonogramEntry(WizardsReborn.PRAEDICTIONEM_MONOGRAM, 4),
-                new ResearchMonogramEntry(WizardsReborn.LUX_MONOGRAM, 4),
-                new ResearchMonogramEntry(WizardsReborn.SOLSTITIUM_MONOGRAM, 5)
+                WizardsRebornMonograms.SOLSTITIUM,  WizardsRebornMonograms.LUX),
+                new ResearchMonogramEntry(WizardsRebornMonograms.VITA, 4),
+                new ResearchMonogramEntry(WizardsRebornMonograms.PRAEDICTIONEM, 4),
+                new ResearchMonogramEntry(WizardsRebornMonograms.LUX, 4),
+                new ResearchMonogramEntry(WizardsRebornMonograms.SOLSTITIUM, 5)
         );
         FROST_PROJECTILE = new Research(6, new ResearchMapEntry(
-                WizardsReborn.LUNAM_MONOGRAM,  WizardsReborn.TEMPUS_MONOGRAM),
-                new ResearchMonogramEntry(WizardsReborn.SOLEM_MONOGRAM, 3),
-                new ResearchMonogramEntry(WizardsReborn.LUNAM_MONOGRAM, 3),
-                new ResearchMonogramEntry(WizardsReborn.FAMES_MONOGRAM, 3),
-                new ResearchMonogramEntry(WizardsReborn.TEMPUS_MONOGRAM, 6)
+                WizardsRebornMonograms.LUNAM,  WizardsRebornMonograms.TEMPUS),
+                new ResearchMonogramEntry(WizardsRebornMonograms.SOLEM, 3),
+                new ResearchMonogramEntry(WizardsRebornMonograms.LUNAM, 3),
+                new ResearchMonogramEntry(WizardsRebornMonograms.FAMES, 3),
+                new ResearchMonogramEntry(WizardsRebornMonograms.TEMPUS, 6)
         );
         HOLY_PROJECTILE = new Research(6, new ResearchMapEntry(
-                WizardsReborn.MORS_MONOGRAM,  WizardsReborn.ECLIPSIS_MONOGRAM),
-                new ResearchMonogramEntry(WizardsReborn.ECLIPSIS_MONOGRAM, 6),
-                new ResearchMonogramEntry(WizardsReborn.TENEBRIS_MONOGRAM, 4),
-                new ResearchMonogramEntry(WizardsReborn.MORS_MONOGRAM, 3)
+                WizardsRebornMonograms.MORS,  WizardsRebornMonograms.ECLIPSIS),
+                new ResearchMonogramEntry(WizardsRebornMonograms.ECLIPSIS, 6),
+                new ResearchMonogramEntry(WizardsRebornMonograms.TENEBRIS, 4),
+                new ResearchMonogramEntry(WizardsRebornMonograms.MORS, 3)
         );
         CURSE_PROJECTILE = new Research(6, new ResearchMapEntry(
-                WizardsReborn.RENAISSANCE_MONOGRAM,  WizardsReborn.SOLSTITIUM_MONOGRAM),
-                new ResearchMonogramEntry(WizardsReborn.MORS_MONOGRAM, 4),
-                new ResearchMonogramEntry(WizardsReborn.BELLUM_MONOGRAM, 4),
-                new ResearchMonogramEntry(WizardsReborn.SOLSTITIUM_MONOGRAM, 3),
-                new ResearchMonogramEntry(WizardsReborn.TEMPUS_MONOGRAM, 5),
-                new ResearchMonogramEntry(WizardsReborn.RENAISSANCE_MONOGRAM, 4)
+                WizardsRebornMonograms.RENAISSANCE,  WizardsRebornMonograms.SOLSTITIUM),
+                new ResearchMonogramEntry(WizardsRebornMonograms.MORS, 4),
+                new ResearchMonogramEntry(WizardsRebornMonograms.BELLUM, 4),
+                new ResearchMonogramEntry(WizardsRebornMonograms.SOLSTITIUM, 3),
+                new ResearchMonogramEntry(WizardsRebornMonograms.TEMPUS, 5),
+                new ResearchMonogramEntry(WizardsRebornMonograms.RENAISSANCE, 4)
         );
 
         EARTH_RAY = new Research(10, new ResearchMapEntry(
-                WizardsReborn.SOLSTITIUM_MONOGRAM,  WizardsReborn.PRAEDICTIONEM_MONOGRAM,  WizardsReborn.PRAEDICTIONEM_MONOGRAM,  WizardsReborn.PRAEDICTIONEM_MONOGRAM),
-                new ResearchMonogramEntry(WizardsReborn.PRAEDICTIONEM_MONOGRAM, 6),
-                new ResearchMonogramEntry(WizardsReborn.SOLSTITIUM_MONOGRAM, 4),
-                new ResearchMonogramEntry(WizardsReborn.MIRACULUM_MONOGRAM, 8)
+                WizardsRebornMonograms.SOLSTITIUM,  WizardsRebornMonograms.PRAEDICTIONEM,  WizardsRebornMonograms.PRAEDICTIONEM,  WizardsRebornMonograms.PRAEDICTIONEM),
+                new ResearchMonogramEntry(WizardsRebornMonograms.PRAEDICTIONEM, 6),
+                new ResearchMonogramEntry(WizardsRebornMonograms.SOLSTITIUM, 4),
+                new ResearchMonogramEntry(WizardsRebornMonograms.MIRACULUM, 8)
         );
         WATER_RAY = new Research(10, new ResearchMapEntry(
-                WizardsReborn.SOLSTITIUM_MONOGRAM,  WizardsReborn.MIRACULUM_MONOGRAM,  WizardsReborn.MIRACULUM_MONOGRAM,  WizardsReborn.MIRACULUM_MONOGRAM),
-                new ResearchMonogramEntry(WizardsReborn.LUNAM_MONOGRAM, 6),
-                new ResearchMonogramEntry(WizardsReborn.SOLSTITIUM_MONOGRAM, 4),
-                new ResearchMonogramEntry(WizardsReborn.MIRACULUM_MONOGRAM, 8)
+                WizardsRebornMonograms.SOLSTITIUM,  WizardsRebornMonograms.MIRACULUM,  WizardsRebornMonograms.MIRACULUM,  WizardsRebornMonograms.MIRACULUM),
+                new ResearchMonogramEntry(WizardsRebornMonograms.LUNAM, 6),
+                new ResearchMonogramEntry(WizardsRebornMonograms.SOLSTITIUM, 4),
+                new ResearchMonogramEntry(WizardsRebornMonograms.MIRACULUM, 8)
         );
         AIR_RAY = new Research(10, new ResearchMapEntry(
-                WizardsReborn.SOLSTITIUM_MONOGRAM,  WizardsReborn.BELLUM_MONOGRAM,  WizardsReborn.BELLUM_MONOGRAM,  WizardsReborn.SOLSTITIUM_MONOGRAM),
-                new ResearchMonogramEntry(WizardsReborn.BELLUM_MONOGRAM, 6),
-                new ResearchMonogramEntry(WizardsReborn.SOLSTITIUM_MONOGRAM, 7),
-                new ResearchMonogramEntry(WizardsReborn.MIRACULUM_MONOGRAM, 4)
+                WizardsRebornMonograms.SOLSTITIUM,  WizardsRebornMonograms.BELLUM,  WizardsRebornMonograms.BELLUM,  WizardsRebornMonograms.SOLSTITIUM),
+                new ResearchMonogramEntry(WizardsRebornMonograms.BELLUM, 6),
+                new ResearchMonogramEntry(WizardsRebornMonograms.SOLSTITIUM, 7),
+                new ResearchMonogramEntry(WizardsRebornMonograms.MIRACULUM, 4)
         );
         FIRE_RAY = new Research(10, new ResearchMapEntry(
-                WizardsReborn.PRAEDICTIONEM_MONOGRAM,  WizardsReborn.ECLIPSIS_MONOGRAM,  WizardsReborn.VITA_MONOGRAM,  WizardsReborn.VITA_MONOGRAM),
-                new ResearchMonogramEntry(WizardsReborn.PRAEDICTIONEM_MONOGRAM, 4),
-                new ResearchMonogramEntry(WizardsReborn.SOLSTITIUM_MONOGRAM, 4),
-                new ResearchMonogramEntry(WizardsReborn.EVOLUTIONIS_MONOGRAM, 3),
-                new ResearchMonogramEntry(WizardsReborn.ECLIPSIS_MONOGRAM, 5),
-                new ResearchMonogramEntry(WizardsReborn.VITA_MONOGRAM, 6)
+                WizardsRebornMonograms.PRAEDICTIONEM,  WizardsRebornMonograms.ECLIPSIS,  WizardsRebornMonograms.VITA,  WizardsRebornMonograms.VITA),
+                new ResearchMonogramEntry(WizardsRebornMonograms.PRAEDICTIONEM, 4),
+                new ResearchMonogramEntry(WizardsRebornMonograms.SOLSTITIUM, 4),
+                new ResearchMonogramEntry(WizardsRebornMonograms.EVOLUTIONIS, 3),
+                new ResearchMonogramEntry(WizardsRebornMonograms.ECLIPSIS, 5),
+                new ResearchMonogramEntry(WizardsRebornMonograms.VITA, 6)
         );
         VOID_RAY = new Research(10, new ResearchMapEntry(
-                WizardsReborn.RENAISSANCE_MONOGRAM,  WizardsReborn.LUNAM_MONOGRAM,  WizardsReborn.MORS_MONOGRAM,  WizardsReborn.LUNAM_MONOGRAM),
-                new ResearchMonogramEntry(WizardsReborn.LUNAM_MONOGRAM, 6),
-                new ResearchMonogramEntry(WizardsReborn.RENAISSANCE_MONOGRAM, 3),
-                new ResearchMonogramEntry(WizardsReborn.MORS_MONOGRAM, 7)
+                WizardsRebornMonograms.RENAISSANCE,  WizardsRebornMonograms.LUNAM,  WizardsRebornMonograms.MORS,  WizardsRebornMonograms.LUNAM),
+                new ResearchMonogramEntry(WizardsRebornMonograms.LUNAM, 6),
+                new ResearchMonogramEntry(WizardsRebornMonograms.RENAISSANCE, 3),
+                new ResearchMonogramEntry(WizardsRebornMonograms.MORS, 7)
         );
         FROST_RAY = new Research(10, new ResearchMapEntry(
-                WizardsReborn.LUNAM_MONOGRAM,  WizardsReborn.TEMPUS_MONOGRAM,  WizardsReborn.TEMPUS_MONOGRAM,  WizardsReborn.TEMPUS_MONOGRAM),
-                new ResearchMonogramEntry(WizardsReborn.LUNAM_MONOGRAM, 4),
-                new ResearchMonogramEntry(WizardsReborn.TEMPUS_MONOGRAM, 6),
-                new ResearchMonogramEntry(WizardsReborn.VITA_MONOGRAM, 3),
-                new ResearchMonogramEntry(WizardsReborn.UNIVERSUM_MONOGRAM, 7)
+                WizardsRebornMonograms.LUNAM,  WizardsRebornMonograms.TEMPUS,  WizardsRebornMonograms.TEMPUS,  WizardsRebornMonograms.TEMPUS),
+                new ResearchMonogramEntry(WizardsRebornMonograms.LUNAM, 4),
+                new ResearchMonogramEntry(WizardsRebornMonograms.TEMPUS, 6),
+                new ResearchMonogramEntry(WizardsRebornMonograms.VITA, 3),
+                new ResearchMonogramEntry(WizardsRebornMonograms.UNIVERSUM, 7)
         );
         HOLY_RAY = new Research(10, new ResearchMapEntry(
-                WizardsReborn.SICCITAS_MONOGRAM,  WizardsReborn.SICCITAS_MONOGRAM,  WizardsReborn.MORS_MONOGRAM,  WizardsReborn.MORS_MONOGRAM),
-                new ResearchMonogramEntry(WizardsReborn.SOLEM_MONOGRAM, 4),
-                new ResearchMonogramEntry(WizardsReborn.VITA_MONOGRAM, 6),
-                new ResearchMonogramEntry(WizardsReborn.SICCITAS_MONOGRAM, 5),
-                new ResearchMonogramEntry(WizardsReborn.MORS_MONOGRAM, 7)
+                WizardsRebornMonograms.SICCITAS,  WizardsRebornMonograms.SICCITAS,  WizardsRebornMonograms.MORS,  WizardsRebornMonograms.MORS),
+                new ResearchMonogramEntry(WizardsRebornMonograms.SOLEM, 4),
+                new ResearchMonogramEntry(WizardsRebornMonograms.VITA, 6),
+                new ResearchMonogramEntry(WizardsRebornMonograms.SICCITAS, 5),
+                new ResearchMonogramEntry(WizardsRebornMonograms.MORS, 7)
         );
         CURSE_RAY = new Research(10, new ResearchMapEntry(
-                WizardsReborn.TENEBRIS_MONOGRAM,  WizardsReborn.VITA_MONOGRAM,  WizardsReborn.VITA_MONOGRAM,  WizardsReborn.ECLIPSIS_MONOGRAM),
-                new ResearchMonogramEntry(WizardsReborn.ECLIPSIS_MONOGRAM, 4),
-                new ResearchMonogramEntry(WizardsReborn.LUX_MONOGRAM, 5),
-                new ResearchMonogramEntry(WizardsReborn.VITA_MONOGRAM, 5),
-                new ResearchMonogramEntry(WizardsReborn.SOLSTITIUM_MONOGRAM, 5),
-                new ResearchMonogramEntry(WizardsReborn.TENEBRIS_MONOGRAM, 3)
+                WizardsRebornMonograms.TENEBRIS,  WizardsRebornMonograms.VITA,  WizardsRebornMonograms.VITA,  WizardsRebornMonograms.ECLIPSIS),
+                new ResearchMonogramEntry(WizardsRebornMonograms.ECLIPSIS, 4),
+                new ResearchMonogramEntry(WizardsRebornMonograms.LUX, 5),
+                new ResearchMonogramEntry(WizardsRebornMonograms.VITA, 5),
+                new ResearchMonogramEntry(WizardsRebornMonograms.SOLSTITIUM, 5),
+                new ResearchMonogramEntry(WizardsRebornMonograms.TENEBRIS, 3)
         );
 
         HEART_OF_NATURE = new Research(12, new ResearchMapEntry(
-                WizardsReborn.UNIVERSUM_MONOGRAM,  WizardsReborn.MORS_MONOGRAM,  WizardsReborn.MORS_MONOGRAM),
-                new ResearchMonogramEntry(WizardsReborn.MORS_MONOGRAM, 6),
-                new ResearchMonogramEntry(WizardsReborn.BELLUM_MONOGRAM, 4),
-                new ResearchMonogramEntry(WizardsReborn.UNIVERSUM_MONOGRAM, 2),
-                new ResearchMonogramEntry(WizardsReborn.STATERA_MONOGRAM, 3),
-                new ResearchMonogramEntry(WizardsReborn.TEMPUS_MONOGRAM, 2)
+                WizardsRebornMonograms.UNIVERSUM,  WizardsRebornMonograms.MORS,  WizardsRebornMonograms.MORS),
+                new ResearchMonogramEntry(WizardsRebornMonograms.MORS, 6),
+                new ResearchMonogramEntry(WizardsRebornMonograms.BELLUM, 4),
+                new ResearchMonogramEntry(WizardsRebornMonograms.UNIVERSUM, 2),
+                new ResearchMonogramEntry(WizardsRebornMonograms.STATERA, 3),
+                new ResearchMonogramEntry(WizardsRebornMonograms.TEMPUS, 2)
         );
         WATER_BREATHING = new Research(12, new ResearchMapEntry(
-                WizardsReborn.VITA_MONOGRAM,  WizardsReborn.LUNAM_MONOGRAM,  WizardsReborn.LUNAM_MONOGRAM),
-                new ResearchMonogramEntry(WizardsReborn.MORS_MONOGRAM, 4),
-                new ResearchMonogramEntry(WizardsReborn.LUNAM_MONOGRAM, 3),
-                new ResearchMonogramEntry(WizardsReborn.STATERA_MONOGRAM, 3),
-                new ResearchMonogramEntry(WizardsReborn.VITA_MONOGRAM, 5),
-                new ResearchMonogramEntry(WizardsReborn.RENAISSANCE_MONOGRAM, 2)
+                WizardsRebornMonograms.VITA,  WizardsRebornMonograms.LUNAM,  WizardsRebornMonograms.LUNAM),
+                new ResearchMonogramEntry(WizardsRebornMonograms.MORS, 4),
+                new ResearchMonogramEntry(WizardsRebornMonograms.LUNAM, 3),
+                new ResearchMonogramEntry(WizardsRebornMonograms.STATERA, 3),
+                new ResearchMonogramEntry(WizardsRebornMonograms.VITA, 5),
+                new ResearchMonogramEntry(WizardsRebornMonograms.RENAISSANCE, 2)
         );
         AIR_FLOW = new Research(12, new ResearchMapEntry(
-                WizardsReborn.MIRACULUM_MONOGRAM,  WizardsReborn.VITA_MONOGRAM,  WizardsReborn.VITA_MONOGRAM),
-                new ResearchMonogramEntry(WizardsReborn.LUNAM_MONOGRAM, 2),
-                new ResearchMonogramEntry(WizardsReborn.MIRACULUM_MONOGRAM, 4),
-                new ResearchMonogramEntry(WizardsReborn.VITA_MONOGRAM, 5),
-                new ResearchMonogramEntry(WizardsReborn.SOLEM_MONOGRAM, 4),
-                new ResearchMonogramEntry(WizardsReborn.TEMPUS_MONOGRAM, 2)
+                WizardsRebornMonograms.MIRACULUM,  WizardsRebornMonograms.VITA,  WizardsRebornMonograms.VITA),
+                new ResearchMonogramEntry(WizardsRebornMonograms.LUNAM, 2),
+                new ResearchMonogramEntry(WizardsRebornMonograms.MIRACULUM, 4),
+                new ResearchMonogramEntry(WizardsRebornMonograms.VITA, 5),
+                new ResearchMonogramEntry(WizardsRebornMonograms.SOLEM, 4),
+                new ResearchMonogramEntry(WizardsRebornMonograms.TEMPUS, 2)
         );
         FIRE_SHIELD = new Research(12, new ResearchMapEntry(
-                WizardsReborn.TEMPUS_MONOGRAM,  WizardsReborn.SOLEM_MONOGRAM,  WizardsReborn.RENAISSANCE_MONOGRAM),
-                new ResearchMonogramEntry(WizardsReborn.MORS_MONOGRAM, 3),
-                new ResearchMonogramEntry(WizardsReborn.FAMES_MONOGRAM, 2),
-                new ResearchMonogramEntry(WizardsReborn.SOLEM_MONOGRAM, 2),
-                new ResearchMonogramEntry(WizardsReborn.TEMPUS_MONOGRAM, 5),
-                new ResearchMonogramEntry(WizardsReborn.RENAISSANCE_MONOGRAM, 5)
+                WizardsRebornMonograms.TEMPUS,  WizardsRebornMonograms.SOLEM,  WizardsRebornMonograms.RENAISSANCE),
+                new ResearchMonogramEntry(WizardsRebornMonograms.MORS, 3),
+                new ResearchMonogramEntry(WizardsRebornMonograms.FAMES, 2),
+                new ResearchMonogramEntry(WizardsRebornMonograms.SOLEM, 2),
+                new ResearchMonogramEntry(WizardsRebornMonograms.TEMPUS, 5),
+                new ResearchMonogramEntry(WizardsRebornMonograms.RENAISSANCE, 5)
         );
         BLINK = new Research(12, new ResearchMapEntry(
-                WizardsReborn.EVOLUTIONIS_MONOGRAM,  WizardsReborn.STATERA_MONOGRAM,  WizardsReborn.TEMPUS_MONOGRAM),
-                new ResearchMonogramEntry(WizardsReborn.EVOLUTIONIS_MONOGRAM, 3),
-                new ResearchMonogramEntry(WizardsReborn.STATERA_MONOGRAM, 6),
-                new ResearchMonogramEntry(WizardsReborn.SOLEM_MONOGRAM, 2),
-                new ResearchMonogramEntry(WizardsReborn.VITA_MONOGRAM, 3),
-                new ResearchMonogramEntry(WizardsReborn.TEMPUS_MONOGRAM, 4)
+                WizardsRebornMonograms.EVOLUTIONIS,  WizardsRebornMonograms.STATERA,  WizardsRebornMonograms.TEMPUS),
+                new ResearchMonogramEntry(WizardsRebornMonograms.EVOLUTIONIS, 3),
+                new ResearchMonogramEntry(WizardsRebornMonograms.STATERA, 6),
+                new ResearchMonogramEntry(WizardsRebornMonograms.SOLEM, 2),
+                new ResearchMonogramEntry(WizardsRebornMonograms.VITA, 3),
+                new ResearchMonogramEntry(WizardsRebornMonograms.TEMPUS, 4)
         );
         SNOWFLAKE = new Research(12, new ResearchMapEntry(
-                WizardsReborn.SOLSTITIUM_MONOGRAM,  WizardsReborn.STATERA_MONOGRAM,  WizardsReborn.STATERA_MONOGRAM),
-                new ResearchMonogramEntry(WizardsReborn.SOLSTITIUM_MONOGRAM, 4),
-                new ResearchMonogramEntry(WizardsReborn.UNIVERSUM_MONOGRAM, 3),
-                new ResearchMonogramEntry(WizardsReborn.PRAEDICTIONEM_MONOGRAM, 2),
-                new ResearchMonogramEntry(WizardsReborn.STATERA_MONOGRAM, 4),
-                new ResearchMonogramEntry(WizardsReborn.VITA_MONOGRAM, 4)
+                WizardsRebornMonograms.SOLSTITIUM,  WizardsRebornMonograms.STATERA,  WizardsRebornMonograms.STATERA),
+                new ResearchMonogramEntry(WizardsRebornMonograms.SOLSTITIUM, 4),
+                new ResearchMonogramEntry(WizardsRebornMonograms.UNIVERSUM, 3),
+                new ResearchMonogramEntry(WizardsRebornMonograms.PRAEDICTIONEM, 2),
+                new ResearchMonogramEntry(WizardsRebornMonograms.STATERA, 4),
+                new ResearchMonogramEntry(WizardsRebornMonograms.VITA, 4)
         );
         HOLY_CROSS = new Research(12, new ResearchMapEntry(
-                WizardsReborn.PRAEDICTIONEM_MONOGRAM,  WizardsReborn.MIRACULUM_MONOGRAM,  WizardsReborn.MIRACULUM_MONOGRAM),
-                new ResearchMonogramEntry(WizardsReborn.SOLSTITIUM_MONOGRAM, 6),
-                new ResearchMonogramEntry(WizardsReborn.MIRACULUM_MONOGRAM, 5),
-                new ResearchMonogramEntry(WizardsReborn.PRAEDICTIONEM_MONOGRAM, 4),
-                new ResearchMonogramEntry(WizardsReborn.SOLEM_MONOGRAM, 3)
+                WizardsRebornMonograms.PRAEDICTIONEM,  WizardsRebornMonograms.MIRACULUM,  WizardsRebornMonograms.MIRACULUM),
+                new ResearchMonogramEntry(WizardsRebornMonograms.SOLSTITIUM, 6),
+                new ResearchMonogramEntry(WizardsRebornMonograms.MIRACULUM, 5),
+                new ResearchMonogramEntry(WizardsRebornMonograms.PRAEDICTIONEM, 4),
+                new ResearchMonogramEntry(WizardsRebornMonograms.SOLEM, 3)
         );
         CURSE_CROSS = new Research(12, new ResearchMapEntry(
-                WizardsReborn.VITA_MONOGRAM,  WizardsReborn.SOLEM_MONOGRAM,  WizardsReborn.VITA_MONOGRAM),
-                new ResearchMonogramEntry(WizardsReborn.MORS_MONOGRAM, 4),
-                new ResearchMonogramEntry(WizardsReborn.SOLEM_MONOGRAM, 4),
-                new ResearchMonogramEntry(WizardsReborn.VITA_MONOGRAM, 5),
-                new ResearchMonogramEntry(WizardsReborn.ECLIPSIS_MONOGRAM, 5),
-                new ResearchMonogramEntry(WizardsReborn.TENEBRIS_MONOGRAM, 2)
+                WizardsRebornMonograms.VITA,  WizardsRebornMonograms.SOLEM,  WizardsRebornMonograms.VITA),
+                new ResearchMonogramEntry(WizardsRebornMonograms.MORS, 4),
+                new ResearchMonogramEntry(WizardsRebornMonograms.SOLEM, 4),
+                new ResearchMonogramEntry(WizardsRebornMonograms.VITA, 5),
+                new ResearchMonogramEntry(WizardsRebornMonograms.ECLIPSIS, 5),
+                new ResearchMonogramEntry(WizardsRebornMonograms.TENEBRIS, 2)
         );
         POISON = new Research(12, new ResearchMapEntry(
-                WizardsReborn.MIRACULUM_MONOGRAM,  WizardsReborn.SOLSTITIUM_MONOGRAM,  WizardsReborn.SOLEM_MONOGRAM),
-                new ResearchMonogramEntry(WizardsReborn.SOLSTITIUM_MONOGRAM, 6),
-                new ResearchMonogramEntry(WizardsReborn.MIRACULUM_MONOGRAM, 4),
-                new ResearchMonogramEntry(WizardsReborn.PRAEDICTIONEM_MONOGRAM, 5),
-                new ResearchMonogramEntry(WizardsReborn.SOLEM_MONOGRAM, 3),
-                new ResearchMonogramEntry(WizardsReborn.LUX_MONOGRAM, 2)
+                WizardsRebornMonograms.MIRACULUM,  WizardsRebornMonograms.SOLSTITIUM,  WizardsRebornMonograms.SOLEM),
+                new ResearchMonogramEntry(WizardsRebornMonograms.SOLSTITIUM, 6),
+                new ResearchMonogramEntry(WizardsRebornMonograms.MIRACULUM, 4),
+                new ResearchMonogramEntry(WizardsRebornMonograms.PRAEDICTIONEM, 5),
+                new ResearchMonogramEntry(WizardsRebornMonograms.SOLEM, 3),
+                new ResearchMonogramEntry(WizardsRebornMonograms.LUX, 2)
         );
 
         MAGIC_SPROUT = new Research(12, new ResearchMapEntry(
-                WizardsReborn.SOLSTITIUM_MONOGRAM,  WizardsReborn.VITA_MONOGRAM,  WizardsReborn.LUX_MONOGRAM),
-                new ResearchMonogramEntry(WizardsReborn.ECLIPSIS_MONOGRAM, 3),
-                new ResearchMonogramEntry(WizardsReborn.LUX_MONOGRAM, 4),
-                new ResearchMonogramEntry(WizardsReborn.VITA_MONOGRAM, 6),
-                new ResearchMonogramEntry(WizardsReborn.SOLSTITIUM_MONOGRAM, 3)
+                WizardsRebornMonograms.SOLSTITIUM,  WizardsRebornMonograms.VITA,  WizardsRebornMonograms.LUX),
+                new ResearchMonogramEntry(WizardsRebornMonograms.ECLIPSIS, 3),
+                new ResearchMonogramEntry(WizardsRebornMonograms.LUX, 4),
+                new ResearchMonogramEntry(WizardsRebornMonograms.VITA, 6),
+                new ResearchMonogramEntry(WizardsRebornMonograms.SOLSTITIUM, 3)
         );
         DIRT_BLOCK = new Research(8, new ResearchMapEntry(
-                WizardsReborn.RENAISSANCE_MONOGRAM,  WizardsReborn.SOLEM_MONOGRAM,  WizardsReborn.ECLIPSIS_MONOGRAM),
-                new ResearchMonogramEntry(WizardsReborn.RENAISSANCE_MONOGRAM, 3),
-                new ResearchMonogramEntry(WizardsReborn.SOLEM_MONOGRAM, 4),
-                new ResearchMonogramEntry(WizardsReborn.ECLIPSIS_MONOGRAM, 4),
-                new ResearchMonogramEntry(WizardsReborn.TEMPUS_MONOGRAM, 3),
-                new ResearchMonogramEntry(WizardsReborn.TENEBRIS_MONOGRAM, 3)
+                WizardsRebornMonograms.RENAISSANCE,  WizardsRebornMonograms.SOLEM,  WizardsRebornMonograms.ECLIPSIS),
+                new ResearchMonogramEntry(WizardsRebornMonograms.RENAISSANCE, 3),
+                new ResearchMonogramEntry(WizardsRebornMonograms.SOLEM, 4),
+                new ResearchMonogramEntry(WizardsRebornMonograms.ECLIPSIS, 4),
+                new ResearchMonogramEntry(WizardsRebornMonograms.TEMPUS, 3),
+                new ResearchMonogramEntry(WizardsRebornMonograms.TENEBRIS, 3)
         );
         WATER_BLOCK = new Research(8, new ResearchMapEntry(
-                WizardsReborn.SICCITAS_MONOGRAM,  WizardsReborn.SICCITAS_MONOGRAM,  WizardsReborn.KARA_MONOGRAM),
-                new ResearchMonogramEntry(WizardsReborn.STATERA_MONOGRAM, 3),
-                new ResearchMonogramEntry(WizardsReborn.KARA_MONOGRAM, 5),
-                new ResearchMonogramEntry(WizardsReborn.SICCITAS_MONOGRAM, 4)
+                WizardsRebornMonograms.SICCITAS,  WizardsRebornMonograms.SICCITAS,  WizardsRebornMonograms.KARA),
+                new ResearchMonogramEntry(WizardsRebornMonograms.STATERA, 3),
+                new ResearchMonogramEntry(WizardsRebornMonograms.KARA, 5),
+                new ResearchMonogramEntry(WizardsRebornMonograms.SICCITAS, 4)
         );
         AIR_IMPACT = new Research(12, new ResearchMapEntry(
-                WizardsReborn.SOLSTITIUM_MONOGRAM,  WizardsReborn.RENAISSANCE_MONOGRAM,  WizardsReborn.MORS_MONOGRAM),
-                new ResearchMonogramEntry(WizardsReborn.SOLSTITIUM_MONOGRAM, 5),
-                new ResearchMonogramEntry(WizardsReborn.MORS_MONOGRAM, 3),
-                new ResearchMonogramEntry(WizardsReborn.SOLEM_MONOGRAM, 2),
-                new ResearchMonogramEntry(WizardsReborn.RENAISSANCE_MONOGRAM, 3),
-                new ResearchMonogramEntry(WizardsReborn.BELLUM_MONOGRAM, 5)
+                WizardsRebornMonograms.SOLSTITIUM,  WizardsRebornMonograms.RENAISSANCE,  WizardsRebornMonograms.MORS),
+                new ResearchMonogramEntry(WizardsRebornMonograms.SOLSTITIUM, 5),
+                new ResearchMonogramEntry(WizardsRebornMonograms.MORS, 3),
+                new ResearchMonogramEntry(WizardsRebornMonograms.SOLEM, 2),
+                new ResearchMonogramEntry(WizardsRebornMonograms.RENAISSANCE, 3),
+                new ResearchMonogramEntry(WizardsRebornMonograms.BELLUM, 5)
         );
         ICE_BLOCK = new Research(8, new ResearchMapEntry(
-                WizardsReborn.UNIVERSUM_MONOGRAM,  WizardsReborn.TEMPUS_MONOGRAM,  WizardsReborn.TEMPUS_MONOGRAM),
-                new ResearchMonogramEntry(WizardsReborn.UNIVERSUM_MONOGRAM, 3),
-                new ResearchMonogramEntry(WizardsReborn.FAMES_MONOGRAM, 4),
-                new ResearchMonogramEntry(WizardsReborn.SICCITAS_MONOGRAM, 3),
-                new ResearchMonogramEntry(WizardsReborn.TEMPUS_MONOGRAM, 6)
+                WizardsRebornMonograms.UNIVERSUM,  WizardsRebornMonograms.TEMPUS,  WizardsRebornMonograms.TEMPUS),
+                new ResearchMonogramEntry(WizardsRebornMonograms.UNIVERSUM, 3),
+                new ResearchMonogramEntry(WizardsRebornMonograms.FAMES, 4),
+                new ResearchMonogramEntry(WizardsRebornMonograms.SICCITAS, 3),
+                new ResearchMonogramEntry(WizardsRebornMonograms.TEMPUS, 6)
         );
 
         EARTH_CHARGE = new Research(12, new ResearchMapEntry(
-                WizardsReborn.LUNAM_MONOGRAM,  WizardsReborn.ECLIPSIS_MONOGRAM,  WizardsReborn.TENEBRIS_MONOGRAM,  WizardsReborn.TENEBRIS_MONOGRAM),
-                new ResearchMonogramEntry(WizardsReborn.TENEBRIS_MONOGRAM, 8),
-                new ResearchMonogramEntry(WizardsReborn.ECLIPSIS_MONOGRAM, 9),
-                new ResearchMonogramEntry(WizardsReborn.LUNAM_MONOGRAM, 3)
+                WizardsRebornMonograms.LUNAM,  WizardsRebornMonograms.ECLIPSIS,  WizardsRebornMonograms.TENEBRIS,  WizardsRebornMonograms.TENEBRIS),
+                new ResearchMonogramEntry(WizardsRebornMonograms.TENEBRIS, 8),
+                new ResearchMonogramEntry(WizardsRebornMonograms.ECLIPSIS, 9),
+                new ResearchMonogramEntry(WizardsRebornMonograms.LUNAM, 3)
         );
         WATER_CHARGE = new Research(12, new ResearchMapEntry(
-                WizardsReborn.MORS_MONOGRAM,  WizardsReborn.MORS_MONOGRAM,  WizardsReborn.MORS_MONOGRAM,  WizardsReborn.ECLIPSIS_MONOGRAM),
-                new ResearchMonogramEntry(WizardsReborn.FAMES_MONOGRAM, 4),
-                new ResearchMonogramEntry(WizardsReborn.ECLIPSIS_MONOGRAM, 6),
-                new ResearchMonogramEntry(WizardsReborn.TEMPUS_MONOGRAM, 5),
-                new ResearchMonogramEntry(WizardsReborn.MORS_MONOGRAM, 7)
+                WizardsRebornMonograms.MORS,  WizardsRebornMonograms.MORS,  WizardsRebornMonograms.MORS,  WizardsRebornMonograms.ECLIPSIS),
+                new ResearchMonogramEntry(WizardsRebornMonograms.FAMES, 4),
+                new ResearchMonogramEntry(WizardsRebornMonograms.ECLIPSIS, 6),
+                new ResearchMonogramEntry(WizardsRebornMonograms.TEMPUS, 5),
+                new ResearchMonogramEntry(WizardsRebornMonograms.MORS, 7)
         );
         AIR_CHARGE = new Research(12, new ResearchMapEntry(
-                WizardsReborn.STATERA_MONOGRAM,  WizardsReborn.EVOLUTIONIS_MONOGRAM,  WizardsReborn.SOLSTITIUM_MONOGRAM,  WizardsReborn.VITA_MONOGRAM),
-                new ResearchMonogramEntry(WizardsReborn.SOLSTITIUM_MONOGRAM, 6),
-                new ResearchMonogramEntry(WizardsReborn.PRAEDICTIONEM_MONOGRAM, 4),
-                new ResearchMonogramEntry(WizardsReborn.EVOLUTIONIS_MONOGRAM, 4),
-                new ResearchMonogramEntry(WizardsReborn.STATERA_MONOGRAM, 5),
-                new ResearchMonogramEntry(WizardsReborn.VITA_MONOGRAM, 7)
+                WizardsRebornMonograms.STATERA,  WizardsRebornMonograms.EVOLUTIONIS,  WizardsRebornMonograms.SOLSTITIUM,  WizardsRebornMonograms.VITA),
+                new ResearchMonogramEntry(WizardsRebornMonograms.SOLSTITIUM, 6),
+                new ResearchMonogramEntry(WizardsRebornMonograms.PRAEDICTIONEM, 4),
+                new ResearchMonogramEntry(WizardsRebornMonograms.EVOLUTIONIS, 4),
+                new ResearchMonogramEntry(WizardsRebornMonograms.STATERA, 5),
+                new ResearchMonogramEntry(WizardsRebornMonograms.VITA, 7)
         );
         FIRE_CHARGE = new Research(12, new ResearchMapEntry(
-                WizardsReborn.TEMPUS_MONOGRAM,  WizardsReborn.TEMPUS_MONOGRAM,  WizardsReborn.MORS_MONOGRAM,  WizardsReborn.RENAISSANCE_MONOGRAM),
-                new ResearchMonogramEntry(WizardsReborn.FAMES_MONOGRAM, 4),
-                new ResearchMonogramEntry(WizardsReborn.ECLIPSIS_MONOGRAM, 4),
-                new ResearchMonogramEntry(WizardsReborn.TEMPUS_MONOGRAM, 6),
-                new ResearchMonogramEntry(WizardsReborn.MORS_MONOGRAM, 5),
-                new ResearchMonogramEntry(WizardsReborn.RENAISSANCE_MONOGRAM, 6)
+                WizardsRebornMonograms.TEMPUS,  WizardsRebornMonograms.TEMPUS,  WizardsRebornMonograms.MORS,  WizardsRebornMonograms.RENAISSANCE),
+                new ResearchMonogramEntry(WizardsRebornMonograms.FAMES, 4),
+                new ResearchMonogramEntry(WizardsRebornMonograms.ECLIPSIS, 4),
+                new ResearchMonogramEntry(WizardsRebornMonograms.TEMPUS, 6),
+                new ResearchMonogramEntry(WizardsRebornMonograms.MORS, 5),
+                new ResearchMonogramEntry(WizardsRebornMonograms.RENAISSANCE, 6)
         );
         VOID_CHARGE = new Research(12, new ResearchMapEntry(
-                WizardsReborn.SOLEM_MONOGRAM,  WizardsReborn.SOLEM_MONOGRAM,  WizardsReborn.ECLIPSIS_MONOGRAM,  WizardsReborn.TENEBRIS_MONOGRAM),
-                new ResearchMonogramEntry(WizardsReborn.SOLEM_MONOGRAM, 6),
-                new ResearchMonogramEntry(WizardsReborn.TENEBRIS_MONOGRAM, 4),
-                new ResearchMonogramEntry(WizardsReborn.ECLIPSIS_MONOGRAM, 5),
-                new ResearchMonogramEntry(WizardsReborn.MORS_MONOGRAM, 5),
-                new ResearchMonogramEntry(WizardsReborn.RENAISSANCE_MONOGRAM, 4)
+                WizardsRebornMonograms.SOLEM,  WizardsRebornMonograms.SOLEM,  WizardsRebornMonograms.ECLIPSIS,  WizardsRebornMonograms.TENEBRIS),
+                new ResearchMonogramEntry(WizardsRebornMonograms.SOLEM, 6),
+                new ResearchMonogramEntry(WizardsRebornMonograms.TENEBRIS, 4),
+                new ResearchMonogramEntry(WizardsRebornMonograms.ECLIPSIS, 5),
+                new ResearchMonogramEntry(WizardsRebornMonograms.MORS, 5),
+                new ResearchMonogramEntry(WizardsRebornMonograms.RENAISSANCE, 4)
         );
         FROST_CHARGE = new Research(12, new ResearchMapEntry(
-                WizardsReborn.SOLSTITIUM_MONOGRAM,  WizardsReborn.SOLEM_MONOGRAM,  WizardsReborn.SOLEM_MONOGRAM,  WizardsReborn.SOLSTITIUM_MONOGRAM),
-                new ResearchMonogramEntry(WizardsReborn.SOLEM_MONOGRAM, 5),
-                new ResearchMonogramEntry(WizardsReborn.SOLSTITIUM_MONOGRAM, 6),
-                new ResearchMonogramEntry(WizardsReborn.LUX_MONOGRAM, 5),
-                new ResearchMonogramEntry(WizardsReborn.VITA_MONOGRAM, 6)
+                WizardsRebornMonograms.SOLSTITIUM,  WizardsRebornMonograms.SOLEM,  WizardsRebornMonograms.SOLEM,  WizardsRebornMonograms.SOLSTITIUM),
+                new ResearchMonogramEntry(WizardsRebornMonograms.SOLEM, 5),
+                new ResearchMonogramEntry(WizardsRebornMonograms.SOLSTITIUM, 6),
+                new ResearchMonogramEntry(WizardsRebornMonograms.LUX, 5),
+                new ResearchMonogramEntry(WizardsRebornMonograms.VITA, 6)
         );
         HOLY_CHARGE = new Research(12, new ResearchMapEntry(
-                WizardsReborn.BELLUM_MONOGRAM,  WizardsReborn.MORS_MONOGRAM,  WizardsReborn.SICCITAS_MONOGRAM,  WizardsReborn.MORS_MONOGRAM),
-                new ResearchMonogramEntry(WizardsReborn.BELLUM_MONOGRAM, 3),
-                new ResearchMonogramEntry(WizardsReborn.SOLSTITIUM_MONOGRAM, 4),
-                new ResearchMonogramEntry(WizardsReborn.SICCITAS_MONOGRAM, 4),
-                new ResearchMonogramEntry(WizardsReborn.MORS_MONOGRAM, 8),
-                new ResearchMonogramEntry(WizardsReborn.VITA_MONOGRAM, 5)
+                WizardsRebornMonograms.BELLUM,  WizardsRebornMonograms.MORS,  WizardsRebornMonograms.SICCITAS,  WizardsRebornMonograms.MORS),
+                new ResearchMonogramEntry(WizardsRebornMonograms.BELLUM, 3),
+                new ResearchMonogramEntry(WizardsRebornMonograms.SOLSTITIUM, 4),
+                new ResearchMonogramEntry(WizardsRebornMonograms.SICCITAS, 4),
+                new ResearchMonogramEntry(WizardsRebornMonograms.MORS, 8),
+                new ResearchMonogramEntry(WizardsRebornMonograms.VITA, 5)
         );
         CURSE_CHARGE = new Research(12, new ResearchMapEntry(
-                WizardsReborn.VITA_MONOGRAM,  WizardsReborn.SOLSTITIUM_MONOGRAM,  WizardsReborn.BELLUM_MONOGRAM,  WizardsReborn.SOLSTITIUM_MONOGRAM),
-                new ResearchMonogramEntry(WizardsReborn.BELLUM_MONOGRAM, 5),
-                new ResearchMonogramEntry(WizardsReborn.LUNAM_MONOGRAM, 3),
-                new ResearchMonogramEntry(WizardsReborn.LUX_MONOGRAM, 4),
-                new ResearchMonogramEntry(WizardsReborn.VITA_MONOGRAM, 6),
-                new ResearchMonogramEntry(WizardsReborn.SOLSTITIUM_MONOGRAM, 7)
+                WizardsRebornMonograms.VITA,  WizardsRebornMonograms.SOLSTITIUM,  WizardsRebornMonograms.BELLUM,  WizardsRebornMonograms.SOLSTITIUM),
+                new ResearchMonogramEntry(WizardsRebornMonograms.BELLUM, 5),
+                new ResearchMonogramEntry(WizardsRebornMonograms.LUNAM, 3),
+                new ResearchMonogramEntry(WizardsRebornMonograms.LUX, 4),
+                new ResearchMonogramEntry(WizardsRebornMonograms.VITA, 6),
+                new ResearchMonogramEntry(WizardsRebornMonograms.SOLSTITIUM, 7)
         );
 
         EARTH_AURA = new Research(15, new ResearchMapEntry(
-                WizardsReborn.VITA_MONOGRAM,  WizardsReborn.TENEBRIS_MONOGRAM,  WizardsReborn.TENEBRIS_MONOGRAM,  WizardsReborn.DEGRADATIO_MONOGRAM),
-                new ResearchMonogramEntry(WizardsReborn.DEGRADATIO_MONOGRAM, 4),
-                new ResearchMonogramEntry(WizardsReborn.VITA_MONOGRAM, 3),
-                new ResearchMonogramEntry(WizardsReborn.ECLIPSIS_MONOGRAM, 8),
-                new ResearchMonogramEntry(WizardsReborn.TENEBRIS_MONOGRAM, 7)
+                WizardsRebornMonograms.VITA,  WizardsRebornMonograms.TENEBRIS,  WizardsRebornMonograms.TENEBRIS,  WizardsRebornMonograms.DEGRADATIO),
+                new ResearchMonogramEntry(WizardsRebornMonograms.DEGRADATIO, 4),
+                new ResearchMonogramEntry(WizardsRebornMonograms.VITA, 3),
+                new ResearchMonogramEntry(WizardsRebornMonograms.ECLIPSIS, 8),
+                new ResearchMonogramEntry(WizardsRebornMonograms.TENEBRIS, 7)
         );
         WATER_AURA = new Research(15, new ResearchMapEntry(
-                WizardsReborn.LUNAM_MONOGRAM,  WizardsReborn.RENAISSANCE_MONOGRAM,  WizardsReborn.TEMPUS_MONOGRAM,  WizardsReborn.TEMPUS_MONOGRAM),
-                new ResearchMonogramEntry(WizardsReborn.MORS_MONOGRAM, 3),
-                new ResearchMonogramEntry(WizardsReborn.RENAISSANCE_MONOGRAM, 5),
-                new ResearchMonogramEntry(WizardsReborn.TEMPUS_MONOGRAM, 8),
-                new ResearchMonogramEntry(WizardsReborn.LUNAM_MONOGRAM, 5)
+                WizardsRebornMonograms.LUNAM,  WizardsRebornMonograms.RENAISSANCE,  WizardsRebornMonograms.TEMPUS,  WizardsRebornMonograms.TEMPUS),
+                new ResearchMonogramEntry(WizardsRebornMonograms.MORS, 3),
+                new ResearchMonogramEntry(WizardsRebornMonograms.RENAISSANCE, 5),
+                new ResearchMonogramEntry(WizardsRebornMonograms.TEMPUS, 8),
+                new ResearchMonogramEntry(WizardsRebornMonograms.LUNAM, 5)
         );
         AIR_AURA = new Research(15, new ResearchMapEntry(
-                WizardsReborn.SOLSTITIUM_MONOGRAM,  WizardsReborn.MIRACULUM_MONOGRAM,  WizardsReborn.VITA_MONOGRAM,  WizardsReborn.MIRACULUM_MONOGRAM),
-                new ResearchMonogramEntry(WizardsReborn.SOLSTITIUM_MONOGRAM, 3),
-                new ResearchMonogramEntry(WizardsReborn.MIRACULUM_MONOGRAM, 6),
-                new ResearchMonogramEntry(WizardsReborn.VITA_MONOGRAM, 6),
-                new ResearchMonogramEntry(WizardsReborn.LUNAM_MONOGRAM, 6)
+                WizardsRebornMonograms.SOLSTITIUM,  WizardsRebornMonograms.MIRACULUM,  WizardsRebornMonograms.VITA,  WizardsRebornMonograms.MIRACULUM),
+                new ResearchMonogramEntry(WizardsRebornMonograms.SOLSTITIUM, 3),
+                new ResearchMonogramEntry(WizardsRebornMonograms.MIRACULUM, 6),
+                new ResearchMonogramEntry(WizardsRebornMonograms.VITA, 6),
+                new ResearchMonogramEntry(WizardsRebornMonograms.LUNAM, 6)
         );
         FIRE_AURA = new Research(15, new ResearchMapEntry(
-                WizardsReborn.SOLEM_MONOGRAM,  WizardsReborn.SOLEM_MONOGRAM,  WizardsReborn.TEMPUS_MONOGRAM,  WizardsReborn.SOLEM_MONOGRAM),
-                new ResearchMonogramEntry(WizardsReborn.SOLEM_MONOGRAM, 6),
-                new ResearchMonogramEntry(WizardsReborn.TEMPUS_MONOGRAM, 6),
-                new ResearchMonogramEntry(WizardsReborn.LUNAM_MONOGRAM, 5),
-                new ResearchMonogramEntry(WizardsReborn.TENEBRIS_MONOGRAM, 2)
+                WizardsRebornMonograms.SOLEM,  WizardsRebornMonograms.SOLEM,  WizardsRebornMonograms.TEMPUS,  WizardsRebornMonograms.SOLEM),
+                new ResearchMonogramEntry(WizardsRebornMonograms.SOLEM, 6),
+                new ResearchMonogramEntry(WizardsRebornMonograms.TEMPUS, 6),
+                new ResearchMonogramEntry(WizardsRebornMonograms.LUNAM, 5),
+                new ResearchMonogramEntry(WizardsRebornMonograms.TENEBRIS, 2)
         );
         VOID_AURA = new Research(15, new ResearchMapEntry(
-                WizardsReborn.LUNAM_MONOGRAM,  WizardsReborn.LUNAM_MONOGRAM,  WizardsReborn.SOLEM_MONOGRAM,  WizardsReborn.MIRACULUM_MONOGRAM),
-                new ResearchMonogramEntry(WizardsReborn.MIRACULUM_MONOGRAM, 5),
-                new ResearchMonogramEntry(WizardsReborn.SOLEM_MONOGRAM, 5),
-                new ResearchMonogramEntry(WizardsReborn.LUNAM_MONOGRAM, 10)
+                WizardsRebornMonograms.LUNAM,  WizardsRebornMonograms.LUNAM,  WizardsRebornMonograms.SOLEM,  WizardsRebornMonograms.MIRACULUM),
+                new ResearchMonogramEntry(WizardsRebornMonograms.MIRACULUM, 5),
+                new ResearchMonogramEntry(WizardsRebornMonograms.SOLEM, 5),
+                new ResearchMonogramEntry(WizardsRebornMonograms.LUNAM, 10)
         );
         FROST_AURA = new Research(15, new ResearchMapEntry(
-                WizardsReborn.VITA_MONOGRAM,  WizardsReborn.VITA_MONOGRAM,  WizardsReborn.SOLSTITIUM_MONOGRAM,  WizardsReborn.MORS_MONOGRAM),
-                new ResearchMonogramEntry(WizardsReborn.SOLSTITIUM_MONOGRAM, 6),
-                new ResearchMonogramEntry(WizardsReborn.MORS_MONOGRAM, 6),
-                new ResearchMonogramEntry(WizardsReborn.VITA_MONOGRAM, 6),
-                new ResearchMonogramEntry(WizardsReborn.LUX_MONOGRAM, 2)
+                WizardsRebornMonograms.VITA,  WizardsRebornMonograms.VITA,  WizardsRebornMonograms.SOLSTITIUM,  WizardsRebornMonograms.MORS),
+                new ResearchMonogramEntry(WizardsRebornMonograms.SOLSTITIUM, 6),
+                new ResearchMonogramEntry(WizardsRebornMonograms.MORS, 6),
+                new ResearchMonogramEntry(WizardsRebornMonograms.VITA, 6),
+                new ResearchMonogramEntry(WizardsRebornMonograms.LUX, 2)
         );
         HOLY_AURA = new Research(15, new ResearchMapEntry(
-                WizardsReborn.ECLIPSIS_MONOGRAM,  WizardsReborn.MORS_MONOGRAM,  WizardsReborn.LUNAM_MONOGRAM,  WizardsReborn.LUNAM_MONOGRAM),
-                new ResearchMonogramEntry(WizardsReborn.DEGRADATIO_MONOGRAM, 2),
-                new ResearchMonogramEntry(WizardsReborn.MORS_MONOGRAM, 5),
-                new ResearchMonogramEntry(WizardsReborn.ECLIPSIS_MONOGRAM, 8),
-                new ResearchMonogramEntry(WizardsReborn.LUNAM_MONOGRAM, 6)
+                WizardsRebornMonograms.ECLIPSIS,  WizardsRebornMonograms.MORS,  WizardsRebornMonograms.LUNAM,  WizardsRebornMonograms.LUNAM),
+                new ResearchMonogramEntry(WizardsRebornMonograms.DEGRADATIO, 2),
+                new ResearchMonogramEntry(WizardsRebornMonograms.MORS, 5),
+                new ResearchMonogramEntry(WizardsRebornMonograms.ECLIPSIS, 8),
+                new ResearchMonogramEntry(WizardsRebornMonograms.LUNAM, 6)
         );
         CURSE_AURA = new Research(15, new ResearchMapEntry(
-                WizardsReborn.TEMPUS_MONOGRAM,  WizardsReborn.TEMPUS_MONOGRAM,  WizardsReborn.RENAISSANCE_MONOGRAM,  WizardsReborn.TEMPUS_MONOGRAM),
-                new ResearchMonogramEntry(WizardsReborn.FAMES_MONOGRAM, 4),
-                new ResearchMonogramEntry(WizardsReborn.RENAISSANCE_MONOGRAM, 6),
-                new ResearchMonogramEntry(WizardsReborn.TEMPUS_MONOGRAM, 8)
+                WizardsRebornMonograms.TEMPUS,  WizardsRebornMonograms.TEMPUS,  WizardsRebornMonograms.RENAISSANCE,  WizardsRebornMonograms.TEMPUS),
+                new ResearchMonogramEntry(WizardsRebornMonograms.FAMES, 4),
+                new ResearchMonogramEntry(WizardsRebornMonograms.RENAISSANCE, 6),
+                new ResearchMonogramEntry(WizardsRebornMonograms.TEMPUS, 8)
         );
 
         RAIN_CLOUD = new Research(13, new ResearchMapEntry(
-                WizardsReborn.TEMPUS_MONOGRAM,  WizardsReborn.STATERA_MONOGRAM,  WizardsReborn.RENAISSANCE_MONOGRAM,  WizardsReborn.MORS_MONOGRAM),
-                new ResearchMonogramEntry(WizardsReborn.RENAISSANCE_MONOGRAM, 4),
-                new ResearchMonogramEntry(WizardsReborn.TEMPUS_MONOGRAM, 6),
-                new ResearchMonogramEntry(WizardsReborn.STATERA_MONOGRAM, 6),
-                new ResearchMonogramEntry(WizardsReborn.MORS_MONOGRAM, 6),
-                new ResearchMonogramEntry(WizardsReborn.UNIVERSUM_MONOGRAM, 4)
+                WizardsRebornMonograms.TEMPUS,  WizardsRebornMonograms.STATERA,  WizardsRebornMonograms.RENAISSANCE,  WizardsRebornMonograms.MORS),
+                new ResearchMonogramEntry(WizardsRebornMonograms.RENAISSANCE, 4),
+                new ResearchMonogramEntry(WizardsRebornMonograms.TEMPUS, 6),
+                new ResearchMonogramEntry(WizardsRebornMonograms.STATERA, 6),
+                new ResearchMonogramEntry(WizardsRebornMonograms.MORS, 6),
+                new ResearchMonogramEntry(WizardsRebornMonograms.UNIVERSUM, 4)
         );
         LAVA_BLOCK = new Research(9, new ResearchMapEntry(
-                WizardsReborn.STATERA_MONOGRAM,  WizardsReborn.EVOLUTIONIS_MONOGRAM),
-                new ResearchMonogramEntry(WizardsReborn.VITA_MONOGRAM, 5),
-                new ResearchMonogramEntry(WizardsReborn.STATERA_MONOGRAM, 6),
-                new ResearchMonogramEntry(WizardsReborn.EVOLUTIONIS_MONOGRAM, 5),
-                new ResearchMonogramEntry(WizardsReborn.MORS_MONOGRAM, 3)
+                WizardsRebornMonograms.STATERA,  WizardsRebornMonograms.EVOLUTIONIS),
+                new ResearchMonogramEntry(WizardsRebornMonograms.VITA, 5),
+                new ResearchMonogramEntry(WizardsRebornMonograms.STATERA, 6),
+                new ResearchMonogramEntry(WizardsRebornMonograms.EVOLUTIONIS, 5),
+                new ResearchMonogramEntry(WizardsRebornMonograms.MORS, 3)
         );
         ICICLE = new Research(12, new ResearchMapEntry(
-                WizardsReborn.STATERA_MONOGRAM,  WizardsReborn.MORS_MONOGRAM,  WizardsReborn.MORS_MONOGRAM),
-                new ResearchMonogramEntry(WizardsReborn.STATERA_MONOGRAM, 6),
-                new ResearchMonogramEntry(WizardsReborn.EVOLUTIONIS_MONOGRAM, 3),
-                new ResearchMonogramEntry(WizardsReborn.MORS_MONOGRAM, 6),
-                new ResearchMonogramEntry(WizardsReborn.UNIVERSUM_MONOGRAM, 3),
-                new ResearchMonogramEntry(WizardsReborn.BELLUM_MONOGRAM, 5)
+                WizardsRebornMonograms.STATERA,  WizardsRebornMonograms.MORS,  WizardsRebornMonograms.MORS),
+                new ResearchMonogramEntry(WizardsRebornMonograms.STATERA, 6),
+                new ResearchMonogramEntry(WizardsRebornMonograms.EVOLUTIONIS, 3),
+                new ResearchMonogramEntry(WizardsRebornMonograms.MORS, 6),
+                new ResearchMonogramEntry(WizardsRebornMonograms.UNIVERSUM, 3),
+                new ResearchMonogramEntry(WizardsRebornMonograms.BELLUM, 5)
         );
         SHARP_BLINK = new Research(11, new ResearchMapEntry(
-                WizardsReborn.EVOLUTIONIS_MONOGRAM,  WizardsReborn.FAMES_MONOGRAM,  WizardsReborn.FAMES_MONOGRAM,  WizardsReborn.FAMES_MONOGRAM),
-                new ResearchMonogramEntry(WizardsReborn.VITA_MONOGRAM, 2),
-                new ResearchMonogramEntry(WizardsReborn.TEMPUS_MONOGRAM, 6),
-                new ResearchMonogramEntry(WizardsReborn.FAMES_MONOGRAM, 5),
-                new ResearchMonogramEntry(WizardsReborn.EVOLUTIONIS_MONOGRAM, 2),
-                new ResearchMonogramEntry(WizardsReborn.STATERA_MONOGRAM, 3)
+                WizardsRebornMonograms.EVOLUTIONIS,  WizardsRebornMonograms.FAMES,  WizardsRebornMonograms.FAMES,  WizardsRebornMonograms.FAMES),
+                new ResearchMonogramEntry(WizardsRebornMonograms.VITA, 2),
+                new ResearchMonogramEntry(WizardsRebornMonograms.TEMPUS, 6),
+                new ResearchMonogramEntry(WizardsRebornMonograms.FAMES, 5),
+                new ResearchMonogramEntry(WizardsRebornMonograms.EVOLUTIONIS, 2),
+                new ResearchMonogramEntry(WizardsRebornMonograms.STATERA, 3)
         );
         CRYSTAL_CRUSHING = new Research(15, new ResearchMapEntry(
-                WizardsReborn.SICCITAS_MONOGRAM),
-                new ResearchMonogramEntry(WizardsReborn.PRAEDICTIONEM_MONOGRAM, 2),
-                new ResearchMonogramEntry(WizardsReborn.FAMES_MONOGRAM, 5),
-                new ResearchMonogramEntry(WizardsReborn.SICCITAS_MONOGRAM, 7),
-                new ResearchMonogramEntry(WizardsReborn.MORS_MONOGRAM, 6),
-                new ResearchMonogramEntry(WizardsReborn.SOLSTITIUM_MONOGRAM, 3)
+                WizardsRebornMonograms.SICCITAS),
+                new ResearchMonogramEntry(WizardsRebornMonograms.PRAEDICTIONEM, 2),
+                new ResearchMonogramEntry(WizardsRebornMonograms.FAMES, 5),
+                new ResearchMonogramEntry(WizardsRebornMonograms.SICCITAS, 7),
+                new ResearchMonogramEntry(WizardsRebornMonograms.MORS, 6),
+                new ResearchMonogramEntry(WizardsRebornMonograms.SOLSTITIUM, 3)
         );
         TOXIC_RAIN = new Research(14, new ResearchMapEntry(
-                WizardsReborn.LUNAM_MONOGRAM,  WizardsReborn.TEMPUS_MONOGRAM,  WizardsReborn.TEMPUS_MONOGRAM,  WizardsReborn.MORS_MONOGRAM),
-                new ResearchMonogramEntry(WizardsReborn.RENAISSANCE_MONOGRAM, 3),
-                new ResearchMonogramEntry(WizardsReborn.TEMPUS_MONOGRAM, 6),
-                new ResearchMonogramEntry(WizardsReborn.LUNAM_MONOGRAM, 3),
-                new ResearchMonogramEntry(WizardsReborn.SICCITAS_MONOGRAM, 5),
-                new ResearchMonogramEntry(WizardsReborn.SOLEM_MONOGRAM, 6),
-                new ResearchMonogramEntry(WizardsReborn.MORS_MONOGRAM, 5)
+                WizardsRebornMonograms.LUNAM,  WizardsRebornMonograms.TEMPUS,  WizardsRebornMonograms.TEMPUS,  WizardsRebornMonograms.MORS),
+                new ResearchMonogramEntry(WizardsRebornMonograms.RENAISSANCE, 3),
+                new ResearchMonogramEntry(WizardsRebornMonograms.TEMPUS, 6),
+                new ResearchMonogramEntry(WizardsRebornMonograms.LUNAM, 3),
+                new ResearchMonogramEntry(WizardsRebornMonograms.SICCITAS, 5),
+                new ResearchMonogramEntry(WizardsRebornMonograms.SOLEM, 6),
+                new ResearchMonogramEntry(WizardsRebornMonograms.MORS, 5)
         );
         MOR_SWARM = new Research(13, new ResearchMapEntry(
-                WizardsReborn.EVOLUTIONIS_MONOGRAM,  WizardsReborn.STATERA_MONOGRAM),
-                new ResearchMonogramEntry(WizardsReborn.TEMPUS_MONOGRAM, 5),
-                new ResearchMonogramEntry(WizardsReborn.FAMES_MONOGRAM, 2),
-                new ResearchMonogramEntry(WizardsReborn.EVOLUTIONIS_MONOGRAM, 2),
-                new ResearchMonogramEntry(WizardsReborn.STATERA_MONOGRAM, 4),
-                new ResearchMonogramEntry(WizardsReborn.SICCITAS_MONOGRAM, 3),
-                new ResearchMonogramEntry(WizardsReborn.UNIVERSUM_MONOGRAM, 3)
+                WizardsRebornMonograms.EVOLUTIONIS,  WizardsRebornMonograms.STATERA),
+                new ResearchMonogramEntry(WizardsRebornMonograms.TEMPUS, 5),
+                new ResearchMonogramEntry(WizardsRebornMonograms.FAMES, 2),
+                new ResearchMonogramEntry(WizardsRebornMonograms.EVOLUTIONIS, 2),
+                new ResearchMonogramEntry(WizardsRebornMonograms.STATERA, 4),
+                new ResearchMonogramEntry(WizardsRebornMonograms.SICCITAS, 3),
+                new ResearchMonogramEntry(WizardsRebornMonograms.UNIVERSUM, 3)
         );
         WITHERING = new Research(12, new ResearchMapEntry(
-                WizardsReborn.MORS_MONOGRAM,  WizardsReborn.BELLUM_MONOGRAM,  WizardsReborn.SOLSTITIUM_MONOGRAM,  WizardsReborn.MORS_MONOGRAM),
-                new ResearchMonogramEntry(WizardsReborn.EVOLUTIONIS_MONOGRAM, 3),
-                new ResearchMonogramEntry(WizardsReborn.STATERA_MONOGRAM, 6),
-                new ResearchMonogramEntry(WizardsReborn.MORS_MONOGRAM, 7),
-                new ResearchMonogramEntry(WizardsReborn.SOLSTITIUM_MONOGRAM, 2),
-                new ResearchMonogramEntry(WizardsReborn.BELLUM_MONOGRAM, 2)
+                WizardsRebornMonograms.MORS,  WizardsRebornMonograms.BELLUM,  WizardsRebornMonograms.SOLSTITIUM,  WizardsRebornMonograms.MORS),
+                new ResearchMonogramEntry(WizardsRebornMonograms.EVOLUTIONIS, 3),
+                new ResearchMonogramEntry(WizardsRebornMonograms.STATERA, 6),
+                new ResearchMonogramEntry(WizardsRebornMonograms.MORS, 7),
+                new ResearchMonogramEntry(WizardsRebornMonograms.SOLSTITIUM, 2),
+                new ResearchMonogramEntry(WizardsRebornMonograms.BELLUM, 2)
         );
         IRRITATION = new Research(18, new ResearchMapEntry(
-                WizardsReborn.TEMPUS_MONOGRAM,  WizardsReborn.STATERA_MONOGRAM,  WizardsReborn.SICCITAS_MONOGRAM,  WizardsReborn.STATERA_MONOGRAM),
-                new ResearchMonogramEntry(WizardsReborn.TEMPUS_MONOGRAM, 4),
-                new ResearchMonogramEntry(WizardsReborn.LUNAM_MONOGRAM, 2),
-                new ResearchMonogramEntry(WizardsReborn.STATERA_MONOGRAM, 7),
-                new ResearchMonogramEntry(WizardsReborn.SICCITAS_MONOGRAM, 5),
-                new ResearchMonogramEntry(WizardsReborn.KARA_MONOGRAM, 4),
-                new ResearchMonogramEntry(WizardsReborn.MORS_MONOGRAM, 2)
+                WizardsRebornMonograms.TEMPUS,  WizardsRebornMonograms.STATERA,  WizardsRebornMonograms.SICCITAS,  WizardsRebornMonograms.STATERA),
+                new ResearchMonogramEntry(WizardsRebornMonograms.TEMPUS, 4),
+                new ResearchMonogramEntry(WizardsRebornMonograms.LUNAM, 2),
+                new ResearchMonogramEntry(WizardsRebornMonograms.STATERA, 7),
+                new ResearchMonogramEntry(WizardsRebornMonograms.SICCITAS, 5),
+                new ResearchMonogramEntry(WizardsRebornMonograms.KARA, 4),
+                new ResearchMonogramEntry(WizardsRebornMonograms.MORS, 2)
         );
         NECROTIC_RAY = new Research(18, new ResearchMapEntry(
-                WizardsReborn.TEMPUS_MONOGRAM,  WizardsReborn.TEMPUS_MONOGRAM,  WizardsReborn.UNIVERSUM_MONOGRAM,  WizardsReborn.UNIVERSUM_MONOGRAM),
-                new ResearchMonogramEntry(WizardsReborn.RENAISSANCE_MONOGRAM, 2),
-                new ResearchMonogramEntry(WizardsReborn.TEMPUS_MONOGRAM, 7),
-                new ResearchMonogramEntry(WizardsReborn.FAMES_MONOGRAM, 2),
-                new ResearchMonogramEntry(WizardsReborn.EVOLUTIONIS_MONOGRAM, 2),
-                new ResearchMonogramEntry(WizardsReborn.STATERA_MONOGRAM, 5),
-                new ResearchMonogramEntry(WizardsReborn.UNIVERSUM_MONOGRAM, 6)
+                WizardsRebornMonograms.TEMPUS,  WizardsRebornMonograms.TEMPUS,  WizardsRebornMonograms.UNIVERSUM,  WizardsRebornMonograms.UNIVERSUM),
+                new ResearchMonogramEntry(WizardsRebornMonograms.RENAISSANCE, 2),
+                new ResearchMonogramEntry(WizardsRebornMonograms.TEMPUS, 7),
+                new ResearchMonogramEntry(WizardsRebornMonograms.FAMES, 2),
+                new ResearchMonogramEntry(WizardsRebornMonograms.EVOLUTIONIS, 2),
+                new ResearchMonogramEntry(WizardsRebornMonograms.STATERA, 5),
+                new ResearchMonogramEntry(WizardsRebornMonograms.UNIVERSUM, 6)
         );
         LIGHT_RAY = new Research(20, new ResearchMapEntry(),
-                new ResearchMonogramEntry(WizardsReborn.PRAEDICTIONEM_MONOGRAM, 5),
-                new ResearchMonogramEntry(WizardsReborn.FAMES_MONOGRAM, 3),
-                new ResearchMonogramEntry(WizardsReborn.TENEBRIS_MONOGRAM, 4),
-                new ResearchMonogramEntry(WizardsReborn.SICCITAS_MONOGRAM, 3),
-                new ResearchMonogramEntry(WizardsReborn.SOLEM_MONOGRAM, 5),
-                new ResearchMonogramEntry(WizardsReborn.SOLSTITIUM_MONOGRAM, 7)
+                new ResearchMonogramEntry(WizardsRebornMonograms.PRAEDICTIONEM, 5),
+                new ResearchMonogramEntry(WizardsRebornMonograms.FAMES, 3),
+                new ResearchMonogramEntry(WizardsRebornMonograms.TENEBRIS, 4),
+                new ResearchMonogramEntry(WizardsRebornMonograms.SICCITAS, 3),
+                new ResearchMonogramEntry(WizardsRebornMonograms.SOLEM, 5),
+                new ResearchMonogramEntry(WizardsRebornMonograms.SOLSTITIUM, 7)
         );
 
         INCINERATION = new Research(18, new ResearchMapEntry(
-                WizardsReborn.RENAISSANCE_MONOGRAM,  WizardsReborn.FAMES_MONOGRAM,  WizardsReborn.FAMES_MONOGRAM,  WizardsReborn.SOLEM_MONOGRAM),
-                new ResearchMonogramEntry(WizardsReborn.RENAISSANCE_MONOGRAM, 2),
-                new ResearchMonogramEntry(WizardsReborn.TEMPUS_MONOGRAM, 8),
-                new ResearchMonogramEntry(WizardsReborn.LUNAM_MONOGRAM, 2),
-                new ResearchMonogramEntry(WizardsReborn.FAMES_MONOGRAM, 5),
-                new ResearchMonogramEntry(WizardsReborn.SOLEM_MONOGRAM, 5),
-                new ResearchMonogramEntry(WizardsReborn.SOLSTITIUM_MONOGRAM, 2)
+                WizardsRebornMonograms.RENAISSANCE,  WizardsRebornMonograms.FAMES,  WizardsRebornMonograms.FAMES,  WizardsRebornMonograms.SOLEM),
+                new ResearchMonogramEntry(WizardsRebornMonograms.RENAISSANCE, 2),
+                new ResearchMonogramEntry(WizardsRebornMonograms.TEMPUS, 8),
+                new ResearchMonogramEntry(WizardsRebornMonograms.LUNAM, 2),
+                new ResearchMonogramEntry(WizardsRebornMonograms.FAMES, 5),
+                new ResearchMonogramEntry(WizardsRebornMonograms.SOLEM, 5),
+                new ResearchMonogramEntry(WizardsRebornMonograms.SOLSTITIUM, 2)
         );
         REPENTANCE = new Research(18, new ResearchMapEntry(
-                WizardsReborn.ECLIPSIS_MONOGRAM,  WizardsReborn.SOLSTITIUM_MONOGRAM,  WizardsReborn.MORS_MONOGRAM,  WizardsReborn.BELLUM_MONOGRAM),
-                new ResearchMonogramEntry(WizardsReborn.VITA_MONOGRAM, 2),
-                new ResearchMonogramEntry(WizardsReborn.ECLIPSIS_MONOGRAM, 3),
-                new ResearchMonogramEntry(WizardsReborn.SICCITAS_MONOGRAM, 4),
-                new ResearchMonogramEntry(WizardsReborn.MORS_MONOGRAM, 7),
-                new ResearchMonogramEntry(WizardsReborn.SOLSTITIUM_MONOGRAM, 4),
-                new ResearchMonogramEntry(WizardsReborn.BELLUM_MONOGRAM, 4)
+                WizardsRebornMonograms.ECLIPSIS,  WizardsRebornMonograms.SOLSTITIUM,  WizardsRebornMonograms.MORS,  WizardsRebornMonograms.BELLUM),
+                new ResearchMonogramEntry(WizardsRebornMonograms.VITA, 2),
+                new ResearchMonogramEntry(WizardsRebornMonograms.ECLIPSIS, 3),
+                new ResearchMonogramEntry(WizardsRebornMonograms.SICCITAS, 4),
+                new ResearchMonogramEntry(WizardsRebornMonograms.MORS, 7),
+                new ResearchMonogramEntry(WizardsRebornMonograms.SOLSTITIUM, 4),
+                new ResearchMonogramEntry(WizardsRebornMonograms.BELLUM, 4)
         );
         RENUNCIATION = new Research(18, new ResearchMapEntry(
-                WizardsReborn.MORS_MONOGRAM,  WizardsReborn.TEMPUS_MONOGRAM,  WizardsReborn.TEMPUS_MONOGRAM,  WizardsReborn.TEMPUS_MONOGRAM),
-                new ResearchMonogramEntry(WizardsReborn.ECLIPSIS_MONOGRAM, 2),
-                new ResearchMonogramEntry(WizardsReborn.TEMPUS_MONOGRAM, 7),
-                new ResearchMonogramEntry(WizardsReborn.LUNAM_MONOGRAM, 5),
-                new ResearchMonogramEntry(WizardsReborn.SICCITAS_MONOGRAM, 4),
-                new ResearchMonogramEntry(WizardsReborn.MORS_MONOGRAM, 4),
-                new ResearchMonogramEntry(WizardsReborn.UNIVERSUM_MONOGRAM, 2)
+                WizardsRebornMonograms.MORS,  WizardsRebornMonograms.TEMPUS,  WizardsRebornMonograms.TEMPUS,  WizardsRebornMonograms.TEMPUS),
+                new ResearchMonogramEntry(WizardsRebornMonograms.ECLIPSIS, 2),
+                new ResearchMonogramEntry(WizardsRebornMonograms.TEMPUS, 7),
+                new ResearchMonogramEntry(WizardsRebornMonograms.LUNAM, 5),
+                new ResearchMonogramEntry(WizardsRebornMonograms.SICCITAS, 4),
+                new ResearchMonogramEntry(WizardsRebornMonograms.MORS, 4),
+                new ResearchMonogramEntry(WizardsRebornMonograms.UNIVERSUM, 2)
         );
 
         EMBER_RAY = new Research(16, new ResearchMapEntry(
-                WizardsReborn.KARA_MONOGRAM,  WizardsReborn.TEMPUS_MONOGRAM,  WizardsReborn.SICCITAS_MONOGRAM,  WizardsReborn.MORS_MONOGRAM),
-                new ResearchMonogramEntry(WizardsReborn.TEMPUS_MONOGRAM, 5),
-                new ResearchMonogramEntry(WizardsReborn.STATERA_MONOGRAM, 5),
-                new ResearchMonogramEntry(WizardsReborn.KARA_MONOGRAM, 3),
-                new ResearchMonogramEntry(WizardsReborn.SICCITAS_MONOGRAM, 4),
-                new ResearchMonogramEntry(WizardsReborn.MORS_MONOGRAM, 4)
+                WizardsRebornMonograms.KARA,  WizardsRebornMonograms.TEMPUS,  WizardsRebornMonograms.SICCITAS,  WizardsRebornMonograms.MORS),
+                new ResearchMonogramEntry(WizardsRebornMonograms.TEMPUS, 5),
+                new ResearchMonogramEntry(WizardsRebornMonograms.STATERA, 5),
+                new ResearchMonogramEntry(WizardsRebornMonograms.KARA, 3),
+                new ResearchMonogramEntry(WizardsRebornMonograms.SICCITAS, 4),
+                new ResearchMonogramEntry(WizardsRebornMonograms.MORS, 4)
         );
         WISDOM = new Research(25, new ResearchMapEntry(),
-                new ResearchMonogramEntry(WizardsReborn.TEMPUS_MONOGRAM, 8),
-                new ResearchMonogramEntry(WizardsReborn.LUNAM_MONOGRAM, 3),
-                new ResearchMonogramEntry(WizardsReborn.SOLSTITIUM_MONOGRAM, 4),
-                new ResearchMonogramEntry(WizardsReborn.MORS_MONOGRAM, 9),
-                new ResearchMonogramEntry(WizardsReborn.ECLIPSIS_MONOGRAM, 2),
-                new ResearchMonogramEntry(WizardsReborn.SICCITAS_MONOGRAM, 6),
-                new ResearchMonogramEntry(WizardsReborn.RENAISSANCE_MONOGRAM, 5)
+                new ResearchMonogramEntry(WizardsRebornMonograms.TEMPUS, 8),
+                new ResearchMonogramEntry(WizardsRebornMonograms.LUNAM, 3),
+                new ResearchMonogramEntry(WizardsRebornMonograms.SOLSTITIUM, 4),
+                new ResearchMonogramEntry(WizardsRebornMonograms.MORS, 9),
+                new ResearchMonogramEntry(WizardsRebornMonograms.ECLIPSIS, 2),
+                new ResearchMonogramEntry(WizardsRebornMonograms.SICCITAS, 6),
+                new ResearchMonogramEntry(WizardsRebornMonograms.RENAISSANCE, 5)
         );
 
-        WizardsReborn.EARTH_PROJECTILE_SPELL.setResearch(EARTH_PROJECTILE);
-        WizardsReborn.WATER_PROJECTILE_SPELL.setResearch(WATER_PROJECTILE);
-        WizardsReborn.AIR_PROJECTILE_SPELL.setResearch(AIR_PROJECTILE);
-        WizardsReborn.FIRE_PROJECTILE_SPELL.setResearch(FIRE_PROJECTILE);
-        WizardsReborn.VOID_PROJECTILE_SPELL.setResearch(VOID_PROJECTILE);
-        WizardsReborn.FROST_PROJECTILE_SPELL.setResearch(FROST_PROJECTILE);
-        WizardsReborn.HOLY_PROJECTILE_SPELL.setResearch(HOLY_PROJECTILE);
-        WizardsReborn.CURSE_PROJECTILE_SPELL.setResearch(CURSE_PROJECTILE);
+        WizardsRebornSpells.EARTH_PROJECTILE.setResearch(EARTH_PROJECTILE);
+        WizardsRebornSpells.WATER_PROJECTILE.setResearch(WATER_PROJECTILE);
+        WizardsRebornSpells.AIR_PROJECTILE.setResearch(AIR_PROJECTILE);
+        WizardsRebornSpells.FIRE_PROJECTILE.setResearch(FIRE_PROJECTILE);
+        WizardsRebornSpells.VOID_PROJECTILE.setResearch(VOID_PROJECTILE);
+        WizardsRebornSpells.FROST_PROJECTILE.setResearch(FROST_PROJECTILE);
+        WizardsRebornSpells.HOLY_PROJECTILE.setResearch(HOLY_PROJECTILE);
+        WizardsRebornSpells.CURSE_PROJECTILE.setResearch(CURSE_PROJECTILE);
 
-        WizardsReborn.EARTH_RAY_SPELL.setResearch(EARTH_RAY);
-        WizardsReborn.WATER_RAY_SPELL.setResearch(WATER_RAY);
-        WizardsReborn.AIR_RAY_SPELL.setResearch(AIR_RAY);
-        WizardsReborn.FIRE_RAY_SPELL.setResearch(FIRE_RAY);
-        WizardsReborn.VOID_RAY_SPELL.setResearch(VOID_RAY);
-        WizardsReborn.FROST_RAY_SPELL.setResearch(FROST_RAY);
-        WizardsReborn.HOLY_RAY_SPELL.setResearch(HOLY_RAY);
-        WizardsReborn.CURSE_RAY_SPELL.setResearch(CURSE_RAY);
+        WizardsRebornSpells.EARTH_RAY.setResearch(EARTH_RAY);
+        WizardsRebornSpells.WATER_RAY.setResearch(WATER_RAY);
+        WizardsRebornSpells.AIR_RAY.setResearch(AIR_RAY);
+        WizardsRebornSpells.FIRE_RAY.setResearch(FIRE_RAY);
+        WizardsRebornSpells.VOID_RAY.setResearch(VOID_RAY);
+        WizardsRebornSpells.FROST_RAY.setResearch(FROST_RAY);
+        WizardsRebornSpells.HOLY_RAY.setResearch(HOLY_RAY);
+        WizardsRebornSpells.CURSE_RAY.setResearch(CURSE_RAY);
 
-        WizardsReborn.HEART_OF_NATURE_SPELL.setResearch(HEART_OF_NATURE);
-        WizardsReborn.WATER_BREATHING_SPELL.setResearch(WATER_BREATHING);
-        WizardsReborn.AIR_FLOW_SPELL.setResearch(AIR_FLOW);
-        WizardsReborn.FIRE_SHIELD_SPELL.setResearch(FIRE_SHIELD);
-        WizardsReborn.BLINK_SPELL.setResearch(BLINK);
-        WizardsReborn.SNOWFLAKE_SPELL.setResearch(SNOWFLAKE);
-        WizardsReborn.HOLY_CROSS_SPELL.setResearch(HOLY_CROSS);
-        WizardsReborn.CURSE_CROSS_SPELL.setResearch(CURSE_CROSS);
-        WizardsReborn.POISON_SPELL.setResearch(POISON);
+        WizardsRebornSpells.HEART_OF_NATURE.setResearch(HEART_OF_NATURE);
+        WizardsRebornSpells.WATER_BREATHING.setResearch(WATER_BREATHING);
+        WizardsRebornSpells.AIR_FLOW.setResearch(AIR_FLOW);
+        WizardsRebornSpells.FIRE_SHIELD.setResearch(FIRE_SHIELD);
+        WizardsRebornSpells.BLINK.setResearch(BLINK);
+        WizardsRebornSpells.SNOWFLAKE.setResearch(SNOWFLAKE);
+        WizardsRebornSpells.HOLY_CROSS.setResearch(HOLY_CROSS);
+        WizardsRebornSpells.CURSE_CROSS.setResearch(CURSE_CROSS);
+        WizardsRebornSpells.POISON.setResearch(POISON);
 
-        WizardsReborn.MAGIC_SPROUT_SPELL.setResearch(MAGIC_SPROUT);
-        WizardsReborn.DIRT_BLOCK_SPELL.setResearch(DIRT_BLOCK);
-        WizardsReborn.WATER_BLOCK_SPELL.setResearch(WATER_BLOCK);
-        WizardsReborn.AIR_IMPACT_SPELL.setResearch(AIR_IMPACT);
-        WizardsReborn.ICE_BLOCK_SPELL.setResearch(ICE_BLOCK);
+        WizardsRebornSpells.MAGIC_SPROUT.setResearch(MAGIC_SPROUT);
+        WizardsRebornSpells.DIRT_BLOCK.setResearch(DIRT_BLOCK);
+        WizardsRebornSpells.WATER_BLOCK.setResearch(WATER_BLOCK);
+        WizardsRebornSpells.AIR_IMPACT.setResearch(AIR_IMPACT);
+        WizardsRebornSpells.ICE_BLOCK.setResearch(ICE_BLOCK);
 
-        WizardsReborn.EARTH_CHARGE_SPELL.setResearch(EARTH_CHARGE);
-        WizardsReborn.WATER_CHARGE_SPELL.setResearch(WATER_CHARGE);
-        WizardsReborn.AIR_CHARGE_SPELL.setResearch(AIR_CHARGE);
-        WizardsReborn.FIRE_CHARGE_SPELL.setResearch(FIRE_CHARGE);
-        WizardsReborn.VOID_CHARGE_SPELL.setResearch(VOID_CHARGE);
-        WizardsReborn.FROST_CHARGE_SPELL.setResearch(FROST_CHARGE);
-        WizardsReborn.HOLY_CHARGE_SPELL.setResearch(HOLY_CHARGE);
-        WizardsReborn.CURSE_CHARGE_SPELL.setResearch(CURSE_CHARGE);
+        WizardsRebornSpells.EARTH_CHARGE.setResearch(EARTH_CHARGE);
+        WizardsRebornSpells.WATER_CHARGE.setResearch(WATER_CHARGE);
+        WizardsRebornSpells.AIR_CHARGE.setResearch(AIR_CHARGE);
+        WizardsRebornSpells.FIRE_CHARGE.setResearch(FIRE_CHARGE);
+        WizardsRebornSpells.VOID_CHARGE.setResearch(VOID_CHARGE);
+        WizardsRebornSpells.FROST_CHARGE.setResearch(FROST_CHARGE);
+        WizardsRebornSpells.HOLY_CHARGE.setResearch(HOLY_CHARGE);
+        WizardsRebornSpells.CURSE_CHARGE.setResearch(CURSE_CHARGE);
 
-        WizardsReborn.EARTH_AURA_SPELL.setResearch(EARTH_AURA);
-        WizardsReborn.WATER_AURA_SPELL.setResearch(WATER_AURA);
-        WizardsReborn.AIR_AURA_SPELL.setResearch(AIR_AURA);
-        WizardsReborn.FIRE_AURA_SPELL.setResearch(FIRE_AURA);
-        WizardsReborn.VOID_AURA_SPELL.setResearch(VOID_AURA);
-        WizardsReborn.FROST_AURA_SPELL.setResearch(FROST_AURA);
-        WizardsReborn.HOLY_AURA_SPELL.setResearch(HOLY_AURA);
-        WizardsReborn.CURSE_AURA_SPELL.setResearch(CURSE_AURA);
+        WizardsRebornSpells.EARTH_AURA.setResearch(EARTH_AURA);
+        WizardsRebornSpells.WATER_AURA.setResearch(WATER_AURA);
+        WizardsRebornSpells.AIR_AURA.setResearch(AIR_AURA);
+        WizardsRebornSpells.FIRE_AURA.setResearch(FIRE_AURA);
+        WizardsRebornSpells.VOID_AURA.setResearch(VOID_AURA);
+        WizardsRebornSpells.FROST_AURA.setResearch(FROST_AURA);
+        WizardsRebornSpells.HOLY_AURA.setResearch(HOLY_AURA);
+        WizardsRebornSpells.CURSE_AURA.setResearch(CURSE_AURA);
 
-        WizardsReborn.RAIN_CLOUD_SPELL.setResearch(RAIN_CLOUD);
-        WizardsReborn.LAVA_BLOCK_SPELL.setResearch(LAVA_BLOCK);
-        WizardsReborn.ICICLE_SPELL.setResearch(ICICLE);
-        WizardsReborn.SHARP_BLINK_SPELL.setResearch(SHARP_BLINK);
-        WizardsReborn.CRYSTAL_CRUSHING_SPELL.setResearch(CRYSTAL_CRUSHING);
-        WizardsReborn.TOXIC_RAIN_SPELL.setResearch(TOXIC_RAIN);
-        WizardsReborn.MOR_SWARM_SPELL.setResearch(MOR_SWARM);
-        WizardsReborn.WITHERING_SPELL.setResearch(WITHERING);
-        WizardsReborn.IRRITATION_SPELL.setResearch(IRRITATION);
-        WizardsReborn.NECROTIC_RAY_SPELL.setResearch(NECROTIC_RAY);
-        WizardsReborn.LIGHT_RAY_SPELL.setResearch(LIGHT_RAY);
+        WizardsRebornSpells.RAIN_CLOUD.setResearch(RAIN_CLOUD);
+        WizardsRebornSpells.LAVA_BLOCK.setResearch(LAVA_BLOCK);
+        WizardsRebornSpells.ICICLE.setResearch(ICICLE);
+        WizardsRebornSpells.SHARP_BLINK.setResearch(SHARP_BLINK);
+        WizardsRebornSpells.CRYSTAL_CRUSHING.setResearch(CRYSTAL_CRUSHING);
+        WizardsRebornSpells.TOXIC_RAIN.setResearch(TOXIC_RAIN);
+        WizardsRebornSpells.MOR_SWARM.setResearch(MOR_SWARM);
+        WizardsRebornSpells.WITHERING.setResearch(WITHERING);
+        WizardsRebornSpells.IRRITATION.setResearch(IRRITATION);
+        WizardsRebornSpells.NECROTIC_RAY.setResearch(NECROTIC_RAY);
+        WizardsRebornSpells.LIGHT_RAY.setResearch(LIGHT_RAY);
 
-        WizardsReborn.INCINERATION_SPELL.setResearch(INCINERATION);
-        WizardsReborn.REPENTANCE_SPELL.setResearch(REPENTANCE);
-        WizardsReborn.RENUNCIATION_SPELL.setResearch(RENUNCIATION);
+        WizardsRebornSpells.INCINERATION.setResearch(INCINERATION);
+        WizardsRebornSpells.REPENTANCE.setResearch(REPENTANCE);
+        WizardsRebornSpells.RENUNCIATION.setResearch(RENUNCIATION);
 
-        WizardsReborn.EMBER_RAY_SPELL.setResearch(EMBER_RAY);
-        WizardsReborn.WISDOM_SPELL.setResearch(WISDOM);
+        WizardsRebornSpells.EMBER_RAY.setResearch(EMBER_RAY);
+        WizardsRebornSpells.WISDOM.setResearch(WISDOM);
     }
 }

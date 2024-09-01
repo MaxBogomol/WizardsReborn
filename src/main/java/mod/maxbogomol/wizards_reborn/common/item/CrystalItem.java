@@ -2,13 +2,13 @@ package mod.maxbogomol.wizards_reborn.common.item;
 
 import com.mojang.blaze3d.systems.RenderSystem;
 import com.mojang.blaze3d.vertex.PoseStack;
-import mod.maxbogomol.fluffy_fur.FluffyFur;
 import mod.maxbogomol.fluffy_fur.client.particle.ParticleBuilder;
 import mod.maxbogomol.fluffy_fur.client.particle.data.ColorParticleData;
 import mod.maxbogomol.fluffy_fur.client.particle.data.GenericParticleData;
 import mod.maxbogomol.fluffy_fur.common.item.ICustomBlockEntityDataItem;
 import mod.maxbogomol.fluffy_fur.common.item.IGuiParticleItem;
 import mod.maxbogomol.fluffy_fur.common.item.IParticleItem;
+import mod.maxbogomol.fluffy_fur.registry.client.FluffyFurParticles;
 import mod.maxbogomol.fluffy_fur.util.ColorUtil;
 import mod.maxbogomol.wizards_reborn.api.crystal.CrystalStat;
 import mod.maxbogomol.wizards_reborn.api.crystal.CrystalType;
@@ -128,7 +128,7 @@ public class CrystalItem extends BlockItem implements IParticleItem, IGuiParticl
 
         if (random.nextFloat() < 0.01) {
             Color color = type.getColor();
-            ParticleBuilder.create(FluffyFur.SPARKLE_PARTICLE)
+            ParticleBuilder.create(FluffyFurParticles.SPARKLE)
                     .setColorData(ColorParticleData.create(color).build())
                     .setTransparencyData(GenericParticleData.create(0.5f, 0).build())
                     .setScaleData(GenericParticleData.create(0.1f, 0).build())
@@ -142,7 +142,7 @@ public class CrystalItem extends BlockItem implements IParticleItem, IGuiParticl
         if (polishing.hasParticle()) {
             if (random.nextFloat() < 0.01) {
                 Color color = polishing.getColor();
-                ParticleBuilder.create(FluffyFur.SPARKLE_PARTICLE)
+                ParticleBuilder.create(FluffyFurParticles.SPARKLE)
                         .setColorData(ColorParticleData.create(color).build())
                         .setTransparencyData(GenericParticleData.create(0.5f, 0).build())
                         .setScaleData(GenericParticleData.create(0.1f, 0).build())

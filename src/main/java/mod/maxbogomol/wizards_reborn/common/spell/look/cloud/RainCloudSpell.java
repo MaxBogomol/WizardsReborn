@@ -1,10 +1,11 @@
 package mod.maxbogomol.wizards_reborn.common.spell.look.cloud;
 
-import mod.maxbogomol.wizards_reborn.WizardsReborn;
 import mod.maxbogomol.wizards_reborn.api.crystal.CrystalUtil;
 import mod.maxbogomol.wizards_reborn.common.crystalritual.ArtificialFertilityCrystalRitual;
 import mod.maxbogomol.wizards_reborn.common.entity.SpellProjectileEntity;
 import mod.maxbogomol.wizards_reborn.common.item.equipment.arcane.ArcaneArmorItem;
+import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornCrystals;
+import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornSpells;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
@@ -17,19 +18,19 @@ import java.util.List;
 public class RainCloudSpell extends CloudSpell {
     public RainCloudSpell(String id, int points) {
         super(id, points);
-        addCrystalType(WizardsReborn.WATER_CRYSTAL_TYPE);
+        addCrystalType(WizardsRebornCrystals.WATER);
     }
 
     @Override
     public Color getColor() {
-        return WizardsReborn.waterSpellColor;
+        return WizardsRebornSpells.waterSpellColor;
     }
 
     @Override
     public void rain(SpellProjectileEntity entity, Player player) {
         float size = getCloudSize(entity);
 
-        int focusLevel = CrystalUtil.getStatLevel(entity.getStats(), WizardsReborn.FOCUS_CRYSTAL_STAT);
+        int focusLevel = CrystalUtil.getStatLevel(entity.getStats(), WizardsRebornCrystals.FOCUS);
         float magicModifier = ArcaneArmorItem.getPlayerMagicModifier(entity.getSender());
         float chance = (0.1f + ((focusLevel + magicModifier) * 0.025f));
 

@@ -1,9 +1,9 @@
 package mod.maxbogomol.wizards_reborn.common.network.tileentity;
 
-import mod.maxbogomol.fluffy_fur.FluffyFur;
 import mod.maxbogomol.fluffy_fur.client.particle.ParticleBuilder;
 import mod.maxbogomol.fluffy_fur.client.particle.data.ColorParticleData;
 import mod.maxbogomol.fluffy_fur.client.particle.data.GenericParticleData;
+import mod.maxbogomol.fluffy_fur.registry.client.FluffyFurParticles;
 import mod.maxbogomol.wizards_reborn.WizardsReborn;
 import mod.maxbogomol.wizards_reborn.client.config.ClientConfig;
 import mod.maxbogomol.wizards_reborn.client.event.ClientTickHandler;
@@ -49,7 +49,7 @@ public class WissenTranslatorSendEffectPacket {
 
                     for (int i = 0; i < 15; i++) {
                         if (random.nextFloat() < (0.75f * (1f - ((float) wissenCount / ClientConfig.WISSEN_RAYS_LIMIT.get()))) + 0.05f) {
-                            ParticleBuilder.create(FluffyFur.SPARKLE_PARTICLE)
+                            ParticleBuilder.create(FluffyFurParticles.SPARKLE)
                                     .setColorData(ColorParticleData.create(Config.wissenColorR(), Config.wissenColorG(), Config.wissenColorB()).build())
                                     .setTransparencyData(GenericParticleData.create(0.25f, 0).build())
                                     .setScaleData(GenericParticleData.create(0.15f, 0).build())

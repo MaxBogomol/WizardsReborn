@@ -1,15 +1,16 @@
 package mod.maxbogomol.wizards_reborn.common.spell.fog;
 
-import mod.maxbogomol.fluffy_fur.FluffyFur;
 import mod.maxbogomol.fluffy_fur.client.particle.ParticleBuilder;
 import mod.maxbogomol.fluffy_fur.client.particle.data.ColorParticleData;
 import mod.maxbogomol.fluffy_fur.client.particle.data.GenericParticleData;
 import mod.maxbogomol.fluffy_fur.client.particle.data.LightParticleData;
+import mod.maxbogomol.fluffy_fur.registry.client.FluffyFurParticles;
 import mod.maxbogomol.fluffy_fur.util.RenderUtils;
-import mod.maxbogomol.wizards_reborn.WizardsReborn;
 import mod.maxbogomol.wizards_reborn.api.crystal.CrystalUtil;
 import mod.maxbogomol.wizards_reborn.api.spell.Spell;
 import mod.maxbogomol.wizards_reborn.common.entity.SpellProjectileEntity;
+import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornCrystals;
+import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornEntities;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.world.InteractionHand;
@@ -46,7 +47,7 @@ public class FogSpell extends Spell {
             CompoundTag stats = getStats(stack);
 
             Vec3 pos = context.getClickedPos().getCenter();
-            SpellProjectileEntity entity = new SpellProjectileEntity(WizardsReborn.SPELL_PROJECTILE.get(), world).shoot(
+            SpellProjectileEntity entity = new SpellProjectileEntity(WizardsRebornEntities.SPELL_PROJECTILE.get(), world).shoot(
                     pos.x, pos.y + 0.5, pos.z, 0, 0, 0, player.getUUID(), this.getId(), stats
             );
             world.addFreshEntity(entity);
@@ -115,13 +116,13 @@ public class FogSpell extends Spell {
         if (alpha > 1f) alpha = 1f;
         if (alpha < 0f) alpha = 0f;
 
-        int focusLevel = CrystalUtil.getStatLevel(entity.getStats(), WizardsReborn.FOCUS_CRYSTAL_STAT);
+        int focusLevel = CrystalUtil.getStatLevel(entity.getStats(), WizardsRebornCrystals.FOCUS);
         int size = getSize(entity) + (getSize(entity) * focusLevel);
         List<BlockPos> blocks = getBlocks(entity.level(), entity.getOnPos(), (int) (size * alpha), 4, isCircle(entity));
 
         for (BlockPos pos : blocks) {
             if (random.nextFloat() < 0.2f) {
-                ParticleBuilder.create(FluffyFur.SMOKE_PARTICLE)
+                ParticleBuilder.create(FluffyFurParticles.SMOKE)
                         .setColorData(ColorParticleData.create(color).build())
                         .setTransparencyData(GenericParticleData.create(0.45f, 0).build())
                         .setScaleData(GenericParticleData.create(0.5f).build())
@@ -132,7 +133,7 @@ public class FogSpell extends Spell {
                         .spawn(entity.level(), pos.getX() + 0.5f, pos.getY() + 0.1f, pos.getZ() + 0.5f);
             }
             if (random.nextFloat() < 0.4f) {
-                ParticleBuilder.create(FluffyFur.SMOKE_PARTICLE)
+                ParticleBuilder.create(FluffyFurParticles.SMOKE)
                         .setRenderType(RenderUtils.DELAYED_PARTICLE)
                         .setColorData(ColorParticleData.create(color).build())
                         .setTransparencyData(GenericParticleData.create(0.35f, 0).build())

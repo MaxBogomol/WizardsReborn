@@ -1,7 +1,7 @@
 package mod.maxbogomol.wizards_reborn.common.block.arcane_pedestal;
 
 import mod.maxbogomol.fluffy_fur.common.block.entity.ExposedBlockSimpleInventory;
-import mod.maxbogomol.wizards_reborn.WizardsReborn;
+import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornBlockEntities;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.SimpleContainer;
 import net.minecraft.world.level.block.entity.BlockEntityType;
@@ -14,7 +14,7 @@ public class ArcanePedestalBlockEntity extends ExposedBlockSimpleInventory {
     }
 
     public ArcanePedestalBlockEntity(BlockPos pos, BlockState state) {
-        this(WizardsReborn.ARCANE_PEDESTAL_BLOCK_ENTITY.get(), pos, state);
+        this(WizardsRebornBlockEntities.ARCANE_PEDESTAL.get(), pos, state);
     }
 
     @Override

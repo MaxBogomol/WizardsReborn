@@ -4,6 +4,8 @@ import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import mod.maxbogomol.wizards_reborn.WizardsReborn;
+import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornItems;
+import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornRecipes;
 import net.minecraft.core.NonNullList;
 import net.minecraft.core.RegistryAccess;
 import net.minecraft.core.registries.BuiltInRegistries;
@@ -80,7 +82,7 @@ public class JewelerTableRecipe implements Recipe<Container> {
     }
 
     public ItemStack getToastSymbol() {
-        return new ItemStack(WizardsReborn.JEWELER_TABLE_ITEM.get());
+        return new ItemStack(WizardsRebornItems.JEWELER_TABLE.get());
     }
 
     @Override
@@ -90,14 +92,7 @@ public class JewelerTableRecipe implements Recipe<Container> {
 
     @Override
     public RecipeSerializer<?> getSerializer() {
-        return WizardsReborn.JEWELER_TABLE_SERIALIZER.get();
-    }
-
-    public static class JewelerTableRecipeType implements RecipeType<JewelerTableRecipe> {
-        @Override
-        public String toString() {
-            return JewelerTableRecipe.TYPE_ID.toString();
-        }
+        return WizardsRebornRecipes.JEWELER_TABLE_SERIALIZER.get();
     }
 
     public static class Serializer implements RecipeSerializer<JewelerTableRecipe> {

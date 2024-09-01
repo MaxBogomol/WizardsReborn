@@ -1,14 +1,16 @@
 package mod.maxbogomol.wizards_reborn.common.entity;
 
-import mod.maxbogomol.fluffy_fur.FluffyFur;
 import mod.maxbogomol.fluffy_fur.client.particle.ParticleBuilder;
 import mod.maxbogomol.fluffy_fur.client.particle.data.ColorParticleData;
 import mod.maxbogomol.fluffy_fur.client.particle.data.GenericParticleData;
 import mod.maxbogomol.fluffy_fur.common.easing.Easing;
-import mod.maxbogomol.wizards_reborn.WizardsReborn;
-import mod.maxbogomol.wizards_reborn.common.damage.DamageSourceRegistry;
+import mod.maxbogomol.fluffy_fur.registry.client.FluffyFurParticles;
 import mod.maxbogomol.wizards_reborn.common.network.AddScreenshakePacket;
 import mod.maxbogomol.wizards_reborn.common.network.PacketHandler;
+import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornArcaneEnchantments;
+import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornDamage;
+import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornEntities;
+import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornItems;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.ListTag;
 import net.minecraft.nbt.Tag;
@@ -59,16 +61,16 @@ public class ThrowedScytheEntity extends ThrowableItemProjectile {
     public Map<UUID, Integer> damagedEntities = new HashMap<>();
 
     public ThrowedScytheEntity(EntityType<?> entityTypeIn, Level worldIn) {
-        super(WizardsReborn.THROWED_SCYTHE_PROJECTILE.get(), worldIn);
+        super(WizardsRebornEntities.THROWED_SCYTHE_PROJECTILE.get(), worldIn);
         noPhysics = false;
     }
 
     public ThrowedScytheEntity(Level level) {
-        super(WizardsReborn.THROWED_SCYTHE_PROJECTILE.get(), level);
+        super(WizardsRebornEntities.THROWED_SCYTHE_PROJECTILE.get(), level);
     }
 
     public ThrowedScytheEntity(Level level, double pX, double pY, double pZ) {
-        super(WizardsReborn.THROWED_SCYTHE_PROJECTILE.get(), pX, pY, pZ, level);
+        super(WizardsRebornEntities.THROWED_SCYTHE_PROJECTILE.get(), pX, pY, pZ, level);
     }
 
     public void setData(Entity owner, float baseDamage, float magicDamage, int slot, boolean isRight) {
@@ -157,7 +159,7 @@ public class ThrowedScytheEntity extends ThrowableItemProjectile {
 
                 addTrail(new Vec3(position().toVector3f()).add(x, y, z));
 
-                Color color = WizardsReborn.THROW_ARCANE_ENCHANTMENT.getColor();
+                Color color = WizardsRebornArcaneEnchantments.THROW.getColor();
                 float r = color.getRed() / 255f;
                 float g = color.getGreen() / 255f;
                 float b = color.getBlue() / 255f;
@@ -165,7 +167,7 @@ public class ThrowedScytheEntity extends ThrowableItemProjectile {
                 Vec3 pos = new Vec3(getPosition(0.5f).toVector3f()).add(x, y, z);
 
                 if (random.nextFloat() < 0.8f) {
-                    ParticleBuilder.create(FluffyFur.CUBE_PARTICLE)
+                    ParticleBuilder.create(FluffyFurParticles.CUBE)
                             .setColorData(ColorParticleData.create(r, g, b).build())
                             .setTransparencyData(GenericParticleData.create(0.3f, 0).build())
                             .setScaleData(GenericParticleData.create(0.05f, 0).setEasing(Easing.QUINTIC_IN_OUT).build())
@@ -178,7 +180,7 @@ public class ThrowedScytheEntity extends ThrowableItemProjectile {
                 int i = EnchantmentHelper.getItemEnchantmentLevel(Enchantments.FIRE_ASPECT, getItem());
                 if (i > 0) {
                     if (random.nextFloat() < 0.8f) {
-                        ParticleBuilder.create(FluffyFur.CUBE_PARTICLE)
+                        ParticleBuilder.create(FluffyFurParticles.CUBE)
                                 .setColorData(ColorParticleData.create(0.882f, 0.498f, 0.404f, 0.979f, 0.912f, 0.585f).build())
                                 .setTransparencyData(GenericParticleData.create(0.3f, 0).build())
                                 .setScaleData(GenericParticleData.create(0.05f, 0).setEasing(Easing.QUINTIC_IN_OUT).build())
@@ -289,7 +291,7 @@ public class ThrowedScytheEntity extends ThrowableItemProjectile {
             }
         } else {
             if (getSender() != null && distanceTo(getSender()) < 150 && getSender().isAlive()) {
-                Color color = WizardsReborn.THROW_ARCANE_ENCHANTMENT.getColor();
+                Color color = WizardsRebornArcaneEnchantments.THROW.getColor();
                 float r = color.getRed() / 255f;
                 float g = color.getGreen() / 255f;
                 float b = color.getBlue() / 255f;
@@ -309,7 +311,7 @@ public class ThrowedScytheEntity extends ThrowableItemProjectile {
 
                     Vec3 pos = new Vec3(lerpX, lerpY, lerpZ).add(x, y, z);
 
-                    ParticleBuilder.create(FluffyFur.CUBE_PARTICLE)
+                    ParticleBuilder.create(FluffyFurParticles.CUBE)
                             .setColorData(ColorParticleData.create(r, g, b).build())
                             .setTransparencyData(GenericParticleData.create(0.3f, 0).build())
                             .setScaleData(GenericParticleData.create(0.1f, 0).setEasing(Easing.QUINTIC_IN_OUT).build())
@@ -319,7 +321,7 @@ public class ThrowedScytheEntity extends ThrowableItemProjectile {
                             .spawn(level(), pos.x(), pos.y() + 0.1, pos.z());
                 }
 
-                ParticleBuilder.create(FluffyFur.TINY_STAR_PARTICLE)
+                ParticleBuilder.create(FluffyFurParticles.TINY_STAR)
                         .setColorData(ColorParticleData.create(r, g, b).build())
                         .setTransparencyData(GenericParticleData.create(0.3f, 0).build())
                         .setScaleData(GenericParticleData.create(0.4f, 0).setEasing(Easing.SINE_IN_OUT).build())
@@ -328,7 +330,7 @@ public class ThrowedScytheEntity extends ThrowableItemProjectile {
                         .addVelocity(0f, 0.05, 0f)
                         .randomVelocity(0.03f, 0.03f, 0.03f)
                         .repeat(level(), getX(), getY() + 0.1, getZ(), 5);
-                ParticleBuilder.create(FluffyFur.TINY_STAR_PARTICLE)
+                ParticleBuilder.create(FluffyFurParticles.TINY_STAR)
                         .setColorData(ColorParticleData.create(r, g, b).build())
                         .setTransparencyData(GenericParticleData.create(0.3f, 0).build())
                         .setScaleData(GenericParticleData.create(0.4f, 0).setEasing(Easing.SINE_IN_OUT).build())
@@ -355,7 +357,7 @@ public class ThrowedScytheEntity extends ThrowableItemProjectile {
 
                 if (getMagicDamage() > 0) {
                     target.invulnerableTime = 0;
-                    target.hurt(new DamageSource(DamageSourceRegistry.create(target.level(), DamageSourceRegistry.ARCANE_MAGIC).typeHolder(), this, owner), getMagicDamage());
+                    target.hurt(new DamageSource(WizardsRebornDamage.create(target.level(), WizardsRebornDamage.ARCANE_MAGIC).typeHolder(), this, owner), getMagicDamage());
                     target.invulnerableTime = 30;
                 }
 
@@ -366,7 +368,7 @@ public class ThrowedScytheEntity extends ThrowableItemProjectile {
 
     @Override
     protected Item getDefaultItem() {
-        return WizardsReborn.ARCANE_GOLD_SCYTHE.get();
+        return WizardsRebornItems.ARCANE_GOLD_SCYTHE.get();
     }
 
     @Override

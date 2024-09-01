@@ -3,6 +3,7 @@ package mod.maxbogomol.wizards_reborn.client.toast;
 import mod.maxbogomol.wizards_reborn.WizardsReborn;
 import mod.maxbogomol.wizards_reborn.api.knowledge.Knowledge;
 import mod.maxbogomol.wizards_reborn.api.knowledge.Knowledges;
+import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornItems;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.components.toasts.Toast;
 import net.minecraft.client.gui.components.toasts.ToastComponent;
@@ -30,7 +31,7 @@ public class KnowledgeToast implements Toast {
         guiGraphics.blit(TEXTURE, 0, 0, 0, 0, this.width(), this.height(), 256, 32);
 
         if (all) {
-            guiGraphics.renderItem(WizardsReborn.ARCANEMICON.get().getDefaultInstance(), 8, 8);
+            guiGraphics.renderItem(WizardsRebornItems.ARCANEMICON.get().getDefaultInstance(), 8, 8);
         } else if (id.getString() != "") {
             Knowledge knowledge = Knowledges.getKnowledge(id.getString());
             guiGraphics.renderItem(knowledge.getIcon(), 8, 8);

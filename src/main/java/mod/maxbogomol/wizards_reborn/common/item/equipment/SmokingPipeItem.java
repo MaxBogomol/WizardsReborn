@@ -4,11 +4,12 @@ import mod.maxbogomol.fluffy_fur.client.animation.ItemAnimation;
 import mod.maxbogomol.fluffy_fur.common.item.ICustomAnimationItem;
 import mod.maxbogomol.fluffy_fur.common.item.ItemBackedInventory;
 import mod.maxbogomol.fluffy_fur.util.ColorUtil;
-import mod.maxbogomol.wizards_reborn.WizardsReborn;
 import mod.maxbogomol.wizards_reborn.client.animation.SmokingPipeItemAnimation;
 import mod.maxbogomol.wizards_reborn.common.network.PacketHandler;
 import mod.maxbogomol.wizards_reborn.common.network.SmokeEffectPacket;
 import mod.maxbogomol.wizards_reborn.common.recipe.CenserRecipe;
+import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornRecipes;
+import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornSounds;
 import net.minecraft.core.Direction;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
@@ -91,7 +92,7 @@ public class SmokingPipeItem extends Item implements ICustomAnimationItem {
                     SimpleContainer inv = new SimpleContainer(1);
                     for (int i = 0; i < getInventorySize(stack); i++) {
                         inv.setItem(0, getInventory(stack).getItem(i).copy());
-                        Optional<CenserRecipe> recipe = world.getRecipeManager().getRecipeFor(WizardsReborn.CENSER_RECIPE.get(), inv, world);
+                        Optional<CenserRecipe> recipe = world.getRecipeManager().getRecipeFor(WizardsRebornRecipes.CENSER.get(), inv, world);
                         if (recipe.isPresent()) {
                             for (MobEffectInstance effectInstance : recipe.get().getEffects()) {
                                 effects.add(new MobEffectInstance(effectInstance.getEffect(), (int) Math.ceil(effectInstance.getDuration() / 4F), effectInstance.getAmplifier()));
@@ -135,7 +136,7 @@ public class SmokingPipeItem extends Item implements ICustomAnimationItem {
                     Vec3 posSmoke = player.getEyePosition().add(player.getLookAngle().scale(0.75f));
                     Vec3 vel = player.getEyePosition().add(player.getLookAngle().scale(40)).subtract(posSmoke).scale(1.0 / 20).normalize().scale(0.05f);
                     PacketHandler.sendToTracking(world, player.getOnPos(), new SmokeEffectPacket((float) posSmoke.x, (float) posSmoke.y, (float) posSmoke.z, (float) vel.x, (float) vel.y, (float) vel.z, R, G, B));
-                    world.playSound(null, player.getOnPos(), WizardsReborn.STEAM_BURST_SOUND.get(), SoundSource.PLAYERS, 0.1f, 2.0f);
+                    world.playSound(null, player.getOnPos(), WizardsRebornSounds.STEAM_BURST.get(), SoundSource.PLAYERS, 0.1f, 2.0f);
                     player.awardStat(Stats.ITEM_USED.get(this));
                 }
             }
@@ -155,7 +156,7 @@ public class SmokingPipeItem extends Item implements ICustomAnimationItem {
 
             SimpleContainer inv = new SimpleContainer(1);
             inv.setItem(0, offStack);
-            Optional<CenserRecipe> recipe = world.getRecipeManager().getRecipeFor(WizardsReborn.CENSER_RECIPE.get(), inv, world);
+            Optional<CenserRecipe> recipe = world.getRecipeManager().getRecipeFor(WizardsRebornRecipes.CENSER.get(), inv, world);
 
             CompoundTag nbt = stack.getOrCreateTag();
             int invSize = getInventorySize(stack);

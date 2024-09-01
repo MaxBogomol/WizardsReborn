@@ -1,13 +1,14 @@
 package mod.maxbogomol.wizards_reborn.common.spell.ray;
 
-import mod.maxbogomol.wizards_reborn.WizardsReborn;
 import mod.maxbogomol.wizards_reborn.api.crystal.CrystalUtil;
 import mod.maxbogomol.wizards_reborn.api.wissen.WissenItemUtil;
-import mod.maxbogomol.wizards_reborn.common.damage.DamageSourceRegistry;
 import mod.maxbogomol.wizards_reborn.common.entity.SpellProjectileEntity;
 import mod.maxbogomol.wizards_reborn.common.item.equipment.arcane.ArcaneArmorItem;
 import mod.maxbogomol.wizards_reborn.common.network.PacketHandler;
 import mod.maxbogomol.wizards_reborn.common.network.spell.HolyRaySpellEffectPacket;
+import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornCrystals;
+import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornDamage;
+import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornSpells;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
@@ -24,13 +25,13 @@ import java.util.List;
 public class HolyRaySpell extends RaySpell {
     public HolyRaySpell(String id, int points) {
         super(id, points);
-        addCrystalType(WizardsReborn.EARTH_CRYSTAL_TYPE);
-        addCrystalType(WizardsReborn.AIR_CRYSTAL_TYPE);
+        addCrystalType(WizardsRebornCrystals.EARTH);
+        addCrystalType(WizardsRebornCrystals.AIR);
     }
 
     @Override
     public Color getColor() {
-        return WizardsReborn.holySpellColor;
+        return WizardsRebornSpells.holySpellColor;
     }
 
     @Override
@@ -43,12 +44,12 @@ public class HolyRaySpell extends RaySpell {
                     ItemStack stack = player.getItemInHand(player.getUsedItemHand());
                     if (WissenItemUtil.canRemoveWissen(stack, getWissenCostWithStat(projectile.getStats(), player))) {
                         if (target instanceof LivingEntity livingEntity) {
-                            int focusLevel = CrystalUtil.getStatLevel(projectile.getStats(), WizardsReborn.FOCUS_CRYSTAL_STAT);
+                            int focusLevel = CrystalUtil.getStatLevel(projectile.getStats(), WizardsRebornCrystals.FOCUS);
                             float magicModifier = ArcaneArmorItem.getPlayerMagicModifier(player);
                             float damage = (float) (1.0f + (focusLevel * 0.5)) + magicModifier;
                             boolean effect = false;
                             if (livingEntity.isInvertedHealAndHarm()) {
-                                target.hurt(new DamageSource(DamageSourceRegistry.create(target.level(), DamageSourceRegistry.ARCANE_MAGIC).typeHolder(), projectile, player), damage);
+                                target.hurt(new DamageSource(WizardsRebornDamage.create(target.level(), WizardsRebornDamage.ARCANE_MAGIC).typeHolder(), projectile, player), damage);
                                 removeWissen(stack, projectile.getStats(), player);
                                 effect = true;
                             } else {
@@ -71,7 +72,7 @@ public class HolyRaySpell extends RaySpell {
                     }
                 }
             } else {
-                int focusLevel = CrystalUtil.getStatLevel(projectile.getStats(), WizardsReborn.FOCUS_CRYSTAL_STAT);
+                int focusLevel = CrystalUtil.getStatLevel(projectile.getStats(), WizardsRebornCrystals.FOCUS);
                 healAura(world, ray.getLocation(), focusLevel + 1, projectile, player);
             }
         }
@@ -83,7 +84,7 @@ public class HolyRaySpell extends RaySpell {
 
         if (player != null) {
             if (player.isShiftKeyDown()) {
-                int focusLevel = CrystalUtil.getStatLevel(projectile.getStats(), WizardsReborn.FOCUS_CRYSTAL_STAT);
+                int focusLevel = CrystalUtil.getStatLevel(projectile.getStats(), WizardsRebornCrystals.FOCUS);
                 healAura(world, ray.getLocation(), focusLevel + 1, projectile, player);
             }
         }

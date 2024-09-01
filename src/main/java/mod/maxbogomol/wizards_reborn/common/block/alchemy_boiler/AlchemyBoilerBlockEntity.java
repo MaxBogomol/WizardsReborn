@@ -1,7 +1,6 @@
 package mod.maxbogomol.wizards_reborn.common.block.alchemy_boiler;
 
 import mod.maxbogomol.fluffy_fur.common.block.entity.TickableBlockEntity;
-import mod.maxbogomol.wizards_reborn.WizardsReborn;
 import mod.maxbogomol.wizards_reborn.api.alchemy.IFluidBlockEntity;
 import mod.maxbogomol.wizards_reborn.api.alchemy.ISteamBlockEntity;
 import mod.maxbogomol.wizards_reborn.api.alchemy.PipeConnection;
@@ -11,6 +10,8 @@ import mod.maxbogomol.wizards_reborn.api.wissen.IWissenBlockEntity;
 import mod.maxbogomol.wizards_reborn.api.wissen.IWissenWandFunctionalBlockEntity;
 import mod.maxbogomol.wizards_reborn.common.block.alchemy_machine.AlchemyMachineBlockEntity;
 import mod.maxbogomol.wizards_reborn.common.block.pipe.PipeBaseBlockEntity;
+import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornBlockEntities;
+import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornTags;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.nbt.CompoundTag;
@@ -58,7 +59,7 @@ public class AlchemyBoilerBlockEntity extends PipeBaseBlockEntity implements Tic
     }
 
     public AlchemyBoilerBlockEntity(BlockPos pos, BlockState state) {
-        this(WizardsReborn.ALCHEMY_BOILER_BLOCK_ENTITY.get(), pos, state);
+        this(WizardsRebornBlockEntities.ALCHEMY_BOILER.get(), pos, state);
     }
 
     @Override
@@ -107,7 +108,7 @@ public class AlchemyBoilerBlockEntity extends PipeBaseBlockEntity implements Tic
         for (Direction direction : directions) {
             BlockState facingState = level.getBlockState(worldPosition.relative(direction));
             BlockEntity facingBE = level.getBlockEntity(worldPosition.relative(direction));
-            if (facingState.is(WizardsReborn.STEAM_PIPE_CONNECTION_BLOCK_TAG) || facingState.is(WizardsReborn.FLUID_PIPE_CONNECTION_BLOCK_TAG)) {
+            if (facingState.is(WizardsRebornTags.STEAM_PIPE_CONNECTION_BLOCK) || facingState.is(WizardsRebornTags.FLUID_PIPE_CONNECTION_BLOCK)) {
                 if (facingBE instanceof PipeBaseBlockEntity && !((PipeBaseBlockEntity) facingBE).getConnection(direction.getOpposite()).transfer) {
                     connections[direction.get3DDataValue()] = PipeConnection.NONE;
                 } else {

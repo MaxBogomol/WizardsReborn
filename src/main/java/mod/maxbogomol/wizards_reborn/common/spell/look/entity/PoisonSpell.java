@@ -1,10 +1,11 @@
 package mod.maxbogomol.wizards_reborn.common.spell.look.entity;
 
-import mod.maxbogomol.wizards_reborn.WizardsReborn;
 import mod.maxbogomol.wizards_reborn.api.crystal.CrystalUtil;
 import mod.maxbogomol.wizards_reborn.common.item.equipment.arcane.ArcaneArmorItem;
 import mod.maxbogomol.wizards_reborn.common.network.PacketHandler;
 import mod.maxbogomol.wizards_reborn.common.network.spell.PoisonSpellEffectPacket;
+import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornCrystals;
+import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornSpells;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.effect.MobEffectInstance;
@@ -21,13 +22,13 @@ import java.awt.*;
 public class PoisonSpell extends EntityLookSpell {
     public PoisonSpell(String id, int points) {
         super(id, points);
-        addCrystalType(WizardsReborn.EARTH_CRYSTAL_TYPE);
-        addCrystalType(WizardsReborn.WATER_CRYSTAL_TYPE);
+        addCrystalType(WizardsRebornCrystals.EARTH);
+        addCrystalType(WizardsRebornCrystals.WATER);
     }
 
     @Override
     public Color getColor() {
-        return WizardsReborn.poisonSpellColor;
+        return WizardsRebornSpells.poisonSpellColor;
     }
 
     @Override
@@ -49,7 +50,7 @@ public class PoisonSpell extends EntityLookSpell {
     public void lookSpell(Level world, Player player, InteractionHand hand) {
         ItemStack stack = player.getItemInHand(hand);
         CompoundTag stats = getStats(stack);
-        int focusLevel = CrystalUtil.getStatLevel(stats, WizardsReborn.FOCUS_CRYSTAL_STAT);
+        int focusLevel = CrystalUtil.getStatLevel(stats, WizardsRebornCrystals.FOCUS);
         float magicModifier = ArcaneArmorItem.getPlayerMagicModifier(player);
 
         HitResult hit = getEntityHit(world, player, hand);

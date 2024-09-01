@@ -1,10 +1,10 @@
 package mod.maxbogomol.wizards_reborn.common.block;
 
-import mod.maxbogomol.fluffy_fur.FluffyFur;
 import mod.maxbogomol.fluffy_fur.client.particle.ParticleBuilder;
 import mod.maxbogomol.fluffy_fur.client.particle.data.ColorParticleData;
 import mod.maxbogomol.fluffy_fur.client.particle.data.GenericParticleData;
 import mod.maxbogomol.fluffy_fur.common.easing.Easing;
+import mod.maxbogomol.fluffy_fur.registry.client.FluffyFurParticles;
 import net.minecraft.client.particle.ParticleEngine;
 import net.minecraft.core.BlockPos;
 import net.minecraft.util.RandomSource;
@@ -68,7 +68,7 @@ public class ArcaneLumosBlock extends Block {
     public void animateTick(BlockState state, Level world, BlockPos pos, RandomSource random) {
         Color color = getColor(this.color);
 
-        ParticleBuilder.create(FluffyFur.WISP_PARTICLE)
+        ParticleBuilder.create(FluffyFurParticles.WISP)
                 .setColorData(ColorParticleData.create(color).build())
                 .setTransparencyData(GenericParticleData.create(0.5f, 0).build())
                 .setScaleData(GenericParticleData.create(0.3f, 0).build())
@@ -76,7 +76,7 @@ public class ArcaneLumosBlock extends Block {
                 .randomVelocity(0.015f, 0.015f, 0.015f)
                 .spawn(world, pos.getX() + 0.5F, pos.getY() + 0.5F, pos.getZ() + 0.5F);
         if (random.nextFloat() < 0.5) {
-            ParticleBuilder.create(FluffyFur.SPARKLE_PARTICLE)
+            ParticleBuilder.create(FluffyFurParticles.SPARKLE)
                     .setColorData(ColorParticleData.create(color).build())
                     .setTransparencyData(GenericParticleData.create(0.75f, 0).build())
                     .setScaleData(GenericParticleData.create(0.1f, 0).build())
@@ -88,7 +88,7 @@ public class ArcaneLumosBlock extends Block {
 
         if (this.color == Colors.COSMIC) {
             if (random.nextFloat() < 0.3) {
-                ParticleBuilder.create(FluffyFur.STAR_PARTICLE)
+                ParticleBuilder.create(FluffyFurParticles.STAR)
                         .setColorData(ColorParticleData.create(color).build())
                         .setTransparencyData(GenericParticleData.create(0.75f, 0).build())
                         .setScaleData(GenericParticleData.create(0, 0.1f, 0).setEasing(Easing.SINE_IN_OUT).build())
@@ -99,7 +99,7 @@ public class ArcaneLumosBlock extends Block {
                         .spawn(world, pos.getX() + 0.5F, pos.getY() + 0.5F, pos.getZ() + 0.5F);
             }
             if (random.nextFloat() < 0.3) {
-                ParticleBuilder.create(FluffyFur.STAR_PARTICLE)
+                ParticleBuilder.create(FluffyFurParticles.STAR)
                         .setColorData(ColorParticleData.create(Color.WHITE).build())
                         .setTransparencyData(GenericParticleData.create(0.75f, 0).build())
                         .setScaleData(GenericParticleData.create(0, 0.1f, 0).setEasing(Easing.SINE_IN_OUT).build())

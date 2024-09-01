@@ -1,6 +1,7 @@
 package mod.maxbogomol.wizards_reborn.common.spell.block;
 
-import mod.maxbogomol.wizards_reborn.WizardsReborn;
+import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornCrystals;
+import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornSpells;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.item.ItemStack;
@@ -13,12 +14,12 @@ import java.awt.*;
 public class IceBlockSpell extends BlockPlaceSpell {
     public IceBlockSpell(String id, int points) {
         super(id, points);
-        addCrystalType(WizardsReborn.WATER_CRYSTAL_TYPE);
+        addCrystalType(WizardsRebornCrystals.WATER);
     }
 
     @Override
     public Color getColor() {
-        return WizardsReborn.frostSpellColor;
+        return WizardsRebornSpells.frostSpellColor;
     }
 
     @Override

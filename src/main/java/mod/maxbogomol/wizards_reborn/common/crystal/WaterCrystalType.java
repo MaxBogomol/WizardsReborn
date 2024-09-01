@@ -2,6 +2,8 @@ package mod.maxbogomol.wizards_reborn.common.crystal;
 
 import mod.maxbogomol.wizards_reborn.WizardsReborn;
 import mod.maxbogomol.wizards_reborn.api.crystal.CrystalType;
+import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornCrystals;
+import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornItems;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;
 
@@ -13,7 +15,7 @@ public class WaterCrystalType extends CrystalType {
     }
 
     public Color getColor() {
-        return WizardsReborn.waterCrystalColor;
+        return WizardsRebornCrystals.waterCrystalColor;
     }
 
     public ResourceLocation getMiniIcon() {
@@ -25,10 +27,10 @@ public class WaterCrystalType extends CrystalType {
     }
 
     public ItemStack getFracturedCrystal() {
-        return WizardsReborn.FRACTURED_WATER_CRYSTAL.get().getDefaultInstance();
+        return WizardsRebornItems.FRACTURED_WATER_CRYSTAL.get().getDefaultInstance();
     }
 
     public ItemStack getCrystal() {
-        return WizardsReborn.WATER_CRYSTAL.get().getDefaultInstance();
+        return WizardsRebornItems.WATER_CRYSTAL.get().getDefaultInstance();
     }
 }

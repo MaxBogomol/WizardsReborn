@@ -5,6 +5,8 @@ import mod.maxbogomol.wizards_reborn.api.crystalritual.CrystalRitual;
 import mod.maxbogomol.wizards_reborn.api.crystalritual.CrystalRitualUtil;
 import mod.maxbogomol.wizards_reborn.client.arcanemicon.ArcanemiconGui;
 import mod.maxbogomol.wizards_reborn.common.recipe.CrystalRitualRecipe;
+import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornItems;
+import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornRecipes;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.multiplayer.ClientLevel;
@@ -35,7 +37,7 @@ public class CrystalRitualPage extends RecipePage {
         double angleBetweenEach = 360.0 / (inputs.length);
         Vec2 point = new Vec2(56, 22), center = new Vec2(56, 57);
 
-        ItemStack item = new ItemStack(WizardsReborn.RUNIC_WISESTONE_PLATE.get());
+        ItemStack item = new ItemStack(WizardsRebornItems.RUNIC_WISESTONE_PLATE.get());
         CrystalRitualUtil.setCrystalRitual(item, crystalRitual);
         drawItem(book, gui, item,x + 56, y + 56, mouseX, mouseY);
 
@@ -66,7 +68,7 @@ public class CrystalRitualPage extends RecipePage {
                 inv.setItem(i, inputs[i]);
             }
 
-            Optional<CrystalRitualRecipe> recipe = level.getRecipeManager().getRecipeFor(WizardsReborn.CRYSTAL_RITUAL_RECIPE.get(), inv, level);
+            Optional<CrystalRitualRecipe> recipe = level.getRecipeManager().getRecipeFor(WizardsRebornRecipes.CRYSTAL_RITUAL.get(), inv, level);
             return !recipe.isPresent();
         }
 

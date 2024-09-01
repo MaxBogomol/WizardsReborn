@@ -3,6 +3,7 @@ package mod.maxbogomol.wizards_reborn.client.arcanemicon.recipe;
 import mod.maxbogomol.wizards_reborn.WizardsReborn;
 import mod.maxbogomol.wizards_reborn.client.arcanemicon.ArcanemiconGui;
 import mod.maxbogomol.wizards_reborn.common.recipe.WissenAltarRecipe;
+import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornRecipes;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.multiplayer.ClientLevel;
@@ -39,7 +40,7 @@ public class WissenAltarPage extends RecipePage {
             SimpleContainer inv = new SimpleContainer(1);
             inv.setItem(0, input);
 
-            Optional<WissenAltarRecipe> recipe = level.getRecipeManager().getRecipeFor(WizardsReborn.WISSEN_ALTAR_RECIPE.get(), inv, level);
+            Optional<WissenAltarRecipe> recipe = level.getRecipeManager().getRecipeFor(WizardsRebornRecipes.WISSEN_ALTAR.get(), inv, level);
             return !recipe.isPresent();
         }
 

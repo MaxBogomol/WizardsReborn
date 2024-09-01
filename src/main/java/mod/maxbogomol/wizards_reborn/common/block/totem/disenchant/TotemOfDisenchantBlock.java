@@ -1,10 +1,10 @@
 package mod.maxbogomol.wizards_reborn.common.block.totem.disenchant;
 
 import mod.maxbogomol.fluffy_fur.common.block.entity.TickableBlockEntity;
-import mod.maxbogomol.wizards_reborn.WizardsReborn;
 import mod.maxbogomol.wizards_reborn.api.wissen.ITotemBlock;
 import mod.maxbogomol.wizards_reborn.client.gui.container.TotemOfDisenchantContainer;
 import mod.maxbogomol.wizards_reborn.common.item.equipment.WissenWandItem;
+import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornBlocks;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.network.chat.Component;
@@ -158,7 +158,7 @@ public class TotemOfDisenchantBlock extends Block implements EntityBlock, Simple
     public boolean canSurvive(BlockState state, LevelReader level, BlockPos pos) {
         BlockPos blockpos = pos.below();
         BlockState blockstate = level.getBlockState(blockpos);
-        if (blockstate.getBlock() == WizardsReborn.ARCANE_PEDESTAL.get() || blockstate.getBlock() == WizardsReborn.TOTEM_BASE.get()) {
+        if (blockstate.getBlock() == WizardsRebornBlocks.ARCANE_PEDESTAL.get() || blockstate.getBlock() == WizardsRebornBlocks.TOTEM_BASE.get()) {
             return true;
         }
 
@@ -167,8 +167,8 @@ public class TotemOfDisenchantBlock extends Block implements EntityBlock, Simple
 
     @Override
     public void setPlacedBy(Level level, BlockPos pos, BlockState state, @Nullable LivingEntity placer, ItemStack stack) {
-        if (level.getBlockState(pos.below()).getBlock() == WizardsReborn.ARCANE_PEDESTAL.get()) {
-            level.setBlockAndUpdate(pos.below(), WizardsReborn.TOTEM_BASE.get().defaultBlockState());
+        if (level.getBlockState(pos.below()).getBlock() == WizardsRebornBlocks.ARCANE_PEDESTAL.get()) {
+            level.setBlockAndUpdate(pos.below(), WizardsRebornBlocks.TOTEM_BASE.get().defaultBlockState());
         }
     }
 

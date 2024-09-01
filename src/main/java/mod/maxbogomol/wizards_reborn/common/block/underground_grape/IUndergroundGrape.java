@@ -1,6 +1,6 @@
 package mod.maxbogomol.wizards_reborn.common.block.underground_grape;
 
-import mod.maxbogomol.wizards_reborn.WizardsReborn;
+import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornItems;
 import net.minecraft.core.BlockPos;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
@@ -23,7 +23,7 @@ public interface IUndergroundGrape {
 
     static InteractionResult use(@Nullable Entity pEntity, BlockState pState, Level pLevel, BlockPos pPos) {
         if (pState.getValue(BERRIES)) {
-            Block.popResource(pLevel, pPos, new ItemStack(WizardsReborn.UNDERGROUND_GRAPE.get(), 1));
+            Block.popResource(pLevel, pPos, new ItemStack(WizardsRebornItems.UNDERGROUND_GRAPE.get(), 1));
             float f = Mth.randomBetween(pLevel.random, 0.8F, 1.2F);
             pLevel.playSound((Player)null, pPos, SoundEvents.CAVE_VINES_PICK_BERRIES, SoundSource.BLOCKS, 1.0F, f);
             BlockState blockstate = pState.setValue(BERRIES, Boolean.valueOf(false));

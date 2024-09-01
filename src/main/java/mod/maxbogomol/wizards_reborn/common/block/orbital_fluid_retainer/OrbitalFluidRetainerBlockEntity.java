@@ -1,10 +1,11 @@
 package mod.maxbogomol.wizards_reborn.common.block.orbital_fluid_retainer;
 
 import mod.maxbogomol.fluffy_fur.common.block.entity.TickableBlockEntity;
-import mod.maxbogomol.wizards_reborn.WizardsReborn;
 import mod.maxbogomol.wizards_reborn.api.alchemy.IFluidBlockEntity;
 import mod.maxbogomol.wizards_reborn.api.alchemy.PipeConnection;
 import mod.maxbogomol.wizards_reborn.common.block.pipe.PipeBaseBlockEntity;
+import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornBlockEntities;
+import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornTags;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.nbt.CompoundTag;
@@ -49,7 +50,7 @@ public class OrbitalFluidRetainerBlockEntity extends PipeBaseBlockEntity impleme
     }
 
     public OrbitalFluidRetainerBlockEntity(BlockPos pos, BlockState state) {
-        this(WizardsReborn.ORBITAL_FLUID_RETAINER_BLOCK_ENTITY.get(), pos, state);
+        this(WizardsRebornBlockEntities.ORBITAL_FLUID_RETAINER.get(), pos, state);
     }
 
     @Override
@@ -104,7 +105,7 @@ public class OrbitalFluidRetainerBlockEntity extends PipeBaseBlockEntity impleme
         for (Direction direction : directions) {
             BlockState facingState = level.getBlockState(worldPosition.relative(direction));
             BlockEntity facingBE = level.getBlockEntity(worldPosition.relative(direction));
-            if (facingState.is(WizardsReborn.FLUID_PIPE_CONNECTION_BLOCK_TAG)) {
+            if (facingState.is(WizardsRebornTags.FLUID_PIPE_CONNECTION_BLOCK)) {
                 if (facingBE instanceof PipeBaseBlockEntity && !((PipeBaseBlockEntity) facingBE).getConnection(direction.getOpposite()).transfer) {
                     connections[direction.get3DDataValue()] = PipeConnection.NONE;
                 } else {

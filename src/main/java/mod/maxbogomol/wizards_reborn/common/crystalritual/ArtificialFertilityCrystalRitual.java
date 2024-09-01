@@ -1,12 +1,12 @@
 package mod.maxbogomol.wizards_reborn.common.crystalritual;
 
-import mod.maxbogomol.wizards_reborn.WizardsReborn;
 import mod.maxbogomol.wizards_reborn.api.crystal.CrystalType;
 import mod.maxbogomol.wizards_reborn.api.crystalritual.CrystalRitual;
 import mod.maxbogomol.wizards_reborn.api.crystalritual.CrystalRitualArea;
+import mod.maxbogomol.wizards_reborn.common.block.crystal.CrystalBlockEntity;
 import mod.maxbogomol.wizards_reborn.common.network.PacketHandler;
 import mod.maxbogomol.wizards_reborn.common.network.spell.MagicSproutSpellEffectPacket;
-import mod.maxbogomol.wizards_reborn.common.block.crystal.CrystalBlockEntity;
+import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornCrystals;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.sounds.SoundEvents;
@@ -40,8 +40,8 @@ public class ArtificialFertilityCrystalRitual extends CrystalRitual {
     @Override
     public List<CrystalType> getCrystalsList() {
         List<CrystalType> list = new ArrayList<>();
-        list.add(WizardsReborn.EARTH_CRYSTAL_TYPE);
-        list.add(WizardsReborn.WATER_CRYSTAL_TYPE);
+        list.add(WizardsRebornCrystals.EARTH);
+        list.add(WizardsRebornCrystals.WATER);
 
         return list;
     }

@@ -13,6 +13,9 @@ import mod.maxbogomol.wizards_reborn.common.item.CrystalItem;
 import mod.maxbogomol.wizards_reborn.common.network.PacketHandler;
 import mod.maxbogomol.wizards_reborn.common.network.crystalritual.CrystalRitualBurstEffectPacket;
 import mod.maxbogomol.wizards_reborn.common.recipe.CrystalRitualRecipe;
+import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornCrystals;
+import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornRecipes;
+import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornSounds;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
@@ -96,7 +99,7 @@ public class CrystalRitual {
     }
 
     public int getMaxRitualCooldown(int cooldown, ItemStack item) {
-        int resonanceLevel = CrystalItem.getStatLevel(item, WizardsReborn.RESONANCE_CRYSTAL_STAT);
+        int resonanceLevel = CrystalItem.getStatLevel(item, WizardsRebornCrystals.RESONANCE);
         return (int) (cooldown * (1 - (getCooldownStatModifier() * resonanceLevel)));
     }
 
@@ -281,7 +284,7 @@ public class CrystalRitual {
             inv.setItem(i, items.get(i));
         }
 
-        Optional<CrystalRitualRecipe> recipe = level.getRecipeManager().getRecipeFor(WizardsReborn.CRYSTAL_RITUAL_RECIPE.get(), inv, level);
+        Optional<CrystalRitualRecipe> recipe = level.getRecipeManager().getRecipeFor(WizardsRebornRecipes.CRYSTAL_RITUAL.get(), inv, level);
         if (recipe.isPresent()) {
             return (recipe.get().getRecipeRitual() == this);
         }
@@ -300,7 +303,7 @@ public class CrystalRitual {
                 BlockEntityUpdate.packet(pedestals.get(i));
 
                 if (hasSound) {
-                    level.playSound(WizardsReborn.proxy.getPlayer(), pedestals.get(i).getBlockPos(), WizardsReborn.WISSEN_TRANSFER_SOUND.get(), SoundSource.BLOCKS, 0.25f, (float) (1f + ((random.nextFloat() - 0.5D) / 4)));
+                    level.playSound(WizardsReborn.proxy.getPlayer(), pedestals.get(i).getBlockPos(), WizardsRebornSounds.WISSEN_TRANSFER.get(), SoundSource.BLOCKS, 0.25f, (float) (1f + ((random.nextFloat() - 0.5D) / 4)));
                 }
 
                 if (hasEffect) {

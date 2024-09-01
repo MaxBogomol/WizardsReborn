@@ -5,14 +5,17 @@ import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonSyntaxException;
 import mod.maxbogomol.wizards_reborn.WizardsReborn;
+import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornItems;
+import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornRecipes;
+import net.minecraft.core.NonNullList;
 import net.minecraft.core.RegistryAccess;
 import net.minecraft.core.registries.BuiltInRegistries;
+import net.minecraft.network.FriendlyByteBuf;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.util.GsonHelper;
 import net.minecraft.world.Container;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.network.FriendlyByteBuf;
-import net.minecraft.util.GsonHelper;
-import net.minecraft.core.NonNullList;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.item.crafting.*;
 import net.minecraft.world.level.Level;
 
 import javax.annotation.Nonnull;
@@ -20,12 +23,6 @@ import javax.annotation.Nullable;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
-import net.minecraft.world.item.crafting.Ingredient;
-import net.minecraft.world.item.crafting.Recipe;
-import net.minecraft.world.item.crafting.RecipeSerializer;
-import net.minecraft.world.item.crafting.RecipeType;
-import net.minecraft.world.item.crafting.ShapedRecipe;
 
 public class ArcaneWorkbenchRecipe implements Recipe<Container> {
     public static ResourceLocation TYPE_ID = new ResourceLocation(WizardsReborn.MOD_ID, "arcane_workbench");
@@ -87,7 +84,7 @@ public class ArcaneWorkbenchRecipe implements Recipe<Container> {
     }
 
     public ItemStack getToastSymbol() {
-        return new ItemStack(WizardsReborn.ARCANE_WORKBENCH_ITEM.get());
+        return new ItemStack(WizardsRebornItems.ARCANE_WORKBENCH.get());
     }
 
     @Override
@@ -97,14 +94,7 @@ public class ArcaneWorkbenchRecipe implements Recipe<Container> {
 
     @Override
     public RecipeSerializer<?> getSerializer() {
-        return WizardsReborn.ARCANE_WORKBENCH_SERIALIZER.get();
-    }
-
-    public static class ArcaneWorkbenchRecipeType implements RecipeType<ArcaneWorkbenchRecipe> {
-        @Override
-        public String toString() {
-            return ArcaneWorkbenchRecipe.TYPE_ID.toString();
-        }
+        return WizardsRebornRecipes.ARCANE_WORKBENCH_SERIALIZER.get();
     }
 
     public static class Serializer implements RecipeSerializer<ArcaneWorkbenchRecipe> {

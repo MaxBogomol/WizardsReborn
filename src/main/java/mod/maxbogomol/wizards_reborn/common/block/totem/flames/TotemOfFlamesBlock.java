@@ -3,9 +3,11 @@ package mod.maxbogomol.wizards_reborn.common.block.totem.flames;
 import mod.maxbogomol.fluffy_fur.common.block.entity.BlockSimpleInventory;
 import mod.maxbogomol.fluffy_fur.common.block.entity.TickableBlockEntity;
 import mod.maxbogomol.fluffy_fur.common.network.BlockEntityUpdate;
-import mod.maxbogomol.wizards_reborn.WizardsReborn;
 import mod.maxbogomol.wizards_reborn.api.wissen.ITotemBlock;
 import mod.maxbogomol.wizards_reborn.common.item.equipment.WissenWandItem;
+import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornBlocks;
+import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornSounds;
+import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornTags;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.sounds.SoundSource;
@@ -103,21 +105,21 @@ public class TotemOfFlamesBlock extends Block implements EntityBlock, SimpleWate
         }
 
         if ((!stack.isEmpty()) && (tile.getItemHandler().getItem(0).isEmpty())) {
-            if (stack.is(WizardsReborn.ARCANE_LUMOS_ITEM_TAG)) {
+            if (stack.is(WizardsRebornTags.ARCANE_LUMOS_ITEM)) {
                 if (stack.getCount() > 1) {
                     player.getItemInHand(hand).setCount(stack.getCount() - 1);
                     stack.setCount(1);
                     tile.getItemHandler().setItem(0, stack);
                     world.updateNeighbourForOutputSignal(pos, this);
                     BlockEntityUpdate.packet(tile);
-                    world.playSound(null, pos, WizardsReborn.PEDESTAL_INSERT_SOUND.get(), SoundSource.BLOCKS, 1.0f, 1.0f);
+                    world.playSound(null, pos, WizardsRebornSounds.PEDESTAL_INSERT.get(), SoundSource.BLOCKS, 1.0f, 1.0f);
                     return InteractionResult.SUCCESS;
                 } else {
                     tile.getItemHandler().setItem(0, stack);
                     player.getInventory().removeItem(player.getItemInHand(hand));
                     world.updateNeighbourForOutputSignal(pos, this);
                     BlockEntityUpdate.packet(tile);
-                    world.playSound(null, pos, WizardsReborn.PEDESTAL_INSERT_SOUND.get(), SoundSource.BLOCKS, 1.0f, 1.0f);
+                    world.playSound(null, pos, WizardsRebornSounds.PEDESTAL_INSERT.get(), SoundSource.BLOCKS, 1.0f, 1.0f);
                     return InteractionResult.SUCCESS;
                 }
             }
@@ -132,7 +134,7 @@ public class TotemOfFlamesBlock extends Block implements EntityBlock, SimpleWate
             tile.getItemHandler().removeItem(0, 1);
             world.updateNeighbourForOutputSignal(pos, this);
             BlockEntityUpdate.packet(tile);
-            world.playSound(null, pos, WizardsReborn.PEDESTAL_REMOVE_SOUND.get(), SoundSource.BLOCKS, 1.0f, 1.0f);
+            world.playSound(null, pos, WizardsRebornSounds.PEDESTAL_REMOVE.get(), SoundSource.BLOCKS, 1.0f, 1.0f);
             return InteractionResult.SUCCESS;
         }
 
@@ -162,7 +164,7 @@ public class TotemOfFlamesBlock extends Block implements EntityBlock, SimpleWate
     public boolean canSurvive(BlockState state, LevelReader level, BlockPos pos) {
         BlockPos blockpos = pos.below();
         BlockState blockstate = level.getBlockState(blockpos);
-        if (blockstate.getBlock() == WizardsReborn.ARCANE_PEDESTAL.get() || blockstate.getBlock() == WizardsReborn.TOTEM_BASE.get()) {
+        if (blockstate.getBlock() == WizardsRebornBlocks.ARCANE_PEDESTAL.get() || blockstate.getBlock() == WizardsRebornBlocks.TOTEM_BASE.get()) {
             return true;
         }
 
@@ -171,8 +173,8 @@ public class TotemOfFlamesBlock extends Block implements EntityBlock, SimpleWate
 
     @Override
     public void setPlacedBy(Level level, BlockPos pos, BlockState state, @Nullable LivingEntity placer, ItemStack stack) {
-        if (level.getBlockState(pos.below()).getBlock() == WizardsReborn.ARCANE_PEDESTAL.get()) {
-            level.setBlockAndUpdate(pos.below(), WizardsReborn.TOTEM_BASE.get().defaultBlockState());
+        if (level.getBlockState(pos.below()).getBlock() == WizardsRebornBlocks.ARCANE_PEDESTAL.get()) {
+            level.setBlockAndUpdate(pos.below(), WizardsRebornBlocks.TOTEM_BASE.get().defaultBlockState());
         }
     }
 

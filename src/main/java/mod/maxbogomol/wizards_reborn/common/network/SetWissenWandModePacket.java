@@ -2,6 +2,7 @@ package mod.maxbogomol.wizards_reborn.common.network;
 
 import mod.maxbogomol.wizards_reborn.WizardsReborn;
 import mod.maxbogomol.wizards_reborn.common.item.equipment.WissenWandItem;
+import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornSounds;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundSource;
@@ -47,7 +48,7 @@ public class SetWissenWandModePacket {
                 }
 
                 player.awardStat(Stats.ITEM_USED.get(stack.getItem()));
-                player.serverLevel().playSound(WizardsReborn.proxy.getPlayer(), player.blockPosition(), WizardsReborn.CRYSTAL_RESONATE_SOUND.get(), SoundSource.PLAYERS, 1.0f, 1.2f);
+                player.serverLevel().playSound(WizardsReborn.proxy.getPlayer(), player.blockPosition(), WizardsRebornSounds.CRYSTAL_RESONATE.get(), SoundSource.PLAYERS, 1.0f, 1.2f);
             });
         }
         ctx.get().setPacketHandled(true);

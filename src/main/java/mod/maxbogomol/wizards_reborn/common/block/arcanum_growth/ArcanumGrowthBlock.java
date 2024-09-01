@@ -1,10 +1,10 @@
 package mod.maxbogomol.wizards_reborn.common.block.arcanum_growth;
 
-import mod.maxbogomol.fluffy_fur.FluffyFur;
 import mod.maxbogomol.fluffy_fur.client.particle.ParticleBuilder;
 import mod.maxbogomol.fluffy_fur.client.particle.data.ColorParticleData;
 import mod.maxbogomol.fluffy_fur.client.particle.data.GenericParticleData;
 import mod.maxbogomol.fluffy_fur.common.block.entity.TickableBlockEntity;
+import mod.maxbogomol.fluffy_fur.registry.client.FluffyFurParticles;
 import mod.maxbogomol.wizards_reborn.api.crystalritual.IGrowableCrystal;
 import mod.maxbogomol.wizards_reborn.common.config.Config;
 import net.minecraft.core.BlockPos;
@@ -200,7 +200,7 @@ public class ArcanumGrowthBlock extends Block implements EntityBlock, SimpleWate
         if (world.getBlockEntity(pos) instanceof IGrowableCrystal growable) {
             if (growable.getGrowingPower() > 0) {
                 if (random.nextFloat() < 0.1f * growable.getGrowingPower()) {
-                    ParticleBuilder.create(FluffyFur.SPARKLE_PARTICLE)
+                    ParticleBuilder.create(FluffyFurParticles.SPARKLE)
                             .setColorData(ColorParticleData.create(Config.wissenColorR(), Config.wissenColorG(), Config.wissenColorB()).build())
                             .setTransparencyData(GenericParticleData.create(0.5f, 0).build())
                             .setScaleData(GenericParticleData.create(0.1f, 0).build())
@@ -219,7 +219,7 @@ public class ArcanumGrowthBlock extends Block implements EntityBlock, SimpleWate
         if (world.isClientSide()) {
             if (!player.isCreative()) {
                 for (int i = 0; i < (5 * (getAge(state) + 1)); i++) {
-                    ParticleBuilder.create(FluffyFur.SPARKLE_PARTICLE)
+                    ParticleBuilder.create(FluffyFurParticles.SPARKLE)
                             .setColorData(ColorParticleData.create(Config.wissenColorR(), Config.wissenColorG(), Config.wissenColorB()).build())
                             .setTransparencyData(GenericParticleData.create(0.25f, 0).build())
                             .setScaleData(GenericParticleData.create(0.35f, 0).build())

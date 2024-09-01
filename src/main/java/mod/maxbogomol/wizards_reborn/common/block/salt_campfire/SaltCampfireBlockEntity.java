@@ -1,6 +1,5 @@
 package mod.maxbogomol.wizards_reborn.common.block.salt_campfire;
 
-import mod.maxbogomol.fluffy_fur.FluffyFur;
 import mod.maxbogomol.fluffy_fur.client.particle.ParticleBuilder;
 import mod.maxbogomol.fluffy_fur.client.particle.data.ColorParticleData;
 import mod.maxbogomol.fluffy_fur.client.particle.data.GenericParticleData;
@@ -9,9 +8,11 @@ import mod.maxbogomol.fluffy_fur.common.block.entity.ExposedBlockSimpleInventory
 import mod.maxbogomol.fluffy_fur.common.block.entity.TickableBlockEntity;
 import mod.maxbogomol.fluffy_fur.common.easing.Easing;
 import mod.maxbogomol.fluffy_fur.common.network.BlockEntityUpdate;
+import mod.maxbogomol.fluffy_fur.registry.client.FluffyFurParticles;
 import mod.maxbogomol.fluffy_fur.util.RenderUtils;
-import mod.maxbogomol.wizards_reborn.WizardsReborn;
 import mod.maxbogomol.wizards_reborn.common.block.ArcaneLumosBlock;
+import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornBlockEntities;
+import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornTags;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.NonNullList;
@@ -56,7 +57,7 @@ public class SaltCampfireBlockEntity extends ExposedBlockSimpleInventory impleme
     }
 
     public SaltCampfireBlockEntity(BlockPos pos, BlockState state) {
-        this(WizardsReborn.SALT_CAMPFIRE_BLOCK_ENTITY.get(), pos, state);
+        this(WizardsRebornBlockEntities.SALT_CAMPFIRE.get(), pos, state);
     }
 
     @Override
@@ -99,7 +100,7 @@ public class SaltCampfireBlockEntity extends ExposedBlockSimpleInventory impleme
             }
 
             if (random.nextFloat() < 0.5) {
-                ParticleBuilder.create(FluffyFur.SPARKLE_PARTICLE)
+                ParticleBuilder.create(FluffyFurParticles.SPARKLE)
                         .setColorData(ColorParticleData.create(colorF, color).build())
                         .setTransparencyData(GenericParticleData.create(0.25f, 0).build())
                         .setScaleData(GenericParticleData.create(0.55f, 0).setEasing(Easing.CUBIC_IN_OUT).build())
@@ -108,7 +109,7 @@ public class SaltCampfireBlockEntity extends ExposedBlockSimpleInventory impleme
                         .spawn(level, worldPosition.getX() + pos.x(), worldPosition.getY() + pos.y(), worldPosition.getZ() + pos.z());
             }
             if (random.nextFloat() < 0.45) {
-                ParticleBuilder.create(random.nextFloat() < 0.3 ? FluffyFur.TINY_STAR_PARTICLE : FluffyFur.SPARKLE_PARTICLE)
+                ParticleBuilder.create(random.nextFloat() < 0.3 ? FluffyFurParticles.TINY_STAR : FluffyFurParticles.SPARKLE)
                         .setColorData(ColorParticleData.create(colorF, color).build())
                         .setTransparencyData(GenericParticleData.create(0.35f, 0).build())
                         .setScaleData(GenericParticleData.create(0.45f, 0).setEasing(Easing.SINE_IN_OUT).build())
@@ -119,7 +120,7 @@ public class SaltCampfireBlockEntity extends ExposedBlockSimpleInventory impleme
                         .spawn(level, worldPosition.getX() + pos.x(), worldPosition.getY() + pos.y(), worldPosition.getZ() + pos.z());
             }
             if (random.nextFloat() < 0.45) {
-                ParticleBuilder.create(FluffyFur.TINY_WISP_PARTICLE)
+                ParticleBuilder.create(FluffyFurParticles.TINY_WISP)
                         .setColorData(ColorParticleData.create(colorF, color).build())
                         .setTransparencyData(GenericParticleData.create(0.35f, 0).build())
                         .setScaleData(GenericParticleData.create(0.35f, 0).setEasing(Easing.SINE_OUT).build())
@@ -129,7 +130,7 @@ public class SaltCampfireBlockEntity extends ExposedBlockSimpleInventory impleme
                         .spawn(level, worldPosition.getX() + pos.x(), worldPosition.getY() + pos.y(), worldPosition.getZ() + pos.z());
             }
             if (random.nextFloat() < 0.3) {
-                ParticleBuilder.create(FluffyFur.SMOKE_PARTICLE)
+                ParticleBuilder.create(FluffyFurParticles.SMOKE)
                         .setRenderType(RenderUtils.DELAYED_PARTICLE)
                         .setColorData(ColorParticleData.create(Color.BLACK).build())
                         .setTransparencyData(GenericParticleData.create(0.4f, 0).build())
@@ -144,7 +145,7 @@ public class SaltCampfireBlockEntity extends ExposedBlockSimpleInventory impleme
 
             if (isCosmic) {
                 if (random.nextFloat() < 0.1) {
-                    ParticleBuilder.create(FluffyFur.STAR_PARTICLE)
+                    ParticleBuilder.create(FluffyFurParticles.STAR)
                             .setColorData(ColorParticleData.create(color).build())
                             .setTransparencyData(GenericParticleData.create(0.75f, 0).build())
                             .setScaleData(GenericParticleData.create(0, 0.1f, 0).setEasing(Easing.SINE_IN_OUT).build())
@@ -156,7 +157,7 @@ public class SaltCampfireBlockEntity extends ExposedBlockSimpleInventory impleme
                             .spawn(level, worldPosition.getX() + pos.x(), worldPosition.getY() + pos.y() + 0.1f, worldPosition.getZ() + pos.z());
                 }
                 if (random.nextFloat() < 0.1) {
-                    ParticleBuilder.create(FluffyFur.STAR_PARTICLE)
+                    ParticleBuilder.create(FluffyFurParticles.STAR)
                             .setColorData(ColorParticleData.create(Color.WHITE).build())
                             .setTransparencyData(GenericParticleData.create(0.75f, 0).build())
                             .setScaleData(GenericParticleData.create(0, 0.1f, 0).setEasing(Easing.SINE_IN_OUT).build())
@@ -190,7 +191,7 @@ public class SaltCampfireBlockEntity extends ExposedBlockSimpleInventory impleme
                     pos = pos.add(X, Y, Z);
 
                     if (random.nextFloat() < 0.1) {
-                        ParticleBuilder.create(FluffyFur.SMOKE_PARTICLE)
+                        ParticleBuilder.create(FluffyFurParticles.SMOKE)
                                 .setRenderType(RenderUtils.DELAYED_PARTICLE)
                                 .setColorData(ColorParticleData.create(Color.BLACK).build())
                                 .setTransparencyData(GenericParticleData.create(0.4f, 0).build())
@@ -225,7 +226,7 @@ public class SaltCampfireBlockEntity extends ExposedBlockSimpleInventory impleme
 
     @Override
     public boolean canPlaceItemThroughFace(int index, @NotNull ItemStack stack, @Nullable Direction direction) {
-        if (stack.is(WizardsReborn.ARCANE_LUMOS_ITEM_TAG)) {
+        if (stack.is(WizardsRebornTags.ARCANE_LUMOS_ITEM)) {
             return true;
         }
 

@@ -1,7 +1,8 @@
 package mod.maxbogomol.wizards_reborn.common.block.baulk;
 
 import mod.maxbogomol.fluffy_fur.common.block.entity.TickableBlockEntity;
-import mod.maxbogomol.wizards_reborn.WizardsReborn;
+import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornBlockEntities;
+import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornTags;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.tags.TagKey;
@@ -21,12 +22,12 @@ public class CrossBaulkBlock extends CrossBaulkBaseBlock {
 
     @Override
     public TagKey<Block> getConnectionTag() {
-        return WizardsReborn.FLUID_PIPE_CONNECTION_BLOCK_TAG;
+        return WizardsRebornTags.FLUID_PIPE_CONNECTION_BLOCK;
     }
 
     @Override
     public TagKey<Block> getToggleConnectionTag() {
-        return WizardsReborn.FLUID_PIPE_CONNECTION_BLOCK_TAG;
+        return WizardsRebornTags.FLUID_PIPE_CONNECTION_BLOCK;
     }
 
     @Override
@@ -46,7 +47,7 @@ public class CrossBaulkBlock extends CrossBaulkBaseBlock {
 
     @Override
     public BlockEntity newBlockEntity(BlockPos pPos, BlockState pState) {
-        return WizardsReborn.CROSS_BAULK_BLOCK_ENTITY.get().create(pPos, pState);
+        return WizardsRebornBlockEntities.CROSS_BAULK.get().create(pPos, pState);
     }
 
     @Override

@@ -1,12 +1,11 @@
 package mod.maxbogomol.wizards_reborn.common.block.steam_pipe;
 
-import mod.maxbogomol.fluffy_fur.FluffyFur;
 import mod.maxbogomol.fluffy_fur.client.particle.ParticleBuilder;
 import mod.maxbogomol.fluffy_fur.client.particle.data.ColorParticleData;
 import mod.maxbogomol.fluffy_fur.client.particle.data.GenericParticleData;
 import mod.maxbogomol.fluffy_fur.common.block.entity.TickableBlockEntity;
 import mod.maxbogomol.fluffy_fur.common.network.BlockEntityUpdate;
-import mod.maxbogomol.wizards_reborn.WizardsReborn;
+import mod.maxbogomol.fluffy_fur.registry.client.FluffyFurParticles;
 import mod.maxbogomol.wizards_reborn.api.alchemy.ISteamBlockEntity;
 import mod.maxbogomol.wizards_reborn.api.alchemy.ISteamPipePriority;
 import mod.maxbogomol.wizards_reborn.api.alchemy.PipePriorityMap;
@@ -14,6 +13,7 @@ import mod.maxbogomol.wizards_reborn.api.alchemy.SteamUtil;
 import mod.maxbogomol.wizards_reborn.api.wissen.WissenUtils;
 import mod.maxbogomol.wizards_reborn.common.block.pipe.PipeBaseBlockEntity;
 import mod.maxbogomol.wizards_reborn.common.item.equipment.WissenWandItem;
+import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornSounds;
 import net.minecraft.client.Minecraft;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -149,7 +149,7 @@ public abstract class SteamPipeBaseBlockEntity extends PipeBaseBlockEntity imple
                     }
                     if (steamMoved) {
                         if (random.nextFloat() < 0.005F) {
-                            level.playSound(null, getBlockPos(), WizardsReborn.STEAM_BURST_SOUND.get(), SoundSource.BLOCKS, 0.1f, 1.0f);
+                            level.playSound(null, getBlockPos(), WizardsRebornSounds.STEAM_BURST.get(), SoundSource.BLOCKS, 0.1f, 1.0f);
                         }
                         break;
                     }
@@ -205,7 +205,7 @@ public abstract class SteamPipeBaseBlockEntity extends PipeBaseBlockEntity imple
             float r = clogged ? 255f : 16f;
             float g = clogged ? 16f : 255f;
             float b = 16f;
-            ParticleBuilder.create(FluffyFur.SPARKLE_PARTICLE)
+            ParticleBuilder.create(FluffyFurParticles.SPARKLE)
                     .setColorData(ColorParticleData.create(r / 255f, g / 255f, b / 255f).build())
                     .setTransparencyData(GenericParticleData.create(0.3f, 0f).build())
                     .setScaleData(GenericParticleData.create(0.1f, 0f).build())

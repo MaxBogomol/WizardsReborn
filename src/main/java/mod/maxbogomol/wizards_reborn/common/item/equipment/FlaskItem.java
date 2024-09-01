@@ -5,6 +5,7 @@ import com.mojang.math.Axis;
 import mod.maxbogomol.wizards_reborn.WizardsReborn;
 import mod.maxbogomol.wizards_reborn.WizardsRebornClient;
 import mod.maxbogomol.wizards_reborn.common.block.placed_items.PlacedItemsBlockEntity;
+import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornItems;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.texture.OverlayTexture;
@@ -22,7 +23,7 @@ public class FlaskItem extends AlchemyBottleItem {
 
     @Override
     public ItemStack getPotionItem() {
-        return new ItemStack(WizardsReborn.ALCHEMY_FLASK_POTION.get());
+        return new ItemStack(WizardsRebornItems.ALCHEMY_FLASK_POTION.get());
     }
 
     @Override

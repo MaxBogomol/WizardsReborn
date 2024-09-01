@@ -1,6 +1,5 @@
 package mod.maxbogomol.wizards_reborn.common.block.engraved_wisestone;
 
-import mod.maxbogomol.fluffy_fur.FluffyFur;
 import mod.maxbogomol.fluffy_fur.client.particle.ParticleBuilder;
 import mod.maxbogomol.fluffy_fur.client.particle.data.ColorParticleData;
 import mod.maxbogomol.fluffy_fur.client.particle.data.GenericParticleData;
@@ -9,10 +8,13 @@ import mod.maxbogomol.fluffy_fur.common.block.entity.BlockEntityBase;
 import mod.maxbogomol.fluffy_fur.common.block.entity.TickableBlockEntity;
 import mod.maxbogomol.fluffy_fur.common.easing.Easing;
 import mod.maxbogomol.fluffy_fur.common.network.BlockEntityUpdate;
+import mod.maxbogomol.fluffy_fur.registry.client.FluffyFurParticles;
 import mod.maxbogomol.wizards_reborn.WizardsReborn;
 import mod.maxbogomol.wizards_reborn.api.monogram.Monogram;
 import mod.maxbogomol.wizards_reborn.api.wissen.IWissenWandFunctionalBlockEntity;
 import mod.maxbogomol.wizards_reborn.client.event.ClientTickHandler;
+import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornBlockEntities;
+import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornSounds;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.sounds.SoundSource;
@@ -35,7 +37,7 @@ public class EngravedWisestoneBlockEntity extends BlockEntityBase implements Tic
     }
 
     public EngravedWisestoneBlockEntity(BlockPos pos, BlockState state) {
-        this(WizardsReborn.ENGRAVED_WISESTONE_BLOCK_ENTITY.get(), pos, state);
+        this(WizardsRebornBlockEntities.ENGRAVED_WISESTONE.get(), pos, state);
     }
 
     @Override
@@ -71,7 +73,7 @@ public class EngravedWisestoneBlockEntity extends BlockEntityBase implements Tic
                     float g = color.getGreen() / 255f;
                     float b = color.getBlue() / 255f;
 
-                    ParticleBuilder.create(FluffyFur.CUBE_PARTICLE)
+                    ParticleBuilder.create(FluffyFurParticles.CUBE)
                             .setColorData(ColorParticleData.create(r, g, b, random.nextFloat(), random.nextFloat(), random.nextFloat()).build())
                             .setTransparencyData(GenericParticleData.create(0.75f, 0).build())
                             .setScaleData(GenericParticleData.create(0, 0.1f, 0).setEasing(Easing.SINE_IN_OUT).build())
@@ -79,7 +81,7 @@ public class EngravedWisestoneBlockEntity extends BlockEntityBase implements Tic
                             .setLifetime(30)
                             .randomVelocity(0.005f)
                             .spawn(level, getBlockPos().getX() + 0.5F + X, getBlockPos().getY() + (glowTicks / 20f), getBlockPos().getZ() + 0.5F + Z);
-                    ParticleBuilder.create(FluffyFur.WISP_PARTICLE)
+                    ParticleBuilder.create(FluffyFurParticles.WISP)
                             .setColorData(ColorParticleData.create(r, g, b, random.nextFloat(), random.nextFloat(), random.nextFloat()).build())
                             .setTransparencyData(GenericParticleData.create(0.75f, 0).build())
                             .setScaleData(GenericParticleData.create(0, 0.1f, 0).setEasing(Easing.SINE_IN_OUT).build())
@@ -145,7 +147,7 @@ public class EngravedWisestoneBlockEntity extends BlockEntityBase implements Tic
             if (cooldown <= 0) {
                 glow = !glow;
                 BlockEntityUpdate.packet(this);
-                level.playSound(WizardsReborn.proxy.getPlayer(), getBlockPos(), WizardsReborn.WISSEN_BURST_SOUND.get(), SoundSource.BLOCKS, 0.5f, glow ? 2f : 0.5f);
+                level.playSound(WizardsReborn.proxy.getPlayer(), getBlockPos(), WizardsRebornSounds.WISSEN_BURST.get(), SoundSource.BLOCKS, 0.5f, glow ? 2f : 0.5f);
                 cooldown = 20;
             }
         }

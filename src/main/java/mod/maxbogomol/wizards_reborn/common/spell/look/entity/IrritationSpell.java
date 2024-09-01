@@ -1,10 +1,12 @@
 package mod.maxbogomol.wizards_reborn.common.spell.look.entity;
 
-import mod.maxbogomol.wizards_reborn.WizardsReborn;
 import mod.maxbogomol.wizards_reborn.api.crystal.CrystalUtil;
 import mod.maxbogomol.wizards_reborn.common.item.equipment.arcane.ArcaneArmorItem;
 import mod.maxbogomol.wizards_reborn.common.network.PacketHandler;
 import mod.maxbogomol.wizards_reborn.common.network.spell.IrritationSpellEffectPacket;
+import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornCrystals;
+import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornMobEffects;
+import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornSpells;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.effect.MobEffectInstance;
@@ -20,12 +22,12 @@ import java.awt.*;
 public class IrritationSpell extends EntityLookSpell {
     public IrritationSpell(String id, int points) {
         super(id, points);
-        addCrystalType(WizardsReborn.VOID_CRYSTAL_TYPE);
+        addCrystalType(WizardsRebornCrystals.VOID);
     }
 
     @Override
     public Color getColor() {
-        return WizardsReborn.necroticSpellColor;
+        return WizardsRebornSpells.necroticSpellColor;
     }
 
     @Override
@@ -52,7 +54,7 @@ public class IrritationSpell extends EntityLookSpell {
     public void lookSpell(Level world, Player player, InteractionHand hand) {
         ItemStack stack = player.getItemInHand(hand);
         CompoundTag stats = getStats(stack);
-        int focusLevel = CrystalUtil.getStatLevel(stats, WizardsReborn.FOCUS_CRYSTAL_STAT);
+        int focusLevel = CrystalUtil.getStatLevel(stats, WizardsRebornCrystals.FOCUS);
         float magicModifier = ArcaneArmorItem.getPlayerMagicModifier(player);
 
         HitResult hit = getEntityHit(world, player, hand);
@@ -60,7 +62,7 @@ public class IrritationSpell extends EntityLookSpell {
         if (hit.hasEntities()) {
             for (Entity entity : hit.getEntities()) {
                 if (entity instanceof LivingEntity livingEntity) {
-                    livingEntity.addEffect(new MobEffectInstance(WizardsReborn.IRRITATION_EFFECT.get(), (int) (400 + (100 * (focusLevel + magicModifier))), 0));
+                    livingEntity.addEffect(new MobEffectInstance(WizardsRebornMobEffects.IRRITATION.get(), (int) (400 + (100 * (focusLevel + magicModifier))), 0));
 
                     Color color = getColor();
                     float r = color.getRed() / 255f;

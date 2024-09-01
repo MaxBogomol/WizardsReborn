@@ -1,10 +1,10 @@
 package mod.maxbogomol.wizards_reborn.common.block.pipe;
 
-import mod.maxbogomol.fluffy_fur.FluffyFur;
 import mod.maxbogomol.fluffy_fur.client.particle.ParticleBuilder;
 import mod.maxbogomol.fluffy_fur.client.particle.data.ColorParticleData;
 import mod.maxbogomol.fluffy_fur.client.particle.data.GenericParticleData;
 import mod.maxbogomol.fluffy_fur.common.block.entity.BlockEntityBase;
+import mod.maxbogomol.fluffy_fur.registry.client.FluffyFurParticles;
 import mod.maxbogomol.wizards_reborn.api.alchemy.IPipeConnection;
 import mod.maxbogomol.wizards_reborn.api.alchemy.PipeConnection;
 import net.minecraft.core.BlockPos;
@@ -157,7 +157,7 @@ public class PipeBaseBlockEntity extends BlockEntityBase {
         float vx = xOffset * speed + posRand.nextFloat() * speed * 0.3f;
         float vy = yOffset * speed + posRand.nextFloat() * speed * 0.3f;
         float vz = zOffset * speed + posRand.nextFloat() * speed * 0.3f;
-        ParticleBuilder.create(FluffyFur.SMOKE_PARTICLE)
+        ParticleBuilder.create(FluffyFurParticles.SMOKE)
                 .setColorData(ColorParticleData.create(Color.WHITE).build())
                 .setTransparencyData(GenericParticleData.create(0.4f, 0).build())
                 .setScaleData(GenericParticleData.create(0.05f, 0.15f).build())

@@ -5,6 +5,8 @@ import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import mod.maxbogomol.fluffy_fur.util.RecipeUtil;
 import mod.maxbogomol.wizards_reborn.WizardsReborn;
+import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornItems;
+import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornRecipes;
 import net.minecraft.core.RegistryAccess;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.network.FriendlyByteBuf;
@@ -54,7 +56,7 @@ public class CenserRecipe implements Recipe<Container>  {
     }
 
     public ItemStack getToastSymbol() {
-        return new ItemStack(WizardsReborn.ARCANE_CENSER_ITEM.get());
+        return new ItemStack(WizardsRebornItems.ARCANE_CENSER.get());
     }
 
     @Override
@@ -64,14 +66,7 @@ public class CenserRecipe implements Recipe<Container>  {
 
     @Override
     public RecipeSerializer<?> getSerializer() {
-        return WizardsReborn.CENSER_SERIALIZER.get();
-    }
-
-    public static class CenserRecipeType implements RecipeType<CenserRecipe> {
-        @Override
-        public String toString() {
-            return CenserRecipe.TYPE_ID.toString();
-        }
+        return WizardsRebornRecipes.CENSER_SERIALIZER.get();
     }
 
     @Override

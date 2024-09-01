@@ -1,10 +1,12 @@
 package mod.maxbogomol.wizards_reborn.common.entity;
 
-import mod.maxbogomol.wizards_reborn.WizardsReborn;
 import mod.maxbogomol.wizards_reborn.client.gui.container.SniffaloContainer;
 import mod.maxbogomol.wizards_reborn.common.item.CargoCarpetItem;
 import mod.maxbogomol.wizards_reborn.common.network.PacketHandler;
 import mod.maxbogomol.wizards_reborn.common.network.SniffaloScreenPacket;
+import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornEntities;
+import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornItems;
+import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornTags;
 import net.minecraft.advancements.CriteriaTriggers;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.particles.ParticleOptions;
@@ -95,14 +97,14 @@ public class SniffaloEntity extends Sniffer implements ContainerListener, HasCus
 
     @Override
     public AgeableMob getBreedOffspring(ServerLevel level, AgeableMob ageableMob) {
-        return WizardsReborn.SNIFFALO.get().create(level);
+        return WizardsRebornEntities.SNIFFALO.get().create(level);
     }
 
     @Override
     public void dropSeed() {
         if (!this.level().isClientSide() && this.entityData.get(DATA_DROP_SEED_AT_TICK) == this.tickCount) {
             ServerLevel serverlevel = (ServerLevel)this.level();
-            LootTable loottable = serverlevel.getServer().getLootData().getLootTable(WizardsReborn.SNIFFALO_DIGGING_LOOT_TABLE);
+            LootTable loottable = serverlevel.getServer().getLootData().getLootTable(WizardsRebornTags.SNIFFALO_DIGGING_LOOT_TABLE);
             LootParams lootparams = (new LootParams.Builder(serverlevel)).withParameter(LootContextParams.ORIGIN, this.getHeadPosition()).withParameter(LootContextParams.THIS_ENTITY, this).create(LootContextParamSets.GIFT);
             List<ItemStack> list = loottable.getRandomItems(lootparams);
             BlockPos blockpos = this.getHeadBlock();
@@ -287,7 +289,7 @@ public class SniffaloEntity extends Sniffer implements ContainerListener, HasCus
 
     @Override
     public void spawnChildFromBreeding(ServerLevel level, Animal mate) {
-        ItemStack itemstack = new ItemStack(WizardsReborn.SNIFFALO_EGG_ITEM.get());
+        ItemStack itemstack = new ItemStack(WizardsRebornItems.SNIFFALO_EGG.get());
         ItemEntity itementity = new ItemEntity(level, this.position().x(), this.position().y(), this.position().z(), itemstack);
         itementity.setDefaultPickUpDelay();
         this.finalizeSpawnChildFromBreeding(level, mate, (AgeableMob)null);
@@ -297,7 +299,7 @@ public class SniffaloEntity extends Sniffer implements ContainerListener, HasCus
 
     @Override
     public boolean isFood(ItemStack pStack) {
-        return pStack.is(WizardsReborn.SNIFFALO_FOOD_ITEM_TAG);
+        return pStack.is(WizardsRebornTags.SNIFFALO_FOOD_ITEM);
     }
 
     @Override

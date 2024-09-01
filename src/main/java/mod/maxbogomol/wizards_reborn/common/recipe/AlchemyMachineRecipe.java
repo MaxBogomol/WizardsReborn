@@ -3,11 +3,14 @@ package mod.maxbogomol.wizards_reborn.common.recipe;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
+import mod.maxbogomol.fluffy_fur.common.recipe.FluidIngredient;
 import mod.maxbogomol.fluffy_fur.util.RecipeUtil;
 import mod.maxbogomol.wizards_reborn.WizardsReborn;
 import mod.maxbogomol.wizards_reborn.api.alchemy.AlchemyPotion;
 import mod.maxbogomol.wizards_reborn.api.alchemy.AlchemyPotionUtil;
-import mod.maxbogomol.wizards_reborn.common.alchemypotion.RegisterAlchemyPotions;
+import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornAlchemyPotions;
+import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornItems;
+import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornRecipes;
 import net.minecraft.core.NonNullList;
 import net.minecraft.core.RegistryAccess;
 import net.minecraft.core.registries.BuiltInRegistries;
@@ -149,7 +152,7 @@ public class AlchemyMachineRecipe implements Recipe<AlchemyMachineContext> {
     }
 
     public ItemStack getToastSymbol() {
-        return new ItemStack(WizardsReborn.ALCHEMY_MACHINE_ITEM.get());
+        return new ItemStack(WizardsRebornItems.ALCHEMY_MACHINE.get());
     }
 
     @Override
@@ -159,14 +162,7 @@ public class AlchemyMachineRecipe implements Recipe<AlchemyMachineContext> {
 
     @Override
     public RecipeSerializer<?> getSerializer() {
-        return WizardsReborn.ALCHEMY_MACHINE_SERIALIZER.get();
-    }
-
-    public static class AlchemyMachineRecipeType implements RecipeType<AlchemyMachineRecipe> {
-        @Override
-        public String toString() {
-            return AlchemyMachineRecipe.TYPE_ID.toString();
-        }
+        return WizardsRebornRecipes.ALCHEMY_MACHINE_SERIALIZER.get();
     }
 
     public static class Serializer implements RecipeSerializer<AlchemyMachineRecipe> {
@@ -175,8 +171,8 @@ public class AlchemyMachineRecipe implements Recipe<AlchemyMachineContext> {
         public AlchemyMachineRecipe fromJson(ResourceLocation recipeId, JsonObject json) {
             ItemStack outputItem = ItemStack.EMPTY;
             FluidStack outputFluid = FluidStack.EMPTY;
-            AlchemyPotion alchemyPotion = RegisterAlchemyPotions.EMPTY;
-            AlchemyPotion alchemyPotionIngredient = RegisterAlchemyPotions.EMPTY;
+            AlchemyPotion alchemyPotion = WizardsRebornAlchemyPotions.EMPTY;
+            AlchemyPotion alchemyPotionIngredient = WizardsRebornAlchemyPotions.EMPTY;
             int wissen = 0;
             int steam = 0;
 

@@ -1,14 +1,14 @@
 package mod.maxbogomol.wizards_reborn.common.block.crystal;
 
-import mod.maxbogomol.fluffy_fur.FluffyFur;
 import mod.maxbogomol.fluffy_fur.client.particle.ParticleBuilder;
 import mod.maxbogomol.fluffy_fur.client.particle.data.ColorParticleData;
 import mod.maxbogomol.fluffy_fur.client.particle.data.GenericParticleData;
 import mod.maxbogomol.fluffy_fur.common.block.entity.BlockSimpleInventory;
 import mod.maxbogomol.fluffy_fur.common.block.entity.TickableBlockEntity;
-import mod.maxbogomol.wizards_reborn.WizardsReborn;
+import mod.maxbogomol.fluffy_fur.registry.client.FluffyFurParticles;
 import mod.maxbogomol.wizards_reborn.api.crystal.CrystalType;
 import mod.maxbogomol.wizards_reborn.api.crystal.PolishingType;
+import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornCrystals;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.util.RandomSource;
@@ -71,7 +71,7 @@ public class CrystalBlock extends Block implements EntityBlock, SimpleWaterlogge
     @Nonnull
     @Override
     public VoxelShape getShape(BlockState state, BlockGetter world, BlockPos pos, CollisionContext ctx) {
-        if (polishing == WizardsReborn.CRYSTAL_POLISHING_TYPE) {
+        if (polishing == WizardsRebornCrystals.CRYSTAL) {
             return SHAPE;
         }
 
@@ -128,7 +128,7 @@ public class CrystalBlock extends Block implements EntityBlock, SimpleWaterlogge
     public void animateTick(BlockState state, Level world, BlockPos pos, RandomSource random) {
         if (polishing.hasParticle()) {
             Color color = polishing.getColor();
-            ParticleBuilder.create(FluffyFur.SPARKLE_PARTICLE)
+            ParticleBuilder.create(FluffyFurParticles.SPARKLE)
                     .setColorData(ColorParticleData.create(color).build())
                     .setTransparencyData(GenericParticleData.create(0.5f, 0).build())
                     .setScaleData(GenericParticleData.create(0.1f, 0).build())
@@ -145,7 +145,7 @@ public class CrystalBlock extends Block implements EntityBlock, SimpleWaterlogge
         if (world.isClientSide()) {
             if (!player.isCreative()) {
                 Color color = type.getColor();
-                ParticleBuilder.create(FluffyFur.SPARKLE_PARTICLE)
+                ParticleBuilder.create(FluffyFurParticles.SPARKLE)
                         .setColorData(ColorParticleData.create(color).build())
                         .setTransparencyData(GenericParticleData.create(0.25f, 0).build())
                         .setScaleData(GenericParticleData.create(0.35f, 0).build())

@@ -1,9 +1,9 @@
 package mod.maxbogomol.wizards_reborn.client.particle;
 
-import mod.maxbogomol.fluffy_fur.FluffyFur;
 import mod.maxbogomol.fluffy_fur.client.particle.ParticleBuilder;
 import mod.maxbogomol.fluffy_fur.client.particle.data.ColorParticleData;
 import mod.maxbogomol.fluffy_fur.client.particle.data.GenericParticleData;
+import mod.maxbogomol.fluffy_fur.registry.client.FluffyFurParticles;
 import net.minecraft.util.Mth;
 import net.minecraft.world.level.Level;
 
@@ -47,7 +47,7 @@ public class ExperienceTotemBurst {
 
         this.end = false;
 
-        ParticleBuilder.create(FluffyFur.SPARKLE_PARTICLE)
+        ParticleBuilder.create(FluffyFurParticles.SPARKLE)
                 .setColorData(ColorParticleData.create(R, G, B).build())
                 .setTransparencyData(GenericParticleData.create(0.25f, 0).build())
                 .setScaleData(GenericParticleData.create(0.2f, 0).build())
@@ -89,7 +89,7 @@ public class ExperienceTotemBurst {
             float Y = Mth.lerp(i / 4F, y, y + velY);
             float Z = Mth.lerp(i / 4F, z, z + velZ);
             if (random.nextFloat() < 0.25) {
-                ParticleBuilder.create(FluffyFur.WISP_PARTICLE)
+                ParticleBuilder.create(FluffyFurParticles.WISP)
                         .setColorData(ColorParticleData.create(R, G, B).build())
                         .setTransparencyData(GenericParticleData.create(0.25f, 0).build())
                         .setScaleData(GenericParticleData.create(0.2f, 0).build())
@@ -98,7 +98,7 @@ public class ExperienceTotemBurst {
                         .spawn(level, X, Y, Z);
             }
             if (random.nextFloat() < 0.05) {
-                ParticleBuilder.create(FluffyFur.SPARKLE_PARTICLE)
+                ParticleBuilder.create(FluffyFurParticles.SPARKLE)
                         .setColorData(ColorParticleData.create(R, G, B).build())
                         .setTransparencyData(GenericParticleData.create(0.25f, 0).build())
                         .setScaleData(GenericParticleData.create(0.05f, 0).build())

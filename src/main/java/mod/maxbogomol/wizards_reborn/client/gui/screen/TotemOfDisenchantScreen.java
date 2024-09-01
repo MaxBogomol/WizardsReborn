@@ -9,6 +9,7 @@ import mod.maxbogomol.wizards_reborn.client.gui.container.TotemOfDisenchantConta
 import mod.maxbogomol.wizards_reborn.common.block.totem.disenchant.TotemOfDisenchantBlockEntity;
 import mod.maxbogomol.wizards_reborn.common.network.PacketHandler;
 import mod.maxbogomol.wizards_reborn.common.network.tileentity.TotemOfDisenchantStartEffectPacket;
+import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornItems;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
@@ -92,11 +93,11 @@ public class TotemOfDisenchantScreen extends AbstractContainerScreen<TotemOfDise
 
                 for (ArcaneEnchantment enchantment : arcaneEnchantments.keySet()) {
                     if (enchantment != null) {
-                        ItemStack book = new ItemStack(WizardsReborn.ARCANE_ENCHANTED_BOOK.get());
+                        ItemStack book = new ItemStack(WizardsRebornItems.ARCANE_ENCHANTED_BOOK.get());
                         ArcaneEnchantmentUtil.addArcaneEnchantment(book, enchantment, arcaneEnchantments.get(enchantment));
 
                         int of = 0;
-                        if (currentBook.getItem().equals(WizardsReborn.ARCANE_ENCHANTED_BOOK.get())) {
+                        if (currentBook.getItem().equals(WizardsRebornItems.ARCANE_ENCHANTED_BOOK.get())) {
                             if (ArcaneEnchantmentUtil.getArcaneEnchantment(currentBook, enchantment) > 0) {
                                 gui.blit(GUI, i + 42 + (xx * 18), j + 16 + (yy * 18), 176, 18, 20, 20, 256, 256);
                                 of = -1;
@@ -185,7 +186,7 @@ public class TotemOfDisenchantScreen extends AbstractContainerScreen<TotemOfDise
                 }
 
                 for (ArcaneEnchantment enchantment : arcaneEnchantments.keySet()) {
-                    ItemStack book = new ItemStack(WizardsReborn.ARCANE_ENCHANTED_BOOK.get());
+                    ItemStack book = new ItemStack(WizardsRebornItems.ARCANE_ENCHANTED_BOOK.get());
                     ArcaneEnchantmentUtil.addArcaneEnchantment(book, enchantment, arcaneEnchantments.get(enchantment));
                     if (x >= i + 44 + (xx * 18) && y >= j + 18 + (yy * 18) && x <= i + 44 + (xx * 18) + 16 && y <= j + 18 + (yy * 18) + 16 && !totem.isStart && !enchantment.isCurse()) {
                         currentBook = book;

@@ -1,7 +1,8 @@
 package mod.maxbogomol.wizards_reborn.client.gui.container;
 
 import mod.maxbogomol.fluffy_fur.client.gui.screen.ContainerMenuBase;
-import mod.maxbogomol.wizards_reborn.WizardsReborn;
+import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornBlocks;
+import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornMenuTypes;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
@@ -16,7 +17,7 @@ public class ItemSorterContainer extends ContainerMenuBase {
     public final BlockEntity blockEntity;
 
     public ItemSorterContainer(int windowId, Level level, BlockPos pos, Inventory playerInventory, Player player) {
-        super(WizardsReborn.ITEM_SORTER_CONTAINER.get(), windowId);
+        super(WizardsRebornMenuTypes.ITEM_SORTER_CONTAINER.get(), windowId);
         this.blockEntity = level.getBlockEntity(pos);
         playerEntity = player;
         this.playerInventory = new InvWrapper(playerInventory);
@@ -37,7 +38,7 @@ public class ItemSorterContainer extends ContainerMenuBase {
 
     @Override
     public boolean stillValid(Player player) {
-        return stillValid(ContainerLevelAccess.create(blockEntity.getLevel(), blockEntity.getBlockPos()), player, WizardsReborn.ITEM_SORTER.get());
+        return stillValid(ContainerLevelAccess.create(blockEntity.getLevel(), blockEntity.getBlockPos()), player, WizardsRebornBlocks.ITEM_SORTER.get());
     }
 
     @Override

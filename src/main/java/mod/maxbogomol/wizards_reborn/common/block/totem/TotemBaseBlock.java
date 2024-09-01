@@ -1,7 +1,7 @@
 package mod.maxbogomol.wizards_reborn.common.block.totem;
 
-import mod.maxbogomol.wizards_reborn.WizardsReborn;
 import mod.maxbogomol.wizards_reborn.api.wissen.ITotemBlock;
+import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornBlocks;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.world.InteractionHand;
@@ -81,7 +81,7 @@ public class TotemBaseBlock extends Block implements SimpleWaterloggedBlock {
             pLevel.scheduleTick(pCurrentPos, Fluids.WATER, Fluids.WATER.getTickDelay(pLevel));
         }
 
-        return !canTotem(pLevel, pCurrentPos) ? WizardsReborn.ARCANE_PEDESTAL.get().defaultBlockState() : super.updateShape(pState, pDirection, pNeighborState, pLevel, pCurrentPos, pNeighborPos);
+        return !canTotem(pLevel, pCurrentPos) ? WizardsRebornBlocks.ARCANE_PEDESTAL.get().defaultBlockState() : super.updateShape(pState, pDirection, pNeighborState, pLevel, pCurrentPos, pNeighborPos);
     }
 
     public boolean canTotem(LevelReader level, BlockPos pos) {

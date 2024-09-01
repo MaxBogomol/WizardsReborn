@@ -1,13 +1,14 @@
 package mod.maxbogomol.wizards_reborn.common.spell.look;
 
-import mod.maxbogomol.fluffy_fur.FluffyFur;
 import mod.maxbogomol.fluffy_fur.client.animation.ItemAnimation;
 import mod.maxbogomol.fluffy_fur.client.particle.ParticleBuilder;
 import mod.maxbogomol.fluffy_fur.client.particle.data.ColorParticleData;
 import mod.maxbogomol.fluffy_fur.client.particle.data.GenericParticleData;
-import mod.maxbogomol.wizards_reborn.WizardsReborn;
+import mod.maxbogomol.fluffy_fur.registry.client.FluffyFurParticles;
 import mod.maxbogomol.wizards_reborn.api.crystal.CrystalUtil;
 import mod.maxbogomol.wizards_reborn.client.animation.StrikeSpellItemAnimation;
+import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornCrystals;
+import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornSpells;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.entity.ExperienceOrb;
@@ -27,12 +28,12 @@ public class WisdomSpell extends LookSpell {
 
     public WisdomSpell(String id, int points) {
         super(id, points);
-        addCrystalType(WizardsReborn.VOID_CRYSTAL_TYPE);
+        addCrystalType(WizardsRebornCrystals.VOID);
     }
 
     @Override
     public Color getColor() {
-        return WizardsReborn.experienceSpellColor;
+        return WizardsRebornSpells.experienceSpellColor;
     }
 
     @Override
@@ -70,13 +71,13 @@ public class WisdomSpell extends LookSpell {
                 } else {
                     Vec3 pos = getHitPos(world, player, player.getUsedItemHand()).getPosHit();
                     Color color = getColor();
-                    ParticleBuilder.create(FluffyFur.SPARKLE_PARTICLE)
+                    ParticleBuilder.create(FluffyFurParticles.SPARKLE)
                             .setColorData(ColorParticleData.create(color).build())
                             .setTransparencyData(GenericParticleData.create(0.5f).build())
                             .setScaleData(GenericParticleData.create(0.2f, 0f).build())
                             .setLifetime(15)
                             .spawn(world, pos.x(), pos.y(), pos.z());
-                    ParticleBuilder.create(FluffyFur.SPARKLE_PARTICLE)
+                    ParticleBuilder.create(FluffyFurParticles.SPARKLE)
                             .setColorData(ColorParticleData.create(color).build())
                             .setTransparencyData(GenericParticleData.create(0.5f).build())
                             .setScaleData(GenericParticleData.create(0.2f, 0f).build())
@@ -101,7 +102,7 @@ public class WisdomSpell extends LookSpell {
 
         ItemStack stack = player.getItemInHand(hand);
         CompoundTag stats = getStats(stack);
-        int focusLevel = CrystalUtil.getStatLevel(stats, WizardsReborn.FOCUS_CRYSTAL_STAT);
+        int focusLevel = CrystalUtil.getStatLevel(stats, WizardsRebornCrystals.FOCUS);
         int exp = 5 + focusLevel;
 
         world.addFreshEntity(new ExperienceOrb(world, pos.x, pos.y, pos.z, exp));

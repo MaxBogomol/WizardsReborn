@@ -15,7 +15,6 @@ public class AlchemyMachineContext implements Container {
         this.fluids = fluids;
     }
 
-    //useless methods from container that I have to implement to make a recipe
     @Override
     @Deprecated
     public void clearContent() { }

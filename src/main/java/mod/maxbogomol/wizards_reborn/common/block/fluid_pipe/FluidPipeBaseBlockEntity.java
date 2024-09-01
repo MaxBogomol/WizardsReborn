@@ -1,10 +1,10 @@
 package mod.maxbogomol.wizards_reborn.common.block.fluid_pipe;
 
-import mod.maxbogomol.fluffy_fur.FluffyFur;
 import mod.maxbogomol.fluffy_fur.client.particle.ParticleBuilder;
 import mod.maxbogomol.fluffy_fur.client.particle.data.ColorParticleData;
 import mod.maxbogomol.fluffy_fur.client.particle.data.GenericParticleData;
 import mod.maxbogomol.fluffy_fur.common.block.entity.TickableBlockEntity;
+import mod.maxbogomol.fluffy_fur.registry.client.FluffyFurParticles;
 import mod.maxbogomol.wizards_reborn.api.alchemy.IFluidBlockEntity;
 import mod.maxbogomol.wizards_reborn.api.alchemy.IFluidPipePriority;
 import mod.maxbogomol.wizards_reborn.api.alchemy.PipePriorityMap;
@@ -222,7 +222,7 @@ public abstract class FluidPipeBaseBlockEntity extends PipeBaseBlockEntity imple
             float r = clogged ? 255f : 16f;
             float g = clogged ? 16f : 255f;
             float b = 16f;
-            ParticleBuilder.create(FluffyFur.SPARKLE_PARTICLE)
+            ParticleBuilder.create(FluffyFurParticles.SPARKLE)
                     .setColorData(ColorParticleData.create(r / 255f, g / 255f, b / 255f).build())
                     .setTransparencyData(GenericParticleData.create(0.3f, 0f).build())
                     .setScaleData(GenericParticleData.create(0.1f, 0f).build())

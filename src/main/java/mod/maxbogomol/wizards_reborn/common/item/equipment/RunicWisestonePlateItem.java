@@ -4,11 +4,11 @@ import com.mojang.blaze3d.vertex.PoseStack;
 import mod.maxbogomol.fluffy_fur.FluffyFur;
 import mod.maxbogomol.fluffy_fur.common.item.IGuiParticleItem;
 import mod.maxbogomol.fluffy_fur.util.ColorUtil;
-import mod.maxbogomol.wizards_reborn.WizardsReborn;
 import mod.maxbogomol.wizards_reborn.api.crystalritual.CrystalRitual;
 import mod.maxbogomol.wizards_reborn.api.crystalritual.CrystalRitualUtil;
 import mod.maxbogomol.wizards_reborn.api.crystalritual.CrystalRituals;
 import mod.maxbogomol.wizards_reborn.client.event.ClientTickHandler;
+import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornCrystalRituals;
 import mod.maxbogomol.wizards_reborn.util.RenderUtils;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.color.item.ItemColor;
@@ -39,7 +39,7 @@ public class RunicWisestonePlateItem extends Item implements IGuiParticleItem {
     @Override
     public ItemStack getDefaultInstance() {
         ItemStack stack = super.getDefaultInstance();
-        CrystalRitualUtil.setCrystalRitual(stack, WizardsReborn.EMPTY_CRYSTAL_RITUAL);
+        CrystalRitualUtil.setCrystalRitual(stack, WizardsRebornCrystalRituals.EMPTY);
         return stack;
     }
 

@@ -10,6 +10,8 @@ import mod.maxbogomol.wizards_reborn.client.animation.ChargeSpellHandItemAnimati
 import mod.maxbogomol.wizards_reborn.common.entity.SpellProjectileEntity;
 import mod.maxbogomol.wizards_reborn.common.network.PacketHandler;
 import mod.maxbogomol.wizards_reborn.common.network.spell.ChargeSpellProjectileRayEffectPacket;
+import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornEntities;
+import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornSounds;
 import mod.maxbogomol.wizards_reborn.util.RenderUtils;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.core.BlockPos;
@@ -70,7 +72,7 @@ public class ChargeSpell extends Spell {
             spellData.putInt("ticks_left", 1);
 
             Vec3 pos = player.getEyePosition();
-            SpellProjectileEntity entity = new SpellProjectileEntity(WizardsReborn.SPELL_PROJECTILE.get(), world).shoot(
+            SpellProjectileEntity entity = new SpellProjectileEntity(WizardsRebornEntities.SPELL_PROJECTILE.get(), world).shoot(
                     pos.x, pos.y - 0.2f, pos.z, 0, 0, 0, player.getUUID(), this.getId(), stats
             ).createSpellData(spellData);
             world.addFreshEntity(entity);
@@ -86,7 +88,7 @@ public class ChargeSpell extends Spell {
 
             player.startUsingItem(hand);
             awardStat(player, stack);
-            world.playSound(WizardsReborn.proxy.getPlayer(), player.getX(), player.getY(), player.getZ(), WizardsReborn.WISSEN_BURST_SOUND.get(), SoundSource.PLAYERS, 0.5f, (float) (1f + ((random.nextFloat() - 0.5D) / 4)));
+            world.playSound(WizardsReborn.proxy.getPlayer(), player.getX(), player.getY(), player.getZ(), WizardsRebornSounds.WISSEN_BURST.get(), SoundSource.PLAYERS, 0.5f, (float) (1f + ((random.nextFloat() - 0.5D) / 4)));
         }
     }
 
@@ -111,7 +113,7 @@ public class ChargeSpell extends Spell {
                         projectile.updateSpellData();
 
                         if (random.nextFloat() < 0.5) {
-                            entity.level().playSound(WizardsReborn.proxy.getPlayer(), entity.getX(), entity.getY(), entity.getZ(), WizardsReborn.SPELL_BURST_SOUND.get(), SoundSource.PLAYERS, 0.25f, (float) (0.5f + ((random.nextFloat() - 0.5D) / 4)));
+                            entity.level().playSound(WizardsReborn.proxy.getPlayer(), entity.getX(), entity.getY(), entity.getZ(), WizardsRebornSounds.SPELL_BURST.get(), SoundSource.PLAYERS, 0.25f, (float) (0.5f + ((random.nextFloat() - 0.5D) / 4)));
                         }
                     }
                 }
@@ -141,7 +143,7 @@ public class ChargeSpell extends Spell {
                         Vec3 vel = projectile.getSender().getEyePosition(0).add(projectile.getSender().getLookAngle().scale(40)).subtract(pos).scale(1.0 / 25);
                         projectile.setDeltaMovement(vel);
 
-                        world.playSound(WizardsReborn.proxy.getPlayer(), projectile.getSender().getX(), projectile.getSender().getY(), projectile.getSender().getZ(), WizardsReborn.SPELL_CAST_SOUND.get(), SoundSource.PLAYERS, 0.25f, (float) (1f + ((random.nextFloat() - 0.5D) / 4)));
+                        world.playSound(WizardsReborn.proxy.getPlayer(), projectile.getSender().getX(), projectile.getSender().getY(), projectile.getSender().getZ(), WizardsRebornSounds.SPELL_CAST.get(), SoundSource.PLAYERS, 0.25f, (float) (1f + ((random.nextFloat() - 0.5D) / 4)));
                     }
 
                     nbt.put("spell_data", new CompoundTag());
@@ -305,7 +307,7 @@ public class ChargeSpell extends Spell {
         projectile.setFade(true);
         projectile.setFadeTick(20);
         projectile.burstEffect();
-        world.playSound(WizardsReborn.proxy.getPlayer(), projectile.getX(), projectile.getY(), projectile.getZ(), WizardsReborn.SPELL_BURST_SOUND.get(), SoundSource.PLAYERS, 0.35f, (float) (1f + ((random.nextFloat() - 0.5D) / 4)));
+        world.playSound(WizardsReborn.proxy.getPlayer(), projectile.getX(), projectile.getY(), projectile.getZ(), WizardsRebornSounds.SPELL_BURST.get(), SoundSource.PLAYERS, 0.35f, (float) (1f + ((random.nextFloat() - 0.5D) / 4)));
     }
 
     @Override
@@ -314,7 +316,7 @@ public class ChargeSpell extends Spell {
         projectile.setFadeTick(20);
         projectile.setPos(ray.getLocation().x, ray.getLocation().y, ray.getLocation().z);
         projectile.burstEffect();
-        world.playSound(WizardsReborn.proxy.getPlayer(), projectile.getX(), projectile.getY(), projectile.getZ(), WizardsReborn.SPELL_BURST_SOUND.get(), SoundSource.PLAYERS, 0.35f, (float) (1f + ((random.nextFloat() - 0.5D) / 4)));
+        world.playSound(WizardsReborn.proxy.getPlayer(), projectile.getX(), projectile.getY(), projectile.getZ(), WizardsRebornSounds.SPELL_BURST.get(), SoundSource.PLAYERS, 0.35f, (float) (1f + ((random.nextFloat() - 0.5D) / 4)));
     }
 
     public void rayEffect(SpellProjectileEntity projectile) {

@@ -1,6 +1,5 @@
 package mod.maxbogomol.wizards_reborn.common.arcaneenchantment;
 
-import mod.maxbogomol.wizards_reborn.WizardsReborn;
 import mod.maxbogomol.wizards_reborn.api.arcaneenchantment.ArcaneEnchantment;
 import mod.maxbogomol.wizards_reborn.api.arcaneenchantment.ArcaneEnchantmentType;
 import mod.maxbogomol.wizards_reborn.api.arcaneenchantment.ArcaneEnchantmentUtil;
@@ -9,6 +8,7 @@ import mod.maxbogomol.wizards_reborn.api.wissen.WissenUtils;
 import mod.maxbogomol.wizards_reborn.common.network.AddScreenshakePacket;
 import mod.maxbogomol.wizards_reborn.common.network.EagleShotRayEffectPacket;
 import mod.maxbogomol.wizards_reborn.common.network.PacketHandler;
+import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornArcaneEnchantments;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.entity.Entity;
@@ -47,7 +47,7 @@ public class EagleShotArcaneEnchantment extends ArcaneEnchantment {
     @Override
     public boolean canEnchantItem(ItemStack stack) {
         if (stack.getItem() instanceof IArcaneItem item) {
-            if (ArcaneEnchantmentUtil.getArcaneEnchantment(stack, WizardsReborn.SPLIT_ARCANE_ENCHANTMENT) > 0) return false;
+            if (ArcaneEnchantmentUtil.getArcaneEnchantment(stack, WizardsRebornArcaneEnchantments.SPLIT) > 0) return false;
             return item.getArcaneEnchantmentTypes().contains(ArcaneEnchantmentType.BOW);
         }
         return false;
@@ -55,7 +55,7 @@ public class EagleShotArcaneEnchantment extends ArcaneEnchantment {
 
     public static void onBowShot(AbstractArrow abstractarrow, ItemStack stack, Level level, LivingEntity entityLiving, int timeLeft) {
         if (entityLiving instanceof Player player && ArcaneEnchantmentUtil.isArcaneItem(stack)) {
-            int enchantmentLevel = ArcaneEnchantmentUtil.getArcaneEnchantment(stack, WizardsReborn.EAGLE_SHOT_ARCANE_ENCHANTMENT);
+            int enchantmentLevel = ArcaneEnchantmentUtil.getArcaneEnchantment(stack, WizardsRebornArcaneEnchantments.EAGLE_SHOT);
             if (enchantmentLevel > 0) {
                 if (BowItem.getPowerForTime(stack.getUseDuration() - timeLeft) >= 1f) {
                     float costModifier = WissenUtils.getWissenCostModifierWithDiscount(player);
@@ -109,7 +109,7 @@ public class EagleShotArcaneEnchantment extends ArcaneEnchantment {
                         player.hurtMarked = true;
                         level.playSound(null, player.getX(), player.getY(), player.getZ(), SoundEvents.ANVIL_PLACE, SoundSource.PLAYERS, 0.05f, 2f);
                         if (!level.isClientSide()) {
-                            Color color = WizardsReborn.EAGLE_SHOT_ARCANE_ENCHANTMENT.getColor();
+                            Color color = WizardsRebornArcaneEnchantments.EAGLE_SHOT.getColor();
                             float r = color.getRed() / 255f;
                             float g = color.getGreen() / 255f;
                             float b = color.getBlue() / 255f;
@@ -124,7 +124,7 @@ public class EagleShotArcaneEnchantment extends ArcaneEnchantment {
 
     @OnlyIn(Dist.CLIENT)
     public static float getFOW(Player player, ItemStack stack, float fow) {
-        int enchantmentLevel = ArcaneEnchantmentUtil.getArcaneEnchantment(stack, WizardsReborn.EAGLE_SHOT_ARCANE_ENCHANTMENT);
+        int enchantmentLevel = ArcaneEnchantmentUtil.getArcaneEnchantment(stack, WizardsRebornArcaneEnchantments.EAGLE_SHOT);
         if (enchantmentLevel > 0) {
             float costModifier = WissenUtils.getWissenCostModifierWithDiscount(player);
             List<ItemStack> items = WissenUtils.getWissenItemsNoneAndStorage(WissenUtils.getWissenItemsCurios(player));

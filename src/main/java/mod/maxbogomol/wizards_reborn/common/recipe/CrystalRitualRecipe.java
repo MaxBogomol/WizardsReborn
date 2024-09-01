@@ -6,6 +6,8 @@ import com.google.gson.JsonObject;
 import mod.maxbogomol.wizards_reborn.WizardsReborn;
 import mod.maxbogomol.wizards_reborn.api.crystalritual.CrystalRitual;
 import mod.maxbogomol.wizards_reborn.api.crystalritual.CrystalRitualUtil;
+import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornItems;
+import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornRecipes;
 import net.minecraft.core.NonNullList;
 import net.minecraft.core.RegistryAccess;
 import net.minecraft.core.registries.BuiltInRegistries;
@@ -87,7 +89,7 @@ public class CrystalRitualRecipe implements Recipe<Container> {
     }
 
     public ItemStack getToastSymbol() {
-        return new ItemStack(WizardsReborn.RUNIC_PEDESTAL_ITEM.get());
+        return new ItemStack(WizardsRebornItems.RUNIC_PEDESTAL.get());
     }
 
     @Override
@@ -97,14 +99,7 @@ public class CrystalRitualRecipe implements Recipe<Container> {
 
     @Override
     public RecipeSerializer<?> getSerializer() {
-        return WizardsReborn.CRYSTAL_RITUAL_SERIALIZER.get();
-    }
-
-    public static class CrystalRitualRecipeType implements RecipeType<CrystalRitualRecipe> {
-        @Override
-        public String toString() {
-            return CrystalRitualRecipe.TYPE_ID.toString();
-        }
+        return WizardsRebornRecipes.CRYSTAL_RITUAL_SERIALIZER.get();
     }
 
     public static class Serializer implements RecipeSerializer<CrystalRitualRecipe> {

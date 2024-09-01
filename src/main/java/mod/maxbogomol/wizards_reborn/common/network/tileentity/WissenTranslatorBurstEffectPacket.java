@@ -1,9 +1,9 @@
 package mod.maxbogomol.wizards_reborn.common.network.tileentity;
 
-import mod.maxbogomol.fluffy_fur.FluffyFur;
 import mod.maxbogomol.fluffy_fur.client.particle.ParticleBuilder;
 import mod.maxbogomol.fluffy_fur.client.particle.data.ColorParticleData;
 import mod.maxbogomol.fluffy_fur.client.particle.data.GenericParticleData;
+import mod.maxbogomol.fluffy_fur.registry.client.FluffyFurParticles;
 import mod.maxbogomol.wizards_reborn.WizardsReborn;
 import mod.maxbogomol.wizards_reborn.client.event.ClientTickHandler;
 import mod.maxbogomol.wizards_reborn.common.config.Config;
@@ -74,7 +74,7 @@ public class WissenTranslatorBurstEffectPacket {
 
                     for (int i = 0; i < 10; i++) {
                         if (random.nextFloat() < (0.75f * (1f - (wissenCount / 200f))) + 0.05f) {
-                            ParticleBuilder.create(FluffyFur.WISP_PARTICLE)
+                            ParticleBuilder.create(FluffyFurParticles.WISP)
                                     .setColorData(ColorParticleData.create(msg.colorR, msg.colorG, msg.colorB).build())
                                     .setTransparencyData(GenericParticleData.create(0.125f, 0).build())
                                     .setScaleData(GenericParticleData.create(0.2f, 0).build())
@@ -83,7 +83,7 @@ public class WissenTranslatorBurstEffectPacket {
                                     .spawn(world, msg.posX, msg.posY, msg.posZ);
                         }
                         if (random.nextFloat() < (0.75f * (1f - (wissenCount / 200f))) + 0.05f) {
-                            ParticleBuilder.create(FluffyFur.SPARKLE_PARTICLE)
+                            ParticleBuilder.create(FluffyFurParticles.SPARKLE)
                                     .setColorData(ColorParticleData.create(msg.colorR, msg.colorG, msg.colorB).build())
                                     .setTransparencyData(GenericParticleData.create(0.25f, 0).build())
                                     .setScaleData(GenericParticleData.create(0.075f, 0).build())

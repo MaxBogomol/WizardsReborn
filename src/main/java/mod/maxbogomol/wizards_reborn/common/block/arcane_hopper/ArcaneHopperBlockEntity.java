@@ -1,6 +1,6 @@
 package mod.maxbogomol.wizards_reborn.common.block.arcane_hopper;
 
-import mod.maxbogomol.wizards_reborn.WizardsReborn;
+import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornBlockEntities;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.NonNullList;
@@ -53,7 +53,7 @@ public class ArcaneHopperBlockEntity extends RandomizableContainerBlockEntity im
     }
 
     public ArcaneHopperBlockEntity(BlockPos pPos, BlockState pBlockState) {
-        super(WizardsReborn.ARCANE_HOPPER_BLOCK_ENTITY.get(), pPos, pBlockState);
+        super(WizardsRebornBlockEntities.ARCANE_HOPPER.get(), pPos, pBlockState);
     }
 
     public void load(CompoundTag pTag) {

@@ -1,10 +1,12 @@
 package mod.maxbogomol.wizards_reborn.common.spell.fog;
 
-import mod.maxbogomol.wizards_reborn.WizardsReborn;
 import mod.maxbogomol.wizards_reborn.api.crystal.CrystalUtil;
-import mod.maxbogomol.wizards_reborn.common.damage.DamageSourceRegistry;
 import mod.maxbogomol.wizards_reborn.common.entity.SpellProjectileEntity;
 import mod.maxbogomol.wizards_reborn.common.item.equipment.arcane.ArcaneArmorItem;
+import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornCrystals;
+import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornDamage;
+import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornMobEffects;
+import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornSpells;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.effect.MobEffectInstance;
@@ -19,13 +21,13 @@ import java.util.List;
 public class MorSwarmSpell extends FogSpell {
     public MorSwarmSpell(String id, int points) {
         super(id, points);
-        addCrystalType(WizardsReborn.EARTH_CRYSTAL_TYPE);
-        addCrystalType(WizardsReborn.WATER_CRYSTAL_TYPE);
+        addCrystalType(WizardsRebornCrystals.EARTH);
+        addCrystalType(WizardsRebornCrystals.WATER);
     }
 
     @Override
     public Color getColor() {
-        return WizardsReborn.poisonSpellColor;
+        return WizardsRebornSpells.poisonSpellColor;
     }
 
     @Override
@@ -57,7 +59,7 @@ public class MorSwarmSpell extends FogSpell {
         if (alpha > 1f) alpha = 1f;
         if (alpha < 0f) alpha = 0f;
 
-        int focusLevel = CrystalUtil.getStatLevel(entity.getStats(), WizardsReborn.FOCUS_CRYSTAL_STAT);
+        int focusLevel = CrystalUtil.getStatLevel(entity.getStats(), WizardsRebornCrystals.FOCUS);
         int size = getSize(entity) + (getSize(entity) * focusLevel);
         List<BlockPos> blocks = getBlocks(entity.level(), entity.getOnPos(), (int) (size * alpha), 4, isCircle(entity));
         List<Entity> entities = getEntities(entity.level(), blocks);
@@ -69,12 +71,12 @@ public class MorSwarmSpell extends FogSpell {
             if (e instanceof LivingEntity target) {
                 if (target.tickCount % 20 == 0) {
                     target.lastHurtByPlayerTime = target.tickCount;
-                    target.hurt(new DamageSource(DamageSourceRegistry.create(target.level(), DamageSourceRegistry.ARCANE_MAGIC).typeHolder()), damage);
+                    target.hurt(new DamageSource(WizardsRebornDamage.create(target.level(), WizardsRebornDamage.ARCANE_MAGIC).typeHolder()), damage);
                 }
                 target.addEffect(new MobEffectInstance(MobEffects.POISON, (int) (60 + (20 * (focusLevel + magicModifier))), 1));
                 target.addEffect(new MobEffectInstance(MobEffects.HUNGER, (int) (20 + (20 * (focusLevel + magicModifier))), 0));
                 target.addEffect(new MobEffectInstance(MobEffects.CONFUSION, (int) (100 + (40 * (focusLevel + magicModifier))), 0));
-                target.addEffect(new MobEffectInstance(WizardsReborn.MOR_SPORES_EFFECT.get(), (int) (100 + (40 * (focusLevel + magicModifier))), 0));
+                target.addEffect(new MobEffectInstance(WizardsRebornMobEffects.MOR_SPORES.get(), (int) (100 + (40 * (focusLevel + magicModifier))), 0));
             }
         }
     }

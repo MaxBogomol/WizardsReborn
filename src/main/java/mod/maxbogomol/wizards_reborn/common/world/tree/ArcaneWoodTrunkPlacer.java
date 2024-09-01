@@ -3,7 +3,7 @@ package mod.maxbogomol.wizards_reborn.common.world.tree;
 import com.google.common.collect.Lists;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
-import mod.maxbogomol.wizards_reborn.WizardsReborn;
+import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornTrunkPlacerTypes;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.util.RandomSource;
@@ -25,7 +25,7 @@ public class ArcaneWoodTrunkPlacer extends TrunkPlacer {
 
     @Override
     protected TrunkPlacerType<?> type() {
-        return WizardsReborn.ARCANE_WOOD_TRUNK_PLACER.get();
+        return WizardsRebornTrunkPlacerTypes.ARCANE_WOOD.get();
     }
 
     public static final Codec<ArcaneWoodTrunkPlacer> CODEC = RecordCodecBuilder.create(builder ->

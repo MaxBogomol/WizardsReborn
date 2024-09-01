@@ -1,13 +1,14 @@
 package mod.maxbogomol.wizards_reborn.common.block.orbital_fluid_retainer;
 
 import mod.maxbogomol.fluffy_fur.common.block.entity.TickableBlockEntity;
-import mod.maxbogomol.wizards_reborn.WizardsReborn;
 import mod.maxbogomol.wizards_reborn.api.alchemy.IPipeConnection;
 import mod.maxbogomol.wizards_reborn.api.alchemy.PipeConnection;
 import mod.maxbogomol.wizards_reborn.common.block.pipe.PipeBaseBlock;
+import mod.maxbogomol.wizards_reborn.common.block.pipe.PipeBaseBlockEntity;
 import mod.maxbogomol.wizards_reborn.common.item.equipment.AlchemyBottleItem;
 import mod.maxbogomol.wizards_reborn.common.item.equipment.AlchemyPotionItem;
-import mod.maxbogomol.wizards_reborn.common.block.pipe.PipeBaseBlockEntity;
+import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornItems;
+import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornTags;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.nbt.CompoundTag;
@@ -100,7 +101,7 @@ public class OrbitalFluidRetainerBlock extends Block implements EntityBlock, Sim
             CompoundTag nbt = tile.getUpdateTag();
             if (nbt != null) {
                 for (ItemStack stack : items) {
-                    if (stack.getItem() == WizardsReborn.ORBITAL_FLUID_RETAINER_ITEM.get()) {
+                    if (stack.getItem() == WizardsRebornItems.ORBITAL_FLUID_RETAINER.get()) {
                         CompoundTag tag = stack.getOrCreateTag();
                         tag.put("fluidTank", nbt.getCompound("fluidTank"));
                     }
@@ -149,7 +150,7 @@ public class OrbitalFluidRetainerBlock extends Block implements EntityBlock, Sim
 
         if (pLevel.getBlockEntity(pCurrentPos) instanceof PipeBaseBlockEntity pipe) {
             BlockEntity facingBE = pLevel.getBlockEntity(pCurrentPos);
-            if (pNeighborState.is(WizardsReborn.FLUID_PIPE_CONNECTION_BLOCK_TAG)) {
+            if (pNeighborState.is(WizardsRebornTags.FLUID_PIPE_CONNECTION_BLOCK)) {
                 if (facingBE instanceof PipeBaseBlockEntity && ((PipeBaseBlockEntity) facingBE).getConnection(pDirection.getOpposite()) == PipeConnection.DISABLED) {
                     pipe.setConnection(pDirection, PipeConnection.NONE);
                 } else {

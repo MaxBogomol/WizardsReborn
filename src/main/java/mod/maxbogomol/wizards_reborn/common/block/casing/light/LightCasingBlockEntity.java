@@ -1,11 +1,11 @@
 package mod.maxbogomol.wizards_reborn.common.block.casing.light;
 
 import mod.maxbogomol.fluffy_fur.common.network.BlockEntityUpdate;
-import mod.maxbogomol.wizards_reborn.WizardsReborn;
 import mod.maxbogomol.wizards_reborn.api.light.LightRayHitResult;
 import mod.maxbogomol.wizards_reborn.api.light.LightUtil;
 import mod.maxbogomol.wizards_reborn.client.sound.LightCasingSoundInstance;
 import mod.maxbogomol.wizards_reborn.common.block.light_transfer_lens.LightTransferLensBlockEntity;
+import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornBlockEntities;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.nbt.CompoundTag;
@@ -26,7 +26,7 @@ public class LightCasingBlockEntity extends LightTransferLensBlockEntity {
     }
 
     public LightCasingBlockEntity(BlockPos pos, BlockState state) {
-        this(WizardsReborn.LIGHT_CASING_BLOCK_ENTITY.get(), pos, state);
+        this(WizardsRebornBlockEntities.LIGHT_CASING.get(), pos, state);
     }
 
     public void tick() {

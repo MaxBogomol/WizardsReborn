@@ -1,7 +1,7 @@
 package mod.maxbogomol.wizards_reborn.api.wissen;
 
-import mod.maxbogomol.wizards_reborn.WizardsReborn;
 import mod.maxbogomol.wizards_reborn.common.item.equipment.WissenWandItem;
+import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornAttributes;
 import net.minecraft.client.Minecraft;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.entity.ai.attributes.AttributeInstance;
@@ -65,7 +65,7 @@ public class WissenUtils {
     }
 
     public static float getWissenCostModifierWithDiscount(Player player) {
-        AttributeInstance attr = player.getAttribute(WizardsReborn.WISSEN_DISCOUNT.get());
+        AttributeInstance attr = player.getAttribute(WizardsRebornAttributes.WISSEN_DISCOUNT.get());
         return (float) (attr.getValue() / 100d);
     }
 

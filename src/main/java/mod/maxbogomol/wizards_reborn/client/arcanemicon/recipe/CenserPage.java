@@ -3,6 +3,7 @@ package mod.maxbogomol.wizards_reborn.client.arcanemicon.recipe;
 import mod.maxbogomol.wizards_reborn.WizardsReborn;
 import mod.maxbogomol.wizards_reborn.client.arcanemicon.ArcanemiconGui;
 import mod.maxbogomol.wizards_reborn.common.recipe.CenserRecipe;
+import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornRecipes;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.multiplayer.ClientLevel;
@@ -51,7 +52,7 @@ public class CenserPage extends RecipePage {
             SimpleContainer inv = new SimpleContainer(1);
             inv.setItem(0, input);
 
-            Optional<CenserRecipe> recipe = level.getRecipeManager().getRecipeFor(WizardsReborn.CENSER_RECIPE.get(), inv, level);
+            Optional<CenserRecipe> recipe = level.getRecipeManager().getRecipeFor(WizardsRebornRecipes.CENSER.get(), inv, level);
             return !recipe.isPresent();
         }
 

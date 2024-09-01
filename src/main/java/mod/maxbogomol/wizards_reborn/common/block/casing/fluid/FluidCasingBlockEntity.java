@@ -1,9 +1,9 @@
 package mod.maxbogomol.wizards_reborn.common.block.casing.fluid;
 
-import mod.maxbogomol.wizards_reborn.WizardsReborn;
 import mod.maxbogomol.wizards_reborn.api.alchemy.IFluidPipePriority;
 import mod.maxbogomol.wizards_reborn.api.alchemy.PipePriorityMap;
 import mod.maxbogomol.wizards_reborn.common.block.fluid_pipe.FluidPipeBlockEntity;
+import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornBlockEntities;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.sounds.SoundEvents;
@@ -25,7 +25,7 @@ public class FluidCasingBlockEntity extends FluidPipeBlockEntity {
     }
 
     public FluidCasingBlockEntity(BlockPos pos, BlockState state) {
-        this(WizardsReborn.FLUID_CASING_BLOCK_ENTITY.get(), pos, state);
+        this(WizardsRebornBlockEntities.FLUID_CASING.get(), pos, state);
     }
 
     public void tick() {

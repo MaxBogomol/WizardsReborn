@@ -1,12 +1,13 @@
 package mod.maxbogomol.wizards_reborn.common.spell.block;
 
-import mod.maxbogomol.wizards_reborn.WizardsReborn;
 import mod.maxbogomol.wizards_reborn.api.crystal.CrystalUtil;
 import mod.maxbogomol.wizards_reborn.api.spell.Spell;
 import mod.maxbogomol.wizards_reborn.api.wissen.WissenItemUtil;
 import mod.maxbogomol.wizards_reborn.common.item.equipment.arcane.ArcaneArmorItem;
 import mod.maxbogomol.wizards_reborn.common.network.PacketHandler;
 import mod.maxbogomol.wizards_reborn.common.network.spell.MagicSproutSpellEffectPacket;
+import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornCrystals;
+import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornSpells;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.world.InteractionHand;
@@ -26,13 +27,13 @@ import java.awt.*;
 public class MagicSproutSpell extends Spell {
     public MagicSproutSpell(String id, int points) {
         super(id, points);
-        addCrystalType(WizardsReborn.EARTH_CRYSTAL_TYPE);
-        addCrystalType(WizardsReborn.WATER_CRYSTAL_TYPE);
+        addCrystalType(WizardsRebornCrystals.EARTH);
+        addCrystalType(WizardsRebornCrystals.WATER);
     }
 
     @Override
     public Color getColor() {
-        return WizardsReborn.earthSpellColor;
+        return WizardsRebornSpells.earthSpellColor;
     }
 
     @Override
@@ -54,7 +55,7 @@ public class MagicSproutSpell extends Spell {
                     PacketHandler.sendToTracking(context.getPlayer().level(), context.getClickedPos(), new MagicSproutSpellEffectPacket((float) context.getClickedPos().getX() + 0.5F, (float) context.getClickedPos().getY() + 0.5F, (float) context.getClickedPos().getZ() + 0.5F, r, g, b));
                 } else if (WissenItemUtil.canRemoveWissen(stack, getWissenCostWithStat(getStats(stack), context.getPlayer(), getWissenCost() * 10))) {
                     CompoundTag stats = getStats(stack);
-                    int focusLevel = CrystalUtil.getStatLevel(stats, WizardsReborn.FOCUS_CRYSTAL_STAT);
+                    int focusLevel = CrystalUtil.getStatLevel(stats, WizardsRebornCrystals.FOCUS);
                     float magicModifier = ArcaneArmorItem.getPlayerMagicModifier(context.getPlayer());
                     int radius = (int) (1 + magicModifier);
                     BlockPos blockPos = context.getClickedPos();

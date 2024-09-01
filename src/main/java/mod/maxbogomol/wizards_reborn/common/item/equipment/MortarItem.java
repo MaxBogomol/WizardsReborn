@@ -1,8 +1,8 @@
 package mod.maxbogomol.wizards_reborn.common.item.equipment;
 
 import mod.maxbogomol.fluffy_fur.common.item.FuelItem;
-import mod.maxbogomol.wizards_reborn.WizardsReborn;
 import mod.maxbogomol.wizards_reborn.common.recipe.MortarRecipe;
+import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornRecipes;
 import net.minecraft.core.RegistryAccess;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
@@ -41,7 +41,7 @@ public class MortarItem extends FuelItem {
             SimpleContainer inv = new SimpleContainer(1);
             inv.setItem(0, offStack);
             Optional<MortarRecipe> recipe = world.getRecipeManager()
-                    .getRecipeFor(WizardsReborn.MORTAR_RECIPE.get(), inv, world);
+                    .getRecipeFor(WizardsRebornRecipes.MORTAR.get(), inv, world);
 
             if (recipe.isPresent()) {
                 if (recipe.get().getResultItem(RegistryAccess.EMPTY) != null) {

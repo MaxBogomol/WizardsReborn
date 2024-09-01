@@ -1,6 +1,6 @@
 package mod.maxbogomol.wizards_reborn.client.event;
 
-import mod.maxbogomol.wizards_reborn.WizardsReborn;
+import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornMobEffects;
 import net.minecraft.client.Minecraft;
 import net.minecraft.util.Mth;
 import net.minecraftforge.api.distmarker.Dist;
@@ -100,7 +100,7 @@ public class ViewHandler {
 
     public static boolean hasMorEffect() {
         if (Minecraft.getInstance().player != null) {
-            return Minecraft.getInstance().player.hasEffect(WizardsReborn.MOR_SPORES_EFFECT.get());
+            return Minecraft.getInstance().player.hasEffect(WizardsRebornMobEffects.MOR_SPORES.get());
         }
 
         return false;

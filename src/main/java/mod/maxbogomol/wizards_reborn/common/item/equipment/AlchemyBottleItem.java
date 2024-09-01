@@ -6,6 +6,7 @@ import mod.maxbogomol.wizards_reborn.WizardsReborn;
 import mod.maxbogomol.wizards_reborn.api.alchemy.AlchemyPotion;
 import mod.maxbogomol.wizards_reborn.api.alchemy.AlchemyPotionUtil;
 import mod.maxbogomol.wizards_reborn.common.item.PlacedItem;
+import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornItems;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.InteractionHand;
@@ -24,7 +25,7 @@ public class AlchemyBottleItem extends PlacedItem implements ICustomBlockEntityD
     }
 
     public ItemStack getPotionItem() {
-        return new ItemStack(WizardsReborn.ALCHEMY_VIAL_POTION.get());
+        return new ItemStack(WizardsRebornItems.ALCHEMY_VIAL_POTION.get());
     }
 
     public static boolean interactWithFluidHandler(@NotNull Player player, @NotNull InteractionHand hand, @NotNull IFluidHandler handler) {

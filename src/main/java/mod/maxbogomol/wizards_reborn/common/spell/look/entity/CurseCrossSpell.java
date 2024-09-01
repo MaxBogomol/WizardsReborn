@@ -1,11 +1,12 @@
 package mod.maxbogomol.wizards_reborn.common.spell.look.entity;
 
-import mod.maxbogomol.wizards_reborn.WizardsReborn;
 import mod.maxbogomol.wizards_reborn.api.crystal.CrystalUtil;
-import mod.maxbogomol.wizards_reborn.common.damage.DamageSourceRegistry;
 import mod.maxbogomol.wizards_reborn.common.item.equipment.arcane.ArcaneArmorItem;
 import mod.maxbogomol.wizards_reborn.common.network.PacketHandler;
 import mod.maxbogomol.wizards_reborn.common.network.spell.HolyCrossSpellEffectPacket;
+import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornCrystals;
+import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornDamage;
+import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornSpells;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.damagesource.DamageSource;
@@ -22,13 +23,13 @@ import java.awt.*;
 public class CurseCrossSpell extends EntityLookSpell {
     public CurseCrossSpell(String id, int points) {
         super(id, points);
-        addCrystalType(WizardsReborn.FIRE_CRYSTAL_TYPE);
-        addCrystalType(WizardsReborn.VOID_CRYSTAL_TYPE);
+        addCrystalType(WizardsRebornCrystals.FIRE);
+        addCrystalType(WizardsRebornCrystals.VOID);
     }
 
     @Override
     public Color getColor() {
-        return WizardsReborn.curseSpellColor;
+        return WizardsRebornSpells.curseSpellColor;
     }
 
     @Override
@@ -50,7 +51,7 @@ public class CurseCrossSpell extends EntityLookSpell {
     public void lookSpell(Level world, Player player, InteractionHand hand) {
         ItemStack stack = player.getItemInHand(hand);
         CompoundTag stats = getStats(stack);
-        int focusLevel = CrystalUtil.getStatLevel(stats, WizardsReborn.FOCUS_CRYSTAL_STAT);
+        int focusLevel = CrystalUtil.getStatLevel(stats, WizardsRebornCrystals.FOCUS);
         float magicModifier = ArcaneArmorItem.getPlayerMagicModifier(player);
         float damage = (float) (1.0f + ((focusLevel + magicModifier) * 0.5));
 
@@ -60,7 +61,7 @@ public class CurseCrossSpell extends EntityLookSpell {
             for (Entity entity : hit.getEntities()) {
                 if (entity instanceof LivingEntity livingEntity) {
                     if (livingEntity.getMobType() != MobType.UNDEAD) {
-                        entity.hurt(new DamageSource(DamageSourceRegistry.create(entity.level(), DamageSourceRegistry.ARCANE_MAGIC).typeHolder(), player), damage);
+                        entity.hurt(new DamageSource(WizardsRebornDamage.create(entity.level(), WizardsRebornDamage.ARCANE_MAGIC).typeHolder(), player), damage);
                     } else {
                         if (livingEntity.getHealth() != livingEntity.getMaxHealth()) {
                             livingEntity.heal(damage);

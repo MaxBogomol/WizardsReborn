@@ -1,7 +1,7 @@
 package mod.maxbogomol.wizards_reborn.common.block.fluid_extractor;
 
-import mod.maxbogomol.wizards_reborn.WizardsReborn;
 import mod.maxbogomol.wizards_reborn.common.block.fluid_pipe.FluidPipeBaseBlockEntity;
+import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornBlockEntities;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.world.level.block.entity.BlockEntity;
@@ -27,7 +27,7 @@ public class FluidExtractorBlockEntity extends FluidPipeBaseBlockEntity {
     }
 
     public FluidExtractorBlockEntity(BlockPos pos, BlockState state) {
-        this(WizardsReborn.FLUID_EXTRACTOR_BLOCK_ENTITY.get(), pos, state);
+        this(WizardsRebornBlockEntities.FLUID_EXTRACTOR.get(), pos, state);
     }
 
     @Override

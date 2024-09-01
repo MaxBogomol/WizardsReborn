@@ -3,82 +3,55 @@ package mod.maxbogomol.wizards_reborn;
 import com.mojang.blaze3d.platform.InputConstants;
 import com.mojang.blaze3d.vertex.DefaultVertexFormat;
 import mod.maxbogomol.fluffy_fur.FluffyFurClient;
-import mod.maxbogomol.fluffy_fur.client.event.BowHandler;
 import mod.maxbogomol.fluffy_fur.client.gui.screen.FluffyFurMod;
 import mod.maxbogomol.fluffy_fur.client.gui.screen.FluffyFurPanorama;
 import mod.maxbogomol.fluffy_fur.client.model.item.CustomModel;
-import mod.maxbogomol.fluffy_fur.client.particle.GenericParticleType;
-import mod.maxbogomol.fluffy_fur.client.render.item.LargeItemRenderer;
-import mod.maxbogomol.fluffy_fur.client.sound.MusicHandler;
-import mod.maxbogomol.fluffy_fur.client.sound.MusicModifier;
-import mod.maxbogomol.fluffy_fur.client.tooltip.AttributeTooltipModifier;
-import mod.maxbogomol.fluffy_fur.client.tooltip.TooltipModifierHandler;
 import mod.maxbogomol.wizards_reborn.client.arcanemicon.ArcanemiconChapters;
 import mod.maxbogomol.wizards_reborn.client.event.ClientEvents;
 import mod.maxbogomol.wizards_reborn.client.event.ClientTickHandler;
 import mod.maxbogomol.wizards_reborn.client.event.ClientWorldEvent;
 import mod.maxbogomol.wizards_reborn.client.event.KeyBindHandler;
 import mod.maxbogomol.wizards_reborn.client.gui.TooltipEventHandler;
-import mod.maxbogomol.wizards_reborn.client.gui.screen.*;
 import mod.maxbogomol.wizards_reborn.client.model.armor.*;
 import mod.maxbogomol.wizards_reborn.client.model.block.AlchemyBottleModel;
 import mod.maxbogomol.wizards_reborn.client.model.block.AlchemyFlaskModel;
 import mod.maxbogomol.wizards_reborn.client.model.block.AlchemyVialModel;
 import mod.maxbogomol.wizards_reborn.client.model.block.PipeModel;
 import mod.maxbogomol.wizards_reborn.client.model.curio.*;
-import mod.maxbogomol.wizards_reborn.client.model.item.*;
+import mod.maxbogomol.wizards_reborn.client.model.item.ItemSkinsModels;
+import mod.maxbogomol.wizards_reborn.client.model.item.SkinItemOverrides;
+import mod.maxbogomol.wizards_reborn.client.model.item.WandCrystalsModels;
 import mod.maxbogomol.wizards_reborn.client.model.sniffalo.SniffaloArcaneArmorModel;
 import mod.maxbogomol.wizards_reborn.client.model.sniffalo.SniffaloCarpetArmorModel;
 import mod.maxbogomol.wizards_reborn.client.model.sniffalo.SniffaloSaddleArmorModel;
-import mod.maxbogomol.wizards_reborn.client.particle.LeavesParticleType;
-import mod.maxbogomol.wizards_reborn.client.render.block.*;
-import mod.maxbogomol.wizards_reborn.client.render.curio.*;
-import mod.maxbogomol.wizards_reborn.client.render.entity.*;
 import mod.maxbogomol.wizards_reborn.client.render.fluid.FluidCuboid;
-import mod.maxbogomol.wizards_reborn.common.block.CustomBlockColor;
-import mod.maxbogomol.wizards_reborn.common.entity.CustomBoatEntity;
-import mod.maxbogomol.wizards_reborn.common.integration.farmersdelight.FarmersDelightIntegration;
-import mod.maxbogomol.wizards_reborn.common.item.equipment.*;
-import mod.maxbogomol.wizards_reborn.common.item.equipment.curio.LeatherCollarItem;
+import mod.maxbogomol.wizards_reborn.common.item.equipment.WissenWandItem;
+import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornBlocks;
+import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornItems;
 import net.minecraft.client.KeyMapping;
-import net.minecraft.client.Minecraft;
-import net.minecraft.client.gui.screens.MenuScreens;
-import net.minecraft.client.model.BoatModel;
-import net.minecraft.client.model.ChestBoatModel;
-import net.minecraft.client.model.ChestRaftModel;
-import net.minecraft.client.model.RaftModel;
 import net.minecraft.client.model.geom.ModelLayerLocation;
-import net.minecraft.client.particle.ParticleEngine;
 import net.minecraft.client.renderer.ItemBlockRenderTypes;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.ShaderInstance;
-import net.minecraft.client.renderer.Sheets;
-import net.minecraft.client.renderer.blockentity.BlockEntityRenderers;
-import net.minecraft.client.renderer.entity.EntityRenderers;
-import net.minecraft.client.renderer.item.ItemProperties;
 import net.minecraft.client.resources.model.BakedModel;
 import net.minecraft.client.resources.model.ModelManager;
 import net.minecraft.client.resources.model.ModelResourceLocation;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.sounds.Music;
-import net.minecraft.world.entity.ai.attributes.Attribute;
-import net.minecraft.world.entity.ai.attributes.AttributeModifier;
-import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.TooltipFlag;
 import net.minecraftforge.api.distmarker.Dist;
-import net.minecraftforge.client.event.*;
+import net.minecraftforge.client.event.EntityRenderersEvent;
+import net.minecraftforge.client.event.ModelEvent;
+import net.minecraftforge.client.event.RegisterKeyMappingsEvent;
+import net.minecraftforge.client.event.RegisterShadersEvent;
 import net.minecraftforge.client.settings.KeyConflictContext;
 import net.minecraftforge.common.MinecraftForge;
-import net.minecraftforge.common.Tags;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import org.joml.Vector3f;
 import org.lwjgl.glfw.GLFW;
-import top.theillusivec4.curios.api.client.CuriosRendererRegistry;
 
 import java.awt.*;
 import java.io.IOException;
@@ -166,21 +139,21 @@ public class WizardsRebornClient {
 
     public static PipeModel fluidPipe;
     public static PipeModel steamPipe;
-    public static ArrayList<PipeModel> fluidExtractor = new ArrayList<PipeModel>();
-    public static ArrayList<PipeModel> steamExtractor = new ArrayList<PipeModel>();
-    public static ArrayList<PipeModel> orbitalFluidRetainer = new ArrayList<PipeModel>();
-    public static ArrayList<PipeModel> alchemyMachine = new ArrayList<PipeModel>();
-    public static ArrayList<PipeModel> alchemyBoiler = new ArrayList<PipeModel>();
-    public static ArrayList<PipeModel> arcaneWoodFluidCasing = new ArrayList<PipeModel>();
-    public static ArrayList<PipeModel> innocentWoodFluidCasing = new ArrayList<PipeModel>();
-    public static ArrayList<PipeModel> corkBambooFluidCasing = new ArrayList<PipeModel>();
-    public static ArrayList<PipeModel> wisestoneFluidCasing = new ArrayList<PipeModel>();
-    public static ArrayList<PipeModel> arcaneWoodSteamCasing = new ArrayList<PipeModel>();
-    public static ArrayList<PipeModel> innocentWoodSteamCasing = new ArrayList<PipeModel>();
-    public static ArrayList<PipeModel> corkBambooSteamCasing = new ArrayList<PipeModel>();
-    public static ArrayList<PipeModel> wisestoneSteamCasing = new ArrayList<PipeModel>();
-    public static ArrayList<PipeModel> creativeFluidStorage = new ArrayList<PipeModel>();
-    public static ArrayList<PipeModel> creativeSteamStorage = new ArrayList<PipeModel>();
+    public static ArrayList<PipeModel> fluidExtractor = new ArrayList<>();
+    public static ArrayList<PipeModel> steamExtractor = new ArrayList<>();
+    public static ArrayList<PipeModel> orbitalFluidRetainer = new ArrayList<>();
+    public static ArrayList<PipeModel> alchemyMachine = new ArrayList<>();
+    public static ArrayList<PipeModel> alchemyBoiler = new ArrayList<>();
+    public static ArrayList<PipeModel> arcaneWoodFluidCasing = new ArrayList<>();
+    public static ArrayList<PipeModel> innocentWoodFluidCasing = new ArrayList<>();
+    public static ArrayList<PipeModel> corkBambooFluidCasing = new ArrayList<>();
+    public static ArrayList<PipeModel> wisestoneFluidCasing = new ArrayList<>();
+    public static ArrayList<PipeModel> arcaneWoodSteamCasing = new ArrayList<>();
+    public static ArrayList<PipeModel> innocentWoodSteamCasing = new ArrayList<>();
+    public static ArrayList<PipeModel> corkBambooSteamCasing = new ArrayList<>();
+    public static ArrayList<PipeModel> wisestoneSteamCasing = new ArrayList<>();
+    public static ArrayList<PipeModel> creativeFluidStorage = new ArrayList<>();
+    public static ArrayList<PipeModel> creativeSteamStorage = new ArrayList<>();
 
     public static PipeModel arcaneWoodCrossBaulk;
     public static PipeModel strippedArcaneWoodCrossBaulk;
@@ -258,10 +231,6 @@ public class WizardsRebornClient {
     public static final ModelResourceLocation CORK_BAMBOO_CHISELED_PLANKS_CROSS_BAULK_CONNECTION_2 = new ModelResourceLocation(new ResourceLocation(WizardsReborn.MOD_ID, "cork_bamboo_chiseled_planks_cross_baulk_connection_opposite"), "");
     public static final ModelResourceLocation CORK_BAMBOO_CHISELED_PLANKS_CROSS_BAULK_END_2 = new ModelResourceLocation(new ResourceLocation(WizardsReborn.MOD_ID, "cork_bamboo_chiseled_planks_cross_baulk_end_opposite"), "");
 
-    public static final Music REBORN_MUSIC = new Music(WizardsReborn.MUSIC_DISC_REBORN_SOUND.getHolder().get(), 20, 600, true);
-    public static final Music MOR_MUSIC = new Music(WizardsReborn.MUSIC_DISC_MOR_SOUND.getHolder().get(), 3600, 9600, false);
-    public static final Music SHIMMER_MUSIC = new Music(WizardsReborn.MUSIC_DISC_SHIMMER_SOUND.getHolder().get(), 3600, 9600, false);
-
     public static Random random = new Random();
 
     public static class ClientOnly {
@@ -316,210 +285,103 @@ public class WizardsRebornClient {
     public static void clientSetup(final FMLClientSetupEvent event) {
         event.enqueueWork(() -> {
             setupMenu();
-            setupBows();
-            setupTooltipModifiers();
-            setupMusic();
             ArcanemiconChapters.init();
-
-            MenuScreens.register(WizardsReborn.ARCANE_WORKBENCH_CONTAINER.get(), ArcaneWorkbenchScreen::new);
-            MenuScreens.register(WizardsReborn.JEWELER_TABLE_CONTAINER.get(), JewelerTableScreen::new);
-            MenuScreens.register(WizardsReborn.ALCHEMY_FURNACE_CONTAINER.get(), AlchemyFurnaceScreen::new);
-            MenuScreens.register(WizardsReborn.ALCHEMY_MACHINE_CONTAINER.get(), AlchemyMachineScreen::new);
-            MenuScreens.register(WizardsReborn.ARCANE_HOPPER_CONTAINER.get(), ArcaneHopperScreen::new);
-            MenuScreens.register(WizardsReborn.ITEM_SORTER_CONTAINER.get(), ItemSorterScreen::new);
-            MenuScreens.register(WizardsReborn.TOTEM_OF_DISENCHANT_CONTAINER.get(), TotemOfDisenchantScreen::new);
-            MenuScreens.register(WizardsReborn.RUNIC_PEDESTAL_CONTAINER.get(), RunicPedestalScreen::new);
-            MenuScreens.register(WizardsReborn.CRYSTAL_BAG_CONTAINER.get(), CrystalBagScreen::new);
-            MenuScreens.register(WizardsReborn.ALCHEMY_BAG_CONTAINER.get(), AlchemyBagScreen::new);
-
-            CuriosRendererRegistry.register(WizardsReborn.ARCANUM_AMULET.get(), AmuletRenderer::new);
-            CuriosRendererRegistry.register(WizardsReborn.ARCACITE_AMULET.get(), AmuletRenderer::new);
-            CuriosRendererRegistry.register(WizardsReborn.LEATHER_BELT.get(), BeltRenderer::new);
-            CuriosRendererRegistry.register(WizardsReborn.ARCANE_FORTRESS_BELT.get(), BeltRenderer::new);
-            CuriosRendererRegistry.register(WizardsReborn.INVENTOR_WIZARD_BELT.get(), BeltRenderer::new);
-            CuriosRendererRegistry.register(WizardsReborn.CRYSTAL_BAG.get(), BagRenderer::new);
-            CuriosRendererRegistry.register(WizardsReborn.ALCHEMY_BAG.get(), BagRenderer::new);
-            CuriosRendererRegistry.register(WizardsReborn.LEATHER_COLLAR.get(), CollarRenderer::new);
-            CuriosRendererRegistry.register(WizardsReborn.BROWN_MUSHROOM_CAP.get(), MushroomCapRenderer::new);
-            CuriosRendererRegistry.register(WizardsReborn.RED_MUSHROOM_CAP.get(), MushroomCapRenderer::new);
-            CuriosRendererRegistry.register(WizardsReborn.CRIMSON_FUNGUS_CAP.get(), MushroomCapRenderer::new);
-            CuriosRendererRegistry.register(WizardsReborn.WARPED_FUNGUS_CAP.get(), MushroomCapRenderer::new);
-            CuriosRendererRegistry.register(WizardsReborn.MOR_CAP.get(), MushroomCapRenderer::new);
-            CuriosRendererRegistry.register(WizardsReborn.ELDER_MOR_CAP.get(), MushroomCapRenderer::new);
         });
     }
 
-    @Mod.EventBusSubscriber(bus=Mod.EventBusSubscriber.Bus.MOD, value = Dist.CLIENT)
+    @Mod.EventBusSubscriber(modid = WizardsReborn.MOD_ID, bus = Mod.EventBusSubscriber.Bus.MOD, value = Dist.CLIENT)
     public static class RegistryEvents {
         @SubscribeEvent
-        public static void onRenderTypeSetup(FMLClientSetupEvent event) {
-            Sheets.addWoodType(WizardsReborn.ARCANE_WOOD_TYPE.resolve().get());
-            Sheets.addWoodType(WizardsReborn.INNOCENT_WOOD_TYPE.resolve().get());
-            Sheets.addWoodType(WizardsReborn.CORK_BAMBOO_TYPE.resolve().get());
+        public static void clientSetup(FMLClientSetupEvent event) {
+            ItemBlockRenderTypes.setRenderLayer(WizardsRebornBlocks.ARCANE_WOOD_DOOR.get(), RenderType.cutout());
+            ItemBlockRenderTypes.setRenderLayer(WizardsRebornBlocks.ARCANE_WOOD_TRAPDOOR.get(), RenderType.cutout());
+            ItemBlockRenderTypes.setRenderLayer(WizardsRebornBlocks.ARCANE_WOOD_LEAVES.get(), RenderType.cutout());
+            ItemBlockRenderTypes.setRenderLayer(WizardsRebornBlocks.ARCANE_WOOD_SAPLING.get(), RenderType.cutout());
+            ItemBlockRenderTypes.setRenderLayer(WizardsRebornBlocks.POTTED_ARCANE_WOOD_SAPLING.get(), RenderType.cutout());
+            ItemBlockRenderTypes.setRenderLayer(WizardsRebornBlocks.INNOCENT_WOOD_DOOR.get(), RenderType.cutout());
+            ItemBlockRenderTypes.setRenderLayer(WizardsRebornBlocks.INNOCENT_WOOD_TRAPDOOR.get(), RenderType.cutout());
+            ItemBlockRenderTypes.setRenderLayer(WizardsRebornBlocks.INNOCENT_WOOD_LEAVES.get(), RenderType.cutout());
+            ItemBlockRenderTypes.setRenderLayer(WizardsRebornBlocks.INNOCENT_WOOD_SAPLING.get(), RenderType.cutout());
+            ItemBlockRenderTypes.setRenderLayer(WizardsRebornBlocks.POTTED_INNOCENT_WOOD_SAPLING.get(), RenderType.cutout());
+            ItemBlockRenderTypes.setRenderLayer(WizardsRebornBlocks.PETALS_OF_INNOCENCE.get(), RenderType.cutout());
+            ItemBlockRenderTypes.setRenderLayer(WizardsRebornBlocks.POTTED_PETALS_OF_INNOCENCE.get(), RenderType.cutout());
+            ItemBlockRenderTypes.setRenderLayer(WizardsRebornBlocks.POTTED_PINK_PETALS.get(), RenderType.cutout());
+            ItemBlockRenderTypes.setRenderLayer(WizardsRebornBlocks.ARCANE_LINEN.get(), RenderType.cutout());
+            ItemBlockRenderTypes.setRenderLayer(WizardsRebornBlocks.MOR.get(), RenderType.cutout());
+            ItemBlockRenderTypes.setRenderLayer(WizardsRebornBlocks.POTTED_MOR.get(), RenderType.cutout());
+            ItemBlockRenderTypes.setRenderLayer(WizardsRebornBlocks.ELDER_MOR.get(), RenderType.cutout());
+            ItemBlockRenderTypes.setRenderLayer(WizardsRebornBlocks.POTTED_ELDER_MOR.get(), RenderType.cutout());
+            ItemBlockRenderTypes.setRenderLayer(WizardsRebornBlocks.PITCHER_TURNIP.get(), RenderType.cutout());
+            ItemBlockRenderTypes.setRenderLayer(WizardsRebornBlocks.PITCHER_TURNIP_BLOCK.get(), RenderType.cutout());
+            ItemBlockRenderTypes.setRenderLayer(WizardsRebornBlocks.POTTED_PITCHER_TURNIP.get(), RenderType.cutout());
+            ItemBlockRenderTypes.setRenderLayer(WizardsRebornBlocks.SHINY_CLOVER_CROP.get(), RenderType.cutout());
+            ItemBlockRenderTypes.setRenderLayer(WizardsRebornBlocks.SHINY_CLOVER.get(), RenderType.cutout());
+            ItemBlockRenderTypes.setRenderLayer(WizardsRebornBlocks.POTTED_SHINY_CLOVER.get(), RenderType.cutout());
+            ItemBlockRenderTypes.setRenderLayer(WizardsRebornBlocks.UNDERGROUND_GRAPE_VINES.get(), RenderType.cutout());
+            ItemBlockRenderTypes.setRenderLayer(WizardsRebornBlocks.UNDERGROUND_GRAPE_VINES_PLANT.get(), RenderType.cutout());
+            ItemBlockRenderTypes.setRenderLayer(WizardsRebornBlocks.CORK_BAMBOO_SAPLING.get(), RenderType.cutout());
+            ItemBlockRenderTypes.setRenderLayer(WizardsRebornBlocks.CORK_BAMBOO.get(), RenderType.cutout());
+            ItemBlockRenderTypes.setRenderLayer(WizardsRebornBlocks.POTTED_CORK_BAMBOO.get(), RenderType.cutout());
+            ItemBlockRenderTypes.setRenderLayer(WizardsRebornBlocks.STEAM_THERMAL_STORAGE.get(), RenderType.cutout());
+            ItemBlockRenderTypes.setRenderLayer(WizardsRebornBlocks.ARCANE_CENSER.get(), RenderType.cutout());
+            ItemBlockRenderTypes.setRenderLayer(WizardsRebornBlocks.ALCHEMY_GLASS.get(), RenderType.translucent());
+            ItemBlockRenderTypes.setRenderLayer(WizardsRebornBlocks.WHITE_LUMINAL_GLASS.get(), RenderType.translucent());
+            ItemBlockRenderTypes.setRenderLayer(WizardsRebornBlocks.LIGHT_GRAY_LUMINAL_GLASS.get(), RenderType.translucent());
+            ItemBlockRenderTypes.setRenderLayer(WizardsRebornBlocks.GRAY_LUMINAL_GLASS.get(), RenderType.translucent());
+            ItemBlockRenderTypes.setRenderLayer(WizardsRebornBlocks.BLACK_LUMINAL_GLASS.get(), RenderType.translucent());
+            ItemBlockRenderTypes.setRenderLayer(WizardsRebornBlocks.BROWN_LUMINAL_GLASS.get(), RenderType.translucent());
+            ItemBlockRenderTypes.setRenderLayer(WizardsRebornBlocks.RED_LUMINAL_GLASS.get(), RenderType.translucent());
+            ItemBlockRenderTypes.setRenderLayer(WizardsRebornBlocks.ORANGE_LUMINAL_GLASS.get(), RenderType.translucent());
+            ItemBlockRenderTypes.setRenderLayer(WizardsRebornBlocks.YELLOW_LUMINAL_GLASS.get(), RenderType.translucent());
+            ItemBlockRenderTypes.setRenderLayer(WizardsRebornBlocks.LIME_LUMINAL_GLASS.get(), RenderType.translucent());
+            ItemBlockRenderTypes.setRenderLayer(WizardsRebornBlocks.GREEN_LUMINAL_GLASS.get(), RenderType.translucent());
+            ItemBlockRenderTypes.setRenderLayer(WizardsRebornBlocks.CYAN_LUMINAL_GLASS.get(), RenderType.translucent());
+            ItemBlockRenderTypes.setRenderLayer(WizardsRebornBlocks.LIGHT_BLUE_LUMINAL_GLASS.get(), RenderType.translucent());
+            ItemBlockRenderTypes.setRenderLayer(WizardsRebornBlocks.BLUE_LUMINAL_GLASS.get(), RenderType.translucent());
+            ItemBlockRenderTypes.setRenderLayer(WizardsRebornBlocks.PURPLE_LUMINAL_GLASS.get(), RenderType.translucent());
+            ItemBlockRenderTypes.setRenderLayer(WizardsRebornBlocks.MAGENTA_LUMINAL_GLASS.get(), RenderType.translucent());
+            ItemBlockRenderTypes.setRenderLayer(WizardsRebornBlocks.PINK_LUMINAL_GLASS.get(), RenderType.translucent());
+            ItemBlockRenderTypes.setRenderLayer(WizardsRebornBlocks.RAINBOW_LUMINAL_GLASS.get(), RenderType.translucent());
+            ItemBlockRenderTypes.setRenderLayer(WizardsRebornBlocks.COSMIC_LUMINAL_GLASS.get(), RenderType.translucent());
+            ItemBlockRenderTypes.setRenderLayer(WizardsRebornBlocks.WHITE_FRAMED_LUMINAL_GLASS.get(), RenderType.translucent());
+            ItemBlockRenderTypes.setRenderLayer(WizardsRebornBlocks.LIGHT_GRAY_FRAMED_LUMINAL_GLASS.get(), RenderType.translucent());
+            ItemBlockRenderTypes.setRenderLayer(WizardsRebornBlocks.GRAY_FRAMED_LUMINAL_GLASS.get(), RenderType.translucent());
+            ItemBlockRenderTypes.setRenderLayer(WizardsRebornBlocks.BLACK_FRAMED_LUMINAL_GLASS.get(), RenderType.translucent());
+            ItemBlockRenderTypes.setRenderLayer(WizardsRebornBlocks.BROWN_FRAMED_LUMINAL_GLASS.get(), RenderType.translucent());
+            ItemBlockRenderTypes.setRenderLayer(WizardsRebornBlocks.RED_FRAMED_LUMINAL_GLASS.get(), RenderType.translucent());
+            ItemBlockRenderTypes.setRenderLayer(WizardsRebornBlocks.ORANGE_FRAMED_LUMINAL_GLASS.get(), RenderType.translucent());
+            ItemBlockRenderTypes.setRenderLayer(WizardsRebornBlocks.YELLOW_FRAMED_LUMINAL_GLASS.get(), RenderType.translucent());
+            ItemBlockRenderTypes.setRenderLayer(WizardsRebornBlocks.LIME_FRAMED_LUMINAL_GLASS.get(), RenderType.translucent());
+            ItemBlockRenderTypes.setRenderLayer(WizardsRebornBlocks.GREEN_FRAMED_LUMINAL_GLASS.get(), RenderType.translucent());
+            ItemBlockRenderTypes.setRenderLayer(WizardsRebornBlocks.CYAN_FRAMED_LUMINAL_GLASS.get(), RenderType.translucent());
+            ItemBlockRenderTypes.setRenderLayer(WizardsRebornBlocks.LIGHT_BLUE_FRAMED_LUMINAL_GLASS.get(), RenderType.translucent());
+            ItemBlockRenderTypes.setRenderLayer(WizardsRebornBlocks.BLUE_FRAMED_LUMINAL_GLASS.get(), RenderType.translucent());
+            ItemBlockRenderTypes.setRenderLayer(WizardsRebornBlocks.PURPLE_FRAMED_LUMINAL_GLASS.get(), RenderType.translucent());
+            ItemBlockRenderTypes.setRenderLayer(WizardsRebornBlocks.MAGENTA_FRAMED_LUMINAL_GLASS.get(), RenderType.translucent());
+            ItemBlockRenderTypes.setRenderLayer(WizardsRebornBlocks.PINK_FRAMED_LUMINAL_GLASS.get(), RenderType.translucent());
+            ItemBlockRenderTypes.setRenderLayer(WizardsRebornBlocks.RAINBOW_FRAMED_LUMINAL_GLASS.get(), RenderType.translucent());
+            ItemBlockRenderTypes.setRenderLayer(WizardsRebornBlocks.COSMIC_FRAMED_LUMINAL_GLASS.get(), RenderType.translucent());
 
-            ItemBlockRenderTypes.setRenderLayer(WizardsReborn.ARCANE_WOOD_DOOR.get(), RenderType.cutout());
-            ItemBlockRenderTypes.setRenderLayer(WizardsReborn.ARCANE_WOOD_TRAPDOOR.get(), RenderType.cutout());
-            ItemBlockRenderTypes.setRenderLayer(WizardsReborn.ARCANE_WOOD_LEAVES.get(), RenderType.cutout());
-            ItemBlockRenderTypes.setRenderLayer(WizardsReborn.ARCANE_WOOD_SAPLING.get(), RenderType.cutout());
-            ItemBlockRenderTypes.setRenderLayer(WizardsReborn.POTTED_ARCANE_WOOD_SAPLING.get(), RenderType.cutout());
-            ItemBlockRenderTypes.setRenderLayer(WizardsReborn.INNOCENT_WOOD_DOOR.get(), RenderType.cutout());
-            ItemBlockRenderTypes.setRenderLayer(WizardsReborn.INNOCENT_WOOD_TRAPDOOR.get(), RenderType.cutout());
-            ItemBlockRenderTypes.setRenderLayer(WizardsReborn.INNOCENT_WOOD_LEAVES.get(), RenderType.cutout());
-            ItemBlockRenderTypes.setRenderLayer(WizardsReborn.INNOCENT_WOOD_SAPLING.get(), RenderType.cutout());
-            ItemBlockRenderTypes.setRenderLayer(WizardsReborn.POTTED_INNOCENT_WOOD_SAPLING.get(), RenderType.cutout());
-            ItemBlockRenderTypes.setRenderLayer(WizardsReborn.PETALS_OF_INNOCENCE.get(), RenderType.cutout());
-            ItemBlockRenderTypes.setRenderLayer(WizardsReborn.POTTED_PETALS_OF_INNOCENCE.get(), RenderType.cutout());
-            ItemBlockRenderTypes.setRenderLayer(WizardsReborn.POTTED_PINK_PETALS.get(), RenderType.cutout());
-            ItemBlockRenderTypes.setRenderLayer(WizardsReborn.ARCANE_LINEN.get(), RenderType.cutout());
-            ItemBlockRenderTypes.setRenderLayer(WizardsReborn.MOR.get(), RenderType.cutout());
-            ItemBlockRenderTypes.setRenderLayer(WizardsReborn.POTTED_MOR.get(), RenderType.cutout());
-            ItemBlockRenderTypes.setRenderLayer(WizardsReborn.ELDER_MOR.get(), RenderType.cutout());
-            ItemBlockRenderTypes.setRenderLayer(WizardsReborn.POTTED_ELDER_MOR.get(), RenderType.cutout());
-            ItemBlockRenderTypes.setRenderLayer(WizardsReborn.PITCHER_TURNIP.get(), RenderType.cutout());
-            ItemBlockRenderTypes.setRenderLayer(WizardsReborn.PITCHER_TURNIP_BLOCK.get(), RenderType.cutout());
-            ItemBlockRenderTypes.setRenderLayer(WizardsReborn.POTTED_PITCHER_TURNIP.get(), RenderType.cutout());
-            ItemBlockRenderTypes.setRenderLayer(WizardsReborn.SHINY_CLOVER_CROP.get(), RenderType.cutout());
-            ItemBlockRenderTypes.setRenderLayer(WizardsReborn.SHINY_CLOVER.get(), RenderType.cutout());
-            ItemBlockRenderTypes.setRenderLayer(WizardsReborn.POTTED_SHINY_CLOVER.get(), RenderType.cutout());
-            ItemBlockRenderTypes.setRenderLayer(WizardsReborn.UNDERGROUND_GRAPE_VINES.get(), RenderType.cutout());
-            ItemBlockRenderTypes.setRenderLayer(WizardsReborn.UNDERGROUND_GRAPE_VINES_PLANT.get(), RenderType.cutout());
-            ItemBlockRenderTypes.setRenderLayer(WizardsReborn.CORK_BAMBOO_SAPLING.get(), RenderType.cutout());
-            ItemBlockRenderTypes.setRenderLayer(WizardsReborn.CORK_BAMBOO.get(), RenderType.cutout());
-            ItemBlockRenderTypes.setRenderLayer(WizardsReborn.POTTED_CORK_BAMBOO.get(), RenderType.cutout());
-            ItemBlockRenderTypes.setRenderLayer(WizardsReborn.STEAM_THERMAL_STORAGE.get(), RenderType.cutout());
-            ItemBlockRenderTypes.setRenderLayer(WizardsReborn.ARCANE_CENSER.get(), RenderType.cutout());
-            ItemBlockRenderTypes.setRenderLayer(WizardsReborn.ALCHEMY_GLASS.get(), RenderType.translucent());
-            ItemBlockRenderTypes.setRenderLayer(WizardsReborn.WHITE_LUMINAL_GLASS.get(), RenderType.translucent());
-            ItemBlockRenderTypes.setRenderLayer(WizardsReborn.LIGHT_GRAY_LUMINAL_GLASS.get(), RenderType.translucent());
-            ItemBlockRenderTypes.setRenderLayer(WizardsReborn.GRAY_LUMINAL_GLASS.get(), RenderType.translucent());
-            ItemBlockRenderTypes.setRenderLayer(WizardsReborn.BLACK_LUMINAL_GLASS.get(), RenderType.translucent());
-            ItemBlockRenderTypes.setRenderLayer(WizardsReborn.BROWN_LUMINAL_GLASS.get(), RenderType.translucent());
-            ItemBlockRenderTypes.setRenderLayer(WizardsReborn.RED_LUMINAL_GLASS.get(), RenderType.translucent());
-            ItemBlockRenderTypes.setRenderLayer(WizardsReborn.ORANGE_LUMINAL_GLASS.get(), RenderType.translucent());
-            ItemBlockRenderTypes.setRenderLayer(WizardsReborn.YELLOW_LUMINAL_GLASS.get(), RenderType.translucent());
-            ItemBlockRenderTypes.setRenderLayer(WizardsReborn.LIME_LUMINAL_GLASS.get(), RenderType.translucent());
-            ItemBlockRenderTypes.setRenderLayer(WizardsReborn.GREEN_LUMINAL_GLASS.get(), RenderType.translucent());
-            ItemBlockRenderTypes.setRenderLayer(WizardsReborn.CYAN_LUMINAL_GLASS.get(), RenderType.translucent());
-            ItemBlockRenderTypes.setRenderLayer(WizardsReborn.LIGHT_BLUE_LUMINAL_GLASS.get(), RenderType.translucent());
-            ItemBlockRenderTypes.setRenderLayer(WizardsReborn.BLUE_LUMINAL_GLASS.get(), RenderType.translucent());
-            ItemBlockRenderTypes.setRenderLayer(WizardsReborn.PURPLE_LUMINAL_GLASS.get(), RenderType.translucent());
-            ItemBlockRenderTypes.setRenderLayer(WizardsReborn.MAGENTA_LUMINAL_GLASS.get(), RenderType.translucent());
-            ItemBlockRenderTypes.setRenderLayer(WizardsReborn.PINK_LUMINAL_GLASS.get(), RenderType.translucent());
-            ItemBlockRenderTypes.setRenderLayer(WizardsReborn.RAINBOW_LUMINAL_GLASS.get(), RenderType.translucent());
-            ItemBlockRenderTypes.setRenderLayer(WizardsReborn.COSMIC_LUMINAL_GLASS.get(), RenderType.translucent());
-            ItemBlockRenderTypes.setRenderLayer(WizardsReborn.WHITE_FRAMED_LUMINAL_GLASS.get(), RenderType.translucent());
-            ItemBlockRenderTypes.setRenderLayer(WizardsReborn.LIGHT_GRAY_FRAMED_LUMINAL_GLASS.get(), RenderType.translucent());
-            ItemBlockRenderTypes.setRenderLayer(WizardsReborn.GRAY_FRAMED_LUMINAL_GLASS.get(), RenderType.translucent());
-            ItemBlockRenderTypes.setRenderLayer(WizardsReborn.BLACK_FRAMED_LUMINAL_GLASS.get(), RenderType.translucent());
-            ItemBlockRenderTypes.setRenderLayer(WizardsReborn.BROWN_FRAMED_LUMINAL_GLASS.get(), RenderType.translucent());
-            ItemBlockRenderTypes.setRenderLayer(WizardsReborn.RED_FRAMED_LUMINAL_GLASS.get(), RenderType.translucent());
-            ItemBlockRenderTypes.setRenderLayer(WizardsReborn.ORANGE_FRAMED_LUMINAL_GLASS.get(), RenderType.translucent());
-            ItemBlockRenderTypes.setRenderLayer(WizardsReborn.YELLOW_FRAMED_LUMINAL_GLASS.get(), RenderType.translucent());
-            ItemBlockRenderTypes.setRenderLayer(WizardsReborn.LIME_FRAMED_LUMINAL_GLASS.get(), RenderType.translucent());
-            ItemBlockRenderTypes.setRenderLayer(WizardsReborn.GREEN_FRAMED_LUMINAL_GLASS.get(), RenderType.translucent());
-            ItemBlockRenderTypes.setRenderLayer(WizardsReborn.CYAN_FRAMED_LUMINAL_GLASS.get(), RenderType.translucent());
-            ItemBlockRenderTypes.setRenderLayer(WizardsReborn.LIGHT_BLUE_FRAMED_LUMINAL_GLASS.get(), RenderType.translucent());
-            ItemBlockRenderTypes.setRenderLayer(WizardsReborn.BLUE_FRAMED_LUMINAL_GLASS.get(), RenderType.translucent());
-            ItemBlockRenderTypes.setRenderLayer(WizardsReborn.PURPLE_FRAMED_LUMINAL_GLASS.get(), RenderType.translucent());
-            ItemBlockRenderTypes.setRenderLayer(WizardsReborn.MAGENTA_FRAMED_LUMINAL_GLASS.get(), RenderType.translucent());
-            ItemBlockRenderTypes.setRenderLayer(WizardsReborn.PINK_FRAMED_LUMINAL_GLASS.get(), RenderType.translucent());
-            ItemBlockRenderTypes.setRenderLayer(WizardsReborn.RAINBOW_FRAMED_LUMINAL_GLASS.get(), RenderType.translucent());
-            ItemBlockRenderTypes.setRenderLayer(WizardsReborn.COSMIC_FRAMED_LUMINAL_GLASS.get(), RenderType.translucent());
+            ItemBlockRenderTypes.setRenderLayer(WizardsRebornBlocks.FLUID_SENSOR.get(), RenderType.translucent());
+            ItemBlockRenderTypes.setRenderLayer(WizardsRebornBlocks.WISSEN_ACTIVATOR.get(), RenderType.translucent());
+            ItemBlockRenderTypes.setRenderLayer(WizardsRebornBlocks.ITEM_SORTER.get(), RenderType.translucent());
+            ItemBlockRenderTypes.setRenderLayer(WizardsRebornBlocks.ARCANE_WOOD_GLASS_FRAME.get(), RenderType.translucent());
+            ItemBlockRenderTypes.setRenderLayer(WizardsRebornBlocks.INNOCENT_WOOD_GLASS_FRAME.get(), RenderType.translucent());
+            ItemBlockRenderTypes.setRenderLayer(WizardsRebornBlocks.CORK_BAMBOO_GLASS_FRAME.get(), RenderType.translucent());
+            ItemBlockRenderTypes.setRenderLayer(WizardsRebornBlocks.WISESTONE_GLASS_FRAME.get(), RenderType.translucent());
 
-            ItemBlockRenderTypes.setRenderLayer(WizardsReborn.FLUID_SENSOR.get(), RenderType.translucent());
-            ItemBlockRenderTypes.setRenderLayer(WizardsReborn.WISSEN_ACTIVATOR.get(), RenderType.translucent());
-            ItemBlockRenderTypes.setRenderLayer(WizardsReborn.ITEM_SORTER.get(), RenderType.translucent());
-            ItemBlockRenderTypes.setRenderLayer(WizardsReborn.ARCANE_WOOD_GLASS_FRAME.get(), RenderType.translucent());
-            ItemBlockRenderTypes.setRenderLayer(WizardsReborn.INNOCENT_WOOD_GLASS_FRAME.get(), RenderType.translucent());
-            ItemBlockRenderTypes.setRenderLayer(WizardsReborn.CORK_BAMBOO_GLASS_FRAME.get(), RenderType.translucent());
-            ItemBlockRenderTypes.setRenderLayer(WizardsReborn.WISESTONE_GLASS_FRAME.get(), RenderType.translucent());
-
-            ItemBlockRenderTypes.setRenderLayer(WizardsReborn.ARCANE_SALT_TORCH.get(), RenderType.cutout());
-            ItemBlockRenderTypes.setRenderLayer(WizardsReborn.ARCANE_SALT_WALL_TORCH.get(), RenderType.cutout());
-            ItemBlockRenderTypes.setRenderLayer(WizardsReborn.INNOCENT_SALT_TORCH.get(), RenderType.cutout());
-            ItemBlockRenderTypes.setRenderLayer(WizardsReborn.INNOCENT_SALT_WALL_TORCH.get(), RenderType.cutout());
-            ItemBlockRenderTypes.setRenderLayer(WizardsReborn.CORK_BAMBOO_SALT_TORCH.get(), RenderType.cutout());
-            ItemBlockRenderTypes.setRenderLayer(WizardsReborn.CORK_BAMBOO_SALT_WALL_TORCH.get(), RenderType.cutout());
-            ItemBlockRenderTypes.setRenderLayer(WizardsReborn.WISESTONE_SALT_TORCH.get(), RenderType.cutout());
-            ItemBlockRenderTypes.setRenderLayer(WizardsReborn.WISESTONE_SALT_WALL_TORCH.get(), RenderType.cutout());
-            ItemBlockRenderTypes.setRenderLayer(WizardsReborn.ARCANE_SALT_LANTERN.get(), RenderType.cutout());
-            ItemBlockRenderTypes.setRenderLayer(WizardsReborn.INNOCENT_SALT_LANTERN.get(), RenderType.cutout());
-            ItemBlockRenderTypes.setRenderLayer(WizardsReborn.CORK_BAMBOO_SALT_LANTERN.get(), RenderType.cutout());
-            ItemBlockRenderTypes.setRenderLayer(WizardsReborn.WISESTONE_SALT_LANTERN.get(), RenderType.cutout());
-
-            ItemBlockRenderTypes.setRenderLayer(WizardsReborn.MUNDANE_BREW_FLUID.get(), RenderType.translucent());
-            ItemBlockRenderTypes.setRenderLayer(WizardsReborn.FLOWING_MUNDANE_BREW_FLUID.get(), RenderType.translucent());
-            ItemBlockRenderTypes.setRenderLayer(WizardsReborn.ALCHEMY_OIL_FLUID.get(), RenderType.translucent());
-            ItemBlockRenderTypes.setRenderLayer(WizardsReborn.FLOWING_ALCHEMY_OIL_FLUID.get(), RenderType.translucent());
-            ItemBlockRenderTypes.setRenderLayer(WizardsReborn.OIL_TEA_FLUID.get(), RenderType.translucent());
-            ItemBlockRenderTypes.setRenderLayer(WizardsReborn.FLOWING_OIL_TEA_FLUID.get(), RenderType.translucent());
-            ItemBlockRenderTypes.setRenderLayer(WizardsReborn.WISSEN_TEA_FLUID.get(), RenderType.translucent());
-            ItemBlockRenderTypes.setRenderLayer(WizardsReborn.FLOWING_WISSEN_TEA_FLUID.get(), RenderType.translucent());
-            ItemBlockRenderTypes.setRenderLayer(WizardsReborn.MUSHROOM_BREW_FLUID.get(), RenderType.translucent());
-            ItemBlockRenderTypes.setRenderLayer(WizardsReborn.FLOWING_MUSHROOM_BREW_FLUID.get(), RenderType.translucent());
-            ItemBlockRenderTypes.setRenderLayer(WizardsReborn.HELLISH_MUSHROOM_BREW_FLUID.get(), RenderType.translucent());
-            ItemBlockRenderTypes.setRenderLayer(WizardsReborn.FLOWING_HELLISH_MUSHROOM_BREW_FLUID.get(), RenderType.translucent());
-            ItemBlockRenderTypes.setRenderLayer(WizardsReborn.MOR_BREW_FLUID.get(), RenderType.translucent());
-            ItemBlockRenderTypes.setRenderLayer(WizardsReborn.FLOWING_MOR_BREW_FLUID.get(), RenderType.translucent());
-            ItemBlockRenderTypes.setRenderLayer(WizardsReborn.FLOWER_BREW_FLUID.get(), RenderType.translucent());
-            ItemBlockRenderTypes.setRenderLayer(WizardsReborn.FLOWING_FLOWER_BREW_FLUID.get(), RenderType.translucent());
-
-            BlockEntityRenderers.register(WizardsReborn.ARCANE_PEDESTAL_BLOCK_ENTITY.get(), (trd) -> new ArcanePedestalRenderer());
-            BlockEntityRenderers.register(WizardsReborn.HOVERING_TOME_STAND_BLOCK_ENTITY.get(), HoveringTomeStandRenderer::new);
-            BlockEntityRenderers.register(WizardsReborn.WISSEN_ALTAR_BLOCK_ENTITY.get(), (trd) -> new WissenAltarRenderer());
-            BlockEntityRenderers.register(WizardsReborn.WISSEN_TRANSLATOR_BLOCK_ENTITY.get(), (trd) -> new WissenTranslatorRenderer());
-            BlockEntityRenderers.register(WizardsReborn.WISSEN_CRYSTALLIZER_BLOCK_ENTITY.get(), (trd) -> new WissenCrystallizerRenderer());
-            BlockEntityRenderers.register(WizardsReborn.ARCANE_WORKBENCH_BLOCK_ENTITY.get(), (trd) -> new ArcaneWorkbenchRenderer());
-            BlockEntityRenderers.register(WizardsReborn.WISSEN_CELL_BLOCK_ENTITY.get(), (trd) -> new WissenCellRenderer());
-            BlockEntityRenderers.register(WizardsReborn.JEWELER_TABLE_BLOCK_ENTITY.get(), (trd) -> new JewelerTableRenderer());
-            BlockEntityRenderers.register(WizardsReborn.ORBITAL_FLUID_RETAINER_BLOCK_ENTITY.get(), (trd) -> new OrbitalFluidRetainerRenderer());
-            BlockEntityRenderers.register(WizardsReborn.ALTAR_OF_DROUGHT_BLOCK_ENTITY.get(), (trd) -> new AltarOfDroughtRenderer());
-            BlockEntityRenderers.register(WizardsReborn.ALCHEMY_MACHINE_BLOCK_ENTITY.get(), (trd) -> new AlchemyMachineRenderer());
-            BlockEntityRenderers.register(WizardsReborn.ALCHEMY_BOILER_BLOCK_ENTITY.get(), (trd) -> new AlchemyBoilerRenderer());
-            BlockEntityRenderers.register(WizardsReborn.ARCANE_CENSER_BLOCK_ENTITY.get(), (trd) -> new ArcaneCenserRenderer());
-            BlockEntityRenderers.register(WizardsReborn.EXPERIENCE_TOTEM_BLOCK_ENTITY.get(), (trd) -> new ExperienceTotemRenderer());
-            BlockEntityRenderers.register(WizardsReborn.TOTEM_OF_EXPERIENCE_ABSORPTION_BLOCK_ENTITY.get(), (trd) -> new TotemOfExperienceAbsorptionRenderer());
-            BlockEntityRenderers.register(WizardsReborn.TOTEM_OF_DISENCHANT_BLOCK_ENTITY.get(), (trd) -> new TotemOfDisenchantRenderer());
-            BlockEntityRenderers.register(WizardsReborn.ARCANE_ITERATOR_BLOCK_ENTITY.get(), (trd) -> new ArcaneIteratorRenderer());
-            BlockEntityRenderers.register(WizardsReborn.LIGHT_EMITTER_BLOCK_ENTITY.get(), (trd) -> new LightEmitterBlockRenderer());
-            BlockEntityRenderers.register(WizardsReborn.LIGHT_TRANSFER_LENS_BLOCK_ENTITY.get(), (trd) -> new LightTransferLensRenderer());
-            BlockEntityRenderers.register(WizardsReborn.RUNIC_PEDESTAL_BLOCK_ENTITY.get(), (trd) -> new RunicPedestalRenderer());
-            BlockEntityRenderers.register(WizardsReborn.ENGRAVED_WISESTONE_BLOCK_ENTITY.get(), (trd) -> new EngravedWisestoneRenderer());
-
-            BlockEntityRenderers.register(WizardsReborn.SENSOR_BLOCK_ENTITY.get(), (trd) -> new SensorRenderer());
-            BlockEntityRenderers.register(WizardsReborn.FLUID_SENSOR_BLOCK_ENTITY.get(), (trd) -> new FluidSensorRenderer());
-            BlockEntityRenderers.register(WizardsReborn.WISSEN_ACTIVATOR_BLOCK_ENTITY.get(), (trd) -> new SensorRenderer());
-            BlockEntityRenderers.register(WizardsReborn.ITEM_SORTER_BLOCK_ENTITY.get(), (trd) -> new ItemSorterRenderer());
-
-            BlockEntityRenderers.register(WizardsReborn.WISSEN_CASING_BLOCK_ENTITY.get(), (trd) -> new WissenCasingRenderer());
-            BlockEntityRenderers.register(WizardsReborn.LIGHT_CASING_BLOCK_ENTITY.get(), (trd) -> new LightCasingRenderer());
-            BlockEntityRenderers.register(WizardsReborn.FLUID_CASING_BLOCK_ENTITY.get(), (trd) -> new FluidCasingRenderer());
-            BlockEntityRenderers.register(WizardsReborn.STEAM_CASING_BLOCK_ENTITY.get(), (trd) -> new SteamCasingRenderer());
-
-            BlockEntityRenderers.register(WizardsReborn.CREATIVE_WISSEN_STORAGE_BLOCK_ENTITY.get(), (trd) -> new CreativeWissenStorageRenderer());
-            BlockEntityRenderers.register(WizardsReborn.CREATIVE_LIGHT_STORAGE_BLOCK_ENTITY.get(), (trd) -> new LightCasingRenderer());
-
-            BlockEntityRenderers.register(WizardsReborn.SALT_CAMPFIRE_BLOCK_ENTITY.get(), (trd) -> new SaltCampfireRenderer());
-
-            BlockEntityRenderers.register(WizardsReborn.ARCANUM_GROWTH_BLOCK_ENTITY.get(), (trd) -> new ArcanumGrowthRenderer());
-            BlockEntityRenderers.register(WizardsReborn.CRYSTAL_GROWTH_BLOCK_ENTITY.get(), (trd) -> new CrystalGrowthRenderer());
-            BlockEntityRenderers.register(WizardsReborn.CRYSTAL_BLOCK_ENTITY.get(), (trd) -> new CrystalRenderer());
-
-            BlockEntityRenderers.register(WizardsReborn.PLACED_ITEMS_BLOCK_ENTITY.get(), (trd) -> new PlacedItemsRenderer());
-
-            EntityRenderers.register(WizardsReborn.BOAT.get(), m -> new CustomBoatRenderer(m, false));
-            EntityRenderers.register(WizardsReborn.CHEST_BOAT.get(), m -> new CustomBoatRenderer(m, true));
-            EntityRenderers.register(WizardsReborn.SPELL_PROJECTILE.get(), SpellProjectileRenderer::new);
-            EntityRenderers.register(WizardsReborn.THROWED_SCYTHE_PROJECTILE.get(), ThrowedScytheRenderer::new);
-            EntityRenderers.register(WizardsReborn.SPLIT_ARROW_PROJECTILE.get(), SplitArrowRenderer::new);
-            EntityRenderers.register(WizardsReborn.SNIFFALO.get(), SniffaloRenderer::new);
-
-            FluffyFurClient.makeBow(WizardsReborn.ARCANE_WOOD_BOW.get());
-
-            ItemProperties.register(WizardsReborn.ALCHEMY_VIAL_POTION.get(), new ResourceLocation("uses"), (stack, level, entity, seed) -> AlchemyPotionItem.getUses(stack));
-            ItemProperties.register(WizardsReborn.ALCHEMY_FLASK_POTION.get(), new ResourceLocation("uses"), (stack, level, entity, seed) -> AlchemyPotionItem.getUses(stack));
-
-            ItemProperties.register(WizardsReborn.KNOWLEDGE_SCROLL.get(), new ResourceLocation("knowledge"), (stack, level, entity, seed) -> KnowledgeSrollItem.hasKnowledge(stack) ? 1 : 0);
+            ItemBlockRenderTypes.setRenderLayer(WizardsRebornBlocks.ARCANE_SALT_TORCH.get(), RenderType.cutout());
+            ItemBlockRenderTypes.setRenderLayer(WizardsRebornBlocks.ARCANE_SALT_WALL_TORCH.get(), RenderType.cutout());
+            ItemBlockRenderTypes.setRenderLayer(WizardsRebornBlocks.INNOCENT_SALT_TORCH.get(), RenderType.cutout());
+            ItemBlockRenderTypes.setRenderLayer(WizardsRebornBlocks.INNOCENT_SALT_WALL_TORCH.get(), RenderType.cutout());
+            ItemBlockRenderTypes.setRenderLayer(WizardsRebornBlocks.CORK_BAMBOO_SALT_TORCH.get(), RenderType.cutout());
+            ItemBlockRenderTypes.setRenderLayer(WizardsRebornBlocks.CORK_BAMBOO_SALT_WALL_TORCH.get(), RenderType.cutout());
+            ItemBlockRenderTypes.setRenderLayer(WizardsRebornBlocks.WISESTONE_SALT_TORCH.get(), RenderType.cutout());
+            ItemBlockRenderTypes.setRenderLayer(WizardsRebornBlocks.WISESTONE_SALT_WALL_TORCH.get(), RenderType.cutout());
+            ItemBlockRenderTypes.setRenderLayer(WizardsRebornBlocks.ARCANE_SALT_LANTERN.get(), RenderType.cutout());
+            ItemBlockRenderTypes.setRenderLayer(WizardsRebornBlocks.INNOCENT_SALT_LANTERN.get(), RenderType.cutout());
+            ItemBlockRenderTypes.setRenderLayer(WizardsRebornBlocks.CORK_BAMBOO_SALT_LANTERN.get(), RenderType.cutout());
+            ItemBlockRenderTypes.setRenderLayer(WizardsRebornBlocks.WISESTONE_SALT_LANTERN.get(), RenderType.cutout());
         }
 
         @SubscribeEvent
@@ -528,52 +390,8 @@ public class WizardsRebornClient {
                 event.register(WandCrystalsModels.getModelLocationCrystal(crystal));
             }
 
-            event.register(LargeItemRenderer.getModelResourceLocation(WizardsReborn.MOD_ID, "arcane_gold_scythe"));
-            event.register(LargeItemRenderer.getModelResourceLocation(WizardsReborn.MOD_ID, "arcane_wood_scythe"));
-            event.register(LargeItemRenderer.getModelResourceLocation(WizardsReborn.MOD_ID, "innocent_wood_scythe"));
-            event.register(LargeItemRenderer.getModelResourceLocation(WizardsReborn.MOD_ID, "blaze_reap"));
-            event.register(LargeItemRenderer.getModelResourceLocation(WizardsReborn.MOD_ID, "skin/implosion_scythe"));
-            event.register(LargeItemRenderer.getModelResourceLocation(WizardsReborn.MOD_ID, "skin/soul_hunter_scythe"));
-
-            for (String skin : LeatherCollarItem.skins.values()) {
-                event.register(new ModelResourceLocation(new ResourceLocation(WizardsReborn.MOD_ID, "collar/" + skin), "inventory"));
-            }
-
-            ItemSkinsModels.addSkin(WizardsReborn.MOD_ID+":top_hat");
-            ItemSkinsModels.addSkin(WizardsReborn.MOD_ID+":soul_hunter_hood");
-            ItemSkinsModels.addSkin(WizardsReborn.MOD_ID+":soul_hunter_costume");
-            ItemSkinsModels.addSkin(WizardsReborn.MOD_ID+":soul_hunter_trousers");
-            ItemSkinsModels.addSkin(WizardsReborn.MOD_ID+":soul_hunter_boots");
-            ItemSkinsModels.addSkin(WizardsReborn.MOD_ID+":soul_hunter_scythe");
-            ItemSkinsModels.addSkin(WizardsReborn.MOD_ID+":soul_hunter_arcane_wand");
-            ItemSkinsModels.addSkin(WizardsReborn.MOD_ID+":soul_hunter_wissen_wand");
-            ItemSkinsModels.addSkin(WizardsReborn.MOD_ID+":implosion_sword");
-            ItemSkinsModels.addSkin(WizardsReborn.MOD_ID+":implosion_pickaxe");
-            ItemSkinsModels.addSkin(WizardsReborn.MOD_ID+":implosion_axe");
-            ItemSkinsModels.addSkin(WizardsReborn.MOD_ID+":implosion_shovel");
-            ItemSkinsModels.addSkin(WizardsReborn.MOD_ID+":implosion_hoe");
-            ItemSkinsModels.addSkin(WizardsReborn.MOD_ID+":implosion_scythe");
-            ItemSkinsModels.addSkin(WizardsReborn.MOD_ID+":implosion_knife");
-            ItemSkinsModels.addSkin(WizardsReborn.MOD_ID+":implosion_arcane_wand");
-            ItemSkinsModels.addSkin(WizardsReborn.MOD_ID+":implosion_wissen_wand");
-            ItemSkinsModels.addSkin(WizardsReborn.MOD_ID+":magnificent_maid_headwear");
-            ItemSkinsModels.addSkin(WizardsReborn.MOD_ID+":magnificent_maid_suit");
-            ItemSkinsModels.addSkin(WizardsReborn.MOD_ID+":magnificent_maid_stockings");
-            ItemSkinsModels.addSkin(WizardsReborn.MOD_ID+":magnificent_maid_boots");
-            ItemSkinsModels.addSkin(WizardsReborn.MOD_ID+":magnificent_maid_arcane_wand");
-            ItemSkinsModels.addSkin(WizardsReborn.MOD_ID+":magnificent_maid_wissen_wand");
-            ItemSkinsModels.addSkin(WizardsReborn.MOD_ID+":summer_love_flower");
-            ItemSkinsModels.addSkin(WizardsReborn.MOD_ID+":summer_love_dress");
-            ItemSkinsModels.addSkin(WizardsReborn.MOD_ID+":summer_love_boots");
-            ItemSkinsModels.addSkin(WizardsReborn.MOD_ID+":summer_love_arcane_wand");
-            ItemSkinsModels.addSkin(WizardsReborn.MOD_ID+":summer_love_wissen_wand");
-
             for (String skin : ItemSkinsModels.getSkins()) {
                 event.register(ItemSkinsModels.getModelLocationSkin(skin));
-            }
-
-            for (int i = 0; i < 4; i++) {
-                event.register(DrinksModels.getModelLocationStage(i + 1));
             }
 
             event.register(JEWELER_TABLE_STONE_MODEL);
@@ -665,96 +483,10 @@ public class WizardsRebornClient {
         public static void onModelBakeEvent(ModelEvent.ModifyBakingResult event) {
             Map<ResourceLocation, BakedModel> map = event.getModels();
 
-            WandCrystalsModels.addWandItem(map, WizardsReborn.ARCANE_WAND.getId());
-            WandCrystalsModels.addWandItem(map, new ResourceLocation(WizardsReborn.MOD_ID, "skin/soul_hunter_arcane_wand"));
-            WandCrystalsModels.addWandItem(map, new ResourceLocation(WizardsReborn.MOD_ID, "skin/implosion_arcane_wand"));
-            WandCrystalsModels.addWandItem(map, new ResourceLocation(WizardsReborn.MOD_ID, "skin/magnificent_maid_arcane_wand"));
-            WandCrystalsModels.addWandItem(map, new ResourceLocation(WizardsReborn.MOD_ID, "skin/summer_love_arcane_wand"));
-
-            LargeItemRenderer.bakeModel(map, WizardsReborn.MOD_ID, "arcane_gold_scythe");
-            LargeItemRenderer.bakeModel(map, WizardsReborn.MOD_ID, "arcane_wood_scythe");
-            LargeItemRenderer.bakeModel(map, WizardsReborn.MOD_ID, "innocent_wood_scythe");
-            LargeItemRenderer.bakeModel(map, WizardsReborn.MOD_ID, "blaze_reap");
-            LargeItemRenderer.bakeModel(map, WizardsReborn.MOD_ID, "skin/soul_hunter_scythe");
-            LargeItemRenderer.bakeModel(map, WizardsReborn.MOD_ID, "skin/implosion_scythe");
-
-            for (String skin : LeatherCollarItem.skins.keySet()) {
-                BakedModel model = map.get(new ModelResourceLocation(new ResourceLocation(WizardsReborn.MOD_ID, "collar/" + LeatherCollarItem.skins.get(skin)), "inventory"));
-                CollarItemOverrides.skins.put(skin, model);
-            }
-            BakedModel collarModel = map.get(new ModelResourceLocation(WizardsReborn.LEATHER_COLLAR.getId(), "inventory"));
-            CustomModel collarNewModel = new CustomModel(collarModel, new CollarItemOverrides());
-            map.replace(new ModelResourceLocation(WizardsReborn.LEATHER_COLLAR.getId(), "inventory"), collarNewModel);
-
             for (String skin : ItemSkinsModels.getSkins()) {
                 BakedModel model = map.get(ItemSkinsModels.getModelLocationSkin(skin));
                 ItemSkinsModels.addModelSkins(skin, model);
             }
-
-            addSkinModel(map, WizardsReborn.WISSEN_WAND.getId());
-            addSkinModel(map, WizardsReborn.ARCANE_WOOD_SWORD.getId());
-            addSkinModel(map, WizardsReborn.INNOCENT_WOOD_SWORD.getId());
-            addSkinModel(map, WizardsReborn.ARCANE_GOLD_SWORD.getId());
-            addSkinModel(map, WizardsReborn.ARCANE_WOOD_PICKAXE.getId());
-            addSkinModel(map, WizardsReborn.INNOCENT_WOOD_PICKAXE.getId());
-            addSkinModel(map, WizardsReborn.ARCANE_GOLD_PICKAXE.getId());
-            addSkinModel(map, WizardsReborn.ARCANE_WOOD_AXE.getId());
-            addSkinModel(map, WizardsReborn.INNOCENT_WOOD_AXE.getId());
-            addSkinModel(map, WizardsReborn.ARCANE_GOLD_AXE.getId());
-            addSkinModel(map, WizardsReborn.ARCANE_WOOD_SHOVEL.getId());
-            addSkinModel(map, WizardsReborn.INNOCENT_WOOD_SHOVEL.getId());
-            addSkinModel(map, WizardsReborn.ARCANE_GOLD_SHOVEL.getId());
-            addSkinModel(map, WizardsReborn.ARCANE_WOOD_HOE.getId());
-            addSkinModel(map, WizardsReborn.INNOCENT_WOOD_HOE.getId());
-            addSkinModel(map, WizardsReborn.ARCANE_GOLD_HOE.getId());
-            LargeItemRenderer.bakeModel(map, WizardsReborn.MOD_ID, "arcane_wood_scythe", new SkinItemOverrides());
-            LargeItemRenderer.bakeModel(map, WizardsReborn.MOD_ID, "innocent_wood_scythe", new SkinItemOverrides());
-            LargeItemRenderer.bakeModel(map, WizardsReborn.MOD_ID, "arcane_gold_scythe", new SkinItemOverrides());
-            addSkinModel(map, WizardsReborn.ARCANE_FORTRESS_HELMET.getId());
-            addSkinModel(map, WizardsReborn.ARCANE_FORTRESS_CHESTPLATE.getId());
-            addSkinModel(map, WizardsReborn.ARCANE_FORTRESS_LEGGINGS.getId());
-            addSkinModel(map, WizardsReborn.ARCANE_FORTRESS_BOOTS.getId());
-            addSkinModel(map, WizardsReborn.INVENTOR_WIZARD_HAT.getId());
-            addSkinModel(map, WizardsReborn.INVENTOR_WIZARD_COSTUME.getId());
-            addSkinModel(map, WizardsReborn.INVENTOR_WIZARD_TROUSERS.getId());
-            addSkinModel(map, WizardsReborn.INVENTOR_WIZARD_BOOTS.getId());
-
-            if (FarmersDelightIntegration.isLoaded()) {
-                addSkinModel(map, FarmersDelightIntegration.ARCANE_GOLD_KNIFE.getId());
-                addSkinModel(map, FarmersDelightIntegration.ARCANE_WOOD_KNIFE.getId());
-                addSkinModel(map, FarmersDelightIntegration.INNOCENT_WOOD_KNIFE.getId());
-            }
-
-            DrinksModels.addDrinkItem(map, WizardsReborn.VODKA_BOTTLE.getId());
-            DrinksModels.addDrinkItem(map, WizardsReborn.BOURBON_BOTTLE.getId());
-            DrinksModels.addDrinkItem(map, WizardsReborn.WHISKEY_BOTTLE.getId());
-            DrinksModels.addDrinkItem(map, WizardsReborn.WHITE_WINE_BOTTLE.getId());
-            DrinksModels.addDrinkItem(map, WizardsReborn.RED_WINE_BOTTLE.getId());
-            DrinksModels.addDrinkItem(map, WizardsReborn.PORT_WINE_BOTTLE.getId());
-            DrinksModels.addDrinkItem(map, WizardsReborn.PALM_LIQUEUR_BOTTLE.getId());
-            DrinksModels.addDrinkItem(map, WizardsReborn.MEAD_BOTTLE.getId());
-            DrinksModels.addDrinkItem(map, WizardsReborn.SBITEN_BOTTLE.getId());
-            DrinksModels.addDrinkItem(map, WizardsReborn.SLIVOVITZ_BOTTLE.getId());
-            DrinksModels.addDrinkItem(map, WizardsReborn.SAKE_BOTTLE.getId());
-            DrinksModels.addDrinkItem(map, WizardsReborn.SOJU_BOTTLE.getId());
-            DrinksModels.addDrinkItem(map, WizardsReborn.CHICHA_BOTTLE.getId());
-            DrinksModels.addDrinkItem(map, WizardsReborn.CHACHA_BOTTLE.getId());
-            DrinksModels.addDrinkItem(map, WizardsReborn.APPLEJACK_BOTTLE.getId());
-            DrinksModels.addDrinkItem(map, WizardsReborn.RAKIA_BOTTLE.getId());
-            DrinksModels.addDrinkItem(map, WizardsReborn.KIRSCH_BOTTLE.getId());
-            DrinksModels.addDrinkItem(map, WizardsReborn.BOROVICHKA_BOTTLE.getId());
-            DrinksModels.addDrinkItem(map, WizardsReborn.PALINKA_BOTTLE.getId());
-            DrinksModels.addDrinkItem(map, WizardsReborn.TEQUILA_BOTTLE.getId());
-            DrinksModels.addDrinkItem(map, WizardsReborn.PULQUE_BOTTLE.getId());
-            DrinksModels.addDrinkItem(map, WizardsReborn.ARKHI_BOTTLE.getId());
-            DrinksModels.addDrinkItem(map, WizardsReborn.TEJ_BOTTLE.getId());
-            DrinksModels.addDrinkItem(map, WizardsReborn.WISSEN_BEER_BOTTLE.getId());
-            DrinksModels.addDrinkItem(map, WizardsReborn.MOR_TINCTURE_BOTTLE.getId());
-            DrinksModels.addDrinkItem(map, WizardsReborn.INNOCENT_WINE_BOTTLE.getId());
-            DrinksModels.addDrinkItem(map, WizardsReborn.TARKHUNA_BOTTLE.getId());
-            DrinksModels.addDrinkItem(map, WizardsReborn.BAIKAL_BOTTLE.getId());
-            DrinksModels.addDrinkItem(map, WizardsReborn.KVASS_BOTTLE.getId());
-            DrinksModels.addDrinkItem(map, WizardsReborn.KISSEL_BOTTLE.getId());
 
             fluidPipe = new PipeModel(map.get(FLUID_CENTER), "fluid_pipe");
             steamPipe = new PipeModel(map.get(STEAM_CENTER), "steam_pipe");
@@ -870,14 +602,6 @@ public class WizardsRebornClient {
         }
 
         @SubscribeEvent
-        public static void registerFactories(RegisterParticleProvidersEvent event) {
-            ParticleEngine particleEngine = Minecraft.getInstance().particleEngine;
-            particleEngine.register(WizardsReborn.KARMA_PARTICLE.get(), GenericParticleType.Factory::new);
-            particleEngine.register(WizardsReborn.ARCANE_WOOD_LEAVES_PARTICLE.get(), LeavesParticleType.Factory::new);
-            particleEngine.register(WizardsReborn.INNOCENT_WOOD_LEAVES_PARTICLE.get(), LeavesParticleType.Factory::new);
-        }
-
-        @SubscribeEvent
         public static void shaderRegistry(RegisterShadersEvent event) throws IOException {
             event.registerShader(new ShaderInstance(event.getResourceProvider(), new ResourceLocation("wizards_reborn:glowing"), DefaultVertexFormat.POSITION_COLOR),
                     shader -> { GLOWING_SHADER = shader; });
@@ -893,16 +617,6 @@ public class WizardsRebornClient {
 
         @SubscribeEvent
         public static void onRegisterLayers(EntityRenderersEvent.RegisterLayerDefinitions event) {
-            for (CustomBoatEntity.Type boatType : CustomBoatEntity.Type.values()) {
-                if (boatType == CustomBoatEntity.Type.CORK_BAMBOO) {
-                    event.registerLayerDefinition(CustomBoatRenderer.createBoatModelName(boatType), RaftModel::createBodyModel);
-                    event.registerLayerDefinition(CustomBoatRenderer.createChestBoatModelName(boatType), ChestRaftModel::createBodyModel);
-                } else {
-                    event.registerLayerDefinition(CustomBoatRenderer.createBoatModelName(boatType), BoatModel::createBodyModel);
-                    event.registerLayerDefinition(CustomBoatRenderer.createChestBoatModelName(boatType), ChestBoatModel::createBodyModel);
-                }
-            }
-
             event.registerLayerDefinition(WizardsRebornClient.BELT_LAYER, BeltModel::createBodyLayer);
             event.registerLayerDefinition(WizardsRebornClient.BAG_LAYER, BagModel::createBodyLayer);
             event.registerLayerDefinition(WizardsRebornClient.AMULET_LAYER, AmuletModel::createBodyLayer);
@@ -946,100 +660,25 @@ public class WizardsRebornClient {
             ALCHEMY_FLASK_MODEL = new AlchemyFlaskModel(event.getEntityModels().bakeLayer(ALCHEMY_FLASK_LAYER));
             ALCHEMY_BOTTLE_MODEL = new AlchemyBottleModel(event.getEntityModels().bakeLayer(ALCHEMY_BOTTLE_LAYER));
         }
-
-        @SubscribeEvent
-        public static void registerItemColorHandlers(RegisterColorHandlersEvent.Item event) {
-            event.register(new AlchemyPotionItem.ColorHandler(), WizardsReborn.ALCHEMY_VIAL_POTION.get(), WizardsReborn.ALCHEMY_FLASK_POTION.get());
-            event.register(new RunicWisestonePlateItem.ColorHandler(), WizardsReborn.RUNIC_WISESTONE_PLATE.get());
-        }
-
-        @SubscribeEvent
-        public static void ColorMappingBlocks(RegisterColorHandlersEvent.Block event) {
-            event.register((state, world, pos, tintIndex) -> CustomBlockColor.getInstance().getColor(state, world, pos, tintIndex), CustomBlockColor.PLANTS);
-        }
     }
 
     public static FluffyFurMod MOD_INSTANCE;
     public static FluffyFurPanorama MAGICAL_ORIGINS_PANORAMA;
 
     public static void setupMenu() {
-        MOD_INSTANCE = new FluffyFurMod(WizardsReborn.MOD_ID, WizardsReborn.NAME, WizardsReborn.VERSION).setDev("MaxBogomol").setItem(new ItemStack(WizardsReborn.ARCANUM.get()))
+        MOD_INSTANCE = new FluffyFurMod(WizardsReborn.MOD_ID, WizardsReborn.NAME, WizardsReborn.VERSION).setDev("MaxBogomol").setItem(new ItemStack(WizardsRebornItems.ARCANUM.get()))
                 .setEdition(WizardsReborn.VERSION_NUMBER).setNameColor(new Color(205, 237, 254)).setVersionColor(new Color(255, 243, 177))
                 .setDescription(Component.translatable("mod_description.wizards_reborn"))
                 .addGithubLink("https://github.com/MaxBogomol/WizardsReborn")
                 .addCurseForgeLink("https://www.curseforge.com/minecraft/mc-mods/wizards-reborn")
                 .addModrinthLink("https://modrinth.com/mod/wizards-reborn");
         MAGICAL_ORIGINS_PANORAMA = new FluffyFurPanorama(WizardsReborn.MOD_ID + ":magical_origins", Component.translatable("panorama.wizards_reborn.magical_origins"))
-                .setMod(MOD_INSTANCE).setItem(new ItemStack(WizardsReborn.WISSEN_ALTAR_ITEM.get())).setSort(0)
+                .setMod(MOD_INSTANCE).setItem(new ItemStack(WizardsRebornItems.WISSEN_ALTAR.get())).setSort(0)
                 .setTexture(new ResourceLocation(WizardsReborn.MOD_ID, "textures/gui/title/background/panorama"))
                 .setLogo(new ResourceLocation(WizardsReborn.MOD_ID, "textures/gui/title/wizards_reborn.png"));
 
         FluffyFurClient.registerMod(MOD_INSTANCE);
         FluffyFurClient.registerPanorama(MAGICAL_ORIGINS_PANORAMA);
-    }
-
-    public static void setupBows() {
-        BowHandler.addBow(WizardsReborn.ARCANE_WOOD_BOW.get());
-    }
-
-    public static void setupTooltipModifiers() {
-        TooltipModifierHandler.register(new AttributeTooltipModifier() {
-            public boolean isToolBase(AttributeModifier modifier, Player player, TooltipFlag flag) {
-                return modifier.getId().equals(ScytheItem.BASE_ENTITY_REACH_UUID);
-            }
-        });
-        TooltipModifierHandler.register(new AttributeTooltipModifier() {
-            public boolean isModifiable(Attribute key, AttributeModifier modifier, Player player, TooltipFlag flag) {
-                return key.equals(WizardsReborn.WISSEN_DISCOUNT.get());
-            }
-
-            public ModifyResult modify(AttributeModifier modifier, double amount, AttributeModifier.Operation operation) {
-                operation = AttributeModifier.Operation.MULTIPLY_BASE;
-                amount = amount / 100f;
-                return new ModifyResult(modifier, amount, operation);
-            }
-        });
-        TooltipModifierHandler.register(new AttributeTooltipModifier() {
-            public boolean isModifiable(Attribute key, AttributeModifier modifier, Player player, TooltipFlag flag) {
-                return key.equals(WizardsReborn.MAGIC_ARMOR.get());
-            }
-
-            public ModifyResult modify(AttributeModifier modifier, double amount, AttributeModifier.Operation operation) {
-                operation = AttributeModifier.Operation.MULTIPLY_BASE;
-                amount = amount / 100f;
-                return new ModifyResult(modifier, amount, operation);
-            }
-        });
-    }
-
-    public static void setupMusic() {
-        MusicHandler.register(new MusicModifier.Panorama(REBORN_MUSIC, MAGICAL_ORIGINS_PANORAMA));
-        MusicHandler.register(new MusicModifier() {
-            public boolean isCanPlay(Music defaultMisic, Minecraft minecraft) {
-                if (isBiome(Tags.Biomes.IS_SWAMP, minecraft)) {
-                    return (random.nextFloat() < 0.8f);
-                }
-                return false;
-            }
-
-            public Music play(Music defaultMisic, Minecraft minecraft) {
-                return MOR_MUSIC;
-            }
-        });
-        MusicHandler.register(new MusicModifier() {
-            public boolean isCanPlay(Music defaultMisic, Minecraft minecraft) {
-                if (isBiome(Tags.Biomes.IS_CAVE, minecraft)) {
-                    if (minecraft.player.getY() >= -40 && minecraft.player.getY() <= 30) {
-                        return (random.nextFloat() < 0.6f);
-                    }
-                }
-                return false;
-            }
-
-            public Music play(Music defaultMisic, Minecraft minecraft) {
-                return SHIMMER_MUSIC;
-            }
-        });
     }
 
     public static void addPipeModel(Map<ResourceLocation, BakedModel> map, String modId, String modelId, String path, PipeModel pipe) {

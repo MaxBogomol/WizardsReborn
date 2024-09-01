@@ -1,12 +1,12 @@
 package mod.maxbogomol.wizards_reborn.common.spell.ray;
 
-import mod.maxbogomol.wizards_reborn.WizardsReborn;
 import mod.maxbogomol.wizards_reborn.api.crystal.CrystalUtil;
 import mod.maxbogomol.wizards_reborn.api.wissen.WissenItemUtil;
-import mod.maxbogomol.wizards_reborn.common.damage.DamageSourceRegistry;
 import mod.maxbogomol.wizards_reborn.common.entity.SpellProjectileEntity;
 import mod.maxbogomol.wizards_reborn.common.item.equipment.arcane.ArcaneArmorItem;
 import mod.maxbogomol.wizards_reborn.common.spell.look.LookSpell;
+import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornCrystals;
+import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornDamage;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
@@ -59,7 +59,7 @@ public class EmberRaySpell extends FireRaySpell {
             boolean remove = false;
 
             ItemStack stack = player.getItemInHand(player.getUsedItemHand());
-            int focusLevel = CrystalUtil.getStatLevel(entity.getStats(), WizardsReborn.FOCUS_CRYSTAL_STAT);
+            int focusLevel = CrystalUtil.getStatLevel(entity.getStats(), WizardsRebornCrystals.FOCUS);
             float magicModifier = ArcaneArmorItem.getPlayerMagicModifier(player);
             float damage = (1f + (focusLevel * 0.5f)) + magicModifier;
 
@@ -76,7 +76,7 @@ public class EmberRaySpell extends FireRaySpell {
 
                             target.hurt(new DamageSource(target.damageSources().onFire().typeHolder(), entity, player), damage);
                             target.invulnerableTime = 0;
-                            target.hurt(new DamageSource(DamageSourceRegistry.create(target.level(), DamageSourceRegistry.ARCANE_MAGIC).typeHolder(), entity, player), 1);
+                            target.hurt(new DamageSource(WizardsRebornDamage.create(target.level(), WizardsRebornDamage.ARCANE_MAGIC).typeHolder(), entity, player), 1);
                         }
                     }
                 }

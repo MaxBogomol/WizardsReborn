@@ -3,7 +3,6 @@ package mod.maxbogomol.wizards_reborn.common.block.light_transfer_lens;
 import mod.maxbogomol.fluffy_fur.common.block.entity.ExposedBlockSimpleInventory;
 import mod.maxbogomol.fluffy_fur.common.block.entity.TickableBlockEntity;
 import mod.maxbogomol.fluffy_fur.common.network.BlockEntityUpdate;
-import mod.maxbogomol.wizards_reborn.WizardsReborn;
 import mod.maxbogomol.wizards_reborn.api.light.ILightBlockEntity;
 import mod.maxbogomol.wizards_reborn.api.light.LightRayHitResult;
 import mod.maxbogomol.wizards_reborn.api.light.LightUtil;
@@ -11,6 +10,8 @@ import mod.maxbogomol.wizards_reborn.api.wissen.IWissenWandControlledBlockEntity
 import mod.maxbogomol.wizards_reborn.client.sound.LightTransferLensSoundInstance;
 import mod.maxbogomol.wizards_reborn.common.block.ArcaneLumosBlock;
 import mod.maxbogomol.wizards_reborn.common.item.equipment.WissenWandItem;
+import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornBlockEntities;
+import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornTags;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.nbt.CompoundTag;
@@ -45,7 +46,7 @@ public class LightTransferLensBlockEntity extends ExposedBlockSimpleInventory im
     }
 
     public LightTransferLensBlockEntity(BlockPos pos, BlockState state) {
-        this(WizardsReborn.LIGHT_TRANSFER_LENS_BLOCK_ENTITY.get(), pos, state);
+        this(WizardsRebornBlockEntities.LIGHT_TRANSFER_LENS.get(), pos, state);
     }
 
     @Override
@@ -106,7 +107,7 @@ public class LightTransferLensBlockEntity extends ExposedBlockSimpleInventory im
 
     @Override
     public boolean canPlaceItemThroughFace(int index, @NotNull ItemStack stack, @Nullable Direction direction) {
-        if (stack.is(WizardsReborn.ARCANE_LUMOS_ITEM_TAG)) {
+        if (stack.is(WizardsRebornTags.ARCANE_LUMOS_ITEM)) {
             return true;
         }
 

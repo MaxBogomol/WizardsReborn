@@ -1,10 +1,10 @@
 package mod.maxbogomol.wizards_reborn.common.block;
 
-import mod.maxbogomol.fluffy_fur.FluffyFur;
 import mod.maxbogomol.fluffy_fur.client.particle.ParticleBuilder;
 import mod.maxbogomol.fluffy_fur.client.particle.data.ColorParticleData;
 import mod.maxbogomol.fluffy_fur.client.particle.data.GenericParticleData;
 import mod.maxbogomol.fluffy_fur.client.particle.data.LightParticleData;
+import mod.maxbogomol.fluffy_fur.registry.client.FluffyFurParticles;
 import mod.maxbogomol.fluffy_fur.util.RenderUtils;
 import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerLevel;
@@ -43,7 +43,7 @@ public class NetherSaltOreBlock extends Block {
     public void playerWillDestroy(Level world, BlockPos pos, BlockState state, Player player) {
         if (world.isClientSide()) {
             if (!player.isCreative()) {
-                ParticleBuilder.create(FluffyFur.WISP_PARTICLE)
+                ParticleBuilder.create(FluffyFurParticles.WISP)
                         .setRenderType(RenderUtils.DELAYED_PARTICLE)
                         .setColorData(ColorParticleData.create(Color.BLACK).build())
                         .setTransparencyData(GenericParticleData.create(1f, 0).build())

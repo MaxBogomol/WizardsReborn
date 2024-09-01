@@ -2,6 +2,8 @@ package mod.maxbogomol.wizards_reborn.common.crystal;
 
 import mod.maxbogomol.wizards_reborn.WizardsReborn;
 import mod.maxbogomol.wizards_reborn.api.crystal.CrystalType;
+import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornCrystals;
+import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornItems;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;
 
@@ -13,7 +15,7 @@ public class EarthCrystalType extends CrystalType {
     }
 
     public Color getColor() {
-        return WizardsReborn.earthCrystalColor;
+        return WizardsRebornCrystals.earthCrystalColor;
     }
 
     public ResourceLocation getMiniIcon() {
@@ -25,10 +27,10 @@ public class EarthCrystalType extends CrystalType {
     }
 
     public ItemStack getFracturedCrystal() {
-        return WizardsReborn.FRACTURED_EARTH_CRYSTAL.get().getDefaultInstance();
+        return WizardsRebornItems.FRACTURED_EARTH_CRYSTAL.get().getDefaultInstance();
     }
 
     public ItemStack getCrystal() {
-        return WizardsReborn.EARTH_CRYSTAL.get().getDefaultInstance();
+        return WizardsRebornItems.EARTH_CRYSTAL.get().getDefaultInstance();
     }
 }

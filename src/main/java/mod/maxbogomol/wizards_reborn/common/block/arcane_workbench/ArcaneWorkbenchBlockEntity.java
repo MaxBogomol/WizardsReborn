@@ -1,12 +1,12 @@
 package mod.maxbogomol.wizards_reborn.common.block.arcane_workbench;
 
-import mod.maxbogomol.fluffy_fur.FluffyFur;
 import mod.maxbogomol.fluffy_fur.client.particle.ParticleBuilder;
 import mod.maxbogomol.fluffy_fur.client.particle.data.ColorParticleData;
 import mod.maxbogomol.fluffy_fur.client.particle.data.GenericParticleData;
 import mod.maxbogomol.fluffy_fur.common.block.entity.BlockEntityBase;
 import mod.maxbogomol.fluffy_fur.common.block.entity.TickableBlockEntity;
 import mod.maxbogomol.fluffy_fur.common.easing.Easing;
+import mod.maxbogomol.fluffy_fur.registry.client.FluffyFurParticles;
 import mod.maxbogomol.wizards_reborn.WizardsReborn;
 import mod.maxbogomol.wizards_reborn.api.wissen.*;
 import mod.maxbogomol.wizards_reborn.client.sound.ArcaneWorkbenchSoundInstance;
@@ -14,6 +14,10 @@ import mod.maxbogomol.wizards_reborn.common.config.Config;
 import mod.maxbogomol.wizards_reborn.common.network.PacketHandler;
 import mod.maxbogomol.wizards_reborn.common.network.tileentity.ArcaneWorkbenchBurstEffectPacket;
 import mod.maxbogomol.wizards_reborn.common.recipe.ArcaneWorkbenchRecipe;
+import mod.maxbogomol.wizards_reborn.registry.client.WizardsRebornParticles;
+import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornBlockEntities;
+import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornRecipes;
+import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornSounds;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.RegistryAccess;
@@ -59,7 +63,7 @@ public class ArcaneWorkbenchBlockEntity extends BlockEntityBase implements Ticka
     }
 
     public ArcaneWorkbenchBlockEntity(BlockPos pos, BlockState state) {
-        this(WizardsReborn.ARCANE_WORKBENCH_BLOCK_ENTITY.get(), pos, state);
+        this(WizardsRebornBlockEntities.ARCANE_WORKBENCH.get(), pos, state);
     }
 
     @Override
@@ -73,7 +77,7 @@ public class ArcaneWorkbenchBlockEntity extends BlockEntityBase implements Ticka
             inv.setItem(13, itemOutputHandler.getStackInSlot(0));
 
             if (!inv.isEmpty()) {
-                Optional<ArcaneWorkbenchRecipe> recipe = level.getRecipeManager().getRecipeFor(WizardsReborn.ARCANE_WORKBENCH_RECIPE.get(), inv, level);
+                Optional<ArcaneWorkbenchRecipe> recipe = level.getRecipeManager().getRecipeFor(WizardsRebornRecipes.ARCANE_WORKBENCH.get(), inv, level);
                 wissenInCraft = recipe.map(ArcaneWorkbenchRecipe::getRecipeWissen).orElse(0);
 
                 if (wissenInCraft <= 0 && (wissenIsCraft > 0 || startCraft)) {
@@ -88,7 +92,7 @@ public class ArcaneWorkbenchBlockEntity extends BlockEntityBase implements Ticka
 
                     if (isCanCraft(inv, output)) {
                         if (wissenIsCraft == 0) {
-                            level.playSound(WizardsReborn.proxy.getPlayer(), getBlockPos(), WizardsReborn.ARCANE_WORKBENCH_START_SOUND.get(), SoundSource.BLOCKS, 1f, 1f);
+                            level.playSound(WizardsReborn.proxy.getPlayer(), getBlockPos(), WizardsRebornSounds.ARCANE_WORKBENCH_START.get(), SoundSource.BLOCKS, 1f, 1f);
                         }
 
                         int addRemainCraft = WissenUtils.getAddWissenRemain(wissenIsCraft, getWissenPerTick(), wissenInCraft);
@@ -132,7 +136,7 @@ public class ArcaneWorkbenchBlockEntity extends BlockEntityBase implements Ticka
                             update = true;
 
                             PacketHandler.sendToTracking(level, getBlockPos(), new ArcaneWorkbenchBurstEffectPacket(getBlockPos()));
-                            level.playSound(WizardsReborn.proxy.getPlayer(), getBlockPos(), WizardsReborn.ARCANE_WORKBENCH_END_SOUND.get(), SoundSource.BLOCKS, 1f, (float) (1f + ((random.nextFloat() - 0.5D) / 4)));
+                            level.playSound(WizardsReborn.proxy.getPlayer(), getBlockPos(), WizardsRebornSounds.ARCANE_WORKBENCH_END.get(), SoundSource.BLOCKS, 1f, (float) (1f + ((random.nextFloat() - 0.5D) / 4)));
                         }
                     }
                 }
@@ -149,7 +153,7 @@ public class ArcaneWorkbenchBlockEntity extends BlockEntityBase implements Ticka
         if (level.isClientSide()) {
             if (getWissen() > 0) {
                 if (random.nextFloat() < 0.5) {
-                    ParticleBuilder.create(FluffyFur.WISP_PARTICLE)
+                    ParticleBuilder.create(FluffyFurParticles.WISP)
                             .setColorData(ColorParticleData.create(Config.wissenColorR(), Config.wissenColorG(), Config.wissenColorB()).build())
                             .setTransparencyData(GenericParticleData.create(0.25f, 0).build())
                             .setScaleData(GenericParticleData.create(0.3f * getStage(), 0).build())
@@ -158,7 +162,7 @@ public class ArcaneWorkbenchBlockEntity extends BlockEntityBase implements Ticka
                             .spawn(level, getBlockPos().getX() + 0.5F, getBlockPos().getY() + 1.5F, getBlockPos().getZ() + 0.5F);
                 }
                 if (random.nextFloat() < 0.1) {
-                    ParticleBuilder.create(random.nextBoolean() ? FluffyFur.SQUARE_PARTICLE : FluffyFur.SPARKLE_PARTICLE)
+                    ParticleBuilder.create(random.nextBoolean() ? FluffyFurParticles.SQUARE : FluffyFurParticles.SPARKLE)
                             .setColorData(ColorParticleData.create(Config.wissenColorR(), Config.wissenColorG(), Config.wissenColorB()).build())
                             .setTransparencyData(GenericParticleData.create(0.25f, 0).build())
                             .setScaleData(GenericParticleData.create(0.05f * getStage(), 0.1f * getStage(), 0).setEasing(Easing.QUINTIC_IN_OUT).build())
@@ -171,7 +175,7 @@ public class ArcaneWorkbenchBlockEntity extends BlockEntityBase implements Ticka
 
             if (wissenInCraft > 0 && startCraft) {
                 if (random.nextFloat() < 0.2) {
-                    ParticleBuilder.create(FluffyFur.SPARKLE_PARTICLE)
+                    ParticleBuilder.create(FluffyFurParticles.SPARKLE)
                             .setColorData(ColorParticleData.create(Config.wissenColorR(), Config.wissenColorG(), Config.wissenColorB()).build())
                             .setTransparencyData(GenericParticleData.create(0.25f, 0).build())
                             .setScaleData(GenericParticleData.create(0.1f * getStage(), 0).build())
@@ -181,7 +185,7 @@ public class ArcaneWorkbenchBlockEntity extends BlockEntityBase implements Ticka
                             .spawn(level, getBlockPos().getX() + 0.5F, getBlockPos().getY() + 1.5F, getBlockPos().getZ() + 0.5F);
                 }
                 if (random.nextFloat() < 0.1) {
-                    ParticleBuilder.create(random.nextBoolean() ? FluffyFur.SQUARE_PARTICLE : FluffyFur.SPARKLE_PARTICLE)
+                    ParticleBuilder.create(random.nextBoolean() ? FluffyFurParticles.SQUARE : FluffyFurParticles.SPARKLE)
                             .setColorData(ColorParticleData.create(Config.wissenColorR(), Config.wissenColorG(), Config.wissenColorB()).build())
                             .setTransparencyData(GenericParticleData.create(0.75f, 0).build())
                             .setScaleData(GenericParticleData.create(0.05f * getStage(), 0.1f * getStage(), 0).setEasing(Easing.QUINTIC_IN_OUT).build())
@@ -193,7 +197,7 @@ public class ArcaneWorkbenchBlockEntity extends BlockEntityBase implements Ticka
                 if (random.nextFloat() < 0.3) {
                     double X = ((random.nextDouble() - 0.5D) * 0.5);
                     double Z = ((random.nextDouble() - 0.5D) * 0.5);
-                    ParticleBuilder.create(WizardsReborn.KARMA_PARTICLE)
+                    ParticleBuilder.create(WizardsRebornParticles.KARMA)
                             .setColorData(ColorParticleData.create(0.733f, 0.564f, 0.937f).build())
                             .setTransparencyData(GenericParticleData.create(0.5f, 0).build())
                             .setScaleData(GenericParticleData.create(0.1f, 0.025f).build())
@@ -400,7 +404,7 @@ public class ArcaneWorkbenchBlockEntity extends BlockEntityBase implements Ticka
         }
         inv.setItem(13, itemOutputHandler.getStackInSlot(0));
 
-        Optional<ArcaneWorkbenchRecipe> recipe = level.getRecipeManager().getRecipeFor(WizardsReborn.ARCANE_WORKBENCH_RECIPE.get(), inv, level);
+        Optional<ArcaneWorkbenchRecipe> recipe = level.getRecipeManager().getRecipeFor(WizardsRebornRecipes.ARCANE_WORKBENCH.get(), inv, level);
         wissenInCraft = recipe.map(ArcaneWorkbenchRecipe::getRecipeWissen).orElse(0);
 
         if (recipe.isPresent() && wissenInCraft > 0) {

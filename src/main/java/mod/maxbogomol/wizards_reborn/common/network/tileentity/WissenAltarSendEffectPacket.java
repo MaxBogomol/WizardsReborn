@@ -1,10 +1,10 @@
 package mod.maxbogomol.wizards_reborn.common.network.tileentity;
 
-import mod.maxbogomol.fluffy_fur.FluffyFur;
 import mod.maxbogomol.fluffy_fur.client.particle.ParticleBuilder;
 import mod.maxbogomol.fluffy_fur.client.particle.data.ColorParticleData;
 import mod.maxbogomol.fluffy_fur.client.particle.data.GenericParticleData;
 import mod.maxbogomol.fluffy_fur.common.easing.Easing;
+import mod.maxbogomol.fluffy_fur.registry.client.FluffyFurParticles;
 import mod.maxbogomol.wizards_reborn.WizardsReborn;
 import mod.maxbogomol.wizards_reborn.common.config.Config;
 import net.minecraft.core.BlockPos;
@@ -37,7 +37,7 @@ public class WissenAltarSendEffectPacket {
                 @Override
                 public void run() {
                     Level world = WizardsReborn.proxy.getLevel();
-                    ParticleBuilder.create(FluffyFur.WISP_PARTICLE)
+                    ParticleBuilder.create(FluffyFurParticles.WISP)
                             .setColorData(ColorParticleData.create(Config.wissenColorR(), Config.wissenColorG(), Config.wissenColorB()).build())
                             .setTransparencyData(GenericParticleData.create(0.35f, 0).build())
                             .setScaleData(GenericParticleData.create(0.05f, 0).build())
@@ -46,7 +46,7 @@ public class WissenAltarSendEffectPacket {
                             .spawn(world, msg.pos.getX() + 0.5F, msg.pos.getY() + 1.3125F, msg.pos.getZ() + 0.5F);
                     boolean square = random.nextFloat() < 0.3f;
                     float i = square ? 0.5f : 1f;
-                    ParticleBuilder.create(square ? FluffyFur.SQUARE_PARTICLE : FluffyFur.SPARKLE_PARTICLE)
+                    ParticleBuilder.create(square ? FluffyFurParticles.SQUARE : FluffyFurParticles.SPARKLE)
                             .setColorData(ColorParticleData.create(Config.wissenColorR(), Config.wissenColorG(), Config.wissenColorB()).build())
                             .setTransparencyData(GenericParticleData.create(0.35f, 0).build())
                             .setScaleData(GenericParticleData.create(0.025f * i, 0.05f * i, 0).setEasing(Easing.QUINTIC_IN_OUT).build())

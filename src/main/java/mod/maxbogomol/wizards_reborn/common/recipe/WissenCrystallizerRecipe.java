@@ -4,28 +4,24 @@ import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import mod.maxbogomol.wizards_reborn.WizardsReborn;
+import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornItems;
+import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornRecipes;
+import net.minecraft.core.NonNullList;
 import net.minecraft.core.RegistryAccess;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.nbt.CompoundTag;
+import net.minecraft.network.FriendlyByteBuf;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.util.GsonHelper;
 import net.minecraft.world.Container;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.network.FriendlyByteBuf;
-import net.minecraft.util.GsonHelper;
-import net.minecraft.core.NonNullList;
-import net.minecraft.resources.ResourceLocation;
-import net.minecraft.core.Registry;
+import net.minecraft.world.item.crafting.*;
 import net.minecraft.world.level.Level;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import java.util.ArrayList;
 import java.util.List;
-
-import net.minecraft.world.item.crafting.Ingredient;
-import net.minecraft.world.item.crafting.Recipe;
-import net.minecraft.world.item.crafting.RecipeSerializer;
-import net.minecraft.world.item.crafting.RecipeType;
-import net.minecraft.world.item.crafting.ShapedRecipe;
 
 public class WissenCrystallizerRecipe implements Recipe<Container> {
     public static ResourceLocation TYPE_ID = new ResourceLocation(WizardsReborn.MOD_ID, "wissen_crystallizer");
@@ -121,7 +117,7 @@ public class WissenCrystallizerRecipe implements Recipe<Container> {
     }
 
     public ItemStack getToastSymbol() {
-        return new ItemStack(WizardsReborn.WISSEN_CRYSTALLIZER_ITEM.get());
+        return new ItemStack(WizardsRebornItems.WISSEN_CRYSTALLIZER.get());
     }
 
     @Override
@@ -131,14 +127,7 @@ public class WissenCrystallizerRecipe implements Recipe<Container> {
 
     @Override
     public RecipeSerializer<?> getSerializer() {
-        return WizardsReborn.WISSEN_CRYSTALLIZER_SERIALIZER.get();
-    }
-
-    public static class WissenCrystallizerRecipeType implements RecipeType<WissenCrystallizerRecipe> {
-        @Override
-        public String toString() {
-            return WissenCrystallizerRecipe.TYPE_ID.toString();
-        }
+        return WizardsRebornRecipes.WISSEN_CRYSTALLIZER_SERIALIZER.get();
     }
 
     public static class Serializer implements RecipeSerializer<WissenCrystallizerRecipe> {

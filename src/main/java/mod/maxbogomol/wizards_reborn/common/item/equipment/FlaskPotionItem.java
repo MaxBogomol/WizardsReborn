@@ -11,6 +11,7 @@ import mod.maxbogomol.wizards_reborn.api.alchemy.AlchemyPotionUtil;
 import mod.maxbogomol.wizards_reborn.client.render.fluid.FluidRenderer;
 import mod.maxbogomol.wizards_reborn.common.alchemypotion.FluidAlchemyPotion;
 import mod.maxbogomol.wizards_reborn.common.block.placed_items.PlacedItemsBlockEntity;
+import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornItems;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.texture.OverlayTexture;
@@ -30,7 +31,7 @@ public class FlaskPotionItem extends AlchemyPotionItem {
     public static final ResourceLocation FLASK_TEXTURE = new ResourceLocation(WizardsReborn.MOD_ID, "textures/models/potion/alchemy_flask.png");
 
     public FlaskPotionItem(Properties properties) {
-        super(properties, 6, WizardsReborn.ALCHEMY_FLASK.get());
+        super(properties, 6, WizardsRebornItems.ALCHEMY_FLASK.get());
     }
 
     @Override

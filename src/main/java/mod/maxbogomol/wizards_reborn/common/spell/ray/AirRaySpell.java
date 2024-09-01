@@ -1,12 +1,13 @@
 package mod.maxbogomol.wizards_reborn.common.spell.ray;
 
-import mod.maxbogomol.wizards_reborn.WizardsReborn;
 import mod.maxbogomol.wizards_reborn.api.crystal.CrystalUtil;
 import mod.maxbogomol.wizards_reborn.api.wissen.WissenItemUtil;
 import mod.maxbogomol.wizards_reborn.common.entity.SpellProjectileEntity;
 import mod.maxbogomol.wizards_reborn.common.item.equipment.arcane.ArcaneArmorItem;
 import mod.maxbogomol.wizards_reborn.common.network.PacketHandler;
 import mod.maxbogomol.wizards_reborn.common.network.spell.AirRaySpellEffectPacket;
+import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornCrystals;
+import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornSpells;
 import net.minecraft.util.Mth;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.Entity;
@@ -22,12 +23,12 @@ import java.awt.*;
 public class AirRaySpell extends RaySpell {
     public AirRaySpell(String id, int points) {
         super(id, points);
-        addCrystalType(WizardsReborn.AIR_CRYSTAL_TYPE);
+        addCrystalType(WizardsRebornCrystals.AIR);
     }
 
     @Override
     public Color getColor() {
-        return WizardsReborn.airSpellColor;
+        return WizardsRebornSpells.airSpellColor;
     }
 
     @Override
@@ -39,7 +40,7 @@ public class AirRaySpell extends RaySpell {
                 ItemStack stack = player.getItemInHand(player.getUsedItemHand());
                 if (WissenItemUtil.canRemoveWissen(stack, getWissenCostWithStat(projectile.getStats(), player))) {
                     removeWissen(stack, projectile.getStats(), player);
-                    int focusLevel = CrystalUtil.getStatLevel(projectile.getStats(), WizardsReborn.FOCUS_CRYSTAL_STAT);
+                    int focusLevel = CrystalUtil.getStatLevel(projectile.getStats(), WizardsRebornCrystals.FOCUS);
                     float magicModifier = ArcaneArmorItem.getPlayerMagicModifier(player);
                     float damage = (float) (1.5f + (focusLevel * 0.5)) + magicModifier;
                     target.hurt(new DamageSource(target.damageSources().fall().typeHolder(), projectile, player), damage);

@@ -1,10 +1,10 @@
 package mod.maxbogomol.wizards_reborn.common.block.alchemy_furnace;
 
-import mod.maxbogomol.fluffy_fur.FluffyFur;
 import mod.maxbogomol.fluffy_fur.client.particle.ParticleBuilder;
 import mod.maxbogomol.fluffy_fur.client.particle.data.ColorParticleData;
 import mod.maxbogomol.fluffy_fur.client.particle.data.GenericParticleData;
 import mod.maxbogomol.fluffy_fur.common.block.entity.TickableBlockEntity;
+import mod.maxbogomol.fluffy_fur.registry.client.FluffyFurParticles;
 import mod.maxbogomol.wizards_reborn.api.alchemy.ISteamBlockEntity;
 import mod.maxbogomol.wizards_reborn.client.gui.container.AlchemyFurnaceContainer;
 import mod.maxbogomol.wizards_reborn.common.item.equipment.WissenWandItem;
@@ -162,7 +162,7 @@ public class AlchemyFurnaceBlock extends HorizontalDirectionalBlock implements E
                     if (world.getBlockEntity(pos) instanceof ISteamBlockEntity tile) {
                         if (tile.getMaxSteam() > 0) {
                             float amount = (float) tile.getSteam() / (float) tile.getMaxSteam();
-                            ParticleBuilder.create(FluffyFur.SMOKE_PARTICLE)
+                            ParticleBuilder.create(FluffyFurParticles.SMOKE)
                                     .setColorData(ColorParticleData.create(Color.WHITE).build())
                                     .setTransparencyData(GenericParticleData.create(0.4f, 0).build())
                                     .setScaleData(GenericParticleData.create(0.1f, 0.5f).build())

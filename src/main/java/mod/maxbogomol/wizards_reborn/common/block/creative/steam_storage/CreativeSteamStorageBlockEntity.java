@@ -1,10 +1,11 @@
 package mod.maxbogomol.wizards_reborn.common.block.creative.steam_storage;
 
 import mod.maxbogomol.fluffy_fur.common.block.entity.TickableBlockEntity;
-import mod.maxbogomol.wizards_reborn.WizardsReborn;
 import mod.maxbogomol.wizards_reborn.api.alchemy.ISteamBlockEntity;
 import mod.maxbogomol.wizards_reborn.api.alchemy.PipeConnection;
 import mod.maxbogomol.wizards_reborn.common.block.pipe.PipeBaseBlockEntity;
+import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornBlockEntities;
+import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornTags;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.world.level.block.Block;
@@ -19,7 +20,7 @@ public class CreativeSteamStorageBlockEntity extends PipeBaseBlockEntity impleme
     }
 
     public CreativeSteamStorageBlockEntity(BlockPos pos, BlockState state) {
-        this(WizardsReborn.CREATIVE_STEAM_STORAGE_BLOCK_ENTITY.get(), pos, state);
+        this(WizardsRebornBlockEntities.CREATIVE_STEAM_STORAGE.get(), pos, state);
     }
 
     @Override
@@ -34,7 +35,7 @@ public class CreativeSteamStorageBlockEntity extends PipeBaseBlockEntity impleme
         for (Direction direction : Direction.values()) {
             BlockState facingState = level.getBlockState(worldPosition.relative(direction));
             BlockEntity facingBE = level.getBlockEntity(worldPosition.relative(direction));
-            if (facingState.is(WizardsReborn.STEAM_PIPE_CONNECTION_BLOCK_TAG)) {
+            if (facingState.is(WizardsRebornTags.STEAM_PIPE_CONNECTION_BLOCK)) {
                 if (facingBE instanceof PipeBaseBlockEntity && !((PipeBaseBlockEntity) facingBE).getConnection(direction.getOpposite()).transfer) {
                     connections[direction.get3DDataValue()] = PipeConnection.NONE;
                 } else {

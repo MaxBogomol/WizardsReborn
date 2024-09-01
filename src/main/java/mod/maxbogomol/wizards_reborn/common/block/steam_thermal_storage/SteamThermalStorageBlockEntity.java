@@ -1,13 +1,13 @@
 package mod.maxbogomol.wizards_reborn.common.block.steam_thermal_storage;
 
-import mod.maxbogomol.fluffy_fur.FluffyFur;
 import mod.maxbogomol.fluffy_fur.client.particle.ParticleBuilder;
 import mod.maxbogomol.fluffy_fur.client.particle.data.ColorParticleData;
 import mod.maxbogomol.fluffy_fur.client.particle.data.GenericParticleData;
 import mod.maxbogomol.fluffy_fur.common.block.entity.BlockEntityBase;
 import mod.maxbogomol.fluffy_fur.common.block.entity.TickableBlockEntity;
-import mod.maxbogomol.wizards_reborn.WizardsReborn;
+import mod.maxbogomol.fluffy_fur.registry.client.FluffyFurParticles;
 import mod.maxbogomol.wizards_reborn.api.alchemy.ISteamBlockEntity;
+import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornBlockEntities;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.nbt.CompoundTag;
@@ -28,7 +28,7 @@ public class SteamThermalStorageBlockEntity extends BlockEntityBase implements T
     }
 
     public SteamThermalStorageBlockEntity(BlockPos pos, BlockState state) {
-        this(WizardsReborn.STEAM_THERMAL_STORAGE_BLOCK_ENTITY.get(), pos, state);
+        this(WizardsRebornBlockEntities.STEAM_THERMAL_STORAGE.get(), pos, state);
     }
 
     @Override
@@ -54,7 +54,7 @@ public class SteamThermalStorageBlockEntity extends BlockEntityBase implements T
 
             for (int i = 0; i < 2 * amount; i++) {
                 if (random.nextFloat() < amount) {
-                    ParticleBuilder.create(FluffyFur.SMOKE_PARTICLE)
+                    ParticleBuilder.create(FluffyFurParticles.SMOKE)
                             .setColorData(ColorParticleData.create(Color.WHITE).build())
                             .setTransparencyData(GenericParticleData.create(0.4f, 0).build())
                             .setScaleData(GenericParticleData.create(0f, 0.3f).build())

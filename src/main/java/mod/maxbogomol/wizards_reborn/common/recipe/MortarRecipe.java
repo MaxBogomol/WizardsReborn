@@ -2,6 +2,8 @@ package mod.maxbogomol.wizards_reborn.common.recipe;
 
 import com.google.gson.JsonObject;
 import mod.maxbogomol.wizards_reborn.WizardsReborn;
+import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornItems;
+import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornRecipes;
 import net.minecraft.core.RegistryAccess;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.network.FriendlyByteBuf;
@@ -41,7 +43,7 @@ public class MortarRecipe implements Recipe<Container>  {
     }
 
     public ItemStack getToastSymbol() {
-        return new ItemStack(WizardsReborn.ARCANE_WOOD_MORTAR.get());
+        return new ItemStack(WizardsRebornItems.ARCANE_WOOD_MORTAR.get());
     }
 
     @Override
@@ -51,7 +53,7 @@ public class MortarRecipe implements Recipe<Container>  {
 
     @Override
     public RecipeSerializer<?> getSerializer() {
-        return WizardsReborn.MORTAR_SERIALIZER.get();
+        return WizardsRebornRecipes.MORTAR_SERIALIZER.get();
     }
 
     public static class MortarRecipeType implements RecipeType<MortarRecipe> {

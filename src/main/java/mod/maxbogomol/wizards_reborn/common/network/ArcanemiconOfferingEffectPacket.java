@@ -1,9 +1,9 @@
 package mod.maxbogomol.wizards_reborn.common.network;
 
-import mod.maxbogomol.fluffy_fur.FluffyFur;
 import mod.maxbogomol.fluffy_fur.client.particle.ParticleBuilder;
 import mod.maxbogomol.fluffy_fur.client.particle.data.ColorParticleData;
 import mod.maxbogomol.fluffy_fur.client.particle.data.GenericParticleData;
+import mod.maxbogomol.fluffy_fur.registry.client.FluffyFurParticles;
 import mod.maxbogomol.wizards_reborn.WizardsReborn;
 import mod.maxbogomol.wizards_reborn.common.config.Config;
 import net.minecraft.network.FriendlyByteBuf;
@@ -52,7 +52,7 @@ public class ArcanemiconOfferingEffectPacket {
                         double Y = Math.cos(pitch);
                         double Z = Math.sin(pitch) * Math.sin(yaw) * distance;
 
-                        ParticleBuilder.create(FluffyFur.SMOKE_PARTICLE)
+                        ParticleBuilder.create(FluffyFurParticles.SMOKE)
                                 .setColorData(ColorParticleData.create(251 / 255f, 179 / 255f, 176 / 255f).build())
                                 .setTransparencyData(GenericParticleData.create(0.4f, 0).build())
                                 .setScaleData(GenericParticleData.create(0.4f, 0f).build())
@@ -61,7 +61,7 @@ public class ArcanemiconOfferingEffectPacket {
                                 .addVelocity(X / 10, 0, Z / 10)
                                 .randomOffset(0.05f)
                                 .spawn(world, msg.posX, msg.posY, msg.posZ);
-                        ParticleBuilder.create(FluffyFur.WISP_PARTICLE)
+                        ParticleBuilder.create(FluffyFurParticles.WISP)
                                 .setColorData(ColorParticleData.create(Config.wissenColorR(), Config.wissenColorG(), Config.wissenColorB()).build())
                                 .setTransparencyData(GenericParticleData.create(0.4f, 0).build())
                                 .setScaleData(GenericParticleData.create(0.4f, 0f).build())
@@ -73,7 +73,7 @@ public class ArcanemiconOfferingEffectPacket {
                     }
 
                     for (int i = 0; i < 30; i++) {
-                        ParticleBuilder.create(FluffyFur.SPARKLE_PARTICLE)
+                        ParticleBuilder.create(FluffyFurParticles.SPARKLE)
                                 .setColorData(ColorParticleData.create(123 / 255f, 73 / 255f, 109 / 255f).build())
                                 .setTransparencyData(GenericParticleData.create(0.3f, 0).build())
                                 .setScaleData(GenericParticleData.create(0.4f, 0).build())

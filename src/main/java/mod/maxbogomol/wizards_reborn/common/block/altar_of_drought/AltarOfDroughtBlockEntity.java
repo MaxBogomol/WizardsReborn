@@ -1,12 +1,12 @@
 package mod.maxbogomol.wizards_reborn.common.block.altar_of_drought;
 
-import mod.maxbogomol.fluffy_fur.FluffyFur;
 import mod.maxbogomol.fluffy_fur.client.particle.ParticleBuilder;
 import mod.maxbogomol.fluffy_fur.client.particle.data.ColorParticleData;
 import mod.maxbogomol.fluffy_fur.client.particle.data.GenericParticleData;
 import mod.maxbogomol.fluffy_fur.common.block.entity.ExposedBlockSimpleInventory;
 import mod.maxbogomol.fluffy_fur.common.block.entity.TickableBlockEntity;
 import mod.maxbogomol.fluffy_fur.common.easing.Easing;
+import mod.maxbogomol.fluffy_fur.registry.client.FluffyFurParticles;
 import mod.maxbogomol.wizards_reborn.WizardsReborn;
 import mod.maxbogomol.wizards_reborn.api.crystalritual.CrystalRitual;
 import mod.maxbogomol.wizards_reborn.api.wissen.*;
@@ -16,6 +16,9 @@ import mod.maxbogomol.wizards_reborn.common.network.WissenSendEffectPacket;
 import mod.maxbogomol.wizards_reborn.common.network.tileentity.AltarOfDroughtBreakEffectPacket;
 import mod.maxbogomol.wizards_reborn.common.network.tileentity.AltarOfDroughtBurstEffectPacket;
 import mod.maxbogomol.wizards_reborn.common.network.tileentity.AltarOfDroughtSendEffectPacket;
+import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornBlockEntities;
+import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornSounds;
+import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornTags;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.nbt.CompoundTag;
@@ -43,7 +46,7 @@ public class AltarOfDroughtBlockEntity extends ExposedBlockSimpleInventory imple
     }
 
     public AltarOfDroughtBlockEntity(BlockPos pos, BlockState state) {
-        this(WizardsReborn.ALTAR_OF_DROUGHT_BLOCK_ENTITY.get(), pos, state);
+        this(WizardsRebornBlockEntities.ALTAR_OF_DROUGHT.get(), pos, state);
     }
 
     @Override
@@ -67,7 +70,7 @@ public class AltarOfDroughtBlockEntity extends ExposedBlockSimpleInventory imple
                                 PacketHandler.sendToTracking(level, getBlockPos(), new AltarOfDroughtSendEffectPacket(getBlockPos()));
                             }
                             if (random.nextFloat() < 0.1) {
-                                level.playSound(WizardsReborn.proxy.getPlayer(), getBlockPos(), WizardsReborn.WISSEN_BURST_SOUND.get(), SoundSource.BLOCKS, 0.15f, (float) (0.5f + ((random.nextFloat() - 0.5D) / 4)));
+                                level.playSound(WizardsReborn.proxy.getPlayer(), getBlockPos(), WizardsRebornSounds.WISSEN_BURST.get(), SoundSource.BLOCKS, 0.15f, (float) (0.5f + ((random.nextFloat() - 0.5D) / 4)));
                             }
 
                             update = true;
@@ -88,11 +91,11 @@ public class AltarOfDroughtBlockEntity extends ExposedBlockSimpleInventory imple
 
             if (ticks <= 0 && wissen < getMaxWissen() && canWork()) {
                 ArrayList<BlockPos> blockPosList = CrystalRitual.getBlockPosWithArea(level, getBlockPos(), new Vec3(distance, distance, distance), new Vec3(distance, distance, distance), (p) -> {
-                    return level.getBlockState(p).is(WizardsReborn.ALTAR_OF_DROUGHT_TARGET_BLOCK_TAG) && !level.getBlockState(p).getValue(BlockStateProperties.PERSISTENT);
+                    return level.getBlockState(p).is(WizardsRebornTags.ALTAR_OF_DROUGHT_TARGET_BLOCK) && !level.getBlockState(p).getValue(BlockStateProperties.PERSISTENT);
                 }, true, true, 1);
 
                 for (BlockPos breakPos : blockPosList) {
-                    if (level.getBlockState(breakPos).is(WizardsReborn.ALTAR_OF_DROUGHT_TARGET_BLOCK_TAG) && !level.getBlockState(breakPos).getValue(BlockStateProperties.PERSISTENT)) {
+                    if (level.getBlockState(breakPos).is(WizardsRebornTags.ALTAR_OF_DROUGHT_TARGET_BLOCK) && !level.getBlockState(breakPos).getValue(BlockStateProperties.PERSISTENT)) {
                         PacketHandler.sendToTracking(level, getBlockPos(), new AltarOfDroughtBurstEffectPacket(getBlockPos()));
                         PacketHandler.sendToTracking(level, breakPos, new AltarOfDroughtBreakEffectPacket(breakPos));
                         PacketHandler.sendToTracking(level, getBlockPos(), new WissenSendEffectPacket(getBlockPos().getX() + 0.5F, getBlockPos().getY() + 0.5F, getBlockPos().getZ() + 0.5F, breakPos.getX() + 0.5F, breakPos.getY() + 0.5F, breakPos.getZ() + 0.5F, Config.wissenColorR(), Config.wissenColorG(), Config.wissenColorB(), 25));
@@ -101,7 +104,7 @@ public class AltarOfDroughtBlockEntity extends ExposedBlockSimpleInventory imple
                         ticks = 20 + random.nextInt(10);
                         maxTicks = ticks;
                         update = true;
-                        level.playSound(WizardsReborn.proxy.getPlayer(), getBlockPos(), WizardsReborn.ALTAR_OF_DROUGHT_SOUND.get(), SoundSource.BLOCKS, 0.5f, (float) (1f + ((random.nextFloat() - 0.5D) / 4)));
+                        level.playSound(WizardsReborn.proxy.getPlayer(), getBlockPos(), WizardsRebornSounds.ALTAR_OF_DROUGHT.get(), SoundSource.BLOCKS, 0.5f, (float) (1f + ((random.nextFloat() - 0.5D) / 4)));
                     }
                 }
             }
@@ -112,7 +115,7 @@ public class AltarOfDroughtBlockEntity extends ExposedBlockSimpleInventory imple
         if (level.isClientSide()) {
             if (getWissen() > 0) {
                 if (random.nextFloat() < 0.5) {
-                    ParticleBuilder.create(FluffyFur.WISP_PARTICLE)
+                    ParticleBuilder.create(FluffyFurParticles.WISP)
                             .setColorData(ColorParticleData.create(Config.wissenColorR(), Config.wissenColorG(), Config.wissenColorB()).build())
                             .setTransparencyData(GenericParticleData.create(0.25f, 0).build())
                             .setScaleData(GenericParticleData.create(0.3f * getStage(), 0).build())
@@ -121,7 +124,7 @@ public class AltarOfDroughtBlockEntity extends ExposedBlockSimpleInventory imple
                             .spawn(level, worldPosition.getX() + 0.5F, worldPosition.getY() + 0.625F, worldPosition.getZ() + 0.5F);
                 }
                 if (random.nextFloat() < 0.1) {
-                    ParticleBuilder.create(random.nextBoolean() ? FluffyFur.SQUARE_PARTICLE : FluffyFur.SPARKLE_PARTICLE)
+                    ParticleBuilder.create(random.nextBoolean() ? FluffyFurParticles.SQUARE : FluffyFurParticles.SPARKLE)
                             .setColorData(ColorParticleData.create(Config.wissenColorR(), Config.wissenColorG(), Config.wissenColorB()).build())
                             .setTransparencyData(GenericParticleData.create(0.25f, 0).build())
                             .setScaleData(GenericParticleData.create(0, 0.1f * getStage(), 0).setEasing(Easing.QUINTIC_IN_OUT).build())

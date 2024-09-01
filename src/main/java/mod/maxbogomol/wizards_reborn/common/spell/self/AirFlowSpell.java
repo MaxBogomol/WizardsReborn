@@ -1,10 +1,11 @@
 package mod.maxbogomol.wizards_reborn.common.spell.self;
 
-import mod.maxbogomol.wizards_reborn.WizardsReborn;
 import mod.maxbogomol.wizards_reborn.api.crystal.CrystalUtil;
 import mod.maxbogomol.wizards_reborn.common.item.equipment.arcane.ArcaneArmorItem;
 import mod.maxbogomol.wizards_reborn.common.network.PacketHandler;
 import mod.maxbogomol.wizards_reborn.common.network.spell.AirFlowSpellEffectPacket;
+import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornCrystals;
+import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornSpells;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.effect.MobEffectInstance;
@@ -19,12 +20,12 @@ import java.awt.*;
 public class AirFlowSpell extends SelfSpell {
     public AirFlowSpell(String id, int points) {
         super(id, points);
-        addCrystalType(WizardsReborn.AIR_CRYSTAL_TYPE);
+        addCrystalType(WizardsRebornCrystals.AIR);
     }
 
     @Override
     public Color getColor() {
-        return WizardsReborn.airSpellColor;
+        return WizardsRebornSpells.airSpellColor;
     }
 
     @Override
@@ -42,7 +43,7 @@ public class AirFlowSpell extends SelfSpell {
         ItemStack stack = player.getItemInHand(hand);
         CompoundTag stats = getStats(stack);
 
-        int focusLevel = CrystalUtil.getStatLevel(stats, WizardsReborn.FOCUS_CRYSTAL_STAT);
+        int focusLevel = CrystalUtil.getStatLevel(stats, WizardsRebornCrystals.FOCUS);
         float magicModifier = ArcaneArmorItem.getPlayerMagicModifier(player);
 
         float scale = 0.55f + (focusLevel * 0.15f);

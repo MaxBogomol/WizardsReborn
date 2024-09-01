@@ -3,6 +3,7 @@ package mod.maxbogomol.wizards_reborn.client.arcanemicon.recipe;
 import mod.maxbogomol.wizards_reborn.WizardsReborn;
 import mod.maxbogomol.wizards_reborn.client.arcanemicon.ArcanemiconGui;
 import mod.maxbogomol.wizards_reborn.common.recipe.WissenCrystallizerRecipe;
+import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornRecipes;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.multiplayer.ClientLevel;
@@ -68,7 +69,7 @@ public class WissenCrystallizerPage extends RecipePage {
                 inv.setItem(i, inputs[i]);
             }
 
-            Optional<WissenCrystallizerRecipe> recipe = level.getRecipeManager().getRecipeFor(WizardsReborn.WISSEN_CRYSTALLIZER_RECIPE.get(), inv, level);
+            Optional<WissenCrystallizerRecipe> recipe = level.getRecipeManager().getRecipeFor(WizardsRebornRecipes.WISSEN_CRYSTALLIZER.get(), inv, level);
             return !(recipe.isPresent() && recipe.get().getResultItem(RegistryAccess.EMPTY).getItem().equals(result.getItem()));
         }
 

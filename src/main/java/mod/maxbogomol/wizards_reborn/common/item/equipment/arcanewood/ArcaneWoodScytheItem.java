@@ -1,9 +1,10 @@
 package mod.maxbogomol.wizards_reborn.common.item.equipment.arcanewood;
 
-import mod.maxbogomol.wizards_reborn.WizardsReborn;
 import mod.maxbogomol.wizards_reborn.api.arcaneenchantment.ArcaneEnchantmentType;
 import mod.maxbogomol.wizards_reborn.api.arcaneenchantment.ArcaneEnchantmentUtil;
 import mod.maxbogomol.wizards_reborn.common.item.equipment.arcane.ArcaneScytheItem;
+import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornArcaneEnchantments;
+import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornSounds;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.InteractionHand;
@@ -36,11 +37,11 @@ public class ArcaneWoodScytheItem extends ArcaneScytheItem {
     }
 
     public int getLifeRoots(ItemStack stack) {
-        return ArcaneEnchantmentUtil.getArcaneEnchantment(stack, WizardsReborn.LIFE_ROOTS_ARCANE_ENCHANTMENT);
+        return ArcaneEnchantmentUtil.getArcaneEnchantment(stack, WizardsRebornArcaneEnchantments.LIFE_ROOTS);
     }
 
     public SoundEvent getRepairSound(ItemStack stack, Level world, Entity entity) {
-        return WizardsReborn.ARCANE_WOOD_PLACE_SOUND.get();
+        return WizardsRebornSounds.ARCANE_WOOD_PLACE.get();
     }
 
     @Override

@@ -1,19 +1,21 @@
 package mod.maxbogomol.wizards_reborn.common.block.arcane_censer;
 
-import mod.maxbogomol.fluffy_fur.FluffyFur;
 import mod.maxbogomol.fluffy_fur.client.particle.ParticleBuilder;
 import mod.maxbogomol.fluffy_fur.client.particle.data.ColorParticleData;
 import mod.maxbogomol.fluffy_fur.client.particle.data.GenericParticleData;
 import mod.maxbogomol.fluffy_fur.common.block.entity.ExposedBlockSimpleInventory;
 import mod.maxbogomol.fluffy_fur.common.block.entity.TickableBlockEntity;
 import mod.maxbogomol.fluffy_fur.common.network.BlockEntityUpdate;
+import mod.maxbogomol.fluffy_fur.registry.client.FluffyFurParticles;
 import mod.maxbogomol.fluffy_fur.util.ColorUtil;
-import mod.maxbogomol.wizards_reborn.WizardsReborn;
 import mod.maxbogomol.wizards_reborn.api.alchemy.ISteamBlockEntity;
 import mod.maxbogomol.wizards_reborn.api.wissen.ICooldownBlockEntity;
 import mod.maxbogomol.wizards_reborn.common.network.PacketHandler;
 import mod.maxbogomol.wizards_reborn.common.network.SmokeEffectPacket;
 import mod.maxbogomol.wizards_reborn.common.recipe.CenserRecipe;
+import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornBlockEntities;
+import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornRecipes;
+import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornSounds;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.nbt.CompoundTag;
@@ -47,7 +49,7 @@ public class ArcaneCenserBlockEntity extends ExposedBlockSimpleInventory impleme
     }
 
     public ArcaneCenserBlockEntity(BlockPos pos, BlockState state) {
-        this(WizardsReborn.ARCANE_CENSER_BLOCK_ENTITY.get(), pos, state);
+        this(WizardsRebornBlockEntities.ARCANE_CENSER.get(), pos, state);
     }
 
     @Override
@@ -66,7 +68,7 @@ public class ArcaneCenserBlockEntity extends ExposedBlockSimpleInventory impleme
         if (level.isClientSide()) {
             if (cooldown > 0) {
                 if (random.nextFloat() < 0.2F) {
-                    ParticleBuilder.create(FluffyFur.SMOKE_PARTICLE)
+                    ParticleBuilder.create(FluffyFurParticles.SMOKE)
                             .setColorData(ColorParticleData.create(Color.WHITE).build())
                             .setTransparencyData(GenericParticleData.create(0.1f, 0).build())
                             .setScaleData(GenericParticleData.create(0.1f, 3f).build())
@@ -82,7 +84,7 @@ public class ArcaneCenserBlockEntity extends ExposedBlockSimpleInventory impleme
 
             for (int i = 0; i < 2 * amount; i++) {
                 if (random.nextFloat() < amount) {
-                    ParticleBuilder.create(FluffyFur.SMOKE_PARTICLE)
+                    ParticleBuilder.create(FluffyFurParticles.SMOKE)
                             .setColorData(ColorParticleData.create(Color.WHITE).build())
                             .setTransparencyData(GenericParticleData.create(0.4f, 0).build())
                             .setScaleData(GenericParticleData.create(0, 0.3f).build())
@@ -106,7 +108,7 @@ public class ArcaneCenserBlockEntity extends ExposedBlockSimpleInventory impleme
         SimpleContainer inv = new SimpleContainer(1);
         for (int i = 0; i < getInventorySize(); i++) {
             inv.setItem(0, getItem(i).copy());
-            Optional<CenserRecipe> recipe = level.getRecipeManager().getRecipeFor(WizardsReborn.CENSER_RECIPE.get(), inv, level);
+            Optional<CenserRecipe> recipe = level.getRecipeManager().getRecipeFor(WizardsRebornRecipes.CENSER.get(), inv, level);
             if (recipe.isPresent()) {
                 for (MobEffectInstance effectInstance : recipe.get().getEffects()) {
                     effects.add(new MobEffectInstance(effectInstance));
@@ -149,7 +151,7 @@ public class ArcaneCenserBlockEntity extends ExposedBlockSimpleInventory impleme
         Vec3 posSmoke = player.getEyePosition().add(player.getLookAngle().scale(0.75f));
         Vec3 vel = player.getEyePosition().add(player.getLookAngle().scale(40)).subtract(posSmoke).scale(1.0 / 20).normalize().scale(0.05f);
         PacketHandler.sendToTracking(level, player.getOnPos(), new SmokeEffectPacket((float) posSmoke.x, (float) posSmoke.y, (float) posSmoke.z, (float) vel.x, (float) vel.y, (float) vel.z, R, G, B));
-        level.playSound(null, player.getOnPos(), WizardsReborn.STEAM_BURST_SOUND.get(), SoundSource.PLAYERS, 0.1f, 2.0f);
+        level.playSound(null, player.getOnPos(), WizardsRebornSounds.STEAM_BURST.get(), SoundSource.PLAYERS, 0.1f, 2.0f);
 
         BlockEntityUpdate.packet(this);
     }

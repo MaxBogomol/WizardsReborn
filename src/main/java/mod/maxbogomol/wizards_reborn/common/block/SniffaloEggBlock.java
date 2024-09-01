@@ -1,7 +1,7 @@
 package mod.maxbogomol.wizards_reborn.common.block;
 
-import mod.maxbogomol.wizards_reborn.WizardsReborn;
 import mod.maxbogomol.wizards_reborn.common.entity.SniffaloEntity;
+import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornEntities;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.server.level.ServerLevel;
@@ -53,7 +53,7 @@ public class SniffaloEggBlock extends SnifferEggBlock implements SimpleWaterlogg
         } else {
             level.playSound(null, pos, SoundEvents.SNIFFER_EGG_HATCH, SoundSource.BLOCKS, 0.7F, 0.9F + random.nextFloat() * 0.2F);
             level.destroyBlock(pos, false);
-            SniffaloEntity sniffalo = WizardsReborn.SNIFFALO.get().create(level);
+            SniffaloEntity sniffalo = WizardsRebornEntities.SNIFFALO.get().create(level);
             if (sniffalo != null) {
                 Vec3 vec3 = pos.getCenter();
                 sniffalo.setBaby(true);

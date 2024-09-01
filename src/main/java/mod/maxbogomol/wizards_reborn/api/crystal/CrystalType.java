@@ -1,6 +1,7 @@
 package mod.maxbogomol.wizards_reborn.api.crystal;
 
 import mod.maxbogomol.wizards_reborn.WizardsReborn;
+import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornCrystals;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;
 
@@ -14,10 +15,10 @@ public class CrystalType {
     public CrystalType(String id) {
         this.id = id;
 
-        addStat(WizardsReborn.FOCUS_CRYSTAL_STAT);
-        addStat(WizardsReborn.BALANCE_CRYSTAL_STAT);
-        addStat(WizardsReborn.ABSORPTION_CRYSTAL_STAT);
-        addStat(WizardsReborn.RESONANCE_CRYSTAL_STAT);
+        addStat(WizardsRebornCrystals.FOCUS);
+        addStat(WizardsRebornCrystals.BALANCE);
+        addStat(WizardsRebornCrystals.ABSORPTION);
+        addStat(WizardsRebornCrystals.RESONANCE);
     }
 
     public Color getColor() {

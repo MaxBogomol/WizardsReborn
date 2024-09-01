@@ -1,9 +1,9 @@
 package mod.maxbogomol.wizards_reborn.common.block.casing.steam;
 
-import mod.maxbogomol.wizards_reborn.WizardsReborn;
 import mod.maxbogomol.wizards_reborn.common.block.casing.CasingBlock;
-import mod.maxbogomol.wizards_reborn.common.block.steam_pipe.SteamPipeBlock;
 import mod.maxbogomol.wizards_reborn.common.block.pipe.PipeBaseBlock;
+import mod.maxbogomol.wizards_reborn.common.block.steam_pipe.SteamPipeBlock;
+import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornBlockEntities;
 import net.minecraft.core.BlockPos;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
@@ -44,7 +44,7 @@ public class SteamCasingBlock extends SteamPipeBlock {
 
     @Override
     public BlockEntity newBlockEntity(BlockPos pPos, BlockState pState) {
-        return WizardsReborn.STEAM_CASING_BLOCK_ENTITY.get().create(pPos, pState);
+        return WizardsRebornBlockEntities.STEAM_CASING.get().create(pPos, pState);
     }
 
     public InteractionResult use(BlockState pState, Level pLevel, BlockPos pPos, Player pPlayer, InteractionHand pHand, BlockHitResult pHit) {

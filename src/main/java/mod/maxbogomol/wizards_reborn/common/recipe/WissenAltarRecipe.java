@@ -2,6 +2,8 @@ package mod.maxbogomol.wizards_reborn.common.recipe;
 
 import com.google.gson.JsonObject;
 import mod.maxbogomol.wizards_reborn.WizardsReborn;
+import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornItems;
+import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornRecipes;
 import net.minecraft.core.RegistryAccess;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.world.Container;
@@ -48,7 +50,7 @@ public class WissenAltarRecipe implements Recipe<Container> {
     }
 
     public ItemStack getToastSymbol() {
-        return new ItemStack(WizardsReborn.WISSEN_ALTAR_ITEM.get());
+        return new ItemStack(WizardsRebornItems.WISSEN_ALTAR.get());
     }
 
     @Override
@@ -58,14 +60,7 @@ public class WissenAltarRecipe implements Recipe<Container> {
 
     @Override
     public RecipeSerializer<?> getSerializer() {
-        return WizardsReborn.WISSEN_ALTAR_SERIALIZER.get();
-    }
-
-    public static class WissenAltarRecipeType implements RecipeType<WissenAltarRecipe> {
-        @Override
-        public String toString() {
-            return WissenAltarRecipe.TYPE_ID.toString();
-        }
+        return WizardsRebornRecipes.WISSEN_ALTAR_SERIALIZER.get();
     }
 
     public static class Serializer implements RecipeSerializer<WissenAltarRecipe> {

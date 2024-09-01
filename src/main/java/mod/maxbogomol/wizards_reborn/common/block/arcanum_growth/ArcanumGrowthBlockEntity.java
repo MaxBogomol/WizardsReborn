@@ -2,9 +2,9 @@ package mod.maxbogomol.wizards_reborn.common.block.arcanum_growth;
 
 import mod.maxbogomol.fluffy_fur.common.block.entity.BlockEntityBase;
 import mod.maxbogomol.fluffy_fur.common.block.entity.TickableBlockEntity;
-import mod.maxbogomol.wizards_reborn.WizardsReborn;
 import mod.maxbogomol.wizards_reborn.api.crystalritual.IGrowableCrystal;
 import mod.maxbogomol.wizards_reborn.api.light.ILightBlockEntity;
+import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornBlockEntities;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.world.level.block.entity.BlockEntityType;
@@ -22,7 +22,7 @@ public class ArcanumGrowthBlockEntity extends BlockEntityBase implements Tickabl
     }
 
     public ArcanumGrowthBlockEntity(BlockPos pos, BlockState state) {
-        this(WizardsReborn.ARCANUM_GROWTH_BLOCK_ENTITY.get(), pos, state);
+        this(WizardsRebornBlockEntities.ARCANUM_GROWTH.get(), pos, state);
     }
 
     @Override

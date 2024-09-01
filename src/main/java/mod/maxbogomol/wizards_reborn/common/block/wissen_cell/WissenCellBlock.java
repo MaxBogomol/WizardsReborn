@@ -3,11 +3,12 @@ package mod.maxbogomol.wizards_reborn.common.block.wissen_cell;
 import mod.maxbogomol.fluffy_fur.common.block.entity.BlockSimpleInventory;
 import mod.maxbogomol.fluffy_fur.common.block.entity.TickableBlockEntity;
 import mod.maxbogomol.fluffy_fur.common.network.BlockEntityUpdate;
-import mod.maxbogomol.wizards_reborn.WizardsReborn;
 import mod.maxbogomol.wizards_reborn.api.wissen.IWissenBlockEntity;
 import mod.maxbogomol.wizards_reborn.api.wissen.IWissenItem;
 import mod.maxbogomol.wizards_reborn.api.wissen.WissenItemUtil;
 import mod.maxbogomol.wizards_reborn.common.item.equipment.WissenWandItem;
+import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornItems;
+import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornSounds;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.nbt.CompoundTag;
@@ -100,7 +101,7 @@ public class WissenCellBlock extends HorizontalDirectionalBlock implements Entit
             CompoundTag nbt = tile.getUpdateTag();
             if (nbt != null) {
                 for (ItemStack stack : items) {
-                    if (stack.getItem() == WizardsReborn.WISSEN_CELL_ITEM.get()) {
+                    if (stack.getItem() == WizardsRebornItems.WISSEN_CELL.get()) {
                         if (stack.getItem() instanceof IWissenItem) {
                             WissenItemUtil.existWissen(stack);
                             WissenItemUtil.setWissen(stack, wissenTile.getWissen());
@@ -131,7 +132,7 @@ public class WissenCellBlock extends HorizontalDirectionalBlock implements Entit
                 player.getInventory().removeItem(player.getItemInHand(hand));
                 world.updateNeighbourForOutputSignal(pos, this);
                 BlockEntityUpdate.packet(cell);
-                world.playSound(null, pos, WizardsReborn.PEDESTAL_INSERT_SOUND.get(), SoundSource.BLOCKS, 1.0f, 1.0f);
+                world.playSound(null, pos, WizardsRebornSounds.PEDESTAL_INSERT.get(), SoundSource.BLOCKS, 1.0f, 1.0f);
                 return InteractionResult.SUCCESS;
             }
         }
@@ -145,7 +146,7 @@ public class WissenCellBlock extends HorizontalDirectionalBlock implements Entit
             cell.getItemHandler().removeItem(0, 1);
             world.updateNeighbourForOutputSignal(pos, this);
             BlockEntityUpdate.packet(cell);
-            world.playSound(null, pos, WizardsReborn.PEDESTAL_REMOVE_SOUND.get(), SoundSource.BLOCKS, 1.0f, 1.0f);
+            world.playSound(null, pos, WizardsRebornSounds.PEDESTAL_REMOVE.get(), SoundSource.BLOCKS, 1.0f, 1.0f);
             return InteractionResult.SUCCESS;
         }
 

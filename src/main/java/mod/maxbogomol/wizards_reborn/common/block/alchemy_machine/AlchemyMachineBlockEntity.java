@@ -1,12 +1,11 @@
 package mod.maxbogomol.wizards_reborn.common.block.alchemy_machine;
 
-import mod.maxbogomol.fluffy_fur.FluffyFur;
 import mod.maxbogomol.fluffy_fur.client.particle.ParticleBuilder;
 import mod.maxbogomol.fluffy_fur.client.particle.data.ColorParticleData;
 import mod.maxbogomol.fluffy_fur.client.particle.data.GenericParticleData;
 import mod.maxbogomol.fluffy_fur.common.block.entity.TickableBlockEntity;
 import mod.maxbogomol.fluffy_fur.common.network.BlockEntityUpdate;
-import mod.maxbogomol.wizards_reborn.WizardsReborn;
+import mod.maxbogomol.fluffy_fur.registry.client.FluffyFurParticles;
 import mod.maxbogomol.wizards_reborn.api.alchemy.AlchemyPotionUtil;
 import mod.maxbogomol.wizards_reborn.api.alchemy.PipeConnection;
 import mod.maxbogomol.wizards_reborn.api.alchemy.SteamUtil;
@@ -20,6 +19,10 @@ import mod.maxbogomol.wizards_reborn.common.item.equipment.AlchemyBottleItem;
 import mod.maxbogomol.wizards_reborn.common.item.equipment.AlchemyPotionItem;
 import mod.maxbogomol.wizards_reborn.common.recipe.AlchemyMachineContext;
 import mod.maxbogomol.wizards_reborn.common.recipe.AlchemyMachineRecipe;
+import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornBlockEntities;
+import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornRecipes;
+import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornSounds;
+import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornTags;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.RegistryAccess;
@@ -98,7 +101,7 @@ public class AlchemyMachineBlockEntity extends PipeBaseBlockEntity implements Ti
     }
 
     public AlchemyMachineBlockEntity(BlockPos pos, BlockState state) {
-        this(WizardsReborn.ALCHEMY_MACHINE_BLOCK_ENTITY.get(), pos, state);
+        this(WizardsRebornBlockEntities.ALCHEMY_MACHINE.get(), pos, state);
     }
 
     @Override
@@ -117,7 +120,7 @@ public class AlchemyMachineBlockEntity extends PipeBaseBlockEntity implements Ti
 
                 if (!inv.isEmpty()) {
                     AlchemyMachineContext context = new AlchemyMachineContext(inv, fluidTank1, fluidTank2, fluidTank3);
-                    Optional<AlchemyMachineRecipe> recipe = level.getRecipeManager().getRecipeFor(WizardsReborn.ALCHEMY_MACHINE_RECIPE.get(), context, level);
+                    Optional<AlchemyMachineRecipe> recipe = level.getRecipeManager().getRecipeFor(WizardsRebornRecipes.ALCHEMY_MACHINE.get(), context, level);
                     wissenInCraft = recipe.map(AlchemyMachineRecipe::getRecipeWissen).orElse(0);
                     steamInCraft = recipe.map(AlchemyMachineRecipe::getRecipeSteam).orElse(0);
 
@@ -167,7 +170,7 @@ public class AlchemyMachineBlockEntity extends PipeBaseBlockEntity implements Ti
                             }
 
                             if (random.nextFloat() < 0.01F) {
-                                level.playSound(null, getBlockPos(), WizardsReborn.STEAM_BURST_SOUND.get(), SoundSource.BLOCKS, 0.1f, 1.0f);
+                                level.playSound(null, getBlockPos(), WizardsRebornSounds.STEAM_BURST.get(), SoundSource.BLOCKS, 0.1f, 1.0f);
                             }
                         }
 
@@ -230,7 +233,7 @@ public class AlchemyMachineBlockEntity extends PipeBaseBlockEntity implements Ti
                                         }
                                     }
 
-                                    level.playSound(null, getBlockPos(), WizardsReborn.STEAM_BURST_SOUND.get(), SoundSource.BLOCKS, 0.1f, 1.0f);
+                                    level.playSound(null, getBlockPos(), WizardsRebornSounds.STEAM_BURST.get(), SoundSource.BLOCKS, 0.1f, 1.0f);
 
                                     update = true;
                                 }
@@ -260,7 +263,7 @@ public class AlchemyMachineBlockEntity extends PipeBaseBlockEntity implements Ti
             if (level.getBlockEntity(getBlockPos().above()) instanceof AlchemyBoilerBlockEntity boiler) {
                 if (wissenIsCraft > 0 || steamIsCraft > 0) {
                     if (random.nextFloat() < 0.6F) {
-                        ParticleBuilder.create(FluffyFur.SMOKE_PARTICLE)
+                        ParticleBuilder.create(FluffyFurParticles.SMOKE)
                                 .setColorData(ColorParticleData.create(Color.WHITE).build())
                                 .setTransparencyData(GenericParticleData.create(0.4f, 0).build())
                                 .setScaleData(GenericParticleData.create(0.1f, 0.5f).build())
@@ -384,7 +387,7 @@ public class AlchemyMachineBlockEntity extends PipeBaseBlockEntity implements Ti
         for (Direction direction : directions) {
             BlockState facingState = level.getBlockState(worldPosition.relative(direction));
             BlockEntity facingBE = level.getBlockEntity(worldPosition.relative(direction));
-            if (facingState.is(WizardsReborn.FLUID_PIPE_CONNECTION_BLOCK_TAG)) {
+            if (facingState.is(WizardsRebornTags.FLUID_PIPE_CONNECTION_BLOCK)) {
                 if (facingBE instanceof PipeBaseBlockEntity && !((PipeBaseBlockEntity) facingBE).getConnection(direction.getOpposite()).transfer) {
                     connections[direction.get3DDataValue()] = PipeConnection.NONE;
                 } else {
@@ -516,7 +519,7 @@ public class AlchemyMachineBlockEntity extends PipeBaseBlockEntity implements Ti
         inv.setItem(6, itemOutputHandler.getStackInSlot(0));
 
         AlchemyMachineContext context = new AlchemyMachineContext(inv, fluidTank1, fluidTank2, fluidTank3);
-        Optional<AlchemyMachineRecipe> recipe = level.getRecipeManager().getRecipeFor(WizardsReborn.ALCHEMY_MACHINE_RECIPE.get(), context, level);
+        Optional<AlchemyMachineRecipe> recipe = level.getRecipeManager().getRecipeFor(WizardsRebornRecipes.ALCHEMY_MACHINE.get(), context, level);
         if (recipe.isPresent()) {
             ItemStack stack = recipe.get().getResultItem(RegistryAccess.EMPTY).copy();
 

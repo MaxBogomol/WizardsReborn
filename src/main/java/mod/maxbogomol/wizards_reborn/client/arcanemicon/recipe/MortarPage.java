@@ -3,6 +3,8 @@ package mod.maxbogomol.wizards_reborn.client.arcanemicon.recipe;
 import mod.maxbogomol.wizards_reborn.WizardsReborn;
 import mod.maxbogomol.wizards_reborn.client.arcanemicon.ArcanemiconGui;
 import mod.maxbogomol.wizards_reborn.common.recipe.MortarRecipe;
+import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornItems;
+import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornRecipes;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.multiplayer.ClientLevel;
@@ -29,7 +31,7 @@ public class MortarPage extends RecipePage {
     @Override
     @OnlyIn(Dist.CLIENT)
     public void render(ArcanemiconGui book, GuiGraphics gui, int x, int y, int mouseX, int mouseY) {
-        drawItem(book, gui, new ItemStack(WizardsReborn.ARCANE_WOOD_MORTAR.get()),x + 56, y + 18, mouseX, mouseY);
+        drawItem(book, gui, new ItemStack(WizardsRebornItems.ARCANE_WOOD_MORTAR.get()),x + 56, y + 18, mouseX, mouseY);
         drawItem(book, gui, input,x + 56, y + 69, mouseX, mouseY);
         drawItem(book, gui, result,x + 56, y + 123, mouseX, mouseY);
         renderChanged(book, gui, x, y, mouseX, mouseY);
@@ -44,7 +46,7 @@ public class MortarPage extends RecipePage {
             SimpleContainer inv = new SimpleContainer(1);
             inv.setItem(0, input);
 
-            Optional<MortarRecipe> recipe = level.getRecipeManager().getRecipeFor(WizardsReborn.MORTAR_RECIPE.get(), inv, level);
+            Optional<MortarRecipe> recipe = level.getRecipeManager().getRecipeFor(WizardsRebornRecipes.MORTAR.get(), inv, level);
             return !(recipe.isPresent() && recipe.get().getResultItem(RegistryAccess.EMPTY).getItem().equals(result.getItem()));
         }
 

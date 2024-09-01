@@ -1,8 +1,9 @@
 package mod.maxbogomol.wizards_reborn.common.spell.block;
 
-import mod.maxbogomol.wizards_reborn.WizardsReborn;
 import mod.maxbogomol.wizards_reborn.api.crystal.CrystalUtil;
 import mod.maxbogomol.wizards_reborn.common.item.equipment.arcane.ArcaneArmorItem;
+import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornCrystals;
+import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornSpells;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.world.InteractionResult;
@@ -22,7 +23,7 @@ public class DirtBlockSpell extends BlockPlaceSpell {
 
     public DirtBlockSpell(String id, int points) {
         super(id, points);
-        addCrystalType(WizardsReborn.EARTH_CRYSTAL_TYPE);
+        addCrystalType(WizardsRebornCrystals.EARTH);
         blockList.add(Blocks.GRASS_BLOCK);
         blockList.add(Blocks.COARSE_DIRT);
         blockList.add(Blocks.ROOTED_DIRT);
@@ -32,7 +33,7 @@ public class DirtBlockSpell extends BlockPlaceSpell {
 
     @Override
     public Color getColor() {
-        return WizardsReborn.earthSpellColor;
+        return WizardsRebornSpells.earthSpellColor;
     }
 
     @Override
@@ -42,7 +43,7 @@ public class DirtBlockSpell extends BlockPlaceSpell {
         BlockState blockState = Blocks.DIRT.defaultBlockState();
 
         CompoundTag stats = getStats(stack);
-        int focusLevel = CrystalUtil.getStatLevel(stats, WizardsReborn.FOCUS_CRYSTAL_STAT);
+        int focusLevel = CrystalUtil.getStatLevel(stats, WizardsRebornCrystals.FOCUS);
         float magicModifier = ArcaneArmorItem.getPlayerMagicModifier(context.getPlayer());
         if (random.nextFloat() < 0.15f + (0.05f* (focusLevel + magicModifier))) {
             blockState = blockList.get(random.nextInt(blockList.size())).defaultBlockState();

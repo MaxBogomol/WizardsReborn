@@ -2,6 +2,8 @@ package mod.maxbogomol.wizards_reborn.common.spell.sound;
 
 import mod.maxbogomol.wizards_reborn.WizardsReborn;
 import mod.maxbogomol.wizards_reborn.api.spell.Spell;
+import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornSounds;
+import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornSpells;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundSource;
@@ -20,7 +22,7 @@ public class SoundSpell extends Spell {
 
     @Override
     public Color getColor() {
-        return WizardsReborn.soundSpellColor;
+        return WizardsRebornSpells.soundSpellColor;
     }
 
     @Override
@@ -37,7 +39,7 @@ public class SoundSpell extends Spell {
     }
 
     public SoundEvent getSound(Level world, Player player, InteractionHand hand) {
-        return WizardsReborn.SPELL_CAST_SOUND.get();
+        return WizardsRebornSounds.SPELL_CAST.get();
     }
 
     public void playSound(Level world, Player player, InteractionHand hand) {

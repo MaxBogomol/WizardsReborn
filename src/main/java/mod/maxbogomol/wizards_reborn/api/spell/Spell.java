@@ -12,6 +12,9 @@ import mod.maxbogomol.wizards_reborn.api.wissen.WissenUtils;
 import mod.maxbogomol.wizards_reborn.common.entity.SpellProjectileEntity;
 import mod.maxbogomol.wizards_reborn.common.item.CrystalItem;
 import mod.maxbogomol.wizards_reborn.common.item.equipment.ArcaneWandItem;
+import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornCrystals;
+import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornEntities;
+import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornSounds;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.resources.ResourceLocation;
@@ -115,12 +118,12 @@ public class Spell {
     }
 
     public int getCooldownWithStat(CompoundTag nbt, int cost) {
-        int absorptionLevel = CrystalUtil.getStatLevel(nbt, WizardsReborn.ABSORPTION_CRYSTAL_STAT);
+        int absorptionLevel = CrystalUtil.getStatLevel(nbt, WizardsRebornCrystals.ABSORPTION);
         return (int) (cost * (1 - (getCooldownStatModifier() * absorptionLevel)));
     }
 
     public int getWissenCostWithStat(CompoundTag nbt) {
-        int balanceLevel = CrystalUtil.getStatLevel(nbt, WizardsReborn.BALANCE_CRYSTAL_STAT);
+        int balanceLevel = CrystalUtil.getStatLevel(nbt, WizardsRebornCrystals.BALANCE);
         return (int) (getWissenCost() * (1 - (getWissenStatModifier() * balanceLevel)));
     }
 
@@ -129,7 +132,7 @@ public class Spell {
     }
 
     public int getWissenCostWithStat(CompoundTag nbt, Player player, int cost) {
-        int balanceLevel = CrystalUtil.getStatLevel(nbt, WizardsReborn.BALANCE_CRYSTAL_STAT);
+        int balanceLevel = CrystalUtil.getStatLevel(nbt, WizardsRebornCrystals.BALANCE);
         float modifier = (1 - (getWissenStatModifier() * balanceLevel) - WissenUtils.getWissenCostModifierWithDiscount(player));
         if (modifier <= 0) {
             return 1;
@@ -261,14 +264,14 @@ public class Spell {
         if (!level.isClientSide()) {
             Vec3 pos = player.getEyePosition(0);
             Vec3 vel = player.getEyePosition(0).add(player.getLookAngle().scale(40)).subtract(pos).scale(1.0 / 30);
-            level.addFreshEntity(new SpellProjectileEntity(WizardsReborn.SPELL_PROJECTILE.get(), level).shoot(
+            level.addFreshEntity(new SpellProjectileEntity(WizardsRebornEntities.SPELL_PROJECTILE.get(), level).shoot(
                     pos.x, pos.y - 0.2f, pos.z, vel.x, vel.y, vel.z, player.getUUID(), this.getId(), stats
             ));
         }
     }
 
     public void onReload(ItemStack stack, Level level, Entity entity, int slot, boolean isSelected) {
-        level.playSound(WizardsReborn.proxy.getPlayer(), entity.getX(), entity.getY(), entity.getZ(), WizardsReborn.SPELL_RELOAD_SOUND.get(), SoundSource.BLOCKS, 0.1f, (float) (1f + ((random.nextFloat() - 0.5D) / 4)));
+        level.playSound(WizardsReborn.proxy.getPlayer(), entity.getX(), entity.getY(), entity.getZ(), WizardsRebornSounds.SPELL_RELOAD.get(), SoundSource.BLOCKS, 0.1f, (float) (1f + ((random.nextFloat() - 0.5D) / 4)));
     }
 
     @OnlyIn(Dist.CLIENT)
@@ -298,6 +301,6 @@ public class Spell {
     }
 
     public static void spellSound(Player player, Level level) {
-        level.playSound(WizardsReborn.proxy.getPlayer(), player.getX(), player.getY(), player.getZ(), WizardsReborn.SPELL_CAST_SOUND.get(), SoundSource.PLAYERS, 0.25f, (float) (1f + ((random.nextFloat() - 0.5D) / 4)));
+        level.playSound(WizardsReborn.proxy.getPlayer(), player.getX(), player.getY(), player.getZ(), WizardsRebornSounds.SPELL_CAST.get(), SoundSource.PLAYERS, 0.25f, (float) (1f + ((random.nextFloat() - 0.5D) / 4)));
     }
 }

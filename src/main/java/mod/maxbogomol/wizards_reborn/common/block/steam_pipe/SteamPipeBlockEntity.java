@@ -1,7 +1,7 @@
 package mod.maxbogomol.wizards_reborn.common.block.steam_pipe;
 
 import mod.maxbogomol.fluffy_fur.common.block.entity.TickableBlockEntity;
-import mod.maxbogomol.wizards_reborn.WizardsReborn;
+import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornBlockEntities;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.world.level.block.entity.BlockEntityType;
@@ -14,7 +14,7 @@ public class SteamPipeBlockEntity extends SteamPipeBaseBlockEntity implements Ti
     }
 
     public SteamPipeBlockEntity(BlockPos pos, BlockState state) {
-        this(WizardsReborn.STEAM_PIPE_BLOCK_ENTITY.get(), pos, state);
+        this(WizardsRebornBlockEntities.STEAM_PIPE.get(), pos, state);
     }
 
     public void tick() {

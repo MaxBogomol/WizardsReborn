@@ -3,6 +3,7 @@ package mod.maxbogomol.wizards_reborn.client.arcanemicon.recipe;
 import mod.maxbogomol.wizards_reborn.WizardsReborn;
 import mod.maxbogomol.wizards_reborn.client.arcanemicon.ArcanemiconGui;
 import mod.maxbogomol.wizards_reborn.common.recipe.CrystalInfusionRecipe;
+import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornRecipes;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.multiplayer.ClientLevel;
@@ -66,7 +67,7 @@ public class CrystalInfusionPage extends RecipePage {
                 inv.setItem(i, inputs[i]);
             }
 
-            Optional<CrystalInfusionRecipe> recipe = level.getRecipeManager().getRecipeFor(WizardsReborn.CRYSTAL_INFUSION_RECIPE.get(), inv, level);
+            Optional<CrystalInfusionRecipe> recipe = level.getRecipeManager().getRecipeFor(WizardsRebornRecipes.CRYSTAL_INFUSION.get(), inv, level);
             return !(recipe.isPresent() && recipe.get().getResultItem(RegistryAccess.EMPTY).getItem().equals(result.getItem()));
         }
 

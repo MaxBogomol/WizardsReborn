@@ -1,11 +1,11 @@
 package mod.maxbogomol.wizards_reborn.common.block.steam_extractor;
 
 import mod.maxbogomol.fluffy_fur.common.network.BlockEntityUpdate;
-import mod.maxbogomol.wizards_reborn.WizardsReborn;
 import mod.maxbogomol.wizards_reborn.api.alchemy.ISteamBlockEntity;
 import mod.maxbogomol.wizards_reborn.api.alchemy.SteamUtil;
 import mod.maxbogomol.wizards_reborn.api.wissen.WissenUtils;
 import mod.maxbogomol.wizards_reborn.common.block.steam_pipe.SteamPipeBaseBlockEntity;
+import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornBlockEntities;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.world.level.block.entity.BlockEntity;
@@ -22,7 +22,7 @@ public class SteamExtractorBlockEntity extends SteamPipeBaseBlockEntity {
     }
 
     public SteamExtractorBlockEntity(BlockPos pos, BlockState state) {
-        this(WizardsReborn.STEAM_EXTRACTOR_BLOCK_ENTITY.get(), pos, state);
+        this(WizardsRebornBlockEntities.STEAM_EXTRACTOR.get(), pos, state);
     }
 
     public void tick() {

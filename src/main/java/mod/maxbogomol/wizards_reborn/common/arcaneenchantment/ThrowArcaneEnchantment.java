@@ -2,7 +2,6 @@ package mod.maxbogomol.wizards_reborn.common.arcaneenchantment;
 
 import com.google.common.collect.Multimap;
 import mod.maxbogomol.fluffy_fur.client.animation.ItemAnimation;
-import mod.maxbogomol.wizards_reborn.WizardsReborn;
 import mod.maxbogomol.wizards_reborn.api.arcaneenchantment.ArcaneEnchantment;
 import mod.maxbogomol.wizards_reborn.api.arcaneenchantment.ArcaneEnchantmentType;
 import mod.maxbogomol.wizards_reborn.api.arcaneenchantment.ArcaneEnchantmentUtil;
@@ -10,6 +9,8 @@ import mod.maxbogomol.wizards_reborn.api.arcaneenchantment.IArcaneItem;
 import mod.maxbogomol.wizards_reborn.api.wissen.WissenUtils;
 import mod.maxbogomol.wizards_reborn.client.animation.ScytheThrowItemAnimation;
 import mod.maxbogomol.wizards_reborn.common.entity.ThrowedScytheEntity;
+import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornArcaneEnchantments;
+import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornAttributes;
 import net.minecraft.stats.Stats;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.entity.EquipmentSlot;
@@ -51,7 +52,7 @@ public class ThrowArcaneEnchantment extends ArcaneEnchantment {
         if (!level.isClientSide()) {
             if (livingEntity instanceof Player player) {
                 if (ArcaneEnchantmentUtil.isArcaneItem(stack)) {
-                    if (ArcaneEnchantmentUtil.getArcaneEnchantment(stack, WizardsReborn.THROW_ARCANE_ENCHANTMENT) > 0) {
+                    if (ArcaneEnchantmentUtil.getArcaneEnchantment(stack, WizardsRebornArcaneEnchantments.THROW) > 0) {
                         float costModifier = WissenUtils.getWissenCostModifierWithDiscount(player);
                         List<ItemStack> items = WissenUtils.getWissenItemsNoneAndStorage(WissenUtils.getWissenItemsCurios(player));
                         int wissen = WissenUtils.getWissenInItems(items);
@@ -70,14 +71,14 @@ public class ThrowArcaneEnchantment extends ArcaneEnchantment {
                                 if (entry.getKey() == Attributes.ATTACK_DAMAGE) {
                                     baseDamage = (float) (baseDamage + attribute.getAmount());
                                 }
-                                if (entry.getKey() == WizardsReborn.ARCANE_DAMAGE.get()) {
+                                if (entry.getKey() == WizardsRebornAttributes.ARCANE_DAMAGE.get()) {
                                     magicDamage = (float) (magicDamage + attribute.getAmount());
                                 }
                             }
 
                             baseDamage = baseDamage + EnchantmentHelper.getDamageBonus(stack, MobType.UNDEFINED);
 
-                            int bladeLevel = ArcaneEnchantmentUtil.getArcaneEnchantment(stack, WizardsReborn.MAGIC_BLADE_ARCANE_ENCHANTMENT);
+                            int bladeLevel = ArcaneEnchantmentUtil.getArcaneEnchantment(stack, WizardsRebornArcaneEnchantments.MAGIC_BLADE);
                             if (bladeLevel > 0) {
                                 int additionalCost = (int) ((5 * bladeLevel) * (1 - costModifier));
                                 if (WissenUtils.canRemoveWissen(wissen, cost + additionalCost)) {

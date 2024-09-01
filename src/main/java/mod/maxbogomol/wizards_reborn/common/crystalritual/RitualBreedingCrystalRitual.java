@@ -1,10 +1,10 @@
 package mod.maxbogomol.wizards_reborn.common.crystalritual;
 
-import mod.maxbogomol.wizards_reborn.WizardsReborn;
 import mod.maxbogomol.wizards_reborn.api.crystal.CrystalType;
 import mod.maxbogomol.wizards_reborn.api.crystalritual.CrystalRitual;
 import mod.maxbogomol.wizards_reborn.api.crystalritual.CrystalRitualArea;
 import mod.maxbogomol.wizards_reborn.common.block.crystal.CrystalBlockEntity;
+import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornCrystals;
 import net.minecraft.core.BlockPos;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
@@ -34,7 +34,7 @@ public class RitualBreedingCrystalRitual extends CrystalRitual {
     @Override
     public List<CrystalType> getCrystalsList() {
         List<CrystalType> list = new ArrayList<>();
-        list.add(WizardsReborn.EARTH_CRYSTAL_TYPE);
+        list.add(WizardsRebornCrystals.EARTH);
 
         return list;
     }

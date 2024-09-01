@@ -1,10 +1,10 @@
 package mod.maxbogomol.wizards_reborn.common.effect;
 
-import mod.maxbogomol.wizards_reborn.WizardsReborn;
 import mod.maxbogomol.wizards_reborn.api.wissen.IWissenItem;
 import mod.maxbogomol.wizards_reborn.api.wissen.WissenItemType;
 import mod.maxbogomol.wizards_reborn.api.wissen.WissenItemUtil;
 import mod.maxbogomol.wizards_reborn.api.wissen.WissenUtils;
+import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornAttributes;
 import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.effect.MobEffectCategory;
 import net.minecraft.world.entity.LivingEntity;
@@ -17,8 +17,8 @@ import java.util.List;
 public class WissenAuraEffect extends MobEffect {
     public WissenAuraEffect() {
         super(MobEffectCategory.BENEFICIAL, 0x9fc9e7);
-        addAttributeModifier(WizardsReborn.WISSEN_DISCOUNT.get(), "3DB196CE-7DF0-4254-A014-BD7fB6DFC33A", 5, AttributeModifier.Operation.ADDITION);
-        addAttributeModifier(WizardsReborn.MAGIC_ARMOR.get(), "46A55828-4BB3-4326-88DA-3C31E593C315", 5, AttributeModifier.Operation.ADDITION);
+        addAttributeModifier(WizardsRebornAttributes.WISSEN_DISCOUNT.get(), "3DB196CE-7DF0-4254-A014-BD7fB6DFC33A", 5, AttributeModifier.Operation.ADDITION);
+        addAttributeModifier(WizardsRebornAttributes.MAGIC_ARMOR.get(), "46A55828-4BB3-4326-88DA-3C31E593C315", 5, AttributeModifier.Operation.ADDITION);
     }
 
     @Override

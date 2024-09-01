@@ -1,6 +1,6 @@
 package mod.maxbogomol.wizards_reborn.client.gui.container;
 
-import mod.maxbogomol.wizards_reborn.WizardsReborn;
+import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornTags;
 import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.items.IItemHandler;
 import net.minecraftforge.items.SlotItemHandler;
@@ -12,6 +12,6 @@ public class CrystalBagSlot extends SlotItemHandler {
     }
 
     public boolean mayPlace(ItemStack stack) {
-        return stack.is(WizardsReborn.CRYSTAL_BAG_SLOTS_ITEM_TAG);
+        return stack.is(WizardsRebornTags.CRYSTAL_BAG_SLOTS_ITEM);
     }
 }

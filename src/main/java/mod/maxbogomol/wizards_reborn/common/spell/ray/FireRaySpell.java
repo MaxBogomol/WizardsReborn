@@ -1,12 +1,13 @@
 package mod.maxbogomol.wizards_reborn.common.spell.ray;
 
-import mod.maxbogomol.wizards_reborn.WizardsReborn;
 import mod.maxbogomol.wizards_reborn.api.crystal.CrystalUtil;
 import mod.maxbogomol.wizards_reborn.api.wissen.WissenItemUtil;
 import mod.maxbogomol.wizards_reborn.common.entity.SpellProjectileEntity;
 import mod.maxbogomol.wizards_reborn.common.item.equipment.arcane.ArcaneArmorItem;
 import mod.maxbogomol.wizards_reborn.common.network.PacketHandler;
 import mod.maxbogomol.wizards_reborn.common.network.spell.FireRaySpellEffectPacket;
+import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornCrystals;
+import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornSpells;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.sounds.SoundEvents;
@@ -34,12 +35,12 @@ import java.awt.*;
 public class FireRaySpell extends RaySpell {
     public FireRaySpell(String id, int points) {
         super(id, points);
-        addCrystalType(WizardsReborn.FIRE_CRYSTAL_TYPE);
+        addCrystalType(WizardsRebornCrystals.FIRE);
     }
 
     @Override
     public Color getColor() {
-        return WizardsReborn.fireSpellColor;
+        return WizardsRebornSpells.fireSpellColor;
     }
 
     @Override
@@ -51,7 +52,7 @@ public class FireRaySpell extends RaySpell {
                 ItemStack stack = player.getItemInHand(player.getUsedItemHand());
                 if (WissenItemUtil.canRemoveWissen(stack, getWissenCostWithStat(projectile.getStats(), player))) {
                     removeWissen(stack, projectile.getStats(), player);
-                    int focusLevel = CrystalUtil.getStatLevel(projectile.getStats(), WizardsReborn.FOCUS_CRYSTAL_STAT);
+                    int focusLevel = CrystalUtil.getStatLevel(projectile.getStats(), WizardsRebornCrystals.FOCUS);
                     float magicModifier = ArcaneArmorItem.getPlayerMagicModifier(player);
                     float damage = (float) (1.5f + (focusLevel * 0.5)) + magicModifier;
 
@@ -72,7 +73,7 @@ public class FireRaySpell extends RaySpell {
 
         if (player != null) {
             if (player.isShiftKeyDown()) {
-                int focusLevel = CrystalUtil.getStatLevel(projectile.getStats(), WizardsReborn.FOCUS_CRYSTAL_STAT);
+                int focusLevel = CrystalUtil.getStatLevel(projectile.getStats(), WizardsRebornCrystals.FOCUS);
                 ItemStack stack = player.getItemInHand(player.getUsedItemHand());
 
                 Color color = getColor();

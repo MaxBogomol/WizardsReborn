@@ -1,12 +1,14 @@
 package mod.maxbogomol.wizards_reborn.common.knowledge;
 
 import mod.maxbogomol.fluffy_fur.util.ColorUtil;
-import mod.maxbogomol.wizards_reborn.WizardsReborn;
 import mod.maxbogomol.wizards_reborn.api.knowledge.Knowledge;
 import mod.maxbogomol.wizards_reborn.api.knowledge.KnowledgeUtil;
 import mod.maxbogomol.wizards_reborn.common.config.ServerConfig;
 import mod.maxbogomol.wizards_reborn.common.network.ArcanemiconOfferingEffectPacket;
 import mod.maxbogomol.wizards_reborn.common.network.PacketHandler;
+import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornItems;
+import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornKnowledges;
+import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornSounds;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.Style;
 import net.minecraft.server.level.ServerPlayer;
@@ -53,13 +55,13 @@ public class ArcanemiconOfferingKnowledge extends Knowledge {
 
     @Override
     public void award(Player player) {
-        if (!KnowledgeUtil.isKnowledge(player, RegisterKnowledges.ARCANEMICON)) {
+        if (!KnowledgeUtil.isKnowledge(player, WizardsRebornKnowledges.ARCANEMICON)) {
             player.sendSystemMessage(Component.literal("<").append(
                             Component.translatable("message.wizards_reborn.someone").withStyle(Style.EMPTY.withColor(ColorUtil.packColor(255, 123, 73, 109))))
                     .append(Component.literal("> "))
                     .append(Component.translatable("message.wizards_reborn.arcanemicon_offering").withStyle(Style.EMPTY.withColor(ColorUtil.packColor(255, 251, 179, 176)))));
-            player.getInventory().add(new ItemStack(WizardsReborn.ARCANEMICON.get()));
-            player.level().playSound(null, player.getX(), player.getY(), player.getZ(), WizardsReborn.ARCANEMICON_OFFERING_SOUND.get(), SoundSource.PLAYERS, 1.0f, 1.0f);
+            player.getInventory().add(new ItemStack(WizardsRebornItems.ARCANEMICON.get()));
+            player.level().playSound(null, player.getX(), player.getY(), player.getZ(), WizardsRebornSounds.ARCANEMICON_OFFERING.get(), SoundSource.PLAYERS, 1.0f, 1.0f);
             PacketHandler.sendToTracking(player.level(), player.getOnPos(), new ArcanemiconOfferingEffectPacket((float) player.getX(), (float) player.getY() + 1f, (float) player.getZ()));
         }
     }

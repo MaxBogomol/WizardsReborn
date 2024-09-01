@@ -6,6 +6,7 @@ import mod.maxbogomol.wizards_reborn.WizardsRebornClient;
 import mod.maxbogomol.wizards_reborn.api.arcaneenchantment.ArcaneEnchantmentType;
 import mod.maxbogomol.wizards_reborn.api.skin.Skin;
 import mod.maxbogomol.wizards_reborn.common.item.equipment.arcane.ArcaneArmorItem;
+import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornItems;
 import net.minecraft.ChatFormatting;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.model.HumanoidModel;
@@ -99,10 +100,10 @@ public class ArcaneFortressArmorItem extends ArcaneArmorItem implements IForgeIt
     @Override
     public ItemStack getArmorSetItem(EquipmentSlot slot) {
         return switch (slot) {
-            case HEAD -> WizardsReborn.ARCANE_FORTRESS_HELMET.get().getDefaultInstance();
-            case CHEST -> WizardsReborn.ARCANE_FORTRESS_CHESTPLATE.get().getDefaultInstance();
-            case LEGS -> WizardsReborn.ARCANE_FORTRESS_LEGGINGS.get().getDefaultInstance();
-            case FEET -> WizardsReborn.ARCANE_FORTRESS_BOOTS.get().getDefaultInstance();
+            case HEAD -> WizardsRebornItems.ARCANE_FORTRESS_HELMET.get().getDefaultInstance();
+            case CHEST -> WizardsRebornItems.ARCANE_FORTRESS_CHESTPLATE.get().getDefaultInstance();
+            case LEGS -> WizardsRebornItems.ARCANE_FORTRESS_LEGGINGS.get().getDefaultInstance();
+            case FEET -> WizardsRebornItems.ARCANE_FORTRESS_BOOTS.get().getDefaultInstance();
             default -> ItemStack.EMPTY;
         };
     }

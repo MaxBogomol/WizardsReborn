@@ -1,6 +1,5 @@
 package mod.maxbogomol.wizards_reborn.common.arcaneenchantment;
 
-import mod.maxbogomol.wizards_reborn.WizardsReborn;
 import mod.maxbogomol.wizards_reborn.api.arcaneenchantment.ArcaneEnchantment;
 import mod.maxbogomol.wizards_reborn.api.arcaneenchantment.ArcaneEnchantmentType;
 import mod.maxbogomol.wizards_reborn.api.arcaneenchantment.ArcaneEnchantmentUtil;
@@ -9,6 +8,7 @@ import mod.maxbogomol.wizards_reborn.api.wissen.WissenUtils;
 import mod.maxbogomol.wizards_reborn.common.entity.SplitArrowEntity;
 import mod.maxbogomol.wizards_reborn.common.network.AddScreenshakePacket;
 import mod.maxbogomol.wizards_reborn.common.network.PacketHandler;
+import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornArcaneEnchantments;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.entity.LivingEntity;
@@ -36,7 +36,7 @@ public class SplitArcaneEnchantment extends ArcaneEnchantment {
     @Override
     public boolean canEnchantItem(ItemStack stack) {
         if (stack.getItem() instanceof IArcaneItem item) {
-            if (ArcaneEnchantmentUtil.getArcaneEnchantment(stack, WizardsReborn.EAGLE_SHOT_ARCANE_ENCHANTMENT) > 0) return false;
+            if (ArcaneEnchantmentUtil.getArcaneEnchantment(stack, WizardsRebornArcaneEnchantments.EAGLE_SHOT) > 0) return false;
             return item.getArcaneEnchantmentTypes().contains(ArcaneEnchantmentType.BOW);
         }
         return false;
@@ -44,7 +44,7 @@ public class SplitArcaneEnchantment extends ArcaneEnchantment {
 
     public static void onBowShot(AbstractArrow abstractarrow, ItemStack stack, Level level, LivingEntity entityLiving, int timeLeft) {
         if (entityLiving instanceof Player player && ArcaneEnchantmentUtil.isArcaneItem(stack)) {
-            int enchantmentLevel = ArcaneEnchantmentUtil.getArcaneEnchantment(stack, WizardsReborn.SPLIT_ARCANE_ENCHANTMENT);
+            int enchantmentLevel = ArcaneEnchantmentUtil.getArcaneEnchantment(stack, WizardsRebornArcaneEnchantments.SPLIT);
             if (enchantmentLevel > 0) {
                 if (stack.getUseDuration() - timeLeft > 35) {
                     float costModifier = WissenUtils.getWissenCostModifierWithDiscount(player);
@@ -97,7 +97,7 @@ public class SplitArcaneEnchantment extends ArcaneEnchantment {
 
     @OnlyIn(Dist.CLIENT)
     public static float getFOW(Player player, ItemStack stack, float fow) {
-        int enchantmentLevel = ArcaneEnchantmentUtil.getArcaneEnchantment(stack, WizardsReborn.SPLIT_ARCANE_ENCHANTMENT);
+        int enchantmentLevel = ArcaneEnchantmentUtil.getArcaneEnchantment(stack, WizardsRebornArcaneEnchantments.SPLIT);
         if (enchantmentLevel > 0) {
             if (player.getTicksUsingItem() > 35) {
                 float costModifier = WissenUtils.getWissenCostModifierWithDiscount(player);

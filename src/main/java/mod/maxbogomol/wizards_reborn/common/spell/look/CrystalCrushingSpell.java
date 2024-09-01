@@ -7,12 +7,16 @@ import mod.maxbogomol.fluffy_fur.client.particle.data.GenericParticleData;
 import mod.maxbogomol.wizards_reborn.WizardsReborn;
 import mod.maxbogomol.wizards_reborn.client.animation.StrikeSpellItemAnimation;
 import mod.maxbogomol.wizards_reborn.common.block.crystal.CrystalBlockEntity;
-import mod.maxbogomol.wizards_reborn.common.damage.DamageSourceRegistry;
 import mod.maxbogomol.wizards_reborn.common.item.CrystalItem;
 import mod.maxbogomol.wizards_reborn.common.item.equipment.ArcaneWandItem;
 import mod.maxbogomol.wizards_reborn.common.network.AddScreenshakePacket;
 import mod.maxbogomol.wizards_reborn.common.network.PacketHandler;
 import mod.maxbogomol.wizards_reborn.common.network.spell.CrystalCrushingSpellEffectPacket;
+import mod.maxbogomol.wizards_reborn.registry.client.WizardsRebornParticles;
+import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornCrystals;
+import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornDamage;
+import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornSounds;
+import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornSpells;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.sounds.SoundSource;
@@ -38,12 +42,12 @@ public class CrystalCrushingSpell extends LookSpell {
 
     public CrystalCrushingSpell(String id, int points) {
         super(id, points);
-        addCrystalType(WizardsReborn.VOID_CRYSTAL_TYPE);
+        addCrystalType(WizardsRebornCrystals.VOID);
     }
 
     @Override
     public Color getColor() {
-        return WizardsReborn.voidSpellColor;
+        return WizardsRebornSpells.voidSpellColor;
     }
 
     @Override
@@ -93,7 +97,7 @@ public class CrystalCrushingSpell extends LookSpell {
                     Color color = getColor();
 
                     if (random.nextFloat() < 0.075f) {
-                        ParticleBuilder.create(WizardsReborn.KARMA_PARTICLE)
+                        ParticleBuilder.create(WizardsRebornParticles.KARMA)
                                 .setColorData(ColorParticleData.create(color).build())
                                 .setTransparencyData(GenericParticleData.create(0.25f, 0).build())
                                 .setScaleData(GenericParticleData.create(0.1f, 0).build())
@@ -175,7 +179,7 @@ public class CrystalCrushingSpell extends LookSpell {
                         inv.setItem(0, ItemStack.EMPTY);
                         nbt.putBoolean("crystal", false);
 
-                        player.hurt(new DamageSource(DamageSourceRegistry.create(player.level(), DamageSourceRegistry.ARCANE_MAGIC).typeHolder(), player), 10);
+                        player.hurt(new DamageSource(WizardsRebornDamage.create(player.level(), WizardsRebornDamage.ARCANE_MAGIC).typeHolder(), player), 10);
 
                         Vec3 effectPos = player.getLookAngle().scale(1f).add(player.getEyePosition());
                         Color color = crystalItem.getType().getColor();
@@ -183,7 +187,7 @@ public class CrystalCrushingSpell extends LookSpell {
                         float g = color.getGreen() / 255f;
                         float b = color.getBlue() / 255f;
                         PacketHandler.sendToTracking(world, player.getOnPos(), new CrystalCrushingSpellEffectPacket((float) effectPos.x(), (float) effectPos.y(), (float) effectPos.z(), r, g, b));
-                        world.playSound(WizardsReborn.proxy.getPlayer(), player.getX(), player.getY(), player.getZ(), WizardsReborn.CRYSTAL_BREAK_SOUND.get(), SoundSource.PLAYERS, 1f, 0.5f);
+                        world.playSound(WizardsReborn.proxy.getPlayer(), player.getX(), player.getY(), player.getZ(), WizardsRebornSounds.CRYSTAL_BREAK.get(), SoundSource.PLAYERS, 1f, 0.5f);
                         PacketHandler.sendTo(player, new AddScreenshakePacket(0.6f));
                     }
                 }

@@ -1,9 +1,10 @@
 package mod.maxbogomol.wizards_reborn.common.spell.charge;
 
-import mod.maxbogomol.wizards_reborn.WizardsReborn;
 import mod.maxbogomol.wizards_reborn.api.crystal.CrystalUtil;
 import mod.maxbogomol.wizards_reborn.common.entity.SpellProjectileEntity;
 import mod.maxbogomol.wizards_reborn.common.item.equipment.arcane.ArcaneArmorItem;
+import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornCrystals;
+import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornSpells;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.player.Player;
@@ -15,19 +16,19 @@ import java.awt.*;
 public class AirChargeSpell extends ChargeSpell {
     public AirChargeSpell(String id, int points) {
         super(id, points);
-        addCrystalType(WizardsReborn.AIR_CRYSTAL_TYPE);
+        addCrystalType(WizardsRebornCrystals.AIR);
     }
 
     @Override
     public Color getColor() {
-        return WizardsReborn.airSpellColor;
+        return WizardsRebornSpells.airSpellColor;
     }
 
     @Override
     public void onImpact(HitResult ray, Level world, SpellProjectileEntity projectile, Player player, Entity target) {
         super.onImpact(ray, world, projectile, player, target);
 
-        int focusLevel = CrystalUtil.getStatLevel(projectile.getStats(), WizardsReborn.FOCUS_CRYSTAL_STAT);
+        int focusLevel = CrystalUtil.getStatLevel(projectile.getStats(), WizardsRebornCrystals.FOCUS);
         float magicModifier = ArcaneArmorItem.getPlayerMagicModifier(player) * 2;
         float damage = (3.0f + (focusLevel * 1.5f)) + magicModifier;
 

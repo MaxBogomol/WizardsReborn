@@ -11,6 +11,7 @@ import mod.maxbogomol.wizards_reborn.api.skin.Skin;
 import mod.maxbogomol.wizards_reborn.api.wissen.*;
 import mod.maxbogomol.wizards_reborn.client.config.ClientConfig;
 import mod.maxbogomol.wizards_reborn.common.block.alchemy_machine.AlchemyMachineBlockEntity;
+import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornSounds;
 import mod.maxbogomol.wizards_reborn.util.NumericalUtil;
 import net.minecraft.ChatFormatting;
 import net.minecraft.client.CameraType;
@@ -79,7 +80,7 @@ public class WissenWandItem extends Item {
             player.displayClientMessage(getModeTranslate(stack), true);
 
             player.awardStat(Stats.ITEM_USED.get(this));
-            world.playSound(WizardsReborn.proxy.getPlayer(), player.blockPosition(), WizardsReborn.CRYSTAL_RESONATE_SOUND.get(), SoundSource.PLAYERS, 1.0f, 1.2f);
+            world.playSound(WizardsReborn.proxy.getPlayer(), player.blockPosition(), WizardsRebornSounds.CRYSTAL_RESONATE.get(), SoundSource.PLAYERS, 1.0f, 1.2f);
 
             return InteractionResultHolder.success(stack);
         }
@@ -119,7 +120,7 @@ public class WissenWandItem extends Item {
 
         if (result == InteractionResult.SUCCESS) {
             context.getPlayer().awardStat(Stats.ITEM_USED.get(this));
-            world.playSound(WizardsReborn.proxy.getPlayer(), context.getClickedPos(), WizardsReborn.CRYSTAL_RESONATE_SOUND.get(), SoundSource.PLAYERS, 1.0f, 1.0f);
+            world.playSound(WizardsReborn.proxy.getPlayer(), context.getClickedPos(), WizardsRebornSounds.CRYSTAL_RESONATE.get(), SoundSource.PLAYERS, 1.0f, 1.0f);
         }
 
         return result;

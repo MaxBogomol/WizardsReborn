@@ -6,6 +6,7 @@ import mod.maxbogomol.wizards_reborn.api.arcaneenchantment.ArcaneEnchantment;
 import mod.maxbogomol.wizards_reborn.api.arcaneenchantment.ArcaneEnchantmentUtil;
 import mod.maxbogomol.wizards_reborn.client.sound.TotemOfDisenchantSoundInstance;
 import mod.maxbogomol.wizards_reborn.common.block.totem.disenchant.TotemOfDisenchantBlockEntity;
+import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornSounds;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.ListTag;
@@ -116,7 +117,7 @@ public class TotemOfDisenchantStartEffectPacket {
                     totem.enchantmentLevel = msg.enchantmentLevel;
                     BlockEntityUpdate.packet(totem);
 
-                    level.playSound(WizardsReborn.proxy.getPlayer(), totem.getBlockPos(), WizardsReborn.TOTEM_OF_DISENCHANT_START_SOUND.get(), SoundSource.BLOCKS, 1f, 1f);
+                    level.playSound(WizardsReborn.proxy.getPlayer(), totem.getBlockPos(), WizardsRebornSounds.TOTEM_OF_DISENCHANT_START.get(), SoundSource.BLOCKS, 1f, 1f);
                     TotemOfDisenchantSoundInstance.playSound(totem);
                 }
             });

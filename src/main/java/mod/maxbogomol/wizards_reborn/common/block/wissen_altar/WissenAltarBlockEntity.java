@@ -1,12 +1,12 @@
 package mod.maxbogomol.wizards_reborn.common.block.wissen_altar;
 
-import mod.maxbogomol.fluffy_fur.FluffyFur;
 import mod.maxbogomol.fluffy_fur.client.particle.ParticleBuilder;
 import mod.maxbogomol.fluffy_fur.client.particle.data.ColorParticleData;
 import mod.maxbogomol.fluffy_fur.client.particle.data.GenericParticleData;
 import mod.maxbogomol.fluffy_fur.common.block.entity.ExposedBlockSimpleInventory;
 import mod.maxbogomol.fluffy_fur.common.block.entity.TickableBlockEntity;
 import mod.maxbogomol.fluffy_fur.common.easing.Easing;
+import mod.maxbogomol.fluffy_fur.registry.client.FluffyFurParticles;
 import mod.maxbogomol.wizards_reborn.WizardsReborn;
 import mod.maxbogomol.wizards_reborn.api.wissen.*;
 import mod.maxbogomol.wizards_reborn.common.config.Config;
@@ -14,6 +14,9 @@ import mod.maxbogomol.wizards_reborn.common.network.PacketHandler;
 import mod.maxbogomol.wizards_reborn.common.network.tileentity.WissenAltarBurstEffectPacket;
 import mod.maxbogomol.wizards_reborn.common.network.tileentity.WissenAltarSendEffectPacket;
 import mod.maxbogomol.wizards_reborn.common.recipe.WissenAltarRecipe;
+import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornBlockEntities;
+import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornRecipes;
+import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornSounds;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.nbt.CompoundTag;
@@ -40,7 +43,7 @@ public class WissenAltarBlockEntity extends ExposedBlockSimpleInventory implemen
     }
 
     public WissenAltarBlockEntity(BlockPos pos, BlockState state) {
-        this(WizardsReborn.WISSEN_ALTAR_BLOCK_ENTITY.get(), pos, state);
+        this(WizardsRebornBlockEntities.WISSEN_ALTAR.get(), pos, state);
     }
 
     @Override
@@ -63,7 +66,7 @@ public class WissenAltarBlockEntity extends ExposedBlockSimpleInventory implemen
             inv.setItem(0, getItemHandler().getItem(2));
             if (!inv.isEmpty()) {
                 wissenInItem = 0;
-                wissenInItem = level.getRecipeManager().getRecipeFor(WizardsReborn.WISSEN_ALTAR_RECIPE.get(), inv, level)
+                wissenInItem = level.getRecipeManager().getRecipeFor(WizardsRebornRecipes.WISSEN_ALTAR.get(), inv, level)
                         .map(WissenAltarRecipe::getRecipeWissen)
                         .orElse(0);
 
@@ -74,7 +77,7 @@ public class WissenAltarBlockEntity extends ExposedBlockSimpleInventory implemen
                     wissenIsCraft = wissenIsCraft + (getWissenPerTick() - addRemainCraft - addRemain);
                     addWissen(getWissenPerTick() - addRemainCraft - addRemain);
                     if (random.nextFloat() < 0.05) {
-                        level.playSound(WizardsReborn.proxy.getPlayer(), getBlockPos(), WizardsReborn.WISSEN_BURST_SOUND.get(), SoundSource.BLOCKS, 0.15f, (float) (0.5f + ((random.nextFloat() - 0.5D) / 4)));
+                        level.playSound(WizardsReborn.proxy.getPlayer(), getBlockPos(), WizardsRebornSounds.WISSEN_BURST.get(), SoundSource.BLOCKS, 0.15f, (float) (0.5f + ((random.nextFloat() - 0.5D) / 4)));
                     }
 
                     update = true;
@@ -89,7 +92,7 @@ public class WissenAltarBlockEntity extends ExposedBlockSimpleInventory implemen
                         update = true;
 
                         PacketHandler.sendToTracking(level, getBlockPos(), new WissenAltarBurstEffectPacket(getBlockPos()));
-                        level.playSound(WizardsReborn.proxy.getPlayer(), getBlockPos(), WizardsReborn.WISSEN_ALTAR_BURST_SOUND.get(), SoundSource.BLOCKS, 0.25f, (float) (1f + ((random.nextFloat() - 0.5D) / 4)));
+                        level.playSound(WizardsReborn.proxy.getPlayer(), getBlockPos(), WizardsRebornSounds.WISSEN_ALTAR_BURST.get(), SoundSource.BLOCKS, 0.25f, (float) (1f + ((random.nextFloat() - 0.5D) / 4)));
                     }
                 }
 
@@ -110,7 +113,7 @@ public class WissenAltarBlockEntity extends ExposedBlockSimpleInventory implemen
                                     PacketHandler.sendToTracking(level, getBlockPos(), new WissenAltarSendEffectPacket(getBlockPos()));
                                 }
                                 if (random.nextFloat() < 0.1) {
-                                    level.playSound(WizardsReborn.proxy.getPlayer(), getBlockPos(), WizardsReborn.WISSEN_BURST_SOUND.get(), SoundSource.BLOCKS, 0.15f, (float) (0.5f + ((random.nextFloat() - 0.5D) / 4)));
+                                    level.playSound(WizardsReborn.proxy.getPlayer(), getBlockPos(), WizardsRebornSounds.WISSEN_BURST.get(), SoundSource.BLOCKS, 0.15f, (float) (0.5f + ((random.nextFloat() - 0.5D) / 4)));
                                 }
 
                                 update = true;
@@ -130,7 +133,7 @@ public class WissenAltarBlockEntity extends ExposedBlockSimpleInventory implemen
         if (level.isClientSide()) {
             if (getWissen() > 0) {
                 if (random.nextFloat() < 0.5) {
-                    ParticleBuilder.create(FluffyFur.WISP_PARTICLE)
+                    ParticleBuilder.create(FluffyFurParticles.WISP)
                             .setColorData(ColorParticleData.create(Config.wissenColorR(), Config.wissenColorG(), Config.wissenColorB()).build())
                             .setTransparencyData(GenericParticleData.create(0.25f, 0).build())
                             .setScaleData(GenericParticleData.create(0.3f * getStage(), 0).build())
@@ -139,7 +142,7 @@ public class WissenAltarBlockEntity extends ExposedBlockSimpleInventory implemen
                             .spawn(level, worldPosition.getX() + 0.5F, worldPosition.getY() + 1.3125F, worldPosition.getZ() + 0.5F);
                 }
                 if (random.nextFloat() < 0.1) {
-                    ParticleBuilder.create(random.nextBoolean() ? FluffyFur.SQUARE_PARTICLE : FluffyFur.SPARKLE_PARTICLE)
+                    ParticleBuilder.create(random.nextBoolean() ? FluffyFurParticles.SQUARE : FluffyFurParticles.SPARKLE)
                             .setColorData(ColorParticleData.create(Config.wissenColorR(), Config.wissenColorG(), Config.wissenColorB()).build())
                             .setTransparencyData(GenericParticleData.create(0.25f, 0).build())
                             .setScaleData(GenericParticleData.create(0.05f * getStage(), 0.1f * getStage(), 0).setEasing(Easing.QUINTIC_IN_OUT).build())
@@ -152,7 +155,7 @@ public class WissenAltarBlockEntity extends ExposedBlockSimpleInventory implemen
 
             if (wissenInItem > 0 && getWissen() < getMaxWissen()) {
                 if (random.nextFloat() < 0.2) {
-                    ParticleBuilder.create(random.nextBoolean() ? FluffyFur.SQUARE_PARTICLE : FluffyFur.SPARKLE_PARTICLE)
+                    ParticleBuilder.create(random.nextBoolean() ? FluffyFurParticles.SQUARE : FluffyFurParticles.SPARKLE)
                             .setColorData(ColorParticleData.create(Config.wissenColorR(), Config.wissenColorG(), Config.wissenColorB()).build())
                             .setTransparencyData(GenericParticleData.create(0.25f, 0).build())
                             .setScaleData(GenericParticleData.create(0.05f * getStage(), 0.1f * getStage(), 0).setEasing(Easing.QUINTIC_IN_OUT).build())
@@ -186,7 +189,7 @@ public class WissenAltarBlockEntity extends ExposedBlockSimpleInventory implemen
         if (index == 1) {
             SimpleContainer inv = new SimpleContainer(1);
             inv.setItem(0, stack);
-            int wissenInItem = getLevel().getRecipeManager().getRecipeFor(WizardsReborn.WISSEN_ALTAR_RECIPE.get(), inv, getLevel())
+            int wissenInItem = getLevel().getRecipeManager().getRecipeFor(WizardsRebornRecipes.WISSEN_ALTAR.get(), inv, getLevel())
                     .map(WissenAltarRecipe::getRecipeWissen)
                     .orElse(0);
             if (wissenInItem > 0) {

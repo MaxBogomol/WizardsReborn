@@ -8,6 +8,8 @@ import mod.maxbogomol.wizards_reborn.WizardsRebornClient;
 import mod.maxbogomol.wizards_reborn.api.arcaneenchantment.ArcaneEnchantmentType;
 import mod.maxbogomol.wizards_reborn.api.skin.Skin;
 import mod.maxbogomol.wizards_reborn.common.item.equipment.arcane.ArcaneArmorItem;
+import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornAttributes;
+import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornItems;
 import net.minecraft.ChatFormatting;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.model.HumanoidModel;
@@ -59,8 +61,8 @@ public class InventorWizardArmorItem extends ArcaneArmorItem implements IForgeIt
     public Multimap<Attribute, AttributeModifier> getDefaultAttributeModifiers(EquipmentSlot slot) {
         ImmutableMultimap.Builder<Attribute, AttributeModifier> atts = ImmutableMultimap.builder();
         atts.putAll(super.getDefaultAttributeModifiers(slot));
-        atts.put(WizardsReborn.WISSEN_DISCOUNT.get(), new AttributeModifier(getWissenDiscountUUIDForSlot(slot), "bonus", getWissenDiscountForSlot(slot), AttributeModifier.Operation.ADDITION));
-        atts.put(WizardsReborn.MAGIC_ARMOR.get(), new AttributeModifier(getMagicArmorUUIDForSlot(slot), "bonus", getMagicArmorForSlot(slot), AttributeModifier.Operation.ADDITION));
+        atts.put(WizardsRebornAttributes.WISSEN_DISCOUNT.get(), new AttributeModifier(getWissenDiscountUUIDForSlot(slot), "bonus", getWissenDiscountForSlot(slot), AttributeModifier.Operation.ADDITION));
+        atts.put(WizardsRebornAttributes.MAGIC_ARMOR.get(), new AttributeModifier(getMagicArmorUUIDForSlot(slot), "bonus", getMagicArmorForSlot(slot), AttributeModifier.Operation.ADDITION));
         return slot == type.getSlot() ? atts.build() : super.getDefaultAttributeModifiers(slot);
     }
 
@@ -120,10 +122,10 @@ public class InventorWizardArmorItem extends ArcaneArmorItem implements IForgeIt
     @Override
     public ItemStack getArmorSetItem(EquipmentSlot slot) {
         return switch (slot) {
-            case HEAD -> WizardsReborn.INVENTOR_WIZARD_HAT.get().getDefaultInstance();
-            case CHEST -> WizardsReborn.INVENTOR_WIZARD_COSTUME.get().getDefaultInstance();
-            case LEGS -> WizardsReborn.INVENTOR_WIZARD_TROUSERS.get().getDefaultInstance();
-            case FEET -> WizardsReborn.INVENTOR_WIZARD_BOOTS.get().getDefaultInstance();
+            case HEAD -> WizardsRebornItems.INVENTOR_WIZARD_HAT.get().getDefaultInstance();
+            case CHEST -> WizardsRebornItems.INVENTOR_WIZARD_COSTUME.get().getDefaultInstance();
+            case LEGS -> WizardsRebornItems.INVENTOR_WIZARD_TROUSERS.get().getDefaultInstance();
+            case FEET -> WizardsRebornItems.INVENTOR_WIZARD_BOOTS.get().getDefaultInstance();
             default -> ItemStack.EMPTY;
         };
     }

@@ -1,8 +1,8 @@
 package mod.maxbogomol.wizards_reborn.client.gui.container;
 
 import mod.maxbogomol.fluffy_fur.client.gui.screen.ContainerMenuBase;
-import mod.maxbogomol.wizards_reborn.WizardsReborn;
 import mod.maxbogomol.wizards_reborn.common.item.equipment.curio.AlchemyBagItem;
+import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornMenuTypes;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.Container;
@@ -19,7 +19,7 @@ public class AlchemyBagContainer extends ContainerMenuBase {
     private final Container inventory;
 
     public AlchemyBagContainer(int windowId, Level level, ItemStack stack, Inventory playerInventory, Player player) {
-        super(WizardsReborn.ALCHEMY_BAG_CONTAINER.get(), windowId);
+        super(WizardsRebornMenuTypes.ALCHEMY_BAG_CONTAINER.get(), windowId);
         this.itemStack = stack;
         this.playerEntity = player;
         this.playerInventory = new InvWrapper(playerInventory);

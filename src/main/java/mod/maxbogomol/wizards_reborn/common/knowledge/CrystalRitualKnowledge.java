@@ -1,10 +1,10 @@
 package mod.maxbogomol.wizards_reborn.common.knowledge;
 
-import mod.maxbogomol.wizards_reborn.WizardsReborn;
 import mod.maxbogomol.wizards_reborn.api.crystalritual.CrystalRitual;
 import mod.maxbogomol.wizards_reborn.api.crystalritual.CrystalRitualUtil;
 import mod.maxbogomol.wizards_reborn.api.knowledge.Knowledge;
 import mod.maxbogomol.wizards_reborn.common.item.equipment.RunicWisestonePlateItem;
+import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornItems;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
@@ -36,7 +36,7 @@ public class CrystalRitualKnowledge extends Knowledge {
 
     @OnlyIn(Dist.CLIENT)
     public ItemStack getIcon() {
-        ItemStack stack = WizardsReborn.RUNIC_WISESTONE_PLATE.get().getDefaultInstance();
+        ItemStack stack = WizardsRebornItems.RUNIC_WISESTONE_PLATE.get().getDefaultInstance();
         CrystalRitualUtil.setCrystalRitual(stack, ritual);
         return stack;
     }

@@ -8,6 +8,7 @@ import mod.maxbogomol.fluffy_fur.client.particle.data.ColorParticleData;
 import mod.maxbogomol.fluffy_fur.client.particle.data.GenericParticleData;
 import mod.maxbogomol.fluffy_fur.common.item.IGuiParticleItem;
 import mod.maxbogomol.fluffy_fur.common.item.IParticleItem;
+import mod.maxbogomol.fluffy_fur.registry.client.FluffyFurParticles;
 import mod.maxbogomol.wizards_reborn.client.event.ClientTickHandler;
 import mod.maxbogomol.wizards_reborn.common.block.ArcaneLumosBlock;
 import mod.maxbogomol.wizards_reborn.util.RenderUtils;
@@ -41,7 +42,7 @@ public class ArcaneLumosItem extends BlockItem implements IParticleItem, IGuiPar
             Color color = ArcaneLumosBlock.getColor(lumos.color);
 
             if (random.nextFloat() < 0.1) {
-                ParticleBuilder.create(FluffyFur.WISP_PARTICLE)
+                ParticleBuilder.create(FluffyFurParticles.WISP)
                         .setColorData(ColorParticleData.create(color).build())
                         .setTransparencyData(GenericParticleData.create(0.5f, 0).build())
                         .setScaleData(GenericParticleData.create(0.3f, 0).build())
@@ -50,7 +51,7 @@ public class ArcaneLumosItem extends BlockItem implements IParticleItem, IGuiPar
                         .spawn(level, entity.getX(), entity.getY() + 0.25F, entity.getZ());
             }
             if (random.nextFloat() < 0.05) {
-                ParticleBuilder.create(FluffyFur.SPARKLE_PARTICLE)
+                ParticleBuilder.create(FluffyFurParticles.SPARKLE)
                         .setColorData(ColorParticleData.create(color).build())
                         .setTransparencyData(GenericParticleData.create(0.75f, 0).build())
                         .setScaleData(GenericParticleData.create(0.1f, 0).build())
@@ -62,7 +63,7 @@ public class ArcaneLumosItem extends BlockItem implements IParticleItem, IGuiPar
 
             if (lumos.color == ArcaneLumosBlock.Colors.COSMIC) {
                 if (random.nextFloat() < 0.03) {;
-                    ParticleBuilder.create(FluffyFur.SPARKLE_PARTICLE)
+                    ParticleBuilder.create(FluffyFurParticles.SPARKLE)
                             .setColorData(ColorParticleData.create(color).build())
                             .setTransparencyData(GenericParticleData.create(0.75f, 0).build())
                             .setScaleData(GenericParticleData.create(0.1f, 0).build())
@@ -72,7 +73,7 @@ public class ArcaneLumosItem extends BlockItem implements IParticleItem, IGuiPar
                             .spawn(level, entity.getX(), entity.getY(), entity.getZ());
                 }
                 if (random.nextFloat() < 0.03) {
-                    ParticleBuilder.create(FluffyFur.SPARKLE_PARTICLE)
+                    ParticleBuilder.create(FluffyFurParticles.SPARKLE)
                             .setColorData(ColorParticleData.create(Color.WHITE).build())
                             .setTransparencyData(GenericParticleData.create(0.75f, 0).build())
                             .setScaleData(GenericParticleData.create(0.1f, 0).build())

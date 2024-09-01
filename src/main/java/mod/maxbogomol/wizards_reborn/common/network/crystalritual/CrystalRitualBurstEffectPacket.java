@@ -1,9 +1,9 @@
 package mod.maxbogomol.wizards_reborn.common.network.crystalritual;
 
-import mod.maxbogomol.fluffy_fur.FluffyFur;
 import mod.maxbogomol.fluffy_fur.client.particle.ParticleBuilder;
 import mod.maxbogomol.fluffy_fur.client.particle.data.ColorParticleData;
 import mod.maxbogomol.fluffy_fur.client.particle.data.GenericParticleData;
+import mod.maxbogomol.fluffy_fur.registry.client.FluffyFurParticles;
 import mod.maxbogomol.wizards_reborn.WizardsReborn;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.FriendlyByteBuf;
@@ -39,7 +39,7 @@ public class CrystalRitualBurstEffectPacket {
                     for (int i = 0; i < msg.tag.size(); i++) {
                         for (int ii = 0; ii < 20; ii++) {
                             CompoundTag pos = msg.tag.getCompound(String.valueOf(i));
-                            ParticleBuilder.create(FluffyFur.SPARKLE_PARTICLE)
+                            ParticleBuilder.create(FluffyFurParticles.SPARKLE)
                                     .setColorData(ColorParticleData.create(random.nextFloat(), random.nextFloat(), random.nextFloat()).build())
                                     .setTransparencyData(GenericParticleData.create(0.3f, 0).build())
                                     .setScaleData(GenericParticleData.create(0.25f, 0).build())

@@ -1,12 +1,13 @@
 package mod.maxbogomol.wizards_reborn.common.spell.ray;
 
-import mod.maxbogomol.wizards_reborn.WizardsReborn;
 import mod.maxbogomol.wizards_reborn.api.crystal.CrystalUtil;
 import mod.maxbogomol.wizards_reborn.api.wissen.WissenItemUtil;
 import mod.maxbogomol.wizards_reborn.common.entity.SpellProjectileEntity;
 import mod.maxbogomol.wizards_reborn.common.item.equipment.arcane.ArcaneArmorItem;
 import mod.maxbogomol.wizards_reborn.common.network.PacketHandler;
 import mod.maxbogomol.wizards_reborn.common.network.spell.FrostRaySpellEffectPacket;
+import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornCrystals;
+import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornSpells;
 import net.minecraft.core.BlockPos;
 import net.minecraft.util.Mth;
 import net.minecraft.world.damagesource.DamageSource;
@@ -32,12 +33,12 @@ import java.util.function.Predicate;
 public class FrostRaySpell extends RaySpell {
     public FrostRaySpell(String id, int points) {
         super(id, points);
-        addCrystalType(WizardsReborn.WATER_CRYSTAL_TYPE);
+        addCrystalType(WizardsRebornCrystals.WATER);
     }
 
     @Override
     public Color getColor() {
-        return WizardsReborn.frostSpellColor;
+        return WizardsRebornSpells.frostSpellColor;
     }
 
     @Override
@@ -49,7 +50,7 @@ public class FrostRaySpell extends RaySpell {
                 ItemStack stack = player.getItemInHand(player.getUsedItemHand());
                 if (WissenItemUtil.canRemoveWissen(stack, getWissenCostWithStat(projectile.getStats(), player))) {
                     removeWissen(stack, projectile.getStats(), player);
-                    int focusLevel = CrystalUtil.getStatLevel(projectile.getStats(), WizardsReborn.FOCUS_CRYSTAL_STAT);
+                    int focusLevel = CrystalUtil.getStatLevel(projectile.getStats(), WizardsRebornCrystals.FOCUS);
                     float magicModifier = ArcaneArmorItem.getPlayerMagicModifier(player);
                     float damage = (float) (1.5f + (focusLevel * 0.5)) + magicModifier;
 
@@ -77,7 +78,7 @@ public class FrostRaySpell extends RaySpell {
 
         if (player != null) {
             if (player.isShiftKeyDown()) {
-                int focusLevel = CrystalUtil.getStatLevel(projectile.getStats(), WizardsReborn.FOCUS_CRYSTAL_STAT);
+                int focusLevel = CrystalUtil.getStatLevel(projectile.getStats(), WizardsRebornCrystals.FOCUS);
                 ItemStack stack = player.getItemInHand(player.getUsedItemHand());
                 if (projectile.tickCount % (4 - focusLevel) == 0) {
                     if (WissenItemUtil.canRemoveWissen(stack, 1)) {

@@ -2,7 +2,6 @@ package mod.maxbogomol.wizards_reborn.client.event;
 
 import com.google.common.collect.Multimap;
 import mod.maxbogomol.fluffy_fur.client.tooltip.TooltipModifierHandler;
-import mod.maxbogomol.wizards_reborn.WizardsReborn;
 import mod.maxbogomol.wizards_reborn.api.arcaneenchantment.ArcaneEnchantmentUtil;
 import mod.maxbogomol.wizards_reborn.client.arcanemicon.ArcanemiconChapters;
 import mod.maxbogomol.wizards_reborn.client.arcanemicon.ArcanemiconGui;
@@ -11,6 +10,7 @@ import mod.maxbogomol.wizards_reborn.common.arcaneenchantment.SplitArcaneEnchant
 import mod.maxbogomol.wizards_reborn.common.item.equipment.ArcaneWandItem;
 import mod.maxbogomol.wizards_reborn.common.item.equipment.WissenWandItem;
 import mod.maxbogomol.wizards_reborn.common.item.equipment.arcane.ArcaneBowItem;
+import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornMobEffects;
 import net.minecraft.client.Minecraft;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.ai.attributes.Attribute;
@@ -82,7 +82,7 @@ public class ClientEvents {
     @SubscribeEvent
     public void input(MovementInputUpdateEvent event) {
         if (Minecraft.getInstance().player != null) {
-            if (Minecraft.getInstance().player.hasEffect(WizardsReborn.TIPSY_EFFECT.get())) {
+            if (Minecraft.getInstance().player.hasEffect(WizardsRebornMobEffects.TIPSY.get())) {
                 //event.getInput().right = true;
                 event.getInput().forwardImpulse = 1f;
             }

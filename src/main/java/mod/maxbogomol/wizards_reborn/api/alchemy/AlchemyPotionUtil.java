@@ -3,7 +3,7 @@ package mod.maxbogomol.wizards_reborn.api.alchemy;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonSyntaxException;
 import mod.maxbogomol.wizards_reborn.common.alchemypotion.FluidAlchemyPotion;
-import mod.maxbogomol.wizards_reborn.common.alchemypotion.RegisterAlchemyPotions;
+import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornAlchemyPotions;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.network.chat.Component;
@@ -23,7 +23,7 @@ public class AlchemyPotionUtil {
     }
 
     public static AlchemyPotion alchemyPotionFromNetwork(FriendlyByteBuf buffer) {
-        return !buffer.readBoolean() ? RegisterAlchemyPotions.EMPTY : AlchemyPotions.getAlchemyPotion(buffer.readComponent().getString());
+        return !buffer.readBoolean() ? WizardsRebornAlchemyPotions.EMPTY : AlchemyPotions.getAlchemyPotion(buffer.readComponent().getString());
     }
 
     public static void alchemyPotionToNetwork(AlchemyPotion potion, FriendlyByteBuf buffer) {
@@ -44,7 +44,7 @@ public class AlchemyPotionUtil {
             }
         }
 
-        return RegisterAlchemyPotions.EMPTY;
+        return WizardsRebornAlchemyPotions.EMPTY;
     }
 
     public static void setPotion(ItemStack stack, AlchemyPotion potion) {
@@ -53,11 +53,11 @@ public class AlchemyPotionUtil {
     }
 
     public static boolean isEmpty(AlchemyPotion potion) {
-        return potion == RegisterAlchemyPotions.EMPTY;
+        return potion == WizardsRebornAlchemyPotions.EMPTY;
     }
 
     public static AlchemyPotion getPotionFluid(Fluid fluid) {
-        AlchemyPotion potionFluid = RegisterAlchemyPotions.EMPTY;
+        AlchemyPotion potionFluid = WizardsRebornAlchemyPotions.EMPTY;
 
         for (AlchemyPotion potion : AlchemyPotions.getAlchemyPotions()) {
             if (potion instanceof FluidAlchemyPotion fluidPotion) {

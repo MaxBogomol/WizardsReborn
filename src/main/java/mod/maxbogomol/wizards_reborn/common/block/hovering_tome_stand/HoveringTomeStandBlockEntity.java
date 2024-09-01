@@ -1,7 +1,7 @@
 package mod.maxbogomol.wizards_reborn.common.block.hovering_tome_stand;
 
 import mod.maxbogomol.fluffy_fur.common.block.entity.TickableBlockEntity;
-import mod.maxbogomol.wizards_reborn.WizardsReborn;
+import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornBlockEntities;
 import net.minecraft.core.BlockPos;
 import net.minecraft.util.Mth;
 import net.minecraft.util.RandomSource;
@@ -29,7 +29,7 @@ public class HoveringTomeStandBlockEntity extends BlockEntity implements Tickabl
     }
 
     public HoveringTomeStandBlockEntity(BlockPos pos, BlockState state) {
-        this(WizardsReborn.HOVERING_TOME_STAND_BLOCK_ENTITY.get(), pos, state);
+        this(WizardsRebornBlockEntities.HOVERING_TOME_STAND.get(), pos, state);
     }
 
     @Override

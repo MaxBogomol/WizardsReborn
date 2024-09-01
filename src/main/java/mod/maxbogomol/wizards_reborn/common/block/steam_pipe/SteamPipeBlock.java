@@ -1,14 +1,15 @@
 package mod.maxbogomol.wizards_reborn.common.block.steam_pipe;
 
-import mod.maxbogomol.fluffy_fur.FluffyFur;
 import mod.maxbogomol.fluffy_fur.client.particle.ParticleBuilder;
 import mod.maxbogomol.fluffy_fur.client.particle.data.ColorParticleData;
 import mod.maxbogomol.fluffy_fur.client.particle.data.GenericParticleData;
 import mod.maxbogomol.fluffy_fur.common.block.entity.TickableBlockEntity;
 import mod.maxbogomol.fluffy_fur.common.network.BlockEntityUpdate;
-import mod.maxbogomol.wizards_reborn.WizardsReborn;
+import mod.maxbogomol.fluffy_fur.registry.client.FluffyFurParticles;
 import mod.maxbogomol.wizards_reborn.api.alchemy.ISteamBlockEntity;
 import mod.maxbogomol.wizards_reborn.common.block.pipe.TinyPipeBaseBlock;
+import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornBlockEntities;
+import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornTags;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.tags.TagKey;
@@ -32,12 +33,12 @@ public class SteamPipeBlock extends TinyPipeBaseBlock {
 
     @Override
     public TagKey<Block> getConnectionTag() {
-        return WizardsReborn.STEAM_PIPE_CONNECTION_BLOCK_TAG;
+        return WizardsRebornTags.STEAM_PIPE_CONNECTION_BLOCK;
     }
 
     @Override
     public TagKey<Block> getToggleConnectionTag() {
-        return WizardsReborn.STEAM_PIPE_CONNECTION_TOGGLE_BLOCK_TAG;
+        return WizardsRebornTags.STEAM_PIPE_CONNECTION_TOGGLE_BLOCK;
     }
 
     @Override
@@ -70,7 +71,7 @@ public class SteamPipeBlock extends TinyPipeBaseBlock {
 
     @Override
     public BlockEntity newBlockEntity(BlockPos pPos, BlockState pState) {
-        return WizardsReborn.STEAM_PIPE_BLOCK_ENTITY.get().create(pPos, pState);
+        return WizardsRebornBlockEntities.STEAM_PIPE.get().create(pPos, pState);
     }
 
     @Override
@@ -97,7 +98,7 @@ public class SteamPipeBlock extends TinyPipeBaseBlock {
                     if (world.getBlockEntity(pos) instanceof ISteamBlockEntity tile) {
                         if (tile.getMaxSteam() > 0) {
                             float amount = (float) tile.getSteam() / (float) tile.getMaxSteam();
-                            ParticleBuilder.create(FluffyFur.SMOKE_PARTICLE)
+                            ParticleBuilder.create(FluffyFurParticles.SMOKE)
                                     .setColorData(ColorParticleData.create(Color.WHITE).build())
                                     .setTransparencyData(GenericParticleData.create(0.4f, 0).build())
                                     .setScaleData(GenericParticleData.create(0.1f, 0.5f).build())

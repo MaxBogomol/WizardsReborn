@@ -1,6 +1,6 @@
 package mod.maxbogomol.wizards_reborn.common.item;
 
-import mod.maxbogomol.wizards_reborn.WizardsReborn;
+import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornMobEffects;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.BlockItem;
@@ -23,7 +23,7 @@ public class MorItem extends BlockItem {
 
     @Override
     public ItemStack finishUsingItem(ItemStack stack, Level level, LivingEntity livingEntity) {
-        livingEntity.addEffect(new MobEffectInstance(WizardsReborn.MOR_SPORES_EFFECT.get(), random.nextInt(minEffect, maxEffect), 0));
+        livingEntity.addEffect(new MobEffectInstance(WizardsRebornMobEffects.MOR_SPORES.get(), random.nextInt(minEffect, maxEffect), 0));
         return super.finishUsingItem(stack, level, livingEntity);
     }
 }

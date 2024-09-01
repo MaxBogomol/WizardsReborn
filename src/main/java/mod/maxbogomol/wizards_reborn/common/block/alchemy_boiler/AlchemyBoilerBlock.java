@@ -1,14 +1,14 @@
 package mod.maxbogomol.wizards_reborn.common.block.alchemy_boiler;
 
 import mod.maxbogomol.fluffy_fur.common.block.entity.TickableBlockEntity;
-import mod.maxbogomol.wizards_reborn.WizardsReborn;
 import mod.maxbogomol.wizards_reborn.api.alchemy.IPipeConnection;
 import mod.maxbogomol.wizards_reborn.api.alchemy.PipeConnection;
+import mod.maxbogomol.wizards_reborn.common.block.alchemy_machine.AlchemyMachineBlock;
 import mod.maxbogomol.wizards_reborn.common.block.pipe.PipeBaseBlock;
 import mod.maxbogomol.wizards_reborn.common.block.pipe.PipeBaseBlockEntity;
 import mod.maxbogomol.wizards_reborn.common.block.pipe.TinyPipeBaseBlock;
-import mod.maxbogomol.wizards_reborn.common.block.alchemy_machine.AlchemyMachineBlock;
 import mod.maxbogomol.wizards_reborn.common.item.equipment.WissenWandItem;
+import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornTags;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.server.level.ServerPlayer;
@@ -168,7 +168,7 @@ public class AlchemyBoilerBlock extends HorizontalDirectionalBlock implements En
 
         if (pLevel.getBlockEntity(pCurrentPos) instanceof PipeBaseBlockEntity pipe) {
             BlockEntity facingBE = pLevel.getBlockEntity(pCurrentPos);
-            if (pNeighborState.is(WizardsReborn.STEAM_PIPE_CONNECTION_BLOCK_TAG) || pNeighborState.is(WizardsReborn.FLUID_PIPE_CONNECTION_BLOCK_TAG)) {
+            if (pNeighborState.is(WizardsRebornTags.STEAM_PIPE_CONNECTION_BLOCK) || pNeighborState.is(WizardsRebornTags.FLUID_PIPE_CONNECTION_BLOCK)) {
                 if (facingBE instanceof PipeBaseBlockEntity && ((PipeBaseBlockEntity) facingBE).getConnection(pDirection.getOpposite()) == PipeConnection.DISABLED) {
                     pipe.setConnection(pDirection, PipeConnection.NONE);
                 } else {

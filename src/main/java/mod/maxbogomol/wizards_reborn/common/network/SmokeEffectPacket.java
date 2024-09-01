@@ -1,9 +1,9 @@
 package mod.maxbogomol.wizards_reborn.common.network;
 
-import mod.maxbogomol.fluffy_fur.FluffyFur;
 import mod.maxbogomol.fluffy_fur.client.particle.ParticleBuilder;
 import mod.maxbogomol.fluffy_fur.client.particle.data.ColorParticleData;
 import mod.maxbogomol.fluffy_fur.client.particle.data.GenericParticleData;
+import mod.maxbogomol.fluffy_fur.registry.client.FluffyFurParticles;
 import mod.maxbogomol.wizards_reborn.WizardsReborn;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.world.level.Level;
@@ -65,7 +65,7 @@ public class SmokeEffectPacket {
                     Level world = WizardsReborn.proxy.getLevel();
 
                     for (int i = 0; i < 40; i++) {
-                        ParticleBuilder.create(FluffyFur.SMOKE_PARTICLE)
+                        ParticleBuilder.create(FluffyFurParticles.SMOKE)
                                 .setColorData(ColorParticleData.create(msg.colorR, msg.colorG, msg.colorB).build())
                                 .setTransparencyData(GenericParticleData.create(0.05f, 0).build())
                                 .setScaleData(GenericParticleData.create(0.1f, 2).build())

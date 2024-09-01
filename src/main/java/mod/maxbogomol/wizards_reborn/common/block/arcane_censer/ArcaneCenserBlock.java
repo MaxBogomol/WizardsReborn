@@ -1,16 +1,17 @@
 package mod.maxbogomol.wizards_reborn.common.block.arcane_censer;
 
-import mod.maxbogomol.fluffy_fur.FluffyFur;
 import mod.maxbogomol.fluffy_fur.client.particle.ParticleBuilder;
 import mod.maxbogomol.fluffy_fur.client.particle.data.ColorParticleData;
 import mod.maxbogomol.fluffy_fur.client.particle.data.GenericParticleData;
 import mod.maxbogomol.fluffy_fur.common.block.entity.BlockSimpleInventory;
 import mod.maxbogomol.fluffy_fur.common.block.entity.TickableBlockEntity;
 import mod.maxbogomol.fluffy_fur.common.network.BlockEntityUpdate;
-import mod.maxbogomol.wizards_reborn.WizardsReborn;
+import mod.maxbogomol.fluffy_fur.registry.client.FluffyFurParticles;
 import mod.maxbogomol.wizards_reborn.api.alchemy.ISteamBlockEntity;
 import mod.maxbogomol.wizards_reborn.api.alchemy.SteamUtil;
 import mod.maxbogomol.wizards_reborn.common.recipe.CenserRecipe;
+import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornRecipes;
+import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornSounds;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.sounds.SoundSource;
@@ -118,7 +119,7 @@ public class ArcaneCenserBlock extends HorizontalDirectionalBlock implements Ent
 
         SimpleContainer inv = new SimpleContainer(1);
         inv.setItem(0, stack);
-        Optional<CenserRecipe> recipe = world.getRecipeManager().getRecipeFor(WizardsReborn.CENSER_RECIPE.get(), inv, world);
+        Optional<CenserRecipe> recipe = world.getRecipeManager().getRecipeFor(WizardsRebornRecipes.CENSER.get(), inv, world);
 
         if (!player.isShiftKeyDown()) {
             if (recipe.isPresent()) {
@@ -131,14 +132,14 @@ public class ArcaneCenserBlock extends HorizontalDirectionalBlock implements Ent
                             tile.getItemHandler().setItem(slot, stack);
                             world.updateNeighbourForOutputSignal(pos, this);
                             BlockEntityUpdate.packet(tile);
-                            world.playSound(null, pos, WizardsReborn.PEDESTAL_INSERT_SOUND.get(), SoundSource.BLOCKS, 1.0f, 1.0f);
+                            world.playSound(null, pos, WizardsRebornSounds.PEDESTAL_INSERT.get(), SoundSource.BLOCKS, 1.0f, 1.0f);
                             return InteractionResult.SUCCESS;
                         } else {
                             tile.getItemHandler().setItem(slot, stack);
                             player.getInventory().removeItem(player.getItemInHand(hand));
                             world.updateNeighbourForOutputSignal(pos, this);
                             BlockEntityUpdate.packet(tile);
-                            world.playSound(null, pos, WizardsReborn.PEDESTAL_INSERT_SOUND.get(), SoundSource.BLOCKS, 1.0f, 1.0f);
+                            world.playSound(null, pos, WizardsRebornSounds.PEDESTAL_INSERT.get(), SoundSource.BLOCKS, 1.0f, 1.0f);
                             return InteractionResult.SUCCESS;
                         }
                     }
@@ -159,7 +160,7 @@ public class ArcaneCenserBlock extends HorizontalDirectionalBlock implements Ent
                             world.updateNeighbourForOutputSignal(pos, this);
                             tile.sortItems();
                             BlockEntityUpdate.packet(tile);
-                            world.playSound(null, pos, WizardsReborn.PEDESTAL_REMOVE_SOUND.get(), SoundSource.BLOCKS, 1.0f, 1.0f);
+                            world.playSound(null, pos, WizardsRebornSounds.PEDESTAL_REMOVE.get(), SoundSource.BLOCKS, 1.0f, 1.0f);
                             return InteractionResult.SUCCESS;
                         }
                     }
@@ -229,7 +230,7 @@ public class ArcaneCenserBlock extends HorizontalDirectionalBlock implements Ent
                     if (world.getBlockEntity(pos) instanceof ISteamBlockEntity tile) {
                         if (tile.getMaxSteam() > 0) {
                             float amount = (float) tile.getSteam() / (float) tile.getMaxSteam();
-                            ParticleBuilder.create(FluffyFur.SMOKE_PARTICLE)
+                            ParticleBuilder.create(FluffyFurParticles.SMOKE)
                                     .setColorData(ColorParticleData.create(Color.WHITE).build())
                                     .setTransparencyData(GenericParticleData.create(0.4f, 0).build())
                                     .setScaleData(GenericParticleData.create(0.1f, 0.5f).build())

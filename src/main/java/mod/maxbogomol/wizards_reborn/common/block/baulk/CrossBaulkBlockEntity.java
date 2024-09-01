@@ -1,8 +1,8 @@
 package mod.maxbogomol.wizards_reborn.common.block.baulk;
 
 import mod.maxbogomol.fluffy_fur.common.block.entity.TickableBlockEntity;
-import mod.maxbogomol.wizards_reborn.WizardsReborn;
 import mod.maxbogomol.wizards_reborn.common.block.pipe.PipeBaseBlockEntity;
+import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornBlockEntities;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.protocol.game.ClientboundBlockEntityDataPacket;
 import net.minecraft.world.level.block.entity.BlockEntityType;
@@ -15,7 +15,7 @@ public class CrossBaulkBlockEntity extends PipeBaseBlockEntity implements Tickab
     }
 
     public CrossBaulkBlockEntity(BlockPos pos, BlockState state) {
-        this(WizardsReborn.CROSS_BAULK_BLOCK_ENTITY.get(), pos, state);
+        this(WizardsRebornBlockEntities.CROSS_BAULK.get(), pos, state);
     }
 
     @Override

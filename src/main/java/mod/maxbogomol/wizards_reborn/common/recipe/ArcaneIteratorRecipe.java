@@ -9,6 +9,8 @@ import mod.maxbogomol.wizards_reborn.api.arcaneenchantment.ArcaneEnchantment;
 import mod.maxbogomol.wizards_reborn.api.arcaneenchantment.ArcaneEnchantmentUtil;
 import mod.maxbogomol.wizards_reborn.api.crystalritual.CrystalRitual;
 import mod.maxbogomol.wizards_reborn.api.crystalritual.CrystalRitualUtil;
+import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornItems;
+import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornRecipes;
 import net.minecraft.core.NonNullList;
 import net.minecraft.core.RegistryAccess;
 import net.minecraft.core.registries.BuiltInRegistries;
@@ -155,7 +157,7 @@ public class ArcaneIteratorRecipe implements Recipe<Container> {
     }
 
     public ItemStack getToastSymbol() {
-        return new ItemStack(WizardsReborn.ARCANE_ITERATOR_ITEM.get());
+        return new ItemStack(WizardsRebornItems.ARCANE_ITERATOR.get());
     }
 
     @Override
@@ -165,14 +167,7 @@ public class ArcaneIteratorRecipe implements Recipe<Container> {
 
     @Override
     public RecipeSerializer<?> getSerializer() {
-        return WizardsReborn.ARCANE_ITERATOR_SERIALIZER.get();
-    }
-
-    public static class ArcaneIteratorRecipeType implements RecipeType<ArcaneIteratorRecipe> {
-        @Override
-        public String toString() {
-            return ArcaneIteratorRecipe.TYPE_ID.toString();
-        }
+        return WizardsRebornRecipes.ARCANE_ITERATOR_SERIALIZER.get();
     }
 
     public static class Serializer implements RecipeSerializer<ArcaneIteratorRecipe> {

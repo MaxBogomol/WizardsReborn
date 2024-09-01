@@ -1,10 +1,11 @@
 package mod.maxbogomol.wizards_reborn.common.block.casing.steam;
 
-import mod.maxbogomol.wizards_reborn.WizardsReborn;
-import mod.maxbogomol.wizards_reborn.api.alchemy.ISteamPipePriority;
 import mod.maxbogomol.wizards_reborn.api.alchemy.ISteamBlockEntity;
+import mod.maxbogomol.wizards_reborn.api.alchemy.ISteamPipePriority;
 import mod.maxbogomol.wizards_reborn.api.alchemy.PipePriorityMap;
 import mod.maxbogomol.wizards_reborn.common.block.steam_pipe.SteamPipeBlockEntity;
+import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornBlockEntities;
+import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornSounds;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.sounds.SoundSource;
@@ -22,7 +23,7 @@ public class SteamCasingBlockEntity extends SteamPipeBlockEntity {
     }
 
     public SteamCasingBlockEntity(BlockPos pos, BlockState state) {
-        this(WizardsReborn.STEAM_CASING_BLOCK_ENTITY.get(), pos, state);
+        this(WizardsRebornBlockEntities.STEAM_CASING.get(), pos, state);
     }
 
     public void tick() {
@@ -87,7 +88,7 @@ public class SteamCasingBlockEntity extends SteamPipeBlockEntity {
                             }
                             if (steamMoved) {
                                 if (random.nextFloat() < 0.005F) {
-                                    level.playSound(null, getBlockPos(), WizardsReborn.STEAM_BURST_SOUND.get(), SoundSource.BLOCKS, 0.1f, 1.0f);
+                                    level.playSound(null, getBlockPos(), WizardsRebornSounds.STEAM_BURST.get(), SoundSource.BLOCKS, 0.1f, 1.0f);
                                 }
                             }
                         }

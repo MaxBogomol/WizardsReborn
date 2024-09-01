@@ -1,9 +1,9 @@
 package mod.maxbogomol.wizards_reborn.common.network.spell;
 
-import mod.maxbogomol.fluffy_fur.FluffyFur;
 import mod.maxbogomol.fluffy_fur.client.particle.ParticleBuilder;
 import mod.maxbogomol.fluffy_fur.client.particle.data.ColorParticleData;
 import mod.maxbogomol.fluffy_fur.client.particle.data.GenericParticleData;
+import mod.maxbogomol.fluffy_fur.registry.client.FluffyFurParticles;
 import mod.maxbogomol.wizards_reborn.WizardsReborn;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.world.level.Level;
@@ -48,7 +48,7 @@ public class MagicSproutSpellEffectPacket {
                 @Override
                 public void run() {
                     Level world = WizardsReborn.proxy.getLevel();
-                    ParticleBuilder.create(FluffyFur.SPARKLE_PARTICLE)
+                    ParticleBuilder.create(FluffyFurParticles.SPARKLE)
                             .setColorData(ColorParticleData.create(msg.colorR, msg.colorG, msg.colorB).build())
                             .setTransparencyData(GenericParticleData.create(0.3f, 0).build())
                             .setScaleData(GenericParticleData.create(0.1f, 0.3f).build())
@@ -56,7 +56,7 @@ public class MagicSproutSpellEffectPacket {
                             .randomVelocity(0.05f)
                             .flatRandomOffset(0.25f, 0.25f, 0.25f)
                             .repeat(world, msg.X, msg.Y, msg.Z, 10, 0.6f);
-                    ParticleBuilder.create(FluffyFur.SMOKE_PARTICLE)
+                    ParticleBuilder.create(FluffyFurParticles.SMOKE)
                             .setColorData(ColorParticleData.create(msg.colorR, msg.colorG, msg.colorB).build())
                             .setTransparencyData(GenericParticleData.create(0.15f, 0).build())
                             .setScaleData(GenericParticleData.create(0.1f, 1.5f).build())

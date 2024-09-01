@@ -1,12 +1,12 @@
 package mod.maxbogomol.wizards_reborn.common.block;
 
-import mod.maxbogomol.fluffy_fur.FluffyFur;
 import mod.maxbogomol.fluffy_fur.client.particle.ParticleBuilder;
 import mod.maxbogomol.fluffy_fur.client.particle.data.ColorParticleData;
 import mod.maxbogomol.fluffy_fur.client.particle.data.GenericParticleData;
 import mod.maxbogomol.fluffy_fur.client.particle.data.LightParticleData;
+import mod.maxbogomol.fluffy_fur.registry.client.FluffyFurParticles;
 import mod.maxbogomol.fluffy_fur.util.RenderUtils;
-import mod.maxbogomol.wizards_reborn.WizardsReborn;
+import mod.maxbogomol.wizards_reborn.registry.client.WizardsRebornParticles;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.util.RandomSource;
@@ -30,7 +30,7 @@ public class InnocentWoodLeavesBlock extends LeavesBlock {
     public void playerWillDestroy(Level world, BlockPos pos, BlockState state, Player player) {
         if (world.isClientSide()) {
             if (!player.isCreative()) {
-                ParticleBuilder.create(FluffyFur.WISP_PARTICLE)
+                ParticleBuilder.create(FluffyFurParticles.WISP)
                         .setColorData(ColorParticleData.create(0.968f, 0.968f, 0.968f).build())
                         .setTransparencyData(GenericParticleData.create(0.2f, 0).build())
                         .setScaleData(GenericParticleData.create(0.2f, 0).build())
@@ -51,7 +51,7 @@ public class InnocentWoodLeavesBlock extends LeavesBlock {
             BlockPos blockpos = pos.below();
             BlockState blockstate = world.getBlockState(blockpos);
             if (!isFaceFull(blockstate.getCollisionShape(world, blockpos), Direction.UP)) {
-                ParticleBuilder.create(WizardsReborn.INNOCENT_WOOD_LEAVES_PARTICLE)
+                ParticleBuilder.create(WizardsRebornParticles.INNOCENT_WOOD_LEAVES)
                         .setRenderType(RenderUtils.DELAYED_PARTICLE)
                         .setLightData(LightParticleData.DEFAULT)
                         .flatRandomOffset(1f, 0, 1f)

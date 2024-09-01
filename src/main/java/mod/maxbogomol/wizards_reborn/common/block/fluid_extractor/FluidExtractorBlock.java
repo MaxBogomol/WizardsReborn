@@ -1,9 +1,10 @@
 package mod.maxbogomol.wizards_reborn.common.block.fluid_extractor;
 
 import mod.maxbogomol.fluffy_fur.common.block.entity.TickableBlockEntity;
-import mod.maxbogomol.wizards_reborn.WizardsReborn;
 import mod.maxbogomol.wizards_reborn.common.block.extractor.ExtractorBaseBlock;
 import mod.maxbogomol.wizards_reborn.common.block.fluid_pipe.FluidPipeBaseBlockEntity;
+import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornBlockEntities;
+import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornTags;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.tags.TagKey;
@@ -25,12 +26,12 @@ public class FluidExtractorBlock extends ExtractorBaseBlock {
 
     @Override
     public TagKey<Block> getConnectionTag() {
-        return WizardsReborn.FLUID_PIPE_CONNECTION_BLOCK_TAG;
+        return WizardsRebornTags.FLUID_PIPE_CONNECTION_BLOCK;
     }
 
     @Override
     public TagKey<Block> getToggleConnectionTag() {
-        return WizardsReborn.FLUID_PIPE_CONNECTION_TOGGLE_BLOCK_TAG;
+        return WizardsRebornTags.FLUID_PIPE_CONNECTION_TOGGLE_BLOCK;
     }
 
     @Override
@@ -52,7 +53,7 @@ public class FluidExtractorBlock extends ExtractorBaseBlock {
 
     @Override
     public BlockEntity newBlockEntity(BlockPos pPos, BlockState pState) {
-        return WizardsReborn.FLUID_EXTRACTOR_BLOCK_ENTITY.get().create(pPos, pState);
+        return WizardsRebornBlockEntities.FLUID_EXTRACTOR.get().create(pPos, pState);
     }
 
     @Override

@@ -2,7 +2,7 @@ package mod.maxbogomol.wizards_reborn.api.crystalritual;
 
 import com.google.gson.JsonObject;
 import com.google.gson.JsonSyntaxException;
-import mod.maxbogomol.wizards_reborn.WizardsReborn;
+import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornCrystalRituals;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.network.chat.Component;
@@ -21,7 +21,7 @@ public class CrystalRitualUtil {
     }
 
     public static CrystalRitual crystalRitualFromNetwork(FriendlyByteBuf buffer) {
-        return !buffer.readBoolean() ? WizardsReborn.EMPTY_CRYSTAL_RITUAL : CrystalRituals.getCrystalRitual(buffer.readComponent().getString());
+        return !buffer.readBoolean() ? WizardsRebornCrystalRituals.EMPTY : CrystalRituals.getCrystalRitual(buffer.readComponent().getString());
     }
 
     public static void crystalRitualToNetwork(CrystalRitual ritual, FriendlyByteBuf buffer) {
@@ -42,7 +42,7 @@ public class CrystalRitualUtil {
             }
         }
 
-        return WizardsReborn.EMPTY_CRYSTAL_RITUAL;
+        return WizardsRebornCrystalRituals.EMPTY;
     }
 
     public static void setCrystalRitual(ItemStack stack, CrystalRitual ritual) {

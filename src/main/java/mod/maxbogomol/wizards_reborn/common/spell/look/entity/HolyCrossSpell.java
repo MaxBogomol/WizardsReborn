@@ -1,11 +1,12 @@
 package mod.maxbogomol.wizards_reborn.common.spell.look.entity;
 
-import mod.maxbogomol.wizards_reborn.WizardsReborn;
 import mod.maxbogomol.wizards_reborn.api.crystal.CrystalUtil;
-import mod.maxbogomol.wizards_reborn.common.damage.DamageSourceRegistry;
 import mod.maxbogomol.wizards_reborn.common.item.equipment.arcane.ArcaneArmorItem;
 import mod.maxbogomol.wizards_reborn.common.network.PacketHandler;
 import mod.maxbogomol.wizards_reborn.common.network.spell.HolyCrossSpellEffectPacket;
+import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornCrystals;
+import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornDamage;
+import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornSpells;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.damagesource.DamageSource;
@@ -21,13 +22,13 @@ import java.awt.*;
 public class HolyCrossSpell extends EntityLookSpell {
     public HolyCrossSpell(String id, int points) {
         super(id, points);
-        addCrystalType(WizardsReborn.EARTH_CRYSTAL_TYPE);
-        addCrystalType(WizardsReborn.AIR_CRYSTAL_TYPE);
+        addCrystalType(WizardsRebornCrystals.EARTH);
+        addCrystalType(WizardsRebornCrystals.AIR);
     }
 
     @Override
     public Color getColor() {
-        return WizardsReborn.holySpellColor;
+        return WizardsRebornSpells.holySpellColor;
     }
 
     @Override
@@ -49,7 +50,7 @@ public class HolyCrossSpell extends EntityLookSpell {
     public void lookSpell(Level world, Player player, InteractionHand hand) {
         ItemStack stack = player.getItemInHand(hand);
         CompoundTag stats = getStats(stack);
-        int focusLevel = CrystalUtil.getStatLevel(stats, WizardsReborn.FOCUS_CRYSTAL_STAT);
+        int focusLevel = CrystalUtil.getStatLevel(stats, WizardsRebornCrystals.FOCUS);
         float magicModifier = ArcaneArmorItem.getPlayerMagicModifier(player);
         float damage = (float) (1.0f + ((focusLevel + magicModifier) * 0.5));
 
@@ -59,7 +60,7 @@ public class HolyCrossSpell extends EntityLookSpell {
             for (Entity entity : hit.getEntities()) {
                 if (entity instanceof LivingEntity livingEntity) {
                     if (livingEntity.isInvertedHealAndHarm()) {
-                        entity.hurt(new DamageSource(DamageSourceRegistry.create(entity.level(), DamageSourceRegistry.ARCANE_MAGIC).typeHolder(), player), damage);
+                        entity.hurt(new DamageSource(WizardsRebornDamage.create(entity.level(), WizardsRebornDamage.ARCANE_MAGIC).typeHolder(), player), damage);
                     } else {
                         if (livingEntity.getHealth() != livingEntity.getMaxHealth()) {
                             livingEntity.heal(damage);

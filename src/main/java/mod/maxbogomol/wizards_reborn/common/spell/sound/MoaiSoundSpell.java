@@ -1,6 +1,6 @@
 package mod.maxbogomol.wizards_reborn.common.spell.sound;
 
-import mod.maxbogomol.wizards_reborn.WizardsReborn;
+import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornSounds;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.entity.player.Player;
@@ -15,6 +15,6 @@ public class MoaiSoundSpell extends SecretSoundSpell {
 
     @Override
     public SoundEvent getSound(Level world, Player player, InteractionHand hand) {
-        return WizardsReborn.MOAI_SOUND.get();
+        return WizardsRebornSounds.MOAI.get();
     }
 }

@@ -1,6 +1,8 @@
 package mod.maxbogomol.wizards_reborn.common.block.cork_bamboo;
 
-import mod.maxbogomol.wizards_reborn.WizardsReborn;
+import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornBlocks;
+import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornItems;
+import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornTags;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.world.item.ItemStack;
@@ -27,8 +29,8 @@ public class CorkBambooSaplingBlock extends BambooSaplingBlock {
         if (!pState.canSurvive(pLevel, pCurrentPos)) {
             return Blocks.AIR.defaultBlockState();
         } else {
-            if (pFacing == Direction.UP && pFacingState.is(WizardsReborn.CORK_BAMBOO.get())) {
-                pLevel.setBlock(pCurrentPos, WizardsReborn.CORK_BAMBOO.get().defaultBlockState(), 2);
+            if (pFacing == Direction.UP && pFacingState.is(WizardsRebornBlocks.CORK_BAMBOO.get())) {
+                pLevel.setBlock(pCurrentPos, WizardsRebornBlocks.CORK_BAMBOO.get().defaultBlockState(), 2);
             }
 
             return super.updateShape(pState, pFacing, pFacingState, pLevel, pCurrentPos, pFacingPos);
@@ -38,15 +40,15 @@ public class CorkBambooSaplingBlock extends BambooSaplingBlock {
     @Override
     @Nullable
     public boolean canSurvive(BlockState pState, LevelReader pLevel, BlockPos pPos) {
-        return pLevel.getBlockState(pPos.below()).is(WizardsReborn.CORK_BAMBOO_PLANTABLE_ON_BLOCK_TAG) && !pLevel.getBlockState(pPos.below()).is(WizardsReborn.CORK_BAMBOO_SAPLING.get());
+        return pLevel.getBlockState(pPos.below()).is(WizardsRebornTags.CORK_BAMBOO_PLANTABLE_ON_BLOCK) && !pLevel.getBlockState(pPos.below()).is(WizardsRebornBlocks.CORK_BAMBOO_SAPLING.get());
     }
 
     @Override
     public ItemStack getCloneItemStack(BlockGetter blockGetter, BlockPos blockPos, BlockState blockState) {
-        return new ItemStack(WizardsReborn.CORK_BAMBOO_SEED.get());
+        return new ItemStack(WizardsRebornItems.CORK_BAMBOO_SEED.get());
     }
 
     protected void growBamboo(Level level, BlockPos state) {
-        level.setBlock(state.above(), WizardsReborn.CORK_BAMBOO.get().defaultBlockState().setValue(BambooStalkBlock.LEAVES, BambooLeaves.SMALL), 3);
+        level.setBlock(state.above(), WizardsRebornBlocks.CORK_BAMBOO.get().defaultBlockState().setValue(BambooStalkBlock.LEAVES, BambooLeaves.SMALL), 3);
     }
 }

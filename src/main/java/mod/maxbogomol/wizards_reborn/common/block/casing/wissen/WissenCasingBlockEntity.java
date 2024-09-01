@@ -4,6 +4,8 @@ import mod.maxbogomol.fluffy_fur.common.network.BlockEntityUpdate;
 import mod.maxbogomol.wizards_reborn.WizardsReborn;
 import mod.maxbogomol.wizards_reborn.api.wissen.WissenUtils;
 import mod.maxbogomol.wizards_reborn.common.block.wissen_translator.WissenTranslatorBlockEntity;
+import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornBlockEntities;
+import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornSounds;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.nbt.CompoundTag;
@@ -24,7 +26,7 @@ public class WissenCasingBlockEntity extends WissenTranslatorBlockEntity {
     }
 
     public WissenCasingBlockEntity(BlockPos pos, BlockState state) {
-        this(WizardsReborn.WISSEN_CASING_BLOCK_ENTITY.get(), pos, state);
+        this(WizardsRebornBlockEntities.WISSEN_CASING.get(), pos, state);
     }
 
     public void tick() {
@@ -72,7 +74,7 @@ public class WissenCasingBlockEntity extends WissenTranslatorBlockEntity {
             if (setCooldown) {
                 cooldown = (int) (getSendWissenCooldown() + (((cooldownCount - 1) / 5f) * getSendWissenCooldown()));
                 maxCooldown = cooldown;
-                level.playSound(WizardsReborn.proxy.getPlayer(), getBlockPos(), WizardsReborn.WISSEN_TRANSFER_SOUND.get(), SoundSource.BLOCKS, 0.1f, (float) (1.1f + ((random.nextFloat() - 0.5D) / 2)));
+                level.playSound(WizardsReborn.proxy.getPlayer(), getBlockPos(), WizardsRebornSounds.WISSEN_TRANSFER.get(), SoundSource.BLOCKS, 0.1f, (float) (1.1f + ((random.nextFloat() - 0.5D) / 2)));
             }
 
             if (update) setChanged();

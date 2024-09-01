@@ -1,8 +1,8 @@
 package mod.maxbogomol.wizards_reborn.common.block.steam_thermal_storage;
 
 import mod.maxbogomol.fluffy_fur.common.block.entity.TickableBlockEntity;
-import mod.maxbogomol.wizards_reborn.WizardsReborn;
 import mod.maxbogomol.wizards_reborn.api.alchemy.ISteamBlockEntity;
+import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornItems;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.nbt.CompoundTag;
@@ -118,7 +118,7 @@ public class SteamThermalStorageBlock extends RotatedPillarBlock implements Enti
             CompoundTag nbt = tile.getUpdateTag();
             if (nbt != null) {
                 for (ItemStack stack : items) {
-                    if (stack.getItem() == WizardsReborn.STEAM_THERMAL_STORAGE_ITEM.get()) {
+                    if (stack.getItem() == WizardsRebornItems.STEAM_THERMAL_STORAGE.get()) {
                         CompoundTag tag = stack.getOrCreateTag();
                         tag.putInt("steam", steamTile.getSteam());
                     }
