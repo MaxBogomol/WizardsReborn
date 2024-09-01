@@ -16,7 +16,7 @@ import mod.maxbogomol.wizards_reborn.integration.common.farmersdelight.FarmersDe
 import mod.maxbogomol.wizards_reborn.common.item.CrystalItem;
 import mod.maxbogomol.wizards_reborn.common.item.FracturedCrystalItem;
 import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornCrystalRituals;
-import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornItems;
+import mod.maxbogomol.wizards_reborn.registry.common.item.WizardsRebornItems;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;

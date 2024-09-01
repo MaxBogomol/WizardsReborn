@@ -1,8 +1,8 @@
 package mod.maxbogomol.wizards_reborn.common.block.cork_bamboo;
 
-import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornBlocks;
-import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornItems;
-import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornTags;
+import mod.maxbogomol.wizards_reborn.registry.common.block.WizardsRebornBlockTags;
+import mod.maxbogomol.wizards_reborn.registry.common.block.WizardsRebornBlocks;
+import mod.maxbogomol.wizards_reborn.registry.common.item.WizardsRebornItems;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.world.item.ItemStack;
@@ -40,7 +40,7 @@ public class CorkBambooSaplingBlock extends BambooSaplingBlock {
     @Override
     @Nullable
     public boolean canSurvive(BlockState pState, LevelReader pLevel, BlockPos pPos) {
-        return pLevel.getBlockState(pPos.below()).is(WizardsRebornTags.CORK_BAMBOO_PLANTABLE_ON_BLOCK) && !pLevel.getBlockState(pPos.below()).is(WizardsRebornBlocks.CORK_BAMBOO_SAPLING.get());
+        return pLevel.getBlockState(pPos.below()).is(WizardsRebornBlockTags.CORK_BAMBOO_PLANTABLE_ON) && !pLevel.getBlockState(pPos.below()).is(WizardsRebornBlocks.CORK_BAMBOO_SAPLING.get());
     }
 
     @Override

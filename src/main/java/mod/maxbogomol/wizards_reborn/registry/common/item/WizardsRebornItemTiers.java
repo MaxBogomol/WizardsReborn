@@ -1,13 +1,12 @@
-package mod.maxbogomol.wizards_reborn.common.item.equipment;
+package mod.maxbogomol.wizards_reborn.registry.common.item;
 
-import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornItems;
 import net.minecraft.util.LazyLoadedValue;
 import net.minecraft.world.item.Tier;
 import net.minecraft.world.item.crafting.Ingredient;
 
 import java.util.function.Supplier;
 
-public enum CustomItemTier implements Tier {
+public enum WizardsRebornItemTiers implements Tier {
 
     ARCANE_GOLD(3, 450, 8f, 2f, 25, () -> Ingredient.of(WizardsRebornItems.ARCANE_GOLD_INGOT.get())),
     ARCANE_WOOD(2, 175, 5f, 0.5f, 15, () -> Ingredient.of(WizardsRebornItems.ARCANE_WOOD_BRANCH.get())),
@@ -20,8 +19,8 @@ public enum CustomItemTier implements Tier {
     private final int enchantability;
     private final LazyLoadedValue<Ingredient> repairMaterial;
 
-    CustomItemTier(int harvestLevel, int maxUses, float efficiency,
-                   float attackDamage, int enchantability, Supplier<Ingredient> repairMaterial) {
+    WizardsRebornItemTiers(int harvestLevel, int maxUses, float efficiency,
+                           float attackDamage, int enchantability, Supplier<Ingredient> repairMaterial) {
         this.harvestLevel = harvestLevel;
         this.maxUses = maxUses;
         this.efficiency = efficiency;

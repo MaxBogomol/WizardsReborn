@@ -1,7 +1,9 @@
-package mod.maxbogomol.wizards_reborn.registry.common;
+package mod.maxbogomol.wizards_reborn.registry.common.fluid;
 
 import mod.maxbogomol.fluffy_fur.common.fluid.CustomFluidType;
 import mod.maxbogomol.wizards_reborn.WizardsReborn;
+import mod.maxbogomol.wizards_reborn.registry.common.block.WizardsRebornBlocks;
+import mod.maxbogomol.wizards_reborn.registry.common.item.WizardsRebornItems;
 import net.minecraft.client.renderer.ItemBlockRenderTypes;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.resources.ResourceLocation;

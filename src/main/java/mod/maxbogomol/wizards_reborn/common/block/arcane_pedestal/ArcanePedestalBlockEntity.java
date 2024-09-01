@@ -1,7 +1,7 @@
 package mod.maxbogomol.wizards_reborn.common.block.arcane_pedestal;
 
 import mod.maxbogomol.fluffy_fur.common.block.entity.ExposedBlockSimpleInventory;
-import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornBlockEntities;
+import mod.maxbogomol.wizards_reborn.registry.common.block.WizardsRebornBlockEntities;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.SimpleContainer;
 import net.minecraft.world.level.block.entity.BlockEntityType;

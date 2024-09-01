@@ -8,14 +8,14 @@ import mod.maxbogomol.wizards_reborn.common.capability.ArrowModifierProvider;
 import mod.maxbogomol.wizards_reborn.common.capability.IKnowledge;
 import mod.maxbogomol.wizards_reborn.common.capability.KnowledgeProvider;
 import mod.maxbogomol.wizards_reborn.common.command.WizardsRebornCommand;
-import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornAttributes;
-import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornDamage;
 import mod.maxbogomol.wizards_reborn.common.entity.SpellProjectileEntity;
 import mod.maxbogomol.wizards_reborn.common.item.equipment.ArcaneFortressArmorItem;
 import mod.maxbogomol.wizards_reborn.common.network.KnowledgeUpdatePacket;
 import mod.maxbogomol.wizards_reborn.common.network.PacketHandler;
-import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornItems;
-import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornTags;
+import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornAttributes;
+import mod.maxbogomol.wizards_reborn.registry.common.damage.WizardsRebornDamage;
+import mod.maxbogomol.wizards_reborn.registry.common.damage.WizardsRebornDamageTags;
+import mod.maxbogomol.wizards_reborn.registry.common.item.WizardsRebornItems;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerPlayer;
@@ -93,7 +93,7 @@ public class Events {
             AttributeInstance attr = event.getEntity().getAttribute(WizardsRebornAttributes.MAGIC_ARMOR.get());
 
             if (attr != null) {
-                if (event.getSource().is(WizardsRebornTags.MAGIC_DAMAGE_TYPE)) {
+                if (event.getSource().is(WizardsRebornDamageTags.MAGIC)) {
                     scale = (float) (1f - (attr.getValue() / 100f));
                 }
                 if (scale == 1 && event.getSource().getDirectEntity() instanceof SpellProjectileEntity) {
@@ -112,7 +112,7 @@ public class Events {
 
     public void arcaneDamage(LivingDamageEvent event) {
         if (event.getSource().getEntity() instanceof LivingEntity attacker) {
-            if (!event.getSource().is(WizardsRebornTags.ARCANE_MAGIC_DAMAGE_TYPE)) {
+            if (!event.getSource().is(WizardsRebornDamageTags.ARCANE_MAGIC)) {
                 AttributeInstance attr = attacker.getAttribute(WizardsRebornAttributes.ARCANE_DAMAGE.get());
                 if (attr != null && attr.getValue() > 0) {
                     event.getEntity().invulnerableTime = 0;

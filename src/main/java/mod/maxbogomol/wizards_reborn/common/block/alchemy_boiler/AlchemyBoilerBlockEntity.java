@@ -10,8 +10,8 @@ import mod.maxbogomol.wizards_reborn.api.wissen.IWissenBlockEntity;
 import mod.maxbogomol.wizards_reborn.api.wissen.IWissenWandFunctionalBlockEntity;
 import mod.maxbogomol.wizards_reborn.common.block.alchemy_machine.AlchemyMachineBlockEntity;
 import mod.maxbogomol.wizards_reborn.common.block.pipe.PipeBaseBlockEntity;
-import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornBlockEntities;
-import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornTags;
+import mod.maxbogomol.wizards_reborn.registry.common.block.WizardsRebornBlockEntities;
+import mod.maxbogomol.wizards_reborn.registry.common.block.WizardsRebornBlockTags;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.nbt.CompoundTag;
@@ -108,7 +108,7 @@ public class AlchemyBoilerBlockEntity extends PipeBaseBlockEntity implements Tic
         for (Direction direction : directions) {
             BlockState facingState = level.getBlockState(worldPosition.relative(direction));
             BlockEntity facingBE = level.getBlockEntity(worldPosition.relative(direction));
-            if (facingState.is(WizardsRebornTags.STEAM_PIPE_CONNECTION_BLOCK) || facingState.is(WizardsRebornTags.FLUID_PIPE_CONNECTION_BLOCK)) {
+            if (facingState.is(WizardsRebornBlockTags.STEAM_PIPE_CONNECTION) || facingState.is(WizardsRebornBlockTags.FLUID_PIPE_CONNECTION)) {
                 if (facingBE instanceof PipeBaseBlockEntity && !((PipeBaseBlockEntity) facingBE).getConnection(direction.getOpposite()).transfer) {
                     connections[direction.get3DDataValue()] = PipeConnection.NONE;
                 } else {

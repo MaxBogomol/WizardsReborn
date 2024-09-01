@@ -4,7 +4,7 @@ import mod.maxbogomol.wizards_reborn.WizardsReborn;
 import mod.maxbogomol.wizards_reborn.api.arcaneenchantment.ArcaneEnchantment;
 import mod.maxbogomol.wizards_reborn.api.arcaneenchantment.ArcaneEnchantmentType;
 import mod.maxbogomol.wizards_reborn.api.arcaneenchantment.IArcaneItem;
-import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornTags;
+import mod.maxbogomol.wizards_reborn.registry.common.block.WizardsRebornBlockTags;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.nbt.CompoundTag;
@@ -63,7 +63,7 @@ public class SonarArcaneEnchantment extends ArcaneEnchantment {
                     for (int z = -distance; z <= distance; z++) {
                         BlockPos pos = center.offset(x, y, z);
                         BlockState blockState = player.level().getBlockState(pos);
-                        if (blockState.is(WizardsRebornTags.ORES_BLOCK)) {
+                        if (blockState.is(WizardsRebornBlockTags.ORES)) {
                             oresPos.add(pos);
                         }
                     }

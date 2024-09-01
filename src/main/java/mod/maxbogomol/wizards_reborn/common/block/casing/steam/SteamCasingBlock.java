@@ -3,7 +3,7 @@ package mod.maxbogomol.wizards_reborn.common.block.casing.steam;
 import mod.maxbogomol.wizards_reborn.common.block.casing.CasingBlock;
 import mod.maxbogomol.wizards_reborn.common.block.pipe.PipeBaseBlock;
 import mod.maxbogomol.wizards_reborn.common.block.steam_pipe.SteamPipeBlock;
-import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornBlockEntities;
+import mod.maxbogomol.wizards_reborn.registry.common.block.WizardsRebornBlockEntities;
 import net.minecraft.core.BlockPos;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;

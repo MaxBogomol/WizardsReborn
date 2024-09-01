@@ -18,6 +18,8 @@ import mod.maxbogomol.wizards_reborn.integration.common.create.CreateIntegration
 import mod.maxbogomol.wizards_reborn.integration.common.farmersdelight.FarmersDelightIntegration;
 import mod.maxbogomol.wizards_reborn.common.item.equipment.ArcaneWandItem;
 import mod.maxbogomol.wizards_reborn.registry.common.*;
+import mod.maxbogomol.wizards_reborn.registry.common.fluid.WizardsRebornFluids;
+import mod.maxbogomol.wizards_reborn.registry.common.item.WizardsRebornItems;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.ListTag;
 import net.minecraft.resources.ResourceLocation;

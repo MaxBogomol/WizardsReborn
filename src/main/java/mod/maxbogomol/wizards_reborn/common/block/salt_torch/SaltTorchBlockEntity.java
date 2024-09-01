@@ -10,8 +10,8 @@ import mod.maxbogomol.fluffy_fur.common.easing.Easing;
 import mod.maxbogomol.fluffy_fur.registry.client.FluffyFurParticles;
 import mod.maxbogomol.fluffy_fur.util.RenderUtils;
 import mod.maxbogomol.wizards_reborn.common.block.ArcaneLumosBlock;
-import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornBlockEntities;
-import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornTags;
+import mod.maxbogomol.wizards_reborn.registry.common.block.WizardsRebornBlockEntities;
+import mod.maxbogomol.wizards_reborn.registry.common.item.WizardsRebornItemTags;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.world.SimpleContainer;
@@ -170,7 +170,7 @@ public class SaltTorchBlockEntity extends ExposedBlockSimpleInventory implements
 
     @Override
     public boolean canPlaceItemThroughFace(int index, @NotNull ItemStack stack, @Nullable Direction direction) {
-        if (stack.is(WizardsRebornTags.ARCANE_LUMOS_ITEM)) {
+        if (stack.is(WizardsRebornItemTags.ARCANE_LUMOS)) {
             return true;
         }
 

@@ -1,7 +1,7 @@
 package mod.maxbogomol.wizards_reborn.common.block.creative.light_storage;
 
 import mod.maxbogomol.wizards_reborn.common.block.casing.light.LightCasingBlockEntity;
-import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornBlockEntities;
+import mod.maxbogomol.wizards_reborn.registry.common.block.WizardsRebornBlockEntities;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;

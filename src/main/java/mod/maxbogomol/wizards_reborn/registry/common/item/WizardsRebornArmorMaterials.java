@@ -1,7 +1,6 @@
-package mod.maxbogomol.wizards_reborn.common.item.equipment;
+package mod.maxbogomol.wizards_reborn.registry.common.item;
 
 import mod.maxbogomol.wizards_reborn.WizardsReborn;
-import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornItems;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.item.ArmorItem;
@@ -10,7 +9,7 @@ import net.minecraft.world.item.crafting.Ingredient;
 
 import java.util.function.Supplier;
 
-public enum CustomArmorMaterial implements ArmorMaterial {
+public enum WizardsRebornArmorMaterials implements ArmorMaterial {
     ARCANE_GOLD("arcane_gold", 20, new int[]{ 2, 6, 5, 2 }, 30, SoundEvents.ARMOR_EQUIP_GOLD, 1f, 0f, () -> Ingredient.of(WizardsRebornItems.ARCANE_GOLD_INGOT.get())),
     INVENTOR_WIZARD("inventor_wizard", 25, new int[]{ 3, 7, 5, 3 }, 40, SoundEvents.ARMOR_EQUIP_LEATHER, 1f, 0f, () -> Ingredient.of(WizardsRebornItems.ARCANE_GOLD_INGOT.get())),
     ARCANE_FORTRESS("arcane_fortress", 30, new int[]{ 3, 8, 6, 3 }, 30, SoundEvents.ARMOR_EQUIP_GOLD, 2f, 0.15f, () -> Ingredient.of(WizardsRebornItems.ARCANE_GOLD_INGOT.get()));
@@ -26,8 +25,8 @@ public enum CustomArmorMaterial implements ArmorMaterial {
 
     private static final int[] BASE_DURABILITY = { 11, 16, 15, 13 };
 
-    CustomArmorMaterial(String name, int durabilityMultiplier, int[] protectionAmounts, int enchantmentValue, SoundEvent equipSound,
-                      float toughness, float knockbackResistance, Supplier<Ingredient> repairIngredient) {
+    WizardsRebornArmorMaterials(String name, int durabilityMultiplier, int[] protectionAmounts, int enchantmentValue, SoundEvent equipSound,
+                                float toughness, float knockbackResistance, Supplier<Ingredient> repairIngredient) {
         this.name = name;
         this.durabilityMultiplier = durabilityMultiplier;
         this.protectionAmounts = protectionAmounts;

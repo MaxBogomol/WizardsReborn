@@ -1,8 +1,8 @@
 package mod.maxbogomol.wizards_reborn.common.block.cork_bamboo;
 
-import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornBlocks;
-import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornItems;
-import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornTags;
+import mod.maxbogomol.wizards_reborn.registry.common.block.WizardsRebornBlockTags;
+import mod.maxbogomol.wizards_reborn.registry.common.block.WizardsRebornBlocks;
+import mod.maxbogomol.wizards_reborn.registry.common.item.WizardsRebornItems;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.util.RandomSource;
@@ -33,7 +33,7 @@ public class CorkBambooStalkBlock extends BambooStalkBlock {
             return null;
         } else {
             BlockState blockstate = pContext.getLevel().getBlockState(pContext.getClickedPos().below());
-            if (blockstate.is(WizardsRebornTags.CORK_BAMBOO_PLANTABLE_ON_BLOCK)) {
+            if (blockstate.is(WizardsRebornBlockTags.CORK_BAMBOO_PLANTABLE_ON)) {
                 if (blockstate.is(WizardsRebornBlocks.CORK_BAMBOO_SAPLING.get())) {
                     return this.defaultBlockState().setValue(AGE, Integer.valueOf(0));
                 } else if (blockstate.is(WizardsRebornBlocks.CORK_BAMBOO.get())) {
@@ -52,7 +52,7 @@ public class CorkBambooStalkBlock extends BambooStalkBlock {
     @Override
     @Nullable
     public boolean canSurvive(BlockState pState, LevelReader pLevel, BlockPos pPos) {
-        return pLevel.getBlockState(pPos.below()).is(WizardsRebornTags.CORK_BAMBOO_PLANTABLE_ON_BLOCK);
+        return pLevel.getBlockState(pPos.below()).is(WizardsRebornBlockTags.CORK_BAMBOO_PLANTABLE_ON);
     }
 
     @Override

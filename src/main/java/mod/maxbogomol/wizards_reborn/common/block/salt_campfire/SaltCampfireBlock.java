@@ -5,7 +5,7 @@ import mod.maxbogomol.fluffy_fur.common.block.entity.TickableBlockEntity;
 import mod.maxbogomol.fluffy_fur.common.network.BlockEntityUpdate;
 import mod.maxbogomol.wizards_reborn.common.item.equipment.WissenWandItem;
 import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornSounds;
-import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornTags;
+import mod.maxbogomol.wizards_reborn.registry.common.item.WizardsRebornItemTags;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.sounds.SoundEvents;
@@ -119,7 +119,7 @@ public class SaltCampfireBlock extends Block implements EntityBlock, SimpleWater
         if (!player.isShiftKeyDown()) {
             if (invSize < 2) {
                 int slot = invSize;
-                if (stack.is(WizardsRebornTags.ARCANE_LUMOS_ITEM)) {
+                if (stack.is(WizardsRebornItemTags.ARCANE_LUMOS)) {
                     if ((!stack.isEmpty()) && (tile.getItemHandler().getItem(slot).isEmpty())) {
                         if (stack.getCount() > 1) {
                             player.getItemInHand(hand).setCount(stack.getCount() - 1);

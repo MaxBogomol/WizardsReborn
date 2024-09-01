@@ -1,4 +1,4 @@
-package mod.maxbogomol.wizards_reborn.registry.common;
+package mod.maxbogomol.wizards_reborn.registry.common.damage;
 
 import mod.maxbogomol.wizards_reborn.WizardsReborn;
 import net.minecraft.core.registries.Registries;

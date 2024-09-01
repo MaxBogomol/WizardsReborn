@@ -5,6 +5,7 @@ import mod.maxbogomol.wizards_reborn.api.alchemy.AlchemyPotion;
 import mod.maxbogomol.wizards_reborn.api.alchemy.AlchemyPotions;
 import mod.maxbogomol.wizards_reborn.common.alchemypotion.ColorAlchemyPotion;
 import mod.maxbogomol.wizards_reborn.common.alchemypotion.FluidAlchemyPotion;
+import mod.maxbogomol.wizards_reborn.registry.common.fluid.WizardsRebornFluids;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.level.material.Fluids;

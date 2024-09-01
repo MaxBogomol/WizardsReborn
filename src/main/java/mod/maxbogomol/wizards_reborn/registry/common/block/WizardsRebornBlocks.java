@@ -1,4 +1,4 @@
-package mod.maxbogomol.wizards_reborn.registry.common;
+package mod.maxbogomol.wizards_reborn.registry.common.block;
 
 import mod.maxbogomol.fluffy_fur.common.block.WaterloggableLeverBlock;
 import mod.maxbogomol.fluffy_fur.common.block.sign.CustomCeilingHangingSignBlock;
@@ -69,6 +69,8 @@ import mod.maxbogomol.wizards_reborn.common.block.wissen_crystallizer.WissenCrys
 import mod.maxbogomol.wizards_reborn.common.block.wissen_translator.WissenTranslatorBlock;
 import mod.maxbogomol.wizards_reborn.common.world.tree.ArcaneWoodTree;
 import mod.maxbogomol.wizards_reborn.common.world.tree.InnocentWoodTree;
+import mod.maxbogomol.wizards_reborn.registry.common.*;
+import mod.maxbogomol.wizards_reborn.registry.common.fluid.WizardsRebornFluids;
 import net.minecraft.util.valueproviders.UniformInt;
 import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.state.BlockBehaviour;

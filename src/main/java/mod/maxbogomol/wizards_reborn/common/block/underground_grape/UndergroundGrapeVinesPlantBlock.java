@@ -1,7 +1,7 @@
 package mod.maxbogomol.wizards_reborn.common.block.underground_grape;
 
-import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornBlocks;
-import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornItems;
+import mod.maxbogomol.wizards_reborn.registry.common.block.WizardsRebornBlocks;
+import mod.maxbogomol.wizards_reborn.registry.common.item.WizardsRebornItems;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;

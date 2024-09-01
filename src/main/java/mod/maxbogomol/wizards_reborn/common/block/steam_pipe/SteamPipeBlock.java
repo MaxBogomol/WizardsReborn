@@ -8,8 +8,8 @@ import mod.maxbogomol.fluffy_fur.common.network.BlockEntityUpdate;
 import mod.maxbogomol.fluffy_fur.registry.client.FluffyFurParticles;
 import mod.maxbogomol.wizards_reborn.api.alchemy.ISteamBlockEntity;
 import mod.maxbogomol.wizards_reborn.common.block.pipe.TinyPipeBaseBlock;
-import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornBlockEntities;
-import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornTags;
+import mod.maxbogomol.wizards_reborn.registry.common.block.WizardsRebornBlockEntities;
+import mod.maxbogomol.wizards_reborn.registry.common.block.WizardsRebornBlockTags;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.tags.TagKey;
@@ -33,12 +33,12 @@ public class SteamPipeBlock extends TinyPipeBaseBlock {
 
     @Override
     public TagKey<Block> getConnectionTag() {
-        return WizardsRebornTags.STEAM_PIPE_CONNECTION_BLOCK;
+        return WizardsRebornBlockTags.STEAM_PIPE_CONNECTION;
     }
 
     @Override
     public TagKey<Block> getToggleConnectionTag() {
-        return WizardsRebornTags.STEAM_PIPE_CONNECTION_TOGGLE_BLOCK;
+        return WizardsRebornBlockTags.STEAM_PIPE_CONNECTION_TOGGLE;
     }
 
     @Override

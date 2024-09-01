@@ -5,9 +5,9 @@ import mezz.jei.api.registration.IRecipeRegistration;
 import mod.maxbogomol.wizards_reborn.WizardsReborn;
 import mod.maxbogomol.wizards_reborn.api.arcaneenchantment.ArcaneEnchantmentType;
 import mod.maxbogomol.wizards_reborn.api.skin.Skin;
-import mod.maxbogomol.wizards_reborn.common.item.equipment.CustomItemTier;
+import mod.maxbogomol.wizards_reborn.registry.common.item.WizardsRebornItemTiers;
 import mod.maxbogomol.wizards_reborn.common.skin.ItemClassSkinEntry;
-import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornItems;
+import mod.maxbogomol.wizards_reborn.registry.common.item.WizardsRebornItems;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.eventbus.api.IEventBus;
@@ -28,15 +28,15 @@ public class FarmersDelightIntegration {
 
     public static class LoadedOnly {
         public static Item makeArcaneGoldKnife() {
-            return new ArcaneKnifeItem(CustomItemTier.ARCANE_GOLD, 0.5F, -2.0F, new Item.Properties()).addArcaneEnchantmentType(ArcaneEnchantmentType.ARCANE_COLD);
+            return new ArcaneKnifeItem(WizardsRebornItemTiers.ARCANE_GOLD, 0.5F, -2.0F, new Item.Properties()).addArcaneEnchantmentType(ArcaneEnchantmentType.ARCANE_COLD);
         }
 
         public static Item makeArcaneWoodKnife() {
-            return new ArcaneWoodKnifeItem(CustomItemTier.ARCANE_WOOD, 0.5F, -2.0F, new Item.Properties(), WizardsRebornItems.ARCANE_WOOD_BRANCH.get()).addArcaneEnchantmentType(ArcaneEnchantmentType.ARCANE_WOOD);
+            return new ArcaneWoodKnifeItem(WizardsRebornItemTiers.ARCANE_WOOD, 0.5F, -2.0F, new Item.Properties(), WizardsRebornItems.ARCANE_WOOD_BRANCH.get()).addArcaneEnchantmentType(ArcaneEnchantmentType.ARCANE_WOOD);
         }
 
         public static Item makeInnocentWoodKnife() {
-            return new InnocentWoodKnifeItem(CustomItemTier.INNOCENT_WOOD, 0.5F, -2.0F, new Item.Properties(), WizardsRebornItems.INNOCENT_WOOD_BRANCH.get()).addArcaneEnchantmentType(ArcaneEnchantmentType.INNOCENT_WOOD);
+            return new InnocentWoodKnifeItem(WizardsRebornItemTiers.INNOCENT_WOOD, 0.5F, -2.0F, new Item.Properties(), WizardsRebornItems.INNOCENT_WOOD_BRANCH.get()).addArcaneEnchantmentType(ArcaneEnchantmentType.INNOCENT_WOOD);
         }
 
         public static void addKnifeSkin(Skin skin, String item) {

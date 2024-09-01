@@ -1,6 +1,7 @@
-package mod.maxbogomol.wizards_reborn.registry.common;
+package mod.maxbogomol.wizards_reborn.registry.common.block;
 
 import mod.maxbogomol.wizards_reborn.WizardsReborn;
+import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornSounds;
 import net.minecraft.client.renderer.Sheets;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.block.state.properties.WoodType;

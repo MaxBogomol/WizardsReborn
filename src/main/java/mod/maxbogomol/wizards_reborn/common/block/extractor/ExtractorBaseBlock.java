@@ -2,7 +2,7 @@ package mod.maxbogomol.wizards_reborn.common.block.extractor;
 
 import mod.maxbogomol.wizards_reborn.common.block.pipe.PipeBaseBlock;
 import mod.maxbogomol.wizards_reborn.common.block.pipe.PipeBaseBlockEntity;
-import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornTags;
+import mod.maxbogomol.wizards_reborn.registry.common.block.WizardsRebornBlockTags;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.server.level.ServerLevel;
@@ -55,7 +55,7 @@ public abstract class ExtractorBaseBlock extends PipeBaseBlock {
 
     @Override
     public boolean connected(Direction direction, BlockState state) {
-        if (!state.is(WizardsRebornTags.EXTRACTOR_LEVER_CONNECTION_BLOCK)) {
+        if (!state.is(WizardsRebornBlockTags.EXTRACTOR_LEVER_CONNECTION)) {
             return false;
         }
 

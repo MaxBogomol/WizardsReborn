@@ -3,7 +3,7 @@ package mod.maxbogomol.wizards_reborn.common.block.casing.fluid;
 import mod.maxbogomol.wizards_reborn.api.alchemy.IFluidPipePriority;
 import mod.maxbogomol.wizards_reborn.api.alchemy.PipePriorityMap;
 import mod.maxbogomol.wizards_reborn.common.block.fluid_pipe.FluidPipeBlockEntity;
-import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornBlockEntities;
+import mod.maxbogomol.wizards_reborn.registry.common.block.WizardsRebornBlockEntities;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.sounds.SoundEvents;

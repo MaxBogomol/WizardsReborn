@@ -4,6 +4,8 @@ import mod.maxbogomol.wizards_reborn.WizardsReborn;
 import mod.maxbogomol.wizards_reborn.api.knowledge.Knowledge;
 import mod.maxbogomol.wizards_reborn.api.knowledge.Knowledges;
 import mod.maxbogomol.wizards_reborn.common.knowledge.*;
+import mod.maxbogomol.wizards_reborn.registry.common.item.WizardsRebornItemTags;
+import mod.maxbogomol.wizards_reborn.registry.common.item.WizardsRebornItems;
 import net.minecraft.world.item.ItemStack;
 
 import java.util.ArrayList;
@@ -21,7 +23,7 @@ public class WizardsRebornKnowledges {
 
     //ARCANE NATURE
     public static ItemKnowledge ARCANUM_DUST = new ItemKnowledge(WizardsReborn.MOD_ID+":arcanum_dust", true, 10, WizardsRebornItems.ARCANUM_DUST.get());
-    public static ItemTagKnowledge ARCANE_WOOD = new ItemTagKnowledge(WizardsReborn.MOD_ID+":arcane_wood", true, 10, WizardsRebornTags.ARCANE_WOOD_LOGS_ITEM, new ItemStack(WizardsRebornItems.ARCANE_WOOD_LOG.get()));
+    public static ItemTagKnowledge ARCANE_WOOD = new ItemTagKnowledge(WizardsReborn.MOD_ID+":arcane_wood", true, 10, WizardsRebornItemTags.ARCANE_WOOD_LOGS, new ItemStack(WizardsRebornItems.ARCANE_WOOD_LOG.get()));
     public static ItemKnowledge ARCANE_GOLD = new ItemKnowledge(WizardsReborn.MOD_ID+":arcane_gold", true, 10, WizardsRebornItems.ARCANE_GOLD_INGOT.get());
     public static ItemKnowledge WISSEN_CRYSTALLIZER = new ItemKnowledge(WizardsReborn.MOD_ID+":wissen_crystallizer", true, 10, WizardsRebornItems.WISSEN_CRYSTALLIZER.get());
     public static ItemKnowledge ARCANE_WORKBENCH = new ItemKnowledge(WizardsReborn.MOD_ID+":arcane_workbench", true, 10, WizardsRebornItems.ARCANE_WORKBENCH.get());
@@ -30,14 +32,14 @@ public class WizardsRebornKnowledges {
     public static ItemKnowledge ARCANE_ITERATOR = new ItemKnowledge(WizardsReborn.MOD_ID+":arcane_iterator", true, 10, WizardsRebornItems.ARCANE_ITERATOR.get());
     public static ItemKnowledge ARCANUM_LENS = new ItemKnowledge(WizardsReborn.MOD_ID+":arcanum_lens", true, 10, WizardsRebornItems.ARCANUM_LENS.get());
     public static ItemKnowledge JEWELER_TABLE = new ItemKnowledge(WizardsReborn.MOD_ID+":jeweler_table", true, 10, WizardsRebornItems.JEWELER_TABLE.get());
-    public static ItemTagKnowledge FACETED_CRYSTALS = new ItemTagKnowledge(WizardsReborn.MOD_ID+":faceted_crystals", true, 20, WizardsRebornTags.FACETED_CRYSTALS_ITEM, new ItemStack(WizardsRebornItems.FACETED_EARTH_CRYSTAL.get()));
+    public static ItemTagKnowledge FACETED_CRYSTALS = new ItemTagKnowledge(WizardsReborn.MOD_ID+":faceted_crystals", true, 20, WizardsRebornItemTags.FACETED_CRYSTALS, new ItemStack(WizardsRebornItems.FACETED_EARTH_CRYSTAL.get()));
 
-    public static ItemTagKnowledge ARCANE_WOOD_TOOLS = new ItemTagKnowledge(WizardsReborn.MOD_ID+":arcane_wood_tools", false, 5, WizardsRebornTags.ARCANE_WOOD_TOOLS_ITEM, new ItemStack(WizardsRebornItems.ARCANE_WOOD_PICKAXE.get()));
-    public static ItemTagKnowledge ARCANE_GOLD_TOOLS = new ItemTagKnowledge(WizardsReborn.MOD_ID+":arcane_gold_tools", false, 5, WizardsRebornTags.ARCANE_GOLD_TOOLS_ITEM, new ItemStack(WizardsRebornItems.ARCANE_GOLD_PICKAXE.get()));
-    public static ItemTagKnowledge SCYTHES = new ItemTagKnowledge(WizardsReborn.MOD_ID+":scythes", false, 5, WizardsRebornTags.SCYTHES_ITEM, new ItemStack(WizardsRebornItems.ARCANE_GOLD_SCYTHE.get()));
+    public static ItemTagKnowledge ARCANE_WOOD_TOOLS = new ItemTagKnowledge(WizardsReborn.MOD_ID+":arcane_wood_tools", false, 5, WizardsRebornItemTags.ARCANE_WOOD_TOOLS, new ItemStack(WizardsRebornItems.ARCANE_WOOD_PICKAXE.get()));
+    public static ItemTagKnowledge ARCANE_GOLD_TOOLS = new ItemTagKnowledge(WizardsReborn.MOD_ID+":arcane_gold_tools", false, 5, WizardsRebornItemTags.ARCANE_GOLD_TOOLS, new ItemStack(WizardsRebornItems.ARCANE_GOLD_PICKAXE.get()));
+    public static ItemTagKnowledge SCYTHES = new ItemTagKnowledge(WizardsReborn.MOD_ID+":scythes", false, 5, WizardsRebornItemTags.SCYTHES, new ItemStack(WizardsRebornItems.ARCANE_GOLD_SCYTHE.get()));
     public static ItemKnowledge MUSIC_DISC_SHIMMER = new MusicDiscKnowledge(WizardsReborn.MOD_ID+":music_disc_shimmer", false, 8, WizardsRebornItems.MUSIC_DISC_SHIMMER.get());
-    public static ItemTagKnowledge ARCANE_LUMOS = new ItemTagKnowledge(WizardsReborn.MOD_ID+":arcane_lumos", false, 5, WizardsRebornTags.ARCANE_LUMOS_ITEM, new ItemStack(WizardsRebornItems.WHITE_ARCANE_LUMOS.get()));
-    public static ItemTagKnowledge CRYSTALS_SEEDS = new ItemTagKnowledge(WizardsReborn.MOD_ID+":crystal_seeds", false, 3, WizardsRebornTags.CRYSTALS_SEEDS_ITEM, new ItemStack(WizardsRebornItems.EARTH_CRYSTAL_SEED.get()));
+    public static ItemTagKnowledge ARCANE_LUMOS = new ItemTagKnowledge(WizardsReborn.MOD_ID+":arcane_lumos", false, 5, WizardsRebornItemTags.ARCANE_LUMOS, new ItemStack(WizardsRebornItems.WHITE_ARCANE_LUMOS.get()));
+    public static ItemTagKnowledge CRYSTALS_SEEDS = new ItemTagKnowledge(WizardsReborn.MOD_ID+":crystal_seeds", false, 3, WizardsRebornItemTags.CRYSTALS_SEEDS, new ItemStack(WizardsRebornItems.EARTH_CRYSTAL_SEED.get()));
     public static ItemKnowledge EARTH_CRYSTAL = new ItemKnowledge(WizardsReborn.MOD_ID+":earth_crystal", false, 5, WizardsRebornItems.EARTH_CRYSTAL.get());
     public static ItemKnowledge WATER_CRYSTAL = new ItemKnowledge(WizardsReborn.MOD_ID+":water_crystal", false, 5, WizardsRebornItems.WATER_CRYSTAL.get());
     public static ItemKnowledge AIR_CRYSTAL = new ItemKnowledge(WizardsReborn.MOD_ID+":air_crystal", false, 5, WizardsRebornItems.AIR_CRYSTAL.get());
@@ -65,17 +67,17 @@ public class WizardsRebornKnowledges {
     public static ItemKnowledge STEAM_SENSOR = new ItemKnowledge(WizardsReborn.MOD_ID+":steam_sensor", false, 5, WizardsRebornItems.STEAM_SENSOR.get());
     public static ItemKnowledge WISSEN_ACTIVATOR = new ItemKnowledge(WizardsReborn.MOD_ID+":wissen_activator", false, 5, WizardsRebornItems.WISSEN_ACTIVATOR.get());
     public static ItemKnowledge ITEM_SORTER = new ItemKnowledge(WizardsReborn.MOD_ID+":item_sorter", false, 5, WizardsRebornItems.ITEM_SORTER.get());
-    public static ItemTagKnowledge WISSEN_CASING = new ItemTagKnowledge(WizardsReborn.MOD_ID+":wissen_casing", false, 6, WizardsRebornTags.WISSEN_CASINGS_ITEM, new ItemStack(WizardsRebornItems.ARCANE_WOOD_WISSEN_CASING.get()));
-    public static ItemTagKnowledge LIGHT_CASING = new ItemTagKnowledge(WizardsReborn.MOD_ID+":light_casing", false, 6, WizardsRebornTags.LIGHT_CASINGS_ITEM, new ItemStack(WizardsRebornItems.ARCANE_WOOD_LIGHT_CASING.get()));
-    public static ItemTagKnowledge FLUID_CASING = new ItemTagKnowledge(WizardsReborn.MOD_ID+":fluid_casing", false, 6, WizardsRebornTags.FLUID_CASINGS_ITEM, new ItemStack(WizardsRebornItems.ARCANE_WOOD_FLUID_CASING.get()));
-    public static ItemTagKnowledge STEAM_CASING = new ItemTagKnowledge(WizardsReborn.MOD_ID+":steam_casing", false, 6, WizardsRebornTags.STEAM_CASINGS_ITEM, new ItemStack(WizardsRebornItems.ARCANE_WOOD_STEAM_CASING.get()));
+    public static ItemTagKnowledge WISSEN_CASING = new ItemTagKnowledge(WizardsReborn.MOD_ID+":wissen_casing", false, 6, WizardsRebornItemTags.WISSEN_CASINGS, new ItemStack(WizardsRebornItems.ARCANE_WOOD_WISSEN_CASING.get()));
+    public static ItemTagKnowledge LIGHT_CASING = new ItemTagKnowledge(WizardsReborn.MOD_ID+":light_casing", false, 6, WizardsRebornItemTags.LIGHT_CASINGS, new ItemStack(WizardsRebornItems.ARCANE_WOOD_LIGHT_CASING.get()));
+    public static ItemTagKnowledge FLUID_CASING = new ItemTagKnowledge(WizardsReborn.MOD_ID+":fluid_casing", false, 6, WizardsRebornItemTags.FLUID_CASINGS, new ItemStack(WizardsRebornItems.ARCANE_WOOD_FLUID_CASING.get()));
+    public static ItemTagKnowledge STEAM_CASING = new ItemTagKnowledge(WizardsReborn.MOD_ID+":steam_casing", false, 6, WizardsRebornItemTags.STEAM_CASINGS, new ItemStack(WizardsRebornItems.ARCANE_WOOD_STEAM_CASING.get()));
 
     //CRYSTAL RITUALS
     public static ItemKnowledge LIGHT_EMITTER = new ItemKnowledge(WizardsReborn.MOD_ID+":light_emitter", true, 10, WizardsRebornItems.LIGHT_EMITTER.get());
     public static ItemKnowledge RUNIC_PEDESTAL = new ItemKnowledge(WizardsReborn.MOD_ID+":runic_pedestal", true, 10, WizardsRebornItems.RUNIC_PEDESTAL.get());
     public static CrystalRitualKnowledge CRYSTAL_INFUSION = new CrystalRitualKnowledge(WizardsReborn.MOD_ID+":crystal_infusion", true, 15, WizardsRebornCrystalRituals.CRYSTAL_INFUSION);
-    public static ItemTagKnowledge INNOCENT_WOOD = new ItemTagKnowledge(WizardsReborn.MOD_ID+":innocent_wood", true, 10, WizardsRebornTags.INNOCENT_WOOD_LOGS_ITEM, new ItemStack(WizardsRebornItems.INNOCENT_WOOD_LOG.get()));
-    public static ItemTagKnowledge INNOCENT_WOOD_TOOLS = new ItemTagKnowledge(WizardsReborn.MOD_ID+":innocent_wood_tools", false, 5, WizardsRebornTags.INNOCENT_WOOD_TOOLS_ITEM, new ItemStack(WizardsRebornItems.INNOCENT_WOOD_PICKAXE.get()));
+    public static ItemTagKnowledge INNOCENT_WOOD = new ItemTagKnowledge(WizardsReborn.MOD_ID+":innocent_wood", true, 10, WizardsRebornItemTags.INNOCENT_WOOD_LOGS, new ItemStack(WizardsRebornItems.INNOCENT_WOOD_LOG.get()));
+    public static ItemTagKnowledge INNOCENT_WOOD_TOOLS = new ItemTagKnowledge(WizardsReborn.MOD_ID+":innocent_wood_tools", false, 5, WizardsRebornItemTags.INNOCENT_WOOD_TOOLS, new ItemStack(WizardsRebornItems.INNOCENT_WOOD_PICKAXE.get()));
 
     //ALCHEMY
     public static ItemKnowledge PETALS = new ItemKnowledge(WizardsReborn.MOD_ID+":petals", false, 3, WizardsRebornItems.PETALS.get());

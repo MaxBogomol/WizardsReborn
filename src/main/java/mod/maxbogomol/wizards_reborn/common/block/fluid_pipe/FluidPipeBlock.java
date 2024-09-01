@@ -2,8 +2,8 @@ package mod.maxbogomol.wizards_reborn.common.block.fluid_pipe;
 
 import mod.maxbogomol.fluffy_fur.common.block.entity.TickableBlockEntity;
 import mod.maxbogomol.wizards_reborn.common.block.pipe.PipeBaseBlock;
-import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornBlockEntities;
-import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornTags;
+import mod.maxbogomol.wizards_reborn.registry.common.block.WizardsRebornBlockEntities;
+import mod.maxbogomol.wizards_reborn.registry.common.block.WizardsRebornBlockTags;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.tags.TagKey;
@@ -25,12 +25,12 @@ public class FluidPipeBlock extends PipeBaseBlock {
 
     @Override
     public TagKey<Block> getConnectionTag() {
-        return WizardsRebornTags.FLUID_PIPE_CONNECTION_BLOCK;
+        return WizardsRebornBlockTags.FLUID_PIPE_CONNECTION;
     }
 
     @Override
     public TagKey<Block> getToggleConnectionTag() {
-        return WizardsRebornTags.FLUID_PIPE_CONNECTION_TOGGLE_BLOCK;
+        return WizardsRebornBlockTags.FLUID_PIPE_CONNECTION_TOGGLE;
     }
 
     @Override

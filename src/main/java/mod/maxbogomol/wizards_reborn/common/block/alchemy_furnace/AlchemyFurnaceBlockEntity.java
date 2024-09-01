@@ -7,9 +7,9 @@ import mod.maxbogomol.wizards_reborn.api.alchemy.IFluidBlockEntity;
 import mod.maxbogomol.wizards_reborn.api.alchemy.IHeatBlockEntity;
 import mod.maxbogomol.wizards_reborn.api.alchemy.ISteamBlockEntity;
 import mod.maxbogomol.wizards_reborn.api.wissen.IItemResultBlockEntity;
-import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornBlockEntities;
 import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornSounds;
-import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornTags;
+import mod.maxbogomol.wizards_reborn.registry.common.block.WizardsRebornBlockEntities;
+import mod.maxbogomol.wizards_reborn.registry.common.fluid.WizardsRebornFluidTags;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.RegistryAccess;
@@ -140,7 +140,7 @@ public class AlchemyFurnaceBlockEntity extends BlockEntityBase implements Tickab
                 }
             }
 
-            if (getTank().getFluid().getFluid().is(WizardsRebornTags.STEAM_SOURCE_FLUID)) {
+            if (getTank().getFluid().getFluid().is(WizardsRebornFluidTags.STEAM_SOURCE)) {
                 for (int i = 0; i < 5; i++) {
                     if (steam < getMaxSteam() && heat > 0 && getFluidAmount() > 0) {
                         getTank().drain(1, IFluidHandler.FluidAction.EXECUTE);
@@ -161,7 +161,7 @@ public class AlchemyFurnaceBlockEntity extends BlockEntityBase implements Tickab
                 }
             }
 
-            if (getTank().getFluid().getFluid().is(WizardsRebornTags.HEAT_SOURCE_FLUID)) {
+            if (getTank().getFluid().getFluid().is(WizardsRebornFluidTags.HEAT_SOURCE)) {
                 if (steam < getMaxSteam() && heat - 20 < getMaxHeat() && getFluidAmount() > 0) {
                     getTank().drain(1, IFluidHandler.FluidAction.EXECUTE);
                     heat = heat + 20;

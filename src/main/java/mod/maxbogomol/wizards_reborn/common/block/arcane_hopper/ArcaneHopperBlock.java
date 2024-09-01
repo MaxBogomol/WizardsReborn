@@ -1,7 +1,7 @@
 package mod.maxbogomol.wizards_reborn.common.block.arcane_hopper;
 
 import mod.maxbogomol.wizards_reborn.client.gui.container.ArcaneHopperContainer;
-import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornBlockEntities;
+import mod.maxbogomol.wizards_reborn.registry.common.block.WizardsRebornBlockEntities;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.network.chat.Component;

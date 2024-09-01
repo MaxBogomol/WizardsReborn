@@ -5,8 +5,9 @@ import mod.maxbogomol.wizards_reborn.common.item.CargoCarpetItem;
 import mod.maxbogomol.wizards_reborn.common.network.PacketHandler;
 import mod.maxbogomol.wizards_reborn.common.network.SniffaloScreenPacket;
 import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornEntities;
-import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornItems;
-import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornTags;
+import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornLootTables;
+import mod.maxbogomol.wizards_reborn.registry.common.item.WizardsRebornItemTags;
+import mod.maxbogomol.wizards_reborn.registry.common.item.WizardsRebornItems;
 import net.minecraft.advancements.CriteriaTriggers;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.particles.ParticleOptions;
@@ -104,7 +105,7 @@ public class SniffaloEntity extends Sniffer implements ContainerListener, HasCus
     public void dropSeed() {
         if (!this.level().isClientSide() && this.entityData.get(DATA_DROP_SEED_AT_TICK) == this.tickCount) {
             ServerLevel serverlevel = (ServerLevel)this.level();
-            LootTable loottable = serverlevel.getServer().getLootData().getLootTable(WizardsRebornTags.SNIFFALO_DIGGING_LOOT_TABLE);
+            LootTable loottable = serverlevel.getServer().getLootData().getLootTable(WizardsRebornLootTables.SNIFFALO_DIGGING);
             LootParams lootparams = (new LootParams.Builder(serverlevel)).withParameter(LootContextParams.ORIGIN, this.getHeadPosition()).withParameter(LootContextParams.THIS_ENTITY, this).create(LootContextParamSets.GIFT);
             List<ItemStack> list = loottable.getRandomItems(lootparams);
             BlockPos blockpos = this.getHeadBlock();
@@ -299,7 +300,7 @@ public class SniffaloEntity extends Sniffer implements ContainerListener, HasCus
 
     @Override
     public boolean isFood(ItemStack pStack) {
-        return pStack.is(WizardsRebornTags.SNIFFALO_FOOD_ITEM);
+        return pStack.is(WizardsRebornItemTags.SNIFFALO_FOOD);
     }
 
     @Override
