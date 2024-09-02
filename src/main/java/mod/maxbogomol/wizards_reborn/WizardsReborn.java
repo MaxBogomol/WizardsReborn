@@ -87,8 +87,6 @@ public class WizardsReborn {
         WizardsRebornArcaneEnchantments.register();
         WizardsRebornCrystalRituals.register();
 
-        IEventBus forgeBus = MinecraftForge.EVENT_BUS;
-
         ModLoadingContext.get().registerConfig(ModConfig.Type.CLIENT, ClientConfig.SPEC);
         ModLoadingContext.get().registerConfig(ModConfig.Type.COMMON, Config.SPEC);
         ModLoadingContext.get().registerConfig(ModConfig.Type.SERVER, ServerConfig.SPEC);

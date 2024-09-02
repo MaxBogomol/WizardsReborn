@@ -6,19 +6,28 @@ import mod.maxbogomol.wizards_reborn.client.model.armor.*;
 import mod.maxbogomol.wizards_reborn.client.model.block.AlchemyBottleModel;
 import mod.maxbogomol.wizards_reborn.client.model.block.AlchemyFlaskModel;
 import mod.maxbogomol.wizards_reborn.client.model.block.AlchemyVialModel;
+import mod.maxbogomol.wizards_reborn.client.model.block.PipeModel;
 import mod.maxbogomol.wizards_reborn.client.model.curio.*;
+import mod.maxbogomol.wizards_reborn.client.model.item.WandCrystalsModels;
 import mod.maxbogomol.wizards_reborn.client.model.sniffalo.SniffaloArcaneArmorModel;
 import mod.maxbogomol.wizards_reborn.client.model.sniffalo.SniffaloCarpetArmorModel;
 import mod.maxbogomol.wizards_reborn.client.model.sniffalo.SniffaloSaddleArmorModel;
 import mod.maxbogomol.wizards_reborn.client.render.fluid.FluidCuboid;
 import net.minecraft.client.model.geom.ModelLayerLocation;
+import net.minecraft.client.resources.model.BakedModel;
+import net.minecraft.client.resources.model.ModelManager;
 import net.minecraft.client.resources.model.ModelResourceLocation;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.client.event.EntityRenderersEvent;
 import net.minecraftforge.client.event.ModelEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import org.joml.Vector3f;
+
+import java.util.ArrayList;
+import java.util.Map;
 
 public class WizardsRebornModels {
     public static ModelLayerLocation BELT_LAYER = addLayer("belt");
@@ -83,10 +92,109 @@ public class WizardsRebornModels {
     public static ModelResourceLocation WISSEN_ACTIVATOR_PIECE = addCustomModel("wissen_activator_piece");
     public static ModelResourceLocation ITEM_SORTER_PIECE = addCustomModel("item_sorter_piece");
 
+    public static PipeModel fluidPipe;
+    public static PipeModel steamPipe;
+    public static ArrayList<PipeModel> fluidExtractor = new ArrayList<>();
+    public static ArrayList<PipeModel> steamExtractor = new ArrayList<>();
+    public static ArrayList<PipeModel> orbitalFluidRetainer = new ArrayList<>();
+    public static ArrayList<PipeModel> alchemyMachine = new ArrayList<>();
+    public static ArrayList<PipeModel> alchemyBoiler = new ArrayList<>();
+    public static ArrayList<PipeModel> arcaneWoodFluidCasing = new ArrayList<>();
+    public static ArrayList<PipeModel> innocentWoodFluidCasing = new ArrayList<>();
+    public static ArrayList<PipeModel> corkBambooFluidCasing = new ArrayList<>();
+    public static ArrayList<PipeModel> wisestoneFluidCasing = new ArrayList<>();
+    public static ArrayList<PipeModel> arcaneWoodSteamCasing = new ArrayList<>();
+    public static ArrayList<PipeModel> innocentWoodSteamCasing = new ArrayList<>();
+    public static ArrayList<PipeModel> corkBambooSteamCasing = new ArrayList<>();
+    public static ArrayList<PipeModel> wisestoneSteamCasing = new ArrayList<>();
+    public static ArrayList<PipeModel> creativeFluidStorage = new ArrayList<>();
+    public static ArrayList<PipeModel> creativeSteamStorage = new ArrayList<>();
+
+    public static PipeModel arcaneWoodCrossBaulk;
+    public static PipeModel strippedArcaneWoodCrossBaulk;
+    public static PipeModel arcaneWoodPlanksCrossBaulk;
+    public static PipeModel innocentWoodCrossBaulk;
+    public static PipeModel strippedInnocentWoodCrossBaulk;
+    public static PipeModel innocentWoodPlanksCrossBaulk;
+    public static PipeModel corkBambooCrossBaulk;
+    public static PipeModel corkBambooPlanksCrossBaulk;
+    public static PipeModel corkBambooChiseledPlanksCrossBaulk;
+
+    public static final ModelResourceLocation FLUID_CENTER = new ModelResourceLocation(new ResourceLocation(WizardsReborn.MOD_ID, "fluid_pipe_center"), "");
+    public static final ModelResourceLocation FLUID_CONNECTION = new ModelResourceLocation(new ResourceLocation(WizardsReborn.MOD_ID, "fluid_pipe_connection"), "");
+    public static final ModelResourceLocation FLUID_END = new ModelResourceLocation(new ResourceLocation(WizardsReborn.MOD_ID, "fluid_pipe_end"), "");
+    public static final ModelResourceLocation FLUID_CONNECTION_2 = new ModelResourceLocation(new ResourceLocation(WizardsReborn.MOD_ID, "fluid_pipe_connection_opposite"), "");
+    public static final ModelResourceLocation FLUID_END_2 = new ModelResourceLocation(new ResourceLocation(WizardsReborn.MOD_ID, "fluid_pipe_end_opposite"), "");
+
+    public static final ModelResourceLocation STEAM_CENTER = new ModelResourceLocation(new ResourceLocation(WizardsReborn.MOD_ID, "steam_pipe_center"), "");
+    public static final ModelResourceLocation STEAM_CONNECTION = new ModelResourceLocation(new ResourceLocation(WizardsReborn.MOD_ID, "steam_pipe_connection"), "");
+    public static final ModelResourceLocation STEAM_END = new ModelResourceLocation(new ResourceLocation(WizardsReborn.MOD_ID, "steam_pipe_end"), "");
+    public static final ModelResourceLocation STEAM_CONNECTION_2 = new ModelResourceLocation(new ResourceLocation(WizardsReborn.MOD_ID, "steam_pipe_connection_opposite"), "");
+    public static final ModelResourceLocation STEAM_END_2 = new ModelResourceLocation(new ResourceLocation(WizardsReborn.MOD_ID, "steam_pipe_end_opposite"), "");
+
+    public static final ModelResourceLocation ARCANE_WOOD_CROSS_BAULK_CENTER = new ModelResourceLocation(new ResourceLocation(WizardsReborn.MOD_ID, "arcane_wood_cross_baulk_center"), "");
+    public static final ModelResourceLocation ARCANE_WOOD_CROSS_BAULK_CONNECTION = new ModelResourceLocation(new ResourceLocation(WizardsReborn.MOD_ID, "arcane_wood_cross_baulk_connection"), "");
+    public static final ModelResourceLocation ARCANE_WOOD_CROSS_BAULK_END = new ModelResourceLocation(new ResourceLocation(WizardsReborn.MOD_ID, "arcane_wood_cross_baulk_end"), "");
+    public static final ModelResourceLocation ARCANE_WOOD_CROSS_BAULK_CONNECTION_2 = new ModelResourceLocation(new ResourceLocation(WizardsReborn.MOD_ID, "arcane_wood_cross_baulk_connection_opposite"), "");
+    public static final ModelResourceLocation ARCANE_WOOD_CROSS_BAULK_END_2 = new ModelResourceLocation(new ResourceLocation(WizardsReborn.MOD_ID, "arcane_wood_cross_baulk_end_opposite"), "");
+
+    public static final ModelResourceLocation STRIPPED_ARCANE_WOOD_CROSS_BAULK_CENTER = new ModelResourceLocation(new ResourceLocation(WizardsReborn.MOD_ID, "stripped_arcane_wood_cross_baulk_center"), "");
+    public static final ModelResourceLocation STRIPPED_ARCANE_WOOD_CROSS_BAULK_CONNECTION = new ModelResourceLocation(new ResourceLocation(WizardsReborn.MOD_ID, "stripped_arcane_wood_cross_baulk_connection"), "");
+    public static final ModelResourceLocation STRIPPED_ARCANE_WOOD_CROSS_BAULK_END = new ModelResourceLocation(new ResourceLocation(WizardsReborn.MOD_ID, "stripped_arcane_wood_cross_baulk_end"), "");
+    public static final ModelResourceLocation STRIPPED_ARCANE_WOOD_CROSS_BAULK_CONNECTION_2 = new ModelResourceLocation(new ResourceLocation(WizardsReborn.MOD_ID, "stripped_arcane_wood_cross_baulk_connection_opposite"), "");
+    public static final ModelResourceLocation STRIPPED_ARCANE_WOOD_CROSS_BAULK_END_2 = new ModelResourceLocation(new ResourceLocation(WizardsReborn.MOD_ID, "stripped_arcane_wood_cross_baulk_end_opposite"), "");
+
+    public static final ModelResourceLocation ARCANE_WOOD_PLANKS_CROSS_BAULK_CENTER = new ModelResourceLocation(new ResourceLocation(WizardsReborn.MOD_ID, "arcane_wood_planks_cross_baulk_center"), "");
+    public static final ModelResourceLocation ARCANE_WOOD_PLANKS_CROSS_BAULK_CONNECTION = new ModelResourceLocation(new ResourceLocation(WizardsReborn.MOD_ID, "arcane_wood_planks_cross_baulk_connection"), "");
+    public static final ModelResourceLocation ARCANE_WOOD_PLANKS_CROSS_BAULK_END = new ModelResourceLocation(new ResourceLocation(WizardsReborn.MOD_ID, "arcane_wood_planks_cross_baulk_end"), "");
+    public static final ModelResourceLocation ARCANE_WOOD_PLANKS_CROSS_BAULK_CONNECTION_2 = new ModelResourceLocation(new ResourceLocation(WizardsReborn.MOD_ID, "arcane_wood_planks_cross_baulk_connection_opposite"), "");
+    public static final ModelResourceLocation ARCANE_WOOD_PLANKS_CROSS_BAULK_END_2 = new ModelResourceLocation(new ResourceLocation(WizardsReborn.MOD_ID, "arcane_wood_planks_cross_baulk_end_opposite"), "");
+
+    public static final ModelResourceLocation INNOCENT_WOOD_CROSS_BAULK_CENTER = new ModelResourceLocation(new ResourceLocation(WizardsReborn.MOD_ID, "innocent_wood_cross_baulk_center"), "");
+    public static final ModelResourceLocation INNOCENT_WOOD_CROSS_BAULK_CONNECTION = new ModelResourceLocation(new ResourceLocation(WizardsReborn.MOD_ID, "innocent_wood_cross_baulk_connection"), "");
+    public static final ModelResourceLocation INNOCENT_WOOD_CROSS_BAULK_END = new ModelResourceLocation(new ResourceLocation(WizardsReborn.MOD_ID, "innocent_wood_cross_baulk_end"), "");
+    public static final ModelResourceLocation INNOCENT_WOOD_CROSS_BAULK_CONNECTION_2 = new ModelResourceLocation(new ResourceLocation(WizardsReborn.MOD_ID, "innocent_wood_cross_baulk_connection_opposite"), "");
+    public static final ModelResourceLocation INNOCENT_WOOD_CROSS_BAULK_END_2 = new ModelResourceLocation(new ResourceLocation(WizardsReborn.MOD_ID, "innocent_wood_cross_baulk_end_opposite"), "");
+
+    public static final ModelResourceLocation STRIPPED_INNOCENT_WOOD_CROSS_BAULK_CENTER = new ModelResourceLocation(new ResourceLocation(WizardsReborn.MOD_ID, "stripped_innocent_wood_cross_baulk_center"), "");
+    public static final ModelResourceLocation STRIPPED_INNOCENT_WOOD_CROSS_BAULK_CONNECTION = new ModelResourceLocation(new ResourceLocation(WizardsReborn.MOD_ID, "stripped_innocent_wood_cross_baulk_connection"), "");
+    public static final ModelResourceLocation STRIPPED_INNOCENT_WOOD_CROSS_BAULK_END = new ModelResourceLocation(new ResourceLocation(WizardsReborn.MOD_ID, "stripped_innocent_wood_cross_baulk_end"), "");
+    public static final ModelResourceLocation STRIPPED_INNOCENT_WOOD_CROSS_BAULK_CONNECTION_2 = new ModelResourceLocation(new ResourceLocation(WizardsReborn.MOD_ID, "stripped_innocent_wood_cross_baulk_connection_opposite"), "");
+    public static final ModelResourceLocation STRIPPED_INNOCENT_WOOD_CROSS_BAULK_END_2 = new ModelResourceLocation(new ResourceLocation(WizardsReborn.MOD_ID, "stripped_innocent_wood_cross_baulk_end_opposite"), "");
+
+    public static final ModelResourceLocation INNOCENT_WOOD_PLANKS_CROSS_BAULK_CENTER = new ModelResourceLocation(new ResourceLocation(WizardsReborn.MOD_ID, "innocent_wood_planks_cross_baulk_center"), "");
+    public static final ModelResourceLocation INNOCENT_WOOD_PLANKS_CROSS_BAULK_CONNECTION = new ModelResourceLocation(new ResourceLocation(WizardsReborn.MOD_ID, "innocent_wood_planks_cross_baulk_connection"), "");
+    public static final ModelResourceLocation INNOCENT_WOOD_PLANKS_CROSS_BAULK_END = new ModelResourceLocation(new ResourceLocation(WizardsReborn.MOD_ID, "innocent_wood_planks_cross_baulk_end"), "");
+    public static final ModelResourceLocation INNOCENT_WOOD_PLANKS_CROSS_BAULK_CONNECTION_2 = new ModelResourceLocation(new ResourceLocation(WizardsReborn.MOD_ID, "innocent_wood_planks_cross_baulk_connection_opposite"), "");
+    public static final ModelResourceLocation INNOCENT_WOOD_PLANKS_CROSS_BAULK_END_2 = new ModelResourceLocation(new ResourceLocation(WizardsReborn.MOD_ID, "innocent_wood_planks_cross_baulk_end_opposite"), "");
+
+    public static final ModelResourceLocation CORK_BAMBOO_CROSS_BAULK_CENTER = new ModelResourceLocation(new ResourceLocation(WizardsReborn.MOD_ID, "cork_bamboo_cross_baulk_center"), "");
+    public static final ModelResourceLocation CORK_BAMBOO_CROSS_BAULK_CONNECTION = new ModelResourceLocation(new ResourceLocation(WizardsReborn.MOD_ID, "cork_bamboo_cross_baulk_connection"), "");
+    public static final ModelResourceLocation CORK_BAMBOO_CROSS_BAULK_END = new ModelResourceLocation(new ResourceLocation(WizardsReborn.MOD_ID, "cork_bamboo_cross_baulk_end"), "");
+    public static final ModelResourceLocation CORK_BAMBOO_CROSS_BAULK_CONNECTION_2 = new ModelResourceLocation(new ResourceLocation(WizardsReborn.MOD_ID, "cork_bamboo_cross_baulk_connection_opposite"), "");
+    public static final ModelResourceLocation CORK_BAMBOO_CROSS_BAULK_END_2 = new ModelResourceLocation(new ResourceLocation(WizardsReborn.MOD_ID, "cork_bamboo_cross_baulk_end_opposite"), "");
+
+    public static final ModelResourceLocation CORK_BAMBOO_PLANKS_CROSS_BAULK_CENTER = new ModelResourceLocation(new ResourceLocation(WizardsReborn.MOD_ID, "cork_bamboo_planks_cross_baulk_center"), "");
+    public static final ModelResourceLocation CORK_BAMBOO_PLANKS_CROSS_BAULK_CONNECTION = new ModelResourceLocation(new ResourceLocation(WizardsReborn.MOD_ID, "cork_bamboo_planks_cross_baulk_connection"), "");
+    public static final ModelResourceLocation CORK_BAMBOO_PLANKS_CROSS_BAULK_END = new ModelResourceLocation(new ResourceLocation(WizardsReborn.MOD_ID, "cork_bamboo_planks_cross_baulk_end"), "");
+    public static final ModelResourceLocation CORK_BAMBOO_PLANKS_CROSS_BAULK_CONNECTION_2 = new ModelResourceLocation(new ResourceLocation(WizardsReborn.MOD_ID, "cork_bamboo_planks_cross_baulk_connection_opposite"), "");
+    public static final ModelResourceLocation CORK_BAMBOO_PLANKS_CROSS_BAULK_END_2 = new ModelResourceLocation(new ResourceLocation(WizardsReborn.MOD_ID, "cork_bamboo_planks_cross_baulk_end_opposite"), "");
+
+    public static final ModelResourceLocation CORK_BAMBOO_CHISELED_PLANKS_CROSS_BAULK_CENTER = new ModelResourceLocation(new ResourceLocation(WizardsReborn.MOD_ID, "cork_bamboo_chiseled_planks_cross_baulk_center"), "");
+    public static final ModelResourceLocation CORK_BAMBOO_CHISELED_PLANKS_CROSS_BAULK_CONNECTION = new ModelResourceLocation(new ResourceLocation(WizardsReborn.MOD_ID, "cork_bamboo_chiseled_planks_cross_baulk_connection"), "");
+    public static final ModelResourceLocation CORK_BAMBOO_CHISELED_PLANKS_CROSS_BAULK_END = new ModelResourceLocation(new ResourceLocation(WizardsReborn.MOD_ID, "cork_bamboo_chiseled_planks_cross_baulk_end"), "");
+    public static final ModelResourceLocation CORK_BAMBOO_CHISELED_PLANKS_CROSS_BAULK_CONNECTION_2 = new ModelResourceLocation(new ResourceLocation(WizardsReborn.MOD_ID, "cork_bamboo_chiseled_planks_cross_baulk_connection_opposite"), "");
+    public static final ModelResourceLocation CORK_BAMBOO_CHISELED_PLANKS_CROSS_BAULK_END_2 = new ModelResourceLocation(new ResourceLocation(WizardsReborn.MOD_ID, "cork_bamboo_chiseled_planks_cross_baulk_end_opposite"), "");
+
+
     @Mod.EventBusSubscriber(modid = WizardsReborn.MOD_ID, bus = Mod.EventBusSubscriber.Bus.MOD, value = Dist.CLIENT)
     public static class ClientRegistryEvents {
         @SubscribeEvent
         public static void modelRegistry(ModelEvent.RegisterAdditional event) {
+            for (String crystal : WandCrystalsModels.getCrystals()) {
+                event.register(WandCrystalsModels.getModelLocationCrystal(crystal));
+            }
+
             event.register(JEWELER_TABLE_STONE);
             event.register(ALTAR_OF_DROUGHT_FRAME);
             event.register(TOTEM_OF_EXPERIENCE_ABSORPTION_PIECE);
@@ -104,6 +212,180 @@ public class WizardsRebornModels {
             event.register(STEAM_SENSOR_PIECE);
             event.register(WISSEN_ACTIVATOR_PIECE);
             event.register(ITEM_SORTER_PIECE);
+
+            event.register(FLUID_CENTER);
+            event.register(FLUID_CONNECTION);
+            event.register(FLUID_END);
+            event.register(FLUID_CONNECTION_2);
+            event.register(FLUID_END_2);
+
+            event.register(STEAM_CENTER);
+            event.register(STEAM_CONNECTION);
+            event.register(STEAM_END);
+            event.register(STEAM_CONNECTION_2);
+            event.register(STEAM_END_2);
+
+            event.register(ARCANE_WOOD_CROSS_BAULK_CENTER);
+            event.register(ARCANE_WOOD_CROSS_BAULK_CONNECTION);
+            event.register(ARCANE_WOOD_CROSS_BAULK_END);
+            event.register(ARCANE_WOOD_CROSS_BAULK_CONNECTION_2);
+            event.register(ARCANE_WOOD_CROSS_BAULK_END_2);
+
+            event.register(STRIPPED_ARCANE_WOOD_CROSS_BAULK_CENTER);
+            event.register(STRIPPED_ARCANE_WOOD_CROSS_BAULK_CONNECTION);
+            event.register(STRIPPED_ARCANE_WOOD_CROSS_BAULK_END);
+            event.register(STRIPPED_ARCANE_WOOD_CROSS_BAULK_CONNECTION_2);
+            event.register(STRIPPED_ARCANE_WOOD_CROSS_BAULK_END_2);
+
+            event.register(ARCANE_WOOD_PLANKS_CROSS_BAULK_CENTER);
+            event.register(ARCANE_WOOD_PLANKS_CROSS_BAULK_CONNECTION);
+            event.register(ARCANE_WOOD_PLANKS_CROSS_BAULK_END);
+            event.register(ARCANE_WOOD_PLANKS_CROSS_BAULK_CONNECTION_2);
+            event.register(ARCANE_WOOD_PLANKS_CROSS_BAULK_END_2);
+
+            event.register(INNOCENT_WOOD_CROSS_BAULK_CENTER);
+            event.register(INNOCENT_WOOD_CROSS_BAULK_CONNECTION);
+            event.register(INNOCENT_WOOD_CROSS_BAULK_END);
+            event.register(INNOCENT_WOOD_CROSS_BAULK_CONNECTION_2);
+            event.register(INNOCENT_WOOD_CROSS_BAULK_END_2);
+
+            event.register(STRIPPED_INNOCENT_WOOD_CROSS_BAULK_CENTER);
+            event.register(STRIPPED_INNOCENT_WOOD_CROSS_BAULK_CONNECTION);
+            event.register(STRIPPED_INNOCENT_WOOD_CROSS_BAULK_END);
+            event.register(STRIPPED_INNOCENT_WOOD_CROSS_BAULK_CONNECTION_2);
+            event.register(STRIPPED_INNOCENT_WOOD_CROSS_BAULK_END_2);
+
+            event.register(INNOCENT_WOOD_PLANKS_CROSS_BAULK_CENTER);
+            event.register(INNOCENT_WOOD_PLANKS_CROSS_BAULK_CONNECTION);
+            event.register(INNOCENT_WOOD_PLANKS_CROSS_BAULK_END);
+            event.register(INNOCENT_WOOD_PLANKS_CROSS_BAULK_CONNECTION_2);
+            event.register(INNOCENT_WOOD_PLANKS_CROSS_BAULK_END_2);
+
+            event.register(CORK_BAMBOO_CROSS_BAULK_CENTER);
+            event.register(CORK_BAMBOO_CROSS_BAULK_CONNECTION);
+            event.register(CORK_BAMBOO_CROSS_BAULK_END);
+            event.register(CORK_BAMBOO_CROSS_BAULK_CONNECTION_2);
+            event.register(CORK_BAMBOO_CROSS_BAULK_END_2);
+
+            event.register(CORK_BAMBOO_PLANKS_CROSS_BAULK_CENTER);
+            event.register(CORK_BAMBOO_PLANKS_CROSS_BAULK_CONNECTION);
+            event.register(CORK_BAMBOO_PLANKS_CROSS_BAULK_END);
+            event.register(CORK_BAMBOO_PLANKS_CROSS_BAULK_CONNECTION_2);
+            event.register(CORK_BAMBOO_PLANKS_CROSS_BAULK_END_2);
+
+            event.register(CORK_BAMBOO_CHISELED_PLANKS_CROSS_BAULK_CENTER);
+            event.register(CORK_BAMBOO_CHISELED_PLANKS_CROSS_BAULK_CONNECTION);
+            event.register(CORK_BAMBOO_CHISELED_PLANKS_CROSS_BAULK_END);
+            event.register(CORK_BAMBOO_CHISELED_PLANKS_CROSS_BAULK_CONNECTION_2);
+            event.register(CORK_BAMBOO_CHISELED_PLANKS_CROSS_BAULK_END_2);
+        }
+
+        @SubscribeEvent
+        public static void modelBake(ModelEvent.ModifyBakingResult event) {
+            Map<ResourceLocation, BakedModel> map = event.getModels();
+
+            fluidPipe = new PipeModel(map.get(FLUID_CENTER), "fluid_pipe");
+            steamPipe = new PipeModel(map.get(STEAM_CENTER), "steam_pipe");
+
+            addPipeModel(map, WizardsReborn.MOD_ID, "fluid_pipe", "waterlogged=false", fluidPipe);
+            addPipeModel(map, WizardsReborn.MOD_ID, "fluid_pipe", "waterlogged=true", fluidPipe);
+            addPipeModel(map, WizardsReborn.MOD_ID, "steam_pipe", "waterlogged=false", steamPipe);
+            addPipeModel(map, WizardsReborn.MOD_ID, "steam_pipe", "waterlogged=true", steamPipe);
+            addPipeModel(map, WizardsReborn.MOD_ID, "fluid_extractor", "lit=false,powered=false", "fluid_pipe", fluidExtractor, true);
+            addPipeModel(map, WizardsReborn.MOD_ID, "fluid_extractor", "lit=true,powered=false", "fluid_pipe", fluidExtractor, true);
+            addPipeModel(map, WizardsReborn.MOD_ID, "fluid_extractor", "lit=false,powered=true", "fluid_pipe", fluidExtractor, true);
+            addPipeModel(map, WizardsReborn.MOD_ID, "fluid_extractor", "lit=true,powered=true", "fluid_pipe", fluidExtractor, true);
+            addPipeModel(map, WizardsReborn.MOD_ID, "steam_extractor", "lit=false,powered=false", "steam_pipe", steamExtractor, true);
+            addPipeModel(map, WizardsReborn.MOD_ID, "steam_extractor", "lit=true,powered=false", "steam_pipe", steamExtractor, true);
+            addPipeModel(map, WizardsReborn.MOD_ID, "steam_extractor", "lit=false,powered=true", "steam_pipe", steamExtractor, true);
+            addPipeModel(map, WizardsReborn.MOD_ID, "steam_extractor", "lit=true,powered=true", "steam_pipe", steamExtractor, true);
+            addPipeModel(map, WizardsReborn.MOD_ID, "orbital_fluid_retainer", "", "fluid_pipe", orbitalFluidRetainer, true);
+            addPipeModel(map, WizardsReborn.MOD_ID, "alchemy_machine", "facing=east", "fluid_pipe", alchemyMachine, true);
+            addPipeModel(map, WizardsReborn.MOD_ID, "alchemy_machine", "facing=north", "fluid_pipe", alchemyMachine, true);
+            addPipeModel(map, WizardsReborn.MOD_ID, "alchemy_machine", "facing=south", "fluid_pipe", alchemyMachine, true);
+            addPipeModel(map, WizardsReborn.MOD_ID, "alchemy_machine", "facing=west", "fluid_pipe", alchemyMachine, true);
+            addPipeModel(map, WizardsReborn.MOD_ID, "alchemy_boiler", "facing=east", "steam_pipe", alchemyBoiler, true);
+            addPipeModel(map, WizardsReborn.MOD_ID, "alchemy_boiler", "facing=north", "steam_pipe", alchemyBoiler, true);
+            addPipeModel(map, WizardsReborn.MOD_ID, "alchemy_boiler", "facing=south", "steam_pipe", alchemyBoiler, true);
+            addPipeModel(map, WizardsReborn.MOD_ID, "alchemy_boiler", "facing=west", "steam_pipe", alchemyBoiler, true);
+            addPipeModel(map, WizardsReborn.MOD_ID, "arcane_wood_fluid_casing", "powered=false", "fluid_pipe", arcaneWoodFluidCasing, true);
+            addPipeModel(map, WizardsReborn.MOD_ID, "arcane_wood_fluid_casing", "powered=true", "fluid_pipe", arcaneWoodFluidCasing, true);
+            addPipeModel(map, WizardsReborn.MOD_ID, "innocent_wood_fluid_casing", "powered=false", "fluid_pipe", innocentWoodFluidCasing, true);
+            addPipeModel(map, WizardsReborn.MOD_ID, "innocent_wood_fluid_casing", "powered=true", "fluid_pipe", innocentWoodFluidCasing, true);
+            addPipeModel(map, WizardsReborn.MOD_ID, "cork_bamboo_fluid_casing", "powered=false", "fluid_pipe", corkBambooFluidCasing, true);
+            addPipeModel(map, WizardsReborn.MOD_ID, "cork_bamboo_fluid_casing", "powered=true", "fluid_pipe", corkBambooFluidCasing, true);
+            addPipeModel(map, WizardsReborn.MOD_ID, "wisestone_fluid_casing", "powered=false", "fluid_pipe", wisestoneFluidCasing, true);
+            addPipeModel(map, WizardsReborn.MOD_ID, "wisestone_fluid_casing", "powered=true", "fluid_pipe", wisestoneFluidCasing, true);
+            addPipeModel(map, WizardsReborn.MOD_ID, "arcane_wood_steam_casing", "powered=false", "steam_pipe", arcaneWoodSteamCasing, true);
+            addPipeModel(map, WizardsReborn.MOD_ID, "arcane_wood_steam_casing", "powered=true", "steam_pipe", arcaneWoodSteamCasing, true);
+            addPipeModel(map, WizardsReborn.MOD_ID, "innocent_wood_steam_casing", "powered=false", "steam_pipe", innocentWoodSteamCasing, true);
+            addPipeModel(map, WizardsReborn.MOD_ID, "innocent_wood_steam_casing", "powered=true", "steam_pipe", innocentWoodSteamCasing, true);
+            addPipeModel(map, WizardsReborn.MOD_ID, "cork_bamboo_steam_casing", "powered=false", "steam_pipe", corkBambooSteamCasing, true);
+            addPipeModel(map, WizardsReborn.MOD_ID, "cork_bamboo_steam_casing", "powered=true", "steam_pipe", corkBambooSteamCasing, true);
+            addPipeModel(map, WizardsReborn.MOD_ID, "wisestone_steam_casing", "powered=false", "steam_pipe", wisestoneSteamCasing, true);
+            addPipeModel(map, WizardsReborn.MOD_ID, "wisestone_steam_casing", "powered=true", "steam_pipe", wisestoneSteamCasing, true);
+            addPipeModel(map, WizardsReborn.MOD_ID, "creative_fluid_storage", "", "fluid_pipe", creativeFluidStorage, true);
+            addPipeModel(map, WizardsReborn.MOD_ID, "creative_steam_storage", "", "steam_pipe", creativeSteamStorage, true);
+
+            arcaneWoodCrossBaulk = new PipeModel(map.get(ARCANE_WOOD_CROSS_BAULK_CENTER), "arcane_wood_cross_baulk");
+            strippedArcaneWoodCrossBaulk = new PipeModel(map.get(STRIPPED_ARCANE_WOOD_CROSS_BAULK_CENTER), "stripped_arcane_wood_cross_baulk");
+            arcaneWoodPlanksCrossBaulk = new PipeModel(map.get(ARCANE_WOOD_PLANKS_CROSS_BAULK_CENTER), "arcane_wood_planks_cross_baulk");
+            innocentWoodCrossBaulk = new PipeModel(map.get(INNOCENT_WOOD_CROSS_BAULK_CENTER), "innocent_wood_cross_baulk");
+            strippedInnocentWoodCrossBaulk = new PipeModel(map.get(STRIPPED_INNOCENT_WOOD_CROSS_BAULK_CENTER), "stripped_innocent_wood_cross_baulk");
+            innocentWoodPlanksCrossBaulk = new PipeModel(map.get(INNOCENT_WOOD_PLANKS_CROSS_BAULK_CENTER), "innocent_wood_planks_cross_baulk");
+            corkBambooCrossBaulk = new PipeModel(map.get(CORK_BAMBOO_CROSS_BAULK_CENTER), "cork_bamboo_cross_baulk");
+            corkBambooPlanksCrossBaulk = new PipeModel(map.get(CORK_BAMBOO_PLANKS_CROSS_BAULK_CENTER), "cork_bamboo_planks_cross_baulk");
+            corkBambooChiseledPlanksCrossBaulk = new PipeModel(map.get(CORK_BAMBOO_CHISELED_PLANKS_CROSS_BAULK_CENTER), "cork_bamboo_chiseled_planks_cross_baulk");
+
+            addPipeModel(map, WizardsReborn.MOD_ID, "arcane_wood_cross_baulk", "waterlogged=false", arcaneWoodCrossBaulk);
+            addPipeModel(map, WizardsReborn.MOD_ID, "arcane_wood_cross_baulk", "waterlogged=true", arcaneWoodCrossBaulk);
+            addPipeModel(map, WizardsReborn.MOD_ID, "stripped_arcane_wood_cross_baulk", "waterlogged=false", strippedArcaneWoodCrossBaulk);
+            addPipeModel(map, WizardsReborn.MOD_ID, "stripped_arcane_wood_cross_baulk", "waterlogged=true", strippedArcaneWoodCrossBaulk);
+            addPipeModel(map, WizardsReborn.MOD_ID, "arcane_wood_planks_cross_baulk", "waterlogged=false", arcaneWoodPlanksCrossBaulk);
+            addPipeModel(map, WizardsReborn.MOD_ID, "arcane_wood_planks_cross_baulk", "waterlogged=true", arcaneWoodPlanksCrossBaulk);
+            addPipeModel(map, WizardsReborn.MOD_ID, "innocent_wood_cross_baulk", "waterlogged=false", innocentWoodCrossBaulk);
+            addPipeModel(map, WizardsReborn.MOD_ID, "innocent_wood_cross_baulk", "waterlogged=true", innocentWoodCrossBaulk);
+            addPipeModel(map, WizardsReborn.MOD_ID, "stripped_innocent_wood_cross_baulk", "waterlogged=false", strippedInnocentWoodCrossBaulk);
+            addPipeModel(map, WizardsReborn.MOD_ID, "stripped_innocent_wood_cross_baulk", "waterlogged=true", strippedInnocentWoodCrossBaulk);
+            addPipeModel(map, WizardsReborn.MOD_ID, "innocent_wood_planks_cross_baulk", "waterlogged=false", innocentWoodPlanksCrossBaulk);
+            addPipeModel(map, WizardsReborn.MOD_ID, "innocent_wood_planks_cross_baulk", "waterlogged=true", innocentWoodPlanksCrossBaulk);
+            addPipeModel(map, WizardsReborn.MOD_ID, "cork_bamboo_cross_baulk", "waterlogged=false", corkBambooCrossBaulk);
+            addPipeModel(map, WizardsReborn.MOD_ID, "cork_bamboo_cross_baulk", "waterlogged=true", corkBambooCrossBaulk);
+            addPipeModel(map, WizardsReborn.MOD_ID, "cork_bamboo_planks_cross_baulk", "waterlogged=false", corkBambooPlanksCrossBaulk);
+            addPipeModel(map, WizardsReborn.MOD_ID, "cork_bamboo_planks_cross_baulk", "waterlogged=true", corkBambooPlanksCrossBaulk);
+            addPipeModel(map, WizardsReborn.MOD_ID, "cork_bamboo_chiseled_planks_cross_baulk", "waterlogged=false", corkBambooChiseledPlanksCrossBaulk);
+            addPipeModel(map, WizardsReborn.MOD_ID, "cork_bamboo_chiseled_planks_cross_baulk", "waterlogged=true", corkBambooChiseledPlanksCrossBaulk);
+        }
+
+        @SubscribeEvent
+        public static void completeModelBake(ModelEvent.BakingCompleted event) {
+            fluidPipe.init(event.getModelManager());
+            steamPipe.init(event.getModelManager());
+            bakePipeModel(fluidExtractor, event.getModelManager());
+            bakePipeModel(steamExtractor, event.getModelManager());
+            bakePipeModel(orbitalFluidRetainer, event.getModelManager());
+            bakePipeModel(alchemyMachine, event.getModelManager());
+            bakePipeModel(alchemyBoiler, event.getModelManager());
+            bakePipeModel(arcaneWoodFluidCasing, event.getModelManager());
+            bakePipeModel(innocentWoodFluidCasing, event.getModelManager());
+            bakePipeModel(corkBambooFluidCasing, event.getModelManager());
+            bakePipeModel(wisestoneFluidCasing, event.getModelManager());
+            bakePipeModel(arcaneWoodSteamCasing, event.getModelManager());
+            bakePipeModel(innocentWoodSteamCasing, event.getModelManager());
+            bakePipeModel(corkBambooSteamCasing, event.getModelManager());
+            bakePipeModel(wisestoneSteamCasing, event.getModelManager());
+            bakePipeModel(creativeFluidStorage, event.getModelManager());
+            bakePipeModel(creativeSteamStorage, event.getModelManager());
+
+            arcaneWoodCrossBaulk.init(event.getModelManager());
+            strippedArcaneWoodCrossBaulk.init(event.getModelManager());
+            arcaneWoodPlanksCrossBaulk.init(event.getModelManager());
+            innocentWoodCrossBaulk.init(event.getModelManager());
+            strippedInnocentWoodCrossBaulk.init(event.getModelManager());
+            innocentWoodPlanksCrossBaulk.init(event.getModelManager());
+            corkBambooCrossBaulk.init(event.getModelManager());
+            corkBambooPlanksCrossBaulk.init(event.getModelManager());
+            corkBambooChiseledPlanksCrossBaulk.init(event.getModelManager());
         }
 
         @SubscribeEvent
@@ -153,11 +435,78 @@ public class WizardsRebornModels {
         }
     }
 
+    @OnlyIn(Dist.CLIENT)
+    public static void setupWandCrystalsModels() {
+        WandCrystalsModels.addCrystal(WizardsReborn.MOD_ID+":earth_crystal");
+        WandCrystalsModels.addCrystal(WizardsReborn.MOD_ID+":water_crystal");
+        WandCrystalsModels.addCrystal(WizardsReborn.MOD_ID+":air_crystal");
+        WandCrystalsModels.addCrystal(WizardsReborn.MOD_ID+":fire_crystal");
+        WandCrystalsModels.addCrystal(WizardsReborn.MOD_ID+":void_crystal");
+
+        WandCrystalsModels.addCrystal(WizardsReborn.MOD_ID+":faceted_earth_crystal");
+        WandCrystalsModels.addCrystal(WizardsReborn.MOD_ID+":faceted_water_crystal");
+        WandCrystalsModels.addCrystal(WizardsReborn.MOD_ID+":faceted_air_crystal");
+        WandCrystalsModels.addCrystal(WizardsReborn.MOD_ID+":faceted_fire_crystal");
+        WandCrystalsModels.addCrystal(WizardsReborn.MOD_ID+":faceted_void_crystal");
+
+        WandCrystalsModels.addCrystal(WizardsReborn.MOD_ID+":advanced_earth_crystal");
+        WandCrystalsModels.addCrystal(WizardsReborn.MOD_ID+":advanced_water_crystal");
+        WandCrystalsModels.addCrystal(WizardsReborn.MOD_ID+":advanced_air_crystal");
+        WandCrystalsModels.addCrystal(WizardsReborn.MOD_ID+":advanced_fire_crystal");
+        WandCrystalsModels.addCrystal(WizardsReborn.MOD_ID+":advanced_void_crystal");
+
+        WandCrystalsModels.addCrystal(WizardsReborn.MOD_ID+":masterful_earth_crystal");
+        WandCrystalsModels.addCrystal(WizardsReborn.MOD_ID+":masterful_water_crystal");
+        WandCrystalsModels.addCrystal(WizardsReborn.MOD_ID+":masterful_air_crystal");
+        WandCrystalsModels.addCrystal(WizardsReborn.MOD_ID+":masterful_fire_crystal");
+        WandCrystalsModels.addCrystal(WizardsReborn.MOD_ID+":masterful_void_crystal");
+
+        WandCrystalsModels.addCrystal(WizardsReborn.MOD_ID+":pure_earth_crystal");
+        WandCrystalsModels.addCrystal(WizardsReborn.MOD_ID+":pure_water_crystal");
+        WandCrystalsModels.addCrystal(WizardsReborn.MOD_ID+":pure_air_crystal");
+        WandCrystalsModels.addCrystal(WizardsReborn.MOD_ID+":pure_fire_crystal");
+        WandCrystalsModels.addCrystal(WizardsReborn.MOD_ID+":pure_void_crystal");
+    }
+
     public static ModelLayerLocation addLayer(String layer) {
         return FluffyFurModels.addLayer(WizardsReborn.MOD_ID, layer);
     }
 
     public static ModelResourceLocation addCustomModel(String model) {
         return FluffyFurModels.addCustomModel(WizardsReborn.MOD_ID, model);
+    }
+
+    public static void addPipeModel(Map<ResourceLocation, BakedModel> map, String modId, String modelId, String path, PipeModel pipe) {
+        map.put(new ModelResourceLocation(new ResourceLocation(modId + ":" + modelId), path), pipe);
+    }
+
+    public static void addPipeModel(Map<ResourceLocation, BakedModel> map, String modId, String modelId, String path, String pipe, ArrayList<PipeModel> pipes) {
+        if (map.get(new ModelResourceLocation(new ResourceLocation(modId + ":" + modelId), path)) != null) {
+            PipeModel model = new PipeModel(map.get(new ModelResourceLocation(new ResourceLocation(modId + ":" + modelId), path)), pipe);
+            pipes.add(model);
+            addPipeModel(map, modId, modelId, path, model);
+        }
+    }
+
+    public static void addPipeModel(Map<ResourceLocation, BakedModel> map, String modId, String modelId, String path, String pipe, ArrayList<PipeModel> pipes, boolean waterlogged) {
+        if (waterlogged) {
+            if (path.equals("")) {
+                addPipeModel(map, modId, modelId, "waterlogged=false", pipe, pipes);
+                addPipeModel(map, modId, modelId, "waterlogged=true", pipe, pipes);
+            } else {
+                addPipeModel(map, modId, modelId, "waterlogged=false," + path, pipe, pipes);
+                addPipeModel(map, modId, modelId, "waterlogged=true," + path, pipe, pipes);
+                addPipeModel(map, modId, modelId, path + ",waterlogged=false", pipe, pipes);
+                addPipeModel(map, modId, modelId, path + ",waterlogged=true", pipe, pipes);
+            }
+        } else {
+            addPipeModel(map, modId, modelId, path, pipe, pipes);
+        }
+    }
+
+    public static void bakePipeModel(ArrayList<PipeModel> pipes, ModelManager manager) {
+        for (PipeModel model : pipes) {
+            model.init(manager);
+        }
     }
 }

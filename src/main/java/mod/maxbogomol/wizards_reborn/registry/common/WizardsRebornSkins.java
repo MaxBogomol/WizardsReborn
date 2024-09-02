@@ -18,6 +18,7 @@ import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.client.event.ModelEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
+import net.minecraftforge.fml.DistExecutor;
 import net.minecraftforge.fml.common.Mod;
 
 import java.awt.*;
@@ -39,6 +40,14 @@ public class WizardsRebornSkins {
         Skins.register(MAGNIFICENT_MAID_SKIN);
         Skins.register(SUMMER_LOVE_SKIN);
 
+        DistExecutor.unsafeCallWhenOn(Dist.CLIENT, () -> () -> {
+            registerModels();
+            return new Object();
+        });
+    }
+
+    @OnlyIn(Dist.CLIENT)
+    public static void registerModels() {
         ItemSkinsModels.addSkin(WizardsReborn.MOD_ID+":top_hat");
         ItemSkinsModels.addSkin(WizardsReborn.MOD_ID+":soul_hunter_hood");
         ItemSkinsModels.addSkin(WizardsReborn.MOD_ID+":soul_hunter_costume");
@@ -73,6 +82,10 @@ public class WizardsRebornSkins {
     public static class ClientRegistryEvents {
         @SubscribeEvent
         public static void modelRegistrySkins(ModelEvent.RegisterAdditional event) {
+            for (String skin : ItemSkinsModels.getSkins()) {
+                event.register(ItemSkinsModels.getModelLocationSkin(skin));
+            }
+
             event.register(LargeItemRenderer.getModelResourceLocation(WizardsReborn.MOD_ID, "skin/implosion_scythe"));
             event.register(LargeItemRenderer.getModelResourceLocation(WizardsReborn.MOD_ID, "skin/soul_hunter_scythe"));
         }
@@ -80,6 +93,11 @@ public class WizardsRebornSkins {
         @SubscribeEvent
         public static void modelBakeSkins(ModelEvent.ModifyBakingResult event) {
             Map<ResourceLocation, BakedModel> map = event.getModels();
+
+            for (String skin : ItemSkinsModels.getSkins()) {
+                BakedModel model = map.get(ItemSkinsModels.getModelLocationSkin(skin));
+                ItemSkinsModels.addModelSkins(skin, model);
+            }
 
             WandCrystalsModels.addWandItem(map, new ResourceLocation(WizardsReborn.MOD_ID, "skin/soul_hunter_arcane_wand"));
             WandCrystalsModels.addWandItem(map, new ResourceLocation(WizardsReborn.MOD_ID, "skin/implosion_arcane_wand"));
