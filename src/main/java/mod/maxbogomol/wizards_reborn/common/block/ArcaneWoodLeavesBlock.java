@@ -4,7 +4,7 @@ import mod.maxbogomol.fluffy_fur.client.particle.ParticleBuilder;
 import mod.maxbogomol.fluffy_fur.client.particle.data.ColorParticleData;
 import mod.maxbogomol.fluffy_fur.client.particle.data.GenericParticleData;
 import mod.maxbogomol.fluffy_fur.registry.client.FluffyFurParticles;
-import mod.maxbogomol.fluffy_fur.util.RenderUtils;
+import mod.maxbogomol.fluffy_fur.registry.client.FluffyFurRenderTypes;
 import mod.maxbogomol.wizards_reborn.common.config.Config;
 import mod.maxbogomol.wizards_reborn.registry.client.WizardsRebornParticles;
 import net.minecraft.core.BlockPos;
@@ -60,7 +60,7 @@ public class ArcaneWoodLeavesBlock extends LeavesBlock {
             BlockState blockstate = world.getBlockState(blockpos);
             if (!isFaceFull(blockstate.getCollisionShape(world, blockpos), Direction.UP)) {
                 ParticleBuilder.create(WizardsRebornParticles.ARCANE_WOOD_LEAVES)
-                        .setRenderType(RenderUtils.DELAYED_PARTICLE)
+                        .setRenderType(FluffyFurRenderTypes.DELAYED_PARTICLE)
                         .flatRandomOffset(1f, 0, 1f)
                         .spawn(world, pos.getX() + 0.5F, pos.getY() - 0.05f, pos.getZ() + 0.5F);
             }

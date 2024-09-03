@@ -5,7 +5,7 @@ import mod.maxbogomol.fluffy_fur.client.particle.data.ColorParticleData;
 import mod.maxbogomol.fluffy_fur.client.particle.data.GenericParticleData;
 import mod.maxbogomol.fluffy_fur.registry.client.FluffyFurParticles;
 import mod.maxbogomol.wizards_reborn.WizardsReborn;
-import mod.maxbogomol.wizards_reborn.client.event.ClientTickHandler;
+import mod.maxbogomol.wizards_reborn.client.event.WissenLimitHandler;
 import mod.maxbogomol.wizards_reborn.common.config.Config;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.world.level.Level;
@@ -64,13 +64,13 @@ public class WissenTranslatorBurstEffectPacket {
                 public void run() {
                     Level world = WizardsReborn.proxy.getLevel();
 
-                    ClientTickHandler.wissenCount++;
+                    WissenLimitHandler.wissenCount++;
 
-                    if (ClientTickHandler.wissenCount > 200) {
-                        ClientTickHandler.wissenCount = 200;
+                    if (WissenLimitHandler.wissenCount > 200) {
+                        WissenLimitHandler.wissenCount = 200;
                     }
 
-                    int wissenCount = ClientTickHandler.wissenCountOld;
+                    int wissenCount = WissenLimitHandler.wissenCountOld;
 
                     for (int i = 0; i < 10; i++) {
                         if (random.nextFloat() < (0.75f * (1f - (wissenCount / 200f))) + 0.05f) {

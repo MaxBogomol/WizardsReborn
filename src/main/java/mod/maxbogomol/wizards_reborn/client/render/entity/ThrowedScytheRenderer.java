@@ -4,6 +4,7 @@ import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
 import com.mojang.math.Axis;
 import mod.maxbogomol.fluffy_fur.client.render.LevelRenderHandler;
+import mod.maxbogomol.fluffy_fur.registry.client.FluffyFurRenderTypes;
 import mod.maxbogomol.wizards_reborn.common.entity.ThrowedScytheEntity;
 import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornArcaneEnchantments;
 import mod.maxbogomol.wizards_reborn.util.RenderUtils;
@@ -31,7 +32,7 @@ public class ThrowedScytheRenderer<T extends ThrowedScytheEntity> extends Entity
     @Override
     public void render(ThrowedScytheEntity entity, float entityYaw, float partialTicks, PoseStack stack, MultiBufferSource buffer, int light) {
         MultiBufferSource bufferDelayed = LevelRenderHandler.getDelayedRender();
-        VertexConsumer builder = bufferDelayed.getBuffer(RenderUtils.GLOWING);
+        VertexConsumer builder = bufferDelayed.getBuffer(FluffyFurRenderTypes.GLOWING);
         Color color = WizardsRebornArcaneEnchantments.THROW.getColor();
 
         List<Vec3> trailList = new ArrayList<>(entity.trail);

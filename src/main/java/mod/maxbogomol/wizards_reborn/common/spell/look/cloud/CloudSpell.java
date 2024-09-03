@@ -5,7 +5,7 @@ import mod.maxbogomol.fluffy_fur.client.particle.data.ColorParticleData;
 import mod.maxbogomol.fluffy_fur.client.particle.data.GenericParticleData;
 import mod.maxbogomol.fluffy_fur.client.particle.data.LightParticleData;
 import mod.maxbogomol.fluffy_fur.registry.client.FluffyFurParticles;
-import mod.maxbogomol.fluffy_fur.util.RenderUtils;
+import mod.maxbogomol.fluffy_fur.registry.client.FluffyFurRenderTypes;
 import mod.maxbogomol.wizards_reborn.api.crystal.CrystalUtil;
 import mod.maxbogomol.wizards_reborn.common.entity.SpellProjectileEntity;
 import mod.maxbogomol.wizards_reborn.common.item.equipment.arcane.ArcaneArmorItem;
@@ -101,7 +101,7 @@ public class CloudSpell extends BlockLookSpell {
             }
             if (random.nextFloat() < 0.8f) {
                 ParticleBuilder.create(FluffyFurParticles.SMOKE)
-                        .setRenderType(RenderUtils.DELAYED_PARTICLE)
+                        .setRenderType(FluffyFurRenderTypes.DELAYED_PARTICLE)
                         .setColorData(ColorParticleData.create(color).build())
                         .setTransparencyData(GenericParticleData.create(0.45f, 0).build())
                         .setScaleData(GenericParticleData.create(1.5f).build())

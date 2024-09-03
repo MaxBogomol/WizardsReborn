@@ -3,15 +3,16 @@ package mod.maxbogomol.wizards_reborn.common.crystalritual;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
 import com.mojang.math.Axis;
+import mod.maxbogomol.fluffy_fur.client.event.ClientTickHandler;
 import mod.maxbogomol.fluffy_fur.client.particle.ParticleBuilder;
 import mod.maxbogomol.fluffy_fur.client.particle.data.ColorParticleData;
 import mod.maxbogomol.fluffy_fur.client.particle.data.GenericParticleData;
 import mod.maxbogomol.fluffy_fur.client.render.LevelRenderHandler;
 import mod.maxbogomol.fluffy_fur.registry.client.FluffyFurParticles;
+import mod.maxbogomol.fluffy_fur.registry.client.FluffyFurRenderTypes;
 import mod.maxbogomol.wizards_reborn.WizardsReborn;
 import mod.maxbogomol.wizards_reborn.api.crystalritual.CrystalRitual;
 import mod.maxbogomol.wizards_reborn.api.crystalritual.CrystalRitualArea;
-import mod.maxbogomol.wizards_reborn.client.event.ClientTickHandler;
 import mod.maxbogomol.wizards_reborn.common.block.arcane_pedestal.ArcanePedestalBlockEntity;
 import mod.maxbogomol.wizards_reborn.common.block.crystal.CrystalBlockEntity;
 import mod.maxbogomol.wizards_reborn.common.network.PacketHandler;
@@ -327,7 +328,7 @@ public class CrystalInfusionCrystalRitual extends CrystalRitual {
         }
 
         MultiBufferSource bufferDelayed = LevelRenderHandler.getDelayedRender();
-        VertexConsumer builder = bufferDelayed.getBuffer(RenderUtils.GLOWING);
+        VertexConsumer builder = bufferDelayed.getBuffer(FluffyFurRenderTypes.GLOWING);
         Color color = getColor();
 
         ItemStack item = getCrystalItem(crystal);
@@ -343,12 +344,10 @@ public class CrystalInfusionCrystalRitual extends CrystalRitual {
 
             if (getCooldown(crystal) > getMaxCooldown(crystal) - 11) {
                 fade = (getMaxCooldown(crystal) - getCooldown(crystal)) / 11f;
-                System.out.println(fade);
             }
 
             if (getCooldown(crystal) < (20 + 11)) {
                 fade = (getCooldown(crystal) - 20) / 11f;
-                System.out.println(fade);
             }
 
             for (int i = 0; i < size; i++) {

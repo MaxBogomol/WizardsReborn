@@ -701,9 +701,6 @@ public class WizardsRebornItems {
 
             WandCrystalsModels.addWandItem(map, ARCANE_WAND.getId());
 
-            LargeItemRenderer.bakeModel(map, WizardsReborn.MOD_ID, "arcane_gold_scythe");
-            LargeItemRenderer.bakeModel(map, WizardsReborn.MOD_ID, "arcane_wood_scythe");
-            LargeItemRenderer.bakeModel(map, WizardsReborn.MOD_ID, "innocent_wood_scythe");
             LargeItemRenderer.bakeModel(map, WizardsReborn.MOD_ID, "blaze_reap");
 
             for (String skin : LeatherCollarItem.skins.keySet()) {

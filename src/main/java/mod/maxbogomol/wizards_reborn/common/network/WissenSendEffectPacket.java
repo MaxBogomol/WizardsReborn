@@ -7,7 +7,7 @@ import mod.maxbogomol.fluffy_fur.common.easing.Easing;
 import mod.maxbogomol.fluffy_fur.registry.client.FluffyFurParticles;
 import mod.maxbogomol.wizards_reborn.WizardsReborn;
 import mod.maxbogomol.wizards_reborn.client.config.ClientConfig;
-import mod.maxbogomol.wizards_reborn.client.event.ClientTickHandler;
+import mod.maxbogomol.wizards_reborn.client.event.WissenLimitHandler;
 import mod.maxbogomol.wizards_reborn.common.config.Config;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.world.level.Level;
@@ -129,13 +129,13 @@ public class WissenSendEffectPacket {
                     float y = (float) (dY / (particlePerBlock));
                     float z = (float) (dZ / (particlePerBlock));
 
-                    ClientTickHandler.wissenCount++;
+                    WissenLimitHandler.wissenCount++;
 
-                    if (ClientTickHandler.wissenCount > ClientConfig.WISSEN_RAYS_LIMIT.get()) {
-                        ClientTickHandler.wissenCount = ClientConfig.WISSEN_RAYS_LIMIT.get();
+                    if (WissenLimitHandler.wissenCount > ClientConfig.WISSEN_RAYS_LIMIT.get()) {
+                        WissenLimitHandler.wissenCount = ClientConfig.WISSEN_RAYS_LIMIT.get();
                     }
 
-                    int wissenCount = ClientTickHandler.wissenCountOld;
+                    int wissenCount = WissenLimitHandler.wissenCountOld;
 
                     for (int i = 0; i < particlePerBlock; i++) {
                         if (random.nextFloat() < (0.45f * (1f - ((float) wissenCount / ClientConfig.WISSEN_RAYS_LIMIT.get()))) + 0.05f) {

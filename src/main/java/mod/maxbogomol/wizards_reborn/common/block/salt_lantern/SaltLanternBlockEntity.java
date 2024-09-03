@@ -6,7 +6,7 @@ import mod.maxbogomol.fluffy_fur.client.particle.data.GenericParticleData;
 import mod.maxbogomol.fluffy_fur.client.particle.data.LightParticleData;
 import mod.maxbogomol.fluffy_fur.common.easing.Easing;
 import mod.maxbogomol.fluffy_fur.registry.client.FluffyFurParticles;
-import mod.maxbogomol.fluffy_fur.util.RenderUtils;
+import mod.maxbogomol.fluffy_fur.registry.client.FluffyFurRenderTypes;
 import mod.maxbogomol.wizards_reborn.common.block.ArcaneLumosBlock;
 import mod.maxbogomol.wizards_reborn.common.block.salt_torch.SaltTorchBlockEntity;
 import mod.maxbogomol.wizards_reborn.registry.common.block.WizardsRebornBlockEntities;
@@ -96,7 +96,7 @@ public class SaltLanternBlockEntity extends SaltTorchBlockEntity {
             }
             if (random.nextFloat() < 0.3) {
                 ParticleBuilder.create(FluffyFurParticles.SMOKE)
-                        .setRenderType(RenderUtils.DELAYED_PARTICLE)
+                        .setRenderType(FluffyFurRenderTypes.DELAYED_PARTICLE)
                         .setColorData(ColorParticleData.create(Color.BLACK).build())
                         .setTransparencyData(GenericParticleData.create(0.4f, 0).build())
                         .setScaleData(GenericParticleData.create(0.15f, 0.35f).build())

@@ -4,6 +4,7 @@ import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
 import mod.maxbogomol.fluffy_fur.client.animation.ItemAnimation;
 import mod.maxbogomol.fluffy_fur.client.render.LevelRenderHandler;
+import mod.maxbogomol.fluffy_fur.registry.client.FluffyFurRenderTypes;
 import mod.maxbogomol.wizards_reborn.WizardsReborn;
 import mod.maxbogomol.wizards_reborn.api.spell.Spell;
 import mod.maxbogomol.wizards_reborn.client.animation.ChargeSpellHandItemAnimation;
@@ -357,7 +358,7 @@ public class ChargeSpell extends Spell {
     public void render(SpellProjectileEntity entity, float entityYaw, float partialTicks, PoseStack stack, MultiBufferSource buffer, int light) {
         CompoundTag spellData = entity.getSpellData();
         MultiBufferSource bufferDelayed = LevelRenderHandler.getDelayedRender();
-        VertexConsumer builder = bufferDelayed.getBuffer(RenderUtils.GLOWING);
+        VertexConsumer builder = bufferDelayed.getBuffer(FluffyFurRenderTypes.GLOWING);
         Color color = getColor();
 
         List<Vec3> trailList = new ArrayList<>(entity.trail);

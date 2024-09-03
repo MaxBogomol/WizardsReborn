@@ -5,7 +5,7 @@ import mod.maxbogomol.fluffy_fur.client.particle.data.ColorParticleData;
 import mod.maxbogomol.fluffy_fur.client.particle.data.GenericParticleData;
 import mod.maxbogomol.fluffy_fur.client.particle.data.LightParticleData;
 import mod.maxbogomol.fluffy_fur.registry.client.FluffyFurParticles;
-import mod.maxbogomol.fluffy_fur.util.RenderUtils;
+import mod.maxbogomol.fluffy_fur.registry.client.FluffyFurRenderTypes;
 import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.util.Mth;
@@ -44,7 +44,7 @@ public class NetherSaltOreBlock extends Block {
         if (world.isClientSide()) {
             if (!player.isCreative()) {
                 ParticleBuilder.create(FluffyFurParticles.WISP)
-                        .setRenderType(RenderUtils.DELAYED_PARTICLE)
+                        .setRenderType(FluffyFurRenderTypes.DELAYED_PARTICLE)
                         .setColorData(ColorParticleData.create(Color.BLACK).build())
                         .setTransparencyData(GenericParticleData.create(1f, 0).build())
                         .setScaleData(GenericParticleData.create(0.2f, 0).build())

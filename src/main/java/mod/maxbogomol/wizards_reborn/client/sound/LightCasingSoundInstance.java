@@ -17,7 +17,6 @@ public class LightCasingSoundInstance extends BlockEntitySoundInstance<LightCasi
     @Override
     public void tick() {
         if (blockEntity.getLight() <= 0) {
-            System.out.println(123);
             stop();
         }
 

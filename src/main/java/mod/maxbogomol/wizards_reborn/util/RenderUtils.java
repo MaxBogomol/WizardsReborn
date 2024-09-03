@@ -3,24 +3,20 @@ package mod.maxbogomol.wizards_reborn.util;
 import com.mojang.blaze3d.platform.GlStateManager;
 import com.mojang.blaze3d.platform.Lighting;
 import com.mojang.blaze3d.systems.RenderSystem;
-import com.mojang.blaze3d.vertex.DefaultVertexFormat;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
-import com.mojang.blaze3d.vertex.VertexFormat;
 import com.mojang.math.Axis;
+import mod.maxbogomol.fluffy_fur.client.event.ClientTickHandler;
 import mod.maxbogomol.fluffy_fur.client.render.LevelRenderHandler;
 import mod.maxbogomol.fluffy_fur.client.render.item.CustomItemRenderer;
-import mod.maxbogomol.wizards_reborn.WizardsReborn;
-import mod.maxbogomol.wizards_reborn.WizardsRebornClient;
-import mod.maxbogomol.wizards_reborn.client.event.ClientTickHandler;
+import mod.maxbogomol.fluffy_fur.registry.client.FluffyFurRenderTypes;
+import mod.maxbogomol.fluffy_fur.registry.client.FluffyFurShaders;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.renderer.GameRenderer;
 import net.minecraft.client.renderer.MultiBufferSource;
-import net.minecraft.client.renderer.RenderStateShard;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.texture.OverlayTexture;
-import net.minecraft.client.renderer.texture.TextureAtlas;
 import net.minecraft.client.resources.model.BakedModel;
 import net.minecraft.client.resources.model.ModelResourceLocation;
 import net.minecraft.core.BlockPos;
@@ -40,93 +36,6 @@ import java.util.Random;
 public class RenderUtils {
 
     public static float blitOffset = 0;
-
-    public static final RenderStateShard.TransparencyStateShard ADDITIVE_TRANSPARENCY = new RenderStateShard.TransparencyStateShard("lightning_transparency", () -> {
-        RenderSystem.enableBlend();
-        RenderSystem.blendFunc(GlStateManager.SourceFactor.SRC_ALPHA, GlStateManager.DestFactor.ONE);
-    }, () -> {
-        RenderSystem.disableBlend();
-        RenderSystem.defaultBlendFunc();
-    });
-
-    public static final RenderStateShard.TransparencyStateShard NORMAL_TRANSPARENCY = new RenderStateShard.TransparencyStateShard("lightning_transparency", () -> {
-        RenderSystem.enableBlend();
-        RenderSystem.blendFunc(GlStateManager.SourceFactor.SRC_ALPHA, GlStateManager.DestFactor.ONE_MINUS_SRC_ALPHA);
-    }, () -> {
-        RenderSystem.disableBlend();
-        RenderSystem.defaultBlendFunc();
-    });
-
-    public static final RenderStateShard.TransparencyStateShard TRANSLUCENT_TRANSPARENCY = new RenderStateShard.TransparencyStateShard("translucent_transparency", () -> {
-        RenderSystem.enableBlend();
-        RenderSystem.blendFuncSeparate(GlStateManager.SourceFactor.SRC_ALPHA, GlStateManager.DestFactor.ONE_MINUS_SRC_ALPHA, GlStateManager.SourceFactor.ONE, GlStateManager.DestFactor.ONE_MINUS_SRC_ALPHA);
-    }, () -> {
-        RenderSystem.disableBlend();
-        RenderSystem.defaultBlendFunc();
-    });
-
-    public static final RenderType GLOWING_SPRITE = RenderType.create(
-            WizardsReborn.MOD_ID + ":glowing_sprite",
-            DefaultVertexFormat.POSITION_TEX_COLOR,
-            VertexFormat.Mode.QUADS, 256, true, false,
-            RenderType.CompositeState.builder()
-                    .setWriteMaskState(new RenderStateShard.WriteMaskStateShard(true, false))
-                    .setLightmapState(new RenderStateShard.LightmapStateShard(false))
-                    .setTransparencyState(ADDITIVE_TRANSPARENCY)
-                    .setTextureState(new RenderStateShard.TextureStateShard(TextureAtlas.LOCATION_BLOCKS, false, false))
-                    .setShaderState(new RenderStateShard.ShaderStateShard(WizardsRebornClient::getGlowingSpriteShader))
-                    .createCompositeState(false)
-    );
-
-    public static final RenderType GLOWING = RenderType.create(
-            WizardsReborn.MOD_ID + ":glowing",
-            DefaultVertexFormat.POSITION_COLOR,
-            VertexFormat.Mode.QUADS, 256, true, false,
-            RenderType.CompositeState.builder()
-                    .setWriteMaskState(new RenderStateShard.WriteMaskStateShard(true, false))
-                    .setLightmapState(new RenderStateShard.LightmapStateShard(false))
-                    .setTransparencyState(ADDITIVE_TRANSPARENCY)
-                    .setShaderState(new RenderStateShard.ShaderStateShard(WizardsRebornClient::getGlowingShader))
-                    .createCompositeState(false)
-    );
-
-    public static RenderType GLOWING_PARTICLE = RenderType.create(
-            WizardsReborn.MOD_ID + ":glowing_particle",
-            DefaultVertexFormat.PARTICLE,
-            VertexFormat.Mode.QUADS, 256, true, false,
-                    RenderType.CompositeState.builder()
-                    .setWriteMaskState(new RenderStateShard.WriteMaskStateShard(true, false))
-                    .setLightmapState(new RenderStateShard.LightmapStateShard(false))
-                    .setTransparencyState(ADDITIVE_TRANSPARENCY)
-                    .setTextureState(new RenderStateShard.TextureStateShard(TextureAtlas.LOCATION_PARTICLES, false, false))
-                    .setShaderState(new RenderStateShard.ShaderStateShard(WizardsRebornClient::getGlowingParticleShader))
-                    .createCompositeState(false));
-
-    public static RenderType DELAYED_PARTICLE = RenderType.create(
-            WizardsReborn.MOD_ID + ":delayed_particle",
-            DefaultVertexFormat.PARTICLE,
-            VertexFormat.Mode.QUADS, 256, true, false,
-            RenderType.CompositeState.builder()
-                    .setWriteMaskState(new RenderStateShard.WriteMaskStateShard(true, false))
-                    .setTransparencyState(NORMAL_TRANSPARENCY)
-                    .setTextureState(new RenderStateShard.TextureStateShard(TextureAtlas.LOCATION_PARTICLES, false, false))
-                    .setShaderState(new RenderStateShard.ShaderStateShard(WizardsRebornClient::getSpriteParticleShader))
-                    .createCompositeState(false)
-    );
-
-    public static final RenderType FLUID = RenderType.create(
-            WizardsReborn.MOD_ID + ":fluid",
-            DefaultVertexFormat.POSITION_COLOR_TEX_LIGHTMAP,
-            VertexFormat.Mode.QUADS, 256, true, false,
-            RenderType.CompositeState.builder()
-                    .setWriteMaskState(new RenderStateShard.WriteMaskStateShard(true, false))
-                    .setLightmapState(new RenderStateShard.LightmapStateShard(true))
-                    .setTransparencyState(TRANSLUCENT_TRANSPARENCY)
-                    .setTextureState(new RenderStateShard.TextureStateShard(TextureAtlas.LOCATION_BLOCKS, false, false))
-                    .setShaderState(new RenderStateShard.ShaderStateShard(WizardsRebornClient::getFluidShader))
-                    .setCullState(new RenderStateShard.CullStateShard(true))
-                    .createCompositeState(false)
-    );
 
     public static CustomItemRenderer customItemRenderer;
 
@@ -251,7 +160,7 @@ public class RenderUtils {
         float f5 = 0.5f;
         float f7 = Math.min(f5 > 0.8F ? (f5 - 0.8F) / 0.2F : 0.0F, 1.0F);
         Random random = new Random((long) (432L + randomF));
-        VertexConsumer builder = buf.getBuffer(GLOWING);
+        VertexConsumer builder = buf.getBuffer(FluffyFurRenderTypes.GLOWING);
         mStack.pushPose();
         mStack.translate(x, y, z);
 
@@ -306,7 +215,7 @@ public class RenderUtils {
     }
 
     public static void ray(PoseStack mStack, MultiBufferSource buf, float width, float height, float endOffset, float r1, float g1, float b1, float a1, float r2, float g2, float b2, float a2) {
-        VertexConsumer builder = buf.getBuffer(GLOWING);
+        VertexConsumer builder = buf.getBuffer(FluffyFurRenderTypes.GLOWING);
 
         Matrix4f mat = mStack.last().pose();
 
@@ -359,7 +268,7 @@ public class RenderUtils {
     }
 
     public static void beam(PoseStack mStack, MultiBufferSource buf, float width, float height, float endOffset, float r1, float g1, float b1, float a1, float r2, float g2, float b2, float a2) {
-        VertexConsumer builder = buf.getBuffer(GLOWING);
+        VertexConsumer builder = buf.getBuffer(FluffyFurRenderTypes.GLOWING);
 
         Matrix4f mat = mStack.last().pose();
 
@@ -385,7 +294,7 @@ public class RenderUtils {
     }
 
     public static void litQuad(PoseStack mStack, MultiBufferSource buf, float x, float y, float width, float height, float r, float g, float b, float a) {
-        VertexConsumer builder = buf.getBuffer(GLOWING);
+        VertexConsumer builder = buf.getBuffer(FluffyFurRenderTypes.GLOWING);
 
         Matrix4f mat = mStack.last().pose();
         builder.vertex(mat, x, y + height, 0).color(r, g, b, a).endVertex();
@@ -395,7 +304,7 @@ public class RenderUtils {
     }
 
     public static void litQuadCube(PoseStack mStack, MultiBufferSource buf, float x1, float y1, float z1, float x2, float y2, float z2, float r, float g, float b, float a) {
-        VertexConsumer builder = buf.getBuffer(GLOWING);
+        VertexConsumer builder = buf.getBuffer(FluffyFurRenderTypes.GLOWING);
 
         Matrix4f mat = mStack.last().pose();
 
@@ -431,7 +340,7 @@ public class RenderUtils {
     }
 
     public static void spriteGlowQuad(PoseStack mStack, MultiBufferSource buf, float x, float y, float width, float height, float u0, float u1, float v0, float v1, float r, float g, float b, float a) {
-        VertexConsumer builder = buf.getBuffer(GLOWING_SPRITE);
+        VertexConsumer builder = buf.getBuffer(FluffyFurRenderTypes.GLOWING_SPRITE);
 
         Matrix4f mat = mStack.last().pose();
         builder.vertex(mat, x, y + height, 0).uv(u0, v1).uv2(0).color(r, g, b, a).endVertex();
@@ -441,7 +350,7 @@ public class RenderUtils {
     }
 
     public static void spriteGlowQuadCenter(PoseStack mStack, MultiBufferSource buf, float x, float y, float width, float height, float u0, float u1, float v0, float v1, float r, float g, float b, float a) {
-        VertexConsumer builder = buf.getBuffer(GLOWING_SPRITE);
+        VertexConsumer builder = buf.getBuffer(FluffyFurRenderTypes.GLOWING_SPRITE);
 
         Matrix4f mat = mStack.last().pose();
         builder.vertex(mat, x - (width / 2), y + (height / 2), 0).uv(u0, v1).uv2(0).color(r, g, b, a).endVertex();
@@ -451,7 +360,7 @@ public class RenderUtils {
     }
 
     public static void spriteWaveQuad(PoseStack mStack, MultiBufferSource buf, float x, float y, float width, float height, float wave, float tick1, float tick2, float tick3, float tick4, float u0, float u1, float v0, float v1, float r, float g, float b, float a) {
-        VertexConsumer builder = buf.getBuffer(GLOWING_SPRITE);
+        VertexConsumer builder = buf.getBuffer(FluffyFurRenderTypes.GLOWING_SPRITE);
 
         Matrix4f mat = mStack.last().pose();
         builder.vertex(mat, x - (width / 2) + (wave * (float) Math.sin(Math.toRadians(tick1))), y + (height / 2) + (wave * (float) Math.cos(Math.toRadians(tick1))), 0).uv(u0, v1).uv2(0).color(r, g, b, a).endVertex();
@@ -771,7 +680,7 @@ public class RenderUtils {
     }
 
     public static void scytheTrail(PoseStack mStack, MultiBufferSource buf, float width, float height, float endOffset, float r1, float g1, float b1, float a1, float r2, float g2, float b2, float a2) {
-        VertexConsumer builder = buf.getBuffer(GLOWING);
+        VertexConsumer builder = buf.getBuffer(FluffyFurRenderTypes.GLOWING);
 
         Matrix4f mat = mStack.last().pose();
 
@@ -800,7 +709,7 @@ public class RenderUtils {
         RenderSystem.enableBlend();
         RenderSystem.blendFunc(GlStateManager.SourceFactor.SRC_ALPHA, GlStateManager.DestFactor.ONE);
         RenderSystem.depthMask(false);
-        RenderSystem.setShader(WizardsRebornClient::getGlowingShader);
+        RenderSystem.setShader(FluffyFurShaders::getGlowing);
         RenderSystem.setShaderColor(1F, 1F, 1F, 1F);
     }
 

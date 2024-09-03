@@ -7,9 +7,9 @@ import mod.maxbogomol.fluffy_fur.client.animation.ItemAnimation;
 import mod.maxbogomol.fluffy_fur.common.item.ICustomAnimationItem;
 import mod.maxbogomol.fluffy_fur.common.item.IGuiParticleItem;
 import mod.maxbogomol.fluffy_fur.common.item.ItemBackedInventory;
+import mod.maxbogomol.fluffy_fur.registry.client.FluffyFurShaders;
 import mod.maxbogomol.fluffy_fur.util.ColorUtil;
 import mod.maxbogomol.wizards_reborn.WizardsReborn;
-import mod.maxbogomol.wizards_reborn.WizardsRebornClient;
 import mod.maxbogomol.wizards_reborn.api.crystal.CrystalStat;
 import mod.maxbogomol.wizards_reborn.api.crystal.CrystalType;
 import mod.maxbogomol.wizards_reborn.api.knowledge.KnowledgeUtil;
@@ -762,7 +762,7 @@ public class ArcaneWandItem extends Item implements IWissenItem, ICustomAnimatio
                 RenderSystem.blendFunc(GlStateManager.SourceFactor.SRC_ALPHA, GlStateManager.DestFactor.ONE);
                 MultiBufferSource.BufferSource buffersource = Minecraft.getInstance().renderBuffers().bufferSource();
                 RenderSystem.depthMask(false);
-                RenderSystem.setShader(WizardsRebornClient::getGlowingShader);
+                RenderSystem.setShader(FluffyFurShaders::getGlowing);
                 RenderSystem.setShaderColor(1F, 1F, 1F, 1F);
 
                 pose.pushPose();

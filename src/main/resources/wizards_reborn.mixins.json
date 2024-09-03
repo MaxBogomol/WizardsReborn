@@ -14,8 +14,7 @@
     "client.LevelRendererMixin",
     "client.RabbitRendererMixin",
     "client.FoxRendererMixin",
-    "client.GuiGraphicsMixin",
-    "client.CameraMixin"
+    "client.GuiGraphicsMixin"
   ],
   "minVersion": "0.8",
   "injectors": {

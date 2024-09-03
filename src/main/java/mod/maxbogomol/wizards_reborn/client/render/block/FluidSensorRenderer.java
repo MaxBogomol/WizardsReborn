@@ -2,10 +2,10 @@ package mod.maxbogomol.wizards_reborn.client.render.block;
 
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.math.Axis;
+import mod.maxbogomol.fluffy_fur.client.event.ClientTickHandler;
 import mod.maxbogomol.fluffy_fur.client.render.LevelRenderHandler;
-import mod.maxbogomol.wizards_reborn.client.event.ClientTickHandler;
-import mod.maxbogomol.wizards_reborn.client.render.fluid.FluidCuboid;
-import mod.maxbogomol.wizards_reborn.client.render.fluid.FluidRenderer;
+import mod.maxbogomol.fluffy_fur.client.render.fluid.FluidCuboid;
+import mod.maxbogomol.fluffy_fur.client.render.fluid.FluidRenderer;
 import mod.maxbogomol.wizards_reborn.common.block.sensor.SensorBaseBlock;
 import mod.maxbogomol.wizards_reborn.common.block.sensor.fluid.FluidSensorBlockEntity;
 import mod.maxbogomol.wizards_reborn.util.RenderUtils;

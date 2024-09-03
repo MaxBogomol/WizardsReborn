@@ -9,7 +9,7 @@ import mod.maxbogomol.fluffy_fur.common.block.entity.TickableBlockEntity;
 import mod.maxbogomol.fluffy_fur.common.easing.Easing;
 import mod.maxbogomol.fluffy_fur.common.network.BlockEntityUpdate;
 import mod.maxbogomol.fluffy_fur.registry.client.FluffyFurParticles;
-import mod.maxbogomol.fluffy_fur.util.RenderUtils;
+import mod.maxbogomol.fluffy_fur.registry.client.FluffyFurRenderTypes;
 import mod.maxbogomol.wizards_reborn.common.block.ArcaneLumosBlock;
 import mod.maxbogomol.wizards_reborn.registry.common.block.WizardsRebornBlockEntities;
 import mod.maxbogomol.wizards_reborn.registry.common.item.WizardsRebornItemTags;
@@ -131,7 +131,7 @@ public class SaltCampfireBlockEntity extends ExposedBlockSimpleInventory impleme
             }
             if (random.nextFloat() < 0.3) {
                 ParticleBuilder.create(FluffyFurParticles.SMOKE)
-                        .setRenderType(RenderUtils.DELAYED_PARTICLE)
+                        .setRenderType(FluffyFurRenderTypes.DELAYED_PARTICLE)
                         .setColorData(ColorParticleData.create(Color.BLACK).build())
                         .setTransparencyData(GenericParticleData.create(0.4f, 0).build())
                         .setScaleData(GenericParticleData.create(0.45f, 0).build())
@@ -192,7 +192,7 @@ public class SaltCampfireBlockEntity extends ExposedBlockSimpleInventory impleme
 
                     if (random.nextFloat() < 0.1) {
                         ParticleBuilder.create(FluffyFurParticles.SMOKE)
-                                .setRenderType(RenderUtils.DELAYED_PARTICLE)
+                                .setRenderType(FluffyFurRenderTypes.DELAYED_PARTICLE)
                                 .setColorData(ColorParticleData.create(Color.BLACK).build())
                                 .setTransparencyData(GenericParticleData.create(0.4f, 0).build())
                                 .setScaleData(GenericParticleData.create(0.45f, 0.3f).build())

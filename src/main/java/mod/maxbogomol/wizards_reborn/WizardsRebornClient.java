@@ -1,13 +1,11 @@
 package mod.maxbogomol.wizards_reborn;
 
 import com.mojang.blaze3d.platform.InputConstants;
-import com.mojang.blaze3d.vertex.DefaultVertexFormat;
 import mod.maxbogomol.fluffy_fur.FluffyFurClient;
 import mod.maxbogomol.fluffy_fur.client.gui.screen.FluffyFurMod;
 import mod.maxbogomol.fluffy_fur.client.gui.screen.FluffyFurPanorama;
 import mod.maxbogomol.wizards_reborn.client.arcanemicon.ArcanemiconChapters;
 import mod.maxbogomol.wizards_reborn.client.event.ClientEvents;
-import mod.maxbogomol.wizards_reborn.client.event.ClientTickHandler;
 import mod.maxbogomol.wizards_reborn.client.event.ClientWorldEvent;
 import mod.maxbogomol.wizards_reborn.client.event.KeyBindHandler;
 import mod.maxbogomol.wizards_reborn.client.gui.TooltipEventHandler;
@@ -15,13 +13,11 @@ import mod.maxbogomol.wizards_reborn.common.item.equipment.WissenWandItem;
 import mod.maxbogomol.wizards_reborn.registry.client.WizardsRebornModels;
 import mod.maxbogomol.wizards_reborn.registry.common.item.WizardsRebornItems;
 import net.minecraft.client.KeyMapping;
-import net.minecraft.client.renderer.ShaderInstance;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.client.event.RegisterKeyMappingsEvent;
-import net.minecraftforge.client.event.RegisterShadersEvent;
 import net.minecraftforge.client.settings.KeyConflictContext;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.eventbus.api.IEventBus;
@@ -31,7 +27,6 @@ import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import org.lwjgl.glfw.GLFW;
 
 import java.awt.*;
-import java.io.IOException;
 import java.util.Random;
 
 public class WizardsRebornClient {
@@ -42,14 +37,6 @@ public class WizardsRebornClient {
     public static final KeyMapping PREVIOUS_SPELL_KEY = new KeyMapping("key."+WizardsReborn.MOD_ID+".previous_spell", KeyConflictContext.IN_GAME, InputConstants.Type.KEYSYM, GLFW.GLFW_KEY_Z, CATEGORY_KEY);
     public static final KeyMapping SPELL_SETS_TOGGLE_KEY = new KeyMapping("key."+WizardsReborn.MOD_ID+".spell_sets_toggle", KeyConflictContext.IN_GAME, InputConstants.Type.KEYSYM, GLFW.GLFW_KEY_LEFT_ALT, CATEGORY_KEY);
 
-    public static ShaderInstance GLOWING_SHADER, GLOWING_SPRITE_SHADER, GLOWING_PARTICLE_SHADER, SPRITE_PARTICLE_SHADER, FLUID_SHADER;
-
-    public static ShaderInstance getGlowingShader() { return GLOWING_SHADER; }
-    public static ShaderInstance getGlowingSpriteShader() { return GLOWING_SPRITE_SHADER; }
-    public static ShaderInstance getGlowingParticleShader() { return GLOWING_PARTICLE_SHADER; }
-    public static ShaderInstance getSpriteParticleShader() { return SPRITE_PARTICLE_SHADER; }
-    public static ShaderInstance getFluidShader() { return FLUID_SHADER; }
-
     public static Random random = new Random();
 
     public static class ClientOnly {
@@ -58,7 +45,6 @@ public class WizardsRebornClient {
             WizardsRebornModels.setupWandCrystalsModels();
             WissenWandItem.setupTooltips();
 
-            forgeBus.addListener(ClientTickHandler::clientTickEnd);
             forgeBus.addListener(ClientWorldEvent::onTick);
             forgeBus.addListener(ClientWorldEvent::onRender);
             forgeBus.addListener(TooltipEventHandler::onPostTooltipEvent);
@@ -83,20 +69,6 @@ public class WizardsRebornClient {
             event.register(WizardsRebornClient.NEXT_SPELL_KEY);
             event.register(WizardsRebornClient.PREVIOUS_SPELL_KEY);
             event.register(WizardsRebornClient.SPELL_SETS_TOGGLE_KEY);
-        }
-
-        @SubscribeEvent
-        public static void shaderRegistry(RegisterShadersEvent event) throws IOException {
-            event.registerShader(new ShaderInstance(event.getResourceProvider(), new ResourceLocation("wizards_reborn:glowing"), DefaultVertexFormat.POSITION_COLOR),
-                    shader -> { GLOWING_SHADER = shader; });
-            event.registerShader(new ShaderInstance(event.getResourceProvider(), new ResourceLocation("wizards_reborn:glowing_sprite"), DefaultVertexFormat.POSITION_TEX_COLOR),
-                    shader -> { GLOWING_SPRITE_SHADER = shader; });
-            event.registerShader(new ShaderInstance(event.getResourceProvider(), new ResourceLocation("wizards_reborn:glowing_particle"), DefaultVertexFormat.PARTICLE),
-                    shader -> { GLOWING_PARTICLE_SHADER = shader; });
-            event.registerShader(new ShaderInstance(event.getResourceProvider(), new ResourceLocation("wizards_reborn:sprite_particle"), DefaultVertexFormat.PARTICLE),
-                    shader -> { SPRITE_PARTICLE_SHADER = shader; });
-            event.registerShader(new ShaderInstance(event.getResourceProvider(), new ResourceLocation("wizards_reborn:fluid"), DefaultVertexFormat.POSITION_COLOR_TEX_LIGHTMAP),
-                    shader -> { FLUID_SHADER = shader; });
         }
     }
 

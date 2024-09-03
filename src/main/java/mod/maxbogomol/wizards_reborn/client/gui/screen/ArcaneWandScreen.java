@@ -4,20 +4,20 @@ import com.mojang.blaze3d.platform.GlStateManager;
 import com.mojang.blaze3d.platform.InputConstants;
 import com.mojang.blaze3d.systems.RenderSystem;
 import com.mojang.math.Axis;
+import mod.maxbogomol.fluffy_fur.client.event.ClientTickHandler;
+import mod.maxbogomol.fluffy_fur.registry.client.FluffyFurShaders;
 import mod.maxbogomol.wizards_reborn.WizardsReborn;
-import mod.maxbogomol.wizards_reborn.WizardsRebornClient;
 import mod.maxbogomol.wizards_reborn.api.crystal.CrystalType;
 import mod.maxbogomol.wizards_reborn.api.crystal.Crystals;
 import mod.maxbogomol.wizards_reborn.api.knowledge.KnowledgeUtil;
 import mod.maxbogomol.wizards_reborn.api.spell.Spell;
 import mod.maxbogomol.wizards_reborn.api.spell.Spells;
-import mod.maxbogomol.wizards_reborn.client.event.ClientTickHandler;
 import mod.maxbogomol.wizards_reborn.common.item.CrystalItem;
 import mod.maxbogomol.wizards_reborn.common.item.equipment.ArcaneWandItem;
 import mod.maxbogomol.wizards_reborn.common.item.equipment.curio.CrystalBagItem;
 import mod.maxbogomol.wizards_reborn.common.network.*;
-import mod.maxbogomol.wizards_reborn.registry.common.item.WizardsRebornItems;
 import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornSounds;
+import mod.maxbogomol.wizards_reborn.registry.common.item.WizardsRebornItems;
 import mod.maxbogomol.wizards_reborn.util.RenderUtils;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
@@ -409,7 +409,7 @@ public class ArcaneWandScreen extends Screen {
             RenderSystem.blendFunc(GlStateManager.SourceFactor.SRC_ALPHA, GlStateManager.DestFactor.ONE);
             MultiBufferSource.BufferSource buffersource = Minecraft.getInstance().renderBuffers().bufferSource();
             RenderSystem.depthMask(false);
-            RenderSystem.setShader(WizardsRebornClient::getGlowingShader);
+            RenderSystem.setShader(FluffyFurShaders::getGlowing);
 
             gui.pose().pushPose();
             gui.pose().translate(x, y, 0);
@@ -499,7 +499,7 @@ public class ArcaneWandScreen extends Screen {
                     RenderSystem.blendFunc(GlStateManager.SourceFactor.SRC_ALPHA, GlStateManager.DestFactor.ONE);
                     MultiBufferSource.BufferSource buffersource = Minecraft.getInstance().renderBuffers().bufferSource();
                     RenderSystem.depthMask(false);
-                    RenderSystem.setShader(WizardsRebornClient::getGlowingShader);
+                    RenderSystem.setShader(FluffyFurShaders::getGlowing);
 
                     gui.pose().pushPose();
                     gui.pose().translate(x - 64 + w + 16, y - h + (i * 34) + 16, 0);
@@ -569,7 +569,7 @@ public class ArcaneWandScreen extends Screen {
                     RenderSystem.blendFunc(GlStateManager.SourceFactor.SRC_ALPHA, GlStateManager.DestFactor.ONE);
                     MultiBufferSource.BufferSource buffersource = Minecraft.getInstance().renderBuffers().bufferSource();
                     RenderSystem.depthMask(false);
-                    RenderSystem.setShader(WizardsRebornClient::getGlowingShader);
+                    RenderSystem.setShader(FluffyFurShaders::getGlowing);
 
                     gui.pose().pushPose();
                     gui.pose().translate(x - 64 + w + 16, y - h + (i * 34) + 16, 0);
@@ -618,7 +618,7 @@ public class ArcaneWandScreen extends Screen {
                 RenderSystem.blendFunc(GlStateManager.SourceFactor.SRC_ALPHA, GlStateManager.DestFactor.ONE);
                 MultiBufferSource.BufferSource buffersource = Minecraft.getInstance().renderBuffers().bufferSource();
                 RenderSystem.depthMask(false);
-                RenderSystem.setShader(WizardsRebornClient::getGlowingShader);
+                RenderSystem.setShader(FluffyFurShaders::getGlowing);
 
                 float r = 1f;
                 float g = 1f;
@@ -992,7 +992,7 @@ public class ArcaneWandScreen extends Screen {
         RenderSystem.blendFunc(GlStateManager.SourceFactor.SRC_ALPHA, GlStateManager.DestFactor.ONE);
         MultiBufferSource.BufferSource buffersource = Minecraft.getInstance().renderBuffers().bufferSource();
         RenderSystem.depthMask(false);
-        RenderSystem.setShader(WizardsRebornClient::getGlowingShader);
+        RenderSystem.setShader(FluffyFurShaders::getGlowing);
 
         RenderUtils.dragon(gui.pose(), buffersource, x, y, 0, 30 * scale, partialTicks, r, g, b, i);
         buffersource.endBatch();
@@ -1024,7 +1024,7 @@ public class ArcaneWandScreen extends Screen {
         RenderSystem.blendFunc(GlStateManager.SourceFactor.SRC_ALPHA, GlStateManager.DestFactor.ONE);
         MultiBufferSource.BufferSource buffersource = Minecraft.getInstance().renderBuffers().bufferSource();
         RenderSystem.depthMask(false);
-        RenderSystem.setShader(WizardsRebornClient::getGlowingShader);
+        RenderSystem.setShader(FluffyFurShaders::getGlowing);
 
         gui.pose().pushPose();
         gui.pose().translate(width / 2,  height / 2, 0);
@@ -1048,7 +1048,7 @@ public class ArcaneWandScreen extends Screen {
         RenderSystem.blendFunc(GlStateManager.SourceFactor.SRC_ALPHA, GlStateManager.DestFactor.ONE);
         MultiBufferSource.BufferSource buffersource = Minecraft.getInstance().renderBuffers().bufferSource();
         RenderSystem.depthMask(false);
-        RenderSystem.setShader(WizardsRebornClient::getGlowingShader);
+        RenderSystem.setShader(FluffyFurShaders::getGlowing);
 
         gui.pose().pushPose();
         gui.pose().translate(width / 2,  height / 2, 0);

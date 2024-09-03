@@ -86,8 +86,8 @@ public class WizardsRebornSkins {
                 event.register(ItemSkinsModels.getModelLocationSkin(skin));
             }
 
-            event.register(LargeItemRenderer.getModelResourceLocation(WizardsReborn.MOD_ID, "skin/implosion_scythe"));
             event.register(LargeItemRenderer.getModelResourceLocation(WizardsReborn.MOD_ID, "skin/soul_hunter_scythe"));
+            event.register(LargeItemRenderer.getModelResourceLocation(WizardsReborn.MOD_ID, "skin/implosion_scythe"));
         }
 
         @SubscribeEvent
@@ -104,8 +104,8 @@ public class WizardsRebornSkins {
             WandCrystalsModels.addWandItem(map, new ResourceLocation(WizardsReborn.MOD_ID, "skin/magnificent_maid_arcane_wand"));
             WandCrystalsModels.addWandItem(map, new ResourceLocation(WizardsReborn.MOD_ID, "skin/summer_love_arcane_wand"));
 
-            LargeItemRenderer.bakeModel(map, WizardsReborn.MOD_ID, "skin/soul_hunter_scythe");
-            LargeItemRenderer.bakeModel(map, WizardsReborn.MOD_ID, "skin/implosion_scythe");
+            addLargeModel(map, WizardsReborn.MOD_ID, "soul_hunter_scythe");
+            addLargeModel(map, WizardsReborn.MOD_ID, "implosion_scythe");
 
             addSkinModel(map, WizardsRebornItems.WISSEN_WAND.getId());
             addSkinModel(map, WizardsRebornItems.ARCANE_WOOD_SWORD.getId());
@@ -148,5 +148,11 @@ public class WizardsRebornSkins {
         BakedModel model = map.get(new ModelResourceLocation(id, "inventory"));
         CustomModel newModel = new CustomModel(model, new SkinItemOverrides());
         map.replace(new ModelResourceLocation(id, "inventory"), newModel);
+    }
+
+    @OnlyIn(Dist.CLIENT)
+    public static void addLargeModel(Map<ResourceLocation, BakedModel> map, String modId, String skin) {
+        LargeItemRenderer.bakeModel(map, modId, "skin/"+skin);
+        ItemSkinsModels.addModelSkins(modId+":"+skin, map.get(ItemSkinsModels.getModelLocationSkin(modId+":"+skin)));
     }
 }

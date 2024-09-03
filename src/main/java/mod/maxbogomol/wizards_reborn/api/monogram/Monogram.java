@@ -2,10 +2,10 @@ package mod.maxbogomol.wizards_reborn.api.monogram;
 
 import com.mojang.blaze3d.platform.GlStateManager;
 import com.mojang.blaze3d.systems.RenderSystem;
-import mod.maxbogomol.wizards_reborn.WizardsRebornClient;
+import mod.maxbogomol.fluffy_fur.client.event.ClientTickHandler;
+import mod.maxbogomol.fluffy_fur.registry.client.FluffyFurShaders;
 import mod.maxbogomol.wizards_reborn.client.arcanemicon.ArcanemiconGui;
 import mod.maxbogomol.wizards_reborn.client.config.ClientConfig;
-import mod.maxbogomol.wizards_reborn.client.event.ClientTickHandler;
 import mod.maxbogomol.wizards_reborn.util.RenderUtils;
 import net.minecraft.ChatFormatting;
 import net.minecraft.client.Minecraft;
@@ -104,7 +104,7 @@ public class Monogram {
             RenderSystem.blendFunc(GlStateManager.SourceFactor.SRC_ALPHA, GlStateManager.DestFactor.ONE);
             MultiBufferSource.BufferSource buffersource = Minecraft.getInstance().renderBuffers().bufferSource();
             RenderSystem.depthMask(false);
-            RenderSystem.setShader(WizardsRebornClient::getGlowingShader);
+            RenderSystem.setShader(FluffyFurShaders::getGlowing);
 
             gui.pose().pushPose();
             gui.pose().translate(0, 0, 100);
