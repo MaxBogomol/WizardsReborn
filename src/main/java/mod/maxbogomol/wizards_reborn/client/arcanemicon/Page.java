@@ -1,7 +1,7 @@
 package mod.maxbogomol.wizards_reborn.client.arcanemicon;
 
 import mod.maxbogomol.fluffy_fur.util.ColorUtil;
-import mod.maxbogomol.wizards_reborn.WizardsRebornClient;
+import mod.maxbogomol.wizards_reborn.registry.client.WizardsRebornKeyMappings;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Font;
 import net.minecraft.client.gui.GuiGraphics;
@@ -41,19 +41,19 @@ public abstract class Page {
         Font font = Minecraft.getInstance().font;
         List<String> lines = new ArrayList<>();
         if (text.contains("wizards_reborn:wandMenu")) {
-            text = text.replace("wizards_reborn:wandMenu", WizardsRebornClient.OPEN_SELECTION_MENU_KEY.getTranslatedKeyMessage().getString());
+            text = text.replace("wizards_reborn:wandMenu", WizardsRebornKeyMappings.OPEN_SELECTION_MENU.getTranslatedKeyMessage().getString());
         }
         if (text.contains("wizards_reborn:bagMenu")) {
-            text = text.replace("wizards_reborn:bagMenu", WizardsRebornClient.OPEN_BAG_MENU_KEY.getTranslatedKeyMessage().getString());
+            text = text.replace("wizards_reborn:bagMenu", WizardsRebornKeyMappings.OPEN_BAG_MENU.getTranslatedKeyMessage().getString());
         }
         if (text.contains("wizards_reborn:nextSpell")) {
-            text = text.replace("wizards_reborn:nextSpell", WizardsRebornClient.NEXT_SPELL_KEY.getTranslatedKeyMessage().getString());
+            text = text.replace("wizards_reborn:nextSpell", WizardsRebornKeyMappings.NEXT_SPELL.getTranslatedKeyMessage().getString());
         }
         if (text.contains("wizards_reborn:previousSpell")) {
-            text = text.replace("wizards_reborn:previousSpell", WizardsRebornClient.PREVIOUS_SPELL_KEY.getTranslatedKeyMessage().getString());
+            text = text.replace("wizards_reborn:previousSpell", WizardsRebornKeyMappings.PREVIOUS_SPELL.getTranslatedKeyMessage().getString());
         }
         if (text.contains("wizards_reborn:spellSetsToggle")) {
-            text = text.replace("wizards_reborn:spellSetsToggle", WizardsRebornClient.SPELL_SETS_TOGGLE_KEY.getTranslatedKeyMessage().getString());
+            text = text.replace("wizards_reborn:spellSetsToggle", WizardsRebornKeyMappings.SPELL_SETS_TOGGLE.getTranslatedKeyMessage().getString());
         }
         if (text.contains("minecraft:sneak")) {
             text = text.replace("minecraft:sneak", Minecraft.getInstance().options.keyShift.getTranslatedKeyMessage().getString());
