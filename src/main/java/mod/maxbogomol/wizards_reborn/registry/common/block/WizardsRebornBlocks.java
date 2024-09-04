@@ -5,7 +5,7 @@ import mod.maxbogomol.fluffy_fur.common.block.sign.CustomCeilingHangingSignBlock
 import mod.maxbogomol.fluffy_fur.common.block.sign.CustomStandingSignBlock;
 import mod.maxbogomol.fluffy_fur.common.block.sign.CustomWallHangingSignBlock;
 import mod.maxbogomol.fluffy_fur.common.block.sign.CustomWallSignBlock;
-import mod.maxbogomol.fluffy_fur.registry.common.FluffyFurBlocks;
+import mod.maxbogomol.fluffy_fur.registry.common.block.FluffyFurBlocks;
 import mod.maxbogomol.wizards_reborn.WizardsReborn;
 import mod.maxbogomol.wizards_reborn.common.block.*;
 import mod.maxbogomol.wizards_reborn.common.block.alchemy_boiler.AlchemyBoilerBlock;
@@ -161,7 +161,6 @@ public class WizardsRebornBlocks {
     public static final RegistryObject<Block> POTTED_INNOCENT_WOOD_SAPLING = BLOCKS.register("potted_innocent_wood_sapling", () -> new FlowerPotBlock(INNOCENT_WOOD_SAPLING.get(), BlockBehaviour.Properties.copy(Blocks.FLOWER_POT).instabreak().noOcclusion()));
     public static final RegistryObject<Block> PETALS_OF_INNOCENCE = BLOCKS.register("petals_of_innocence", () -> new PetalsOfInnocenceBlock(BlockBehaviour.Properties.copy(Blocks.PINK_PETALS)));
     public static final RegistryObject<Block> POTTED_PETALS_OF_INNOCENCE = BLOCKS.register("potted_petals_of_innocence", () -> new FlowerPotBlock(PETALS_OF_INNOCENCE.get(), BlockBehaviour.Properties.copy(Blocks.FLOWER_POT).instabreak().noOcclusion()));
-    public static final RegistryObject<Block> POTTED_PINK_PETALS = BLOCKS.register("potted_pink_petals", () -> new FlowerPotBlock(Blocks.PINK_PETALS, BlockBehaviour.Properties.copy(Blocks.FLOWER_POT).instabreak().noOcclusion()));
 
     public static final RegistryObject<Block> WISESTONE = BLOCKS.register("wisestone", () -> new Block(BlockBehaviour.Properties.copy(Blocks.DEEPSLATE).mapColor(MapColor.TERRACOTTA_BLACK).sound(WizardsRebornSounds.WISESTONE)));
     public static final RegistryObject<Block> WISESTONE_STAIRS = BLOCKS.register("wisestone_stairs", () -> new StairBlock(() -> WISESTONE.get().defaultBlockState(), BlockBehaviour.Properties.copy(WISESTONE.get())));
@@ -472,6 +471,8 @@ public class WizardsRebornBlocks {
 
     public static final RegistryObject<Block> ARCACITE_POLISHING_MIXTURE_BLOCK = BLOCKS.register("arcacite_polishing_mixture_block", () -> new Block(BlockBehaviour.Properties.copy(Blocks.RAW_GOLD_BLOCK).mapColor(MapColor.TERRACOTTA_RED).sound(WizardsRebornSounds.MIXTURE)));
 
+    public static final RegistryObject<Block> SNIFFALO_EGG = BLOCKS.register("sniffalo_egg", () -> new SniffaloEggBlock(BlockBehaviour.Properties.copy(Blocks.SNIFFER_EGG).mapColor(MapColor.COLOR_BROWN)));
+
     public static final RegistryObject<LiquidBlock> MUNDANE_BREW = BLOCKS.register("mundane_brew", () -> new LiquidBlock(WizardsRebornFluids.MUNDANE_BREW, BlockBehaviour.Properties.copy(Blocks.WATER)));
     public static final RegistryObject<LiquidBlock> ALCHEMY_OIL = BLOCKS.register("alchemy_oil", () -> new LiquidBlock(WizardsRebornFluids.ALCHEMY_OIL, BlockBehaviour.Properties.copy(Blocks.WATER)));
     public static final RegistryObject<LiquidBlock> OIL_TEA = BLOCKS.register("oil_tea", () -> new LiquidBlock(WizardsRebornFluids.OIL_TEA, BlockBehaviour.Properties.copy(Blocks.WATER)));
@@ -480,8 +481,6 @@ public class WizardsRebornBlocks {
     public static final RegistryObject<LiquidBlock> HELLISH_MUSHROOM_BREW = BLOCKS.register("hellish_mushroom_brew", () -> new LiquidBlock(WizardsRebornFluids.HELLISH_MUSHROOM_BREW, BlockBehaviour.Properties.copy(Blocks.WATER)));
     public static final RegistryObject<LiquidBlock> MOR_BREW = BLOCKS.register("mor_brew", () -> new LiquidBlock(WizardsRebornFluids.MOR_BREW, BlockBehaviour.Properties.copy(Blocks.WATER)));
     public static final RegistryObject<LiquidBlock> FLOWER_BREW = BLOCKS.register("flower_brew", () -> new LiquidBlock(WizardsRebornFluids.FLOWER_BREW, BlockBehaviour.Properties.copy(Blocks.WATER)));
-
-    public static final RegistryObject<Block> SNIFFALO_EGG = BLOCKS.register("sniffalo_egg", () -> new SniffaloEggBlock(BlockBehaviour.Properties.copy(Blocks.SNIFFER_EGG).mapColor(MapColor.COLOR_BROWN)));
 
     public static void register(IEventBus eventBus) {
         BLOCKS.register(eventBus);

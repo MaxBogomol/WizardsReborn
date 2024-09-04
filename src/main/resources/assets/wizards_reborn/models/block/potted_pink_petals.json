@@ -1,9 +1,0 @@
-{
-  "parent": "wizards_reborn:block/potted_petals",
-  "render_type": "minecraft:cutout",
-  "textures": {
-    "pot": "minecraft:block/flower_pot",
-    "dirt": "minecraft:block/dirt",
-    "petals": "wizards_reborn:block/potted_pink_petals"
-  }
-}

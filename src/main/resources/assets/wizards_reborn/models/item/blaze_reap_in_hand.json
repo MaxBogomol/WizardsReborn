@@ -1,5 +1,5 @@
 {
-  "parent": "wizards_reborn:item/handheld_large_rotated",
+  "parent": "fluffy_fur:item/handheld_large_rotated",
   "textures": {
     "layer0": "wizards_reborn:item/blaze_reap_in_hand"
   }

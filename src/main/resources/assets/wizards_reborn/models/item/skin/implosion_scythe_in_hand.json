@@ -1,5 +1,5 @@
 {
-  "parent": "wizards_reborn:item/handheld_large",
+  "parent": "fluffy_fur:item/handheld_large",
   "textures": {
     "layer0": "wizards_reborn:item/skin/implosion_scythe_in_hand"
   }

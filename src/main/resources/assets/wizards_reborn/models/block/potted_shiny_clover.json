@@ -1,5 +1,5 @@
 {
-  "parent": "wizards_reborn:block/potted_petals",
+  "parent": "fluffy_fur:block/potted_petals",
   "render_type": "minecraft:cutout",
   "textures": {
     "pot": "minecraft:block/flower_pot",
