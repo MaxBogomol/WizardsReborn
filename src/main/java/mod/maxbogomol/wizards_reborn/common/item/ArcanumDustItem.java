@@ -35,14 +35,14 @@ public class ArcanumDustItem extends ArcanumItem {
     @Override
     public InteractionResult onItemUseFirst(ItemStack stack, UseOnContext context) {
         Player player = context.getPlayer();
-        Level world = context.getLevel();
+        Level level = context.getLevel();
         BlockPos blockpos = context.getClickedPos();
 
-        if (!world.isClientSide) {
+        if (!level.isClientSide) {
             SimpleContainer inv = new SimpleContainer(1);
-            inv.setItem(0, world.getBlockState(blockpos).getBlock().asItem().getDefaultInstance());
-            Optional<ArcanumDustTransmutationRecipe> recipe = world.getRecipeManager()
-                    .getRecipeFor(WizardsRebornRecipes.ARCANUM_DUST_TRANSMUTATION.get(), inv, world);
+            inv.setItem(0, level.getBlockState(blockpos).getBlock().asItem().getDefaultInstance());
+            Optional<ArcanumDustTransmutationRecipe> recipe = level.getRecipeManager()
+                    .getRecipeFor(WizardsRebornRecipes.ARCANUM_DUST_TRANSMUTATION.get(), inv, level);
 
             AtomicBoolean place_block = new AtomicBoolean(true);
             AtomicReference<ItemStack> item = new AtomicReference<>(ItemStack.EMPTY);
@@ -57,20 +57,20 @@ public class ArcanumDustItem extends ArcanumItem {
             if (!(item.get().isEmpty())) {
                 if (item.get().getItem() instanceof BlockItem) {
                     BlockItem blockitem = (BlockItem) item.get().getItem();
-                    world.destroyBlock(blockpos, false);
+                    level.destroyBlock(blockpos, false);
                     if (place_block.get()) {
-                        world.setBlockAndUpdate(blockpos, blockitem.getBlock().defaultBlockState());
+                        level.setBlockAndUpdate(blockpos, blockitem.getBlock().defaultBlockState());
                     } else {
-                        if (!world.isClientSide()) {
-                            world.addFreshEntity(new ItemEntity(world, blockpos.getX() + 0.5F, blockpos.getY() + 0.5F, blockpos.getZ() + 0.5F, item.get()));
+                        if (!level.isClientSide()) {
+                            level.addFreshEntity(new ItemEntity(level, blockpos.getX() + 0.5F, blockpos.getY() + 0.5F, blockpos.getZ() + 0.5F, item.get()));
                         }
                     }
 
                     craft = true;
                 } else {
-                    world.destroyBlock(blockpos, false);
-                    if (!world.isClientSide()) {
-                        world.addFreshEntity(new ItemEntity(world, blockpos.getX() + 0.5F, blockpos.getY() + 0.5F, blockpos.getZ() + 0.5F, item.get()));
+                    level.destroyBlock(blockpos, false);
+                    if (!level.isClientSide()) {
+                        level.addFreshEntity(new ItemEntity(level, blockpos.getX() + 0.5F, blockpos.getY() + 0.5F, blockpos.getZ() + 0.5F, item.get()));
                     }
 
                     craft = true;
@@ -84,10 +84,10 @@ public class ArcanumDustItem extends ArcanumItem {
                     Vec3 pos = player.getEyePosition().add(player.getLookAngle().scale(0.75f));
                     Vec3 vel = player.getEyePosition().add(player.getLookAngle().scale(40)).subtract(pos).scale(1.0 / 20).normalize().scale(0.2f);
 
-                    PacketHandler.sendToTracking(world, player.getOnPos(), new WissenDustBurstEffectPacket(blockpos, (float) pos.x, (float) pos.y, (float) pos.z, (float) vel.x, (float) vel.y, (float) vel.z));
+                    PacketHandler.sendToTracking(level, player.getOnPos(), new WissenDustBurstEffectPacket(blockpos, (float) pos.x, (float) pos.y, (float) pos.z, (float) vel.x, (float) vel.y, (float) vel.z));
 
                     player.awardStat(Stats.ITEM_USED.get(this));
-                    world.playSound(WizardsReborn.proxy.getPlayer(), blockpos, WizardsRebornSounds.ARCANUM_DUST_TRANSMUTATION.get(), SoundSource.PLAYERS, 1f, (float) (1.0f + ((random.nextFloat() - 0.5D) / 2)));
+                    level.playSound(WizardsReborn.proxy.getPlayer(), blockpos, WizardsRebornSounds.ARCANUM_DUST_TRANSMUTATION.get(), SoundSource.PLAYERS, 1f, (float) (1.0f + ((random.nextFloat() - 0.5D) / 2)));
 
                     return InteractionResult.SUCCESS;
                 }
@@ -97,12 +97,12 @@ public class ArcanumDustItem extends ArcanumItem {
         return InteractionResult.PASS;
     }
 
-    public static boolean executeTransmutation(ItemStack stack, Level world, BlockPos blockpos) {
-        if (!world.isClientSide) {
+    public static boolean executeTransmutation(ItemStack stack, Level level, BlockPos blockpos) {
+        if (!level.isClientSide) {
             SimpleContainer inv = new SimpleContainer(1);
-            inv.setItem(0, world.getBlockState(blockpos).getBlock().asItem().getDefaultInstance());
-            Optional<ArcanumDustTransmutationRecipe> recipe = world.getRecipeManager()
-                    .getRecipeFor(WizardsRebornRecipes.ARCANUM_DUST_TRANSMUTATION.get(), inv, world);
+            inv.setItem(0, level.getBlockState(blockpos).getBlock().asItem().getDefaultInstance());
+            Optional<ArcanumDustTransmutationRecipe> recipe = level.getRecipeManager()
+                    .getRecipeFor(WizardsRebornRecipes.ARCANUM_DUST_TRANSMUTATION.get(), inv, level);
 
             AtomicBoolean place_block = new AtomicBoolean(true);
             AtomicReference<ItemStack> item = new AtomicReference<>(ItemStack.EMPTY);
@@ -117,20 +117,20 @@ public class ArcanumDustItem extends ArcanumItem {
             if (!(item.get().isEmpty())) {
                 if (item.get().getItem() instanceof BlockItem) {
                     BlockItem blockitem = (BlockItem) item.get().getItem();
-                    world.destroyBlock(blockpos, false);
+                    level.destroyBlock(blockpos, false);
                     if (place_block.get()) {
-                        world.setBlockAndUpdate(blockpos, blockitem.getBlock().defaultBlockState());
+                        level.setBlockAndUpdate(blockpos, blockitem.getBlock().defaultBlockState());
                     } else {
-                        if (!world.isClientSide()) {
-                            world.addFreshEntity(new ItemEntity(world, blockpos.getX() + 0.5F, blockpos.getY() + 0.5F, blockpos.getZ() + 0.5F, item.get()));
+                        if (!level.isClientSide()) {
+                            level.addFreshEntity(new ItemEntity(level, blockpos.getX() + 0.5F, blockpos.getY() + 0.5F, blockpos.getZ() + 0.5F, item.get()));
                         }
                     }
 
                     craft = true;
                 } else {
-                    world.destroyBlock(blockpos, false);
-                    if (!world.isClientSide()) {
-                        world.addFreshEntity(new ItemEntity(world, blockpos.getX() + 0.5F, blockpos.getY() + 0.5F, blockpos.getZ() + 0.5F, item.get()));
+                    level.destroyBlock(blockpos, false);
+                    if (!level.isClientSide()) {
+                        level.addFreshEntity(new ItemEntity(level, blockpos.getX() + 0.5F, blockpos.getY() + 0.5F, blockpos.getZ() + 0.5F, item.get()));
                     }
 
                     craft = true;
@@ -139,9 +139,9 @@ public class ArcanumDustItem extends ArcanumItem {
 
             if (craft) {
                 stack.setCount(stack.getCount() - 1);
-                PacketHandler.sendToTracking(world, blockpos, new WissenDustBurstEffectPacket(blockpos, blockpos.getX() + 0.5F,  blockpos.getY() + 0.5F,  blockpos.getZ() + 0.5F, 0, 0, 0));
-                world.playSound(WizardsReborn.proxy.getPlayer(), blockpos, WizardsRebornSounds.WISSEN_TRANSFER.get(), SoundSource.PLAYERS, 0.5f, (float) (1.1f + ((random.nextFloat() - 0.5D) / 2)));
-                world.playSound(WizardsReborn.proxy.getPlayer(), blockpos, WizardsRebornSounds.WISSEN_BURST.get(), SoundSource.PLAYERS, 0.5f, (float) (1.3f + ((random.nextFloat() - 0.5D) / 2)));
+                PacketHandler.sendToTracking(level, blockpos, new WissenDustBurstEffectPacket(blockpos, blockpos.getX() + 0.5F,  blockpos.getY() + 0.5F,  blockpos.getZ() + 0.5F, 0, 0, 0));
+                level.playSound(WizardsReborn.proxy.getPlayer(), blockpos, WizardsRebornSounds.WISSEN_TRANSFER.get(), SoundSource.PLAYERS, 0.5f, (float) (1.1f + ((random.nextFloat() - 0.5D) / 2)));
+                level.playSound(WizardsReborn.proxy.getPlayer(), blockpos, WizardsRebornSounds.WISSEN_BURST.get(), SoundSource.PLAYERS, 0.5f, (float) (1.3f + ((random.nextFloat() - 0.5D) / 2)));
 
                 return true;
             }

@@ -128,7 +128,7 @@ public class AlchemyPotionItem extends PlacedItem {
 
     @OnlyIn(Dist.CLIENT)
     @Override
-    public void appendHoverText(ItemStack stack, Level world, List<Component> list, TooltipFlag flags) {
+    public void appendHoverText(ItemStack stack, Level level, List<Component> list, TooltipFlag flags) {
         AlchemyPotion potion = AlchemyPotionUtil.getPotion(stack);
         if (!AlchemyPotionUtil.isEmpty(potion)) {
             list.add(getPotionName(potion));
@@ -154,12 +154,12 @@ public class AlchemyPotionItem extends PlacedItem {
     }
 
     @Override
-    public InteractionResultHolder<ItemStack> use(Level world, Player player, InteractionHand hand) {
+    public InteractionResultHolder<ItemStack> use(Level level, Player player, InteractionHand hand) {
         ItemStack stack = player.getItemInHand(hand);
 
         AlchemyPotion potion = AlchemyPotionUtil.getPotion(stack);
         if (!AlchemyPotionUtil.isEmpty(potion)) {
-            return ItemUtils.startUsingInstantly(world, player, hand);
+            return ItemUtils.startUsingInstantly(level, player, hand);
         }
 
         return InteractionResultHolder.pass(stack);

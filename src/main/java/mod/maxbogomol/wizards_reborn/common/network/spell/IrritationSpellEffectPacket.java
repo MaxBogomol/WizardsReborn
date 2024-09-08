@@ -48,18 +48,18 @@ public class IrritationSpellEffectPacket {
             ctx.get().enqueueWork(new Runnable() {
                 @Override
                 public void run() {
-                    Level world = WizardsReborn.proxy.getLevel();
+                    Level level = WizardsReborn.proxy.getLevel();
                     ParticleBuilder.create(FluffyFurParticles.WISP)
                             .setColorData(ColorParticleData.create(msg.colorR, msg.colorG, msg.colorB).build())
                             .setTransparencyData(GenericParticleData.create(0.3f, 0).build())
                             .setScaleData(GenericParticleData.create(0, 0.3f).build())
                             .setLifetime(60)
                             .randomVelocity(0.05f)
-                            .repeat(world, msg.X, msg.Y, msg.Z, 10, 0.4f);
+                            .repeat(level, msg.X, msg.Y, msg.Z, 10, 0.4f);
 
                     for (int i = 0; i < 22; i++) {
                         if (random.nextFloat() < 0.6f) {
-                            world.addParticle(ParticleTypes.ENTITY_EFFECT,
+                            level.addParticle(ParticleTypes.ENTITY_EFFECT,
                                     msg.X + ((random.nextDouble() - 0.5D) / 5), msg.Y + ((random.nextDouble() - 0.5D) / 5), msg.Z + ((random.nextDouble() - 0.5D) / 5),
                                     msg.colorR, msg.colorG, msg.colorB);
                         }

@@ -31,7 +31,7 @@ public class CreativeWissenKeychainItem extends WissenKeychainItem {
     }
 
     @Override
-    public void inventoryTick(ItemStack stack, Level world, Entity entity, int slot, boolean isSelected) {
+    public void inventoryTick(ItemStack stack, Level level, Entity entity, int slot, boolean isSelected) {
         WissenItemUtil.existWissen(stack);
         WissenItemUtil.setWissen(stack, Integer.MAX_VALUE);
     }

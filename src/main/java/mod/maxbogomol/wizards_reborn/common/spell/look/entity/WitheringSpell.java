@@ -52,13 +52,13 @@ public class WitheringSpell extends EntityLookSpell {
     }
 
     @Override
-    public void lookSpell(Level world, Player player, InteractionHand hand) {
+    public void lookSpell(Level level, Player player, InteractionHand hand) {
         ItemStack stack = player.getItemInHand(hand);
         CompoundTag stats = getStats(stack);
         int focusLevel = CrystalUtil.getStatLevel(stats, WizardsRebornCrystals.FOCUS);
         float magicModifier = ArcaneArmorItem.getPlayerMagicModifier(player);
 
-        HitResult hit = getEntityHit(world, player, hand);
+        HitResult hit = getEntityHit(level, player, hand);
         Vec3 pos = hit.getPosHit();
         if (hit.hasEntities()) {
             for (Entity entity : hit.getEntities()) {

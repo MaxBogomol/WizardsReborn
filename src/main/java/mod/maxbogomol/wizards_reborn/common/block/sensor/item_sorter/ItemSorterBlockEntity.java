@@ -31,8 +31,8 @@ public class ItemSorterBlockEntity extends SensorBlockEntity implements ICooldow
         super(type, pos, state);
     }
 
-    public ItemSorterBlockEntity(BlockPos pPos, BlockState pBlockState) {
-        super(WizardsRebornBlockEntities.ITEM_SORTER.get(), pPos, pBlockState);
+    public ItemSorterBlockEntity(BlockPos pos, BlockState blockState) {
+        super(WizardsRebornBlockEntities.ITEM_SORTER.get(), pos, blockState);
     }
 
     @Override

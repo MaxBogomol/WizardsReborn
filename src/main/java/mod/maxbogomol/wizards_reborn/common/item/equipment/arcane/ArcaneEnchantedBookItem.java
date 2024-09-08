@@ -25,8 +25,8 @@ public class ArcaneEnchantedBookItem extends Item implements IArcaneItem {
 
     @OnlyIn(Dist.CLIENT)
     @Override
-    public void appendHoverText(ItemStack stack, Level world, List<Component> list, TooltipFlag flags) {
-        list.addAll(ArcaneEnchantmentUtil.appendHoverText(stack, world, flags));
+    public void appendHoverText(ItemStack stack, Level level, List<Component> list, TooltipFlag flags) {
+        list.addAll(ArcaneEnchantmentUtil.appendHoverText(stack, level, flags));
     }
 
     @Override

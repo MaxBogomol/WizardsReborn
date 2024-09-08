@@ -67,8 +67,8 @@ public abstract class PipeBaseBlock extends Block implements EntityBlock, Simple
 
     public abstract boolean unclog(BlockEntity blockEntity, Level level, BlockPos pos);
 
-    public PipeBaseBlock(Properties pProperties) {
-        super(pProperties);
+    public PipeBaseBlock(Properties properties) {
+        super(properties);
         this.registerDefaultState(this.stateDefinition.any().setValue(BlockStateProperties.WATERLOGGED, false));
     }
 
@@ -82,7 +82,7 @@ public abstract class PipeBaseBlock extends Block implements EntityBlock, Simple
 
     @Override
     public InteractionResult use(BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hit) {
-        if (!level.isClientSide) {
+        if (!level.isClientSide()) {
             ItemStack stack = player.getItemInHand(hand).copy();
             boolean isWand = false;
 
@@ -256,7 +256,7 @@ public abstract class PipeBaseBlock extends Block implements EntityBlock, Simple
     }
 
     @Override
-    public RenderShape getRenderShape(BlockState pState) {
+    public RenderShape getRenderShape(BlockState state) {
         return RenderShape.MODEL;
     }
 
@@ -267,39 +267,39 @@ public abstract class PipeBaseBlock extends Block implements EntityBlock, Simple
     }
 
     @Override
-    public BlockState updateShape(BlockState pState, Direction pFacing, BlockState pFacingState, LevelAccessor pLevel, BlockPos pCurrentPos, BlockPos pFacingPos) {
-        if (pState.getValue(BlockStateProperties.WATERLOGGED)) {
-            pLevel.scheduleTick(pCurrentPos, Fluids.WATER, Fluids.WATER.getTickDelay(pLevel));
+    public BlockState updateShape(BlockState state, Direction facing, BlockState facingState, LevelAccessor level, BlockPos currentPos, BlockPos facingPos) {
+        if (state.getValue(BlockStateProperties.WATERLOGGED)) {
+            level.scheduleTick(currentPos, Fluids.WATER, Fluids.WATER.getTickDelay(level));
         }
 
-        BlockEntity BE = pLevel.getBlockEntity(pCurrentPos);
+        BlockEntity BE = level.getBlockEntity(currentPos);
         if (BE instanceof PipeBaseBlockEntity pipe) {
-            BlockEntity facingBE = pLevel.getBlockEntity(pFacingPos);
-            if (!(facingBE instanceof PipeBaseBlockEntity) || ((PipeBaseBlockEntity) facingBE).getConnection(pFacing.getOpposite()) != PipeConnection.DISABLED) {
-                boolean enabled = pipe.getConnection(pFacing) != PipeConnection.DISABLED;
-                if (pFacingState.is(getConnectionTag()) && enabled) {
-                    if (facingBE instanceof PipeBaseBlockEntity && ((PipeBaseBlockEntity) facingBE).getConnection(pFacing.getOpposite()) == PipeConnection.DISABLED) {
-                        pipe.setConnection(pFacing, PipeConnection.DISABLED);
+            BlockEntity facingBE = level.getBlockEntity(facingPos);
+            if (!(facingBE instanceof PipeBaseBlockEntity) || ((PipeBaseBlockEntity) facingBE).getConnection(facing.getOpposite()) != PipeConnection.DISABLED) {
+                boolean enabled = pipe.getConnection(facing) != PipeConnection.DISABLED;
+                if (facingState.is(getConnectionTag()) && enabled) {
+                    if (facingBE instanceof PipeBaseBlockEntity && ((PipeBaseBlockEntity) facingBE).getConnection(facing.getOpposite()) == PipeConnection.DISABLED) {
+                        pipe.setConnection(facing, PipeConnection.DISABLED);
                     } else {
-                        pipe.setConnection(pFacing, PipeConnection.PIPE);
+                        pipe.setConnection(facing, PipeConnection.PIPE);
                     }
                 } else {
-                    BlockEntity blockEntity = pLevel.getBlockEntity(pFacingPos);
-                    if (connected(pFacing, pFacingState)) {
-                        pipe.setConnection(pFacing, PipeConnection.LEVER);
-                    } else if ((connectToTile(blockEntity, pFacing) && enabled)) {
-                        if (pFacingState.getBlock() instanceof IPipeConnection) {
-                            pipe.setConnection(pFacing, ((IPipeConnection) pFacingState.getBlock()).getPipeConnection(pFacingState, pFacing.getOpposite()));
+                    BlockEntity blockEntity = level.getBlockEntity(facingPos);
+                    if (connected(facing, facingState)) {
+                        pipe.setConnection(facing, PipeConnection.LEVER);
+                    } else if ((connectToTile(blockEntity, facing) && enabled)) {
+                        if (facingState.getBlock() instanceof IPipeConnection) {
+                            pipe.setConnection(facing, ((IPipeConnection) facingState.getBlock()).getPipeConnection(facingState, facing.getOpposite()));
                         } else {
-                            pipe.setConnection(pFacing, PipeConnection.END);
+                            pipe.setConnection(facing, PipeConnection.END);
                         }
                     } else if (enabled) {
-                        pipe.setConnection(pFacing, PipeConnection.NONE);
+                        pipe.setConnection(facing, PipeConnection.NONE);
                     }
                 }
             }
         }
-        return super.updateShape(pState, pFacing, pFacingState, pLevel, pCurrentPos, pFacingPos);
+        return super.updateShape(state, facing, facingState, level, currentPos, facingPos);
     }
 
     public static boolean facingConnected(Direction facing, BlockState state, DirectionProperty property) {
@@ -309,12 +309,12 @@ public abstract class PipeBaseBlock extends Block implements EntityBlock, Simple
     public abstract boolean connected(Direction direction, BlockState state);
 
     @Override
-    protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> pBuilder) {
-        pBuilder.add(BlockStateProperties.WATERLOGGED);
+    protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {
+        builder.add(BlockStateProperties.WATERLOGGED);
     }
 
     @Override
-    public FluidState getFluidState(BlockState pState) {
-        return pState.getValue(BlockStateProperties.WATERLOGGED) ? Fluids.WATER.getSource(false) : super.getFluidState(pState);
+    public FluidState getFluidState(BlockState state) {
+        return state.getValue(BlockStateProperties.WATERLOGGED) ? Fluids.WATER.getSource(false) : super.getFluidState(state);
     }
 }

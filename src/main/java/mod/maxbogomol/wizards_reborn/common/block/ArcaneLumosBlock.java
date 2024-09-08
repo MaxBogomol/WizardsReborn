@@ -3,6 +3,7 @@ package mod.maxbogomol.wizards_reborn.common.block;
 import mod.maxbogomol.fluffy_fur.client.particle.ParticleBuilder;
 import mod.maxbogomol.fluffy_fur.client.particle.data.ColorParticleData;
 import mod.maxbogomol.fluffy_fur.client.particle.data.GenericParticleData;
+import mod.maxbogomol.fluffy_fur.client.particle.data.SpinParticleData;
 import mod.maxbogomol.fluffy_fur.common.easing.Easing;
 import mod.maxbogomol.fluffy_fur.registry.client.FluffyFurParticles;
 import net.minecraft.client.particle.ParticleEngine;
@@ -27,8 +28,9 @@ import java.util.Random;
 import java.util.function.Consumer;
 
 public class ArcaneLumosBlock extends Block {
+
     private static final VoxelShape SHAPE = Block.box(6, 6, 6, 10, 10, 10);
-    private static Random random = new Random();
+    private static final Random random = new Random();
 
     public enum Colors {
         WHITE,
@@ -53,19 +55,19 @@ public class ArcaneLumosBlock extends Block {
 
     public Colors color;
 
-    public ArcaneLumosBlock(Colors color, Properties builder) {
-        super(builder);
+    public ArcaneLumosBlock(Colors color, Properties properties) {
+        super(properties);
         this.color = color;
     }
 
     @Nonnull
     @Override
-    public VoxelShape getShape(BlockState state, BlockGetter world, BlockPos pos, CollisionContext ctx) {
+    public VoxelShape getShape(BlockState state, BlockGetter level, BlockPos pos, CollisionContext context) {
         return SHAPE;
     }
 
     @OnlyIn(Dist.CLIENT)
-    public void animateTick(BlockState state, Level world, BlockPos pos, RandomSource random) {
+    public void animateTick(BlockState state, Level level, BlockPos pos, RandomSource random) {
         Color color = getColor(this.color);
 
         ParticleBuilder.create(FluffyFurParticles.WISP)
@@ -74,16 +76,16 @@ public class ArcaneLumosBlock extends Block {
                 .setScaleData(GenericParticleData.create(0.3f, 0).build())
                 .setLifetime(20)
                 .randomVelocity(0.015f, 0.015f, 0.015f)
-                .spawn(world, pos.getX() + 0.5F, pos.getY() + 0.5F, pos.getZ() + 0.5F);
+                .spawn(level, pos.getX() + 0.5F, pos.getY() + 0.5F, pos.getZ() + 0.5F);
         if (random.nextFloat() < 0.5) {
             ParticleBuilder.create(FluffyFurParticles.SPARKLE)
                     .setColorData(ColorParticleData.create(color).build())
                     .setTransparencyData(GenericParticleData.create(0.75f, 0).build())
                     .setScaleData(GenericParticleData.create(0.1f, 0).build())
-                    .randomSpin(0.5f)
+                    .setSpinData(SpinParticleData.create().randomSpin(0.5f).build())
                     .setLifetime(30)
                     .randomVelocity(0.015f, 0.015f, 0.015f)
-                    .spawn(world, pos.getX() + 0.5F, pos.getY() + 0.5F, pos.getZ() + 0.5F);
+                    .spawn(level, pos.getX() + 0.5F, pos.getY() + 0.5F, pos.getZ() + 0.5F);
         }
 
         if (this.color == Colors.COSMIC) {
@@ -92,22 +94,22 @@ public class ArcaneLumosBlock extends Block {
                         .setColorData(ColorParticleData.create(color).build())
                         .setTransparencyData(GenericParticleData.create(0.75f, 0).build())
                         .setScaleData(GenericParticleData.create(0, 0.1f, 0).setEasing(Easing.SINE_IN_OUT).build())
-                        .randomSpin(0.5f)
+                        .setSpinData(SpinParticleData.create().randomSpin(0.5f).build())
                         .setLifetime(5)
                         .randomVelocity(0.01f, 0.01f, 0.01f)
                         .flatRandomOffset(0.25f, 0.25f, 0.25f)
-                        .spawn(world, pos.getX() + 0.5F, pos.getY() + 0.5F, pos.getZ() + 0.5F);
+                        .spawn(level, pos.getX() + 0.5F, pos.getY() + 0.5F, pos.getZ() + 0.5F);
             }
             if (random.nextFloat() < 0.3) {
                 ParticleBuilder.create(FluffyFurParticles.STAR)
                         .setColorData(ColorParticleData.create(Color.WHITE).build())
                         .setTransparencyData(GenericParticleData.create(0.75f, 0).build())
                         .setScaleData(GenericParticleData.create(0, 0.1f, 0).setEasing(Easing.SINE_IN_OUT).build())
-                        .randomSpin(0.5f)
+                        .setSpinData(SpinParticleData.create().randomSpin(0.5f).build())
                         .setLifetime(5)
                         .randomVelocity(0.01f, 0.01f, 0.01f)
                         .flatRandomOffset(0.25f, 0.25f, 0.25f)
-                        .spawn(world, pos.getX() + 0.5F, pos.getY() + 0.5F, pos.getZ() + 0.5F);
+                        .spawn(level, pos.getX() + 0.5F, pos.getY() + 0.5F, pos.getZ() + 0.5F);
             }
         }
     }

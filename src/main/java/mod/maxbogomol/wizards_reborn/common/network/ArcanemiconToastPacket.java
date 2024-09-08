@@ -37,8 +37,8 @@ public class ArcanemiconToastPacket {
         ctx.get().enqueueWork(() -> {
             assert ctx.get().getDirection() == NetworkDirection.PLAY_TO_CLIENT;
 
-            Level world = WizardsReborn.proxy.getLevel();
-            Player player = world.getPlayerByUUID(packet.uuid);
+            Level level = WizardsReborn.proxy.getLevel();
+            Player player = level.getPlayerByUUID(packet.uuid);
             if (player != null) {
                 toast(packet);
             }

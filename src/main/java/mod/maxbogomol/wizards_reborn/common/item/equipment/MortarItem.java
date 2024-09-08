@@ -29,10 +29,10 @@ public class MortarItem extends FuelItem {
     }
 
     @Override
-    public InteractionResultHolder<ItemStack> use(Level world, Player player, InteractionHand hand) {
+    public InteractionResultHolder<ItemStack> use(Level level, Player player, InteractionHand hand) {
         ItemStack stack = player.getItemInHand(hand);
 
-        if (!world.isClientSide) {
+        if (!level.isClientSide) {
             ItemStack offStack = player.getItemInHand(InteractionHand.MAIN_HAND);
             if (hand == InteractionHand.MAIN_HAND) {
                 offStack = player.getItemInHand(InteractionHand.OFF_HAND);
@@ -40,8 +40,8 @@ public class MortarItem extends FuelItem {
 
             SimpleContainer inv = new SimpleContainer(1);
             inv.setItem(0, offStack);
-            Optional<MortarRecipe> recipe = world.getRecipeManager()
-                    .getRecipeFor(WizardsRebornRecipes.MORTAR.get(), inv, world);
+            Optional<MortarRecipe> recipe = level.getRecipeManager()
+                    .getRecipeFor(WizardsRebornRecipes.MORTAR.get(), inv, level);
 
             if (recipe.isPresent()) {
                 if (recipe.get().getResultItem(RegistryAccess.EMPTY) != null) {
@@ -52,9 +52,9 @@ public class MortarItem extends FuelItem {
                     if (player.getInventory().getSlotWithRemainingSpace(recipe.get().getResultItem(RegistryAccess.EMPTY).copy()) != -1 || player.getInventory().getFreeSlot() > -1) {
                         player.getInventory().add(recipe.get().getResultItem(RegistryAccess.EMPTY).copy());
                     } else {
-                        world.addFreshEntity(new ItemEntity(world, player.getX(), player.getY() + 0.5F, player.getZ(), recipe.get().getResultItem(RegistryAccess.EMPTY).copy()));
+                        level.addFreshEntity(new ItemEntity(level, player.getX(), player.getY() + 0.5F, player.getZ(), recipe.get().getResultItem(RegistryAccess.EMPTY).copy()));
                     }
-                    world.playSound(null, player.getX(), player.getY(), player.getZ(), SoundEvents.BONE_MEAL_USE, SoundSource.PLAYERS, 1.0f, 1.0f);
+                    level.playSound(null, player.getX(), player.getY(), player.getZ(), SoundEvents.BONE_MEAL_USE, SoundSource.PLAYERS, 1.0f, 1.0f);
                     player.awardStat(Stats.ITEM_USED.get(this));
 
                     return InteractionResultHolder.success(stack);

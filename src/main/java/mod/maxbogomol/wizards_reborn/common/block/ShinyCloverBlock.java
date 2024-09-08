@@ -19,20 +19,21 @@ import net.minecraftforge.api.distmarker.OnlyIn;
 import javax.annotation.Nonnull;
 
 public class ShinyCloverBlock extends BushBlock {
+
     private static final VoxelShape SHAPE = Block.box(3, 0, 3, 13, 3, 13);
 
-    public ShinyCloverBlock(Properties builder) {
-        super(builder);
+    public ShinyCloverBlock(Properties properties) {
+        super(properties);
     }
 
     @Nonnull
     @Override
-    public VoxelShape getShape(BlockState state, BlockGetter world, BlockPos pos, CollisionContext ctx) {
+    public VoxelShape getShape(BlockState state, BlockGetter level, BlockPos pos, CollisionContext context) {
         return SHAPE;
     }
 
     @OnlyIn(Dist.CLIENT)
-    public void animateTick(BlockState state, Level world, BlockPos pos, RandomSource random) {
+    public void animateTick(BlockState state, Level level, BlockPos pos, RandomSource random) {
         if (random.nextFloat() < 0.1f) {
             double X = (random.nextDouble() - 0.5D) * 0.75f;
             double Z = (random.nextDouble() - 0.5D) * 0.75f;
@@ -42,7 +43,7 @@ public class ShinyCloverBlock extends BushBlock {
                     .setScaleData(GenericParticleData.create(0.1f, 0).build())
                     .setLifetime(10)
                     .addVelocity(-(X / 100), (random.nextDouble() / 20), -(Z / 100))
-                    .spawn(world, pos.getX() + 0.5F, pos.getY() + 0.5F, pos.getZ() + 0.5F);
+                    .spawn(level, pos.getX() + 0.5F, pos.getY() + 0.5F, pos.getZ() + 0.5F);
         }
     }
 }

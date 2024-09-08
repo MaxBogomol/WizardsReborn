@@ -3,6 +3,7 @@ package mod.maxbogomol.wizards_reborn.common.network.spell;
 import mod.maxbogomol.fluffy_fur.client.particle.ParticleBuilder;
 import mod.maxbogomol.fluffy_fur.client.particle.data.ColorParticleData;
 import mod.maxbogomol.fluffy_fur.client.particle.data.GenericParticleData;
+import mod.maxbogomol.fluffy_fur.client.particle.data.SpinParticleData;
 import mod.maxbogomol.fluffy_fur.registry.client.FluffyFurParticles;
 import mod.maxbogomol.wizards_reborn.WizardsReborn;
 import net.minecraft.network.FriendlyByteBuf;
@@ -70,7 +71,7 @@ public class BlinkSpellEffectPacket {
             ctx.get().enqueueWork(new Runnable() {
                 @Override
                 public void run() {
-                    Level world = WizardsReborn.proxy.getLevel();
+                    Level level = WizardsReborn.proxy.getLevel();
 
                     Vec3 pos = new Vec3(msg.posToX, msg.posToY, msg.posToZ);
                     for (int i = 0; i < 25; i++) {
@@ -95,24 +96,24 @@ public class BlinkSpellEffectPacket {
                                 .setColorData(ColorParticleData.create(msg.colorR, msg.colorG, msg.colorB).build())
                                 .setTransparencyData(GenericParticleData.create(0.4f, 0).build())
                                 .setScaleData(GenericParticleData.create(0.25f, 0).build())
-                                .randomSpin(0.25f)
+                                .setSpinData(SpinParticleData.create().randomSpin(0.25f).build())
                                 .setLifetime(80)
                                 .randomVelocity(0.015f)
                                 .addVelocity(X, Y, Z)
                                 .randomOffset(0.15f)
-                                .spawn(world, lerpX, lerpY, lerpZ);
+                                .spawn(level, lerpX, lerpY, lerpZ);
 
                         if (random.nextFloat() < 0.5f) {
                             ParticleBuilder.create(FluffyFurParticles.SPARKLE)
                                     .setColorData(ColorParticleData.create(msg.colorR, msg.colorG, msg.colorB).build())
                                     .setTransparencyData(GenericParticleData.create(0.2f, 0).build())
                                     .setScaleData(GenericParticleData.create(0.3f, 0).build())
-                                    .randomSpin(0.1f)
+                                    .setSpinData(SpinParticleData.create().randomSpin(0.1f).build())
                                     .setLifetime(70)
                                     .randomVelocity(0.015f)
                                     .addVelocity(X, Y, Z)
                                     .randomOffset(0.15f)
-                                    .spawn(world, lerpX, lerpY, lerpZ);
+                                    .spawn(level, lerpX, lerpY, lerpZ);
                         }
                         if (msg.burst) {
                             if (random.nextFloat() < 0.75) {
@@ -124,7 +125,7 @@ public class BlinkSpellEffectPacket {
                                         .randomVelocity(0.015f)
                                         .addVelocity(X, Y, Z)
                                         .randomOffset(0.15f)
-                                        .spawn(world, lerpX, lerpY, lerpZ);
+                                        .spawn(level, lerpX, lerpY, lerpZ);
                             }
                         }
                     }

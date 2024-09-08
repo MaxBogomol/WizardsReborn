@@ -80,25 +80,20 @@ public class AlchemyMachineBlock extends HorizontalDirectionalBlock implements E
     }
 
     @Override
-    public RenderShape getRenderShape(BlockState pState) {
+    public RenderShape getRenderShape(BlockState state) {
         return RenderShape.MODEL;
     }
 
     @Nonnull
     @Override
-    public VoxelShape getShape(BlockState state, BlockGetter world, BlockPos pos, CollisionContext ctx) {
-        switch (state.getValue(HORIZONTAL_FACING)) {
-            case NORTH:
-                return PipeBaseBlock.getShapeWithConnection(state, world, pos, ctx, SHAPES_N);
-            case SOUTH:
-                return PipeBaseBlock.getShapeWithConnection(state, world, pos, ctx, SHAPES_S);
-            case WEST:
-                return PipeBaseBlock.getShapeWithConnection(state, world, pos, ctx, SHAPES_W);
-            case EAST:
-                return PipeBaseBlock.getShapeWithConnection(state, world, pos, ctx, SHAPES_E);
-            default:
-                return SHAPE;
-        }
+    public VoxelShape getShape(BlockState state, BlockGetter level, BlockPos pos, CollisionContext ctx) {
+        return switch (state.getValue(HORIZONTAL_FACING)) {
+            case NORTH -> PipeBaseBlock.getShapeWithConnection(state, level, pos, ctx, SHAPES_N);
+            case SOUTH -> PipeBaseBlock.getShapeWithConnection(state, level, pos, ctx, SHAPES_S);
+            case WEST -> PipeBaseBlock.getShapeWithConnection(state, level, pos, ctx, SHAPES_W);
+            case EAST -> PipeBaseBlock.getShapeWithConnection(state, level, pos, ctx, SHAPES_E);
+            default -> SHAPE;
+        };
     }
 
     @Override
@@ -114,40 +109,34 @@ public class AlchemyMachineBlock extends HorizontalDirectionalBlock implements E
     }
 
     @Override
-    public void onRemove(@Nonnull BlockState state, @Nonnull Level world, @Nonnull BlockPos pos, @Nonnull BlockState newState, boolean isMoving) {
+    public void onRemove(@Nonnull BlockState state, @Nonnull Level level, @Nonnull BlockPos pos, @Nonnull BlockState newState, boolean isMoving) {
         if (state.getBlock() != newState.getBlock()) {
-            BlockEntity tile = world.getBlockEntity(pos);
-            if (tile instanceof AlchemyMachineBlockEntity machine) {
+            BlockEntity blockEntity = level.getBlockEntity(pos);
+            if (blockEntity instanceof AlchemyMachineBlockEntity machine) {
                 SimpleContainer inv = new SimpleContainer(machine.itemHandler.getSlots() + 1);
                 for (int i = 0; i < machine.itemHandler.getSlots(); i++) {
                     inv.setItem(i, machine.itemHandler.getStackInSlot(i));
                 }
                 inv.setItem(machine.itemHandler.getSlots(), machine.itemOutputHandler.getStackInSlot(0));
-                Containers.dropContents(world, pos, inv);
+                Containers.dropContents(level, pos, inv);
             }
-            super.onRemove(state, world, pos, newState, isMoving);
         }
+        super.onRemove(state, level, pos, newState, isMoving);
     }
 
     @Override
-    public InteractionResult use(BlockState state, Level world, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hit) {
-        if (world.isClientSide) {
+    public InteractionResult use(BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hit) {
+        if (level.isClientSide()) {
             return InteractionResult.SUCCESS;
         } else {
             ItemStack stack = player.getItemInHand(hand).copy();
-            boolean isWand = false;
+            boolean clickable = WissenWandItem.isClickable(stack);
 
-            if (stack.getItem() instanceof WissenWandItem) {
-                if (WissenWandItem.getMode(stack) != 4) {
-                    isWand = true;
-                }
-            }
+            if (clickable) {
+                BlockEntity blockEntity = level.getBlockEntity(pos);
 
-            if (!isWand) {
-                BlockEntity tileEntity = world.getBlockEntity(pos);
-
-                MenuProvider containerProvider = createContainerProvider(world, pos);
-                NetworkHooks.openScreen(((ServerPlayer) player), containerProvider, tileEntity.getBlockPos());
+                MenuProvider containerProvider = createContainerProvider(level, pos);
+                NetworkHooks.openScreen(((ServerPlayer) player), containerProvider, blockEntity.getBlockPos());
                 return InteractionResult.CONSUME;
             }
         }
@@ -155,7 +144,7 @@ public class AlchemyMachineBlock extends HorizontalDirectionalBlock implements E
         return InteractionResult.PASS;
     }
 
-    public MenuProvider createContainerProvider(Level worldIn, BlockPos pos) {
+    public MenuProvider createContainerProvider(Level level, BlockPos pos) {
         return new MenuProvider() {
             @Override
             public Component getDisplayName() {
@@ -164,8 +153,8 @@ public class AlchemyMachineBlock extends HorizontalDirectionalBlock implements E
 
             @Nullable
             @Override
-            public AbstractContainerMenu createMenu(int i, Inventory playerInventory, Player playerEntity) {
-                return new AlchemyMachineContainer(i, worldIn, pos, playerInventory, playerEntity);
+            public AbstractContainerMenu createMenu(int i, Inventory inventory, Player player) {
+                return new AlchemyMachineContainer(i, level, pos, inventory, player);
             }
         };
     }
@@ -176,38 +165,31 @@ public class AlchemyMachineBlock extends HorizontalDirectionalBlock implements E
     }
 
     @Override
-    public BlockState updateShape(BlockState pState, Direction pDirection, BlockState pNeighborState, LevelAccessor pLevel, BlockPos pCurrentPos, BlockPos pNeighborPos) {
-        if (pState.getValue(BlockStateProperties.WATERLOGGED)) {
-            pLevel.scheduleTick(pCurrentPos, Fluids.WATER, Fluids.WATER.getTickDelay(pLevel));
+    public BlockState updateShape(BlockState state, Direction direction, BlockState neighborState, LevelAccessor level, BlockPos currentPos, BlockPos neighborPos) {
+        if (state.getValue(BlockStateProperties.WATERLOGGED)) {
+            level.scheduleTick(currentPos, Fluids.WATER, Fluids.WATER.getTickDelay(level));
         }
 
-        if (pLevel.getBlockEntity(pCurrentPos) instanceof PipeBaseBlockEntity pipe) {
-            BlockEntity facingBE = pLevel.getBlockEntity(pCurrentPos);
-            if (pNeighborState.is(WizardsRebornBlockTags.FLUID_PIPE_CONNECTION)) {
-                if (facingBE instanceof PipeBaseBlockEntity && ((PipeBaseBlockEntity) facingBE).getConnection(pDirection.getOpposite()) == PipeConnection.DISABLED) {
-                    pipe.setConnection(pDirection, PipeConnection.NONE);
+        if (level.getBlockEntity(currentPos) instanceof PipeBaseBlockEntity pipe) {
+            BlockEntity facingBE = level.getBlockEntity(currentPos);
+            if (neighborState.is(WizardsRebornBlockTags.FLUID_PIPE_CONNECTION)) {
+                if (facingBE instanceof PipeBaseBlockEntity && ((PipeBaseBlockEntity) facingBE).getConnection(direction.getOpposite()) == PipeConnection.DISABLED) {
+                    pipe.setConnection(direction, PipeConnection.NONE);
                 } else {
-                    pipe.setConnection(pDirection, PipeConnection.PIPE);
+                    pipe.setConnection(direction, PipeConnection.PIPE);
                 }
             } else {
-                pipe.setConnection(pDirection, PipeConnection.NONE);
+                pipe.setConnection(direction, PipeConnection.NONE);
             }
         }
 
-        return super.updateShape(pState, pDirection, pNeighborState, pLevel, pCurrentPos, pNeighborPos);
-    }
-
-    @Override
-    public boolean triggerEvent(BlockState state, Level world, BlockPos pos, int id, int param) {
-        super.triggerEvent(state, world, pos, id, param);
-        BlockEntity tileentity = world.getBlockEntity(pos);
-        return tileentity != null && tileentity.triggerEvent(id, param);
+        return super.updateShape(state, direction, neighborState, level, currentPos, neighborPos);
     }
 
     @Nullable
     @Override
-    public BlockEntity newBlockEntity(BlockPos pPos, BlockState pState) {
-        return new AlchemyMachineBlockEntity(pPos, pState);
+    public BlockEntity newBlockEntity(BlockPos pos, BlockState state) {
+        return new AlchemyMachineBlockEntity(pos, state);
     }
 
     @Nullable

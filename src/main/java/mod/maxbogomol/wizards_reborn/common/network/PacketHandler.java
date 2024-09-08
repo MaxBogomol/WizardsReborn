@@ -145,8 +145,8 @@ public final class PacketHandler {
         }
     }
 
-    public static void sendToTracking(Level world, BlockPos pos, Object msg) {
-        HANDLER.send(TRACKING_CHUNK_AND_NEAR.with(() -> Pair.of(world, pos)), msg);
+    public static void sendToTracking(Level level, BlockPos pos, Object msg) {
+        HANDLER.send(TRACKING_CHUNK_AND_NEAR.with(() -> Pair.of(level, pos)), msg);
     }
 
     public static void sendTo(Player entity, Object msg) {

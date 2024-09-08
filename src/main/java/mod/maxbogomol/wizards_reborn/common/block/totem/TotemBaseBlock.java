@@ -43,7 +43,7 @@ public class TotemBaseBlock extends Block implements SimpleWaterloggedBlock {
 
     @Nonnull
     @Override
-    public VoxelShape getShape(BlockState state, BlockGetter world, BlockPos pos, CollisionContext ctx) {
+    public VoxelShape getShape(BlockState state, BlockGetter level, BlockPos pos, CollisionContext context) {
         return SHAPE;
     }
 
@@ -60,11 +60,11 @@ public class TotemBaseBlock extends Block implements SimpleWaterloggedBlock {
     }
 
     @Override
-    public InteractionResult use(BlockState state, Level world, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hit) {
+    public InteractionResult use(BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hit) {
         BlockPos blockpos = pos.above();
-        BlockState blockstate = world.getBlockState(blockpos);
+        BlockState blockstate = level.getBlockState(blockpos);
         if (blockstate.getBlock() instanceof ITotemBlock totemBlock) {
-            return totemBlock.useTotem(blockstate, world, blockpos, player, hand, hit);
+            return totemBlock.useTotem(blockstate, level, blockpos, player, hand, hit);
         }
 
         return InteractionResult.PASS;
@@ -76,21 +76,17 @@ public class TotemBaseBlock extends Block implements SimpleWaterloggedBlock {
     }
 
     @Override
-    public BlockState updateShape(BlockState pState, Direction pDirection, BlockState pNeighborState, LevelAccessor pLevel, BlockPos pCurrentPos, BlockPos pNeighborPos) {
-        if (pState.getValue(BlockStateProperties.WATERLOGGED)) {
-            pLevel.scheduleTick(pCurrentPos, Fluids.WATER, Fluids.WATER.getTickDelay(pLevel));
+    public BlockState updateShape(BlockState state, Direction direction, BlockState neighborState, LevelAccessor level, BlockPos currentPos, BlockPos neighborPos) {
+        if (state.getValue(BlockStateProperties.WATERLOGGED)) {
+            level.scheduleTick(currentPos, Fluids.WATER, Fluids.WATER.getTickDelay(level));
         }
 
-        return !canTotem(pLevel, pCurrentPos) ? WizardsRebornBlocks.ARCANE_PEDESTAL.get().defaultBlockState() : super.updateShape(pState, pDirection, pNeighborState, pLevel, pCurrentPos, pNeighborPos);
+        return !canTotem(level, currentPos) ? WizardsRebornBlocks.ARCANE_PEDESTAL.get().defaultBlockState() : super.updateShape(state, direction, neighborState, level, currentPos, neighborPos);
     }
 
     public boolean canTotem(LevelReader level, BlockPos pos) {
         BlockPos blockpos = pos.above();
         BlockState blockstate = level.getBlockState(blockpos);
-        if (blockstate.getBlock() instanceof ITotemBlock) {
-            return true;
-        }
-
-        return false;
+        return blockstate.getBlock() instanceof ITotemBlock;
     }
 }

@@ -16,8 +16,8 @@ import net.minecraftforge.common.capabilities.ForgeCapabilities;
 import org.jetbrains.annotations.NotNull;
 
 public class CrossBaulkBlock extends CrossBaulkBaseBlock {
-    public CrossBaulkBlock(Properties pProperties) {
-        super(pProperties);
+    public CrossBaulkBlock(Properties properties) {
+        super(properties);
     }
 
     @Override
@@ -46,8 +46,8 @@ public class CrossBaulkBlock extends CrossBaulkBaseBlock {
     }
 
     @Override
-    public BlockEntity newBlockEntity(BlockPos pPos, BlockState pState) {
-        return WizardsRebornBlockEntities.CROSS_BAULK.get().create(pPos, pState);
+    public BlockEntity newBlockEntity(BlockPos pos, BlockState state) {
+        return WizardsRebornBlockEntities.CROSS_BAULK.get().create(pos, state);
     }
 
     @Override

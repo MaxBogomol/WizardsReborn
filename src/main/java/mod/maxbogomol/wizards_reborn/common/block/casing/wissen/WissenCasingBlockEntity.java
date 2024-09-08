@@ -21,8 +21,8 @@ public class WissenCasingBlockEntity extends WissenTranslatorBlockEntity {
 
     public int maxCooldown = 0;
 
-    public WissenCasingBlockEntity(BlockEntityType<?> pType, BlockPos pPos, BlockState pBlockState) {
-        super(pType, pPos, pBlockState);
+    public WissenCasingBlockEntity(BlockEntityType<?> type, BlockPos pos, BlockState blockState) {
+        super(type, pos, blockState);
     }
 
     public WissenCasingBlockEntity(BlockPos pos, BlockState state) {

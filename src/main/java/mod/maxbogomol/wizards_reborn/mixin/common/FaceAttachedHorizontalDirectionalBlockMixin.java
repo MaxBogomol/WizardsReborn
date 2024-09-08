@@ -1,7 +1,7 @@
 package mod.maxbogomol.wizards_reborn.mixin.common;
 
-import mod.maxbogomol.wizards_reborn.common.block.extractor.ExtractorBaseBlock;
-import mod.maxbogomol.wizards_reborn.common.block.extractor.TinyExtractorBaseBlock;
+import mod.maxbogomol.wizards_reborn.common.block.pipe.extractor.ExtractorBaseBlock;
+import mod.maxbogomol.wizards_reborn.common.block.pipe.extractor.TinyExtractorBaseBlock;
 import mod.maxbogomol.wizards_reborn.registry.common.block.WizardsRebornBlockTags;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;

@@ -59,7 +59,7 @@ public class WissenWandItem extends Item {
     }
 
     @Override
-    public InteractionResultHolder<ItemStack> use(Level world, Player player, InteractionHand hand) {
+    public InteractionResultHolder<ItemStack> use(Level level, Player player, InteractionHand hand) {
         ItemStack stack = player.getItemInHand(hand);
 
         if (player.isShiftKeyDown()) {
@@ -80,7 +80,7 @@ public class WissenWandItem extends Item {
             player.displayClientMessage(getModeTranslate(stack), true);
 
             player.awardStat(Stats.ITEM_USED.get(this));
-            world.playSound(WizardsReborn.proxy.getPlayer(), player.blockPosition(), WizardsRebornSounds.CRYSTAL_RESONATE.get(), SoundSource.PLAYERS, 1.0f, 1.2f);
+            level.playSound(WizardsReborn.proxy.getPlayer(), player.blockPosition(), WizardsRebornSounds.CRYSTAL_RESONATE.get(), SoundSource.PLAYERS, 1.0f, 1.2f);
 
             return InteractionResultHolder.success(stack);
         }
@@ -90,11 +90,11 @@ public class WissenWandItem extends Item {
 
     @Override
     public InteractionResult onItemUseFirst(ItemStack stack, UseOnContext context) {
-        Level world = context.getLevel();
+        Level level = context.getLevel();
         InteractionResult result = InteractionResult.PASS;
 
-        if(!world.isClientSide) {
-            BlockEntity tileentity = world.getBlockEntity(context.getClickedPos());
+        if(!level.isClientSide) {
+            BlockEntity tileentity = level.getBlockEntity(context.getClickedPos());
             CompoundTag nbt = stack.getOrCreateTag();
 
             if (!nbt.contains("block")) {
@@ -120,7 +120,7 @@ public class WissenWandItem extends Item {
 
         if (result == InteractionResult.SUCCESS) {
             context.getPlayer().awardStat(Stats.ITEM_USED.get(this));
-            world.playSound(WizardsReborn.proxy.getPlayer(), context.getClickedPos(), WizardsRebornSounds.CRYSTAL_RESONATE.get(), SoundSource.PLAYERS, 1.0f, 1.0f);
+            level.playSound(WizardsReborn.proxy.getPlayer(), context.getClickedPos(), WizardsRebornSounds.CRYSTAL_RESONATE.get(), SoundSource.PLAYERS, 1.0f, 1.0f);
         }
 
         return result;
@@ -146,6 +146,14 @@ public class WissenWandItem extends Item {
         }
 
         return false;
+    }
+
+    public static boolean isClickable(ItemStack stack) {
+        if (stack.getItem() instanceof WissenWandItem) {
+            return WissenWandItem.getMode(stack) == 4;
+        }
+
+        return true;
     }
 
     public static int getMode(ItemStack stack) {
@@ -194,7 +202,7 @@ public class WissenWandItem extends Item {
 
     @OnlyIn(Dist.CLIENT)
     @Override
-    public void appendHoverText(ItemStack stack, Level world, List<Component> list, TooltipFlag flags) {
+    public void appendHoverText(ItemStack stack, Level level, List<Component> list, TooltipFlag flags) {
         Skin skin = Skin.getSkinFromItem(stack);
         if (skin != null) list.add(skin.getSkinComponent());
 

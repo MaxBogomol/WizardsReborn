@@ -1,4 +1,4 @@
-package mod.maxbogomol.wizards_reborn.common.block.steam_pipe;
+package mod.maxbogomol.wizards_reborn.common.block.pipe.steam;
 
 import mod.maxbogomol.fluffy_fur.common.block.entity.TickableBlockEntity;
 import mod.maxbogomol.wizards_reborn.registry.common.block.WizardsRebornBlockEntities;
@@ -9,8 +9,8 @@ import net.minecraft.world.level.block.state.BlockState;
 
 public class SteamPipeBlockEntity extends SteamPipeBaseBlockEntity implements TickableBlockEntity {
 
-    public SteamPipeBlockEntity(BlockEntityType<?> pType, BlockPos pPos, BlockState pBlockState) {
-        super(pType, pPos, pBlockState);
+    public SteamPipeBlockEntity(BlockEntityType<?> type, BlockPos pos, BlockState blockState) {
+        super(type, pos, blockState);
     }
 
     public SteamPipeBlockEntity(BlockPos pos, BlockState state) {

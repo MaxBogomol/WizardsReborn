@@ -80,23 +80,23 @@ public class TotemOfDisenchantBlock extends Block implements EntityBlock, Simple
     }
 
     @Override
-    public void onRemove(@Nonnull BlockState state, @Nonnull Level world, @Nonnull BlockPos pos, @Nonnull BlockState newState, boolean isMoving) {
+    public void onRemove(@Nonnull BlockState state, @Nonnull Level level, @Nonnull BlockPos pos, @Nonnull BlockState newState, boolean isMoving) {
         if (state.getBlock() != newState.getBlock()) {
-            BlockEntity tile = world.getBlockEntity(pos);
+            BlockEntity tile = level.getBlockEntity(pos);
             if (tile instanceof TotemOfDisenchantBlockEntity totem) {
                 SimpleContainer inv = new SimpleContainer(totem.itemHandler.getSlots());
                 for (int i = 0; i < totem.itemHandler.getSlots(); i++) {
                     inv.setItem(i, totem.itemHandler.getStackInSlot(i));
                 }
-                Containers.dropContents(world, pos, inv);
+                Containers.dropContents(level, pos, inv);
             }
-            super.onRemove(state, world, pos, newState, isMoving);
+            super.onRemove(state, level, pos, newState, isMoving);
         }
     }
 
     @Override
-    public InteractionResult use(BlockState state, Level world, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hit) {
-        if (world.isClientSide) {
+    public InteractionResult use(BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hit) {
+        if (level.isClientSide) {
             return InteractionResult.SUCCESS;
         } else {
             ItemStack stack = player.getItemInHand(hand).copy();
@@ -109,9 +109,9 @@ public class TotemOfDisenchantBlock extends Block implements EntityBlock, Simple
             }
 
             if (!isWand) {
-                BlockEntity tileEntity = world.getBlockEntity(pos);
+                BlockEntity tileEntity = level.getBlockEntity(pos);
 
-                MenuProvider containerProvider = createContainerProvider(world, pos);
+                MenuProvider containerProvider = createContainerProvider(level, pos);
                 NetworkHooks.openScreen(((ServerPlayer) player), containerProvider, tileEntity.getBlockPos());
                 return InteractionResult.CONSUME;
             }
@@ -120,7 +120,7 @@ public class TotemOfDisenchantBlock extends Block implements EntityBlock, Simple
         return InteractionResult.PASS;
     }
 
-    private MenuProvider createContainerProvider(Level worldIn, BlockPos pos) {
+    private MenuProvider createContainerProvider(Level level, BlockPos pos) {
         return new MenuProvider() {
             @Override
             public Component getDisplayName() {
@@ -130,14 +130,14 @@ public class TotemOfDisenchantBlock extends Block implements EntityBlock, Simple
             @Nullable
             @Override
             public AbstractContainerMenu createMenu(int i, Inventory playerInventory, Player playerEntity) {
-                return new TotemOfDisenchantContainer(i, worldIn, pos, playerInventory, playerEntity);
+                return new TotemOfDisenchantContainer(i, level, pos, playerInventory, playerEntity);
             }
         };
     }
 
     @Override
-    public InteractionResult useTotem(BlockState state, Level world, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hit) {
-        return use(state, world, pos, player, hand, hit);
+    public InteractionResult useTotem(BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hit) {
+        return use(state, level, pos, player, hand, hit);
     }
 
     @Override
@@ -146,12 +146,12 @@ public class TotemOfDisenchantBlock extends Block implements EntityBlock, Simple
     }
 
     @Override
-    public BlockState updateShape(BlockState pState, Direction pDirection, BlockState pNeighborState, LevelAccessor pLevel, BlockPos pCurrentPos, BlockPos pNeighborPos) {
-        if (pState.getValue(BlockStateProperties.WATERLOGGED)) {
-            pLevel.scheduleTick(pCurrentPos, Fluids.WATER, Fluids.WATER.getTickDelay(pLevel));
+    public BlockState updateShape(BlockState state, Direction direction, BlockState neighborState, LevelAccessor level, BlockPos currentPos, BlockPos neighborPos) {
+        if (state.getValue(BlockStateProperties.WATERLOGGED)) {
+            level.scheduleTick(currentPos, Fluids.WATER, Fluids.WATER.getTickDelay(level));
         }
 
-        return !pState.canSurvive(pLevel, pCurrentPos) ? Blocks.AIR.defaultBlockState() : super.updateShape(pState, pDirection, pNeighborState, pLevel, pCurrentPos, pNeighborPos);
+        return !state.canSurvive(level, currentPos) ? Blocks.AIR.defaultBlockState() : super.updateShape(state, direction, neighborState, level, currentPos, neighborPos);
     }
 
     @Override
@@ -172,13 +172,6 @@ public class TotemOfDisenchantBlock extends Block implements EntityBlock, Simple
         }
     }
 
-    @Override
-    public boolean triggerEvent(BlockState state, Level world, BlockPos pos, int id, int param) {
-        super.triggerEvent(state, world, pos, id, param);
-        BlockEntity tileentity = world.getBlockEntity(pos);
-        return tileentity != null && tileentity.triggerEvent(id, param);
-    }
-
     @Nullable
     @Override
     public <T extends BlockEntity> BlockEntityTicker<T> getTicker(@NotNull Level level, @NotNull BlockState state, @NotNull BlockEntityType<T> type) {
@@ -187,8 +180,8 @@ public class TotemOfDisenchantBlock extends Block implements EntityBlock, Simple
 
     @Nullable
     @Override
-    public BlockEntity newBlockEntity(BlockPos pPos, BlockState pState) {
-        return new TotemOfDisenchantBlockEntity(pPos, pState);
+    public BlockEntity newBlockEntity(BlockPos pos, BlockState state) {
+        return new TotemOfDisenchantBlockEntity(pos, state);
     }
 
     @Override
@@ -197,7 +190,7 @@ public class TotemOfDisenchantBlock extends Block implements EntityBlock, Simple
     }
 
     @Override
-    public int getAnalogOutputSignal(BlockState blockState, Level level, BlockPos pos) {
+    public int getAnalogOutputSignal(BlockState state, Level level, BlockPos pos) {
         TotemOfDisenchantBlockEntity totem = (TotemOfDisenchantBlockEntity) level.getBlockEntity(pos);
         SimpleContainer inv = new SimpleContainer(totem.itemHandler.getSlots());
         for (int i = 0; i < totem.itemHandler.getSlots(); i++) {

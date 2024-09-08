@@ -88,7 +88,7 @@ public class DrinkBottleItem extends PlacedItem {
 
     @OnlyIn(Dist.CLIENT)
     @Override
-    public void appendHoverText(ItemStack stack, Level world, List<Component> list, TooltipFlag flags) {
+    public void appendHoverText(ItemStack stack, Level level, List<Component> list, TooltipFlag flags) {
         int ticks = getTicks(stack);
 
         if (getAlcoholicWithItem(stack)) {

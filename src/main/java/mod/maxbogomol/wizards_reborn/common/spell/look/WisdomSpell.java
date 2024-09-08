@@ -52,60 +52,60 @@ public class WisdomSpell extends LookSpell {
     }
 
     @Override
-    public void useSpell(Level world, Player player, InteractionHand hand) {
-        if (!world.isClientSide) {
+    public void useSpell(Level level, Player player, InteractionHand hand) {
+        if (!level.isClientSide) {
             player.startUsingItem(hand);
         }
     }
 
     @Override
-    public void onUseTick(Level world, LivingEntity livingEntity, ItemStack stack, int remainingUseDuration) {
+    public void onUseTick(Level level, LivingEntity livingEntity, ItemStack stack, int remainingUseDuration) {
         if (livingEntity instanceof Player player) {
             if (player.getTicksUsingItem() % 20 == 0 && player.getTicksUsingItem() > 0) {
-                if (!world.isClientSide) {
+                if (!level.isClientSide) {
                     CompoundTag stats = getStats(stack);
                     removeWissen(stack, stats, player);
                     awardStat(player, stack);
-                    spellSound(player, world);
-                    lookSpell(world, player, player.getUsedItemHand());
+                    spellSound(player, level);
+                    lookSpell(level, player, player.getUsedItemHand());
                 } else {
-                    Vec3 pos = getHitPos(world, player, player.getUsedItemHand()).getPosHit();
+                    Vec3 pos = getHitPos(level, player, player.getUsedItemHand()).getPosHit();
                     Color color = getColor();
                     ParticleBuilder.create(FluffyFurParticles.SPARKLE)
                             .setColorData(ColorParticleData.create(color).build())
                             .setTransparencyData(GenericParticleData.create(0.5f).build())
                             .setScaleData(GenericParticleData.create(0.2f, 0f).build())
                             .setLifetime(15)
-                            .spawn(world, pos.x(), pos.y(), pos.z());
+                            .spawn(level, pos.x(), pos.y(), pos.z());
                     ParticleBuilder.create(FluffyFurParticles.SPARKLE)
                             .setColorData(ColorParticleData.create(color).build())
                             .setTransparencyData(GenericParticleData.create(0.5f).build())
                             .setScaleData(GenericParticleData.create(0.2f, 0f).build())
                             .setLifetime(10)
-                            .spawn(world, pos.x(), pos.y(), pos.z());
+                            .spawn(level, pos.x(), pos.y(), pos.z());
                 }
             }
         }
     }
 
     @Override
-    public void releaseUsing(ItemStack stack, Level world, LivingEntity entityLiving, int timeLeft) {
-        if (!world.isClientSide) {
+    public void releaseUsing(ItemStack stack, Level level, LivingEntity entityLiving, int timeLeft) {
+        if (!level.isClientSide) {
             CompoundTag stats = getStats(stack);
             setCooldown(stack, stats);
         }
     }
 
     @Override
-    public void lookSpell(Level world, Player player, InteractionHand hand) {
-        Vec3 pos = getHitPos(world, player, hand).getPosHit();
+    public void lookSpell(Level level, Player player, InteractionHand hand) {
+        Vec3 pos = getHitPos(level, player, hand).getPosHit();
 
         ItemStack stack = player.getItemInHand(hand);
         CompoundTag stats = getStats(stack);
         int focusLevel = CrystalUtil.getStatLevel(stats, WizardsRebornCrystals.FOCUS);
         int exp = 5 + focusLevel;
 
-        world.addFreshEntity(new ExperienceOrb(world, pos.x, pos.y, pos.z, exp));
+        level.addFreshEntity(new ExperienceOrb(level, pos.x, pos.y, pos.z, exp));
     }
 
     @Override

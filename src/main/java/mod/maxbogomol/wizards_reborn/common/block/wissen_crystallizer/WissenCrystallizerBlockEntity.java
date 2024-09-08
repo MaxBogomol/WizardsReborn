@@ -1,12 +1,17 @@
 package mod.maxbogomol.wizards_reborn.common.block.wissen_crystallizer;
 
+import com.mojang.math.Axis;
+import mod.maxbogomol.fluffy_fur.client.event.ClientTickHandler;
 import mod.maxbogomol.fluffy_fur.client.particle.ParticleBuilder;
 import mod.maxbogomol.fluffy_fur.client.particle.data.ColorParticleData;
 import mod.maxbogomol.fluffy_fur.client.particle.data.GenericParticleData;
+import mod.maxbogomol.fluffy_fur.client.particle.data.SpinParticleData;
+import mod.maxbogomol.fluffy_fur.client.particle.options.ItemParticleOptions;
 import mod.maxbogomol.fluffy_fur.common.block.entity.ExposedBlockSimpleInventory;
 import mod.maxbogomol.fluffy_fur.common.block.entity.TickableBlockEntity;
 import mod.maxbogomol.fluffy_fur.common.easing.Easing;
 import mod.maxbogomol.fluffy_fur.registry.client.FluffyFurParticles;
+import mod.maxbogomol.fluffy_fur.registry.client.FluffyFurRenderTypes;
 import mod.maxbogomol.wizards_reborn.WizardsReborn;
 import mod.maxbogomol.wizards_reborn.api.crystal.CrystalUtil;
 import mod.maxbogomol.wizards_reborn.api.wissen.*;
@@ -16,9 +21,9 @@ import mod.maxbogomol.wizards_reborn.common.network.PacketHandler;
 import mod.maxbogomol.wizards_reborn.common.network.tileentity.WissenCrystallizerBurstEffectPacket;
 import mod.maxbogomol.wizards_reborn.common.recipe.WissenCrystallizerRecipe;
 import mod.maxbogomol.wizards_reborn.registry.client.WizardsRebornParticles;
-import mod.maxbogomol.wizards_reborn.registry.common.block.WizardsRebornBlockEntities;
 import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornRecipes;
 import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornSounds;
+import mod.maxbogomol.wizards_reborn.registry.common.block.WizardsRebornBlockEntities;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.RegistryAccess;
 import net.minecraft.nbt.CompoundTag;
@@ -29,7 +34,9 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.AABB;
+import org.joml.Vector3f;
 
+import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -140,7 +147,7 @@ public class WissenCrystallizerBlockEntity extends ExposedBlockSimpleInventory i
                             .setColorData(ColorParticleData.create(Config.wissenColorR(), Config.wissenColorG(), Config.wissenColorB()).build())
                             .setTransparencyData(GenericParticleData.create(0.25f, 0).build())
                             .setScaleData(GenericParticleData.create(0, 0.1f * getStage(), 0).setEasing(Easing.QUINTIC_IN_OUT).build())
-                            .randomSpin(0.5f)
+                            .setSpinData(SpinParticleData.create().randomSpin(0.5f).build())
                             .setLifetime(30)
                             .randomVelocity(0.015f)
                             .spawn(level, worldPosition.getX() + 0.5F, worldPosition.getY() + 1.125F, worldPosition.getZ() + 0.5F);
@@ -150,33 +157,65 @@ public class WissenCrystallizerBlockEntity extends ExposedBlockSimpleInventory i
             if (wissenInCraft > 0 && startCraft) {
                 if (random.nextFloat() < 0.2) {
                     ParticleBuilder.create(FluffyFurParticles.WISP)
-                            .setColorData(ColorParticleData.create(Config.wissenColorR(), Config.wissenColorG(), Config.wissenColorB()).build())
+                            .setColorData(ColorParticleData.create(random.nextFloat(), random.nextFloat(), random.nextFloat()).build())
                             .setTransparencyData(GenericParticleData.create(0.25f, 0).build())
                             .setScaleData(GenericParticleData.create(0.1f * getStage(), 0).build())
-                            .randomSpin(0.5f)
+                            .setSpinData(SpinParticleData.create().randomSpin(0.5f).build())
                             .setLifetime(30)
                             .randomVelocity(0.025f)
                             .spawn(level, worldPosition.getX() + 0.5F, worldPosition.getY() + 1.125F, worldPosition.getZ() + 0.5F);
                 }
                 if (random.nextFloat() < 0.1) {
                     ParticleBuilder.create(random.nextBoolean() ? FluffyFurParticles.SQUARE : FluffyFurParticles.SPARKLE)
-                            .setColorData(ColorParticleData.create(Config.wissenColorR(), Config.wissenColorG(), Config.wissenColorB()).build())
+                            .setColorData(ColorParticleData.create(random.nextFloat(), random.nextFloat(), random.nextFloat()).build())
                             .setTransparencyData(GenericParticleData.create(0.75f, 0).build())
                             .setScaleData(GenericParticleData.create(0.025f * getStage(), 0.05f * getStage(), 0).setEasing(Easing.QUINTIC_IN_OUT).build())
-                            .randomSpin(0.1f)
+                            .setSpinData(SpinParticleData.create().randomSpin(0.1f).build())
                             .setLifetime(65)
                             .randomVelocity(0.0125f)
                             .spawn(level, worldPosition.getX() + 0.5F, worldPosition.getY() + 1.125F, worldPosition.getZ() + 0.5F);
                 }
-                if (random.nextFloat() < 0.3) {
+                if (random.nextFloat() < 0.2) {
                     ParticleBuilder.create(WizardsRebornParticles.KARMA)
                             .setColorData(ColorParticleData.create(0.733f, 0.564f, 0.937f).build())
-                            .setTransparencyData(GenericParticleData.create(0.5f, 0).build())
-                            .setScaleData(GenericParticleData.create(0.1f * getStage(), 0).build())
-                            .setLifetime(10)
+                            .setTransparencyData(GenericParticleData.create(0.1f, 0.5f, 0).setEasing(Easing.EXPO_IN, Easing.QUINTIC_IN_OUT).build())
+                            .setScaleData(GenericParticleData.create(0.05f, 0.1f, 0).setEasing(Easing.EXPO_IN, Easing.QUINTIC_IN_OUT).build())
+                            .setLifetime(20)
                             .randomVelocity(0.015f)
                             .flatRandomOffset(0.25f, 0.25f, 0.25f)
                             .spawn(level, worldPosition.getX() + 0.5F, worldPosition.getY() + 1.125F, worldPosition.getZ() + 0.5F);
+                }
+
+                Container container = getItemHandler();
+                int size = getInventorySize();
+                float rotate = 360f / (size - 1);
+
+                double ticks = (ClientTickHandler.ticksInGame) * 2;
+                double ticksUp = (ClientTickHandler.ticksInGame) * 4;
+
+                for (int i = 0; i < size - 1; i++) {
+                    if (random.nextFloat() < 0.3) {
+                        ItemStack stack = container.getItem(i + 1);
+                        float y = (float) Math.sin(Math.toRadians(ticksUp + (rotate * i))) * 0.0625F;
+
+                        Vector3f vector3f = new Vector3f(0.5f, 0, 0);
+                        vector3f.rotate(Axis.YP.rotationDegrees((float) -ticks + ((i - 1) * rotate)));
+                        float x = vector3f.x();
+                        float z = vector3f.z();
+
+                        if (!stack.isEmpty()) {
+                            ItemParticleOptions options = new ItemParticleOptions(FluffyFurParticles.ITEM.get(), stack);
+                            ParticleBuilder.create(options)
+                                    .setRenderType(FluffyFurRenderTypes.DELAYED_TERRAIN_PARTICLE)
+                                    .setColorData(ColorParticleData.create(Color.WHITE).build())
+                                    .setTransparencyData(GenericParticleData.create(0.2f, 0.5f, 0).setEasing(Easing.EXPO_IN, Easing.ELASTIC_OUT).build())
+                                    .setScaleData(GenericParticleData.create(0.025f, 0.05f, 0).setEasing(Easing.EXPO_IN, Easing.ELASTIC_OUT).build())
+                                    .setSpinData(SpinParticleData.create().randomSpin(0.2f).build())
+                                    .setLifetime(20)
+                                    .addVelocity(-x / 20f, -y / 20f, -z / 20f)
+                                    .spawn(level, worldPosition.getX() + 0.5F + x, worldPosition.getY() + 1.125F + y, worldPosition.getZ() + 0.5F + z);
+                        }
+                    }
                 }
 
                 if (sound == null) {

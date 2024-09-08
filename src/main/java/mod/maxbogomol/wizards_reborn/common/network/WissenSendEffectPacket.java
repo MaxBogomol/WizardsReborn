@@ -3,6 +3,7 @@ package mod.maxbogomol.wizards_reborn.common.network;
 import mod.maxbogomol.fluffy_fur.client.particle.ParticleBuilder;
 import mod.maxbogomol.fluffy_fur.client.particle.data.ColorParticleData;
 import mod.maxbogomol.fluffy_fur.client.particle.data.GenericParticleData;
+import mod.maxbogomol.fluffy_fur.client.particle.data.SpinParticleData;
 import mod.maxbogomol.fluffy_fur.common.easing.Easing;
 import mod.maxbogomol.fluffy_fur.registry.client.FluffyFurParticles;
 import mod.maxbogomol.wizards_reborn.WizardsReborn;
@@ -117,7 +118,7 @@ public class WissenSendEffectPacket {
             ctx.get().enqueueWork(new Runnable() {
                 @Override
                 public void run() {
-                    Level world = WizardsReborn.proxy.getLevel();
+                    Level level = WizardsReborn.proxy.getLevel();
 
                     int particlePerBlock = msg.particlePerBlock;
 
@@ -145,26 +146,26 @@ public class WissenSendEffectPacket {
                                     .setScaleData(GenericParticleData.create(0.15f, 0).build())
                                     .setLifetime(20)
                                     .randomVelocity(0.01f)
-                                    .spawn(world, msg.posFromX - (x * i), msg.posFromY - (y * i), msg.posFromZ - (z * i));
+                                    .spawn(level, msg.posFromX - (x * i), msg.posFromY - (y * i), msg.posFromZ - (z * i));
                             if (random.nextFloat() < 0.1) {
                                 ParticleBuilder.create(FluffyFurParticles.SPARKLE)
                                         .setColorData(ColorParticleData.create(msg.colorR, msg.colorG, msg.colorB).build())
                                         .setTransparencyData(GenericParticleData.create(0.125f, 0).build())
                                         .setScaleData(GenericParticleData.create(0.1f, 0.2f, 0).setEasing(Easing.QUINTIC_IN_OUT).build())
-                                        .randomSpin(0.5f)
+                                        .setSpinData(SpinParticleData.create().randomSpin(0.5f).build())
                                         .setLifetime(30)
                                         .randomVelocity(0.02f)
-                                        .spawn(world, msg.posFromX - (x * i), msg.posFromY - (y * i), msg.posFromZ - (z * i));
+                                        .spawn(level, msg.posFromX - (x * i), msg.posFromY - (y * i), msg.posFromZ - (z * i));
                             }
                             if (random.nextFloat() < 0.1) {
                                 ParticleBuilder.create(FluffyFurParticles.SQUARE)
                                         .setColorData(ColorParticleData.create(msg.colorR, msg.colorG, msg.colorB).build())
                                         .setTransparencyData(GenericParticleData.create(0.125f, 0).build())
                                         .setScaleData(GenericParticleData.create(0.05f, 0.1f, 0).setEasing(Easing.QUINTIC_IN_OUT).build())
-                                        .randomSpin(0.5f)
+                                        .setSpinData(SpinParticleData.create().randomSpin(0.5f).build())
                                         .setLifetime(30)
                                         .randomVelocity(0.02f)
-                                        .spawn(world, msg.posFromX - (x * i), msg.posFromY - (y * i), msg.posFromZ - (z * i));
+                                        .spawn(level, msg.posFromX - (x * i), msg.posFromY - (y * i), msg.posFromZ - (z * i));
                             }
                         }
                     }

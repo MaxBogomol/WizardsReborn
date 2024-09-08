@@ -3,6 +3,7 @@ package mod.maxbogomol.wizards_reborn.common.item;
 import mod.maxbogomol.fluffy_fur.client.particle.ParticleBuilder;
 import mod.maxbogomol.fluffy_fur.client.particle.data.ColorParticleData;
 import mod.maxbogomol.fluffy_fur.client.particle.data.GenericParticleData;
+import mod.maxbogomol.fluffy_fur.client.particle.data.SpinParticleData;
 import mod.maxbogomol.fluffy_fur.common.item.IParticleItem;
 import mod.maxbogomol.fluffy_fur.registry.client.FluffyFurParticles;
 import net.minecraft.world.entity.item.ItemEntity;
@@ -26,7 +27,7 @@ public class ArcaciteItem extends Item implements IParticleItem {
                     .setColorData(ColorParticleData.create(0.694f, 0.275f, 0.310f).build())
                     .setTransparencyData(GenericParticleData.create(0.5f, 0).build())
                     .setScaleData(GenericParticleData.create(0.1f, 0).build())
-                    .randomSpin(0.5f)
+                    .setSpinData(SpinParticleData.create().randomSpin(0.5f).build())
                     .setLifetime(30)
                     .randomVelocity(0.01f)
                     .randomOffset(0.125f)

@@ -28,8 +28,8 @@ public class VoidRaySpell extends RaySpell {
     }
 
     @Override
-    public void onImpact(HitResult ray, Level world, SpellProjectileEntity projectile, Player player, Entity target) {
-        super.onImpact(ray, world, projectile, player, target);
+    public void onImpact(HitResult ray, Level level, SpellProjectileEntity projectile, Player player, Entity target) {
+        super.onImpact(ray, level, projectile, player, target);
 
         if (player != null) {
             if (target.tickCount % 10 == 0) {

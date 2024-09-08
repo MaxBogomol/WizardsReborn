@@ -5,8 +5,9 @@ import net.minecraft.world.level.block.GlassBlock;
 import net.minecraft.world.level.block.state.BlockState;
 
 public class LuminalGlassBlock extends GlassBlock {
-    public LuminalGlassBlock(Properties pProperties) {
-        super(pProperties);
+
+    public LuminalGlassBlock(Properties properties) {
+        super(properties);
     }
 
     @Override

@@ -18,11 +18,12 @@ import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
 
 public class ShinyCloverCropBlock extends CropBlock {
+
     public static final IntegerProperty AGE = BlockStateProperties.AGE_1;
     private static final VoxelShape[] SHAPE_BY_AGE = new VoxelShape[]{Block.box(5.0D, 0.0D, 5.0D, 11.0D, 1.0D, 11.0D), Block.box(4.0D, 0.0D, 4.0D, 12.0D, 2, 12.0D)};
 
-    public ShinyCloverCropBlock(Properties builder) {
-        super(builder);
+    public ShinyCloverCropBlock(Properties properties) {
+        super(properties);
     }
 
     @Override
@@ -31,7 +32,7 @@ public class ShinyCloverCropBlock extends CropBlock {
     }
 
     @Override
-    public VoxelShape getShape(BlockState state, BlockGetter worldIn, BlockPos pos, CollisionContext context) {
+    public VoxelShape getShape(BlockState state, BlockGetter level, BlockPos pos, CollisionContext context) {
         return SHAPE_BY_AGE[state.getValue(this.getAgeProperty())];
     }
 
@@ -56,9 +57,9 @@ public class ShinyCloverCropBlock extends CropBlock {
     }
 
     @Override
-    public void randomTick(BlockState state, ServerLevel worldIn, BlockPos pos, RandomSource random) {
+    public void randomTick(BlockState state, ServerLevel level, BlockPos pos, RandomSource random) {
         if (random.nextInt(3) != 0) {
-            super.randomTick(state, worldIn, pos, random);
+            super.randomTick(state, level, pos, random);
         }
     }
 

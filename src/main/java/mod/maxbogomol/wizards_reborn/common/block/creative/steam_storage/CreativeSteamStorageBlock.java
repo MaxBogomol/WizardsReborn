@@ -47,7 +47,7 @@ public class CreativeSteamStorageBlock extends Block implements EntityBlock, Sim
     }
 
     @Override
-    public RenderShape getRenderShape(BlockState pState) {
+    public RenderShape getRenderShape(BlockState state) {
         return RenderShape.MODEL;
     }
 
@@ -75,38 +75,31 @@ public class CreativeSteamStorageBlock extends Block implements EntityBlock, Sim
     }
 
     @Override
-    public BlockState updateShape(BlockState pState, Direction pDirection, BlockState pNeighborState, LevelAccessor pLevel, BlockPos pCurrentPos, BlockPos pNeighborPos) {
-        if (pState.getValue(BlockStateProperties.WATERLOGGED)) {
-            pLevel.scheduleTick(pCurrentPos, Fluids.WATER, Fluids.WATER.getTickDelay(pLevel));
+    public BlockState updateShape(BlockState state, Direction direction, BlockState neighborState, LevelAccessor level, BlockPos currentPos, BlockPos neighborPos) {
+        if (state.getValue(BlockStateProperties.WATERLOGGED)) {
+            level.scheduleTick(currentPos, Fluids.WATER, Fluids.WATER.getTickDelay(level));
         }
 
-        if (pLevel.getBlockEntity(pCurrentPos) instanceof PipeBaseBlockEntity pipe) {
-            BlockEntity facingBE = pLevel.getBlockEntity(pCurrentPos);
-            if (pNeighborState.is(WizardsRebornBlockTags.STEAM_PIPE_CONNECTION)) {
-                if (facingBE instanceof PipeBaseBlockEntity && ((PipeBaseBlockEntity) facingBE).getConnection(pDirection.getOpposite()) == PipeConnection.DISABLED) {
-                    pipe.setConnection(pDirection, PipeConnection.NONE);
+        if (level.getBlockEntity(currentPos) instanceof PipeBaseBlockEntity pipe) {
+            BlockEntity facingBE = level.getBlockEntity(currentPos);
+            if (neighborState.is(WizardsRebornBlockTags.STEAM_PIPE_CONNECTION)) {
+                if (facingBE instanceof PipeBaseBlockEntity && ((PipeBaseBlockEntity) facingBE).getConnection(direction.getOpposite()) == PipeConnection.DISABLED) {
+                    pipe.setConnection(direction, PipeConnection.NONE);
                 } else {
-                    pipe.setConnection(pDirection, PipeConnection.PIPE);
+                    pipe.setConnection(direction, PipeConnection.PIPE);
                 }
             } else {
-                pipe.setConnection(pDirection, PipeConnection.NONE);
+                pipe.setConnection(direction, PipeConnection.NONE);
             }
         }
 
-        return super.updateShape(pState, pDirection, pNeighborState, pLevel, pCurrentPos, pNeighborPos);
-    }
-
-    @Override
-    public boolean triggerEvent(BlockState state, Level world, BlockPos pos, int id, int param) {
-        super.triggerEvent(state, world, pos, id, param);
-        BlockEntity tileentity = world.getBlockEntity(pos);
-        return tileentity != null && tileentity.triggerEvent(id, param);
+        return super.updateShape(state, direction, neighborState, level, currentPos, neighborPos);
     }
 
     @Nullable
     @Override
-    public BlockEntity newBlockEntity(BlockPos pPos, BlockState pState) {
-        return new CreativeSteamStorageBlockEntity(pPos, pState);
+    public BlockEntity newBlockEntity(BlockPos pos, BlockState state) {
+        return new CreativeSteamStorageBlockEntity(pos, state);
     }
 
     @Nullable
@@ -126,7 +119,7 @@ public class CreativeSteamStorageBlock extends Block implements EntityBlock, Sim
     }
 
     @Override
-    public int getAnalogOutputSignal(BlockState blockState, Level level, BlockPos pos) {
+    public int getAnalogOutputSignal(BlockState state, Level level, BlockPos pos) {
         CreativeSteamStorageBlockEntity tile = (CreativeSteamStorageBlockEntity) level.getBlockEntity(pos);
         return Mth.floor(((float) tile.getSteam() / tile.getMaxSteam()) * 14.0F);
     }

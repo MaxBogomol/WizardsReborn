@@ -3,6 +3,7 @@ package mod.maxbogomol.wizards_reborn.common.arcaneenchantment;
 import mod.maxbogomol.fluffy_fur.client.particle.ParticleBuilder;
 import mod.maxbogomol.fluffy_fur.client.particle.data.ColorParticleData;
 import mod.maxbogomol.fluffy_fur.client.particle.data.GenericParticleData;
+import mod.maxbogomol.fluffy_fur.client.particle.data.SpinParticleData;
 import mod.maxbogomol.fluffy_fur.common.easing.Easing;
 import mod.maxbogomol.fluffy_fur.registry.client.FluffyFurParticles;
 import mod.maxbogomol.wizards_reborn.WizardsReborn;
@@ -96,7 +97,7 @@ public class WissenChargeArcaneEnchantment extends ArcaneEnchantment {
                                             .setColorData(ColorParticleData.create(color).build())
                                             .setTransparencyData(GenericParticleData.create(0.3f * charge, 0).build())
                                             .setScaleData(GenericParticleData.create(0.15f * charge, 0).build())
-                                            .randomSpin(0.3f)
+                                            .setSpinData(SpinParticleData.create().randomSpin(0.3f).build())
                                             .setLifetime(20)
                                             .randomVelocity(0.02f)
                                             .addVelocity(0, 0.02f, 0)
@@ -110,7 +111,7 @@ public class WissenChargeArcaneEnchantment extends ArcaneEnchantment {
                                             .setColorData(ColorParticleData.create(color).build())
                                             .setTransparencyData(GenericParticleData.create(0.3f * charge, 0).build())
                                             .setScaleData(GenericParticleData.create(0.075f * charge * i, 0.15f * charge * i, 0).setEasing(Easing.QUINTIC_IN_OUT).build())
-                                            .randomSpin(0.3f)
+                                            .setSpinData(SpinParticleData.create().randomSpin(0.3f).build())
                                             .setLifetime(30)
                                             .randomVelocity(0.02f)
                                             .addVelocity(0, 0.02f, 0)

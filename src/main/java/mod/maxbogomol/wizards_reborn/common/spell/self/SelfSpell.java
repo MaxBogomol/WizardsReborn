@@ -13,31 +13,31 @@ public class SelfSpell extends Spell {
     }
 
     @Override
-    public void useSpell(Level world, Player player, InteractionHand hand) {
-        if (!world.isClientSide) {
+    public void useSpell(Level level, Player player, InteractionHand hand) {
+        if (!level.isClientSide) {
             ItemStack stack = player.getItemInHand(hand);
 
             CompoundTag stats = getStats(stack);
             setCooldown(stack, stats);
             removeWissen(stack, stats, player);
             awardStat(player, stack);
-            spellSound(player, world);
-            selfSpell(world, player, hand);
+            spellSound(player, level);
+            selfSpell(level, player, hand);
         }
     }
 
-    public boolean canSpell(Level world, Player player, InteractionHand hand) {
-        if (super.canSpell(world, player, hand)) {
-            return canSelfSpell(world, player, hand);
+    public boolean canSpell(Level level, Player player, InteractionHand hand) {
+        if (super.canSpell(level, player, hand)) {
+            return canSelfSpell(level, player, hand);
         }
         return false;
     }
 
-    public boolean canSelfSpell(Level world, Player player, InteractionHand hand) {
+    public boolean canSelfSpell(Level level, Player player, InteractionHand hand) {
         return true;
     }
 
-    public void selfSpell(Level world, Player player, InteractionHand hand) {
+    public void selfSpell(Level level, Player player, InteractionHand hand) {
 
     }
 }

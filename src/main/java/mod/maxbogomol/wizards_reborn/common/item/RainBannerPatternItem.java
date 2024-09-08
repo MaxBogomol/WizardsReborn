@@ -37,8 +37,8 @@ public class RainBannerPatternItem extends BannerPatternItem {
 
     @OnlyIn(Dist.CLIENT)
     @Override
-    public void appendHoverText(ItemStack stack, Level world, List<Component> list, TooltipFlag flags) {
-        super.appendHoverText(stack, world, list, flags);
+    public void appendHoverText(ItemStack stack, Level level, List<Component> list, TooltipFlag flags) {
+        super.appendHoverText(stack, level, list, flags);
         list.add(Component.empty());
 
         Color color = getColor(type);

@@ -8,8 +8,8 @@ import net.minecraft.world.level.block.state.BlockState;
 
 public class CreativeLightStorageBlockEntity extends LightCasingBlockEntity {
 
-    public CreativeLightStorageBlockEntity(BlockEntityType<?> pType, BlockPos pPos, BlockState pBlockState) {
-        super(pType, pPos, pBlockState);
+    public CreativeLightStorageBlockEntity(BlockEntityType<?> type, BlockPos pos, BlockState blockState) {
+        super(type, pos, blockState);
     }
 
     public CreativeLightStorageBlockEntity(BlockPos pos, BlockState state) {

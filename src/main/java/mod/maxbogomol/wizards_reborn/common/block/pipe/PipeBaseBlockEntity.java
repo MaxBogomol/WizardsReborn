@@ -3,6 +3,7 @@ package mod.maxbogomol.wizards_reborn.common.block.pipe;
 import mod.maxbogomol.fluffy_fur.client.particle.ParticleBuilder;
 import mod.maxbogomol.fluffy_fur.client.particle.data.ColorParticleData;
 import mod.maxbogomol.fluffy_fur.client.particle.data.GenericParticleData;
+import mod.maxbogomol.fluffy_fur.client.particle.data.SpinParticleData;
 import mod.maxbogomol.fluffy_fur.common.block.entity.BlockEntityBase;
 import mod.maxbogomol.fluffy_fur.registry.client.FluffyFurParticles;
 import mod.maxbogomol.wizards_reborn.api.alchemy.IPipeConnection;
@@ -36,8 +37,8 @@ public class PipeBaseBlockEntity extends BlockEntityBase {
 
     public static final ModelProperty<int[]> DATA_TYPE = new ModelProperty<int[]>();
 
-    public PipeBaseBlockEntity(BlockEntityType<?> pType, BlockPos pPos, BlockState pBlockState) {
-        super(pType, pPos, pBlockState);
+    public PipeBaseBlockEntity(BlockEntityType<?> type, BlockPos pos, BlockState blockState) {
+        super(type, pos, blockState);
     }
 
     public void initConnections() {
@@ -153,7 +154,7 @@ public class PipeBaseBlockEntity extends BlockEntityBase {
         float xOffset = (float) (Math.cos(angleA) * Math.cos(angleB));
         float yOffset = (float) (Math.sin(angleA) * Math.cos(angleB));
         float zOffset = (float) Math.sin(angleB);
-        float speed = 0.03f;
+        float speed = 0.02f;
         float vx = xOffset * speed + posRand.nextFloat() * speed * 0.3f;
         float vy = yOffset * speed + posRand.nextFloat() * speed * 0.3f;
         float vz = zOffset * speed + posRand.nextFloat() * speed * 0.3f;
@@ -161,7 +162,7 @@ public class PipeBaseBlockEntity extends BlockEntityBase {
                 .setColorData(ColorParticleData.create(Color.WHITE).build())
                 .setTransparencyData(GenericParticleData.create(0.4f, 0).build())
                 .setScaleData(GenericParticleData.create(0.05f, 0.15f).build())
-                .randomSpin(0.1f)
+                .setSpinData(SpinParticleData.create(-0.1f).randomSpin(0.01f).build())
                 .setLifetime(30)
                 .addVelocity(vx, vy, vz)
                 .spawn(level, getBlockPos().getX() + 0.5, getBlockPos().getY() + 0.5, getBlockPos().getZ() + 0.5);

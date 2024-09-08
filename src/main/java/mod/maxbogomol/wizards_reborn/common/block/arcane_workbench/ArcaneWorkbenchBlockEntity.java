@@ -1,12 +1,16 @@
 package mod.maxbogomol.wizards_reborn.common.block.arcane_workbench;
 
+import com.mojang.math.Axis;
 import mod.maxbogomol.fluffy_fur.client.particle.ParticleBuilder;
 import mod.maxbogomol.fluffy_fur.client.particle.data.ColorParticleData;
 import mod.maxbogomol.fluffy_fur.client.particle.data.GenericParticleData;
+import mod.maxbogomol.fluffy_fur.client.particle.data.SpinParticleData;
+import mod.maxbogomol.fluffy_fur.client.particle.options.ItemParticleOptions;
 import mod.maxbogomol.fluffy_fur.common.block.entity.BlockEntityBase;
 import mod.maxbogomol.fluffy_fur.common.block.entity.TickableBlockEntity;
 import mod.maxbogomol.fluffy_fur.common.easing.Easing;
 import mod.maxbogomol.fluffy_fur.registry.client.FluffyFurParticles;
+import mod.maxbogomol.fluffy_fur.registry.client.FluffyFurRenderTypes;
 import mod.maxbogomol.wizards_reborn.WizardsReborn;
 import mod.maxbogomol.wizards_reborn.api.wissen.*;
 import mod.maxbogomol.wizards_reborn.client.sound.ArcaneWorkbenchSoundInstance;
@@ -15,9 +19,9 @@ import mod.maxbogomol.wizards_reborn.common.network.PacketHandler;
 import mod.maxbogomol.wizards_reborn.common.network.tileentity.ArcaneWorkbenchBurstEffectPacket;
 import mod.maxbogomol.wizards_reborn.common.recipe.ArcaneWorkbenchRecipe;
 import mod.maxbogomol.wizards_reborn.registry.client.WizardsRebornParticles;
-import mod.maxbogomol.wizards_reborn.registry.common.block.WizardsRebornBlockEntities;
 import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornRecipes;
 import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornSounds;
+import mod.maxbogomol.wizards_reborn.registry.common.block.WizardsRebornBlockEntities;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.RegistryAccess;
@@ -35,9 +39,11 @@ import net.minecraftforge.items.IItemHandler;
 import net.minecraftforge.items.ItemHandlerHelper;
 import net.minecraftforge.items.ItemStackHandler;
 import net.minecraftforge.items.wrapper.CombinedInvWrapper;
+import org.joml.Vector3f;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
+import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -85,6 +91,16 @@ public class ArcaneWorkbenchBlockEntity extends BlockEntityBase implements Ticka
                     startCraft = false;
 
                     update = true;
+                }
+
+                if (wissenInCraft > 0 && startCraft) {
+                    ItemStack output = recipe.get().getResultItem(RegistryAccess.EMPTY);
+                    if (!isCanCraft(inv, output)) {
+                        wissenIsCraft = 0;
+                        startCraft = false;
+
+                        update = true;
+                    }
                 }
 
                 if ((wissenInCraft > 0) && (wissen > 0) && (startCraft)) {
@@ -166,7 +182,7 @@ public class ArcaneWorkbenchBlockEntity extends BlockEntityBase implements Ticka
                             .setColorData(ColorParticleData.create(Config.wissenColorR(), Config.wissenColorG(), Config.wissenColorB()).build())
                             .setTransparencyData(GenericParticleData.create(0.25f, 0).build())
                             .setScaleData(GenericParticleData.create(0.05f * getStage(), 0.1f * getStage(), 0).setEasing(Easing.QUINTIC_IN_OUT).build())
-                            .randomSpin(0.5f)
+                            .setSpinData(SpinParticleData.create().randomSpin(0.5f).build())
                             .setLifetime(30)
                             .randomVelocity(0.015f * getStage())
                             .spawn(level, getBlockPos().getX() + 0.5F, getBlockPos().getY() + 1.5F, getBlockPos().getZ() + 0.5F);
@@ -175,35 +191,97 @@ public class ArcaneWorkbenchBlockEntity extends BlockEntityBase implements Ticka
 
             if (wissenInCraft > 0 && startCraft) {
                 if (random.nextFloat() < 0.2) {
-                    ParticleBuilder.create(FluffyFurParticles.SPARKLE)
-                            .setColorData(ColorParticleData.create(Config.wissenColorR(), Config.wissenColorG(), Config.wissenColorB()).build())
+                    ParticleBuilder.create(FluffyFurParticles.WISP)
+                            .setColorData(ColorParticleData.create(random.nextFloat(), random.nextFloat(), random.nextFloat()).build())
                             .setTransparencyData(GenericParticleData.create(0.25f, 0).build())
                             .setScaleData(GenericParticleData.create(0.1f * getStage(), 0).build())
-                            .randomSpin(0.5f)
+                            .setSpinData(SpinParticleData.create().randomSpin(0.5f).build())
                             .setLifetime(30)
                             .randomVelocity(0.025f)
                             .spawn(level, getBlockPos().getX() + 0.5F, getBlockPos().getY() + 1.5F, getBlockPos().getZ() + 0.5F);
                 }
                 if (random.nextFloat() < 0.1) {
                     ParticleBuilder.create(random.nextBoolean() ? FluffyFurParticles.SQUARE : FluffyFurParticles.SPARKLE)
-                            .setColorData(ColorParticleData.create(Config.wissenColorR(), Config.wissenColorG(), Config.wissenColorB()).build())
+                            .setColorData(ColorParticleData.create(random.nextFloat(), random.nextFloat(), random.nextFloat()).build())
                             .setTransparencyData(GenericParticleData.create(0.75f, 0).build())
                             .setScaleData(GenericParticleData.create(0.05f * getStage(), 0.1f * getStage(), 0).setEasing(Easing.QUINTIC_IN_OUT).build())
-                            .randomSpin(0.1f)
+                            .setSpinData(SpinParticleData.create().randomSpin(0.1f).build())
                             .setLifetime(65)
                             .randomVelocity(0.0125f)
                             .spawn(level, getBlockPos().getX() + 0.5F, getBlockPos().getY() + 1.5F, getBlockPos().getZ() + 0.5F);
                 }
-                if (random.nextFloat() < 0.3) {
+                if (random.nextFloat() < 0.2) {
                     double X = ((random.nextDouble() - 0.5D) * 0.5);
                     double Z = ((random.nextDouble() - 0.5D) * 0.5);
                     ParticleBuilder.create(WizardsRebornParticles.KARMA)
                             .setColorData(ColorParticleData.create(0.733f, 0.564f, 0.937f).build())
-                            .setTransparencyData(GenericParticleData.create(0.5f, 0).build())
-                            .setScaleData(GenericParticleData.create(0.1f, 0.025f).build())
-                            .setLifetime(15)
+                            .setTransparencyData(GenericParticleData.create(0.1f, 0.5f, 0).setEasing(Easing.EXPO_IN, Easing.QUINTIC_IN_OUT).build())
+                            .setScaleData(GenericParticleData.create(0.05f, 0.1f, 0).setEasing(Easing.EXPO_IN, Easing.QUINTIC_IN_OUT).build())
+                            .setLifetime(25)
                             .addVelocity(-(X / 100), (random.nextDouble() / 20), -(Z / 100))
                             .spawn(level, getBlockPos().getX() + 0.5F + X, getBlockPos().getY() + 1F, getBlockPos().getZ() + 0.5F + Z);
+                }
+
+                int x = -1;
+                int y = -1;
+                for (int i = 0; i < 9; i += 1) {
+                    ItemStack stack = itemHandler.getStackInSlot(i);
+
+                    if (random.nextFloat() < 0.1) {
+                        if (!stack.isEmpty()) {
+                            ItemParticleOptions options = new ItemParticleOptions(FluffyFurParticles.ITEM.get(), stack);
+
+                            float rotate = getBlockRotate();
+
+                            Vector3f vector3f = new Vector3f(x, 0, y);
+                            vector3f.rotate(Axis.YP.rotationDegrees(rotate));
+                            float xx = vector3f.x();
+                            float yy = vector3f.z();
+
+                            ParticleBuilder.create(options)
+                                    .setRenderType(FluffyFurRenderTypes.DELAYED_TERRAIN_PARTICLE)
+                                    .setColorData(ColorParticleData.create(Color.WHITE).build())
+                                    .setTransparencyData(GenericParticleData.create(0.2f, 0.5f, 0).setEasing(Easing.EXPO_IN, Easing.ELASTIC_OUT).build())
+                                    .setScaleData(GenericParticleData.create(0.025f, 0.05f, 0).setEasing(Easing.EXPO_IN, Easing.ELASTIC_OUT).build())
+                                    .setSpinData(SpinParticleData.create().randomSpin(0.2f).build())
+                                    .setLifetime(20)
+                                    .addVelocity(xx / 100f, 0.02f, yy / 100f)
+                                    .spawn(level, worldPosition.getX() + 0.5F + (-0.1875F * xx), worldPosition.getY() + 1.125F, worldPosition.getZ() + 0.5F + (-0.1875F * yy));
+                        }
+                    }
+
+                    x = x + 1;
+                    if (x > 1) {
+                        y = y + 1;
+                        x = -1;
+                    }
+                }
+
+                for (int i = 0; i < 4; i += 1) {
+                    ItemStack stack = itemHandler.getStackInSlot(i + 9);
+
+                    if (random.nextFloat() < 0.1) {
+                        if (!stack.isEmpty()) {
+                            ItemParticleOptions options = new ItemParticleOptions(FluffyFurParticles.ITEM.get(), stack);
+
+                            float rotate = -90F * i + getBlockRotate() - 90F;
+
+                            Vector3f vector3f = new Vector3f(0.375F, 0, 0);
+                            vector3f.rotate(Axis.YP.rotationDegrees(rotate));
+                            float xx = vector3f.x();
+                            float yy = vector3f.z();
+
+                            ParticleBuilder.create(options)
+                                    .setRenderType(FluffyFurRenderTypes.DELAYED_TERRAIN_PARTICLE)
+                                    .setColorData(ColorParticleData.create(Color.WHITE).build())
+                                    .setTransparencyData(GenericParticleData.create(0.2f, 0.5f, 0).setEasing(Easing.EXPO_IN, Easing.ELASTIC_OUT).build())
+                                    .setScaleData(GenericParticleData.create(0.025f, 0.05f, 0).setEasing(Easing.EXPO_IN, Easing.ELASTIC_OUT).build())
+                                    .setSpinData(SpinParticleData.create().randomSpin(0.2f).build())
+                                    .setLifetime(20)
+                                    .addVelocity(-xx / 20f, 0.018f, -yy / 20f)
+                                    .spawn(level, worldPosition.getX() + 0.5F + xx, worldPosition.getY() + 1.125F, worldPosition.getZ() + 0.5F + yy);
+                        }
+                    }
                 }
 
                 if (sound == null) {
@@ -285,15 +363,8 @@ public class ArcaneWorkbenchBlockEntity extends BlockEntityBase implements Ticka
     }
 
     public boolean isCanCraft(SimpleContainer inv, ItemStack output) {
-        if (inv.getItem(13).isEmpty()) {
-            return true;
-        }
-
-        if ((ItemHandlerHelper.canItemStacksStack(output, inv.getItem(13))) && (inv.getItem(13).getCount() + output.getCount() <= output.getMaxStackSize())) {
-            return true;
-        }
-
-        return false;
+        if (inv.getItem(13).isEmpty()) return true;
+        return (ItemHandlerHelper.canItemStacksStack(output, inv.getItem(13))) && (inv.getItem(13).getCount() + output.getCount() <= output.getMaxStackSize());
     }
 
     @Override

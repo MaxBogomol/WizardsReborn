@@ -3,6 +3,7 @@ package mod.maxbogomol.wizards_reborn.common.block.crystal;
 import mod.maxbogomol.fluffy_fur.client.particle.ParticleBuilder;
 import mod.maxbogomol.fluffy_fur.client.particle.data.ColorParticleData;
 import mod.maxbogomol.fluffy_fur.client.particle.data.GenericParticleData;
+import mod.maxbogomol.fluffy_fur.client.particle.data.SpinParticleData;
 import mod.maxbogomol.fluffy_fur.common.block.entity.BlockSimpleInventory;
 import mod.maxbogomol.fluffy_fur.common.block.entity.TickableBlockEntity;
 import mod.maxbogomol.fluffy_fur.registry.client.FluffyFurParticles;
@@ -96,28 +97,21 @@ public class CrystalBlock extends Block implements EntityBlock, SimpleWaterlogge
     }
 
     @Override
-    public BlockState updateShape(BlockState pState, Direction pDirection, BlockState pNeighborState, LevelAccessor pLevel, BlockPos pCurrentPos, BlockPos pNeighborPos) {
-        if (pState.getValue(BlockStateProperties.WATERLOGGED)) {
-            pLevel.scheduleTick(pCurrentPos, Fluids.WATER, Fluids.WATER.getTickDelay(pLevel));
+    public BlockState updateShape(BlockState state, Direction direction, BlockState neighborState, LevelAccessor level, BlockPos currentPos, BlockPos neighborPos) {
+        if (state.getValue(BlockStateProperties.WATERLOGGED)) {
+            level.scheduleTick(currentPos, Fluids.WATER, Fluids.WATER.getTickDelay(level));
         }
 
-        return getBlockConnected(pState).getOpposite() == pDirection && !pState.canSurvive(pLevel, pCurrentPos) ? Blocks.AIR.defaultBlockState() : super.updateShape(pState, pDirection, pNeighborState, pLevel, pCurrentPos, pNeighborPos);
-    }
-
-    @Override
-    public boolean triggerEvent(BlockState state, Level world, BlockPos pos, int id, int param) {
-        super.triggerEvent(state, world, pos, id, param);
-        BlockEntity tileentity = world.getBlockEntity(pos);
-        return tileentity != null && tileentity.triggerEvent(id, param);
+        return getBlockConnected(state).getOpposite() == direction && !state.canSurvive(level, currentPos) ? Blocks.AIR.defaultBlockState() : super.updateShape(state, direction, neighborState, level, currentPos, neighborPos);
     }
 
     public PushReaction getPistonPushReaction(BlockState state) {
         return PushReaction.DESTROY;
     }
 
-    public boolean canSurvive(BlockState state, LevelReader worldIn, BlockPos pos) {
+    public boolean canSurvive(BlockState state, LevelReader level, BlockPos pos) {
         Direction direction = getBlockConnected(state).getOpposite();
-        return Block.canSupportCenter(worldIn, pos.relative(direction), direction.getOpposite());
+        return Block.canSupportCenter(level, pos.relative(direction), direction.getOpposite());
     }
 
     protected static Direction getBlockConnected(BlockState state) {
@@ -125,45 +119,45 @@ public class CrystalBlock extends Block implements EntityBlock, SimpleWaterlogge
     }
 
     @OnlyIn(Dist.CLIENT)
-    public void animateTick(BlockState state, Level world, BlockPos pos, RandomSource random) {
+    public void animateTick(BlockState state, Level level, BlockPos pos, RandomSource random) {
         if (polishing.hasParticle()) {
             Color color = polishing.getColor();
             ParticleBuilder.create(FluffyFurParticles.SPARKLE)
                     .setColorData(ColorParticleData.create(color).build())
                     .setTransparencyData(GenericParticleData.create(0.5f, 0).build())
                     .setScaleData(GenericParticleData.create(0.1f, 0).build())
-                    .randomSpin(0.5f)
+                    .setSpinData(SpinParticleData.create().randomSpin(0.5f).build())
                     .setLifetime(30)
                     .randomVelocity(0.015f)
                     .flatRandomOffset(0.25f, 0.25f, 0.25f)
-                    .spawn(world, pos.getX() + 0.5F, pos.getY() + 0.35F, pos.getZ() + 0.5F);
+                    .spawn(level, pos.getX() + 0.5F, pos.getY() + 0.35F, pos.getZ() + 0.5F);
         }
     }
 
     @Override
-    public void playerWillDestroy(Level world, BlockPos pos, BlockState state, Player player) {
-        if (world.isClientSide()) {
+    public void playerWillDestroy(Level level, BlockPos pos, BlockState state, Player player) {
+        if (level.isClientSide()) {
             if (!player.isCreative()) {
                 Color color = type.getColor();
                 ParticleBuilder.create(FluffyFurParticles.SPARKLE)
                         .setColorData(ColorParticleData.create(color).build())
                         .setTransparencyData(GenericParticleData.create(0.25f, 0).build())
                         .setScaleData(GenericParticleData.create(0.35f, 0).build())
-                        .randomSpin(0.5f)
+                        .setSpinData(SpinParticleData.create().randomSpin(0.5f).build())
                         .setLifetime(30)
                         .randomVelocity(0.035f)
                         .randomOffset(0.25f)
-                        .repeat(world, pos.getX() + 0.5F, pos.getY() + 0.5F, pos.getZ() + 0.5F, 25);
+                        .repeat(level, pos.getX() + 0.5F, pos.getY() + 0.5F, pos.getZ() + 0.5F, 25);
             }
         }
 
-        super.playerWillDestroy(world, pos, state, player);
+        super.playerWillDestroy(level, pos, state, player);
     }
 
     @Nullable
     @Override
-    public BlockEntity newBlockEntity(BlockPos pPos, BlockState pState) {
-        return new CrystalBlockEntity(pPos, pState);
+    public BlockEntity newBlockEntity(BlockPos pos, BlockState state) {
+        return new CrystalBlockEntity(pos, state);
     }
 
     @Nullable
@@ -173,13 +167,13 @@ public class CrystalBlock extends Block implements EntityBlock, SimpleWaterlogge
     }
 
     @Override
-    public void onRemove(@Nonnull BlockState state, @Nonnull Level world, @Nonnull BlockPos pos, @Nonnull BlockState newState, boolean isMoving) {
+    public void onRemove(@Nonnull BlockState state, @Nonnull Level level, @Nonnull BlockPos pos, @Nonnull BlockState newState, boolean isMoving) {
         if (state.getBlock() != newState.getBlock()) {
-            BlockEntity tile = world.getBlockEntity(pos);
+            BlockEntity tile = level.getBlockEntity(pos);
             if (tile instanceof BlockSimpleInventory) {
-                Containers.dropContents(world, pos, ((BlockSimpleInventory) tile).getItemHandler());
+                Containers.dropContents(level, pos, ((BlockSimpleInventory) tile).getItemHandler());
             }
-            super.onRemove(state, world, pos, newState, isMoving);
+            super.onRemove(state, level, pos, newState, isMoving);
         }
     }
 }

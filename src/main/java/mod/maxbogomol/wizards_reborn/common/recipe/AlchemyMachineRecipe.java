@@ -55,10 +55,10 @@ public class AlchemyMachineRecipe implements Recipe<AlchemyMachineContext> {
     }
 
     @Override
-    public boolean matches(AlchemyMachineContext inv, Level worldIn) {
-        if (matches(inputs, inv.container)) {
+    public boolean matches(AlchemyMachineContext context, Level level) {
+        if (matches(inputs, context.container)) {
             if (fluidInputs.size() > 0) {
-                return fluidMatches(inv, worldIn);
+                return fluidMatches(context, level);
             } else {
                 return true;
             }

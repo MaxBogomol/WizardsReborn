@@ -54,19 +54,19 @@ public class ScytheItem extends SwordItem {
     public InteractionResult onItemUseFirst(ItemStack stack, UseOnContext context) {
         Player player = context.getPlayer();
         InteractionHand hand = context.getHand();
-        Level world = context.getLevel();
+        Level level = context.getLevel();
         BlockPos blockpos = context.getClickedPos();
-        InteractionResult res = onBlockUse(player, world, hand, blockpos, true);
+        InteractionResult res = onBlockUse(player, level, hand, blockpos, true);
 
         return res;
     }
 
-    public InteractionResult onBlockUse(Player player, Level world, InteractionHand hand, BlockPos blockPos, boolean initialCall) {
+    public InteractionResult onBlockUse(Player player, Level level, InteractionHand hand, BlockPos blockPos, boolean initialCall) {
         if (player.isSpectator() || hand == InteractionHand.OFF_HAND) {
             return InteractionResult.PASS;
         }
 
-        BlockState state = world.getBlockState(blockPos);
+        BlockState state = level.getBlockState(blockPos);
         ItemStack stack = player.getItemInHand(hand);
 
         if (state.getBlock() instanceof CropBlock || state.getBlock() instanceof NetherWartBlock) {
@@ -76,23 +76,23 @@ public class ScytheItem extends SwordItem {
                         for (int z = -radius; z <= radius; z++) {
                             BlockPos pos = blockPos.relative(Direction.Axis.X, x)
                                     .relative(Direction.Axis.Z, z);
-                            onBlockUse(player, world, hand, pos, false);
+                            onBlockUse(player, level, hand, pos, false);
                         }
                     }
                 }
 
-                if (!world.isClientSide) {
-                    BlockEvent.BreakEvent breakEv = new BlockEvent.BreakEvent(world, blockPos, state, player);
+                if (!level.isClientSide) {
+                    BlockEvent.BreakEvent breakEv = new BlockEvent.BreakEvent(level, blockPos, state, player);
                     if (MinecraftForge.EVENT_BUS.post(breakEv)) return InteractionResult.FAIL;
                     BlockState replantState = getReplantState(state);
                     BlockEvent.EntityPlaceEvent placeEv = new BlockEvent.EntityPlaceEvent(
-                            BlockSnapshot.create(world.dimension(), world, blockPos),
-                            world.getBlockState(blockPos.below()),
+                            BlockSnapshot.create(level.dimension(), level, blockPos),
+                            level.getBlockState(blockPos.below()),
                             player
                     );
                     if (MinecraftForge.EVENT_BUS.post(placeEv)) return InteractionResult.FAIL;
-                    world.setBlockAndUpdate(blockPos, replantState);
-                    dropStacks(state, (ServerLevel) world, blockPos, player,
+                    level.setBlockAndUpdate(blockPos, replantState);
+                    dropStacks(state, (ServerLevel) level, blockPos, player,
                             player.getItemInHand(hand));
 
                     stack.hurtAndBreak(1, player, (entity) -> entity.broadcastBreakEvent(hand));
@@ -133,20 +133,20 @@ public class ScytheItem extends SwordItem {
         return state;
     }
 
-    private static void dropStacks(BlockState state, ServerLevel world, BlockPos pos, Entity entity,
+    private static void dropStacks(BlockState state, ServerLevel level, BlockPos pos, Entity entity,
                                    ItemStack toolStack) {
-        Item replant = state.getBlock().getCloneItemStack(world, pos, state).getItem();
+        Item replant = state.getBlock().getCloneItemStack(level, pos, state).getItem();
         final boolean[] removedReplant = {false};
 
-        Block.getDrops(state, world, pos, null, entity, toolStack).forEach(stack -> {
+        Block.getDrops(state, level, pos, null, entity, toolStack).forEach(stack -> {
             if (!removedReplant[0] && stack.getItem() == replant) {
                 stack.setCount(stack.getCount() - 1);
                 removedReplant[0] = true;
             }
 
-            Block.popResource(world, pos, stack);
+            Block.popResource(level, pos, stack);
         });
 
-        state.spawnAfterBreak(world, pos, toolStack, true);
+        state.spawnAfterBreak(level, pos, toolStack, true);
     }
 }

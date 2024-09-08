@@ -25,8 +25,8 @@ public class WaterChargeSpell extends ChargeSpell {
     }
 
     @Override
-    public void onImpact(HitResult ray, Level world, SpellProjectileEntity projectile, Player player, Entity target) {
-        super.onImpact(ray, world, projectile, player, target);
+    public void onImpact(HitResult ray, Level level, SpellProjectileEntity projectile, Player player, Entity target) {
+        super.onImpact(ray, level, projectile, player, target);
 
         int focusLevel = CrystalUtil.getStatLevel(projectile.getStats(), WizardsRebornCrystals.FOCUS);
         float magicModifier = ArcaneArmorItem.getPlayerMagicModifier(player) * 2;

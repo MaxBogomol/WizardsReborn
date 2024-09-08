@@ -1,13 +1,15 @@
-package mod.maxbogomol.wizards_reborn.common.block.steam_pipe;
+package mod.maxbogomol.wizards_reborn.common.block.pipe.extractor.steam;
 
 import mod.maxbogomol.fluffy_fur.client.particle.ParticleBuilder;
 import mod.maxbogomol.fluffy_fur.client.particle.data.ColorParticleData;
 import mod.maxbogomol.fluffy_fur.client.particle.data.GenericParticleData;
+import mod.maxbogomol.fluffy_fur.client.particle.data.SpinParticleData;
 import mod.maxbogomol.fluffy_fur.common.block.entity.TickableBlockEntity;
 import mod.maxbogomol.fluffy_fur.common.network.BlockEntityUpdate;
 import mod.maxbogomol.fluffy_fur.registry.client.FluffyFurParticles;
 import mod.maxbogomol.wizards_reborn.api.alchemy.ISteamBlockEntity;
-import mod.maxbogomol.wizards_reborn.common.block.pipe.TinyPipeBaseBlock;
+import mod.maxbogomol.wizards_reborn.common.block.pipe.extractor.TinyExtractorBaseBlock;
+import mod.maxbogomol.wizards_reborn.common.block.pipe.steam.SteamPipeBaseBlockEntity;
 import mod.maxbogomol.wizards_reborn.registry.common.block.WizardsRebornBlockEntities;
 import mod.maxbogomol.wizards_reborn.registry.common.block.WizardsRebornBlockTags;
 import net.minecraft.core.BlockPos;
@@ -25,10 +27,10 @@ import org.jetbrains.annotations.NotNull;
 
 import java.awt.*;
 
-public class SteamPipeBlock extends TinyPipeBaseBlock {
+public class SteamExtractorBlock extends TinyExtractorBaseBlock {
 
-    public SteamPipeBlock(Properties pProperties) {
-        super(pProperties);
+    public SteamExtractorBlock(Properties properties) {
+        super(properties);
     }
 
     @Override
@@ -39,11 +41,6 @@ public class SteamPipeBlock extends TinyPipeBaseBlock {
     @Override
     public TagKey<Block> getToggleConnectionTag() {
         return WizardsRebornBlockTags.STEAM_PIPE_CONNECTION_TOGGLE;
-    }
-
-    @Override
-    public boolean connected(Direction direction, BlockState state) {
-        return false;
     }
 
     @Override
@@ -70,8 +67,8 @@ public class SteamPipeBlock extends TinyPipeBaseBlock {
     }
 
     @Override
-    public BlockEntity newBlockEntity(BlockPos pPos, BlockState pState) {
-        return WizardsRebornBlockEntities.STEAM_PIPE.get().create(pPos, pState);
+    public BlockEntity newBlockEntity(BlockPos pos, BlockState state) {
+        return WizardsRebornBlockEntities.STEAM_EXTRACTOR.get().create(pos, state);
     }
 
     @Override
@@ -85,33 +82,33 @@ public class SteamPipeBlock extends TinyPipeBaseBlock {
     }
 
     @Override
-    public int getAnalogOutputSignal(BlockState blockState, Level level, BlockPos pos) {
+    public int getAnalogOutputSignal(BlockState state, Level level, BlockPos pos) {
         SteamPipeBaseBlockEntity tile = (SteamPipeBaseBlockEntity) level.getBlockEntity(pos);
         return Mth.floor(((float) tile.getSteam() / tile.getMaxSteam()) * 14.0F);
     }
 
     @Override
-    public void playerWillDestroy(Level world, BlockPos pos, BlockState state, Player player) {
-        if (world.isClientSide()) {
+    public void playerWillDestroy(Level level, BlockPos pos, BlockState state, Player player) {
+        if (level.isClientSide()) {
             if (!player.isCreative()) {
-                if (world.getBlockEntity(pos) != null) {
-                    if (world.getBlockEntity(pos) instanceof ISteamBlockEntity tile) {
+                if (level.getBlockEntity(pos) != null) {
+                    if (level.getBlockEntity(pos) instanceof ISteamBlockEntity tile) {
                         if (tile.getMaxSteam() > 0) {
                             float amount = (float) tile.getSteam() / (float) tile.getMaxSteam();
                             ParticleBuilder.create(FluffyFurParticles.SMOKE)
                                     .setColorData(ColorParticleData.create(Color.WHITE).build())
                                     .setTransparencyData(GenericParticleData.create(0.4f, 0).build())
                                     .setScaleData(GenericParticleData.create(0.1f, 0.5f).build())
-                                    .randomSpin(0.1f)
+                                    .setSpinData(SpinParticleData.create().randomSpin(0.1f).build())
                                     .setLifetime(30)
                                     .randomVelocity(0.015f)
-                                    .repeat(world, pos.getX() + 0.5F, pos.getY() + 0.5F, pos.getZ() + 0.5F, (int) (15 * amount));
+                                    .repeat(level, pos.getX() + 0.5F, pos.getY() + 0.5F, pos.getZ() + 0.5F, (int) (15 * amount));
                         }
                     }
                 }
             }
         }
 
-        super.playerWillDestroy(world, pos, state, player);
+        super.playerWillDestroy(level, pos, state, player);
     }
 }

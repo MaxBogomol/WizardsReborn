@@ -3,6 +3,7 @@ package mod.maxbogomol.wizards_reborn.common.block.wissen_cell;
 import mod.maxbogomol.fluffy_fur.client.particle.ParticleBuilder;
 import mod.maxbogomol.fluffy_fur.client.particle.data.ColorParticleData;
 import mod.maxbogomol.fluffy_fur.client.particle.data.GenericParticleData;
+import mod.maxbogomol.fluffy_fur.client.particle.data.SpinParticleData;
 import mod.maxbogomol.fluffy_fur.common.block.entity.ExposedBlockSimpleInventory;
 import mod.maxbogomol.fluffy_fur.common.block.entity.TickableBlockEntity;
 import mod.maxbogomol.fluffy_fur.common.easing.Easing;
@@ -92,7 +93,7 @@ public class WissenCellBlockEntity extends ExposedBlockSimpleInventory implement
                             .setColorData(ColorParticleData.create(Config.wissenColorR(), Config.wissenColorG(), Config.wissenColorB(), 0.5f, 0.5f, 0).build())
                             .setTransparencyData(GenericParticleData.create(0.25f, 0).build())
                             .setScaleData(GenericParticleData.create(0.1f * getStage() * i, 0.2f * getStage() * i, 0).setEasing(Easing.QUINTIC_IN_OUT).build())
-                            .randomSpin(0.1f)
+                            .setSpinData(SpinParticleData.create().randomSpin(0.1f).build())
                             .setLifetime(100)
                             .randomVelocity(0.025f * getStage() * i)
                             .spawn(level, getBlockPos().getX() + 0.5F, getBlockPos().getY() + 0.9375F, getBlockPos().getZ() + 0.5F);

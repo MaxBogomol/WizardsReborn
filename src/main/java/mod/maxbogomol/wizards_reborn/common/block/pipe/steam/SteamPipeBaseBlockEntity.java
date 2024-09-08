@@ -1,8 +1,9 @@
-package mod.maxbogomol.wizards_reborn.common.block.steam_pipe;
+package mod.maxbogomol.wizards_reborn.common.block.pipe.steam;
 
 import mod.maxbogomol.fluffy_fur.client.particle.ParticleBuilder;
 import mod.maxbogomol.fluffy_fur.client.particle.data.ColorParticleData;
 import mod.maxbogomol.fluffy_fur.client.particle.data.GenericParticleData;
+import mod.maxbogomol.fluffy_fur.client.particle.data.SpinParticleData;
 import mod.maxbogomol.fluffy_fur.common.block.entity.TickableBlockEntity;
 import mod.maxbogomol.fluffy_fur.common.network.BlockEntityUpdate;
 import mod.maxbogomol.fluffy_fur.registry.client.FluffyFurParticles;
@@ -18,7 +19,6 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.nbt.CompoundTag;
-import net.minecraft.network.protocol.game.ClientboundBlockEntityDataPacket;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundSource;
@@ -50,8 +50,8 @@ public abstract class SteamPipeBaseBlockEntity extends PipeBaseBlockEntity imple
 
     public int steam = 0;
 
-    public SteamPipeBaseBlockEntity(BlockEntityType<?> pType, BlockPos pPos, BlockState pBlockState) {
-        super(pType, pPos, pBlockState);
+    public SteamPipeBaseBlockEntity(BlockEntityType<?> type, BlockPos pos, BlockState blockState) {
+        super(type, pos, blockState);
     }
 
     public void onLoad() {
@@ -95,11 +95,6 @@ public abstract class SteamPipeBaseBlockEntity extends PipeBaseBlockEntity imple
                 return true;
         }
         return false;
-    }
-
-    @Override
-    public ClientboundBlockEntityDataPacket getUpdatePacket() {
-        return ClientboundBlockEntityDataPacket.create(this, (e) -> e.getUpdateTag());
     }
 
     public void tick() {
@@ -209,7 +204,7 @@ public abstract class SteamPipeBaseBlockEntity extends PipeBaseBlockEntity imple
                     .setColorData(ColorParticleData.create(r / 255f, g / 255f, b / 255f).build())
                     .setTransparencyData(GenericParticleData.create(0.3f, 0f).build())
                     .setScaleData(GenericParticleData.create(0.1f, 0f).build())
-                    .randomSpin(0.1f)
+                    .setSpinData(SpinParticleData.create().randomSpin(0.1f).build())
                     .setLifetime(10)
                     .addVelocity(vx / 10f, vy / 10f, vz / 10f)
                     .repeat(level, x, y, z, 2);

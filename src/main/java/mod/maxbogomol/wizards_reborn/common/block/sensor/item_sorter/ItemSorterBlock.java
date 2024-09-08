@@ -36,39 +36,39 @@ public class ItemSorterBlock extends SensorBaseBlock {
 
     @Nullable
     @Override
-    public BlockEntity newBlockEntity(BlockPos pPos, BlockState pState) {
-        return new ItemSorterBlockEntity(pPos, pState);
+    public BlockEntity newBlockEntity(BlockPos pos, BlockState state) {
+        return new ItemSorterBlockEntity(pos, state);
     }
 
     @Override
-    public void onRemove(@Nonnull BlockState state, @Nonnull Level world, @Nonnull BlockPos pos, @Nonnull BlockState newState, boolean isMoving) {
+    public void onRemove(@Nonnull BlockState state, @Nonnull Level level, @Nonnull BlockPos pos, @Nonnull BlockState newState, boolean isMoving) {
         if (state.getBlock() != newState.getBlock()) {
-            BlockEntity tile = world.getBlockEntity(pos);
+            BlockEntity tile = level.getBlockEntity(pos);
             if (tile instanceof ItemSorterBlockEntity sorter) {
                 SimpleContainer inv = new SimpleContainer(sorter.itemHandler.getSlots());
                 for (int i = 0; i < sorter.itemHandler.getSlots(); i++) {
                     inv.setItem(i, sorter.itemHandler.getStackInSlot(i));
                 }
-                Containers.dropContents(world, pos, inv);
+                Containers.dropContents(level, pos, inv);
             }
-            super.onRemove(state, world, pos, newState, isMoving);
+            super.onRemove(state, level, pos, newState, isMoving);
         }
     }
 
     @Override
-    public InteractionResult use(BlockState state, Level world, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hit) {
-        if (world.isClientSide) {
+    public InteractionResult use(BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hit) {
+        if (level.isClientSide) {
             return InteractionResult.SUCCESS;
         } else {
-            BlockEntity tileEntity = world.getBlockEntity(pos);
+            BlockEntity tileEntity = level.getBlockEntity(pos);
 
-            MenuProvider containerProvider = createContainerProvider(world, pos);
+            MenuProvider containerProvider = createContainerProvider(level, pos);
             NetworkHooks.openScreen(((ServerPlayer) player), containerProvider, tileEntity.getBlockPos());
             return InteractionResult.CONSUME;
         }
     }
 
-    private MenuProvider createContainerProvider(Level worldIn, BlockPos pos) {
+    private MenuProvider createContainerProvider(Level level, BlockPos pos) {
         return new MenuProvider() {
             @Override
             public Component getDisplayName() {
@@ -78,7 +78,7 @@ public class ItemSorterBlock extends SensorBaseBlock {
             @Nullable
             @Override
             public AbstractContainerMenu createMenu(int i, Inventory playerInventory, Player playerEntity) {
-                return new ItemSorterContainer(i, worldIn, pos, playerInventory, playerEntity);
+                return new ItemSorterContainer(i, level, pos, playerInventory, playerEntity);
             }
         };
     }
@@ -89,7 +89,7 @@ public class ItemSorterBlock extends SensorBaseBlock {
     }
 
     @Override
-    public int getAnalogOutputSignal(BlockState blockState, Level level, BlockPos pos) {
+    public int getAnalogOutputSignal(BlockState state, Level level, BlockPos pos) {
         ItemSorterBlockEntity sorter = (ItemSorterBlockEntity) level.getBlockEntity(pos);
         SimpleContainer inv = new SimpleContainer(sorter.itemHandler.getSlots());
         for (int i = 0; i < sorter.itemHandler.getSlots(); i++) {

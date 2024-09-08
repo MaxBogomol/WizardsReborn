@@ -79,8 +79,8 @@ public class SmokingPipeItem extends Item implements ICustomAnimationItem {
     }
 
     @Override
-    public void releaseUsing(ItemStack stack, Level world, LivingEntity entityLiving, int pTimeLeft) {
-        if (!world.isClientSide) {
+    public void releaseUsing(ItemStack stack, Level level, LivingEntity entityLiving, int pTimeLeft) {
+        if (!level.isClientSide) {
             if (entityLiving instanceof Player player) {
                 CompoundTag nbt = stack.getOrCreateTag();
                 int invSize = getInventorySize(stack);
@@ -92,7 +92,7 @@ public class SmokingPipeItem extends Item implements ICustomAnimationItem {
                     SimpleContainer inv = new SimpleContainer(1);
                     for (int i = 0; i < getInventorySize(stack); i++) {
                         inv.setItem(0, getInventory(stack).getItem(i).copy());
-                        Optional<CenserRecipe> recipe = world.getRecipeManager().getRecipeFor(WizardsRebornRecipes.CENSER.get(), inv, world);
+                        Optional<CenserRecipe> recipe = level.getRecipeManager().getRecipeFor(WizardsRebornRecipes.CENSER.get(), inv, level);
                         if (recipe.isPresent()) {
                             for (MobEffectInstance effectInstance : recipe.get().getEffects()) {
                                 effects.add(new MobEffectInstance(effectInstance.getEffect(), (int) Math.ceil(effectInstance.getDuration() / 4F), effectInstance.getAmplifier()));
@@ -114,7 +114,7 @@ public class SmokingPipeItem extends Item implements ICustomAnimationItem {
                             setItemBurnCenser(item, getItemBurnCenser(item) + 1);
                             getInventory(stack).setItem(i, item);
                             if (getItemBurnCenser(item) >= 5) {
-                                world.playSound(null, player.getOnPos(), SoundEvents.BONE_MEAL_USE, SoundSource.BLOCKS, 1.0f, 1.0f);
+                                level.playSound(null, player.getOnPos(), SoundEvents.BONE_MEAL_USE, SoundSource.BLOCKS, 1.0f, 1.0f);
                             }
                             usedItems.remove(item.getItem());
                         }
@@ -135,8 +135,8 @@ public class SmokingPipeItem extends Item implements ICustomAnimationItem {
 
                     Vec3 posSmoke = player.getEyePosition().add(player.getLookAngle().scale(0.75f));
                     Vec3 vel = player.getEyePosition().add(player.getLookAngle().scale(40)).subtract(posSmoke).scale(1.0 / 20).normalize().scale(0.05f);
-                    PacketHandler.sendToTracking(world, player.getOnPos(), new SmokeEffectPacket((float) posSmoke.x, (float) posSmoke.y, (float) posSmoke.z, (float) vel.x, (float) vel.y, (float) vel.z, R, G, B));
-                    world.playSound(null, player.getOnPos(), WizardsRebornSounds.STEAM_BURST.get(), SoundSource.PLAYERS, 0.1f, 2.0f);
+                    PacketHandler.sendToTracking(level, player.getOnPos(), new SmokeEffectPacket((float) posSmoke.x, (float) posSmoke.y, (float) posSmoke.z, (float) vel.x, (float) vel.y, (float) vel.z, R, G, B));
+                    level.playSound(null, player.getOnPos(), WizardsRebornSounds.STEAM_BURST.get(), SoundSource.PLAYERS, 0.1f, 2.0f);
                     player.awardStat(Stats.ITEM_USED.get(this));
                 }
             }
@@ -144,9 +144,9 @@ public class SmokingPipeItem extends Item implements ICustomAnimationItem {
     }
 
     @Override
-    public InteractionResultHolder<ItemStack> use(Level world, Player player, InteractionHand hand) {
+    public InteractionResultHolder<ItemStack> use(Level level, Player player, InteractionHand hand) {
         ItemStack stack = player.getItemInHand(hand);
-        if (!world.isClientSide) {
+        if (!level.isClientSide) {
             ItemStack offStack = player.getItemInHand(InteractionHand.MAIN_HAND);
             InteractionHand offHand = InteractionHand.MAIN_HAND;
             if (hand == InteractionHand.MAIN_HAND) {
@@ -156,7 +156,7 @@ public class SmokingPipeItem extends Item implements ICustomAnimationItem {
 
             SimpleContainer inv = new SimpleContainer(1);
             inv.setItem(0, offStack);
-            Optional<CenserRecipe> recipe = world.getRecipeManager().getRecipeFor(WizardsRebornRecipes.CENSER.get(), inv, world);
+            Optional<CenserRecipe> recipe = level.getRecipeManager().getRecipeFor(WizardsRebornRecipes.CENSER.get(), inv, level);
 
             CompoundTag nbt = stack.getOrCreateTag();
             int invSize = getInventorySize(stack);
@@ -188,7 +188,7 @@ public class SmokingPipeItem extends Item implements ICustomAnimationItem {
                                 if (player.getInventory().getSlotWithRemainingSpace(getInventory(stack).getItem(slot)) != -1 || player.getInventory().getFreeSlot() > -1) {
                                     player.getInventory().add(getInventory(stack).getItem(slot).copy());
                                 } else {
-                                    world.addFreshEntity(new ItemEntity(world, player.getX(), player.getY() + 0.5F, player.getZ(), getInventory(stack).getItem(slot).copy()));
+                                    level.addFreshEntity(new ItemEntity(level, player.getX(), player.getY() + 0.5F, player.getZ(), getInventory(stack).getItem(slot).copy()));
                                 }
                                 getInventory(stack).removeItem(slot, 1);
                                 sortItems(stack);
@@ -262,7 +262,7 @@ public class SmokingPipeItem extends Item implements ICustomAnimationItem {
 
     @OnlyIn(Dist.CLIENT)
     @Override
-    public void appendHoverText(ItemStack stack, Level world, List<Component> list, TooltipFlag flags) {
+    public void appendHoverText(ItemStack stack, Level level, List<Component> list, TooltipFlag flags) {
         CompoundTag nbt = stack.getOrCreateTag();
         int invSize = getInventorySize(stack);
 

@@ -32,8 +32,8 @@ public class AirRaySpell extends RaySpell {
     }
 
     @Override
-    public void onImpact(HitResult ray, Level world, SpellProjectileEntity projectile, Player player, Entity target) {
-        super.onImpact(ray, world, projectile, player, target);
+    public void onImpact(HitResult ray, Level level, SpellProjectileEntity projectile, Player player, Entity target) {
+        super.onImpact(ray, level, projectile, player, target);
 
         if (player != null) {
             if (target.tickCount % 10 == 0) {
@@ -56,7 +56,7 @@ public class AirRaySpell extends RaySpell {
                             Vec3 pos = ray.getLocation().add(projectile.getLookAngle());
                             Vec3 vel = player.getEyePosition().add(player.getLookAngle().scale(40)).subtract(pos).scale(1.0 / 10).normalize().scale(0.2f);
 
-                            PacketHandler.sendToTracking(world, player.getOnPos(), new AirRaySpellEffectPacket((float) pos.x(), (float) pos.y() + (target.getBbHeight() / 2), (float) pos.z(), (float) vel.x(), (float) vel.y(), (float) vel.z(), r, g, b));
+                            PacketHandler.sendToTracking(level, player.getOnPos(), new AirRaySpellEffectPacket((float) pos.x(), (float) pos.y() + (target.getBbHeight() / 2), (float) pos.z(), (float) vel.x(), (float) vel.y(), (float) vel.z(), r, g, b));
                         }
                     }
                 }

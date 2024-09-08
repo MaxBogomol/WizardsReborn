@@ -1,4 +1,4 @@
-package mod.maxbogomol.wizards_reborn.common.block.salt_torch;
+package mod.maxbogomol.wizards_reborn.common.block.salt.lantern;
 
 import mod.maxbogomol.fluffy_fur.common.block.entity.BlockSimpleInventory;
 import mod.maxbogomol.fluffy_fur.common.block.entity.TickableBlockEntity;
@@ -27,67 +27,95 @@ import net.minecraft.world.level.block.SimpleWaterloggedBlock;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityTicker;
 import net.minecraft.world.level.block.entity.BlockEntityType;
-import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
+import net.minecraft.world.level.block.state.properties.BooleanProperty;
 import net.minecraft.world.level.material.FluidState;
 import net.minecraft.world.level.material.Fluids;
+import net.minecraft.world.level.pathfinder.PathComputationType;
 import net.minecraft.world.phys.BlockHitResult;
+import net.minecraft.world.phys.shapes.BooleanOp;
 import net.minecraft.world.phys.shapes.CollisionContext;
+import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
 import org.jetbrains.annotations.NotNull;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
+import java.util.stream.Stream;
 
-public class SaltTorchBlock extends Block implements EntityBlock, SimpleWaterloggedBlock {
-    public static final VoxelShape SHAPE = Block.box(6.0D, 0.0D, 6.0D, 10.0D, 10.0D, 10.0D);
+public class SaltLanternBlock extends Block implements EntityBlock, SimpleWaterloggedBlock {
+    public static final BooleanProperty HANGING = BlockStateProperties.HANGING;
 
-    public SaltTorchBlock(BlockBehaviour.Properties properties) {
+    private static final VoxelShape SHAPE = Stream.of(
+            Block.box(5, 0, 5, 11, 2, 11),
+            Block.box(5, 2, 5, 11, 7, 11),
+            Block.box(5, 7, 5, 11, 8, 11),
+            Block.box(6, 8, 6, 10, 10, 10)
+    ).reduce((v1, v2) -> Shapes.join(v1, v2, BooleanOp.OR)).get();
+
+    private static final VoxelShape HANGING_SHAPE = Stream.of(
+            Block.box(5, 3, 5, 11, 5, 11),
+            Block.box(5, 5, 5, 11, 10, 11),
+            Block.box(5, 10, 5, 11, 11, 11),
+            Block.box(6, 11, 6, 10, 13, 10)
+    ).reduce((v1, v2) -> Shapes.join(v1, v2, BooleanOp.OR)).get();
+
+    public SaltLanternBlock(Properties properties) {
         super(properties);
-        registerDefaultState(defaultBlockState().setValue(BlockStateProperties.WATERLOGGED, false));
+        registerDefaultState(defaultBlockState().setValue(BlockStateProperties.WATERLOGGED, false).setValue(HANGING, Boolean.valueOf(false)));
     }
 
     @Nonnull
     @Override
     public VoxelShape getShape(BlockState state, BlockGetter world, BlockPos pos, CollisionContext ctx) {
-        return SHAPE;
+        return state.getValue(HANGING) ? HANGING_SHAPE : SHAPE;
     }
 
     @Override
     protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {
-        builder.add(BlockStateProperties.WATERLOGGED);
+        builder.add(BlockStateProperties.WATERLOGGED).add(HANGING);
     }
 
     @Nullable
     @Override
     public BlockState getStateForPlacement(BlockPlaceContext context) {
         FluidState fluidState = context.getLevel().getFluidState(context.getClickedPos());
-        return this.defaultBlockState().setValue(BlockStateProperties.WATERLOGGED, fluidState.getType() == Fluids.WATER);
+
+        for(Direction direction : context.getNearestLookingDirections()) {
+            if (direction.getAxis() == Direction.Axis.Y) {
+                BlockState blockstate = this.defaultBlockState().setValue(HANGING, Boolean.valueOf(direction == Direction.UP));
+                if (blockstate.canSurvive(context.getLevel(), context.getClickedPos())) {
+                    return blockstate.setValue(BlockStateProperties.WATERLOGGED, fluidState.getType() == Fluids.WATER);
+                }
+            }
+        }
+
+        return null;
     }
 
     @Override
-    public void onRemove(@Nonnull BlockState state, @Nonnull Level world, @Nonnull BlockPos pos, @Nonnull BlockState newState, boolean isMoving) {
+    public void onRemove(@Nonnull BlockState state, @Nonnull Level level, @Nonnull BlockPos pos, @Nonnull BlockState newState, boolean isMoving) {
         if (state.getBlock() != newState.getBlock()) {
-            BlockEntity tile = world.getBlockEntity(pos);
+            BlockEntity tile = level.getBlockEntity(pos);
             if (tile instanceof BlockSimpleInventory) {
-                net.minecraft.world.Containers.dropContents(world, pos, ((BlockSimpleInventory) tile).getItemHandler());
+                net.minecraft.world.Containers.dropContents(level, pos, ((BlockSimpleInventory) tile).getItemHandler());
             }
-            super.onRemove(state, world, pos, newState, isMoving);
+            super.onRemove(state, level, pos, newState, isMoving);
         }
     }
 
     @Override
-    public InteractionResult use(BlockState state, Level world, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hit) {
-        SaltTorchBlockEntity tile = (SaltTorchBlockEntity) world.getBlockEntity(pos);
+    public InteractionResult use(BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hit) {
+        SaltLanternBlockEntity tile = (SaltLanternBlockEntity) level.getBlockEntity(pos);
         ItemStack stack = player.getItemInHand(hand).copy();
 
         int invSize = tile.getInventorySize();
 
         if (stack.getItem() instanceof WissenWandItem) {
             if (WissenWandItem.getMode(stack) != 4) {
-                world.updateNeighbourForOutputSignal(pos, this);
+                level.updateNeighbourForOutputSignal(pos, this);
                 BlockEntityUpdate.packet(tile);
                 return InteractionResult.SUCCESS;
             }
@@ -106,9 +134,9 @@ public class SaltTorchBlock extends Block implements EntityBlock, SimpleWaterlog
                             tile.getItemHandler().setItem(slot, stack);
                             player.getInventory().removeItem(player.getItemInHand(hand));
                         }
-                        world.updateNeighbourForOutputSignal(pos, this);
+                        level.updateNeighbourForOutputSignal(pos, this);
                         BlockEntityUpdate.packet(tile);
-                        world.playSound(null, pos, WizardsRebornSounds.PEDESTAL_INSERT.get(), SoundSource.BLOCKS, 1.0f, 1.0f);
+                        level.playSound(null, pos, WizardsRebornSounds.PEDESTAL_INSERT.get(), SoundSource.BLOCKS, 1.0f, 1.0f);
                         return InteractionResult.SUCCESS;
                     }
                 }
@@ -120,12 +148,12 @@ public class SaltTorchBlock extends Block implements EntityBlock, SimpleWaterlog
                     if (player.getInventory().getSlotWithRemainingSpace(tile.getItemHandler().getItem(slot)) != -1 || player.getInventory().getFreeSlot() > -1) {
                         player.getInventory().add(tile.getItemHandler().getItem(slot).copy());
                     } else {
-                        world.addFreshEntity(new ItemEntity(world, pos.getX() + 0.5F, pos.getY() + 1.0F, pos.getZ() + 0.5F, tile.getItemHandler().getItem(slot).copy()));
+                        level.addFreshEntity(new ItemEntity(level, pos.getX() + 0.5F, pos.getY() + 1.0F, pos.getZ() + 0.5F, tile.getItemHandler().getItem(slot).copy()));
                     }
                     tile.getItemHandler().removeItem(slot, 1);
-                    world.updateNeighbourForOutputSignal(pos, this);
+                    level.updateNeighbourForOutputSignal(pos, this);
                     BlockEntityUpdate.packet(tile);
-                    world.playSound(null, pos, WizardsRebornSounds.PEDESTAL_REMOVE.get(), SoundSource.BLOCKS, 1.0f, 1.0f);
+                    level.playSound(null, pos, WizardsRebornSounds.PEDESTAL_REMOVE.get(), SoundSource.BLOCKS, 1.0f, 1.0f);
                     return InteractionResult.SUCCESS;
                 }
             }
@@ -140,17 +168,26 @@ public class SaltTorchBlock extends Block implements EntityBlock, SimpleWaterlog
     }
 
     @Override
-    public BlockState updateShape(BlockState pState, Direction pDirection, BlockState pNeighborState, LevelAccessor pLevel, BlockPos pCurrentPos, BlockPos pNeighborPos) {
-        if (pState.getValue(BlockStateProperties.WATERLOGGED)) {
-            pLevel.scheduleTick(pCurrentPos, Fluids.WATER, Fluids.WATER.getTickDelay(pLevel));
+    public BlockState updateShape(BlockState state, Direction direction, BlockState neighborState, LevelAccessor level, BlockPos currentPos, BlockPos neighborPos) {
+        if (state.getValue(BlockStateProperties.WATERLOGGED)) {
+            level.scheduleTick(currentPos, Fluids.WATER, Fluids.WATER.getTickDelay(level));
         }
 
-        return pDirection == Direction.DOWN && !this.canSurvive(pState, pLevel, pCurrentPos) ? Blocks.AIR.defaultBlockState() : super.updateShape(pState, pDirection, pNeighborState, pLevel, pCurrentPos, pNeighborPos);
+        return getConnectedDirection(state).getOpposite() == direction && !state.canSurvive(level, currentPos) ? Blocks.AIR.defaultBlockState() : super.updateShape(state, direction, neighborState, level, currentPos, neighborPos);
     }
 
     @Override
     public boolean canSurvive(BlockState state, LevelReader level, BlockPos pos) {
-        return canSupportCenter(level, pos.below(), Direction.UP);
+        Direction direction = getConnectedDirection(state).getOpposite();
+        return Block.canSupportCenter(level, pos.relative(direction), direction.getOpposite());
+    }
+
+    protected static Direction getConnectedDirection(BlockState state) {
+        return state.getValue(HANGING) ? Direction.DOWN : Direction.UP;
+    }
+
+    public boolean isPathfindable(BlockState state, BlockGetter level, BlockPos pos, PathComputationType type) {
+        return false;
     }
 
     @Nullable
@@ -161,8 +198,8 @@ public class SaltTorchBlock extends Block implements EntityBlock, SimpleWaterlog
 
     @Nullable
     @Override
-    public BlockEntity newBlockEntity(BlockPos pPos, BlockState pState) {
-        return new SaltTorchBlockEntity(pPos, pState);
+    public BlockEntity newBlockEntity(BlockPos pos, BlockState state) {
+        return new SaltLanternBlockEntity(pos, state);
     }
 
     @Override
@@ -171,7 +208,7 @@ public class SaltTorchBlock extends Block implements EntityBlock, SimpleWaterlog
     }
 
     @Override
-    public int getAnalogOutputSignal(BlockState blockState, Level level, BlockPos pos) {
+    public int getAnalogOutputSignal(BlockState state, Level level, BlockPos pos) {
         BlockSimpleInventory tile = (BlockSimpleInventory) level.getBlockEntity(pos);
         return AbstractContainerMenu.getRedstoneSignalFromContainer(tile.getItemHandler());
     }

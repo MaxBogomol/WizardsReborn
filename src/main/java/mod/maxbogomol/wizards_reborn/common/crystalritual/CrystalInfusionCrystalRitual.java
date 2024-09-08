@@ -7,7 +7,7 @@ import mod.maxbogomol.fluffy_fur.client.event.ClientTickHandler;
 import mod.maxbogomol.fluffy_fur.client.particle.ParticleBuilder;
 import mod.maxbogomol.fluffy_fur.client.particle.data.ColorParticleData;
 import mod.maxbogomol.fluffy_fur.client.particle.data.GenericParticleData;
-import mod.maxbogomol.fluffy_fur.client.render.LevelRenderHandler;
+import mod.maxbogomol.fluffy_fur.client.particle.data.SpinParticleData;
 import mod.maxbogomol.fluffy_fur.registry.client.FluffyFurParticles;
 import mod.maxbogomol.fluffy_fur.registry.client.FluffyFurRenderTypes;
 import mod.maxbogomol.wizards_reborn.WizardsReborn;
@@ -187,7 +187,7 @@ public class CrystalInfusionCrystalRitual extends CrystalRitual {
                                 .setColorData(ColorParticleData.create(r, g, b).build())
                                 .setTransparencyData(GenericParticleData.create(0.35f, 0).build())
                                 .setScaleData(GenericParticleData.create(0.3f, 0).build())
-                                .randomSpin(0.5f)
+                                .setSpinData(SpinParticleData.create().randomSpin(0.5f).build())
                                 .setLifetime(30)
                                 .addVelocity(-X / 20, -Y / 10, -Z / 20)
                                 .spawn(level, blockPos.getX() + 0.5F + X, blockPos.getY() + 0.5F + v, blockPos.getZ() + 0.5F + Z);
@@ -198,7 +198,7 @@ public class CrystalInfusionCrystalRitual extends CrystalRitual {
                                 .setColorData(ColorParticleData.create(r, g, b).build())
                                 .setTransparencyData(GenericParticleData.create(0.25f, 0).build())
                                 .setScaleData(GenericParticleData.create(0.3f, 0).build())
-                                .randomSpin(0.5f)
+                                .setSpinData(SpinParticleData.create().randomSpin(0.5f).build())
                                 .setLifetime(30)
                                 .randomOffset(0.05f)
                                 .addVelocity(-X / 20, -Y / 10, -Z / 20)
@@ -327,7 +327,7 @@ public class CrystalInfusionCrystalRitual extends CrystalRitual {
             ms.popPose();
         }
 
-        MultiBufferSource bufferDelayed = LevelRenderHandler.getDelayedRender();
+        MultiBufferSource bufferDelayed = FluffyFurRenderTypes.getDelayedRender();
         VertexConsumer builder = bufferDelayed.getBuffer(FluffyFurRenderTypes.GLOWING);
         Color color = getColor();
 

@@ -65,8 +65,8 @@ public class ArcaneHopperBlock extends HopperBlock implements SimpleWaterloggedB
         this.registerDefaultState(this.stateDefinition.any().setValue(FACING, Direction.DOWN).setValue(ENABLED, Boolean.valueOf(true)).setValue(BlockStateProperties.WATERLOGGED, false));
     }
 
-    public VoxelShape getShape(BlockState pState, BlockGetter pLevel, BlockPos pPos, CollisionContext pContext) {
-        switch ((Direction)pState.getValue(FACING)) {
+    public VoxelShape getShape(BlockState state, BlockGetter level, BlockPos pos, CollisionContext pContext) {
+        switch ((Direction)state.getValue(FACING)) {
             case DOWN:
                 return DOWN_SHAPE;
             case NORTH:
@@ -82,8 +82,8 @@ public class ArcaneHopperBlock extends HopperBlock implements SimpleWaterloggedB
         }
     }
 
-    public VoxelShape getInteractionShape(BlockState pState, BlockGetter pLevel, BlockPos pPos) {
-        switch ((Direction)pState.getValue(FACING)) {
+    public VoxelShape getInteractionShape(BlockState state, BlockGetter level, BlockPos pos) {
+        switch ((Direction)state.getValue(FACING)) {
             case DOWN:
                 return DOWN_INTERACTION_SHAPE;
             case NORTH:
@@ -126,33 +126,33 @@ public class ArcaneHopperBlock extends HopperBlock implements SimpleWaterloggedB
     }
 
     @Override
-    public BlockEntity newBlockEntity(BlockPos pPos, BlockState pState) {
-        return new ArcaneHopperBlockEntity(pPos, pState);
+    public BlockEntity newBlockEntity(BlockPos pos, BlockState state) {
+        return new ArcaneHopperBlockEntity(pos, state);
     }
 
     @Override
     @Nullable
-    public <T extends BlockEntity> BlockEntityTicker<T> getTicker(Level pLevel, BlockState pState, BlockEntityType<T> pBlockEntityType) {
-        return pLevel.isClientSide ? null : createTickerHelper(pBlockEntityType, WizardsRebornBlockEntities.ARCANE_HOPPER.get(), ArcaneHopperBlockEntity::pushItemsTick);
+    public <T extends BlockEntity> BlockEntityTicker<T> getTicker(Level level, BlockState state, BlockEntityType<T> pBlockEntityType) {
+        return level.isClientSide ? null : createTickerHelper(pBlockEntityType, WizardsRebornBlockEntities.ARCANE_HOPPER.get(), ArcaneHopperBlockEntity::pushItemsTick);
     }
 
     @Override
-    public InteractionResult use(BlockState pState, Level pLevel, BlockPos pPos, Player pPlayer, InteractionHand pHand, BlockHitResult pHit) {
-        if (pLevel.isClientSide) {
+    public InteractionResult use(BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hit) {
+        if (level.isClientSide) {
             return InteractionResult.SUCCESS;
         } else {
-            BlockEntity blockentity = pLevel.getBlockEntity(pPos);
+            BlockEntity blockentity = level.getBlockEntity(pos);
             if (blockentity instanceof ArcaneHopperBlockEntity) {
-                MenuProvider containerProvider = createContainerProvider(pLevel, pPos);
-                NetworkHooks.openScreen(((ServerPlayer) pPlayer), containerProvider, blockentity.getBlockPos());
-                pPlayer.awardStat(Stats.INSPECT_HOPPER);
+                MenuProvider containerProvider = createContainerProvider(level, pos);
+                NetworkHooks.openScreen(((ServerPlayer) player), containerProvider, blockentity.getBlockPos());
+                player.awardStat(Stats.INSPECT_HOPPER);
             }
 
             return InteractionResult.CONSUME;
         }
     }
 
-    private MenuProvider createContainerProvider(Level worldIn, BlockPos pos) {
+    private MenuProvider createContainerProvider(Level level, BlockPos pos) {
         return new MenuProvider() {
             @Override
             public Component getDisplayName() {
@@ -162,29 +162,29 @@ public class ArcaneHopperBlock extends HopperBlock implements SimpleWaterloggedB
             @Nullable
             @Override
             public AbstractContainerMenu createMenu(int i, Inventory playerInventory, Player playerEntity) {
-                return new ArcaneHopperContainer(i, worldIn, pos, playerInventory, playerEntity);
+                return new ArcaneHopperContainer(i, level, pos, playerInventory, playerEntity);
             }
         };
     }
 
     @Override
-    public void onRemove(BlockState pState, Level pLevel, BlockPos pPos, BlockState pNewState, boolean pIsMoving) {
-        if (!pState.is(pNewState.getBlock())) {
-            BlockEntity blockentity = pLevel.getBlockEntity(pPos);
+    public void onRemove(BlockState state, Level level, BlockPos pos, BlockState pNewState, boolean pIsMoving) {
+        if (!state.is(pNewState.getBlock())) {
+            BlockEntity blockentity = level.getBlockEntity(pos);
             if (blockentity instanceof ArcaneHopperBlockEntity) {
-                Containers.dropContents(pLevel, pPos, (ArcaneHopperBlockEntity)blockentity);
-                pLevel.updateNeighbourForOutputSignal(pPos, this);
+                Containers.dropContents(level, pos, (ArcaneHopperBlockEntity)blockentity);
+                level.updateNeighbourForOutputSignal(pos, this);
             }
 
-            super.onRemove(pState, pLevel, pPos, pNewState, pIsMoving);
+            super.onRemove(state, level, pos, pNewState, pIsMoving);
         }
     }
 
     @Override
-    public void entityInside(BlockState pState, Level pLevel, BlockPos pPos, Entity pEntity) {
-        BlockEntity blockentity = pLevel.getBlockEntity(pPos);
+    public void entityInside(BlockState state, Level level, BlockPos pos, Entity pEntity) {
+        BlockEntity blockentity = level.getBlockEntity(pos);
         if (blockentity instanceof ArcaneHopperBlockEntity) {
-            ArcaneHopperBlockEntity.entityInside(pLevel, pPos, pState, pEntity, (ArcaneHopperBlockEntity)blockentity);
+            ArcaneHopperBlockEntity.entityInside(level, pos, state, pEntity, (ArcaneHopperBlockEntity)blockentity);
         }
     }
 }

@@ -66,17 +66,17 @@ public class CrystalCrushingSpell extends LookSpell {
     }
 
     @Override
-    public void useSpell(Level world, Player player, InteractionHand hand) {
-        if (!world.isClientSide) {
+    public void useSpell(Level level, Player player, InteractionHand hand) {
+        if (!level.isClientSide) {
             player.startUsingItem(hand);
         }
     }
 
     @Override
-    public void onUseTick(Level world, LivingEntity livingEntity, ItemStack stack, int remainingUseDuration) {
-        if (world.isClientSide) {
+    public void onUseTick(Level level, LivingEntity livingEntity, ItemStack stack, int remainingUseDuration) {
+        if (level.isClientSide) {
             if (livingEntity instanceof Player player) {
-                Vec3 pos = getHitPos(world, player, player.getUsedItemHand()).getPosHit();
+                Vec3 pos = getHitPos(level, player, player.getUsedItemHand()).getPosHit();
                 float ds = (float) Math.sqrt(Math.pow(player.getEyePosition().x() - pos.x(), 2) + Math.pow(player.getEyePosition().y() - pos.y(), 2) + Math.pow(player.getEyePosition().z() - pos.z(), 2));
 
                 double dX = player.getEyePosition().x() - pos.x();
@@ -93,7 +93,7 @@ public class CrystalCrushingSpell extends LookSpell {
 
                 BlockPos blockPos = BlockPos.containing(X, Y, Z);
 
-                if (world.getBlockEntity(blockPos) instanceof CrystalBlockEntity crystal) {
+                if (level.getBlockEntity(blockPos) instanceof CrystalBlockEntity crystal) {
                     Color color = getColor();
 
                     if (random.nextFloat() < 0.075f) {
@@ -104,7 +104,7 @@ public class CrystalCrushingSpell extends LookSpell {
                                 .setLifetime(30)
                                 .randomVelocity(0.025f)
                                 .addVelocity(0, 0.03f, 0)
-                                .spawn(world, pos.x(), pos.y(), pos.z());
+                                .spawn(level, pos.x(), pos.y(), pos.z());
                     }
                 }
             }
@@ -112,23 +112,23 @@ public class CrystalCrushingSpell extends LookSpell {
     }
 
     @Override
-    public void finishUsingItem(ItemStack stack, Level world, LivingEntity entityLiving) {
-        if (!world.isClientSide) {
+    public void finishUsingItem(ItemStack stack, Level level, LivingEntity entityLiving) {
+        if (!level.isClientSide) {
             if (entityLiving instanceof Player player) {
                 CompoundTag stats = getStats(stack);
                 removeWissen(stack, stats, player);
                 setCooldown(stack, stats);
                 awardStat(player, stack);
-                spellSound(player, world);
-                lookSpell(world, player, player.getUsedItemHand());
+                spellSound(player, level);
+                lookSpell(level, player, player.getUsedItemHand());
                 player.stopUsingItem();
             }
         }
     }
 
     @Override
-    public void lookSpell(Level world, Player player, InteractionHand hand) {
-        Vec3 pos = getHitPos(world, player, hand).getPosHit();
+    public void lookSpell(Level level, Player player, InteractionHand hand) {
+        Vec3 pos = getHitPos(level, player, hand).getPosHit();
         float ds = (float) Math.sqrt(Math.pow(player.getEyePosition().x() - pos.x(), 2) + Math.pow(player.getEyePosition().y() - pos.y(), 2) + Math.pow(player.getEyePosition().z() - pos.z(), 2));
 
         double dX = player.getEyePosition().x() - pos.x();
@@ -144,24 +144,24 @@ public class CrystalCrushingSpell extends LookSpell {
         float Z = (float) (player.getEyePosition().z() + z);
 
         BlockPos blockPos = BlockPos.containing(X, Y, Z);
-        BlockEvent.BreakEvent breakEv = new BlockEvent.BreakEvent(world, blockPos, world.getBlockState(blockPos), player);
+        BlockEvent.BreakEvent breakEv = new BlockEvent.BreakEvent(level, blockPos, level.getBlockState(blockPos), player);
 
         if (!MinecraftForge.EVENT_BUS.post(breakEv)) {
-            if (world.getBlockEntity(blockPos) instanceof CrystalBlockEntity crystal) {
+            if (level.getBlockEntity(blockPos) instanceof CrystalBlockEntity crystal) {
                 if (crystal.getCrystalItem().getItem() instanceof CrystalItem crystalItem) {
                     for (int i = 0; i < 3; i++) {
                         ItemStack fracturedCrystal = crystalItem.getType().getFracturedCrystal();
                         fracturedCrystal.setTag(crystal.getCrystalItem().getOrCreateTag().copy());
-                        world.addFreshEntity(new ItemEntity(world, blockPos.getX() + 0.5F, blockPos.getY() + 0.5F, blockPos.getZ() + 0.5F, fracturedCrystal));
+                        level.addFreshEntity(new ItemEntity(level, blockPos.getX() + 0.5F, blockPos.getY() + 0.5F, blockPos.getZ() + 0.5F, fracturedCrystal));
                     }
-                    world.removeBlockEntity(blockPos);
-                    world.destroyBlock(blockPos, false);
+                    level.removeBlockEntity(blockPos);
+                    level.destroyBlock(blockPos, false);
 
                     Color color = crystalItem.getType().getColor();
                     float r = color.getRed() / 255f;
                     float g = color.getGreen() / 255f;
                     float b = color.getBlue() / 255f;
-                    PacketHandler.sendToTracking(world, player.getOnPos(), new CrystalCrushingSpellEffectPacket((float) blockPos.getX() + 0.5f, (float) blockPos.getY() + 0.5f, (float) blockPos.getZ() + 0.5f, r, g, b));
+                    PacketHandler.sendToTracking(level, player.getOnPos(), new CrystalCrushingSpellEffectPacket((float) blockPos.getX() + 0.5f, (float) blockPos.getY() + 0.5f, (float) blockPos.getZ() + 0.5f, r, g, b));
                     PacketHandler.sendTo(player, new AddScreenshakePacket(0.6f));
                 }
             } else {
@@ -173,7 +173,7 @@ public class CrystalCrushingSpell extends LookSpell {
                         for (int i = 0; i < 3; i++) {
                             ItemStack fracturedCrystal = crystalItem.getType().getFracturedCrystal();
                             fracturedCrystal.setTag(crystal.getOrCreateTag().copy());
-                            world.addFreshEntity(new ItemEntity(world, player.getX(), player.getY() + 0.5F, player.getZ(), fracturedCrystal));
+                            level.addFreshEntity(new ItemEntity(level, player.getX(), player.getY() + 0.5F, player.getZ(), fracturedCrystal));
                         }
                         CompoundTag nbt = wandItem.getOrCreateTag();
                         inv.setItem(0, ItemStack.EMPTY);
@@ -186,8 +186,8 @@ public class CrystalCrushingSpell extends LookSpell {
                         float r = color.getRed() / 255f;
                         float g = color.getGreen() / 255f;
                         float b = color.getBlue() / 255f;
-                        PacketHandler.sendToTracking(world, player.getOnPos(), new CrystalCrushingSpellEffectPacket((float) effectPos.x(), (float) effectPos.y(), (float) effectPos.z(), r, g, b));
-                        world.playSound(WizardsReborn.proxy.getPlayer(), player.getX(), player.getY(), player.getZ(), WizardsRebornSounds.CRYSTAL_BREAK.get(), SoundSource.PLAYERS, 1f, 0.5f);
+                        PacketHandler.sendToTracking(level, player.getOnPos(), new CrystalCrushingSpellEffectPacket((float) effectPos.x(), (float) effectPos.y(), (float) effectPos.z(), r, g, b));
+                        level.playSound(WizardsReborn.proxy.getPlayer(), player.getX(), player.getY(), player.getZ(), WizardsRebornSounds.CRYSTAL_BREAK.get(), SoundSource.PLAYERS, 1f, 0.5f);
                         PacketHandler.sendTo(player, new AddScreenshakePacket(0.6f));
                     }
                 }

@@ -7,7 +7,6 @@ import net.minecraft.sounds.SoundSource;
 import net.minecraft.util.Mth;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.Entity;
-import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
@@ -21,15 +20,15 @@ import javax.annotation.Nullable;
 public interface IUndergroundGrape {
     BooleanProperty BERRIES = BlockStateProperties.BERRIES;
 
-    static InteractionResult use(@Nullable Entity pEntity, BlockState pState, Level pLevel, BlockPos pPos) {
-        if (pState.getValue(BERRIES)) {
-            Block.popResource(pLevel, pPos, new ItemStack(WizardsRebornItems.UNDERGROUND_GRAPE.get(), 1));
-            float f = Mth.randomBetween(pLevel.random, 0.8F, 1.2F);
-            pLevel.playSound((Player)null, pPos, SoundEvents.CAVE_VINES_PICK_BERRIES, SoundSource.BLOCKS, 1.0F, f);
-            BlockState blockstate = pState.setValue(BERRIES, Boolean.valueOf(false));
-            pLevel.setBlock(pPos, blockstate, 2);
-            pLevel.gameEvent(GameEvent.BLOCK_CHANGE, pPos, GameEvent.Context.of(pEntity, blockstate));
-            return InteractionResult.sidedSuccess(pLevel.isClientSide);
+    static InteractionResult use(@Nullable Entity entity, BlockState state, Level level, BlockPos pos) {
+        if (state.getValue(BERRIES)) {
+            Block.popResource(level, pos, new ItemStack(WizardsRebornItems.UNDERGROUND_GRAPE.get(), 1));
+            float f = Mth.randomBetween(level.random, 0.8F, 1.2F);
+            level.playSound(null, pos, SoundEvents.CAVE_VINES_PICK_BERRIES, SoundSource.BLOCKS, 1.0F, f);
+            BlockState blockstate = state.setValue(BERRIES, Boolean.valueOf(false));
+            level.setBlock(pos, blockstate, 2);
+            level.gameEvent(GameEvent.BLOCK_CHANGE, pos, GameEvent.Context.of(entity, blockstate));
+            return InteractionResult.sidedSuccess(level.isClientSide);
         } else {
             return InteractionResult.PASS;
         }

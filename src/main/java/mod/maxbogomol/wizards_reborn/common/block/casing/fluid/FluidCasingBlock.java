@@ -1,8 +1,8 @@
 package mod.maxbogomol.wizards_reborn.common.block.casing.fluid;
 
 import mod.maxbogomol.wizards_reborn.common.block.casing.CasingBlock;
-import mod.maxbogomol.wizards_reborn.common.block.fluid_pipe.FluidPipeBlock;
 import mod.maxbogomol.wizards_reborn.common.block.pipe.PipeBaseBlock;
+import mod.maxbogomol.wizards_reborn.common.block.pipe.fluid.FluidPipeBlock;
 import mod.maxbogomol.wizards_reborn.registry.common.block.WizardsRebornBlockEntities;
 import net.minecraft.core.BlockPos;
 import net.minecraft.sounds.SoundEvents;
@@ -25,8 +25,9 @@ import net.minecraft.world.phys.shapes.VoxelShape;
 import javax.annotation.Nonnull;
 
 public class FluidCasingBlock extends FluidPipeBlock {
-    public FluidCasingBlock(Properties pProperties) {
-        super(pProperties);
+
+    public FluidCasingBlock(Properties properties) {
+        super(properties);
         this.registerDefaultState(this.stateDefinition.any().setValue(BlockStateProperties.WATERLOGGED, false).setValue(BlockStateProperties.POWERED, false));
     }
 
@@ -38,46 +39,46 @@ public class FluidCasingBlock extends FluidPipeBlock {
 
     @Nonnull
     @Override
-    public VoxelShape getShape(BlockState state, BlockGetter world, BlockPos pos, CollisionContext ctx) {
-        return PipeBaseBlock.getShapeWithConnection(state, world, pos, ctx, SHAPES);
+    public VoxelShape getShape(BlockState state, BlockGetter level, BlockPos pos, CollisionContext context) {
+        return PipeBaseBlock.getShapeWithConnection(state, level, pos, context, SHAPES);
     }
 
     @Override
-    public BlockEntity newBlockEntity(BlockPos pPos, BlockState pState) {
-        return WizardsRebornBlockEntities.FLUID_CASING.get().create(pPos, pState);
+    public BlockEntity newBlockEntity(BlockPos pos, BlockState state) {
+        return WizardsRebornBlockEntities.FLUID_CASING.get().create(pos, state);
     }
 
-    public InteractionResult use(BlockState pState, Level pLevel, BlockPos pPos, Player pPlayer, InteractionHand pHand, BlockHitResult pHit) {
-        if (!pLevel.isClientSide) {
-            InteractionResult interactionResult = super.use(pState, pLevel, pPos, pPlayer, pHand, pHit);
+    public InteractionResult use(BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hit) {
+        if (!level.isClientSide) {
+            InteractionResult interactionResult = super.use(state, level, pos, player, hand, hit);
             if (interactionResult != InteractionResult.PASS) {
                 return InteractionResult.SUCCESS;
             }
 
-            BlockState blockstate = this.pull(pState, pLevel, pPos);
+            BlockState blockstate = this.pull(state, level, pos);
             float f = blockstate.getValue(BlockStateProperties.POWERED) ? 0.6F : 0.5F;
-            pLevel.playSound((Player)null, pPos, SoundEvents.LEVER_CLICK, SoundSource.BLOCKS, 0.3F, f);
-            pLevel.gameEvent(pPlayer, blockstate.getValue(BlockStateProperties.POWERED) ? GameEvent.BLOCK_ACTIVATE : GameEvent.BLOCK_DEACTIVATE, pPos);
+            level.playSound(null, pos, SoundEvents.LEVER_CLICK, SoundSource.BLOCKS, 0.3F, f);
+            level.gameEvent(player, blockstate.getValue(BlockStateProperties.POWERED) ? GameEvent.BLOCK_ACTIVATE : GameEvent.BLOCK_DEACTIVATE, pos);
             return InteractionResult.SUCCESS;
         }
 
         return InteractionResult.SUCCESS;
     }
 
-    public BlockState pull(BlockState pState, Level pLevel, BlockPos pPos) {
-        pState = pState.cycle(BlockStateProperties.POWERED);
-        pLevel.setBlock(pPos, pState, 3);
-        this.updateNeighbours(pState, pLevel, pPos);
-        return pState;
+    public BlockState pull(BlockState state, Level level, BlockPos pos) {
+        state = state.cycle(BlockStateProperties.POWERED);
+        level.setBlock(pos, state, 3);
+        this.updateNeighbours(state, level, pos);
+        return state;
     }
 
 
-    private void updateNeighbours(BlockState pState, Level pLevel, BlockPos pPos) {
-        pLevel.updateNeighborsAt(pPos, this);
+    private void updateNeighbours(BlockState state, Level level, BlockPos pos) {
+        level.updateNeighborsAt(pos, this);
     }
 
     @Override
-    protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> pBuilder) {
-        pBuilder.add(BlockStateProperties.WATERLOGGED).add(BlockStateProperties.POWERED);
+    protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {
+        builder.add(BlockStateProperties.WATERLOGGED).add(BlockStateProperties.POWERED);
     }
 }

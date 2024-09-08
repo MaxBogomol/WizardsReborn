@@ -3,6 +3,7 @@ package mod.maxbogomol.wizards_reborn.common.network.spell;
 import mod.maxbogomol.fluffy_fur.client.particle.ParticleBuilder;
 import mod.maxbogomol.fluffy_fur.client.particle.data.ColorParticleData;
 import mod.maxbogomol.fluffy_fur.client.particle.data.GenericParticleData;
+import mod.maxbogomol.fluffy_fur.client.particle.data.SpinParticleData;
 import mod.maxbogomol.fluffy_fur.registry.client.FluffyFurParticles;
 import mod.maxbogomol.wizards_reborn.WizardsReborn;
 import net.minecraft.network.FriendlyByteBuf;
@@ -70,7 +71,7 @@ public class RaySpellEffectPacket {
             ctx.get().enqueueWork(new Runnable() {
                 @Override
                 public void run() {
-                    Level world = WizardsReborn.proxy.getLevel();
+                    Level level = WizardsReborn.proxy.getLevel();
 
                     if (random.nextFloat() < 0.2f) {
                         ParticleBuilder.create(FluffyFurParticles.WISP)
@@ -79,7 +80,7 @@ public class RaySpellEffectPacket {
                                 .setScaleData(GenericParticleData.create(0.15f, 0).build())
                                 .setLifetime(25)
                                 .randomVelocity(0.025f)
-                                .spawn(world, msg.posFromX, msg.posFromY, msg.posFromZ);
+                                .spawn(level, msg.posFromX, msg.posFromY, msg.posFromZ);
 
                         if (random.nextFloat() < 0.1f) {
                             ParticleBuilder.create(FluffyFurParticles.WISP)
@@ -88,7 +89,7 @@ public class RaySpellEffectPacket {
                                     .setScaleData(GenericParticleData.create(0.2f, 0).build())
                                     .setLifetime(20)
                                     .randomVelocity(0.025f)
-                                    .spawn(world, msg.posFromX, msg.posFromY, msg.posFromZ);
+                                    .spawn(level, msg.posFromX, msg.posFromY, msg.posFromZ);
                         }
                     }
 
@@ -106,7 +107,7 @@ public class RaySpellEffectPacket {
                                     .setScaleData(GenericParticleData.create(0.15f, 0).build())
                                     .setLifetime(10)
                                     .randomVelocity(0.015f)
-                                    .spawn(world, lerpX, lerpY, lerpZ);
+                                    .spawn(level, lerpX, lerpY, lerpZ);
 
                             if (random.nextFloat() < 0.1f) {
                                 ParticleBuilder.create(FluffyFurParticles.SPARKLE)
@@ -115,7 +116,7 @@ public class RaySpellEffectPacket {
                                         .setScaleData(GenericParticleData.create(0.2f, 0).build())
                                         .setLifetime(5)
                                         .randomVelocity(0.015f)
-                                        .spawn(world, lerpX, lerpY, lerpZ);
+                                        .spawn(level, lerpX, lerpY, lerpZ);
                             }
                         }
                     }
@@ -127,15 +128,15 @@ public class RaySpellEffectPacket {
                                 .setScaleData(GenericParticleData.create(0.2f, 0).build())
                                 .setLifetime(40)
                                 .randomVelocity(0.035f)
-                                .repeat(world, msg.posToX, msg.posToY, msg.posToZ, 5, 0.1f);
+                                .repeat(level, msg.posToX, msg.posToY, msg.posToZ, 5, 0.1f);
                         ParticleBuilder.create(FluffyFurParticles.SPARKLE)
                                 .setColorData(ColorParticleData.create(msg.colorR, msg.colorG, msg.colorB).build())
                                 .setTransparencyData(GenericParticleData.create(0.25f, 0).build())
                                 .setScaleData(GenericParticleData.create(0.075f, 0).build())
-                                .randomSpin(0.5f)
+                                .setSpinData(SpinParticleData.create().randomSpin(0.5f).build())
                                 .setLifetime(50)
                                 .randomVelocity(0.035f)
-                                .repeat(world, msg.posToX, msg.posToY, msg.posToZ, 5, 0.1f);
+                                .repeat(level, msg.posToX, msg.posToY, msg.posToZ, 5, 0.1f);
                     }
                     ctx.get().setPacketHandled(true);
                 }

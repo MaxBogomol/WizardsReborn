@@ -3,6 +3,7 @@ package mod.maxbogomol.wizards_reborn.common.network;
 import mod.maxbogomol.fluffy_fur.client.particle.ParticleBuilder;
 import mod.maxbogomol.fluffy_fur.client.particle.data.ColorParticleData;
 import mod.maxbogomol.fluffy_fur.client.particle.data.GenericParticleData;
+import mod.maxbogomol.fluffy_fur.client.particle.data.SpinParticleData;
 import mod.maxbogomol.fluffy_fur.registry.client.FluffyFurParticles;
 import mod.maxbogomol.wizards_reborn.WizardsReborn;
 import net.minecraft.network.FriendlyByteBuf;
@@ -62,19 +63,19 @@ public class SmokeEffectPacket {
             ctx.get().enqueueWork(new Runnable() {
                 @Override
                 public void run() {
-                    Level world = WizardsReborn.proxy.getLevel();
+                    Level level = WizardsReborn.proxy.getLevel();
 
                     for (int i = 0; i < 40; i++) {
                         ParticleBuilder.create(FluffyFurParticles.SMOKE)
                                 .setColorData(ColorParticleData.create(msg.colorR, msg.colorG, msg.colorB).build())
                                 .setTransparencyData(GenericParticleData.create(0.05f, 0).build())
                                 .setScaleData(GenericParticleData.create(0.1f, 2).build())
-                                .randomSpin(0.1f)
+                                .setSpinData(SpinParticleData.create().randomSpin(0.1f).build())
                                 .setLifetime(500, 100)
                                 .randomVelocity(0.5f / (20 - (5 * random.nextDouble())), 0.5f / (20 - (5 * random.nextDouble())), 0.5f / (20 - (5 * random.nextDouble())))
                                 .addVelocity(msg.velX, msg.velY, msg.velZ)
                                 .randomOffset(0.05f)
-                                .spawn(world, msg.posX, msg.posY, msg.posZ);
+                                .spawn(level, msg.posX, msg.posY, msg.posZ);
                     }
                     ctx.get().setPacketHandled(true);
                 }

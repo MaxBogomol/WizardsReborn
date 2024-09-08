@@ -6,7 +6,7 @@ import com.mojang.math.Axis;
 import mod.maxbogomol.fluffy_fur.client.particle.ParticleBuilder;
 import mod.maxbogomol.fluffy_fur.client.particle.data.ColorParticleData;
 import mod.maxbogomol.fluffy_fur.client.particle.data.GenericParticleData;
-import mod.maxbogomol.fluffy_fur.client.render.LevelRenderHandler;
+import mod.maxbogomol.fluffy_fur.client.particle.data.SpinParticleData;
 import mod.maxbogomol.fluffy_fur.registry.client.FluffyFurParticles;
 import mod.maxbogomol.fluffy_fur.registry.client.FluffyFurRenderTypes;
 import mod.maxbogomol.wizards_reborn.WizardsReborn;
@@ -59,23 +59,23 @@ public class AuraSpell extends Spell {
     }
 
     @Override
-    public boolean canSpellAir(Level world, Player player, InteractionHand hand) {
+    public boolean canSpellAir(Level level, Player player, InteractionHand hand) {
         return false;
     }
 
     @Override
     public InteractionResult onWandUseOn(ItemStack stack, UseOnContext context) {
-        Level world = context.getLevel();
+        Level level = context.getLevel();
         Player player = context.getPlayer();
 
-        if (!world.isClientSide && canSpell(world, player, context.getHand())) {
+        if (!level.isClientSide && canSpell(level, player, context.getHand())) {
             CompoundTag stats = getStats(stack);
 
             Vec3 pos = context.getClickedPos().getCenter();
-            SpellProjectileEntity entity = new SpellProjectileEntity(WizardsRebornEntities.SPELL_PROJECTILE.get(), world).shoot(
+            SpellProjectileEntity entity = new SpellProjectileEntity(WizardsRebornEntities.SPELL_PROJECTILE.get(), level).shoot(
                     pos.x, pos.y + 0.5, pos.z, 0, 0, 0, player.getUUID(), this.getId(), stats
             );
-            world.addFreshEntity(entity);
+            level.addFreshEntity(entity);
 
             setCooldown(stack, stats);
             removeWissen(stack, stats, player);
@@ -87,7 +87,7 @@ public class AuraSpell extends Spell {
             float g = color.getGreen() / 255f;
             float b = color.getBlue() / 255f;
 
-            PacketHandler.sendToTracking(world, player.getOnPos(), new AuraSpellCastEffectPacket((float) pos.x, (float) (pos.y + 0.5f), (float) pos.z, r, g, b));
+            PacketHandler.sendToTracking(level, player.getOnPos(), new AuraSpellCastEffectPacket((float) pos.x, (float) (pos.y + 0.5f), (float) pos.z, r, g, b));
 
             return InteractionResult.SUCCESS;
         }
@@ -115,7 +115,7 @@ public class AuraSpell extends Spell {
                             .setColorData(ColorParticleData.create(color).build())
                             .setTransparencyData(GenericParticleData.create(0.3f, 0).build())
                             .setScaleData(GenericParticleData.create(0.5f, 0f).build())
-                            .randomSpin(1f)
+                            .setSpinData(SpinParticleData.create().randomSpin(1f).build())
                             .setLifetime(40)
                             .randomVelocity(0.025f)
                             .addVelocity(0, 0.2f, 0)
@@ -127,7 +127,7 @@ public class AuraSpell extends Spell {
                             .setColorData(ColorParticleData.create(color).build())
                             .setTransparencyData(GenericParticleData.create(0.1f, 0).build())
                             .setScaleData(GenericParticleData.create(1f, 0).build())
-                            .randomSpin(0.05f)
+                            .setSpinData(SpinParticleData.create().randomSpin(0.05f).build())
                             .setLifetime(30)
                             .randomVelocity(0.025f)
                             .addVelocity(0, 0.2f, 0)
@@ -139,7 +139,7 @@ public class AuraSpell extends Spell {
                             .setColorData(ColorParticleData.create(color).build())
                             .setTransparencyData(GenericParticleData.create(0.5f, 0).build())
                             .setScaleData(GenericParticleData.create(0.15f, 0f).build())
-                            .randomSpin(0.4f)
+                            .setSpinData(SpinParticleData.create().randomSpin(0.4f).build())
                             .setLifetime(30)
                             .randomVelocity(0.035f)
                             .addVelocity(0, 0.22f, 0)
@@ -152,7 +152,7 @@ public class AuraSpell extends Spell {
                             .setColorData(ColorParticleData.create(color).build())
                             .setTransparencyData(GenericParticleData.create(0.5f, 0).build())
                             .setScaleData(GenericParticleData.create(0.15f, 0f).build())
-                            .randomSpin(0.4f)
+                            .setSpinData(SpinParticleData.create().randomSpin(0.4f).build())
                             .setLifetime(30)
                             .randomVelocity(0.035f)
                             .addVelocity(0, 0.25f, 0)
@@ -164,7 +164,7 @@ public class AuraSpell extends Spell {
                             .setColorData(ColorParticleData.create(color).build())
                             .setTransparencyData(GenericParticleData.create(0.5f, 0).build())
                             .setScaleData(GenericParticleData.create(0.15f, 0f).build())
-                            .randomSpin(0.4f)
+                            .setSpinData(SpinParticleData.create().randomSpin(0.4f).build())
                             .setLifetime(30)
                             .randomVelocity(0.035f)
                             .addVelocity(0, 0.15f, 0)
@@ -201,14 +201,14 @@ public class AuraSpell extends Spell {
         return targets;
     }
 
-    public void onAura(Level world, SpellProjectileEntity projectile, Player player, List<Entity> targets) {
+    public void onAura(Level level, SpellProjectileEntity projectile, Player player, List<Entity> targets) {
 
     }
 
     @Override
     @OnlyIn(Dist.CLIENT)
     public void render(SpellProjectileEntity entity, float entityYaw, float partialTicks, PoseStack stack, MultiBufferSource buffer, int light) {
-        MultiBufferSource bufferDelayed = LevelRenderHandler.getDelayedRender();
+        MultiBufferSource bufferDelayed = FluffyFurRenderTypes.getDelayedRender();
         VertexConsumer builder = bufferDelayed.getBuffer(FluffyFurRenderTypes.GLOWING);
         Color color = getColor();
         float r = color.getRed() / 255f;

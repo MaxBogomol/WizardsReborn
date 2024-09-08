@@ -3,6 +3,7 @@ package mod.maxbogomol.wizards_reborn.common.item;
 import mod.maxbogomol.fluffy_fur.client.particle.ParticleBuilder;
 import mod.maxbogomol.fluffy_fur.client.particle.data.ColorParticleData;
 import mod.maxbogomol.fluffy_fur.client.particle.data.GenericParticleData;
+import mod.maxbogomol.fluffy_fur.client.particle.data.SpinParticleData;
 import mod.maxbogomol.fluffy_fur.common.item.IParticleItem;
 import mod.maxbogomol.fluffy_fur.registry.client.FluffyFurParticles;
 import mod.maxbogomol.fluffy_fur.util.ColorUtil;
@@ -57,12 +58,12 @@ public class FracturedCrystalItem extends Item implements IParticleItem {
     }
 
     @Override
-    public void inventoryTick(ItemStack stack, Level world, Entity entity, int slot, boolean isSelected) {
-        if (!world.isClientSide()) {
+    public void inventoryTick(ItemStack stack, Level level, Entity entity, int slot, boolean isSelected) {
+        if (!level.isClientSide()) {
             CompoundTag nbt = stack.getOrCreateTag();
             if (nbt.contains("random_stats")) {
                 nbt.remove("random_stats");
-                CrystalUtil.createCrystalItemStats(stack, type, world, 6);
+                CrystalUtil.createCrystalItemStats(stack, type, level, 6);
                 stack.setTag(nbt);
             }
         }
@@ -70,7 +71,7 @@ public class FracturedCrystalItem extends Item implements IParticleItem {
 
     @OnlyIn(Dist.CLIENT)
     @Override
-    public void appendHoverText(ItemStack stack, Level world, List<Component> list, TooltipFlag flags) {
+    public void appendHoverText(ItemStack stack, Level level, List<Component> list, TooltipFlag flags) {
         CrystalType type = getType();
         Color color = type.getColor();
         for (CrystalStat stat : type.getStats()) {
@@ -95,7 +96,7 @@ public class FracturedCrystalItem extends Item implements IParticleItem {
                     .setColorData(ColorParticleData.create(color).build())
                     .setTransparencyData(GenericParticleData.create(0.5f, 0).build())
                     .setScaleData(GenericParticleData.create(0.1f, 0).build())
-                    .randomSpin(0.5f)
+                    .setSpinData(SpinParticleData.create().randomSpin(0.5f).build())
                     .setLifetime(30)
                     .randomVelocity(0.01f)
                     .randomOffset(0.125f)

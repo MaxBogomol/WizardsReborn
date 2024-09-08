@@ -35,8 +35,8 @@ public class WaterRaySpell extends RaySpell {
     }
 
     @Override
-    public void onImpact(HitResult ray, Level world, SpellProjectileEntity projectile, Player player, Entity target) {
-        super.onImpact(ray, world, projectile, player, target);
+    public void onImpact(HitResult ray, Level level, SpellProjectileEntity projectile, Player player, Entity target) {
+        super.onImpact(ray, level, projectile, player, target);
 
         if (player != null) {
             if (target.tickCount % 10 == 0) {
@@ -59,8 +59,8 @@ public class WaterRaySpell extends RaySpell {
     }
 
     @Override
-    public void onImpact(HitResult ray, Level world, SpellProjectileEntity projectile, Player player) {
-        super.onImpact(ray, world, projectile, player);
+    public void onImpact(HitResult ray, Level level, SpellProjectileEntity projectile, Player player) {
+        super.onImpact(ray, level, projectile, player);
 
         if (player != null) {
             if (player.isShiftKeyDown()) {
@@ -83,13 +83,13 @@ public class WaterRaySpell extends RaySpell {
                             if (WissenItemUtil.canRemoveWissen(stack, 5)) {
                                 BlockPos pos = blockPos.relative(Direction.Axis.X, x).relative(Direction.Axis.Y, y).relative(Direction.Axis.Z, z);
 
-                                BlockEvent.BreakEvent breakEv = new BlockEvent.BreakEvent(world, blockPos, world.getBlockState(pos), player);
+                                BlockEvent.BreakEvent breakEv = new BlockEvent.BreakEvent(level, blockPos, level.getBlockState(pos), player);
 
-                                if (!world.getBlockState(pos).isAir() && !MinecraftForge.EVENT_BUS.post(breakEv)) {
-                                    if (world.getBlockState(pos).getBlock() instanceof FireBlock) {
-                                        world.destroyBlock(pos, false);
+                                if (!level.getBlockState(pos).isAir() && !MinecraftForge.EVENT_BUS.post(breakEv)) {
+                                    if (level.getBlockState(pos).getBlock() instanceof FireBlock) {
+                                        level.destroyBlock(pos, false);
                                         removeWissen(stack, projectile.getStats(), player, 5);
-                                        PacketHandler.sendToTracking(world, player.getOnPos(), new WaterRaySpellEffectPacket((float) pos.getX() + 0.5f, (float) pos.getY() + 0.5f, (float) pos.getZ() + 0.5f, r, g, b));
+                                        PacketHandler.sendToTracking(level, player.getOnPos(), new WaterRaySpellEffectPacket((float) pos.getX() + 0.5f, (float) pos.getY() + 0.5f, (float) pos.getZ() + 0.5f, r, g, b));
                                     }
                                 }
                             }

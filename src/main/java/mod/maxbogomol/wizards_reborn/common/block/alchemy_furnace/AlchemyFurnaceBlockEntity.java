@@ -353,25 +353,25 @@ public class AlchemyFurnaceBlockEntity extends BlockEntityBase implements Tickab
         fluidTank.readFromNBT(tag.getCompound("fluidTank"));
     }
 
-    public boolean isFuel(ItemStack pStack) {
-        return net.minecraftforge.common.ForgeHooks.getBurnTime(pStack, RecipeType.SMELTING) > 0;
+    public boolean isFuel(ItemStack stack) {
+        return net.minecraftforge.common.ForgeHooks.getBurnTime(stack, RecipeType.SMELTING) > 0;
     }
 
-    public int getBurnDuration(ItemStack pFuel) {
-        if (pFuel.isEmpty()) {
+    public int getBurnDuration(ItemStack fuel) {
+        if (fuel.isEmpty()) {
             return 0;
         } else {
-            Item item = pFuel.getItem();
-            return net.minecraftforge.common.ForgeHooks.getBurnTime(pFuel, RecipeType.SMELTING);
+            Item item = fuel.getItem();
+            return net.minecraftforge.common.ForgeHooks.getBurnTime(fuel, RecipeType.SMELTING);
         }
     }
 
-    public boolean canBurn(RegistryAccess pRegistryAccess, SmeltingRecipe pRecipe, int pMaxStackSize) {
-        if (!itemHandler.getStackInSlot(0).isEmpty() && pRecipe != null) {
+    public boolean canBurn(RegistryAccess registryAccess, SmeltingRecipe recipe, int maxStackSize) {
+        if (!itemHandler.getStackInSlot(0).isEmpty() && recipe != null) {
             SimpleContainer inv = new SimpleContainer(1);
             inv.setItem(0, itemHandler.getStackInSlot(0));
 
-            ItemStack itemstack = pRecipe.assemble(inv, pRegistryAccess);
+            ItemStack itemstack = recipe.assemble(inv, registryAccess);
             if (itemstack.isEmpty()) {
                 return false;
             } else {
@@ -380,7 +380,7 @@ public class AlchemyFurnaceBlockEntity extends BlockEntityBase implements Tickab
                     return true;
                 } else if (!ItemStack.isSameItem(itemstack1, itemstack)) {
                     return false;
-                } else if (itemstack1.getCount() + itemstack.getCount() <= pMaxStackSize && itemstack1.getCount() + itemstack.getCount() <= itemstack1.getMaxStackSize()) {
+                } else if (itemstack1.getCount() + itemstack.getCount() <= maxStackSize && itemstack1.getCount() + itemstack.getCount() <= itemstack1.getMaxStackSize()) {
                     return true;
                 } else {
                     return itemstack1.getCount() + itemstack.getCount() <= itemstack.getMaxStackSize();
@@ -391,13 +391,13 @@ public class AlchemyFurnaceBlockEntity extends BlockEntityBase implements Tickab
         }
     }
 
-    public boolean burn(RegistryAccess pRegistryAccess, SmeltingRecipe pRecipe, int pMaxStackSize) {
-        if (pRecipe != null && this.canBurn(pRegistryAccess, pRecipe, pMaxStackSize)) {
+    public boolean burn(RegistryAccess registryAccess, SmeltingRecipe recipe, int maxStackSize) {
+        if (recipe != null && this.canBurn(registryAccess, recipe, maxStackSize)) {
             SimpleContainer inv = new SimpleContainer(1);
             inv.setItem(0, itemHandler.getStackInSlot(0));
 
             ItemStack itemstack = itemHandler.getStackInSlot(0);
-            ItemStack itemstack1 = pRecipe.assemble(inv, pRegistryAccess);
+            ItemStack itemstack1 = recipe.assemble(inv, registryAccess);
             ItemStack itemstack2 = itemOutputHandler.getStackInSlot(0);
             if (itemstack2.isEmpty()) {
                 itemOutputHandler.setStackInSlot(0, itemstack1.copy());
@@ -416,20 +416,20 @@ public class AlchemyFurnaceBlockEntity extends BlockEntityBase implements Tickab
         }
     }
 
-    public void popExperience(ServerPlayer pPlayer) {
-        createExperience(pPlayer.serverLevel(), pPlayer.getPosition(0), (int) exp);
+    public void popExperience(ServerPlayer player) {
+        createExperience(player.serverLevel(), player.getPosition(0), (int) exp);
         exp = exp - ((int) exp);
         BlockEntityUpdate.packet(this);
     }
 
-    public void popExperience(ServerLevel pLevel, Vec3 pPopVec) {
-        createExperience(pLevel, pPopVec, (int) exp);
+    public void popExperience(ServerLevel level, Vec3 popVec) {
+        createExperience(level, popVec, (int) exp);
         exp = exp - ((int) exp);
         BlockEntityUpdate.packet(this);
     }
 
-    public static void createExperience(ServerLevel pLevel, Vec3 pPopVec, int pExperience) {
-        ExperienceOrb.award(pLevel, pPopVec, pExperience);
+    public static void createExperience(ServerLevel level, Vec3 popVec, int experience) {
+        ExperienceOrb.award(level, popVec, experience);
     }
 
     public boolean isLit() {

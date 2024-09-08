@@ -51,17 +51,17 @@ public class AirImpactSpell extends EntityLookSpell {
     }
 
     @Override
-    public boolean hasReachDistance(Level world, Player player, InteractionHand hand) {
+    public boolean hasReachDistance(Level level, Player player, InteractionHand hand) {
         return false;
     }
 
     @Override
-    public boolean canLookSpell(Level world, Player player, InteractionHand hand) {
-        return getEntityHit(world, player, hand, getAllFilter(player), 0, 1.5f, false).hasEntities();
+    public boolean canLookSpell(Level level, Player player, InteractionHand hand) {
+        return getEntityHit(level, player, hand, getAllFilter(player), 0, 1.5f, false).hasEntities();
     }
 
     @Override
-    public void lookSpell(Level world, Player player, InteractionHand hand) {
+    public void lookSpell(Level level, Player player, InteractionHand hand) {
         ItemStack stack = player.getItemInHand(hand);
         CompoundTag stats = getStats(stack);
         int focusLevel = CrystalUtil.getStatLevel(stats, WizardsRebornCrystals.FOCUS);
@@ -70,7 +70,7 @@ public class AirImpactSpell extends EntityLookSpell {
 
         Vec3 vec = player.getLookAngle().scale(power);
 
-        HitResult hit = getEntityHit(world, player, hand, getAllFilter(player), 0, 1.5f, false);
+        HitResult hit = getEntityHit(level, player, hand, getAllFilter(player), 0, 1.5f, false);
         if (hit.hasEntities()) {
             for (Entity entity : hit.getEntities()) {
                 entity.push(vec.x(), vec.y() / 2, vec.z());
@@ -84,6 +84,6 @@ public class AirImpactSpell extends EntityLookSpell {
         float b = color.getBlue() / 255f;
 
         Vec3 pos = player.getEyePosition().add(player.getLookAngle().scale(0.5f));
-        PacketHandler.sendToTracking(world, player.getOnPos(), new AirImpactSpellEffectPacket((float) pos.x(), (float) pos.y(), (float) pos.z(), (float) vec.x() / 3, (float) vec.y() / 6, (float) vec.z() / 3, r, g, b));
+        PacketHandler.sendToTracking(level, player.getOnPos(), new AirImpactSpellEffectPacket((float) pos.x(), (float) pos.y(), (float) pos.z(), (float) vec.x() / 3, (float) vec.y() / 6, (float) vec.z() / 3, r, g, b));
     }
 }

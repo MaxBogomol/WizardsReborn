@@ -1,4 +1,4 @@
-package mod.maxbogomol.wizards_reborn.common.block.fluid_pipe;
+package mod.maxbogomol.wizards_reborn.common.block.pipe.fluid;
 
 import mod.maxbogomol.wizards_reborn.registry.common.block.WizardsRebornBlockEntities;
 import net.minecraft.core.BlockPos;
@@ -66,8 +66,8 @@ public class FluidPipeBlockEntity extends FluidPipeBaseBlockEntity {
         }
     }
 
-    public FluidPipeBlockEntity(BlockEntityType<?> pType, BlockPos pPos, BlockState pBlockState) {
-        super(pType, pPos, pBlockState);
+    public FluidPipeBlockEntity(BlockEntityType<?> type, BlockPos pos, BlockState blockState) {
+        super(type, pos, blockState);
     }
 
     public FluidPipeBlockEntity(BlockPos pos, BlockState state) {

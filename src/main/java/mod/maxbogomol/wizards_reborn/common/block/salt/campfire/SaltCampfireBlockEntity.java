@@ -1,9 +1,10 @@
-package mod.maxbogomol.wizards_reborn.common.block.salt_campfire;
+package mod.maxbogomol.wizards_reborn.common.block.salt.campfire;
 
 import mod.maxbogomol.fluffy_fur.client.particle.ParticleBuilder;
 import mod.maxbogomol.fluffy_fur.client.particle.data.ColorParticleData;
 import mod.maxbogomol.fluffy_fur.client.particle.data.GenericParticleData;
 import mod.maxbogomol.fluffy_fur.client.particle.data.LightParticleData;
+import mod.maxbogomol.fluffy_fur.client.particle.data.SpinParticleData;
 import mod.maxbogomol.fluffy_fur.common.block.entity.ExposedBlockSimpleInventory;
 import mod.maxbogomol.fluffy_fur.common.block.entity.TickableBlockEntity;
 import mod.maxbogomol.fluffy_fur.common.easing.Easing;
@@ -104,7 +105,7 @@ public class SaltCampfireBlockEntity extends ExposedBlockSimpleInventory impleme
                         .setColorData(ColorParticleData.create(colorF, color).build())
                         .setTransparencyData(GenericParticleData.create(0.25f, 0).build())
                         .setScaleData(GenericParticleData.create(0.55f, 0).setEasing(Easing.CUBIC_IN_OUT).build())
-                        .randomSpin(0.005f)
+                        .setSpinData(SpinParticleData.create().randomSpin(0.005f).build())
                         .setLifetime(30)
                         .spawn(level, worldPosition.getX() + pos.x(), worldPosition.getY() + pos.y(), worldPosition.getZ() + pos.z());
             }
@@ -113,7 +114,7 @@ public class SaltCampfireBlockEntity extends ExposedBlockSimpleInventory impleme
                         .setColorData(ColorParticleData.create(colorF, color).build())
                         .setTransparencyData(GenericParticleData.create(0.35f, 0).build())
                         .setScaleData(GenericParticleData.create(0.45f, 0).setEasing(Easing.SINE_IN_OUT).build())
-                        .randomSpin(0.01f)
+                        .setSpinData(SpinParticleData.create().randomSpin(0.01f).build())
                         .setLifetime(60)
                         .randomVelocity(0.0025f)
                         .addVelocity(0, 0.025f, 0)
@@ -135,8 +136,8 @@ public class SaltCampfireBlockEntity extends ExposedBlockSimpleInventory impleme
                         .setColorData(ColorParticleData.create(Color.BLACK).build())
                         .setTransparencyData(GenericParticleData.create(0.4f, 0).build())
                         .setScaleData(GenericParticleData.create(0.45f, 0).build())
+                        .setSpinData(SpinParticleData.create().randomSpin(0.1f).build())
                         .setLightData(LightParticleData.DEFAULT)
-                        .randomSpin(0.1f)
                         .setLifetime(60)
                         .randomVelocity(0.005f)
                         .addVelocity(0, 0.03f, 0)
@@ -149,7 +150,7 @@ public class SaltCampfireBlockEntity extends ExposedBlockSimpleInventory impleme
                             .setColorData(ColorParticleData.create(color).build())
                             .setTransparencyData(GenericParticleData.create(0.75f, 0).build())
                             .setScaleData(GenericParticleData.create(0, 0.1f, 0).setEasing(Easing.SINE_IN_OUT).build())
-                            .randomSpin(0.1f)
+                            .setSpinData(SpinParticleData.create().randomSpin(0.1f).build())
                             .setLifetime(10)
                             .randomVelocity(0.015f)
                             .flatRandomOffset(0.2f, 0.2f, 0.2f)
@@ -161,7 +162,7 @@ public class SaltCampfireBlockEntity extends ExposedBlockSimpleInventory impleme
                             .setColorData(ColorParticleData.create(Color.WHITE).build())
                             .setTransparencyData(GenericParticleData.create(0.75f, 0).build())
                             .setScaleData(GenericParticleData.create(0, 0.1f, 0).setEasing(Easing.SINE_IN_OUT).build())
-                            .randomSpin(0.1f)
+                            .setSpinData(SpinParticleData.create().randomSpin(0.1f).build())
                             .setLifetime(10)
                             .randomVelocity(0.015f)
                             .flatRandomOffset(0.2f, 0.2f, 0.2f)
@@ -197,7 +198,7 @@ public class SaltCampfireBlockEntity extends ExposedBlockSimpleInventory impleme
                                 .setTransparencyData(GenericParticleData.create(0.4f, 0).build())
                                 .setScaleData(GenericParticleData.create(0.45f, 0.3f).build())
                                 .setLightData(LightParticleData.DEFAULT)
-                                .randomSpin(0.1f)
+                                .setSpinData(SpinParticleData.create().randomSpin(0.1f).build())
                                 .setLifetime(50)
                                 .randomVelocity(0.005f)
                                 .addVelocity(0, 0.03f, 0)
@@ -273,7 +274,7 @@ public class SaltCampfireBlockEntity extends ExposedBlockSimpleInventory impleme
         }
     }
 
-    public static void cookTick(Level pLevel, BlockPos pPos, BlockState pState, SaltCampfireBlockEntity pBlockEntity) {
+    public static void cookTick(Level level, BlockPos pos, BlockState state, SaltCampfireBlockEntity pBlockEntity) {
         boolean flag = false;
 
         for(int i = 0; i < pBlockEntity.items.size(); ++i) {
@@ -283,21 +284,21 @@ public class SaltCampfireBlockEntity extends ExposedBlockSimpleInventory impleme
                 int j = pBlockEntity.cookingProgress[i]++;
                 if (pBlockEntity.cookingProgress[i] >= pBlockEntity.cookingTime[i]) {
                     Container container = new SimpleContainer(itemstack);
-                    ItemStack itemstack1 = pBlockEntity.quickCheck.getRecipeFor(container, pLevel).map((p_270054_) -> {
-                        return p_270054_.assemble(container, pLevel.registryAccess());
+                    ItemStack itemstack1 = pBlockEntity.quickCheck.getRecipeFor(container, level).map((p_270054_) -> {
+                        return p_270054_.assemble(container, level.registryAccess());
                     }).orElse(itemstack);
-                    if (itemstack1.isItemEnabled(pLevel.enabledFeatures())) {
-                        Containers.dropItemStack(pLevel, (double)pPos.getX(), (double)pPos.getY(), (double)pPos.getZ(), itemstack1);
+                    if (itemstack1.isItemEnabled(level.enabledFeatures())) {
+                        Containers.dropItemStack(level, (double)pos.getX(), (double)pos.getY(), (double)pos.getZ(), itemstack1);
                         pBlockEntity.items.set(i, ItemStack.EMPTY);
-                        pLevel.sendBlockUpdated(pPos, pState, pState, 3);
-                        pLevel.gameEvent(GameEvent.BLOCK_CHANGE, pPos, GameEvent.Context.of(pState));
+                        level.sendBlockUpdated(pos, state, state, 3);
+                        level.gameEvent(GameEvent.BLOCK_CHANGE, pos, GameEvent.Context.of(state));
                     }
                 }
             }
         }
 
         if (flag) {
-            setChanged(pLevel, pPos, pState);
+            setChanged(level, pos, state);
             BlockEntityUpdate.packet(pBlockEntity);
         }
 
@@ -307,17 +308,17 @@ public class SaltCampfireBlockEntity extends ExposedBlockSimpleInventory impleme
         return this.items;
     }
 
-    public Optional<CampfireCookingRecipe> getCookableRecipe(ItemStack pStack) {
-        return this.items.stream().noneMatch(ItemStack::isEmpty) ? Optional.empty() : this.quickCheck.getRecipeFor(new SimpleContainer(pStack), this.level);
+    public Optional<CampfireCookingRecipe> getCookableRecipe(ItemStack stack) {
+        return this.items.stream().noneMatch(ItemStack::isEmpty) ? Optional.empty() : this.quickCheck.getRecipeFor(new SimpleContainer(stack), this.level);
     }
 
-    public boolean placeFood(@Nullable Entity pEntity, ItemStack pStack, int pCookTime) {
+    public boolean placeFood(@Nullable Entity pEntity, ItemStack stack, int pCookTime) {
         for(int i = 0; i < this.items.size(); ++i) {
             ItemStack itemstack = this.items.get(i);
             if (itemstack.isEmpty()) {
                 this.cookingTime[i] = (pCookTime / 2);
                 this.cookingProgress[i] = 0;
-                this.items.set(i, pStack.split(1));
+                this.items.set(i, stack.split(1));
                 this.level.gameEvent(GameEvent.BLOCK_CHANGE, this.getBlockPos(), GameEvent.Context.of(pEntity, this.getBlockState()));
                 this.markUpdated();
                 return true;

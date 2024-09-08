@@ -25,26 +25,26 @@ public class CorkBambooSaplingBlock extends BambooSaplingBlock {
     }
 
     @Override
-    public BlockState updateShape(BlockState pState, Direction pFacing, BlockState pFacingState, LevelAccessor pLevel, BlockPos pCurrentPos, BlockPos pFacingPos) {
-        if (!pState.canSurvive(pLevel, pCurrentPos)) {
+    public BlockState updateShape(BlockState state, Direction facing, BlockState facingState, LevelAccessor level, BlockPos currentPos, BlockPos facingPos) {
+        if (!state.canSurvive(level, currentPos)) {
             return Blocks.AIR.defaultBlockState();
         } else {
-            if (pFacing == Direction.UP && pFacingState.is(WizardsRebornBlocks.CORK_BAMBOO.get())) {
-                pLevel.setBlock(pCurrentPos, WizardsRebornBlocks.CORK_BAMBOO.get().defaultBlockState(), 2);
+            if (facing == Direction.UP && facingState.is(WizardsRebornBlocks.CORK_BAMBOO.get())) {
+                level.setBlock(currentPos, WizardsRebornBlocks.CORK_BAMBOO.get().defaultBlockState(), 2);
             }
 
-            return super.updateShape(pState, pFacing, pFacingState, pLevel, pCurrentPos, pFacingPos);
+            return super.updateShape(state, facing, facingState, level, currentPos, facingPos);
         }
     }
 
     @Override
     @Nullable
-    public boolean canSurvive(BlockState pState, LevelReader pLevel, BlockPos pPos) {
-        return pLevel.getBlockState(pPos.below()).is(WizardsRebornBlockTags.CORK_BAMBOO_PLANTABLE_ON) && !pLevel.getBlockState(pPos.below()).is(WizardsRebornBlocks.CORK_BAMBOO_SAPLING.get());
+    public boolean canSurvive(BlockState state, LevelReader level, BlockPos pos) {
+        return level.getBlockState(pos.below()).is(WizardsRebornBlockTags.CORK_BAMBOO_PLANTABLE_ON) && !level.getBlockState(pos.below()).is(WizardsRebornBlocks.CORK_BAMBOO_SAPLING.get());
     }
 
     @Override
-    public ItemStack getCloneItemStack(BlockGetter blockGetter, BlockPos blockPos, BlockState blockState) {
+    public ItemStack getCloneItemStack(BlockGetter level, BlockPos pos, BlockState state) {
         return new ItemStack(WizardsRebornItems.CORK_BAMBOO_SEED.get());
     }
 

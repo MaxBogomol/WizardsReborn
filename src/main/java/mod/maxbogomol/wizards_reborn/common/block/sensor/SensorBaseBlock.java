@@ -81,7 +81,7 @@ public class SensorBaseBlock extends DiodeBlock implements EntityBlock, SimpleWa
     }
 
     @Override
-    protected int getDelay(BlockState pState) {
+    protected int getDelay(BlockState state) {
         return 2;
     }
 
@@ -91,25 +91,18 @@ public class SensorBaseBlock extends DiodeBlock implements EntityBlock, SimpleWa
     }
 
     @Override
-    public BlockState updateShape(BlockState pState, Direction pDirection, BlockState pNeighborState, LevelAccessor pLevel, BlockPos pCurrentPos, BlockPos pNeighborPos) {
-        if (pState.getValue(BlockStateProperties.WATERLOGGED)) {
-            pLevel.scheduleTick(pCurrentPos, Fluids.WATER, Fluids.WATER.getTickDelay(pLevel));
+    public BlockState updateShape(BlockState state, Direction direction, BlockState neighborState, LevelAccessor level, BlockPos currentPos, BlockPos neighborPos) {
+        if (state.getValue(BlockStateProperties.WATERLOGGED)) {
+            level.scheduleTick(currentPos, Fluids.WATER, Fluids.WATER.getTickDelay(level));
         }
 
-        return pState;
-    }
-
-    @Override
-    public boolean triggerEvent(BlockState state, Level world, BlockPos pos, int id, int param) {
-        super.triggerEvent(state, world, pos, id, param);
-        BlockEntity tileentity = world.getBlockEntity(pos);
-        return tileentity != null && tileentity.triggerEvent(id, param);
+        return state;
     }
 
     @Nullable
     @Override
-    public BlockEntity newBlockEntity(BlockPos pPos, BlockState pState) {
-        return new SensorBlockEntity(pPos, pState);
+    public BlockEntity newBlockEntity(BlockPos pos, BlockState state) {
+        return new SensorBlockEntity(pos, state);
     }
 
     @Nullable
@@ -119,111 +112,111 @@ public class SensorBaseBlock extends DiodeBlock implements EntityBlock, SimpleWa
     }
 
     @Override
-    protected int getInputSignal(Level pLevel, BlockPos pPos, BlockState pState) {
+    protected int getInputSignal(Level level, BlockPos pos, BlockState state) {
         return 0;
     }
 
     @Override
-    protected int getAlternateSignal(SignalGetter pSignalGetter, BlockPos pPos, BlockState pState) {
+    protected int getAlternateSignal(SignalGetter pSignalGetter, BlockPos pos, BlockState state) {
         return 0;
     }
 
 
     @Override
-    protected int getOutputSignal(BlockGetter pLevel, BlockPos pPos, BlockState pState) {
-        BlockEntity blockentity = pLevel.getBlockEntity(pPos);
+    protected int getOutputSignal(BlockGetter level, BlockPos pos, BlockState state) {
+        BlockEntity blockentity = level.getBlockEntity(pos);
         return blockentity instanceof SensorBlockEntity ? ((SensorBlockEntity)blockentity).getOutputSignal() : 0;
     }
 
     @Override
-    protected void checkTickOnNeighbor(Level pLevel, BlockPos pPos, BlockState pState) {
-        if (!pLevel.getBlockTicks().willTickThisTick(pPos, this)) {
-            int i = this.calculateOutputSignal(pLevel, pPos, pState);
-            BlockEntity blockentity = pLevel.getBlockEntity(pPos);
+    protected void checkTickOnNeighbor(Level level, BlockPos pos, BlockState state) {
+        if (!level.getBlockTicks().willTickThisTick(pos, this)) {
+            int i = this.calculateOutputSignal(level, pos, state);
+            BlockEntity blockentity = level.getBlockEntity(pos);
             int j = blockentity instanceof SensorBlockEntity ? ((SensorBlockEntity)blockentity).getOutputSignal() : 0;
-            if (i != j || pState.getValue(POWERED) != this.shouldTurnOn(pLevel, pPos, pState)) {
-                TickPriority tickpriority = this.shouldPrioritize(pLevel, pPos, pState) ? TickPriority.HIGH : TickPriority.NORMAL;
-                pLevel.scheduleTick(pPos, this, 2, tickpriority);
+            if (i != j || state.getValue(POWERED) != this.shouldTurnOn(level, pos, state)) {
+                TickPriority tickpriority = this.shouldPrioritize(level, pos, state) ? TickPriority.HIGH : TickPriority.NORMAL;
+                level.scheduleTick(pos, this, 2, tickpriority);
             }
 
         }
     }
 
-    public void refreshOutputState(Level pLevel, BlockPos pPos, BlockState pState) {
-        int i = this.calculateOutputSignal(pLevel, pPos, pState);
-        BlockEntity blockentity = pLevel.getBlockEntity(pPos);
+    public void refreshOutputState(Level level, BlockPos pos, BlockState state) {
+        int i = this.calculateOutputSignal(level, pos, state);
+        BlockEntity blockentity = level.getBlockEntity(pos);
         int j = 0;
         if (blockentity instanceof SensorBlockEntity comparatorblockentity) {
             j = comparatorblockentity.getOutputSignal();
             comparatorblockentity.setOutputSignal(i);
         }
 
-        if (j != i || pState.getValue(MODE) == ComparatorMode.COMPARE) {
-            boolean flag1 = this.shouldTurnOn(pLevel, pPos, pState);
-            boolean flag = pState.getValue(POWERED);
+        if (j != i || state.getValue(MODE) == ComparatorMode.COMPARE) {
+            boolean flag1 = this.shouldTurnOn(level, pos, state);
+            boolean flag = state.getValue(POWERED);
             if (flag && !flag1) {
-                pLevel.setBlock(pPos, pState.setValue(POWERED, Boolean.valueOf(false)), 2);
+                level.setBlock(pos, state.setValue(POWERED, Boolean.valueOf(false)), 2);
             } else if (!flag && flag1) {
-                pLevel.setBlock(pPos, pState.setValue(POWERED, Boolean.valueOf(true)), 2);
+                level.setBlock(pos, state.setValue(POWERED, Boolean.valueOf(true)), 2);
             }
 
-            this.updateNeighborsInFront(pLevel, pPos, pState);
+            this.updateNeighborsInFront(level, pos, state);
         }
     }
 
-    protected void updateNeighborsInFront(Level pLevel, BlockPos pPos, BlockState pState) {
-        Direction direction = pState.getValue(FACING);
-        BlockPos blockpos = pPos.relative(direction.getOpposite());
+    protected void updateNeighborsInFront(Level level, BlockPos pos, BlockState state) {
+        Direction direction = state.getValue(FACING);
+        BlockPos blockpos = pos.relative(direction.getOpposite());
 
-        switch (pState.getValue(FACE)) {
+        switch (state.getValue(FACE)) {
             case FLOOR:
-                blockpos = pPos.below();
+                blockpos = pos.below();
                 direction = Direction.UP;
                 break;
             case WALL:
                 break;
             case CEILING:
-                blockpos = pPos.above();
+                blockpos = pos.above();
                 direction = Direction.DOWN;
                 break;
         }
 
-        if (net.minecraftforge.event.ForgeEventFactory.onNeighborNotify(pLevel, pPos, pLevel.getBlockState(pPos), java.util.EnumSet.of(direction.getOpposite()), false).isCanceled())
+        if (net.minecraftforge.event.ForgeEventFactory.onNeighborNotify(level, pos, level.getBlockState(pos), java.util.EnumSet.of(direction.getOpposite()), false).isCanceled())
             return;
-        pLevel.neighborChanged(blockpos, this, pPos);
-        pLevel.updateNeighborsAtExceptFromFacing(blockpos, this, direction);
+        level.neighborChanged(blockpos, this, pos);
+        level.updateNeighborsAtExceptFromFacing(blockpos, this, direction);
     }
 
-    private int calculateOutputSignal(Level pLevel, BlockPos pPos, BlockState pState) {
-        int i = this.getInputSignal(pLevel, pPos, pState);
+    private int calculateOutputSignal(Level level, BlockPos pos, BlockState state) {
+        int i = this.getInputSignal(level, pos, state);
         if (i == 0) {
             return 0;
         } else {
-            int j = this.getAlternateSignal(pLevel, pPos, pState);
+            int j = this.getAlternateSignal(level, pos, state);
             if (j > i) {
                 return 0;
             } else {
-                return pState.getValue(MODE) == ComparatorMode.SUBTRACT ? i - j : i;
+                return state.getValue(MODE) == ComparatorMode.SUBTRACT ? i - j : i;
             }
         }
     }
 
-    protected boolean shouldTurnOn(Level pLevel, BlockPos pPos, BlockState pState) {
-        int i = this.getInputSignal(pLevel, pPos, pState);
+    protected boolean shouldTurnOn(Level level, BlockPos pos, BlockState state) {
+        int i = this.getInputSignal(level, pos, state);
         if (i == 0) {
             return false;
         } else {
-            int j = this.getAlternateSignal(pLevel, pPos, pState);
+            int j = this.getAlternateSignal(level, pos, state);
             if (i > j) {
                 return true;
             } else {
-                return i == j && pState.getValue(MODE) == ComparatorMode.COMPARE;
+                return i == j && state.getValue(MODE) == ComparatorMode.COMPARE;
             }
         }
     }
 
-    public void tick(BlockState pState, ServerLevel pLevel, BlockPos pPos, RandomSource pRandom) {
-        this.refreshOutputState(pLevel, pPos, pState);
+    public void tick(BlockState state, ServerLevel level, BlockPos pos, RandomSource random) {
+        this.refreshOutputState(level, pos, state);
     }
 
     @Override
@@ -237,32 +230,32 @@ public class SensorBaseBlock extends DiodeBlock implements EntityBlock, SimpleWa
     }
 
     @Nullable
-    public ItemFrame getItemFrame(Level pLevel, Direction pFacing, BlockPos pPos) {
-        List<ItemFrame> list = pLevel.getEntitiesOfClass(ItemFrame.class, new AABB((double)pPos.getX(), (double)pPos.getY(), (double)pPos.getZ(), (double)(pPos.getX() + 1), (double)(pPos.getY() + 1), (double)(pPos.getZ() + 1)), (p_289506_) -> {
-            return p_289506_ != null && p_289506_.getDirection() == pFacing;
+    public ItemFrame getItemFrame(Level level, Direction facing, BlockPos pos) {
+        List<ItemFrame> list = level.getEntitiesOfClass(ItemFrame.class, new AABB((double)pos.getX(), (double)pos.getY(), (double)pos.getZ(), (double)(pos.getX() + 1), (double)(pos.getY() + 1), (double)(pos.getZ() + 1)), (p_289506_) -> {
+            return p_289506_ != null && p_289506_.getDirection() == facing;
         });
         return list.size() == 1 ? list.get(0) : null;
     }
 
     @Override
-    public boolean canSurvive(BlockState pState, LevelReader pLevel, BlockPos pPos) {
+    public boolean canSurvive(BlockState state, LevelReader level, BlockPos pos) {
         return true;
     }
 
     @Nullable
-    public int getSignal(BlockState pBlockState, BlockGetter pBlockAccess, BlockPos pPos, Direction pSide) {
-        if (!pBlockState.getValue(POWERED)) {
+    public int getSignal(BlockState blockState, BlockGetter pBlockAccess, BlockPos pos, Direction pSide) {
+        if (!blockState.getValue(POWERED)) {
             return 0;
         } else {
-            switch (pBlockState.getValue(FACE)) {
+            switch (blockState.getValue(FACE)) {
                 case FLOOR:
-                    return Direction.UP == pSide ? this.getOutputSignal(pBlockAccess, pPos, pBlockState) : 0;
+                    return Direction.UP == pSide ? this.getOutputSignal(pBlockAccess, pos, blockState) : 0;
                 case WALL:
-                    return pBlockState.getValue(FACING) == pSide ? this.getOutputSignal(pBlockAccess, pPos, pBlockState) : 0;
+                    return blockState.getValue(FACING) == pSide ? this.getOutputSignal(pBlockAccess, pos, blockState) : 0;
                 case CEILING:
-                    return Direction.DOWN == pSide ? this.getOutputSignal(pBlockAccess, pPos, pBlockState) : 0;
+                    return Direction.DOWN == pSide ? this.getOutputSignal(pBlockAccess, pos, blockState) : 0;
             }
-            return pBlockState.getValue(FACING) == pSide ? this.getOutputSignal(pBlockAccess, pPos, pBlockState) : 0;
+            return blockState.getValue(FACING) == pSide ? this.getOutputSignal(pBlockAccess, pos, blockState) : 0;
         }
     }
 

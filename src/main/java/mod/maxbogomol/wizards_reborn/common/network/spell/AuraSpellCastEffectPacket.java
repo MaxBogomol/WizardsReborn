@@ -47,7 +47,7 @@ public class AuraSpellCastEffectPacket {
             ctx.get().enqueueWork(new Runnable() {
                 @Override
                 public void run() {
-                    Level world = WizardsReborn.proxy.getLevel();
+                    Level level = WizardsReborn.proxy.getLevel();
                     ParticleBuilder.create(FluffyFurParticles.SPARKLE)
                             .setColorData(ColorParticleData.create(msg.colorR, msg.colorG, msg.colorB).build())
                             .setTransparencyData(GenericParticleData.create(0.4f, 0).build())
@@ -56,7 +56,7 @@ public class AuraSpellCastEffectPacket {
                             .setGravity(1f)
                             .randomVelocity(0.125f)
                             .addVelocity(msg.X, msg.Y, msg.Z)
-                            .repeat(world, msg.X, msg.Y, msg.Z, 30, 0.8f);
+                            .repeat(level, msg.X, msg.Y, msg.Z, 30, 0.8f);
 
                     ctx.get().setPacketHandled(true);
                 }

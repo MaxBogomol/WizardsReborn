@@ -3,10 +3,14 @@ package mod.maxbogomol.wizards_reborn.common.block.jeweler_table;
 import mod.maxbogomol.fluffy_fur.client.particle.ParticleBuilder;
 import mod.maxbogomol.fluffy_fur.client.particle.data.ColorParticleData;
 import mod.maxbogomol.fluffy_fur.client.particle.data.GenericParticleData;
+import mod.maxbogomol.fluffy_fur.client.particle.data.SpinParticleData;
+import mod.maxbogomol.fluffy_fur.client.particle.options.GenericParticleOptions;
+import mod.maxbogomol.fluffy_fur.client.particle.options.ItemParticleOptions;
 import mod.maxbogomol.fluffy_fur.common.block.entity.BlockEntityBase;
 import mod.maxbogomol.fluffy_fur.common.block.entity.TickableBlockEntity;
 import mod.maxbogomol.fluffy_fur.common.easing.Easing;
 import mod.maxbogomol.fluffy_fur.registry.client.FluffyFurParticles;
+import mod.maxbogomol.fluffy_fur.registry.client.FluffyFurRenderTypes;
 import mod.maxbogomol.wizards_reborn.WizardsReborn;
 import mod.maxbogomol.wizards_reborn.api.skin.Skin;
 import mod.maxbogomol.wizards_reborn.api.wissen.*;
@@ -16,9 +20,9 @@ import mod.maxbogomol.wizards_reborn.common.item.SkinTrimItem;
 import mod.maxbogomol.wizards_reborn.common.network.PacketHandler;
 import mod.maxbogomol.wizards_reborn.common.network.tileentity.JewelerTableBurstEffectPacket;
 import mod.maxbogomol.wizards_reborn.common.recipe.JewelerTableRecipe;
-import mod.maxbogomol.wizards_reborn.registry.common.block.WizardsRebornBlockEntities;
 import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornRecipes;
 import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornSounds;
+import mod.maxbogomol.wizards_reborn.registry.common.block.WizardsRebornBlockEntities;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.RegistryAccess;
@@ -182,9 +186,9 @@ public class JewelerTableBlockEntity extends BlockEntityBase implements Tickable
                                 float g = color.getGreen() / 255f;
                                 float b = color.getBlue() / 255f;
 
-                                PacketHandler.sendToTracking(level, getBlockPos(), new JewelerTableBurstEffectPacket(getBlockPos(), (float) pos.x(), (float) pos.y(), (float) pos.z(), vel.x, vel.y, r, g, b));
+                                PacketHandler.sendToTracking(level, getBlockPos(), new JewelerTableBurstEffectPacket(getBlockPos(), (float) pos.x(), (float) pos.y(), (float) pos.z(), vel.x, vel.y, r, g, b, itemOutputHandler.getStackInSlot(0)));
                             } else {
-                                PacketHandler.sendToTracking(level, getBlockPos(), new JewelerTableBurstEffectPacket(getBlockPos(), (float) pos.x(), (float) pos.y(), (float) pos.z()));
+                                PacketHandler.sendToTracking(level, getBlockPos(), new JewelerTableBurstEffectPacket(getBlockPos(), (float) pos.x(), (float) pos.y(), (float) pos.z(), itemOutputHandler.getStackInSlot(0)));
                             }
 
                             level.playSound(WizardsReborn.proxy.getPlayer(), getBlockPos(), SoundEvents.GRINDSTONE_USE, SoundSource.BLOCKS, 0.5f, (float) (1f + ((random.nextFloat() - 0.5D) / 4)));
@@ -221,7 +225,7 @@ public class JewelerTableBlockEntity extends BlockEntityBase implements Tickable
                             .setColorData(ColorParticleData.create(Config.wissenColorR(), Config.wissenColorG(), Config.wissenColorB()).build())
                             .setTransparencyData(GenericParticleData.create(0.25f, 0).build())
                             .setScaleData(GenericParticleData.create(0, 0.05f * getStage(), 0).setEasing(Easing.QUINTIC_IN_OUT).build())
-                            .randomSpin(0.5f)
+                            .setSpinData(SpinParticleData.create().randomSpin(0.5f).build())
                             .setLifetime(30)
                             .randomVelocity(0.015f)
                             .spawn(level, pos.x(), pos.y(), pos.z());
@@ -247,41 +251,39 @@ public class JewelerTableBlockEntity extends BlockEntityBase implements Tickable
                 if (skin != null) {
                     color = skin.getColor();
                     isColor = true;
-                } else if (itemOutputHandler.getStackInSlot(0).getItem() instanceof CrystalItem crystalItem) {
+                } else if (itemHandler.getStackInSlot(0).getItem() instanceof CrystalItem crystalItem) {
                     color = crystalItem.getType().getColor();
                     isColor = true;
                 }
 
-                if (isColor) {
-                    float r = color.getRed() / 255f;
-                    float g = color.getGreen() / 255f;
-                    float b = color.getBlue() / 255f;
+                if (random.nextFloat() < 0.6) {
+                    float x = 0F;
+                    float y = 0F;
 
-                    if (random.nextFloat() < 0.6) {
-                        float x = 0F;
-                        float y = 0F;
-
-                        if (vel.x == 0) {
-                            x = (float) ((random.nextDouble() - 0.5D) / 20);
-                        } else {
-                            x = (float) ((random.nextDouble() / 20) * vel.x);
-                        }
-
-                        if (vel.y == 0) {
-                            y = (float) ((random.nextDouble() - 0.5D) / 20);
-                        } else {
-                            y = (float) ((random.nextDouble() / 20) * vel.y);
-                        }
-
-                        ParticleBuilder.create(FluffyFurParticles.SPARKLE)
-                                .setColorData(ColorParticleData.create(r, g, b).build())
-                                .setTransparencyData(GenericParticleData.create(0.35f, 0).build())
-                                .setScaleData(GenericParticleData.create(0.2f, 0).build())
-                                .randomSpin(0.5f)
-                                .setLifetime(30)
-                                .addVelocity(x, (random.nextDouble() / 30), y)
-                                .spawn(level, pos.x(), pos.y(), pos.z());
+                    if (vel.x == 0) {
+                        x = (float) ((random.nextDouble() - 0.5D) / 20);
+                    } else {
+                        x = (float) ((random.nextDouble() / 20) * vel.x);
                     }
+
+                    if (vel.y == 0) {
+                        y = (float) ((random.nextDouble() - 0.5D) / 20);
+                    } else {
+                        y = (float) ((random.nextDouble() / 20) * vel.y);
+                    }
+
+                    boolean item = random.nextBoolean();
+                    if (!isColor) item = true;
+                    ItemParticleOptions options = new ItemParticleOptions(FluffyFurParticles.ITEM.get(), itemHandler.getStackInSlot(0));
+                    ParticleBuilder.create(item ? options : new GenericParticleOptions(FluffyFurParticles.SQUARE.get()))
+                            .setRenderType(item ? FluffyFurRenderTypes.DELAYED_TERRAIN_PARTICLE : FluffyFurRenderTypes.GLOWING_PARTICLE)
+                            .setColorData(ColorParticleData.create(item ? Color.WHITE : color).build())
+                            .setTransparencyData(GenericParticleData.create(0.2f, 0.5f, 0).setEasing(Easing.QUINTIC_IN_OUT).build())
+                            .setScaleData(GenericParticleData.create(0.025f, 0.06f, 0).setEasing(Easing.QUINTIC_IN_OUT).build())
+                            .setSpinData(SpinParticleData.create().randomSpin(0.5f).build())
+                            .setLifetime(30)
+                            .addVelocity(x, (random.nextDouble() / 30), y)
+                            .spawn(level, pos.x(), pos.y(), pos.z());
                 }
             } else {
                 if (stoneSpeed > 0) {

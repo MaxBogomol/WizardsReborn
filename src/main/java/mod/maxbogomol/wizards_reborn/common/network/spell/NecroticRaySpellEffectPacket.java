@@ -61,7 +61,7 @@ public class NecroticRaySpellEffectPacket {
             ctx.get().enqueueWork(new Runnable() {
                 @Override
                 public void run() {
-                    Level world = WizardsReborn.proxy.getLevel();
+                    Level level = WizardsReborn.proxy.getLevel();
 
                     Vec3 pos = new Vec3(msg.posToX, msg.posToY, msg.posToZ);
                     for (int i = 0; i < 10; i++) {
@@ -72,7 +72,7 @@ public class NecroticRaySpellEffectPacket {
                             double lerpZ = Mth.lerp(lerp, msg.posFromZ, pos.z);
 
                             if (random.nextFloat() < 0.1f) {
-                                world.addParticle(ParticleTypes.ENTITY_EFFECT,
+                                level.addParticle(ParticleTypes.ENTITY_EFFECT,
                                         lerpX, lerpY, lerpZ,
                                         msg.colorR, msg.colorG, msg.colorB);
                             }

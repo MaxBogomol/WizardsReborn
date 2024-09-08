@@ -19,23 +19,23 @@ public class WissenSensorBlock extends SensorBaseBlock {
     }
 
     @Override
-    protected int getInputSignal(Level pLevel, BlockPos pPos, BlockState pState) {
-        int i = super.getInputSignal(pLevel, pPos, pState);
-        Direction direction = pState.getValue(FACING);
-        BlockPos blockpos = pPos.relative(direction);
+    protected int getInputSignal(Level level, BlockPos pos, BlockState state) {
+        int i = super.getInputSignal(level, pos, state);
+        Direction direction = state.getValue(FACING);
+        BlockPos blockpos = pos.relative(direction);
 
-        switch (pState.getValue(FACE)) {
+        switch (state.getValue(FACE)) {
             case FLOOR:
-                blockpos = pPos.above();
+                blockpos = pos.above();
                 break;
             case WALL:
                 break;
             case CEILING:
-                blockpos = pPos.below();
+                blockpos = pos.below();
                 break;
         }
 
-        BlockEntity tile = pLevel.getBlockEntity(blockpos);
+        BlockEntity tile = level.getBlockEntity(blockpos);
         if (tile instanceof IWissenBlockEntity wissenTile) {
             i = Mth.floor(((float) wissenTile.getWissen() / wissenTile.getMaxWissen()) * 14.0F);
         }

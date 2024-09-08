@@ -55,7 +55,7 @@ public class ArcaneIteratorRecipe implements Recipe<Container> {
     }
 
     @Override
-    public boolean matches(Container inv, Level worldIn) {
+    public boolean matches(Container inv, Level levelIn) {
         boolean hasEnchantment = (getResultItem(RegistryAccess.EMPTY).isEmpty() && (hasRecipeEnchantment() || hasRecipeArcaneEnchantment()));
         return matches(inputs, inv, hasEnchantment);
     }

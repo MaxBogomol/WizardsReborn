@@ -72,8 +72,8 @@ public class LeatherCollarItem extends BaseCurioItem implements ICurioItemTextur
 
     @OnlyIn(Dist.CLIENT)
     @Override
-    public void appendHoverText(ItemStack stack, Level world, List<Component> list, TooltipFlag flags) {
-        super.appendHoverText(stack, world, list, flags);
+    public void appendHoverText(ItemStack stack, Level level, List<Component> list, TooltipFlag flags) {
+        super.appendHoverText(stack, level, list, flags);
 
         String name1 = "lore.wizards_reborn.leather_collar.0";
         String name2 = "lore.wizards_reborn.leather_collar.1";

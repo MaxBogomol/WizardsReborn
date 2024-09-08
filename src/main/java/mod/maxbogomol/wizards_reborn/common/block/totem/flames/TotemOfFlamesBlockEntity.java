@@ -4,6 +4,7 @@ import mod.maxbogomol.fluffy_fur.client.particle.ParticleBuilder;
 import mod.maxbogomol.fluffy_fur.client.particle.data.ColorParticleData;
 import mod.maxbogomol.fluffy_fur.client.particle.data.GenericParticleData;
 import mod.maxbogomol.fluffy_fur.client.particle.data.LightParticleData;
+import mod.maxbogomol.fluffy_fur.client.particle.data.SpinParticleData;
 import mod.maxbogomol.fluffy_fur.common.block.entity.ExposedBlockSimpleInventory;
 import mod.maxbogomol.fluffy_fur.common.block.entity.TickableBlockEntity;
 import mod.maxbogomol.fluffy_fur.registry.client.FluffyFurParticles;
@@ -74,7 +75,7 @@ public class TotemOfFlamesBlockEntity extends ExposedBlockSimpleInventory implem
                                     .setColorData(ColorParticleData.create(color).build())
                                     .setTransparencyData(GenericParticleData.create(0.35f, 0).build())
                                     .setScaleData(GenericParticleData.create(0.25f, 0).build())
-                                    .randomSpin(0.005f)
+                                    .setSpinData(SpinParticleData.create().randomSpin(0.005f).build())
                                     .setLifetime(60)
                                     .randomVelocity(0.0035f)
                                     .addVelocity(0, 0.015f, 0)
@@ -87,7 +88,7 @@ public class TotemOfFlamesBlockEntity extends ExposedBlockSimpleInventory implem
                                     .setTransparencyData(GenericParticleData.create(0.35f, 0).build())
                                     .setScaleData(GenericParticleData.create(0.25f, 0).build())
                                     .setLightData(LightParticleData.DEFAULT)
-                                    .randomSpin(0.1f)
+                                    .setSpinData(SpinParticleData.create().randomSpin(0.1f).build())
                                     .setLifetime(60)
                                     .randomVelocity(0.0035f)
                                     .addVelocity(0, 0.02f, 0)
@@ -100,7 +101,7 @@ public class TotemOfFlamesBlockEntity extends ExposedBlockSimpleInventory implem
                                         .setColorData(ColorParticleData.create(color).build())
                                         .setTransparencyData(GenericParticleData.create(0.75f, 0).build())
                                         .setScaleData(GenericParticleData.create(0.1f, 0).build())
-                                        .randomSpin(0.1f)
+                                        .setSpinData(SpinParticleData.create().randomSpin(0.1f).build())
                                         .setLifetime(60)
                                         .randomVelocity(0.0035f)
                                         .flatRandomOffset(0.15f, 0.15f, 0.15f)

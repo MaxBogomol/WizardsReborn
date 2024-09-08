@@ -1,7 +1,8 @@
-package mod.maxbogomol.wizards_reborn.common.block.fluid_pipe;
+package mod.maxbogomol.wizards_reborn.common.block.pipe.extractor.fluid;
 
 import mod.maxbogomol.fluffy_fur.common.block.entity.TickableBlockEntity;
-import mod.maxbogomol.wizards_reborn.common.block.pipe.PipeBaseBlock;
+import mod.maxbogomol.wizards_reborn.common.block.pipe.extractor.ExtractorBaseBlock;
+import mod.maxbogomol.wizards_reborn.common.block.pipe.fluid.FluidPipeBaseBlockEntity;
 import mod.maxbogomol.wizards_reborn.registry.common.block.WizardsRebornBlockEntities;
 import mod.maxbogomol.wizards_reborn.registry.common.block.WizardsRebornBlockTags;
 import net.minecraft.core.BlockPos;
@@ -18,9 +19,10 @@ import net.minecraftforge.common.capabilities.ForgeCapabilities;
 import net.minecraftforge.fluids.capability.IFluidHandler;
 import org.jetbrains.annotations.NotNull;
 
-public class FluidPipeBlock extends PipeBaseBlock {
-    public FluidPipeBlock(Properties pProperties) {
-        super(pProperties);
+public class FluidExtractorBlock extends ExtractorBaseBlock {
+    
+    public FluidExtractorBlock(Properties properties) {
+        super(properties);
     }
 
     @Override
@@ -31,11 +33,6 @@ public class FluidPipeBlock extends PipeBaseBlock {
     @Override
     public TagKey<Block> getToggleConnectionTag() {
         return WizardsRebornBlockTags.FLUID_PIPE_CONNECTION_TOGGLE;
-    }
-
-    @Override
-    public boolean connected(Direction direction, BlockState state) {
-        return false;
     }
 
     @Override
@@ -56,8 +53,8 @@ public class FluidPipeBlock extends PipeBaseBlock {
     }
 
     @Override
-    public BlockEntity newBlockEntity(BlockPos pPos, BlockState pState) {
-        return WizardsRebornBlockEntities.FLUID_PIPE.get().create(pPos, pState);
+    public BlockEntity newBlockEntity(BlockPos pos, BlockState state) {
+        return WizardsRebornBlockEntities.FLUID_EXTRACTOR.get().create(pos, state);
     }
 
     @Override
@@ -71,7 +68,7 @@ public class FluidPipeBlock extends PipeBaseBlock {
     }
 
     @Override
-    public int getAnalogOutputSignal(BlockState blockState, Level level, BlockPos pos) {
+    public int getAnalogOutputSignal(BlockState state, Level level, BlockPos pos) {
         FluidPipeBaseBlockEntity tile = (FluidPipeBaseBlockEntity) level.getBlockEntity(pos);
         return Mth.floor(((float) tile.tank.getFluidAmount() / tile.getCapacity()) * 14.0F);
     }

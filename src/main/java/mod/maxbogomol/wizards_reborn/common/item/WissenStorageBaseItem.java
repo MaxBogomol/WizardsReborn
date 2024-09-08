@@ -57,7 +57,7 @@ public class WissenStorageBaseItem extends BlockItem implements IWissenItem, ICu
 
     @OnlyIn(Dist.CLIENT)
     @Override
-    public void appendHoverText(ItemStack stack, Level world, List<Component> list, TooltipFlag flags) {
+    public void appendHoverText(ItemStack stack, Level level, List<Component> list, TooltipFlag flags) {
         if (ClientConfig.NUMERICAL_WISSEN.get()) {
             WissenItemUtil.existWissen(stack);
             list.add(NumericalUtil.getWissenName(WissenItemUtil.getWissen(stack), getMaxWissen()).copy().withStyle(ChatFormatting.GRAY));

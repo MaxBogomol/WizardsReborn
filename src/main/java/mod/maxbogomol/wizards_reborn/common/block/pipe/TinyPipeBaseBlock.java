@@ -34,8 +34,8 @@ public abstract class TinyPipeBaseBlock extends PipeBaseBlock {
         makeShapes(CENTER_AABB, SHAPES);
     }
 
-    public TinyPipeBaseBlock(Properties pProperties) {
-        super(pProperties);
+    public TinyPipeBaseBlock(Properties properties) {
+        super(properties);
         this.registerDefaultState(this.stateDefinition.any().setValue(BlockStateProperties.WATERLOGGED, false));
     }
 

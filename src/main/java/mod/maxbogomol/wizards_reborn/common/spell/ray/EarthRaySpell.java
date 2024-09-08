@@ -36,8 +36,8 @@ public class EarthRaySpell extends RaySpell {
     }
 
     @Override
-    public void onImpact(HitResult ray, Level world, SpellProjectileEntity projectile, Player player, Entity target) {
-        super.onImpact(ray, world, projectile, player, target);
+    public void onImpact(HitResult ray, Level level, SpellProjectileEntity projectile, Player player, Entity target) {
+        super.onImpact(ray, level, projectile, player, target);
 
         if (player != null) {
             if (target.tickCount % 10 == 0) {
@@ -58,8 +58,8 @@ public class EarthRaySpell extends RaySpell {
     }
 
     @Override
-    public void onImpact(HitResult ray, Level world, SpellProjectileEntity projectile, Player player) {
-        super.onImpact(ray, world, projectile, player);
+    public void onImpact(HitResult ray, Level level, SpellProjectileEntity projectile, Player player) {
+        super.onImpact(ray, level, projectile, player);
 
         if (player != null) {
             if (player.isShiftKeyDown()) {
@@ -69,13 +69,13 @@ public class EarthRaySpell extends RaySpell {
                     if (WissenItemUtil.canRemoveWissen(stack, getWissenCostWithStat(projectile.getStats(), player))) {
                         Vec3 vec = getBlockHitOffset(ray, projectile, 0.1f);
                         BlockPos blockPos = BlockPos.containing(vec.x(), vec.y(), vec.z());
-                        BlockState blockState = world.getBlockState(blockPos);
+                        BlockState blockState = level.getBlockState(blockPos);
 
-                        BlockEvent.BreakEvent breakEv = new BlockEvent.BreakEvent(world, blockPos, blockState, player);
+                        BlockEvent.BreakEvent breakEv = new BlockEvent.BreakEvent(level, blockPos, blockState, player);
 
                         if (!blockState.isAir() && !MinecraftForge.EVENT_BUS.post(breakEv)) {
                             if (canBreak(blockState)) {
-                                world.destroyBlock(blockPos, true);
+                                level.destroyBlock(blockPos, true);
 
                                 removeWissen(stack, projectile.getStats(), player);
 
@@ -84,7 +84,7 @@ public class EarthRaySpell extends RaySpell {
                                 float g = color.getGreen() / 255f;
                                 float b = color.getBlue() / 255f;
 
-                                PacketHandler.sendToTracking(world, player.getOnPos(), new EarthRaySpellEffectPacket((float) blockPos.getX() + 0.5f, (float) blockPos.getY() + 0.5f, (float) blockPos.getZ() + 0.5f, r, g, b));
+                                PacketHandler.sendToTracking(level, player.getOnPos(), new EarthRaySpellEffectPacket((float) blockPos.getX() + 0.5f, (float) blockPos.getY() + 0.5f, (float) blockPos.getZ() + 0.5f, r, g, b));
                             }
                         }
                     }

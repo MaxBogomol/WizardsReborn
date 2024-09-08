@@ -48,7 +48,7 @@ public class HolyCrossSpellEffectPacket {
             ctx.get().enqueueWork(new Runnable() {
                 @Override
                 public void run() {
-                    Level world = WizardsReborn.proxy.getLevel();
+                    Level level = WizardsReborn.proxy.getLevel();
 
                     for (int i = 0; i < 4; i++) {
                         if (random.nextFloat() < 0.6f) {
@@ -62,7 +62,7 @@ public class HolyCrossSpellEffectPacket {
                                     .setScaleData(GenericParticleData.create(0.05f, 0.2f).build())
                                     .setLifetime(35)
                                     .addVelocity(-x / 16, -y / 16, -z / 16)
-                                    .spawn(world, msg.X + x, msg.Y + y, msg.Z + z);
+                                    .spawn(level, msg.X + x, msg.Y + y, msg.Z + z);
                         }
                     }
 
@@ -72,7 +72,7 @@ public class HolyCrossSpellEffectPacket {
                             .setScaleData(GenericParticleData.create(0, 0.3f).build())
                             .setLifetime(60)
                             .randomVelocity(0.0125f)
-                            .repeat(world, msg.X, msg.Y, msg.Z, 10, 0.6f);
+                            .repeat(level, msg.X, msg.Y, msg.Z, 10, 0.6f);
 
                     ctx.get().setPacketHandled(true);
                 }

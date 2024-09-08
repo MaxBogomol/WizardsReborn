@@ -77,24 +77,24 @@ public class ArcaneWorkbenchBlock extends HorizontalDirectionalBlock implements 
     }
 
     @Override
-    public void onRemove(@Nonnull BlockState state, @Nonnull Level world, @Nonnull BlockPos pos, @Nonnull BlockState newState, boolean isMoving) {
+    public void onRemove(@Nonnull BlockState state, @Nonnull Level level, @Nonnull BlockPos pos, @Nonnull BlockState newState, boolean isMoving) {
         if (state.getBlock() != newState.getBlock()) {
-            BlockEntity tile = world.getBlockEntity(pos);
+            BlockEntity tile = level.getBlockEntity(pos);
             if (tile instanceof ArcaneWorkbenchBlockEntity workbench) {
                 SimpleContainer inv = new SimpleContainer(workbench.itemHandler.getSlots() + 1);
                 for (int i = 0; i < workbench.itemHandler.getSlots(); i++) {
                     inv.setItem(i, workbench.itemHandler.getStackInSlot(i));
                 }
                 inv.setItem(workbench.itemHandler.getSlots(), workbench.itemOutputHandler.getStackInSlot(0));
-                Containers.dropContents(world, pos, inv);
+                Containers.dropContents(level, pos, inv);
             }
-            super.onRemove(state, world, pos, newState, isMoving);
+            super.onRemove(state, level, pos, newState, isMoving);
         }
     }
 
     @Override
-    public InteractionResult use(BlockState state, Level world, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hit) {
-        if (world.isClientSide) {
+    public InteractionResult use(BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hit) {
+        if (level.isClientSide) {
             return InteractionResult.SUCCESS;
         } else {
             ItemStack stack = player.getItemInHand(hand).copy();
@@ -107,9 +107,9 @@ public class ArcaneWorkbenchBlock extends HorizontalDirectionalBlock implements 
             }
 
             if (!isWand) {
-                BlockEntity tileEntity = world.getBlockEntity(pos);
+                BlockEntity tileEntity = level.getBlockEntity(pos);
 
-                MenuProvider containerProvider = createContainerProvider(world, pos);
+                MenuProvider containerProvider = createContainerProvider(level, pos);
                 NetworkHooks.openScreen(((ServerPlayer) player), containerProvider, tileEntity.getBlockPos());
                 return InteractionResult.CONSUME;
             }
@@ -118,7 +118,7 @@ public class ArcaneWorkbenchBlock extends HorizontalDirectionalBlock implements 
         return InteractionResult.PASS;
     }
 
-    private MenuProvider createContainerProvider(Level worldIn, BlockPos pos) {
+    private MenuProvider createContainerProvider(Level level, BlockPos pos) {
         return new MenuProvider() {
             @Override
             public Component getDisplayName() {
@@ -128,7 +128,7 @@ public class ArcaneWorkbenchBlock extends HorizontalDirectionalBlock implements 
             @Nullable
             @Override
             public AbstractContainerMenu createMenu(int i, Inventory playerInventory, Player playerEntity) {
-                return new ArcaneWorkbenchContainer(i, worldIn, pos, playerInventory, playerEntity);
+                return new ArcaneWorkbenchContainer(i, level, pos, playerInventory, playerEntity);
             }
         };
     }
@@ -139,25 +139,18 @@ public class ArcaneWorkbenchBlock extends HorizontalDirectionalBlock implements 
     }
 
     @Override
-    public BlockState updateShape(BlockState pState, Direction pDirection, BlockState pNeighborState, LevelAccessor pLevel, BlockPos pCurrentPos, BlockPos pNeighborPos) {
-        if (pState.getValue(BlockStateProperties.WATERLOGGED)) {
-            pLevel.scheduleTick(pCurrentPos, Fluids.WATER, Fluids.WATER.getTickDelay(pLevel));
+    public BlockState updateShape(BlockState state, Direction direction, BlockState neighborState, LevelAccessor level, BlockPos currentPos, BlockPos neighborPos) {
+        if (state.getValue(BlockStateProperties.WATERLOGGED)) {
+            level.scheduleTick(currentPos, Fluids.WATER, Fluids.WATER.getTickDelay(level));
         }
 
-        return super.updateShape(pState, pDirection, pNeighborState, pLevel, pCurrentPos, pNeighborPos);
-    }
-
-    @Override
-    public boolean triggerEvent(BlockState state, Level world, BlockPos pos, int id, int param) {
-        super.triggerEvent(state, world, pos, id, param);
-        BlockEntity tileentity = world.getBlockEntity(pos);
-        return tileentity != null && tileentity.triggerEvent(id, param);
+        return super.updateShape(state, direction, neighborState, level, currentPos, neighborPos);
     }
 
     @Nullable
     @Override
-    public BlockEntity newBlockEntity(BlockPos pPos, BlockState pState) {
-        return new ArcaneWorkbenchBlockEntity(pPos, pState);
+    public BlockEntity newBlockEntity(BlockPos pos, BlockState state) {
+        return new ArcaneWorkbenchBlockEntity(pos, state);
     }
 
     @Nullable
@@ -172,7 +165,7 @@ public class ArcaneWorkbenchBlock extends HorizontalDirectionalBlock implements 
     }
 
     @Override
-    public int getAnalogOutputSignal(BlockState blockState, Level level, BlockPos pos) {
+    public int getAnalogOutputSignal(BlockState state, Level level, BlockPos pos) {
         ArcaneWorkbenchBlockEntity workbench = (ArcaneWorkbenchBlockEntity) level.getBlockEntity(pos);
         SimpleContainer inv = new SimpleContainer(workbench.itemHandler.getSlots() + 1);
         for (int i = 0; i < workbench.itemHandler.getSlots(); i++) {

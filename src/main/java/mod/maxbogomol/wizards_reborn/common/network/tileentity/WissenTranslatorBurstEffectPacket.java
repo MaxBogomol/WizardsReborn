@@ -3,6 +3,7 @@ package mod.maxbogomol.wizards_reborn.common.network.tileentity;
 import mod.maxbogomol.fluffy_fur.client.particle.ParticleBuilder;
 import mod.maxbogomol.fluffy_fur.client.particle.data.ColorParticleData;
 import mod.maxbogomol.fluffy_fur.client.particle.data.GenericParticleData;
+import mod.maxbogomol.fluffy_fur.client.particle.data.SpinParticleData;
 import mod.maxbogomol.fluffy_fur.registry.client.FluffyFurParticles;
 import mod.maxbogomol.wizards_reborn.WizardsReborn;
 import mod.maxbogomol.wizards_reborn.client.event.WissenLimitHandler;
@@ -62,7 +63,7 @@ public class WissenTranslatorBurstEffectPacket {
             ctx.get().enqueueWork(new Runnable() {
                 @Override
                 public void run() {
-                    Level world = WizardsReborn.proxy.getLevel();
+                    Level level = WizardsReborn.proxy.getLevel();
 
                     WissenLimitHandler.wissenCount++;
 
@@ -80,17 +81,17 @@ public class WissenTranslatorBurstEffectPacket {
                                     .setScaleData(GenericParticleData.create(0.2f, 0).build())
                                     .setLifetime(20)
                                     .randomVelocity(0.025f)
-                                    .spawn(world, msg.posX, msg.posY, msg.posZ);
+                                    .spawn(level, msg.posX, msg.posY, msg.posZ);
                         }
                         if (random.nextFloat() < (0.75f * (1f - (wissenCount / 200f))) + 0.05f) {
                             ParticleBuilder.create(FluffyFurParticles.SPARKLE)
                                     .setColorData(ColorParticleData.create(msg.colorR, msg.colorG, msg.colorB).build())
                                     .setTransparencyData(GenericParticleData.create(0.25f, 0).build())
                                     .setScaleData(GenericParticleData.create(0.075f, 0).build())
-                                    .randomSpin(0.5f)
+                                    .setSpinData(SpinParticleData.create().randomSpin(0.5f).build())
                                     .setLifetime(30)
                                     .randomVelocity(0.025f)
-                                    .spawn(world, msg.posX, msg.posY, msg.posZ);
+                                    .spawn(level, msg.posX, msg.posY, msg.posZ);
                         }
                     }
                     ctx.get().setPacketHandled(true);

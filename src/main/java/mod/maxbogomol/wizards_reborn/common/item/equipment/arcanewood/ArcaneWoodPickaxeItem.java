@@ -26,12 +26,12 @@ public class ArcaneWoodPickaxeItem extends ArcanePickaxeItem {
         arcaneEnchantmentTypes.add(ArcaneEnchantmentType.WOODEN);
     }
 
-    public int repairTick(ItemStack stack, Level world, Entity entity) {
+    public int repairTick(ItemStack stack, Level level, Entity entity) {
         return 800;
     }
 
-    public int getRepairTick(ItemStack stack, Level world, Entity entity) {
-        int tick = repairTick(stack, world, entity) - (150 * getLifeRoots(stack));
+    public int getRepairTick(ItemStack stack, Level level, Entity entity) {
+        int tick = repairTick(stack, level, entity) - (150 * getLifeRoots(stack));
         if (tick < 50) tick = 50;
         return tick;
     }
@@ -40,26 +40,26 @@ public class ArcaneWoodPickaxeItem extends ArcanePickaxeItem {
         return ArcaneEnchantmentUtil.getArcaneEnchantment(stack, WizardsRebornArcaneEnchantments.LIFE_ROOTS);
     }
 
-    public SoundEvent getRepairSound(ItemStack stack, Level world, Entity entity) {
+    public SoundEvent getRepairSound(ItemStack stack, Level level, Entity entity) {
         return WizardsRebornSounds.ARCANE_WOOD_PLACE.get();
     }
 
     @Override
-    public void inventoryTick(ItemStack stack, Level world, Entity entity, int slot, boolean isSelected) {
-        if (!world.isClientSide) {
-            if (entity.tickCount % getRepairTick(stack, world, entity) == 0 && stack.getDamageValue() > 0) {
+    public void inventoryTick(ItemStack stack, Level level, Entity entity, int slot, boolean isSelected) {
+        if (!level.isClientSide) {
+            if (entity.tickCount % getRepairTick(stack, level, entity) == 0 && stack.getDamageValue() > 0) {
                 stack.setDamageValue(stack.getDamageValue() - 1);
-                world.playSound(null, entity.getX(), entity.getY(), entity.getZ(), getRepairSound(stack, world, entity), SoundSource.PLAYERS, 0.05f, 2f);
+                level.playSound(null, entity.getX(), entity.getY(), entity.getZ(), getRepairSound(stack, level, entity), SoundSource.PLAYERS, 0.05f, 2f);
             }
         }
-        super.inventoryTick(stack, world, entity, slot, isSelected);
+        super.inventoryTick(stack, level, entity, slot, isSelected);
     }
 
     @Override
-    public InteractionResultHolder<ItemStack> use(Level world, Player player, InteractionHand hand) {
+    public InteractionResultHolder<ItemStack> use(Level level, Player player, InteractionHand hand) {
         ItemStack stack = player.getItemInHand(hand);
 
-        if (!world.isClientSide) {
+        if (!level.isClientSide) {
             if (stack.getDamageValue() > 0) {
                 ItemStack offStack = player.getItemInHand(InteractionHand.MAIN_HAND);
                 if (hand == InteractionHand.MAIN_HAND) {
@@ -69,12 +69,12 @@ public class ArcaneWoodPickaxeItem extends ArcanePickaxeItem {
                 if (offStack.getItem().equals(repairItem)) {
                     offStack.setCount(offStack.getCount() - 1);
                     stack.setDamageValue(0);
-                    world.playSound(null, player.getX(), player.getY(), player.getZ(), getRepairSound(stack, world, player), SoundSource.PLAYERS, 1.0f, 1.5f);
+                    level.playSound(null, player.getX(), player.getY(), player.getZ(), getRepairSound(stack, level, player), SoundSource.PLAYERS, 1.0f, 1.5f);
                     return InteractionResultHolder.success(stack);
                 }
             }
         }
 
-        return super.use(world, player, hand);
+        return super.use(level, player, hand);
     }
 }

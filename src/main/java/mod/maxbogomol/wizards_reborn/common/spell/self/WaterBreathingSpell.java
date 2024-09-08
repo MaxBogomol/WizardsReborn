@@ -38,7 +38,7 @@ public class WaterBreathingSpell extends SelfSpell {
     }
 
     @Override
-    public void selfSpell(Level world, Player player, InteractionHand hand) {
+    public void selfSpell(Level level, Player player, InteractionHand hand) {
         ItemStack stack = player.getItemInHand(hand);
         CompoundTag stats = getStats(stack);
 

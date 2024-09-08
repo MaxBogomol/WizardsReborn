@@ -3,6 +3,7 @@ package mod.maxbogomol.wizards_reborn.client.particle;
 import mod.maxbogomol.fluffy_fur.client.particle.ParticleBuilder;
 import mod.maxbogomol.fluffy_fur.client.particle.data.ColorParticleData;
 import mod.maxbogomol.fluffy_fur.client.particle.data.GenericParticleData;
+import mod.maxbogomol.fluffy_fur.client.particle.data.SpinParticleData;
 import mod.maxbogomol.fluffy_fur.registry.client.FluffyFurParticles;
 import net.minecraft.util.Mth;
 import net.minecraft.world.level.Level;
@@ -51,7 +52,7 @@ public class ArcaneIteratorBurst {
                 .setColorData(ColorParticleData.create(R, G, B).build())
                 .setTransparencyData(GenericParticleData.create(0.25f, 0).build())
                 .setScaleData(GenericParticleData.create(0.4f, 0).build())
-                .randomSpin(0.35f)
+                .setSpinData(SpinParticleData.create().randomSpin(0.35f).build())
                 .setLifetime(20)
                 .randomVelocity(0.025f)
                 .repeat(level, x, y, z, 4);
@@ -102,7 +103,7 @@ public class ArcaneIteratorBurst {
                         .setColorData(ColorParticleData.create(R, G, B).build())
                         .setTransparencyData(GenericParticleData.create(0.25f, 0).build())
                         .setScaleData(GenericParticleData.create(0.1f, 0).build())
-                        .randomSpin(0.5f)
+                        .setSpinData(SpinParticleData.create().randomSpin(0.5f).build())
                         .setLifetime(30)
                         .randomVelocity(0.0125f)
                         .spawn(level, X, Y, Z);

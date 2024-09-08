@@ -1,6 +1,6 @@
-package mod.maxbogomol.wizards_reborn.common.block.fluid_extractor;
+package mod.maxbogomol.wizards_reborn.common.block.pipe.extractor.fluid;
 
-import mod.maxbogomol.wizards_reborn.common.block.fluid_pipe.FluidPipeBaseBlockEntity;
+import mod.maxbogomol.wizards_reborn.common.block.pipe.fluid.FluidPipeBaseBlockEntity;
 import mod.maxbogomol.wizards_reborn.registry.common.block.WizardsRebornBlockEntities;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -22,8 +22,8 @@ public class FluidExtractorBlockEntity extends FluidPipeBaseBlockEntity {
     boolean active;
     public static final int MAX_DRAIN = 150;
 
-    public FluidExtractorBlockEntity(BlockEntityType<?> pType, BlockPos pPos, BlockState pBlockState) {
-        super(pType, pPos, pBlockState);
+    public FluidExtractorBlockEntity(BlockEntityType<?> type, BlockPos pos, BlockState blockState) {
+        super(type, pos, blockState);
     }
 
     public FluidExtractorBlockEntity(BlockPos pos, BlockState state) {

@@ -78,7 +78,7 @@ public class SpellProjectileRayEffectPacket {
             ctx.get().enqueueWork(new Runnable() {
                 @Override
                 public void run() {
-                    Level world = WizardsReborn.proxy.getLevel();
+                    Level level = WizardsReborn.proxy.getLevel();
 
                     Vec3 pos = new Vec3(msg.posToX, msg.posToY, msg.posToZ);
                     Vec3 norm = new Vec3(msg.motionX, msg.motionY, msg.motionZ).normalize().scale(0.025f);
@@ -96,7 +96,7 @@ public class SpellProjectileRayEffectPacket {
                                     .setLifetime(20)
                                     .randomVelocity(0.001f)
                                     .addVelocity(-norm.x, -norm.y, -norm.z)
-                                    .spawn(world, lerpX, lerpY, lerpZ);
+                                    .spawn(level, lerpX, lerpY, lerpZ);
                         }
 
                         if (random.nextFloat() < 0.05f) {
@@ -107,7 +107,7 @@ public class SpellProjectileRayEffectPacket {
                                     .setLifetime(30)
                                     .randomVelocity(0.002f)
                                     .addVelocity(-norm.x, -norm.y, -norm.z)
-                                    .spawn(world, lerpX, lerpY, lerpZ);
+                                    .spawn(level, lerpX, lerpY, lerpZ);
                         }
                     }
                     ctx.get().setPacketHandled(true);

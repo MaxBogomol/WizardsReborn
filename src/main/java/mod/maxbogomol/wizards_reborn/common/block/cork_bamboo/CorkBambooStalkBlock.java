@@ -27,12 +27,12 @@ public class CorkBambooStalkBlock extends BambooStalkBlock {
 
     @Override
     @Nullable
-    public BlockState getStateForPlacement(BlockPlaceContext pContext) {
-        FluidState fluidstate = pContext.getLevel().getFluidState(pContext.getClickedPos());
+    public BlockState getStateForPlacement(BlockPlaceContext context) {
+        FluidState fluidstate = context.getLevel().getFluidState(context.getClickedPos());
         if (!fluidstate.isEmpty()) {
             return null;
         } else {
-            BlockState blockstate = pContext.getLevel().getBlockState(pContext.getClickedPos().below());
+            BlockState blockstate = context.getLevel().getBlockState(context.getClickedPos().below());
             if (blockstate.is(WizardsRebornBlockTags.CORK_BAMBOO_PLANTABLE_ON)) {
                 if (blockstate.is(WizardsRebornBlocks.CORK_BAMBOO_SAPLING.get())) {
                     return this.defaultBlockState().setValue(AGE, Integer.valueOf(0));
@@ -40,7 +40,7 @@ public class CorkBambooStalkBlock extends BambooStalkBlock {
                     int i = blockstate.getValue(AGE) > 0 ? 1 : 0;
                     return this.defaultBlockState().setValue(AGE, Integer.valueOf(i));
                 } else {
-                    BlockState blockstate1 = pContext.getLevel().getBlockState(pContext.getClickedPos().above());
+                    BlockState blockstate1 = context.getLevel().getBlockState(context.getClickedPos().above());
                     return blockstate1.is(WizardsRebornBlocks.CORK_BAMBOO.get()) ? this.defaultBlockState().setValue(AGE, blockstate1.getValue(AGE)) : WizardsRebornBlocks.CORK_BAMBOO.get().defaultBlockState();
                 }
             } else {
@@ -51,40 +51,40 @@ public class CorkBambooStalkBlock extends BambooStalkBlock {
 
     @Override
     @Nullable
-    public boolean canSurvive(BlockState pState, LevelReader pLevel, BlockPos pPos) {
-        return pLevel.getBlockState(pPos.below()).is(WizardsRebornBlockTags.CORK_BAMBOO_PLANTABLE_ON);
+    public boolean canSurvive(BlockState state, LevelReader level, BlockPos pos) {
+        return level.getBlockState(pos.below()).is(WizardsRebornBlockTags.CORK_BAMBOO_PLANTABLE_ON);
     }
 
     @Override
-    public BlockState updateShape(BlockState pState, Direction pDirection, BlockState pNeighborState, LevelAccessor pLevel, BlockPos pCurrentPos, BlockPos pNeighborPos) {
-        if (!pState.canSurvive(pLevel, pCurrentPos)) {
-            pLevel.scheduleTick(pCurrentPos, this, 1);
+    public BlockState updateShape(BlockState state, Direction direction, BlockState neighborState, LevelAccessor level, BlockPos currentPos, BlockPos neighborPos) {
+        if (!state.canSurvive(level, currentPos)) {
+            level.scheduleTick(currentPos, this, 1);
         }
 
-        if (pDirection == Direction.UP && pNeighborState.is(WizardsRebornBlocks.CORK_BAMBOO.get()) && pNeighborState.getValue(AGE) > pState.getValue(AGE)) {
-            pLevel.setBlock(pCurrentPos, pState.cycle(AGE), 2);
+        if (direction == Direction.UP && neighborState.is(WizardsRebornBlocks.CORK_BAMBOO.get()) && neighborState.getValue(AGE) > state.getValue(AGE)) {
+            level.setBlock(currentPos, state.cycle(AGE), 2);
         }
 
-        return super.updateShape(pState, pDirection, pNeighborState, pLevel, pCurrentPos, pNeighborPos);
+        return super.updateShape(state, direction, neighborState, level, currentPos, neighborPos);
     }
 
     @Override
-    public ItemStack getCloneItemStack(BlockGetter blockGetter, BlockPos blockPos, BlockState blockState) {
+    public ItemStack getCloneItemStack(BlockGetter level, BlockPos pos, BlockState state) {
         return new ItemStack(WizardsRebornItems.CORK_BAMBOO.get());
     }
 
-    protected void growBamboo(BlockState pState, Level pLevel, BlockPos pPos, RandomSource pRandom, int pAge) {
-        BlockState blockstate = pLevel.getBlockState(pPos.below());
-        BlockPos blockpos = pPos.below(2);
-        BlockState blockstate1 = pLevel.getBlockState(blockpos);
+    protected void growBamboo(BlockState state, Level level, BlockPos pos, RandomSource random, int age) {
+        BlockState blockstate = level.getBlockState(pos.below());
+        BlockPos blockpos = pos.below(2);
+        BlockState blockstate1 = level.getBlockState(blockpos);
         BambooLeaves bambooleaves = BambooLeaves.NONE;
-        if (pAge >= 1) {
+        if (age >= 1) {
             if (blockstate.is(WizardsRebornBlocks.CORK_BAMBOO.get()) && blockstate.getValue(LEAVES) != BambooLeaves.NONE) {
                 if (blockstate.is(WizardsRebornBlocks.CORK_BAMBOO.get()) && blockstate.getValue(LEAVES) != BambooLeaves.NONE) {
                     bambooleaves = BambooLeaves.LARGE;
                     if (blockstate1.is(WizardsRebornBlocks.CORK_BAMBOO.get())) {
-                        pLevel.setBlock(pPos.below(), blockstate.setValue(LEAVES, BambooLeaves.SMALL), 3);
-                        pLevel.setBlock(blockpos, blockstate1.setValue(LEAVES, BambooLeaves.NONE), 3);
+                        level.setBlock(pos.below(), blockstate.setValue(LEAVES, BambooLeaves.SMALL), 3);
+                        level.setBlock(blockpos, blockstate1.setValue(LEAVES, BambooLeaves.NONE), 3);
                     }
                 }
             } else {
@@ -92,22 +92,22 @@ public class CorkBambooStalkBlock extends BambooStalkBlock {
             }
         }
 
-        int i = pState.getValue(AGE) != 1 && !blockstate1.is(WizardsRebornBlocks.CORK_BAMBOO.get()) ? 0 : 1;
-        int j = (pAge < 11 || !(pRandom.nextFloat() < 0.25F)) && pAge != 15 ? 0 : 1;
-        pLevel.setBlock(pPos.above(), this.defaultBlockState().setValue(AGE, Integer.valueOf(i)).setValue(LEAVES, bambooleaves).setValue(STAGE, Integer.valueOf(j)), 3);
+        int i = state.getValue(AGE) != 1 && !blockstate1.is(WizardsRebornBlocks.CORK_BAMBOO.get()) ? 0 : 1;
+        int j = (age < 11 || !(random.nextFloat() < 0.25F)) && age != 15 ? 0 : 1;
+        level.setBlock(pos.above(), this.defaultBlockState().setValue(AGE, Integer.valueOf(i)).setValue(LEAVES, bambooleaves).setValue(STAGE, Integer.valueOf(j)), 3);
     }
 
-    protected int getHeightAboveUpToMax(BlockGetter pLevel, BlockPos pPos) {
+    protected int getHeightAboveUpToMax(BlockGetter level, BlockPos pos) {
         int i;
-        for(i = 0; i < 16 && pLevel.getBlockState(pPos.above(i + 1)).is(WizardsRebornBlocks.CORK_BAMBOO.get()); ++i) {
+        for(i = 0; i < 16 && level.getBlockState(pos.above(i + 1)).is(WizardsRebornBlocks.CORK_BAMBOO.get()); ++i) {
         }
 
         return i;
     }
 
-    protected int getHeightBelowUpToMax(BlockGetter pLevel, BlockPos pPos) {
+    protected int getHeightBelowUpToMax(BlockGetter level, BlockPos pos) {
         int i;
-        for(i = 0; i < 16 && pLevel.getBlockState(pPos.below(i + 1)).is(WizardsRebornBlocks.CORK_BAMBOO.get()); ++i) {
+        for(i = 0; i < 16 && level.getBlockState(pos.below(i + 1)).is(WizardsRebornBlocks.CORK_BAMBOO.get()); ++i) {
         }
 
         return i;

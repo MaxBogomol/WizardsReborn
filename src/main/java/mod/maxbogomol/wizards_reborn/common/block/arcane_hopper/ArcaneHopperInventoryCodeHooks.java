@@ -212,17 +212,17 @@ public class ArcaneHopperInventoryCodeHooks {
         return true;
     }
 
-    public static Optional<Pair<IItemHandler, Object>> getItemHandler(Level worldIn, double x, double y, double z, final Direction side)
+    public static Optional<Pair<IItemHandler, Object>> getItemHandler(Level level, double x, double y, double z, final Direction side)
     {
         int i = Mth.floor(x);
         int j = Mth.floor(y);
         int k = Mth.floor(z);
         BlockPos blockpos = new BlockPos(i, j, k);
-        net.minecraft.world.level.block.state.BlockState state = worldIn.getBlockState(blockpos);
+        net.minecraft.world.level.block.state.BlockState state = level.getBlockState(blockpos);
 
         if (state.hasBlockEntity())
         {
-            BlockEntity blockEntity = worldIn.getBlockEntity(blockpos);
+            BlockEntity blockEntity = level.getBlockEntity(blockpos);
             if (blockEntity != null)
             {
                 return blockEntity.getCapability(ForgeCapabilities.ITEM_HANDLER, side)

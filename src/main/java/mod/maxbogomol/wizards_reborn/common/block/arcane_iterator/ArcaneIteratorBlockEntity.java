@@ -3,6 +3,7 @@ package mod.maxbogomol.wizards_reborn.common.block.arcane_iterator;
 import mod.maxbogomol.fluffy_fur.client.particle.ParticleBuilder;
 import mod.maxbogomol.fluffy_fur.client.particle.data.ColorParticleData;
 import mod.maxbogomol.fluffy_fur.client.particle.data.GenericParticleData;
+import mod.maxbogomol.fluffy_fur.client.particle.data.SpinParticleData;
 import mod.maxbogomol.fluffy_fur.common.block.entity.BlockEntityBase;
 import mod.maxbogomol.fluffy_fur.common.block.entity.TickableBlockEntity;
 import mod.maxbogomol.fluffy_fur.common.easing.Easing;
@@ -276,7 +277,7 @@ public class ArcaneIteratorBlockEntity extends BlockEntityBase implements Tickab
                                 .setColorData(ColorParticleData.create(Config.wissenColorR(), Config.wissenColorG(), Config.wissenColorB()).build())
                                 .setTransparencyData(GenericParticleData.create(0.25f, 0).build())
                                 .setScaleData(GenericParticleData.create(0.05f * getStage(), 0.1f * getStage(), 0).setEasing(Easing.QUINTIC_IN_OUT).build())
-                                .randomSpin(0.5f)
+                                .setSpinData(SpinParticleData.create().randomSpin(0.5f).build())
                                 .setLifetime(30)
                                 .randomVelocity(0.015f * getStage())
                                 .spawn(level, getBlockPos().getX() + 0.5F, getBlockPos().getY() - 0.7F, getBlockPos().getZ() + 0.5F);
@@ -320,7 +321,7 @@ public class ArcaneIteratorBlockEntity extends BlockEntityBase implements Tickab
                                 .setColorData(ColorParticleData.create(0.611f, 0.352f, 0.447f, 0.807f, 0.800f, 0.639f).build())
                                 .setTransparencyData(GenericParticleData.create(0.3f, 0).build())
                                 .setScaleData(GenericParticleData.create(0.5f, 0).build())
-                                .randomSpin(0.25f)
+                                .setSpinData(SpinParticleData.create().randomSpin(0.25f).build())
                                 .setLifetime(30)
                                 .randomVelocity(0.0125f)
                                 .spawn(level, getBlockPos().getX() + 0.5F, getBlockPos().getY() + 1F, getBlockPos().getZ() + 0.5F);
@@ -376,7 +377,7 @@ public class ArcaneIteratorBlockEntity extends BlockEntityBase implements Tickab
                 .setColorData(ColorParticleData.create(0.611f, 0.352f, 0.447f, 0.807f, 0.800f, 0.639f).build())
                 .setTransparencyData(GenericParticleData.create(0.4f, 0).build())
                 .setScaleData(GenericParticleData.create(0.5f, 0).build())
-                .randomSpin(0.25f)
+                .setSpinData(SpinParticleData.create().randomSpin(0.25f).build())
                 .setLifetime(120)
                 .addVelocity(vx, vy, vz)
                 .spawn(level, worldPosition.getX() + 0.5F, worldPosition.getY() + 0.5F, worldPosition.getZ() + 0.5F);

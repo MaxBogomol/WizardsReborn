@@ -30,10 +30,10 @@ public class KnowledgeSrollItem extends ArcanumItem {
     }
 
     @Override
-    public InteractionResultHolder<ItemStack> use(Level world, Player player, InteractionHand hand) {
+    public InteractionResultHolder<ItemStack> use(Level level, Player player, InteractionHand hand) {
         ItemStack stack = player.getItemInHand(hand);
 
-        if (!world.isClientSide()) {
+        if (!level.isClientSide()) {
             CompoundTag nbt = stack.getOrCreateTag();
             if (!nbt.contains("knowledges")) {
                 ListTag knowledges = new ListTag();
@@ -44,7 +44,7 @@ public class KnowledgeSrollItem extends ArcanumItem {
                 }
                 nbt.put("knowledges", knowledges);
                 nbt.putUUID("player", player.getUUID());
-                world.playSound(null, player.getX(), player.getY(), player.getZ(), SoundEvents.ENCHANTMENT_TABLE_USE, SoundSource.PLAYERS, 1.0f, 1.2f);
+                level.playSound(null, player.getX(), player.getY(), player.getZ(), SoundEvents.ENCHANTMENT_TABLE_USE, SoundSource.PLAYERS, 1.0f, 1.2f);
             } else {
                 ListTag knowledges = nbt.getList("knowledges", Tag.TAG_STRING);
                 for (int i = 0; i < knowledges.size(); i++) {
@@ -57,12 +57,12 @@ public class KnowledgeSrollItem extends ArcanumItem {
                 }
 
                 if (nbt.contains("player")) {
-                    Player playerFrom = world.getPlayerByUUID(nbt.getUUID("player"));
+                    Player playerFrom = level.getPlayerByUUID(nbt.getUUID("player"));
                     if (playerFrom != null) {
                         player.sendSystemMessage(Component.translatable("message.wizards_reborn.knowledge_scroll", playerFrom.getName()).withStyle(ChatFormatting.GRAY));
                     }
                 }
-                world.playSound(null, player.getX(), player.getY(), player.getZ(), SoundEvents.ENCHANTMENT_TABLE_USE, SoundSource.PLAYERS, 1.0f, 1.5f);
+                level.playSound(null, player.getX(), player.getY(), player.getZ(), SoundEvents.ENCHANTMENT_TABLE_USE, SoundSource.PLAYERS, 1.0f, 1.5f);
             }
         }
 
@@ -71,10 +71,10 @@ public class KnowledgeSrollItem extends ArcanumItem {
 
     @OnlyIn(Dist.CLIENT)
     @Override
-    public void appendHoverText(ItemStack stack, Level world, List<Component> list, TooltipFlag flags) {
+    public void appendHoverText(ItemStack stack, Level level, List<Component> list, TooltipFlag flags) {
         CompoundTag nbt = stack.getOrCreateTag();
         if (nbt.contains("player")) {
-            Player player = world.getPlayerByUUID(nbt.getUUID("player"));
+            Player player = level.getPlayerByUUID(nbt.getUUID("player"));
             if (player != null) {
                 list.add(Component.translatable("lore.wizards_reborn.knowledge_scroll", player.getName()).withStyle(ChatFormatting.GRAY));
             }

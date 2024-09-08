@@ -19,7 +19,7 @@ public class PetalsOfInnocenceBlock extends PinkPetalsBlock {
     }
 
     @OnlyIn(Dist.CLIENT)
-    public void animateTick(BlockState state, Level world, BlockPos pos, RandomSource random) {
+    public void animateTick(BlockState state, Level level, BlockPos pos, RandomSource random) {
         if (random.nextFloat() < 0.1f) {
             double X = (random.nextDouble() - 0.5D);
             double Z = (random.nextDouble() - 0.5D);
@@ -29,7 +29,7 @@ public class PetalsOfInnocenceBlock extends PinkPetalsBlock {
                     .setScaleData(GenericParticleData.create(0.05f, 0).build())
                     .setLifetime(10)
                     .addVelocity(-(X / 100), (random.nextDouble() / 40), -(Z / 100))
-                    .spawn(world, pos.getX() + 0.5F + X, pos.getY() + 0.05F, pos.getZ() + 0.5F + Z);
+                    .spawn(level, pos.getX() + 0.5F + X, pos.getY() + 0.05F, pos.getZ() + 0.5F + Z);
         }
     }
 }

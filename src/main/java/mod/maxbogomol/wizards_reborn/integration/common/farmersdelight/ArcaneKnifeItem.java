@@ -43,15 +43,15 @@ public class ArcaneKnifeItem extends KnifeItem implements IArcaneItem {
 
     @OnlyIn(Dist.CLIENT)
     @Override
-    public void appendHoverText(ItemStack stack, Level world, List<Component> list, TooltipFlag flags) {
+    public void appendHoverText(ItemStack stack, Level level, List<Component> list, TooltipFlag flags) {
         Skin skin = Skin.getSkinFromItem(stack);
         if (skin != null) list.add(skin.getSkinComponent());
-        list.addAll(ArcaneEnchantmentUtil.appendHoverText(stack, world, flags));
+        list.addAll(ArcaneEnchantmentUtil.appendHoverText(stack, level, flags));
     }
 
     @Override
-    public void inventoryTick(ItemStack stack, Level world, Entity entity, int slot, boolean isSelected) {
-        ArcaneEnchantmentUtil.inventoryTick(stack, world, entity, slot, isSelected);
+    public void inventoryTick(ItemStack stack, Level level, Entity entity, int slot, boolean isSelected) {
+        ArcaneEnchantmentUtil.inventoryTick(stack, level, entity, slot, isSelected);
     }
 
     @Override

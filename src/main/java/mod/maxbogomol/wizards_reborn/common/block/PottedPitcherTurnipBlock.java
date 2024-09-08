@@ -14,18 +14,19 @@ import javax.annotation.Nonnull;
 import java.util.stream.Stream;
 
 public class PottedPitcherTurnipBlock extends FlowerPotBlock {
+
     private static final VoxelShape SHAPE = Stream.of(
                     Block.box(5.0D, 0.0D, 5.0D, 11.0D, 6.0D, 11.0D),
                     Block.box(3, 6, 3, 13, 12, 13)
     ).reduce((v1, v2) -> Shapes.join(v1, v2, BooleanOp.OR)).get();
 
-    public PottedPitcherTurnipBlock(Block content, Properties pProperties) {
-        super(content, pProperties);
+    public PottedPitcherTurnipBlock(Block content, Properties properties) {
+        super(content, properties);
     }
 
     @Nonnull
     @Override
-    public VoxelShape getShape(BlockState state, BlockGetter world, BlockPos pos, CollisionContext ctx) {
+    public VoxelShape getShape(BlockState state, BlockGetter level, BlockPos pos, CollisionContext context) {
         return SHAPE;
     }
 }

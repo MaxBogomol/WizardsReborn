@@ -4,6 +4,7 @@ import mod.maxbogomol.fluffy_fur.client.particle.ParticleBuilder;
 import mod.maxbogomol.fluffy_fur.client.particle.data.ColorParticleData;
 import mod.maxbogomol.fluffy_fur.client.particle.data.GenericParticleData;
 import mod.maxbogomol.fluffy_fur.client.particle.data.LightParticleData;
+import mod.maxbogomol.fluffy_fur.client.particle.data.SpinParticleData;
 import mod.maxbogomol.fluffy_fur.registry.client.FluffyFurParticles;
 import mod.maxbogomol.fluffy_fur.registry.client.FluffyFurRenderTypes;
 import mod.maxbogomol.wizards_reborn.api.crystal.CrystalUtil;
@@ -34,23 +35,23 @@ public class FogSpell extends Spell {
     }
 
     @Override
-    public boolean canSpellAir(Level world, Player player, InteractionHand hand) {
+    public boolean canSpellAir(Level level, Player player, InteractionHand hand) {
         return false;
     }
 
     @Override
     public InteractionResult onWandUseOn(ItemStack stack, UseOnContext context) {
-        Level world = context.getLevel();
+        Level level = context.getLevel();
         Player player = context.getPlayer();
 
-        if (!world.isClientSide && canSpell(world, player, context.getHand())) {
+        if (!level.isClientSide && canSpell(level, player, context.getHand())) {
             CompoundTag stats = getStats(stack);
 
             Vec3 pos = context.getClickedPos().getCenter();
-            SpellProjectileEntity entity = new SpellProjectileEntity(WizardsRebornEntities.SPELL_PROJECTILE.get(), world).shoot(
+            SpellProjectileEntity entity = new SpellProjectileEntity(WizardsRebornEntities.SPELL_PROJECTILE.get(), level).shoot(
                     pos.x, pos.y + 0.5, pos.z, 0, 0, 0, player.getUUID(), this.getId(), stats
             );
-            world.addFreshEntity(entity);
+            level.addFreshEntity(entity);
 
             setCooldown(stack, stats);
             removeWissen(stack, stats, player);
@@ -126,7 +127,7 @@ public class FogSpell extends Spell {
                         .setColorData(ColorParticleData.create(color).build())
                         .setTransparencyData(GenericParticleData.create(0.45f, 0).build())
                         .setScaleData(GenericParticleData.create(0.5f).build())
-                        .randomSpin(0.1f)
+                        .setSpinData(SpinParticleData.create().randomSpin(0.1f).build())
                         .setLifetime(20)
                         .randomVelocity(0.007f)
                         .flatRandomOffset(0.5f, 0, 0.5f)
@@ -139,7 +140,7 @@ public class FogSpell extends Spell {
                         .setTransparencyData(GenericParticleData.create(0.35f, 0).build())
                         .setScaleData(GenericParticleData.create(0.5f).build())
                         .setLightData(LightParticleData.DEFAULT)
-                        .randomSpin(0.1f)
+                        .setSpinData(SpinParticleData.create().randomSpin(0.1f).build())
                         .setLifetime(20)
                         .randomVelocity(0.007f)
                         .flatRandomOffset(0.5f, 0, 0.5f)

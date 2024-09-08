@@ -48,14 +48,14 @@ public class FireRaySpellEffectPacket {
             ctx.get().enqueueWork(new Runnable() {
                 @Override
                 public void run() {
-                    Level world = WizardsReborn.proxy.getLevel();
+                    Level level = WizardsReborn.proxy.getLevel();
                     ParticleBuilder.create(FluffyFurParticles.WISP)
                             .setColorData(ColorParticleData.create(msg.colorR, msg.colorG, msg.colorB).build())
                             .setTransparencyData(GenericParticleData.create(0.3f, 0).build())
                             .setScaleData(GenericParticleData.create(0.3f, 0).build())
                             .setLifetime(40)
                             .randomVelocity(0.05f)
-                            .repeat(world, msg.X, msg.Y, msg.Z, 15, 0.6f);
+                            .repeat(level, msg.X, msg.Y, msg.Z, 15, 0.6f);
                     ParticleBuilder.create(FluffyFurParticles.WISP)
                             .setColorData(ColorParticleData.create(0.979f, 0.912f, 0.585f).build())
                             .setTransparencyData(GenericParticleData.create(0.4f, 0).build())
@@ -63,12 +63,12 @@ public class FireRaySpellEffectPacket {
                             .setLifetime(60)
                             .setGravity(1f)
                             .randomVelocity(0.085f)
-                            .repeat(world, msg.X, msg.Y, msg.Z, 15, 0.1f);
+                            .repeat(level, msg.X, msg.Y, msg.Z, 15, 0.1f);
 
 
                     for (int i = 0; i < 15; i++) {
                         if (random.nextFloat() < 0.4f) {
-                            world.addParticle(ParticleTypes.LARGE_SMOKE,
+                            level.addParticle(ParticleTypes.LARGE_SMOKE,
                                     msg.X + ((random.nextDouble() - 0.5D) / 4), msg.Y + ((random.nextDouble() - 0.5D) / 4), msg.Z + ((random.nextDouble() - 0.5D) / 4),
                                     ((random.nextDouble() - 0.5D) / 10), ((random.nextDouble() - 0.5D) / 10) + 0.05f, ((random.nextDouble() - 0.5D) / 10));
                         }

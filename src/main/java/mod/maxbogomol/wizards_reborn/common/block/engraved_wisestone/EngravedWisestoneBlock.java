@@ -42,17 +42,10 @@ public class EngravedWisestoneBlock extends FaceAttachedHorizontalDirectionalBlo
         return true;
     }
 
-    @Override
-    public boolean triggerEvent(BlockState state, Level world, BlockPos pos, int id, int param) {
-        super.triggerEvent(state, world, pos, id, param);
-        BlockEntity tileentity = world.getBlockEntity(pos);
-        return tileentity != null && tileentity.triggerEvent(id, param);
-    }
-
     @Nullable
     @Override
-    public BlockEntity newBlockEntity(BlockPos pPos, BlockState pState) {
-        return new EngravedWisestoneBlockEntity(pPos, pState);
+    public BlockEntity newBlockEntity(BlockPos pos, BlockState state) {
+        return new EngravedWisestoneBlockEntity(pos, state);
     }
 
     @Nullable
@@ -67,7 +60,7 @@ public class EngravedWisestoneBlock extends FaceAttachedHorizontalDirectionalBlo
     }
 
     @Override
-    public int getAnalogOutputSignal(BlockState blockState, Level level, BlockPos pos) {
+    public int getAnalogOutputSignal(BlockState state, Level level, BlockPos pos) {
         BlockSimpleInventory tile = (BlockSimpleInventory) level.getBlockEntity(pos);
         return AbstractContainerMenu.getRedstoneSignalFromContainer(tile.getItemHandler());
     }*/

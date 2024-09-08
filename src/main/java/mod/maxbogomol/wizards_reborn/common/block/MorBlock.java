@@ -17,14 +17,15 @@ import net.minecraft.world.level.levelgen.feature.ConfiguredFeature;
 import java.util.Optional;
 
 public class MorBlock extends MushroomBlock {
-    public MorBlock(Properties pProperties) {
-        super(pProperties, WorldGen.TALL_MOR);
+
+    public MorBlock(Properties properties) {
+        super(properties, WorldGen.TALL_MOR);
     }
 
     @Override
-    public boolean growMushroom(ServerLevel pLevel, BlockPos pPos, BlockState pState, RandomSource pRandom) {
+    public boolean growMushroom(ServerLevel level, BlockPos pos, BlockState state, RandomSource random) {
         ResourceKey<ConfiguredFeature<?, ?>> configuredfeature = WorldGen.TALL_MOR;
-        if (pRandom.nextFloat() < 0.4) {
+        if (random.nextFloat() < 0.4) {
             if (this == WizardsRebornBlocks.MOR.get()) {
                 configuredfeature = WorldGen.TALL_MOR;
             } else {
@@ -38,17 +39,17 @@ public class MorBlock extends MushroomBlock {
             }
         }
 
-        Optional<? extends Holder<ConfiguredFeature<?, ?>>> optional = pLevel.registryAccess().registryOrThrow(Registries.CONFIGURED_FEATURE).getHolder(configuredfeature);
+        Optional<? extends Holder<ConfiguredFeature<?, ?>>> optional = level.registryAccess().registryOrThrow(Registries.CONFIGURED_FEATURE).getHolder(configuredfeature);
         if (optional.isEmpty()) {
             return false;
         } else {
-            var event = net.minecraftforge.event.ForgeEventFactory.blockGrowFeature(pLevel, pRandom, pPos, optional.get());
+            var event = net.minecraftforge.event.ForgeEventFactory.blockGrowFeature(level, random, pos, optional.get());
             if (event.getResult().equals(net.minecraftforge.eventbus.api.Event.Result.DENY)) return false;
-            pLevel.removeBlock(pPos, false);
-            if (event.getFeature().value().place(pLevel, pLevel.getChunkSource().getGenerator(), pRandom, pPos)) {
+            level.removeBlock(pos, false);
+            if (event.getFeature().value().place(level, level.getChunkSource().getGenerator(), random, pos)) {
                 return true;
             } else {
-                pLevel.setBlock(pPos, pState, 3);
+                level.setBlock(pos, state, 3);
                 return false;
             }
         }

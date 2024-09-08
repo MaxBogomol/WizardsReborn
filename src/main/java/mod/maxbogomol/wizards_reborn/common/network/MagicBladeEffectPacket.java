@@ -3,6 +3,7 @@ package mod.maxbogomol.wizards_reborn.common.network;
 import mod.maxbogomol.fluffy_fur.client.particle.ParticleBuilder;
 import mod.maxbogomol.fluffy_fur.client.particle.data.ColorParticleData;
 import mod.maxbogomol.fluffy_fur.client.particle.data.GenericParticleData;
+import mod.maxbogomol.fluffy_fur.client.particle.data.SpinParticleData;
 import mod.maxbogomol.fluffy_fur.registry.client.FluffyFurParticles;
 import mod.maxbogomol.wizards_reborn.WizardsReborn;
 import net.minecraft.network.FriendlyByteBuf;
@@ -40,16 +41,16 @@ public class MagicBladeEffectPacket {
             ctx.get().enqueueWork(new Runnable() {
                 @Override
                 public void run() {
-                    Level world = WizardsReborn.proxy.getLevel();
+                    Level level = WizardsReborn.proxy.getLevel();
                     ParticleBuilder.create(FluffyFurParticles.SPARKLE)
                             .setColorData(ColorParticleData.create(0.431F, 0.305F, 0.662F).build())
                             .setTransparencyData(GenericParticleData.create(0.4f, 0).build())
                             .setScaleData(GenericParticleData.create(0.1f, 0.5f).build())
-                            .randomSpin(0.1f)
+                            .setSpinData(SpinParticleData.create().randomSpin(0.1f).build())
                             .setLifetime(30)
                             .randomVelocity(0.05f)
                             .randomOffset(0.05f)
-                            .repeat(world, msg.posX, msg.posY, msg.posZ, 15);
+                            .repeat(level, msg.posX, msg.posY, msg.posZ, 15);
                     ctx.get().setPacketHandled(true);
                 }
             });

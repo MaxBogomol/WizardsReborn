@@ -3,6 +3,7 @@ package mod.maxbogomol.wizards_reborn.common.block.arcane_censer;
 import mod.maxbogomol.fluffy_fur.client.particle.ParticleBuilder;
 import mod.maxbogomol.fluffy_fur.client.particle.data.ColorParticleData;
 import mod.maxbogomol.fluffy_fur.client.particle.data.GenericParticleData;
+import mod.maxbogomol.fluffy_fur.client.particle.data.SpinParticleData;
 import mod.maxbogomol.fluffy_fur.common.block.entity.ExposedBlockSimpleInventory;
 import mod.maxbogomol.fluffy_fur.common.block.entity.TickableBlockEntity;
 import mod.maxbogomol.fluffy_fur.common.network.BlockEntityUpdate;
@@ -72,7 +73,7 @@ public class ArcaneCenserBlockEntity extends ExposedBlockSimpleInventory impleme
                             .setColorData(ColorParticleData.create(Color.WHITE).build())
                             .setTransparencyData(GenericParticleData.create(0.1f, 0).build())
                             .setScaleData(GenericParticleData.create(0.1f, 3f).build())
-                            .randomSpin(0.1f)
+                            .setSpinData(SpinParticleData.create().randomSpin(0.1f).build())
                             .setLifetime(200, 100)
                             .randomVelocity(0.035f)
                             .addVelocity(0, 0.05f, 0)
@@ -88,7 +89,7 @@ public class ArcaneCenserBlockEntity extends ExposedBlockSimpleInventory impleme
                             .setColorData(ColorParticleData.create(Color.WHITE).build())
                             .setTransparencyData(GenericParticleData.create(0.4f, 0).build())
                             .setScaleData(GenericParticleData.create(0, 0.3f).build())
-                            .randomSpin(0.1f)
+                            .setSpinData(SpinParticleData.create().randomSpin(0.1f).build())
                             .setLifetime(30)
                             .randomVelocity(0.015f)
                             .flatRandomOffset(0.025f, 0.075f, 0.025f)

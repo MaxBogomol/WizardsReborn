@@ -69,25 +69,25 @@ public class CreativeWissenStorageBlock extends HorizontalDirectionalBlock imple
     }
 
     @Override
-    public void onRemove(@Nonnull BlockState state, @Nonnull Level world, @Nonnull BlockPos pos, @Nonnull BlockState newState, boolean isMoving) {
+    public void onRemove(@Nonnull BlockState state, @Nonnull Level level, @Nonnull BlockPos pos, @Nonnull BlockState newState, boolean isMoving) {
         if (state.getBlock() != newState.getBlock()) {
-            BlockEntity tile = world.getBlockEntity(pos);
+            BlockEntity tile = level.getBlockEntity(pos);
             if (tile instanceof BlockSimpleInventory) {
-                Containers.dropContents(world, pos, ((BlockSimpleInventory) tile).getItemHandler());
+                Containers.dropContents(level, pos, ((BlockSimpleInventory) tile).getItemHandler());
             }
 
-            super.onRemove(state, world, pos, newState, isMoving);
+            super.onRemove(state, level, pos, newState, isMoving);
         }
     }
 
     @Override
-    public InteractionResult use(BlockState state, Level world, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hit) {
-        CreativeWissenStorageBlockEntity cell = (CreativeWissenStorageBlockEntity) world.getBlockEntity(pos);
+    public InteractionResult use(BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hit) {
+        CreativeWissenStorageBlockEntity cell = (CreativeWissenStorageBlockEntity) level.getBlockEntity(pos);
         ItemStack stack = player.getItemInHand(hand).copy();
 
         if (stack.getItem() instanceof WissenWandItem) {
             if (WissenWandItem.getMode(stack) != 4) {
-                world.updateNeighbourForOutputSignal(pos, this);
+                level.updateNeighbourForOutputSignal(pos, this);
                 BlockEntityUpdate.packet(cell);
                 return InteractionResult.SUCCESS;
             }
@@ -97,9 +97,9 @@ public class CreativeWissenStorageBlock extends HorizontalDirectionalBlock imple
             if (cell.getItemHandler().getItem(0).isEmpty()) {
                 cell.getItemHandler().setItem(0, stack);
                 player.getInventory().removeItem(player.getItemInHand(hand));
-                world.updateNeighbourForOutputSignal(pos, this);
+                level.updateNeighbourForOutputSignal(pos, this);
                 BlockEntityUpdate.packet(cell);
-                world.playSound(null, pos, WizardsRebornSounds.PEDESTAL_INSERT.get(), SoundSource.BLOCKS, 1.0f, 1.0f);
+                level.playSound(null, pos, WizardsRebornSounds.PEDESTAL_INSERT.get(), SoundSource.BLOCKS, 1.0f, 1.0f);
                 return InteractionResult.SUCCESS;
             }
         }
@@ -108,12 +108,12 @@ public class CreativeWissenStorageBlock extends HorizontalDirectionalBlock imple
             if (player.getInventory().getSlotWithRemainingSpace(cell.getItemHandler().getItem(0)) != -1 || player.getInventory().getFreeSlot() > -1) {
                 player.getInventory().add(cell.getItemHandler().getItem(0).copy());
             } else {
-                world.addFreshEntity(new ItemEntity(world, pos.getX() + 0.5F, pos.getY() + 1.0F, pos.getZ() + 0.5F, cell.getItemHandler().getItem(0).copy()));
+                level.addFreshEntity(new ItemEntity(level, pos.getX() + 0.5F, pos.getY() + 1.0F, pos.getZ() + 0.5F, cell.getItemHandler().getItem(0).copy()));
             }
             cell.getItemHandler().removeItem(0, 1);
-            world.updateNeighbourForOutputSignal(pos, this);
+            level.updateNeighbourForOutputSignal(pos, this);
             BlockEntityUpdate.packet(cell);
-            world.playSound(null, pos, WizardsRebornSounds.PEDESTAL_REMOVE.get(), SoundSource.BLOCKS, 1.0f, 1.0f);
+            level.playSound(null, pos, WizardsRebornSounds.PEDESTAL_REMOVE.get(), SoundSource.BLOCKS, 1.0f, 1.0f);
             return InteractionResult.SUCCESS;
         }
 
@@ -126,25 +126,18 @@ public class CreativeWissenStorageBlock extends HorizontalDirectionalBlock imple
     }
 
     @Override
-    public BlockState updateShape(BlockState pState, Direction pDirection, BlockState pNeighborState, LevelAccessor pLevel, BlockPos pCurrentPos, BlockPos pNeighborPos) {
-        if (pState.getValue(BlockStateProperties.WATERLOGGED)) {
-            pLevel.scheduleTick(pCurrentPos, Fluids.WATER, Fluids.WATER.getTickDelay(pLevel));
+    public BlockState updateShape(BlockState state, Direction direction, BlockState neighborState, LevelAccessor level, BlockPos currentPos, BlockPos neighborPos) {
+        if (state.getValue(BlockStateProperties.WATERLOGGED)) {
+            level.scheduleTick(currentPos, Fluids.WATER, Fluids.WATER.getTickDelay(level));
         }
 
-        return super.updateShape(pState, pDirection, pNeighborState, pLevel, pCurrentPos, pNeighborPos);
-    }
-
-    @Override
-    public boolean triggerEvent(BlockState state, Level world, BlockPos pos, int id, int param) {
-        super.triggerEvent(state, world, pos, id, param);
-        BlockEntity tileentity = world.getBlockEntity(pos);
-        return tileentity != null && tileentity.triggerEvent(id, param);
+        return super.updateShape(state, direction, neighborState, level, currentPos, neighborPos);
     }
 
     @Nullable
     @Override
-    public BlockEntity newBlockEntity(BlockPos pPos, BlockState pState) {
-        return new CreativeWissenStorageBlockEntity(pPos, pState);
+    public BlockEntity newBlockEntity(BlockPos pos, BlockState state) {
+        return new CreativeWissenStorageBlockEntity(pos, state);
     }
 
     @Nullable
@@ -159,7 +152,7 @@ public class CreativeWissenStorageBlock extends HorizontalDirectionalBlock imple
     }
 
     @Override
-    public int getAnalogOutputSignal(BlockState blockState, Level level, BlockPos pos) {
+    public int getAnalogOutputSignal(BlockState state, Level level, BlockPos pos) {
         BlockSimpleInventory tile = (BlockSimpleInventory) level.getBlockEntity(pos);
         return AbstractContainerMenu.getRedstoneSignalFromContainer(tile.getItemHandler());
     }

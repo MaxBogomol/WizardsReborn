@@ -67,8 +67,8 @@ public abstract class CrossBaulkBaseBlock extends Block implements EntityBlock, 
 
     public abstract boolean unclog(BlockEntity blockEntity, Level level, BlockPos pos);
 
-    public CrossBaulkBaseBlock(Properties pProperties) {
-        super(pProperties);
+    public CrossBaulkBaseBlock(Properties properties) {
+        super(properties);
         this.registerDefaultState(this.stateDefinition.any().setValue(BlockStateProperties.WATERLOGGED, false));
     }
 
@@ -238,7 +238,7 @@ public abstract class CrossBaulkBaseBlock extends Block implements EntityBlock, 
     }
 
     @Override
-    public RenderShape getRenderShape(BlockState pState) {
+    public RenderShape getRenderShape(BlockState state) {
         return RenderShape.MODEL;
     }
 
@@ -249,19 +249,19 @@ public abstract class CrossBaulkBaseBlock extends Block implements EntityBlock, 
     }
 
     @Override
-    public BlockState updateShape(BlockState pState, Direction pFacing, BlockState pFacingState, LevelAccessor pLevel, BlockPos pCurrentPos, BlockPos pFacingPos) {
-        if (pState.getValue(BlockStateProperties.WATERLOGGED)) {
-            pLevel.scheduleTick(pCurrentPos, Fluids.WATER, Fluids.WATER.getTickDelay(pLevel));
+    public BlockState updateShape(BlockState state, Direction facing, BlockState facingState, LevelAccessor level, BlockPos currentPos, BlockPos facingPos) {
+        if (state.getValue(BlockStateProperties.WATERLOGGED)) {
+            level.scheduleTick(currentPos, Fluids.WATER, Fluids.WATER.getTickDelay(level));
         }
 
-        BlockEntity BE = pLevel.getBlockEntity(pCurrentPos);
+        BlockEntity BE = level.getBlockEntity(currentPos);
         if (BE instanceof PipeBaseBlockEntity pipe) {
-            BlockEntity facingBE = pLevel.getBlockEntity(pFacingPos);
-            if (!(facingBE instanceof PipeBaseBlockEntity) || ((PipeBaseBlockEntity) facingBE).getConnection(pFacing.getOpposite()) != PipeConnection.DISABLED) {
+            BlockEntity facingBE = level.getBlockEntity(facingPos);
+            if (!(facingBE instanceof PipeBaseBlockEntity) || ((PipeBaseBlockEntity) facingBE).getConnection(facing.getOpposite()) != PipeConnection.DISABLED) {
 
             }
         }
-        return super.updateShape(pState, pFacing, pFacingState, pLevel, pCurrentPos, pFacingPos);
+        return super.updateShape(state, facing, facingState, level, currentPos, facingPos);
     }
 
     public static boolean facingConnected(Direction facing, BlockState state, DirectionProperty property) {
@@ -271,12 +271,12 @@ public abstract class CrossBaulkBaseBlock extends Block implements EntityBlock, 
     public abstract boolean connected(Direction direction, BlockState state);
 
     @Override
-    protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> pBuilder) {
-        pBuilder.add(BlockStateProperties.WATERLOGGED);
+    protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {
+        builder.add(BlockStateProperties.WATERLOGGED);
     }
 
     @Override
-    public FluidState getFluidState(BlockState pState) {
-        return pState.getValue(BlockStateProperties.WATERLOGGED) ? Fluids.WATER.getSource(false) : super.getFluidState(pState);
+    public FluidState getFluidState(BlockState state) {
+        return state.getValue(BlockStateProperties.WATERLOGGED) ? Fluids.WATER.getSource(false) : super.getFluidState(state);
     }
 }

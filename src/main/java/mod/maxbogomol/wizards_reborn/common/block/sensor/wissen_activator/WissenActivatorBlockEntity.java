@@ -14,8 +14,8 @@ public class WissenActivatorBlockEntity extends SensorBlockEntity {
         super(type, pos, state);
     }
 
-    public WissenActivatorBlockEntity(BlockPos pPos, BlockState pBlockState) {
-        super(WizardsRebornBlockEntities.WISSEN_ACTIVATOR.get(), pPos, pBlockState);
+    public WissenActivatorBlockEntity(BlockPos pos, BlockState blockState) {
+        super(WizardsRebornBlockEntities.WISSEN_ACTIVATOR.get(), pos, blockState);
     }
 
     @Override

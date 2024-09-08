@@ -21,7 +21,10 @@ import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelAccessor;
-import net.minecraft.world.level.block.*;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.EntityBlock;
+import net.minecraft.world.level.block.HorizontalDirectionalBlock;
+import net.minecraft.world.level.block.SimpleWaterloggedBlock;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityTicker;
 import net.minecraft.world.level.block.entity.BlockEntityType;
@@ -95,26 +98,16 @@ public class AlchemyBoilerBlock extends HorizontalDirectionalBlock implements En
         registerDefaultState(defaultBlockState().setValue(BlockStateProperties.WATERLOGGED, false));
     }
 
-    @Override
-    public RenderShape getRenderShape(BlockState pState) {
-        return RenderShape.MODEL;
-    }
-
     @Nonnull
     @Override
-    public VoxelShape getShape(BlockState state, BlockGetter world, BlockPos pos, CollisionContext ctx) {
-        switch (state.getValue(HORIZONTAL_FACING)) {
-            case NORTH:
-                return PipeBaseBlock.getShapeWithConnection(state, world, pos, ctx, SHAPES_N);
-            case SOUTH:
-                return PipeBaseBlock.getShapeWithConnection(state, world, pos, ctx, SHAPES_S);
-            case WEST:
-                return PipeBaseBlock.getShapeWithConnection(state, world, pos, ctx, SHAPES_W);
-            case EAST:
-                return PipeBaseBlock.getShapeWithConnection(state, world, pos, ctx, SHAPES_E);
-            default:
-                return SHAPE;
-        }
+    public VoxelShape getShape(BlockState state, BlockGetter level, BlockPos pos, CollisionContext context) {
+        return switch (state.getValue(HORIZONTAL_FACING)) {
+            case NORTH -> PipeBaseBlock.getShapeWithConnection(state, level, pos, context, SHAPES_N);
+            case SOUTH -> PipeBaseBlock.getShapeWithConnection(state, level, pos, context, SHAPES_S);
+            case WEST -> PipeBaseBlock.getShapeWithConnection(state, level, pos, context, SHAPES_W);
+            case EAST -> PipeBaseBlock.getShapeWithConnection(state, level, pos, context, SHAPES_E);
+            default -> SHAPE;
+        };
     }
 
     @Override
@@ -130,25 +123,22 @@ public class AlchemyBoilerBlock extends HorizontalDirectionalBlock implements En
     }
 
     @Override
-    public InteractionResult use(BlockState state, Level world, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hit) {
-        ItemStack stack = player.getItemInHand(hand).copy();
-        boolean isWand = false;
+    public InteractionResult use(BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hit) {
 
-        if (stack.getItem() instanceof WissenWandItem) {
-            if (WissenWandItem.getMode(stack) != 4) {
-                isWand = true;
-            }
-        }
+        if (level.isClientSide()) {
+            return InteractionResult.SUCCESS;
+        } else {
+            ItemStack stack = player.getItemInHand(hand).copy();
+            boolean clickable = WissenWandItem.isClickable(stack);
 
-        if (!isWand) {
-            BlockEntity tileEntity = world.getBlockEntity(pos.below());
+            if (clickable) {
+                BlockEntity blockEntity = level.getBlockEntity(pos.below());
 
-            if (world.getBlockState(pos.below()).getBlock() instanceof AlchemyMachineBlock block) {
-                if (!world.isClientSide) {
-                    MenuProvider containerProvider = block.createContainerProvider(world, pos.below());
-                    NetworkHooks.openScreen(((ServerPlayer) player), containerProvider, tileEntity.getBlockPos());
+                if (level.getBlockState(pos.below()).getBlock() instanceof AlchemyMachineBlock block) {
+                    MenuProvider containerProvider = block.createContainerProvider(level, pos.below());
+                    NetworkHooks.openScreen(((ServerPlayer) player), containerProvider, blockEntity.getBlockPos());
+                    return InteractionResult.SUCCESS;
                 }
-                return InteractionResult.SUCCESS;
             }
         }
 
@@ -161,38 +151,31 @@ public class AlchemyBoilerBlock extends HorizontalDirectionalBlock implements En
     }
 
     @Override
-    public BlockState updateShape(BlockState pState, Direction pDirection, BlockState pNeighborState, LevelAccessor pLevel, BlockPos pCurrentPos, BlockPos pNeighborPos) {
-        if (pState.getValue(BlockStateProperties.WATERLOGGED)) {
-            pLevel.scheduleTick(pCurrentPos, Fluids.WATER, Fluids.WATER.getTickDelay(pLevel));
+    public BlockState updateShape(BlockState state, Direction direction, BlockState neighborState, LevelAccessor level, BlockPos currentPos, BlockPos neighborPos) {
+        if (state.getValue(BlockStateProperties.WATERLOGGED)) {
+            level.scheduleTick(currentPos, Fluids.WATER, Fluids.WATER.getTickDelay(level));
         }
 
-        if (pLevel.getBlockEntity(pCurrentPos) instanceof PipeBaseBlockEntity pipe) {
-            BlockEntity facingBE = pLevel.getBlockEntity(pCurrentPos);
-            if (pNeighborState.is(WizardsRebornBlockTags.STEAM_PIPE_CONNECTION) || pNeighborState.is(WizardsRebornBlockTags.FLUID_PIPE_CONNECTION)) {
-                if (facingBE instanceof PipeBaseBlockEntity && ((PipeBaseBlockEntity) facingBE).getConnection(pDirection.getOpposite()) == PipeConnection.DISABLED) {
-                    pipe.setConnection(pDirection, PipeConnection.NONE);
+        if (level.getBlockEntity(currentPos) instanceof PipeBaseBlockEntity pipe) {
+            BlockEntity facingBE = level.getBlockEntity(currentPos);
+            if (neighborState.is(WizardsRebornBlockTags.STEAM_PIPE_CONNECTION) || neighborState.is(WizardsRebornBlockTags.FLUID_PIPE_CONNECTION)) {
+                if (facingBE instanceof PipeBaseBlockEntity && ((PipeBaseBlockEntity) facingBE).getConnection(direction.getOpposite()) == PipeConnection.DISABLED) {
+                    pipe.setConnection(direction, PipeConnection.NONE);
                 } else {
-                    pipe.setConnection(pDirection, PipeConnection.PIPE);
+                    pipe.setConnection(direction, PipeConnection.PIPE);
                 }
             } else {
-                pipe.setConnection(pDirection, PipeConnection.NONE);
+                pipe.setConnection(direction, PipeConnection.NONE);
             }
         }
 
-        return super.updateShape(pState, pDirection, pNeighborState, pLevel, pCurrentPos, pNeighborPos);
-    }
-
-    @Override
-    public boolean triggerEvent(BlockState state, Level world, BlockPos pos, int id, int param) {
-        super.triggerEvent(state, world, pos, id, param);
-        BlockEntity tileentity = world.getBlockEntity(pos);
-        return tileentity != null && tileentity.triggerEvent(id, param);
+        return super.updateShape(state, direction, neighborState, level, currentPos, neighborPos);
     }
 
     @Nullable
     @Override
-    public BlockEntity newBlockEntity(BlockPos pPos, BlockState pState) {
-        return new AlchemyBoilerBlockEntity(pPos, pState);
+    public BlockEntity newBlockEntity(BlockPos pos, BlockState state) {
+        return new AlchemyBoilerBlockEntity(pos, state);
     }
 
     @Nullable

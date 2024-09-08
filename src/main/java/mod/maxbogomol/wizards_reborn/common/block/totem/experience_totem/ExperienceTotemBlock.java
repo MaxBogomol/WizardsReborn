@@ -79,27 +79,27 @@ public class ExperienceTotemBlock extends Block implements EntityBlock, SimpleWa
     }
 
     @Override
-    public void onRemove(@Nonnull BlockState state, @Nonnull Level world, @Nonnull BlockPos pos, @Nonnull BlockState newState, boolean isMoving) {
+    public void onRemove(@Nonnull BlockState state, @Nonnull Level level, @Nonnull BlockPos pos, @Nonnull BlockState newState, boolean isMoving) {
         if (state.getBlock() != newState.getBlock()) {
-            BlockEntity tile = world.getBlockEntity(pos);
+            BlockEntity tile = level.getBlockEntity(pos);
             if (tile instanceof ExperienceTotemBlockEntity totem) {
                 if (totem.getExperience() > 0) {
-                    world.addFreshEntity(new ExperienceOrb(world, pos.getX() + 0.5f, pos.getY() + 0.5f, pos.getZ() + 0.5f, totem.getExperience()));
+                    level.addFreshEntity(new ExperienceOrb(level, pos.getX() + 0.5f, pos.getY() + 0.5f, pos.getZ() + 0.5f, totem.getExperience()));
                 }
             }
 
-            super.onRemove(state, world, pos, newState, isMoving);
+            super.onRemove(state, level, pos, newState, isMoving);
         }
     }
 
     @Override
-    public InteractionResult use(BlockState state, Level world, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hit) {
-        ExperienceTotemBlockEntity tile = (ExperienceTotemBlockEntity) world.getBlockEntity(pos);
+    public InteractionResult use(BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hit) {
+        ExperienceTotemBlockEntity tile = (ExperienceTotemBlockEntity) level.getBlockEntity(pos);
         ItemStack stack = player.getItemInHand(hand).copy();
 
         if (stack.getItem() instanceof WissenWandItem) {
             if (WissenWandItem.getMode(stack) != 4) {
-                world.updateNeighbourForOutputSignal(pos, this);
+                level.updateNeighbourForOutputSignal(pos, this);
                 BlockEntityUpdate.packet(tile);
                 return InteractionResult.SUCCESS;
             }
@@ -112,11 +112,11 @@ public class ExperienceTotemBlock extends Block implements EntityBlock, SimpleWa
                 if (remain > 0) {
                     tile.removeExperience(remain);
                     player.giveExperiencePoints(remain);
-                    world.playSound(WizardsReborn.proxy.getPlayer(), player.getOnPos(), SoundEvents.EXPERIENCE_ORB_PICKUP, SoundSource.BLOCKS, 0.5f, 1f);
+                    level.playSound(WizardsReborn.proxy.getPlayer(), player.getOnPos(), SoundEvents.EXPERIENCE_ORB_PICKUP, SoundSource.BLOCKS, 0.5f, 1f);
                     if (player.level().isClientSide()) {
                         tile.addBurst(pos.getCenter().add(0, 0.25f, 0), player.getPosition(0).add(0, player.getEyeHeight() / 2, 0));
                     }
-                    world.updateNeighbourForOutputSignal(pos, this);
+                    level.updateNeighbourForOutputSignal(pos, this);
                     BlockEntityUpdate.packet(tile);
                     return InteractionResult.SUCCESS;
                 }
@@ -130,11 +130,11 @@ public class ExperienceTotemBlock extends Block implements EntityBlock, SimpleWa
                 if (remainAdd > 0 && remain > 0) {
                     tile.addExperience(remainAdd);
                     player.giveExperiencePoints(-remainAdd);
-                    world.playSound(WizardsReborn.proxy.getPlayer(), player.getOnPos(), SoundEvents.EXPERIENCE_ORB_PICKUP, SoundSource.BLOCKS, 0.5f, 1.2f);
+                    level.playSound(WizardsReborn.proxy.getPlayer(), player.getOnPos(), SoundEvents.EXPERIENCE_ORB_PICKUP, SoundSource.BLOCKS, 0.5f, 1.2f);
                     if (player.level().isClientSide()) {
                         tile.addBurst(player.getPosition(0).add(0, player.getEyeHeight() / 2, 0), pos.getCenter().add(0, 0.25f, 0));
                     }
-                    world.updateNeighbourForOutputSignal(pos, this);
+                    level.updateNeighbourForOutputSignal(pos, this);
                     BlockEntityUpdate.packet(tile);
                     return InteractionResult.SUCCESS;
                 }
@@ -145,8 +145,8 @@ public class ExperienceTotemBlock extends Block implements EntityBlock, SimpleWa
     }
 
     @Override
-    public InteractionResult useTotem(BlockState state, Level world, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hit) {
-        return use(state, world, pos, player, hand, hit);
+    public InteractionResult useTotem(BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hit) {
+        return use(state, level, pos, player, hand, hit);
     }
 
     public static int getPlayerXP(Player player) {
@@ -170,12 +170,12 @@ public class ExperienceTotemBlock extends Block implements EntityBlock, SimpleWa
     }
 
     @Override
-    public BlockState updateShape(BlockState pState, Direction pDirection, BlockState pNeighborState, LevelAccessor pLevel, BlockPos pCurrentPos, BlockPos pNeighborPos) {
-        if (pState.getValue(BlockStateProperties.WATERLOGGED)) {
-            pLevel.scheduleTick(pCurrentPos, Fluids.WATER, Fluids.WATER.getTickDelay(pLevel));
+    public BlockState updateShape(BlockState state, Direction direction, BlockState neighborState, LevelAccessor level, BlockPos currentPos, BlockPos neighborPos) {
+        if (state.getValue(BlockStateProperties.WATERLOGGED)) {
+            level.scheduleTick(currentPos, Fluids.WATER, Fluids.WATER.getTickDelay(level));
         }
 
-        return !pState.canSurvive(pLevel, pCurrentPos) ? Blocks.AIR.defaultBlockState() : super.updateShape(pState, pDirection, pNeighborState, pLevel, pCurrentPos, pNeighborPos);
+        return !state.canSurvive(level, currentPos) ? Blocks.AIR.defaultBlockState() : super.updateShape(state, direction, neighborState, level, currentPos, neighborPos);
     }
 
     @Override
@@ -196,13 +196,6 @@ public class ExperienceTotemBlock extends Block implements EntityBlock, SimpleWa
         }
     }
 
-    @Override
-    public boolean triggerEvent(BlockState state, Level world, BlockPos pos, int id, int param) {
-        super.triggerEvent(state, world, pos, id, param);
-        BlockEntity tileentity = world.getBlockEntity(pos);
-        return tileentity != null && tileentity.triggerEvent(id, param);
-    }
-
     @Nullable
     @Override
     public <T extends BlockEntity> BlockEntityTicker<T> getTicker(@NotNull Level level, @NotNull BlockState state, @NotNull BlockEntityType<T> type) {
@@ -211,8 +204,8 @@ public class ExperienceTotemBlock extends Block implements EntityBlock, SimpleWa
 
     @Nullable
     @Override
-    public BlockEntity newBlockEntity(BlockPos pPos, BlockState pState) {
-        return new ExperienceTotemBlockEntity(pPos, pState);
+    public BlockEntity newBlockEntity(BlockPos pos, BlockState state) {
+        return new ExperienceTotemBlockEntity(pos, state);
     }
 
     @Override
@@ -221,7 +214,7 @@ public class ExperienceTotemBlock extends Block implements EntityBlock, SimpleWa
     }
 
     @Override
-    public int getAnalogOutputSignal(BlockState blockState, Level level, BlockPos pos) {
+    public int getAnalogOutputSignal(BlockState state, Level level, BlockPos pos) {
         ExperienceTotemBlockEntity tile = (ExperienceTotemBlockEntity) level.getBlockEntity(pos);
         return Mth.floor(((float) tile.getExperience() / tile.getMaxExperience()) * 14.0F);
     }

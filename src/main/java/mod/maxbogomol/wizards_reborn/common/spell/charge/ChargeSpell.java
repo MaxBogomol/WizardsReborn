@@ -61,8 +61,8 @@ public class ChargeSpell extends Spell {
     }
 
     @Override
-    public void useSpell(Level world, Player player, InteractionHand hand) {
-        if (!world.isClientSide) {
+    public void useSpell(Level level, Player player, InteractionHand hand) {
+        if (!level.isClientSide) {
             ItemStack stack = player.getItemInHand(hand);
 
             CompoundTag stats = getStats(stack);
@@ -73,10 +73,10 @@ public class ChargeSpell extends Spell {
             spellData.putInt("ticks_left", 1);
 
             Vec3 pos = player.getEyePosition();
-            SpellProjectileEntity entity = new SpellProjectileEntity(WizardsRebornEntities.SPELL_PROJECTILE.get(), world).shoot(
+            SpellProjectileEntity entity = new SpellProjectileEntity(WizardsRebornEntities.SPELL_PROJECTILE.get(), level).shoot(
                     pos.x, pos.y - 0.2f, pos.z, 0, 0, 0, player.getUUID(), this.getId(), stats
             ).createSpellData(spellData);
-            world.addFreshEntity(entity);
+            level.addFreshEntity(entity);
 
             updatePos(entity);
             updateRot(entity);
@@ -89,19 +89,19 @@ public class ChargeSpell extends Spell {
 
             player.startUsingItem(hand);
             awardStat(player, stack);
-            world.playSound(WizardsReborn.proxy.getPlayer(), player.getX(), player.getY(), player.getZ(), WizardsRebornSounds.WISSEN_BURST.get(), SoundSource.PLAYERS, 0.5f, (float) (1f + ((random.nextFloat() - 0.5D) / 4)));
+            level.playSound(WizardsReborn.proxy.getPlayer(), player.getX(), player.getY(), player.getZ(), WizardsRebornSounds.WISSEN_BURST.get(), SoundSource.PLAYERS, 0.5f, (float) (1f + ((random.nextFloat() - 0.5D) / 4)));
         }
     }
 
     @Override
-    public void onUseTick(Level world, LivingEntity livingEntity, ItemStack stack, int remainingUseDuration) {
-        if (!world.isClientSide) {
+    public void onUseTick(Level level, LivingEntity livingEntity, ItemStack stack, int remainingUseDuration) {
+        if (!level.isClientSide) {
             CompoundTag nbt = stack.getOrCreateTag();
             if (nbt.contains("spell_data")) {
                 CompoundTag stackSpellData = nbt.getCompound("spell_data");
                 if (stackSpellData.contains("entity")) {
                     UUID entityUUID = stackSpellData.getUUID("entity");
-                    Entity entity = ((ServerLevel) world).getEntity(entityUUID);
+                    Entity entity = ((ServerLevel) level).getEntity(entityUUID);
                     if (entity instanceof SpellProjectileEntity projectile) {
                         CompoundTag spellData = projectile.getSpellData();
                         spellData.putInt("ticks", 0);
@@ -122,8 +122,8 @@ public class ChargeSpell extends Spell {
         }
     }
 
-    public void releaseUsing(ItemStack stack, Level world, LivingEntity entityLiving, int timeLeft) {
-        if (!world.isClientSide) {
+    public void releaseUsing(ItemStack stack, Level level, LivingEntity entityLiving, int timeLeft) {
+        if (!level.isClientSide) {
             CompoundTag stats = getStats(stack);
 
             CompoundTag nbt = stack.getOrCreateTag();
@@ -131,7 +131,7 @@ public class ChargeSpell extends Spell {
                 CompoundTag stackSpellData = nbt.getCompound("spell_data");
                 if (stackSpellData.contains("entity")) {
                     UUID entityUUID = stackSpellData.getUUID("entity");
-                    Entity entity = ((ServerLevel) world).getEntity(entityUUID);
+                    Entity entity = ((ServerLevel) level).getEntity(entityUUID);
                     if (entity instanceof SpellProjectileEntity projectile) {
                         setCooldown(stack, stats);
 
@@ -144,7 +144,7 @@ public class ChargeSpell extends Spell {
                         Vec3 vel = projectile.getSender().getEyePosition(0).add(projectile.getSender().getLookAngle().scale(40)).subtract(pos).scale(1.0 / 25);
                         projectile.setDeltaMovement(vel);
 
-                        world.playSound(WizardsReborn.proxy.getPlayer(), projectile.getSender().getX(), projectile.getSender().getY(), projectile.getSender().getZ(), WizardsRebornSounds.SPELL_CAST.get(), SoundSource.PLAYERS, 0.25f, (float) (1f + ((random.nextFloat() - 0.5D) / 4)));
+                        level.playSound(WizardsReborn.proxy.getPlayer(), projectile.getSender().getX(), projectile.getSender().getY(), projectile.getSender().getZ(), WizardsRebornSounds.SPELL_CAST.get(), SoundSource.PLAYERS, 0.25f, (float) (1f + ((random.nextFloat() - 0.5D) / 4)));
                     }
 
                     nbt.put("spell_data", new CompoundTag());
@@ -304,20 +304,20 @@ public class ChargeSpell extends Spell {
     }
 
     @Override
-    public void onImpact(HitResult ray, Level world, SpellProjectileEntity projectile, Player player, Entity target) {
+    public void onImpact(HitResult ray, Level level, SpellProjectileEntity projectile, Player player, Entity target) {
         projectile.setFade(true);
         projectile.setFadeTick(20);
         projectile.burstEffect();
-        world.playSound(WizardsReborn.proxy.getPlayer(), projectile.getX(), projectile.getY(), projectile.getZ(), WizardsRebornSounds.SPELL_BURST.get(), SoundSource.PLAYERS, 0.35f, (float) (1f + ((random.nextFloat() - 0.5D) / 4)));
+        level.playSound(WizardsReborn.proxy.getPlayer(), projectile.getX(), projectile.getY(), projectile.getZ(), WizardsRebornSounds.SPELL_BURST.get(), SoundSource.PLAYERS, 0.35f, (float) (1f + ((random.nextFloat() - 0.5D) / 4)));
     }
 
     @Override
-    public void onImpact(HitResult ray, Level world, SpellProjectileEntity projectile, Player player) {
+    public void onImpact(HitResult ray, Level level, SpellProjectileEntity projectile, Player player) {
         projectile.setFade(true);
         projectile.setFadeTick(20);
         projectile.setPos(ray.getLocation().x, ray.getLocation().y, ray.getLocation().z);
         projectile.burstEffect();
-        world.playSound(WizardsReborn.proxy.getPlayer(), projectile.getX(), projectile.getY(), projectile.getZ(), WizardsRebornSounds.SPELL_BURST.get(), SoundSource.PLAYERS, 0.35f, (float) (1f + ((random.nextFloat() - 0.5D) / 4)));
+        level.playSound(WizardsReborn.proxy.getPlayer(), projectile.getX(), projectile.getY(), projectile.getZ(), WizardsRebornSounds.SPELL_BURST.get(), SoundSource.PLAYERS, 0.35f, (float) (1f + ((random.nextFloat() - 0.5D) / 4)));
     }
 
     public void rayEffect(SpellProjectileEntity projectile) {
@@ -357,7 +357,7 @@ public class ChargeSpell extends Spell {
     @OnlyIn(Dist.CLIENT)
     public void render(SpellProjectileEntity entity, float entityYaw, float partialTicks, PoseStack stack, MultiBufferSource buffer, int light) {
         CompoundTag spellData = entity.getSpellData();
-        MultiBufferSource bufferDelayed = LevelRenderHandler.getDelayedRender();
+        MultiBufferSource bufferDelayed = FluffyFurRenderTypes.getDelayedRender();
         VertexConsumer builder = bufferDelayed.getBuffer(FluffyFurRenderTypes.GLOWING);
         Color color = getColor();
 

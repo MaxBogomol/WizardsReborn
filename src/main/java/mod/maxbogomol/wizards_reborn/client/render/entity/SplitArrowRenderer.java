@@ -27,7 +27,7 @@ public class SplitArrowRenderer<T extends SplitArrowEntity> extends EntityRender
 
     @Override
     public void render(SplitArrowEntity entity, float entityYaw, float partialTicks, PoseStack stack, MultiBufferSource buffer, int light) {
-        MultiBufferSource bufferDelayed = LevelRenderHandler.getDelayedRender();
+        MultiBufferSource bufferDelayed = FluffyFurRenderTypes.getDelayedRender();
         VertexConsumer builder = bufferDelayed.getBuffer(FluffyFurRenderTypes.GLOWING);
         Color color = WizardsRebornArcaneEnchantments.SPLIT.getColor();
 

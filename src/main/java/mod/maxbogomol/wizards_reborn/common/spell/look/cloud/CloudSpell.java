@@ -4,6 +4,7 @@ import mod.maxbogomol.fluffy_fur.client.particle.ParticleBuilder;
 import mod.maxbogomol.fluffy_fur.client.particle.data.ColorParticleData;
 import mod.maxbogomol.fluffy_fur.client.particle.data.GenericParticleData;
 import mod.maxbogomol.fluffy_fur.client.particle.data.LightParticleData;
+import mod.maxbogomol.fluffy_fur.client.particle.data.SpinParticleData;
 import mod.maxbogomol.fluffy_fur.registry.client.FluffyFurParticles;
 import mod.maxbogomol.fluffy_fur.registry.client.FluffyFurRenderTypes;
 import mod.maxbogomol.wizards_reborn.api.crystal.CrystalUtil;
@@ -46,27 +47,27 @@ public class CloudSpell extends BlockLookSpell {
     }
 
     @Override
-    public void lookSpell(Level world, Player player, InteractionHand hand) {
+    public void lookSpell(Level level, Player player, InteractionHand hand) {
         CompoundTag stats = getStats(player.getItemInHand(hand));
-        Vec3 pos = getBlockHit(world, player, hand).getPosHit();
+        Vec3 pos = getBlockHit(level, player, hand).getPosHit();
 
-        SpellProjectileEntity entity = new SpellProjectileEntity(WizardsRebornEntities.SPELL_PROJECTILE.get(), world).shoot(
+        SpellProjectileEntity entity = new SpellProjectileEntity(WizardsRebornEntities.SPELL_PROJECTILE.get(), level).shoot(
                 pos.x, pos.y, pos.z, 0, 0, 0, player.getUUID(), this.getId(), stats
         );
-        world.addFreshEntity(entity);
+        level.addFreshEntity(entity);
     }
 
     @Override
-    public boolean canLookSpell(Level world, Player player, InteractionHand hand) {
-        return !getBlockHit(world, player, hand).hasBlockHit();
+    public boolean canLookSpell(Level level, Player player, InteractionHand hand) {
+        return !getBlockHit(level, player, hand).hasBlockHit();
     }
 
     @Override
-    public HitResult getBlockHit(Level world, Player player, InteractionHand hand) {
-        float distance = getLookDistance(world, player, hand);
+    public HitResult getBlockHit(Level level, Player player, InteractionHand hand) {
+        float distance = getLookDistance(level, player, hand);
         Vec3 firstPos = player.getLookAngle().scale(distance);
-        Vec3 lookPos = getHitPos(world, player.getEyePosition(), player.getEyePosition().add(firstPos.x(), 0, firstPos.z())).getPosHit();
-        return getHitPos(world, lookPos, new Vec3(lookPos.x(), lookPos.y() + getBlockDistance(world, player, hand), lookPos.z()));
+        Vec3 lookPos = getHitPos(level, player.getEyePosition(), player.getEyePosition().add(firstPos.x(), 0, firstPos.z())).getPosHit();
+        return getHitPos(level, lookPos, new Vec3(lookPos.x(), lookPos.y() + getBlockDistance(level, player, hand), lookPos.z()));
     }
 
     @Override
@@ -93,7 +94,7 @@ public class CloudSpell extends BlockLookSpell {
                         .setColorData(ColorParticleData.create(color).build())
                         .setTransparencyData(GenericParticleData.create(0.45f, 0).build())
                         .setScaleData(GenericParticleData.create(1.5f).build())
-                        .randomSpin(0.1f)
+                        .setSpinData(SpinParticleData.create().randomSpin(0.1f).build())
                         .setLifetime(20)
                         .randomVelocity(0.007f)
                         .randomOffset(size, ySize, size)
@@ -106,7 +107,7 @@ public class CloudSpell extends BlockLookSpell {
                         .setTransparencyData(GenericParticleData.create(0.45f, 0).build())
                         .setScaleData(GenericParticleData.create(1.5f).build())
                         .setLightData(LightParticleData.DEFAULT)
-                        .randomSpin(0.1f)
+                        .setSpinData(SpinParticleData.create().randomSpin(0.1f).build())
                         .setLifetime(20)
                         .randomVelocity(0.007f)
                         .randomOffset(size, ySize, size)

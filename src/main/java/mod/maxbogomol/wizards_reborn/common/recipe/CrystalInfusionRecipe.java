@@ -37,7 +37,7 @@ public class CrystalInfusionRecipe implements Recipe<Container> {
     }
 
     @Override
-    public boolean matches(Container inv, Level worldIn) {
+    public boolean matches(Container inv, Level levelIn) {
         return matches(inputs, inv);
     }
 

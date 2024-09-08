@@ -52,19 +52,19 @@ public class PlacedItemsBlock extends Block implements EntityBlock, SimpleWaterl
 
     @Nonnull
     @Override
-    public VoxelShape getShape(BlockState state, BlockGetter world, BlockPos pos, CollisionContext ctx) {
+    public VoxelShape getShape(BlockState state, BlockGetter level, BlockPos pos, CollisionContext context) {
         return SHAPE;
     }
 
     @Nonnull
     @Override
-    public VoxelShape getVisualShape(BlockState state, BlockGetter world, BlockPos pos, CollisionContext ctx) {
+    public VoxelShape getVisualShape(BlockState state, BlockGetter level, BlockPos pos, CollisionContext context) {
         return Shapes.empty();
     }
 
     @Override
     protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {
-        builder.add(BlockStateProperties.WATERLOGGED).add(ROTATION);;
+        builder.add(BlockStateProperties.WATERLOGGED).add(ROTATION);
     }
 
     @Nullable
@@ -75,9 +75,9 @@ public class PlacedItemsBlock extends Block implements EntityBlock, SimpleWaterl
     }
 
     @Override
-    public void onRemove(@Nonnull BlockState state, @Nonnull Level world, @Nonnull BlockPos pos, @Nonnull BlockState newState, boolean isMoving) {
+    public void onRemove(@Nonnull BlockState state, @Nonnull Level level, @Nonnull BlockPos pos, @Nonnull BlockState newState, boolean isMoving) {
         if (state.getBlock() != newState.getBlock()) {
-            BlockEntity tile = world.getBlockEntity(pos);
+            BlockEntity tile = level.getBlockEntity(pos);
             if (tile instanceof PlacedItemsBlockEntity items) {
                 SimpleContainer inv = new SimpleContainer(5);
                 for (int i = 0; i < 4; i++) {
@@ -86,22 +86,22 @@ public class PlacedItemsBlock extends Block implements EntityBlock, SimpleWaterl
                 if (items.things) {
                     inv.setItem(4, new ItemStack(WizardsRebornItems.BUNCH_OF_THINGS.get()));
                 }
-                Containers.dropContents(world, pos, inv);
+                Containers.dropContents(level, pos, inv);
             }
-            super.onRemove(state, world, pos, newState, isMoving);
         }
+        super.onRemove(state, level, pos, newState, isMoving);
     }
 
     @Override
-    public InteractionResult use(BlockState state, Level world, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hit) {
-        PlacedItemsBlockEntity tile = (PlacedItemsBlockEntity) world.getBlockEntity(pos);
+    public InteractionResult use(BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hit) {
+        PlacedItemsBlockEntity tile = (PlacedItemsBlockEntity) level.getBlockEntity(pos);
         ItemStack stack = player.getItemInHand(hand).copy();
 
         int invSize = tile.getInventorySize();
 
         if (stack.getItem() instanceof WissenWandItem) {
             if (WissenWandItem.getMode(stack) != 4) {
-                world.updateNeighbourForOutputSignal(pos, this);
+                level.updateNeighbourForOutputSignal(pos, this);
                 BlockEntityUpdate.packet(tile);
                 return InteractionResult.SUCCESS;
             }
@@ -119,9 +119,9 @@ public class PlacedItemsBlock extends Block implements EntityBlock, SimpleWaterl
                         tile.getItemHandler().setItem(slot, stack);
                         player.getInventory().removeItem(player.getItemInHand(hand));
                     }
-                    world.updateNeighbourForOutputSignal(pos, this);
+                    level.updateNeighbourForOutputSignal(pos, this);
                     BlockEntityUpdate.packet(tile);
-                    world.playSound(null, pos, WizardsRebornSounds.PEDESTAL_INSERT.get(), SoundSource.BLOCKS, 1.0f, 1.0f);
+                    level.playSound(null, pos, WizardsRebornSounds.PEDESTAL_INSERT.get(), SoundSource.BLOCKS, 1.0f, 1.0f);
                     return InteractionResult.SUCCESS;
                 }
             }
@@ -132,14 +132,14 @@ public class PlacedItemsBlock extends Block implements EntityBlock, SimpleWaterl
                     if (player.getInventory().getSlotWithRemainingSpace(tile.getItemHandler().getItem(slot)) != -1 || player.getInventory().getFreeSlot() > -1) {
                         player.getInventory().add(tile.getItemHandler().getItem(slot).copy());
                     } else {
-                        world.addFreshEntity(new ItemEntity(world, pos.getX() + 0.5F, pos.getY() + 1.0F, pos.getZ() + 0.5F, tile.getItemHandler().getItem(slot).copy()));
+                        level.addFreshEntity(new ItemEntity(level, pos.getX() + 0.5F, pos.getY() + 1.0F, pos.getZ() + 0.5F, tile.getItemHandler().getItem(slot).copy()));
                     }
                     tile.getItemHandler().removeItem(slot, 1);
-                    world.updateNeighbourForOutputSignal(pos, this);
+                    level.updateNeighbourForOutputSignal(pos, this);
                     BlockEntityUpdate.packet(tile);
-                    world.playSound(null, pos, WizardsRebornSounds.PEDESTAL_REMOVE.get(), SoundSource.BLOCKS, 1.0f, 1.0f);
+                    level.playSound(null, pos, WizardsRebornSounds.PEDESTAL_REMOVE.get(), SoundSource.BLOCKS, 1.0f, 1.0f);
                     if (tile.getInventorySize() <= 0) {
-                        world.removeBlock(pos, false);
+                        level.removeBlock(pos, false);
                     }
                     return InteractionResult.SUCCESS;
                 }
@@ -155,25 +155,18 @@ public class PlacedItemsBlock extends Block implements EntityBlock, SimpleWaterl
     }
 
     @Override
-    public BlockState updateShape(BlockState pState, Direction pDirection, BlockState pNeighborState, LevelAccessor pLevel, BlockPos pCurrentPos, BlockPos pNeighborPos) {
-        if (pState.getValue(BlockStateProperties.WATERLOGGED)) {
-            pLevel.scheduleTick(pCurrentPos, Fluids.WATER, Fluids.WATER.getTickDelay(pLevel));
+    public BlockState updateShape(BlockState state, Direction direction, BlockState neighborState, LevelAccessor level, BlockPos currentPos, BlockPos neighborPos) {
+        if (state.getValue(BlockStateProperties.WATERLOGGED)) {
+            level.scheduleTick(currentPos, Fluids.WATER, Fluids.WATER.getTickDelay(level));
         }
 
-        return super.updateShape(pState, pDirection, pNeighborState, pLevel, pCurrentPos, pNeighborPos);
-    }
-
-    @Override
-    public boolean triggerEvent(BlockState state, Level world, BlockPos pos, int id, int param) {
-        super.triggerEvent(state, world, pos, id, param);
-        BlockEntity tileentity = world.getBlockEntity(pos);
-        return tileentity != null && tileentity.triggerEvent(id, param);
+        return super.updateShape(state, direction, neighborState, level, currentPos, neighborPos);
     }
 
     @Nullable
     @Override
-    public BlockEntity newBlockEntity(BlockPos pPos, BlockState pState) {
-        return new PlacedItemsBlockEntity(pPos, pState);
+    public BlockEntity newBlockEntity(BlockPos pos, BlockState state) {
+        return new PlacedItemsBlockEntity(pos, state);
     }
 
     @Override
@@ -182,19 +175,19 @@ public class PlacedItemsBlock extends Block implements EntityBlock, SimpleWaterl
     }
 
     @Override
-    public int getAnalogOutputSignal(BlockState blockState, Level level, BlockPos pos) {
+    public int getAnalogOutputSignal(BlockState state, Level level, BlockPos pos) {
         BlockSimpleInventory tile = (BlockSimpleInventory) level.getBlockEntity(pos);
         return AbstractContainerMenu.getRedstoneSignalFromContainer(tile.getItemHandler());
     }
 
     @Override
-    public BlockState rotate(BlockState pState, Rotation pRotation) {
-        return pState.setValue(ROTATION, Integer.valueOf(pRotation.rotate(pState.getValue(ROTATION), 16)));
+    public BlockState rotate(BlockState state, Rotation pRotation) {
+        return state.setValue(ROTATION, Integer.valueOf(pRotation.rotate(state.getValue(ROTATION), 16)));
     }
 
     @Override
-    public BlockState mirror(BlockState pState, Mirror pMirror) {
-        return pState.setValue(ROTATION, Integer.valueOf(pMirror.mirror(pState.getValue(ROTATION), 16)));
+    public BlockState mirror(BlockState state, Mirror pMirror) {
+        return state.setValue(ROTATION, Integer.valueOf(pMirror.mirror(state.getValue(ROTATION), 16)));
     }
 
     @Override
@@ -203,7 +196,7 @@ public class PlacedItemsBlock extends Block implements EntityBlock, SimpleWaterl
     }
 
     @Override
-    public boolean canSurvive(BlockState pState, LevelReader pLevel, BlockPos pPos) {
-        return Block.canSupportCenter(pLevel, pPos.below(), Direction.UP);
+    public boolean canSurvive(BlockState state, LevelReader level, BlockPos pos) {
+        return Block.canSupportCenter(level, pos.below(), Direction.UP);
     }
 }

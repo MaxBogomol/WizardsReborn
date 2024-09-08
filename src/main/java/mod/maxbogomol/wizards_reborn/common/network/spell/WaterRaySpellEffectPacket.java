@@ -47,7 +47,7 @@ public class WaterRaySpellEffectPacket {
             ctx.get().enqueueWork(new Runnable() {
                 @Override
                 public void run() {
-                    Level world = WizardsReborn.proxy.getLevel();
+                    Level level = WizardsReborn.proxy.getLevel();
                     ParticleBuilder.create(FluffyFurParticles.WISP)
                             .setColorData(ColorParticleData.create(msg.colorR, msg.colorG, msg.colorB).build())
                             .setTransparencyData(GenericParticleData.create(0.4f, 0).build())
@@ -56,7 +56,7 @@ public class WaterRaySpellEffectPacket {
                             .setGravity(1f)
                             .randomVelocity(0.085f, 0.0625f, 0.085f)
                             .addVelocity(0, 0.3f, 0)
-                            .repeat(world, msg.X, msg.Y, msg.Z, 15, 0.6f);
+                            .repeat(level, msg.X, msg.Y, msg.Z, 15, 0.6f);
 
                     ctx.get().setPacketHandled(true);
                 }

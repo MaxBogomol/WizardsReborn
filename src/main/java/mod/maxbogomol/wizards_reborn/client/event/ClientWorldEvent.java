@@ -174,16 +174,16 @@ public class ClientWorldEvent {
         }
     }
 
-    public static boolean canEffect(BlockPos pos, Level world) {
-        BlockEntity blockEntity = world.getBlockEntity(pos);
+    public static boolean canEffect(BlockPos pos, Level level) {
+        BlockEntity blockEntity = level.getBlockEntity(pos);
         if (blockEntity instanceof IWissenBlockEntity) return true;
         if (blockEntity instanceof ILightBlockEntity) return true;
 
         return false;
     }
 
-    public static Vec3 getEffectPos(BlockPos pos, Level world) {
-        BlockEntity blockEntity = world.getBlockEntity(pos);
+    public static Vec3 getEffectPos(BlockPos pos, Level level) {
+        BlockEntity blockEntity = level.getBlockEntity(pos);
         if (blockEntity instanceof ILightBlockEntity lightTile) return lightTile.getLightLensPos();
 
         return new Vec3(0.5f, 0.5f, 0.5f);

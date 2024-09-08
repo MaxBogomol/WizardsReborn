@@ -26,28 +26,28 @@ public class SoundSpell extends Spell {
     }
 
     @Override
-    public void useSpell(Level world, Player player, InteractionHand hand) {
-        if (!world.isClientSide) {
+    public void useSpell(Level level, Player player, InteractionHand hand) {
+        if (!level.isClientSide) {
             ItemStack stack = player.getItemInHand(hand);
 
             CompoundTag stats = getStats(stack);
             setCooldown(stack, stats);
             removeWissen(stack, stats, player);
             awardStat(player, stack);
-            playSound(world, player, hand);
+            playSound(level, player, hand);
         }
     }
 
-    public SoundEvent getSound(Level world, Player player, InteractionHand hand) {
+    public SoundEvent getSound(Level level, Player player, InteractionHand hand) {
         return WizardsRebornSounds.SPELL_CAST.get();
     }
 
-    public void playSound(Level world, Player player, InteractionHand hand) {
-        world.playSound(WizardsReborn.proxy.getPlayer(), player.getX(), player.getY(), player.getZ(), getSound(world, player, hand), SoundSource.PLAYERS, 1f, 1f);
+    public void playSound(Level level, Player player, InteractionHand hand) {
+        level.playSound(WizardsReborn.proxy.getPlayer(), player.getX(), player.getY(), player.getZ(), getSound(level, player, hand), SoundSource.PLAYERS, 1f, 1f);
     }
 
     @Override
-    public void onReload(ItemStack stack, Level world, Entity entity, int slot, boolean isSelected) {
+    public void onReload(ItemStack stack, Level level, Entity entity, int slot, boolean isSelected) {
 
     }
 }

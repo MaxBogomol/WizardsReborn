@@ -7,6 +7,7 @@ import mod.maxbogomol.fluffy_fur.client.event.ClientTickHandler;
 import mod.maxbogomol.fluffy_fur.client.particle.ParticleBuilder;
 import mod.maxbogomol.fluffy_fur.client.particle.data.ColorParticleData;
 import mod.maxbogomol.fluffy_fur.client.particle.data.GenericParticleData;
+import mod.maxbogomol.fluffy_fur.client.particle.data.SpinParticleData;
 import mod.maxbogomol.fluffy_fur.common.item.IGuiParticleItem;
 import mod.maxbogomol.fluffy_fur.common.item.IParticleItem;
 import mod.maxbogomol.fluffy_fur.registry.client.FluffyFurParticles;
@@ -55,7 +56,7 @@ public class ArcaneLumosItem extends BlockItem implements IParticleItem, IGuiPar
                         .setColorData(ColorParticleData.create(color).build())
                         .setTransparencyData(GenericParticleData.create(0.75f, 0).build())
                         .setScaleData(GenericParticleData.create(0.1f, 0).build())
-                        .randomSpin(0.5f)
+                        .setSpinData(SpinParticleData.create().randomSpin(0.5f).build())
                         .setLifetime(30)
                         .randomVelocity(0.015f)
                         .spawn(level, entity.getX(), entity.getY() + 0.25F, entity.getZ());
@@ -67,7 +68,7 @@ public class ArcaneLumosItem extends BlockItem implements IParticleItem, IGuiPar
                             .setColorData(ColorParticleData.create(color).build())
                             .setTransparencyData(GenericParticleData.create(0.75f, 0).build())
                             .setScaleData(GenericParticleData.create(0.1f, 0).build())
-                            .randomSpin(0.5f)
+                            .setSpinData(SpinParticleData.create().randomSpin(0.5f).build())
                             .setLifetime(5)
                             .flatRandomOffset(0.25f, 0.25f, 0.25f)
                             .spawn(level, entity.getX(), entity.getY(), entity.getZ());
@@ -77,7 +78,7 @@ public class ArcaneLumosItem extends BlockItem implements IParticleItem, IGuiPar
                             .setColorData(ColorParticleData.create(Color.WHITE).build())
                             .setTransparencyData(GenericParticleData.create(0.75f, 0).build())
                             .setScaleData(GenericParticleData.create(0.1f, 0).build())
-                            .randomSpin(0.5f)
+                            .setSpinData(SpinParticleData.create().randomSpin(0.5f).build())
                             .setLifetime(5)
                             .flatRandomOffset(0.25f, 0.25f, 0.25f)
                             .spawn(level, entity.getX(), entity.getY(), entity.getZ());

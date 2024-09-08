@@ -8,5 +8,5 @@ import java.awt.*;
 
 public interface IBagItem {
     Color getColor(ItemStack stack);
-    void openBag(Level world, Player player, ItemStack stack);
+    void openBag(Level level, Player player, ItemStack stack);
 }

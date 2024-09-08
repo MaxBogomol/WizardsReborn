@@ -41,18 +41,18 @@ public class ArcanemiconItem extends Item {
     @Override
     public InteractionResult onItemUseFirst(ItemStack stack, UseOnContext context) {
         Player player = context.getPlayer();
-        Level world = context.getLevel();
+        Level level = context.getLevel();
         BlockPos blockpos = context.getClickedPos();
 
         if (player.isShiftKeyDown()) {
-            Block block = ArcanePedestalBlock.blocksList.get(world.getBlockState(blockpos).getBlock());
+            Block block = ArcanePedestalBlock.blocksList.get(level.getBlockState(blockpos).getBlock());
             if (block != null) {
-                if (world.getBlockEntity(blockpos) instanceof ArcanePedestalBlockEntity pedestal) {
+                if (level.getBlockEntity(blockpos) instanceof ArcanePedestalBlockEntity pedestal) {
                     if (pedestal.getItemHandler().getItem(0).isEmpty()) {
-                        world.setBlockAndUpdate(blockpos, block.defaultBlockState());
+                        level.setBlockAndUpdate(blockpos, block.defaultBlockState());
                         player.getInventory().removeItem(player.getItemInHand(context.getHand()));
-                        world.playSound(null, blockpos, WizardsRebornSounds.PEDESTAL_INSERT.get(), SoundSource.BLOCKS, 1.0f, 1.0f);
-                        world.playSound(null, blockpos, SoundEvents.BOOK_PAGE_TURN, SoundSource.BLOCKS, 1.0f, 1.0f);
+                        level.playSound(null, blockpos, WizardsRebornSounds.PEDESTAL_INSERT.get(), SoundSource.BLOCKS, 1.0f, 1.0f);
+                        level.playSound(null, blockpos, SoundEvents.BOOK_PAGE_TURN, SoundSource.BLOCKS, 1.0f, 1.0f);
                         return InteractionResult.SUCCESS;
                     }
                 }
@@ -63,11 +63,11 @@ public class ArcanemiconItem extends Item {
     }
 
     @Override
-    public InteractionResultHolder<ItemStack> use(Level world, Player player, InteractionHand hand) {
+    public InteractionResultHolder<ItemStack> use(Level level, Player player, InteractionHand hand) {
         ItemStack stack = player.getItemInHand(hand);
         player.awardStat(Stats.ITEM_USED.get(this));
 
-        if (world.isClientSide) {
+        if (level.isClientSide) {
             openGui();
         }
 
@@ -82,7 +82,7 @@ public class ArcanemiconItem extends Item {
 
     @OnlyIn(Dist.CLIENT)
     @Override
-    public void appendHoverText(ItemStack stack, Level world, List<Component> list, TooltipFlag flags) {
+    public void appendHoverText(ItemStack stack, Level level, List<Component> list, TooltipFlag flags) {
         list.add(getEditionComponent());
     }
 

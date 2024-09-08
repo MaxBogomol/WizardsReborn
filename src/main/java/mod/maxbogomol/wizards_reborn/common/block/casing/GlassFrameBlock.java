@@ -14,8 +14,9 @@ import javax.annotation.Nonnull;
 import java.util.stream.Stream;
 
 public class GlassFrameBlock extends GlassBlock {
-    public GlassFrameBlock(Properties pProperties) {
-        super(pProperties);
+
+    public GlassFrameBlock(Properties properties) {
+        super(properties);
     }
 
     private static final VoxelShape SHAPE_SHELL = Block.box(0, 0, 0, 16, 16, 16);
@@ -29,7 +30,7 @@ public class GlassFrameBlock extends GlassBlock {
 
     @Nonnull
     @Override
-    public VoxelShape getVisualShape(BlockState state, BlockGetter world, BlockPos pos, CollisionContext ctx) {
+    public VoxelShape getVisualShape(BlockState state, BlockGetter level, BlockPos pos, CollisionContext context) {
         return SHAPE;
     }
 }

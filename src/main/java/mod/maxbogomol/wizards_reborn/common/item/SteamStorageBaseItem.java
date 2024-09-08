@@ -50,7 +50,7 @@ public class SteamStorageBaseItem extends BlockItem implements ISteamItem, ICust
 
     @OnlyIn(Dist.CLIENT)
     @Override
-    public void appendHoverText(ItemStack stack, Level world, List<Component> list, TooltipFlag flags) {
+    public void appendHoverText(ItemStack stack, Level level, List<Component> list, TooltipFlag flags) {
         if (ClientConfig.NUMERICAL_STEAM.get()) {
             CompoundTag nbt = stack.getTag();
             if (nbt != null && nbt.contains("steam")) {

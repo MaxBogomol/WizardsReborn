@@ -5,6 +5,7 @@ import com.mojang.blaze3d.vertex.PoseStack;
 import mod.maxbogomol.fluffy_fur.client.particle.ParticleBuilder;
 import mod.maxbogomol.fluffy_fur.client.particle.data.ColorParticleData;
 import mod.maxbogomol.fluffy_fur.client.particle.data.GenericParticleData;
+import mod.maxbogomol.fluffy_fur.client.particle.data.SpinParticleData;
 import mod.maxbogomol.fluffy_fur.common.item.ICustomBlockEntityDataItem;
 import mod.maxbogomol.fluffy_fur.common.item.IGuiParticleItem;
 import mod.maxbogomol.fluffy_fur.common.item.IParticleItem;
@@ -83,12 +84,12 @@ public class CrystalItem extends BlockItem implements IParticleItem, IGuiParticl
     }
 
     @Override
-    public void inventoryTick(ItemStack stack, Level world, Entity entity, int slot, boolean isSelected) {
-        if (!world.isClientSide()) {
+    public void inventoryTick(ItemStack stack, Level level, Entity entity, int slot, boolean isSelected) {
+        if (!level.isClientSide()) {
             CompoundTag nbt = stack.getOrCreateTag();
             if (nbt.contains("random_stats")) {
                 nbt.remove("random_stats");
-                CrystalUtil.createCrystalItemStats(stack, getType(), world, 6);
+                CrystalUtil.createCrystalItemStats(stack, getType(), level, 6);
                 stack.setTag(nbt);
             }
         }
@@ -96,7 +97,7 @@ public class CrystalItem extends BlockItem implements IParticleItem, IGuiParticl
 
     @OnlyIn(Dist.CLIENT)
     @Override
-    public void appendHoverText(ItemStack stack, Level world, List<Component> list, TooltipFlag flags) {
+    public void appendHoverText(ItemStack stack, Level level, List<Component> list, TooltipFlag flags) {
         CrystalType type = getType();
         Color color = type.getColor();
         for (CrystalStat stat : type.getStats()) {
@@ -132,7 +133,7 @@ public class CrystalItem extends BlockItem implements IParticleItem, IGuiParticl
                     .setColorData(ColorParticleData.create(color).build())
                     .setTransparencyData(GenericParticleData.create(0.5f, 0).build())
                     .setScaleData(GenericParticleData.create(0.1f, 0).build())
-                    .randomSpin(0.5f)
+                    .setSpinData(SpinParticleData.create().randomSpin(0.5f).build())
                     .setLifetime(30)
                     .randomVelocity(0.01f)
                     .randomOffset(0.125f)
@@ -146,7 +147,7 @@ public class CrystalItem extends BlockItem implements IParticleItem, IGuiParticl
                         .setColorData(ColorParticleData.create(color).build())
                         .setTransparencyData(GenericParticleData.create(0.5f, 0).build())
                         .setScaleData(GenericParticleData.create(0.1f, 0).build())
-                        .randomSpin(0.5f)
+                        .setSpinData(SpinParticleData.create().randomSpin(0.5f).build())
                         .setLifetime(30)
                         .randomVelocity(0.01f)
                         .randomOffset(0.125f)

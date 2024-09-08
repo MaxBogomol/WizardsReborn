@@ -119,7 +119,7 @@ public class SonarArcaneEnchantment extends ArcaneEnchantment {
         }
     }
 
-    public static void inventoryTick(ItemStack stack, Level world, Entity entity, int slot, boolean isSelected) {
+    public static void inventoryTick(ItemStack stack, Level level, Entity entity, int slot, boolean isSelected) {
         if (getCooldown(stack) > 0) {
             setCooldown(stack, getCooldown(stack) - 1);
         }
@@ -142,7 +142,7 @@ public class SonarArcaneEnchantment extends ArcaneEnchantment {
                 playSound(entity.level(), entity.position(), volume, id);
 
                 Vec3 pos = entity.getLookAngle().scale(1.5f).add(entity.getEyePosition());
-                world.addParticle(ParticleTypes.NOTE, pos.x(), pos.y(), pos.z(), (id % 7) / 7f, 0.0D, 0.0D);
+                level.addParticle(ParticleTypes.NOTE, pos.x(), pos.y(), pos.z(), (id % 7) / 7f, 0.0D, 0.0D);
                 setTick(stack, 10);
 
                 ores.remove(0);

@@ -1,8 +1,8 @@
 package mod.maxbogomol.wizards_reborn.registry.client;
 
-import mod.maxbogomol.fluffy_fur.client.particle.GenericParticleType;
+import mod.maxbogomol.fluffy_fur.client.particle.type.GenericParticleType;
+import mod.maxbogomol.fluffy_fur.client.particle.type.LeavesParticleType;
 import mod.maxbogomol.wizards_reborn.WizardsReborn;
-import mod.maxbogomol.wizards_reborn.client.particle.LeavesParticleType;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.particle.ParticleEngine;
 import net.minecraft.core.particles.ParticleType;
@@ -31,9 +31,9 @@ public class WizardsRebornParticles {
         @SubscribeEvent
         public static void registerParticles(RegisterParticleProvidersEvent event) {
             ParticleEngine particleEngine = Minecraft.getInstance().particleEngine;
-            particleEngine.register(WizardsRebornParticles.KARMA.get(), GenericParticleType.Factory::new);
-            particleEngine.register(WizardsRebornParticles.ARCANE_WOOD_LEAVES.get(), LeavesParticleType.Factory::new);
-            particleEngine.register(WizardsRebornParticles.INNOCENT_WOOD_LEAVES.get(), LeavesParticleType.Factory::new);
+            particleEngine.register(KARMA.get(), GenericParticleType.Factory::new);
+            particleEngine.register(ARCANE_WOOD_LEAVES.get(), LeavesParticleType.Factory::new);
+            particleEngine.register(INNOCENT_WOOD_LEAVES.get(), LeavesParticleType.Factory::new);
         }
     }
 }

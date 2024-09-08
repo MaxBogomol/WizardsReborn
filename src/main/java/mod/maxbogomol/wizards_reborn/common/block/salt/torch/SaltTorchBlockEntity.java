@@ -1,30 +1,43 @@
-package mod.maxbogomol.wizards_reborn.common.block.salt_lantern;
+package mod.maxbogomol.wizards_reborn.common.block.salt.torch;
 
 import mod.maxbogomol.fluffy_fur.client.particle.ParticleBuilder;
 import mod.maxbogomol.fluffy_fur.client.particle.data.ColorParticleData;
 import mod.maxbogomol.fluffy_fur.client.particle.data.GenericParticleData;
 import mod.maxbogomol.fluffy_fur.client.particle.data.LightParticleData;
+import mod.maxbogomol.fluffy_fur.client.particle.data.SpinParticleData;
+import mod.maxbogomol.fluffy_fur.common.block.entity.ExposedBlockSimpleInventory;
+import mod.maxbogomol.fluffy_fur.common.block.entity.TickableBlockEntity;
 import mod.maxbogomol.fluffy_fur.common.easing.Easing;
 import mod.maxbogomol.fluffy_fur.registry.client.FluffyFurParticles;
 import mod.maxbogomol.fluffy_fur.registry.client.FluffyFurRenderTypes;
 import mod.maxbogomol.wizards_reborn.common.block.ArcaneLumosBlock;
-import mod.maxbogomol.wizards_reborn.common.block.salt_torch.SaltTorchBlockEntity;
 import mod.maxbogomol.wizards_reborn.registry.common.block.WizardsRebornBlockEntities;
+import mod.maxbogomol.wizards_reborn.registry.common.item.WizardsRebornItemTags;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
+import net.minecraft.world.SimpleContainer;
 import net.minecraft.world.item.BlockItem;
+import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.Vec3;
+import org.jetbrains.annotations.NotNull;
 
+import javax.annotation.Nullable;
 import java.awt.*;
 
-public class SaltLanternBlockEntity extends SaltTorchBlockEntity {
-    public SaltLanternBlockEntity(BlockEntityType<?> type, BlockPos pos, BlockState state) {
+public class SaltTorchBlockEntity extends ExposedBlockSimpleInventory implements TickableBlockEntity {
+
+    public static Color colorFirst = new Color(255, 170, 65);
+    public static Color colorSecond = new Color(231, 71, 101);
+
+    public SaltTorchBlockEntity(BlockEntityType<?> type, BlockPos pos, BlockState state) {
         super(type, pos, state);
     }
 
-    public SaltLanternBlockEntity(BlockPos pos, BlockState state) {
-        this(WizardsRebornBlockEntities.SALT_LANTERN.get(), pos, state);
+    public SaltTorchBlockEntity(BlockPos pos, BlockState state) {
+        this(WizardsRebornBlockEntities.SALT_TORCH.get(), pos, state);
     }
 
     @Override
@@ -32,11 +45,12 @@ public class SaltLanternBlockEntity extends SaltTorchBlockEntity {
         if (level.isClientSide()) {
             Color colorF = colorFirst;
             Color color = colorSecond;
-            Vec3 pos = new Vec3(0.5f, 0.25f, 0.5f);
+            Vec3 pos = new Vec3(0.5f, 0.6875f, 0.5f);
             boolean isCosmic = false;
 
-            if (getBlockState().getValue(SaltLanternBlock.HANGING)) {
-                pos = pos.add(0f, 0.1875f, 0f);
+            if (getBlockState().getBlock() instanceof SaltWallTorchBlock) {
+                BlockPos blockPos = new BlockPos(0, 0, 0).relative(getBlockState().getValue(SaltWallTorchBlock.FACING));
+                pos = pos.add(blockPos.getX() * -0.25f, 0.09375f, blockPos.getZ() * -0.25f);
             }
 
             if (!getItemHandler().getItem(0).isEmpty()) {
@@ -70,8 +84,8 @@ public class SaltLanternBlockEntity extends SaltTorchBlockEntity {
                 ParticleBuilder.create(FluffyFurParticles.SPARKLE)
                         .setColorData(ColorParticleData.create(colorF, color).build())
                         .setTransparencyData(GenericParticleData.create(0.25f, 0).build())
-                        .setScaleData(GenericParticleData.create(0.45f, 0).setEasing(Easing.CUBIC_IN_OUT).build())
-                        .randomSpin(0.005f)
+                        .setScaleData(GenericParticleData.create(0.35f, 0).setEasing(Easing.CUBIC_IN_OUT).build())
+                        .setSpinData(SpinParticleData.create().randomSpin(0.005f).build())
                         .setLifetime(30)
                         .spawn(level, worldPosition.getX() + pos.x(), worldPosition.getY() + pos.y(), worldPosition.getZ() + pos.z());
             }
@@ -79,10 +93,11 @@ public class SaltLanternBlockEntity extends SaltTorchBlockEntity {
                 ParticleBuilder.create(random.nextFloat() < 0.3 ? FluffyFurParticles.TINY_STAR : FluffyFurParticles.SPARKLE)
                         .setColorData(ColorParticleData.create(colorF, color).build())
                         .setTransparencyData(GenericParticleData.create(0.35f, 0).build())
-                        .setScaleData(GenericParticleData.create(0f, 0.35f).setEasing(Easing.SINE_IN_OUT).build())
-                        .randomSpin(0.01f)
+                        .setScaleData(GenericParticleData.create(0.25f, 0).setEasing(Easing.SINE_IN_OUT).build())
+                        .setSpinData(SpinParticleData.create().randomSpin(0.01f).build())
                         .setLifetime(60)
-                        .randomVelocity(0.00625f)
+                        .randomVelocity(0.007f)
+                        .addVelocity(0, 0.015f, 0)
                         .spawn(level, worldPosition.getX() + pos.x(), worldPosition.getY() + pos.y(), worldPosition.getZ() + pos.z());
             }
             if (random.nextFloat() < 0.45) {
@@ -92,19 +107,20 @@ public class SaltLanternBlockEntity extends SaltTorchBlockEntity {
                         .setScaleData(GenericParticleData.create(0.15f, 0).setEasing(Easing.SINE_OUT).build())
                         .setLifetime(30)
                         .randomVelocity(0.015f)
+                        .addVelocity(0, 0.03f, 0)
                         .spawn(level, worldPosition.getX() + pos.x(), worldPosition.getY() + pos.y(), worldPosition.getZ() + pos.z());
             }
             if (random.nextFloat() < 0.3) {
                 ParticleBuilder.create(FluffyFurParticles.SMOKE)
                         .setRenderType(FluffyFurRenderTypes.DELAYED_PARTICLE)
                         .setColorData(ColorParticleData.create(Color.BLACK).build())
-                        .setTransparencyData(GenericParticleData.create(0.4f, 0).build())
-                        .setScaleData(GenericParticleData.create(0.15f, 0.35f).build())
+                        .setTransparencyData(GenericParticleData.create(0.2f, 0).build())
+                        .setScaleData(GenericParticleData.create(0.25f, 0).build())
+                        .setSpinData(SpinParticleData.create().randomSpin(0.1f).build())
                         .setLightData(LightParticleData.DEFAULT)
-                        .randomSpin(0.1f)
                         .setLifetime(60)
                         .randomVelocity(0.0035f)
-                        .addVelocity(0, 0.02f, 0)
+                        .addVelocity(0, 0.03f, 0)
                         .spawn(level, worldPosition.getX() + pos.x(), worldPosition.getY() + pos.y(), worldPosition.getZ() + pos.z());
             }
 
@@ -114,7 +130,7 @@ public class SaltLanternBlockEntity extends SaltTorchBlockEntity {
                             .setColorData(ColorParticleData.create(color).build())
                             .setTransparencyData(GenericParticleData.create(0.75f, 0).build())
                             .setScaleData(GenericParticleData.create(0, 0.1f, 0).setEasing(Easing.SINE_IN_OUT).build())
-                            .randomSpin(0.1f)
+                            .setSpinData(SpinParticleData.create().randomSpin(0.1f).build())
                             .setLifetime(10)
                             .randomVelocity(0.015f)
                             .flatRandomOffset(0.2f, 0.2f, 0.2f)
@@ -126,7 +142,7 @@ public class SaltLanternBlockEntity extends SaltTorchBlockEntity {
                             .setColorData(ColorParticleData.create(Color.WHITE).build())
                             .setTransparencyData(GenericParticleData.create(0.75f, 0).build())
                             .setScaleData(GenericParticleData.create(0, 0.1f, 0).setEasing(Easing.SINE_IN_OUT).build())
-                            .randomSpin(0.1f)
+                            .setSpinData(SpinParticleData.create().randomSpin(0.1f).build())
                             .setLifetime(10)
                             .randomVelocity(0.015f)
                             .flatRandomOffset(0.2f, 0.2f, 0.2f)
@@ -135,5 +151,47 @@ public class SaltLanternBlockEntity extends SaltTorchBlockEntity {
                 }
             }
         }
+    }
+
+    @Override
+    protected SimpleContainer createItemHandler() {
+        return new SimpleContainer(2) {
+            @Override
+            public int getMaxStackSize() {
+                return 1;
+            }
+        };
+    }
+
+    @Override
+    public AABB getRenderBoundingBox() {
+        BlockPos pos = getBlockPos();
+        return new AABB(pos.getX() - 0.5f, pos.getY() - 0.5f, pos.getZ() - 0.5f, pos.getX() + 1.5f, pos.getY() + 1.5f, pos.getZ() + 1.5f);
+    }
+
+    @Override
+    public boolean canPlaceItemThroughFace(int index, @NotNull ItemStack stack, @Nullable Direction direction) {
+        if (stack.is(WizardsRebornItemTags.ARCANE_LUMOS)) {
+            return true;
+        }
+
+        return false;
+    }
+
+    @Override
+    public boolean canTakeItemThroughFace(int index, @NotNull ItemStack stack, @Nullable Direction direction) {
+        return true;
+    }
+
+    public int getInventorySize() {
+        int size = 0;
+
+        for (int i = 0; i < getItemHandler().getContainerSize(); i++) {
+            if (!getItemHandler().getItem(i).isEmpty()) {
+                size++;
+            }
+        }
+
+        return size;
     }
 }

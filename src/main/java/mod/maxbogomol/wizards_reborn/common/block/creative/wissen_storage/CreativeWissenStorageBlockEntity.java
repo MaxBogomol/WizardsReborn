@@ -8,8 +8,8 @@ import net.minecraft.world.level.block.state.BlockState;
 
 public class CreativeWissenStorageBlockEntity extends WissenCellBlockEntity {
 
-    public CreativeWissenStorageBlockEntity(BlockEntityType<?> pType, BlockPos pPos, BlockState pBlockState) {
-        super(pType, pPos, pBlockState);
+    public CreativeWissenStorageBlockEntity(BlockEntityType<?> type, BlockPos pos, BlockState blockState) {
+        super(type, pos, blockState);
     }
 
     public CreativeWissenStorageBlockEntity(BlockPos pos, BlockState state) {

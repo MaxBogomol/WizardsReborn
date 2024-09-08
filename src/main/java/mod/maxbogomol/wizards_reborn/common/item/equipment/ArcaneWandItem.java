@@ -140,7 +140,7 @@ public class ArcaneWandItem extends Item implements IWissenItem, ICustomAnimatio
     }
 
     @Override
-    public void inventoryTick(ItemStack stack, Level world, Entity entity, int slot, boolean isSelected) {
+    public void inventoryTick(ItemStack stack, Level level, Entity entity, int slot, boolean isSelected) {
         WissenItemUtil.existWissen(stack);
         existTags(stack);
         CompoundTag nbt = stack.getOrCreateTag();
@@ -152,7 +152,7 @@ public class ArcaneWandItem extends Item implements IWissenItem, ICustomAnimatio
                     nbt.putInt("maxCooldown", 0);
                     if (nbt.getString("spell") != "") {
                         Spell spell = Spells.getSpell(nbt.getString("spell"));
-                        spell.onReload(stack, world, entity, slot, isSelected);
+                        spell.onReload(stack, level, entity, slot, isSelected);
                     }
                 }
             }
@@ -178,15 +178,15 @@ public class ArcaneWandItem extends Item implements IWissenItem, ICustomAnimatio
     }
 
     @Override
-    public InteractionResultHolder<ItemStack> use(Level world, Player player, InteractionHand hand) {
+    public InteractionResultHolder<ItemStack> use(Level level, Player player, InteractionHand hand) {
         ItemStack stack = player.getItemInHand(hand);
 
         CompoundTag nbt = stack.getTag();
         if (canSpell(stack, player)) {
             Spell spell = Spells.getSpell(nbt.getString("spell"));
-            if (spell.canSpell(world, player, hand) && spell.canSpellAir(world, player, hand)) {
+            if (spell.canSpell(level, player, hand) && spell.canSpellAir(level, player, hand)) {
                 if (spell.canWandWithCrystal(stack)) {
-                    spell.useSpell(world, player, hand);
+                    spell.useSpell(level, player, hand);
                     return InteractionResultHolder.success(stack);
                 }
             }
@@ -317,7 +317,7 @@ public class ArcaneWandItem extends Item implements IWissenItem, ICustomAnimatio
 
     @OnlyIn(Dist.CLIENT)
     @Override
-    public void appendHoverText(ItemStack stack, Level world, List<Component> list, TooltipFlag flags) {
+    public void appendHoverText(ItemStack stack, Level level, List<Component> list, TooltipFlag flags) {
         Skin skin = Skin.getSkinFromItem(stack);
         if (skin != null) list.add(skin.getSkinComponent());
 

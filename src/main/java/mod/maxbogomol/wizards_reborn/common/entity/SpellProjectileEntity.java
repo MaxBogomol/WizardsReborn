@@ -38,8 +38,8 @@ public class SpellProjectileEntity extends Entity {
 
     public List<Vec3> trail = new ArrayList<>();
 
-    public SpellProjectileEntity(EntityType<?> entityTypeIn, Level worldIn) {
-        super(entityTypeIn, worldIn);
+    public SpellProjectileEntity(EntityType<?> type, Level level) {
+        super(type, level);
     }
 
     public SpellProjectileEntity shoot(double x, double y, double z, double vx, double vy, double vz, UUID caster, String spell, CompoundTag stats) {

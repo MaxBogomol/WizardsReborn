@@ -3,7 +3,7 @@ package mod.maxbogomol.wizards_reborn.common.block.casing.steam;
 import mod.maxbogomol.wizards_reborn.api.alchemy.ISteamBlockEntity;
 import mod.maxbogomol.wizards_reborn.api.alchemy.ISteamPipePriority;
 import mod.maxbogomol.wizards_reborn.api.alchemy.PipePriorityMap;
-import mod.maxbogomol.wizards_reborn.common.block.steam_pipe.SteamPipeBlockEntity;
+import mod.maxbogomol.wizards_reborn.common.block.pipe.steam.SteamPipeBlockEntity;
 import mod.maxbogomol.wizards_reborn.registry.common.block.WizardsRebornBlockEntities;
 import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornSounds;
 import net.minecraft.core.BlockPos;
@@ -18,8 +18,8 @@ import net.minecraft.world.phys.AABB;
 import java.util.ArrayList;
 
 public class SteamCasingBlockEntity extends SteamPipeBlockEntity {
-    public SteamCasingBlockEntity(BlockEntityType<?> pType, BlockPos pPos, BlockState pBlockState) {
-        super(pType, pPos, pBlockState);
+    public SteamCasingBlockEntity(BlockEntityType<?> type, BlockPos pos, BlockState blockState) {
+        super(type, pos, blockState);
     }
 
     public SteamCasingBlockEntity(BlockPos pos, BlockState state) {

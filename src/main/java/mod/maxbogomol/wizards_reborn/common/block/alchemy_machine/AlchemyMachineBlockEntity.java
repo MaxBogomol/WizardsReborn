@@ -3,6 +3,7 @@ package mod.maxbogomol.wizards_reborn.common.block.alchemy_machine;
 import mod.maxbogomol.fluffy_fur.client.particle.ParticleBuilder;
 import mod.maxbogomol.fluffy_fur.client.particle.data.ColorParticleData;
 import mod.maxbogomol.fluffy_fur.client.particle.data.GenericParticleData;
+import mod.maxbogomol.fluffy_fur.client.particle.data.SpinParticleData;
 import mod.maxbogomol.fluffy_fur.common.block.entity.TickableBlockEntity;
 import mod.maxbogomol.fluffy_fur.common.network.BlockEntityUpdate;
 import mod.maxbogomol.fluffy_fur.registry.client.FluffyFurParticles;
@@ -267,7 +268,7 @@ public class AlchemyMachineBlockEntity extends PipeBaseBlockEntity implements Ti
                                 .setColorData(ColorParticleData.create(Color.WHITE).build())
                                 .setTransparencyData(GenericParticleData.create(0.4f, 0).build())
                                 .setScaleData(GenericParticleData.create(0.1f, 0.5f).build())
-                                .randomSpin(0.5f)
+                                .setSpinData(SpinParticleData.create().randomSpin(0.5f).build())
                                 .setLifetime(30)
                                 .randomVelocity(0.0125f, 0, 0.0125f)
                                 .flatRandomVelocity(0, 0.025f, 0)

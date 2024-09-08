@@ -2,8 +2,8 @@ package mod.maxbogomol.wizards_reborn.common.item.equipment;
 
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.math.Axis;
-import mod.maxbogomol.fluffy_fur.client.render.LevelRenderHandler;
 import mod.maxbogomol.fluffy_fur.client.render.fluid.FluidRenderer;
+import mod.maxbogomol.fluffy_fur.registry.client.FluffyFurRenderTypes;
 import mod.maxbogomol.fluffy_fur.util.ColorUtil;
 import mod.maxbogomol.wizards_reborn.WizardsReborn;
 import mod.maxbogomol.wizards_reborn.api.alchemy.AlchemyPotion;
@@ -63,7 +63,7 @@ public class VialPotionItem extends AlchemyPotionItem {
                 fluidStack = new FluidStack(fluid, usesI);
                 colorI = clientType.getTintColor(fluidStack);
             }
-            MultiBufferSource bufferDelayed = LevelRenderHandler.getDelayedRender();
+            MultiBufferSource bufferDelayed = FluffyFurRenderTypes.getDelayedRender();
             FluidRenderer.renderScaledCuboid(ms, bufferDelayed, WizardsRebornModels.VIAL_FLUID_CUBE_0, fluidStack, colorI, 0, 2, light, false);
             ms.popPose();
 

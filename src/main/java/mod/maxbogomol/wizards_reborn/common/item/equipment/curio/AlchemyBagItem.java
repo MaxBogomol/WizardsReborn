@@ -90,15 +90,15 @@ public class AlchemyBagItem extends BaseCurioItem implements ICurioItemTexture, 
     }
 
     @Override
-    public InteractionResultHolder<ItemStack> use(Level world, Player player, InteractionHand hand) {
+    public InteractionResultHolder<ItemStack> use(Level level, Player player, InteractionHand hand) {
         ItemStack stack = player.getItemInHand(hand);
         player.awardStat(Stats.ITEM_USED.get(this));
-        openBag(world, player, stack);
+        openBag(level, player, stack);
 
         return InteractionResultHolder.success(stack);
     }
 
-    public MenuProvider createContainerProvider(Level worldIn, ItemStack stack) {
+    public MenuProvider createContainerProvider(Level level, ItemStack stack) {
         return new MenuProvider() {
             @Override
             public Component getDisplayName() {
@@ -108,7 +108,7 @@ public class AlchemyBagItem extends BaseCurioItem implements ICurioItemTexture, 
             @Nullable
             @Override
             public AbstractContainerMenu createMenu(int i, Inventory playerInventory, Player playerEntity) {
-                return new AlchemyBagContainer(i, worldIn, stack, playerInventory, playerEntity);
+                return new AlchemyBagContainer(i, level, stack, playerInventory, playerEntity);
             }
         };
     }
@@ -139,11 +139,11 @@ public class AlchemyBagItem extends BaseCurioItem implements ICurioItemTexture, 
     }
 
     @Override
-    public void openBag(Level world, Player player, ItemStack stack) {
-        if (!world.isClientSide) {
-            MenuProvider containerProvider = createContainerProvider(world, stack);
+    public void openBag(Level level, Player player, ItemStack stack) {
+        if (!level.isClientSide) {
+            MenuProvider containerProvider = createContainerProvider(level, stack);
             NetworkHooks.openScreen(((ServerPlayer) player), containerProvider, b -> b.writeItem(stack));
-            world.playSound(WizardsReborn.proxy.getPlayer(), player.getX(), player.getY(), player.getZ(), SoundEvents.ARMOR_EQUIP_LEATHER, SoundSource.PLAYERS, 1f, 1f);
+            level.playSound(WizardsReborn.proxy.getPlayer(), player.getX(), player.getY(), player.getZ(), SoundEvents.ARMOR_EQUIP_LEATHER, SoundSource.PLAYERS, 1f, 1f);
         }
     }
 }

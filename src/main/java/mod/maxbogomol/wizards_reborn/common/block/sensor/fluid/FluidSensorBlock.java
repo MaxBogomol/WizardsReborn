@@ -39,28 +39,28 @@ public class FluidSensorBlock extends SensorBaseBlock {
     }
 
     @Override
-    protected int getInputSignal(Level pLevel, BlockPos pPos, BlockState pState) {
-        int i = super.getInputSignal(pLevel, pPos, pState);
-        Direction direction = pState.getValue(FACING);
-        BlockPos blockpos = pPos.relative(direction);
+    protected int getInputSignal(Level level, BlockPos pos, BlockState state) {
+        int i = super.getInputSignal(level, pos, state);
+        Direction direction = state.getValue(FACING);
+        BlockPos blockpos = pos.relative(direction);
 
-        switch (pState.getValue(FACE)) {
+        switch (state.getValue(FACE)) {
             case FLOOR:
-                blockpos = pPos.above();
+                blockpos = pos.above();
                 direction = Direction.UP;
                 break;
             case WALL:
                 direction = direction.getOpposite();
                 break;
             case CEILING:
-                blockpos = pPos.below();
+                blockpos = pos.below();
                 direction = Direction.DOWN;
                 break;
         }
 
-        if (pLevel.getBlockEntity(pPos) instanceof FluidSensorBlockEntity sensor) {
-            BlockEntity tile = pLevel.getBlockEntity(blockpos);
-            boolean active = ((!pState.getValue(BlockStateProperties.LIT) || pLevel.hasNeighborSignal(pPos)));
+        if (level.getBlockEntity(pos) instanceof FluidSensorBlockEntity sensor) {
+            BlockEntity tile = level.getBlockEntity(blockpos);
+            boolean active = ((!state.getValue(BlockStateProperties.LIT) || level.hasNeighborSignal(pos)));
             if (tile instanceof IFluidBlockEntity fluidTile) {
                 if (!sensor.getTank().isEmpty()) {
                     if ((active && fluidTile.getFluidStack().getFluid().isSame(sensor.getTank().getFluid().getFluid())) ||
@@ -90,18 +90,18 @@ public class FluidSensorBlock extends SensorBaseBlock {
         return i;
     }
 
-    public InteractionResult use(BlockState pState, Level pLevel, BlockPos pPos, Player pPlayer, InteractionHand pHand, BlockHitResult pHit) {
-        if (!pPlayer.getAbilities().mayBuild) {
+    public InteractionResult use(BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hit) {
+        if (!player.getAbilities().mayBuild) {
             return InteractionResult.PASS;
         } else {
-            if (pLevel.getBlockEntity(pPos) instanceof FluidSensorBlockEntity sensorTile) {
-                ItemStack stack = pPlayer.getItemInHand(pHand);
+            if (level.getBlockEntity(pos) instanceof FluidSensorBlockEntity sensorTile) {
+                ItemStack stack = player.getItemInHand(hand);
                 if (!stack.isEmpty()) {
                     IFluidHandler cap = stack.getCapability(ForgeCapabilities.FLUID_HANDLER_ITEM).orElse(null);
                     if (cap != null) {
                         sensorTile.getTank().setFluid(new FluidStack(cap.getFluidInTank(0).getFluid(), 1));
                         SoundEvent soundevent = cap.getFluidInTank(0).getFluid().getFluidType().getSound(cap.getFluidInTank(0), SoundActions.BUCKET_FILL);
-                        pLevel.playSound(pPlayer, pPos, soundevent, SoundSource.BLOCKS, 1F, 1f);
+                        level.playSound(player, pos, soundevent, SoundSource.BLOCKS, 1F, 1f);
 
                         return InteractionResult.SUCCESS;
                     }
@@ -111,7 +111,7 @@ public class FluidSensorBlock extends SensorBaseBlock {
                             if (potion instanceof FluidAlchemyPotion fluidPotion) {
                                 FluidStack fluid = new FluidStack(fluidPotion.fluid, 1);
                                 sensorTile.getTank().setFluid(fluid);
-                                pLevel.playSound(pPlayer, pPos, SoundEvents.BOTTLE_EMPTY, SoundSource.BLOCKS, 1F, 1f);
+                                level.playSound(player, pos, SoundEvents.BOTTLE_EMPTY, SoundSource.BLOCKS, 1F, 1f);
 
                                 return InteractionResult.SUCCESS;
                             }
@@ -119,24 +119,24 @@ public class FluidSensorBlock extends SensorBaseBlock {
                     }
                 }
 
-                if (pPlayer.isShiftKeyDown()) {
+                if (player.isShiftKeyDown()) {
                     sensorTile.getTank().setFluid(FluidStack.EMPTY);
-                    pLevel.playSound(pPlayer, pPos, SoundEvents.COMPARATOR_CLICK, SoundSource.BLOCKS, 0.3F, 0.7f);
+                    level.playSound(player, pos, SoundEvents.COMPARATOR_CLICK, SoundSource.BLOCKS, 0.3F, 0.7f);
                     return InteractionResult.SUCCESS;
                 }
             }
 
-            pState = pState.setValue(BlockStateProperties.LIT, !pState.getValue(BlockStateProperties.LIT));
-            pLevel.playSound(pPlayer, pPos, SoundEvents.COMPARATOR_CLICK, SoundSource.BLOCKS, 0.3F, 0.5f);
-            pLevel.setBlock(pPos, pState, 2);
-            return InteractionResult.sidedSuccess(pLevel.isClientSide);
+            state = state.setValue(BlockStateProperties.LIT, !state.getValue(BlockStateProperties.LIT));
+            level.playSound(player, pos, SoundEvents.COMPARATOR_CLICK, SoundSource.BLOCKS, 0.3F, 0.5f);
+            level.setBlock(pos, state, 2);
+            return InteractionResult.sidedSuccess(level.isClientSide);
         }
     }
 
     @Nullable
     @Override
-    public BlockEntity newBlockEntity(BlockPos pPos, BlockState pState) {
-        return new FluidSensorBlockEntity(pPos, pState);
+    public BlockEntity newBlockEntity(BlockPos pos, BlockState state) {
+        return new FluidSensorBlockEntity(pos, state);
     }
 
     @Override

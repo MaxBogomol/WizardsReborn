@@ -52,8 +52,8 @@ public class ArcaneHopperBlockEntity extends RandomizableContainerBlockEntity im
         return HOPPER_CONTAINER_SIZE;
     }
 
-    public ArcaneHopperBlockEntity(BlockPos pPos, BlockState pBlockState) {
-        super(WizardsRebornBlockEntities.ARCANE_HOPPER.get(), pPos, pBlockState);
+    public ArcaneHopperBlockEntity(BlockPos pos, BlockState blockState) {
+        super(WizardsRebornBlockEntities.ARCANE_HOPPER.get(), pos, blockState);
     }
 
     public void load(CompoundTag pTag) {
@@ -84,11 +84,11 @@ public class ArcaneHopperBlockEntity extends RandomizableContainerBlockEntity im
         return ContainerHelper.removeItem(this.getItems(), pIndex, pCount);
     }
 
-    public void setItem(int pIndex, ItemStack pStack) {
+    public void setItem(int pIndex, ItemStack stack) {
         this.unpackLootTable((Player)null);
-        this.getItems().set(pIndex, pStack);
-        if (pStack.getCount() > this.getMaxStackSize()) {
-            pStack.setCount(this.getMaxStackSize());
+        this.getItems().set(pIndex, stack);
+        if (stack.getCount() > this.getMaxStackSize()) {
+            stack.setCount(this.getMaxStackSize());
         }
     }
 
@@ -96,25 +96,25 @@ public class ArcaneHopperBlockEntity extends RandomizableContainerBlockEntity im
         return Component.translatable("container.hopper");
     }
 
-    public static void pushItemsTick(Level pLevel, BlockPos pPos, BlockState pState, ArcaneHopperBlockEntity pBlockEntity) {
+    public static void pushItemsTick(Level level, BlockPos pos, BlockState state, ArcaneHopperBlockEntity pBlockEntity) {
         --pBlockEntity.cooldownTime;
-        pBlockEntity.tickedGameTime = pLevel.getGameTime();
+        pBlockEntity.tickedGameTime = level.getGameTime();
         if (!pBlockEntity.isOnCooldown()) {
             pBlockEntity.setCooldown(0);
-            tryMoveItems(pLevel, pPos, pState, pBlockEntity, () -> {
-                return suckInItems(pLevel, pBlockEntity);
+            tryMoveItems(level, pos, state, pBlockEntity, () -> {
+                return suckInItems(level, pBlockEntity);
             });
         }
     }
 
-    private static boolean tryMoveItems(Level pLevel, BlockPos pPos, BlockState pState, ArcaneHopperBlockEntity pBlockEntity, BooleanSupplier pValidator) {
-        if (pLevel.isClientSide) {
+    private static boolean tryMoveItems(Level level, BlockPos pos, BlockState state, ArcaneHopperBlockEntity pBlockEntity, BooleanSupplier pValidator) {
+        if (level.isClientSide) {
             return false;
         } else {
-            if (!pBlockEntity.isOnCooldown() && pState.getValue(HopperBlock.ENABLED)) {
+            if (!pBlockEntity.isOnCooldown() && state.getValue(HopperBlock.ENABLED)) {
                 boolean flag = false;
                 if (!pBlockEntity.isEmpty()) {
-                    flag = ejectItems(pLevel, pPos, pState, pBlockEntity);
+                    flag = ejectItems(level, pos, state, pBlockEntity);
                 }
 
                 if (!pBlockEntity.inventoryFull()) {
@@ -123,7 +123,7 @@ public class ArcaneHopperBlockEntity extends RandomizableContainerBlockEntity im
 
                 if (flag) {
                     pBlockEntity.setCooldown(getMoveItemSpeed());
-                    setChanged(pLevel, pPos, pState);
+                    setChanged(level, pos, state);
                     return true;
                 }
             }
@@ -142,13 +142,13 @@ public class ArcaneHopperBlockEntity extends RandomizableContainerBlockEntity im
         return true;
     }
 
-    private static boolean ejectItems(Level pLevel, BlockPos pPos, BlockState pState, ArcaneHopperBlockEntity pSourceContainer) {
+    private static boolean ejectItems(Level level, BlockPos pos, BlockState state, ArcaneHopperBlockEntity pSourceContainer) {
         if (ArcaneHopperInventoryCodeHooks.insertHook(pSourceContainer)) return true;
-        Container container = getAttachedContainer(pLevel, pPos, pState);
+        Container container = getAttachedContainer(level, pos, state);
         if (container == null) {
             return false;
         } else {
-            Direction direction = pState.getValue(HopperBlock.FACING).getOpposite();
+            Direction direction = state.getValue(HopperBlock.FACING).getOpposite();
             if (isFullContainer(container, direction)) {
                 return false;
             } else {
@@ -170,34 +170,34 @@ public class ArcaneHopperBlockEntity extends RandomizableContainerBlockEntity im
         }
     }
 
-    private static IntStream getSlots(Container pContainer, Direction pDirection) {
-        return pContainer instanceof WorldlyContainer ? IntStream.of(((WorldlyContainer)pContainer).getSlotsForFace(pDirection)) : IntStream.range(0, pContainer.getContainerSize());
+    private static IntStream getSlots(Container pContainer, Direction direction) {
+        return pContainer instanceof WorldlyContainer ? IntStream.of(((WorldlyContainer)pContainer).getSlotsForFace(direction)) : IntStream.range(0, pContainer.getContainerSize());
     }
 
-    private static boolean isFullContainer(Container pContainer, Direction pDirection) {
-        return getSlots(pContainer, pDirection).allMatch((p_59379_) -> {
+    private static boolean isFullContainer(Container pContainer, Direction direction) {
+        return getSlots(pContainer, direction).allMatch((p_59379_) -> {
             ItemStack itemstack = pContainer.getItem(p_59379_);
             return itemstack.getCount() >= itemstack.getMaxStackSize();
         });
     }
 
-    private static boolean isEmptyContainer(Container pContainer, Direction pDirection) {
-        return getSlots(pContainer, pDirection).allMatch((p_59319_) -> {
+    private static boolean isEmptyContainer(Container pContainer, Direction direction) {
+        return getSlots(pContainer, direction).allMatch((p_59319_) -> {
             return pContainer.getItem(p_59319_).isEmpty();
         });
     }
 
-    public static boolean suckInItems(Level pLevel, Hopper pHopper) {
-        Boolean ret = net.minecraftforge.items.VanillaInventoryCodeHooks.extractHook(pLevel, pHopper);
+    public static boolean suckInItems(Level level, Hopper pHopper) {
+        Boolean ret = net.minecraftforge.items.VanillaInventoryCodeHooks.extractHook(level, pHopper);
         if (ret != null) return ret;
-        Container container = getSourceContainer(pLevel, pHopper);
+        Container container = getSourceContainer(level, pHopper);
         if (container != null) {
             Direction direction = Direction.DOWN;
             return isEmptyContainer(container, direction) ? false : getSlots(container, direction).anyMatch((p_59363_) -> {
                 return tryTakeInItemFromSlot(pHopper, container, p_59363_, direction);
             });
         } else {
-            for(ItemEntity itementity : getItemsAtAndAbove(pLevel, pHopper)) {
+            for(ItemEntity itementity : getItemsAtAndAbove(level, pHopper)) {
                 if (addItem(pHopper, itementity)) {
                     return true;
                 }
@@ -207,9 +207,9 @@ public class ArcaneHopperBlockEntity extends RandomizableContainerBlockEntity im
         }
     }
 
-    private static boolean tryTakeInItemFromSlot(Hopper pHopper, Container pContainer, int pSlot, Direction pDirection) {
+    private static boolean tryTakeInItemFromSlot(Hopper pHopper, Container pContainer, int pSlot, Direction direction) {
         ItemStack itemstack = pContainer.getItem(pSlot);
-        if (!itemstack.isEmpty() && canTakeItemFromContainer(pHopper, pContainer, itemstack, pSlot, pDirection)) {
+        if (!itemstack.isEmpty() && canTakeItemFromContainer(pHopper, pContainer, itemstack, pSlot, direction)) {
             ItemStack itemstack1 = itemstack.copy();
             ItemStack itemstack2 = addItem(pContainer, pHopper, pContainer.removeItem(pSlot, 1), (Direction)null);
             if (itemstack2.isEmpty()) {
@@ -237,35 +237,35 @@ public class ArcaneHopperBlockEntity extends RandomizableContainerBlockEntity im
         return flag;
     }
 
-    public static ItemStack addItem(@Nullable Container pSource, Container pDestination, ItemStack pStack, @Nullable Direction pDirection) {
+    public static ItemStack addItem(@Nullable Container pSource, Container pDestination, ItemStack stack, @Nullable Direction direction) {
         if (pDestination instanceof WorldlyContainer worldlycontainer) {
-            if (pDirection != null) {
-                int[] aint = worldlycontainer.getSlotsForFace(pDirection);
+            if (direction != null) {
+                int[] aint = worldlycontainer.getSlotsForFace(direction);
 
-                for(int k = 0; k < aint.length && !pStack.isEmpty(); ++k) {
-                    pStack = tryMoveInItem(pSource, pDestination, pStack, aint[k], pDirection);
+                for(int k = 0; k < aint.length && !stack.isEmpty(); ++k) {
+                    stack = tryMoveInItem(pSource, pDestination, stack, aint[k], direction);
                 }
 
-                return pStack;
+                return stack;
             }
         }
 
         int i = pDestination.getContainerSize();
 
-        for(int j = 0; j < i && !pStack.isEmpty(); ++j) {
-            pStack = tryMoveInItem(pSource, pDestination, pStack, j, pDirection);
+        for(int j = 0; j < i && !stack.isEmpty(); ++j) {
+            stack = tryMoveInItem(pSource, pDestination, stack, j, direction);
         }
 
-        return pStack;
+        return stack;
     }
 
-    private static boolean canPlaceItemInContainer(Container pContainer, ItemStack pStack, int pSlot, @Nullable Direction pDirection) {
-        if (!pContainer.canPlaceItem(pSlot, pStack)) {
+    private static boolean canPlaceItemInContainer(Container pContainer, ItemStack stack, int pSlot, @Nullable Direction direction) {
+        if (!pContainer.canPlaceItem(pSlot, stack)) {
             return false;
         } else {
             if (pContainer instanceof WorldlyContainer) {
                 WorldlyContainer worldlycontainer = (WorldlyContainer)pContainer;
-                if (!worldlycontainer.canPlaceItemThroughFace(pSlot, pStack, pDirection)) {
+                if (!worldlycontainer.canPlaceItemThroughFace(pSlot, stack, direction)) {
                     return false;
                 }
             }
@@ -274,13 +274,13 @@ public class ArcaneHopperBlockEntity extends RandomizableContainerBlockEntity im
         }
     }
 
-    private static boolean canTakeItemFromContainer(Container pSource, Container pDestination, ItemStack pStack, int pSlot, Direction pDirection) {
-        if (!pDestination.canTakeItem(pSource, pSlot, pStack)) {
+    private static boolean canTakeItemFromContainer(Container pSource, Container pDestination, ItemStack stack, int pSlot, Direction direction) {
+        if (!pDestination.canTakeItem(pSource, pSlot, stack)) {
             return false;
         } else {
             if (pDestination instanceof WorldlyContainer) {
                 WorldlyContainer worldlycontainer = (WorldlyContainer)pDestination;
-                if (!worldlycontainer.canTakeItemThroughFace(pSlot, pStack, pDirection)) {
+                if (!worldlycontainer.canTakeItemThroughFace(pSlot, stack, direction)) {
                     return false;
                 }
             }
@@ -289,19 +289,19 @@ public class ArcaneHopperBlockEntity extends RandomizableContainerBlockEntity im
         }
     }
 
-    private static ItemStack tryMoveInItem(@Nullable Container pSource, Container pDestination, ItemStack pStack, int pSlot, @Nullable Direction pDirection) {
+    private static ItemStack tryMoveInItem(@Nullable Container pSource, Container pDestination, ItemStack stack, int pSlot, @Nullable Direction direction) {
         ItemStack itemstack = pDestination.getItem(pSlot);
-        if (canPlaceItemInContainer(pDestination, pStack, pSlot, pDirection)) {
+        if (canPlaceItemInContainer(pDestination, stack, pSlot, direction)) {
             boolean flag = false;
             boolean flag1 = pDestination.isEmpty();
             if (itemstack.isEmpty()) {
-                pDestination.setItem(pSlot, pStack);
-                pStack = ItemStack.EMPTY;
+                pDestination.setItem(pSlot, stack);
+                stack = ItemStack.EMPTY;
                 flag = true;
-            } else if (canMergeItems(itemstack, pStack)) {
-                int i = pStack.getMaxStackSize() - itemstack.getCount();
-                int j = Math.min(pStack.getCount(), i);
-                pStack.shrink(j);
+            } else if (canMergeItems(itemstack, stack)) {
+                int i = stack.getMaxStackSize() - itemstack.getCount();
+                int j = Math.min(stack.getCount(), i);
+                stack.shrink(j);
                 itemstack.grow(j);
                 flag = j > 0;
             }
@@ -326,61 +326,61 @@ public class ArcaneHopperBlockEntity extends RandomizableContainerBlockEntity im
             }
         }
 
-        return pStack;
+        return stack;
     }
 
     @Nullable
-    private static Container getAttachedContainer(Level pLevel, BlockPos pPos, BlockState pState) {
-        Direction direction = pState.getValue(HopperBlock.FACING);
-        return getContainerAt(pLevel, pPos.relative(direction));
+    private static Container getAttachedContainer(Level level, BlockPos pos, BlockState state) {
+        Direction direction = state.getValue(HopperBlock.FACING);
+        return getContainerAt(level, pos.relative(direction));
     }
 
     @Nullable
-    private static Container getSourceContainer(Level pLevel, Hopper pHopper) {
-        return getContainerAt(pLevel, pHopper.getLevelX(), pHopper.getLevelY() + 1.0D, pHopper.getLevelZ());
+    private static Container getSourceContainer(Level level, Hopper pHopper) {
+        return getContainerAt(level, pHopper.getLevelX(), pHopper.getLevelY() + 1.0D, pHopper.getLevelZ());
     }
 
-    public static List<ItemEntity> getItemsAtAndAbove(Level pLevel, Hopper pHopper) {
+    public static List<ItemEntity> getItemsAtAndAbove(Level level, Hopper pHopper) {
         return pHopper.getSuckShape().toAabbs().stream().flatMap((p_155558_) -> {
-            return pLevel.getEntitiesOfClass(ItemEntity.class, p_155558_.move(pHopper.getLevelX() - 0.5D, pHopper.getLevelY() - 0.5D, pHopper.getLevelZ() - 0.5D), EntitySelector.ENTITY_STILL_ALIVE).stream();
+            return level.getEntitiesOfClass(ItemEntity.class, p_155558_.move(pHopper.getLevelX() - 0.5D, pHopper.getLevelY() - 0.5D, pHopper.getLevelZ() - 0.5D), EntitySelector.ENTITY_STILL_ALIVE).stream();
         }).collect(Collectors.toList());
     }
 
     @Nullable
-    public static Container getContainerAt(Level pLevel, BlockPos pPos) {
-        return getContainerAt(pLevel, (double)pPos.getX() + 0.5D, (double)pPos.getY() + 0.5D, (double)pPos.getZ() + 0.5D);
+    public static Container getContainerAt(Level level, BlockPos pos) {
+        return getContainerAt(level, (double)pos.getX() + 0.5D, (double)pos.getY() + 0.5D, (double)pos.getZ() + 0.5D);
     }
 
     @Nullable
-    private static Container getContainerAt(Level pLevel, double pX, double pY, double pZ) {
+    private static Container getContainerAt(Level level, double pX, double pY, double pZ) {
         Container container = null;
         BlockPos blockpos = BlockPos.containing(pX, pY, pZ);
-        BlockState blockstate = pLevel.getBlockState(blockpos);
+        BlockState blockstate = level.getBlockState(blockpos);
         Block block = blockstate.getBlock();
         if (block instanceof WorldlyContainerHolder) {
-            container = ((WorldlyContainerHolder)block).getContainer(blockstate, pLevel, blockpos);
+            container = ((WorldlyContainerHolder)block).getContainer(blockstate, level, blockpos);
         } else if (blockstate.hasBlockEntity()) {
-            BlockEntity blockentity = pLevel.getBlockEntity(blockpos);
+            BlockEntity blockentity = level.getBlockEntity(blockpos);
             if (blockentity instanceof Container) {
                 container = (Container)blockentity;
                 if (container instanceof ChestBlockEntity && block instanceof ChestBlock) {
-                    container = ChestBlock.getContainer((ChestBlock)block, blockstate, pLevel, blockpos, true);
+                    container = ChestBlock.getContainer((ChestBlock)block, blockstate, level, blockpos, true);
                 }
             }
         }
 
         if (container == null) {
-            List<Entity> list = pLevel.getEntities((Entity)null, new AABB(pX - 0.5D, pY - 0.5D, pZ - 0.5D, pX + 0.5D, pY + 0.5D, pZ + 0.5D), EntitySelector.CONTAINER_ENTITY_SELECTOR);
+            List<Entity> list = level.getEntities((Entity)null, new AABB(pX - 0.5D, pY - 0.5D, pZ - 0.5D, pX + 0.5D, pY + 0.5D, pZ + 0.5D), EntitySelector.CONTAINER_ENTITY_SELECTOR);
             if (!list.isEmpty()) {
-                container = (Container)list.get(pLevel.random.nextInt(list.size()));
+                container = (Container)list.get(level.random.nextInt(list.size()));
             }
         }
 
         return container;
     }
 
-    private static boolean canMergeItems(ItemStack pStack1, ItemStack pStack2) {
-        return pStack1.getCount() <= pStack1.getMaxStackSize() && ItemStack.isSameItemSameTags(pStack1, pStack2);
+    private static boolean canMergeItems(ItemStack stack1, ItemStack stack2) {
+        return stack1.getCount() <= stack1.getMaxStackSize() && ItemStack.isSameItemSameTags(stack1, stack2);
     }
 
     public double getLevelX() {
@@ -415,17 +415,17 @@ public class ArcaneHopperBlockEntity extends RandomizableContainerBlockEntity im
         this.items = pItems;
     }
 
-    public static void entityInside(Level pLevel, BlockPos pPos, BlockState pState, Entity pEntity, ArcaneHopperBlockEntity pBlockEntity) {
-        if (pEntity instanceof ItemEntity && Shapes.joinIsNotEmpty(Shapes.create(pEntity.getBoundingBox().move((double)(-pPos.getX()), (double)(-pPos.getY()), (double)(-pPos.getZ()))), pBlockEntity.getSuckShape(), BooleanOp.AND)) {
-            tryMoveItems(pLevel, pPos, pState, pBlockEntity, () -> {
+    public static void entityInside(Level level, BlockPos pos, BlockState state, Entity pEntity, ArcaneHopperBlockEntity pBlockEntity) {
+        if (pEntity instanceof ItemEntity && Shapes.joinIsNotEmpty(Shapes.create(pEntity.getBoundingBox().move((double)(-pos.getX()), (double)(-pos.getY()), (double)(-pos.getZ()))), pBlockEntity.getSuckShape(), BooleanOp.AND)) {
+            tryMoveItems(level, pos, state, pBlockEntity, () -> {
                 return addItem(pBlockEntity, (ItemEntity)pEntity);
             });
         }
 
     }
 
-    protected AbstractContainerMenu createMenu(int pId, Inventory pPlayer) {
-        return new HopperMenu(pId, pPlayer, this);
+    protected AbstractContainerMenu createMenu(int pId, Inventory player) {
+        return new HopperMenu(pId, player, this);
     }
 
     @Override

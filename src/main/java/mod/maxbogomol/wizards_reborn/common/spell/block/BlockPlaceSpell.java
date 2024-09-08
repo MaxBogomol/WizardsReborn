@@ -34,7 +34,7 @@ public class BlockPlaceSpell extends Spell {
     }
 
     @Override
-    public boolean canSpellAir(Level world, Player player, InteractionHand hand) {
+    public boolean canSpellAir(Level level, Player player, InteractionHand hand) {
         return false;
     }
 

@@ -121,13 +121,13 @@ public class SniffaloEntity extends Sniffer implements ContainerListener, HasCus
     }
 
     @Override
-    public InteractionResult mobInteract(Player pPlayer, InteractionHand pHand) {
-        ItemStack itemstack = pPlayer.getItemInHand(pHand);
-        if (pPlayer.isSecondaryUseActive() && !this.isBaby() && this.isTamed() ) {
-            this.openCustomInventoryScreen(pPlayer);
+    public InteractionResult mobInteract(Player player, InteractionHand hand) {
+        ItemStack itemstack = player.getItemInHand(hand);
+        if (player.isSecondaryUseActive() && !this.isBaby() && this.isTamed() ) {
+            this.openCustomInventoryScreen(player);
             return InteractionResult.sidedSuccess(this.level().isClientSide);
         } else {
-            InteractionResult interactionresult = super.mobInteract(pPlayer, pHand);
+            InteractionResult interactionresult = super.mobInteract(player, hand);
             boolean flag = this.isFood(itemstack);
             if (interactionresult.consumesAction() && flag) return interactionresult;
 
@@ -138,13 +138,13 @@ public class SniffaloEntity extends Sniffer implements ContainerListener, HasCus
                 return InteractionResult.sidedSuccess(this.level().isClientSide);
             }
 
-            interactionresult = itemstack.interactLivingEntity(pPlayer, this, pHand);
+            interactionresult = itemstack.interactLivingEntity(player, this, hand);
             if (interactionresult.consumesAction()) {
                 return interactionresult;
             } else {
                 if (this.getPassengers().size() < 2 && !this.isBaby()) {
                     getBrain().clearMemories();
-                    this.doPlayerRide(pPlayer);
+                    this.doPlayerRide(player);
                 }
 
                 return InteractionResult.sidedSuccess(this.level().isClientSide);
@@ -152,11 +152,11 @@ public class SniffaloEntity extends Sniffer implements ContainerListener, HasCus
         }
     }
 
-    protected void doPlayerRide(Player pPlayer) {
+    protected void doPlayerRide(Player player) {
         if (!this.level().isClientSide) {
-            pPlayer.setYRot(this.getYRot());
-            pPlayer.setXRot(this.getXRot());
-            pPlayer.startRiding(this);
+            player.setYRot(this.getYRot());
+            player.setXRot(this.getXRot());
+            player.startRiding(this);
         }
     }
 
@@ -277,11 +277,11 @@ public class SniffaloEntity extends Sniffer implements ContainerListener, HasCus
         return this.getPassengers().size() <= 2;
     }
 
-    public boolean tameWithName(Player pPlayer) {
-        this.setOwnerUUID(pPlayer.getUUID());
+    public boolean tameWithName(Player player) {
+        this.setOwnerUUID(player.getUUID());
         this.setTamed(true);
-        if (pPlayer instanceof ServerPlayer) {
-            CriteriaTriggers.TAME_ANIMAL.trigger((ServerPlayer)pPlayer, this);
+        if (player instanceof ServerPlayer) {
+            CriteriaTriggers.TAME_ANIMAL.trigger((ServerPlayer)player, this);
         }
 
         this.level().broadcastEntityEvent(this, (byte)7);

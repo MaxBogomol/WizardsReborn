@@ -3,9 +3,9 @@ package mod.maxbogomol.wizards_reborn.client.render.block;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.math.Axis;
 import mod.maxbogomol.fluffy_fur.client.event.ClientTickHandler;
-import mod.maxbogomol.fluffy_fur.client.render.LevelRenderHandler;
 import mod.maxbogomol.fluffy_fur.client.render.fluid.FluidCuboid;
 import mod.maxbogomol.fluffy_fur.client.render.fluid.FluidRenderer;
+import mod.maxbogomol.fluffy_fur.registry.client.FluffyFurRenderTypes;
 import mod.maxbogomol.wizards_reborn.common.block.sensor.SensorBaseBlock;
 import mod.maxbogomol.wizards_reborn.common.block.sensor.fluid.FluidSensorBlockEntity;
 import mod.maxbogomol.wizards_reborn.util.RenderUtils;
@@ -27,7 +27,7 @@ public class FluidSensorRenderer implements BlockEntityRenderer<FluidSensorBlock
         Random random = new Random();
         random.setSeed(sensor.getBlockPos().asLong());
 
-        MultiBufferSource bufferDelayed = LevelRenderHandler.getDelayedRender();
+        MultiBufferSource bufferDelayed = FluffyFurRenderTypes.getDelayedRender();
 
         double ticks = (ClientTickHandler.ticksInGame + partialTicks) * 0.1F;
 

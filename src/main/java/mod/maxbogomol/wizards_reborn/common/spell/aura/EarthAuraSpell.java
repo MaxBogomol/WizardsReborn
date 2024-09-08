@@ -31,8 +31,8 @@ public class EarthAuraSpell extends AuraSpell {
     }
 
     @Override
-    public void onAura(Level world, SpellProjectileEntity projectile, Player player, List<Entity> targets) {
-        super.onAura(world, projectile, player, targets);
+    public void onAura(Level level, SpellProjectileEntity projectile, Player player, List<Entity> targets) {
+        super.onAura(level, projectile, player, targets);
 
         if (projectile.tickCount % 20 == 0) {
             int focusLevel = CrystalUtil.getStatLevel(projectile.getStats(), WizardsRebornCrystals.FOCUS);
@@ -55,7 +55,7 @@ public class EarthAuraSpell extends AuraSpell {
                         float g = color.getGreen() / 255f;
                         float b = color.getBlue() / 255f;
 
-                        PacketHandler.sendToTracking(world, player.getOnPos(), new AuraSpellBurstEffectPacket((float) target.getX(), (float) target.getY() + (target.getBbHeight() / 2), (float) target.getZ(), r, g, b));
+                        PacketHandler.sendToTracking(level, player.getOnPos(), new AuraSpellBurstEffectPacket((float) target.getX(), (float) target.getY() + (target.getBbHeight() / 2), (float) target.getZ(), r, g, b));
                     } else {
                         livingEntity.addEffect(new MobEffectInstance(MobEffects.DAMAGE_RESISTANCE, 200, 0, true, false, true));
                     }

@@ -23,7 +23,7 @@ public class BlockLookSpell extends LookSpell {
         return 0f;
     }
 
-    public float getBlockDistance(Level world, Player player, InteractionHand hand) {
+    public float getBlockDistance(Level level, Player player, InteractionHand hand) {
         ItemStack stack = player.getItemInHand(hand);
         CompoundTag stats = getStats(stack);
 
@@ -32,12 +32,12 @@ public class BlockLookSpell extends LookSpell {
     }
 
     @Override
-    public boolean canLookSpell(Level world, Player player, InteractionHand hand) {
-        return getBlockHit(world, player, hand).hasBlockHit();
+    public boolean canLookSpell(Level level, Player player, InteractionHand hand) {
+        return getBlockHit(level, player, hand).hasBlockHit();
     }
 
-    public HitResult getBlockHit(Level world, Player player, InteractionHand hand) {
-        Vec3 lookPos = getHitPos(world, player, hand).getPosHit();
-        return getHitPos(world, lookPos, new Vec3(lookPos.x(), lookPos.y() - getBlockDistance(world, player, hand), lookPos.z()));
+    public HitResult getBlockHit(Level level, Player player, InteractionHand hand) {
+        Vec3 lookPos = getHitPos(level, player, hand).getPosHit();
+        return getHitPos(level, lookPos, new Vec3(lookPos.x(), lookPos.y() - getBlockDistance(level, player, hand), lookPos.z()));
     }
 }

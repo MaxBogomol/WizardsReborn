@@ -3,6 +3,7 @@ package mod.maxbogomol.wizards_reborn.common.network;
 import mod.maxbogomol.fluffy_fur.client.particle.ParticleBuilder;
 import mod.maxbogomol.fluffy_fur.client.particle.data.ColorParticleData;
 import mod.maxbogomol.fluffy_fur.client.particle.data.GenericParticleData;
+import mod.maxbogomol.fluffy_fur.client.particle.data.SpinParticleData;
 import mod.maxbogomol.fluffy_fur.registry.client.FluffyFurParticles;
 import mod.maxbogomol.wizards_reborn.WizardsReborn;
 import mod.maxbogomol.wizards_reborn.common.config.Config;
@@ -41,7 +42,7 @@ public class ArcanemiconOfferingEffectPacket {
             ctx.get().enqueueWork(new Runnable() {
                 @Override
                 public void run() {
-                    Level world = WizardsReborn.proxy.getLevel();
+                    Level level = WizardsReborn.proxy.getLevel();
 
                     for (int i = 0; i < 36; i++) {
                         float distance = 0.5f + (0.25f * random.nextFloat());
@@ -56,20 +57,20 @@ public class ArcanemiconOfferingEffectPacket {
                                 .setColorData(ColorParticleData.create(251 / 255f, 179 / 255f, 176 / 255f).build())
                                 .setTransparencyData(GenericParticleData.create(0.4f, 0).build())
                                 .setScaleData(GenericParticleData.create(0.4f, 0f).build())
-                                .randomSpin(0.1f)
+                                .setSpinData(SpinParticleData.create().randomSpin(0.1f).build())
                                 .setLifetime(100)
                                 .addVelocity(X / 10, 0, Z / 10)
                                 .randomOffset(0.05f)
-                                .spawn(world, msg.posX, msg.posY, msg.posZ);
+                                .spawn(level, msg.posX, msg.posY, msg.posZ);
                         ParticleBuilder.create(FluffyFurParticles.WISP)
                                 .setColorData(ColorParticleData.create(Config.wissenColorR(), Config.wissenColorG(), Config.wissenColorB()).build())
                                 .setTransparencyData(GenericParticleData.create(0.4f, 0).build())
                                 .setScaleData(GenericParticleData.create(0.4f, 0f).build())
-                                .randomSpin(0.1f)
+                                .setSpinData(SpinParticleData.create().randomSpin(0.1f).build())
                                 .setLifetime(100)
                                 .addVelocity(X / 12, 0, Z / 12)
                                 .randomOffset(0.05f)
-                                .spawn(world, msg.posX, msg.posY, msg.posZ);
+                                .spawn(level, msg.posX, msg.posY, msg.posZ);
                     }
 
                     for (int i = 0; i < 30; i++) {
@@ -77,12 +78,12 @@ public class ArcanemiconOfferingEffectPacket {
                                 .setColorData(ColorParticleData.create(123 / 255f, 73 / 255f, 109 / 255f).build())
                                 .setTransparencyData(GenericParticleData.create(0.3f, 0).build())
                                 .setScaleData(GenericParticleData.create(0.4f, 0).build())
-                                .randomSpin(0.1f)
+                                .setSpinData(SpinParticleData.create().randomSpin(0.1f).build())
                                 .setLifetime(100)
                                 .randomVelocity(0.02f, 0, 0.02f)
                                 .randomOffset(0.1f)
                                 .addVelocity(0, random.nextDouble() / 10, 0)
-                                .spawn(world, msg.posX, msg.posY, msg.posZ);
+                                .spawn(level, msg.posX, msg.posY, msg.posZ);
                     }
 
                     ctx.get().setPacketHandled(true);

@@ -89,7 +89,7 @@ public class MagicBladeArcaneEnchantment extends ArcaneEnchantment {
     }
 
     @OnlyIn(Dist.CLIENT)
-    public List<Component> modifierAppendHoverText(ItemStack stack, Level world, TooltipFlag flags) {
+    public List<Component> modifierAppendHoverText(ItemStack stack, Level level, TooltipFlag flags) {
         List<Component> list = new ArrayList<>();
         int enchantmentLevel = ArcaneEnchantmentUtil.getArcaneEnchantment(stack, this);
         list.add(Component.literal(" +").append(String.valueOf(enchantmentLevel))

@@ -3,6 +3,7 @@ package mod.maxbogomol.wizards_reborn.common.block.steam_thermal_storage;
 import mod.maxbogomol.fluffy_fur.client.particle.ParticleBuilder;
 import mod.maxbogomol.fluffy_fur.client.particle.data.ColorParticleData;
 import mod.maxbogomol.fluffy_fur.client.particle.data.GenericParticleData;
+import mod.maxbogomol.fluffy_fur.client.particle.data.SpinParticleData;
 import mod.maxbogomol.fluffy_fur.common.block.entity.BlockEntityBase;
 import mod.maxbogomol.fluffy_fur.common.block.entity.TickableBlockEntity;
 import mod.maxbogomol.fluffy_fur.registry.client.FluffyFurParticles;
@@ -58,7 +59,7 @@ public class SteamThermalStorageBlockEntity extends BlockEntityBase implements T
                             .setColorData(ColorParticleData.create(Color.WHITE).build())
                             .setTransparencyData(GenericParticleData.create(0.4f, 0).build())
                             .setScaleData(GenericParticleData.create(0f, 0.3f).build())
-                            .randomSpin(0.1f)
+                            .setSpinData(SpinParticleData.create().randomSpin(0.1f).build())
                             .setLifetime(30)
                             .randomVelocity(0.015f)
                             .flatRandomOffset(0.5f * posSteam.x(), 0.5f * posSteam.y(), 0.5f * posSteam.z())

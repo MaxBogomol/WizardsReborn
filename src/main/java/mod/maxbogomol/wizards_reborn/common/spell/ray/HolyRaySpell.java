@@ -35,8 +35,8 @@ public class HolyRaySpell extends RaySpell {
     }
 
     @Override
-    public void onImpact(HitResult ray, Level world, SpellProjectileEntity projectile, Player player, Entity target) {
-        super.onImpact(ray, world, projectile, player, target);
+    public void onImpact(HitResult ray, Level level, SpellProjectileEntity projectile, Player player, Entity target) {
+        super.onImpact(ray, level, projectile, player, target);
 
         if (player != null) {
             if (!player.isShiftKeyDown()) {
@@ -66,33 +66,33 @@ public class HolyRaySpell extends RaySpell {
                                 float g = color.getGreen() / 255f;
                                 float b = color.getBlue() / 255f;
 
-                                PacketHandler.sendToTracking(world, player.getOnPos(), new HolyRaySpellEffectPacket((float) target.getX(), (float) target.getY() + (target.getBbHeight() / 2), (float) target.getZ(), r, g, b));
+                                PacketHandler.sendToTracking(level, player.getOnPos(), new HolyRaySpellEffectPacket((float) target.getX(), (float) target.getY() + (target.getBbHeight() / 2), (float) target.getZ(), r, g, b));
                             }
                         }
                     }
                 }
             } else {
                 int focusLevel = CrystalUtil.getStatLevel(projectile.getStats(), WizardsRebornCrystals.FOCUS);
-                healAura(world, ray.getLocation(), focusLevel + 1, projectile, player);
+                healAura(level, ray.getLocation(), focusLevel + 1, projectile, player);
             }
         }
     }
 
     @Override
-    public void onImpact(HitResult ray, Level world, SpellProjectileEntity projectile, Player player) {
-        super.onImpact(ray, world, projectile, player);
+    public void onImpact(HitResult ray, Level level, SpellProjectileEntity projectile, Player player) {
+        super.onImpact(ray, level, projectile, player);
 
         if (player != null) {
             if (player.isShiftKeyDown()) {
                 int focusLevel = CrystalUtil.getStatLevel(projectile.getStats(), WizardsRebornCrystals.FOCUS);
-                healAura(world, ray.getLocation(), focusLevel + 1, projectile, player);
+                healAura(level, ray.getLocation(), focusLevel + 1, projectile, player);
             }
         }
     }
 
-    public void healAura(Level world, Vec3 pos, int radius, SpellProjectileEntity projectile, Player player) {
+    public void healAura(Level level, Vec3 pos, int radius, SpellProjectileEntity projectile, Player player) {
         ItemStack stack = player.getItemInHand(player.getUsedItemHand());
-        List<Entity> entities = world.getEntitiesOfClass(Entity.class,  new AABB(pos.x - radius,pos.y - radius,pos.z - radius,pos.x + radius,pos.y + radius,pos.z + radius));
+        List<Entity> entities = level.getEntitiesOfClass(Entity.class,  new AABB(pos.x - radius,pos.y - radius,pos.z - radius,pos.x + radius,pos.y + radius,pos.z + radius));
         for (Entity entity : entities) {
             if (entity.tickCount % 20 == 0) {
                 if (WissenItemUtil.canRemoveWissen(stack, getWissenCostWithStat(projectile.getStats(), player))) {
@@ -116,7 +116,7 @@ public class HolyRaySpell extends RaySpell {
                             float g = color.getGreen() / 255f;
                             float b = color.getBlue() / 255f;
 
-                            PacketHandler.sendToTracking(world, player.getOnPos(), new HolyRaySpellEffectPacket((float) entity.getX(), (float) entity.getY() + (entity.getBbHeight() / 2), (float) entity.getZ(), r, g, b));
+                            PacketHandler.sendToTracking(level, player.getOnPos(), new HolyRaySpellEffectPacket((float) entity.getX(), (float) entity.getY() + (entity.getBbHeight() / 2), (float) entity.getZ(), r, g, b));
                         }
                     }
                 }

@@ -3,6 +3,7 @@ package mod.maxbogomol.wizards_reborn.common.entity;
 import mod.maxbogomol.fluffy_fur.client.particle.ParticleBuilder;
 import mod.maxbogomol.fluffy_fur.client.particle.data.ColorParticleData;
 import mod.maxbogomol.fluffy_fur.client.particle.data.GenericParticleData;
+import mod.maxbogomol.fluffy_fur.client.particle.data.SpinParticleData;
 import mod.maxbogomol.fluffy_fur.common.easing.Easing;
 import mod.maxbogomol.fluffy_fur.common.network.AddScreenshakePacket;
 import mod.maxbogomol.fluffy_fur.registry.client.FluffyFurParticles;
@@ -60,8 +61,8 @@ public class ThrowedScytheEntity extends ThrowableItemProjectile {
     public List<Vec3> trail = new ArrayList<>();
     public Map<UUID, Integer> damagedEntities = new HashMap<>();
 
-    public ThrowedScytheEntity(EntityType<?> entityTypeIn, Level worldIn) {
-        super(WizardsRebornEntities.THROWED_SCYTHE_PROJECTILE.get(), worldIn);
+    public ThrowedScytheEntity(EntityType<?> type, Level level) {
+        super(WizardsRebornEntities.THROWED_SCYTHE_PROJECTILE.get(), level);
         noPhysics = false;
     }
 
@@ -171,7 +172,7 @@ public class ThrowedScytheEntity extends ThrowableItemProjectile {
                             .setColorData(ColorParticleData.create(r, g, b).build())
                             .setTransparencyData(GenericParticleData.create(0.3f, 0).build())
                             .setScaleData(GenericParticleData.create(0.05f, 0).setEasing(Easing.QUINTIC_IN_OUT).build())
-                            .randomSpin(0.3f)
+                            .setSpinData(SpinParticleData.create().randomSpin(0.3f).build())
                             .setLifetime(40)
                             .randomVelocity(0.02f, 0.02f, 0.02f)
                             .spawn(level(), pos.x(), pos.y() + 0.1, pos.z());
@@ -184,7 +185,7 @@ public class ThrowedScytheEntity extends ThrowableItemProjectile {
                                 .setColorData(ColorParticleData.create(0.882f, 0.498f, 0.404f, 0.979f, 0.912f, 0.585f).build())
                                 .setTransparencyData(GenericParticleData.create(0.3f, 0).build())
                                 .setScaleData(GenericParticleData.create(0.05f, 0).setEasing(Easing.QUINTIC_IN_OUT).build())
-                                .randomSpin(0.3f)
+                                .setSpinData(SpinParticleData.create().randomSpin(0.3f).build())
                                 .setLifetime(40)
                                 .randomVelocity(0.02f, 0.02f, 0.02f)
                                 .spawn(level(), pos.x(), pos.y() + 0.1, pos.z());
@@ -315,7 +316,7 @@ public class ThrowedScytheEntity extends ThrowableItemProjectile {
                             .setColorData(ColorParticleData.create(r, g, b).build())
                             .setTransparencyData(GenericParticleData.create(0.3f, 0).build())
                             .setScaleData(GenericParticleData.create(0.1f, 0).setEasing(Easing.QUINTIC_IN_OUT).build())
-                            .randomSpin(0.3f)
+                            .setSpinData(SpinParticleData.create().randomSpin(0.3f).build())
                             .setLifetime(40)
                             .randomVelocity(0.02f, 0.02f, 0.02f)
                             .spawn(level(), pos.x(), pos.y() + 0.1, pos.z());
@@ -325,7 +326,7 @@ public class ThrowedScytheEntity extends ThrowableItemProjectile {
                         .setColorData(ColorParticleData.create(r, g, b).build())
                         .setTransparencyData(GenericParticleData.create(0.3f, 0).build())
                         .setScaleData(GenericParticleData.create(0.4f, 0).setEasing(Easing.SINE_IN_OUT).build())
-                        .randomSpin(0.5f)
+                        .setSpinData(SpinParticleData.create().randomSpin(0.5f).build())
                         .setLifetime(30)
                         .addVelocity(0f, 0.05, 0f)
                         .randomVelocity(0.03f, 0.03f, 0.03f)
@@ -334,7 +335,7 @@ public class ThrowedScytheEntity extends ThrowableItemProjectile {
                         .setColorData(ColorParticleData.create(r, g, b).build())
                         .setTransparencyData(GenericParticleData.create(0.3f, 0).build())
                         .setScaleData(GenericParticleData.create(0.4f, 0).setEasing(Easing.SINE_IN_OUT).build())
-                        .randomSpin(0.5f)
+                        .setSpinData(SpinParticleData.create().randomSpin(0.5f).build())
                         .setLifetime(30)
                         .addVelocity(0f, -0.05, 0f)
                         .randomVelocity(0.03f, 0.03f, 0.03f)

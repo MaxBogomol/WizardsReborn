@@ -21,8 +21,8 @@ public class LightCasingBlockEntity extends LightTransferLensBlockEntity {
 
     public LightCasingSoundInstance sound;
 
-    public LightCasingBlockEntity(BlockEntityType<?> pType, BlockPos pPos, BlockState pBlockState) {
-        super(pType, pPos, pBlockState);
+    public LightCasingBlockEntity(BlockEntityType<?> type, BlockPos pos, BlockState blockState) {
+        super(type, pos, blockState);
     }
 
     public LightCasingBlockEntity(BlockPos pos, BlockState state) {

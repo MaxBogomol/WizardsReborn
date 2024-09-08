@@ -111,7 +111,7 @@ public class ArcaneIteratorRenderer implements BlockEntityRenderer<ArcaneIterato
             }
         }
 
-        MultiBufferSource bufferDelayed = LevelRenderHandler.getDelayedRender();
+        MultiBufferSource bufferDelayed = FluffyFurRenderTypes.getDelayedRender();
         VertexConsumer builder = bufferDelayed.getBuffer(FluffyFurRenderTypes.GLOWING);
 
         if ((1f - size) > 0) {

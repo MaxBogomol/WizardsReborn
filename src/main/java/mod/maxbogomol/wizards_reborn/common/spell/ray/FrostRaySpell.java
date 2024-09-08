@@ -42,8 +42,8 @@ public class FrostRaySpell extends RaySpell {
     }
 
     @Override
-    public void onImpact(HitResult ray, Level world, SpellProjectileEntity projectile, Player player, Entity target) {
-        super.onImpact(ray, world, projectile, player, target);
+    public void onImpact(HitResult ray, Level level, SpellProjectileEntity projectile, Player player, Entity target) {
+        super.onImpact(ray, level, projectile, player, target);
 
         if (player != null) {
             if (target.tickCount % 10 == 0) {
@@ -66,15 +66,15 @@ public class FrostRaySpell extends RaySpell {
                     float g = color.getGreen() / 255f;
                     float b = color.getBlue() / 255f;
 
-                    PacketHandler.sendToTracking(world, player.getOnPos(), new FrostRaySpellEffectPacket((float) target.getX(), (float) target.getY() + (target.getBbHeight() / 2), (float) target.getZ(), r, g, b));
+                    PacketHandler.sendToTracking(level, player.getOnPos(), new FrostRaySpellEffectPacket((float) target.getX(), (float) target.getY() + (target.getBbHeight() / 2), (float) target.getZ(), r, g, b));
                 }
             }
         }
     }
 
     @Override
-    public void onImpact(HitResult ray, Level world, SpellProjectileEntity projectile, Player player) {
-        super.onImpact(ray, world, projectile, player);
+    public void onImpact(HitResult ray, Level level, SpellProjectileEntity projectile, Player player) {
+        super.onImpact(ray, level, projectile, player);
 
         if (player != null) {
             if (player.isShiftKeyDown()) {
@@ -84,18 +84,18 @@ public class FrostRaySpell extends RaySpell {
                     if (WissenItemUtil.canRemoveWissen(stack, 1)) {
                         Vec3 vec = getBlockHitOffset(ray, projectile, 0.1f);
                         BlockPos blockPos = BlockPos.containing(vec.x(), vec.y(), vec.z());
-                        BlockState blockState = world.getBlockState(blockPos);
+                        BlockState blockState = level.getBlockState(blockPos);
                         BlockState blockStateIce = Blocks.FROSTED_ICE.defaultBlockState();
 
                         BlockEvent.EntityPlaceEvent placeEv = new BlockEvent.EntityPlaceEvent(
-                                BlockSnapshot.create(world.dimension(), world, blockPos),
+                                BlockSnapshot.create(level.dimension(), level, blockPos),
                                 blockStateIce,
                                 player
                         );
 
-                        if (blockState == FrostedIceBlock.meltsInto() && blockStateIce.canSurvive(world, blockPos) && world.isUnobstructed(blockStateIce, blockPos, CollisionContext.empty()) && !net.minecraftforge.event.ForgeEventFactory.onBlockPlace(player, net.minecraftforge.common.util.BlockSnapshot.create(world.dimension(), world, blockPos), net.minecraft.core.Direction.UP)  && !MinecraftForge.EVENT_BUS.post(placeEv)) {
-                            world.setBlockAndUpdate(blockPos, blockStateIce);
-                            world.scheduleTick(blockPos, Blocks.FROSTED_ICE, Mth.nextInt(player.getRandom(), 300, 600));
+                        if (blockState == FrostedIceBlock.meltsInto() && blockStateIce.canSurvive(level, blockPos) && level.isUnobstructed(blockStateIce, blockPos, CollisionContext.empty()) && !net.minecraftforge.event.ForgeEventFactory.onBlockPlace(player, net.minecraftforge.common.util.BlockSnapshot.create(level.dimension(), level, blockPos), net.minecraft.core.Direction.UP)  && !MinecraftForge.EVENT_BUS.post(placeEv)) {
+                            level.setBlockAndUpdate(blockPos, blockStateIce);
+                            level.scheduleTick(blockPos, Blocks.FROSTED_ICE, Mth.nextInt(player.getRandom(), 300, 600));
 
                             WissenItemUtil.removeWissen(stack, 1);
 
@@ -104,7 +104,7 @@ public class FrostRaySpell extends RaySpell {
                             float g = color.getGreen() / 255f;
                             float b = color.getBlue() / 255f;
 
-                            PacketHandler.sendToTracking(world, player.getOnPos(), new FrostRaySpellEffectPacket((float) blockPos.getX() + 0.5f, (float) blockPos.getY() + 0.5f, (float) blockPos.getZ() + 0.5f, r, g, b));
+                            PacketHandler.sendToTracking(level, player.getOnPos(), new FrostRaySpellEffectPacket((float) blockPos.getX() + 0.5f, (float) blockPos.getY() + 0.5f, (float) blockPos.getZ() + 0.5f, r, g, b));
                         }
                     }
                 }

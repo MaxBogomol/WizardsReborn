@@ -16,8 +16,8 @@ import net.minecraft.world.phys.BlockHitResult;
 
 public class UndergroundGrapeVinesPlantBlock extends CaveVinesPlantBlock {
 
-    public UndergroundGrapeVinesPlantBlock(Properties builder) {
-        super(builder);
+    public UndergroundGrapeVinesPlantBlock(Properties properties) {
+        super(properties);
     }
 
     @Override
@@ -26,12 +26,12 @@ public class UndergroundGrapeVinesPlantBlock extends CaveVinesPlantBlock {
     }
 
     @Override
-    public ItemStack getCloneItemStack(BlockGetter blockGetter, BlockPos blockPos, BlockState blockState) {
+    public ItemStack getCloneItemStack(BlockGetter level, BlockPos pos, BlockState state) {
         return new ItemStack(WizardsRebornItems.UNDERGROUND_GRAPE_VINE.get());
     }
 
     @Override
-    public InteractionResult use(BlockState blockState, Level level, BlockPos blockPos, Player player, InteractionHand hand, BlockHitResult hitResult) {
-        return IUndergroundGrape.use(player, blockState, level, blockPos);
+    public InteractionResult use(BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hit) {
+        return IUndergroundGrape.use(player, state, level, pos);
     }
 }

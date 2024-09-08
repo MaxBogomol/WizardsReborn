@@ -25,30 +25,30 @@ public class RedstoneSensorBlock extends SensorBaseBlock {
     }
 
     @Override
-    protected int getInputSignal(Level pLevel, BlockPos pPos, BlockState pState) {
-        int i = super.getInputSignal(pLevel, pPos, pState);
-        Direction direction = pState.getValue(FACING);
-        BlockPos blockpos = pPos.relative(direction);
+    protected int getInputSignal(Level level, BlockPos pos, BlockState state) {
+        int i = super.getInputSignal(level, pos, state);
+        Direction direction = state.getValue(FACING);
+        BlockPos blockpos = pos.relative(direction);
 
-        switch (pState.getValue(FACE)) {
+        switch (state.getValue(FACE)) {
             case FLOOR:
-                blockpos = pPos.above();
+                blockpos = pos.above();
                 break;
             case WALL:
                 break;
             case CEILING:
-                blockpos = pPos.below();
+                blockpos = pos.below();
                 break;
         }
 
-        BlockState blockstate = pLevel.getBlockState(blockpos);
+        BlockState blockstate = level.getBlockState(blockpos);
         if (blockstate.hasAnalogOutputSignal()) {
-            i = blockstate.getAnalogOutputSignal(pLevel, blockpos);
-        } else if (i < 15 && blockstate.isRedstoneConductor(pLevel, blockpos)) {
+            i = blockstate.getAnalogOutputSignal(level, blockpos);
+        } else if (i < 15 && blockstate.isRedstoneConductor(level, blockpos)) {
             blockpos = blockpos.relative(direction);
-            blockstate = pLevel.getBlockState(blockpos);
-            ItemFrame itemframe = this.getItemFrame(pLevel, direction, blockpos);
-            int j = Math.max(itemframe == null ? Integer.MIN_VALUE : itemframe.getAnalogOutput(), blockstate.hasAnalogOutputSignal() ? blockstate.getAnalogOutputSignal(pLevel, blockpos) : Integer.MIN_VALUE);
+            blockstate = level.getBlockState(blockpos);
+            ItemFrame itemframe = this.getItemFrame(level, direction, blockpos);
+            int j = Math.max(itemframe == null ? Integer.MIN_VALUE : itemframe.getAnalogOutput(), blockstate.hasAnalogOutputSignal() ? blockstate.getAnalogOutputSignal(level, blockpos) : Integer.MIN_VALUE);
             if (j != Integer.MIN_VALUE) {
                 i = j;
             }
@@ -58,24 +58,24 @@ public class RedstoneSensorBlock extends SensorBaseBlock {
     }
 
     @Override
-    protected int getAlternateSignal(SignalGetter pSignalGetter, BlockPos pPos, BlockState pState) {
-        Direction direction = pState.getValue(FACING);
+    protected int getAlternateSignal(SignalGetter pSignalGetter, BlockPos pos, BlockState state) {
+        Direction direction = state.getValue(FACING);
         Direction direction1 = direction.getClockWise();
         Direction direction2 = direction.getCounterClockWise();
         boolean flag = this.sideInputDiodesOnly();
-        return Math.max(pSignalGetter.getControlInputSignal(pPos.relative(direction1), direction1, flag), pSignalGetter.getControlInputSignal(pPos.relative(direction2), direction2, flag));
+        return Math.max(pSignalGetter.getControlInputSignal(pos.relative(direction1), direction1, flag), pSignalGetter.getControlInputSignal(pos.relative(direction2), direction2, flag));
     }
 
-    public InteractionResult use(BlockState pState, Level pLevel, BlockPos pPos, Player pPlayer, InteractionHand pHand, BlockHitResult pHit) {
-        if (!pPlayer.getAbilities().mayBuild) {
+    public InteractionResult use(BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hit) {
+        if (!player.getAbilities().mayBuild) {
             return InteractionResult.PASS;
         } else {
-            pState = pState.cycle(MODE);
-            float f = pState.getValue(MODE) == ComparatorMode.SUBTRACT ? 0.55F : 0.5F;
-            pLevel.playSound(pPlayer, pPos, SoundEvents.COMPARATOR_CLICK, SoundSource.BLOCKS, 0.3F, f);
-            pLevel.setBlock(pPos, pState, 2);
-            this.refreshOutputState(pLevel, pPos, pState);
-            return InteractionResult.sidedSuccess(pLevel.isClientSide);
+            state = state.cycle(MODE);
+            float f = state.getValue(MODE) == ComparatorMode.SUBTRACT ? 0.55F : 0.5F;
+            level.playSound(player, pos, SoundEvents.COMPARATOR_CLICK, SoundSource.BLOCKS, 0.3F, f);
+            level.setBlock(pos, state, 2);
+            this.refreshOutputState(level, pos, state);
+            return InteractionResult.sidedSuccess(level.isClientSide);
         }
     }
 

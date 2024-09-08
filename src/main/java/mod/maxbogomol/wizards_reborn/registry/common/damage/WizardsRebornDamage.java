@@ -19,15 +19,15 @@ public class WizardsRebornDamage {
         return ResourceKey.create(Registries.DAMAGE_TYPE, new ResourceLocation(WizardsReborn.MOD_ID, name));
     }
 
-    public static DamageSource create(Level world, ResourceKey<DamageType> key, @Nullable Entity source, @Nullable Entity attacker) {
-        return new DamageSource(world.registryAccess().registryOrThrow(Registries.DAMAGE_TYPE).getHolderOrThrow(key), source, attacker);
+    public static DamageSource create(Level level, ResourceKey<DamageType> key, @Nullable Entity source, @Nullable Entity attacker) {
+        return new DamageSource(level.registryAccess().registryOrThrow(Registries.DAMAGE_TYPE).getHolderOrThrow(key), source, attacker);
     }
 
-    public static DamageSource create(Level world, ResourceKey<DamageType> key, @Nullable Entity source) {
-        return create(world, key, source, null);
+    public static DamageSource create(Level level, ResourceKey<DamageType> key, @Nullable Entity source) {
+        return create(level, key, source, null);
     }
 
-    public static DamageSource create(Level world, ResourceKey<DamageType> key) {
-        return create(world, key, null, null);
+    public static DamageSource create(Level level, ResourceKey<DamageType> key) {
+        return create(level, key, null, null);
     }
 }

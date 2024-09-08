@@ -25,7 +25,7 @@ public class WissenActivatorBlock extends SensorBaseBlock {
 
     @Nullable
     @Override
-    public BlockEntity newBlockEntity(BlockPos pPos, BlockState pState) {
-        return new WissenActivatorBlockEntity(pPos, pState);
+    public BlockEntity newBlockEntity(BlockPos pos, BlockState state) {
+        return new WissenActivatorBlockEntity(pos, state);
     }
 }

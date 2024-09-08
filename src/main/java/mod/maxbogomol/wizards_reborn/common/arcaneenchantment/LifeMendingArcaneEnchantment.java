@@ -40,8 +40,8 @@ public class LifeMendingArcaneEnchantment extends ArcaneEnchantment {
         return true;
     }
 
-    public static void inventoryTick(ItemStack stack, Level world, Entity entity, int slot, boolean isSelected) {
-        if (!world.isClientSide()) {
+    public static void inventoryTick(ItemStack stack, Level level, Entity entity, int slot, boolean isSelected) {
+        if (!level.isClientSide()) {
             if (entity instanceof Player player) {
                 int enchantmentLevel = ArcaneEnchantmentUtil.getArcaneEnchantment(stack, WizardsRebornArcaneEnchantments.LIFE_MENDING);
 

@@ -23,12 +23,12 @@ public class InnocentWoodKnifeItem extends ArcaneWoodKnifeItem {
     }
 
     @Override
-    public int repairTick(ItemStack stack, Level world, Entity entity) {
+    public int repairTick(ItemStack stack, Level level, Entity entity) {
         return 500;
     }
 
     @Override
-    public SoundEvent getRepairSound(ItemStack stack, Level world, Entity entity) {
+    public SoundEvent getRepairSound(ItemStack stack, Level level, Entity entity) {
         return WizardsRebornSounds.INNOCENT_WOOD_PLACE.get();
     }
 

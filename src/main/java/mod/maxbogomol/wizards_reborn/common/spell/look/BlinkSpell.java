@@ -67,17 +67,17 @@ public class BlinkSpell extends LookSpell {
     }
 
     @Override
-    public void lookSpell(Level world, Player player, InteractionHand hand) {
-        Vec3 pos = getHitPos(world, player, hand).getPosHit();
+    public void lookSpell(Level level, Player player, InteractionHand hand) {
+        Vec3 pos = getHitPos(level, player, hand).getPosHit();
 
         Color color = getColor();
         float r = color.getRed() / 255f;
         float g = color.getGreen() / 255f;
         float b = color.getBlue() / 255f;
 
-        PacketHandler.sendToTracking(world, player.getOnPos(), new BlinkSpellEffectPacket((float) player.getX(), (float) player.getY() + player.getEyeHeight(), (float) player.getZ(), (float) pos.x, (float) pos.y, (float) pos.z, r, g, b, isSharp));
+        PacketHandler.sendToTracking(level, player.getOnPos(), new BlinkSpellEffectPacket((float) player.getX(), (float) player.getY() + player.getEyeHeight(), (float) player.getZ(), (float) pos.x, (float) pos.y, (float) pos.z, r, g, b, isSharp));
         PacketHandler.sendTo(player, new SetAdditionalFovPacket(30f));
-        world.playSound(WizardsReborn.proxy.getPlayer(), pos.x(), pos.y(), pos.z(), SoundEvents.ENDERMAN_TELEPORT, SoundSource.PLAYERS, 1f, 0.95f);
+        level.playSound(WizardsReborn.proxy.getPlayer(), pos.x(), pos.y(), pos.z(), SoundEvents.ENDERMAN_TELEPORT, SoundSource.PLAYERS, 1f, 0.95f);
 
         ItemStack stack = player.getItemInHand(hand);
         CompoundTag stats = getStats(stack);
@@ -86,7 +86,7 @@ public class BlinkSpell extends LookSpell {
         float damage = (3f + (focusLevel)) + magicModifier;
 
         if (isSharp) {
-            for (Entity entity : getHitEntities(world, player.getEyePosition(), pos, 0.5f)) {
+            for (Entity entity : getHitEntities(level, player.getEyePosition(), pos, 0.5f)) {
                 if (!entity.equals(player) && entity instanceof LivingEntity) {
                     entity.hurt(new DamageSource(WizardsRebornDamage.create(entity.level(), WizardsRebornDamage.ARCANE_MAGIC).typeHolder(), player), damage);
                 }

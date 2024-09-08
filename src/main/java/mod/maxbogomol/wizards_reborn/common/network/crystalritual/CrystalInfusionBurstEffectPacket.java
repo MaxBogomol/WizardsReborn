@@ -44,7 +44,7 @@ public class CrystalInfusionBurstEffectPacket {
             ctx.get().enqueueWork(new Runnable() {
                 @Override
                 public void run() {
-                    Level world = WizardsReborn.proxy.getLevel();
+                    Level level = WizardsReborn.proxy.getLevel();
                     ParticleBuilder.create(FluffyFurParticles.SPARKLE)
                             .setColorData(ColorParticleData.create(msg.colorR, msg.colorG, msg.colorB).build())
                             .setTransparencyData(GenericParticleData.create(0.4f, 0).build())
@@ -53,7 +53,7 @@ public class CrystalInfusionBurstEffectPacket {
                             .setGravity(1)
                             .randomVelocity(0.085f)
                             .addVelocity(0, 0.2f, 0)
-                            .repeat(world, msg.pos.getX() + 0.5f, msg.pos.getY() + 1.25f, msg.pos.getZ() + 0.5f, 15);
+                            .repeat(level, msg.pos.getX() + 0.5f, msg.pos.getY() + 1.25f, msg.pos.getZ() + 0.5f, 15);
 
                     ctx.get().setPacketHandled(true);
                 }

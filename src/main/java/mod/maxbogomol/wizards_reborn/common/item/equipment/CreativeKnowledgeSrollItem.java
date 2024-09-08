@@ -19,10 +19,10 @@ public class CreativeKnowledgeSrollItem extends ArcanumItem {
     }
 
     @Override
-    public InteractionResultHolder<ItemStack> use(Level world, Player player, InteractionHand hand) {
+    public InteractionResultHolder<ItemStack> use(Level level, Player player, InteractionHand hand) {
         ItemStack stack = player.getItemInHand(hand);
 
-        if (!world.isClientSide()) {
+        if (!level.isClientSide()) {
             if (isAncient) {
                 KnowledgeUtil.removeAllKnowledge(player);
             } else {
@@ -32,7 +32,7 @@ public class CreativeKnowledgeSrollItem extends ArcanumItem {
             if (!player.isCreative()) {
                 stack.setCount(stack.getCount() - 1);
             }
-            world.playSound(null, player.getX(), player.getY(), player.getZ(), SoundEvents.ENCHANTMENT_TABLE_USE, SoundSource.PLAYERS, 1.0f, 1.5f);
+            level.playSound(null, player.getX(), player.getY(), player.getZ(), SoundEvents.ENCHANTMENT_TABLE_USE, SoundSource.PLAYERS, 1.0f, 1.5f);
         }
 
         return InteractionResultHolder.success(stack);

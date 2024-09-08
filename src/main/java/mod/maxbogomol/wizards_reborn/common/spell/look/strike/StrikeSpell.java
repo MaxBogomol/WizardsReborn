@@ -6,9 +6,9 @@ import mod.maxbogomol.fluffy_fur.client.animation.ItemAnimation;
 import mod.maxbogomol.fluffy_fur.client.particle.ParticleBuilder;
 import mod.maxbogomol.fluffy_fur.client.particle.data.ColorParticleData;
 import mod.maxbogomol.fluffy_fur.client.particle.data.GenericParticleData;
-import mod.maxbogomol.fluffy_fur.client.render.LevelRenderHandler;
 import mod.maxbogomol.fluffy_fur.common.network.AddScreenshakePacket;
 import mod.maxbogomol.fluffy_fur.registry.client.FluffyFurParticles;
+import mod.maxbogomol.fluffy_fur.registry.client.FluffyFurRenderTypes;
 import mod.maxbogomol.wizards_reborn.WizardsReborn;
 import mod.maxbogomol.wizards_reborn.client.animation.StrikeSpellItemAnimation;
 import mod.maxbogomol.wizards_reborn.common.entity.SpellProjectileEntity;
@@ -77,32 +77,32 @@ public class StrikeSpell extends BlockLookSpell {
     }
 
     @Override
-    public void useSpell(Level world, Player player, InteractionHand hand) {
-        if (!world.isClientSide) {
+    public void useSpell(Level level, Player player, InteractionHand hand) {
+        if (!level.isClientSide) {
             player.startUsingItem(hand);
         }
     }
 
     @Override
-    public void onUseTick(Level world, LivingEntity livingEntity, ItemStack stack, int remainingUseDuration) {
+    public void onUseTick(Level level, LivingEntity livingEntity, ItemStack stack, int remainingUseDuration) {
         if (livingEntity instanceof Player player) {
-            if (!world.isClientSide) {
-                if (!super.canSpell(world, player, player.getUsedItemHand())) {
+            if (!level.isClientSide) {
+                if (!super.canSpell(level, player, player.getUsedItemHand())) {
                     player.stopUsingItem();
                 }
 
-                if (player.getTicksUsingItem() > getUseTime(world, livingEntity, stack, remainingUseDuration)) {
+                if (player.getTicksUsingItem() > getUseTime(level, livingEntity, stack, remainingUseDuration)) {
                     CompoundTag stats = getStats(stack);
                     setCooldown(stack, stats);
                     removeWissen(stack, stats, player);
                     awardStat(player, stack);
-                    spellSound(player, world);
-                    lookSpell(world, player, player.getUsedItemHand());
+                    spellSound(player, level);
+                    lookSpell(level, player, player.getUsedItemHand());
                     player.stopUsingItem();
                 }
             } else {
-                Vec3 pos = getBlockHit(world, player, player.getUsedItemHand()).getPosHit();
-                float stage = (float) player.getTicksUsingItem() / getUseTime(world, livingEntity, stack, remainingUseDuration);
+                Vec3 pos = getBlockHit(level, player, player.getUsedItemHand()).getPosHit();
+                float stage = (float) player.getTicksUsingItem() / getUseTime(level, livingEntity, stack, remainingUseDuration);
                 Color color = getColor();
 
                 ParticleBuilder.create(FluffyFurParticles.WISP)
@@ -112,21 +112,21 @@ public class StrikeSpell extends BlockLookSpell {
                         .setLifetime(30)
                         .randomVelocity(0.025f)
                         .addVelocity(0, 0.03f, 0)
-                        .spawn(world, pos.x(), pos.y(), pos.z());
+                        .spawn(level, pos.x(), pos.y(), pos.z());
             }
         }
     }
 
     @Override
-    public void lookSpell(Level world, Player player, InteractionHand hand) {
+    public void lookSpell(Level level, Player player, InteractionHand hand) {
         CompoundTag stats = getStats(player.getItemInHand(hand));
-        Vec3 pos = getBlockHit(world, player, hand).getPosHit();
+        Vec3 pos = getBlockHit(level, player, hand).getPosHit();
 
-        SpellProjectileEntity entity = new SpellProjectileEntity(WizardsRebornEntities.SPELL_PROJECTILE.get(), world).shoot(
+        SpellProjectileEntity entity = new SpellProjectileEntity(WizardsRebornEntities.SPELL_PROJECTILE.get(), level).shoot(
                 pos.x, pos.y, pos.z, 0, 0, 0, player.getUUID(), this.getId(), stats
         );
         entity.setYRot(player.getYRot());
-        world.addFreshEntity(entity);
+        level.addFreshEntity(entity);
     }
 
     @Override
@@ -186,7 +186,7 @@ public class StrikeSpell extends BlockLookSpell {
         PacketHandler.sendToTracking(entity.level(), entity.getOnPos(), new StrikeSpellEffectPacket((float) entity.getX(), (float) entity.getY(), (float) entity.getZ(), r, g, b));
     }
 
-    public int getUseTime(Level world, LivingEntity livingEntity, ItemStack stack, int remainingUseDuration) {
+    public int getUseTime(Level level, LivingEntity livingEntity, ItemStack stack, int remainingUseDuration) {
         return 100;
     }
 
@@ -213,7 +213,7 @@ public class StrikeSpell extends BlockLookSpell {
     @Override
     @OnlyIn(Dist.CLIENT)
     public void render(SpellProjectileEntity entity, float entityYaw, float partialTicks, PoseStack stack, MultiBufferSource buffer, int light) {
-        MultiBufferSource bufferDelayed = LevelRenderHandler.getDelayedRender();
+        MultiBufferSource bufferDelayed = FluffyFurRenderTypes.getDelayedRender();
         Color color = getColor();
         float r = color.getRed() / 255f;
         float g = color.getGreen() / 255f;

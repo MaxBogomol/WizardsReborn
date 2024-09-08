@@ -3,6 +3,7 @@ package mod.maxbogomol.wizards_reborn.common.block.alchemy_furnace;
 import mod.maxbogomol.fluffy_fur.client.particle.ParticleBuilder;
 import mod.maxbogomol.fluffy_fur.client.particle.data.ColorParticleData;
 import mod.maxbogomol.fluffy_fur.client.particle.data.GenericParticleData;
+import mod.maxbogomol.fluffy_fur.client.particle.data.SpinParticleData;
 import mod.maxbogomol.fluffy_fur.common.block.entity.TickableBlockEntity;
 import mod.maxbogomol.fluffy_fur.registry.client.FluffyFurParticles;
 import mod.maxbogomol.wizards_reborn.api.alchemy.ISteamBlockEntity;
@@ -41,10 +42,8 @@ import org.jetbrains.annotations.NotNull;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import java.awt.*;
-import java.util.Random;
 
 public class AlchemyFurnaceBlock extends HorizontalDirectionalBlock implements EntityBlock  {
-    private static Random random = new Random();
 
     public AlchemyFurnaceBlock(Properties properties) {
         super(properties);
@@ -62,42 +61,36 @@ public class AlchemyFurnaceBlock extends HorizontalDirectionalBlock implements E
     }
 
     @Override
-    public void onRemove(@Nonnull BlockState state, @Nonnull Level world, @Nonnull BlockPos pos, @Nonnull BlockState newState, boolean isMoving) {
+    public void onRemove(@Nonnull BlockState state, @Nonnull Level level, @Nonnull BlockPos pos, @Nonnull BlockState newState, boolean isMoving) {
         if (state.getBlock() != newState.getBlock()) {
-            BlockEntity tile = world.getBlockEntity(pos);
-            if (tile instanceof AlchemyFurnaceBlockEntity furnace) {
+            BlockEntity blockEntity = level.getBlockEntity(pos);
+            if (blockEntity instanceof AlchemyFurnaceBlockEntity furnace) {
                 SimpleContainer inv = new SimpleContainer(3);
                 inv.setItem(0, furnace.itemHandler.getStackInSlot(0));
                 inv.setItem(1, furnace.itemFuelHandler.getStackInSlot(0));
                 inv.setItem(2, furnace.itemOutputHandler.getStackInSlot(0));
-                Containers.dropContents(world, pos, inv);
-                if (world instanceof ServerLevel) {
-                    furnace.popExperience((ServerLevel) world, Vec3.atCenterOf(pos));
+                Containers.dropContents(level, pos, inv);
+                if (level instanceof ServerLevel) {
+                    furnace.popExperience((ServerLevel) level, Vec3.atCenterOf(pos));
                 }
             }
-            super.onRemove(state, world, pos, newState, isMoving);
         }
+        super.onRemove(state, level, pos, newState, isMoving);
     }
 
     @Override
-    public InteractionResult use(BlockState state, Level world, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hit) {
-        if (world.isClientSide) {
+    public InteractionResult use(BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hit) {
+        if (level.isClientSide()) {
             return InteractionResult.SUCCESS;
         } else {
             ItemStack stack = player.getItemInHand(hand).copy();
-            boolean isWand = false;
+            boolean clickable = WissenWandItem.isClickable(stack);
 
-            if (stack.getItem() instanceof WissenWandItem) {
-                if (WissenWandItem.getMode(stack) != 4) {
-                    isWand = true;
-                }
-            }
+            if (clickable) {
+                BlockEntity blockEntity = level.getBlockEntity(pos);
 
-            if (!isWand) {
-                BlockEntity tileEntity = world.getBlockEntity(pos);
-
-                MenuProvider containerProvider = createContainerProvider(world, pos);
-                NetworkHooks.openScreen(((ServerPlayer) player), containerProvider, tileEntity.getBlockPos());
+                MenuProvider containerProvider = createContainerProvider(level, pos);
+                NetworkHooks.openScreen(((ServerPlayer) player), containerProvider, blockEntity.getBlockPos());
                 return InteractionResult.CONSUME;
             }
         }
@@ -105,7 +98,7 @@ public class AlchemyFurnaceBlock extends HorizontalDirectionalBlock implements E
         return InteractionResult.PASS;
     }
 
-    private MenuProvider createContainerProvider(Level worldIn, BlockPos pos) {
+    private MenuProvider createContainerProvider(Level level, BlockPos pos) {
         return new MenuProvider() {
             @Override
             public Component getDisplayName() {
@@ -114,23 +107,16 @@ public class AlchemyFurnaceBlock extends HorizontalDirectionalBlock implements E
 
             @Nullable
             @Override
-            public AbstractContainerMenu createMenu(int i, Inventory playerInventory, Player playerEntity) {
-                return new AlchemyFurnaceContainer(i, worldIn, pos, playerInventory, playerEntity);
+            public AbstractContainerMenu createMenu(int i, Inventory inventory, Player player) {
+                return new AlchemyFurnaceContainer(i, level, pos, inventory, player);
             }
         };
     }
 
-    @Override
-    public boolean triggerEvent(BlockState state, Level world, BlockPos pos, int id, int param) {
-        super.triggerEvent(state, world, pos, id, param);
-        BlockEntity tileentity = world.getBlockEntity(pos);
-        return tileentity != null && tileentity.triggerEvent(id, param);
-    }
-
     @Nullable
     @Override
-    public BlockEntity newBlockEntity(BlockPos pPos, BlockState pState) {
-        return new AlchemyFurnaceBlockEntity(pPos, pState);
+    public BlockEntity newBlockEntity(BlockPos pos, BlockState state) {
+        return new AlchemyFurnaceBlockEntity(pos, state);
     }
 
     @Nullable
@@ -145,7 +131,7 @@ public class AlchemyFurnaceBlock extends HorizontalDirectionalBlock implements E
     }
 
     @Override
-    public int getAnalogOutputSignal(BlockState blockState, Level level, BlockPos pos) {
+    public int getAnalogOutputSignal(BlockState state, Level level, BlockPos pos) {
         AlchemyFurnaceBlockEntity furnace = (AlchemyFurnaceBlockEntity) level.getBlockEntity(pos);
         SimpleContainer inv = new SimpleContainer(3);
         inv.setItem(0, furnace.itemHandler.getStackInSlot(0));
@@ -155,49 +141,49 @@ public class AlchemyFurnaceBlock extends HorizontalDirectionalBlock implements E
     }
 
     @Override
-    public void playerWillDestroy(Level world, BlockPos pos, BlockState state, Player player) {
-        if (world.isClientSide()) {
+    public void playerWillDestroy(Level level, BlockPos pos, BlockState state, Player player) {
+        if (level.isClientSide()) {
             if (!player.isCreative()) {
-                if (world.getBlockEntity(pos) != null) {
-                    if (world.getBlockEntity(pos) instanceof ISteamBlockEntity tile) {
+                if (level.getBlockEntity(pos) != null) {
+                    if (level.getBlockEntity(pos) instanceof ISteamBlockEntity tile) {
                         if (tile.getMaxSteam() > 0) {
                             float amount = (float) tile.getSteam() / (float) tile.getMaxSteam();
                             ParticleBuilder.create(FluffyFurParticles.SMOKE)
                                     .setColorData(ColorParticleData.create(Color.WHITE).build())
                                     .setTransparencyData(GenericParticleData.create(0.4f, 0).build())
                                     .setScaleData(GenericParticleData.create(0.1f, 0.5f).build())
-                                    .randomSpin(0.1f)
+                                    .setSpinData(SpinParticleData.create().randomSpin(0.1f).build())
                                     .setLifetime(30)
                                     .randomVelocity(0.015f)
                                     .randomOffset(0.25f)
-                                    .repeat(world, pos.getX() + 0.5F, pos.getY() + 0.5F, pos.getZ() + 0.5F, (int) (25 * amount));
+                                    .repeat(level, pos.getX() + 0.5F, pos.getY() + 0.5F, pos.getZ() + 0.5F, (int) (25 * amount));
                         }
                     }
                 }
             }
         }
 
-        super.playerWillDestroy(world, pos, state, player);
+        super.playerWillDestroy(level, pos, state, player);
     }
 
-    public void animateTick(BlockState pState, Level pLevel, BlockPos pPos, RandomSource pRandom) {
-        if (pState.getValue(BlockStateProperties.LIT)) {
-            double d0 = (double)pPos.getX() + 0.5D;
-            double d1 = (double)pPos.getY();
-            double d2 = (double)pPos.getZ() + 0.5D;
-            if (pRandom.nextDouble() < 0.1D) {
-                pLevel.playLocalSound(d0, d1, d2, SoundEvents.FURNACE_FIRE_CRACKLE, SoundSource.BLOCKS, 1.0F, 1.0F, false);
+    public void animateTick(BlockState state, Level level, BlockPos pos, RandomSource random) {
+        if (state.getValue(BlockStateProperties.LIT)) {
+            double d0 = (double)pos.getX() + 0.5D;
+            double d1 = (double)pos.getY();
+            double d2 = (double)pos.getZ() + 0.5D;
+            if (random.nextDouble() < 0.1D) {
+                level.playLocalSound(d0, d1, d2, SoundEvents.FURNACE_FIRE_CRACKLE, SoundSource.BLOCKS, 1.0F, 1.0F, false);
             }
 
-            Direction direction = pState.getValue(FACING);
+            Direction direction = state.getValue(FACING);
             Direction.Axis direction$axis = direction.getAxis();
             double d3 = 0.52D;
-            double d4 = pRandom.nextDouble() * 0.6D - 0.3D;
+            double d4 = random.nextDouble() * 0.6D - 0.3D;
             double d5 = direction$axis == Direction.Axis.X ? (double)direction.getStepX() * 0.52D : d4;
-            double d6 = pRandom.nextDouble() * 6.0D / 16.0D;
+            double d6 = random.nextDouble() * 6.0D / 16.0D;
             double d7 = direction$axis == Direction.Axis.Z ? (double)direction.getStepZ() * 0.52D : d4;
-            pLevel.addParticle(ParticleTypes.SMOKE, d0 + d5, d1 + d6, d2 + d7, 0.0D, 0.0D, 0.0D);
-            pLevel.addParticle(ParticleTypes.FLAME, d0 + d5, d1 + d6, d2 + d7, 0.0D, 0.0D, 0.0D);
+            level.addParticle(ParticleTypes.SMOKE, d0 + d5, d1 + d6, d2 + d7, 0.0D, 0.0D, 0.0D);
+            level.addParticle(ParticleTypes.FLAME, d0 + d5, d1 + d6, d2 + d7, 0.0D, 0.0D, 0.0D);
         }
     }
 }

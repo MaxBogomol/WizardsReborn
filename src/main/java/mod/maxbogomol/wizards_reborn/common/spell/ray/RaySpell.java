@@ -3,7 +3,7 @@ package mod.maxbogomol.wizards_reborn.common.spell.ray;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.math.Axis;
 import mod.maxbogomol.fluffy_fur.client.animation.ItemAnimation;
-import mod.maxbogomol.fluffy_fur.client.render.LevelRenderHandler;
+import mod.maxbogomol.fluffy_fur.registry.client.FluffyFurRenderTypes;
 import mod.maxbogomol.wizards_reborn.WizardsReborn;
 import mod.maxbogomol.wizards_reborn.api.spell.Spell;
 import mod.maxbogomol.wizards_reborn.api.wissen.WissenItemUtil;
@@ -60,8 +60,8 @@ public class RaySpell extends Spell {
     }
 
     @Override
-    public void useSpell(Level world, Player player, InteractionHand hand) {
-        if (!world.isClientSide) {
+    public void useSpell(Level level, Player player, InteractionHand hand) {
+        if (!level.isClientSide) {
             ItemStack stack = player.getItemInHand(hand);
 
             CompoundTag stats = getStats(stack);
@@ -71,10 +71,10 @@ public class RaySpell extends Spell {
             spellData.putInt("tick_left", 0);
 
             Vec3 pos = player.getEyePosition();
-            SpellProjectileEntity entity = new SpellProjectileEntity(WizardsRebornEntities.SPELL_PROJECTILE.get(), world).shoot(
+            SpellProjectileEntity entity = new SpellProjectileEntity(WizardsRebornEntities.SPELL_PROJECTILE.get(), level).shoot(
                     pos.x, pos.y - 0.5, pos.z, 0, 0, 0, player.getUUID(), this.getId(), stats
             ).createSpellData(spellData);
-            world.addFreshEntity(entity);
+            level.addFreshEntity(entity);
 
             updatePos(entity);
             updateRot(entity);
@@ -87,19 +87,19 @@ public class RaySpell extends Spell {
 
             player.startUsingItem(hand);
             awardStat(player, stack);
-            spellSound(player, world);
+            spellSound(player, level);
         }
     }
 
     @Override
-    public void onUseTick(Level world, LivingEntity livingEntity, ItemStack stack, int remainingUseDuration) {
-        if (!world.isClientSide) {
+    public void onUseTick(Level level, LivingEntity livingEntity, ItemStack stack, int remainingUseDuration) {
+        if (!level.isClientSide) {
             CompoundTag nbt = stack.getOrCreateTag();
             if (nbt.contains("spell_data")) {
                 CompoundTag stackSpellData = nbt.getCompound("spell_data");
                 if (stackSpellData.contains("entity")) {
                     UUID entityUUID = stackSpellData.getUUID("entity");
-                    Entity entity = ((ServerLevel) world).getEntity(entityUUID);
+                    Entity entity = ((ServerLevel) level).getEntity(entityUUID);
                     if (entity instanceof SpellProjectileEntity projectile) {
                         CompoundTag spellData = projectile.getSpellData();
                         spellData.putInt("ticks", 1);
@@ -121,8 +121,8 @@ public class RaySpell extends Spell {
         }
     }
 
-    public void releaseUsing(ItemStack stack, Level world, LivingEntity entityLiving, int timeLeft) {
-        if (!world.isClientSide) {
+    public void releaseUsing(ItemStack stack, Level level, LivingEntity entityLiving, int timeLeft) {
+        if (!level.isClientSide) {
             CompoundTag stats = getStats(stack);
 
             CompoundTag nbt = stack.getOrCreateTag();
@@ -130,7 +130,7 @@ public class RaySpell extends Spell {
                 CompoundTag stackSpellData = nbt.getCompound("spell_data");
                 if (stackSpellData.contains("entity")) {
                     UUID entityUUID = stackSpellData.getUUID("entity");
-                    Entity entity = ((ServerLevel) world).getEntity(entityUUID);
+                    Entity entity = ((ServerLevel) level).getEntity(entityUUID);
                     if (entity instanceof SpellProjectileEntity projectile) {
                         setCooldown(stack, stats);
 
@@ -311,7 +311,7 @@ public class RaySpell extends Spell {
 
         stack.translate(offset, 0, 0);
 
-        MultiBufferSource bufferDelayed = LevelRenderHandler.getDelayedRender();
+        MultiBufferSource bufferDelayed = FluffyFurRenderTypes.getDelayedRender();
 
         float width = 1f;
         if (entity.tickCount < 3) {

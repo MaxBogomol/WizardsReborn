@@ -25,22 +25,22 @@ public class LookSpell extends Spell {
     }
 
     @Override
-    public void useSpell(Level world, Player player, InteractionHand hand) {
-        if (!world.isClientSide) {
+    public void useSpell(Level level, Player player, InteractionHand hand) {
+        if (!level.isClientSide) {
             ItemStack stack = player.getItemInHand(hand);
 
             CompoundTag stats = getStats(stack);
             setCooldown(stack, stats);
             removeWissen(stack, stats, player);
             awardStat(player, stack);
-            spellSound(player, world);
-            lookSpell(world, player, hand);
+            spellSound(player, level);
+            lookSpell(level, player, hand);
         }
     }
 
-    public boolean canSpell(Level world, Player player, InteractionHand hand) {
-        if (super.canSpell(world, player, hand)) {
-            return canLookSpell(world, player, hand);
+    public boolean canSpell(Level level, Player player, InteractionHand hand) {
+        if (super.canSpell(level, player, hand)) {
+            return canLookSpell(level, player, hand);
         }
         return false;
     }
@@ -53,7 +53,7 @@ public class LookSpell extends Spell {
         return 0f;
     }
 
-    public float getLookDistance(Level world, Player player, InteractionHand hand) {
+    public float getLookDistance(Level level, Player player, InteractionHand hand) {
         ItemStack stack = player.getItemInHand(hand);
         CompoundTag stats = getStats(stack);
 
@@ -61,7 +61,7 @@ public class LookSpell extends Spell {
         return getLookDistance() + (getLookAdditionalDistance() * focusLevel);
     }
 
-    public static HitResult getHitPos(Level world, Vec3 start, Vec3 endPos, Predicate<Entity> entityFilter, int entityCount, float size, boolean endE) {
+    public static HitResult getHitPos(Level level, Vec3 start, Vec3 endPos, Predicate<Entity> entityFilter, int entityCount, float size, boolean endE) {
         float distance = (float) Math.sqrt(Math.pow(start.x() - endPos.x, 2) + Math.pow(start.y() - endPos.y, 2) + Math.pow(start.z() - endPos.z, 2));
         float X = (float) start.x();
         float Y = (float) start.y();
@@ -91,7 +91,7 @@ public class LookSpell extends Spell {
             if (endE) canEntity = (entityCount > 0);
 
             if (canEntity) {
-                List<Entity> entityList = world.getEntitiesOfClass(Entity.class, new AABB(X - size, Y - size, Z - size, X + size, Y + size, Z + size));
+                List<Entity> entityList = level.getEntitiesOfClass(Entity.class, new AABB(X - size, Y - size, Z - size, X + size, Y + size, Z + size));
                 for (Entity entity : entityList) {
                     if (entityFilter.test(entity) && !entities.contains(entity)) {
                         entities.add(entity);
@@ -106,9 +106,9 @@ public class LookSpell extends Spell {
 
             BlockPos blockPos = BlockPos.containing(X, Y, Z);
 
-            BlockHitResult blockHitResult = world.getBlockState(blockPos).getVisualShape(world, blockPos, CollisionContext.empty()).clip(start, endPos, blockPos);
+            BlockHitResult blockHitResult = level.getBlockState(blockPos).getVisualShape(level, blockPos, CollisionContext.empty()).clip(start, endPos, blockPos);
             if (blockHitResult != null) {
-                boolean isBlock = !world.getBlockState(blockHitResult.getBlockPos()).isAir();
+                boolean isBlock = !level.getBlockState(blockHitResult.getBlockPos()).isAir();
                 return new HitResult(new Vec3(oldX, oldY, oldZ), isBlock, entities);
             }
 
@@ -119,29 +119,29 @@ public class LookSpell extends Spell {
         return new HitResult(new Vec3(X, Y, Z), false, entities);
     }
 
-    public static HitResult getHitPos(Level world, Vec3 start, Vec3 endPos) {
-        return getHitPos(world, start, endPos, (e) -> {return false;}, 0, 0, false);
+    public static HitResult getHitPos(Level level, Vec3 start, Vec3 endPos) {
+        return getHitPos(level, start, endPos, (e) -> {return false;}, 0, 0, false);
     }
 
-    public HitResult getHitPos(Level world, Player player, InteractionHand hand, Predicate<Entity> entityFilter, int entityCount, float size, boolean endE) {
-        float distance = getLookDistance(world, player, hand);
-        return getHitPos(world, player.getEyePosition(), player.getEyePosition().add(player.getLookAngle().scale(distance)), entityFilter, entityCount, size, endE);
+    public HitResult getHitPos(Level level, Player player, InteractionHand hand, Predicate<Entity> entityFilter, int entityCount, float size, boolean endE) {
+        float distance = getLookDistance(level, player, hand);
+        return getHitPos(level, player.getEyePosition(), player.getEyePosition().add(player.getLookAngle().scale(distance)), entityFilter, entityCount, size, endE);
     }
 
-    public HitResult getHitPos(Level world, Player player, InteractionHand hand) {
-        float distance = getLookDistance(world, player, hand);
-        return getHitPos(world, player.getEyePosition(), player.getEyePosition().add(player.getLookAngle().scale(distance)));
+    public HitResult getHitPos(Level level, Player player, InteractionHand hand) {
+        float distance = getLookDistance(level, player, hand);
+        return getHitPos(level, player.getEyePosition(), player.getEyePosition().add(player.getLookAngle().scale(distance)));
     }
 
-    public boolean canLookSpell(Level world, Player player, InteractionHand hand) {
+    public boolean canLookSpell(Level level, Player player, InteractionHand hand) {
         return true;
     }
 
-    public void lookSpell(Level world, Player player, InteractionHand hand) {
+    public void lookSpell(Level level, Player player, InteractionHand hand) {
 
     }
 
-    public static List<Entity> getHitEntities(Level world, Vec3 start, Vec3 endPos, float distance) {
+    public static List<Entity> getHitEntities(Level level, Vec3 start, Vec3 endPos, float distance) {
         List<Entity> list = new ArrayList<>();
         float ds = (float) Math.sqrt(Math.pow(start.x() - endPos.x, 2) + Math.pow(start.y() - endPos.y, 2) + Math.pow(start.z() - endPos.z, 2));
         for (float i = 0; i < ds * 10; i++) {
@@ -159,7 +159,7 @@ public class LookSpell extends Spell {
             float Y = (float) (start.y() + y);
             float Z = (float) (start.z() + z);
 
-            List<Entity> entityList = world.getEntitiesOfClass(Entity.class, new AABB(X - distance, Y - distance, Z - distance, X + distance, Y + distance, Z + distance));
+            List<Entity> entityList = level.getEntitiesOfClass(Entity.class, new AABB(X - distance, Y - distance, Z - distance, X + distance, Y + distance, Z + distance));
             for (Entity entity : entityList) {
                 if (!list.contains(entity)) {
                     list.add(entity);

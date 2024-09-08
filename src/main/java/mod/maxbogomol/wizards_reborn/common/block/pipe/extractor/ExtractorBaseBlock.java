@@ -1,4 +1,4 @@
-package mod.maxbogomol.wizards_reborn.common.block.extractor;
+package mod.maxbogomol.wizards_reborn.common.block.pipe.extractor;
 
 import mod.maxbogomol.wizards_reborn.common.block.pipe.PipeBaseBlock;
 import mod.maxbogomol.wizards_reborn.common.block.pipe.PipeBaseBlockEntity;
@@ -34,8 +34,8 @@ public abstract class ExtractorBaseBlock extends PipeBaseBlock {
         makeShapes(EXTRACTOR_AABB, EXTRACTOR_SHAPES);
     }
 
-    public ExtractorBaseBlock(Properties pProperties) {
-        super(pProperties);
+    public ExtractorBaseBlock(Properties properties) {
+        super(properties);
         this.registerDefaultState(this.stateDefinition.any().setValue(BlockStateProperties.WATERLOGGED, false).setValue(BlockStateProperties.LIT, false).setValue(BlockStateProperties.POWERED, false));
     }
 
@@ -71,61 +71,61 @@ public abstract class ExtractorBaseBlock extends PipeBaseBlock {
             return false;
         }
 
-        return facingConnected(direction, state, BlockStateProperties.HORIZONTAL_FACING)
-                && facingConnected(direction, state, BlockStateProperties.FACING);
+        return facingConnected(direction, state, BlockStateProperties.HORIZONTAL_FACING) && facingConnected(direction, state, BlockStateProperties.FACING);
     }
 
     @Override
-    public void neighborChanged(BlockState pState, Level pLevel, BlockPos pPos, Block pBlock, BlockPos pFromPos, boolean pIsMoving) {
-        if (!pLevel.isClientSide) {
-            boolean flag = pState.getValue(BlockStateProperties.LIT);
-            if (flag != pLevel.hasNeighborSignal(pPos)) {
+    public void neighborChanged(BlockState state, Level level, BlockPos pos, Block block, BlockPos fromPos, boolean isMoving) {
+        if (!level.isClientSide) {
+            boolean flag = state.getValue(BlockStateProperties.LIT);
+            if (flag != level.hasNeighborSignal(pos)) {
                 if (flag) {
-                    pLevel.scheduleTick(pPos, this, 4);
+                    level.scheduleTick(pos, this, 4);
                 } else {
-                    pLevel.setBlock(pPos, pState.cycle(BlockStateProperties.LIT), 2);
+                    level.setBlock(pos, state.cycle(BlockStateProperties.LIT), 2);
                 }
             }
         }
     }
 
     @Override
-    public void tick(BlockState pState, ServerLevel pLevel, BlockPos pPos, RandomSource pRandom) {
-        if (pState.getValue(BlockStateProperties.LIT) && !pLevel.hasNeighborSignal(pPos)) {
-            pLevel.setBlock(pPos, pState.cycle(BlockStateProperties.LIT), 2);
+    public void tick(BlockState state, ServerLevel level, BlockPos pos, RandomSource random) {
+        if (state.getValue(BlockStateProperties.LIT) && !level.hasNeighborSignal(pos)) {
+            level.setBlock(pos, state.cycle(BlockStateProperties.LIT), 2);
         }
     }
 
-    public InteractionResult use(BlockState pState, Level pLevel, BlockPos pPos, Player pPlayer, InteractionHand pHand, BlockHitResult pHit) {
-        if (!pLevel.isClientSide) {
-            InteractionResult interactionResult = super.use(pState, pLevel, pPos, pPlayer, pHand, pHit);
+    @Override
+    public InteractionResult use(BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hit) {
+        if (!level.isClientSide) {
+            InteractionResult interactionResult = super.use(state, level, pos, player, hand, hit);
             if (interactionResult != InteractionResult.PASS) {
                 return InteractionResult.SUCCESS;
             }
 
-            BlockState blockstate = this.pull(pState, pLevel, pPos);
+            BlockState blockstate = this.pull(state, level, pos);
             float f = blockstate.getValue(BlockStateProperties.POWERED) ? 0.6F : 0.5F;
-            pLevel.playSound((Player)null, pPos, SoundEvents.LEVER_CLICK, SoundSource.BLOCKS, 0.3F, f);
-            pLevel.gameEvent(pPlayer, blockstate.getValue(BlockStateProperties.POWERED) ? GameEvent.BLOCK_ACTIVATE : GameEvent.BLOCK_DEACTIVATE, pPos);
+            level.playSound(null, pos, SoundEvents.LEVER_CLICK, SoundSource.BLOCKS, 0.3F, f);
+            level.gameEvent(player, blockstate.getValue(BlockStateProperties.POWERED) ? GameEvent.BLOCK_ACTIVATE : GameEvent.BLOCK_DEACTIVATE, pos);
             return InteractionResult.SUCCESS;
         }
 
         return InteractionResult.SUCCESS;
     }
 
-    public BlockState pull(BlockState pState, Level pLevel, BlockPos pPos) {
-        pState = pState.cycle(BlockStateProperties.POWERED);
-        pLevel.setBlock(pPos, pState, 3);
-        this.updateNeighbours(pState, pLevel, pPos);
-        return pState;
+    public BlockState pull(BlockState state, Level level, BlockPos pos) {
+        state = state.cycle(BlockStateProperties.POWERED);
+        level.setBlock(pos, state, 3);
+        this.updateNeighbours(state, level, pos);
+        return state;
     }
 
-    private void updateNeighbours(BlockState pState, Level pLevel, BlockPos pPos) {
-        pLevel.updateNeighborsAt(pPos, this);
+    private void updateNeighbours(BlockState state, Level level, BlockPos pos) {
+        level.updateNeighborsAt(pos, this);
     }
 
     @Override
-    protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> pBuilder) {
-        pBuilder.add(BlockStateProperties.WATERLOGGED).add(BlockStateProperties.LIT).add(BlockStateProperties.POWERED);
+    protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {
+        builder.add(BlockStateProperties.WATERLOGGED).add(BlockStateProperties.LIT).add(BlockStateProperties.POWERED);
     }
 }

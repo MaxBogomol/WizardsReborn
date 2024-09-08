@@ -44,8 +44,8 @@ public class FireRaySpell extends RaySpell {
     }
 
     @Override
-    public void onImpact(HitResult ray, Level world, SpellProjectileEntity projectile, Player player, Entity target) {
-        super.onImpact(ray, world, projectile, player, target);
+    public void onImpact(HitResult ray, Level level, SpellProjectileEntity projectile, Player player, Entity target) {
+        super.onImpact(ray, level, projectile, player, target);
 
         if (player != null) {
             if (target.tickCount % 10 == 0) {
@@ -68,8 +68,8 @@ public class FireRaySpell extends RaySpell {
     }
 
     @Override
-    public void onImpact(HitResult ray, Level world, SpellProjectileEntity projectile, Player player) {
-        super.onImpact(ray, world, projectile, player);
+    public void onImpact(HitResult ray, Level level, SpellProjectileEntity projectile, Player player) {
+        super.onImpact(ray, level, projectile, player);
 
         if (player != null) {
             if (player.isShiftKeyDown()) {
@@ -85,38 +85,38 @@ public class FireRaySpell extends RaySpell {
                     if (WissenItemUtil.canRemoveWissen(stack, getWissenCostWithStat(projectile.getStats(), player, getBlockWissen(projectile, focusLevel)))) {
                         Vec3 vec = getBlockHitOffset(ray, projectile, -0.1f);
                         BlockPos blockPos = BlockPos.containing(vec.x(), vec.y(), vec.z());
-                        BlockState blockState = world.getBlockState(blockPos);
+                        BlockState blockState = level.getBlockState(blockPos);
                         if (!CampfireBlock.canLight(blockState) && !CandleBlock.canLight(blockState) && !CandleCakeBlock.canLight(blockState)) {
                             BlockEvent.EntityPlaceEvent placeEv = new BlockEvent.EntityPlaceEvent(
-                                    BlockSnapshot.create(world.dimension(), world, blockPos),
-                                    BaseFireBlock.getState(world, blockPos),
+                                    BlockSnapshot.create(level.dimension(), level, blockPos),
+                                    BaseFireBlock.getState(level, blockPos),
                                     player
                             );
 
-                            if (BaseFireBlock.canBePlacedAt(world, blockPos, Direction.UP) && !MinecraftForge.EVENT_BUS.post(placeEv)) {
-                                world.playSound(null, blockPos, SoundEvents.FIRECHARGE_USE, SoundSource.BLOCKS, 0.1F, world.getRandom().nextFloat() * 0.4F + 0.8F);
-                                BlockState blockstate1 = BaseFireBlock.getState(world, blockPos);
-                                world.setBlock(blockPos, blockstate1, 11);
+                            if (BaseFireBlock.canBePlacedAt(level, blockPos, Direction.UP) && !MinecraftForge.EVENT_BUS.post(placeEv)) {
+                                level.playSound(null, blockPos, SoundEvents.FIRECHARGE_USE, SoundSource.BLOCKS, 0.1F, level.getRandom().nextFloat() * 0.4F + 0.8F);
+                                BlockState blockstate1 = BaseFireBlock.getState(level, blockPos);
+                                level.setBlock(blockPos, blockstate1, 11);
 
                                 removeWissen(stack, projectile.getStats(), player, getBlockWissen(projectile, focusLevel));
 
-                                PacketHandler.sendToTracking(world, player.getOnPos(), new FireRaySpellEffectPacket((float) blockPos.getX() + 0.5f, (float) blockPos.getY() + 0.2f, (float) blockPos.getZ() + 0.5f, r, g, b));
+                                PacketHandler.sendToTracking(level, player.getOnPos(), new FireRaySpellEffectPacket((float) blockPos.getX() + 0.5f, (float) blockPos.getY() + 0.2f, (float) blockPos.getZ() + 0.5f, r, g, b));
                             }
                         } else {
                             BlockEvent.EntityPlaceEvent placeEv = new BlockEvent.EntityPlaceEvent(
-                                    BlockSnapshot.create(world.dimension(), world, blockPos),
-                                    world.getBlockState(blockPos),
+                                    BlockSnapshot.create(level.dimension(), level, blockPos),
+                                    level.getBlockState(blockPos),
                                     player
                             );
 
                             if (!MinecraftForge.EVENT_BUS.post(placeEv)) {
-                                world.playSound(player, blockPos, SoundEvents.FLINTANDSTEEL_USE, SoundSource.BLOCKS, 1.0F, world.getRandom().nextFloat() * 0.4F + 0.8F);
-                                world.setBlock(blockPos, blockState.setValue(BlockStateProperties.LIT, Boolean.valueOf(true)), 11);
-                                world.gameEvent(player, GameEvent.BLOCK_CHANGE, blockPos);
+                                level.playSound(player, blockPos, SoundEvents.FLINTANDSTEEL_USE, SoundSource.BLOCKS, 1.0F, level.getRandom().nextFloat() * 0.4F + 0.8F);
+                                level.setBlock(blockPos, blockState.setValue(BlockStateProperties.LIT, Boolean.valueOf(true)), 11);
+                                level.gameEvent(player, GameEvent.BLOCK_CHANGE, blockPos);
 
                                 removeWissen(stack, projectile.getStats(), player, getBlockWissen(projectile, focusLevel));
 
-                                PacketHandler.sendToTracking(world, player.getOnPos(), new FireRaySpellEffectPacket((float) blockPos.getX() + 0.5f, (float) blockPos.getY() + 0.5f, (float) blockPos.getZ() + 0.5f, r, g, b));
+                                PacketHandler.sendToTracking(level, player.getOnPos(), new FireRaySpellEffectPacket((float) blockPos.getX() + 0.5f, (float) blockPos.getY() + 0.5f, (float) blockPos.getZ() + 0.5f, r, g, b));
                             }
                         }
                     }

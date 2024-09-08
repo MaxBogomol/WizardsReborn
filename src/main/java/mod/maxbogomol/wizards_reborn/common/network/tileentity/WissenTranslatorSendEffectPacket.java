@@ -3,6 +3,7 @@ package mod.maxbogomol.wizards_reborn.common.network.tileentity;
 import mod.maxbogomol.fluffy_fur.client.particle.ParticleBuilder;
 import mod.maxbogomol.fluffy_fur.client.particle.data.ColorParticleData;
 import mod.maxbogomol.fluffy_fur.client.particle.data.GenericParticleData;
+import mod.maxbogomol.fluffy_fur.client.particle.data.SpinParticleData;
 import mod.maxbogomol.fluffy_fur.registry.client.FluffyFurParticles;
 import mod.maxbogomol.wizards_reborn.WizardsReborn;
 import mod.maxbogomol.wizards_reborn.client.config.ClientConfig;
@@ -37,7 +38,7 @@ public class WissenTranslatorSendEffectPacket {
             ctx.get().enqueueWork(new Runnable() {
                 @Override
                 public void run() {
-                    Level world = WizardsReborn.proxy.getLevel();
+                    Level level = WizardsReborn.proxy.getLevel();
 
                     WissenLimitHandler.wissenCount++;
 
@@ -53,11 +54,11 @@ public class WissenTranslatorSendEffectPacket {
                                     .setColorData(ColorParticleData.create(Config.wissenColorR(), Config.wissenColorG(), Config.wissenColorB()).build())
                                     .setTransparencyData(GenericParticleData.create(0.25f, 0).build())
                                     .setScaleData(GenericParticleData.create(0.15f, 0).build())
-                                    .randomSpin(0.5f)
+                                    .setSpinData(SpinParticleData.create().randomSpin(0.5f).build())
                                     .setLifetime(30)
                                     .randomVelocity(0.015f)
                                     .flatRandomOffset(0.375f, 0.375f, 0.375f)
-                                    .spawn(world, msg.pos.getX() + 0.5F, msg.pos.getY() + 0.5F, msg.pos.getZ() + 0.5F);
+                                    .spawn(level, msg.pos.getX() + 0.5F, msg.pos.getY() + 0.5F, msg.pos.getZ() + 0.5F);
                         }
                     }
                     ctx.get().setPacketHandled(true);

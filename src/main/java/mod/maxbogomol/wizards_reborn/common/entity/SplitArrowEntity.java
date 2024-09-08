@@ -36,8 +36,8 @@ public class SplitArrowEntity extends AbstractArrow {
 
     public List<Vec3> trail = new ArrayList<>();
 
-    public SplitArrowEntity(EntityType<? extends SplitArrowEntity> entityTypeIn, Level worldIn) {
-        super(entityTypeIn, worldIn);
+    public SplitArrowEntity(EntityType<? extends SplitArrowEntity> type, Level level) {
+        super(type, level);
     }
 
     public SplitArrowEntity(Level pLevel, double pX, double pY, double pZ) {

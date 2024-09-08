@@ -3,6 +3,7 @@ package mod.maxbogomol.wizards_reborn.common.network;
 import mod.maxbogomol.fluffy_fur.client.particle.ParticleBuilder;
 import mod.maxbogomol.fluffy_fur.client.particle.data.ColorParticleData;
 import mod.maxbogomol.fluffy_fur.client.particle.data.GenericParticleData;
+import mod.maxbogomol.fluffy_fur.client.particle.data.SpinParticleData;
 import mod.maxbogomol.fluffy_fur.registry.client.FluffyFurParticles;
 import mod.maxbogomol.wizards_reborn.WizardsReborn;
 import net.minecraft.network.FriendlyByteBuf;
@@ -78,7 +79,7 @@ public class EagleShotRayEffectPacket {
             ctx.get().enqueueWork(new Runnable() {
                 @Override
                 public void run() {
-                    Level world = WizardsReborn.proxy.getLevel();
+                    Level level = WizardsReborn.proxy.getLevel();
 
                     Vec3 pos = new Vec3(msg.posToX, msg.posToY, msg.posToZ);
                     Vec3 norm = new Vec3(msg.motionX, msg.motionY, msg.motionZ).normalize().scale(0.025f);
@@ -94,11 +95,11 @@ public class EagleShotRayEffectPacket {
                                     .setColorData(ColorParticleData.create(msg.r, msg.g, msg.b).build())
                                     .setTransparencyData(GenericParticleData.create(0.2f, 0).build())
                                     .setScaleData(GenericParticleData.create(0.05f, 0).build())
-                                    .randomSpin(0.3f)
+                                    .setSpinData(SpinParticleData.create().randomSpin(0.3f).build())
                                     .setLifetime(60)
                                     .randomVelocity(0.01f)
                                     .addVelocity(-norm.x, -norm.y, -norm.z)
-                                    .spawn(world, lerpX, lerpY, lerpZ);
+                                    .spawn(level, lerpX, lerpY, lerpZ);
                         }
 
                         if (random.nextFloat() < 0.05f) {
@@ -106,11 +107,11 @@ public class EagleShotRayEffectPacket {
                                     .setColorData(ColorParticleData.create(msg.r, msg.g, msg.b).build())
                                     .setTransparencyData(GenericParticleData.create(0.125f, 0).build())
                                     .setScaleData(GenericParticleData.create(0.1f, 0).build())
-                                    .randomSpin(0.3f)
+                                    .setSpinData(SpinParticleData.create().randomSpin(0.3f).build())
                                     .setLifetime(80)
                                     .randomVelocity(0.02f)
                                     .addVelocity(-norm.x, -norm.y, -norm.z)
-                                    .spawn(world, lerpX, lerpY, lerpZ);
+                                    .spawn(level, lerpX, lerpY, lerpZ);
                         }
                     }
                     ctx.get().setPacketHandled(true);

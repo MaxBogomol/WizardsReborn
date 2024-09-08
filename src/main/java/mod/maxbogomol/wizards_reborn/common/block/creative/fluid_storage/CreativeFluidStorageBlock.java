@@ -63,7 +63,7 @@ public class CreativeFluidStorageBlock extends Block implements EntityBlock, Sim
     }
 
     @Override
-    public RenderShape getRenderShape(BlockState pState) {
+    public RenderShape getRenderShape(BlockState state) {
         return RenderShape.MODEL;
     }
 
@@ -86,15 +86,15 @@ public class CreativeFluidStorageBlock extends Block implements EntityBlock, Sim
     }
 
     @Override
-    public InteractionResult use(BlockState state, Level world, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hit) {
-        if (world.getBlockEntity(pos) instanceof CreativeFluidStorageBlockEntity storage) {
+    public InteractionResult use(BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hit) {
+        if (level.getBlockEntity(pos) instanceof CreativeFluidStorageBlockEntity storage) {
             ItemStack stack = player.getItemInHand(hand);
             if (!stack.isEmpty()) {
                 IFluidHandler cap = stack.getCapability(ForgeCapabilities.FLUID_HANDLER_ITEM).orElse(null);
                 if (cap != null) {
                     storage.getTank().setFluid(new FluidStack(cap.getFluidInTank(0).getFluid(), Integer.MAX_VALUE));
                     SoundEvent soundevent = cap.getFluidInTank(0).getFluid().getFluidType().getSound(cap.getFluidInTank(0), SoundActions.BUCKET_FILL);
-                    world.playSound(player, pos, soundevent, SoundSource.BLOCKS, 1F, 1f);
+                    level.playSound(player, pos, soundevent, SoundSource.BLOCKS, 1F, 1f);
 
                     return InteractionResult.SUCCESS;
                 }
@@ -104,7 +104,7 @@ public class CreativeFluidStorageBlock extends Block implements EntityBlock, Sim
                         if (potion instanceof FluidAlchemyPotion fluidPotion) {
                             FluidStack fluid = new FluidStack(fluidPotion.fluid, Integer.MAX_VALUE);
                             storage.getTank().setFluid(fluid);
-                            world.playSound(player, pos, SoundEvents.BOTTLE_EMPTY, SoundSource.BLOCKS, 0.3F, 0.7f);
+                            level.playSound(player, pos, SoundEvents.BOTTLE_EMPTY, SoundSource.BLOCKS, 0.3F, 0.7f);
 
                             return InteractionResult.SUCCESS;
                         }
@@ -124,38 +124,31 @@ public class CreativeFluidStorageBlock extends Block implements EntityBlock, Sim
     }
 
     @Override
-    public BlockState updateShape(BlockState pState, Direction pDirection, BlockState pNeighborState, LevelAccessor pLevel, BlockPos pCurrentPos, BlockPos pNeighborPos) {
-        if (pState.getValue(BlockStateProperties.WATERLOGGED)) {
-            pLevel.scheduleTick(pCurrentPos, Fluids.WATER, Fluids.WATER.getTickDelay(pLevel));
+    public BlockState updateShape(BlockState state, Direction direction, BlockState neighborState, LevelAccessor level, BlockPos currentPos, BlockPos neighborPos) {
+        if (state.getValue(BlockStateProperties.WATERLOGGED)) {
+            level.scheduleTick(currentPos, Fluids.WATER, Fluids.WATER.getTickDelay(level));
         }
 
-        if (pLevel.getBlockEntity(pCurrentPos) instanceof PipeBaseBlockEntity pipe) {
-            BlockEntity facingBE = pLevel.getBlockEntity(pCurrentPos);
-            if (pNeighborState.is(WizardsRebornBlockTags.FLUID_PIPE_CONNECTION)) {
-                if (facingBE instanceof PipeBaseBlockEntity && ((PipeBaseBlockEntity) facingBE).getConnection(pDirection.getOpposite()) == PipeConnection.DISABLED) {
-                    pipe.setConnection(pDirection, PipeConnection.NONE);
+        if (level.getBlockEntity(currentPos) instanceof PipeBaseBlockEntity pipe) {
+            BlockEntity facingBE = level.getBlockEntity(currentPos);
+            if (neighborState.is(WizardsRebornBlockTags.FLUID_PIPE_CONNECTION)) {
+                if (facingBE instanceof PipeBaseBlockEntity && ((PipeBaseBlockEntity) facingBE).getConnection(direction.getOpposite()) == PipeConnection.DISABLED) {
+                    pipe.setConnection(direction, PipeConnection.NONE);
                 } else {
-                    pipe.setConnection(pDirection, PipeConnection.PIPE);
+                    pipe.setConnection(direction, PipeConnection.PIPE);
                 }
             } else {
-                pipe.setConnection(pDirection, PipeConnection.NONE);
+                pipe.setConnection(direction, PipeConnection.NONE);
             }
         }
 
-        return super.updateShape(pState, pDirection, pNeighborState, pLevel, pCurrentPos, pNeighborPos);
-    }
-
-    @Override
-    public boolean triggerEvent(BlockState state, Level world, BlockPos pos, int id, int param) {
-        super.triggerEvent(state, world, pos, id, param);
-        BlockEntity tileentity = world.getBlockEntity(pos);
-        return tileentity != null && tileentity.triggerEvent(id, param);
+        return super.updateShape(state, direction, neighborState, level, currentPos, neighborPos);
     }
 
     @Nullable
     @Override
-    public BlockEntity newBlockEntity(BlockPos pPos, BlockState pState) {
-        return new CreativeFluidStorageBlockEntity(pPos, pState);
+    public BlockEntity newBlockEntity(BlockPos pos, BlockState state) {
+        return new CreativeFluidStorageBlockEntity(pos, state);
     }
 
     @Nullable
@@ -175,7 +168,7 @@ public class CreativeFluidStorageBlock extends Block implements EntityBlock, Sim
     }
 
     @Override
-    public int getAnalogOutputSignal(BlockState blockState, Level level, BlockPos pos) {
+    public int getAnalogOutputSignal(BlockState state, Level level, BlockPos pos) {
         CreativeFluidStorageBlockEntity tile = (CreativeFluidStorageBlockEntity) level.getBlockEntity(pos);
         return Mth.floor(((float) tile.getTank().getFluidAmount() / tile.getMaxCapacity()) * 14.0F);
     }

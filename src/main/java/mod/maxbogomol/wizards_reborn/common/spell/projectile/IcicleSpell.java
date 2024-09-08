@@ -66,8 +66,8 @@ public class IcicleSpell extends ProjectileSpell {
     }
 
     @Override
-    public void useSpell(Level world, Player player, InteractionHand hand) {
-        if (!world.isClientSide) {
+    public void useSpell(Level level, Player player, InteractionHand hand) {
+        if (!level.isClientSide) {
             ItemStack stack = player.getItemInHand(hand);
 
             CompoundTag stats = getStats(stack);
@@ -76,13 +76,13 @@ public class IcicleSpell extends ProjectileSpell {
 
             Vec3 pos = player.getEyePosition(0);
             Vec3 vel = player.getEyePosition(0).add(player.getLookAngle().scale(40)).subtract(pos).scale(1.0 / 20);
-            world.addFreshEntity(new SpellProjectileEntity(WizardsRebornEntities.SPELL_PROJECTILE.get(), world).shoot(
+            level.addFreshEntity(new SpellProjectileEntity(WizardsRebornEntities.SPELL_PROJECTILE.get(), level).shoot(
                     pos.x, pos.y - 0.2f, pos.z, vel.x, vel.y, vel.z, player.getUUID(), this.getId(), stats
             ).createSpellData(spellData));
             setCooldown(stack, stats);
             removeWissen(stack, stats, player);
             awardStat(player, stack);
-            spellSound(player, world);
+            spellSound(player, level);
         }
     }
 
@@ -138,10 +138,10 @@ public class IcicleSpell extends ProjectileSpell {
     }
 
     @Override
-    public void onImpact(HitResult ray, Level world, SpellProjectileEntity projectile, Player player, Entity target) {
+    public void onImpact(HitResult ray, Level level, SpellProjectileEntity projectile, Player player, Entity target) {
         projectile.burstEffect();
         projectile.remove();
-        world.playSound(WizardsReborn.proxy.getPlayer(), projectile.getX(), projectile.getY(), projectile.getZ(), SoundEvents.GLASS_BREAK, SoundSource.PLAYERS, 1f, (float) (1f + ((random.nextFloat() - 0.5D) / 4)));
+        level.playSound(WizardsReborn.proxy.getPlayer(), projectile.getX(), projectile.getY(), projectile.getZ(), SoundEvents.GLASS_BREAK, SoundSource.PLAYERS, 1f, (float) (1f + ((random.nextFloat() - 0.5D) / 4)));
 
         int focusLevel = CrystalUtil.getStatLevel(projectile.getStats(), WizardsRebornCrystals.FOCUS);
         float magicModifier = ArcaneArmorItem.getPlayerMagicModifier(player);
@@ -149,7 +149,7 @@ public class IcicleSpell extends ProjectileSpell {
 
         CompoundTag spellData = projectile.getSpellData();
         if (spellData.contains("shard") && spellData.getBoolean("shard")) {
-            createShards(world, projectile, player, (int) (focusLevel + magicModifier));
+            createShards(level, projectile, player, (int) (focusLevel + magicModifier));
         } else {
             damage = damage / 2f;
         }
@@ -168,29 +168,29 @@ public class IcicleSpell extends ProjectileSpell {
     }
 
     @Override
-    public void onImpact(HitResult ray, Level world, SpellProjectileEntity projectile, Player player) {
+    public void onImpact(HitResult ray, Level level, SpellProjectileEntity projectile, Player player) {
         projectile.setPos(ray.getLocation().x, ray.getLocation().y, ray.getLocation().z);
         projectile.burstEffect();
         projectile.remove();
-        world.playSound(WizardsReborn.proxy.getPlayer(), projectile.getX(), projectile.getY(), projectile.getZ(), SoundEvents.GLASS_BREAK, SoundSource.PLAYERS, 1f, (float) (1f + ((random.nextFloat() - 0.5D) / 4)));
+        level.playSound(WizardsReborn.proxy.getPlayer(), projectile.getX(), projectile.getY(), projectile.getZ(), SoundEvents.GLASS_BREAK, SoundSource.PLAYERS, 1f, (float) (1f + ((random.nextFloat() - 0.5D) / 4)));
 
         int focusLevel = CrystalUtil.getStatLevel(projectile.getStats(), WizardsRebornCrystals.FOCUS);
         float magicModifier = ArcaneArmorItem.getPlayerMagicModifier(player);
 
         CompoundTag spellData = projectile.getSpellData();
         if (spellData.contains("shard") && spellData.getBoolean("shard")) {
-            createShards(world, projectile, player, (int) (focusLevel + magicModifier));
+            createShards(level, projectile, player, (int) (focusLevel + magicModifier));
         }
     }
 
-    public void createShards(Level world, SpellProjectileEntity projectile, Player player, int count) {
+    public void createShards(Level level, SpellProjectileEntity projectile, Player player, int count) {
         for (int i = 0; i < count; i++) {
             CompoundTag spellData = new CompoundTag();
             spellData.putBoolean("shard", false);
 
             Vec3 pos = projectile.getEyePosition(0);
             Vec3 vel = new Vec3((random.nextFloat() - 0.5f) * 0.3f, random.nextFloat() * 0.2f, (random.nextFloat() - 0.5f) * 0.3f);
-            world.addFreshEntity(new SpellProjectileEntity(WizardsRebornEntities.SPELL_PROJECTILE.get(), world).shoot(
+            level.addFreshEntity(new SpellProjectileEntity(WizardsRebornEntities.SPELL_PROJECTILE.get(), level).shoot(
                     pos.x, pos.y - 0.2f, pos.z, vel.x, vel.y, vel.z, player.getUUID(), this.getId(), projectile.getStats()
             ).createSpellData(spellData));
         }
