@@ -12,10 +12,12 @@ public class CrystalBagInventorySlot extends SlotItemHandler {
         super(itemHandler, slot, xPosition, yPosition);
     }
 
+    @Override
     public boolean mayPlace(ItemStack stack) {
         return !(getItem().getItem() instanceof CrystalBagItem);
     }
 
+    @Override
     public boolean mayPickup(Player player) {
         return !(getItem().getItem() instanceof CrystalBagItem);
     }

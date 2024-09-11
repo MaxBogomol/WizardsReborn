@@ -5,18 +5,24 @@ import mezz.jei.api.JeiPlugin;
 import mezz.jei.api.constants.RecipeTypes;
 import mezz.jei.api.constants.VanillaTypes;
 import mezz.jei.api.ingredients.subtypes.IIngredientSubtypeInterpreter;
-import mezz.jei.api.registration.IRecipeCatalystRegistration;
-import mezz.jei.api.registration.IRecipeCategoryRegistration;
-import mezz.jei.api.registration.IRecipeRegistration;
-import mezz.jei.api.registration.ISubtypeRegistration;
+import mezz.jei.api.registration.*;
 import mod.maxbogomol.wizards_reborn.WizardsReborn;
 import mod.maxbogomol.wizards_reborn.api.alchemy.AlchemyPotionUtil;
 import mod.maxbogomol.wizards_reborn.api.arcaneenchantment.ArcaneEnchantmentUtil;
 import mod.maxbogomol.wizards_reborn.api.crystalritual.CrystalRitualUtil;
-import mod.maxbogomol.wizards_reborn.integration.common.farmersdelight.FarmersDelightIntegration;
+import mod.maxbogomol.wizards_reborn.client.gui.container.AlchemyFurnaceContainer;
+import mod.maxbogomol.wizards_reborn.client.gui.container.AlchemyMachineContainer;
+import mod.maxbogomol.wizards_reborn.client.gui.container.ArcaneWorkbenchContainer;
+import mod.maxbogomol.wizards_reborn.client.gui.container.JewelerTableContainer;
+import mod.maxbogomol.wizards_reborn.client.gui.screen.AlchemyFurnaceScreen;
+import mod.maxbogomol.wizards_reborn.client.gui.screen.AlchemyMachineScreen;
+import mod.maxbogomol.wizards_reborn.client.gui.screen.ArcaneWorkbenchScreen;
+import mod.maxbogomol.wizards_reborn.client.gui.screen.JewelerTableScreen;
 import mod.maxbogomol.wizards_reborn.common.item.equipment.DrinkBottleItem;
-import mod.maxbogomol.wizards_reborn.registry.common.item.WizardsRebornItems;
+import mod.maxbogomol.wizards_reborn.integration.common.farmersdelight.FarmersDelightIntegration;
+import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornMenuTypes;
 import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornRecipes;
+import mod.maxbogomol.wizards_reborn.registry.common.item.WizardsRebornItems;
 import net.minecraft.client.Minecraft;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.Container;
@@ -43,28 +49,17 @@ public class WizardsRebornJei implements IModPlugin {
 
     @Override
     public void registerCategories(IRecipeCategoryRegistration registration) {
-        registration.addRecipeCategories(
-                new ArcanumDustTransmutationRecipeCategory(registration.getJeiHelpers().getGuiHelper()));
-        registration.addRecipeCategories(
-                new WissenAltarRecipeCategory(registration.getJeiHelpers().getGuiHelper()));
-        registration.addRecipeCategories(
-                new WissenCrystallizerRecipeCategory(registration.getJeiHelpers().getGuiHelper()));
-        registration.addRecipeCategories(
-                new ArcaneWorkbenchRecipeCategory(registration.getJeiHelpers().getGuiHelper()));
-        registration.addRecipeCategories(
-                new MortarRecipeCategory(registration.getJeiHelpers().getGuiHelper()));
-        registration.addRecipeCategories(
-                new AlchemyMachineRecipeCategory(registration.getJeiHelpers().getGuiHelper()));
-        registration.addRecipeCategories(
-                new CenserRecipeCategory(registration.getJeiHelpers().getGuiHelper()));
-        registration.addRecipeCategories(
-                new ArcaneIteratorRecipeCategory(registration.getJeiHelpers().getGuiHelper()));
-        registration.addRecipeCategories(
-                new JewelerTableRecipeCategory(registration.getJeiHelpers().getGuiHelper()));
-        registration.addRecipeCategories(
-                new CrystalRitualRecipeCategory(registration.getJeiHelpers().getGuiHelper()));
-        registration.addRecipeCategories(
-                new CrystalInfusionRecipeCategory(registration.getJeiHelpers().getGuiHelper()));
+        registration.addRecipeCategories(new ArcanumDustTransmutationRecipeCategory(registration.getJeiHelpers().getGuiHelper()));
+        registration.addRecipeCategories(new WissenAltarRecipeCategory(registration.getJeiHelpers().getGuiHelper()));
+        registration.addRecipeCategories(new WissenCrystallizerRecipeCategory(registration.getJeiHelpers().getGuiHelper()));
+        registration.addRecipeCategories(new ArcaneWorkbenchRecipeCategory(registration.getJeiHelpers().getGuiHelper()));
+        registration.addRecipeCategories(new MortarRecipeCategory(registration.getJeiHelpers().getGuiHelper()));
+        registration.addRecipeCategories(new AlchemyMachineRecipeCategory(registration.getJeiHelpers().getGuiHelper()));
+        registration.addRecipeCategories(new CenserRecipeCategory(registration.getJeiHelpers().getGuiHelper()));
+        registration.addRecipeCategories(new ArcaneIteratorRecipeCategory(registration.getJeiHelpers().getGuiHelper()));
+        registration.addRecipeCategories(new JewelerTableRecipeCategory(registration.getJeiHelpers().getGuiHelper()));
+        registration.addRecipeCategories(new CrystalRitualRecipeCategory(registration.getJeiHelpers().getGuiHelper()));
+        registration.addRecipeCategories(new CrystalInfusionRecipeCategory(registration.getJeiHelpers().getGuiHelper()));
     }
 
     @Override
@@ -158,6 +153,23 @@ public class WizardsRebornJei implements IModPlugin {
         registry.registerSubtypeInterpreter(VanillaTypes.ITEM_STACK, WizardsRebornItems.BAIKAL_BOTTLE.get(), interpreterDrinks);
         registry.registerSubtypeInterpreter(VanillaTypes.ITEM_STACK, WizardsRebornItems.KVASS_BOTTLE.get(), interpreterDrinks);
         registry.registerSubtypeInterpreter(VanillaTypes.ITEM_STACK, WizardsRebornItems.KISSEL_BOTTLE.get(), interpreterDrinks);
+    }
+
+    @Override
+    public void registerGuiHandlers(IGuiHandlerRegistration registration) {
+        registration.addRecipeClickArea(ArcaneWorkbenchScreen.class, 110, 55, 28, 23, ArcaneWorkbenchRecipeCategory.TYPE);
+        registration.addRecipeClickArea(AlchemyMachineScreen.class, 96, 51, 28, 23, AlchemyMachineRecipeCategory.TYPE);
+        registration.addRecipeClickArea(AlchemyFurnaceScreen.class, 96, 33, 28, 23, RecipeTypes.SMELTING, RecipeTypes.FUELING);
+        registration.addRecipeClickArea(JewelerTableScreen.class, 96, 33, 28, 23, JewelerTableRecipeCategory.TYPE);
+    }
+
+    @Override
+    public void registerRecipeTransferHandlers(IRecipeTransferRegistration registration) {
+        registration.addRecipeTransferHandler(ArcaneWorkbenchContainer.class, WizardsRebornMenuTypes.ARCANE_WORKBENCH_CONTAINER.get(), ArcaneWorkbenchRecipeCategory.TYPE, 36, 13, 0, 36);
+        registration.addRecipeTransferHandler(AlchemyMachineContainer.class, WizardsRebornMenuTypes.ALCHEMY_MACHINE_CONTAINER.get(), AlchemyMachineRecipeCategory.TYPE, 36, 6, 0, 36);
+        registration.addRecipeTransferHandler(AlchemyFurnaceContainer.class, WizardsRebornMenuTypes.ALCHEMY_FURNACE_CONTAINER.get(), RecipeTypes.SMELTING, 36, 1, 0, 36);
+        registration.addRecipeTransferHandler(AlchemyFurnaceContainer.class, WizardsRebornMenuTypes.ALCHEMY_FURNACE_CONTAINER.get(), RecipeTypes.FUELING, 37, 1, 0, 36);
+        registration.addRecipeTransferHandler(JewelerTableContainer.class, WizardsRebornMenuTypes.JEWELER_TABLE_CONTAINER.get(), JewelerTableRecipeCategory.TYPE, 36, 2, 0, 36);
     }
 
     private static <T extends Recipe<C>, C extends Container> List<T> sortRecipes(RecipeType<T> type, Comparator<? super T> comparator) {

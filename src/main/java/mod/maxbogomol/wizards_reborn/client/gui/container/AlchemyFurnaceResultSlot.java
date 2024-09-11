@@ -34,13 +34,14 @@ public class AlchemyFurnaceResultSlot extends SlotItemHandler {
         return super.remove(pAmount);
     }
 
-    public void onTake(Player pPlayer, ItemStack pStack) {
-        this.checkTakeAchievements(pStack);
-        super.onTake(pPlayer, pStack);
+    @Override
+    public void onTake(Player player, ItemStack stack) {
+        this.checkTakeAchievements(stack);
+        super.onTake(player, stack);
     }
 
-    protected void checkTakeAchievements(ItemStack pStack) {
-        pStack.onCraftedBy(this.player.level(), this.player, this.removeCount);
+    protected void checkTakeAchievements(ItemStack stack) {
+        stack.onCraftedBy(this.player.level(), this.player, this.removeCount);
         Player player = this.player;
         if (player instanceof ServerPlayer serverplayer) {
             if (menu.blockEntity instanceof AlchemyFurnaceBlockEntity furnace) {
@@ -49,6 +50,6 @@ public class AlchemyFurnaceResultSlot extends SlotItemHandler {
         }
 
         this.removeCount = 0;
-        net.minecraftforge.event.ForgeEventFactory.firePlayerSmeltedEvent(this.player, pStack);
+        net.minecraftforge.event.ForgeEventFactory.firePlayerSmeltedEvent(this.player, stack);
     }
 }

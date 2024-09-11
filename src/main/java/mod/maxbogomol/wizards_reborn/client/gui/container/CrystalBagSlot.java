@@ -11,6 +11,7 @@ public class CrystalBagSlot extends SlotItemHandler {
         super(itemHandler, slot, xPosition, yPosition);
     }
 
+    @Override
     public boolean mayPlace(ItemStack stack) {
         return stack.is(WizardsRebornItemTags.CRYSTAL_BAG_SLOTS);
     }

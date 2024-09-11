@@ -71,25 +71,31 @@ public class AlchemyMachineRecipeCategory implements IRecipeCategory<AlchemyMach
     public void setRecipe(@NotNull IRecipeLayoutBuilder builder, @NotNull AlchemyMachineRecipe recipe, @NotNull IFocusGroup focusGroup) {
         int x = 0;
         int y = 0;
-        for (Ingredient o : recipe.getIngredients()) {
-            ItemStack[] items = o.getItems();
-            boolean setIngr = true;
-            IRecipeSlotBuilder slot =  builder.addSlot(RecipeIngredientRole.INPUT, 15 + x, 30 + y);
+        for (int i = 0; i < 6; i++) {
+            if (i < recipe.getIngredients().size()) {
+                Ingredient ingredient = recipe.getIngredients().get(i);
+                ItemStack[] items = ingredient.getItems();
+                boolean setIngr = true;
+                IRecipeSlotBuilder slot = builder.addSlot(RecipeIngredientRole.INPUT, 15 + x, 30 + y);
 
-            for (ItemStack stack : items) {
-                if (!AlchemyPotionUtil.isEmpty(recipe.getRecipeAlchemyPotionIngredient())) {
-                    if (stack.getItem() instanceof AlchemyPotionItem item) {
-                        setIngr = false;
-                        ItemStack bottle = stack.copy();
-                        AlchemyPotionUtil.setPotion(bottle, recipe.getRecipeAlchemyPotionIngredient());
-                        slot.addItemStack(bottle);
+                for (ItemStack stack : items) {
+                    if (!AlchemyPotionUtil.isEmpty(recipe.getRecipeAlchemyPotionIngredient())) {
+                        if (stack.getItem() instanceof AlchemyPotionItem item) {
+                            setIngr = false;
+                            ItemStack bottle = stack.copy();
+                            AlchemyPotionUtil.setPotion(bottle, recipe.getRecipeAlchemyPotionIngredient());
+                            slot.addItemStack(bottle);
+                        }
                     }
                 }
+
+                if (setIngr) {
+                    slot.addIngredients(ingredient);
+                }
+            } else {
+                builder.addSlot(RecipeIngredientRole.INPUT, 15 + x, 30 + y);
             }
 
-            if (setIngr) {
-                slot.addIngredients(o);
-            }
             x = x + 18;
             if (x >= 34) {
                 y = y + 18;
@@ -99,7 +105,7 @@ public class AlchemyMachineRecipeCategory implements IRecipeCategory<AlchemyMach
 
         y = 0;
         for (FluidIngredient o : recipe.getFluidIngredients()) {
-            builder.addSlot(RecipeIngredientRole.INPUT, 55, 30 + y)
+            builder.addSlot(RecipeIngredientRole.RENDER_ONLY, 55, 30 + y)
                     .setFluidRenderer(o.getFluids().get(0).getAmount(), false, 16, 16)
                     .addIngredients(ForgeTypes.FLUID_STACK, o.getFluids());
             y = y + 18;

@@ -12,10 +12,12 @@ public class AlchemyBagInventorySlot extends SlotItemHandler {
         super(itemHandler, slot, xPosition, yPosition);
     }
 
+    @Override
     public boolean mayPlace(ItemStack stack) {
         return !(getItem().getItem() instanceof AlchemyBagItem);
     }
 
+    @Override
     public boolean mayPickup(Player player) {
         return !(getItem().getItem() instanceof AlchemyBagItem);
     }
