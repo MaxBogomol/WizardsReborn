@@ -47,11 +47,11 @@ public class ArcaneIteratorBurstEffectPacket {
                                     .setLifetime(20)
                                     .randomVelocity(0.025f)
                                     .spawn(level, pos.getFloat("x") + 0.5F, pos.getFloat("y") + 1.3F, pos.getFloat("z") + 0.5F);
-                            ParticleBuilder.create(FluffyFurParticles.WISP)
+                            ParticleBuilder.create(FluffyFurParticles.SPARKLE)
                                     .setColorData(ColorParticleData.create(random.nextFloat(), random.nextFloat(), random.nextFloat()).build())
                                     .setTransparencyData(GenericParticleData.create(0.25f, 0).build())
                                     .setScaleData(GenericParticleData.create(0.1f, 0).build())
-                                    .setSpinData(SpinParticleData.create().randomSpin(0.5f).build())
+                                    .setSpinData(SpinParticleData.create().randomOffset().randomSpin(0.5f).build())
                                     .setLifetime(30)
                                     .randomVelocity(0.025f)
                                     .spawn(level, pos.getFloat("x") + 0.5F, pos.getFloat("y") + 1.3F, pos.getFloat("z") + 0.5F);

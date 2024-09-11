@@ -35,10 +35,10 @@ public class CooldownSensorBlock extends SensorBaseBlock {
                 break;
         }
 
-        BlockEntity tile = level.getBlockEntity(blockpos);
-        if (tile instanceof ICooldownBlockEntity cooldownTile) {
-            i = Mth.floor((1f / cooldownTile.getCooldown()) * 14.0F);
-            if (cooldownTile.getCooldown() <= 0) {
+        BlockEntity blockEntity = level.getBlockEntity(blockpos);
+        if (blockEntity instanceof ICooldownBlockEntity cooldownBlock) {
+            i = Mth.floor((1f / cooldownBlock.getCooldown()) * 14.0F);
+            if (cooldownBlock.getCooldown() <= 0) {
                 i = 0;
             }
         }

@@ -35,9 +35,9 @@ public class HeatSensorBlock extends SensorBaseBlock {
                 break;
         }
 
-        BlockEntity tile = level.getBlockEntity(blockpos);
-        if (tile instanceof IHeatBlockEntity heatTile) {
-            i = Mth.floor(((float) heatTile.getHeat() / heatTile.getMaxHeat()) * 14.0F);
+        BlockEntity blockEntity = level.getBlockEntity(blockpos);
+        if (blockEntity instanceof IHeatBlockEntity heatBlock) {
+            i = Mth.floor(((float) heatBlock.getHeat() / heatBlock.getMaxHeat()) * 14.0F);
         }
 
         return i;

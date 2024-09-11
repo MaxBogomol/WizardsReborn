@@ -71,7 +71,7 @@ public class CrystalBlock extends Block implements EntityBlock, SimpleWaterlogge
 
     @Nonnull
     @Override
-    public VoxelShape getShape(BlockState state, BlockGetter world, BlockPos pos, CollisionContext ctx) {
+    public VoxelShape getShape(BlockState state, BlockGetter level, BlockPos pos, CollisionContext context) {
         if (polishing == WizardsRebornCrystals.CRYSTAL) {
             return SHAPE;
         }

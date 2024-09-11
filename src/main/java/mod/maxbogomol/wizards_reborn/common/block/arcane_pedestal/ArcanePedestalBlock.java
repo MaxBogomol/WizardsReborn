@@ -7,10 +7,10 @@ import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornSounds;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.sounds.SoundSource;
+import net.minecraft.world.Container;
 import net.minecraft.world.Containers;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
-import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.item.ItemStack;
@@ -57,7 +57,7 @@ public class ArcanePedestalBlock extends Block implements EntityBlock, SimpleWat
 
     @Nonnull
     @Override
-    public VoxelShape getShape(BlockState state, BlockGetter world, BlockPos pos, CollisionContext ctx) {
+    public VoxelShape getShape(BlockState state, BlockGetter level, BlockPos pos, CollisionContext context) {
         return SHAPE;
     }
 
@@ -74,63 +74,6 @@ public class ArcanePedestalBlock extends Block implements EntityBlock, SimpleWat
     }
 
     @Override
-    public void onRemove(@Nonnull BlockState state, @Nonnull Level level, @Nonnull BlockPos pos, @Nonnull BlockState newState, boolean isMoving) {
-        if (state.getBlock() != newState.getBlock()) {
-            BlockEntity tile = level.getBlockEntity(pos);
-            if (tile instanceof BlockSimpleInventory) {
-                Containers.dropContents(level, pos, ((BlockSimpleInventory) tile).getItemHandler());
-            }
-            super.onRemove(state, level, pos, newState, isMoving);
-        }
-    }
-
-    @Override
-    public InteractionResult use(BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hit) {
-        ArcanePedestalBlockEntity tile = (ArcanePedestalBlockEntity) level.getBlockEntity(pos);
-        ItemStack stack = player.getItemInHand(hand).copy();
-
-        if (player.isShiftKeyDown()) {
-            if (stack.getItem() instanceof ArcanemiconItem) {
-                return InteractionResult.PASS;
-            }
-        }
-
-        if ((!stack.isEmpty()) && (tile.getItemHandler().getItem(0).isEmpty())) {
-            if (stack.getCount() > 1) {
-                player.getItemInHand(hand).setCount(stack.getCount() - 1);
-                stack.setCount(1);
-                tile.getItemHandler().setItem(0, stack);
-                level.updateNeighbourForOutputSignal(pos, this);
-                BlockEntityUpdate.packet(tile);
-                level.playSound(null, pos, WizardsRebornSounds.PEDESTAL_INSERT.get(), SoundSource.BLOCKS, 1.0f, 1.0f);
-                return InteractionResult.SUCCESS;
-            } else {
-                tile.getItemHandler().setItem(0, stack);
-                player.getInventory().removeItem(player.getItemInHand(hand));
-                level.updateNeighbourForOutputSignal(pos, this);
-                BlockEntityUpdate.packet(tile);
-                level.playSound(null, pos, WizardsRebornSounds.PEDESTAL_INSERT.get(), SoundSource.BLOCKS, 1.0f, 1.0f);
-                return InteractionResult.SUCCESS;
-            }
-        }
-
-        if (!tile.getItemHandler().getItem(0).isEmpty()) {
-            if (player.getInventory().getSlotWithRemainingSpace(tile.getItemHandler().getItem(0)) != -1 || player.getInventory().getFreeSlot() > -1) {
-                player.getInventory().add(tile.getItemHandler().getItem(0).copy());
-            } else {
-                level.addFreshEntity(new ItemEntity(level, pos.getX() + 0.5F, pos.getY() + 1.0F, pos.getZ() + 0.5F, tile.getItemHandler().getItem(0).copy()));
-            }
-            tile.getItemHandler().removeItem(0, 1);
-            level.updateNeighbourForOutputSignal(pos, this);
-            BlockEntityUpdate.packet(tile);
-            level.playSound(null, pos, WizardsRebornSounds.PEDESTAL_REMOVE.get(), SoundSource.BLOCKS, 1.0f, 1.0f);
-            return InteractionResult.SUCCESS;
-        }
-
-        return InteractionResult.PASS;
-    }
-
-    @Override
     public FluidState getFluidState(BlockState state) {
         return state.getValue(BlockStateProperties.WATERLOGGED) ? Fluids.WATER.getSource(false) : Fluids.EMPTY.defaultFluidState();
     }
@@ -142,6 +85,56 @@ public class ArcanePedestalBlock extends Block implements EntityBlock, SimpleWat
         }
 
         return super.updateShape(state, direction, neighborState, level, currentPos, neighborPos);
+    }
+
+    @Override
+    public void onRemove(@Nonnull BlockState state, @Nonnull Level level, @Nonnull BlockPos pos, @Nonnull BlockState newState, boolean isMoving) {
+        if (state.getBlock() != newState.getBlock()) {
+            BlockEntity blockEntity = level.getBlockEntity(pos);
+            if (blockEntity instanceof BlockSimpleInventory blockSimpleInventory) {
+                Containers.dropContents(level, pos, (blockSimpleInventory).getItemHandler());
+            }
+        }
+        super.onRemove(state, level, pos, newState, isMoving);
+    }
+
+    @Override
+    public InteractionResult use(BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hit) {
+        ArcanePedestalBlockEntity blockEntity = (ArcanePedestalBlockEntity) level.getBlockEntity(pos);
+        ItemStack stack = player.getItemInHand(hand).copy();
+
+        if (player.isShiftKeyDown()) {
+            if (stack.getItem() instanceof ArcanemiconItem) {
+                return InteractionResult.PASS;
+            }
+        }
+
+        Container container = blockEntity.getItemHandler();
+        if ((!stack.isEmpty()) && (container.getItem(0).isEmpty())) {
+            if (stack.getCount() > 1) {
+                player.getItemInHand(hand).shrink(1);
+                stack.setCount(1);
+                container.setItem(0, stack);
+            } else {
+                container.setItem(0, stack);
+                player.getInventory().removeItem(player.getItemInHand(hand));
+            }
+            level.updateNeighbourForOutputSignal(pos, this);
+            BlockEntityUpdate.packet(blockEntity);
+            level.playSound(null, pos, WizardsRebornSounds.PEDESTAL_INSERT.get(), SoundSource.BLOCKS, 1.0f, 1.0f);
+            return InteractionResult.SUCCESS;
+        }
+
+        if (!container.getItem(0).isEmpty()) {
+            BlockSimpleInventory.addHandPlayerItem(level, player, hand, stack, container.getItem(0));
+            container.removeItem(0, 1);
+            level.updateNeighbourForOutputSignal(pos, this);
+            BlockEntityUpdate.packet(blockEntity);
+            level.playSound(null, pos, WizardsRebornSounds.PEDESTAL_REMOVE.get(), SoundSource.BLOCKS, 1.0f, 1.0f);
+            return InteractionResult.SUCCESS;
+        }
+
+        return InteractionResult.PASS;
     }
 
     @Nullable
@@ -157,7 +150,7 @@ public class ArcanePedestalBlock extends Block implements EntityBlock, SimpleWat
 
     @Override
     public int getAnalogOutputSignal(BlockState state, Level level, BlockPos pos) {
-        BlockSimpleInventory tile = (BlockSimpleInventory) level.getBlockEntity(pos);
-        return AbstractContainerMenu.getRedstoneSignalFromContainer(tile.getItemHandler());
+        BlockSimpleInventory blockEntity = (BlockSimpleInventory) level.getBlockEntity(pos);
+        return AbstractContainerMenu.getRedstoneSignalFromContainer(blockEntity.getItemHandler());
     }
 }

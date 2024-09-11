@@ -100,7 +100,7 @@ public class WissenTranslatorBlock extends FaceAttachedHorizontalDirectionalBloc
 
     @Nonnull
     @Override
-    public VoxelShape getShape(BlockState state, BlockGetter world, BlockPos pos, CollisionContext ctx) {
+    public VoxelShape getShape(BlockState state, BlockGetter level, BlockPos pos, CollisionContext context) {
         switch (state.getValue(FACE)) {
             case FLOOR:
                 return SHAPE_D;

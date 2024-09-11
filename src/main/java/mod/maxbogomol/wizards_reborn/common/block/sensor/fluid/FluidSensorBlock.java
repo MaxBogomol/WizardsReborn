@@ -59,21 +59,21 @@ public class FluidSensorBlock extends SensorBaseBlock {
         }
 
         if (level.getBlockEntity(pos) instanceof FluidSensorBlockEntity sensor) {
-            BlockEntity tile = level.getBlockEntity(blockpos);
+            BlockEntity blockEntity = level.getBlockEntity(blockpos);
             boolean active = ((!state.getValue(BlockStateProperties.LIT) || level.hasNeighborSignal(pos)));
-            if (tile instanceof IFluidBlockEntity fluidTile) {
+            if (blockEntity instanceof IFluidBlockEntity fluidBlock) {
                 if (!sensor.getTank().isEmpty()) {
-                    if ((active && fluidTile.getFluidStack().getFluid().isSame(sensor.getTank().getFluid().getFluid())) ||
-                            (!active && fluidTile.getFluidStack().getFluid() != sensor.getTank().getFluid().getFluid())) {
-                        i = Mth.floor(((float) fluidTile.getFluidAmount() / fluidTile.getFluidMaxAmount()) * 14.0F);
+                    if ((active && fluidBlock.getFluidStack().getFluid().isSame(sensor.getTank().getFluid().getFluid())) ||
+                            (!active && fluidBlock.getFluidStack().getFluid() != sensor.getTank().getFluid().getFluid())) {
+                        i = Mth.floor(((float) fluidBlock.getFluidAmount() / fluidBlock.getFluidMaxAmount()) * 14.0F);
                     }
                 } else {
-                    i = Mth.floor(((float) fluidTile.getFluidAmount() / fluidTile.getFluidMaxAmount()) * 14.0F);
+                    i = Mth.floor(((float) fluidBlock.getFluidAmount() / fluidBlock.getFluidMaxAmount()) * 14.0F);
                 }
             }
 
-            if (tile != null) {
-                IFluidHandler cap = tile.getCapability(ForgeCapabilities.FLUID_HANDLER, direction).orElse(null);
+            if (blockEntity != null) {
+                IFluidHandler cap = blockEntity.getCapability(ForgeCapabilities.FLUID_HANDLER, direction).orElse(null);
                 if (cap != null) {
                     if (!sensor.getTank().isEmpty()) {
                         if ((active && cap.getFluidInTank(0).getFluid() == sensor.getTank().getFluid().getFluid()) ||
@@ -94,12 +94,12 @@ public class FluidSensorBlock extends SensorBaseBlock {
         if (!player.getAbilities().mayBuild) {
             return InteractionResult.PASS;
         } else {
-            if (level.getBlockEntity(pos) instanceof FluidSensorBlockEntity sensorTile) {
+            if (level.getBlockEntity(pos) instanceof FluidSensorBlockEntity sensorBlock) {
                 ItemStack stack = player.getItemInHand(hand);
                 if (!stack.isEmpty()) {
                     IFluidHandler cap = stack.getCapability(ForgeCapabilities.FLUID_HANDLER_ITEM).orElse(null);
                     if (cap != null) {
-                        sensorTile.getTank().setFluid(new FluidStack(cap.getFluidInTank(0).getFluid(), 1));
+                        sensorBlock.getTank().setFluid(new FluidStack(cap.getFluidInTank(0).getFluid(), 1));
                         SoundEvent soundevent = cap.getFluidInTank(0).getFluid().getFluidType().getSound(cap.getFluidInTank(0), SoundActions.BUCKET_FILL);
                         level.playSound(player, pos, soundevent, SoundSource.BLOCKS, 1F, 1f);
 
@@ -110,7 +110,7 @@ public class FluidSensorBlock extends SensorBaseBlock {
                         if (!AlchemyPotionUtil.isEmpty(potion)) {
                             if (potion instanceof FluidAlchemyPotion fluidPotion) {
                                 FluidStack fluid = new FluidStack(fluidPotion.fluid, 1);
-                                sensorTile.getTank().setFluid(fluid);
+                                sensorBlock.getTank().setFluid(fluid);
                                 level.playSound(player, pos, SoundEvents.BOTTLE_EMPTY, SoundSource.BLOCKS, 1F, 1f);
 
                                 return InteractionResult.SUCCESS;
@@ -120,7 +120,7 @@ public class FluidSensorBlock extends SensorBaseBlock {
                 }
 
                 if (player.isShiftKeyDown()) {
-                    sensorTile.getTank().setFluid(FluidStack.EMPTY);
+                    sensorBlock.getTank().setFluid(FluidStack.EMPTY);
                     level.playSound(player, pos, SoundEvents.COMPARATOR_CLICK, SoundSource.BLOCKS, 0.3F, 0.7f);
                     return InteractionResult.SUCCESS;
                 }

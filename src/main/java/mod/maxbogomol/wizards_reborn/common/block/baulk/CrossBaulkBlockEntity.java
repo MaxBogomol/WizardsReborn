@@ -19,8 +19,7 @@ public class CrossBaulkBlockEntity extends PipeBaseBlockEntity implements Tickab
 
     public void tick() {
         if (!level.isClientSide()) {
-            if (!loaded)
-                initConnections();
+            if (!loaded) initConnections();
         }
     }
 }

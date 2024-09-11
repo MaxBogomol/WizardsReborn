@@ -55,7 +55,7 @@ public class SaltCampfireBlock extends Block implements EntityBlock, SimpleWater
 
     @Nonnull
     @Override
-    public VoxelShape getShape(BlockState state, BlockGetter world, BlockPos pos, CollisionContext ctx) {
+    public VoxelShape getShape(BlockState state, BlockGetter level, BlockPos pos, CollisionContext context) {
         return getShape(state);
     }
 

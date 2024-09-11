@@ -4,6 +4,7 @@ import mod.maxbogomol.fluffy_fur.client.particle.ParticleBuilder;
 import mod.maxbogomol.fluffy_fur.client.particle.data.ColorParticleData;
 import mod.maxbogomol.fluffy_fur.client.particle.data.GenericParticleData;
 import mod.maxbogomol.fluffy_fur.client.particle.data.SpinParticleData;
+import mod.maxbogomol.fluffy_fur.common.easing.Easing;
 import mod.maxbogomol.fluffy_fur.registry.client.FluffyFurParticles;
 import mod.maxbogomol.wizards_reborn.WizardsReborn;
 import mod.maxbogomol.wizards_reborn.common.config.Config;
@@ -44,10 +45,12 @@ public class AltarOfDroughtSendEffectPacket {
                             .setLifetime(20)
                             .addVelocity(((random.nextDouble() - 0.5D) / 100), -(random.nextDouble() / 40), ((random.nextDouble() - 0.5D) / 100))
                             .spawn(level, msg.pos.getX() + 0.5F, msg.pos.getY() + 0.625F, msg.pos.getZ() + 0.5F);
-                    ParticleBuilder.create(FluffyFurParticles.WISP)
+                    boolean square = random.nextFloat() < 0.3f;
+                    float i = square ? 0.5f : 1f;
+                    ParticleBuilder.create(square ? FluffyFurParticles.SQUARE : FluffyFurParticles.SPARKLE)
                             .setColorData(ColorParticleData.create(Config.wissenColorR(), Config.wissenColorG(), Config.wissenColorB()).build())
                             .setTransparencyData(GenericParticleData.create(0.35f, 0).build())
-                            .setScaleData(GenericParticleData.create(0.05f, 0).build())
+                            .setScaleData(GenericParticleData.create(0.025f * i, 0.05f * i, 0).setEasing(Easing.QUINTIC_IN_OUT).build())
                             .setSpinData(SpinParticleData.create().randomSpin(0.2f).build())
                             .setLifetime(30)
                             .addVelocity(((random.nextDouble() - 0.5D) / 100), -(random.nextDouble() / 40), ((random.nextDouble() - 0.5D) / 100))

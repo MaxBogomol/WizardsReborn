@@ -152,7 +152,7 @@ public class WissenSendEffectPacket {
                                         .setColorData(ColorParticleData.create(msg.colorR, msg.colorG, msg.colorB).build())
                                         .setTransparencyData(GenericParticleData.create(0.125f, 0).build())
                                         .setScaleData(GenericParticleData.create(0.1f, 0.2f, 0).setEasing(Easing.QUINTIC_IN_OUT).build())
-                                        .setSpinData(SpinParticleData.create().randomSpin(0.5f).build())
+                                        .setSpinData(SpinParticleData.create().randomOffset().randomSpin(0.5f).build())
                                         .setLifetime(30)
                                         .randomVelocity(0.02f)
                                         .spawn(level, msg.posFromX - (x * i), msg.posFromY - (y * i), msg.posFromZ - (z * i));
@@ -162,7 +162,7 @@ public class WissenSendEffectPacket {
                                         .setColorData(ColorParticleData.create(msg.colorR, msg.colorG, msg.colorB).build())
                                         .setTransparencyData(GenericParticleData.create(0.125f, 0).build())
                                         .setScaleData(GenericParticleData.create(0.05f, 0.1f, 0).setEasing(Easing.QUINTIC_IN_OUT).build())
-                                        .setSpinData(SpinParticleData.create().randomSpin(0.5f).build())
+                                        .setSpinData(SpinParticleData.create().randomOffset().randomSpin(0.5f).build())
                                         .setLifetime(30)
                                         .randomVelocity(0.02f)
                                         .spawn(level, msg.posFromX - (x * i), msg.posFromY - (y * i), msg.posFromZ - (z * i));

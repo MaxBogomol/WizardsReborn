@@ -59,7 +59,7 @@ public class ArcaneWorkbenchBlock extends HorizontalDirectionalBlock implements 
 
     @Nonnull
     @Override
-    public VoxelShape getShape(BlockState state, BlockGetter world, BlockPos pos, CollisionContext ctx) {
+    public VoxelShape getShape(BlockState state, BlockGetter level, BlockPos pos, CollisionContext context) {
         return SHAPE;
     }
 
@@ -77,10 +77,24 @@ public class ArcaneWorkbenchBlock extends HorizontalDirectionalBlock implements 
     }
 
     @Override
+    public FluidState getFluidState(BlockState state) {
+        return state.getValue(BlockStateProperties.WATERLOGGED) ? Fluids.WATER.getSource(false) : Fluids.EMPTY.defaultFluidState();
+    }
+
+    @Override
+    public BlockState updateShape(BlockState state, Direction direction, BlockState neighborState, LevelAccessor level, BlockPos currentPos, BlockPos neighborPos) {
+        if (state.getValue(BlockStateProperties.WATERLOGGED)) {
+            level.scheduleTick(currentPos, Fluids.WATER, Fluids.WATER.getTickDelay(level));
+        }
+
+        return super.updateShape(state, direction, neighborState, level, currentPos, neighborPos);
+    }
+
+    @Override
     public void onRemove(@Nonnull BlockState state, @Nonnull Level level, @Nonnull BlockPos pos, @Nonnull BlockState newState, boolean isMoving) {
         if (state.getBlock() != newState.getBlock()) {
-            BlockEntity tile = level.getBlockEntity(pos);
-            if (tile instanceof ArcaneWorkbenchBlockEntity workbench) {
+            BlockEntity blockEntity = level.getBlockEntity(pos);
+            if (blockEntity instanceof ArcaneWorkbenchBlockEntity workbench) {
                 SimpleContainer inv = new SimpleContainer(workbench.itemHandler.getSlots() + 1);
                 for (int i = 0; i < workbench.itemHandler.getSlots(); i++) {
                     inv.setItem(i, workbench.itemHandler.getStackInSlot(i));
@@ -88,8 +102,8 @@ public class ArcaneWorkbenchBlock extends HorizontalDirectionalBlock implements 
                 inv.setItem(workbench.itemHandler.getSlots(), workbench.itemOutputHandler.getStackInSlot(0));
                 Containers.dropContents(level, pos, inv);
             }
-            super.onRemove(state, level, pos, newState, isMoving);
         }
+        super.onRemove(state, level, pos, newState, isMoving);
     }
 
     @Override
@@ -127,24 +141,10 @@ public class ArcaneWorkbenchBlock extends HorizontalDirectionalBlock implements 
 
             @Nullable
             @Override
-            public AbstractContainerMenu createMenu(int i, Inventory playerInventory, Player playerEntity) {
-                return new ArcaneWorkbenchContainer(i, level, pos, playerInventory, playerEntity);
+            public AbstractContainerMenu createMenu(int i, Inventory inventory, Player player) {
+                return new ArcaneWorkbenchContainer(i, level, pos, inventory, player);
             }
         };
-    }
-
-    @Override
-    public FluidState getFluidState(BlockState state) {
-        return state.getValue(BlockStateProperties.WATERLOGGED) ? Fluids.WATER.getSource(false) : Fluids.EMPTY.defaultFluidState();
-    }
-
-    @Override
-    public BlockState updateShape(BlockState state, Direction direction, BlockState neighborState, LevelAccessor level, BlockPos currentPos, BlockPos neighborPos) {
-        if (state.getValue(BlockStateProperties.WATERLOGGED)) {
-            level.scheduleTick(currentPos, Fluids.WATER, Fluids.WATER.getTickDelay(level));
-        }
-
-        return super.updateShape(state, direction, neighborState, level, currentPos, neighborPos);
     }
 
     @Nullable

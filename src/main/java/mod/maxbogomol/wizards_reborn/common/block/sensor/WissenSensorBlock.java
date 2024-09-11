@@ -35,9 +35,9 @@ public class WissenSensorBlock extends SensorBaseBlock {
                 break;
         }
 
-        BlockEntity tile = level.getBlockEntity(blockpos);
-        if (tile instanceof IWissenBlockEntity wissenTile) {
-            i = Mth.floor(((float) wissenTile.getWissen() / wissenTile.getMaxWissen()) * 14.0F);
+        BlockEntity blockEntity = level.getBlockEntity(blockpos);
+        if (blockEntity instanceof IWissenBlockEntity wissenBlock) {
+            i = Mth.floor(((float) wissenBlock.getWissen() / wissenBlock.getMaxWissen()) * 14.0F);
         }
 
         return i;

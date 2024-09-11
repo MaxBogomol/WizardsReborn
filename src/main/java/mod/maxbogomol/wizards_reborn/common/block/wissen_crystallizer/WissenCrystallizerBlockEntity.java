@@ -140,40 +140,40 @@ public class WissenCrystallizerBlockEntity extends ExposedBlockSimpleInventory i
                             .setScaleData(GenericParticleData.create(0.3f * getStage(), 0).build())
                             .setLifetime(20)
                             .randomVelocity(0.015f)
-                            .spawn(level, worldPosition.getX() + 0.5F, worldPosition.getY() + 1.125F, worldPosition.getZ() + 0.5F);
+                            .spawn(level, getBlockPos().getX() + 0.5F, getBlockPos().getY() + 1.125F, getBlockPos().getZ() + 0.5F);
                 }
                 if (random.nextFloat() < 0.1) {
                     ParticleBuilder.create(random.nextBoolean() ? FluffyFurParticles.SQUARE : FluffyFurParticles.SPARKLE)
                             .setColorData(ColorParticleData.create(Config.wissenColorR(), Config.wissenColorG(), Config.wissenColorB()).build())
                             .setTransparencyData(GenericParticleData.create(0.25f, 0).build())
                             .setScaleData(GenericParticleData.create(0, 0.1f * getStage(), 0).setEasing(Easing.QUINTIC_IN_OUT).build())
-                            .setSpinData(SpinParticleData.create().randomSpin(0.5f).build())
+                            .setSpinData(SpinParticleData.create().randomOffset().randomSpin(0.5f).build())
                             .setLifetime(30)
                             .randomVelocity(0.015f)
-                            .spawn(level, worldPosition.getX() + 0.5F, worldPosition.getY() + 1.125F, worldPosition.getZ() + 0.5F);
+                            .spawn(level, getBlockPos().getX() + 0.5F, getBlockPos().getY() + 1.125F, getBlockPos().getZ() + 0.5F);
                 }
             }
 
             if (wissenInCraft > 0 && startCraft) {
                 if (random.nextFloat() < 0.2) {
                     ParticleBuilder.create(FluffyFurParticles.WISP)
-                            .setColorData(ColorParticleData.create(random.nextFloat(), random.nextFloat(), random.nextFloat()).build())
+                            .setColorData(ColorParticleData.create().setRandomColor().build())
                             .setTransparencyData(GenericParticleData.create(0.25f, 0).build())
                             .setScaleData(GenericParticleData.create(0.1f * getStage(), 0).build())
                             .setSpinData(SpinParticleData.create().randomSpin(0.5f).build())
                             .setLifetime(30)
                             .randomVelocity(0.025f)
-                            .spawn(level, worldPosition.getX() + 0.5F, worldPosition.getY() + 1.125F, worldPosition.getZ() + 0.5F);
+                            .spawn(level, getBlockPos().getX() + 0.5F, getBlockPos().getY() + 1.125F, getBlockPos().getZ() + 0.5F);
                 }
                 if (random.nextFloat() < 0.1) {
                     ParticleBuilder.create(random.nextBoolean() ? FluffyFurParticles.SQUARE : FluffyFurParticles.SPARKLE)
-                            .setColorData(ColorParticleData.create(random.nextFloat(), random.nextFloat(), random.nextFloat()).build())
+                            .setColorData(ColorParticleData.create().setRandomColor().build())
                             .setTransparencyData(GenericParticleData.create(0.75f, 0).build())
                             .setScaleData(GenericParticleData.create(0.025f * getStage(), 0.05f * getStage(), 0).setEasing(Easing.QUINTIC_IN_OUT).build())
-                            .setSpinData(SpinParticleData.create().randomSpin(0.1f).build())
+                            .setSpinData(SpinParticleData.create().randomOffset().randomSpin(0.1f).build())
                             .setLifetime(65)
                             .randomVelocity(0.0125f)
-                            .spawn(level, worldPosition.getX() + 0.5F, worldPosition.getY() + 1.125F, worldPosition.getZ() + 0.5F);
+                            .spawn(level, getBlockPos().getX() + 0.5F, getBlockPos().getY() + 1.125F, getBlockPos().getZ() + 0.5F);
                 }
                 if (random.nextFloat() < 0.2) {
                     ParticleBuilder.create(WizardsRebornParticles.KARMA)
@@ -183,7 +183,7 @@ public class WissenCrystallizerBlockEntity extends ExposedBlockSimpleInventory i
                             .setLifetime(20)
                             .randomVelocity(0.015f)
                             .flatRandomOffset(0.25f, 0.25f, 0.25f)
-                            .spawn(level, worldPosition.getX() + 0.5F, worldPosition.getY() + 1.125F, worldPosition.getZ() + 0.5F);
+                            .spawn(level, getBlockPos().getX() + 0.5F, getBlockPos().getY() + 1.125F, getBlockPos().getZ() + 0.5F);
                 }
 
                 Container container = getItemHandler();
@@ -213,7 +213,7 @@ public class WissenCrystallizerBlockEntity extends ExposedBlockSimpleInventory i
                                     .setSpinData(SpinParticleData.create().randomSpin(0.2f).build())
                                     .setLifetime(20)
                                     .addVelocity(-x / 20f, -y / 20f, -z / 20f)
-                                    .spawn(level, worldPosition.getX() + 0.5F + x, worldPosition.getY() + 1.125F + y, worldPosition.getZ() + 0.5F + z);
+                                    .spawn(level, getBlockPos().getX() + 0.5F + x, getBlockPos().getY() + 1.125F + y, getBlockPos().getZ() + 0.5F + z);
                         }
                     }
                 }

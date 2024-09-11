@@ -123,7 +123,7 @@ public class JewelerTableBurstEffectPacket {
                             .setColorData(ColorParticleData.create(Config.wissenColorR(), Config.wissenColorG(), Config.wissenColorB()).build())
                             .setTransparencyData(GenericParticleData.create(0.25f, 0).build())
                             .setScaleData(GenericParticleData.create(0.1f, 0).build())
-                            .setSpinData(SpinParticleData.create().randomSpin(0.5f).build())
+                            .setSpinData(SpinParticleData.create().randomOffset().randomSpin(0.5f).build())
                             .setLifetime(30)
                             .randomVelocity(0.05f)
                             .repeat(level, msg.pos.getX() + msg.X, msg.pos.getY() + msg.Y + 0.1875F, msg.pos.getZ() + msg.Z, 10);
@@ -131,7 +131,7 @@ public class JewelerTableBurstEffectPacket {
                             .setColorData(ColorParticleData.create(Config.wissenColorR(), Config.wissenColorG(), Config.wissenColorB()).build())
                             .setTransparencyData(GenericParticleData.create(0.25f, 0).build())
                             .setScaleData(GenericParticleData.create(0, 0.1f, 0).setEasing(Easing.QUINTIC_IN_OUT).build())
-                            .setSpinData(SpinParticleData.create().randomSpin(0.5f).build())
+                            .setSpinData(SpinParticleData.create().randomOffset().randomSpin(0.5f).build())
                             .setLifetime(30)
                             .randomVelocity(0.05f)
                             .repeat(level, msg.pos.getX() + msg.X, msg.pos.getY() + msg.Y + 0.1875F, msg.pos.getZ() + msg.Z, 10);
@@ -161,7 +161,7 @@ public class JewelerTableBurstEffectPacket {
                                     .setColorData(ColorParticleData.create(item ? Color.WHITE : new Color(msg.colorR, msg.colorG, msg.colorB)).build())
                                     .setTransparencyData(GenericParticleData.create(0.2f, 0.5f, 0).setEasing(Easing.QUINTIC_IN_OUT).build())
                                     .setScaleData(GenericParticleData.create(0.025f, 0.06f, 0).setEasing(Easing.QUINTIC_IN_OUT).build())
-                                    .setSpinData(SpinParticleData.create().randomSpin(0.5f).build())
+                                    .setSpinData(SpinParticleData.create().randomOffset().randomSpin(0.5f).build())
                                     .setLifetime(30)
                                     .addVelocity(x, (random.nextDouble() / 30), y)
                                     .spawn(level, msg.pos.getX() + msg.X, msg.pos.getY() + msg.Y - 0.125F, msg.pos.getZ() + msg.Z);

@@ -43,16 +43,16 @@ public class ItemSorterBlock extends SensorBaseBlock {
     @Override
     public void onRemove(@Nonnull BlockState state, @Nonnull Level level, @Nonnull BlockPos pos, @Nonnull BlockState newState, boolean isMoving) {
         if (state.getBlock() != newState.getBlock()) {
-            BlockEntity tile = level.getBlockEntity(pos);
-            if (tile instanceof ItemSorterBlockEntity sorter) {
+            BlockEntity blockEntity = level.getBlockEntity(pos);
+            if (blockEntity instanceof ItemSorterBlockEntity sorter) {
                 SimpleContainer inv = new SimpleContainer(sorter.itemHandler.getSlots());
                 for (int i = 0; i < sorter.itemHandler.getSlots(); i++) {
                     inv.setItem(i, sorter.itemHandler.getStackInSlot(i));
                 }
                 Containers.dropContents(level, pos, inv);
             }
-            super.onRemove(state, level, pos, newState, isMoving);
         }
+        super.onRemove(state, level, pos, newState, isMoving);
     }
 
     @Override
@@ -60,10 +60,10 @@ public class ItemSorterBlock extends SensorBaseBlock {
         if (level.isClientSide) {
             return InteractionResult.SUCCESS;
         } else {
-            BlockEntity tileEntity = level.getBlockEntity(pos);
+            BlockEntity blockEntity = level.getBlockEntity(pos);
 
             MenuProvider containerProvider = createContainerProvider(level, pos);
-            NetworkHooks.openScreen(((ServerPlayer) player), containerProvider, tileEntity.getBlockPos());
+            NetworkHooks.openScreen(((ServerPlayer) player), containerProvider, blockEntity.getBlockPos());
             return InteractionResult.CONSUME;
         }
     }
@@ -77,8 +77,8 @@ public class ItemSorterBlock extends SensorBaseBlock {
 
             @Nullable
             @Override
-            public AbstractContainerMenu createMenu(int i, Inventory playerInventory, Player playerEntity) {
-                return new ItemSorterContainer(i, level, pos, playerInventory, playerEntity);
+            public AbstractContainerMenu createMenu(int i, Inventory inventory, Player player) {
+                return new ItemSorterContainer(i, level, pos, inventory, player);
             }
         };
     }

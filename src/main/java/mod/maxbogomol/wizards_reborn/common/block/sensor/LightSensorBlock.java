@@ -34,8 +34,8 @@ public class LightSensorBlock extends SensorBaseBlock {
                 break;
         }
 
-        BlockEntity tile = level.getBlockEntity(blockpos);
-        if (tile instanceof ILightBlockEntity lightTile && lightTile.getLight() > 0) {
+        BlockEntity blockEntity = level.getBlockEntity(blockpos);
+        if (blockEntity instanceof ILightBlockEntity lightBlock && lightBlock.getLight() > 0) {
             i = 14;
         }
 

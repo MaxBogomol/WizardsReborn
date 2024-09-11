@@ -77,8 +77,8 @@ public class OrbitalFluidRetainerBlock extends Block implements EntityBlock, Sim
 
     @Nonnull
     @Override
-    public VoxelShape getShape(BlockState state, BlockGetter world, BlockPos pos, CollisionContext ctx) {
-        return PipeBaseBlock.getShapeWithConnection(state, world, pos, ctx, SHAPES);
+    public VoxelShape getShape(BlockState state, BlockGetter level, BlockPos pos, CollisionContext context) {
+        return PipeBaseBlock.getShapeWithConnection(state, level, pos, context, SHAPES);
     }
 
     @Override

@@ -88,7 +88,7 @@ public class WissenTranslatorBurstEffectPacket {
                                     .setColorData(ColorParticleData.create(msg.colorR, msg.colorG, msg.colorB).build())
                                     .setTransparencyData(GenericParticleData.create(0.25f, 0).build())
                                     .setScaleData(GenericParticleData.create(0.075f, 0).build())
-                                    .setSpinData(SpinParticleData.create().randomSpin(0.5f).build())
+                                    .setSpinData(SpinParticleData.create().randomOffset().randomSpin(0.5f).build())
                                     .setLifetime(30)
                                     .randomVelocity(0.025f)
                                     .spawn(level, msg.posX, msg.posY, msg.posZ);

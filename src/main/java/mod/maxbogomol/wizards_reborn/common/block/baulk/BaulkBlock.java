@@ -32,17 +32,13 @@ public class BaulkBlock extends RotatedPillarBlock implements SimpleWaterloggedB
 
     @Nonnull
     @Override
-    public VoxelShape getShape(BlockState state, BlockGetter world, BlockPos pos, CollisionContext ctx) {
-        switch (state.getValue(AXIS)) {
-            case X:
-                return SHAPE_X;
-            case Y:
-                return SHAPE_Y;
-            case Z:
-                return SHAPE_Z;
-            default:
-                return SHAPE_Y;
-        }
+    public VoxelShape getShape(BlockState state, BlockGetter level, BlockPos pos, CollisionContext context) {
+        return switch (state.getValue(AXIS)) {
+            case X -> SHAPE_X;
+            case Y -> SHAPE_Y;
+            case Z -> SHAPE_Z;
+            default -> SHAPE_Y;
+        };
     }
 
     @Override

@@ -22,6 +22,7 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.sounds.SoundSource;
+import net.minecraft.world.Container;
 import net.minecraft.world.SimpleContainer;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.entity.BlockEntityType;
@@ -46,11 +47,12 @@ public class WissenCellBlockEntity extends ExposedBlockSimpleInventory implement
     public void tick() {
         if (!level.isClientSide()) {
             boolean update = false;
+            Container container = getItemHandler();
+
             if (wissen > 0) {
-                if (!getItemHandler().getItem(0).isEmpty()) {
-                    ItemStack stack = getItemHandler().getItem(0);
-                    if (stack.getItem() instanceof IWissenItem) {
-                        IWissenItem item = (IWissenItem) stack.getItem();
+                if (!container.getItem(0).isEmpty()) {
+                    ItemStack stack = container.getItem(0);
+                    if (stack.getItem() instanceof IWissenItem item) {
                         int wissenRemain = WissenUtils.getRemoveWissenRemain(wissen, getWissenPerReceive());
                         wissenRemain = getWissenPerReceive() - wissenRemain;
                         WissenItemUtil.existWissen(stack);
@@ -114,11 +116,7 @@ public class WissenCellBlockEntity extends ExposedBlockSimpleInventory implement
 
     @Override
     public boolean canPlaceItemThroughFace(int index, @NotNull ItemStack stack, @Nullable Direction direction) {
-        if (stack.getItem() instanceof IWissenItem) {
-            return true;
-        }
-
-        return false;
+        return stack.getItem() instanceof IWissenItem;
     }
 
     @Override

@@ -35,9 +35,9 @@ public class SteamSensorBlock extends SensorBaseBlock {
                 break;
         }
 
-        BlockEntity tile = level.getBlockEntity(blockpos);
-        if (tile instanceof ISteamBlockEntity steamTile) {
-            i = Mth.floor(((float) steamTile.getSteam() / steamTile.getMaxSteam()) * 14.0F);
+        BlockEntity blockEntity = level.getBlockEntity(blockpos);
+        if (blockEntity instanceof ISteamBlockEntity steamBlock) {
+            i = Mth.floor(((float) steamBlock.getSteam() / steamBlock.getMaxSteam()) * 14.0F);
         }
 
         return i;

@@ -28,14 +28,14 @@ public class SensorBlockEntity extends BlockEntityBase implements TickableBlockE
         }
     }
 
-    protected void saveAdditional(CompoundTag pTag) {
-        super.saveAdditional(pTag);
-        pTag.putInt("OutputSignal", this.output);
+    protected void saveAdditional(CompoundTag tag) {
+        super.saveAdditional(tag);
+        tag.putInt("OutputSignal", this.output);
     }
 
-    public void load(CompoundTag pTag) {
-        super.load(pTag);
-        this.output = pTag.getInt("OutputSignal");
+    public void load(CompoundTag tag) {
+        super.load(tag);
+        this.output = tag.getInt("OutputSignal");
     }
 
     @Override
@@ -53,30 +53,21 @@ public class SensorBlockEntity extends BlockEntityBase implements TickableBlockE
     }
 
     public float getBlockRotate() {
-        switch (this.getBlockState().getValue(BlockStateProperties.HORIZONTAL_FACING)) {
-            case NORTH:
-                return 0F;
-            case SOUTH:
-                return 180F;
-            case WEST:
-                return 90F;
-            case EAST:
-                return 270F;
-            default:
-                return 0F;
-        }
+        return switch (this.getBlockState().getValue(BlockStateProperties.HORIZONTAL_FACING)) {
+            case NORTH -> 0F;
+            case SOUTH -> 180F;
+            case WEST -> 90F;
+            case EAST -> 270F;
+            default -> 0F;
+        };
     }
 
     public float getBlockUpRotate() {
-        switch (this.getBlockState().getValue(SensorBaseBlock.FACE)) {
-            case FLOOR:
-                return 90F;
-            case WALL:
-                return 0F;
-            case CEILING:
-                return -90F;
-            default:
-                return 0F;
-        }
+        return switch (this.getBlockState().getValue(SensorBaseBlock.FACE)) {
+            case FLOOR -> 90F;
+            case WALL -> 0F;
+            case CEILING -> -90F;
+            default -> 0F;
+        };
     }
 }

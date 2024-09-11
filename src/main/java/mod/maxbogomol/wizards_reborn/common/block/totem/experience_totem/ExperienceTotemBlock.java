@@ -62,7 +62,7 @@ public class ExperienceTotemBlock extends Block implements EntityBlock, SimpleWa
     @Nonnull
 
     @Override
-    public VoxelShape getShape(BlockState state, BlockGetter world, BlockPos pos, CollisionContext ctx) {
+    public VoxelShape getShape(BlockState state, BlockGetter level, BlockPos pos, CollisionContext context) {
         return SHAPE;
     }
 

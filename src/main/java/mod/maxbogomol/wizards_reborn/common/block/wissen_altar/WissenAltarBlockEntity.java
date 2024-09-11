@@ -22,6 +22,7 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.sounds.SoundSource;
+import net.minecraft.world.Container;
 import net.minecraft.world.SimpleContainer;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.entity.BlockEntityType;
@@ -51,25 +52,25 @@ public class WissenAltarBlockEntity extends ExposedBlockSimpleInventory implemen
     public void tick() {
         if (!level.isClientSide()) {
             boolean update = false;
-            if ((getItemHandler().getItem(2).isEmpty()) && (!getItemHandler().getItem(1).isEmpty())) {
-                getItemHandler().setItem(2, getItemHandler().getItem(1).copy());
-                getItemHandler().getItem(2).setCount(1);
-                if (getItemHandler().getItem(1).getCount()>  1) {
-                    getItemHandler().getItem(1).setCount(getItemHandler().getItem(1).getCount() - 1);
+            Container container = getItemHandler();
+
+            if ((container.getItem(2).isEmpty()) && (!container.getItem(1).isEmpty())) {
+                container.setItem(2, container.getItem(1).copy());
+                container.getItem(2).setCount(1);
+                if (container.getItem(1).getCount()>  1) {
+                    container.getItem(1).setCount(container.getItem(1).getCount() - 1);
                 } else {
-                    getItemHandler().removeItemNoUpdate(1);
+                    container.removeItemNoUpdate(1);
                 }
 
                 update = true;
             }
 
             SimpleContainer inv = new SimpleContainer(1);
-            inv.setItem(0, getItemHandler().getItem(2));
+            inv.setItem(0, container.getItem(2));
             if (!inv.isEmpty()) {
                 wissenInItem = 0;
-                wissenInItem = level.getRecipeManager().getRecipeFor(WizardsRebornRecipes.WISSEN_ALTAR.get(), inv, level)
-                        .map(WissenAltarRecipe::getRecipeWissen)
-                        .orElse(0);
+                wissenInItem = level.getRecipeManager().getRecipeFor(WizardsRebornRecipes.WISSEN_ALTAR.get(), inv, level).map(WissenAltarRecipe::getRecipeWissen).orElse(0);
 
                 if ((wissenInItem > 0) && (wissen < getMaxWissen())) {
                     int addRemainCraft = WissenUtils.getAddWissenRemain(wissenIsCraft, getWissenPerTick(), wissenInItem);
@@ -86,7 +87,7 @@ public class WissenAltarBlockEntity extends ExposedBlockSimpleInventory implemen
 
                 if (wissenInItem > 0) {
                     if (wissenInItem <= wissenIsCraft) {
-                        getItemHandler().removeItemNoUpdate(2);
+                        container.removeItemNoUpdate(2);
                         wissenInItem = 0;
                         wissenIsCraft = 0;
 
@@ -98,10 +99,9 @@ public class WissenAltarBlockEntity extends ExposedBlockSimpleInventory implemen
                 }
 
                 if (wissen > 0) {
-                    if (!getItemHandler().getItem(0).isEmpty()) {
-                        ItemStack stack = getItemHandler().getItem(0);
-                        if (stack.getItem() instanceof IWissenItem) {
-                            IWissenItem item = (IWissenItem) stack.getItem();
+                    if (!container.getItem(0).isEmpty()) {
+                        ItemStack stack = container.getItem(0);
+                        if (stack.getItem() instanceof IWissenItem item) {
                             int wissenRemain = WissenUtils.getRemoveWissenRemain(wissen, getWissenPerReceive());
                             wissenRemain = getWissenPerReceive() - wissenRemain;
                             WissenItemUtil.existWissen(stack);
@@ -140,17 +140,17 @@ public class WissenAltarBlockEntity extends ExposedBlockSimpleInventory implemen
                             .setScaleData(GenericParticleData.create(0.3f * getStage(), 0).build())
                             .setLifetime(20)
                             .randomVelocity(0.035f * getStage(), 0.035f * getStage(), 0.035f * getStage())
-                            .spawn(level, worldPosition.getX() + 0.5F, worldPosition.getY() + 1.3125F, worldPosition.getZ() + 0.5F);
+                            .spawn(level, getBlockPos().getX() + 0.5F, getBlockPos().getY() + 1.3125F, getBlockPos().getZ() + 0.5F);
                 }
                 if (random.nextFloat() < 0.1) {
                     ParticleBuilder.create(random.nextBoolean() ? FluffyFurParticles.SQUARE : FluffyFurParticles.SPARKLE)
                             .setColorData(ColorParticleData.create(Config.wissenColorR(), Config.wissenColorG(), Config.wissenColorB()).build())
                             .setTransparencyData(GenericParticleData.create(0.25f, 0).build())
                             .setScaleData(GenericParticleData.create(0.05f * getStage(), 0.1f * getStage(), 0).setEasing(Easing.QUINTIC_IN_OUT).build())
-                            .setSpinData(SpinParticleData.create().randomSpin(0.5f).build())
+                            .setSpinData(SpinParticleData.create().randomOffset().randomSpin(0.5f).build())
                             .setLifetime(30)
                             .randomVelocity(0.035f * getStage(), 0.035f * getStage(), 0.035f * getStage())
-                            .spawn(level, worldPosition.getX() + 0.5F, worldPosition.getY() + 1.3125F, worldPosition.getZ() + 0.5F);
+                            .spawn(level, getBlockPos().getX() + 0.5F, getBlockPos().getY() + 1.3125F, getBlockPos().getZ() + 0.5F);
                 }
             }
 
@@ -160,10 +160,10 @@ public class WissenAltarBlockEntity extends ExposedBlockSimpleInventory implemen
                             .setColorData(ColorParticleData.create(Config.wissenColorR(), Config.wissenColorG(), Config.wissenColorB()).build())
                             .setTransparencyData(GenericParticleData.create(0.25f, 0).build())
                             .setScaleData(GenericParticleData.create(0.05f * getStage(), 0.1f * getStage(), 0).setEasing(Easing.QUINTIC_IN_OUT).build())
-                            .setSpinData(SpinParticleData.create().randomSpin(0.5f).build())
+                            .setSpinData(SpinParticleData.create().randomOffset().randomSpin(0.5f).build())
                             .setLifetime(20)
                             .randomVelocity(0.05f)
-                            .spawn(level, worldPosition.getX() + 0.5F, worldPosition.getY() + 1.3125F, worldPosition.getZ() + 0.5F);
+                            .spawn(level, getBlockPos().getX() + 0.5F, getBlockPos().getY() + 1.3125F, getBlockPos().getZ() + 0.5F);
                 }
             }
         }
@@ -190,9 +190,7 @@ public class WissenAltarBlockEntity extends ExposedBlockSimpleInventory implemen
         if (index == 1) {
             SimpleContainer inv = new SimpleContainer(1);
             inv.setItem(0, stack);
-            int wissenInItem = getLevel().getRecipeManager().getRecipeFor(WizardsRebornRecipes.WISSEN_ALTAR.get(), inv, getLevel())
-                    .map(WissenAltarRecipe::getRecipeWissen)
-                    .orElse(0);
+            int wissenInItem = getLevel().getRecipeManager().getRecipeFor(WizardsRebornRecipes.WISSEN_ALTAR.get(), inv, getLevel()).map(WissenAltarRecipe::getRecipeWissen).orElse(0);
             if (wissenInItem > 0) {
                 if (canPlaceItem(index, stack)) {
                     ItemStack existing = getItem(index);
@@ -206,11 +204,7 @@ public class WissenAltarBlockEntity extends ExposedBlockSimpleInventory implemen
 
     @Override
     public boolean canTakeItemThroughFace(int index, @NotNull ItemStack stack, @Nullable Direction direction) {
-        if (index <= 1) {
-            return true;
-        }
-
-        return false;
+        return index <= 1;
     }
 
     @Override
@@ -236,18 +230,13 @@ public class WissenAltarBlockEntity extends ExposedBlockSimpleInventory implemen
     }
 
     public float getBlockRotate() {
-        switch (this.getBlockState().getValue(BlockStateProperties.HORIZONTAL_FACING)) {
-            case NORTH:
-                return 0F;
-            case SOUTH:
-                return 180F;
-            case WEST:
-                return 90F;
-            case EAST:
-                return 270F;
-            default:
-                return 0F;
-        }
+        return switch (this.getBlockState().getValue(BlockStateProperties.HORIZONTAL_FACING)) {
+            case NORTH -> 0F;
+            case SOUTH -> 180F;
+            case WEST -> 90F;
+            case EAST -> 270F;
+            default -> 0F;
+        };
     }
 
     public float getStage() {

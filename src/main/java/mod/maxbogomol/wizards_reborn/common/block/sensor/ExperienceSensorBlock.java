@@ -35,9 +35,9 @@ public class ExperienceSensorBlock extends SensorBaseBlock {
                 break;
         }
 
-        BlockEntity tile = level.getBlockEntity(blockpos);
-        if (tile instanceof IExperienceBlockEntity experienceTile) {
-            i = Mth.floor(((float) experienceTile.getExperience() / experienceTile.getMaxExperience()) * 14.0F);
+        BlockEntity blockEntity = level.getBlockEntity(blockpos);
+        if (blockEntity instanceof IExperienceBlockEntity experienceBlock) {
+            i = Mth.floor(((float) experienceBlock.getExperience() / experienceBlock.getMaxExperience()) * 14.0F);
         }
 
         return i;

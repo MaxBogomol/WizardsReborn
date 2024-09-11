@@ -47,7 +47,7 @@ public class ArcaneLumosItem extends BlockItem implements IParticleItem, IGuiPar
                         .setColorData(ColorParticleData.create(color).build())
                         .setTransparencyData(GenericParticleData.create(0.5f, 0).build())
                         .setScaleData(GenericParticleData.create(0.3f, 0).build())
-                        .setLifetime(320)
+                        .setLifetime(20)
                         .randomVelocity(0.015f)
                         .spawn(level, entity.getX(), entity.getY() + 0.25F, entity.getZ());
             }

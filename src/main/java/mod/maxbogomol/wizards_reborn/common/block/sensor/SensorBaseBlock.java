@@ -28,6 +28,7 @@ import net.minecraft.world.phys.shapes.VoxelShape;
 import net.minecraft.world.ticks.TickPriority;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
+import net.minecraftforge.event.ForgeEventFactory;
 import org.jetbrains.annotations.NotNull;
 
 import javax.annotation.Nonnull;
@@ -48,7 +49,7 @@ public class SensorBaseBlock extends DiodeBlock implements EntityBlock, SimpleWa
 
     @Nonnull
     @Override
-    public VoxelShape getShape(BlockState state, BlockGetter world, BlockPos pos, CollisionContext ctx) {
+    public VoxelShape getShape(BlockState state, BlockGetter level, BlockPos pos, CollisionContext context) {
         return SHAPE;
     }
 
@@ -181,7 +182,7 @@ public class SensorBaseBlock extends DiodeBlock implements EntityBlock, SimpleWa
                 break;
         }
 
-        if (net.minecraftforge.event.ForgeEventFactory.onNeighborNotify(level, pos, level.getBlockState(pos), java.util.EnumSet.of(direction.getOpposite()), false).isCanceled())
+        if (ForgeEventFactory.onNeighborNotify(level, pos, level.getBlockState(pos), java.util.EnumSet.of(direction.getOpposite()), false).isCanceled())
             return;
         level.neighborChanged(blockpos, this, pos);
         level.updateNeighborsAtExceptFromFacing(blockpos, this, direction);
@@ -231,8 +232,8 @@ public class SensorBaseBlock extends DiodeBlock implements EntityBlock, SimpleWa
 
     @Nullable
     public ItemFrame getItemFrame(Level level, Direction facing, BlockPos pos) {
-        List<ItemFrame> list = level.getEntitiesOfClass(ItemFrame.class, new AABB((double)pos.getX(), (double)pos.getY(), (double)pos.getZ(), (double)(pos.getX() + 1), (double)(pos.getY() + 1), (double)(pos.getZ() + 1)), (p_289506_) -> {
-            return p_289506_ != null && p_289506_.getDirection() == facing;
+        List<ItemFrame> list = level.getEntitiesOfClass(ItemFrame.class, new AABB(pos.getX(), pos.getY(), pos.getZ(), (pos.getX() + 1), (pos.getY() + 1), (pos.getZ() + 1)), (frame) -> {
+            return frame != null && frame.getDirection() == facing;
         });
         return list.size() == 1 ? list.get(0) : null;
     }
@@ -243,19 +244,19 @@ public class SensorBaseBlock extends DiodeBlock implements EntityBlock, SimpleWa
     }
 
     @Nullable
-    public int getSignal(BlockState blockState, BlockGetter pBlockAccess, BlockPos pos, Direction pSide) {
+    public int getSignal(BlockState blockState, BlockGetter blockAccess, BlockPos pos, Direction pSide) {
         if (!blockState.getValue(POWERED)) {
             return 0;
         } else {
             switch (blockState.getValue(FACE)) {
                 case FLOOR:
-                    return Direction.UP == pSide ? this.getOutputSignal(pBlockAccess, pos, blockState) : 0;
+                    return Direction.UP == pSide ? this.getOutputSignal(blockAccess, pos, blockState) : 0;
                 case WALL:
-                    return blockState.getValue(FACING) == pSide ? this.getOutputSignal(pBlockAccess, pos, blockState) : 0;
+                    return blockState.getValue(FACING) == pSide ? this.getOutputSignal(blockAccess, pos, blockState) : 0;
                 case CEILING:
-                    return Direction.DOWN == pSide ? this.getOutputSignal(pBlockAccess, pos, blockState) : 0;
+                    return Direction.DOWN == pSide ? this.getOutputSignal(blockAccess, pos, blockState) : 0;
             }
-            return blockState.getValue(FACING) == pSide ? this.getOutputSignal(pBlockAccess, pos, blockState) : 0;
+            return blockState.getValue(FACING) == pSide ? this.getOutputSignal(blockAccess, pos, blockState) : 0;
         }
     }
 

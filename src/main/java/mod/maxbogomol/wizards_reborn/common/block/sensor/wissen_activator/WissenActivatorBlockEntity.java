@@ -10,12 +10,13 @@ import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 
 public class WissenActivatorBlockEntity extends SensorBlockEntity {
+
     public WissenActivatorBlockEntity(BlockEntityType<?> type, BlockPos pos, BlockState state) {
         super(type, pos, state);
     }
 
     public WissenActivatorBlockEntity(BlockPos pos, BlockState blockState) {
-        super(WizardsRebornBlockEntities.WISSEN_ACTIVATOR.get(), pos, blockState);
+        this(WizardsRebornBlockEntities.WISSEN_ACTIVATOR.get(), pos, blockState);
     }
 
     @Override
@@ -38,8 +39,8 @@ public class WissenActivatorBlockEntity extends SensorBlockEntity {
                         break;
                 }
 
-                if (level.getBlockEntity(blockpos) instanceof IWissenWandFunctionalBlockEntity functionalTile) {
-                    functionalTile.wissenWandFunction();
+                if (level.getBlockEntity(blockpos) instanceof IWissenWandFunctionalBlockEntity functionalBlock) {
+                    functionalBlock.wissenWandFunction();
                 }
             }
         }

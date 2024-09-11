@@ -85,7 +85,7 @@ public class SteamThermalStorageBlock extends RotatedPillarBlock implements Enti
 
     @Nonnull
     @Override
-    public VoxelShape getShape(BlockState state, BlockGetter world, BlockPos pos, CollisionContext ctx) {
+    public VoxelShape getShape(BlockState state, BlockGetter level, BlockPos pos, CollisionContext context) {
         switch (state.getValue(AXIS)) {
             case X:
                 return SHAPE_X;

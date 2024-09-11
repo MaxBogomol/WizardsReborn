@@ -49,7 +49,7 @@ public class TotemOfDisenchantBurstEffectPacket {
                             .setColorData(ColorParticleData.create(Config.wissenColorR(), Config.wissenColorG(), Config.wissenColorB()).build())
                             .setTransparencyData(GenericParticleData.create(0.25f, 0).build())
                             .setScaleData(GenericParticleData.create(0, 0.1f, 0).setEasing(Easing.QUINTIC_IN_OUT).build())
-                            .setSpinData(SpinParticleData.create().randomSpin(0.5f).build())
+                            .setSpinData(SpinParticleData.create().randomOffset().randomSpin(0.5f).build())
                             .setLifetime(30)
                             .randomVelocity(0.025f)
                             .repeat(level, msg.pos.getX() + 0.5F, msg.pos.getY() + 0.725F, msg.pos.getZ() + 0.5F, 5);
@@ -57,7 +57,7 @@ public class TotemOfDisenchantBurstEffectPacket {
                             .setColorData(ColorParticleData.create(Config.wissenColorR(), Config.wissenColorG(), Config.wissenColorB()).build())
                             .setTransparencyData(GenericParticleData.create(0.25f, 0).build())
                             .setScaleData(GenericParticleData.create(0, 0.1f, 0).setEasing(Easing.QUINTIC_IN_OUT).build())
-                            .setSpinData(SpinParticleData.create().randomSpin(0.5f).build())
+                            .setSpinData(SpinParticleData.create().randomOffset().randomSpin(0.5f).build())
                             .setLifetime(30)
                             .randomVelocity(0.025f)
                             .repeat(level, msg.pos.getX() + 0.5F, msg.pos.getY() + 0.725F, msg.pos.getZ() + 0.5F, 5);
@@ -73,7 +73,7 @@ public class TotemOfDisenchantBurstEffectPacket {
                             .setColorData(ColorParticleData.create(0.784f, 1f, 0.560f).build())
                             .setTransparencyData(GenericParticleData.create(0.75f, 0).build())
                             .setScaleData(GenericParticleData.create(0.1f, 0).build())
-                            .setSpinData(SpinParticleData.create().randomSpin(0.5f).build())
+                            .setSpinData(SpinParticleData.create().randomOffset().randomSpin(0.5f).build())
                             .setLifetime(30)
                             .randomVelocity(0.025f)
                             .repeat(level, msg.pos.getX() + 0.5F, msg.pos.getY() + 0.725F, msg.pos.getZ() + 0.5F, 10);

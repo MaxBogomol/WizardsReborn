@@ -1,6 +1,7 @@
 package mod.maxbogomol.wizards_reborn.common.block.salt.campfire;
 
 import mod.maxbogomol.fluffy_fur.client.particle.ParticleBuilder;
+import mod.maxbogomol.fluffy_fur.client.particle.behavior.ParticleBehavior;
 import mod.maxbogomol.fluffy_fur.client.particle.data.ColorParticleData;
 import mod.maxbogomol.fluffy_fur.client.particle.data.GenericParticleData;
 import mod.maxbogomol.fluffy_fur.client.particle.data.LightParticleData;
@@ -102,19 +103,27 @@ public class SaltCampfireBlockEntity extends ExposedBlockSimpleInventory impleme
 
             if (random.nextFloat() < 0.5) {
                 ParticleBuilder.create(FluffyFurParticles.SPARKLE)
+                        .setBehavior(ParticleBehavior.create(90, 0, 0)
+                                .setXSpinData(SpinParticleData.create().randomOffsetDegrees(-25, 25).build())
+                                .setYSpinData(SpinParticleData.create().randomOffsetDegrees(-25, 25).build())
+                                .build())
                         .setColorData(ColorParticleData.create(colorF, color).build())
-                        .setTransparencyData(GenericParticleData.create(0.25f, 0).build())
-                        .setScaleData(GenericParticleData.create(0.55f, 0).setEasing(Easing.CUBIC_IN_OUT).build())
-                        .setSpinData(SpinParticleData.create().randomSpin(0.005f).build())
+                        .setTransparencyData(GenericParticleData.create(0.1f, 0.25f, 0).setEasing(Easing.QUINTIC_IN_OUT).build())
+                        .setScaleData(GenericParticleData.create(0.3f, 0.55f, 0).setEasing(Easing.QUINTIC_IN_OUT).build())
+                        .setSpinData(SpinParticleData.create().randomOffset().randomSpin(0.05f).build())
                         .setLifetime(30)
                         .spawn(level, worldPosition.getX() + pos.x(), worldPosition.getY() + pos.y(), worldPosition.getZ() + pos.z());
             }
             if (random.nextFloat() < 0.45) {
                 ParticleBuilder.create(random.nextFloat() < 0.3 ? FluffyFurParticles.TINY_STAR : FluffyFurParticles.SPARKLE)
+                        .setBehavior(ParticleBehavior.create(0, 0, 0).enableCamera().disableSideLayer()
+                                .setXSpinData(SpinParticleData.create().randomOffsetDegrees(-20, 20).build())
+                                .setYSpinData(SpinParticleData.create().randomOffsetDegrees(-20, 20).build())
+                                .build())
                         .setColorData(ColorParticleData.create(colorF, color).build())
                         .setTransparencyData(GenericParticleData.create(0.35f, 0).build())
                         .setScaleData(GenericParticleData.create(0.45f, 0).setEasing(Easing.SINE_IN_OUT).build())
-                        .setSpinData(SpinParticleData.create().randomSpin(0.01f).build())
+                        .setSpinData(SpinParticleData.create().randomOffset().randomSpin(0.05f).build())
                         .setLifetime(60)
                         .randomVelocity(0.0025f)
                         .addVelocity(0, 0.025f, 0)

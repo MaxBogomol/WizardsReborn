@@ -1,6 +1,7 @@
 package mod.maxbogomol.wizards_reborn.common.block.totem.flames;
 
 import mod.maxbogomol.fluffy_fur.client.particle.ParticleBuilder;
+import mod.maxbogomol.fluffy_fur.client.particle.behavior.ParticleBehavior;
 import mod.maxbogomol.fluffy_fur.client.particle.data.ColorParticleData;
 import mod.maxbogomol.fluffy_fur.client.particle.data.GenericParticleData;
 import mod.maxbogomol.fluffy_fur.client.particle.data.LightParticleData;
@@ -72,10 +73,14 @@ public class TotemOfFlamesBlockEntity extends ExposedBlockSimpleInventory implem
                         }
                         if (random.nextFloat() < 0.75) {
                             ParticleBuilder.create(FluffyFurParticles.SPARKLE)
+                                    .setBehavior(ParticleBehavior.create().enableCamera().disableSideLayer()
+                                            .setXSpinData(SpinParticleData.create().randomOffsetDegrees(-25, 25).build())
+                                            .setYSpinData(SpinParticleData.create().randomOffsetDegrees(-25, 25).build())
+                                            .build())
                                     .setColorData(ColorParticleData.create(color).build())
                                     .setTransparencyData(GenericParticleData.create(0.35f, 0).build())
                                     .setScaleData(GenericParticleData.create(0.25f, 0).build())
-                                    .setSpinData(SpinParticleData.create().randomSpin(0.005f).build())
+                                    .setSpinData(SpinParticleData.create().randomOffsetDegrees(-30, 30).randomSpin(0.005f).build())
                                     .setLifetime(60)
                                     .randomVelocity(0.0035f)
                                     .addVelocity(0, 0.015f, 0)

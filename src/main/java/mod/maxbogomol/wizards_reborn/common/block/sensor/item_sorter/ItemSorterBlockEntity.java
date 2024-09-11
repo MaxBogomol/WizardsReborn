@@ -32,7 +32,7 @@ public class ItemSorterBlockEntity extends SensorBlockEntity implements ICooldow
     }
 
     public ItemSorterBlockEntity(BlockPos pos, BlockState blockState) {
-        super(WizardsRebornBlockEntities.ITEM_SORTER.get(), pos, blockState);
+        this(WizardsRebornBlockEntities.ITEM_SORTER.get(), pos, blockState);
     }
 
     @Override
@@ -70,14 +70,14 @@ public class ItemSorterBlockEntity extends SensorBlockEntity implements ICooldow
                         break;
                 }
 
-                BlockEntity outputTile = level.getBlockEntity(outputBlockpos);
-                BlockEntity inputTile = level.getBlockEntity(inputBlockpos);
+                BlockEntity outputBlock = level.getBlockEntity(outputBlockpos);
+                BlockEntity inputBlock = level.getBlockEntity(inputBlockpos);
 
                 boolean isTransfer = false;
 
-                if (outputTile != null && inputTile != null) {
-                    IItemHandler outputHandler = outputTile.getCapability(ForgeCapabilities.ITEM_HANDLER, outputDirection).orElse(null);
-                    IItemHandler inputHandler = inputTile.getCapability(ForgeCapabilities.ITEM_HANDLER, inputDirection).orElse(null);
+                if (outputBlock != null && inputBlock != null) {
+                    IItemHandler outputHandler = outputBlock.getCapability(ForgeCapabilities.ITEM_HANDLER, outputDirection).orElse(null);
+                    IItemHandler inputHandler = inputBlock.getCapability(ForgeCapabilities.ITEM_HANDLER, inputDirection).orElse(null);
 
                     if (outputHandler != null && inputHandler != null) {
                         for (int i = 0; i < itemHandler.getSlots(); i++) {

@@ -58,12 +58,12 @@ public class RedstoneSensorBlock extends SensorBaseBlock {
     }
 
     @Override
-    protected int getAlternateSignal(SignalGetter pSignalGetter, BlockPos pos, BlockState state) {
+    protected int getAlternateSignal(SignalGetter signalGetter, BlockPos pos, BlockState state) {
         Direction direction = state.getValue(FACING);
         Direction direction1 = direction.getClockWise();
         Direction direction2 = direction.getCounterClockWise();
         boolean flag = this.sideInputDiodesOnly();
-        return Math.max(pSignalGetter.getControlInputSignal(pos.relative(direction1), direction1, flag), pSignalGetter.getControlInputSignal(pos.relative(direction2), direction2, flag));
+        return Math.max(signalGetter.getControlInputSignal(pos.relative(direction1), direction1, flag), signalGetter.getControlInputSignal(pos.relative(direction2), direction2, flag));
     }
 
     public InteractionResult use(BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hit) {

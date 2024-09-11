@@ -66,37 +66,25 @@ public class ArcaneHopperBlock extends HopperBlock implements SimpleWaterloggedB
     }
 
     public VoxelShape getShape(BlockState state, BlockGetter level, BlockPos pos, CollisionContext pContext) {
-        switch ((Direction)state.getValue(FACING)) {
-            case DOWN:
-                return DOWN_SHAPE;
-            case NORTH:
-                return NORTH_SHAPE;
-            case SOUTH:
-                return SOUTH_SHAPE;
-            case WEST:
-                return WEST_SHAPE;
-            case EAST:
-                return EAST_SHAPE;
-            default:
-                return BASE;
-        }
+        return switch (state.getValue(FACING)) {
+            case DOWN -> DOWN_SHAPE;
+            case NORTH -> NORTH_SHAPE;
+            case SOUTH -> SOUTH_SHAPE;
+            case WEST -> WEST_SHAPE;
+            case EAST -> EAST_SHAPE;
+            default -> BASE;
+        };
     }
 
     public VoxelShape getInteractionShape(BlockState state, BlockGetter level, BlockPos pos) {
-        switch ((Direction)state.getValue(FACING)) {
-            case DOWN:
-                return DOWN_INTERACTION_SHAPE;
-            case NORTH:
-                return NORTH_INTERACTION_SHAPE;
-            case SOUTH:
-                return SOUTH_INTERACTION_SHAPE;
-            case WEST:
-                return WEST_INTERACTION_SHAPE;
-            case EAST:
-                return EAST_INTERACTION_SHAPE;
-            default:
-                return INSIDE;
-        }
+        return switch (state.getValue(FACING)) {
+            case DOWN -> DOWN_INTERACTION_SHAPE;
+            case NORTH -> NORTH_INTERACTION_SHAPE;
+            case SOUTH -> SOUTH_INTERACTION_SHAPE;
+            case WEST -> WEST_INTERACTION_SHAPE;
+            case EAST -> EAST_INTERACTION_SHAPE;
+            default -> INSIDE;
+        };
     }
 
     @Nullable
@@ -104,6 +92,11 @@ public class ArcaneHopperBlock extends HopperBlock implements SimpleWaterloggedB
     public BlockState getStateForPlacement(BlockPlaceContext context) {
         Direction direction = context.getClickedFace().getOpposite();
         return this.defaultBlockState().setValue(FACING, direction.getAxis() == Direction.Axis.Y ? Direction.DOWN : direction).setValue(ENABLED, Boolean.valueOf(true)).setValue(BlockStateProperties.WATERLOGGED, Boolean.valueOf(context.getLevel().getFluidState(context.getClickedPos()).getType() == Fluids.WATER));
+    }
+
+    @Override
+    public FluidState getFluidState(BlockState state) {
+        return state.getValue(BlockStateProperties.WATERLOGGED) ? Fluids.WATER.getSource(false) : super.getFluidState(state);
     }
 
     @Override
@@ -118,11 +111,6 @@ public class ArcaneHopperBlock extends HopperBlock implements SimpleWaterloggedB
     protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {
         super.createBlockStateDefinition(builder);
         builder.add(BlockStateProperties.WATERLOGGED);
-    }
-
-    @Override
-    public FluidState getFluidState(BlockState state) {
-        return state.getValue(BlockStateProperties.WATERLOGGED) ? Fluids.WATER.getSource(false) : super.getFluidState(state);
     }
 
     @Override
@@ -161,8 +149,8 @@ public class ArcaneHopperBlock extends HopperBlock implements SimpleWaterloggedB
 
             @Nullable
             @Override
-            public AbstractContainerMenu createMenu(int i, Inventory playerInventory, Player playerEntity) {
-                return new ArcaneHopperContainer(i, level, pos, playerInventory, playerEntity);
+            public AbstractContainerMenu createMenu(int i, Inventory inventory, Player player) {
+                return new ArcaneHopperContainer(i, level, pos, inventory, player);
             }
         };
     }
@@ -175,9 +163,8 @@ public class ArcaneHopperBlock extends HopperBlock implements SimpleWaterloggedB
                 Containers.dropContents(level, pos, (ArcaneHopperBlockEntity)blockentity);
                 level.updateNeighbourForOutputSignal(pos, this);
             }
-
-            super.onRemove(state, level, pos, pNewState, pIsMoving);
         }
+        super.onRemove(state, level, pos, pNewState, pIsMoving);
     }
 
     @Override
