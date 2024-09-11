@@ -1,10 +1,8 @@
 package mod.maxbogomol.wizards_reborn.common.block.arcane_hopper;
 
-import mod.maxbogomol.wizards_reborn.client.gui.container.ArcaneHopperContainer;
 import mod.maxbogomol.wizards_reborn.registry.common.block.WizardsRebornBlockEntities;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
-import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.stats.Stats;
 import net.minecraft.world.Containers;
@@ -12,9 +10,9 @@ import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.MenuProvider;
 import net.minecraft.world.entity.Entity;
-import net.minecraft.world.entity.player.Inventory;
+import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.inventory.AbstractContainerMenu;
+import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
@@ -131,8 +129,8 @@ public class ArcaneHopperBlock extends HopperBlock implements SimpleWaterloggedB
         } else {
             BlockEntity blockentity = level.getBlockEntity(pos);
             if (blockentity instanceof ArcaneHopperBlockEntity) {
-                MenuProvider containerProvider = createContainerProvider(level, pos);
-                NetworkHooks.openScreen(((ServerPlayer) player), containerProvider, blockentity.getBlockPos());
+                BlockEntity blockEntity = level.getBlockEntity(pos);
+                NetworkHooks.openScreen(((ServerPlayer) player), (MenuProvider) blockEntity, blockEntity.getBlockPos());
                 player.awardStat(Stats.INSPECT_HOPPER);
             }
 
@@ -140,19 +138,14 @@ public class ArcaneHopperBlock extends HopperBlock implements SimpleWaterloggedB
         }
     }
 
-    private MenuProvider createContainerProvider(Level level, BlockPos pos) {
-        return new MenuProvider() {
-            @Override
-            public Component getDisplayName() {
-                return Component.translatable("gui.wizards_reborn.arcane_hopper.title");
+    @Override
+    public void setPlacedBy(Level level, BlockPos pos, BlockState state, @Nullable LivingEntity placer, ItemStack stack) {
+        if (stack.hasCustomHoverName()) {
+            BlockEntity blockEntity = level.getBlockEntity(pos);
+            if (blockEntity instanceof ArcaneHopperBlockEntity hopperBlock) {
+                hopperBlock.setCustomName(stack.getHoverName());
             }
-
-            @Nullable
-            @Override
-            public AbstractContainerMenu createMenu(int i, Inventory inventory, Player player) {
-                return new ArcaneHopperContainer(i, level, pos, inventory, player);
-            }
-        };
+        }
     }
 
     @Override

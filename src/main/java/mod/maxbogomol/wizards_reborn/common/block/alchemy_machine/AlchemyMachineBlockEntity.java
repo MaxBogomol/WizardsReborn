@@ -14,6 +14,7 @@ import mod.maxbogomol.wizards_reborn.api.wissen.ICooldownBlockEntity;
 import mod.maxbogomol.wizards_reborn.api.wissen.IItemResultBlockEntity;
 import mod.maxbogomol.wizards_reborn.api.wissen.IWissenWandFunctionalBlockEntity;
 import mod.maxbogomol.wizards_reborn.api.wissen.WissenUtils;
+import mod.maxbogomol.wizards_reborn.client.gui.container.AlchemyMachineContainer;
 import mod.maxbogomol.wizards_reborn.common.block.alchemy_boiler.AlchemyBoilerBlockEntity;
 import mod.maxbogomol.wizards_reborn.common.block.pipe.PipeBaseBlockEntity;
 import mod.maxbogomol.wizards_reborn.common.item.equipment.AlchemyBottleItem;
@@ -28,9 +29,15 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.RegistryAccess;
 import net.minecraft.nbt.CompoundTag;
+import net.minecraft.network.chat.Component;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
+import net.minecraft.world.MenuProvider;
+import net.minecraft.world.Nameable;
 import net.minecraft.world.SimpleContainer;
+import net.minecraft.world.entity.player.Inventory;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.entity.BlockEntity;
@@ -56,7 +63,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-public class AlchemyMachineBlockEntity extends PipeBaseBlockEntity implements TickableBlockEntity, IWissenWandFunctionalBlockEntity, ICooldownBlockEntity, IItemResultBlockEntity {
+public class AlchemyMachineBlockEntity extends PipeBaseBlockEntity implements TickableBlockEntity, IWissenWandFunctionalBlockEntity, ICooldownBlockEntity, IItemResultBlockEntity, MenuProvider, Nameable {
     protected FluidTank fluidTank1 = new FluidTank(getMaxCapacity()) {
         @Override
         public void onContentsChanged() {
@@ -96,6 +103,9 @@ public class AlchemyMachineBlockEntity extends PipeBaseBlockEntity implements Ti
     public int steamInCraft= 0;
     public int steamIsCraft = 0;
     public boolean startCraft = false;
+
+    @Nullable
+    public Component name;
 
     public AlchemyMachineBlockEntity(BlockEntityType<?> type, BlockPos pos, BlockState state) {
         super(type, pos, state);
@@ -344,6 +354,30 @@ public class AlchemyMachineBlockEntity extends PipeBaseBlockEntity implements Ti
     }
 
     @Override
+    public Component getName() {
+        return name;
+    }
+
+    public void setCustomName(Component pName) {
+        this.name = pName;
+    }
+
+    @Override
+    public Component getDisplayName() {
+        return this.name != null ? this.name : this.getDefaultName();
+    }
+
+    public Component getDefaultName() {
+        return Component.translatable("gui.wizards_reborn.alchemy_machine.title");
+    }
+
+    @Nullable
+    @Override
+    public AbstractContainerMenu createMenu(int i, Inventory inventory, Player player) {
+        return new AlchemyMachineContainer(i, level, getBlockPos(), inventory, player);
+    }
+
+    @Override
     public void saveAdditional(CompoundTag tag) {
         super.saveAdditional(tag);
         tag.put("fluidTank1", fluidTank1.writeToNBT(new CompoundTag()));
@@ -358,6 +392,10 @@ public class AlchemyMachineBlockEntity extends PipeBaseBlockEntity implements Ti
         tag.putInt("steamInCraft", steamInCraft);
         tag.putInt("steamIsCraft", steamIsCraft);
         tag.putBoolean("startCraft", startCraft);
+
+        if (this.name != null) {
+            tag.putString("CustomName", Component.Serializer.toJson(this.name));
+        }
     }
 
     @Override
@@ -375,6 +413,10 @@ public class AlchemyMachineBlockEntity extends PipeBaseBlockEntity implements Ti
         steamInCraft = tag.getInt("steamInCraft");
         steamIsCraft = tag.getInt("steamIsCraft");
         startCraft = tag.getBoolean("startCraft");
+
+        if (tag.contains("CustomName", 8)) {
+            this.name = Component.Serializer.fromJson(tag.getString("CustomName"));
+        }
     }
 
     @Override

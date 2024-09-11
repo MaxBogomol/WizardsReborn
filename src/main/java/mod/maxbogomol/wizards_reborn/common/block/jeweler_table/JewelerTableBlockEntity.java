@@ -6,7 +6,7 @@ import mod.maxbogomol.fluffy_fur.client.particle.data.GenericParticleData;
 import mod.maxbogomol.fluffy_fur.client.particle.data.SpinParticleData;
 import mod.maxbogomol.fluffy_fur.client.particle.options.GenericParticleOptions;
 import mod.maxbogomol.fluffy_fur.client.particle.options.ItemParticleOptions;
-import mod.maxbogomol.fluffy_fur.common.block.entity.BlockEntityBase;
+import mod.maxbogomol.fluffy_fur.common.block.entity.NameableBlockEntityBase;
 import mod.maxbogomol.fluffy_fur.common.block.entity.TickableBlockEntity;
 import mod.maxbogomol.fluffy_fur.common.easing.Easing;
 import mod.maxbogomol.fluffy_fur.registry.client.FluffyFurParticles;
@@ -14,6 +14,8 @@ import mod.maxbogomol.fluffy_fur.registry.client.FluffyFurRenderTypes;
 import mod.maxbogomol.wizards_reborn.WizardsReborn;
 import mod.maxbogomol.wizards_reborn.api.skin.Skin;
 import mod.maxbogomol.wizards_reborn.api.wissen.*;
+import mod.maxbogomol.wizards_reborn.client.gui.container.AlchemyFurnaceContainer;
+import mod.maxbogomol.wizards_reborn.client.gui.container.JewelerTableContainer;
 import mod.maxbogomol.wizards_reborn.common.config.Config;
 import mod.maxbogomol.wizards_reborn.common.item.CrystalItem;
 import mod.maxbogomol.wizards_reborn.common.item.SkinTrimItem;
@@ -27,9 +29,13 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.RegistryAccess;
 import net.minecraft.nbt.CompoundTag;
+import net.minecraft.network.chat.Component;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.SimpleContainer;
+import net.minecraft.world.entity.player.Inventory;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
@@ -53,7 +59,7 @@ import java.util.Optional;
 
 import static net.minecraft.world.level.block.state.properties.BlockStateProperties.HORIZONTAL_FACING;
 
-public class JewelerTableBlockEntity extends BlockEntityBase implements TickableBlockEntity, IWissenBlockEntity, ICooldownBlockEntity, IWissenWandFunctionalBlockEntity, IItemResultBlockEntity {
+public class JewelerTableBlockEntity extends NameableBlockEntityBase implements TickableBlockEntity, IWissenBlockEntity, ICooldownBlockEntity, IWissenWandFunctionalBlockEntity, IItemResultBlockEntity {
     public final ItemStackHandler itemHandler = createHandler(2);
     public final LazyOptional<IItemHandler> handler = LazyOptional.of(() -> itemHandler);
     public final ItemStackHandler itemOutputHandler = createHandler(1);
@@ -342,6 +348,17 @@ public class JewelerTableBlockEntity extends BlockEntityBase implements Tickable
         }
 
         return super.getCapability(cap, side);
+    }
+
+    @Override
+    public net.minecraft.network.chat.Component getDefaultName() {
+        return Component.translatable("gui.wizards_reborn.jeweler_table.title");
+    }
+
+    @Nullable
+    @Override
+    public AbstractContainerMenu createMenu(int i, Inventory inventory, Player player) {
+        return new JewelerTableContainer(i, level, getBlockPos(), inventory, player);
     }
 
     public float getBlockRotate() {

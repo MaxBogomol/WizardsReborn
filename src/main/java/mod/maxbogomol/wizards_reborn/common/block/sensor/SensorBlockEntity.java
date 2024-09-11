@@ -1,6 +1,6 @@
 package mod.maxbogomol.wizards_reborn.common.block.sensor;
 
-import mod.maxbogomol.fluffy_fur.common.block.entity.BlockEntityBase;
+import mod.maxbogomol.fluffy_fur.common.block.entity.NameableBlockEntityBase;
 import mod.maxbogomol.fluffy_fur.common.block.entity.TickableBlockEntity;
 import mod.maxbogomol.wizards_reborn.registry.common.block.WizardsRebornBlockEntities;
 import net.minecraft.core.BlockPos;
@@ -10,7 +10,7 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.phys.AABB;
 
-public class SensorBlockEntity extends BlockEntityBase implements TickableBlockEntity {
+public class SensorBlockEntity extends NameableBlockEntityBase implements TickableBlockEntity {
     private int output;
 
     public SensorBlockEntity(BlockEntityType<?> type, BlockPos pos, BlockState state) {
@@ -28,11 +28,13 @@ public class SensorBlockEntity extends BlockEntityBase implements TickableBlockE
         }
     }
 
-    protected void saveAdditional(CompoundTag tag) {
+    @Override
+    public void saveAdditional(CompoundTag tag) {
         super.saveAdditional(tag);
         tag.putInt("OutputSignal", this.output);
     }
 
+    @Override
     public void load(CompoundTag tag) {
         super.load(tag);
         this.output = tag.getInt("OutputSignal");

@@ -1,5 +1,6 @@
 package mod.maxbogomol.wizards_reborn.common.block.arcane_hopper;
 
+import mod.maxbogomol.wizards_reborn.client.gui.container.ArcaneHopperContainer;
 import mod.maxbogomol.wizards_reborn.registry.common.block.WizardsRebornBlockEntities;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -66,7 +67,7 @@ public class ArcaneHopperBlockEntity extends RandomizableContainerBlockEntity im
         this.cooldownTime = tag.getInt("TransferCooldown");
     }
 
-    protected void saveAdditional(CompoundTag tag) {
+    public void saveAdditional(CompoundTag tag) {
         super.saveAdditional(tag);
         if (!this.trySaveLootTable(tag)) {
             ContainerHelper.saveAllItems(tag, this.items);
@@ -435,5 +436,16 @@ public class ArcaneHopperBlockEntity extends RandomizableContainerBlockEntity im
 
     public long getLastUpdateTime() {
         return this.tickedGameTime;
+    }
+
+    @Override
+    public Component getName() {
+        return getName() != null ? getName() : Component.translatable("gui.wizards_reborn.arcane_hopper.title");
+    }
+
+    @Nullable
+    @Override
+    public AbstractContainerMenu createMenu(int i, Inventory inventory, Player player) {
+        return new ArcaneHopperContainer(i, level, getBlockPos(), inventory, player);
     }
 }

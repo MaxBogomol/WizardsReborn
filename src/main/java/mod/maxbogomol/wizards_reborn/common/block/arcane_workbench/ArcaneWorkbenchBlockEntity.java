@@ -6,13 +6,14 @@ import mod.maxbogomol.fluffy_fur.client.particle.data.ColorParticleData;
 import mod.maxbogomol.fluffy_fur.client.particle.data.GenericParticleData;
 import mod.maxbogomol.fluffy_fur.client.particle.data.SpinParticleData;
 import mod.maxbogomol.fluffy_fur.client.particle.options.ItemParticleOptions;
-import mod.maxbogomol.fluffy_fur.common.block.entity.BlockEntityBase;
+import mod.maxbogomol.fluffy_fur.common.block.entity.NameableBlockEntityBase;
 import mod.maxbogomol.fluffy_fur.common.block.entity.TickableBlockEntity;
 import mod.maxbogomol.fluffy_fur.common.easing.Easing;
 import mod.maxbogomol.fluffy_fur.registry.client.FluffyFurParticles;
 import mod.maxbogomol.fluffy_fur.registry.client.FluffyFurRenderTypes;
 import mod.maxbogomol.wizards_reborn.WizardsReborn;
 import mod.maxbogomol.wizards_reborn.api.wissen.*;
+import mod.maxbogomol.wizards_reborn.client.gui.container.ArcaneWorkbenchContainer;
 import mod.maxbogomol.wizards_reborn.client.sound.ArcaneWorkbenchSoundInstance;
 import mod.maxbogomol.wizards_reborn.common.config.Config;
 import mod.maxbogomol.wizards_reborn.common.network.PacketHandler;
@@ -26,8 +27,12 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.RegistryAccess;
 import net.minecraft.nbt.CompoundTag;
+import net.minecraft.network.chat.Component;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.SimpleContainer;
+import net.minecraft.world.entity.player.Inventory;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
@@ -50,7 +55,7 @@ import java.util.Optional;
 
 import static net.minecraft.world.level.block.state.properties.BlockStateProperties.HORIZONTAL_FACING;
 
-public class ArcaneWorkbenchBlockEntity extends BlockEntityBase implements TickableBlockEntity, IWissenBlockEntity, ICooldownBlockEntity, IWissenWandFunctionalBlockEntity, IItemResultBlockEntity {
+public class ArcaneWorkbenchBlockEntity extends NameableBlockEntityBase implements TickableBlockEntity, IWissenBlockEntity, ICooldownBlockEntity, IWissenWandFunctionalBlockEntity, IItemResultBlockEntity {
     public final ItemStackHandler itemHandler = createHandler(13);
     public final LazyOptional<IItemHandler> handler = LazyOptional.of(() -> itemHandler);
     public final ItemStackHandler itemOutputHandler = createHandler(1);
@@ -341,6 +346,17 @@ public class ArcaneWorkbenchBlockEntity extends BlockEntityBase implements Ticka
         }
 
         return super.getCapability(cap, side);
+    }
+
+    @Override
+    public Component getDefaultName() {
+        return Component.translatable("gui.wizards_reborn.arcane_workbench.title");
+    }
+
+    @Nullable
+    @Override
+    public AbstractContainerMenu createMenu(int i, Inventory inventory, Player player) {
+        return new ArcaneWorkbenchContainer(i, level, getBlockPos(), inventory, player);
     }
 
     public float getBlockRotate() {

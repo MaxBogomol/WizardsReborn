@@ -5,7 +5,7 @@ import mod.maxbogomol.fluffy_fur.client.particle.ParticleBuilder;
 import mod.maxbogomol.fluffy_fur.client.particle.data.ColorParticleData;
 import mod.maxbogomol.fluffy_fur.client.particle.data.GenericParticleData;
 import mod.maxbogomol.fluffy_fur.client.particle.data.SpinParticleData;
-import mod.maxbogomol.fluffy_fur.common.block.entity.BlockEntityBase;
+import mod.maxbogomol.fluffy_fur.common.block.entity.NameableBlockEntityBase;
 import mod.maxbogomol.fluffy_fur.common.block.entity.TickableBlockEntity;
 import mod.maxbogomol.fluffy_fur.common.easing.Easing;
 import mod.maxbogomol.fluffy_fur.registry.client.FluffyFurParticles;
@@ -15,6 +15,7 @@ import mod.maxbogomol.wizards_reborn.api.arcaneenchantment.ArcaneEnchantmentUtil
 import mod.maxbogomol.wizards_reborn.api.arcaneenchantment.ArcaneEnchantments;
 import mod.maxbogomol.wizards_reborn.api.wissen.ICooldownBlockEntity;
 import mod.maxbogomol.wizards_reborn.api.wissen.IWissenBlockEntity;
+import mod.maxbogomol.wizards_reborn.client.gui.container.TotemOfDisenchantContainer;
 import mod.maxbogomol.wizards_reborn.common.config.Config;
 import mod.maxbogomol.wizards_reborn.common.network.PacketHandler;
 import mod.maxbogomol.wizards_reborn.common.network.tileentity.TotemOfDisenchantBurstEffectPacket;
@@ -24,8 +25,12 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.ListTag;
+import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.sounds.SoundSource;
+import net.minecraft.world.entity.player.Inventory;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.item.EnchantedBookItem;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
@@ -47,7 +52,7 @@ import javax.annotation.Nullable;
 import java.util.Map;
 import java.util.Random;
 
-public class TotemOfDisenchantBlockEntity extends BlockEntityBase implements TickableBlockEntity, IWissenBlockEntity, ICooldownBlockEntity {
+public class TotemOfDisenchantBlockEntity extends NameableBlockEntityBase implements TickableBlockEntity, IWissenBlockEntity, ICooldownBlockEntity {
     public final ItemStackHandler itemHandler = createHandler(1);
     public final LazyOptional<IItemHandler> handler = LazyOptional.of(() -> itemHandler);
 
@@ -261,6 +266,17 @@ public class TotemOfDisenchantBlockEntity extends BlockEntityBase implements Tic
         }
 
         return super.getCapability(cap, side);
+    }
+
+    @Override
+    public Component getDefaultName() {
+        return Component.translatable("gui.wizards_reborn.totem_of_disenchant.title");
+    }
+
+    @Nullable
+    @Override
+    public AbstractContainerMenu createMenu(int i, Inventory inventory, Player player) {
+        return new TotemOfDisenchantContainer(i, level, getBlockPos(), inventory, player);
     }
 
     @Override

@@ -1,12 +1,17 @@
 package mod.maxbogomol.wizards_reborn.common.block.sensor.item_sorter;
 
 import mod.maxbogomol.wizards_reborn.api.wissen.ICooldownBlockEntity;
+import mod.maxbogomol.wizards_reborn.client.gui.container.ItemSorterContainer;
 import mod.maxbogomol.wizards_reborn.common.block.sensor.SensorBaseBlock;
 import mod.maxbogomol.wizards_reborn.common.block.sensor.SensorBlockEntity;
 import mod.maxbogomol.wizards_reborn.registry.common.block.WizardsRebornBlockEntities;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.nbt.CompoundTag;
+import net.minecraft.network.chat.Component;
+import net.minecraft.world.entity.player.Inventory;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityType;
@@ -152,6 +157,17 @@ public class ItemSorterBlockEntity extends SensorBlockEntity implements ICooldow
         }
 
         return super.getCapability(cap, side);
+    }
+
+    @Override
+    public Component getDefaultName() {
+        return Component.translatable("gui.wizards_reborn.item_sorter.title");
+    }
+
+    @Nullable
+    @Override
+    public AbstractContainerMenu createMenu(int i, Inventory inventory, Player player) {
+        return new ItemSorterContainer(i, level, getBlockPos(), inventory, player);
     }
 
     @Override

@@ -3,19 +3,16 @@ package mod.maxbogomol.wizards_reborn.common.block.alchemy_machine;
 import mod.maxbogomol.fluffy_fur.common.block.entity.TickableBlockEntity;
 import mod.maxbogomol.wizards_reborn.api.alchemy.IPipeConnection;
 import mod.maxbogomol.wizards_reborn.api.alchemy.PipeConnection;
-import mod.maxbogomol.wizards_reborn.client.gui.container.AlchemyMachineContainer;
 import mod.maxbogomol.wizards_reborn.common.block.pipe.PipeBaseBlock;
 import mod.maxbogomol.wizards_reborn.common.block.pipe.PipeBaseBlockEntity;
 import mod.maxbogomol.wizards_reborn.common.item.equipment.WissenWandItem;
 import mod.maxbogomol.wizards_reborn.registry.common.block.WizardsRebornBlockTags;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
-import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.*;
-import net.minecraft.world.entity.player.Inventory;
+import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.BlockGetter;
@@ -134,9 +131,7 @@ public class AlchemyMachineBlock extends HorizontalDirectionalBlock implements E
 
             if (clickable) {
                 BlockEntity blockEntity = level.getBlockEntity(pos);
-
-                MenuProvider containerProvider = createContainerProvider(level, pos);
-                NetworkHooks.openScreen(((ServerPlayer) player), containerProvider, blockEntity.getBlockPos());
+                NetworkHooks.openScreen(((ServerPlayer) player), (MenuProvider) blockEntity, blockEntity.getBlockPos());
                 return InteractionResult.CONSUME;
             }
         }
@@ -144,19 +139,14 @@ public class AlchemyMachineBlock extends HorizontalDirectionalBlock implements E
         return InteractionResult.PASS;
     }
 
-    public MenuProvider createContainerProvider(Level level, BlockPos pos) {
-        return new MenuProvider() {
-            @Override
-            public Component getDisplayName() {
-                return Component.translatable("gui.wizards_reborn.alchemy_machine.title");
+    @Override
+    public void setPlacedBy(Level level, BlockPos pos, BlockState state, @Nullable LivingEntity placer, ItemStack stack) {
+        if (stack.hasCustomHoverName()) {
+            BlockEntity blockEntity = level.getBlockEntity(pos);
+            if (blockEntity instanceof AlchemyMachineBlockEntity machineBlock) {
+                machineBlock.setCustomName(stack.getHoverName());
             }
-
-            @Nullable
-            @Override
-            public AbstractContainerMenu createMenu(int i, Inventory inventory, Player player) {
-                return new AlchemyMachineContainer(i, level, pos, inventory, player);
-            }
-        };
+        }
     }
 
     @Override

@@ -1,14 +1,13 @@
 package mod.maxbogomol.wizards_reborn.common.block.runic_pedestal;
 
+import mod.maxbogomol.fluffy_fur.common.block.entity.NameableBlockSimpleInventory;
 import mod.maxbogomol.fluffy_fur.common.block.entity.TickableBlockEntity;
-import mod.maxbogomol.wizards_reborn.client.gui.container.RunicPedestalContainer;
 import mod.maxbogomol.wizards_reborn.common.item.equipment.WissenWandItem;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
-import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.*;
-import net.minecraft.world.entity.player.Inventory;
+import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.item.ItemStack;
@@ -116,10 +115,8 @@ public class RunicPedestalBlock extends Block implements EntityBlock, SimpleWate
             }
 
             if (!isWand) {
-                BlockEntity tileEntity = level.getBlockEntity(pos);
-
-                MenuProvider containerProvider = createContainerProvider(level, pos);
-                NetworkHooks.openScreen(((ServerPlayer) player), containerProvider, tileEntity.getBlockPos());
+                BlockEntity blockEntity = level.getBlockEntity(pos);
+                NetworkHooks.openScreen(((ServerPlayer) player), (MenuProvider) blockEntity, blockEntity.getBlockPos());
                 return InteractionResult.CONSUME;
             }
         }
@@ -127,19 +124,14 @@ public class RunicPedestalBlock extends Block implements EntityBlock, SimpleWate
         return InteractionResult.PASS;
     }
 
-    private MenuProvider createContainerProvider(Level level, BlockPos pos) {
-        return new MenuProvider() {
-            @Override
-            public Component getDisplayName() {
-                return Component.translatable("gui.wizards_reborn.runic_pedestal.title");
+    @Override
+    public void setPlacedBy(Level level, BlockPos pos, BlockState state, @Nullable LivingEntity placer, ItemStack stack) {
+        if (stack.hasCustomHoverName()) {
+            BlockEntity blockEntity = level.getBlockEntity(pos);
+            if (blockEntity instanceof NameableBlockSimpleInventory blockSimpleInventory) {
+                blockSimpleInventory.setCustomName(stack.getHoverName());
             }
-
-            @Nullable
-            @Override
-            public AbstractContainerMenu createMenu(int i, Inventory inventory, Player player) {
-                return new RunicPedestalContainer(i, level, pos, inventory, player);
-            }
-        };
+        }
     }
 
     @Nullable

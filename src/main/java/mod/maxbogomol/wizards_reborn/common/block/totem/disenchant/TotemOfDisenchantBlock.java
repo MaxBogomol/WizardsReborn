@@ -1,17 +1,15 @@
 package mod.maxbogomol.wizards_reborn.common.block.totem.disenchant;
 
+import mod.maxbogomol.fluffy_fur.common.block.entity.NameableBlockEntityBase;
 import mod.maxbogomol.fluffy_fur.common.block.entity.TickableBlockEntity;
 import mod.maxbogomol.wizards_reborn.api.wissen.ITotemBlock;
-import mod.maxbogomol.wizards_reborn.client.gui.container.TotemOfDisenchantContainer;
 import mod.maxbogomol.wizards_reborn.common.item.equipment.WissenWandItem;
 import mod.maxbogomol.wizards_reborn.registry.common.block.WizardsRebornBlocks;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
-import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.*;
 import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.item.ItemStack;
@@ -109,30 +107,13 @@ public class TotemOfDisenchantBlock extends Block implements EntityBlock, Simple
             }
 
             if (!isWand) {
-                BlockEntity tileEntity = level.getBlockEntity(pos);
-
-                MenuProvider containerProvider = createContainerProvider(level, pos);
-                NetworkHooks.openScreen(((ServerPlayer) player), containerProvider, tileEntity.getBlockPos());
+                BlockEntity blockEntity = level.getBlockEntity(pos);
+                NetworkHooks.openScreen(((ServerPlayer) player), (MenuProvider) blockEntity, blockEntity.getBlockPos());
                 return InteractionResult.CONSUME;
             }
         }
 
         return InteractionResult.PASS;
-    }
-
-    private MenuProvider createContainerProvider(Level level, BlockPos pos) {
-        return new MenuProvider() {
-            @Override
-            public Component getDisplayName() {
-                return Component.translatable("gui.wizards_reborn.totem_of_disenchant.title");
-            }
-
-            @Nullable
-            @Override
-            public AbstractContainerMenu createMenu(int i, Inventory playerInventory, Player playerEntity) {
-                return new TotemOfDisenchantContainer(i, level, pos, playerInventory, playerEntity);
-            }
-        };
     }
 
     @Override
@@ -169,6 +150,12 @@ public class TotemOfDisenchantBlock extends Block implements EntityBlock, Simple
     public void setPlacedBy(Level level, BlockPos pos, BlockState state, @Nullable LivingEntity placer, ItemStack stack) {
         if (level.getBlockState(pos.below()).getBlock() == WizardsRebornBlocks.ARCANE_PEDESTAL.get()) {
             level.setBlockAndUpdate(pos.below(), WizardsRebornBlocks.TOTEM_BASE.get().defaultBlockState());
+        }
+        if (stack.hasCustomHoverName()) {
+            BlockEntity blockEntity = level.getBlockEntity(pos);
+            if (blockEntity instanceof NameableBlockEntityBase blockEntityBase) {
+                blockEntityBase.setCustomName(stack.getHoverName());
+            }
         }
     }
 

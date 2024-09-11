@@ -135,8 +135,7 @@ public class AlchemyBoilerBlock extends HorizontalDirectionalBlock implements En
                 BlockEntity blockEntity = level.getBlockEntity(pos.below());
 
                 if (level.getBlockState(pos.below()).getBlock() instanceof AlchemyMachineBlock block) {
-                    MenuProvider containerProvider = block.createContainerProvider(level, pos.below());
-                    NetworkHooks.openScreen(((ServerPlayer) player), containerProvider, blockEntity.getBlockPos());
+                    NetworkHooks.openScreen(((ServerPlayer) player), (MenuProvider) block, pos.below());
                     return InteractionResult.SUCCESS;
                 }
             }

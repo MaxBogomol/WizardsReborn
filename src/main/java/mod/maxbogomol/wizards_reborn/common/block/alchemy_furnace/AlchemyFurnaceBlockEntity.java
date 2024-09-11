@@ -1,12 +1,13 @@
 package mod.maxbogomol.wizards_reborn.common.block.alchemy_furnace;
 
-import mod.maxbogomol.fluffy_fur.common.block.entity.BlockEntityBase;
+import mod.maxbogomol.fluffy_fur.common.block.entity.NameableBlockEntityBase;
 import mod.maxbogomol.fluffy_fur.common.block.entity.TickableBlockEntity;
 import mod.maxbogomol.fluffy_fur.common.network.BlockEntityUpdate;
 import mod.maxbogomol.wizards_reborn.api.alchemy.IFluidBlockEntity;
 import mod.maxbogomol.wizards_reborn.api.alchemy.IHeatBlockEntity;
 import mod.maxbogomol.wizards_reborn.api.alchemy.ISteamBlockEntity;
 import mod.maxbogomol.wizards_reborn.api.wissen.IItemResultBlockEntity;
+import mod.maxbogomol.wizards_reborn.client.gui.container.AlchemyFurnaceContainer;
 import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornSounds;
 import mod.maxbogomol.wizards_reborn.registry.common.block.WizardsRebornBlockEntities;
 import mod.maxbogomol.wizards_reborn.registry.common.fluid.WizardsRebornFluidTags;
@@ -14,11 +15,15 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.RegistryAccess;
 import net.minecraft.nbt.CompoundTag;
+import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.SimpleContainer;
 import net.minecraft.world.entity.ExperienceOrb;
+import net.minecraft.world.entity.player.Inventory;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
@@ -48,7 +53,7 @@ import java.util.Optional;
 
 import static net.minecraft.world.level.block.state.properties.BlockStateProperties.HORIZONTAL_FACING;
 
-public class AlchemyFurnaceBlockEntity extends BlockEntityBase implements TickableBlockEntity, IFluidBlockEntity, ISteamBlockEntity, IHeatBlockEntity, IItemResultBlockEntity {
+public class AlchemyFurnaceBlockEntity extends NameableBlockEntityBase implements TickableBlockEntity, IFluidBlockEntity, ISteamBlockEntity, IHeatBlockEntity, IItemResultBlockEntity {
     public final ItemStackHandler itemHandler = createHandler(1);
     public final LazyOptional<IItemHandler> handler = LazyOptional.of(() -> itemHandler);
     public final ItemStackHandler itemFuelHandler = createHandler(1);
@@ -309,6 +314,17 @@ public class AlchemyFurnaceBlockEntity extends BlockEntityBase implements Tickab
         }
 
         return super.getCapability(cap, side);
+    }
+
+    @Override
+    public Component getDefaultName() {
+        return Component.translatable("gui.wizards_reborn.alchemy_furnace.title");
+    }
+
+    @Nullable
+    @Override
+    public AbstractContainerMenu createMenu(int i, Inventory inventory, Player player) {
+        return new AlchemyFurnaceContainer(i, level, getBlockPos(), inventory, player);
     }
 
     @Override

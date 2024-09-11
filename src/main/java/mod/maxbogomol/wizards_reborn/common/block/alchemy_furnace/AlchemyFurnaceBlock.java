@@ -4,22 +4,21 @@ import mod.maxbogomol.fluffy_fur.client.particle.ParticleBuilder;
 import mod.maxbogomol.fluffy_fur.client.particle.data.ColorParticleData;
 import mod.maxbogomol.fluffy_fur.client.particle.data.GenericParticleData;
 import mod.maxbogomol.fluffy_fur.client.particle.data.SpinParticleData;
+import mod.maxbogomol.fluffy_fur.common.block.entity.NameableBlockEntityBase;
 import mod.maxbogomol.fluffy_fur.common.block.entity.TickableBlockEntity;
 import mod.maxbogomol.fluffy_fur.registry.client.FluffyFurParticles;
 import mod.maxbogomol.wizards_reborn.api.alchemy.ISteamBlockEntity;
-import mod.maxbogomol.wizards_reborn.client.gui.container.AlchemyFurnaceContainer;
 import mod.maxbogomol.wizards_reborn.common.item.equipment.WissenWandItem;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.particles.ParticleTypes;
-import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.*;
-import net.minecraft.world.entity.player.Inventory;
+import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.item.ItemStack;
@@ -88,9 +87,7 @@ public class AlchemyFurnaceBlock extends HorizontalDirectionalBlock implements E
 
             if (clickable) {
                 BlockEntity blockEntity = level.getBlockEntity(pos);
-
-                MenuProvider containerProvider = createContainerProvider(level, pos);
-                NetworkHooks.openScreen(((ServerPlayer) player), containerProvider, blockEntity.getBlockPos());
+                NetworkHooks.openScreen(((ServerPlayer) player), (MenuProvider) blockEntity, blockEntity.getBlockPos());
                 return InteractionResult.CONSUME;
             }
         }
@@ -98,19 +95,14 @@ public class AlchemyFurnaceBlock extends HorizontalDirectionalBlock implements E
         return InteractionResult.PASS;
     }
 
-    private MenuProvider createContainerProvider(Level level, BlockPos pos) {
-        return new MenuProvider() {
-            @Override
-            public Component getDisplayName() {
-                return Component.translatable("gui.wizards_reborn.alchemy_furnace.title");
+    @Override
+    public void setPlacedBy(Level level, BlockPos pos, BlockState state, @Nullable LivingEntity placer, ItemStack stack) {
+        if (stack.hasCustomHoverName()) {
+            BlockEntity blockEntity = level.getBlockEntity(pos);
+            if (blockEntity instanceof NameableBlockEntityBase blockEntityBase) {
+                blockEntityBase.setCustomName(stack.getHoverName());
             }
-
-            @Nullable
-            @Override
-            public AbstractContainerMenu createMenu(int i, Inventory inventory, Player player) {
-                return new AlchemyFurnaceContainer(i, level, pos, inventory, player);
-            }
-        };
+        }
     }
 
     @Nullable

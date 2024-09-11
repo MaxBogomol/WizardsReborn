@@ -1,16 +1,16 @@
 package mod.maxbogomol.wizards_reborn.common.block.sensor.item_sorter;
 
-import mod.maxbogomol.wizards_reborn.client.gui.container.ItemSorterContainer;
+import mod.maxbogomol.fluffy_fur.common.block.entity.NameableBlockEntityBase;
 import mod.maxbogomol.wizards_reborn.common.block.sensor.SensorBaseBlock;
 import mod.maxbogomol.wizards_reborn.registry.client.WizardsRebornModels;
 import net.minecraft.client.resources.model.ModelResourceLocation;
 import net.minecraft.core.BlockPos;
-import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.*;
-import net.minecraft.world.entity.player.Inventory;
+import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.AbstractContainerMenu;
+import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
@@ -61,26 +61,19 @@ public class ItemSorterBlock extends SensorBaseBlock {
             return InteractionResult.SUCCESS;
         } else {
             BlockEntity blockEntity = level.getBlockEntity(pos);
-
-            MenuProvider containerProvider = createContainerProvider(level, pos);
-            NetworkHooks.openScreen(((ServerPlayer) player), containerProvider, blockEntity.getBlockPos());
+            NetworkHooks.openScreen(((ServerPlayer) player), (MenuProvider) blockEntity, blockEntity.getBlockPos());
             return InteractionResult.CONSUME;
         }
     }
 
-    private MenuProvider createContainerProvider(Level level, BlockPos pos) {
-        return new MenuProvider() {
-            @Override
-            public Component getDisplayName() {
-                return Component.translatable("gui.wizards_reborn.item_sorter.title");
+    @Override
+    public void setPlacedBy(Level level, BlockPos pos, BlockState state, @Nullable LivingEntity placer, ItemStack stack) {
+        if (stack.hasCustomHoverName()) {
+            BlockEntity blockEntity = level.getBlockEntity(pos);
+            if (blockEntity instanceof NameableBlockEntityBase blockEntityBase) {
+                blockEntityBase.setCustomName(stack.getHoverName());
             }
-
-            @Nullable
-            @Override
-            public AbstractContainerMenu createMenu(int i, Inventory inventory, Player player) {
-                return new ItemSorterContainer(i, level, pos, inventory, player);
-            }
-        };
+        }
     }
 
     @Override
