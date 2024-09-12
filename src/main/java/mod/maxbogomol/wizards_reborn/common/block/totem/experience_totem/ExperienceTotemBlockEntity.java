@@ -6,7 +6,7 @@ import mod.maxbogomol.wizards_reborn.api.wissen.IExperienceBlockEntity;
 import mod.maxbogomol.wizards_reborn.api.wissen.WissenUtils;
 import mod.maxbogomol.wizards_reborn.client.particle.ExperienceTotemBurst;
 import mod.maxbogomol.wizards_reborn.common.network.PacketHandler;
-import mod.maxbogomol.wizards_reborn.common.network.tileentity.ExperienceTotemBurstEffectPacket;
+import mod.maxbogomol.wizards_reborn.common.network.block.ExperienceTotemBurstEffectPacket;
 import mod.maxbogomol.wizards_reborn.registry.common.block.WizardsRebornBlockEntities;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;

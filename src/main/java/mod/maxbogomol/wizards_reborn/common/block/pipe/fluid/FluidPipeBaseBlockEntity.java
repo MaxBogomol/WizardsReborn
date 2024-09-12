@@ -105,7 +105,7 @@ public abstract class FluidPipeBaseBlockEntity extends PipeBaseBlockEntity imple
         for (Direction facing : Direction.values()) {
             if (!getConnection(facing).transfer)
                 continue;
-            BlockEntity tile = level.getBlockEntity(worldPosition.relative(facing));
+            BlockEntity tile = level.getBlockEntity(getBlockPos().relative(facing));
             if (tile instanceof FluidPipeBaseBlockEntity && !((FluidPipeBaseBlockEntity) tile).clogged)
                 return true;
         }

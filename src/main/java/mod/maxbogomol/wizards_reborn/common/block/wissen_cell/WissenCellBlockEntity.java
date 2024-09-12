@@ -15,7 +15,7 @@ import mod.maxbogomol.wizards_reborn.api.wissen.WissenItemUtil;
 import mod.maxbogomol.wizards_reborn.api.wissen.WissenUtils;
 import mod.maxbogomol.wizards_reborn.common.config.Config;
 import mod.maxbogomol.wizards_reborn.common.network.PacketHandler;
-import mod.maxbogomol.wizards_reborn.common.network.tileentity.WissenCellSendEffectPacket;
+import mod.maxbogomol.wizards_reborn.common.network.block.WissenCellSendEffectPacket;
 import mod.maxbogomol.wizards_reborn.registry.common.block.WizardsRebornBlockEntities;
 import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornSounds;
 import net.minecraft.core.BlockPos;
@@ -106,12 +106,7 @@ public class WissenCellBlockEntity extends ExposedBlockSimpleInventory implement
 
     @Override
     protected SimpleContainer createItemHandler() {
-        return new SimpleContainer(1) {
-            @Override
-            public int getMaxStackSize() {
-                return 64;
-            }
-        };
+        return new SimpleContainer(1);
     }
 
     @Override

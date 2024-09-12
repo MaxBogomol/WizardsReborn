@@ -18,7 +18,7 @@ import mod.maxbogomol.wizards_reborn.api.wissen.*;
 import mod.maxbogomol.wizards_reborn.client.sound.WissenCrystallizerSoundInstance;
 import mod.maxbogomol.wizards_reborn.common.config.Config;
 import mod.maxbogomol.wizards_reborn.common.network.PacketHandler;
-import mod.maxbogomol.wizards_reborn.common.network.tileentity.WissenCrystallizerBurstEffectPacket;
+import mod.maxbogomol.wizards_reborn.common.network.block.WissenCrystallizerBurstEffectPacket;
 import mod.maxbogomol.wizards_reborn.common.recipe.WissenCrystallizerRecipe;
 import mod.maxbogomol.wizards_reborn.registry.client.WizardsRebornParticles;
 import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornRecipes;

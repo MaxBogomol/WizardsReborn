@@ -1,4 +1,4 @@
-package mod.maxbogomol.wizards_reborn.common.network.tileentity;
+package mod.maxbogomol.wizards_reborn.common.network.block;
 
 import mod.maxbogomol.fluffy_fur.common.network.BlockEntityUpdate;
 import mod.maxbogomol.wizards_reborn.WizardsReborn;

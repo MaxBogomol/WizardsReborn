@@ -14,9 +14,9 @@ import mod.maxbogomol.wizards_reborn.api.wissen.*;
 import mod.maxbogomol.wizards_reborn.common.config.Config;
 import mod.maxbogomol.wizards_reborn.common.network.PacketHandler;
 import mod.maxbogomol.wizards_reborn.common.network.WissenSendEffectPacket;
-import mod.maxbogomol.wizards_reborn.common.network.tileentity.AltarOfDroughtBreakEffectPacket;
-import mod.maxbogomol.wizards_reborn.common.network.tileentity.AltarOfDroughtBurstEffectPacket;
-import mod.maxbogomol.wizards_reborn.common.network.tileentity.AltarOfDroughtSendEffectPacket;
+import mod.maxbogomol.wizards_reborn.common.network.block.AltarOfDroughtBreakEffectPacket;
+import mod.maxbogomol.wizards_reborn.common.network.block.AltarOfDroughtBurstEffectPacket;
+import mod.maxbogomol.wizards_reborn.common.network.block.AltarOfDroughtSendEffectPacket;
 import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornSounds;
 import mod.maxbogomol.wizards_reborn.registry.common.block.WizardsRebornBlockEntities;
 import mod.maxbogomol.wizards_reborn.registry.common.block.WizardsRebornBlockTags;
@@ -122,7 +122,7 @@ public class AltarOfDroughtBlockEntity extends ExposedBlockSimpleInventory imple
                             .setScaleData(GenericParticleData.create(0.3f * getStage(), 0).build())
                             .setLifetime(20)
                             .randomVelocity(0.015f * getStage())
-                            .spawn(level, worldPosition.getX() + 0.5F, worldPosition.getY() + 0.625F, worldPosition.getZ() + 0.5F);
+                            .spawn(level, getBlockPos().getX() + 0.5F, getBlockPos().getY() + 0.625F, getBlockPos().getZ() + 0.5F);
                 }
                 if (random.nextFloat() < 0.1) {
                     ParticleBuilder.create(random.nextBoolean() ? FluffyFurParticles.SQUARE : FluffyFurParticles.SPARKLE)
@@ -132,7 +132,7 @@ public class AltarOfDroughtBlockEntity extends ExposedBlockSimpleInventory imple
                             .setSpinData(SpinParticleData.create().randomSpin(0.5f).build())
                             .setLifetime(30)
                             .randomVelocity(0.015f * getStage())
-                            .spawn(level, worldPosition.getX() + 0.5F, worldPosition.getY() + 0.625F, worldPosition.getZ() + 0.5F);
+                            .spawn(level, getBlockPos().getX() + 0.5F, getBlockPos().getY() + 0.625F, getBlockPos().getZ() + 0.5F);
                 }
             }
         }
@@ -140,12 +140,7 @@ public class AltarOfDroughtBlockEntity extends ExposedBlockSimpleInventory imple
 
     @Override
     protected SimpleContainer createItemHandler() {
-        return new SimpleContainer(1) {
-            @Override
-            public int getMaxStackSize() {
-                return 64;
-            }
-        };
+        return new SimpleContainer(1);
     }
 
     @Override

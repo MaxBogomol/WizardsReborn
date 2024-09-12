@@ -18,7 +18,7 @@ import mod.maxbogomol.wizards_reborn.api.wissen.IWissenBlockEntity;
 import mod.maxbogomol.wizards_reborn.client.gui.container.TotemOfDisenchantContainer;
 import mod.maxbogomol.wizards_reborn.common.config.Config;
 import mod.maxbogomol.wizards_reborn.common.network.PacketHandler;
-import mod.maxbogomol.wizards_reborn.common.network.tileentity.TotemOfDisenchantBurstEffectPacket;
+import mod.maxbogomol.wizards_reborn.common.network.block.TotemOfDisenchantBurstEffectPacket;
 import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornSounds;
 import mod.maxbogomol.wizards_reborn.registry.common.block.WizardsRebornBlockEntities;
 import net.minecraft.core.BlockPos;
@@ -178,7 +178,7 @@ public class TotemOfDisenchantBlockEntity extends NameableBlockEntityBase implem
                             .setScaleData(GenericParticleData.create(0.2f * getStage(), 0).build())
                             .setLifetime(20)
                             .randomVelocity(0.015f)
-                            .spawn(level, worldPosition.getX() + 0.5F, worldPosition.getY() + 0.5F, worldPosition.getZ() + 0.5F);
+                            .spawn(level, getBlockPos().getX() + 0.5F, getBlockPos().getY() + 0.5F, getBlockPos().getZ() + 0.5F);
                 }
                 if (random.nextFloat() < 0.1) {
                     ParticleBuilder.create(random.nextBoolean() ? FluffyFurParticles.SQUARE : FluffyFurParticles.SPARKLE)
@@ -188,7 +188,7 @@ public class TotemOfDisenchantBlockEntity extends NameableBlockEntityBase implem
                             .setSpinData(SpinParticleData.create().randomSpin(0.5f).build())
                             .setLifetime(20)
                             .randomVelocity(0.015f)
-                            .spawn(level, worldPosition.getX() + 0.5F, worldPosition.getY() + 0.5F, worldPosition.getZ() + 0.5F);
+                            .spawn(level, getBlockPos().getX() + 0.5F, getBlockPos().getY() + 0.5F, getBlockPos().getZ() + 0.5F);
                 }
             }
 

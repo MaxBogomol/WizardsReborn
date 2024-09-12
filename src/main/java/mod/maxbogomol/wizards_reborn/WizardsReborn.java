@@ -11,14 +11,14 @@ import mod.maxbogomol.wizards_reborn.common.capability.IArrowModifier;
 import mod.maxbogomol.wizards_reborn.common.capability.IKnowledge;
 import mod.maxbogomol.wizards_reborn.common.config.Config;
 import mod.maxbogomol.wizards_reborn.common.config.ServerConfig;
-import mod.maxbogomol.wizards_reborn.common.creativetab.WizardsRebornCreativeTab;
+import mod.maxbogomol.wizards_reborn.registry.common.item.WizardsRebornCreativeTab;
 import mod.maxbogomol.wizards_reborn.common.event.Events;
-import mod.maxbogomol.wizards_reborn.integration.common.create.CreateIntegration;
-import mod.maxbogomol.wizards_reborn.integration.common.farmersdelight.FarmersDelightIntegration;
 import mod.maxbogomol.wizards_reborn.common.item.equipment.WissenWandItem;
 import mod.maxbogomol.wizards_reborn.common.knowledge.Researches;
 import mod.maxbogomol.wizards_reborn.common.network.PacketHandler;
 import mod.maxbogomol.wizards_reborn.common.world.tree.SupplierBlockStateProvider;
+import mod.maxbogomol.wizards_reborn.integration.common.create.CreateIntegration;
+import mod.maxbogomol.wizards_reborn.integration.common.farmersdelight.FarmersDelightIntegration;
 import mod.maxbogomol.wizards_reborn.registry.client.WizardsRebornParticles;
 import mod.maxbogomol.wizards_reborn.registry.common.*;
 import mod.maxbogomol.wizards_reborn.registry.common.banner.WizardsRebornBannerPatterns;
@@ -29,6 +29,7 @@ import mod.maxbogomol.wizards_reborn.registry.common.item.WizardsRebornItems;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.world.level.levelgen.feature.stateproviders.BlockStateProviderType;
 import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.common.ForgeMod;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.capabilities.RegisterCapabilitiesEvent;
 import net.minecraftforge.eventbus.api.IEventBus;
@@ -104,6 +105,7 @@ public class WizardsReborn {
 
         MinecraftForge.EVENT_BUS.register(this);
         MinecraftForge.EVENT_BUS.register(new Events());
+        ForgeMod.enableMilkFluid();
     }
 
     private void setup(final FMLCommonSetupEvent event) {

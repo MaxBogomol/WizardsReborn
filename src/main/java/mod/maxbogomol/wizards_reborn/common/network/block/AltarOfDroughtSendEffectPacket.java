@@ -1,4 +1,4 @@
-package mod.maxbogomol.wizards_reborn.common.network.tileentity;
+package mod.maxbogomol.wizards_reborn.common.network.block;
 
 import mod.maxbogomol.fluffy_fur.client.particle.ParticleBuilder;
 import mod.maxbogomol.fluffy_fur.client.particle.data.ColorParticleData;
@@ -16,23 +16,23 @@ import net.minecraftforge.network.NetworkEvent;
 import java.util.Random;
 import java.util.function.Supplier;
 
-public class WissenAltarSendEffectPacket {
+public class AltarOfDroughtSendEffectPacket {
     private final BlockPos pos;
     private static final Random random = new Random();
 
-    public WissenAltarSendEffectPacket(BlockPos pos) {
+    public AltarOfDroughtSendEffectPacket(BlockPos pos) {
         this.pos = pos;
     }
 
-    public static WissenAltarSendEffectPacket decode(FriendlyByteBuf buf) {
-        return new WissenAltarSendEffectPacket(buf.readBlockPos());
+    public static AltarOfDroughtSendEffectPacket decode(FriendlyByteBuf buf) {
+        return new AltarOfDroughtSendEffectPacket(buf.readBlockPos());
     }
 
     public void encode(FriendlyByteBuf buf) {
         buf.writeBlockPos(pos);
     }
 
-    public static void handle(WissenAltarSendEffectPacket msg, Supplier<NetworkEvent.Context> ctx) {
+    public static void handle(AltarOfDroughtSendEffectPacket msg, Supplier<NetworkEvent.Context> ctx) {
         if (ctx.get().getDirection().getReceptionSide().isClient()) {
             ctx.get().enqueueWork(new Runnable() {
                 @Override
@@ -44,17 +44,17 @@ public class WissenAltarSendEffectPacket {
                             .setScaleData(GenericParticleData.create(0.05f, 0).build())
                             .setLifetime(20)
                             .addVelocity(((random.nextDouble() - 0.5D) / 100), -(random.nextDouble() / 40), ((random.nextDouble() - 0.5D) / 100))
-                            .spawn(level, msg.pos.getX() + 0.5F, msg.pos.getY() + 1.3125F, msg.pos.getZ() + 0.5F);
+                            .spawn(level, msg.pos.getX() + 0.5F, msg.pos.getY() + 0.625F, msg.pos.getZ() + 0.5F);
                     boolean square = random.nextFloat() < 0.3f;
                     float i = square ? 0.5f : 1f;
                     ParticleBuilder.create(square ? FluffyFurParticles.SQUARE : FluffyFurParticles.SPARKLE)
                             .setColorData(ColorParticleData.create(Config.wissenColorR(), Config.wissenColorG(), Config.wissenColorB()).build())
                             .setTransparencyData(GenericParticleData.create(0.35f, 0).build())
                             .setScaleData(GenericParticleData.create(0.025f * i, 0.05f * i, 0).setEasing(Easing.QUINTIC_IN_OUT).build())
-                            .setSpinData(SpinParticleData.create().randomOffset().randomSpin(0.2f).build())
+                            .setSpinData(SpinParticleData.create().randomSpin(0.2f).build())
                             .setLifetime(30)
                             .addVelocity(((random.nextDouble() - 0.5D) / 100), -(random.nextDouble() / 40), ((random.nextDouble() - 0.5D) / 100))
-                            .spawn(level, msg.pos.getX() + 0.5F, msg.pos.getY() + 1.3125F, msg.pos.getZ() + 0.5F);
+                            .spawn(level, msg.pos.getX() + 0.5F, msg.pos.getY() + 0.625F, msg.pos.getZ() + 0.5F);
                     ctx.get().setPacketHandled(true);
                 }
             });

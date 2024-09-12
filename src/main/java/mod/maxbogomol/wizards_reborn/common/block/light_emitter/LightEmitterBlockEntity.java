@@ -107,7 +107,7 @@ public class LightEmitterBlockEntity extends ExposedBlockSimpleInventory impleme
                             .setScaleData(GenericParticleData.create(0.2f * getStage(), 0).build())
                             .setLifetime(20)
                             .randomVelocity(0.005f * getStage())
-                            .spawn(level, worldPosition.getX() + 0.5F, worldPosition.getY() + 0.5625F, worldPosition.getZ() + 0.5F);
+                            .spawn(level, getBlockPos().getX() + 0.5F, getBlockPos().getY() + 0.5625F, getBlockPos().getZ() + 0.5F);
                 }
                 if (random.nextFloat() < 0.1) {
                     ParticleBuilder.create(random.nextBoolean() ? FluffyFurParticles.SQUARE : FluffyFurParticles.SPARKLE)
@@ -117,7 +117,7 @@ public class LightEmitterBlockEntity extends ExposedBlockSimpleInventory impleme
                             .setSpinData(SpinParticleData.create().randomSpin(0.5f).build())
                             .setLifetime(30)
                             .randomVelocity(0.005f * getStage())
-                            .spawn(level, worldPosition.getX() + 0.5F, worldPosition.getY() + 0.5625F, worldPosition.getZ() + 0.5F);
+                            .spawn(level, getBlockPos().getX() + 0.5F, getBlockPos().getY() + 0.5625F, getBlockPos().getZ() + 0.5F);
                 }
 
                 if (canWork()) {
@@ -252,7 +252,7 @@ public class LightEmitterBlockEntity extends ExposedBlockSimpleInventory impleme
                     .setScaleData(GenericParticleData.create(0.1f, 0).build())
                     .setLifetime(20)
                     .addVelocity((to.x() - from.x()) / 20, (to.y() - from.y()) / 20, (to.z() - from.z()) / 20)
-                    .spawn(level, worldPosition.getX() + from.x(), worldPosition.getY() + from.y(), worldPosition.getZ() + from.z());
+                    .spawn(level, getBlockPos().getX() + from.x(), getBlockPos().getY() + from.y(), getBlockPos().getZ() + from.z());
         }
         if (random.nextFloat() < chance / 2) {
             boolean square = random.nextBoolean();
@@ -264,7 +264,7 @@ public class LightEmitterBlockEntity extends ExposedBlockSimpleInventory impleme
                     .setSpinData(SpinParticleData.create().randomSpin(0.5f).build())
                     .setLifetime(30)
                     .addVelocity((to.x() - from.x()) / 20, (to.y() - from.y()) / 20, (to.z() - from.z()) / 20)
-                    .spawn(level, worldPosition.getX() + from.x(), worldPosition.getY() + from.y(), worldPosition.getZ() + from.z());
+                    .spawn(level, getBlockPos().getX() + from.x(), getBlockPos().getY() + from.y(), getBlockPos().getZ() + from.z());
         }
     }
 

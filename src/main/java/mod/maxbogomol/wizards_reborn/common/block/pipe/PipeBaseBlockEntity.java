@@ -42,11 +42,11 @@ public class PipeBaseBlockEntity extends BlockEntityBase {
     }
 
     public void initConnections() {
-        Block block = level.getBlockState(worldPosition).getBlock();
+        Block block = level.getBlockState(getBlockPos()).getBlock();
         for (Direction direction : Direction.values()) {
             if (block instanceof PipeBaseBlock pipeBlock) {
-                BlockState facingState = level.getBlockState(worldPosition.relative(direction));
-                BlockEntity facingBE = level.getBlockEntity(worldPosition.relative(direction));
+                BlockState facingState = level.getBlockState(getBlockPos().relative(direction));
+                BlockEntity facingBE = level.getBlockEntity(getBlockPos().relative(direction));
                 if (!(facingBE instanceof PipeBaseBlockEntity) || ((PipeBaseBlockEntity) facingBE).getConnection(direction.getOpposite()) != PipeConnection.DISABLED) {
                     if (facingState.is(pipeBlock.getConnectionTag())) {
                         if (facingBE instanceof PipeBaseBlockEntity && ((PipeBaseBlockEntity) facingBE).getConnection(direction.getOpposite()) == PipeConnection.DISABLED) {
@@ -72,8 +72,8 @@ public class PipeBaseBlockEntity extends BlockEntityBase {
         }
         loaded = true;
         setChanged();
-        level.getChunkAt(worldPosition).setUnsaved(true);
-        level.updateNeighbourForOutputSignal(worldPosition, block);
+        level.getChunkAt(getBlockPos()).setUnsaved(true);
+        level.updateNeighbourForOutputSignal(getBlockPos(), block);
     }
 
     @Override
@@ -109,7 +109,7 @@ public class PipeBaseBlockEntity extends BlockEntityBase {
     public void onDataPacket(Connection net, ClientboundBlockEntityDataPacket pkt) {
         super.onDataPacket(net, pkt);
         if (level.isClientSide()) {
-            level.sendBlockUpdated(worldPosition, getBlockState(), getBlockState(), Block.UPDATE_ALL);
+            level.sendBlockUpdated(getBlockPos(), getBlockState(), getBlockState(), Block.UPDATE_ALL);
         }
     }
 

@@ -18,13 +18,13 @@ import java.util.Random;
 import java.util.function.Supplier;
 
 public class WissenSendEffectPacket {
-    private final float posFromX;
-    private final float posFromY;
-    private final float posFromZ;
+    private final double posFromX;
+    private final double posFromY;
+    private final double posFromZ;
 
-    private final float posToX;
-    private final float posToY;
-    private final float posToZ;
+    private final double posToX;
+    private final double posToY;
+    private final double posToZ;
 
     private final float colorR, colorG, colorB;
 
@@ -32,7 +32,7 @@ public class WissenSendEffectPacket {
 
     private static final Random random = new Random();
 
-    public WissenSendEffectPacket(float posFromX, float posFromY, float posFromZ, float posToX, float posToY, float posToZ, float colorR, float colorG, float colorB) {
+    public WissenSendEffectPacket(double posFromX, double posFromY, double posFromZ, double posToX, double posToY, double posToZ, float colorR, float colorG, float colorB) {
         this.posFromX = posFromX;
         this.posFromY = posFromY;
         this.posFromZ = posFromZ;
@@ -47,7 +47,7 @@ public class WissenSendEffectPacket {
         this.particlePerBlock = 4;
     }
 
-    public WissenSendEffectPacket(float posFromX, float posFromY, float posFromZ, float posToX, float posToY, float posToZ) {
+    public WissenSendEffectPacket(double posFromX, double posFromY, double posFromZ, double posToX, double posToY, double posToZ) {
         this.posFromX = posFromX;
         this.posFromY = posFromY;
         this.posFromZ = posFromZ;
@@ -62,7 +62,7 @@ public class WissenSendEffectPacket {
         this.particlePerBlock = 4;
     }
 
-    public WissenSendEffectPacket(float posFromX, float posFromY, float posFromZ, float posToX, float posToY, float posToZ, float colorR, float colorG, float colorB, int particlePerBlock) {
+    public WissenSendEffectPacket(double posFromX, double posFromY, double posFromZ, double posToX, double posToY, double posToZ, float colorR, float colorG, float colorB, int particlePerBlock) {
         this.posFromX = posFromX;
         this.posFromY = posFromY;
         this.posFromZ = posFromZ;
@@ -77,7 +77,7 @@ public class WissenSendEffectPacket {
         this.particlePerBlock = particlePerBlock;
     }
 
-    public WissenSendEffectPacket(float posFromX, float posFromY, float posFromZ, float posToX, float posToY, float posToZ, int particlePerBlock) {
+    public WissenSendEffectPacket(double posFromX, double posFromY, double posFromZ, double posToX, double posToY, double posToZ, int particlePerBlock) {
         this.posFromX = posFromX;
         this.posFromY = posFromY;
         this.posFromZ = posFromZ;
@@ -93,17 +93,17 @@ public class WissenSendEffectPacket {
     }
 
     public static WissenSendEffectPacket decode(FriendlyByteBuf buf) {
-        return new WissenSendEffectPacket(buf.readFloat(), buf.readFloat(), buf.readFloat(), buf.readFloat(), buf.readFloat(), buf.readFloat(), buf.readFloat(), buf.readFloat(), buf.readFloat(), buf.readInt());
+        return new WissenSendEffectPacket(buf.readDouble(), buf.readDouble(), buf.readDouble(), buf.readDouble(), buf.readDouble(), buf.readDouble(), buf.readFloat(), buf.readFloat(), buf.readFloat(), buf.readInt());
     }
 
     public void encode(FriendlyByteBuf buf) {
-        buf.writeFloat(posFromX);
-        buf.writeFloat(posFromY);
-        buf.writeFloat(posFromZ);
+        buf.writeDouble(posFromX);
+        buf.writeDouble(posFromY);
+        buf.writeDouble(posFromZ);
 
-        buf.writeFloat(posToX);
-        buf.writeFloat(posToY);
-        buf.writeFloat(posToZ);
+        buf.writeDouble(posToX);
+        buf.writeDouble(posToY);
+        buf.writeDouble(posToZ);
 
         buf.writeFloat(colorR);
         buf.writeFloat(colorG);
@@ -126,9 +126,9 @@ public class WissenSendEffectPacket {
                     double dY = msg.posFromY - msg.posToY;
                     double dZ = msg.posFromZ - msg.posToZ;
 
-                    float x = (float) (dX / (particlePerBlock));
-                    float y = (float) (dY / (particlePerBlock));
-                    float z = (float) (dZ / (particlePerBlock));
+                    double x = (dX / (particlePerBlock));
+                    double y = (dY / (particlePerBlock));
+                    double z = (dZ / (particlePerBlock));
 
                     WissenLimitHandler.wissenCount++;
 

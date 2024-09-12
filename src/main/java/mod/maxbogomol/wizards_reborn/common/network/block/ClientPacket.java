@@ -1,4 +1,4 @@
-package mod.maxbogomol.wizards_reborn.common.network.tileentity;
+package mod.maxbogomol.wizards_reborn.common.network.block;
 
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraftforge.api.distmarker.Dist;

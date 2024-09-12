@@ -20,7 +20,7 @@ import mod.maxbogomol.wizards_reborn.client.sound.ArcaneIteratorSoundInstance;
 import mod.maxbogomol.wizards_reborn.common.block.arcane_pedestal.ArcanePedestalBlockEntity;
 import mod.maxbogomol.wizards_reborn.common.config.Config;
 import mod.maxbogomol.wizards_reborn.common.network.PacketHandler;
-import mod.maxbogomol.wizards_reborn.common.network.tileentity.ArcaneIteratorBurstEffectPacket;
+import mod.maxbogomol.wizards_reborn.common.network.block.ArcaneIteratorBurstEffectPacket;
 import mod.maxbogomol.wizards_reborn.common.recipe.ArcaneIteratorRecipe;
 import mod.maxbogomol.wizards_reborn.registry.common.block.WizardsRebornBlockEntities;
 import mod.maxbogomol.wizards_reborn.registry.common.damage.WizardsRebornDamage;
@@ -380,7 +380,7 @@ public class ArcaneIteratorBlockEntity extends BlockEntityBase implements Tickab
                 .setSpinData(SpinParticleData.create().randomSpin(0.25f).build())
                 .setLifetime(120)
                 .addVelocity(vx, vy, vz)
-                .spawn(level, worldPosition.getX() + 0.5F, worldPosition.getY() + 0.5F, worldPosition.getZ() + 0.5F);
+                .spawn(level, getBlockPos().getX() + 0.5F, getBlockPos().getY() + 0.5F, getBlockPos().getZ() + 0.5F);
     }
 
     public boolean isWorks() {

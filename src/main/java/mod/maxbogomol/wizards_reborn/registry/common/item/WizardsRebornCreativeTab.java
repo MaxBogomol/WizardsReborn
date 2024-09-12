@@ -1,4 +1,4 @@
-package mod.maxbogomol.wizards_reborn.common.creativetab;
+package mod.maxbogomol.wizards_reborn.registry.common.item;
 
 import mod.maxbogomol.wizards_reborn.WizardsReborn;
 import mod.maxbogomol.wizards_reborn.api.alchemy.AlchemyPotion;
@@ -16,7 +16,6 @@ import mod.maxbogomol.wizards_reborn.integration.common.farmersdelight.FarmersDe
 import mod.maxbogomol.wizards_reborn.common.item.CrystalItem;
 import mod.maxbogomol.wizards_reborn.common.item.FracturedCrystalItem;
 import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornCrystalRituals;
-import mod.maxbogomol.wizards_reborn.registry.common.item.WizardsRebornItems;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
@@ -664,6 +663,7 @@ public class WizardsRebornCreativeTab {
             event.accept(WizardsRebornItems.ALCHEMY_OIL_BUCKET);
             event.accept(WizardsRebornItems.OIL_TEA_BUCKET);
             event.accept(WizardsRebornItems.WISSEN_TEA_BUCKET);
+            event.accept(WizardsRebornItems.MILK_TEA_BUCKET);
             event.accept(WizardsRebornItems.MUSHROOM_BREW_BUCKET);
             event.accept(WizardsRebornItems.HELLISH_MUSHROOM_BREW_BUCKET);
             event.accept(WizardsRebornItems.MOR_BREW_BUCKET);

@@ -5,16 +5,16 @@ import mod.maxbogomol.fluffy_fur.common.block.entity.TickableBlockEntity;
 import mod.maxbogomol.fluffy_fur.common.network.BlockEntityUpdate;
 import mod.maxbogomol.wizards_reborn.api.wissen.ITotemBlock;
 import mod.maxbogomol.wizards_reborn.common.item.equipment.WissenWandItem;
-import mod.maxbogomol.wizards_reborn.registry.common.block.WizardsRebornBlocks;
 import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornSounds;
+import mod.maxbogomol.wizards_reborn.registry.common.block.WizardsRebornBlocks;
 import mod.maxbogomol.wizards_reborn.registry.common.item.WizardsRebornItemTags;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.sounds.SoundSource;
+import net.minecraft.world.Container;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.item.ItemStack;
@@ -70,7 +70,8 @@ public class TotemOfFlamesBlock extends Block implements EntityBlock, SimpleWate
 
     @Override
     protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {
-        builder.add(BlockStateProperties.WATERLOGGED).add(BlockStateProperties.LIT);
+        builder.add(BlockStateProperties.WATERLOGGED);
+        builder.add(BlockStateProperties.LIT);
     }
 
     @Nullable
@@ -78,72 +79,6 @@ public class TotemOfFlamesBlock extends Block implements EntityBlock, SimpleWate
     public BlockState getStateForPlacement(BlockPlaceContext context) {
         FluidState fluidState = context.getLevel().getFluidState(context.getClickedPos());
         return this.defaultBlockState().setValue(BlockStateProperties.WATERLOGGED, fluidState.getType() == Fluids.WATER);
-    }
-
-    @Override
-    public void onRemove(@Nonnull BlockState state, @Nonnull Level level, @Nonnull BlockPos pos, @Nonnull BlockState newState, boolean isMoving) {
-        if (state.getBlock() != newState.getBlock()) {
-            BlockEntity tile = level.getBlockEntity(pos);
-            if (tile instanceof BlockSimpleInventory) {
-                net.minecraft.world.Containers.dropContents(level, pos, ((BlockSimpleInventory) tile).getItemHandler());
-            }
-            super.onRemove(state, level, pos, newState, isMoving);
-        }
-    }
-
-    @Override
-    public InteractionResult use(BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hit) {
-        TotemOfFlamesBlockEntity tile = (TotemOfFlamesBlockEntity) level.getBlockEntity(pos);
-        ItemStack stack = player.getItemInHand(hand).copy();
-
-        if (stack.getItem() instanceof WissenWandItem) {
-            if (WissenWandItem.getMode(stack) != 4) {
-                level.updateNeighbourForOutputSignal(pos, this);
-                BlockEntityUpdate.packet(tile);
-                return InteractionResult.SUCCESS;
-            }
-        }
-
-        if ((!stack.isEmpty()) && (tile.getItemHandler().getItem(0).isEmpty())) {
-            if (stack.is(WizardsRebornItemTags.ARCANE_LUMOS)) {
-                if (stack.getCount() > 1) {
-                    player.getItemInHand(hand).setCount(stack.getCount() - 1);
-                    stack.setCount(1);
-                    tile.getItemHandler().setItem(0, stack);
-                    level.updateNeighbourForOutputSignal(pos, this);
-                    BlockEntityUpdate.packet(tile);
-                    level.playSound(null, pos, WizardsRebornSounds.PEDESTAL_INSERT.get(), SoundSource.BLOCKS, 1.0f, 1.0f);
-                    return InteractionResult.SUCCESS;
-                } else {
-                    tile.getItemHandler().setItem(0, stack);
-                    player.getInventory().removeItem(player.getItemInHand(hand));
-                    level.updateNeighbourForOutputSignal(pos, this);
-                    BlockEntityUpdate.packet(tile);
-                    level.playSound(null, pos, WizardsRebornSounds.PEDESTAL_INSERT.get(), SoundSource.BLOCKS, 1.0f, 1.0f);
-                    return InteractionResult.SUCCESS;
-                }
-            }
-        }
-
-        if (!tile.getItemHandler().getItem(0).isEmpty()) {
-            if (player.getInventory().getSlotWithRemainingSpace(tile.getItemHandler().getItem(0)) != -1 || player.getInventory().getFreeSlot() > -1) {
-                player.getInventory().add(tile.getItemHandler().getItem(0).copy());
-            } else {
-                level.addFreshEntity(new ItemEntity(level, pos.getX() + 0.5F, pos.getY() + 1.0F, pos.getZ() + 0.5F, tile.getItemHandler().getItem(0).copy()));
-            }
-            tile.getItemHandler().removeItem(0, 1);
-            level.updateNeighbourForOutputSignal(pos, this);
-            BlockEntityUpdate.packet(tile);
-            level.playSound(null, pos, WizardsRebornSounds.PEDESTAL_REMOVE.get(), SoundSource.BLOCKS, 1.0f, 1.0f);
-            return InteractionResult.SUCCESS;
-        }
-
-        return InteractionResult.PASS;
-    }
-
-    @Override
-    public InteractionResult useTotem(BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hit) {
-        return use(state, level, pos, player, hand, hit);
     }
 
     @Override
@@ -172,10 +107,67 @@ public class TotemOfFlamesBlock extends Block implements EntityBlock, SimpleWate
     }
 
     @Override
+    public void onRemove(@Nonnull BlockState state, @Nonnull Level level, @Nonnull BlockPos pos, @Nonnull BlockState newState, boolean isMoving) {
+        if (state.getBlock() != newState.getBlock()) {
+            BlockEntity blockEntity = level.getBlockEntity(pos);
+            if (blockEntity instanceof BlockSimpleInventory blockSimpleInventory) {
+                net.minecraft.world.Containers.dropContents(level, pos, (blockSimpleInventory).getItemHandler());
+            }
+        }
+        super.onRemove(state, level, pos, newState, isMoving);
+    }
+
+    @Override
+    public InteractionResult use(BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hit) {
+        TotemOfFlamesBlockEntity blockEntity = (TotemOfFlamesBlockEntity) level.getBlockEntity(pos);
+        ItemStack stack = player.getItemInHand(hand).copy();
+
+        if (!WissenWandItem.isClickable(stack)) {
+            level.updateNeighbourForOutputSignal(pos, this);
+            BlockEntityUpdate.packet(blockEntity);
+            return InteractionResult.SUCCESS;
+        }
+
+        Container container = blockEntity.getItemHandler();
+        if ((!stack.isEmpty()) && (container.getItem(0).isEmpty())) {
+            if (stack.is(WizardsRebornItemTags.ARCANE_LUMOS)) {
+                if (stack.getCount() > 1) {
+                    player.getItemInHand(hand).setCount(stack.getCount() - 1);
+                    stack.setCount(1);
+                    container.setItem(0, stack);
+                } else {
+                    container.setItem(0, stack);
+                    player.getInventory().removeItem(player.getItemInHand(hand));
+                }
+                level.updateNeighbourForOutputSignal(pos, this);
+                BlockEntityUpdate.packet(blockEntity);
+                level.playSound(null, pos, WizardsRebornSounds.PEDESTAL_INSERT.get(), SoundSource.BLOCKS, 1.0f, 1.0f);
+                return InteractionResult.SUCCESS;
+            }
+        }
+
+        if (!container.getItem(0).isEmpty()) {
+            BlockSimpleInventory.addHandPlayerItem(level, player, hand, stack, container.getItem(0));
+            container.removeItem(0, 1);
+            level.updateNeighbourForOutputSignal(pos, this);
+            BlockEntityUpdate.packet(blockEntity);
+            level.playSound(null, pos, WizardsRebornSounds.PEDESTAL_REMOVE.get(), SoundSource.BLOCKS, 1.0f, 1.0f);
+            return InteractionResult.SUCCESS;
+        }
+
+        return InteractionResult.PASS;
+    }
+
+    @Override
     public void setPlacedBy(Level level, BlockPos pos, BlockState state, @Nullable LivingEntity placer, ItemStack stack) {
         if (level.getBlockState(pos.below()).getBlock() == WizardsRebornBlocks.ARCANE_PEDESTAL.get()) {
             level.setBlockAndUpdate(pos.below(), WizardsRebornBlocks.TOTEM_BASE.get().defaultBlockState());
         }
+    }
+
+    @Override
+    public InteractionResult useTotem(BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hit) {
+        return use(state, level, pos, player, hand, hit);
     }
 
     @Nullable
@@ -197,8 +189,8 @@ public class TotemOfFlamesBlock extends Block implements EntityBlock, SimpleWate
 
     @Override
     public int getAnalogOutputSignal(BlockState state, Level level, BlockPos pos) {
-        BlockSimpleInventory tile = (BlockSimpleInventory) level.getBlockEntity(pos);
-        return AbstractContainerMenu.getRedstoneSignalFromContainer(tile.getItemHandler());
+        BlockSimpleInventory blockEntity = (BlockSimpleInventory) level.getBlockEntity(pos);
+        return AbstractContainerMenu.getRedstoneSignalFromContainer(blockEntity.getItemHandler());
     }
 
     public static int getLightLevel(BlockState state) {

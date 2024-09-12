@@ -1,4 +1,4 @@
-package mod.maxbogomol.wizards_reborn.common.network.tileentity;
+package mod.maxbogomol.wizards_reborn.common.network.block;
 
 import mod.maxbogomol.fluffy_fur.client.particle.ParticleBuilder;
 import mod.maxbogomol.fluffy_fur.client.particle.data.ColorParticleData;

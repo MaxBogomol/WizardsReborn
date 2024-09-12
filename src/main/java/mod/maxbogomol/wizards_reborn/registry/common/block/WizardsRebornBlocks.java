@@ -477,6 +477,7 @@ public class WizardsRebornBlocks {
     public static final RegistryObject<LiquidBlock> ALCHEMY_OIL = BLOCKS.register("alchemy_oil", () -> new LiquidBlock(WizardsRebornFluids.ALCHEMY_OIL, BlockBehaviour.Properties.copy(Blocks.WATER)));
     public static final RegistryObject<LiquidBlock> OIL_TEA = BLOCKS.register("oil_tea", () -> new LiquidBlock(WizardsRebornFluids.OIL_TEA, BlockBehaviour.Properties.copy(Blocks.WATER)));
     public static final RegistryObject<LiquidBlock> WISSEN_TEA = BLOCKS.register("wissen_tea", () -> new LiquidBlock(WizardsRebornFluids.WISSEN_TEA, BlockBehaviour.Properties.copy(Blocks.WATER)));
+    public static final RegistryObject<LiquidBlock> MILK_TEA = BLOCKS.register("milk_tea", () -> new LiquidBlock(WizardsRebornFluids.MILK_TEA, BlockBehaviour.Properties.copy(Blocks.WATER)));
     public static final RegistryObject<LiquidBlock> MUSHROOM_BREW = BLOCKS.register("mushroom_brew", () -> new LiquidBlock(WizardsRebornFluids.MUSHROOM_BREW, BlockBehaviour.Properties.copy(Blocks.WATER)));
     public static final RegistryObject<LiquidBlock> HELLISH_MUSHROOM_BREW = BLOCKS.register("hellish_mushroom_brew", () -> new LiquidBlock(WizardsRebornFluids.HELLISH_MUSHROOM_BREW, BlockBehaviour.Properties.copy(Blocks.WATER)));
     public static final RegistryObject<LiquidBlock> MOR_BREW = BLOCKS.register("mor_brew", () -> new LiquidBlock(WizardsRebornFluids.MOR_BREW, BlockBehaviour.Properties.copy(Blocks.WATER)));

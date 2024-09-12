@@ -39,6 +39,9 @@ public class WizardsRebornFluids {
     public static final RegistryObject<FlowingFluid> WISSEN_TEA = FLUIDS.register("wissen_tea", () -> new ForgeFlowingFluid.Source(WizardsRebornFluids.WISSEN_TEA_PROPERTIES));
     public static final RegistryObject<FlowingFluid> FLOWING_WISSEN_TEA = FLUIDS.register("flowing_wissen_tea", () -> new ForgeFlowingFluid.Flowing(WizardsRebornFluids.WISSEN_TEA_PROPERTIES));
 
+    public static final RegistryObject<FlowingFluid> MILK_TEA = FLUIDS.register("milk_tea", () -> new ForgeFlowingFluid.Source(WizardsRebornFluids.MILK_TEA_PROPERTIES));
+    public static final RegistryObject<FlowingFluid> FLOWING_MILK_TEA = FLUIDS.register("flowing_milk_tea", () -> new ForgeFlowingFluid.Flowing(WizardsRebornFluids.MILK_TEA_PROPERTIES));
+
     public static final RegistryObject<FlowingFluid> MUSHROOM_BREW  = FLUIDS.register("mushroom_brew", () -> new ForgeFlowingFluid.Source(WizardsRebornFluids.MUSHROOM_BREW_PROPERTIES));
     public static final RegistryObject<FlowingFluid> FLOWING_MUSHROOM_BREW = FLUIDS.register("flowing_mushroom_brew", () -> new ForgeFlowingFluid.Flowing(WizardsRebornFluids.MUSHROOM_BREW_PROPERTIES));
 
@@ -59,6 +62,8 @@ public class WizardsRebornFluids {
             0xFFBD7C81, new Vector3f(189f / 255f, 124f / 255f, 129f / 255f), FluidType.Properties.create().density(1).viscosity(15).sound(SoundActions.BUCKET_FILL, SoundEvents.BUCKET_FILL).sound(SoundActions.BUCKET_EMPTY, SoundEvents.BUCKET_EMPTY)));
     public static final RegistryObject<FluidType> WISSEN_TEA_TYPE =  FLUID_TYPES.register("wissen_tea", () -> new CustomFluidType( new ResourceLocation("block/water_still"),  new ResourceLocation("block/water_flow"), new ResourceLocation("misc/underwater"),
             0xFF77A4D0, new Vector3f(119f / 255f, 164f / 255f, 208f / 255f), FluidType.Properties.create().density(1).viscosity(15).sound(SoundActions.BUCKET_FILL, SoundEvents.BUCKET_FILL).sound(SoundActions.BUCKET_EMPTY, SoundEvents.BUCKET_EMPTY)));
+    public static final RegistryObject<FluidType> MILK_TEA_TYPE =  FLUID_TYPES.register("milk_tea", () -> new CustomFluidType( new ResourceLocation("block/water_still"),  new ResourceLocation("block/water_flow"), new ResourceLocation("misc/underwater"),
+            0xFFC2DDEE, new Vector3f(194f / 255f, 221f / 255f, 238f / 255f), FluidType.Properties.create().density(1).viscosity(15).sound(SoundActions.BUCKET_FILL, SoundEvents.BUCKET_FILL).sound(SoundActions.BUCKET_EMPTY, SoundEvents.BUCKET_EMPTY)));
     public static final RegistryObject<FluidType> MUSHROOM_BREW_TYPE =  FLUID_TYPES.register("mushroom_brew", () -> new CustomFluidType( new ResourceLocation("block/water_still"),  new ResourceLocation("block/water_flow"), new ResourceLocation("misc/underwater"),
             0xFF8D6B53, new Vector3f(141f / 255f, 107f / 255f, 83f / 255f), FluidType.Properties.create().density(1).viscosity(15).sound(SoundActions.BUCKET_FILL, SoundEvents.BUCKET_FILL).sound(SoundActions.BUCKET_EMPTY, SoundEvents.BUCKET_EMPTY)));
     public static final RegistryObject<FluidType> HELLISH_MUSHROOM_BREW_TYPE =  FLUID_TYPES.register("hellish_mushroom_brew", () -> new CustomFluidType( new ResourceLocation("block/water_still"),  new ResourceLocation("block/water_flow"), new ResourceLocation("misc/underwater"),
@@ -84,6 +89,10 @@ public class WizardsRebornFluids {
             WISSEN_TEA_TYPE, WISSEN_TEA, FLOWING_WISSEN_TEA)
             .slopeFindDistance(1).levelDecreasePerBlock(1).block(WizardsRebornBlocks.WISSEN_TEA)
             .bucket(WizardsRebornItems.WISSEN_TEA_BUCKET);
+    public static final ForgeFlowingFluid.Properties MILK_TEA_PROPERTIES = new ForgeFlowingFluid.Properties(
+            MILK_TEA_TYPE, MILK_TEA, FLOWING_MILK_TEA)
+            .slopeFindDistance(1).levelDecreasePerBlock(1).block(WizardsRebornBlocks.MILK_TEA)
+            .bucket(WizardsRebornItems.MILK_TEA_BUCKET);
     public static final ForgeFlowingFluid.Properties MUSHROOM_BREW_PROPERTIES = new ForgeFlowingFluid.Properties(
             MUSHROOM_BREW_TYPE, MUSHROOM_BREW, FLOWING_MUSHROOM_BREW)
             .slopeFindDistance(1).levelDecreasePerBlock(1).block(WizardsRebornBlocks.MUSHROOM_BREW)
@@ -118,6 +127,8 @@ public class WizardsRebornFluids {
             ItemBlockRenderTypes.setRenderLayer(WizardsRebornFluids.FLOWING_OIL_TEA.get(), RenderType.translucent());
             ItemBlockRenderTypes.setRenderLayer(WizardsRebornFluids.WISSEN_TEA.get(), RenderType.translucent());
             ItemBlockRenderTypes.setRenderLayer(WizardsRebornFluids.FLOWING_WISSEN_TEA.get(), RenderType.translucent());
+            ItemBlockRenderTypes.setRenderLayer(WizardsRebornFluids.MILK_TEA.get(), RenderType.translucent());
+            ItemBlockRenderTypes.setRenderLayer(WizardsRebornFluids.FLOWING_MILK_TEA.get(), RenderType.translucent());
             ItemBlockRenderTypes.setRenderLayer(WizardsRebornFluids.MUSHROOM_BREW.get(), RenderType.translucent());
             ItemBlockRenderTypes.setRenderLayer(WizardsRebornFluids.FLOWING_MUSHROOM_BREW.get(), RenderType.translucent());
             ItemBlockRenderTypes.setRenderLayer(WizardsRebornFluids.HELLISH_MUSHROOM_BREW.get(), RenderType.translucent());

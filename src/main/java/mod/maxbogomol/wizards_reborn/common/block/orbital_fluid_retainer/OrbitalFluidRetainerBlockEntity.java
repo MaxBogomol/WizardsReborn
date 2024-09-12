@@ -101,10 +101,10 @@ public class OrbitalFluidRetainerBlockEntity extends PipeBaseBlockEntity impleme
     }
 
     public void initConnections() {
-        Block block = level.getBlockState(worldPosition).getBlock();
+        Block block = level.getBlockState(getBlockPos()).getBlock();
         for (Direction direction : directions) {
-            BlockState facingState = level.getBlockState(worldPosition.relative(direction));
-            BlockEntity facingBE = level.getBlockEntity(worldPosition.relative(direction));
+            BlockState facingState = level.getBlockState(getBlockPos().relative(direction));
+            BlockEntity facingBE = level.getBlockEntity(getBlockPos().relative(direction));
             if (facingState.is(WizardsRebornBlockTags.FLUID_PIPE_CONNECTION)) {
                 if (facingBE instanceof PipeBaseBlockEntity && !((PipeBaseBlockEntity) facingBE).getConnection(direction.getOpposite()).transfer) {
                     connections[direction.get3DDataValue()] = PipeConnection.NONE;
@@ -117,8 +117,8 @@ public class OrbitalFluidRetainerBlockEntity extends PipeBaseBlockEntity impleme
         }
         loaded = true;
         setChanged();
-        level.getChunkAt(worldPosition).setUnsaved(true);
-        level.updateNeighbourForOutputSignal(worldPosition, block);
+        level.getChunkAt(getBlockPos()).setUnsaved(true);
+        level.updateNeighbourForOutputSignal(getBlockPos(), block);
     }
 
     public int getMaxCapacity() {

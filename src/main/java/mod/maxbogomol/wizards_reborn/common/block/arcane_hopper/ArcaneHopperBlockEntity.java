@@ -385,15 +385,15 @@ public class ArcaneHopperBlockEntity extends RandomizableContainerBlockEntity im
     }
 
     public double getLevelX() {
-        return (double)this.worldPosition.getX() + 0.5D;
+        return (double)this.getBlockPos().getX() + 0.5D;
     }
 
     public double getLevelY() {
-        return (double)this.worldPosition.getY() + 0.5D;
+        return (double)this.getBlockPos().getY() + 0.5D;
     }
 
     public double getLevelZ() {
-        return (double)this.worldPosition.getZ() + 0.5D;
+        return (double)this.getBlockPos().getZ() + 0.5D;
     }
 
     public void setCooldown(int pCooldownTime) {

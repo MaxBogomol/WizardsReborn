@@ -17,7 +17,7 @@ import mod.maxbogomol.wizards_reborn.client.gui.container.ArcaneWorkbenchContain
 import mod.maxbogomol.wizards_reborn.client.sound.ArcaneWorkbenchSoundInstance;
 import mod.maxbogomol.wizards_reborn.common.config.Config;
 import mod.maxbogomol.wizards_reborn.common.network.PacketHandler;
-import mod.maxbogomol.wizards_reborn.common.network.tileentity.ArcaneWorkbenchBurstEffectPacket;
+import mod.maxbogomol.wizards_reborn.common.network.block.ArcaneWorkbenchBurstEffectPacket;
 import mod.maxbogomol.wizards_reborn.common.recipe.ArcaneWorkbenchRecipe;
 import mod.maxbogomol.wizards_reborn.registry.client.WizardsRebornParticles;
 import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornRecipes;
@@ -251,7 +251,7 @@ public class ArcaneWorkbenchBlockEntity extends NameableBlockEntityBase implemen
                                     .setSpinData(SpinParticleData.create().randomSpin(0.2f).build())
                                     .setLifetime(20)
                                     .addVelocity(xx / 100f, 0.02f, yy / 100f)
-                                    .spawn(level, worldPosition.getX() + 0.5F + (-0.1875F * xx), worldPosition.getY() + 1.125F, worldPosition.getZ() + 0.5F + (-0.1875F * yy));
+                                    .spawn(level, getBlockPos().getX() + 0.5F + (-0.1875F * xx), getBlockPos().getY() + 1.125F, getBlockPos().getZ() + 0.5F + (-0.1875F * yy));
                         }
                     }
 
@@ -284,7 +284,7 @@ public class ArcaneWorkbenchBlockEntity extends NameableBlockEntityBase implemen
                                     .setSpinData(SpinParticleData.create().randomSpin(0.2f).build())
                                     .setLifetime(20)
                                     .addVelocity(-xx / 20f, 0.018f, -yy / 20f)
-                                    .spawn(level, worldPosition.getX() + 0.5F + xx, worldPosition.getY() + 1.125F, worldPosition.getZ() + 0.5F + yy);
+                                    .spawn(level, getBlockPos().getX() + 0.5F + xx, getBlockPos().getY() + 1.125F, getBlockPos().getZ() + 0.5F + yy);
                         }
                     }
                 }

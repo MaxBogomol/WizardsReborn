@@ -6,7 +6,7 @@ import mod.maxbogomol.wizards_reborn.WizardsReborn;
 import mod.maxbogomol.wizards_reborn.common.network.crystalritual.CrystalInfusionBurstEffectPacket;
 import mod.maxbogomol.wizards_reborn.common.network.crystalritual.CrystalRitualBurstEffectPacket;
 import mod.maxbogomol.wizards_reborn.common.network.spell.*;
-import mod.maxbogomol.wizards_reborn.common.network.tileentity.*;
+import mod.maxbogomol.wizards_reborn.common.network.block.*;
 import net.minecraft.core.BlockPos;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerChunkCache;

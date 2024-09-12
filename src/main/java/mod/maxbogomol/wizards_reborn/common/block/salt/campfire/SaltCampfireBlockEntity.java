@@ -112,7 +112,7 @@ public class SaltCampfireBlockEntity extends ExposedBlockSimpleInventory impleme
                         .setScaleData(GenericParticleData.create(0.3f, 0.55f, 0).setEasing(Easing.QUINTIC_IN_OUT).build())
                         .setSpinData(SpinParticleData.create().randomOffset().randomSpin(0.05f).build())
                         .setLifetime(30)
-                        .spawn(level, worldPosition.getX() + pos.x(), worldPosition.getY() + pos.y(), worldPosition.getZ() + pos.z());
+                        .spawn(level, getBlockPos().getX() + pos.x(), getBlockPos().getY() + pos.y(), getBlockPos().getZ() + pos.z());
             }
             if (random.nextFloat() < 0.45) {
                 ParticleBuilder.create(random.nextFloat() < 0.3 ? FluffyFurParticles.TINY_STAR : FluffyFurParticles.SPARKLE)
@@ -127,7 +127,7 @@ public class SaltCampfireBlockEntity extends ExposedBlockSimpleInventory impleme
                         .setLifetime(60)
                         .randomVelocity(0.0025f)
                         .addVelocity(0, 0.025f, 0)
-                        .spawn(level, worldPosition.getX() + pos.x(), worldPosition.getY() + pos.y(), worldPosition.getZ() + pos.z());
+                        .spawn(level, getBlockPos().getX() + pos.x(), getBlockPos().getY() + pos.y(), getBlockPos().getZ() + pos.z());
             }
             if (random.nextFloat() < 0.45) {
                 ParticleBuilder.create(FluffyFurParticles.TINY_WISP)
@@ -137,7 +137,7 @@ public class SaltCampfireBlockEntity extends ExposedBlockSimpleInventory impleme
                         .setLifetime(30)
                         .randomVelocity(0.005f)
                         .addVelocity(0, 0.04f, 0)
-                        .spawn(level, worldPosition.getX() + pos.x(), worldPosition.getY() + pos.y(), worldPosition.getZ() + pos.z());
+                        .spawn(level, getBlockPos().getX() + pos.x(), getBlockPos().getY() + pos.y(), getBlockPos().getZ() + pos.z());
             }
             if (random.nextFloat() < 0.3) {
                 ParticleBuilder.create(FluffyFurParticles.SMOKE)
@@ -150,7 +150,7 @@ public class SaltCampfireBlockEntity extends ExposedBlockSimpleInventory impleme
                         .setLifetime(60)
                         .randomVelocity(0.005f)
                         .addVelocity(0, 0.03f, 0)
-                        .spawn(level, worldPosition.getX() + pos.x(), worldPosition.getY() + pos.y(), worldPosition.getZ() + pos.z());
+                        .spawn(level, getBlockPos().getX() + pos.x(), getBlockPos().getY() + pos.y(), getBlockPos().getZ() + pos.z());
             }
 
             if (isCosmic) {
@@ -164,7 +164,7 @@ public class SaltCampfireBlockEntity extends ExposedBlockSimpleInventory impleme
                             .randomVelocity(0.015f)
                             .flatRandomOffset(0.2f, 0.2f, 0.2f)
                             .addVelocity(0, 0.025f, 0)
-                            .spawn(level, worldPosition.getX() + pos.x(), worldPosition.getY() + pos.y() + 0.1f, worldPosition.getZ() + pos.z());
+                            .spawn(level, getBlockPos().getX() + pos.x(), getBlockPos().getY() + pos.y() + 0.1f, getBlockPos().getZ() + pos.z());
                 }
                 if (random.nextFloat() < 0.1) {
                     ParticleBuilder.create(FluffyFurParticles.STAR)
@@ -176,7 +176,7 @@ public class SaltCampfireBlockEntity extends ExposedBlockSimpleInventory impleme
                             .randomVelocity(0.015f)
                             .flatRandomOffset(0.2f, 0.2f, 0.2f)
                             .addVelocity(0, 0.025f, 0)
-                            .spawn(level, worldPosition.getX() + pos.x(), worldPosition.getY() + pos.y() + 0.1f, worldPosition.getZ() + pos.z());
+                            .spawn(level, getBlockPos().getX() + pos.x(), getBlockPos().getY() + pos.y() + 0.1f, getBlockPos().getZ() + pos.z());
                 }
             }
 
@@ -211,7 +211,7 @@ public class SaltCampfireBlockEntity extends ExposedBlockSimpleInventory impleme
                                 .setLifetime(50)
                                 .randomVelocity(0.005f)
                                 .addVelocity(0, 0.03f, 0)
-                                .spawn(level, worldPosition.getX() + pos.x(), worldPosition.getY() + pos.y(), worldPosition.getZ() + pos.z());
+                                .spawn(level, getBlockPos().getX() + pos.x(), getBlockPos().getY() + pos.y(), getBlockPos().getZ() + pos.z());
                     }
                 }
             }

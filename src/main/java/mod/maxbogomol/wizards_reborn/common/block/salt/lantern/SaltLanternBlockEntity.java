@@ -79,7 +79,7 @@ public class SaltLanternBlockEntity extends SaltTorchBlockEntity {
                         .setScaleData(GenericParticleData.create(0.1f, 0.35f, 0).setEasing(Easing.QUINTIC_IN_OUT).build())
                         .setSpinData(SpinParticleData.create().randomOffset().randomSpin(0.05f).build())
                         .setLifetime(30)
-                        .spawn(level, worldPosition.getX() + pos.x(), worldPosition.getY() + pos.y(), worldPosition.getZ() + pos.z());
+                        .spawn(level, getBlockPos().getX() + pos.x(), getBlockPos().getY() + pos.y(), getBlockPos().getZ() + pos.z());
             }
             if (random.nextFloat() < 0.45) {
                 ParticleBuilder.create(random.nextFloat() < 0.3 ? FluffyFurParticles.TINY_STAR : FluffyFurParticles.SPARKLE)
@@ -93,7 +93,7 @@ public class SaltLanternBlockEntity extends SaltTorchBlockEntity {
                         .setSpinData(SpinParticleData.create().randomOffset().randomSpin(0.05f).build())
                         .setLifetime(60)
                         .randomVelocity(0.00625f)
-                        .spawn(level, worldPosition.getX() + pos.x(), worldPosition.getY() + pos.y(), worldPosition.getZ() + pos.z());
+                        .spawn(level, getBlockPos().getX() + pos.x(), getBlockPos().getY() + pos.y(), getBlockPos().getZ() + pos.z());
             }
             if (random.nextFloat() < 0.45) {
                 ParticleBuilder.create(FluffyFurParticles.TINY_WISP)
@@ -102,7 +102,7 @@ public class SaltLanternBlockEntity extends SaltTorchBlockEntity {
                         .setScaleData(GenericParticleData.create(0.15f, 0).setEasing(Easing.SINE_OUT).build())
                         .setLifetime(30)
                         .randomVelocity(0.015f)
-                        .spawn(level, worldPosition.getX() + pos.x(), worldPosition.getY() + pos.y(), worldPosition.getZ() + pos.z());
+                        .spawn(level, getBlockPos().getX() + pos.x(), getBlockPos().getY() + pos.y(), getBlockPos().getZ() + pos.z());
             }
             if (random.nextFloat() < 0.3) {
                 ParticleBuilder.create(FluffyFurParticles.SMOKE)
@@ -115,7 +115,7 @@ public class SaltLanternBlockEntity extends SaltTorchBlockEntity {
                         .setLifetime(60)
                         .randomVelocity(0.0035f)
                         .addVelocity(0, 0.02f, 0)
-                        .spawn(level, worldPosition.getX() + pos.x(), worldPosition.getY() + pos.y(), worldPosition.getZ() + pos.z());
+                        .spawn(level, getBlockPos().getX() + pos.x(), getBlockPos().getY() + pos.y(), getBlockPos().getZ() + pos.z());
             }
 
             if (isCosmic) {
@@ -129,7 +129,7 @@ public class SaltLanternBlockEntity extends SaltTorchBlockEntity {
                             .randomVelocity(0.015f)
                             .flatRandomOffset(0.2f, 0.2f, 0.2f)
                             .addVelocity(0, 0.025f, 0)
-                            .spawn(level, worldPosition.getX() + pos.x(), worldPosition.getY() + pos.y() + 0.1f, worldPosition.getZ() + pos.z());
+                            .spawn(level, getBlockPos().getX() + pos.x(), getBlockPos().getY() + pos.y() + 0.1f, getBlockPos().getZ() + pos.z());
                 }
                 if (random.nextFloat() < 0.1) {
                     ParticleBuilder.create(FluffyFurParticles.STAR)
@@ -141,7 +141,7 @@ public class SaltLanternBlockEntity extends SaltTorchBlockEntity {
                             .randomVelocity(0.015f)
                             .flatRandomOffset(0.2f, 0.2f, 0.2f)
                             .addVelocity(0, 0.025f, 0)
-                            .spawn(level, worldPosition.getX() + pos.x(), worldPosition.getY() + pos.y() + 0.1f, worldPosition.getZ() + pos.z());
+                            .spawn(level, getBlockPos().getX() + pos.x(), getBlockPos().getY() + pos.y() + 0.1f, getBlockPos().getZ() + pos.z());
                 }
             }
         }

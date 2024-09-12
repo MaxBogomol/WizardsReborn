@@ -88,7 +88,6 @@ public class WissenCrystallizerBlock extends Block implements EntityBlock, Simpl
         if (state.getValue(BlockStateProperties.WATERLOGGED)) {
             level.scheduleTick(currentPos, Fluids.WATER, Fluids.WATER.getTickDelay(level));
         }
-
         return super.updateShape(state, direction, neighborState, level, currentPos, neighborPos);
     }
 

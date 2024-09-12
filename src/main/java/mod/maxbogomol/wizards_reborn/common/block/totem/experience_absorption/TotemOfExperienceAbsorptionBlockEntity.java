@@ -16,7 +16,7 @@ import mod.maxbogomol.wizards_reborn.client.particle.ExperienceTotemBurst;
 import mod.maxbogomol.wizards_reborn.client.sound.TotemOfExperienceAbsorptionSoundInstance;
 import mod.maxbogomol.wizards_reborn.common.config.Config;
 import mod.maxbogomol.wizards_reborn.common.network.PacketHandler;
-import mod.maxbogomol.wizards_reborn.common.network.tileentity.ExperienceTotemBurstEffectPacket;
+import mod.maxbogomol.wizards_reborn.common.network.block.ExperienceTotemBurstEffectPacket;
 import mod.maxbogomol.wizards_reborn.registry.common.block.WizardsRebornBlockEntities;
 import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornSounds;
 import net.minecraft.core.BlockPos;
@@ -117,7 +117,7 @@ public class TotemOfExperienceAbsorptionBlockEntity extends BlockEntityBase impl
                             .setScaleData(GenericParticleData.create(0.2f * getStage(), 0).build())
                             .setLifetime(20)
                             .randomVelocity(0.015f * getStage())
-                            .spawn(level, worldPosition.getX() + 0.5F, worldPosition.getY() + 0.5F, worldPosition.getZ() + 0.5F);
+                            .spawn(level, getBlockPos().getX() + 0.5F, getBlockPos().getY() + 0.5F, getBlockPos().getZ() + 0.5F);
                 }
                 if (random.nextFloat() < 0.1) {
                     ParticleBuilder.create(random.nextBoolean() ? FluffyFurParticles.SQUARE : FluffyFurParticles.SPARKLE)
@@ -127,7 +127,7 @@ public class TotemOfExperienceAbsorptionBlockEntity extends BlockEntityBase impl
                             .setSpinData(SpinParticleData.create().randomSpin(0.5f).build())
                             .setLifetime(30)
                             .randomVelocity(0.015f * getStage())
-                            .spawn(level, worldPosition.getX() + 0.5F, worldPosition.getY() + 0.5F, worldPosition.getZ() + 0.5F);
+                            .spawn(level, getBlockPos().getX() + 0.5F, getBlockPos().getY() + 0.5F, getBlockPos().getZ() + 0.5F);
                 }
             }
 
@@ -141,7 +141,7 @@ public class TotemOfExperienceAbsorptionBlockEntity extends BlockEntityBase impl
                             .setLifetime(40)
                             .randomVelocity(0.085f, 0.05f, 0.085f)
                             .addVelocity(0, 0.02f, 0)
-                            .spawn(level, worldPosition.getX() + 0.5F, worldPosition.getY() + 0.5F, worldPosition.getZ() + 0.5F);
+                            .spawn(level, getBlockPos().getX() + 0.5F, getBlockPos().getY() + 0.5F, getBlockPos().getZ() + 0.5F);
                 }
             }
 
@@ -154,7 +154,7 @@ public class TotemOfExperienceAbsorptionBlockEntity extends BlockEntityBase impl
                             .setLifetime(60)
                             .randomVelocity(0.015f * getStage())
                             .addVelocity(0, 0.05f * getStage(), 0)
-                            .spawn(level, worldPosition.getX() + 0.5F, worldPosition.getY() + 0.5F, worldPosition.getZ() + 0.5F);
+                            .spawn(level, getBlockPos().getX() + 0.5F, getBlockPos().getY() + 0.5F, getBlockPos().getZ() + 0.5F);
                 }
 
                 if (sound == null) {

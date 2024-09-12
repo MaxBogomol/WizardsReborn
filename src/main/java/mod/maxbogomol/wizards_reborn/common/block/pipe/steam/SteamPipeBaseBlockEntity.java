@@ -90,7 +90,7 @@ public abstract class SteamPipeBaseBlockEntity extends PipeBaseBlockEntity imple
         for (Direction facing : Direction.values()) {
             if (!getConnection(facing).transfer)
                 continue;
-            BlockEntity tile = level.getBlockEntity(worldPosition.relative(facing));
+            BlockEntity tile = level.getBlockEntity(getBlockPos().relative(facing));
             if (tile instanceof SteamPipeBaseBlockEntity && !((SteamPipeBaseBlockEntity) tile).clogged)
                 return true;
         }

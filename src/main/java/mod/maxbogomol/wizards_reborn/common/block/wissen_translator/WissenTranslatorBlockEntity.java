@@ -19,8 +19,8 @@ import mod.maxbogomol.wizards_reborn.common.config.Config;
 import mod.maxbogomol.wizards_reborn.common.item.equipment.WissenWandItem;
 import mod.maxbogomol.wizards_reborn.common.network.PacketHandler;
 import mod.maxbogomol.wizards_reborn.common.network.WissenSendEffectPacket;
-import mod.maxbogomol.wizards_reborn.common.network.tileentity.WissenTranslatorBurstEffectPacket;
-import mod.maxbogomol.wizards_reborn.common.network.tileentity.WissenTranslatorSendEffectPacket;
+import mod.maxbogomol.wizards_reborn.common.network.block.WissenTranslatorBurstEffectPacket;
+import mod.maxbogomol.wizards_reborn.common.network.block.WissenTranslatorSendEffectPacket;
 import mod.maxbogomol.wizards_reborn.registry.common.block.WizardsRebornBlockEntities;
 import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornSounds;
 import mod.maxbogomol.wizards_reborn.registry.common.item.WizardsRebornItemTags;
@@ -90,11 +90,11 @@ public class WissenTranslatorBlockEntity extends ExposedBlockSimpleInventory imp
 
             if (isToBlock) {
                 if (level.isLoaded(new BlockPos(blockToX, blockToY, blockToZ))) {
-                    BlockEntity tileentity = level.getBlockEntity(new BlockPos(blockToX, blockToY, blockToZ));
-                    if (tileentity instanceof IWissenBlockEntity wissenTileEntity) {
-                        if (wissenTileEntity.canReceiveWissen() && (cooldown <= 0) && canWork()) {
+                    BlockEntity blockEntity = level.getBlockEntity(new BlockPos(blockToX, blockToY, blockToZ));
+                    if (blockEntity instanceof IWissenBlockEntity wissenBlockEntity) {
+                        if (wissenBlockEntity.canReceiveWissen() && (cooldown <= 0) && canWork()) {
                             int removeRemain = WissenUtils.getRemoveWissenRemain(getWissen(), getWissenPerReceive());
-                            int addRemain = WissenUtils.getAddWissenRemain(wissenTileEntity.getWissen(), getWissenPerReceive() - removeRemain, wissenTileEntity.getMaxWissen());
+                            int addRemain = WissenUtils.getAddWissenRemain(wissenBlockEntity.getWissen(), getWissenPerReceive() - removeRemain, wissenBlockEntity.getMaxWissen());
 
                             if ((getWissenPerReceive() - removeRemain - addRemain) > 0) {
                                 removeWissen(getWissenPerReceive() - removeRemain - addRemain);
@@ -118,21 +118,21 @@ public class WissenTranslatorBlockEntity extends ExposedBlockSimpleInventory imp
 
             if (isFromBlock) {
                 if (level.isLoaded(new BlockPos(blockFromX, blockFromY, blockFromZ))) {
-                    BlockEntity tileentity = level.getBlockEntity(new BlockPos(blockFromX, blockFromY, blockFromZ));
-                    if (tileentity instanceof IWissenBlockEntity wissenTileEntity) {
-                        if (wissenTileEntity.canSendWissen() && (cooldown <= 0) && canWork()) {
+                    BlockEntity blockEntity = level.getBlockEntity(new BlockPos(blockFromX, blockFromY, blockFromZ));
+                    if (blockEntity instanceof IWissenBlockEntity wissenBlockEntity) {
+                        if (wissenBlockEntity.canSendWissen() && (cooldown <= 0) && canWork()) {
                             int addRemain = WissenUtils.getAddWissenRemain(getWissen(), getWissenPerReceive(), getMaxWissen());
-                            int removeRemain = WissenUtils.getRemoveWissenRemain(wissenTileEntity.getWissen(), getWissenPerReceive() - addRemain);
+                            int removeRemain = WissenUtils.getRemoveWissenRemain(wissenBlockEntity.getWissen(), getWissenPerReceive() - addRemain);
 
                             if ((getWissenPerReceive() - removeRemain - addRemain) > 0) {
-                                wissenTileEntity.removeWissen(getWissenPerReceive() - removeRemain - addRemain);
+                                wissenBlockEntity.removeWissen(getWissenPerReceive() - removeRemain - addRemain);
                                 addWissenRay(new BlockPos(blockFromX, blockFromY, blockFromZ), getBlockPos(), getWissenPerReceive() - removeRemain - addRemain);
-                                BlockEntityUpdate.packet(tileentity);
+                                BlockEntityUpdate.packet(blockEntity);
 
                                 setCooldown = true;
                                 update = true;
 
-                                level.playSound(WizardsReborn.proxy.getPlayer(), tileentity.getBlockPos(), WizardsRebornSounds.WISSEN_TRANSFER.get(), SoundSource.BLOCKS, 0.1f, (float) (1.1f + ((random.nextFloat() - 0.5D) / 2)));
+                                level.playSound(WizardsReborn.proxy.getPlayer(), blockEntity.getBlockPos(), WizardsRebornSounds.WISSEN_TRANSFER.get(), SoundSource.BLOCKS, 0.1f, (float) (1.1f + ((random.nextFloat() - 0.5D) / 2)));
                             }
                         }
                     } else {
@@ -165,7 +165,7 @@ public class WissenTranslatorBlockEntity extends ExposedBlockSimpleInventory imp
                             .setScaleData(GenericParticleData.create(0.2f * getStage(), 0).build())
                             .setLifetime(20)
                             .randomVelocity(0.015f)
-                            .spawn(level, worldPosition.getX() + 0.5F, worldPosition.getY() + 0.5F, worldPosition.getZ() + 0.5F);
+                            .spawn(level, getBlockPos().getX() + 0.5F, getBlockPos().getY() + 0.5F, getBlockPos().getZ() + 0.5F);
                 }
                 if (random.nextFloat() < 0.1) {
                     ParticleBuilder.create(random.nextBoolean() ? FluffyFurParticles.SQUARE : FluffyFurParticles.SPARKLE)
@@ -175,7 +175,7 @@ public class WissenTranslatorBlockEntity extends ExposedBlockSimpleInventory imp
                             .setSpinData(SpinParticleData.create().randomOffset().randomSpin(0.5f).build())
                             .setLifetime(30)
                             .randomVelocity(0.015f)
-                            .spawn(level, worldPosition.getX() + 0.5F, worldPosition.getY() + 0.5F, worldPosition.getZ() + 0.5F);
+                            .spawn(level, getBlockPos().getX() + 0.5F, getBlockPos().getY() + 0.5F, getBlockPos().getZ() + 0.5F);
                 }
             }
         }
@@ -193,11 +193,7 @@ public class WissenTranslatorBlockEntity extends ExposedBlockSimpleInventory imp
 
     @Override
     public boolean canPlaceItemThroughFace(int index, @NotNull ItemStack stack, @Nullable Direction direction) {
-        if (stack.is(WizardsRebornItemTags.ARCANE_LUMOS)) {
-            return true;
-        }
-
-        return false;
+        return stack.is(WizardsRebornItemTags.ARCANE_LUMOS);
     }
 
     @Override
@@ -260,7 +256,7 @@ public class WissenTranslatorBlockEntity extends ExposedBlockSimpleInventory imp
         return ((float) getWissen() / (float) getMaxWissen());
     }
 
-    public float getRaySpeed() {
+    public double getRaySpeed() {
         return 0.1f;
     }
 
@@ -345,13 +341,13 @@ public class WissenTranslatorBlockEntity extends ExposedBlockSimpleInventory imp
         tag.putInt("blockFromY", posFrom.getY());
         tag.putInt("blockFromZ", posFrom.getZ());
 
-        tag.putFloat("blockX", posFrom.getX() + 0.5f);
-        tag.putFloat("blockY", posFrom.getY() + 0.5f);
-        tag.putFloat("blockZ", posFrom.getZ() + 0.5f);
+        tag.putDouble("blockX", posFrom.getX() + 0.5f);
+        tag.putDouble("blockY", posFrom.getY() + 0.5f);
+        tag.putDouble("blockZ", posFrom.getZ() + 0.5f);
 
-        tag.putFloat("velocityX", (float) -X);
-        tag.putFloat("velocityY", (float) -Y);
-        tag.putFloat("velocityZ", (float) -Z);
+        tag.putDouble("velocityX", -X);
+        tag.putDouble("velocityY", -Y);
+        tag.putDouble("velocityZ", -Z);
 
         tag.putInt("wissen", wissenCount);
         tag.putInt("mitting", 0);
@@ -383,45 +379,45 @@ public class WissenTranslatorBlockEntity extends ExposedBlockSimpleInventory imp
             int blockFromY = tag.getInt("blockFromY");
             int blockFromZ = tag.getInt("blockFromZ");
 
-            float blockX = tag.getFloat("blockX");
-            float blockY = tag.getFloat("blockY");
-            float blockZ = tag.getFloat("blockZ");
+            double blockX = tag.getDouble("blockX");
+            double blockY = tag.getDouble("blockY");
+            double blockZ = tag.getDouble("blockZ");
 
-            float X = tag.getFloat("velocityX") + blockX;
-            float Y = tag.getFloat("velocityY") + blockY;
-            float Z = tag.getFloat("velocityZ") + blockZ;
+            double X = tag.getDouble("velocityX") + blockX;
+            double Y = tag.getDouble("velocityY") + blockY;
+            double Z = tag.getDouble("velocityZ") + blockZ;
 
             if (level.isOutsideBuildHeight(BlockPos.containing(blockX, blockY, blockZ))) {
                 deleteRays.add(i);
             }
 
             if (level.isLoaded(BlockPos.containing(blockX, blockY, blockZ))) {
-                tag.putFloat("blockX", X);
-                tag.putFloat("blockY", Y);
-                tag.putFloat("blockZ", Z);
+                tag.putDouble("blockX", X);
+                tag.putDouble("blockY", Y);
+                tag.putDouble("blockZ", Z);
 
                 Color color = getColor();
 
                 PacketHandler.sendToTracking(level, getBlockPos(), new WissenSendEffectPacket(blockX, blockY, blockZ, X, Y, Z, (float) color.getRed() / 255, (float) color.getGreen()/ 255, (float) color.getBlue() / 255));
 
                 if (tag.getInt("wissen") <= 0) {
-                    PacketHandler.sendToTracking(level, getBlockPos(), new WissenTranslatorBurstEffectPacket(X, Y, Z, (float) color.getRed() / 255, (float) color.getGreen() / 255, (float) color.getBlue() / 255));
+                    PacketHandler.sendToTracking(level, getBlockPos(), new WissenTranslatorBurstEffectPacket((float) X, (float) Y, (float) Z, (float) color.getRed() / 255, (float) color.getGreen() / 255, (float) color.getBlue() / 255));
                     deleteRays.add(i);
                 } else if ((blockFromX != Mth.floor(blockX)) || blockFromY != Mth.floor(blockY) || (blockFromZ != Mth.floor(blockZ))) {
-                    BlockEntity tileentity = level.getBlockEntity(BlockPos.containing(blockX, blockY, blockZ));
-                    if (tileentity instanceof IWissenBlockEntity) {
+                    BlockEntity blockEntity = level.getBlockEntity(BlockPos.containing(blockX, blockY, blockZ));
+                    if (blockEntity instanceof IWissenBlockEntity) {
                         if ((Math.abs(blockX) % 1F > 0.15F && Math.abs(blockX) % 1F <= 0.85F) &&
                                 (Math.abs(blockY) % 1F > 0.15F && Math.abs(blockY) % 1F <= 0.85F) &&
                                 (Math.abs(blockZ) % 1F > 0.15F && Math.abs(blockZ) % 1F <= 0.85F)) {
-                            IWissenBlockEntity wissenTileEntity = (IWissenBlockEntity) tileentity;
+                            IWissenBlockEntity wissenBlockEntity = (IWissenBlockEntity) blockEntity;
 
-                            int addRemain = WissenUtils.getAddWissenRemain(wissenTileEntity.getWissen(), tag.getInt("wissen"), wissenTileEntity.getMaxWissen());
-                            wissenTileEntity.addWissen(tag.getInt("wissen") - addRemain);
+                            int addRemain = WissenUtils.getAddWissenRemain(wissenBlockEntity.getWissen(), tag.getInt("wissen"), wissenBlockEntity.getMaxWissen());
+                            wissenBlockEntity.addWissen(tag.getInt("wissen") - addRemain);
                             level.playSound(WizardsReborn.proxy.getPlayer(), X, Y, Z, WizardsRebornSounds.WISSEN_TRANSFER.get(), SoundSource.BLOCKS, 0.1f, (float) (1f + ((random.nextFloat() - 0.5D) / 2)));
 
-                            BlockEntityUpdate.packet(tileentity);
+                            BlockEntityUpdate.packet(blockEntity);
 
-                            PacketHandler.sendToTracking(level, getBlockPos(), new WissenTranslatorBurstEffectPacket(X, Y, Z, (float) color.getRed() / 255, (float) color.getGreen() / 255, (float) color.getBlue() / 255));
+                            PacketHandler.sendToTracking(level, getBlockPos(), new WissenTranslatorBurstEffectPacket((float) X, (float) Y, (float) Z, (float) color.getRed() / 255, (float) color.getGreen() / 255, (float) color.getBlue() / 255));
                             PacketHandler.sendToTracking(level, getBlockPos(), new WissenTranslatorSendEffectPacket(BlockPos.containing(X, Y, Z)));
 
                             deleteRays.add(i);
@@ -475,12 +471,12 @@ public class WissenTranslatorBlockEntity extends ExposedBlockSimpleInventory imp
     }
 
     @Override
-    public boolean wissenWandReceiveConnect(ItemStack stack, UseOnContext context, BlockEntity tile) {
+    public boolean wissenWandReceiveConnect(ItemStack stack, UseOnContext context, BlockEntity blockEntity) {
         BlockPos oldBlockPos = WissenWandItem.getBlockPos(stack);
-        BlockEntity oldTile = level.getBlockEntity(oldBlockPos);
+        BlockEntity oldBlockEntity = level.getBlockEntity(oldBlockPos);
 
-        if (oldTile instanceof IWissenBlockEntity wissenTile) {
-            if ((!isSameFromAndTo(getBlockPos(), oldBlockPos)) && (wissenTile.canConnectReceiveWissen())) {
+        if (oldBlockEntity instanceof IWissenBlockEntity wissenBlockEntity) {
+            if ((!isSameFromAndTo(getBlockPos(), oldBlockPos)) && (wissenBlockEntity.canConnectReceiveWissen())) {
                 blockFromX = oldBlockPos.getX();
                 blockFromY = oldBlockPos.getY();
                 blockFromZ = oldBlockPos.getZ();
@@ -495,12 +491,12 @@ public class WissenTranslatorBlockEntity extends ExposedBlockSimpleInventory imp
     }
 
     @Override
-    public boolean wissenWandSendConnect(ItemStack stack, UseOnContext context, BlockEntity tile) {
+    public boolean wissenWandSendConnect(ItemStack stack, UseOnContext context, BlockEntity blockEntity) {
         BlockPos oldBlockPos = WissenWandItem.getBlockPos(stack);
-        BlockEntity oldTile = level.getBlockEntity(oldBlockPos);
+        BlockEntity oldBlockEntity = level.getBlockEntity(oldBlockPos);
 
-        if (oldTile instanceof IWissenBlockEntity wissenTile) {
-            if ((!isSameFromAndTo(getBlockPos(), oldBlockPos)) && (wissenTile.canConnectSendWissen())) {
+        if (oldBlockEntity instanceof IWissenBlockEntity wissenBlockEntity) {
+            if ((!isSameFromAndTo(getBlockPos(), oldBlockPos)) && (wissenBlockEntity.canConnectSendWissen())) {
                 blockToX = oldBlockPos.getX();
                 blockToY = oldBlockPos.getY();
                 blockToZ = oldBlockPos.getZ();
@@ -515,7 +511,7 @@ public class WissenTranslatorBlockEntity extends ExposedBlockSimpleInventory imp
     }
 
     @Override
-    public boolean wissenWandReload(ItemStack stack, UseOnContext context, BlockEntity tile) {
+    public boolean wissenWandReload(ItemStack stack, UseOnContext context, BlockEntity blockEntity) {
         isFromBlock = false;
         isToBlock = false;
         BlockEntityUpdate.packet(this);

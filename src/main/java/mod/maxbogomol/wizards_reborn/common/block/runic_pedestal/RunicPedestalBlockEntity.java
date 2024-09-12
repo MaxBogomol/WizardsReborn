@@ -91,12 +91,7 @@ public class RunicPedestalBlockEntity extends NameableBlockSimpleInventory imple
 
     @Override
     protected SimpleContainer createItemHandler() {
-        return new SimpleContainer(100) {
-            @Override
-            public int getMaxStackSize() {
-                return 64;
-            }
-        };
+        return new SimpleContainer(100);
     }
 
     @Nonnull

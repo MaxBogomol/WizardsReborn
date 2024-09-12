@@ -1,10 +1,9 @@
-package mod.maxbogomol.wizards_reborn.common.network.tileentity;
+package mod.maxbogomol.wizards_reborn.common.network.block;
 
 import mod.maxbogomol.fluffy_fur.client.particle.ParticleBuilder;
 import mod.maxbogomol.fluffy_fur.client.particle.data.ColorParticleData;
 import mod.maxbogomol.fluffy_fur.client.particle.data.GenericParticleData;
 import mod.maxbogomol.fluffy_fur.client.particle.data.SpinParticleData;
-import mod.maxbogomol.fluffy_fur.common.easing.Easing;
 import mod.maxbogomol.fluffy_fur.registry.client.FluffyFurParticles;
 import mod.maxbogomol.wizards_reborn.WizardsReborn;
 import mod.maxbogomol.wizards_reborn.common.config.Config;
@@ -16,23 +15,23 @@ import net.minecraftforge.network.NetworkEvent;
 import java.util.Random;
 import java.util.function.Supplier;
 
-public class ArcaneWorkbenchBurstEffectPacket {
+public class AltarOfDroughtBreakEffectPacket {
     private final BlockPos pos;
     private static final Random random = new Random();
 
-    public ArcaneWorkbenchBurstEffectPacket(BlockPos pos) {
+    public AltarOfDroughtBreakEffectPacket(BlockPos pos) {
         this.pos = pos;
     }
 
-    public static ArcaneWorkbenchBurstEffectPacket decode(FriendlyByteBuf buf) {
-        return new ArcaneWorkbenchBurstEffectPacket(buf.readBlockPos());
+    public static AltarOfDroughtBreakEffectPacket decode(FriendlyByteBuf buf) {
+        return new AltarOfDroughtBreakEffectPacket(buf.readBlockPos());
     }
 
     public void encode(FriendlyByteBuf buf) {
         buf.writeBlockPos(pos);
     }
 
-    public static void handle(ArcaneWorkbenchBurstEffectPacket msg, Supplier<NetworkEvent.Context> ctx) {
+    public static void handle(AltarOfDroughtBreakEffectPacket msg, Supplier<NetworkEvent.Context> ctx) {
         if (ctx.get().getDirection().getReceptionSide().isClient()) {
             ctx.get().enqueueWork(new Runnable() {
                 @Override
@@ -41,26 +40,20 @@ public class ArcaneWorkbenchBurstEffectPacket {
                     ParticleBuilder.create(FluffyFurParticles.WISP)
                             .setColorData(ColorParticleData.create(Config.wissenColorR(), Config.wissenColorG(), Config.wissenColorB()).build())
                             .setTransparencyData(GenericParticleData.create(0.125f, 0).build())
-                            .setScaleData(GenericParticleData.create(0.3f, 0).build())
-                            .setLifetime(20)
-                            .randomVelocity(0.025f)
-                            .repeat(level, msg.pos.getX() + 0.5F, msg.pos.getY() + 1.5F, msg.pos.getZ() + 0.5F, 20);
+                            .setScaleData(GenericParticleData.create(0.2f, 0).build())
+                            .setLifetime(30)
+                            .randomVelocity(0.1f)
+                            .randomOffset(0.05f)
+                            .repeat(level, msg.pos.getX() + 0.5F, msg.pos.getY() + 0.5F, msg.pos.getZ() + 0.5F, 5);
                     ParticleBuilder.create(FluffyFurParticles.SPARKLE)
                             .setColorData(ColorParticleData.create(Config.wissenColorR(), Config.wissenColorG(), Config.wissenColorB()).build())
                             .setTransparencyData(GenericParticleData.create(0.25f, 0).build())
-                            .setScaleData(GenericParticleData.create(0.05f, 0.1f, 0).setEasing(Easing.QUINTIC_IN_OUT).build())
+                            .setScaleData(GenericParticleData.create(0.2f, 0).build())
                             .setSpinData(SpinParticleData.create().randomOffset().randomSpin(0.5f).build())
                             .setLifetime(30)
-                            .randomVelocity(0.025f)
-                            .repeat(level, msg.pos.getX() + 0.5F, msg.pos.getY() + 1.5F, msg.pos.getZ() + 0.5F, 10);
-                    ParticleBuilder.create(FluffyFurParticles.SQUARE)
-                            .setColorData(ColorParticleData.create(Config.wissenColorR(), Config.wissenColorG(), Config.wissenColorB()).build())
-                            .setTransparencyData(GenericParticleData.create(0.25f, 0).build())
-                            .setScaleData(GenericParticleData.create(0.05f, 0.1f, 0).setEasing(Easing.QUINTIC_IN_OUT).build())
-                            .setSpinData(SpinParticleData.create().randomOffset().randomSpin(0.5f).build())
-                            .setLifetime(30)
-                            .randomVelocity(0.025f)
-                            .repeat(level, msg.pos.getX() + 0.5F, msg.pos.getY() + 1.5F, msg.pos.getZ() + 0.5F, 10);
+                            .randomVelocity(0.035f)
+                            .randomOffset(0.25f)
+                            .repeat(level, msg.pos.getX() + 0.5F, msg.pos.getY() + 0.5F, msg.pos.getZ() + 0.5F, 5);
                     ctx.get().setPacketHandled(true);
                 }
             });

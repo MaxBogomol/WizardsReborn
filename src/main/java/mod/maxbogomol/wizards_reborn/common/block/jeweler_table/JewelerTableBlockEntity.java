@@ -14,13 +14,12 @@ import mod.maxbogomol.fluffy_fur.registry.client.FluffyFurRenderTypes;
 import mod.maxbogomol.wizards_reborn.WizardsReborn;
 import mod.maxbogomol.wizards_reborn.api.skin.Skin;
 import mod.maxbogomol.wizards_reborn.api.wissen.*;
-import mod.maxbogomol.wizards_reborn.client.gui.container.AlchemyFurnaceContainer;
 import mod.maxbogomol.wizards_reborn.client.gui.container.JewelerTableContainer;
 import mod.maxbogomol.wizards_reborn.common.config.Config;
 import mod.maxbogomol.wizards_reborn.common.item.CrystalItem;
 import mod.maxbogomol.wizards_reborn.common.item.SkinTrimItem;
 import mod.maxbogomol.wizards_reborn.common.network.PacketHandler;
-import mod.maxbogomol.wizards_reborn.common.network.tileentity.JewelerTableBurstEffectPacket;
+import mod.maxbogomol.wizards_reborn.common.network.block.JewelerTableBurstEffectPacket;
 import mod.maxbogomol.wizards_reborn.common.recipe.JewelerTableRecipe;
 import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornRecipes;
 import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornSounds;
@@ -215,7 +214,7 @@ public class JewelerTableBlockEntity extends NameableBlockEntityBase implements 
         if (level.isClientSide()) {
             if (getWissen() > 0) {
                 Vec3 pos = getBlockRotatePos();
-                pos = new Vec3(worldPosition.getX() + pos.x(), worldPosition.getY() + pos.y() + 0.1875F, worldPosition.getZ() + pos.z());
+                pos = new Vec3(getBlockPos().getX() + pos.x(), getBlockPos().getY() + pos.y() + 0.1875F, getBlockPos().getZ() + pos.z());
 
                 if (random.nextFloat() < 0.5) {
                     ParticleBuilder.create(FluffyFurParticles.WISP)
@@ -241,7 +240,7 @@ public class JewelerTableBlockEntity extends NameableBlockEntityBase implements 
             if (wissenInCraft > 0 && startCraft) {
                 Vec3 pos = getBlockRotatePos();
                 Vec2 vel = getBlockRotateParticle();
-                pos = new Vec3(worldPosition.getX() + pos.x(), worldPosition.getY() + pos.y() - 0.125F, worldPosition.getZ() + pos.z());
+                pos = new Vec3(getBlockPos().getX() + pos.x(), getBlockPos().getY() + pos.y() - 0.125F, getBlockPos().getZ() + pos.z());
 
                 if (stoneSpeed < 35) {
                     stoneSpeed = stoneSpeed + 1;

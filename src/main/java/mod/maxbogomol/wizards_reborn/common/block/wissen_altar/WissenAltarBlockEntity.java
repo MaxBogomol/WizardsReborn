@@ -12,8 +12,8 @@ import mod.maxbogomol.wizards_reborn.WizardsReborn;
 import mod.maxbogomol.wizards_reborn.api.wissen.*;
 import mod.maxbogomol.wizards_reborn.common.config.Config;
 import mod.maxbogomol.wizards_reborn.common.network.PacketHandler;
-import mod.maxbogomol.wizards_reborn.common.network.tileentity.WissenAltarBurstEffectPacket;
-import mod.maxbogomol.wizards_reborn.common.network.tileentity.WissenAltarSendEffectPacket;
+import mod.maxbogomol.wizards_reborn.common.network.block.WissenAltarBurstEffectPacket;
+import mod.maxbogomol.wizards_reborn.common.network.block.WissenAltarSendEffectPacket;
 import mod.maxbogomol.wizards_reborn.common.recipe.WissenAltarRecipe;
 import mod.maxbogomol.wizards_reborn.registry.common.block.WizardsRebornBlockEntities;
 import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornRecipes;
@@ -171,12 +171,7 @@ public class WissenAltarBlockEntity extends ExposedBlockSimpleInventory implemen
 
     @Override
     protected SimpleContainer createItemHandler() {
-        return new SimpleContainer(3) {
-            @Override
-            public int getMaxStackSize() {
-                return 64;
-            }
-        };
+        return new SimpleContainer(3);
     }
 
     @Override
