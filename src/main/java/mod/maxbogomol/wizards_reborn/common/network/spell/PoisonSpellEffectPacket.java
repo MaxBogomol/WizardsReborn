@@ -61,7 +61,7 @@ public class PoisonSpellEffectPacket {
                             .randomOffset(0.25f)
                             .repeat(level, msg.X, msg.Y, msg.Z, 10, 0.3f);
                     ParticleBuilder.create(FluffyFurParticles.SMOKE)
-                            .setRenderType(FluffyFurRenderTypes.DELAYED_PARTICLE)
+                            .setRenderType(FluffyFurRenderTypes.TRANSLUCENT_PARTICLE)
                             .setColorData(ColorParticleData.create(msg.colorR, msg.colorG, msg.colorB).build())
                             .setTransparencyData(GenericParticleData.create(0.25f, 0).build())
                             .setScaleData(GenericParticleData.create(0.1f, 1.5f).build())

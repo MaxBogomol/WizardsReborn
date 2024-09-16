@@ -37,7 +37,7 @@ public class NetherSaltOreBlock extends Block {
         if (level.isClientSide()) {
             if (!player.isCreative()) {
                 ParticleBuilder.create(FluffyFurParticles.WISP)
-                        .setRenderType(FluffyFurRenderTypes.DELAYED_PARTICLE)
+                        .setRenderType(FluffyFurRenderTypes.TRANSLUCENT_PARTICLE)
                         .setColorData(ColorParticleData.create(Color.BLACK).build())
                         .setTransparencyData(GenericParticleData.create(1f, 0).build())
                         .setScaleData(GenericParticleData.create(0.2f, 0).build())

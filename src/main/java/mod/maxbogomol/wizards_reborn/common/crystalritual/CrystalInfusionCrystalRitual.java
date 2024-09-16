@@ -328,7 +328,7 @@ public class CrystalInfusionCrystalRitual extends CrystalRitual {
         }
 
         MultiBufferSource bufferDelayed = FluffyFurRenderTypes.getDelayedRender();
-        VertexConsumer builder = bufferDelayed.getBuffer(FluffyFurRenderTypes.GLOWING);
+        VertexConsumer builder = bufferDelayed.getBuffer(FluffyFurRenderTypes.ADDITIVE);
         Color color = getColor();
 
         ItemStack item = getCrystalItem(crystal);

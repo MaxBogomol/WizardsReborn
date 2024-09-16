@@ -26,7 +26,7 @@ public class NetherSaltItem extends FuelItem implements IParticleItem {
     public void addParticles(Level level, ItemEntity entity) {
         if (random.nextFloat() < 0.1) {
             ParticleBuilder.create(FluffyFurParticles.SMOKE)
-                    .setRenderType(FluffyFurRenderTypes.DELAYED_PARTICLE)
+                    .setRenderType(FluffyFurRenderTypes.TRANSLUCENT_PARTICLE)
                     .setColorData(ColorParticleData.create(Color.BLACK).build())
                     .setTransparencyData(GenericParticleData.create(1f, 0).build())
                     .setScaleData(GenericParticleData.create(0.15f, 0).build())

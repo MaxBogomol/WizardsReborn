@@ -35,7 +35,7 @@ public class ThrowedScytheRenderer<T extends ThrowedScytheEntity> extends Entity
     @Override
     public void render(ThrowedScytheEntity entity, float entityYaw, float partialTicks, PoseStack stack, MultiBufferSource buffer, int light) {
         MultiBufferSource bufferDelayed = FluffyFurRenderTypes.getDelayedRender();
-        VertexConsumer builder = bufferDelayed.getBuffer(FluffyFurRenderTypes.GLOWING);
+        VertexConsumer builder = bufferDelayed.getBuffer(FluffyFurRenderTypes.ADDITIVE);
         Color color = WizardsRebornArcaneEnchantments.THROW.getColor();
 
         List<Vec3> trailList = new ArrayList<>(entity.trail);

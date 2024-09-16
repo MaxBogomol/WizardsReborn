@@ -112,7 +112,7 @@ public class ArcaneIteratorRenderer implements BlockEntityRenderer<ArcaneIterato
         }
 
         MultiBufferSource bufferDelayed = FluffyFurRenderTypes.getDelayedRender();
-        VertexConsumer builder = bufferDelayed.getBuffer(FluffyFurRenderTypes.GLOWING);
+        VertexConsumer builder = bufferDelayed.getBuffer(FluffyFurRenderTypes.ADDITIVE);
 
         if ((1f - size) > 0) {
             ms.pushPose();

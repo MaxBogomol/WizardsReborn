@@ -141,7 +141,7 @@ public class SaltCampfireBlockEntity extends ExposedBlockSimpleInventory impleme
             }
             if (random.nextFloat() < 0.3) {
                 ParticleBuilder.create(FluffyFurParticles.SMOKE)
-                        .setRenderType(FluffyFurRenderTypes.DELAYED_PARTICLE)
+                        .setRenderType(FluffyFurRenderTypes.ADDITIVE_PARTICLE)
                         .setColorData(ColorParticleData.create(Color.BLACK).build())
                         .setTransparencyData(GenericParticleData.create(0.4f, 0).build())
                         .setScaleData(GenericParticleData.create(0.45f, 0).build())
@@ -202,7 +202,7 @@ public class SaltCampfireBlockEntity extends ExposedBlockSimpleInventory impleme
 
                     if (random.nextFloat() < 0.1) {
                         ParticleBuilder.create(FluffyFurParticles.SMOKE)
-                                .setRenderType(FluffyFurRenderTypes.DELAYED_PARTICLE)
+                                .setRenderType(FluffyFurRenderTypes.ADDITIVE_PARTICLE)
                                 .setColorData(ColorParticleData.create(Color.BLACK).build())
                                 .setTransparencyData(GenericParticleData.create(0.4f, 0).build())
                                 .setScaleData(GenericParticleData.create(0.45f, 0.3f).build())

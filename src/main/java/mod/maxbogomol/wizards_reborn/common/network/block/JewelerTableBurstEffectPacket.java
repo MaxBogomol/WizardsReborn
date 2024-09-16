@@ -157,7 +157,7 @@ public class JewelerTableBurstEffectPacket {
                             if (!msg.isParticle) item = true;
                             ItemParticleOptions options = new ItemParticleOptions(FluffyFurParticles.ITEM.get(), msg.stack);
                             ParticleBuilder.create(item ? options : new GenericParticleOptions(FluffyFurParticles.SQUARE.get()))
-                                    .setRenderType(item ? FluffyFurRenderTypes.DELAYED_TERRAIN_PARTICLE : FluffyFurRenderTypes.GLOWING_PARTICLE)
+                                    .setRenderType(item ? FluffyFurRenderTypes.TRANSLUCENT_BLOCK_PARTICLE : FluffyFurRenderTypes.ADDITIVE_PARTICLE)
                                     .setColorData(ColorParticleData.create(item ? Color.WHITE : new Color(msg.colorR, msg.colorG, msg.colorB)).build())
                                     .setTransparencyData(GenericParticleData.create(0.2f, 0.5f, 0).setEasing(Easing.QUINTIC_IN_OUT).build())
                                     .setScaleData(GenericParticleData.create(0.025f, 0.06f, 0).setEasing(Easing.QUINTIC_IN_OUT).build())

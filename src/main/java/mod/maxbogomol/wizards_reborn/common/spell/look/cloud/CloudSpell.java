@@ -102,7 +102,7 @@ public class CloudSpell extends BlockLookSpell {
             }
             if (random.nextFloat() < 0.8f) {
                 ParticleBuilder.create(FluffyFurParticles.SMOKE)
-                        .setRenderType(FluffyFurRenderTypes.DELAYED_PARTICLE)
+                        .setRenderType(FluffyFurRenderTypes.TRANSLUCENT_PARTICLE)
                         .setColorData(ColorParticleData.create(color).build())
                         .setTransparencyData(GenericParticleData.create(0.45f, 0).build())
                         .setScaleData(GenericParticleData.create(1.5f).build())

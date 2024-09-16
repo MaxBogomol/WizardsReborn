@@ -135,7 +135,7 @@ public class FogSpell extends Spell {
             }
             if (random.nextFloat() < 0.4f) {
                 ParticleBuilder.create(FluffyFurParticles.SMOKE)
-                        .setRenderType(FluffyFurRenderTypes.DELAYED_PARTICLE)
+                        .setRenderType(FluffyFurRenderTypes.TRANSLUCENT_PARTICLE)
                         .setColorData(ColorParticleData.create(color).build())
                         .setTransparencyData(GenericParticleData.create(0.35f, 0).build())
                         .setScaleData(GenericParticleData.create(0.5f).build())

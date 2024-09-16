@@ -63,7 +63,7 @@ public class MagicBladeEffectPacket {
                             .enablePhysics()
                             .setGravity(1f)
                             .repeat(level, msg.posX, msg.posY, msg.posZ, 15, 0.8f);
-                    builder.setRenderType(FluffyFurRenderTypes.DELAYED_PARTICLE)
+                    builder.setRenderType(FluffyFurRenderTypes.TRANSLUCENT_PARTICLE)
                             .repeat(level, msg.posX, msg.posY, msg.posZ, 5, 0.5f);
                     ctx.get().setPacketHandled(true);
                 }

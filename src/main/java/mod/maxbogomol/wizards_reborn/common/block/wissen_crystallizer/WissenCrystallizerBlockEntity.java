@@ -206,7 +206,7 @@ public class WissenCrystallizerBlockEntity extends ExposedBlockSimpleInventory i
                         if (!stack.isEmpty()) {
                             ItemParticleOptions options = new ItemParticleOptions(FluffyFurParticles.ITEM.get(), stack);
                             ParticleBuilder.create(options)
-                                    .setRenderType(FluffyFurRenderTypes.DELAYED_TERRAIN_PARTICLE)
+                                    .setRenderType(FluffyFurRenderTypes.TRANSLUCENT_BLOCK_PARTICLE)
                                     .setColorData(ColorParticleData.create(Color.WHITE).build())
                                     .setTransparencyData(GenericParticleData.create(0.2f, 0.5f, 0).setEasing(Easing.EXPO_IN, Easing.ELASTIC_OUT).build())
                                     .setScaleData(GenericParticleData.create(0.025f, 0.05f, 0).setEasing(Easing.EXPO_IN, Easing.ELASTIC_OUT).build())
