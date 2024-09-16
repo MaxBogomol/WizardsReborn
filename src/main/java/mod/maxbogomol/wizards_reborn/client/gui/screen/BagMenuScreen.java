@@ -150,7 +150,7 @@ public class BagMenuScreen extends Screen {
         RenderSystem.blendFunc(GlStateManager.SourceFactor.SRC_ALPHA, GlStateManager.DestFactor.ONE);
         MultiBufferSource.BufferSource buffersource = Minecraft.getInstance().renderBuffers().bufferSource();
         RenderSystem.depthMask(false);
-        RenderSystem.setShader(FluffyFurShaders::getGlowing);
+        RenderSystem.setShader(FluffyFurShaders::getAdditive);
 
         gui.pose().pushPose();
         gui.pose().translate(width / 2,  height / 2, 0);

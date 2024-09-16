@@ -28,7 +28,7 @@ public class RenderUtils {
         float f5 = 0.5f;
         float f7 = Math.min(f5 > 0.8F ? (f5 - 0.8F) / 0.2F : 0.0F, 1.0F);
         Random random = new Random((long) (432L + randomF));
-        VertexConsumer builder = buf.getBuffer(FluffyFurRenderTypes.GLOWING);
+        VertexConsumer builder = buf.getBuffer(FluffyFurRenderTypes.ADDITIVE);
         mStack.pushPose();
         mStack.translate(x, y, z);
 
@@ -83,7 +83,7 @@ public class RenderUtils {
     }
 
     public static void ray(PoseStack mStack, MultiBufferSource buf, float width, float height, float endOffset, float r1, float g1, float b1, float a1, float r2, float g2, float b2, float a2) {
-        VertexConsumer builder = buf.getBuffer(FluffyFurRenderTypes.GLOWING);
+        VertexConsumer builder = buf.getBuffer(FluffyFurRenderTypes.ADDITIVE);
 
         Matrix4f mat = mStack.last().pose();
 
@@ -136,7 +136,7 @@ public class RenderUtils {
     }
 
     public static void beam(PoseStack mStack, MultiBufferSource buf, float width, float height, float endOffset, float r1, float g1, float b1, float a1, float r2, float g2, float b2, float a2) {
-        VertexConsumer builder = buf.getBuffer(FluffyFurRenderTypes.GLOWING);
+        VertexConsumer builder = buf.getBuffer(FluffyFurRenderTypes.ADDITIVE);
 
         Matrix4f mat = mStack.last().pose();
 
@@ -162,7 +162,7 @@ public class RenderUtils {
     }
 
     public static void litQuad(PoseStack mStack, MultiBufferSource buf, float x, float y, float width, float height, float r, float g, float b, float a) {
-        VertexConsumer builder = buf.getBuffer(FluffyFurRenderTypes.GLOWING);
+        VertexConsumer builder = buf.getBuffer(FluffyFurRenderTypes.ADDITIVE);
 
         Matrix4f mat = mStack.last().pose();
         builder.vertex(mat, x, y + height, 0).color(r, g, b, a).endVertex();
@@ -172,7 +172,7 @@ public class RenderUtils {
     }
 
     public static void litQuadCube(PoseStack mStack, MultiBufferSource buf, float x1, float y1, float z1, float x2, float y2, float z2, float r, float g, float b, float a) {
-        VertexConsumer builder = buf.getBuffer(FluffyFurRenderTypes.GLOWING);
+        VertexConsumer builder = buf.getBuffer(FluffyFurRenderTypes.ADDITIVE);
 
         Matrix4f mat = mStack.last().pose();
 
@@ -543,7 +543,7 @@ public class RenderUtils {
     }
 
     public static void scytheTrail(PoseStack mStack, MultiBufferSource buf, float width, float height, float endOffset, float r1, float g1, float b1, float a1, float r2, float g2, float b2, float a2) {
-        VertexConsumer builder = buf.getBuffer(FluffyFurRenderTypes.GLOWING);
+        VertexConsumer builder = buf.getBuffer(FluffyFurRenderTypes.ADDITIVE);
 
         Matrix4f mat = mStack.last().pose();
 
@@ -572,7 +572,7 @@ public class RenderUtils {
         RenderSystem.enableBlend();
         RenderSystem.blendFunc(GlStateManager.SourceFactor.SRC_ALPHA, GlStateManager.DestFactor.ONE);
         RenderSystem.depthMask(false);
-        RenderSystem.setShader(FluffyFurShaders::getGlowing);
+        RenderSystem.setShader(FluffyFurShaders::getAdditive);
         RenderSystem.setShaderColor(1F, 1F, 1F, 1F);
     }
 

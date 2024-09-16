@@ -104,7 +104,7 @@ public class Monogram {
             RenderSystem.blendFunc(GlStateManager.SourceFactor.SRC_ALPHA, GlStateManager.DestFactor.ONE);
             MultiBufferSource.BufferSource buffersource = Minecraft.getInstance().renderBuffers().bufferSource();
             RenderSystem.depthMask(false);
-            RenderSystem.setShader(FluffyFurShaders::getGlowing);
+            RenderSystem.setShader(FluffyFurShaders::getAdditive);
 
             gui.pose().pushPose();
             gui.pose().translate(0, 0, 100);

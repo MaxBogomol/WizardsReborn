@@ -410,7 +410,7 @@ public class ArcaneWandScreen extends Screen {
             RenderSystem.blendFunc(GlStateManager.SourceFactor.SRC_ALPHA, GlStateManager.DestFactor.ONE);
             MultiBufferSource.BufferSource buffersource = Minecraft.getInstance().renderBuffers().bufferSource();
             RenderSystem.depthMask(false);
-            RenderSystem.setShader(FluffyFurShaders::getGlowing);
+            RenderSystem.setShader(FluffyFurShaders::getAdditive);
 
             gui.pose().pushPose();
             gui.pose().translate(x, y, 0);
@@ -500,7 +500,7 @@ public class ArcaneWandScreen extends Screen {
                     RenderSystem.blendFunc(GlStateManager.SourceFactor.SRC_ALPHA, GlStateManager.DestFactor.ONE);
                     MultiBufferSource.BufferSource buffersource = Minecraft.getInstance().renderBuffers().bufferSource();
                     RenderSystem.depthMask(false);
-                    RenderSystem.setShader(FluffyFurShaders::getGlowing);
+                    RenderSystem.setShader(FluffyFurShaders::getAdditive);
 
                     gui.pose().pushPose();
                     gui.pose().translate(x - 64 + w + 16, y - h + (i * 34) + 16, 0);
@@ -570,7 +570,7 @@ public class ArcaneWandScreen extends Screen {
                     RenderSystem.blendFunc(GlStateManager.SourceFactor.SRC_ALPHA, GlStateManager.DestFactor.ONE);
                     MultiBufferSource.BufferSource buffersource = Minecraft.getInstance().renderBuffers().bufferSource();
                     RenderSystem.depthMask(false);
-                    RenderSystem.setShader(FluffyFurShaders::getGlowing);
+                    RenderSystem.setShader(FluffyFurShaders::getAdditive);
 
                     gui.pose().pushPose();
                     gui.pose().translate(x - 64 + w + 16, y - h + (i * 34) + 16, 0);
@@ -619,7 +619,7 @@ public class ArcaneWandScreen extends Screen {
                 RenderSystem.blendFunc(GlStateManager.SourceFactor.SRC_ALPHA, GlStateManager.DestFactor.ONE);
                 MultiBufferSource.BufferSource buffersource = Minecraft.getInstance().renderBuffers().bufferSource();
                 RenderSystem.depthMask(false);
-                RenderSystem.setShader(FluffyFurShaders::getGlowing);
+                RenderSystem.setShader(FluffyFurShaders::getAdditive);
 
                 float r = 1f;
                 float g = 1f;
@@ -993,7 +993,7 @@ public class ArcaneWandScreen extends Screen {
         RenderSystem.blendFunc(GlStateManager.SourceFactor.SRC_ALPHA, GlStateManager.DestFactor.ONE);
         MultiBufferSource.BufferSource buffersource = Minecraft.getInstance().renderBuffers().bufferSource();
         RenderSystem.depthMask(false);
-        RenderSystem.setShader(FluffyFurShaders::getGlowing);
+        RenderSystem.setShader(FluffyFurShaders::getAdditive);
 
         RenderUtils.dragon(gui.pose(), buffersource, x, y, 0, 30 * scale, partialTicks, r, g, b, i);
         buffersource.endBatch();
@@ -1025,7 +1025,7 @@ public class ArcaneWandScreen extends Screen {
         RenderSystem.blendFunc(GlStateManager.SourceFactor.SRC_ALPHA, GlStateManager.DestFactor.ONE);
         MultiBufferSource.BufferSource buffersource = Minecraft.getInstance().renderBuffers().bufferSource();
         RenderSystem.depthMask(false);
-        RenderSystem.setShader(FluffyFurShaders::getGlowing);
+        RenderSystem.setShader(FluffyFurShaders::getAdditive);
 
         gui.pose().pushPose();
         gui.pose().translate(width / 2,  height / 2, 0);
@@ -1049,7 +1049,7 @@ public class ArcaneWandScreen extends Screen {
         RenderSystem.blendFunc(GlStateManager.SourceFactor.SRC_ALPHA, GlStateManager.DestFactor.ONE);
         MultiBufferSource.BufferSource buffersource = Minecraft.getInstance().renderBuffers().bufferSource();
         RenderSystem.depthMask(false);
-        RenderSystem.setShader(FluffyFurShaders::getGlowing);
+        RenderSystem.setShader(FluffyFurShaders::getAdditive);
 
         gui.pose().pushPose();
         gui.pose().translate(width / 2,  height / 2, 0);

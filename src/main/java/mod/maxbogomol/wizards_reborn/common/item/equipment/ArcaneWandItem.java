@@ -762,7 +762,7 @@ public class ArcaneWandItem extends Item implements IWissenItem, ICustomAnimatio
                 RenderSystem.blendFunc(GlStateManager.SourceFactor.SRC_ALPHA, GlStateManager.DestFactor.ONE);
                 MultiBufferSource.BufferSource buffersource = Minecraft.getInstance().renderBuffers().bufferSource();
                 RenderSystem.depthMask(false);
-                RenderSystem.setShader(FluffyFurShaders::getGlowing);
+                RenderSystem.setShader(FluffyFurShaders::getAdditive);
                 RenderSystem.setShaderColor(1F, 1F, 1F, 1F);
 
                 pose.pushPose();
