@@ -7,6 +7,7 @@ import com.mojang.math.Axis;
 import mod.maxbogomol.fluffy_fur.client.event.ClientTickHandler;
 import mod.maxbogomol.fluffy_fur.registry.client.FluffyFurShaders;
 import mod.maxbogomol.fluffy_fur.util.ColorUtil;
+import mod.maxbogomol.fluffy_fur.util.RenderUtil;
 import mod.maxbogomol.wizards_reborn.common.item.equipment.WissenWandItem;
 import mod.maxbogomol.wizards_reborn.common.network.PacketHandler;
 import mod.maxbogomol.wizards_reborn.common.network.SetWissenWandModePacket;
@@ -79,7 +80,7 @@ public class WissenWandChooseScreen extends Screen {
         for (int i = 0; i < 5; i++) {
             renderRays(WissenWandItem.getModeColor(i), gui, partialTicks, i, 72, i == choosedRay);
         }
-        RenderUtils.renderItemModelInGui(getWand(), x - 16, y - 16, 32, 32, 32, 45f * (1f - hoveramount), 45f * (1f - hoveramount), 0);
+        RenderUtil.renderItemModelInGui(getWand(), x - 16, y - 16, 32, 32, 32, 45f * (1f - hoveramount), 45f * (1f - hoveramount), 0);
     }
 
     public int getSelectedMode(double X, double Y) {

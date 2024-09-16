@@ -2,14 +2,15 @@ package mod.maxbogomol.wizards_reborn.api.light;
 
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.math.Axis;
+import mod.maxbogomol.fluffy_fur.FluffyFur;
 import mod.maxbogomol.fluffy_fur.client.event.ClientTickHandler;
+import mod.maxbogomol.fluffy_fur.client.render.RenderBuilder;
 import mod.maxbogomol.fluffy_fur.common.network.BlockEntityUpdate;
 import mod.maxbogomol.fluffy_fur.registry.client.FluffyFurRenderTypes;
+import mod.maxbogomol.fluffy_fur.util.RenderUtil;
 import mod.maxbogomol.wizards_reborn.common.block.ArcaneLumosBlock;
-import mod.maxbogomol.wizards_reborn.util.RenderUtils;
-import net.minecraft.client.renderer.MultiBufferSource;
+import net.minecraft.client.Minecraft;
 import net.minecraft.core.BlockPos;
-import net.minecraft.util.Mth;
 import net.minecraft.world.level.ClipContext;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntity;
@@ -89,28 +90,42 @@ public class LightUtil {
 
     @OnlyIn(Dist.CLIENT)
     public static void renderLightRay(Vec3 from, Vec3 to, float rayDistance, float maxRayDistance, Color color, float partialTicks, PoseStack ms) {
-        MultiBufferSource bufferDelayed = FluffyFurRenderTypes.getDelayedRender();
+        RenderBuilder builder = RenderBuilder.create().setRenderType(FluffyFurRenderTypes.ADDITIVE_TEXTURE)
+                .setUV(RenderUtil.getSprite(FluffyFur.MOD_ID, "particle/star"))
+                .setColor(color)
+                .setAlpha(0.2f);
+        float tick = (ClientTickHandler.ticksInGame + partialTicks) * 2.5f;
 
-        double dX = to.x() - from.x();
-        double dY = to.y() - from.y();
-        double dZ = to.z() - from.z();
+        ms.pushPose();
+        ms.mulPose(Minecraft.getInstance().getEntityRenderDispatcher().cameraOrientation());
+        ms.mulPose(Axis.ZP.rotationDegrees(tick));
+        builder.renderCenteredQuad(ms, 0.15f);
+        ms.mulPose(Axis.ZP.rotationDegrees(-tick * 2));
+        builder.renderCenteredQuad(ms, 0.15f);
+        ms.popPose();
 
-        double yaw = Math.atan2(dZ, dX);
-        double pitch = Math.atan2(Math.sqrt(dZ * dZ + dX * dX), dY) + Math.PI;
+        builder.setUV(RenderUtil.getSprite(FluffyFur.MOD_ID, "particle/tiny_wisp"))
+                .setAlpha(0.1f);
+        ms.pushPose();
+        Vec3 pos = to.subtract(from);
+        ms.translate(pos.x(), pos.y(), pos.z());
+        ms.mulPose(Minecraft.getInstance().getEntityRenderDispatcher().cameraOrientation());
+        ms.mulPose(Axis.ZP.rotationDegrees(tick));
+        builder.renderCenteredQuad(ms, 0.15f);
+        ms.mulPose(Axis.ZP.rotationDegrees(-tick * 2));
+        builder.renderCenteredQuad(ms, 0.15f);
+        ms.popPose();
 
-        float r = color.getRed() / 255f;
-        float g = color.getGreen() / 255f;
-        float b = color.getBlue() / 255f;
-
-        ms.mulPose(Axis.YP.rotationDegrees((float) Math.toDegrees(-yaw)));
-        ms.mulPose(Axis.ZP.rotationDegrees((float) Math.toDegrees(-pitch) - 90f));
-        float width = rayDistance - 0.05f;
-        ms.translate(0.05f, 0, 0);
-        ms.mulPose(Axis.XP.rotationDegrees((ClientTickHandler.ticksInGame + partialTicks) * 2.5f));
-        RenderUtils.ray(ms, bufferDelayed, 0.05f, width, Mth.lerp(rayDistance / maxRayDistance, 1f, 0.75f), r, g, b, 0.3f);
-        ms.translate(-0.01f, 0, 0);
-        ms.mulPose(Axis.XP.rotationDegrees(-(ClientTickHandler.ticksInGame + partialTicks) * 5f));
-        RenderUtils.ray(ms, bufferDelayed, 0.03f, width, Mth.lerp(rayDistance / maxRayDistance, 1f, 0.75f), 1f, 1f, 1f, 0.4f, 0.564f, 0.682f, 0.705f, 0.4f);
+        ms.pushPose();
+        ms.translate(-from.x(), -from.y(), -from.z());
+        builder.setUV(RenderUtil.getSprite(FluffyFur.MOD_ID, "particle/trail"));
+        builder.setColor(Color.WHITE)
+                .setAlpha(0.5f)
+                .renderBeam(ms.last().pose(), from, to, 0.12f);
+        builder.setColor(color)
+                .setAlpha(0.4f)
+                .renderBeam(ms.last().pose(), from, to, 0.16f);
+        ms.popPose();
     }
 
     public static void renderLightRay(Level level, BlockPos startPos, Vec3 from, Vec3 to, float rayDistance, Color color, float partialTicks, PoseStack ms) {

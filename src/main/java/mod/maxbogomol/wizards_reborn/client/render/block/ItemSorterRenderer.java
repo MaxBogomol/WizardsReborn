@@ -3,6 +3,7 @@ package mod.maxbogomol.wizards_reborn.client.render.block;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.math.Axis;
 import mod.maxbogomol.fluffy_fur.client.event.ClientTickHandler;
+import mod.maxbogomol.fluffy_fur.util.RenderUtil;
 import mod.maxbogomol.wizards_reborn.api.wissen.WissenUtils;
 import mod.maxbogomol.wizards_reborn.common.block.sensor.SensorBaseBlock;
 import mod.maxbogomol.wizards_reborn.common.block.sensor.item_sorter.ItemSorterBlockEntity;
@@ -35,7 +36,7 @@ public class ItemSorterRenderer implements BlockEntityRenderer<ItemSorterBlockEn
 
         ms.mulPose(Axis.YP.rotationDegrees(sensor.getBlockRotate()));
         ms.mulPose(Axis.XP.rotationDegrees(sensor.getBlockUpRotate()));
-        RenderUtils.renderCustomModel(((SensorBaseBlock) sensor.getBlockState().getBlock()).getModel(sensor.getBlockState()), ItemDisplayContext.FIXED, false, ms, buffers, light, overlay);
+        RenderUtil.renderCustomModel(((SensorBaseBlock) sensor.getBlockState().getBlock()).getModel(sensor.getBlockState()), ItemDisplayContext.FIXED, false, ms, buffers, light, overlay);
         ms.popPose();
 
         if (WissenUtils.isCanRenderWissenWand()) {

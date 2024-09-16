@@ -2,6 +2,7 @@ package mod.maxbogomol.wizards_reborn.common.block.engraved_wisestone;
 
 import mod.maxbogomol.fluffy_fur.client.event.ClientTickHandler;
 import mod.maxbogomol.fluffy_fur.client.particle.ParticleBuilder;
+import mod.maxbogomol.fluffy_fur.client.particle.behavior.CubeParticleBehavior;
 import mod.maxbogomol.fluffy_fur.client.particle.data.ColorParticleData;
 import mod.maxbogomol.fluffy_fur.client.particle.data.GenericParticleData;
 import mod.maxbogomol.fluffy_fur.client.particle.data.SpinParticleData;
@@ -73,7 +74,8 @@ public class EngravedWisestoneBlockEntity extends BlockEntityBase implements Tic
                     float g = color.getGreen() / 255f;
                     float b = color.getBlue() / 255f;
 
-                    ParticleBuilder.create(FluffyFurParticles.CUBE)
+                    ParticleBuilder.create(FluffyFurParticles.SQUARE)
+                            .setBehavior(CubeParticleBehavior.create().build())
                             .setColorData(ColorParticleData.create(r, g, b, random.nextFloat(), random.nextFloat(), random.nextFloat()).build())
                             .setTransparencyData(GenericParticleData.create(0.75f, 0).build())
                             .setScaleData(GenericParticleData.create(0, 0.1f, 0).setEasing(Easing.SINE_IN_OUT).build())

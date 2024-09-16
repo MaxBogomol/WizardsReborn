@@ -129,7 +129,7 @@ public class CloudSpell extends BlockLookSpell {
         }
 
         if (trails && random.nextFloat() < 0.4f) {
-            ParticleBuilder.create(FluffyFurParticles.TRAIL)
+            ParticleBuilder.create(FluffyFurParticles.DOT)
                     .setColorData(ColorParticleData.create(color).build())
                     .setTransparencyData(GenericParticleData.create(0.4f, 0).build())
                     .setScaleData(GenericParticleData.create(0.2f, 0).build())

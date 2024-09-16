@@ -3,6 +3,7 @@ package mod.maxbogomol.wizards_reborn.client.render.block;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.math.Axis;
 import mod.maxbogomol.fluffy_fur.client.event.ClientTickHandler;
+import mod.maxbogomol.fluffy_fur.util.RenderUtil;
 import mod.maxbogomol.wizards_reborn.api.wissen.WissenUtils;
 import mod.maxbogomol.wizards_reborn.common.block.altar_of_drought.AltarOfDroughtBlockEntity;
 import mod.maxbogomol.wizards_reborn.registry.client.WizardsRebornModels;
@@ -42,7 +43,7 @@ public class AltarOfDroughtRenderer implements BlockEntityRenderer<AltarOfDrough
         ms.mulPose(Axis.YP.rotationDegrees((float) ((Math.sin(Math.toRadians(random.nextFloat() * 360) + ticks))) * 5F));
         ms.mulPose(Axis.XP.rotationDegrees((float) ((Math.sin(Math.toRadians(random.nextFloat() * 360) + ticks))) * 5F));
         ms.mulPose(Axis.ZP.rotationDegrees((float) ((Math.sin(Math.toRadians(random.nextFloat() * 360) + ticks))) * 5F));
-        RenderUtils.renderCustomModel(WizardsRebornModels.ALTAR_OF_DROUGHT_FRAME, ItemDisplayContext.FIXED, false, ms, buffers, light, overlay);
+        RenderUtil.renderCustomModel(WizardsRebornModels.ALTAR_OF_DROUGHT_FRAME, ItemDisplayContext.FIXED, false, ms, buffers, light, overlay);
         ms.popPose();
 
         if (WissenUtils.isCanRenderWissenWand()) {

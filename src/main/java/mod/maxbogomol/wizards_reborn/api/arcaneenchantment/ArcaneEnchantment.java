@@ -4,15 +4,13 @@ import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.math.Axis;
 import mod.maxbogomol.fluffy_fur.FluffyFur;
 import mod.maxbogomol.fluffy_fur.client.event.ClientTickHandler;
-import mod.maxbogomol.wizards_reborn.util.RenderUtils;
+import mod.maxbogomol.fluffy_fur.client.render.RenderBuilder;
+import mod.maxbogomol.fluffy_fur.registry.client.FluffyFurRenderTypes;
+import mod.maxbogomol.fluffy_fur.util.RenderUtil;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.renderer.MultiBufferSource;
-import net.minecraft.client.renderer.texture.TextureAtlas;
-import net.minecraft.client.renderer.texture.TextureAtlasSprite;
 import net.minecraft.network.chat.CommonComponents;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;
-import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
@@ -82,32 +80,24 @@ public class ArcaneEnchantment {
     }
 
     @OnlyIn(Dist.CLIENT)
-    public void renderParticle(PoseStack pose, LivingEntity entity, Level level, ItemStack stack, int x, int y, int seed, int guiOffset, int index) {
+    public void renderParticle(PoseStack poseStack, LivingEntity entity, Level level, ItemStack stack, int x, int y, int seed, int guiOffset, int index) {
         int levelEnchantment = ArcaneEnchantmentUtil.getArcaneEnchantment(stack, this);
-        if (levelEnchantment > getMaxLevel()) {
-            levelEnchantment = getMaxLevel();
-        }
+        if (levelEnchantment > getMaxLevel()) levelEnchantment = getMaxLevel();
         float size = 0.5f + (((float) levelEnchantment / getMaxLevel()) * 0.5f);
 
         float ticks = (ClientTickHandler.ticksInGame + Minecraft.getInstance().getPartialTick()) * 0.4f + (index * 35);
-        float r = getColor().getRed() / 255f;
-        float g = getColor().getGreen() / 255f;
-        float b = getColor().getBlue() / 255f;
-
         if (isCurse()) ticks = -ticks;
 
-        RenderUtils.startGuiParticle();
-        MultiBufferSource.BufferSource buffersource = Minecraft.getInstance().renderBuffers().bufferSource();
-
-        TextureAtlasSprite sparkle = Minecraft.getInstance().getTextureAtlas(TextureAtlas.LOCATION_BLOCKS).apply(new ResourceLocation(FluffyFur.MOD_ID, "particle/sparkle"));
-
-        pose.pushPose();
-        pose.translate(x + 8, y + 8, 100);
-        pose.mulPose(Axis.ZP.rotationDegrees(ticks));
-        RenderUtils.spriteGlowQuadCenter(pose, buffersource, 0, 0, 18f * size, 18f * size, sparkle.getU0(), sparkle.getU1(), sparkle.getV0(), sparkle.getV1(), r, g, b, 0.25f + (0.5f * size));
-        buffersource.endBatch();
-        pose.popPose();
-
-        RenderUtils.endGuiParticle();
+        RenderUtil.startGlowGuiSprite();
+        poseStack.pushPose();
+        poseStack.translate(x + 8, y + 8, 100);
+        poseStack.mulPose(Axis.ZP.rotationDegrees(ticks));
+        RenderBuilder.create().setRenderType(FluffyFurRenderTypes.ADDITIVE_TEXTURE)
+                .setUV(RenderUtil.getSprite(FluffyFur.MOD_ID, "particle/sparkle"))
+                .setColor(getColor()).setAlpha(0.25f + (0.5f * size))
+                .renderCenteredQuad(poseStack, 9f * size)
+                .endBatch();
+        poseStack.popPose();
+        RenderUtil.endGlowGuiSprite();
     }
 }

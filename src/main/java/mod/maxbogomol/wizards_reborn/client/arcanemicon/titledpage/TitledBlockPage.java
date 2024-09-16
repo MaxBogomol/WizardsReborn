@@ -1,11 +1,11 @@
 package mod.maxbogomol.wizards_reborn.client.arcanemicon.titledpage;
 
 import com.google.common.collect.Lists;
+import mod.maxbogomol.fluffy_fur.util.RenderUtil;
 import mod.maxbogomol.wizards_reborn.WizardsReborn;
 import mod.maxbogomol.wizards_reborn.client.arcanemicon.ArcanemiconGui;
 import mod.maxbogomol.wizards_reborn.client.arcanemicon.Page;
 import mod.maxbogomol.wizards_reborn.client.arcanemicon.index.BlockEntry;
-import mod.maxbogomol.wizards_reborn.util.RenderUtils;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.resources.language.I18n;
@@ -42,7 +42,7 @@ public class TitledBlockPage extends Page {
         int ii = 0;
 
         for (int i = 0; i < blocks.size(); i++) {
-            RenderUtils.blitOffset  += 10.0F;
+            RenderUtil.blitOffset  += 10.0F;
             int width = 0;
             if (lines == line) {
                 width = (120 - (20 * (6 - ((lines + 1) * 6 - blocks.size())))) / 2;
@@ -59,7 +59,7 @@ public class TitledBlockPage extends Page {
                 ii++;
             }
         }
-        RenderUtils.blitOffset  -= 10.0F * blocks.size();
+        RenderUtil.blitOffset  -= 10.0F * blocks.size();
 
         line = 0;
         ii = 0;

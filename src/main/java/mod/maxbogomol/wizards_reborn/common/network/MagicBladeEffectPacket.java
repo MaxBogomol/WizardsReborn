@@ -1,10 +1,13 @@
 package mod.maxbogomol.wizards_reborn.common.network;
 
 import mod.maxbogomol.fluffy_fur.client.particle.ParticleBuilder;
+import mod.maxbogomol.fluffy_fur.client.particle.behavior.SparkParticleBehavior;
 import mod.maxbogomol.fluffy_fur.client.particle.data.ColorParticleData;
 import mod.maxbogomol.fluffy_fur.client.particle.data.GenericParticleData;
 import mod.maxbogomol.fluffy_fur.client.particle.data.SpinParticleData;
+import mod.maxbogomol.fluffy_fur.common.easing.Easing;
 import mod.maxbogomol.fluffy_fur.registry.client.FluffyFurParticles;
+import mod.maxbogomol.fluffy_fur.registry.client.FluffyFurRenderTypes;
 import mod.maxbogomol.wizards_reborn.WizardsReborn;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.world.level.Level;
@@ -42,15 +45,26 @@ public class MagicBladeEffectPacket {
                 @Override
                 public void run() {
                     Level level = WizardsReborn.proxy.getLevel();
-                    ParticleBuilder.create(FluffyFurParticles.SPARKLE)
-                            .setColorData(ColorParticleData.create(0.431F, 0.305F, 0.662F).build())
-                            .setTransparencyData(GenericParticleData.create(0.4f, 0).build())
-                            .setScaleData(GenericParticleData.create(0.1f, 0.5f).build())
+                    ParticleBuilder builder = ParticleBuilder.create(FluffyFurParticles.TINY_WISP);
+                    builder.setBehavior(SparkParticleBehavior.create()
+                                    .enableSecondColor()
+                                    .setColorData(ColorParticleData.create().setRandomColor().build())
+                                    .setTransparencyData(GenericParticleData.create(0.2f, 0.2f, 0).setEasing(Easing.QUARTIC_OUT).build())
+                                    .build())
+                            .setColorData(ColorParticleData.create(0.431f, 0.305f, 0.662f).build())
+                            .setTransparencyData(GenericParticleData.create(0.6f, 0.6f, 0).setEasing(Easing.QUARTIC_OUT).build())
+                            .setScaleData(GenericParticleData.create(0.05f, 0.1f, 0).setEasing(Easing.ELASTIC_OUT).build())
                             .setSpinData(SpinParticleData.create().randomSpin(0.1f).build())
-                            .setLifetime(30)
-                            .randomVelocity(0.05f)
+                            .setLifetime(20)
+                            .randomVelocity(0.5f)
+                            .addVelocity(0, 0.1f, 0)
                             .randomOffset(0.05f)
-                            .repeat(level, msg.posX, msg.posY, msg.posZ, 15);
+                            .setFriction(0.9f)
+                            .enablePhysics()
+                            .setGravity(1f)
+                            .repeat(level, msg.posX, msg.posY, msg.posZ, 15, 0.8f);
+                    builder.setRenderType(FluffyFurRenderTypes.DELAYED_PARTICLE)
+                            .repeat(level, msg.posX, msg.posY, msg.posZ, 5, 0.5f);
                     ctx.get().setPacketHandled(true);
                 }
             });

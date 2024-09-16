@@ -6,9 +6,9 @@ import mod.maxbogomol.fluffy_fur.client.event.ClientTickHandler;
 import mod.maxbogomol.fluffy_fur.client.render.fluid.FluidCuboid;
 import mod.maxbogomol.fluffy_fur.client.render.fluid.FluidRenderer;
 import mod.maxbogomol.fluffy_fur.registry.client.FluffyFurRenderTypes;
+import mod.maxbogomol.fluffy_fur.util.RenderUtil;
 import mod.maxbogomol.wizards_reborn.common.block.sensor.SensorBaseBlock;
 import mod.maxbogomol.wizards_reborn.common.block.sensor.fluid.FluidSensorBlockEntity;
-import mod.maxbogomol.wizards_reborn.util.RenderUtils;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.blockentity.BlockEntityRenderer;
 import net.minecraft.world.item.ItemDisplayContext;
@@ -46,7 +46,7 @@ public class FluidSensorRenderer implements BlockEntityRenderer<FluidSensorBlock
 
         ms.mulPose(Axis.YP.rotationDegrees(sensor.getBlockRotate()));
         ms.mulPose(Axis.XP.rotationDegrees(sensor.getBlockUpRotate()));
-        RenderUtils.renderCustomModel(((SensorBaseBlock) sensor.getBlockState().getBlock()).getModel(sensor.getBlockState()), ItemDisplayContext.FIXED, false, ms, buffers, light, overlay);
+        RenderUtil.renderCustomModel(((SensorBaseBlock) sensor.getBlockState().getBlock()).getModel(sensor.getBlockState()), ItemDisplayContext.FIXED, false, ms, buffers, light, overlay);
         ms.popPose();
 
         for (int i = 0; i < 10; i++) {

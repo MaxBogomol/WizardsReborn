@@ -6,6 +6,7 @@ import com.mojang.blaze3d.systems.RenderSystem;
 import com.mojang.math.Axis;
 import mod.maxbogomol.fluffy_fur.client.event.ClientTickHandler;
 import mod.maxbogomol.fluffy_fur.registry.client.FluffyFurShaders;
+import mod.maxbogomol.fluffy_fur.util.RenderUtil;
 import mod.maxbogomol.wizards_reborn.common.item.equipment.IBagItem;
 import mod.maxbogomol.wizards_reborn.common.network.OpenBagPacket;
 import mod.maxbogomol.wizards_reborn.common.network.PacketHandler;
@@ -89,9 +90,9 @@ public class BagMenuScreen extends Screen {
             }
 
             if (stack == selectedItem) {
-                RenderUtils.renderItemModelInGui(stack, x + X - 24, y + Y - 24, 48, 48, 48, 45f * (1f - hoveramount), 45f * (1f - hoveramount), 0);
+                RenderUtil.renderItemModelInGui(stack, x + X - 24, y + Y - 24, 48, 48, 48, 45f * (1f - hoveramount), 45f * (1f - hoveramount), 0);
             } else {
-                RenderUtils.renderItemModelInGui(stack, x + X - 16, y + Y - 16, 32, 32, 32, 45f * (1f - hoveramount), 45f * (1f - hoveramount), 0);
+                RenderUtil.renderItemModelInGui(stack, x + X - 16, y + Y - 16, 32, 32, 32, 45f * (1f - hoveramount), 45f * (1f - hoveramount), 0);
             }
 
             i = i + 1F;

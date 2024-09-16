@@ -3,9 +3,9 @@ package mod.maxbogomol.wizards_reborn.client.render.block;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.math.Axis;
 import mod.maxbogomol.fluffy_fur.client.event.ClientTickHandler;
+import mod.maxbogomol.fluffy_fur.util.RenderUtil;
 import mod.maxbogomol.wizards_reborn.common.block.jeweler_table.JewelerTableBlockEntity;
 import mod.maxbogomol.wizards_reborn.registry.client.WizardsRebornModels;
-import mod.maxbogomol.wizards_reborn.util.RenderUtils;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.blockentity.BlockEntityRenderer;
@@ -34,7 +34,7 @@ public class JewelerTableRenderer implements BlockEntityRenderer<JewelerTableBlo
         ms.translate(pos.x(), pos.y(), pos.z());
         ms.mulPose(Axis.YP.rotationDegrees(table.getBlockRotate()));
         ms.mulPose(Axis.XP.rotationDegrees((float) ticksStone));
-        RenderUtils.renderCustomModel(WizardsRebornModels.JEWELER_TABLE_STONE, ItemDisplayContext.FIXED, false, ms, buffers, light, overlay);
+        RenderUtil.renderCustomModel(WizardsRebornModels.JEWELER_TABLE_STONE, ItemDisplayContext.FIXED, false, ms, buffers, light, overlay);
         ms.popPose();
 
         ms.pushPose();

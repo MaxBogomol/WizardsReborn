@@ -3,8 +3,11 @@ package mod.maxbogomol.wizards_reborn.client.render.entity;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
 import com.mojang.math.Axis;
-import mod.maxbogomol.fluffy_fur.client.render.LevelRenderHandler;
+import mod.maxbogomol.fluffy_fur.FluffyFur;
+import mod.maxbogomol.fluffy_fur.client.render.RenderBuilder;
+import mod.maxbogomol.fluffy_fur.client.render.trail.TrailPoint;
 import mod.maxbogomol.fluffy_fur.registry.client.FluffyFurRenderTypes;
+import mod.maxbogomol.fluffy_fur.util.RenderUtil;
 import mod.maxbogomol.wizards_reborn.common.entity.ThrowedScytheEntity;
 import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornArcaneEnchantments;
 import mod.maxbogomol.wizards_reborn.util.RenderUtils;
@@ -45,6 +48,11 @@ public class ThrowedScytheRenderer<T extends ThrowedScytheEntity> extends Entity
             trailList.set(0, new Vec3(x, y, z));
         }
 
+        List<TrailPoint> trail = new ArrayList<>();
+        for (Vec3 point : trailList) {
+            trail.add(new TrailPoint(point.subtract(entity.position())));
+        }
+
         float x = (float) Mth.lerp(partialTicks, entity.xOld, entity.getX());
         float y = (float) Mth.lerp(partialTicks, entity.yOld, entity.getY());
         float z = (float) Mth.lerp(partialTicks, entity.zOld, entity.getZ());
@@ -52,7 +60,15 @@ public class ThrowedScytheRenderer<T extends ThrowedScytheEntity> extends Entity
         stack.pushPose();
         stack.translate(0, 0.1f, 0);
         stack.translate(entity.getX() - x, entity.getY() - y,  entity.getZ() - z);
-        RenderUtils.renderTrail(stack, builder, entity.position(), trailList, 0,0.02f, 0,1.0f, 1.0f, color, 4, true);
+        stack.translate(0, 0.1f, 0);
+        //RenderUtils.renderTrail(stack, builder, entity.position(), trailList, 0,0.02f, 0,1.0f, 1.0f, color, 4, true);
+        stack.translate(0, -0.1f, 0);
+
+        RenderBuilder.create().setRenderType(FluffyFurRenderTypes.ADDITIVE_TEXTURE)
+                .setUV(RenderUtil.getSprite(FluffyFur.MOD_ID, "particle/trail"))
+                .setColor(color)
+                .setAlpha(0.5f)
+                .renderTrail(stack, trail, (f) -> {return f * 0.08f;});
         stack.popPose();
 
         if (entity.getFade() && entity.getFadeTick() <= 30 && entity.getEndTick() > 0) {

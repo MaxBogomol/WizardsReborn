@@ -2,15 +2,20 @@ package mod.maxbogomol.wizards_reborn.common.spell.projectile;
 
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
-import mod.maxbogomol.fluffy_fur.client.render.LevelRenderHandler;
+import mod.maxbogomol.fluffy_fur.FluffyFur;
+import mod.maxbogomol.fluffy_fur.client.render.RenderBuilder;
+import mod.maxbogomol.fluffy_fur.client.render.trail.TrailPoint;
 import mod.maxbogomol.fluffy_fur.registry.client.FluffyFurRenderTypes;
 import mod.maxbogomol.wizards_reborn.WizardsReborn;
 import mod.maxbogomol.wizards_reborn.api.spell.Spell;
 import mod.maxbogomol.wizards_reborn.common.entity.SpellProjectileEntity;
 import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornSounds;
-import mod.maxbogomol.wizards_reborn.util.RenderUtils;
+import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.MultiBufferSource;
+import net.minecraft.client.renderer.texture.TextureAtlas;
+import net.minecraft.client.renderer.texture.TextureAtlasSprite;
 import net.minecraft.nbt.CompoundTag;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.util.Mth;
 import net.minecraft.world.InteractionHand;
@@ -139,11 +144,24 @@ public class ProjectileSpell extends Spell {
             trailList.set(trailList.size() - 1, new Vec3(x, y, z));
         }
 
+        List<TrailPoint> trail = new ArrayList<>();
+        for (Vec3 point : trailList) {
+            trail.add(new TrailPoint(point.subtract(entity.position())));
+        }
+
         stack.pushPose();
         stack.translate(0, 0.2f, 0);
         stack.translate(entity.getX() - x, entity.getY() - y,  entity.getZ() - z);
-        RenderUtils.renderTrail(stack, builder, entity.position(), trailList, 0,0.15f, 0,1.0f, 1.0f, color, 8, true);
-        RenderUtils.renderTrail(stack, builder, entity.position(), trailList, 0,0.15f, 0,0.75f, 0.75f, color, 8, true);
+        //RenderUtils.renderTrail(stack, builder, entity.position(), trailList, 0,0.15f, 0,1.0f, 1.0f, color, 8, true);
+        //RenderUtils.renderTrail(stack, builder, entity.position(), trailList, 0,0.15f, 0,0.75f, 0.75f, color, 8, true);
+        TextureAtlasSprite star = Minecraft.getInstance().getTextureAtlas(TextureAtlas.LOCATION_BLOCKS).apply(new ResourceLocation(FluffyFur.MOD_ID, "particle/wisp"));
+
+        RenderBuilder.create()
+                .setRenderType(FluffyFurRenderTypes.ADDITIVE_TEXTURE)
+                .setUV(star.getU0(), star.getV0(), star.getU1(), star.getV1())
+                .setColor(color)
+                .setAlpha(0.5f)
+                .renderTrail(stack, trail, (f) -> {return f * 0.3f;});
         stack.popPose();
     }
 }

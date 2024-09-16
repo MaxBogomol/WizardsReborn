@@ -148,7 +148,7 @@ public class AuraSpell extends Spell {
                 }
 
                 if (random.nextFloat() < 0.45f) {
-                    ParticleBuilder.create(FluffyFurParticles.CUBE)
+                    ParticleBuilder.create(FluffyFurParticles.DOT) //PARTICLE CUBE
                             .setColorData(ColorParticleData.create(color).build())
                             .setTransparencyData(GenericParticleData.create(0.5f, 0).build())
                             .setScaleData(GenericParticleData.create(0.15f, 0f).build())

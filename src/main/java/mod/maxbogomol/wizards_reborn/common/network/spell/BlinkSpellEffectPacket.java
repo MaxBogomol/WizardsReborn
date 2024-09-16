@@ -117,7 +117,7 @@ public class BlinkSpellEffectPacket {
                         }
                         if (msg.burst) {
                             if (random.nextFloat() < 0.75) {
-                                ParticleBuilder.create(FluffyFurParticles.CUBE)
+                                ParticleBuilder.create(FluffyFurParticles.DOT) //PARTICLE CUBE
                                         .setColorData(ColorParticleData.create(msg.colorR, msg.colorG, msg.colorB).build())
                                         .setTransparencyData(GenericParticleData.create(0.2f, 0).build())
                                         .setScaleData(GenericParticleData.create(0.1f, 0).build())

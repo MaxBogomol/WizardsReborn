@@ -4,8 +4,8 @@ import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.math.Axis;
 import mod.maxbogomol.fluffy_fur.client.event.ClientTickHandler;
 import mod.maxbogomol.fluffy_fur.client.render.fluid.FluidCuboid;
-import mod.maxbogomol.fluffy_fur.client.render.fluid.FluidRenderer;
 import mod.maxbogomol.fluffy_fur.registry.client.FluffyFurRenderTypes;
+import mod.maxbogomol.fluffy_fur.util.RenderUtil;
 import mod.maxbogomol.wizards_reborn.common.block.orbital_fluid_retainer.OrbitalFluidRetainerBlockEntity;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.blockentity.BlockEntityRenderer;
@@ -49,8 +49,10 @@ public class OrbitalFluidRetainerRenderer implements BlockEntityRenderer<Orbital
         ms.mulPose(Axis.XP.rotationDegrees((float) ((random.nextFloat() * 360) + ticksSub)));
         ms.mulPose(Axis.ZP.rotationDegrees((float) ((random.nextFloat() * 360) + ticksSub)));
         ms.scale(amount, amount, amount);
-        ms.translate(-0.25F, -0.25F, -0.25F);
-        FluidRenderer.renderCuboid(ms, bufferDelayed, cube, fluidStack, retainer.getCapacity(), light, false);
+        //ms.translate(-0.25F, -0.25F, -0.25F);
+        //FluidRenderer.renderCuboid(ms, bufferDelayed, cube, fluidStack, retainer.getCapacity(), light, false);
+        RenderUtil.renderWavyFluid(ms, fluidStack, 0.25f, 0.01f, (float) (ticks + (random.nextFloat() * 100)));
+
         ms.popPose();
 
         for (int i = 0; i < amount * 25; i++) {
@@ -70,11 +72,14 @@ public class OrbitalFluidRetainerRenderer implements BlockEntityRenderer<Orbital
             ms.translate(-0.25F / 2, -0.25F / 2, -0.25F / 2);
 
             FluidCuboid subCube = cube_tiny;
+            float size = 1;
             if (i % 2 == 0) {
                 subCube = cube_large;
+                size = 2;
             }
 
-            FluidRenderer.renderCuboid(ms, bufferDelayed, subCube, fluidStack, retainer.getCapacity(), light, false);
+            //FluidRenderer.renderCuboid(ms, bufferDelayed, subCube, fluidStack, retainer.getCapacity(), light, false);
+            RenderUtil.renderWavyFluid(ms, fluidStack, 0.03125f * size, 0.003125f, (float) (ticks + (random.nextFloat() * 100)));
             ms.popPose();
         }
     }

@@ -6,6 +6,7 @@ import com.mojang.blaze3d.systems.RenderSystem;
 import com.mojang.math.Axis;
 import mod.maxbogomol.fluffy_fur.client.event.ClientTickHandler;
 import mod.maxbogomol.fluffy_fur.registry.client.FluffyFurShaders;
+import mod.maxbogomol.fluffy_fur.util.RenderUtil;
 import mod.maxbogomol.wizards_reborn.WizardsReborn;
 import mod.maxbogomol.wizards_reborn.api.crystal.CrystalType;
 import mod.maxbogomol.wizards_reborn.api.crystal.Crystals;
@@ -294,9 +295,9 @@ public class ArcaneWandScreen extends Screen {
                         stack = new ItemStack(WizardsRebornItems.EARTH_CRYSTAL.get());
                     }
                     if (i == choosedRay) {
-                        RenderUtils.renderItemModelInGui(stack, x + X - 24, y + Y - 24, 48, 48, 48, 45f * (1f - hoveramount), 45f * (1f - hoveramount), 0);
+                        RenderUtil.renderItemModelInGui(stack, x + X - 24, y + Y - 24, 48, 48, 48, 45f * (1f - hoveramount), 45f * (1f - hoveramount), 0);
                     } else {
-                        RenderUtils.renderItemModelInGui(stack, x + X - 16, y + Y - 16, 32, 32, 32, 45f * (1f - hoveramount), 45f * (1f - hoveramount), 0);
+                        RenderUtil.renderItemModelInGui(stack, x + X - 16, y + Y - 16, 32, 32, 32, 45f * (1f - hoveramount), 45f * (1f - hoveramount), 0);
                     }
                 }
 
@@ -432,9 +433,9 @@ public class ArcaneWandScreen extends Screen {
                 renderCrystalRays(stack, gui, x + X, y + Y, mouseX, mouseY, partialTicks, i, step, 1, true);
 
                 if (stack == selectedItem && mouseDistance > getWandItemDistance()) {
-                    RenderUtils.renderItemModelInGui(stack, x + X - 24, y + Y - 24, 48, 48, 48, 45f * (1f - hoveramount), 45f * (1f - hoveramount), 0);
+                    RenderUtil.renderItemModelInGui(stack, x + X - 24, y + Y - 24, 48, 48, 48, 45f * (1f - hoveramount), 45f * (1f - hoveramount), 0);
                 } else {
-                    RenderUtils.renderItemModelInGui(stack, x + X - 16, y + Y - 16, 32, 32, 32, 45f * (1f - hoveramount), 45f * (1f - hoveramount), 0);
+                    RenderUtil.renderItemModelInGui(stack, x + X - 16, y + Y - 16, 32, 32, 32, 45f * (1f - hoveramount), 45f * (1f - hoveramount), 0);
                 }
 
                 i = i + 1F;
@@ -442,7 +443,7 @@ public class ArcaneWandScreen extends Screen {
 
             if (isWandItem(getWandCrystal())) {
                 renderCrystalRays(getWandCrystal(), gui, x, y, mouseX, mouseY, partialTicks, i, step, 1, false);
-                RenderUtils.renderItemModelInGui(getWandCrystal(), x - 16, y - 16, 32, 32, 32, 45f * (1f - hoveramount), 45f * (1f - hoveramount), 0);
+                RenderUtil.renderItemModelInGui(getWandCrystal(), x - 16, y - 16, 32, 32, 32, 45f * (1f - hoveramount), 45f * (1f - hoveramount), 0);
             }
 
             if (selectedItem != null && mouseDistance > getWandItemDistance()) {
@@ -465,7 +466,7 @@ public class ArcaneWandScreen extends Screen {
             }
             float rot = 45f * (1f - hoveramount);
             if (!hover) rot = 0;
-            RenderUtils.renderItemModelInGui(getWand(), x - 32 - 144, y - 32, 64, 64, 64, -15 + rot, -15 + rot, -45);
+            RenderUtil.renderItemModelInGui(getWand(), x - 32 - 144, y - 32, 64, 64, 64, -15 + rot, -15 + rot, -45);
 
             Spell spellWand = null;
             if (getWand().getItem() instanceof ArcaneWandItem wand) {
@@ -521,7 +522,7 @@ public class ArcaneWandScreen extends Screen {
                     RenderSystem.blendFunc(GlStateManager.SourceFactor.SRC_ALPHA, GlStateManager.DestFactor.ONE_MINUS_SRC_ALPHA);
                     RenderSystem.setShader(GameRenderer::getPositionTexShader);
 
-                    RenderUtils.renderItemModelInGui(type.getCrystal(), x - 64 + w, y - h + (i * 34), 32, 32, 32, 45f * (1f - hoveramount), 45f * (1f - hoveramount), 0);
+                    RenderUtil.renderItemModelInGui(type.getCrystal(), x - 64 + w, y - h + (i * 34), 32, 32, 32, 45f * (1f - hoveramount), 45f * (1f - hoveramount), 0);
                     gui.drawString(Minecraft.getInstance().font, Component.translatable(type.getTranslatedName()), x - 64 + w + 34, y - h + (i * 34) + 12, -1, true);
                     i++;
                 }

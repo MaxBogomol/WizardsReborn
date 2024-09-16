@@ -3,15 +3,15 @@ package mod.maxbogomol.wizards_reborn.client.render.block;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.math.Axis;
 import mod.maxbogomol.fluffy_fur.client.event.ClientTickHandler;
+import mod.maxbogomol.fluffy_fur.client.render.RenderBuilder;
 import mod.maxbogomol.fluffy_fur.registry.client.FluffyFurRenderTypes;
+import mod.maxbogomol.fluffy_fur.util.RenderUtil;
 import mod.maxbogomol.wizards_reborn.api.monogram.Monogram;
 import mod.maxbogomol.wizards_reborn.common.block.engraved_wisestone.EngravedWisestoneBlock;
 import mod.maxbogomol.wizards_reborn.common.block.engraved_wisestone.EngravedWisestoneBlockEntity;
-import mod.maxbogomol.wizards_reborn.util.RenderUtils;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.blockentity.BlockEntityRenderer;
-import net.minecraft.client.renderer.texture.TextureAtlas;
 import net.minecraft.client.renderer.texture.TextureAtlasSprite;
 import net.minecraft.world.phys.Vec3;
 
@@ -33,11 +33,8 @@ public class EngravedWisestoneRenderer implements BlockEntityRenderer<EngravedWi
         if (tile.glowTicks > 0 && tile.getBlockState().getBlock() instanceof EngravedWisestoneBlock block && block.hasMonogram()) {
             Monogram monogram = block.getMonogram();
             Color color = monogram.getColor();
-            float r = color.getRed() / 255f;
-            float g = color.getGreen() / 255f;
-            float b = color.getBlue() / 255f;
 
-            TextureAtlasSprite sprite = Minecraft.getInstance().getTextureAtlas(TextureAtlas.LOCATION_BLOCKS).apply(monogram.getTexture());
+            TextureAtlasSprite sprite = RenderUtil.getSprite(monogram.getTexture());
 
             float width = 1f;
             float alpha = (tile.glowTicks + partialTicks) / 20f;
@@ -53,26 +50,21 @@ public class EngravedWisestoneRenderer implements BlockEntityRenderer<EngravedWi
             ms.mulPose(Axis.XP.rotationDegrees(tile.getVerticalBlockRotate()));
             if (tile.getVerticalBlockRotate() == 0) ms.mulPose(Axis.ZP.rotationDegrees(180f));
             ms.translate(0f, 0f, -0.505f);
-            RenderUtils.spriteGlowQuadCenter(ms, bufferDelayed, 0, 0, 0.5f, 0.5f, sprite.getU0(), sprite.getU1(), sprite.getV0(), sprite.getV1(), 1, 1, 1, 0.5f * alpha);
+            RenderBuilder.create().setRenderType(FluffyFurRenderTypes.ADDITIVE_TEXTURE)
+                    .setUV(sprite)
+                    .setColor(Color.WHITE).setAlpha(0.5f * alpha)
+                    .renderCenteredQuad(ms, 0.25f);
 
             for (int i = 0; i < 5; i++) {
                 ms.translate(0, 0, -0.005f * offset);
                 ms.mulPose(Axis.ZP.rotationDegrees((float) Math.sin(Math.toRadians(((random.nextFloat() * 360) + ticks))) * rotateOffset));
                 ms.mulPose(Axis.XP.rotationDegrees((float) Math.sin(Math.toRadians(((random.nextFloat() * 360) + ticks))) * rotateOffset));
                 ms.mulPose(Axis.YP.rotationDegrees((float) Math.sin(Math.toRadians(((random.nextFloat() * 360) + ticks))) * rotateOffset));
-
-                float tick1 = (random.nextFloat() * 360) + ticks;
-                float tick2 = (random.nextFloat() * 360) + ticks;
-                float tick3 = (random.nextFloat() * 360) + ticks;
-                float tick4 = (random.nextFloat() * 360) + ticks;
-
-                RenderUtils.spriteWaveQuad(ms, bufferDelayed, 0, 0, 0.5f * width, 0.5f * width, 0.01f, tick1, tick2, tick3, tick4, sprite.getU0(), sprite.getU1(), sprite.getV0(), sprite.getV1(), r, g, b, 0.2f * alpha);
-
-                ms.pushPose();
-                ms.mulPose(Axis.YP.rotationDegrees(180f));
-                RenderUtils.spriteWaveQuad(ms, bufferDelayed, 0, 0, 0.5f * width, 0.5f * width, 0.01f, tick4, tick3, tick2, tick1, sprite.getU1(), sprite.getU0(), sprite.getV0(), sprite.getV1(), r, g, b, 0.2f * alpha);
-                ms.popPose();
-
+                RenderBuilder.create().setRenderType(FluffyFurRenderTypes.ADDITIVE_TEXTURE)
+                        .enableSided()
+                        .setUV(sprite)
+                        .setColor(color).setAlpha(0.2f * alpha)
+                        .renderWavyQuad(ms, 0.25f * width, 0.02f * offset, ticks + (random.nextFloat() * 100));
                 width = width + 0.1f;
             }
 

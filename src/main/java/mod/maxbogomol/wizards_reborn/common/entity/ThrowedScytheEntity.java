@@ -168,7 +168,7 @@ public class ThrowedScytheEntity extends ThrowableItemProjectile {
                 Vec3 pos = new Vec3(getPosition(0.5f).toVector3f()).add(x, y, z);
 
                 if (random.nextFloat() < 0.8f) {
-                    ParticleBuilder.create(FluffyFurParticles.CUBE)
+                    ParticleBuilder.create(FluffyFurParticles.DOT) //PARTICLE CUBE
                             .setColorData(ColorParticleData.create(r, g, b).build())
                             .setTransparencyData(GenericParticleData.create(0.3f, 0).build())
                             .setScaleData(GenericParticleData.create(0.05f, 0).setEasing(Easing.QUINTIC_IN_OUT).build())
@@ -181,7 +181,7 @@ public class ThrowedScytheEntity extends ThrowableItemProjectile {
                 int i = EnchantmentHelper.getItemEnchantmentLevel(Enchantments.FIRE_ASPECT, getItem());
                 if (i > 0) {
                     if (random.nextFloat() < 0.8f) {
-                        ParticleBuilder.create(FluffyFurParticles.CUBE)
+                        ParticleBuilder.create(FluffyFurParticles.DOT) //PARTICLE CUBE
                                 .setColorData(ColorParticleData.create(0.882f, 0.498f, 0.404f, 0.979f, 0.912f, 0.585f).build())
                                 .setTransparencyData(GenericParticleData.create(0.3f, 0).build())
                                 .setScaleData(GenericParticleData.create(0.05f, 0).setEasing(Easing.QUINTIC_IN_OUT).build())
@@ -312,7 +312,7 @@ public class ThrowedScytheEntity extends ThrowableItemProjectile {
 
                     Vec3 pos = new Vec3(lerpX, lerpY, lerpZ).add(x, y, z);
 
-                    ParticleBuilder.create(FluffyFurParticles.CUBE)
+                    ParticleBuilder.create(FluffyFurParticles.DOT) //PARTICLE CUBE
                             .setColorData(ColorParticleData.create(r, g, b).build())
                             .setTransparencyData(GenericParticleData.create(0.3f, 0).build())
                             .setScaleData(GenericParticleData.create(0.1f, 0).setEasing(Easing.QUINTIC_IN_OUT).build())

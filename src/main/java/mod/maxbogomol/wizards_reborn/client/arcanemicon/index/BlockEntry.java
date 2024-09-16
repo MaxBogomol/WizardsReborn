@@ -1,8 +1,8 @@
 package mod.maxbogomol.wizards_reborn.client.arcanemicon.index;
 
 import mod.maxbogomol.fluffy_fur.client.event.ClientTickHandler;
+import mod.maxbogomol.fluffy_fur.util.RenderUtil;
 import mod.maxbogomol.wizards_reborn.client.arcanemicon.ArcanemiconGui;
-import mod.maxbogomol.wizards_reborn.util.RenderUtils;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.world.item.ItemStack;
@@ -38,7 +38,7 @@ public class BlockEntry {
         ticksUp = ticksUp % 360;
 
         if (item != ItemStack.EMPTY) {
-            RenderUtils.renderFloatingItemModelIntoGUI(gui, item, x, y - 12, (float) ticks, (float) ticksUp);
+            RenderUtil.renderFloatingItemModelIntoGUI(gui, item, x, y - 12, (float) ticks, (float) ticksUp);
         }
     }
 
