@@ -1,6 +1,5 @@
 package mod.maxbogomol.wizards_reborn.registry.client;
 
-import mod.maxbogomol.fluffy_fur.client.render.fluid.FluidCuboid;
 import mod.maxbogomol.fluffy_fur.registry.client.FluffyFurModels;
 import mod.maxbogomol.wizards_reborn.WizardsReborn;
 import mod.maxbogomol.wizards_reborn.client.model.armor.*;
@@ -24,7 +23,6 @@ import net.minecraftforge.client.event.EntityRenderersEvent;
 import net.minecraftforge.client.event.ModelEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
-import org.joml.Vector3f;
 
 import java.util.ArrayList;
 import java.util.Map;
@@ -69,10 +67,6 @@ public class WizardsRebornModels {
     public static AlchemyVialModel ALCHEMY_VIAL = null;
     public static AlchemyFlaskModel ALCHEMY_FLASK = null;
     public static AlchemyBottleModel ALCHEMY_BOTTLE = null;
-
-    public static FluidCuboid VIAL_FLUID_CUBE_0 = new FluidCuboid(new Vector3f(0, 0, 0), new Vector3f(4, 3, 4), FluidCuboid.DEFAULT_FACES);
-    public static FluidCuboid VIAL_FLUID_CUBE_1 = new FluidCuboid(new Vector3f(0, 0, 0), new Vector3f(2, 2, 2), FluidCuboid.DEFAULT_FACES);
-    public static FluidCuboid FLASK_FLUID_CUBE = new FluidCuboid(new Vector3f(0, 0, 0), new Vector3f(4, 5, 4), FluidCuboid.DEFAULT_FACES);
 
     public static ModelResourceLocation JEWELER_TABLE_STONE = addCustomModel("jeweler_table_stone");
     public static ModelResourceLocation ALTAR_OF_DROUGHT_FRAME = addCustomModel("altar_of_drought_frame");

@@ -3,31 +3,21 @@ package mod.maxbogomol.wizards_reborn.client.render.block;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.math.Axis;
 import mod.maxbogomol.fluffy_fur.client.event.ClientTickHandler;
-import mod.maxbogomol.fluffy_fur.client.render.fluid.FluidCuboid;
-import mod.maxbogomol.fluffy_fur.client.render.fluid.FluidRenderer;
-import mod.maxbogomol.fluffy_fur.registry.client.FluffyFurRenderTypes;
 import mod.maxbogomol.fluffy_fur.util.RenderUtil;
 import mod.maxbogomol.wizards_reborn.common.block.sensor.SensorBaseBlock;
 import mod.maxbogomol.wizards_reborn.common.block.sensor.fluid.FluidSensorBlockEntity;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.blockentity.BlockEntityRenderer;
 import net.minecraft.world.item.ItemDisplayContext;
-import org.joml.Vector3f;
 
 import java.util.Random;
 
 public class FluidSensorRenderer implements BlockEntityRenderer<FluidSensorBlockEntity> {
 
-    FluidCuboid CUBE = new FluidCuboid(new Vector3f(0, 0, 0), new Vector3f(1, 1, 1), FluidCuboid.DEFAULT_FACES);
-
-    public FluidSensorRenderer() {}
-
     @Override
     public void render(FluidSensorBlockEntity sensor, float partialTicks, PoseStack ms, MultiBufferSource buffers, int light, int overlay) {
         Random random = new Random();
         random.setSeed(sensor.getBlockPos().asLong());
-
-        MultiBufferSource bufferDelayed = FluffyFurRenderTypes.getDelayedRender();
 
         double ticks = (ClientTickHandler.ticksInGame + partialTicks) * 0.1F;
 
@@ -63,9 +53,7 @@ public class FluidSensorRenderer implements BlockEntityRenderer<FluidSensorBlock
             ms.mulPose(Axis.YP.rotationDegrees((float) ((random.nextFloat() * 360) + ticks)));
             ms.mulPose(Axis.XP.rotationDegrees((float) ((random.nextFloat() * 360) + ticks)));
             ms.mulPose(Axis.ZP.rotationDegrees((float) ((random.nextFloat() * 360) + ticks)));
-            ms.translate(-0.25F / 2, -0.25F / 2, -0.25F / 2);
-
-            FluidRenderer.renderCuboid(ms, bufferDelayed, CUBE, sensor.getTank().getFluid(), 1, light, false);
+            RenderUtil.renderWavyFluid(ms, sensor.getTank().getFluid(), 0.03125f, 0.0625f, false, light, 0.003125f, (float) (ticks + (random.nextFloat() * 100)));
             ms.popPose();
         }
     }

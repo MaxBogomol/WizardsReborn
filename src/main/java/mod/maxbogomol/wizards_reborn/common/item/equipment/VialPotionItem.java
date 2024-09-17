@@ -2,9 +2,7 @@ package mod.maxbogomol.wizards_reborn.common.item.equipment;
 
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.math.Axis;
-import mod.maxbogomol.fluffy_fur.client.render.fluid.FluidRenderer;
-import mod.maxbogomol.fluffy_fur.registry.client.FluffyFurRenderTypes;
-import mod.maxbogomol.fluffy_fur.util.ColorUtil;
+import mod.maxbogomol.fluffy_fur.util.RenderUtil;
 import mod.maxbogomol.wizards_reborn.WizardsReborn;
 import mod.maxbogomol.wizards_reborn.api.alchemy.AlchemyPotion;
 import mod.maxbogomol.wizards_reborn.api.alchemy.AlchemyPotionUtil;
@@ -21,9 +19,7 @@ import net.minecraft.world.level.material.Fluid;
 import net.minecraft.world.level.material.Fluids;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
-import net.minecraftforge.client.extensions.common.IClientFluidTypeExtensions;
 import net.minecraftforge.fluids.FluidStack;
-import net.minecraftforge.fluids.FluidType;
 
 import java.awt.*;
 
@@ -51,28 +47,30 @@ public class VialPotionItem extends AlchemyPotionItem {
             ms.translate(-0.125F, 0.0078125F, -0.125F);
             int uses = AlchemyPotionItem.getUses(stack);
             Color color = potion.getColor();
-            int colorI = ColorUtil.packColor(255, color.getRed(), color.getGreen(), color.getBlue());
             int usesI = 3 - uses;
-            if (uses == 0) usesI = 2;
+            if (uses == 0) usesI = 0;
+            if (uses == 1) usesI = 0;
             Fluid fluid = Fluids.WATER;
-            FluidStack fluidStack = new FluidStack(fluid, usesI);
+            FluidStack fluidStack = new FluidStack(fluid, 1);
             if (potion instanceof FluidAlchemyPotion fluidAlchemyPotion) {
-                fluid = fluidAlchemyPotion.getFluid();
-                FluidType type = fluid.getFluidType();
-                IClientFluidTypeExtensions clientType = IClientFluidTypeExtensions.of(type);
-                fluidStack = new FluidStack(fluid, usesI);
-                colorI = clientType.getTintColor(fluidStack);
-            }
-            MultiBufferSource bufferDelayed = FluffyFurRenderTypes.getDelayedRender();
-            FluidRenderer.renderScaledCuboid(ms, bufferDelayed, WizardsRebornModels.VIAL_FLUID_CUBE_0, fluidStack, colorI, 0, 2, light, false);
-            ms.popPose();
-
-            if (uses == 0) {
-                ms.translate(0, 0.25, 0);
-                ms.scale(1.5F, 1.5F, 1.5F);
-                ms.translate(-0.0625F, -0.0078125F, -0.0625F);
-                fluidStack = new FluidStack(fluidStack.getFluid(), 1);
-                FluidRenderer.renderScaledCuboid(ms, bufferDelayed, WizardsRebornModels.VIAL_FLUID_CUBE_1, fluidStack, colorI, 0, 1, light, false);
+                fluidStack = new FluidStack(fluidAlchemyPotion.getFluid(), 1);
+                RenderUtil.renderFluid(ms, fluidStack, 0.25f, 0.1875f * (1f - (usesI / 2f)), 0.25f, 0.25f, 0.1875f * (1f - (usesI / 2f)), 0.25f, false, light);
+                ms.popPose();
+                if (uses == 0) {
+                    ms.translate(0, 0.25, 0);
+                    ms.scale(1.5F, 1.5F, 1.5F);
+                    ms.translate(-0.0625F, -0.0078125F, -0.0625F);
+                    RenderUtil.renderFluid(ms, fluidStack, 0.125f, 0.125f, false, light);
+                }
+            } else {
+                RenderUtil.renderFluid(ms, fluidStack, 0.25f, 0.1875f * (1f - (usesI / 2f)), 0.25f, 0.25f, 0.1875f * (1f - (usesI / 2f)), 0.25f, color, false, light);
+                ms.popPose();
+                if (uses == 0) {
+                    ms.translate(0, 0.25, 0);
+                    ms.scale(1.5F, 1.5F, 1.5F);
+                    ms.translate(-0.0625F, -0.0078125F, -0.0625F);
+                    RenderUtil.renderFluid(ms, fluidStack, 0.125f, 0.125f, color, false, light);
+                }
             }
         }
 

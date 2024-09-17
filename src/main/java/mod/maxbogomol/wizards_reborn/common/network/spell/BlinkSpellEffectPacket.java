@@ -1,10 +1,12 @@
 package mod.maxbogomol.wizards_reborn.common.network.spell;
 
 import mod.maxbogomol.fluffy_fur.client.particle.ParticleBuilder;
+import mod.maxbogomol.fluffy_fur.client.particle.behavior.CubeParticleBehavior;
 import mod.maxbogomol.fluffy_fur.client.particle.data.ColorParticleData;
 import mod.maxbogomol.fluffy_fur.client.particle.data.GenericParticleData;
 import mod.maxbogomol.fluffy_fur.client.particle.data.SpinParticleData;
 import mod.maxbogomol.fluffy_fur.registry.client.FluffyFurParticles;
+import mod.maxbogomol.fluffy_fur.registry.client.FluffyFurRenderTypes;
 import mod.maxbogomol.wizards_reborn.WizardsReborn;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.util.Mth;
@@ -117,7 +119,9 @@ public class BlinkSpellEffectPacket {
                         }
                         if (msg.burst) {
                             if (random.nextFloat() < 0.75) {
-                                ParticleBuilder.create(FluffyFurParticles.DOT) //PARTICLE CUBE
+                                ParticleBuilder.create(FluffyFurParticles.SQUARE)
+                                        .setRenderType(FluffyFurRenderTypes.ADDITIVE)
+                                        .setBehavior(CubeParticleBehavior.create().build())
                                         .setColorData(ColorParticleData.create(msg.colorR, msg.colorG, msg.colorB).build())
                                         .setTransparencyData(GenericParticleData.create(0.2f, 0).build())
                                         .setScaleData(GenericParticleData.create(0.1f, 0).build())

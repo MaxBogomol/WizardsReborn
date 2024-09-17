@@ -4,6 +4,7 @@ import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
 import com.mojang.math.Axis;
 import mod.maxbogomol.fluffy_fur.client.particle.ParticleBuilder;
+import mod.maxbogomol.fluffy_fur.client.particle.behavior.CubeParticleBehavior;
 import mod.maxbogomol.fluffy_fur.client.particle.data.ColorParticleData;
 import mod.maxbogomol.fluffy_fur.client.particle.data.GenericParticleData;
 import mod.maxbogomol.fluffy_fur.client.particle.data.SpinParticleData;
@@ -148,7 +149,9 @@ public class AuraSpell extends Spell {
                 }
 
                 if (random.nextFloat() < 0.45f) {
-                    ParticleBuilder.create(FluffyFurParticles.DOT) //PARTICLE CUBE
+                    ParticleBuilder.create(FluffyFurParticles.SQUARE)
+                            .setRenderType(FluffyFurRenderTypes.ADDITIVE)
+                            .setBehavior(CubeParticleBehavior.create().build())
                             .setColorData(ColorParticleData.create(color).build())
                             .setTransparencyData(GenericParticleData.create(0.5f, 0).build())
                             .setScaleData(GenericParticleData.create(0.15f, 0f).build())

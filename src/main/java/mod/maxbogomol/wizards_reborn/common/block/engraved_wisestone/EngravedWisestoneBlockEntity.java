@@ -11,6 +11,7 @@ import mod.maxbogomol.fluffy_fur.common.block.entity.TickableBlockEntity;
 import mod.maxbogomol.fluffy_fur.common.easing.Easing;
 import mod.maxbogomol.fluffy_fur.common.network.BlockEntityUpdate;
 import mod.maxbogomol.fluffy_fur.registry.client.FluffyFurParticles;
+import mod.maxbogomol.fluffy_fur.registry.client.FluffyFurRenderTypes;
 import mod.maxbogomol.wizards_reborn.WizardsReborn;
 import mod.maxbogomol.wizards_reborn.api.monogram.Monogram;
 import mod.maxbogomol.wizards_reborn.api.wissen.IWissenWandFunctionalBlockEntity;
@@ -75,6 +76,7 @@ public class EngravedWisestoneBlockEntity extends BlockEntityBase implements Tic
                     float b = color.getBlue() / 255f;
 
                     ParticleBuilder.create(FluffyFurParticles.SQUARE)
+                            .setRenderType(FluffyFurRenderTypes.ADDITIVE)
                             .setBehavior(CubeParticleBehavior.create().build())
                             .setColorData(ColorParticleData.create(r, g, b, random.nextFloat(), random.nextFloat(), random.nextFloat()).build())
                             .setTransparencyData(GenericParticleData.create(0.75f, 0).build())
