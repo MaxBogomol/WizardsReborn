@@ -1,14 +1,18 @@
 package mod.maxbogomol.wizards_reborn.common.block.arcane_iterator;
 
+import mod.maxbogomol.fluffy_fur.client.particle.GenericParticle;
 import mod.maxbogomol.fluffy_fur.client.particle.ParticleBuilder;
+import mod.maxbogomol.fluffy_fur.client.particle.behavior.TrailParticleBehavior;
 import mod.maxbogomol.fluffy_fur.client.particle.data.ColorParticleData;
 import mod.maxbogomol.fluffy_fur.client.particle.data.GenericParticleData;
 import mod.maxbogomol.fluffy_fur.client.particle.data.SpinParticleData;
+import mod.maxbogomol.fluffy_fur.client.particle.options.ItemParticleOptions;
 import mod.maxbogomol.fluffy_fur.common.block.entity.BlockEntityBase;
 import mod.maxbogomol.fluffy_fur.common.block.entity.TickableBlockEntity;
 import mod.maxbogomol.fluffy_fur.common.easing.Easing;
 import mod.maxbogomol.fluffy_fur.common.network.BlockEntityUpdate;
 import mod.maxbogomol.fluffy_fur.registry.client.FluffyFurParticles;
+import mod.maxbogomol.fluffy_fur.registry.client.FluffyFurRenderTypes;
 import mod.maxbogomol.wizards_reborn.WizardsReborn;
 import mod.maxbogomol.wizards_reborn.api.arcaneenchantment.ArcaneEnchantment;
 import mod.maxbogomol.wizards_reborn.api.arcaneenchantment.ArcaneEnchantmentUtil;
@@ -22,10 +26,10 @@ import mod.maxbogomol.wizards_reborn.common.config.Config;
 import mod.maxbogomol.wizards_reborn.common.network.PacketHandler;
 import mod.maxbogomol.wizards_reborn.common.network.block.ArcaneIteratorBurstEffectPacket;
 import mod.maxbogomol.wizards_reborn.common.recipe.ArcaneIteratorRecipe;
-import mod.maxbogomol.wizards_reborn.registry.common.block.WizardsRebornBlockEntities;
-import mod.maxbogomol.wizards_reborn.registry.common.damage.WizardsRebornDamage;
 import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornRecipes;
 import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornSounds;
+import mod.maxbogomol.wizards_reborn.registry.common.block.WizardsRebornBlockEntities;
+import mod.maxbogomol.wizards_reborn.registry.common.damage.WizardsRebornDamage;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.RegistryAccess;
 import net.minecraft.nbt.CompoundTag;
@@ -47,12 +51,15 @@ import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.AABB;
+import net.minecraft.world.phys.Vec3;
 import net.minecraftforge.common.extensions.IForgeBlockEntity;
 
+import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
+import java.util.function.Consumer;
 
 public class ArcaneIteratorBlockEntity extends BlockEntityBase implements TickableBlockEntity, IWissenBlockEntity, ICooldownBlockEntity, IWissenWandFunctionalBlockEntity, IItemResultBlockEntity {
     public int wissenInCraft= 0;
@@ -209,21 +216,21 @@ public class ArcaneIteratorBlockEntity extends BlockEntityBase implements Tickab
                             }
 
                             int ii = 0;
-                            for (int i = 0; i < pedestals.size(); i++) {
-                                if (!pedestals.get(i).getItemHandler().getItem(0).isEmpty()) {
-                                    if (pedestals.get(i).getItemHandler().getItem(0).hasCraftingRemainingItem()) {
-                                        pedestals.get(i).getItemHandler().setItem(0, pedestals.get(i).getItemHandler().getItem(0).getCraftingRemainingItem());
+                            for (ArcanePedestalBlockEntity pedestal : pedestals) {
+                                if (!pedestal.getItemHandler().getItem(0).isEmpty()) {
+                                    if (pedestal.getItemHandler().getItem(0).hasCraftingRemainingItem()) {
+                                        pedestal.getItemHandler().setItem(0, pedestal.getItemHandler().getItem(0).getCraftingRemainingItem());
                                     } else {
-                                        pedestals.get(i).getItemHandler().removeItemNoUpdate(0);
+                                        pedestal.getItemHandler().removeItemNoUpdate(0);
                                     }
-                                    BlockEntityUpdate.packet(pedestals.get(i));
+                                    BlockEntityUpdate.packet(pedestal);
                                     CompoundTag tagBlock = new CompoundTag();
-                                    tagBlock.putInt("x", pedestals.get(i).getBlockPos().getX());
-                                    tagBlock.putInt("y", pedestals.get(i).getBlockPos().getY());
-                                    tagBlock.putInt("z", pedestals.get(i).getBlockPos().getZ());
+                                    tagBlock.putInt("x", pedestal.getBlockPos().getX());
+                                    tagBlock.putInt("y", pedestal.getBlockPos().getY());
+                                    tagBlock.putInt("z", pedestal.getBlockPos().getZ());
                                     tagPos.put(String.valueOf(ii), tagBlock);
                                     ii++;
-                                    level.playSound(WizardsReborn.proxy.getPlayer(), pedestals.get(i).getBlockPos(), WizardsRebornSounds.WISSEN_TRANSFER.get(), SoundSource.BLOCKS, 0.25f, (float) (1f + ((random.nextFloat() - 0.5D) / 4)));
+                                    level.playSound(WizardsReborn.proxy.getPlayer(), pedestal.getBlockPos(), WizardsRebornSounds.WISSEN_TRANSFER.get(), SoundSource.BLOCKS, 0.25f, (float) (1f + ((random.nextFloat() - 0.5D) / 4)));
                                 }
                             }
                             getMainPedestal().setItem(0, stack);
@@ -256,7 +263,7 @@ public class ArcaneIteratorBlockEntity extends BlockEntityBase implements Tickab
                 List<ArcaneIteratorBurst> newBursts = new ArrayList<>();
                 newBursts.addAll(bursts);
                 for (ArcaneIteratorBurst burst : newBursts) {
-                    burst.tick();
+                    //burst.tick();
                     if (burst.end) {
                         bursts.remove(burst);
                     }
@@ -277,7 +284,7 @@ public class ArcaneIteratorBlockEntity extends BlockEntityBase implements Tickab
                                 .setColorData(ColorParticleData.create(Config.wissenColorR(), Config.wissenColorG(), Config.wissenColorB()).build())
                                 .setTransparencyData(GenericParticleData.create(0.25f, 0).build())
                                 .setScaleData(GenericParticleData.create(0.05f * getStage(), 0.1f * getStage(), 0).setEasing(Easing.QUINTIC_IN_OUT).build())
-                                .setSpinData(SpinParticleData.create().randomSpin(0.5f).build())
+                                .setSpinData(SpinParticleData.create().randomOffset().randomSpin(0.5f).build())
                                 .setLifetime(30)
                                 .randomVelocity(0.015f * getStage())
                                 .spawn(level, getBlockPos().getX() + 0.5F, getBlockPos().getY() - 0.7F, getBlockPos().getZ() + 0.5F);
@@ -330,11 +337,78 @@ public class ArcaneIteratorBlockEntity extends BlockEntityBase implements Tickab
                     List<ArcanePedestalBlockEntity> pedestals = getPedestals();
                     for (ArcanePedestalBlockEntity pedestal : pedestals) {
                         if (!pedestal.getItemHandler().getItem(0).isEmpty()) {
-                            if (random.nextFloat() < 0.025) {
-                                bursts.add(new ArcaneIteratorBurst(level, pedestal.getBlockPos().getX() + 0.5F, pedestal.getBlockPos().getY() + 1.3F, pedestal.getBlockPos().getZ() + 0.5F,
-                                        getBlockPos().getX() + 0.5F, getBlockPos().getY() + 0.5F, getBlockPos().getZ() + 0.5F, 0.05f, 20, 200,
-                                        random.nextFloat(), random.nextFloat(), random.nextFloat()));
-                                level.playSound(WizardsReborn.proxy.getPlayer(), pedestal.getBlockPos(), WizardsRebornSounds.WISSEN_TRANSFER.get(), SoundSource.BLOCKS, 0.25f, (float) (1f + ((random.nextFloat() - 0.5D) / 4)));
+                            if (pedestal != getMainPedestal()) {
+                                if (random.nextFloat() < 0.025f) {
+                                    final Consumer<GenericParticle> blockTarget = p -> {
+                                        Vec3 blockPos = getBlockPos().getCenter();
+                                        Vec3 pos = p.getPosition();
+                                        float x = 0;
+                                        float y = 0;
+                                        float z = 0;
+
+                                        if (blockPos.x() < pos.x()) x = -0.01f;
+                                        if (blockPos.x() > pos.x()) x = 0.01f;
+                                        if (blockPos.y() < pos.y()) y = -0.01f;
+                                        if (blockPos.y() > pos.y()) y = 0.01f;
+                                        if (blockPos.z() < pos.z()) z = -0.01f;
+                                        if (blockPos.z() > pos.z()) z = 0.01f;
+
+                                        p.setSpeed(p.getSpeed().add(x, y, z));
+                                    };
+                                    ParticleBuilder.create(FluffyFurParticles.TRAIL)
+                                            .setRenderType(FluffyFurRenderTypes.ADDITIVE_PARTICLE_TEXTURE)
+                                            .setBehavior(TrailParticleBehavior.create()
+                                                    .enableSecondColor()
+                                                    .setColorData(ColorParticleData.create().setRandomColor().build())
+                                                    .setTransparencyData(GenericParticleData.create(1, 1, 0).setEasing(Easing.QUARTIC_OUT).build())
+                                                    .build())
+                                            .setColorData(ColorParticleData.create().setRandomColor().build())
+                                            .setTransparencyData(GenericParticleData.create(1, 1, 0).setEasing(Easing.QUARTIC_OUT).build())
+                                            .setScaleData(GenericParticleData.create(0.5f).build())
+                                            .addTickActor(blockTarget)
+                                            .setLifetime(100, 50)
+                                            .randomVelocity(0.5f)
+                                            .disablePhysics()
+                                            .setFriction(0.95f)
+                                            .spawn(level, pedestal.getBlockPos().getX() + 0.5f, pedestal.getBlockPos().getY() + 1.3f, pedestal.getBlockPos().getZ() + 0.5f);
+                                    ParticleBuilder.create(FluffyFurParticles.SQUARE)
+                                            .setColorData(ColorParticleData.create().setRandomColor().build())
+                                            .setTransparencyData(GenericParticleData.create(0.5f, 0).build())
+                                            .setScaleData(GenericParticleData.create(0.05f, 0.1f, 0).setEasing(Easing.QUINTIC_IN_OUT).build())
+                                            .setSpinData(SpinParticleData.create().randomOffset().randomSpin(0.5f).build())
+                                            .setLifetime(30)
+                                            .randomVelocity(0.035f)
+                                            .repeat(level, pedestal.getBlockPos().getX() + 0.5f, pedestal.getBlockPos().getY() + 1.3f, pedestal.getBlockPos().getZ() + 0.5f, 5, 0.9f);
+                                    level.playSound(WizardsReborn.proxy.getPlayer(), pedestal.getBlockPos(), WizardsRebornSounds.WISSEN_TRANSFER.get(), SoundSource.BLOCKS, 0.25f, (float) (1f + ((random.nextFloat() - 0.5D) / 4)));
+                                }
+                                if (random.nextFloat() < 0.025f) {
+                                    Vec3 to = getBlockPos().getCenter().add(0, -1.3f, 0);
+                                    Vec3 from = pedestal.getBlockPos().getCenter().add(0, 0.7f, 0);
+
+                                    double dX = to.x() - from.x();
+                                    double dY = to.y() - from.y();
+                                    double dZ = to.z() - from.z();
+                                    float distance = (float) Math.sqrt(Math.pow(dX, 2) + Math.pow(dY, 2) + Math.pow(dZ, 2)) / 20f;
+
+                                    double yaw = Math.atan2(dZ, dX);
+                                    double pitch = Math.atan2(Math.sqrt(dZ * dZ + dX * dX), dY) + Math.PI;
+
+                                    double x = Math.sin(pitch) * Math.cos(yaw) * distance;
+                                    double y = Math.cos(pitch) * distance;
+                                    double z = Math.sin(pitch) * Math.sin(yaw) * distance;
+
+                                    ItemParticleOptions options = new ItemParticleOptions(FluffyFurParticles.ITEM.get(), pedestal.getItemHandler().getItem(0));
+                                    ParticleBuilder.create(options)
+                                            .setRenderType(FluffyFurRenderTypes.TRANSLUCENT_BLOCK_PARTICLE)
+                                            .setColorData(ColorParticleData.create(Color.WHITE).build())
+                                            .setTransparencyData(GenericParticleData.create(0.2f, 0.5f, 0).setEasing(Easing.EXPO_IN, Easing.ELASTIC_OUT).build())
+                                            .setScaleData(GenericParticleData.create(0.05f, 0.1f, 0).setEasing(Easing.EXPO_IN, Easing.ELASTIC_OUT).build())
+                                            .setSpinData(SpinParticleData.create().randomSpin(0.2f).build())
+                                            .setLifetime(20)
+                                            .addVelocity(-x, -y, -z)
+                                            .disablePhysics()
+                                            .spawn(level, pedestal.getBlockPos().getX() + 0.5f, pedestal.getBlockPos().getY() + 1.3f, pedestal.getBlockPos().getZ() + 0.5f);
+                                }
                             }
                         }
                     }

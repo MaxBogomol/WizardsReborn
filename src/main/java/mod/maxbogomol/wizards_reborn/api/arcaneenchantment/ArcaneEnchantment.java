@@ -88,7 +88,6 @@ public class ArcaneEnchantment {
         float ticks = (ClientTickHandler.ticksInGame + Minecraft.getInstance().getPartialTick()) * 0.4f + (index * 35);
         if (isCurse()) ticks = -ticks;
 
-        RenderUtil.startGlowGuiSprite();
         poseStack.pushPose();
         poseStack.translate(x + 8, y + 8, 100);
         poseStack.mulPose(Axis.ZP.rotationDegrees(ticks));
@@ -98,6 +97,5 @@ public class ArcaneEnchantment {
                 .renderCenteredQuad(poseStack, 9f * size)
                 .endBatch();
         poseStack.popPose();
-        RenderUtil.endGlowGuiSprite();
     }
 }

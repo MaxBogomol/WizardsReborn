@@ -70,7 +70,7 @@ public class SaltLanternBlockEntity extends SaltTorchBlockEntity {
 
             if (random.nextFloat() < 0.5) {
                 ParticleBuilder.create(FluffyFurParticles.SPARKLE)
-                        .setBehavior(ParticleBehavior.create().enableCamera().disableSideLayer()
+                        .setBehavior(ParticleBehavior.create().enableCamera().enableSided()
                                 .setXSpinData(SpinParticleData.create().randomOffsetDegrees(-25, 25).build())
                                 .setYSpinData(SpinParticleData.create().randomOffsetDegrees(-25, 25).build())
                                 .build())
@@ -83,7 +83,7 @@ public class SaltLanternBlockEntity extends SaltTorchBlockEntity {
             }
             if (random.nextFloat() < 0.45) {
                 ParticleBuilder.create(random.nextFloat() < 0.3 ? FluffyFurParticles.TINY_STAR : FluffyFurParticles.SPARKLE)
-                        .setBehavior(ParticleBehavior.create(0, 0, 0).enableCamera().disableSideLayer()
+                        .setBehavior(ParticleBehavior.create(0, 0, 0).enableCamera().enableSided()
                                 .setXSpinData(SpinParticleData.create().randomOffsetDegrees(-20, 20).build())
                                 .setYSpinData(SpinParticleData.create().randomOffsetDegrees(-20, 20).build())
                                 .build())

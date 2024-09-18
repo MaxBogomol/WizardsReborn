@@ -73,7 +73,7 @@ public class TotemOfFlamesBlockEntity extends ExposedBlockSimpleInventory implem
                         }
                         if (random.nextFloat() < 0.75) {
                             ParticleBuilder.create(FluffyFurParticles.SPARKLE)
-                                    .setBehavior(ParticleBehavior.create().enableCamera().disableSideLayer()
+                                    .setBehavior(ParticleBehavior.create().enableCamera().enableSided()
                                             .setXSpinData(SpinParticleData.create().randomOffsetDegrees(-25, 25).build())
                                             .setYSpinData(SpinParticleData.create().randomOffsetDegrees(-25, 25).build())
                                             .build())
