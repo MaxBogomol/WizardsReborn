@@ -41,9 +41,9 @@ public class FluidStorageBaseItem extends BlockItem implements IFluidItem, ICust
     @Override
     public int getMaxFluid(ItemStack stack) {
         if (getBlock() instanceof EntityBlock tileBlock) {
-            BlockEntity tile = tileBlock.newBlockEntity(new BlockPos(0, 0, 0), getBlock().defaultBlockState());
-            if (tile instanceof IFluidBlockEntity fluidTile) {
-                return fluidTile.getFluidMaxAmount();
+            BlockEntity blockEntity = tileBlock.newBlockEntity(new BlockPos(0, 0, 0), getBlock().defaultBlockState());
+            if (blockEntity instanceof IFluidBlockEntity fluidBlockEntity) {
+                return fluidBlockEntity.getFluidMaxAmount();
             }
         }
         return 0;
@@ -53,12 +53,12 @@ public class FluidStorageBaseItem extends BlockItem implements IFluidItem, ICust
     @Override
     public void appendHoverText(ItemStack stack, Level level, List<Component> list, TooltipFlag flags) {
         if (getBlock() instanceof EntityBlock tileBlock) {
-            BlockEntity tile = tileBlock.newBlockEntity(new BlockPos(0, 0, 0), getBlock().defaultBlockState());
-            if (tile instanceof IFluidBlockEntity fluidTile) {
+            BlockEntity blockEntity = tileBlock.newBlockEntity(new BlockPos(0, 0, 0), getBlock().defaultBlockState());
+            if (blockEntity instanceof IFluidBlockEntity fluidBlockEntity) {
                 CompoundTag nbt = stack.getOrCreateTag();
                 if (nbt.contains("fluidTank")) {
                     FluidStack fluid = FluidStack.loadFluidStackFromNBT(nbt.getCompound("fluidTank"));
-                    Component fluidName = NumericalUtil.getFluidName(fluid, fluidTile.getFluidMaxAmount());
+                    Component fluidName = NumericalUtil.getFluidName(fluid, fluidBlockEntity.getFluidMaxAmount());
                     if (!ClientConfig.NUMERICAL_FLUID.get()) {
                         fluidName = NumericalUtil.getFluidName(fluid);
                     }

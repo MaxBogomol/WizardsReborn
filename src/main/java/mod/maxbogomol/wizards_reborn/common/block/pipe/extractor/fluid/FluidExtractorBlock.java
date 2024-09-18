@@ -69,7 +69,7 @@ public class FluidExtractorBlock extends ExtractorBaseBlock {
 
     @Override
     public int getAnalogOutputSignal(BlockState state, Level level, BlockPos pos) {
-        FluidPipeBaseBlockEntity tile = (FluidPipeBaseBlockEntity) level.getBlockEntity(pos);
-        return Mth.floor(((float) tile.tank.getFluidAmount() / tile.getCapacity()) * 14.0F);
+        FluidPipeBaseBlockEntity blockEntity = (FluidPipeBaseBlockEntity) level.getBlockEntity(pos);
+        return Mth.floor(((float) blockEntity.tank.getFluidAmount() / blockEntity.getCapacity()) * 14.0F);
     }
 }

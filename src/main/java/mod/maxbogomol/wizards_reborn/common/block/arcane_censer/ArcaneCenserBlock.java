@@ -93,11 +93,11 @@ public class ArcaneCenserBlock extends HorizontalDirectionalBlock implements Ent
     @Override
     public void onRemove(@Nonnull BlockState state, @Nonnull Level level, @Nonnull BlockPos pos, @Nonnull BlockState newState, boolean isMoving) {
         if (state.getBlock() != newState.getBlock()) {
-            BlockEntity tile = level.getBlockEntity(pos);
-            if (tile instanceof ArcaneCenserBlockEntity censerTile) {
-                SimpleContainer inv = new SimpleContainer(censerTile.getInventorySize());
-                for (int i = 0; i < censerTile.getInventorySize(); i++) {
-                    ItemStack item = censerTile.getItem(i);
+            BlockEntity blockEntity = level.getBlockEntity(pos);
+            if (blockEntity instanceof ArcaneCenserBlockEntity censerBlockEntity) {
+                SimpleContainer inv = new SimpleContainer(censerBlockEntity.getInventorySize());
+                for (int i = 0; i < censerBlockEntity.getInventorySize(); i++) {
+                    ItemStack item = censerBlockEntity.getItem(i);
                     if (ArcaneCenserBlockEntity.getItemBurnCenser(item) <= 0) {
                         inv.addItem(item);
                     }

@@ -61,8 +61,8 @@ public class EngravedWisestoneBlock extends FaceAttachedHorizontalDirectionalBlo
 
     @Override
     public int getAnalogOutputSignal(BlockState state, Level level, BlockPos pos) {
-        BlockSimpleInventory tile = (BlockSimpleInventory) level.getBlockEntity(pos);
-        return AbstractContainerMenu.getRedstoneSignalFromContainer(tile.getItemHandler());
+        BlockSimpleInventory blockEntity = (BlockSimpleInventory) level.getBlockEntity(pos);
+        return AbstractContainerMenu.getRedstoneSignalFromContainer(blockEntity.getItemHandler());
     }*/
 
     public boolean hasMonogram() {

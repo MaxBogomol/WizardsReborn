@@ -31,6 +31,8 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.shapes.BooleanOp;
 import net.minecraft.world.phys.shapes.Shapes;
+import net.minecraftforge.items.IItemHandler;
+import org.jetbrains.annotations.NotNull;
 
 import javax.annotation.Nullable;
 import java.util.List;
@@ -80,9 +82,9 @@ public class ArcaneHopperBlockEntity extends RandomizableContainerBlockEntity im
         return this.items.size();
     }
 
-    public ItemStack removeItem(int index, int pCount) {
+    public ItemStack removeItem(int index, int count) {
         this.unpackLootTable((Player)null);
-        return ContainerHelper.removeItem(this.getItems(), index, pCount);
+        return ContainerHelper.removeItem(this.getItems(), index, count);
     }
 
     public void setItem(int index, ItemStack stack) {
@@ -91,10 +93,6 @@ public class ArcaneHopperBlockEntity extends RandomizableContainerBlockEntity im
         if (stack.getCount() > this.getMaxStackSize()) {
             stack.setCount(this.getMaxStackSize());
         }
-    }
-
-    protected Component getDefaultName() {
-        return Component.translatable("container.hopper");
     }
 
     public static void pushItemsTick(Level level, BlockPos pos, BlockState state, ArcaneHopperBlockEntity blockEntity) {
@@ -224,15 +222,15 @@ public class ArcaneHopperBlockEntity extends RandomizableContainerBlockEntity im
         return false;
     }
 
-    public static boolean addItem(Container container, ItemEntity pItem) {
+    public static boolean addItem(Container container, ItemEntity item) {
         boolean flag = false;
-        ItemStack itemstack = pItem.getItem().copy();
+        ItemStack itemstack = item.getItem().copy();
         ItemStack itemstack1 = addItem((Container)null, container, itemstack, (Direction)null);
         if (itemstack1.isEmpty()) {
             flag = true;
-            pItem.discard();
+            item.discard();
         } else {
-            pItem.setItem(itemstack1);
+            item.setItem(itemstack1);
         }
 
         return flag;
@@ -412,25 +410,25 @@ public class ArcaneHopperBlockEntity extends RandomizableContainerBlockEntity im
         return this.items;
     }
 
-    protected void setItems(NonNullList<ItemStack> pItems) {
-        this.items = pItems;
+    protected void setItems(NonNullList<ItemStack> items) {
+        this.items = items;
     }
 
-    public static void entityInside(Level level, BlockPos pos, BlockState state, Entity pEntity, ArcaneHopperBlockEntity blockEntity) {
-        if (pEntity instanceof ItemEntity && Shapes.joinIsNotEmpty(Shapes.create(pEntity.getBoundingBox().move((double)(-pos.getX()), (double)(-pos.getY()), (double)(-pos.getZ()))), blockEntity.getSuckShape(), BooleanOp.AND)) {
+    public static void entityInside(Level level, BlockPos pos, BlockState state, Entity entity, ArcaneHopperBlockEntity blockEntity) {
+        if (entity instanceof ItemEntity && Shapes.joinIsNotEmpty(Shapes.create(entity.getBoundingBox().move((double)(-pos.getX()), (double)(-pos.getY()), (double)(-pos.getZ()))), blockEntity.getSuckShape(), BooleanOp.AND)) {
             tryMoveItems(level, pos, state, blockEntity, () -> {
-                return addItem(blockEntity, (ItemEntity)pEntity);
+                return addItem(blockEntity, (ItemEntity)entity);
             });
         }
 
     }
 
-    protected AbstractContainerMenu createMenu(int pId, Inventory player) {
-        return new HopperMenu(pId, player, this);
+    protected AbstractContainerMenu createMenu(int id, Inventory player) {
+        return new HopperMenu(id, player, this);
     }
 
     @Override
-    protected net.minecraftforge.items.IItemHandler createUnSidedHandler() {
+    protected IItemHandler createUnSidedHandler() {
         return new ArcaneHopperItemHandler(this);
     }
 
@@ -439,8 +437,9 @@ public class ArcaneHopperBlockEntity extends RandomizableContainerBlockEntity im
     }
 
     @Override
-    public Component getName() {
-        return getName() != null ? getName() : Component.translatable("gui.wizards_reborn.arcane_hopper.title");
+    @NotNull
+    public Component getDefaultName() {
+        return Component.translatable("gui.wizards_reborn.arcane_hopper.title");
     }
 
     @Nullable

@@ -118,17 +118,17 @@ public class WissenCasingBlockEntity extends WissenTranslatorBlockEntity {
     }
 
     @Override
-    public boolean wissenWandReceiveConnect(ItemStack stack, UseOnContext context, BlockEntity tile) {
+    public boolean wissenWandReceiveConnect(ItemStack stack, UseOnContext context, BlockEntity blockEntity) {
         return false;
     }
 
     @Override
-    public boolean wissenWandSendConnect(ItemStack stack, UseOnContext context, BlockEntity tile) {
+    public boolean wissenWandSendConnect(ItemStack stack, UseOnContext context, BlockEntity blockEntity) {
         return false;
     }
 
     @Override
-    public boolean wissenWandReload(ItemStack stack, UseOnContext context, BlockEntity tile) {
+    public boolean wissenWandReload(ItemStack stack, UseOnContext context, BlockEntity blockEntity) {
         resetsConnections();
         BlockEntityUpdate.packet(this);
         return true;

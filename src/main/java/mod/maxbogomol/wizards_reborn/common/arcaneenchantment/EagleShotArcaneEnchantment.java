@@ -142,14 +142,14 @@ public class EagleShotArcaneEnchantment extends ArcaneEnchantment {
         return fow;
     }
 
-    public static HitResult getHitResult(Vec3 pStartVec, Entity pProjectile, Predicate<Entity> pFilter, Vec3 pEndVecOffset, Level pLevel) {
-        Vec3 vec3 = pStartVec.add(pEndVecOffset);
-        HitResult hitresult = pLevel.clip(new ClipContext(pStartVec, vec3, ClipContext.Block.COLLIDER, ClipContext.Fluid.NONE, pProjectile));
+    public static HitResult getHitResult(Vec3 startVec, Entity projectile, Predicate<Entity> filter, Vec3 endVecOffset, Level level) {
+        Vec3 vec3 = startVec.add(endVecOffset);
+        HitResult hitresult = level.clip(new ClipContext(startVec, vec3, ClipContext.Block.COLLIDER, ClipContext.Fluid.NONE, projectile));
         if (hitresult.getType() != HitResult.Type.MISS) {
             vec3 = hitresult.getLocation();
         }
 
-        HitResult hitresult1 = ProjectileUtil.getEntityHitResult(pLevel, pProjectile, pStartVec, vec3, pProjectile.getBoundingBox().expandTowards(pEndVecOffset).inflate(1.0D), pFilter);
+        HitResult hitresult1 = ProjectileUtil.getEntityHitResult(level, projectile, startVec, vec3, projectile.getBoundingBox().expandTowards(endVecOffset).inflate(1.0D), filter);
         if (hitresult1 != null) {
             hitresult = hitresult1;
         }

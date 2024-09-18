@@ -169,11 +169,11 @@ public class CrystalBlock extends Block implements EntityBlock, SimpleWaterlogge
     @Override
     public void onRemove(@Nonnull BlockState state, @Nonnull Level level, @Nonnull BlockPos pos, @Nonnull BlockState newState, boolean isMoving) {
         if (state.getBlock() != newState.getBlock()) {
-            BlockEntity tile = level.getBlockEntity(pos);
-            if (tile instanceof BlockSimpleInventory) {
-                Containers.dropContents(level, pos, ((BlockSimpleInventory) tile).getItemHandler());
+            BlockEntity blockEntity = level.getBlockEntity(pos);
+            if (blockEntity instanceof BlockSimpleInventory blockSimpleInventory) {
+                Containers.dropContents(level, pos, (blockSimpleInventory).getItemHandler());
             }
-            super.onRemove(state, level, pos, newState, isMoving);
         }
+        super.onRemove(state, level, pos, newState, isMoving);
     }
 }

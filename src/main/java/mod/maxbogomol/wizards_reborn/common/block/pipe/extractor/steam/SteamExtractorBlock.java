@@ -83,8 +83,8 @@ public class SteamExtractorBlock extends TinyExtractorBaseBlock {
 
     @Override
     public int getAnalogOutputSignal(BlockState state, Level level, BlockPos pos) {
-        SteamPipeBaseBlockEntity tile = (SteamPipeBaseBlockEntity) level.getBlockEntity(pos);
-        return Mth.floor(((float) tile.getSteam() / tile.getMaxSteam()) * 14.0F);
+        SteamPipeBaseBlockEntity blockEntity = (SteamPipeBaseBlockEntity) level.getBlockEntity(pos);
+        return Mth.floor(((float) blockEntity.getSteam() / blockEntity.getMaxSteam()) * 14.0F);
     }
 
     @Override
@@ -92,9 +92,9 @@ public class SteamExtractorBlock extends TinyExtractorBaseBlock {
         if (level.isClientSide()) {
             if (!player.isCreative()) {
                 if (level.getBlockEntity(pos) != null) {
-                    if (level.getBlockEntity(pos) instanceof ISteamBlockEntity tile) {
-                        if (tile.getMaxSteam() > 0) {
-                            float amount = (float) tile.getSteam() / (float) tile.getMaxSteam();
+                    if (level.getBlockEntity(pos) instanceof ISteamBlockEntity blockEntity) {
+                        if (blockEntity.getMaxSteam() > 0) {
+                            float amount = (float) blockEntity.getSteam() / (float) blockEntity.getMaxSteam();
                             ParticleBuilder.create(FluffyFurParticles.SMOKE)
                                     .setColorData(ColorParticleData.create(Color.WHITE).build())
                                     .setTransparencyData(GenericParticleData.create(0.4f, 0).build())

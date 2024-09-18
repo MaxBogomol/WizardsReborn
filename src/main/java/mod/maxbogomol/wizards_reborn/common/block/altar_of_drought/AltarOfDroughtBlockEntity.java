@@ -145,11 +145,7 @@ public class AltarOfDroughtBlockEntity extends ExposedBlockSimpleInventory imple
 
     @Override
     public boolean canPlaceItemThroughFace(int index, @NotNull ItemStack stack, @Nullable Direction direction) {
-        if (stack.getItem() instanceof IWissenItem) {
-            return true;
-        }
-
-        return false;
+        return stack.getItem() instanceof IWissenItem;
     }
 
     @Override
@@ -179,18 +175,13 @@ public class AltarOfDroughtBlockEntity extends ExposedBlockSimpleInventory imple
     }
 
     public float getBlockRotate() {
-        switch (this.getBlockState().getValue(BlockStateProperties.HORIZONTAL_FACING)) {
-            case NORTH:
-                return 0F;
-            case SOUTH:
-                return 180F;
-            case WEST:
-                return 90F;
-            case EAST:
-                return 270F;
-            default:
-                return 0F;
-        }
+        return switch (this.getBlockState().getValue(BlockStateProperties.HORIZONTAL_FACING)) {
+            case NORTH -> 0F;
+            case SOUTH -> 180F;
+            case WEST -> 90F;
+            case EAST -> 270F;
+            default -> 0F;
+        };
     }
 
     public boolean canWork() {

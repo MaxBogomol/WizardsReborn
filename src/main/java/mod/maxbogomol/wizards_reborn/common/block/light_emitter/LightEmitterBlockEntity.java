@@ -71,15 +71,15 @@ public class LightEmitterBlockEntity extends ExposedBlockSimpleInventory impleme
             if (isToBlock) {
                 BlockPos pos = new BlockPos(blockToX, blockToY, blockToZ);
                 if (level.isLoaded(pos)) {
-                    BlockEntity tileentity = level.getBlockEntity(pos);
-                    if (tileentity instanceof ILightBlockEntity lightTileEntity) {
+                    BlockEntity blockEntity = level.getBlockEntity(pos);
+                    if (blockEntity instanceof ILightBlockEntity lightBlockEntity) {
                         if (canWork()) {
                             if (getWissen() > 0) {
                                 removeWissen(1);
                                 addLight(2);
                                 update = true;
                                 Vec3 from = LightUtil.getLightLensPos(getBlockPos(), getLightLensPos());
-                                Vec3 to = LightUtil.getLightLensPos(pos, lightTileEntity.getLightLensPos());
+                                Vec3 to = LightUtil.getLightLensPos(pos, lightBlockEntity.getLightLensPos());
 
                                 LightRayHitResult hitResult = LightUtil.getLightRayHitResult(level, getBlockPos(), from, to, 25);
                                 BlockEntity hitTile = hitResult.getBlockEntity();
@@ -157,11 +157,7 @@ public class LightEmitterBlockEntity extends ExposedBlockSimpleInventory impleme
 
     @Override
     public boolean canPlaceItemThroughFace(int index, @NotNull ItemStack stack, @Nullable Direction direction) {
-        if (stack.is(WizardsRebornItemTags.ARCANE_LUMOS)) {
-            return true;
-        }
-
-        return false;
+        return stack.is(WizardsRebornItemTags.ARCANE_LUMOS);
     }
 
     @Override
@@ -226,11 +222,9 @@ public class LightEmitterBlockEntity extends ExposedBlockSimpleInventory impleme
 
     public ArcaneLumosBlock getLumos() {
         if (!getItemHandler().getItem(0).isEmpty()) {
-            if (getItemHandler().getItem(0).getItem() instanceof BlockItem) {
-                BlockItem blockItem = (BlockItem) getItemHandler().getItem(0).getItem();
+            if (getItemHandler().getItem(0).getItem() instanceof BlockItem blockItem) {
                 if (blockItem.getBlock() instanceof ArcaneLumosBlock) {
-                    ArcaneLumosBlock lumos = (ArcaneLumosBlock) blockItem.getBlock();
-                    return lumos;
+                    return (ArcaneLumosBlock) blockItem.getBlock();
                 }
             }
         }
@@ -381,12 +375,12 @@ public class LightEmitterBlockEntity extends ExposedBlockSimpleInventory impleme
     }
 
     @Override
-    public boolean wissenWandReceiveConnect(ItemStack stack, UseOnContext context, BlockEntity tile) {
+    public boolean wissenWandReceiveConnect(ItemStack stack, UseOnContext context, BlockEntity blockEntity) {
         return false;
     }
 
     @Override
-    public boolean wissenWandSendConnect(ItemStack stack, UseOnContext context, BlockEntity tile) {
+    public boolean wissenWandSendConnect(ItemStack stack, UseOnContext context, BlockEntity blockEntity) {
         BlockPos oldBlockPos = WissenWandItem.getBlockPos(stack);
         BlockEntity oldTile = level.getBlockEntity(oldBlockPos);
 
@@ -406,7 +400,7 @@ public class LightEmitterBlockEntity extends ExposedBlockSimpleInventory impleme
     }
 
     @Override
-    public boolean wissenWandReload(ItemStack stack, UseOnContext context, BlockEntity tile) {
+    public boolean wissenWandReload(ItemStack stack, UseOnContext context, BlockEntity blockEntity) {
         isToBlock = false;
         BlockEntityUpdate.packet(this);
         return true;

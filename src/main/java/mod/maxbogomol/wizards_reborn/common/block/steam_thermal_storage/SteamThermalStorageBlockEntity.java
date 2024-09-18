@@ -119,15 +119,11 @@ public class SteamThermalStorageBlockEntity extends BlockEntityBase implements T
 
     @Override
     public boolean canSteamConnection(Direction side) {
-        switch (getBlockState().getValue(SteamThermalStorageBlock.AXIS)) {
-            case X:
-                return (side == Direction.EAST || side == Direction.WEST);
-            case Y:
-                return (side == Direction.UP || side == Direction.DOWN);
-            case Z:
-                return (side == Direction.NORTH || side == Direction.SOUTH);
-            default:
-                return false;
-        }
+        return switch (getBlockState().getValue(SteamThermalStorageBlock.AXIS)) {
+            case X -> (side == Direction.EAST || side == Direction.WEST);
+            case Y -> (side == Direction.UP || side == Direction.DOWN);
+            case Z -> (side == Direction.NORTH || side == Direction.SOUTH);
+            default -> false;
+        };
     }
 }

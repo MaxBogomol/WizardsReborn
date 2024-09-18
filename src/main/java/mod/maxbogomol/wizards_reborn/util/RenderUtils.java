@@ -161,16 +161,6 @@ public class RenderUtils {
         builder.vertex(mat, 0, -width, width).color(r1, g1, b1, a1).uv(0, 0).endVertex();
     }
 
-    public static void litQuad(PoseStack mStack, MultiBufferSource buf, float x, float y, float width, float height, float r, float g, float b, float a) {
-        VertexConsumer builder = buf.getBuffer(FluffyFurRenderTypes.ADDITIVE);
-
-        Matrix4f mat = mStack.last().pose();
-        builder.vertex(mat, x, y + height, 0).color(r, g, b, a).endVertex();
-        builder.vertex(mat, x + width, y + height, 0).color(r, g, b, a).endVertex();
-        builder.vertex(mat, x + width, y, 0).color(r, g, b, a).endVertex();
-        builder.vertex(mat, x, y, 0).color(r, g, b, a).endVertex();
-    }
-
     public static void litQuadCube(PoseStack mStack, MultiBufferSource buf, float x1, float y1, float z1, float x2, float y2, float z2, float r, float g, float b, float a) {
         VertexConsumer builder = buf.getBuffer(FluffyFurRenderTypes.ADDITIVE);
 
@@ -207,16 +197,6 @@ public class RenderUtils {
         builder.vertex(mat, x1, y1, z1 + z2).color(r, g, b, a).endVertex();
     }
 
-    public static void spriteGlowQuad(PoseStack mStack, MultiBufferSource buf, float x, float y, float width, float height, float u0, float u1, float v0, float v1, float r, float g, float b, float a) {
-        VertexConsumer builder = buf.getBuffer(FluffyFurRenderTypes.ADDITIVE_TEXTURE);
-
-        Matrix4f mat = mStack.last().pose();
-        builder.vertex(mat, x, y + height, 0).uv(u0, v1).uv2(0).color(r, g, b, a).endVertex();
-        builder.vertex(mat, x + width, y + height, 0).uv(u1, v1).uv2(0).color(r, g, b, a).endVertex();
-        builder.vertex(mat, x + width, y, 0).uv(u1, v0).uv2(0).color(r, g, b, a).endVertex();
-        builder.vertex(mat, x, y, 0).uv(u0, v0).uv2(0).color(r, g, b, a).endVertex();
-    }
-
     public static void spriteGlowQuadCenter(PoseStack mStack, MultiBufferSource buf, float x, float y, float width, float height, float u0, float u1, float v0, float v1, float r, float g, float b, float a) {
         VertexConsumer builder = buf.getBuffer(FluffyFurRenderTypes.ADDITIVE_TEXTURE);
 
@@ -225,16 +205,6 @@ public class RenderUtils {
         builder.vertex(mat, x + (width / 2), y + (height / 2), 0).uv(u1, v1).uv2(0).color(r, g, b, a).endVertex();
         builder.vertex(mat, x + (width / 2), y - (height / 2), 0).uv(u1, v0).uv2(0).color(r, g, b, a).endVertex();
         builder.vertex(mat, x - (width / 2), y - (height / 2), 0).uv(u0, v0).uv2(0).color(r, g, b, a).endVertex();
-    }
-
-    public static void spriteWaveQuad(PoseStack mStack, MultiBufferSource buf, float x, float y, float width, float height, float wave, float tick1, float tick2, float tick3, float tick4, float u0, float u1, float v0, float v1, float r, float g, float b, float a) {
-        VertexConsumer builder = buf.getBuffer(FluffyFurRenderTypes.ADDITIVE_TEXTURE);
-
-        Matrix4f mat = mStack.last().pose();
-        builder.vertex(mat, x - (width / 2) + (wave * (float) Math.sin(Math.toRadians(tick1))), y + (height / 2) + (wave * (float) Math.cos(Math.toRadians(tick1))), 0).uv(u0, v1).uv2(0).color(r, g, b, a).endVertex();
-        builder.vertex(mat, x + (width / 2) + (wave * (float) Math.sin(Math.toRadians(tick2))), y + (height / 2) + (wave * (float) Math.cos(Math.toRadians(tick2))), 0).uv(u1, v1).uv2(0).color(r, g, b, a).endVertex();
-        builder.vertex(mat, x + (width / 2) + (wave * (float) Math.sin(Math.toRadians(tick3))), y - (height / 2) + (wave * (float) Math.cos(Math.toRadians(tick3))), 0).uv(u1, v0).uv2(0).color(r, g, b, a).endVertex();
-        builder.vertex(mat, x - (width / 2) + (wave * (float) Math.sin(Math.toRadians(tick4))), y - (height / 2) + (wave * (float) Math.cos(Math.toRadians(tick4))), 0).uv(u0, v0).uv2(0).color(r, g, b, a).endVertex();
     }
 
     public static Color colorConnectFrom = new Color(165, 223, 108);
@@ -475,10 +445,6 @@ public class RenderUtils {
                 builder.vertex(last, (float) p3.x(), (float) p3.y(), (float) p3.z()).color(r, g, b, alpha).endVertex();
             }
         }
-    }
-
-    public static void renderSphere(PoseStack mStack, VertexConsumer builder, float radius, int longs, int lats, Color color, float alpha) {
-        renderSphere(mStack, builder, radius, longs, lats, color, alpha, Mth.PI * 2);
     }
 
     public static void renderSemiSphere(PoseStack mStack, VertexConsumer builder, float radius, int longs, int lats, Color color, float alpha) {

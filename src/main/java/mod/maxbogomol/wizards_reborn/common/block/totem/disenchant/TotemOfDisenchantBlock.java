@@ -80,16 +80,16 @@ public class TotemOfDisenchantBlock extends Block implements EntityBlock, Simple
     @Override
     public void onRemove(@Nonnull BlockState state, @Nonnull Level level, @Nonnull BlockPos pos, @Nonnull BlockState newState, boolean isMoving) {
         if (state.getBlock() != newState.getBlock()) {
-            BlockEntity tile = level.getBlockEntity(pos);
-            if (tile instanceof TotemOfDisenchantBlockEntity totem) {
+            BlockEntity blockEntity = level.getBlockEntity(pos);
+            if (blockEntity instanceof TotemOfDisenchantBlockEntity totem) {
                 SimpleContainer inv = new SimpleContainer(totem.itemHandler.getSlots());
                 for (int i = 0; i < totem.itemHandler.getSlots(); i++) {
                     inv.setItem(i, totem.itemHandler.getStackInSlot(i));
                 }
                 Containers.dropContents(level, pos, inv);
             }
-            super.onRemove(state, level, pos, newState, isMoving);
         }
+        super.onRemove(state, level, pos, newState, isMoving);
     }
 
     @Override

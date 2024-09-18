@@ -96,9 +96,9 @@ public class OrbitalFluidRetainerBlock extends Block implements EntityBlock, Sim
     @Override
     public List<ItemStack> getDrops(BlockState state, LootParams.Builder builder) {
         List<ItemStack> items = super.getDrops(state, builder);
-        BlockEntity tile = builder.getOptionalParameter(LootContextParams.BLOCK_ENTITY);
-        if (tile instanceof OrbitalFluidRetainerBlockEntity) {
-            CompoundTag nbt = tile.getUpdateTag();
+        BlockEntity blockEntity = builder.getOptionalParameter(LootContextParams.BLOCK_ENTITY);
+        if (blockEntity instanceof OrbitalFluidRetainerBlockEntity) {
+            CompoundTag nbt = blockEntity.getUpdateTag();
             if (nbt != null) {
                 for (ItemStack stack : items) {
                     if (stack.getItem() == WizardsRebornItems.ORBITAL_FLUID_RETAINER.get()) {
@@ -188,7 +188,7 @@ public class OrbitalFluidRetainerBlock extends Block implements EntityBlock, Sim
 
     @Override
     public int getAnalogOutputSignal(BlockState state, Level level, BlockPos pos) {
-        OrbitalFluidRetainerBlockEntity tile = (OrbitalFluidRetainerBlockEntity) level.getBlockEntity(pos);
-        return Mth.floor(((float) tile.getTank().getFluidAmount() / tile.getMaxCapacity()) * 14.0F);
+        OrbitalFluidRetainerBlockEntity blockEntity = (OrbitalFluidRetainerBlockEntity) level.getBlockEntity(pos);
+        return Mth.floor(((float) blockEntity.getTank().getFluidAmount() / blockEntity.getMaxCapacity()) * 14.0F);
     }
 }

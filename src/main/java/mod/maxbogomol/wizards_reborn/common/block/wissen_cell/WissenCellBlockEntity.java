@@ -132,18 +132,13 @@ public class WissenCellBlockEntity extends ExposedBlockSimpleInventory implement
     }
 
     public float getBlockRotate() {
-        switch (this.getBlockState().getValue(BlockStateProperties.HORIZONTAL_FACING)) {
-            case NORTH:
-                return 0F;
-            case SOUTH:
-                return 180F;
-            case WEST:
-                return 90F;
-            case EAST:
-                return 270F;
-            default:
-                return 0F;
-        }
+        return switch (this.getBlockState().getValue(BlockStateProperties.HORIZONTAL_FACING)) {
+            case NORTH -> 0F;
+            case SOUTH -> 180F;
+            case WEST -> 90F;
+            case EAST -> 270F;
+            default -> 0F;
+        };
     }
 
     public float getStage() {

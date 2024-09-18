@@ -358,9 +358,9 @@ public class ArcaneIteratorBlockEntity extends BlockEntityBase implements Tickab
                                     ParticleBuilder.create(FluffyFurParticles.TRAIL)
                                             .setRenderType(FluffyFurRenderTypes.ADDITIVE_PARTICLE_TEXTURE)
                                             .setBehavior(TrailParticleBehavior.create()
-                                                    .enableSecondColor()
                                                     .setColorData(ColorParticleData.create().setRandomColor().build())
                                                     .setTransparencyData(GenericParticleData.create(1, 1, 0).setEasing(Easing.QUARTIC_OUT).build())
+                                                    .enableSecondColor()
                                                     .build())
                                             .setColorData(ColorParticleData.create().setRandomColor().build())
                                             .setTransparencyData(GenericParticleData.create(1, 1, 0).setEasing(Easing.QUARTIC_OUT).build())
@@ -458,20 +458,18 @@ public class ArcaneIteratorBlockEntity extends BlockEntityBase implements Tickab
     }
 
     public boolean isWorks() {
-        BlockEntity tile = level.getBlockEntity(getBlockPos().below().below());
-        if (tile != null) {
-            if (tile instanceof ArcanePedestalBlockEntity pedestal) {
-                return true;
-            }
+        BlockEntity blockEntity = level.getBlockEntity(getBlockPos().below().below());
+        if (blockEntity != null) {
+            return blockEntity instanceof ArcanePedestalBlockEntity;
         }
 
         return false;
     }
 
     public ArcanePedestalBlockEntity getMainPedestal() {
-        BlockEntity tile = level.getBlockEntity(getBlockPos().below().below());
-        if (tile != null) {
-            if (tile instanceof ArcanePedestalBlockEntity pedestal) {
+        BlockEntity blockEntity = level.getBlockEntity(getBlockPos().below().below());
+        if (blockEntity != null) {
+            if (blockEntity instanceof ArcanePedestalBlockEntity pedestal) {
                 return pedestal;
             }
         }
@@ -485,9 +483,9 @@ public class ArcaneIteratorBlockEntity extends BlockEntityBase implements Tickab
         for (int x = -5; x <= 5; x++) {
             for (int y = -3; y <= 3; y++) {
                 for (int z = -5; z <= 5; z++) {
-                    BlockEntity tile = level.getBlockEntity(new BlockPos(getBlockPos().getX() + x, getBlockPos().getY() + y, getBlockPos().getZ() + z));
-                    if (tile != null) {
-                        if (tile instanceof ArcanePedestalBlockEntity pedestal) {
+                    BlockEntity blockEntity = level.getBlockEntity(new BlockPos(getBlockPos().getX() + x, getBlockPos().getY() + y, getBlockPos().getZ() + z));
+                    if (blockEntity != null) {
+                        if (blockEntity instanceof ArcanePedestalBlockEntity pedestal) {
                             pedestals.add(pedestal);
                         }
                     }

@@ -63,7 +63,7 @@ public class ArcaneHopperBlock extends HopperBlock implements SimpleWaterloggedB
         this.registerDefaultState(this.stateDefinition.any().setValue(FACING, Direction.DOWN).setValue(ENABLED, Boolean.valueOf(true)).setValue(BlockStateProperties.WATERLOGGED, false));
     }
 
-    public VoxelShape getShape(BlockState state, BlockGetter level, BlockPos pos, CollisionContext pContext) {
+    public VoxelShape getShape(BlockState state, BlockGetter level, BlockPos pos, CollisionContext context) {
         return switch (state.getValue(FACING)) {
             case DOWN -> DOWN_SHAPE;
             case NORTH -> NORTH_SHAPE;
@@ -118,8 +118,8 @@ public class ArcaneHopperBlock extends HopperBlock implements SimpleWaterloggedB
 
     @Override
     @Nullable
-    public <T extends BlockEntity> BlockEntityTicker<T> getTicker(Level level, BlockState state, BlockEntityType<T> pBlockEntityType) {
-        return level.isClientSide ? null : createTickerHelper(pBlockEntityType, WizardsRebornBlockEntities.ARCANE_HOPPER.get(), ArcaneHopperBlockEntity::pushItemsTick);
+    public <T extends BlockEntity> BlockEntityTicker<T> getTicker(Level level, BlockState state, BlockEntityType<T> blockEntityType) {
+        return level.isClientSide ? null : createTickerHelper(blockEntityType, WizardsRebornBlockEntities.ARCANE_HOPPER.get(), ArcaneHopperBlockEntity::pushItemsTick);
     }
 
     @Override
@@ -149,7 +149,7 @@ public class ArcaneHopperBlock extends HopperBlock implements SimpleWaterloggedB
     }
 
     @Override
-    public void onRemove(BlockState state, Level level, BlockPos pos, BlockState pNewState, boolean pIsMoving) {
+    public void onRemove(BlockState state, Level level, BlockPos pos, BlockState pNewState, boolean isMoving) {
         if (!state.is(pNewState.getBlock())) {
             BlockEntity blockentity = level.getBlockEntity(pos);
             if (blockentity instanceof ArcaneHopperBlockEntity) {
@@ -157,14 +157,14 @@ public class ArcaneHopperBlock extends HopperBlock implements SimpleWaterloggedB
                 level.updateNeighbourForOutputSignal(pos, this);
             }
         }
-        super.onRemove(state, level, pos, pNewState, pIsMoving);
+        super.onRemove(state, level, pos, pNewState, isMoving);
     }
 
     @Override
-    public void entityInside(BlockState state, Level level, BlockPos pos, Entity pEntity) {
+    public void entityInside(BlockState state, Level level, BlockPos pos, Entity entity) {
         BlockEntity blockentity = level.getBlockEntity(pos);
         if (blockentity instanceof ArcaneHopperBlockEntity) {
-            ArcaneHopperBlockEntity.entityInside(level, pos, state, pEntity, (ArcaneHopperBlockEntity)blockentity);
+            ArcaneHopperBlockEntity.entityInside(level, pos, state, entity, (ArcaneHopperBlockEntity)blockentity);
         }
     }
 }

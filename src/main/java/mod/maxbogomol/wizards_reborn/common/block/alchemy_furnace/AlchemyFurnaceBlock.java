@@ -137,9 +137,9 @@ public class AlchemyFurnaceBlock extends HorizontalDirectionalBlock implements E
         if (level.isClientSide()) {
             if (!player.isCreative()) {
                 if (level.getBlockEntity(pos) != null) {
-                    if (level.getBlockEntity(pos) instanceof ISteamBlockEntity tile) {
-                        if (tile.getMaxSteam() > 0) {
-                            float amount = (float) tile.getSteam() / (float) tile.getMaxSteam();
+                    if (level.getBlockEntity(pos) instanceof ISteamBlockEntity blockEntity) {
+                        if (blockEntity.getMaxSteam() > 0) {
+                            float amount = (float) blockEntity.getSteam() / (float) blockEntity.getMaxSteam();
                             ParticleBuilder.create(FluffyFurParticles.SMOKE)
                                     .setColorData(ColorParticleData.create(Color.WHITE).build())
                                     .setTransparencyData(GenericParticleData.create(0.4f, 0).build())

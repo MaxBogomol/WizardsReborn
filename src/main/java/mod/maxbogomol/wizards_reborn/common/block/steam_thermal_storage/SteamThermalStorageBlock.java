@@ -113,14 +113,14 @@ public class SteamThermalStorageBlock extends RotatedPillarBlock implements Enti
     @Override
     public List<ItemStack> getDrops(BlockState state, LootParams.Builder builder) {
         List<ItemStack> items = super.getDrops(state, builder);
-        BlockEntity tile = builder.getOptionalParameter(LootContextParams.BLOCK_ENTITY);
-        if (tile instanceof ISteamBlockEntity steamTile) {
-            CompoundTag nbt = tile.getUpdateTag();
+        BlockEntity blockEntity = builder.getOptionalParameter(LootContextParams.BLOCK_ENTITY);
+        if (blockEntity instanceof ISteamBlockEntity steamBlockEntity) {
+            CompoundTag nbt = blockEntity.getUpdateTag();
             if (nbt != null) {
                 for (ItemStack stack : items) {
                     if (stack.getItem() == WizardsRebornItems.STEAM_THERMAL_STORAGE.get()) {
                         CompoundTag tag = stack.getOrCreateTag();
-                        tag.putInt("steam", steamTile.getSteam());
+                        tag.putInt("steam", steamBlockEntity.getSteam());
                     }
                 }
             }
@@ -166,7 +166,7 @@ public class SteamThermalStorageBlock extends RotatedPillarBlock implements Enti
 
     @Override
     public int getAnalogOutputSignal(BlockState state, Level level, BlockPos pos) {
-        ISteamBlockEntity tile = (ISteamBlockEntity) level.getBlockEntity(pos);
-        return Mth.floor(((float) tile.getSteam() / tile.getMaxSteam()) * 14.0F);
+        ISteamBlockEntity blockEntity = (ISteamBlockEntity) level.getBlockEntity(pos);
+        return Mth.floor(((float) blockEntity.getSteam() / blockEntity.getMaxSteam()) * 14.0F);
     }
 }

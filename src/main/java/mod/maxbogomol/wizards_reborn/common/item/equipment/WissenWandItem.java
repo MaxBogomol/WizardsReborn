@@ -94,7 +94,7 @@ public class WissenWandItem extends Item {
         InteractionResult result = InteractionResult.PASS;
 
         if(!level.isClientSide) {
-            BlockEntity tileentity = level.getBlockEntity(context.getClickedPos());
+            BlockEntity blockEntity = level.getBlockEntity(context.getClickedPos());
             CompoundTag nbt = stack.getOrCreateTag();
 
             if (!nbt.contains("block")) {
@@ -105,12 +105,12 @@ public class WissenWandItem extends Item {
             }
 
             if (nbt.getInt("mode") != 4) {
-                boolean control = controlled(stack, context, tileentity);
+                boolean control = controlled(stack, context, blockEntity);
                 if (control) result = InteractionResult.SUCCESS;
 
-                if (tileentity instanceof IWissenWandFunctionalBlockEntity functionalTile) {
+                if (blockEntity instanceof IWissenWandFunctionalBlockEntity functionalBlock) {
                     if (nbt.getInt("mode") == 0) {
-                        functionalTile.wissenWandFunction();
+                        functionalBlock.wissenWandFunction();
                     }
                     stack.setTag(nbt);
                     result = InteractionResult.SUCCESS;
@@ -126,22 +126,22 @@ public class WissenWandItem extends Item {
         return result;
     }
 
-    public boolean controlled(ItemStack stack, UseOnContext context, BlockEntity tile) {
+    public boolean controlled(ItemStack stack, UseOnContext context, BlockEntity blockEntity) {
         int mode = getMode(stack);
 
         for (ControlType controlType : controlTypes) {
-            if (controlType.controlled(stack, context, tile)) return true;
+            if (controlType.controlled(stack, context, blockEntity)) return true;
         }
 
-        if (tile instanceof IWissenWandControlledBlockEntity controlledTile) {
+        if (blockEntity instanceof IWissenWandControlledBlockEntity controlledBlockEntity) {
             if (mode == 1) {
-                return controlledTile.wissenWandReceiveConnect(stack, context, tile);
+                return controlledBlockEntity.wissenWandReceiveConnect(stack, context, blockEntity);
             }
             if (mode == 2) {
-                return controlledTile.wissenWandSendConnect(stack, context, tile);
+                return controlledBlockEntity.wissenWandSendConnect(stack, context, blockEntity);
             }
             if (mode == 3) {
-                return controlledTile.wissenWandReload(stack, context, tile);
+                return controlledBlockEntity.wissenWandReload(stack, context, blockEntity);
             }
         }
 
@@ -405,11 +405,11 @@ public class WissenWandItem extends Item {
         @OnlyIn(Dist.CLIENT)
         public void draw(GuiGraphics gui, BlockPos pos) {
             Minecraft mc = Minecraft.getInstance();
-            BlockEntity tileentity = pos != null ? mc.level.getBlockEntity(pos) : null;
+            BlockEntity blockEntity = pos != null ? mc.level.getBlockEntity(pos) : null;
 
-            if (tileentity != null) {
-                if (tileentity instanceof IItemResultBlockEntity tile) {
-                    List<ItemStack> list = tile.getItemsResult();
+            if (blockEntity != null) {
+                if (blockEntity instanceof IItemResultBlockEntity resultBlockEntity) {
+                    List<ItemStack> list = resultBlockEntity.getItemsResult();
                     int i = 0;
                     for (ItemStack item : list) {
                         int x = mc.getWindow().getGuiScaledWidth() / 2 - 8 + (i * 16) - ((list.size() - 1) * 8);
@@ -435,14 +435,14 @@ public class WissenWandItem extends Item {
         public void draw(GuiGraphics gui, BlockPos pos) {
             Minecraft mc = Minecraft.getInstance();
             Player player = mc.player;
-            BlockEntity tileentity = pos != null ? mc.level.getBlockEntity(pos) : null;
+            BlockEntity blockEntity = pos != null ? mc.level.getBlockEntity(pos) : null;
 
-            if (tileentity != null) {
-                if (tileentity instanceof IWissenBlockEntity tile) {
+            if (blockEntity != null) {
+                if (blockEntity instanceof IWissenBlockEntity wissenBlockEntity) {
                     if (player.isShiftKeyDown() && ClientConfig.NUMERICAL_WISSEN.get()) {
                         int x = mc.getWindow().getGuiScaledWidth() / 2;
                         int y = mc.getWindow().getGuiScaledHeight() / 2 + 12 + getYOffset();
-                        Component name = NumericalUtil.getWissenName(tile.getWissen(), tile.getMaxWissen());
+                        Component name = NumericalUtil.getWissenName(wissenBlockEntity.getWissen(), wissenBlockEntity.getMaxWissen());
                         drawCenteredText(gui, name.getString(), x, y);
                         addYOffset(11);
                     }
@@ -450,7 +450,7 @@ public class WissenWandItem extends Item {
                     int x = mc.getWindow().getGuiScaledWidth() / 2 - (48 / 2);
                     int y = mc.getWindow().getGuiScaledHeight() / 2 + 11 + getYOffset();
 
-                    drawBar(gui, getBarTexture(), x, y, tile.getWissen(), tile.getMaxWissen());
+                    drawBar(gui, getBarTexture(), x, y, wissenBlockEntity.getWissen(), wissenBlockEntity.getMaxWissen());
                     addYOffset(11);
                 }
             }
@@ -469,14 +469,14 @@ public class WissenWandItem extends Item {
         public void draw(GuiGraphics gui, BlockPos pos) {
             Minecraft mc = Minecraft.getInstance();
             Player player = mc.player;
-            BlockEntity tileentity = pos != null ? mc.level.getBlockEntity(pos) : null;
+            BlockEntity blockEntity = pos != null ? mc.level.getBlockEntity(pos) : null;
 
-            if (tileentity != null) {
-                if (tileentity instanceof ICooldownBlockEntity tile) {
+            if (blockEntity != null) {
+                if (blockEntity instanceof ICooldownBlockEntity cooldownBlockEntity) {
                     if (player.isShiftKeyDown() && ClientConfig.NUMERICAL_COOLDOWN.get()) {
                         int x = mc.getWindow().getGuiScaledWidth() / 2;
                         int y = mc.getWindow().getGuiScaledHeight() / 2 + 12 + getYOffset();
-                        Component name = NumericalUtil.getCooldownName(tile.getCooldown());
+                        Component name = NumericalUtil.getCooldownName(cooldownBlockEntity.getCooldown());
                         drawCenteredText(gui, name.getString(), x, y);
                         addYOffset(11);
                     }
@@ -484,7 +484,7 @@ public class WissenWandItem extends Item {
                     int x = mc.getWindow().getGuiScaledWidth() / 2 - (48 / 2);
                     int y = mc.getWindow().getGuiScaledHeight() / 2 + 11 + getYOffset();
 
-                    drawBar(gui, getBarTexture(), x, y, 32 / tile.getCooldown());
+                    drawBar(gui, getBarTexture(), x, y, 32 / cooldownBlockEntity.getCooldown());
                     addYOffset(11);
                 }
             }
@@ -503,10 +503,10 @@ public class WissenWandItem extends Item {
         public void draw(GuiGraphics gui, BlockPos pos) {
             Minecraft mc = Minecraft.getInstance();
             Player player = mc.player;
-            BlockEntity tileentity = pos != null ? mc.level.getBlockEntity(pos) : null;
+            BlockEntity blockEntity = pos != null ? mc.level.getBlockEntity(pos) : null;
 
-            if (tileentity != null) {
-                if (tileentity instanceof ILightBlockEntity tile) {
+            if (blockEntity != null) {
+                if (blockEntity instanceof ILightBlockEntity lightBlockEntity) {
                     if (player.isShiftKeyDown() && ClientConfig.SHOW_LIGHT_NAME.get()) {
                         int x = mc.getWindow().getGuiScaledWidth() / 2;
                         int y = mc.getWindow().getGuiScaledHeight() / 2 + 12 + getYOffset();
@@ -519,7 +519,7 @@ public class WissenWandItem extends Item {
                     int y = mc.getWindow().getGuiScaledHeight() / 2 + 11 + getYOffset();
 
                     int width = 32;
-                    if (tile.getLight() <= 0) width = 0;
+                    if (lightBlockEntity.getLight() <= 0) width = 0;
                     drawBar(gui, getBarTexture(), x, y, width);
                     addYOffset(11);
                 }
@@ -539,16 +539,16 @@ public class WissenWandItem extends Item {
         public void draw(GuiGraphics gui, BlockPos pos) {
             Minecraft mc = Minecraft.getInstance();
             Player player = mc.player;
-            BlockEntity tileentity = pos != null ? mc.level.getBlockEntity(pos) : null;
+            BlockEntity blockEntity = pos != null ? mc.level.getBlockEntity(pos) : null;
 
-            if (tileentity != null) {
-                if (tileentity instanceof IFluidBlockEntity tile) {
+            if (blockEntity != null) {
+                if (blockEntity instanceof IFluidBlockEntity fluidBlockEntity) {
                     int x = mc.getWindow().getGuiScaledWidth() / 2;
                     int y = mc.getWindow().getGuiScaledHeight() / 2 + 12 + getYOffset();
 
-                    Component name = NumericalUtil.getFluidName(tile.getFluidStack(), tile.getFluidMaxAmount());
+                    Component name = NumericalUtil.getFluidName(fluidBlockEntity.getFluidStack(), fluidBlockEntity.getFluidMaxAmount());
                     if (!ClientConfig.NUMERICAL_FLUID.get()) {
-                        name = NumericalUtil.getFluidName(tile.getFluidStack());
+                        name = NumericalUtil.getFluidName(fluidBlockEntity.getFluidStack());
                     }
                     drawCenteredText(gui, name.getString(), x, y);
                     addYOffset(11);
@@ -556,7 +556,7 @@ public class WissenWandItem extends Item {
                     x = mc.getWindow().getGuiScaledWidth() / 2 - (48 / 2);
                     y = mc.getWindow().getGuiScaledHeight() / 2 + 11 + getYOffset();
 
-                    drawBar(gui, getBarTexture(), x, y, tile.getFluidAmount(), tile.getFluidMaxAmount());
+                    drawBar(gui, getBarTexture(), x, y, fluidBlockEntity.getFluidAmount(), fluidBlockEntity.getFluidMaxAmount());
                     addYOffset(11);
                 }
             }
@@ -575,14 +575,14 @@ public class WissenWandItem extends Item {
         public void draw(GuiGraphics gui, BlockPos pos) {
             Minecraft mc = Minecraft.getInstance();
             Player player = mc.player;
-            BlockEntity tileentity = pos != null ? mc.level.getBlockEntity(pos) : null;
+            BlockEntity blockEntity = pos != null ? mc.level.getBlockEntity(pos) : null;
 
-            if (tileentity != null) {
-                if (tileentity instanceof IExperienceBlockEntity tile) {
+            if (blockEntity != null) {
+                if (blockEntity instanceof IExperienceBlockEntity experienceBlockEntity) {
                     if (player.isShiftKeyDown() && ClientConfig.NUMERICAL_EXPERIENCE.get()) {
                         int x = mc.getWindow().getGuiScaledWidth() / 2;
                         int y = mc.getWindow().getGuiScaledHeight() / 2 + 12 + getYOffset();
-                        Component name = NumericalUtil.getExperienceName(tile.getExperience(), tile.getMaxExperience());
+                        Component name = NumericalUtil.getExperienceName(experienceBlockEntity.getExperience(), experienceBlockEntity.getMaxExperience());
                         drawCenteredText(gui, name.getString(), x, y);
                         addYOffset(11);
                     }
@@ -590,7 +590,7 @@ public class WissenWandItem extends Item {
                     int x = mc.getWindow().getGuiScaledWidth() / 2 - (48 / 2);
                     int y = mc.getWindow().getGuiScaledHeight() / 2 + 11 + getYOffset();
 
-                    drawBar(gui, getBarTexture(), x, y, tile.getExperience(), tile.getMaxExperience());
+                    drawBar(gui, getBarTexture(), x, y, experienceBlockEntity.getExperience(), experienceBlockEntity.getMaxExperience());
                     addYOffset(11);
                 }
             }
@@ -609,14 +609,14 @@ public class WissenWandItem extends Item {
         public void draw(GuiGraphics gui, BlockPos pos) {
             Minecraft mc = Minecraft.getInstance();
             Player player = mc.player;
-            BlockEntity tileentity = pos != null ? mc.level.getBlockEntity(pos) : null;
+            BlockEntity blockEntity = pos != null ? mc.level.getBlockEntity(pos) : null;
 
-            if (tileentity != null) {
-                if (tileentity instanceof IHeatBlockEntity tile) {
+            if (blockEntity != null) {
+                if (blockEntity instanceof IHeatBlockEntity heatBlockEntity) {
                     if (player.isShiftKeyDown() && ClientConfig.NUMERICAL_HEAT.get()) {
                         int x = mc.getWindow().getGuiScaledWidth() / 2;
                         int y = mc.getWindow().getGuiScaledHeight() / 2 + 12 + getYOffset();
-                        Component name = NumericalUtil.getHeatName(tile.getHeat(), tile.getMaxHeat());
+                        Component name = NumericalUtil.getHeatName(heatBlockEntity.getHeat(), heatBlockEntity.getMaxHeat());
                         drawCenteredText(gui, name.getString(), x, y);
                         addYOffset(11);
                     }
@@ -624,7 +624,7 @@ public class WissenWandItem extends Item {
                     int x = mc.getWindow().getGuiScaledWidth() / 2 - (48 / 2);
                     int y = mc.getWindow().getGuiScaledHeight() / 2 + 11 + getYOffset();
 
-                    drawBar(gui, getBarTexture(), x, y, tile.getHeat(), tile.getMaxHeat());
+                    drawBar(gui, getBarTexture(), x, y, heatBlockEntity.getHeat(), heatBlockEntity.getMaxHeat());
                     addYOffset(11);
                 }
             }
@@ -643,14 +643,14 @@ public class WissenWandItem extends Item {
         public void draw(GuiGraphics gui, BlockPos pos) {
             Minecraft mc = Minecraft.getInstance();
             Player player = mc.player;
-            BlockEntity tileentity = pos != null ? mc.level.getBlockEntity(pos) : null;
+            BlockEntity blockEntity = pos != null ? mc.level.getBlockEntity(pos) : null;
 
-            if (tileentity != null) {
-                if (tileentity instanceof ISteamBlockEntity tile) {
+            if (blockEntity != null) {
+                if (blockEntity instanceof ISteamBlockEntity steamBlockEntity) {
                     if (player.isShiftKeyDown() && ClientConfig.NUMERICAL_STEAM.get()) {
                         int x = mc.getWindow().getGuiScaledWidth() / 2;
                         int y = mc.getWindow().getGuiScaledHeight() / 2 + 12 + getYOffset();
-                        Component name = NumericalUtil.getHeatName(tile.getSteam(), tile.getMaxSteam());
+                        Component name = NumericalUtil.getHeatName(steamBlockEntity.getSteam(), steamBlockEntity.getMaxSteam());
                         drawCenteredText(gui, name.getString(), x, y);
                         addYOffset(11);
                     }
@@ -658,7 +658,7 @@ public class WissenWandItem extends Item {
                     int x = mc.getWindow().getGuiScaledWidth() / 2 - (48 / 2);
                     int y = mc.getWindow().getGuiScaledHeight() / 2 + 11 + getYOffset();
 
-                    drawBar(gui, getBarTexture(), x, y, tile.getSteam(), tile.getMaxSteam());
+                    drawBar(gui, getBarTexture(), x, y, steamBlockEntity.getSteam(), steamBlockEntity.getMaxSteam());
                     addYOffset(11);
                 }
             }
@@ -677,10 +677,10 @@ public class WissenWandItem extends Item {
         public void draw(GuiGraphics gui, BlockPos pos) {
             Minecraft mc = Minecraft.getInstance();
             Player player = mc.player;
-            BlockEntity tileentity = pos != null ? mc.level.getBlockEntity(pos) : null;
+            BlockEntity blockEntity = pos != null ? mc.level.getBlockEntity(pos) : null;
 
-            if (tileentity != null) {
-                if (tileentity instanceof AlchemyMachineBlockEntity machine) {
+            if (blockEntity != null) {
+                if (blockEntity instanceof AlchemyMachineBlockEntity machine) {
                     for (int ii = 0; ii <= 2; ii++) {
                         int x = mc.getWindow().getGuiScaledWidth() / 2;
                         int y = mc.getWindow().getGuiScaledHeight() / 2 + 12 + getYOffset();
@@ -713,19 +713,19 @@ public class WissenWandItem extends Item {
     }
 
     public static class ControlType {
-        public boolean controlled(ItemStack stack, UseOnContext context, BlockEntity tile) {
+        public boolean controlled(ItemStack stack, UseOnContext context, BlockEntity blockEntity) {
             return false;
         }
     }
 
     public static class WissenControlType extends ControlType {
         @Override
-        public boolean controlled(ItemStack stack, UseOnContext context, BlockEntity tile) {
+        public boolean controlled(ItemStack stack, UseOnContext context, BlockEntity blockEntity) {
             int mode = getMode(stack);
 
-            if (tile instanceof IWissenBlockEntity wissenTile) {
+            if (blockEntity instanceof IWissenBlockEntity wissenBlockEntity) {
                 if (!getBlock(stack)) {
-                    if ((mode == 1 && wissenTile.canConnectReceiveWissen()) || (mode == 2 && wissenTile.canConnectSendWissen())) {
+                    if ((mode == 1 && wissenBlockEntity.canConnectReceiveWissen()) || (mode == 2 && wissenBlockEntity.canConnectSendWissen())) {
                         setBlockPos(stack, context.getClickedPos());
                         setBlock(stack, true);
                         return true;
@@ -738,12 +738,12 @@ public class WissenWandItem extends Item {
 
     public static class LightControlType extends ControlType {
         @Override
-        public boolean controlled(ItemStack stack, UseOnContext context, BlockEntity tile) {
+        public boolean controlled(ItemStack stack, UseOnContext context, BlockEntity blockEntity) {
             int mode = getMode(stack);
 
-            if (tile instanceof ILightBlockEntity lightTile) {
+            if (blockEntity instanceof ILightBlockEntity lightBlockEntity) {
                 if (!getBlock(stack)) {
-                    if ((mode == 1 && lightTile.canConnectReceiveLight()) || (mode == 2 && lightTile.canConnectSendLight())) {
+                    if ((mode == 1 && lightBlockEntity.canConnectReceiveLight()) || (mode == 2 && lightBlockEntity.canConnectSendLight())) {
                         setBlockPos(stack, context.getClickedPos());
                         setBlock(stack, true);
                         return true;

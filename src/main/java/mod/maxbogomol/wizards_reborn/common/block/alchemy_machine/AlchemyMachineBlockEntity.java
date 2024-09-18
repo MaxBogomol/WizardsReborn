@@ -451,42 +451,30 @@ public class AlchemyMachineBlockEntity extends PipeBaseBlockEntity implements Ti
     }
 
     public int getCapacity(int index) {
-        switch (index) {
-            case 0:
-                return fluidTank1.getCapacity();
-            case 1:
-                return fluidTank2.getCapacity();
-            case 2:
-                return fluidTank3.getCapacity();
-            default:
-                return fluidTank1.getCapacity();
-        }
+        return switch (index) {
+            case 0 -> fluidTank1.getCapacity();
+            case 1 -> fluidTank2.getCapacity();
+            case 2 -> fluidTank3.getCapacity();
+            default -> fluidTank1.getCapacity();
+        };
     }
 
     public FluidStack getFluidStack(int index) {
-        switch (index) {
-            case 0:
-                return fluidTank1.getFluid();
-            case 1:
-                return fluidTank2.getFluid();
-            case 2:
-                return fluidTank3.getFluid();
-            default:
-                return fluidTank1.getFluid();
-        }
+        return switch (index) {
+            case 0 -> fluidTank1.getFluid();
+            case 1 -> fluidTank2.getFluid();
+            case 2 -> fluidTank3.getFluid();
+            default -> fluidTank1.getFluid();
+        };
     }
 
     public FluidTank getTank(int index) {
-        switch (index) {
-            case 0:
-                return fluidTank1;
-            case 1:
-                return fluidTank2;
-            case 2:
-                return fluidTank3;
-            default:
-                return fluidTank1;
-        }
+        return switch (index) {
+            case 0 -> fluidTank1;
+            case 1 -> fluidTank2;
+            case 2 -> fluidTank3;
+            default -> fluidTank1;
+        };
     }
 
     @Override
@@ -540,15 +528,8 @@ public class AlchemyMachineBlockEntity extends PipeBaseBlockEntity implements Ti
     }
 
     public boolean isCanCraftItem(SimpleContainer inv, ItemStack output) {
-        if (inv.getItem(6).isEmpty()) {
-            return true;
-        }
-
-        if ((ItemHandlerHelper.canItemStacksStack(output, inv.getItem(6))) && (inv.getItem(6).getCount() + output.getCount() <= output.getMaxStackSize())) {
-            return true;
-        }
-
-        return false;
+        if (inv.getItem(6).isEmpty()) return true;
+        return (ItemHandlerHelper.canItemStacksStack(output, inv.getItem(6))) && (inv.getItem(6).getCount() + output.getCount() <= output.getMaxStackSize());
     }
 
     @Override

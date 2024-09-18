@@ -90,8 +90,8 @@ public abstract class SteamPipeBaseBlockEntity extends PipeBaseBlockEntity imple
         for (Direction facing : Direction.values()) {
             if (!getConnection(facing).transfer)
                 continue;
-            BlockEntity tile = level.getBlockEntity(getBlockPos().relative(facing));
-            if (tile instanceof SteamPipeBaseBlockEntity && !((SteamPipeBaseBlockEntity) tile).clogged)
+            BlockEntity blockEntity = level.getBlockEntity(getBlockPos().relative(facing));
+            if (blockEntity instanceof SteamPipeBaseBlockEntity && !((SteamPipeBaseBlockEntity) blockEntity).clogged)
                 return true;
         }
         return false;
@@ -112,13 +112,13 @@ public abstract class SteamPipeBaseBlockEntity extends PipeBaseBlockEntity imple
                         continue;
                     if (isFrom(facing))
                         continue;
-                    BlockEntity tile = level.getBlockEntity(getBlockPos().relative(facing));
-                    if (tile != null) {
-                        if (tile instanceof ISteamBlockEntity steamTileEntity) {
-                            if (steamTileEntity.canSteamTransfer(facing.getOpposite())) {
+                    BlockEntity blockEntity = level.getBlockEntity(getBlockPos().relative(facing));
+                    if (blockEntity != null) {
+                        if (blockEntity instanceof ISteamBlockEntity steamBlockEntity) {
+                            if (steamBlockEntity.canSteamTransfer(facing.getOpposite())) {
                                 int priority = PRIORITY_BLOCK;
-                                if (tile instanceof ISteamPipePriority)
-                                    priority = ((ISteamPipePriority) tile).getPriority(facing.getOpposite());
+                                if (blockEntity instanceof ISteamPipePriority)
+                                    priority = ((ISteamPipePriority) blockEntity).getPriority(facing.getOpposite());
                                 if (isFrom(facing.getOpposite()))
                                     priority -= 5;
                                 possibleDirections.put(priority, facing);
@@ -212,18 +212,18 @@ public abstract class SteamPipeBaseBlockEntity extends PipeBaseBlockEntity imple
     }
 
     public boolean pushSteam(int amount, Direction facing) {
-        BlockEntity tile = level.getBlockEntity(getBlockPos().relative(facing));
-        if (tile instanceof ISteamBlockEntity steamTileEntity) {
+        BlockEntity blockEntity = level.getBlockEntity(getBlockPos().relative(facing));
+        if (blockEntity instanceof ISteamBlockEntity steamBlockEntity) {
             int steam_remain = WissenUtils.getRemoveWissenRemain(steam, amount);
             steam_remain = amount - steam_remain;
-            int addRemain = SteamUtil.getAddSteamRemain(steamTileEntity.getSteam(), steam_remain, steamTileEntity.getMaxSteam());
+            int addRemain = SteamUtil.getAddSteamRemain(steamBlockEntity.getSteam(), steam_remain, steamBlockEntity.getMaxSteam());
             steam_remain = steam_remain - addRemain;
             if (steam_remain > 0) {
-                steamTileEntity.addSteam(steam_remain);
+                steamBlockEntity.addSteam(steam_remain);
                 removeSteam(steam_remain);
                 BlockEntityUpdate.packet(this);
-                BlockEntityUpdate.packet(tile);
-                if (tile instanceof SteamPipeBaseBlockEntity steamPipe) {
+                BlockEntityUpdate.packet(blockEntity);
+                if (blockEntity instanceof SteamPipeBaseBlockEntity steamPipe) {
                     steamPipe.setFrom(facing.getOpposite(), true);
                 }
                 return steam <= 0;

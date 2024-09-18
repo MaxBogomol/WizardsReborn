@@ -105,8 +105,8 @@ public abstract class FluidPipeBaseBlockEntity extends PipeBaseBlockEntity imple
         for (Direction facing : Direction.values()) {
             if (!getConnection(facing).transfer)
                 continue;
-            BlockEntity tile = level.getBlockEntity(getBlockPos().relative(facing));
-            if (tile instanceof FluidPipeBaseBlockEntity && !((FluidPipeBaseBlockEntity) tile).clogged)
+            BlockEntity blockEntity = level.getBlockEntity(getBlockPos().relative(facing));
+            if (blockEntity instanceof FluidPipeBaseBlockEntity && !((FluidPipeBaseBlockEntity) blockEntity).clogged)
                 return true;
         }
         return false;
@@ -129,13 +129,13 @@ public abstract class FluidPipeBaseBlockEntity extends PipeBaseBlockEntity imple
                         continue;
                     if (isFrom(facing))
                         continue;
-                    BlockEntity tile = level.getBlockEntity(getBlockPos().relative(facing));
-                    if (tile != null) {
-                        IFluidHandler handler = tile.getCapability(ForgeCapabilities.FLUID_HANDLER, facing.getOpposite()).orElse(null);
+                    BlockEntity blockEntity = level.getBlockEntity(getBlockPos().relative(facing));
+                    if (blockEntity != null) {
+                        IFluidHandler handler = blockEntity.getCapability(ForgeCapabilities.FLUID_HANDLER, facing.getOpposite()).orElse(null);
                         if (handler != null) {
                             int priority = PRIORITY_BLOCK;
-                            if (tile instanceof IFluidPipePriority)
-                                priority = ((IFluidPipePriority) tile).getPriority(facing.getOpposite());
+                            if (blockEntity instanceof IFluidPipePriority)
+                                priority = ((IFluidPipePriority) blockEntity).getPriority(facing.getOpposite());
                             if (isFrom(facing.getOpposite()))
                                 priority -= 5;
                             possibleDirections.put(priority, facing);

@@ -87,10 +87,10 @@ public class FluidExtractorBlockEntity extends FluidPipeBaseBlockEntity {
             for (Direction facing : Direction.values()) {
                 if (!getConnection(facing).transfer)
                     continue;
-                BlockEntity tile = level.getBlockEntity(getBlockPos().relative(facing));
-                if (tile != null && !(tile instanceof FluidPipeBaseBlockEntity)) {
+                BlockEntity blockEntity = level.getBlockEntity(getBlockPos().relative(facing));
+                if (blockEntity != null && !(blockEntity instanceof FluidPipeBaseBlockEntity)) {
                     if (active) {
-                        IFluidHandler handler = tile.getCapability(ForgeCapabilities.FLUID_HANDLER, facing.getOpposite()).orElse(null);
+                        IFluidHandler handler = blockEntity.getCapability(ForgeCapabilities.FLUID_HANDLER, facing.getOpposite()).orElse(null);
                         if (handler != null && handler.drain(MAX_DRAIN, IFluidHandler.FluidAction.SIMULATE) != null) {
                             FluidStack extracted = handler.drain(MAX_DRAIN, IFluidHandler.FluidAction.SIMULATE);
                             int filled = tank.fill(extracted, IFluidHandler.FluidAction.SIMULATE);

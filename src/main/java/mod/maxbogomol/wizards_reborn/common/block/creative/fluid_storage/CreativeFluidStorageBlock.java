@@ -169,7 +169,7 @@ public class CreativeFluidStorageBlock extends Block implements EntityBlock, Sim
 
     @Override
     public int getAnalogOutputSignal(BlockState state, Level level, BlockPos pos) {
-        CreativeFluidStorageBlockEntity tile = (CreativeFluidStorageBlockEntity) level.getBlockEntity(pos);
-        return Mth.floor(((float) tile.getTank().getFluidAmount() / tile.getMaxCapacity()) * 14.0F);
+        CreativeFluidStorageBlockEntity blockEntity = (CreativeFluidStorageBlockEntity) level.getBlockEntity(pos);
+        return Mth.floor(((float) blockEntity.getTank().getFluidAmount() / blockEntity.getMaxCapacity()) * 14.0F);
     }
 }

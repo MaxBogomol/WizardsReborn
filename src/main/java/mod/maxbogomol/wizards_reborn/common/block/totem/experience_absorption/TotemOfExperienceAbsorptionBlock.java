@@ -80,8 +80,8 @@ public class TotemOfExperienceAbsorptionBlock extends Block implements EntityBlo
     @Override
     public void onRemove(@Nonnull BlockState state, @Nonnull Level level, @Nonnull BlockPos pos, @Nonnull BlockState newState, boolean isMoving) {
         if (state.getBlock() != newState.getBlock()) {
-            BlockEntity tile = level.getBlockEntity(pos);
-            if (tile instanceof TotemOfExperienceAbsorptionBlockEntity totem) {
+            BlockEntity blockEntity = level.getBlockEntity(pos);
+            if (blockEntity instanceof TotemOfExperienceAbsorptionBlockEntity totem) {
                 if (totem.getExperience() > 0) {
                     level.addFreshEntity(new ExperienceOrb(level, pos.getX() + 0.5f, pos.getY() + 0.5f, pos.getZ() + 0.5f, totem.getExperience()));
                 }
@@ -93,32 +93,32 @@ public class TotemOfExperienceAbsorptionBlock extends Block implements EntityBlo
 
     @Override
     public InteractionResult use(BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hit) {
-        TotemOfExperienceAbsorptionBlockEntity tile = (TotemOfExperienceAbsorptionBlockEntity) level.getBlockEntity(pos);
+        TotemOfExperienceAbsorptionBlockEntity blockEntity = (TotemOfExperienceAbsorptionBlockEntity) level.getBlockEntity(pos);
         ItemStack stack = player.getItemInHand(hand).copy();
 
         if (stack.getItem() instanceof WissenWandItem) {
             if (WissenWandItem.getMode(stack) != 4) {
                 level.updateNeighbourForOutputSignal(pos, this);
-                BlockEntityUpdate.packet(tile);
+                BlockEntityUpdate.packet(blockEntity);
                 return InteractionResult.SUCCESS;
             }
         }
 
         if (!player.isShiftKeyDown()) {
-            if (tile.getExperience() < tile.getMaxExperience()) {
+            if (blockEntity.getExperience() < blockEntity.getMaxExperience()) {
                 int remain = WissenUtils.getRemoveWissenRemain(getPlayerXP(player), 100);
                 remain = 100 - remain;
-                int remainAdd = WissenUtils.getAddWissenRemain(tile.getExperience(), remain, tile.getMaxExperience());
+                int remainAdd = WissenUtils.getAddWissenRemain(blockEntity.getExperience(), remain, blockEntity.getMaxExperience());
                 remainAdd = remain - remainAdd;
                 if (remainAdd > 0 && remain > 0) {
-                    tile.addExperience(remainAdd);
+                    blockEntity.addExperience(remainAdd);
                     player.giveExperiencePoints(-remainAdd);
                     level.playSound(WizardsReborn.proxy.getPlayer(), player.getOnPos(), SoundEvents.EXPERIENCE_ORB_PICKUP, SoundSource.BLOCKS, 0.5f, 1.2f);
                     if (player.level().isClientSide()) {
-                        tile.addBurst(player.getPosition(0).add(0, player.getEyeHeight() / 2, 0), pos.getCenter().add(0, 0.25f, 0));
+                        blockEntity.addBurst(player.getPosition(0).add(0, player.getEyeHeight() / 2, 0), pos.getCenter().add(0, 0.25f, 0));
                     }
                     level.updateNeighbourForOutputSignal(pos, this);
-                    BlockEntityUpdate.packet(tile);
+                    BlockEntityUpdate.packet(blockEntity);
                     return InteractionResult.SUCCESS;
                 }
             }
@@ -198,7 +198,7 @@ public class TotemOfExperienceAbsorptionBlock extends Block implements EntityBlo
 
     @Override
     public int getAnalogOutputSignal(BlockState state, Level level, BlockPos pos) {
-        TotemOfExperienceAbsorptionBlockEntity tile = (TotemOfExperienceAbsorptionBlockEntity) level.getBlockEntity(pos);
-        return Mth.floor(((float) tile.getWissen() / tile.getMaxWissen()) * 14.0F);
+        TotemOfExperienceAbsorptionBlockEntity blockEntity = (TotemOfExperienceAbsorptionBlockEntity) level.getBlockEntity(pos);
+        return Mth.floor(((float) blockEntity.getWissen() / blockEntity.getMaxWissen()) * 14.0F);
     }
 }

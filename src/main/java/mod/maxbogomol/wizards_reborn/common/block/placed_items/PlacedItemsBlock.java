@@ -77,8 +77,8 @@ public class PlacedItemsBlock extends Block implements EntityBlock, SimpleWaterl
     @Override
     public void onRemove(@Nonnull BlockState state, @Nonnull Level level, @Nonnull BlockPos pos, @Nonnull BlockState newState, boolean isMoving) {
         if (state.getBlock() != newState.getBlock()) {
-            BlockEntity tile = level.getBlockEntity(pos);
-            if (tile instanceof PlacedItemsBlockEntity items) {
+            BlockEntity blockEntity = level.getBlockEntity(pos);
+            if (blockEntity instanceof PlacedItemsBlockEntity items) {
                 SimpleContainer inv = new SimpleContainer(5);
                 for (int i = 0; i < 4; i++) {
                     inv.setItem(i, items.getItemHandler().getItem(i));
@@ -94,15 +94,15 @@ public class PlacedItemsBlock extends Block implements EntityBlock, SimpleWaterl
 
     @Override
     public InteractionResult use(BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hit) {
-        PlacedItemsBlockEntity tile = (PlacedItemsBlockEntity) level.getBlockEntity(pos);
+        PlacedItemsBlockEntity blockEntity = (PlacedItemsBlockEntity) level.getBlockEntity(pos);
         ItemStack stack = player.getItemInHand(hand).copy();
 
-        int invSize = tile.getInventorySize();
+        int invSize = blockEntity.getInventorySize();
 
         if (stack.getItem() instanceof WissenWandItem) {
             if (WissenWandItem.getMode(stack) != 4) {
                 level.updateNeighbourForOutputSignal(pos, this);
-                BlockEntityUpdate.packet(tile);
+                BlockEntityUpdate.packet(blockEntity);
                 return InteractionResult.SUCCESS;
             }
         }
@@ -110,17 +110,17 @@ public class PlacedItemsBlock extends Block implements EntityBlock, SimpleWaterl
         if (!player.isShiftKeyDown()) {
             if (invSize < 4) {
                 int slot = invSize;
-                if ((!stack.isEmpty()) && (tile.getItemHandler().getItem(slot).isEmpty()) && (stack.getItem() instanceof IPlacedItem || tile.things)) {
+                if ((!stack.isEmpty()) && (blockEntity.getItemHandler().getItem(slot).isEmpty()) && (stack.getItem() instanceof IPlacedItem || blockEntity.things)) {
                     if (stack.getCount() > 1) {
                         player.getItemInHand(hand).setCount(stack.getCount() - 1);
                         stack.setCount(1);
-                        tile.getItemHandler().setItem(slot, stack);
+                        blockEntity.getItemHandler().setItem(slot, stack);
                     } else {
-                        tile.getItemHandler().setItem(slot, stack);
+                        blockEntity.getItemHandler().setItem(slot, stack);
                         player.getInventory().removeItem(player.getItemInHand(hand));
                     }
                     level.updateNeighbourForOutputSignal(pos, this);
-                    BlockEntityUpdate.packet(tile);
+                    BlockEntityUpdate.packet(blockEntity);
                     level.playSound(null, pos, WizardsRebornSounds.PEDESTAL_INSERT.get(), SoundSource.BLOCKS, 1.0f, 1.0f);
                     return InteractionResult.SUCCESS;
                 }
@@ -128,17 +128,17 @@ public class PlacedItemsBlock extends Block implements EntityBlock, SimpleWaterl
         } else {
             if (invSize > 0) {
                 int slot = invSize - 1;
-                if (!tile.getItemHandler().getItem(slot).isEmpty()) {
-                    if (player.getInventory().getSlotWithRemainingSpace(tile.getItemHandler().getItem(slot)) != -1 || player.getInventory().getFreeSlot() > -1) {
-                        player.getInventory().add(tile.getItemHandler().getItem(slot).copy());
+                if (!blockEntity.getItemHandler().getItem(slot).isEmpty()) {
+                    if (player.getInventory().getSlotWithRemainingSpace(blockEntity.getItemHandler().getItem(slot)) != -1 || player.getInventory().getFreeSlot() > -1) {
+                        player.getInventory().add(blockEntity.getItemHandler().getItem(slot).copy());
                     } else {
-                        level.addFreshEntity(new ItemEntity(level, pos.getX() + 0.5F, pos.getY() + 1.0F, pos.getZ() + 0.5F, tile.getItemHandler().getItem(slot).copy()));
+                        level.addFreshEntity(new ItemEntity(level, pos.getX() + 0.5F, pos.getY() + 1.0F, pos.getZ() + 0.5F, blockEntity.getItemHandler().getItem(slot).copy()));
                     }
-                    tile.getItemHandler().removeItem(slot, 1);
+                    blockEntity.getItemHandler().removeItem(slot, 1);
                     level.updateNeighbourForOutputSignal(pos, this);
-                    BlockEntityUpdate.packet(tile);
+                    BlockEntityUpdate.packet(blockEntity);
                     level.playSound(null, pos, WizardsRebornSounds.PEDESTAL_REMOVE.get(), SoundSource.BLOCKS, 1.0f, 1.0f);
-                    if (tile.getInventorySize() <= 0) {
+                    if (blockEntity.getInventorySize() <= 0) {
                         level.removeBlock(pos, false);
                     }
                     return InteractionResult.SUCCESS;
@@ -176,8 +176,8 @@ public class PlacedItemsBlock extends Block implements EntityBlock, SimpleWaterl
 
     @Override
     public int getAnalogOutputSignal(BlockState state, Level level, BlockPos pos) {
-        BlockSimpleInventory tile = (BlockSimpleInventory) level.getBlockEntity(pos);
-        return AbstractContainerMenu.getRedstoneSignalFromContainer(tile.getItemHandler());
+        BlockSimpleInventory blockEntity = (BlockSimpleInventory) level.getBlockEntity(pos);
+        return AbstractContainerMenu.getRedstoneSignalFromContainer(blockEntity.getItemHandler());
     }
 
     @Override

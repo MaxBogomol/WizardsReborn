@@ -40,9 +40,9 @@ public class SteamStorageBaseItem extends BlockItem implements ISteamItem, ICust
     @Override
     public int getMaxSteam() {
         if (getBlock() instanceof EntityBlock tileBlock) {
-            BlockEntity tile = tileBlock.newBlockEntity(new BlockPos(0, 0, 0), getBlock().defaultBlockState());
-            if (tile instanceof ISteamBlockEntity steamTile) {
-                return steamTile.getMaxSteam();
+            BlockEntity blockEntity = tileBlock.newBlockEntity(new BlockPos(0, 0, 0), getBlock().defaultBlockState());
+            if (blockEntity instanceof ISteamBlockEntity steamBlockEntity) {
+                return steamBlockEntity.getMaxSteam();
             }
         }
         return 0;

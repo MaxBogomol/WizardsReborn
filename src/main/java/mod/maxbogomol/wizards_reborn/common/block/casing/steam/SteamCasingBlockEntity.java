@@ -43,13 +43,13 @@ public class SteamCasingBlockEntity extends SteamPipeBlockEntity {
                                 continue;
                             if (isFrom(facing))
                                 continue;
-                            BlockEntity tile = level.getBlockEntity(getBlockPos().relative(facing));
-                            if (tile != null) {
-                                if (tile instanceof ISteamBlockEntity steamTileEntity) {
-                                    if (steamTileEntity.canSteamTransfer(facing.getOpposite())) {
+                            BlockEntity blockEntity = level.getBlockEntity(getBlockPos().relative(facing));
+                            if (blockEntity != null) {
+                                if (blockEntity instanceof ISteamBlockEntity steamBlockEntity) {
+                                    if (steamBlockEntity.canSteamTransfer(facing.getOpposite())) {
                                         int priority = PRIORITY_BLOCK;
-                                        if (tile instanceof ISteamPipePriority)
-                                            priority = ((ISteamPipePriority) tile).getPriority(facing.getOpposite());
+                                        if (blockEntity instanceof ISteamPipePriority)
+                                            priority = ((ISteamPipePriority) blockEntity).getPriority(facing.getOpposite());
                                         possibleDirections.put(priority, facing);
                                     }
                                 }

@@ -118,31 +118,22 @@ public class EngravedWisestoneBlockEntity extends BlockEntityBase implements Tic
     }
 
     public float getHorizontalBlockRotate() {
-        switch (this.getBlockState().getValue(EngravedWisestoneBlock.FACING)) {
-            case NORTH:
-                return 0F;
-            case SOUTH:
-                return 180F;
-            case WEST:
-                return 90F;
-            case EAST:
-                return 270F;
-            default:
-                return 0F;
-        }
+        return switch (this.getBlockState().getValue(EngravedWisestoneBlock.FACING)) {
+            case NORTH -> 0F;
+            case SOUTH -> 180F;
+            case WEST -> 90F;
+            case EAST -> 270F;
+            default -> 0F;
+        };
     }
 
     public float getVerticalBlockRotate() {
-        switch (this.getBlockState().getValue(EngravedWisestoneBlock.FACE)) {
-            case FLOOR:
-                return 90F;
-            case WALL:
-                return 0F;
-            case CEILING:
-                return -90F;
-            default:
-                return 0F;
-        }
+        return switch (this.getBlockState().getValue(EngravedWisestoneBlock.FACE)) {
+            case FLOOR -> 90F;
+            case WALL -> 0F;
+            case CEILING -> -90F;
+            default -> 0F;
+        };
     }
 
     @Override

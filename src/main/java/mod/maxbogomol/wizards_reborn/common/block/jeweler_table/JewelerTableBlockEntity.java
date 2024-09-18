@@ -361,48 +361,33 @@ public class JewelerTableBlockEntity extends NameableBlockEntityBase implements 
     }
 
     public float getBlockRotate() {
-        switch (this.getBlockState().getValue(HORIZONTAL_FACING)) {
-            case NORTH:
-                return 0F;
-            case SOUTH:
-                return 180F;
-            case WEST:
-                return 90F;
-            case EAST:
-                return 270F;
-            default:
-                return 0F;
-        }
+        return switch (this.getBlockState().getValue(HORIZONTAL_FACING)) {
+            case NORTH -> 0F;
+            case SOUTH -> 180F;
+            case WEST -> 90F;
+            case EAST -> 270F;
+            default -> 0F;
+        };
     }
 
     public Vec3 getBlockRotatePos() {
-        switch (this.getBlockState().getValue(HORIZONTAL_FACING)) {
-            case NORTH:
-                return new Vec3(0.5F, 0.84375F, 0.71875F);
-            case SOUTH:
-                return new Vec3(0.5F, 0.84375F, 0.28125F);
-            case WEST:
-                return new Vec3(0.71875F, 0.84375F, 0.5F);
-            case EAST:
-                return new Vec3(0.28125F, 0.84375F, 0.5F);
-            default:
-                return new Vec3(0.5F, 0.84375F, 0.5F);
-        }
+        return switch (this.getBlockState().getValue(HORIZONTAL_FACING)) {
+            case NORTH -> new Vec3(0.5F, 0.84375F, 0.71875F);
+            case SOUTH -> new Vec3(0.5F, 0.84375F, 0.28125F);
+            case WEST -> new Vec3(0.71875F, 0.84375F, 0.5F);
+            case EAST -> new Vec3(0.28125F, 0.84375F, 0.5F);
+            default -> new Vec3(0.5F, 0.84375F, 0.5F);
+        };
     }
 
     public Vec2 getBlockRotateParticle() {
-        switch (this.getBlockState().getValue(HORIZONTAL_FACING)) {
-            case NORTH:
-                return new Vec2(0F, -1F);
-            case SOUTH:
-                return new Vec2(0F, 1F);
-            case WEST:
-                return new Vec2(-1F, 0F);
-            case EAST:
-                return new Vec2(1F, 0F);
-            default:
-                return new Vec2(0F, 0F);
-        }
+        return switch (this.getBlockState().getValue(HORIZONTAL_FACING)) {
+            case NORTH -> new Vec2(0F, -1F);
+            case SOUTH -> new Vec2(0F, 1F);
+            case WEST -> new Vec2(-1F, 0F);
+            case EAST -> new Vec2(1F, 0F);
+            default -> new Vec2(0F, 0F);
+        };
     }
 
     public float getStage() {

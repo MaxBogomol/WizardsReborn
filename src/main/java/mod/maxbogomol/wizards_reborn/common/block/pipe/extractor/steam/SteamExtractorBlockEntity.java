@@ -31,20 +31,20 @@ public class SteamExtractorBlockEntity extends SteamPipeBaseBlockEntity {
             for (Direction facing : Direction.values()) {
                 if (!getConnection(facing).transfer)
                     continue;
-                BlockEntity tile = level.getBlockEntity(getBlockPos().relative(facing));
-                if (tile != null && !(tile instanceof SteamPipeBaseBlockEntity)) {
+                BlockEntity blockEntity = level.getBlockEntity(getBlockPos().relative(facing));
+                if (blockEntity != null && !(blockEntity instanceof SteamPipeBaseBlockEntity)) {
                     if (active) {
-                        if (tile instanceof ISteamBlockEntity steamTileEntity) {
-                            if (steamTileEntity.canSteamTransfer(facing.getOpposite())) {
+                        if (blockEntity instanceof ISteamBlockEntity steamBlockEntity) {
+                            if (steamBlockEntity.canSteamTransfer(facing.getOpposite())) {
                                 int steam_remain = WissenUtils.getAddWissenRemain(steam, MAX_DRAIN, getMaxSteam());
                                 steam_remain = MAX_DRAIN - steam_remain;
-                                int removeRemain = SteamUtil.getRemoveSteamRemain(steamTileEntity.getSteam(), steam_remain);
+                                int removeRemain = SteamUtil.getRemoveSteamRemain(steamBlockEntity.getSteam(), steam_remain);
                                 steam_remain = steam_remain - removeRemain;
                                 if (steam_remain > 0) {
-                                    steamTileEntity.removeSteam(steam_remain);
+                                    steamBlockEntity.removeSteam(steam_remain);
                                     addSteam(steam_remain);
                                     BlockEntityUpdate.packet(this);
-                                    BlockEntityUpdate.packet(tile);
+                                    BlockEntityUpdate.packet(blockEntity);
                                 }
                             }
                         }

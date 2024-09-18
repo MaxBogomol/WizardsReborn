@@ -120,7 +120,7 @@ public class CreativeSteamStorageBlock extends Block implements EntityBlock, Sim
 
     @Override
     public int getAnalogOutputSignal(BlockState state, Level level, BlockPos pos) {
-        CreativeSteamStorageBlockEntity tile = (CreativeSteamStorageBlockEntity) level.getBlockEntity(pos);
-        return Mth.floor(((float) tile.getSteam() / tile.getMaxSteam()) * 14.0F);
+        CreativeSteamStorageBlockEntity blockEntity = (CreativeSteamStorageBlockEntity) level.getBlockEntity(pos);
+        return Mth.floor(((float) blockEntity.getSteam() / blockEntity.getMaxSteam()) * 14.0F);
     }
 }

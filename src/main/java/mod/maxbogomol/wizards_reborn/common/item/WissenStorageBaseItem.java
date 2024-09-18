@@ -42,9 +42,9 @@ public class WissenStorageBaseItem extends BlockItem implements IWissenItem, ICu
     @Override
     public int getMaxWissen() {
         if (getBlock() instanceof EntityBlock tileBlock) {
-            BlockEntity tile = tileBlock.newBlockEntity(new BlockPos(0, 0, 0), getBlock().defaultBlockState());
-            if (tile instanceof IWissenBlockEntity wissenTile) {
-                return wissenTile.getMaxWissen();
+            BlockEntity blockEntity = tileBlock.newBlockEntity(new BlockPos(0, 0, 0), getBlock().defaultBlockState());
+            if (blockEntity instanceof IWissenBlockEntity wissenBlockEntity) {
+                return wissenBlockEntity.getMaxWissen();
             }
         }
         return 0;
