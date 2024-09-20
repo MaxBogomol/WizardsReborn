@@ -9,10 +9,10 @@ import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornSounds;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.sounds.SoundSource;
+import net.minecraft.world.Container;
 import net.minecraft.world.Containers;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
-import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.item.ItemStack;
@@ -69,6 +69,20 @@ public class CreativeWissenStorageBlock extends HorizontalDirectionalBlock imple
     }
 
     @Override
+    public FluidState getFluidState(BlockState state) {
+        return state.getValue(BlockStateProperties.WATERLOGGED) ? Fluids.WATER.getSource(false) : Fluids.EMPTY.defaultFluidState();
+    }
+
+    @Override
+    public BlockState updateShape(BlockState state, Direction direction, BlockState neighborState, LevelAccessor level, BlockPos currentPos, BlockPos neighborPos) {
+        if (state.getValue(BlockStateProperties.WATERLOGGED)) {
+            level.scheduleTick(currentPos, Fluids.WATER, Fluids.WATER.getTickDelay(level));
+        }
+
+        return super.updateShape(state, direction, neighborState, level, currentPos, neighborPos);
+    }
+
+    @Override
     public void onRemove(@Nonnull BlockState state, @Nonnull Level level, @Nonnull BlockPos pos, @Nonnull BlockState newState, boolean isMoving) {
         if (state.getBlock() != newState.getBlock()) {
             BlockEntity blockEntity = level.getBlockEntity(pos);
@@ -81,56 +95,37 @@ public class CreativeWissenStorageBlock extends HorizontalDirectionalBlock imple
 
     @Override
     public InteractionResult use(BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hit) {
-        CreativeWissenStorageBlockEntity cell = (CreativeWissenStorageBlockEntity) level.getBlockEntity(pos);
+        CreativeWissenStorageBlockEntity blockEntity = (CreativeWissenStorageBlockEntity) level.getBlockEntity(pos);
         ItemStack stack = player.getItemInHand(hand).copy();
 
-        if (stack.getItem() instanceof WissenWandItem) {
-            if (WissenWandItem.getMode(stack) != 4) {
-                level.updateNeighbourForOutputSignal(pos, this);
-                BlockEntityUpdate.packet(cell);
-                return InteractionResult.SUCCESS;
-            }
+        if (!WissenWandItem.isClickable(stack)) {
+            level.updateNeighbourForOutputSignal(pos, this);
+            BlockEntityUpdate.packet(blockEntity);
+            return InteractionResult.SUCCESS;
         }
 
+        Container container = blockEntity.getItemHandler();
         if (stack.getItem() instanceof IWissenItem) {
-            if (cell.getItemHandler().getItem(0).isEmpty()) {
-                cell.getItemHandler().setItem(0, stack);
+            if (container.getItem(0).isEmpty()) {
+                container.setItem(0, stack);
                 player.getInventory().removeItem(player.getItemInHand(hand));
                 level.updateNeighbourForOutputSignal(pos, this);
-                BlockEntityUpdate.packet(cell);
+                BlockEntityUpdate.packet(blockEntity);
                 level.playSound(null, pos, WizardsRebornSounds.PEDESTAL_INSERT.get(), SoundSource.BLOCKS, 1.0f, 1.0f);
                 return InteractionResult.SUCCESS;
             }
         }
 
-        if (!cell.getItemHandler().getItem(0).isEmpty()) {
-            if (player.getInventory().getSlotWithRemainingSpace(cell.getItemHandler().getItem(0)) != -1 || player.getInventory().getFreeSlot() > -1) {
-                player.getInventory().add(cell.getItemHandler().getItem(0).copy());
-            } else {
-                level.addFreshEntity(new ItemEntity(level, pos.getX() + 0.5F, pos.getY() + 1.0F, pos.getZ() + 0.5F, cell.getItemHandler().getItem(0).copy()));
-            }
-            cell.getItemHandler().removeItem(0, 1);
+        if (!container.getItem(0).isEmpty()) {
+            BlockSimpleInventory.addHandPlayerItem(level, player, hand, stack, container.getItem(0));
+            container.removeItem(0, 1);
             level.updateNeighbourForOutputSignal(pos, this);
-            BlockEntityUpdate.packet(cell);
+            BlockEntityUpdate.packet(blockEntity);
             level.playSound(null, pos, WizardsRebornSounds.PEDESTAL_REMOVE.get(), SoundSource.BLOCKS, 1.0f, 1.0f);
             return InteractionResult.SUCCESS;
         }
 
         return InteractionResult.PASS;
-    }
-
-    @Override
-    public FluidState getFluidState(BlockState state) {
-        return state.getValue(BlockStateProperties.WATERLOGGED) ? Fluids.WATER.getSource(false) : Fluids.EMPTY.defaultFluidState();
-    }
-
-    @Override
-    public BlockState updateShape(BlockState state, Direction direction, BlockState neighborState, LevelAccessor level, BlockPos currentPos, BlockPos neighborPos) {
-        if (state.getValue(BlockStateProperties.WATERLOGGED)) {
-            level.scheduleTick(currentPos, Fluids.WATER, Fluids.WATER.getTickDelay(level));
-        }
-
-        return super.updateShape(state, direction, neighborState, level, currentPos, neighborPos);
     }
 
     @Nullable

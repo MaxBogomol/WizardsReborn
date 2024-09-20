@@ -12,13 +12,12 @@ import mod.maxbogomol.wizards_reborn.WizardsReborn;
 import mod.maxbogomol.wizards_reborn.api.wissen.IExperienceBlockEntity;
 import mod.maxbogomol.wizards_reborn.api.wissen.IWissenBlockEntity;
 import mod.maxbogomol.wizards_reborn.api.wissen.WissenUtils;
-import mod.maxbogomol.wizards_reborn.client.particle.ExperienceTotemBurst;
 import mod.maxbogomol.wizards_reborn.client.sound.TotemOfExperienceAbsorptionSoundInstance;
 import mod.maxbogomol.wizards_reborn.common.config.Config;
 import mod.maxbogomol.wizards_reborn.common.network.PacketHandler;
 import mod.maxbogomol.wizards_reborn.common.network.block.ExperienceTotemBurstEffectPacket;
-import mod.maxbogomol.wizards_reborn.registry.common.block.WizardsRebornBlockEntities;
 import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornSounds;
+import mod.maxbogomol.wizards_reborn.registry.common.block.WizardsRebornBlockEntities;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.sounds.SoundEvents;
@@ -27,12 +26,8 @@ import net.minecraft.world.entity.ExperienceOrb;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.AABB;
-import net.minecraft.world.phys.Vec3;
-import net.minecraftforge.api.distmarker.Dist;
-import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.common.extensions.IForgeBlockEntity;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
@@ -44,8 +39,6 @@ public class TotemOfExperienceAbsorptionBlockEntity extends BlockEntityBase impl
     public int tick = 0;
 
     public Random random = new Random();
-
-    public List<ExperienceTotemBurst> bursts = new ArrayList<>();
 
     public TotemOfExperienceAbsorptionSoundInstance sound;
 
@@ -100,15 +93,6 @@ public class TotemOfExperienceAbsorptionBlockEntity extends BlockEntityBase impl
         }
 
         if (level.isClientSide()) {
-            List<ExperienceTotemBurst> newBursts = new ArrayList<>();
-            newBursts.addAll(bursts);
-            for (ExperienceTotemBurst burst : newBursts) {
-                burst.tick();
-                if (burst.end) {
-                    bursts.remove(burst);
-                }
-            }
-
             if (getWissen() > 0) {
                 if (random.nextFloat() < 0.3) {
                     ParticleBuilder.create(FluffyFurParticles.WISP)
@@ -124,7 +108,7 @@ public class TotemOfExperienceAbsorptionBlockEntity extends BlockEntityBase impl
                             .setColorData(ColorParticleData.create(Config.wissenColorR(), Config.wissenColorG(), Config.wissenColorB()).build())
                             .setTransparencyData(GenericParticleData.create(0.25f, 0).build())
                             .setScaleData(GenericParticleData.create(0, 0.075f * getStage(), 0).setEasing(Easing.QUINTIC_IN_OUT).build())
-                            .setSpinData(SpinParticleData.create().randomSpin(0.5f).build())
+                            .setSpinData(SpinParticleData.create().randomOffset().randomSpin(0.5f).build())
                             .setLifetime(30)
                             .randomVelocity(0.015f * getStage())
                             .spawn(level, getBlockPos().getX() + 0.5F, getBlockPos().getY() + 0.5F, getBlockPos().getZ() + 0.5F);
@@ -137,7 +121,7 @@ public class TotemOfExperienceAbsorptionBlockEntity extends BlockEntityBase impl
                             .setColorData(ColorParticleData.create(0.784f, 1f, 0.560f).build())
                             .setTransparencyData(GenericParticleData.create(0.25f, 0).build())
                             .setScaleData(GenericParticleData.create(0.05f, 0).build())
-                            .setSpinData(SpinParticleData.create().randomSpin(0.1f).build())
+                            .setSpinData(SpinParticleData.create().randomOffset().randomSpin(0.1f).build())
                             .setLifetime(40)
                             .randomVelocity(0.085f, 0.05f, 0.085f)
                             .addVelocity(0, 0.02f, 0)
@@ -282,12 +266,5 @@ public class TotemOfExperienceAbsorptionBlockEntity extends BlockEntityBase impl
         if (this.experience < 0) {
             this.experience = 0;
         }
-    }
-
-    @OnlyIn(Dist.CLIENT)
-    public void addBurst(Vec3 startPos, Vec3 endPos) {
-        bursts.add(new ExperienceTotemBurst(level, (float) startPos.x(), (float) startPos.y(), (float) startPos.z(),
-                (float) endPos.x(), (float) endPos.y(), (float) endPos.z(), 0.1f, 5, 200,
-                0.784f, 1f, 0.560f));
     }
 }

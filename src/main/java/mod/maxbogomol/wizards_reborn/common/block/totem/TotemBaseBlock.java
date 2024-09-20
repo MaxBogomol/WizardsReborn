@@ -60,17 +60,6 @@ public class TotemBaseBlock extends Block implements SimpleWaterloggedBlock {
     }
 
     @Override
-    public InteractionResult use(BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hit) {
-        BlockPos blockpos = pos.above();
-        BlockState blockstate = level.getBlockState(blockpos);
-        if (blockstate.getBlock() instanceof ITotemBlock totemBlock) {
-            return totemBlock.useTotem(blockstate, level, blockpos, player, hand, hit);
-        }
-
-        return InteractionResult.PASS;
-    }
-
-    @Override
     public FluidState getFluidState(BlockState state) {
         return state.getValue(BlockStateProperties.WATERLOGGED) ? Fluids.WATER.getSource(false) : Fluids.EMPTY.defaultFluidState();
     }
@@ -82,6 +71,17 @@ public class TotemBaseBlock extends Block implements SimpleWaterloggedBlock {
         }
 
         return !canTotem(level, currentPos) ? WizardsRebornBlocks.ARCANE_PEDESTAL.get().defaultBlockState() : super.updateShape(state, direction, neighborState, level, currentPos, neighborPos);
+    }
+
+    @Override
+    public InteractionResult use(BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hit) {
+        BlockPos blockpos = pos.above();
+        BlockState blockstate = level.getBlockState(blockpos);
+        if (blockstate.getBlock() instanceof ITotemBlock totemBlock) {
+            return totemBlock.useTotem(blockstate, level, blockpos, player, hand, hit);
+        }
+
+        return InteractionResult.PASS;
     }
 
     public boolean canTotem(LevelReader level, BlockPos pos) {

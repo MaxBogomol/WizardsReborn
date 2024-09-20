@@ -112,14 +112,14 @@ public class CrystalItem extends BlockItem implements IParticleItem, IGuiParticl
     }
 
     @Override
-    public CompoundTag getCustomBlockEntityData(ItemStack stack, CompoundTag tileNbt) {
-        if (!tileNbt.contains("Items")) {
+    public CompoundTag getCustomBlockEntityData(ItemStack stack, CompoundTag nbt) {
+        if (!nbt.contains("Items")) {
             NonNullList<ItemStack> ret = NonNullList.withSize(1, ItemStack.EMPTY);
             ret.set(0, stack);
-            ContainerHelper.saveAllItems(tileNbt, ret);
+            ContainerHelper.saveAllItems(nbt, ret);
         }
 
-        return tileNbt;
+        return nbt;
     }
 
     @Override

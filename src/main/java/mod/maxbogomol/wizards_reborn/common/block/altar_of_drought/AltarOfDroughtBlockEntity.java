@@ -57,8 +57,7 @@ public class AltarOfDroughtBlockEntity extends ExposedBlockSimpleInventory imple
             if (wissen > 0) {
                 if (!getItemHandler().getItem(0).isEmpty()) {
                     ItemStack stack = getItemHandler().getItem(0);
-                    if (stack.getItem() instanceof IWissenItem) {
-                        IWissenItem item = (IWissenItem) stack.getItem();
+                    if (stack.getItem() instanceof IWissenItem item) {
                         int wissen_remain = WissenUtils.getRemoveWissenRemain(wissen, 50);
                         wissen_remain = 50 - wissen_remain;
                         WissenItemUtil.existWissen(stack);
@@ -129,7 +128,7 @@ public class AltarOfDroughtBlockEntity extends ExposedBlockSimpleInventory imple
                             .setColorData(ColorParticleData.create(Config.wissenColorR(), Config.wissenColorG(), Config.wissenColorB()).build())
                             .setTransparencyData(GenericParticleData.create(0.25f, 0).build())
                             .setScaleData(GenericParticleData.create(0, 0.1f * getStage(), 0).setEasing(Easing.QUINTIC_IN_OUT).build())
-                            .setSpinData(SpinParticleData.create().randomSpin(0.5f).build())
+                            .setSpinData(SpinParticleData.create().randomOffset().randomSpin(0.5f).build())
                             .setLifetime(30)
                             .randomVelocity(0.015f * getStage())
                             .spawn(level, getBlockPos().getX() + 0.5F, getBlockPos().getY() + 0.625F, getBlockPos().getZ() + 0.5F);

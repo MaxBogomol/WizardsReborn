@@ -36,7 +36,7 @@ public class FluidExtractorBlock extends ExtractorBaseBlock {
     }
 
     @Override
-    public boolean connectToTile(BlockEntity blockEntity, Direction direction) {
+    public boolean connectToBlockEntity(BlockEntity blockEntity, Direction direction) {
         return blockEntity != null && blockEntity.getCapability(ForgeCapabilities.FLUID_HANDLER, direction.getOpposite()).isPresent();
     }
 

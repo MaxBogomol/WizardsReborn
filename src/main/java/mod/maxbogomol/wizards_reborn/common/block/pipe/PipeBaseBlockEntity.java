@@ -57,7 +57,7 @@ public class PipeBaseBlockEntity extends BlockEntityBase {
                     } else {
                         if (pipeBlock.connected(direction, facingState)) {
                             connections[direction.get3DDataValue()] = PipeConnection.LEVER;
-                        } else if (pipeBlock.connectToTile(facingBE, direction)) {
+                        } else if (pipeBlock.connectToBlockEntity(facingBE, direction)) {
                             if (facingState.getBlock() instanceof IPipeConnection) {
                                 connections[direction.get3DDataValue()] = ((IPipeConnection) facingState.getBlock()).getPipeConnection(facingState, direction.getOpposite());
                             } else {

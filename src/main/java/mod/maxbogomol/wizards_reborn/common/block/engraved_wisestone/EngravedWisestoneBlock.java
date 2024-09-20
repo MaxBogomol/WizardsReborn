@@ -54,16 +54,16 @@ public class EngravedWisestoneBlock extends FaceAttachedHorizontalDirectionalBlo
         return TickableBlockEntity.getTickerHelper();
     }
 
-    /*@Override
+    @Override
     public boolean hasAnalogOutputSignal(BlockState state) {
         return true;
     }
 
     @Override
     public int getAnalogOutputSignal(BlockState state, Level level, BlockPos pos) {
-        BlockSimpleInventory blockEntity = (BlockSimpleInventory) level.getBlockEntity(pos);
-        return AbstractContainerMenu.getRedstoneSignalFromContainer(blockEntity.getItemHandler());
-    }*/
+        EngravedWisestoneBlockEntity blockEntity = (EngravedWisestoneBlockEntity) level.getBlockEntity(pos);
+        return blockEntity.glow ? 15 : 0;
+    }
 
     public boolean hasMonogram() {
         return monogram != null;

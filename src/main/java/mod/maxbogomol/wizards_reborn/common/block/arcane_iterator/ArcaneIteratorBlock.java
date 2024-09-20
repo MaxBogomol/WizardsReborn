@@ -62,22 +62,6 @@ public class ArcaneIteratorBlock extends HorizontalDirectionalBlock implements E
     }
 
     @Override
-    public InteractionResult use(BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hit) {
-        ArcaneIteratorBlockEntity iterator = (ArcaneIteratorBlockEntity) level.getBlockEntity(pos);
-        ItemStack stack = player.getItemInHand(hand).copy();
-
-        if (stack.getItem() instanceof WissenWandItem) {
-            if (WissenWandItem.getMode(stack) != 4) {
-                level.updateNeighbourForOutputSignal(pos, this);
-                BlockEntityUpdate.packet(iterator);
-                return InteractionResult.SUCCESS;
-            }
-        }
-
-        return InteractionResult.PASS;
-    }
-
-    @Override
     public FluidState getFluidState(BlockState state) {
         return state.getValue(BlockStateProperties.WATERLOGGED) ? Fluids.WATER.getSource(false) : Fluids.EMPTY.defaultFluidState();
     }
@@ -89,6 +73,21 @@ public class ArcaneIteratorBlock extends HorizontalDirectionalBlock implements E
         }
 
         return super.updateShape(state, direction, neighborState, level, currentPos, neighborPos);
+    }
+
+
+    @Override
+    public InteractionResult use(BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hit) {
+        ArcaneIteratorBlockEntity blockEntity = (ArcaneIteratorBlockEntity) level.getBlockEntity(pos);
+        ItemStack stack = player.getItemInHand(hand).copy();
+
+        if (!WissenWandItem.isClickable(stack)) {
+            level.updateNeighbourForOutputSignal(pos, this);
+            BlockEntityUpdate.packet(blockEntity);
+            return InteractionResult.SUCCESS;
+        }
+
+        return InteractionResult.PASS;
     }
 
     @Nullable

@@ -82,8 +82,8 @@ public class LightEmitterBlockEntity extends ExposedBlockSimpleInventory impleme
                                 Vec3 to = LightUtil.getLightLensPos(pos, lightBlockEntity.getLightLensPos());
 
                                 LightRayHitResult hitResult = LightUtil.getLightRayHitResult(level, getBlockPos(), from, to, 25);
-                                BlockEntity hitTile = hitResult.getBlockEntity();
-                                LightUtil.transferLight(this, hitTile);
+                                BlockEntity hitBlock = hitResult.getBlockEntity();
+                                LightUtil.transferLight(this, hitBlock);
                             }
                         }
                     } else {
@@ -114,7 +114,7 @@ public class LightEmitterBlockEntity extends ExposedBlockSimpleInventory impleme
                             .setColorData(ColorParticleData.create(color).build())
                             .setTransparencyData(GenericParticleData.create(0.25f, 0).build())
                             .setScaleData(GenericParticleData.create(0.0375f * getStage(), 0.075f * getStage(), 0).setEasing(Easing.QUINTIC_IN_OUT).build())
-                            .setSpinData(SpinParticleData.create().randomSpin(0.5f).build())
+                            .setSpinData(SpinParticleData.create().randomOffset().randomSpin(0.5f).build())
                             .setLifetime(30)
                             .randomVelocity(0.005f * getStage())
                             .spawn(level, getBlockPos().getX() + 0.5F, getBlockPos().getY() + 0.5625F, getBlockPos().getZ() + 0.5F);
@@ -255,7 +255,7 @@ public class LightEmitterBlockEntity extends ExposedBlockSimpleInventory impleme
                     .setColorData(ColorParticleData.create(color).build())
                     .setTransparencyData(GenericParticleData.create(0.35f, 0).build())
                     .setScaleData(GenericParticleData.create(0.05f * i, 0.1f * i, 0).setEasing(Easing.QUINTIC_IN_OUT).build())
-                    .setSpinData(SpinParticleData.create().randomSpin(0.5f).build())
+                    .setSpinData(SpinParticleData.create().randomOffset().randomSpin(0.5f).build())
                     .setLifetime(30)
                     .addVelocity((to.x() - from.x()) / 20, (to.y() - from.y()) / 20, (to.z() - from.z()) / 20)
                     .spawn(level, getBlockPos().getX() + from.x(), getBlockPos().getY() + from.y(), getBlockPos().getZ() + from.z());
@@ -382,10 +382,10 @@ public class LightEmitterBlockEntity extends ExposedBlockSimpleInventory impleme
     @Override
     public boolean wissenWandSendConnect(ItemStack stack, UseOnContext context, BlockEntity blockEntity) {
         BlockPos oldBlockPos = WissenWandItem.getBlockPos(stack);
-        BlockEntity oldTile = level.getBlockEntity(oldBlockPos);
+        BlockEntity oldBlockEntity = level.getBlockEntity(oldBlockPos);
 
-        if (oldTile instanceof ILightBlockEntity lightTile) {
-            if (lightTile.canConnectSendLight()) {
+        if (oldBlockEntity instanceof ILightBlockEntity lightBlockEntity) {
+            if (lightBlockEntity.canConnectSendLight()) {
                 blockToX = oldBlockPos.getX();
                 blockToY = oldBlockPos.getY();
                 blockToZ = oldBlockPos.getZ();

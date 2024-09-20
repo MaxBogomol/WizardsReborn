@@ -19,7 +19,6 @@ import mod.maxbogomol.wizards_reborn.api.arcaneenchantment.ArcaneEnchantmentUtil
 import mod.maxbogomol.wizards_reborn.api.crystalritual.CrystalRitual;
 import mod.maxbogomol.wizards_reborn.api.crystalritual.CrystalRitualUtil;
 import mod.maxbogomol.wizards_reborn.api.wissen.*;
-import mod.maxbogomol.wizards_reborn.client.particle.ArcaneIteratorBurst;
 import mod.maxbogomol.wizards_reborn.client.sound.ArcaneIteratorSoundInstance;
 import mod.maxbogomol.wizards_reborn.common.block.arcane_pedestal.ArcanePedestalBlockEntity;
 import mod.maxbogomol.wizards_reborn.common.config.Config;
@@ -79,7 +78,6 @@ public class ArcaneIteratorBlockEntity extends BlockEntityBase implements Tickab
     public int rotate = 0;
     public int offset = 0;
     public int scale = 0;
-    public List<ArcaneIteratorBurst> bursts = new ArrayList<>();
 
     public ArcaneIteratorSoundInstance sound;
 
@@ -133,7 +131,7 @@ public class ArcaneIteratorBlockEntity extends BlockEntityBase implements Tickab
                         update = true;
                     }
 
-                    if ((wissenInCraft > 0) && (wissen > 0) && (startCraft) && canCraft) {
+                    if (wissenInCraft > 0 && wissen > 0 && startCraft) {
                         if (wissenIsCraft == 0) {
                             level.playSound(WizardsReborn.proxy.getPlayer(), getBlockPos(), WizardsRebornSounds.ARCANE_ITERATOR_START.get(), SoundSource.BLOCKS, 1f, 1f);
                         }
@@ -170,7 +168,7 @@ public class ArcaneIteratorBlockEntity extends BlockEntityBase implements Tickab
                         update = true;
                     }
 
-                    if (wissenInCraft > 0 && startCraft && canCraft) {
+                    if (wissenInCraft > 0 && startCraft) {
                         if (wissenInCraft <= wissenIsCraft && experienceInCraft <= experienceIsCraft) {
                             wissenInCraft = 0;
                             wissenIsCraft = 0;
@@ -260,15 +258,6 @@ public class ArcaneIteratorBlockEntity extends BlockEntityBase implements Tickab
             if (isWorks()) {
                 rotate++;
 
-                List<ArcaneIteratorBurst> newBursts = new ArrayList<>();
-                newBursts.addAll(bursts);
-                for (ArcaneIteratorBurst burst : newBursts) {
-                    //burst.tick();
-                    if (burst.end) {
-                        bursts.remove(burst);
-                    }
-                }
-
                 if (getWissen() > 0) {
                     if (random.nextFloat() < 0.5) {
                         ParticleBuilder.create(FluffyFurParticles.WISP)
@@ -294,18 +283,68 @@ public class ArcaneIteratorBlockEntity extends BlockEntityBase implements Tickab
                 if (experienceTick == 10) {
                     Player player = getPlayer();
                     if (player != null) {
-                        bursts.add(new ArcaneIteratorBurst(level, (float) player.getX(), (float) player.getY() + (player.getEyeHeight() / 2), (float) player.getZ(),
-                                getBlockPos().getX() + 0.5F, getBlockPos().getY() + 0.5F, getBlockPos().getZ() + 0.5F, 0.05f, 20, 200,
-                                0.784f, 1f, 0.560f));
+                        final Consumer<GenericParticle> blockTarget = p -> {
+                            Vec3 blockPos = getBlockPos().getCenter();
+                            Vec3 pos = p.getPosition();
+
+                            double dX = blockPos.x() - pos.x();
+                            double dY = blockPos.y() - pos.y();
+                            double dZ = blockPos.z() - pos.z();
+
+                            double yaw = Math.atan2(dZ, dX);
+                            double pitch = Math.atan2(Math.sqrt(dZ * dZ + dX * dX), dY) + Math.PI;
+
+                            float speed = 0.01f;
+                            double x = Math.sin(pitch) * Math.cos(yaw) * speed;
+                            double y = Math.cos(pitch) * speed;
+                            double z = Math.sin(pitch) * Math.sin(yaw) * speed;
+
+                            p.setSpeed(p.getSpeed().subtract(x, y, z));
+                        };
+                        ParticleBuilder.create(FluffyFurParticles.WISP)
+                                .setColorData(ColorParticleData.create(0.784f, 1f, 0.560f).build())
+                                .setTransparencyData(GenericParticleData.create(0.3f, 0.6f, 0).setEasing(Easing.QUARTIC_OUT).build())
+                                .setScaleData(GenericParticleData.create(0.05f, 0.15f, 0).setEasing(Easing.QUARTIC_OUT).build())
+                                .addTickActor(blockTarget)
+                                .setLifetime(100)
+                                .randomVelocity(0.5f)
+                                .disablePhysics()
+                                .setFriction(0.9f)
+                                .repeat(level, player.getX(), player.getY() + (player.getEyeHeight() / 2), player.getZ(), 5);
                     }
                 }
 
                 if (healthTick == 5) {
                     Player player = getPlayer();
                     if (player != null) {
-                        bursts.add(new ArcaneIteratorBurst(level, (float) player.getX(), (float) player.getY() + (player.getEyeHeight() / 2), (float) player.getZ(),
-                                getBlockPos().getX() + 0.5F, getBlockPos().getY() + 0.5F, getBlockPos().getZ() + 0.5F, 0.05f, 20, 200,
-                                1F, 0F, 0F));
+                        final Consumer<GenericParticle> blockTarget = p -> {
+                            Vec3 blockPos = getBlockPos().getCenter();
+                            Vec3 pos = p.getPosition();
+
+                            double dX = blockPos.x() - pos.x();
+                            double dY = blockPos.y() - pos.y();
+                            double dZ = blockPos.z() - pos.z();
+
+                            double yaw = Math.atan2(dZ, dX);
+                            double pitch = Math.atan2(Math.sqrt(dZ * dZ + dX * dX), dY) + Math.PI;
+
+                            float speed = 0.01f;
+                            double x = Math.sin(pitch) * Math.cos(yaw) * speed;
+                            double y = Math.cos(pitch) * speed;
+                            double z = Math.sin(pitch) * Math.sin(yaw) * speed;
+
+                            p.setSpeed(p.getSpeed().subtract(x, y, z));
+                        };
+                        ParticleBuilder.create(FluffyFurParticles.WISP)
+                                .setColorData(ColorParticleData.create(1f, 0, 0).build())
+                                .setTransparencyData(GenericParticleData.create(0.3f, 0.6f, 0).setEasing(Easing.QUARTIC_OUT).build())
+                                .setScaleData(GenericParticleData.create(0.05f, 0.15f, 0).setEasing(Easing.QUARTIC_OUT).build())
+                                .addTickActor(blockTarget)
+                                .setLifetime(100)
+                                .randomVelocity(0.5f)
+                                .disablePhysics()
+                                .setFriction(0.9f)
+                                .repeat(level, player.getX(), player.getY() + (player.getEyeHeight() / 2), player.getZ(), 5);
                     }
                 }
 
@@ -342,19 +381,31 @@ public class ArcaneIteratorBlockEntity extends BlockEntityBase implements Tickab
                                     final Consumer<GenericParticle> blockTarget = p -> {
                                         Vec3 blockPos = getBlockPos().getCenter();
                                         Vec3 pos = p.getPosition();
-                                        float x = 0;
-                                        float y = 0;
-                                        float z = 0;
 
-                                        if (blockPos.x() < pos.x()) x = -0.01f;
-                                        if (blockPos.x() > pos.x()) x = 0.01f;
-                                        if (blockPos.y() < pos.y()) y = -0.01f;
-                                        if (blockPos.y() > pos.y()) y = 0.01f;
-                                        if (blockPos.z() < pos.z()) z = -0.01f;
-                                        if (blockPos.z() > pos.z()) z = 0.01f;
+                                        double dX = blockPos.x() - pos.x();
+                                        double dY = blockPos.y() - pos.y();
+                                        double dZ = blockPos.z() - pos.z();
 
-                                        p.setSpeed(p.getSpeed().add(x, y, z));
+                                        double yaw = Math.atan2(dZ, dX);
+                                        double pitch = Math.atan2(Math.sqrt(dZ * dZ + dX * dX), dY) + Math.PI;
+
+                                        float speed = 0.01f;
+                                        double x = Math.sin(pitch) * Math.cos(yaw) * speed;
+                                        double y = Math.cos(pitch) * speed;
+                                        double z = Math.sin(pitch) * Math.sin(yaw) * speed;
+
+                                        p.setSpeed(p.getSpeed().subtract(x, y, z));
                                     };
+                                    ParticleBuilder starBuilder = ParticleBuilder.create(FluffyFurParticles.STAR)
+                                            .setColorData(ColorParticleData.create().setRandomColor().build())
+                                            .setTransparencyData(GenericParticleData.create(0.6f, 0.6f, 0).setEasing(Easing.QUARTIC_OUT).build())
+                                            .setScaleData(GenericParticleData.create(0.15f).build())
+                                            .setSpinData(SpinParticleData.create().randomOffset().randomSpin(0.5f).build())
+                                            .addTickActor(blockTarget)
+                                            .setLifetime(150)
+                                            .randomVelocity(0.5f)
+                                            .disablePhysics()
+                                            .setFriction(0.95f);
                                     ParticleBuilder.create(FluffyFurParticles.TRAIL)
                                             .setRenderType(FluffyFurRenderTypes.ADDITIVE_PARTICLE_TEXTURE)
                                             .setBehavior(TrailParticleBehavior.create()
@@ -366,10 +417,11 @@ public class ArcaneIteratorBlockEntity extends BlockEntityBase implements Tickab
                                             .setTransparencyData(GenericParticleData.create(1, 1, 0).setEasing(Easing.QUARTIC_OUT).build())
                                             .setScaleData(GenericParticleData.create(0.5f).build())
                                             .addTickActor(blockTarget)
-                                            .setLifetime(100, 50)
+                                            .setLifetime(150)
                                             .randomVelocity(0.5f)
                                             .disablePhysics()
                                             .setFriction(0.95f)
+                                            .addAdditionalBuilder(starBuilder)
                                             .spawn(level, pedestal.getBlockPos().getX() + 0.5f, pedestal.getBlockPos().getY() + 1.3f, pedestal.getBlockPos().getZ() + 0.5f);
                                     ParticleBuilder.create(FluffyFurParticles.SQUARE)
                                             .setColorData(ColorParticleData.create().setRandomColor().build())

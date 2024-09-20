@@ -29,19 +29,19 @@ public class FluidStorageBaseItem extends BlockItem implements IFluidItem, ICust
     }
 
     @Override
-    public CompoundTag getCustomBlockEntityData(ItemStack stack, CompoundTag tileNbt) {
-        if (!tileNbt.contains("fluidTank")) {
-            CompoundTag nbt = stack.getOrCreateTag();
-            tileNbt.put("fluidTank", nbt.getCompound("fluidTank"));
+    public CompoundTag getCustomBlockEntityData(ItemStack stack, CompoundTag nbt) {
+        if (!nbt.contains("fluidTank")) {
+            CompoundTag stackNbt = stack.getOrCreateTag();
+            nbt.put("fluidTank", stackNbt.getCompound("fluidTank"));
         }
 
-        return tileNbt;
+        return nbt;
     }
 
     @Override
     public int getMaxFluid(ItemStack stack) {
-        if (getBlock() instanceof EntityBlock tileBlock) {
-            BlockEntity blockEntity = tileBlock.newBlockEntity(new BlockPos(0, 0, 0), getBlock().defaultBlockState());
+        if (getBlock() instanceof EntityBlock entityBlock) {
+            BlockEntity blockEntity = entityBlock.newBlockEntity(new BlockPos(0, 0, 0), getBlock().defaultBlockState());
             if (blockEntity instanceof IFluidBlockEntity fluidBlockEntity) {
                 return fluidBlockEntity.getFluidMaxAmount();
             }
@@ -52,8 +52,8 @@ public class FluidStorageBaseItem extends BlockItem implements IFluidItem, ICust
     @OnlyIn(Dist.CLIENT)
     @Override
     public void appendHoverText(ItemStack stack, Level level, List<Component> list, TooltipFlag flags) {
-        if (getBlock() instanceof EntityBlock tileBlock) {
-            BlockEntity blockEntity = tileBlock.newBlockEntity(new BlockPos(0, 0, 0), getBlock().defaultBlockState());
+        if (getBlock() instanceof EntityBlock block) {
+            BlockEntity blockEntity = block.newBlockEntity(new BlockPos(0, 0, 0), getBlock().defaultBlockState());
             if (blockEntity instanceof IFluidBlockEntity fluidBlockEntity) {
                 CompoundTag nbt = stack.getOrCreateTag();
                 if (nbt.contains("fluidTank")) {

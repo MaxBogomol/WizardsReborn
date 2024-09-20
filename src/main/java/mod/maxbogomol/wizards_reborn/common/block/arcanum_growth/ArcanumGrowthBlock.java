@@ -42,11 +42,9 @@ import org.jetbrains.annotations.NotNull;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
-import java.util.Random;
 import java.util.stream.Stream;
 
 public class ArcanumGrowthBlock extends Block implements EntityBlock, SimpleWaterloggedBlock {
-    private static Random random = new Random();
 
     public static final IntegerProperty AGE =  IntegerProperty.create("age", 0, 4);
 
@@ -180,7 +178,7 @@ public class ArcanumGrowthBlock extends Block implements EntityBlock, SimpleWate
         level.setBlock(pos, this.withAge(i), 2);
     }
 
-    public float getGrowthChance(Block blockIn, BlockGetter level, BlockPos pos) {
+    public float getGrowthChance(Block block, BlockGetter level, BlockPos pos) {
         if (level.getBlockEntity(pos) instanceof IGrowableCrystal growable) {
             if (growable.getGrowingPower() > 0) {
                 return growable.getGrowingPower();

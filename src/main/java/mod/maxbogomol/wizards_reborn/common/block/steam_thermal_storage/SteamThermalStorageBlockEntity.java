@@ -37,21 +37,13 @@ public class SteamThermalStorageBlockEntity extends BlockEntityBase implements T
         if (level.isClientSide()) {
             float amount = (float) getSteam() / (float) getMaxSteam();
 
-            Vec3 posSteam = new Vec3(0F, 0F, 0F);
-            switch (getBlockState().getValue(SteamThermalStorageBlock.AXIS)) {
-                case X:
-                    posSteam = new Vec3(0.25F, 0.15F, 0.15F);
-                    break;
-                case Y:
-                    posSteam = new Vec3(0.15F, 0.25F, 0.15F);
-                    break;
-                case Z:
-                    posSteam = new Vec3(0.15F, 0.15F, 0.25F);
-                    break;
-                default:
-                    posSteam = new Vec3(0F, 0F, 0F);
-                    break;
-            }
+            new Vec3(0F, 0F, 0F);
+            Vec3 posSteam = switch (getBlockState().getValue(SteamThermalStorageBlock.AXIS)) {
+                case X -> new Vec3(0.25F, 0.15F, 0.15F);
+                case Y -> new Vec3(0.15F, 0.25F, 0.15F);
+                case Z -> new Vec3(0.15F, 0.15F, 0.25F);
+                default -> new Vec3(0F, 0F, 0F);
+            };
 
             for (int i = 0; i < 2 * amount; i++) {
                 if (random.nextFloat() < amount) {

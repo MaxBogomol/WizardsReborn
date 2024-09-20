@@ -57,7 +57,7 @@ public class SteamCasingBlock extends SteamPipeBlock {
 
             BlockState blockstate = this.pull(state, level, pos);
             float f = blockstate.getValue(BlockStateProperties.POWERED) ? 0.6F : 0.5F;
-            level.playSound((Player)null, pos, SoundEvents.LEVER_CLICK, SoundSource.BLOCKS, 0.3F, f);
+            level.playSound(null, pos, SoundEvents.LEVER_CLICK, SoundSource.BLOCKS, 0.3F, f);
             level.gameEvent(player, blockstate.getValue(BlockStateProperties.POWERED) ? GameEvent.BLOCK_ACTIVATE : GameEvent.BLOCK_DEACTIVATE, pos);
             return InteractionResult.SUCCESS;
         }

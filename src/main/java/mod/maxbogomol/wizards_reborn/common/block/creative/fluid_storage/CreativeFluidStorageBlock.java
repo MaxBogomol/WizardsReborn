@@ -86,6 +86,33 @@ public class CreativeFluidStorageBlock extends Block implements EntityBlock, Sim
     }
 
     @Override
+    public FluidState getFluidState(BlockState state) {
+        return state.getValue(BlockStateProperties.WATERLOGGED) ? Fluids.WATER.getSource(false) : Fluids.EMPTY.defaultFluidState();
+    }
+
+    @Override
+    public BlockState updateShape(BlockState state, Direction direction, BlockState neighborState, LevelAccessor level, BlockPos currentPos, BlockPos neighborPos) {
+        if (state.getValue(BlockStateProperties.WATERLOGGED)) {
+            level.scheduleTick(currentPos, Fluids.WATER, Fluids.WATER.getTickDelay(level));
+        }
+
+        if (level.getBlockEntity(currentPos) instanceof PipeBaseBlockEntity pipe) {
+            BlockEntity facingBE = level.getBlockEntity(currentPos);
+            if (neighborState.is(WizardsRebornBlockTags.FLUID_PIPE_CONNECTION)) {
+                if (facingBE instanceof PipeBaseBlockEntity && ((PipeBaseBlockEntity) facingBE).getConnection(direction.getOpposite()) == PipeConnection.DISABLED) {
+                    pipe.setConnection(direction, PipeConnection.NONE);
+                } else {
+                    pipe.setConnection(direction, PipeConnection.PIPE);
+                }
+            } else {
+                pipe.setConnection(direction, PipeConnection.NONE);
+            }
+        }
+
+        return super.updateShape(state, direction, neighborState, level, currentPos, neighborPos);
+    }
+
+    @Override
     public InteractionResult use(BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hit) {
         if (level.getBlockEntity(pos) instanceof CreativeFluidStorageBlockEntity storage) {
             ItemStack stack = player.getItemInHand(hand);
@@ -116,33 +143,6 @@ public class CreativeFluidStorageBlock extends Block implements EntityBlock, Sim
             }
         }
         return InteractionResult.PASS;
-    }
-
-    @Override
-    public FluidState getFluidState(BlockState state) {
-        return state.getValue(BlockStateProperties.WATERLOGGED) ? Fluids.WATER.getSource(false) : Fluids.EMPTY.defaultFluidState();
-    }
-
-    @Override
-    public BlockState updateShape(BlockState state, Direction direction, BlockState neighborState, LevelAccessor level, BlockPos currentPos, BlockPos neighborPos) {
-        if (state.getValue(BlockStateProperties.WATERLOGGED)) {
-            level.scheduleTick(currentPos, Fluids.WATER, Fluids.WATER.getTickDelay(level));
-        }
-
-        if (level.getBlockEntity(currentPos) instanceof PipeBaseBlockEntity pipe) {
-            BlockEntity facingBE = level.getBlockEntity(currentPos);
-            if (neighborState.is(WizardsRebornBlockTags.FLUID_PIPE_CONNECTION)) {
-                if (facingBE instanceof PipeBaseBlockEntity && ((PipeBaseBlockEntity) facingBE).getConnection(direction.getOpposite()) == PipeConnection.DISABLED) {
-                    pipe.setConnection(direction, PipeConnection.NONE);
-                } else {
-                    pipe.setConnection(direction, PipeConnection.PIPE);
-                }
-            } else {
-                pipe.setConnection(direction, PipeConnection.NONE);
-            }
-        }
-
-        return super.updateShape(state, direction, neighborState, level, currentPos, neighborPos);
     }
 
     @Nullable

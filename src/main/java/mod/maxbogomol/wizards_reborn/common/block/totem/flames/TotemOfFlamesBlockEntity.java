@@ -8,6 +8,7 @@ import mod.maxbogomol.fluffy_fur.client.particle.data.LightParticleData;
 import mod.maxbogomol.fluffy_fur.client.particle.data.SpinParticleData;
 import mod.maxbogomol.fluffy_fur.common.block.entity.ExposedBlockSimpleInventory;
 import mod.maxbogomol.fluffy_fur.common.block.entity.TickableBlockEntity;
+import mod.maxbogomol.fluffy_fur.common.easing.Easing;
 import mod.maxbogomol.fluffy_fur.registry.client.FluffyFurParticles;
 import mod.maxbogomol.fluffy_fur.registry.client.FluffyFurRenderTypes;
 import mod.maxbogomol.wizards_reborn.common.block.ArcaneLumosBlock;
@@ -76,11 +77,11 @@ public class TotemOfFlamesBlockEntity extends ExposedBlockSimpleInventory implem
                                     .setBehavior(ParticleBehavior.create().enableCamera().enableSided()
                                             .setXSpinData(SpinParticleData.create().randomOffsetDegrees(-25, 25).build())
                                             .setYSpinData(SpinParticleData.create().randomOffsetDegrees(-25, 25).build())
+                                            .setZSpinData(SpinParticleData.create().randomOffsetDegrees(-30, 30).randomSpin(0.005f).build())
                                             .build())
                                     .setColorData(ColorParticleData.create(color).build())
                                     .setTransparencyData(GenericParticleData.create(0.35f, 0).build())
                                     .setScaleData(GenericParticleData.create(0.25f, 0).build())
-                                    .setSpinData(SpinParticleData.create().randomOffsetDegrees(-30, 30).randomSpin(0.005f).build())
                                     .setLifetime(60)
                                     .randomVelocity(0.0035f)
                                     .addVelocity(0, 0.015f, 0)
@@ -102,25 +103,25 @@ public class TotemOfFlamesBlockEntity extends ExposedBlockSimpleInventory implem
 
                         if (lumos.color == ArcaneLumosBlock.Colors.COSMIC) {
                             if (random.nextFloat() < 0.1) {
-                                ParticleBuilder.create(FluffyFurParticles.SPARKLE)
+                                ParticleBuilder.create(FluffyFurParticles.STAR)
                                         .setColorData(ColorParticleData.create(color).build())
                                         .setTransparencyData(GenericParticleData.create(0.75f, 0).build())
-                                        .setScaleData(GenericParticleData.create(0.1f, 0).build())
+                                        .setScaleData(GenericParticleData.create(0, 0.1f, 0).setEasing(Easing.SINE_IN_OUT).build())
                                         .setSpinData(SpinParticleData.create().randomSpin(0.1f).build())
-                                        .setLifetime(60)
+                                        .setLifetime(10)
                                         .randomVelocity(0.0035f)
-                                        .flatRandomOffset(0.15f, 0.15f, 0.15f)
+                                        .flatRandomOffset(0.2f, 0.2f, 0.2f)
                                         .addVelocity(0, 0.025f, 0)
                                         .spawn(level, getBlockPos().getX() + 0.5F, getBlockPos().getY() + 0.5F, getBlockPos().getZ() + 0.5F);
                             }
                             if (random.nextFloat() < 0.1) {
-                                ParticleBuilder.create(FluffyFurParticles.SPARKLE)
+                                ParticleBuilder.create(FluffyFurParticles.STAR)
                                         .setColorData(ColorParticleData.create(Color.WHITE).build())
                                         .setTransparencyData(GenericParticleData.create(0.75f, 0).build())
-                                        .setScaleData(GenericParticleData.create(0.1f, 0).build())
+                                        .setScaleData(GenericParticleData.create(0, 0.1f, 0).setEasing(Easing.SINE_IN_OUT).build())
                                         .setLifetime(10)
                                         .randomVelocity(0.0035f)
-                                        .flatRandomOffset(0.15f, 0.15f, 0.15f)
+                                        .flatRandomOffset(0.2f, 0.2f, 0.2f)
                                         .addVelocity(0, 0.025f, 0)
                                         .spawn(level, getBlockPos().getX() + 0.5F, getBlockPos().getY() + 0.5F, getBlockPos().getZ() + 0.5F);
                             }

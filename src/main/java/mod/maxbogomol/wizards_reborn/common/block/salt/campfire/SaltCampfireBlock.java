@@ -12,10 +12,10 @@ import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.stats.Stats;
 import net.minecraft.util.RandomSource;
+import net.minecraft.world.Container;
 import net.minecraft.world.Containers;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
-import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.item.ItemStack;
@@ -85,9 +85,8 @@ public class SaltCampfireBlock extends Block implements EntityBlock, SimpleWater
             if (blockEntity instanceof SaltCampfireBlockEntity saltCampfireBlock) {
                 Containers.dropContents(level, pos, (saltCampfireBlock).getItems());
             }
-
-            super.onRemove(state, level, pos, newState, isMoving);
         }
+        super.onRemove(state, level, pos, newState, isMoving);
     }
 
     @Override
@@ -95,14 +94,12 @@ public class SaltCampfireBlock extends Block implements EntityBlock, SimpleWater
         SaltCampfireBlockEntity blockEntity = (SaltCampfireBlockEntity) level.getBlockEntity(pos);
         ItemStack stack = player.getItemInHand(hand).copy();
 
-        int invSize = blockEntity.getInventorySize();
+        int size = blockEntity.getInventorySize();
 
-        if (stack.getItem() instanceof WissenWandItem) {
-            if (WissenWandItem.getMode(stack) != 4) {
-                level.updateNeighbourForOutputSignal(pos, this);
-                BlockEntityUpdate.packet(blockEntity);
-                return InteractionResult.SUCCESS;
-            }
+        if (!WissenWandItem.isClickable(stack)) {
+            level.updateNeighbourForOutputSignal(pos, this);
+            BlockEntityUpdate.packet(blockEntity);
+            return InteractionResult.SUCCESS;
         }
 
         ItemStack itemstack = player.getItemInHand(hand);
@@ -116,17 +113,17 @@ public class SaltCampfireBlock extends Block implements EntityBlock, SimpleWater
             return InteractionResult.CONSUME;
         }
 
-        if (!player.isShiftKeyDown()) {
-            if (invSize < 2) {
-                int slot = invSize;
+        Container container = blockEntity.getItemHandler();
+        if (!stack.isEmpty()) {
+            if (size < 2) {
                 if (stack.is(WizardsRebornItemTags.ARCANE_LUMOS)) {
-                    if ((!stack.isEmpty()) && (blockEntity.getItemHandler().getItem(slot).isEmpty())) {
+                    if (container.getItem(size).isEmpty()) {
                         if (stack.getCount() > 1) {
-                            player.getItemInHand(hand).setCount(stack.getCount() - 1);
+                            player.getItemInHand(hand).shrink(1);
                             stack.setCount(1);
-                            blockEntity.getItemHandler().setItem(slot, stack);
+                            container.setItem(size, stack);
                         } else {
-                            blockEntity.getItemHandler().setItem(slot, stack);
+                            container.setItem(size, stack);
                             player.getInventory().removeItem(player.getItemInHand(hand));
                         }
                         level.updateNeighbourForOutputSignal(pos, this);
@@ -137,15 +134,11 @@ public class SaltCampfireBlock extends Block implements EntityBlock, SimpleWater
                 }
             }
         } else {
-            if (invSize > 0) {
-                int slot = invSize - 1;
-                if (!blockEntity.getItemHandler().getItem(slot).isEmpty()) {
-                    if (player.getInventory().getSlotWithRemainingSpace(blockEntity.getItemHandler().getItem(slot)) != -1 || player.getInventory().getFreeSlot() > -1) {
-                        player.getInventory().add(blockEntity.getItemHandler().getItem(slot).copy());
-                    } else {
-                        level.addFreshEntity(new ItemEntity(level, pos.getX() + 0.5F, pos.getY() + 1.0F, pos.getZ() + 0.5F, blockEntity.getItemHandler().getItem(slot).copy()));
-                    }
-                    blockEntity.getItemHandler().removeItem(slot, 1);
+            if (size > 0) {
+                int slot = size - 1;
+                if (!container.getItem(slot).isEmpty()) {
+                    BlockSimpleInventory.addHandPlayerItem(level, player, hand, stack, container.getItem(slot));
+                    container.removeItem(slot, 1);
                     level.updateNeighbourForOutputSignal(pos, this);
                     BlockEntityUpdate.packet(blockEntity);
                     level.playSound(null, pos, WizardsRebornSounds.PEDESTAL_REMOVE.get(), SoundSource.BLOCKS, 1.0f, 1.0f);

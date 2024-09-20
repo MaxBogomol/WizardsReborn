@@ -111,15 +111,9 @@ public class ArcaneWorkbenchBlock extends HorizontalDirectionalBlock implements 
             return InteractionResult.SUCCESS;
         } else {
             ItemStack stack = player.getItemInHand(hand).copy();
-            boolean isWand = false;
+            boolean clickable = WissenWandItem.isClickable(stack);
 
-            if (stack.getItem() instanceof WissenWandItem) {
-                if (WissenWandItem.getMode(stack) != 4) {
-                    isWand = true;
-                }
-            }
-
-            if (!isWand) {
+            if (clickable) {
                 BlockEntity blockEntity = level.getBlockEntity(pos);
                 NetworkHooks.openScreen(((ServerPlayer) player), (MenuProvider) blockEntity, blockEntity.getBlockPos());
                 return InteractionResult.CONSUME;

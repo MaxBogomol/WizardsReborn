@@ -185,7 +185,7 @@ public class TotemOfDisenchantBlockEntity extends NameableBlockEntityBase implem
                             .setColorData(ColorParticleData.create(Config.wissenColorR(), Config.wissenColorG(), Config.wissenColorB()).build())
                             .setTransparencyData(GenericParticleData.create(0.25f, 0).build())
                             .setScaleData(GenericParticleData.create(0, 0.075f * getStage(), 0).setEasing(Easing.QUINTIC_IN_OUT).build())
-                            .setSpinData(SpinParticleData.create().randomSpin(0.5f).build())
+                            .setSpinData(SpinParticleData.create().randomOffset().randomSpin(0.5f).build())
                             .setLifetime(20)
                             .randomVelocity(0.015f)
                             .spawn(level, getBlockPos().getX() + 0.5F, getBlockPos().getY() + 0.5F, getBlockPos().getZ() + 0.5F);

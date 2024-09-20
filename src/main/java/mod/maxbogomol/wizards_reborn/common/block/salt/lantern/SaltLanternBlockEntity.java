@@ -42,10 +42,8 @@ public class SaltLanternBlockEntity extends SaltTorchBlockEntity {
             }
 
             if (!getItemHandler().getItem(0).isEmpty()) {
-                if (getItemHandler().getItem(0).getItem() instanceof BlockItem) {
-                    BlockItem blockItem = (BlockItem) getItemHandler().getItem(0).getItem();
-                    if (blockItem.getBlock() instanceof ArcaneLumosBlock) {
-                        ArcaneLumosBlock lumos = (ArcaneLumosBlock) blockItem.getBlock();
+                if (getItemHandler().getItem(0).getItem() instanceof BlockItem blockItem) {
+                    if (blockItem.getBlock() instanceof ArcaneLumosBlock lumos) {
                         color = ArcaneLumosBlock.getColor(lumos.color);
 
                         if (lumos.color == ArcaneLumosBlock.Colors.COSMIC) {
@@ -55,10 +53,8 @@ public class SaltLanternBlockEntity extends SaltTorchBlockEntity {
                 }
             }
             if (!getItemHandler().getItem(1).isEmpty()) {
-                if (getItemHandler().getItem(1).getItem() instanceof BlockItem) {
-                    BlockItem blockItem = (BlockItem) getItemHandler().getItem(1).getItem();
-                    if (blockItem.getBlock() instanceof ArcaneLumosBlock) {
-                        ArcaneLumosBlock lumos = (ArcaneLumosBlock) blockItem.getBlock();
+                if (getItemHandler().getItem(1).getItem() instanceof BlockItem blockItem) {
+                    if (blockItem.getBlock() instanceof ArcaneLumosBlock lumos) {
                         colorF = ArcaneLumosBlock.getColor(lumos.color);
 
                         if (lumos.color == ArcaneLumosBlock.Colors.COSMIC) {
@@ -73,11 +69,11 @@ public class SaltLanternBlockEntity extends SaltTorchBlockEntity {
                         .setBehavior(ParticleBehavior.create().enableCamera().enableSided()
                                 .setXSpinData(SpinParticleData.create().randomOffsetDegrees(-25, 25).build())
                                 .setYSpinData(SpinParticleData.create().randomOffsetDegrees(-25, 25).build())
+                                .setZSpinData(SpinParticleData.create().randomOffset().randomSpin(0.05f).build())
                                 .build())
                         .setColorData(ColorParticleData.create(colorF, color).build())
                         .setTransparencyData(GenericParticleData.create(0.2f, 0.45f, 0).setEasing(Easing.QUINTIC_IN_OUT).build())
                         .setScaleData(GenericParticleData.create(0.1f, 0.35f, 0).setEasing(Easing.QUINTIC_IN_OUT).build())
-                        .setSpinData(SpinParticleData.create().randomOffset().randomSpin(0.05f).build())
                         .setLifetime(30)
                         .spawn(level, getBlockPos().getX() + pos.x(), getBlockPos().getY() + pos.y(), getBlockPos().getZ() + pos.z());
             }
@@ -86,11 +82,11 @@ public class SaltLanternBlockEntity extends SaltTorchBlockEntity {
                         .setBehavior(ParticleBehavior.create(0, 0, 0).enableCamera().enableSided()
                                 .setXSpinData(SpinParticleData.create().randomOffsetDegrees(-20, 20).build())
                                 .setYSpinData(SpinParticleData.create().randomOffsetDegrees(-20, 20).build())
+                                .setZSpinData(SpinParticleData.create().randomOffset().randomSpin(0.05f).build())
                                 .build())
                         .setColorData(ColorParticleData.create(colorF, color).build())
                         .setTransparencyData(GenericParticleData.create(0.35f, 0).build())
                         .setScaleData(GenericParticleData.create(0f, 0.35f).setEasing(Easing.SINE_IN_OUT).build())
-                        .setSpinData(SpinParticleData.create().randomOffset().randomSpin(0.05f).build())
                         .setLifetime(60)
                         .randomVelocity(0.00625f)
                         .spawn(level, getBlockPos().getX() + pos.x(), getBlockPos().getY() + pos.y(), getBlockPos().getZ() + pos.z());

@@ -28,19 +28,19 @@ public class SteamStorageBaseItem extends BlockItem implements ISteamItem, ICust
     }
 
     @Override
-    public CompoundTag getCustomBlockEntityData(ItemStack stack, CompoundTag tileNbt) {
-        if (!tileNbt.contains("steam")) {
-            CompoundTag nbt = stack.getOrCreateTag();
-            tileNbt.putInt("steam", nbt.getInt("steam"));
+    public CompoundTag getCustomBlockEntityData(ItemStack stack, CompoundTag nbt) {
+        if (!nbt.contains("steam")) {
+            CompoundTag stackNbt = stack.getOrCreateTag();
+            nbt.putInt("steam", stackNbt.getInt("steam"));
         }
 
-        return tileNbt;
+        return nbt;
     }
 
     @Override
     public int getMaxSteam() {
-        if (getBlock() instanceof EntityBlock tileBlock) {
-            BlockEntity blockEntity = tileBlock.newBlockEntity(new BlockPos(0, 0, 0), getBlock().defaultBlockState());
+        if (getBlock() instanceof EntityBlock block) {
+            BlockEntity blockEntity = block.newBlockEntity(new BlockPos(0, 0, 0), getBlock().defaultBlockState());
             if (blockEntity instanceof ISteamBlockEntity steamBlockEntity) {
                 return steamBlockEntity.getMaxSteam();
             }

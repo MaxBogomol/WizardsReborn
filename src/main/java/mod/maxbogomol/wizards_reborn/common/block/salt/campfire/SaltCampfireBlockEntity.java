@@ -75,10 +75,8 @@ public class SaltCampfireBlockEntity extends ExposedBlockSimpleInventory impleme
             boolean isCosmic = false;
 
             if (!getItemHandler().getItem(0).isEmpty()) {
-                if (getItemHandler().getItem(0).getItem() instanceof BlockItem) {
-                    BlockItem blockItem = (BlockItem) getItemHandler().getItem(0).getItem();
-                    if (blockItem.getBlock() instanceof ArcaneLumosBlock) {
-                        ArcaneLumosBlock lumos = (ArcaneLumosBlock) blockItem.getBlock();
+                if (getItemHandler().getItem(0).getItem() instanceof BlockItem blockItem) {
+                    if (blockItem.getBlock() instanceof ArcaneLumosBlock lumos) {
                         color = ArcaneLumosBlock.getColor(lumos.color);
 
                         if (lumos.color == ArcaneLumosBlock.Colors.COSMIC) {
@@ -88,10 +86,8 @@ public class SaltCampfireBlockEntity extends ExposedBlockSimpleInventory impleme
                 }
             }
             if (!getItemHandler().getItem(1).isEmpty()) {
-                if (getItemHandler().getItem(1).getItem() instanceof BlockItem) {
-                    BlockItem blockItem = (BlockItem) getItemHandler().getItem(1).getItem();
-                    if (blockItem.getBlock() instanceof ArcaneLumosBlock) {
-                        ArcaneLumosBlock lumos = (ArcaneLumosBlock) blockItem.getBlock();
+                if (getItemHandler().getItem(1).getItem() instanceof BlockItem blockItem) {
+                    if (blockItem.getBlock() instanceof ArcaneLumosBlock lumos) {
                         colorF = ArcaneLumosBlock.getColor(lumos.color);
 
                         if (lumos.color == ArcaneLumosBlock.Colors.COSMIC) {
@@ -106,11 +102,11 @@ public class SaltCampfireBlockEntity extends ExposedBlockSimpleInventory impleme
                         .setBehavior(ParticleBehavior.create(90, 0, 0)
                                 .setXSpinData(SpinParticleData.create().randomOffsetDegrees(-25, 25).build())
                                 .setYSpinData(SpinParticleData.create().randomOffsetDegrees(-25, 25).build())
+                                .setZSpinData(SpinParticleData.create().randomOffset().randomSpin(0.05f).build())
                                 .build())
                         .setColorData(ColorParticleData.create(colorF, color).build())
                         .setTransparencyData(GenericParticleData.create(0.1f, 0.25f, 0).setEasing(Easing.QUINTIC_IN_OUT).build())
                         .setScaleData(GenericParticleData.create(0.3f, 0.55f, 0).setEasing(Easing.QUINTIC_IN_OUT).build())
-                        .setSpinData(SpinParticleData.create().randomOffset().randomSpin(0.05f).build())
                         .setLifetime(30)
                         .spawn(level, getBlockPos().getX() + pos.x(), getBlockPos().getY() + pos.y(), getBlockPos().getZ() + pos.z());
             }
@@ -119,11 +115,11 @@ public class SaltCampfireBlockEntity extends ExposedBlockSimpleInventory impleme
                         .setBehavior(ParticleBehavior.create(0, 0, 0).enableCamera().enableSided()
                                 .setXSpinData(SpinParticleData.create().randomOffsetDegrees(-20, 20).build())
                                 .setYSpinData(SpinParticleData.create().randomOffsetDegrees(-20, 20).build())
+                                .setZSpinData(SpinParticleData.create().randomOffset().randomSpin(0.05f).build())
                                 .build())
                         .setColorData(ColorParticleData.create(colorF, color).build())
                         .setTransparencyData(GenericParticleData.create(0.35f, 0).build())
                         .setScaleData(GenericParticleData.create(0.45f, 0).setEasing(Easing.SINE_IN_OUT).build())
-                        .setSpinData(SpinParticleData.create().randomOffset().randomSpin(0.05f).build())
                         .setLifetime(60)
                         .randomVelocity(0.0025f)
                         .addVelocity(0, 0.025f, 0)
@@ -236,11 +232,7 @@ public class SaltCampfireBlockEntity extends ExposedBlockSimpleInventory impleme
 
     @Override
     public boolean canPlaceItemThroughFace(int index, @NotNull ItemStack stack, @Nullable Direction direction) {
-        if (stack.is(WizardsRebornItemTags.ARCANE_LUMOS)) {
-            return true;
-        }
-
-        return false;
+        return stack.is(WizardsRebornItemTags.ARCANE_LUMOS);
     }
 
     @Override

@@ -116,9 +116,9 @@ public class WissenCrystallizerBlock extends Block implements EntityBlock, Simpl
         }
 
         Container container = blockEntity.getItemHandler();
-        if (!player.isShiftKeyDown()) {
+        if (!stack.isEmpty()) {
             if (slot < 11) {
-                if ((!stack.isEmpty()) && (container.getItem(slot).isEmpty())) {
+                if (container.getItem(slot).isEmpty()) {
                     if (stack.getCount() > 1) {
                         player.getItemInHand(hand).shrink(1);
                         stack.setCount(1);

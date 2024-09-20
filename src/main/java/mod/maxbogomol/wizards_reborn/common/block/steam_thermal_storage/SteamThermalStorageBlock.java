@@ -39,11 +39,9 @@ import org.jetbrains.annotations.NotNull;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import java.util.List;
-import java.util.Random;
 import java.util.stream.Stream;
 
 public class SteamThermalStorageBlock extends RotatedPillarBlock implements EntityBlock, SimpleWaterloggedBlock  {
-    private static Random random = new Random();
 
     private static final VoxelShape SHAPE_X_SHELL  = Stream.of(
             Block.box(0, 6, 6, 1, 10, 10),
@@ -86,16 +84,12 @@ public class SteamThermalStorageBlock extends RotatedPillarBlock implements Enti
     @Nonnull
     @Override
     public VoxelShape getShape(BlockState state, BlockGetter level, BlockPos pos, CollisionContext context) {
-        switch (state.getValue(AXIS)) {
-            case X:
-                return SHAPE_X;
-            case Y:
-                return SHAPE_Y;
-            case Z:
-                return SHAPE_Z;
-            default:
-                return SHAPE_Y;
-        }
+        return switch (state.getValue(AXIS)) {
+            case X -> SHAPE_X;
+            case Y -> SHAPE_Y;
+            case Z -> SHAPE_Z;
+            default -> SHAPE_Y;
+        };
     }
 
     @Override
@@ -108,6 +102,20 @@ public class SteamThermalStorageBlock extends RotatedPillarBlock implements Enti
     public BlockState getStateForPlacement(BlockPlaceContext context) {
         FluidState fluidState = context.getLevel().getFluidState(context.getClickedPos());
         return this.defaultBlockState().setValue(AXIS, context.getClickedFace().getAxis()).setValue(BlockStateProperties.WATERLOGGED, fluidState.getType() == Fluids.WATER);
+    }
+
+    @Override
+    public FluidState getFluidState(BlockState state) {
+        return state.getValue(BlockStateProperties.WATERLOGGED) ? Fluids.WATER.getSource(false) : Fluids.EMPTY.defaultFluidState();
+    }
+
+    @Override
+    public BlockState updateShape(BlockState state, Direction direction, BlockState neighborState, LevelAccessor level, BlockPos currentPos, BlockPos neighborPos) {
+        if (state.getValue(BlockStateProperties.WATERLOGGED)) {
+            level.scheduleTick(currentPos, Fluids.WATER, Fluids.WATER.getTickDelay(level));
+        }
+
+        return super.updateShape(state, direction, neighborState, level, currentPos, neighborPos);
     }
 
     @Override
@@ -131,20 +139,6 @@ public class SteamThermalStorageBlock extends RotatedPillarBlock implements Enti
     @Override
     public InteractionResult use(BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hit) {
         return InteractionResult.PASS;
-    }
-
-    @Override
-    public FluidState getFluidState(BlockState state) {
-        return state.getValue(BlockStateProperties.WATERLOGGED) ? Fluids.WATER.getSource(false) : Fluids.EMPTY.defaultFluidState();
-    }
-
-    @Override
-    public BlockState updateShape(BlockState state, Direction direction, BlockState neighborState, LevelAccessor level, BlockPos currentPos, BlockPos neighborPos) {
-        if (state.getValue(BlockStateProperties.WATERLOGGED)) {
-            level.scheduleTick(currentPos, Fluids.WATER, Fluids.WATER.getTickDelay(level));
-        }
-
-        return super.updateShape(state, direction, neighborState, level, currentPos, neighborPos);
     }
 
     @Nullable

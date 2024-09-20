@@ -26,15 +26,15 @@ public class PlacedItem extends ItemNameBlockItem implements ICustomBlockEntityD
     }
 
     @Override
-    public CompoundTag getCustomBlockEntityData(ItemStack stack, CompoundTag tileNbt) {
-        if (!tileNbt.contains("Items")) {
+    public CompoundTag getCustomBlockEntityData(ItemStack stack, CompoundTag nbt) {
+        if (!nbt.contains("Items")) {
             ItemStack newStack = stack.copy();
             NonNullList<ItemStack> ret = NonNullList.withSize(1, ItemStack.EMPTY);
             ret.set(0, newStack);
-            ContainerHelper.saveAllItems(tileNbt, ret);
+            ContainerHelper.saveAllItems(nbt, ret);
         }
 
-        return tileNbt;
+        return nbt;
     }
 
     @Override

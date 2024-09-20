@@ -46,8 +46,8 @@ public class LightCasingBlockEntity extends LightTransferLensBlockEntity {
                         Vec3 to = LightUtil.getLightLensPos(getBlockPos().relative(direction), getLightLensPos());
 
                         LightRayHitResult hitResult = LightUtil.getLightRayHitResult(level, getBlockPos(), from, to, 25);
-                        BlockEntity hitTile = hitResult.getBlockEntity();
-                        LightUtil.transferLight(this, hitTile);
+                        BlockEntity hitBlock = hitResult.getBlockEntity();
+                        LightUtil.transferLight(this, hitBlock);
                     }
                 }
             }

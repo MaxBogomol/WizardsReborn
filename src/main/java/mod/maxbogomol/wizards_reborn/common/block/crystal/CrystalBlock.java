@@ -44,14 +44,12 @@ import org.jetbrains.annotations.NotNull;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import java.awt.*;
-import java.util.Random;
 import java.util.stream.Stream;
 
 public class CrystalBlock extends Block implements EntityBlock, SimpleWaterloggedBlock {
 
     public PolishingType polishing;
     public CrystalType type;
-    private static Random random = new Random();
 
     private static final VoxelShape FACETED_SHAPE = Block.box(5, 0, 5, 11, 9, 11);
     private static final VoxelShape SHAPE = Stream.of(

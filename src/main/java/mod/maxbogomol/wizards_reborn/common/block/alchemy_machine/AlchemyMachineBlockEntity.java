@@ -145,10 +145,7 @@ public class AlchemyMachineBlockEntity extends PipeBaseBlockEntity implements Ti
 
                     if (recipe.isPresent()) {
                         int filled = boiler.getTank().fill(recipe.get().getResultFluid(), IFluidHandler.FluidAction.SIMULATE);
-                        boolean isCanFluid = true;
-                        if (filled != recipe.get().getResultFluid().getAmount()) {
-                            isCanFluid = false;
-                        }
+                        boolean isCanFluid = filled == recipe.get().getResultFluid().getAmount();
                         if ((wissenInCraft > 0) && (boiler.wissen > 0) && (startCraft)) {
                             ItemStack output = recipe.get().getResultItem(RegistryAccess.EMPTY);
 
@@ -165,6 +162,11 @@ public class AlchemyMachineBlockEntity extends PipeBaseBlockEntity implements Ti
                             if (random.nextFloat() < 0.01F) {
                                 level.playSound(null, getBlockPos(), SoundEvents.WATER_AMBIENT, SoundSource.BLOCKS, 0.6f, 1.0f);
                             }
+                        } else {
+                            wissenIsCraft = 0;
+                            startCraft = false;
+
+                            update = true;
                         }
 
                         if ((steamInCraft > 0) && (boiler.steam > 0) && (startCraft)) {
@@ -300,11 +302,6 @@ public class AlchemyMachineBlockEntity extends PipeBaseBlockEntity implements Ti
             @Override
             public boolean isItemValid(int slot, @Nonnull ItemStack stack) {
                 return true;
-            }
-
-            @Override
-            public int getSlotLimit(int slot) {
-                return 64;
             }
 
             @Nonnull

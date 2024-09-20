@@ -48,11 +48,11 @@ public class SteamPipeBlock extends TinyPipeBaseBlock {
     }
 
     @Override
-    public boolean connectToTile(BlockEntity blockEntity, Direction direction) {
+    public boolean connectToBlockEntity(BlockEntity blockEntity, Direction direction) {
         boolean connect = false;
         if (blockEntity != null) {
-            if (blockEntity instanceof ISteamBlockEntity steamTile) {
-                connect = steamTile.canSteamConnection(direction.getOpposite());
+            if (blockEntity instanceof ISteamBlockEntity steamBlockEntity) {
+                connect = steamBlockEntity.canSteamConnection(direction.getOpposite());
             }
         }
         return connect;

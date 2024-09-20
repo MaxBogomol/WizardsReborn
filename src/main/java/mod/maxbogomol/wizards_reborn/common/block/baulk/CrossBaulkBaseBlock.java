@@ -63,7 +63,7 @@ public abstract class CrossBaulkBaseBlock extends Block implements EntityBlock, 
 
     public abstract TagKey<Block> getToggleConnectionTag();
 
-    public abstract boolean connectToTile(BlockEntity blockEntity, Direction face);
+    public abstract boolean connectToBlockEntity(BlockEntity blockEntity, Direction face);
 
     public abstract boolean unclog(BlockEntity blockEntity, Level level, BlockPos pos);
 

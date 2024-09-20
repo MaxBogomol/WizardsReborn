@@ -99,11 +99,7 @@ public class TotemOfFlamesBlock extends Block implements EntityBlock, SimpleWate
     public boolean canSurvive(BlockState state, LevelReader level, BlockPos pos) {
         BlockPos blockpos = pos.below();
         BlockState blockstate = level.getBlockState(blockpos);
-        if (blockstate.getBlock() == WizardsRebornBlocks.ARCANE_PEDESTAL.get() || blockstate.getBlock() == WizardsRebornBlocks.TOTEM_BASE.get()) {
-            return true;
-        }
-
-        return false;
+        return blockstate.getBlock() == WizardsRebornBlocks.ARCANE_PEDESTAL.get() || blockstate.getBlock() == WizardsRebornBlocks.TOTEM_BASE.get();
     }
 
     @Override
@@ -132,7 +128,7 @@ public class TotemOfFlamesBlock extends Block implements EntityBlock, SimpleWate
         if ((!stack.isEmpty()) && (container.getItem(0).isEmpty())) {
             if (stack.is(WizardsRebornItemTags.ARCANE_LUMOS)) {
                 if (stack.getCount() > 1) {
-                    player.getItemInHand(hand).setCount(stack.getCount() - 1);
+                    player.getItemInHand(hand).shrink(1);
                     stack.setCount(1);
                     container.setItem(0, stack);
                 } else {

@@ -63,7 +63,7 @@ public abstract class PipeBaseBlock extends Block implements EntityBlock, Simple
 
     public abstract TagKey<Block> getToggleConnectionTag();
 
-    public abstract boolean connectToTile(BlockEntity blockEntity, Direction face);
+    public abstract boolean connectToBlockEntity(BlockEntity blockEntity, Direction face);
 
     public abstract boolean unclog(BlockEntity blockEntity, Level level, BlockPos pos);
 
@@ -151,7 +151,7 @@ public abstract class PipeBaseBlock extends Block implements EntityBlock, Simple
                         return InteractionResult.SUCCESS;
                     }
                     BlockEntity blockEntity = level.getBlockEntity(facingPos);
-                    if (connectToTile(blockEntity, face)) {
+                    if (connectToBlockEntity(blockEntity, face)) {
                         if (facingState.getBlock() instanceof IPipeConnection) {
                             pipe.setConnection(face, ((IPipeConnection) facingState.getBlock()).getPipeConnection(facingState, face.getOpposite()));
                         } else {
@@ -287,7 +287,7 @@ public abstract class PipeBaseBlock extends Block implements EntityBlock, Simple
                     BlockEntity blockEntity = level.getBlockEntity(facingPos);
                     if (connected(facing, facingState)) {
                         pipe.setConnection(facing, PipeConnection.LEVER);
-                    } else if ((connectToTile(blockEntity, facing) && enabled)) {
+                    } else if ((connectToBlockEntity(blockEntity, facing) && enabled)) {
                         if (facingState.getBlock() instanceof IPipeConnection) {
                             pipe.setConnection(facing, ((IPipeConnection) facingState.getBlock()).getPipeConnection(facingState, facing.getOpposite()));
                         } else {

@@ -11,12 +11,12 @@ public class BunchOfThingsItem extends PlacedItem {
     }
 
     @Override
-    public CompoundTag getCustomBlockEntityData(ItemStack stack, CompoundTag tileNbt) {
-        if (!tileNbt.contains("things")) {
-            tileNbt.putBoolean("things", true);
+    public CompoundTag getCustomBlockEntityData(ItemStack stack, CompoundTag nbt) {
+        if (!nbt.contains("things")) {
+            nbt.putBoolean("things", true);
         }
 
-        return tileNbt;
+        return nbt;
     }
 
     @Override

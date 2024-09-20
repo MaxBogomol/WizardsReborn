@@ -78,6 +78,20 @@ public class TotemOfDisenchantBlock extends Block implements EntityBlock, Simple
     }
 
     @Override
+    public FluidState getFluidState(BlockState state) {
+        return state.getValue(BlockStateProperties.WATERLOGGED) ? Fluids.WATER.getSource(false) : Fluids.EMPTY.defaultFluidState();
+    }
+
+    @Override
+    public BlockState updateShape(BlockState state, Direction direction, BlockState neighborState, LevelAccessor level, BlockPos currentPos, BlockPos neighborPos) {
+        if (state.getValue(BlockStateProperties.WATERLOGGED)) {
+            level.scheduleTick(currentPos, Fluids.WATER, Fluids.WATER.getTickDelay(level));
+        }
+
+        return !state.canSurvive(level, currentPos) ? Blocks.AIR.defaultBlockState() : super.updateShape(state, direction, neighborState, level, currentPos, neighborPos);
+    }
+
+    @Override
     public void onRemove(@Nonnull BlockState state, @Nonnull Level level, @Nonnull BlockPos pos, @Nonnull BlockState newState, boolean isMoving) {
         if (state.getBlock() != newState.getBlock()) {
             BlockEntity blockEntity = level.getBlockEntity(pos);
@@ -98,15 +112,9 @@ public class TotemOfDisenchantBlock extends Block implements EntityBlock, Simple
             return InteractionResult.SUCCESS;
         } else {
             ItemStack stack = player.getItemInHand(hand).copy();
-            boolean isWand = false;
+            boolean clickable = WissenWandItem.isClickable(stack);
 
-            if (stack.getItem() instanceof WissenWandItem) {
-                if (WissenWandItem.getMode(stack) != 4) {
-                    isWand = true;
-                }
-            }
-
-            if (!isWand) {
+            if (clickable) {
                 BlockEntity blockEntity = level.getBlockEntity(pos);
                 NetworkHooks.openScreen(((ServerPlayer) player), (MenuProvider) blockEntity, blockEntity.getBlockPos());
                 return InteractionResult.CONSUME;
@@ -122,28 +130,10 @@ public class TotemOfDisenchantBlock extends Block implements EntityBlock, Simple
     }
 
     @Override
-    public FluidState getFluidState(BlockState state) {
-        return state.getValue(BlockStateProperties.WATERLOGGED) ? Fluids.WATER.getSource(false) : Fluids.EMPTY.defaultFluidState();
-    }
-
-    @Override
-    public BlockState updateShape(BlockState state, Direction direction, BlockState neighborState, LevelAccessor level, BlockPos currentPos, BlockPos neighborPos) {
-        if (state.getValue(BlockStateProperties.WATERLOGGED)) {
-            level.scheduleTick(currentPos, Fluids.WATER, Fluids.WATER.getTickDelay(level));
-        }
-
-        return !state.canSurvive(level, currentPos) ? Blocks.AIR.defaultBlockState() : super.updateShape(state, direction, neighborState, level, currentPos, neighborPos);
-    }
-
-    @Override
     public boolean canSurvive(BlockState state, LevelReader level, BlockPos pos) {
         BlockPos blockpos = pos.below();
         BlockState blockstate = level.getBlockState(blockpos);
-        if (blockstate.getBlock() == WizardsRebornBlocks.ARCANE_PEDESTAL.get() || blockstate.getBlock() == WizardsRebornBlocks.TOTEM_BASE.get()) {
-            return true;
-        }
-
-        return false;
+        return blockstate.getBlock() == WizardsRebornBlocks.ARCANE_PEDESTAL.get() || blockstate.getBlock() == WizardsRebornBlocks.TOTEM_BASE.get();
     }
 
     @Override

@@ -69,8 +69,8 @@ public class LightTransferLensBlockEntity extends ExposedBlockSimpleInventory im
                             Vec3 to = LightUtil.getLightLensPos(pos, lightBlockEntity.getLightLensPos());
 
                             LightRayHitResult hitResult = LightUtil.getLightRayHitResult(level, getBlockPos(), from, to, 25);
-                            BlockEntity hitTile = hitResult.getBlockEntity();
-                            LightUtil.transferLight(this, hitTile);
+                            BlockEntity hitBlock = hitResult.getBlockEntity();
+                            LightUtil.transferLight(this, hitBlock);
                         }
                     } else {
                         isToBlock = false;
@@ -107,11 +107,7 @@ public class LightTransferLensBlockEntity extends ExposedBlockSimpleInventory im
 
     @Override
     public boolean canPlaceItemThroughFace(int index, @NotNull ItemStack stack, @Nullable Direction direction) {
-        if (stack.is(WizardsRebornItemTags.ARCANE_LUMOS)) {
-            return true;
-        }
-
-        return false;
+        return stack.is(WizardsRebornItemTags.ARCANE_LUMOS);
     }
 
     @Override
@@ -242,10 +238,10 @@ public class LightTransferLensBlockEntity extends ExposedBlockSimpleInventory im
     @Override
     public boolean wissenWandSendConnect(ItemStack stack, UseOnContext context, BlockEntity blockEntity) {
         BlockPos oldBlockPos = WissenWandItem.getBlockPos(stack);
-        BlockEntity oldTile = level.getBlockEntity(oldBlockPos);
+        BlockEntity oldBlockEntity = level.getBlockEntity(oldBlockPos);
 
-        if (oldTile instanceof ILightBlockEntity lightTile) {
-            if (lightTile.canConnectSendLight()) {
+        if (oldBlockEntity instanceof ILightBlockEntity lightBlockEntity) {
+            if (lightBlockEntity.canConnectSendLight()) {
                 blockToX = oldBlockPos.getX();
                 blockToY = oldBlockPos.getY();
                 blockToZ = oldBlockPos.getZ();

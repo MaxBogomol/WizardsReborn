@@ -178,7 +178,7 @@ public class CrystalGrowthBlock extends Block implements EntityBlock, SimpleWate
         level.setBlock(pos, this.withAge(i), 2);
     }
 
-    public float getGrowthChance(Block blockIn, BlockGetter level, BlockPos pos) {
+    public float getGrowthChance(Block block, BlockGetter level, BlockPos pos) {
         if (level.getBlockEntity(pos) instanceof IGrowableCrystal growable) {
             if (growable.getGrowingPower() > 0) {
                 return growable.getGrowingPower();
@@ -256,8 +256,8 @@ public class CrystalGrowthBlock extends Block implements EntityBlock, SimpleWate
                 CrystalUtil.createCrystalItemStats(crystalItem, type, level, 6);
                 Containers.dropItemStack(level, pos.getX(), pos.getY(), pos.getZ(), crystalItem);
             }
-            super.onRemove(state, level, pos, newState, isMoving);
         }
+        super.onRemove(state, level, pos, newState, isMoving);
     }
 
     @Override

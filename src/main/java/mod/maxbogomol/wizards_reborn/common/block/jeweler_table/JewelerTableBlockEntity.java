@@ -120,6 +120,11 @@ public class JewelerTableBlockEntity extends NameableBlockEntityBase implements 
                         if (random.nextFloat() < 0.05) {
                             level.playSound(WizardsReborn.proxy.getPlayer(), getBlockPos(), SoundEvents.GRINDSTONE_USE, SoundSource.BLOCKS, 0.3f, (float) (0.5f + ((random.nextFloat() - 0.5D) / 4)));
                         }
+                    } else {
+                        wissenIsCraft = 0;
+                        startCraft = false;
+
+                        update = true;
                     }
                 }
 
@@ -230,7 +235,7 @@ public class JewelerTableBlockEntity extends NameableBlockEntityBase implements 
                             .setColorData(ColorParticleData.create(Config.wissenColorR(), Config.wissenColorG(), Config.wissenColorB()).build())
                             .setTransparencyData(GenericParticleData.create(0.25f, 0).build())
                             .setScaleData(GenericParticleData.create(0, 0.05f * getStage(), 0).setEasing(Easing.QUINTIC_IN_OUT).build())
-                            .setSpinData(SpinParticleData.create().randomSpin(0.5f).build())
+                            .setSpinData(SpinParticleData.create().randomOffset().randomSpin(0.5f).build())
                             .setLifetime(30)
                             .randomVelocity(0.015f)
                             .spawn(level, pos.x(), pos.y(), pos.z());
@@ -285,7 +290,7 @@ public class JewelerTableBlockEntity extends NameableBlockEntityBase implements 
                             .setColorData(ColorParticleData.create(item ? Color.WHITE : color).build())
                             .setTransparencyData(GenericParticleData.create(0.2f, 0.5f, 0).setEasing(Easing.QUINTIC_IN_OUT).build())
                             .setScaleData(GenericParticleData.create(0.025f, 0.06f, 0).setEasing(Easing.QUINTIC_IN_OUT).build())
-                            .setSpinData(SpinParticleData.create().randomSpin(0.5f).build())
+                            .setSpinData(SpinParticleData.create().randomOffset().randomSpin(0.5f).build())
                             .setLifetime(30)
                             .addVelocity(x, (random.nextDouble() / 30), y)
                             .spawn(level, pos.x(), pos.y(), pos.z());
@@ -311,11 +316,6 @@ public class JewelerTableBlockEntity extends NameableBlockEntityBase implements 
             @Override
             public boolean isItemValid(int slot, @Nonnull ItemStack stack) {
                 return true;
-            }
-
-            @Override
-            public int getSlotLimit(int slot) {
-                return 64;
             }
 
             @Nonnull
@@ -399,11 +399,7 @@ public class JewelerTableBlockEntity extends NameableBlockEntityBase implements 
             return true;
         }
 
-        if ((ItemHandlerHelper.canItemStacksStack(output, inv.getItem(2))) && (inv.getItem(2).getCount() + output.getCount() <= output.getMaxStackSize())) {
-            return true;
-        }
-
-        return false;
+        return (ItemHandlerHelper.canItemStacksStack(output, inv.getItem(2))) && (inv.getItem(2).getCount() + output.getCount() <= output.getMaxStackSize());
     }
 
     @Override

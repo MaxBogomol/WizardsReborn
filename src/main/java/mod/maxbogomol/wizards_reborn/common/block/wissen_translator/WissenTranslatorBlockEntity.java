@@ -446,10 +446,8 @@ public class WissenTranslatorBlockEntity extends ExposedBlockSimpleInventory imp
         Color color = new Color(Config.wissenColorR(), Config.wissenColorG(), Config.wissenColorB());
 
         if (!getItemHandler().getItem(0).isEmpty()) {
-            if (getItemHandler().getItem(0).getItem() instanceof BlockItem) {
-                BlockItem blockItem = (BlockItem) getItemHandler().getItem(0).getItem();
-                if (blockItem.getBlock() instanceof ArcaneLumosBlock) {
-                    ArcaneLumosBlock lumos = (ArcaneLumosBlock) blockItem.getBlock();
+            if (getItemHandler().getItem(0).getItem() instanceof BlockItem blockItem) {
+                if (blockItem.getBlock() instanceof ArcaneLumosBlock lumos) {
                     color = ArcaneLumosBlock.getColor(lumos.color);
                 }
             }

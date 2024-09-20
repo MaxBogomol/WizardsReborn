@@ -72,6 +72,20 @@ public class JewelerTableBlock extends HorizontalDirectionalBlock implements Ent
     }
 
     @Override
+    public FluidState getFluidState(BlockState state) {
+        return state.getValue(BlockStateProperties.WATERLOGGED) ? Fluids.WATER.getSource(false) : Fluids.EMPTY.defaultFluidState();
+    }
+
+    @Override
+    public BlockState updateShape(BlockState state, Direction direction, BlockState neighborState, LevelAccessor level, BlockPos currentPos, BlockPos neighborPos) {
+        if (state.getValue(BlockStateProperties.WATERLOGGED)) {
+            level.scheduleTick(currentPos, Fluids.WATER, Fluids.WATER.getTickDelay(level));
+        }
+
+        return super.updateShape(state, direction, neighborState, level, currentPos, neighborPos);
+    }
+
+    @Override
     public void onRemove(@Nonnull BlockState state, @Nonnull Level level, @Nonnull BlockPos pos, @Nonnull BlockState newState, boolean isMoving) {
         if (state.getBlock() != newState.getBlock()) {
             BlockEntity blockEntity = level.getBlockEntity(pos);
@@ -93,15 +107,9 @@ public class JewelerTableBlock extends HorizontalDirectionalBlock implements Ent
             return InteractionResult.SUCCESS;
         } else {
             ItemStack stack = player.getItemInHand(hand).copy();
-            boolean isWand = false;
+            boolean clickable = WissenWandItem.isClickable(stack);
 
-            if (stack.getItem() instanceof WissenWandItem) {
-                if (WissenWandItem.getMode(stack) != 4) {
-                    isWand = true;
-                }
-            }
-
-            if (!isWand) {
+            if (clickable) {
                 BlockEntity blockEntity = level.getBlockEntity(pos);
                 NetworkHooks.openScreen(((ServerPlayer) player), (MenuProvider) blockEntity, blockEntity.getBlockPos());
                 return InteractionResult.CONSUME;
@@ -119,20 +127,6 @@ public class JewelerTableBlock extends HorizontalDirectionalBlock implements Ent
                 blockEntityBase.setCustomName(stack.getHoverName());
             }
         }
-    }
-
-    @Override
-    public FluidState getFluidState(BlockState state) {
-        return state.getValue(BlockStateProperties.WATERLOGGED) ? Fluids.WATER.getSource(false) : Fluids.EMPTY.defaultFluidState();
-    }
-
-    @Override
-    public BlockState updateShape(BlockState state, Direction direction, BlockState neighborState, LevelAccessor level, BlockPos currentPos, BlockPos neighborPos) {
-        if (state.getValue(BlockStateProperties.WATERLOGGED)) {
-            level.scheduleTick(currentPos, Fluids.WATER, Fluids.WATER.getTickDelay(level));
-        }
-
-        return super.updateShape(state, direction, neighborState, level, currentPos, neighborPos);
     }
 
     @Nullable

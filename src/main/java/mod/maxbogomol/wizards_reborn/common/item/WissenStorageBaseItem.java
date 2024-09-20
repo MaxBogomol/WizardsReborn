@@ -30,19 +30,19 @@ public class WissenStorageBaseItem extends BlockItem implements IWissenItem, ICu
     }
 
     @Override
-    public CompoundTag getCustomBlockEntityData(ItemStack stack, CompoundTag tileNbt) {
-        if (!tileNbt.contains("wissen")) {
+    public CompoundTag getCustomBlockEntityData(ItemStack stack, CompoundTag nbt) {
+        if (!nbt.contains("wissen")) {
             WissenItemUtil.existWissen(stack);
-            tileNbt.putInt("wissen", WissenItemUtil.getWissen(stack));
+            nbt.putInt("wissen", WissenItemUtil.getWissen(stack));
         }
 
-        return tileNbt;
+        return nbt;
     }
 
     @Override
     public int getMaxWissen() {
-        if (getBlock() instanceof EntityBlock tileBlock) {
-            BlockEntity blockEntity = tileBlock.newBlockEntity(new BlockPos(0, 0, 0), getBlock().defaultBlockState());
+        if (getBlock() instanceof EntityBlock block) {
+            BlockEntity blockEntity = block.newBlockEntity(new BlockPos(0, 0, 0), getBlock().defaultBlockState());
             if (blockEntity instanceof IWissenBlockEntity wissenBlockEntity) {
                 return wissenBlockEntity.getMaxWissen();
             }
