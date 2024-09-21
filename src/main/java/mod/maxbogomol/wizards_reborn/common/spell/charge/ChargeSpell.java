@@ -12,7 +12,6 @@ import mod.maxbogomol.wizards_reborn.common.network.PacketHandler;
 import mod.maxbogomol.wizards_reborn.common.network.spell.ChargeSpellProjectileRayEffectPacket;
 import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornEntities;
 import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornSounds;
-import mod.maxbogomol.wizards_reborn.util.WizardsRebornRenderUtil;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
@@ -383,8 +382,8 @@ public class ChargeSpell extends Spell {
         stack.pushPose();
         stack.translate(0, 0.2f, 0);
         stack.translate(entity.getX() - x, entity.getY() - y,  entity.getZ() - z);
-        WizardsRebornRenderUtil.renderTrail(stack, builder, entity.position(), trailList, 0, 0.15f * charge, 0, 1.0f,  1.0f, color, 8, true);
-        WizardsRebornRenderUtil.renderTrail(stack, builder, entity.position(), trailList, 0, 0.15f * charge, 0, 0.75f, 0.75f, color, 8, true);
+        //WizardsRebornRenderUtil.renderTrail(stack, builder, entity.position(), trailList, 0, 0.15f * charge, 0, 1.0f,  1.0f, color, 8, true);
+        //WizardsRebornRenderUtil.renderTrail(stack, builder, entity.position(), trailList, 0, 0.15f * charge, 0, 0.75f, 0.75f, color, 8, true);
         stack.popPose();
     }
 }

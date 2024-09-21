@@ -5,7 +5,6 @@ import com.mojang.blaze3d.vertex.VertexConsumer;
 import mod.maxbogomol.fluffy_fur.registry.client.FluffyFurRenderTypes;
 import mod.maxbogomol.wizards_reborn.common.entity.SplitArrowEntity;
 import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornArcaneEnchantments;
-import mod.maxbogomol.wizards_reborn.util.WizardsRebornRenderUtil;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.culling.Frustum;
 import net.minecraft.client.renderer.entity.EntityRenderer;
@@ -47,7 +46,7 @@ public class SplitArrowRenderer<T extends SplitArrowEntity> extends EntityRender
         poseStack.pushPose();
         poseStack.translate(0, 0.1f, 0);
         poseStack.translate(entity.getX() - x, entity.getY() - y,  entity.getZ() - z);
-        WizardsRebornRenderUtil.renderTrail(poseStack, builder, entity.position(), trailList, 0,0.1f, 0,1.0f, 1.0f, color, 4, true);
+        //WizardsRebornRenderUtil.renderTrail(poseStack, builder, entity.position(), trailList, 0,0.1f, 0,1.0f, 1.0f, color, 4, true);
         //RenderUtils.renderTrail(stack, builder, entity.position(), trailList, 0,0.05f, 0,1.0f, 1.0f, color, 4, true);
         poseStack.popPose();
     }

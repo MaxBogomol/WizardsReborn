@@ -21,7 +21,6 @@ import mod.maxbogomol.wizards_reborn.common.recipe.CrystalInfusionRecipe;
 import mod.maxbogomol.wizards_reborn.registry.client.WizardsRebornParticles;
 import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornRecipes;
 import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornSounds;
-import mod.maxbogomol.wizards_reborn.util.WizardsRebornRenderUtil;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.core.BlockPos;
@@ -370,8 +369,8 @@ public class CrystalInfusionCrystalRitual extends CrystalRitual {
 
                 ms.pushPose();
                 ms.translate(0.5F, 1F, 0.5F);
-                WizardsRebornRenderUtil.renderTrail(ms, builder, Vec3.ZERO, trailList, 0, 0.15f, 0, 0.5f * fade, 1.0f, color, 8, true);
-                WizardsRebornRenderUtil.renderTrail(ms, builder, Vec3.ZERO, trailList, 0, 0.15f, 0, 0.75f * fade, 0.5f, color, 8, true);
+                //WizardsRebornRenderUtil.renderTrail(ms, builder, Vec3.ZERO, trailList, 0, 0.15f, 0, 0.5f * fade, 1.0f, color, 8, true);
+                //WizardsRebornRenderUtil.renderTrail(ms, builder, Vec3.ZERO, trailList, 0, 0.15f, 0, 0.75f * fade, 0.5f, color, 8, true);
                 ms.popPose();
             }
         }

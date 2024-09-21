@@ -16,7 +16,6 @@ import net.minecraft.client.renderer.blockentity.BlockEntityRenderer;
 import net.minecraft.world.item.ItemDisplayContext;
 import net.minecraft.world.phys.Vec3;
 
-import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
@@ -126,15 +125,15 @@ public class ArcaneIteratorRenderer implements BlockEntityRenderer<ArcaneIterato
             trailList.add(new Vec3(0, 0, 0));
             trailList.add(new Vec3(xOffset * trailSize, yOffset * trailSize, zOffset * trailSize));
 
-            WizardsRebornRenderUtil.renderTrail(poseStack, builder, Vec3.ZERO, trailList, trailWidth, 0, 0.25f,0, 1.0f, new Color(0.807f, 0.800f, 0.639f), 8, false);
-            WizardsRebornRenderUtil.renderTrail(poseStack, builder, Vec3.ZERO, trailList, trailWidth, 0, 0.5f,0,0.75f, new Color(0.611f, 0.352f, 0.447f), 8, false);
+            //WizardsRebornRenderUtil.renderTrail(poseStack, builder, Vec3.ZERO, trailList, trailWidth, 0, 0.25f,0, 1.0f, new Color(0.807f, 0.800f, 0.639f), 8, false);
+            //WizardsRebornRenderUtil.renderTrail(poseStack, builder, Vec3.ZERO, trailList, trailWidth, 0, 0.5f,0,0.75f, new Color(0.611f, 0.352f, 0.447f), 8, false);
 
             trailList.clear();
             trailList.add(new Vec3(0, 0, 0));
             trailList.add(new Vec3(xOffset * -trailSize, yOffset * -trailSize, zOffset * -trailSize));
 
-            WizardsRebornRenderUtil.renderTrail(poseStack, builder, Vec3.ZERO, trailList, trailWidth, 0, 0.25f,0, 1.0f, new Color(0.807f, 0.800f, 0.639f), 8, false);
-            WizardsRebornRenderUtil.renderTrail(poseStack, builder, Vec3.ZERO, trailList, trailWidth, 0, 0.5f,0,0.75f, new Color(0.611f, 0.352f, 0.447f), 8, false);
+            //WizardsRebornRenderUtil.renderTrail(poseStack, builder, Vec3.ZERO, trailList, trailWidth, 0, 0.25f,0, 1.0f, new Color(0.807f, 0.800f, 0.639f), 8, false);
+            //WizardsRebornRenderUtil.renderTrail(poseStack, builder, Vec3.ZERO, trailList, trailWidth, 0, 0.5f,0,0.75f, new Color(0.611f, 0.352f, 0.447f), 8, false);
             poseStack.popPose();
         }
     }
