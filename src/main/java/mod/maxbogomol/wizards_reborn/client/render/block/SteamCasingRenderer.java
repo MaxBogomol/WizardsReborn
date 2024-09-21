@@ -13,15 +13,13 @@ import java.util.Optional;
 
 public class SteamCasingRenderer implements BlockEntityRenderer<SteamCasingBlockEntity> {
 
-    public SteamCasingRenderer() {}
-
     @Override
-    public void render(SteamCasingBlockEntity casing, float partialTicks, PoseStack ms, MultiBufferSource buffers, int light, int overlay) {
-        Optional<Boolean> powered = casing.getLevel().getBlockState(casing.getBlockPos()).getOptionalValue(BlockStateProperties.POWERED);
+    public void render(SteamCasingBlockEntity blockEntity, float partialTicks, PoseStack poseStack, MultiBufferSource bufferSource, int light, int overlay) {
+        Optional<Boolean> powered = blockEntity.getLevel().getBlockState(blockEntity.getBlockPos()).getOptionalValue(BlockStateProperties.POWERED);
         if (powered.isPresent() && powered.get() && WissenUtils.isCanRenderWissenWand()) {
-            ms.pushPose();
-            RenderUtils.renderBoxLines(new Vec3(1f, 1f, 1f), RenderUtils.colorArea, partialTicks, ms);
-            ms.popPose();
+            poseStack.pushPose();
+            RenderUtils.renderBoxLines(new Vec3(1f, 1f, 1f), RenderUtils.colorArea, partialTicks, poseStack);
+            poseStack.popPose();
         }
     }
 }

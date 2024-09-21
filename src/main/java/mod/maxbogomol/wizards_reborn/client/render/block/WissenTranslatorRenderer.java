@@ -11,33 +11,31 @@ import net.minecraft.world.phys.Vec3;
 
 public class WissenTranslatorRenderer implements BlockEntityRenderer<WissenTranslatorBlockEntity> {
 
-    public WissenTranslatorRenderer() {}
-
     @Override
-    public void render(WissenTranslatorBlockEntity translator, float partialTicks, PoseStack ms, MultiBufferSource buffers, int light, int overlay) {
+    public void render(WissenTranslatorBlockEntity blockEntity, float partialTicks, PoseStack poseStack, MultiBufferSource bufferSource, int light, int overlay) {
         if (WissenUtils.isCanRenderWissenWand()) {
-            if (translator.isToBlock) {
-                ms.pushPose();
-                ms.translate(0.5F,0.5F,0.5F);
-                RenderUtils.renderConnectLine(translator.getBlockPos(), new BlockPos(translator.blockToX, translator.blockToY, translator.blockToZ), RenderUtils.colorConnectTo, partialTicks, ms);
-                ms.popPose();
+            if (blockEntity.isToBlock) {
+                poseStack.pushPose();
+                poseStack.translate(0.5F,0.5F,0.5F);
+                RenderUtils.renderConnectLine(blockEntity.getBlockPos(), new BlockPos(blockEntity.blockToX, blockEntity.blockToY, blockEntity.blockToZ), RenderUtils.colorConnectTo, partialTicks, poseStack);
+                poseStack.popPose();
             }
-            if (translator.isFromBlock) {
-                ms.pushPose();
-                ms.translate(0.5F,0.5F,0.5F);
-                RenderUtils.renderConnectLine(translator.getBlockPos(), new BlockPos(translator.blockFromX, translator.blockFromY, translator.blockFromZ), RenderUtils.colorConnectFrom, partialTicks, ms);
-                ms.popPose();
+            if (blockEntity.isFromBlock) {
+                poseStack.pushPose();
+                poseStack.translate(0.5F,0.5F,0.5F);
+                RenderUtils.renderConnectLine(blockEntity.getBlockPos(), new BlockPos(blockEntity.blockFromX, blockEntity.blockFromY, blockEntity.blockFromZ), RenderUtils.colorConnectFrom, partialTicks, poseStack);
+                poseStack.popPose();
             }
         }
     }
 
     @Override
-    public boolean shouldRenderOffScreen(WissenTranslatorBlockEntity pBlockEntity) {
+    public boolean shouldRenderOffScreen(WissenTranslatorBlockEntity blockEntity) {
         return true;
     }
 
     @Override
-    public boolean shouldRender(WissenTranslatorBlockEntity pBlockEntity, Vec3 pCameraPos) {
+    public boolean shouldRender(WissenTranslatorBlockEntity blockEntity, Vec3 cameraPos) {
         return true;
     }
 }

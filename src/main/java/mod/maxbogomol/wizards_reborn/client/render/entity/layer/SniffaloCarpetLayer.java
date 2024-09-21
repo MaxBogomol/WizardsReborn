@@ -37,7 +37,7 @@ public class SniffaloCarpetLayer extends RenderLayer<SniffaloEntity, SnifferMode
     }
 
     @Override
-    public void render(PoseStack ms, MultiBufferSource buffer, int packedLight, SniffaloEntity livingEntity, float limbSwing, float limbSwingAmount, float partialTicks, float ageInTicks, float betHeadYaw, float headPitch) {
+    public void render(PoseStack poseStack, MultiBufferSource bufferSource, int packedLight, SniffaloEntity livingEntity, float limbSwing, float limbSwingAmount, float partialTicks, float ageInTicks, float betHeadYaw, float headPitch) {
         if (!livingEntity.getCarpetClient().isEmpty()) {
             ResourceLocation texture = SNIFFALO_CARPET_TEXTURE;
             if (livingEntity.getCarpetClient().getItem() instanceof CargoCarpetItem carpet) {
@@ -48,25 +48,25 @@ public class SniffaloCarpetLayer extends RenderLayer<SniffaloEntity, SnifferMode
             model.young = livingEntity.isBaby();
             model.copyFromDefault(defaultModel);
             model.setupAnim(livingEntity, livingEntity.walkAnimation.position(partialTicks), livingEntity.walkAnimation.speed(partialTicks), livingEntity.tickCount + partialTicks, betHeadYaw, headPitch);
-            model.renderToBuffer(ms, buffer.getBuffer(RenderType.entityCutoutNoCull(texture)), packedLight, OverlayTexture.NO_OVERLAY, 1, 1, 1, 1);
+            model.renderToBuffer(poseStack, bufferSource.getBuffer(RenderType.entityCutoutNoCull(texture)), packedLight, OverlayTexture.NO_OVERLAY, 1, 1, 1, 1);
 
             if (!livingEntity.getBannerClient().isEmpty()) {
                 if (livingEntity.getBannerClient().getItem() instanceof BannerItem bannerItem) {
                     banner.fromItem(livingEntity.getBannerClient(), ((AbstractBannerBlock)bannerItem.getBlock()).getColor());
                 }
 
-                ms.pushPose();
+                poseStack.pushPose();
                 ModelPart body = defaultModel.root().getChild("bone").getChild("body");
-                ms.mulPose(Axis.XP.rotationDegrees((float) (Math.toDegrees(body.xRot))));
-                ms.mulPose(Axis.YP.rotationDegrees((float) (Math.toDegrees(body.yRot))));
-                ms.mulPose(Axis.ZP.rotationDegrees((float) (Math.toDegrees(body.zRot))));
-                ms.translate(body.x / 16f, body.y / 16f, body.z / 16f);
-                ms.translate(-1, -1, -1);
-                ms.mulPose(Axis.ZP.rotationDegrees(180f));
-                ms.mulPose(Axis.YP.rotationDegrees(180f));
-                ms.translate(0.5f, 0.15f, -2.4f);
-                Minecraft.getInstance().getBlockEntityRenderDispatcher().renderItem(banner, ms, buffer, packedLight, OverlayTexture.NO_OVERLAY);
-                ms.popPose();
+                poseStack.mulPose(Axis.XP.rotationDegrees((float) (Math.toDegrees(body.xRot))));
+                poseStack.mulPose(Axis.YP.rotationDegrees((float) (Math.toDegrees(body.yRot))));
+                poseStack.mulPose(Axis.ZP.rotationDegrees((float) (Math.toDegrees(body.zRot))));
+                poseStack.translate(body.x / 16f, body.y / 16f, body.z / 16f);
+                poseStack.translate(-1, -1, -1);
+                poseStack.mulPose(Axis.ZP.rotationDegrees(180f));
+                poseStack.mulPose(Axis.YP.rotationDegrees(180f));
+                poseStack.translate(0.5f, 0.15f, -2.4f);
+                Minecraft.getInstance().getBlockEntityRenderDispatcher().renderItem(banner, poseStack, bufferSource, packedLight, OverlayTexture.NO_OVERLAY);
+                poseStack.popPose();
             }
         }
     }

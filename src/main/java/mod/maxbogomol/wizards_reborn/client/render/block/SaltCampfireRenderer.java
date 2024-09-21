@@ -14,27 +14,25 @@ import net.minecraft.world.item.ItemStack;
 
 public class SaltCampfireRenderer implements BlockEntityRenderer<SaltCampfireBlockEntity> {
 
-    public SaltCampfireRenderer() {}
-
     @Override
-    public void render(SaltCampfireBlockEntity campfire, float partialTicks, PoseStack ms, MultiBufferSource buffers, int light, int overlay) {
-        Direction direction = campfire.getBlockState().getValue(SaltCampfireBlock.FACING);
-        NonNullList<ItemStack> nonnulllist = campfire.getItems();
-        int i = (int)campfire.getBlockPos().asLong();
+    public void render(SaltCampfireBlockEntity blockEntity, float partialTicks, PoseStack poseStack, MultiBufferSource bufferSource, int light, int overlay) {
+        Direction direction = blockEntity.getBlockState().getValue(SaltCampfireBlock.FACING);
+        NonNullList<ItemStack> nonnulllist = blockEntity.getItems();
+        int i = (int) blockEntity.getBlockPos().asLong();
 
         for(int j = 0; j < nonnulllist.size(); ++j) {
-            ItemStack itemstack = nonnulllist.get(j);
-            if (itemstack != ItemStack.EMPTY && (campfire.cookingTime[j] - campfire.cookingProgress[j] > 0)) {
-                ms.pushPose();
-                ms.translate(0.5F, 0.44921875F, 0.5F);
+            ItemStack iteposeStacktack = nonnulllist.get(j);
+            if (iteposeStacktack != ItemStack.EMPTY && (blockEntity.cookingTime[j] - blockEntity.cookingProgress[j] > 0)) {
+                poseStack.pushPose();
+                poseStack.translate(0.5F, 0.44921875F, 0.5F);
                 Direction direction1 = Direction.from2DDataValue((j + direction.get2DDataValue()) % 4);
                 float f = -direction1.toYRot();
-                ms.mulPose(Axis.YP.rotationDegrees(f));
-                ms.mulPose(Axis.XP.rotationDegrees(90.0F));
-                ms.translate(-0.3125F, -0.3125F, 0.0F);
-                ms.scale(0.375F, 0.375F, 0.375F);
-                Minecraft.getInstance().getItemRenderer().renderStatic(itemstack, ItemDisplayContext.FIXED, light, overlay, ms, buffers, campfire.getLevel(), i + j);
-                ms.popPose();
+                poseStack.mulPose(Axis.YP.rotationDegrees(f));
+                poseStack.mulPose(Axis.XP.rotationDegrees(90.0F));
+                poseStack.translate(-0.3125F, -0.3125F, 0.0F);
+                poseStack.scale(0.375F, 0.375F, 0.375F);
+                Minecraft.getInstance().getItemRenderer().renderStatic(iteposeStacktack, ItemDisplayContext.FIXED, light, overlay, poseStack, bufferSource, blockEntity.getLevel(), i + j);
+                poseStack.popPose();
             }
         }
     }

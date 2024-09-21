@@ -20,65 +20,63 @@ import java.util.Random;
 
 public class EngravedWisestoneRenderer implements BlockEntityRenderer<EngravedWisestoneBlockEntity> {
 
-    public EngravedWisestoneRenderer() {}
-
     @Override
-    public void render(EngravedWisestoneBlockEntity tile, float partialTicks, PoseStack ms, MultiBufferSource buffers, int light, int overlay) {
+    public void render(EngravedWisestoneBlockEntity blockEntity, float partialTicks, PoseStack poseStack, MultiBufferSource bufferSource, int light, int overlay) {
         MultiBufferSource bufferDelayed = FluffyFurRenderTypes.getDelayedRender();
         float ticks = ClientTickHandler.ticksInGame + Minecraft.getInstance().getPartialTick() * 0.1f;
 
         Random random = new Random();
-        random.setSeed(tile.getBlockPos().asLong());
+        random.setSeed(blockEntity.getBlockPos().asLong());
 
-        if (tile.glowTicks > 0 && tile.getBlockState().getBlock() instanceof EngravedWisestoneBlock block && block.hasMonogram()) {
+        if (blockEntity.glowTicks > 0 && blockEntity.getBlockState().getBlock() instanceof EngravedWisestoneBlock block && block.hasMonogram()) {
             Monogram monogram = block.getMonogram();
             Color color = monogram.getColor();
 
             TextureAtlasSprite sprite = RenderUtil.getSprite(monogram.getTexture());
 
             float width = 1f;
-            float alpha = (tile.glowTicks + partialTicks) / 20f;
-            if (!tile.glow) alpha = (tile.glowTicks - partialTicks) / 20f;
+            float alpha = (blockEntity.glowTicks + partialTicks) / 20f;
+            if (!blockEntity.glow) alpha = (blockEntity.glowTicks - partialTicks) / 20f;
             if (alpha > 1f) alpha = 1f;
             if (alpha < 0f) alpha = 0f;
             float offset = 1f + ((1f - alpha) * 10f);
             float rotateOffset = offset / 2f;
 
-            ms.pushPose();
-            ms.translate(0.5f, 0.5f, 0.5f);
-            ms.mulPose(Axis.YP.rotationDegrees(tile.getHorizontalBlockRotate()));
-            ms.mulPose(Axis.XP.rotationDegrees(tile.getVerticalBlockRotate()));
-            if (tile.getVerticalBlockRotate() == 0) ms.mulPose(Axis.ZP.rotationDegrees(180f));
-            ms.translate(0f, 0f, -0.505f);
+            poseStack.pushPose();
+            poseStack.translate(0.5f, 0.5f, 0.5f);
+            poseStack.mulPose(Axis.YP.rotationDegrees(blockEntity.getHorizontalBlockRotate()));
+            poseStack.mulPose(Axis.XP.rotationDegrees(blockEntity.getVerticalBlockRotate()));
+            if (blockEntity.getVerticalBlockRotate() == 0) poseStack.mulPose(Axis.ZP.rotationDegrees(180f));
+            poseStack.translate(0f, 0f, -0.505f);
             RenderBuilder.create().setRenderType(FluffyFurRenderTypes.ADDITIVE_TEXTURE)
                     .setUV(sprite)
                     .setColor(Color.WHITE).setAlpha(0.5f * alpha)
-                    .renderCenteredQuad(ms, 0.25f);
+                    .renderCenteredQuad(poseStack, 0.25f);
 
             for (int i = 0; i < 5; i++) {
-                ms.translate(0, 0, -0.005f * offset);
-                ms.mulPose(Axis.ZP.rotationDegrees((float) Math.sin(Math.toRadians(((random.nextFloat() * 360) + ticks))) * rotateOffset));
-                ms.mulPose(Axis.XP.rotationDegrees((float) Math.sin(Math.toRadians(((random.nextFloat() * 360) + ticks))) * rotateOffset));
-                ms.mulPose(Axis.YP.rotationDegrees((float) Math.sin(Math.toRadians(((random.nextFloat() * 360) + ticks))) * rotateOffset));
+                poseStack.translate(0, 0, -0.005f * offset);
+                poseStack.mulPose(Axis.ZP.rotationDegrees((float) Math.sin(Math.toRadians(((random.nextFloat() * 360) + ticks))) * rotateOffset));
+                poseStack.mulPose(Axis.XP.rotationDegrees((float) Math.sin(Math.toRadians(((random.nextFloat() * 360) + ticks))) * rotateOffset));
+                poseStack.mulPose(Axis.YP.rotationDegrees((float) Math.sin(Math.toRadians(((random.nextFloat() * 360) + ticks))) * rotateOffset));
                 RenderBuilder.create().setRenderType(FluffyFurRenderTypes.ADDITIVE_TEXTURE)
                         .enableSided()
                         .setUV(sprite)
                         .setColor(color).setAlpha(0.2f * alpha)
-                        .renderWavyQuad(ms, 0.25f * width, 0.02f * offset, ticks + (random.nextFloat() * 100));
+                        .renderWavyQuad(poseStack, 0.25f * width, 0.02f * offset, ticks + (random.nextFloat() * 100));
                 width = width + 0.1f;
             }
 
-            ms.popPose();
+            poseStack.popPose();
         }
     }
 
     @Override
-    public boolean shouldRenderOffScreen(EngravedWisestoneBlockEntity pBlockEntity) {
+    public boolean shouldRenderOffScreen(EngravedWisestoneBlockEntity blockEntity) {
         return true;
     }
 
     @Override
-    public boolean shouldRender(EngravedWisestoneBlockEntity pBlockEntity, Vec3 pCameraPos) {
+    public boolean shouldRender(EngravedWisestoneBlockEntity blockEntity, Vec3 cameraPos) {
         return true;
     }
 }

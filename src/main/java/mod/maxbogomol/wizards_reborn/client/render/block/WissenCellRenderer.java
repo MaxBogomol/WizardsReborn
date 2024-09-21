@@ -10,18 +10,16 @@ import net.minecraft.world.item.ItemDisplayContext;
 
 public class WissenCellRenderer implements BlockEntityRenderer<WissenCellBlockEntity> {
 
-    public WissenCellRenderer() {}
-
     @Override
-    public void render(WissenCellBlockEntity cell, float partialTicks, PoseStack ms, MultiBufferSource buffers, int light, int overlay) {
-        Minecraft mc = Minecraft.getInstance();
+    public void render(WissenCellBlockEntity blockEntity, float partialTicks, PoseStack poseStack, MultiBufferSource bufferSource, int light, int overlay) {
+        Minecraft minecraft = Minecraft.getInstance();
 
-        ms.pushPose();
-        ms.translate(0.5F, 0.703125F, 0.5F);
-        ms.mulPose(Axis.YP.rotationDegrees(cell.getBlockRotate()));
-        ms.mulPose(Axis.XP.rotationDegrees(90F));
-        ms.scale(0.5F,0.5F,0.5F);
-        mc.getItemRenderer().renderStatic(cell.getItemHandler().getItem(0), ItemDisplayContext.FIXED, light, overlay, ms, buffers, cell.getLevel(), 0);
-        ms.popPose();
+        poseStack.pushPose();
+        poseStack.translate(0.5F, 0.703125F, 0.5F);
+        poseStack.mulPose(Axis.YP.rotationDegrees(blockEntity.getBlockRotate()));
+        poseStack.mulPose(Axis.XP.rotationDegrees(90F));
+        poseStack.scale(0.5F,0.5F,0.5F);
+        minecraft.getItemRenderer().renderStatic(blockEntity.getItemHandler().getItem(0), ItemDisplayContext.FIXED, light, overlay, poseStack, bufferSource, blockEntity.getLevel(), 0);
+        poseStack.popPose();
     }
 }

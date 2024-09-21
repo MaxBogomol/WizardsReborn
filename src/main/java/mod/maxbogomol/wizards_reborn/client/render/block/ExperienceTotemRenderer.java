@@ -16,14 +16,12 @@ import java.util.Random;
 
 public class ExperienceTotemRenderer implements BlockEntityRenderer<ExperienceTotemBlockEntity> {
 
-    public ExperienceTotemRenderer() {}
-
     @Override
-    public void render(ExperienceTotemBlockEntity totem, float partialTicks, PoseStack ms, MultiBufferSource buffers, int light, int overlay) {
+    public void render(ExperienceTotemBlockEntity blockEntity, float partialTicks, PoseStack poseStack, MultiBufferSource bufferSource, int light, int overlay) {
         Random random = new Random();
-        random.setSeed(totem.getBlockPos().asLong());
+        random.setSeed(blockEntity.getBlockPos().asLong());
 
-        Minecraft mc = Minecraft.getInstance();
+        Minecraft minecraft = Minecraft.getInstance();
         double ticks = (ClientTickHandler.ticksInGame + partialTicks) * 0.5F;
         double ticksUp = (ClientTickHandler.ticksInGame + partialTicks) * 3;
         ticksUp = (ticksUp) % 360;
@@ -34,40 +32,40 @@ public class ExperienceTotemRenderer implements BlockEntityRenderer<ExperienceTo
         float globalOffset = (float) Math.abs(Math.sin(Math.toRadians(random.nextFloat() * 360f + (ticksAlpha / 3))));
         float offset = (float) (0.55f + Math.abs(Math.sin(Math.toRadians(random.nextFloat() * 360f + ticksAlpha * 2)) * 0.45f));
 
-        if (totem.getExperience() > 0) {
-            float size = (0.85f + (0.15f * globalOffset)) * ((float) totem.getExperience() / totem.getMaxExperience());
+        if (blockEntity.getExperience() > 0) {
+            float size = (0.85f + (0.15f * globalOffset)) * ((float) blockEntity.getExperience() / blockEntity.getMaxExperience());
 
             MultiBufferSource bufferDelayed = FluffyFurRenderTypes.getDelayedRender();
 
-            ms.pushPose();
-            ms.translate(0.5F, 0.75F, 0.5F);
-            ms.translate(0F, (Math.sin(Math.toRadians(ticksUp)) * 0.03125F), 0F);
-            ms.mulPose(Axis.YP.rotationDegrees((float) (random.nextFloat() * 360 + ticks)));
-            ms.mulPose(Axis.XP.rotationDegrees((float) (random.nextFloat() * 360 + ticks)));
-            ms.mulPose(Axis.ZP.rotationDegrees((float) (random.nextFloat() * 360 + ticks)));
-            ms.scale(size, size, size);
-            RenderUtils.ray(ms, bufferDelayed, 0.06f, 0.06f, 1f, 0.243f, 0.564f, 0.250f, 0.75f);
-            RenderUtils.ray(ms, bufferDelayed, 0.075f, 0.075f, 1f, 0.243f, 0.564f, 0.250f, alpha);
-            RenderUtils.ray(ms, bufferDelayed, 0.1f, 0.1f, 1f, 0.784f, 1f, 0.560f, alpha / 2);
-            RenderUtils.ray(ms, bufferDelayed, 0.12f * offset, 0.12f * offset, 1f, 0.960f, 1f, 0.560f, 0.2f);
-            ms.popPose();
+            poseStack.pushPose();
+            poseStack.translate(0.5F, 0.75F, 0.5F);
+            poseStack.translate(0F, (Math.sin(Math.toRadians(ticksUp)) * 0.03125F), 0F);
+            poseStack.mulPose(Axis.YP.rotationDegrees((float) (random.nextFloat() * 360 + ticks)));
+            poseStack.mulPose(Axis.XP.rotationDegrees((float) (random.nextFloat() * 360 + ticks)));
+            poseStack.mulPose(Axis.ZP.rotationDegrees((float) (random.nextFloat() * 360 + ticks)));
+            poseStack.scale(size, size, size);
+            RenderUtils.ray(poseStack, bufferDelayed, 0.06f, 0.06f, 1f, 0.243f, 0.564f, 0.250f, 0.75f);
+            RenderUtils.ray(poseStack, bufferDelayed, 0.075f, 0.075f, 1f, 0.243f, 0.564f, 0.250f, alpha);
+            RenderUtils.ray(poseStack, bufferDelayed, 0.1f, 0.1f, 1f, 0.784f, 1f, 0.560f, alpha / 2);
+            RenderUtils.ray(poseStack, bufferDelayed, 0.12f * offset, 0.12f * offset, 1f, 0.960f, 1f, 0.560f, 0.2f);
+            poseStack.popPose();
         }
 
         if (WissenUtils.isCanRenderWissenWand()) {
-            ms.pushPose();
-            ms.translate(-1, -1, -1);
-            RenderUtils.renderBoxLines(new Vec3(3, 3, 3), RenderUtils.colorArea, partialTicks, ms);
-            ms.popPose();
+            poseStack.pushPose();
+            poseStack.translate(-1, -1, -1);
+            RenderUtils.renderBoxLines(new Vec3(3, 3, 3), RenderUtils.colorArea, partialTicks, poseStack);
+            poseStack.popPose();
         }
     }
 
     @Override
-    public boolean shouldRenderOffScreen(ExperienceTotemBlockEntity pBlockEntity) {
+    public boolean shouldRenderOffScreen(ExperienceTotemBlockEntity blockEntity) {
         return true;
     }
 
     @Override
-    public boolean shouldRender(ExperienceTotemBlockEntity pBlockEntity, Vec3 pCameraPos) {
+    public boolean shouldRender(ExperienceTotemBlockEntity blockEntity, Vec3 cameraPos) {
         return true;
     }
 }

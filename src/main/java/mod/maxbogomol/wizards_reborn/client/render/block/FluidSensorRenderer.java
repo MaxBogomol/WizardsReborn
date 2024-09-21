@@ -15,9 +15,9 @@ import java.util.Random;
 public class FluidSensorRenderer implements BlockEntityRenderer<FluidSensorBlockEntity> {
 
     @Override
-    public void render(FluidSensorBlockEntity sensor, float partialTicks, PoseStack ms, MultiBufferSource buffers, int light, int overlay) {
+    public void render(FluidSensorBlockEntity blockEntity, float partialTicks, PoseStack poseStack, MultiBufferSource bufferSource, int light, int overlay) {
         Random random = new Random();
-        random.setSeed(sensor.getBlockPos().asLong());
+        random.setSeed(blockEntity.getBlockPos().asLong());
 
         double ticks = (ClientTickHandler.ticksInGame + partialTicks) * 0.1F;
 
@@ -28,33 +28,33 @@ public class FluidSensorRenderer implements BlockEntityRenderer<FluidSensorBlock
 
         double v = Math.sin(Math.toRadians(ticksUp)) * 0.0625F;
 
-        ms.pushPose();
-        ms.translate(0.5F, 0.5F, 0.5F);
-        ms.mulPose(Axis.YP.rotationDegrees((float) ((Math.sin(Math.toRadians(random.nextFloat() * 360) + ticks))) * 5F));
-        ms.mulPose(Axis.XP.rotationDegrees((float) ((Math.sin(Math.toRadians(random.nextFloat() * 360) + ticks))) * 5F));
-        ms.mulPose(Axis.ZP.rotationDegrees((float) ((Math.sin(Math.toRadians(random.nextFloat() * 360) + ticks))) * 5F));
+        poseStack.pushPose();
+        poseStack.translate(0.5F, 0.5F, 0.5F);
+        poseStack.mulPose(Axis.YP.rotationDegrees((float) ((Math.sin(Math.toRadians(random.nextFloat() * 360) + ticks))) * 5F));
+        poseStack.mulPose(Axis.XP.rotationDegrees((float) ((Math.sin(Math.toRadians(random.nextFloat() * 360) + ticks))) * 5F));
+        poseStack.mulPose(Axis.ZP.rotationDegrees((float) ((Math.sin(Math.toRadians(random.nextFloat() * 360) + ticks))) * 5F));
 
-        ms.mulPose(Axis.YP.rotationDegrees(sensor.getBlockRotate()));
-        ms.mulPose(Axis.XP.rotationDegrees(sensor.getBlockUpRotate()));
-        RenderUtil.renderCustomModel(((SensorBaseBlock) sensor.getBlockState().getBlock()).getModel(sensor.getBlockState()), ItemDisplayContext.FIXED, false, ms, buffers, light, overlay);
-        ms.popPose();
+        poseStack.mulPose(Axis.YP.rotationDegrees(blockEntity.getBlockRotate()));
+        poseStack.mulPose(Axis.XP.rotationDegrees(blockEntity.getBlockUpRotate()));
+        RenderUtil.renderCustomModel(((SensorBaseBlock) blockEntity.getBlockState().getBlock()).getModel(blockEntity.getBlockState()), ItemDisplayContext.FIXED, false, poseStack, bufferSource, light, overlay);
+        poseStack.popPose();
 
         for (int i = 0; i < 10; i++) {
             double f = Math.sin(Math.toRadians(((random.nextFloat() * 360) + ticks * 20)));
             double j = Math.abs(f);
-            ms.pushPose();
-            ms.translate(0.5F, 0.5F, 0.5F);
-            ms.translate(0F, (float) v, 0F);
-            ms.mulPose(Axis.YP.rotationDegrees((float) ((random.nextFloat() * 360) + ticksSub)));
-            ms.mulPose(Axis.XP.rotationDegrees((float) ((random.nextFloat() * 360) + ticksSub)));
-            ms.mulPose(Axis.ZP.rotationDegrees((float) ((random.nextFloat() * 360) + ticksSub)));
-            ms.translate(0F, (0.15F + (random.nextFloat() * 0.3F)) * f, 0F);
-            ms.scale((float) j, (float) j, (float) j);
-            ms.mulPose(Axis.YP.rotationDegrees((float) ((random.nextFloat() * 360) + ticks)));
-            ms.mulPose(Axis.XP.rotationDegrees((float) ((random.nextFloat() * 360) + ticks)));
-            ms.mulPose(Axis.ZP.rotationDegrees((float) ((random.nextFloat() * 360) + ticks)));
-            RenderUtil.renderWavyFluid(ms, sensor.getTank().getFluid(), 0.03125f, 0.0625f, false, light, 0.003125f, (float) (ticks + (random.nextFloat() * 100)));
-            ms.popPose();
+            poseStack.pushPose();
+            poseStack.translate(0.5F, 0.5F, 0.5F);
+            poseStack.translate(0F, (float) v, 0F);
+            poseStack.mulPose(Axis.YP.rotationDegrees((float) ((random.nextFloat() * 360) + ticksSub)));
+            poseStack.mulPose(Axis.XP.rotationDegrees((float) ((random.nextFloat() * 360) + ticksSub)));
+            poseStack.mulPose(Axis.ZP.rotationDegrees((float) ((random.nextFloat() * 360) + ticksSub)));
+            poseStack.translate(0F, (0.15F + (random.nextFloat() * 0.3F)) * f, 0F);
+            poseStack.scale((float) j, (float) j, (float) j);
+            poseStack.mulPose(Axis.YP.rotationDegrees((float) ((random.nextFloat() * 360) + ticks)));
+            poseStack.mulPose(Axis.XP.rotationDegrees((float) ((random.nextFloat() * 360) + ticks)));
+            poseStack.mulPose(Axis.ZP.rotationDegrees((float) ((random.nextFloat() * 360) + ticks)));
+            RenderUtil.renderWavyFluid(poseStack, blockEntity.getTank().getFluid(), 0.03125f, 0.0625f, false, light, 0.003125f, (float) (ticks + (random.nextFloat() * 100)));
+            poseStack.popPose();
         }
     }
 }

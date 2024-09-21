@@ -22,12 +22,10 @@ import java.util.Random;
 
 public class LightTransferLensRenderer implements BlockEntityRenderer<LightTransferLensBlockEntity> {
 
-    public LightTransferLensRenderer() {}
-
     @Override
-    public void render(LightTransferLensBlockEntity lens, float partialTicks, PoseStack ms, MultiBufferSource buffers, int light, int overlay) {
+    public void render(LightTransferLensBlockEntity blockEntity, float partialTicks, PoseStack poseStack, MultiBufferSource bufferSource, int light, int overlay) {
         Random random = new Random();
-        random.setSeed(lens.getBlockPos().asLong());
+        random.setSeed(blockEntity.getBlockPos().asLong());
 
         double ticks = (ClientTickHandler.ticksInGame + partialTicks) * 0.4f;
         double ticksAlpha = (ClientTickHandler.ticksInGame + partialTicks);
@@ -35,50 +33,50 @@ public class LightTransferLensRenderer implements BlockEntityRenderer<LightTrans
 
         MultiBufferSource bufferDelayed = FluffyFurRenderTypes.getDelayedRender();
 
-        ms.pushPose();
-        ms.translate(0.5F, 0.5F, 0.5F);
-        ms.mulPose(Axis.YP.rotationDegrees((float) (random.nextFloat() * 360 + ticks)));
-        ms.mulPose(Axis.XP.rotationDegrees((float) (random.nextFloat() * 360 + ticks)));
-        ms.mulPose(Axis.ZP.rotationDegrees((float) (random.nextFloat() * 360 + ticks)));
-        RenderUtil.renderCustomModel(WizardsRebornModels.HOVERING_LENS, ItemDisplayContext.FIXED, false, ms, buffers, light, overlay);
-        RenderUtils.ray(ms, bufferDelayed, 0.075f, 0.075f, 1f, 0.564f, 0.682f, 0.705f, alpha, 0.564f, 0.682f, 0.705f, alpha);
-        ms.popPose();
+        poseStack.pushPose();
+        poseStack.translate(0.5F, 0.5F, 0.5F);
+        poseStack.mulPose(Axis.YP.rotationDegrees((float) (random.nextFloat() * 360 + ticks)));
+        poseStack.mulPose(Axis.XP.rotationDegrees((float) (random.nextFloat() * 360 + ticks)));
+        poseStack.mulPose(Axis.ZP.rotationDegrees((float) (random.nextFloat() * 360 + ticks)));
+        RenderUtil.renderCustomModel(WizardsRebornModels.HOVERING_LENS, ItemDisplayContext.FIXED, false, poseStack, bufferSource, light, overlay);
+        RenderUtils.ray(poseStack, bufferDelayed, 0.075f, 0.075f, 1f, 0.564f, 0.682f, 0.705f, alpha, 0.564f, 0.682f, 0.705f, alpha);
+        poseStack.popPose();
 
-        if (lens.isToBlock && lens.canWork() && lens.getLight() > 0) {
-            BlockPos pos = new BlockPos(lens.blockToX, lens.blockToY, lens.blockToZ);
-            if (lens.getLevel().getBlockEntity(pos) instanceof ILightBlockEntity lightTile) {
-                Vec3 from = LightUtil.getLightLensPos(lens.getBlockPos(), lens.getLightLensPos());
+        if (blockEntity.isToBlock && blockEntity.canWork() && blockEntity.getLight() > 0) {
+            BlockPos pos = new BlockPos(blockEntity.blockToX, blockEntity.blockToY, blockEntity.blockToZ);
+            if (blockEntity.getLevel().getBlockEntity(pos) instanceof ILightBlockEntity lightTile) {
+                Vec3 from = LightUtil.getLightLensPos(blockEntity.getBlockPos(), blockEntity.getLightLensPos());
                 Vec3 to = LightUtil.getLightLensPos(pos, lightTile.getLightLensPos());
 
-                ms.pushPose();
-                ms.translate(0.5F, 0.5F, 0.5F);
-                Color color = LightUtil.getRayColorFromLumos(lens.getColor(), lens.getLumos(), lens.getBlockPos(), partialTicks);
-                LightUtil.renderLightRay(lens.getLevel(), lens.getBlockPos(), from, to, 25f, color, partialTicks, ms);
-                ms.popPose();
+                poseStack.pushPose();
+                poseStack.translate(0.5F, 0.5F, 0.5F);
+                Color color = LightUtil.getRayColorFromLumos(blockEntity.getColor(), blockEntity.getLumos(), blockEntity.getBlockPos(), partialTicks);
+                LightUtil.renderLightRay(blockEntity.getLevel(), blockEntity.getBlockPos(), from, to, 25f, color, partialTicks, poseStack);
+                poseStack.popPose();
             }
         }
 
         if (WissenUtils.isCanRenderWissenWand()) {
-            if (lens.isToBlock) {
-                ms.pushPose();
-                Vec3 lensPos = lens.getLightLensPos();
-                ms.translate(lensPos.x(), lensPos.y(), lensPos.z());
-                BlockPos pos = new BlockPos(lens.blockToX, lens.blockToY, lens.blockToZ);
-                if (lens.getLevel().getBlockEntity(pos) instanceof ILightBlockEntity lightTile) {
-                    RenderUtils.renderConnectLine(LightUtil.getLightLensPos(lens.getBlockPos(), lens.getLightLensPos()), LightUtil.getLightLensPos(pos, lightTile.getLightLensPos()), RenderUtils.colorConnectTo, partialTicks, ms);
+            if (blockEntity.isToBlock) {
+                poseStack.pushPose();
+                Vec3 blockEntityPos = blockEntity.getLightLensPos();
+                poseStack.translate(blockEntityPos.x(), blockEntityPos.y(), blockEntityPos.z());
+                BlockPos pos = new BlockPos(blockEntity.blockToX, blockEntity.blockToY, blockEntity.blockToZ);
+                if (blockEntity.getLevel().getBlockEntity(pos) instanceof ILightBlockEntity lightTile) {
+                    RenderUtils.renderConnectLine(LightUtil.getLightLensPos(blockEntity.getBlockPos(), blockEntity.getLightLensPos()), LightUtil.getLightLensPos(pos, lightTile.getLightLensPos()), RenderUtils.colorConnectTo, partialTicks, poseStack);
                 }
-                ms.popPose();
+                poseStack.popPose();
             }
         }
     }
 
     @Override
-    public boolean shouldRenderOffScreen(LightTransferLensBlockEntity pBlockEntity) {
+    public boolean shouldRenderOffScreen(LightTransferLensBlockEntity blockEntity) {
         return true;
     }
 
     @Override
-    public boolean shouldRender(LightTransferLensBlockEntity pBlockEntity, Vec3 pCameraPos) {
+    public boolean shouldRender(LightTransferLensBlockEntity blockEntity, Vec3 cameraPos) {
         return true;
     }
 }

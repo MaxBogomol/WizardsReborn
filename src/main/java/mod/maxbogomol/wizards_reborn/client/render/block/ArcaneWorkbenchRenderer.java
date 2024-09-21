@@ -11,37 +11,35 @@ import net.minecraft.world.item.ItemDisplayContext;
 
 public class ArcaneWorkbenchRenderer implements BlockEntityRenderer<ArcaneWorkbenchBlockEntity> {
 
-    public ArcaneWorkbenchRenderer() {}
-
     @Override
-    public void render(ArcaneWorkbenchBlockEntity workbench, float partialTicks, PoseStack ms, MultiBufferSource buffers, int light, int overlay) {
-        Minecraft mc = Minecraft.getInstance();
+    public void render(ArcaneWorkbenchBlockEntity blockEntity, float partialTicks, PoseStack poseStack, MultiBufferSource bufferSource, int light, int overlay) {
+        Minecraft minecraft = Minecraft.getInstance();
 
         double ticks = (ClientTickHandler.ticksInGame + partialTicks) * 2;
         double ticksUp = (ClientTickHandler.ticksInGame + partialTicks) * 4;
         ticksUp = (ticksUp) % 360;
 
-        ms.pushPose();
-        ms.translate(0.5F, 1.5F, 0.5F);
-        ms.translate(0F, (float) (Math.sin(Math.toRadians(ticksUp)) * 0.03125F), 0F);
-        ms.mulPose(Axis.YP.rotationDegrees((float) ticks));
-        ms.scale(0.5F, 0.5F, 0.5F);
-        mc.getItemRenderer().renderStatic(workbench.itemOutputHandler.getStackInSlot(0), ItemDisplayContext.FIXED, light, overlay, ms, buffers, workbench.getLevel(), 0);
-        ms.popPose();
+        poseStack.pushPose();
+        poseStack.translate(0.5F, 1.5F, 0.5F);
+        poseStack.translate(0F, (float) (Math.sin(Math.toRadians(ticksUp)) * 0.03125F), 0F);
+        poseStack.mulPose(Axis.YP.rotationDegrees((float) ticks));
+        poseStack.scale(0.5F, 0.5F, 0.5F);
+        minecraft.getItemRenderer().renderStatic(blockEntity.itemOutputHandler.getStackInSlot(0), ItemDisplayContext.FIXED, light, overlay, poseStack, bufferSource, blockEntity.getLevel(), 0);
+        poseStack.popPose();
 
         int x = -1;
         int y = -1;
         for (int i = 0; i < 9; i += 1) {
-            ms.pushPose();
-            ms.translate(0.5F, 1.125F, 0.5F);
-            ms.translate(0F, (float) Math.sin(Math.toRadians(ticksUp + (i * 10) % 360)) * 0.03125F, 0F);
-            ms.mulPose(Axis.YP.rotationDegrees(workbench.getBlockRotate()));
-            ms.translate((-0.1875F * x), 0F, (-0.1875F * y));
-            ms.scale(0.15F, 0.15F, 0.15F);
-            ms.mulPose(Axis.YP.rotationDegrees((float) ticks));
+            poseStack.pushPose();
+            poseStack.translate(0.5F, 1.125F, 0.5F);
+            poseStack.translate(0F, (float) Math.sin(Math.toRadians(ticksUp + (i * 10) % 360)) * 0.03125F, 0F);
+            poseStack.mulPose(Axis.YP.rotationDegrees(blockEntity.getBlockRotate()));
+            poseStack.translate((-0.1875F * x), 0F, (-0.1875F * y));
+            poseStack.scale(0.15F, 0.15F, 0.15F);
+            poseStack.mulPose(Axis.YP.rotationDegrees((float) ticks));
 
-            mc.getItemRenderer().renderStatic(workbench.itemHandler.getStackInSlot(i), ItemDisplayContext.FIXED, light, overlay, ms, buffers, workbench.getLevel(), 0);
-            ms.popPose();
+            minecraft.getItemRenderer().renderStatic(blockEntity.itemHandler.getStackInSlot(i), ItemDisplayContext.FIXED, light, overlay, poseStack, bufferSource, blockEntity.getLevel(), 0);
+            poseStack.popPose();
 
             x = x + 1;
             if (x > 1) {
@@ -51,17 +49,17 @@ public class ArcaneWorkbenchRenderer implements BlockEntityRenderer<ArcaneWorkbe
         }
 
         for (int i = 0; i < 4; i += 1) {
-            ms.pushPose();
-            ms.translate(0.5F, 1.125F, 0.5F);
-            ms.mulPose(Axis.YP.rotationDegrees(-90F * i + workbench.getBlockRotate() - 90F));
-            ms.translate(0.375F, 0F, 0F);
-            ms.translate(0F, (float) Math.sin(Math.toRadians(ticksUp + (i * 10) % 360)) * 0.03125F, 0F);
-            ms.scale(0.15F,0.15F,0.15F);
-            ms.mulPose(Axis.YP.rotationDegrees((float) ticks));
-            ms.mulPose(Axis.YP.rotationDegrees(workbench.getBlockRotate()));
+            poseStack.pushPose();
+            poseStack.translate(0.5F, 1.125F, 0.5F);
+            poseStack.mulPose(Axis.YP.rotationDegrees(-90F * i + blockEntity.getBlockRotate() - 90F));
+            poseStack.translate(0.375F, 0F, 0F);
+            poseStack.translate(0F, (float) Math.sin(Math.toRadians(ticksUp + (i * 10) % 360)) * 0.03125F, 0F);
+            poseStack.scale(0.15F,0.15F,0.15F);
+            poseStack.mulPose(Axis.YP.rotationDegrees((float) ticks));
+            poseStack.mulPose(Axis.YP.rotationDegrees(blockEntity.getBlockRotate()));
 
-            mc.getItemRenderer().renderStatic(workbench.itemHandler.getStackInSlot(9 + i), ItemDisplayContext.FIXED, light, overlay, ms, buffers, workbench.getLevel(), 0);
-            ms.popPose();
+            minecraft.getItemRenderer().renderStatic(blockEntity.itemHandler.getStackInSlot(9 + i), ItemDisplayContext.FIXED, light, overlay, poseStack, bufferSource, blockEntity.getLevel(), 0);
+            poseStack.popPose();
         }
     }
 }

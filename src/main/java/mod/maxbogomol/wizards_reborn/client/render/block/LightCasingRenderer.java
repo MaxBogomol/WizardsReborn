@@ -20,13 +20,11 @@ import java.awt.*;
 import java.util.Random;
 
 public class LightCasingRenderer implements BlockEntityRenderer<LightCasingBlockEntity> {
-
-    public LightCasingRenderer() {}
-
+    
     @Override
-    public void render(LightCasingBlockEntity casing, float partialTicks, PoseStack ms, MultiBufferSource buffers, int light, int overlay) {
+    public void render(LightCasingBlockEntity blockEntity, float partialTicks, PoseStack poseStack, MultiBufferSource bufferSource, int light, int overlay) {
         Random random = new Random();
-        random.setSeed(casing.getBlockPos().asLong());
+        random.setSeed(blockEntity.getBlockPos().asLong());
 
         double ticksAlpha = (ClientTickHandler.ticksInGame + partialTicks);
         float alpha = (float) (0.35f + Math.abs(Math.sin(Math.toRadians(random.nextFloat() * 360f + ticksAlpha)) * 0.3f));
@@ -34,44 +32,44 @@ public class LightCasingRenderer implements BlockEntityRenderer<LightCasingBlock
         MultiBufferSource bufferDelayed = FluffyFurRenderTypes.getDelayedRender();
 
         for (Direction direction : Direction.values()) {
-            ms.pushPose();
-            ms.translate(0.5F, 0.5F, 0.5F);
+            poseStack.pushPose();
+            poseStack.translate(0.5F, 0.5F, 0.5F);
             BlockPos pos = new BlockPos(0, 0, 0).relative(direction);
-            ms.translate(pos.getX() * casing.getLightLensOffset(), pos.getY() * casing.getLightLensOffset(), pos.getZ() * casing.getLightLensOffset());
+            poseStack.translate(pos.getX() * blockEntity.getLightLensOffset(), pos.getY() * blockEntity.getLightLensOffset(), pos.getZ() * blockEntity.getLightLensOffset());
 
-            RenderUtil.renderCustomModel(WizardsRebornModels.HOVERING_LENS, ItemDisplayContext.FIXED, false, ms, buffers, light, overlay);
+            RenderUtil.renderCustomModel(WizardsRebornModels.HOVERING_LENS, ItemDisplayContext.FIXED, false, poseStack, bufferSource, light, overlay);
 
-            if (casing.isConnection(direction)) {
-                RenderUtil.ray(ms, bufferDelayed, 0.075f, 0.075f, 1f, 0.564f, 0.682f, 0.705f, alpha, 0.564f, 0.682f, 0.705f, alpha);
+            if (blockEntity.isConnection(direction)) {
+                RenderUtil.ray(poseStack, bufferDelayed, 0.075f, 0.075f, 1f, 0.564f, 0.682f, 0.705f, alpha, 0.564f, 0.682f, 0.705f, alpha);
 
-                if (casing.canWork() && casing.getLight() > 0) {
-                    Vec3 from = new Vec3(casing.getBlockPos().getX() + 0.5f + (pos.getX() * casing.getLightLensOffset()), casing.getBlockPos().getY() + 0.5f + (pos.getY() * casing.getLightLensOffset()), casing.getBlockPos().getZ() + 0.5f + (pos.getZ() * casing.getLightLensOffset()));
-                    Vec3 to = LightUtil.getLightLensPos(casing.getBlockPos().relative(direction), casing.getLightLensPos());
+                if (blockEntity.canWork() && blockEntity.getLight() > 0) {
+                    Vec3 from = new Vec3(blockEntity.getBlockPos().getX() + 0.5f + (pos.getX() * blockEntity.getLightLensOffset()), blockEntity.getBlockPos().getY() + 0.5f + (pos.getY() * blockEntity.getLightLensOffset()), blockEntity.getBlockPos().getZ() + 0.5f + (pos.getZ() * blockEntity.getLightLensOffset()));
+                    Vec3 to = LightUtil.getLightLensPos(blockEntity.getBlockPos().relative(direction), blockEntity.getLightLensPos());
 
-                    Color color = LightUtil.getRayColorFromLumos(casing.getColor(), casing.getLumos(), casing.getBlockPos(), partialTicks);
-                    ms.pushPose();
-                    LightUtil.renderLightRay(casing.getLevel(), casing.getBlockPos(), from, to, 25f, color, partialTicks, ms);
-                    ms.popPose();
+                    Color color = LightUtil.getRayColorFromLumos(blockEntity.getColor(), blockEntity.getLumos(), blockEntity.getBlockPos(), partialTicks);
+                    poseStack.pushPose();
+                    LightUtil.renderLightRay(blockEntity.getLevel(), blockEntity.getBlockPos(), from, to, 25f, color, partialTicks, poseStack);
+                    poseStack.popPose();
                 }
 
                 if (WissenUtils.isCanRenderWissenWand()) {
-                    ms.pushPose();
-                    ms.translate(-0.2f, -0.2f, -0.2f);
-                    RenderUtils.renderBoxLines(new Vec3(0.4f, 0.4f, 0.4f), RenderUtils.colorConnectTo, partialTicks, ms);
-                    ms.popPose();
+                    poseStack.pushPose();
+                    poseStack.translate(-0.2f, -0.2f, -0.2f);
+                    RenderUtils.renderBoxLines(new Vec3(0.4f, 0.4f, 0.4f), RenderUtils.colorConnectTo, partialTicks, poseStack);
+                    poseStack.popPose();
                 }
             }
-            ms.popPose();
+            poseStack.popPose();
         }
     }
 
     @Override
-    public boolean shouldRenderOffScreen(LightCasingBlockEntity pBlockEntity) {
+    public boolean shouldRenderOffScreen(LightCasingBlockEntity blockEntity) {
         return true;
     }
 
     @Override
-    public boolean shouldRender(LightCasingBlockEntity pBlockEntity, Vec3 pCameraPos) {
+    public boolean shouldRender(LightCasingBlockEntity blockEntity, Vec3 cameraPos) {
         return true;
     }
 }

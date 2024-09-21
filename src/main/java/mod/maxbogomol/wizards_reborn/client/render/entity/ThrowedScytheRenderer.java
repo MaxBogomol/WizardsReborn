@@ -33,7 +33,7 @@ public class ThrowedScytheRenderer<T extends ThrowedScytheEntity> extends Entity
     }
 
     @Override
-    public void render(ThrowedScytheEntity entity, float entityYaw, float partialTicks, PoseStack stack, MultiBufferSource buffer, int light) {
+    public void render(ThrowedScytheEntity entity, float entityYaw, float partialTicks, PoseStack poseStack, MultiBufferSource bufferSource, int light) {
         MultiBufferSource bufferDelayed = FluffyFurRenderTypes.getDelayedRender();
         VertexConsumer builder = bufferDelayed.getBuffer(FluffyFurRenderTypes.ADDITIVE);
         Color color = WizardsRebornArcaneEnchantments.THROW.getColor();
@@ -57,23 +57,23 @@ public class ThrowedScytheRenderer<T extends ThrowedScytheEntity> extends Entity
         float y = (float) Mth.lerp(partialTicks, entity.yOld, entity.getY());
         float z = (float) Mth.lerp(partialTicks, entity.zOld, entity.getZ());
 
-        stack.pushPose();
-        stack.translate(0, 0.1f, 0);
-        stack.translate(entity.getX() - x, entity.getY() - y,  entity.getZ() - z);
-        stack.translate(0, 0.1f, 0);
-        //RenderUtils.renderTrail(stack, builder, entity.position(), trailList, 0,0.02f, 0,1.0f, 1.0f, color, 4, true);
-        stack.translate(0, -0.1f, 0);
+        poseStack.pushPose();
+        poseStack.translate(0, 0.1f, 0);
+        poseStack.translate(entity.getX() - x, entity.getY() - y,  entity.getZ() - z);
+        poseStack.translate(0, 0.1f, 0);
+        //RenderUtils.renderTrail(poseStack, builder, entity.position(), trailList, 0,0.02f, 0,1.0f, 1.0f, color, 4, true);
+        poseStack.translate(0, -0.1f, 0);
 
         RenderBuilder.create().setRenderType(FluffyFurRenderTypes.ADDITIVE_TEXTURE)
                 .setUV(RenderUtil.getSprite(FluffyFur.MOD_ID, "particle/trail"))
                 .setColor(color)
                 .setAlpha(0.5f)
-                .renderTrail(stack, trail, (f) -> {return f * 0.08f;});
-        stack.popPose();
+                .renderTrail(poseStack, trail, (f) -> {return f * 0.08f;});
+        poseStack.popPose();
 
         if (entity.getFade() && entity.getFadeTick() <= 30 && entity.getEndTick() > 0) {
-            stack.pushPose();
-            stack.translate(0, 0.1f, 0);
+            poseStack.pushPose();
+            poseStack.translate(0, 0.1f, 0);
             Vec3 endPoint = entity.getEndPoint();
             double dX = endPoint.x() - entity.getX();
             double dY = endPoint.y() - entity.getY();
@@ -89,25 +89,25 @@ public class ThrowedScytheRenderer<T extends ThrowedScytheEntity> extends Entity
             float b = color.getBlue() / 255f;
             float alpha = entity.getFadeTick() / 30f;
 
-            stack.mulPose(Axis.YP.rotationDegrees((float) Math.toDegrees(-yaw)));
-            stack.mulPose(Axis.ZP.rotationDegrees((float) Math.toDegrees(-pitch) - 90f));
-            RenderUtils.scytheTrail(stack, bufferDelayed, 2f, distance, 0.5f, r, g, b, 0.5f * alpha, r, g, b, 0.5f * alpha);
-            stack.popPose();
+            poseStack.mulPose(Axis.YP.rotationDegrees((float) Math.toDegrees(-yaw)));
+            poseStack.mulPose(Axis.ZP.rotationDegrees((float) Math.toDegrees(-pitch) - 90f));
+            RenderUtils.scytheTrail(poseStack, bufferDelayed, 2f, distance, 0.5f, r, g, b, 0.5f * alpha, r, g, b, 0.5f * alpha);
+            poseStack.popPose();
         }
 
         if (!entity.getFade()) {
             float tick = (entity.tickCount + partialTicks);
             int right = entity.getIsRight() ? 1 : -1;
 
-            stack.pushPose();
-            stack.translate(0f, 0.1f, 0f);
-            stack.mulPose(Axis.YP.rotationDegrees(Mth.lerp(partialTicks, entity.yRotO, entity.getYRot()) - 90.0F));
-            stack.mulPose(Axis.XP.rotationDegrees(-90f * right));
-            stack.mulPose(Axis.ZP.rotation(tick * 0.8f));
-            stack.scale(2, 2f, 1f);
-            stack.translate(0.25f, 0.25f, 0f);
-            Minecraft.getInstance().getItemRenderer().renderStatic(entity.getItem(), ItemDisplayContext.NONE, light, OverlayTexture.NO_OVERLAY, stack, buffer, entity.level(), 0);
-            stack.popPose();
+            poseStack.pushPose();
+            poseStack.translate(0f, 0.1f, 0f);
+            poseStack.mulPose(Axis.YP.rotationDegrees(Mth.lerp(partialTicks, entity.yRotO, entity.getYRot()) - 90.0F));
+            poseStack.mulPose(Axis.XP.rotationDegrees(-90f * right));
+            poseStack.mulPose(Axis.ZP.rotation(tick * 0.8f));
+            poseStack.scale(2, 2f, 1f);
+            poseStack.translate(0.25f, 0.25f, 0f);
+            Minecraft.getInstance().getItemRenderer().renderStatic(entity.getItem(), ItemDisplayContext.NONE, light, OverlayTexture.NO_OVERLAY, poseStack, bufferSource, entity.level(), 0);
+            poseStack.popPose();
         }
     }
 

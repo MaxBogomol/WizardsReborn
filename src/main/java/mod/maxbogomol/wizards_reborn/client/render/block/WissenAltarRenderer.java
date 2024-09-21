@@ -11,30 +11,28 @@ import net.minecraft.world.item.ItemDisplayContext;
 
 public class WissenAltarRenderer implements BlockEntityRenderer<WissenAltarBlockEntity> {
 
-    public WissenAltarRenderer() {}
-
     @Override
-    public void render(WissenAltarBlockEntity altar, float partialTicks, PoseStack ms, MultiBufferSource buffers, int light, int overlay) {
-        Minecraft mc = Minecraft.getInstance();
+    public void render(WissenAltarBlockEntity blockEntity, float partialTicks, PoseStack poseStack, MultiBufferSource bufferSource, int light, int overlay) {
+        Minecraft minecraft = Minecraft.getInstance();
 
         double ticks = (ClientTickHandler.ticksInGame + partialTicks) * 2;
         double ticksUp = (ClientTickHandler.ticksInGame + partialTicks) * 4;
         ticksUp = (ticksUp) % 360;
 
-        ms.pushPose();
-        ms.translate(0.5F, 0.890625F, 0.5F);
-        ms.mulPose(Axis.YP.rotationDegrees(altar.getBlockRotate()));
-        ms.mulPose(Axis.XP.rotationDegrees(90F));
-        ms.scale(0.5F,0.5F,0.5F);
-        mc.getItemRenderer().renderStatic(altar.getItemHandler().getItem(0), ItemDisplayContext.FIXED, light, overlay, ms, buffers, altar.getLevel(), 0);
-        ms.popPose();
+        poseStack.pushPose();
+        poseStack.translate(0.5F, 0.890625F, 0.5F);
+        poseStack.mulPose(Axis.YP.rotationDegrees(blockEntity.getBlockRotate()));
+        poseStack.mulPose(Axis.XP.rotationDegrees(90F));
+        poseStack.scale(0.5F,0.5F,0.5F);
+        minecraft.getItemRenderer().renderStatic(blockEntity.getItemHandler().getItem(0), ItemDisplayContext.FIXED, light, overlay, poseStack, bufferSource, blockEntity.getLevel(), 0);
+        poseStack.popPose();
 
-        ms.pushPose();
-        ms.translate(0.5F, 1.3125F, 0.5F);
-        ms.translate(0F, (float) (Math.sin(Math.toRadians(ticksUp)) * 0.03125F * altar.getCraftingStage()), 0F);
-        ms.mulPose(Axis.YP.rotationDegrees((float) ticks));
-        ms.scale(0.5F * altar.getCraftingStage(), 0.5F * altar.getCraftingStage(), 0.5F * altar.getCraftingStage());
-        mc.getItemRenderer().renderStatic(altar.getItemHandler().getItem(2), ItemDisplayContext.FIXED, light, overlay, ms, buffers, altar.getLevel(), 0);
-        ms.popPose();
+        poseStack.pushPose();
+        poseStack.translate(0.5F, 1.3125F, 0.5F);
+        poseStack.translate(0F, (float) (Math.sin(Math.toRadians(ticksUp)) * 0.03125F * blockEntity.getCraftingStage()), 0F);
+        poseStack.mulPose(Axis.YP.rotationDegrees((float) ticks));
+        poseStack.scale(0.5F * blockEntity.getCraftingStage(), 0.5F * blockEntity.getCraftingStage(), 0.5F * blockEntity.getCraftingStage());
+        minecraft.getItemRenderer().renderStatic(blockEntity.getItemHandler().getItem(2), ItemDisplayContext.FIXED, light, overlay, poseStack, bufferSource, blockEntity.getLevel(), 0);
+        poseStack.popPose();
     }
 }

@@ -12,21 +12,19 @@ import net.minecraft.world.item.ItemStack;
 
 public class ArcanePedestalRenderer implements BlockEntityRenderer<ArcanePedestalBlockEntity> {
 
-    public ArcanePedestalRenderer() {}
-
     @Override
-    public void render(ArcanePedestalBlockEntity pedestal, float partialTicks, PoseStack ms, MultiBufferSource buffers, int light, int overlay) {
+    public void render(ArcanePedestalBlockEntity blockEntity, float partialTicks, PoseStack poseStack, MultiBufferSource bufferSource, int light, int overlay) {
         double ticks = (ClientTickHandler.ticksInGame + partialTicks) * 2;
         double ticksUp = (ClientTickHandler.ticksInGame + partialTicks) * 4;
         ticksUp = (ticksUp) % 360;
 
-        ms.pushPose();
-        ms.translate(0.5F, 1.1875F, 0.5F);
-        ms.translate(0F, (float) (Math.sin(Math.toRadians(ticksUp)) * 0.03125F), 0F);
-        ms.mulPose(Axis.YP.rotationDegrees((float) ticks));
-        ms.scale(0.5F, 0.5F, 0.5F);
-        ItemStack stack = pedestal.getItemHandler().getItem(0);
-        Minecraft.getInstance().getItemRenderer().renderStatic(stack, ItemDisplayContext.FIXED, light, overlay, ms, buffers, pedestal.getLevel(), 0);
-        ms.popPose();
+        poseStack.pushPose();
+        poseStack.translate(0.5F, 1.1875F, 0.5F);
+        poseStack.translate(0F, (float) (Math.sin(Math.toRadians(ticksUp)) * 0.03125F), 0F);
+        poseStack.mulPose(Axis.YP.rotationDegrees((float) ticks));
+        poseStack.scale(0.5F, 0.5F, 0.5F);
+        ItemStack stack = blockEntity.getItemHandler().getItem(0);
+        Minecraft.getInstance().getItemRenderer().renderStatic(stack, ItemDisplayContext.FIXED, light, overlay, poseStack, bufferSource, blockEntity.getLevel(), 0);
+        poseStack.popPose();
     }
 }

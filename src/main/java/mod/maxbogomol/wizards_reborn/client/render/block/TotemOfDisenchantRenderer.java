@@ -12,21 +12,19 @@ import net.minecraft.world.item.ItemStack;
 
 public class TotemOfDisenchantRenderer implements BlockEntityRenderer<TotemOfDisenchantBlockEntity> {
 
-    public TotemOfDisenchantRenderer() {}
-
     @Override
-    public void render(TotemOfDisenchantBlockEntity totem, float partialTicks, PoseStack ms, MultiBufferSource buffers, int light, int overlay) {
+    public void render(TotemOfDisenchantBlockEntity blockEntity, float partialTicks, PoseStack poseStack, MultiBufferSource bufferSource, int light, int overlay) {
         double ticks = (ClientTickHandler.ticksInGame + partialTicks) / 2;
         double ticksUp = (ClientTickHandler.ticksInGame + partialTicks);
         ticksUp = (ticksUp) % 360;
 
-        ms.pushPose();
-        ms.translate(0.5F, 0.625F, 0.5F);
-        ms.translate(0F, (float) (Math.sin(Math.toRadians(ticksUp)) * 0.03125F), 0F);
-        ms.mulPose(Axis.YP.rotationDegrees((float) ticks));
-        ms.scale(0.25F, 0.25F, 0.25F);
-        ItemStack stack = totem.itemHandler.getStackInSlot(0);
-        Minecraft.getInstance().getItemRenderer().renderStatic(stack, ItemDisplayContext.FIXED, light, overlay, ms, buffers, totem.getLevel(), 0);
-        ms.popPose();
+        poseStack.pushPose();
+        poseStack.translate(0.5F, 0.625F, 0.5F);
+        poseStack.translate(0F, (float) (Math.sin(Math.toRadians(ticksUp)) * 0.03125F), 0F);
+        poseStack.mulPose(Axis.YP.rotationDegrees((float) ticks));
+        poseStack.scale(0.25F, 0.25F, 0.25F);
+        ItemStack stack = blockEntity.itemHandler.getStackInSlot(0);
+        Minecraft.getInstance().getItemRenderer().renderStatic(stack, ItemDisplayContext.FIXED, light, overlay, poseStack, bufferSource, blockEntity.getLevel(), 0);
+        poseStack.popPose();
     }
 }

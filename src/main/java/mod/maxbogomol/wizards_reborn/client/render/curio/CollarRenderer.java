@@ -23,13 +23,8 @@ public class CollarRenderer implements ICurioRenderer {
     AmuletModel model = null;
 
     @Override
-    public <T extends LivingEntity, M extends EntityModel<T>> void render(ItemStack stack, SlotContext slotContext,
-                                                                          PoseStack matrixStack, RenderLayerParent<T, M> renderLayerParent, MultiBufferSource renderTypeBuffer,
-                                                                          int light, float limbSwing, float limbSwingAmount, float partialTicks,
-                                                                          float ageInTicks, float netHeadYaw, float headPitch) {
-        if (model == null) {
-            model = new AmuletModel(Minecraft.getInstance().getEntityModels().bakeLayer(WizardsRebornModels.COLLAR_LAYER));
-        }
+    public <T extends LivingEntity, M extends EntityModel<T>> void render(ItemStack stack, SlotContext slotContext, PoseStack poseStack, RenderLayerParent<T, M> renderLayerParent, MultiBufferSource bufferSource, int light, float limbSwing, float limbSwingAmount, float partialTicks, float ageInTicks, float netHeadYaw, float headPitch) {
+        if (model == null) model = new AmuletModel(Minecraft.getInstance().getEntityModels().bakeLayer(WizardsRebornModels.COLLAR_LAYER));
 
         LivingEntity entity = slotContext.entity();
         if (stack.getItem() instanceof ICurioItemTexture curio) {
@@ -39,6 +34,6 @@ public class CollarRenderer implements ICurioRenderer {
         ICurioRenderer.followBodyRotations(entity, model);
 
         model.setupAnim(entity, limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch);
-        model.renderToBuffer(matrixStack, renderTypeBuffer.getBuffer(RenderType.entityCutoutNoCull(TEXTURE)), light, OverlayTexture.NO_OVERLAY, 1, 1, 1, 1);
+        model.renderToBuffer(poseStack, bufferSource.getBuffer(RenderType.entityCutoutNoCull(TEXTURE)), light, OverlayTexture.NO_OVERLAY, 1, 1, 1, 1);
     }
 }

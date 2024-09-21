@@ -11,16 +11,14 @@ import net.minecraft.world.phys.Vec3;
 
 public class AlchemyBoilerRenderer implements BlockEntityRenderer<AlchemyBoilerBlockEntity> {
 
-    public AlchemyBoilerRenderer() {}
-
     @Override
-    public void render(AlchemyBoilerBlockEntity boiler, float partialTicks, PoseStack ms, MultiBufferSource buffers, int light, int overlay) {
+    public void render(AlchemyBoilerBlockEntity blockEntity, float partialTicks, PoseStack poseStack, MultiBufferSource bufferSource, int light, int overlay) {
         if (WissenUtils.isCanRenderWissenWand()) {
-            if (!(boiler.getLevel().getBlockEntity(boiler.getBlockPos().below()) instanceof AlchemyMachineBlockEntity machine)) {
-                ms.pushPose();
-                ms.translate(0, -1, 0);
-                RenderUtils.renderBoxLines(new Vec3(1f, 2f, 1f), RenderUtils.colorMissing, partialTicks, ms);
-                ms.popPose();
+            if (!(blockEntity.getLevel().getBlockEntity(blockEntity.getBlockPos().below()) instanceof AlchemyMachineBlockEntity machine)) {
+                poseStack.pushPose();
+                poseStack.translate(0, -1, 0);
+                RenderUtils.renderBoxLines(new Vec3(1f, 2f, 1f), RenderUtils.colorMissing, partialTicks, poseStack);
+                poseStack.popPose();
             }
         }
     }

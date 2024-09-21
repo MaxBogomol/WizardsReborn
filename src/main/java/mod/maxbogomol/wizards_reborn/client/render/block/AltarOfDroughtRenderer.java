@@ -18,49 +18,47 @@ import java.util.Random;
 
 public class AltarOfDroughtRenderer implements BlockEntityRenderer<AltarOfDroughtBlockEntity> {
 
-    public AltarOfDroughtRenderer() {}
-
     @Override
-    public void render(AltarOfDroughtBlockEntity altar, float partialTicks, PoseStack ms, MultiBufferSource buffers, int light, int overlay) {
+    public void render(AltarOfDroughtBlockEntity blockEntity, float partialTicks, PoseStack poseStack, MultiBufferSource bufferSource, int light, int overlay) {
         Random random = new Random();
-        random.setSeed(altar.getBlockPos().asLong());
+        random.setSeed(blockEntity.getBlockPos().asLong());
 
-        Minecraft mc = Minecraft.getInstance();
+        Minecraft minecraft = Minecraft.getInstance();
         double ticks = (ClientTickHandler.ticksInGame + partialTicks) * 0.1F;
         double ticksUp = (ClientTickHandler.ticksInGame + partialTicks) * 4;
         ticksUp = (ticksUp) % 360;
 
-        ms.pushPose();
-        ms.translate(0.5F, 0.203125F, 0.5F);
-        ms.mulPose(Axis.YP.rotationDegrees(altar.getBlockRotate()));
-        ms.mulPose(Axis.XP.rotationDegrees(90F));
-        ms.scale(0.5F,0.5F,0.5F);
-        mc.getItemRenderer().renderStatic(altar.getItemHandler().getItem(0), ItemDisplayContext.FIXED, light, overlay, ms, buffers, altar.getLevel(), 0);
-        ms.popPose();
+        poseStack.pushPose();
+        poseStack.translate(0.5F, 0.203125F, 0.5F);
+        poseStack.mulPose(Axis.YP.rotationDegrees(blockEntity.getBlockRotate()));
+        poseStack.mulPose(Axis.XP.rotationDegrees(90F));
+        poseStack.scale(0.5F,0.5F,0.5F);
+        minecraft.getItemRenderer().renderStatic(blockEntity.getItemHandler().getItem(0), ItemDisplayContext.FIXED, light, overlay, poseStack, bufferSource, blockEntity.getLevel(), 0);
+        poseStack.popPose();
 
-        ms.pushPose();
-        ms.translate(0.5F, 0.625F + (Math.sin(Math.toRadians(ticksUp)) * 0.03125F), 0.5F);
-        ms.mulPose(Axis.YP.rotationDegrees((float) ((Math.sin(Math.toRadians(random.nextFloat() * 360) + ticks))) * 5F));
-        ms.mulPose(Axis.XP.rotationDegrees((float) ((Math.sin(Math.toRadians(random.nextFloat() * 360) + ticks))) * 5F));
-        ms.mulPose(Axis.ZP.rotationDegrees((float) ((Math.sin(Math.toRadians(random.nextFloat() * 360) + ticks))) * 5F));
-        RenderUtil.renderCustomModel(WizardsRebornModels.ALTAR_OF_DROUGHT_FRAME, ItemDisplayContext.FIXED, false, ms, buffers, light, overlay);
-        ms.popPose();
+        poseStack.pushPose();
+        poseStack.translate(0.5F, 0.625F + (Math.sin(Math.toRadians(ticksUp)) * 0.03125F), 0.5F);
+        poseStack.mulPose(Axis.YP.rotationDegrees((float) ((Math.sin(Math.toRadians(random.nextFloat() * 360) + ticks))) * 5F));
+        poseStack.mulPose(Axis.XP.rotationDegrees((float) ((Math.sin(Math.toRadians(random.nextFloat() * 360) + ticks))) * 5F));
+        poseStack.mulPose(Axis.ZP.rotationDegrees((float) ((Math.sin(Math.toRadians(random.nextFloat() * 360) + ticks))) * 5F));
+        RenderUtil.renderCustomModel(WizardsRebornModels.ALTAR_OF_DROUGHT_FRAME, ItemDisplayContext.FIXED, false, poseStack, bufferSource, light, overlay);
+        poseStack.popPose();
 
         if (WissenUtils.isCanRenderWissenWand()) {
-            ms.pushPose();
-            ms.translate(-15, -15, -15);
-            RenderUtils.renderBoxLines(new Vec3(31, 31, 31), RenderUtils.colorArea, partialTicks, ms);
-            ms.popPose();
+            poseStack.pushPose();
+            poseStack.translate(-15, -15, -15);
+            RenderUtils.renderBoxLines(new Vec3(31, 31, 31), RenderUtils.colorArea, partialTicks, poseStack);
+            poseStack.popPose();
         }
     }
 
     @Override
-    public boolean shouldRenderOffScreen(AltarOfDroughtBlockEntity pBlockEntity) {
+    public boolean shouldRenderOffScreen(AltarOfDroughtBlockEntity blockEntity) {
         return true;
     }
 
     @Override
-    public boolean shouldRender(AltarOfDroughtBlockEntity pBlockEntity, Vec3 pCameraPos) {
+    public boolean shouldRender(AltarOfDroughtBlockEntity blockEntity, Vec3 cameraPos) {
         return true;
     }
 }

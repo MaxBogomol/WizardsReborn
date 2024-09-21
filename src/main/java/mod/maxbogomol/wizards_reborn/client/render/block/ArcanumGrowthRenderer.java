@@ -18,73 +18,71 @@ import java.util.Random;
 
 public class ArcanumGrowthRenderer implements BlockEntityRenderer<ArcanumGrowthBlockEntity> {
 
-    public ArcanumGrowthRenderer() {}
-
     @Override
-    public void render(ArcanumGrowthBlockEntity crystal, float partialTicks, PoseStack ms, MultiBufferSource buffers, int light, int overlay) {
+    public void render(ArcanumGrowthBlockEntity blockEntity, float partialTicks, PoseStack poseStack, MultiBufferSource bufferSource, int light, int overlay) {
         Random random = new Random();
-        random.setSeed(crystal.getBlockPos().asLong());
+        random.setSeed(blockEntity.getBlockPos().asLong());
 
         double ticksAlpha = (ClientTickHandler.ticksInGame + partialTicks);
         float alpha = (float) (0.15f + Math.abs(Math.sin(Math.toRadians(random.nextFloat() * 360f + ticksAlpha)) * 0.05f));
 
         MultiBufferSource bufferDelayed = FluffyFurRenderTypes.getDelayedRender();
 
-        if (crystal.getLevel().getBlockState(crystal.getBlockPos()).getBlock() instanceof ArcanumGrowthBlock growth) {
+        if (blockEntity.getLevel().getBlockState(blockEntity.getBlockPos()).getBlock() instanceof ArcanumGrowthBlock growth) {
             Color color = new Color(Config.wissenColorR(), Config.wissenColorG(), Config.wissenColorB());
             float r = color.getRed() / 255f;
             float g = color.getGreen() / 255f;
             float b = color.getBlue() / 255f;
 
-            int age = crystal.getLevel().getBlockState(crystal.getBlockPos()).getValue(growth.getAgeProperty());
+            int age = blockEntity.getLevel().getBlockState(blockEntity.getBlockPos()).getValue(growth.getAgeProperty());
 
-            if (crystal.getLight() > 0) {
+            if (blockEntity.getLight() > 0) {
                 if (age == 0) {
-                    ms.pushPose();
-                    ms.translate(0.46875F, 0.1F, 0.46875F);
-                    ms.mulPose(Axis.ZP.rotationDegrees(-90f));
-                    RenderUtils.ray(ms, bufferDelayed, 0.10625f, 0.11f, 1f, r, g, b, alpha);
-                    ms.popPose();
+                    poseStack.pushPose();
+                    poseStack.translate(0.46875F, 0.1F, 0.46875F);
+                    poseStack.mulPose(Axis.ZP.rotationDegrees(-90f));
+                    RenderUtils.ray(poseStack, bufferDelayed, 0.10625f, 0.11f, 1f, r, g, b, alpha);
+                    poseStack.popPose();
                 }
 
                 if (age == 1) {
-                    ms.pushPose();
-                    ms.translate(0.5F, 0.06F, 0.5F);
-                    ms.mulPose(Axis.ZP.rotationDegrees(-90f));
-                    RenderUtils.ray(ms, bufferDelayed, 0.1375f, 0.08f, 1f, r, g, b, alpha);
-                    ms.popPose();
+                    poseStack.pushPose();
+                    poseStack.translate(0.5F, 0.06F, 0.5F);
+                    poseStack.mulPose(Axis.ZP.rotationDegrees(-90f));
+                    RenderUtils.ray(poseStack, bufferDelayed, 0.1375f, 0.08f, 1f, r, g, b, alpha);
+                    poseStack.popPose();
                 }
 
                 if (age == 2) {
-                    ms.pushPose();
-                    ms.translate(0.5F, 0.19F, 0.5F);
-                    ms.mulPose(Axis.ZP.rotationDegrees(-90f));
-                    RenderUtils.ray(ms, bufferDelayed, 0.1375f, 0.21f, 1f, r, g, b, alpha);
-                    ms.popPose();
+                    poseStack.pushPose();
+                    poseStack.translate(0.5F, 0.19F, 0.5F);
+                    poseStack.mulPose(Axis.ZP.rotationDegrees(-90f));
+                    RenderUtils.ray(poseStack, bufferDelayed, 0.1375f, 0.21f, 1f, r, g, b, alpha);
+                    poseStack.popPose();
                 }
 
                 if (age == 3) {
-                    ms.pushPose();
-                    ms.translate(0.53125F, 0.29F, 0.53125F);
-                    ms.mulPose(Axis.ZP.rotationDegrees(-90f));
-                    RenderUtils.ray(ms, bufferDelayed, 0.16875f, 0.3f, 1f, r, g, b, alpha);
-                    ms.popPose();
+                    poseStack.pushPose();
+                    poseStack.translate(0.53125F, 0.29F, 0.53125F);
+                    poseStack.mulPose(Axis.ZP.rotationDegrees(-90f));
+                    RenderUtils.ray(poseStack, bufferDelayed, 0.16875f, 0.3f, 1f, r, g, b, alpha);
+                    poseStack.popPose();
                 }
 
                 if (age == 4) {
-                    ms.pushPose();
-                    ms.translate(0.5F, 0.3825F, 0.5F);
-                    ms.mulPose(Axis.ZP.rotationDegrees(-90f));
-                    RenderUtils.ray(ms, bufferDelayed, 0.2f, 0.4f, 1f, r, g, b, alpha);
-                    ms.popPose();
+                    poseStack.pushPose();
+                    poseStack.translate(0.5F, 0.3825F, 0.5F);
+                    poseStack.mulPose(Axis.ZP.rotationDegrees(-90f));
+                    RenderUtils.ray(poseStack, bufferDelayed, 0.2f, 0.4f, 1f, r, g, b, alpha);
+                    poseStack.popPose();
                 }
             }
 
             if (WissenUtils.isCanRenderWissenWand()) {
                 if (age == 4) {
-                    ms.pushPose();
-                    RenderUtils.renderBoxLines(new Vec3(1, 1, 1), color, partialTicks, ms);
-                    ms.popPose();
+                    poseStack.pushPose();
+                    RenderUtils.renderBoxLines(new Vec3(1, 1, 1), color, partialTicks, poseStack);
+                    poseStack.popPose();
                 }
             }
         }

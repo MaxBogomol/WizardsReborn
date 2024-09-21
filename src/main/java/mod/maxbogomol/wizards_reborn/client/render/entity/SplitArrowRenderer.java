@@ -25,7 +25,7 @@ public class SplitArrowRenderer<T extends SplitArrowEntity> extends EntityRender
     }
 
     @Override
-    public void render(SplitArrowEntity entity, float entityYaw, float partialTicks, PoseStack stack, MultiBufferSource buffer, int light) {
+    public void render(SplitArrowEntity entity, float entityYaw, float partialTicks, PoseStack poseStack, MultiBufferSource bufferSource, int light) {
         MultiBufferSource bufferDelayed = FluffyFurRenderTypes.getDelayedRender();
         VertexConsumer builder = bufferDelayed.getBuffer(FluffyFurRenderTypes.ADDITIVE);
         Color color = WizardsRebornArcaneEnchantments.SPLIT.getColor();
@@ -44,12 +44,12 @@ public class SplitArrowRenderer<T extends SplitArrowEntity> extends EntityRender
         float y = (float) Mth.lerp(partialTicks, entity.yOld, entity.getY());
         float z = (float) Mth.lerp(partialTicks, entity.zOld, entity.getZ());
 
-        stack.pushPose();
-        stack.translate(0, 0.1f, 0);
-        stack.translate(entity.getX() - x, entity.getY() - y,  entity.getZ() - z);
-        RenderUtils.renderTrail(stack, builder, entity.position(), trailList, 0,0.1f, 0,1.0f, 1.0f, color, 4, true);
+        poseStack.pushPose();
+        poseStack.translate(0, 0.1f, 0);
+        poseStack.translate(entity.getX() - x, entity.getY() - y,  entity.getZ() - z);
+        RenderUtils.renderTrail(poseStack, builder, entity.position(), trailList, 0,0.1f, 0,1.0f, 1.0f, color, 4, true);
         //RenderUtils.renderTrail(stack, builder, entity.position(), trailList, 0,0.05f, 0,1.0f, 1.0f, color, 4, true);
-        stack.popPose();
+        poseStack.popPose();
     }
 
     @Override

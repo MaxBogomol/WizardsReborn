@@ -25,30 +25,30 @@ public class HoveringTomeStandRenderer implements BlockEntityRenderer<HoveringTo
     }
 
     @Override
-    public void render(HoveringTomeStandBlockEntity stand, float partialTicks, PoseStack ms, MultiBufferSource buffers, int light, int overlay) {
-        ms.pushPose();
-        ms.translate(0.5F, 0.85F, 0.5F);
-        float f = (float)stand.time + partialTicks;
-        ms.translate(0.0F, 0.1F + Mth.sin(f * 0.1F) * 0.01F, 0.0F);
+    public void render(HoveringTomeStandBlockEntity blockEntity, float partialTicks, PoseStack poseStack, MultiBufferSource bufferSource, int light, int overlay) {
+        poseStack.pushPose();
+        poseStack.translate(0.5F, 0.85F, 0.5F);
+        float f = (float) blockEntity.time + partialTicks;
+        poseStack.translate(0.0F, 0.1F + Mth.sin(f * 0.1F) * 0.01F, 0.0F);
 
         float f1;
-        for(f1 = stand.rot - stand.oRot; f1 >= (float)Math.PI; f1 -= ((float)Math.PI * 2F)) {
+        for(f1 = blockEntity.rot - blockEntity.oRot; f1 >= (float)Math.PI; f1 -= ((float)Math.PI * 2F)) {
         }
 
         while(f1 < -(float)Math.PI) {
             f1 += ((float)Math.PI * 2F);
         }
 
-        float f2 = stand.oRot + f1 * partialTicks;
-        ms.mulPose(Axis.YP.rotation(-f2));
-        ms.mulPose(Axis.ZP.rotationDegrees(80.0F));
-        float f3 = Mth.lerp(partialTicks, stand.oFlip, stand.flip);
+        float f2 = blockEntity.oRot + f1 * partialTicks;
+        poseStack.mulPose(Axis.YP.rotation(-f2));
+        poseStack.mulPose(Axis.ZP.rotationDegrees(80.0F));
+        float f3 = Mth.lerp(partialTicks, blockEntity.oFlip, blockEntity.flip);
         float f4 = Mth.frac(f3 + 0.25F) * 1.6F - 0.3F;
         float f5 = Mth.frac(f3 + 0.75F) * 1.6F - 0.3F;
-        float f6 = Mth.lerp(partialTicks, stand.oOpen, stand.open);
+        float f6 = Mth.lerp(partialTicks, blockEntity.oOpen, blockEntity.open);
         this.bookModel.setupAnim(f, Mth.clamp(f4, 0.0F, 1.0F), Mth.clamp(f5, 0.0F, 1.0F), f6);
-        VertexConsumer vertexconsumer = BOOK_LOCATION.buffer(buffers, RenderType::entitySolid);
-        this.bookModel.render(ms, vertexconsumer, light, overlay, 1.0F, 1.0F, 1.0F, 1.0F);
-        ms.popPose();
+        VertexConsumer vertexconsumer = BOOK_LOCATION.buffer(bufferSource, RenderType::entitySolid);
+        this.bookModel.render(poseStack, vertexconsumer, light, overlay, 1.0F, 1.0F, 1.0F, 1.0F);
+        poseStack.popPose();
     }
 }

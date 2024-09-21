@@ -24,40 +24,38 @@ import java.util.Random;
 
 public class CrystalRenderer implements BlockEntityRenderer<CrystalBlockEntity> {
 
-    public CrystalRenderer() {}
-
     @Override
-    public void render(CrystalBlockEntity crystal, float partialTicks, PoseStack ms, MultiBufferSource buffers, int light, int overlay) {
+    public void render(CrystalBlockEntity blockEntity, float partialTicks, PoseStack poseStack, MultiBufferSource bufferSource, int light, int overlay) {
         Random random = new Random();
-        random.setSeed(crystal.getBlockPos().asLong());
+        random.setSeed(blockEntity.getBlockPos().asLong());
 
         double ticksAlpha = (ClientTickHandler.ticksInGame + partialTicks);
         float alpha = (float) (0.15f + Math.abs(Math.sin(Math.toRadians(random.nextFloat() * 360f + ticksAlpha)) * 0.05f));
 
         MultiBufferSource bufferDelayed = FluffyFurRenderTypes.getDelayedRender();
 
-        CrystalRitual ritual = crystal.getCrystalRitual();
+        CrystalRitual ritual = blockEntity.getCrystalRitual();
 
-        if (crystal.getLight() > 0) {
-            if (!crystal.getItemHandler().getItem(0).isEmpty()) {
-                if (crystal.getItemHandler().getItem(0).getItem() instanceof CrystalItem crystalItem) {
+        if (blockEntity.getLight() > 0) {
+            if (!blockEntity.getItemHandler().getItem(0).isEmpty()) {
+                if (blockEntity.getItemHandler().getItem(0).getItem() instanceof CrystalItem crystalItem) {
                     Color color = crystalItem.getType().getColor();
                     float r = color.getRed() / 255f;
                     float g = color.getGreen() / 255f;
                     float b = color.getBlue() / 255f;
 
-                    ms.pushPose();
-                    ms.translate(0.5F, 0.3825F, 0.5F);
-                    ms.mulPose(Axis.ZP.rotationDegrees(-90f));
-                    RenderUtils.ray(ms, bufferDelayed, 0.2f, 0.4f, 1f, r, g, b, alpha);
-                    ms.popPose();
+                    poseStack.pushPose();
+                    poseStack.translate(0.5F, 0.3825F, 0.5F);
+                    poseStack.mulPose(Axis.ZP.rotationDegrees(-90f));
+                    RenderUtils.ray(poseStack, bufferDelayed, 0.2f, 0.4f, 1f, r, g, b, alpha);
+                    poseStack.popPose();
                 }
             }
 
-            if (crystal.isToBlock && !CrystalRitualUtil.isEmpty(ritual) && ritual.hasLightRay(crystal)) {
-                BlockPos pos = new BlockPos(crystal.blockToX, crystal.blockToY, crystal.blockToZ);
-                if (crystal.getLevel().getBlockEntity(pos) instanceof ILightBlockEntity lightTile) {
-                    Vec3 from = LightUtil.getLightLensPos(crystal.getBlockPos(), crystal.getLightLensPos());
+            if (blockEntity.isToBlock && !CrystalRitualUtil.isEmpty(ritual) && ritual.hasLightRay(blockEntity)) {
+                BlockPos pos = new BlockPos(blockEntity.blockToX, blockEntity.blockToY, blockEntity.blockToZ);
+                if (blockEntity.getLevel().getBlockEntity(pos) instanceof ILightBlockEntity lightTile) {
+                    Vec3 from = LightUtil.getLightLensPos(blockEntity.getBlockPos(), blockEntity.getLightLensPos());
                     Vec3 to = LightUtil.getLightLensPos(pos, lightTile.getLightLensPos());
 
                     double dX = to.x() - from.x();
@@ -75,55 +73,55 @@ public class CrystalRenderer implements BlockEntityRenderer<CrystalBlockEntity> 
 
                     from = from.add(-X, -Y, -Z);
 
-                    ms.pushPose();
-                    ms.translate(0.5F, 0.3125F, 0.5F);
+                    poseStack.pushPose();
+                    poseStack.translate(0.5F, 0.3125F, 0.5F);
                     Color color = new Color(0.886f, 0.811f, 0.549f);
-                    LightRayHitResult hitResult = LightUtil.getLightRayHitResult(crystal.getLevel(), crystal.getBlockPos(), from, to, 25f);
-                    LightUtil.renderLightRay(from, hitResult.getPosHit(), hitResult.getDistance() + rayDistance, 25f, color, partialTicks, ms);
-                    ms.popPose();
+                    LightRayHitResult hitResult = LightUtil.getLightRayHitResult(blockEntity.getLevel(), blockEntity.getBlockPos(), from, to, 25f);
+                    LightUtil.renderLightRay(from, hitResult.getPosHit(), hitResult.getDistance() + rayDistance, 25f, color, partialTicks, poseStack);
+                    poseStack.popPose();
                 }
             }
         }
 
-        if (!CrystalRitualUtil.isEmpty(ritual) && ritual.canStartWithCrystal(crystal)) {
-            ritual.render(crystal, partialTicks, ms, buffers, light, overlay);
+        if (!CrystalRitualUtil.isEmpty(ritual) && ritual.canStartWithCrystal(blockEntity)) {
+            ritual.render(blockEntity, partialTicks, poseStack, bufferSource, light, overlay);
         }
 
         if (WissenUtils.isCanRenderWissenWand()) {
             if (!CrystalRitualUtil.isEmpty(ritual)) {
-                CrystalRitualArea area = ritual.getArea(crystal);
-                ms.pushPose();
-                ms.translate(-area.getSizeFrom().x(), -area.getSizeFrom().y(), -area.getSizeFrom().z());
-                RenderUtils.renderBoxLines(new Vec3( area.getSizeFrom().x() + area.getSizeTo().x() + 1, area.getSizeFrom().y() + area.getSizeTo().y() + 1, area.getSizeFrom().z() + area.getSizeTo().z() + 1), RenderUtils.colorArea, partialTicks, ms);
-                ms.popPose();
+                CrystalRitualArea area = ritual.getArea(blockEntity);
+                poseStack.pushPose();
+                poseStack.translate(-area.getSizeFrom().x(), -area.getSizeFrom().y(), -area.getSizeFrom().z());
+                RenderUtils.renderBoxLines(new Vec3( area.getSizeFrom().x() + area.getSizeTo().x() + 1, area.getSizeFrom().y() + area.getSizeTo().y() + 1, area.getSizeFrom().z() + area.getSizeTo().z() + 1), RenderUtils.colorArea, partialTicks, poseStack);
+                poseStack.popPose();
             }
 
-            if (crystal.startRitual) {
-                ms.pushPose();
-                RenderUtils.renderBoxLines(new Vec3(1, 1, 1), crystal.getCrystalColor(), partialTicks, ms);
-                ms.popPose();
+            if (blockEntity.startRitual) {
+                poseStack.pushPose();
+                RenderUtils.renderBoxLines(new Vec3(1, 1, 1), blockEntity.getCrystalColor(), partialTicks, poseStack);
+                poseStack.popPose();
             }
 
-            if (crystal.isToBlock) {
-                ms.pushPose();
-                Vec3 lensPos = crystal.getLightLensPos();
-                ms.translate(lensPos.x(), lensPos.y(), lensPos.z());
-                BlockPos pos = new BlockPos(crystal.blockToX, crystal.blockToY, crystal.blockToZ);
-                if (crystal.getLevel().getBlockEntity(pos) instanceof ILightBlockEntity lightTile) {
-                    RenderUtils.renderConnectLine(LightUtil.getLightLensPos(crystal.getBlockPos(), crystal.getLightLensPos()), LightUtil.getLightLensPos(pos, lightTile.getLightLensPos()), RenderUtils.colorConnectTo, partialTicks, ms);
+            if (blockEntity.isToBlock) {
+                poseStack.pushPose();
+                Vec3 lensPos = blockEntity.getLightLensPos();
+                poseStack.translate(lensPos.x(), lensPos.y(), lensPos.z());
+                BlockPos pos = new BlockPos(blockEntity.blockToX, blockEntity.blockToY, blockEntity.blockToZ);
+                if (blockEntity.getLevel().getBlockEntity(pos) instanceof ILightBlockEntity lightTile) {
+                    RenderUtils.renderConnectLine(LightUtil.getLightLensPos(blockEntity.getBlockPos(), blockEntity.getLightLensPos()), LightUtil.getLightLensPos(pos, lightTile.getLightLensPos()), RenderUtils.colorConnectTo, partialTicks, poseStack);
                 }
-                ms.popPose();
+                poseStack.popPose();
             }
         }
     }
 
     @Override
-    public boolean shouldRenderOffScreen(CrystalBlockEntity pBlockEntity) {
+    public boolean shouldRenderOffScreen(CrystalBlockEntity blockEntity) {
         return true;
     }
 
     @Override
-    public boolean shouldRender(CrystalBlockEntity pBlockEntity, Vec3 pCameraPos) {
+    public boolean shouldRender(CrystalBlockEntity blockEntity, Vec3 cameraPos) {
         return true;
     }
 }

@@ -18,56 +18,54 @@ import net.minecraft.world.phys.Vec3;
 import java.util.Random;
 
 public class ItemSorterRenderer implements BlockEntityRenderer<ItemSorterBlockEntity> {
-
-    public ItemSorterRenderer() {}
-
+    
     @Override
-    public void render(ItemSorterBlockEntity sensor, float partialTicks, PoseStack ms, MultiBufferSource buffers, int light, int overlay) {
+    public void render(ItemSorterBlockEntity blockEntity, float partialTicks, PoseStack poseStack, MultiBufferSource bufferSource, int light, int overlay) {
         Random random = new Random();
-        random.setSeed(sensor.getBlockPos().asLong());
+        random.setSeed(blockEntity.getBlockPos().asLong());
 
         double ticks = (ClientTickHandler.ticksInGame + partialTicks) * 0.1F;
 
-        ms.pushPose();
-        ms.translate(0.5F, 0.5F, 0.5F);
-        ms.mulPose(Axis.YP.rotationDegrees((float) ((Math.sin(Math.toRadians(random.nextFloat() * 360) + ticks))) * 5F));
-        ms.mulPose(Axis.XP.rotationDegrees((float) ((Math.sin(Math.toRadians(random.nextFloat() * 360) + ticks))) * 5F));
-        ms.mulPose(Axis.ZP.rotationDegrees((float) ((Math.sin(Math.toRadians(random.nextFloat() * 360) + ticks))) * 5F));
+        poseStack.pushPose();
+        poseStack.translate(0.5F, 0.5F, 0.5F);
+        poseStack.mulPose(Axis.YP.rotationDegrees((float) ((Math.sin(Math.toRadians(random.nextFloat() * 360) + ticks))) * 5F));
+        poseStack.mulPose(Axis.XP.rotationDegrees((float) ((Math.sin(Math.toRadians(random.nextFloat() * 360) + ticks))) * 5F));
+        poseStack.mulPose(Axis.ZP.rotationDegrees((float) ((Math.sin(Math.toRadians(random.nextFloat() * 360) + ticks))) * 5F));
 
-        ms.mulPose(Axis.YP.rotationDegrees(sensor.getBlockRotate()));
-        ms.mulPose(Axis.XP.rotationDegrees(sensor.getBlockUpRotate()));
-        RenderUtil.renderCustomModel(((SensorBaseBlock) sensor.getBlockState().getBlock()).getModel(sensor.getBlockState()), ItemDisplayContext.FIXED, false, ms, buffers, light, overlay);
-        ms.popPose();
+        poseStack.mulPose(Axis.YP.rotationDegrees(blockEntity.getBlockRotate()));
+        poseStack.mulPose(Axis.XP.rotationDegrees(blockEntity.getBlockUpRotate()));
+        RenderUtil.renderCustomModel(((SensorBaseBlock) blockEntity.getBlockState().getBlock()).getModel(blockEntity.getBlockState()), ItemDisplayContext.FIXED, false, poseStack, bufferSource, light, overlay);
+        poseStack.popPose();
 
         if (WissenUtils.isCanRenderWissenWand()) {
-            Direction outputDirection = sensor.getBlockState().getValue(SensorBaseBlock.FACING);
-            BlockPos outputBlockpos = sensor.getBlockPos().relative(outputDirection);
+            Direction outputDirection = blockEntity.getBlockState().getValue(SensorBaseBlock.FACING);
+            BlockPos outputBlockpos = blockEntity.getBlockPos().relative(outputDirection);
 
-            Direction inputDirection = sensor.getBlockState().getValue(SensorBaseBlock.FACING).getOpposite();
-            BlockPos inputBlockpos = sensor.getBlockPos().relative(inputDirection);
+            Direction inputDirection = blockEntity.getBlockState().getValue(SensorBaseBlock.FACING).getOpposite();
+            BlockPos inputBlockpos = blockEntity.getBlockPos().relative(inputDirection);
 
-            switch (sensor.getBlockState().getValue(SensorBaseBlock.FACE)) {
+            switch (blockEntity.getBlockState().getValue(SensorBaseBlock.FACE)) {
                 case FLOOR:
-                    outputBlockpos = sensor.getBlockPos().above();
-                    inputBlockpos = sensor.getBlockPos().below();
+                    outputBlockpos = blockEntity.getBlockPos().above();
+                    inputBlockpos = blockEntity.getBlockPos().below();
                     break;
                 case WALL:
                     break;
                 case CEILING:
-                    outputBlockpos = sensor.getBlockPos().below();
-                    inputBlockpos = sensor.getBlockPos().above();
+                    outputBlockpos = blockEntity.getBlockPos().below();
+                    inputBlockpos = blockEntity.getBlockPos().above();
                     break;
             }
 
-            ms.pushPose();
-            ms.translate(sensor.getBlockPos().getX() - outputBlockpos.getX(), sensor.getBlockPos().getY() - outputBlockpos.getY(), sensor.getBlockPos().getZ() - outputBlockpos.getZ());
-            RenderUtils.renderBoxLines(new Vec3(1, 1, 1), RenderUtils.colorConnectFrom, partialTicks, ms);
-            ms.popPose();
+            poseStack.pushPose();
+            poseStack.translate(blockEntity.getBlockPos().getX() - outputBlockpos.getX(), blockEntity.getBlockPos().getY() - outputBlockpos.getY(), blockEntity.getBlockPos().getZ() - outputBlockpos.getZ());
+            RenderUtils.renderBoxLines(new Vec3(1, 1, 1), RenderUtils.colorConnectFrom, partialTicks, poseStack);
+            poseStack.popPose();
 
-            ms.pushPose();
-            ms.translate(sensor.getBlockPos().getX() - inputBlockpos.getX(), sensor.getBlockPos().getY() - inputBlockpos.getY(), sensor.getBlockPos().getZ() - inputBlockpos.getZ());
-            RenderUtils.renderBoxLines(new Vec3(1, 1, 1), RenderUtils.colorConnectTo, partialTicks, ms);
-            ms.popPose();
+            poseStack.pushPose();
+            poseStack.translate(blockEntity.getBlockPos().getX() - inputBlockpos.getX(), blockEntity.getBlockPos().getY() - inputBlockpos.getY(), blockEntity.getBlockPos().getZ() - inputBlockpos.getZ());
+            RenderUtils.renderBoxLines(new Vec3(1, 1, 1), RenderUtils.colorConnectTo, partialTicks, poseStack);
+            poseStack.popPose();
         }
     }
 }

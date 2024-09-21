@@ -17,10 +17,10 @@ public class SpellProjectileRenderer<T extends SpellProjectileEntity> extends En
     }
 
     @Override
-    public void render(SpellProjectileEntity entity, float entityYaw, float partialTicks, PoseStack stack, MultiBufferSource buffer, int light) {
+    public void render(SpellProjectileEntity entity, float entityYaw, float partialTicks, PoseStack poseStack, MultiBufferSource bufferSource, int light) {
         Spell spell = entity.getSpell();
         if (spell != null) {
-            spell.render(entity, entityYaw, partialTicks, stack, buffer, light);
+            spell.render(entity, entityYaw, partialTicks, poseStack, bufferSource, light);
         }
     }
 

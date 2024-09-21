@@ -23,21 +23,19 @@ import java.util.Random;
 
 public class ArcaneIteratorRenderer implements BlockEntityRenderer<ArcaneIteratorBlockEntity> {
 
-    public ArcaneIteratorRenderer() {}
-
     @Override
-    public void render(ArcaneIteratorBlockEntity iterator, float partialTicks, PoseStack ms, MultiBufferSource buffers, int light, int overlay) {
+    public void render(ArcaneIteratorBlockEntity blockEntity, float partialTicks, PoseStack poseStack, MultiBufferSource bufferSource, int light, int overlay) {
         Random random = new Random();
-        random.setSeed(iterator.getBlockPos().asLong());
+        random.setSeed(blockEntity.getBlockPos().asLong());
 
-        Minecraft mc = Minecraft.getInstance();
-        double ticks = (iterator.rotate + partialTicks);
+        Minecraft minecraft = Minecraft.getInstance();
+        double ticks = (blockEntity.rotate + partialTicks);
         double ticksOffset = (ClientTickHandler.ticksInGame + partialTicks) * 0.1F;
         double ticksUp = (ClientTickHandler.ticksInGame + partialTicks) * 4;
         ticksUp = (ticksUp) % 360;
 
-        if (!iterator.isWorks()) {
-            ticks = iterator.rotate;
+        if (!blockEntity.isWorks()) {
+            ticks = blockEntity.rotate;
         }
 
         float x = 0.15625F;
@@ -46,31 +44,31 @@ public class ArcaneIteratorRenderer implements BlockEntityRenderer<ArcaneIterato
         float offset = 1;
         float size = 1;
 
-        if (iterator.wissenInCraft > 0 && iterator.startCraft) {
-            if (iterator.offset > 0) {
-                offset = (iterator.offset + partialTicks) / 40F;
+        if (blockEntity.wissenInCraft > 0 && blockEntity.startCraft) {
+            if (blockEntity.offset > 0) {
+                offset = (blockEntity.offset + partialTicks) / 40F;
                 if (offset > 1) {
                     offset = 1;
                 }
                 offset = offset + 1;
             }
-            if (iterator.scale > 0) {
-                size = (iterator.scale + partialTicks) / 60F;
+            if (blockEntity.scale > 0) {
+                size = (blockEntity.scale + partialTicks) / 60F;
                 if (size > 1) {
                     size = 1;
                 }
                 size = 1 - size;
             }
         } else {
-            if (iterator.offset > 0) {
-                offset = (iterator.offset - partialTicks) / 40F;
+            if (blockEntity.offset > 0) {
+                offset = (blockEntity.offset - partialTicks) / 40F;
                 if (offset < 0) {
                     offset = 0;
                 }
                 offset = offset + 1;
             }
-            if (iterator.scale > 0) {
-                size = (iterator.scale - partialTicks) / 60F;
+            if (blockEntity.scale > 0) {
+                size = (blockEntity.scale - partialTicks) / 60F;
                 if (size < 0) {
                     size = 0;
                 }
@@ -81,33 +79,33 @@ public class ArcaneIteratorRenderer implements BlockEntityRenderer<ArcaneIterato
             size = 0;
         }
 
-        ms.pushPose();
-        ms.translate(0.5F, 0.5F + (Math.sin(Math.toRadians(ticksUp)) * 0.03125F), 0.5F);
-        ms.mulPose(Axis.YP.rotationDegrees((float) (random.nextFloat() * 360 + ticks)));
-        ms.mulPose(Axis.XP.rotationDegrees((float) (random.nextFloat() * 360 + ticks)));
-        ms.scale(size, size, size);
-        ms.mulPose(Axis.ZP.rotationDegrees((float) (random.nextFloat() * 360 + ticks)));
-        renderPiece(-x * offset, y * offset, -z * offset, 90F, 0F, size, iterator, partialTicks, ms, buffers, light, overlay);
-        renderPiece(x * offset, y * offset, -z * offset, 0F, 0F, size, iterator, partialTicks, ms, buffers, light, overlay);
-        renderPiece(-x * offset, y * offset, z * offset, 180F, 0F, size, iterator, partialTicks, ms, buffers, light, overlay);
-        renderPiece(x * offset, y * offset, z * offset, -90F, 0F, size, iterator, partialTicks, ms, buffers, light, overlay);
-        renderPiece(-x * offset, -y * offset, -z * offset, 90F, 90F, size, iterator, partialTicks, ms, buffers, light, overlay);
-        renderPiece(x * offset, -y * offset, -z * offset, 0F, 90F, size, iterator, partialTicks, ms, buffers, light, overlay);
-        renderPiece(-x * offset, -y * offset, z * offset, 180F, 90F, size, iterator, partialTicks, ms, buffers, light, overlay);
-        renderPiece(x * offset, -y * offset, z * offset, -90F, 90F, size, iterator, partialTicks, ms, buffers, light, overlay);
-        ms.popPose();
+        poseStack.pushPose();
+        poseStack.translate(0.5F, 0.5F + (Math.sin(Math.toRadians(ticksUp)) * 0.03125F), 0.5F);
+        poseStack.mulPose(Axis.YP.rotationDegrees((float) (random.nextFloat() * 360 + ticks)));
+        poseStack.mulPose(Axis.XP.rotationDegrees((float) (random.nextFloat() * 360 + ticks)));
+        poseStack.scale(size, size, size);
+        poseStack.mulPose(Axis.ZP.rotationDegrees((float) (random.nextFloat() * 360 + ticks)));
+        renderPiece(-x * offset, y * offset, -z * offset, 90F, 0F, size, blockEntity, partialTicks, poseStack, bufferSource, light, overlay);
+        renderPiece(x * offset, y * offset, -z * offset, 0F, 0F, size, blockEntity, partialTicks, poseStack, bufferSource, light, overlay);
+        renderPiece(-x * offset, y * offset, z * offset, 180F, 0F, size, blockEntity, partialTicks, poseStack, bufferSource, light, overlay);
+        renderPiece(x * offset, y * offset, z * offset, -90F, 0F, size, blockEntity, partialTicks, poseStack, bufferSource, light, overlay);
+        renderPiece(-x * offset, -y * offset, -z * offset, 90F, 90F, size, blockEntity, partialTicks, poseStack, bufferSource, light, overlay);
+        renderPiece(x * offset, -y * offset, -z * offset, 0F, 90F, size, blockEntity, partialTicks, poseStack, bufferSource, light, overlay);
+        renderPiece(-x * offset, -y * offset, z * offset, 180F, 90F, size, blockEntity, partialTicks, poseStack, bufferSource, light, overlay);
+        renderPiece(x * offset, -y * offset, z * offset, -90F, 90F, size, blockEntity, partialTicks, poseStack, bufferSource, light, overlay);
+        poseStack.popPose();
 
         if (WissenUtils.isCanRenderWissenWand()) {
-            ms.pushPose();
-            ms.translate(-5, -3, -5);
-            RenderUtils.renderBoxLines(new Vec3(11, 7, 11), RenderUtils.colorArea, partialTicks, ms);
-            ms.popPose();
+            poseStack.pushPose();
+            poseStack.translate(-5, -3, -5);
+            RenderUtils.renderBoxLines(new Vec3(11, 7, 11), RenderUtils.colorArea, partialTicks, poseStack);
+            poseStack.popPose();
 
-            if (!iterator.isWorks()) {
-                ms.pushPose();
-                ms.translate(0, -2, 0);
-                RenderUtils.renderBoxLines(new Vec3(1, 3, 1), RenderUtils.colorMissing, partialTicks, ms);
-                ms.popPose();
+            if (!blockEntity.isWorks()) {
+                poseStack.pushPose();
+                poseStack.translate(0, -2, 0);
+                RenderUtils.renderBoxLines(new Vec3(1, 3, 1), RenderUtils.colorMissing, partialTicks, poseStack);
+                poseStack.popPose();
             }
         }
 
@@ -115,49 +113,49 @@ public class ArcaneIteratorRenderer implements BlockEntityRenderer<ArcaneIterato
         VertexConsumer builder = bufferDelayed.getBuffer(FluffyFurRenderTypes.ADDITIVE);
 
         if ((1f - size) > 0) {
-            ms.pushPose();
+            poseStack.pushPose();
             List<Vec3> trailList = new ArrayList<>();
-            float xOffset = (float) (Math.cos(iterator.angleA) * Math.cos(iterator.angleB));
-            float yOffset = (float) (Math.sin(iterator.angleA) * Math.cos(iterator.angleB));
-            float zOffset = (float) Math.sin(iterator.angleB);
+            float xOffset = (float) (Math.cos(blockEntity.angleA) * Math.cos(blockEntity.angleB));
+            float yOffset = (float) (Math.sin(blockEntity.angleA) * Math.cos(blockEntity.angleB));
+            float zOffset = (float) Math.sin(blockEntity.angleB);
 
             float trailSize = (1f - size) * 1.1f;
             float trailWidth = (1f - size) * 0.3f;
 
-            ms.translate(0.5F, 0.5F, 0.5F);
+            poseStack.translate(0.5F, 0.5F, 0.5F);
             trailList.add(new Vec3(0, 0, 0));
             trailList.add(new Vec3(xOffset * trailSize, yOffset * trailSize, zOffset * trailSize));
 
-            RenderUtils.renderTrail(ms, builder, Vec3.ZERO, trailList, trailWidth, 0, 0.25f,0, 1.0f, new Color(0.807f, 0.800f, 0.639f), 8, false);
-            RenderUtils.renderTrail(ms, builder, Vec3.ZERO, trailList, trailWidth, 0, 0.5f,0,0.75f, new Color(0.611f, 0.352f, 0.447f), 8, false);
+            RenderUtils.renderTrail(poseStack, builder, Vec3.ZERO, trailList, trailWidth, 0, 0.25f,0, 1.0f, new Color(0.807f, 0.800f, 0.639f), 8, false);
+            RenderUtils.renderTrail(poseStack, builder, Vec3.ZERO, trailList, trailWidth, 0, 0.5f,0,0.75f, new Color(0.611f, 0.352f, 0.447f), 8, false);
 
             trailList.clear();
             trailList.add(new Vec3(0, 0, 0));
             trailList.add(new Vec3(xOffset * -trailSize, yOffset * -trailSize, zOffset * -trailSize));
 
-            RenderUtils.renderTrail(ms, builder, Vec3.ZERO, trailList, trailWidth, 0, 0.25f,0, 1.0f, new Color(0.807f, 0.800f, 0.639f), 8, false);
-            RenderUtils.renderTrail(ms, builder, Vec3.ZERO, trailList, trailWidth, 0, 0.5f,0,0.75f, new Color(0.611f, 0.352f, 0.447f), 8, false);
-            ms.popPose();
+            RenderUtils.renderTrail(poseStack, builder, Vec3.ZERO, trailList, trailWidth, 0, 0.25f,0, 1.0f, new Color(0.807f, 0.800f, 0.639f), 8, false);
+            RenderUtils.renderTrail(poseStack, builder, Vec3.ZERO, trailList, trailWidth, 0, 0.5f,0,0.75f, new Color(0.611f, 0.352f, 0.447f), 8, false);
+            poseStack.popPose();
         }
     }
 
-    public void renderPiece(float x, float y, float z, float yRot, float zRot, float size, ArcaneIteratorBlockEntity iterator, float partialTicks, PoseStack ms, MultiBufferSource buffers, int light, int overlay) {
-        ms.pushPose();
-        ms.translate(x, y, z);
-        ms.mulPose(Axis.YP.rotationDegrees(yRot));
-        ms.mulPose(Axis.ZP.rotationDegrees(-zRot));
-        ms.scale(size, size, size);
-        RenderUtil.renderCustomModel(WizardsRebornModels.ARCANE_ITERATOR_PIECE, ItemDisplayContext.FIXED, false, ms, buffers, light, overlay);
-        ms.popPose();
+    public void renderPiece(float x, float y, float z, float yRot, float zRot, float size, ArcaneIteratorBlockEntity iterator, float partialTicks, PoseStack poseStack, MultiBufferSource bufferSource, int light, int overlay) {
+        poseStack.pushPose();
+        poseStack.translate(x, y, z);
+        poseStack.mulPose(Axis.YP.rotationDegrees(yRot));
+        poseStack.mulPose(Axis.ZP.rotationDegrees(-zRot));
+        poseStack.scale(size, size, size);
+        RenderUtil.renderCustomModel(WizardsRebornModels.ARCANE_ITERATOR_PIECE, ItemDisplayContext.FIXED, false, poseStack, bufferSource, light, overlay);
+        poseStack.popPose();
     }
 
     @Override
-    public boolean shouldRenderOffScreen(ArcaneIteratorBlockEntity pBlockEntity) {
+    public boolean shouldRenderOffScreen(ArcaneIteratorBlockEntity blockEntity) {
         return true;
     }
 
     @Override
-    public boolean shouldRender(ArcaneIteratorBlockEntity pBlockEntity, Vec3 pCameraPos) {
+    public boolean shouldRender(ArcaneIteratorBlockEntity blockEntity, Vec3 cameraPos) {
         return true;
     }
 }

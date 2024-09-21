@@ -13,58 +13,56 @@ import net.minecraft.world.item.ItemDisplayContext;
 import net.minecraft.world.phys.Vec3;
 
 public class JewelerTableRenderer implements BlockEntityRenderer<JewelerTableBlockEntity> {
-
-    public JewelerTableRenderer() {}
-
+    
     @Override
-    public void render(JewelerTableBlockEntity table, float partialTicks, PoseStack ms, MultiBufferSource buffers, int light, int overlay) {
-        Minecraft mc = Minecraft.getInstance();
-        Vec3 pos = table.getBlockRotatePos();
+    public void render(JewelerTableBlockEntity blockEntity, float partialTicks, PoseStack poseStack, MultiBufferSource bufferSource, int light, int overlay) {
+        Minecraft minecraft = Minecraft.getInstance();
+        Vec3 pos = blockEntity.getBlockRotatePos();
         double ticks = (ClientTickHandler.ticksInGame + partialTicks) * 2;
         double ticksUp = (ClientTickHandler.ticksInGame + partialTicks) * 4;
         ticksUp = (ticksUp) % 360;
 
 
-        double ticksStone = table.stoneRotate;
-        if (table.stoneSpeed > 0) {
-            ticksStone = (table.stoneRotate + ((partialTicks) * table.stoneSpeed));
+        double ticksStone = blockEntity.stoneRotate;
+        if (blockEntity.stoneSpeed > 0) {
+            ticksStone = (blockEntity.stoneRotate + ((partialTicks) * blockEntity.stoneSpeed));
         }
 
-        ms.pushPose();
-        ms.translate(pos.x(), pos.y(), pos.z());
-        ms.mulPose(Axis.YP.rotationDegrees(table.getBlockRotate()));
-        ms.mulPose(Axis.XP.rotationDegrees((float) ticksStone));
-        RenderUtil.renderCustomModel(WizardsRebornModels.JEWELER_TABLE_STONE, ItemDisplayContext.FIXED, false, ms, buffers, light, overlay);
-        ms.popPose();
+        poseStack.pushPose();
+        poseStack.translate(pos.x(), pos.y(), pos.z());
+        poseStack.mulPose(Axis.YP.rotationDegrees(blockEntity.getBlockRotate()));
+        poseStack.mulPose(Axis.XP.rotationDegrees((float) ticksStone));
+        RenderUtil.renderCustomModel(WizardsRebornModels.JEWELER_TABLE_STONE, ItemDisplayContext.FIXED, false, poseStack, bufferSource, light, overlay);
+        poseStack.popPose();
 
-        ms.pushPose();
-        ms.translate(0.5F, 0.703125F, 0.5F);
-        ms.mulPose(Axis.YP.rotationDegrees(table.getBlockRotate()));
-        ms.mulPose(Axis.XP.rotationDegrees(90F));
-        ms.mulPose(Axis.ZP.rotationDegrees(-3F));
-        ms.translate(0, -0.0725, 0);
-        ms.scale(0.5F,0.5F,0.5F);
-        mc.getItemRenderer().renderStatic(table.itemHandler.getStackInSlot(0), ItemDisplayContext.FIXED, light, overlay, ms, buffers, table.getLevel(), 0);
-        ms.popPose();
+        poseStack.pushPose();
+        poseStack.translate(0.5F, 0.703125F, 0.5F);
+        poseStack.mulPose(Axis.YP.rotationDegrees(blockEntity.getBlockRotate()));
+        poseStack.mulPose(Axis.XP.rotationDegrees(90F));
+        poseStack.mulPose(Axis.ZP.rotationDegrees(-3F));
+        poseStack.translate(0, -0.0725, 0);
+        poseStack.scale(0.5F,0.5F,0.5F);
+        minecraft.getItemRenderer().renderStatic(blockEntity.itemHandler.getStackInSlot(0), ItemDisplayContext.FIXED, light, overlay, poseStack, bufferSource, blockEntity.getLevel(), 0);
+        poseStack.popPose();
 
-        ms.pushPose();
-        ms.translate(0.5F, 0.703125F + 0.03125F, 0.5F);
-        ms.mulPose(Axis.YP.rotationDegrees(table.getBlockRotate()));
-        ms.mulPose(Axis.XP.rotationDegrees(90F + 5F));
-        ms.mulPose(Axis.ZP.rotationDegrees(15F));
-        ms.translate(0.125F, -0.0625F, 0);
-        ms.scale(0.5F,0.5F,0.5F);
-        mc.getItemRenderer().renderStatic(table.itemHandler.getStackInSlot(1), ItemDisplayContext.FIXED, light, overlay, ms, buffers, table.getLevel(), 0);
-        ms.popPose();
+        poseStack.pushPose();
+        poseStack.translate(0.5F, 0.703125F + 0.03125F, 0.5F);
+        poseStack.mulPose(Axis.YP.rotationDegrees(blockEntity.getBlockRotate()));
+        poseStack.mulPose(Axis.XP.rotationDegrees(90F + 5F));
+        poseStack.mulPose(Axis.ZP.rotationDegrees(15F));
+        poseStack.translate(0.125F, -0.0625F, 0);
+        poseStack.scale(0.5F,0.5F,0.5F);
+        minecraft.getItemRenderer().renderStatic(blockEntity.itemHandler.getStackInSlot(1), ItemDisplayContext.FIXED, light, overlay, poseStack, bufferSource, blockEntity.getLevel(), 0);
+        poseStack.popPose();
 
-        ms.pushPose();
-        ms.translate(0.5F, 1F, 0.5F);
-        ms.mulPose(Axis.YP.rotationDegrees(table.getBlockRotate() + 90F));
-        ms.translate(0.125F, 0, 0);
-        ms.translate(0F, (float) (Math.sin(Math.toRadians(ticksUp)) * 0.03125F), 0F);
-        ms.mulPose(Axis.YP.rotationDegrees((float) ticks));
-        ms.scale(0.5F, 0.5F, 0.5F);
-        mc.getItemRenderer().renderStatic(table.itemOutputHandler.getStackInSlot(0), ItemDisplayContext.FIXED, light, overlay, ms, buffers, table.getLevel(), 0);
-        ms.popPose();
+        poseStack.pushPose();
+        poseStack.translate(0.5F, 1F, 0.5F);
+        poseStack.mulPose(Axis.YP.rotationDegrees(blockEntity.getBlockRotate() + 90F));
+        poseStack.translate(0.125F, 0, 0);
+        poseStack.translate(0F, (float) (Math.sin(Math.toRadians(ticksUp)) * 0.03125F), 0F);
+        poseStack.mulPose(Axis.YP.rotationDegrees((float) ticks));
+        poseStack.scale(0.5F, 0.5F, 0.5F);
+        minecraft.getItemRenderer().renderStatic(blockEntity.itemOutputHandler.getStackInSlot(0), ItemDisplayContext.FIXED, light, overlay, poseStack, bufferSource, blockEntity.getLevel(), 0);
+        poseStack.popPose();
     }
 }
