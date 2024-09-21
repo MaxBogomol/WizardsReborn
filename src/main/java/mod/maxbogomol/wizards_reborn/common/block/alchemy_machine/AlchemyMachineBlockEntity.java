@@ -13,7 +13,7 @@ import mod.maxbogomol.wizards_reborn.api.alchemy.SteamUtil;
 import mod.maxbogomol.wizards_reborn.api.wissen.ICooldownBlockEntity;
 import mod.maxbogomol.wizards_reborn.api.wissen.IItemResultBlockEntity;
 import mod.maxbogomol.wizards_reborn.api.wissen.IWissenWandFunctionalBlockEntity;
-import mod.maxbogomol.wizards_reborn.api.wissen.WissenUtils;
+import mod.maxbogomol.wizards_reborn.api.wissen.WissenUtil;
 import mod.maxbogomol.wizards_reborn.client.gui.container.AlchemyMachineContainer;
 import mod.maxbogomol.wizards_reborn.common.block.alchemy_boiler.AlchemyBoilerBlockEntity;
 import mod.maxbogomol.wizards_reborn.common.block.pipe.PipeBaseBlockEntity;
@@ -150,8 +150,8 @@ public class AlchemyMachineBlockEntity extends PipeBaseBlockEntity implements Ti
                             ItemStack output = recipe.get().getResultItem(RegistryAccess.EMPTY);
 
                             if (isCanCraft(inv, output, recipe.get(), isCanFluid)) {
-                                int addRemainCraft = WissenUtils.getAddWissenRemain(wissenIsCraft, 6, wissenInCraft);
-                                int removeRemain = WissenUtils.getRemoveWissenRemain(boiler.getWissen(), 6 - addRemainCraft);
+                                int addRemainCraft = WissenUtil.getAddWissenRemain(wissenIsCraft, 6, wissenInCraft);
+                                int removeRemain = WissenUtil.getRemoveWissenRemain(boiler.getWissen(), 6 - addRemainCraft);
 
                                 wissenIsCraft = wissenIsCraft + (6 - addRemainCraft - removeRemain);
                                 boiler.removeWissen(6 - addRemainCraft - removeRemain);

@@ -21,7 +21,7 @@ import mod.maxbogomol.wizards_reborn.common.recipe.CrystalInfusionRecipe;
 import mod.maxbogomol.wizards_reborn.registry.client.WizardsRebornParticles;
 import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornRecipes;
 import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornSounds;
-import mod.maxbogomol.wizards_reborn.util.RenderUtils;
+import mod.maxbogomol.wizards_reborn.util.WizardsRebornRenderUtil;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.core.BlockPos;
@@ -293,7 +293,7 @@ public class CrystalInfusionCrystalRitual extends CrystalRitual {
     @Override
     @OnlyIn(Dist.CLIENT)
     public void render(CrystalBlockEntity crystal, float partialTicks, PoseStack ms, MultiBufferSource buffers, int light, int overlay) {
-        Minecraft mc = Minecraft.getInstance();
+        Minecraft minecraft = Minecraft.getInstance();
         double ticks = (ClientTickHandler.ticksInGame + partialTicks) * 2;
         double ticksUp = (ClientTickHandler.ticksInGame + partialTicks) * 4;
         ticksUp = (ticksUp) % 360;
@@ -312,7 +312,7 @@ public class CrystalInfusionCrystalRitual extends CrystalRitual {
                 ms.translate(1.5F, 0F, 0F);
                 ms.mulPose(Axis.YP.rotationDegrees(90f));
                 ms.scale(0.5F, 0.5F, 0.5F);
-                mc.getItemRenderer().renderStatic(container.getItem(i), ItemDisplayContext.FIXED, light, overlay, ms, buffers, crystal.getLevel(), 0);
+                minecraft.getItemRenderer().renderStatic(container.getItem(i), ItemDisplayContext.FIXED, light, overlay, ms, buffers, crystal.getLevel(), 0);
                 ms.popPose();
             }
         }
@@ -323,7 +323,7 @@ public class CrystalInfusionCrystalRitual extends CrystalRitual {
             ms.translate(0F, (float) (Math.sin(Math.toRadians(ticksUp)) * 0.03125F), 0F);
             ms.mulPose(Axis.YP.rotationDegrees((float) ticks));
             ms.scale(0.5F, 0.5F, 0.5F);
-            mc.getItemRenderer().renderStatic(container.getItem(0), ItemDisplayContext.FIXED, light, overlay, ms, buffers, crystal.getLevel(), 0);
+            minecraft.getItemRenderer().renderStatic(container.getItem(0), ItemDisplayContext.FIXED, light, overlay, ms, buffers, crystal.getLevel(), 0);
             ms.popPose();
         }
 
@@ -370,8 +370,8 @@ public class CrystalInfusionCrystalRitual extends CrystalRitual {
 
                 ms.pushPose();
                 ms.translate(0.5F, 1F, 0.5F);
-                RenderUtils.renderTrail(ms, builder, Vec3.ZERO, trailList, 0, 0.15f, 0, 0.5f * fade, 1.0f, color, 8, true);
-                RenderUtils.renderTrail(ms, builder, Vec3.ZERO, trailList, 0, 0.15f, 0, 0.75f * fade, 0.5f, color, 8, true);
+                WizardsRebornRenderUtil.renderTrail(ms, builder, Vec3.ZERO, trailList, 0, 0.15f, 0, 0.5f * fade, 1.0f, color, 8, true);
+                WizardsRebornRenderUtil.renderTrail(ms, builder, Vec3.ZERO, trailList, 0, 0.15f, 0, 0.75f * fade, 0.5f, color, 8, true);
                 ms.popPose();
             }
         }

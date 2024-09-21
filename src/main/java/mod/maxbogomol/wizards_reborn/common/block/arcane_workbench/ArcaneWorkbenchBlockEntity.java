@@ -116,8 +116,8 @@ public class ArcaneWorkbenchBlockEntity extends NameableBlockEntityBase implemen
                             level.playSound(WizardsReborn.proxy.getPlayer(), getBlockPos(), WizardsRebornSounds.ARCANE_WORKBENCH_START.get(), SoundSource.BLOCKS, 1f, 1f);
                         }
 
-                        int addRemainCraft = WissenUtils.getAddWissenRemain(wissenIsCraft, getWissenPerTick(), wissenInCraft);
-                        int removeRemain = WissenUtils.getRemoveWissenRemain(getWissen(), getWissenPerTick() - addRemainCraft);
+                        int addRemainCraft = WissenUtil.getAddWissenRemain(wissenIsCraft, getWissenPerTick(), wissenInCraft);
+                        int removeRemain = WissenUtil.getRemoveWissenRemain(getWissen(), getWissenPerTick() - addRemainCraft);
 
                         wissenIsCraft = wissenIsCraft + (getWissenPerTick() - addRemainCraft - removeRemain);
                         removeWissen(getWissenPerTick() - addRemainCraft - removeRemain);

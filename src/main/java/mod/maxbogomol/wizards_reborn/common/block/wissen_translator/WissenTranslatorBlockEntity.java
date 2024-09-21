@@ -13,7 +13,7 @@ import mod.maxbogomol.wizards_reborn.WizardsReborn;
 import mod.maxbogomol.wizards_reborn.api.wissen.ICooldownBlockEntity;
 import mod.maxbogomol.wizards_reborn.api.wissen.IWissenBlockEntity;
 import mod.maxbogomol.wizards_reborn.api.wissen.IWissenWandControlledBlockEntity;
-import mod.maxbogomol.wizards_reborn.api.wissen.WissenUtils;
+import mod.maxbogomol.wizards_reborn.api.wissen.WissenUtil;
 import mod.maxbogomol.wizards_reborn.common.block.ArcaneLumosBlock;
 import mod.maxbogomol.wizards_reborn.common.config.Config;
 import mod.maxbogomol.wizards_reborn.common.item.equipment.WissenWandItem;
@@ -93,8 +93,8 @@ public class WissenTranslatorBlockEntity extends ExposedBlockSimpleInventory imp
                     BlockEntity blockEntity = level.getBlockEntity(new BlockPos(blockToX, blockToY, blockToZ));
                     if (blockEntity instanceof IWissenBlockEntity wissenBlockEntity) {
                         if (wissenBlockEntity.canReceiveWissen() && (cooldown <= 0) && canWork()) {
-                            int removeRemain = WissenUtils.getRemoveWissenRemain(getWissen(), getWissenPerReceive());
-                            int addRemain = WissenUtils.getAddWissenRemain(wissenBlockEntity.getWissen(), getWissenPerReceive() - removeRemain, wissenBlockEntity.getMaxWissen());
+                            int removeRemain = WissenUtil.getRemoveWissenRemain(getWissen(), getWissenPerReceive());
+                            int addRemain = WissenUtil.getAddWissenRemain(wissenBlockEntity.getWissen(), getWissenPerReceive() - removeRemain, wissenBlockEntity.getMaxWissen());
 
                             if ((getWissenPerReceive() - removeRemain - addRemain) > 0) {
                                 removeWissen(getWissenPerReceive() - removeRemain - addRemain);
@@ -121,8 +121,8 @@ public class WissenTranslatorBlockEntity extends ExposedBlockSimpleInventory imp
                     BlockEntity blockEntity = level.getBlockEntity(new BlockPos(blockFromX, blockFromY, blockFromZ));
                     if (blockEntity instanceof IWissenBlockEntity wissenBlockEntity) {
                         if (wissenBlockEntity.canSendWissen() && (cooldown <= 0) && canWork()) {
-                            int addRemain = WissenUtils.getAddWissenRemain(getWissen(), getWissenPerReceive(), getMaxWissen());
-                            int removeRemain = WissenUtils.getRemoveWissenRemain(wissenBlockEntity.getWissen(), getWissenPerReceive() - addRemain);
+                            int addRemain = WissenUtil.getAddWissenRemain(getWissen(), getWissenPerReceive(), getMaxWissen());
+                            int removeRemain = WissenUtil.getRemoveWissenRemain(wissenBlockEntity.getWissen(), getWissenPerReceive() - addRemain);
 
                             if ((getWissenPerReceive() - removeRemain - addRemain) > 0) {
                                 wissenBlockEntity.removeWissen(getWissenPerReceive() - removeRemain - addRemain);
@@ -411,7 +411,7 @@ public class WissenTranslatorBlockEntity extends ExposedBlockSimpleInventory imp
                                 (Math.abs(blockZ) % 1F > 0.15F && Math.abs(blockZ) % 1F <= 0.85F)) {
                             IWissenBlockEntity wissenBlockEntity = (IWissenBlockEntity) blockEntity;
 
-                            int addRemain = WissenUtils.getAddWissenRemain(wissenBlockEntity.getWissen(), tag.getInt("wissen"), wissenBlockEntity.getMaxWissen());
+                            int addRemain = WissenUtil.getAddWissenRemain(wissenBlockEntity.getWissen(), tag.getInt("wissen"), wissenBlockEntity.getMaxWissen());
                             wissenBlockEntity.addWissen(tag.getInt("wissen") - addRemain);
                             level.playSound(WizardsReborn.proxy.getPlayer(), X, Y, Z, WizardsRebornSounds.WISSEN_TRANSFER.get(), SoundSource.BLOCKS, 0.1f, (float) (1f + ((random.nextFloat() - 0.5D) / 2)));
 

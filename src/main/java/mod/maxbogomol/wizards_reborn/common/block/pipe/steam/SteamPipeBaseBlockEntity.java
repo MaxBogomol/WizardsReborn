@@ -11,7 +11,7 @@ import mod.maxbogomol.wizards_reborn.api.alchemy.ISteamBlockEntity;
 import mod.maxbogomol.wizards_reborn.api.alchemy.ISteamPipePriority;
 import mod.maxbogomol.wizards_reborn.api.alchemy.PipePriorityMap;
 import mod.maxbogomol.wizards_reborn.api.alchemy.SteamUtil;
-import mod.maxbogomol.wizards_reborn.api.wissen.WissenUtils;
+import mod.maxbogomol.wizards_reborn.api.wissen.WissenUtil;
 import mod.maxbogomol.wizards_reborn.common.block.pipe.PipeBaseBlockEntity;
 import mod.maxbogomol.wizards_reborn.common.item.equipment.WissenWandItem;
 import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornSounds;
@@ -175,9 +175,9 @@ public abstract class SteamPipeBaseBlockEntity extends PipeBaseBlockEntity imple
 
     @OnlyIn(Dist.CLIENT)
     public void wissenWandEffect() {
-        Minecraft mc = Minecraft.getInstance();
+        Minecraft minecraft = Minecraft.getInstance();
 
-        Player player = mc.player;
+        Player player = minecraft.player;
         ItemStack main = player.getMainHandItem();
         ItemStack offhand = player.getOffhandItem();
         boolean renderWand = false;
@@ -214,7 +214,7 @@ public abstract class SteamPipeBaseBlockEntity extends PipeBaseBlockEntity imple
     public boolean pushSteam(int amount, Direction facing) {
         BlockEntity blockEntity = level.getBlockEntity(getBlockPos().relative(facing));
         if (blockEntity instanceof ISteamBlockEntity steamBlockEntity) {
-            int steam_remain = WissenUtils.getRemoveWissenRemain(steam, amount);
+            int steam_remain = WissenUtil.getRemoveWissenRemain(steam, amount);
             steam_remain = amount - steam_remain;
             int addRemain = SteamUtil.getAddSteamRemain(steamBlockEntity.getSteam(), steam_remain, steamBlockEntity.getMaxSteam());
             steam_remain = steam_remain - addRemain;

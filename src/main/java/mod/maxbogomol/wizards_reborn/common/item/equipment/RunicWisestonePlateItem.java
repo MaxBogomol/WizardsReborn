@@ -3,21 +3,19 @@ package mod.maxbogomol.wizards_reborn.common.item.equipment;
 import com.mojang.blaze3d.vertex.PoseStack;
 import mod.maxbogomol.fluffy_fur.FluffyFur;
 import mod.maxbogomol.fluffy_fur.client.event.ClientTickHandler;
+import mod.maxbogomol.fluffy_fur.client.render.RenderBuilder;
 import mod.maxbogomol.fluffy_fur.common.item.IGuiParticleItem;
+import mod.maxbogomol.fluffy_fur.registry.client.FluffyFurRenderTypes;
 import mod.maxbogomol.fluffy_fur.util.ColorUtil;
+import mod.maxbogomol.fluffy_fur.util.RenderUtil;
 import mod.maxbogomol.wizards_reborn.api.crystalritual.CrystalRitual;
 import mod.maxbogomol.wizards_reborn.api.crystalritual.CrystalRitualUtil;
 import mod.maxbogomol.wizards_reborn.api.crystalritual.CrystalRituals;
 import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornCrystalRituals;
-import mod.maxbogomol.wizards_reborn.util.RenderUtils;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.color.item.ItemColor;
-import net.minecraft.client.renderer.MultiBufferSource;
-import net.minecraft.client.renderer.texture.TextureAtlas;
-import net.minecraft.client.renderer.texture.TextureAtlasSprite;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.Style;
-import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.Mth;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.Item;
@@ -94,7 +92,7 @@ public class RunicWisestonePlateItem extends Item implements IGuiParticleItem {
 
     @Override
     @OnlyIn(Dist.CLIENT)
-    public void renderParticle(PoseStack pose, LivingEntity entity, Level level, ItemStack stack, int x, int y, int seed, int guiOffset) {
+    public void renderParticle(PoseStack poseStack, LivingEntity entity, Level level, ItemStack stack, int x, int y, int seed, int guiOffset) {
         CrystalRitual ritual = CrystalRitualUtil.getCrystalRitual(stack);
         if (!CrystalRitualUtil.isEmpty(ritual)) {
             Color color = ritual.getColor();
@@ -102,27 +100,20 @@ public class RunicWisestonePlateItem extends Item implements IGuiParticleItem {
 
             float ticks = (ClientTickHandler.ticksInGame + Minecraft.getInstance().getPartialTick()) + (ii * 10);
             float alpha = (float) (0.1f + Math.abs(Math.sin(Math.toRadians(ticks)) * 0.15f));
-            float r = color.getRed() / 255f;
-            float g = color.getGreen() / 255f;
-            float b = color.getBlue() / 255f;
-            
-            RenderUtils.startGuiParticle();
-            MultiBufferSource.BufferSource buffersource = Minecraft.getInstance().renderBuffers().bufferSource();
-
-            TextureAtlasSprite wisp = Minecraft.getInstance().getTextureAtlas(TextureAtlas.LOCATION_BLOCKS).apply(new ResourceLocation(FluffyFur.MOD_ID, "particle/wisp"));
 
             for (int i = 0; i < 45; i++) {
-                pose.pushPose();
+                poseStack.pushPose();
                 float offset = (float) (Math.abs(Math.sin(Math.toRadians(i * 4 + (ticks * 2f)))));
                 offset = (offset - 0.25f) * (1 / 0.75f);
                 if (offset < 0) offset = 0;
-                pose.translate(x + 8.5 + (Math.sin(Math.toRadians(i * 8)) * 7.5), y + 8 + (Math.cos(Math.toRadians(i * 8)) * 2) + (Math.sin(Math.toRadians(i * 8 * 2 + ticks)) * 2), 100 + (100 * Math.cos(Math.toRadians(i * 8))));
-                RenderUtils.spriteGlowQuadCenter(pose, buffersource, 0, 0, 4f * offset, 4f * offset, wisp.getU0(), wisp.getU1(), wisp.getV0(), wisp.getV1(), r, g, b, alpha);
-                buffersource.endBatch();
-                pose.popPose();
+                poseStack.translate(x + 8.5 + (Math.sin(Math.toRadians(i * 8)) * 7.5), y + 8 + (Math.cos(Math.toRadians(i * 8)) * 2) + (Math.sin(Math.toRadians(i * 8 * 2 + ticks)) * 2), 100 + (100 * Math.cos(Math.toRadians(i * 8))));
+                RenderBuilder.create().setRenderType(FluffyFurRenderTypes.ADDITIVE_TEXTURE)
+                        .setUV(RenderUtil.getSprite(FluffyFur.MOD_ID, "particle/wisp"))
+                        .setColor(color).setAlpha(alpha)
+                        .renderCenteredQuad(poseStack, 2f * offset)
+                        .endBatch();
+                poseStack.popPose();
             }
-
-            RenderUtils.endGuiParticle();
         }
     }
 }

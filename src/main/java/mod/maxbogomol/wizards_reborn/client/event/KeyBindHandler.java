@@ -70,14 +70,14 @@ public class KeyBindHandler {
     }
 
     public static boolean arcaneWandMenu() {
-        Minecraft mc = Minecraft.getInstance();
-        Player player = mc.player;
+        Minecraft minecraft = Minecraft.getInstance();
+        Player player = minecraft.player;
 
-        ItemStack main = mc.player.getMainHandItem();
-        ItemStack offhand = mc.player.getOffhandItem();
+        ItemStack main = minecraft.player.getMainHandItem();
+        ItemStack offhand = minecraft.player.getOffhandItem();
         boolean open = false;
         boolean hand = true;
-        ItemStack stack = mc.player.getMainHandItem();
+        ItemStack stack = minecraft.player.getMainHandItem();
 
         if (!main.isEmpty() && main.getItem() instanceof ArcaneWandItem) {
             open=true;
@@ -107,10 +107,10 @@ public class KeyBindHandler {
     }
 
     public static boolean wissenWandMenu() {
-        Minecraft mc = Minecraft.getInstance();
+        Minecraft minecraft = Minecraft.getInstance();
 
-        ItemStack main = mc.player.getMainHandItem();
-        ItemStack offhand = mc.player.getOffhandItem();
+        ItemStack main = minecraft.player.getMainHandItem();
+        ItemStack offhand = minecraft.player.getOffhandItem();
         boolean open = false;
 
         if (!main.isEmpty() && main.getItem() instanceof WissenWandItem) {
@@ -130,9 +130,9 @@ public class KeyBindHandler {
     }
 
     public static void bagMenu() {
-        Minecraft mc = Minecraft.getInstance();
-        List<ItemStack> items = mc.player.inventoryMenu.getItems();
-        List<SlotResult> curioSlots = CuriosApi.getCuriosInventory(mc.player).resolve().get().findCurios();
+        Minecraft minecraft = Minecraft.getInstance();
+        List<ItemStack> items = minecraft.player.inventoryMenu.getItems();
+        List<SlotResult> curioSlots = CuriosApi.getCuriosInventory(minecraft.player).resolve().get().findCurios();
         for (SlotResult slot : curioSlots) {
             if (slot.stack() != null) {
                 items.add(slot.stack());
@@ -157,15 +157,15 @@ public class KeyBindHandler {
     }
 
     public static void spellsToggle(int key) {
-        Minecraft mc = Minecraft.getInstance();
-        Player player = mc.player;
+        Minecraft minecraft = Minecraft.getInstance();
+        Player player = minecraft.player;
 
         if (player != null) {
-            ItemStack main = mc.player.getMainHandItem();
-            ItemStack offhand = mc.player.getOffhandItem();
+            ItemStack main = minecraft.player.getMainHandItem();
+            ItemStack offhand = minecraft.player.getOffhandItem();
             boolean open = false;
             boolean hand = true;
-            ItemStack stack = mc.player.getMainHandItem();
+            ItemStack stack = minecraft.player.getMainHandItem();
 
             if (!main.isEmpty() && main.getItem() instanceof ArcaneWandItem) {
                 open = true;

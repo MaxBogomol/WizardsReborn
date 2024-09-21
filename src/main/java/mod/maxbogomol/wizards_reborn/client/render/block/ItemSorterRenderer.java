@@ -4,10 +4,10 @@ import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.math.Axis;
 import mod.maxbogomol.fluffy_fur.client.event.ClientTickHandler;
 import mod.maxbogomol.fluffy_fur.util.RenderUtil;
-import mod.maxbogomol.wizards_reborn.api.wissen.WissenUtils;
+import mod.maxbogomol.wizards_reborn.api.wissen.WissenUtil;
 import mod.maxbogomol.wizards_reborn.common.block.sensor.SensorBaseBlock;
 import mod.maxbogomol.wizards_reborn.common.block.sensor.item_sorter.ItemSorterBlockEntity;
-import mod.maxbogomol.wizards_reborn.util.RenderUtils;
+import mod.maxbogomol.wizards_reborn.util.WizardsRebornRenderUtil;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.blockentity.BlockEntityRenderer;
 import net.minecraft.core.BlockPos;
@@ -37,7 +37,7 @@ public class ItemSorterRenderer implements BlockEntityRenderer<ItemSorterBlockEn
         RenderUtil.renderCustomModel(((SensorBaseBlock) blockEntity.getBlockState().getBlock()).getModel(blockEntity.getBlockState()), ItemDisplayContext.FIXED, false, poseStack, bufferSource, light, overlay);
         poseStack.popPose();
 
-        if (WissenUtils.isCanRenderWissenWand()) {
+        if (WissenUtil.isCanRenderWissenWand()) {
             Direction outputDirection = blockEntity.getBlockState().getValue(SensorBaseBlock.FACING);
             BlockPos outputBlockpos = blockEntity.getBlockPos().relative(outputDirection);
 
@@ -59,12 +59,12 @@ public class ItemSorterRenderer implements BlockEntityRenderer<ItemSorterBlockEn
 
             poseStack.pushPose();
             poseStack.translate(blockEntity.getBlockPos().getX() - outputBlockpos.getX(), blockEntity.getBlockPos().getY() - outputBlockpos.getY(), blockEntity.getBlockPos().getZ() - outputBlockpos.getZ());
-            RenderUtils.renderBoxLines(new Vec3(1, 1, 1), RenderUtils.colorConnectFrom, partialTicks, poseStack);
+            WizardsRebornRenderUtil.renderBoxLines(new Vec3(1, 1, 1), WizardsRebornRenderUtil.colorConnectFrom, partialTicks, poseStack);
             poseStack.popPose();
 
             poseStack.pushPose();
             poseStack.translate(blockEntity.getBlockPos().getX() - inputBlockpos.getX(), blockEntity.getBlockPos().getY() - inputBlockpos.getY(), blockEntity.getBlockPos().getZ() - inputBlockpos.getZ());
-            RenderUtils.renderBoxLines(new Vec3(1, 1, 1), RenderUtils.colorConnectTo, partialTicks, poseStack);
+            WizardsRebornRenderUtil.renderBoxLines(new Vec3(1, 1, 1), WizardsRebornRenderUtil.colorConnectTo, partialTicks, poseStack);
             poseStack.popPose();
         }
     }

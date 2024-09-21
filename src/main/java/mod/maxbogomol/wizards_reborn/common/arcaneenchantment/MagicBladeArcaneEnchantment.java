@@ -5,7 +5,7 @@ import mod.maxbogomol.wizards_reborn.api.arcaneenchantment.ArcaneEnchantment;
 import mod.maxbogomol.wizards_reborn.api.arcaneenchantment.ArcaneEnchantmentType;
 import mod.maxbogomol.wizards_reborn.api.arcaneenchantment.ArcaneEnchantmentUtil;
 import mod.maxbogomol.wizards_reborn.api.arcaneenchantment.IArcaneItem;
-import mod.maxbogomol.wizards_reborn.api.wissen.WissenUtils;
+import mod.maxbogomol.wizards_reborn.api.wissen.WissenUtil;
 import mod.maxbogomol.wizards_reborn.registry.common.damage.WizardsRebornDamage;
 import mod.maxbogomol.wizards_reborn.common.network.MagicBladeEffectPacket;
 import mod.maxbogomol.wizards_reborn.common.network.PacketHandler;
@@ -58,17 +58,17 @@ public class MagicBladeArcaneEnchantment extends ArcaneEnchantment {
                     int enchantmentLevel = ArcaneEnchantmentUtil.getArcaneEnchantment(stack, WizardsRebornArcaneEnchantments.MAGIC_BLADE);
 
                     if (enchantmentLevel > 0 && random.nextFloat() < (getChanceDefault(stack) + ((enchantmentLevel - 1) * getChancePerLevel(stack)))) {
-                        float costModifier = WissenUtils.getWissenCostModifierWithDiscount(player);
-                        List<ItemStack> items = WissenUtils.getWissenItemsNoneAndStorage(WissenUtils.getWissenItemsCurios(player));
-                        int wissen = WissenUtils.getWissenInItems(items);
+                        float costModifier = WissenUtil.getWissenCostModifierWithDiscount(player);
+                        List<ItemStack> items = WissenUtil.getWissenItemsNoneAndStorage(WissenUtil.getWissenItemsCurios(player));
+                        int wissen = WissenUtil.getWissenInItems(items);
                         int cost = (int) (40 + ((enchantmentLevel - 1) * 15) * (1 - costModifier));
                         if (cost <= 0) {
                             cost = 1;
                         }
 
-                        if (WissenUtils.canRemoveWissen(wissen, cost)) {
+                        if (WissenUtil.canRemoveWissen(wissen, cost)) {
                             AttributeInstance attr = attacker.getAttribute(WizardsRebornAttributes.ARCANE_DAMAGE.get());
-                            WissenUtils.removeWissenFromWissenItems(items, cost);
+                            WissenUtil.removeWissenFromWissenItems(items, cost);
                             target.invulnerableTime = 0;
                             target.hurt(new DamageSource(WizardsRebornDamage.create(target.level(), WizardsRebornDamage.ARCANE_MAGIC).typeHolder(), player), (1.0f * enchantmentLevel) + (float) attr.getValue());
                             target.level().playSound(WizardsReborn.proxy.getPlayer(), target.getOnPos(), WizardsRebornSounds.CRYSTAL_HIT.get(), SoundSource.PLAYERS, 1.3f, (float) (1.0f + ((random.nextFloat() - 0.5D) / 3)));

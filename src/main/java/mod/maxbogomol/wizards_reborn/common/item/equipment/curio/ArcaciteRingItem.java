@@ -4,7 +4,7 @@ import com.google.common.collect.LinkedHashMultimap;
 import com.google.common.collect.Multimap;
 import mod.maxbogomol.wizards_reborn.api.wissen.WissenItemType;
 import mod.maxbogomol.wizards_reborn.api.wissen.WissenItemUtil;
-import mod.maxbogomol.wizards_reborn.api.wissen.WissenUtils;
+import mod.maxbogomol.wizards_reborn.api.wissen.WissenUtil;
 import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornAttributes;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.entity.ai.attributes.Attribute;
@@ -63,7 +63,7 @@ public class ArcaciteRingItem extends BaseWissenCurioItem {
             if (slotContext.entity() instanceof Player player) {
                 if (slotContext.entity().getHealth() < slotContext.entity().getMaxHealth()) {
                     if (slotContext.entity().tickCount % 120 == 0) {
-                        float costModifier = WissenUtils.getWissenCostModifierWithDiscount(player);
+                        float costModifier = WissenUtil.getWissenCostModifierWithDiscount(player);
                         int cost = (int) (12 * costModifier);
                         if (cost <= 0) {
                             cost = 1;

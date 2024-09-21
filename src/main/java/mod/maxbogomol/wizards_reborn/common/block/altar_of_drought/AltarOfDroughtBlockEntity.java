@@ -58,7 +58,7 @@ public class AltarOfDroughtBlockEntity extends ExposedBlockSimpleInventory imple
                 if (!getItemHandler().getItem(0).isEmpty()) {
                     ItemStack stack = getItemHandler().getItem(0);
                     if (stack.getItem() instanceof IWissenItem item) {
-                        int wissen_remain = WissenUtils.getRemoveWissenRemain(wissen, 50);
+                        int wissen_remain = WissenUtil.getRemoveWissenRemain(wissen, 50);
                         wissen_remain = 50 - wissen_remain;
                         WissenItemUtil.existWissen(stack);
                         int item_wissen_remain = WissenItemUtil.getAddWissenRemain(stack, wissen_remain, item.getMaxWissen());

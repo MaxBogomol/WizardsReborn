@@ -13,7 +13,7 @@ import mod.maxbogomol.wizards_reborn.common.network.PacketHandler;
 import mod.maxbogomol.wizards_reborn.common.network.spell.RaySpellEffectPacket;
 import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornEntities;
 import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornSounds;
-import mod.maxbogomol.wizards_reborn.util.RenderUtils;
+import mod.maxbogomol.wizards_reborn.util.WizardsRebornRenderUtil;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
@@ -328,10 +328,10 @@ public class RaySpell extends Spell {
         if (width < 0f) width = 0f;
 
         float distance = (float) Math.sqrt(Math.pow(entity.getX() - ray.getLocation().x, 2) + Math.pow(entity.getY() - ray.getLocation().y, 2) + Math.pow(entity.getZ() - ray.getLocation().z, 2));
-        RenderUtils.ray(stack, bufferDelayed, 0.1f * width, (distance - offset) * width, Mth.lerp(distance / getRayDistance(), 1f, 0.5f), sr, sg, sb, 1, sr, sg, sb, 0.1F);
+        WizardsRebornRenderUtil.ray(stack, bufferDelayed, 0.1f * width, (distance - offset) * width, Mth.lerp(distance / getRayDistance(), 1f, 0.5f), sr, sg, sb, 1, sr, sg, sb, 0.1F);
         stack.translate(-0.05f, 0, 0);
         stack.mulPose(Axis.XP.rotationDegrees(-(entity.tickCount + partialTicks) * 10f));
-        RenderUtils.ray(stack, bufferDelayed, 0.15f * width, (distance - offset + 0.1f) * width, Mth.lerp(distance / getRayDistance(), 1f, 0.5f), r, g, b, 0.5F, r, g, b, 0.05F);
+        WizardsRebornRenderUtil.ray(stack, bufferDelayed, 0.15f * width, (distance - offset + 0.1f) * width, Mth.lerp(distance / getRayDistance(), 1f, 0.5f), r, g, b, 0.5F, r, g, b, 0.05F);
 
         stack.popPose();
     }

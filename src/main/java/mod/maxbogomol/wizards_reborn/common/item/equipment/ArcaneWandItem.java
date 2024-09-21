@@ -1,13 +1,14 @@
 package mod.maxbogomol.wizards_reborn.common.item.equipment;
 
-import com.mojang.blaze3d.platform.GlStateManager;
 import com.mojang.blaze3d.systems.RenderSystem;
 import com.mojang.blaze3d.vertex.PoseStack;
 import mod.maxbogomol.fluffy_fur.client.animation.ItemAnimation;
+import mod.maxbogomol.fluffy_fur.client.event.ClientTickHandler;
+import mod.maxbogomol.fluffy_fur.client.render.RenderBuilder;
 import mod.maxbogomol.fluffy_fur.common.item.ICustomAnimationItem;
 import mod.maxbogomol.fluffy_fur.common.item.IGuiParticleItem;
 import mod.maxbogomol.fluffy_fur.common.item.ItemBackedInventory;
-import mod.maxbogomol.fluffy_fur.registry.client.FluffyFurShaders;
+import mod.maxbogomol.fluffy_fur.registry.client.FluffyFurRenderTypes;
 import mod.maxbogomol.fluffy_fur.util.ColorUtil;
 import mod.maxbogomol.wizards_reborn.WizardsReborn;
 import mod.maxbogomol.wizards_reborn.api.crystal.CrystalStat;
@@ -22,13 +23,10 @@ import mod.maxbogomol.wizards_reborn.api.wissen.WissenItemUtil;
 import mod.maxbogomol.wizards_reborn.client.config.ClientConfig;
 import mod.maxbogomol.wizards_reborn.common.item.CrystalItem;
 import mod.maxbogomol.wizards_reborn.util.NumericalUtil;
-import mod.maxbogomol.wizards_reborn.util.RenderUtils;
 import net.minecraft.ChatFormatting;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Font;
 import net.minecraft.client.gui.GuiGraphics;
-import net.minecraft.client.renderer.GameRenderer;
-import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.core.Direction;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
@@ -363,10 +361,10 @@ public class ArcaneWandItem extends Item implements IWissenItem, ICustomAnimatio
 
     @OnlyIn(Dist.CLIENT)
     public static void drawWandGui(GuiGraphics gui) {
-        Minecraft mc = Minecraft.getInstance();
-        Player player = mc.player;
-        ItemStack main = mc.player.getMainHandItem();
-        ItemStack offhand = mc.player.getOffhandItem();
+        Minecraft minecraft = Minecraft.getInstance();
+        Player player = minecraft.player;
+        ItemStack main = minecraft.player.getMainHandItem();
+        ItemStack offhand = minecraft.player.getOffhandItem();
 
         boolean isMain = false;
         boolean isOff = false;
@@ -578,7 +576,7 @@ public class ArcaneWandItem extends Item implements IWissenItem, ICustomAnimatio
 
     @OnlyIn(Dist.CLIENT)
     public static void drawBar(GuiGraphics gui, int x, int y, boolean horizontal, boolean right, boolean showEmpty, boolean reverse) {
-        Minecraft mc = Minecraft.getInstance();
+        Minecraft minecraft = Minecraft.getInstance();
         int currentSpellInSet = getCurrentSpellInSet(showEmpty, reverse);
 
         int x1 = 18;
@@ -641,7 +639,7 @@ public class ArcaneWandItem extends Item implements IWissenItem, ICustomAnimatio
         for (Spell spellI : spells) {
             ResourceLocation resource = new ResourceLocation(WizardsReborn.MOD_ID, "textures/gui/arcanemicon/research.png");
             if (spellI != null) {
-                if (!KnowledgeUtil.isSpell(mc.player, spellI)) {
+                if (!KnowledgeUtil.isSpell(minecraft.player, spellI)) {
                     resource = new ResourceLocation(WizardsReborn.MOD_ID, "textures/gui/arcanemicon/unknown.png");
                 } else {
                     resource = spellI.getIcon();
@@ -695,12 +693,12 @@ public class ArcaneWandItem extends Item implements IWissenItem, ICustomAnimatio
 
     @OnlyIn(Dist.CLIENT)
     public static List<Spell> getSpellSet(boolean showEmpty, boolean reverse) {
-        Minecraft mc = Minecraft.getInstance();
+        Minecraft minecraft = Minecraft.getInstance();
 
-        int currentSpellSet = KnowledgeUtil.getCurrentSpellSet(mc.player);
-        int currentSpellInSet = KnowledgeUtil.getCurrentSpellInSet(mc.player);
+        int currentSpellSet = KnowledgeUtil.getCurrentSpellSet(minecraft.player);
+        int currentSpellInSet = KnowledgeUtil.getCurrentSpellInSet(minecraft.player);
 
-        List<Spell> spells = KnowledgeUtil.getSpellSet(mc.player, currentSpellSet);
+        List<Spell> spells = KnowledgeUtil.getSpellSet(minecraft.player, currentSpellSet);
         List<Spell> spellSet = new ArrayList<>();
 
         int ii = 0;
@@ -721,12 +719,12 @@ public class ArcaneWandItem extends Item implements IWissenItem, ICustomAnimatio
 
     @OnlyIn(Dist.CLIENT)
     public static int getCurrentSpellInSet(boolean showEmpty, boolean reverse) {
-        Minecraft mc = Minecraft.getInstance();
+        Minecraft minecraft = Minecraft.getInstance();
 
-        int currentSpellSet = KnowledgeUtil.getCurrentSpellSet(mc.player);
-        int currentSpellInSet = KnowledgeUtil.getCurrentSpellInSet(mc.player);
+        int currentSpellSet = KnowledgeUtil.getCurrentSpellSet(minecraft.player);
+        int currentSpellInSet = KnowledgeUtil.getCurrentSpellInSet(minecraft.player);
 
-        List<Spell> spells = KnowledgeUtil.getSpellSet(mc.player, currentSpellSet);
+        List<Spell> spells = KnowledgeUtil.getSpellSet(minecraft.player, currentSpellSet);
 
         int ii = 0;
         if (reverse) ii = 9;
@@ -746,47 +744,34 @@ public class ArcaneWandItem extends Item implements IWissenItem, ICustomAnimatio
 
     @Override
     @OnlyIn(Dist.CLIENT)
-    public void renderParticle(PoseStack pose, LivingEntity entity, Level level, ItemStack stack, int x, int y, int seed, int guiOffset) {
+    public void renderParticle(PoseStack poseStack, LivingEntity entity, Level level, ItemStack stack, int x, int y, int seed, int guiOffset) {
         SimpleContainer inv = ArcaneWandItem.getInventory(stack);
 
         if (inv.getItem(0).getItem() instanceof CrystalItem crystal) {
             if (crystal.getPolishing().getPolishingLevel() > 0) {
                 int polishingLevel = crystal.getPolishing().getPolishingLevel();
-                if (polishingLevel > 4) {
-                    polishingLevel = 4;
-                }
+                if (polishingLevel > 4) polishingLevel = 4;
                 Color color = crystal.getType().getColor();
                 int seedI = this.getDescriptionId().length();
 
-                RenderSystem.enableBlend();
-                RenderSystem.blendFunc(GlStateManager.SourceFactor.SRC_ALPHA, GlStateManager.DestFactor.ONE);
-                MultiBufferSource.BufferSource buffersource = Minecraft.getInstance().renderBuffers().bufferSource();
-                RenderSystem.depthMask(false);
-                RenderSystem.setShader(FluffyFurShaders::getAdditive);
-                RenderSystem.setShaderColor(1F, 1F, 1F, 1F);
-
-                pose.pushPose();
-                pose.translate(x, y, 100);
-                RenderSystem.setShaderColor(color.getRed() / 255f, color.getGreen() / 255f, color.getBlue() / 255f, 0.75F * (polishingLevel / 4f));
-                RenderUtils.dragon(pose, buffersource, 12, 4, 0, 7f, Minecraft.getInstance().getPartialTick(), 1, 1, 1, seedI);
-                buffersource.endBatch();
-                pose.popPose();
+                poseStack.pushPose();
+                poseStack.translate(x + 12, y + 4, 100);
+                RenderBuilder.create().setRenderType(FluffyFurRenderTypes.ADDITIVE)
+                        .setColor(color).setAlpha(0.75F * (polishingLevel / 4f))
+                        .renderDragon(poseStack, 7f, ClientTickHandler.partialTicks, seedI)
+                        .endBatch();
+                poseStack.popPose();
 
                 if (crystal.getPolishing().hasParticle()) {
                     Color polishingColor = crystal.getPolishing().getColor();
-                    pose.pushPose();
-                    pose.translate(x, y, 100);
-                    RenderSystem.setShaderColor(polishingColor.getRed() / 255f, polishingColor.getGreen() / 255f, polishingColor.getBlue() / 255f, 0.5F);
-                    RenderUtils.dragon(pose, buffersource, 12, 4, 0, 6f, Minecraft.getInstance().getPartialTick(), 1, 1, 1, seedI + 1f);
-                    buffersource.endBatch();
-                    pose.popPose();
+                    poseStack.pushPose();
+                    poseStack.translate(x + 12, y + 4, 100);
+                    RenderBuilder.create().setRenderType(FluffyFurRenderTypes.ADDITIVE)
+                            .setColor(polishingColor).setAlpha(0.5f)
+                            .renderDragon(poseStack, 6f, ClientTickHandler.partialTicks, seedI + 1)
+                            .endBatch();
+                    poseStack.popPose();
                 }
-
-                RenderSystem.disableBlend();
-                RenderSystem.depthMask(true);
-                RenderSystem.blendFunc(GlStateManager.SourceFactor.SRC_ALPHA, GlStateManager.DestFactor.ONE_MINUS_SRC_ALPHA);
-                RenderSystem.setShader(GameRenderer::getPositionTexShader);
-                RenderSystem.setShaderColor(1F, 1F, 1F, 1F);
             }
         }
     }

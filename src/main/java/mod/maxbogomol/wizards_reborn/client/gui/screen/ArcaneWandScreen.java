@@ -5,6 +5,8 @@ import com.mojang.blaze3d.platform.InputConstants;
 import com.mojang.blaze3d.systems.RenderSystem;
 import com.mojang.math.Axis;
 import mod.maxbogomol.fluffy_fur.client.event.ClientTickHandler;
+import mod.maxbogomol.fluffy_fur.client.render.RenderBuilder;
+import mod.maxbogomol.fluffy_fur.registry.client.FluffyFurRenderTypes;
 import mod.maxbogomol.fluffy_fur.registry.client.FluffyFurShaders;
 import mod.maxbogomol.fluffy_fur.util.RenderUtil;
 import mod.maxbogomol.wizards_reborn.WizardsReborn;
@@ -19,7 +21,7 @@ import mod.maxbogomol.wizards_reborn.common.item.equipment.curio.CrystalBagItem;
 import mod.maxbogomol.wizards_reborn.common.network.*;
 import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornSounds;
 import mod.maxbogomol.wizards_reborn.registry.common.item.WizardsRebornItems;
-import mod.maxbogomol.wizards_reborn.util.RenderUtils;
+import mod.maxbogomol.wizards_reborn.util.WizardsRebornRenderUtil;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.screens.Screen;
@@ -416,7 +418,7 @@ public class ArcaneWandScreen extends Screen {
             gui.pose().translate(x, y, 0);
             gui.pose().mulPose(Axis.ZP.rotationDegrees(mouseAngle));
             gui.pose().mulPose(Axis.XP.rotationDegrees((ClientTickHandler.ticksInGame + partialTicks + (i * 10) * 5)));
-            RenderUtils.ray(gui.pose(), buffersource, 1f, mouseDistance, 10f, 1, 1, 1, 0.5f, 1, 1, 1, 0F);
+            WizardsRebornRenderUtil.ray(gui.pose(), buffersource, 1f, mouseDistance, 10f, 1, 1, 1, 0.5f, 1, 1, 1, 0F);
             buffersource.endBatch();
             gui.pose().popPose();
 
@@ -505,7 +507,7 @@ public class ArcaneWandScreen extends Screen {
                     gui.pose().pushPose();
                     gui.pose().translate(x - 64 + w + 16, y - h + (i * 34) + 16, 0);
                     float s = (float) (0.5f * (Math.sin(Math.toRadians((ClientTickHandler.ticksInGame * 10 + partialTicks + (i * 10) * 2)))));
-                    RenderUtils.ray(gui.pose(), buffersource, 14, 128, 1f, r, g, b, 0.5f + s, r, g, b, 0.5f - s);
+                    WizardsRebornRenderUtil.ray(gui.pose(), buffersource, 14, 128, 1f, r, g, b, 0.5f + s, r, g, b, 0.5f - s);
                     buffersource.endBatch();
                     gui.pose().popPose();
 
@@ -513,7 +515,7 @@ public class ArcaneWandScreen extends Screen {
                     gui.pose().translate(x - 144 + 24, y, 0);
                     gui.pose().mulPose(Axis.ZP.rotationDegrees(i * 20 - 40));
                     gui.pose().mulPose(Axis.XP.rotationDegrees((ClientTickHandler.ticksInGame + partialTicks + (i * 10) * 5)));
-                    RenderUtils.ray(gui.pose(), buffersource, 1f, 85, 7.5f, r, g, b, 0.5f + chooseRay, r, g, b, 0F + chooseRay);
+                    WizardsRebornRenderUtil.ray(gui.pose(), buffersource, 1f, 85, 7.5f, r, g, b, 0.5f + chooseRay, r, g, b, 0F + chooseRay);
                     buffersource.endBatch();
                     gui.pose().popPose();
 
@@ -575,7 +577,7 @@ public class ArcaneWandScreen extends Screen {
                     gui.pose().pushPose();
                     gui.pose().translate(x - 64 + w + 16, y - h + (i * 34) + 16, 0);
                     float s = (float) (0.5f * (Math.sin(Math.toRadians((ClientTickHandler.ticksInGame * 10 + partialTicks + (i * 10) * 2)))));
-                    RenderUtils.ray(gui.pose(), buffersource, 14, 128, 1f, r, g, b, 0.5f + s, r, g, b, 0.5f - s);
+                    WizardsRebornRenderUtil.ray(gui.pose(), buffersource, 14, 128, 1f, r, g, b, 0.5f + s, r, g, b, 0.5f - s);
                     buffersource.endBatch();
                     gui.pose().popPose();
 
@@ -583,7 +585,7 @@ public class ArcaneWandScreen extends Screen {
                     gui.pose().translate(x - 144 + 24, y, 0);
                     gui.pose().mulPose(Axis.ZP.rotationDegrees(i * 20 - 40));
                     gui.pose().mulPose(Axis.XP.rotationDegrees((ClientTickHandler.ticksInGame + partialTicks + (i * 10) * 5)));
-                    RenderUtils.ray(gui.pose(), buffersource, 1f, 85, 7.5f, r, g, b, (0.5f + chooseRay) * f, r, g, b, (0F + chooseRay) * f);
+                    WizardsRebornRenderUtil.ray(gui.pose(), buffersource, 1f, 85, 7.5f, r, g, b, (0.5f + chooseRay) * f, r, g, b, (0F + chooseRay) * f);
                     buffersource.endBatch();
                     gui.pose().popPose();
 
@@ -636,7 +638,7 @@ public class ArcaneWandScreen extends Screen {
                     gui.pose().pushPose();
                     gui.pose().translate(x - 64 + wPageLeft + 16 + 148, y - h + 16, 0);
                     float s = (float) (0.5f * (Math.sin(Math.toRadians((ClientTickHandler.ticksInGame * 10 + partialTicks + (i * 10) * 3) + (90)))));
-                    RenderUtils.ray(gui.pose(), buffersource, 14, 14, 1f, r, g, b, 0.5f + s, r, g, b, 0.5f - s);
+                    WizardsRebornRenderUtil.ray(gui.pose(), buffersource, 14, 14, 1f, r, g, b, 0.5f + s, r, g, b, 0.5f - s);
                     buffersource.endBatch();
                     gui.pose().popPose();
                 }
@@ -645,7 +647,7 @@ public class ArcaneWandScreen extends Screen {
                 gui.pose().translate(x - 64 + wCount + 16 + 148, y - h + 16 + 54, 0);
                 gui.pose().mulPose(Axis.ZP.rotationDegrees(90));
                 float s = (float) (0.5f * (Math.sin(Math.toRadians((ClientTickHandler.ticksInGame * 10 + partialTicks + (i * 10) * 3) + (90 * 2)))));
-                RenderUtils.ray(gui.pose(), buffersource, 14, 42, 1f, r, g, b, 0.5f + s, r, g, b, 0.5f - s);
+                WizardsRebornRenderUtil.ray(gui.pose(), buffersource, 14, 42, 1f, r, g, b, 0.5f + s, r, g, b, 0.5f - s);
                 buffersource.endBatch();
                 gui.pose().popPose();
 
@@ -653,7 +655,7 @@ public class ArcaneWandScreen extends Screen {
                     gui.pose().pushPose();
                     gui.pose().translate(x - 64 + wPageRight + 16 + 148, y - h + 16 + 136, 0);
                     s = (float) (0.5f * (Math.sin(Math.toRadians((ClientTickHandler.ticksInGame * 10 + partialTicks + (i * 10) * 3) + (90 * 3)))));
-                    RenderUtils.ray(gui.pose(), buffersource, 14, 14, 1f, r, g, b, 0.5f + s, r, g, b, 0.5f - s);
+                    WizardsRebornRenderUtil.ray(gui.pose(), buffersource, 14, 14, 1f, r, g, b, 0.5f + s, r, g, b, 0.5f - s);
                     buffersource.endBatch();
                     gui.pose().popPose();
                 }
@@ -824,8 +826,8 @@ public class ArcaneWandScreen extends Screen {
     }
 
     public List<ItemStack> getPlayerCrystals() {
-        Minecraft mc = Minecraft.getInstance();
-        Player player = mc.player;
+        Minecraft minecraft = Minecraft.getInstance();
+        Player player = minecraft.player;
         List<ItemStack> items = player.inventoryMenu.getItems();
         List<SlotResult> curioSlots = CuriosApi.getCuriosInventory(player).resolve().get().findCurios((i) -> {return true;});
         for (SlotResult slot : curioSlots) {
@@ -995,19 +997,25 @@ public class ArcaneWandScreen extends Screen {
         RenderSystem.depthMask(false);
         RenderSystem.setShader(FluffyFurShaders::getAdditive);
 
-        RenderUtils.dragon(gui.pose(), buffersource, x, y, 0, 30 * scale, partialTicks, r, g, b, i);
+        RenderBuilder.create().setRenderType(FluffyFurRenderTypes.ADDITIVE)
+                .setColorRaw(r, g, b).setAlpha(1f)
+                .renderDragon(gui.pose(), x, y, 0, 30 * scale, ClientTickHandler.partialTicks, i)
+                .endBatch();
         buffersource.endBatch();
         if (renderPolishing) {
-            RenderUtils.dragon(gui.pose(), buffersource, x, y, 0, 20 * scale, partialTicks, r1 / 2f, g1 / 2f, b1 / 2f, i * 5);
+            RenderBuilder.create().setRenderType(FluffyFurRenderTypes.ADDITIVE)
+                    .setColorRaw(r1 / 2f, g1 / 2f, b1 / 2f).setAlpha(1f)
+                    .renderDragon(gui.pose(), x, y, 0, 20 * scale, ClientTickHandler.partialTicks, i * 5)
+                    .endBatch();
             buffersource.endBatch();
         }
 
         if (renderRay) {
             gui.pose().pushPose();
-            gui.pose().translate(width / 2,  height / 2, 0);
+            gui.pose().translate(width / 2f,  height / 2f, 0);
             gui.pose().mulPose(Axis.ZP.rotationDegrees(i * step + (step / 2)));
             gui.pose().mulPose(Axis.XP.rotationDegrees((ClientTickHandler.ticksInGame + partialTicks + (i * 10) * 5)));
-            RenderUtils.ray(gui.pose(), buffersource, 1f, (100 * hoveramount) * chooseRay, 10f, r, g, b, 1, r, g, b, 0F);
+            WizardsRebornRenderUtil.ray(gui.pose(), buffersource, 1f, (100 * hoveramount) * chooseRay, 10f, r, g, b, 1, r, g, b, 0F);
             buffersource.endBatch();
             gui.pose().popPose();
         }
@@ -1028,10 +1036,10 @@ public class ArcaneWandScreen extends Screen {
         RenderSystem.setShader(FluffyFurShaders::getAdditive);
 
         gui.pose().pushPose();
-        gui.pose().translate(width / 2,  height / 2, 0);
+        gui.pose().translate(width / 2f,  height / 2f, 0);
         gui.pose().mulPose(Axis.ZP.rotationDegrees(i * step + (step / 2) + offset));
         gui.pose().mulPose(Axis.XP.rotationDegrees((ClientTickHandler.ticksInGame + partialTicks + (i * 10) * 5)));
-        RenderUtils.ray(gui.pose(), buffersource, 1f, (100 * hoveramount) * chooseRay, 30f, r, g, b, 1, r, g, b, 0F);
+        WizardsRebornRenderUtil.ray(gui.pose(), buffersource, 1f, (100 * hoveramount) * chooseRay, 30f, r, g, b, 1, r, g, b, 0F);
         buffersource.endBatch();
         gui.pose().popPose();
 
@@ -1055,7 +1063,7 @@ public class ArcaneWandScreen extends Screen {
         gui.pose().translate(width / 2,  height / 2, 0);
         gui.pose().mulPose(Axis.ZP.rotationDegrees(i * step + (step / 2) + offset));
         gui.pose().mulPose(Axis.XP.rotationDegrees((ClientTickHandler.ticksInGame + partialTicks + (i * 10) * 5)));
-        RenderUtils.ray(gui.pose(), buffersource, 1f, (100 * hoveramount) * chooseRay, 10f, r, g, b, alpha, r, g, b, 0F);
+        WizardsRebornRenderUtil.ray(gui.pose(), buffersource, 1f, (100 * hoveramount) * chooseRay, 10f, r, g, b, alpha, r, g, b, 0F);
         buffersource.endBatch();
         gui.pose().popPose();
 

@@ -192,9 +192,9 @@ public abstract class FluidPipeBaseBlockEntity extends PipeBaseBlockEntity imple
 
     @OnlyIn(Dist.CLIENT)
     public void wissenWandEffect() {
-        Minecraft mc = Minecraft.getInstance();
+        Minecraft minecraft = Minecraft.getInstance();
 
-        Player player = mc.player;
+        Player player = minecraft.player;
         ItemStack main = player.getMainHandItem();
         ItemStack offhand = player.getOffhandItem();
         boolean renderWand = false;

@@ -3,7 +3,7 @@ package mod.maxbogomol.wizards_reborn.common.effect;
 import mod.maxbogomol.wizards_reborn.api.wissen.IWissenItem;
 import mod.maxbogomol.wizards_reborn.api.wissen.WissenItemType;
 import mod.maxbogomol.wizards_reborn.api.wissen.WissenItemUtil;
-import mod.maxbogomol.wizards_reborn.api.wissen.WissenUtils;
+import mod.maxbogomol.wizards_reborn.api.wissen.WissenUtil;
 import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornAttributes;
 import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.effect.MobEffectCategory;
@@ -25,7 +25,7 @@ public class WissenAuraEffect extends MobEffect {
     public void applyEffectTick(LivingEntity livingEntity, int amplifier) {
         if (!livingEntity.level().isClientSide()) {
             if (livingEntity instanceof Player player) {
-                List<ItemStack> itemsAdd = WissenUtils.getWissenItemsActive(player);
+                List<ItemStack> itemsAdd = WissenUtil.getWissenItemsActive(player);
 
                 int wissenRemain = 10 * (amplifier + 1);
 

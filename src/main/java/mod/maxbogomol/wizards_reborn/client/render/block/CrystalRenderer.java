@@ -10,10 +10,10 @@ import mod.maxbogomol.wizards_reborn.api.crystalritual.CrystalRitualUtil;
 import mod.maxbogomol.wizards_reborn.api.light.ILightBlockEntity;
 import mod.maxbogomol.wizards_reborn.api.light.LightRayHitResult;
 import mod.maxbogomol.wizards_reborn.api.light.LightUtil;
-import mod.maxbogomol.wizards_reborn.api.wissen.WissenUtils;
+import mod.maxbogomol.wizards_reborn.api.wissen.WissenUtil;
 import mod.maxbogomol.wizards_reborn.common.block.crystal.CrystalBlockEntity;
 import mod.maxbogomol.wizards_reborn.common.item.CrystalItem;
-import mod.maxbogomol.wizards_reborn.util.RenderUtils;
+import mod.maxbogomol.wizards_reborn.util.WizardsRebornRenderUtil;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.blockentity.BlockEntityRenderer;
 import net.minecraft.core.BlockPos;
@@ -47,7 +47,7 @@ public class CrystalRenderer implements BlockEntityRenderer<CrystalBlockEntity> 
                     poseStack.pushPose();
                     poseStack.translate(0.5F, 0.3825F, 0.5F);
                     poseStack.mulPose(Axis.ZP.rotationDegrees(-90f));
-                    RenderUtils.ray(poseStack, bufferDelayed, 0.2f, 0.4f, 1f, r, g, b, alpha);
+                    WizardsRebornRenderUtil.ray(poseStack, bufferDelayed, 0.2f, 0.4f, 1f, r, g, b, alpha);
                     poseStack.popPose();
                 }
             }
@@ -87,18 +87,18 @@ public class CrystalRenderer implements BlockEntityRenderer<CrystalBlockEntity> 
             ritual.render(blockEntity, partialTicks, poseStack, bufferSource, light, overlay);
         }
 
-        if (WissenUtils.isCanRenderWissenWand()) {
+        if (WissenUtil.isCanRenderWissenWand()) {
             if (!CrystalRitualUtil.isEmpty(ritual)) {
                 CrystalRitualArea area = ritual.getArea(blockEntity);
                 poseStack.pushPose();
                 poseStack.translate(-area.getSizeFrom().x(), -area.getSizeFrom().y(), -area.getSizeFrom().z());
-                RenderUtils.renderBoxLines(new Vec3( area.getSizeFrom().x() + area.getSizeTo().x() + 1, area.getSizeFrom().y() + area.getSizeTo().y() + 1, area.getSizeFrom().z() + area.getSizeTo().z() + 1), RenderUtils.colorArea, partialTicks, poseStack);
+                WizardsRebornRenderUtil.renderBoxLines(new Vec3( area.getSizeFrom().x() + area.getSizeTo().x() + 1, area.getSizeFrom().y() + area.getSizeTo().y() + 1, area.getSizeFrom().z() + area.getSizeTo().z() + 1), WizardsRebornRenderUtil.colorArea, partialTicks, poseStack);
                 poseStack.popPose();
             }
 
             if (blockEntity.startRitual) {
                 poseStack.pushPose();
-                RenderUtils.renderBoxLines(new Vec3(1, 1, 1), blockEntity.getCrystalColor(), partialTicks, poseStack);
+                WizardsRebornRenderUtil.renderBoxLines(new Vec3(1, 1, 1), blockEntity.getCrystalColor(), partialTicks, poseStack);
                 poseStack.popPose();
             }
 
@@ -108,7 +108,7 @@ public class CrystalRenderer implements BlockEntityRenderer<CrystalBlockEntity> 
                 poseStack.translate(lensPos.x(), lensPos.y(), lensPos.z());
                 BlockPos pos = new BlockPos(blockEntity.blockToX, blockEntity.blockToY, blockEntity.blockToZ);
                 if (blockEntity.getLevel().getBlockEntity(pos) instanceof ILightBlockEntity lightTile) {
-                    RenderUtils.renderConnectLine(LightUtil.getLightLensPos(blockEntity.getBlockPos(), blockEntity.getLightLensPos()), LightUtil.getLightLensPos(pos, lightTile.getLightLensPos()), RenderUtils.colorConnectTo, partialTicks, poseStack);
+                    WizardsRebornRenderUtil.renderConnectLine(LightUtil.getLightLensPos(blockEntity.getBlockPos(), blockEntity.getLightLensPos()), LightUtil.getLightLensPos(pos, lightTile.getLightLensPos()), WizardsRebornRenderUtil.colorConnectTo, partialTicks, poseStack);
                 }
                 poseStack.popPose();
             }

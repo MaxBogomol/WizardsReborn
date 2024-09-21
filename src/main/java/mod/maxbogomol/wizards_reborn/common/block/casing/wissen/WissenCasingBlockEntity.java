@@ -2,7 +2,7 @@ package mod.maxbogomol.wizards_reborn.common.block.casing.wissen;
 
 import mod.maxbogomol.fluffy_fur.common.network.BlockEntityUpdate;
 import mod.maxbogomol.wizards_reborn.WizardsReborn;
-import mod.maxbogomol.wizards_reborn.api.wissen.WissenUtils;
+import mod.maxbogomol.wizards_reborn.api.wissen.WissenUtil;
 import mod.maxbogomol.wizards_reborn.common.block.wissen_translator.WissenTranslatorBlockEntity;
 import mod.maxbogomol.wizards_reborn.registry.common.block.WizardsRebornBlockEntities;
 import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornSounds;
@@ -52,7 +52,7 @@ public class WissenCasingBlockEntity extends WissenTranslatorBlockEntity {
             if (canReceiveWissen() && (cooldown <= 0) && canWork()) {
                 for (Direction direction : Direction.values()) {
                     if (isConnection(direction)) {
-                        int removeRemain = WissenUtils.getRemoveWissenRemain(getWissen(), removeCount);
+                        int removeRemain = WissenUtil.getRemoveWissenRemain(getWissen(), removeCount);
 
                         if (removeCount - removeRemain > 0 && getWissen() > 0) {
                             removeWissen(removeCount - removeRemain);

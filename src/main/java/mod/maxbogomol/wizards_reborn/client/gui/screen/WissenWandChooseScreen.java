@@ -11,7 +11,7 @@ import mod.maxbogomol.fluffy_fur.util.RenderUtil;
 import mod.maxbogomol.wizards_reborn.common.item.equipment.WissenWandItem;
 import mod.maxbogomol.wizards_reborn.common.network.PacketHandler;
 import mod.maxbogomol.wizards_reborn.common.network.SetWissenWandModePacket;
-import mod.maxbogomol.wizards_reborn.util.RenderUtils;
+import mod.maxbogomol.wizards_reborn.util.WizardsRebornRenderUtil;
 import net.minecraft.ChatFormatting;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
@@ -134,7 +134,7 @@ public class WissenWandChooseScreen extends Screen {
         gui.pose().translate(width / 2,  height / 2, 0);
         gui.pose().mulPose(Axis.ZP.rotationDegrees(i * step + (step / 2)));
         gui.pose().mulPose(Axis.XP.rotationDegrees((ClientTickHandler.ticksInGame + partialTicks + (i * 10) * 5)));
-        RenderUtils.ray(gui.pose(), buffersource, 1f, (100 * hoveramount) * chooseRay, 40f, r, g, b, 1, r, g, b, 0F);
+        WizardsRebornRenderUtil.ray(gui.pose(), buffersource, 1f, (100 * hoveramount) * chooseRay, 40f, r, g, b, 1, r, g, b, 0F);
         buffersource.endBatch();
         gui.pose().popPose();
 

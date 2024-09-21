@@ -44,15 +44,15 @@ public class SniffaloScreenPacket {
             ctx.get().enqueueWork(new Runnable() {
                 @Override
                 public void run() {
-                    Minecraft mc = Minecraft.getInstance();
+                    Minecraft minecraft = Minecraft.getInstance();
 
-                    Entity entity = mc.level.getEntity(msg.getEntityId());
+                    Entity entity = minecraft.level.getEntity(msg.getEntityId());
                     if (entity instanceof SniffaloEntity sniffalo) {
-                        LocalPlayer localplayer = mc.player;
+                        LocalPlayer localplayer = minecraft.player;
                         SimpleContainer simplecontainer = new SimpleContainer(msg.getSize());
-                        SniffaloContainer sniffaloContainer = new SniffaloContainer(msg.getContainerId(), localplayer.getInventory(), simplecontainer, mc.player, sniffalo);
+                        SniffaloContainer sniffaloContainer = new SniffaloContainer(msg.getContainerId(), localplayer.getInventory(), simplecontainer, minecraft.player, sniffalo);
                         localplayer.containerMenu = sniffaloContainer;
-                        mc.setScreen(new SniffaloScreen(sniffaloContainer, localplayer.getInventory(), sniffalo));
+                        minecraft.setScreen(new SniffaloScreen(sniffaloContainer, localplayer.getInventory(), sniffalo));
                     }
                 }
             });

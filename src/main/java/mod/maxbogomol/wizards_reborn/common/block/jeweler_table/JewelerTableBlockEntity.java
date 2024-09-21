@@ -109,8 +109,8 @@ public class JewelerTableBlockEntity extends NameableBlockEntityBase implements 
                     if (recipe.isPresent()) output = recipe.get().getResultItem(RegistryAccess.EMPTY);
 
                     if (isCanCraft(inv, output) || skin != null) {
-                        int addRemainCraft = WissenUtils.getAddWissenRemain(wissenIsCraft, getWissenPerTick(), wissenInCraft);
-                        int removeRemain = WissenUtils.getRemoveWissenRemain(getWissen(), getWissenPerTick() - addRemainCraft);
+                        int addRemainCraft = WissenUtil.getAddWissenRemain(wissenIsCraft, getWissenPerTick(), wissenInCraft);
+                        int removeRemain = WissenUtil.getRemoveWissenRemain(getWissen(), getWissenPerTick() - addRemainCraft);
 
                         wissenIsCraft = wissenIsCraft + (getWissenPerTick() - addRemainCraft - removeRemain);
                         removeWissen(getWissenPerTick() - addRemainCraft - removeRemain);

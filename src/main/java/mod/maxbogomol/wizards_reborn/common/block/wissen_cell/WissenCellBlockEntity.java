@@ -12,7 +12,7 @@ import mod.maxbogomol.wizards_reborn.WizardsReborn;
 import mod.maxbogomol.wizards_reborn.api.wissen.IWissenBlockEntity;
 import mod.maxbogomol.wizards_reborn.api.wissen.IWissenItem;
 import mod.maxbogomol.wizards_reborn.api.wissen.WissenItemUtil;
-import mod.maxbogomol.wizards_reborn.api.wissen.WissenUtils;
+import mod.maxbogomol.wizards_reborn.api.wissen.WissenUtil;
 import mod.maxbogomol.wizards_reborn.common.config.Config;
 import mod.maxbogomol.wizards_reborn.common.network.PacketHandler;
 import mod.maxbogomol.wizards_reborn.common.network.block.WissenCellSendEffectPacket;
@@ -53,7 +53,7 @@ public class WissenCellBlockEntity extends ExposedBlockSimpleInventory implement
                 if (!container.getItem(0).isEmpty()) {
                     ItemStack stack = container.getItem(0);
                     if (stack.getItem() instanceof IWissenItem item) {
-                        int wissenRemain = WissenUtils.getRemoveWissenRemain(wissen, getWissenPerReceive());
+                        int wissenRemain = WissenUtil.getRemoveWissenRemain(wissen, getWissenPerReceive());
                         wissenRemain = getWissenPerReceive() - wissenRemain;
                         WissenItemUtil.existWissen(stack);
                         int itemWissenRemain = WissenItemUtil.getAddWissenRemain(stack, wissenRemain, item.getMaxWissen());

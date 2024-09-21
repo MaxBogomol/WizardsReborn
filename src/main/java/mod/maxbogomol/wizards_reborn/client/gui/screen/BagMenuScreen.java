@@ -10,7 +10,7 @@ import mod.maxbogomol.fluffy_fur.util.RenderUtil;
 import mod.maxbogomol.wizards_reborn.common.item.equipment.IBagItem;
 import mod.maxbogomol.wizards_reborn.common.network.OpenBagPacket;
 import mod.maxbogomol.wizards_reborn.common.network.PacketHandler;
-import mod.maxbogomol.wizards_reborn.util.RenderUtils;
+import mod.maxbogomol.wizards_reborn.util.WizardsRebornRenderUtil;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.screens.Screen;
@@ -118,8 +118,8 @@ public class BagMenuScreen extends Screen {
     }
 
     public List<ItemStack> getPlayerBags() {
-        Minecraft mc = Minecraft.getInstance();
-        Player player = mc.player;
+        Minecraft minecraft = Minecraft.getInstance();
+        Player player = minecraft.player;
         List<ItemStack> items = player.inventoryMenu.getItems();
         List<SlotResult> curioSlots = CuriosApi.getCuriosInventory(player).resolve().get().findCurios((i) -> {return true;});
         for (SlotResult slot : curioSlots) {
@@ -156,7 +156,7 @@ public class BagMenuScreen extends Screen {
         gui.pose().translate(width / 2,  height / 2, 0);
         gui.pose().mulPose(Axis.ZP.rotationDegrees(i * step + (step / 2)));
         gui.pose().mulPose(Axis.XP.rotationDegrees((ClientTickHandler.ticksInGame + partialTicks + (i * 10) * 5)));
-        RenderUtils.ray(gui.pose(), buffersource, 1f, (100 * hoveramount) * chooseRay, 10f, r, g, b, 1, r, g, b, 0F);
+        WizardsRebornRenderUtil.ray(gui.pose(), buffersource, 1f, (100 * hoveramount) * chooseRay, 10f, r, g, b, 1, r, g, b, 0F);
         buffersource.endBatch();
         gui.pose().popPose();
 

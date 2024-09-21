@@ -16,7 +16,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
-public class WissenUtils {
+public class WissenUtil {
 
     public static Random random = new Random();
 
@@ -46,9 +46,9 @@ public class WissenUtils {
 
     @OnlyIn(Dist.CLIENT)
     public static boolean isCanRenderWissenWand() {
-        Minecraft mc = Minecraft.getInstance();
+        Minecraft minecraft = Minecraft.getInstance();
 
-        Player player = mc.player;
+        Player player = minecraft.player;
         ItemStack main = player.getMainHandItem();
         ItemStack offhand = player.getOffhandItem();
         boolean renderWand = false;

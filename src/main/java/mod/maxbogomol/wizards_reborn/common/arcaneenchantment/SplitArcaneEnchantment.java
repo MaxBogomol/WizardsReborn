@@ -5,7 +5,7 @@ import mod.maxbogomol.wizards_reborn.api.arcaneenchantment.ArcaneEnchantment;
 import mod.maxbogomol.wizards_reborn.api.arcaneenchantment.ArcaneEnchantmentType;
 import mod.maxbogomol.wizards_reborn.api.arcaneenchantment.ArcaneEnchantmentUtil;
 import mod.maxbogomol.wizards_reborn.api.arcaneenchantment.IArcaneItem;
-import mod.maxbogomol.wizards_reborn.api.wissen.WissenUtils;
+import mod.maxbogomol.wizards_reborn.api.wissen.WissenUtil;
 import mod.maxbogomol.wizards_reborn.common.entity.SplitArrowEntity;
 import mod.maxbogomol.wizards_reborn.common.network.PacketHandler;
 import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornArcaneEnchantments;
@@ -47,16 +47,16 @@ public class SplitArcaneEnchantment extends ArcaneEnchantment {
             int enchantmentLevel = ArcaneEnchantmentUtil.getArcaneEnchantment(stack, WizardsRebornArcaneEnchantments.SPLIT);
             if (enchantmentLevel > 0) {
                 if (stack.getUseDuration() - timeLeft > 35) {
-                    float costModifier = WissenUtils.getWissenCostModifierWithDiscount(player);
-                    List<ItemStack> items = WissenUtils.getWissenItemsNoneAndStorage(WissenUtils.getWissenItemsCurios(player));
-                    int wissen = WissenUtils.getWissenInItems(items);
+                    float costModifier = WissenUtil.getWissenCostModifierWithDiscount(player);
+                    List<ItemStack> items = WissenUtil.getWissenItemsNoneAndStorage(WissenUtil.getWissenItemsCurios(player));
+                    int wissen = WissenUtil.getWissenInItems(items);
                     int cost = (int) ((30 + (enchantmentLevel * 25)) * (1 - costModifier));
                     if (cost <= 0) {
                         cost = 1;
                     }
 
-                    if (WissenUtils.canRemoveWissen(wissen, cost)) {
-                        WissenUtils.removeWissenFromWissenItems(items, cost);
+                    if (WissenUtil.canRemoveWissen(wissen, cost)) {
+                        WissenUtil.removeWissenFromWissenItems(items, cost);
 
                         int charge = WissenChargeArcaneEnchantment.getCharge(abstractarrow);
                         if (charge > 0) {
@@ -100,15 +100,15 @@ public class SplitArcaneEnchantment extends ArcaneEnchantment {
         int enchantmentLevel = ArcaneEnchantmentUtil.getArcaneEnchantment(stack, WizardsRebornArcaneEnchantments.SPLIT);
         if (enchantmentLevel > 0) {
             if (player.getTicksUsingItem() > 35) {
-                float costModifier = WissenUtils.getWissenCostModifierWithDiscount(player);
-                List<ItemStack> items = WissenUtils.getWissenItemsNoneAndStorage(WissenUtils.getWissenItemsCurios(player));
-                int wissen = WissenUtils.getWissenInItems(items);
+                float costModifier = WissenUtil.getWissenCostModifierWithDiscount(player);
+                List<ItemStack> items = WissenUtil.getWissenItemsNoneAndStorage(WissenUtil.getWissenItemsCurios(player));
+                int wissen = WissenUtil.getWissenInItems(items);
                 int cost = (int) ((30 + (enchantmentLevel * 25)) * (1 - costModifier));
                 if (cost <= 0) {
                     cost = 1;
                 }
 
-                if (WissenUtils.canRemoveWissen(wissen, cost)) {
+                if (WissenUtil.canRemoveWissen(wissen, cost)) {
                     fow = fow + 0.2f;
                 }
             }

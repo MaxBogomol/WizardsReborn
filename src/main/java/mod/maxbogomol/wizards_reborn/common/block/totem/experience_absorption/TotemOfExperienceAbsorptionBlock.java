@@ -9,7 +9,7 @@ import mod.maxbogomol.fluffy_fur.common.easing.Easing;
 import mod.maxbogomol.fluffy_fur.common.network.BlockEntityUpdate;
 import mod.maxbogomol.fluffy_fur.registry.client.FluffyFurParticles;
 import mod.maxbogomol.wizards_reborn.api.wissen.ITotemBlock;
-import mod.maxbogomol.wizards_reborn.api.wissen.WissenUtils;
+import mod.maxbogomol.wizards_reborn.api.wissen.WissenUtil;
 import mod.maxbogomol.wizards_reborn.common.item.equipment.WissenWandItem;
 import mod.maxbogomol.wizards_reborn.registry.common.block.WizardsRebornBlocks;
 import net.minecraft.core.BlockPos;
@@ -111,9 +111,9 @@ public class TotemOfExperienceAbsorptionBlock extends Block implements EntityBlo
 
         if (!player.isShiftKeyDown()) {
             if (blockEntity.getExperience() < blockEntity.getMaxExperience()) {
-                int remain = WissenUtils.getRemoveWissenRemain(getPlayerXP(player), 100);
+                int remain = WissenUtil.getRemoveWissenRemain(getPlayerXP(player), 100);
                 remain = 100 - remain;
-                int remainAdd = WissenUtils.getAddWissenRemain(blockEntity.getExperience(), remain, blockEntity.getMaxExperience());
+                int remainAdd = WissenUtil.getAddWissenRemain(blockEntity.getExperience(), remain, blockEntity.getMaxExperience());
                 remainAdd = remain - remainAdd;
                 if (remainAdd > 0 && remain > 0) {
                     blockEntity.addExperience(remainAdd);

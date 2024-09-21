@@ -73,8 +73,8 @@ public class WissenAltarBlockEntity extends ExposedBlockSimpleInventory implemen
                 wissenInItem = level.getRecipeManager().getRecipeFor(WizardsRebornRecipes.WISSEN_ALTAR.get(), inv, level).map(WissenAltarRecipe::getRecipeWissen).orElse(0);
 
                 if ((wissenInItem > 0) && (wissen < getMaxWissen())) {
-                    int addRemainCraft = WissenUtils.getAddWissenRemain(wissenIsCraft, getWissenPerTick(), wissenInItem);
-                    int addRemain = WissenUtils.getAddWissenRemain(getWissen(), getWissenPerTick() - addRemainCraft, getMaxWissen());
+                    int addRemainCraft = WissenUtil.getAddWissenRemain(wissenIsCraft, getWissenPerTick(), wissenInItem);
+                    int addRemain = WissenUtil.getAddWissenRemain(getWissen(), getWissenPerTick() - addRemainCraft, getMaxWissen());
 
                     wissenIsCraft = wissenIsCraft + (getWissenPerTick() - addRemainCraft - addRemain);
                     addWissen(getWissenPerTick() - addRemainCraft - addRemain);
@@ -102,7 +102,7 @@ public class WissenAltarBlockEntity extends ExposedBlockSimpleInventory implemen
                     if (!container.getItem(0).isEmpty()) {
                         ItemStack stack = container.getItem(0);
                         if (stack.getItem() instanceof IWissenItem item) {
-                            int wissenRemain = WissenUtils.getRemoveWissenRemain(wissen, getWissenPerReceive());
+                            int wissenRemain = WissenUtil.getRemoveWissenRemain(wissen, getWissenPerReceive());
                             wissenRemain = getWissenPerReceive() - wissenRemain;
                             WissenItemUtil.existWissen(stack);
                             int itemWissenRemain = WissenItemUtil.getAddWissenRemain(stack, wissenRemain, item.getMaxWissen());

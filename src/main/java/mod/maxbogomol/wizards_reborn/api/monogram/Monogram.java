@@ -3,15 +3,13 @@ package mod.maxbogomol.wizards_reborn.api.monogram;
 import com.mojang.blaze3d.platform.GlStateManager;
 import com.mojang.blaze3d.systems.RenderSystem;
 import mod.maxbogomol.fluffy_fur.client.event.ClientTickHandler;
-import mod.maxbogomol.fluffy_fur.registry.client.FluffyFurShaders;
+import mod.maxbogomol.fluffy_fur.client.render.RenderBuilder;
+import mod.maxbogomol.fluffy_fur.registry.client.FluffyFurRenderTypes;
 import mod.maxbogomol.wizards_reborn.client.arcanemicon.ArcanemiconGui;
 import mod.maxbogomol.wizards_reborn.client.config.ClientConfig;
-import mod.maxbogomol.wizards_reborn.util.RenderUtils;
 import net.minecraft.ChatFormatting;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
-import net.minecraft.client.renderer.GameRenderer;
-import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraftforge.api.distmarker.Dist;
@@ -100,23 +98,13 @@ public class Monogram {
         }
 
         if (ClientConfig.MONOGRAM_RAYS.get()) {
-            RenderSystem.enableBlend();
-            RenderSystem.blendFunc(GlStateManager.SourceFactor.SRC_ALPHA, GlStateManager.DestFactor.ONE);
-            MultiBufferSource.BufferSource buffersource = Minecraft.getInstance().renderBuffers().bufferSource();
-            RenderSystem.depthMask(false);
-            RenderSystem.setShader(FluffyFurShaders::getAdditive);
-
             gui.pose().pushPose();
-            gui.pose().translate(0, 0, 100);
-            RenderSystem.setShaderColor(r, g, b, 0.35F);
-            RenderUtils.dragon(gui.pose(), buffersource, x + 8, y + 8, 0, 7.5f, Minecraft.getInstance().getPartialTick(), r, g, b, getId().length());
-            buffersource.endBatch();
+            gui.pose().translate(x + 8, y + 8, 100);
+            RenderBuilder.create().setRenderType(FluffyFurRenderTypes.ADDITIVE)
+                    .setColorRaw(r, g, b).setAlpha(0.35f)
+                    .renderDragon(gui.pose(), 7.5f, ClientTickHandler.partialTicks, getId().length())
+                    .endBatch();
             gui.pose().popPose();
-
-            RenderSystem.disableBlend();
-            RenderSystem.depthMask(true);
-            RenderSystem.blendFunc(GlStateManager.SourceFactor.SRC_ALPHA, GlStateManager.DestFactor.ONE_MINUS_SRC_ALPHA);
-            RenderSystem.setShader(GameRenderer::getPositionTexShader);
         }
 
         if (ClientConfig.MONOGRAM_GLOW.get()) {

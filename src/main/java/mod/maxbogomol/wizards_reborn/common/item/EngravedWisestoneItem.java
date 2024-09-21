@@ -4,19 +4,17 @@ import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.math.Axis;
 import mod.maxbogomol.fluffy_fur.FluffyFur;
 import mod.maxbogomol.fluffy_fur.client.event.ClientTickHandler;
+import mod.maxbogomol.fluffy_fur.client.render.RenderBuilder;
 import mod.maxbogomol.fluffy_fur.common.item.IGuiParticleItem;
+import mod.maxbogomol.fluffy_fur.registry.client.FluffyFurRenderTypes;
 import mod.maxbogomol.fluffy_fur.util.ColorUtil;
+import mod.maxbogomol.fluffy_fur.util.RenderUtil;
 import mod.maxbogomol.wizards_reborn.api.monogram.Monogram;
 import mod.maxbogomol.wizards_reborn.common.block.engraved_wisestone.EngravedWisestoneBlock;
-import mod.maxbogomol.wizards_reborn.util.RenderUtils;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.renderer.MultiBufferSource;
-import net.minecraft.client.renderer.texture.TextureAtlas;
-import net.minecraft.client.renderer.texture.TextureAtlasSprite;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.network.chat.Style;
-import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.Mth;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.BlockItem;
@@ -79,36 +77,30 @@ public class EngravedWisestoneItem extends BlockItem implements IGuiParticleItem
 
     @Override
     @OnlyIn(Dist.CLIENT)
-    public void renderParticle(PoseStack pose, LivingEntity entity, Level level, ItemStack stack, int x, int y, int seed, int guiOffset) {
+    public void renderParticle(PoseStack poseStack, LivingEntity entity, Level level, ItemStack stack, int x, int y, int seed, int guiOffset) {
         if (getBlock() instanceof EngravedWisestoneBlock block && block.hasMonogram()) {
-            float ticks = ClientTickHandler.ticksInGame + Minecraft.getInstance().getPartialTick();
-
+            float ticks = ClientTickHandler.getTotal();
             Color color = block.getMonogram().getColor();
-            float r = color.getRed() / 255f;
-            float g = color.getGreen() / 255f;
-            float b = color.getBlue() / 255f;
 
-            RenderUtils.startGuiParticle();
-            MultiBufferSource.BufferSource buffersource = Minecraft.getInstance().renderBuffers().bufferSource();
+            poseStack.pushPose();
+            poseStack.translate(x + 8, y + 8f, 100);
+            poseStack.mulPose(Axis.ZP.rotationDegrees(ticks));
+            RenderBuilder.create().setRenderType(FluffyFurRenderTypes.ADDITIVE_TEXTURE)
+                    .setUV(RenderUtil.getSprite(FluffyFur.MOD_ID, "particle/wisp"))
+                    .setColor(color).setAlpha(0.5f)
+                    .renderCenteredQuad(poseStack, 11f)
+                    .endBatch();
+            poseStack.popPose();
 
-            TextureAtlasSprite sparkle = Minecraft.getInstance().getTextureAtlas(TextureAtlas.LOCATION_BLOCKS).apply(new ResourceLocation(FluffyFur.MOD_ID, "particle/sparkle"));
-            TextureAtlasSprite wisp = Minecraft.getInstance().getTextureAtlas(TextureAtlas.LOCATION_BLOCKS).apply(new ResourceLocation(FluffyFur.MOD_ID, "particle/wisp"));
-
-            pose.pushPose();
-            pose.translate(x + 8, y + 8f, 100);
-            pose.mulPose(Axis.ZP.rotationDegrees(ticks));
-            RenderUtils.spriteGlowQuadCenter(pose, buffersource, 0, 0, 22f, 22f, wisp.getU0(), wisp.getU1(), wisp.getV0(), wisp.getV1(), r, g, b, 0.5F);
-            buffersource.endBatch();
-            pose.popPose();
-
-            pose.pushPose();
-            pose.translate(x + 8, y + 8f, 100);
-            pose.mulPose(Axis.ZP.rotationDegrees(-ticks / 2));
-            RenderUtils.spriteGlowQuadCenter(pose, buffersource, 0, 0, 24f, 24f, sparkle.getU0(), sparkle.getU1(), sparkle.getV0(), sparkle.getV1(), r, g, b, 0.5F);
-            buffersource.endBatch();
-            pose.popPose();
-
-            RenderUtils.endGuiParticle();
+            poseStack.pushPose();
+            poseStack.translate(x + 8, y + 8f, 100);
+            poseStack.mulPose(Axis.ZP.rotationDegrees(-ticks / 2));
+            RenderBuilder.create().setRenderType(FluffyFurRenderTypes.ADDITIVE_TEXTURE)
+                    .setUV(RenderUtil.getSprite(FluffyFur.MOD_ID, "particle/sparkle"))
+                    .setColor(color).setAlpha(0.5f)
+                    .renderCenteredQuad(poseStack, 12f)
+                    .endBatch();
+            poseStack.popPose();
         }
     }
 }

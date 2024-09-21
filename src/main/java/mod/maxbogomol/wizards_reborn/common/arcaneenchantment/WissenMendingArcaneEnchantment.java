@@ -4,7 +4,7 @@ import mod.maxbogomol.wizards_reborn.api.arcaneenchantment.ArcaneEnchantment;
 import mod.maxbogomol.wizards_reborn.api.arcaneenchantment.ArcaneEnchantmentType;
 import mod.maxbogomol.wizards_reborn.api.arcaneenchantment.ArcaneEnchantmentUtil;
 import mod.maxbogomol.wizards_reborn.api.arcaneenchantment.IArcaneItem;
-import mod.maxbogomol.wizards_reborn.api.wissen.WissenUtils;
+import mod.maxbogomol.wizards_reborn.api.wissen.WissenUtil;
 import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornArcaneEnchantments;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
@@ -46,16 +46,16 @@ public class WissenMendingArcaneEnchantment extends ArcaneEnchantment {
                         tick = 20;
                     }
                     if (entity.tickCount % tick == 0) {
-                        float costModifier = WissenUtils.getWissenCostModifierWithDiscount(player);
-                        List<ItemStack> items = WissenUtils.getWissenItemsNoneAndStorage(WissenUtils.getWissenItemsCurios(player));
-                        int wissen = WissenUtils.getWissenInItems(items);
+                        float costModifier = WissenUtil.getWissenCostModifierWithDiscount(player);
+                        List<ItemStack> items = WissenUtil.getWissenItemsNoneAndStorage(WissenUtil.getWissenItemsCurios(player));
+                        int wissen = WissenUtil.getWissenInItems(items);
                         int cost = (int) (5 * (1 - costModifier));
                         if (cost <= 0) {
                             cost = 1;
                         }
 
-                        if (WissenUtils.canRemoveWissen(wissen, cost)) {
-                            WissenUtils.removeWissenFromWissenItems(items, cost);
+                        if (WissenUtil.canRemoveWissen(wissen, cost)) {
+                            WissenUtil.removeWissenFromWissenItems(items, cost);
                             stack.setDamageValue(stack.getDamageValue() - 1);
                         }
                     }
@@ -69,16 +69,16 @@ public class WissenMendingArcaneEnchantment extends ArcaneEnchantment {
             if (amount > 0) {
                 if (entity instanceof Player player) {
                     int enchantmentLevel = ArcaneEnchantmentUtil.getArcaneEnchantment(stack, WizardsRebornArcaneEnchantments.WISSEN_MENDING);
-                    float costModifier = WissenUtils.getWissenCostModifierWithDiscount(player);
-                    List<ItemStack> items = WissenUtils.getWissenItemsNoneAndStorage(WissenUtils.getWissenItemsCurios(player));
-                    int wissen = WissenUtils.getWissenInItems(items);
+                    float costModifier = WissenUtil.getWissenCostModifierWithDiscount(player);
+                    List<ItemStack> items = WissenUtil.getWissenItemsNoneAndStorage(WissenUtil.getWissenItemsCurios(player));
+                    int wissen = WissenUtil.getWissenInItems(items);
                     int cost = (int) (5 * (1 - costModifier));
                     if (cost <= 0) {
                         cost = 1;
                     }
 
-                    if (enchantmentLevel >= 3 && WissenUtils.canRemoveWissen(wissen, cost)) {
-                        WissenUtils.removeWissenFromWissenItems(items, cost);
+                    if (enchantmentLevel >= 3 && WissenUtil.canRemoveWissen(wissen, cost)) {
+                        WissenUtil.removeWissenFromWissenItems(items, cost);
                         amount--;
                     }
                 }

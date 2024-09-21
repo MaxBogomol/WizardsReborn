@@ -3,7 +3,7 @@ package mod.maxbogomol.wizards_reborn.common.item.equipment.curio;
 import mod.maxbogomol.wizards_reborn.api.wissen.IWissenItem;
 import mod.maxbogomol.wizards_reborn.api.wissen.WissenItemType;
 import mod.maxbogomol.wizards_reborn.api.wissen.WissenItemUtil;
-import mod.maxbogomol.wizards_reborn.api.wissen.WissenUtils;
+import mod.maxbogomol.wizards_reborn.api.wissen.WissenUtil;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
@@ -52,13 +52,13 @@ public class WissenRingItem extends BaseWissenCurioItem {
                     WissenItemUtil.addWissen(stack, 1, getMaxWissen());
                 }
 
-                List<ItemStack> itemsAdd = WissenUtils.getWissenItemsActive(player);
-                List<ItemStack> itemsUsing = WissenUtils.getWissenItemsUsing(itemsAdd);
-                itemsUsing.addAll(WissenUtils.getWissenItemsStorage(itemsAdd));
+                List<ItemStack> itemsAdd = WissenUtil.getWissenItemsActive(player);
+                List<ItemStack> itemsUsing = WissenUtil.getWissenItemsUsing(itemsAdd);
+                itemsUsing.addAll(WissenUtil.getWissenItemsStorage(itemsAdd));
 
                 for (ItemStack item : itemsUsing) {
                     if (item.getItem() instanceof IWissenItem wissenItem) {
-                        int wissenRemain = WissenUtils.getRemoveWissenRemain(WissenItemUtil.getWissen(stack), 1);
+                        int wissenRemain = WissenUtil.getRemoveWissenRemain(WissenItemUtil.getWissen(stack), 1);
                         wissenRemain = 1 - wissenRemain;
                         WissenItemUtil.existWissen(item);
                         int itemWissenRemain = WissenItemUtil.getAddWissenRemain(item, wissenRemain, wissenItem.getMaxWissen());

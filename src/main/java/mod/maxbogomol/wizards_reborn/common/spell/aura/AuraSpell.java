@@ -19,7 +19,7 @@ import mod.maxbogomol.wizards_reborn.common.network.spell.AuraSpellCastEffectPac
 import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornCrystals;
 import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornEntities;
 import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornSounds;
-import mod.maxbogomol.wizards_reborn.util.RenderUtils;
+import mod.maxbogomol.wizards_reborn.util.WizardsRebornRenderUtil;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.sounds.SoundSource;
@@ -236,20 +236,20 @@ public class AuraSpell extends Spell {
         stack.pushPose();
         stack.mulPose(Axis.ZP.rotationDegrees(90f));
         stack.mulPose(Axis.XP.rotationDegrees(ticks));
-        RenderUtils.raySided(stack, bufferDelayed, 0.8f, 10, 0.75f, r, g, b, 0.05f * alpha, r, g, b, 0F);
+        WizardsRebornRenderUtil.raySided(stack, bufferDelayed, 0.8f, 10, 0.75f, r, g, b, 0.05f * alpha, r, g, b, 0F);
         stack.mulPose(Axis.XP.rotationDegrees(-ticks * 2));
-        RenderUtils.raySided(stack, bufferDelayed, 0.5f, 7, 0.75f, r, g, b, 0.15f * alpha, r, g, b, 0F);
+        WizardsRebornRenderUtil.raySided(stack, bufferDelayed, 0.5f, 7, 0.75f, r, g, b, 0.15f * alpha, r, g, b, 0F);
         stack.mulPose(Axis.XP.rotationDegrees(ticks * 2));
         stack.mulPose(Axis.XP.rotationDegrees(ticks * 0.4f));
-        RenderUtils.raySided(stack, bufferDelayed, 0.25f, 5, 0.75f, r, g, b, 0.5f * alpha, r, g, b, 0F);
+        WizardsRebornRenderUtil.raySided(stack, bufferDelayed, 0.25f, 5, 0.75f, r, g, b, 0.5f * alpha, r, g, b, 0F);
         stack.popPose();
 
         stack.pushPose();
         stack.translate(0, 0.01f, 0);
         stack.mulPose(Axis.YP.rotationDegrees(-ticks * 0.3f));
-        RenderUtils.renderAura(stack, builder, size * sizeS, 2, 8, color, color, 0.2f * alpha, 0, true, true);
-        RenderUtils.renderAura(stack, builder, (size - 0.5f) * sizeS, 1.5f, 8, color, color, 0.3f * alpha, 0, true, false);
-        RenderUtils.renderAura(stack, builder, (size - 1f) * sizeS, 1f, 8, color, color, 0.05f * alpha, 0, true, false);
+        WizardsRebornRenderUtil.renderAura(stack, builder, size * sizeS, 2, 8, color, color, 0.2f * alpha, 0, true, true);
+        WizardsRebornRenderUtil.renderAura(stack, builder, (size - 0.5f) * sizeS, 1.5f, 8, color, color, 0.3f * alpha, 0, true, false);
+        WizardsRebornRenderUtil.renderAura(stack, builder, (size - 1f) * sizeS, 1f, 8, color, color, 0.05f * alpha, 0, true, false);
         stack.popPose();
     }
 }

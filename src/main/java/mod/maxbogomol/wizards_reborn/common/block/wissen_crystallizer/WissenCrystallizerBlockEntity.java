@@ -80,8 +80,8 @@ public class WissenCrystallizerBlockEntity extends ExposedBlockSimpleInventory i
                     if (wissenIsCraft == 0) {
                         level.playSound(WizardsReborn.proxy.getPlayer(), getBlockPos(), WizardsRebornSounds.WISSEN_CRYSTALLIZER_START.get(), SoundSource.BLOCKS, 1f, 1f);
                     }
-                    int addRemainCraft = WissenUtils.getAddWissenRemain(wissenIsCraft, getWissenPerTick(), wissenInCraft);
-                    int removeRemain = WissenUtils.getRemoveWissenRemain(getWissen(), getWissenPerTick() - addRemainCraft);
+                    int addRemainCraft = WissenUtil.getAddWissenRemain(wissenIsCraft, getWissenPerTick(), wissenInCraft);
+                    int removeRemain = WissenUtil.getRemoveWissenRemain(getWissen(), getWissenPerTick() - addRemainCraft);
 
                     wissenIsCraft = wissenIsCraft + (getWissenPerTick() - addRemainCraft - removeRemain);
                     removeWissen(getWissenPerTick() - addRemainCraft - removeRemain);

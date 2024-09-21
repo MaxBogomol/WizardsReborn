@@ -11,7 +11,7 @@ import mod.maxbogomol.wizards_reborn.api.arcaneenchantment.ArcaneEnchantment;
 import mod.maxbogomol.wizards_reborn.api.arcaneenchantment.ArcaneEnchantmentType;
 import mod.maxbogomol.wizards_reborn.api.arcaneenchantment.ArcaneEnchantmentUtil;
 import mod.maxbogomol.wizards_reborn.api.arcaneenchantment.IArcaneItem;
-import mod.maxbogomol.wizards_reborn.api.wissen.WissenUtils;
+import mod.maxbogomol.wizards_reborn.api.wissen.WissenUtil;
 import mod.maxbogomol.wizards_reborn.common.capability.IArrowModifier;
 import mod.maxbogomol.wizards_reborn.common.network.PacketHandler;
 import mod.maxbogomol.wizards_reborn.common.network.WissenChargeBurstEffectPacket;
@@ -83,15 +83,15 @@ public class WissenChargeArcaneEnchantment extends ArcaneEnchantment {
                             float charge = (time / 100f);
                             Vec3 pos = player.getLookAngle().scale(40).scale(1.0 / 25).add(player.getEyePosition(0));
 
-                            float costModifier = WissenUtils.getWissenCostModifierWithDiscount(player);
-                            List<ItemStack> items = WissenUtils.getWissenItemsNoneAndStorage(WissenUtils.getWissenItemsCurios(player));
-                            int wissen = WissenUtils.getWissenInItems(items);
+                            float costModifier = WissenUtil.getWissenCostModifierWithDiscount(player);
+                            List<ItemStack> items = WissenUtil.getWissenItemsNoneAndStorage(WissenUtil.getWissenItemsCurios(player));
+                            int wissen = WissenUtil.getWissenInItems(items);
                             int cost = (int) ((30 + time) * (1 - costModifier));
                             if (cost <= 0) {
                                 cost = 1;
                             }
 
-                            if (WissenUtils.canRemoveWissen(wissen, cost)) {
+                            if (WissenUtil.canRemoveWissen(wissen, cost)) {
                                 if (random.nextFloat() < 0.45f) {
                                     ParticleBuilder.create(FluffyFurParticles.WISP)
                                             .setColorData(ColorParticleData.create(color).build())
@@ -139,16 +139,16 @@ public class WissenChargeArcaneEnchantment extends ArcaneEnchantment {
                             time = 50;
                         }
 
-                        float costModifier = WissenUtils.getWissenCostModifierWithDiscount(player);
-                        List<ItemStack> items = WissenUtils.getWissenItemsNoneAndStorage(WissenUtils.getWissenItemsCurios(player));
-                        int wissen = WissenUtils.getWissenInItems(items);
+                        float costModifier = WissenUtil.getWissenCostModifierWithDiscount(player);
+                        List<ItemStack> items = WissenUtil.getWissenItemsNoneAndStorage(WissenUtil.getWissenItemsCurios(player));
+                        int wissen = WissenUtil.getWissenInItems(items);
                         int cost = (int) ((30 + time) * (1 - costModifier));
                         if (cost <= 0) {
                             cost = 1;
                         }
 
-                        if (WissenUtils.canRemoveWissen(wissen, cost)) {
-                            WissenUtils.removeWissenFromWissenItems(items, cost);
+                        if (WissenUtil.canRemoveWissen(wissen, cost)) {
+                            WissenUtil.removeWissenFromWissenItems(items, cost);
                             w.setCharge(time);
                         }
                     });

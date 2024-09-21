@@ -11,7 +11,7 @@ import mod.maxbogomol.fluffy_fur.registry.client.FluffyFurParticles;
 import mod.maxbogomol.wizards_reborn.WizardsReborn;
 import mod.maxbogomol.wizards_reborn.api.wissen.IExperienceBlockEntity;
 import mod.maxbogomol.wizards_reborn.api.wissen.IWissenBlockEntity;
-import mod.maxbogomol.wizards_reborn.api.wissen.WissenUtils;
+import mod.maxbogomol.wizards_reborn.api.wissen.WissenUtil;
 import mod.maxbogomol.wizards_reborn.client.sound.TotemOfExperienceAbsorptionSoundInstance;
 import mod.maxbogomol.wizards_reborn.common.config.Config;
 import mod.maxbogomol.wizards_reborn.common.network.PacketHandler;
@@ -67,9 +67,9 @@ public class TotemOfExperienceAbsorptionBlockEntity extends BlockEntityBase impl
             if (getExperience() < getMaxExperience() && cooldown <= 0) {
                 List<ExperienceOrb> orbs = level.getEntitiesOfClass(ExperienceOrb.class, new AABB(getBlockPos().getX() - 1, getBlockPos().getY() - 1, getBlockPos().getZ() - 1, getBlockPos().getX() + 2, getBlockPos().getY() + 2, getBlockPos().getZ() + 2));
                 for (ExperienceOrb orb : orbs) {
-                    int remain = WissenUtils.getRemoveWissenRemain(orb.value, 100);
+                    int remain = WissenUtil.getRemoveWissenRemain(orb.value, 100);
                     remain = 100 - remain;
-                    int remainAdd = WissenUtils.getAddWissenRemain(getExperience(), remain, getMaxExperience());
+                    int remainAdd = WissenUtil.getAddWissenRemain(getExperience(), remain, getMaxExperience());
                     remainAdd = remain - remainAdd;
                     if (remainAdd > 0 && remain > 0) {
                         addExperience(remainAdd);

@@ -4,21 +4,19 @@ import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.math.Axis;
 import mod.maxbogomol.fluffy_fur.FluffyFur;
 import mod.maxbogomol.fluffy_fur.client.event.ClientTickHandler;
+import mod.maxbogomol.fluffy_fur.client.render.RenderBuilder;
 import mod.maxbogomol.fluffy_fur.common.item.IGuiParticleItem;
+import mod.maxbogomol.fluffy_fur.registry.client.FluffyFurRenderTypes;
+import mod.maxbogomol.fluffy_fur.util.RenderUtil;
 import mod.maxbogomol.wizards_reborn.WizardsReborn;
 import mod.maxbogomol.wizards_reborn.api.wissen.IWissenItem;
 import mod.maxbogomol.wizards_reborn.api.wissen.WissenItemUtil;
-import mod.maxbogomol.wizards_reborn.api.wissen.WissenUtils;
+import mod.maxbogomol.wizards_reborn.api.wissen.WissenUtil;
 import mod.maxbogomol.wizards_reborn.common.config.Config;
 import mod.maxbogomol.wizards_reborn.common.network.ArcanumLensBurstEffectPacket;
 import mod.maxbogomol.wizards_reborn.common.network.PacketHandler;
 import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornSounds;
-import mod.maxbogomol.wizards_reborn.util.RenderUtils;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.renderer.MultiBufferSource;
-import net.minecraft.client.renderer.texture.TextureAtlas;
-import net.minecraft.client.renderer.texture.TextureAtlasSprite;
-import net.minecraft.resources.ResourceLocation;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResultHolder;
@@ -46,8 +44,8 @@ public class ArcanumLensItem extends ArcanumItem implements IGuiParticleItem {
         if (!level.isClientSide()) {
             int wissen = random.nextInt(2000, 3000);
 
-            List<ItemStack> items = WissenUtils.getWissenItems(player);
-            List<ItemStack> itemsOff = WissenUtils.getWissenItemsOff(items);
+            List<ItemStack> items = WissenUtil.getWissenItems(player);
+            List<ItemStack> itemsOff = WissenUtil.getWissenItemsOff(items);
             items.removeAll(itemsOff);
 
             for (ItemStack item : items) {
@@ -77,26 +75,22 @@ public class ArcanumLensItem extends ArcanumItem implements IGuiParticleItem {
 
     @Override
     @OnlyIn(Dist.CLIENT)
-    public void renderParticle(PoseStack pose, LivingEntity entity, Level level, ItemStack stack, int x, int y, int seed, int guiOffset) {
+    public void renderParticle(PoseStack poseStack, LivingEntity entity, Level level, ItemStack stack, int x, int y, int seed, int guiOffset) {
         float ticks = (ClientTickHandler.ticksInGame + Minecraft.getInstance().getPartialTick());
 
-        RenderUtils.startGuiParticle();
-        MultiBufferSource.BufferSource buffersource = Minecraft.getInstance().renderBuffers().bufferSource();
-
-        TextureAtlasSprite sparkle = Minecraft.getInstance().getTextureAtlas(TextureAtlas.LOCATION_BLOCKS).apply(new ResourceLocation(FluffyFur.MOD_ID, "particle/sparkle"));
-
         for (int i = 0; i < 45; i++) {
-            pose.pushPose();
+            poseStack.pushPose();
             float offset = (float) (Math.abs(Math.sin(Math.toRadians(i * 4 + (ticks * 2f)))));
             offset = (offset - 0.25f) * (1 / 0.75f);
             if (offset < 0) offset = 0;
-            pose.translate(x + 8 + (Math.sin(Math.toRadians(i * 8)) * 8), y + 8 + (Math.cos(Math.toRadians(i * 8)) * 2), 100 + (100 * Math.cos(Math.toRadians(i * 8))));
-            pose.mulPose(Axis.ZP.rotationDegrees(i * 2 + (ticks * 2f)));
-            RenderUtils.spriteGlowQuadCenter(pose, buffersource, 0, 0, 6f * offset, 6f * offset, sparkle.getU0(), sparkle.getU1(), sparkle.getV0(), sparkle.getV1(), Config.wissenColorR(), Config.wissenColorG(), Config.wissenColorB(), 0.2F);
-            buffersource.endBatch();
-            pose.popPose();
+            poseStack.translate(x + 8 + (Math.sin(Math.toRadians(i * 8)) * 8), y + 8 + (Math.cos(Math.toRadians(i * 8)) * 2), 100 + (100 * Math.cos(Math.toRadians(i * 8))));
+            poseStack.mulPose(Axis.ZP.rotationDegrees(i * 2 + (ticks * 2f)));
+            RenderBuilder.create().setRenderType(FluffyFurRenderTypes.ADDITIVE_TEXTURE)
+                    .setUV(RenderUtil.getSprite(FluffyFur.MOD_ID, "particle/sparkle"))
+                    .setColorRaw(Config.wissenColorR(), Config.wissenColorG(), Config.wissenColorB()).setAlpha(0.2f)
+                    .renderCenteredQuad(poseStack, 3f * offset)
+                    .endBatch();
+            poseStack.popPose();
         }
-
-        RenderUtils.endGuiParticle();
     }
 }

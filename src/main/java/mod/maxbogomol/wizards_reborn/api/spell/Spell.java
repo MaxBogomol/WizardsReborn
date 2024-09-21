@@ -8,7 +8,7 @@ import mod.maxbogomol.wizards_reborn.api.crystal.CrystalUtil;
 import mod.maxbogomol.wizards_reborn.api.crystal.Crystals;
 import mod.maxbogomol.wizards_reborn.api.knowledge.Research;
 import mod.maxbogomol.wizards_reborn.api.wissen.WissenItemUtil;
-import mod.maxbogomol.wizards_reborn.api.wissen.WissenUtils;
+import mod.maxbogomol.wizards_reborn.api.wissen.WissenUtil;
 import mod.maxbogomol.wizards_reborn.common.entity.SpellProjectileEntity;
 import mod.maxbogomol.wizards_reborn.common.item.CrystalItem;
 import mod.maxbogomol.wizards_reborn.common.item.equipment.ArcaneWandItem;
@@ -133,7 +133,7 @@ public class Spell {
 
     public int getWissenCostWithStat(CompoundTag nbt, Player player, int cost) {
         int balanceLevel = CrystalUtil.getStatLevel(nbt, WizardsRebornCrystals.BALANCE);
-        float modifier = (1 - (getWissenStatModifier() * balanceLevel) - WissenUtils.getWissenCostModifierWithDiscount(player));
+        float modifier = (1 - (getWissenStatModifier() * balanceLevel) - WissenUtil.getWissenCostModifierWithDiscount(player));
         if (modifier <= 0) {
             return 1;
         }

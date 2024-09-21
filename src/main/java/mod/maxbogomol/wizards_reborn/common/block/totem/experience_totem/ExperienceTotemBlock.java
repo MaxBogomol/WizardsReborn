@@ -9,7 +9,7 @@ import mod.maxbogomol.fluffy_fur.common.easing.Easing;
 import mod.maxbogomol.fluffy_fur.common.network.BlockEntityUpdate;
 import mod.maxbogomol.fluffy_fur.registry.client.FluffyFurParticles;
 import mod.maxbogomol.wizards_reborn.api.wissen.ITotemBlock;
-import mod.maxbogomol.wizards_reborn.api.wissen.WissenUtils;
+import mod.maxbogomol.wizards_reborn.api.wissen.WissenUtil;
 import mod.maxbogomol.wizards_reborn.common.item.equipment.WissenWandItem;
 import mod.maxbogomol.wizards_reborn.registry.common.block.WizardsRebornBlocks;
 import net.minecraft.core.BlockPos;
@@ -125,7 +125,7 @@ public class ExperienceTotemBlock extends Block implements EntityBlock, SimpleWa
 
         if (player.isShiftKeyDown()) {
             if (blockEntity.getExperience() > 0) {
-                int remain = WissenUtils.getRemoveWissenRemain(blockEntity.getExperience(), 100);
+                int remain = WissenUtil.getRemoveWissenRemain(blockEntity.getExperience(), 100);
                 remain = 100 - remain;
                 if (remain > 0) {
                     blockEntity.removeExperience(remain);
@@ -168,9 +168,9 @@ public class ExperienceTotemBlock extends Block implements EntityBlock, SimpleWa
             }
         } else {
             if (blockEntity.getExperience() < blockEntity.getMaxExperience()) {
-                int remain = WissenUtils.getRemoveWissenRemain(getPlayerXP(player), 100);
+                int remain = WissenUtil.getRemoveWissenRemain(getPlayerXP(player), 100);
                 remain = 100 - remain;
-                int remainAdd = WissenUtils.getAddWissenRemain(blockEntity.getExperience(), remain, blockEntity.getMaxExperience());
+                int remainAdd = WissenUtil.getAddWissenRemain(blockEntity.getExperience(), remain, blockEntity.getMaxExperience());
                 remainAdd = remain - remainAdd;
                 if (remainAdd > 0 && remain > 0) {
                     blockEntity.addExperience(remainAdd);

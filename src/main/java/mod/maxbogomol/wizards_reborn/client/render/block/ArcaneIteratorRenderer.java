@@ -6,10 +6,10 @@ import com.mojang.math.Axis;
 import mod.maxbogomol.fluffy_fur.client.event.ClientTickHandler;
 import mod.maxbogomol.fluffy_fur.registry.client.FluffyFurRenderTypes;
 import mod.maxbogomol.fluffy_fur.util.RenderUtil;
-import mod.maxbogomol.wizards_reborn.api.wissen.WissenUtils;
+import mod.maxbogomol.wizards_reborn.api.wissen.WissenUtil;
 import mod.maxbogomol.wizards_reborn.common.block.arcane_iterator.ArcaneIteratorBlockEntity;
 import mod.maxbogomol.wizards_reborn.registry.client.WizardsRebornModels;
-import mod.maxbogomol.wizards_reborn.util.RenderUtils;
+import mod.maxbogomol.wizards_reborn.util.WizardsRebornRenderUtil;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.blockentity.BlockEntityRenderer;
@@ -95,16 +95,16 @@ public class ArcaneIteratorRenderer implements BlockEntityRenderer<ArcaneIterato
         renderPiece(x * offset, -y * offset, z * offset, -90F, 90F, size, blockEntity, partialTicks, poseStack, bufferSource, light, overlay);
         poseStack.popPose();
 
-        if (WissenUtils.isCanRenderWissenWand()) {
+        if (WissenUtil.isCanRenderWissenWand()) {
             poseStack.pushPose();
             poseStack.translate(-5, -3, -5);
-            RenderUtils.renderBoxLines(new Vec3(11, 7, 11), RenderUtils.colorArea, partialTicks, poseStack);
+            WizardsRebornRenderUtil.renderBoxLines(new Vec3(11, 7, 11), WizardsRebornRenderUtil.colorArea, partialTicks, poseStack);
             poseStack.popPose();
 
             if (!blockEntity.isWorks()) {
                 poseStack.pushPose();
                 poseStack.translate(0, -2, 0);
-                RenderUtils.renderBoxLines(new Vec3(1, 3, 1), RenderUtils.colorMissing, partialTicks, poseStack);
+                WizardsRebornRenderUtil.renderBoxLines(new Vec3(1, 3, 1), WizardsRebornRenderUtil.colorMissing, partialTicks, poseStack);
                 poseStack.popPose();
             }
         }
@@ -126,15 +126,15 @@ public class ArcaneIteratorRenderer implements BlockEntityRenderer<ArcaneIterato
             trailList.add(new Vec3(0, 0, 0));
             trailList.add(new Vec3(xOffset * trailSize, yOffset * trailSize, zOffset * trailSize));
 
-            RenderUtils.renderTrail(poseStack, builder, Vec3.ZERO, trailList, trailWidth, 0, 0.25f,0, 1.0f, new Color(0.807f, 0.800f, 0.639f), 8, false);
-            RenderUtils.renderTrail(poseStack, builder, Vec3.ZERO, trailList, trailWidth, 0, 0.5f,0,0.75f, new Color(0.611f, 0.352f, 0.447f), 8, false);
+            WizardsRebornRenderUtil.renderTrail(poseStack, builder, Vec3.ZERO, trailList, trailWidth, 0, 0.25f,0, 1.0f, new Color(0.807f, 0.800f, 0.639f), 8, false);
+            WizardsRebornRenderUtil.renderTrail(poseStack, builder, Vec3.ZERO, trailList, trailWidth, 0, 0.5f,0,0.75f, new Color(0.611f, 0.352f, 0.447f), 8, false);
 
             trailList.clear();
             trailList.add(new Vec3(0, 0, 0));
             trailList.add(new Vec3(xOffset * -trailSize, yOffset * -trailSize, zOffset * -trailSize));
 
-            RenderUtils.renderTrail(poseStack, builder, Vec3.ZERO, trailList, trailWidth, 0, 0.25f,0, 1.0f, new Color(0.807f, 0.800f, 0.639f), 8, false);
-            RenderUtils.renderTrail(poseStack, builder, Vec3.ZERO, trailList, trailWidth, 0, 0.5f,0,0.75f, new Color(0.611f, 0.352f, 0.447f), 8, false);
+            WizardsRebornRenderUtil.renderTrail(poseStack, builder, Vec3.ZERO, trailList, trailWidth, 0, 0.25f,0, 1.0f, new Color(0.807f, 0.800f, 0.639f), 8, false);
+            WizardsRebornRenderUtil.renderTrail(poseStack, builder, Vec3.ZERO, trailList, trailWidth, 0, 0.5f,0,0.75f, new Color(0.611f, 0.352f, 0.447f), 8, false);
             poseStack.popPose();
         }
     }

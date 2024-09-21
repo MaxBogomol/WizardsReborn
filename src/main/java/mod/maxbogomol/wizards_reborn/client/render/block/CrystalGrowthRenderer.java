@@ -4,10 +4,10 @@ import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.math.Axis;
 import mod.maxbogomol.fluffy_fur.client.event.ClientTickHandler;
 import mod.maxbogomol.fluffy_fur.registry.client.FluffyFurRenderTypes;
-import mod.maxbogomol.wizards_reborn.api.wissen.WissenUtils;
+import mod.maxbogomol.wizards_reborn.api.wissen.WissenUtil;
 import mod.maxbogomol.wizards_reborn.common.block.crystal_growth.CrystalGrowthBlock;
 import mod.maxbogomol.wizards_reborn.common.block.crystal_growth.CrystalGrowthBlockEntity;
-import mod.maxbogomol.wizards_reborn.util.RenderUtils;
+import mod.maxbogomol.wizards_reborn.util.WizardsRebornRenderUtil;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.blockentity.BlockEntityRenderer;
 import net.minecraft.world.phys.Vec3;
@@ -40,7 +40,7 @@ public class CrystalGrowthRenderer implements BlockEntityRenderer<CrystalGrowthB
                     poseStack.pushPose();
                     poseStack.translate(0.46875F, 0.1F, 0.46875F);
                     poseStack.mulPose(Axis.ZP.rotationDegrees(-90f));
-                    RenderUtils.ray(poseStack, bufferDelayed, 0.10625f, 0.11f, 1f, r, g, b, alpha);
+                    WizardsRebornRenderUtil.ray(poseStack, bufferDelayed, 0.10625f, 0.11f, 1f, r, g, b, alpha);
                     poseStack.popPose();
                 }
 
@@ -48,7 +48,7 @@ public class CrystalGrowthRenderer implements BlockEntityRenderer<CrystalGrowthB
                     poseStack.pushPose();
                     poseStack.translate(0.5F, 0.06F, 0.5F);
                     poseStack.mulPose(Axis.ZP.rotationDegrees(-90f));
-                    RenderUtils.ray(poseStack, bufferDelayed, 0.1375f, 0.08f, 1f, r, g, b, alpha);
+                    WizardsRebornRenderUtil.ray(poseStack, bufferDelayed, 0.1375f, 0.08f, 1f, r, g, b, alpha);
                     poseStack.popPose();
                 }
 
@@ -56,7 +56,7 @@ public class CrystalGrowthRenderer implements BlockEntityRenderer<CrystalGrowthB
                     poseStack.pushPose();
                     poseStack.translate(0.5F, 0.19F, 0.5F);
                     poseStack.mulPose(Axis.ZP.rotationDegrees(-90f));
-                    RenderUtils.ray(poseStack, bufferDelayed, 0.1375f, 0.21f, 1f, r, g, b, alpha);
+                    WizardsRebornRenderUtil.ray(poseStack, bufferDelayed, 0.1375f, 0.21f, 1f, r, g, b, alpha);
                     poseStack.popPose();
                 }
 
@@ -64,7 +64,7 @@ public class CrystalGrowthRenderer implements BlockEntityRenderer<CrystalGrowthB
                     poseStack.pushPose();
                     poseStack.translate(0.53125F, 0.29F, 0.53125F);
                     poseStack.mulPose(Axis.ZP.rotationDegrees(-90f));
-                    RenderUtils.ray(poseStack, bufferDelayed, 0.16875f, 0.3f, 1f, r, g, b, alpha);
+                    WizardsRebornRenderUtil.ray(poseStack, bufferDelayed, 0.16875f, 0.3f, 1f, r, g, b, alpha);
                     poseStack.popPose();
                 }
 
@@ -72,15 +72,15 @@ public class CrystalGrowthRenderer implements BlockEntityRenderer<CrystalGrowthB
                     poseStack.pushPose();
                     poseStack.translate(0.5F, 0.3825F, 0.5F);
                     poseStack.mulPose(Axis.ZP.rotationDegrees(-90f));
-                    RenderUtils.ray(poseStack, bufferDelayed, 0.2f, 0.4f, 1f, r, g, b, alpha);
+                    WizardsRebornRenderUtil.ray(poseStack, bufferDelayed, 0.2f, 0.4f, 1f, r, g, b, alpha);
                     poseStack.popPose();
                 }
             }
 
-            if (WissenUtils.isCanRenderWissenWand()) {
+            if (WissenUtil.isCanRenderWissenWand()) {
                 if (age == 4) {
                     poseStack.pushPose();
-                    RenderUtils.renderBoxLines(new Vec3(1, 1, 1), color, partialTicks, poseStack);
+                    WizardsRebornRenderUtil.renderBoxLines(new Vec3(1, 1, 1), color, partialTicks, poseStack);
                     poseStack.popPose();
                 }
             }

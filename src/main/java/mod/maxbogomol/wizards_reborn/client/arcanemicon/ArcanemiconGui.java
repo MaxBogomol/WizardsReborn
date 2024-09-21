@@ -92,12 +92,12 @@ public class ArcanemiconGui extends Screen {
     @Override
     public void render(GuiGraphics gui, int mouseX, int mouseY, float partialTicks) {
         renderBackground(gui);
-        Minecraft mc = Minecraft.getInstance();
+        Minecraft minecraft = Minecraft.getInstance();
 
         currentItem = ItemStack.EMPTY;
 
-        this.width = mc.getWindow().getGuiScaledWidth();
-        this.height = mc.getWindow().getGuiScaledHeight();
+        this.width = minecraft.getWindow().getGuiScaledWidth();
+        this.height = minecraft.getWindow().getGuiScaledHeight();
         int guiLeft = (width - xSize) / 2, guiTop = (height - ySize) / 2;
         gui.blit(BACKGROUND, guiLeft, guiTop, 0, 180, xSize, ySize, 512, 512);
 
@@ -163,9 +163,9 @@ public class ArcanemiconGui extends Screen {
     @Override
     public boolean mouseClicked(double mouseX, double mouseY, int button) {
         if (button == GLFW.GLFW_MOUSE_BUTTON_LEFT) {
-            Minecraft mc = Minecraft.getInstance();
-            this.width = mc.getWindow().getGuiScaledWidth();
-            this.height = mc.getWindow().getGuiScaledHeight();
+            Minecraft minecraft = Minecraft.getInstance();
+            this.width = minecraft.getWindow().getGuiScaledWidth();
+            this.height = minecraft.getWindow().getGuiScaledHeight();
             int guiLeft = (width - xSize) / 2, guiTop = (height - ySize) / 2;
 
             if (currentPage > 0) {
@@ -232,9 +232,9 @@ public class ArcanemiconGui extends Screen {
 
     @Override
     public boolean mouseScrolled(double mouseX, double mouseY, double delta) {
-        Minecraft mc = Minecraft.getInstance();
-        this.width = mc.getWindow().getGuiScaledWidth();
-        this.height = mc.getWindow().getGuiScaledHeight();
+        Minecraft minecraft = Minecraft.getInstance();
+        this.width = minecraft.getWindow().getGuiScaledWidth();
+        this.height = minecraft.getWindow().getGuiScaledHeight();
         int guiLeft = (width - xSize) / 2, guiTop = (height - ySize) / 2;
 
         Page left = currentChapter.getPage(currentPage), right = currentChapter.getPage(currentPage + 1);

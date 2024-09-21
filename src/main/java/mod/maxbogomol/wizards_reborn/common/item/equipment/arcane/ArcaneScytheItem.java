@@ -6,7 +6,7 @@ import mod.maxbogomol.wizards_reborn.api.arcaneenchantment.ArcaneEnchantmentType
 import mod.maxbogomol.wizards_reborn.api.arcaneenchantment.ArcaneEnchantmentUtil;
 import mod.maxbogomol.wizards_reborn.api.arcaneenchantment.IArcaneItem;
 import mod.maxbogomol.wizards_reborn.api.skin.Skin;
-import mod.maxbogomol.wizards_reborn.api.wissen.WissenUtils;
+import mod.maxbogomol.wizards_reborn.api.wissen.WissenUtil;
 import mod.maxbogomol.wizards_reborn.common.arcaneenchantment.ThrowArcaneEnchantment;
 import mod.maxbogomol.wizards_reborn.common.item.equipment.ScytheItem;
 import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornArcaneEnchantments;
@@ -80,12 +80,12 @@ public class ArcaneScytheItem extends ScytheItem implements IArcaneItem, ICustom
         ItemStack stack = player.getItemInHand(hand);
 
         if (ArcaneEnchantmentUtil.getArcaneEnchantment(stack, WizardsRebornArcaneEnchantments.THROW) > 0) {
-            float costModifier = WissenUtils.getWissenCostModifierWithDiscount(player);
-            List<ItemStack> items = WissenUtils.getWissenItemsNoneAndStorage(WissenUtils.getWissenItemsCurios(player));
-            int wissen = WissenUtils.getWissenInItems(items);
+            float costModifier = WissenUtil.getWissenCostModifierWithDiscount(player);
+            List<ItemStack> items = WissenUtil.getWissenItemsNoneAndStorage(WissenUtil.getWissenItemsCurios(player));
+            int wissen = WissenUtil.getWissenInItems(items);
             int cost = (int) (150 * (1 - costModifier));
 
-            if (WissenUtils.canRemoveWissen(wissen, cost)) {
+            if (WissenUtil.canRemoveWissen(wissen, cost)) {
                 player.startUsingItem(hand);
                 return InteractionResultHolder.pass(stack);
             }

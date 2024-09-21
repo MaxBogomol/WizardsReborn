@@ -4,10 +4,10 @@ import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.math.Axis;
 import mod.maxbogomol.fluffy_fur.client.event.ClientTickHandler;
 import mod.maxbogomol.fluffy_fur.util.RenderUtil;
-import mod.maxbogomol.wizards_reborn.api.wissen.WissenUtils;
+import mod.maxbogomol.wizards_reborn.api.wissen.WissenUtil;
 import mod.maxbogomol.wizards_reborn.common.block.altar_of_drought.AltarOfDroughtBlockEntity;
 import mod.maxbogomol.wizards_reborn.registry.client.WizardsRebornModels;
-import mod.maxbogomol.wizards_reborn.util.RenderUtils;
+import mod.maxbogomol.wizards_reborn.util.WizardsRebornRenderUtil;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.blockentity.BlockEntityRenderer;
@@ -44,10 +44,10 @@ public class AltarOfDroughtRenderer implements BlockEntityRenderer<AltarOfDrough
         RenderUtil.renderCustomModel(WizardsRebornModels.ALTAR_OF_DROUGHT_FRAME, ItemDisplayContext.FIXED, false, poseStack, bufferSource, light, overlay);
         poseStack.popPose();
 
-        if (WissenUtils.isCanRenderWissenWand()) {
+        if (WissenUtil.isCanRenderWissenWand()) {
             poseStack.pushPose();
             poseStack.translate(-15, -15, -15);
-            RenderUtils.renderBoxLines(new Vec3(31, 31, 31), RenderUtils.colorArea, partialTicks, poseStack);
+            WizardsRebornRenderUtil.renderBoxLines(new Vec3(31, 31, 31), WizardsRebornRenderUtil.colorArea, partialTicks, poseStack);
             poseStack.popPose();
         }
     }

@@ -5,7 +5,7 @@ import mod.maxbogomol.wizards_reborn.api.arcaneenchantment.ArcaneEnchantment;
 import mod.maxbogomol.wizards_reborn.api.arcaneenchantment.ArcaneEnchantmentType;
 import mod.maxbogomol.wizards_reborn.api.arcaneenchantment.ArcaneEnchantmentUtil;
 import mod.maxbogomol.wizards_reborn.api.arcaneenchantment.IArcaneItem;
-import mod.maxbogomol.wizards_reborn.api.wissen.WissenUtils;
+import mod.maxbogomol.wizards_reborn.api.wissen.WissenUtil;
 import mod.maxbogomol.wizards_reborn.common.network.EagleShotRayEffectPacket;
 import mod.maxbogomol.wizards_reborn.common.network.PacketHandler;
 import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornArcaneEnchantments;
@@ -58,16 +58,16 @@ public class EagleShotArcaneEnchantment extends ArcaneEnchantment {
             int enchantmentLevel = ArcaneEnchantmentUtil.getArcaneEnchantment(stack, WizardsRebornArcaneEnchantments.EAGLE_SHOT);
             if (enchantmentLevel > 0) {
                 if (BowItem.getPowerForTime(stack.getUseDuration() - timeLeft) >= 1f) {
-                    float costModifier = WissenUtils.getWissenCostModifierWithDiscount(player);
-                    List<ItemStack> items = WissenUtils.getWissenItemsNoneAndStorage(WissenUtils.getWissenItemsCurios(player));
-                    int wissen = WissenUtils.getWissenInItems(items);
+                    float costModifier = WissenUtil.getWissenCostModifierWithDiscount(player);
+                    List<ItemStack> items = WissenUtil.getWissenItemsNoneAndStorage(WissenUtil.getWissenItemsCurios(player));
+                    int wissen = WissenUtil.getWissenInItems(items);
                     int cost = (int) ((30 + (enchantmentLevel * 20)) * (1 - costModifier));
                     if (cost <= 0) {
                         cost = 1;
                     }
 
-                    if (WissenUtils.canRemoveWissen(wissen, cost)) {
-                        WissenUtils.removeWissenFromWissenItems(items, cost);
+                    if (WissenUtil.canRemoveWissen(wissen, cost)) {
+                        WissenUtil.removeWissenFromWissenItems(items, cost);
 
                         float distance = (enchantmentLevel * 10) + 2f;
                         Vec3 movement = abstractarrow.getDeltaMovement();
@@ -126,15 +126,15 @@ public class EagleShotArcaneEnchantment extends ArcaneEnchantment {
     public static float getFOW(Player player, ItemStack stack, float fow) {
         int enchantmentLevel = ArcaneEnchantmentUtil.getArcaneEnchantment(stack, WizardsRebornArcaneEnchantments.EAGLE_SHOT);
         if (enchantmentLevel > 0) {
-            float costModifier = WissenUtils.getWissenCostModifierWithDiscount(player);
-            List<ItemStack> items = WissenUtils.getWissenItemsNoneAndStorage(WissenUtils.getWissenItemsCurios(player));
-            int wissen = WissenUtils.getWissenInItems(items);
+            float costModifier = WissenUtil.getWissenCostModifierWithDiscount(player);
+            List<ItemStack> items = WissenUtil.getWissenItemsNoneAndStorage(WissenUtil.getWissenItemsCurios(player));
+            int wissen = WissenUtil.getWissenInItems(items);
             int cost = (int) ((30 + (enchantmentLevel * 20)) * (1 - costModifier));
             if (cost <= 0) {
                 cost = 1;
             }
 
-            if (WissenUtils.canRemoveWissen(wissen, cost)) {
+            if (WissenUtil.canRemoveWissen(wissen, cost)) {
                 fow = fow - (BowItem.getPowerForTime(player.getTicksUsingItem()) * 0.4f) - 0.3f;
                 if (fow < 0) fow = 0;
             }

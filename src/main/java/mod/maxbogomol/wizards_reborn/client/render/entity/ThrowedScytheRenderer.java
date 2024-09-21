@@ -10,7 +10,7 @@ import mod.maxbogomol.fluffy_fur.registry.client.FluffyFurRenderTypes;
 import mod.maxbogomol.fluffy_fur.util.RenderUtil;
 import mod.maxbogomol.wizards_reborn.common.entity.ThrowedScytheEntity;
 import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornArcaneEnchantments;
-import mod.maxbogomol.wizards_reborn.util.RenderUtils;
+import mod.maxbogomol.wizards_reborn.util.WizardsRebornRenderUtil;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.culling.Frustum;
@@ -91,7 +91,7 @@ public class ThrowedScytheRenderer<T extends ThrowedScytheEntity> extends Entity
 
             poseStack.mulPose(Axis.YP.rotationDegrees((float) Math.toDegrees(-yaw)));
             poseStack.mulPose(Axis.ZP.rotationDegrees((float) Math.toDegrees(-pitch) - 90f));
-            RenderUtils.scytheTrail(poseStack, bufferDelayed, 2f, distance, 0.5f, r, g, b, 0.5f * alpha, r, g, b, 0.5f * alpha);
+            WizardsRebornRenderUtil.scytheTrail(poseStack, bufferDelayed, 2f, distance, 0.5f, r, g, b, 0.5f * alpha, r, g, b, 0.5f * alpha);
             poseStack.popPose();
         }
 

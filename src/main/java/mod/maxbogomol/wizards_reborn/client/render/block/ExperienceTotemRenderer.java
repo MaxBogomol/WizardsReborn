@@ -4,9 +4,9 @@ import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.math.Axis;
 import mod.maxbogomol.fluffy_fur.client.event.ClientTickHandler;
 import mod.maxbogomol.fluffy_fur.registry.client.FluffyFurRenderTypes;
-import mod.maxbogomol.wizards_reborn.api.wissen.WissenUtils;
+import mod.maxbogomol.wizards_reborn.api.wissen.WissenUtil;
 import mod.maxbogomol.wizards_reborn.common.block.totem.experience_totem.ExperienceTotemBlockEntity;
-import mod.maxbogomol.wizards_reborn.util.RenderUtils;
+import mod.maxbogomol.wizards_reborn.util.WizardsRebornRenderUtil;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.blockentity.BlockEntityRenderer;
@@ -44,17 +44,17 @@ public class ExperienceTotemRenderer implements BlockEntityRenderer<ExperienceTo
             poseStack.mulPose(Axis.XP.rotationDegrees((float) (random.nextFloat() * 360 + ticks)));
             poseStack.mulPose(Axis.ZP.rotationDegrees((float) (random.nextFloat() * 360 + ticks)));
             poseStack.scale(size, size, size);
-            RenderUtils.ray(poseStack, bufferDelayed, 0.06f, 0.06f, 1f, 0.243f, 0.564f, 0.250f, 0.75f);
-            RenderUtils.ray(poseStack, bufferDelayed, 0.075f, 0.075f, 1f, 0.243f, 0.564f, 0.250f, alpha);
-            RenderUtils.ray(poseStack, bufferDelayed, 0.1f, 0.1f, 1f, 0.784f, 1f, 0.560f, alpha / 2);
-            RenderUtils.ray(poseStack, bufferDelayed, 0.12f * offset, 0.12f * offset, 1f, 0.960f, 1f, 0.560f, 0.2f);
+            WizardsRebornRenderUtil.ray(poseStack, bufferDelayed, 0.06f, 0.06f, 1f, 0.243f, 0.564f, 0.250f, 0.75f);
+            WizardsRebornRenderUtil.ray(poseStack, bufferDelayed, 0.075f, 0.075f, 1f, 0.243f, 0.564f, 0.250f, alpha);
+            WizardsRebornRenderUtil.ray(poseStack, bufferDelayed, 0.1f, 0.1f, 1f, 0.784f, 1f, 0.560f, alpha / 2);
+            WizardsRebornRenderUtil.ray(poseStack, bufferDelayed, 0.12f * offset, 0.12f * offset, 1f, 0.960f, 1f, 0.560f, 0.2f);
             poseStack.popPose();
         }
 
-        if (WissenUtils.isCanRenderWissenWand()) {
+        if (WissenUtil.isCanRenderWissenWand()) {
             poseStack.pushPose();
             poseStack.translate(-1, -1, -1);
-            RenderUtils.renderBoxLines(new Vec3(3, 3, 3), RenderUtils.colorArea, partialTicks, poseStack);
+            WizardsRebornRenderUtil.renderBoxLines(new Vec3(3, 3, 3), WizardsRebornRenderUtil.colorArea, partialTicks, poseStack);
             poseStack.popPose();
         }
     }

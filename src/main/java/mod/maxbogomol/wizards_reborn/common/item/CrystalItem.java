@@ -1,24 +1,23 @@
 package mod.maxbogomol.wizards_reborn.common.item;
 
-import com.mojang.blaze3d.systems.RenderSystem;
 import com.mojang.blaze3d.vertex.PoseStack;
+import mod.maxbogomol.fluffy_fur.client.event.ClientTickHandler;
 import mod.maxbogomol.fluffy_fur.client.particle.ParticleBuilder;
 import mod.maxbogomol.fluffy_fur.client.particle.data.ColorParticleData;
 import mod.maxbogomol.fluffy_fur.client.particle.data.GenericParticleData;
 import mod.maxbogomol.fluffy_fur.client.particle.data.SpinParticleData;
+import mod.maxbogomol.fluffy_fur.client.render.RenderBuilder;
 import mod.maxbogomol.fluffy_fur.common.item.ICustomBlockEntityDataItem;
 import mod.maxbogomol.fluffy_fur.common.item.IGuiParticleItem;
 import mod.maxbogomol.fluffy_fur.common.item.IParticleItem;
 import mod.maxbogomol.fluffy_fur.registry.client.FluffyFurParticles;
+import mod.maxbogomol.fluffy_fur.registry.client.FluffyFurRenderTypes;
 import mod.maxbogomol.fluffy_fur.util.ColorUtil;
 import mod.maxbogomol.wizards_reborn.api.crystal.CrystalStat;
 import mod.maxbogomol.wizards_reborn.api.crystal.CrystalType;
 import mod.maxbogomol.wizards_reborn.api.crystal.CrystalUtil;
 import mod.maxbogomol.wizards_reborn.api.crystal.PolishingType;
 import mod.maxbogomol.wizards_reborn.common.block.crystal.CrystalBlock;
-import mod.maxbogomol.wizards_reborn.util.RenderUtils;
-import net.minecraft.client.Minecraft;
-import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.core.NonNullList;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
@@ -158,36 +157,31 @@ public class CrystalItem extends BlockItem implements IParticleItem, IGuiParticl
 
     @Override
     @OnlyIn(Dist.CLIENT)
-    public void renderParticle(PoseStack pose, LivingEntity entity, Level level, ItemStack stack, int x, int y, int seed, int guiOffset) {
+    public void renderParticle(PoseStack poseStack, LivingEntity entity, Level level, ItemStack stack, int x, int y, int seed, int guiOffset) {
         if (getPolishing().getPolishingLevel() > 0) {
             int polishingLevel = getPolishing().getPolishingLevel();
-            if (polishingLevel > 4) {
-                polishingLevel = 4;
-            }
+            if (polishingLevel > 4) polishingLevel = 4;
             Color color = getType().getColor();
             int seedI = this.getDescriptionId().length();
 
-            RenderUtils.startGuiParticle();
-            MultiBufferSource.BufferSource buffersource = Minecraft.getInstance().renderBuffers().bufferSource();
-
-            pose.pushPose();
-            pose.translate(x, y, 100);
-            RenderSystem.setShaderColor(color.getRed() / 255f, color.getGreen() / 255f, color.getBlue() / 255f, 0.75F * (polishingLevel / 4f));
-            RenderUtils.dragon(pose, buffersource, 8, 8, 0, 12f, Minecraft.getInstance().getPartialTick(), 1, 1, 1, seedI);
-            buffersource.endBatch();
-            pose.popPose();
+            poseStack.pushPose();
+            poseStack.translate(x + 8, y + 8, 100);
+            RenderBuilder.create().setRenderType(FluffyFurRenderTypes.ADDITIVE)
+                    .setColor(color).setAlpha(0.75F * (polishingLevel / 4f))
+                    .renderDragon(poseStack, 12f, ClientTickHandler.partialTicks, seedI)
+                    .endBatch();
+            poseStack.popPose();
 
             if (getPolishing().hasParticle()) {
                 Color polishingColor = getPolishing().getColor();
-                pose.pushPose();
-                pose.translate(x, y, 100);
-                RenderSystem.setShaderColor(polishingColor.getRed() / 255f, polishingColor.getGreen() / 255f, polishingColor.getBlue() / 255f, 0.5F);
-                RenderUtils.dragon(pose, buffersource, 8, 8, 0, 10f, Minecraft.getInstance().getPartialTick(), 1, 1, 1, seedI + 1f);
-                buffersource.endBatch();
-                pose.popPose();
+                poseStack.pushPose();
+                poseStack.translate(x + 8, y + 8, 100);
+                RenderBuilder.create().setRenderType(FluffyFurRenderTypes.ADDITIVE)
+                        .setColor(polishingColor).setAlpha(0.5f)
+                        .renderDragon(poseStack, 10f, ClientTickHandler.partialTicks, seedI + 1)
+                        .endBatch();
+                poseStack.popPose();
             }
-
-            RenderUtils.endGuiParticle();
         }
     }
 }

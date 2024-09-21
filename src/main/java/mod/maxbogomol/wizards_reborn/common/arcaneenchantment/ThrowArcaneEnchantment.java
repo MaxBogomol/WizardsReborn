@@ -6,7 +6,7 @@ import mod.maxbogomol.wizards_reborn.api.arcaneenchantment.ArcaneEnchantment;
 import mod.maxbogomol.wizards_reborn.api.arcaneenchantment.ArcaneEnchantmentType;
 import mod.maxbogomol.wizards_reborn.api.arcaneenchantment.ArcaneEnchantmentUtil;
 import mod.maxbogomol.wizards_reborn.api.arcaneenchantment.IArcaneItem;
-import mod.maxbogomol.wizards_reborn.api.wissen.WissenUtils;
+import mod.maxbogomol.wizards_reborn.api.wissen.WissenUtil;
 import mod.maxbogomol.wizards_reborn.client.animation.ScytheThrowItemAnimation;
 import mod.maxbogomol.wizards_reborn.common.entity.ThrowedScytheEntity;
 import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornArcaneEnchantments;
@@ -53,13 +53,13 @@ public class ThrowArcaneEnchantment extends ArcaneEnchantment {
             if (livingEntity instanceof Player player) {
                 if (ArcaneEnchantmentUtil.isArcaneItem(stack)) {
                     if (ArcaneEnchantmentUtil.getArcaneEnchantment(stack, WizardsRebornArcaneEnchantments.THROW) > 0) {
-                        float costModifier = WissenUtils.getWissenCostModifierWithDiscount(player);
-                        List<ItemStack> items = WissenUtils.getWissenItemsNoneAndStorage(WissenUtils.getWissenItemsCurios(player));
-                        int wissen = WissenUtils.getWissenInItems(items);
+                        float costModifier = WissenUtil.getWissenCostModifierWithDiscount(player);
+                        List<ItemStack> items = WissenUtil.getWissenItemsNoneAndStorage(WissenUtil.getWissenItemsCurios(player));
+                        int wissen = WissenUtil.getWissenInItems(items);
                         int cost = (int) (150 * (1 - costModifier));
 
                         int ticks = player.getUseItem().getUseDuration() - player.getUseItemRemainingTicks();
-                        if (ticks > 18 && WissenUtils.canRemoveWissen(wissen, cost)) {
+                        if (ticks > 18 && WissenUtil.canRemoveWissen(wissen, cost)) {
                             float baseDamage = 1;
                             float magicDamage = 0;
                             int slot = player.getUsedItemHand() == InteractionHand.OFF_HAND ? player.getInventory().getContainerSize() - 1 : player.getInventory().selected;
@@ -81,8 +81,8 @@ public class ThrowArcaneEnchantment extends ArcaneEnchantment {
                             int bladeLevel = ArcaneEnchantmentUtil.getArcaneEnchantment(stack, WizardsRebornArcaneEnchantments.MAGIC_BLADE);
                             if (bladeLevel > 0) {
                                 int additionalCost = (int) ((5 * bladeLevel) * (1 - costModifier));
-                                if (WissenUtils.canRemoveWissen(wissen, cost + additionalCost)) {
-                                    WissenUtils.removeWissenFromWissenItems(items, additionalCost);
+                                if (WissenUtil.canRemoveWissen(wissen, cost + additionalCost)) {
+                                    WissenUtil.removeWissenFromWissenItems(items, additionalCost);
                                     magicDamage = magicDamage + (2f * (bladeLevel / 5f));
                                 }
                             }
@@ -97,7 +97,7 @@ public class ThrowArcaneEnchantment extends ArcaneEnchantment {
                             player.awardStat(Stats.ITEM_USED.get(stack.getItem()));
                             player.setItemInHand(player.getUsedItemHand(), ItemStack.EMPTY);
                             livingEntity.stopUsingItem();
-                            WissenUtils.removeWissenFromWissenItems(items, cost);
+                            WissenUtil.removeWissenFromWissenItems(items, cost);
                         }
                     }
                 }

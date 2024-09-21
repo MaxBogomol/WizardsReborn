@@ -6,7 +6,7 @@ import mod.maxbogomol.wizards_reborn.api.knowledge.Knowledge;
 import mod.maxbogomol.wizards_reborn.api.knowledge.KnowledgeUtil;
 import mod.maxbogomol.wizards_reborn.api.spell.Spell;
 import mod.maxbogomol.wizards_reborn.api.spell.Spells;
-import mod.maxbogomol.wizards_reborn.api.wissen.WissenUtils;
+import mod.maxbogomol.wizards_reborn.api.wissen.WissenUtil;
 import mod.maxbogomol.wizards_reborn.client.arcanemicon.ArcanemiconGui;
 import mod.maxbogomol.wizards_reborn.client.arcanemicon.Page;
 import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornAttributes;
@@ -76,7 +76,7 @@ public class StatisticPage extends Page {
         String foodText = String.valueOf(Math.round(player.getFoodData().getFoodLevel() * 10) / 10f) + " (" + String.valueOf(Math.round(player.getFoodData().getSaturationLevel() * 10) / 10f) + ")";
         String armorText = String.valueOf(Math.round(player.getArmorValue() * 10) / 10f);
         String magicArmorText = String.valueOf(Math.round(player.getAttribute(WizardsRebornAttributes.MAGIC_ARMOR.get()).getValue() * 10) / 10f) + "%";
-        String wissenDiscountText = String.valueOf(Math.round(WissenUtils.getWissenCostModifierWithDiscount(player) * 1000) / 10f) + "%";
+        String wissenDiscountText = String.valueOf(Math.round(WissenUtil.getWissenCostModifierWithDiscount(player) * 1000) / 10f) + "%";
         String experienceText = String.valueOf(player.experienceLevel) + " (" + String.valueOf(getPlayerXP(player)) + ")";
 
         String text = I18n.get(this.text, progressionText, knowledgeText, pointsText, spellsText, healthText, foodText, armorText, magicArmorText, wissenDiscountText, experienceText);

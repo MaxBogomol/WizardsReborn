@@ -3,7 +3,7 @@ package mod.maxbogomol.wizards_reborn.common.block.totem.experience_totem;
 import mod.maxbogomol.fluffy_fur.common.block.entity.BlockEntityBase;
 import mod.maxbogomol.fluffy_fur.common.block.entity.TickableBlockEntity;
 import mod.maxbogomol.wizards_reborn.api.wissen.IExperienceBlockEntity;
-import mod.maxbogomol.wizards_reborn.api.wissen.WissenUtils;
+import mod.maxbogomol.wizards_reborn.api.wissen.WissenUtil;
 import mod.maxbogomol.wizards_reborn.common.network.PacketHandler;
 import mod.maxbogomol.wizards_reborn.common.network.block.ExperienceTotemBurstEffectPacket;
 import mod.maxbogomol.wizards_reborn.registry.common.block.WizardsRebornBlockEntities;
@@ -41,9 +41,9 @@ public class ExperienceTotemBlockEntity extends BlockEntityBase implements Ticka
                 List<ExperienceOrb> orbs = level.getEntitiesOfClass(ExperienceOrb.class, new AABB(getBlockPos().getX() - 1, getBlockPos().getY() - 1, getBlockPos().getZ() - 1, getBlockPos().getX() + 2, getBlockPos().getY() + 2, getBlockPos().getZ() + 2));
                 for (ExperienceOrb orb : orbs) {
                     if (orb.tickCount > 50) {
-                        int remain = WissenUtils.getRemoveWissenRemain(orb.value, 100);
+                        int remain = WissenUtil.getRemoveWissenRemain(orb.value, 100);
                         remain = 100 - remain;
-                        int remainAdd = WissenUtils.getAddWissenRemain(getExperience(), remain, getMaxExperience());
+                        int remainAdd = WissenUtil.getAddWissenRemain(getExperience(), remain, getMaxExperience());
                         remainAdd = remain - remainAdd;
                         if (remainAdd > 0 && remain > 0) {
                             addExperience(remainAdd);

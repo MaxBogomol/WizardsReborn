@@ -4,7 +4,7 @@ import mod.maxbogomol.wizards_reborn.api.arcaneenchantment.ArcaneEnchantmentType
 import mod.maxbogomol.wizards_reborn.api.arcaneenchantment.ArcaneEnchantmentUtil;
 import mod.maxbogomol.wizards_reborn.api.arcaneenchantment.IArcaneItem;
 import mod.maxbogomol.wizards_reborn.api.skin.Skin;
-import mod.maxbogomol.wizards_reborn.api.wissen.WissenUtils;
+import mod.maxbogomol.wizards_reborn.api.wissen.WissenUtil;
 import mod.maxbogomol.wizards_reborn.common.arcaneenchantment.SonarArcaneEnchantment;
 import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornArcaneEnchantments;
 import net.minecraft.network.chat.Component;
@@ -59,15 +59,15 @@ public class ArcanePickaxeItem extends PickaxeItem implements IArcaneItem {
 
         int enchantmentLevel = ArcaneEnchantmentUtil.getArcaneEnchantment(stack, WizardsRebornArcaneEnchantments.SONAR);
         if (enchantmentLevel > 0) {
-            float costModifier = WissenUtils.getWissenCostModifierWithDiscount(player);
-            List<ItemStack> items = WissenUtils.getWissenItemsNoneAndStorage(WissenUtils.getWissenItemsCurios(player));
-            int wissen = WissenUtils.getWissenInItems(items);
+            float costModifier = WissenUtil.getWissenCostModifierWithDiscount(player);
+            List<ItemStack> items = WissenUtil.getWissenItemsNoneAndStorage(WissenUtil.getWissenItemsCurios(player));
+            int wissen = WissenUtil.getWissenInItems(items);
             int cost = (int) (60 * (1 - costModifier));
 
-            if (WissenUtils.canRemoveWissen(wissen, cost)) {
+            if (WissenUtil.canRemoveWissen(wissen, cost)) {
                 if (SonarArcaneEnchantment.getCooldown(stack) <= 0 && SonarArcaneEnchantment.getOres(stack).isEmpty()) {
                     SonarArcaneEnchantment.writeOres(player, stack, enchantmentLevel);
-                    WissenUtils.removeWissenFromWissenItems(items, cost);
+                    WissenUtil.removeWissenFromWissenItems(items, cost);
                     return InteractionResultHolder.success(stack);
                 }
             }

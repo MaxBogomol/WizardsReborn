@@ -7,7 +7,7 @@ import mod.maxbogomol.fluffy_fur.registry.client.FluffyFurRenderTypes;
 import mod.maxbogomol.wizards_reborn.common.block.placed_items.PlacedItemsBlock;
 import mod.maxbogomol.wizards_reborn.common.block.placed_items.PlacedItemsBlockEntity;
 import mod.maxbogomol.wizards_reborn.common.item.IPlacedItem;
-import mod.maxbogomol.wizards_reborn.util.RenderUtils;
+import mod.maxbogomol.wizards_reborn.util.WizardsRebornRenderUtil;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.blockentity.BlockEntityRenderer;
@@ -93,7 +93,7 @@ public class PlacedItemsRenderer implements BlockEntityRenderer<PlacedItemsBlock
             poseStack.translate(0.5F, 0F, 0.5F);
             poseStack.mulPose(Axis.ZP.rotationDegrees(90f));
             poseStack.mulPose(Axis.XP.rotationDegrees((float) tick + addTick));
-            RenderUtils.beamSided(poseStack, bufferDelayed, 0.25f, 0.8f, 1f, 0.984f, 0.827f, 0.220f, 0.2f, r, g, b, 0f);
+            WizardsRebornRenderUtil.beamSided(poseStack, bufferDelayed, 0.25f, 0.8f, 1f, 0.984f, 0.827f, 0.220f, 0.2f, r, g, b, 0f);
             poseStack.popPose();
         }
     }

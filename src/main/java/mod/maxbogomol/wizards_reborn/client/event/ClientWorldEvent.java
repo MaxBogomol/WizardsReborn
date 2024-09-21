@@ -7,7 +7,7 @@ import mod.maxbogomol.wizards_reborn.api.light.ILightBlockEntity;
 import mod.maxbogomol.wizards_reborn.api.light.LightUtil;
 import mod.maxbogomol.wizards_reborn.api.wissen.IWissenBlockEntity;
 import mod.maxbogomol.wizards_reborn.common.item.equipment.WissenWandItem;
-import mod.maxbogomol.wizards_reborn.util.RenderUtils;
+import mod.maxbogomol.wizards_reborn.util.WizardsRebornRenderUtil;
 import net.minecraft.client.Minecraft;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -40,14 +40,14 @@ public class ClientWorldEvent {
 
     @OnlyIn(Dist.CLIENT)
     public static void onRender(RenderLevelStageEvent event) {
-        Minecraft mc = Minecraft.getInstance();
+        Minecraft minecraft = Minecraft.getInstance();
         float partialTicks = event.getPartialTick();
         PoseStack ms = event.getPoseStack();
 
-        Vec3 camera = mc.gameRenderer.getMainCamera().getPosition();
+        Vec3 camera = minecraft.gameRenderer.getMainCamera().getPosition();
 
         if (event.getStage() == RenderLevelStageEvent.Stage.AFTER_SOLID_BLOCKS) {
-            Player player = mc.player;
+            Player player = minecraft.player;
             if (player != null) {
                 ItemStack main = player.getMainHandItem();
                 ItemStack offhand = player.getOffhandItem();
@@ -80,16 +80,16 @@ public class ClientWorldEvent {
                                 double dZ = blockPos.getZ() - camera.z();
                                 ms.translate(dX, dY, dZ);
 
-                                Color color = RenderUtils.colorSelected;
-                                RenderUtils.renderBoxLines(new Vec3(1, 1, 1), new Color(color.getRed() / 255f, color.getGreen() / 255f, color.getBlue() / 255f, alpha), partialTicks, ms);
+                                Color color = WizardsRebornRenderUtil.colorSelected;
+                                WizardsRebornRenderUtil.renderBoxLines(new Vec3(1, 1, 1), new Color(color.getRed() / 255f, color.getGreen() / 255f, color.getBlue() / 255f, alpha), partialTicks, ms);
                                 ms.popPose();
 
                                 if (hitresult.getType() == HitResult.Type.BLOCK) {
                                     BlockPos blockpos = ((BlockHitResult) hitresult).getBlockPos();
                                     if (canEffect(blockpos, player.level())) {
-                                        color = RenderUtils.colorConnectFrom;
+                                        color = WizardsRebornRenderUtil.colorConnectFrom;
                                         if (WissenWandItem.getMode(stack) == 2) {
-                                            color = RenderUtils.colorConnectTo;
+                                            color = WizardsRebornRenderUtil.colorConnectTo;
                                         }
 
                                         dX = blockpos.getX() - camera.x();
@@ -101,7 +101,7 @@ public class ClientWorldEvent {
 
                                         ms.pushPose();
                                         ms.translate(dX, dY, dZ);
-                                        RenderUtils.renderBoxLines(new Vec3(1, 1, 1), new Color(color.getRed() / 255f, color.getGreen() / 255f, color.getBlue() / 255f, alpha), partialTicks, ms);
+                                        WizardsRebornRenderUtil.renderBoxLines(new Vec3(1, 1, 1), new Color(color.getRed() / 255f, color.getGreen() / 255f, color.getBlue() / 255f, alpha), partialTicks, ms);
                                         ms.popPose();
 
                                         dX = blockPos.getX() - camera.x();
@@ -111,7 +111,7 @@ public class ClientWorldEvent {
                                         ms.pushPose();
                                         ms.translate(dX, dY, dZ);
                                         ms.translate(offset.x(), offset.y(), offset.z());
-                                        RenderUtils.renderConnectLine(LightUtil.getLightLensPos(blockPos, offset), LightUtil.getLightLensPos(blockpos, newOffset), new Color(color.getRed() / 255f, color.getGreen() / 255f, color.getBlue() / 255f, alpha), partialTicks, ms);
+                                        WizardsRebornRenderUtil.renderConnectLine(LightUtil.getLightLensPos(blockPos, offset), LightUtil.getLightLensPos(blockpos, newOffset), new Color(color.getRed() / 255f, color.getGreen() / 255f, color.getBlue() / 255f, alpha), partialTicks, ms);
                                         ms.popPose();
                                     }
                                 }
@@ -155,16 +155,16 @@ public class ClientWorldEvent {
                             double dZ = blockpos.getZ() - camera.z();
                             ms.translate(dX, dY, dZ);
                             if (renderFluidSide) {
-                                Color color = RenderUtils.colorFluidSide;
-                                RenderUtils.renderSide(direction, new Color(color.getRed() / 255f, color.getGreen() / 255f, color.getBlue() / 255f, alpha), partialTicks, ms);
+                                Color color = WizardsRebornRenderUtil.colorFluidSide;
+                                WizardsRebornRenderUtil.renderSide(direction, new Color(color.getRed() / 255f, color.getGreen() / 255f, color.getBlue() / 255f, alpha), partialTicks, ms);
                             }
                             if (renderSteamSide) {
-                                Color color = RenderUtils.colorSteamSide;
-                                RenderUtils.renderSide(direction, new Color(color.getRed() / 255f, color.getGreen() / 255f, color.getBlue() / 255f, alpha), partialTicks, ms);
+                                Color color = WizardsRebornRenderUtil.colorSteamSide;
+                                WizardsRebornRenderUtil.renderSide(direction, new Color(color.getRed() / 255f, color.getGreen() / 255f, color.getBlue() / 255f, alpha), partialTicks, ms);
                             }
                             if (renderEnergySide) {
-                                Color color = RenderUtils.colorEnergySide;
-                                RenderUtils.renderSide(direction, new Color(color.getRed() / 255f, color.getGreen() / 255f, color.getBlue() / 255f, alpha), partialTicks, ms);
+                                Color color = WizardsRebornRenderUtil.colorEnergySide;
+                                WizardsRebornRenderUtil.renderSide(direction, new Color(color.getRed() / 255f, color.getGreen() / 255f, color.getBlue() / 255f, alpha), partialTicks, ms);
                             }
                             ms.popPose();
                         }
