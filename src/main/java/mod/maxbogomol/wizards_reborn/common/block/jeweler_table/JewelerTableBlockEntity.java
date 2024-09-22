@@ -19,7 +19,7 @@ import mod.maxbogomol.wizards_reborn.common.config.Config;
 import mod.maxbogomol.wizards_reborn.common.item.CrystalItem;
 import mod.maxbogomol.wizards_reborn.common.item.SkinTrimItem;
 import mod.maxbogomol.wizards_reborn.common.network.PacketHandler;
-import mod.maxbogomol.wizards_reborn.common.network.block.JewelerTableBurstEffectPacket;
+import mod.maxbogomol.wizards_reborn.common.network.block.JewelerTableBurstPacket;
 import mod.maxbogomol.wizards_reborn.common.recipe.JewelerTableRecipe;
 import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornRecipes;
 import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornSounds;
@@ -196,9 +196,9 @@ public class JewelerTableBlockEntity extends NameableBlockEntityBase implements 
                                 float g = color.getGreen() / 255f;
                                 float b = color.getBlue() / 255f;
 
-                                PacketHandler.sendToTracking(level, getBlockPos(), new JewelerTableBurstEffectPacket(getBlockPos(), (float) pos.x(), (float) pos.y(), (float) pos.z(), vel.x, vel.y, r, g, b, itemOutputHandler.getStackInSlot(0)));
+                                PacketHandler.sendToTracking(level, getBlockPos(), new JewelerTableBurstPacket(getBlockPos(), (float) pos.x(), (float) pos.y(), (float) pos.z(), vel.x, vel.y, r, g, b, itemOutputHandler.getStackInSlot(0)));
                             } else {
-                                PacketHandler.sendToTracking(level, getBlockPos(), new JewelerTableBurstEffectPacket(getBlockPos(), (float) pos.x(), (float) pos.y(), (float) pos.z(), itemOutputHandler.getStackInSlot(0)));
+                                PacketHandler.sendToTracking(level, getBlockPos(), new JewelerTableBurstPacket(getBlockPos(), (float) pos.x(), (float) pos.y(), (float) pos.z(), itemOutputHandler.getStackInSlot(0)));
                             }
 
                             level.playSound(WizardsReborn.proxy.getPlayer(), getBlockPos(), SoundEvents.GRINDSTONE_USE, SoundSource.BLOCKS, 0.5f, (float) (1f + ((random.nextFloat() - 0.5D) / 4)));

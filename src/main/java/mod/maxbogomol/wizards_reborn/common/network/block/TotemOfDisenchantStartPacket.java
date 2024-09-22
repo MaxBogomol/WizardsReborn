@@ -1,6 +1,7 @@
 package mod.maxbogomol.wizards_reborn.common.network.block;
 
 import mod.maxbogomol.fluffy_fur.common.network.BlockEntityUpdate;
+import mod.maxbogomol.fluffy_fur.common.network.ServerPacket;
 import mod.maxbogomol.wizards_reborn.WizardsReborn;
 import mod.maxbogomol.wizards_reborn.api.arcaneenchantment.ArcaneEnchantment;
 import mod.maxbogomol.wizards_reborn.api.arcaneenchantment.ArcaneEnchantmentUtil;
@@ -21,19 +22,20 @@ import net.minecraft.world.item.Items;
 import net.minecraft.world.item.enchantment.Enchantment;
 import net.minecraft.world.item.enchantment.EnchantmentHelper;
 import net.minecraftforge.network.NetworkEvent;
+import net.minecraftforge.network.simple.SimpleChannel;
 import net.minecraftforge.registries.ForgeRegistries;
 
 import java.util.HashMap;
 import java.util.Map;
 import java.util.function.Supplier;
 
-public class TotemOfDisenchantStartEffectPacket {
+public class TotemOfDisenchantStartPacket extends ServerPacket {
     private final BlockPos pos;
     private final Component enchantment;
     private final Component arcaneEnchantment;
     private final int enchantmentLevel;
 
-    public TotemOfDisenchantStartEffectPacket(BlockPos pos, ItemStack stack) {
+    public TotemOfDisenchantStartPacket(BlockPos pos, ItemStack stack) {
         this.pos = pos;
 
         Component enchantment1 = Component.empty();
@@ -85,15 +87,33 @@ public class TotemOfDisenchantStartEffectPacket {
         this.enchantmentLevel = enchantmentLevel1;
     }
 
-    public TotemOfDisenchantStartEffectPacket(BlockPos pos, Component enchantment, Component arcaneEnchantment, int enchantmentLevel) {
+    public TotemOfDisenchantStartPacket(BlockPos pos, Component enchantment, Component arcaneEnchantment, int enchantmentLevel) {
         this.pos = pos;
         this.enchantment = enchantment;
         this.arcaneEnchantment = arcaneEnchantment;
         this.enchantmentLevel = enchantmentLevel;
     }
 
-    public static TotemOfDisenchantStartEffectPacket decode(FriendlyByteBuf buf) {
-        return new TotemOfDisenchantStartEffectPacket(buf.readBlockPos(), buf.readComponent(), buf.readComponent(), buf.readInt());
+    @Override
+    public void execute(Supplier<NetworkEvent.Context> context) {
+        ServerPlayer player = context.get().getSender();
+        ServerLevel level = player.serverLevel();
+
+        if (level.getBlockEntity(pos) instanceof TotemOfDisenchantBlockEntity totem) {
+            totem.isStart = true;
+            totem.cooldown = 200;
+            totem.enchantment = enchantment.getString();
+            totem.arcaneEnchantment = arcaneEnchantment.getString();
+            totem.enchantmentLevel = enchantmentLevel;
+            BlockEntityUpdate.packet(totem);
+
+            level.playSound(WizardsReborn.proxy.getPlayer(), totem.getBlockPos(), WizardsRebornSounds.TOTEM_OF_DISENCHANT_START.get(), SoundSource.BLOCKS, 1f, 1f);
+            TotemOfDisenchantSoundInstance.playSound(totem);
+        }
+    }
+
+    public static void register(SimpleChannel instance, int index) {
+        instance.registerMessage(index, TotemOfDisenchantStartPacket.class, TotemOfDisenchantStartPacket::encode, TotemOfDisenchantStartPacket::decode, TotemOfDisenchantStartPacket::handle);
     }
 
     public void encode(FriendlyByteBuf buf) {
@@ -103,25 +123,7 @@ public class TotemOfDisenchantStartEffectPacket {
         buf.writeInt(enchantmentLevel);
     }
 
-    public static void handle(TotemOfDisenchantStartEffectPacket msg, Supplier<NetworkEvent.Context> ctx) {
-        if (ctx.get().getDirection().getReceptionSide().isServer()) {
-            ctx.get().enqueueWork(() -> {
-                ServerPlayer player = ctx.get().getSender();
-                ServerLevel level = player.serverLevel();
-
-                if (level.getBlockEntity(msg.pos) instanceof TotemOfDisenchantBlockEntity totem) {
-                    totem.isStart = true;
-                    totem.cooldown = 200;
-                    totem.enchantment = msg.enchantment.getString();
-                    totem.arcaneEnchantment = msg.arcaneEnchantment.getString();
-                    totem.enchantmentLevel = msg.enchantmentLevel;
-                    BlockEntityUpdate.packet(totem);
-
-                    level.playSound(WizardsReborn.proxy.getPlayer(), totem.getBlockPos(), WizardsRebornSounds.TOTEM_OF_DISENCHANT_START.get(), SoundSource.BLOCKS, 1f, 1f);
-                    TotemOfDisenchantSoundInstance.playSound(totem);
-                }
-            });
-        }
-        ctx.get().setPacketHandled(true);
+    public static TotemOfDisenchantStartPacket decode(FriendlyByteBuf buf) {
+        return new TotemOfDisenchantStartPacket(buf.readBlockPos(), buf.readComponent(), buf.readComponent(), buf.readInt());
     }
 }

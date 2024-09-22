@@ -19,8 +19,8 @@ import mod.maxbogomol.wizards_reborn.common.config.Config;
 import mod.maxbogomol.wizards_reborn.common.item.equipment.WissenWandItem;
 import mod.maxbogomol.wizards_reborn.common.network.PacketHandler;
 import mod.maxbogomol.wizards_reborn.common.network.WissenSendEffectPacket;
-import mod.maxbogomol.wizards_reborn.common.network.block.WissenTranslatorBurstEffectPacket;
-import mod.maxbogomol.wizards_reborn.common.network.block.WissenTranslatorSendEffectPacket;
+import mod.maxbogomol.wizards_reborn.common.network.block.WissenTranslatorBurstPacket;
+import mod.maxbogomol.wizards_reborn.common.network.block.WissenTranslatorSendPacket;
 import mod.maxbogomol.wizards_reborn.registry.common.block.WizardsRebornBlockEntities;
 import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornSounds;
 import mod.maxbogomol.wizards_reborn.registry.common.item.WizardsRebornItemTags;
@@ -105,7 +105,7 @@ public class WissenTranslatorBlockEntity extends ExposedBlockSimpleInventory imp
 
                                 Color color = getColor();
 
-                                PacketHandler.sendToTracking(level, getBlockPos(), new WissenTranslatorBurstEffectPacket(getBlockPos().getX() + 0.5f, getBlockPos().getY() + 0.5f, getBlockPos().getZ() + 0.5f, (float) color.getRed() / 255, (float) color.getGreen() / 255, (float) color.getBlue() / 255));
+                                PacketHandler.sendToTracking(level, getBlockPos(), new WissenTranslatorBurstPacket(getBlockPos().getX() + 0.5f, getBlockPos().getY() + 0.5f, getBlockPos().getZ() + 0.5f, (float) color.getRed() / 255, (float) color.getGreen() / 255, (float) color.getBlue() / 255));
                                 level.playSound(WizardsReborn.proxy.getPlayer(), getBlockPos(), WizardsRebornSounds.WISSEN_TRANSFER.get(), SoundSource.BLOCKS, 0.1f, (float) (1.1f + ((random.nextFloat() - 0.5D) / 2)));
                             }
                         }
@@ -401,7 +401,7 @@ public class WissenTranslatorBlockEntity extends ExposedBlockSimpleInventory imp
                 PacketHandler.sendToTracking(level, getBlockPos(), new WissenSendEffectPacket(blockX, blockY, blockZ, X, Y, Z, (float) color.getRed() / 255, (float) color.getGreen()/ 255, (float) color.getBlue() / 255));
 
                 if (tag.getInt("wissen") <= 0) {
-                    PacketHandler.sendToTracking(level, getBlockPos(), new WissenTranslatorBurstEffectPacket((float) X, (float) Y, (float) Z, (float) color.getRed() / 255, (float) color.getGreen() / 255, (float) color.getBlue() / 255));
+                    PacketHandler.sendToTracking(level, getBlockPos(), new WissenTranslatorBurstPacket((float) X, (float) Y, (float) Z, (float) color.getRed() / 255, (float) color.getGreen() / 255, (float) color.getBlue() / 255));
                     deleteRays.add(i);
                 } else if ((blockFromX != Mth.floor(blockX)) || blockFromY != Mth.floor(blockY) || (blockFromZ != Mth.floor(blockZ))) {
                     BlockEntity blockEntity = level.getBlockEntity(BlockPos.containing(blockX, blockY, blockZ));
@@ -417,8 +417,8 @@ public class WissenTranslatorBlockEntity extends ExposedBlockSimpleInventory imp
 
                             BlockEntityUpdate.packet(blockEntity);
 
-                            PacketHandler.sendToTracking(level, getBlockPos(), new WissenTranslatorBurstEffectPacket((float) X, (float) Y, (float) Z, (float) color.getRed() / 255, (float) color.getGreen() / 255, (float) color.getBlue() / 255));
-                            PacketHandler.sendToTracking(level, getBlockPos(), new WissenTranslatorSendEffectPacket(BlockPos.containing(X, Y, Z)));
+                            PacketHandler.sendToTracking(level, getBlockPos(), new WissenTranslatorBurstPacket((float) X, (float) Y, (float) Z, (float) color.getRed() / 255, (float) color.getGreen() / 255, (float) color.getBlue() / 255));
+                            PacketHandler.sendToTracking(level, getBlockPos(), new WissenTranslatorSendPacket(BlockPos.containing(X, Y, Z)));
 
                             deleteRays.add(i);
                         }

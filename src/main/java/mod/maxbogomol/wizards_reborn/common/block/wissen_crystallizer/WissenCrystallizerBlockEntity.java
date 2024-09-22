@@ -18,7 +18,7 @@ import mod.maxbogomol.wizards_reborn.api.wissen.*;
 import mod.maxbogomol.wizards_reborn.client.sound.WissenCrystallizerSoundInstance;
 import mod.maxbogomol.wizards_reborn.common.config.Config;
 import mod.maxbogomol.wizards_reborn.common.network.PacketHandler;
-import mod.maxbogomol.wizards_reborn.common.network.block.WissenCrystallizerBurstEffectPacket;
+import mod.maxbogomol.wizards_reborn.common.network.block.WissenCrystallizerBurstPacket;
 import mod.maxbogomol.wizards_reborn.common.recipe.WissenCrystallizerRecipe;
 import mod.maxbogomol.wizards_reborn.registry.client.WizardsRebornParticles;
 import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornRecipes;
@@ -117,7 +117,7 @@ public class WissenCrystallizerBlockEntity extends ExposedBlockSimpleInventory i
 
                         update = true;
 
-                        PacketHandler.sendToTracking(level, getBlockPos(), new WissenCrystallizerBurstEffectPacket(getBlockPos()));
+                        PacketHandler.sendToTracking(level, getBlockPos(), new WissenCrystallizerBurstPacket(getBlockPos()));
                         level.playSound(WizardsReborn.proxy.getPlayer(), getBlockPos(), WizardsRebornSounds.WISSEN_CRYSTALLIZER_END.get(), SoundSource.BLOCKS, 1f, (float) (1f + ((random.nextFloat() - 0.5D) / 4)));
                     }
                 }

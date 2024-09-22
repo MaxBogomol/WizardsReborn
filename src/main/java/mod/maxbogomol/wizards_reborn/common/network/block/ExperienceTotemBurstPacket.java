@@ -13,17 +13,14 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.Vec3;
 import net.minecraftforge.network.NetworkEvent;
 
-import java.util.Random;
 import java.util.function.Consumer;
 import java.util.function.Supplier;
 
-public class ExperienceTotemBurstEffectPacket {
+public class ExperienceTotemBurstPacket {
     private final BlockPos pos;
     private final float X, Y, Z;
 
-    private static final Random random = new Random();
-
-    public ExperienceTotemBurstEffectPacket(BlockPos pos, float X, float Y, float Z) {
+    public ExperienceTotemBurstPacket(BlockPos pos, float X, float Y, float Z) {
         this.pos = pos;
 
         this.X = X;
@@ -31,7 +28,7 @@ public class ExperienceTotemBurstEffectPacket {
         this.Z = Z;
     }
 
-    public ExperienceTotemBurstEffectPacket(BlockPos pos, Vec3 end) {
+    public ExperienceTotemBurstPacket(BlockPos pos, Vec3 end) {
         this.pos = pos;
 
         this.X = (float) end.x();
@@ -39,8 +36,8 @@ public class ExperienceTotemBurstEffectPacket {
         this.Z = (float) end.z();
     }
 
-    public static ExperienceTotemBurstEffectPacket decode(FriendlyByteBuf buf) {
-        return new ExperienceTotemBurstEffectPacket(buf.readBlockPos(), buf.readFloat(), buf.readFloat(), buf.readFloat());
+    public static ExperienceTotemBurstPacket decode(FriendlyByteBuf buf) {
+        return new ExperienceTotemBurstPacket(buf.readBlockPos(), buf.readFloat(), buf.readFloat(), buf.readFloat());
     }
 
     public void encode(FriendlyByteBuf buf) {
@@ -51,7 +48,7 @@ public class ExperienceTotemBurstEffectPacket {
         buf.writeFloat(Z);
     }
 
-    public static void handle(ExperienceTotemBurstEffectPacket msg, Supplier<NetworkEvent.Context> ctx) {
+    public static void handle(ExperienceTotemBurstPacket msg, Supplier<NetworkEvent.Context> ctx) {
         if (ctx.get().getDirection().getReceptionSide().isClient()) {
             ctx.get().enqueueWork(new Runnable() {
                 @Override

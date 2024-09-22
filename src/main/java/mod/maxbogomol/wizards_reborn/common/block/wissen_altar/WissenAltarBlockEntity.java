@@ -12,8 +12,8 @@ import mod.maxbogomol.wizards_reborn.WizardsReborn;
 import mod.maxbogomol.wizards_reborn.api.wissen.*;
 import mod.maxbogomol.wizards_reborn.common.config.Config;
 import mod.maxbogomol.wizards_reborn.common.network.PacketHandler;
-import mod.maxbogomol.wizards_reborn.common.network.block.WissenAltarBurstEffectPacket;
-import mod.maxbogomol.wizards_reborn.common.network.block.WissenAltarSendEffectPacket;
+import mod.maxbogomol.wizards_reborn.common.network.block.WissenAltarBurstPacket;
+import mod.maxbogomol.wizards_reborn.common.network.block.WissenAltarSendPacket;
 import mod.maxbogomol.wizards_reborn.common.recipe.WissenAltarRecipe;
 import mod.maxbogomol.wizards_reborn.registry.common.block.WizardsRebornBlockEntities;
 import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornRecipes;
@@ -93,7 +93,7 @@ public class WissenAltarBlockEntity extends ExposedBlockSimpleInventory implemen
 
                         update = true;
 
-                        PacketHandler.sendToTracking(level, getBlockPos(), new WissenAltarBurstEffectPacket(getBlockPos()));
+                        PacketHandler.sendToTracking(level, getBlockPos(), new WissenAltarBurstPacket(getBlockPos()));
                         level.playSound(WizardsReborn.proxy.getPlayer(), getBlockPos(), WizardsRebornSounds.WISSEN_ALTAR_BURST.get(), SoundSource.BLOCKS, 0.25f, (float) (1f + ((random.nextFloat() - 0.5D) / 4)));
                     }
                 }
@@ -111,7 +111,7 @@ public class WissenAltarBlockEntity extends ExposedBlockSimpleInventory implemen
                                 WissenItemUtil.addWissen(stack, wissenRemain, item.getMaxWissen());
                                 wissen = wissen - wissenRemain;
                                 if (random.nextFloat() < 0.5) {
-                                    PacketHandler.sendToTracking(level, getBlockPos(), new WissenAltarSendEffectPacket(getBlockPos()));
+                                    PacketHandler.sendToTracking(level, getBlockPos(), new WissenAltarSendPacket(getBlockPos()));
                                 }
                                 if (random.nextFloat() < 0.1) {
                                     level.playSound(WizardsReborn.proxy.getPlayer(), getBlockPos(), WizardsRebornSounds.WISSEN_BURST.get(), SoundSource.BLOCKS, 0.15f, (float) (0.5f + ((random.nextFloat() - 0.5D) / 4)));

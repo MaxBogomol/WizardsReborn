@@ -3,6 +3,8 @@ package mod.maxbogomol.wizards_reborn.client.gui.screen;
 import com.mojang.blaze3d.platform.InputConstants;
 import com.mojang.math.Axis;
 import mod.maxbogomol.fluffy_fur.client.event.ClientTickHandler;
+import mod.maxbogomol.fluffy_fur.client.render.RenderBuilder;
+import mod.maxbogomol.fluffy_fur.registry.client.FluffyFurRenderTypes;
 import mod.maxbogomol.fluffy_fur.util.ColorUtil;
 import mod.maxbogomol.fluffy_fur.util.RenderUtil;
 import mod.maxbogomol.wizards_reborn.common.item.equipment.WissenWandItem;
@@ -16,8 +18,10 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 
-public class WissenWandChooseScreen extends Screen {
-    public WissenWandChooseScreen(Component titleIn) {
+import java.awt.*;
+
+public class WissenWandScreen extends Screen {
+    public WissenWandScreen(Component titleIn) {
         super(titleIn);
     }
 
@@ -70,17 +74,17 @@ public class WissenWandChooseScreen extends Screen {
         int y = height / 2;
 
         int choosedRay = getSelectedMode(mouseX, mouseY);
-        gui.renderTooltip(Minecraft.getInstance().font, Component.translatable(WissenWandItem.getModeString(choosedRay)).withStyle(WissenWandItem.getModeColor(choosedRay)), mouseX, mouseY);
         for (int i = 0; i < 5; i++) {
             renderRays(WissenWandItem.getModeColor(i), gui, partialTicks, i, 72, i == choosedRay);
         }
         RenderUtil.renderItemModelInGui(getWand(), x - 16, y - 16, 32, 32, 32, 45f * (1f - hoveramount), 45f * (1f - hoveramount), 0);
+        gui.renderTooltip(Minecraft.getInstance().font, Component.translatable(WissenWandItem.getModeString(choosedRay)).withStyle(WissenWandItem.getModeColor(choosedRay)), mouseX, mouseY);
     }
 
     public int getSelectedMode(double X, double Y) {
         double step = (float) 360 / 5;
-        double x = width / 2;
-        double y = height / 2;
+        double x = width / 2f;
+        double y = height / 2f;
 
         double angle =  Math.toDegrees(Math.atan2(Y-y,X-x));
         if (angle < 0D) {
@@ -112,18 +116,20 @@ public class WissenWandChooseScreen extends Screen {
     }
 
     public void renderRays(ChatFormatting color, GuiGraphics gui, float partialTicks, float i, float step, boolean choosed) {
-        float r = ColorUtil.getRed(color.getColor()) / 255f;
-        float g = ColorUtil.getGreen(color.getColor()) / 255f;
-        float b = ColorUtil.getBlue(color.getColor()) / 255f;
+        Color color1 = ColorUtil.getColor(color.getColor());
 
         float chooseRay = (choosed) ? 1.2f : 0.8f;
 
         gui.pose().pushPose();
-        gui.pose().translate(width / 2,  height / 2, 0);
+        gui.pose().translate(width / 2f,  height / 2f, 0);
         gui.pose().mulPose(Axis.ZP.rotationDegrees(i * step + (step / 2)));
         gui.pose().mulPose(Axis.XP.rotationDegrees((ClientTickHandler.ticksInGame + partialTicks + (i * 10) * 5)));
-        //WizardsRebornRenderUtil.ray(gui.pose(), buffersource, 1f, (100 * hoveramount) * chooseRay, 40f, r, g, b, 1, r, g, b, 0F);
-        //buffersource.endBatch();
+        gui.pose().mulPose(Axis.ZP.rotationDegrees(-90f));
+        RenderBuilder.create().setRenderType(FluffyFurRenderTypes.ADDITIVE)
+                .setColor(color1)
+                .setSecondAlpha(0)
+                .renderRay(gui.pose(), 1f, (100 * hoveramount) * chooseRay, 40f)
+                .endBatch();
         gui.pose().popPose();
     }
 

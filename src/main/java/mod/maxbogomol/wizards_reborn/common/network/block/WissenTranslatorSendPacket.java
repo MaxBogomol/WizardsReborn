@@ -17,23 +17,23 @@ import net.minecraftforge.network.NetworkEvent;
 import java.util.Random;
 import java.util.function.Supplier;
 
-public class WissenTranslatorSendEffectPacket {
+public class WissenTranslatorSendPacket {
     private final BlockPos pos;
     private static final Random random = new Random();
 
-    public WissenTranslatorSendEffectPacket(BlockPos pos) {
+    public WissenTranslatorSendPacket(BlockPos pos) {
         this.pos = pos;
     }
 
-    public static WissenTranslatorSendEffectPacket decode(FriendlyByteBuf buf) {
-        return new WissenTranslatorSendEffectPacket(buf.readBlockPos());
+    public static WissenTranslatorSendPacket decode(FriendlyByteBuf buf) {
+        return new WissenTranslatorSendPacket(buf.readBlockPos());
     }
 
     public void encode(FriendlyByteBuf buf) {
         buf.writeBlockPos(pos);
     }
 
-    public static void handle(WissenTranslatorSendEffectPacket msg, Supplier<NetworkEvent.Context> ctx) {
+    public static void handle(WissenTranslatorSendPacket msg, Supplier<NetworkEvent.Context> ctx) {
         if (ctx.get().getDirection().getReceptionSide().isClient()) {
             ctx.get().enqueueWork(new Runnable() {
                 @Override
@@ -41,11 +41,7 @@ public class WissenTranslatorSendEffectPacket {
                     Level level = WizardsReborn.proxy.getLevel();
 
                     WissenLimitHandler.wissenCount++;
-
-                    if (WissenLimitHandler.wissenCount > ClientConfig.WISSEN_RAYS_LIMIT.get()) {
-                        WissenLimitHandler.wissenCount = ClientConfig.WISSEN_RAYS_LIMIT.get();
-                    }
-
+                    if (WissenLimitHandler.wissenCount > ClientConfig.WISSEN_RAYS_LIMIT.get()) WissenLimitHandler.wissenCount = ClientConfig.WISSEN_RAYS_LIMIT.get();
                     int wissenCount = WissenLimitHandler.wissenCountOld;
 
                     for (int i = 0; i < 15; i++) {
@@ -58,7 +54,7 @@ public class WissenTranslatorSendEffectPacket {
                                     .setLifetime(30)
                                     .randomVelocity(0.015f)
                                     .flatRandomOffset(0.375f, 0.375f, 0.375f)
-                                    .spawn(level, msg.pos.getX() + 0.5F, msg.pos.getY() + 0.5F, msg.pos.getZ() + 0.5F);
+                                    .spawn(level, msg.pos.getX() + 0.5f, msg.pos.getY() + 0.5f, msg.pos.getZ() + 0.5f);
                         }
                     }
                     ctx.get().setPacketHandled(true);

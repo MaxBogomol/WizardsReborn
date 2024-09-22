@@ -15,7 +15,7 @@ import net.minecraftforge.network.NetworkEvent;
 import java.util.Random;
 import java.util.function.Supplier;
 
-public class WissenTranslatorBurstEffectPacket {
+public class WissenTranslatorBurstPacket {
     private final float posX;
     private final float posY;
     private final float posZ;
@@ -24,7 +24,7 @@ public class WissenTranslatorBurstEffectPacket {
 
     private static final Random random = new Random();
 
-    public WissenTranslatorBurstEffectPacket(float posX, float posY, float posZ, float colorR, float colorG, float colorB) {
+    public WissenTranslatorBurstPacket(float posX, float posY, float posZ, float colorR, float colorG, float colorB) {
         this.posX = posX;
         this.posY = posY;
         this.posZ = posZ;
@@ -34,7 +34,7 @@ public class WissenTranslatorBurstEffectPacket {
         this.colorB = colorB;
     }
 
-    public WissenTranslatorBurstEffectPacket(float posX, float posY, float posZ) {
+    public WissenTranslatorBurstPacket(float posX, float posY, float posZ) {
         this.posX = posX;
         this.posY = posY;
         this.posZ = posZ;
@@ -44,8 +44,8 @@ public class WissenTranslatorBurstEffectPacket {
         this.colorB = Config.wissenColorB();
     }
 
-    public static WissenTranslatorBurstEffectPacket decode(FriendlyByteBuf buf) {
-        return new WissenTranslatorBurstEffectPacket(buf.readFloat(), buf.readFloat(), buf.readFloat(), buf.readFloat(), buf.readFloat(), buf.readFloat());
+    public static WissenTranslatorBurstPacket decode(FriendlyByteBuf buf) {
+        return new WissenTranslatorBurstPacket(buf.readFloat(), buf.readFloat(), buf.readFloat(), buf.readFloat(), buf.readFloat(), buf.readFloat());
     }
 
     public void encode(FriendlyByteBuf buf) {
@@ -58,7 +58,7 @@ public class WissenTranslatorBurstEffectPacket {
         buf.writeFloat(colorB);
     }
 
-    public static void handle(WissenTranslatorBurstEffectPacket msg, Supplier<NetworkEvent.Context> ctx) {
+    public static void handle(WissenTranslatorBurstPacket msg, Supplier<NetworkEvent.Context> ctx) {
         if (ctx.get().getDirection().getReceptionSide().isClient()) {
             ctx.get().enqueueWork(new Runnable() {
                 @Override
@@ -66,11 +66,7 @@ public class WissenTranslatorBurstEffectPacket {
                     Level level = WizardsReborn.proxy.getLevel();
 
                     WissenLimitHandler.wissenCount++;
-
-                    if (WissenLimitHandler.wissenCount > 200) {
-                        WissenLimitHandler.wissenCount = 200;
-                    }
-
+                    if (WissenLimitHandler.wissenCount > 200) WissenLimitHandler.wissenCount = 200;
                     int wissenCount = WissenLimitHandler.wissenCountOld;
 
                     for (int i = 0; i < 10; i++) {

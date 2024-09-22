@@ -5,6 +5,7 @@ import mod.maxbogomol.fluffy_fur.client.particle.data.ColorParticleData;
 import mod.maxbogomol.fluffy_fur.client.particle.data.GenericParticleData;
 import mod.maxbogomol.fluffy_fur.client.particle.data.SpinParticleData;
 import mod.maxbogomol.fluffy_fur.common.easing.Easing;
+import mod.maxbogomol.fluffy_fur.common.network.PositionClientPacket;
 import mod.maxbogomol.fluffy_fur.registry.client.FluffyFurParticles;
 import mod.maxbogomol.wizards_reborn.WizardsReborn;
 import mod.maxbogomol.wizards_reborn.common.config.Config;
@@ -18,13 +19,13 @@ import net.minecraftforge.network.simple.SimpleChannel;
 
 import java.util.function.Supplier;
 
-public class WissenAltarBurstEffectPacket extends PositionEffectPacket {
+public class WissenAltarBurstPacket extends PositionClientPacket {
 
-    public WissenAltarBurstEffectPacket(double posX, double posY, double posZ) {
-        super(posX, posY, posZ);
+    public WissenAltarBurstPacket(double x, double y, double z) {
+        super(x, y, z);
     }
 
-    public WissenAltarBurstEffectPacket(BlockPos pos) {
+    public WissenAltarBurstPacket(BlockPos pos) {
         super(pos);
     }
 
@@ -38,7 +39,7 @@ public class WissenAltarBurstEffectPacket extends PositionEffectPacket {
                 .setScaleData(GenericParticleData.create(0.3f, 0).build())
                 .setLifetime(20)
                 .randomVelocity(0.05f)
-                .repeat(level, posX + 0.5F, posY + 1.3125F, posZ + 0.5F, 20);
+                .repeat(level, x + 0.5f, y + 1.3125f, z + 0.5f, 20);
         ParticleBuilder.create(FluffyFurParticles.SPARKLE)
                 .setColorData(ColorParticleData.create(Config.wissenColorR(), Config.wissenColorG(), Config.wissenColorB()).build())
                 .setTransparencyData(GenericParticleData.create(0.25f, 0).build())
@@ -46,7 +47,7 @@ public class WissenAltarBurstEffectPacket extends PositionEffectPacket {
                 .setSpinData(SpinParticleData.create().randomOffset().randomSpin(0.5f).build())
                 .setLifetime(30)
                 .randomVelocity(0.05f)
-                .repeat(level, posX + 0.5F, posY + 1.3125F, posZ + 0.5F, 10);
+                .repeat(level, x + 0.5f, y + 1.3125f, z + 0.5f, 10);
         ParticleBuilder.create(FluffyFurParticles.SQUARE)
                 .setColorData(ColorParticleData.create(Config.wissenColorR(), Config.wissenColorG(), Config.wissenColorB()).build())
                 .setTransparencyData(GenericParticleData.create(0.25f, 0).build())
@@ -54,14 +55,14 @@ public class WissenAltarBurstEffectPacket extends PositionEffectPacket {
                 .setSpinData(SpinParticleData.create().randomOffset().randomSpin(0.5f).build())
                 .setLifetime(30)
                 .randomVelocity(0.05f)
-                .repeat(level, posX + 0.5F, posY + 1.3125F, posZ + 0.5F, 10);
+                .repeat(level, z + 0.5f, z + 1.3125f, z + 0.5f, 10);
     }
 
     public static void register(SimpleChannel instance, int index) {
-        instance.registerMessage(index, WissenAltarBurstEffectPacket.class, WissenAltarBurstEffectPacket::encode, WissenAltarBurstEffectPacket::decode, WissenAltarBurstEffectPacket::handle);
+        instance.registerMessage(index, WissenAltarBurstPacket.class, WissenAltarBurstPacket::encode, WissenAltarBurstPacket::decode, WissenAltarBurstPacket::handle);
     }
 
-    public static WissenAltarBurstEffectPacket decode(FriendlyByteBuf buf) {
-        return decode(WissenAltarBurstEffectPacket::new, buf);
+    public static WissenAltarBurstPacket decode(FriendlyByteBuf buf) {
+        return decode(WissenAltarBurstPacket::new, buf);
     }
 }

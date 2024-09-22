@@ -5,7 +5,7 @@ import mod.maxbogomol.wizards_reborn.api.knowledge.KnowledgeUtil;
 import mod.maxbogomol.wizards_reborn.api.spell.Spell;
 import mod.maxbogomol.wizards_reborn.client.gui.screen.ArcaneWandScreen;
 import mod.maxbogomol.wizards_reborn.client.gui.screen.BagMenuScreen;
-import mod.maxbogomol.wizards_reborn.client.gui.screen.WissenWandChooseScreen;
+import mod.maxbogomol.wizards_reborn.client.gui.screen.WissenWandScreen;
 import mod.maxbogomol.wizards_reborn.common.item.equipment.ArcaneWandItem;
 import mod.maxbogomol.wizards_reborn.common.item.equipment.IBagItem;
 import mod.maxbogomol.wizards_reborn.common.item.equipment.WissenWandItem;
@@ -122,7 +122,7 @@ public class KeyBindHandler {
         }
 
         if (open) {
-            Minecraft.getInstance().setScreen(new WissenWandChooseScreen(Component.empty()));
+            Minecraft.getInstance().setScreen(new WissenWandScreen(Component.empty()));
             return true;
         }
 

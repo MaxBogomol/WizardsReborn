@@ -23,7 +23,7 @@ import mod.maxbogomol.wizards_reborn.client.sound.ArcaneIteratorSoundInstance;
 import mod.maxbogomol.wizards_reborn.common.block.arcane_pedestal.ArcanePedestalBlockEntity;
 import mod.maxbogomol.wizards_reborn.common.config.Config;
 import mod.maxbogomol.wizards_reborn.common.network.PacketHandler;
-import mod.maxbogomol.wizards_reborn.common.network.block.ArcaneIteratorBurstEffectPacket;
+import mod.maxbogomol.wizards_reborn.common.network.block.ArcaneIteratorBurstPacket;
 import mod.maxbogomol.wizards_reborn.common.recipe.ArcaneIteratorRecipe;
 import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornRecipes;
 import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornSounds;
@@ -234,7 +234,7 @@ public class ArcaneIteratorBlockEntity extends BlockEntityBase implements Tickab
                             getMainPedestal().setItem(0, stack);
                             BlockEntityUpdate.packet(getMainPedestal());
 
-                            PacketHandler.sendToTracking(level, getBlockPos(), new ArcaneIteratorBurstEffectPacket(tagPos));
+                            PacketHandler.sendToTracking(level, getBlockPos(), new ArcaneIteratorBurstPacket(tagPos));
                             level.playSound(WizardsReborn.proxy.getPlayer(), getBlockPos(), WizardsRebornSounds.ARCANE_ITERATOR_END.get(), SoundSource.BLOCKS, 1f, 1f);
                         }
                     }

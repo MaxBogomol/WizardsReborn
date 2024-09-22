@@ -44,27 +44,25 @@ public final class PacketHandler {
         HANDLER.registerMessage(id++, AddScreenshakePacket.class, AddScreenshakePacket::encode, AddScreenshakePacket::decode, AddScreenshakePacket::handle);
         HANDLER.registerMessage(id++, SniffaloScreenPacket.class, SniffaloScreenPacket::encode, SniffaloScreenPacket::decode, SniffaloScreenPacket::handle);
 
-        //HANDLER.registerMessage(id++, WissenAltarBurstEffectPacket.class, WissenAltarBurstEffectPacket::encode, WissenAltarBurstEffectPacket::decode, WissenAltarBurstEffectPacket::handle);
-        WissenAltarBurstEffectPacket.register(HANDLER, id++);
-        HANDLER.registerMessage(id++, WissenCrystallizerBurstEffectPacket.class, WissenCrystallizerBurstEffectPacket::encode, WissenCrystallizerBurstEffectPacket::decode, WissenCrystallizerBurstEffectPacket::handle);
-        HANDLER.registerMessage(id++, ArcaneWorkbenchBurstEffectPacket.class, ArcaneWorkbenchBurstEffectPacket::encode, ArcaneWorkbenchBurstEffectPacket::decode, ArcaneWorkbenchBurstEffectPacket::handle);
-        HANDLER.registerMessage(id++, WissenAltarSendEffectPacket.class, WissenAltarSendEffectPacket::encode, WissenAltarSendEffectPacket::decode, WissenAltarSendEffectPacket::handle);
-        HANDLER.registerMessage(id++, WissenCellSendEffectPacket.class, WissenCellSendEffectPacket::encode, WissenCellSendEffectPacket::decode, WissenCellSendEffectPacket::handle);
-        HANDLER.registerMessage(id++, JewelerTableBurstEffectPacket.class, JewelerTableBurstEffectPacket::encode, JewelerTableBurstEffectPacket::decode, JewelerTableBurstEffectPacket::handle);
-        HANDLER.registerMessage(id++, AltarOfDroughtBurstEffectPacket.class, AltarOfDroughtBurstEffectPacket::encode, AltarOfDroughtBurstEffectPacket::decode, AltarOfDroughtBurstEffectPacket::handle);
-        HANDLER.registerMessage(id++, AltarOfDroughtSendEffectPacket.class, AltarOfDroughtSendEffectPacket::encode, AltarOfDroughtSendEffectPacket::decode, AltarOfDroughtSendEffectPacket::handle);
-        HANDLER.registerMessage(id++, AltarOfDroughtBreakEffectPacket.class, AltarOfDroughtBreakEffectPacket::encode, AltarOfDroughtBreakEffectPacket::decode, AltarOfDroughtBreakEffectPacket::handle);
-        HANDLER.registerMessage(id++, ArcaneIteratorBurstEffectPacket.class, ArcaneIteratorBurstEffectPacket::encode, ArcaneIteratorBurstEffectPacket::decode, ArcaneIteratorBurstEffectPacket::handle);
-        HANDLER.registerMessage(id++, ExperienceTotemBurstEffectPacket.class, ExperienceTotemBurstEffectPacket::encode, ExperienceTotemBurstEffectPacket::decode, ExperienceTotemBurstEffectPacket::handle);
-        HANDLER.registerMessage(id++, TotemOfDisenchantStartEffectPacket.class, TotemOfDisenchantStartEffectPacket::encode, TotemOfDisenchantStartEffectPacket::decode, TotemOfDisenchantStartEffectPacket::handle);
-        HANDLER.registerMessage(id++, TotemOfDisenchantBurstEffectPacket.class, TotemOfDisenchantBurstEffectPacket::encode, TotemOfDisenchantBurstEffectPacket::decode, TotemOfDisenchantBurstEffectPacket::handle);
+        WissenAltarBurstPacket.register(HANDLER, id++);
+        WissenAltarBurstPacket.register(HANDLER, id++);
+        HANDLER.registerMessage(id++, WissenTranslatorBurstPacket.class, WissenTranslatorBurstPacket::encode, WissenTranslatorBurstPacket::decode, WissenTranslatorBurstPacket::handle);
+        HANDLER.registerMessage(id++, WissenTranslatorSendPacket.class, WissenTranslatorSendPacket::encode, WissenTranslatorSendPacket::decode, WissenTranslatorSendPacket::handle);
+        HANDLER.registerMessage(id++, WissenSendEffectPacket.class, WissenSendEffectPacket::encode, WissenSendEffectPacket::decode, WissenSendEffectPacket::handle);
+        WissenCrystallizerBurstPacket.register(HANDLER, id++);
+        ArcaneWorkbenchBurstPacket.register(HANDLER, id++);
+        WissenCellSendPacket.register(HANDLER, id++);
+        JewelerTableBurstPacket.register(HANDLER, id++);
+        AltarOfDroughtBurstPacket.register(HANDLER, id++);
+        AltarOfDroughtSendPacket.register(HANDLER, id++);
+        AltarOfDroughtBreakPacket.register(HANDLER, id++);
+        ArcaneIteratorBurstPacket.register(HANDLER, id++);
+        HANDLER.registerMessage(id++, ExperienceTotemBurstPacket.class, ExperienceTotemBurstPacket::encode, ExperienceTotemBurstPacket::decode, ExperienceTotemBurstPacket::handle);
+        TotemOfDisenchantStartPacket.register(HANDLER, id++);
+        TotemOfDisenchantBurstPacket.register(HANDLER, id++);
 
         HANDLER.registerMessage(id++, CrystalRitualBurstEffectPacket.class, CrystalRitualBurstEffectPacket::encode, CrystalRitualBurstEffectPacket::decode, CrystalRitualBurstEffectPacket::handle);
         HANDLER.registerMessage(id++, CrystalInfusionBurstEffectPacket.class, CrystalInfusionBurstEffectPacket::encode, CrystalInfusionBurstEffectPacket::decode, CrystalInfusionBurstEffectPacket::handle);
-
-        HANDLER.registerMessage(id++, WissenTranslatorBurstEffectPacket.class, WissenTranslatorBurstEffectPacket::encode, WissenTranslatorBurstEffectPacket::decode, WissenTranslatorBurstEffectPacket::handle);
-        HANDLER.registerMessage(id++, WissenTranslatorSendEffectPacket.class, WissenTranslatorSendEffectPacket::encode, WissenTranslatorSendEffectPacket::decode, WissenTranslatorSendEffectPacket::handle);
-        HANDLER.registerMessage(id++, WissenSendEffectPacket.class, WissenSendEffectPacket::encode, WissenSendEffectPacket::decode, WissenSendEffectPacket::handle);
 
         HANDLER.registerMessage(id++, SpellBurstEffectPacket.class, SpellBurstEffectPacket::encode, SpellBurstEffectPacket::decode, SpellBurstEffectPacket::handle);
         HANDLER.registerMessage(id++, SpellProjectileRayEffectPacket.class, SpellProjectileRayEffectPacket::encode, SpellProjectileRayEffectPacket::decode, SpellProjectileRayEffectPacket::handle);
