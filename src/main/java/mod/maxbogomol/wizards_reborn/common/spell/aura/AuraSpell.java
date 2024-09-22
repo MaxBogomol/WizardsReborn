@@ -236,12 +236,12 @@ public class AuraSpell extends Spell {
         stack.pushPose();
         stack.mulPose(Axis.ZP.rotationDegrees(90f));
         stack.mulPose(Axis.XP.rotationDegrees(ticks));
-        WizardsRebornRenderUtil.raySided(stack, bufferDelayed, 0.8f, 10, 0.75f, r, g, b, 0.05f * alpha, r, g, b, 0F);
+        //WizardsRebornRenderUtil.raySided(stack, bufferDelayed, 0.8f, 10, 0.75f, r, g, b, 0.05f * alpha, r, g, b, 0F);
         stack.mulPose(Axis.XP.rotationDegrees(-ticks * 2));
-        WizardsRebornRenderUtil.raySided(stack, bufferDelayed, 0.5f, 7, 0.75f, r, g, b, 0.15f * alpha, r, g, b, 0F);
+        //WizardsRebornRenderUtil.raySided(stack, bufferDelayed, 0.5f, 7, 0.75f, r, g, b, 0.15f * alpha, r, g, b, 0F);
         stack.mulPose(Axis.XP.rotationDegrees(ticks * 2));
         stack.mulPose(Axis.XP.rotationDegrees(ticks * 0.4f));
-        WizardsRebornRenderUtil.raySided(stack, bufferDelayed, 0.25f, 5, 0.75f, r, g, b, 0.5f * alpha, r, g, b, 0F);
+        //WizardsRebornRenderUtil.raySided(stack, bufferDelayed, 0.25f, 5, 0.75f, r, g, b, 0.5f * alpha, r, g, b, 0F);
         stack.popPose();
 
         stack.pushPose();

@@ -1,6 +1,7 @@
 package mod.maxbogomol.wizards_reborn.client.render.block;
 
 import com.mojang.blaze3d.vertex.PoseStack;
+import mod.maxbogomol.fluffy_fur.util.RenderUtil;
 import mod.maxbogomol.wizards_reborn.api.wissen.WissenUtil;
 import mod.maxbogomol.wizards_reborn.common.block.casing.fluid.FluidCasingBlockEntity;
 import mod.maxbogomol.wizards_reborn.util.WizardsRebornRenderUtil;
@@ -18,7 +19,7 @@ public class FluidCasingRenderer implements BlockEntityRenderer<FluidCasingBlock
         Optional<Boolean> powered = blockEntity.getLevel().getBlockState(blockEntity.getBlockPos()).getOptionalValue(BlockStateProperties.POWERED);
         if (powered.isPresent() && powered.get() && WissenUtil.isCanRenderWissenWand()) {
             poseStack.pushPose();
-            WizardsRebornRenderUtil.renderBoxLines(new Vec3(1f, 1f, 1f), WizardsRebornRenderUtil.colorArea, partialTicks, poseStack);
+            RenderUtil.renderConnectBoxLines(poseStack, new Vec3(1f, 1f, 1f), WizardsRebornRenderUtil.colorArea, 0.5f);
             poseStack.popPose();
         }
     }

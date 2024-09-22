@@ -4,6 +4,7 @@ import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.math.Axis;
 import mod.maxbogomol.fluffy_fur.client.event.ClientTickHandler;
 import mod.maxbogomol.fluffy_fur.registry.client.FluffyFurRenderTypes;
+import mod.maxbogomol.fluffy_fur.util.RenderUtil;
 import mod.maxbogomol.wizards_reborn.api.crystalritual.CrystalRitual;
 import mod.maxbogomol.wizards_reborn.api.crystalritual.CrystalRitualArea;
 import mod.maxbogomol.wizards_reborn.api.crystalritual.CrystalRitualUtil;
@@ -47,7 +48,7 @@ public class CrystalRenderer implements BlockEntityRenderer<CrystalBlockEntity> 
                     poseStack.pushPose();
                     poseStack.translate(0.5F, 0.3825F, 0.5F);
                     poseStack.mulPose(Axis.ZP.rotationDegrees(-90f));
-                    WizardsRebornRenderUtil.ray(poseStack, bufferDelayed, 0.2f, 0.4f, 1f, r, g, b, alpha);
+                    //WizardsRebornRenderUtil.ray(poseStack, bufferDelayed, 0.2f, 0.4f, 1f, r, g, b, alpha);
                     poseStack.popPose();
                 }
             }
@@ -92,13 +93,13 @@ public class CrystalRenderer implements BlockEntityRenderer<CrystalBlockEntity> 
                 CrystalRitualArea area = ritual.getArea(blockEntity);
                 poseStack.pushPose();
                 poseStack.translate(-area.getSizeFrom().x(), -area.getSizeFrom().y(), -area.getSizeFrom().z());
-                WizardsRebornRenderUtil.renderBoxLines(new Vec3( area.getSizeFrom().x() + area.getSizeTo().x() + 1, area.getSizeFrom().y() + area.getSizeTo().y() + 1, area.getSizeFrom().z() + area.getSizeTo().z() + 1), WizardsRebornRenderUtil.colorArea, partialTicks, poseStack);
+                RenderUtil.renderConnectBoxLines(poseStack, new Vec3( area.getSizeFrom().x() + area.getSizeTo().x() + 1, area.getSizeFrom().y() + area.getSizeTo().y() + 1, area.getSizeFrom().z() + area.getSizeTo().z() + 1), WizardsRebornRenderUtil.colorArea, 0.5f);
                 poseStack.popPose();
             }
 
             if (blockEntity.startRitual) {
                 poseStack.pushPose();
-                WizardsRebornRenderUtil.renderBoxLines(new Vec3(1, 1, 1), blockEntity.getCrystalColor(), partialTicks, poseStack);
+                RenderUtil.renderConnectBoxLines(poseStack, new Vec3(1, 1, 1), blockEntity.getCrystalColor(), 0.5f);
                 poseStack.popPose();
             }
 
@@ -108,7 +109,7 @@ public class CrystalRenderer implements BlockEntityRenderer<CrystalBlockEntity> 
                 poseStack.translate(lensPos.x(), lensPos.y(), lensPos.z());
                 BlockPos pos = new BlockPos(blockEntity.blockToX, blockEntity.blockToY, blockEntity.blockToZ);
                 if (blockEntity.getLevel().getBlockEntity(pos) instanceof ILightBlockEntity lightTile) {
-                    WizardsRebornRenderUtil.renderConnectLine(LightUtil.getLightLensPos(blockEntity.getBlockPos(), blockEntity.getLightLensPos()), LightUtil.getLightLensPos(pos, lightTile.getLightLensPos()), WizardsRebornRenderUtil.colorConnectTo, partialTicks, poseStack);
+                    RenderUtil.renderConnectLine(poseStack, LightUtil.getLightLensPos(blockEntity.getBlockPos(), blockEntity.getLightLensPos()), LightUtil.getLightLensPos(pos, lightTile.getLightLensPos()), WizardsRebornRenderUtil.colorConnectTo, 0.5f);
                 }
                 poseStack.popPose();
             }

@@ -11,7 +11,6 @@ import mod.maxbogomol.wizards_reborn.api.crystalritual.CrystalRitual;
 import mod.maxbogomol.wizards_reborn.api.crystalritual.CrystalRitualUtil;
 import mod.maxbogomol.wizards_reborn.common.block.crystal.CrystalBlockEntity;
 import mod.maxbogomol.wizards_reborn.common.block.runic_pedestal.RunicPedestalBlockEntity;
-import mod.maxbogomol.wizards_reborn.util.WizardsRebornRenderUtil;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.blockentity.BlockEntityRenderer;
@@ -85,8 +84,8 @@ public class RunicPedestalRenderer implements BlockEntityRenderer<RunicPedestalB
                 poseStack.translate(0.5F, 0.9F, 0.5F);
                 poseStack.mulPose(Axis.YP.rotationDegrees((float) ticks));
                 poseStack.mulPose(Axis.ZP.rotationDegrees((float) (50f + ((Math.sin(Math.toRadians(ticks / 2.5f)) * 20f)))));
-                WizardsRebornRenderUtil.ray(poseStack, bufferDelayed, 0.025f, 0.75f, 2, r, g, b, 0.7f);
-                WizardsRebornRenderUtil.ray(poseStack, bufferDelayed, 0.02f, 0.74f, 1.5f, r, g, b, 0.4f);
+                //WizardsRebornRenderUtil.ray(poseStack, bufferDelayed, 0.025f, 0.75f, 2, r, g, b, 0.7f);
+                //WizardsRebornRenderUtil.ray(poseStack, bufferDelayed, 0.02f, 0.74f, 1.5f, r, g, b, 0.4f);
                 poseStack.translate(0.75F, 0F, 0F);
                 poseStack.scale(0.25F, 0.25F, 0.25F);
                 poseStack.mulPose(Axis.YP.rotationDegrees(90));

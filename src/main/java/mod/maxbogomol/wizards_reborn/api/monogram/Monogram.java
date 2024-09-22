@@ -1,15 +1,14 @@
 package mod.maxbogomol.wizards_reborn.api.monogram;
 
-import com.mojang.blaze3d.platform.GlStateManager;
-import com.mojang.blaze3d.systems.RenderSystem;
 import mod.maxbogomol.fluffy_fur.client.event.ClientTickHandler;
 import mod.maxbogomol.fluffy_fur.client.render.RenderBuilder;
 import mod.maxbogomol.fluffy_fur.registry.client.FluffyFurRenderTypes;
+import mod.maxbogomol.fluffy_fur.util.RenderUtil;
 import mod.maxbogomol.wizards_reborn.client.arcanemicon.ArcanemiconGui;
 import mod.maxbogomol.wizards_reborn.client.config.ClientConfig;
 import net.minecraft.ChatFormatting;
-import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
+import net.minecraft.client.renderer.texture.TextureAtlasSprite;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraftforge.api.distmarker.Dist;
@@ -87,100 +86,78 @@ public class Monogram {
     public void renderArcanemiconIcon(ArcanemiconGui book, GuiGraphics gui, int x, int y) {
         Random random = new Random(getId().length());
 
-        float r = 1f;
-        float g = 1f;
-        float b = 1f;
+        TextureAtlasSprite sprite = RenderUtil.getSprite(getTexture());
 
-        if (ClientConfig.MONOGRAM_GLOW_COLOR.get()) {
-            r = color.getRed() / 255f;
-            g = color.getGreen() / 255f;
-            b = color.getBlue() / 255f;
-        }
+        gui.pose().pushPose();
+        gui.pose().translate(x + 8, y + 8, 100);
+        RenderBuilder.create().setRenderType(FluffyFurRenderTypes.TRANSLUCENT_TEXTURE)
+                .setUV(sprite)
+                .setColor(ClientConfig.MONOGRAM_COLOR.get() ? color : Color.WHITE).setAlpha(1f)
+                .renderCenteredQuad(gui.pose(), 8f)
+                .endBatch();
+        gui.pose().popPose();
 
         if (ClientConfig.MONOGRAM_RAYS.get()) {
             gui.pose().pushPose();
             gui.pose().translate(x + 8, y + 8, 100);
             RenderBuilder.create().setRenderType(FluffyFurRenderTypes.ADDITIVE)
-                    .setColorRaw(r, g, b).setAlpha(0.35f)
-                    .renderDragon(gui.pose(), 7.5f, ClientTickHandler.partialTicks, getId().length())
+                    .setColor(ClientConfig.MONOGRAM_GLOW_COLOR.get() ? color : Color.WHITE).setAlpha(0.15f)
+                    .renderDragon(gui.pose(), 14f, ClientTickHandler.partialTicks, getId().length())
                     .endBatch();
             gui.pose().popPose();
         }
 
         if (ClientConfig.MONOGRAM_GLOW.get()) {
-            RenderSystem.enableBlend();
-            RenderSystem.blendFunc(GlStateManager.SourceFactor.SRC_ALPHA, GlStateManager.DestFactor.ONE);
-            RenderSystem.setShaderColor(r, g, b, 0.15F);
-
             for (int i = 0; i < 5; i++) {
-                RenderSystem.setShaderColor(r, g, b, (float) (0.15F + (random.nextDouble() / 10)));
-                double dst = (360 * random.nextDouble()) + (ClientTickHandler.ticksInGame + Minecraft.getInstance().getFrameTime()) / 8;
-                double dstX = (360 * random.nextDouble()) + (ClientTickHandler.ticksInGame + Minecraft.getInstance().getFrameTime()) / 16;
-                double dstY = (360 * random.nextDouble()) + (ClientTickHandler.ticksInGame + Minecraft.getInstance().getFrameTime()) / 16;
-                int X = (int) (Math.cos(dst) * (4 * Math.sin(Math.toRadians(dstX))));
-                int Y = (int) (Math.sin(dst) * (4 * Math.sin(Math.toRadians(dstY))));
-
-                gui.blit(getIcon(), x + X, y + Y, 0, 0, 16, 16, 16, 16);
+                gui.pose().pushPose();
+                gui.pose().translate(x + 8, y + 8, 100);
+                RenderBuilder.create().setRenderType(FluffyFurRenderTypes.ADDITIVE_TEXTURE)
+                        .setUV(sprite)
+                        .setColor(ClientConfig.MONOGRAM_GLOW_COLOR.get() ? color : Color.WHITE).setAlpha(0.15f)
+                        .renderWavyQuad(gui.pose(), 8f + i, 0.1f, ClientTickHandler.getTotal() + (random.nextFloat() * 100))
+                        .endBatch();
+                gui.pose().popPose();
             }
         }
-
-        RenderSystem.disableBlend();
-        RenderSystem.blendFunc(GlStateManager.SourceFactor.SRC_ALPHA, GlStateManager.DestFactor.ONE_MINUS_SRC_ALPHA);
-
-        RenderSystem.setShaderColor(1F, 1F, 1F, 1F);
-        if (ClientConfig.MONOGRAM_COLOR.get()) {
-            r = color.getRed() / 255f;
-            g = color.getGreen() / 255f;
-            b = color.getBlue() / 255f;
-            RenderSystem.setShaderColor(r, g, b, 1F);
-        }
-        gui.blit(getIcon(), x, y, 0, 0, 16, 16, 16, 16);
-        RenderSystem.setShaderColor(1F, 1F, 1F, 1F);
     }
 
     @OnlyIn(Dist.CLIENT)
     public void renderArcanemiconMiniIcon(ArcanemiconGui book, GuiGraphics gui, int x, int y) {
         Random random = new Random(getId().length());
 
-        float r = 1f;
-        float g = 1f;
-        float b = 1f;
+        TextureAtlasSprite sprite = RenderUtil.getSprite(getTexture());
 
-        if (ClientConfig.MONOGRAM_GLOW_COLOR.get()) {
-            r = color.getRed() / 255f;
-            g = color.getGreen() / 255f;
-            b = color.getBlue() / 255f;
+        gui.pose().pushPose();
+        gui.pose().translate(x + 4, y + 4, 100);
+        RenderBuilder.create().setRenderType(FluffyFurRenderTypes.TRANSLUCENT_TEXTURE)
+                .setUV(sprite)
+                .setColor(ClientConfig.MONOGRAM_COLOR.get() ? color : Color.WHITE).setAlpha(1f)
+                .renderCenteredQuad(gui.pose(), 4f)
+                .endBatch();
+        gui.pose().popPose();
+
+        if (ClientConfig.MONOGRAM_RAYS.get()) {
+            gui.pose().pushPose();
+            gui.pose().translate(x + 4, y + 4, 100);
+            RenderBuilder.create().setRenderType(FluffyFurRenderTypes.ADDITIVE)
+                    .setColor(ClientConfig.MONOGRAM_GLOW_COLOR.get() ? color : Color.WHITE).setAlpha(0.15f)
+                    .renderDragon(gui.pose(), 7f, ClientTickHandler.partialTicks, getId().length())
+                    .endBatch();
+            gui.pose().popPose();
         }
 
         if (ClientConfig.MONOGRAM_GLOW.get()) {
-            RenderSystem.enableBlend();
-            RenderSystem.blendFunc(GlStateManager.SourceFactor.SRC_ALPHA, GlStateManager.DestFactor.ONE);
-            RenderSystem.setShaderColor(r, g, b, 0.15F);
-
             for (int i = 0; i < 5; i++) {
-                RenderSystem.setShaderColor(r, g, b, (float) (0.15F + (random.nextDouble() / 10)));
-                double dst = (360 * random.nextDouble()) + (ClientTickHandler.ticksInGame + Minecraft.getInstance().getFrameTime()) / 8;
-                double dstX = (360 * random.nextDouble()) + (ClientTickHandler.ticksInGame + Minecraft.getInstance().getFrameTime()) / 16;
-                double dstY = (360 * random.nextDouble()) + (ClientTickHandler.ticksInGame + Minecraft.getInstance().getFrameTime()) / 16;
-                int X = (int) (Math.cos(dst) * (2 * Math.sin(Math.toRadians(dstX))));
-                int Y = (int) (Math.sin(dst) * (2 * Math.sin(Math.toRadians(dstY))));
-
-                gui.blit(getIcon(), x + X, y + Y, 0, 0, 8, 8, 8, 8);
+                gui.pose().pushPose();
+                gui.pose().translate(x + 4, y + 4, 100);
+                RenderBuilder.create().setRenderType(FluffyFurRenderTypes.ADDITIVE_TEXTURE)
+                        .setUV(sprite)
+                        .setColor(ClientConfig.MONOGRAM_GLOW_COLOR.get() ? color : Color.WHITE).setAlpha(0.15f)
+                        .renderWavyQuad(gui.pose(), 4f + (i / 2f), 0.1f, ClientTickHandler.getTotal() + (random.nextFloat() * 100))
+                        .endBatch();
+                gui.pose().popPose();
             }
-
-            RenderSystem.disableBlend();
-            RenderSystem.blendFunc(GlStateManager.SourceFactor.SRC_ALPHA, GlStateManager.DestFactor.ONE_MINUS_SRC_ALPHA);
         }
-
-        RenderSystem.setShaderColor(1F, 1F, 1F, 1F);
-        if (ClientConfig.MONOGRAM_COLOR.get()) {
-            r = color.getRed() / 255f;
-            g = color.getGreen() / 255f;
-            b = color.getBlue() / 255f;
-            RenderSystem.setShaderColor(r, g, b, 1F);
-        }
-        gui.blit(getIcon(), x, y, 0, 0, 8, 8, 8, 8);
-        RenderSystem.setShaderColor(1F, 1F, 1F, 1F);
     }
 
     public List<Component> getComponentList() {

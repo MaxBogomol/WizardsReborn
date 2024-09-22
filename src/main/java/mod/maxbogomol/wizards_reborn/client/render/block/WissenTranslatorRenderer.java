@@ -1,6 +1,7 @@
 package mod.maxbogomol.wizards_reborn.client.render.block;
 
 import com.mojang.blaze3d.vertex.PoseStack;
+import mod.maxbogomol.fluffy_fur.util.RenderUtil;
 import mod.maxbogomol.wizards_reborn.api.wissen.WissenUtil;
 import mod.maxbogomol.wizards_reborn.common.block.wissen_translator.WissenTranslatorBlockEntity;
 import mod.maxbogomol.wizards_reborn.util.WizardsRebornRenderUtil;
@@ -17,13 +18,13 @@ public class WissenTranslatorRenderer implements BlockEntityRenderer<WissenTrans
             if (blockEntity.isToBlock) {
                 poseStack.pushPose();
                 poseStack.translate(0.5F,0.5F,0.5F);
-                WizardsRebornRenderUtil.renderConnectLine(blockEntity.getBlockPos(), new BlockPos(blockEntity.blockToX, blockEntity.blockToY, blockEntity.blockToZ), WizardsRebornRenderUtil.colorConnectTo, partialTicks, poseStack);
+                RenderUtil.renderConnectLine(poseStack, blockEntity.getBlockPos(), new BlockPos(blockEntity.blockToX, blockEntity.blockToY, blockEntity.blockToZ), WizardsRebornRenderUtil.colorConnectTo, 0.5f);
                 poseStack.popPose();
             }
             if (blockEntity.isFromBlock) {
                 poseStack.pushPose();
                 poseStack.translate(0.5F,0.5F,0.5F);
-                WizardsRebornRenderUtil.renderConnectLine(blockEntity.getBlockPos(), new BlockPos(blockEntity.blockFromX, blockEntity.blockFromY, blockEntity.blockFromZ), WizardsRebornRenderUtil.colorConnectFrom, partialTicks, poseStack);
+                RenderUtil.renderConnectLine(poseStack, blockEntity.getBlockPos(), new BlockPos(blockEntity.blockFromX, blockEntity.blockFromY, blockEntity.blockFromZ), WizardsRebornRenderUtil.colorConnectFrom, 0.5f);
                 poseStack.popPose();
             }
         }

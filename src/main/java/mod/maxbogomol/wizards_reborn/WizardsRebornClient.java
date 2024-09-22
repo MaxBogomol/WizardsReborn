@@ -5,7 +5,7 @@ import mod.maxbogomol.fluffy_fur.client.gui.screen.FluffyFurMod;
 import mod.maxbogomol.fluffy_fur.client.gui.screen.FluffyFurPanorama;
 import mod.maxbogomol.wizards_reborn.client.arcanemicon.ArcanemiconChapters;
 import mod.maxbogomol.wizards_reborn.client.event.ClientEvents;
-import mod.maxbogomol.wizards_reborn.client.event.ClientWorldEvent;
+import mod.maxbogomol.wizards_reborn.client.event.ClientLevelEvent;
 import mod.maxbogomol.wizards_reborn.client.event.KeyBindHandler;
 import mod.maxbogomol.wizards_reborn.client.gui.TooltipEventHandler;
 import mod.maxbogomol.wizards_reborn.common.item.equipment.WissenWandItem;
@@ -30,8 +30,8 @@ public class WizardsRebornClient {
             WizardsRebornModels.setupWandCrystalsModels();
             WissenWandItem.setupTooltips();
 
-            forgeBus.addListener(ClientWorldEvent::onTick);
-            forgeBus.addListener(ClientWorldEvent::onRender);
+            forgeBus.addListener(ClientLevelEvent::onTick);
+            forgeBus.addListener(ClientLevelEvent::onRender);
             forgeBus.addListener(TooltipEventHandler::onPostTooltipEvent);
             forgeBus.addListener(KeyBindHandler::onInput);
             forgeBus.addListener(KeyBindHandler::onKey);

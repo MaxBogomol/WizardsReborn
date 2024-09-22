@@ -97,13 +97,13 @@ public class ArcaneIteratorRenderer implements BlockEntityRenderer<ArcaneIterato
         if (WissenUtil.isCanRenderWissenWand()) {
             poseStack.pushPose();
             poseStack.translate(-5, -3, -5);
-            WizardsRebornRenderUtil.renderBoxLines(new Vec3(11, 7, 11), WizardsRebornRenderUtil.colorArea, partialTicks, poseStack);
+            RenderUtil.renderConnectBoxLines(poseStack, new Vec3(11, 7, 11), WizardsRebornRenderUtil.colorArea, 0.5f);
             poseStack.popPose();
 
             if (!blockEntity.isWorks()) {
                 poseStack.pushPose();
                 poseStack.translate(0, -2, 0);
-                WizardsRebornRenderUtil.renderBoxLines(new Vec3(1, 3, 1), WizardsRebornRenderUtil.colorMissing, partialTicks, poseStack);
+                RenderUtil.renderConnectBoxLines(poseStack, new Vec3(1, 3, 1), WizardsRebornRenderUtil.colorMissing, 0.5f);
                 poseStack.popPose();
             }
         }

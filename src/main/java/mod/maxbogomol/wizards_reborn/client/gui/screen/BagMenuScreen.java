@@ -1,21 +1,15 @@
 package mod.maxbogomol.wizards_reborn.client.gui.screen;
 
-import com.mojang.blaze3d.platform.GlStateManager;
 import com.mojang.blaze3d.platform.InputConstants;
-import com.mojang.blaze3d.systems.RenderSystem;
 import com.mojang.math.Axis;
 import mod.maxbogomol.fluffy_fur.client.event.ClientTickHandler;
-import mod.maxbogomol.fluffy_fur.registry.client.FluffyFurShaders;
 import mod.maxbogomol.fluffy_fur.util.RenderUtil;
 import mod.maxbogomol.wizards_reborn.common.item.equipment.IBagItem;
 import mod.maxbogomol.wizards_reborn.common.network.OpenBagPacket;
 import mod.maxbogomol.wizards_reborn.common.network.PacketHandler;
-import mod.maxbogomol.wizards_reborn.util.WizardsRebornRenderUtil;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.screens.Screen;
-import net.minecraft.client.renderer.GameRenderer;
-import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
@@ -146,24 +140,13 @@ public class BagMenuScreen extends Screen {
 
         float chooseRay = (choosed) ? 1.2f : 0.8f;
 
-        RenderSystem.enableBlend();
-        RenderSystem.blendFunc(GlStateManager.SourceFactor.SRC_ALPHA, GlStateManager.DestFactor.ONE);
-        MultiBufferSource.BufferSource buffersource = Minecraft.getInstance().renderBuffers().bufferSource();
-        RenderSystem.depthMask(false);
-        RenderSystem.setShader(FluffyFurShaders::getAdditive);
-
         gui.pose().pushPose();
         gui.pose().translate(width / 2,  height / 2, 0);
         gui.pose().mulPose(Axis.ZP.rotationDegrees(i * step + (step / 2)));
         gui.pose().mulPose(Axis.XP.rotationDegrees((ClientTickHandler.ticksInGame + partialTicks + (i * 10) * 5)));
-        WizardsRebornRenderUtil.ray(gui.pose(), buffersource, 1f, (100 * hoveramount) * chooseRay, 10f, r, g, b, 1, r, g, b, 0F);
-        buffersource.endBatch();
+        //WizardsRebornRenderUtil.ray(gui.pose(), buffersource, 1f, (100 * hoveramount) * chooseRay, 10f, r, g, b, 1, r, g, b, 0F);
+        //buffersource.endBatch();
         gui.pose().popPose();
-
-        RenderSystem.disableBlend();
-        RenderSystem.depthMask(true);
-        RenderSystem.blendFunc(GlStateManager.SourceFactor.SRC_ALPHA, GlStateManager.DestFactor.ONE_MINUS_SRC_ALPHA);
-        RenderSystem.setShader(GameRenderer::getPositionTexShader);
     }
 
     @Override

@@ -17,7 +17,6 @@ import mod.maxbogomol.wizards_reborn.common.network.spell.StrikeSpellEffectPacke
 import mod.maxbogomol.wizards_reborn.common.spell.look.block.BlockLookSpell;
 import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornEntities;
 import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornSounds;
-import mod.maxbogomol.wizards_reborn.util.WizardsRebornRenderUtil;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
@@ -250,14 +249,14 @@ public class StrikeSpell extends BlockLookSpell {
 
         stack.pushPose();
         stack.mulPose(Axis.XP.rotationDegrees(yRot));
-        WizardsRebornRenderUtil.raySided(stack, bufferDelayed, 0.2f * alpha, 100 * size, 0.4f, r, g, b, 0.4f * alpha, r, g, b, 0F);
-        WizardsRebornRenderUtil.raySided(stack, bufferDelayed, 0.5f * alpha, 100 * size, 0.4f, sr, sg, sb, 0.2f * alpha, sr, sg, sb, 0F);
+        //WizardsRebornRenderUtil.raySided(stack, bufferDelayed, 0.2f * alpha, 100 * size, 0.4f, r, g, b, 0.4f * alpha, r, g, b, 0F);
+        //WizardsRebornRenderUtil.raySided(stack, bufferDelayed, 0.5f * alpha, 100 * size, 0.4f, sr, sg, sb, 0.2f * alpha, sr, sg, sb, 0F);
         stack.popPose();
 
         stack.pushPose();
         stack.mulPose(Axis.XP.rotationDegrees(yRot + ticks));
-        WizardsRebornRenderUtil.raySided(stack, bufferDelayed, 0.38f * sizeEnd, 100 * size, 1f, r, g, b, 0.08f * alpha, r, g, b, 0F);
-        WizardsRebornRenderUtil.raySided(stack, bufferDelayed, 0.4f * sizeEnd, 100 * size, 1f, r, g, b, 0.05f * alpha, r, g, b, 0F);
+        //WizardsRebornRenderUtil.raySided(stack, bufferDelayed, 0.38f * sizeEnd, 100 * size, 1f, r, g, b, 0.08f * alpha, r, g, b, 0F);
+        //WizardsRebornRenderUtil.raySided(stack, bufferDelayed, 0.4f * sizeEnd, 100 * size, 1f, r, g, b, 0.05f * alpha, r, g, b, 0F);
         stack.popPose();
 
         stack.popPose();

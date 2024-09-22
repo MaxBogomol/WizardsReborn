@@ -1,6 +1,7 @@
 package mod.maxbogomol.wizards_reborn.client.render.block;
 
 import com.mojang.blaze3d.vertex.PoseStack;
+import mod.maxbogomol.fluffy_fur.util.RenderUtil;
 import mod.maxbogomol.wizards_reborn.api.light.LightUtil;
 import mod.maxbogomol.wizards_reborn.api.wissen.WissenUtil;
 import mod.maxbogomol.wizards_reborn.common.block.casing.light.LightCasingBlockEntity;
@@ -45,7 +46,7 @@ public class LightCasingRenderer implements BlockEntityRenderer<LightCasingBlock
                 if (WissenUtil.isCanRenderWissenWand()) {
                     poseStack.pushPose();
                     poseStack.translate(-0.2f, -0.2f, -0.2f);
-                    WizardsRebornRenderUtil.renderBoxLines(new Vec3(0.4f, 0.4f, 0.4f), WizardsRebornRenderUtil.colorConnectTo, partialTicks, poseStack);
+                    RenderUtil.renderConnectBoxLines(poseStack, new Vec3(0.4f, 0.4f, 0.4f), WizardsRebornRenderUtil.colorConnectTo, 0.5f);
                     poseStack.popPose();
                 }
             }

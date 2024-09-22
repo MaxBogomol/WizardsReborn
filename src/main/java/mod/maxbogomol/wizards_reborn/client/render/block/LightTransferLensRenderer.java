@@ -3,6 +3,7 @@ package mod.maxbogomol.wizards_reborn.client.render.block;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.math.Axis;
 import mod.maxbogomol.fluffy_fur.client.event.ClientTickHandler;
+import mod.maxbogomol.fluffy_fur.util.RenderUtil;
 import mod.maxbogomol.wizards_reborn.api.light.ILightBlockEntity;
 import mod.maxbogomol.wizards_reborn.api.light.LightUtil;
 import mod.maxbogomol.wizards_reborn.api.wissen.WissenUtil;
@@ -54,7 +55,7 @@ public class LightTransferLensRenderer implements BlockEntityRenderer<LightTrans
                 poseStack.translate(blockEntityPos.x(), blockEntityPos.y(), blockEntityPos.z());
                 BlockPos pos = new BlockPos(blockEntity.blockToX, blockEntity.blockToY, blockEntity.blockToZ);
                 if (blockEntity.getLevel().getBlockEntity(pos) instanceof ILightBlockEntity lightTile) {
-                    WizardsRebornRenderUtil.renderConnectLine(LightUtil.getLightLensPos(blockEntity.getBlockPos(), blockEntity.getLightLensPos()), LightUtil.getLightLensPos(pos, lightTile.getLightLensPos()), WizardsRebornRenderUtil.colorConnectTo, partialTicks, poseStack);
+                    RenderUtil.renderConnectLine(poseStack, LightUtil.getLightLensPos(blockEntity.getBlockPos(), blockEntity.getLightLensPos()), LightUtil.getLightLensPos(pos, lightTile.getLightLensPos()), WizardsRebornRenderUtil.colorConnectTo, 0.5f);
                 }
                 poseStack.popPose();
             }

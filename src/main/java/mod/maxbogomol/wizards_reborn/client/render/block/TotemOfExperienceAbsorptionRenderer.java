@@ -64,7 +64,7 @@ public class TotemOfExperienceAbsorptionRenderer implements BlockEntityRenderer<
         if (WissenUtil.isCanRenderWissenWand()) {
             poseStack.pushPose();
             poseStack.translate(-1, -1, -1);
-            WizardsRebornRenderUtil.renderBoxLines(new Vec3(3, 3, 3), WizardsRebornRenderUtil.colorArea, partialTicks, poseStack);
+            RenderUtil.renderConnectBoxLines(poseStack, new Vec3(3, 3, 3), WizardsRebornRenderUtil.colorArea, 0.5f);
             poseStack.popPose();
         }
     }

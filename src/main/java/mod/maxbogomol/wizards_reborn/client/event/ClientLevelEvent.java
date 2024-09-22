@@ -2,6 +2,7 @@ package mod.maxbogomol.wizards_reborn.client.event;
 
 import com.mojang.blaze3d.vertex.PoseStack;
 import mod.maxbogomol.fluffy_fur.client.event.ClientTickHandler;
+import mod.maxbogomol.fluffy_fur.util.RenderUtil;
 import mod.maxbogomol.wizards_reborn.api.alchemy.ISteamBlockEntity;
 import mod.maxbogomol.wizards_reborn.api.light.ILightBlockEntity;
 import mod.maxbogomol.wizards_reborn.api.light.LightUtil;
@@ -27,11 +28,8 @@ import net.minecraftforge.event.TickEvent;
 import net.minecraftforge.fluids.capability.IFluidHandler;
 
 import java.awt.*;
-import java.util.Random;
 
-public class ClientWorldEvent {
-
-    private static Random random = new Random();
+public class ClientLevelEvent {
 
     @OnlyIn(Dist.CLIENT)
     public static void onTick(TickEvent.LevelTickEvent event) {
@@ -42,7 +40,7 @@ public class ClientWorldEvent {
     public static void onRender(RenderLevelStageEvent event) {
         Minecraft minecraft = Minecraft.getInstance();
         float partialTicks = event.getPartialTick();
-        PoseStack ms = event.getPoseStack();
+        PoseStack poseStack = event.getPoseStack();
 
         Vec3 camera = minecraft.gameRenderer.getMainCamera().getPosition();
 
@@ -74,15 +72,15 @@ public class ClientWorldEvent {
                             BlockPos blockPos = WissenWandItem.getBlockPos(stack);
 
                             if (canEffect(blockPos, player.level())) {
-                                ms.pushPose();
+                                poseStack.pushPose();
                                 double dX = blockPos.getX() - camera.x();
                                 double dY = blockPos.getY() - camera.y();
                                 double dZ = blockPos.getZ() - camera.z();
-                                ms.translate(dX, dY, dZ);
+                                poseStack.translate(dX, dY, dZ);
 
                                 Color color = WizardsRebornRenderUtil.colorSelected;
-                                WizardsRebornRenderUtil.renderBoxLines(new Vec3(1, 1, 1), new Color(color.getRed() / 255f, color.getGreen() / 255f, color.getBlue() / 255f, alpha), partialTicks, ms);
-                                ms.popPose();
+                                RenderUtil.renderConnectBoxLines(poseStack, new Vec3(1, 1, 1), color, 0.5f * alpha);
+                                poseStack.popPose();
 
                                 if (hitresult.getType() == HitResult.Type.BLOCK) {
                                     BlockPos blockpos = ((BlockHitResult) hitresult).getBlockPos();
@@ -99,20 +97,20 @@ public class ClientWorldEvent {
                                         Vec3 offset = getEffectPos(blockPos, player.level());
                                         Vec3 newOffset = getEffectPos(blockpos, player.level());
 
-                                        ms.pushPose();
-                                        ms.translate(dX, dY, dZ);
-                                        WizardsRebornRenderUtil.renderBoxLines(new Vec3(1, 1, 1), new Color(color.getRed() / 255f, color.getGreen() / 255f, color.getBlue() / 255f, alpha), partialTicks, ms);
-                                        ms.popPose();
+                                        poseStack.pushPose();
+                                        poseStack.translate(dX, dY, dZ);
+                                        RenderUtil.renderConnectBoxLines(poseStack, new Vec3(1, 1, 1), color, 0.5f * alpha);
+                                        poseStack.popPose();
 
                                         dX = blockPos.getX() - camera.x();
                                         dY = blockPos.getY() - camera.y();
                                         dZ = blockPos.getZ() - camera.z();
 
-                                        ms.pushPose();
-                                        ms.translate(dX, dY, dZ);
-                                        ms.translate(offset.x(), offset.y(), offset.z());
-                                        WizardsRebornRenderUtil.renderConnectLine(LightUtil.getLightLensPos(blockPos, offset), LightUtil.getLightLensPos(blockpos, newOffset), new Color(color.getRed() / 255f, color.getGreen() / 255f, color.getBlue() / 255f, alpha), partialTicks, ms);
-                                        ms.popPose();
+                                        poseStack.pushPose();
+                                        poseStack.translate(dX, dY, dZ);
+                                        poseStack.translate(offset.x(), offset.y(), offset.z());
+                                        RenderUtil.renderConnectLine(poseStack, LightUtil.getLightLensPos(blockPos, offset), LightUtil.getLightLensPos(blockpos, newOffset), color, 0.5f * alpha);
+                                        poseStack.popPose();
                                     }
                                 }
                             }
@@ -149,24 +147,24 @@ public class ClientWorldEvent {
                         }
 
                         if (renderSide) {
-                            ms.pushPose();
+                            poseStack.pushPose();
                             double dX = blockpos.getX() - camera.x();
                             double dY = blockpos.getY() - camera.y();
                             double dZ = blockpos.getZ() - camera.z();
-                            ms.translate(dX, dY, dZ);
+                            poseStack.translate(dX, dY, dZ);
                             if (renderFluidSide) {
                                 Color color = WizardsRebornRenderUtil.colorFluidSide;
-                                WizardsRebornRenderUtil.renderSide(direction, new Color(color.getRed() / 255f, color.getGreen() / 255f, color.getBlue() / 255f, alpha), partialTicks, ms);
+                                RenderUtil.renderConnectSide(poseStack, direction, color, 0.5f * alpha);
                             }
                             if (renderSteamSide) {
                                 Color color = WizardsRebornRenderUtil.colorSteamSide;
-                                WizardsRebornRenderUtil.renderSide(direction, new Color(color.getRed() / 255f, color.getGreen() / 255f, color.getBlue() / 255f, alpha), partialTicks, ms);
+                                RenderUtil.renderConnectSide(poseStack, direction, color, 0.5f * alpha);
                             }
                             if (renderEnergySide) {
                                 Color color = WizardsRebornRenderUtil.colorEnergySide;
-                                WizardsRebornRenderUtil.renderSide(direction, new Color(color.getRed() / 255f, color.getGreen() / 255f, color.getBlue() / 255f, alpha), partialTicks, ms);
+                                RenderUtil.renderConnectSide(poseStack, direction, color, 0.5f * alpha);
                             }
-                            ms.popPose();
+                            poseStack.popPose();
                         }
                     }
                 }
@@ -184,7 +182,7 @@ public class ClientWorldEvent {
 
     public static Vec3 getEffectPos(BlockPos pos, Level level) {
         BlockEntity blockEntity = level.getBlockEntity(pos);
-        if (blockEntity instanceof ILightBlockEntity lightTile) return lightTile.getLightLensPos();
+        if (blockEntity instanceof ILightBlockEntity lightBlockEntity) return lightBlockEntity.getLightLensPos();
 
         return new Vec3(0.5f, 0.5f, 0.5f);
     }

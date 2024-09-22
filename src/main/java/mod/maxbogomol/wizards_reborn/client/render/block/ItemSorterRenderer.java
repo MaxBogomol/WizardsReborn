@@ -59,12 +59,12 @@ public class ItemSorterRenderer implements BlockEntityRenderer<ItemSorterBlockEn
 
             poseStack.pushPose();
             poseStack.translate(blockEntity.getBlockPos().getX() - outputBlockpos.getX(), blockEntity.getBlockPos().getY() - outputBlockpos.getY(), blockEntity.getBlockPos().getZ() - outputBlockpos.getZ());
-            WizardsRebornRenderUtil.renderBoxLines(new Vec3(1, 1, 1), WizardsRebornRenderUtil.colorConnectFrom, partialTicks, poseStack);
+            RenderUtil.renderConnectBoxLines(poseStack, new Vec3(1, 1, 1), WizardsRebornRenderUtil.colorConnectFrom, 0.5f);
             poseStack.popPose();
 
             poseStack.pushPose();
             poseStack.translate(blockEntity.getBlockPos().getX() - inputBlockpos.getX(), blockEntity.getBlockPos().getY() - inputBlockpos.getY(), blockEntity.getBlockPos().getZ() - inputBlockpos.getZ());
-            WizardsRebornRenderUtil.renderBoxLines(new Vec3(1, 1, 1), WizardsRebornRenderUtil.colorConnectTo, partialTicks, poseStack);
+            RenderUtil.renderConnectBoxLines(poseStack, new Vec3(1, 1, 1), WizardsRebornRenderUtil.colorConnectTo, 0.5f);
             poseStack.popPose();
         }
     }

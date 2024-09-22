@@ -2404,7 +2404,7 @@ public class ArcanemiconChapters {
         RESEARCHES = new Chapter(
                 "wizards_reborn.arcanemicon.chapter.researches",
                 new TitlePage("wizards_reborn.arcanemicon.page.researches.0"),
-                new TextPage("wizards_reborn.arcanemicon.page.researches.1")
+                new ResearchesPage("wizards_reborn.arcanemicon.page.researches.1")
         );
 
         MONOGRAMS = new Chapter(
