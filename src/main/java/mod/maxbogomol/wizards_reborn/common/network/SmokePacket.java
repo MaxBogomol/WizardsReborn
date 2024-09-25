@@ -13,7 +13,7 @@ import net.minecraftforge.network.NetworkEvent;
 import java.util.Random;
 import java.util.function.Supplier;
 
-public class SmokeEffectPacket {
+public class SmokePacket {
     private final float posX;
     private final float posY;
     private final float posZ;
@@ -26,7 +26,7 @@ public class SmokeEffectPacket {
 
     private static final Random random = new Random();
 
-    public SmokeEffectPacket(float posX, float posY, float posZ, float velX, float velY, float velZ, float colorR, float colorG, float colorB) {
+    public SmokePacket(float posX, float posY, float posZ, float velX, float velY, float velZ, float colorR, float colorG, float colorB) {
         this.posX = posX;
         this.posY = posY;
         this.posZ = posZ;
@@ -40,8 +40,8 @@ public class SmokeEffectPacket {
         this.colorB = colorB;
     }
 
-    public static SmokeEffectPacket decode(FriendlyByteBuf buf) {
-        return new SmokeEffectPacket(buf.readFloat(), buf.readFloat(), buf.readFloat(), buf.readFloat(), buf.readFloat(), buf.readFloat(), buf.readFloat(), buf.readFloat(), buf.readFloat());
+    public static SmokePacket decode(FriendlyByteBuf buf) {
+        return new SmokePacket(buf.readFloat(), buf.readFloat(), buf.readFloat(), buf.readFloat(), buf.readFloat(), buf.readFloat(), buf.readFloat(), buf.readFloat(), buf.readFloat());
     }
 
     public void encode(FriendlyByteBuf buf) {
@@ -58,7 +58,7 @@ public class SmokeEffectPacket {
         buf.writeFloat(colorB);
     }
 
-    public static void handle(SmokeEffectPacket msg, Supplier<NetworkEvent.Context> ctx) {
+    public static void handle(SmokePacket msg, Supplier<NetworkEvent.Context> ctx) {
         if (ctx.get().getDirection().getReceptionSide().isClient()) {
             ctx.get().enqueueWork(new Runnable() {
                 @Override

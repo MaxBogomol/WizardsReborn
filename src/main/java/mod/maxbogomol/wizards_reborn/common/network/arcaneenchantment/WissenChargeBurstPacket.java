@@ -1,4 +1,4 @@
-package mod.maxbogomol.wizards_reborn.common.network;
+package mod.maxbogomol.wizards_reborn.common.network.arcaneenchantment;
 
 import mod.maxbogomol.fluffy_fur.client.particle.ParticleBuilder;
 import mod.maxbogomol.fluffy_fur.client.particle.data.ColorParticleData;
@@ -14,7 +14,7 @@ import net.minecraftforge.network.NetworkEvent;
 import java.util.Random;
 import java.util.function.Supplier;
 
-public class WissenChargeBurstEffectPacket {
+public class WissenChargeBurstPacket {
     private final float posX;
     private final float posY;
     private final float posZ;
@@ -27,7 +27,7 @@ public class WissenChargeBurstEffectPacket {
 
     private static final Random random = new Random();
 
-    public WissenChargeBurstEffectPacket(float posX, float posY, float posZ, float r, float g, float b, float charge) {
+    public WissenChargeBurstPacket(float posX, float posY, float posZ, float r, float g, float b, float charge) {
         this.posX = posX;
         this.posY = posY;
         this.posZ = posZ;
@@ -39,8 +39,8 @@ public class WissenChargeBurstEffectPacket {
         this.charge = charge;
     }
 
-    public static WissenChargeBurstEffectPacket decode(FriendlyByteBuf buf) {
-        return new WissenChargeBurstEffectPacket(buf.readFloat(), buf.readFloat(), buf.readFloat(), buf.readFloat(), buf.readFloat(), buf.readFloat(), buf.readFloat());
+    public static WissenChargeBurstPacket decode(FriendlyByteBuf buf) {
+        return new WissenChargeBurstPacket(buf.readFloat(), buf.readFloat(), buf.readFloat(), buf.readFloat(), buf.readFloat(), buf.readFloat(), buf.readFloat());
     }
 
     public void encode(FriendlyByteBuf buf) {
@@ -55,7 +55,7 @@ public class WissenChargeBurstEffectPacket {
         buf.writeFloat(charge);
     }
 
-    public static void handle(WissenChargeBurstEffectPacket msg, Supplier<NetworkEvent.Context> ctx) {
+    public static void handle(WissenChargeBurstPacket msg, Supplier<NetworkEvent.Context> ctx) {
         if (ctx.get().getDirection().getReceptionSide().isClient()) {
             ctx.get().enqueueWork(new Runnable() {
                 @Override

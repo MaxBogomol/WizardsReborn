@@ -1,5 +1,6 @@
 package mod.maxbogomol.wizards_reborn.common.network;
 
+import mod.maxbogomol.fluffy_fur.common.network.ClientPacket;
 import mod.maxbogomol.wizards_reborn.client.gui.container.SniffaloContainer;
 import mod.maxbogomol.wizards_reborn.client.gui.screen.SniffaloScreen;
 import mod.maxbogomol.wizards_reborn.common.entity.SniffaloEntity;
@@ -9,66 +10,46 @@ import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.world.SimpleContainer;
 import net.minecraft.world.entity.Entity;
 import net.minecraftforge.network.NetworkEvent;
+import net.minecraftforge.network.simple.SimpleChannel;
 
 import java.util.function.Supplier;
 
-public class SniffaloScreenPacket {
-    private final int containerId;
-    private final int size;
-    private final int entityId;
+public class SniffaloScreenPacket extends ClientPacket {
+    protected final int containerId;
+    protected final int size;
+    protected final int entityId;
 
-    public SniffaloScreenPacket(int pContainerId, int pSize, int pEntityId) {
-        this.containerId = pContainerId;
-        this.size = pSize;
-        this.entityId = pEntityId;
+    public SniffaloScreenPacket(int containerId, int size, int entityId) {
+        this.containerId = containerId;
+        this.size = size;
+        this.entityId = entityId;
     }
 
-    public SniffaloScreenPacket(FriendlyByteBuf pBuffer) {
-        this.containerId = pBuffer.readUnsignedByte();
-        this.size = pBuffer.readVarInt();
-        this.entityId = pBuffer.readInt();
+    @Override
+    public void execute(Supplier<NetworkEvent.Context> context) {
+        Minecraft minecraft = Minecraft.getInstance();
+
+        Entity entity = minecraft.level.getEntity(entityId);
+        if (entity instanceof SniffaloEntity sniffalo) {
+            LocalPlayer localplayer = minecraft.player;
+            SimpleContainer simplecontainer = new SimpleContainer(size);
+            SniffaloContainer sniffaloContainer = new SniffaloContainer(containerId, localplayer.getInventory(), simplecontainer, minecraft.player, sniffalo);
+            localplayer.containerMenu = sniffaloContainer;
+            minecraft.setScreen(new SniffaloScreen(sniffaloContainer, localplayer.getInventory(), sniffalo));
+        }
+    }
+
+    public static void register(SimpleChannel instance, int index) {
+        instance.registerMessage(index, SniffaloScreenPacket.class, SniffaloScreenPacket::encode, SniffaloScreenPacket::decode, SniffaloScreenPacket::handle);
+    }
+
+    public void encode(FriendlyByteBuf buf) {
+        buf.writeByte(containerId);
+        buf.writeVarInt(size);
+        buf.writeInt(entityId);
     }
 
     public static SniffaloScreenPacket decode(FriendlyByteBuf buf) {
         return new SniffaloScreenPacket(buf.readByte(), buf.readVarInt(), buf.readInt());
-    }
-
-    public void encode(FriendlyByteBuf buf) {
-        buf.writeByte(this.containerId);
-        buf.writeVarInt(this.size);
-        buf.writeInt(this.entityId);
-    }
-
-    public static void handle(SniffaloScreenPacket msg, Supplier<NetworkEvent.Context> ctx) {
-        if (ctx.get().getDirection().getReceptionSide().isClient()) {
-            ctx.get().enqueueWork(new Runnable() {
-                @Override
-                public void run() {
-                    Minecraft minecraft = Minecraft.getInstance();
-
-                    Entity entity = minecraft.level.getEntity(msg.getEntityId());
-                    if (entity instanceof SniffaloEntity sniffalo) {
-                        LocalPlayer localplayer = minecraft.player;
-                        SimpleContainer simplecontainer = new SimpleContainer(msg.getSize());
-                        SniffaloContainer sniffaloContainer = new SniffaloContainer(msg.getContainerId(), localplayer.getInventory(), simplecontainer, minecraft.player, sniffalo);
-                        localplayer.containerMenu = sniffaloContainer;
-                        minecraft.setScreen(new SniffaloScreen(sniffaloContainer, localplayer.getInventory(), sniffalo));
-                    }
-                }
-            });
-        }
-        ctx.get().setPacketHandled(true);
-    }
-
-    public int getContainerId() {
-        return this.containerId;
-    }
-
-    public int getSize() {
-        return this.size;
-    }
-
-    public int getEntityId() {
-        return this.entityId;
     }
 }

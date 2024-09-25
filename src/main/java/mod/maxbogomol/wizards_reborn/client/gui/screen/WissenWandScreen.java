@@ -9,7 +9,7 @@ import mod.maxbogomol.fluffy_fur.util.ColorUtil;
 import mod.maxbogomol.fluffy_fur.util.RenderUtil;
 import mod.maxbogomol.wizards_reborn.common.item.equipment.WissenWandItem;
 import mod.maxbogomol.wizards_reborn.common.network.PacketHandler;
-import mod.maxbogomol.wizards_reborn.common.network.SetWissenWandModePacket;
+import mod.maxbogomol.wizards_reborn.common.network.item.WissenWandSetModePacket;
 import net.minecraft.ChatFormatting;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
@@ -45,11 +45,11 @@ public class WissenWandScreen extends Screen {
         ItemStack offhand = player.getOffhandItem();
 
         if (!main.isEmpty() && main.getItem() instanceof WissenWandItem) {
-            PacketHandler.sendToServer(new SetWissenWandModePacket(true, getSelectedMode(mouseX, mouseY)));
+            PacketHandler.sendToServer(new WissenWandSetModePacket(true, getSelectedMode(mouseX, mouseY)));
             hover = false;
         } else {
             if (!offhand.isEmpty() && offhand.getItem() instanceof WissenWandItem) {
-                PacketHandler.sendToServer(new SetWissenWandModePacket(false, getSelectedMode(mouseX, mouseY)));
+                PacketHandler.sendToServer(new WissenWandSetModePacket(false, getSelectedMode(mouseX, mouseY)));
                 hover = false;
             }
         }

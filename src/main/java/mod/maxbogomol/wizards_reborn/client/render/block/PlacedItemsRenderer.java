@@ -3,7 +3,9 @@ package mod.maxbogomol.wizards_reborn.client.render.block;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.math.Axis;
 import mod.maxbogomol.fluffy_fur.client.event.ClientTickHandler;
+import mod.maxbogomol.fluffy_fur.client.render.RenderBuilder;
 import mod.maxbogomol.fluffy_fur.registry.client.FluffyFurRenderTypes;
+import mod.maxbogomol.fluffy_fur.util.ColorUtil;
 import mod.maxbogomol.wizards_reborn.common.block.placed_items.PlacedItemsBlock;
 import mod.maxbogomol.wizards_reborn.common.block.placed_items.PlacedItemsBlockEntity;
 import mod.maxbogomol.wizards_reborn.common.item.IPlacedItem;
@@ -80,19 +82,17 @@ public class PlacedItemsRenderer implements BlockEntityRenderer<PlacedItemsBlock
             poseStack.popPose();
         }
 
-        MultiBufferSource bufferDelayed = FluffyFurRenderTypes.getDelayedRender();
         if (size <= 0 && blockEntity.things) {
             float addTick = random.nextFloat() * 360f;
             double ticks = (ClientTickHandler.ticksInGame + partialTicks) * 0.05f + addTick;
             double tick = (ClientTickHandler.ticksInGame + partialTicks) * 0.7f;
-            float r = (float) (Math.sin(ticks) * 127 + 128) / 255f;
-            float g = (float) (Math.sin(ticks + Math.PI / 2) * 127 + 128) / 255f;
-            float b = (float) (Math.sin(ticks + Math.PI) * 127 + 128) / 255f;
             poseStack.pushPose();
             poseStack.translate(0.5F, 0F, 0.5F);
-            poseStack.mulPose(Axis.ZP.rotationDegrees(90f));
-            poseStack.mulPose(Axis.XP.rotationDegrees((float) tick + addTick));
-            //WizardsRebornRenderUtil.beamSided(poseStack, bufferDelayed, 0.25f, 0.8f, 1f, 0.984f, 0.827f, 0.220f, 0.2f, r, g, b, 0f);
+            poseStack.mulPose(Axis.YP.rotationDegrees((float) tick + addTick));
+            RenderBuilder.create().setRenderType(FluffyFurRenderTypes.ADDITIVE)
+                    .setColor(ColorUtil.rainbowColor((float) ticks))
+                    .setAlpha(0.25f).setSecondAlpha(0).enableSided()
+                    .renderBeam(poseStack, 0.25f, 0.8f);
             poseStack.popPose();
         }
     }

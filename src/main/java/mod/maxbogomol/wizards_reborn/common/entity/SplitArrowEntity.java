@@ -1,7 +1,7 @@
 package mod.maxbogomol.wizards_reborn.common.entity;
 
 import mod.maxbogomol.wizards_reborn.common.network.PacketHandler;
-import mod.maxbogomol.wizards_reborn.common.network.SplitArrowBurstEffectPacket;
+import mod.maxbogomol.wizards_reborn.common.network.arcaneenchantment.SplitArrowBurstPacket;
 import mod.maxbogomol.wizards_reborn.common.network.spell.ChargeSpellProjectileRayEffectPacket;
 import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornArcaneEnchantments;
 import mod.maxbogomol.wizards_reborn.registry.common.damage.WizardsRebornDamage;
@@ -123,14 +123,8 @@ public class SplitArrowEntity extends AbstractArrow {
             if (end) {
                 setFade(true);
                 setFadeTick(10);
-
-                Vec3 pos = position();
                 Color color = WizardsRebornArcaneEnchantments.SPLIT.getColor();
-                float r = color.getRed() / 255f;
-                float g = color.getGreen() / 255f;
-                float b = color.getBlue() / 255f;
-
-                PacketHandler.sendToTracking(level(), new BlockPos((int) pos.x, (int) pos.y, (int) pos.z), new SplitArrowBurstEffectPacket((float) pos.x, (float) pos.y, (float) pos.z, r, g, b));
+                PacketHandler.sendToTracking(level(), blockPosition(), new SplitArrowBurstPacket(position(), color));
             }
         }
     }
@@ -142,13 +136,8 @@ public class SplitArrowEntity extends AbstractArrow {
         setFadeTick(11);
 
         if (!level().isClientSide()) {
-            Vec3 pos = result.getLocation();
             Color color = WizardsRebornArcaneEnchantments.SPLIT.getColor();
-            float r = color.getRed() / 255f;
-            float g = color.getGreen() / 255f;
-            float b = color.getBlue() / 255f;
-
-            PacketHandler.sendToTracking(level(), new BlockPos((int) pos.x, (int) pos.y, (int) pos.z), new SplitArrowBurstEffectPacket((float) pos.x, (float) pos.y, (float) pos.z, r, g, b));
+            PacketHandler.sendToTracking(level(), blockPosition(), new SplitArrowBurstPacket(position(), color));
         }
         addTrail(result.getLocation());
     }

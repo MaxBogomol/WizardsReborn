@@ -1,4 +1,4 @@
-package mod.maxbogomol.wizards_reborn.common.network;
+package mod.maxbogomol.wizards_reborn.common.network.arcaneenchantment;
 
 import mod.maxbogomol.fluffy_fur.client.particle.ParticleBuilder;
 import mod.maxbogomol.fluffy_fur.client.particle.data.ColorParticleData;
@@ -15,7 +15,7 @@ import net.minecraftforge.network.NetworkEvent;
 import java.util.Random;
 import java.util.function.Supplier;
 
-public class EagleShotRayEffectPacket {
+public class EagleShotRayPacket {
     private final float posFromX;
     private final float posFromY;
     private final float posFromZ;
@@ -34,7 +34,7 @@ public class EagleShotRayEffectPacket {
 
     private static final Random random = new Random();
 
-    public EagleShotRayEffectPacket(float posFromX, float posFromY, float posFromZ, float posToX, float posToY, float posToZ, float motionX, float motionY, float motionZ, float r, float g, float b) {
+    public EagleShotRayPacket(float posFromX, float posFromY, float posFromZ, float posToX, float posToY, float posToZ, float motionX, float motionY, float motionZ, float r, float g, float b) {
         this.posFromX = posFromX;
         this.posFromY = posFromY;
         this.posFromZ = posFromZ;
@@ -52,8 +52,8 @@ public class EagleShotRayEffectPacket {
         this.b = b;
     }
 
-    public static EagleShotRayEffectPacket decode(FriendlyByteBuf buf) {
-        return new EagleShotRayEffectPacket(buf.readFloat(), buf.readFloat(), buf.readFloat(), buf.readFloat(), buf.readFloat(), buf.readFloat(), buf.readFloat(), buf.readFloat(), buf.readFloat(), buf.readFloat(), buf.readFloat(), buf.readFloat());
+    public static EagleShotRayPacket decode(FriendlyByteBuf buf) {
+        return new EagleShotRayPacket(buf.readFloat(), buf.readFloat(), buf.readFloat(), buf.readFloat(), buf.readFloat(), buf.readFloat(), buf.readFloat(), buf.readFloat(), buf.readFloat(), buf.readFloat(), buf.readFloat(), buf.readFloat());
     }
 
     public void encode(FriendlyByteBuf buf) {
@@ -74,7 +74,7 @@ public class EagleShotRayEffectPacket {
         buf.writeFloat(b);
     }
 
-    public static void handle(EagleShotRayEffectPacket msg, Supplier<NetworkEvent.Context> ctx) {
+    public static void handle(EagleShotRayPacket msg, Supplier<NetworkEvent.Context> ctx) {
         if (ctx.get().getDirection().getReceptionSide().isClient()) {
             ctx.get().enqueueWork(new Runnable() {
                 @Override

@@ -59,7 +59,7 @@ public class TitledBlockPage extends Page {
                 ii++;
             }
         }
-        RenderUtil.blitOffset  -= 10.0F * blocks.size();
+        RenderUtil.blitOffset -= 10.0F * blocks.size();
 
         line = 0;
         ii = 0;

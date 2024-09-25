@@ -1,8 +1,7 @@
 package mod.maxbogomol.wizards_reborn.client.render.block;
 
 import com.mojang.blaze3d.vertex.PoseStack;
-import com.mojang.math.Axis;
-import mod.maxbogomol.fluffy_fur.client.event.ClientTickHandler;
+import mod.maxbogomol.fluffy_fur.client.render.RenderBuilder;
 import mod.maxbogomol.fluffy_fur.registry.client.FluffyFurRenderTypes;
 import mod.maxbogomol.fluffy_fur.util.RenderUtil;
 import mod.maxbogomol.wizards_reborn.api.wissen.WissenUtil;
@@ -23,57 +22,46 @@ public class ArcanumGrowthRenderer implements BlockEntityRenderer<ArcanumGrowthB
         Random random = new Random();
         random.setSeed(blockEntity.getBlockPos().asLong());
 
-        double ticksAlpha = (ClientTickHandler.ticksInGame + partialTicks);
-        float alpha = (float) (0.15f + Math.abs(Math.sin(Math.toRadians(random.nextFloat() * 360f + ticksAlpha)) * 0.05f));
-
-        MultiBufferSource bufferDelayed = FluffyFurRenderTypes.getDelayedRender();
-
         if (blockEntity.getLevel().getBlockState(blockEntity.getBlockPos()).getBlock() instanceof ArcanumGrowthBlock growth) {
             Color color = new Color(Config.wissenColorR(), Config.wissenColorG(), Config.wissenColorB());
-            float r = color.getRed() / 255f;
-            float g = color.getGreen() / 255f;
-            float b = color.getBlue() / 255f;
+            RenderBuilder builder = RenderBuilder.create().setRenderType(FluffyFurRenderTypes.ADDITIVE)
+                    .setColor(color).setAlpha(0.8f).setSided(false, true);
 
             int age = blockEntity.getLevel().getBlockState(blockEntity.getBlockPos()).getValue(growth.getAgeProperty());
 
             if (blockEntity.getLight() > 0) {
                 if (age == 0) {
                     poseStack.pushPose();
-                    poseStack.translate(0.46875F, 0.1F, 0.46875F);
-                    poseStack.mulPose(Axis.ZP.rotationDegrees(-90f));
-                    //WizardsRebornRenderUtil.ray(poseStack, bufferDelayed, 0.10625f, 0.11f, 1f, r, g, b, alpha);
+                    poseStack.translate(0.46875F, 0.09375f, 0.46875F);
+                    builder.renderCenteredCube(poseStack, 0.1171875f, 0.1171875f, 0.1171875f);
                     poseStack.popPose();
                 }
 
                 if (age == 1) {
                     poseStack.pushPose();
-                    poseStack.translate(0.5F, 0.06F, 0.5F);
-                    poseStack.mulPose(Axis.ZP.rotationDegrees(-90f));
-                    //WizardsRebornRenderUtil.ray(poseStack, bufferDelayed, 0.1375f, 0.08f, 1f, r, g, b, alpha);
+                    poseStack.translate(0.5f, 0.09375f, 0.5f);
+                    builder.renderCenteredCube(poseStack, 0.1484375f, 0.1171875f, 0.1484375f);
                     poseStack.popPose();
                 }
 
                 if (age == 2) {
                     poseStack.pushPose();
-                    poseStack.translate(0.5F, 0.19F, 0.5F);
-                    poseStack.mulPose(Axis.ZP.rotationDegrees(-90f));
-                    //WizardsRebornRenderUtil.ray(poseStack, bufferDelayed, 0.1375f, 0.21f, 1f, r, g, b, alpha);
+                    poseStack.translate(0.5f, 0.15625f, 0.5f);
+                    builder.renderCenteredCube(poseStack, 0.1484375f, 0.1796875f, 0.1484375f);
                     poseStack.popPose();
                 }
 
                 if (age == 3) {
                     poseStack.pushPose();
-                    poseStack.translate(0.53125F, 0.29F, 0.53125F);
-                    poseStack.mulPose(Axis.ZP.rotationDegrees(-90f));
-                    //WizardsRebornRenderUtil.ray(poseStack, bufferDelayed, 0.16875f, 0.3f, 1f, r, g, b, alpha);
+                    poseStack.translate(0.53125f, 0.21875f, 0.53125f);
+                    builder.renderCenteredCube(poseStack, 0.1796875f, 0.2421875f, 0.1796875f);
                     poseStack.popPose();
                 }
 
                 if (age == 4) {
                     poseStack.pushPose();
-                    poseStack.translate(0.5F, 0.3825F, 0.5F);
-                    poseStack.mulPose(Axis.ZP.rotationDegrees(-90f));
-                    //WizardsRebornRenderUtil.ray(poseStack, bufferDelayed, 0.2f, 0.4f, 1f, r, g, b, alpha);
+                    poseStack.translate(0.5f, 0.28125f, 0.5f);
+                    builder.renderCenteredCube(poseStack, 0.2109375f, 0.3046875f, 0.2109375f);
                     poseStack.popPose();
                 }
             }

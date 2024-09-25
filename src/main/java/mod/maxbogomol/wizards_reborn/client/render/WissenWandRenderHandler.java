@@ -131,9 +131,13 @@ public class WissenWandRenderHandler {
                     }
                 }
 
-                colorBlock = WizardsRebornRenderUtil.colorConnectFrom;
-                if (WissenWandItem.getMode(stack) == 2) {
-                    colorBlock = WizardsRebornRenderUtil.colorConnectTo;
+                if (WissenWandItem.getBlock(stack)) {
+                    colorBlock = WizardsRebornRenderUtil.colorConnectFrom;
+                    if (WissenWandItem.getMode(stack) == 2) {
+                        colorBlock = WizardsRebornRenderUtil.colorConnectTo;
+                    }
+                } else {
+                    colorBlock = WizardsRebornRenderUtil.colorSelected;
                 }
             }
             if (!addBlock && timeBlock > 0) timeBlock = timeBlock - 1;

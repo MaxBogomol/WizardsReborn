@@ -5,6 +5,7 @@ import mod.maxbogomol.wizards_reborn.api.alchemy.AlchemyPotion;
 import mod.maxbogomol.wizards_reborn.api.alchemy.AlchemyPotions;
 import mod.maxbogomol.wizards_reborn.common.alchemypotion.ColorAlchemyPotion;
 import mod.maxbogomol.wizards_reborn.common.alchemypotion.FluidAlchemyPotion;
+import mod.maxbogomol.wizards_reborn.common.alchemypotion.MilkAlchemyPotion;
 import mod.maxbogomol.wizards_reborn.registry.common.fluid.WizardsRebornFluids;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
@@ -22,12 +23,12 @@ public class WizardsRebornAlchemyPotions {
 
     public static void init() {
         WATER = new FluidAlchemyPotion(WizardsReborn.MOD_ID+":water", Fluids.WATER, new Color(55, 92, 196));
-        MILK = new FluidAlchemyPotion(WizardsReborn.MOD_ID+":milk", ForgeMod.MILK.get(), new Color(255, 255, 255));
+        MILK = new MilkAlchemyPotion(WizardsReborn.MOD_ID+":milk", ForgeMod.MILK.get(), new Color(255, 255, 255));
         MUNDANE_BREW = new FluidAlchemyPotion(WizardsReborn.MOD_ID+":mundane_brew", WizardsRebornFluids.MUNDANE_BREW.get(), new Color(50, 75, 141));
         ALCHEMY_OIL = new FluidAlchemyPotion(WizardsReborn.MOD_ID+":alchemy_oil", WizardsRebornFluids.ALCHEMY_OIL.get(), new Color(96, 47, 59), new MobEffectInstance(MobEffects.MOVEMENT_SLOWDOWN, 800, 3), new MobEffectInstance(MobEffects.WEAKNESS, 800, 1));
         OIL_TEA = new FluidAlchemyPotion(WizardsReborn.MOD_ID+":oil_tea", WizardsRebornFluids.OIL_TEA.get(), new Color(189, 124, 129), new MobEffectInstance(MobEffects.MOVEMENT_SLOWDOWN, 3600, 1), new MobEffectInstance(MobEffects.REGENERATION, 3600, 0), new MobEffectInstance(MobEffects.DAMAGE_BOOST, 3600, 1));
         WISSEN_TEA = new FluidAlchemyPotion(WizardsReborn.MOD_ID+":wissen_tea", WizardsRebornFluids.WISSEN_TEA.get(), new Color(119, 164, 208), new MobEffectInstance(WizardsRebornMobEffects.WISSEN_AURA.get(), 7800));
-        MILK_TEA = new FluidAlchemyPotion(WizardsReborn.MOD_ID+":milk_tea", WizardsRebornFluids.MILK_TEA.get(), new Color(194, 221, 238));
+        MILK_TEA = new FluidAlchemyPotion(WizardsReborn.MOD_ID+":milk_tea", WizardsRebornFluids.MILK_TEA.get(), new Color(194, 221, 238), new MobEffectInstance(MobEffects.REGENERATION, 1200));
         MUSHROOM_BREW = new FluidAlchemyPotion(WizardsReborn.MOD_ID+":mushroom_brew", WizardsRebornFluids.MUSHROOM_BREW.get(), new Color(141, 107, 83));
         HELLISH_MUSHROOM_BREW = new FluidAlchemyPotion(WizardsReborn.MOD_ID+":hellish_mushroom_brew", WizardsRebornFluids.HELLISH_MUSHROOM_BREW.get(), new Color(78, 27, 27));
         MOR_BREW = new FluidAlchemyPotion(WizardsReborn.MOD_ID+":mor_brew", WizardsRebornFluids.MOR_BREW.get(), new Color(77, 84, 116), new MobEffectInstance(WizardsRebornMobEffects.MOR_SPORES.get(), 1600));

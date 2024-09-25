@@ -29,10 +29,15 @@ public class WizardsRebornRenderUtil {
         RenderUtil.renderCustomModel(WizardsRebornModels.HOVERING_LENS, ItemDisplayContext.FIXED, false, poseStack, bufferSource, light, overlay);
     }
 
-    public static void renderHoveringLensGlow(PoseStack poseStack) {
-        RenderBuilder.create().setRenderType(FluffyFurRenderTypes.ADDITIVE)
+    public static RenderBuilder renderHoveringLensGlow(PoseStack poseStack) {
+        return RenderBuilder.create().setRenderType(FluffyFurRenderTypes.ADDITIVE)
                 .setColorRaw(0.564f, 0.682f, 0.705f).setAlpha(0.6f)
                 .renderCenteredCube(poseStack, 0.075f);
+    }
+
+    public static RenderBuilder renderHoveringLens(PoseStack poseStack, MultiBufferSource bufferSource, int light, int overlay) {
+        renderHoveringLensModel(poseStack, bufferSource, light, overlay);
+        return renderHoveringLensGlow(poseStack);
     }
 
     public static void renderAura(PoseStack mStack, VertexConsumer builder, float radius, float size, int longs, Color color1, Color color2, float alpha1, float alpha2, boolean renderSide, boolean renderFloor) {

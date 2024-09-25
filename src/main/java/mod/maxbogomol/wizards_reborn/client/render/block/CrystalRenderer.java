@@ -1,8 +1,7 @@
 package mod.maxbogomol.wizards_reborn.client.render.block;
 
 import com.mojang.blaze3d.vertex.PoseStack;
-import com.mojang.math.Axis;
-import mod.maxbogomol.fluffy_fur.client.event.ClientTickHandler;
+import mod.maxbogomol.fluffy_fur.client.render.RenderBuilder;
 import mod.maxbogomol.fluffy_fur.registry.client.FluffyFurRenderTypes;
 import mod.maxbogomol.fluffy_fur.util.RenderUtil;
 import mod.maxbogomol.wizards_reborn.api.crystalritual.CrystalRitual;
@@ -30,29 +29,29 @@ public class CrystalRenderer implements BlockEntityRenderer<CrystalBlockEntity> 
         Random random = new Random();
         random.setSeed(blockEntity.getBlockPos().asLong());
 
-        double ticksAlpha = (ClientTickHandler.ticksInGame + partialTicks);
-        float alpha = (float) (0.15f + Math.abs(Math.sin(Math.toRadians(random.nextFloat() * 360f + ticksAlpha)) * 0.05f));
-
-        MultiBufferSource bufferDelayed = FluffyFurRenderTypes.getDelayedRender();
-
         CrystalRitual ritual = blockEntity.getCrystalRitual();
 
-        if (blockEntity.getLight() > 0) {
-            if (!blockEntity.getItemHandler().getItem(0).isEmpty()) {
-                if (blockEntity.getItemHandler().getItem(0).getItem() instanceof CrystalItem crystalItem) {
-                    Color color = crystalItem.getType().getColor();
-                    float r = color.getRed() / 255f;
-                    float g = color.getGreen() / 255f;
-                    float b = color.getBlue() / 255f;
+        if (!blockEntity.getItemHandler().getItem(0).isEmpty()) {
+            if (blockEntity.getItemHandler().getItem(0).getItem() instanceof CrystalItem crystalItem) {
+                Color color = crystalItem.getType().getColor();
 
-                    poseStack.pushPose();
-                    poseStack.translate(0.5F, 0.3825F, 0.5F);
-                    poseStack.mulPose(Axis.ZP.rotationDegrees(-90f));
-                    //WizardsRebornRenderUtil.ray(poseStack, bufferDelayed, 0.2f, 0.4f, 1f, r, g, b, alpha);
-                    poseStack.popPose();
+                poseStack.pushPose();
+                poseStack.translate(0.5f, 0.28125f, 0.5f);
+                if (blockEntity.getLight() > 0) {
+                    RenderBuilder.create().setRenderType(FluffyFurRenderTypes.ADDITIVE)
+                            .setColor(color).setAlpha(0.8f).setSided(false, true)
+                            .renderCenteredCube(poseStack, 0.2109375f, 0.3046875f, 0.2109375f);
                 }
+                if (crystalItem.getPolishing().hasParticle()) {
+                    RenderBuilder.create().setRenderType(FluffyFurRenderTypes.ADDITIVE)
+                            .setColor(crystalItem.getPolishing().getColor()).setAlpha(0.3f).setSided(false, true)
+                            .renderCenteredCube(poseStack, 0.203125f, 0.296875f, 0.203125f);
+                }
+                poseStack.popPose();
             }
+        }
 
+        if (blockEntity.getLight() > 0) {
             if (blockEntity.isToBlock && !CrystalRitualUtil.isEmpty(ritual) && ritual.hasLightRay(blockEntity)) {
                 BlockPos pos = new BlockPos(blockEntity.blockToX, blockEntity.blockToY, blockEntity.blockToZ);
                 if (blockEntity.getLevel().getBlockEntity(pos) instanceof ILightBlockEntity lightTile) {

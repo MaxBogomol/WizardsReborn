@@ -89,6 +89,7 @@ public class AlchemyPotionItem extends PlacedItem {
                         entityLiving.addEffect(new MobEffectInstance(mobeffectinstance));
                     }
                 }
+                potion.apply(stack, level, entityLiving);
             }
         }
 

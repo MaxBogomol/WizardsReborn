@@ -7,6 +7,7 @@ import mod.maxbogomol.fluffy_fur.common.item.CustomBoatItem;
 import mod.maxbogomol.fluffy_fur.common.item.CustomChestBoatItem;
 import mod.maxbogomol.fluffy_fur.common.item.FuelBlockItem;
 import mod.maxbogomol.fluffy_fur.common.item.FuelItem;
+import mod.maxbogomol.fluffy_fur.registry.client.FluffyFurModels;
 import mod.maxbogomol.fluffy_fur.registry.common.item.FluffyFurItems;
 import mod.maxbogomol.fluffy_fur.util.ColorUtil;
 import mod.maxbogomol.wizards_reborn.WizardsReborn;
@@ -350,8 +351,8 @@ public class WizardsRebornItems {
     public static final RegistryObject<Item> CORK_BAMBOO_PEDESTAL = ITEMS.register("cork_bamboo_pedestal", () -> new BlockItem(WizardsRebornBlocks.CORK_BAMBOO_PEDESTAL.get(), new Item.Properties()));
     public static final RegistryObject<Item> CORK_BAMBOO_HOVERING_TOME_STAND = ITEMS.register("cork_bamboo_hovering_tome_stand", () -> new BlockItem(WizardsRebornBlocks.CORK_BAMBOO_HOVERING_TOME_STAND.get(), new Item.Properties()));
 
-    public static final RegistryObject<Item> LIGHT_EMITTER = ITEMS.register("light_emitter", () -> new BlockItem(WizardsRebornBlocks.LIGHT_EMITTER.get(), new Item.Properties()));
-    public static final RegistryObject<Item> LIGHT_TRANSFER_LENS = ITEMS.register("light_transfer_lens", () -> new BlockItem(WizardsRebornBlocks.LIGHT_TRANSFER_LENS.get(), new Item.Properties()));
+    public static final RegistryObject<Item> LIGHT_EMITTER = ITEMS.register("light_emitter", () -> new WizardsRebornRenderBlockItem(WizardsRebornBlocks.LIGHT_EMITTER.get(), new Item.Properties()));
+    public static final RegistryObject<Item> LIGHT_TRANSFER_LENS = ITEMS.register("light_transfer_lens", () -> new WizardsRebornRenderBlockItem(WizardsRebornBlocks.LIGHT_TRANSFER_LENS.get(), new Item.Properties()));
     public static final RegistryObject<Item> RUNIC_PEDESTAL = ITEMS.register("runic_pedestal", () -> new BlockItem(WizardsRebornBlocks.RUNIC_PEDESTAL.get(), new Item.Properties()));
 
     public static final RegistryObject<Item> ENGRAVED_WISESTONE = ITEMS.register("engraved_wisestone", () -> new EngravedWisestoneItem(WizardsRebornBlocks.ENGRAVED_WISESTONE.get(), new Item.Properties()));
@@ -396,33 +397,33 @@ public class WizardsRebornItems {
     public static final RegistryObject<Item> ARCANE_WOOD_GLASS_FRAME = ITEMS.register("arcane_wood_glass_frame", () -> new BlockItem(WizardsRebornBlocks.ARCANE_WOOD_GLASS_FRAME.get(), new Item.Properties()));
     public static final RegistryObject<Item> ARCANE_WOOD_CASING = ITEMS.register("arcane_wood_casing", () -> new BlockItem(WizardsRebornBlocks.ARCANE_WOOD_CASING.get(), new Item.Properties()));
     public static final RegistryObject<Item> ARCANE_WOOD_WISSEN_CASING = ITEMS.register("arcane_wood_wissen_casing", () -> new BlockItem(WizardsRebornBlocks.ARCANE_WOOD_WISSEN_CASING.get(), new Item.Properties()));
-    public static final RegistryObject<Item> ARCANE_WOOD_LIGHT_CASING = ITEMS.register("arcane_wood_light_casing", () -> new BlockItem(WizardsRebornBlocks.ARCANE_WOOD_LIGHT_CASING.get(), new Item.Properties()));
+    public static final RegistryObject<Item> ARCANE_WOOD_LIGHT_CASING = ITEMS.register("arcane_wood_light_casing", () -> new WizardsRebornRenderBlockItem(WizardsRebornBlocks.ARCANE_WOOD_LIGHT_CASING.get(), new Item.Properties()));
     public static final RegistryObject<Item> ARCANE_WOOD_FLUID_CASING = ITEMS.register("arcane_wood_fluid_casing", () -> new BlockItem(WizardsRebornBlocks.ARCANE_WOOD_FLUID_CASING.get(), new Item.Properties()));
     public static final RegistryObject<Item> ARCANE_WOOD_STEAM_CASING = ITEMS.register("arcane_wood_steam_casing", () -> new BlockItem(WizardsRebornBlocks.ARCANE_WOOD_STEAM_CASING.get(), new Item.Properties()));
     public static final RegistryObject<Item> INNOCENT_WOOD_FRAME = ITEMS.register("innocent_wood_frame", () -> new BlockItem(WizardsRebornBlocks.INNOCENT_WOOD_FRAME.get(), new Item.Properties()));
     public static final RegistryObject<Item> INNOCENT_WOOD_GLASS_FRAME = ITEMS.register("innocent_wood_glass_frame", () -> new BlockItem(WizardsRebornBlocks.INNOCENT_WOOD_GLASS_FRAME.get(), new Item.Properties()));
     public static final RegistryObject<Item> INNOCENT_WOOD_CASING = ITEMS.register("innocent_wood_casing", () -> new BlockItem(WizardsRebornBlocks.INNOCENT_WOOD_CASING.get(), new Item.Properties()));
     public static final RegistryObject<Item> INNOCENT_WOOD_WISSEN_CASING = ITEMS.register("innocent_wood_wissen_casing", () -> new BlockItem(WizardsRebornBlocks.INNOCENT_WOOD_WISSEN_CASING.get(), new Item.Properties()));
-    public static final RegistryObject<Item> INNOCENT_WOOD_LIGHT_CASING = ITEMS.register("innocent_wood_light_casing", () -> new BlockItem(WizardsRebornBlocks.INNOCENT_WOOD_LIGHT_CASING.get(), new Item.Properties()));
+    public static final RegistryObject<Item> INNOCENT_WOOD_LIGHT_CASING = ITEMS.register("innocent_wood_light_casing", () -> new WizardsRebornRenderBlockItem(WizardsRebornBlocks.INNOCENT_WOOD_LIGHT_CASING.get(), new Item.Properties()));
     public static final RegistryObject<Item> INNOCENT_WOOD_FLUID_CASING = ITEMS.register("innocent_wood_fluid_casing", () -> new BlockItem(WizardsRebornBlocks.INNOCENT_WOOD_FLUID_CASING.get(), new Item.Properties()));
     public static final RegistryObject<Item> INNOCENT_WOOD_STEAM_CASING = ITEMS.register("innocent_wood_steam_casing", () -> new BlockItem(WizardsRebornBlocks.INNOCENT_WOOD_STEAM_CASING.get(), new Item.Properties()));
     public static final RegistryObject<Item> CORK_BAMBOO_FRAME = ITEMS.register("cork_bamboo_frame", () -> new BlockItem(WizardsRebornBlocks.CORK_BAMBOO_FRAME.get(), new Item.Properties()));
     public static final RegistryObject<Item> CORK_BAMBOO_GLASS_FRAME = ITEMS.register("cork_bamboo_glass_frame", () -> new BlockItem(WizardsRebornBlocks.CORK_BAMBOO_GLASS_FRAME.get(), new Item.Properties()));
     public static final RegistryObject<Item> CORK_BAMBOO_CASING = ITEMS.register("cork_bamboo_casing", () -> new BlockItem(WizardsRebornBlocks.CORK_BAMBOO_CASING.get(), new Item.Properties()));
     public static final RegistryObject<Item> CORK_BAMBOO_WISSEN_CASING = ITEMS.register("cork_bamboo_wissen_casing", () -> new BlockItem(WizardsRebornBlocks.CORK_BAMBOO_WISSEN_CASING.get(), new Item.Properties()));
-    public static final RegistryObject<Item> CORK_BAMBOO_LIGHT_CASING = ITEMS.register("cork_bamboo_light_casing", () -> new BlockItem(WizardsRebornBlocks.CORK_BAMBOO_LIGHT_CASING.get(), new Item.Properties()));
+    public static final RegistryObject<Item> CORK_BAMBOO_LIGHT_CASING = ITEMS.register("cork_bamboo_light_casing", () -> new WizardsRebornRenderBlockItem(WizardsRebornBlocks.CORK_BAMBOO_LIGHT_CASING.get(), new Item.Properties()));
     public static final RegistryObject<Item> CORK_BAMBOO_FLUID_CASING = ITEMS.register("cork_bamboo_fluid_casing", () -> new BlockItem(WizardsRebornBlocks.CORK_BAMBOO_FLUID_CASING.get(), new Item.Properties()));
     public static final RegistryObject<Item> CORK_BAMBOO_STEAM_CASING = ITEMS.register("cork_bamboo_steam_casing", () -> new BlockItem(WizardsRebornBlocks.CORK_BAMBOO_STEAM_CASING.get(), new Item.Properties()));
     public static final RegistryObject<Item> WISESTONE_FRAME = ITEMS.register("wisestone_frame", () -> new BlockItem(WizardsRebornBlocks.WISESTONE_FRAME.get(), new Item.Properties()));
     public static final RegistryObject<Item> WISESTONE_GLASS_FRAME = ITEMS.register("wisestone_glass_frame", () -> new BlockItem(WizardsRebornBlocks.WISESTONE_GLASS_FRAME.get(), new Item.Properties()));
     public static final RegistryObject<Item> WISESTONE_CASING = ITEMS.register("wisestone_casing", () -> new BlockItem(WizardsRebornBlocks.WISESTONE_CASING.get(), new Item.Properties()));
     public static final RegistryObject<Item> WISESTONE_WISSEN_CASING = ITEMS.register("wisestone_wissen_casing", () -> new BlockItem(WizardsRebornBlocks.WISESTONE_WISSEN_CASING.get(), new Item.Properties()));
-    public static final RegistryObject<Item> WISESTONE_LIGHT_CASING = ITEMS.register("wisestone_light_casing", () -> new BlockItem(WizardsRebornBlocks.WISESTONE_LIGHT_CASING.get(), new Item.Properties()));
+    public static final RegistryObject<Item> WISESTONE_LIGHT_CASING = ITEMS.register("wisestone_light_casing", () -> new WizardsRebornRenderBlockItem(WizardsRebornBlocks.WISESTONE_LIGHT_CASING.get(), new Item.Properties()));
     public static final RegistryObject<Item> WISESTONE_FLUID_CASING = ITEMS.register("wisestone_fluid_casing", () -> new BlockItem(WizardsRebornBlocks.WISESTONE_FLUID_CASING.get(), new Item.Properties()));
     public static final RegistryObject<Item> WISESTONE_STEAM_CASING = ITEMS.register("wisestone_steam_casing", () -> new BlockItem(WizardsRebornBlocks.WISESTONE_STEAM_CASING.get(), new Item.Properties()));
 
     public static final RegistryObject<Item> CREATIVE_WISSEN_STORAGE = ITEMS.register("creative_wissen_storage", () -> new BlockItem(WizardsRebornBlocks.CREATIVE_WISSEN_STORAGE.get(), new Item.Properties()));
-    public static final RegistryObject<Item> CREATIVE_LIGHT_STORAGE = ITEMS.register("creative_light_storage", () -> new BlockItem(WizardsRebornBlocks.CREATIVE_LIGHT_STORAGE.get(), new Item.Properties()));
+    public static final RegistryObject<Item> CREATIVE_LIGHT_STORAGE = ITEMS.register("creative_light_storage", () -> new WizardsRebornRenderBlockItem(WizardsRebornBlocks.CREATIVE_LIGHT_STORAGE.get(), new Item.Properties()));
     public static final RegistryObject<Item> CREATIVE_FLUID_STORAGE = ITEMS.register("creative_fluid_storage", () -> new BlockItem(WizardsRebornBlocks.CREATIVE_FLUID_STORAGE.get(), new Item.Properties()));
     public static final RegistryObject<Item> CREATIVE_STEAM_STORAGE = ITEMS.register("creative_steam_storage", () -> new BlockItem(WizardsRebornBlocks.CREATIVE_STEAM_STORAGE.get(), new Item.Properties()));
 
@@ -742,6 +743,14 @@ public class WizardsRebornItems {
             DrinksModels.addDrinkItem(map, BAIKAL_BOTTLE.getId());
             DrinksModels.addDrinkItem(map, KVASS_BOTTLE.getId());
             DrinksModels.addDrinkItem(map, KISSEL_BOTTLE.getId());
+
+            FluffyFurModels.addCustomRenderItemModel(map, LIGHT_EMITTER.getId());
+            FluffyFurModels.addCustomRenderItemModel(map, LIGHT_TRANSFER_LENS.getId());
+            FluffyFurModels.addCustomRenderItemModel(map, ARCANE_WOOD_LIGHT_CASING.getId());
+            FluffyFurModels.addCustomRenderItemModel(map, INNOCENT_WOOD_LIGHT_CASING.getId());
+            FluffyFurModels.addCustomRenderItemModel(map, CORK_BAMBOO_LIGHT_CASING.getId());
+            FluffyFurModels.addCustomRenderItemModel(map, WISESTONE_LIGHT_CASING.getId());
+            FluffyFurModels.addCustomRenderItemModel(map, CREATIVE_LIGHT_STORAGE.getId());
         }
 
         @SubscribeEvent

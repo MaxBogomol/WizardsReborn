@@ -1,4 +1,4 @@
-package mod.maxbogomol.wizards_reborn.common.network;
+package mod.maxbogomol.wizards_reborn.common.network.item;
 
 import mod.maxbogomol.fluffy_fur.client.particle.ParticleBuilder;
 import mod.maxbogomol.fluffy_fur.client.particle.data.ColorParticleData;
@@ -12,21 +12,21 @@ import net.minecraftforge.network.NetworkEvent;
 import java.util.Random;
 import java.util.function.Supplier;
 
-public class InnocentWoodToolsEffectPacket {
+public class InnocentWoodToolsPacket {
     private final float posX;
     private final float posY;
     private final float posZ;
 
     private static final Random random = new Random();
 
-    public InnocentWoodToolsEffectPacket(float posX, float posY, float posZ) {
+    public InnocentWoodToolsPacket(float posX, float posY, float posZ) {
         this.posX = posX;
         this.posY = posY;
         this.posZ = posZ;
     }
 
-    public static InnocentWoodToolsEffectPacket decode(FriendlyByteBuf buf) {
-        return new InnocentWoodToolsEffectPacket(buf.readFloat(), buf.readFloat(), buf.readFloat());
+    public static InnocentWoodToolsPacket decode(FriendlyByteBuf buf) {
+        return new InnocentWoodToolsPacket(buf.readFloat(), buf.readFloat(), buf.readFloat());
     }
 
     public void encode(FriendlyByteBuf buf) {
@@ -35,7 +35,7 @@ public class InnocentWoodToolsEffectPacket {
         buf.writeFloat(posZ);
     }
 
-    public static void handle(InnocentWoodToolsEffectPacket msg, Supplier<NetworkEvent.Context> ctx) {
+    public static void handle(InnocentWoodToolsPacket msg, Supplier<NetworkEvent.Context> ctx) {
         if (ctx.get().getDirection().getReceptionSide().isClient()) {
             ctx.get().enqueueWork(new Runnable() {
                 @Override

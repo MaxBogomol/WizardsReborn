@@ -1,7 +1,7 @@
 {
 	"parent": "block/block",
 	"textures": {
-		"extractor": "wizards_reborn:block/creative_light_storage",
+		"side": "wizards_reborn:block/creative_light_storage",
 		"particle": "wizards_reborn:block/arcane_wood_planks"
 	},
 	"elements": [
@@ -10,12 +10,12 @@
 			"from": [4, 4, 4],
 			"to": [12, 12, 12],
 			"faces": {
-				"north": {"uv": [0, 0, 8, 8], "texture": "#extractor"},
-				"east": {"uv": [0, 0, 8, 8], "texture": "#extractor"},
-				"south": {"uv": [0, 0, 8, 8], "texture": "#extractor"},
-				"west": {"uv": [0, 0, 8, 8], "texture": "#extractor"},
-				"up": {"uv": [0, 0, 8, 8], "texture": "#extractor"},
-				"down": {"uv": [0, 0, 8, 8], "texture": "#extractor"}
+				"north": {"uv": [0, 0, 8, 8], "texture": "#side"},
+				"east": {"uv": [0, 0, 8, 8], "texture": "#side"},
+				"south": {"uv": [0, 0, 8, 8], "texture": "#side"},
+				"west": {"uv": [0, 0, 8, 8], "texture": "#side"},
+				"up": {"uv": [0, 0, 8, 8], "texture": "#side"},
+				"down": {"uv": [0, 0, 8, 8], "texture": "#side"}
 			}
 		}
 	]

@@ -34,15 +34,12 @@ public class RunicPedestalRenderer implements BlockEntityRenderer<RunicPedestalB
         double ticksUp = (ClientTickHandler.ticksInGame + partialTicks) * 4;
         ticksUp = (ticksUp) % 360;
 
-        MultiBufferSource bufferDelayed = FluffyFurRenderTypes.getDelayedRender();
-
         if (blockEntity.getBlockState().getValue(BlockStateProperties.LIT)) {
             poseStack.pushPose();
             poseStack.translate(0.5f, 0.40625f, 0.5f);
             RenderBuilder.create().setRenderType(FluffyFurRenderTypes.ADDITIVE)
                     .setColorRaw(0.678f, 0.929f, 0.803f).setAlpha(0.5f)
-                    .renderCenteredCube(poseStack, 0.265625f, 0.046875f, 0.265625f)
-                    .endBatch();
+                    .renderCenteredCube(poseStack, 0.265625f, 0.046875f, 0.265625f);
             poseStack.popPose();
         } else if (!blockEntity.hasRunicPlate()) {
             poseStack.pushPose();

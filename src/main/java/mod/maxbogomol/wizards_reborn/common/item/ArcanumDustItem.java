@@ -2,7 +2,7 @@ package mod.maxbogomol.wizards_reborn.common.item;
 
 import mod.maxbogomol.wizards_reborn.WizardsReborn;
 import mod.maxbogomol.wizards_reborn.common.network.PacketHandler;
-import mod.maxbogomol.wizards_reborn.common.network.WissenDustBurstEffectPacket;
+import mod.maxbogomol.wizards_reborn.common.network.item.WissenDustBurstPacket;
 import mod.maxbogomol.wizards_reborn.common.recipe.ArcanumDustTransmutationRecipe;
 import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornRecipes;
 import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornSounds;
@@ -84,7 +84,7 @@ public class ArcanumDustItem extends ArcanumItem {
                     Vec3 pos = player.getEyePosition().add(player.getLookAngle().scale(0.75f));
                     Vec3 vel = player.getEyePosition().add(player.getLookAngle().scale(40)).subtract(pos).scale(1.0 / 20).normalize().scale(0.2f);
 
-                    PacketHandler.sendToTracking(level, player.getOnPos(), new WissenDustBurstEffectPacket(blockpos, (float) pos.x, (float) pos.y, (float) pos.z, (float) vel.x, (float) vel.y, (float) vel.z));
+                    PacketHandler.sendToTracking(level, player.getOnPos(), new WissenDustBurstPacket(blockpos, pos, vel));
 
                     player.awardStat(Stats.ITEM_USED.get(this));
                     level.playSound(WizardsReborn.proxy.getPlayer(), blockpos, WizardsRebornSounds.ARCANUM_DUST_TRANSMUTATION.get(), SoundSource.PLAYERS, 1f, (float) (1.0f + ((random.nextFloat() - 0.5D) / 2)));
@@ -139,7 +139,7 @@ public class ArcanumDustItem extends ArcanumItem {
 
             if (craft) {
                 stack.setCount(stack.getCount() - 1);
-                PacketHandler.sendToTracking(level, blockpos, new WissenDustBurstEffectPacket(blockpos, blockpos.getX() + 0.5F,  blockpos.getY() + 0.5F,  blockpos.getZ() + 0.5F, 0, 0, 0));
+                PacketHandler.sendToTracking(level, blockpos, new WissenDustBurstPacket(blockpos, blockpos.getX() + 0.5F,  blockpos.getY() + 0.5F,  blockpos.getZ() + 0.5F, 0, 0, 0));
                 level.playSound(WizardsReborn.proxy.getPlayer(), blockpos, WizardsRebornSounds.WISSEN_TRANSFER.get(), SoundSource.PLAYERS, 0.5f, (float) (1.1f + ((random.nextFloat() - 0.5D) / 2)));
                 level.playSound(WizardsReborn.proxy.getPlayer(), blockpos, WizardsRebornSounds.WISSEN_BURST.get(), SoundSource.PLAYERS, 0.5f, (float) (1.3f + ((random.nextFloat() - 0.5D) / 2)));
 

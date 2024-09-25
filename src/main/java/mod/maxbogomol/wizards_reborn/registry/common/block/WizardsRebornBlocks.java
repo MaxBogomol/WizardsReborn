@@ -34,6 +34,7 @@ import mod.maxbogomol.wizards_reborn.common.block.creative.light_storage.Creativ
 import mod.maxbogomol.wizards_reborn.common.block.creative.steam_storage.CreativeSteamStorageBlock;
 import mod.maxbogomol.wizards_reborn.common.block.creative.wissen_storage.CreativeWissenStorageBlock;
 import mod.maxbogomol.wizards_reborn.common.block.crystal.CrystalBlock;
+import mod.maxbogomol.wizards_reborn.common.block.crystal.CrystalSeedBlock;
 import mod.maxbogomol.wizards_reborn.common.block.crystal_growth.CrystalGrowthBlock;
 import mod.maxbogomol.wizards_reborn.common.block.engraved_wisestone.EngravedWisestoneBlock;
 import mod.maxbogomol.wizards_reborn.common.block.pipe.extractor.fluid.FluidExtractorBlock;

@@ -3,8 +3,13 @@ package mod.maxbogomol.wizards_reborn.common.network;
 import com.mojang.datafixers.util.Pair;
 import mod.maxbogomol.fluffy_fur.common.network.AddScreenshakePacket;
 import mod.maxbogomol.wizards_reborn.WizardsReborn;
+import mod.maxbogomol.wizards_reborn.common.network.arcaneenchantment.EagleShotRayPacket;
+import mod.maxbogomol.wizards_reborn.common.network.arcaneenchantment.MagicBladePacket;
+import mod.maxbogomol.wizards_reborn.common.network.arcaneenchantment.SplitArrowBurstPacket;
+import mod.maxbogomol.wizards_reborn.common.network.arcaneenchantment.WissenChargeBurstPacket;
 import mod.maxbogomol.wizards_reborn.common.network.crystalritual.CrystalInfusionBurstEffectPacket;
 import mod.maxbogomol.wizards_reborn.common.network.crystalritual.CrystalRitualBurstEffectPacket;
+import mod.maxbogomol.wizards_reborn.common.network.item.*;
 import mod.maxbogomol.wizards_reborn.common.network.spell.*;
 import mod.maxbogomol.wizards_reborn.common.network.block.*;
 import net.minecraft.core.BlockPos;
@@ -31,24 +36,24 @@ public final class PacketHandler {
     public static void init() {
         int id = 0;
 
-        HANDLER.registerMessage(id++, SetCrystalPacket.class, SetCrystalPacket::encode, SetCrystalPacket::decode, SetCrystalPacket::handle);
-        HANDLER.registerMessage(id++, DeleteCrystalPacket.class, DeleteCrystalPacket::encode, DeleteCrystalPacket::decode, DeleteCrystalPacket::handle);
-        HANDLER.registerMessage(id++, SetSpellPacket.class, SetSpellPacket::encode, SetSpellPacket::decode, SetSpellPacket::handle);
-        HANDLER.registerMessage(id++, SetSpellInSetPacket.class, SetSpellInSetPacket::encode, SetSpellInSetPacket::decode, SetSpellInSetPacket::handle);
-        HANDLER.registerMessage(id++, RemoveSpellSetPacket.class, RemoveSpellSetPacket::encode, RemoveSpellSetPacket::decode, RemoveSpellSetPacket::handle);
-        HANDLER.registerMessage(id++, SetCurrentSpellSetPacket.class, SetCurrentSpellSetPacket::encode, SetCurrentSpellSetPacket::decode, SetCurrentSpellSetPacket::handle);
-        HANDLER.registerMessage(id++, SetCurrentSpellInSetPacket.class, SetCurrentSpellInSetPacket::encode, SetCurrentSpellInSetPacket::decode, SetCurrentSpellInSetPacket::handle);
-        HANDLER.registerMessage(id++, SetWissenWandModePacket.class, SetWissenWandModePacket::encode, SetWissenWandModePacket::decode, SetWissenWandModePacket::handle);
-        HANDLER.registerMessage(id++, OpenBagPacket.class, OpenBagPacket::encode, OpenBagPacket::decode, OpenBagPacket::handle);
+        ArcaneWandSetCrystalPacket.register(HANDLER, id++);
+        ArcaneWandRemoveCrystalPacket.register(HANDLER, id++);
+        ArcaneWandSpellSetPacket.register(HANDLER, id++);
+        SetSpellInSetPacket.register(HANDLER, id++);
+        RemoveSpellSetPacket.register(HANDLER, id++);
+        SetCurrentSpellSetPacket.register(HANDLER, id++);
+        SetCurrentSpellInSetPacket.register(HANDLER, id++);
+        WissenWandSetModePacket.register(HANDLER, id++);
+        BagOpenPacket.register(HANDLER, id++);
         HANDLER.registerMessage(id++, SetAdditionalFovPacket.class, SetAdditionalFovPacket::encode, SetAdditionalFovPacket::decode, SetAdditionalFovPacket::handle);
         HANDLER.registerMessage(id++, AddScreenshakePacket.class, AddScreenshakePacket::encode, AddScreenshakePacket::decode, AddScreenshakePacket::handle);
-        HANDLER.registerMessage(id++, SniffaloScreenPacket.class, SniffaloScreenPacket::encode, SniffaloScreenPacket::decode, SniffaloScreenPacket::handle);
+        SniffaloScreenPacket.register(HANDLER, id++);
 
         WissenAltarBurstPacket.register(HANDLER, id++);
         WissenAltarBurstPacket.register(HANDLER, id++);
-        HANDLER.registerMessage(id++, WissenTranslatorBurstPacket.class, WissenTranslatorBurstPacket::encode, WissenTranslatorBurstPacket::decode, WissenTranslatorBurstPacket::handle);
-        HANDLER.registerMessage(id++, WissenTranslatorSendPacket.class, WissenTranslatorSendPacket::encode, WissenTranslatorSendPacket::decode, WissenTranslatorSendPacket::handle);
-        HANDLER.registerMessage(id++, WissenSendEffectPacket.class, WissenSendEffectPacket::encode, WissenSendEffectPacket::decode, WissenSendEffectPacket::handle);
+        WissenTranslatorBurstPacket.register(HANDLER, id++);
+        WissenTranslatorSendPacket.register(HANDLER, id++);
+        WissenSendEffectPacket.register(HANDLER, id++);
         WissenCrystallizerBurstPacket.register(HANDLER, id++);
         ArcaneWorkbenchBurstPacket.register(HANDLER, id++);
         WissenCellSendPacket.register(HANDLER, id++);
@@ -57,7 +62,7 @@ public final class PacketHandler {
         AltarOfDroughtSendPacket.register(HANDLER, id++);
         AltarOfDroughtBreakPacket.register(HANDLER, id++);
         ArcaneIteratorBurstPacket.register(HANDLER, id++);
-        HANDLER.registerMessage(id++, ExperienceTotemBurstPacket.class, ExperienceTotemBurstPacket::encode, ExperienceTotemBurstPacket::decode, ExperienceTotemBurstPacket::handle);
+        ExperienceTotemBurstPacket.register(HANDLER, id++);
         TotemOfDisenchantStartPacket.register(HANDLER, id++);
         TotemOfDisenchantBurstPacket.register(HANDLER, id++);
 
@@ -69,16 +74,16 @@ public final class PacketHandler {
         HANDLER.registerMessage(id++, SpellProjectileUpdateSpellDataPacket.class, SpellProjectileUpdateSpellDataPacket::encode, SpellProjectileUpdateSpellDataPacket::decode, SpellProjectileUpdateSpellDataPacket::handle);
         HANDLER.registerMessage(id++, RaySpellEffectPacket.class, RaySpellEffectPacket::encode, RaySpellEffectPacket::decode, RaySpellEffectPacket::handle);
 
-        HANDLER.registerMessage(id++, ArcanemiconOfferingEffectPacket.class, ArcanemiconOfferingEffectPacket::encode, ArcanemiconOfferingEffectPacket::decode, ArcanemiconOfferingEffectPacket::handle);
-        HANDLER.registerMessage(id++, WissenDustBurstEffectPacket.class, WissenDustBurstEffectPacket::encode, WissenDustBurstEffectPacket::decode, WissenDustBurstEffectPacket::handle);
-        HANDLER.registerMessage(id++, ArcanumLensBurstEffectPacket.class, ArcanumLensBurstEffectPacket::encode, ArcanumLensBurstEffectPacket::decode, ArcanumLensBurstEffectPacket::handle);
-        HANDLER.registerMessage(id++, SmokeEffectPacket.class, SmokeEffectPacket::encode, SmokeEffectPacket::decode, SmokeEffectPacket::handle);
-        HANDLER.registerMessage(id++, InnocentWoodToolsEffectPacket.class, InnocentWoodToolsEffectPacket::encode, InnocentWoodToolsEffectPacket::decode, InnocentWoodToolsEffectPacket::handle);
-        HANDLER.registerMessage(id++, FlowerFertilizerEffectPacket.class, FlowerFertilizerEffectPacket::encode, FlowerFertilizerEffectPacket::decode, FlowerFertilizerEffectPacket::handle);
+        ArcanemiconOfferingEffectPacket.register(HANDLER, id++);
+        WissenDustBurstPacket.register(HANDLER, id++);
+        ArcanumLensBurstPacket.register(HANDLER, id++);
+        HANDLER.registerMessage(id++, SmokePacket.class, SmokePacket::encode, SmokePacket::decode, SmokePacket::handle);
+        HANDLER.registerMessage(id++, InnocentWoodToolsPacket.class, InnocentWoodToolsPacket::encode, InnocentWoodToolsPacket::decode, InnocentWoodToolsPacket::handle);
+        HANDLER.registerMessage(id++, FlowerFertilizerPacket.class, FlowerFertilizerPacket::encode, FlowerFertilizerPacket::decode, FlowerFertilizerPacket::handle);
 
         HANDLER.registerMessage(id++, KnowledgeUpdatePacket.class, KnowledgeUpdatePacket::encode, KnowledgeUpdatePacket::decode, KnowledgeUpdatePacket::handle);
         HANDLER.registerMessage(id++, KnowledgeToastPacket.class, KnowledgeToastPacket::encode, KnowledgeToastPacket::decode, KnowledgeToastPacket::handle);
-        HANDLER.registerMessage(id++, UnlockSpellPacket.class, UnlockSpellPacket::encode, UnlockSpellPacket::decode, UnlockSpellPacket::handle);
+        HANDLER.registerMessage(id++, SpellUnlockPacket.class, SpellUnlockPacket::encode, SpellUnlockPacket::decode, SpellUnlockPacket::handle);
         HANDLER.registerMessage(id++, ArcanemiconToastPacket.class, ArcanemiconToastPacket::encode, ArcanemiconToastPacket::decode, ArcanemiconToastPacket::handle);
 
         HANDLER.registerMessage(id++, EarthRaySpellEffectPacket.class, EarthRaySpellEffectPacket::encode, EarthRaySpellEffectPacket::decode, EarthRaySpellEffectPacket::handle);
@@ -108,10 +113,11 @@ public final class PacketHandler {
         HANDLER.registerMessage(id++, CrystalCrushingSpellEffectPacket.class, CrystalCrushingSpellEffectPacket::encode, CrystalCrushingSpellEffectPacket::decode, CrystalCrushingSpellEffectPacket::handle);
         HANDLER.registerMessage(id++, IrritationSpellEffectPacket.class, IrritationSpellEffectPacket::encode, IrritationSpellEffectPacket::decode, IrritationSpellEffectPacket::handle);
 
-        HANDLER.registerMessage(id++, MagicBladeEffectPacket.class, MagicBladeEffectPacket::encode, MagicBladeEffectPacket::decode, MagicBladeEffectPacket::handle);
-        HANDLER.registerMessage(id++, WissenChargeBurstEffectPacket.class, WissenChargeBurstEffectPacket::encode, WissenChargeBurstEffectPacket::decode, WissenChargeBurstEffectPacket::handle);
-        HANDLER.registerMessage(id++, EagleShotRayEffectPacket.class, EagleShotRayEffectPacket::encode, EagleShotRayEffectPacket::decode, EagleShotRayEffectPacket::handle);
-        HANDLER.registerMessage(id++, SplitArrowBurstEffectPacket.class, SplitArrowBurstEffectPacket::encode, SplitArrowBurstEffectPacket::decode, SplitArrowBurstEffectPacket::handle);
+        MagicBladePacket.register(HANDLER, id++);
+        HANDLER.registerMessage(id++, WissenChargeBurstPacket.class, WissenChargeBurstPacket::encode, WissenChargeBurstPacket::decode, WissenChargeBurstPacket::handle);
+        HANDLER.registerMessage(id++, EagleShotRayPacket.class, EagleShotRayPacket::encode, EagleShotRayPacket::decode, EagleShotRayPacket::handle);
+        HANDLER.registerMessage(id++, SplitArrowBurstPacket.class, SplitArrowBurstPacket::encode, SplitArrowBurstPacket::decode, SplitArrowBurstPacket::handle);
+        SplitArrowBurstPacket.register(HANDLER, id++);
     }
 
     private static final PacketDistributor<Pair<Level, BlockPos>> TRACKING_CHUNK_AND_NEAR = new PacketDistributor<>(

@@ -30,8 +30,7 @@ public class LightEmitterBlockRenderer implements BlockEntityRenderer<LightEmitt
         poseStack.mulPose(Axis.YP.rotationDegrees((float) (random.nextFloat() * 360 + ticks)));
         poseStack.mulPose(Axis.XP.rotationDegrees((float) (random.nextFloat() * 360 + ticks)));
         poseStack.mulPose(Axis.ZP.rotationDegrees((float) (random.nextFloat() * 360 + ticks)));
-        WizardsRebornRenderUtil.renderHoveringLensModel(poseStack, bufferSource, light, overlay);
-        WizardsRebornRenderUtil.renderHoveringLensGlow(poseStack);
+        WizardsRebornRenderUtil.renderHoveringLens(poseStack, bufferSource, light, overlay);
         poseStack.popPose();
 
 

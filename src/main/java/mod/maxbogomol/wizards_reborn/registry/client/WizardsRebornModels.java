@@ -12,6 +12,8 @@ import mod.maxbogomol.wizards_reborn.client.model.item.WandCrystalsModels;
 import mod.maxbogomol.wizards_reborn.client.model.sniffalo.SniffaloArcaneArmorModel;
 import mod.maxbogomol.wizards_reborn.client.model.sniffalo.SniffaloCarpetArmorModel;
 import mod.maxbogomol.wizards_reborn.client.model.sniffalo.SniffaloSaddleArmorModel;
+import mod.maxbogomol.wizards_reborn.client.render.item.WizardsRebornItemRenderer;
+import net.minecraft.client.Minecraft;
 import net.minecraft.client.model.geom.ModelLayerLocation;
 import net.minecraft.client.resources.model.BakedModel;
 import net.minecraft.client.resources.model.ModelManager;
@@ -23,6 +25,7 @@ import net.minecraftforge.client.event.EntityRenderersEvent;
 import net.minecraftforge.client.event.ModelEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
+import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 
 import java.util.ArrayList;
 import java.util.Map;
@@ -85,6 +88,13 @@ public class WizardsRebornModels {
     public static ModelResourceLocation STEAM_SENSOR_PIECE = addCustomModel("steam_sensor_piece");
     public static ModelResourceLocation WISSEN_ACTIVATOR_PIECE = addCustomModel("wissen_activator_piece");
     public static ModelResourceLocation ITEM_SORTER_PIECE = addCustomModel("item_sorter_piece");
+    public static ModelResourceLocation LIGHT_EMITTER_PIECE = addCustomModel("light_emitter_piece");
+    public static ModelResourceLocation LIGHT_TRANSFER_LENS_PIECE = addCustomModel("light_transfer_lens_piece");
+    public static ModelResourceLocation ARCANE_WOOD_LIGHT_CASING_PIECE = addCustomModel("arcane_wood_light_casing_piece");
+    public static ModelResourceLocation INNOCENT_WOOD_LIGHT_CASING_PIECE  = addCustomModel("innocent_wood_light_casing_piece");
+    public static ModelResourceLocation CORK_BAMBOO_LIGHT_CASING_PIECE  = addCustomModel("cork_bamboo_light_casing_piece");
+    public static ModelResourceLocation WISESTONE_LIGHT_CASING_PIECE  = addCustomModel("wisestone_light_casing_piece");
+    public static ModelResourceLocation CREATIVE_LIGHT_STORAGE_PIECE = addCustomModel("creative_light_storage_piece");
 
     public static PipeModel fluidPipe;
     public static PipeModel steamPipe;
@@ -180,8 +190,16 @@ public class WizardsRebornModels {
     public static final ModelResourceLocation CORK_BAMBOO_CHISELED_PLANKS_CROSS_BAULK_CONNECTION_2 = new ModelResourceLocation(new ResourceLocation(WizardsReborn.MOD_ID, "cork_bamboo_chiseled_planks_cross_baulk_connection_opposite"), "");
     public static final ModelResourceLocation CORK_BAMBOO_CHISELED_PLANKS_CROSS_BAULK_END_2 = new ModelResourceLocation(new ResourceLocation(WizardsReborn.MOD_ID, "cork_bamboo_chiseled_planks_cross_baulk_end_opposite"), "");
 
+    public static WizardsRebornItemRenderer itemRenderer;
+
     @Mod.EventBusSubscriber(modid = WizardsReborn.MOD_ID, bus = Mod.EventBusSubscriber.Bus.MOD, value = Dist.CLIENT)
     public static class ClientRegistryEvents {
+        @SubscribeEvent
+        public static void registerModels(FMLClientSetupEvent event) {
+            Minecraft minecraft = Minecraft.getInstance();
+            itemRenderer = new WizardsRebornItemRenderer(minecraft.getBlockEntityRenderDispatcher(), minecraft.getEntityModels());
+        }
+
         @SubscribeEvent
         public static void modelRegistry(ModelEvent.RegisterAdditional event) {
             for (String crystal : WandCrystalsModels.getCrystals()) {
@@ -205,6 +223,13 @@ public class WizardsRebornModels {
             event.register(STEAM_SENSOR_PIECE);
             event.register(WISSEN_ACTIVATOR_PIECE);
             event.register(ITEM_SORTER_PIECE);
+            event.register(LIGHT_EMITTER_PIECE);
+            event.register(LIGHT_TRANSFER_LENS_PIECE);
+            event.register(ARCANE_WOOD_LIGHT_CASING_PIECE);
+            event.register(INNOCENT_WOOD_LIGHT_CASING_PIECE);
+            event.register(CORK_BAMBOO_LIGHT_CASING_PIECE);
+            event.register(WISESTONE_LIGHT_CASING_PIECE);
+            event.register(CREATIVE_LIGHT_STORAGE_PIECE);
 
             event.register(FLUID_CENTER);
             event.register(FLUID_CONNECTION);

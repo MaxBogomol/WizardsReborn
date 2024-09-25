@@ -1,23 +1,20 @@
 package mod.maxbogomol.wizards_reborn.client.render.block;
 
 import com.mojang.blaze3d.vertex.PoseStack;
-import com.mojang.blaze3d.vertex.VertexConsumer;
 import com.mojang.math.Axis;
 import mod.maxbogomol.fluffy_fur.client.event.ClientTickHandler;
+import mod.maxbogomol.fluffy_fur.client.render.RenderBuilder;
 import mod.maxbogomol.fluffy_fur.registry.client.FluffyFurRenderTypes;
 import mod.maxbogomol.fluffy_fur.util.RenderUtil;
 import mod.maxbogomol.wizards_reborn.api.wissen.WissenUtil;
 import mod.maxbogomol.wizards_reborn.common.block.arcane_iterator.ArcaneIteratorBlockEntity;
 import mod.maxbogomol.wizards_reborn.registry.client.WizardsRebornModels;
 import mod.maxbogomol.wizards_reborn.util.WizardsRebornRenderUtil;
-import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.blockentity.BlockEntityRenderer;
 import net.minecraft.world.item.ItemDisplayContext;
 import net.minecraft.world.phys.Vec3;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Random;
 
 public class ArcaneIteratorRenderer implements BlockEntityRenderer<ArcaneIteratorBlockEntity> {
@@ -27,9 +24,7 @@ public class ArcaneIteratorRenderer implements BlockEntityRenderer<ArcaneIterato
         Random random = new Random();
         random.setSeed(blockEntity.getBlockPos().asLong());
 
-        Minecraft minecraft = Minecraft.getInstance();
         double ticks = (blockEntity.rotate + partialTicks);
-        double ticksOffset = (ClientTickHandler.ticksInGame + partialTicks) * 0.1F;
         double ticksUp = (ClientTickHandler.ticksInGame + partialTicks) * 4;
         ticksUp = (ticksUp) % 360;
 
@@ -108,32 +103,28 @@ public class ArcaneIteratorRenderer implements BlockEntityRenderer<ArcaneIterato
             }
         }
 
-        MultiBufferSource bufferDelayed = FluffyFurRenderTypes.getDelayedRender();
-        VertexConsumer builder = bufferDelayed.getBuffer(FluffyFurRenderTypes.ADDITIVE);
+        RenderBuilder builder = RenderBuilder.create().setRenderType(FluffyFurRenderTypes.ADDITIVE).setSecondAlpha(0);
 
         if ((1f - size) > 0) {
             poseStack.pushPose();
-            List<Vec3> trailList = new ArrayList<>();
             float xOffset = (float) (Math.cos(blockEntity.angleA) * Math.cos(blockEntity.angleB));
             float yOffset = (float) (Math.sin(blockEntity.angleA) * Math.cos(blockEntity.angleB));
             float zOffset = (float) Math.sin(blockEntity.angleB);
 
+            double yaw = Math.atan2(zOffset, xOffset);
+            double pitch = Math.atan2(Math.sqrt(zOffset * zOffset + xOffset * xOffset), yOffset) + Math.PI;
+
             float trailSize = (1f - size) * 1.1f;
-            float trailWidth = (1f - size) * 0.3f;
+            float trailWidth = (1f - size) * 0.6f;
 
             poseStack.translate(0.5F, 0.5F, 0.5F);
-            trailList.add(new Vec3(0, 0, 0));
-            trailList.add(new Vec3(xOffset * trailSize, yOffset * trailSize, zOffset * trailSize));
-
-            //WizardsRebornRenderUtil.renderTrail(poseStack, builder, Vec3.ZERO, trailList, trailWidth, 0, 0.25f,0, 1.0f, new Color(0.807f, 0.800f, 0.639f), 8, false);
-            //WizardsRebornRenderUtil.renderTrail(poseStack, builder, Vec3.ZERO, trailList, trailWidth, 0, 0.5f,0,0.75f, new Color(0.611f, 0.352f, 0.447f), 8, false);
-
-            trailList.clear();
-            trailList.add(new Vec3(0, 0, 0));
-            trailList.add(new Vec3(xOffset * -trailSize, yOffset * -trailSize, zOffset * -trailSize));
-
-            //WizardsRebornRenderUtil.renderTrail(poseStack, builder, Vec3.ZERO, trailList, trailWidth, 0, 0.25f,0, 1.0f, new Color(0.807f, 0.800f, 0.639f), 8, false);
-            //WizardsRebornRenderUtil.renderTrail(poseStack, builder, Vec3.ZERO, trailList, trailWidth, 0, 0.5f,0,0.75f, new Color(0.611f, 0.352f, 0.447f), 8, false);
+            poseStack.mulPose(Axis.YP.rotation((float) -yaw));
+            poseStack.mulPose(Axis.ZP.rotation((float) -pitch));
+            builder.setColorRaw(0.807f, 0.800f, 0.639f).setFirstAlpha(1f).renderBeam(poseStack, 0.25f * trailWidth, trailSize * 0.9f, 0);
+            builder.setColorRaw(0.611f, 0.352f, 0.447f).setFirstAlpha(0.75f).renderBeam(poseStack, 0.45f * trailWidth, trailSize, 0);
+            poseStack.mulPose(Axis.ZP.rotationDegrees(180f));
+            builder.setColorRaw(0.807f, 0.800f, 0.639f).setFirstAlpha(1f).renderBeam(poseStack, 0.25f * trailWidth, trailSize * 0.9f, 0);
+            builder.setColorRaw(0.611f, 0.352f, 0.447f).setFirstAlpha(0.75f).renderBeam(poseStack, 0.45f * trailWidth, trailSize, 0);
             poseStack.popPose();
         }
     }

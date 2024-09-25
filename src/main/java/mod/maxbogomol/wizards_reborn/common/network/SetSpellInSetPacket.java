@@ -1,17 +1,19 @@
 package mod.maxbogomol.wizards_reborn.common.network;
 
+import mod.maxbogomol.fluffy_fur.common.network.ServerPacket;
 import mod.maxbogomol.wizards_reborn.api.knowledge.KnowledgeUtil;
 import mod.maxbogomol.wizards_reborn.api.spell.Spells;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraftforge.network.NetworkEvent;
+import net.minecraftforge.network.simple.SimpleChannel;
 
 import java.util.function.Supplier;
 
-public class SetSpellInSetPacket {
-    private final String spell;
-    private final int setId;
-    private final int spellId;
+public class SetSpellInSetPacket extends ServerPacket {
+    protected final String spell;
+    protected final int setId;
+    protected final int spellId;
 
     public SetSpellInSetPacket(String spell, int setId, int spellId) {
         this.spell = spell;
@@ -19,8 +21,14 @@ public class SetSpellInSetPacket {
         this.spellId = spellId;
     }
 
-    public static SetSpellInSetPacket decode(FriendlyByteBuf buf) {
-        return new SetSpellInSetPacket(buf.readUtf(), buf.readInt(), buf.readInt());
+    @Override
+    public void execute(Supplier<NetworkEvent.Context> context) {
+        ServerPlayer player = context.get().getSender();
+        KnowledgeUtil.addSpellInSet(player, setId, spellId, Spells.getSpell(spell));
+    }
+
+    public static void register(SimpleChannel instance, int index) {
+        instance.registerMessage(index, SetSpellInSetPacket.class, SetSpellInSetPacket::encode, SetSpellInSetPacket::decode, SetSpellInSetPacket::handle);
     }
 
     public void encode(FriendlyByteBuf buf) {
@@ -29,14 +37,7 @@ public class SetSpellInSetPacket {
         buf.writeInt(spellId);
     }
 
-    public static void handle(SetSpellInSetPacket msg, Supplier<NetworkEvent.Context> ctx) {
-        if (ctx.get().getDirection().getReceptionSide().isServer()) {
-            ctx.get().enqueueWork(() -> {
-                ServerPlayer player = ctx.get().getSender();
-
-                KnowledgeUtil.addSpellInSet(player, msg.setId, msg.spellId, Spells.getSpell(msg.spell));
-            });
-        }
-        ctx.get().setPacketHandled(true);
+    public static SetSpellInSetPacket decode(FriendlyByteBuf buf) {
+        return new SetSpellInSetPacket(buf.readUtf(), buf.readInt(), buf.readInt());
     }
 }

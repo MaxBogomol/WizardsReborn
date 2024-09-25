@@ -2,7 +2,10 @@ package mod.maxbogomol.wizards_reborn.api.alchemy;
 
 import mod.maxbogomol.fluffy_fur.util.ColorUtil;
 import net.minecraft.world.effect.MobEffectInstance;
+import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.alchemy.PotionUtils;
+import net.minecraft.world.level.Level;
 
 import java.awt.*;
 import java.util.ArrayList;
@@ -43,5 +46,9 @@ public class AlchemyPotion {
         String modId = id.substring(0, i);
         String spellId = id.substring(i + 1);
         return "alchemy_potion."  + modId + "." + spellId;
+    }
+
+    public void apply(ItemStack stack, Level level, LivingEntity livingEntity) {
+
     }
 }

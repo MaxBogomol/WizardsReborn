@@ -356,21 +356,17 @@ public class ArcaneIteratorBlockEntity extends BlockEntityBase implements Tickab
                         scale++;
                     }
 
-                    if (random.nextFloat() < 0.255) {
-                        particleRay(0.03f);
-                    }
-                    if (random.nextFloat() < 0.255) {
-                        particleRay(-0.03f);
-                    }
+                    if (random.nextFloat() < 0.255) particleRay(0.03f);
+                    if (random.nextFloat() < 0.255) particleRay(-0.03f);
                     if (random.nextFloat() < 0.225) {
                         ParticleBuilder.create(FluffyFurParticles.WISP)
                                 .setColorData(ColorParticleData.create(0.611f, 0.352f, 0.447f, 0.807f, 0.800f, 0.639f).build())
                                 .setTransparencyData(GenericParticleData.create(0.3f, 0).build())
-                                .setScaleData(GenericParticleData.create(0.5f, 0).build())
-                                .setSpinData(SpinParticleData.create().randomSpin(0.25f).build())
+                                .setScaleData(GenericParticleData.create(0.4f, 0.5f, 0).setEasing(Easing.QUINTIC_IN_OUT).build())
+                                .setSpinData(SpinParticleData.create().randomOffset().randomSpin(0.25f).build())
                                 .setLifetime(30)
                                 .randomVelocity(0.0125f)
-                                .spawn(level, getBlockPos().getX() + 0.5F, getBlockPos().getY() + 1F, getBlockPos().getZ() + 0.5F);
+                                .spawn(level, getBlockPos().getX() + 0.5f, getBlockPos().getY() + 0.5f, getBlockPos().getZ() + 0.5f);
                     }
 
                     List<ArcanePedestalBlockEntity> pedestals = getPedestals();
@@ -501,9 +497,9 @@ public class ArcaneIteratorBlockEntity extends BlockEntityBase implements Tickab
 
         ParticleBuilder.create(FluffyFurParticles.SMOKE)
                 .setColorData(ColorParticleData.create(0.611f, 0.352f, 0.447f, 0.807f, 0.800f, 0.639f).build())
-                .setTransparencyData(GenericParticleData.create(0.4f, 0).build())
-                .setScaleData(GenericParticleData.create(0.5f, 0).build())
-                .setSpinData(SpinParticleData.create().randomSpin(0.25f).build())
+                .setTransparencyData(GenericParticleData.create(0.4f, 0).setEasing(Easing.SINE_IN_OUT).build())
+                .setScaleData(GenericParticleData.create(0.5f, 0).setEasing(Easing.SINE_IN_OUT).build())
+                .setSpinData(SpinParticleData.create().randomOffset().randomSpin(0.25f).build())
                 .setLifetime(120)
                 .addVelocity(vx, vy, vz)
                 .spawn(level, getBlockPos().getX() + 0.5F, getBlockPos().getY() + 0.5F, getBlockPos().getZ() + 0.5F);

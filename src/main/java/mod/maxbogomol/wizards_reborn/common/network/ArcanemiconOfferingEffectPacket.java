@@ -1,94 +1,143 @@
 package mod.maxbogomol.wizards_reborn.common.network;
 
+import mod.maxbogomol.fluffy_fur.client.particle.GenericParticle;
 import mod.maxbogomol.fluffy_fur.client.particle.ParticleBuilder;
+import mod.maxbogomol.fluffy_fur.client.particle.behavior.TrailParticleBehavior;
 import mod.maxbogomol.fluffy_fur.client.particle.data.ColorParticleData;
 import mod.maxbogomol.fluffy_fur.client.particle.data.GenericParticleData;
 import mod.maxbogomol.fluffy_fur.client.particle.data.SpinParticleData;
+import mod.maxbogomol.fluffy_fur.common.easing.Easing;
+import mod.maxbogomol.fluffy_fur.common.network.PositionClientPacket;
 import mod.maxbogomol.fluffy_fur.registry.client.FluffyFurParticles;
+import mod.maxbogomol.fluffy_fur.registry.client.FluffyFurRenderTypes;
 import mod.maxbogomol.wizards_reborn.WizardsReborn;
 import mod.maxbogomol.wizards_reborn.common.config.Config;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.phys.Vec3;
 import net.minecraftforge.network.NetworkEvent;
+import net.minecraftforge.network.simple.SimpleChannel;
 
-import java.util.Random;
+import java.awt.*;
+import java.util.function.Consumer;
 import java.util.function.Supplier;
 
-public class ArcanemiconOfferingEffectPacket {
-    private final float posX;
-    private final float posY;
-    private final float posZ;
+public class ArcanemiconOfferingEffectPacket extends PositionClientPacket {
 
-    private static final Random random = new Random();
+    public ArcanemiconOfferingEffectPacket(double x, double y, double z) {
+        super(x, y, z);
+    }
 
-    public ArcanemiconOfferingEffectPacket(float posX, float posY, float posZ) {
-        this.posX = posX;
-        this.posY = posY;
-        this.posZ = posZ;
+    public ArcanemiconOfferingEffectPacket(Vec3 vec) {
+        super(vec);
+    }
+
+    @Override
+    public void execute(Supplier<NetworkEvent.Context> context) {
+        Level level = WizardsReborn.proxy.getLevel();
+
+        ParticleBuilder sparkleBuilder = ParticleBuilder.create(FluffyFurParticles.SPARKLE)
+                .setRenderType(FluffyFurRenderTypes.ADDITIVE_PARTICLE_TEXTURE)
+                .setBehavior(TrailParticleBehavior.create().build())
+                .setColorData(ColorParticleData.create(new Color(123, 73, 109)).build())
+                .setTransparencyData(GenericParticleData.create(0.4f, 0.4f, 0).setEasing(Easing.QUARTIC_OUT).build())
+                .setScaleData(GenericParticleData.create(0.2f, 0.4f, 0f).setEasing(Easing.ELASTIC_OUT).build())
+                .setLifetime(100)
+                .randomOffset(0.05f)
+                .randomVelocity(0.05f)
+                .setFriction(0.97f);
+
+        ParticleBuilder circleBuilder = ParticleBuilder.create(FluffyFurParticles.TINY_CIRCLE)
+                .setRenderType(FluffyFurRenderTypes.ADDITIVE_PARTICLE_TEXTURE)
+                .setBehavior(TrailParticleBehavior.create().build())
+                .setColorData(ColorParticleData.create(Config.wissenColorR(), Config.wissenColorG(), Config.wissenColorB()).build())
+                .setTransparencyData(GenericParticleData.create(0.4f, 0.4f, 0).setEasing(Easing.QUARTIC_OUT).build())
+                .setScaleData(GenericParticleData.create(0.2f, 0.4f, 0f).setEasing(Easing.ELASTIC_OUT).build())
+                .setLifetime(100)
+                .randomOffset(0.05f)
+                .randomVelocity(0.05f)
+                .setFriction(0.97f);
+
+        for (int i = 0; i < 36; i++) {
+            float distance = 0.5f + (0.25f * random.nextFloat());
+            double yaw = Math.toRadians(10 * i);
+            double pitch = 90;
+
+            double X = Math.sin(pitch) * Math.cos(yaw) * distance;
+            double Z = Math.sin(pitch) * Math.sin(yaw) * distance;
+
+            sparkleBuilder.setVelocity(X / 5, 0, Z / 5)
+                    .spawn(level, x, y, z);
+            circleBuilder.setVelocity(X / 6, 0, Z / 6)
+                    .spawn(level, x, y, z);
+        }
+
+        ParticleBuilder.create(FluffyFurParticles.DOT)
+                .setRenderType(FluffyFurRenderTypes.ADDITIVE_PARTICLE_TEXTURE)
+                .setBehavior(TrailParticleBehavior.create().build())
+                .setColorData(ColorParticleData.create(new Color(123, 73, 109)).build())
+                .setTransparencyData(GenericParticleData.create(0.3f, 0.3f, 0).setEasing(Easing.QUARTIC_OUT).build())
+                .setScaleData(GenericParticleData.create(0.3f, 0.4f, 0).setEasing(Easing.ELASTIC_OUT).build())
+                .setLifetime(100)
+                .randomVelocity(0.1f)
+                .randomOffset(0.1f)
+                .addVelocity(0, 0.3f, 0)
+                .setGravity(0.5f)
+                .repeat(level, x, y, z, 30);
+
+        final Consumer<GenericParticle> playerTarget = p -> {
+            Vec3 playerPos = WizardsReborn.proxy.getPlayer().position();
+            Vec3 pos = p.getPosition();
+
+            double dX = playerPos.x() - pos.x();
+            double dY = playerPos.y() + 0.5f - pos.y();
+            double dZ = playerPos.z() - pos.z();
+
+            double yaw = Math.atan2(dZ, dX);
+            double pitch = Math.atan2(Math.sqrt(dZ * dZ + dX * dX), dY) + Math.PI;
+
+            float speed = 0.03f;
+            double x = Math.sin(pitch) * Math.cos(yaw) * speed;
+            double y = Math.cos(pitch) * speed;
+            double z = Math.sin(pitch) * Math.sin(yaw) * speed;
+
+            p.setSpeed(p.getSpeed().subtract(x, y, z));
+        };
+
+        ParticleBuilder starBuilder = ParticleBuilder.create(FluffyFurParticles.STAR)
+                .setColorData(ColorParticleData.create().setRandomColor().build())
+                .setTransparencyData(GenericParticleData.create(0.3f, 0.3f, 0).setEasing(Easing.QUARTIC_OUT).build())
+                .setScaleData(GenericParticleData.create(0.15f).build())
+                .setSpinData(SpinParticleData.create().randomOffset().randomSpin(0.2f).build())
+                .addTickActor(playerTarget)
+                .setLifetime(200)
+                .randomVelocity(0.6f)
+                .disablePhysics()
+                .setFriction(0.95f);
+        ParticleBuilder.create(FluffyFurParticles.TRAIL)
+                .setRenderType(FluffyFurRenderTypes.ADDITIVE_PARTICLE_TEXTURE)
+                .setBehavior(TrailParticleBehavior.create()
+                        .setColorData(ColorParticleData.create().setRandomColor().build())
+                        .setTransparencyData(GenericParticleData.create(0.5f, 0.5f, 0).setEasing(Easing.QUARTIC_OUT).build())
+                        .enableSecondColor()
+                        .build())
+                .setColorData(ColorParticleData.create().setRandomColor().build())
+                .setTransparencyData(GenericParticleData.create(0.5f, 0.5f, 0).setEasing(Easing.QUARTIC_OUT).build())
+                .setScaleData(GenericParticleData.create(0.5f).build())
+                .addTickActor(playerTarget)
+                .setLifetime(200)
+                .randomVelocity(0.7f)
+                .disablePhysics()
+                .setFriction(0.95f)
+                .addAdditionalBuilder(starBuilder)
+                .repeat(level, x, y, z, 10);
+    }
+
+    public static void register(SimpleChannel instance, int index) {
+        instance.registerMessage(index, ArcanemiconOfferingEffectPacket.class, ArcanemiconOfferingEffectPacket::encode, ArcanemiconOfferingEffectPacket::decode, ArcanemiconOfferingEffectPacket::handle);
     }
 
     public static ArcanemiconOfferingEffectPacket decode(FriendlyByteBuf buf) {
-        return new ArcanemiconOfferingEffectPacket(buf.readFloat(), buf.readFloat(), buf.readFloat());
-    }
-
-    public void encode(FriendlyByteBuf buf) {
-        buf.writeFloat(posX);
-        buf.writeFloat(posY);
-        buf.writeFloat(posZ);
-    }
-
-    public static void handle(ArcanemiconOfferingEffectPacket msg, Supplier<NetworkEvent.Context> ctx) {
-        if (ctx.get().getDirection().getReceptionSide().isClient()) {
-            ctx.get().enqueueWork(new Runnable() {
-                @Override
-                public void run() {
-                    Level level = WizardsReborn.proxy.getLevel();
-
-                    for (int i = 0; i < 36; i++) {
-                        float distance = 0.5f + (0.25f * random.nextFloat());
-                        double yaw = Math.toRadians(10 * i);
-                        double pitch = 90;
-
-                        double X = Math.sin(pitch) * Math.cos(yaw) * distance;
-                        double Y = Math.cos(pitch);
-                        double Z = Math.sin(pitch) * Math.sin(yaw) * distance;
-
-                        ParticleBuilder.create(FluffyFurParticles.SMOKE)
-                                .setColorData(ColorParticleData.create(251 / 255f, 179 / 255f, 176 / 255f).build())
-                                .setTransparencyData(GenericParticleData.create(0.4f, 0).build())
-                                .setScaleData(GenericParticleData.create(0.4f, 0f).build())
-                                .setSpinData(SpinParticleData.create().randomSpin(0.1f).build())
-                                .setLifetime(100)
-                                .addVelocity(X / 10, 0, Z / 10)
-                                .randomOffset(0.05f)
-                                .spawn(level, msg.posX, msg.posY, msg.posZ);
-                        ParticleBuilder.create(FluffyFurParticles.WISP)
-                                .setColorData(ColorParticleData.create(Config.wissenColorR(), Config.wissenColorG(), Config.wissenColorB()).build())
-                                .setTransparencyData(GenericParticleData.create(0.4f, 0).build())
-                                .setScaleData(GenericParticleData.create(0.4f, 0f).build())
-                                .setSpinData(SpinParticleData.create().randomSpin(0.1f).build())
-                                .setLifetime(100)
-                                .addVelocity(X / 12, 0, Z / 12)
-                                .randomOffset(0.05f)
-                                .spawn(level, msg.posX, msg.posY, msg.posZ);
-                    }
-
-                    for (int i = 0; i < 30; i++) {
-                        ParticleBuilder.create(FluffyFurParticles.SPARKLE)
-                                .setColorData(ColorParticleData.create(123 / 255f, 73 / 255f, 109 / 255f).build())
-                                .setTransparencyData(GenericParticleData.create(0.3f, 0).build())
-                                .setScaleData(GenericParticleData.create(0.4f, 0).build())
-                                .setSpinData(SpinParticleData.create().randomSpin(0.1f).build())
-                                .setLifetime(100)
-                                .randomVelocity(0.02f, 0, 0.02f)
-                                .randomOffset(0.1f)
-                                .addVelocity(0, random.nextDouble() / 10, 0)
-                                .spawn(level, msg.posX, msg.posY, msg.posZ);
-                    }
-
-                    ctx.get().setPacketHandled(true);
-                }
-            });
-        }
+        return decode(ArcanemiconOfferingEffectPacket::new, buf);
     }
 }

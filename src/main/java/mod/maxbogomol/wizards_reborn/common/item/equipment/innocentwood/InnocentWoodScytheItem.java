@@ -1,7 +1,7 @@
 package mod.maxbogomol.wizards_reborn.common.item.equipment.innocentwood;
 
 import mod.maxbogomol.wizards_reborn.common.item.equipment.arcanewood.ArcaneWoodScytheItem;
-import mod.maxbogomol.wizards_reborn.common.network.InnocentWoodToolsEffectPacket;
+import mod.maxbogomol.wizards_reborn.common.network.item.InnocentWoodToolsPacket;
 import mod.maxbogomol.wizards_reborn.common.network.PacketHandler;
 import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornSounds;
 import net.minecraft.sounds.SoundEvent;
@@ -40,7 +40,7 @@ public class InnocentWoodScytheItem extends ArcaneWoodScytheItem {
                 if (entity.getHealth() != entity.getMaxHealth() && random.nextFloat() < 0.35f + (0.15f * getLifeRoots(stack))) {
                     entity.heal(1f);
                     entity.level().playSound(null, entity.getX(), entity.getY(), entity.getZ(), getRepairSound(stack, entity.level(), entity), SoundSource.PLAYERS, 0.25f, 2f);
-                    PacketHandler.sendToTracking(entity.level(), entity.getOnPos(), new InnocentWoodToolsEffectPacket((float) entity.getX(), (float) entity.getY() + (entity.getBbHeight() / 2), (float) entity.getZ()));
+                    PacketHandler.sendToTracking(entity.level(), entity.getOnPos(), new InnocentWoodToolsPacket((float) entity.getX(), (float) entity.getY() + (entity.getBbHeight() / 2), (float) entity.getZ()));
                 }
             }
         }

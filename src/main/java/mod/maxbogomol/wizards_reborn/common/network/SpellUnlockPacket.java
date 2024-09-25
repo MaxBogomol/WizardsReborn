@@ -10,30 +10,30 @@ import net.minecraftforge.network.NetworkEvent;
 
 import java.util.function.Supplier;
 
-public class UnlockSpellPacket {
+public class SpellUnlockPacket {
     private final Component spell;
 
-    public UnlockSpellPacket(Spell spell) {
+    public SpellUnlockPacket(Spell spell) {
         this.spell = Component.literal(spell.getId());
     }
 
-    public UnlockSpellPacket(String spell) {
+    public SpellUnlockPacket(String spell) {
         this.spell = Component.literal(spell);
     }
 
-    public UnlockSpellPacket(Component spell) {
+    public SpellUnlockPacket(Component spell) {
         this.spell = spell;
     }
 
-    public static UnlockSpellPacket decode(FriendlyByteBuf buf) {
-        return new UnlockSpellPacket(buf.readComponent());
+    public static SpellUnlockPacket decode(FriendlyByteBuf buf) {
+        return new SpellUnlockPacket(buf.readComponent());
     }
 
     public void encode(FriendlyByteBuf buf) {
         buf.writeComponent(spell);
     }
 
-    public static void handle(UnlockSpellPacket msg, Supplier<NetworkEvent.Context> ctx) {
+    public static void handle(SpellUnlockPacket msg, Supplier<NetworkEvent.Context> ctx) {
         if (ctx.get().getDirection().getReceptionSide().isServer()) {
             ctx.get().enqueueWork(() -> {
                 ServerPlayer player = ctx.get().getSender();

@@ -3,6 +3,7 @@ package mod.maxbogomol.wizards_reborn.client.render.block;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.math.Axis;
 import mod.maxbogomol.fluffy_fur.client.event.ClientTickHandler;
+import mod.maxbogomol.fluffy_fur.client.render.RenderBuilder;
 import mod.maxbogomol.fluffy_fur.registry.client.FluffyFurRenderTypes;
 import mod.maxbogomol.fluffy_fur.util.RenderUtil;
 import mod.maxbogomol.wizards_reborn.api.wissen.WissenUtil;
@@ -36,7 +37,7 @@ public class ExperienceTotemRenderer implements BlockEntityRenderer<ExperienceTo
         if (blockEntity.getExperience() > 0) {
             float size = (0.85f + (0.15f * globalOffset)) * ((float) blockEntity.getExperience() / blockEntity.getMaxExperience());
 
-            MultiBufferSource bufferDelayed = FluffyFurRenderTypes.getDelayedRender();
+            RenderBuilder builder = RenderBuilder.create().setRenderType(FluffyFurRenderTypes.ADDITIVE);
 
             poseStack.pushPose();
             poseStack.translate(0.5F, 0.75F, 0.5F);
@@ -45,10 +46,10 @@ public class ExperienceTotemRenderer implements BlockEntityRenderer<ExperienceTo
             poseStack.mulPose(Axis.XP.rotationDegrees((float) (random.nextFloat() * 360 + ticks)));
             poseStack.mulPose(Axis.ZP.rotationDegrees((float) (random.nextFloat() * 360 + ticks)));
             poseStack.scale(size, size, size);
-            //WizardsRebornRenderUtil.ray(poseStack, bufferDelayed, 0.06f, 0.06f, 1f, 0.243f, 0.564f, 0.250f, 0.75f);
-            //WizardsRebornRenderUtil.ray(poseStack, bufferDelayed, 0.075f, 0.075f, 1f, 0.243f, 0.564f, 0.250f, alpha);
-            //WizardsRebornRenderUtil.ray(poseStack, bufferDelayed, 0.1f, 0.1f, 1f, 0.784f, 1f, 0.560f, alpha / 2);
-            //WizardsRebornRenderUtil.ray(poseStack, bufferDelayed, 0.12f * offset, 0.12f * offset, 1f, 0.960f, 1f, 0.560f, 0.2f);
+            builder.setColorRaw(0.243f, 0.564f, 0.250f).setAlpha(0.75f).renderCenteredCube(poseStack, 0.06f);
+            builder.setColorRaw(0.243f, 0.564f, 0.250f).setAlpha(alpha).renderCenteredCube(poseStack, 0.075f);
+            builder.setColorRaw(0.784f, 1f, 0.560f).setAlpha(alpha / 2f).renderCenteredCube(poseStack, 0.1f);
+            builder.setColorRaw(0.960f, 1f, 0.560f).setAlpha(0.2f).renderCenteredCube(poseStack, 0.12f * offset);
             poseStack.popPose();
         }
 
