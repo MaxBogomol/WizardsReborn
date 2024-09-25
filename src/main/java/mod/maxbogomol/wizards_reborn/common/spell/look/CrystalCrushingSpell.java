@@ -4,7 +4,6 @@ import mod.maxbogomol.fluffy_fur.client.animation.ItemAnimation;
 import mod.maxbogomol.fluffy_fur.client.particle.ParticleBuilder;
 import mod.maxbogomol.fluffy_fur.client.particle.data.ColorParticleData;
 import mod.maxbogomol.fluffy_fur.client.particle.data.GenericParticleData;
-import mod.maxbogomol.fluffy_fur.common.network.AddScreenshakePacket;
 import mod.maxbogomol.wizards_reborn.WizardsReborn;
 import mod.maxbogomol.wizards_reborn.client.animation.StrikeSpellItemAnimation;
 import mod.maxbogomol.wizards_reborn.common.block.crystal.CrystalBlockEntity;
@@ -162,7 +161,7 @@ public class CrystalCrushingSpell extends LookSpell {
                     float g = color.getGreen() / 255f;
                     float b = color.getBlue() / 255f;
                     PacketHandler.sendToTracking(level, player.getOnPos(), new CrystalCrushingSpellEffectPacket((float) blockPos.getX() + 0.5f, (float) blockPos.getY() + 0.5f, (float) blockPos.getZ() + 0.5f, r, g, b));
-                    PacketHandler.sendTo(player, new AddScreenshakePacket(0.6f));
+                    //PacketHandler.sendTo(player, new AddScreenshakePacket(0.6f));
                 }
             } else {
                 ItemStack wandItem = player.getItemInHand(hand);
@@ -188,7 +187,7 @@ public class CrystalCrushingSpell extends LookSpell {
                         float b = color.getBlue() / 255f;
                         PacketHandler.sendToTracking(level, player.getOnPos(), new CrystalCrushingSpellEffectPacket((float) effectPos.x(), (float) effectPos.y(), (float) effectPos.z(), r, g, b));
                         level.playSound(WizardsReborn.proxy.getPlayer(), player.getX(), player.getY(), player.getZ(), WizardsRebornSounds.CRYSTAL_BREAK.get(), SoundSource.PLAYERS, 1f, 0.5f);
-                        PacketHandler.sendTo(player, new AddScreenshakePacket(0.6f));
+                        //PacketHandler.sendTo(player, new AddScreenshakePacket(0.6f));
                     }
                 }
             }

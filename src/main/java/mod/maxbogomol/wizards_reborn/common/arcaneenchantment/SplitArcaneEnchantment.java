@@ -1,13 +1,11 @@
 package mod.maxbogomol.wizards_reborn.common.arcaneenchantment;
 
-import mod.maxbogomol.fluffy_fur.common.network.AddScreenshakePacket;
 import mod.maxbogomol.wizards_reborn.api.arcaneenchantment.ArcaneEnchantment;
 import mod.maxbogomol.wizards_reborn.api.arcaneenchantment.ArcaneEnchantmentType;
 import mod.maxbogomol.wizards_reborn.api.arcaneenchantment.ArcaneEnchantmentUtil;
 import mod.maxbogomol.wizards_reborn.api.arcaneenchantment.IArcaneItem;
 import mod.maxbogomol.wizards_reborn.api.wissen.WissenUtil;
 import mod.maxbogomol.wizards_reborn.common.entity.SplitArrowEntity;
-import mod.maxbogomol.wizards_reborn.common.network.PacketHandler;
 import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornArcaneEnchantments;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
@@ -84,7 +82,7 @@ public class SplitArcaneEnchantment extends ArcaneEnchantment {
                         }
 
                         if (!player.level().isClientSide()) {
-                            PacketHandler.sendTo(player, new AddScreenshakePacket(0.45f));
+                            //PacketHandler.sendTo(player, new AddScreenshakePacket(0.45f));
                             player.knockback(0.5f, player.getLookAngle().x(), player.getLookAngle().z());
                             player.hurtMarked = true;
                             level.playSound(null, player.getX(), player.getY(), player.getZ(), SoundEvents.ANVIL_PLACE, SoundSource.PLAYERS, 0.05f, 1.5f);

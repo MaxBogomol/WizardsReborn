@@ -1,7 +1,6 @@
 package mod.maxbogomol.wizards_reborn.common.network;
 
 import com.mojang.datafixers.util.Pair;
-import mod.maxbogomol.fluffy_fur.common.network.AddScreenshakePacket;
 import mod.maxbogomol.wizards_reborn.WizardsReborn;
 import mod.maxbogomol.wizards_reborn.common.network.arcaneenchantment.EagleShotRayPacket;
 import mod.maxbogomol.wizards_reborn.common.network.arcaneenchantment.MagicBladePacket;
@@ -46,7 +45,6 @@ public final class PacketHandler {
         WissenWandSetModePacket.register(HANDLER, id++);
         BagOpenPacket.register(HANDLER, id++);
         HANDLER.registerMessage(id++, SetAdditionalFovPacket.class, SetAdditionalFovPacket::encode, SetAdditionalFovPacket::decode, SetAdditionalFovPacket::handle);
-        HANDLER.registerMessage(id++, AddScreenshakePacket.class, AddScreenshakePacket::encode, AddScreenshakePacket::decode, AddScreenshakePacket::handle);
         SniffaloScreenPacket.register(HANDLER, id++);
 
         ArcanumOreBreakPacket.register(HANDLER, id++);

@@ -6,7 +6,6 @@ import mod.maxbogomol.fluffy_fur.client.animation.ItemAnimation;
 import mod.maxbogomol.fluffy_fur.client.particle.ParticleBuilder;
 import mod.maxbogomol.fluffy_fur.client.particle.data.ColorParticleData;
 import mod.maxbogomol.fluffy_fur.client.particle.data.GenericParticleData;
-import mod.maxbogomol.fluffy_fur.common.network.AddScreenshakePacket;
 import mod.maxbogomol.fluffy_fur.registry.client.FluffyFurParticles;
 import mod.maxbogomol.fluffy_fur.registry.client.FluffyFurRenderTypes;
 import mod.maxbogomol.wizards_reborn.WizardsReborn;
@@ -139,7 +138,7 @@ public class StrikeSpell extends BlockLookSpell {
                 List<Player> players = entity.level().getEntitiesOfClass(Player.class, new AABB(entity.getX() - distance, entity.getY() - distance, entity.getZ() - distance, entity.getX() + distance, entity.getY() + distance, entity.getZ() + distance));
                 for (Player player : players) {
                     float distanceToPlayer = (float) Math.sqrt(Math.pow(entity.getX() - player.getX(), 2) + Math.pow(entity.getY() - player.getY(), 2) + Math.pow(entity.getZ() - player.getZ(), 2));
-                    if (40f - distanceToPlayer > 0) PacketHandler.sendTo(player, new AddScreenshakePacket(1f - (distanceToPlayer / distance / 2)));
+                    //if (40f - distanceToPlayer > 0) PacketHandler.sendTo(player, new AddScreenshakePacket(1f - (distanceToPlayer / distance / 2)));
                 }
 
                 strikeDamage(entity, entity.getSender());

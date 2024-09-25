@@ -1,6 +1,5 @@
 package mod.maxbogomol.wizards_reborn.common.arcaneenchantment;
 
-import mod.maxbogomol.fluffy_fur.common.network.AddScreenshakePacket;
 import mod.maxbogomol.wizards_reborn.api.arcaneenchantment.ArcaneEnchantment;
 import mod.maxbogomol.wizards_reborn.api.arcaneenchantment.ArcaneEnchantmentType;
 import mod.maxbogomol.wizards_reborn.api.arcaneenchantment.ArcaneEnchantmentUtil;
@@ -113,7 +112,7 @@ public class EagleShotArcaneEnchantment extends ArcaneEnchantment {
                             float r = color.getRed() / 255f;
                             float g = color.getGreen() / 255f;
                             float b = color.getBlue() / 255f;
-                            PacketHandler.sendTo(player, new AddScreenshakePacket(0.3f));
+                            //PacketHandler.sendTo(player, new AddScreenshakePacket(0.3f));
                             PacketHandler.sendToTracking(level, player.getOnPos(), new EagleShotRayPacket((float) from.x, (float) from.y, (float) from.z, (float) (from.x() - X), (float) (from.y() - Y), (float) (from.z() - Z), (float) movement.x, (float) movement.y, (float) movement.z, r, g, b));
                         }
                     }
