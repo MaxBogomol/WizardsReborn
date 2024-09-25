@@ -1,14 +1,11 @@
 package mod.maxbogomol.wizards_reborn.common.block.alchemy_furnace;
 
-import mod.maxbogomol.fluffy_fur.client.particle.ParticleBuilder;
-import mod.maxbogomol.fluffy_fur.client.particle.data.ColorParticleData;
-import mod.maxbogomol.fluffy_fur.client.particle.data.GenericParticleData;
-import mod.maxbogomol.fluffy_fur.client.particle.data.SpinParticleData;
 import mod.maxbogomol.fluffy_fur.common.block.entity.NameableBlockEntityBase;
 import mod.maxbogomol.fluffy_fur.common.block.entity.TickableBlockEntity;
-import mod.maxbogomol.fluffy_fur.registry.client.FluffyFurParticles;
 import mod.maxbogomol.wizards_reborn.api.alchemy.ISteamBlockEntity;
 import mod.maxbogomol.wizards_reborn.common.item.equipment.WissenWandItem;
+import mod.maxbogomol.wizards_reborn.common.network.PacketHandler;
+import mod.maxbogomol.wizards_reborn.common.network.block.SteamBreakPacket;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.particles.ParticleTypes;
@@ -40,7 +37,6 @@ import org.jetbrains.annotations.NotNull;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
-import java.awt.*;
 
 public class AlchemyFurnaceBlock extends HorizontalDirectionalBlock implements EntityBlock  {
 
@@ -71,6 +67,12 @@ public class AlchemyFurnaceBlock extends HorizontalDirectionalBlock implements E
                 Containers.dropContents(level, pos, inv);
                 if (level instanceof ServerLevel) {
                     furnace.popExperience((ServerLevel) level, Vec3.atCenterOf(pos));
+                }
+            }
+            if (blockEntity instanceof ISteamBlockEntity steamBlockEntity) {
+                if (steamBlockEntity.getMaxSteam() > 0) {
+                    float amount = (float) steamBlockEntity.getSteam() / (float) steamBlockEntity.getMaxSteam();
+                    PacketHandler.sendToTracking(level, pos, new SteamBreakPacket(pos, 15 * amount));
                 }
             }
         }
@@ -130,32 +132,6 @@ public class AlchemyFurnaceBlock extends HorizontalDirectionalBlock implements E
         inv.setItem(1, furnace.itemFuelHandler.getStackInSlot(0));
         inv.setItem(2, furnace.itemOutputHandler.getStackInSlot(0));
         return AbstractContainerMenu.getRedstoneSignalFromContainer(inv);
-    }
-
-    @Override
-    public void playerWillDestroy(Level level, BlockPos pos, BlockState state, Player player) {
-        if (level.isClientSide()) {
-            if (!player.isCreative()) {
-                if (level.getBlockEntity(pos) != null) {
-                    if (level.getBlockEntity(pos) instanceof ISteamBlockEntity blockEntity) {
-                        if (blockEntity.getMaxSteam() > 0) {
-                            float amount = (float) blockEntity.getSteam() / (float) blockEntity.getMaxSteam();
-                            ParticleBuilder.create(FluffyFurParticles.SMOKE)
-                                    .setColorData(ColorParticleData.create(Color.WHITE).build())
-                                    .setTransparencyData(GenericParticleData.create(0.4f, 0).build())
-                                    .setScaleData(GenericParticleData.create(0.1f, 0.5f).build())
-                                    .setSpinData(SpinParticleData.create().randomSpin(0.1f).build())
-                                    .setLifetime(30)
-                                    .randomVelocity(0.015f)
-                                    .randomOffset(0.25f)
-                                    .repeat(level, pos.getX() + 0.5F, pos.getY() + 0.5F, pos.getZ() + 0.5F, (int) (25 * amount));
-                        }
-                    }
-                }
-            }
-        }
-
-        super.playerWillDestroy(level, pos, state, player);
     }
 
     public void animateTick(BlockState state, Level level, BlockPos pos, RandomSource random) {

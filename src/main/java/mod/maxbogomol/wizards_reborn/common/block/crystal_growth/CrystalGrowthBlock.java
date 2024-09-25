@@ -9,12 +9,13 @@ import mod.maxbogomol.fluffy_fur.registry.client.FluffyFurParticles;
 import mod.maxbogomol.wizards_reborn.api.crystal.CrystalType;
 import mod.maxbogomol.wizards_reborn.api.crystal.CrystalUtil;
 import mod.maxbogomol.wizards_reborn.api.crystalritual.IGrowableCrystal;
+import mod.maxbogomol.wizards_reborn.common.network.PacketHandler;
+import mod.maxbogomol.wizards_reborn.common.network.block.CrystalGrowthBreakPacket;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.Containers;
-import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.BlockGetter;
@@ -201,33 +202,10 @@ public class CrystalGrowthBlock extends Block implements EntityBlock, SimpleWate
                             .setLifetime(30)
                             .randomVelocity(0.15f)
                             .randomOffset(0.25f)
-                            .spawn(level, pos.getX() + 0.5F, pos.getY() + 0.35F, pos.getZ() + 0.5F);
+                            .spawn(level, pos.getX() + 0.5f, pos.getY() + 0.35f, pos.getZ() + 0.5f);
                 }
             }
         }
-    }
-
-
-    @Override
-    public void playerWillDestroy(Level level, BlockPos pos, BlockState state, Player player) {
-        if (level.isClientSide()) {
-            if (!player.isCreative()) {
-                Color color = type.getColor();
-                for (int i = 0; i < (5 * (getAge(state) + 1)); i++) {
-                    ParticleBuilder.create(FluffyFurParticles.SPARKLE)
-                            .setColorData(ColorParticleData.create(color).build())
-                            .setTransparencyData(GenericParticleData.create(0.25f, 0).build())
-                            .setScaleData(GenericParticleData.create(0.35f, 0).build())
-                            .setSpinData(SpinParticleData.create().randomSpin(0.5f).build())
-                            .setLifetime(30)
-                            .randomVelocity(0.035f)
-                            .randomOffset(0.25f)
-                            .spawn(level, pos.getX() + 0.5F, pos.getY() + 0.5F, pos.getZ() + 0.5F);
-                }
-            }
-        }
-
-        super.playerWillDestroy(level, pos, state, player);
     }
 
     @Nullable
@@ -245,6 +223,7 @@ public class CrystalGrowthBlock extends Block implements EntityBlock, SimpleWate
     @Override
     public void onRemove(@Nonnull BlockState state, @Nonnull Level level, @Nonnull BlockPos pos, @Nonnull BlockState newState, boolean isMoving) {
         if (state.getBlock() != newState.getBlock()) {
+            PacketHandler.sendToTracking(level, pos, new CrystalGrowthBreakPacket(pos, type.getColor(), 5 * (getAge(state) + 1)));
             if (random.nextFloat() < getAge(state) * 0.05) {
                 ItemStack crystalItem = type.getFracturedCrystal();
                 CrystalUtil.createCrystalItemStats(crystalItem, type, level, 6);

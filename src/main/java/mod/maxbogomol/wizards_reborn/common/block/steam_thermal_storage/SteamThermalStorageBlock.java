@@ -2,14 +2,13 @@ package mod.maxbogomol.wizards_reborn.common.block.steam_thermal_storage;
 
 import mod.maxbogomol.fluffy_fur.common.block.entity.TickableBlockEntity;
 import mod.maxbogomol.wizards_reborn.api.alchemy.ISteamBlockEntity;
+import mod.maxbogomol.wizards_reborn.common.network.PacketHandler;
+import mod.maxbogomol.wizards_reborn.common.network.block.SteamBreakPacket;
 import mod.maxbogomol.wizards_reborn.registry.common.item.WizardsRebornItems;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.util.Mth;
-import net.minecraft.world.InteractionHand;
-import net.minecraft.world.InteractionResult;
-import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.BlockGetter;
@@ -29,7 +28,6 @@ import net.minecraft.world.level.material.FluidState;
 import net.minecraft.world.level.material.Fluids;
 import net.minecraft.world.level.storage.loot.LootParams;
 import net.minecraft.world.level.storage.loot.parameters.LootContextParams;
-import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.shapes.BooleanOp;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.Shapes;
@@ -119,17 +117,27 @@ public class SteamThermalStorageBlock extends RotatedPillarBlock implements Enti
     }
 
     @Override
+    public void onRemove(@Nonnull BlockState state, @Nonnull Level level, @Nonnull BlockPos pos, @Nonnull BlockState newState, boolean isMoving) {
+        if (state.getBlock() != newState.getBlock()) {
+            if (level.getBlockEntity(pos) instanceof ISteamBlockEntity blockEntity) {
+                if (blockEntity.getMaxSteam() > 0) {
+                    float amount = (float) blockEntity.getSteam() / (float) blockEntity.getMaxSteam();
+                    PacketHandler.sendToTracking(level, pos, new SteamBreakPacket(pos, 15 * amount));
+                }
+            }
+        }
+        super.onRemove(state, level, pos, newState, isMoving);
+    }
+
+    @Override
     public List<ItemStack> getDrops(BlockState state, LootParams.Builder builder) {
         List<ItemStack> items = super.getDrops(state, builder);
         BlockEntity blockEntity = builder.getOptionalParameter(LootContextParams.BLOCK_ENTITY);
         if (blockEntity instanceof ISteamBlockEntity steamBlockEntity) {
-            CompoundTag nbt = blockEntity.getUpdateTag();
-            if (nbt != null) {
-                for (ItemStack stack : items) {
-                    if (stack.getItem() == WizardsRebornItems.STEAM_THERMAL_STORAGE.get()) {
-                        CompoundTag tag = stack.getOrCreateTag();
-                        tag.putInt("steam", steamBlockEntity.getSteam());
-                    }
+            for (ItemStack stack : items) {
+                if (stack.getItem() == WizardsRebornItems.STEAM_THERMAL_STORAGE.get()) {
+                    CompoundTag tag = stack.getOrCreateTag();
+                    tag.putInt("steam", steamBlockEntity.getSteam());
                 }
             }
         }
@@ -137,8 +145,15 @@ public class SteamThermalStorageBlock extends RotatedPillarBlock implements Enti
     }
 
     @Override
-    public InteractionResult use(BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hit) {
-        return InteractionResult.PASS;
+    public ItemStack getCloneItemStack(BlockGetter level, BlockPos pos, BlockState state) {
+        BlockEntity blockEntity = level.getBlockEntity(pos);
+        if (blockEntity instanceof ISteamBlockEntity steamBlockEntity) {
+            ItemStack stack = new ItemStack(WizardsRebornItems.STEAM_THERMAL_STORAGE.get());
+            CompoundTag tag = stack.getOrCreateTag();
+            tag.putInt("steam", steamBlockEntity.getSteam());
+            return stack;
+        }
+        return ItemStack.EMPTY;
     }
 
     @Nullable

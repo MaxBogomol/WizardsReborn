@@ -3,6 +3,8 @@ package mod.maxbogomol.wizards_reborn.common.config;
 import net.minecraftforge.common.ForgeConfigSpec;
 import org.apache.commons.lang3.tuple.Pair;
 
+import java.awt.*;
+
 public class Config {
     public static ForgeConfigSpec.ConfigValue<Integer>
             STANDARD_WISSEN_COLOR_R, STANDARD_WISSEN_COLOR_G, STANDARD_WISSEN_COLOR_B;
@@ -35,5 +37,9 @@ public class Config {
 
     public static float wissenColorB() {
         return STANDARD_WISSEN_COLOR_B.get() / 255f;
+    }
+
+    public static Color wissenColor() {
+        return new Color(wissenColorR(), wissenColorG(), wissenColorB());
     }
 }

@@ -126,16 +126,27 @@ public class OrbitalFluidRetainerBlock extends Block implements EntityBlock, Sim
         BlockEntity blockEntity = builder.getOptionalParameter(LootContextParams.BLOCK_ENTITY);
         if (blockEntity instanceof OrbitalFluidRetainerBlockEntity) {
             CompoundTag nbt = blockEntity.getUpdateTag();
-            if (nbt != null) {
-                for (ItemStack stack : items) {
-                    if (stack.getItem() == WizardsRebornItems.ORBITAL_FLUID_RETAINER.get()) {
-                        CompoundTag tag = stack.getOrCreateTag();
-                        tag.put("fluidTank", nbt.getCompound("fluidTank"));
-                    }
+            for (ItemStack stack : items) {
+                if (stack.getItem() == WizardsRebornItems.ORBITAL_FLUID_RETAINER.get()) {
+                    CompoundTag tag = stack.getOrCreateTag();
+                    tag.put("fluidTank", nbt.getCompound("fluidTank"));
                 }
             }
         }
         return items;
+    }
+
+    @Override
+    public ItemStack getCloneItemStack(BlockGetter level, BlockPos pos, BlockState state) {
+        BlockEntity blockEntity = level.getBlockEntity(pos);
+        if (blockEntity instanceof OrbitalFluidRetainerBlockEntity) {
+            CompoundTag nbt = blockEntity.getUpdateTag();
+            ItemStack stack = new ItemStack(WizardsRebornItems.ORBITAL_FLUID_RETAINER.get());
+            CompoundTag tag = stack.getOrCreateTag();
+            tag.put("fluidTank", nbt.getCompound("fluidTank"));
+            return stack;
+        }
+        return ItemStack.EMPTY;
     }
 
     @Override

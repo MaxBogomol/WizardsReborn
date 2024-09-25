@@ -1,21 +1,17 @@
 package mod.maxbogomol.wizards_reborn.common.block.pipe.steam;
 
-import mod.maxbogomol.fluffy_fur.client.particle.ParticleBuilder;
-import mod.maxbogomol.fluffy_fur.client.particle.data.ColorParticleData;
-import mod.maxbogomol.fluffy_fur.client.particle.data.GenericParticleData;
-import mod.maxbogomol.fluffy_fur.client.particle.data.SpinParticleData;
 import mod.maxbogomol.fluffy_fur.common.block.entity.TickableBlockEntity;
 import mod.maxbogomol.fluffy_fur.common.network.BlockEntityUpdate;
-import mod.maxbogomol.fluffy_fur.registry.client.FluffyFurParticles;
 import mod.maxbogomol.wizards_reborn.api.alchemy.ISteamBlockEntity;
 import mod.maxbogomol.wizards_reborn.common.block.pipe.TinyPipeBaseBlock;
+import mod.maxbogomol.wizards_reborn.common.network.PacketHandler;
+import mod.maxbogomol.wizards_reborn.common.network.block.SteamBreakPacket;
 import mod.maxbogomol.wizards_reborn.registry.common.block.WizardsRebornBlockEntities;
 import mod.maxbogomol.wizards_reborn.registry.common.block.WizardsRebornBlockTags;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.tags.TagKey;
 import net.minecraft.util.Mth;
-import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.entity.BlockEntity;
@@ -24,7 +20,7 @@ import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 import org.jetbrains.annotations.NotNull;
 
-import java.awt.*;
+import javax.annotation.Nonnull;
 
 public class SteamPipeBlock extends TinyPipeBaseBlock {
 
@@ -92,27 +88,15 @@ public class SteamPipeBlock extends TinyPipeBaseBlock {
     }
 
     @Override
-    public void playerWillDestroy(Level level, BlockPos pos, BlockState state, Player player) {
-        if (level.isClientSide()) {
-            if (!player.isCreative()) {
-                if (level.getBlockEntity(pos) != null) {
-                    if (level.getBlockEntity(pos) instanceof ISteamBlockEntity blockEntity) {
-                        if (blockEntity.getMaxSteam() > 0) {
-                            float amount = (float) blockEntity.getSteam() / (float) blockEntity.getMaxSteam();
-                            ParticleBuilder.create(FluffyFurParticles.SMOKE)
-                                    .setColorData(ColorParticleData.create(Color.WHITE).build())
-                                    .setTransparencyData(GenericParticleData.create(0.4f, 0).build())
-                                    .setScaleData(GenericParticleData.create(0.1f, 0.5f).build())
-                                    .setSpinData(SpinParticleData.create().randomSpin(0.1f).build())
-                                    .setLifetime(30)
-                                    .randomVelocity(0.015f)
-                                    .repeat(level, pos.getX() + 0.5F, pos.getY() + 0.5F, pos.getZ() + 0.5F, (int) (15 * amount));
-                        }
-                    }
+    public void onRemove(@Nonnull BlockState state, @Nonnull Level level, @Nonnull BlockPos pos, @Nonnull BlockState newState, boolean isMoving) {
+        if (state.getBlock() != newState.getBlock()) {
+            if (level.getBlockEntity(pos) instanceof ISteamBlockEntity blockEntity) {
+                if (blockEntity.getMaxSteam() > 0) {
+                    float amount = (float) blockEntity.getSteam() / (float) blockEntity.getMaxSteam();
+                    PacketHandler.sendToTracking(level, pos, new SteamBreakPacket(pos, 15 * amount));
                 }
             }
         }
-
-        super.playerWillDestroy(level, pos, state, player);
+        super.onRemove(state, level, pos, newState, isMoving);
     }
 }

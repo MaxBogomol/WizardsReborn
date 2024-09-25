@@ -49,6 +49,14 @@ public final class PacketHandler {
         HANDLER.registerMessage(id++, AddScreenshakePacket.class, AddScreenshakePacket::encode, AddScreenshakePacket::decode, AddScreenshakePacket::handle);
         SniffaloScreenPacket.register(HANDLER, id++);
 
+        ArcanumOreBreakPacket.register(HANDLER, id++);
+        NetherSaltOreBreakPacket.register(HANDLER, id++);
+        ArcaneWoodLeavesBreakPacket.register(HANDLER, id++);
+        InnocentWoodLeavesBreakPacket.register(HANDLER, id++);
+        CrystalBreakPacket.register(HANDLER, id++);
+        CrystalGrowthBreakPacket.register(HANDLER, id++);
+        SteamBreakPacket.register(HANDLER, id++);
+
         WissenAltarBurstPacket.register(HANDLER, id++);
         WissenAltarBurstPacket.register(HANDLER, id++);
         WissenTranslatorBurstPacket.register(HANDLER, id++);

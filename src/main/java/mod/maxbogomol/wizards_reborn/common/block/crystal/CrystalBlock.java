@@ -10,12 +10,15 @@ import mod.maxbogomol.fluffy_fur.common.easing.Easing;
 import mod.maxbogomol.fluffy_fur.registry.client.FluffyFurParticles;
 import mod.maxbogomol.wizards_reborn.api.crystal.CrystalType;
 import mod.maxbogomol.wizards_reborn.api.crystal.PolishingType;
+import mod.maxbogomol.wizards_reborn.common.item.CrystalItem;
+import mod.maxbogomol.wizards_reborn.common.network.PacketHandler;
+import mod.maxbogomol.wizards_reborn.common.network.block.CrystalBreakPacket;
 import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornCrystals;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.nbt.CompoundTag;
 import net.minecraft.util.RandomSource;
-import net.minecraft.world.Containers;
-import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
@@ -34,6 +37,8 @@ import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.material.FluidState;
 import net.minecraft.world.level.material.Fluids;
 import net.minecraft.world.level.material.PushReaction;
+import net.minecraft.world.level.storage.loot.LootParams;
+import net.minecraft.world.level.storage.loot.parameters.LootContextParams;
 import net.minecraft.world.phys.shapes.BooleanOp;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.Shapes;
@@ -45,6 +50,7 @@ import org.jetbrains.annotations.NotNull;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import java.awt.*;
+import java.util.List;
 import java.util.stream.Stream;
 
 public class CrystalBlock extends Block implements EntityBlock, SimpleWaterloggedBlock {
@@ -104,6 +110,38 @@ public class CrystalBlock extends Block implements EntityBlock, SimpleWaterlogge
         return getBlockConnected(state).getOpposite() == direction && !state.canSurvive(level, currentPos) ? Blocks.AIR.defaultBlockState() : super.updateShape(state, direction, neighborState, level, currentPos, neighborPos);
     }
 
+    @Override
+    public void onRemove(@Nonnull BlockState state, @Nonnull Level level, @Nonnull BlockPos pos, @Nonnull BlockState newState, boolean isMoving) {
+        if (state.getBlock() != newState.getBlock()) {
+            PacketHandler.sendToTracking(level, pos, new CrystalBreakPacket(pos, type.getColor()));
+        }
+        super.onRemove(state, level, pos, newState, isMoving);
+    }
+
+    @Override
+    public java.util.List<ItemStack> getDrops(BlockState state, LootParams.Builder builder) {
+        List<ItemStack> items = super.getDrops(state, builder);
+        BlockEntity blockEntity = builder.getOptionalParameter(LootContextParams.BLOCK_ENTITY);
+        if (blockEntity instanceof BlockSimpleInventory blockSimpleInventory) {
+            for (ItemStack stack : items) {
+                if (stack.getItem() instanceof CrystalItem) {
+                    CompoundTag tag = blockSimpleInventory.getItemHandler().getItem(0).copy().getOrCreateTag();
+                    stack.setTag(tag);
+                }
+            }
+        }
+        return items;
+    }
+
+    @Override
+    public ItemStack getCloneItemStack(BlockGetter level, BlockPos pos, BlockState state) {
+        BlockEntity blockEntity = level.getBlockEntity(pos);
+        if (blockEntity instanceof BlockSimpleInventory blockSimpleInventory) {
+            return blockSimpleInventory.getItemHandler().getItem(0).copy();
+        }
+        return ItemStack.EMPTY;
+    }
+
     public PushReaction getPistonPushReaction(BlockState state) {
         return PushReaction.DESTROY;
     }
@@ -129,28 +167,8 @@ public class CrystalBlock extends Block implements EntityBlock, SimpleWaterlogge
                     .setLifetime(30)
                     .randomVelocity(0.015f)
                     .flatRandomOffset(0.25f, 0.25f, 0.25f)
-                    .spawn(level, pos.getX() + 0.5F, pos.getY() + 0.35F, pos.getZ() + 0.5F);
+                    .spawn(level, pos.getX() + 0.5f, pos.getY() + 0.35f, pos.getZ() + 0.5f);
         }
-    }
-
-    @Override
-    public void playerWillDestroy(Level level, BlockPos pos, BlockState state, Player player) {
-        if (level.isClientSide()) {
-            if (!player.isCreative()) {
-                Color color = type.getColor();
-                ParticleBuilder.create(FluffyFurParticles.SPARKLE)
-                        .setColorData(ColorParticleData.create(color).build())
-                        .setTransparencyData(GenericParticleData.create(0.25f, 0).build())
-                        .setScaleData(GenericParticleData.create(0.35f, 0).build())
-                        .setSpinData(SpinParticleData.create().randomSpin(0.5f).build())
-                        .setLifetime(30)
-                        .randomVelocity(0.035f)
-                        .randomOffset(0.25f)
-                        .repeat(level, pos.getX() + 0.5F, pos.getY() + 0.5F, pos.getZ() + 0.5F, 25);
-            }
-        }
-
-        super.playerWillDestroy(level, pos, state, player);
     }
 
     @Nullable
@@ -163,16 +181,5 @@ public class CrystalBlock extends Block implements EntityBlock, SimpleWaterlogge
     @Override
     public <T extends BlockEntity> BlockEntityTicker<T> getTicker(@NotNull Level level, @NotNull BlockState state, @NotNull BlockEntityType<T> type) {
         return TickableBlockEntity.getTickerHelper();
-    }
-
-    @Override
-    public void onRemove(@Nonnull BlockState state, @Nonnull Level level, @Nonnull BlockPos pos, @Nonnull BlockState newState, boolean isMoving) {
-        if (state.getBlock() != newState.getBlock()) {
-            BlockEntity blockEntity = level.getBlockEntity(pos);
-            if (blockEntity instanceof BlockSimpleInventory blockSimpleInventory) {
-                Containers.dropContents(level, pos, (blockSimpleInventory).getItemHandler());
-            }
-        }
-        super.onRemove(state, level, pos, newState, isMoving);
     }
 }

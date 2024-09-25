@@ -8,11 +8,12 @@ import mod.maxbogomol.fluffy_fur.common.block.entity.TickableBlockEntity;
 import mod.maxbogomol.fluffy_fur.registry.client.FluffyFurParticles;
 import mod.maxbogomol.wizards_reborn.api.crystalritual.IGrowableCrystal;
 import mod.maxbogomol.wizards_reborn.common.config.Config;
+import mod.maxbogomol.wizards_reborn.common.network.PacketHandler;
+import mod.maxbogomol.wizards_reborn.common.network.block.CrystalGrowthBreakPacket;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.util.RandomSource;
-import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
@@ -207,24 +208,11 @@ public class ArcanumGrowthBlock extends Block implements EntityBlock, SimpleWate
     }
 
     @Override
-    public void playerWillDestroy(Level level, BlockPos pos, BlockState state, Player player) {
-        if (level.isClientSide()) {
-            if (!player.isCreative()) {
-                for (int i = 0; i < (5 * (getAge(state) + 1)); i++) {
-                    ParticleBuilder.create(FluffyFurParticles.SPARKLE)
-                            .setColorData(ColorParticleData.create(Config.wissenColorR(), Config.wissenColorG(), Config.wissenColorB()).build())
-                            .setTransparencyData(GenericParticleData.create(0.25f, 0).build())
-                            .setScaleData(GenericParticleData.create(0.35f, 0).build())
-                            .setSpinData(SpinParticleData.create().randomSpin(0.5f).build())
-                            .setLifetime(30)
-                            .randomVelocity(0.035f)
-                            .randomOffset(0.25f)
-                            .spawn(level, pos.getX() + 0.5F, pos.getY() + 0.5F, pos.getZ() + 0.5F);
-                }
-            }
+    public void onRemove(@Nonnull BlockState state, @Nonnull Level level, @Nonnull BlockPos pos, @Nonnull BlockState newState, boolean isMoving) {
+        if (state.getBlock() != newState.getBlock()) {
+            PacketHandler.sendToTracking(level, pos, new CrystalGrowthBreakPacket(pos, Config.wissenColor(), 5 * (getAge(state) + 1)));
         }
-
-        super.playerWillDestroy(level, pos, state, player);
+        super.onRemove(state, level, pos, newState, isMoving);
     }
 
     @Nullable

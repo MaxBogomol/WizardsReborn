@@ -122,6 +122,18 @@ public class WissenCellBlock extends HorizontalDirectionalBlock implements Entit
     }
 
     @Override
+    public ItemStack getCloneItemStack(BlockGetter level, BlockPos pos, BlockState state) {
+        BlockEntity blockEntity = level.getBlockEntity(pos);
+        if (blockEntity instanceof IWissenBlockEntity wissenBlock) {
+            ItemStack stack = new ItemStack(WizardsRebornItems.WISSEN_CELL.get());
+            WissenItemUtil.existWissen(stack);
+            WissenItemUtil.setWissen(stack, wissenBlock.getWissen());
+            return stack;
+        }
+        return ItemStack.EMPTY;
+    }
+
+    @Override
     public InteractionResult use(BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hit) {
         WissenCellBlockEntity blockEntity = (WissenCellBlockEntity) level.getBlockEntity(pos);
         ItemStack stack = player.getItemInHand(hand).copy();
