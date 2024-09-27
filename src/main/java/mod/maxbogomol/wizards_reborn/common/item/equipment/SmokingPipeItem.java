@@ -1,6 +1,7 @@
 package mod.maxbogomol.wizards_reborn.common.item.equipment;
 
 import mod.maxbogomol.fluffy_fur.client.animation.ItemAnimation;
+import mod.maxbogomol.fluffy_fur.common.block.entity.BlockSimpleInventory;
 import mod.maxbogomol.fluffy_fur.common.item.ICustomAnimationItem;
 import mod.maxbogomol.fluffy_fur.common.item.ItemBackedInventory;
 import mod.maxbogomol.fluffy_fur.util.ColorUtil;
@@ -23,7 +24,6 @@ import net.minecraft.world.InteractionResultHolder;
 import net.minecraft.world.SimpleContainer;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
@@ -48,6 +48,7 @@ import java.util.List;
 import java.util.Optional;
 
 public class SmokingPipeItem extends Item implements ICustomAnimationItem {
+
     public static SmokingPipeItemAnimation animation = new SmokingPipeItemAnimation();
 
     public SmokingPipeItem(Properties properties) {
@@ -79,9 +80,9 @@ public class SmokingPipeItem extends Item implements ICustomAnimationItem {
     }
 
     @Override
-    public void releaseUsing(ItemStack stack, Level level, LivingEntity entityLiving, int pTimeLeft) {
+    public void releaseUsing(ItemStack stack, Level level, LivingEntity livingEntity, int timeLeft) {
         if (!level.isClientSide) {
-            if (entityLiving instanceof Player player) {
+            if (livingEntity instanceof Player player) {
                 CompoundTag nbt = stack.getOrCreateTag();
                 int invSize = getInventorySize(stack);
 
@@ -159,37 +160,31 @@ public class SmokingPipeItem extends Item implements ICustomAnimationItem {
             Optional<CenserRecipe> recipe = level.getRecipeManager().getRecipeFor(WizardsRebornRecipes.CENSER.get(), inv, level);
 
             CompoundTag nbt = stack.getOrCreateTag();
-            int invSize = getInventorySize(stack);
+            int size = getInventorySize(stack);
 
             if (!player.isShiftKeyDown()) {
                 if (recipe.isPresent()) {
-                    if (invSize < 6) {
-                        int slot = invSize;
+                    if (size < 6) {
                         if (offStack.getCount() > 1) {
                             player.getItemInHand(offHand).setCount(offStack.getCount() - 1);
-                            getInventory(stack).setItem(slot, offStack);
-                            ItemStack itemStack = getInventory(stack).getItem(slot);
+                            getInventory(stack).setItem(size, offStack);
+                            ItemStack itemStack = getInventory(stack).getItem(size);
                             itemStack.setCount(1);
-                            getInventory(stack).setItem(slot, itemStack);
-                            return InteractionResultHolder.success(stack);
+                            getInventory(stack).setItem(size, itemStack);
                         } else {
-                            getInventory(stack).setItem(slot, offStack);
+                            getInventory(stack).setItem(size, offStack);
                             player.getInventory().removeItem(player.getItemInHand(offHand));
-                            return InteractionResultHolder.success(stack);
                         }
+                        return InteractionResultHolder.success(stack);
                     }
                 }
             } else {
-                if (invSize > 0) {
-                    for (int i = 0; i < invSize; i++) {
-                        int slot = invSize - i - 1;
+                if (size > 0) {
+                    for (int i = 0; i < size; i++) {
+                        int slot = size - i - 1;
                         if (!getInventory(stack).getItem(slot).isEmpty()) {
                             if (getItemBurnCenser(getInventory(stack).getItem(slot)) <= 0) {
-                                if (player.getInventory().getSlotWithRemainingSpace(getInventory(stack).getItem(slot)) != -1 || player.getInventory().getFreeSlot() > -1) {
-                                    player.getInventory().add(getInventory(stack).getItem(slot).copy());
-                                } else {
-                                    level.addFreshEntity(new ItemEntity(level, player.getX(), player.getY() + 0.5F, player.getZ(), getInventory(stack).getItem(slot).copy()));
-                                }
+                                BlockSimpleInventory.addPlayerItem(level, player, getInventory(stack).getItem(slot).copy());
                                 getInventory(stack).removeItem(slot, 1);
                                 sortItems(stack);
                                 return InteractionResultHolder.success(stack);
@@ -251,7 +246,7 @@ public class SmokingPipeItem extends Item implements ICustomAnimationItem {
     }
 
     @Override
-    public UseAnim getUseAnimation(ItemStack pStack) {
+    public UseAnim getUseAnimation(ItemStack stack) {
         return UseAnim.CUSTOM;
     }
 

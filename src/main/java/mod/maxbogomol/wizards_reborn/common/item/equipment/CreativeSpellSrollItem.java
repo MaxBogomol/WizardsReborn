@@ -30,7 +30,7 @@ public class CreativeSpellSrollItem extends ArcanumItem {
             }
 
             if (!player.isCreative()) {
-                stack.setCount(stack.getCount() - 1);
+                stack.shrink(1);
             }
             level.playSound(null, player.getX(), player.getY(), player.getZ(), SoundEvents.ENCHANTMENT_TABLE_USE, SoundSource.PLAYERS, 1.0f, 1.5f);
         }

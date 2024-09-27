@@ -23,8 +23,8 @@ import java.util.List;
 
 public class SteamStorageBaseItem extends BlockItem implements ISteamItem, ICustomBlockEntityDataItem {
 
-    public SteamStorageBaseItem(Block blockIn, Properties properties) {
-        super(blockIn, properties);
+    public SteamStorageBaseItem(Block block, Properties properties) {
+        super(block, properties);
     }
 
     @Override

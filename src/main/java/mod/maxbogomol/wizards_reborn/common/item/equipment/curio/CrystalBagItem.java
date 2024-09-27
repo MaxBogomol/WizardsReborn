@@ -41,6 +41,7 @@ import java.util.Iterator;
 import java.util.stream.Stream;
 
 public class CrystalBagItem extends BaseCurioItem implements ICurioItemTexture, IBagItem {
+
     public static Color color = new Color(153, 246, 146);
 
     private static final ResourceLocation BELT_TEXTURE = new ResourceLocation(WizardsReborn.MOD_ID,"textures/entity/curio/crystal_bag.png");
@@ -114,10 +115,10 @@ public class CrystalBagItem extends BaseCurioItem implements ICurioItemTexture, 
     }
 
     @Override
-    public void onDestroyed(ItemEntity pItemEntity) {
+    public void onDestroyed(ItemEntity itemEntity) {
         Iterator<ItemStack> iter = new Iterator<>() {
             private int i = 0;
-            private final SimpleContainer inventory = getInventory(pItemEntity.getItem());
+            private final SimpleContainer inventory = getInventory(itemEntity.getItem());
 
             @Override
             public boolean hasNext() {
@@ -130,7 +131,7 @@ public class CrystalBagItem extends BaseCurioItem implements ICurioItemTexture, 
             }
         };
 
-        ItemUtils.onContainerDestroyed(pItemEntity, Stream.iterate(iter.next(), t -> iter.hasNext(), t -> iter.next()));
+        ItemUtils.onContainerDestroyed(itemEntity, Stream.iterate(iter.next(), t -> iter.hasNext(), t -> iter.next()));
     }
 
     @Override

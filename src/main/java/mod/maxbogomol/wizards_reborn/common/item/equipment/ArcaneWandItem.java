@@ -63,6 +63,7 @@ import java.util.List;
 import java.util.stream.Stream;
 
 public class ArcaneWandItem extends Item implements IWissenItem, ICustomAnimationItem, IGuiParticleItem {
+
     public ArcaneWandItem(Properties properties) {
         super(properties);
     }
@@ -92,10 +93,10 @@ public class ArcaneWandItem extends Item implements IWissenItem, ICustomAnimatio
     }
 
     @Override
-    public void onDestroyed(ItemEntity pItemEntity) {
+    public void onDestroyed(ItemEntity itemEntity) {
         Iterator<ItemStack> iter = new Iterator<>() {
             private int i = 0;
-            private final SimpleContainer inventory = getInventory(pItemEntity.getItem());
+            private final SimpleContainer inventory = getInventory(itemEntity.getItem());
 
             @Override
             public boolean hasNext() {
@@ -108,7 +109,7 @@ public class ArcaneWandItem extends Item implements IWissenItem, ICustomAnimatio
             }
         };
 
-        ItemUtils.onContainerDestroyed(pItemEntity, Stream.iterate(iter.next(), t -> iter.hasNext(), t -> iter.next()));
+        ItemUtils.onContainerDestroyed(itemEntity, Stream.iterate(iter.next(), t -> iter.hasNext(), t -> iter.next()));
     }
 
     @Override
@@ -333,13 +334,13 @@ public class ArcaneWandItem extends Item implements IWissenItem, ICustomAnimatio
                 CrystalType type = crystal.getType();
                 Color color = crystal.getType().getColor();
                 for (CrystalStat stat : type.getStats()) {
-                    int statlevel = crystal.getStatLevel(ArcaneWandItem.getInventory(stack).getItem(0), stat);
-                    int red = (int) Mth.lerp((float) statlevel / stat.getMaxLevel(), Color.GRAY.getRed(), color.getRed());
-                    int green = (int) Mth.lerp((float) statlevel / stat.getMaxLevel(), Color.GRAY.getGreen(), color.getGreen());
-                    int blue = (int) Mth.lerp((float) statlevel / stat.getMaxLevel(), Color.GRAY.getBlue(), color.getBlue());
+                    int statLevel = crystal.getStatLevel(ArcaneWandItem.getInventory(stack).getItem(0), stat);
+                    int red = (int) Mth.lerp((float) statLevel / stat.getMaxLevel(), Color.GRAY.getRed(), color.getRed());
+                    int green = (int) Mth.lerp((float) statLevel / stat.getMaxLevel(), Color.GRAY.getGreen(), color.getGreen());
+                    int blue = (int) Mth.lerp((float) statLevel / stat.getMaxLevel(), Color.GRAY.getBlue(), color.getBlue());
 
                     int packColor = ColorUtil.packColor(255, red, green, blue);
-                    list.add(Component.literal(" ").append(Component.translatable(stat.getTranslatedName()).append(": " + statlevel).withStyle(Style.EMPTY.withColor(packColor))));
+                    list.add(Component.literal(" ").append(Component.translatable(stat.getTranslatedName()).append(": " + statLevel).withStyle(Style.EMPTY.withColor(packColor))));
                 }
             }
         }

@@ -11,7 +11,6 @@ import mod.maxbogomol.fluffy_fur.util.RenderUtil;
 import mod.maxbogomol.wizards_reborn.common.block.salt.torch.SaltTorchBlockEntity;
 import net.minecraft.core.Direction;
 import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.StandingAndWallBlockItem;
 import net.minecraft.world.level.Level;
@@ -22,7 +21,8 @@ import net.minecraftforge.api.distmarker.OnlyIn;
 import java.awt.*;
 
 public class SaltTorchItem extends StandingAndWallBlockItem implements IGuiParticleItem {
-    public SaltTorchItem(Block block, Block wallBlock, Item.Properties properties, Direction attachmentDirection) {
+
+    public SaltTorchItem(Block block, Block wallBlock, Properties properties, Direction attachmentDirection) {
         super(block, wallBlock, properties, attachmentDirection);
     }
 

@@ -34,6 +34,7 @@ import java.util.List;
 import java.util.Random;
 
 public class ArcanemiconItem extends Item {
+
     public ArcanemiconItem(Properties properties) {
         super(properties);
     }

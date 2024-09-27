@@ -32,15 +32,15 @@ public class FlaskPotionItem extends AlchemyPotionItem {
 
     @Override
     @OnlyIn(Dist.CLIENT)
-    public void renderPlacedItem(ItemStack stack, int rotation, float rotate, PlacedItemsBlockEntity items, float partialTicks, PoseStack ms, MultiBufferSource buffers, int light, int overlay) {
-        ms.pushPose();
-        ms.translate(0F, 0.0001F, 0F);
-        ms.mulPose(Axis.YP.rotationDegrees((rotation * -22.5f) + rotate));
-        ms.mulPose(Axis.XP.rotationDegrees(180f));
-        WizardsRebornModels.ALCHEMY_FLASK.renderToBuffer(ms, buffers.getBuffer(RenderType.entityCutoutNoCull(FLASK_TEXTURE)), light, OverlayTexture.NO_OVERLAY, 1, 1, 1, 1);
-        ms.mulPose(Axis.XP.rotationDegrees(-180f));
-        ms.scale(1.25F, 1.25F, 1.25F);
-        ms.translate(-0.125F, 0.015625F, -0.125F);
+    public void renderPlacedItem(ItemStack stack, int rotation, float rotate, PlacedItemsBlockEntity items, float partialTicks, PoseStack poseStack, MultiBufferSource bufferSource, int light, int overlay) {
+        poseStack.pushPose();
+        poseStack.translate(0F, 0.0001F, 0F);
+        poseStack.mulPose(Axis.YP.rotationDegrees((rotation * -22.5f) + rotate));
+        poseStack.mulPose(Axis.XP.rotationDegrees(180f));
+        WizardsRebornModels.ALCHEMY_FLASK.renderToBuffer(poseStack, bufferSource.getBuffer(RenderType.entityCutoutNoCull(FLASK_TEXTURE)), light, OverlayTexture.NO_OVERLAY, 1, 1, 1, 1);
+        poseStack.mulPose(Axis.XP.rotationDegrees(-180f));
+        poseStack.scale(1.25F, 1.25F, 1.25F);
+        poseStack.translate(-0.125F, 0.015625F, -0.125F);
         AlchemyPotion potion = AlchemyPotionUtil.getPotion(stack);
         if (!AlchemyPotionUtil.isEmpty(potion)) {
             Color color = potion.getColor();
@@ -49,11 +49,11 @@ public class FlaskPotionItem extends AlchemyPotionItem {
             FluidStack fluidStack = new FluidStack(fluid, 1);
             if (potion instanceof FluidAlchemyPotion fluidAlchemyPotion) {
                 fluidStack = new FluidStack(fluidAlchemyPotion.getFluid(), 1);
-                RenderUtil.renderFluid(ms, fluidStack, 0.25f, 0.3125f * (1f - (uses / 6f)), 0.25f, 0.25f, 0.3125f * (1f - (uses / 6f)), 0.25f, false, light);
+                RenderUtil.renderFluid(poseStack, fluidStack, 0.25f, 0.3125f * (1f - (uses / 6f)), 0.25f, 0.25f, 0.3125f * (1f - (uses / 6f)), 0.25f, false, light);
             } else {
-                RenderUtil.renderFluid(ms, fluidStack, 0.25f, 0.3125f * (1f - (uses / 6f)), 0.25f, 0.25f, 0.3125f * (1f - (uses / 6f)), 0.25f, color, false, light);
+                RenderUtil.renderFluid(poseStack, fluidStack, 0.25f, 0.3125f * (1f - (uses / 6f)), 0.25f, 0.25f, 0.3125f * (1f - (uses / 6f)), 0.25f, color, false, light);
             }
         }
-        ms.popPose();
+        poseStack.popPose();
     }
 }

@@ -31,6 +31,7 @@ import java.util.List;
 import java.util.Random;
 
 public class ArcanumLensItem extends ArcanumItem implements IGuiParticleItem {
+
     private static Random random = new Random();
 
     public ArcanumLensItem(Properties properties) {
@@ -60,7 +61,7 @@ public class ArcanumLensItem extends ArcanumItem implements IGuiParticleItem {
             }
 
             if (!player.isCreative()) {
-                stack.setCount(stack.getCount() - 1);
+                stack.shrink(1);
             }
 
             PacketHandler.sendToTracking(level, player.getOnPos(), new ArcanumLensBurstPacket(player.position().add(0, player.getBbHeight() / 2, 0)));

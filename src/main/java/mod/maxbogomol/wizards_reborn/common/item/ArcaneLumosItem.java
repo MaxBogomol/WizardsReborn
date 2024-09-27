@@ -9,10 +9,12 @@ import mod.maxbogomol.fluffy_fur.client.particle.data.ColorParticleData;
 import mod.maxbogomol.fluffy_fur.client.particle.data.GenericParticleData;
 import mod.maxbogomol.fluffy_fur.client.particle.data.SpinParticleData;
 import mod.maxbogomol.fluffy_fur.client.render.RenderBuilder;
+import mod.maxbogomol.fluffy_fur.common.easing.Easing;
 import mod.maxbogomol.fluffy_fur.common.item.IGuiParticleItem;
 import mod.maxbogomol.fluffy_fur.common.item.IParticleItem;
 import mod.maxbogomol.fluffy_fur.registry.client.FluffyFurParticles;
 import mod.maxbogomol.fluffy_fur.registry.client.FluffyFurRenderTypes;
+import mod.maxbogomol.fluffy_fur.util.ColorUtil;
 import mod.maxbogomol.fluffy_fur.util.RenderUtil;
 import mod.maxbogomol.wizards_reborn.common.block.ArcaneLumosBlock;
 import net.minecraft.client.Minecraft;
@@ -29,6 +31,7 @@ import java.awt.*;
 import java.util.Random;
 
 public class ArcaneLumosItem extends BlockItem implements IParticleItem, IGuiParticleItem {
+
     private static Random random = new Random();
 
     public ArcaneLumosItem(Block blockIn, Properties properties) {
@@ -62,22 +65,22 @@ public class ArcaneLumosItem extends BlockItem implements IParticleItem, IGuiPar
 
             if (lumos.color == ArcaneLumosBlock.Colors.COSMIC) {
                 if (random.nextFloat() < 0.03) {;
-                    ParticleBuilder.create(FluffyFurParticles.SPARKLE)
+                    ParticleBuilder.create(FluffyFurParticles.STAR)
                             .setColorData(ColorParticleData.create(color).build())
                             .setTransparencyData(GenericParticleData.create(0.75f, 0).build())
-                            .setScaleData(GenericParticleData.create(0.1f, 0).build())
+                            .setScaleData(GenericParticleData.create(0, 0.1f, 0).setEasing(Easing.SINE_IN_OUT).build())
                             .setSpinData(SpinParticleData.create().randomSpin(0.5f).build())
-                            .setLifetime(5)
+                            .setLifetime(10)
                             .flatRandomOffset(0.25f, 0.25f, 0.25f)
                             .spawn(level, entity.getX(), entity.getY(), entity.getZ());
                 }
                 if (random.nextFloat() < 0.03) {
-                    ParticleBuilder.create(FluffyFurParticles.SPARKLE)
+                    ParticleBuilder.create(FluffyFurParticles.STAR)
                             .setColorData(ColorParticleData.create(Color.WHITE).build())
                             .setTransparencyData(GenericParticleData.create(0.75f, 0).build())
-                            .setScaleData(GenericParticleData.create(0.1f, 0).build())
+                            .setScaleData(GenericParticleData.create(0, 0.1f, 0).setEasing(Easing.SINE_IN_OUT).build())
                             .setSpinData(SpinParticleData.create().randomSpin(0.5f).build())
-                            .setLifetime(5)
+                            .setLifetime(10)
                             .flatRandomOffset(0.25f, 0.25f, 0.25f)
                             .spawn(level, entity.getX(), entity.getY(), entity.getZ());
                 }
@@ -92,7 +95,7 @@ public class ArcaneLumosItem extends BlockItem implements IParticleItem, IGuiPar
             Color color = ArcaneLumosBlock.getColor(lumos.color);
             if (lumos.color == ArcaneLumosBlock.Colors.RAINBOW) {
                 double ticks = (ClientTickHandler.ticksInGame + Minecraft.getInstance().getPartialTick()) * 0.1f;
-                color = new Color((int)(Math.sin(ticks) * 127 + 128), (int)(Math.sin(ticks + Math.PI/2) * 127 + 128), (int)(Math.sin(ticks + Math.PI) * 127 + 128));
+                color = ColorUtil.rainbowColor((float) ticks);
             }
 
             int seedI = this.getDescriptionId().length();

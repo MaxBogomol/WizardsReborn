@@ -53,7 +53,7 @@ public class KnowledgeSrollItem extends ArcanumItem {
                 }
 
                 if (!player.isCreative()) {
-                    stack.setCount(stack.getCount() - 1);
+                    stack.shrink(1);
                 }
 
                 if (nbt.contains("player")) {

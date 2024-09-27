@@ -8,6 +8,7 @@ import top.theillusivec4.curios.api.SlotContext;
 import top.theillusivec4.curios.api.type.capability.ICurioItem;
 
 public class BaseCurioItem extends Item implements ICurioItem, ICurioItemTexture {
+
     public BaseCurioItem(Properties properties) {
         super(properties);
     }

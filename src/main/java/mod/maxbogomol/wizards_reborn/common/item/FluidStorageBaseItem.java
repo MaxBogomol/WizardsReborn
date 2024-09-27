@@ -24,8 +24,8 @@ import java.util.List;
 
 public class FluidStorageBaseItem extends BlockItem implements IFluidItem, ICustomBlockEntityDataItem {
 
-    public FluidStorageBaseItem(Block blockIn, Properties properties) {
-        super(blockIn, properties);
+    public FluidStorageBaseItem(Block block, Properties properties) {
+        super(block, properties);
     }
 
     @Override

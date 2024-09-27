@@ -39,6 +39,7 @@ import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.item.*;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.DispenserBlock;
+import net.minecraft.world.phys.Vec3;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.client.event.ModelEvent;
 import net.minecraftforge.client.event.RegisterColorHandlersEvent;
@@ -794,7 +795,7 @@ public class WizardsRebornItems {
                 this.setSuccess(true);
                 Level level = blockSource.getLevel();
                 BlockPos blockpos = blockSource.getPos().relative(blockSource.getBlockState().getValue(DispenserBlock.FACING));
-                if (!ArcanumDustItem.executeTransmutation(itemStack, level, blockpos)) {
+                if (!ArcanumDustItem.executeTransmutation(itemStack, level, blockpos, Vec3.ZERO, Vec3.ZERO, false, false)) {
                     this.setSuccess(false);
                 }
 

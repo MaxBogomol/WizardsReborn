@@ -53,7 +53,7 @@ public class PlacedItem extends ItemNameBlockItem implements ICustomBlockEntityD
 
     @Override
     @OnlyIn(Dist.CLIENT)
-    public void renderPlacedItem(ItemStack stack, int rotation, float rotate, PlacedItemsBlockEntity items, float partialTicks, PoseStack ms, MultiBufferSource buffers, int light, int overlay) {
+    public void renderPlacedItem(ItemStack stack, int rotation, float rotate, PlacedItemsBlockEntity items, float partialTicks, PoseStack poseStack, MultiBufferSource bufferSource, int light, int overlay) {
         double ticks = (ClientTickHandler.ticksInGame + partialTicks) * 2;
         double ticksUp = (ClientTickHandler.ticksInGame + partialTicks) * 4;
         ticksUp = (ticksUp) % 360;
@@ -63,12 +63,12 @@ public class PlacedItem extends ItemNameBlockItem implements ICustomBlockEntityD
             rotateTicks = (float) (rotateTicks + ticks);
         }
 
-        ms.pushPose();
-        ms.translate(0F, 0.2875F, 0F);
-        ms.translate(0F, (float) (Math.sin(Math.toRadians(ticksUp)) * 0.03125F), 0F);
-        ms.mulPose(Axis.YP.rotationDegrees(rotateTicks));
-        ms.scale(0.5F, 0.5F, 0.5F);
-        Minecraft.getInstance().getItemRenderer().renderStatic(stack, ItemDisplayContext.FIXED, light, overlay, ms, buffers, items.getLevel(), 0);
-        ms.popPose();
+        poseStack.pushPose();
+        poseStack.translate(0F, 0.2875F, 0F);
+        poseStack.translate(0F, (float) (Math.sin(Math.toRadians(ticksUp)) * 0.03125F), 0F);
+        poseStack.mulPose(Axis.YP.rotationDegrees(rotateTicks));
+        poseStack.scale(0.5F, 0.5F, 0.5F);
+        Minecraft.getInstance().getItemRenderer().renderStatic(stack, ItemDisplayContext.FIXED, light, overlay, poseStack, bufferSource, items.getLevel(), 0);
+        poseStack.popPose();
     }
 }

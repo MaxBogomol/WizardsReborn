@@ -29,8 +29,9 @@ import java.awt.*;
 import java.util.List;
 
 public class EngravedWisestoneItem extends BlockItem implements IGuiParticleItem {
-    public EngravedWisestoneItem(Block blockIn, Properties properties) {
-        super(blockIn, properties);
+
+    public EngravedWisestoneItem(Block block, Properties properties) {
+        super(block, properties);
     }
 
     @OnlyIn(Dist.CLIENT)

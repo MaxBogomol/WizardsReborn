@@ -19,6 +19,7 @@ import top.theillusivec4.curios.api.SlotContext;
 import java.util.List;
 
 public class BaseWissenCurioItem extends BaseCurioItem implements IWissenItem {
+
     public BaseWissenCurioItem(Properties properties) {
         super(properties);
     }

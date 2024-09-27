@@ -74,8 +74,7 @@ public class ScytheItem extends SwordItem {
                 if (radius != 0 && initialCall) {
                     for (int x = -radius; x <= radius; x++) {
                         for (int z = -radius; z <= radius; z++) {
-                            BlockPos pos = blockPos.relative(Direction.Axis.X, x)
-                                    .relative(Direction.Axis.Z, z);
+                            BlockPos pos = blockPos.relative(Direction.Axis.X, x).relative(Direction.Axis.Z, z);
                             onBlockUse(player, level, hand, pos, false);
                         }
                     }
@@ -85,15 +84,10 @@ public class ScytheItem extends SwordItem {
                     BlockEvent.BreakEvent breakEv = new BlockEvent.BreakEvent(level, blockPos, state, player);
                     if (MinecraftForge.EVENT_BUS.post(breakEv)) return InteractionResult.FAIL;
                     BlockState replantState = getReplantState(state);
-                    BlockEvent.EntityPlaceEvent placeEv = new BlockEvent.EntityPlaceEvent(
-                            BlockSnapshot.create(level.dimension(), level, blockPos),
-                            level.getBlockState(blockPos.below()),
-                            player
-                    );
+                    BlockEvent.EntityPlaceEvent placeEv = new BlockEvent.EntityPlaceEvent(BlockSnapshot.create(level.dimension(), level, blockPos), level.getBlockState(blockPos.below()), player);
                     if (MinecraftForge.EVENT_BUS.post(placeEv)) return InteractionResult.FAIL;
                     level.setBlockAndUpdate(blockPos, replantState);
-                    dropStacks(state, (ServerLevel) level, blockPos, player,
-                            player.getItemInHand(hand));
+                    dropStacks(state, (ServerLevel) level, blockPos, player, player.getItemInHand(hand));
 
                     stack.hurtAndBreak(1, player, (entity) -> entity.broadcastBreakEvent(hand));
                 } else {
@@ -133,14 +127,13 @@ public class ScytheItem extends SwordItem {
         return state;
     }
 
-    private static void dropStacks(BlockState state, ServerLevel level, BlockPos pos, Entity entity,
-                                   ItemStack toolStack) {
+    private static void dropStacks(BlockState state, ServerLevel level, BlockPos pos, Entity entity, ItemStack toolStack) {
         Item replant = state.getBlock().getCloneItemStack(level, pos, state).getItem();
         final boolean[] removedReplant = {false};
 
         Block.getDrops(state, level, pos, null, entity, toolStack).forEach(stack -> {
             if (!removedReplant[0] && stack.getItem() == replant) {
-                stack.setCount(stack.getCount() - 1);
+                stack.shrink(1);
                 removedReplant[0] = true;
             }
 

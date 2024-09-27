@@ -44,8 +44,7 @@ public class ArcanemiconOfferingEffectPacket extends PositionClientPacket {
                 .setScaleData(GenericParticleData.create(0.2f, 0.4f, 0f).setEasing(Easing.ELASTIC_OUT).build())
                 .setLifetime(100)
                 .randomOffset(0.05f)
-                .randomVelocity(0.05f)
-                .setFriction(0.97f);
+                .randomVelocity(0.05f);
 
         ParticleBuilder circleBuilder = ParticleBuilder.create(FluffyFurParticles.TINY_CIRCLE)
                 .setRenderType(FluffyFurRenderTypes.ADDITIVE_PARTICLE_TEXTURE)
@@ -55,8 +54,7 @@ public class ArcanemiconOfferingEffectPacket extends PositionClientPacket {
                 .setScaleData(GenericParticleData.create(0.2f, 0.4f, 0f).setEasing(Easing.ELASTIC_OUT).build())
                 .setLifetime(100)
                 .randomOffset(0.05f)
-                .randomVelocity(0.05f)
-                .setFriction(0.97f);
+                .randomVelocity(0.05f);
 
         for (int i = 0; i < 36; i++) {
             float distance = 0.5f + (0.25f * random.nextFloat());

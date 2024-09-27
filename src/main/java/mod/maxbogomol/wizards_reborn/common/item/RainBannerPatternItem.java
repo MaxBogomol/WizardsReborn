@@ -6,7 +6,6 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.Style;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.BannerPatternItem;
-import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.level.Level;
@@ -30,7 +29,7 @@ public class RainBannerPatternItem extends BannerPatternItem {
 
     public Types type;
 
-    public RainBannerPatternItem(Types type, TagKey<BannerPattern> bannerPattern, Item.Properties properties) {
+    public RainBannerPatternItem(Types type, TagKey<BannerPattern> bannerPattern, Properties properties) {
         super(bannerPattern, properties);
         this.type = type;
     }

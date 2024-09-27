@@ -20,8 +20,9 @@ import net.minecraftforge.api.distmarker.OnlyIn;
 import java.awt.*;
 
 public class SaltCampfireItem extends BlockItem implements IGuiParticleItem {
-    public SaltCampfireItem(Block blockIn, Properties properties) {
-        super(blockIn, properties);
+
+    public SaltCampfireItem(Block block, Properties properties) {
+        super(block, properties);
     }
 
     @Override

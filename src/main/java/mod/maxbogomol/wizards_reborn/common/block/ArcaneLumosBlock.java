@@ -95,7 +95,7 @@ public class ArcaneLumosBlock extends Block {
                         .setTransparencyData(GenericParticleData.create(0.75f, 0).build())
                         .setScaleData(GenericParticleData.create(0, 0.1f, 0).setEasing(Easing.SINE_IN_OUT).build())
                         .setSpinData(SpinParticleData.create().randomSpin(0.5f).build())
-                        .setLifetime(5)
+                        .setLifetime(10)
                         .randomVelocity(0.01f, 0.01f, 0.01f)
                         .flatRandomOffset(0.25f, 0.25f, 0.25f)
                         .spawn(level, pos.getX() + 0.5F, pos.getY() + 0.5F, pos.getZ() + 0.5F);
@@ -106,7 +106,7 @@ public class ArcaneLumosBlock extends Block {
                         .setTransparencyData(GenericParticleData.create(0.75f, 0).build())
                         .setScaleData(GenericParticleData.create(0, 0.1f, 0).setEasing(Easing.SINE_IN_OUT).build())
                         .setSpinData(SpinParticleData.create().randomSpin(0.5f).build())
-                        .setLifetime(5)
+                        .setLifetime(10)
                         .randomVelocity(0.01f, 0.01f, 0.01f)
                         .flatRandomOffset(0.25f, 0.25f, 0.25f)
                         .spawn(level, pos.getX() + 0.5F, pos.getY() + 0.5F, pos.getZ() + 0.5F);

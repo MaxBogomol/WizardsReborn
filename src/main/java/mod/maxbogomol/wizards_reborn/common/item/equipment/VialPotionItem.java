@@ -32,19 +32,19 @@ public class VialPotionItem extends AlchemyPotionItem {
 
     @Override
     @OnlyIn(Dist.CLIENT)
-    public void renderPlacedItem(ItemStack stack, int rotation, float rotate, PlacedItemsBlockEntity items, float partialTicks, PoseStack ms, MultiBufferSource buffers, int light, int overlay) {
-        ms.pushPose();
-        ms.translate(0F, 0.0001F, 0F);
-        ms.mulPose(Axis.YP.rotationDegrees((rotation * -22.5f) + rotate));
-        ms.mulPose(Axis.XP.rotationDegrees(180f));
-        WizardsRebornModels.ALCHEMY_VIAL.renderToBuffer(ms, buffers.getBuffer(RenderType.entityCutoutNoCull(VIAL_TEXTURE)), light, OverlayTexture.NO_OVERLAY, 1, 1, 1, 1);
-        ms.mulPose(Axis.XP.rotationDegrees(-180f));
+    public void renderPlacedItem(ItemStack stack, int rotation, float rotate, PlacedItemsBlockEntity items, float partialTicks, PoseStack poseStack, MultiBufferSource bufferSource, int light, int overlay) {
+        poseStack.pushPose();
+        poseStack.translate(0F, 0.0001F, 0F);
+        poseStack.mulPose(Axis.YP.rotationDegrees((rotation * -22.5f) + rotate));
+        poseStack.mulPose(Axis.XP.rotationDegrees(180f));
+        WizardsRebornModels.ALCHEMY_VIAL.renderToBuffer(poseStack, bufferSource.getBuffer(RenderType.entityCutoutNoCull(VIAL_TEXTURE)), light, OverlayTexture.NO_OVERLAY, 1, 1, 1, 1);
+        poseStack.mulPose(Axis.XP.rotationDegrees(-180f));
 
         AlchemyPotion potion = AlchemyPotionUtil.getPotion(stack);
         if (!AlchemyPotionUtil.isEmpty(potion)) {
-            ms.pushPose();
-            ms.scale(1.25F, 1.25F, 1.25F);
-            ms.translate(-0.125F, 0.0078125F, -0.125F);
+            poseStack.pushPose();
+            poseStack.scale(1.25F, 1.25F, 1.25F);
+            poseStack.translate(-0.125F, 0.0078125F, -0.125F);
             int uses = AlchemyPotionItem.getUses(stack);
             Color color = potion.getColor();
             int usesI = 3 - uses;
@@ -54,26 +54,26 @@ public class VialPotionItem extends AlchemyPotionItem {
             FluidStack fluidStack = new FluidStack(fluid, 1);
             if (potion instanceof FluidAlchemyPotion fluidAlchemyPotion) {
                 fluidStack = new FluidStack(fluidAlchemyPotion.getFluid(), 1);
-                RenderUtil.renderFluid(ms, fluidStack, 0.25f, 0.1875f * (1f - (usesI / 2f)), 0.25f, 0.25f, 0.1875f * (1f - (usesI / 2f)), 0.25f, false, light);
-                ms.popPose();
+                RenderUtil.renderFluid(poseStack, fluidStack, 0.25f, 0.1875f * (1f - (usesI / 2f)), 0.25f, 0.25f, 0.1875f * (1f - (usesI / 2f)), 0.25f, false, light);
+                poseStack.popPose();
                 if (uses == 0) {
-                    ms.translate(0, 0.25, 0);
-                    ms.scale(1.5F, 1.5F, 1.5F);
-                    ms.translate(-0.0625F, -0.0078125F, -0.0625F);
-                    RenderUtil.renderFluid(ms, fluidStack, 0.125f, 0.125f, false, light);
+                    poseStack.translate(0, 0.25, 0);
+                    poseStack.scale(1.5F, 1.5F, 1.5F);
+                    poseStack.translate(-0.0625F, -0.0078125F, -0.0625F);
+                    RenderUtil.renderFluid(poseStack, fluidStack, 0.125f, 0.125f, false, light);
                 }
             } else {
-                RenderUtil.renderFluid(ms, fluidStack, 0.25f, 0.1875f * (1f - (usesI / 2f)), 0.25f, 0.25f, 0.1875f * (1f - (usesI / 2f)), 0.25f, color, false, light);
-                ms.popPose();
+                RenderUtil.renderFluid(poseStack, fluidStack, 0.25f, 0.1875f * (1f - (usesI / 2f)), 0.25f, 0.25f, 0.1875f * (1f - (usesI / 2f)), 0.25f, color, false, light);
+                poseStack.popPose();
                 if (uses == 0) {
-                    ms.translate(0, 0.25, 0);
-                    ms.scale(1.5F, 1.5F, 1.5F);
-                    ms.translate(-0.0625F, -0.0078125F, -0.0625F);
-                    RenderUtil.renderFluid(ms, fluidStack, 0.125f, 0.125f, color, false, light);
+                    poseStack.translate(0, 0.25, 0);
+                    poseStack.scale(1.5F, 1.5F, 1.5F);
+                    poseStack.translate(-0.0625F, -0.0078125F, -0.0625F);
+                    RenderUtil.renderFluid(poseStack, fluidStack, 0.125f, 0.125f, color, false, light);
                 }
             }
         }
 
-        ms.popPose();
+        poseStack.popPose();
     }
 }

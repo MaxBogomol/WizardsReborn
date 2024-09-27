@@ -67,7 +67,7 @@ public class AlchemyPotionItem extends PlacedItem {
 
     @Override
     public ItemStack getDefaultInstance() {
-        ItemStack stack = super.getDefaultInstance();;
+        ItemStack stack = super.getDefaultInstance();
         AlchemyPotionUtil.setPotion(stack, WizardsRebornAlchemyPotions.WATER);
         return stack;
     }
@@ -98,16 +98,14 @@ public class AlchemyPotionItem extends PlacedItem {
             if (!player.getAbilities().instabuild) {
                 setUses(stack, getUses(stack) + 1);
                 if (getUses(stack) >= maxUses) {
-                    if (player == null || !player.getAbilities().instabuild) {
+                    if (!player.getAbilities().instabuild) {
                         stack.shrink(1);
 
                         if (stack.isEmpty()) {
                             return new ItemStack(bottle);
                         }
 
-                        if (player != null) {
-                            player.getInventory().add(new ItemStack(bottle));
-                        }
+                        player.getInventory().add(new ItemStack(bottle));
                     }
                 }
             }
@@ -144,13 +142,13 @@ public class AlchemyPotionItem extends PlacedItem {
     }
 
     @Override
-    public int getUseDuration(ItemStack pStack) {
+    public int getUseDuration(ItemStack stack) {
         return 32;
     }
 
     @OnlyIn(Dist.CLIENT)
     @Override
-    public UseAnim getUseAnimation(ItemStack pStack) {
+    public UseAnim getUseAnimation(ItemStack stack) {
         return UseAnim.DRINK;
     }
 
@@ -208,7 +206,7 @@ public class AlchemyPotionItem extends PlacedItem {
                             if (!player.getAbilities().instabuild) {
                                 setUses(stack, getUses(stack) + (added / 250));
                                 if (getUses(stack) >= vial.maxUses) {
-                                    if (player == null || !player.getAbilities().instabuild) {
+                                    if (!player.getAbilities().instabuild) {
                                         stack.shrink(1);
 
                                         if (stack.isEmpty()) {

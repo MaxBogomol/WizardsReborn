@@ -23,7 +23,7 @@ public class ArcanumAmuletItem extends BaseWissenCurioItem {
 
     private static final ResourceLocation AMULET_TEXTURE = new ResourceLocation(WizardsReborn.MOD_ID,"textures/entity/curio/arcanum_amulet.png");
 
-    public ArcanumAmuletItem(Item.Properties properties) {
+    public ArcanumAmuletItem(Properties properties) {
         super(properties);
     }
 

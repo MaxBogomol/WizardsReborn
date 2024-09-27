@@ -20,8 +20,9 @@ import net.minecraftforge.api.distmarker.OnlyIn;
 import java.awt.*;
 
 public class SaltLanternItem extends BlockItem implements IGuiParticleItem {
-    public SaltLanternItem(Block blockIn, Properties properties) {
-        super(blockIn, properties);
+
+    public SaltLanternItem(Block block, Properties properties) {
+        super(block, properties);
     }
 
     @Override

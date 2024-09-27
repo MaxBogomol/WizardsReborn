@@ -1,5 +1,6 @@
 package mod.maxbogomol.wizards_reborn.common.item.equipment;
 
+import mod.maxbogomol.fluffy_fur.common.block.entity.BlockSimpleInventory;
 import mod.maxbogomol.fluffy_fur.common.item.FuelItem;
 import mod.maxbogomol.wizards_reborn.common.recipe.MortarRecipe;
 import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornRecipes;
@@ -10,7 +11,6 @@ import net.minecraft.stats.Stats;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResultHolder;
 import net.minecraft.world.SimpleContainer;
-import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
@@ -40,20 +40,14 @@ public class MortarItem extends FuelItem {
 
             SimpleContainer inv = new SimpleContainer(1);
             inv.setItem(0, offStack);
-            Optional<MortarRecipe> recipe = level.getRecipeManager()
-                    .getRecipeFor(WizardsRebornRecipes.MORTAR.get(), inv, level);
+            Optional<MortarRecipe> recipe = level.getRecipeManager().getRecipeFor(WizardsRebornRecipes.MORTAR.get(), inv, level);
 
             if (recipe.isPresent()) {
                 if (recipe.get().getResultItem(RegistryAccess.EMPTY) != null) {
                     if (!player.isCreative()) {
-                        offStack.setCount(offStack.getCount() - 1);
+                        offStack.shrink(1);
                     }
-
-                    if (player.getInventory().getSlotWithRemainingSpace(recipe.get().getResultItem(RegistryAccess.EMPTY).copy()) != -1 || player.getInventory().getFreeSlot() > -1) {
-                        player.getInventory().add(recipe.get().getResultItem(RegistryAccess.EMPTY).copy());
-                    } else {
-                        level.addFreshEntity(new ItemEntity(level, player.getX(), player.getY() + 0.5F, player.getZ(), recipe.get().getResultItem(RegistryAccess.EMPTY).copy()));
-                    }
+                    BlockSimpleInventory.addPlayerItem(level, player, recipe.get().getResultItem(RegistryAccess.EMPTY).copy());
                     level.playSound(null, player.getX(), player.getY(), player.getZ(), SoundEvents.BONE_MEAL_USE, SoundSource.PLAYERS, 1.0f, 1.0f);
                     player.awardStat(Stats.ITEM_USED.get(this));
 

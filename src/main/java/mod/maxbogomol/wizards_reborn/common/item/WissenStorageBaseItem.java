@@ -25,8 +25,8 @@ import java.util.List;
 
 public class WissenStorageBaseItem extends BlockItem implements IWissenItem, ICustomBlockEntityDataItem {
 
-    public WissenStorageBaseItem(Block blockIn, Properties properties) {
-        super(blockIn, properties);
+    public WissenStorageBaseItem(Block block, Properties properties) {
+        super(block, properties);
     }
 
     @Override

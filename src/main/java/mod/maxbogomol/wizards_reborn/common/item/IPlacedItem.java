@@ -9,5 +9,5 @@ import net.minecraftforge.api.distmarker.OnlyIn;
 
 public interface IPlacedItem {
     @OnlyIn(Dist.CLIENT)
-    void renderPlacedItem(ItemStack stack, int rotation, float rotate, PlacedItemsBlockEntity items, float partialTicks, PoseStack ms, MultiBufferSource buffers, int light, int overlay);
+    void renderPlacedItem(ItemStack stack, int rotation, float rotate, PlacedItemsBlockEntity items, float partialTicks, PoseStack poseStack, MultiBufferSource bufferSourceource, int light, int overlay);
 }

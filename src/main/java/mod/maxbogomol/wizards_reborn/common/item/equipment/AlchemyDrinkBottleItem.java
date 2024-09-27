@@ -23,12 +23,12 @@ public class AlchemyDrinkBottleItem extends PlacedItem {
 
     @Override
     @OnlyIn(Dist.CLIENT)
-    public void renderPlacedItem(ItemStack stack, int rotation, float rotate, PlacedItemsBlockEntity items, float partialTicks, PoseStack ms, MultiBufferSource buffers, int light, int overlay) {
-        ms.pushPose();
-        ms.translate(0F, 0.0001F, 0F);
-        ms.mulPose(Axis.YP.rotationDegrees((rotation * -22.5f) + rotate));
-        ms.mulPose(Axis.XP.rotationDegrees(180f));
-        WizardsRebornModels.ALCHEMY_BOTTLE.renderToBuffer(ms, buffers.getBuffer(RenderType.entityCutoutNoCull(BOTTLE_TEXTURE)), light, OverlayTexture.NO_OVERLAY, 1, 1, 1, 1);
-        ms.popPose();
+    public void renderPlacedItem(ItemStack stack, int rotation, float rotate, PlacedItemsBlockEntity items, float partialTicks, PoseStack poseStack, MultiBufferSource bufferSource, int light, int overlay) {
+        poseStack.pushPose();
+        poseStack.translate(0F, 0.0001F, 0F);
+        poseStack.mulPose(Axis.YP.rotationDegrees((rotation * -22.5f) + rotate));
+        poseStack.mulPose(Axis.XP.rotationDegrees(180f));
+        WizardsRebornModels.ALCHEMY_BOTTLE.renderToBuffer(poseStack, bufferSource.getBuffer(RenderType.entityCutoutNoCull(BOTTLE_TEXTURE)), light, OverlayTexture.NO_OVERLAY, 1, 1, 1, 1);
+        poseStack.popPose();
     }
 }

@@ -7,6 +7,7 @@ import mod.maxbogomol.fluffy_fur.client.particle.data.ColorParticleData;
 import mod.maxbogomol.fluffy_fur.client.particle.data.GenericParticleData;
 import mod.maxbogomol.fluffy_fur.client.particle.data.SpinParticleData;
 import mod.maxbogomol.fluffy_fur.client.render.RenderBuilder;
+import mod.maxbogomol.fluffy_fur.common.easing.Easing;
 import mod.maxbogomol.fluffy_fur.common.item.ICustomBlockEntityDataItem;
 import mod.maxbogomol.fluffy_fur.common.item.IGuiParticleItem;
 import mod.maxbogomol.fluffy_fur.common.item.IParticleItem;
@@ -41,15 +42,15 @@ import java.util.List;
 import java.util.Random;
 
 public class CrystalItem extends BlockItem implements IParticleItem, IGuiParticleItem, ICustomBlockEntityDataItem {
+
     private static Random random = new Random();
 
-    public CrystalItem(Block blockIn, Properties properties) {
-        super(blockIn, properties);
+    public CrystalItem(Block block, Properties properties) {
+        super(block, properties);
     }
 
     public CrystalType getType() {
-        if (getBlock() instanceof CrystalBlock) {
-            CrystalBlock block = (CrystalBlock) getBlock();
+        if (getBlock() instanceof CrystalBlock block) {
             return block.type;
         }
 
@@ -57,8 +58,7 @@ public class CrystalItem extends BlockItem implements IParticleItem, IGuiParticl
     }
 
     public PolishingType getPolishing() {
-        if (getBlock() instanceof CrystalBlock) {
-            CrystalBlock block = (CrystalBlock) getBlock();
+        if (getBlock() instanceof CrystalBlock block) {
             return block.polishing;
         }
 
@@ -67,17 +67,17 @@ public class CrystalItem extends BlockItem implements IParticleItem, IGuiParticl
 
     public static int getStatLevel(ItemStack stack, CrystalStat stat) {
         CompoundTag nbt = stack.getOrCreateTag();
-        int statlevel = 0;
+        int statLevel = 0;
         if (nbt.contains(stat.getId())) {
-            statlevel = nbt.getInt(stat.getId());
+            statLevel = nbt.getInt(stat.getId());
         }
-        return statlevel;
+        return statLevel;
     }
 
     public static ItemStack creativeTabRandomStats(Item item) {
         ItemStack stack = item.getDefaultInstance();
         CompoundTag nbt = stack.getOrCreateTag();
-        nbt.putBoolean("random_stats", true);
+        nbt.putBoolean("randomStats", true);
         stack.setTag(nbt);
         return stack;
     }
@@ -86,8 +86,8 @@ public class CrystalItem extends BlockItem implements IParticleItem, IGuiParticl
     public void inventoryTick(ItemStack stack, Level level, Entity entity, int slot, boolean isSelected) {
         if (!level.isClientSide()) {
             CompoundTag nbt = stack.getOrCreateTag();
-            if (nbt.contains("random_stats")) {
-                nbt.remove("random_stats");
+            if (nbt.contains("randomStats")) {
+                nbt.remove("randomStats");
                 CrystalUtil.createCrystalItemStats(stack, getType(), level, 6);
                 stack.setTag(nbt);
             }
@@ -100,13 +100,13 @@ public class CrystalItem extends BlockItem implements IParticleItem, IGuiParticl
         CrystalType type = getType();
         Color color = type.getColor();
         for (CrystalStat stat : type.getStats()) {
-            int statlevel = getStatLevel(stack, stat);
-            int red = (int) Mth.lerp((float) statlevel / stat.getMaxLevel(), Color.GRAY.getRed(), color.getRed());
-            int green = (int) Mth.lerp((float) statlevel / stat.getMaxLevel(), Color.GRAY.getGreen(), color.getGreen());
-            int blue = (int) Mth.lerp((float) statlevel / stat.getMaxLevel(), Color.GRAY.getBlue(), color.getBlue());
+            int statLevel = getStatLevel(stack, stat);
+            int red = (int) Mth.lerp((float) statLevel / stat.getMaxLevel(), Color.GRAY.getRed(), color.getRed());
+            int green = (int) Mth.lerp((float) statLevel / stat.getMaxLevel(), Color.GRAY.getGreen(), color.getGreen());
+            int blue = (int) Mth.lerp((float) statLevel / stat.getMaxLevel(), Color.GRAY.getBlue(), color.getBlue());
 
             int packColor = ColorUtil.packColor(255, red, green, blue);
-            list.add(Component.translatable(stat.getTranslatedName()).append(": " + statlevel).withStyle(Style.EMPTY.withColor(packColor)));
+            list.add(Component.translatable(stat.getTranslatedName()).append(": " + statLevel).withStyle(Style.EMPTY.withColor(packColor)));
         }
     }
 
@@ -126,13 +126,13 @@ public class CrystalItem extends BlockItem implements IParticleItem, IGuiParticl
         CrystalType type = getType();
         PolishingType polishing = getPolishing();
 
-        if (random.nextFloat() < 0.01) {
+        if (random.nextFloat() < 0.05) {
             Color color = type.getColor();
             ParticleBuilder.create(FluffyFurParticles.SPARKLE)
                     .setColorData(ColorParticleData.create(color).build())
-                    .setTransparencyData(GenericParticleData.create(0.5f, 0).build())
-                    .setScaleData(GenericParticleData.create(0.1f, 0).build())
-                    .setSpinData(SpinParticleData.create().randomSpin(0.5f).build())
+                    .setTransparencyData(GenericParticleData.create(0.4f, 0.5f, 0).setEasing(Easing.QUINTIC_IN_OUT).build())
+                    .setScaleData(GenericParticleData.create(0.05f, 0.1f, 0).setEasing(Easing.QUINTIC_IN_OUT).build())
+                    .setSpinData(SpinParticleData.create().randomOffset().randomSpin(0.5f).build())
                     .setLifetime(30)
                     .randomVelocity(0.01f)
                     .randomOffset(0.125f)
@@ -140,13 +140,13 @@ public class CrystalItem extends BlockItem implements IParticleItem, IGuiParticl
         }
 
         if (polishing.hasParticle()) {
-            if (random.nextFloat() < 0.01) {
+            if (random.nextFloat() < 0.03) {
                 Color color = polishing.getColor();
                 ParticleBuilder.create(FluffyFurParticles.SPARKLE)
                         .setColorData(ColorParticleData.create(color).build())
-                        .setTransparencyData(GenericParticleData.create(0.5f, 0).build())
-                        .setScaleData(GenericParticleData.create(0.1f, 0).build())
-                        .setSpinData(SpinParticleData.create().randomSpin(0.5f).build())
+                        .setTransparencyData(GenericParticleData.create(0.4f, 0.5f, 0).setEasing(Easing.QUINTIC_IN_OUT).build())
+                        .setScaleData(GenericParticleData.create(0.05f, 0.1f, 0).setEasing(Easing.QUINTIC_IN_OUT).build())
+                        .setSpinData(SpinParticleData.create().randomOffset().randomSpin(0.5f).build())
                         .setLifetime(30)
                         .randomVelocity(0.01f)
                         .randomOffset(0.125f)

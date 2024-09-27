@@ -30,6 +30,7 @@ import net.minecraftforge.client.extensions.common.IClientItemExtensions;
 import net.minecraftforge.common.extensions.IForgeItem;
 
 public class InventorWizardArmorItem extends ArcaneArmorItem implements IForgeItem {
+
     public InventorWizardArmorItem(ArmorMaterial material, ArmorItem.Type type, Properties properties) {
         super(material, type, properties);
         arcaneEnchantmentTypes.add(ArcaneEnchantmentType.MAGIC_ARMOR);

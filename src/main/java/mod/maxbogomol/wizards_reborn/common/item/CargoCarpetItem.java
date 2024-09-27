@@ -54,7 +54,7 @@ public class CargoCarpetItem extends Item {
     }
 
     @Override
-    public InteractionResult interactLivingEntity(ItemStack stack, Player player, LivingEntity target, InteractionHand hnd) {
+    public InteractionResult interactLivingEntity(ItemStack stack, Player player, LivingEntity target, InteractionHand hand) {
         if (target instanceof SniffaloEntity sniffalo && target.isAlive()) {
             if (sniffalo.isSaddled()) {
                 sniffalo.setCarpet(stack.copy());
