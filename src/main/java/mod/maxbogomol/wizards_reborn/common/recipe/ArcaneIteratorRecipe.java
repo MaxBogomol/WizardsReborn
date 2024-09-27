@@ -55,12 +55,12 @@ public class ArcaneIteratorRecipe implements Recipe<Container> {
     }
 
     @Override
-    public boolean matches(Container inv, Level levelIn) {
+    public boolean matches(Container container, Level level) {
         boolean hasEnchantment = (getResultItem(RegistryAccess.EMPTY).isEmpty() && (hasRecipeEnchantment() || hasRecipeArcaneEnchantment()));
-        return matches(inputs, inv, hasEnchantment);
+        return matches(inputs, container, hasEnchantment);
     }
 
-    public static boolean matches(List<Ingredient> inputs, Container inv, boolean hasEnchantment) {
+    public static boolean matches(List<Ingredient> inputs, Container container, boolean hasEnchantment) {
         List<Ingredient> ingredientsMissing = new ArrayList<>(inputs);
 
         int u = 0;
@@ -68,8 +68,8 @@ public class ArcaneIteratorRecipe implements Recipe<Container> {
             u = 1;
         }
 
-        for (int i = u; i < inv.getContainerSize(); i++) {
-            ItemStack input = inv.getItem(i);
+        for (int i = u; i < container.getContainerSize(); i++) {
+            ItemStack input = container.getItem(i);
             if (input.isEmpty()) {
                 break;
             }
@@ -92,7 +92,7 @@ public class ArcaneIteratorRecipe implements Recipe<Container> {
         }
 
         if (!hasEnchantment) {
-            ItemStack stack = inv.getItem(0);
+            ItemStack stack = container.getItem(0);
             if (stack.isEmpty()) {
                 return false;
             }
@@ -106,7 +106,7 @@ public class ArcaneIteratorRecipe implements Recipe<Container> {
     }
 
     @Override
-    public ItemStack assemble(Container inv, RegistryAccess pRegistryAccess) {
+    public ItemStack assemble(Container container, RegistryAccess registryAccess) {
         return output;
     }
 
@@ -265,7 +265,7 @@ public class ArcaneIteratorRecipe implements Recipe<Container> {
     }
 
     @Override
-    public ItemStack getResultItem(RegistryAccess pRegistryAccess) {
+    public ItemStack getResultItem(RegistryAccess registryAccess) {
         return output;
     }
 

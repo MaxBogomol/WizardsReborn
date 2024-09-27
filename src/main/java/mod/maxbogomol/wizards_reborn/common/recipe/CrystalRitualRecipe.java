@@ -40,15 +40,15 @@ public class CrystalRitualRecipe implements Recipe<Container> {
     }
 
     @Override
-    public boolean matches(Container inv, Level levelIn) {
-        return matches(inputs, inv);
+    public boolean matches(Container container, Level level) {
+        return matches(inputs, container);
     }
 
-    public static boolean matches(List<Ingredient> inputs, Container inv) {
+    public static boolean matches(List<Ingredient> inputs, Container container) {
         List<Ingredient> ingredientsMissing = new ArrayList<>(inputs);
 
-        for (int i = 0; i < inv.getContainerSize(); i++) {
-            ItemStack input = inv.getItem(i);
+        for (int i = 0; i < container.getContainerSize(); i++) {
+            ItemStack input = container.getItem(i);
             if (input.isEmpty()) {
                 break;
             }
@@ -74,7 +74,7 @@ public class CrystalRitualRecipe implements Recipe<Container> {
     }
 
     @Override
-    public ItemStack assemble(Container inv, RegistryAccess pRegistryAccess) {
+    public ItemStack assemble(Container container, RegistryAccess registryAccess) {
         return ItemStack.EMPTY;
     }
 
@@ -149,7 +149,7 @@ public class CrystalRitualRecipe implements Recipe<Container> {
     }
 
     @Override
-    public ItemStack getResultItem(RegistryAccess pRegistryAccess) {
+    public ItemStack getResultItem(RegistryAccess registryAccess) {
         return ItemStack.EMPTY;
     }
 

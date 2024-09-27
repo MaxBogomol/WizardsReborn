@@ -47,14 +47,14 @@ public class JewelerTableRecipe implements Recipe<Container> {
     }
 
     @Override
-    public boolean matches(Container inv, Level levelIn) {
-        return matches(inputs, inv);
+    public boolean matches(Container container, Level level) {
+        return matches(inputs, container);
     }
 
-    public static boolean matches(List<Ingredient> inputs, Container inv) {
+    public static boolean matches(List<Ingredient> inputs, Container container) {
         boolean craft = true;
         for (int i = 0; i < 2; i += 1) {
-            if (!inputs.get(i).test(inv.getItem(i))) {
+            if (!inputs.get(i).test(container.getItem(i))) {
                 craft = false;
             }
         }
@@ -63,7 +63,7 @@ public class JewelerTableRecipe implements Recipe<Container> {
     }
 
     @Override
-    public ItemStack assemble(Container inv, RegistryAccess pRegistryAccess) {
+    public ItemStack assemble(Container container, RegistryAccess registryAccess) {
         return output;
     }
 
@@ -152,7 +152,7 @@ public class JewelerTableRecipe implements Recipe<Container> {
     }
 
     @Override
-    public ItemStack getResultItem(RegistryAccess pRegistryAccess) {
+    public ItemStack getResultItem(RegistryAccess registryAccess) {
         return output;
     }
 

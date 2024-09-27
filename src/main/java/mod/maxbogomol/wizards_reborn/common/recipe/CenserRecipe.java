@@ -38,12 +38,12 @@ public class CenserRecipe implements Recipe<Container>  {
     }
 
     @Override
-    public boolean matches(Container inv, Level levelIn) {
-        return input.test(inv.getItem(0));
+    public boolean matches(Container container, Level level) {
+        return input.test(container.getItem(0));
     }
 
     @Override
-    public ItemStack assemble(Container inv, RegistryAccess pRegistryAccess) {
+    public ItemStack assemble(Container container, RegistryAccess registryAccess) {
         return ItemStack.EMPTY;
     }
 
@@ -80,7 +80,7 @@ public class CenserRecipe implements Recipe<Container>  {
     }
 
     @Override
-    public ItemStack getResultItem(RegistryAccess pRegistryAccess) {
+    public ItemStack getResultItem(RegistryAccess registryAccess) {
         return ItemStack.EMPTY;
     }
 

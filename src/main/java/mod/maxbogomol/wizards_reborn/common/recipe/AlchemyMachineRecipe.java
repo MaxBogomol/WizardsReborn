@@ -66,11 +66,11 @@ public class AlchemyMachineRecipe implements Recipe<AlchemyMachineContext> {
         return false;
     }
 
-    public static boolean matches(List<Ingredient> inputs, Container inv) {
+    public static boolean matches(List<Ingredient> inputs, Container container) {
         List<Ingredient> ingredientsMissing = new ArrayList<>(inputs);
         List<ItemStack> items = new ArrayList<>();
         for (int i = 0; i < 6; i++) {
-            ItemStack input = inv.getItem(i);
+            ItemStack input = container.getItem(i);
             if (!input.isEmpty()) {
                 items.add(input);
             }
@@ -97,7 +97,7 @@ public class AlchemyMachineRecipe implements Recipe<AlchemyMachineContext> {
         return ingredientsMissing.isEmpty();
     }
 
-    public boolean fluidMatches(AlchemyMachineContext context, Level pLevel) {
+    public boolean fluidMatches(AlchemyMachineContext context, Level level) {
         HashSet<FluidIngredient> remaining = new HashSet<>();
         remaining.addAll(fluidInputs);
 
@@ -121,7 +121,7 @@ public class AlchemyMachineRecipe implements Recipe<AlchemyMachineContext> {
     }
 
     @Override
-    public ItemStack assemble(AlchemyMachineContext inv, RegistryAccess pRegistryAccess) {
+    public ItemStack assemble(AlchemyMachineContext context, RegistryAccess registryAccess) {
         return output;
     }
 
@@ -270,7 +270,7 @@ public class AlchemyMachineRecipe implements Recipe<AlchemyMachineContext> {
     }
 
     @Override
-    public ItemStack getResultItem(RegistryAccess pRegistryAccess) {
+    public ItemStack getResultItem(RegistryAccess registryAccess) {
         return output;
     }
 
