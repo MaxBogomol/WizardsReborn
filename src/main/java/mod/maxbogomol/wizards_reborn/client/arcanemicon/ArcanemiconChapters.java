@@ -1,5 +1,6 @@
 package mod.maxbogomol.wizards_reborn.client.arcanemicon;
 
+import mod.maxbogomol.fluffy_fur.config.FluffyFurClientConfig;
 import mod.maxbogomol.fluffy_fur.util.IntegrationUtil;
 import mod.maxbogomol.wizards_reborn.WizardsReborn;
 import mod.maxbogomol.wizards_reborn.api.alchemy.AlchemyPotion;
@@ -4114,8 +4115,8 @@ public class ArcanemiconChapters {
                 new TitlePage("wizards_reborn.arcanemicon.page.particles_configs"),
                 new ConfigPage(
                         new ConfigIndexEntry().setIntegerConfig(WizardsRebornClientConfig.WISSEN_RAYS_LIMIT),
-                        new ConfigIndexEntry().setBooleanConfig(mod.maxbogomol.fluffy_fur.client.config.ClientConfig.ITEM_PARTICLE).setSpecConfig(mod.maxbogomol.fluffy_fur.client.config.ClientConfig.SPEC),
-                        new ConfigIndexEntry().setBooleanConfig(mod.maxbogomol.fluffy_fur.client.config.ClientConfig.ITEM_GUI_PARTICLE).setSpecConfig(mod.maxbogomol.fluffy_fur.client.config.ClientConfig.SPEC)
+                        new ConfigIndexEntry().setBooleanConfig(FluffyFurClientConfig.ITEM_PARTICLE).setSpecConfig(FluffyFurClientConfig.SPEC),
+                        new ConfigIndexEntry().setBooleanConfig(FluffyFurClientConfig.ITEM_GUI_PARTICLE).setSpecConfig(FluffyFurClientConfig.SPEC)
                 )
         );
 
