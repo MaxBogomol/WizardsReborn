@@ -9,7 +9,7 @@ import mod.maxbogomol.fluffy_fur.common.network.PositionColorClientPacket;
 import mod.maxbogomol.fluffy_fur.registry.client.FluffyFurParticles;
 import mod.maxbogomol.wizards_reborn.WizardsReborn;
 import mod.maxbogomol.wizards_reborn.client.event.WissenLimitHandler;
-import mod.maxbogomol.wizards_reborn.common.config.Config;
+import mod.maxbogomol.wizards_reborn.config.WizardsRebornConfig;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.world.level.Level;
 import net.minecraftforge.network.NetworkEvent;
@@ -29,7 +29,7 @@ public class WissenTranslatorBurstPacket extends PositionColorClientPacket {
     }
 
     public WissenTranslatorBurstPacket(double x, double y, double z) {
-        super(x, y, z, Config.wissenColorR(), Config.wissenColorG(), Config.wissenColorB(), 1);
+        super(x, y, z, WizardsRebornConfig.wissenColorR(), WizardsRebornConfig.wissenColorG(), WizardsRebornConfig.wissenColorB(), 1);
     }
 
     @Override

@@ -5,7 +5,7 @@ import mod.maxbogomol.wizards_reborn.api.wissen.IWissenItem;
 import mod.maxbogomol.wizards_reborn.api.wissen.IWissenBlockEntity;
 import mod.maxbogomol.wizards_reborn.api.wissen.WissenItemType;
 import mod.maxbogomol.wizards_reborn.api.wissen.WissenItemUtil;
-import mod.maxbogomol.wizards_reborn.client.config.ClientConfig;
+import mod.maxbogomol.wizards_reborn.config.WizardsRebornClientConfig;
 import mod.maxbogomol.wizards_reborn.util.NumericalUtil;
 import net.minecraft.ChatFormatting;
 import net.minecraft.core.BlockPos;
@@ -58,7 +58,7 @@ public class WissenStorageBaseItem extends BlockItem implements IWissenItem, ICu
     @OnlyIn(Dist.CLIENT)
     @Override
     public void appendHoverText(ItemStack stack, Level level, List<Component> list, TooltipFlag flags) {
-        if (ClientConfig.NUMERICAL_WISSEN.get()) {
+        if (WizardsRebornClientConfig.NUMERICAL_WISSEN.get()) {
             WissenItemUtil.existWissen(stack);
             list.add(NumericalUtil.getWissenName(WissenItemUtil.getWissen(stack), getMaxWissen()).copy().withStyle(ChatFormatting.GRAY));
         }

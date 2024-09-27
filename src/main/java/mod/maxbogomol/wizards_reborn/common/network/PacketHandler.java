@@ -83,9 +83,9 @@ public final class PacketHandler {
         ArcanemiconOfferingEffectPacket.register(HANDLER, id++);
         WissenDustBurstPacket.register(HANDLER, id++);
         ArcanumLensBurstPacket.register(HANDLER, id++);
-        HANDLER.registerMessage(id++, SmokePacket.class, SmokePacket::encode, SmokePacket::decode, SmokePacket::handle);
-        HANDLER.registerMessage(id++, InnocentWoodToolsPacket.class, InnocentWoodToolsPacket::encode, InnocentWoodToolsPacket::decode, InnocentWoodToolsPacket::handle);
-        HANDLER.registerMessage(id++, FlowerFertilizerPacket.class, FlowerFertilizerPacket::encode, FlowerFertilizerPacket::decode, FlowerFertilizerPacket::handle);
+        SmokePacket.register(HANDLER, id++);
+        InnocentWoodToolsPacket.register(HANDLER, id++);
+        FlowerFertilizerPacket.register(HANDLER, id++);
 
         HANDLER.registerMessage(id++, KnowledgeUpdatePacket.class, KnowledgeUpdatePacket::encode, KnowledgeUpdatePacket::decode, KnowledgeUpdatePacket::handle);
         HANDLER.registerMessage(id++, KnowledgeToastPacket.class, KnowledgeToastPacket::encode, KnowledgeToastPacket::decode, KnowledgeToastPacket::handle);

@@ -8,9 +8,9 @@ import mod.maxbogomol.fluffy_fur.common.easing.Easing;
 import mod.maxbogomol.fluffy_fur.common.network.ClientPacket;
 import mod.maxbogomol.fluffy_fur.registry.client.FluffyFurParticles;
 import mod.maxbogomol.wizards_reborn.WizardsReborn;
-import mod.maxbogomol.wizards_reborn.client.config.ClientConfig;
+import mod.maxbogomol.wizards_reborn.config.WizardsRebornClientConfig;
 import mod.maxbogomol.wizards_reborn.client.event.WissenLimitHandler;
-import mod.maxbogomol.wizards_reborn.common.config.Config;
+import mod.maxbogomol.wizards_reborn.config.WizardsRebornConfig;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.world.level.Level;
 import net.minecraftforge.network.NetworkEvent;
@@ -55,9 +55,9 @@ public class WissenSendEffectPacket extends ClientPacket {
         this.posToY = posToY;
         this.posToZ = posToZ;
 
-        this.colorR = Config.wissenColorR();
-        this.colorG = Config.wissenColorG();
-        this.colorB = Config.wissenColorB();
+        this.colorR = WizardsRebornConfig.wissenColorR();
+        this.colorG = WizardsRebornConfig.wissenColorG();
+        this.colorB = WizardsRebornConfig.wissenColorB();
         this.particlePerBlock = 4;
     }
 
@@ -85,9 +85,9 @@ public class WissenSendEffectPacket extends ClientPacket {
         this.posToY = posToY;
         this.posToZ = posToZ;
 
-        this.colorR = Config.wissenColorR();
-        this.colorG = Config.wissenColorG();
-        this.colorB = Config.wissenColorB();
+        this.colorR = WizardsRebornConfig.wissenColorR();
+        this.colorG = WizardsRebornConfig.wissenColorG();
+        this.colorB = WizardsRebornConfig.wissenColorB();
         this.particlePerBlock = particlePerBlock;
     }
 
@@ -105,8 +105,8 @@ public class WissenSendEffectPacket extends ClientPacket {
 
         WissenLimitHandler.wissenCount++;
 
-        if (WissenLimitHandler.wissenCount > ClientConfig.WISSEN_RAYS_LIMIT.get()) {
-            WissenLimitHandler.wissenCount = ClientConfig.WISSEN_RAYS_LIMIT.get();
+        if (WissenLimitHandler.wissenCount > WizardsRebornClientConfig.WISSEN_RAYS_LIMIT.get()) {
+            WissenLimitHandler.wissenCount = WizardsRebornClientConfig.WISSEN_RAYS_LIMIT.get();
         }
 
         int wissenCount = WissenLimitHandler.wissenCountOld;
@@ -133,7 +133,7 @@ public class WissenSendEffectPacket extends ClientPacket {
                 .randomVelocity(0.02f);
 
         for (int i = 0; i < particlePerBlock; i++) {
-            if (random.nextFloat() < (0.45f * (1f - ((float) wissenCount / ClientConfig.WISSEN_RAYS_LIMIT.get()))) + 0.05f) {
+            if (random.nextFloat() < (0.45f * (1f - ((float) wissenCount / WizardsRebornClientConfig.WISSEN_RAYS_LIMIT.get()))) + 0.05f) {
                 wispBuilder.spawn(level, posFromX - (x * i), posFromY - (y * i), posFromZ - (z * i));
                 if (random.nextFloat() < 0.1) {
                     sparkleBuilder.spawn(level, posFromX - (x * i), posFromY - (y * i), posFromZ - (z * i));

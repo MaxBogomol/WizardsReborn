@@ -13,7 +13,7 @@ import mod.maxbogomol.wizards_reborn.client.arcanemicon.integration.CrushingPage
 import mod.maxbogomol.wizards_reborn.client.arcanemicon.page.*;
 import mod.maxbogomol.wizards_reborn.client.arcanemicon.recipe.*;
 import mod.maxbogomol.wizards_reborn.client.arcanemicon.titledpage.*;
-import mod.maxbogomol.wizards_reborn.client.config.ClientConfig;
+import mod.maxbogomol.wizards_reborn.config.WizardsRebornClientConfig;
 import mod.maxbogomol.wizards_reborn.integration.common.create.CreateIntegration;
 import mod.maxbogomol.wizards_reborn.integration.common.farmersdelight.FarmersDelightIntegration;
 import mod.maxbogomol.wizards_reborn.common.item.equipment.ArcaneWandItem;
@@ -4103,9 +4103,9 @@ public class ArcanemiconChapters {
                 "wizards_reborn.arcanemicon.chapter.animations_configs",
                 new TitlePage("wizards_reborn.arcanemicon.page.animations_configs"),
                 new ConfigPage(
-                        new ConfigIndexEntry().setBooleanConfig(ClientConfig.SPELLS_ANIMATIONS),
-                        new ConfigIndexEntry().setBooleanConfig(ClientConfig.SPELLS_ITEM_ANIMATIONS),
-                        new ConfigIndexEntry().setBooleanConfig(ClientConfig.SPELLS_FIRST_PERSON_ITEM_ANIMATIONS)
+                        new ConfigIndexEntry().setBooleanConfig(WizardsRebornClientConfig.SPELLS_ANIMATIONS),
+                        new ConfigIndexEntry().setBooleanConfig(WizardsRebornClientConfig.SPELLS_ITEM_ANIMATIONS),
+                        new ConfigIndexEntry().setBooleanConfig(WizardsRebornClientConfig.SPELLS_FIRST_PERSON_ITEM_ANIMATIONS)
                 )
         );
 
@@ -4113,7 +4113,7 @@ public class ArcanemiconChapters {
                 "wizards_reborn.arcanemicon.chapter.particles_configs",
                 new TitlePage("wizards_reborn.arcanemicon.page.particles_configs"),
                 new ConfigPage(
-                        new ConfigIndexEntry().setIntegerConfig(ClientConfig.WISSEN_RAYS_LIMIT),
+                        new ConfigIndexEntry().setIntegerConfig(WizardsRebornClientConfig.WISSEN_RAYS_LIMIT),
                         new ConfigIndexEntry().setBooleanConfig(mod.maxbogomol.fluffy_fur.client.config.ClientConfig.ITEM_PARTICLE).setSpecConfig(mod.maxbogomol.fluffy_fur.client.config.ClientConfig.SPEC),
                         new ConfigIndexEntry().setBooleanConfig(mod.maxbogomol.fluffy_fur.client.config.ClientConfig.ITEM_GUI_PARTICLE).setSpecConfig(mod.maxbogomol.fluffy_fur.client.config.ClientConfig.SPEC)
                 )
@@ -4132,15 +4132,15 @@ public class ArcanemiconChapters {
                 "wizards_reborn.arcanemicon.chapter.numerical_configs",
                 new TitlePage("wizards_reborn.arcanemicon.page.numerical_configs"),
                 new ConfigPage(
-                        new ConfigIndexEntry().setBooleanConfig(ClientConfig.NUMERICAL_WISSEN),
-                        new ConfigIndexEntry().setBooleanConfig(ClientConfig.NUMERICAL_COOLDOWN),
-                        new ConfigIndexEntry().setBooleanConfig(ClientConfig.SHOW_LIGHT_NAME),
-                        new ConfigIndexEntry().setBooleanConfig(ClientConfig.NUMERICAL_EXPERIENCE),
-                        new ConfigIndexEntry().setBooleanConfig(ClientConfig.NUMERICAL_HEAT),
-                        new ConfigIndexEntry().setBooleanConfig(ClientConfig.NUMERICAL_FLUID)
+                        new ConfigIndexEntry().setBooleanConfig(WizardsRebornClientConfig.NUMERICAL_WISSEN),
+                        new ConfigIndexEntry().setBooleanConfig(WizardsRebornClientConfig.NUMERICAL_COOLDOWN),
+                        new ConfigIndexEntry().setBooleanConfig(WizardsRebornClientConfig.SHOW_LIGHT_NAME),
+                        new ConfigIndexEntry().setBooleanConfig(WizardsRebornClientConfig.NUMERICAL_EXPERIENCE),
+                        new ConfigIndexEntry().setBooleanConfig(WizardsRebornClientConfig.NUMERICAL_HEAT),
+                        new ConfigIndexEntry().setBooleanConfig(WizardsRebornClientConfig.NUMERICAL_FLUID)
                 ),
                 new ConfigPage(
-                        new ConfigIndexEntry().setBooleanConfig(ClientConfig.NUMERICAL_STEAM)
+                        new ConfigIndexEntry().setBooleanConfig(WizardsRebornClientConfig.NUMERICAL_STEAM)
                 )
         );
 
@@ -4148,17 +4148,17 @@ public class ArcanemiconChapters {
                 "wizards_reborn.arcanemicon.chapter.arcanemicon_configs",
                 new TitlePage("wizards_reborn.arcanemicon.page.arcanemicon_configs"),
                 new ConfigPage(
-                        new ConfigIndexEntry().setBooleanConfig(ClientConfig.RESEARCH_HARDMODE),
-                        new ConfigIndexEntry().setBooleanConfig(ClientConfig.OLD_RESEARCH_MONOGRAM_OUTLINE),
-                        new ConfigIndexEntry().setBooleanConfig(ClientConfig.BRIGHT_RESEARCH_MONOGRAM_OUTLINE),
-                        new ConfigIndexEntry().setBooleanConfig(ClientConfig.RESEARCH_MONOGRAM_CONNECTS),
-                        new ConfigIndexEntry().setBooleanConfig(ClientConfig.MONOGRAM_GLOW),
-                        new ConfigIndexEntry().setBooleanConfig(ClientConfig.MONOGRAM_GLOW_COLOR)
+                        new ConfigIndexEntry().setBooleanConfig(WizardsRebornClientConfig.RESEARCH_HARDMODE),
+                        new ConfigIndexEntry().setBooleanConfig(WizardsRebornClientConfig.OLD_RESEARCH_MONOGRAM_OUTLINE),
+                        new ConfigIndexEntry().setBooleanConfig(WizardsRebornClientConfig.BRIGHT_RESEARCH_MONOGRAM_OUTLINE),
+                        new ConfigIndexEntry().setBooleanConfig(WizardsRebornClientConfig.RESEARCH_MONOGRAM_CONNECTS),
+                        new ConfigIndexEntry().setBooleanConfig(WizardsRebornClientConfig.MONOGRAM_GLOW),
+                        new ConfigIndexEntry().setBooleanConfig(WizardsRebornClientConfig.MONOGRAM_GLOW_COLOR)
                 ),
                 new ConfigPage(
-                        new ConfigIndexEntry().setBooleanConfig(ClientConfig.MONOGRAM_COLOR),
-                        new ConfigIndexEntry().setBooleanConfig(ClientConfig.MONOGRAM_RAYS),
-                        new ConfigIndexEntry().setBooleanConfig(ClientConfig.CONFIG_CENTER)
+                        new ConfigIndexEntry().setBooleanConfig(WizardsRebornClientConfig.MONOGRAM_COLOR),
+                        new ConfigIndexEntry().setBooleanConfig(WizardsRebornClientConfig.MONOGRAM_RAYS),
+                        new ConfigIndexEntry().setBooleanConfig(WizardsRebornClientConfig.CONFIG_CENTER)
                 )
         );
 
@@ -4166,27 +4166,27 @@ public class ArcanemiconChapters {
                 "wizards_reborn.arcanemicon.chapter.arcane_wand_overlay_configs",
                 new TitlePage("wizards_reborn.arcanemicon.page.arcane_wand_overlay_configs"),
                 new ConfigPage(
-                        new ConfigIndexEntry().setBooleanConfig(ClientConfig.ARCANE_WAND_OVERLAY_UP),
-                        new ConfigIndexEntry().setBooleanConfig(ClientConfig.ARCANE_WAND_OVERLAY_RIGHT),
-                        new ConfigIndexEntry().setBooleanConfig(ClientConfig.ARCANE_WAND_OVERLAY_SIDE_HUD),
-                        new ConfigIndexEntry().setBooleanConfig(ClientConfig.ARCANE_WAND_OVERLAY_SIDE_BAR),
-                        new ConfigIndexEntry().setBooleanConfig(ClientConfig.ARCANE_WAND_OVERLAY_HORIZONTAL_BAR),
-                        new ConfigIndexEntry().setIntegerConfig(ClientConfig.ARCANE_WAND_OVERLAY_X_OFFSET)
+                        new ConfigIndexEntry().setBooleanConfig(WizardsRebornClientConfig.ARCANE_WAND_OVERLAY_UP),
+                        new ConfigIndexEntry().setBooleanConfig(WizardsRebornClientConfig.ARCANE_WAND_OVERLAY_RIGHT),
+                        new ConfigIndexEntry().setBooleanConfig(WizardsRebornClientConfig.ARCANE_WAND_OVERLAY_SIDE_HUD),
+                        new ConfigIndexEntry().setBooleanConfig(WizardsRebornClientConfig.ARCANE_WAND_OVERLAY_SIDE_BAR),
+                        new ConfigIndexEntry().setBooleanConfig(WizardsRebornClientConfig.ARCANE_WAND_OVERLAY_HORIZONTAL_BAR),
+                        new ConfigIndexEntry().setIntegerConfig(WizardsRebornClientConfig.ARCANE_WAND_OVERLAY_X_OFFSET)
                 ),
                 new ConfigPage(
-                        new ConfigIndexEntry().setIntegerConfig(ClientConfig.ARCANE_WAND_OVERLAY_Y_OFFSET),
-                        new ConfigIndexEntry().setIntegerConfig(ClientConfig.ARCANE_WAND_OVERLAY_SECOND_X_OFFSET),
-                        new ConfigIndexEntry().setIntegerConfig(ClientConfig.ARCANE_WAND_OVERLAY_SECOND_Y_OFFSET),
-                        new ConfigIndexEntry().setIntegerConfig(ClientConfig.ARCANE_WAND_OVERLAY_BAR_X_OFFSET),
-                        new ConfigIndexEntry().setIntegerConfig(ClientConfig.ARCANE_WAND_OVERLAY_BAR_Y_OFFSET),
-                        new ConfigIndexEntry().setBooleanConfig(ClientConfig.ARCANE_WAND_OVERLAY_SECOND_HUD_FREE)
+                        new ConfigIndexEntry().setIntegerConfig(WizardsRebornClientConfig.ARCANE_WAND_OVERLAY_Y_OFFSET),
+                        new ConfigIndexEntry().setIntegerConfig(WizardsRebornClientConfig.ARCANE_WAND_OVERLAY_SECOND_X_OFFSET),
+                        new ConfigIndexEntry().setIntegerConfig(WizardsRebornClientConfig.ARCANE_WAND_OVERLAY_SECOND_Y_OFFSET),
+                        new ConfigIndexEntry().setIntegerConfig(WizardsRebornClientConfig.ARCANE_WAND_OVERLAY_BAR_X_OFFSET),
+                        new ConfigIndexEntry().setIntegerConfig(WizardsRebornClientConfig.ARCANE_WAND_OVERLAY_BAR_Y_OFFSET),
+                        new ConfigIndexEntry().setBooleanConfig(WizardsRebornClientConfig.ARCANE_WAND_OVERLAY_SECOND_HUD_FREE)
                 ),
                 new ConfigPage(
-                        new ConfigIndexEntry().setBooleanConfig(ClientConfig.ARCANE_WAND_OVERLAY_BAR_FREE),
-                        new ConfigIndexEntry().setBooleanConfig(ClientConfig.ARCANE_WAND_OVERLAY_COOLDOWN_TEXT),
-                        new ConfigIndexEntry().setBooleanConfig(ClientConfig.ARCANE_WAND_OVERLAY_WISSEN_TEXT),
-                        new ConfigIndexEntry().setBooleanConfig(ClientConfig.ARCANE_WAND_OVERLAY_REVERSE_BAR),
-                        new ConfigIndexEntry().setBooleanConfig(ClientConfig.ARCANE_WAND_OVERLAY_SHOW_EMPTY)
+                        new ConfigIndexEntry().setBooleanConfig(WizardsRebornClientConfig.ARCANE_WAND_OVERLAY_BAR_FREE),
+                        new ConfigIndexEntry().setBooleanConfig(WizardsRebornClientConfig.ARCANE_WAND_OVERLAY_COOLDOWN_TEXT),
+                        new ConfigIndexEntry().setBooleanConfig(WizardsRebornClientConfig.ARCANE_WAND_OVERLAY_WISSEN_TEXT),
+                        new ConfigIndexEntry().setBooleanConfig(WizardsRebornClientConfig.ARCANE_WAND_OVERLAY_REVERSE_BAR),
+                        new ConfigIndexEntry().setBooleanConfig(WizardsRebornClientConfig.ARCANE_WAND_OVERLAY_SHOW_EMPTY)
                 )
         );
 

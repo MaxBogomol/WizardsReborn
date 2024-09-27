@@ -29,6 +29,7 @@ import java.util.List;
 import java.util.Map;
 
 public class ThrowArcaneEnchantment extends ArcaneEnchantment {
+
     public static ScytheThrowItemAnimation animation = new ScytheThrowItemAnimation();
 
     public ThrowArcaneEnchantment(String id, int maxLevel) {

@@ -10,7 +10,7 @@ import mod.maxbogomol.fluffy_fur.common.easing.Easing;
 import mod.maxbogomol.fluffy_fur.registry.client.FluffyFurParticles;
 import mod.maxbogomol.wizards_reborn.WizardsReborn;
 import mod.maxbogomol.wizards_reborn.api.wissen.*;
-import mod.maxbogomol.wizards_reborn.common.config.Config;
+import mod.maxbogomol.wizards_reborn.config.WizardsRebornConfig;
 import mod.maxbogomol.wizards_reborn.common.network.PacketHandler;
 import mod.maxbogomol.wizards_reborn.common.network.block.WissenAltarBurstPacket;
 import mod.maxbogomol.wizards_reborn.common.network.block.WissenAltarSendPacket;
@@ -135,7 +135,7 @@ public class WissenAltarBlockEntity extends ExposedBlockSimpleInventory implemen
             if (getWissen() > 0) {
                 if (random.nextFloat() < 0.5) {
                     ParticleBuilder.create(FluffyFurParticles.WISP)
-                            .setColorData(ColorParticleData.create(Config.wissenColorR(), Config.wissenColorG(), Config.wissenColorB()).build())
+                            .setColorData(ColorParticleData.create(WizardsRebornConfig.wissenColorR(), WizardsRebornConfig.wissenColorG(), WizardsRebornConfig.wissenColorB()).build())
                             .setTransparencyData(GenericParticleData.create(0.25f, 0).build())
                             .setScaleData(GenericParticleData.create(0.3f * getStage(), 0).build())
                             .setLifetime(20)
@@ -144,7 +144,7 @@ public class WissenAltarBlockEntity extends ExposedBlockSimpleInventory implemen
                 }
                 if (random.nextFloat() < 0.1) {
                     ParticleBuilder.create(random.nextBoolean() ? FluffyFurParticles.SQUARE : FluffyFurParticles.SPARKLE)
-                            .setColorData(ColorParticleData.create(Config.wissenColorR(), Config.wissenColorG(), Config.wissenColorB()).build())
+                            .setColorData(ColorParticleData.create(WizardsRebornConfig.wissenColorR(), WizardsRebornConfig.wissenColorG(), WizardsRebornConfig.wissenColorB()).build())
                             .setTransparencyData(GenericParticleData.create(0.25f, 0).build())
                             .setScaleData(GenericParticleData.create(0.05f * getStage(), 0.1f * getStage(), 0).setEasing(Easing.QUINTIC_IN_OUT).build())
                             .setSpinData(SpinParticleData.create().randomOffset().randomSpin(0.5f).build())
@@ -157,7 +157,7 @@ public class WissenAltarBlockEntity extends ExposedBlockSimpleInventory implemen
             if (wissenInItem > 0 && getWissen() < getMaxWissen()) {
                 if (random.nextFloat() < 0.2) {
                     ParticleBuilder.create(random.nextBoolean() ? FluffyFurParticles.SQUARE : FluffyFurParticles.SPARKLE)
-                            .setColorData(ColorParticleData.create(Config.wissenColorR(), Config.wissenColorG(), Config.wissenColorB()).build())
+                            .setColorData(ColorParticleData.create(WizardsRebornConfig.wissenColorR(), WizardsRebornConfig.wissenColorG(), WizardsRebornConfig.wissenColorB()).build())
                             .setTransparencyData(GenericParticleData.create(0.25f, 0).build())
                             .setScaleData(GenericParticleData.create(0.05f * getStage(), 0.1f * getStage(), 0).setEasing(Easing.QUINTIC_IN_OUT).build())
                             .setSpinData(SpinParticleData.create().randomOffset().randomSpin(0.5f).build())

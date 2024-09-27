@@ -7,7 +7,7 @@ import mod.maxbogomol.fluffy_fur.client.particle.data.SpinParticleData;
 import mod.maxbogomol.fluffy_fur.common.block.entity.TickableBlockEntity;
 import mod.maxbogomol.fluffy_fur.registry.client.FluffyFurParticles;
 import mod.maxbogomol.wizards_reborn.api.crystalritual.IGrowableCrystal;
-import mod.maxbogomol.wizards_reborn.common.config.Config;
+import mod.maxbogomol.wizards_reborn.config.WizardsRebornConfig;
 import mod.maxbogomol.wizards_reborn.common.network.PacketHandler;
 import mod.maxbogomol.wizards_reborn.common.network.block.CrystalGrowthBreakPacket;
 import net.minecraft.core.BlockPos;
@@ -194,7 +194,7 @@ public class ArcanumGrowthBlock extends Block implements EntityBlock, SimpleWate
             if (growable.getGrowingPower() > 0) {
                 if (random.nextFloat() < 0.1f * growable.getGrowingPower()) {
                     ParticleBuilder.create(FluffyFurParticles.SPARKLE)
-                            .setColorData(ColorParticleData.create(Config.wissenColorR(), Config.wissenColorG(), Config.wissenColorB()).build())
+                            .setColorData(ColorParticleData.create(WizardsRebornConfig.wissenColorR(), WizardsRebornConfig.wissenColorG(), WizardsRebornConfig.wissenColorB()).build())
                             .setTransparencyData(GenericParticleData.create(0.5f, 0).build())
                             .setScaleData(GenericParticleData.create(0.1f, 0).build())
                             .setSpinData(SpinParticleData.create().randomSpin(0.5f).build())
@@ -210,7 +210,7 @@ public class ArcanumGrowthBlock extends Block implements EntityBlock, SimpleWate
     @Override
     public void onRemove(@Nonnull BlockState state, @Nonnull Level level, @Nonnull BlockPos pos, @Nonnull BlockState newState, boolean isMoving) {
         if (state.getBlock() != newState.getBlock()) {
-            PacketHandler.sendToTracking(level, pos, new CrystalGrowthBreakPacket(pos, Config.wissenColor(), 5 * (getAge(state) + 1)));
+            PacketHandler.sendToTracking(level, pos, new CrystalGrowthBreakPacket(pos, WizardsRebornConfig.wissenColor(), 5 * (getAge(state) + 1)));
         }
         super.onRemove(state, level, pos, newState, isMoving);
     }

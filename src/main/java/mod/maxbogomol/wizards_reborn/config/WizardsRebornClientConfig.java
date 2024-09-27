@@ -1,9 +1,9 @@
-package mod.maxbogomol.wizards_reborn.client.config;
+package mod.maxbogomol.wizards_reborn.config;
 
 import net.minecraftforge.common.ForgeConfigSpec;
 import org.apache.commons.lang3.tuple.Pair;
 
-public class ClientConfig {
+public class WizardsRebornClientConfig {
     public static ForgeConfigSpec.ConfigValue<Boolean>
             SPELLS_ANIMATIONS, SPELLS_ITEM_ANIMATIONS, SPELLS_FIRST_PERSON_ITEM_ANIMATIONS,
             RESEARCH_HARDMODE, OLD_RESEARCH_MONOGRAM_OUTLINE, BRIGHT_RESEARCH_MONOGRAM_OUTLINE, RESEARCH_MONOGRAM_CONNECTS, MONOGRAM_GLOW, MONOGRAM_GLOW_COLOR, MONOGRAM_COLOR, MONOGRAM_RAYS, CONFIG_CENTER,
@@ -13,7 +13,7 @@ public class ClientConfig {
             WISSEN_RAYS_LIMIT,
             ARCANE_WAND_OVERLAY_X_OFFSET, ARCANE_WAND_OVERLAY_Y_OFFSET, ARCANE_WAND_OVERLAY_SECOND_X_OFFSET, ARCANE_WAND_OVERLAY_SECOND_Y_OFFSET, ARCANE_WAND_OVERLAY_BAR_X_OFFSET, ARCANE_WAND_OVERLAY_BAR_Y_OFFSET;
 
-    public ClientConfig(ForgeConfigSpec.Builder builder) {
+    public WizardsRebornClientConfig(ForgeConfigSpec.Builder builder) {
         builder.comment("Graphics").push("graphics");
 
         builder.comment("Animations").push("animations");
@@ -110,11 +110,11 @@ public class ClientConfig {
         builder.pop();
     }
 
-    public static final ClientConfig INSTANCE;
+    public static final WizardsRebornClientConfig INSTANCE;
     public static final ForgeConfigSpec SPEC;
 
     static {
-        final Pair<ClientConfig, ForgeConfigSpec> specPair = new ForgeConfigSpec.Builder().configure(ClientConfig::new);
+        final Pair<WizardsRebornClientConfig, ForgeConfigSpec> specPair = new ForgeConfigSpec.Builder().configure(WizardsRebornClientConfig::new);
         SPEC = specPair.getRight();
         INSTANCE = specPair.getLeft();
     }

@@ -11,7 +11,7 @@ import mod.maxbogomol.fluffy_fur.registry.client.FluffyFurParticles;
 import mod.maxbogomol.wizards_reborn.WizardsReborn;
 import mod.maxbogomol.wizards_reborn.api.crystalritual.CrystalRitual;
 import mod.maxbogomol.wizards_reborn.api.wissen.*;
-import mod.maxbogomol.wizards_reborn.common.config.Config;
+import mod.maxbogomol.wizards_reborn.config.WizardsRebornConfig;
 import mod.maxbogomol.wizards_reborn.common.network.PacketHandler;
 import mod.maxbogomol.wizards_reborn.common.network.WissenSendEffectPacket;
 import mod.maxbogomol.wizards_reborn.common.network.block.AltarOfDroughtBreakPacket;
@@ -98,7 +98,7 @@ public class AltarOfDroughtBlockEntity extends ExposedBlockSimpleInventory imple
                     if (level.getBlockState(breakPos).is(WizardsRebornBlockTags.ALTAR_OF_DROUGHT_TARGET) && !level.getBlockState(breakPos).getValue(BlockStateProperties.PERSISTENT)) {
                         PacketHandler.sendToTracking(level, getBlockPos(), new AltarOfDroughtBurstPacket(getBlockPos()));
                         PacketHandler.sendToTracking(level, breakPos, new AltarOfDroughtBreakPacket(breakPos));
-                        PacketHandler.sendToTracking(level, getBlockPos(), new WissenSendEffectPacket(getBlockPos().getX() + 0.5F, getBlockPos().getY() + 0.5F, getBlockPos().getZ() + 0.5F, breakPos.getX() + 0.5F, breakPos.getY() + 0.5F, breakPos.getZ() + 0.5F, Config.wissenColorR(), Config.wissenColorG(), Config.wissenColorB(), 25));
+                        PacketHandler.sendToTracking(level, getBlockPos(), new WissenSendEffectPacket(getBlockPos().getX() + 0.5F, getBlockPos().getY() + 0.5F, getBlockPos().getZ() + 0.5F, breakPos.getX() + 0.5F, breakPos.getY() + 0.5F, breakPos.getZ() + 0.5F, WizardsRebornConfig.wissenColorR(), WizardsRebornConfig.wissenColorG(), WizardsRebornConfig.wissenColorB(), 25));
                         level.destroyBlock(breakPos, false);
                         addWissen(25);
                         ticks = 20 + random.nextInt(10);
@@ -116,7 +116,7 @@ public class AltarOfDroughtBlockEntity extends ExposedBlockSimpleInventory imple
             if (getWissen() > 0) {
                 if (random.nextFloat() < 0.5) {
                     ParticleBuilder.create(FluffyFurParticles.WISP)
-                            .setColorData(ColorParticleData.create(Config.wissenColorR(), Config.wissenColorG(), Config.wissenColorB()).build())
+                            .setColorData(ColorParticleData.create(WizardsRebornConfig.wissenColorR(), WizardsRebornConfig.wissenColorG(), WizardsRebornConfig.wissenColorB()).build())
                             .setTransparencyData(GenericParticleData.create(0.25f, 0).build())
                             .setScaleData(GenericParticleData.create(0.3f * getStage(), 0).build())
                             .setLifetime(20)
@@ -125,7 +125,7 @@ public class AltarOfDroughtBlockEntity extends ExposedBlockSimpleInventory imple
                 }
                 if (random.nextFloat() < 0.1) {
                     ParticleBuilder.create(random.nextBoolean() ? FluffyFurParticles.SQUARE : FluffyFurParticles.SPARKLE)
-                            .setColorData(ColorParticleData.create(Config.wissenColorR(), Config.wissenColorG(), Config.wissenColorB()).build())
+                            .setColorData(ColorParticleData.create(WizardsRebornConfig.wissenColorR(), WizardsRebornConfig.wissenColorG(), WizardsRebornConfig.wissenColorB()).build())
                             .setTransparencyData(GenericParticleData.create(0.25f, 0).build())
                             .setScaleData(GenericParticleData.create(0, 0.1f * getStage(), 0).setEasing(Easing.QUINTIC_IN_OUT).build())
                             .setSpinData(SpinParticleData.create().randomOffset().randomSpin(0.5f).build())

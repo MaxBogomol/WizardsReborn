@@ -11,7 +11,7 @@ import mod.maxbogomol.fluffy_fur.common.network.ClientPacket;
 import mod.maxbogomol.fluffy_fur.registry.client.FluffyFurParticles;
 import mod.maxbogomol.fluffy_fur.registry.client.FluffyFurRenderTypes;
 import mod.maxbogomol.wizards_reborn.WizardsReborn;
-import mod.maxbogomol.wizards_reborn.common.config.Config;
+import mod.maxbogomol.wizards_reborn.config.WizardsRebornConfig;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.world.item.ItemStack;
@@ -91,14 +91,14 @@ public class JewelerTableBurstPacket extends ClientPacket {
     public void execute(Supplier<NetworkEvent.Context> context) {
         Level level = WizardsReborn.proxy.getLevel();
         ParticleBuilder.create(FluffyFurParticles.WISP)
-                .setColorData(ColorParticleData.create(Config.wissenColorR(), Config.wissenColorG(), Config.wissenColorB()).build())
+                .setColorData(ColorParticleData.create(WizardsRebornConfig.wissenColorR(), WizardsRebornConfig.wissenColorG(), WizardsRebornConfig.wissenColorB()).build())
                 .setTransparencyData(GenericParticleData.create(0.125f, 0).build())
                 .setScaleData(GenericParticleData.create(0.2f, 0).build())
                 .setLifetime(20)
                 .randomVelocity(0.05f)
                 .repeat(level, pos.getX() + X, pos.getY() + Y + 0.1875f, pos.getZ() + Z, 20);
         ParticleBuilder.create(FluffyFurParticles.SPARKLE)
-                .setColorData(ColorParticleData.create(Config.wissenColorR(), Config.wissenColorG(), Config.wissenColorB()).build())
+                .setColorData(ColorParticleData.create(WizardsRebornConfig.wissenColorR(), WizardsRebornConfig.wissenColorG(), WizardsRebornConfig.wissenColorB()).build())
                 .setTransparencyData(GenericParticleData.create(0.25f, 0).build())
                 .setScaleData(GenericParticleData.create(0.1f, 0).build())
                 .setSpinData(SpinParticleData.create().randomOffset().randomSpin(0.5f).build())
@@ -106,7 +106,7 @@ public class JewelerTableBurstPacket extends ClientPacket {
                 .randomVelocity(0.05f)
                 .repeat(level, pos.getX() + X, pos.getY() + Y + 0.1875f, pos.getZ() + Z, 10);
         ParticleBuilder.create(FluffyFurParticles.SQUARE)
-                .setColorData(ColorParticleData.create(Config.wissenColorR(), Config.wissenColorG(), Config.wissenColorB()).build())
+                .setColorData(ColorParticleData.create(WizardsRebornConfig.wissenColorR(), WizardsRebornConfig.wissenColorG(), WizardsRebornConfig.wissenColorB()).build())
                 .setTransparencyData(GenericParticleData.create(0.25f, 0).build())
                 .setScaleData(GenericParticleData.create(0, 0.1f, 0).setEasing(Easing.QUINTIC_IN_OUT).build())
                 .setSpinData(SpinParticleData.create().randomOffset().randomSpin(0.5f).build())

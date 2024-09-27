@@ -43,6 +43,7 @@ import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.concurrent.atomic.AtomicInteger;
 
 public class WissenChargeArcaneEnchantment extends ArcaneEnchantment {
+
     public static Random random = new Random();
 
     public WissenChargeArcaneEnchantment(String id, int maxLevel) {

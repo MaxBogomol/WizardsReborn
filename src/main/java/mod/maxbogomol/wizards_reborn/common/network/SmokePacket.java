@@ -4,82 +4,50 @@ import mod.maxbogomol.fluffy_fur.client.particle.ParticleBuilder;
 import mod.maxbogomol.fluffy_fur.client.particle.data.ColorParticleData;
 import mod.maxbogomol.fluffy_fur.client.particle.data.GenericParticleData;
 import mod.maxbogomol.fluffy_fur.client.particle.data.SpinParticleData;
+import mod.maxbogomol.fluffy_fur.common.network.TwoPositionColorClientPacket;
 import mod.maxbogomol.fluffy_fur.registry.client.FluffyFurParticles;
 import mod.maxbogomol.wizards_reborn.WizardsReborn;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.phys.Vec3;
 import net.minecraftforge.network.NetworkEvent;
+import net.minecraftforge.network.simple.SimpleChannel;
 
-import java.util.Random;
+import java.awt.*;
 import java.util.function.Supplier;
 
-public class SmokePacket {
-    private final float posX;
-    private final float posY;
-    private final float posZ;
+public class SmokePacket extends TwoPositionColorClientPacket {
 
-    private final float velX;
-    private final float velY;
-    private final float velZ;
+    public SmokePacket(double x1, double y1, double z1, double x2, double y2, double z2, float r, float g, float b, float a) {
+        super(x1, y1, z1, x2, y2, z2, r, g, b, a);
+    }
 
-    private final float colorR, colorG, colorB;
+    public SmokePacket(Vec3 pos, Vec3 vec, Color color) {
+        super(pos, vec, color);
+    }
 
-    private static final Random random = new Random();
+    @Override
+    public void execute(Supplier<NetworkEvent.Context> context) {
+        Level level = WizardsReborn.proxy.getLevel();
+        for (int i = 0; i < 40; i++) {
+            ParticleBuilder.create(FluffyFurParticles.SMOKE)
+                    .setColorData(ColorParticleData.create(r, g, b).build())
+                    .setTransparencyData(GenericParticleData.create(0.05f, 0).build())
+                    .setScaleData(GenericParticleData.create(0.1f, 2).build())
+                    .setSpinData(SpinParticleData.create().randomSpin(0.1f).build())
+                    .setLifetime(500, 100)
+                    .randomVelocity(0.5f / (20 - (5 * random.nextDouble())), 0.5f / (20 - (5 * random.nextDouble())), 0.5f / (20 - (5 * random.nextDouble())))
+                    .addVelocity(x2, y2, z2)
+                    .randomOffset(0.05f)
+                    .spawn(level, x1, y1, z1);
+        }
+    }
 
-    public SmokePacket(float posX, float posY, float posZ, float velX, float velY, float velZ, float colorR, float colorG, float colorB) {
-        this.posX = posX;
-        this.posY = posY;
-        this.posZ = posZ;
-
-        this.velX = velX;
-        this.velY = velY;
-        this.velZ = velZ;
-
-        this.colorR = colorR;
-        this.colorG = colorG;
-        this.colorB = colorB;
+    public static void register(SimpleChannel instance, int index) {
+        instance.registerMessage(index, SmokePacket.class, SmokePacket::encode, SmokePacket::decode, SmokePacket::handle);
     }
 
     public static SmokePacket decode(FriendlyByteBuf buf) {
-        return new SmokePacket(buf.readFloat(), buf.readFloat(), buf.readFloat(), buf.readFloat(), buf.readFloat(), buf.readFloat(), buf.readFloat(), buf.readFloat(), buf.readFloat());
-    }
-
-    public void encode(FriendlyByteBuf buf) {
-        buf.writeFloat(posX);
-        buf.writeFloat(posY);
-        buf.writeFloat(posZ);
-
-        buf.writeFloat(velX);
-        buf.writeFloat(velY);
-        buf.writeFloat(velZ);
-
-        buf.writeFloat(colorR);
-        buf.writeFloat(colorG);
-        buf.writeFloat(colorB);
-    }
-
-    public static void handle(SmokePacket msg, Supplier<NetworkEvent.Context> ctx) {
-        if (ctx.get().getDirection().getReceptionSide().isClient()) {
-            ctx.get().enqueueWork(new Runnable() {
-                @Override
-                public void run() {
-                    Level level = WizardsReborn.proxy.getLevel();
-
-                    for (int i = 0; i < 40; i++) {
-                        ParticleBuilder.create(FluffyFurParticles.SMOKE)
-                                .setColorData(ColorParticleData.create(msg.colorR, msg.colorG, msg.colorB).build())
-                                .setTransparencyData(GenericParticleData.create(0.05f, 0).build())
-                                .setScaleData(GenericParticleData.create(0.1f, 2).build())
-                                .setSpinData(SpinParticleData.create().randomSpin(0.1f).build())
-                                .setLifetime(500, 100)
-                                .randomVelocity(0.5f / (20 - (5 * random.nextDouble())), 0.5f / (20 - (5 * random.nextDouble())), 0.5f / (20 - (5 * random.nextDouble())))
-                                .addVelocity(msg.velX, msg.velY, msg.velZ)
-                                .randomOffset(0.05f)
-                                .spawn(level, msg.posX, msg.posY, msg.posZ);
-                    }
-                    ctx.get().setPacketHandled(true);
-                }
-            });
-        }
+        return decode(SmokePacket::new, buf);
     }
 }

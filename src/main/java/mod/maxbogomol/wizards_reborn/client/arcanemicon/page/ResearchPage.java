@@ -10,7 +10,7 @@ import mod.maxbogomol.wizards_reborn.client.arcanemicon.ArcanemiconChapters;
 import mod.maxbogomol.wizards_reborn.client.arcanemicon.ArcanemiconGui;
 import mod.maxbogomol.wizards_reborn.client.arcanemicon.Chapter;
 import mod.maxbogomol.wizards_reborn.client.arcanemicon.Page;
-import mod.maxbogomol.wizards_reborn.client.config.ClientConfig;
+import mod.maxbogomol.wizards_reborn.config.WizardsRebornClientConfig;
 import mod.maxbogomol.wizards_reborn.common.network.PacketHandler;
 import mod.maxbogomol.wizards_reborn.common.network.SpellUnlockPacket;
 import net.minecraft.client.Minecraft;
@@ -138,7 +138,7 @@ public class ResearchPage extends Page {
     @Override
     @OnlyIn(Dist.CLIENT)
     public void render(ArcanemiconGui book, GuiGraphics gui, int x, int y, int mouseX, int mouseY) {
-        boolean hardmode = ClientConfig.RESEARCH_HARDMODE.get();
+        boolean hardmode = WizardsRebornClientConfig.RESEARCH_HARDMODE.get();
         if (Minecraft.getInstance().level.getLevelData().isHardcore()) hardmode = true;
         if (main) {
             setActives();
@@ -158,10 +158,10 @@ public class ResearchPage extends Page {
             int outlineXOffset = 0;
             int outlineYOffset = 14;
 
-            if (ClientConfig.OLD_RESEARCH_MONOGRAM_OUTLINE.get()) {
+            if (WizardsRebornClientConfig.OLD_RESEARCH_MONOGRAM_OUTLINE.get()) {
                 outlineYOffset = 0;
             }
-            if (ClientConfig.BRIGHT_RESEARCH_MONOGRAM_OUTLINE.get()) {
+            if (WizardsRebornClientConfig.BRIGHT_RESEARCH_MONOGRAM_OUTLINE.get()) {
                 outlineXOffset = 14;
                 outlineYOffset = 14;
             }
@@ -192,7 +192,7 @@ public class ResearchPage extends Page {
 
             int i = 0;
             int selected = getSelectedMonogram(x, y, mouseX, mouseY);
-            if (ClientConfig.RESEARCH_MONOGRAM_CONNECTS.get()) {
+            if (WizardsRebornClientConfig.RESEARCH_MONOGRAM_CONNECTS.get()) {
                 for (MonogramMapEntry monogramMapEntry : map) {
                     for (int ii = 0; ii < 2; ii++) {
                         if (monogramMapEntry.isActive()) {

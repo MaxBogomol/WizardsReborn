@@ -20,7 +20,7 @@ import mod.maxbogomol.wizards_reborn.api.spell.Spells;
 import mod.maxbogomol.wizards_reborn.api.wissen.IWissenItem;
 import mod.maxbogomol.wizards_reborn.api.wissen.WissenItemType;
 import mod.maxbogomol.wizards_reborn.api.wissen.WissenItemUtil;
-import mod.maxbogomol.wizards_reborn.client.config.ClientConfig;
+import mod.maxbogomol.wizards_reborn.config.WizardsRebornClientConfig;
 import mod.maxbogomol.wizards_reborn.common.item.CrystalItem;
 import mod.maxbogomol.wizards_reborn.util.NumericalUtil;
 import net.minecraft.ChatFormatting;
@@ -257,7 +257,7 @@ public class ArcaneWandItem extends Item implements IWissenItem, ICustomAnimatio
     @OnlyIn(Dist.CLIENT)
     @Override
     public UseAnim getUseAnimation(ItemStack stack) {
-        if (!ClientConfig.SPELLS_FIRST_PERSON_ITEM_ANIMATIONS.get()) {
+        if (!WizardsRebornClientConfig.SPELLS_FIRST_PERSON_ITEM_ANIMATIONS.get()) {
             return UseAnim.NONE;
         }
         CompoundTag nbt = stack.getTag();
@@ -320,7 +320,7 @@ public class ArcaneWandItem extends Item implements IWissenItem, ICustomAnimatio
         Skin skin = Skin.getSkinFromItem(stack);
         if (skin != null) list.add(skin.getSkinComponent());
 
-        if (ClientConfig.NUMERICAL_WISSEN.get()) {
+        if (WizardsRebornClientConfig.NUMERICAL_WISSEN.get()) {
             WissenItemUtil.existWissen(stack);
             list.add(NumericalUtil.getWissenName(WissenItemUtil.getWissen(stack), getMaxWissen()).copy().withStyle(ChatFormatting.GRAY));
         }
@@ -386,26 +386,26 @@ public class ArcaneWandItem extends Item implements IWissenItem, ICustomAnimatio
 
         if (render) {
             if (!player.isSpectator()) {
-                boolean up = ClientConfig.ARCANE_WAND_OVERLAY_UP.get();
-                boolean right = ClientConfig.ARCANE_WAND_OVERLAY_RIGHT.get();
-                boolean sideHud = ClientConfig.ARCANE_WAND_OVERLAY_SIDE_HUD.get();
-                boolean sideBar = ClientConfig.ARCANE_WAND_OVERLAY_SIDE_BAR.get();
-                boolean horizontalBar = ClientConfig.ARCANE_WAND_OVERLAY_HORIZONTAL_BAR.get();
+                boolean up = WizardsRebornClientConfig.ARCANE_WAND_OVERLAY_UP.get();
+                boolean right = WizardsRebornClientConfig.ARCANE_WAND_OVERLAY_RIGHT.get();
+                boolean sideHud = WizardsRebornClientConfig.ARCANE_WAND_OVERLAY_SIDE_HUD.get();
+                boolean sideBar = WizardsRebornClientConfig.ARCANE_WAND_OVERLAY_SIDE_BAR.get();
+                boolean horizontalBar = WizardsRebornClientConfig.ARCANE_WAND_OVERLAY_HORIZONTAL_BAR.get();
 
-                int xOff = ClientConfig.ARCANE_WAND_OVERLAY_X_OFFSET.get();
-                int yOff = ClientConfig.ARCANE_WAND_OVERLAY_Y_OFFSET.get();
-                int xTwoOff = ClientConfig.ARCANE_WAND_OVERLAY_SECOND_X_OFFSET.get();
-                int yTwoOff = ClientConfig.ARCANE_WAND_OVERLAY_SECOND_Y_OFFSET.get();
-                int xBarOff = ClientConfig.ARCANE_WAND_OVERLAY_BAR_X_OFFSET.get();
-                int yBarOff = ClientConfig.ARCANE_WAND_OVERLAY_BAR_Y_OFFSET.get();
+                int xOff = WizardsRebornClientConfig.ARCANE_WAND_OVERLAY_X_OFFSET.get();
+                int yOff = WizardsRebornClientConfig.ARCANE_WAND_OVERLAY_Y_OFFSET.get();
+                int xTwoOff = WizardsRebornClientConfig.ARCANE_WAND_OVERLAY_SECOND_X_OFFSET.get();
+                int yTwoOff = WizardsRebornClientConfig.ARCANE_WAND_OVERLAY_SECOND_Y_OFFSET.get();
+                int xBarOff = WizardsRebornClientConfig.ARCANE_WAND_OVERLAY_BAR_X_OFFSET.get();
+                int yBarOff = WizardsRebornClientConfig.ARCANE_WAND_OVERLAY_BAR_Y_OFFSET.get();
 
-                boolean twoHudFree = ClientConfig.ARCANE_WAND_OVERLAY_SECOND_HUD_FREE.get();
-                boolean barFree = ClientConfig.ARCANE_WAND_OVERLAY_BAR_FREE.get();
+                boolean twoHudFree = WizardsRebornClientConfig.ARCANE_WAND_OVERLAY_SECOND_HUD_FREE.get();
+                boolean barFree = WizardsRebornClientConfig.ARCANE_WAND_OVERLAY_BAR_FREE.get();
 
-                boolean drawCooldown = ClientConfig.ARCANE_WAND_OVERLAY_COOLDOWN_TEXT.get();
-                boolean drawWissen = ClientConfig.ARCANE_WAND_OVERLAY_WISSEN_TEXT.get();
-                boolean reverseBar = ClientConfig.ARCANE_WAND_OVERLAY_REVERSE_BAR.get();
-                boolean showEmpty = ClientConfig.ARCANE_WAND_OVERLAY_SHOW_EMPTY.get();
+                boolean drawCooldown = WizardsRebornClientConfig.ARCANE_WAND_OVERLAY_COOLDOWN_TEXT.get();
+                boolean drawWissen = WizardsRebornClientConfig.ARCANE_WAND_OVERLAY_WISSEN_TEXT.get();
+                boolean reverseBar = WizardsRebornClientConfig.ARCANE_WAND_OVERLAY_REVERSE_BAR.get();
+                boolean showEmpty = WizardsRebornClientConfig.ARCANE_WAND_OVERLAY_SHOW_EMPTY.get();
 
                 boolean rightBar = right;
                 if (up && horizontalBar) {

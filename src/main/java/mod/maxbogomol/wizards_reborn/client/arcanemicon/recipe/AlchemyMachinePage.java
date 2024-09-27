@@ -3,7 +3,7 @@ package mod.maxbogomol.wizards_reborn.client.arcanemicon.recipe;
 import mod.maxbogomol.wizards_reborn.WizardsReborn;
 import mod.maxbogomol.wizards_reborn.api.alchemy.AlchemyPotionUtil;
 import mod.maxbogomol.wizards_reborn.client.arcanemicon.ArcanemiconGui;
-import mod.maxbogomol.wizards_reborn.client.config.ClientConfig;
+import mod.maxbogomol.wizards_reborn.config.WizardsRebornClientConfig;
 import mod.maxbogomol.wizards_reborn.common.item.equipment.AlchemyBottleItem;
 import mod.maxbogomol.wizards_reborn.common.item.equipment.AlchemyPotionItem;
 import mod.maxbogomol.wizards_reborn.common.recipe.AlchemyMachineContext;
@@ -74,7 +74,7 @@ public class AlchemyMachinePage extends RecipePage {
 
             if (mouseX >= x + 38 + 4 && mouseY >= y + 76 && mouseX <= x + 38 + 4 + 8 && mouseY <= y + 76 + 32) {
                 Component component = NumericalUtil.getFluidName(fluidInputs1, 5000);
-                if (!ClientConfig.NUMERICAL_FLUID.get()) {
+                if (!WizardsRebornClientConfig.NUMERICAL_FLUID.get()) {
                     component = NumericalUtil.getFluidName(fluidInputs1);
                 }
                 gui.renderTooltip(Minecraft.getInstance().font, component, mouseX, mouseY);
@@ -91,7 +91,7 @@ public class AlchemyMachinePage extends RecipePage {
 
             if (mouseX >= x + 56 + 4 && mouseY >= y + 76 && mouseX <= x + 56 + 4 + 8 && mouseY <= y + 76 + 32) {
                 Component component = NumericalUtil.getFluidName(fluidInputs2, 5000);
-                if (!ClientConfig.NUMERICAL_FLUID.get()) {
+                if (!WizardsRebornClientConfig.NUMERICAL_FLUID.get()) {
                     component = NumericalUtil.getFluidName(fluidInputs2);
                 }
                 gui.renderTooltip(Minecraft.getInstance().font, component, mouseX, mouseY);
@@ -108,7 +108,7 @@ public class AlchemyMachinePage extends RecipePage {
 
             if (mouseX >= x + 74 + 4 && mouseY >= y + 76 && mouseX <= x + 74 + 4 + 8 && mouseY <= y + 76 + 32) {
                 Component component = NumericalUtil.getFluidName(fluidInputs3, 5000);
-                if (!ClientConfig.NUMERICAL_FLUID.get()) {
+                if (!WizardsRebornClientConfig.NUMERICAL_FLUID.get()) {
                     component = NumericalUtil.getFluidName(fluidInputs3);
                 }
                 gui.renderTooltip(Minecraft.getInstance().font, component, mouseX, mouseY);

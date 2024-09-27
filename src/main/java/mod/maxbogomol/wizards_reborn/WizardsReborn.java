@@ -6,11 +6,11 @@ import mod.maxbogomol.fluffy_fur.common.proxy.ISidedProxy;
 import mod.maxbogomol.fluffy_fur.common.proxy.ServerProxy;
 import mod.maxbogomol.wizards_reborn.api.skin.Skin;
 import mod.maxbogomol.wizards_reborn.api.skin.Skins;
-import mod.maxbogomol.wizards_reborn.client.config.ClientConfig;
+import mod.maxbogomol.wizards_reborn.config.WizardsRebornClientConfig;
 import mod.maxbogomol.wizards_reborn.common.capability.IArrowModifier;
 import mod.maxbogomol.wizards_reborn.common.capability.IKnowledge;
-import mod.maxbogomol.wizards_reborn.common.config.Config;
-import mod.maxbogomol.wizards_reborn.common.config.ServerConfig;
+import mod.maxbogomol.wizards_reborn.config.WizardsRebornConfig;
+import mod.maxbogomol.wizards_reborn.config.WizardsRebornServerConfig;
 import mod.maxbogomol.wizards_reborn.registry.common.item.WizardsRebornCreativeTab;
 import mod.maxbogomol.wizards_reborn.common.event.Events;
 import mod.maxbogomol.wizards_reborn.common.item.equipment.WissenWandItem;
@@ -88,9 +88,9 @@ public class WizardsReborn {
         WizardsRebornArcaneEnchantments.register();
         WizardsRebornCrystalRituals.register();
 
-        ModLoadingContext.get().registerConfig(ModConfig.Type.CLIENT, ClientConfig.SPEC);
-        ModLoadingContext.get().registerConfig(ModConfig.Type.COMMON, Config.SPEC);
-        ModLoadingContext.get().registerConfig(ModConfig.Type.SERVER, ServerConfig.SPEC);
+        ModLoadingContext.get().registerConfig(ModConfig.Type.CLIENT, WizardsRebornClientConfig.SPEC);
+        ModLoadingContext.get().registerConfig(ModConfig.Type.COMMON, WizardsRebornConfig.SPEC);
+        ModLoadingContext.get().registerConfig(ModConfig.Type.SERVER, WizardsRebornServerConfig.SPEC);
 
         DistExecutor.unsafeCallWhenOn(Dist.CLIENT, () -> () -> {
             WizardsRebornClient.ClientOnly.clientInit();

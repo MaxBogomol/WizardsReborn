@@ -16,7 +16,7 @@ import mod.maxbogomol.wizards_reborn.api.wissen.IWissenBlockEntity;
 import mod.maxbogomol.wizards_reborn.api.wissen.IWissenWandControlledBlockEntity;
 import mod.maxbogomol.wizards_reborn.client.sound.LightEmitterSoundInstance;
 import mod.maxbogomol.wizards_reborn.common.block.ArcaneLumosBlock;
-import mod.maxbogomol.wizards_reborn.common.config.Config;
+import mod.maxbogomol.wizards_reborn.config.WizardsRebornConfig;
 import mod.maxbogomol.wizards_reborn.common.item.equipment.WissenWandItem;
 import mod.maxbogomol.wizards_reborn.registry.common.block.WizardsRebornBlockEntities;
 import mod.maxbogomol.wizards_reborn.registry.common.item.WizardsRebornItemTags;
@@ -199,7 +199,7 @@ public class LightEmitterBlockEntity extends ExposedBlockSimpleInventory impleme
     }
 
     public Color getColor() {
-        Color color = new Color(Config.wissenColorR(), Config.wissenColorG(), Config.wissenColorB());
+        Color color = new Color(WizardsRebornConfig.wissenColorR(), WizardsRebornConfig.wissenColorG(), WizardsRebornConfig.wissenColorB());
 
         ArcaneLumosBlock lumos = getLumos();
         if (lumos != null) {

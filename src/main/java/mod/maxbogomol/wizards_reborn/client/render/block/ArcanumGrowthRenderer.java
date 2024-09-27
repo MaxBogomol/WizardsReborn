@@ -7,7 +7,7 @@ import mod.maxbogomol.fluffy_fur.util.RenderUtil;
 import mod.maxbogomol.wizards_reborn.api.wissen.WissenUtil;
 import mod.maxbogomol.wizards_reborn.common.block.arcanum_growth.ArcanumGrowthBlock;
 import mod.maxbogomol.wizards_reborn.common.block.arcanum_growth.ArcanumGrowthBlockEntity;
-import mod.maxbogomol.wizards_reborn.common.config.Config;
+import mod.maxbogomol.wizards_reborn.config.WizardsRebornConfig;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.blockentity.BlockEntityRenderer;
 import net.minecraft.world.phys.Vec3;
@@ -23,7 +23,7 @@ public class ArcanumGrowthRenderer implements BlockEntityRenderer<ArcanumGrowthB
         random.setSeed(blockEntity.getBlockPos().asLong());
 
         if (blockEntity.getLevel().getBlockState(blockEntity.getBlockPos()).getBlock() instanceof ArcanumGrowthBlock growth) {
-            Color color = new Color(Config.wissenColorR(), Config.wissenColorG(), Config.wissenColorB());
+            Color color = new Color(WizardsRebornConfig.wissenColorR(), WizardsRebornConfig.wissenColorG(), WizardsRebornConfig.wissenColorB());
             RenderBuilder builder = RenderBuilder.create().setRenderType(FluffyFurRenderTypes.ADDITIVE)
                     .setColor(color).setAlpha(0.8f).setSided(false, true);
 

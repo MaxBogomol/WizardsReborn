@@ -13,7 +13,7 @@ import mod.maxbogomol.wizards_reborn.api.wissen.IWissenBlockEntity;
 import mod.maxbogomol.wizards_reborn.api.wissen.IWissenItem;
 import mod.maxbogomol.wizards_reborn.api.wissen.WissenItemUtil;
 import mod.maxbogomol.wizards_reborn.api.wissen.WissenUtil;
-import mod.maxbogomol.wizards_reborn.common.config.Config;
+import mod.maxbogomol.wizards_reborn.config.WizardsRebornConfig;
 import mod.maxbogomol.wizards_reborn.common.network.PacketHandler;
 import mod.maxbogomol.wizards_reborn.common.network.block.WissenCellSendPacket;
 import mod.maxbogomol.wizards_reborn.registry.common.block.WizardsRebornBlockEntities;
@@ -81,7 +81,7 @@ public class WissenCellBlockEntity extends ExposedBlockSimpleInventory implement
             if (getWissen() > 0) {
                 if (random.nextFloat() < 0.5) {
                     ParticleBuilder.create(FluffyFurParticles.WISP)
-                            .setColorData(ColorParticleData.create(Config.wissenColorR(), Config.wissenColorG(), Config.wissenColorB()).build())
+                            .setColorData(ColorParticleData.create(WizardsRebornConfig.wissenColorR(), WizardsRebornConfig.wissenColorG(), WizardsRebornConfig.wissenColorB()).build())
                             .setTransparencyData(GenericParticleData.create(0.25f, 0).build())
                             .setScaleData(GenericParticleData.create(0.3f * getStage(), 0).build())
                             .setLifetime(20)
@@ -92,7 +92,7 @@ public class WissenCellBlockEntity extends ExposedBlockSimpleInventory implement
                     boolean square = random.nextFloat() < 0.2;
                     float i = square ? 0.5f : 1f;
                     ParticleBuilder.create(square ? FluffyFurParticles.SQUARE : FluffyFurParticles.SPARKLE)
-                            .setColorData(ColorParticleData.create(Config.wissenColorR(), Config.wissenColorG(), Config.wissenColorB(), 0.5f, 0.5f, 0).build())
+                            .setColorData(ColorParticleData.create(WizardsRebornConfig.wissenColorR(), WizardsRebornConfig.wissenColorG(), WizardsRebornConfig.wissenColorB(), 0.5f, 0.5f, 0).build())
                             .setTransparencyData(GenericParticleData.create(0.25f, 0).build())
                             .setScaleData(GenericParticleData.create(0.1f * getStage() * i, 0.2f * getStage() * i, 0).setEasing(Easing.QUINTIC_IN_OUT).build())
                             .setSpinData(SpinParticleData.create().randomSpin(0.1f).build())

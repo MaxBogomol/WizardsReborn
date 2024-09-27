@@ -10,6 +10,7 @@ import net.minecraft.world.item.ItemStack;
 import java.awt.*;
 
 public class FireCrystalType extends CrystalType {
+
     public FireCrystalType(String id) {
         super(id);
     }

@@ -10,6 +10,7 @@ import net.minecraft.world.item.ItemStack;
 import java.awt.*;
 
 public class AirCrystalType extends CrystalType {
+
     public AirCrystalType(String id) {
         super(id);
     }

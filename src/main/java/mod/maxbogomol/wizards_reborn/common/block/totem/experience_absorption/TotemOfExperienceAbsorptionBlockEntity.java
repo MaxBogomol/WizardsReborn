@@ -13,7 +13,7 @@ import mod.maxbogomol.wizards_reborn.api.wissen.IExperienceBlockEntity;
 import mod.maxbogomol.wizards_reborn.api.wissen.IWissenBlockEntity;
 import mod.maxbogomol.wizards_reborn.api.wissen.WissenUtil;
 import mod.maxbogomol.wizards_reborn.client.sound.TotemOfExperienceAbsorptionSoundInstance;
-import mod.maxbogomol.wizards_reborn.common.config.Config;
+import mod.maxbogomol.wizards_reborn.config.WizardsRebornConfig;
 import mod.maxbogomol.wizards_reborn.common.network.PacketHandler;
 import mod.maxbogomol.wizards_reborn.common.network.block.ExperienceTotemBurstPacket;
 import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornSounds;
@@ -96,7 +96,7 @@ public class TotemOfExperienceAbsorptionBlockEntity extends BlockEntityBase impl
             if (getWissen() > 0) {
                 if (random.nextFloat() < 0.3) {
                     ParticleBuilder.create(FluffyFurParticles.WISP)
-                            .setColorData(ColorParticleData.create(Config.wissenColorR(), Config.wissenColorG(), Config.wissenColorB()).build())
+                            .setColorData(ColorParticleData.create(WizardsRebornConfig.wissenColorR(), WizardsRebornConfig.wissenColorG(), WizardsRebornConfig.wissenColorB()).build())
                             .setTransparencyData(GenericParticleData.create(0.25f, 0).build())
                             .setScaleData(GenericParticleData.create(0.2f * getStage(), 0).build())
                             .setLifetime(20)
@@ -105,7 +105,7 @@ public class TotemOfExperienceAbsorptionBlockEntity extends BlockEntityBase impl
                 }
                 if (random.nextFloat() < 0.1) {
                     ParticleBuilder.create(random.nextBoolean() ? FluffyFurParticles.SQUARE : FluffyFurParticles.SPARKLE)
-                            .setColorData(ColorParticleData.create(Config.wissenColorR(), Config.wissenColorG(), Config.wissenColorB()).build())
+                            .setColorData(ColorParticleData.create(WizardsRebornConfig.wissenColorR(), WizardsRebornConfig.wissenColorG(), WizardsRebornConfig.wissenColorB()).build())
                             .setTransparencyData(GenericParticleData.create(0.25f, 0).build())
                             .setScaleData(GenericParticleData.create(0, 0.075f * getStage(), 0).setEasing(Easing.QUINTIC_IN_OUT).build())
                             .setSpinData(SpinParticleData.create().randomOffset().randomSpin(0.5f).build())
@@ -132,7 +132,7 @@ public class TotemOfExperienceAbsorptionBlockEntity extends BlockEntityBase impl
             if (getExperience() > 0 && getWissen() < getMaxWissen()) {
                 if (random.nextFloat() < 0.5) {
                     ParticleBuilder.create(FluffyFurParticles.WISP)
-                            .setColorData(ColorParticleData.create(Config.wissenColorR(), Config.wissenColorG(), Config.wissenColorB(), 0.784f, 1f, 0.560f).build())
+                            .setColorData(ColorParticleData.create(WizardsRebornConfig.wissenColorR(), WizardsRebornConfig.wissenColorG(), WizardsRebornConfig.wissenColorB(), 0.784f, 1f, 0.560f).build())
                             .setTransparencyData(GenericParticleData.create(0.25f, 0).build())
                             .setScaleData(GenericParticleData.create(0.05f, 0).build())
                             .setLifetime(60)

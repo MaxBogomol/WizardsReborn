@@ -3,7 +3,7 @@ package mod.maxbogomol.wizards_reborn.client.arcanemicon.index;
 import mod.maxbogomol.wizards_reborn.WizardsReborn;
 import mod.maxbogomol.wizards_reborn.api.knowledge.Knowledge;
 import mod.maxbogomol.wizards_reborn.api.knowledge.KnowledgeUtil;
-import mod.maxbogomol.wizards_reborn.client.config.ClientConfig;
+import mod.maxbogomol.wizards_reborn.config.WizardsRebornClientConfig;
 import net.minecraft.client.Minecraft;
 import net.minecraft.network.chat.Component;
 import net.minecraftforge.api.distmarker.Dist;
@@ -19,12 +19,12 @@ public class ConfigIndexEntry {
 
     public ConfigIndexEntry() {
         this.modId = WizardsReborn.MOD_ID;
-        this.spec = ClientConfig.SPEC;
+        this.spec = WizardsRebornClientConfig.SPEC;
     }
 
     public ConfigIndexEntry(Knowledge knowledge) {
         this.modId = WizardsReborn.MOD_ID;
-        this.spec = ClientConfig.SPEC;
+        this.spec = WizardsRebornClientConfig.SPEC;
         this.knowledge = knowledge;
     }
 

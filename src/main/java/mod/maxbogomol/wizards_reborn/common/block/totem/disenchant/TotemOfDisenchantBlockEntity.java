@@ -16,7 +16,7 @@ import mod.maxbogomol.wizards_reborn.api.arcaneenchantment.ArcaneEnchantments;
 import mod.maxbogomol.wizards_reborn.api.wissen.ICooldownBlockEntity;
 import mod.maxbogomol.wizards_reborn.api.wissen.IWissenBlockEntity;
 import mod.maxbogomol.wizards_reborn.client.gui.container.TotemOfDisenchantContainer;
-import mod.maxbogomol.wizards_reborn.common.config.Config;
+import mod.maxbogomol.wizards_reborn.config.WizardsRebornConfig;
 import mod.maxbogomol.wizards_reborn.common.network.PacketHandler;
 import mod.maxbogomol.wizards_reborn.common.network.block.TotemOfDisenchantBurstPacket;
 import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornSounds;
@@ -173,7 +173,7 @@ public class TotemOfDisenchantBlockEntity extends NameableBlockEntityBase implem
             if (getWissen() > 0) {
                 if (random.nextFloat() < 0.3) {
                     ParticleBuilder.create(FluffyFurParticles.WISP)
-                            .setColorData(ColorParticleData.create(Config.wissenColorR(), Config.wissenColorG(), Config.wissenColorB()).build())
+                            .setColorData(ColorParticleData.create(WizardsRebornConfig.wissenColorR(), WizardsRebornConfig.wissenColorG(), WizardsRebornConfig.wissenColorB()).build())
                             .setTransparencyData(GenericParticleData.create(0.25f, 0).build())
                             .setScaleData(GenericParticleData.create(0.2f * getStage(), 0).build())
                             .setLifetime(20)
@@ -182,7 +182,7 @@ public class TotemOfDisenchantBlockEntity extends NameableBlockEntityBase implem
                 }
                 if (random.nextFloat() < 0.1) {
                     ParticleBuilder.create(random.nextBoolean() ? FluffyFurParticles.SQUARE : FluffyFurParticles.SPARKLE)
-                            .setColorData(ColorParticleData.create(Config.wissenColorR(), Config.wissenColorG(), Config.wissenColorB()).build())
+                            .setColorData(ColorParticleData.create(WizardsRebornConfig.wissenColorR(), WizardsRebornConfig.wissenColorG(), WizardsRebornConfig.wissenColorB()).build())
                             .setTransparencyData(GenericParticleData.create(0.25f, 0).build())
                             .setScaleData(GenericParticleData.create(0, 0.075f * getStage(), 0).setEasing(Easing.QUINTIC_IN_OUT).build())
                             .setSpinData(SpinParticleData.create().randomOffset().randomSpin(0.5f).build())
@@ -210,9 +210,9 @@ public class TotemOfDisenchantBlockEntity extends NameableBlockEntityBase implem
                         float b = 0.560f;
 
                         if (i == 1) {
-                            r = Config.wissenColorR();
-                            g = Config.wissenColorG();
-                            b = Config.wissenColorB();
+                            r = WizardsRebornConfig.wissenColorR();
+                            g = WizardsRebornConfig.wissenColorG();
+                            b = WizardsRebornConfig.wissenColorB();
                         }
 
                         ParticleBuilder.create(FluffyFurParticles.SPARKLE)

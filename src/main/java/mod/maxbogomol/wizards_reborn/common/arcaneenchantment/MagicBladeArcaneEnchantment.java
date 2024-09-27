@@ -31,6 +31,7 @@ import java.util.List;
 import java.util.Random;
 
 public class MagicBladeArcaneEnchantment extends ArcaneEnchantment {
+
     private static Random random = new Random();
 
     public MagicBladeArcaneEnchantment(String id, int maxLevel) {

@@ -9,7 +9,7 @@ import mod.maxbogomol.wizards_reborn.api.alchemy.ISteamBlockEntity;
 import mod.maxbogomol.wizards_reborn.api.light.ILightBlockEntity;
 import mod.maxbogomol.wizards_reborn.api.skin.Skin;
 import mod.maxbogomol.wizards_reborn.api.wissen.*;
-import mod.maxbogomol.wizards_reborn.client.config.ClientConfig;
+import mod.maxbogomol.wizards_reborn.config.WizardsRebornClientConfig;
 import mod.maxbogomol.wizards_reborn.common.block.alchemy_machine.AlchemyMachineBlockEntity;
 import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornSounds;
 import mod.maxbogomol.wizards_reborn.util.NumericalUtil;
@@ -439,7 +439,7 @@ public class WissenWandItem extends Item {
 
             if (blockEntity != null) {
                 if (blockEntity instanceof IWissenBlockEntity wissenBlockEntity) {
-                    if (player.isShiftKeyDown() && ClientConfig.NUMERICAL_WISSEN.get()) {
+                    if (player.isShiftKeyDown() && WizardsRebornClientConfig.NUMERICAL_WISSEN.get()) {
                         int x = minecraft.getWindow().getGuiScaledWidth() / 2;
                         int y = minecraft.getWindow().getGuiScaledHeight() / 2 + 12 + getYOffset();
                         Component name = NumericalUtil.getWissenName(wissenBlockEntity.getWissen(), wissenBlockEntity.getMaxWissen());
@@ -473,7 +473,7 @@ public class WissenWandItem extends Item {
 
             if (blockEntity != null) {
                 if (blockEntity instanceof ICooldownBlockEntity cooldownBlockEntity) {
-                    if (player.isShiftKeyDown() && ClientConfig.NUMERICAL_COOLDOWN.get()) {
+                    if (player.isShiftKeyDown() && WizardsRebornClientConfig.NUMERICAL_COOLDOWN.get()) {
                         int x = minecraft.getWindow().getGuiScaledWidth() / 2;
                         int y = minecraft.getWindow().getGuiScaledHeight() / 2 + 12 + getYOffset();
                         Component name = NumericalUtil.getCooldownName(cooldownBlockEntity.getCooldown());
@@ -507,7 +507,7 @@ public class WissenWandItem extends Item {
 
             if (blockEntity != null) {
                 if (blockEntity instanceof ILightBlockEntity lightBlockEntity) {
-                    if (player.isShiftKeyDown() && ClientConfig.SHOW_LIGHT_NAME.get()) {
+                    if (player.isShiftKeyDown() && WizardsRebornClientConfig.SHOW_LIGHT_NAME.get()) {
                         int x = minecraft.getWindow().getGuiScaledWidth() / 2;
                         int y = minecraft.getWindow().getGuiScaledHeight() / 2 + 12 + getYOffset();
                         Component name = NumericalUtil.getLightName();
@@ -547,7 +547,7 @@ public class WissenWandItem extends Item {
                     int y = minecraft.getWindow().getGuiScaledHeight() / 2 + 12 + getYOffset();
 
                     Component name = NumericalUtil.getFluidName(fluidBlockEntity.getFluidStack(), fluidBlockEntity.getFluidMaxAmount());
-                    if (!ClientConfig.NUMERICAL_FLUID.get()) {
+                    if (!WizardsRebornClientConfig.NUMERICAL_FLUID.get()) {
                         name = NumericalUtil.getFluidName(fluidBlockEntity.getFluidStack());
                     }
                     drawCenteredText(gui, name.getString(), x, y);
@@ -579,7 +579,7 @@ public class WissenWandItem extends Item {
 
             if (blockEntity != null) {
                 if (blockEntity instanceof IExperienceBlockEntity experienceBlockEntity) {
-                    if (player.isShiftKeyDown() && ClientConfig.NUMERICAL_EXPERIENCE.get()) {
+                    if (player.isShiftKeyDown() && WizardsRebornClientConfig.NUMERICAL_EXPERIENCE.get()) {
                         int x = minecraft.getWindow().getGuiScaledWidth() / 2;
                         int y = minecraft.getWindow().getGuiScaledHeight() / 2 + 12 + getYOffset();
                         Component name = NumericalUtil.getExperienceName(experienceBlockEntity.getExperience(), experienceBlockEntity.getMaxExperience());
@@ -613,7 +613,7 @@ public class WissenWandItem extends Item {
 
             if (blockEntity != null) {
                 if (blockEntity instanceof IHeatBlockEntity heatBlockEntity) {
-                    if (player.isShiftKeyDown() && ClientConfig.NUMERICAL_HEAT.get()) {
+                    if (player.isShiftKeyDown() && WizardsRebornClientConfig.NUMERICAL_HEAT.get()) {
                         int x = minecraft.getWindow().getGuiScaledWidth() / 2;
                         int y = minecraft.getWindow().getGuiScaledHeight() / 2 + 12 + getYOffset();
                         Component name = NumericalUtil.getHeatName(heatBlockEntity.getHeat(), heatBlockEntity.getMaxHeat());
@@ -647,7 +647,7 @@ public class WissenWandItem extends Item {
 
             if (blockEntity != null) {
                 if (blockEntity instanceof ISteamBlockEntity steamBlockEntity) {
-                    if (player.isShiftKeyDown() && ClientConfig.NUMERICAL_STEAM.get()) {
+                    if (player.isShiftKeyDown() && WizardsRebornClientConfig.NUMERICAL_STEAM.get()) {
                         int x = minecraft.getWindow().getGuiScaledWidth() / 2;
                         int y = minecraft.getWindow().getGuiScaledHeight() / 2 + 12 + getYOffset();
                         Component name = NumericalUtil.getHeatName(steamBlockEntity.getSteam(), steamBlockEntity.getMaxSteam());
@@ -686,7 +686,7 @@ public class WissenWandItem extends Item {
                         int y = minecraft.getWindow().getGuiScaledHeight() / 2 + 12 + getYOffset();
 
                         Component name = NumericalUtil.getFluidName(machine.getFluidStack(ii), machine.getMaxCapacity());
-                        if (!ClientConfig.NUMERICAL_FLUID.get()) {
+                        if (!WizardsRebornClientConfig.NUMERICAL_FLUID.get()) {
                             name = NumericalUtil.getFluidName(machine.getFluidStack(ii));
                         }
                         drawCenteredText(gui, name.getString(), x, y);

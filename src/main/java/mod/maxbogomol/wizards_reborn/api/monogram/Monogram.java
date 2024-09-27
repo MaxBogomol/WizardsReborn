@@ -5,7 +5,7 @@ import mod.maxbogomol.fluffy_fur.client.render.RenderBuilder;
 import mod.maxbogomol.fluffy_fur.registry.client.FluffyFurRenderTypes;
 import mod.maxbogomol.fluffy_fur.util.RenderUtil;
 import mod.maxbogomol.wizards_reborn.client.arcanemicon.ArcanemiconGui;
-import mod.maxbogomol.wizards_reborn.client.config.ClientConfig;
+import mod.maxbogomol.wizards_reborn.config.WizardsRebornClientConfig;
 import net.minecraft.ChatFormatting;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.renderer.texture.TextureAtlasSprite;
@@ -92,28 +92,28 @@ public class Monogram {
         gui.pose().translate(x + 8, y + 8, 100);
         RenderBuilder.create().setRenderType(FluffyFurRenderTypes.TRANSLUCENT_TEXTURE)
                 .setUV(sprite)
-                .setColor(ClientConfig.MONOGRAM_COLOR.get() ? color : Color.WHITE).setAlpha(1f)
+                .setColor(WizardsRebornClientConfig.MONOGRAM_COLOR.get() ? color : Color.WHITE).setAlpha(1f)
                 .renderCenteredQuad(gui.pose(), 8f)
                 .endBatch();
         gui.pose().popPose();
 
-        if (ClientConfig.MONOGRAM_RAYS.get()) {
+        if (WizardsRebornClientConfig.MONOGRAM_RAYS.get()) {
             gui.pose().pushPose();
             gui.pose().translate(x + 8, y + 8, 100);
             RenderBuilder.create().setRenderType(FluffyFurRenderTypes.ADDITIVE)
-                    .setColor(ClientConfig.MONOGRAM_GLOW_COLOR.get() ? color : Color.WHITE).setAlpha(0.15f)
+                    .setColor(WizardsRebornClientConfig.MONOGRAM_GLOW_COLOR.get() ? color : Color.WHITE).setAlpha(0.15f)
                     .renderDragon(gui.pose(), 14f, ClientTickHandler.partialTicks, getId().length())
                     .endBatch();
             gui.pose().popPose();
         }
 
-        if (ClientConfig.MONOGRAM_GLOW.get()) {
+        if (WizardsRebornClientConfig.MONOGRAM_GLOW.get()) {
             for (int i = 0; i < 5; i++) {
                 gui.pose().pushPose();
                 gui.pose().translate(x + 8, y + 8, 100);
                 RenderBuilder.create().setRenderType(FluffyFurRenderTypes.ADDITIVE_TEXTURE)
                         .setUV(sprite)
-                        .setColor(ClientConfig.MONOGRAM_GLOW_COLOR.get() ? color : Color.WHITE).setAlpha(0.15f)
+                        .setColor(WizardsRebornClientConfig.MONOGRAM_GLOW_COLOR.get() ? color : Color.WHITE).setAlpha(0.15f)
                         .renderWavyQuad(gui.pose(), 8f + i, 0.1f, ClientTickHandler.getTotal() + (random.nextFloat() * 100))
                         .endBatch();
                 gui.pose().popPose();
@@ -131,28 +131,28 @@ public class Monogram {
         gui.pose().translate(x + 4, y + 4, 100);
         RenderBuilder.create().setRenderType(FluffyFurRenderTypes.TRANSLUCENT_TEXTURE)
                 .setUV(sprite)
-                .setColor(ClientConfig.MONOGRAM_COLOR.get() ? color : Color.WHITE).setAlpha(1f)
+                .setColor(WizardsRebornClientConfig.MONOGRAM_COLOR.get() ? color : Color.WHITE).setAlpha(1f)
                 .renderCenteredQuad(gui.pose(), 4f)
                 .endBatch();
         gui.pose().popPose();
 
-        if (ClientConfig.MONOGRAM_RAYS.get()) {
+        if (WizardsRebornClientConfig.MONOGRAM_RAYS.get()) {
             gui.pose().pushPose();
             gui.pose().translate(x + 4, y + 4, 100);
             RenderBuilder.create().setRenderType(FluffyFurRenderTypes.ADDITIVE)
-                    .setColor(ClientConfig.MONOGRAM_GLOW_COLOR.get() ? color : Color.WHITE).setAlpha(0.15f)
+                    .setColor(WizardsRebornClientConfig.MONOGRAM_GLOW_COLOR.get() ? color : Color.WHITE).setAlpha(0.15f)
                     .renderDragon(gui.pose(), 7f, ClientTickHandler.partialTicks, getId().length())
                     .endBatch();
             gui.pose().popPose();
         }
 
-        if (ClientConfig.MONOGRAM_GLOW.get()) {
+        if (WizardsRebornClientConfig.MONOGRAM_GLOW.get()) {
             for (int i = 0; i < 5; i++) {
                 gui.pose().pushPose();
                 gui.pose().translate(x + 4, y + 4, 100);
                 RenderBuilder.create().setRenderType(FluffyFurRenderTypes.ADDITIVE_TEXTURE)
                         .setUV(sprite)
-                        .setColor(ClientConfig.MONOGRAM_GLOW_COLOR.get() ? color : Color.WHITE).setAlpha(0.15f)
+                        .setColor(WizardsRebornClientConfig.MONOGRAM_GLOW_COLOR.get() ? color : Color.WHITE).setAlpha(0.15f)
                         .renderWavyQuad(gui.pose(), 4f + (i / 2f), 0.1f, ClientTickHandler.getTotal() + (random.nextFloat() * 100))
                         .endBatch();
                 gui.pose().popPose();

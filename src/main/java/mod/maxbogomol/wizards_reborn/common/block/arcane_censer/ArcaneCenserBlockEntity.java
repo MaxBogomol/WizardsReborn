@@ -120,9 +120,7 @@ public class ArcaneCenserBlockEntity extends ExposedBlockSimpleInventory impleme
             }
         }
 
-        float R = 1f;
-        float G = 1f;
-        float B = 1f;
+        Color color = Color.WHITE;
 
         for (int i = 0; i < getInventorySize(); i++) {
             ItemStack item = getItem(i);
@@ -142,16 +140,12 @@ public class ArcaneCenserBlockEntity extends ExposedBlockSimpleInventory impleme
             for (MobEffectInstance effectInstance : effects) {
                 player.addEffect(new MobEffectInstance(effectInstance));
             }
-
-            int color = PotionUtils.getColor(effects);
-            R = ColorUtil.getRed(color) / 255F;
-            G = ColorUtil.getGreen(color) / 255F;
-            B = ColorUtil.getBlue(color) / 255F;
+            color = ColorUtil.getColor(PotionUtils.getColor(effects));
         }
 
         Vec3 posSmoke = player.getEyePosition().add(player.getLookAngle().scale(0.75f));
         Vec3 vel = player.getEyePosition().add(player.getLookAngle().scale(40)).subtract(posSmoke).scale(1.0 / 20).normalize().scale(0.05f);
-        PacketHandler.sendToTracking(level, player.getOnPos(), new SmokePacket((float) posSmoke.x, (float) posSmoke.y, (float) posSmoke.z, (float) vel.x, (float) vel.y, (float) vel.z, R, G, B));
+        PacketHandler.sendToTracking(level, player.getOnPos(), new SmokePacket(posSmoke, vel, color));
         level.playSound(null, player.getOnPos(), WizardsRebornSounds.STEAM_BURST.get(), SoundSource.PLAYERS, 0.1f, 2.0f);
 
         BlockEntityUpdate.packet(this);

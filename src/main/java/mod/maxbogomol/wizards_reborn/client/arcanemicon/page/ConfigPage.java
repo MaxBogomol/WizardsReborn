@@ -4,7 +4,7 @@ import mod.maxbogomol.wizards_reborn.WizardsReborn;
 import mod.maxbogomol.wizards_reborn.client.arcanemicon.ArcanemiconGui;
 import mod.maxbogomol.wizards_reborn.client.arcanemicon.Page;
 import mod.maxbogomol.wizards_reborn.client.arcanemicon.index.ConfigIndexEntry;
-import mod.maxbogomol.wizards_reborn.client.config.ClientConfig;
+import mod.maxbogomol.wizards_reborn.config.WizardsRebornClientConfig;
 import net.minecraft.ChatFormatting;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
@@ -173,7 +173,7 @@ public class ConfigPage extends Page {
 
                 drawText(book, gui, getFormatText(changed, name), x + 4, y + 16 + i * 24 - Minecraft.getInstance().font.lineHeight);
 
-                if (ClientConfig.CONFIG_CENTER.get()) {
+                if (WizardsRebornClientConfig.CONFIG_CENTER.get()) {
                     String title = value;
                     int titleWidth = Minecraft.getInstance().font.width(title);
                     drawText(book, gui, value, x + 48 - titleWidth / 2, y + 26 + i * 24 - Minecraft.getInstance().font.lineHeight);

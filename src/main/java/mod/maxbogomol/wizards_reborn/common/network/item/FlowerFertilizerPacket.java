@@ -4,69 +4,60 @@ import mod.maxbogomol.fluffy_fur.client.particle.ParticleBuilder;
 import mod.maxbogomol.fluffy_fur.client.particle.data.ColorParticleData;
 import mod.maxbogomol.fluffy_fur.client.particle.data.GenericParticleData;
 import mod.maxbogomol.fluffy_fur.client.particle.data.SpinParticleData;
+import mod.maxbogomol.fluffy_fur.common.network.PositionClientPacket;
 import mod.maxbogomol.fluffy_fur.registry.client.FluffyFurParticles;
 import mod.maxbogomol.wizards_reborn.WizardsReborn;
+import mod.maxbogomol.wizards_reborn.common.network.ArcanemiconOfferingEffectPacket;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.phys.Vec3;
 import net.minecraftforge.network.NetworkEvent;
+import net.minecraftforge.network.simple.SimpleChannel;
 
-import java.util.Random;
 import java.util.function.Supplier;
 
-public class FlowerFertilizerPacket {
-    private final float posX;
-    private final float posY;
-    private final float posZ;
+public class FlowerFertilizerPacket extends PositionClientPacket {
 
-    private static final Random random = new Random();
-
-    public FlowerFertilizerPacket(float posX, float posY, float posZ) {
-        this.posX = posX;
-        this.posY = posY;
-        this.posZ = posZ;
+    public FlowerFertilizerPacket(double x, double y, double z) {
+        super(x, y, z);
     }
 
-    public static FlowerFertilizerPacket decode(FriendlyByteBuf buf) {
-        return new FlowerFertilizerPacket(buf.readFloat(), buf.readFloat(), buf.readFloat());
+    public FlowerFertilizerPacket(Vec3 vec) {
+        super(vec);
     }
 
-    public void encode(FriendlyByteBuf buf) {
-        buf.writeFloat(posX);
-        buf.writeFloat(posY);
-        buf.writeFloat(posZ);
+    @Override
+    public void execute(Supplier<NetworkEvent.Context> context) {
+        Level level = WizardsReborn.proxy.getLevel();
+        ParticleBuilder.create(FluffyFurParticles.WISP)
+                .setColorData(ColorParticleData.create(0.545F, 0.875F, 0.522F).build())
+                .setTransparencyData(GenericParticleData.create(0.4f, 0).build())
+                .setScaleData(GenericParticleData.create(0.1f, 0.5f).build())
+                .setSpinData(SpinParticleData.create().randomSpin(0.01f).build())
+                .setLifetime(20)
+                .setGravity(1f)
+                .randomVelocity(0.05f)
+                .addVelocity(0, 0.2F, 0)
+                .randomOffset(0.125f)
+                .repeat(level, x, y, z, 10);
+        ParticleBuilder.create(FluffyFurParticles.SPARKLE)
+                .setColorData(ColorParticleData.create(0.545F, 0.875F, 0.522F).build())
+                .setTransparencyData(GenericParticleData.create(0.4f, 0).build())
+                .setScaleData(GenericParticleData.create(0.1f, 0.5f).build())
+                .setSpinData(SpinParticleData.create().randomSpin(0.01f).build())
+                .setLifetime(10)
+                .setGravity(1f)
+                .randomVelocity(0.05f)
+                .addVelocity(0, 0.2F, 0)
+                .randomOffset(0.125f)
+                .repeat(level, x, y, z, 10);
     }
 
-    public static void handle(FlowerFertilizerPacket msg, Supplier<NetworkEvent.Context> ctx) {
-        if (ctx.get().getDirection().getReceptionSide().isClient()) {
-            ctx.get().enqueueWork(new Runnable() {
-                @Override
-                public void run() {
-                    Level level = WizardsReborn.proxy.getLevel();
-                    ParticleBuilder.create(FluffyFurParticles.WISP)
-                            .setColorData(ColorParticleData.create(0.545F, 0.875F, 0.522F).build())
-                            .setTransparencyData(GenericParticleData.create(0.4f, 0).build())
-                            .setScaleData(GenericParticleData.create(0.1f, 0.5f).build())
-                            .setSpinData(SpinParticleData.create().randomSpin(0.01f).build())
-                            .setLifetime(20)
-                            .setGravity(1f)
-                            .randomVelocity(0.05f)
-                            .addVelocity(0, 0.2F, 0)
-                            .randomOffset(0.125f)
-                            .repeat(level, msg.posX, msg.posY, msg.posZ, 10);
-                    ParticleBuilder.create(FluffyFurParticles.SPARKLE)
-                            .setColorData(ColorParticleData.create(0.545F, 0.875F, 0.522F).build())
-                            .setTransparencyData(GenericParticleData.create(0.4f, 0).build())
-                            .setScaleData(GenericParticleData.create(0.1f, 0.5f).build())
-                            .setSpinData(SpinParticleData.create().randomSpin(0.01f).build())
-                            .setLifetime(10)
-                            .setGravity(1f)
-                            .randomVelocity(0.05f)
-                            .addVelocity(0, 0.2F, 0)
-                            .randomOffset(0.125f)
-                            .repeat(level, msg.posX, msg.posY, msg.posZ, 10);
-                    ctx.get().setPacketHandled(true);
-                }
-            });
-        }
+    public static void register(SimpleChannel instance, int index) {
+        instance.registerMessage(index, ArcanemiconOfferingEffectPacket.class, ArcanemiconOfferingEffectPacket::encode, ArcanemiconOfferingEffectPacket::decode, ArcanemiconOfferingEffectPacket::handle);
+    }
+
+    public static ArcanemiconOfferingEffectPacket decode(FriendlyByteBuf buf) {
+        return decode(ArcanemiconOfferingEffectPacket::new, buf);
     }
 }

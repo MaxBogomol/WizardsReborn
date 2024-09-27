@@ -26,6 +26,7 @@ import java.util.List;
 import java.util.*;
 
 public class SonarArcaneEnchantment extends ArcaneEnchantment {
+
     public static String alphabet = "abcdefghijklmnopqrstuvwxyz";
 
     public SonarArcaneEnchantment(String id, int maxLevel) {

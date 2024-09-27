@@ -20,7 +20,7 @@ public class FlowerFertilizerItem extends BoneMealItem {
         if (result1 != InteractionResult.PASS || result2 != InteractionResult.PASS) {
             if (!context.getLevel().isClientSide()) {
                 Vec3 pos = context.getClickedPos().getCenter();
-                PacketHandler.sendToTracking(context.getLevel(), context.getClickedPos(), new FlowerFertilizerPacket((float) pos.x(), (float) pos.y() - 0.4f, (float) pos.z()));
+                PacketHandler.sendToTracking(context.getLevel(), context.getClickedPos(), new FlowerFertilizerPacket(pos.add(0, -0.4f, 0)));
             }
             return InteractionResult.sidedSuccess(context.getLevel().isClientSide);
         }

@@ -12,7 +12,7 @@ import mod.maxbogomol.wizards_reborn.WizardsReborn;
 import mod.maxbogomol.wizards_reborn.api.wissen.IWissenItem;
 import mod.maxbogomol.wizards_reborn.api.wissen.WissenItemUtil;
 import mod.maxbogomol.wizards_reborn.api.wissen.WissenUtil;
-import mod.maxbogomol.wizards_reborn.common.config.Config;
+import mod.maxbogomol.wizards_reborn.config.WizardsRebornConfig;
 import mod.maxbogomol.wizards_reborn.common.network.item.ArcanumLensBurstPacket;
 import mod.maxbogomol.wizards_reborn.common.network.PacketHandler;
 import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornSounds;
@@ -88,7 +88,7 @@ public class ArcanumLensItem extends ArcanumItem implements IGuiParticleItem {
             poseStack.mulPose(Axis.ZP.rotationDegrees(i * 2 + (ticks * 2f)));
             RenderBuilder.create().setRenderType(FluffyFurRenderTypes.ADDITIVE_TEXTURE)
                     .setUV(RenderUtil.getSprite(FluffyFur.MOD_ID, "particle/sparkle"))
-                    .setColorRaw(Config.wissenColorR(), Config.wissenColorG(), Config.wissenColorB()).setAlpha(0.2f)
+                    .setColorRaw(WizardsRebornConfig.wissenColorR(), WizardsRebornConfig.wissenColorG(), WizardsRebornConfig.wissenColorB()).setAlpha(0.2f)
                     .renderCenteredQuad(poseStack, 3f * offset)
                     .endBatch();
             poseStack.popPose();

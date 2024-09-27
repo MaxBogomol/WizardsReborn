@@ -11,7 +11,7 @@ import mod.maxbogomol.fluffy_fur.common.network.PositionClientPacket;
 import mod.maxbogomol.fluffy_fur.registry.client.FluffyFurParticles;
 import mod.maxbogomol.fluffy_fur.registry.client.FluffyFurRenderTypes;
 import mod.maxbogomol.wizards_reborn.WizardsReborn;
-import mod.maxbogomol.wizards_reborn.common.config.Config;
+import mod.maxbogomol.wizards_reborn.config.WizardsRebornConfig;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.Vec3;
@@ -49,7 +49,7 @@ public class ArcanemiconOfferingEffectPacket extends PositionClientPacket {
         ParticleBuilder circleBuilder = ParticleBuilder.create(FluffyFurParticles.TINY_CIRCLE)
                 .setRenderType(FluffyFurRenderTypes.ADDITIVE_PARTICLE_TEXTURE)
                 .setBehavior(TrailParticleBehavior.create().build())
-                .setColorData(ColorParticleData.create(Config.wissenColorR(), Config.wissenColorG(), Config.wissenColorB()).build())
+                .setColorData(ColorParticleData.create(WizardsRebornConfig.wissenColorR(), WizardsRebornConfig.wissenColorG(), WizardsRebornConfig.wissenColorB()).build())
                 .setTransparencyData(GenericParticleData.create(0.4f, 0.4f, 0).setEasing(Easing.QUARTIC_OUT).build())
                 .setScaleData(GenericParticleData.create(0.2f, 0.4f, 0f).setEasing(Easing.ELASTIC_OUT).build())
                 .setLifetime(100)
