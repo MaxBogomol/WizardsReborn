@@ -11,8 +11,10 @@ import net.minecraft.client.model.geom.EntityModelSet;
 import net.minecraft.client.renderer.BlockEntityWithoutLevelRenderer;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.blockentity.BlockEntityRenderDispatcher;
+import net.minecraft.client.resources.model.ModelResourceLocation;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemDisplayContext;
 import net.minecraft.world.item.ItemStack;
 
@@ -47,69 +49,10 @@ public class WizardsRebornItemRenderer extends BlockEntityWithoutLevelRenderer {
             poseStack.popPose();
         }
 
-        if (stack.getItem() == WizardsRebornItems.ARCANE_WOOD_LIGHT_CASING.get()) {
-            poseStack.pushPose();
-            poseStack.translate(0.5f, 0.5f, 0.5f);
-            RenderUtil.renderCustomModel(WizardsRebornModels.ARCANE_WOOD_LIGHT_CASING_PIECE, ItemDisplayContext.FIXED, false, poseStack, buffer, packedLight, packedOverlay);
-            for (Direction direction : Direction.values()) {
-                poseStack.pushPose();
-                BlockPos pos = new BlockPos(0, 0, 0).relative(direction);
-                poseStack.translate(pos.getX() * 0.4375f, pos.getY() * 0.4375f, pos.getZ() * 0.4375f);
-                RenderBuilder builder = WizardsRebornRenderUtil.renderHoveringLens(poseStack, buffer, packedLight, packedOverlay);
-                if (displayContext.firstPerson()) FluffyFurRenderTypes.addCustomItemRenderBuilderFirst(builder);
-                if (displayContext == ItemDisplayContext.GUI) FluffyFurRenderTypes.addCustomItemRenderBuilderGui(builder);
-                poseStack.popPose();
-            }
-            poseStack.popPose();
-        }
-
-        if (stack.getItem() == WizardsRebornItems.INNOCENT_WOOD_LIGHT_CASING.get()) {
-            poseStack.pushPose();
-            poseStack.translate(0.5f, 0.5f, 0.5f);
-            RenderUtil.renderCustomModel(WizardsRebornModels.INNOCENT_WOOD_LIGHT_CASING_PIECE, ItemDisplayContext.FIXED, false, poseStack, buffer, packedLight, packedOverlay);
-            for (Direction direction : Direction.values()) {
-                poseStack.pushPose();
-                BlockPos pos = new BlockPos(0, 0, 0).relative(direction);
-                poseStack.translate(pos.getX() * 0.4375f, pos.getY() * 0.4375f, pos.getZ() * 0.4375f);
-                RenderBuilder builder = WizardsRebornRenderUtil.renderHoveringLens(poseStack, buffer, packedLight, packedOverlay);
-                if (displayContext.firstPerson()) FluffyFurRenderTypes.addCustomItemRenderBuilderFirst(builder);
-                if (displayContext == ItemDisplayContext.GUI) FluffyFurRenderTypes.addCustomItemRenderBuilderGui(builder);
-                poseStack.popPose();
-            }
-            poseStack.popPose();
-        }
-
-        if (stack.getItem() == WizardsRebornItems.CORK_BAMBOO_LIGHT_CASING.get()) {
-            poseStack.pushPose();
-            poseStack.translate(0.5f, 0.5f, 0.5f);
-            RenderUtil.renderCustomModel(WizardsRebornModels.CORK_BAMBOO_LIGHT_CASING_PIECE, ItemDisplayContext.FIXED, false, poseStack, buffer, packedLight, packedOverlay);
-            for (Direction direction : Direction.values()) {
-                poseStack.pushPose();
-                BlockPos pos = new BlockPos(0, 0, 0).relative(direction);
-                poseStack.translate(pos.getX() * 0.4375f, pos.getY() * 0.4375f, pos.getZ() * 0.4375f);
-                RenderBuilder builder = WizardsRebornRenderUtil.renderHoveringLens(poseStack, buffer, packedLight, packedOverlay);
-                if (displayContext.firstPerson()) FluffyFurRenderTypes.addCustomItemRenderBuilderFirst(builder);
-                if (displayContext == ItemDisplayContext.GUI) FluffyFurRenderTypes.addCustomItemRenderBuilderGui(builder);
-                poseStack.popPose();
-            }
-            poseStack.popPose();
-        }
-
-        if (stack.getItem() == WizardsRebornItems.WISESTONE_LIGHT_CASING.get()) {
-            poseStack.pushPose();
-            poseStack.translate(0.5f, 0.5f, 0.5f);
-            RenderUtil.renderCustomModel(WizardsRebornModels.WISESTONE_LIGHT_CASING_PIECE, ItemDisplayContext.FIXED, false, poseStack, buffer, packedLight, packedOverlay);
-            for (Direction direction : Direction.values()) {
-                poseStack.pushPose();
-                BlockPos pos = new BlockPos(0, 0, 0).relative(direction);
-                poseStack.translate(pos.getX() * 0.4375f, pos.getY() * 0.4375f, pos.getZ() * 0.4375f);
-                RenderBuilder builder = WizardsRebornRenderUtil.renderHoveringLens(poseStack, buffer, packedLight, packedOverlay);
-                if (displayContext.firstPerson()) FluffyFurRenderTypes.addCustomItemRenderBuilderFirst(builder);
-                if (displayContext == ItemDisplayContext.GUI) FluffyFurRenderTypes.addCustomItemRenderBuilderGui(builder);
-                poseStack.popPose();
-            }
-            poseStack.popPose();
-        }
+        renderLightCasing(WizardsRebornItems.ARCANE_WOOD_LIGHT_CASING.get(), WizardsRebornModels.ARCANE_WOOD_LIGHT_CASING_PIECE, stack, displayContext, poseStack, buffer, packedLight, packedOverlay);
+        renderLightCasing(WizardsRebornItems.INNOCENT_WOOD_LIGHT_CASING.get(), WizardsRebornModels.INNOCENT_WOOD_LIGHT_CASING_PIECE, stack, displayContext, poseStack, buffer, packedLight, packedOverlay);
+        renderLightCasing(WizardsRebornItems.CORK_BAMBOO_LIGHT_CASING.get(), WizardsRebornModels.CORK_BAMBOO_LIGHT_CASING_PIECE, stack, displayContext, poseStack, buffer, packedLight, packedOverlay);
+        renderLightCasing(WizardsRebornItems.WISESTONE_LIGHT_CASING.get(), WizardsRebornModels.WISESTONE_LIGHT_CASING_PIECE, stack, displayContext, poseStack, buffer, packedLight, packedOverlay);
 
         if (stack.getItem() == WizardsRebornItems.CREATIVE_LIGHT_STORAGE.get()) {
             poseStack.pushPose();
@@ -119,6 +62,24 @@ public class WizardsRebornItemRenderer extends BlockEntityWithoutLevelRenderer {
                 poseStack.pushPose();
                 BlockPos pos = new BlockPos(0, 0, 0).relative(direction);
                 poseStack.translate(pos.getX() * 0.25f, pos.getY() * 0.25f, pos.getZ() * 0.25f);
+                RenderBuilder builder = WizardsRebornRenderUtil.renderHoveringLens(poseStack, buffer, packedLight, packedOverlay);
+                if (displayContext.firstPerson()) FluffyFurRenderTypes.addCustomItemRenderBuilderFirst(builder);
+                if (displayContext == ItemDisplayContext.GUI) FluffyFurRenderTypes.addCustomItemRenderBuilderGui(builder);
+                poseStack.popPose();
+            }
+            poseStack.popPose();
+        }
+    }
+
+    public static void renderLightCasing(Item item, ModelResourceLocation model, ItemStack stack, ItemDisplayContext displayContext, PoseStack poseStack, MultiBufferSource buffer, int packedLight, int packedOverlay) {
+        if (stack.getItem() == item) {
+            poseStack.pushPose();
+            poseStack.translate(0.5f, 0.5f, 0.5f);
+            RenderUtil.renderCustomModel(model, ItemDisplayContext.FIXED, false, poseStack, buffer, packedLight, packedOverlay);
+            for (Direction direction : Direction.values()) {
+                poseStack.pushPose();
+                BlockPos pos = new BlockPos(0, 0, 0).relative(direction);
+                poseStack.translate(pos.getX() * 0.4375f, pos.getY() * 0.4375f, pos.getZ() * 0.4375f);
                 RenderBuilder builder = WizardsRebornRenderUtil.renderHoveringLens(poseStack, buffer, packedLight, packedOverlay);
                 if (displayContext.firstPerson()) FluffyFurRenderTypes.addCustomItemRenderBuilderFirst(builder);
                 if (displayContext == ItemDisplayContext.GUI) FluffyFurRenderTypes.addCustomItemRenderBuilderGui(builder);

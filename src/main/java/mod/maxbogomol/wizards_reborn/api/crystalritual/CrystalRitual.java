@@ -65,9 +65,7 @@ public class CrystalRitual {
     }
 
     public List<CrystalType> getCrystalsList() {
-        List<CrystalType> list = new ArrayList<>();
-
-        return list;
+        return new ArrayList<>();
     }
 
     public int getMinimalPolishingLevel() {
@@ -285,11 +283,7 @@ public class CrystalRitual {
         }
 
         Optional<CrystalRitualRecipe> recipe = level.getRecipeManager().getRecipeFor(WizardsRebornRecipes.CRYSTAL_RITUAL.get(), inv, level);
-        if (recipe.isPresent()) {
-            return (recipe.get().getRecipeRitual() == this);
-        }
-
-        return false;
+        return recipe.filter(crystalRitualRecipe -> (crystalRitualRecipe.getRecipeRitual() == this)).isPresent();
     }
 
     public static void deleteItemsFromPedestals(Level level, BlockPos startPos, List<ArcanePedestalBlockEntity> pedestals, boolean hasSound, boolean hasEffect) {
@@ -297,20 +291,20 @@ public class CrystalRitual {
         Random random = new Random();
 
         int ii = 0;
-        for (int i = 0; i < pedestals.size(); i++) {
-            if (!pedestals.get(i).getItemHandler().getItem(0).isEmpty()) {
-                pedestals.get(i).getItemHandler().removeItemNoUpdate(0);
-                BlockEntityUpdate.packet(pedestals.get(i));
+        for (ArcanePedestalBlockEntity pedestal : pedestals) {
+            if (!pedestal.getItemHandler().getItem(0).isEmpty()) {
+                pedestal.getItemHandler().removeItemNoUpdate(0);
+                BlockEntityUpdate.packet(pedestal);
 
                 if (hasSound) {
-                    level.playSound(WizardsReborn.proxy.getPlayer(), pedestals.get(i).getBlockPos(), WizardsRebornSounds.WISSEN_TRANSFER.get(), SoundSource.BLOCKS, 0.25f, (float) (1f + ((random.nextFloat() - 0.5D) / 4)));
+                    level.playSound(WizardsReborn.proxy.getPlayer(), pedestal.getBlockPos(), WizardsRebornSounds.WISSEN_TRANSFER.get(), SoundSource.BLOCKS, 0.25f, (float) (1f + ((random.nextFloat() - 0.5D) / 4)));
                 }
 
                 if (hasEffect) {
                     CompoundTag tagBlock = new CompoundTag();
-                    tagBlock.putInt("x", pedestals.get(i).getBlockPos().getX());
-                    tagBlock.putInt("y", pedestals.get(i).getBlockPos().getY());
-                    tagBlock.putInt("z", pedestals.get(i).getBlockPos().getZ());
+                    tagBlock.putInt("x", pedestal.getBlockPos().getX());
+                    tagBlock.putInt("y", pedestal.getBlockPos().getY());
+                    tagBlock.putInt("z", pedestal.getBlockPos().getZ());
                     tagPos.put(String.valueOf(ii), tagBlock);
                     ii++;
                 }
@@ -363,9 +357,7 @@ public class CrystalRitual {
     }
 
     public List<ItemStack> getItemsResult(CrystalBlockEntity crystal) {
-        List<ItemStack> list = new ArrayList<>();
-
-        return list;
+        return new ArrayList<>();
     }
 
     public boolean canStartWithCrystal(CrystalBlockEntity crystal) {

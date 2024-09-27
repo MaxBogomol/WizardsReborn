@@ -41,7 +41,7 @@ import java.util.Random;
 
 public class Spell {
     public String id;
-    public ArrayList<CrystalType> crystalTypes = new ArrayList<CrystalType>();
+    public ArrayList<CrystalType> crystalTypes = new ArrayList<>();
     public static Random random = new Random();
     public Research research;
     public int points;
@@ -163,11 +163,7 @@ public class Spell {
         ItemStack stack = player.getItemInHand(hand);
 
         CompoundTag nbt = stack.getTag();
-        if (nbt.getBoolean("crystal") && nbt.getInt("cooldown") <= 0 && WissenItemUtil.canRemoveWissen(stack, getWissenCostWithStat(getStats(stack), player))) {
-            return true;
-        }
-
-        return false;
+        return nbt.getBoolean("crystal") && nbt.getInt("cooldown") <= 0 && WissenItemUtil.canRemoveWissen(stack, getWissenCostWithStat(getStats(stack), player));
     }
 
     public boolean canSpellAir(Level level, Player player, InteractionHand hand) {
@@ -175,14 +171,14 @@ public class Spell {
     }
 
     public void setCooldown(ItemStack stack, CompoundTag stats) {
-        CompoundTag nbt = stack.getTag();
+        CompoundTag nbt = stack.getOrCreateTag();
         int cooldown = getCooldownWithStat(stats);
         nbt.putInt("cooldown", cooldown);
         nbt.putInt("maxCooldown", cooldown);
     }
 
     public void setCooldown(ItemStack stack, CompoundTag stats, int cost) {
-        CompoundTag nbt = stack.getTag();
+        CompoundTag nbt = stack.getOrCreateTag();
         int cooldown = getCooldownWithStat(stats, cost);
         nbt.putInt("cooldown", cooldown);
         nbt.putInt("maxCooldown", cooldown);

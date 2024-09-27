@@ -21,8 +21,8 @@ public class LightTransferLensSoundInstance extends BlockEntitySoundInstance<Lig
         super.tick();
     }
 
-    public static LightTransferLensSoundInstance playSound(LightTransferLensBlockEntity tileEntity) {
-        return new LightTransferLensSoundInstance(tileEntity, 1, 1);
+    public static LightTransferLensSoundInstance playSound(LightTransferLensBlockEntity blockEntity) {
+        return new LightTransferLensSoundInstance(blockEntity, 1, 1);
     }
 
     public void playSound() {

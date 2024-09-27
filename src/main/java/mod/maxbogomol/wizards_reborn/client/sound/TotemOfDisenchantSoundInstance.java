@@ -21,7 +21,7 @@ public class TotemOfDisenchantSoundInstance extends BlockEntitySoundInstance<Tot
         super.tick();
     }
 
-    public static void playSound(TotemOfDisenchantBlockEntity tileEntity) {
-        Minecraft.getInstance().getSoundManager().queueTickingSound(new TotemOfDisenchantSoundInstance(tileEntity, 1, 1));
+    public static void playSound(TotemOfDisenchantBlockEntity blockEntity) {
+        Minecraft.getInstance().getSoundManager().queueTickingSound(new TotemOfDisenchantSoundInstance(blockEntity, 1, 1));
     }
 }

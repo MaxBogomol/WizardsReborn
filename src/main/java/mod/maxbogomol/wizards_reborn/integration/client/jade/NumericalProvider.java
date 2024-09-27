@@ -21,34 +21,34 @@ public enum NumericalProvider implements IBlockComponentProvider {
     INSTANCE;
 
     public void appendTooltip(ITooltip tooltip, BlockAccessor accessor, IPluginConfig config) {
-        BlockEntity tile = accessor.getLevel().getBlockEntity(accessor.getPosition());
+        BlockEntity blockEntity = accessor.getLevel().getBlockEntity(accessor.getPosition());
 
-        if (tile instanceof IWissenBlockEntity wissenTile) {
-            tooltip.add(NumericalUtil.getWissenName(wissenTile.getWissen(), wissenTile.getMaxWissen()));
+        if (blockEntity instanceof IWissenBlockEntity wissenBlockEntity) {
+            tooltip.add(NumericalUtil.getWissenName(wissenBlockEntity.getWissen(), wissenBlockEntity.getMaxWissen()));
         }
-        if (tile instanceof ICooldownBlockEntity cooldownTile) {
-            tooltip.add(NumericalUtil.getCooldownName(cooldownTile.getCooldown()));
+        if (blockEntity instanceof ICooldownBlockEntity cooldownBlockEntity) {
+            tooltip.add(NumericalUtil.getCooldownName(cooldownBlockEntity.getCooldown()));
         }
-        if (tile instanceof ILightBlockEntity lightTile) {
-            if (lightTile.getLight() > 0) {
+        if (blockEntity instanceof ILightBlockEntity lightBlockEntity) {
+            if (lightBlockEntity.getLight() > 0) {
                 tooltip.add(NumericalUtil.getLightName().copy().append(Component.literal(": ").append(Component.translatable("tooltip.jade.state_on"))));
             } else {
                 tooltip.add(NumericalUtil.getLightName().copy().append(Component.literal(": ").append(Component.translatable("tooltip.jade.state_off"))));
             }
         }
-        if (tile instanceof IFluidBlockEntity fluidTile) {
-            tooltip.add(NumericalUtil.getFluidName(fluidTile.getFluidStack(), fluidTile.getFluidMaxAmount()));
+        if (blockEntity instanceof IFluidBlockEntity fluidBlockEntity) {
+            tooltip.add(NumericalUtil.getFluidName(fluidBlockEntity.getFluidStack(), fluidBlockEntity.getFluidMaxAmount()));
         }
-        if (tile instanceof IExperienceBlockEntity experienceTile) {
-            tooltip.add(NumericalUtil.getExperienceName(experienceTile.getExperience(), experienceTile.getMaxExperience()));
+        if (blockEntity instanceof IExperienceBlockEntity experienceBlockEntity) {
+            tooltip.add(NumericalUtil.getExperienceName(experienceBlockEntity.getExperience(), experienceBlockEntity.getMaxExperience()));
         }
-        if (tile instanceof IHeatBlockEntity heatTile) {
-            tooltip.add(NumericalUtil.getHeatName(heatTile.getHeat(), heatTile.getMaxHeat()));
+        if (blockEntity instanceof IHeatBlockEntity heatBlockEntity) {
+            tooltip.add(NumericalUtil.getHeatName(heatBlockEntity.getHeat(), heatBlockEntity.getMaxHeat()));
         }
-        if (tile instanceof ISteamBlockEntity steamTile) {
-            tooltip.add(NumericalUtil.getSteamName(steamTile.getSteam(), steamTile.getMaxSteam()));
+        if (blockEntity instanceof ISteamBlockEntity steamBlockEntity) {
+            tooltip.add(NumericalUtil.getSteamName(steamBlockEntity.getSteam(), steamBlockEntity.getMaxSteam()));
         }
-        if (tile instanceof AlchemyMachineBlockEntity machine) {
+        if (blockEntity instanceof AlchemyMachineBlockEntity machine) {
             for (int i = 0; i <= 2; i++) {
                 tooltip.add(NumericalUtil.getFluidName(machine.getFluidStack(i), machine.getMaxCapacity()));
             }

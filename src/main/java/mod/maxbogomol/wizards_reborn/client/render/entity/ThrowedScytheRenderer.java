@@ -1,7 +1,6 @@
 package mod.maxbogomol.wizards_reborn.client.render.entity;
 
 import com.mojang.blaze3d.vertex.PoseStack;
-import com.mojang.blaze3d.vertex.VertexConsumer;
 import com.mojang.math.Axis;
 import mod.maxbogomol.fluffy_fur.FluffyFur;
 import mod.maxbogomol.fluffy_fur.client.render.RenderBuilder;
@@ -34,23 +33,16 @@ public class ThrowedScytheRenderer<T extends ThrowedScytheEntity> extends Entity
 
     @Override
     public void render(ThrowedScytheEntity entity, float entityYaw, float partialTicks, PoseStack poseStack, MultiBufferSource bufferSource, int light) {
-        MultiBufferSource bufferDelayed = FluffyFurRenderTypes.getDelayedRender();
-        VertexConsumer builder = bufferDelayed.getBuffer(FluffyFurRenderTypes.ADDITIVE);
         Color color = WizardsRebornArcaneEnchantments.THROW.getColor();
 
-        List<Vec3> trailList = new ArrayList<>(entity.trail);
-        if (trailList.size() > 1 && entity.tickCount >= 30) {
-            Vec3 position = trailList.get(0);
-            Vec3 nextPosition = trailList.get(1);
-            float x = (float) Mth.lerp(partialTicks, position.x, nextPosition.x);
-            float y = (float) Mth.lerp(partialTicks, position.y, nextPosition.y);
-            float z = (float) Mth.lerp(partialTicks, position.z, nextPosition.z);
-            trailList.set(0, new Vec3(x, y, z));
-        }
-
-        List<TrailPoint> trail = new ArrayList<>();
-        for (Vec3 point : trailList) {
-            trail.add(new TrailPoint(point.subtract(entity.position())));
+        List<TrailPoint> trail = new ArrayList<>(entity.trailPointBuilder.getTrailPoints());
+        if (trail.size() > 1 && entity.tickCount >= entity.trailPointBuilder.trailLength.get()) {
+            TrailPoint position = trail.get(0);
+            TrailPoint nextPosition = trail.get(1);
+            float x = (float) Mth.lerp(partialTicks, position.getPosition().x, nextPosition.getPosition().x);
+            float y = (float) Mth.lerp(partialTicks, position.getPosition().y, nextPosition.getPosition().y);
+            float z = (float) Mth.lerp(partialTicks, position.getPosition().z, nextPosition.getPosition().z);
+            trail.set(0, new TrailPoint(new Vec3(x, y, z)));
         }
 
         float x = (float) Mth.lerp(partialTicks, entity.xOld, entity.getX());
@@ -58,12 +50,8 @@ public class ThrowedScytheRenderer<T extends ThrowedScytheEntity> extends Entity
         float z = (float) Mth.lerp(partialTicks, entity.zOld, entity.getZ());
 
         poseStack.pushPose();
+        poseStack.translate(-x, -y, -z);
         poseStack.translate(0, 0.1f, 0);
-        poseStack.translate(entity.getX() - x, entity.getY() - y,  entity.getZ() - z);
-        poseStack.translate(0, 0.1f, 0);
-        //RenderUtils.renderTrail(poseStack, builder, entity.position(), trailList, 0,0.02f, 0,1.0f, 1.0f, color, 4, true);
-        poseStack.translate(0, -0.1f, 0);
-
         RenderBuilder.create().setRenderType(FluffyFurRenderTypes.ADDITIVE_TEXTURE)
                 .setUV(RenderUtil.getSprite(FluffyFur.MOD_ID, "particle/trail"))
                 .setColor(color)
@@ -84,14 +72,18 @@ public class ThrowedScytheRenderer<T extends ThrowedScytheEntity> extends Entity
             double yaw = Math.atan2(dZ, dX);
             double pitch = Math.atan2(Math.sqrt(dZ * dZ + dX * dX), dY) + Math.PI;
 
-            float r = color.getRed() / 255f;
-            float g = color.getGreen() / 255f;
-            float b = color.getBlue() / 255f;
             float alpha = entity.getFadeTick() / 30f;
 
             poseStack.mulPose(Axis.YP.rotationDegrees((float) Math.toDegrees(-yaw)));
-            poseStack.mulPose(Axis.ZP.rotationDegrees((float) Math.toDegrees(-pitch) - 90f));
-            WizardsRebornRenderUtil.scytheTrail(poseStack, bufferDelayed, 2f, distance, 0.5f, r, g, b, 0.5f * alpha, r, g, b, 0.5f * alpha);
+            poseStack.mulPose(Axis.ZP.rotationDegrees((float) Math.toDegrees(-pitch) - 180f));
+            poseStack.mulPose(Axis.YP.rotationDegrees(90f));
+            RenderBuilder renderBuilder = RenderBuilder.create().setRenderType(FluffyFurRenderTypes.ADDITIVE)
+                    .setUV(RenderUtil.getSprite(FluffyFur.MOD_ID, "particle/trail"))
+                    .setColor(color)
+                    .setAlpha(0.5f * alpha)
+                    .setSecondAlpha(0.05f * alpha)
+                    .enableSided();
+            WizardsRebornRenderUtil.scytheTrail(renderBuilder, poseStack, 1f, distance, 0.5f);
             poseStack.popPose();
         }
 
@@ -112,7 +104,7 @@ public class ThrowedScytheRenderer<T extends ThrowedScytheEntity> extends Entity
     }
 
     @Override
-    public boolean shouldRender(T livingEntityIn, Frustum camera, double camX, double camY, double camZ) {
+    public boolean shouldRender(T livingEntity, Frustum camera, double camX, double camY, double camZ) {
         return true;
     }
 

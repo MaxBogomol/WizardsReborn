@@ -15,8 +15,8 @@ public class CrystalUtil {
 
     public static void createCrystalItemStats(ItemStack stack, CrystalType type, Level level, int count) {
         int maxCount = 0;
-        Map<CrystalStat, Integer> intStats = new HashMap<CrystalStat, Integer>();
-        ArrayList<CrystalStat> stats = new ArrayList<CrystalStat>();
+        Map<CrystalStat, Integer> intStats = new HashMap<>();
+        ArrayList<CrystalStat> stats = new ArrayList<>();
 
         for (CrystalStat stat : type.getStats()) {
             maxCount = maxCount + stat.getMaxLevel();
@@ -45,10 +45,9 @@ public class CrystalUtil {
 
     public static void createCrystalFromFractured(ItemStack stack, Container container) {
         int fracturedCount = 0;
-        Map<CrystalStat, Integer> intStats = new HashMap<CrystalStat, Integer>();
+        Map<CrystalStat, Integer> intStats = new HashMap<>();
         for (int i = 0; i < container.getContainerSize(); i++) {
-            if (container.getItem(i).getItem() instanceof FracturedCrystalItem) {
-                FracturedCrystalItem fractured = (FracturedCrystalItem) container.getItem(i).getItem();
+            if (container.getItem(i).getItem() instanceof FracturedCrystalItem fractured) {
                 fracturedCount++;
 
                 for (CrystalStat stat : fractured.getType().getStats()) {

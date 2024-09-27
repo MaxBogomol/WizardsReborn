@@ -9,7 +9,6 @@ import mod.maxbogomol.fluffy_fur.util.RenderUtil;
 import mod.maxbogomol.wizards_reborn.api.wissen.WissenUtil;
 import mod.maxbogomol.wizards_reborn.common.block.totem.experience_totem.ExperienceTotemBlockEntity;
 import mod.maxbogomol.wizards_reborn.util.WizardsRebornRenderUtil;
-import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.blockentity.BlockEntityRenderer;
 import net.minecraft.world.phys.Vec3;
@@ -23,7 +22,6 @@ public class ExperienceTotemRenderer implements BlockEntityRenderer<ExperienceTo
         Random random = new Random();
         random.setSeed(blockEntity.getBlockPos().asLong());
 
-        Minecraft minecraft = Minecraft.getInstance();
         double ticks = (ClientTickHandler.ticksInGame + partialTicks) * 0.5F;
         double ticksUp = (ClientTickHandler.ticksInGame + partialTicks) * 3;
         ticksUp = (ticksUp) % 360;
@@ -32,7 +30,7 @@ public class ExperienceTotemRenderer implements BlockEntityRenderer<ExperienceTo
         float alpha = (float) (0.45f + Math.abs(Math.sin(Math.toRadians(random.nextFloat() * 360f + ticksAlpha)) * 0.2f));
 
         float globalOffset = (float) Math.abs(Math.sin(Math.toRadians(random.nextFloat() * 360f + (ticksAlpha / 3))));
-        float offset = (float) (0.55f + Math.abs(Math.sin(Math.toRadians(random.nextFloat() * 360f + ticksAlpha * 2)) * 0.45f));
+        float offset = (float) (0.55f + (((Math.sin(Math.toRadians(random.nextFloat() * 360f + ticksAlpha * 2)) + 1) * 0.5f) * 0.45f));
 
         if (blockEntity.getExperience() > 0) {
             float size = (0.85f + (0.15f * globalOffset)) * ((float) blockEntity.getExperience() / blockEntity.getMaxExperience());

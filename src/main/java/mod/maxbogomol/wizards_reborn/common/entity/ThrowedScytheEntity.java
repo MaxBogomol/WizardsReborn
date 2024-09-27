@@ -5,6 +5,7 @@ import mod.maxbogomol.fluffy_fur.client.particle.behavior.CubeParticleBehavior;
 import mod.maxbogomol.fluffy_fur.client.particle.data.ColorParticleData;
 import mod.maxbogomol.fluffy_fur.client.particle.data.GenericParticleData;
 import mod.maxbogomol.fluffy_fur.client.particle.data.SpinParticleData;
+import mod.maxbogomol.fluffy_fur.client.render.trail.TrailPointBuilder;
 import mod.maxbogomol.fluffy_fur.common.easing.Easing;
 import mod.maxbogomol.fluffy_fur.registry.client.FluffyFurParticles;
 import mod.maxbogomol.fluffy_fur.registry.client.FluffyFurRenderTypes;
@@ -58,7 +59,7 @@ public class ThrowedScytheEntity extends ThrowableItemProjectile {
     public static final EntityDataAccessor<Float> endPointZId = SynchedEntityData.defineId(ThrowedScytheEntity.class, EntityDataSerializers.FLOAT);
     public static final EntityDataAccessor<Boolean> isRightId = SynchedEntityData.defineId(ThrowedScytheEntity.class, EntityDataSerializers.BOOLEAN);
 
-    public List<Vec3> trail = new ArrayList<>();
+    public TrailPointBuilder trailPointBuilder = TrailPointBuilder.create(30);
     public Map<UUID, Integer> damagedEntities = new HashMap<>();
 
     public ThrowedScytheEntity(EntityType<?> type, Level level) {
@@ -146,10 +147,6 @@ public class ThrowedScytheEntity extends ThrowableItemProjectile {
 
 
             if (level().isClientSide()) {
-                if (trail.size() > 30) {
-                    trail.remove(0);
-                }
-
                 int right = getIsRight() ? 1 : -1;
                 float yaw = (float) -tickCount * right * 0.8f + (getIsRight() ? 0.3f : -0.3f) + (float) Math.toRadians(-getYRot()) + (getIsRight() ? 0 : (float) Math.PI);
                 float pitch = (float) (Math.PI / 2f);
@@ -210,11 +207,7 @@ public class ThrowedScytheEntity extends ThrowableItemProjectile {
             yRotO = getYRot();
             xRotO = getXRot();
         } else {
-            if (level().isClientSide()) {
-                if (trail.size() > 0) {
-                    trail.remove(0);
-                }
-            } else {
+            if (!level().isClientSide()) {
                 if (getFadeTick() <= 0) {
                     discard();
                 } else {
@@ -238,6 +231,9 @@ public class ThrowedScytheEntity extends ThrowableItemProjectile {
                 setBlock(true);
                 setBlockTick(30);
             }
+        }
+        if (level().isClientSide()) {
+            trailPointBuilder.tickTrailPoints();
         }
     }
 
@@ -505,7 +501,7 @@ public class ThrowedScytheEntity extends ThrowableItemProjectile {
     }
 
     public void addTrail(Vec3 pos) {
-        trail.add(pos);
+        trailPointBuilder.addTrailPoint(pos);
     }
 
     public Player getSender() {

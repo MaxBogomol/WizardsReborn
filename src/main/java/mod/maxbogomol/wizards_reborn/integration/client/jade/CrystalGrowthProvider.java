@@ -29,9 +29,9 @@ public enum CrystalGrowthProvider implements IBlockComponentProvider {
     private static void addMaturityTooltip(ITooltip tooltip, float growthValue) {
         growthValue *= 100.0F;
         if (growthValue < 100.0F) {
-            tooltip.add(Component.translatable("tooltip.jade.crop_growth", new Object[]{IThemeHelper.get().info(String.format("%.0f%%", growthValue))}));
+            tooltip.add(Component.translatable("tooltip.jade.crop_growth", IThemeHelper.get().info(String.format("%.0f%%", growthValue))));
         } else {
-            tooltip.add(Component.translatable("tooltip.jade.crop_growth", new Object[]{IThemeHelper.get().success(Component.translatable("tooltip.jade.crop_mature"))}));
+            tooltip.add(Component.translatable("tooltip.jade.crop_growth", IThemeHelper.get().success(Component.translatable("tooltip.jade.crop_mature"))));
         }
 
     }

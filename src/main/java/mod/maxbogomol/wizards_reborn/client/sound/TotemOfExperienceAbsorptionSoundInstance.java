@@ -21,8 +21,8 @@ public class TotemOfExperienceAbsorptionSoundInstance extends BlockEntitySoundIn
         super.tick();
     }
 
-    public static TotemOfExperienceAbsorptionSoundInstance getSound(TotemOfExperienceAbsorptionBlockEntity tileEntity) {
-        return new TotemOfExperienceAbsorptionSoundInstance(tileEntity, 1, 1);
+    public static TotemOfExperienceAbsorptionSoundInstance getSound(TotemOfExperienceAbsorptionBlockEntity blockEntity) {
+        return new TotemOfExperienceAbsorptionSoundInstance(blockEntity, 1, 1);
     }
 
     public void playSound() {

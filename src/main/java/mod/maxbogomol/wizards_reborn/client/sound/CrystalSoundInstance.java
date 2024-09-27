@@ -21,8 +21,8 @@ public class CrystalSoundInstance extends BlockEntitySoundInstance<CrystalBlockE
         super.tick();
     }
 
-    public static CrystalSoundInstance getSound(CrystalBlockEntity tileEntity) {
-        return new CrystalSoundInstance(tileEntity, 1, 1);
+    public static CrystalSoundInstance getSound(CrystalBlockEntity blockEntity) {
+        return new CrystalSoundInstance(blockEntity, 1, 1);
     }
 
     public void playSound() {

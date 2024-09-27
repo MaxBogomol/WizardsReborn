@@ -21,8 +21,8 @@ public class ArcaneIteratorSoundInstance extends BlockEntitySoundInstance<Arcane
         super.tick();
     }
 
-    public static ArcaneIteratorSoundInstance getSound(ArcaneIteratorBlockEntity tileEntity) {
-        return new ArcaneIteratorSoundInstance(tileEntity, 1, 1);
+    public static ArcaneIteratorSoundInstance getSound(ArcaneIteratorBlockEntity blockEntity) {
+        return new ArcaneIteratorSoundInstance(blockEntity, 1, 1);
     }
 
     public void playSound() {

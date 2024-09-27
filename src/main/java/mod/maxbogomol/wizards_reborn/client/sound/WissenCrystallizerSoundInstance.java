@@ -21,8 +21,8 @@ public class WissenCrystallizerSoundInstance extends BlockEntitySoundInstance<Wi
         super.tick();
     }
 
-    public static WissenCrystallizerSoundInstance getSound(WissenCrystallizerBlockEntity tileEntity) {
-        return new WissenCrystallizerSoundInstance(tileEntity, 1, 1);
+    public static WissenCrystallizerSoundInstance getSound(WissenCrystallizerBlockEntity blockEntity) {
+        return new WissenCrystallizerSoundInstance(blockEntity, 1, 1);
     }
 
     public void playSound() {

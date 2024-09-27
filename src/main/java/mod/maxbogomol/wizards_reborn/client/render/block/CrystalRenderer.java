@@ -77,7 +77,7 @@ public class CrystalRenderer implements BlockEntityRenderer<CrystalBlockEntity> 
                     poseStack.translate(0.5F, 0.3125F, 0.5F);
                     Color color = new Color(0.886f, 0.811f, 0.549f);
                     LightRayHitResult hitResult = LightUtil.getLightRayHitResult(blockEntity.getLevel(), blockEntity.getBlockPos(), from, to, 25f);
-                    LightUtil.renderLightRay(from, hitResult.getPosHit(), hitResult.getDistance() + rayDistance, 25f, color, partialTicks, poseStack);
+                    LightUtil.renderLightRay(from, hitResult.getPosHit(), color, partialTicks, poseStack);
                     poseStack.popPose();
                 }
             }

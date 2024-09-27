@@ -11,6 +11,7 @@ import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.util.Mth;
 import net.minecraft.world.item.ItemDisplayContext;
 import org.joml.Matrix4f;
+import org.joml.Vector3f;
 
 import java.awt.*;
 
@@ -93,29 +94,40 @@ public class WizardsRebornRenderUtil {
         mStack.popPose();
     }
 
-    public static void scytheTrail(PoseStack mStack, MultiBufferSource buf, float width, float height, float endOffset, float r1, float g1, float b1, float a1, float r2, float g2, float b2, float a2) {
-        VertexConsumer builder = buf.getBuffer(FluffyFurRenderTypes.ADDITIVE);
+    public static void scytheTrail(RenderBuilder builder, PoseStack poseStack, float width, float height, float endOffset) {
+        Matrix4f last = poseStack.last().pose();
+        Vector3f[] positions = new Vector3f[]{
+                new Vector3f(-1, 1, 0), new Vector3f(0, 1, 0), new Vector3f(0, 0, 0), new Vector3f(-1, 0, 0),
+                new Vector3f(0, 1, 0), new Vector3f(1, 1, 0), new Vector3f(1, 0, 0), new Vector3f(0, 0, 0)};
+        for (int i = 0; i < 8; ++i) {
+            positions[i].mul(width, height, width);
+        }
 
-        Matrix4f mat = mStack.last().pose();
+        RenderBuilder.VertexConsumerActor supplier = builder.getSupplier();
+        VertexConsumer vertexConsumer = builder.getVertexConsumer();
 
-        builder.vertex(mat, 0, 0, width * endOffset).color(r1, g1, b1, a1).endVertex();
-        builder.vertex(mat, height, 0, width).color(r2, g2, b2, 0).endVertex();
-        builder.vertex(mat, height, 0, 0).color(r2, g2, b2, a2 / 10f).endVertex();
-        builder.vertex(mat, 0, 0, 0).color(r1, g1, b1, a1).endVertex();
+        if (builder.firstSide) {
+            supplier.placeVertex(vertexConsumer, last, builder, positions[0].x(), positions[0].y(), positions[0].z(), builder.r2, builder.g2, builder.b2, 0, builder.u0, builder.v1, builder.l2);
+            supplier.placeVertex(vertexConsumer, last, builder, positions[1].x(), positions[1].y(), positions[1].z(), builder.r2, builder.g2, builder.b2, builder.a2, builder.u1, builder.v1, builder.l1);
+            supplier.placeVertex(vertexConsumer, last, builder, positions[2].x(), positions[2].y(), positions[2].z(), builder.r1, builder.g1, builder.b1, builder.a1, builder.u1, builder.v0, builder.l1);
+            supplier.placeVertex(vertexConsumer, last, builder, positions[3].x(), positions[3].y(), positions[3].z(), builder.r1, builder.g1, builder.b1, builder.a1, builder.u0, builder.v0, builder.l1);
 
-        builder.vertex(mat, 0, 0, 0).color(r1, g1, b1, a1).endVertex();
-        builder.vertex(mat, height, 0, 0).color(r2, g2, b2, a2 / 10f).endVertex();
-        builder.vertex(mat, height, 0, -width).color(r2, g2, b2, 0).endVertex();
-        builder.vertex(mat, 0, 0, -width * endOffset).color(r1, g1, b1, a1).endVertex();
+            supplier.placeVertex(vertexConsumer, last, builder, positions[4].x(), positions[4].y(), positions[4].z(), builder.r2, builder.g2, builder.b2, builder.a2, builder.u0, builder.v1, builder.l2);
+            supplier.placeVertex(vertexConsumer, last, builder, positions[5].x(), positions[5].y(), positions[5].z(), builder.r2, builder.g2, builder.b2, 0, builder.u1, builder.v1, builder.l1);
+            supplier.placeVertex(vertexConsumer, last, builder, positions[6].x(), positions[6].y(), positions[6].z(), builder.r1, builder.g1, builder.b1, builder.a1, builder.u1, builder.v0, builder.l1);
+            supplier.placeVertex(vertexConsumer, last, builder, positions[7].x(), positions[7].y(), positions[7].z(), builder.r1, builder.g1, builder.b1, builder.a1, builder.u0, builder.v0, builder.l1);
+        }
 
-        builder.vertex(mat, 0, 0, 0).color(r1, g1, b1, a1).endVertex();
-        builder.vertex(mat, height, 0, 0).color(r2, g2, b2, a2 / 10f).endVertex();
-        builder.vertex(mat, height, 0, width).color(r2, g2, b2, 0).endVertex();
-        builder.vertex(mat, 0, 0, width  * endOffset).color(r1, g1, b1, a1).endVertex();
+        if (builder.secondSide) {
+            supplier.placeVertex(vertexConsumer, last, builder, positions[3].x(), positions[3].y(), positions[3].z(), builder.r1, builder.g1, builder.b1, builder.a1, builder.u1, builder.v0, builder.l1);
+            supplier.placeVertex(vertexConsumer, last, builder, positions[2].x(), positions[2].y(), positions[2].z(), builder.r1, builder.g1, builder.b1, builder.a1, builder.u0, builder.v0, builder.l1);
+            supplier.placeVertex(vertexConsumer, last, builder, positions[1].x(), positions[1].y(), positions[1].z(), builder.r2, builder.g2, builder.b2, builder.a2, builder.u0, builder.v1, builder.l2);
+            supplier.placeVertex(vertexConsumer, last, builder, positions[0].x(), positions[0].y(), positions[0].z(), builder.r2, builder.g2, builder.b2, 0, builder.u1, builder.v1, builder.l2);
 
-        builder.vertex(mat, 0, 0, -width * endOffset).color(r1, g1, b1, a1).endVertex();
-        builder.vertex(mat, height, 0, -width).color(r2, g2, b2, 0).endVertex();
-        builder.vertex(mat, height, 0, 0).color(r2, g2, b2, a2 / 10f).endVertex();
-        builder.vertex(mat, 0, 0, 0).color(r1, g1, b1, a1).endVertex();
+            supplier.placeVertex(vertexConsumer, last, builder, positions[7].x(), positions[7].y(), positions[7].z(), builder.r1, builder.g1, builder.b1, builder.a1, builder.u1, builder.v0, builder.l1);
+            supplier.placeVertex(vertexConsumer, last, builder, positions[6].x(), positions[6].y(), positions[5].z(), builder.r1, builder.g1, builder.b1, builder.a1, builder.u0, builder.v0, builder.l1);
+            supplier.placeVertex(vertexConsumer, last, builder, positions[5].x(), positions[5].y(), positions[6].z(), builder.r2, builder.g2, builder.b2, 0, builder.u0, builder.v1, builder.l2);
+            supplier.placeVertex(vertexConsumer, last, builder, positions[4].x(), positions[4].y(), positions[4].z(), builder.r2, builder.g2, builder.b2, builder.a2, builder.u1, builder.v1, builder.l2);
+        }
     }
 }

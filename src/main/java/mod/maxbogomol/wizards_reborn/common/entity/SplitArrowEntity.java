@@ -1,12 +1,13 @@
 package mod.maxbogomol.wizards_reborn.common.entity;
 
+import mod.maxbogomol.fluffy_fur.client.render.trail.TrailPointBuilder;
 import mod.maxbogomol.wizards_reborn.common.network.PacketHandler;
 import mod.maxbogomol.wizards_reborn.common.network.arcaneenchantment.SplitArrowBurstPacket;
 import mod.maxbogomol.wizards_reborn.common.network.spell.ChargeSpellProjectileRayEffectPacket;
 import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornArcaneEnchantments;
-import mod.maxbogomol.wizards_reborn.registry.common.damage.WizardsRebornDamage;
 import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornEntities;
 import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornSounds;
+import mod.maxbogomol.wizards_reborn.registry.common.damage.WizardsRebornDamage;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.syncher.EntityDataAccessor;
@@ -27,14 +28,12 @@ import net.minecraft.world.phys.EntityHitResult;
 import net.minecraft.world.phys.Vec3;
 
 import java.awt.*;
-import java.util.ArrayList;
-import java.util.List;
 
 public class SplitArrowEntity extends AbstractArrow {
     public static final EntityDataAccessor<Boolean> fadeId = SynchedEntityData.defineId(SplitArrowEntity.class, EntityDataSerializers.BOOLEAN);
     public static final EntityDataAccessor<Integer> fadeTickId = SynchedEntityData.defineId(SplitArrowEntity.class, EntityDataSerializers.INT);
 
-    public List<Vec3> trail = new ArrayList<>();
+    public TrailPointBuilder trailPointBuilder = TrailPointBuilder.create(10);
 
     public SplitArrowEntity(EntityType<? extends SplitArrowEntity> type, Level level) {
         super(type, level);
@@ -53,10 +52,6 @@ public class SplitArrowEntity extends AbstractArrow {
         super.tick();
         if (!getFade()) {
             if (level().isClientSide()) {
-                if (trail.size() > 10) {
-                    trail.remove(0);
-                }
-
                 addTrail(new Vec3(position().toVector3f()));
             } else {
                 if (tickCount > 30) {
@@ -77,17 +72,16 @@ public class SplitArrowEntity extends AbstractArrow {
             }
         } else {
             setDeltaMovement(0, 0, 0);
-            if (level().isClientSide()) {
-                if (trail.size() > 0) {
-                    trail.remove(0);
-                }
-            } else {
+            if (!level().isClientSide()) {
                 if (getFadeTick() <= 0) {
                     discard();
                 } else {
                     setFadeTick(getFadeTick() - 1);
                 }
             }
+        }
+        if (level().isClientSide()) {
+            trailPointBuilder.tickTrailPoints();
         }
     }
 
@@ -185,7 +179,7 @@ public class SplitArrowEntity extends AbstractArrow {
     }
 
     public void addTrail(Vec3 pos) {
-        trail.add(pos);
+        trailPointBuilder.addTrailPoint(pos);
     }
 
     @Override

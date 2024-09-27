@@ -21,8 +21,8 @@ public class ArcaneWorkbenchSoundInstance extends BlockEntitySoundInstance<Arcan
         super.tick();
     }
 
-    public static ArcaneWorkbenchSoundInstance getSound(ArcaneWorkbenchBlockEntity tileEntity) {
-        return new ArcaneWorkbenchSoundInstance(tileEntity, 1, 1);
+    public static ArcaneWorkbenchSoundInstance getSound(ArcaneWorkbenchBlockEntity blockEntity) {
+        return new ArcaneWorkbenchSoundInstance(blockEntity, 1, 1);
     }
 
     public void playSound() {

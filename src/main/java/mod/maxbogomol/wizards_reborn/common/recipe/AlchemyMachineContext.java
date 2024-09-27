@@ -33,25 +33,25 @@ public class AlchemyMachineContext implements Container {
 
     @Override
     @Deprecated
-    public ItemStack getItem(int pSlot) {
+    public ItemStack getItem(int slot) {
         return ItemStack.EMPTY;
     }
 
     @Override
     @Deprecated
-    public ItemStack removeItem(int pSlot, int pAmount) {
+    public ItemStack removeItem(int slot, int amount) {
         return ItemStack.EMPTY;
     }
 
     @Override
     @Deprecated
-    public ItemStack removeItemNoUpdate(int pSlot) {
+    public ItemStack removeItemNoUpdate(int slot) {
         return ItemStack.EMPTY;
     }
 
     @Override
     @Deprecated
-    public void setItem(int pSlot, ItemStack pStack) { }
+    public void setItem(int slot, ItemStack stack) { }
 
     @Override
     @Deprecated

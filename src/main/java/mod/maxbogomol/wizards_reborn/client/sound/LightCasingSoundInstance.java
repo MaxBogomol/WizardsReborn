@@ -34,8 +34,8 @@ public class LightCasingSoundInstance extends BlockEntitySoundInstance<LightCasi
         super.tick();
     }
 
-    public static LightCasingSoundInstance getSound(LightCasingBlockEntity tileEntity) {
-        return new LightCasingSoundInstance(tileEntity, 1, 1);
+    public static LightCasingSoundInstance getSound(LightCasingBlockEntity blockEntity) {
+        return new LightCasingSoundInstance(blockEntity, 1, 1);
     }
 
     public void playSound() {

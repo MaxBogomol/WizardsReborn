@@ -9,6 +9,7 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.Vec3;
 
 public class ArcanumGrowthBlockEntity extends BlockEntityBase implements TickableBlockEntity, ILightBlockEntity, IGrowableCrystal {
@@ -144,5 +145,11 @@ public class ArcanumGrowthBlockEntity extends BlockEntityBase implements Tickabl
         if (getLevel().getBlockState(getBlockPos()).getBlock() instanceof ArcanumGrowthBlock growth) {
             growth.grow(getLevel(), getBlockPos(), getLevel().getBlockState(getBlockPos()));
         }
+    }
+
+    @Override
+    public AABB getRenderBoundingBox() {
+        BlockPos pos = getBlockPos();
+        return new AABB(pos.getX() - 0.5f, pos.getY() - 0.5f, pos.getZ() - 0.5f, pos.getX() + 1.5f, pos.getY() + 1.5f, pos.getZ() + 1.5f);
     }
 }

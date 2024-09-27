@@ -1,8 +1,11 @@
 package mod.maxbogomol.wizards_reborn.client.render.entity;
 
 import com.mojang.blaze3d.vertex.PoseStack;
-import com.mojang.blaze3d.vertex.VertexConsumer;
+import mod.maxbogomol.fluffy_fur.FluffyFur;
+import mod.maxbogomol.fluffy_fur.client.render.RenderBuilder;
+import mod.maxbogomol.fluffy_fur.client.render.trail.TrailPoint;
 import mod.maxbogomol.fluffy_fur.registry.client.FluffyFurRenderTypes;
+import mod.maxbogomol.fluffy_fur.util.RenderUtil;
 import mod.maxbogomol.wizards_reborn.common.entity.SplitArrowEntity;
 import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornArcaneEnchantments;
 import net.minecraft.client.renderer.MultiBufferSource;
@@ -25,34 +28,39 @@ public class SplitArrowRenderer<T extends SplitArrowEntity> extends EntityRender
 
     @Override
     public void render(SplitArrowEntity entity, float entityYaw, float partialTicks, PoseStack poseStack, MultiBufferSource bufferSource, int light) {
-        MultiBufferSource bufferDelayed = FluffyFurRenderTypes.getDelayedRender();
-        VertexConsumer builder = bufferDelayed.getBuffer(FluffyFurRenderTypes.ADDITIVE);
         Color color = WizardsRebornArcaneEnchantments.SPLIT.getColor();
 
-        List<Vec3> trailList = new ArrayList<>(entity.trail);
-        if (trailList.size() > 1 && entity.tickCount >= 10) {
-            Vec3 position = trailList.get(0);
-            Vec3 nextPosition = trailList.get(1);
-            float x = (float) Mth.lerp(partialTicks, position.x, nextPosition.x);
-            float y = (float) Mth.lerp(partialTicks, position.y, nextPosition.y);
-            float z = (float) Mth.lerp(partialTicks, position.z, nextPosition.z);
-            trailList.set(0, new Vec3(x, y, z));
+        List<TrailPoint> trail = new ArrayList<>(entity.trailPointBuilder.getTrailPoints());
+        if (trail.size() > 1 && entity.tickCount >= entity.trailPointBuilder.trailLength.get()) {
+            TrailPoint position = trail.get(0);
+            TrailPoint nextPosition = trail.get(1);
+            float x = (float) Mth.lerp(partialTicks, position.getPosition().x, nextPosition.getPosition().x);
+            float y = (float) Mth.lerp(partialTicks, position.getPosition().y, nextPosition.getPosition().y);
+            float z = (float) Mth.lerp(partialTicks, position.getPosition().z, nextPosition.getPosition().z);
+            trail.set(0, new TrailPoint(new Vec3(x, y, z)));
         }
 
         float x = (float) Mth.lerp(partialTicks, entity.xOld, entity.getX());
         float y = (float) Mth.lerp(partialTicks, entity.yOld, entity.getY());
         float z = (float) Mth.lerp(partialTicks, entity.zOld, entity.getZ());
 
+        if (trail.size() > 0) {
+            trail.set(trail.size() - 1, new TrailPoint(new Vec3(x, y, z)));
+        }
+
         poseStack.pushPose();
         poseStack.translate(0, 0.1f, 0);
-        poseStack.translate(entity.getX() - x, entity.getY() - y,  entity.getZ() - z);
-        //WizardsRebornRenderUtil.renderTrail(poseStack, builder, entity.position(), trailList, 0,0.1f, 0,1.0f, 1.0f, color, 4, true);
-        //RenderUtils.renderTrail(stack, builder, entity.position(), trailList, 0,0.05f, 0,1.0f, 1.0f, color, 4, true);
+        poseStack.translate(-x, -y, -z);
+        RenderBuilder.create().setRenderType(FluffyFurRenderTypes.ADDITIVE_TEXTURE)
+                .setUV(RenderUtil.getSprite(FluffyFur.MOD_ID, "particle/trail"))
+                .setColor(color)
+                .setFirstAlpha(0.25f).setSecondAlpha(1f)
+                .renderTrail(poseStack, trail, (f) -> {return f * 0.25f;});
         poseStack.popPose();
     }
 
     @Override
-    public boolean shouldRender(T livingEntityIn, Frustum camera, double camX, double camY, double camZ) {
+    public boolean shouldRender(T livingEntity, Frustum camera, double camX, double camY, double camZ) {
         return true;
     }
 

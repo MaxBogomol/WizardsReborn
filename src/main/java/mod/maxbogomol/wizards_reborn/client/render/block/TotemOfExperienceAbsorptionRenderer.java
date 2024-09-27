@@ -8,7 +8,6 @@ import mod.maxbogomol.wizards_reborn.api.wissen.WissenUtil;
 import mod.maxbogomol.wizards_reborn.common.block.totem.experience_absorption.TotemOfExperienceAbsorptionBlockEntity;
 import mod.maxbogomol.wizards_reborn.registry.client.WizardsRebornModels;
 import mod.maxbogomol.wizards_reborn.util.WizardsRebornRenderUtil;
-import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.blockentity.BlockEntityRenderer;
 import net.minecraft.util.Mth;
@@ -24,7 +23,6 @@ public class TotemOfExperienceAbsorptionRenderer implements BlockEntityRenderer<
         Random random = new Random();
         random.setSeed(blockEntity.getBlockPos().asLong());
 
-        Minecraft minecraft = Minecraft.getInstance();
         double ticks = (ClientTickHandler.ticksInGame + partialTicks) * 0.05F;
         double ticksUp = (ClientTickHandler.ticksInGame + partialTicks) * 3;
         ticksUp = (ticksUp) % 360;

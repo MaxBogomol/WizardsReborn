@@ -89,48 +89,48 @@ public class LightUtil {
     }
 
     @OnlyIn(Dist.CLIENT)
-    public static void renderLightRay(Vec3 from, Vec3 to, float rayDistance, float maxRayDistance, Color color, float partialTicks, PoseStack ms) {
+    public static void renderLightRay(Vec3 from, Vec3 to, Color color, float partialTicks, PoseStack poseStack) {
         RenderBuilder builder = RenderBuilder.create().setRenderType(FluffyFurRenderTypes.ADDITIVE_TEXTURE)
                 .setUV(RenderUtil.getSprite(FluffyFur.MOD_ID, "particle/star"))
                 .setColor(color)
                 .setAlpha(0.2f);
         float tick = (ClientTickHandler.ticksInGame + partialTicks) * 2.5f;
 
-        ms.pushPose();
-        ms.mulPose(Minecraft.getInstance().getEntityRenderDispatcher().cameraOrientation());
-        ms.mulPose(Axis.ZP.rotationDegrees(tick));
-        builder.renderCenteredQuad(ms, 0.15f);
-        ms.mulPose(Axis.ZP.rotationDegrees(-tick * 2));
-        builder.renderCenteredQuad(ms, 0.15f);
-        ms.popPose();
+        poseStack.pushPose();
+        poseStack.mulPose(Minecraft.getInstance().getEntityRenderDispatcher().cameraOrientation());
+        poseStack.mulPose(Axis.ZP.rotationDegrees(tick));
+        builder.renderCenteredQuad(poseStack, 0.15f);
+        poseStack.mulPose(Axis.ZP.rotationDegrees(-tick * 2));
+        builder.renderCenteredQuad(poseStack, 0.15f);
+        poseStack.popPose();
 
         builder.setUV(RenderUtil.getSprite(FluffyFur.MOD_ID, "particle/tiny_wisp"))
                 .setAlpha(0.1f);
-        ms.pushPose();
+        poseStack.pushPose();
         Vec3 pos = to.subtract(from);
-        ms.translate(pos.x(), pos.y(), pos.z());
-        ms.mulPose(Minecraft.getInstance().getEntityRenderDispatcher().cameraOrientation());
-        ms.mulPose(Axis.ZP.rotationDegrees(tick));
-        builder.renderCenteredQuad(ms, 0.15f);
-        ms.mulPose(Axis.ZP.rotationDegrees(-tick * 2));
-        builder.renderCenteredQuad(ms, 0.15f);
-        ms.popPose();
+        poseStack.translate(pos.x(), pos.y(), pos.z());
+        poseStack.mulPose(Minecraft.getInstance().getEntityRenderDispatcher().cameraOrientation());
+        poseStack.mulPose(Axis.ZP.rotationDegrees(tick));
+        builder.renderCenteredQuad(poseStack, 0.15f);
+        poseStack.mulPose(Axis.ZP.rotationDegrees(-tick * 2));
+        builder.renderCenteredQuad(poseStack, 0.15f);
+        poseStack.popPose();
 
-        ms.pushPose();
-        ms.translate(-from.x(), -from.y(), -from.z());
+        poseStack.pushPose();
+        poseStack.translate(-from.x(), -from.y(), -from.z());
         builder.setUV(RenderUtil.getSprite(FluffyFur.MOD_ID, "particle/trail"));
         builder.setColor(Color.WHITE)
                 .setAlpha(0.5f)
-                .renderBeam(ms.last().pose(), from, to, 0.12f);
+                .renderBeam(poseStack.last().pose(), from, to, 0.12f);
         builder.setColor(color)
                 .setAlpha(0.4f)
-                .renderBeam(ms.last().pose(), from, to, 0.16f);
-        ms.popPose();
+                .renderBeam(poseStack.last().pose(), from, to, 0.16f);
+        poseStack.popPose();
     }
 
-    public static void renderLightRay(Level level, BlockPos startPos, Vec3 from, Vec3 to, float rayDistance, Color color, float partialTicks, PoseStack ms) {
+    public static void renderLightRay(Level level, BlockPos startPos, Vec3 from, Vec3 to, float rayDistance, Color color, float partialTicks, PoseStack poseStack) {
         LightRayHitResult hitResult = getLightRayHitResult(level, startPos, from, to, rayDistance);
-        renderLightRay(from, hitResult.getPosHit(), hitResult.getDistance(), rayDistance, color, partialTicks, ms);
+        renderLightRay(from, hitResult.getPosHit(), color, partialTicks, poseStack);
     }
 
     public static void transferLight(BlockEntity from, BlockEntity to) {

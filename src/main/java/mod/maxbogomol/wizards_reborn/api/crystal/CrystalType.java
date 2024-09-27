@@ -60,7 +60,7 @@ public class CrystalType {
     public static String getTranslatedName(String id) {
         int i = id.indexOf(":");
         String modId = id.substring(0, i);
-        String crystalTpyeId = id.substring(i + 1);
-        return "crystal_type."  + modId + "." + crystalTpyeId;
+        String crystalTypeId = id.substring(i + 1);
+        return "crystal_type."  + modId + "." + crystalTypeId;
     }
 }

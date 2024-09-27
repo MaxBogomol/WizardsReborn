@@ -18,9 +18,9 @@ public enum SaltCampfireProvider implements IBlockComponentProvider {
     INSTANCE;
 
     public void appendTooltip(ITooltip tooltip, BlockAccessor accessor, IPluginConfig config) {
-        BlockEntity tile = accessor.getLevel().getBlockEntity(accessor.getPosition());
+        BlockEntity blockEntity = accessor.getLevel().getBlockEntity(accessor.getPosition());
 
-        if (tile instanceof SaltCampfireBlockEntity campfire) {
+        if (blockEntity instanceof SaltCampfireBlockEntity campfire) {
             IElementHelper elements = tooltip.getElementHelper();
 
             for(int i = 0; i < campfire.cookingTime.length; ++i) {

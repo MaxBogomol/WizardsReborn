@@ -12,6 +12,7 @@ import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 
 public class SkinEntry {
+
     public boolean canApplyOnItem(ItemStack itemStack) {
         return true;
     }

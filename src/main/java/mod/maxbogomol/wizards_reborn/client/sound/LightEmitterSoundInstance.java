@@ -21,8 +21,8 @@ public class LightEmitterSoundInstance extends BlockEntitySoundInstance<LightEmi
         super.tick();
     }
 
-    public static LightEmitterSoundInstance getSound(LightEmitterBlockEntity tileEntity) {
-        return new LightEmitterSoundInstance(tileEntity, 1, 1);
+    public static LightEmitterSoundInstance getSound(LightEmitterBlockEntity blockEntity) {
+        return new LightEmitterSoundInstance(blockEntity, 1, 1);
     }
 
     public void playSound() {

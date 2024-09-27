@@ -25,7 +25,7 @@ public class SpellProjectileRenderer<T extends SpellProjectileEntity> extends En
     }
 
     @Override
-    public boolean shouldRender(T livingEntityIn, Frustum camera, double camX, double camY, double camZ) {
+    public boolean shouldRender(T livingEntity, Frustum camera, double camX, double camY, double camZ) {
         return true;
     }
 
