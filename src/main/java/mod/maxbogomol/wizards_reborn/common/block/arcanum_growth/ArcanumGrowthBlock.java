@@ -5,6 +5,7 @@ import mod.maxbogomol.fluffy_fur.client.particle.data.ColorParticleData;
 import mod.maxbogomol.fluffy_fur.client.particle.data.GenericParticleData;
 import mod.maxbogomol.fluffy_fur.client.particle.data.SpinParticleData;
 import mod.maxbogomol.fluffy_fur.common.block.entity.TickableBlockEntity;
+import mod.maxbogomol.fluffy_fur.common.easing.Easing;
 import mod.maxbogomol.fluffy_fur.registry.client.FluffyFurParticles;
 import mod.maxbogomol.wizards_reborn.api.crystalritual.IGrowableCrystal;
 import mod.maxbogomol.wizards_reborn.config.WizardsRebornConfig;
@@ -196,10 +197,10 @@ public class ArcanumGrowthBlock extends Block implements EntityBlock, SimpleWate
                     ParticleBuilder.create(FluffyFurParticles.SPARKLE)
                             .setColorData(ColorParticleData.create(WizardsRebornConfig.wissenColorR(), WizardsRebornConfig.wissenColorG(), WizardsRebornConfig.wissenColorB()).build())
                             .setTransparencyData(GenericParticleData.create(0.5f, 0).build())
-                            .setScaleData(GenericParticleData.create(0.1f, 0).build())
-                            .setSpinData(SpinParticleData.create().randomSpin(0.5f).build())
+                            .setScaleData(GenericParticleData.create(0, 0.1f, 0).setEasing(Easing.SINE_IN_OUT).build())
+                            .setSpinData(SpinParticleData.create().randomOffset().randomSpin(0.5f).build())
                             .setLifetime(30)
-                            .randomVelocity(0.15f)
+                            .randomVelocity(0.015f)
                             .randomOffset(0.25f)
                             .spawn(level, pos.getX() + 0.5F, pos.getY() + 0.35F, pos.getZ() + 0.5F);
                 }

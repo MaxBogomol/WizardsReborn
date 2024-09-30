@@ -43,4 +43,16 @@ public class LightType {
         }
         return Component.empty();
     }
+
+    public boolean tick(LightTypeStack stack) {
+        return false;
+    }
+
+    public boolean hitTick(LightTypeStack stack, LightRayHitResult hitResult) {
+        return false;
+    }
+
+    public boolean transferToNew(LightTypeStack oldStack, LightTypeStack newStack) {
+        return false;
+    }
 }

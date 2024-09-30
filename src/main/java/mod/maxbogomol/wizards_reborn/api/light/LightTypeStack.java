@@ -8,6 +8,7 @@ public class LightTypeStack {
     public int tick = 0;
     public int tickConcentrated = 0;
     public boolean concentrated = false;
+    public CompoundTag tag = new CompoundTag();
 
     public LightTypeStack(LightType type) {
         this.type = type;
@@ -29,6 +30,10 @@ public class LightTypeStack {
         return concentrated;
     }
 
+    public CompoundTag getTag() {
+        return tag;
+    }
+
     public void setType(LightType type) {
         this.type = type;
     }
@@ -45,12 +50,17 @@ public class LightTypeStack {
         this.concentrated = concentrated;
     }
 
+    public void setTag(CompoundTag tag) {
+        this.tag = tag;
+    }
+
     public CompoundTag toTag() {
         CompoundTag tag = new CompoundTag();
         tag.putString("id", getType().getId());
         tag.putInt("tick", getTick());
         tag.putInt("tickConcentrated", getTickConcentrated());
         tag.putBoolean("concentrated", isConcentrated());
+        tag.put("tag", this.tag);
 
         return tag;
     }
@@ -62,6 +72,7 @@ public class LightTypeStack {
             stack.setTick(tag.getInt("tick"));
             stack.setTickConcentrated(tag.getInt("tickConcentrated"));
             stack.setConcentrated(tag.getBoolean("concentrated"));
+            stack.setTag(tag.getCompound("tag"));
             return stack;
         }
 

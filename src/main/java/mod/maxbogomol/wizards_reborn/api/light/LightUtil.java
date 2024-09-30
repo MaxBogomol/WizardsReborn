@@ -194,6 +194,7 @@ public class LightUtil {
                                 stackCopy.setConcentrated(true);
                             }
                             toLight.addLightType(stackCopy);
+                            stack.getType().transferToNew(stack, stackCopy);
                             update = true;
                         } else {
                             if (toStack.getTick() < stack.getTick()) {
@@ -206,6 +207,9 @@ public class LightUtil {
                             }
                             if (!toStack.isConcentrated() && stack.isConcentrated()) {
                                 toStack.setConcentrated(true);
+                                update = true;
+                            }
+                            if (stack.getType().transferToNew(stack, toStack)) {
                                 update = true;
                             }
                         }
@@ -275,8 +279,19 @@ public class LightUtil {
                         stack.setConcentrated(false);
                     }
                 }
+                stack.getType().tick(stack);
             }
         }
+    }
+
+    public static void tickHitLightTypeStack(BlockEntity blockEntity, ArrayList<LightTypeStack> lightTypes, LightRayHitResult hitResult) {
+        boolean update = false;
+        for (LightTypeStack stack : lightTypes) {
+            if (stack.getType().hitTick(stack, hitResult)) {
+                update = true;
+            }
+        }
+        if (update) BlockEntityUpdate.packet(blockEntity);
     }
 
     public static ListTag stacksToTag(ArrayList<LightTypeStack> lightTypes) {

@@ -83,6 +83,7 @@ public class LightTransferLensBlockEntity extends ExposedBlockSimpleInventory im
                             LightRayHitResult hitResult = LightUtil.getLightRayHitResult(level, getBlockPos(), from, to, 25);
                             BlockEntity hitBlock = hitResult.getBlockEntity();
                             LightUtil.transferLight(this, hitBlock);
+                            LightUtil.tickHitLightTypeStack(this, getLightTypes(), hitResult);
                         }
                     } else {
                         isToBlock = false;

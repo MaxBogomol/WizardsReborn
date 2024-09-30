@@ -147,6 +147,7 @@ public class CrystalBlockEntity extends BlockSimpleInventory implements Tickable
                     if (hitResult != null) {
                         BlockEntity hitBlockEntity = hitResult.getBlockEntity();
                         LightUtil.transferLight(this, hitBlockEntity);
+                        LightUtil.tickHitLightTypeStack(this, getLightTypes(), hitResult);
                         BlockEntityUpdate.packet(hitBlockEntity);
                     }
                 }

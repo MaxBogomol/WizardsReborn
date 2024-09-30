@@ -85,6 +85,7 @@ public class LightEmitterBlockEntity extends ExposedBlockSimpleInventory impleme
                                 LightRayHitResult hitResult = LightUtil.getLightRayHitResult(level, getBlockPos(), from, to, 25);
                                 BlockEntity hitBlock = hitResult.getBlockEntity();
                                 LightUtil.transferLight(this, hitBlock);
+                                LightUtil.tickHitLightTypeStack(this, getLightTypes(), hitResult);
                             }
                         }
                     } else {
