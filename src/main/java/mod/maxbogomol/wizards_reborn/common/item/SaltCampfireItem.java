@@ -38,10 +38,9 @@ public class SaltCampfireItem extends BlockItem implements IGuiParticleItem {
         RenderBuilder sparkleBuilder = RenderBuilder.create().setRenderType(FluffyFurRenderTypes.ADDITIVE_TEXTURE)
                 .setUV(RenderUtil.getSprite(FluffyFur.MOD_ID, "particle/sparkle"))
                 .setColor(color1).setAlpha(0.5f)
-                .renderCenteredQuad(poseStack, 7f)
-                .endBatch();
-        sparkleBuilder.renderCenteredQuad(poseStack, 7f)
-                .endBatch();
+                .renderCenteredQuad(poseStack, 7f);
+        poseStack.mulPose(Axis.ZP.rotationDegrees(45));
+        sparkleBuilder.renderCenteredQuad(poseStack, 7f);
         poseStack.popPose();
 
         poseStack.pushPose();
@@ -50,8 +49,8 @@ public class SaltCampfireItem extends BlockItem implements IGuiParticleItem {
         RenderBuilder wispBuilder = RenderBuilder.create().setRenderType(FluffyFurRenderTypes.ADDITIVE_TEXTURE)
                 .setUV(RenderUtil.getSprite(FluffyFur.MOD_ID, "particle/wisp"))
                 .setColor(color2).setAlpha(0.15f)
-                .renderCenteredQuad(poseStack, 6f)
-                .endBatch();
+                .renderCenteredQuad(poseStack, 6f);
+        poseStack.mulPose(Axis.ZP.rotationDegrees(45));
         wispBuilder.renderCenteredQuad(poseStack, 6f)
                 .endBatch();
         poseStack.popPose();

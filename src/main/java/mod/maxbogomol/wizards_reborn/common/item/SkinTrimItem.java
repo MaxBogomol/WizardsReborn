@@ -56,18 +56,15 @@ public class SkinTrimItem extends Item implements IGuiParticleItem {
         RenderBuilder sparkleBuilder = RenderBuilder.create().setRenderType(FluffyFurRenderTypes.ADDITIVE_TEXTURE)
                 .setUV(RenderUtil.getSprite(FluffyFur.MOD_ID, "particle/sparkle"))
                 .setColor(color).setAlpha(0.5f)
-                .renderCenteredQuad(poseStack, 10f)
-                .endBatch();
+                .renderCenteredQuad(poseStack, 10f);
         poseStack.mulPose(Axis.ZP.rotationDegrees(45f));
-        sparkleBuilder.renderCenteredQuad(poseStack, 10f)
-                .endBatch();
+        sparkleBuilder.renderCenteredQuad(poseStack, 10f);
         poseStack.popPose();
 
         poseStack.pushPose();
         poseStack.translate(x + 8, y + 8, 100);
         poseStack.mulPose(Axis.ZP.rotationDegrees(-ticks));
-        sparkleBuilder.renderCenteredQuad(poseStack, 9f)
-                .endBatch();
+        sparkleBuilder.renderCenteredQuad(poseStack, 9f);
         poseStack.mulPose(Axis.ZP.rotationDegrees(45f));
         sparkleBuilder.renderCenteredQuad(poseStack, 9f)
                 .endBatch();

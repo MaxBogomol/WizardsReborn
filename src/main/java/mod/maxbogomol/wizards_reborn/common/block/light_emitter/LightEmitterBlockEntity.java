@@ -204,7 +204,7 @@ public class LightEmitterBlockEntity extends ExposedBlockSimpleInventory impleme
 
         ArcaneLumosBlock lumos = getLumos();
         if (lumos != null) {
-            color = ArcaneLumosBlock.getColor(lumos.color);
+            color = lumos.color.getColor();
         }
 
         return color;
@@ -213,7 +213,7 @@ public class LightEmitterBlockEntity extends ExposedBlockSimpleInventory impleme
     public Color getRayColor() {
         ArcaneLumosBlock lumos = getLumos();
         if (lumos != null) {
-            return ArcaneLumosBlock.getColor(lumos.color);
+            return lumos.color.getColor();
         }
         return LightUtil.standardLightRayColor;
     }

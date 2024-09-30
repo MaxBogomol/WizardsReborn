@@ -61,7 +61,7 @@ public class TotemOfFlamesBlockEntity extends ExposedBlockSimpleInventory implem
             if (!container.getItem(0).isEmpty()) {
                 if (container.getItem(0).getItem() instanceof BlockItem blockItem) {
                     if (blockItem.getBlock() instanceof ArcaneLumosBlock lumos) {
-                        Color color = ArcaneLumosBlock.getColor(lumos.color);
+                        Color color = lumos.color.getColor();
 
                         if (random.nextFloat() < 0.5) {
                             ParticleBuilder.create(FluffyFurParticles.WISP)
@@ -101,10 +101,10 @@ public class TotemOfFlamesBlockEntity extends ExposedBlockSimpleInventory implem
                                     .spawn(level, getBlockPos().getX() + 0.5F, getBlockPos().getY() + 0.5F, getBlockPos().getZ() + 0.5F);
                         }
 
-                        if (lumos.color == ArcaneLumosBlock.Colors.COSMIC) {
+                        if (lumos.color.hasFirstStar()) {
                             if (random.nextFloat() < 0.1) {
                                 ParticleBuilder.create(FluffyFurParticles.STAR)
-                                        .setColorData(ColorParticleData.create(color).build())
+                                        .setColorData(ColorParticleData.create(lumos.color.getColorSecondStar()).build())
                                         .setTransparencyData(GenericParticleData.create(0.75f, 0).build())
                                         .setScaleData(GenericParticleData.create(0, 0.1f, 0).setEasing(Easing.SINE_IN_OUT).build())
                                         .setSpinData(SpinParticleData.create().randomSpin(0.1f).build())
@@ -114,9 +114,11 @@ public class TotemOfFlamesBlockEntity extends ExposedBlockSimpleInventory implem
                                         .addVelocity(0, 0.025f, 0)
                                         .spawn(level, getBlockPos().getX() + 0.5F, getBlockPos().getY() + 0.5F, getBlockPos().getZ() + 0.5F);
                             }
+                        }
+                        if (lumos.color.hasSecondStar()) {
                             if (random.nextFloat() < 0.1) {
                                 ParticleBuilder.create(FluffyFurParticles.STAR)
-                                        .setColorData(ColorParticleData.create(Color.WHITE).build())
+                                        .setColorData(ColorParticleData.create(lumos.color.getColorSecondStar()).build())
                                         .setTransparencyData(GenericParticleData.create(0.75f, 0).build())
                                         .setScaleData(GenericParticleData.create(0, 0.1f, 0).setEasing(Easing.SINE_IN_OUT).build())
                                         .setLifetime(10)

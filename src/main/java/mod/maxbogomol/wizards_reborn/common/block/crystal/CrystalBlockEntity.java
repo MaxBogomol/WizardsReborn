@@ -1,8 +1,14 @@
 package mod.maxbogomol.wizards_reborn.common.block.crystal;
 
+import mod.maxbogomol.fluffy_fur.client.particle.ParticleBuilder;
+import mod.maxbogomol.fluffy_fur.client.particle.behavior.SparkParticleBehavior;
+import mod.maxbogomol.fluffy_fur.client.particle.data.ColorParticleData;
+import mod.maxbogomol.fluffy_fur.client.particle.data.GenericParticleData;
 import mod.maxbogomol.fluffy_fur.common.block.entity.BlockSimpleInventory;
 import mod.maxbogomol.fluffy_fur.common.block.entity.TickableBlockEntity;
+import mod.maxbogomol.fluffy_fur.common.easing.Easing;
 import mod.maxbogomol.fluffy_fur.common.network.BlockEntityUpdate;
+import mod.maxbogomol.fluffy_fur.registry.client.FluffyFurParticles;
 import mod.maxbogomol.wizards_reborn.WizardsReborn;
 import mod.maxbogomol.wizards_reborn.api.crystal.CrystalType;
 import mod.maxbogomol.wizards_reborn.api.crystalritual.CrystalRitual;
@@ -168,6 +174,20 @@ public class CrystalBlockEntity extends BlockSimpleInventory implements Tickable
                 } else if (sound.isStopped()) {
                     sound = CrystalSoundInstance.getSound(this);
                     sound.playSound();
+                }
+            }
+
+            if (startRitual && !CrystalRitualUtil.isEmpty(ritual)) {
+                if (random.nextFloat() < 0.08f) {
+                    ParticleBuilder.create(FluffyFurParticles.SQUARE)
+                            .setBehavior(SparkParticleBehavior.create().build())
+                            .setColorData(ColorParticleData.create(ritual.getColor()).build())
+                            .setTransparencyData(GenericParticleData.create(0.5f, 0.75f, 0).setEasing(Easing.QUINTIC_IN_OUT).build())
+                            .setScaleData(GenericParticleData.create(0.025f, 0.05f, 0).setEasing(Easing.QUINTIC_IN_OUT).build())
+                            .setLifetime(50)
+                            .setVelocity(0, 0.05f, 0)
+                            .flatRandomOffset(0.5f, 0f, 0.5f)
+                            .spawn(level, getBlockPos().getX() + 0.5f, getBlockPos().getY(), getBlockPos().getZ() + 0.5f);
                 }
             }
         }
@@ -350,9 +370,11 @@ public class CrystalBlockEntity extends BlockSimpleInventory implements Tickable
     @Override
     public boolean wissenWandReload(ItemStack stack, UseOnContext context, BlockEntity blockEntity) {
         isToBlock = false;
-        reload();
-        BlockEntityUpdate.packet(this);
-        level.playSound(WizardsReborn.proxy.getPlayer(), getBlockPos(), WizardsRebornSounds.CRYSTAL_RITUAL_END.get(), SoundSource.BLOCKS, 1f, 1f);
+        if (startRitual) {
+            reload();
+            BlockEntityUpdate.packet(this);
+            level.playSound(null, getBlockPos(), WizardsRebornSounds.CRYSTAL_RITUAL_END.get(), SoundSource.BLOCKS, 1f, 1f);
+        }
         return true;
     }
 

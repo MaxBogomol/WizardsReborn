@@ -56,10 +56,6 @@ public class LightTransferLensBlockEntity extends ExposedBlockSimpleInventory im
 
     @Override
     public void tick() {
-        //lightTypes.clear();
-        //addLightType(new LightTypeStack(WizardsRebornLightTypes.EARTH));
-        //addLightType(new LightTypeStack(WizardsRebornLightTypes.WATER));
-        //addLightType(new LightTypeStack(WizardsRebornLightTypes.VOID));
         if (!level.isClientSide()) {
             boolean update = false;
 
@@ -165,7 +161,7 @@ public class LightTransferLensBlockEntity extends ExposedBlockSimpleInventory im
     public Color getColor() {
         ArcaneLumosBlock lumos = getLumos();
         if (lumos != null) {
-            return ArcaneLumosBlock.getColor(lumos.color);
+            return lumos.color.getColor();
         }
         return LightUtil.standardLightRayColor;
     }

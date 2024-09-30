@@ -35,19 +35,26 @@ public class SaltLanternBlockEntity extends SaltTorchBlockEntity {
             Color colorF = colorFirst;
             Color color = colorSecond;
             Vec3 pos = new Vec3(0.5f, 0.25f, 0.5f);
-            boolean isCosmic = false;
-
-            if (getBlockState().getValue(SaltLanternBlock.HANGING)) {
-                pos = pos.add(0f, 0.1875f, 0f);
-            }
+            Color colorFirstStarF = null;
+            Color colorFirstStar = null;
+            Color colorSecondStarF = null;
+            Color colorSecondStar = null;
+            boolean firstStar = false;
+            boolean secondStar = false;
 
             if (!getItemHandler().getItem(0).isEmpty()) {
                 if (getItemHandler().getItem(0).getItem() instanceof BlockItem blockItem) {
                     if (blockItem.getBlock() instanceof ArcaneLumosBlock lumos) {
-                        color = ArcaneLumosBlock.getColor(lumos.color);
-
-                        if (lumos.color == ArcaneLumosBlock.Colors.COSMIC) {
-                            isCosmic = true;
+                        color = lumos.color.getColor();
+                        if (lumos.color.hasFirstStar()) {
+                            firstStar = true;
+                            colorFirstStarF = lumos.color.getColorFirstStar();
+                            colorFirstStar = lumos.color.getColorFirstStar();
+                        }
+                        if (lumos.color.hasSecondStar()) {
+                            secondStar = true;
+                            colorSecondStarF = lumos.color.getColorSecondStar();
+                            colorSecondStar = lumos.color.getColorFirstStar();
                         }
                     }
                 }
@@ -55,10 +62,16 @@ public class SaltLanternBlockEntity extends SaltTorchBlockEntity {
             if (!getItemHandler().getItem(1).isEmpty()) {
                 if (getItemHandler().getItem(1).getItem() instanceof BlockItem blockItem) {
                     if (blockItem.getBlock() instanceof ArcaneLumosBlock lumos) {
-                        colorF = ArcaneLumosBlock.getColor(lumos.color);
-
-                        if (lumos.color == ArcaneLumosBlock.Colors.COSMIC) {
-                            isCosmic = true;
+                        colorF = lumos.color.getColor();
+                        if (lumos.color.hasFirstStar()) {
+                            firstStar = true;
+                            if (colorFirstStarF == null) colorFirstStarF = lumos.color.getColorFirstStar();
+                            colorFirstStar = lumos.color.getColorFirstStar();
+                        }
+                        if (lumos.color.hasSecondStar()) {
+                            secondStar = true;
+                            if (colorSecondStarF == null) colorSecondStarF = lumos.color.getColorSecondStar();
+                            colorSecondStar = lumos.color.getColorFirstStar();
                         }
                     }
                 }
@@ -114,10 +127,10 @@ public class SaltLanternBlockEntity extends SaltTorchBlockEntity {
                         .spawn(level, getBlockPos().getX() + pos.x(), getBlockPos().getY() + pos.y(), getBlockPos().getZ() + pos.z());
             }
 
-            if (isCosmic) {
+            if (firstStar) {
                 if (random.nextFloat() < 0.1) {
                     ParticleBuilder.create(FluffyFurParticles.STAR)
-                            .setColorData(ColorParticleData.create(color).build())
+                            .setColorData(ColorParticleData.create(colorFirstStarF, colorFirstStar).build())
                             .setTransparencyData(GenericParticleData.create(0.75f, 0).build())
                             .setScaleData(GenericParticleData.create(0, 0.1f, 0).setEasing(Easing.SINE_IN_OUT).build())
                             .setSpinData(SpinParticleData.create().randomSpin(0.1f).build())
@@ -127,9 +140,11 @@ public class SaltLanternBlockEntity extends SaltTorchBlockEntity {
                             .addVelocity(0, 0.025f, 0)
                             .spawn(level, getBlockPos().getX() + pos.x(), getBlockPos().getY() + pos.y() + 0.1f, getBlockPos().getZ() + pos.z());
                 }
+            }
+            if (secondStar) {
                 if (random.nextFloat() < 0.1) {
                     ParticleBuilder.create(FluffyFurParticles.STAR)
-                            .setColorData(ColorParticleData.create(Color.WHITE).build())
+                            .setColorData(ColorParticleData.create(colorSecondStarF, colorSecondStarF).build())
                             .setTransparencyData(GenericParticleData.create(0.75f, 0).build())
                             .setScaleData(GenericParticleData.create(0, 0.1f, 0).setEasing(Easing.SINE_IN_OUT).build())
                             .setSpinData(SpinParticleData.create().randomSpin(0.1f).build())

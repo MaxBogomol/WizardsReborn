@@ -14,10 +14,8 @@ import mod.maxbogomol.fluffy_fur.common.item.IGuiParticleItem;
 import mod.maxbogomol.fluffy_fur.common.item.IParticleItem;
 import mod.maxbogomol.fluffy_fur.registry.client.FluffyFurParticles;
 import mod.maxbogomol.fluffy_fur.registry.client.FluffyFurRenderTypes;
-import mod.maxbogomol.fluffy_fur.util.ColorUtil;
 import mod.maxbogomol.fluffy_fur.util.RenderUtil;
 import mod.maxbogomol.wizards_reborn.common.block.ArcaneLumosBlock;
-import net.minecraft.client.Minecraft;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.item.BlockItem;
@@ -41,7 +39,7 @@ public class ArcaneLumosItem extends BlockItem implements IParticleItem, IGuiPar
     @Override
     public void addParticles(Level level, ItemEntity entity) {
         if (getBlock() instanceof ArcaneLumosBlock lumos) {
-            Color color = ArcaneLumosBlock.getColor(lumos.color);
+            Color color = lumos.color.getColor();
 
             if (random.nextFloat() < 0.1) {
                 ParticleBuilder.create(FluffyFurParticles.WISP)
@@ -63,10 +61,11 @@ public class ArcaneLumosItem extends BlockItem implements IParticleItem, IGuiPar
                         .spawn(level, entity.getX(), entity.getY() + 0.25F, entity.getZ());
             }
 
-            if (lumos.color == ArcaneLumosBlock.Colors.COSMIC) {
-                if (random.nextFloat() < 0.03) {;
+            if (lumos.color.hasFirstStar()) {
+                if (random.nextFloat() < 0.03) {
+                    ;
                     ParticleBuilder.create(FluffyFurParticles.STAR)
-                            .setColorData(ColorParticleData.create(color).build())
+                            .setColorData(ColorParticleData.create(lumos.color.getColorSecondStar()).build())
                             .setTransparencyData(GenericParticleData.create(0.75f, 0).build())
                             .setScaleData(GenericParticleData.create(0, 0.1f, 0).setEasing(Easing.SINE_IN_OUT).build())
                             .setSpinData(SpinParticleData.create().randomSpin(0.5f).build())
@@ -74,9 +73,11 @@ public class ArcaneLumosItem extends BlockItem implements IParticleItem, IGuiPar
                             .flatRandomOffset(0.25f, 0.25f, 0.25f)
                             .spawn(level, entity.getX(), entity.getY(), entity.getZ());
                 }
+            }
+            if (lumos.color.hasSecondStar()) {
                 if (random.nextFloat() < 0.03) {
                     ParticleBuilder.create(FluffyFurParticles.STAR)
-                            .setColorData(ColorParticleData.create(Color.WHITE).build())
+                            .setColorData(ColorParticleData.create(lumos.color.getColorSecondStar()).build())
                             .setTransparencyData(GenericParticleData.create(0.75f, 0).build())
                             .setScaleData(GenericParticleData.create(0, 0.1f, 0).setEasing(Easing.SINE_IN_OUT).build())
                             .setSpinData(SpinParticleData.create().randomSpin(0.5f).build())
@@ -92,15 +93,11 @@ public class ArcaneLumosItem extends BlockItem implements IParticleItem, IGuiPar
     @OnlyIn(Dist.CLIENT)
     public void renderParticle(PoseStack poseStack, LivingEntity entity, Level level, ItemStack stack, int x, int y, int seed, int guiOffset) {
         if (getBlock() instanceof ArcaneLumosBlock lumos) {
-            Color color = ArcaneLumosBlock.getColor(lumos.color);
-            if (lumos.color == ArcaneLumosBlock.Colors.RAINBOW) {
-                double ticks = (ClientTickHandler.ticksInGame + Minecraft.getInstance().getPartialTick()) * 0.1f;
-                color = ColorUtil.rainbowColor((float) ticks);
-            }
+            Color color = lumos.color.getLightRayColor(ClientTickHandler.partialTicks);
 
             int seedI = this.getDescriptionId().length();
             Random randomI = new Random(seedI);
-            float ticks = (ClientTickHandler.ticksInGame + Minecraft.getInstance().getPartialTick() + (seedI * 100f));
+            float ticks = (ClientTickHandler.getTotal() + (seedI * 100f));
             float angle = (randomI.nextFloat() * 360f) + ticks;
 
             poseStack.pushPose();
@@ -113,13 +110,13 @@ public class ArcaneLumosItem extends BlockItem implements IParticleItem, IGuiPar
                     .endBatch();
             poseStack.popPose();
 
-            if (lumos.color == ArcaneLumosBlock.Colors.COSMIC) {
+            if (lumos.color.hasFirstStar()) {
                 poseStack.pushPose();
                 poseStack.translate(x + 7.5, y + 9, 100);
                 poseStack.mulPose(Axis.ZP.rotationDegrees(angle + 22.5f));
                 RenderBuilder.create().setRenderType(FluffyFurRenderTypes.ADDITIVE_TEXTURE)
                         .setUV(RenderUtil.getSprite(FluffyFur.MOD_ID, "particle/star"))
-                        .setColor(color).setAlpha(0.75f)
+                        .setColor(lumos.color.getColorFirstStar()).setAlpha(0.75f)
                         .renderCenteredQuad(poseStack, 7f)
                         .endBatch();
                 poseStack.popPose();

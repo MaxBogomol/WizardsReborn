@@ -5,9 +5,11 @@ import mod.maxbogomol.fluffy_fur.common.block.entity.TickableBlockEntity;
 import mod.maxbogomol.wizards_reborn.api.crystalritual.IGrowableCrystal;
 import mod.maxbogomol.wizards_reborn.api.light.ILightBlockEntity;
 import mod.maxbogomol.wizards_reborn.api.light.LightTypeStack;
+import mod.maxbogomol.wizards_reborn.api.light.LightUtil;
 import mod.maxbogomol.wizards_reborn.registry.common.block.WizardsRebornBlockEntities;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
+import net.minecraft.nbt.Tag;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.AABB;
@@ -38,6 +40,13 @@ public class ArcanumGrowthBlockEntity extends BlockEntityBase implements Tickabl
 
             if (getLight() > 0) {
                 removeLight(1);
+                LightUtil.tickLightTypeStack(this, getLightTypes());
+                if (getLight() <= 0) {
+                    clearLightType();
+                }
+                update = true;
+            } else if (!getLightTypes().isEmpty()) {
+                clearLightType();
                 update = true;
             }
 
@@ -59,6 +68,8 @@ public class ArcanumGrowthBlockEntity extends BlockEntityBase implements Tickabl
         tag.putInt("light", light);
         tag.putInt("growingTicks", growingTicks);
         tag.putFloat("growingPower", growingPower);
+
+        tag.put("lightTypes", LightUtil.stacksToTag(lightTypes));
     }
 
     @Override
@@ -67,6 +78,8 @@ public class ArcanumGrowthBlockEntity extends BlockEntityBase implements Tickabl
         light = tag.getInt("light");
         growingTicks = tag.getInt("growingTicks");
         growingPower = tag.getFloat("growingPower");
+
+        lightTypes = LightUtil.stacksFromTag(tag.getList("lightTypes", Tag.TAG_COMPOUND));
     }
 
     @Override

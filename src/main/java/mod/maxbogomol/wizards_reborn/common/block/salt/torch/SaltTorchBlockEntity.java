@@ -47,7 +47,13 @@ public class SaltTorchBlockEntity extends ExposedBlockSimpleInventory implements
             Color colorF = colorFirst;
             Color color = colorSecond;
             Vec3 pos = new Vec3(0.5f, 0.6875f, 0.5f);
-            boolean isCosmic = false;
+            Color colorFirstStarF = null;
+            Color colorFirstStar = null;
+            Color colorSecondStarF = null;
+            Color colorSecondStar = null;
+            boolean firstStar = false;
+            boolean secondStar = false;
+
 
             if (getBlockState().getBlock() instanceof SaltWallTorchBlock) {
                 BlockPos blockPos = new BlockPos(0, 0, 0).relative(getBlockState().getValue(SaltWallTorchBlock.FACING));
@@ -57,10 +63,16 @@ public class SaltTorchBlockEntity extends ExposedBlockSimpleInventory implements
             if (!getItemHandler().getItem(0).isEmpty()) {
                 if (getItemHandler().getItem(0).getItem() instanceof BlockItem blockItem) {
                     if (blockItem.getBlock() instanceof ArcaneLumosBlock lumos) {
-                        color = ArcaneLumosBlock.getColor(lumos.color);
-
-                        if (lumos.color == ArcaneLumosBlock.Colors.COSMIC) {
-                            isCosmic = true;
+                        color = lumos.color.getColor();
+                        if (lumos.color.hasFirstStar()) {
+                            firstStar = true;
+                            colorFirstStarF = lumos.color.getColorFirstStar();
+                            colorFirstStar = lumos.color.getColorFirstStar();
+                        }
+                        if (lumos.color.hasSecondStar()) {
+                            secondStar = true;
+                            colorSecondStarF = lumos.color.getColorSecondStar();
+                            colorSecondStar = lumos.color.getColorFirstStar();
                         }
                     }
                 }
@@ -68,10 +80,16 @@ public class SaltTorchBlockEntity extends ExposedBlockSimpleInventory implements
             if (!getItemHandler().getItem(1).isEmpty()) {
                 if (getItemHandler().getItem(1).getItem() instanceof BlockItem blockItem) {
                     if (blockItem.getBlock() instanceof ArcaneLumosBlock lumos) {
-                        colorF = ArcaneLumosBlock.getColor(lumos.color);
-
-                        if (lumos.color == ArcaneLumosBlock.Colors.COSMIC) {
-                            isCosmic = true;
+                        colorF = lumos.color.getColor();
+                        if (lumos.color.hasFirstStar()) {
+                            firstStar = true;
+                            if (colorFirstStarF == null) colorFirstStarF = lumos.color.getColorFirstStar();
+                            colorFirstStar = lumos.color.getColorFirstStar();
+                        }
+                        if (lumos.color.hasSecondStar()) {
+                            secondStar = true;
+                            if (colorSecondStarF == null) colorSecondStarF = lumos.color.getColorSecondStar();
+                            colorSecondStar = lumos.color.getColorFirstStar();
                         }
                     }
                 }
@@ -129,10 +147,10 @@ public class SaltTorchBlockEntity extends ExposedBlockSimpleInventory implements
                         .spawn(level, getBlockPos().getX() + pos.x(), getBlockPos().getY() + pos.y(), getBlockPos().getZ() + pos.z());
             }
 
-            if (isCosmic) {
+            if (firstStar) {
                 if (random.nextFloat() < 0.1) {
                     ParticleBuilder.create(FluffyFurParticles.STAR)
-                            .setColorData(ColorParticleData.create(color).build())
+                            .setColorData(ColorParticleData.create(colorFirstStarF, colorFirstStar).build())
                             .setTransparencyData(GenericParticleData.create(0.75f, 0).build())
                             .setScaleData(GenericParticleData.create(0, 0.1f, 0).setEasing(Easing.SINE_IN_OUT).build())
                             .setSpinData(SpinParticleData.create().randomSpin(0.1f).build())
@@ -142,9 +160,11 @@ public class SaltTorchBlockEntity extends ExposedBlockSimpleInventory implements
                             .addVelocity(0, 0.025f, 0)
                             .spawn(level, getBlockPos().getX() + pos.x(), getBlockPos().getY() + pos.y() + 0.1f, getBlockPos().getZ() + pos.z());
                 }
+            }
+            if (secondStar) {
                 if (random.nextFloat() < 0.1) {
                     ParticleBuilder.create(FluffyFurParticles.STAR)
-                            .setColorData(ColorParticleData.create(Color.WHITE).build())
+                            .setColorData(ColorParticleData.create(colorSecondStarF, colorSecondStarF).build())
                             .setTransparencyData(GenericParticleData.create(0.75f, 0).build())
                             .setScaleData(GenericParticleData.create(0, 0.1f, 0).setEasing(Easing.SINE_IN_OUT).build())
                             .setSpinData(SpinParticleData.create().randomSpin(0.1f).build())

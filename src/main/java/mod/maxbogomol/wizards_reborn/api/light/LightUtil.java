@@ -219,20 +219,13 @@ public class LightUtil {
 
     public static Color getColorFromLumos(Color color, ArcaneLumosBlock lumos, float partialTicks) {
         if (lumos != null) {
-            if (lumos.color == ArcaneLumosBlock.Colors.RAINBOW) {
-                float ticks = (ClientTickHandler.ticksInGame + partialTicks) * 0.1f;
-                return ColorUtil.rainbowColor(ticks);
-            }
+            return lumos.color.getLightRayColor(partialTicks);
         }
-
         return color;
     }
 
     public static Color getLensColorFromLumos(ArcaneLumosBlock lumos, float partialTicks) {
-        if (lumos != null) {
-            return getColorFromLumos(ArcaneLumosBlock.getColor(lumos.color), lumos, partialTicks);
-        }
-        return standardLensColor;
+        return getColorFromLumos(standardLensColor, lumos, partialTicks);
     }
 
     public static Color getColorFromTypes(ArrayList<LightTypeStack> lightTypes) {
