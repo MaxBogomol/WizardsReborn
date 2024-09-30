@@ -27,7 +27,7 @@ public class Skin {
 
     public Skin(String id) {
         this.id = id;
-        this.color = new Color(255, 255, 255);
+        this.color = Color.WHITE;
     }
 
     public Skin(String id, Color color) {

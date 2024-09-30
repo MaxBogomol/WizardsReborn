@@ -21,6 +21,7 @@ public class LightCasingRenderer implements BlockEntityRenderer<LightCasingBlock
     public void render(LightCasingBlockEntity blockEntity, float partialTicks, PoseStack poseStack, MultiBufferSource bufferSource, int light, int overlay) {
         Random random = new Random();
         random.setSeed(blockEntity.getBlockPos().asLong());
+        Color colorLens = LightUtil.getLensColorFromLumos(blockEntity.getLumos(), partialTicks);
 
         for (Direction direction : Direction.values()) {
             poseStack.pushPose();
@@ -31,15 +32,18 @@ public class LightCasingRenderer implements BlockEntityRenderer<LightCasingBlock
             WizardsRebornRenderUtil.renderHoveringLensModel(poseStack, bufferSource, light, overlay);
 
             if (blockEntity.isConnection(direction)) {
-                WizardsRebornRenderUtil.renderHoveringLensGlow(poseStack);
+                WizardsRebornRenderUtil.renderHoveringLensGlow(poseStack, colorLens);
 
                 if (blockEntity.canWork() && blockEntity.getLight() > 0) {
                     Vec3 from = new Vec3(blockEntity.getBlockPos().getX() + 0.5f + (pos.getX() * blockEntity.getLightLensOffset()), blockEntity.getBlockPos().getY() + 0.5f + (pos.getY() * blockEntity.getLightLensOffset()), blockEntity.getBlockPos().getZ() + 0.5f + (pos.getZ() * blockEntity.getLightLensOffset()));
                     Vec3 to = LightUtil.getLightLensPos(blockEntity.getBlockPos().relative(direction), blockEntity.getLightLensPos());
 
-                    Color color = LightUtil.getRayColorFromLumos(blockEntity.getColor(), blockEntity.getLumos(), blockEntity.getBlockPos(), partialTicks);
+                    Color color = LightUtil.getColorFromLumos(blockEntity.getColor(), blockEntity.getLumos(), partialTicks);
+                    Color colorType = LightUtil.getColorFromTypes(blockEntity.getLightTypes());
+                    Color colorConcentrated = LightUtil.getColorConcentratedFromTypes(blockEntity.getLightTypes());
+                    boolean concentrated = LightUtil.isConcentratedType(blockEntity.getLightTypes());
                     poseStack.pushPose();
-                    LightUtil.renderLightRay(blockEntity.getLevel(), blockEntity.getBlockPos(), from, to, 25f, color, partialTicks, poseStack);
+                    LightUtil.renderLightRay(blockEntity.getLevel(), blockEntity.getBlockPos(), from, to, 25f, color, colorType, colorConcentrated, concentrated, partialTicks, poseStack);
                     poseStack.popPose();
                 }
 

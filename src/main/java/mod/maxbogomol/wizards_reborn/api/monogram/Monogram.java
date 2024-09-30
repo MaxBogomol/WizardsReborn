@@ -25,7 +25,7 @@ public class Monogram {
 
     public Monogram(String id) {
         this.id = id;
-        this.color = new Color(255, 255, 255);
+        this.color = Color.WHITE;
     }
 
     public Monogram(String id, Color color) {

@@ -5,6 +5,7 @@ import mod.maxbogomol.fluffy_fur.common.block.entity.TickableBlockEntity;
 import mod.maxbogomol.fluffy_fur.common.network.BlockEntityUpdate;
 import mod.maxbogomol.wizards_reborn.api.light.ILightBlockEntity;
 import mod.maxbogomol.wizards_reborn.api.light.LightRayHitResult;
+import mod.maxbogomol.wizards_reborn.api.light.LightTypeStack;
 import mod.maxbogomol.wizards_reborn.api.light.LightUtil;
 import mod.maxbogomol.wizards_reborn.api.wissen.IWissenWandControlledBlockEntity;
 import mod.maxbogomol.wizards_reborn.client.sound.LightTransferLensSoundInstance;
@@ -15,6 +16,7 @@ import mod.maxbogomol.wizards_reborn.registry.common.item.WizardsRebornItemTags;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.nbt.CompoundTag;
+import net.minecraft.nbt.Tag;
 import net.minecraft.world.SimpleContainer;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.ItemStack;
@@ -29,15 +31,18 @@ import org.jetbrains.annotations.NotNull;
 
 import javax.annotation.Nullable;
 import java.awt.*;
+import java.util.ArrayList;
 
 public class LightTransferLensBlockEntity extends ExposedBlockSimpleInventory implements TickableBlockEntity, ILightBlockEntity, IWissenWandControlledBlockEntity {
 
     public int blockToX = 0;
-    public int blockToY =0 ;
+    public int blockToY = 0;
     public int blockToZ = 0;
     public boolean isToBlock = false;
 
     public int light = 0;
+
+    public ArrayList<LightTypeStack> lightTypes = new ArrayList<>();
 
     public LightTransferLensSoundInstance sound;
 
@@ -51,11 +56,22 @@ public class LightTransferLensBlockEntity extends ExposedBlockSimpleInventory im
 
     @Override
     public void tick() {
+        //lightTypes.clear();
+        //addLightType(new LightTypeStack(WizardsRebornLightTypes.EARTH));
+        //addLightType(new LightTypeStack(WizardsRebornLightTypes.WATER));
+        //addLightType(new LightTypeStack(WizardsRebornLightTypes.VOID));
         if (!level.isClientSide()) {
             boolean update = false;
 
             if (getLight() > 0) {
                 removeLight(1);
+                LightUtil.tickLightTypeStack(this, getLightTypes());
+                if (getLight() <= 0) {
+                    clearLightType();
+                }
+                update = true;
+            } else if (!getLightTypes().isEmpty()) {
+                clearLightType();
                 update = true;
             }
 
@@ -124,6 +140,8 @@ public class LightTransferLensBlockEntity extends ExposedBlockSimpleInventory im
         tag.putBoolean("isToBlock", isToBlock);
 
         tag.putInt("light", light);
+
+        tag.put("lightTypes", LightUtil.stacksToTag(lightTypes));
     }
 
     @Override
@@ -135,6 +153,8 @@ public class LightTransferLensBlockEntity extends ExposedBlockSimpleInventory im
         isToBlock = tag.getBoolean("isToBlock");
 
         light = tag.getInt("light");
+
+        lightTypes = LightUtil.stacksFromTag(tag.getList("lightTypes", Tag.TAG_COMPOUND));
     }
 
     @Override
@@ -143,14 +163,11 @@ public class LightTransferLensBlockEntity extends ExposedBlockSimpleInventory im
     }
 
     public Color getColor() {
-        Color color = new Color(0.886f, 0.811f, 0.549f);
-
         ArcaneLumosBlock lumos = getLumos();
         if (lumos != null) {
-            color = ArcaneLumosBlock.getColor(lumos.color);
+            return ArcaneLumosBlock.getColor(lumos.color);
         }
-
-        return color;
+        return LightUtil.standardLightRayColor;
     }
 
     public ArcaneLumosBlock getLumos() {
@@ -228,6 +245,31 @@ public class LightTransferLensBlockEntity extends ExposedBlockSimpleInventory im
     @Override
     public float getLightLensSize() {
         return 0.0625f;
+    }
+
+    @Override
+    public ArrayList<LightTypeStack> getLightTypes() {
+        return lightTypes;
+    }
+
+    @Override
+    public void setLightTypes(ArrayList<LightTypeStack> lightTypes) {
+        this.lightTypes = lightTypes;
+    }
+
+    @Override
+    public void addLightType(LightTypeStack lightType) {
+        lightTypes.add(lightType);
+    }
+
+    @Override
+    public void removeLightType(LightTypeStack lightType) {
+        lightTypes.remove(lightType);
+    }
+
+    @Override
+    public void clearLightType() {
+        lightTypes.clear();
     }
 
     @Override

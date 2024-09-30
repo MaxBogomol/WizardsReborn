@@ -39,7 +39,8 @@ import java.util.function.Predicate;
 
 public class CrystalRitual {
     public String id;
-    public Random random = new Random();
+    public static Random random = new Random();
+    public static Color standardColor = new Color(200, 200, 200);
 
     public CrystalRitual(String id) {
         this.id = id;
@@ -50,7 +51,7 @@ public class CrystalRitual {
     }
 
     public Color getColor() {
-        return new Color(200, 200, 200);
+        return standardColor;
     }
 
     public String getTranslatedName() {
@@ -60,8 +61,8 @@ public class CrystalRitual {
     public static String getTranslatedName(String id) {
         int i = id.indexOf(":");
         String modId = id.substring(0, i);
-        String spellId = id.substring(i + 1);
-        return "crystal_ritual."  + modId + "." + spellId;
+        String ritualId = id.substring(i + 1);
+        return "crystal_ritual."  + modId + "." + ritualId;
     }
 
     public List<CrystalType> getCrystalsList() {
@@ -187,7 +188,7 @@ public class CrystalRitual {
         if (type != null) {
             return type.getColor();
         }
-        return new Color(255, 255, 255);
+        return Color.WHITE;
     }
 
     public static ArrayList<BlockPos> getBlockPosWithArea(Level level, BlockPos startPos, Vec3 sizeFrom, Vec3 sizeTo, Predicate<BlockPos> filter, boolean hasRandomOffset, boolean hasLimit, int limit) {
@@ -200,7 +201,6 @@ public class CrystalRitual {
         float zOffset = 0;
 
         if (hasRandomOffset) {
-            Random random = new Random();
             xOffset = (float) (random.nextFloat() * (sizeFrom.x() + sizeTo.x()));
             yOffset = (float) (random.nextFloat() * (sizeFrom.y() + sizeTo.y()));
             zOffset = (float) (random.nextFloat() * (sizeFrom.z() + sizeTo.z()));

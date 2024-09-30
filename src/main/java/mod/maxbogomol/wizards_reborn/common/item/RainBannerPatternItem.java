@@ -64,7 +64,7 @@ public class RainBannerPatternItem extends BannerPatternItem {
                 return new Color(255, 235, 114);
         }
 
-        return new Color(255, 255, 255);
+        return Color.WHITE;
     }
 
     public static Component getLore(Types type) {

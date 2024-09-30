@@ -12,6 +12,7 @@ import net.minecraft.world.level.Level;
 import java.awt.*;
 
 public class CrystalGrowthAccelerationCrystalRitual extends CrystalRitual {
+
     public CrystalGrowthAccelerationCrystalRitual(String id) {
         super(id);
     }

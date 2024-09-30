@@ -169,8 +169,8 @@ public class SniffaloEntity extends Sniffer implements ContainerListener, HasCus
         }
     }
 
-    protected Vec2 getRiddenRotation(LivingEntity pEntity) {
-        return new Vec2(pEntity.getXRot() * 0.5F, pEntity.getYRot());
+    protected Vec2 getRiddenRotation(LivingEntity entity) {
+        return new Vec2(entity.getXRot() * 0.5F, entity.getYRot());
     }
 
     protected @NotNull Vec3 getRiddenInput(Player player, @NotNull Vec3 travelVector) {
@@ -191,8 +191,8 @@ public class SniffaloEntity extends Sniffer implements ContainerListener, HasCus
         return (float) this.getAttributeValue(Attributes.MOVEMENT_SPEED) * 0.75f;
     }
 
-    protected void positionRider(Entity pPassenger, Entity.MoveFunction pCallback) {
-        int i = this.getPassengers().indexOf(pPassenger);
+    protected void positionRider(Entity passenger, Entity.MoveFunction callback) {
+        int i = this.getPassengers().indexOf(passenger);
         if (i >= 0) {
             boolean flag = i == 0;
             float f = Mth.sin(this.yBodyRot * ((float) Math.PI / 180F));
@@ -200,9 +200,9 @@ public class SniffaloEntity extends Sniffer implements ContainerListener, HasCus
             float f2 = flag ? -0.4F : 0.4F;
             float f3 = 0.15F + positionRiderOffset();
 
-            pCallback.accept(pPassenger, this.getX() + (double) (f2 * f), this.getY() + this.getPassengersRidingOffset() + pPassenger.getMyRidingOffset() + (double) f3, this.getZ() - (double) (f2 * f1));
-            if (pPassenger instanceof LivingEntity) {
-                ((LivingEntity) pPassenger).yBodyRot = this.yBodyRot;
+            callback.accept(passenger, this.getX() + (double) (f2 * f), this.getY() + this.getPassengersRidingOffset() + passenger.getMyRidingOffset() + (double) f3, this.getZ() - (double) (f2 * f1));
+            if (passenger instanceof LivingEntity) {
+                ((LivingEntity) passenger).yBodyRot = this.yBodyRot;
             }
         }
     }
@@ -240,19 +240,19 @@ public class SniffaloEntity extends Sniffer implements ContainerListener, HasCus
         return !this.isVehicle();
     }
 
-    public boolean causeFallDamage(float pFallDistance, float pMultiplier, DamageSource pSource) {
-        if (pFallDistance > 1.0F) {
+    public boolean causeFallDamage(float fallDistance, float multiplier, DamageSource source) {
+        if (fallDistance > 1.0F) {
             this.playSound(SoundEvents.SNIFFER_STEP, 0.4F, 1.0F);
         }
 
-        int i = this.calculateFallDamage(pFallDistance, pMultiplier);
+        int i = this.calculateFallDamage(fallDistance, multiplier);
         if (i <= 0) {
             return false;
         } else {
-            this.hurt(pSource, (float)i);
+            this.hurt(source, (float) i);
             if (this.isVehicle()) {
                 for(Entity entity : this.getIndirectPassengers()) {
-                    entity.hurt(pSource, (float)i);
+                    entity.hurt(source, (float) i);
                 }
             }
 
@@ -299,23 +299,23 @@ public class SniffaloEntity extends Sniffer implements ContainerListener, HasCus
     }
 
     @Override
-    public boolean isFood(ItemStack pStack) {
-        return pStack.is(WizardsRebornItemTags.SNIFFALO_FOOD);
+    public boolean isFood(ItemStack stack) {
+        return stack.is(WizardsRebornItemTags.SNIFFALO_FOOD);
     }
 
     @Override
-    public boolean canMate(Animal pOtherAnimal) {
-        if (!(pOtherAnimal instanceof SniffaloEntity sniffalo)) {
+    public boolean canMate(Animal otherAnimal) {
+        if (!(otherAnimal instanceof SniffaloEntity sniffalo)) {
             return false;
         } else {
             Set<State> set = Set.of(Sniffer.State.IDLING, Sniffer.State.SCENTING, Sniffer.State.FEELING_HAPPY);
             if (set.contains(this.entityData.get(DATA_STATE)) && set.contains(sniffalo.entityData.get(DATA_STATE))) {
-                if (pOtherAnimal == this) {
+                if (otherAnimal == this) {
                     return false;
-                } else if (pOtherAnimal.getClass() != this.getClass()) {
+                } else if (otherAnimal.getClass() != this.getClass()) {
                     return false;
                 } else {
-                    return this.isInLove() && pOtherAnimal.isInLove();
+                    return this.isInLove() && otherAnimal.isInLove();
                 }
             }
         }
@@ -415,11 +415,11 @@ public class SniffaloEntity extends Sniffer implements ContainerListener, HasCus
         }
     }
 
-    public void handleEntityEvent(byte pId) {
-        if (pId == 7) {
+    public void handleEntityEvent(byte id) {
+        if (id == 7) {
             this.spawnTamingParticles();
         } else {
-            super.handleEntityEvent(pId);
+            super.handleEntityEvent(id);
         }
     }
 
@@ -433,8 +433,8 @@ public class SniffaloEntity extends Sniffer implements ContainerListener, HasCus
         return this.owner;
     }
 
-    public void setOwnerUUID(@Nullable UUID pUuid) {
-        this.owner = pUuid;
+    public void setOwnerUUID(@Nullable UUID uuid) {
+        this.owner = uuid;
     }
 
     public boolean isTamed() {
@@ -544,7 +544,7 @@ public class SniffaloEntity extends Sniffer implements ContainerListener, HasCus
     }
 
     @Override
-    public void containerChanged(Container pInvBasic) {
+    public void containerChanged(Container container) {
         boolean flag = this.isSaddled();
         this.updateContainerEquipment();
         if (this.tickCount > 20 && !flag && this.isSaddled()) {
@@ -564,8 +564,8 @@ public class SniffaloEntity extends Sniffer implements ContainerListener, HasCus
         }
     }
 
-    public boolean hasInventoryChanged(Container pInventory) {
-        return this.inventory != pInventory;
+    public boolean hasInventoryChanged(Container container) {
+        return this.inventory != container;
     }
 
     private net.minecraftforge.common.util.LazyOptional<?> itemHandler = null;
@@ -608,17 +608,17 @@ public class SniffaloEntity extends Sniffer implements ContainerListener, HasCus
         }
     }
 
-    private SlotAccess createEquipmentSlotAccess(final int pSlot, final Predicate<ItemStack> pStackFilter) {
+    private SlotAccess createEquipmentSlotAccess(final int slot, final Predicate<ItemStack> stackFilter) {
         return new SlotAccess() {
             public ItemStack get() {
-                return SniffaloEntity.this.inventory.getItem(pSlot);
+                return SniffaloEntity.this.inventory.getItem(slot);
             }
 
             public boolean set(ItemStack p_149528_) {
-                if (!pStackFilter.test(p_149528_)) {
+                if (!stackFilter.test(p_149528_)) {
                     return false;
                 } else {
-                    SniffaloEntity.this.inventory.setItem(pSlot, p_149528_);
+                    SniffaloEntity.this.inventory.setItem(slot, p_149528_);
                     SniffaloEntity.this.updateContainerEquipment();
                     return true;
                 }
@@ -626,8 +626,8 @@ public class SniffaloEntity extends Sniffer implements ContainerListener, HasCus
         };
     }
 
-    public SlotAccess getSlot(int pSlot) {
-        int i = pSlot - 400;
+    public SlotAccess getSlot(int slot) {
+        int i = slot - 400;
         if (i >= 0 && i < 28 && i < this.inventory.getContainerSize()) {
             if (i == 0) {
                 return this.createEquipmentSlotAccess(i, (itemStack) -> {
@@ -654,7 +654,7 @@ public class SniffaloEntity extends Sniffer implements ContainerListener, HasCus
             }*/
         }
 
-        int j = pSlot - 500 + 28;
-        return j >= 28 && j < this.inventory.getContainerSize() ? SlotAccess.forContainer(this.inventory, j) : super.getSlot(pSlot);
+        int j = slot - 500 + 28;
+        return j >= 28 && j < this.inventory.getContainerSize() ? SlotAccess.forContainer(this.inventory, j) : super.getSlot(slot);
     }
 }

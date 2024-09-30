@@ -61,10 +61,13 @@ public class RunicPedestalScreen extends AbstractContainerScreen<RunicPedestalCo
                     double dst = (360 * random.nextDouble()) + (ClientTickHandler.ticksInGame + Minecraft.getInstance().getFrameTime()) / 8;
                     double dstX = (360 * random.nextDouble()) + (ClientTickHandler.ticksInGame + Minecraft.getInstance().getFrameTime()) / 16;
                     double dstY = (360 * random.nextDouble()) + (ClientTickHandler.ticksInGame + Minecraft.getInstance().getFrameTime()) / 16;
-                    int X = (int) (Math.cos(dst) * (4 * Math.sin(Math.toRadians(dstX))));
-                    int Y = (int) (Math.sin(dst) * (4 * Math.sin(Math.toRadians(dstY))));
+                    double X = (Math.cos(dst) * (4 * Math.sin(Math.toRadians(dstX))));
+                    double Y = (Math.sin(dst) * (4 * Math.sin(Math.toRadians(dstY))));
 
-                    gui.blit(GUI, i + X + 72, j + Y + 22, 176, 0, 32, 32);
+                    gui.pose().pushPose();
+                    gui.pose().translate(i + X + 72, j + Y + 22,  0);
+                    gui.blit(GUI, 0, 0, 176, 0, 32, 32);
+                    gui.pose().popPose();
                 }
 
                 RenderSystem.disableBlend();

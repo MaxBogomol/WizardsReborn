@@ -41,11 +41,8 @@ public class ThanksHeadPage extends Page {
         drawText(book, gui, "- " + I18n.get(name), x + 30, y + 116);
         drawText(book, gui, "      " + I18n.get(date), x + 30, y + 128);
         if (mouseX >= x + 4 && mouseY >= y + 108 && mouseX <= x + 4 + 24 && mouseY <= y + 108 + 24) {
-            double ticks = (ClientTickHandler.ticksInGame + Minecraft.getInstance().getPartialTick()) * 0.05f;
-            int r = (int)(Math.sin(ticks) * 127 + 128);
-            int g = (int)(Math.sin(ticks + Math.PI/2) * 127 + 128);
-            int b = (int)(Math.sin(ticks + Math.PI) * 127 + 128);
-            int packColor = ColorUtil.packColor(255, r, g, b);
+            float ticks = (ClientTickHandler.ticksInGame + Minecraft.getInstance().getPartialTick()) * 0.05f;
+            int packColor = ColorUtil.packColor(ColorUtil.rainbowColor(ticks));
 
             List<Component> list = new ArrayList<>();
             list.add(Component.translatable(name).withStyle(Style.EMPTY.withColor(packColor)));

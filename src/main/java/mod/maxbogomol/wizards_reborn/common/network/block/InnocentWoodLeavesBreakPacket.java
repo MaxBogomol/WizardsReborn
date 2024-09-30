@@ -33,7 +33,7 @@ public class InnocentWoodLeavesBreakPacket extends PositionClientPacket {
                 .setScaleData(GenericParticleData.create(0.2f, 0).build())
                 .setLifetime(20)
                 .randomVelocity(0.1)
-                .randomOffset(0.05)
+                .flatRandomOffset(0.4f, 0.4f, 0.4f)
                 .repeat(level, x + 0.5f, y + 0.5f, z + 0.5f, 5);
     }
 

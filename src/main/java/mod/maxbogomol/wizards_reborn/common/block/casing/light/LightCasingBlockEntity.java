@@ -35,6 +35,13 @@ public class LightCasingBlockEntity extends LightTransferLensBlockEntity {
 
             if (getLight() > 0) {
                 removeLight(1);
+                LightUtil.tickLightTypeStack(this, getLightTypes());
+                if (getLight() <= 0) {
+                    clearLightType();
+                }
+                update = true;
+            } else if (!getLightTypes().isEmpty()) {
+                clearLightType();
                 update = true;
             }
 

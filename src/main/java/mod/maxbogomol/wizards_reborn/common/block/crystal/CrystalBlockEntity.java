@@ -9,6 +9,7 @@ import mod.maxbogomol.wizards_reborn.api.crystalritual.CrystalRitual;
 import mod.maxbogomol.wizards_reborn.api.crystalritual.CrystalRitualUtil;
 import mod.maxbogomol.wizards_reborn.api.light.ILightBlockEntity;
 import mod.maxbogomol.wizards_reborn.api.light.LightRayHitResult;
+import mod.maxbogomol.wizards_reborn.api.light.LightTypeStack;
 import mod.maxbogomol.wizards_reborn.api.light.LightUtil;
 import mod.maxbogomol.wizards_reborn.api.wissen.ICooldownBlockEntity;
 import mod.maxbogomol.wizards_reborn.api.wissen.IItemResultBlockEntity;
@@ -18,10 +19,11 @@ import mod.maxbogomol.wizards_reborn.client.sound.CrystalSoundInstance;
 import mod.maxbogomol.wizards_reborn.common.block.runic_pedestal.RunicPedestalBlockEntity;
 import mod.maxbogomol.wizards_reborn.common.item.CrystalItem;
 import mod.maxbogomol.wizards_reborn.common.item.equipment.WissenWandItem;
-import mod.maxbogomol.wizards_reborn.registry.common.block.WizardsRebornBlockEntities;
 import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornSounds;
+import mod.maxbogomol.wizards_reborn.registry.common.block.WizardsRebornBlockEntities;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
+import net.minecraft.nbt.Tag;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.SimpleContainer;
 import net.minecraft.world.item.ItemStack;
@@ -40,7 +42,7 @@ import java.util.List;
 public class CrystalBlockEntity extends BlockSimpleInventory implements TickableBlockEntity, ILightBlockEntity, ICooldownBlockEntity, IWissenWandFunctionalBlockEntity, IWissenWandControlledBlockEntity, IItemResultBlockEntity {
 
     public int blockToX = 0;
-    public int blockToY =0 ;
+    public int blockToY = 0;
     public int blockToZ = 0;
     public boolean isToBlock = false;
 
@@ -51,6 +53,8 @@ public class CrystalBlockEntity extends BlockSimpleInventory implements Tickable
     public boolean startRitual = false;
     public int tickRitual = 0;
     public CompoundTag tagRitual = new CompoundTag();
+
+    public ArrayList<LightTypeStack> lightTypes = new ArrayList<>();
 
     public CrystalSoundInstance sound;
 
@@ -70,6 +74,13 @@ public class CrystalBlockEntity extends BlockSimpleInventory implements Tickable
         if (!level.isClientSide()) {
             if (getLight() > 0) {
                 removeLight(1);
+                LightUtil.tickLightTypeStack(this, getLightTypes());
+                if (getLight() <= 0) {
+                    clearLightType();
+                }
+                update = true;
+            } else if (!getLightTypes().isEmpty()) {
+                clearLightType();
                 update = true;
             }
         }
@@ -187,6 +198,8 @@ public class CrystalBlockEntity extends BlockSimpleInventory implements Tickable
         tag.putBoolean("startRitual", startRitual);
         tag.putInt("tickRitual", tickRitual);
         tag.put("tagRitual", tagRitual);
+
+        tag.put("lightTypes", LightUtil.stacksToTag(lightTypes));
     }
 
     @Override
@@ -204,6 +217,8 @@ public class CrystalBlockEntity extends BlockSimpleInventory implements Tickable
         startRitual = tag.getBoolean("startRitual");
         tickRitual = tag.getInt("tickRitual");
         tagRitual = tag.getCompound("tagRitual");
+
+        lightTypes = LightUtil.stacksFromTag(tag.getList("lightTypes", Tag.TAG_COMPOUND));
     }
 
     @Override
@@ -270,6 +285,31 @@ public class CrystalBlockEntity extends BlockSimpleInventory implements Tickable
     @Override
     public float getLightLensSize() {
         return 0f;
+    }
+
+    @Override
+    public ArrayList<LightTypeStack> getLightTypes() {
+        return lightTypes;
+    }
+
+    @Override
+    public void setLightTypes(ArrayList<LightTypeStack> lightTypes) {
+        this.lightTypes = lightTypes;
+    }
+
+    @Override
+    public void addLightType(LightTypeStack lightType) {
+        lightTypes.add(lightType);
+    }
+
+    @Override
+    public void removeLightType(LightTypeStack lightType) {
+        lightTypes.remove(lightType);
+    }
+
+    @Override
+    public void clearLightType() {
+        lightTypes.clear();
     }
 
     @Override
@@ -342,7 +382,7 @@ public class CrystalBlockEntity extends BlockSimpleInventory implements Tickable
                 return type.getColor();
             }
         }
-        return new Color(255, 255, 255);
+        return Color.WHITE;
     }
 
     public Color getCrystalColor() {

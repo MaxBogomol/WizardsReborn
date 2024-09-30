@@ -4,6 +4,7 @@ import mod.maxbogomol.fluffy_fur.common.block.entity.BlockEntityBase;
 import mod.maxbogomol.fluffy_fur.common.block.entity.TickableBlockEntity;
 import mod.maxbogomol.wizards_reborn.api.crystalritual.IGrowableCrystal;
 import mod.maxbogomol.wizards_reborn.api.light.ILightBlockEntity;
+import mod.maxbogomol.wizards_reborn.api.light.LightTypeStack;
 import mod.maxbogomol.wizards_reborn.registry.common.block.WizardsRebornBlockEntities;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
@@ -12,11 +13,15 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.Vec3;
 
+import java.util.ArrayList;
+
 public class ArcanumGrowthBlockEntity extends BlockEntityBase implements TickableBlockEntity, ILightBlockEntity, IGrowableCrystal {
 
     public int light = 0;
     public int growingTicks = 0;
     public float growingPower = 0;
+
+    public ArrayList<LightTypeStack> lightTypes = new ArrayList<>();
 
     public ArcanumGrowthBlockEntity(BlockEntityType<?> type, BlockPos pos, BlockState state) {
         super(type, pos, state);
@@ -126,6 +131,31 @@ public class ArcanumGrowthBlockEntity extends BlockEntityBase implements Tickabl
     @Override
     public float getLightLensSize() {
         return 0f;
+    }
+
+    @Override
+    public ArrayList<LightTypeStack> getLightTypes() {
+        return lightTypes;
+    }
+
+    @Override
+    public void setLightTypes(ArrayList<LightTypeStack> lightTypes) {
+        this.lightTypes = lightTypes;
+    }
+
+    @Override
+    public void addLightType(LightTypeStack lightType) {
+        lightTypes.add(lightType);
+    }
+
+    @Override
+    public void removeLightType(LightTypeStack lightType) {
+        lightTypes.remove(lightType);
+    }
+
+    @Override
+    public void clearLightType() {
+        lightTypes.clear();
     }
 
     @Override

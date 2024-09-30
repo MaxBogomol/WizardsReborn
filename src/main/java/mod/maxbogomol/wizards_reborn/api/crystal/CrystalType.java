@@ -9,7 +9,7 @@ import java.awt.*;
 import java.util.ArrayList;
 
 public class CrystalType {
-    public ArrayList<CrystalStat> stats = new ArrayList<CrystalStat>();
+    public ArrayList<CrystalStat> stats = new ArrayList<>();
     public String id;
 
     public CrystalType(String id) {
@@ -22,7 +22,7 @@ public class CrystalType {
     }
 
     public Color getColor() {
-        return new Color(255, 255, 255);
+        return Color.WHITE;
     }
 
     public ResourceLocation getMiniIcon() {

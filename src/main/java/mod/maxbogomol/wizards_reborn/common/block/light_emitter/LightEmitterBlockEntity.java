@@ -9,15 +9,13 @@ import mod.maxbogomol.fluffy_fur.common.block.entity.TickableBlockEntity;
 import mod.maxbogomol.fluffy_fur.common.easing.Easing;
 import mod.maxbogomol.fluffy_fur.common.network.BlockEntityUpdate;
 import mod.maxbogomol.fluffy_fur.registry.client.FluffyFurParticles;
-import mod.maxbogomol.wizards_reborn.api.light.ILightBlockEntity;
-import mod.maxbogomol.wizards_reborn.api.light.LightRayHitResult;
-import mod.maxbogomol.wizards_reborn.api.light.LightUtil;
+import mod.maxbogomol.wizards_reborn.api.light.*;
 import mod.maxbogomol.wizards_reborn.api.wissen.IWissenBlockEntity;
 import mod.maxbogomol.wizards_reborn.api.wissen.IWissenWandControlledBlockEntity;
 import mod.maxbogomol.wizards_reborn.client.sound.LightEmitterSoundInstance;
 import mod.maxbogomol.wizards_reborn.common.block.ArcaneLumosBlock;
-import mod.maxbogomol.wizards_reborn.config.WizardsRebornConfig;
 import mod.maxbogomol.wizards_reborn.common.item.equipment.WissenWandItem;
+import mod.maxbogomol.wizards_reborn.config.WizardsRebornConfig;
 import mod.maxbogomol.wizards_reborn.registry.common.block.WizardsRebornBlockEntities;
 import mod.maxbogomol.wizards_reborn.registry.common.item.WizardsRebornItemTags;
 import net.minecraft.core.BlockPos;
@@ -37,16 +35,19 @@ import org.jetbrains.annotations.NotNull;
 
 import javax.annotation.Nullable;
 import java.awt.*;
+import java.util.ArrayList;
 
 public class LightEmitterBlockEntity extends ExposedBlockSimpleInventory implements TickableBlockEntity, IWissenBlockEntity, ILightBlockEntity, IWissenWandControlledBlockEntity {
 
     public int blockToX = 0;
-    public int blockToY =0 ;
+    public int blockToY = 0;
     public int blockToZ = 0;
     public boolean isToBlock = false;
 
     public int wissen = 0;
     public int light = 0;
+
+    public ArrayList<LightTypeStack> lightTypes = new ArrayList<>();
 
     public LightEmitterSoundInstance sound;
 
@@ -210,14 +211,11 @@ public class LightEmitterBlockEntity extends ExposedBlockSimpleInventory impleme
     }
 
     public Color getRayColor() {
-        Color color = new Color(0.886f, 0.811f, 0.549f);
-
         ArcaneLumosBlock lumos = getLumos();
         if (lumos != null) {
-            color = ArcaneLumosBlock.getColor(lumos.color);
+            return ArcaneLumosBlock.getColor(lumos.color);
         }
-
-        return color;
+        return LightUtil.standardLightRayColor;
     }
 
     public ArcaneLumosBlock getLumos() {
@@ -372,6 +370,31 @@ public class LightEmitterBlockEntity extends ExposedBlockSimpleInventory impleme
     @Override
     public float getLightLensSize() {
         return 0.0625f;
+    }
+
+    @Override
+    public ArrayList<LightTypeStack> getLightTypes() {
+        return lightTypes;
+    }
+
+    @Override
+    public void setLightTypes(ArrayList<LightTypeStack> lightTypes) {
+        this.lightTypes = lightTypes;
+    }
+
+    @Override
+    public void addLightType(LightTypeStack lightType) {
+        lightTypes.add(lightType);
+    }
+
+    @Override
+    public void removeLightType(LightTypeStack lightType) {
+        lightTypes.remove(lightType);
+    }
+
+    @Override
+    public void clearLightType() {
+        lightTypes.clear();
     }
 
     @Override

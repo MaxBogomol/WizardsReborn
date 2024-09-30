@@ -7,10 +7,11 @@ import mod.maxbogomol.wizards_reborn.api.alchemy.IFluidBlockEntity;
 import mod.maxbogomol.wizards_reborn.api.alchemy.IHeatBlockEntity;
 import mod.maxbogomol.wizards_reborn.api.alchemy.ISteamBlockEntity;
 import mod.maxbogomol.wizards_reborn.api.light.ILightBlockEntity;
+import mod.maxbogomol.wizards_reborn.api.light.LightTypeStack;
 import mod.maxbogomol.wizards_reborn.api.skin.Skin;
 import mod.maxbogomol.wizards_reborn.api.wissen.*;
-import mod.maxbogomol.wizards_reborn.config.WizardsRebornClientConfig;
 import mod.maxbogomol.wizards_reborn.common.block.alchemy_machine.AlchemyMachineBlockEntity;
+import mod.maxbogomol.wizards_reborn.config.WizardsRebornClientConfig;
 import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornSounds;
 import mod.maxbogomol.wizards_reborn.util.NumericalUtil;
 import net.minecraft.ChatFormatting;
@@ -227,20 +228,15 @@ public class WissenWandItem extends Item {
     }
 
     public static String getModeString(int mode) {
-        switch (mode) {
-            case 0:
-                return "lore.wizards_reborn.wissen_wand_mode.functional";
-            case 1:
-                return "lore.wizards_reborn.wissen_wand_mode.receive_connect";
-            case 2:
-                return "lore.wizards_reborn.wissen_wand_mode.send_connect";
-            case 3:
-                return "lore.wizards_reborn.wissen_wand_mode.reload";
-            case 4:
-                return "lore.wizards_reborn.wissen_wand_mode.off";
-        }
+        return switch (mode) {
+            case 0 -> "lore.wizards_reborn.wissen_wand_mode.functional";
+            case 1 -> "lore.wizards_reborn.wissen_wand_mode.receive_connect";
+            case 2 -> "lore.wizards_reborn.wissen_wand_mode.send_connect";
+            case 3 -> "lore.wizards_reborn.wissen_wand_mode.reload";
+            case 4 -> "lore.wizards_reborn.wissen_wand_mode.off";
+            default -> "lore.wizards_reborn.wissen_wand_mode.functional";
+        };
 
-        return "lore.wizards_reborn.wissen_wand_mode.functional";
     }
 
     public static ChatFormatting getModeColor(ItemStack stack) {
@@ -255,27 +251,21 @@ public class WissenWandItem extends Item {
     }
 
     public static ChatFormatting getModeColor(int mode) {
-        switch (mode) {
-            case 0:
-                return ChatFormatting.DARK_AQUA;
-            case 1:
-                return ChatFormatting.GREEN;
-            case 2:
-                return ChatFormatting.AQUA;
-            case 3:
-                return ChatFormatting.YELLOW;
-            case 4:
-                return ChatFormatting.GRAY;
-        }
+        return switch (mode) {
+            case 0 -> ChatFormatting.DARK_AQUA;
+            case 1 -> ChatFormatting.GREEN;
+            case 2 -> ChatFormatting.AQUA;
+            case 3 -> ChatFormatting.YELLOW;
+            case 4 -> ChatFormatting.GRAY;
+            default -> ChatFormatting.DARK_AQUA;
+        };
 
-        return ChatFormatting.DARK_AQUA;
     }
 
     public static Component getModeTranslate(ItemStack stack) {
-        Component mode = Component.literal(" (")
+        return Component.literal(" (")
                 .append(Component.translatable(getModeString(stack)).withStyle(getModeColor(stack)))
                 .append(")");
-        return mode;
     }
 
     @OnlyIn(Dist.CLIENT)
@@ -371,8 +361,12 @@ public class WissenWandItem extends Item {
 
         @OnlyIn(Dist.CLIENT)
         public void drawCenteredText(GuiGraphics gui, String string, int x, int y) {
-            int stringWidth = Minecraft.getInstance().font.width(string);
-            gui.drawString(Minecraft.getInstance().font, string, x - (stringWidth / 2), y, 0xffffff);
+            gui.drawCenteredString(Minecraft.getInstance().font, string, x, y, 0xffffff);
+        }
+
+        @OnlyIn(Dist.CLIENT)
+        public void drawCenteredText(GuiGraphics gui, Component string, int x, int y) {
+            gui.drawCenteredString(Minecraft.getInstance().font, string, x, y, 0xffffff);
         }
 
         @OnlyIn(Dist.CLIENT)
@@ -513,6 +507,13 @@ public class WissenWandItem extends Item {
                         Component name = NumericalUtil.getLightName();
                         drawCenteredText(gui, name.getString(), x, y);
                         addYOffset(11);
+                        y = y + 11;
+
+                        for (LightTypeStack lightType : lightBlockEntity.getLightTypes()) {
+                            drawCenteredText(gui, lightType.getType().getColoredName(), x, y);
+                            addYOffset(11);
+                            y = y + 11;
+                        }
                     }
 
                     int x = minecraft.getWindow().getGuiScaledWidth() / 2 - (48 / 2);

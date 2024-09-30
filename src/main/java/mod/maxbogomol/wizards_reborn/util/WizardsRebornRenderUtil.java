@@ -6,6 +6,7 @@ import com.mojang.math.Axis;
 import mod.maxbogomol.fluffy_fur.client.render.RenderBuilder;
 import mod.maxbogomol.fluffy_fur.registry.client.FluffyFurRenderTypes;
 import mod.maxbogomol.fluffy_fur.util.RenderUtil;
+import mod.maxbogomol.wizards_reborn.api.light.LightUtil;
 import mod.maxbogomol.wizards_reborn.registry.client.WizardsRebornModels;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.util.Mth;
@@ -30,15 +31,23 @@ public class WizardsRebornRenderUtil {
         RenderUtil.renderCustomModel(WizardsRebornModels.HOVERING_LENS, ItemDisplayContext.FIXED, false, poseStack, bufferSource, light, overlay);
     }
 
-    public static RenderBuilder renderHoveringLensGlow(PoseStack poseStack) {
+    public static RenderBuilder renderHoveringLensGlow(PoseStack poseStack, Color color) {
         return RenderBuilder.create().setRenderType(FluffyFurRenderTypes.ADDITIVE)
-                .setColorRaw(0.564f, 0.682f, 0.705f).setAlpha(0.6f)
+                .setColor(color).setAlpha(0.6f)
                 .renderCenteredCube(poseStack, 0.075f);
     }
 
-    public static RenderBuilder renderHoveringLens(PoseStack poseStack, MultiBufferSource bufferSource, int light, int overlay) {
+    public static RenderBuilder renderHoveringLens(PoseStack poseStack, MultiBufferSource bufferSource, Color color, int light, int overlay) {
         renderHoveringLensModel(poseStack, bufferSource, light, overlay);
-        return renderHoveringLensGlow(poseStack);
+        return renderHoveringLensGlow(poseStack, color);
+    }
+
+    public static RenderBuilder renderHoveringLensGlow(PoseStack poseStack) {
+        return renderHoveringLensGlow(poseStack, LightUtil.standardLensColor);
+    }
+
+    public static RenderBuilder renderHoveringLens(PoseStack poseStack, MultiBufferSource bufferSource, int light, int overlay) {
+        return renderHoveringLens(poseStack, bufferSource, LightUtil.standardLensColor, light, overlay);
     }
 
     public static void renderAura(PoseStack mStack, VertexConsumer builder, float radius, float size, int longs, Color color1, Color color2, float alpha1, float alpha2, boolean renderSide, boolean renderFloor) {

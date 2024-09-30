@@ -89,7 +89,7 @@ public class LightRaySpell extends RaySpell {
         stack.translate(0, 0.2, 0);
         stack.translate(offset.x(), offset.y(), offset.z());
         stack.scale(width, width, width);
-        LightUtil.renderLightRay(entity.level(), entity.getOnPos(), entity.position().add(offset).add(0, 0.2f, 0), to, getRayDistance(), color, partialTicks, stack);
+        LightUtil.renderLightRay(entity.level(), entity.getOnPos(), entity.position().add(offset).add(0, 0.2f, 0), to, getRayDistance(), color, Color.WHITE, Color.WHITE, false, partialTicks, stack);
         stack.popPose();
     }
 }

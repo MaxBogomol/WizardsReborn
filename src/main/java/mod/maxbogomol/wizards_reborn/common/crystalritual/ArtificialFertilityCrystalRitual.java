@@ -23,6 +23,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ArtificialFertilityCrystalRitual extends CrystalRitual {
+
     public ArtificialFertilityCrystalRitual(String id) {
         super(id);
     }

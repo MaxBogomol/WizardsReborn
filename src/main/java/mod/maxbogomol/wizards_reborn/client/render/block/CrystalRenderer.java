@@ -74,10 +74,13 @@ public class CrystalRenderer implements BlockEntityRenderer<CrystalBlockEntity> 
                     from = from.add(-X, -Y, -Z);
 
                     poseStack.pushPose();
-                    poseStack.translate(0.5F, 0.3125F, 0.5F);
-                    Color color = new Color(0.886f, 0.811f, 0.549f);
+                    poseStack.translate(0.5f, 0.3125f, 0.5f);
+                    Color color = LightUtil.standardLightRayColor;
+                    Color colorType = LightUtil.getColorFromTypes(blockEntity.getLightTypes());
+                    Color colorConcentrated = LightUtil.getColorConcentratedFromTypes(blockEntity.getLightTypes());
+                    boolean concentrated = LightUtil.isConcentratedType(blockEntity.getLightTypes());
                     LightRayHitResult hitResult = LightUtil.getLightRayHitResult(blockEntity.getLevel(), blockEntity.getBlockPos(), from, to, 25f);
-                    LightUtil.renderLightRay(from, hitResult.getPosHit(), color, partialTicks, poseStack);
+                    LightUtil.renderLightRay(blockEntity.getBlockPos().getCenter().add(0, -0.1875f, 0), hitResult.getPosHit(), color, colorType, colorConcentrated, concentrated, partialTicks, poseStack);
                     poseStack.popPose();
                 }
             }
@@ -88,7 +91,7 @@ public class CrystalRenderer implements BlockEntityRenderer<CrystalBlockEntity> 
         }
 
         if (WissenUtil.isCanRenderWissenWand()) {
-            if (!CrystalRitualUtil.isEmpty(ritual)) {
+            if (!CrystalRitualUtil.isEmpty(ritual) && ritual.hasArea(blockEntity)) {
                 CrystalRitualArea area = ritual.getArea(blockEntity);
                 poseStack.pushPose();
                 poseStack.translate(-area.getSizeFrom().x(), -area.getSizeFrom().y(), -area.getSizeFrom().z());

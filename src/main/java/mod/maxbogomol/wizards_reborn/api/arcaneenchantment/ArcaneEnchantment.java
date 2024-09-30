@@ -35,7 +35,7 @@ public class ArcaneEnchantment {
     }
 
     public Color getColor() {
-        return new Color(255, 255, 255);
+        return Color.WHITE;
     }
 
     public int getMaxLevel() {

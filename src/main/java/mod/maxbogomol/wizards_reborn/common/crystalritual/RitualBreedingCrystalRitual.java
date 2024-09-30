@@ -17,6 +17,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class RitualBreedingCrystalRitual extends CrystalRitual {
+
     public RitualBreedingCrystalRitual(String id) {
         super(id);
     }

@@ -87,6 +87,7 @@ public class WizardsReborn {
         WizardsRebornSkins.register();
         WizardsRebornArcaneEnchantments.register();
         WizardsRebornCrystalRituals.register();
+        WizardsRebornLightTypes.register();
 
         ModLoadingContext.get().registerConfig(ModConfig.Type.CLIENT, WizardsRebornClientConfig.SPEC);
         ModLoadingContext.get().registerConfig(ModConfig.Type.COMMON, WizardsRebornConfig.SPEC);

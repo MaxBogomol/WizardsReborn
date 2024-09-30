@@ -43,6 +43,7 @@ import java.util.List;
 import java.util.Optional;
 
 public class CrystalInfusionCrystalRitual extends CrystalRitual {
+
     public CrystalInfusionCrystalRitual(String id) {
         super(id);
     }

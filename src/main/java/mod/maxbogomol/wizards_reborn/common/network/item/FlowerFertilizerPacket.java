@@ -54,10 +54,10 @@ public class FlowerFertilizerPacket extends PositionClientPacket {
     }
 
     public static void register(SimpleChannel instance, int index) {
-        instance.registerMessage(index, ArcanemiconOfferingEffectPacket.class, ArcanemiconOfferingEffectPacket::encode, ArcanemiconOfferingEffectPacket::decode, ArcanemiconOfferingEffectPacket::handle);
+        instance.registerMessage(index, FlowerFertilizerPacket.class, FlowerFertilizerPacket::encode, FlowerFertilizerPacket::decode, FlowerFertilizerPacket::handle);
     }
 
-    public static ArcanemiconOfferingEffectPacket decode(FriendlyByteBuf buf) {
-        return decode(ArcanemiconOfferingEffectPacket::new, buf);
+    public static FlowerFertilizerPacket decode(FriendlyByteBuf buf) {
+        return decode(FlowerFertilizerPacket::new, buf);
     }
 }

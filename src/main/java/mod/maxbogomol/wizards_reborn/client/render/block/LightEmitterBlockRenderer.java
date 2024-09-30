@@ -24,13 +24,14 @@ public class LightEmitterBlockRenderer implements BlockEntityRenderer<LightEmitt
         Random random = new Random();
         random.setSeed(blockEntity.getBlockPos().asLong());
         double ticks = (ClientTickHandler.ticksInGame + partialTicks) * 0.4f;
+        Color colorLens = LightUtil.getLensColorFromLumos(blockEntity.getLumos(), partialTicks);
 
         poseStack.pushPose();
         poseStack.translate(0.5F, 0.8125F, 0.5F);
         poseStack.mulPose(Axis.YP.rotationDegrees((float) (random.nextFloat() * 360 + ticks)));
         poseStack.mulPose(Axis.XP.rotationDegrees((float) (random.nextFloat() * 360 + ticks)));
         poseStack.mulPose(Axis.ZP.rotationDegrees((float) (random.nextFloat() * 360 + ticks)));
-        WizardsRebornRenderUtil.renderHoveringLens(poseStack, bufferSource, light, overlay);
+        WizardsRebornRenderUtil.renderHoveringLens(poseStack, bufferSource, colorLens, light, overlay);
         poseStack.popPose();
 
 
@@ -42,8 +43,11 @@ public class LightEmitterBlockRenderer implements BlockEntityRenderer<LightEmitt
 
                 poseStack.pushPose();
                 poseStack.translate(0.5F, 0.8125F, 0.5F);
-                Color color = LightUtil.getRayColorFromLumos(blockEntity.getRayColor(), blockEntity.getLumos(), blockEntity.getBlockPos(), partialTicks);
-                LightUtil.renderLightRay(blockEntity.getLevel(), blockEntity.getBlockPos(), from, to, 25f, color, partialTicks, poseStack);
+                Color color = LightUtil.getColorFromLumos(blockEntity.getRayColor(), blockEntity.getLumos(), partialTicks);
+                Color colorType = LightUtil.getColorFromTypes(blockEntity.getLightTypes());
+                Color colorConcentrated = LightUtil.getColorConcentratedFromTypes(blockEntity.getLightTypes());
+                boolean concentrated = LightUtil.isConcentratedType(blockEntity.getLightTypes());
+                LightUtil.renderLightRay(blockEntity.getLevel(), blockEntity.getBlockPos(), from, to, 25f, color, colorType, colorConcentrated, concentrated, partialTicks, poseStack);
                 poseStack.popPose();
             }
         }

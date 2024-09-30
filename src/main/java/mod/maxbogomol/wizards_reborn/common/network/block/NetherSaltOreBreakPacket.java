@@ -41,7 +41,7 @@ public class NetherSaltOreBreakPacket extends PositionClientPacket {
                 .setLightData(LightParticleData.DEFAULT)
                 .setLifetime(40)
                 .randomVelocity(0.025f)
-                .randomOffset(0.35f)
+                .flatRandomOffset(0.4f, 0.4f, 0.4f)
                 .repeat(level, x + 0.5f, y + 0.5f, z + 0.5f, 25);
     }
 

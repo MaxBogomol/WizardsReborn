@@ -79,7 +79,7 @@ public class LeatherCollarItem extends BaseCurioItem implements ICurioItemTextur
         String name2 = "lore.wizards_reborn.leather_collar.1";
         String hearts = "lore.wizards_reborn.leather_collar.2";
 
-        double ticks = (ClientTickHandler.ticksInGame + Minecraft.getInstance().getPartialTick()) * 0.05f;
+        float ticks = (ClientTickHandler.ticksInGame + Minecraft.getInstance().getPartialTick()) * 0.05f;
         float ticksF = (ClientTickHandler.ticksInGame + Minecraft.getInstance().getPartialTick()) * 2f;
         MutableComponent component = Component.empty();
 
@@ -99,12 +99,8 @@ public class LeatherCollarItem extends BaseCurioItem implements ICurioItemTextur
             }
         }
 
-        int r = (int) (Math.sin(ticks) * 127 + 128);
-        int g = (int) (Math.sin(ticks + Math.PI / 2) * 127 + 128);
-        int b = (int) (Math.sin(ticks + Math.PI) * 127 + 128);
-
         for (char c : chars) {
-            component.append(Component.literal(String.valueOf(c)).withStyle(Style.EMPTY.withColor(ColorUtil.packColor(255, r, g, b))));
+            component.append(Component.literal(String.valueOf(c)).withStyle(Style.EMPTY.withColor(ColorUtil.packColor(ColorUtil.rainbowColor(ticks)))));
         }
 
         list.add(component);
