@@ -10,6 +10,7 @@ import mod.maxbogomol.fluffy_fur.common.easing.Easing;
 import mod.maxbogomol.fluffy_fur.common.network.BlockEntityUpdate;
 import mod.maxbogomol.fluffy_fur.registry.client.FluffyFurParticles;
 import mod.maxbogomol.wizards_reborn.api.light.*;
+import mod.maxbogomol.wizards_reborn.api.wissen.ICooldownBlockEntity;
 import mod.maxbogomol.wizards_reborn.api.wissen.IWissenBlockEntity;
 import mod.maxbogomol.wizards_reborn.api.wissen.IWissenWandControlledBlockEntity;
 import mod.maxbogomol.wizards_reborn.client.sound.LightEmitterSoundInstance;
@@ -37,7 +38,7 @@ import javax.annotation.Nullable;
 import java.awt.*;
 import java.util.ArrayList;
 
-public class LightEmitterBlockEntity extends ExposedBlockSimpleInventory implements TickableBlockEntity, IWissenBlockEntity, ILightBlockEntity, IWissenWandControlledBlockEntity {
+public class LightEmitterBlockEntity extends ExposedBlockSimpleInventory implements TickableBlockEntity, IWissenBlockEntity, ILightBlockEntity, ICooldownBlockEntity, IWissenWandControlledBlockEntity {
 
     public int blockToX = 0;
     public int blockToY = 0;
@@ -46,6 +47,7 @@ public class LightEmitterBlockEntity extends ExposedBlockSimpleInventory impleme
 
     public int wissen = 0;
     public int light = 0;
+    public int cooldown = 0;
 
     public ArrayList<LightTypeStack> lightTypes = new ArrayList<>();
 
@@ -76,7 +78,10 @@ public class LightEmitterBlockEntity extends ExposedBlockSimpleInventory impleme
                     if (blockEntity instanceof ILightBlockEntity lightBlockEntity) {
                         if (canWork()) {
                             if (getWissen() > 0) {
-                                removeWissen(1);
+                                if (cooldown == 0) {
+                                    removeWissen(1);
+                                    cooldown = 10;
+                                }
                                 addLight(2);
                                 update = true;
                                 Vec3 from = LightUtil.getLightLensPos(getBlockPos(), getLightLensPos());
@@ -93,6 +98,11 @@ public class LightEmitterBlockEntity extends ExposedBlockSimpleInventory impleme
                         update = true;
                     }
                 }
+            }
+
+            if (cooldown > 0) {
+                cooldown = cooldown - 1;
+                update = true;
             }
 
             if (update) setChanged();
@@ -177,6 +187,7 @@ public class LightEmitterBlockEntity extends ExposedBlockSimpleInventory impleme
 
         tag.putInt("wissen", wissen);
         tag.putInt("light", light);
+        tag.putInt("cooldown", cooldown);
     }
 
     @Override
@@ -189,6 +200,7 @@ public class LightEmitterBlockEntity extends ExposedBlockSimpleInventory impleme
 
         wissen = tag.getInt("wissen");
         light = tag.getInt("light");
+        cooldown = tag.getInt("cooldown");
     }
 
     @Override
@@ -396,6 +408,14 @@ public class LightEmitterBlockEntity extends ExposedBlockSimpleInventory impleme
     @Override
     public void clearLightType() {
         lightTypes.clear();
+    }
+
+    @Override
+    public float getCooldown() {
+        if (cooldown > 0) {
+            return 10f / cooldown;
+        }
+        return 0;
     }
 
     @Override

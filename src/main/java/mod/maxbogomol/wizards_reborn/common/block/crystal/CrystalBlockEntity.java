@@ -188,6 +188,7 @@ public class CrystalBlockEntity extends BlockSimpleInventory implements Tickable
                             .setLifetime(50)
                             .setVelocity(0, 0.05f, 0)
                             .flatRandomOffset(0.5f, 0f, 0.5f)
+                            .disablePhysics()
                             .spawn(level, getBlockPos().getX() + 0.5f, getBlockPos().getY(), getBlockPos().getZ() + 0.5f);
                 }
             }
@@ -382,6 +383,7 @@ public class CrystalBlockEntity extends BlockSimpleInventory implements Tickable
     @Override
     public void wissenWandFunction() {
         startRitual = true;
+        BlockEntityUpdate.packet(this);
     }
 
     public CrystalRitual getCrystalRitual() {

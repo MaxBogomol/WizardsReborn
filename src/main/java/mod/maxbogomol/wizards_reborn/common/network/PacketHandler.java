@@ -6,11 +6,12 @@ import mod.maxbogomol.wizards_reborn.common.network.arcaneenchantment.EagleShotR
 import mod.maxbogomol.wizards_reborn.common.network.arcaneenchantment.MagicBladePacket;
 import mod.maxbogomol.wizards_reborn.common.network.arcaneenchantment.SplitArrowBurstPacket;
 import mod.maxbogomol.wizards_reborn.common.network.arcaneenchantment.WissenChargeBurstPacket;
+import mod.maxbogomol.wizards_reborn.common.network.block.*;
 import mod.maxbogomol.wizards_reborn.common.network.crystalritual.CrystalInfusionBurstEffectPacket;
 import mod.maxbogomol.wizards_reborn.common.network.crystalritual.CrystalRitualBurstEffectPacket;
 import mod.maxbogomol.wizards_reborn.common.network.item.*;
+import mod.maxbogomol.wizards_reborn.common.network.lightray.LightRayBurstPacket;
 import mod.maxbogomol.wizards_reborn.common.network.spell.*;
-import mod.maxbogomol.wizards_reborn.common.network.block.*;
 import net.minecraft.core.BlockPos;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerChunkCache;
@@ -74,6 +75,8 @@ public final class PacketHandler {
 
         HANDLER.registerMessage(id++, CrystalRitualBurstEffectPacket.class, CrystalRitualBurstEffectPacket::encode, CrystalRitualBurstEffectPacket::decode, CrystalRitualBurstEffectPacket::handle);
         HANDLER.registerMessage(id++, CrystalInfusionBurstEffectPacket.class, CrystalInfusionBurstEffectPacket::encode, CrystalInfusionBurstEffectPacket::decode, CrystalInfusionBurstEffectPacket::handle);
+
+        LightRayBurstPacket.register(HANDLER, id++);
 
         HANDLER.registerMessage(id++, SpellBurstEffectPacket.class, SpellBurstEffectPacket::encode, SpellBurstEffectPacket::decode, SpellBurstEffectPacket::handle);
         HANDLER.registerMessage(id++, SpellProjectileRayEffectPacket.class, SpellProjectileRayEffectPacket::encode, SpellProjectileRayEffectPacket::decode, SpellProjectileRayEffectPacket::handle);

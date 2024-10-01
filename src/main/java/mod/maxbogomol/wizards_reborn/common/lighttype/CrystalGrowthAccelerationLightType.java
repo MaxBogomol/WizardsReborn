@@ -1,6 +1,5 @@
 package mod.maxbogomol.wizards_reborn.common.lighttype;
 
-import mod.maxbogomol.fluffy_fur.common.network.BlockEntityUpdate;
 import mod.maxbogomol.wizards_reborn.api.crystalritual.IGrowableCrystal;
 import mod.maxbogomol.wizards_reborn.api.light.LightRayHitResult;
 import mod.maxbogomol.wizards_reborn.api.light.LightType;
@@ -48,7 +47,7 @@ public class CrystalGrowthAccelerationLightType extends LightType {
             }
             int resonanceLevel = tag.getInt("resonance");
             growable.setGrowingPower(5 + resonanceLevel);
-            BlockEntityUpdate.packet(hitResult.getBlockEntity());
+            return true;
         }
         return false;
     }

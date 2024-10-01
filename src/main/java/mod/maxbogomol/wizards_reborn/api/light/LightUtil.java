@@ -14,9 +14,11 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.ListTag;
+import net.minecraft.world.entity.Entity;
 import net.minecraft.world.level.ClipContext;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntity;
+import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.HitResult;
 import net.minecraft.world.phys.Vec3;
 import net.minecraftforge.api.distmarker.Dist;
@@ -24,6 +26,7 @@ import net.minecraftforge.api.distmarker.OnlyIn;
 
 import java.awt.*;
 import java.util.ArrayList;
+import java.util.List;
 
 public class LightUtil {
 
@@ -53,6 +56,7 @@ public class LightUtil {
 
         float distance = (float) Math.sqrt(Math.pow(from.x() - end.x, 2) + Math.pow(from.y() - end.y, 2) + Math.pow(from.z() - end.z, 2));
         BlockEntity hitBlockEntity = null;
+        ArrayList<LightRayHitResult.EntityContext> entities = new ArrayList<>();
 
         BlockPos blockPosHit = BlockPos.containing(end.x(), end.y(), end.z());
         if (startPos.getX() != blockPosHit.getX() || startPos.getY() != blockPosHit.getY() || startPos.getZ() != blockPosHit.getZ()) {
@@ -68,8 +72,22 @@ public class LightUtil {
             X = Math.sin(pitch) * Math.cos(yaw) * v;
             Y = Math.cos(pitch) * v;
             Z = Math.sin(pitch) * Math.sin(yaw) * v;
-
             Vec3 posHit = new Vec3(-X, -Y, -Z).add(from);
+
+            List<Entity> entityList = level.getEntitiesOfClass(Entity.class, new AABB(posHit.x() - 0.1f, posHit.y() - 0.1f, posHit.z() - 0.1f, posHit.x() + 0.1f, posHit.y() + 0.1f, posHit.z() + 0.1f));
+            for (Entity entity : entityList) {
+                boolean add = true;
+                for (LightRayHitResult.EntityContext context : entities) {
+                    if (context.getEntity() == entity) {
+                        add = false;
+                        break;
+                    }
+                }
+                if (add) {
+                    entities.add(new LightRayHitResult.EntityContext(posHit, entity));
+                }
+            }
+
             blockPosHit = BlockPos.containing(posHit.x(), posHit.y(), posHit.z());
             if (startPos.getX() != blockPosHit.getX() || startPos.getY() != blockPosHit.getY() || startPos.getZ() != blockPosHit.getZ()) {
                 BlockEntity blockEntity = level.getBlockEntity(blockPosHit);
@@ -92,7 +110,7 @@ public class LightUtil {
             hitBlockEntity = null;
         }
 
-        return new LightRayHitResult(end, distance, hitBlockEntity);
+        return new LightRayHitResult(end, distance, hitBlockEntity, entities);
     }
 
     @OnlyIn(Dist.CLIENT)

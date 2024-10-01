@@ -1,13 +1,12 @@
-package mod.maxbogomol.wizards_reborn.common.network.arcaneenchantment;
+package mod.maxbogomol.wizards_reborn.common.network.lightray;
 
 import mod.maxbogomol.fluffy_fur.client.particle.ParticleBuilder;
 import mod.maxbogomol.fluffy_fur.client.particle.behavior.SparkParticleBehavior;
 import mod.maxbogomol.fluffy_fur.client.particle.data.ColorParticleData;
 import mod.maxbogomol.fluffy_fur.client.particle.data.GenericParticleData;
 import mod.maxbogomol.fluffy_fur.common.easing.Easing;
-import mod.maxbogomol.fluffy_fur.common.network.PositionClientPacket;
+import mod.maxbogomol.fluffy_fur.common.network.PositionColorClientPacket;
 import mod.maxbogomol.fluffy_fur.registry.client.FluffyFurParticles;
-import mod.maxbogomol.fluffy_fur.registry.client.FluffyFurRenderTypes;
 import mod.maxbogomol.wizards_reborn.WizardsReborn;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.world.level.Level;
@@ -15,47 +14,42 @@ import net.minecraft.world.phys.Vec3;
 import net.minecraftforge.network.NetworkEvent;
 import net.minecraftforge.network.simple.SimpleChannel;
 
+import java.awt.*;
 import java.util.function.Supplier;
 
-public class MagicBladePacket extends PositionClientPacket {
+public class LightRayBurstPacket extends PositionColorClientPacket {
 
-    public MagicBladePacket(double x, double y, double z) {
-        super(x, y, z);
+    public LightRayBurstPacket(double x, double y, double z, float r, float g, float b, float a) {
+        super(x, y, z, r, g, b, a);
     }
 
-    public MagicBladePacket(Vec3 vec) {
-        super(vec);
+    public LightRayBurstPacket(Vec3 vec, Color color) {
+        super(vec, color);
     }
 
     @Override
     public void execute(Supplier<NetworkEvent.Context> context) {
         Level level = WizardsReborn.proxy.getLevel();
         ParticleBuilder builder = ParticleBuilder.create(FluffyFurParticles.TINY_WISP);
-        builder.setBehavior(SparkParticleBehavior.create()
-                        .enableSecondColor()
-                        .setColorData(ColorParticleData.create().setRandomColor().build())
-                        .setTransparencyData(GenericParticleData.create(0.2f, 0.2f, 0).setEasing(Easing.QUARTIC_OUT).build())
-                        .build())
-                .setColorData(ColorParticleData.create(0.431f, 0.305f, 0.662f).build())
+        builder.setBehavior(SparkParticleBehavior.create().build())
+                .setColorData(ColorParticleData.create(r, g, b).build())
                 .setTransparencyData(GenericParticleData.create(0.6f, 0.6f, 0).setEasing(Easing.QUARTIC_OUT).build())
                 .setScaleData(GenericParticleData.create(0.05f, 0.1f, 0).setEasing(Easing.ELASTIC_OUT).build())
-                .setLifetime(20)
+                .setLifetime(10)
                 .randomVelocity(0.5f)
                 .addVelocity(0, 0.1f, 0)
                 .randomOffset(0.05f)
-                .setFriction(0.9f)
+                .setFriction(0.87f)
                 .enablePhysics()
                 .setGravity(1f)
-                .repeat(level, x, y, z, 15, 0.8f);
-        builder.setRenderType(FluffyFurRenderTypes.TRANSLUCENT_PARTICLE)
-                .repeat(level, x, y, z, 5, 0.5f);
+                .spawn(level, x, y, z);
     }
 
     public static void register(SimpleChannel instance, int index) {
-        instance.registerMessage(index, MagicBladePacket.class, MagicBladePacket::encode, MagicBladePacket::decode, MagicBladePacket::handle);
+        instance.registerMessage(index, LightRayBurstPacket.class, LightRayBurstPacket::encode, LightRayBurstPacket::decode, LightRayBurstPacket::handle);
     }
 
-    public static MagicBladePacket decode(FriendlyByteBuf buf) {
-        return decode(MagicBladePacket::new, buf);
+    public static LightRayBurstPacket decode(FriendlyByteBuf buf) {
+        return decode(LightRayBurstPacket::new, buf);
     }
 }

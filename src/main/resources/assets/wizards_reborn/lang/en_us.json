@@ -786,12 +786,21 @@
 
   "_comment_8": "Crystal Rituals",
   "crystal_ritual.wizards_reborn.empty": "Empty",
+  "crystal_ritual.wizards_reborn.focusing": "Focusing",
   "crystal_ritual.wizards_reborn.artificial_fertility": "Artificial Fertility",
   "crystal_ritual.wizards_reborn.ritual_breeding": "Ritual Breeding",
   "crystal_ritual.wizards_reborn.crystal_growth_acceleration": "Crystal Growth Acceleration",
   "crystal_ritual.wizards_reborn.crystal_infusion": "Crystal Infusion",
 
-  "_comment_9": "Alchemy Potions",
+  "_comment_9": "Light Ray Types",
+  "light_type.wizards_reborn.earth": "Earth",
+  "light_type.wizards_reborn.water": "Water",
+  "light_type.wizards_reborn.air": "Air",
+  "light_type.wizards_reborn.fire": "Fire",
+  "light_type.wizards_reborn.void": "Void",
+  "light_type.wizards_reborn.crystal_growth_acceleration": "Crystal Growth Acceleration",
+
+  "_comment_10": "Alchemy Potions",
   "alchemy_potion.wizards_reborn.empty": "Empty",
   "alchemy_potion.wizards_reborn.:combined": "Combined potion",
   "alchemy_potion.wizards_reborn.night_vision": "Potion of Night Vision",
@@ -815,7 +824,7 @@
   "alchemy_potion.wizards_reborn.magical_attunement": "Potion of Magical Attunement",
   "alchemy_potion.wizards_reborn.darkness": "Potion of Darkness",
 
-  "_comment_10": "Items lore",
+  "_comment_11": "Items lore",
   "lore.wizards_reborn.wissen_wand_mode.functional": "Functional Mode",
   "lore.wizards_reborn.wissen_wand_mode.receive_connect": "Receive Connect Mode",
   "lore.wizards_reborn.wissen_wand_mode.send_connect": "Send Connect Mode",
@@ -851,7 +860,7 @@
   "lore.wizards_reborn.skin": "Skin:",
   "lore.wizards_reborn.arcane_enchantments": "Arcane Enchantments:",
 
-  "_comment_11": "Trim materials",
+  "_comment_12": "Trim materials",
   "trim_material.wizards_reborn.arcane_gold": "Arcane Gold Material",
   "trim_material.wizards_reborn.sarcon": "Sarcon Material",
   "trim_material.wizards_reborn.vilenium": "Vilenium Material",
@@ -859,7 +868,7 @@
   "trim_material.wizards_reborn.arcacite": "Arcacite Material",
   "trim_material.wizards_reborn.precision_crystal": "Precision Crystal Material",
 
-  "_comment_12": "Items descriptions",
+  "_comment_13": "Items descriptions",
   "item.wizards_reborn.violence_banner_pattern.desc": "Violence",
   "item.wizards_reborn.reproduction_banner_pattern.desc": "Reproduction",
   "item.wizards_reborn.cooperation_banner_pattern.desc": "Cooperation",
@@ -874,7 +883,7 @@
   "item.wizards_reborn.music_disc_capitalism.desc": "Onjerlay - Battle against a true Capitalist",
   "item.wizards_reborn.music_disc_panache.desc": "Onjerlay - Magical Panache",
 
-  "_comment_13": "Banners",
+  "_comment_14": "Banners",
   "block.minecraft.banner.wizards_reborn.violence.black": "Black Symbol \"Violence\"",
   "block.minecraft.banner.wizards_reborn.violence.blue": "Blue Symbol \"Violence\"",
   "block.minecraft.banner.wizards_reborn.violence.brown": "Brown Symbol \"Violence\"",
@@ -977,7 +986,7 @@
   "block.minecraft.banner.wizards_reborn.elevation.white": "White Symbol \"Elevation\"",
   "block.minecraft.banner.wizards_reborn.elevation.yellow": "Yellow Symbol \"Elevation\"",
 
-  "_comment_14": "Sounds",
+  "_comment_15": "Sounds",
   "sounds.wizards_reborn.wissen_burst": "Wissen Burst",
   "sounds.wizards_reborn.wissen_transfer": "Wissen Transfer",
   "sounds.wizards_reborn.arcanum_lens_resonate": "Arcanum Lens Resonate",
@@ -1013,7 +1022,7 @@
   "sounds.wizards_reborn.crystal_resonate": "Crystal resonates",
   "sounds.wizards_reborn.crystal_shimmer": "Crystal chimes",
 
-  "_comment_15": "Entities",
+  "_comment_16": "Entities",
   "entity.wizards_reborn.arcane_wood_boat": "Arcane Wood Boat",
   "entity.wizards_reborn.arcane_wood_chest_boat": "Arcane Wood Boat with Chest",
   "entity.wizards_reborn.innocent_wood_boat": "Innocent Wood Boat",
@@ -1024,24 +1033,24 @@
   "entity.wizards_reborn.throwed_scythe": "Throwed Scythe",
   "entity.wizards_reborn.sniffalo": "Sniffalo",
 
-  "_comment_16": "Mob Effects",
+  "_comment_17": "Mob Effects",
   "effect.wizards_reborn.mor_spores": "Mor Spores",
   "effect.wizards_reborn.wissen_aura": "Wissen Aura",
   "effect.wizards_reborn.irritation": "Irritation",
   "effect.wizards_reborn.tipsy": "Tipsy",
 
-  "_comment_17": "Attributes",
+  "_comment_18": "Attributes",
   "attribute.name.wizards_reborn.wissen_discount": "Wissen Discount",
   "attribute.name.wizards_reborn.magic_armor": "Magic Armor",
   "attribute.name.wizards_reborn.magic_modifier": "Magic Modifier",
   "attribute.name.wizards_reborn.arcane_damage": "Arcane Damage",
 
-  "_comment_18": "Fluffy Fur Menu",
+  "_comment_19": "Fluffy Fur Menu",
   "mod_description.wizards_reborn": "Wizard's reborn - a mod about magic in the style of alternative 1930s.",
 
   "panorama.wizards_reborn.magical_origins": "Magical Origins",
 
-  "_comment_19": "Gui",
+  "_comment_20": "Gui",
   "gui.wizards_reborn.arcanemicon.title": "Arcanemicon",
   "gui.wizards_reborn.arcane_workbench.title": "Arcane Workbench",
   "gui.wizards_reborn.jeweler_table.title": "Jeweler Table",
@@ -1075,7 +1084,7 @@
   "gui.wizards_reborn.wand.add_spell_set": "Add Spell Set",
   "gui.wizards_reborn.wand.add_spell": "Add Spell",
 
-  "_comment_20": "Death messages",
+  "_comment_21": "Death messages",
   "death.attack.arcane_magic": "%s died from arcane magic",
   "death.attack.arcane_magic.player": "%s died from arcane magic by %s",
   "death.attack.arcane_magic.item": "%s died from arcane magic by %s using %s",
@@ -1083,17 +1092,17 @@
   "death.attack.ritual.player": "%s died during the ritual by %s",
   "death.attack.ritual.item": "%s died during the ritual by %s using %s",
 
-  "_comment_21": "Messages",
+  "_comment_22": "Messages",
   "message.wizards_reborn.someone": "Someone",
   "message.wizards_reborn.arcanemicon_offering": "My strength is fading... I give you this book for you to revive lost knowledge! Accomplish this great goal, for I have not...",
   "message.wizards_reborn.arcanemicon": "The zeal for ancient knowledge begins to blossom inside you! You know what you should do.",
   "message.wizards_reborn.knowledge_scroll": "You received knowledge from %s",
 
-  "_comment_22": "Toasts",
+  "_comment_23": "Toasts",
   "knowledge.toast.wizards_reborn.new_knowledge": "Knowledge gained",
   "knowledge.toast.wizards_reborn.new_articles": "Articles available",
 
-  "_comment_23": "Commands",
+  "_comment_24": "Commands",
   "commands.wizards_reborn.knowledge.unknown": "No knowledge exists with the ID '%s'",
   "commands.wizards_reborn.knowledge.give.single": "Gave knowledge to player %s",
   "commands.wizards_reborn.knowledge.give.multiple": "Gave knowledge to %s players",
@@ -1122,7 +1131,7 @@
   "commands.wizards_reborn.remove_wissen.multiple": "Removed wissen value %s to %s players",
   "commands.wizards_reborn.remove_wissen.single": "Removed wissen value %s to %s's item",
 
-  "_comment_24": "Key binds",
+  "_comment_25": "Key binds",
   "key.category.wizards_reborn.general": "Wizard's Reborn",
   "key.wizards_reborn.selection_menu": "Selection Menu",
   "key.wizards_reborn.bag_menu": "Bag Menu",
@@ -1130,7 +1139,7 @@
   "key.wizards_reborn.previous_spell": "Previous Spell",
   "key.wizards_reborn.spell_sets_toggle": "Spell Sets Toggle",
 
-  "_comment_25": "Arcanemicon",
+  "_comment_26": "Arcanemicon",
   "wizards_reborn.arcanemicon.category.arcane_nature": "Arcane Nature",
   "wizards_reborn.arcanemicon.chapter.arcane_nature_index": "Arcane Nature",
   "wizards_reborn.arcanemicon.page.arcane_nature_index.title": "Arcane Nature",
@@ -1994,7 +2003,7 @@
   "knowledge.wizards_reborn.arcane_lumos": "Arcane Lumos",
   "knowledge.wizards_reborn.crystal_seeds": "Crystal Seeds",
 
-  "_comment_26": "Config",
+  "_comment_27": "Config",
   "config.number.wizards_reborn.default": "Default:",
   "config.number.wizards_reborn.range": "Range:",
   "config.number.wizards_reborn.on": "On",

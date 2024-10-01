@@ -786,12 +786,21 @@
 
   "_comment_8": "Кристальные ритуалы",
   "crystal_ritual.wizards_reborn.empty": "Пусто",
+  "crystal_ritual.wizards_reborn.focusing": "Фокусировка",
   "crystal_ritual.wizards_reborn.artificial_fertility": "Искусственная плодородность",
   "crystal_ritual.wizards_reborn.ritual_breeding": "Ритуальное разведение",
   "crystal_ritual.wizards_reborn.crystal_growth_acceleration": "Ускорение роста кристаллов",
   "crystal_ritual.wizards_reborn.crystal_infusion": "Кристаллическая инфузия",
 
-  "_comment_9": "Алхимические зелья",
+  "_comment_9": "Типы лучей света",
+  "light_type.wizards_reborn.earth": "Земля",
+  "light_type.wizards_reborn.water": "Вода",
+  "light_type.wizards_reborn.air": "Воздух",
+  "light_type.wizards_reborn.fire": "Огонь",
+  "light_type.wizards_reborn.void": "Пустота",
+  "light_type.wizards_reborn.crystal_growth_acceleration": "Ускорение роста кристаллов",
+
+  "_comment_10": "Алхимические зелья",
   "alchemy_potion.wizards_reborn.empty": "Пусто",
   "alchemy_potion.wizards_reborn.:combined": "Комбинированное зелье",
   "alchemy_potion.wizards_reborn.night_vision": "Зелье ночного зрения",
@@ -815,7 +824,7 @@
   "alchemy_potion.wizards_reborn.magical_attunement": "Зелье магического созвучия",
   "alchemy_potion.wizards_reborn.darkness": "Зелье тьмы",
 
-  "_comment_10": "Лор предметов",
+  "_comment_11": "Лор предметов",
   "lore.wizards_reborn.wissen_wand_mode.functional": "Функциональный режим",
   "lore.wizards_reborn.wissen_wand_mode.receive_connect": "Режим получения соединения",
   "lore.wizards_reborn.wissen_wand_mode.send_connect": "Режим отправки соединения",
@@ -851,7 +860,7 @@
   "lore.wizards_reborn.skin": "Облик:",
   "lore.wizards_reborn.arcane_enchantments": "Аркановые зачарования:",
 
-  "_comment_11": "Материалы отделок",
+  "_comment_12": "Материалы отделок",
   "trim_material.wizards_reborn.arcane_gold": "Аркановый золотой материал",
   "trim_material.wizards_reborn.sarcon": "Сарконовый материал",
   "trim_material.wizards_reborn.vilenium": "Вилениумный материал",
@@ -859,7 +868,7 @@
   "trim_material.wizards_reborn.arcacite": "Аркацитовый материал",
   "trim_material.wizards_reborn.precision_crystal": "Материал кристалла точности",
 
-  "_comment_12": "Описания предметов",
+  "_comment_13": "Описания предметов",
   "item.wizards_reborn.violence_banner_pattern.desc": "Насилие",
   "item.wizards_reborn.reproduction_banner_pattern.desc": "Репродукция",
   "item.wizards_reborn.cooperation_banner_pattern.desc": "Кооперация",
@@ -874,7 +883,7 @@
   "item.wizards_reborn.music_disc_capitalism.desc": "Onjerlay - Battle against a true Capitalist",
   "item.wizards_reborn.music_disc_panache.desc": "Onjerlay - Magical Panache",
 
-  "_comment_13": "Узоры флагов",
+  "_comment_14": "Узоры флагов",
   "block.minecraft.banner.wizards_reborn.violence.black": "Чёрный символ \"Насилие\"",
   "block.minecraft.banner.wizards_reborn.violence.blue": "Синий символ \"Насилие\"",
   "block.minecraft.banner.wizards_reborn.violence.brown": "Коричневый символ \"Насилие\"",
@@ -977,7 +986,7 @@
   "block.minecraft.banner.wizards_reborn.elevation.white": "Белый символ \"Возвышение\"",
   "block.minecraft.banner.wizards_reborn.elevation.yellow": "Жёлтый символ \"Возвышение\"",
 
-  "_comment_14": "Звуки",
+  "_comment_15": "Звуки",
   "sounds.wizards_reborn.wissen_burst": "Вспышка виссена",
   "sounds.wizards_reborn.wissen_transfer": "Передача виссена",
   "sounds.wizards_reborn.arcanum_lens_resonate": "Арканумная линза резонирует",
@@ -1013,7 +1022,7 @@
   "sounds.wizards_reborn.crystal_resonate": "Кристалл резонирует",
   "sounds.wizards_reborn.crystal_shimmer": "Кристалл звенит",
 
-  "_comment_15": "Существа",
+  "_comment_16": "Существа",
   "entity.wizards_reborn.arcane_wood_boat": "Арканово-древесная лодка",
   "entity.wizards_reborn.arcane_wood_chest_boat": "Арканово-древесная грузовая лодка",
   "entity.wizards_reborn.innocent_wood_boat": "Невинно-древесная лодка",
@@ -1024,24 +1033,24 @@
   "entity.wizards_reborn.throwed_scythe": "Брошенная коса",
   "entity.wizards_reborn.sniffalo": "Нюхало",
 
-  "_comment_16": "Эффекты мобов",
+  "_comment_17": "Эффекты мобов",
   "effect.wizards_reborn.mor_spores": "Моровые споры",
   "effect.wizards_reborn.wissen_aura": "Виссен аура",
   "effect.wizards_reborn.irritation": "Раздражение",
   "effect.wizards_reborn.tipsy": "Опьянение",
 
-  "_comment_17": "Атрибуты",
+  "_comment_18": "Атрибуты",
   "attribute.name.wizards_reborn.wissen_discount": "Скидка виссена",
   "attribute.name.wizards_reborn.magic_armor": "Магическая броня",
   "attribute.name.wizards_reborn.magic_modifier": "Магический модификатор",
   "attribute.name.wizards_reborn.arcane_damage": "Аркановый урон",
 
-  "_comment_18": "Меню Пушистого Меха",
+  "_comment_19": "Меню Пушистого Меха",
   "mod_description.wizards_reborn": "Wizard's reborn - мод о магии в стиле альтернативных 1930-х.",
 
   "panorama.wizards_reborn.magical_origins": "Магические Истоки",
 
-  "_comment_19": "Интерфейс",
+  "_comment_20": "Интерфейс",
   "gui.wizards_reborn.arcanemicon.title": "Аркейномикон",
   "gui.wizards_reborn.arcane_workbench.title": "Аркановый верстак",
   "gui.wizards_reborn.jeweler_table.title": "Ювелирный стол",
@@ -1075,7 +1084,7 @@
   "gui.wizards_reborn.wand.add_spell_set": "Добавить набор заклинаний",
   "gui.wizards_reborn.wand.add_spell": "Добавить заклинание",
 
-  "_comment_20": "Сообщения о смерти",
+  "_comment_21": "Сообщения о смерти",
   "death.attack.arcane_magic": "%s умер от аркановой магии",
   "death.attack.arcane_magic.player": "%s умер от аркановой магии с помощью %s",
   "death.attack.arcane_magic.item": "%s умер от аркановой магии с помощью %s используя %s",
@@ -1083,17 +1092,17 @@
   "death.attack.ritual.player": "%s  умер во время ритуала с помощью %s",
   "death.attack.ritual.item": "%s  умер во время ритуала с помощью %s используя %s",
 
-  "_comment_21": "Сообщения",
+  "_comment_22": "Сообщения",
   "message.wizards_reborn.someone": "Нечто",
   "message.wizards_reborn.arcanemicon_offering": "Мои силы угасают... Я дарую тебе эту книгу, дабы ты возродил потерянные знания! Достигни этой великой цели, ибо я не смог...",
   "message.wizards_reborn.arcanemicon": "Рвение к древним знаниям начало расцветать в тебе! Ты знаешь что должен делать.",
   "message.wizards_reborn.knowledge_scroll": "Вы получили знания от %s",
 
-  "_comment_22": "Бутерброды",
+  "_comment_23": "Бутерброды",
   "knowledge.toast.wizards_reborn.new_knowledge": "Получены знания",
   "knowledge.toast.wizards_reborn.new_articles": "Доступны статьи",
 
-  "_comment_23": "Команды",
+  "_comment_24": "Команды",
   "commands.wizards_reborn.knowledge.unknown": "Не существует знаний с ID '%s'",
   "commands.wizards_reborn.knowledge.give.single": "Выданы знания игроку %s",
   "commands.wizards_reborn.knowledge.give.multiple": "Выданы знания %s игрокам",
@@ -1122,7 +1131,7 @@
   "commands.wizards_reborn.remove_wissen.multiple": "Удалено значение виссена%s на предмет у %s игроков",
   "commands.wizards_reborn.remove_wissen.single": "Удалено значение виссена %s на предмет %s",
 
-  "_comment_24": "Привязка клавиш",
+  "_comment_25": "Привязка клавиш",
   "key.category.wizards_reborn.general": "Wizard's Reborn",
   "key.wizards_reborn.selection_menu": "Меню выбора",
   "key.wizards_reborn.bag_menu": "Меню сумок",
@@ -1130,7 +1139,7 @@
   "key.wizards_reborn.previous_spell": "Предыдущее заклинание",
   "key.wizards_reborn.spell_sets_toggle": "Переключение наборов заклинаний",
 
-  "_comment_25": "Аркейномикон",
+  "_comment_26": "Аркейномикон",
   "wizards_reborn.arcanemicon.category.arcane_nature": "Аркановая природа",
   "wizards_reborn.arcanemicon.chapter.arcane_nature_index": "Аркановая природа",
   "wizards_reborn.arcanemicon.page.arcane_nature_index.title": "Аркановая природа",
@@ -1994,7 +2003,7 @@
   "knowledge.wizards_reborn.arcane_lumos": "Aркановый люмос",
   "knowledge.wizards_reborn.crystal_seeds": "Кристальные семена",
 
-  "_comment_26": "Конфиги",
+  "_comment_27": "Конфиги",
   "config.number.wizards_reborn.default": "По умолчанию:",
   "config.number.wizards_reborn.range": "Диапазон:",
   "config.number.wizards_reborn.on": "Включено",
