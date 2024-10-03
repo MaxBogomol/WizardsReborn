@@ -6,9 +6,9 @@ import mod.maxbogomol.fluffy_fur.FluffyFur;
 import mod.maxbogomol.fluffy_fur.client.event.ClientTickHandler;
 import mod.maxbogomol.fluffy_fur.client.render.RenderBuilder;
 import mod.maxbogomol.fluffy_fur.common.item.IGuiParticleItem;
+import mod.maxbogomol.fluffy_fur.common.itemskin.ItemSkin;
 import mod.maxbogomol.fluffy_fur.registry.client.FluffyFurRenderTypes;
 import mod.maxbogomol.fluffy_fur.util.RenderUtil;
-import mod.maxbogomol.wizards_reborn.api.skin.Skin;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.Item;
@@ -22,14 +22,14 @@ import java.awt.*;
 import java.util.List;
 
 public class SkinTrimItem extends Item implements IGuiParticleItem {
-    public Skin skin;
+    public ItemSkin skin;
 
-    public SkinTrimItem(Properties properties, Skin skin) {
+    public SkinTrimItem(Properties properties, ItemSkin skin) {
         super(properties);
         this.skin = skin;
     }
 
-    public Skin getSkin() {
+    public ItemSkin getSkin() {
         return skin;
     }
 

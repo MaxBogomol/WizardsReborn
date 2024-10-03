@@ -4,8 +4,6 @@ import mod.maxbogomol.fluffy_fur.FluffyFur;
 import mod.maxbogomol.fluffy_fur.common.proxy.ClientProxy;
 import mod.maxbogomol.fluffy_fur.common.proxy.ISidedProxy;
 import mod.maxbogomol.fluffy_fur.common.proxy.ServerProxy;
-import mod.maxbogomol.wizards_reborn.api.skin.Skin;
-import mod.maxbogomol.wizards_reborn.api.skin.Skins;
 import mod.maxbogomol.wizards_reborn.config.WizardsRebornClientConfig;
 import mod.maxbogomol.wizards_reborn.common.capability.IArrowModifier;
 import mod.maxbogomol.wizards_reborn.common.capability.IKnowledge;
@@ -25,6 +23,7 @@ import mod.maxbogomol.wizards_reborn.registry.common.banner.WizardsRebornBannerP
 import mod.maxbogomol.wizards_reborn.registry.common.block.WizardsRebornBlockEntities;
 import mod.maxbogomol.wizards_reborn.registry.common.block.WizardsRebornBlocks;
 import mod.maxbogomol.wizards_reborn.registry.common.fluid.WizardsRebornFluids;
+import mod.maxbogomol.wizards_reborn.registry.common.item.WizardsRebornItemSkins;
 import mod.maxbogomol.wizards_reborn.registry.common.item.WizardsRebornItems;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.world.level.levelgen.feature.stateproviders.BlockStateProviderType;
@@ -84,7 +83,7 @@ public class WizardsReborn {
         WizardsRebornCrystals.register();
         WizardsRebornMonograms.register();
         WizardsRebornSpells.register();
-        WizardsRebornSkins.register();
+        WizardsRebornItemSkins.register();
         WizardsRebornArcaneEnchantments.register();
         WizardsRebornCrystalRituals.register();
         WizardsRebornLightTypes.register();
@@ -119,11 +118,6 @@ public class WizardsReborn {
 
         WizardsRebornItems.setupCrystalsItems();
         WizardsRebornItems.setupDrinksItems();
-
-        for (Skin skin : Skins.getSkins()) {
-            skin.setupSkinEntries();
-        }
-
         WizardsRebornBlocks.setupBlocks();
         WizardsRebornItems.setupItems();
     }

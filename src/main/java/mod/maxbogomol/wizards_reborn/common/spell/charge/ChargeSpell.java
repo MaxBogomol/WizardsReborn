@@ -33,8 +33,6 @@ import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 
 import java.awt.*;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.UUID;
 
 public class ChargeSpell extends Spell {
@@ -154,7 +152,7 @@ public class ChargeSpell extends Spell {
     @Override
     public void entityTick(SpellProjectileEntity entity) {
         if (!entity.level().isClientSide) {
-            if (!entity.getFade()) {
+            //if (!entity.getFade()) {
                 boolean hasEffectTrue = true;
                 CompoundTag spellData = entity.getSpellData();
                 if (spellData.getBoolean("throw")) {
@@ -178,14 +176,14 @@ public class ChargeSpell extends Spell {
                 if (spellData.getInt("ticks") <= 500) {
                     spellData.putInt("ticks", spellData.getInt("ticks") + 1);
                 } else {
-                    entity.setFade(true);
-                    entity.setFadeTick(20);
+                    //entity.setFade(true);
+                    //entity.setFadeTick(20);
                     entity.burstEffect();
                 }
 
                 if (spellData.getInt("ticks_left") <= 0) {
-                    entity.setFade(true);
-                    entity.setFadeTick(20);
+                    //entity.setFade(true);
+                    //entity.setFadeTick(20);
                 }
 
                 if (!spellData.getBoolean("throw")) {
@@ -208,19 +206,19 @@ public class ChargeSpell extends Spell {
                     spellData.putFloat("oldZ", (float) oldPos.z);
                 }
             }
-        } else {
-            if (!entity.getFade()) {
+        //} else {
+            //if (!entity.getFade()) {
                 updatePos(entity);
                 updateRot(entity);
 
                 if (entity.tickCount > 1) {
                     CompoundTag spellData = entity.getSpellData();
                     if (spellData.getBoolean("throw")) {
-                        entity.addTrail(new Vec3(entity.position().toVector3f()));
+                       // entity.addTrail(new Vec3(entity.position().toVector3f()));
                     }
                 }
-            }
-        }
+            //}
+        //}
     }
 
     public void updatePos(SpellProjectileEntity entity) {
@@ -303,16 +301,16 @@ public class ChargeSpell extends Spell {
 
     @Override
     public void onImpact(HitResult ray, Level level, SpellProjectileEntity projectile, Player player, Entity target) {
-        projectile.setFade(true);
-        projectile.setFadeTick(20);
+        //projectile.setFade(true);
+       // projectile.setFadeTick(20);
         projectile.burstEffect();
         level.playSound(WizardsReborn.proxy.getPlayer(), projectile.getX(), projectile.getY(), projectile.getZ(), WizardsRebornSounds.SPELL_BURST.get(), SoundSource.PLAYERS, 0.35f, (float) (1f + ((random.nextFloat() - 0.5D) / 4)));
     }
 
     @Override
     public void onImpact(HitResult ray, Level level, SpellProjectileEntity projectile, Player player) {
-        projectile.setFade(true);
-        projectile.setFadeTick(20);
+       // projectile.setFade(true);
+        //projectile.setFadeTick(20);
         projectile.setPos(ray.getLocation().x, ray.getLocation().y, ray.getLocation().z);
         projectile.burstEffect();
         level.playSound(WizardsReborn.proxy.getPlayer(), projectile.getX(), projectile.getY(), projectile.getZ(), WizardsRebornSounds.SPELL_BURST.get(), SoundSource.PLAYERS, 0.35f, (float) (1f + ((random.nextFloat() - 0.5D) / 4)));
@@ -359,6 +357,7 @@ public class ChargeSpell extends Spell {
         VertexConsumer builder = bufferDelayed.getBuffer(FluffyFurRenderTypes.ADDITIVE);
         Color color = getColor();
 
+        /*
         List<Vec3> trailList = new ArrayList<>(entity.trail);
         if (trailList.size() > 1 && spellData.getInt("ticks") >= 20) {
             Vec3 position = trailList.get(0);
@@ -380,10 +379,10 @@ public class ChargeSpell extends Spell {
         float charge = 0.5f + (((float) spellData.getInt("charge") / getCharge()) / 2f);
 
         stack.pushPose();
-        stack.translate(0, 0.2f, 0);
-        stack.translate(entity.getX() - x, entity.getY() - y,  entity.getZ() - z);
+        stack.translate(0, 0.2f, 0);*/
+        //stack.translate(entity.getX() - x, entity.getY() - y,  entity.getZ() - z);
         //WizardsRebornRenderUtil.renderTrail(stack, builder, entity.position(), trailList, 0, 0.15f * charge, 0, 1.0f,  1.0f, color, 8, true);
         //WizardsRebornRenderUtil.renderTrail(stack, builder, entity.position(), trailList, 0, 0.15f * charge, 0, 0.75f, 0.75f, color, 8, true);
-        stack.popPose();
+        //stack.popPose();
     }
 }

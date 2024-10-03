@@ -1,7 +1,7 @@
 package mod.maxbogomol.wizards_reborn.client.model.item;
 
 import mod.maxbogomol.fluffy_fur.client.model.item.CustomItemOverrides;
-import mod.maxbogomol.wizards_reborn.api.skin.Skin;
+import mod.maxbogomol.fluffy_fur.common.itemskin.ItemSkin;
 import mod.maxbogomol.wizards_reborn.common.item.equipment.ArcaneWandItem;
 import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.client.resources.model.BakedModel;
@@ -27,7 +27,7 @@ public class WandItemOverrides extends CustomItemOverrides {
             String modId = string.substring(0, i);
             String crystalId = string.substring(i + 1);
 
-            Skin skin = Skin.getSkinFromItem(stack);
+            ItemSkin skin = ItemSkin.getSkinFromItem(stack);
             if (skin != null) {
                 BakedModel model = WandCrystalsModels.getModel(skin.getItemModelName(stack), modId + ":" + crystalId);
                 if (model != null) return model;
@@ -44,7 +44,7 @@ public class WandItemOverrides extends CustomItemOverrides {
             }
         }
 
-        Skin skin = Skin.getSkinFromItem(stack);
+        ItemSkin skin = ItemSkin.getSkinFromItem(stack);
         if (skin != null) {
             BakedModel model = WandCrystalsModels.getModel(skin.getItemModelName(stack), "");
             if (model != null) return model;

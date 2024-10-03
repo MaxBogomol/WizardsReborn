@@ -9,10 +9,10 @@ import mod.maxbogomol.fluffy_fur.client.particle.options.ItemParticleOptions;
 import mod.maxbogomol.fluffy_fur.common.block.entity.NameableBlockEntityBase;
 import mod.maxbogomol.fluffy_fur.common.block.entity.TickableBlockEntity;
 import mod.maxbogomol.fluffy_fur.common.easing.Easing;
+import mod.maxbogomol.fluffy_fur.common.itemskin.ItemSkin;
 import mod.maxbogomol.fluffy_fur.registry.client.FluffyFurParticles;
 import mod.maxbogomol.fluffy_fur.registry.client.FluffyFurRenderTypes;
 import mod.maxbogomol.wizards_reborn.WizardsReborn;
-import mod.maxbogomol.wizards_reborn.api.skin.Skin;
 import mod.maxbogomol.wizards_reborn.api.wissen.*;
 import mod.maxbogomol.wizards_reborn.client.gui.container.JewelerTableContainer;
 import mod.maxbogomol.wizards_reborn.config.WizardsRebornConfig;
@@ -94,7 +94,7 @@ public class JewelerTableBlockEntity extends NameableBlockEntityBase implements 
                 Optional<JewelerTableRecipe> recipe = level.getRecipeManager().getRecipeFor(WizardsRebornRecipes.JEWELER_TABLE.get(), inv, level);
                 wissenInCraft = recipe.map(JewelerTableRecipe::getRecipeWissen).orElse(0);
 
-                Skin skin = getSkin();
+                ItemSkin skin = getSkin();
                 if (skin != null) wissenInCraft = 250;
 
                 if (wissenInCraft <= 0 && (wissenIsCraft > 0 || startCraft)) {
@@ -257,7 +257,7 @@ public class JewelerTableBlockEntity extends NameableBlockEntityBase implements 
                 Color color = Color.WHITE;
                 boolean isColor = false;
 
-                Skin skin = getSkin();
+                ItemSkin skin = getSkin();
                 if (skin != null) {
                     color = skin.getColor();
                     isColor = true;
@@ -494,7 +494,7 @@ public class JewelerTableBlockEntity extends NameableBlockEntityBase implements 
 
     @Override
     public float getCooldown() {
-        Skin skin = getSkin();
+        ItemSkin skin = getSkin();
         if (skin != null) wissenInCraft = 250;
         if (wissenInCraft > 0) {
             return (float) wissenInCraft / wissenIsCraft;
@@ -523,17 +523,17 @@ public class JewelerTableBlockEntity extends NameableBlockEntityBase implements 
             list.add(stack);
         }
 
-        Skin skin = getSkin();
+        ItemSkin skin = getSkin();
         if (skin != null) list.add(skin.applyOnItem(itemHandler.getStackInSlot(0).copy()));
 
         return list;
     }
 
-    public Skin getSkin() {
+    public ItemSkin getSkin() {
         if (itemOutputHandler.getStackInSlot(0).isEmpty() && !itemHandler.getStackInSlot(0).isEmpty() && !itemHandler.getStackInSlot(1).isEmpty()) {
             if (itemHandler.getStackInSlot(1).getItem() instanceof SkinTrimItem trim) {
                 if (trim.getSkin().canApplyOnItem(itemHandler.getStackInSlot(0))) {
-                    Skin skin = Skin.getSkinFromItem(itemHandler.getStackInSlot(0));
+                    ItemSkin skin = ItemSkin.getSkinFromItem(itemHandler.getStackInSlot(0));
                     if (skin != null) {
                         if (skin == trim.getSkin()) return null;
                     }

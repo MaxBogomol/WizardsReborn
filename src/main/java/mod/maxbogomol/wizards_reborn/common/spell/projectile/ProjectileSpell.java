@@ -2,20 +2,13 @@ package mod.maxbogomol.wizards_reborn.common.spell.projectile;
 
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
-import mod.maxbogomol.fluffy_fur.FluffyFur;
-import mod.maxbogomol.fluffy_fur.client.render.RenderBuilder;
-import mod.maxbogomol.fluffy_fur.client.render.trail.TrailPoint;
 import mod.maxbogomol.fluffy_fur.registry.client.FluffyFurRenderTypes;
 import mod.maxbogomol.wizards_reborn.WizardsReborn;
 import mod.maxbogomol.wizards_reborn.api.spell.Spell;
 import mod.maxbogomol.wizards_reborn.common.entity.SpellProjectileEntity;
 import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornSounds;
-import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.MultiBufferSource;
-import net.minecraft.client.renderer.texture.TextureAtlas;
-import net.minecraft.client.renderer.texture.TextureAtlasSprite;
 import net.minecraft.nbt.CompoundTag;
-import net.minecraft.resources.ResourceLocation;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.util.Mth;
 import net.minecraft.world.InteractionHand;
@@ -31,8 +24,6 @@ import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 
 import java.awt.*;
-import java.util.ArrayList;
-import java.util.List;
 
 public class ProjectileSpell extends Spell {
     public ProjectileSpell(String id, int points) {
@@ -56,7 +47,7 @@ public class ProjectileSpell extends Spell {
     @Override
     public void entityTick(SpellProjectileEntity entity) {
         if (!entity.level().isClientSide) {
-            if (!entity.getFade()) {
+            //if (!entity.getFade()) {
                 boolean hasEffectTrue = true;
                 HitResult ray = ProjectileUtil.getHitResultOnMoveVector(entity, (e) -> {
                     return !e.isSpectator() && e.isPickable() && (!e.getUUID().equals(entity.getSenderUUID()) || entity.tickCount > 5);
@@ -72,13 +63,13 @@ public class ProjectileSpell extends Spell {
                 }
 
                 if (hasEffectTrue) entity.rayEffect();
-            }
+            //}
         } else {
-            if (!entity.getFade()) {
+            //if (!entity.getFade()) {
                 updatePos(entity);
                 updateRot(entity);
-                entity.addTrail(new Vec3(entity.position().toVector3f()));
-            }
+                //entity.addTrail(new Vec3(entity.position().toVector3f()));
+            //}
         }
     }
 
@@ -104,16 +95,16 @@ public class ProjectileSpell extends Spell {
 
     @Override
     public void onImpact(HitResult ray, Level level, SpellProjectileEntity projectile, Player player, Entity target) {
-        projectile.setFade(true);
-        projectile.setFadeTick(20);
+        //projectile.setFade(true);
+        //projectile.setFadeTick(20);
         projectile.burstEffect();
         level.playSound(WizardsReborn.proxy.getPlayer(), projectile.getX(), projectile.getY(), projectile.getZ(), WizardsRebornSounds.SPELL_BURST.get(), SoundSource.PLAYERS, 0.35f, (float) (1f + ((random.nextFloat() - 0.5D) / 4)));
     }
 
     @Override
     public void onImpact(HitResult ray, Level level, SpellProjectileEntity projectile, Player player) {
-        projectile.setFade(true);
-        projectile.setFadeTick(20);
+        //projectile.setFade(true);
+        //projectile.setFadeTick(20);
         projectile.setPos(ray.getLocation().x, ray.getLocation().y, ray.getLocation().z);
         projectile.burstEffect();
         level.playSound(WizardsReborn.proxy.getPlayer(), projectile.getX(), projectile.getY(), projectile.getZ(), WizardsRebornSounds.SPELL_BURST.get(), SoundSource.PLAYERS, 0.35f, (float) (1f + ((random.nextFloat() - 0.5D) / 4)));
@@ -126,6 +117,7 @@ public class ProjectileSpell extends Spell {
         VertexConsumer builder = bufferDelayed.getBuffer(FluffyFurRenderTypes.ADDITIVE);
         Color color =  getColor();
 
+        /*
         List<Vec3> trailList = new ArrayList<>(entity.trail);
         if (trailList.size() > 1 && entity.tickCount >= 20) {
             Vec3 position = trailList.get(0);
@@ -151,17 +143,17 @@ public class ProjectileSpell extends Spell {
 
         stack.pushPose();
         stack.translate(0, 0.2f, 0);
-        stack.translate(entity.getX() - x, entity.getY() - y,  entity.getZ() - z);
+        stack.translate(entity.getX() - x, entity.getY() - y,  entity.getZ() - z);*/
         //RenderUtils.renderTrail(stack, builder, entity.position(), trailList, 0,0.15f, 0,1.0f, 1.0f, color, 8, true);
         //RenderUtils.renderTrail(stack, builder, entity.position(), trailList, 0,0.15f, 0,0.75f, 0.75f, color, 8, true);
-        TextureAtlasSprite star = Minecraft.getInstance().getTextureAtlas(TextureAtlas.LOCATION_BLOCKS).apply(new ResourceLocation(FluffyFur.MOD_ID, "particle/wisp"));
-
+        //TextureAtlasSprite star = Minecraft.getInstance().getTextureAtlas(TextureAtlas.LOCATION_BLOCKS).apply(new ResourceLocation(FluffyFur.MOD_ID, "particle/wisp"));
+/*
         RenderBuilder.create()
                 .setRenderType(FluffyFurRenderTypes.ADDITIVE_TEXTURE)
                 .setUV(star.getU0(), star.getV0(), star.getU1(), star.getV1())
                 .setColor(color)
                 .setAlpha(0.5f)
                 .renderTrail(stack, trail, (f) -> {return f * 0.3f;});
-        stack.popPose();
+        stack.popPose();*/
     }
 }

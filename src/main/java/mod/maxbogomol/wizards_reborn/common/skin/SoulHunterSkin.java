@@ -1,8 +1,9 @@
 package mod.maxbogomol.wizards_reborn.common.skin;
 
 import mod.maxbogomol.fluffy_fur.client.model.armor.ArmorModel;
+import mod.maxbogomol.fluffy_fur.common.itemskin.ItemClassSkinEntry;
+import mod.maxbogomol.fluffy_fur.common.itemskin.ItemSkin;
 import mod.maxbogomol.wizards_reborn.WizardsReborn;
-import mod.maxbogomol.wizards_reborn.api.skin.Skin;
 import mod.maxbogomol.wizards_reborn.common.item.equipment.ArcaneWandItem;
 import mod.maxbogomol.wizards_reborn.common.item.equipment.InventorWizardArmorItem;
 import mod.maxbogomol.wizards_reborn.common.item.equipment.WissenWandItem;
@@ -17,7 +18,7 @@ import net.minecraftforge.api.distmarker.OnlyIn;
 
 import java.awt.*;
 
-public class SoulHunterSkin extends Skin {
+public class SoulHunterSkin extends ItemSkin {
     public SoulHunterSkin(String id, Color color) {
         super(id, color);
     }
@@ -35,7 +36,7 @@ public class SoulHunterSkin extends Skin {
         addSkinEntry(new ItemClassSkinEntry(WissenWandItem.class, WizardsReborn.MOD_ID+":soul_hunter_wissen_wand"));
     }
 
-    public static class SoulHunterArmorSkinEntry extends ArmorClassSkinEntry {
+    public static class SoulHunterArmorSkinEntry extends ArcaneArmorClassSkinEntry {
         public SoulHunterArmorSkinEntry(Class item, String skin) {
             super(item, skin);
         }

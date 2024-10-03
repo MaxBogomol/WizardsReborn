@@ -3,9 +3,9 @@ package mod.maxbogomol.wizards_reborn.common.item.equipment;
 import com.google.common.collect.ImmutableMultimap;
 import com.google.common.collect.Multimap;
 import mod.maxbogomol.fluffy_fur.client.model.armor.ArmorModel;
+import mod.maxbogomol.fluffy_fur.common.itemskin.ItemSkin;
 import mod.maxbogomol.wizards_reborn.WizardsReborn;
 import mod.maxbogomol.wizards_reborn.api.arcaneenchantment.ArcaneEnchantmentType;
-import mod.maxbogomol.wizards_reborn.api.skin.Skin;
 import mod.maxbogomol.wizards_reborn.common.item.equipment.arcane.ArcaneArmorItem;
 import mod.maxbogomol.wizards_reborn.registry.client.WizardsRebornModels;
 import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornAttributes;
@@ -81,7 +81,7 @@ public class InventorWizardArmorItem extends ArcaneArmorItem implements IForgeIt
 
                 ArmorModel model = WizardsRebornModels.INVENTOR_WIZARD_ARMOR;
 
-                Skin skin = Skin.getSkinFromItem(itemStack);
+                ItemSkin skin = ItemSkin.getSkinFromItem(itemStack);
                 if (skin != null) model = skin.getArmorModel(entity, itemStack, armorSlot, _default);
 
                 model.slot = type.getSlot();
@@ -95,7 +95,7 @@ public class InventorWizardArmorItem extends ArcaneArmorItem implements IForgeIt
     @OnlyIn(Dist.CLIENT)
     @Override
     public String getArmorTexture(ItemStack stack, Entity entity, EquipmentSlot slot, String type) {
-        Skin skin = Skin.getSkinFromItem(stack);
+        ItemSkin skin = ItemSkin.getSkinFromItem(stack);
         if (skin != null) return skin.getArmorTexture(stack, entity, slot, type);
         return WizardsReborn.MOD_ID + ":textures/models/armor/inventor_wizard.png";
     }

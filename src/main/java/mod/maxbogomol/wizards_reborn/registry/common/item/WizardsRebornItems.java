@@ -596,12 +596,12 @@ public class WizardsRebornItems {
     public static final RegistryObject<Item> ARCANE_WOOD_TRIM = ITEMS.register("arcane_wood_trim", () -> new Item(new Item.Properties()));
     public static final RegistryObject<Item> WISESTONE_TRIM = ITEMS.register("wisestone_trim", () -> new Item(new Item.Properties()));
     public static final RegistryObject<Item> INNOCENT_WOOD_TRIM = ITEMS.register("innocent_wood_trim", () -> new Item(new Item.Properties()));
-    public static final RegistryObject<Item> TOP_HAT_TRIM = ITEMS.register("top_hat_trim", () -> new SkinTrimItem(new Item.Properties(), WizardsRebornSkins.TOP_HAT_SKIN));
-    public static final RegistryObject<Item> MAGNIFICENT_MAID_TRIM = ITEMS.register("magnificent_maid_trim", () -> new SkinTrimItem(new Item.Properties(), WizardsRebornSkins.MAGNIFICENT_MAID_SKIN));
-    public static final RegistryObject<Item> SUMMER_LOVE_TRIM = ITEMS.register("summer_love_trim", () -> new SkinTrimItem(new Item.Properties(), WizardsRebornSkins.SUMMER_LOVE_SKIN));
-    public static final RegistryObject<Item> SOUL_HUNTER_TRIM = ITEMS.register("soul_hunter_trim", () -> new SkinTrimItem(new Item.Properties(), WizardsRebornSkins.SOUL_HUNTER_SKIN));
-    public static final RegistryObject<Item> IMPLOSION_TRIM = ITEMS.register("implosion_trim", () -> new SkinTrimItem(new Item.Properties(), WizardsRebornSkins.IMPLOSION_SKIN));
-    public static final RegistryObject<Item> PHANTOM_INK_TRIM = ITEMS.register("phantom_ink_trim", () -> new SkinTrimItem(new Item.Properties(), WizardsRebornSkins.PHANTOM_INK_SKIN));
+    public static final RegistryObject<Item> TOP_HAT_TRIM = ITEMS.register("top_hat_trim", () -> new SkinTrimItem(new Item.Properties(), WizardsRebornItemSkins.TOP_HAT));
+    public static final RegistryObject<Item> MAGNIFICENT_MAID_TRIM = ITEMS.register("magnificent_maid_trim", () -> new SkinTrimItem(new Item.Properties(), WizardsRebornItemSkins.MAGNIFICENT_MAID));
+    public static final RegistryObject<Item> SUMMER_LOVE_TRIM = ITEMS.register("summer_love_trim", () -> new SkinTrimItem(new Item.Properties(), WizardsRebornItemSkins.SUMMER_LOVE));
+    public static final RegistryObject<Item> SOUL_HUNTER_TRIM = ITEMS.register("soul_hunter_trim", () -> new SkinTrimItem(new Item.Properties(), WizardsRebornItemSkins.SOUL_HUNTER));
+    public static final RegistryObject<Item> IMPLOSION_TRIM = ITEMS.register("implosion_trim", () -> new SkinTrimItem(new Item.Properties(), WizardsRebornItemSkins.IMPLOSION));
+    public static final RegistryObject<Item> PHANTOM_INK_TRIM = ITEMS.register("phantom_ink_trim", () -> new SkinTrimItem(new Item.Properties(), WizardsRebornItemSkins.PHANTOM_INK));
 
     public static final RegistryObject<DrinkBottleItem> VODKA_BOTTLE = ITEMS.register("vodka_bottle", () -> new DrinkBottleItem(new Item.Properties().stacksTo(1)));
     public static final RegistryObject<DrinkBottleItem> BOURBON_BOTTLE = ITEMS.register("bourbon_bottle", () -> new DrinkBottleItem(new Item.Properties().stacksTo(1)));

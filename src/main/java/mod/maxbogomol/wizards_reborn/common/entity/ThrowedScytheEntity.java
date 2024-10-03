@@ -298,9 +298,9 @@ public class ThrowedScytheEntity extends ThrowableItemProjectile {
                 float b = color.getBlue() / 255f;
 
                 for (int i = 0; i < 30; i++) {
-                    double lerpX = Mth.lerp(i / 30.0f, getX(), getSender().getX());
-                    double lerpY = Mth.lerp(i / 30.0f, getY(), getSender().getY() + getSender().getBbHeight() / 2f);
-                    double lerpZ = Mth.lerp(i / 30.0f, getZ(), getSender().getZ());
+                    double lX = Mth.lerp(i / 30.0f, getX(), getSender().getX());
+                    double lY = Mth.lerp(i / 30.0f, getY(), getSender().getY() + getSender().getBbHeight() / 2f);
+                    double lZ = Mth.lerp(i / 30.0f, getZ(), getSender().getZ());
 
                     int right = getIsRight() ? 1 : -1;
                     float yaw = (float) -tickCount - (i * 10) * right * 0.8f + (getIsRight() ? 0.3f : -0.3f) + (float) Math.toRadians(-getYRot()) + (getIsRight() ? 0 : (float) Math.PI);
@@ -310,7 +310,7 @@ public class ThrowedScytheEntity extends ThrowableItemProjectile {
                     float y = (float) Math.cos(pitch);
                     float z = (float) Math.sin(pitch) * (float) Math.sin(yaw);
 
-                    Vec3 pos = new Vec3(lerpX, lerpY, lerpZ).add(x, y, z);
+                    Vec3 pos = new Vec3(lX, lY, lZ).add(x, y, z);
 
                     ParticleBuilder.create(FluffyFurParticles.SQUARE)
                             .setRenderType(FluffyFurRenderTypes.ADDITIVE)

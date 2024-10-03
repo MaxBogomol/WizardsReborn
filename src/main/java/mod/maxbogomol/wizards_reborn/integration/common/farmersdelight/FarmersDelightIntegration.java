@@ -2,11 +2,11 @@ package mod.maxbogomol.wizards_reborn.integration.common.farmersdelight;
 
 import mezz.jei.api.constants.VanillaTypes;
 import mezz.jei.api.registration.IRecipeRegistration;
+import mod.maxbogomol.fluffy_fur.common.itemskin.ItemClassSkinEntry;
+import mod.maxbogomol.fluffy_fur.common.itemskin.ItemSkin;
 import mod.maxbogomol.wizards_reborn.WizardsReborn;
 import mod.maxbogomol.wizards_reborn.api.arcaneenchantment.ArcaneEnchantmentType;
-import mod.maxbogomol.wizards_reborn.api.skin.Skin;
 import mod.maxbogomol.wizards_reborn.registry.common.item.WizardsRebornItemTiers;
-import mod.maxbogomol.wizards_reborn.common.skin.ItemClassSkinEntry;
 import mod.maxbogomol.wizards_reborn.registry.common.item.WizardsRebornItems;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
@@ -39,7 +39,7 @@ public class FarmersDelightIntegration {
             return new InnocentWoodKnifeItem(WizardsRebornItemTiers.INNOCENT_WOOD, 0.5F, -2.0F, new Item.Properties(), WizardsRebornItems.INNOCENT_WOOD_BRANCH.get()).addArcaneEnchantmentType(ArcaneEnchantmentType.INNOCENT_WOOD);
         }
 
-        public static void addKnifeSkin(Skin skin, String item) {
+        public static void addKnifeSkin(ItemSkin skin, String item) {
             skin.addSkinEntry(new ItemClassSkinEntry(ArcaneKnifeItem.class, item));
         }
     }

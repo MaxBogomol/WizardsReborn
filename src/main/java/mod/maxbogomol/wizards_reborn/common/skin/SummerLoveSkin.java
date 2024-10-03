@@ -1,8 +1,9 @@
 package mod.maxbogomol.wizards_reborn.common.skin;
 
 import mod.maxbogomol.fluffy_fur.client.model.armor.ArmorModel;
+import mod.maxbogomol.fluffy_fur.common.itemskin.ItemClassSkinEntry;
+import mod.maxbogomol.fluffy_fur.common.itemskin.ItemSkin;
 import mod.maxbogomol.wizards_reborn.WizardsReborn;
-import mod.maxbogomol.wizards_reborn.api.skin.Skin;
 import mod.maxbogomol.wizards_reborn.common.item.equipment.ArcaneWandItem;
 import mod.maxbogomol.wizards_reborn.common.item.equipment.WissenWandItem;
 import mod.maxbogomol.wizards_reborn.common.item.equipment.arcane.ArcaneArmorItem;
@@ -17,7 +18,7 @@ import net.minecraftforge.api.distmarker.OnlyIn;
 
 import java.awt.*;
 
-public class SummerLoveSkin extends Skin {
+public class SummerLoveSkin extends ItemSkin {
     public SummerLoveSkin(String id, Color color) {
         super(id, color);
     }
@@ -33,7 +34,7 @@ public class SummerLoveSkin extends Skin {
         addSkinEntry(new ItemClassSkinEntry(WissenWandItem.class, WizardsReborn.MOD_ID+":summer_love_wissen_wand"));
     }
 
-    public static class MagnificentMaidArmorSkinEntry extends ArmorClassSkinEntry {
+    public static class MagnificentMaidArmorSkinEntry extends ArcaneArmorClassSkinEntry {
         public MagnificentMaidArmorSkinEntry(Class item, String skin) {
             super(item, skin);
         }

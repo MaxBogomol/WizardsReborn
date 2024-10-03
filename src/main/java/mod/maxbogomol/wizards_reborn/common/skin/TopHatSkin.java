@@ -1,8 +1,8 @@
 package mod.maxbogomol.wizards_reborn.common.skin;
 
 import mod.maxbogomol.fluffy_fur.client.model.armor.ArmorModel;
+import mod.maxbogomol.fluffy_fur.common.itemskin.ItemSkin;
 import mod.maxbogomol.wizards_reborn.WizardsReborn;
-import mod.maxbogomol.wizards_reborn.api.skin.Skin;
 import mod.maxbogomol.wizards_reborn.common.item.equipment.InventorWizardArmorItem;
 import mod.maxbogomol.wizards_reborn.registry.client.WizardsRebornModels;
 import net.minecraft.client.model.HumanoidModel;
@@ -14,7 +14,7 @@ import net.minecraftforge.api.distmarker.OnlyIn;
 
 import java.awt.*;
 
-public class TopHatSkin extends Skin {
+public class TopHatSkin extends ItemSkin {
     public TopHatSkin(String id, Color color) {
         super(id, color);
     }
@@ -26,7 +26,7 @@ public class TopHatSkin extends Skin {
                 .addArmorSkin(EquipmentSlot.HEAD, WizardsReborn.MOD_ID + ":top_hat"));
     }
 
-    public static class TopHatArmorSkinEntry extends ArmorClassSkinEntry {
+    public static class TopHatArmorSkinEntry extends ArcaneArmorClassSkinEntry {
         public TopHatArmorSkinEntry(Class item, String skin) {
             super(item, skin);
         }

@@ -2,7 +2,8 @@ package mod.maxbogomol.wizards_reborn.common.entity;
 
 import mod.maxbogomol.wizards_reborn.api.spell.Spell;
 import mod.maxbogomol.wizards_reborn.api.spell.Spells;
-import mod.maxbogomol.wizards_reborn.common.network.*;
+import mod.maxbogomol.wizards_reborn.common.network.PacketHandler;
+import mod.maxbogomol.wizards_reborn.common.network.SpellProjectileUpdateSpellDataPacket;
 import mod.maxbogomol.wizards_reborn.common.network.spell.SpellBurstEffectPacket;
 import mod.maxbogomol.wizards_reborn.common.network.spell.SpellProjectileRayEffectPacket;
 import net.minecraft.core.BlockPos;
@@ -23,8 +24,6 @@ import net.minecraft.world.phys.Vec3;
 import net.minecraftforge.network.NetworkHooks;
 
 import java.awt.*;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
@@ -33,10 +32,6 @@ public class SpellProjectileEntity extends Entity {
     public static final EntityDataAccessor<String> spellId = SynchedEntityData.defineId(SpellProjectileEntity.class, EntityDataSerializers.STRING);
     public static final EntityDataAccessor<CompoundTag> crystalStats = SynchedEntityData.defineId(SpellProjectileEntity.class, EntityDataSerializers.COMPOUND_TAG);
     public static final EntityDataAccessor<CompoundTag> spellData = SynchedEntityData.defineId(SpellProjectileEntity.class, EntityDataSerializers.COMPOUND_TAG);
-    public static final EntityDataAccessor<Boolean> fadeId = SynchedEntityData.defineId(SpellProjectileEntity.class, EntityDataSerializers.BOOLEAN);
-    public static final EntityDataAccessor<Integer> fadeTickId = SynchedEntityData.defineId(SpellProjectileEntity.class, EntityDataSerializers.INT);
-
-    public List<Vec3> trail = new ArrayList<>();
 
     public SpellProjectileEntity(EntityType<?> type, Level level) {
         super(type, level);
@@ -52,7 +47,7 @@ public class SpellProjectileEntity extends Entity {
     }
 
     public SpellProjectileEntity createSpellData(CompoundTag spellData) {
-        getEntityData().set(this.spellData, spellData);
+        getEntityData().set(SpellProjectileEntity.spellData, spellData);
         return this;
     }
 
@@ -62,27 +57,8 @@ public class SpellProjectileEntity extends Entity {
         Spell spell = getSpell();
         if (spell != null) {
             spell.entityTick(this);
-        }
-
-        if (getFade()) {
-            if (getFadeTick() <= 0) {
-                remove();
-            } else {
-                setFadeTick(getFadeTick() - 1);
-            }
-        }
-
-        if (level().isClientSide()) {
-            if (getFade()) {
-                setDeltaMovement(0, 0, 0);
-                if (trail.size() > 0) {
-                    trail.remove(0);
-                }
-            } else {
-                if (trail.size() > 20) {
-                    trail.remove(0);
-                }
-            }
+        } else {
+            remove();
         }
     }
 
@@ -106,8 +82,6 @@ public class SpellProjectileEntity extends Entity {
         getEntityData().define(casterId, Optional.empty());
         getEntityData().define(crystalStats, new CompoundTag());
         getEntityData().define(spellData, new CompoundTag());
-        getEntityData().define(fadeId, false);
-        getEntityData().define(fadeTickId, 0);
     }
 
     @Override
@@ -118,8 +92,6 @@ public class SpellProjectileEntity extends Entity {
         getEntityData().set(spellId, compound.getString("spell"));
         getEntityData().set(crystalStats, compound.getCompound("stats"));
         getEntityData().set(spellData, compound.getCompound("spell_data"));
-        getEntityData().set(fadeId, compound.getBoolean("fade"));
-        getEntityData().set(fadeTickId, compound.getInt("fadeTick"));
     }
 
     @Override
@@ -130,8 +102,6 @@ public class SpellProjectileEntity extends Entity {
         compound.putString("spell", getEntityData().get(spellId));
         compound.put("stats", getEntityData().get(crystalStats));
         compound.put("spell_data", getEntityData().get(spellData));
-        compound.putBoolean("fade", getEntityData().get(fadeId));
-        compound.putInt("fadeTick", getEntityData().get(fadeTickId));
     }
 
     @Override
@@ -148,6 +118,7 @@ public class SpellProjectileEntity extends Entity {
         return Spells.getSpell(getEntityData().get(spellId));
     }
 
+    //delete
     public void rayEffect() {
         if (tickCount > 1) {
             Vec3 motion = getDeltaMovement();
@@ -166,11 +137,13 @@ public class SpellProjectileEntity extends Entity {
         }
     }
 
+    //delete
     public void burstEffect() {
         Vec3 pos = position();
         burstEffect((float) pos.x, (float) pos.y + 0.2f, (float) pos.z);
     }
 
+    //delete
     public void burstEffect(float x, float y, float z) {
         Vec3 pos = position();
 
@@ -211,25 +184,5 @@ public class SpellProjectileEntity extends Entity {
 
     public UUID getSenderUUID() {
         return (getEntityData().get(casterId).isPresent()) ? getEntityData().get(casterId).get() : null;
-    }
-
-    public boolean getFade() {
-        return getEntityData().get(fadeId);
-    }
-
-    public void setFade(boolean fade) {
-        getEntityData().set(fadeId, fade);
-    }
-
-    public int getFadeTick() {
-        return getEntityData().get(fadeTickId);
-    }
-
-    public void setFadeTick(int fadeTick) {
-        getEntityData().set(fadeTickId, fadeTick);
-    }
-
-    public void addTrail(Vec3 pos) {
-        trail.add(pos);
     }
 }
