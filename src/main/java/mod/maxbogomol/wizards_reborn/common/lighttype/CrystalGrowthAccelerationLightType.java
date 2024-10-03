@@ -46,7 +46,7 @@ public class CrystalGrowthAccelerationLightType extends LightType {
                 growable.addGrowing();
             }
             int resonanceLevel = tag.getInt("resonance");
-            growable.setGrowingPower(5 + resonanceLevel);
+            growable.setGrowingPower((stack.isConcentrated() ? 10 : 5) + resonanceLevel);
             return true;
         }
         return false;
