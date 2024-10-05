@@ -119,9 +119,18 @@ public class ArcaneWandItem extends Item implements IWissenItem, ICustomAnimatio
         return stack;
     }
 
-    public static ItemStack existTags(ItemStack stack) {
-        CompoundTag nbt = stack.getOrCreateTag();
+    @Override
+    public int getMaxWissen() {
+        return 10000;
+    }
 
+    @Override
+    public WissenItemType getWissenItemType() {
+        return WissenItemType.USING;
+    }
+
+    public static void existTags(ItemStack stack) {
+        CompoundTag nbt = stack.getOrCreateTag();
         if (!nbt.contains("crystal")) {
             nbt.putBoolean("crystal", false);
         }
@@ -134,38 +143,71 @@ public class ArcaneWandItem extends Item implements IWissenItem, ICustomAnimatio
         if (!nbt.contains("maxCooldown")) {
             nbt.putInt("maxCooldown", 0);
         }
-
-        return stack;
     }
 
-    @Override
-    public void inventoryTick(ItemStack stack, Level level, Entity entity, int slot, boolean isSelected) {
-        WissenItemUtil.existWissen(stack);
+    public static boolean getCrystal(ItemStack stack) {
         existTags(stack);
         CompoundTag nbt = stack.getOrCreateTag();
+        return nbt.getBoolean("crystal");
+    }
 
-        if (nbt.contains("cooldown")) {
-            if (nbt.getInt("cooldown") > 0) {
-                nbt.putInt("cooldown", nbt.getInt("cooldown") - 1);
-                if (nbt.getInt("cooldown") == 0) {
-                    nbt.putInt("maxCooldown", 0);
-                    if (nbt.getString("spell") != "") {
-                        Spell spell = Spells.getSpell(nbt.getString("spell"));
-                        spell.onReload(stack, level, entity, slot, isSelected);
-                    }
-                }
+    public static String getSpell(ItemStack stack) {
+        existTags(stack);
+        CompoundTag nbt = stack.getOrCreateTag();
+        return nbt.getString("spell");
+    }
+
+    public static int getCooldown(ItemStack stack) {
+        existTags(stack);
+        CompoundTag nbt = stack.getOrCreateTag();
+        return nbt.getInt("cooldown");
+    }
+
+    public static int getMaxCooldown(ItemStack stack) {
+        existTags(stack);
+        CompoundTag nbt = stack.getOrCreateTag();
+        return nbt.getInt("maxCooldown");
+    }
+
+    public static void setCrystal(ItemStack stack, boolean crystal) {
+        CompoundTag nbt = stack.getOrCreateTag();
+        nbt.putBoolean("crystal", crystal);
+    }
+
+    public static void setSpell(ItemStack stack, String spell) {
+        CompoundTag nbt = stack.getOrCreateTag();
+        nbt.putString("spell", spell);
+    }
+
+    public static void setCooldown(ItemStack stack, int cooldown) {
+        CompoundTag nbt = stack.getOrCreateTag();
+        nbt.putInt("cooldown", cooldown);
+    }
+
+    public static void setMaxCooldown(ItemStack stack, int cooldown) {
+        CompoundTag nbt = stack.getOrCreateTag();
+        nbt.putInt("maxCooldown", cooldown);
+    }
+
+    public boolean canSpell(ItemStack stack, Player player) {
+        if (getCrystal(stack)) {
+            if (!getSpell(stack).isEmpty()) {
+                Spell spell = Spells.getSpell(getSpell(stack));
+                return (KnowledgeUtil.isSpell(player, spell));
             }
         }
+        return false;
     }
 
-    @Override
-    public int getMaxWissen() {
-        return 10000;
+    public boolean canSpell(ItemStack stack) {
+        if (getCrystal(stack)) {
+            return !getSpell(stack).isEmpty();
+        }
+        return false;
     }
 
-    @Override
-    public WissenItemType getWissenItemType() {
-        return WissenItemType.USING;
+    public static ItemStack getItemCrystal(ItemStack stack) {
+        return ArcaneWandItem.getInventory(stack).getItem(0);
     }
 
     @Override
@@ -177,14 +219,30 @@ public class ArcaneWandItem extends Item implements IWissenItem, ICustomAnimatio
     }
 
     @Override
+    public void inventoryTick(ItemStack stack, Level level, Entity entity, int slot, boolean isSelected) {
+        WissenItemUtil.existWissen(stack);
+        existTags(stack);
+
+        if (getCooldown(stack) > 0) {
+            setCooldown(stack, getCooldown(stack) - 1);
+            if (getCooldown(stack) <= 0) {
+                setMaxCooldown(stack, 0);
+                if (!getSpell(stack).isEmpty()) {
+                    Spell spell = Spells.getSpell(getSpell(stack));
+                    spell.onReload(stack, level, entity, slot, isSelected);
+                }
+            }
+        }
+    }
+
+    @Override
     public InteractionResultHolder<ItemStack> use(Level level, Player player, InteractionHand hand) {
         ItemStack stack = player.getItemInHand(hand);
 
-        CompoundTag nbt = stack.getTag();
         if (canSpell(stack, player)) {
-            Spell spell = Spells.getSpell(nbt.getString("spell"));
+            Spell spell = Spells.getSpell(getSpell(stack));
             if (spell.canSpell(level, player, hand) && spell.canSpellAir(level, player, hand)) {
-                if (spell.canWandWithCrystal(stack)) {
+                if (spell.canWandWithCrystal(getItemCrystal(stack))) {
                     spell.useWand(level, player, hand, stack);
                     return InteractionResultHolder.success(stack);
                 }
@@ -195,23 +253,20 @@ public class ArcaneWandItem extends Item implements IWissenItem, ICustomAnimatio
 
     @Override
     public InteractionResult onItemUseFirst(ItemStack stack, UseOnContext context) {
-        CompoundTag nbt = stack.getTag();
         if (canSpell(stack, context.getPlayer())) {
-            Spell spell = Spells.getSpell(nbt.getString("spell"));
-            if (spell.canWandWithCrystal(stack)) {
+            Spell spell = Spells.getSpell(getSpell(stack));
+            if (spell.canWandWithCrystal(getItemCrystal(stack))) {
                 return spell.onWandUseOn(stack, context);
             }
         }
-
         return super.onItemUseFirst(stack, context);
     }
 
     @Override
     public void onUseTick(Level level, LivingEntity livingEntity, ItemStack stack, int remainingUseDuration) {
-        CompoundTag nbt = stack.getTag();
         if (canSpell(stack, (Player) livingEntity)) {
-            Spell spell = Spells.getSpell(nbt.getString("spell"));
-            if (spell.canWandWithCrystal(stack)) {
+            Spell spell = Spells.getSpell(getSpell(stack));
+            if (spell.canWandWithCrystal(getItemCrystal(stack))) {
                 spell.onUseTick(level, livingEntity, stack, remainingUseDuration);
             }
         }
@@ -219,10 +274,9 @@ public class ArcaneWandItem extends Item implements IWissenItem, ICustomAnimatio
 
     @Override
     public void releaseUsing(ItemStack stack, Level level, LivingEntity livingEntity, int timeLeft) {
-        CompoundTag nbt = stack.getTag();
         if (canSpell(stack, (Player) livingEntity)) {
-            Spell spell = Spells.getSpell(nbt.getString("spell"));
-            if (spell.canWandWithCrystal(stack)) {
+            Spell spell = Spells.getSpell(getSpell(stack));
+            if (spell.canWandWithCrystal(getItemCrystal(stack))) {
                 spell.releaseUsing(stack, level, livingEntity, timeLeft);
             }
         }
@@ -230,10 +284,9 @@ public class ArcaneWandItem extends Item implements IWissenItem, ICustomAnimatio
 
     @Override
     public ItemStack finishUsingItem(ItemStack stack, Level level, LivingEntity livingEntity) {
-        CompoundTag nbt = stack.getTag();
         if (canSpell(stack, (Player) livingEntity)) {
-            Spell spell = Spells.getSpell(nbt.getString("spell"));
-            if (spell.canWandWithCrystal(stack)) {
+            Spell spell = Spells.getSpell(getSpell(stack));
+            if (spell.canWandWithCrystal(getItemCrystal(stack))) {
                 spell.finishUsingItem(stack, level, livingEntity);
             }
         }
@@ -243,9 +296,8 @@ public class ArcaneWandItem extends Item implements IWissenItem, ICustomAnimatio
 
     @Override
     public int getUseDuration(ItemStack stack) {
-        CompoundTag nbt = stack.getTag();
         if (canSpell(stack)) {
-            Spell spell = Spells.getSpell(nbt.getString("spell"));
+            Spell spell = Spells.getSpell(getSpell(stack));
             return spell.getUseDuration(stack);
         }
 
@@ -258,9 +310,8 @@ public class ArcaneWandItem extends Item implements IWissenItem, ICustomAnimatio
         if (!WizardsRebornClientConfig.SPELLS_FIRST_PERSON_ITEM_ANIMATIONS.get()) {
             return UseAnim.NONE;
         }
-        CompoundTag nbt = stack.getTag();
         if (canSpell(stack, WizardsReborn.proxy.getPlayer())) {
-            Spell spell = Spells.getSpell(nbt.getString("spell"));
+            Spell spell = Spells.getSpell(getSpell(stack));
             return spell.getUseAnimation(stack);
         }
         return UseAnim.NONE;
@@ -269,41 +320,20 @@ public class ArcaneWandItem extends Item implements IWissenItem, ICustomAnimatio
     @OnlyIn(Dist.CLIENT)
     @Override
     public ItemAnimation getAnimation(ItemStack stack) {
-        CompoundTag nbt = stack.getTag();
         if (canSpell(stack, WizardsReborn.proxy.getPlayer())) {
-            Spell spell = Spells.getSpell(nbt.getString("spell"));
+            Spell spell = Spells.getSpell(getSpell(stack));
             return spell.getAnimation(stack);
         }
 
         return null;
     }
 
-    public boolean canSpell(ItemStack stack, Player player) {
-        CompoundTag nbt = stack.getOrCreateTag();
-        if (nbt.getBoolean("crystal")) {
-            if (!nbt.getString("spell").isEmpty()) {
-                Spell spell = Spells.getSpell(nbt.getString("spell"));
-                return (KnowledgeUtil.isSpell(player, spell));
-            }
-        }
-        return false;
-    }
-
-    public boolean canSpell(ItemStack stack) {
-        CompoundTag nbt = stack.getOrCreateTag();
-        if (nbt.getBoolean("crystal")) {
-            return !nbt.getString("spell").isEmpty();
-        }
-        return false;
-    }
-
     @Override
     public Component getName(ItemStack stack) {
         Component displayName = super.getName(stack);
 
-        CompoundTag nbt = stack.getOrCreateTag();
-        if (nbt.getBoolean("crystal")) {
-            if (ArcaneWandItem.getInventory(stack).getItem(0).getItem() instanceof CrystalItem crystal) {
+        if (getCrystal(stack)) {
+            if (getItemCrystal(stack).getItem() instanceof CrystalItem crystal) {
                 Component crystalName = getCrystalTranslate(crystal.getName(stack));
                 return displayName.copy().append(crystalName);
             }
@@ -326,13 +356,12 @@ public class ArcaneWandItem extends Item implements IWissenItem, ICustomAnimatio
         list.add(Component.empty());
         list.add(Component.translatable("lore.wizards_reborn.arcane_wand.crystal").withStyle(ChatFormatting.GRAY));
 
-        CompoundTag nbt = stack.getOrCreateTag();
-        if (nbt.getBoolean("crystal")) {
-            if (ArcaneWandItem.getInventory(stack).getItem(0).getItem() instanceof CrystalItem crystal) {
+        if (getCrystal(stack)) {
+            if (getItemCrystal(stack).getItem() instanceof CrystalItem crystal) {
                 CrystalType type = crystal.getType();
                 Color color = crystal.getType().getColor();
                 for (CrystalStat stat : type.getStats()) {
-                    int statLevel = crystal.getStatLevel(ArcaneWandItem.getInventory(stack).getItem(0), stat);
+                    int statLevel = crystal.getStatLevel(getItemCrystal(stack), stat);
                     int red = (int) Mth.lerp((float) statLevel / stat.getMaxLevel(), Color.GRAY.getRed(), color.getRed());
                     int green = (int) Mth.lerp((float) statLevel / stat.getMaxLevel(), Color.GRAY.getGreen(), color.getGreen());
                     int blue = (int) Mth.lerp((float) statLevel / stat.getMaxLevel(), Color.GRAY.getBlue(), color.getBlue());
@@ -345,8 +374,8 @@ public class ArcaneWandItem extends Item implements IWissenItem, ICustomAnimatio
 
         list.add(Component.translatable("lore.wizards_reborn.arcane_wand.spell").withStyle(ChatFormatting.GRAY));
 
-        if (nbt.getString("spell") != "") {
-            Spell spell = Spells.getSpell(nbt.getString("spell"));
+        if (!getSpell(stack).isEmpty()) {
+            Spell spell = Spells.getSpell(getSpell(stack));
             Color color = spell.getColor();
             int packColor = ColorUtil.packColor(255, color.getRed(), color.getGreen(), color.getBlue());
             list.add(Component.literal(" ").append(Component.translatable(spell.getTranslatedName()).withStyle(Style.EMPTY.withColor(packColor))));
@@ -354,8 +383,7 @@ public class ArcaneWandItem extends Item implements IWissenItem, ICustomAnimatio
     }
 
     public static Component getCrystalTranslate(Component component) {
-        Component crystal = Component.literal(" - ").append(component);
-        return crystal;
+        return Component.literal(" - ").append(component);
     }
 
     @OnlyIn(Dist.CLIENT)
@@ -507,19 +535,16 @@ public class ArcaneWandItem extends Item implements IWissenItem, ICustomAnimatio
     @OnlyIn(Dist.CLIENT)
     public static void drawWandHUD(GuiGraphics gui, int x, int y, ItemStack stack, boolean drawCooldown, boolean drawWissen) {
         if (stack.getItem() instanceof ArcaneWandItem wand) {
-            CompoundTag nbt = stack.getOrCreateTag();
             existTags(stack);
             WissenItemUtil.existWissen(stack);
             Spell spell = null;
 
-            if (nbt.contains("spell")) {
-                if (nbt.getString("spell") != "") {
-                    spell = Spells.getSpell(nbt.getString("spell"));
-                }
+            if (!getSpell(stack).isEmpty()) {
+                spell = Spells.getSpell(getSpell(stack));
             }
 
-            int cooldown = nbt.getInt("cooldown");
-            int maxCooldown = nbt.getInt("maxCooldown");
+            int cooldown = getCooldown(stack);
+            int maxCooldown = getMaxCooldown(stack);
             int wissen = WissenItemUtil.getWissen(stack);
             int maxWissen = wand.getMaxWissen();
 
@@ -540,15 +565,14 @@ public class ArcaneWandItem extends Item implements IWissenItem, ICustomAnimatio
             width /= (double) maxWissen / (double) wissen;
             gui.blit(new ResourceLocation(WizardsReborn.MOD_ID + ":textures/gui/wissen_frame.png"), x + 10, y + 31, 0, 10, width, 8, 64, 64);
 
-            if (nbt.getBoolean("crystal")) {
-                SimpleContainer stack_inv = ArcaneWandItem.getInventory(stack);
-                gui.renderItem(stack_inv.getItem(0), x + 8, y);
+            if (getCrystal(stack)) {
+                gui.renderItem(getItemCrystal(stack), x + 8, y);
             }
 
             if (spell != null) {
                 if (KnowledgeUtil.isSpell(Minecraft.getInstance().player, spell)) {
                     gui.blit(spell.getIcon(), x + 28, y + 1, 0, 0, 16, 16, 16, 16);
-                    if (!spell.canWandWithCrystal(stack)) {
+                    if (!spell.canWandWithCrystal(getItemCrystal(stack))) {
                         gui.blit(new ResourceLocation(WizardsReborn.MOD_ID + ":textures/gui/arcane_wand_frame.png"), x + 27, y, 0, 18, 18, 18, 64, 64);
                     }
                 } else {
@@ -744,9 +768,7 @@ public class ArcaneWandItem extends Item implements IWissenItem, ICustomAnimatio
     @Override
     @OnlyIn(Dist.CLIENT)
     public void renderParticle(PoseStack poseStack, LivingEntity entity, Level level, ItemStack stack, int x, int y, int seed, int guiOffset) {
-        SimpleContainer inv = ArcaneWandItem.getInventory(stack);
-
-        if (inv.getItem(0).getItem() instanceof CrystalItem crystal) {
+        if (getItemCrystal(stack).getItem() instanceof CrystalItem crystal) {
             if (crystal.getPolishing().getPolishingLevel() > 0) {
                 int polishingLevel = crystal.getPolishing().getPolishingLevel();
                 if (polishingLevel > 4) polishingLevel = 4;

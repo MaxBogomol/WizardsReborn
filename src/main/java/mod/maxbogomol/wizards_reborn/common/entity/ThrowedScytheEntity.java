@@ -156,19 +156,14 @@ public class ThrowedScytheEntity extends ThrowableItemProjectile {
                 float z = (float) Math.sin(pitch) * (float) Math.sin(yaw);
 
                 addTrail(new Vec3(position().toVector3f()).add(x, y, z));
-
                 Color color = WizardsRebornArcaneEnchantments.THROW.getColor();
-                float r = color.getRed() / 255f;
-                float g = color.getGreen() / 255f;
-                float b = color.getBlue() / 255f;
-
                 Vec3 pos = new Vec3(getPosition(0.5f).toVector3f()).add(x, y, z);
 
                 if (random.nextFloat() < 0.8f) {
                     ParticleBuilder.create(FluffyFurParticles.SQUARE)
                             .setRenderType(FluffyFurRenderTypes.ADDITIVE)
                             .setBehavior(CubeParticleBehavior.create().build())
-                            .setColorData(ColorParticleData.create(r, g, b).build())
+                            .setColorData(ColorParticleData.create(color).build())
                             .setTransparencyData(GenericParticleData.create(0.3f, 0).build())
                             .setScaleData(GenericParticleData.create(0.05f, 0).setEasing(Easing.QUINTIC_IN_OUT).build())
                             .setSpinData(SpinParticleData.create().randomSpin(0.3f).build())

@@ -1,4 +1,4 @@
-package mod.maxbogomol.wizards_reborn.common.skin;
+package mod.maxbogomol.wizards_reborn.common.itemskin;
 
 import mod.maxbogomol.fluffy_fur.client.model.armor.ArmorModel;
 import mod.maxbogomol.fluffy_fur.common.itemskin.ItemClassSkinEntry;
@@ -18,23 +18,25 @@ import net.minecraftforge.api.distmarker.OnlyIn;
 
 import java.awt.*;
 
-public class SummerLoveSkin extends ItemSkin {
-    public SummerLoveSkin(String id, Color color) {
+public class MagnificentMaidSkin extends ItemSkin {
+    public MagnificentMaidSkin(String id, Color color) {
         super(id, color);
     }
 
     @Override
     public void setupSkinEntries() {
         addSkinEntry(new MagnificentMaidArmorSkinEntry(ArcaneArmorItem.class,
-                WizardsReborn.MOD_ID+":textures/models/armor/skin/summer_love")
-                .addArmorSkin(EquipmentSlot.HEAD, WizardsReborn.MOD_ID + ":summer_love_flower")
-                .addArmorSkin(EquipmentSlot.CHEST, WizardsReborn.MOD_ID + ":summer_love_dress")
-                .addArmorSkin(EquipmentSlot.FEET, WizardsReborn.MOD_ID + ":summer_love_boots"));
-        addSkinEntry(new ItemClassSkinEntry(ArcaneWandItem.class, WizardsReborn.MOD_ID+":skin/summer_love_arcane_wand"));
-        addSkinEntry(new ItemClassSkinEntry(WissenWandItem.class, WizardsReborn.MOD_ID+":summer_love_wissen_wand"));
+                WizardsReborn.MOD_ID+":textures/models/armor/skin/magnificent_maid")
+                .addArmorSkin(EquipmentSlot.HEAD, WizardsReborn.MOD_ID + ":magnificent_maid_headwear")
+                .addArmorSkin(EquipmentSlot.CHEST, WizardsReborn.MOD_ID + ":magnificent_maid_suit")
+                .addArmorSkin(EquipmentSlot.LEGS, WizardsReborn.MOD_ID + ":magnificent_maid_stockings")
+                .addArmorSkin(EquipmentSlot.FEET, WizardsReborn.MOD_ID + ":magnificent_maid_boots"));
+        addSkinEntry(new ItemClassSkinEntry(ArcaneWandItem.class, WizardsReborn.MOD_ID+":skin/magnificent_maid_arcane_wand"));
+        addSkinEntry(new ItemClassSkinEntry(WissenWandItem.class, WizardsReborn.MOD_ID+":magnificent_maid_wissen_wand"));
     }
 
     public static class MagnificentMaidArmorSkinEntry extends ArcaneArmorClassSkinEntry {
+
         public MagnificentMaidArmorSkinEntry(Class item, String skin) {
             super(item, skin);
         }

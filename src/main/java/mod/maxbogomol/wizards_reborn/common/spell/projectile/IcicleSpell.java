@@ -1,11 +1,43 @@
 package mod.maxbogomol.wizards_reborn.common.spell.projectile;
 
+import com.mojang.blaze3d.vertex.PoseStack;
+import com.mojang.blaze3d.vertex.VertexConsumer;
+import com.mojang.math.Axis;
+import mod.maxbogomol.wizards_reborn.WizardsReborn;
+import mod.maxbogomol.wizards_reborn.api.crystal.CrystalUtil;
+import mod.maxbogomol.wizards_reborn.api.spell.SpellComponent;
+import mod.maxbogomol.wizards_reborn.api.spell.SpellContext;
+import mod.maxbogomol.wizards_reborn.common.entity.SpellEntity;
+import mod.maxbogomol.wizards_reborn.common.item.equipment.arcane.ArcaneArmorItem;
+import mod.maxbogomol.wizards_reborn.common.network.PacketHandler;
+import mod.maxbogomol.wizards_reborn.common.network.spell.IcicleSpellTrailPacket;
 import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornCrystals;
+import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornEntities;
 import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornSpells;
+import net.minecraft.client.renderer.MultiBufferSource;
+import net.minecraft.client.renderer.RenderType;
+import net.minecraft.client.renderer.texture.OverlayTexture;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.sounds.SoundEvents;
+import net.minecraft.sounds.SoundSource;
+import net.minecraft.util.Mth;
+import net.minecraft.world.damagesource.DamageSource;
+import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.player.Inventory;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.phys.HitResult;
+import net.minecraft.world.phys.Vec3;
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.api.distmarker.OnlyIn;
+import org.joml.Matrix3f;
+import org.joml.Matrix4f;
 
 import java.awt.*;
 
 public class IcicleSpell extends ProjectileSpell {
+    public static final ResourceLocation ICICLE_TEXTURE = new ResourceLocation(WizardsReborn.MOD_ID,"textures/entity/spell_projectile/icicle.png");
+
     public IcicleSpell(String id, int points) {
         super(id, points);
         addCrystalType(WizardsRebornCrystals.WATER);
@@ -30,103 +62,54 @@ public class IcicleSpell extends ProjectileSpell {
     public int getMinimumPolishingLevel() {
         return 1;
     }
-/*
+
     @Override
-    public void useSpell(Level level, Player player, InteractionHand hand) {
-        if (!level.isClientSide) {
-            ItemStack stack = player.getItemInHand(hand);
+    public SpellComponent getSpellComponent() {
+        return new IcicleSpellComponent();
+    }
 
-            CompoundTag stats = getStats(stack);
-            CompoundTag spellData = new CompoundTag();
-            spellData.putBoolean("shard", true);
-
-            Vec3 pos = player.getEyePosition(0);
-            Vec3 vel = player.getEyePosition(0).add(player.getLookAngle().scale(40)).subtract(pos).scale(1.0 / 20);
-            level.addFreshEntity(new SpellProjectileEntity(WizardsRebornEntities.SPELL_PROJECTILE.get(), level).shoot(
-                    pos.x, pos.y - 0.2f, pos.z, vel.x, vel.y, vel.z, player.getUUID(), this.getId(), stats
-            ).createSpellData(spellData));
-            setCooldown(stack, stats);
-            removeWissen(stack, stats, player);
-            awardStat(player, stack);
-            spellSound(player, level);
+    @Override
+    public void useSpell(Level level, SpellContext spellContext) {
+        if (!level.isClientSide()) {
+            Vec3 pos = spellContext.getPos();
+            Vec3 vel = spellContext.getPos().add(spellContext.getVec().scale(40)).subtract(pos).scale(1.0 / 20);
+            SpellEntity entity = new SpellEntity(WizardsRebornEntities.SPELL.get(), level);
+            entity.setup(pos.x, pos.y - 0.2f, pos.z, spellContext.getEntity(), this.getId(), spellContext.getStats());
+            entity.setDeltaMovement(vel);
+            IcicleSpellComponent spellComponent = (IcicleSpellComponent) entity.getSpellComponent();
+            spellComponent.shard = true;
+            entity.updateSpellComponent(spellComponent);
+            level.addFreshEntity(entity);
+            spellContext.setCooldown(this);
+            spellContext.removeWissen(this);
+            spellContext.awardStat(this);
+            spellContext.spellSound(this);
         }
     }
 
     @Override
-    public void entityTick(SpellProjectileEntity entity) {
-        if (!entity.level().isClientSide) {
-            boolean hasEffectTrue = true;
-            HitResult ray = ProjectileUtil.getHitResultOnMoveVector(entity, (e) -> {
-                return !e.isSpectator() && e.isPickable() && (!e.getUUID().equals(entity.getSenderUUID()) || entity.tickCount > 5);
-            });
-            if (ray.getType() == HitResult.Type.ENTITY) {
-                entity.onImpact(ray, ((EntityHitResult) ray).getEntity());
-                hasEffectTrue = false;
-            } else if (ray.getType() == HitResult.Type.BLOCK) {
-                entity.onImpact(ray);
-            } else {
-                updatePos(entity);
-                updateRot(entity);
-            }
+    public void onImpact(Level level, SpellEntity entity, HitResult hitResult, Entity target) {
+        super.onImpact(level, entity, hitResult, target);
+        IcicleSpellComponent spellComponent = (IcicleSpellComponent) entity.getSpellComponent();
 
-            if (hasEffectTrue) rayEffect(entity);
-        } else {
-            updatePos(entity);
-            updateRot(entity);
-        }
-    }
-
-    @Override
-    public void updatePos(SpellProjectileEntity entity) {
-        Vec3 motion = entity.getDeltaMovement();
-        entity.setDeltaMovement(motion.x * 0.98, (motion.y > 0 ? motion.y * 0.98 : motion.y) - 0.011f, motion.z * 0.98);
-
-        Vec3 pos = entity.position();
-        entity.xo = pos.x;
-        entity.yo = pos.y;
-        entity.zo = pos.z;
-        entity.setPos(pos.x + motion.x, pos.y + motion.y, pos.z + motion.z);
-    }
-
-    public void rayEffect(SpellProjectileEntity entity) {
-        if (entity.tickCount > 1) {
-            Vec3 motion = entity.getDeltaMovement();
-            Vec3 pos = entity.position();
-            Vec3 norm = motion.normalize().scale(0.025f);
-
-            Color color = getColor();
-            float r = color.getRed() / 255f;
-            float g = color.getGreen() / 255f;
-            float b = color.getBlue() / 255f;
-
-            PacketHandler.sendToTracking(entity.level(), new BlockPos((int) pos.x, (int) pos.y, (int) pos.z), new IcicleRayEffectPacket((float) entity.xo, (float) entity.yo + 0.2f, (float) entity.zo, (float) pos.x, (float) pos.y + 0.2f, (float) pos.z, (float) norm.x, (float) norm.y, (float) norm.z, r, g, b));
-        }
-    }
-
-    @Override
-    public void onImpact(HitResult ray, Level level, SpellProjectileEntity projectile, Player player, Entity target) {
-        projectile.burstEffect();
-        projectile.remove();
-        level.playSound(WizardsReborn.proxy.getPlayer(), projectile.getX(), projectile.getY(), projectile.getZ(), SoundEvents.GLASS_BREAK, SoundSource.PLAYERS, 1f, (float) (1f + ((random.nextFloat() - 0.5D) / 4)));
-
-        int focusLevel = CrystalUtil.getStatLevel(projectile.getStats(), WizardsRebornCrystals.FOCUS);
-        float magicModifier = ArcaneArmorItem.getPlayerMagicModifier(player);
+        int focusLevel = CrystalUtil.getStatLevel(entity.getStats(), WizardsRebornCrystals.FOCUS);
+        float magicModifier = ArcaneArmorItem.getPlayerMagicModifier(entity.getOwner());
         float damage = (float) (2f + (focusLevel * 0.75)) + magicModifier;
 
-        CompoundTag spellData = projectile.getSpellData();
-        if (spellData.contains("shard") && spellData.getBoolean("shard")) {
-            createShards(level, projectile, player, (int) (focusLevel + magicModifier));
+        if (spellComponent.shard) {
+            createShards(level, entity, (int) (focusLevel + magicModifier));
         } else {
             damage = damage / 2f;
         }
 
-        DamageSource generic = new DamageSource(target.damageSources().generic().typeHolder(), projectile, player);
+        DamageSource generic = getDamage(target.damageSources().generic().typeHolder(), entity, entity.getOwner());
         target.hurt(generic, 3);
         if (target instanceof Player targetPlayer) {
             targetPlayer.getInventory().hurtArmor(generic, 3, Inventory.ALL_ARMOR_SLOTS);
         }
         target.invulnerableTime = 0;
-        target.hurt(new DamageSource(target.damageSources().freeze().typeHolder(), projectile, player), damage);
+        DamageSource damageSource = getDamage(target.damageSources().freeze().typeHolder(), entity, entity.getOwner());
+        target.hurt(damageSource, damage);
         target.clearFire();
         int frost = target.getTicksFrozen() + 500;
         if (frost > 2000) frost = 2000;
@@ -134,48 +117,59 @@ public class IcicleSpell extends ProjectileSpell {
     }
 
     @Override
-    public void onImpact(HitResult ray, Level level, SpellProjectileEntity projectile, Player player) {
-        projectile.setPos(ray.getLocation().x, ray.getLocation().y, ray.getLocation().z);
-        projectile.burstEffect();
-        projectile.remove();
-        level.playSound(WizardsReborn.proxy.getPlayer(), projectile.getX(), projectile.getY(), projectile.getZ(), SoundEvents.GLASS_BREAK, SoundSource.PLAYERS, 1f, (float) (1f + ((random.nextFloat() - 0.5D) / 4)));
-
-        int focusLevel = CrystalUtil.getStatLevel(projectile.getStats(), WizardsRebornCrystals.FOCUS);
-        float magicModifier = ArcaneArmorItem.getPlayerMagicModifier(player);
-
-        CompoundTag spellData = projectile.getSpellData();
-        if (spellData.contains("shard") && spellData.getBoolean("shard")) {
-            createShards(level, projectile, player, (int) (focusLevel + magicModifier));
+    public void onImpact(Level level, SpellEntity entity, HitResult hitResult) {
+        super.onImpact(level, entity, hitResult);
+        IcicleSpellComponent spellComponent = (IcicleSpellComponent) entity.getSpellComponent();
+        int focusLevel = CrystalUtil.getStatLevel(entity.getStats(), WizardsRebornCrystals.FOCUS);
+        float magicModifier = ArcaneArmorItem.getPlayerMagicModifier(entity.getOwner());
+        if (spellComponent.shard) {
+            createShards(level, entity, (int) (focusLevel + magicModifier));
         }
     }
 
-    public void createShards(Level level, SpellProjectileEntity projectile, Player player, int count) {
+    @Override
+    public void trailEffect(Level level, SpellEntity entity) {
+        if (!entity.level().isClientSide()) {
+            Vec3 motion = entity.getDeltaMovement();
+            Vec3 pos = entity.position();
+            Vec3 norm = motion.normalize().scale(0.005f);
+            PacketHandler.sendToTracking(level, entity.blockPosition(), new IcicleSpellTrailPacket(new Vec3(entity.xo, entity.yo + 0.2f, entity.zo), pos.add(0, 0.2f, 0), norm, getColor()));
+        }
+    }
+
+    @Override
+    public void burstSound(Level level, SpellEntity entity) {
+        level.playSound(null, entity.getX(), entity.getY(), entity.getZ(), SoundEvents.GLASS_BREAK, SoundSource.PLAYERS, 1f, (float) (1f + ((random.nextFloat() - 0.5D) / 4)));
+    }
+
+    public void createShards(Level level, SpellEntity entity, int count) {
         for (int i = 0; i < count; i++) {
-            CompoundTag spellData = new CompoundTag();
-            spellData.putBoolean("shard", false);
-
-            Vec3 pos = projectile.getEyePosition(0);
+            Vec3 pos = entity.getEyePosition();
             Vec3 vel = new Vec3((random.nextFloat() - 0.5f) * 0.3f, random.nextFloat() * 0.2f, (random.nextFloat() - 0.5f) * 0.3f);
-            level.addFreshEntity(new SpellProjectileEntity(WizardsRebornEntities.SPELL_PROJECTILE.get(), level).shoot(
-                    pos.x, pos.y - 0.2f, pos.z, vel.x, vel.y, vel.z, player.getUUID(), this.getId(), projectile.getStats()
-            ).createSpellData(spellData));
+            SpellEntity newEntity = new SpellEntity(WizardsRebornEntities.SPELL.get(), level);
+            newEntity.setup(pos.x, pos.y - 0.2f, pos.z, entity.getOwner(), this.getId(), entity.getStats());
+            newEntity.setDeltaMovement(vel);
+            level.addFreshEntity(newEntity);
         }
     }
-
-    public static final ResourceLocation ICICLE_TEXTURE = new ResourceLocation(WizardsReborn.MOD_ID,"textures/entity/spell_projectile/icicle.png");
 
     @Override
     @OnlyIn(Dist.CLIENT)
-    public void render(SpellProjectileEntity entity, float entityYaw, float partialTicks, PoseStack stack, MultiBufferSource buffer, int light) {
-        stack.pushPose();
-        stack.translate(0.0F, 0.2F, 0.0F);
-        stack.mulPose(Axis.YP.rotationDegrees(Mth.lerp(partialTicks, entity.yRotO, entity.getYRot()) - 90.0F));
-        stack.mulPose(Axis.ZP.rotationDegrees(Mth.lerp(partialTicks, entity.xRotO, entity.getXRot())));
-        stack.mulPose(Axis.XP.rotationDegrees(45.0F));
-        stack.scale(0.05625F, 0.05625F, 0.05625F);
-        stack.translate(2.0F, 0.0F, 0.0F);
-        renderIcicle(ICICLE_TEXTURE, stack, buffer, light);
-        stack.popPose();
+    public void render(SpellEntity entity, float entityYaw, float partialTicks, PoseStack poseStack, MultiBufferSource buffer, int light) {
+        super.render(entity, entityYaw, partialTicks, poseStack, buffer, light);
+        ProjectileSpellComponent spellComponent = (ProjectileSpellComponent) entity.getSpellComponent();
+
+        if (!spellComponent.fade) {
+            poseStack.pushPose();
+            poseStack.translate(0.0F, 0.2F, 0.0F);
+            poseStack.mulPose(Axis.YP.rotationDegrees(Mth.lerp(partialTicks, entity.yRotO, entity.getYRot()) - 90.0F));
+            poseStack.mulPose(Axis.ZP.rotationDegrees(Mth.lerp(partialTicks, entity.xRotO, entity.getXRot())));
+            poseStack.mulPose(Axis.XP.rotationDegrees(45.0F));
+            poseStack.scale(0.05625F, 0.05625F, 0.05625F);
+            poseStack.translate(2.0F, 0.0F, 0.0F);
+            renderIcicle(ICICLE_TEXTURE, poseStack, buffer, light);
+            poseStack.popPose();
+        }
     }
 
     @OnlyIn(Dist.CLIENT)
@@ -202,7 +196,7 @@ public class IcicleSpell extends ProjectileSpell {
         }
     }
 
-    public void vertex(Matrix4f pMatrix, Matrix3f pNormal, VertexConsumer pConsumer, int pX, int pY, int pZ, float pU, float pV, int pNormalX, int pNormalZ, int pNormalY, int light) {
-        pConsumer.vertex(pMatrix, (float)pX, (float)pY, (float)pZ).color(255, 255, 255, 255).uv(pU, pV).overlayCoords(OverlayTexture.NO_OVERLAY).uv2(light).normal(pNormal, (float)pNormalX, (float)pNormalY, (float)pNormalZ).endVertex();
-    }*/
+    public void vertex(Matrix4f matrix, Matrix3f normal, VertexConsumer pConsumer, int x, int y, int z, float u, float v, int normalX, int normalZ, int normalY, int light) {
+        pConsumer.vertex(matrix, (float) x, (float) y, (float) z).color(255, 255, 255, 255).uv(u, v).overlayCoords(OverlayTexture.NO_OVERLAY).uv2(light).normal(normal, (float) normalX, (float) normalY, (float) normalZ).endVertex();
+    }
 }

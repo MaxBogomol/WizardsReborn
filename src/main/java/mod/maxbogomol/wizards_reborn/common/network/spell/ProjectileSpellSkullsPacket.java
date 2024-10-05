@@ -18,13 +18,13 @@ import net.minecraftforge.network.simple.SimpleChannel;
 import java.awt.*;
 import java.util.function.Supplier;
 
-public class HolyProjectileSpellSkullsPacket extends PositionColorClientPacket {
+public class ProjectileSpellSkullsPacket extends PositionColorClientPacket {
 
-    public HolyProjectileSpellSkullsPacket(double x, double y, double z, float r, float g, float b, float a) {
+    public ProjectileSpellSkullsPacket(double x, double y, double z, float r, float g, float b, float a) {
         super(x, y, z, r, g, b, a);
     }
 
-    public HolyProjectileSpellSkullsPacket(Vec3 vec, Color color) {
+    public ProjectileSpellSkullsPacket(Vec3 vec, Color color) {
         super(vec, color);
     }
 
@@ -61,10 +61,10 @@ public class HolyProjectileSpellSkullsPacket extends PositionColorClientPacket {
     }
 
     public static void register(SimpleChannel instance, int index) {
-        instance.registerMessage(index, HolyProjectileSpellSkullsPacket.class, HolyProjectileSpellSkullsPacket::encode, HolyProjectileSpellSkullsPacket::decode, HolyProjectileSpellSkullsPacket::handle);
+        instance.registerMessage(index, ProjectileSpellSkullsPacket.class, ProjectileSpellSkullsPacket::encode, ProjectileSpellSkullsPacket::decode, ProjectileSpellSkullsPacket::handle);
     }
 
-    public static HolyProjectileSpellSkullsPacket decode(FriendlyByteBuf buf) {
-        return decode(HolyProjectileSpellSkullsPacket::new, buf);
+    public static ProjectileSpellSkullsPacket decode(FriendlyByteBuf buf) {
+        return decode(ProjectileSpellSkullsPacket::new, buf);
     }
 }

@@ -1,4 +1,4 @@
-package mod.maxbogomol.wizards_reborn.common.skin;
+package mod.maxbogomol.wizards_reborn.common.itemskin;
 
 import mod.maxbogomol.fluffy_fur.common.itemskin.ArmorClassSkinEntry;
 import mod.maxbogomol.wizards_reborn.common.item.equipment.arcane.ArcaneArmorItem;

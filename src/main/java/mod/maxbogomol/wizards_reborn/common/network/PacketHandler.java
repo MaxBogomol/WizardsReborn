@@ -80,8 +80,8 @@ public final class PacketHandler {
 
         ProjectileSpellBurstPacket.register(HANDLER, id++);
         ProjectileSpellTrailPacket.register(HANDLER, id++);
-        HolyProjectileSpellHeartsPacket.register(HANDLER, id++);
-        HolyProjectileSpellSkullsPacket.register(HANDLER, id++);
+        ProjectileSpellHeartsPacket.register(HANDLER, id++);
+        ProjectileSpellSkullsPacket.register(HANDLER, id++);
         HANDLER.registerMessage(id++, RaySpellEffectPacket.class, RaySpellEffectPacket::encode, RaySpellEffectPacket::decode, RaySpellEffectPacket::handle);
 
         ArcanemiconOfferingEffectPacket.register(HANDLER, id++);
@@ -106,13 +106,13 @@ public final class PacketHandler {
         HANDLER.registerMessage(id++, HeartOfNatureSpellEffectPacket.class, HeartOfNatureSpellEffectPacket::encode, HeartOfNatureSpellEffectPacket::decode, HeartOfNatureSpellEffectPacket::handle);
         HANDLER.registerMessage(id++, MagicSproutSpellEffectPacket.class, MagicSproutSpellEffectPacket::encode, MagicSproutSpellEffectPacket::decode, MagicSproutSpellEffectPacket::handle);
         HANDLER.registerMessage(id++, WaterBreathingSpellEffectPacket.class, WaterBreathingSpellEffectPacket::encode, WaterBreathingSpellEffectPacket::decode, WaterBreathingSpellEffectPacket::handle);
-        HANDLER.registerMessage(id++, AirFlowSpellEffectPacket.class, AirFlowSpellEffectPacket::encode, AirFlowSpellEffectPacket::decode, AirFlowSpellEffectPacket::handle);
+        AirFlowSpellPacket.register(HANDLER, id++);
         HANDLER.registerMessage(id++, FireShieldSpellEffectPacket.class, FireShieldSpellEffectPacket::encode, FireShieldSpellEffectPacket::decode, FireShieldSpellEffectPacket::handle);
         HANDLER.registerMessage(id++, BlinkSpellEffectPacket.class, BlinkSpellEffectPacket::encode, BlinkSpellEffectPacket::decode, BlinkSpellEffectPacket::handle);
         HANDLER.registerMessage(id++, AuraSpellCastEffectPacket.class, AuraSpellCastEffectPacket::encode, AuraSpellCastEffectPacket::decode, AuraSpellCastEffectPacket::handle);
         HANDLER.registerMessage(id++, AuraSpellBurstEffectPacket.class, AuraSpellBurstEffectPacket::encode, AuraSpellBurstEffectPacket::decode, AuraSpellBurstEffectPacket::handle);
         HANDLER.registerMessage(id++, FrostAuraSpellBurstEffectPacket.class, FrostAuraSpellBurstEffectPacket::encode, FrostAuraSpellBurstEffectPacket::decode, FrostAuraSpellBurstEffectPacket::handle);
-        HANDLER.registerMessage(id++, IcicleRayEffectPacket.class, IcicleRayEffectPacket::encode, IcicleRayEffectPacket::decode, IcicleRayEffectPacket::handle);
+        IcicleSpellTrailPacket.register(HANDLER, id++);
         HANDLER.registerMessage(id++, StrikeSpellEffectPacket.class, StrikeSpellEffectPacket::encode, StrikeSpellEffectPacket::decode, StrikeSpellEffectPacket::handle);
         HANDLER.registerMessage(id++, PoisonSpellEffectPacket.class, PoisonSpellEffectPacket::encode, PoisonSpellEffectPacket::decode, PoisonSpellEffectPacket::handle);
         HANDLER.registerMessage(id++, WitheringSpellEffectPacket.class, WitheringSpellEffectPacket::encode, WitheringSpellEffectPacket::decode, WitheringSpellEffectPacket::handle);

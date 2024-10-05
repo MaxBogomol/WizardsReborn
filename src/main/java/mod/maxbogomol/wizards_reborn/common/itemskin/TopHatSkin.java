@@ -1,4 +1,4 @@
-package mod.maxbogomol.wizards_reborn.common.skin;
+package mod.maxbogomol.wizards_reborn.common.itemskin;
 
 import mod.maxbogomol.fluffy_fur.client.model.armor.ArmorModel;
 import mod.maxbogomol.fluffy_fur.common.itemskin.ItemSkin;
@@ -27,6 +27,7 @@ public class TopHatSkin extends ItemSkin {
     }
 
     public static class TopHatArmorSkinEntry extends ArcaneArmorClassSkinEntry {
+
         public TopHatArmorSkinEntry(Class item, String skin) {
             super(item, skin);
         }

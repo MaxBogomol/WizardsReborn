@@ -1,4 +1,4 @@
-package mod.maxbogomol.wizards_reborn.common.skin;
+package mod.maxbogomol.wizards_reborn.common.itemskin;
 
 import mod.maxbogomol.fluffy_fur.common.itemskin.ItemSkin;
 import mod.maxbogomol.wizards_reborn.WizardsReborn;

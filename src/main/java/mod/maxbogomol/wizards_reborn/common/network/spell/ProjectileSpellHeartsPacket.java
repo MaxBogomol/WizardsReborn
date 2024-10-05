@@ -18,13 +18,13 @@ import net.minecraftforge.network.simple.SimpleChannel;
 import java.awt.*;
 import java.util.function.Supplier;
 
-public class HolyProjectileSpellHeartsPacket extends PositionColorClientPacket {
+public class ProjectileSpellHeartsPacket extends PositionColorClientPacket {
 
-    public HolyProjectileSpellHeartsPacket(double x, double y, double z, float r, float g, float b, float a) {
+    public ProjectileSpellHeartsPacket(double x, double y, double z, float r, float g, float b, float a) {
         super(x, y, z, r, g, b, a);
     }
 
-    public HolyProjectileSpellHeartsPacket(Vec3 vec, Color color) {
+    public ProjectileSpellHeartsPacket(Vec3 vec, Color color) {
         super(vec, color);
     }
 
@@ -61,10 +61,10 @@ public class HolyProjectileSpellHeartsPacket extends PositionColorClientPacket {
     }
 
     public static void register(SimpleChannel instance, int index) {
-        instance.registerMessage(index, HolyProjectileSpellHeartsPacket.class, HolyProjectileSpellHeartsPacket::encode, HolyProjectileSpellHeartsPacket::decode, HolyProjectileSpellHeartsPacket::handle);
+        instance.registerMessage(index, ProjectileSpellHeartsPacket.class, ProjectileSpellHeartsPacket::encode, ProjectileSpellHeartsPacket::decode, ProjectileSpellHeartsPacket::handle);
     }
 
-    public static HolyProjectileSpellHeartsPacket decode(FriendlyByteBuf buf) {
-        return decode(HolyProjectileSpellHeartsPacket::new, buf);
+    public static ProjectileSpellHeartsPacket decode(FriendlyByteBuf buf) {
+        return decode(ProjectileSpellHeartsPacket::new, buf);
     }
 }

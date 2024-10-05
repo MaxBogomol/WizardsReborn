@@ -51,10 +51,10 @@ public class ProjectileSpell extends Spell {
         if (!level.isClientSide()) {
             Vec3 pos = spellContext.getPos();
             Vec3 vel = spellContext.getPos().add(spellContext.getVec().scale(40)).subtract(pos).scale(1.0 / 30);
-            SpellEntity projectile = new SpellEntity(WizardsRebornEntities.SPELL.get(), level);
-            projectile.setup(pos.x, pos.y - 0.2f, pos.z, spellContext.getEntity(), this.getId(), spellContext.getStats());
-            projectile.setDeltaMovement(vel);
-            level.addFreshEntity(projectile);
+            SpellEntity entity = new SpellEntity(WizardsRebornEntities.SPELL.get(), level);
+            entity.setup(pos.x, pos.y - 0.2f, pos.z, spellContext.getEntity(), this.getId(), spellContext.getStats());
+            entity.setDeltaMovement(vel);
+            level.addFreshEntity(entity);
             spellContext.setCooldown(this);
             spellContext.removeWissen(this);
             spellContext.awardStat(this);
@@ -129,7 +129,7 @@ public class ProjectileSpell extends Spell {
         if (!level.isClientSide()) {
             ProjectileSpellComponent spellComponent = (ProjectileSpellComponent) entity.getSpellComponent();
             spellComponent.fade = true;
-            spellComponent.fadeTick = 21;
+            spellComponent.fadeTick = spellComponent.getTrailSize() + 1;
             entity.updateSpellComponent(spellComponent);
             burstEffectEntity(level, entity);
             burstSound(level, entity);
@@ -140,7 +140,7 @@ public class ProjectileSpell extends Spell {
         if (!level.isClientSide()) {
             ProjectileSpellComponent spellComponent = (ProjectileSpellComponent) entity.getSpellComponent();
             spellComponent.fade = true;
-            spellComponent.fadeTick = 21;
+            spellComponent.fadeTick = spellComponent.getTrailSize() + 1;
             entity.updateSpellComponent(spellComponent);
             entity.setPos(hitResult.getLocation());
             burstEffectBlock(level, entity);

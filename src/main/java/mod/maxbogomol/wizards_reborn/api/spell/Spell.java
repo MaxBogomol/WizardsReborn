@@ -21,7 +21,6 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
-import net.minecraft.world.SimpleContainer;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.damagesource.DamageType;
 import net.minecraft.world.entity.Entity;
@@ -148,13 +147,10 @@ public class Spell {
     }
 
     public boolean canWandWithCrystal(ItemStack stack) {
-        if (stack.getItem() instanceof ArcaneWandItem) {
-            SimpleContainer stack_inv = ArcaneWandItem.getInventory(stack);
-            if (stack_inv.getItem(0).getItem() instanceof CrystalItem crystal) {
-                for (CrystalType type : getCrystalTypes()) {
-                    if (crystal.getType() == type && crystal.getPolishing().getPolishingLevel() >= getMinimumPolishingLevel()) {
-                        return true;
-                    }
+        if (stack.getItem() instanceof CrystalItem crystal) {
+            for (CrystalType type : getCrystalTypes()) {
+                if (crystal.getType() == type && crystal.getPolishing().getPolishingLevel() >= getMinimumPolishingLevel()) {
+                    return true;
                 }
             }
         }
