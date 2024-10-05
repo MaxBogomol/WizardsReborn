@@ -1,6 +1,7 @@
 package mod.maxbogomol.wizards_reborn.common.item.equipment.curio;
 
 import mod.maxbogomol.fluffy_fur.client.event.ClientTickHandler;
+import mod.maxbogomol.fluffy_fur.integration.common.curios.BaseCurioItem;
 import mod.maxbogomol.fluffy_fur.util.ColorUtil;
 import mod.maxbogomol.wizards_reborn.WizardsReborn;
 import net.minecraft.ChatFormatting;
@@ -32,7 +33,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class LeatherCollarItem extends BaseCurioItem implements ICurioItemTexture {
+public class LeatherCollarItem extends BaseCurioItem {
 
     private static final ResourceLocation COLLAR_TEXTURE = new ResourceLocation(WizardsReborn.MOD_ID,"textures/entity/curio/leather_collar.png");
 

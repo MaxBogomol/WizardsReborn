@@ -36,7 +36,7 @@ public class HeartOfNatureSpell extends SelfSpell {
     public int getWissenCost() {
         return 200;
     }
-
+/*
     @Override
     public void selfSpell(Level level, Player player, InteractionHand hand) {
         ItemStack stack = player.getItemInHand(hand);
@@ -64,5 +64,5 @@ public class HeartOfNatureSpell extends SelfSpell {
         float b = color.getBlue() / 255f;
 
         PacketHandler.sendToTracking(player.level(), player.getOnPos(), new HeartOfNatureSpellEffectPacket((float) player.getX(), (float) player.getY() + (player.getBbHeight() / 2), (float) player.getZ(), r, g, b));
-    }
+    }*/
 }

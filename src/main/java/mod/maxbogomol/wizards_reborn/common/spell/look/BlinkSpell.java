@@ -1,27 +1,7 @@
 package mod.maxbogomol.wizards_reborn.common.spell.look;
 
-import mod.maxbogomol.wizards_reborn.WizardsReborn;
-import mod.maxbogomol.wizards_reborn.api.crystal.CrystalUtil;
 import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornCrystals;
-import mod.maxbogomol.wizards_reborn.registry.common.damage.WizardsRebornDamage;
-import mod.maxbogomol.wizards_reborn.common.item.equipment.arcane.ArcaneArmorItem;
-import mod.maxbogomol.wizards_reborn.common.network.PacketHandler;
-import mod.maxbogomol.wizards_reborn.common.network.SetAdditionalFovPacket;
-import mod.maxbogomol.wizards_reborn.common.network.spell.BlinkSpellEffectPacket;
 import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornSpells;
-import net.minecraft.nbt.CompoundTag;
-import net.minecraft.sounds.SoundEvents;
-import net.minecraft.sounds.SoundSource;
-import net.minecraft.world.InteractionHand;
-import net.minecraft.world.damagesource.DamageSource;
-import net.minecraft.world.effect.MobEffectInstance;
-import net.minecraft.world.effect.MobEffects;
-import net.minecraft.world.entity.Entity;
-import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.level.Level;
-import net.minecraft.world.phys.Vec3;
 
 import java.awt.*;
 
@@ -49,7 +29,7 @@ public class BlinkSpell extends LookSpell {
         return 100;
     }
 
-    @Override
+/*    @Override
     public float getLookDistance() {
         if (isSharp) return 6f;
         return 5f;
@@ -64,8 +44,8 @@ public class BlinkSpell extends LookSpell {
     @Override
     public float getLookAdditionalDistance() {
         return 0.5f;
-    }
-
+    }*/
+/*
     @Override
     public void lookSpell(Level level, Player player, InteractionHand hand) {
         Vec3 pos = getHitPos(level, player, hand).getPosHit();
@@ -100,5 +80,5 @@ public class BlinkSpell extends LookSpell {
         if (magicModifier > 0) {
             player.addEffect(new MobEffectInstance(MobEffects.SLOW_FALLING, (int) (40 * magicModifier), 0));
         }
-    }
+    }*/
 }

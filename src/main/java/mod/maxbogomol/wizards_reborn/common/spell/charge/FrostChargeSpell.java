@@ -1,15 +1,7 @@
 package mod.maxbogomol.wizards_reborn.common.spell.charge;
 
-import mod.maxbogomol.wizards_reborn.api.crystal.CrystalUtil;
-import mod.maxbogomol.wizards_reborn.common.entity.SpellProjectileEntity;
-import mod.maxbogomol.wizards_reborn.common.item.equipment.arcane.ArcaneArmorItem;
 import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornCrystals;
 import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornSpells;
-import net.minecraft.world.damagesource.DamageSource;
-import net.minecraft.world.entity.Entity;
-import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.level.Level;
-import net.minecraft.world.phys.HitResult;
 
 import java.awt.*;
 
@@ -23,7 +15,7 @@ public class FrostChargeSpell extends ChargeSpell {
     public Color getColor() {
         return WizardsRebornSpells.frostSpellColor;
     }
-
+/*
     @Override
     public void onImpact(HitResult ray, Level level, SpellProjectileEntity projectile, Player player, Entity target) {
         super.onImpact(ray, level, projectile, player, target);
@@ -43,5 +35,5 @@ public class FrostChargeSpell extends ChargeSpell {
         target.setTicksFrozen(frost);
 
         target.hurt(new DamageSource(target.damageSources().freeze().typeHolder(), projectile, player), damage);
-    }
+    }*/
 }

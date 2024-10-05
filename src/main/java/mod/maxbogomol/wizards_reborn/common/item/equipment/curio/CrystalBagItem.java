@@ -1,6 +1,7 @@
 package mod.maxbogomol.wizards_reborn.common.item.equipment.curio;
 
 import mod.maxbogomol.fluffy_fur.common.item.ItemBackedInventory;
+import mod.maxbogomol.fluffy_fur.integration.common.curios.BaseCurioItem;
 import mod.maxbogomol.wizards_reborn.WizardsReborn;
 import mod.maxbogomol.wizards_reborn.client.gui.container.CrystalBagContainer;
 import mod.maxbogomol.wizards_reborn.common.item.equipment.IBagItem;
@@ -40,7 +41,7 @@ import java.awt.*;
 import java.util.Iterator;
 import java.util.stream.Stream;
 
-public class CrystalBagItem extends BaseCurioItem implements ICurioItemTexture, IBagItem {
+public class CrystalBagItem extends BaseCurioItem implements IBagItem {
 
     public static Color color = new Color(153, 246, 146);
 

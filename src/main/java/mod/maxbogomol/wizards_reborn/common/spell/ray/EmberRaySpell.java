@@ -1,23 +1,8 @@
 package mod.maxbogomol.wizards_reborn.common.spell.ray;
 
-import mod.maxbogomol.wizards_reborn.api.crystal.CrystalUtil;
-import mod.maxbogomol.wizards_reborn.api.wissen.WissenItemUtil;
-import mod.maxbogomol.wizards_reborn.common.entity.SpellProjectileEntity;
-import mod.maxbogomol.wizards_reborn.common.item.equipment.arcane.ArcaneArmorItem;
-import mod.maxbogomol.wizards_reborn.common.spell.look.LookSpell;
-import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornCrystals;
-import mod.maxbogomol.wizards_reborn.registry.common.damage.WizardsRebornDamage;
-import net.minecraft.world.damagesource.DamageSource;
-import net.minecraft.world.entity.Entity;
-import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.level.Level;
-import net.minecraft.world.phys.HitResult;
-import net.minecraft.world.phys.Vec3;
+import mod.maxbogomol.wizards_reborn.common.entity.SpellEntity;
 
 import java.awt.*;
-import java.util.function.Predicate;
 
 public class EmberRaySpell extends FireRaySpell {
     public Color secondColor = new Color(0.979f, 0.912f, 0.585f);
@@ -51,7 +36,7 @@ public class EmberRaySpell extends FireRaySpell {
         return 1;
     }
 
-    @Override
+/*    @Override
     public void rayTick(SpellProjectileEntity entity, HitResult ray) {
         Player player = entity.getSender();
 
@@ -89,15 +74,15 @@ public class EmberRaySpell extends FireRaySpell {
     @Override
     public HitResult getHitResult(SpellProjectileEntity pProjectile, Vec3 pStartVec, Vec3 pEndVecOffset, Level pLevel, Predicate<Entity> pFilter) {
         return getHitResultStandard(pProjectile, pStartVec, pEndVecOffset, pLevel, (e) -> {return false;});
-    }
+    }*/
 
     @Override
-    public int getBlockTicks(SpellProjectileEntity projectile, int focusLevel) {
+    public int getBlockTicks(SpellEntity projectile, int focusLevel) {
         return 3;
     }
 
     @Override
-    public int getBlockWissen(SpellProjectileEntity projectile, int focusLevel) {
+    public int getBlockWissen(SpellEntity projectile, int focusLevel) {
         return 10;
     }
 }

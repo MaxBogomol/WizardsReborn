@@ -1,23 +1,11 @@
 package mod.maxbogomol.wizards_reborn.common.spell.look;
 
 import mod.maxbogomol.fluffy_fur.client.animation.ItemAnimation;
-import mod.maxbogomol.fluffy_fur.client.particle.ParticleBuilder;
-import mod.maxbogomol.fluffy_fur.client.particle.data.ColorParticleData;
-import mod.maxbogomol.fluffy_fur.client.particle.data.GenericParticleData;
-import mod.maxbogomol.fluffy_fur.registry.client.FluffyFurParticles;
-import mod.maxbogomol.wizards_reborn.api.crystal.CrystalUtil;
 import mod.maxbogomol.wizards_reborn.client.animation.StrikeSpellItemAnimation;
 import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornCrystals;
 import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornSpells;
-import net.minecraft.nbt.CompoundTag;
-import net.minecraft.world.InteractionHand;
-import net.minecraft.world.entity.ExperienceOrb;
-import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.UseAnim;
-import net.minecraft.world.level.Level;
-import net.minecraft.world.phys.Vec3;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 
@@ -50,6 +38,7 @@ public class WisdomSpell extends LookSpell {
     public int getMinimumPolishingLevel() {
         return 1;
     }
+/*
 
     @Override
     public void useSpell(Level level, Player player, InteractionHand hand) {
@@ -107,6 +96,7 @@ public class WisdomSpell extends LookSpell {
 
         level.addFreshEntity(new ExperienceOrb(level, pos.x, pos.y, pos.z, exp));
     }
+*/
 
     @Override
     public UseAnim getUseAnimation(ItemStack stack) {

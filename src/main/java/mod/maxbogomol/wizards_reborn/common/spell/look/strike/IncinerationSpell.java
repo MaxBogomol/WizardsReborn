@@ -1,15 +1,7 @@
 package mod.maxbogomol.wizards_reborn.common.spell.look.strike;
 
-import mod.maxbogomol.wizards_reborn.api.crystal.CrystalUtil;
-import mod.maxbogomol.wizards_reborn.common.entity.SpellProjectileEntity;
-import mod.maxbogomol.wizards_reborn.common.item.equipment.arcane.ArcaneArmorItem;
 import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornCrystals;
-import mod.maxbogomol.wizards_reborn.registry.common.damage.WizardsRebornDamage;
 import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornSpells;
-import net.minecraft.world.damagesource.DamageSource;
-import net.minecraft.world.entity.Entity;
-import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.world.entity.player.Player;
 
 import java.awt.*;
 
@@ -40,7 +32,7 @@ public class IncinerationSpell extends StrikeSpell {
     public int getWissenCost() {
         return 600;
     }
-
+/*
     @Override
     public void strikeDamage(SpellProjectileEntity entity, Player player) {
         int focusLevel = CrystalUtil.getStatLevel(entity.getStats(), WizardsRebornCrystals.FOCUS);
@@ -60,5 +52,5 @@ public class IncinerationSpell extends StrikeSpell {
                 target.hurt(new DamageSource(WizardsRebornDamage.create(target.level(), WizardsRebornDamage.ARCANE_MAGIC).typeHolder(), entity, player), 10);
             }
         }
-    }
+    }*/
 }

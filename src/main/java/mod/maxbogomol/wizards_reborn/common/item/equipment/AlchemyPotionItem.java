@@ -73,8 +73,8 @@ public class AlchemyPotionItem extends PlacedItem {
     }
 
     @Override
-    public ItemStack finishUsingItem(ItemStack stack, Level level, LivingEntity entityLiving) {
-        Player player = entityLiving instanceof Player ? (Player)entityLiving : null;
+    public ItemStack finishUsingItem(ItemStack stack, Level level, LivingEntity livingEntity) {
+        Player player = livingEntity instanceof Player ? (Player) livingEntity : null;
         if (player instanceof ServerPlayer) {
             CriteriaTriggers.CONSUME_ITEM.trigger((ServerPlayer)player, stack);
         }
@@ -84,12 +84,12 @@ public class AlchemyPotionItem extends PlacedItem {
             if (!AlchemyPotionUtil.isEmpty(potion)) {
                 for (MobEffectInstance mobeffectinstance : potion.getEffects()) {
                     if (mobeffectinstance.getEffect().isInstantenous()) {
-                        mobeffectinstance.getEffect().applyInstantenousEffect(player, player, entityLiving, mobeffectinstance.getAmplifier(), 1.0D);
+                        mobeffectinstance.getEffect().applyInstantenousEffect(player, player, livingEntity, mobeffectinstance.getAmplifier(), 1.0D);
                     } else {
-                        entityLiving.addEffect(new MobEffectInstance(mobeffectinstance));
+                        livingEntity.addEffect(new MobEffectInstance(mobeffectinstance));
                     }
                 }
-                potion.apply(stack, level, entityLiving);
+                potion.apply(stack, level, livingEntity);
             }
         }
 
@@ -111,7 +111,7 @@ public class AlchemyPotionItem extends PlacedItem {
             }
         }
 
-        entityLiving.gameEvent(GameEvent.DRINK);
+        livingEntity.gameEvent(GameEvent.DRINK);
         return stack;
     }
 

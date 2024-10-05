@@ -1,26 +1,8 @@
 package mod.maxbogomol.wizards_reborn.common.spell.block;
 
-import mod.maxbogomol.wizards_reborn.api.crystal.CrystalUtil;
 import mod.maxbogomol.wizards_reborn.api.spell.Spell;
-import mod.maxbogomol.wizards_reborn.api.wissen.WissenItemUtil;
-import mod.maxbogomol.wizards_reborn.common.item.equipment.arcane.ArcaneArmorItem;
-import mod.maxbogomol.wizards_reborn.common.network.PacketHandler;
-import mod.maxbogomol.wizards_reborn.common.network.spell.MagicSproutSpellEffectPacket;
 import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornCrystals;
 import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornSpells;
-import net.minecraft.core.BlockPos;
-import net.minecraft.nbt.CompoundTag;
-import net.minecraft.world.InteractionHand;
-import net.minecraft.world.InteractionResult;
-import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.item.BoneMealItem;
-import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.context.UseOnContext;
-import net.minecraft.world.level.Level;
-import net.minecraft.world.level.block.state.BlockState;
-import net.minecraftforge.common.MinecraftForge;
-import net.minecraftforge.common.util.BlockSnapshot;
-import net.minecraftforge.event.level.BlockEvent;
 
 import java.awt.*;
 
@@ -35,7 +17,7 @@ public class MagicSproutSpell extends Spell {
     public Color getColor() {
         return WizardsRebornSpells.earthSpellColor;
     }
-
+/*
     @Override
     public boolean canSpellAir(Level level, Player player, InteractionHand hand) {
         return false;
@@ -107,5 +89,5 @@ public class MagicSproutSpell extends Spell {
         removeWissen(stack, stats, player, (int) (getWissenCost() * costModifier));
         awardStat(player, stack);
         spellSound(player, context.getLevel());
-    }
+    }*/
 }

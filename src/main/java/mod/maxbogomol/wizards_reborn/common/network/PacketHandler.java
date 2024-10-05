@@ -78,9 +78,10 @@ public final class PacketHandler {
 
         LightRayBurstPacket.register(HANDLER, id++);
 
-        HANDLER.registerMessage(id++, SpellBurstEffectPacket.class, SpellBurstEffectPacket::encode, SpellBurstEffectPacket::decode, SpellBurstEffectPacket::handle);
-        HANDLER.registerMessage(id++, SpellProjectileRayEffectPacket.class, SpellProjectileRayEffectPacket::encode, SpellProjectileRayEffectPacket::decode, SpellProjectileRayEffectPacket::handle);
-        HANDLER.registerMessage(id++, SpellProjectileUpdateSpellDataPacket.class, SpellProjectileUpdateSpellDataPacket::encode, SpellProjectileUpdateSpellDataPacket::decode, SpellProjectileUpdateSpellDataPacket::handle);
+        ProjectileSpellBurstPacket.register(HANDLER, id++);
+        ProjectileSpellTrailPacket.register(HANDLER, id++);
+        HolyProjectileSpellHeartsPacket.register(HANDLER, id++);
+        HolyProjectileSpellSkullsPacket.register(HANDLER, id++);
         HANDLER.registerMessage(id++, RaySpellEffectPacket.class, RaySpellEffectPacket::encode, RaySpellEffectPacket::decode, RaySpellEffectPacket::handle);
 
         ArcanemiconOfferingEffectPacket.register(HANDLER, id++);

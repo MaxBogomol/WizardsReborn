@@ -8,7 +8,7 @@ import mod.maxbogomol.wizards_reborn.common.capability.ArrowModifierProvider;
 import mod.maxbogomol.wizards_reborn.common.capability.IKnowledge;
 import mod.maxbogomol.wizards_reborn.common.capability.KnowledgeProvider;
 import mod.maxbogomol.wizards_reborn.common.command.WizardsRebornCommand;
-import mod.maxbogomol.wizards_reborn.common.entity.SpellProjectileEntity;
+import mod.maxbogomol.wizards_reborn.common.entity.SpellEntity;
 import mod.maxbogomol.wizards_reborn.common.item.equipment.ArcaneFortressArmorItem;
 import mod.maxbogomol.wizards_reborn.common.network.KnowledgeUpdatePacket;
 import mod.maxbogomol.wizards_reborn.common.network.PacketHandler;
@@ -96,7 +96,7 @@ public class Events {
                 if (event.getSource().is(WizardsRebornDamageTags.MAGIC)) {
                     scale = (float) (1f - (attr.getValue() / 100f));
                 }
-                if (scale == 1 && event.getSource().getDirectEntity() instanceof SpellProjectileEntity) {
+                if (scale == 1 && event.getSource().getDirectEntity() instanceof SpellEntity) {
                     scale = (float) (1f - ((attr.getValue() / 2) / 100f));
                 }
                 if (scale < 0) {

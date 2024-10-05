@@ -44,11 +44,11 @@ public class ArcaneFortressArmorItem extends ArcaneArmorItem implements IForgeIt
         consumer.accept(new IClientItemExtensions() {
             @Override
             public ArmorModel getHumanoidArmorModel(LivingEntity entity, ItemStack itemStack, EquipmentSlot armorSlot, HumanoidModel _default) {
-                float pticks = Minecraft.getInstance().getFrameTime();
-                float f = Mth.rotLerp(pticks, entity.yBodyRotO, entity.yBodyRot);
-                float f1 = Mth.rotLerp(pticks, entity.yHeadRotO, entity.yHeadRot);
+                float partialTicks = Minecraft.getInstance().getFrameTime();
+                float f = Mth.rotLerp(partialTicks, entity.yBodyRotO, entity.yBodyRot);
+                float f1 = Mth.rotLerp(partialTicks, entity.yHeadRotO, entity.yHeadRot);
                 float netHeadYaw = f1 - f;
-                float netHeadPitch = Mth.lerp(pticks, entity.xRotO, entity.getXRot());
+                float netHeadPitch = Mth.lerp(partialTicks, entity.xRotO, entity.getXRot());
 
                 ArmorModel model = WizardsRebornModels.ARCANE_FORTRESS_ARMOR;
                 if (!isDefaultModel(entity)) {
@@ -60,7 +60,7 @@ public class ArcaneFortressArmorItem extends ArcaneArmorItem implements IForgeIt
 
                 model.slot = type.getSlot();
                 model.copyFromDefault(_default);
-                model.setupAnim(entity, entity.walkAnimation.position(pticks), entity.walkAnimation.speed(pticks), entity.tickCount + pticks, netHeadYaw, netHeadPitch);
+                model.setupAnim(entity, entity.walkAnimation.position(partialTicks), entity.walkAnimation.speed(partialTicks), entity.tickCount + partialTicks, netHeadYaw, netHeadPitch);
                 return model;
             }
         });

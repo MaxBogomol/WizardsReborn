@@ -2,6 +2,7 @@ package mod.maxbogomol.wizards_reborn.common.item.equipment.curio;
 
 import com.google.common.collect.LinkedHashMultimap;
 import com.google.common.collect.Multimap;
+import mod.maxbogomol.fluffy_fur.integration.common.curios.BaseCurioItem;
 import mod.maxbogomol.wizards_reborn.WizardsReborn;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.sounds.SoundEvents;
@@ -16,7 +17,7 @@ import top.theillusivec4.curios.api.type.capability.ICurio;
 import javax.annotation.Nonnull;
 import java.util.UUID;
 
-public class LeatherBeltItem extends BaseCurioItem implements ICurioItemTexture {
+public class LeatherBeltItem extends BaseCurioItem {
 
     private static final ResourceLocation BELT_TEXTURE = new ResourceLocation(WizardsReborn.MOD_ID,"textures/entity/curio/leather_belt.png");
 

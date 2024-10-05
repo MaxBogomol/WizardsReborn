@@ -20,8 +20,8 @@ import mod.maxbogomol.wizards_reborn.api.spell.Spells;
 import mod.maxbogomol.wizards_reborn.api.wissen.IWissenItem;
 import mod.maxbogomol.wizards_reborn.api.wissen.WissenItemType;
 import mod.maxbogomol.wizards_reborn.api.wissen.WissenItemUtil;
-import mod.maxbogomol.wizards_reborn.config.WizardsRebornClientConfig;
 import mod.maxbogomol.wizards_reborn.common.item.CrystalItem;
+import mod.maxbogomol.wizards_reborn.config.WizardsRebornClientConfig;
 import mod.maxbogomol.wizards_reborn.util.NumericalUtil;
 import net.minecraft.ChatFormatting;
 import net.minecraft.client.Minecraft;
@@ -185,7 +185,7 @@ public class ArcaneWandItem extends Item implements IWissenItem, ICustomAnimatio
             Spell spell = Spells.getSpell(nbt.getString("spell"));
             if (spell.canSpell(level, player, hand) && spell.canSpellAir(level, player, hand)) {
                 if (spell.canWandWithCrystal(stack)) {
-                    spell.useSpell(level, player, hand);
+                    spell.useWand(level, player, hand, stack);
                     return InteractionResultHolder.success(stack);
                 }
             }
@@ -194,9 +194,7 @@ public class ArcaneWandItem extends Item implements IWissenItem, ICustomAnimatio
     }
 
     @Override
-    public InteractionResult useOn(UseOnContext context) {
-        ItemStack stack = context.getItemInHand();
-
+    public InteractionResult onItemUseFirst(ItemStack stack, UseOnContext context) {
         CompoundTag nbt = stack.getTag();
         if (canSpell(stack, context.getPlayer())) {
             Spell spell = Spells.getSpell(nbt.getString("spell"));
@@ -220,23 +218,23 @@ public class ArcaneWandItem extends Item implements IWissenItem, ICustomAnimatio
     }
 
     @Override
-    public void releaseUsing(ItemStack stack, Level level, LivingEntity entityLiving, int timeLeft) {
+    public void releaseUsing(ItemStack stack, Level level, LivingEntity livingEntity, int timeLeft) {
         CompoundTag nbt = stack.getTag();
-        if (canSpell(stack, (Player) entityLiving)) {
+        if (canSpell(stack, (Player) livingEntity)) {
             Spell spell = Spells.getSpell(nbt.getString("spell"));
             if (spell.canWandWithCrystal(stack)) {
-                spell.releaseUsing(stack, level, entityLiving, timeLeft);
+                spell.releaseUsing(stack, level, livingEntity, timeLeft);
             }
         }
     }
 
     @Override
-    public ItemStack finishUsingItem(ItemStack stack, Level level, LivingEntity entityLiving) {
+    public ItemStack finishUsingItem(ItemStack stack, Level level, LivingEntity livingEntity) {
         CompoundTag nbt = stack.getTag();
-        if (canSpell(stack, (Player) entityLiving)) {
+        if (canSpell(stack, (Player) livingEntity)) {
             Spell spell = Spells.getSpell(nbt.getString("spell"));
             if (spell.canWandWithCrystal(stack)) {
-                spell.finishUsingItem(stack, level, entityLiving);
+                spell.finishUsingItem(stack, level, livingEntity);
             }
         }
 

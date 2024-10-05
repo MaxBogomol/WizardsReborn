@@ -1,39 +1,7 @@
 package mod.maxbogomol.wizards_reborn.common.spell.charge;
 
-import com.mojang.blaze3d.vertex.PoseStack;
-import com.mojang.blaze3d.vertex.VertexConsumer;
-import mod.maxbogomol.fluffy_fur.client.animation.ItemAnimation;
-import mod.maxbogomol.fluffy_fur.registry.client.FluffyFurRenderTypes;
-import mod.maxbogomol.wizards_reborn.WizardsReborn;
 import mod.maxbogomol.wizards_reborn.api.spell.Spell;
 import mod.maxbogomol.wizards_reborn.client.animation.ChargeSpellHandItemAnimation;
-import mod.maxbogomol.wizards_reborn.common.entity.SpellProjectileEntity;
-import mod.maxbogomol.wizards_reborn.common.network.PacketHandler;
-import mod.maxbogomol.wizards_reborn.common.network.spell.ChargeSpellProjectileRayEffectPacket;
-import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornEntities;
-import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornSounds;
-import net.minecraft.client.renderer.MultiBufferSource;
-import net.minecraft.core.BlockPos;
-import net.minecraft.nbt.CompoundTag;
-import net.minecraft.server.level.ServerLevel;
-import net.minecraft.sounds.SoundSource;
-import net.minecraft.util.Mth;
-import net.minecraft.world.InteractionHand;
-import net.minecraft.world.entity.Entity;
-import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.entity.projectile.ProjectileUtil;
-import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.UseAnim;
-import net.minecraft.world.level.Level;
-import net.minecraft.world.phys.EntityHitResult;
-import net.minecraft.world.phys.HitResult;
-import net.minecraft.world.phys.Vec3;
-import net.minecraftforge.api.distmarker.Dist;
-import net.minecraftforge.api.distmarker.OnlyIn;
-
-import java.awt.*;
-import java.util.UUID;
 
 public class ChargeSpell extends Spell {
     public static ChargeSpellHandItemAnimation animation = new ChargeSpellHandItemAnimation();
@@ -55,7 +23,7 @@ public class ChargeSpell extends Spell {
     public int getMinimumPolishingLevel() {
         return 1;
     }
-
+/*
     @Override
     public void useSpell(Level level, Player player, InteractionHand hand) {
         if (!level.isClientSide) {
@@ -347,9 +315,9 @@ public class ChargeSpell extends Spell {
                 PacketHandler.sendToTracking(projectile.level(), new BlockPos((int) pos.x, (int) pos.y, (int) pos.z), new ChargeSpellProjectileRayEffectPacket((float) projectile.xo, (float) projectile.yo + 0.2f, (float) projectile.zo, (float) pos.x, (float) pos.y + 0.2f, (float) pos.z, (float) norm.x, (float) norm.y, (float) norm.z, r, g, b, charge));
             }
         }
-    }
+    }*/
 
-    @Override
+/*    @Override
     @OnlyIn(Dist.CLIENT)
     public void render(SpellProjectileEntity entity, float entityYaw, float partialTicks, PoseStack stack, MultiBufferSource buffer, int light) {
         CompoundTag spellData = entity.getSpellData();
@@ -357,7 +325,7 @@ public class ChargeSpell extends Spell {
         VertexConsumer builder = bufferDelayed.getBuffer(FluffyFurRenderTypes.ADDITIVE);
         Color color = getColor();
 
-        /*
+        *//*
         List<Vec3> trailList = new ArrayList<>(entity.trail);
         if (trailList.size() > 1 && spellData.getInt("ticks") >= 20) {
             Vec3 position = trailList.get(0);
@@ -379,10 +347,10 @@ public class ChargeSpell extends Spell {
         float charge = 0.5f + (((float) spellData.getInt("charge") / getCharge()) / 2f);
 
         stack.pushPose();
-        stack.translate(0, 0.2f, 0);*/
+        stack.translate(0, 0.2f, 0);*//*
         //stack.translate(entity.getX() - x, entity.getY() - y,  entity.getZ() - z);
         //WizardsRebornRenderUtil.renderTrail(stack, builder, entity.position(), trailList, 0, 0.15f * charge, 0, 1.0f,  1.0f, color, 8, true);
         //WizardsRebornRenderUtil.renderTrail(stack, builder, entity.position(), trailList, 0, 0.15f * charge, 0, 0.75f, 0.75f, color, 8, true);
         //stack.popPose();
-    }
+    }*/
 }

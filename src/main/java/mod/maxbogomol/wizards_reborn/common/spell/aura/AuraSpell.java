@@ -1,43 +1,6 @@
 package mod.maxbogomol.wizards_reborn.common.spell.aura;
 
-import com.mojang.blaze3d.vertex.PoseStack;
-import com.mojang.blaze3d.vertex.VertexConsumer;
-import com.mojang.math.Axis;
-import mod.maxbogomol.fluffy_fur.client.particle.ParticleBuilder;
-import mod.maxbogomol.fluffy_fur.client.particle.behavior.CubeParticleBehavior;
-import mod.maxbogomol.fluffy_fur.client.particle.data.ColorParticleData;
-import mod.maxbogomol.fluffy_fur.client.particle.data.GenericParticleData;
-import mod.maxbogomol.fluffy_fur.client.particle.data.SpinParticleData;
-import mod.maxbogomol.fluffy_fur.registry.client.FluffyFurParticles;
-import mod.maxbogomol.fluffy_fur.registry.client.FluffyFurRenderTypes;
-import mod.maxbogomol.wizards_reborn.WizardsReborn;
-import mod.maxbogomol.wizards_reborn.api.crystal.CrystalUtil;
 import mod.maxbogomol.wizards_reborn.api.spell.Spell;
-import mod.maxbogomol.wizards_reborn.common.entity.SpellProjectileEntity;
-import mod.maxbogomol.wizards_reborn.common.network.PacketHandler;
-import mod.maxbogomol.wizards_reborn.common.network.spell.AuraSpellCastEffectPacket;
-import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornCrystals;
-import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornEntities;
-import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornSounds;
-import mod.maxbogomol.wizards_reborn.util.WizardsRebornRenderUtil;
-import net.minecraft.client.renderer.MultiBufferSource;
-import net.minecraft.nbt.CompoundTag;
-import net.minecraft.sounds.SoundSource;
-import net.minecraft.world.InteractionHand;
-import net.minecraft.world.InteractionResult;
-import net.minecraft.world.entity.Entity;
-import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.context.UseOnContext;
-import net.minecraft.world.level.Level;
-import net.minecraft.world.phys.AABB;
-import net.minecraft.world.phys.Vec3;
-import net.minecraftforge.api.distmarker.Dist;
-import net.minecraftforge.api.distmarker.OnlyIn;
-
-import java.awt.*;
-import java.util.ArrayList;
-import java.util.List;
 
 public class AuraSpell extends Spell {
     public AuraSpell(String id, int points) {
@@ -58,7 +21,7 @@ public class AuraSpell extends Spell {
     public int getMinimumPolishingLevel() {
         return 1;
     }
-
+/*
     @Override
     public boolean canSpellAir(Level level, Player player, InteractionHand hand) {
         return false;
@@ -251,5 +214,5 @@ public class AuraSpell extends Spell {
         WizardsRebornRenderUtil.renderAura(stack, builder, (size - 0.5f) * sizeS, 1.5f, 8, color, color, 0.3f * alpha, 0, true, false);
         WizardsRebornRenderUtil.renderAura(stack, builder, (size - 1f) * sizeS, 1f, 8, color, color, 0.05f * alpha, 0, true, false);
         stack.popPose();
-    }
+    }*/
 }

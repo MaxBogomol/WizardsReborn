@@ -37,7 +37,7 @@ public class AirFlowSpell extends SelfSpell {
     public int getWissenCost() {
         return 80;
     }
-
+/*
     @Override
     public void selfSpell(Level level, Player player, InteractionHand hand) {
         ItemStack stack = player.getItemInHand(hand);
@@ -68,5 +68,5 @@ public class AirFlowSpell extends SelfSpell {
         float b = color.getBlue() / 255f;
 
         PacketHandler.sendToTracking(level, player.getOnPos(), new AirFlowSpellEffectPacket((float) player.getX(), (float) player.getY() + 0.2f, (float) player.getZ(), (float) vel.x() / 4, (float) vel.y() / 4, (float) vel.z() / 4, r, g, b));
-    }
+    }*/
 }

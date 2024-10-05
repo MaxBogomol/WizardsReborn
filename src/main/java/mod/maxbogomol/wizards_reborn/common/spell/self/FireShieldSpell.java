@@ -36,7 +36,7 @@ public class FireShieldSpell extends SelfSpell {
     public int getWissenCost() {
         return 200;
     }
-
+/*
     @Override
     public void selfSpell(Level level, Player player, InteractionHand hand) {
         ItemStack stack = player.getItemInHand(hand);
@@ -54,5 +54,5 @@ public class FireShieldSpell extends SelfSpell {
 
         PacketHandler.sendToTracking(player.level(), player.getOnPos(), new FireShieldSpellEffectPacket((float) player.getX(), (float) player.getY() + (player.getBbHeight() / 2), (float) player.getZ(), r, g, b));
         player.setTicksFrozen(0);
-    }
+    }*/
 }

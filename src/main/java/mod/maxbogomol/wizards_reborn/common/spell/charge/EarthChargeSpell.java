@@ -1,16 +1,7 @@
 package mod.maxbogomol.wizards_reborn.common.spell.charge;
 
-import mod.maxbogomol.wizards_reborn.api.crystal.CrystalUtil;
-import mod.maxbogomol.wizards_reborn.common.entity.SpellProjectileEntity;
-import mod.maxbogomol.wizards_reborn.common.item.equipment.arcane.ArcaneArmorItem;
 import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornCrystals;
 import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornSpells;
-import net.minecraft.world.damagesource.DamageSource;
-import net.minecraft.world.entity.Entity;
-import net.minecraft.world.entity.player.Inventory;
-import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.level.Level;
-import net.minecraft.world.phys.HitResult;
 
 import java.awt.*;
 
@@ -24,7 +15,7 @@ public class EarthChargeSpell extends ChargeSpell {
     public Color getColor() {
         return WizardsRebornSpells.earthSpellColor;
     }
-
+/*
     @Override
     public void onImpact(HitResult ray, Level level, SpellProjectileEntity projectile, Player player, Entity target) {
         super.onImpact(ray, level, projectile, player, target);
@@ -43,5 +34,5 @@ public class EarthChargeSpell extends ChargeSpell {
         if (target instanceof Player targetPlayer) {
             targetPlayer.getInventory().hurtArmor(damageSource, damage, Inventory.ALL_ARMOR_SLOTS);
         }
-    }
+    }*/
 }

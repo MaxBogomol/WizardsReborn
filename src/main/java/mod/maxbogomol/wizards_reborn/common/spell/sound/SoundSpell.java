@@ -25,7 +25,7 @@ public class SoundSpell extends Spell {
         return WizardsRebornSpells.soundSpellColor;
     }
 
-    @Override
+/*    @Override
     public void useSpell(Level level, Player player, InteractionHand hand) {
         if (!level.isClientSide) {
             ItemStack stack = player.getItemInHand(hand);
@@ -49,5 +49,5 @@ public class SoundSpell extends Spell {
     @Override
     public void onReload(ItemStack stack, Level level, Entity entity, int slot, boolean isSelected) {
 
-    }
+    }*/
 }

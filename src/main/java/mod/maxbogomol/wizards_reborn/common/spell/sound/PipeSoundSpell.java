@@ -12,9 +12,9 @@ public class PipeSoundSpell extends SecretSoundSpell {
     public PipeSoundSpell(String id, int points) {
         super(id, points);
     }
-
+/*
     @Override
     public SoundEvent getSound(Level level, Player player, InteractionHand hand) {
         return WizardsRebornSounds.PIPE.get();
-    }
+    }*/
 }

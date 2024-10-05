@@ -2,6 +2,7 @@ package mod.maxbogomol.wizards_reborn.common.item.equipment.curio;
 
 import com.google.common.collect.LinkedHashMultimap;
 import com.google.common.collect.Multimap;
+import mod.maxbogomol.fluffy_fur.integration.common.curios.BaseCurioItem;
 import mod.maxbogomol.wizards_reborn.WizardsReborn;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.sounds.SoundEvents;

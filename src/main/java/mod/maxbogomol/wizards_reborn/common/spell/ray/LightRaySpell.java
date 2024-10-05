@@ -1,19 +1,6 @@
 package mod.maxbogomol.wizards_reborn.common.spell.ray;
 
-import com.mojang.blaze3d.vertex.PoseStack;
-import mod.maxbogomol.fluffy_fur.common.network.BlockEntityUpdate;
-import mod.maxbogomol.wizards_reborn.api.light.ILightBlockEntity;
-import mod.maxbogomol.wizards_reborn.api.light.LightRayHitResult;
-import mod.maxbogomol.wizards_reborn.api.light.LightUtil;
-import mod.maxbogomol.wizards_reborn.common.entity.SpellProjectileEntity;
 import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornCrystals;
-import net.minecraft.client.renderer.MultiBufferSource;
-import net.minecraft.nbt.CompoundTag;
-import net.minecraft.world.level.block.entity.BlockEntity;
-import net.minecraft.world.phys.HitResult;
-import net.minecraft.world.phys.Vec3;
-import net.minecraftforge.api.distmarker.Dist;
-import net.minecraftforge.api.distmarker.OnlyIn;
 
 import java.awt.*;
 
@@ -29,7 +16,7 @@ public class LightRaySpell extends RaySpell {
     public Color getColor() {
         return color;
     }
-
+/*
     @Override
     public int tickCost() {
         return 1;
@@ -91,5 +78,5 @@ public class LightRaySpell extends RaySpell {
         stack.scale(width, width, width);
         LightUtil.renderLightRay(entity.level(), entity.getOnPos(), entity.position().add(offset).add(0, 0.2f, 0), to, getRayDistance(), color, Color.WHITE, Color.WHITE, false, partialTicks, stack);
         stack.popPose();
-    }
+    }*/
 }

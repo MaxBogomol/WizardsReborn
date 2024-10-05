@@ -1,20 +1,9 @@
 package mod.maxbogomol.wizards_reborn.common.spell.look.cloud;
 
-import mod.maxbogomol.wizards_reborn.api.crystal.CrystalUtil;
-import mod.maxbogomol.wizards_reborn.common.entity.SpellProjectileEntity;
-import mod.maxbogomol.wizards_reborn.common.item.equipment.arcane.ArcaneArmorItem;
 import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornCrystals;
-import mod.maxbogomol.wizards_reborn.registry.common.damage.WizardsRebornDamage;
 import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornSpells;
-import net.minecraft.world.damagesource.DamageSource;
-import net.minecraft.world.effect.MobEffectInstance;
-import net.minecraft.world.effect.MobEffects;
-import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.phys.AABB;
 
 import java.awt.*;
-import java.util.List;
 
 public class ToxicRainSpell extends CloudSpell {
     public ToxicRainSpell(String id, int points) {
@@ -37,7 +26,7 @@ public class ToxicRainSpell extends CloudSpell {
     public int getWissenCost() {
         return 300;
     }
-
+/*
     @Override
     public boolean hasTrails(SpellProjectileEntity entity) {
         return true;
@@ -64,5 +53,5 @@ public class ToxicRainSpell extends CloudSpell {
                 target.addEffect(new MobEffectInstance(MobEffects.CONFUSION, (int) (100 + (40 * (focusLevel + magicModifier))), 0));
             }
         }
-    }
+    }*/
 }

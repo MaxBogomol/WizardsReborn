@@ -18,7 +18,7 @@ public class EntityLookSpell extends LookSpell {
     public float getLookDistance() {
         return 2f;
     }
-
+/*
     public float getReachDistance(Level level, Player player, InteractionHand hand) {
         if (hasReachDistance(level, player, hand)) return (float) (player.getAttributeValue(ForgeMod.ENTITY_REACH.get()) + getLookDistance(level, player, hand));
         return (getLookDistance(level, player, hand));
@@ -46,7 +46,7 @@ public class EntityLookSpell extends LookSpell {
     public HitResult getEntityHit(Level level, Player player, InteractionHand hand) {
         float distance = getReachDistance(level, player, hand);
         return getHitPos(level, player.getEyePosition(), player.getEyePosition().add(player.getLookAngle().scale(distance)), getStandardFilter(player), 1, 0.2f, true);
-    }
+    }*/
 
     public static Predicate<Entity> getStandardFilter() {
         return (e) -> {return e instanceof LivingEntity;};

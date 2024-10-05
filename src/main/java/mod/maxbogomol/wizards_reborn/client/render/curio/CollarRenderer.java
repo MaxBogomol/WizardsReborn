@@ -1,9 +1,9 @@
 package mod.maxbogomol.wizards_reborn.client.render.curio;
 
 import com.mojang.blaze3d.vertex.PoseStack;
+import mod.maxbogomol.fluffy_fur.integration.common.curios.ICurioItemTexture;
 import mod.maxbogomol.wizards_reborn.WizardsReborn;
 import mod.maxbogomol.wizards_reborn.client.model.curio.AmuletModel;
-import mod.maxbogomol.wizards_reborn.common.item.equipment.curio.ICurioItemTexture;
 import mod.maxbogomol.wizards_reborn.registry.client.WizardsRebornModels;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.model.EntityModel;
@@ -28,7 +28,8 @@ public class CollarRenderer implements ICurioRenderer {
 
         LivingEntity entity = slotContext.entity();
         if (stack.getItem() instanceof ICurioItemTexture curio) {
-            TEXTURE = curio.getTexture(stack, entity);
+            ResourceLocation texture = curio.getTexture(stack, entity);
+            if (texture != null) TEXTURE = texture;
         }
 
         ICurioRenderer.followBodyRotations(entity, model);

@@ -1,42 +1,12 @@
 package mod.maxbogomol.wizards_reborn.common.spell.look.strike;
 
-import com.mojang.blaze3d.vertex.PoseStack;
-import com.mojang.math.Axis;
-import mod.maxbogomol.fluffy_fur.client.animation.ItemAnimation;
-import mod.maxbogomol.fluffy_fur.client.particle.ParticleBuilder;
-import mod.maxbogomol.fluffy_fur.client.particle.data.ColorParticleData;
-import mod.maxbogomol.fluffy_fur.client.particle.data.GenericParticleData;
-import mod.maxbogomol.fluffy_fur.registry.client.FluffyFurParticles;
-import mod.maxbogomol.fluffy_fur.registry.client.FluffyFurRenderTypes;
-import mod.maxbogomol.wizards_reborn.WizardsReborn;
 import mod.maxbogomol.wizards_reborn.client.animation.StrikeSpellItemAnimation;
-import mod.maxbogomol.wizards_reborn.common.entity.SpellProjectileEntity;
-import mod.maxbogomol.wizards_reborn.common.network.PacketHandler;
-import mod.maxbogomol.wizards_reborn.common.network.spell.StrikeSpellEffectPacket;
 import mod.maxbogomol.wizards_reborn.common.spell.look.block.BlockLookSpell;
-import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornEntities;
-import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornSounds;
-import net.minecraft.client.renderer.MultiBufferSource;
-import net.minecraft.core.BlockPos;
-import net.minecraft.nbt.CompoundTag;
-import net.minecraft.sounds.SoundSource;
-import net.minecraft.util.Mth;
 import net.minecraft.world.InteractionHand;
-import net.minecraft.world.entity.Entity;
-import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.UseAnim;
 import net.minecraft.world.level.Level;
-import net.minecraft.world.level.block.SoundType;
-import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.phys.AABB;
-import net.minecraft.world.phys.Vec3;
-import net.minecraftforge.api.distmarker.Dist;
-import net.minecraftforge.api.distmarker.OnlyIn;
 
 import java.awt.*;
-import java.util.List;
 
 public class StrikeSpell extends BlockLookSpell {
     public static StrikeSpellItemAnimation animation = new StrikeSpellItemAnimation();
@@ -49,10 +19,10 @@ public class StrikeSpell extends BlockLookSpell {
         return getColor();
     }
 
-    @Override
+/*    @Override
     public float getLookDistance() {
         return 10f;
-    }
+    }*/
 
     @Override
     public float getBlockDistance() {
@@ -80,7 +50,7 @@ public class StrikeSpell extends BlockLookSpell {
             player.startUsingItem(hand);
         }
     }
-
+/*
     @Override
     public void onUseTick(Level level, LivingEntity livingEntity, ItemStack stack, int remainingUseDuration) {
         if (livingEntity instanceof Player player) {
@@ -259,5 +229,5 @@ public class StrikeSpell extends BlockLookSpell {
         stack.popPose();
 
         stack.popPose();
-    }
+    }*/
 }

@@ -1,17 +1,12 @@
 package mod.maxbogomol.wizards_reborn.common.spell.self;
 
 import mod.maxbogomol.wizards_reborn.api.spell.Spell;
-import net.minecraft.nbt.CompoundTag;
-import net.minecraft.world.InteractionHand;
-import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.level.Level;
 
 public class SelfSpell extends Spell {
     public SelfSpell(String id, int points) {
         super(id, points);
     }
-
+/*
     @Override
     public void useSpell(Level level, Player player, InteractionHand hand) {
         if (!level.isClientSide) {
@@ -39,5 +34,5 @@ public class SelfSpell extends Spell {
 
     public void selfSpell(Level level, Player player, InteractionHand hand) {
 
-    }
+    }*/
 }

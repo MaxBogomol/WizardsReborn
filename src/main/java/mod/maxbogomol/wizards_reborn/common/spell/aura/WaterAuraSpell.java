@@ -1,22 +1,9 @@
 package mod.maxbogomol.wizards_reborn.common.spell.aura;
 
-import mod.maxbogomol.wizards_reborn.api.crystal.CrystalUtil;
-import mod.maxbogomol.wizards_reborn.common.entity.SpellProjectileEntity;
-import mod.maxbogomol.wizards_reborn.common.item.equipment.arcane.ArcaneArmorItem;
-import mod.maxbogomol.wizards_reborn.common.network.PacketHandler;
-import mod.maxbogomol.wizards_reborn.common.network.spell.AuraSpellBurstEffectPacket;
 import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornCrystals;
 import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornSpells;
-import net.minecraft.world.damagesource.DamageSource;
-import net.minecraft.world.effect.MobEffectInstance;
-import net.minecraft.world.effect.MobEffects;
-import net.minecraft.world.entity.Entity;
-import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.level.Level;
 
 import java.awt.*;
-import java.util.List;
 
 public class WaterAuraSpell extends AuraSpell {
     public WaterAuraSpell(String id, int points) {
@@ -28,7 +15,7 @@ public class WaterAuraSpell extends AuraSpell {
     public Color getColor() {
         return WizardsRebornSpells.waterSpellColor;
     }
-
+/*
     @Override
     public void onAura(Level level, SpellProjectileEntity projectile, Player player, List<Entity> targets) {
         super.onAura(level, projectile, player, targets);
@@ -71,5 +58,5 @@ public class WaterAuraSpell extends AuraSpell {
                 }
             }
         }
-    }
+    }*/
 }

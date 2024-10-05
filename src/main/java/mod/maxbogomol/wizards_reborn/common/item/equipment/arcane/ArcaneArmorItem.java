@@ -131,8 +131,8 @@ public class ArcaneArmorItem extends ArmorItem implements IArcaneItem {
         return 0f;
     }
 
-    public static float getPlayerMagicModifier(Player player) {
-        if (player != null) {
+    public static float getPlayerMagicModifier(Entity entity) {
+        if (entity instanceof Player player) {
             AttributeInstance attr = player.getAttribute(WizardsRebornAttributes.MAGIC_MODIFIER.get());
             if (player.getItemBySlot(EquipmentSlot.HEAD).getItem() instanceof ArcaneArmorItem armor) {
                 if (armor.hasArmorSet()) {

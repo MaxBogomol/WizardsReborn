@@ -21,12 +21,12 @@ public class IceBlockSpell extends BlockPlaceSpell {
     public Color getColor() {
         return WizardsRebornSpells.frostSpellColor;
     }
-
+/*
     @Override
     public InteractionResult placeBlock(ItemStack stack, UseOnContext context, BlockPos blockPos) {
         Level level = context.getLevel();
         BlockPos blockPos1 = blockPos.relative(context.getClickedFace());
         setBlock(level, blockPos1, Blocks.ICE.defaultBlockState(), context.getPlayer());
         return InteractionResult.SUCCESS;
-    }
+    }*/
 }

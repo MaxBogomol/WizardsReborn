@@ -1,44 +1,17 @@
 package mod.maxbogomol.wizards_reborn.common.spell.fog;
 
-import mod.maxbogomol.fluffy_fur.client.particle.ParticleBuilder;
-import mod.maxbogomol.fluffy_fur.client.particle.data.ColorParticleData;
-import mod.maxbogomol.fluffy_fur.client.particle.data.GenericParticleData;
-import mod.maxbogomol.fluffy_fur.client.particle.data.LightParticleData;
-import mod.maxbogomol.fluffy_fur.client.particle.data.SpinParticleData;
-import mod.maxbogomol.fluffy_fur.registry.client.FluffyFurParticles;
-import mod.maxbogomol.fluffy_fur.registry.client.FluffyFurRenderTypes;
-import mod.maxbogomol.wizards_reborn.api.crystal.CrystalUtil;
 import mod.maxbogomol.wizards_reborn.api.spell.Spell;
-import mod.maxbogomol.wizards_reborn.common.entity.SpellProjectileEntity;
-import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornCrystals;
-import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornEntities;
-import net.minecraft.core.BlockPos;
-import net.minecraft.nbt.CompoundTag;
-import net.minecraft.world.InteractionHand;
-import net.minecraft.world.InteractionResult;
-import net.minecraft.world.entity.Entity;
-import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.context.UseOnContext;
-import net.minecraft.world.level.Level;
-import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.phys.AABB;
-import net.minecraft.world.phys.Vec3;
-
-import java.awt.*;
-import java.util.ArrayList;
-import java.util.List;
 
 public class FogSpell extends Spell {
     public FogSpell(String id, int points) {
         super(id, points);
     }
 
-    @Override
+/*    @Override
     public boolean canSpellAir(Level level, Player player, InteractionHand hand) {
         return false;
-    }
-
+    }*/
+/*
     @Override
     public InteractionResult onWandUseOn(ItemStack stack, UseOnContext context) {
         Level level = context.getLevel();
@@ -186,5 +159,5 @@ public class FogSpell extends Spell {
         }
 
         return list;
-    }
+    }*/
 }

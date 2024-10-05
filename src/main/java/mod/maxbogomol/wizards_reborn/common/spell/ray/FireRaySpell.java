@@ -1,34 +1,8 @@
 package mod.maxbogomol.wizards_reborn.common.spell.ray;
 
-import mod.maxbogomol.wizards_reborn.api.crystal.CrystalUtil;
-import mod.maxbogomol.wizards_reborn.api.wissen.WissenItemUtil;
-import mod.maxbogomol.wizards_reborn.common.entity.SpellProjectileEntity;
-import mod.maxbogomol.wizards_reborn.common.item.equipment.arcane.ArcaneArmorItem;
-import mod.maxbogomol.wizards_reborn.common.network.PacketHandler;
-import mod.maxbogomol.wizards_reborn.common.network.spell.FireRaySpellEffectPacket;
+import mod.maxbogomol.wizards_reborn.common.entity.SpellEntity;
 import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornCrystals;
 import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornSpells;
-import net.minecraft.core.BlockPos;
-import net.minecraft.core.Direction;
-import net.minecraft.sounds.SoundEvents;
-import net.minecraft.sounds.SoundSource;
-import net.minecraft.world.damagesource.DamageSource;
-import net.minecraft.world.entity.Entity;
-import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.level.Level;
-import net.minecraft.world.level.block.BaseFireBlock;
-import net.minecraft.world.level.block.CampfireBlock;
-import net.minecraft.world.level.block.CandleBlock;
-import net.minecraft.world.level.block.CandleCakeBlock;
-import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.level.block.state.properties.BlockStateProperties;
-import net.minecraft.world.level.gameevent.GameEvent;
-import net.minecraft.world.phys.HitResult;
-import net.minecraft.world.phys.Vec3;
-import net.minecraftforge.common.MinecraftForge;
-import net.minecraftforge.common.util.BlockSnapshot;
-import net.minecraftforge.event.level.BlockEvent;
 
 import java.awt.*;
 
@@ -42,7 +16,7 @@ public class FireRaySpell extends RaySpell {
     public Color getColor() {
         return WizardsRebornSpells.fireSpellColor;
     }
-
+/*
     @Override
     public void onImpact(HitResult ray, Level level, SpellProjectileEntity projectile, Player player, Entity target) {
         super.onImpact(ray, level, projectile, player, target);
@@ -123,13 +97,13 @@ public class FireRaySpell extends RaySpell {
                 }
             }
         }
-    }
+    }*/
 
-    public int getBlockTicks(SpellProjectileEntity projectile, int focusLevel) {
+    public int getBlockTicks(SpellEntity projectile, int focusLevel) {
         return (15 - (focusLevel * 3));
     }
 
-    public int getBlockWissen(SpellProjectileEntity projectile, int focusLevel) {
+    public int getBlockWissen(SpellEntity projectile, int focusLevel) {
         return getWissenCost();
     }
 }

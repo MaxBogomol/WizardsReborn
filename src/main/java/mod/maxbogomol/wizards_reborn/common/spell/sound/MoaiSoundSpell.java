@@ -13,8 +13,8 @@ public class MoaiSoundSpell extends SecretSoundSpell {
         super(id, points);
     }
 
-    @Override
+/*    @Override
     public SoundEvent getSound(Level level, Player player, InteractionHand hand) {
         return WizardsRebornSounds.MOAI.get();
-    }
+    }*/
 }

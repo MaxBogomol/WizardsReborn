@@ -1,18 +1,9 @@
 package mod.maxbogomol.wizards_reborn.common.spell.block;
 
-import mod.maxbogomol.wizards_reborn.api.crystal.CrystalUtil;
-import mod.maxbogomol.wizards_reborn.common.item.equipment.arcane.ArcaneArmorItem;
 import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornCrystals;
 import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornSpells;
-import net.minecraft.core.BlockPos;
-import net.minecraft.nbt.CompoundTag;
-import net.minecraft.world.InteractionResult;
-import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.context.UseOnContext;
-import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
-import net.minecraft.world.level.block.state.BlockState;
 
 import java.awt.*;
 import java.util.ArrayList;
@@ -35,7 +26,7 @@ public class DirtBlockSpell extends BlockPlaceSpell {
     public Color getColor() {
         return WizardsRebornSpells.earthSpellColor;
     }
-
+/*
     @Override
     public InteractionResult placeBlock(ItemStack stack, UseOnContext context, BlockPos blockPos) {
         Level level = context.getLevel();
@@ -50,5 +41,5 @@ public class DirtBlockSpell extends BlockPlaceSpell {
         }
         setBlock(level, blockPos1, blockState, context.getPlayer());
         return InteractionResult.SUCCESS;
-    }
+    }*/
 }

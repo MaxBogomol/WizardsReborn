@@ -21,7 +21,7 @@ public class WaterBlockSpell extends BlockPlaceSpell {
     public Color getColor() {
         return WizardsRebornSpells.waterSpellColor;
     }
-
+/*
     @Override
     public InteractionResult placeBlock(ItemStack stack, UseOnContext context, BlockPos blockPos) {
         Level level = context.getLevel();
@@ -37,5 +37,5 @@ public class WaterBlockSpell extends BlockPlaceSpell {
         }
 
         return false;
-    }
+    }*/
 }

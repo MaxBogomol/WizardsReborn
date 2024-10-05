@@ -22,7 +22,7 @@ public class BlockLookSpell extends LookSpell {
     public float getBlockAdditionalDistance() {
         return 0f;
     }
-
+/*
     public float getBlockDistance(Level level, Player player, InteractionHand hand) {
         ItemStack stack = player.getItemInHand(hand);
         CompoundTag stats = getStats(stack);
@@ -39,5 +39,5 @@ public class BlockLookSpell extends LookSpell {
     public HitResult getBlockHit(Level level, Player player, InteractionHand hand) {
         Vec3 lookPos = getHitPos(level, player, hand).getPosHit();
         return getHitPos(level, lookPos, new Vec3(lookPos.x(), lookPos.y() - getBlockDistance(level, player, hand), lookPos.z()));
-    }
+    }*/
 }

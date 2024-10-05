@@ -1,19 +1,9 @@
 package mod.maxbogomol.wizards_reborn.common.spell.look.cloud;
 
-import mod.maxbogomol.wizards_reborn.api.crystal.CrystalUtil;
-import mod.maxbogomol.wizards_reborn.common.crystalritual.ArtificialFertilityCrystalRitual;
-import mod.maxbogomol.wizards_reborn.common.entity.SpellProjectileEntity;
-import mod.maxbogomol.wizards_reborn.common.item.equipment.arcane.ArcaneArmorItem;
 import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornCrystals;
 import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornSpells;
-import net.minecraft.core.BlockPos;
-import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.phys.AABB;
-import net.minecraft.world.phys.Vec3;
 
 import java.awt.*;
-import java.util.List;
 
 public class RainCloudSpell extends CloudSpell {
     public RainCloudSpell(String id, int points) {
@@ -25,7 +15,7 @@ public class RainCloudSpell extends CloudSpell {
     public Color getColor() {
         return WizardsRebornSpells.waterSpellColor;
     }
-
+/*
     @Override
     public void rain(SpellProjectileEntity entity, Player player) {
         float size = getCloudSize(entity);
@@ -51,5 +41,5 @@ public class RainCloudSpell extends CloudSpell {
                 target.clearFire();
             }
         }
-    }
+    }*/
 }

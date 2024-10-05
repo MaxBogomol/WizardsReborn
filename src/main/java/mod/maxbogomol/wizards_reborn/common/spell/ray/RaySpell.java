@@ -1,42 +1,9 @@
 package mod.maxbogomol.wizards_reborn.common.spell.ray;
 
-import com.mojang.blaze3d.vertex.PoseStack;
-import com.mojang.math.Axis;
-import mod.maxbogomol.fluffy_fur.client.animation.ItemAnimation;
-import mod.maxbogomol.fluffy_fur.registry.client.FluffyFurRenderTypes;
-import mod.maxbogomol.wizards_reborn.WizardsReborn;
 import mod.maxbogomol.wizards_reborn.api.spell.Spell;
-import mod.maxbogomol.wizards_reborn.api.wissen.WissenItemUtil;
 import mod.maxbogomol.wizards_reborn.client.animation.SpellHandItemAnimation;
-import mod.maxbogomol.wizards_reborn.common.entity.SpellProjectileEntity;
-import mod.maxbogomol.wizards_reborn.common.network.PacketHandler;
-import mod.maxbogomol.wizards_reborn.common.network.spell.RaySpellEffectPacket;
-import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornEntities;
-import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornSounds;
-import net.minecraft.client.renderer.MultiBufferSource;
-import net.minecraft.core.BlockPos;
-import net.minecraft.nbt.CompoundTag;
-import net.minecraft.server.level.ServerLevel;
-import net.minecraft.sounds.SoundSource;
-import net.minecraft.util.Mth;
-import net.minecraft.world.InteractionHand;
-import net.minecraft.world.entity.Entity;
-import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.entity.projectile.ProjectileUtil;
-import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.UseAnim;
-import net.minecraft.world.level.ClipContext;
-import net.minecraft.world.level.Level;
-import net.minecraft.world.phys.EntityHitResult;
-import net.minecraft.world.phys.HitResult;
-import net.minecraft.world.phys.Vec3;
-import net.minecraftforge.api.distmarker.Dist;
-import net.minecraftforge.api.distmarker.OnlyIn;
 
 import java.awt.*;
-import java.util.UUID;
-import java.util.function.Predicate;
 
 public class RaySpell extends Spell {
     public static SpellHandItemAnimation animation = new SpellHandItemAnimation();
@@ -57,7 +24,7 @@ public class RaySpell extends Spell {
     public Color getSecondColor() {
         return getColor();
     }
-
+/*
     @Override
     public void useSpell(Level level, Player player, InteractionHand hand) {
         if (!level.isClientSide) {
@@ -129,7 +96,7 @@ public class RaySpell extends Spell {
                 CompoundTag stackSpellData = nbt.getCompound("spell_data");
                 if (stackSpellData.contains("entity")) {
                     UUID entityUUID = stackSpellData.getUUID("entity");
-                    Entity entity = ((ServerLevel) level).getEntity(entityUUID);
+                    Entity entity = ((ClientLevel) level).getEntities().getEntity(entityUUID);
                     if (entity instanceof SpellProjectileEntity projectile) {
                         setCooldown(stack, stats);
 
@@ -358,5 +325,5 @@ public class RaySpell extends Spell {
         Vec3 vec = new Vec3(ray.getLocation().x() + (projectile.getViewVector(0).x() * offset), ray.getLocation().y() + (projectile.getViewVector(0).y() * offset), ray.getLocation().z() + (projectile.getViewVector(0).z() * offset));
 
         return vec;
-    }
+    }*/
 }

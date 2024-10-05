@@ -456,7 +456,7 @@ public class ThrowedScytheEntity extends ThrowableItemProjectile {
     }
 
     @Override
-    public float getEyeHeight(Pose pPose, EntityDimensions pSize) {
+    public float getEyeHeight(Pose pose, EntityDimensions size) {
         return 0.1F;
     }
 

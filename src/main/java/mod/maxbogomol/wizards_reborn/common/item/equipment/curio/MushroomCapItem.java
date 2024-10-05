@@ -1,5 +1,6 @@
 package mod.maxbogomol.wizards_reborn.common.item.equipment.curio;
 
+import mod.maxbogomol.fluffy_fur.integration.common.curios.BaseCurioItem;
 import mod.maxbogomol.wizards_reborn.WizardsReborn;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.sounds.SoundEvents;
@@ -10,7 +11,7 @@ import top.theillusivec4.curios.api.type.capability.ICurio;
 
 import javax.annotation.Nonnull;
 
-public class MushroomCapItem extends BaseCurioItem implements ICurioItemTexture {
+public class MushroomCapItem extends BaseCurioItem {
     public String name;
 
     public MushroomCapItem(Properties properties, String name) {
