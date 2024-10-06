@@ -23,6 +23,7 @@ public class ImplosionSkin extends ItemSkin {
         addSkinEntry(new ItemClassSkinEntry(ArcaneShovelItem.class, WizardsReborn.MOD_ID+":implosion_shovel"));
         addSkinEntry(new ItemClassSkinEntry(ArcaneHoeItem.class, WizardsReborn.MOD_ID+":implosion_hoe"));
         addSkinEntry(new ItemClassSkinEntry(ArcaneScytheItem.class, WizardsReborn.MOD_ID+":implosion_scythe"));
+        addSkinEntry(new ItemClassSkinEntry(ArcaneBowItem.class, WizardsReborn.MOD_ID+":implosion_bow"));
         addSkinEntry(new ItemClassSkinEntry(ArcaneWandItem.class, WizardsReborn.MOD_ID+":skin/implosion_arcane_wand"));
         addSkinEntry(new ItemClassSkinEntry(WissenWandItem.class, WizardsReborn.MOD_ID+":implosion_wissen_wand"));
         if (FarmersDelightIntegration.isLoaded()) {

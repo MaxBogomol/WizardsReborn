@@ -63,7 +63,6 @@ public class AirFlowSpellPacket extends TwoPositionColorClientPacket {
                 .setLifetime(20)
                 .randomVelocity(0.35f)
                 .setVelocity(x2, y2, z2)
-                //.disablePhysics()
                 .setFriction(0.8f)
                 .repeat(level, x1, y1, z1, 25);
     }

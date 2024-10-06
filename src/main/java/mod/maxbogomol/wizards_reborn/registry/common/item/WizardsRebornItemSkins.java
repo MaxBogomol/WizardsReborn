@@ -1,10 +1,12 @@
 package mod.maxbogomol.wizards_reborn.registry.common.item;
 
+import mod.maxbogomol.fluffy_fur.client.model.item.BowSkinItemOverrides;
 import mod.maxbogomol.fluffy_fur.client.model.item.ItemSkinItemOverrides;
-import mod.maxbogomol.fluffy_fur.client.model.item.ItemSkinsModels;
+import mod.maxbogomol.fluffy_fur.client.model.item.ItemSkinModels;
 import mod.maxbogomol.fluffy_fur.client.render.item.LargeItemRenderer;
 import mod.maxbogomol.fluffy_fur.common.itemskin.ItemSkin;
-import mod.maxbogomol.fluffy_fur.common.itemskin.ItemSkinsHandler;
+import mod.maxbogomol.fluffy_fur.common.itemskin.ItemSkinHandler;
+import mod.maxbogomol.fluffy_fur.registry.client.FluffyFurModels;
 import mod.maxbogomol.fluffy_fur.registry.common.item.FluffyFurItemSkins;
 import mod.maxbogomol.wizards_reborn.WizardsReborn;
 import mod.maxbogomol.wizards_reborn.client.model.item.WandCrystalsModels;
@@ -31,12 +33,12 @@ public class WizardsRebornItemSkins {
     public static ItemSkin SUMMER_LOVE = new SummerLoveSkin(WizardsReborn.MOD_ID+":summer_love", new Color(243, 181, 127));
 
     public static void register() {
-        ItemSkinsHandler.register(TOP_HAT);
-        ItemSkinsHandler.register(SOUL_HUNTER);
-        ItemSkinsHandler.register(IMPLOSION);
-        ItemSkinsHandler.register(PHANTOM_INK);
-        ItemSkinsHandler.register(MAGNIFICENT_MAID);
-        ItemSkinsHandler.register(SUMMER_LOVE);
+        ItemSkinHandler.register(TOP_HAT);
+        ItemSkinHandler.register(SOUL_HUNTER);
+        ItemSkinHandler.register(IMPLOSION);
+        ItemSkinHandler.register(PHANTOM_INK);
+        ItemSkinHandler.register(MAGNIFICENT_MAID);
+        ItemSkinHandler.register(SUMMER_LOVE);
 
         DistExecutor.unsafeCallWhenOn(Dist.CLIENT, () -> () -> {
             registerModels();
@@ -46,34 +48,35 @@ public class WizardsRebornItemSkins {
 
     @OnlyIn(Dist.CLIENT)
     public static void registerModels() {
-        ItemSkinsModels.addSkin(WizardsReborn.MOD_ID+":top_hat");
-        ItemSkinsModels.addSkin(WizardsReborn.MOD_ID+":soul_hunter_hood");
-        ItemSkinsModels.addSkin(WizardsReborn.MOD_ID+":soul_hunter_costume");
-        ItemSkinsModels.addSkin(WizardsReborn.MOD_ID+":soul_hunter_trousers");
-        ItemSkinsModels.addSkin(WizardsReborn.MOD_ID+":soul_hunter_boots");
-        ItemSkinsModels.addSkin(WizardsReborn.MOD_ID+":soul_hunter_scythe");
-        ItemSkinsModels.addSkin(WizardsReborn.MOD_ID+":soul_hunter_arcane_wand");
-        ItemSkinsModels.addSkin(WizardsReborn.MOD_ID+":soul_hunter_wissen_wand");
-        ItemSkinsModels.addSkin(WizardsReborn.MOD_ID+":implosion_sword");
-        ItemSkinsModels.addSkin(WizardsReborn.MOD_ID+":implosion_pickaxe");
-        ItemSkinsModels.addSkin(WizardsReborn.MOD_ID+":implosion_axe");
-        ItemSkinsModels.addSkin(WizardsReborn.MOD_ID+":implosion_shovel");
-        ItemSkinsModels.addSkin(WizardsReborn.MOD_ID+":implosion_hoe");
-        ItemSkinsModels.addSkin(WizardsReborn.MOD_ID+":implosion_scythe");
-        ItemSkinsModels.addSkin(WizardsReborn.MOD_ID+":implosion_knife");
-        ItemSkinsModels.addSkin(WizardsReborn.MOD_ID+":implosion_arcane_wand");
-        ItemSkinsModels.addSkin(WizardsReborn.MOD_ID+":implosion_wissen_wand");
-        ItemSkinsModels.addSkin(WizardsReborn.MOD_ID+":magnificent_maid_headwear");
-        ItemSkinsModels.addSkin(WizardsReborn.MOD_ID+":magnificent_maid_suit");
-        ItemSkinsModels.addSkin(WizardsReborn.MOD_ID+":magnificent_maid_stockings");
-        ItemSkinsModels.addSkin(WizardsReborn.MOD_ID+":magnificent_maid_boots");
-        ItemSkinsModels.addSkin(WizardsReborn.MOD_ID+":magnificent_maid_arcane_wand");
-        ItemSkinsModels.addSkin(WizardsReborn.MOD_ID+":magnificent_maid_wissen_wand");
-        ItemSkinsModels.addSkin(WizardsReborn.MOD_ID+":summer_love_flower");
-        ItemSkinsModels.addSkin(WizardsReborn.MOD_ID+":summer_love_dress");
-        ItemSkinsModels.addSkin(WizardsReborn.MOD_ID+":summer_love_boots");
-        ItemSkinsModels.addSkin(WizardsReborn.MOD_ID+":summer_love_arcane_wand");
-        ItemSkinsModels.addSkin(WizardsReborn.MOD_ID+":summer_love_wissen_wand");
+        ItemSkinModels.addSkin(WizardsReborn.MOD_ID+":top_hat");
+        ItemSkinModels.addSkin(WizardsReborn.MOD_ID+":soul_hunter_hood");
+        ItemSkinModels.addSkin(WizardsReborn.MOD_ID+":soul_hunter_costume");
+        ItemSkinModels.addSkin(WizardsReborn.MOD_ID+":soul_hunter_trousers");
+        ItemSkinModels.addSkin(WizardsReborn.MOD_ID+":soul_hunter_boots");
+        ItemSkinModels.addSkin(WizardsReborn.MOD_ID+":soul_hunter_scythe");
+        ItemSkinModels.addSkin(WizardsReborn.MOD_ID+":soul_hunter_arcane_wand");
+        ItemSkinModels.addSkin(WizardsReborn.MOD_ID+":soul_hunter_wissen_wand");
+        ItemSkinModels.addSkin(WizardsReborn.MOD_ID+":implosion_sword");
+        ItemSkinModels.addSkin(WizardsReborn.MOD_ID+":implosion_pickaxe");
+        ItemSkinModels.addSkin(WizardsReborn.MOD_ID+":implosion_axe");
+        ItemSkinModels.addSkin(WizardsReborn.MOD_ID+":implosion_shovel");
+        ItemSkinModels.addSkin(WizardsReborn.MOD_ID+":implosion_hoe");
+        ItemSkinModels.addSkin(WizardsReborn.MOD_ID+":implosion_scythe");
+        ItemSkinModels.addSkin(WizardsReborn.MOD_ID+":implosion_knife");
+        ItemSkinModels.addBowSkin(WizardsReborn.MOD_ID+":implosion_bow");
+        ItemSkinModels.addSkin(WizardsReborn.MOD_ID+":implosion_arcane_wand");
+        ItemSkinModels.addSkin(WizardsReborn.MOD_ID+":implosion_wissen_wand");
+        ItemSkinModels.addSkin(WizardsReborn.MOD_ID+":magnificent_maid_headwear");
+        ItemSkinModels.addSkin(WizardsReborn.MOD_ID+":magnificent_maid_suit");
+        ItemSkinModels.addSkin(WizardsReborn.MOD_ID+":magnificent_maid_stockings");
+        ItemSkinModels.addSkin(WizardsReborn.MOD_ID+":magnificent_maid_boots");
+        ItemSkinModels.addSkin(WizardsReborn.MOD_ID+":magnificent_maid_arcane_wand");
+        ItemSkinModels.addSkin(WizardsReborn.MOD_ID+":magnificent_maid_wissen_wand");
+        ItemSkinModels.addSkin(WizardsReborn.MOD_ID+":summer_love_flower");
+        ItemSkinModels.addSkin(WizardsReborn.MOD_ID+":summer_love_dress");
+        ItemSkinModels.addSkin(WizardsReborn.MOD_ID+":summer_love_boots");
+        ItemSkinModels.addSkin(WizardsReborn.MOD_ID+":summer_love_arcane_wand");
+        ItemSkinModels.addSkin(WizardsReborn.MOD_ID+":summer_love_wissen_wand");
     }
 
     @Mod.EventBusSubscriber(modid = WizardsReborn.MOD_ID, bus = Mod.EventBusSubscriber.Bus.MOD, value = Dist.CLIENT)
@@ -115,6 +118,7 @@ public class WizardsRebornItemSkins {
             LargeItemRenderer.bakeModel(map, WizardsReborn.MOD_ID, "arcane_wood_scythe", new ItemSkinItemOverrides());
             LargeItemRenderer.bakeModel(map, WizardsReborn.MOD_ID, "innocent_wood_scythe", new ItemSkinItemOverrides());
             LargeItemRenderer.bakeModel(map, WizardsReborn.MOD_ID, "arcane_gold_scythe", new ItemSkinItemOverrides());
+            FluffyFurModels.addBowItemModel(map, WizardsRebornItems.ARCANE_WOOD_BOW.getId(), new BowSkinItemOverrides());
             FluffyFurItemSkins.addSkinModel(map, WizardsRebornItems.ARCANE_FORTRESS_HELMET.getId());
             FluffyFurItemSkins.addSkinModel(map, WizardsRebornItems.ARCANE_FORTRESS_CHESTPLATE.getId());
             FluffyFurItemSkins.addSkinModel(map, WizardsRebornItems.ARCANE_FORTRESS_LEGGINGS.getId());

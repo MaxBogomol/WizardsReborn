@@ -684,9 +684,7 @@ public class WizardsRebornItems {
 
         @SubscribeEvent
         public static void modelRegistryItems(ModelEvent.RegisterAdditional event) {
-            event.register(LargeItemRenderer.getModelResourceLocation(WizardsReborn.MOD_ID, "arcane_gold_scythe"));
-            event.register(LargeItemRenderer.getModelResourceLocation(WizardsReborn.MOD_ID, "arcane_wood_scythe"));
-            event.register(LargeItemRenderer.getModelResourceLocation(WizardsReborn.MOD_ID, "innocent_wood_scythe"));
+            FluffyFurModels.addBowItemModel(event, WizardsReborn.MOD_ID, "arcane_wood_bow");
             event.register(LargeItemRenderer.getModelResourceLocation(WizardsReborn.MOD_ID, "blaze_reap"));
 
             for (String skin : LeatherCollarItem.skins.values()) {
