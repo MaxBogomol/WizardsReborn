@@ -235,13 +235,18 @@ public class ArcaneWandItem extends Item implements IWissenItem, ICustomAnimatio
         }
     }
 
+    public boolean canSpell(Spell spell, Player player, ItemStack stack) {
+        CompoundTag nbt = stack.getOrCreateTag();
+        return nbt.getBoolean("crystal") && nbt.getInt("cooldown") <= 0 && WissenItemUtil.canRemoveWissen(stack, spell.getWissenCostWithStat(Spell.getStats(stack), player));
+    }
+
     @Override
     public InteractionResultHolder<ItemStack> use(Level level, Player player, InteractionHand hand) {
         ItemStack stack = player.getItemInHand(hand);
 
         if (canSpell(stack, player)) {
             Spell spell = Spells.getSpell(getSpell(stack));
-            if (spell.canSpell(level, player, hand) && spell.canSpellAir(level, player, hand)) {
+            if (canSpell(spell, player, stack) && spell.canSpellAir(level, player, hand)) {
                 if (spell.canWandWithCrystal(getItemCrystal(stack))) {
                     spell.useWand(level, player, hand, stack);
                     return InteractionResultHolder.success(stack);

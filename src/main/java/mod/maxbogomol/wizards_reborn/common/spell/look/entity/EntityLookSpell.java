@@ -1,16 +1,14 @@
 package mod.maxbogomol.wizards_reborn.common.spell.look.entity;
 
 import mod.maxbogomol.wizards_reborn.common.spell.look.LookSpell;
-import net.minecraft.world.InteractionHand;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.level.Level;
-import net.minecraftforge.common.ForgeMod;
 
 import java.util.function.Predicate;
 
 public class EntityLookSpell extends LookSpell {
+
     public EntityLookSpell(String id, int points) {
         super(id, points);
     }
@@ -18,8 +16,8 @@ public class EntityLookSpell extends LookSpell {
     public float getLookDistance() {
         return 2f;
     }
-/*
-    public float getReachDistance(Level level, Player player, InteractionHand hand) {
+
+/*    public float getReachDistance(Level level, Player player, InteractionHand hand) {
         if (hasReachDistance(level, player, hand)) return (float) (player.getAttributeValue(ForgeMod.ENTITY_REACH.get()) + getLookDistance(level, player, hand));
         return (getLookDistance(level, player, hand));
     }

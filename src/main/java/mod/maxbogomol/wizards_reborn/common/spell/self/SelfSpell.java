@@ -32,13 +32,14 @@ public class SelfSpell extends Spell {
             useSpell(level, spellContext);
         }
     }
-/*
+
+    @Override
     public boolean canSpell(Level level, SpellContext spellContext) {
-        if (super.canSpell(level, player, hand)) {
+        if (super.canSpell(level, spellContext)) {
             return canSelfSpell(level, spellContext);
         }
         return false;
-    }*/
+    }
 
     public boolean canSelfSpell(Level level, SpellContext spellContext) {
         return true;

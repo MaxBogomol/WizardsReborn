@@ -11,10 +11,12 @@ import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.phys.Vec3;
 
 import java.awt.*;
 
 public class HeartOfNatureSpell extends SelfSpell {
+
     public HeartOfNatureSpell(String id, int points) {
         super(id, points);
         addCrystalType(WizardsRebornCrystals.EARTH);
@@ -54,7 +56,7 @@ public class HeartOfNatureSpell extends SelfSpell {
                 entity.addEffect(new MobEffectInstance(MobEffects.HEAL, 1, heal));
                 entity.addEffect(new MobEffectInstance(MobEffects.REGENERATION, (int) (250 + (40 * (focusLevel + magicModifier))), regen));
                 entity.addEffect(new MobEffectInstance(MobEffects.DAMAGE_RESISTANCE, (int) (680 + (120 * (focusLevel + magicModifier))), 0));
-                PacketHandler.sendToTracking(entity.level(), entity.blockPosition(), new HeartOfNatureSpellPacket(entity.position().add(0, entity.getBbHeight() / 2f, 0), getColor()));
+                PacketHandler.sendToTracking(entity.level(), entity.blockPosition(), new HeartOfNatureSpellPacket(entity.position().add(0, entity.getBbHeight() / 2f, 0), new Vec3(entity.getBbWidth() / 2f, entity.getBbHeight() / 2f, entity.getBbWidth() / 2f), getColor()));
             }
         }
     }

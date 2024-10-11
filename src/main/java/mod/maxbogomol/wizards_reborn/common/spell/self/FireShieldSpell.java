@@ -11,6 +11,7 @@ import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.phys.Vec3;
 
 import java.awt.*;
 
@@ -45,7 +46,7 @@ public class FireShieldSpell extends SelfSpell {
 
                 entity.addEffect(new MobEffectInstance(MobEffects.FIRE_RESISTANCE, (int) (2000 + (450 * (focusLevel + magicModifier))), 0));
                 entity.setTicksFrozen(0);
-                PacketHandler.sendToTracking(entity.level(), entity.blockPosition(), new FireShieldSpellPacket(entity.position().add(0, entity.getBbHeight() / 2f, 0), getColor()));
+                PacketHandler.sendToTracking(entity.level(), entity.blockPosition(), new FireShieldSpellPacket(entity.position().add(0, entity.getBbHeight() / 2f, 0), new Vec3(entity.getBbWidth() / 2f, entity.getBbHeight() / 2f, entity.getBbWidth() / 2f), getColor()));
             }
         }
     }

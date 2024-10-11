@@ -37,8 +37,8 @@ public class AirImpactSpell extends EntityLookSpell {
     @Override
     public float getLookAdditionalDistance() {
         return 0.25f;
-    }*/
-/*
+    }
+
     @Override
     public boolean hasReachDistance(Level level, Player player, InteractionHand hand) {
         return false;

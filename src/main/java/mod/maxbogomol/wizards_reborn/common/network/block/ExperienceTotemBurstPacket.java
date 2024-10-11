@@ -40,7 +40,7 @@ public class ExperienceTotemBurstPacket extends TwoPositionClientPacket {
 
             double dX = x1 - pos.x();
             double dY = y1 + 0.25f - pos.y();
-            double dZ = x1 - pos.z();
+            double dZ = z1 - pos.z();
 
             double yaw = Math.atan2(dZ, dX);
             double pitch = Math.atan2(Math.sqrt(dZ * dZ + dX * dX), dY) + Math.PI;

@@ -43,7 +43,7 @@ public class ArcaneFortressArmorItem extends ArcaneArmorItem implements IForgeIt
     public void initializeClient(java.util.function.Consumer<IClientItemExtensions> consumer) {
         consumer.accept(new IClientItemExtensions() {
             @Override
-            public ArmorModel getHumanoidArmorModel(LivingEntity entity, ItemStack itemStack, EquipmentSlot armorSlot, HumanoidModel _default) {
+            public ArmorModel getHumanoidArmorModel(LivingEntity entity, ItemStack itemStack, EquipmentSlot equipmentSlot, HumanoidModel original) {
                 float partialTicks = Minecraft.getInstance().getFrameTime();
                 float f = Mth.rotLerp(partialTicks, entity.yBodyRotO, entity.yBodyRot);
                 float f1 = Mth.rotLerp(partialTicks, entity.yHeadRotO, entity.yHeadRot);
@@ -56,10 +56,10 @@ public class ArcaneFortressArmorItem extends ArcaneArmorItem implements IForgeIt
                 }
 
                 ItemSkin skin = ItemSkin.getSkinFromItem(itemStack);
-                if (skin != null) model = skin.getArmorModel(entity, itemStack, armorSlot, _default);
+                if (skin != null) model = skin.getArmorModel(entity, itemStack, equipmentSlot, original);
 
                 model.slot = type.getSlot();
-                model.copyFromDefault(_default);
+                model.copyFromDefault(original);
                 model.setupAnim(entity, entity.walkAnimation.position(partialTicks), entity.walkAnimation.speed(partialTicks), entity.tickCount + partialTicks, netHeadYaw, netHeadPitch);
                 return model;
             }
