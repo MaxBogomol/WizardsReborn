@@ -1,12 +1,22 @@
 package mod.maxbogomol.wizards_reborn.common.spell.look.entity;
 
+import mod.maxbogomol.wizards_reborn.api.crystal.CrystalUtil;
+import mod.maxbogomol.wizards_reborn.api.spell.SpellContext;
 import mod.maxbogomol.wizards_reborn.client.animation.StrikeSpellItemAnimation;
+import mod.maxbogomol.wizards_reborn.common.item.equipment.arcane.ArcaneArmorItem;
+import mod.maxbogomol.wizards_reborn.common.network.PacketHandler;
+import mod.maxbogomol.wizards_reborn.common.network.spell.AirImpactSpellPacket;
 import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornCrystals;
 import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornSpells;
+import net.minecraft.core.BlockPos;
+import net.minecraft.world.entity.Entity;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.phys.Vec3;
 
 import java.awt.*;
 
 public class AirImpactSpell extends EntityLookSpell {
+
     public static StrikeSpellItemAnimation animation = new StrikeSpellItemAnimation();
 
     public AirImpactSpell(String id, int points) {
@@ -30,49 +40,44 @@ public class AirImpactSpell extends EntityLookSpell {
     }
 
     @Override
-    public float getLookDistance() {
+    public double getLookDistance() {
         return 2.5f;
     }
-/*
+
     @Override
-    public float getLookAdditionalDistance() {
+    public double getLookAdditionalDistance() {
         return 0.25f;
     }
 
     @Override
-    public boolean hasReachDistance(Level level, Player player, InteractionHand hand) {
+    public boolean hasReachDistance(SpellContext spellContext) {
         return false;
     }
 
     @Override
-    public boolean canLookSpell(Level level, Player player, InteractionHand hand) {
-        return getEntityHit(level, player, hand, getAllFilter(player), 0, 1.5f, false).hasEntities();
+    public boolean canLookSpell(Level level, SpellContext spellContext) {
+        return getEntityHit(level, spellContext, getAllFilter(spellContext.getEntity()), 0, 1.5f, false).hasEntities();
     }
 
     @Override
-    public void lookSpell(Level level, Player player, InteractionHand hand) {
-        ItemStack stack = player.getItemInHand(hand);
-        CompoundTag stats = getStats(stack);
-        int focusLevel = CrystalUtil.getStatLevel(stats, WizardsRebornCrystals.FOCUS);
-        float magicModifier = ArcaneArmorItem.getPlayerMagicModifier(player);
-        float power = 1.1f + ((focusLevel + magicModifier) * 0.1f);
+    public void lookSpell(Level level, SpellContext spellContext) {
+        if (!level.isClientSide()) {
+            int focusLevel = CrystalUtil.getStatLevel(spellContext.getStats(), WizardsRebornCrystals.FOCUS);
+            float magicModifier = ArcaneArmorItem.getPlayerMagicModifier(spellContext.getEntity());
+            float power = 1.1f + ((focusLevel + magicModifier) * 0.1f);
 
-        Vec3 vec = player.getLookAngle().scale(power);
+            Vec3 vec = spellContext.getVec().scale(power);
 
-        HitResult hit = getEntityHit(level, player, hand, getAllFilter(player), 0, 1.5f, false);
-        if (hit.hasEntities()) {
-            for (Entity entity : hit.getEntities()) {
-                entity.push(vec.x(), vec.y() / 2, vec.z());
-                entity.hurtMarked = true;
+            HitResult hit = getEntityHit(level, spellContext, getAllFilter(spellContext.getEntity()), 0, 1.5f, false);
+            if (hit.hasEntities()) {
+                for (Entity entity : hit.getEntities()) {
+                    entity.push(vec.x(), vec.y() / 2, vec.z());
+                    entity.hurtMarked = true;
+                }
             }
+
+            Vec3 pos = spellContext.getPos().add(spellContext.getVec().scale(0.5f));
+            PacketHandler.sendToTracking(level, BlockPos.containing(pos), new AirImpactSpellPacket(pos, vec.scale(0.35f), getColor()));
         }
-
-        Color color = getColor();
-        float r = color.getRed() / 255f;
-        float g = color.getGreen() / 255f;
-        float b = color.getBlue() / 255f;
-
-        Vec3 pos = player.getEyePosition().add(player.getLookAngle().scale(0.5f));
-        PacketHandler.sendToTracking(level, player.getOnPos(), new AirImpactSpellEffectPacket((float) pos.x(), (float) pos.y(), (float) pos.z(), (float) vec.x() / 3, (float) vec.y() / 6, (float) vec.z() / 3, r, g, b));
-    }*/
+    }
 }

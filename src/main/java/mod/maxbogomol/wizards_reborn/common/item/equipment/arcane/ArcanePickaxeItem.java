@@ -2,6 +2,7 @@ package mod.maxbogomol.wizards_reborn.common.item.equipment.arcane;
 
 import mod.maxbogomol.fluffy_fur.common.itemskin.ItemSkin;
 import mod.maxbogomol.wizards_reborn.api.arcaneenchantment.ArcaneEnchantmentType;
+import mod.maxbogomol.wizards_reborn.api.arcaneenchantment.ArcaneEnchantmentTypes;
 import mod.maxbogomol.wizards_reborn.api.arcaneenchantment.ArcaneEnchantmentUtil;
 import mod.maxbogomol.wizards_reborn.api.arcaneenchantment.IArcaneItem;
 import mod.maxbogomol.wizards_reborn.api.wissen.WissenUtil;
@@ -30,9 +31,9 @@ public class ArcanePickaxeItem extends PickaxeItem implements IArcaneItem {
 
     public ArcanePickaxeItem(Tier tier, int attackDamageModifier, float attackSpeedModifier, Properties properties) {
         super(tier, attackDamageModifier, attackSpeedModifier, properties);
-        arcaneEnchantmentTypes.add(ArcaneEnchantmentType.BREAKABLE);
-        arcaneEnchantmentTypes.add(ArcaneEnchantmentType.PICKAXE);
-        arcaneEnchantmentTypes.add(ArcaneEnchantmentType.TOOL);
+        arcaneEnchantmentTypes.add(ArcaneEnchantmentTypes.BREAKABLE);
+        arcaneEnchantmentTypes.add(ArcaneEnchantmentTypes.PICKAXE);
+        arcaneEnchantmentTypes.add(ArcaneEnchantmentTypes.TOOL);
     }
 
     @Override

@@ -1,9 +1,10 @@
 package mod.maxbogomol.wizards_reborn.common.spell.look.entity;
 
+import mod.maxbogomol.wizards_reborn.api.spell.SpellContext;
 import mod.maxbogomol.wizards_reborn.common.spell.look.LookSpell;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.level.Level;
 
 import java.util.function.Predicate;
 
@@ -13,46 +14,46 @@ public class EntityLookSpell extends LookSpell {
         super(id, points);
     }
 
-    public float getLookDistance() {
+    public double getLookDistance() {
         return 2f;
     }
 
-/*    public float getReachDistance(Level level, Player player, InteractionHand hand) {
-        if (hasReachDistance(level, player, hand)) return (float) (player.getAttributeValue(ForgeMod.ENTITY_REACH.get()) + getLookDistance(level, player, hand));
-        return (getLookDistance(level, player, hand));
+    public double getReachDistance(SpellContext spellContext) {
+        if (hasReachDistance(spellContext)) return (spellContext.getDistance() + getLookDistance(spellContext));
+        return getLookDistance(spellContext);
     }
 
-    public boolean hasReachDistance(Level level, Player player, InteractionHand hand) {
+    public boolean hasReachDistance(SpellContext spellContext) {
         return true;
     }
 
     @Override
-    public boolean canLookSpell(Level level, Player player, InteractionHand hand) {
-        return getEntityHit(level, player, hand).hasEntities();
+    public boolean canLookSpell(Level level, SpellContext spellContext) {
+        return getEntityHit(level, spellContext).hasEntities();
     }
 
-    public HitResult getEntityHit(Level level, Player player, InteractionHand hand, Predicate<Entity> entityFilter, int entityCount, float size, boolean endE) {
-        float distance = getReachDistance(level, player, hand);
-        return getHitPos(level, player.getEyePosition(), player.getEyePosition().add(player.getLookAngle().scale(distance)), entityFilter, entityCount, size, endE);
+    public HitResult getEntityHit(Level level, SpellContext spellContext, Predicate<Entity> entityFilter, int entityCount, float size, boolean endE) {
+        double distance = getReachDistance(spellContext);
+        return getHitPos(level, spellContext.getPos(), spellContext.getPos().add(spellContext.getVec().scale(distance)), entityFilter, entityCount, size, endE);
     }
 
-    public HitResult getEntityHit(Level level, Player player, InteractionHand hand, Predicate<Entity> entityFilter) {
-        float distance = getReachDistance(level, player, hand);
-        return getHitPos(level, player.getEyePosition(), player.getEyePosition().add(player.getLookAngle().scale(distance)), entityFilter, 1, 0.2f, true);
+    public HitResult getEntityHit(Level level, SpellContext spellContext, Predicate<Entity> entityFilter) {
+        double distance = getReachDistance(spellContext);
+        return getHitPos(level, spellContext.getPos(), spellContext.getPos().add(spellContext.getVec().scale(distance)), entityFilter, 1, 0.2f, true);
     }
 
-    public HitResult getEntityHit(Level level, Player player, InteractionHand hand) {
-        float distance = getReachDistance(level, player, hand);
-        return getHitPos(level, player.getEyePosition(), player.getEyePosition().add(player.getLookAngle().scale(distance)), getStandardFilter(player), 1, 0.2f, true);
-    }*/
+    public HitResult getEntityHit(Level level, SpellContext spellContext) {
+        double distance = getReachDistance(spellContext);
+        return getHitPos(level, spellContext.getPos(), spellContext.getPos().add(spellContext.getVec().scale(distance)), getStandardFilter(spellContext.getEntity()), 1, 0.2f, true);
+    }
 
     public static Predicate<Entity> getStandardFilter() {
         return (e) -> {return e instanceof LivingEntity;};
     }
 
-    public static Predicate<Entity> getStandardFilter(Player player) {
+    public static Predicate<Entity> getStandardFilter(Entity entity) {
         return (e) -> {
-            if (!e.equals(player)) {
+            if (!e.equals(entity)) {
                 return e instanceof LivingEntity;
             }
             return false;
@@ -63,9 +64,9 @@ public class EntityLookSpell extends LookSpell {
         return (e) -> {return true;};
     }
 
-    public static Predicate<Entity> getAllFilter(Player player) {
+    public static Predicate<Entity> getAllFilter(Entity entity) {
         return (e) -> {
-            return !e.equals(player);
+            return !e.equals(entity);
         };
     }
 }

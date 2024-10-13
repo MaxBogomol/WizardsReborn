@@ -1,6 +1,6 @@
 package mod.maxbogomol.wizards_reborn.common.item.equipment.arcanewood;
 
-import mod.maxbogomol.wizards_reborn.api.arcaneenchantment.ArcaneEnchantmentType;
+import mod.maxbogomol.wizards_reborn.api.arcaneenchantment.ArcaneEnchantmentTypes;
 import mod.maxbogomol.wizards_reborn.common.item.equipment.arcane.ArcaneAxeItem;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
@@ -19,7 +19,7 @@ public class ArcaneWoodAxeItem extends ArcaneAxeItem {
     public ArcaneWoodAxeItem(Tier tier, float attackDamageModifier, float attackSpeedModifier, Properties properties, Item repairItem) {
         super(tier, attackDamageModifier, attackSpeedModifier, properties);
         this.tools = getTools(repairItem);
-        arcaneEnchantmentTypes.add(ArcaneEnchantmentType.WOODEN);
+        arcaneEnchantmentTypes.add(ArcaneEnchantmentTypes.WOODEN);
     }
 
     public ArcaneWoodTools getTools(Item repairItem) {

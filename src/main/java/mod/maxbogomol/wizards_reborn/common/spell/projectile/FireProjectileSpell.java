@@ -34,8 +34,7 @@ public class FireProjectileSpell extends ProjectileSpell {
             float damage = (float) (3.5f + (focusLevel * 0.5)) + magicModifier;
             DamageSource damageSource = getDamage(target.damageSources().onFire().typeHolder(), entity, entity.getOwner());
             int fire = target.getRemainingFireTicks() + 5;
-            if (fire > 10) fire = 10;
-            target.setSecondsOnFire(fire);
+            if (fire <= 10) target.setSecondsOnFire(fire);
             target.setTicksFrozen(0);
             target.hurt(damageSource, damage);
         }

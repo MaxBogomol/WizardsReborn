@@ -2,9 +2,6 @@ package mod.maxbogomol.wizards_reborn.common.spell.look.strike;
 
 import mod.maxbogomol.wizards_reborn.client.animation.StrikeSpellItemAnimation;
 import mod.maxbogomol.wizards_reborn.common.spell.look.block.BlockLookSpell;
-import net.minecraft.world.InteractionHand;
-import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.level.Level;
 
 import java.awt.*;
 
@@ -43,13 +40,13 @@ public class StrikeSpell extends BlockLookSpell {
     public int getMinimumPolishingLevel() {
         return 1;
     }
-
+/*
     @Override
     public void useSpell(Level level, Player player, InteractionHand hand) {
         if (!level.isClientSide) {
             player.startUsingItem(hand);
         }
-    }
+    }*/
 /*
     @Override
     public void onUseTick(Level level, LivingEntity livingEntity, ItemStack stack, int remainingUseDuration) {

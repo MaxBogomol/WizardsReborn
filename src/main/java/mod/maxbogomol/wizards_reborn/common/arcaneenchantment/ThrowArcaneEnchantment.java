@@ -3,7 +3,7 @@ package mod.maxbogomol.wizards_reborn.common.arcaneenchantment;
 import com.google.common.collect.Multimap;
 import mod.maxbogomol.fluffy_fur.client.animation.ItemAnimation;
 import mod.maxbogomol.wizards_reborn.api.arcaneenchantment.ArcaneEnchantment;
-import mod.maxbogomol.wizards_reborn.api.arcaneenchantment.ArcaneEnchantmentType;
+import mod.maxbogomol.wizards_reborn.api.arcaneenchantment.ArcaneEnchantmentTypes;
 import mod.maxbogomol.wizards_reborn.api.arcaneenchantment.ArcaneEnchantmentUtil;
 import mod.maxbogomol.wizards_reborn.api.arcaneenchantment.IArcaneItem;
 import mod.maxbogomol.wizards_reborn.api.wissen.WissenUtil;
@@ -44,7 +44,7 @@ public class ThrowArcaneEnchantment extends ArcaneEnchantment {
     @Override
     public boolean canEnchantItem(ItemStack stack) {
         if (stack.getItem() instanceof IArcaneItem item) {
-            return item.getArcaneEnchantmentTypes().contains(ArcaneEnchantmentType.SCYTHE);
+            return item.getArcaneEnchantmentTypes().contains(ArcaneEnchantmentTypes.SCYTHE);
         }
         return false;
     }

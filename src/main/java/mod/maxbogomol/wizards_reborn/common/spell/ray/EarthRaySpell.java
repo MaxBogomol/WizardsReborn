@@ -8,6 +8,7 @@ import net.minecraft.world.level.block.state.BlockState;
 import java.awt.*;
 
 public class EarthRaySpell extends RaySpell {
+
     public EarthRaySpell(String id, int points) {
         super(id, points);
         addCrystalType(WizardsRebornCrystals.EARTH);

@@ -2,6 +2,7 @@ package mod.maxbogomol.wizards_reborn.common.item.equipment.arcane;
 
 import mod.maxbogomol.fluffy_fur.common.itemskin.ItemSkin;
 import mod.maxbogomol.wizards_reborn.api.arcaneenchantment.ArcaneEnchantmentType;
+import mod.maxbogomol.wizards_reborn.api.arcaneenchantment.ArcaneEnchantmentTypes;
 import mod.maxbogomol.wizards_reborn.api.arcaneenchantment.ArcaneEnchantmentUtil;
 import mod.maxbogomol.wizards_reborn.api.arcaneenchantment.IArcaneItem;
 import net.minecraft.network.chat.Component;
@@ -24,10 +25,10 @@ public class ArcaneSwordItem extends SwordItem implements IArcaneItem {
 
     public ArcaneSwordItem(Tier tier, int attackDamageModifier, float attackSpeedModifier, Properties properties) {
         super(tier, attackDamageModifier, attackSpeedModifier, properties);
-        arcaneEnchantmentTypes.add(ArcaneEnchantmentType.BREAKABLE);
-        arcaneEnchantmentTypes.add(ArcaneEnchantmentType.SWORD);
-        arcaneEnchantmentTypes.add(ArcaneEnchantmentType.WEAPON);
-        arcaneEnchantmentTypes.add(ArcaneEnchantmentType.MELEE_WEAPON);
+        arcaneEnchantmentTypes.add(ArcaneEnchantmentTypes.BREAKABLE);
+        arcaneEnchantmentTypes.add(ArcaneEnchantmentTypes.SWORD);
+        arcaneEnchantmentTypes.add(ArcaneEnchantmentTypes.WEAPON);
+        arcaneEnchantmentTypes.add(ArcaneEnchantmentTypes.MELEE_WEAPON);
     }
 
     @Override

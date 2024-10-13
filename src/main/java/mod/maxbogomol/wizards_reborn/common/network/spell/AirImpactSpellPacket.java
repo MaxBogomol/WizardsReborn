@@ -20,13 +20,13 @@ import java.awt.*;
 import java.util.function.Consumer;
 import java.util.function.Supplier;
 
-public class AirFlowSpellPacket extends TwoPositionColorClientPacket {
+public class AirImpactSpellPacket extends TwoPositionColorClientPacket {
 
-    public AirFlowSpellPacket(double x1, double y1, double z1, double x2, double y2, double z2, float r, float g, float b, float a) {
+    public AirImpactSpellPacket(double x1, double y1, double z1, double x2, double y2, double z2, float r, float g, float b, float a) {
         super(x1, y1, z1, x2, y2, z2, r, g, b, a);
     }
 
-    public AirFlowSpellPacket(Vec3 vec1, Vec3 vec2, Color color) {
+    public AirImpactSpellPacket(Vec3 vec1, Vec3 vec2, Color color) {
         super(vec1, vec2, color);
     }
 
@@ -42,7 +42,7 @@ public class AirFlowSpellPacket extends TwoPositionColorClientPacket {
             double yaw = Math.atan2(dZ, dX);
             double pitch = Math.atan2(Math.sqrt(dZ * dZ + dX * dX), dY) + Math.PI;
 
-            float speed = 0.1f + (p.getAge() * 0.001f);
+            float speed = 0.07f + (p.getAge() * 0.001f);
             double x = Math.sin(pitch) * Math.cos(yaw) * speed;
             double y = Math.cos(pitch) * speed;
             double z = Math.sin(pitch) * Math.sin(yaw) * speed;
@@ -60,19 +60,19 @@ public class AirFlowSpellPacket extends TwoPositionColorClientPacket {
                 .setTransparencyData(GenericParticleData.create(0.6f, 0).setEasing(Easing.QUARTIC_OUT).build())
                 .setScaleData(GenericParticleData.create(0.5f).setEasing(Easing.QUARTIC_OUT).build())
                 .addTickActor(target)
-                .setLifetime(20)
-                .randomVelocity(0.35f)
-                .randomOffset(0.15f)
+                .setLifetime(15)
+                .randomVelocity(0.5f)
+                .randomOffset(0.3f)
                 .setVelocity(x2, y2, z2)
                 .setFriction(0.8f)
-                .repeat(level, x1, y1, z1, 25);
+                .repeat(level, x1, y1, z1, 35);
     }
 
     public static void register(SimpleChannel instance, int index) {
-        instance.registerMessage(index, AirFlowSpellPacket.class, AirFlowSpellPacket::encode, AirFlowSpellPacket::decode, AirFlowSpellPacket::handle);
+        instance.registerMessage(index, AirImpactSpellPacket.class, AirImpactSpellPacket::encode, AirImpactSpellPacket::decode, AirImpactSpellPacket::handle);
     }
 
-    public static AirFlowSpellPacket decode(FriendlyByteBuf buf) {
-        return decode(AirFlowSpellPacket::new, buf);
+    public static AirImpactSpellPacket decode(FriendlyByteBuf buf) {
+        return decode(AirImpactSpellPacket::new, buf);
     }
 }

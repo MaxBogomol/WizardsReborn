@@ -8,7 +8,6 @@ import mod.maxbogomol.wizards_reborn.client.arcanemicon.ArcanemiconGui;
 import mod.maxbogomol.wizards_reborn.client.arcanemicon.Page;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
-import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
@@ -47,9 +46,9 @@ public class MonogramRecipesPage extends Page {
                 if (!renderTooltip) {
                     gui.blit(BACKGROUND, x + (right ? 69 : 9), y + 7 + (ii * 12), 158, 20, 50, 10);
 
-                    monogram.renderArcanemiconMiniIcon(book, gui, x + (right ? 69 : 9) + 1, y + 7 + (ii * 12) + 1);
-                    extraMonogram.renderArcanemiconMiniIcon(book, gui, x + (right ? 69 : 9) + 21, y + 7 + (ii * 12) + 1);
-                    recipe.getOutput().renderArcanemiconMiniIcon(book, gui, x + (right ? 69 : 9) + 41, y + 7 + (ii * 12) + 1);
+                    monogram.renderMiniIcon(gui, x + (right ? 69 : 9) + 1, y + 7 + (ii * 12) + 1);
+                    extraMonogram.renderMiniIcon(gui, x + (right ? 69 : 9) + 21, y + 7 + (ii * 12) + 1);
+                    recipe.getOutput().renderMiniIcon(gui, x + (right ? 69 : 9) + 41, y + 7 + (ii * 12) + 1);
                 } else {
                     if (mouseX >= x + (right ? 69 : 9) + 1 && mouseY >= y + 7 + (ii * 12) + 1 && mouseX <= x + (right ? 69 : 9) + 1 + 8 && mouseY <= y + 7 + (ii * 12) + 1 + 8) {
                         gui.renderTooltip(Minecraft.getInstance().font, monogram.getComponentList(), Optional.empty(), mouseX, mouseY);
@@ -83,9 +82,9 @@ public class MonogramRecipesPage extends Page {
             if (!renderTooltip) {
                 gui.blit(BACKGROUND, x + 39, y + 7 + (ii * 12), 158, 20, 50, 10);
 
-                recipe.getInputs().get(0).renderArcanemiconMiniIcon(book, gui, x + 39 + 1, y + 7 + (ii * 12) + 1);
-                recipe.getInputs().get(1).renderArcanemiconMiniIcon(book, gui, x + 39 + 21, y + 7 + (ii * 12) + 1);
-                recipe.getOutput().renderArcanemiconMiniIcon(book, gui, x + 39 + 41, y + 7 + (ii * 12) + 1);
+                recipe.getInputs().get(0).renderMiniIcon(gui, x + 39 + 1, y + 7 + (ii * 12) + 1);
+                recipe.getInputs().get(1).renderMiniIcon(gui, x + 39 + 21, y + 7 + (ii * 12) + 1);
+                recipe.getOutput().renderMiniIcon(gui, x + 39 + 41, y + 7 + (ii * 12) + 1);
             } else {
                 if (mouseX >= x + 39 + 1 && mouseY >= y + 7 + (ii * 12) + 1 && mouseX <= x + 39 + 1 + 8 && mouseY <= y + 7 + (ii * 12) + 1 + 8) {
                     gui.renderTooltip(Minecraft.getInstance().font, recipe.getInputs().get(0).getComponentList(), Optional.empty(), mouseX, mouseY);

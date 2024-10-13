@@ -283,9 +283,7 @@ public class ArcaneWandScreen extends Screen {
                 int X = (int) (Math.cos(dst) * (100 * Math.sin(Math.toRadians(90 * hoveramount))));
                 int Y = (int) (Math.sin(dst) * (100 * Math.sin(Math.toRadians(90 * hoveramount))));
 
-                float r = 1f;
-                float g = 1f;
-                float b = 1f;
+                Color color = Color.WHITE;
                 ResourceLocation icon = new ResourceLocation(WizardsReborn.MOD_ID, "textures/gui/arcanemicon/research.png");
 
                 if (i == 1) {
@@ -307,9 +305,7 @@ public class ArcaneWandScreen extends Screen {
                             if (nbt.getString("spell") != "") {
                                 Spell spell = Spells.getSpell(nbt.getString("spell"));
                                 if (KnowledgeUtil.isSpell(Minecraft.getInstance().player, spell)) {
-                                    r = spell.getColor().getRed() / 255f;
-                                    g = spell.getColor().getGreen() / 255f;
-                                    b = spell.getColor().getBlue() / 255f;
+                                    color = spell.getColor();
                                     icon = spell.getIcon();
                                 } else {
                                     icon = new ResourceLocation(WizardsReborn.MOD_ID, "textures/gui/arcanemicon/unknown.png");
@@ -332,9 +328,7 @@ public class ArcaneWandScreen extends Screen {
                         if (spell != null) break;
                     }
                     if (spell != null) {
-                        r = spell.getColor().getRed() / 255f;
-                        g = spell.getColor().getGreen() / 255f;
-                        b = spell.getColor().getBlue() / 255f;
+                        color = spell.getColor();
                         icon = spell.getIcon();
                     }
                 }
@@ -349,22 +343,18 @@ public class ArcaneWandScreen extends Screen {
                         }
                     }
                     if (spell != null) {
-                        r = spell.getColor().getRed() / 255f;
-                        g = spell.getColor().getGreen() / 255f;
-                        b = spell.getColor().getBlue() / 255f;
+                        color = spell.getColor();
                         icon = spell.getIcon();
                     }
                 }
 
                 if (i == 1) {
                     if (getWandCrystal().getItem() instanceof CrystalItem crystal) {
-                        r = crystal.getType().getColor().getRed() / 255f;
-                        g = crystal.getType().getColor().getGreen() / 255f;
-                        b = crystal.getType().getColor().getBlue() / 255f;
+                        color = crystal.getType().getColor();
                     }
                 }
 
-                renderRays(r, g, b, gui, partialTicks, i, 90, 45, i == choosedRay);
+                renderRays(color, gui, partialTicks, i, 90, 45, i == choosedRay);
 
                 if (i != 1) {
                     if (i == choosedRay) {
@@ -409,8 +399,13 @@ public class ArcaneWandScreen extends Screen {
             gui.pose().translate(x, y, 0);
             gui.pose().mulPose(Axis.ZP.rotationDegrees(mouseAngle));
             gui.pose().mulPose(Axis.XP.rotationDegrees((ClientTickHandler.ticksInGame + partialTicks + (i * 10) * 5)));
-            //WizardsRebornRenderUtil.ray(gui.pose(), buffersource, 1f, mouseDistance, 10f, 1, 1, 1, 0.5f, 1, 1, 1, 0F);
-            //buffersource.endBatch();
+            gui.pose().mulPose(Axis.ZP.rotationDegrees(-90f));
+            RenderBuilder.create().setRenderType(FluffyFurRenderTypes.ADDITIVE)
+                    .setColor(Color.WHITE)
+                    .setAlpha(0.5f)
+                    .setSecondAlpha(0)
+                    .renderRay(gui.pose(), 1f, mouseDistance, 10f)
+                    .endBatch();
             gui.pose().popPose();
 
             for (ItemStack stack : crystals) {
@@ -460,7 +455,7 @@ public class ArcaneWandScreen extends Screen {
             if (getWand().getItem() instanceof ArcaneWandItem wand) {
                 CompoundTag nbt = getWand().getTag();
                 if (nbt.contains("spell")) {
-                    if (nbt.getString("spell") != "") {
+                    if (!nbt.getString("spell").equals("")) {
                         spellWand = Spells.getSpell(nbt.getString("spell"));
                     }
                 }
@@ -475,9 +470,6 @@ public class ArcaneWandScreen extends Screen {
                     }
 
                     Color color = type.getColor();
-                    float r = color.getRed() / 255f;
-                    float g = color.getGreen() / 255f;
-                    float b = color.getBlue() / 255f;
 
                     float chooseRay = 0;
                     if (getWandCrystal().getItem() instanceof CrystalItem crystalItem) {
@@ -487,16 +479,26 @@ public class ArcaneWandScreen extends Screen {
                     gui.pose().pushPose();
                     gui.pose().translate(x - 64 + w + 16, y - h + (i * 34) + 16, 0);
                     float s = (float) (0.5f * (Math.sin(Math.toRadians((ClientTickHandler.ticksInGame * 10 + partialTicks + (i * 10) * 2)))));
-                    //WizardsRebornRenderUtil.ray(gui.pose(), buffersource, 14, 128, 1f, r, g, b, 0.5f + s, r, g, b, 0.5f - s);
-                    //buffersource.endBatch();
+                    gui.pose().mulPose(Axis.ZP.rotationDegrees(-90f));
+                    RenderBuilder.create().setRenderType(FluffyFurRenderTypes.ADDITIVE)
+                            .setColor(color)
+                            .setAlpha(0.5f + s)
+                            .setSecondAlpha(0.5f - s)
+                            .renderRay(gui.pose(), 14f, 128f, 1f)
+                            .endBatch();
                     gui.pose().popPose();
 
                     gui.pose().pushPose();
                     gui.pose().translate(x - 144 + 24, y, 0);
                     gui.pose().mulPose(Axis.ZP.rotationDegrees(i * 20 - 40));
                     gui.pose().mulPose(Axis.XP.rotationDegrees((ClientTickHandler.ticksInGame + partialTicks + (i * 10) * 5)));
-                    //WizardsRebornRenderUtil.ray(gui.pose(), buffersource, 1f, 85, 7.5f, r, g, b, 0.5f + chooseRay, r, g, b, 0F + chooseRay);
-                    //buffersource.endBatch();
+                    gui.pose().mulPose(Axis.ZP.rotationDegrees(-90f));
+                    RenderBuilder.create().setRenderType(FluffyFurRenderTypes.ADDITIVE)
+                            .setColor(color)
+                            .setAlpha(0.5f + chooseRay)
+                            .setSecondAlpha(0 + chooseRay)
+                            .renderRay(gui.pose(), 1f, 85f, 7.5f)
+                            .endBatch();
                     gui.pose().popPose();
 
                     RenderUtil.renderItemModelInGui(type.getCrystal(), x - 64 + w, y - h + (i * 34), 32, 32, 32, 45f * (1f - hoveramount), 45f * (1f - hoveramount), 0);
@@ -531,14 +533,9 @@ public class ArcaneWandScreen extends Screen {
                     }
 
                     Color color = spell.getColor();
-                    float r = color.getRed() / 255f;
-                    float g = color.getGreen() / 255f;
-                    float b = color.getBlue() / 255f;
 
                     if (!isKnow) {
-                        r = 1f;
-                        g = 1f;
-                        b = 1f;
+                        color = Color.WHITE;
                     }
 
                     float chooseRay = 0;
@@ -546,16 +543,26 @@ public class ArcaneWandScreen extends Screen {
                     gui.pose().pushPose();
                     gui.pose().translate(x - 64 + w + 16, y - h + (i * 34) + 16, 0);
                     float s = (float) (0.5f * (Math.sin(Math.toRadians((ClientTickHandler.ticksInGame * 10 + partialTicks + (i * 10) * 2)))));
-                    //WizardsRebornRenderUtil.ray(gui.pose(), buffersource, 14, 128, 1f, r, g, b, 0.5f + s, r, g, b, 0.5f - s);
-                    //buffersource.endBatch();
+                    gui.pose().mulPose(Axis.ZP.rotationDegrees(-90f));
+                    RenderBuilder.create().setRenderType(FluffyFurRenderTypes.ADDITIVE)
+                            .setColor(color)
+                            .setAlpha(0.5f + s)
+                            .setSecondAlpha(0.5f - s)
+                            .renderRay(gui.pose(), 14f, 128f, 1f)
+                            .endBatch();
                     gui.pose().popPose();
 
                     gui.pose().pushPose();
                     gui.pose().translate(x - 144 + 24, y, 0);
                     gui.pose().mulPose(Axis.ZP.rotationDegrees(i * 20 - 40));
                     gui.pose().mulPose(Axis.XP.rotationDegrees((ClientTickHandler.ticksInGame + partialTicks + (i * 10) * 5)));
-                    //WizardsRebornRenderUtil.ray(gui.pose(), buffersource, 1f, 85, 7.5f, r, g, b, (0.5f + chooseRay) * f, r, g, b, (0F + chooseRay) * f);
-                    //buffersource.endBatch();
+                    gui.pose().mulPose(Axis.ZP.rotationDegrees(-90f));
+                    RenderBuilder.create().setRenderType(FluffyFurRenderTypes.ADDITIVE)
+                            .setColor(color)
+                            .setAlpha((0.5f + chooseRay) * f)
+                            .setSecondAlpha((0 + chooseRay) * f)
+                            .renderRay(gui.pose(), 1f, 85f, 7.5f)
+                            .endBatch();
                     gui.pose().popPose();
 
                     if (iii >= 1 && iii <= 3 && wCount == 0) {
@@ -581,23 +588,21 @@ public class ArcaneWandScreen extends Screen {
 
                 int pages = (int) Math.ceil(spellsList.get(selectedCrystalType).size() / 5f);
 
-                float r = 1f;
-                float g = 1f;
-                float b = 1f;
-
+                Color color = Color.WHITE;
                 if (getWandCrystal().getItem() instanceof CrystalItem crystalItem) {
-                    Color color = crystalItem.getType().getColor();
-                    r = color.getRed() / 255f;
-                    g = color.getGreen() / 255f;
-                    b = color.getBlue() / 255f;
+                    color = crystalItem.getType().getColor();
                 }
 
                 if (page > 0) {
                     gui.pose().pushPose();
                     gui.pose().translate(x - 64 + wPageLeft + 16 + 148, y - h + 16, 0);
                     float s = (float) (0.5f * (Math.sin(Math.toRadians((ClientTickHandler.ticksInGame * 10 + partialTicks + (i * 10) * 3) + (90)))));
-                    //WizardsRebornRenderUtil.ray(gui.pose(), buffersource, 14, 14, 1f, r, g, b, 0.5f + s, r, g, b, 0.5f - s);
-                    //buffersource.endBatch();
+                    RenderBuilder.create().setRenderType(FluffyFurRenderTypes.ADDITIVE)
+                            .setColor(color)
+                            .setAlpha(0.5f + s)
+                            .setSecondAlpha(0.5f - s)
+                            .renderRay(gui.pose(), 14f, 14f, 1f)
+                            .endBatch();
                     gui.pose().popPose();
                 }
 
@@ -605,16 +610,25 @@ public class ArcaneWandScreen extends Screen {
                 gui.pose().translate(x - 64 + wCount + 16 + 148, y - h + 16 + 54, 0);
                 gui.pose().mulPose(Axis.ZP.rotationDegrees(90));
                 float s = (float) (0.5f * (Math.sin(Math.toRadians((ClientTickHandler.ticksInGame * 10 + partialTicks + (i * 10) * 3) + (90 * 2)))));
-                //WizardsRebornRenderUtil.ray(gui.pose(), buffersource, 14, 42, 1f, r, g, b, 0.5f + s, r, g, b, 0.5f - s);
-                //buffersource.endBatch();
+                gui.pose().mulPose(Axis.ZP.rotationDegrees(-90f));
+                RenderBuilder.create().setRenderType(FluffyFurRenderTypes.ADDITIVE)
+                        .setColor(color)
+                        .setAlpha(0.5f + s)
+                        .setSecondAlpha(0.5f - s)
+                        .renderRay(gui.pose(), 14f, 42f, 1f)
+                        .endBatch();
                 gui.pose().popPose();
 
                 if (page + 1 < pages) {
                     gui.pose().pushPose();
                     gui.pose().translate(x - 64 + wPageRight + 16 + 148, y - h + 16 + 136, 0);
                     s = (float) (0.5f * (Math.sin(Math.toRadians((ClientTickHandler.ticksInGame * 10 + partialTicks + (i * 10) * 3) + (90 * 3)))));
-                    //WizardsRebornRenderUtil.ray(gui.pose(), buffersource, 14, 14, 1f, r, g, b, 0.5f + s, r, g, b, 0.5f - s);
-                    //buffersource.endBatch();
+                    RenderBuilder.create().setRenderType(FluffyFurRenderTypes.ADDITIVE)
+                            .setColor(color)
+                            .setAlpha(0.5f + s)
+                            .setSecondAlpha(0.5f - s)
+                            .renderRay(gui.pose(), 14f, 14f, 1f)
+                            .endBatch();
                     gui.pose().popPose();
                 }
 
@@ -660,9 +674,7 @@ public class ArcaneWandScreen extends Screen {
                 int X = (int) (Math.cos(dst) * (100 * Math.sin(Math.toRadians(90 * hoveramount))));
                 int Y = (int) (Math.sin(dst) * (100 * Math.sin(Math.toRadians(90 * hoveramount))));
 
-                float r = 1f;
-                float g = 1f;
-                float b = 1f;
+                Color color = Color.WHITE;
                 boolean standard = currentSpellSet == i;
 
                 ResourceLocation resource = new ResourceLocation(WizardsReborn.MOD_ID, "textures/gui/arcanemicon/research.png");
@@ -679,13 +691,11 @@ public class ArcaneWandScreen extends Screen {
                         resource = new ResourceLocation(WizardsReborn.MOD_ID, "textures/gui/arcanemicon/unknown.png");
                     } else {
                         resource = spell.getIcon();
-                        r = spell.getColor().getRed() / 255f;
-                        g = spell.getColor().getGreen() / 255f;
-                        b = spell.getColor().getBlue() / 255f;
+                        color = spell.getColor();
                     }
                 }
 
-                renderRays(r, g, b, gui, partialTicks, i, 36, -108, i == choosedRay, standard);
+                renderRays(color, gui, partialTicks, i, 36, -108, i == choosedRay, standard);
 
                 if (i == choosedRay) {
                     gui.blit(resource, x + X - 24, y + Y - 24, 0, 0, 48, 48, 48, 48);
@@ -720,9 +730,7 @@ public class ArcaneWandScreen extends Screen {
                 int X = (int) (Math.cos(dst) * (100 * Math.sin(Math.toRadians(90 * hoveramount))));
                 int Y = (int) (Math.sin(dst) * (100 * Math.sin(Math.toRadians(90 * hoveramount))));
 
-                float r = 1f;
-                float g = 1f;
-                float b = 1f;
+                Color color = Color.WHITE;
                 boolean standard = false;
 
                 Spell spellWand = null;
@@ -742,15 +750,13 @@ public class ArcaneWandScreen extends Screen {
                         resource = new ResourceLocation(WizardsReborn.MOD_ID, "textures/gui/arcanemicon/unknown.png");
                     } else {
                         resource = spell.getIcon();
-                        r = spell.getColor().getRed() / 255f;
-                        g = spell.getColor().getGreen() / 255f;
-                        b = spell.getColor().getBlue() / 255f;
+                        color = spell.getColor();
                     }
 
                     if (spellWand != null && spell == spellWand) standard = true;
                 }
 
-                renderRays(r, g, b, gui, partialTicks, i, 36, -108, i == choosedRay, standard);
+                renderRays(color, gui, partialTicks, i, 36, -108, i == choosedRay, standard);
                 if (!(KnowledgeUtil.isSpell(Minecraft.getInstance().player, spell)) && spell != null) {
                     resource = new ResourceLocation(WizardsReborn.MOD_ID, "textures/gui/arcanemicon/unknown.png");
                 }
@@ -815,8 +821,8 @@ public class ArcaneWandScreen extends Screen {
 
     public ItemStack getSelectedItem(List<ItemStack> crystals, double X, double Y) {
         double step = (float) 360 / crystals.size();
-        double x = width / 2;
-        double y = height / 2;
+        double x = width / 2f;
+        double y = height / 2f;
 
         double angle =  Math.toDegrees(Math.atan2(Y-y,X-x));
         if (angle < 0D) {
@@ -833,8 +839,8 @@ public class ArcaneWandScreen extends Screen {
 
     public int getSelectedSpell(double X, double Y) {
         double step = (float) 36;
-        double x = width / 2;
-        double y = height / 2;
+        double x = width / 2f;
+        double y = height / 2f;
 
         double angle =  Math.toDegrees(Math.atan2(Y-y,X-x)) + 108;
         if (angle < 0D) {
@@ -851,8 +857,8 @@ public class ArcaneWandScreen extends Screen {
 
     public int getSelectedMode(double X, double Y, float offset) {
         double step = (float) 360 / 4;
-        double x = width / 2;
-        double y = height / 2;
+        double x = width / 2f;
+        double y = height / 2f;
 
         double angle =  Math.toDegrees(Math.atan2(Y-y,X-x)) - offset;
         if (angle < 0D) {
@@ -868,8 +874,8 @@ public class ArcaneWandScreen extends Screen {
     }
 
     public float getMouseAngle(double X, double Y) {
-        double x = width / 2;
-        double y = height / 2;
+        double x = width / 2f;
+        double y = height / 2f;
 
         double angle =  Math.toDegrees(Math.atan2(Y-y,X-x));
         if (angle < 0D) {
@@ -880,8 +886,8 @@ public class ArcaneWandScreen extends Screen {
     }
 
     public float getMouseDistance(double X, double Y) {
-        double x = width / 2;
-        double y = height / 2;
+        double x = width / 2f;
+        double y = height / 2f;
 
         return (float) Math.sqrt(Math.pow(x - X, 2) + Math.pow(y - Y, 2));
     }
@@ -919,42 +925,31 @@ public class ArcaneWandScreen extends Screen {
     }
 
     public void renderCrystalRays(ItemStack stack, GuiGraphics gui, float x, float y, int mouseX, int mouseY, float partialTicks, float i, float step, float scale, boolean renderRay) {
-        float r = 1f;
-        float g = 1f;
-        float b = 1f;
-        float r1 = 1f;
-        float g1 = 1f;
-        float b1 = 1f;
+        Color color1 = Color.WHITE;
+        Color color2 = Color.WHITE;
         boolean renderPolishing = false;
         float mouseDistance = getMouseDistance(mouseX, mouseY);
         float chooseRay = (stack == selectedItem && mouseDistance > getWandItemDistance()) ? 1.2f : 0.8f;
 
+
         if (stack.getItem() instanceof CrystalItem crystalItem) {
-            Color color = crystalItem.getType().getColor();;
-            r = color.getRed() / 255f;
-            g = color.getGreen() / 255f;
-            b = color.getBlue() / 255f;
+            color1 = crystalItem.getType().getColor();;
 
             if (crystalItem.getPolishing().hasParticle()) {
                 renderPolishing = true;
-                Color color1 = crystalItem.getPolishing().getColor();
-                r1 = color1.getRed() / 255f;
-                g1 = color1.getGreen() / 255f;
-                b1 = color1.getBlue() / 255f;
+                color2 = crystalItem.getPolishing().getColor();
             }
         }
 
         RenderBuilder.create().setRenderType(FluffyFurRenderTypes.ADDITIVE)
-                .setColorRaw(r, g, b).setAlpha(1f)
+                .setColor(color1).setAlpha(1f)
                 .renderDragon(gui.pose(), x, y, 0, 30 * scale, ClientTickHandler.partialTicks, i)
                 .endBatch();
-        //buffersource.endBatch();
         if (renderPolishing) {
             RenderBuilder.create().setRenderType(FluffyFurRenderTypes.ADDITIVE)
-                    .setColorRaw(r1 / 2f, g1 / 2f, b1 / 2f).setAlpha(1f)
+                    .setColor(color2).setAlpha(0.5f)
                     .renderDragon(gui.pose(), x, y, 0, 20 * scale, ClientTickHandler.partialTicks, i * 5)
                     .endBatch();
-            //buffersource.endBatch();
         }
 
         if (renderRay) {
@@ -962,33 +957,46 @@ public class ArcaneWandScreen extends Screen {
             gui.pose().translate(width / 2f,  height / 2f, 0);
             gui.pose().mulPose(Axis.ZP.rotationDegrees(i * step + (step / 2)));
             gui.pose().mulPose(Axis.XP.rotationDegrees((ClientTickHandler.ticksInGame + partialTicks + (i * 10) * 5)));
-            //WizardsRebornRenderUtil.ray(gui.pose(), buffersource, 1f, (100 * hoveramount) * chooseRay, 10f, r, g, b, 1, r, g, b, 0F);
-            //buffersource.endBatch();
+            gui.pose().mulPose(Axis.ZP.rotationDegrees(-90f));
+            RenderBuilder.create().setRenderType(FluffyFurRenderTypes.ADDITIVE)
+                    .setColor(color1)
+                    .setSecondAlpha(0)
+                    .renderRay(gui.pose(), 1f, (100 * hoveramount) * chooseRay, 10f)
+                    .endBatch();
             gui.pose().popPose();
         }
     }
 
-    public void renderRays(float r, float g, float b, GuiGraphics gui, float partialTicks, float i, float step, float offset, boolean choosed) {
+    public void renderRays(Color color, GuiGraphics gui, float partialTicks, float i, float step, float offset, boolean choosed) {
         float chooseRay = (choosed) ? 1.2f : 0.8f;
         gui.pose().pushPose();
         gui.pose().translate(width / 2f,  height / 2f, 0);
         gui.pose().mulPose(Axis.ZP.rotationDegrees(i * step + (step / 2) + offset));
         gui.pose().mulPose(Axis.XP.rotationDegrees((ClientTickHandler.ticksInGame + partialTicks + (i * 10) * 5)));
-        //WizardsRebornRenderUtil.ray(gui.pose(), buffersource, 1f, (100 * hoveramount) * chooseRay, 30f, r, g, b, 1, r, g, b, 0F);
-        //buffersource.endBatch();
+        gui.pose().mulPose(Axis.ZP.rotationDegrees(-90f));
+        RenderBuilder.create().setRenderType(FluffyFurRenderTypes.ADDITIVE)
+                .setColor(color)
+                .setSecondAlpha(0)
+                .renderRay(gui.pose(), 1f, (100 * hoveramount) * chooseRay, 30f)
+                .endBatch();
         gui.pose().popPose();
     }
 
-    public void renderRays(float r, float g, float b, GuiGraphics gui, float partialTicks, float i, float step, float offset, boolean choosed, boolean standard) {
+    public void renderRays(Color color, GuiGraphics gui, float partialTicks, float i, float step, float offset, boolean choosed, boolean standard) {
         float chooseRay = (choosed) ? 1.2f : 0.8f;
         float alpha = (standard) ? 1f : 0.5f;
 
         gui.pose().pushPose();
-        gui.pose().translate(width / 2,  height / 2, 0);
+        gui.pose().translate(width / 2f,  height / 2f, 0);
         gui.pose().mulPose(Axis.ZP.rotationDegrees(i * step + (step / 2) + offset));
         gui.pose().mulPose(Axis.XP.rotationDegrees((ClientTickHandler.ticksInGame + partialTicks + (i * 10) * 5)));
-        //WizardsRebornRenderUtil.ray(gui.pose(), buffersource, 1f, (100 * hoveramount) * chooseRay, 10f, r, g, b, alpha, r, g, b, 0F);
-        //buffersource.endBatch();
+        gui.pose().mulPose(Axis.ZP.rotationDegrees(-90f));
+        RenderBuilder.create().setRenderType(FluffyFurRenderTypes.ADDITIVE)
+                .setColor(color)
+                .setAlpha(alpha)
+                .setSecondAlpha(0)
+                .renderRay(gui.pose(), 1f, (100 * hoveramount) * chooseRay, 10f)
+                .endBatch();
         gui.pose().popPose();
     }
 

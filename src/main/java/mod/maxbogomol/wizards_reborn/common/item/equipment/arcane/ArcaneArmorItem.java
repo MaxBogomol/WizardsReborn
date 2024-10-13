@@ -2,6 +2,7 @@ package mod.maxbogomol.wizards_reborn.common.item.equipment.arcane;
 
 import mod.maxbogomol.fluffy_fur.common.itemskin.ItemSkin;
 import mod.maxbogomol.wizards_reborn.api.arcaneenchantment.ArcaneEnchantmentType;
+import mod.maxbogomol.wizards_reborn.api.arcaneenchantment.ArcaneEnchantmentTypes;
 import mod.maxbogomol.wizards_reborn.api.arcaneenchantment.ArcaneEnchantmentUtil;
 import mod.maxbogomol.wizards_reborn.api.arcaneenchantment.IArcaneItem;
 import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornAttributes;
@@ -47,8 +48,8 @@ public class ArcaneArmorItem extends ArmorItem implements IArcaneItem {
 
     public ArcaneArmorItem(ArmorMaterial material, Type type, Properties properties) {
         super(material, type, properties);
-        arcaneEnchantmentTypes.add(ArcaneEnchantmentType.BREAKABLE);
-        arcaneEnchantmentTypes.add(ArcaneEnchantmentType.ARMOR);
+        arcaneEnchantmentTypes.add(ArcaneEnchantmentTypes.BREAKABLE);
+        arcaneEnchantmentTypes.add(ArcaneEnchantmentTypes.ARMOR);
     }
 
     @Override

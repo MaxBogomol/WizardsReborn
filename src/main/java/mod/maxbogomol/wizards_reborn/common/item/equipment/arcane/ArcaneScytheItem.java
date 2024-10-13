@@ -4,6 +4,7 @@ import mod.maxbogomol.fluffy_fur.client.animation.ItemAnimation;
 import mod.maxbogomol.fluffy_fur.common.item.ICustomAnimationItem;
 import mod.maxbogomol.fluffy_fur.common.itemskin.ItemSkin;
 import mod.maxbogomol.wizards_reborn.api.arcaneenchantment.ArcaneEnchantmentType;
+import mod.maxbogomol.wizards_reborn.api.arcaneenchantment.ArcaneEnchantmentTypes;
 import mod.maxbogomol.wizards_reborn.api.arcaneenchantment.ArcaneEnchantmentUtil;
 import mod.maxbogomol.wizards_reborn.api.arcaneenchantment.IArcaneItem;
 import mod.maxbogomol.wizards_reborn.api.wissen.WissenUtil;
@@ -33,11 +34,11 @@ public class ArcaneScytheItem extends ScytheItem implements IArcaneItem, ICustom
 
     public ArcaneScytheItem(Tier tier, int attackDamageModifier, float attackSpeedModifier, Properties properties, float distance, int radius) {
         super(tier, attackDamageModifier, attackSpeedModifier, properties, distance, radius);
-        arcaneEnchantmentTypes.add(ArcaneEnchantmentType.BREAKABLE);
-        arcaneEnchantmentTypes.add(ArcaneEnchantmentType.SCYTHE);
-        arcaneEnchantmentTypes.add(ArcaneEnchantmentType.WEAPON);
-        arcaneEnchantmentTypes.add(ArcaneEnchantmentType.MELEE_WEAPON);
-        arcaneEnchantmentTypes.add(ArcaneEnchantmentType.TOOL);
+        arcaneEnchantmentTypes.add(ArcaneEnchantmentTypes.BREAKABLE);
+        arcaneEnchantmentTypes.add(ArcaneEnchantmentTypes.SCYTHE);
+        arcaneEnchantmentTypes.add(ArcaneEnchantmentTypes.WEAPON);
+        arcaneEnchantmentTypes.add(ArcaneEnchantmentTypes.MELEE_WEAPON);
+        arcaneEnchantmentTypes.add(ArcaneEnchantmentTypes.TOOL);
     }
 
     @Override

@@ -11,6 +11,7 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.Vec3;
 
 public class BlockLookSpell extends LookSpell {
+
     public BlockLookSpell(String id, int points) {
         super(id, points);
     }

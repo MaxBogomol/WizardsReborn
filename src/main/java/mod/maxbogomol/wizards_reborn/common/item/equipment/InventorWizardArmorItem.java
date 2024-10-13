@@ -5,7 +5,7 @@ import com.google.common.collect.Multimap;
 import mod.maxbogomol.fluffy_fur.client.model.armor.ArmorModel;
 import mod.maxbogomol.fluffy_fur.common.itemskin.ItemSkin;
 import mod.maxbogomol.wizards_reborn.WizardsReborn;
-import mod.maxbogomol.wizards_reborn.api.arcaneenchantment.ArcaneEnchantmentType;
+import mod.maxbogomol.wizards_reborn.api.arcaneenchantment.ArcaneEnchantmentTypes;
 import mod.maxbogomol.wizards_reborn.common.item.equipment.arcane.ArcaneArmorItem;
 import mod.maxbogomol.wizards_reborn.registry.client.WizardsRebornModels;
 import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornAttributes;
@@ -33,7 +33,7 @@ public class InventorWizardArmorItem extends ArcaneArmorItem implements IForgeIt
 
     public InventorWizardArmorItem(ArmorMaterial material, ArmorItem.Type type, Properties properties) {
         super(material, type, properties);
-        arcaneEnchantmentTypes.add(ArcaneEnchantmentType.MAGIC_ARMOR);
+        arcaneEnchantmentTypes.add(ArcaneEnchantmentTypes.MAGIC_ARMOR);
     }
 
     @Override

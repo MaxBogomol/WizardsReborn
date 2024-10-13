@@ -46,7 +46,7 @@ public class BlinkSpell extends LookSpell {
     }
 
     @Override
-    public float getLookDistance() {
+    public double getLookDistance() {
         if (isSharp) return 6f;
         return 5f;
     }
@@ -58,7 +58,7 @@ public class BlinkSpell extends LookSpell {
     }
 
     @Override
-    public float getLookAdditionalDistance() {
+    public double getLookAdditionalDistance() {
         return 0.5f;
     }
 
@@ -67,7 +67,7 @@ public class BlinkSpell extends LookSpell {
         Vec3 pos = getHitPos(level, spellContext).getPosHit();
         Entity entity = spellContext.getEntity();
 
-        if (entity != null) {
+        if (spellContext.getEntity() instanceof LivingEntity livingEntity) {
             PacketHandler.sendToTracking(level, entity.blockPosition(), new BlinkSpellPacket(spellContext.getPos(), pos, getColor(), isSharp ? 1 : 0));
             //PacketHandler.sendTo(player, new SetAdditionalFovPacket(30f));
             level.playSound(WizardsReborn.proxy.getPlayer(), pos.x(), pos.y(), pos.z(), SoundEvents.ENDERMAN_TELEPORT, SoundSource.PLAYERS, 1f, 0.95f);
@@ -79,7 +79,7 @@ public class BlinkSpell extends LookSpell {
             if (isSharp) {
                 for (Entity target : getHitEntities(level, spellContext.getPos(), pos, 0.5f)) {
                     if (!target.equals(spellContext.getEntity()) && target instanceof LivingEntity) {
-                        DamageSource damageSource = getDamage(WizardsRebornDamage.create(target.level(), WizardsRebornDamage.ARCANE_MAGIC).typeHolder(), target, entity);
+                        DamageSource damageSource = new DamageSource(WizardsRebornDamage.create(target.level(), WizardsRebornDamage.ARCANE_MAGIC).typeHolder(), entity);
                         target.hurt(damageSource, damage);
                     }
                 }
@@ -89,9 +89,7 @@ public class BlinkSpell extends LookSpell {
             entity.fallDistance = 0;
 
             if (magicModifier > 0) {
-                if (spellContext.getEntity() instanceof LivingEntity livingEntity) {
-                    livingEntity.addEffect(new MobEffectInstance(MobEffects.SLOW_FALLING, (int) (40 * magicModifier), 0));
-                }
+                livingEntity.addEffect(new MobEffectInstance(MobEffects.SLOW_FALLING, (int) (40 * magicModifier), 0));
             }
         }
     }

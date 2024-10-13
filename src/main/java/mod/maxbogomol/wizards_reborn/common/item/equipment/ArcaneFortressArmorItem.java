@@ -3,7 +3,7 @@ package mod.maxbogomol.wizards_reborn.common.item.equipment;
 import mod.maxbogomol.fluffy_fur.client.model.armor.ArmorModel;
 import mod.maxbogomol.fluffy_fur.common.itemskin.ItemSkin;
 import mod.maxbogomol.wizards_reborn.WizardsReborn;
-import mod.maxbogomol.wizards_reborn.api.arcaneenchantment.ArcaneEnchantmentType;
+import mod.maxbogomol.wizards_reborn.api.arcaneenchantment.ArcaneEnchantmentTypes;
 import mod.maxbogomol.wizards_reborn.common.item.equipment.arcane.ArcaneArmorItem;
 import mod.maxbogomol.wizards_reborn.registry.client.WizardsRebornModels;
 import mod.maxbogomol.wizards_reborn.registry.common.item.WizardsRebornItems;
@@ -35,7 +35,7 @@ public class ArcaneFortressArmorItem extends ArcaneArmorItem implements IForgeIt
 
     public ArcaneFortressArmorItem(ArmorMaterial material, Type type, Properties properties) {
         super(material, type, properties);
-        arcaneEnchantmentTypes.add(ArcaneEnchantmentType.FORTRESS_ARMOR);
+        arcaneEnchantmentTypes.add(ArcaneEnchantmentTypes.FORTRESS_ARMOR);
     }
 
     @OnlyIn(Dist.CLIENT)

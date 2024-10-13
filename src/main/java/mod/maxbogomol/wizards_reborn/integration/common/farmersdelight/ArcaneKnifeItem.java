@@ -2,6 +2,7 @@ package mod.maxbogomol.wizards_reborn.integration.common.farmersdelight;
 
 import mod.maxbogomol.fluffy_fur.common.itemskin.ItemSkin;
 import mod.maxbogomol.wizards_reborn.api.arcaneenchantment.ArcaneEnchantmentType;
+import mod.maxbogomol.wizards_reborn.api.arcaneenchantment.ArcaneEnchantmentTypes;
 import mod.maxbogomol.wizards_reborn.api.arcaneenchantment.ArcaneEnchantmentUtil;
 import mod.maxbogomol.wizards_reborn.api.arcaneenchantment.IArcaneItem;
 import net.minecraft.network.chat.Component;
@@ -24,11 +25,11 @@ public class ArcaneKnifeItem extends KnifeItem implements IArcaneItem {
 
     public ArcaneKnifeItem(Tier tier, float attackDamageModifier, float attackSpeedModifier, Properties properties) {
         super(tier, attackDamageModifier, attackSpeedModifier, properties);
-        arcaneEnchantmentTypes.add(ArcaneEnchantmentType.BREAKABLE);
-        arcaneEnchantmentTypes.add(ArcaneEnchantmentType.KNIFE);
-        arcaneEnchantmentTypes.add(ArcaneEnchantmentType.WEAPON);
-        arcaneEnchantmentTypes.add(ArcaneEnchantmentType.MELEE_WEAPON);
-        arcaneEnchantmentTypes.add(ArcaneEnchantmentType.TOOL);
+        arcaneEnchantmentTypes.add(ArcaneEnchantmentTypes.BREAKABLE);
+        arcaneEnchantmentTypes.add(ArcaneEnchantmentTypes.KNIFE);
+        arcaneEnchantmentTypes.add(ArcaneEnchantmentTypes.WEAPON);
+        arcaneEnchantmentTypes.add(ArcaneEnchantmentTypes.MELEE_WEAPON);
+        arcaneEnchantmentTypes.add(ArcaneEnchantmentTypes.TOOL);
     }
 
     @Override

@@ -3,13 +3,9 @@ package mod.maxbogomol.wizards_reborn.common.spell.look;
 import mod.maxbogomol.wizards_reborn.api.crystal.CrystalUtil;
 import mod.maxbogomol.wizards_reborn.api.spell.Spell;
 import mod.maxbogomol.wizards_reborn.api.spell.SpellContext;
-import mod.maxbogomol.wizards_reborn.common.spell.WandSpellContext;
 import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornCrystals;
 import net.minecraft.core.BlockPos;
-import net.minecraft.world.InteractionHand;
 import net.minecraft.world.entity.Entity;
-import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.BlockHitResult;
@@ -38,14 +34,6 @@ public class LookSpell extends Spell {
     }
 
     @Override
-    public void useWand(Level level, Player player, InteractionHand hand, ItemStack stack) {
-        if (!level.isClientSide()) {
-            WandSpellContext spellContext = WandSpellContext.getFromWand(player, stack);
-            useSpell(level, spellContext);
-        }
-    }
-
-    @Override
     public boolean canSpell(Level level, SpellContext spellContext) {
         if (super.canSpell(level, spellContext)) {
             return canLookSpell(level, spellContext);
@@ -53,20 +41,20 @@ public class LookSpell extends Spell {
         return false;
     }
 
-    public float getLookDistance() {
+    public double getLookDistance() {
         return 5f;
     }
 
-    public float getLookAdditionalDistance() {
+    public double getLookAdditionalDistance() {
         return 0f;
     }
 
-    public float getLookDistance(SpellContext spellContext) {
+    public double getLookDistance(SpellContext spellContext) {
         int focusLevel = CrystalUtil.getStatLevel(spellContext.getStats(), WizardsRebornCrystals.FOCUS);
         return getLookDistance() + (getLookAdditionalDistance() * focusLevel);
     }
 
-    public float getLookDistance(int focusLevel) {
+    public double getLookDistance(int focusLevel) {
         return getLookDistance() + (getLookAdditionalDistance() * focusLevel);
     }
 
@@ -133,12 +121,12 @@ public class LookSpell extends Spell {
     }
 
     public HitResult getHitPos(Level level, SpellContext spellContext, Predicate<Entity> entityFilter, int entityCount, float size, boolean endE) {
-        float distance = getLookDistance(spellContext);
+        double distance = getLookDistance(spellContext);
         return getHitPos(level, spellContext.getPos(), spellContext.getPos().add(spellContext.getVec().scale(distance)), entityFilter, entityCount, size, endE);
     }
 
     public HitResult getHitPos(Level level, SpellContext spellContext) {
-        float distance = getLookDistance(spellContext);
+        double distance = getLookDistance(spellContext);
         return getHitPos(level, spellContext.getPos(), spellContext.getPos().add(spellContext.getVec().scale(distance)));
     }
 

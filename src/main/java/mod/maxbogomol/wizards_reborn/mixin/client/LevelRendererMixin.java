@@ -21,7 +21,7 @@ public abstract class LevelRendererMixin {
             if (projectile.getSpell() instanceof RaySpell spell) {
                 //CompoundTag spellData = projectile.getSpellData();
                 //if (spellData.getInt("tick_left") <= 0) {
-                    //spell.updatePos(projectile);
+                //spell.updatePos(projectile);
                // }
             }
 

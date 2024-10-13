@@ -44,7 +44,7 @@ public class MonogramIndexPage extends Page {
         }
 
         for (int i = 0; i < entries.length; i ++) {
-            entries[i].icon.renderArcanemiconIcon(book, gui, x + 3, y + 8 + i * 20);
+            entries[i].icon.renderIcon(gui, x + 3, y + 8 + i * 20);
             drawText(book, gui, I18n.get(entries[i].chapter.titleKey), x + 24, y + 20 + i * 20 - Minecraft.getInstance().font.lineHeight);
         }
     }

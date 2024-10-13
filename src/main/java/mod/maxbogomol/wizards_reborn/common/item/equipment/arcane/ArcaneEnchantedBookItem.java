@@ -1,6 +1,7 @@
 package mod.maxbogomol.wizards_reborn.common.item.equipment.arcane;
 
 import mod.maxbogomol.wizards_reborn.api.arcaneenchantment.ArcaneEnchantmentType;
+import mod.maxbogomol.wizards_reborn.api.arcaneenchantment.ArcaneEnchantmentTypes;
 import mod.maxbogomol.wizards_reborn.api.arcaneenchantment.ArcaneEnchantmentUtil;
 import mod.maxbogomol.wizards_reborn.api.arcaneenchantment.IArcaneItem;
 import net.minecraft.network.chat.Component;
@@ -19,8 +20,8 @@ public class ArcaneEnchantedBookItem extends Item implements IArcaneItem {
 
     public ArcaneEnchantedBookItem(Properties properties) {
         super(properties);
-        arcaneEnchantmentTypes.add(ArcaneEnchantmentType.ALL);
-        arcaneEnchantmentTypes.add(ArcaneEnchantmentType.BOOK);
+        arcaneEnchantmentTypes.add(ArcaneEnchantmentTypes.ALL);
+        arcaneEnchantmentTypes.add(ArcaneEnchantmentTypes.BOOK);
     }
 
     @OnlyIn(Dist.CLIENT)

@@ -1,15 +1,54 @@
 package mod.maxbogomol.wizards_reborn.common.spell.ray;
 
+import com.mojang.blaze3d.vertex.PoseStack;
+import mod.maxbogomol.fluffy_fur.FluffyFur;
+import mod.maxbogomol.fluffy_fur.client.animation.ItemAnimation;
+import mod.maxbogomol.fluffy_fur.client.render.RenderBuilder;
+import mod.maxbogomol.fluffy_fur.registry.client.FluffyFurRenderTypes;
+import mod.maxbogomol.fluffy_fur.util.RenderUtil;
+import mod.maxbogomol.wizards_reborn.WizardsReborn;
 import mod.maxbogomol.wizards_reborn.api.spell.Spell;
+import mod.maxbogomol.wizards_reborn.api.spell.SpellComponent;
+import mod.maxbogomol.wizards_reborn.api.spell.SpellContext;
 import mod.maxbogomol.wizards_reborn.client.animation.SpellHandItemAnimation;
+import mod.maxbogomol.wizards_reborn.common.entity.SpellEntity;
+import mod.maxbogomol.wizards_reborn.common.network.PacketHandler;
+import mod.maxbogomol.wizards_reborn.common.network.spell.RaySpellEffectPacket;
+import mod.maxbogomol.wizards_reborn.common.spell.WandSpellContext;
+import mod.maxbogomol.wizards_reborn.common.spell.projectile.ProjectileSpellComponent;
+import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornEntities;
+import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornSounds;
+import net.minecraft.client.renderer.MultiBufferSource;
+import net.minecraft.commands.arguments.EntityAnchorArgument;
+import net.minecraft.core.BlockPos;
+import net.minecraft.sounds.SoundSource;
+import net.minecraft.util.Mth;
+import net.minecraft.world.InteractionHand;
+import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.entity.projectile.ProjectileUtil;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.UseAnim;
+import net.minecraft.world.level.ClipContext;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.phys.HitResult;
+import net.minecraft.world.phys.Vec3;
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.api.distmarker.OnlyIn;
 
 import java.awt.*;
+import java.util.function.Predicate;
 
 public class RaySpell extends Spell {
     public static SpellHandItemAnimation animation = new SpellHandItemAnimation();
 
     public RaySpell(String id, int points) {
         super(id, points);
+    }
+
+    @Override
+    public SpellComponent getSpellComponent() {
+        return new ProjectileSpellComponent();
     }
 
     @Override
@@ -24,10 +63,42 @@ public class RaySpell extends Spell {
     public Color getSecondColor() {
         return getColor();
     }
-/*
+
     @Override
+    public void useSpell(Level level, SpellContext spellContext) {
+        if (!level.isClientSide()) {
+            Vec3 pos = spellContext.getPos();
+            Vec3 vec = spellContext.getVec();
+            SpellEntity entity = new SpellEntity(WizardsRebornEntities.SPELL.get(), level);
+            entity.setup(pos.x(), pos.y() - 0.2f, pos.z(), spellContext.getEntity(), this.getId(), spellContext.getStats());
+            entity.lookAt(EntityAnchorArgument.Anchor.FEET, entity.position().add(vec));
+
+            level.addFreshEntity(entity);
+            spellContext.setCooldown(this);
+            spellContext.removeWissen(this);
+            spellContext.awardStat(this);
+            spellContext.spellSound(this);
+        }
+    }
+
+    @Override
+    public void useWand(Level level, Player player, InteractionHand hand, ItemStack stack) {
+        if (!level.isClientSide()) {
+            useSpell(level, getWandContext(player, stack));
+            player.startUsingItem(hand);
+        }
+    }
+
+    @Override
+    public SpellContext getWandContext(Player player, ItemStack stack) {
+        WandSpellContext spellContext = WandSpellContext.getFromWand(player, stack);
+        //pellContext.setVec(new Vec3(0, 0.3f, 0));
+        return spellContext;
+    }
+
+/*    @Override
     public void useSpell(Level level, Player player, InteractionHand hand) {
-        if (!level.isClientSide) {
+        if (!level.isClientSide()) {
             ItemStack stack = player.getItemInHand(hand);
 
             CompoundTag stats = getStats(stack);
@@ -55,9 +126,9 @@ public class RaySpell extends Spell {
             awardStat(player, stack);
             spellSound(player, level);
         }
-    }
+    }*/
 
-    @Override
+/*    @Override
     public void onUseTick(Level level, LivingEntity livingEntity, ItemStack stack, int remainingUseDuration) {
         if (!level.isClientSide) {
             CompoundTag nbt = stack.getOrCreateTag();
@@ -85,9 +156,9 @@ public class RaySpell extends Spell {
                 }
             }
         }
-    }
+    }*/
 
-    public void releaseUsing(ItemStack stack, Level level, LivingEntity entityLiving, int timeLeft) {
+/*    public void releaseUsing(ItemStack stack, Level level, LivingEntity entityLiving, int timeLeft) {
         if (!level.isClientSide) {
             CompoundTag stats = getStats(stack);
 
@@ -111,17 +182,18 @@ public class RaySpell extends Spell {
                 }
             }
         }
-    }
+    }*/
 
     @Override
-    public void entityTick(SpellProjectileEntity entity) {
-        if (!entity.level().isClientSide) {
+    public void entityTick(SpellEntity entity) {
+        updatePos(entity);
+        updateRot(entity);
+        if (!entity.level().isClientSide()) {
             boolean burst = false;
-            CompoundTag spellData = entity.getSpellData();
-            HitResult ray = getHitResult(entity, entity.position().add(0, 0.3F, 0), entity.getLookAngle().scale(getRayDistance()), entity.level(), (e) -> {
-                return !e.isSpectator() && e.isPickable() && !e.getUUID().equals(entity.getSenderUUID());
+            HitResult ray = getHitResult(entity, entity.position(), entity.getLookAngle().scale(getRayDistance()).add(0, 0.3F, 0), entity.level(), (e) -> {
+                return !e.isSpectator() && e.isPickable() && !e.equals(entity.getOwner());
             });
-            if (spellData.getInt("tick_left") <= 0) {
+/*            if (spellData.getInt("tick_left") <= 0) {
                 if (ray.getType() == HitResult.Type.ENTITY) {
                     entity.onImpact(ray, ((EntityHitResult) ray).getEntity());
                     burst = true;
@@ -144,14 +216,15 @@ public class RaySpell extends Spell {
 
             if (spellData.getInt("ticks") >= 0) {
                 spellData.putInt("ticks", spellData.getInt("ticks")  - 1);
-            }
+            }*/
+            entity.remove();
 
-            entity.setSpellData(spellData);
-            entity.updateSpellData();
+            //entity.setSpellData(spellData);
+            //entity.updateSpellData();
 
-            if (spellData.getInt("tick_left") <= 0) {
-                updatePos(entity);
-                updateRot(entity);
+            //if (spellData.getInt("tick_left") <= 0) {
+                //updatePos(entity);
+                //updateRot(entity);
 
                 if (hasBurst(entity)) {
                     float distance = (float) Math.sqrt(Math.pow(entity.getX() - ray.getLocation().x, 2) + Math.pow(entity.getY() - ray.getLocation().y, 2) + Math.pow(entity.getZ() - ray.getLocation().z, 2));
@@ -166,7 +239,7 @@ public class RaySpell extends Spell {
 
                     PacketHandler.sendToTracking(entity.level(), new BlockPos((int) pos.x, (int) pos.y, (int) pos.z), new RaySpellEffectPacket((float) posStart.x, (float) posStart.y + 0.2F, (float) posStart.z, (float) posEnd.x, (float) posEnd.y + 0.4F, (float) posEnd.z, r, g, b, burst));
                 }
-            }
+            //}
 
             if (random.nextFloat() < 0.5 && hasSound(entity)) {
                 entity.level().playSound(WizardsReborn.proxy.getPlayer(), entity.getX(), entity.getY(), entity.getZ(), WizardsRebornSounds.SPELL_BURST.get(), SoundSource.PLAYERS, 0.25f, (float) (0.5f + ((random.nextFloat() - 0.5D) / 4)));
@@ -176,63 +249,73 @@ public class RaySpell extends Spell {
         }
     }
 
-    public void rayTick(SpellProjectileEntity entity, HitResult ray) {
+    public void rayTick(SpellEntity entity, HitResult ray) {
 
     }
 
-    public void rayEndTick(SpellProjectileEntity entity, HitResult ray) {
+    public void rayEndTick(SpellEntity entity, HitResult ray) {
 
     }
 
-    public boolean hasBurst(SpellProjectileEntity entity) {
+    public boolean hasBurst(SpellEntity entity) {
         return true;
     }
 
-    public boolean hasSound(SpellProjectileEntity entity) {
+    public boolean hasSound(SpellEntity entity) {
         return true;
     }
 
-    public void updatePos(SpellProjectileEntity entity) {
-        if (entity.getSender() != null) {
-            Player player = entity.getSender();
-            entity.copyPosition(player);
-            entity.setPos(entity.getX(), entity.getY() + ((player.getEyeHeight() - 0.5F)), entity.getZ());
-            entity.xOld = player.xOld;
-            entity.yOld = player.yOld + ((player.getEyeHeight() - 0.5F));
-            entity.zOld = player.zOld;
+    public void updatePos(SpellEntity entity) {
+        if (entity.getOwner() != null) {
+/*            Entity player = entity.getOwner();
+            //entity.copyPosition(player);
+            entity.setPos(player.getX(), player.getY() + ((player.getEyeHeight() - 0.5F)), player.getZ());
+            entity.xo = player.xo;
+            entity.yo = player.yo + ((player.getEyeHeight() - 0.5F));
+            entity.zo = player.zo;
+            //entity.xOld = player.xo;
+            //entity.yOld = player.yo + ((player.getEyeHeight() - 0.5F));
+            //entity.zOld = player.zo;
+            entity.hurtMarked = true;*/
+            Entity player = entity.getOwner();
+            Vec3 pos = entity.position();
+            entity.xo = pos.x;
+            entity.yo = pos.y;
+            entity.zo = pos.z;
+            entity.setPos(player.getX(), player.getY(), player.getZ());
         }
     }
 
-    public void updateRot(SpellProjectileEntity entity) {
-        if (entity.getSender() != null) {
-            entity.setYRot(entity.getSender().getYRot());
-            entity.setXRot(entity.getSender().getXRot());
-            entity.yRotO = entity.getSender().yRotO;
-            entity.xRotO = entity.getSender().xRotO;
+    public void updateRot(SpellEntity entity) {
+        if (entity.getOwner() != null) {
+            entity.setYRot(entity.getOwner().getYRot());
+            entity.setXRot(entity.getOwner().getXRot());
+            entity.yRotO = entity.getOwner().yRotO;
+            entity.xRotO = entity.getOwner().xRotO;
         }
     }
 
     @Override
     public UseAnim getUseAnimation(ItemStack stack) {
-        CompoundTag nbt = stack.getOrCreateTag();
+/*        CompoundTag nbt = stack.getOrCreateTag();
         if (nbt.contains("spell_data")) {
             CompoundTag stackSpellData = nbt.getCompound("spell_data");
             if (stackSpellData.contains("entity")) {
                 return UseAnim.CUSTOM;
             }
-        }
-        return UseAnim.NONE;
+        }*/
+        return UseAnim.CUSTOM;
     }
 
     @Override
     public boolean hasCustomAnimation(ItemStack stack) {
-        CompoundTag nbt = stack.getOrCreateTag();
+/*        CompoundTag nbt = stack.getOrCreateTag();
         if (nbt.contains("spell_data")) {
             CompoundTag stackSpellData = nbt.getCompound("spell_data");
             if (stackSpellData.contains("entity")) {
                 return true;
             }
-        }
+        }*/
         return false;
     }
 
@@ -248,39 +331,19 @@ public class RaySpell extends Spell {
 
     @Override
     @OnlyIn(Dist.CLIENT)
-    public void render(SpellProjectileEntity entity, float entityYaw, float partialTicks, PoseStack stack, MultiBufferSource buffer, int light) {
-        HitResult ray = getHitResult(entity, entity.position().add(0, 0.3F, 0), entity.getLookAngle().scale(getRayDistance()), entity.level(), (e) -> {
-            return !e.isSpectator() && e.isPickable() && !e.getUUID().equals(entity.getSenderUUID());
+    public void render(SpellEntity entity, float entityYaw, float partialTicks, PoseStack poseStack, MultiBufferSource buffer, int light) {
+        HitResult ray = getHitResult(entity, entity.position(), entity.getLookAngle().scale(getRayDistance()).add(0, 0.3F, 0), entity.level(), (e) -> {
+            return !e.isSpectator() && e.isPickable() && !e.equals(entity.getOwner());
         });
 
         Color color = getColor();
-        float r = color.getRed() / 255f;
-        float g = color.getGreen() / 255f;
-        float b = color.getBlue() / 255f;
-
         Color secondColor = getSecondColor();
-        float sr = secondColor.getRed() / 255f;
-        float sg = secondColor.getGreen() / 255f;
-        float sb = secondColor.getBlue() / 255f;
 
         float offset = 1.0f;
         updateRot(entity);
 
-        float yRot = Mth.lerp(partialTicks, -entity.yRotO, -entity.getYRot()) - 90.0F;
-        float xRot = Mth.lerp(partialTicks, -entity.xRotO, -entity.getXRot());
-
-        stack.pushPose();
-        stack.translate(0, 0.2, 0);
-        stack.mulPose(Axis.YP.rotationDegrees(yRot));
-        stack.mulPose(Axis.ZP.rotationDegrees(xRot));
-        stack.mulPose(Axis.XP.rotationDegrees((entity.tickCount + partialTicks) * 5f));
-
-        stack.translate(offset, 0, 0);
-
-        MultiBufferSource bufferDelayed = FluffyFurRenderTypes.getDelayedRender();
-
         float width = 1f;
-        if (entity.tickCount < 3) {
+/*        if (entity.tickCount < 3) {
             width = (entity.tickCount + partialTicks) / 3;
         } else {
             CompoundTag spellData = entity.getSpellData();
@@ -289,31 +352,34 @@ public class RaySpell extends Spell {
                     width = 1f - (((entity.tickCount - 1) - spellData.getInt("tick_left") + partialTicks) / 4);
                 }
             }
-        }
+        }*/
         if (width > 1f) width = 1f;
         if (width < 0f) width = 0f;
 
-        float distance = (float) Math.sqrt(Math.pow(entity.getX() - ray.getLocation().x, 2) + Math.pow(entity.getY() - ray.getLocation().y, 2) + Math.pow(entity.getZ() - ray.getLocation().z, 2));
-        //WizardsRebornRenderUtil.ray(stack, bufferDelayed, 0.1f * width, (distance - offset) * width, Mth.lerp(distance / getRayDistance(), 1f, 0.5f), sr, sg, sb, 1, sr, sg, sb, 0.1F);
-        stack.translate(-0.05f, 0, 0);
-        stack.mulPose(Axis.XP.rotationDegrees(-(entity.tickCount + partialTicks) * 10f));
-        //WizardsRebornRenderUtil.ray(stack, bufferDelayed, 0.15f * width, (distance - offset + 0.1f) * width, Mth.lerp(distance / getRayDistance(), 1f, 0.5f), r, g, b, 0.5F, r, g, b, 0.05F);
-
-        stack.popPose();
+        poseStack.pushPose();
+        float distance = (float) Math.sqrt(Math.pow(entity.getX() - ray.getLocation().x(), 2) + Math.pow(entity.getY() - ray.getLocation().y(), 2) + Math.pow(entity.getZ() - ray.getLocation().z(), 2));
+        Vec3 pos1 = entity.position().add(entity.getViewVector(partialTicks).scale(offset)).add(0, 0.2f, 0);
+        Vec3 pos2 = entity.position().add(entity.getViewVector(partialTicks).scale(distance)).add(0, 0.3f, 0);;
+        poseStack.translate(-entity.getX(), -entity.getY(), -entity.getZ());
+        RenderBuilder.create().setRenderType(FluffyFurRenderTypes.ADDITIVE_TEXTURE)
+                .setUV(RenderUtil.getSprite(FluffyFur.MOD_ID, "particle/trail"))
+                .setColor(color)
+                .renderBeam(poseStack.last().pose(), pos1, pos2, 0.15f * width, 0.15f * Mth.lerp(distance / getRayDistance(), 1f, 0.5f));
+        poseStack.popPose();
     }
 
-    public HitResult getHitResult(SpellProjectileEntity pProjectile, Vec3 pStartVec, Vec3 pEndVecOffset, Level pLevel, Predicate<Entity> pFilter) {
-        return getHitResultStandard(pProjectile, pStartVec, pEndVecOffset, pLevel, pFilter);
+    public HitResult getHitResult(Entity projectile, Vec3 startVec, Vec3 endVecOffset, Level level, Predicate<Entity> filter) {
+        return getHitResultStandard(projectile, startVec, endVecOffset, level, filter);
     }
 
-    public static HitResult getHitResultStandard(Entity pProjectile, Vec3 pStartVec, Vec3 pEndVecOffset, Level pLevel, Predicate<Entity> pFilter) {
-        Vec3 vec3 = pStartVec.add(pEndVecOffset);
-        HitResult hitresult = pLevel.clip(new ClipContext(pStartVec, vec3, ClipContext.Block.COLLIDER, ClipContext.Fluid.NONE, pProjectile));
+    public static HitResult getHitResultStandard(Entity projectile, Vec3 startVec, Vec3 endVecOffset, Level level, Predicate<Entity> filter) {
+        Vec3 vec3 = startVec.add(endVecOffset);
+        HitResult hitresult = level.clip(new ClipContext(startVec, vec3, ClipContext.Block.COLLIDER, ClipContext.Fluid.NONE, projectile));
         if (hitresult.getType() != HitResult.Type.MISS) {
             vec3 = hitresult.getLocation();
         }
 
-        HitResult hitresult1 = ProjectileUtil.getEntityHitResult(pLevel, pProjectile, pStartVec, vec3, pProjectile.getBoundingBox().expandTowards(pEndVecOffset).inflate(1.0D), pFilter);
+        HitResult hitresult1 = ProjectileUtil.getEntityHitResult(level, projectile, startVec, vec3, projectile.getBoundingBox().expandTowards(endVecOffset).inflate(1.0D), filter);
         if (hitresult1 != null) {
             hitresult = hitresult1;
         }
@@ -325,5 +391,5 @@ public class RaySpell extends Spell {
         Vec3 vec = new Vec3(ray.getLocation().x() + (projectile.getViewVector(0).x() * offset), ray.getLocation().y() + (projectile.getViewVector(0).y() * offset), ray.getLocation().z() + (projectile.getViewVector(0).z() * offset));
 
         return vec;
-    }*/
+    }
 }

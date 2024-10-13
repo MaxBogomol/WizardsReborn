@@ -2,12 +2,16 @@ package mod.maxbogomol.wizards_reborn.common.item.equipment.arcane;
 
 import mod.maxbogomol.fluffy_fur.common.itemskin.ItemSkin;
 import mod.maxbogomol.wizards_reborn.api.arcaneenchantment.ArcaneEnchantmentType;
+import mod.maxbogomol.wizards_reborn.api.arcaneenchantment.ArcaneEnchantmentTypes;
 import mod.maxbogomol.wizards_reborn.api.arcaneenchantment.ArcaneEnchantmentUtil;
 import mod.maxbogomol.wizards_reborn.api.arcaneenchantment.IArcaneItem;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.world.item.*;
+import net.minecraft.world.item.AxeItem;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Tier;
+import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.level.Level;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
@@ -21,11 +25,11 @@ public class ArcaneAxeItem extends AxeItem implements IArcaneItem {
 
     public ArcaneAxeItem(Tier tier, float attackDamageModifier, float attackSpeedModifier, Properties properties) {
         super(tier, attackDamageModifier, attackSpeedModifier, properties);
-        arcaneEnchantmentTypes.add(ArcaneEnchantmentType.BREAKABLE);
-        arcaneEnchantmentTypes.add(ArcaneEnchantmentType.AXE);
-        arcaneEnchantmentTypes.add(ArcaneEnchantmentType.WEAPON);
-        arcaneEnchantmentTypes.add(ArcaneEnchantmentType.MELEE_WEAPON);
-        arcaneEnchantmentTypes.add(ArcaneEnchantmentType.TOOL);
+        arcaneEnchantmentTypes.add(ArcaneEnchantmentTypes.BREAKABLE);
+        arcaneEnchantmentTypes.add(ArcaneEnchantmentTypes.AXE);
+        arcaneEnchantmentTypes.add(ArcaneEnchantmentTypes.WEAPON);
+        arcaneEnchantmentTypes.add(ArcaneEnchantmentTypes.MELEE_WEAPON);
+        arcaneEnchantmentTypes.add(ArcaneEnchantmentTypes.TOOL);
     }
 
     @Override

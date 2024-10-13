@@ -13,17 +13,13 @@ import mod.maxbogomol.wizards_reborn.common.entity.SpellEntity;
 import mod.maxbogomol.wizards_reborn.common.network.PacketHandler;
 import mod.maxbogomol.wizards_reborn.common.network.spell.ProjectileSpellBurstPacket;
 import mod.maxbogomol.wizards_reborn.common.network.spell.ProjectileSpellTrailPacket;
-import mod.maxbogomol.wizards_reborn.common.spell.WandSpellContext;
 import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornEntities;
 import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornSounds;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.util.Mth;
-import net.minecraft.world.InteractionHand;
 import net.minecraft.world.entity.Entity;
-import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.entity.projectile.ProjectileUtil;
-import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.EntityHitResult;
 import net.minecraft.world.phys.HitResult;
@@ -52,21 +48,13 @@ public class ProjectileSpell extends Spell {
             Vec3 pos = spellContext.getPos();
             Vec3 vel = spellContext.getPos().add(spellContext.getVec().scale(40)).subtract(pos).scale(1.0 / 30);
             SpellEntity entity = new SpellEntity(WizardsRebornEntities.SPELL.get(), level);
-            entity.setup(pos.x, pos.y - 0.2f, pos.z, spellContext.getEntity(), this.getId(), spellContext.getStats());
+            entity.setup(pos.x(), pos.y() - 0.2f, pos.z(), spellContext.getEntity(), this.getId(), spellContext.getStats());
             entity.setDeltaMovement(vel);
             level.addFreshEntity(entity);
             spellContext.setCooldown(this);
             spellContext.removeWissen(this);
             spellContext.awardStat(this);
             spellContext.spellSound(this);
-        }
-    }
-
-    @Override
-    public void useWand(Level level, Player player, InteractionHand hand, ItemStack stack) {
-        if (!level.isClientSide()) {
-            WandSpellContext spellContext = WandSpellContext.getFromWand(player, stack);
-            useSpell(level, spellContext);
         }
     }
 

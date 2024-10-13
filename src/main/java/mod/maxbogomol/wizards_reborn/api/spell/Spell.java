@@ -12,6 +12,7 @@ import mod.maxbogomol.wizards_reborn.api.wissen.WissenUtil;
 import mod.maxbogomol.wizards_reborn.common.entity.SpellEntity;
 import mod.maxbogomol.wizards_reborn.common.item.CrystalItem;
 import mod.maxbogomol.wizards_reborn.common.item.equipment.ArcaneWandItem;
+import mod.maxbogomol.wizards_reborn.common.spell.WandSpellContext;
 import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornCrystals;
 import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornSounds;
 import net.minecraft.client.renderer.MultiBufferSource;
@@ -213,18 +214,13 @@ public class Spell {
     }
 
     public void useWand(Level level, Player player, InteractionHand hand, ItemStack stack) {
-
+        if (!level.isClientSide()) {
+            useSpell(level, getWandContext(player, stack));
+        }
     }
 
-    public void useSpell(Level level, Player player, InteractionHand hand) {
-        if (!level.isClientSide()) {
-            ItemStack stack = player.getItemInHand(hand);
-
-            CompoundTag stats = getStats(stack);
-            setCooldown(stack, stats);
-            removeWissen(stack, stats, player);
-            //awardStat(player, stack);
-        }
+    public SpellContext getWandContext(Player player, ItemStack stack) {
+        return WandSpellContext.getFromWand(player, stack);
     }
 
     public InteractionResult onWandUseOn(ItemStack stack, UseOnContext context) {

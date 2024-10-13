@@ -8,6 +8,7 @@ import net.minecraft.stats.Stats;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
+import net.minecraftforge.common.ForgeMod;
 
 public class WandSpellContext extends SpellContext {
 
@@ -49,6 +50,11 @@ public class WandSpellContext extends SpellContext {
         spellContext.setEntity(entity);
         spellContext.setPos(entity.getEyePosition());
         spellContext.setVec(entity.getLookAngle());
+        if (entity instanceof Player player) {
+            spellContext.setDistance(player.getAttributeValue(ForgeMod.ENTITY_REACH.get()));
+        } else {
+            spellContext.setDistance(3);
+        }
         spellContext.setItemStack(stack);
         spellContext.setStats(Spell.getStats(stack));
         return spellContext;

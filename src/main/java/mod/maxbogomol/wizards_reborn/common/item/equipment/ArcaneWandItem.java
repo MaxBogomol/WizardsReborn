@@ -246,7 +246,7 @@ public class ArcaneWandItem extends Item implements IWissenItem, ICustomAnimatio
 
         if (canSpell(stack, player)) {
             Spell spell = Spells.getSpell(getSpell(stack));
-            if (canSpell(spell, player, stack) && spell.canSpellAir(level, player, hand)) {
+            if (canSpell(spell, player, stack) && spell.canSpell(level, spell.getWandContext(player, stack)) && spell.canSpellAir(level, player, hand)) {
                 if (spell.canWandWithCrystal(getItemCrystal(stack))) {
                     spell.useWand(level, player, hand, stack);
                     return InteractionResultHolder.success(stack);

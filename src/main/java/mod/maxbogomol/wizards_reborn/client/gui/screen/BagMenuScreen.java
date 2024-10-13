@@ -3,6 +3,8 @@ package mod.maxbogomol.wizards_reborn.client.gui.screen;
 import com.mojang.blaze3d.platform.InputConstants;
 import com.mojang.math.Axis;
 import mod.maxbogomol.fluffy_fur.client.event.ClientTickHandler;
+import mod.maxbogomol.fluffy_fur.client.render.RenderBuilder;
+import mod.maxbogomol.fluffy_fur.registry.client.FluffyFurRenderTypes;
 import mod.maxbogomol.fluffy_fur.util.RenderUtil;
 import mod.maxbogomol.wizards_reborn.common.item.equipment.IBagItem;
 import mod.maxbogomol.wizards_reborn.common.network.item.BagOpenPacket;
@@ -63,11 +65,7 @@ public class BagMenuScreen extends Screen {
             minecraft.player.closeContainer();
         }
         List<ItemStack> bags = getPlayerBags();
-
         ItemStack selectedItem = getSelectedItem(bags, mouseX, mouseY);
-        if (selectedItem != null) {
-            gui.renderTooltip(Minecraft.getInstance().font, selectedItem, mouseX, mouseY);
-        }
 
         float step = (float) 360 / bags.size();
         float i = 0;
@@ -91,12 +89,15 @@ public class BagMenuScreen extends Screen {
 
             i = i + 1F;
         }
+        if (selectedItem != null) {
+            gui.renderTooltip(Minecraft.getInstance().font, selectedItem, mouseX, mouseY);
+        }
     }
 
     public ItemStack getSelectedItem(List<ItemStack> bags, double X, double Y) {
         double step = (float) 360 / bags.size();
-        double x = width / 2;
-        double y = height / 2;
+        double x = width / 2f;
+        double y = height / 2f;
 
         double angle =  Math.toDegrees(Math.atan2(Y-y,X-x));
         if (angle < 0D) {
@@ -134,18 +135,18 @@ public class BagMenuScreen extends Screen {
     }
 
     public void renderRays(Color color, GuiGraphics gui, float partialTicks, float i, float step, float scale, boolean choosed) {
-        float r = color.getRed() / 255f;
-        float g = color.getGreen() / 255f;
-        float b = color.getBlue() / 255f;
-
         float chooseRay = (choosed) ? 1.2f : 0.8f;
 
         gui.pose().pushPose();
-        gui.pose().translate(width / 2,  height / 2, 0);
+        gui.pose().translate(width / 2f,  height / 2f, 0);
         gui.pose().mulPose(Axis.ZP.rotationDegrees(i * step + (step / 2)));
         gui.pose().mulPose(Axis.XP.rotationDegrees((ClientTickHandler.ticksInGame + partialTicks + (i * 10) * 5)));
-        //WizardsRebornRenderUtil.ray(gui.pose(), buffersource, 1f, (100 * hoveramount) * chooseRay, 10f, r, g, b, 1, r, g, b, 0F);
-        //buffersource.endBatch();
+        gui.pose().mulPose(Axis.ZP.rotationDegrees(-90f));
+        RenderBuilder.create().setRenderType(FluffyFurRenderTypes.ADDITIVE)
+                .setColor(color)
+                .setSecondAlpha(0)
+                .renderRay(gui.pose(), 1f, (100 * hoveramount) * chooseRay, 10f)
+                .endBatch();
         gui.pose().popPose();
     }
 

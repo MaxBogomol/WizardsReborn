@@ -1,7 +1,7 @@
 package mod.maxbogomol.wizards_reborn.common.arcaneenchantment;
 
 import mod.maxbogomol.wizards_reborn.api.arcaneenchantment.ArcaneEnchantment;
-import mod.maxbogomol.wizards_reborn.api.arcaneenchantment.ArcaneEnchantmentType;
+import mod.maxbogomol.wizards_reborn.api.arcaneenchantment.ArcaneEnchantmentTypes;
 import mod.maxbogomol.wizards_reborn.api.arcaneenchantment.ArcaneEnchantmentUtil;
 import mod.maxbogomol.wizards_reborn.api.arcaneenchantment.IArcaneItem;
 import mod.maxbogomol.wizards_reborn.api.wissen.WissenUtil;
@@ -30,7 +30,7 @@ public class WissenMendingArcaneEnchantment extends ArcaneEnchantment {
     public boolean canEnchantItem(ItemStack stack) {
         if (stack.getItem() instanceof IArcaneItem item) {
             if (ArcaneEnchantmentUtil.getArcaneEnchantment(stack, WizardsRebornArcaneEnchantments.LIFE_MENDING) > 0) return false;
-            return item.getArcaneEnchantmentTypes().contains(ArcaneEnchantmentType.BREAKABLE);
+            return item.getArcaneEnchantmentTypes().contains(ArcaneEnchantmentTypes.BREAKABLE);
         }
         return false;
     }

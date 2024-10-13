@@ -1,35 +1,5 @@
 package mod.maxbogomol.wizards_reborn.api.arcaneenchantment;
 
-public enum ArcaneEnchantmentType {
-    ALL,
-    BREAKABLE,
-    CURIO,
-    BOOK,
-    TOOL,
-    WEAPON,
-    MELEE_WEAPON,
-    RANGED_WEAPON,
-    ARMOR,
-    SWORD,
-    PICKAXE,
-    AXE,
-    SHOVEL,
-    HOE,
-    SCYTHE,
-    KNIFE,
-    BOW,
-    HELMET,
-    CHESTPLATE,
-    LEGGINGS,
-    BOOTS,
-    WOODEN,
-    ARCANE_COLD,
-    SARCON,
-    VILENIUM,
-    ARCANE_WOOD,
-    INNOCENT_WOOD,
-    MAGIC_ARMOR,
-    FORTRESS_ARMOR,
-    INVENTOR_WIZARD_ARMOR,
-    ARCANE_FORTRESS_ARMOR
+public interface ArcaneEnchantmentType {
+
 }

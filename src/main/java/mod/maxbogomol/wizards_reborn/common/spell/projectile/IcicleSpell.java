@@ -112,8 +112,7 @@ public class IcicleSpell extends ProjectileSpell {
         target.hurt(damageSource, damage);
         target.clearFire();
         int frost = target.getTicksFrozen() + 500;
-        if (frost > 2000) frost = 2000;
-        target.setTicksFrozen(frost);
+        if (frost <= 2000) target.setTicksFrozen(frost);
     }
 
     @Override

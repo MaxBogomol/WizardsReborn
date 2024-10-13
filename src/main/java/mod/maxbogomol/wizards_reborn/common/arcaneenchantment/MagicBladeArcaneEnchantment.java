@@ -2,7 +2,7 @@ package mod.maxbogomol.wizards_reborn.common.arcaneenchantment;
 
 import mod.maxbogomol.wizards_reborn.WizardsReborn;
 import mod.maxbogomol.wizards_reborn.api.arcaneenchantment.ArcaneEnchantment;
-import mod.maxbogomol.wizards_reborn.api.arcaneenchantment.ArcaneEnchantmentType;
+import mod.maxbogomol.wizards_reborn.api.arcaneenchantment.ArcaneEnchantmentTypes;
 import mod.maxbogomol.wizards_reborn.api.arcaneenchantment.ArcaneEnchantmentUtil;
 import mod.maxbogomol.wizards_reborn.api.arcaneenchantment.IArcaneItem;
 import mod.maxbogomol.wizards_reborn.api.wissen.WissenUtil;
@@ -46,7 +46,7 @@ public class MagicBladeArcaneEnchantment extends ArcaneEnchantment {
     @Override
     public boolean canEnchantItem(ItemStack stack) {
         if (stack.getItem() instanceof IArcaneItem item) {
-            return item.getArcaneEnchantmentTypes().contains(ArcaneEnchantmentType.MELEE_WEAPON);
+            return item.getArcaneEnchantmentTypes().contains(ArcaneEnchantmentTypes.MELEE_WEAPON);
         }
         return false;
     }

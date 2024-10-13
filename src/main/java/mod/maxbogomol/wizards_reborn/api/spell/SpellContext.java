@@ -11,6 +11,7 @@ import java.util.Random;
 public class SpellContext {
     public Vec3 pos = Vec3.ZERO;
     public Vec3 vec = Vec3.ZERO;
+    public double distance = 0;
     public Level level;
     public Entity entity;
     public ItemStack itemStack = ItemStack.EMPTY;
@@ -34,6 +35,15 @@ public class SpellContext {
 
     public Vec3 getVec() {
         return vec;
+    }
+
+    public SpellContext setDistance(double distance) {
+        this.distance = distance;
+        return this;
+    }
+
+    public double getDistance() {
+        return distance;
     }
 
     public SpellContext setLevel(Level level) {

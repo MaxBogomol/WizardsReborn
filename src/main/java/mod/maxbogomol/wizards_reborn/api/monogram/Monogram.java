@@ -4,7 +4,6 @@ import mod.maxbogomol.fluffy_fur.client.event.ClientTickHandler;
 import mod.maxbogomol.fluffy_fur.client.render.RenderBuilder;
 import mod.maxbogomol.fluffy_fur.registry.client.FluffyFurRenderTypes;
 import mod.maxbogomol.fluffy_fur.util.RenderUtil;
-import mod.maxbogomol.wizards_reborn.client.arcanemicon.ArcanemiconGui;
 import mod.maxbogomol.wizards_reborn.config.WizardsRebornClientConfig;
 import net.minecraft.ChatFormatting;
 import net.minecraft.client.gui.GuiGraphics;
@@ -83,7 +82,7 @@ public class Monogram {
     }
 
     @OnlyIn(Dist.CLIENT)
-    public void renderArcanemiconIcon(ArcanemiconGui book, GuiGraphics gui, int x, int y) {
+    public void renderIcon(GuiGraphics gui, int x, int y) {
         Random random = new Random(getId().length());
 
         TextureAtlasSprite sprite = RenderUtil.getSprite(getTexture());
@@ -122,7 +121,7 @@ public class Monogram {
     }
 
     @OnlyIn(Dist.CLIENT)
-    public void renderArcanemiconMiniIcon(ArcanemiconGui book, GuiGraphics gui, int x, int y) {
+    public void renderMiniIcon(GuiGraphics gui, int x, int y) {
         Random random = new Random(getId().length());
 
         TextureAtlasSprite sprite = RenderUtil.getSprite(getTexture());

@@ -2,10 +2,6 @@ package mod.maxbogomol.wizards_reborn.common.spell.self;
 
 import mod.maxbogomol.wizards_reborn.api.spell.Spell;
 import mod.maxbogomol.wizards_reborn.api.spell.SpellContext;
-import mod.maxbogomol.wizards_reborn.common.spell.WandSpellContext;
-import net.minecraft.world.InteractionHand;
-import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 
 public class SelfSpell extends Spell {
@@ -23,14 +19,6 @@ public class SelfSpell extends Spell {
             spellContext.spellSound(this);
         }
         selfSpell(level, spellContext);
-    }
-
-    @Override
-    public void useWand(Level level, Player player, InteractionHand hand, ItemStack stack) {
-        if (!level.isClientSide()) {
-            WandSpellContext spellContext = WandSpellContext.getFromWand(player, stack);
-            useSpell(level, spellContext);
-        }
     }
 
     @Override

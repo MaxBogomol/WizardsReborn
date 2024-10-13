@@ -2,7 +2,7 @@ package mod.maxbogomol.wizards_reborn.common.arcaneenchantment;
 
 import mod.maxbogomol.wizards_reborn.WizardsReborn;
 import mod.maxbogomol.wizards_reborn.api.arcaneenchantment.ArcaneEnchantment;
-import mod.maxbogomol.wizards_reborn.api.arcaneenchantment.ArcaneEnchantmentType;
+import mod.maxbogomol.wizards_reborn.api.arcaneenchantment.ArcaneEnchantmentTypes;
 import mod.maxbogomol.wizards_reborn.api.arcaneenchantment.IArcaneItem;
 import mod.maxbogomol.wizards_reborn.registry.common.block.WizardsRebornBlockTags;
 import net.minecraft.core.BlockPos;
@@ -41,7 +41,7 @@ public class SonarArcaneEnchantment extends ArcaneEnchantment {
     @Override
     public boolean canEnchantItem(ItemStack stack) {
         if (stack.getItem() instanceof IArcaneItem item) {
-            return item.getArcaneEnchantmentTypes().contains(ArcaneEnchantmentType.PICKAXE);
+            return item.getArcaneEnchantmentTypes().contains(ArcaneEnchantmentTypes.PICKAXE);
         }
         return false;
     }
