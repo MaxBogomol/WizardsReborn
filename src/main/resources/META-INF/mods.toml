@@ -5,7 +5,7 @@ license="GPL-2.0"
 [[mods]]
     modId="wizards_reborn"
     version="${file.jarVersion}"
-    updateJSONURL = "https://raw.githubusercontent.com/MaxBogomol/WizardsReborn/refs/master/main/update.json"
+    updateJSONURL = "https://raw.githubusercontent.com/MaxBogomol/WizardsReborn/refs/heads/master/update.json"
     displayName="Wizard's Reborn"
     logoFile="wizards_reborn.png"
     authors='''
