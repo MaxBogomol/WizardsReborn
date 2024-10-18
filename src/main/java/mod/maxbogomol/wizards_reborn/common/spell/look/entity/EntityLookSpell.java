@@ -1,5 +1,7 @@
 package mod.maxbogomol.wizards_reborn.common.spell.look.entity;
 
+import mod.maxbogomol.fluffy_fur.common.raycast.RayCast;
+import mod.maxbogomol.fluffy_fur.common.raycast.RayHitResult;
 import mod.maxbogomol.wizards_reborn.api.spell.SpellContext;
 import mod.maxbogomol.wizards_reborn.common.spell.look.LookSpell;
 import net.minecraft.world.entity.Entity;
@@ -32,19 +34,19 @@ public class EntityLookSpell extends LookSpell {
         return getEntityHit(level, spellContext).hasEntities();
     }
 
-    public HitResult getEntityHit(Level level, SpellContext spellContext, Predicate<Entity> entityFilter, int entityCount, float size, boolean endE) {
+    public RayHitResult getEntityHit(Level level, SpellContext spellContext, Predicate<Entity> entityFilter, int entityCount, float size, boolean endE) {
         double distance = getReachDistance(spellContext);
-        return getHitPos(level, spellContext.getPos(), spellContext.getPos().add(spellContext.getVec().scale(distance)), entityFilter, entityCount, size, endE);
+        return RayCast.getHit(level, spellContext.getPos(), spellContext.getPos().add(spellContext.getVec().scale(distance)), entityFilter, entityCount, size, endE);
     }
 
-    public HitResult getEntityHit(Level level, SpellContext spellContext, Predicate<Entity> entityFilter) {
+    public RayHitResult getEntityHit(Level level, SpellContext spellContext, Predicate<Entity> entityFilter) {
         double distance = getReachDistance(spellContext);
-        return getHitPos(level, spellContext.getPos(), spellContext.getPos().add(spellContext.getVec().scale(distance)), entityFilter, 1, 0.2f, true);
+        return RayCast.getHit(level, spellContext.getPos(), spellContext.getPos().add(spellContext.getVec().scale(distance)), entityFilter, 1, 0.2f, true);
     }
 
-    public HitResult getEntityHit(Level level, SpellContext spellContext) {
+    public RayHitResult getEntityHit(Level level, SpellContext spellContext) {
         double distance = getReachDistance(spellContext);
-        return getHitPos(level, spellContext.getPos(), spellContext.getPos().add(spellContext.getVec().scale(distance)), getStandardFilter(spellContext.getEntity()), 1, 0.2f, true);
+        return RayCast.getHit(level, spellContext.getPos(), spellContext.getPos().add(spellContext.getVec().scale(distance)), getStandardFilter(spellContext.getEntity()), 1, 0.2f, true);
     }
 
     public static Predicate<Entity> getStandardFilter() {

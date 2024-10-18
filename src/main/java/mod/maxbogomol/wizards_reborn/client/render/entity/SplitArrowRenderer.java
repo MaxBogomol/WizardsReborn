@@ -49,7 +49,6 @@ public class SplitArrowRenderer<T extends SplitArrowEntity> extends EntityRender
         }
 
         poseStack.pushPose();
-        poseStack.translate(0, 0.1f, 0);
         poseStack.translate(-x, -y, -z);
         RenderBuilder.create().setRenderType(FluffyFurRenderTypes.ADDITIVE_TEXTURE)
                 .setUV(RenderUtil.getSprite(FluffyFur.MOD_ID, "particle/trail"))

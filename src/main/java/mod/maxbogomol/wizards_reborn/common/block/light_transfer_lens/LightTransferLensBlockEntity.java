@@ -73,22 +73,20 @@ public class LightTransferLensBlockEntity extends ExposedBlockSimpleInventory im
 
             if (isToBlock) {
                 BlockPos pos = new BlockPos(blockToX, blockToY, blockToZ);
-                if (level.isLoaded(pos)) {
-                    BlockEntity blockEntity = level.getBlockEntity(pos);
-                    if (blockEntity instanceof ILightBlockEntity lightBlockEntity) {
-                        if (canWork()) {
-                            Vec3 from = LightUtil.getLightLensPos(getBlockPos(), getLightLensPos());
-                            Vec3 to = LightUtil.getLightLensPos(pos, lightBlockEntity.getLightLensPos());
+                BlockEntity blockEntity = level.getBlockEntity(pos);
+                if (blockEntity instanceof ILightBlockEntity lightBlockEntity) {
+                    if (canWork()) {
+                        Vec3 from = LightUtil.getLightLensPos(getBlockPos(), getLightLensPos());
+                        Vec3 to = LightUtil.getLightLensPos(pos, lightBlockEntity.getLightLensPos());
 
-                            LightRayHitResult hitResult = LightUtil.getLightRayHitResult(level, getBlockPos(), from, to, 25);
-                            BlockEntity hitBlock = hitResult.getBlockEntity();
-                            LightUtil.transferLight(this, hitBlock);
-                            LightUtil.tickHitLightTypeStack(this, getLightTypes(), hitResult);
-                        }
-                    } else {
-                        isToBlock = false;
-                        update = true;
+                        LightRayHitResult hitResult = LightUtil.getLightRayHitResult(level, getBlockPos(), from, to, 25);
+                        BlockEntity hitBlock = hitResult.getBlockEntity();
+                        LightUtil.transferLight(this, hitBlock);
+                        LightUtil.tickHitLightTypeStack(this, getLightTypes(), hitResult);
                     }
+                } else {
+                    isToBlock = false;
+                    update = true;
                 }
             }
 

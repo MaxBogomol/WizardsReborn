@@ -94,10 +94,10 @@ public class ThrowedScytheEntity extends ThrowableItemProjectile {
             if (!level().isClientSide()) {
                 Vec3 mov = getDeltaMovement();
                 for (int i = 0; i < 5; i++) {
-                    double lerpX = Mth.lerp((double) i / 5f, getX(), mov.x());
-                    double lerpY = Mth.lerp((double) i / 5f, getY(), mov.y());
-                    double lerpZ = Mth.lerp((double) i / 5f, getZ(), mov.z());
-                    List<LivingEntity> entityList = level().getEntitiesOfClass(LivingEntity.class, new AABB(lerpX - 1, lerpY - 0.1f, lerpZ - 1, lerpX + 1, lerpY + 0.1f, lerpZ + 1));
+                    double lx = Mth.lerp((double) i / 5f, getX(), mov.x());
+                    double ly = Mth.lerp((double) i / 5f, getY(), mov.y());
+                    double lz = Mth.lerp((double) i / 5f, getZ(), mov.z());
+                    List<LivingEntity> entityList = level().getEntitiesOfClass(LivingEntity.class, new AABB(lx - 1, ly - 0.1f, lz - 1, lx + 1, ly + 0.1f, lz + 1));
                     if (tickCount < 5) {
                         if (getOwner() instanceof LivingEntity living) {
                             if (entityList.contains(living)) {
@@ -250,10 +250,10 @@ public class ThrowedScytheEntity extends ThrowableItemProjectile {
 
                     int dst = (int) distanceTo(player);
                     for (int i = 0; i < dst; i++) {
-                        double lerpX = Mth.lerp((double) i / dst, getX(), player.getX());
-                        double lerpY = Mth.lerp((double) i / dst, getY(), player.getY() + player.getBbHeight() / 2f);
-                        double lerpZ = Mth.lerp((double) i / dst, getZ(), player.getZ());
-                        List<LivingEntity> entityList = level().getEntitiesOfClass(LivingEntity.class, new AABB(lerpX - 1, lerpY - 0.1f, lerpZ - 1, lerpX + 1, lerpY + 0.1f, lerpZ + 1));
+                        double lx = Mth.lerp((double) i / dst, getX(), player.getX());
+                        double ly = Mth.lerp((double) i / dst, getY(), player.getY() + player.getBbHeight() / 2f);
+                        double lz = Mth.lerp((double) i / dst, getZ(), player.getZ());
+                        List<LivingEntity> entityList = level().getEntitiesOfClass(LivingEntity.class, new AABB(lx - 1, ly - 0.1f, lz - 1, lx + 1, ly + 0.1f, lz + 1));
                         for (LivingEntity target : entityList) {
                             if (!entities.contains(target) && !target.equals(player)) {
                                 entities.add(target);

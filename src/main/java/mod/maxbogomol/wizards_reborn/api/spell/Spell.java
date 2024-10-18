@@ -7,7 +7,6 @@ import mod.maxbogomol.wizards_reborn.api.crystal.CrystalType;
 import mod.maxbogomol.wizards_reborn.api.crystal.CrystalUtil;
 import mod.maxbogomol.wizards_reborn.api.crystal.Crystals;
 import mod.maxbogomol.wizards_reborn.api.knowledge.Research;
-import mod.maxbogomol.wizards_reborn.api.wissen.WissenItemUtil;
 import mod.maxbogomol.wizards_reborn.api.wissen.WissenUtil;
 import mod.maxbogomol.wizards_reborn.common.entity.SpellEntity;
 import mod.maxbogomol.wizards_reborn.common.item.CrystalItem;
@@ -179,18 +178,6 @@ public class Spell {
         int cooldown = getCooldownWithStat(stats, cost);
         nbt.putInt("cooldown", cooldown);
         nbt.putInt("maxCooldown", cooldown);
-    }
-
-    public void removeWissen(ItemStack stack, CompoundTag stats) {
-        WissenItemUtil.removeWissen(stack, getWissenCostWithStat(stats));
-    }
-
-    public void removeWissen(ItemStack stack, CompoundTag stats, Entity entity) {
-        WissenItemUtil.removeWissen(stack, getWissenCostWithStat(stats, entity));
-    }
-
-    public void removeWissen(ItemStack stack, CompoundTag stats, Entity entity, int cost) {
-        WissenItemUtil.removeWissen(stack, getWissenCostWithStat(stats, entity, cost));
     }
 
     public static CompoundTag getStats(ItemStack stack) {

@@ -1,11 +1,19 @@
 package mod.maxbogomol.wizards_reborn.common.spell.ray;
 
+import mod.maxbogomol.fluffy_fur.common.raycast.RayHitResult;
+import mod.maxbogomol.wizards_reborn.api.crystal.CrystalUtil;
+import mod.maxbogomol.wizards_reborn.common.entity.SpellEntity;
+import mod.maxbogomol.wizards_reborn.common.item.equipment.arcane.ArcaneArmorItem;
 import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornCrystals;
 import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornSpells;
+import net.minecraft.world.damagesource.DamageSource;
+import net.minecraft.world.entity.Entity;
+import net.minecraft.world.level.Level;
 
 import java.awt.*;
 
 public class AirRaySpell extends RaySpell {
+
     public AirRaySpell(String id, int points) {
         super(id, points);
         addCrystalType(WizardsRebornCrystals.AIR);
@@ -15,21 +23,21 @@ public class AirRaySpell extends RaySpell {
     public Color getColor() {
         return WizardsRebornSpells.airSpellColor;
     }
-/*
-    @Override
-    public void onImpact(HitResult ray, Level level, SpellProjectileEntity projectile, Player player, Entity target) {
-        super.onImpact(ray, level, projectile, player, target);
 
-        if (player != null) {
+    @Override
+    public void onImpact(Level level, SpellEntity entity, RayHitResult hitResult, Entity target) {
+        super.onImpact(level, entity, hitResult, target);
+
+        if (!entity.level().isClientSide()) {
             if (target.tickCount % 10 == 0) {
-                ItemStack stack = player.getItemInHand(player.getUsedItemHand());
-                if (WissenItemUtil.canRemoveWissen(stack, getWissenCostWithStat(projectile.getStats(), player))) {
-                    removeWissen(stack, projectile.getStats(), player);
-                    int focusLevel = CrystalUtil.getStatLevel(projectile.getStats(), WizardsRebornCrystals.FOCUS);
-                    float magicModifier = ArcaneArmorItem.getPlayerMagicModifier(player);
-                    float damage = (float) (1.5f + (focusLevel * 0.5)) + magicModifier;
-                    target.hurt(new DamageSource(target.damageSources().fall().typeHolder(), projectile, player), damage);
-                    if (player.isShiftKeyDown()) {
+                if (entity.getSpellContext().canRemoveWissen(this)) {
+                    entity.getSpellContext().removeWissen(this);
+                    int focusLevel = CrystalUtil.getStatLevel(entity.getStats(), WizardsRebornCrystals.FOCUS);
+                    float magicModifier = ArcaneArmorItem.getPlayerMagicModifier(entity.getOwner());
+                    float damage = (1.5f + (focusLevel * 0.5f)) + magicModifier;
+                    DamageSource damageSource = getDamage(target.damageSources().fall().typeHolder(), entity, entity.getOwner());
+                    target.hurt(damageSource, damage);
+/*                    if (player.isShiftKeyDown()) {
                         if (target instanceof LivingEntity livingEntity) {
                             livingEntity.knockback(((focusLevel + magicModifier) * 0.5F), Mth.sin(projectile.getYRot() * ((float) Math.PI / 180F)), (-Mth.cos(projectile.getYRot() * ((float) Math.PI / 180F))));
 
@@ -43,9 +51,9 @@ public class AirRaySpell extends RaySpell {
 
                             PacketHandler.sendToTracking(level, player.getOnPos(), new AirRaySpellEffectPacket((float) pos.x(), (float) pos.y() + (target.getBbHeight() / 2), (float) pos.z(), (float) vel.x(), (float) vel.y(), (float) vel.z(), r, g, b));
                         }
-                    }
+                    }*/
                 }
             }
         }
-    }*/
+    }
 }

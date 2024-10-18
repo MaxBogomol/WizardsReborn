@@ -68,7 +68,7 @@ public class SplitArrowEntity extends AbstractArrow {
                 Vec3 pos = position();
                 Vec3 norm = motion.normalize().scale(0.025f);
 
-                PacketHandler.sendToTracking(level(), new BlockPos((int) pos.x, (int) pos.y, (int) pos.z), new ChargeSpellProjectileRayEffectPacket((float) xo, (float) yo + 0.1f, (float) zo, (float) pos.x, (float) pos.y + 0.1f, (float) pos.z, (float) norm.x, (float) norm.y, (float) norm.z, r, g, b, 0.5f));
+                PacketHandler.sendToTracking(level(), new BlockPos((int) pos.x, (int) pos.y, (int) pos.z), new ChargeSpellProjectileRayEffectPacket((float) xo, (float) yo, (float) zo, (float) pos.x, (float) pos.y + 0.1f, (float) pos.z, (float) norm.x, (float) norm.y, (float) norm.z, r, g, b, 0.5f));
             }
         } else {
             setDeltaMovement(0, 0, 0);

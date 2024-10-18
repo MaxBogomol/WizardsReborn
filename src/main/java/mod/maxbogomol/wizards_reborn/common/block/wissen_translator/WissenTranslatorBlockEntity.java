@@ -89,56 +89,52 @@ public class WissenTranslatorBlockEntity extends ExposedBlockSimpleInventory imp
             }
 
             if (isToBlock) {
-                if (level.isLoaded(new BlockPos(blockToX, blockToY, blockToZ))) {
-                    BlockEntity blockEntity = level.getBlockEntity(new BlockPos(blockToX, blockToY, blockToZ));
-                    if (blockEntity instanceof IWissenBlockEntity wissenBlockEntity) {
-                        if (wissenBlockEntity.canReceiveWissen() && (cooldown <= 0) && canWork()) {
-                            int removeRemain = WissenUtil.getRemoveWissenRemain(getWissen(), getWissenPerReceive());
-                            int addRemain = WissenUtil.getAddWissenRemain(wissenBlockEntity.getWissen(), getWissenPerReceive() - removeRemain, wissenBlockEntity.getMaxWissen());
+                BlockEntity blockEntity = level.getBlockEntity(new BlockPos(blockToX, blockToY, blockToZ));
+                if (blockEntity instanceof IWissenBlockEntity wissenBlockEntity) {
+                    if (wissenBlockEntity.canReceiveWissen() && (cooldown <= 0) && canWork()) {
+                        int removeRemain = WissenUtil.getRemoveWissenRemain(getWissen(), getWissenPerReceive());
+                        int addRemain = WissenUtil.getAddWissenRemain(wissenBlockEntity.getWissen(), getWissenPerReceive() - removeRemain, wissenBlockEntity.getMaxWissen());
 
-                            if ((getWissenPerReceive() - removeRemain - addRemain) > 0) {
-                                removeWissen(getWissenPerReceive() - removeRemain - addRemain);
-                                addWissenRay(getBlockPos(), new BlockPos(blockToX, blockToY, blockToZ), getWissenPerReceive() - removeRemain - addRemain);
+                        if ((getWissenPerReceive() - removeRemain - addRemain) > 0) {
+                            removeWissen(getWissenPerReceive() - removeRemain - addRemain);
+                            addWissenRay(getBlockPos(), new BlockPos(blockToX, blockToY, blockToZ), getWissenPerReceive() - removeRemain - addRemain);
 
-                                setCooldown = true;
-                                update = true;
+                            setCooldown = true;
+                            update = true;
 
-                                Color color = getColor();
+                            Color color = getColor();
 
-                                PacketHandler.sendToTracking(level, getBlockPos(), new WissenTranslatorBurstPacket(getBlockPos().getX() + 0.5f, getBlockPos().getY() + 0.5f, getBlockPos().getZ() + 0.5f, color));
-                                level.playSound(WizardsReborn.proxy.getPlayer(), getBlockPos(), WizardsRebornSounds.WISSEN_TRANSFER.get(), SoundSource.BLOCKS, 0.1f, (float) (1.1f + ((random.nextFloat() - 0.5D) / 2)));
-                            }
+                            PacketHandler.sendToTracking(level, getBlockPos(), new WissenTranslatorBurstPacket(getBlockPos().getX() + 0.5f, getBlockPos().getY() + 0.5f, getBlockPos().getZ() + 0.5f, color));
+                            level.playSound(WizardsReborn.proxy.getPlayer(), getBlockPos(), WizardsRebornSounds.WISSEN_TRANSFER.get(), SoundSource.BLOCKS, 0.1f, (float) (1.1f + ((random.nextFloat() - 0.5D) / 2)));
                         }
-                    } else {
-                        isToBlock = false;
-                        update = true;
                     }
+                } else {
+                    isToBlock = false;
+                    update = true;
                 }
             }
 
             if (isFromBlock) {
-                if (level.isLoaded(new BlockPos(blockFromX, blockFromY, blockFromZ))) {
-                    BlockEntity blockEntity = level.getBlockEntity(new BlockPos(blockFromX, blockFromY, blockFromZ));
-                    if (blockEntity instanceof IWissenBlockEntity wissenBlockEntity) {
-                        if (wissenBlockEntity.canSendWissen() && (cooldown <= 0) && canWork()) {
-                            int addRemain = WissenUtil.getAddWissenRemain(getWissen(), getWissenPerReceive(), getMaxWissen());
-                            int removeRemain = WissenUtil.getRemoveWissenRemain(wissenBlockEntity.getWissen(), getWissenPerReceive() - addRemain);
+                BlockEntity blockEntity = level.getBlockEntity(new BlockPos(blockFromX, blockFromY, blockFromZ));
+                if (blockEntity instanceof IWissenBlockEntity wissenBlockEntity) {
+                    if (wissenBlockEntity.canSendWissen() && (cooldown <= 0) && canWork()) {
+                        int addRemain = WissenUtil.getAddWissenRemain(getWissen(), getWissenPerReceive(), getMaxWissen());
+                        int removeRemain = WissenUtil.getRemoveWissenRemain(wissenBlockEntity.getWissen(), getWissenPerReceive() - addRemain);
 
-                            if ((getWissenPerReceive() - removeRemain - addRemain) > 0) {
-                                wissenBlockEntity.removeWissen(getWissenPerReceive() - removeRemain - addRemain);
-                                addWissenRay(new BlockPos(blockFromX, blockFromY, blockFromZ), getBlockPos(), getWissenPerReceive() - removeRemain - addRemain);
-                                BlockEntityUpdate.packet(blockEntity);
+                        if ((getWissenPerReceive() - removeRemain - addRemain) > 0) {
+                            wissenBlockEntity.removeWissen(getWissenPerReceive() - removeRemain - addRemain);
+                            addWissenRay(new BlockPos(blockFromX, blockFromY, blockFromZ), getBlockPos(), getWissenPerReceive() - removeRemain - addRemain);
+                            BlockEntityUpdate.packet(blockEntity);
 
-                                setCooldown = true;
-                                update = true;
+                            setCooldown = true;
+                            update = true;
 
-                                level.playSound(WizardsReborn.proxy.getPlayer(), blockEntity.getBlockPos(), WizardsRebornSounds.WISSEN_TRANSFER.get(), SoundSource.BLOCKS, 0.1f, (float) (1.1f + ((random.nextFloat() - 0.5D) / 2)));
-                            }
+                            level.playSound(WizardsReborn.proxy.getPlayer(), blockEntity.getBlockPos(), WizardsRebornSounds.WISSEN_TRANSFER.get(), SoundSource.BLOCKS, 0.1f, (float) (1.1f + ((random.nextFloat() - 0.5D) / 2)));
                         }
-                    } else {
-                        isFromBlock = false;
-                        update = true;
                     }
+                } else {
+                    isFromBlock = false;
+                    update = true;
                 }
             }
 
@@ -391,48 +387,46 @@ public class WissenTranslatorBlockEntity extends ExposedBlockSimpleInventory imp
                 deleteRays.add(i);
             }
 
-            if (level.isLoaded(BlockPos.containing(blockX, blockY, blockZ))) {
-                tag.putDouble("blockX", X);
-                tag.putDouble("blockY", Y);
-                tag.putDouble("blockZ", Z);
+            tag.putDouble("blockX", X);
+            tag.putDouble("blockY", Y);
+            tag.putDouble("blockZ", Z);
 
-                Color color = getColor();
+            Color color = getColor();
 
-                PacketHandler.sendToTracking(level, getBlockPos(), new WissenSendEffectPacket(blockX, blockY, blockZ, X, Y, Z, (float) color.getRed() / 255, (float) color.getGreen()/ 255, (float) color.getBlue() / 255));
+            PacketHandler.sendToTracking(level, getBlockPos(), new WissenSendEffectPacket(blockX, blockY, blockZ, X, Y, Z, (float) color.getRed() / 255, (float) color.getGreen()/ 255, (float) color.getBlue() / 255));
 
-                if (tag.getInt("wissen") <= 0) {
-                    PacketHandler.sendToTracking(level, getBlockPos(), new WissenTranslatorBurstPacket(X, Y, Z, color));
-                    deleteRays.add(i);
-                } else if ((blockFromX != Mth.floor(blockX)) || blockFromY != Mth.floor(blockY) || (blockFromZ != Mth.floor(blockZ))) {
-                    BlockEntity blockEntity = level.getBlockEntity(BlockPos.containing(blockX, blockY, blockZ));
-                    if (blockEntity instanceof IWissenBlockEntity) {
-                        if ((Math.abs(blockX) % 1F > 0.15F && Math.abs(blockX) % 1F <= 0.85F) &&
-                                (Math.abs(blockY) % 1F > 0.15F && Math.abs(blockY) % 1F <= 0.85F) &&
-                                (Math.abs(blockZ) % 1F > 0.15F && Math.abs(blockZ) % 1F <= 0.85F)) {
-                            IWissenBlockEntity wissenBlockEntity = (IWissenBlockEntity) blockEntity;
+            if (tag.getInt("wissen") <= 0) {
+                PacketHandler.sendToTracking(level, getBlockPos(), new WissenTranslatorBurstPacket(X, Y, Z, color));
+                deleteRays.add(i);
+            } else if ((blockFromX != Mth.floor(blockX)) || blockFromY != Mth.floor(blockY) || (blockFromZ != Mth.floor(blockZ))) {
+                BlockEntity blockEntity = level.getBlockEntity(BlockPos.containing(blockX, blockY, blockZ));
+                if (blockEntity instanceof IWissenBlockEntity) {
+                    if ((Math.abs(blockX) % 1F > 0.15F && Math.abs(blockX) % 1F <= 0.85F) &&
+                            (Math.abs(blockY) % 1F > 0.15F && Math.abs(blockY) % 1F <= 0.85F) &&
+                            (Math.abs(blockZ) % 1F > 0.15F && Math.abs(blockZ) % 1F <= 0.85F)) {
+                        IWissenBlockEntity wissenBlockEntity = (IWissenBlockEntity) blockEntity;
 
-                            int addRemain = WissenUtil.getAddWissenRemain(wissenBlockEntity.getWissen(), tag.getInt("wissen"), wissenBlockEntity.getMaxWissen());
-                            wissenBlockEntity.addWissen(tag.getInt("wissen") - addRemain);
-                            level.playSound(WizardsReborn.proxy.getPlayer(), X, Y, Z, WizardsRebornSounds.WISSEN_TRANSFER.get(), SoundSource.BLOCKS, 0.1f, (float) (1f + ((random.nextFloat() - 0.5D) / 2)));
+                        int addRemain = WissenUtil.getAddWissenRemain(wissenBlockEntity.getWissen(), tag.getInt("wissen"), wissenBlockEntity.getMaxWissen());
+                        wissenBlockEntity.addWissen(tag.getInt("wissen") - addRemain);
+                        level.playSound(WizardsReborn.proxy.getPlayer(), X, Y, Z, WizardsRebornSounds.WISSEN_TRANSFER.get(), SoundSource.BLOCKS, 0.1f, (float) (1f + ((random.nextFloat() - 0.5D) / 2)));
 
-                            BlockEntityUpdate.packet(blockEntity);
+                        BlockEntityUpdate.packet(blockEntity);
 
-                            PacketHandler.sendToTracking(level, getBlockPos(), new WissenTranslatorBurstPacket((float) X, (float) Y, (float) Z, color));
-                            PacketHandler.sendToTracking(level, getBlockPos(), new WissenTranslatorSendPacket(BlockPos.containing(X, Y, Z)));
+                        PacketHandler.sendToTracking(level, getBlockPos(), new WissenTranslatorBurstPacket((float) X, (float) Y, (float) Z, color));
+                        PacketHandler.sendToTracking(level, getBlockPos(), new WissenTranslatorSendPacket(BlockPos.containing(X, Y, Z)));
 
-                            deleteRays.add(i);
-                        }
-                    } else {
-                        BlockPos blockpos = BlockPos.containing(blockX, blockY, blockZ);
-                        if (level.getBlockState(blockpos).isCollisionShapeFullBlock(level, blockpos)) {
-                            tag.putInt("wissen", tag.getInt("wissen") - 1);
-                        }
-
-                        if (tag.getInt("mitting") >= getRayMitting()) {
-                            tag.putInt("wissen", tag.getInt("wissen") - 1);
-                        }
-                        tag.putInt("mitting", tag.getInt("mitting") + 1);
+                        deleteRays.add(i);
                     }
+                } else {
+                    BlockPos blockpos = BlockPos.containing(blockX, blockY, blockZ);
+                    if (level.getBlockState(blockpos).isCollisionShapeFullBlock(level, blockpos)) {
+                        tag.putInt("wissen", tag.getInt("wissen") - 1);
+                    }
+
+                    if (tag.getInt("mitting") >= getRayMitting()) {
+                        tag.putInt("wissen", tag.getInt("wissen") - 1);
+                    }
+                    tag.putInt("mitting", tag.getInt("mitting") + 1);
                 }
             }
         }

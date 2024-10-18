@@ -1,5 +1,6 @@
 package mod.maxbogomol.wizards_reborn.common.spell.projectile;
 
+import mod.maxbogomol.fluffy_fur.common.raycast.RayHitResult;
 import mod.maxbogomol.wizards_reborn.api.crystal.CrystalUtil;
 import mod.maxbogomol.wizards_reborn.common.entity.SpellEntity;
 import mod.maxbogomol.wizards_reborn.common.item.equipment.arcane.ArcaneArmorItem;
@@ -13,7 +14,6 @@ import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.level.Level;
-import net.minecraft.world.phys.HitResult;
 
 import java.awt.*;
 
@@ -31,21 +31,21 @@ public class HolyProjectileSpell extends ProjectileSpell {
     }
 
     @Override
-    public void onImpact(Level level, SpellEntity entity, HitResult hitResult, Entity target) {
+    public void onImpact(Level level, SpellEntity entity, RayHitResult hitResult, Entity target) {
         super.onImpact(level, entity, hitResult, target);
 
         if (!level.isClientSide()) {
             if (target instanceof LivingEntity livingEntity) {
                 int focusLevel = CrystalUtil.getStatLevel(entity.getStats(), WizardsRebornCrystals.FOCUS);
                 float magicModifier = ArcaneArmorItem.getPlayerMagicModifier(entity.getOwner());
-                float damage = (float) (1.5f + (focusLevel * 0.5)) + magicModifier;
+                float damage = (1.5f + (focusLevel * 0.5f)) + magicModifier;
                 if (livingEntity.isInvertedHealAndHarm()) {
                     DamageSource damageSource = getDamage(WizardsRebornDamage.create(target.level(), WizardsRebornDamage.ARCANE_MAGIC).typeHolder(), entity, entity.getOwner());
                     target.hurt(damageSource, damage);
-                    PacketHandler.sendToTracking(level, entity.blockPosition(), new ProjectileSpellSkullsPacket(entity.position().add(0, 0.2f, 0), getColor()));
+                    PacketHandler.sendToTracking(level, entity.blockPosition(), new ProjectileSpellSkullsPacket(entity.position(), getColor()));
                 } else {
                     livingEntity.heal(damage);
-                    PacketHandler.sendToTracking(level, entity.blockPosition(), new ProjectileSpellHeartsPacket(entity.position().add(0, 0.2f, 0), getColor()));
+                    PacketHandler.sendToTracking(level, entity.blockPosition(), new ProjectileSpellHeartsPacket(entity.position(), getColor()));
                 }
             }
         }

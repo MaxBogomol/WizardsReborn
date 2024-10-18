@@ -1,11 +1,24 @@
 package mod.maxbogomol.wizards_reborn.common.spell.ray;
 
+import mod.maxbogomol.fluffy_fur.common.raycast.RayHitResult;
+import mod.maxbogomol.wizards_reborn.api.crystal.CrystalUtil;
+import mod.maxbogomol.wizards_reborn.common.entity.SpellEntity;
+import mod.maxbogomol.wizards_reborn.common.item.equipment.arcane.ArcaneArmorItem;
+import mod.maxbogomol.wizards_reborn.common.network.PacketHandler;
+import mod.maxbogomol.wizards_reborn.common.network.spell.CrossSpellHeartsPacket;
+import mod.maxbogomol.wizards_reborn.common.network.spell.CrossSpellSkullsPacket;
 import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornCrystals;
 import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornSpells;
+import mod.maxbogomol.wizards_reborn.registry.common.damage.WizardsRebornDamage;
+import net.minecraft.world.damagesource.DamageSource;
+import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.level.Level;
 
 import java.awt.*;
 
 public class HolyRaySpell extends RaySpell {
+
     public HolyRaySpell(String id, int points) {
         super(id, points);
         addCrystalType(WizardsRebornCrystals.EARTH);
@@ -16,51 +29,36 @@ public class HolyRaySpell extends RaySpell {
     public Color getColor() {
         return WizardsRebornSpells.holySpellColor;
     }
-/*
+
     @Override
-    public void onImpact(HitResult ray, Level level, SpellProjectileEntity projectile, Player player, Entity target) {
-        super.onImpact(ray, level, projectile, player, target);
+    public void onImpact(Level level, SpellEntity entity, RayHitResult hitResult, Entity target) {
+        super.onImpact(level, entity, hitResult, target);
 
-        if (player != null) {
-            if (!player.isShiftKeyDown()) {
+        if (!entity.level().isClientSide()) {
+            if (target instanceof LivingEntity livingEntity) {
                 if (target.tickCount % 10 == 0) {
-                    ItemStack stack = player.getItemInHand(player.getUsedItemHand());
-                    if (WissenItemUtil.canRemoveWissen(stack, getWissenCostWithStat(projectile.getStats(), player))) {
-                        if (target instanceof LivingEntity livingEntity) {
-                            int focusLevel = CrystalUtil.getStatLevel(projectile.getStats(), WizardsRebornCrystals.FOCUS);
-                            float magicModifier = ArcaneArmorItem.getPlayerMagicModifier(player);
-                            float damage = (float) (1.0f + (focusLevel * 0.5)) + magicModifier;
-                            boolean effect = false;
-                            if (livingEntity.isInvertedHealAndHarm()) {
-                                target.hurt(new DamageSource(WizardsRebornDamage.create(target.level(), WizardsRebornDamage.ARCANE_MAGIC).typeHolder(), projectile, player), damage);
-                                removeWissen(stack, projectile.getStats(), player);
-                                effect = true;
-                            } else {
-                                if (livingEntity.getHealth() != livingEntity.getMaxHealth()) {
-                                    livingEntity.heal(damage);
-                                    removeWissen(stack, projectile.getStats(), player);
-                                    effect = true;
-                                }
-                            }
-
-                            if (effect) {
-                                Color color = getColor();
-                                float r = color.getRed() / 255f;
-                                float g = color.getGreen() / 255f;
-                                float b = color.getBlue() / 255f;
-
-                                PacketHandler.sendToTracking(level, player.getOnPos(), new HolyRaySpellEffectPacket((float) target.getX(), (float) target.getY() + (target.getBbHeight() / 2), (float) target.getZ(), r, g, b));
-                            }
+                    if (entity.getSpellContext().canRemoveWissen(this)) {
+                        entity.getSpellContext().removeWissen(this);
+                        int focusLevel = CrystalUtil.getStatLevel(entity.getStats(), WizardsRebornCrystals.FOCUS);
+                        float magicModifier = ArcaneArmorItem.getPlayerMagicModifier(entity.getOwner());
+                        float damage = (1.0f + (focusLevel * 0.5f)) + magicModifier;
+                        if (livingEntity.isInvertedHealAndHarm()) {
+                            DamageSource damageSource = getDamage(WizardsRebornDamage.create(target.level(), WizardsRebornDamage.ARCANE_MAGIC).typeHolder(), entity, entity.getOwner());
+                            target.hurt(damageSource, damage);
+                            PacketHandler.sendToTracking(level, entity.blockPosition(), new CrossSpellSkullsPacket(hitResult.getPos(), getColor()));
+                        } else {
+                            livingEntity.heal(damage);
+                            PacketHandler.sendToTracking(level, entity.blockPosition(), new CrossSpellHeartsPacket(hitResult.getPos(), getColor()));
                         }
                     }
                 }
-            } else {
+            }/* else {
                 int focusLevel = CrystalUtil.getStatLevel(projectile.getStats(), WizardsRebornCrystals.FOCUS);
                 healAura(level, ray.getLocation(), focusLevel + 1, projectile, player);
-            }
-        }
+            }*/
+}
     }
-
+/*
     @Override
     public void onImpact(HitResult ray, Level level, SpellProjectileEntity projectile, Player player) {
         super.onImpact(ray, level, projectile, player);

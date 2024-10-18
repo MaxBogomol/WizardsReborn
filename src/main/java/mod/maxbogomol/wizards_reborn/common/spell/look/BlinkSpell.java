@@ -1,5 +1,6 @@
 package mod.maxbogomol.wizards_reborn.common.spell.look;
 
+import mod.maxbogomol.fluffy_fur.common.raycast.RayCast;
 import mod.maxbogomol.wizards_reborn.WizardsReborn;
 import mod.maxbogomol.wizards_reborn.api.crystal.CrystalUtil;
 import mod.maxbogomol.wizards_reborn.api.spell.SpellContext;
@@ -64,7 +65,7 @@ public class BlinkSpell extends LookSpell {
 
     @Override
     public void lookSpell(Level level, SpellContext spellContext) {
-        Vec3 pos = getHitPos(level, spellContext).getPosHit();
+        Vec3 pos = getHit(level, spellContext).getPos();
         Entity entity = spellContext.getEntity();
 
         if (spellContext.getEntity() instanceof LivingEntity livingEntity) {
@@ -77,7 +78,7 @@ public class BlinkSpell extends LookSpell {
             float damage = (3f + (focusLevel)) + magicModifier;
 
             if (isSharp) {
-                for (Entity target : getHitEntities(level, spellContext.getPos(), pos, 0.5f)) {
+                for (Entity target : RayCast.getHitEntities(level, spellContext.getPos(), pos, 0.5f)) {
                     if (!target.equals(spellContext.getEntity()) && target instanceof LivingEntity) {
                         DamageSource damageSource = new DamageSource(WizardsRebornDamage.create(target.level(), WizardsRebornDamage.ARCANE_MAGIC).typeHolder(), entity);
                         target.hurt(damageSource, damage);

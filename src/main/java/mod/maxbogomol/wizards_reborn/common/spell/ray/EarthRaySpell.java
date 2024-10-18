@@ -1,8 +1,17 @@
 package mod.maxbogomol.wizards_reborn.common.spell.ray;
 
+import mod.maxbogomol.fluffy_fur.common.raycast.RayHitResult;
+import mod.maxbogomol.wizards_reborn.api.crystal.CrystalUtil;
+import mod.maxbogomol.wizards_reborn.common.entity.SpellEntity;
+import mod.maxbogomol.wizards_reborn.common.item.equipment.arcane.ArcaneArmorItem;
 import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornCrystals;
 import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornSpells;
 import net.minecraft.tags.BlockTags;
+import net.minecraft.world.damagesource.DamageSource;
+import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.player.Inventory;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.state.BlockState;
 
 import java.awt.*;
@@ -18,30 +27,29 @@ public class EarthRaySpell extends RaySpell {
     public Color getColor() {
         return WizardsRebornSpells.earthSpellColor;
     }
-/*
-    @Override
-    public void onImpact(HitResult ray, Level level, SpellProjectileEntity projectile, Player player, Entity target) {
-        super.onImpact(ray, level, projectile, player, target);
 
-        if (player != null) {
+    @Override
+    public void onImpact(Level level, SpellEntity entity, RayHitResult hitResult, Entity target) {
+        super.onImpact(level, entity, hitResult, target);
+
+        if (!entity.level().isClientSide()) {
             if (target.tickCount % 10 == 0) {
-                ItemStack stack = player.getItemInHand(player.getUsedItemHand());
-                if (WissenItemUtil.canRemoveWissen(stack, getWissenCostWithStat(projectile.getStats(), player))) {
-                    removeWissen(stack, projectile.getStats(), player);
-                    int focusLevel = CrystalUtil.getStatLevel(projectile.getStats(), WizardsRebornCrystals.FOCUS);
-                    float magicModifier = ArcaneArmorItem.getPlayerMagicModifier(player);
-                    float damage = (float) (2.0f + (focusLevel * 0.5)) + magicModifier;
-                    DamageSource damageSource = new DamageSource(target.damageSources().generic().typeHolder(), projectile, player);
-                    target.hurt(new DamageSource(target.damageSources().generic().typeHolder(), projectile, player), damage);
-                    if (target instanceof Player targetPlayer) {
-                        targetPlayer.getInventory().hurtArmor(damageSource, damage, Inventory.ALL_ARMOR_SLOTS);
+                if (entity.getSpellContext().canRemoveWissen(this)) {
+                    entity.getSpellContext().removeWissen(this);
+                    int focusLevel = CrystalUtil.getStatLevel(entity.getStats(), WizardsRebornCrystals.FOCUS);
+                    float magicModifier = ArcaneArmorItem.getPlayerMagicModifier(entity.getOwner());
+                    float damage = (2.0f + (focusLevel * 0.5f)) + magicModifier;
+                    DamageSource damageSource = getDamage(target.damageSources().generic().typeHolder(), entity, entity.getOwner());
+                    target.hurt(damageSource, damage);
+                    if (target instanceof Player player) {
+                        player.getInventory().hurtArmor(damageSource, damage, Inventory.ALL_ARMOR_SLOTS);
                     }
                 }
             }
         }
     }
 
-    @Override
+/*    @Override
     public void onImpact(HitResult ray, Level level, SpellProjectileEntity projectile, Player player) {
         super.onImpact(ray, level, projectile, player);
 

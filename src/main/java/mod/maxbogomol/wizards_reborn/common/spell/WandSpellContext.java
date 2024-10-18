@@ -2,6 +2,7 @@ package mod.maxbogomol.wizards_reborn.common.spell;
 
 import mod.maxbogomol.wizards_reborn.api.spell.Spell;
 import mod.maxbogomol.wizards_reborn.api.spell.SpellContext;
+import mod.maxbogomol.wizards_reborn.api.wissen.WissenItemUtil;
 import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornSounds;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.stats.Stats;
@@ -24,12 +25,29 @@ public class WandSpellContext extends SpellContext {
 
     @Override
     public void removeWissen(Spell spell) {
-        spell.removeWissen(getItemStack(), getStats(), getEntity());
+        WissenItemUtil.removeWissen(getItemStack(), spell.getWissenCostWithStat(getStats(), getEntity()));
     }
 
     @Override
     public void removeWissen(Spell spell, int cost) {
-        spell.removeWissen(getItemStack(), getStats(), getEntity(), cost);
+        WissenItemUtil.removeWissen(getItemStack(), spell.getWissenCostWithStat(getStats(), getEntity(), cost));
+    }
+
+    @Override
+    public void removeWissen(int cost) {
+        WissenItemUtil.removeWissen(getItemStack(), cost);
+    }
+
+    public boolean canRemoveWissen(Spell spell) {
+        return WissenItemUtil.canRemoveWissen(getItemStack(), spell.getWissenCostWithStat(getStats(), getEntity()));
+    }
+
+    public boolean canRemoveWissen(Spell spell, int cost) {
+        return WissenItemUtil.canRemoveWissen(getItemStack(), spell.getWissenCostWithStat(getStats(), getEntity(), cost));
+    }
+
+    public boolean canRemoveWissen(int cost) {
+        return WissenItemUtil.canRemoveWissen(getItemStack(), cost);
     }
 
     @Override

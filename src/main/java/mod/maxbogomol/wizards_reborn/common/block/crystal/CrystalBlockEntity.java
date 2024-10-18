@@ -435,29 +435,27 @@ public class CrystalBlockEntity extends BlockSimpleInventory implements Tickable
     public LightRayHitResult setupLightRay() {
         BlockPos pos = new BlockPos(blockToX, blockToY, blockToZ);
 
-        if (level.isLoaded(pos)) {
-            BlockEntity blockEntity = level.getBlockEntity(pos);
-            if (blockEntity instanceof ILightBlockEntity lightBlockEntity) {
-                Vec3 from = LightUtil.getLightLensPos(getBlockPos(), getLightLensPos());
-                Vec3 to = LightUtil.getLightLensPos(pos, lightBlockEntity.getLightLensPos());
+        BlockEntity blockEntity = level.getBlockEntity(pos);
+        if (blockEntity instanceof ILightBlockEntity lightBlockEntity) {
+            Vec3 from = LightUtil.getLightLensPos(getBlockPos(), getLightLensPos());
+            Vec3 to = LightUtil.getLightLensPos(pos, lightBlockEntity.getLightLensPos());
 
-                double dX = to.x() - from.x();
-                double dY = to.y() - from.y();
-                double dZ = to.z() - from.z();
+            double dX = to.x() - from.x();
+            double dY = to.y() - from.y();
+            double dZ = to.z() - from.z();
 
-                double yaw = Math.atan2(dZ, dX);
-                double pitch = Math.atan2(Math.sqrt(dZ * dZ + dX * dX), dY) + Math.PI;
+            double yaw = Math.atan2(dZ, dX);
+            double pitch = Math.atan2(Math.sqrt(dZ * dZ + dX * dX), dY) + Math.PI;
 
-                float rayDistance = 0.33f;
+            float rayDistance = 0.33f;
 
-                double X = Math.sin(pitch) * Math.cos(yaw) * rayDistance;
-                double Y = Math.cos(pitch) * rayDistance;
-                double Z = Math.sin(pitch) * Math.sin(yaw) * rayDistance;
+            double X = Math.sin(pitch) * Math.cos(yaw) * rayDistance;
+            double Y = Math.cos(pitch) * rayDistance;
+            double Z = Math.sin(pitch) * Math.sin(yaw) * rayDistance;
 
-                from = from.add(-X, -Y, -Z);
+            from = from.add(-X, -Y, -Z);
 
-                return LightUtil.getLightRayHitResult(level, getBlockPos(), from, to, 25);
-            }
+            return LightUtil.getLightRayHitResult(level, getBlockPos(), from, to, 25);
         }
 
         return null;

@@ -4,6 +4,8 @@ import com.mojang.blaze3d.vertex.PoseStack;
 import mod.maxbogomol.fluffy_fur.FluffyFur;
 import mod.maxbogomol.fluffy_fur.client.render.RenderBuilder;
 import mod.maxbogomol.fluffy_fur.client.render.trail.TrailPoint;
+import mod.maxbogomol.fluffy_fur.common.raycast.RayCast;
+import mod.maxbogomol.fluffy_fur.common.raycast.RayHitResult;
 import mod.maxbogomol.fluffy_fur.registry.client.FluffyFurRenderTypes;
 import mod.maxbogomol.fluffy_fur.util.RenderUtil;
 import mod.maxbogomol.wizards_reborn.api.spell.Spell;
@@ -19,10 +21,7 @@ import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.util.Mth;
 import net.minecraft.world.entity.Entity;
-import net.minecraft.world.entity.projectile.ProjectileUtil;
 import net.minecraft.world.level.Level;
-import net.minecraft.world.phys.EntityHitResult;
-import net.minecraft.world.phys.HitResult;
 import net.minecraft.world.phys.Vec3;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
@@ -30,6 +29,7 @@ import net.minecraftforge.api.distmarker.OnlyIn;
 import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.function.Predicate;
 
 public class ProjectileSpell extends Spell {
 
@@ -48,7 +48,7 @@ public class ProjectileSpell extends Spell {
             Vec3 pos = spellContext.getPos();
             Vec3 vel = spellContext.getPos().add(spellContext.getVec().scale(40)).subtract(pos).scale(1.0 / 30);
             SpellEntity entity = new SpellEntity(WizardsRebornEntities.SPELL.get(), level);
-            entity.setup(pos.x(), pos.y() - 0.2f, pos.z(), spellContext.getEntity(), this.getId(), spellContext.getStats());
+            entity.setup(pos.x(), pos.y(), pos.z(), spellContext.getEntity(), this.getId(), spellContext.getStats()).setSpellContext(spellContext);
             entity.setDeltaMovement(vel);
             level.addFreshEntity(entity);
             spellContext.setCooldown(this);
@@ -64,20 +64,22 @@ public class ProjectileSpell extends Spell {
 
         if (!spellComponent.fade) {
             boolean hasEffectTrue = true;
-            HitResult hitResult = ProjectileUtil.getHitResultOnMoveVector(entity, (e) -> {
-                return !e.isSpectator() && e.isPickable() && (!e.equals(entity.getOwner()) || entity.tickCount > 5);
-            });
-            if (hitResult.getType() == HitResult.Type.ENTITY) {
-                onImpact(entity.level(), entity, hitResult, ((EntityHitResult) hitResult).getEntity());
+            RayHitResult hitResult = getHit(entity, entity.position(), entity.position().add(entity.getDeltaMovement()));
+
+            hitTick(entity, hitResult);
+
+            if (hitResult.hasEntities()) {
+                onImpact(entity.level(), entity, hitResult, hitResult.getEntities().get(0));
                 hasEffectTrue = false;
-            } else if (hitResult.getType() == HitResult.Type.BLOCK) {
-               onImpact(entity.level(), entity, hitResult);
+            } else if (hitResult.hasBlock()) {
+                onImpact(entity.level(), entity, hitResult);
             } else {
                 updatePos(entity);
                 updateRot(entity);
             }
 
             if (hasEffectTrue && entity.tickCount > 1) trailEffect(entity.level(), entity);
+            hitEndTick(entity, hitResult);
         } else {
             entity.setDeltaMovement(0, 0, 0);
             if (spellComponent.fadeTick <= 0) {
@@ -113,27 +115,36 @@ public class ProjectileSpell extends Spell {
         entity.xRotO = entity.getXRot();
     }
 
-    public void onImpact(Level level, SpellEntity entity, HitResult hitResult, Entity target) {
+    public void onImpact(Level level, SpellEntity entity, RayHitResult hitResult, Entity target) {
         if (!level.isClientSide()) {
             ProjectileSpellComponent spellComponent = (ProjectileSpellComponent) entity.getSpellComponent();
             spellComponent.fade = true;
             spellComponent.fadeTick = spellComponent.getTrailSize() + 1;
             entity.updateSpellComponent(spellComponent);
+            entity.setPos(hitResult.getPos());
             burstEffectEntity(level, entity);
             burstSound(level, entity);
         }
     }
 
-    public void onImpact(Level level, SpellEntity entity, HitResult hitResult) {
+    public void onImpact(Level level, SpellEntity entity, RayHitResult hitResult) {
         if (!level.isClientSide()) {
             ProjectileSpellComponent spellComponent = (ProjectileSpellComponent) entity.getSpellComponent();
             spellComponent.fade = true;
             spellComponent.fadeTick = spellComponent.getTrailSize() + 1;
             entity.updateSpellComponent(spellComponent);
-            entity.setPos(hitResult.getLocation());
+            entity.setPos(hitResult.getPos());
             burstEffectBlock(level, entity);
             burstSound(level, entity);
         }
+    }
+
+    public void hitTick(SpellEntity entity, RayHitResult hitResult) {
+
+    }
+
+    public void hitEndTick(SpellEntity entity, RayHitResult hitResult) {
+
     }
 
     public void burstSound(Level level, SpellEntity entity) {
@@ -142,7 +153,7 @@ public class ProjectileSpell extends Spell {
 
     public void burstEffect(Level level, SpellEntity entity) {
         if (!level.isClientSide()) {
-            PacketHandler.sendToTracking(level, entity.blockPosition(), new ProjectileSpellBurstPacket(entity.position().add(0, 0.2f, 0), getColor()));
+            PacketHandler.sendToTracking(level, entity.blockPosition(), new ProjectileSpellBurstPacket(entity.position(), getColor()));
         }
     }
 
@@ -159,7 +170,7 @@ public class ProjectileSpell extends Spell {
             Vec3 motion = entity.getDeltaMovement();
             Vec3 pos = entity.position();
             Vec3 norm = motion.normalize().scale(0.005f);
-            PacketHandler.sendToTracking(level, entity.blockPosition(), new ProjectileSpellTrailPacket(new Vec3(entity.xo, entity.yo + 0.2f, entity.zo), pos.add(0, 0.2f, 0), norm, getColor()));
+            PacketHandler.sendToTracking(level, entity.blockPosition(), new ProjectileSpellTrailPacket(new Vec3(entity.xo, entity.yo, entity.zo), pos, norm, getColor()));
         }
     }
 
@@ -188,7 +199,6 @@ public class ProjectileSpell extends Spell {
         }
 
         poseStack.pushPose();
-        poseStack.translate(0, 0.2f, 0);
         poseStack.translate(-x, -y, -z);
         RenderBuilder.create().setRenderType(FluffyFurRenderTypes.ADDITIVE_TEXTURE)
                 .setUV(RenderUtil.getSprite(FluffyFur.MOD_ID, "particle/trail"))
@@ -196,5 +206,19 @@ public class ProjectileSpell extends Spell {
                 .setFirstAlpha(0.5f)
                 .renderTrail(poseStack, trail, (f) -> {return f * 0.3f;});
         poseStack.popPose();
+    }
+
+    public RayHitResult getHit(SpellEntity entity, Vec3 start, Vec3 endPos, Predicate<Entity> entityFilter) {
+        return RayCast.getHit(entity.level(), start, endPos, entityFilter, 1, 0.1f, true);
+    }
+
+    public RayHitResult getHit(SpellEntity entity, Vec3 start, Vec3 endPos) {
+        return RayCast.getHit(entity.level(), start, endPos, getEntityFilter(entity), 1, 0.1f, true);
+    }
+
+    public Predicate<Entity> getEntityFilter(SpellEntity entity) {
+        return (e) -> {
+            return !e.isSpectator() && e.isPickable() && (!e.equals(entity.getOwner()) || entity.tickCount > 5);
+        };
     }
 }

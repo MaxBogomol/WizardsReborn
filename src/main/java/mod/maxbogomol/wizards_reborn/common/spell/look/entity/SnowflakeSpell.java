@@ -1,5 +1,6 @@
 package mod.maxbogomol.wizards_reborn.common.spell.look.entity;
 
+import mod.maxbogomol.fluffy_fur.common.raycast.RayHitResult;
 import mod.maxbogomol.wizards_reborn.api.crystal.CrystalUtil;
 import mod.maxbogomol.wizards_reborn.api.spell.SpellContext;
 import mod.maxbogomol.wizards_reborn.common.item.equipment.arcane.ArcaneArmorItem;
@@ -49,8 +50,8 @@ public class SnowflakeSpell extends EntityLookSpell {
             float magicModifier = ArcaneArmorItem.getPlayerMagicModifier(spellContext.getEntity());
             float damage = (float) (0.75f + (focusLevel * 0.5)) + magicModifier;
 
-            HitResult hit = getEntityHit(level, spellContext);
-            Vec3 pos = hit.getPosHit();
+            RayHitResult hit = getEntityHit(level, spellContext);
+            Vec3 pos = hit.getPos();
             if (hit.hasEntities()) {
                 for (Entity entity : hit.getEntities()) {
                     if (entity instanceof LivingEntity livingEntity) {

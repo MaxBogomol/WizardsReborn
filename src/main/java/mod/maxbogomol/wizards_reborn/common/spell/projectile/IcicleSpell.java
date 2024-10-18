@@ -3,6 +3,7 @@ package mod.maxbogomol.wizards_reborn.common.spell.projectile;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
 import com.mojang.math.Axis;
+import mod.maxbogomol.fluffy_fur.common.raycast.RayHitResult;
 import mod.maxbogomol.wizards_reborn.WizardsReborn;
 import mod.maxbogomol.wizards_reborn.api.crystal.CrystalUtil;
 import mod.maxbogomol.wizards_reborn.api.spell.SpellComponent;
@@ -26,7 +27,6 @@ import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
-import net.minecraft.world.phys.HitResult;
 import net.minecraft.world.phys.Vec3;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
@@ -74,7 +74,7 @@ public class IcicleSpell extends ProjectileSpell {
             Vec3 pos = spellContext.getPos();
             Vec3 vel = spellContext.getPos().add(spellContext.getVec().scale(40)).subtract(pos).scale(1.0 / 20);
             SpellEntity entity = new SpellEntity(WizardsRebornEntities.SPELL.get(), level);
-            entity.setup(pos.x, pos.y - 0.2f, pos.z, spellContext.getEntity(), this.getId(), spellContext.getStats());
+            entity.setup(pos.x, pos.y, pos.z, spellContext.getEntity(), this.getId(), spellContext.getStats()).setSpellContext(spellContext);
             entity.setDeltaMovement(vel);
             IcicleSpellComponent spellComponent = (IcicleSpellComponent) entity.getSpellComponent();
             spellComponent.shard = true;
@@ -88,13 +88,13 @@ public class IcicleSpell extends ProjectileSpell {
     }
 
     @Override
-    public void onImpact(Level level, SpellEntity entity, HitResult hitResult, Entity target) {
+    public void onImpact(Level level, SpellEntity entity, RayHitResult hitResult, Entity target) {
         super.onImpact(level, entity, hitResult, target);
         IcicleSpellComponent spellComponent = (IcicleSpellComponent) entity.getSpellComponent();
 
         int focusLevel = CrystalUtil.getStatLevel(entity.getStats(), WizardsRebornCrystals.FOCUS);
         float magicModifier = ArcaneArmorItem.getPlayerMagicModifier(entity.getOwner());
-        float damage = (float) (2f + (focusLevel * 0.75)) + magicModifier;
+        float damage = (2f + (focusLevel * 0.75f)) + magicModifier;
 
         if (spellComponent.shard) {
             createShards(level, entity, (int) (focusLevel + magicModifier));
@@ -116,7 +116,7 @@ public class IcicleSpell extends ProjectileSpell {
     }
 
     @Override
-    public void onImpact(Level level, SpellEntity entity, HitResult hitResult) {
+    public void onImpact(Level level, SpellEntity entity, RayHitResult hitResult) {
         super.onImpact(level, entity, hitResult);
         IcicleSpellComponent spellComponent = (IcicleSpellComponent) entity.getSpellComponent();
         int focusLevel = CrystalUtil.getStatLevel(entity.getStats(), WizardsRebornCrystals.FOCUS);
@@ -146,7 +146,7 @@ public class IcicleSpell extends ProjectileSpell {
             Vec3 pos = entity.getEyePosition();
             Vec3 vel = new Vec3((random.nextFloat() - 0.5f) * 0.3f, random.nextFloat() * 0.2f, (random.nextFloat() - 0.5f) * 0.3f);
             SpellEntity newEntity = new SpellEntity(WizardsRebornEntities.SPELL.get(), level);
-            newEntity.setup(pos.x, pos.y - 0.2f, pos.z, entity.getOwner(), this.getId(), entity.getStats());
+            newEntity.setup(pos.x, pos.y - 0.2f, pos.z, entity.getOwner(), this.getId(), entity.getStats()).setSpellContext(entity.getSpellContext());
             newEntity.setDeltaMovement(vel);
             level.addFreshEntity(newEntity);
         }

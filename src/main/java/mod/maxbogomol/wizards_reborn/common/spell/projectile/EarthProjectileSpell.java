@@ -1,5 +1,6 @@
 package mod.maxbogomol.wizards_reborn.common.spell.projectile;
 
+import mod.maxbogomol.fluffy_fur.common.raycast.RayHitResult;
 import mod.maxbogomol.wizards_reborn.api.crystal.CrystalUtil;
 import mod.maxbogomol.wizards_reborn.common.entity.SpellEntity;
 import mod.maxbogomol.wizards_reborn.common.item.equipment.arcane.ArcaneArmorItem;
@@ -10,7 +11,6 @@ import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
-import net.minecraft.world.phys.HitResult;
 
 import java.awt.*;
 
@@ -27,7 +27,7 @@ public class EarthProjectileSpell extends ProjectileSpell {
     }
 
     @Override
-    public void onImpact(Level level, SpellEntity entity, HitResult hitResult, Entity target) {
+    public void onImpact(Level level, SpellEntity entity, RayHitResult hitResult, Entity target) {
         super.onImpact(level, entity, hitResult, target);
 
         if (!entity.level().isClientSide()) {
@@ -36,8 +36,8 @@ public class EarthProjectileSpell extends ProjectileSpell {
             float damage = (4.5f + (focusLevel * 0.5f)) + magicModifier;
             DamageSource damageSource = getDamage(target.damageSources().generic().typeHolder(), entity, entity.getOwner());
             target.hurt(damageSource, damage);
-            if (target instanceof Player targetPlayer) {
-                targetPlayer.getInventory().hurtArmor(damageSource, damage, Inventory.ALL_ARMOR_SLOTS);
+            if (target instanceof Player player) {
+                player.getInventory().hurtArmor(damageSource, damage, Inventory.ALL_ARMOR_SLOTS);
             }
         }
     }

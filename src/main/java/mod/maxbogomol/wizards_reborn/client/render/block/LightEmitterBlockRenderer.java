@@ -35,20 +35,22 @@ public class LightEmitterBlockRenderer implements BlockEntityRenderer<LightEmitt
         poseStack.popPose();
 
 
-        if (blockEntity.isToBlock && blockEntity.getLight() > 0) {
-            BlockPos pos = new BlockPos(blockEntity.blockToX, blockEntity.blockToY, blockEntity.blockToZ);
-            if (blockEntity.getLevel().getBlockEntity(pos) instanceof ILightBlockEntity lightTile) {
-                Vec3 from = LightUtil.getLightLensPos(blockEntity.getBlockPos(), blockEntity.getLightLensPos());
-                Vec3 to = LightUtil.getLightLensPos(pos, lightTile.getLightLensPos());
+        if (blockEntity.canWork()) {
+            if (blockEntity.isToBlock && blockEntity.getLight() > 0) {
+                BlockPos pos = new BlockPos(blockEntity.blockToX, blockEntity.blockToY, blockEntity.blockToZ);
+                if (blockEntity.getLevel().getBlockEntity(pos) instanceof ILightBlockEntity lightTile) {
+                    Vec3 from = LightUtil.getLightLensPos(blockEntity.getBlockPos(), blockEntity.getLightLensPos());
+                    Vec3 to = LightUtil.getLightLensPos(pos, lightTile.getLightLensPos());
 
-                poseStack.pushPose();
-                poseStack.translate(0.5F, 0.8125F, 0.5F);
-                Color color = LightUtil.getColorFromLumos(blockEntity.getRayColor(), blockEntity.getLumos(), partialTicks);
-                Color colorType = LightUtil.getColorFromTypes(blockEntity.getLightTypes());
-                Color colorConcentrated = LightUtil.getColorConcentratedFromTypes(blockEntity.getLightTypes());
-                boolean concentrated = LightUtil.isConcentratedType(blockEntity.getLightTypes());
-                LightUtil.renderLightRay(blockEntity.getLevel(), blockEntity.getBlockPos(), from, to, 25f, color, colorType, colorConcentrated, concentrated, partialTicks, poseStack);
-                poseStack.popPose();
+                    poseStack.pushPose();
+                    poseStack.translate(0.5F, 0.8125F, 0.5F);
+                    Color color = LightUtil.getColorFromLumos(blockEntity.getRayColor(), blockEntity.getLumos(), partialTicks);
+                    Color colorType = LightUtil.getColorFromTypes(blockEntity.getLightTypes());
+                    Color colorConcentrated = LightUtil.getColorConcentratedFromTypes(blockEntity.getLightTypes());
+                    boolean concentrated = LightUtil.isConcentratedType(blockEntity.getLightTypes());
+                    LightUtil.renderLightRay(blockEntity.getLevel(), blockEntity.getBlockPos(), from, to, 25f, color, colorType, colorConcentrated, concentrated, partialTicks, poseStack);
+                    poseStack.popPose();
+                }
             }
         }
 

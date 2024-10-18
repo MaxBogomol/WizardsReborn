@@ -54,7 +54,7 @@ public class LightUtil {
         HitResult hitresult = level.clip(new ClipContext(from, newTo, ClipContext.Block.VISUAL, ClipContext.Fluid.NONE, null));
         Vec3 end = hitresult.getLocation();
 
-        float distance = (float) Math.sqrt(Math.pow(from.x() - end.x, 2) + Math.pow(from.y() - end.y, 2) + Math.pow(from.z() - end.z, 2));
+        float distance = (float) Math.sqrt(Math.pow(from.x() - end.x(), 2) + Math.pow(from.y() - end.y(), 2) + Math.pow(from.z() - end.z(), 2));
         BlockEntity hitBlockEntity = null;
         ArrayList<LightRayHitResult.EntityContext> entities = new ArrayList<>();
 
@@ -62,7 +62,7 @@ public class LightUtil {
         if (startPos.getX() != blockPosHit.getX() || startPos.getY() != blockPosHit.getY() || startPos.getZ() != blockPosHit.getZ()) {
             BlockEntity blockEntity = level.getBlockEntity(blockPosHit);
             if (blockEntity instanceof ILightBlockEntity lightBlockEntityHit && lightBlockEntityHit.getLightLensSize() == 0) {
-                distance = (float) Math.sqrt(Math.pow(from.x() - end.x, 2) + Math.pow(from.y() - end.y, 2) + Math.pow(from.z() - end.z, 2));
+                distance = (float) Math.sqrt(Math.pow(from.x() - end.x(), 2) + Math.pow(from.y() - end.y(), 2) + Math.pow(from.z() - end.z(), 2));
                 hitBlockEntity = blockEntity;
             }
         }

@@ -327,7 +327,9 @@ public class ArcaneWandItem extends Item implements IWissenItem, ICustomAnimatio
     public ItemAnimation getAnimation(ItemStack stack) {
         if (canSpell(stack, WizardsReborn.proxy.getPlayer())) {
             Spell spell = Spells.getSpell(getSpell(stack));
-            return spell.getAnimation(stack);
+            if (spell.hasCustomAnimation(stack)) {
+                return spell.getAnimation(stack);
+            }
         }
 
         return null;

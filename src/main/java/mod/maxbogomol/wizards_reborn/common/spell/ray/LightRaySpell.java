@@ -1,6 +1,19 @@
 package mod.maxbogomol.wizards_reborn.common.spell.ray;
 
+import com.mojang.blaze3d.vertex.PoseStack;
+import mod.maxbogomol.fluffy_fur.common.network.BlockEntityUpdate;
+import mod.maxbogomol.fluffy_fur.common.raycast.RayHitResult;
+import mod.maxbogomol.wizards_reborn.api.light.ILightBlockEntity;
+import mod.maxbogomol.wizards_reborn.api.light.LightRayHitResult;
+import mod.maxbogomol.wizards_reborn.api.light.LightUtil;
+import mod.maxbogomol.wizards_reborn.common.entity.SpellEntity;
 import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornCrystals;
+import net.minecraft.client.renderer.MultiBufferSource;
+import net.minecraft.util.Mth;
+import net.minecraft.world.level.block.entity.BlockEntity;
+import net.minecraft.world.phys.Vec3;
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.api.distmarker.OnlyIn;
 
 import java.awt.*;
 
@@ -16,67 +29,69 @@ public class LightRaySpell extends RaySpell {
     public Color getColor() {
         return color;
     }
-/*
+
     @Override
     public int tickCost() {
-        return 1;
+        return 10;
     }
 
     @Override
-    public boolean hasBurst(SpellProjectileEntity entity) {
+    public boolean hasBurst(SpellEntity entity) {
         return false;
     }
 
     @Override
-    public boolean hasSound(SpellProjectileEntity entity) {
+    public boolean hasSound(SpellEntity entity) {
         return false;
     }
 
     @Override
-    public void rayTick(SpellProjectileEntity entity, HitResult ray) {
-        Vec3 offset = entity.getLookAngle().scale(1f);
-        Vec3 from = entity.position().add(offset).add(0, 0.2f, 0);
-        Vec3 to = entity.getLookAngle().scale(getRayDistance() + 1).add(from);
+    public void hitTick(SpellEntity entity, RayHitResult hitResult) {
+        RaySpellComponent spellComponent = (RaySpellComponent) entity.getSpellComponent();
+        Vec3 vec = spellComponent.vec;
 
-        LightRayHitResult hitResult = LightUtil.getLightRayHitResult(entity.level(), entity.getOnPos(), from, to, getRayDistance());
-        BlockEntity hitTile = hitResult.getBlockEntity();
-        if (hitTile != null) {
-            if (hitTile instanceof ILightBlockEntity toLight) {
+        Vec3 from = entity.position().add(vec);
+        Vec3 to = entity.position().add(vec.scale(getRayDistance() + 1));
+
+        LightRayHitResult lightHitResult = LightUtil.getLightRayHitResult(entity.level(), entity.getOnPos(), from, to, getRayDistance());
+        BlockEntity hitBlock = lightHitResult.getBlockEntity();
+        if (hitBlock != null) {
+            if (hitBlock instanceof ILightBlockEntity toLight) {
                 int max = 10;
                 if (max < toLight.getLight()) {
                     max = toLight.getLight();
                 }
                 toLight.setLight(max);
-                BlockEntityUpdate.packet(hitTile);
+                BlockEntityUpdate.packet(hitBlock);
             }
         }
     }
 
     @Override
     @OnlyIn(Dist.CLIENT)
-    public void render(SpellProjectileEntity entity, float entityYaw, float partialTicks, PoseStack stack, MultiBufferSource buffer, int light) {
-        Vec3 to = entity.getLookAngle().scale(getRayDistance() + 1).add(0, 0.2f, 0).add(entity.position());
-        Vec3 offset = entity.getLookAngle().scale(1f);
+    public void render(SpellEntity entity, float entityYaw, float partialTicks, PoseStack poseStack, MultiBufferSource buffer, int light) {
+        RaySpellComponent spellComponent = (RaySpellComponent) entity.getSpellComponent();
+        Vec3 vec = spellComponent.vec;
+        Vec3 vecOld = spellComponent.vecOld;
+        double vecX = Mth.lerp(partialTicks, vecOld.x(), vec.x());
+        double vecY = Mth.lerp(partialTicks, vecOld.y(), vec.y());
+        double vecZ = Mth.lerp(partialTicks, vecOld.z(), vec.z());
+        Vec3 lookVec = new Vec3(vecX, vecY, vecZ);
 
-        float width = 1f;
-        if (entity.tickCount < 3) {
-            width = (entity.tickCount + partialTicks) / 3;
-        } else {
-            CompoundTag spellData = entity.getSpellData();
-            if (spellData.contains("tick_left")) {
-                if (spellData.getInt("tick_left") > 0) {
-                    width = 1f - (((entity.tickCount - 1) - spellData.getInt("tick_left") + partialTicks) / 4);
-                }
-            }
-        }
-        if (width > 1f) width = 1f;
-        if (width < 0f) width = 0f;
+        Color color = getColor();
+        float offset = 1f;
 
-        stack.pushPose();
-        stack.translate(0, 0.2, 0);
-        stack.translate(offset.x(), offset.y(), offset.z());
-        stack.scale(width, width, width);
-        LightUtil.renderLightRay(entity.level(), entity.getOnPos(), entity.position().add(offset).add(0, 0.2f, 0), to, getRayDistance(), color, Color.WHITE, Color.WHITE, false, partialTicks, stack);
-        stack.popPose();
-    }*/
+        float x = (float) Mth.lerp(partialTicks, entity.xOld, entity.getX());
+        float y = (float) Mth.lerp(partialTicks, entity.yOld, entity.getY());
+        float z = (float) Mth.lerp(partialTicks, entity.zOld, entity.getZ());
+
+        poseStack.pushPose();
+        Vec3 pos1 = entity.getPosition(partialTicks).add(lookVec.scale(offset));
+        Vec3 pos2 = entity.getPosition(partialTicks).add(lookVec.scale(getRayDistance() + 1));
+        poseStack.translate(-x, -y, -z);
+        poseStack.translate(pos1.x(), pos1.y(), pos1.z());
+        LightRayHitResult hitResult = LightUtil.getLightRayHitResult(entity.level(), entity.getOnPos(), pos1, pos2, getRayDistance());
+        LightUtil.renderLightRay(pos1, hitResult.getPosHit(), color, Color.WHITE, Color.WHITE, false, partialTicks, poseStack);
+        poseStack.popPose();
+    }
 }

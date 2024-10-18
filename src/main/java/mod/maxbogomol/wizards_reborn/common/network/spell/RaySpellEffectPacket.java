@@ -4,6 +4,7 @@ import mod.maxbogomol.fluffy_fur.client.particle.ParticleBuilder;
 import mod.maxbogomol.fluffy_fur.client.particle.data.ColorParticleData;
 import mod.maxbogomol.fluffy_fur.client.particle.data.GenericParticleData;
 import mod.maxbogomol.fluffy_fur.client.particle.data.SpinParticleData;
+import mod.maxbogomol.fluffy_fur.common.easing.Easing;
 import mod.maxbogomol.fluffy_fur.registry.client.FluffyFurParticles;
 import mod.maxbogomol.wizards_reborn.WizardsReborn;
 import net.minecraft.network.FriendlyByteBuf;
@@ -81,16 +82,6 @@ public class RaySpellEffectPacket {
                                 .setLifetime(25)
                                 .randomVelocity(0.025f)
                                 .spawn(level, msg.posFromX, msg.posFromY, msg.posFromZ);
-
-                        if (random.nextFloat() < 0.1f) {
-                            ParticleBuilder.create(FluffyFurParticles.WISP)
-                                    .setColorData(ColorParticleData.create(msg.colorR, msg.colorG, msg.colorB).build())
-                                    .setTransparencyData(GenericParticleData.create(0.125f, 0).build())
-                                    .setScaleData(GenericParticleData.create(0.2f, 0).build())
-                                    .setLifetime(20)
-                                    .randomVelocity(0.025f)
-                                    .spawn(level, msg.posFromX, msg.posFromY, msg.posFromZ);
-                        }
                     }
 
                     Vec3 pos = new Vec3(msg.posToX, msg.posToY, msg.posToZ);
@@ -110,11 +101,13 @@ public class RaySpellEffectPacket {
                                     .spawn(level, lerpX, lerpY, lerpZ);
 
                             if (random.nextFloat() < 0.1f) {
-                                ParticleBuilder.create(FluffyFurParticles.SPARKLE)
+                                boolean square = random.nextBoolean();
+                                ParticleBuilder.create(square ? FluffyFurParticles.SQUARE : FluffyFurParticles.SPARKLE)
                                         .setColorData(ColorParticleData.create(msg.colorR, msg.colorG, msg.colorB).build())
                                         .setTransparencyData(GenericParticleData.create(0.125f, 0).build())
-                                        .setScaleData(GenericParticleData.create(0.2f, 0).build())
-                                        .setLifetime(5)
+                                        .setScaleData(GenericParticleData.create(0, square ? 0.1f : 0.2f, 0).setEasing(Easing.SINE_IN_OUT).build())
+                                        .setSpinData(SpinParticleData.create().randomOffset().randomSpin(0.05f).build())
+                                        .setLifetime(10)
                                         .randomVelocity(0.015f)
                                         .spawn(level, lerpX, lerpY, lerpZ);
                             }
@@ -132,11 +125,19 @@ public class RaySpellEffectPacket {
                         ParticleBuilder.create(FluffyFurParticles.SPARKLE)
                                 .setColorData(ColorParticleData.create(msg.colorR, msg.colorG, msg.colorB).build())
                                 .setTransparencyData(GenericParticleData.create(0.25f, 0).build())
-                                .setScaleData(GenericParticleData.create(0.075f, 0).build())
-                                .setSpinData(SpinParticleData.create().randomSpin(0.5f).build())
+                                .setScaleData(GenericParticleData.create(0, 0.075f, 0).setEasing(Easing.SINE_IN_OUT).build())
+                                .setSpinData(SpinParticleData.create().randomOffset().randomSpin(0.5f).build())
                                 .setLifetime(50)
                                 .randomVelocity(0.035f)
-                                .repeat(level, msg.posToX, msg.posToY, msg.posToZ, 5, 0.1f);
+                                .repeat(level, msg.posToX, msg.posToY, msg.posToZ, 4, 0.1f);
+                        ParticleBuilder.create(FluffyFurParticles.SQUARE)
+                                .setColorData(ColorParticleData.create(msg.colorR, msg.colorG, msg.colorB).build())
+                                .setTransparencyData(GenericParticleData.create(0.25f, 0).build())
+                                .setScaleData(GenericParticleData.create(0, 0.05f, 0).setEasing(Easing.SINE_IN_OUT).build())
+                                .setSpinData(SpinParticleData.create().randomOffset().randomSpin(0.5f).build())
+                                .setLifetime(50)
+                                .randomVelocity(0.035f)
+                                .repeat(level, msg.posToX, msg.posToY, msg.posToZ, 1, 0.1f);
                     }
                     ctx.get().setPacketHandled(true);
                 }

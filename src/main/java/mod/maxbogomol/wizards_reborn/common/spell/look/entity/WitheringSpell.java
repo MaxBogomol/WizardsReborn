@@ -1,5 +1,6 @@
 package mod.maxbogomol.wizards_reborn.common.spell.look.entity;
 
+import mod.maxbogomol.fluffy_fur.common.raycast.RayHitResult;
 import mod.maxbogomol.wizards_reborn.api.crystal.CrystalUtil;
 import mod.maxbogomol.wizards_reborn.api.spell.SpellContext;
 import mod.maxbogomol.wizards_reborn.common.item.equipment.arcane.ArcaneArmorItem;
@@ -55,8 +56,8 @@ public class WitheringSpell extends EntityLookSpell {
             int focusLevel = CrystalUtil.getStatLevel(spellContext.getStats(), WizardsRebornCrystals.FOCUS);
             float magicModifier = ArcaneArmorItem.getPlayerMagicModifier(spellContext.getEntity());
 
-            HitResult hit = getEntityHit(level, spellContext);
-            Vec3 pos = hit.getPosHit();
+            RayHitResult hit = getEntityHit(level, spellContext);
+            Vec3 pos = hit.getPos();
             if (hit.hasEntities()) {
                 for (Entity entity : hit.getEntities()) {
                     if (entity instanceof LivingEntity livingEntity) {

@@ -11,6 +11,7 @@ import java.util.Random;
 public class SpellContext {
     public Vec3 pos = Vec3.ZERO;
     public Vec3 vec = Vec3.ZERO;
+    public Vec3 offset = Vec3.ZERO;
     public double distance = 0;
     public Level level;
     public Entity entity;
@@ -35,6 +36,15 @@ public class SpellContext {
 
     public Vec3 getVec() {
         return vec;
+    }
+
+    public SpellContext setOffset(Vec3 offset) {
+        this.offset = offset;
+        return this;
+    }
+
+    public Vec3 getOffset() {
+        return offset;
     }
 
     public SpellContext setDistance(double distance) {
@@ -98,11 +108,58 @@ public class SpellContext {
 
     }
 
+    public void removeWissen(int cost) {
+
+    }
+
+    public boolean canRemoveWissen(Spell spell) {
+        return true;
+    }
+
+    public boolean canRemoveWissen(Spell spell, int cost) {
+        return true;
+    }
+
+    public boolean canRemoveWissen(int cost) {
+        return true;
+    }
+
     public void spellSound(Spell spell) {
 
     }
 
     public void awardStat(Spell spell) {
 
+    }
+
+    public CompoundTag toTag() {
+        CompoundTag tag = new CompoundTag();
+        tag.put("pos", vecToTag(pos));
+        tag.put("vec", vecToTag(vec));
+        tag.put("offset", vecToTag(offset));
+        tag.putDouble("distance", distance);
+        return tag;
+    }
+
+    public void fromTag(CompoundTag tag) {
+        pos = vecFromTag(tag.getCompound("pos"));
+        vec = vecFromTag(tag.getCompound("vec"));
+        offset = vecFromTag(tag.getCompound("offset"));
+        distance = tag.getDouble("distance");
+    }
+
+    public CompoundTag vecToTag(Vec3 vec) {
+        CompoundTag tag = new CompoundTag();
+        tag.putDouble("x", vec.x());
+        tag.putDouble("y", vec.y());
+        tag.putDouble("z", vec.z());
+        return tag;
+    }
+
+    public Vec3 vecFromTag(CompoundTag tag) {
+        double x = tag.getDouble("x");
+        double y = tag.getDouble("y");
+        double z = tag.getDouble("z");
+        return new Vec3(x, y, z);
     }
 }
