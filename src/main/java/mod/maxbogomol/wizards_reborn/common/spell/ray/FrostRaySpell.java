@@ -1,11 +1,21 @@
 package mod.maxbogomol.wizards_reborn.common.spell.ray;
 
+import mod.maxbogomol.fluffy_fur.common.raycast.RayHitResult;
+import mod.maxbogomol.wizards_reborn.api.crystal.CrystalUtil;
+import mod.maxbogomol.wizards_reborn.common.entity.SpellEntity;
+import mod.maxbogomol.wizards_reborn.common.item.equipment.arcane.ArcaneArmorItem;
+import mod.maxbogomol.wizards_reborn.common.network.PacketHandler;
+import mod.maxbogomol.wizards_reborn.common.network.spell.FrostRaySpellEffectPacket;
 import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornCrystals;
 import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornSpells;
+import net.minecraft.world.damagesource.DamageSource;
+import net.minecraft.world.entity.Entity;
+import net.minecraft.world.level.Level;
 
 import java.awt.*;
 
 public class FrostRaySpell extends RaySpell {
+
     public FrostRaySpell(String id, int points) {
         super(id, points);
         addCrystalType(WizardsRebornCrystals.WATER);
@@ -15,39 +25,39 @@ public class FrostRaySpell extends RaySpell {
     public Color getColor() {
         return WizardsRebornSpells.frostSpellColor;
     }
-/*
-    @Override
-    public void onImpact(HitResult ray, Level level, SpellProjectileEntity projectile, Player player, Entity target) {
-        super.onImpact(ray, level, projectile, player, target);
 
-        if (player != null) {
+    @Override
+    public void onImpact(Level level, SpellEntity entity, RayHitResult hitResult, Entity target) {
+        super.onImpact(level, entity, hitResult, target);
+
+        if (!entity.level().isClientSide()) {
             if (target.tickCount % 10 == 0) {
-                ItemStack stack = player.getItemInHand(player.getUsedItemHand());
-                if (WissenItemUtil.canRemoveWissen(stack, getWissenCostWithStat(projectile.getStats(), player))) {
-                    removeWissen(stack, projectile.getStats(), player);
-                    int focusLevel = CrystalUtil.getStatLevel(projectile.getStats(), WizardsRebornCrystals.FOCUS);
-                    float magicModifier = ArcaneArmorItem.getPlayerMagicModifier(player);
-                    float damage = (float) (1.5f + (focusLevel * 0.5)) + magicModifier;
+                if (entity.getSpellContext().canRemoveWissen(this)) {
+                    entity.getSpellContext().removeWissen(this);
+                    int focusLevel = CrystalUtil.getStatLevel(entity.getStats(), WizardsRebornCrystals.FOCUS);
+                    float magicModifier = ArcaneArmorItem.getPlayerMagicModifier(entity.getOwner());
+                    float damage = (1.5f + (focusLevel * 0.5f)) + magicModifier;
 
                     target.clearFire();
                     int frost = target.getTicksFrozen() + 75;
-                    if (frost > 250) frost = 250;
+                    if (frost <= 250) target.setTicksFrozen(frost);
                     target.setTicksFrozen(frost);
 
-                    target.hurt(new DamageSource(target.damageSources().freeze().typeHolder(), projectile, player), damage);
+                    DamageSource damageSource = getDamage(target.damageSources().freeze().typeHolder(), entity, entity.getOwner());
+                    target.hurt(damageSource, damage);
 
                     Color color = getColor();
                     float r = color.getRed() / 255f;
                     float g = color.getGreen() / 255f;
                     float b = color.getBlue() / 255f;
 
-                    PacketHandler.sendToTracking(level, player.getOnPos(), new FrostRaySpellEffectPacket((float) target.getX(), (float) target.getY() + (target.getBbHeight() / 2), (float) target.getZ(), r, g, b));
+                    PacketHandler.sendToTracking(level, entity.blockPosition(), new FrostRaySpellEffectPacket((float) hitResult.getPos().x(), (float) hitResult.getPos().y(), (float) hitResult.getPos().z(), r, g, b));
                 }
             }
         }
     }
 
-    @Override
+/*    @Override
     public void onImpact(HitResult ray, Level level, SpellProjectileEntity projectile, Player player) {
         super.onImpact(ray, level, projectile, player);
 

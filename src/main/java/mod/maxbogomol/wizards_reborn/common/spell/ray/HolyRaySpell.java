@@ -52,56 +52,7 @@ public class HolyRaySpell extends RaySpell {
                         }
                     }
                 }
-            }/* else {
-                int focusLevel = CrystalUtil.getStatLevel(projectile.getStats(), WizardsRebornCrystals.FOCUS);
-                healAura(level, ray.getLocation(), focusLevel + 1, projectile, player);
-            }*/
-}
-    }
-/*
-    @Override
-    public void onImpact(HitResult ray, Level level, SpellProjectileEntity projectile, Player player) {
-        super.onImpact(ray, level, projectile, player);
-
-        if (player != null) {
-            if (player.isShiftKeyDown()) {
-                int focusLevel = CrystalUtil.getStatLevel(projectile.getStats(), WizardsRebornCrystals.FOCUS);
-                healAura(level, ray.getLocation(), focusLevel + 1, projectile, player);
             }
         }
     }
-
-    public void healAura(Level level, Vec3 pos, int radius, SpellProjectileEntity projectile, Player player) {
-        ItemStack stack = player.getItemInHand(player.getUsedItemHand());
-        List<Entity> entities = level.getEntitiesOfClass(Entity.class,  new AABB(pos.x - radius,pos.y - radius,pos.z - radius,pos.x + radius,pos.y + radius,pos.z + radius));
-        for (Entity entity : entities) {
-            if (entity.tickCount % 20 == 0) {
-                if (WissenItemUtil.canRemoveWissen(stack, getWissenCostWithStat(projectile.getStats(), player))) {
-                    if (entity instanceof LivingEntity livingEntity) {
-                        boolean effect = false;
-                        if (livingEntity.isInvertedHealAndHarm()) {
-                            entity.hurt(new DamageSource(entity.damageSources().magic().typeHolder(), projectile, player), 1);
-                            removeWissen(stack, projectile.getStats(), player);
-                            effect = true;
-                        } else {
-                            if (livingEntity.getHealth() != livingEntity.getMaxHealth()) {
-                                livingEntity.heal(1);
-                                removeWissen(stack, projectile.getStats(), player);
-                                effect = true;
-                            }
-                        }
-
-                        if (effect) {
-                            Color color = getColor();
-                            float r = color.getRed() / 255f;
-                            float g = color.getGreen() / 255f;
-                            float b = color.getBlue() / 255f;
-
-                            PacketHandler.sendToTracking(level, player.getOnPos(), new HolyRaySpellEffectPacket((float) entity.getX(), (float) entity.getY() + (entity.getBbHeight() / 2), (float) entity.getZ(), r, g, b));
-                        }
-                    }
-                }
-            }
-        }
-    }*/
 }

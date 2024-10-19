@@ -115,8 +115,10 @@ public class Events {
             if (!event.getSource().is(WizardsRebornDamageTags.ARCANE_MAGIC)) {
                 AttributeInstance attr = attacker.getAttribute(WizardsRebornAttributes.ARCANE_DAMAGE.get());
                 if (attr != null && attr.getValue() > 0) {
+                    int invulnerableTime = event.getEntity().invulnerableTime;
                     event.getEntity().invulnerableTime = 0;
                     event.getEntity().hurt(new DamageSource(WizardsRebornDamage.create(event.getEntity().level(), WizardsRebornDamage.ARCANE_MAGIC).typeHolder(), attacker), (float) attr.getValue());
+                    event.getEntity().invulnerableTime = invulnerableTime;
                 }
             }
         }

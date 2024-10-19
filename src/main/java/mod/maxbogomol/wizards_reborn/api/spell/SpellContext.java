@@ -13,6 +13,7 @@ public class SpellContext {
     public Vec3 vec = Vec3.ZERO;
     public Vec3 offset = Vec3.ZERO;
     public double distance = 0;
+    public boolean alternative = false;
     public Level level;
     public Entity entity;
     public ItemStack itemStack = ItemStack.EMPTY;
@@ -54,6 +55,15 @@ public class SpellContext {
 
     public double getDistance() {
         return distance;
+    }
+
+    public SpellContext setAlternative(boolean alternative) {
+        this.alternative = alternative;
+        return this;
+    }
+
+    public boolean getAlternative() {
+        return alternative;
     }
 
     public SpellContext setLevel(Level level) {
@@ -132,12 +142,21 @@ public class SpellContext {
 
     }
 
+    public CompoundTag getSpellData() {
+        return new CompoundTag();
+    }
+
+    public void setSpellData(CompoundTag spellData) {
+
+    }
+
     public CompoundTag toTag() {
         CompoundTag tag = new CompoundTag();
         tag.put("pos", vecToTag(pos));
         tag.put("vec", vecToTag(vec));
         tag.put("offset", vecToTag(offset));
         tag.putDouble("distance", distance);
+        tag.putBoolean("alternative", alternative);
         return tag;
     }
 
@@ -146,9 +165,10 @@ public class SpellContext {
         vec = vecFromTag(tag.getCompound("vec"));
         offset = vecFromTag(tag.getCompound("offset"));
         distance = tag.getDouble("distance");
+        alternative = tag.getBoolean("alternative");
     }
 
-    public CompoundTag vecToTag(Vec3 vec) {
+    public static CompoundTag vecToTag(Vec3 vec) {
         CompoundTag tag = new CompoundTag();
         tag.putDouble("x", vec.x());
         tag.putDouble("y", vec.y());
@@ -156,7 +176,7 @@ public class SpellContext {
         return tag;
     }
 
-    public Vec3 vecFromTag(CompoundTag tag) {
+    public static Vec3 vecFromTag(CompoundTag tag) {
         double x = tag.getDouble("x");
         double y = tag.getDouble("y");
         double z = tag.getDouble("z");

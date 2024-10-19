@@ -354,9 +354,10 @@ public class ThrowedScytheEntity extends ThrowableItemProjectile {
                 }
 
                 if (getMagicDamage() > 0) {
+                    int invulnerableTime = target.invulnerableTime;
                     target.invulnerableTime = 0;
                     target.hurt(new DamageSource(WizardsRebornDamage.create(target.level(), WizardsRebornDamage.ARCANE_MAGIC).typeHolder(), this, owner), getMagicDamage());
-                    target.invulnerableTime = 30;
+                    target.invulnerableTime = invulnerableTime;
                 }
 
                 level().playSound(null, blockPosition(), SoundEvents.PLAYER_ATTACK_SWEEP, SoundSource.PLAYERS, 0.75f, 1.5f);

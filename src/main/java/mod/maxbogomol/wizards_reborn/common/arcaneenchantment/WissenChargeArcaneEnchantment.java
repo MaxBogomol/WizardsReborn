@@ -15,11 +15,11 @@ import mod.maxbogomol.wizards_reborn.api.wissen.WissenUtil;
 import mod.maxbogomol.wizards_reborn.common.capability.IArrowModifier;
 import mod.maxbogomol.wizards_reborn.common.network.PacketHandler;
 import mod.maxbogomol.wizards_reborn.common.network.arcaneenchantment.WissenChargeBurstPacket;
-import mod.maxbogomol.wizards_reborn.common.network.spell.ChargeSpellProjectileRayEffectPacket;
+import mod.maxbogomol.wizards_reborn.common.network.spell.ChargeSpellTrailPacket;
 import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornArcaneEnchantments;
 import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornAttributes;
-import mod.maxbogomol.wizards_reborn.registry.common.damage.WizardsRebornDamage;
 import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornSounds;
+import mod.maxbogomol.wizards_reborn.registry.common.damage.WizardsRebornDamage;
 import net.minecraft.core.BlockPos;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.damagesource.DamageSource;
@@ -162,17 +162,12 @@ public class WissenChargeArcaneEnchantment extends ArcaneEnchantment {
         if (!arrow.level().isClientSide()) {
             if (isCharged(arrow)) {
                 Color color = WizardsRebornArcaneEnchantments.WISSEN_CHARGE.getColor();
-                float r = color.getRed() / 255f;
-                float g = color.getGreen() / 255f;
-                float b = color.getBlue() / 255f;
-
                 Vec3 motion = arrow.getDeltaMovement();
                 Vec3 pos = arrow.position();
                 Vec3 norm = motion.normalize().scale(0.025f);
-
                 float charge = getCharge(arrow) / 100f;
 
-                PacketHandler.sendToTracking(arrow.level(), new BlockPos((int) pos.x, (int) pos.y, (int) pos.z), new ChargeSpellProjectileRayEffectPacket((float) arrow.xo, (float) arrow.yo, (float) arrow.zo, (float) pos.x, (float) pos.y, (float) pos.z, (float) norm.x, (float) norm.y, (float) norm.z, r, g, b, charge));
+                PacketHandler.sendToTracking(arrow.level(), new BlockPos((int) pos.x, (int) pos.y, (int) pos.z), new ChargeSpellTrailPacket(new Vec3(arrow.xo, arrow.yo, arrow.zo), pos, norm, color, charge));
             }
         }
     }
@@ -218,8 +213,10 @@ public class WissenChargeArcaneEnchantment extends ArcaneEnchantment {
 
                 List<LivingEntity> entityList = arrow.level().getEntitiesOfClass(LivingEntity.class, new AABB(pos.x() - distance, pos.y() - distance, pos.z() - distance, pos.x() + distance, pos.y() + distance, pos.z() + distance));
                 for (LivingEntity target : entityList) {
+                    int invulnerableTime = target.invulnerableTime;
                     target.invulnerableTime = 0;
                     target.hurt(new DamageSource(WizardsRebornDamage.create(target.level(), WizardsRebornDamage.ARCANE_MAGIC).typeHolder(), arrow.getOwner()), damage + additionalDamage);
+                    target.invulnerableTime = invulnerableTime;
                 }
 
                 setCharge(arrow,0);

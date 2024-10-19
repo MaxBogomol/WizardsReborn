@@ -8,6 +8,7 @@ import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornCrystals;
 import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornSpells;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.level.Level;
 
 import java.awt.*;
@@ -37,21 +38,24 @@ public class AirRaySpell extends RaySpell {
                     float damage = (1.5f + (focusLevel * 0.5f)) + magicModifier;
                     DamageSource damageSource = getDamage(target.damageSources().fall().typeHolder(), entity, entity.getOwner());
                     target.hurt(damageSource, damage);
-/*                    if (player.isShiftKeyDown()) {
+
+
+                    if (entity.getSpellContext().getAlternative()) {
                         if (target instanceof LivingEntity livingEntity) {
-                            livingEntity.knockback(((focusLevel + magicModifier) * 0.5F), Mth.sin(projectile.getYRot() * ((float) Math.PI / 180F)), (-Mth.cos(projectile.getYRot() * ((float) Math.PI / 180F))));
+                            RaySpellComponent spellComponent = (RaySpellComponent) entity.getSpellComponent();
+                            livingEntity.knockback(((focusLevel + magicModifier) * 0.5F), -spellComponent.vec.x(), -spellComponent.vec.z());
 
                             Color color = getColor();
                             float r = color.getRed() / 255f;
                             float g = color.getGreen() / 255f;
                             float b = color.getBlue() / 255f;
 
-                            Vec3 pos = ray.getLocation().add(projectile.getLookAngle());
-                            Vec3 vel = player.getEyePosition().add(player.getLookAngle().scale(40)).subtract(pos).scale(1.0 / 10).normalize().scale(0.2f);
+                            //Vec3 pos = ray.getLocation().add(projectile.getLookAngle());
+                            //Vec3 vel = player.getEyePosition().add(player.getLookAngle().scale(40)).subtract(pos).scale(1.0 / 10).normalize().scale(0.2f);
 
-                            PacketHandler.sendToTracking(level, player.getOnPos(), new AirRaySpellEffectPacket((float) pos.x(), (float) pos.y() + (target.getBbHeight() / 2), (float) pos.z(), (float) vel.x(), (float) vel.y(), (float) vel.z(), r, g, b));
+                            //PacketHandler.sendToTracking(level, player.getOnPos(), new AirRaySpellEffectPacket((float) pos.x(), (float) pos.y() + (target.getBbHeight() / 2), (float) pos.z(), (float) vel.x(), (float) vel.y(), (float) vel.z(), r, g, b));
                         }
-                    }*/
+                    }
                 }
             }
         }

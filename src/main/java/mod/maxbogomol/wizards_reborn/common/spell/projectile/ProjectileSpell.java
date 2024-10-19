@@ -42,11 +42,18 @@ public class ProjectileSpell extends Spell {
         return new ProjectileSpellComponent();
     }
 
+    public ProjectileSpellComponent getSpellComponent(SpellEntity entity) {
+        if (entity.getSpellComponent() instanceof ProjectileSpellComponent spellComponent) {
+            return spellComponent;
+        }
+        return new ProjectileSpellComponent();
+    }
+
     @Override
     public void useSpell(Level level, SpellContext spellContext) {
         if (!level.isClientSide()) {
             Vec3 pos = spellContext.getPos();
-            Vec3 vel = spellContext.getPos().add(spellContext.getVec().scale(40)).subtract(pos).scale(1.0 / 30);
+            Vec3 vel = spellContext.getVec().scale(40).scale(1.0 / 30);
             SpellEntity entity = new SpellEntity(WizardsRebornEntities.SPELL.get(), level);
             entity.setup(pos.x(), pos.y(), pos.z(), spellContext.getEntity(), this.getId(), spellContext.getStats()).setSpellContext(spellContext);
             entity.setDeltaMovement(vel);
@@ -60,17 +67,17 @@ public class ProjectileSpell extends Spell {
 
     @Override
     public void entityTick(SpellEntity entity) {
-        ProjectileSpellComponent spellComponent = (ProjectileSpellComponent) entity.getSpellComponent();
+        ProjectileSpellComponent spellComponent = getSpellComponent(entity);
 
         if (!spellComponent.fade) {
-            boolean hasEffectTrue = true;
+            boolean hasEffect = true;
             RayHitResult hitResult = getHit(entity, entity.position(), entity.position().add(entity.getDeltaMovement()));
 
             hitTick(entity, hitResult);
 
             if (hitResult.hasEntities()) {
                 onImpact(entity.level(), entity, hitResult, hitResult.getEntities().get(0));
-                hasEffectTrue = false;
+                hasEffect = false;
             } else if (hitResult.hasBlock()) {
                 onImpact(entity.level(), entity, hitResult);
             } else {
@@ -78,7 +85,7 @@ public class ProjectileSpell extends Spell {
                 updateRot(entity);
             }
 
-            if (hasEffectTrue && entity.tickCount > 1) trailEffect(entity.level(), entity);
+            if (hasEffect && entity.tickCount > 1) trailEffect(entity.level(), entity, hitResult);
             hitEndTick(entity, hitResult);
         } else {
             entity.setDeltaMovement(0, 0, 0);
@@ -117,7 +124,7 @@ public class ProjectileSpell extends Spell {
 
     public void onImpact(Level level, SpellEntity entity, RayHitResult hitResult, Entity target) {
         if (!level.isClientSide()) {
-            ProjectileSpellComponent spellComponent = (ProjectileSpellComponent) entity.getSpellComponent();
+            ProjectileSpellComponent spellComponent = getSpellComponent(entity);
             spellComponent.fade = true;
             spellComponent.fadeTick = spellComponent.getTrailSize() + 1;
             entity.updateSpellComponent(spellComponent);
@@ -129,7 +136,7 @@ public class ProjectileSpell extends Spell {
 
     public void onImpact(Level level, SpellEntity entity, RayHitResult hitResult) {
         if (!level.isClientSide()) {
-            ProjectileSpellComponent spellComponent = (ProjectileSpellComponent) entity.getSpellComponent();
+            ProjectileSpellComponent spellComponent = getSpellComponent(entity);
             spellComponent.fade = true;
             spellComponent.fadeTick = spellComponent.getTrailSize() + 1;
             entity.updateSpellComponent(spellComponent);
@@ -165,8 +172,8 @@ public class ProjectileSpell extends Spell {
         burstEffect(level, entity);
     }
 
-    public void trailEffect(Level level, SpellEntity entity) {
-        if (!entity.level().isClientSide()) {
+    public void trailEffect(Level level, SpellEntity entity, RayHitResult hitResult) {
+        if (!level.isClientSide()) {
             Vec3 motion = entity.getDeltaMovement();
             Vec3 pos = entity.position();
             Vec3 norm = motion.normalize().scale(0.005f);
@@ -178,7 +185,7 @@ public class ProjectileSpell extends Spell {
     @OnlyIn(Dist.CLIENT)
     public void render(SpellEntity entity, float entityYaw, float partialTicks, PoseStack poseStack, MultiBufferSource buffer, int light) {
         Color color =  getColor();
-        ProjectileSpellComponent spellComponent = (ProjectileSpellComponent) entity.getSpellComponent();
+        ProjectileSpellComponent spellComponent = getSpellComponent(entity);
 
         List<TrailPoint> trail = new ArrayList<>(spellComponent.trailPointBuilder.getTrailPoints());
         if (trail.size() > 1 && entity.tickCount >= spellComponent.trailPointBuilder.trailLength.get()) {
@@ -206,6 +213,17 @@ public class ProjectileSpell extends Spell {
                 .setFirstAlpha(0.5f)
                 .renderTrail(poseStack, trail, (f) -> {return f * 0.3f;});
         poseStack.popPose();
+
+/*        poseStack.pushPose();
+        poseStack.mulPose(Minecraft.getInstance().getEntityRenderDispatcher().cameraOrientation());
+        RenderBuilder.create().setRenderType(FluffyFurRenderTypes.ADDITIVE_TEXTURE)
+                .setUV(RenderUtil.getSprite(FluffyFur.MOD_ID, "particle/wisp"))
+                .setColor(color)
+                .setAlpha(0.5f)
+                .renderCenteredQuad(poseStack, 0.15f)
+                .setUV(RenderUtil.getSprite(FluffyFur.MOD_ID, "particle/star"))
+                .renderCenteredQuad(poseStack, 0.2f);
+        poseStack.popPose();*/
     }
 
     public RayHitResult getHit(SpellEntity entity, Vec3 start, Vec3 endPos, Predicate<Entity> entityFilter) {

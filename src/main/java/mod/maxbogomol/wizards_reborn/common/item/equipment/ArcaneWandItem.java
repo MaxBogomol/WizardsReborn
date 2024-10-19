@@ -143,6 +143,9 @@ public class ArcaneWandItem extends Item implements IWissenItem, ICustomAnimatio
         if (!nbt.contains("maxCooldown")) {
             nbt.putInt("maxCooldown", 0);
         }
+        if (!nbt.contains("spellData")) {
+            nbt.put("spellData", new CompoundTag());
+        }
     }
 
     public static boolean getCrystal(ItemStack stack) {
@@ -169,6 +172,12 @@ public class ArcaneWandItem extends Item implements IWissenItem, ICustomAnimatio
         return nbt.getInt("maxCooldown");
     }
 
+    public static CompoundTag getSpellData(ItemStack stack) {
+        existTags(stack);
+        CompoundTag nbt = stack.getOrCreateTag();
+        return nbt.getCompound("spellData");
+    }
+
     public static void setCrystal(ItemStack stack, boolean crystal) {
         CompoundTag nbt = stack.getOrCreateTag();
         nbt.putBoolean("crystal", crystal);
@@ -187,6 +196,11 @@ public class ArcaneWandItem extends Item implements IWissenItem, ICustomAnimatio
     public static void setMaxCooldown(ItemStack stack, int cooldown) {
         CompoundTag nbt = stack.getOrCreateTag();
         nbt.putInt("maxCooldown", cooldown);
+    }
+
+    public static void setSpellData(ItemStack stack, CompoundTag spellData) {
+        CompoundTag nbt = stack.getOrCreateTag();
+        nbt.put("spellData", spellData);
     }
 
     public boolean canSpell(ItemStack stack, Player player) {
@@ -261,7 +275,7 @@ public class ArcaneWandItem extends Item implements IWissenItem, ICustomAnimatio
         if (canSpell(stack, context.getPlayer())) {
             Spell spell = Spells.getSpell(getSpell(stack));
             if (spell.canWandWithCrystal(getItemCrystal(stack))) {
-                return spell.onWandUseOn(stack, context);
+                return spell.useWandOn(stack, context);
             }
         }
         return super.onItemUseFirst(stack, context);
@@ -272,7 +286,7 @@ public class ArcaneWandItem extends Item implements IWissenItem, ICustomAnimatio
         if (canSpell(stack, (Player) livingEntity)) {
             Spell spell = Spells.getSpell(getSpell(stack));
             if (spell.canWandWithCrystal(getItemCrystal(stack))) {
-                spell.onUseTick(level, livingEntity, stack, remainingUseDuration);
+                spell.useWandTick(level, livingEntity, stack, remainingUseDuration);
             }
         }
     }

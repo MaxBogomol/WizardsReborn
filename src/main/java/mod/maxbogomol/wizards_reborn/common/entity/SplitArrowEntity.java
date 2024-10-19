@@ -3,7 +3,7 @@ package mod.maxbogomol.wizards_reborn.common.entity;
 import mod.maxbogomol.fluffy_fur.client.render.trail.TrailPointBuilder;
 import mod.maxbogomol.wizards_reborn.common.network.PacketHandler;
 import mod.maxbogomol.wizards_reborn.common.network.arcaneenchantment.SplitArrowBurstPacket;
-import mod.maxbogomol.wizards_reborn.common.network.spell.ChargeSpellProjectileRayEffectPacket;
+import mod.maxbogomol.wizards_reborn.common.network.spell.ChargeSpellTrailPacket;
 import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornArcaneEnchantments;
 import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornEntities;
 import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornSounds;
@@ -60,15 +60,11 @@ public class SplitArrowEntity extends AbstractArrow {
                 }
 
                 Color color = WizardsRebornArcaneEnchantments.SPLIT.getColor();
-                float r = color.getRed() / 255f;
-                float g = color.getGreen() / 255f;
-                float b = color.getBlue() / 255f;
-
                 Vec3 motion = getDeltaMovement();
                 Vec3 pos = position();
                 Vec3 norm = motion.normalize().scale(0.025f);
 
-                PacketHandler.sendToTracking(level(), new BlockPos((int) pos.x, (int) pos.y, (int) pos.z), new ChargeSpellProjectileRayEffectPacket((float) xo, (float) yo, (float) zo, (float) pos.x, (float) pos.y + 0.1f, (float) pos.z, (float) norm.x, (float) norm.y, (float) norm.z, r, g, b, 0.5f));
+                PacketHandler.sendToTracking(level(), new BlockPos((int) pos.x, (int) pos.y, (int) pos.z), new ChargeSpellTrailPacket(new Vec3(xo, yo, zo), pos, norm, color, 0.5f));
             }
         } else {
             setDeltaMovement(0, 0, 0);
@@ -106,9 +102,10 @@ public class SplitArrowEntity extends AbstractArrow {
                 }
 
                 if (livingEntity.isAlive()) {
+                    int invulnerableTime = livingEntity.invulnerableTime;
                     livingEntity.invulnerableTime = 0;
                     livingEntity.hurt(new DamageSource(WizardsRebornDamage.create(livingEntity.level(), WizardsRebornDamage.ARCANE_MAGIC).typeHolder(), this, getOwner()), (float) getBaseDamage());
-                    livingEntity.invulnerableTime = 0;
+                    livingEntity.invulnerableTime = invulnerableTime;
                 } else {
                     end = false;
                 }

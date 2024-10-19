@@ -3,6 +3,7 @@ package mod.maxbogomol.wizards_reborn.mixin.client;
 import com.mojang.blaze3d.vertex.PoseStack;
 import mod.maxbogomol.wizards_reborn.common.entity.SpellEntity;
 import mod.maxbogomol.wizards_reborn.common.spell.charge.ChargeSpell;
+import mod.maxbogomol.wizards_reborn.common.spell.charge.ChargeSpellComponent;
 import mod.maxbogomol.wizards_reborn.common.spell.ray.RaySpell;
 import net.minecraft.client.renderer.LevelRenderer;
 import net.minecraft.client.renderer.MultiBufferSource;
@@ -27,9 +28,10 @@ public abstract class LevelRendererMixin {
 
             if (projectile.getSpell() instanceof ChargeSpell spell) {
                 //CompoundTag spellData = projectile.getSpellData();
-                //if (!spellData.getBoolean("throw")) {
-                    //spell.updatePos(projectile);
-                //}
+                ChargeSpellComponent spellComponent = spell.getSpellComponent(projectile);
+                if (!spellComponent.throwed) {
+                    spell.updatePos(projectile);
+                }
             }
         }
     }

@@ -55,6 +55,13 @@ public class RaySpell extends Spell {
         return new RaySpellComponent();
     }
 
+    public RaySpellComponent getSpellComponent(SpellEntity entity) {
+        if (entity.getSpellComponent() instanceof RaySpellComponent spellComponent) {
+            return spellComponent;
+        }
+        return new RaySpellComponent();
+    }
+
     @Override
     public int getWissenCost() {
         return 20;
@@ -75,7 +82,7 @@ public class RaySpell extends Spell {
             Vec3 offset = spellContext.getOffset();
             SpellEntity entity = new SpellEntity(WizardsRebornEntities.SPELL.get(), level);
             entity.setup(pos.x() + offset.x(), pos.y() + offset.y(), pos.z() + offset.z(), spellContext.getEntity(), this.getId(), spellContext.getStats()).setSpellContext(spellContext);
-            RaySpellComponent spellComponent = (RaySpellComponent) entity.getSpellComponent();
+            RaySpellComponent spellComponent = getSpellComponent(entity);
             spellComponent.fadeTick = 3;
             spellComponent.useTick = 1;
 
@@ -85,19 +92,48 @@ public class RaySpell extends Spell {
             entity.updateSpellComponent(spellComponent);
 
             level.addFreshEntity(entity);
-            spellContext.setCooldown(this);
-            spellContext.removeWissen(this);
             spellContext.awardStat(this);
             spellContext.spellSound(this);
 
-            ItemStack stack = spellContext.getItemStack();
-
-            CompoundTag nbt = stack.getOrCreateTag();
-            CompoundTag stackSpellData = new CompoundTag();
-            nbt.put("spell_data", stackSpellData);
-            stackSpellData.putUUID("entity", entity.getUUID());
-            stack.setTag(nbt);
+            CompoundTag spellData = new CompoundTag();
+            spellData.putUUID("entity", entity.getUUID());
+            spellContext.setSpellData(spellData);
         }
+    }
+
+    @Override
+    public void useSpellTick(Level level, SpellContext spellContext, int remainingUseDuration) {
+        if (!level.isClientSide()) {
+            CompoundTag spellData = spellContext.getSpellData();
+            if (spellData.contains("entity")) {
+                UUID entityUUID = spellData.getUUID("entity");
+                Entity entity = ((ServerLevel) level).getEntity(entityUUID);
+                if (entity instanceof SpellEntity spellEntity) {
+                    RaySpellComponent spellComponent = getSpellComponent(spellEntity);
+                    spellComponent.useTick = 1;
+                    spellEntity.updateSpellComponent(spellComponent);
+                    spellEntity.setSpellContext(spellContext);
+                    spellEntity.updateSpellContext(spellContext);
+
+                    if (spellEntity.getSpellContext().canRemoveWissen(1)) {
+                        if (spellEntity.tickCount % tickCost() == 0) {
+                            spellEntity.getSpellContext().removeWissen(1);
+                        }
+                    } else {
+                        if (spellContext.getEntity() instanceof LivingEntity livingEntity) {
+                            livingEntity.stopUsingItem();
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    @Override
+    public SpellContext getWandContext(Entity entity, ItemStack stack) {
+        WandSpellContext spellContext = WandSpellContext.getFromWand(entity, stack);
+        spellContext.setOffset(new Vec3(0, entity.getEyeHeight() - 0.3f, 0));
+        return spellContext;
     }
 
     @Override
@@ -109,64 +145,33 @@ public class RaySpell extends Spell {
     }
 
     @Override
-    public SpellContext getWandContext(Player player, ItemStack stack) {
-        WandSpellContext spellContext = WandSpellContext.getFromWand(player, stack);
-        spellContext.setOffset(new Vec3(0, -0.3f, 0));
-        return spellContext;
-    }
-
-    @Override
-    public void onUseTick(Level level, LivingEntity livingEntity, ItemStack stack, int remainingUseDuration) {
-        if (!level.isClientSide) {
-            CompoundTag nbt = stack.getOrCreateTag();
-            if (nbt.contains("spell_data")) {
-                CompoundTag stackSpellData = nbt.getCompound("spell_data");
-                if (stackSpellData.contains("entity")) {
-                    UUID entityUUID = stackSpellData.getUUID("entity");
-                    Entity entity = ((ServerLevel) level).getEntity(entityUUID);
-                    if (entity instanceof SpellEntity projectile) {
-                        RaySpellComponent spellComponent = (RaySpellComponent) projectile.getSpellComponent();
-                        spellComponent.useTick = 1;
-                        projectile.updateSpellComponent(spellComponent);
-
-                        if (projectile.getSpellContext().canRemoveWissen(1)) {
-                            if (projectile.tickCount % tickCost() == 0) {
-                                projectile.getSpellContext().removeWissen(1);
-                            }
-                        } else {
-                            livingEntity.stopUsingItem();
-                        }
-                    }
-                }
-            }
-        }
-    }
-
-    @Override
     public void entityTick(SpellEntity entity) {
-        RaySpellComponent spellComponent = (RaySpellComponent) entity.getSpellComponent();
+        RaySpellComponent spellComponent = getSpellComponent(entity);
         updatePos(entity);
         updateRot(entity);
 
+        Vec3 vec = spellComponent.vec;
+
+        boolean burst = false;
+        RayHitResult hitResult = getHit(entity, entity.position(), entity.position().add(vec.scale(getRayDistance())));
+
+        if (hitResult.hasEntities()) {
+            onImpact(entity.level(), entity, hitResult, hitResult.getEntities().get(0));
+            burst = true;
+        } else if (hitResult.hasBlock()) {
+            onImpact(entity.level(), entity, hitResult);
+            burst = true;
+        }
+
+        hitTick(entity, hitResult);
+
         if (!entity.level().isClientSide()) {
-            Vec3 vec = spellComponent.vec;
-
-            boolean burst = false;
-            RayHitResult hitResult = getHit(entity, entity.position(), entity.position().add(vec.scale(getRayDistance())));
-
-            if (hitResult.hasEntities()) {
-                onImpact(entity.level(), entity, hitResult, hitResult.getEntities().get(0));
-                burst = true;
-            } else if (hitResult.hasBlock()) {
-                onImpact(entity.level(), entity, hitResult);
-                burst = true;
-            }
-
-            hitTick(entity, hitResult);
-
             if (spellComponent.useTick <= 0) {
                 if (spellComponent.fadeTick <= 0) {
                     entity.remove();
+                }
+                if (spellComponent.fadeTick == 3) {
+                    entity.getSpellContext().setCooldown(this);
                 }
                 if (spellComponent.fadeTick > 0) {
                     spellComponent.fadeTick = spellComponent.fadeTick - 1;
@@ -179,27 +184,14 @@ public class RaySpell extends Spell {
                 spellComponent.useTick = spellComponent.useTick - 1;
                 entity.updateSpellComponent(spellComponent);
             }
-
-            if (hasBurst(entity)) {
-                double distance = Math.sqrt(Math.pow(entity.getX() - hitResult.getPos().x(), 2) + Math.pow(entity.getY() - hitResult.getPos().y(), 2) + Math.pow(entity.getZ() - hitResult.getPos().z(), 2));
-                Vec3 pos = entity.position();
-                Vec3 posStart = vec.add(entity.position());
-                Vec3 posEnd = vec.scale(distance).add(entity.position());
-
-                Color color = getColor();
-                float r = color.getRed() / 255f;
-                float g = color.getGreen() / 255f;
-                float b = color.getBlue() / 255f;
-
-                PacketHandler.sendToTracking(entity.level(), new BlockPos((int) pos.x, (int) pos.y, (int) pos.z), new RaySpellEffectPacket((float) posStart.x, (float) posStart.y, (float) posStart.z, (float) posEnd.x, (float) posEnd.y, (float) posEnd.z, r, g, b, burst));
-            }
-
-            if (random.nextFloat() < 0.5 && hasSound(entity)) {
-                entity.level().playSound(WizardsReborn.proxy.getPlayer(), entity.getX(), entity.getY(), entity.getZ(), WizardsRebornSounds.SPELL_BURST.get(), SoundSource.PLAYERS, 0.25f, (float) (0.5f + ((random.nextFloat() - 0.5D) / 4)));
-            }
-
-            hitEndTick(entity, hitResult);
         }
+
+        if (hasBurst(entity)) trailEffect(entity.level(), entity, hitResult, burst);
+        if (random.nextFloat() < 0.5 && hasSound(entity)) {
+            entity.level().playSound(WizardsReborn.proxy.getPlayer(), entity.getX(), entity.getY(), entity.getZ(), WizardsRebornSounds.SPELL_BURST.get(), SoundSource.PLAYERS, 0.25f, (float) (0.5f + ((random.nextFloat() - 0.5D) / 4)));
+        }
+
+        hitEndTick(entity, hitResult);
     }
 
     public void onImpact(Level level, SpellEntity entity, RayHitResult hitResult, Entity target) {
@@ -226,26 +218,49 @@ public class RaySpell extends Spell {
         return true;
     }
 
+    public int tickCost() {
+        return 7;
+    }
+
+    public void trailEffect(Level level, SpellEntity entity, RayHitResult hitResult, boolean burst) {
+        if (!level.isClientSide()) {
+            RaySpellComponent spellComponent = getSpellComponent(entity);
+            Vec3 vec = spellComponent.vec;
+
+            double distance = Math.sqrt(Math.pow(entity.getX() - hitResult.getPos().x(), 2) + Math.pow(entity.getY() - hitResult.getPos().y(), 2) + Math.pow(entity.getZ() - hitResult.getPos().z(), 2));
+            Vec3 pos = entity.position();
+            Vec3 posStart = vec.add(entity.position());
+            Vec3 posEnd = vec.scale(distance).add(entity.position());
+
+            Color color = getColor();
+            float r = color.getRed() / 255f;
+            float g = color.getGreen() / 255f;
+            float b = color.getBlue() / 255f;
+
+            PacketHandler.sendToTracking(level, new BlockPos((int) pos.x, (int) pos.y, (int) pos.z), new RaySpellEffectPacket((float) posStart.x, (float) posStart.y, (float) posStart.z, (float) posEnd.x, (float) posEnd.y, (float) posEnd.z, r, g, b, burst));
+        }
+    }
+
     public void updatePos(SpellEntity entity) {
-        RaySpellComponent spellComponent = (RaySpellComponent) entity.getSpellComponent();
+        RaySpellComponent spellComponent = getSpellComponent(entity);
         Vec3 offset = entity.getSpellContext().getOffset();
 
         if (spellComponent.useTick > 0) {
             if (entity.getOwner() != null) {
                 Entity owner = entity.getOwner();
-                entity.setPos(owner.getX() + offset.x(), owner.getY() + ((owner.getEyeHeight() + offset.y())), owner.getZ() + offset.z());
+                entity.setPos(owner.getX() + offset.x(), owner.getY() + offset.y(), owner.getZ() + offset.z());
                 entity.xo = owner.xo + offset.x();
-                entity.yo = owner.yo + ((owner.getEyeHeight() + offset.y()));
+                entity.yo = owner.yo + offset.y();
                 entity.zo = owner.zo + offset.z();
                 entity.xOld = owner.xo + offset.x();
-                entity.yOld = owner.yo + ((owner.getEyeHeight() + offset.y()));
+                entity.yOld = owner.yo + offset.y();
                 entity.zOld = owner.zo + offset.z();
             }
         }
     }
 
     public void updateRot(SpellEntity entity) {
-        RaySpellComponent spellComponent = (RaySpellComponent) entity.getSpellComponent();
+        RaySpellComponent spellComponent = getSpellComponent(entity);
 
         if (spellComponent.useTick > 0) {
             if (entity.getOwner() != null) {
@@ -274,14 +289,10 @@ public class RaySpell extends Spell {
         return animation;
     }
 
-    public int tickCost() {
-        return 7;
-    }
-
     @Override
     @OnlyIn(Dist.CLIENT)
     public void render(SpellEntity entity, float entityYaw, float partialTicks, PoseStack poseStack, MultiBufferSource buffer, int light) {
-        RaySpellComponent spellComponent = (RaySpellComponent) entity.getSpellComponent();
+        RaySpellComponent spellComponent = getSpellComponent(entity);
         Vec3 vec = spellComponent.vec;
         Vec3 vecOld = spellComponent.vecOld;
         double vecX = Mth.lerp(partialTicks, vecOld.x(), vec.x());

@@ -3,7 +3,9 @@ package mod.maxbogomol.wizards_reborn.common.spell;
 import mod.maxbogomol.wizards_reborn.api.spell.Spell;
 import mod.maxbogomol.wizards_reborn.api.spell.SpellContext;
 import mod.maxbogomol.wizards_reborn.api.wissen.WissenItemUtil;
+import mod.maxbogomol.wizards_reborn.common.item.equipment.ArcaneWandItem;
 import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornSounds;
+import net.minecraft.nbt.CompoundTag;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.stats.Stats;
 import net.minecraft.world.entity.Entity;
@@ -62,6 +64,16 @@ public class WandSpellContext extends SpellContext {
         }
     }
 
+    @Override
+    public CompoundTag getSpellData() {
+        return ArcaneWandItem.getSpellData(getItemStack());
+    }
+
+    @Override
+    public void setSpellData(CompoundTag spellData) {
+        ArcaneWandItem.setSpellData(getItemStack(), spellData);
+    }
+
     public static WandSpellContext getFromWand(Entity entity, ItemStack stack) {
         WandSpellContext spellContext = new WandSpellContext();
         spellContext.setLevel(entity.level());
@@ -70,8 +82,10 @@ public class WandSpellContext extends SpellContext {
         spellContext.setVec(entity.getLookAngle());
         if (entity instanceof Player player) {
             spellContext.setDistance(player.getAttributeValue(ForgeMod.ENTITY_REACH.get()));
+            spellContext.setAlternative(player.isShiftKeyDown());
         } else {
             spellContext.setDistance(3);
+            spellContext.setAlternative(false);
         }
         spellContext.setItemStack(stack);
         spellContext.setStats(Spell.getStats(stack));

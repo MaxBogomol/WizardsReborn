@@ -31,10 +31,12 @@ public class FireLightType extends LightType {
             if (context.getEntity() instanceof LivingEntity livingEntity) {
                 boolean burst = false;
                 if (livingEntity.tickCount % 10 == 0) {
+                    int invulnerableTime = livingEntity.invulnerableTime;
                     livingEntity.invulnerableTime = 0;
                     livingEntity.lastHurtByPlayerTime = livingEntity.tickCount;
                     float damage = stack.isConcentrated() ? 1f : 0.5f;
                     livingEntity.hurt(new DamageSource(livingEntity.damageSources().onFire().typeHolder()), damage);
+                    livingEntity.invulnerableTime = invulnerableTime;
                     int fire = livingEntity.getRemainingFireTicks() + (stack.isConcentrated() ? 60 : 30);
                     if (fire > 200) fire = 200;
                     livingEntity.setSecondsOnFire(fire);

@@ -8,6 +8,7 @@ import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.protocol.Packet;
 import net.minecraft.network.protocol.game.ClientGamePacketListener;
+import net.minecraft.network.protocol.game.ClientboundAddEntityPacket;
 import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
 import net.minecraft.network.syncher.SynchedEntityData;
@@ -57,7 +58,6 @@ public class SpellEntity extends Entity {
 
     @Override
     public void tick() {
-        super.tick();
         Spell spell = getSpell();
         if (spell != null) {
             spell.entityTick(this);
@@ -84,6 +84,8 @@ public class SpellEntity extends Entity {
         getEntityData().set(statsId, compound.getCompound("stats"));
         getEntityData().set(spellContextId, compound.getCompound("spellContext"));
         getEntityData().set(spellComponentId, compound.getCompound("spellComponent"));
+        getSpellContext().fromTag(getSpellContextData());
+        getSpellComponent().fromTag(getSpellComponentData());
     }
 
     @Override
@@ -106,6 +108,15 @@ public class SpellEntity extends Entity {
     @Override
     public Packet<ClientGamePacketListener> getAddEntityPacket() {
         return NetworkHooks.getEntitySpawningPacket(this);
+    }
+
+    @Override
+    public void recreateFromPacket(ClientboundAddEntityPacket pPacket) {
+        super.recreateFromPacket(pPacket);
+        double d0 = pPacket.getX();
+        double d1 = pPacket.getY();
+        double d2 = pPacket.getZ();
+        this.setPos(d0, d1, d2);
     }
 
     @Override
@@ -173,15 +184,18 @@ public class SpellEntity extends Entity {
     }
 
     public void updateSpellContext(SpellContext spellContext) {
+        this.spellContext = spellContext;
         setSpellContextData(spellContext.toTag());
     }
 
     public void initSpellComponent() {
-        Spell spell = getSpell();
-        if (spell != null) {
-            spellComponent = spell.getSpellComponent();
-        } else {
-            spellComponent = new SpellComponent();
+        if (spellComponent == null) {
+            Spell spell = getSpell();
+            if (spell != null) {
+                spellComponent = spell.getSpellComponent();
+            } else {
+                spellComponent = new SpellComponent();
+            }
         }
     }
 
@@ -191,6 +205,7 @@ public class SpellEntity extends Entity {
     }
 
     public void updateSpellComponent(SpellComponent spellComponent) {
+        this.spellComponent = spellComponent;
         setSpellComponentData(spellComponent.toTag());
     }
 }

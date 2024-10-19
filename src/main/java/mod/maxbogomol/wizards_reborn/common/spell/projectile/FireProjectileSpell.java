@@ -33,8 +33,8 @@ public class FireProjectileSpell extends ProjectileSpell {
             float magicModifier = ArcaneArmorItem.getPlayerMagicModifier(entity.getOwner());
             float damage = (3.5f + (focusLevel * 0.5f)) + magicModifier;
             DamageSource damageSource = getDamage(target.damageSources().onFire().typeHolder(), entity, entity.getOwner());
-            int fire = target.getRemainingFireTicks() + 5;
-            if (fire <= 10) target.setSecondsOnFire(fire);
+            int fire = target.getRemainingFireTicks() + 10;
+            if (fire <= 50) target.setSecondsOnFire(fire);
             target.setTicksFrozen(0);
             target.hurt(damageSource, damage);
         }

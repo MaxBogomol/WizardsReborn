@@ -200,22 +200,24 @@ public class Spell {
 
     }
 
+    public void useSpellTick(Level level, SpellContext spellContext, int remainingUseDuration) {
+
+    }
+
+    public SpellContext getWandContext(Entity entity, ItemStack stack) {
+        return WandSpellContext.getFromWand(entity, stack);
+    }
+
     public void useWand(Level level, Player player, InteractionHand hand, ItemStack stack) {
-        if (!level.isClientSide()) {
-            useSpell(level, getWandContext(player, stack));
-        }
+        useSpell(level, getWandContext(player, stack));
     }
 
-    public SpellContext getWandContext(Player player, ItemStack stack) {
-        return WandSpellContext.getFromWand(player, stack);
-    }
-
-    public InteractionResult onWandUseOn(ItemStack stack, UseOnContext context) {
+    public InteractionResult useWandOn(ItemStack stack, UseOnContext context) {
         return InteractionResult.PASS;
     }
 
-    public void onUseTick(Level level, LivingEntity livingEntity, ItemStack stack, int remainingUseDuration) {
-
+    public void useWandTick(Level level, LivingEntity livingEntity, ItemStack stack, int remainingUseDuration) {
+        useSpellTick(level, getWandContext(livingEntity, stack), remainingUseDuration);
     }
 
     public void releaseUsing(ItemStack stack, Level level, LivingEntity entityLiving, int timeLeft) {

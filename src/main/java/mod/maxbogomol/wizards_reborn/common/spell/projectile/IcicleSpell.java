@@ -44,6 +44,18 @@ public class IcicleSpell extends ProjectileSpell {
     }
 
     @Override
+    public SpellComponent getSpellComponent() {
+        return new IcicleSpellComponent();
+    }
+
+    public IcicleSpellComponent getSpellComponent(SpellEntity entity) {
+        if (entity.getSpellComponent() instanceof IcicleSpellComponent spellComponent) {
+            return spellComponent;
+        }
+        return new IcicleSpellComponent();
+    }
+
+    @Override
     public Color getColor() {
         return WizardsRebornSpells.frostSpellColor;
     }
@@ -64,11 +76,6 @@ public class IcicleSpell extends ProjectileSpell {
     }
 
     @Override
-    public SpellComponent getSpellComponent() {
-        return new IcicleSpellComponent();
-    }
-
-    @Override
     public void useSpell(Level level, SpellContext spellContext) {
         if (!level.isClientSide()) {
             Vec3 pos = spellContext.getPos();
@@ -76,7 +83,7 @@ public class IcicleSpell extends ProjectileSpell {
             SpellEntity entity = new SpellEntity(WizardsRebornEntities.SPELL.get(), level);
             entity.setup(pos.x, pos.y, pos.z, spellContext.getEntity(), this.getId(), spellContext.getStats()).setSpellContext(spellContext);
             entity.setDeltaMovement(vel);
-            IcicleSpellComponent spellComponent = (IcicleSpellComponent) entity.getSpellComponent();
+            IcicleSpellComponent spellComponent = getSpellComponent(entity);
             spellComponent.shard = true;
             entity.updateSpellComponent(spellComponent);
             level.addFreshEntity(entity);
@@ -90,7 +97,7 @@ public class IcicleSpell extends ProjectileSpell {
     @Override
     public void onImpact(Level level, SpellEntity entity, RayHitResult hitResult, Entity target) {
         super.onImpact(level, entity, hitResult, target);
-        IcicleSpellComponent spellComponent = (IcicleSpellComponent) entity.getSpellComponent();
+        IcicleSpellComponent spellComponent = getSpellComponent(entity);
 
         int focusLevel = CrystalUtil.getStatLevel(entity.getStats(), WizardsRebornCrystals.FOCUS);
         float magicModifier = ArcaneArmorItem.getPlayerMagicModifier(entity.getOwner());
@@ -107,9 +114,11 @@ public class IcicleSpell extends ProjectileSpell {
         if (target instanceof Player targetPlayer) {
             targetPlayer.getInventory().hurtArmor(generic, 3, Inventory.ALL_ARMOR_SLOTS);
         }
+        int invulnerableTime = target.invulnerableTime;
         target.invulnerableTime = 0;
         DamageSource damageSource = getDamage(target.damageSources().freeze().typeHolder(), entity, entity.getOwner());
         target.hurt(damageSource, damage);
+        target.invulnerableTime = invulnerableTime;
         target.clearFire();
         int frost = target.getTicksFrozen() + 500;
         if (frost <= 2000) target.setTicksFrozen(frost);
@@ -118,7 +127,7 @@ public class IcicleSpell extends ProjectileSpell {
     @Override
     public void onImpact(Level level, SpellEntity entity, RayHitResult hitResult) {
         super.onImpact(level, entity, hitResult);
-        IcicleSpellComponent spellComponent = (IcicleSpellComponent) entity.getSpellComponent();
+        IcicleSpellComponent spellComponent = getSpellComponent(entity);
         int focusLevel = CrystalUtil.getStatLevel(entity.getStats(), WizardsRebornCrystals.FOCUS);
         float magicModifier = ArcaneArmorItem.getPlayerMagicModifier(entity.getOwner());
         if (spellComponent.shard) {
@@ -127,7 +136,7 @@ public class IcicleSpell extends ProjectileSpell {
     }
 
     @Override
-    public void trailEffect(Level level, SpellEntity entity) {
+    public void trailEffect(Level level, SpellEntity entity, RayHitResult hitResult) {
         if (!entity.level().isClientSide()) {
             Vec3 motion = entity.getDeltaMovement();
             Vec3 pos = entity.position();

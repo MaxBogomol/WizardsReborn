@@ -70,8 +70,10 @@ public class MagicBladeArcaneEnchantment extends ArcaneEnchantment {
                         if (WissenUtil.canRemoveWissen(wissen, cost)) {
                             AttributeInstance attr = attacker.getAttribute(WizardsRebornAttributes.ARCANE_DAMAGE.get());
                             WissenUtil.removeWissenFromWissenItems(items, cost);
+                            int invulnerableTime = target.invulnerableTime;
                             target.invulnerableTime = 0;
                             target.hurt(new DamageSource(WizardsRebornDamage.create(target.level(), WizardsRebornDamage.ARCANE_MAGIC).typeHolder(), player), (1.0f * enchantmentLevel) + (float) attr.getValue());
+                            target.invulnerableTime = invulnerableTime;
                             target.level().playSound(WizardsReborn.proxy.getPlayer(), target.getOnPos(), WizardsRebornSounds.CRYSTAL_HIT.get(), SoundSource.PLAYERS, 1.3f, (float) (1.0f + ((random.nextFloat() - 0.5D) / 3)));
                             PacketHandler.sendToTracking(target.level(), target.getOnPos(), new MagicBladePacket(target.position().add(0, target.getBbHeight() / 2f, 0)));
                         }
