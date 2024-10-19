@@ -39,8 +39,8 @@ public class SplitArrowEntity extends AbstractArrow {
         super(type, level);
     }
 
-    public SplitArrowEntity(Level pLevel, double pX, double pY, double pZ) {
-        super(WizardsRebornEntities.SPLIT_ARROW_PROJECTILE.get(), pX, pY, pZ, pLevel);
+    public SplitArrowEntity(Level pLevel, double x, double y, double z) {
+        super(WizardsRebornEntities.SPLIT_ARROW_PROJECTILE.get(), x, y, z, pLevel);
     }
 
     public SplitArrowEntity(Level pLevel, LivingEntity pShooter) {

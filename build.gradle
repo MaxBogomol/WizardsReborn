@@ -83,7 +83,6 @@ dependencies {
     implementation fg.deobf("mod.maxbogomol.fluffy_fur:fluffy_fur:${minecraft_version}-${fluffy_fur_version}")
 
     implementation fg.deobf("top.theillusivec4.curios:curios-forge:5.9.1+1.20.1")
-    implementation fg.deobf("com.blamejared.crafttweaker:CraftTweaker-forge-1.20.1:14.0.39")
     implementation fg.deobf("mezz.jei:jei-1.20.1-forge:15.8.2.25")
     implementation fg.deobf("curse.maven:jade-324717:5493390")
 

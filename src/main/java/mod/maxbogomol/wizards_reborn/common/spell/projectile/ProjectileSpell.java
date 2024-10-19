@@ -105,7 +105,6 @@ public class ProjectileSpell extends Spell {
     public void updatePos(SpellEntity entity) {
         Vec3 motion = entity.getDeltaMovement();
         entity.setDeltaMovement(motion.x * 0.98, (motion.y > 0 ? motion.y * 0.98 : motion.y) - 0.01f, motion.z * 0.98);
-
         Vec3 pos = entity.position();
         entity.xo = pos.x;
         entity.yo = pos.y;
@@ -213,17 +212,6 @@ public class ProjectileSpell extends Spell {
                 .setFirstAlpha(0.5f)
                 .renderTrail(poseStack, trail, (f) -> {return f * 0.3f;});
         poseStack.popPose();
-
-/*        poseStack.pushPose();
-        poseStack.mulPose(Minecraft.getInstance().getEntityRenderDispatcher().cameraOrientation());
-        RenderBuilder.create().setRenderType(FluffyFurRenderTypes.ADDITIVE_TEXTURE)
-                .setUV(RenderUtil.getSprite(FluffyFur.MOD_ID, "particle/wisp"))
-                .setColor(color)
-                .setAlpha(0.5f)
-                .renderCenteredQuad(poseStack, 0.15f)
-                .setUV(RenderUtil.getSprite(FluffyFur.MOD_ID, "particle/star"))
-                .renderCenteredQuad(poseStack, 0.2f);
-        poseStack.popPose();*/
     }
 
     public RayHitResult getHit(SpellEntity entity, Vec3 start, Vec3 endPos, Predicate<Entity> entityFilter) {
