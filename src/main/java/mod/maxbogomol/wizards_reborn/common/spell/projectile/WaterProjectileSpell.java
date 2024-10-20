@@ -32,11 +32,11 @@ public class WaterProjectileSpell extends ProjectileSpell {
             int focusLevel = CrystalUtil.getStatLevel(entity.getStats(), WizardsRebornCrystals.FOCUS);
             float magicModifier = ArcaneArmorItem.getPlayerMagicModifier(entity.getOwner());
             float damage = (2.0f + (focusLevel * 0.5f)) + magicModifier;
-            DamageSource damageSource = getDamage(target.damageSources().drown().typeHolder(), entity, entity.getOwner());
             target.clearFire();
             int frost = target.getTicksFrozen() + 10;
             if (frost > 250) frost = 250;
             target.setTicksFrozen(frost);
+            DamageSource damageSource = getDamage(target.damageSources().drown().typeHolder(), entity, entity.getOwner());
             target.hurt(damageSource, damage);
         }
     }

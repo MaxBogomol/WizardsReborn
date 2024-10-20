@@ -1,11 +1,19 @@
 package mod.maxbogomol.wizards_reborn.common.spell.charge;
 
+import mod.maxbogomol.fluffy_fur.common.raycast.RayHitResult;
+import mod.maxbogomol.wizards_reborn.api.crystal.CrystalUtil;
+import mod.maxbogomol.wizards_reborn.common.entity.SpellEntity;
+import mod.maxbogomol.wizards_reborn.common.item.equipment.arcane.ArcaneArmorItem;
 import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornCrystals;
 import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornSpells;
+import net.minecraft.world.damagesource.DamageSource;
+import net.minecraft.world.entity.Entity;
+import net.minecraft.world.level.Level;
 
 import java.awt.*;
 
 public class FireChargeSpell extends ChargeSpell {
+
     public FireChargeSpell(String id, int points) {
         super(id, points);
         addCrystalType(WizardsRebornCrystals.FIRE);
@@ -15,25 +23,26 @@ public class FireChargeSpell extends ChargeSpell {
     public Color getColor() {
         return WizardsRebornSpells.fireSpellColor;
     }
-/*
+
     @Override
-    public void onImpact(HitResult ray, Level level, SpellProjectileEntity projectile, Player player, Entity target) {
-        super.onImpact(ray, level, projectile, player, target);
+    public void onImpact(Level level, SpellEntity entity, RayHitResult hitResult, Entity target) {
+        super.onImpact(level, entity, hitResult, target);
 
-        int focusLevel = CrystalUtil.getStatLevel(projectile.getStats(), WizardsRebornCrystals.FOCUS);
-        float magicModifier = ArcaneArmorItem.getPlayerMagicModifier(player) * 2;
-        float damage = (5.0f + (focusLevel * 1.5f)) + magicModifier;
+        if (!entity.level().isClientSide()) {
+            int focusLevel = CrystalUtil.getStatLevel(entity.getStats(), WizardsRebornCrystals.FOCUS);
+            float magicModifier = ArcaneArmorItem.getPlayerMagicModifier(entity.getOwner());
+            float damage = (5.0f + (focusLevel * 1.5f)) + (magicModifier * 2f);
+            ChargeSpellComponent spellComponent = getSpellComponent(entity);
 
-        if (projectile.getSpellData() != null) {
-            float charge = 0.75f + (((float) projectile.getSpellData().getInt("charge") / getCharge()) / 4f);
+            float charge = (float) (0.5f + ((spellComponent.charge / getCharge()) / 2f));
             damage = damage * charge;
+
+            int fire = target.getRemainingFireTicks() + 10;
+            if (fire <= 50) target.setSecondsOnFire(fire);
+            target.setTicksFrozen(0);
+
+            DamageSource damageSource = getDamage(target.damageSources().onFire().typeHolder(), entity, entity.getOwner());
+            target.hurt(damageSource, damage);
         }
-
-        int fire = target.getRemainingFireTicks() + 5;
-        if (fire > 10) fire = 10;
-        target.setSecondsOnFire(fire);
-        target.setTicksFrozen(0);
-
-        target.hurt(new DamageSource(target.damageSources().onFire().typeHolder(), projectile, player), damage);
-    }*/
+    }
 }
