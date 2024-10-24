@@ -5,7 +5,7 @@ import mod.maxbogomol.wizards_reborn.api.crystal.CrystalUtil;
 import mod.maxbogomol.wizards_reborn.api.spell.SpellContext;
 import mod.maxbogomol.wizards_reborn.client.animation.StrikeSpellItemAnimation;
 import mod.maxbogomol.wizards_reborn.common.item.equipment.arcane.ArcaneArmorItem;
-import mod.maxbogomol.wizards_reborn.common.network.PacketHandler;
+import mod.maxbogomol.wizards_reborn.common.network.WizardsRebornPacketHandler;
 import mod.maxbogomol.wizards_reborn.common.network.spell.AirImpactSpellPacket;
 import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornCrystals;
 import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornSpells;
@@ -78,7 +78,7 @@ public class AirImpactSpell extends EntityLookSpell {
             }
 
             Vec3 pos = spellContext.getPos().add(spellContext.getVec().scale(0.5f));
-            PacketHandler.sendToTracking(level, BlockPos.containing(pos), new AirImpactSpellPacket(pos, vec.scale(0.35f), getColor()));
+            WizardsRebornPacketHandler.sendToTracking(level, BlockPos.containing(pos), new AirImpactSpellPacket(pos, vec.scale(0.35f), getColor()));
         }
     }
 }

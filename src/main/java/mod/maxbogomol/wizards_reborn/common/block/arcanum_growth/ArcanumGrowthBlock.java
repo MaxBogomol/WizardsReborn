@@ -9,7 +9,7 @@ import mod.maxbogomol.fluffy_fur.common.easing.Easing;
 import mod.maxbogomol.fluffy_fur.registry.client.FluffyFurParticles;
 import mod.maxbogomol.wizards_reborn.api.crystalritual.IGrowableCrystal;
 import mod.maxbogomol.wizards_reborn.config.WizardsRebornConfig;
-import mod.maxbogomol.wizards_reborn.common.network.PacketHandler;
+import mod.maxbogomol.wizards_reborn.common.network.WizardsRebornPacketHandler;
 import mod.maxbogomol.wizards_reborn.common.network.block.CrystalGrowthBreakPacket;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -211,7 +211,7 @@ public class ArcanumGrowthBlock extends Block implements EntityBlock, SimpleWate
     @Override
     public void onRemove(@Nonnull BlockState state, @Nonnull Level level, @Nonnull BlockPos pos, @Nonnull BlockState newState, boolean isMoving) {
         if (state.getBlock() != newState.getBlock()) {
-            PacketHandler.sendToTracking(level, pos, new CrystalGrowthBreakPacket(pos, WizardsRebornConfig.wissenColor(), 5 * (getAge(state) + 1)));
+            WizardsRebornPacketHandler.sendToTracking(level, pos, new CrystalGrowthBreakPacket(pos, WizardsRebornConfig.wissenColor(), 5 * (getAge(state) + 1)));
         }
         super.onRemove(state, level, pos, newState, isMoving);
     }

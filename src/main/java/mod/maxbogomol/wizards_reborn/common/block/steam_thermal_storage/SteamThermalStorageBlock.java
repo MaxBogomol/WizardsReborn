@@ -2,7 +2,7 @@ package mod.maxbogomol.wizards_reborn.common.block.steam_thermal_storage;
 
 import mod.maxbogomol.fluffy_fur.common.block.entity.TickableBlockEntity;
 import mod.maxbogomol.wizards_reborn.api.alchemy.ISteamBlockEntity;
-import mod.maxbogomol.wizards_reborn.common.network.PacketHandler;
+import mod.maxbogomol.wizards_reborn.common.network.WizardsRebornPacketHandler;
 import mod.maxbogomol.wizards_reborn.common.network.block.SteamBreakPacket;
 import mod.maxbogomol.wizards_reborn.registry.common.item.WizardsRebornItems;
 import net.minecraft.core.BlockPos;
@@ -122,7 +122,7 @@ public class SteamThermalStorageBlock extends RotatedPillarBlock implements Enti
             if (level.getBlockEntity(pos) instanceof ISteamBlockEntity blockEntity) {
                 if (blockEntity.getMaxSteam() > 0) {
                     float amount = (float) blockEntity.getSteam() / (float) blockEntity.getMaxSteam();
-                    PacketHandler.sendToTracking(level, pos, new SteamBreakPacket(pos, 15 * amount));
+                    WizardsRebornPacketHandler.sendToTracking(level, pos, new SteamBreakPacket(pos, 15 * amount));
                 }
             }
         }

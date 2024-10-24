@@ -1,6 +1,6 @@
 package mod.maxbogomol.wizards_reborn.common.block;
 
-import mod.maxbogomol.wizards_reborn.common.network.PacketHandler;
+import mod.maxbogomol.wizards_reborn.common.network.WizardsRebornPacketHandler;
 import mod.maxbogomol.wizards_reborn.common.network.block.NetherSaltOreBreakPacket;
 import net.minecraft.core.BlockPos;
 import net.minecraft.util.Mth;
@@ -30,7 +30,7 @@ public class NetherSaltOreBlock extends Block {
     @Override
     public void onRemove(@Nonnull BlockState state, @Nonnull Level level, @Nonnull BlockPos pos, @Nonnull BlockState newState, boolean isMoving) {
         if (state.getBlock() != newState.getBlock()) {
-            PacketHandler.sendToTracking(level, pos, new NetherSaltOreBreakPacket(pos));
+            WizardsRebornPacketHandler.sendToTracking(level, pos, new NetherSaltOreBreakPacket(pos));
         }
         super.onRemove(state, level, pos, newState, isMoving);
     }

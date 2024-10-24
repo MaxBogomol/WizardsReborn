@@ -4,7 +4,7 @@ import mod.maxbogomol.fluffy_fur.common.block.entity.NameableBlockEntityBase;
 import mod.maxbogomol.fluffy_fur.common.block.entity.TickableBlockEntity;
 import mod.maxbogomol.wizards_reborn.api.alchemy.ISteamBlockEntity;
 import mod.maxbogomol.wizards_reborn.common.item.equipment.WissenWandItem;
-import mod.maxbogomol.wizards_reborn.common.network.PacketHandler;
+import mod.maxbogomol.wizards_reborn.common.network.WizardsRebornPacketHandler;
 import mod.maxbogomol.wizards_reborn.common.network.block.SteamBreakPacket;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -72,7 +72,7 @@ public class AlchemyFurnaceBlock extends HorizontalDirectionalBlock implements E
             if (blockEntity instanceof ISteamBlockEntity steamBlockEntity) {
                 if (steamBlockEntity.getMaxSteam() > 0) {
                     float amount = (float) steamBlockEntity.getSteam() / (float) steamBlockEntity.getMaxSteam();
-                    PacketHandler.sendToTracking(level, pos, new SteamBreakPacket(pos, 15 * amount));
+                    WizardsRebornPacketHandler.sendToTracking(level, pos, new SteamBreakPacket(pos, 15 * amount));
                 }
             }
         }

@@ -5,7 +5,7 @@ import mod.maxbogomol.fluffy_fur.common.block.entity.TickableBlockEntity;
 import mod.maxbogomol.fluffy_fur.common.network.BlockEntityUpdate;
 import mod.maxbogomol.wizards_reborn.api.alchemy.ISteamBlockEntity;
 import mod.maxbogomol.wizards_reborn.api.alchemy.SteamUtil;
-import mod.maxbogomol.wizards_reborn.common.network.PacketHandler;
+import mod.maxbogomol.wizards_reborn.common.network.WizardsRebornPacketHandler;
 import mod.maxbogomol.wizards_reborn.common.network.block.SteamBreakPacket;
 import mod.maxbogomol.wizards_reborn.common.recipe.CenserRecipe;
 import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornRecipes;
@@ -113,7 +113,7 @@ public class ArcaneCenserBlock extends HorizontalDirectionalBlock implements Ent
             if (blockEntity instanceof ISteamBlockEntity steamBlockEntity) {
                 if (steamBlockEntity.getMaxSteam() > 0) {
                     float amount = (float) steamBlockEntity.getSteam() / (float) steamBlockEntity.getMaxSteam();
-                    PacketHandler.sendToTracking(level, pos, new SteamBreakPacket(pos, 15 * amount));
+                    WizardsRebornPacketHandler.sendToTracking(level, pos, new SteamBreakPacket(pos, 15 * amount));
                 }
             }
         }

@@ -14,7 +14,7 @@ import mod.maxbogomol.wizards_reborn.api.wissen.IWissenItem;
 import mod.maxbogomol.wizards_reborn.api.wissen.WissenItemUtil;
 import mod.maxbogomol.wizards_reborn.api.wissen.WissenUtil;
 import mod.maxbogomol.wizards_reborn.config.WizardsRebornConfig;
-import mod.maxbogomol.wizards_reborn.common.network.PacketHandler;
+import mod.maxbogomol.wizards_reborn.common.network.WizardsRebornPacketHandler;
 import mod.maxbogomol.wizards_reborn.common.network.block.WissenCellSendPacket;
 import mod.maxbogomol.wizards_reborn.registry.common.block.WizardsRebornBlockEntities;
 import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornSounds;
@@ -62,7 +62,7 @@ public class WissenCellBlockEntity extends ExposedBlockSimpleInventory implement
                             WissenItemUtil.addWissen(stack, wissenRemain, item.getMaxWissen());
                             wissen = wissen - wissenRemain;
                             if (random.nextFloat() < 0.5) {
-                                PacketHandler.sendToTracking(level, getBlockPos(), new WissenCellSendPacket(getBlockPos()));
+                                WizardsRebornPacketHandler.sendToTracking(level, getBlockPos(), new WissenCellSendPacket(getBlockPos()));
                             }
                             if (random.nextFloat() < 0.1) {
                                 level.playSound(WizardsReborn.proxy.getPlayer(), getBlockPos(), WizardsRebornSounds.WISSEN_BURST.get(), SoundSource.BLOCKS, 0.15f, (float) (0.5f + ((random.nextFloat() - 0.5D) / 4)));

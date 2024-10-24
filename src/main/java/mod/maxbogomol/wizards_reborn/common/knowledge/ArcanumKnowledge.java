@@ -1,7 +1,7 @@
 package mod.maxbogomol.wizards_reborn.common.knowledge;
 
 import mod.maxbogomol.wizards_reborn.common.network.ArcanemiconToastPacket;
-import mod.maxbogomol.wizards_reborn.common.network.PacketHandler;
+import mod.maxbogomol.wizards_reborn.common.network.WizardsRebornPacketHandler;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 
@@ -23,6 +23,6 @@ public class ArcanumKnowledge extends ItemKnowledge {
 
     @Override
     public void award(Player player) {
-        PacketHandler.sendTo(player, new ArcanemiconToastPacket(player));
+        WizardsRebornPacketHandler.sendTo(player, new ArcanemiconToastPacket(player));
     }
 }

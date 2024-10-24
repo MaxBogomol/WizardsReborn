@@ -11,8 +11,8 @@ import mod.maxbogomol.fluffy_fur.registry.client.FluffyFurParticles;
 import mod.maxbogomol.wizards_reborn.WizardsReborn;
 import mod.maxbogomol.wizards_reborn.api.crystalritual.CrystalRitual;
 import mod.maxbogomol.wizards_reborn.api.wissen.*;
+import mod.maxbogomol.wizards_reborn.common.network.WizardsRebornPacketHandler;
 import mod.maxbogomol.wizards_reborn.config.WizardsRebornConfig;
-import mod.maxbogomol.wizards_reborn.common.network.PacketHandler;
 import mod.maxbogomol.wizards_reborn.common.network.WissenSendEffectPacket;
 import mod.maxbogomol.wizards_reborn.common.network.block.AltarOfDroughtBreakPacket;
 import mod.maxbogomol.wizards_reborn.common.network.block.AltarOfDroughtBurstPacket;
@@ -67,7 +67,7 @@ public class AltarOfDroughtBlockEntity extends ExposedBlockSimpleInventory imple
                             WissenItemUtil.addWissen(stack, wissen_remain, item.getMaxWissen());
                             wissen = wissen - wissen_remain;
                             if (random.nextFloat() < 0.5) {
-                                PacketHandler.sendToTracking(level, getBlockPos(), new AltarOfDroughtSendPacket(getBlockPos()));
+                                WizardsRebornPacketHandler.sendToTracking(level, getBlockPos(), new AltarOfDroughtSendPacket(getBlockPos()));
                             }
                             if (random.nextFloat() < 0.1) {
                                 level.playSound(WizardsReborn.proxy.getPlayer(), getBlockPos(), WizardsRebornSounds.WISSEN_BURST.get(), SoundSource.BLOCKS, 0.15f, (float) (0.5f + ((random.nextFloat() - 0.5D) / 4)));
@@ -96,9 +96,9 @@ public class AltarOfDroughtBlockEntity extends ExposedBlockSimpleInventory imple
 
                 for (BlockPos breakPos : blockPosList) {
                     if (level.getBlockState(breakPos).is(WizardsRebornBlockTags.ALTAR_OF_DROUGHT_TARGET) && !level.getBlockState(breakPos).getValue(BlockStateProperties.PERSISTENT)) {
-                        PacketHandler.sendToTracking(level, getBlockPos(), new AltarOfDroughtBurstPacket(getBlockPos()));
-                        PacketHandler.sendToTracking(level, breakPos, new AltarOfDroughtBreakPacket(breakPos));
-                        PacketHandler.sendToTracking(level, getBlockPos(), new WissenSendEffectPacket(getBlockPos().getX() + 0.5F, getBlockPos().getY() + 0.5F, getBlockPos().getZ() + 0.5F, breakPos.getX() + 0.5F, breakPos.getY() + 0.5F, breakPos.getZ() + 0.5F, WizardsRebornConfig.wissenColorR(), WizardsRebornConfig.wissenColorG(), WizardsRebornConfig.wissenColorB(), 25));
+                        WizardsRebornPacketHandler.sendToTracking(level, getBlockPos(), new AltarOfDroughtBurstPacket(getBlockPos()));
+                        WizardsRebornPacketHandler.sendToTracking(level, breakPos, new AltarOfDroughtBreakPacket(breakPos));
+                        WizardsRebornPacketHandler.sendToTracking(level, getBlockPos(), new WissenSendEffectPacket(getBlockPos().getX() + 0.5F, getBlockPos().getY() + 0.5F, getBlockPos().getZ() + 0.5F, breakPos.getX() + 0.5F, breakPos.getY() + 0.5F, breakPos.getZ() + 0.5F, WizardsRebornConfig.wissenColorR(), WizardsRebornConfig.wissenColorG(), WizardsRebornConfig.wissenColorB(), 25));
                         level.destroyBlock(breakPos, false);
                         addWissen(25);
                         ticks = 20 + random.nextInt(10);

@@ -11,7 +11,7 @@ import mod.maxbogomol.fluffy_fur.registry.client.FluffyFurParticles;
 import mod.maxbogomol.fluffy_fur.util.ColorUtil;
 import mod.maxbogomol.wizards_reborn.api.alchemy.ISteamBlockEntity;
 import mod.maxbogomol.wizards_reborn.api.wissen.ICooldownBlockEntity;
-import mod.maxbogomol.wizards_reborn.common.network.PacketHandler;
+import mod.maxbogomol.wizards_reborn.common.network.WizardsRebornPacketHandler;
 import mod.maxbogomol.wizards_reborn.common.network.SmokePacket;
 import mod.maxbogomol.wizards_reborn.common.recipe.CenserRecipe;
 import mod.maxbogomol.wizards_reborn.registry.common.block.WizardsRebornBlockEntities;
@@ -145,7 +145,7 @@ public class ArcaneCenserBlockEntity extends ExposedBlockSimpleInventory impleme
 
         Vec3 posSmoke = player.getEyePosition().add(player.getLookAngle().scale(0.75f));
         Vec3 vel = player.getEyePosition().add(player.getLookAngle().scale(40)).subtract(posSmoke).scale(1.0 / 20).normalize().scale(0.05f);
-        PacketHandler.sendToTracking(level, player.getOnPos(), new SmokePacket(posSmoke, vel, color));
+        WizardsRebornPacketHandler.sendToTracking(level, player.getOnPos(), new SmokePacket(posSmoke, vel, color));
         level.playSound(null, player.getOnPos(), WizardsRebornSounds.STEAM_BURST.get(), SoundSource.PLAYERS, 0.1f, 2.0f);
 
         BlockEntityUpdate.packet(this);

@@ -3,7 +3,7 @@ package mod.maxbogomol.wizards_reborn.common.spell.self;
 import mod.maxbogomol.wizards_reborn.api.crystal.CrystalUtil;
 import mod.maxbogomol.wizards_reborn.api.spell.SpellContext;
 import mod.maxbogomol.wizards_reborn.common.item.equipment.arcane.ArcaneArmorItem;
-import mod.maxbogomol.wizards_reborn.common.network.PacketHandler;
+import mod.maxbogomol.wizards_reborn.common.network.WizardsRebornPacketHandler;
 import mod.maxbogomol.wizards_reborn.common.network.spell.AirFlowSpellPacket;
 import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornCrystals;
 import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornSpells;
@@ -60,7 +60,7 @@ public class AirFlowSpell extends SelfSpell {
                     entity.addEffect(new MobEffectInstance(MobEffects.SLOW_FALLING, (int) (50 * magicModifier), 0));
                 }
 
-                PacketHandler.sendToTracking(level, entity.blockPosition(), new AirFlowSpellPacket(entity.position().add(0, 0.2f, 0), vel, getColor()));
+                WizardsRebornPacketHandler.sendToTracking(level, entity.blockPosition(), new AirFlowSpellPacket(entity.position().add(0, 0.2f, 0), vel, getColor()));
             }
         }
     }

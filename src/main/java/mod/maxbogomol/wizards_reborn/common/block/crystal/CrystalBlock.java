@@ -11,7 +11,7 @@ import mod.maxbogomol.fluffy_fur.registry.client.FluffyFurParticles;
 import mod.maxbogomol.wizards_reborn.api.crystal.CrystalType;
 import mod.maxbogomol.wizards_reborn.api.crystal.PolishingType;
 import mod.maxbogomol.wizards_reborn.common.item.CrystalItem;
-import mod.maxbogomol.wizards_reborn.common.network.PacketHandler;
+import mod.maxbogomol.wizards_reborn.common.network.WizardsRebornPacketHandler;
 import mod.maxbogomol.wizards_reborn.common.network.block.CrystalBreakPacket;
 import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornCrystals;
 import net.minecraft.core.BlockPos;
@@ -113,7 +113,7 @@ public class CrystalBlock extends Block implements EntityBlock, SimpleWaterlogge
     @Override
     public void onRemove(@Nonnull BlockState state, @Nonnull Level level, @Nonnull BlockPos pos, @Nonnull BlockState newState, boolean isMoving) {
         if (state.getBlock() != newState.getBlock()) {
-            PacketHandler.sendToTracking(level, pos, new CrystalBreakPacket(pos, type.getColor()));
+            WizardsRebornPacketHandler.sendToTracking(level, pos, new CrystalBreakPacket(pos, type.getColor()));
         }
         super.onRemove(state, level, pos, newState, isMoving);
     }

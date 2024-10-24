@@ -6,7 +6,7 @@ import mod.maxbogomol.fluffy_fur.common.item.ICustomAnimationItem;
 import mod.maxbogomol.fluffy_fur.common.item.ItemBackedInventory;
 import mod.maxbogomol.fluffy_fur.util.ColorUtil;
 import mod.maxbogomol.wizards_reborn.client.animation.SmokingPipeItemAnimation;
-import mod.maxbogomol.wizards_reborn.common.network.PacketHandler;
+import mod.maxbogomol.wizards_reborn.common.network.WizardsRebornPacketHandler;
 import mod.maxbogomol.wizards_reborn.common.network.SmokePacket;
 import mod.maxbogomol.wizards_reborn.common.recipe.CenserRecipe;
 import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornRecipes;
@@ -130,7 +130,7 @@ public class SmokingPipeItem extends Item implements ICustomAnimationItem {
 
                     Vec3 posSmoke = player.getEyePosition().add(player.getLookAngle().scale(0.75f));
                     Vec3 vel = player.getEyePosition().add(player.getLookAngle().scale(40)).subtract(posSmoke).scale(1.0 / 20).normalize().scale(0.05f);
-                    PacketHandler.sendToTracking(level, player.getOnPos(), new SmokePacket(posSmoke, vel, color));
+                    WizardsRebornPacketHandler.sendToTracking(level, player.getOnPos(), new SmokePacket(posSmoke, vel, color));
                     level.playSound(null, player.getOnPos(), WizardsRebornSounds.STEAM_BURST.get(), SoundSource.PLAYERS, 0.1f, 2.0f);
                     player.awardStat(Stats.ITEM_USED.get(this));
                 }

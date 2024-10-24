@@ -4,7 +4,7 @@ import mod.maxbogomol.fluffy_fur.common.raycast.RayHitResult;
 import mod.maxbogomol.wizards_reborn.api.crystal.CrystalUtil;
 import mod.maxbogomol.wizards_reborn.common.entity.SpellEntity;
 import mod.maxbogomol.wizards_reborn.common.item.equipment.arcane.ArcaneArmorItem;
-import mod.maxbogomol.wizards_reborn.common.network.PacketHandler;
+import mod.maxbogomol.wizards_reborn.common.network.WizardsRebornPacketHandler;
 import mod.maxbogomol.wizards_reborn.common.network.spell.CrossSpellHeartsPacket;
 import mod.maxbogomol.wizards_reborn.common.network.spell.CrossSpellSkullsPacket;
 import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornCrystals;
@@ -45,10 +45,10 @@ public class CurseRaySpell extends RaySpell {
                         if (!livingEntity.isInvertedHealAndHarm()) {
                             DamageSource damageSource = getDamage(WizardsRebornDamage.create(target.level(), WizardsRebornDamage.ARCANE_MAGIC).typeHolder(), entity, entity.getOwner());
                             target.hurt(damageSource, damage);
-                            PacketHandler.sendToTracking(level, entity.blockPosition(), new CrossSpellSkullsPacket(hitResult.getPos(), getColor()));
+                            WizardsRebornPacketHandler.sendToTracking(level, entity.blockPosition(), new CrossSpellSkullsPacket(hitResult.getPos(), getColor()));
                         } else {
                             livingEntity.heal(damage);
-                            PacketHandler.sendToTracking(level, entity.blockPosition(), new CrossSpellHeartsPacket(hitResult.getPos(), getColor()));
+                            WizardsRebornPacketHandler.sendToTracking(level, entity.blockPosition(), new CrossSpellHeartsPacket(hitResult.getPos(), getColor()));
                         }
                     }
                 }

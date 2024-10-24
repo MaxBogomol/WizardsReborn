@@ -8,7 +8,7 @@ import mod.maxbogomol.fluffy_fur.registry.client.FluffyFurRenderTypes;
 import mod.maxbogomol.fluffy_fur.util.RenderUtil;
 import mod.maxbogomol.wizards_reborn.common.item.equipment.IBagItem;
 import mod.maxbogomol.wizards_reborn.common.network.item.BagOpenPacket;
-import mod.maxbogomol.wizards_reborn.common.network.PacketHandler;
+import mod.maxbogomol.wizards_reborn.common.network.WizardsRebornPacketHandler;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.screens.Screen;
@@ -46,7 +46,7 @@ public class BagMenuScreen extends Screen {
 
         ItemStack selectedItem = getSelectedItem(bags, mouseX, mouseY);
         if (selectedItem != null) {
-            PacketHandler.sendToServer(new BagOpenPacket(selectedItem));
+            WizardsRebornPacketHandler.sendToServer(new BagOpenPacket(selectedItem));
         }
 
         return true;

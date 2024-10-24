@@ -7,7 +7,7 @@ import mod.maxbogomol.wizards_reborn.api.arcaneenchantment.ArcaneEnchantment;
 import mod.maxbogomol.wizards_reborn.api.arcaneenchantment.ArcaneEnchantmentUtil;
 import mod.maxbogomol.wizards_reborn.client.gui.container.TotemOfDisenchantContainer;
 import mod.maxbogomol.wizards_reborn.common.block.totem.disenchant.TotemOfDisenchantBlockEntity;
-import mod.maxbogomol.wizards_reborn.common.network.PacketHandler;
+import mod.maxbogomol.wizards_reborn.common.network.WizardsRebornPacketHandler;
 import mod.maxbogomol.wizards_reborn.common.network.block.TotemOfDisenchantStartPacket;
 import mod.maxbogomol.wizards_reborn.registry.common.item.WizardsRebornItems;
 import net.minecraft.client.Minecraft;
@@ -219,7 +219,7 @@ public class TotemOfDisenchantScreen extends AbstractContainerScreen<TotemOfDise
             if (x >= i + 141 && y >= j + 73 && x <= i + 141 + 16 && y <= j + 73 + 16) {
                 if (!currentBook.isEmpty() && !totem.isStart) {
                     Minecraft.getInstance().player.playNotifySound(SoundEvents.UI_BUTTON_CLICK.get(), SoundSource.NEUTRAL, 0.5f, 1.0f);
-                    PacketHandler.sendToServer(new TotemOfDisenchantStartPacket(getMenu().blockEntity.getBlockPos(), currentBook));
+                    WizardsRebornPacketHandler.sendToServer(new TotemOfDisenchantStartPacket(getMenu().blockEntity.getBlockPos(), currentBook));
                     this.onClose();
                 }
                 return true;

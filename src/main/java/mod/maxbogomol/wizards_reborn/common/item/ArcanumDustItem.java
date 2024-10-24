@@ -1,7 +1,7 @@
 package mod.maxbogomol.wizards_reborn.common.item;
 
 import mod.maxbogomol.wizards_reborn.WizardsReborn;
-import mod.maxbogomol.wizards_reborn.common.network.PacketHandler;
+import mod.maxbogomol.wizards_reborn.common.network.WizardsRebornPacketHandler;
 import mod.maxbogomol.wizards_reborn.common.network.item.WissenDustBurstPacket;
 import mod.maxbogomol.wizards_reborn.common.recipe.ArcanumDustTransmutationRecipe;
 import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornRecipes;
@@ -93,7 +93,7 @@ public class ArcanumDustItem extends ArcanumItem {
                     vel = Vec3.ZERO;
                 }
                 if (!isCreative) stack.shrink(1);
-                PacketHandler.sendToTracking(level, blockPos, new WissenDustBurstPacket(blockPos, pos, vel));
+                WizardsRebornPacketHandler.sendToTracking(level, blockPos, new WissenDustBurstPacket(blockPos, pos, vel));
                 level.playSound(WizardsReborn.proxy.getPlayer(), blockPos, WizardsRebornSounds.ARCANUM_DUST_TRANSMUTATION.get(), SoundSource.PLAYERS, 1f, (float) (1.0f + ((random.nextFloat() - 0.5D) / 2)));
 
                 return true;

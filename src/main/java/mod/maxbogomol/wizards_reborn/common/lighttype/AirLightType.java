@@ -4,7 +4,7 @@ import mod.maxbogomol.wizards_reborn.WizardsReborn;
 import mod.maxbogomol.wizards_reborn.api.light.LightRayHitResult;
 import mod.maxbogomol.wizards_reborn.api.light.LightType;
 import mod.maxbogomol.wizards_reborn.api.light.LightTypeStack;
-import mod.maxbogomol.wizards_reborn.common.network.PacketHandler;
+import mod.maxbogomol.wizards_reborn.common.network.WizardsRebornPacketHandler;
 import mod.maxbogomol.wizards_reborn.common.network.lightray.LightRayBurstPacket;
 import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornCrystals;
 import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornSounds;
@@ -46,7 +46,7 @@ public class AirLightType extends LightType {
 
             entity.push(x, y / 2f, z);
             entity.hurtMarked = true;
-            PacketHandler.sendToTracking(entity.level(), entity.getOnPos(), new LightRayBurstPacket(posHit, getColor()));
+            WizardsRebornPacketHandler.sendToTracking(entity.level(), entity.getOnPos(), new LightRayBurstPacket(posHit, getColor()));
             entity.level().playSound(WizardsReborn.proxy.getPlayer(), posHit.x(), posHit.y(), posHit.z(), WizardsRebornSounds.WISSEN_BURST.get(), SoundSource.BLOCKS, 0.05f, 2f);
         }
         return false;

@@ -16,7 +16,7 @@ import mod.maxbogomol.wizards_reborn.api.wissen.*;
 import mod.maxbogomol.wizards_reborn.client.gui.container.ArcaneWorkbenchContainer;
 import mod.maxbogomol.wizards_reborn.client.sound.ArcaneWorkbenchSoundInstance;
 import mod.maxbogomol.wizards_reborn.config.WizardsRebornConfig;
-import mod.maxbogomol.wizards_reborn.common.network.PacketHandler;
+import mod.maxbogomol.wizards_reborn.common.network.WizardsRebornPacketHandler;
 import mod.maxbogomol.wizards_reborn.common.network.block.ArcaneWorkbenchBurstPacket;
 import mod.maxbogomol.wizards_reborn.common.recipe.ArcaneWorkbenchRecipe;
 import mod.maxbogomol.wizards_reborn.registry.client.WizardsRebornParticles;
@@ -156,7 +156,7 @@ public class ArcaneWorkbenchBlockEntity extends NameableBlockEntityBase implemen
 
                             update = true;
 
-                            PacketHandler.sendToTracking(level, getBlockPos(), new ArcaneWorkbenchBurstPacket(getBlockPos()));
+                            WizardsRebornPacketHandler.sendToTracking(level, getBlockPos(), new ArcaneWorkbenchBurstPacket(getBlockPos()));
                             level.playSound(WizardsReborn.proxy.getPlayer(), getBlockPos(), WizardsRebornSounds.ARCANE_WORKBENCH_END.get(), SoundSource.BLOCKS, 1f, (float) (1f + ((random.nextFloat() - 0.5D) / 4)));
                         }
                     }

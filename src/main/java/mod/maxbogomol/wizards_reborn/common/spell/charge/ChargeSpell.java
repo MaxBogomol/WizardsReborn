@@ -14,7 +14,7 @@ import mod.maxbogomol.wizards_reborn.api.spell.SpellComponent;
 import mod.maxbogomol.wizards_reborn.api.spell.SpellContext;
 import mod.maxbogomol.wizards_reborn.client.animation.ChargeSpellHandItemAnimation;
 import mod.maxbogomol.wizards_reborn.common.entity.SpellEntity;
-import mod.maxbogomol.wizards_reborn.common.network.PacketHandler;
+import mod.maxbogomol.wizards_reborn.common.network.WizardsRebornPacketHandler;
 import mod.maxbogomol.wizards_reborn.common.network.spell.ChargeSpellTrailPacket;
 import mod.maxbogomol.wizards_reborn.common.network.spell.ProjectileSpellBurstPacket;
 import mod.maxbogomol.wizards_reborn.common.spell.WandSpellContext;
@@ -301,7 +301,7 @@ public class ChargeSpell extends Spell {
 
     public void burstEffect(Level level, SpellEntity entity) {
         if (!level.isClientSide()) {
-            PacketHandler.sendToTracking(level, entity.blockPosition(), new ProjectileSpellBurstPacket(entity.position(), getColor()));
+            WizardsRebornPacketHandler.sendToTracking(level, entity.blockPosition(), new ProjectileSpellBurstPacket(entity.position(), getColor()));
         }
     }
 
@@ -321,12 +321,12 @@ public class ChargeSpell extends Spell {
                 Vec3 pos = entity.position();
                 Vec3 vec = pos.add(spellComponent.vec.scale(40).scale(1.0 / 25));
                 Vec3 vecOld = pos.add(spellComponent.vecOld.scale(40).scale(1.0 / 25));
-                PacketHandler.sendToTracking(level, entity.blockPosition(), new ChargeSpellTrailPacket(vec, vecOld, Vec3.ZERO, getColor(), charge));
+                WizardsRebornPacketHandler.sendToTracking(level, entity.blockPosition(), new ChargeSpellTrailPacket(vec, vecOld, Vec3.ZERO, getColor(), charge));
             } else {
                 Vec3 motion = entity.getDeltaMovement();
                 Vec3 pos = entity.position();
                 Vec3 norm = motion.normalize().scale(0.005f);
-                PacketHandler.sendToTracking(level, entity.blockPosition(), new ChargeSpellTrailPacket(new Vec3(entity.xo, entity.yo, entity.zo), pos, norm, getColor(), charge));
+                WizardsRebornPacketHandler.sendToTracking(level, entity.blockPosition(), new ChargeSpellTrailPacket(new Vec3(entity.xo, entity.yo, entity.zo), pos, norm, getColor(), charge));
             }
         }
     }

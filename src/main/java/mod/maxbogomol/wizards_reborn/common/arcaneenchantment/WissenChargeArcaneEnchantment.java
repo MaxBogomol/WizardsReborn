@@ -13,7 +13,7 @@ import mod.maxbogomol.wizards_reborn.api.arcaneenchantment.ArcaneEnchantmentUtil
 import mod.maxbogomol.wizards_reborn.api.arcaneenchantment.IArcaneItem;
 import mod.maxbogomol.wizards_reborn.api.wissen.WissenUtil;
 import mod.maxbogomol.wizards_reborn.common.capability.IArrowModifier;
-import mod.maxbogomol.wizards_reborn.common.network.PacketHandler;
+import mod.maxbogomol.wizards_reborn.common.network.WizardsRebornPacketHandler;
 import mod.maxbogomol.wizards_reborn.common.network.arcaneenchantment.WissenChargeBurstPacket;
 import mod.maxbogomol.wizards_reborn.common.network.spell.ChargeSpellTrailPacket;
 import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornArcaneEnchantments;
@@ -167,7 +167,7 @@ public class WissenChargeArcaneEnchantment extends ArcaneEnchantment {
                 Vec3 norm = motion.normalize().scale(0.025f);
                 float charge = getCharge(arrow) / 100f;
 
-                PacketHandler.sendToTracking(arrow.level(), new BlockPos((int) pos.x, (int) pos.y, (int) pos.z), new ChargeSpellTrailPacket(new Vec3(arrow.xo, arrow.yo, arrow.zo), pos, norm, color, charge));
+                WizardsRebornPacketHandler.sendToTracking(arrow.level(), new BlockPos((int) pos.x, (int) pos.y, (int) pos.z), new ChargeSpellTrailPacket(new Vec3(arrow.xo, arrow.yo, arrow.zo), pos, norm, color, charge));
             }
         }
     }
@@ -201,7 +201,7 @@ public class WissenChargeArcaneEnchantment extends ArcaneEnchantment {
 
                 float charge = getCharge(arrow) / 100f;
 
-                PacketHandler.sendToTracking(arrow.level(), new BlockPos((int) pos.x, (int) pos.y, (int) pos.z), new WissenChargeBurstPacket((float) pos.x, (float) pos.y, (float) pos.z, r, g, b, charge));
+                WizardsRebornPacketHandler.sendToTracking(arrow.level(), new BlockPos((int) pos.x, (int) pos.y, (int) pos.z), new WissenChargeBurstPacket((float) pos.x, (float) pos.y, (float) pos.z, r, g, b, charge));
                 arrow.level().playSound(WizardsReborn.proxy.getPlayer(), pos.x, pos.y, pos.z, WizardsRebornSounds.SPELL_BURST.get(), SoundSource.PLAYERS, 1f, (float) (1f + ((random.nextFloat() - 0.5D) / 4)));
 
                 float additionalDamage = 0;

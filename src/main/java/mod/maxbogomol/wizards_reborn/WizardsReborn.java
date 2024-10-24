@@ -13,7 +13,7 @@ import mod.maxbogomol.wizards_reborn.registry.common.item.WizardsRebornCreativeT
 import mod.maxbogomol.wizards_reborn.common.event.Events;
 import mod.maxbogomol.wizards_reborn.common.item.equipment.WissenWandItem;
 import mod.maxbogomol.wizards_reborn.common.knowledge.Researches;
-import mod.maxbogomol.wizards_reborn.common.network.PacketHandler;
+import mod.maxbogomol.wizards_reborn.common.network.WizardsRebornPacketHandler;
 import mod.maxbogomol.wizards_reborn.common.world.tree.SupplierBlockStateProvider;
 import mod.maxbogomol.wizards_reborn.integration.common.create.CreateIntegration;
 import mod.maxbogomol.wizards_reborn.integration.common.farmersdelight.FarmersDelightIntegration;
@@ -110,7 +110,7 @@ public class WizardsReborn {
 
     private void setup(final FMLCommonSetupEvent event) {
         hi();
-        PacketHandler.init();
+        WizardsRebornPacketHandler.init();
         WizardsRebornAlchemyPotions.init();
         WizardsRebornKnowledges.init();
         Researches.init();

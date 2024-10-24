@@ -12,7 +12,7 @@ import mod.maxbogomol.wizards_reborn.api.spell.Spell;
 import mod.maxbogomol.wizards_reborn.api.spell.SpellComponent;
 import mod.maxbogomol.wizards_reborn.api.spell.SpellContext;
 import mod.maxbogomol.wizards_reborn.common.entity.SpellEntity;
-import mod.maxbogomol.wizards_reborn.common.network.PacketHandler;
+import mod.maxbogomol.wizards_reborn.common.network.WizardsRebornPacketHandler;
 import mod.maxbogomol.wizards_reborn.common.network.spell.ProjectileSpellBurstPacket;
 import mod.maxbogomol.wizards_reborn.common.network.spell.ProjectileSpellTrailPacket;
 import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornEntities;
@@ -159,7 +159,7 @@ public class ProjectileSpell extends Spell {
 
     public void burstEffect(Level level, SpellEntity entity) {
         if (!level.isClientSide()) {
-            PacketHandler.sendToTracking(level, entity.blockPosition(), new ProjectileSpellBurstPacket(entity.position(), getColor()));
+            WizardsRebornPacketHandler.sendToTracking(level, entity.blockPosition(), new ProjectileSpellBurstPacket(entity.position(), getColor()));
         }
     }
 
@@ -176,7 +176,7 @@ public class ProjectileSpell extends Spell {
             Vec3 motion = entity.getDeltaMovement();
             Vec3 pos = entity.position();
             Vec3 norm = motion.normalize().scale(0.005f);
-            PacketHandler.sendToTracking(level, entity.blockPosition(), new ProjectileSpellTrailPacket(new Vec3(entity.xo, entity.yo, entity.zo), pos, norm, getColor()));
+            WizardsRebornPacketHandler.sendToTracking(level, entity.blockPosition(), new ProjectileSpellTrailPacket(new Vec3(entity.xo, entity.yo, entity.zo), pos, norm, getColor()));
         }
     }
 

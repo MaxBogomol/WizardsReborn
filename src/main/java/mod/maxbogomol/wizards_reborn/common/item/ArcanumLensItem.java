@@ -14,7 +14,7 @@ import mod.maxbogomol.wizards_reborn.api.wissen.WissenItemUtil;
 import mod.maxbogomol.wizards_reborn.api.wissen.WissenUtil;
 import mod.maxbogomol.wizards_reborn.config.WizardsRebornConfig;
 import mod.maxbogomol.wizards_reborn.common.network.item.ArcanumLensBurstPacket;
-import mod.maxbogomol.wizards_reborn.common.network.PacketHandler;
+import mod.maxbogomol.wizards_reborn.common.network.WizardsRebornPacketHandler;
 import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornSounds;
 import net.minecraft.client.Minecraft;
 import net.minecraft.sounds.SoundSource;
@@ -64,7 +64,7 @@ public class ArcanumLensItem extends ArcanumItem implements IGuiParticleItem {
                 stack.shrink(1);
             }
 
-            PacketHandler.sendToTracking(level, player.getOnPos(), new ArcanumLensBurstPacket(player.position().add(0, player.getBbHeight() / 2, 0)));
+            WizardsRebornPacketHandler.sendToTracking(level, player.getOnPos(), new ArcanumLensBurstPacket(player.position().add(0, player.getBbHeight() / 2, 0)));
             level.playSound(WizardsReborn.proxy.getPlayer(), player.blockPosition(), WizardsRebornSounds.WISSEN_BURST.get(), SoundSource.PLAYERS, 0.5f, (float) (1.3f + ((random.nextFloat() - 0.5D) / 2)));
             level.playSound(WizardsReborn.proxy.getPlayer(), player.blockPosition(), WizardsRebornSounds.CRYSTAL_BREAK.get(), SoundSource.PLAYERS, 1f, (float) (1.0f + ((random.nextFloat() - 0.5D) / 4)));
         }

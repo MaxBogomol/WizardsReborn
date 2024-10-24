@@ -4,7 +4,7 @@ import mod.maxbogomol.fluffy_fur.common.raycast.RayHitResult;
 import mod.maxbogomol.wizards_reborn.api.crystal.CrystalUtil;
 import mod.maxbogomol.wizards_reborn.api.spell.SpellContext;
 import mod.maxbogomol.wizards_reborn.common.item.equipment.arcane.ArcaneArmorItem;
-import mod.maxbogomol.wizards_reborn.common.network.PacketHandler;
+import mod.maxbogomol.wizards_reborn.common.network.WizardsRebornPacketHandler;
 import mod.maxbogomol.wizards_reborn.common.network.spell.WitheringSpellPacket;
 import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornCrystals;
 import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornSpells;
@@ -62,7 +62,7 @@ public class WitheringSpell extends EntityLookSpell {
                 for (Entity entity : hit.getEntities()) {
                     if (entity instanceof LivingEntity livingEntity) {
                         livingEntity.addEffect(new MobEffectInstance(MobEffects.WITHER, (int) (200 + (50 * (focusLevel + magicModifier))), 0));
-                        PacketHandler.sendToTracking(level, entity.blockPosition(), new WitheringSpellPacket(pos, getColor()));
+                        WizardsRebornPacketHandler.sendToTracking(level, entity.blockPosition(), new WitheringSpellPacket(pos, getColor()));
                     }
                 }
             }

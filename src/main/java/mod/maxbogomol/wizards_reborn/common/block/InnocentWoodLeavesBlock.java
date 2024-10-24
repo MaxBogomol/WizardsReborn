@@ -2,7 +2,7 @@ package mod.maxbogomol.wizards_reborn.common.block;
 
 import mod.maxbogomol.fluffy_fur.client.particle.ParticleBuilder;
 import mod.maxbogomol.fluffy_fur.client.particle.data.LightParticleData;
-import mod.maxbogomol.wizards_reborn.common.network.PacketHandler;
+import mod.maxbogomol.wizards_reborn.common.network.WizardsRebornPacketHandler;
 import mod.maxbogomol.wizards_reborn.common.network.block.InnocentWoodLeavesBreakPacket;
 import mod.maxbogomol.wizards_reborn.registry.client.WizardsRebornParticles;
 import net.minecraft.client.particle.ParticleRenderType;
@@ -26,7 +26,7 @@ public class InnocentWoodLeavesBlock extends LeavesBlock {
     @Override
     public void onRemove(@Nonnull BlockState state, @Nonnull Level level, @Nonnull BlockPos pos, @Nonnull BlockState newState, boolean isMoving) {
         if (state.getBlock() != newState.getBlock()) {
-            PacketHandler.sendToTracking(level, pos, new InnocentWoodLeavesBreakPacket(pos));
+            WizardsRebornPacketHandler.sendToTracking(level, pos, new InnocentWoodLeavesBreakPacket(pos));
         }
         super.onRemove(state, level, pos, newState, isMoving);
     }

@@ -4,7 +4,7 @@ import mod.maxbogomol.fluffy_fur.common.raycast.RayHitResult;
 import mod.maxbogomol.wizards_reborn.api.crystal.CrystalUtil;
 import mod.maxbogomol.wizards_reborn.api.spell.SpellContext;
 import mod.maxbogomol.wizards_reborn.common.item.equipment.arcane.ArcaneArmorItem;
-import mod.maxbogomol.wizards_reborn.common.network.PacketHandler;
+import mod.maxbogomol.wizards_reborn.common.network.WizardsRebornPacketHandler;
 import mod.maxbogomol.wizards_reborn.common.network.spell.SnowflakeSpellPacket;
 import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornCrystals;
 import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornSpells;
@@ -62,7 +62,7 @@ public class SnowflakeSpell extends EntityLookSpell {
                         int frost = entity.getTicksFrozen() + 250 + (focusLevel * 60) + (int) (40 * magicModifier);
                         if (frost <= 1000) entity.setTicksFrozen(frost);
 
-                        PacketHandler.sendToTracking(level, entity.blockPosition(), new SnowflakeSpellPacket(pos, getColor()));
+                        WizardsRebornPacketHandler.sendToTracking(level, entity.blockPosition(), new SnowflakeSpellPacket(pos, getColor()));
                     }
                 }
             }

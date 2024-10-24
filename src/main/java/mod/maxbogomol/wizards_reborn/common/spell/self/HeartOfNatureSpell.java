@@ -3,7 +3,7 @@ package mod.maxbogomol.wizards_reborn.common.spell.self;
 import mod.maxbogomol.wizards_reborn.api.crystal.CrystalUtil;
 import mod.maxbogomol.wizards_reborn.api.spell.SpellContext;
 import mod.maxbogomol.wizards_reborn.common.item.equipment.arcane.ArcaneArmorItem;
-import mod.maxbogomol.wizards_reborn.common.network.PacketHandler;
+import mod.maxbogomol.wizards_reborn.common.network.WizardsRebornPacketHandler;
 import mod.maxbogomol.wizards_reborn.common.network.spell.HeartOfNatureSpellPacket;
 import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornCrystals;
 import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornSpells;
@@ -56,7 +56,7 @@ public class HeartOfNatureSpell extends SelfSpell {
                 entity.addEffect(new MobEffectInstance(MobEffects.HEAL, 1, heal));
                 entity.addEffect(new MobEffectInstance(MobEffects.REGENERATION, (int) (250 + (40 * (focusLevel + magicModifier))), regen));
                 entity.addEffect(new MobEffectInstance(MobEffects.DAMAGE_RESISTANCE, (int) (680 + (120 * (focusLevel + magicModifier))), 0));
-                PacketHandler.sendToTracking(entity.level(), entity.blockPosition(), new HeartOfNatureSpellPacket(entity.position().add(0, entity.getBbHeight() / 2f, 0), new Vec3(entity.getBbWidth() / 2f, entity.getBbHeight() / 2f, entity.getBbWidth() / 2f), getColor()));
+                WizardsRebornPacketHandler.sendToTracking(entity.level(), entity.blockPosition(), new HeartOfNatureSpellPacket(entity.position().add(0, entity.getBbHeight() / 2f, 0), new Vec3(entity.getBbWidth() / 2f, entity.getBbHeight() / 2f, entity.getBbWidth() / 2f), getColor()));
             }
         }
     }

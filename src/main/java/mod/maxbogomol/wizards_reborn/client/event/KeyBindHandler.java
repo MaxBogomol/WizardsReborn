@@ -99,7 +99,7 @@ public class KeyBindHandler {
             CompoundTag nbt = stack.getOrCreateTag();
             if (nbt.contains("crystal")) {
                 if (nbt.getBoolean("crystal")) {
-                    PacketHandler.sendToServer(new ArcaneWandRemoveCrystalPacket(hand));
+                    WizardsRebornPacketHandler.sendToServer(new ArcaneWandRemoveCrystalPacket(hand));
                     Minecraft.getInstance().player.playNotifySound(WizardsRebornSounds.CRYSTAL_RESONATE.get(), SoundSource.NEUTRAL, 1.0f, 1.0f);
                     return true;
                 }
@@ -152,7 +152,7 @@ public class KeyBindHandler {
 
         if (!bags.isEmpty()) {
             if (bags.size() == 1) {
-                PacketHandler.sendToServer(new BagOpenPacket(bags.get(0)));
+                WizardsRebornPacketHandler.sendToServer(new BagOpenPacket(bags.get(0)));
             } else {
                 Minecraft.getInstance().setScreen(new BagMenuScreen(Component.empty()));
             }
@@ -190,8 +190,8 @@ public class KeyBindHandler {
                     if (key == WizardsRebornKeyMappings.NEXT_SPELL.getKey().getValue()) {
                         current = (KnowledgeUtil.getCurrentSpellSet(player) + 1) % 10;
                         if (current < 0) current = 9;
-                        PacketHandler.sendToServer(new SetCurrentSpellSetPacket(current));
-                        PacketHandler.sendToServer(new SetCurrentSpellInSetPacket(0));
+                        WizardsRebornPacketHandler.sendToServer(new SetCurrentSpellSetPacket(current));
+                        WizardsRebornPacketHandler.sendToServer(new SetCurrentSpellInSetPacket(0));
                         set = true;
                         currentSet = current;
                         current = 0;
@@ -199,8 +199,8 @@ public class KeyBindHandler {
                     if (key == WizardsRebornKeyMappings.PREVIOUS_SPELL.getKey().getValue()) {
                         current = (KnowledgeUtil.getCurrentSpellSet(player) - 1) % 10;
                         if (current < 0) current = 9;
-                        PacketHandler.sendToServer(new SetCurrentSpellSetPacket(current));
-                        PacketHandler.sendToServer(new SetCurrentSpellInSetPacket(0));
+                        WizardsRebornPacketHandler.sendToServer(new SetCurrentSpellSetPacket(current));
+                        WizardsRebornPacketHandler.sendToServer(new SetCurrentSpellInSetPacket(0));
                         set = true;
                         currentSet = current;
                         current = 0;
@@ -209,7 +209,7 @@ public class KeyBindHandler {
                     if (key == WizardsRebornKeyMappings.NEXT_SPELL.getKey().getValue()) {
                         current = (KnowledgeUtil.getCurrentSpellInSet(player) + 1) % 10;
                         if (current < 0) current = 9;
-                        PacketHandler.sendToServer(new SetCurrentSpellInSetPacket(current));
+                        WizardsRebornPacketHandler.sendToServer(new SetCurrentSpellInSetPacket(current));
                         set = true;
                         spellSet = true;
                         currentSet = KnowledgeUtil.getCurrentSpellSet(player);
@@ -217,7 +217,7 @@ public class KeyBindHandler {
                     if (key == WizardsRebornKeyMappings.PREVIOUS_SPELL.getKey().getValue()) {
                         current = (KnowledgeUtil.getCurrentSpellInSet(player) - 1) % 10;
                         if (current < 0) current = 9;
-                        PacketHandler.sendToServer(new SetCurrentSpellInSetPacket(current));
+                        WizardsRebornPacketHandler.sendToServer(new SetCurrentSpellInSetPacket(current));
                         set = true;
                         spellSet = true;
                         currentSet = KnowledgeUtil.getCurrentSpellSet(player);
@@ -229,14 +229,14 @@ public class KeyBindHandler {
                         Spell spell = KnowledgeUtil.getSpellFromSet(player, currentSet, current);
                         String string = "";
                         if (spell != null) string = spell.getId();
-                        if (spellSet) PacketHandler.sendToServer(new ArcaneWandSpellSetPacket(true, string));
+                        if (spellSet) WizardsRebornPacketHandler.sendToServer(new ArcaneWandSpellSetPacket(true, string));
                         Minecraft.getInstance().player.playNotifySound(WizardsRebornSounds.CRYSTAL_RESONATE.get(), SoundSource.NEUTRAL, 1.0f, 1.5f);
                     } else {
                         if (!offhand.isEmpty() && offhand.getItem() instanceof ArcaneWandItem) {
                             Spell spell = KnowledgeUtil.getSpellFromSet(player, KnowledgeUtil.getCurrentSpellSet(player), current);
                             String string = "";
                             if (spell != null) string = spell.getId();
-                            if (spellSet) PacketHandler.sendToServer(new ArcaneWandSpellSetPacket(false, string));
+                            if (spellSet) WizardsRebornPacketHandler.sendToServer(new ArcaneWandSpellSetPacket(false, string));
                             Minecraft.getInstance().player.playNotifySound(WizardsRebornSounds.CRYSTAL_RESONATE.get(), SoundSource.NEUTRAL, 1.0f, 1.5f);
                         }
                     }

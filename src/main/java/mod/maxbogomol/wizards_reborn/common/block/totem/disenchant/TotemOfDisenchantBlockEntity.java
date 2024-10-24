@@ -17,7 +17,7 @@ import mod.maxbogomol.wizards_reborn.api.wissen.ICooldownBlockEntity;
 import mod.maxbogomol.wizards_reborn.api.wissen.IWissenBlockEntity;
 import mod.maxbogomol.wizards_reborn.client.gui.container.TotemOfDisenchantContainer;
 import mod.maxbogomol.wizards_reborn.config.WizardsRebornConfig;
-import mod.maxbogomol.wizards_reborn.common.network.PacketHandler;
+import mod.maxbogomol.wizards_reborn.common.network.WizardsRebornPacketHandler;
 import mod.maxbogomol.wizards_reborn.common.network.block.TotemOfDisenchantBurstPacket;
 import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornSounds;
 import mod.maxbogomol.wizards_reborn.registry.common.block.WizardsRebornBlockEntities;
@@ -149,7 +149,7 @@ public class TotemOfDisenchantBlockEntity extends NameableBlockEntityBase implem
                         itemHandler.getStackInSlot(0).setRepairCost(itemHandler.getStackInSlot(0).getBaseRepairCost() - 1);
                     }
 
-                    PacketHandler.sendToTracking(level, getBlockPos(), new TotemOfDisenchantBurstPacket(getBlockPos()));
+                    WizardsRebornPacketHandler.sendToTracking(level, getBlockPos(), new TotemOfDisenchantBurstPacket(getBlockPos()));
                     level.playSound(WizardsReborn.proxy.getPlayer(), getBlockPos(), WizardsRebornSounds.TOTEM_OF_DISENCHANT_END.get(), SoundSource.BLOCKS, 1f, (float) (1f + ((random.nextFloat() - 0.5D) / 4)));
                 }
 

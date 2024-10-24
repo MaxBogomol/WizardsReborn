@@ -10,7 +10,7 @@ import mod.maxbogomol.fluffy_fur.registry.client.FluffyFurParticles;
 import mod.maxbogomol.wizards_reborn.api.crystal.CrystalType;
 import mod.maxbogomol.wizards_reborn.api.crystal.CrystalUtil;
 import mod.maxbogomol.wizards_reborn.api.crystalritual.IGrowableCrystal;
-import mod.maxbogomol.wizards_reborn.common.network.PacketHandler;
+import mod.maxbogomol.wizards_reborn.common.network.WizardsRebornPacketHandler;
 import mod.maxbogomol.wizards_reborn.common.network.block.CrystalGrowthBreakPacket;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -224,7 +224,7 @@ public class CrystalGrowthBlock extends Block implements EntityBlock, SimpleWate
     @Override
     public void onRemove(@Nonnull BlockState state, @Nonnull Level level, @Nonnull BlockPos pos, @Nonnull BlockState newState, boolean isMoving) {
         if (state.getBlock() != newState.getBlock()) {
-            PacketHandler.sendToTracking(level, pos, new CrystalGrowthBreakPacket(pos, type.getColor(), 5 * (getAge(state) + 1)));
+            WizardsRebornPacketHandler.sendToTracking(level, pos, new CrystalGrowthBreakPacket(pos, type.getColor(), 5 * (getAge(state) + 1)));
             if (random.nextFloat() < getAge(state) * 0.05) {
                 ItemStack crystalItem = type.getFracturedCrystal();
                 CrystalUtil.createCrystalItemStats(crystalItem, type, level, 6);

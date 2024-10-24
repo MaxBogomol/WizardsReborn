@@ -10,7 +10,7 @@ import mod.maxbogomol.wizards_reborn.common.block.arcane_pedestal.ArcanePedestal
 import mod.maxbogomol.wizards_reborn.common.block.crystal.CrystalBlockEntity;
 import mod.maxbogomol.wizards_reborn.common.block.runic_pedestal.RunicPedestalBlockEntity;
 import mod.maxbogomol.wizards_reborn.common.item.CrystalItem;
-import mod.maxbogomol.wizards_reborn.common.network.PacketHandler;
+import mod.maxbogomol.wizards_reborn.common.network.WizardsRebornPacketHandler;
 import mod.maxbogomol.wizards_reborn.common.network.crystalritual.CrystalRitualBurstEffectPacket;
 import mod.maxbogomol.wizards_reborn.common.recipe.CrystalRitualRecipe;
 import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornCrystals;
@@ -312,7 +312,7 @@ public class CrystalRitual {
         }
 
         if (hasEffect) {
-            PacketHandler.sendToTracking(level, startPos, new CrystalRitualBurstEffectPacket(tagPos));
+            WizardsRebornPacketHandler.sendToTracking(level, startPos, new CrystalRitualBurstEffectPacket(tagPos));
         }
     }
 

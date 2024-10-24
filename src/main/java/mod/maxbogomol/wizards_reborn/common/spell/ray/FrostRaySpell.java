@@ -4,7 +4,7 @@ import mod.maxbogomol.fluffy_fur.common.raycast.RayHitResult;
 import mod.maxbogomol.wizards_reborn.api.crystal.CrystalUtil;
 import mod.maxbogomol.wizards_reborn.common.entity.SpellEntity;
 import mod.maxbogomol.wizards_reborn.common.item.equipment.arcane.ArcaneArmorItem;
-import mod.maxbogomol.wizards_reborn.common.network.PacketHandler;
+import mod.maxbogomol.wizards_reborn.common.network.WizardsRebornPacketHandler;
 import mod.maxbogomol.wizards_reborn.common.network.spell.FrostRaySpellEffectPacket;
 import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornCrystals;
 import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornSpells;
@@ -51,7 +51,7 @@ public class FrostRaySpell extends RaySpell {
                     float g = color.getGreen() / 255f;
                     float b = color.getBlue() / 255f;
 
-                    PacketHandler.sendToTracking(level, entity.blockPosition(), new FrostRaySpellEffectPacket((float) hitResult.getPos().x(), (float) hitResult.getPos().y(), (float) hitResult.getPos().z(), r, g, b));
+                    WizardsRebornPacketHandler.sendToTracking(level, entity.blockPosition(), new FrostRaySpellEffectPacket((float) hitResult.getPos().x(), (float) hitResult.getPos().y(), (float) hitResult.getPos().z(), r, g, b));
                 }
             }
         }

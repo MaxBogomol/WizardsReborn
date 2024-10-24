@@ -101,22 +101,22 @@ public class ArcaneWandScreen extends Screen {
             if (mouseAngleI > getWandItemDistance()) {
                 if ((getPlayerCrystals().size() > 0) && (selectedItem != null)) {
                     if (!main.isEmpty() && main.getItem() instanceof ArcaneWandItem) {
-                        PacketHandler.sendToServer(new ArcaneWandSetCrystalPacket(true, selectedItem));
+                        WizardsRebornPacketHandler.sendToServer(new ArcaneWandSetCrystalPacket(true, selectedItem));
                         Minecraft.getInstance().player.playNotifySound(WizardsRebornSounds.CRYSTAL_RESONATE.get(), SoundSource.NEUTRAL, 1.0f, 1.0f);
                     } else {
                         if (!offhand.isEmpty() && offhand.getItem() instanceof ArcaneWandItem) {
-                            PacketHandler.sendToServer(new ArcaneWandSetCrystalPacket(false, selectedItem));
+                            WizardsRebornPacketHandler.sendToServer(new ArcaneWandSetCrystalPacket(false, selectedItem));
                             Minecraft.getInstance().player.playNotifySound(WizardsRebornSounds.CRYSTAL_RESONATE.get(), SoundSource.NEUTRAL, 1.0f, 1.0f);
                         }
                     }
                 }
             } else {
                 if (!main.isEmpty() && main.getItem() instanceof ArcaneWandItem) {
-                    PacketHandler.sendToServer(new ArcaneWandRemoveCrystalPacket(true));
+                    WizardsRebornPacketHandler.sendToServer(new ArcaneWandRemoveCrystalPacket(true));
                     Minecraft.getInstance().player.playNotifySound(WizardsRebornSounds.CRYSTAL_RESONATE.get(), SoundSource.NEUTRAL, 1.0f, 1.0f);
                 } else {
                     if (!offhand.isEmpty() && offhand.getItem() instanceof ArcaneWandItem) {
-                        PacketHandler.sendToServer(new ArcaneWandRemoveCrystalPacket(false));
+                        WizardsRebornPacketHandler.sendToServer(new ArcaneWandRemoveCrystalPacket(false));
                         Minecraft.getInstance().player.playNotifySound(WizardsRebornSounds.CRYSTAL_RESONATE.get(), SoundSource.NEUTRAL, 1.0f, 1.0f);
                     }
                 }
@@ -170,11 +170,11 @@ public class ArcaneWandScreen extends Screen {
                             hover = false;
 
                             if (!main.isEmpty() && main.getItem() instanceof ArcaneWandItem) {
-                                PacketHandler.sendToServer(new ArcaneWandSpellSetPacket(true, selectedSpell.getId()));
+                                WizardsRebornPacketHandler.sendToServer(new ArcaneWandSpellSetPacket(true, selectedSpell.getId()));
                                 Minecraft.getInstance().player.playNotifySound(WizardsRebornSounds.CRYSTAL_RESONATE.get(), SoundSource.NEUTRAL, 1.0f, 1.5f);
                             } else {
                                 if (!offhand.isEmpty() && offhand.getItem() instanceof ArcaneWandItem) {
-                                    PacketHandler.sendToServer(new ArcaneWandSpellSetPacket(false, selectedSpell.getId()));
+                                    WizardsRebornPacketHandler.sendToServer(new ArcaneWandSpellSetPacket(false, selectedSpell.getId()));
                                     Minecraft.getInstance().player.playNotifySound(WizardsRebornSounds.CRYSTAL_RESONATE.get(), SoundSource.NEUTRAL, 1.0f, 1.5f);
                                 }
                             }
@@ -184,7 +184,7 @@ public class ArcaneWandScreen extends Screen {
                             mode = Mode.SPELL_SET;
                             isSpellSet = false;
                             int currentSpellSet = KnowledgeUtil.getCurrentSpellSet(minecraft.player);
-                            PacketHandler.sendToServer(new SetSpellInSetPacket(selectedSpell.getId(), currentSpellSet, idSpellSet));
+                            WizardsRebornPacketHandler.sendToServer(new SetSpellInSetPacket(selectedSpell.getId(), currentSpellSet, idSpellSet));
                             Minecraft.getInstance().player.playNotifySound(WizardsRebornSounds.CRYSTAL_RESONATE.get(), SoundSource.NEUTRAL, 1.0f, 1.5f);
                             return true;
                         }
@@ -196,10 +196,10 @@ public class ArcaneWandScreen extends Screen {
         if (mode == Mode.SPELL_SETS) {
             int choosed = getSelectedSpell(mouseX, mouseY);
             if (button == GLFW.GLFW_MOUSE_BUTTON_RIGHT) {
-                PacketHandler.sendToServer(new RemoveSpellSetPacket(choosed));
+                WizardsRebornPacketHandler.sendToServer(new RemoveSpellSetPacket(choosed));
                 return true;
             } else {
-                PacketHandler.sendToServer(new SetCurrentSpellSetPacket(choosed));
+                WizardsRebornPacketHandler.sendToServer(new SetCurrentSpellSetPacket(choosed));
                 hoveramount = 0;
                 mode = Mode.SPELL_SET;
                 return true;
@@ -210,7 +210,7 @@ public class ArcaneWandScreen extends Screen {
             int choosed = getSelectedSpell(mouseX, mouseY);
             int currentSpellSet = KnowledgeUtil.getCurrentSpellSet(minecraft.player);
             if (button == GLFW.GLFW_MOUSE_BUTTON_RIGHT) {
-                PacketHandler.sendToServer(new SetSpellInSetPacket("", currentSpellSet, choosed));
+                WizardsRebornPacketHandler.sendToServer(new SetSpellInSetPacket("", currentSpellSet, choosed));
                 return true;
             } else {
                 selectedSpell = KnowledgeUtil.getSpellFromSet(minecraft.player, currentSpellSet, choosed);
@@ -220,13 +220,13 @@ public class ArcaneWandScreen extends Screen {
                         hover = false;
 
                         if (!main.isEmpty() && main.getItem() instanceof ArcaneWandItem) {
-                            PacketHandler.sendToServer(new ArcaneWandSpellSetPacket(true, selectedSpell.getId()));
-                            PacketHandler.sendToServer(new SetCurrentSpellInSetPacket(choosed));
+                            WizardsRebornPacketHandler.sendToServer(new ArcaneWandSpellSetPacket(true, selectedSpell.getId()));
+                            WizardsRebornPacketHandler.sendToServer(new SetCurrentSpellInSetPacket(choosed));
                             Minecraft.getInstance().player.playNotifySound(WizardsRebornSounds.CRYSTAL_RESONATE.get(), SoundSource.NEUTRAL, 1.0f, 1.5f);
                         } else {
                             if (!offhand.isEmpty() && offhand.getItem() instanceof ArcaneWandItem) {
-                                PacketHandler.sendToServer(new ArcaneWandSpellSetPacket(false, selectedSpell.getId()));
-                                PacketHandler.sendToServer(new SetCurrentSpellInSetPacket(choosed));
+                                WizardsRebornPacketHandler.sendToServer(new ArcaneWandSpellSetPacket(false, selectedSpell.getId()));
+                                WizardsRebornPacketHandler.sendToServer(new SetCurrentSpellInSetPacket(choosed));
                                 Minecraft.getInstance().player.playNotifySound(WizardsRebornSounds.CRYSTAL_RESONATE.get(), SoundSource.NEUTRAL, 1.0f, 1.5f);
                             }
                         }

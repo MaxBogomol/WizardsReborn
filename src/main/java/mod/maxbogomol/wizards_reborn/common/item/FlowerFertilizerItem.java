@@ -1,7 +1,7 @@
 package mod.maxbogomol.wizards_reborn.common.item;
 
 import mod.maxbogomol.wizards_reborn.common.network.item.FlowerFertilizerPacket;
-import mod.maxbogomol.wizards_reborn.common.network.PacketHandler;
+import mod.maxbogomol.wizards_reborn.common.network.WizardsRebornPacketHandler;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.item.BoneMealItem;
 import net.minecraft.world.item.context.UseOnContext;
@@ -20,7 +20,7 @@ public class FlowerFertilizerItem extends BoneMealItem {
         if (result1 != InteractionResult.PASS || result2 != InteractionResult.PASS) {
             if (!context.getLevel().isClientSide()) {
                 Vec3 pos = context.getClickedPos().getCenter();
-                PacketHandler.sendToTracking(context.getLevel(), context.getClickedPos(), new FlowerFertilizerPacket(pos.add(0, -0.4f, 0)));
+                WizardsRebornPacketHandler.sendToTracking(context.getLevel(), context.getClickedPos(), new FlowerFertilizerPacket(pos.add(0, -0.4f, 0)));
             }
             return InteractionResult.sidedSuccess(context.getLevel().isClientSide);
         }

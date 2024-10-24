@@ -1,7 +1,7 @@
 package mod.maxbogomol.wizards_reborn.common.entity;
 
 import mod.maxbogomol.fluffy_fur.client.render.trail.TrailPointBuilder;
-import mod.maxbogomol.wizards_reborn.common.network.PacketHandler;
+import mod.maxbogomol.wizards_reborn.common.network.WizardsRebornPacketHandler;
 import mod.maxbogomol.wizards_reborn.common.network.arcaneenchantment.SplitArrowBurstPacket;
 import mod.maxbogomol.wizards_reborn.common.network.spell.ChargeSpellTrailPacket;
 import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornArcaneEnchantments;
@@ -64,7 +64,7 @@ public class SplitArrowEntity extends AbstractArrow {
                 Vec3 pos = position();
                 Vec3 norm = motion.normalize().scale(0.025f);
 
-                PacketHandler.sendToTracking(level(), new BlockPos((int) pos.x, (int) pos.y, (int) pos.z), new ChargeSpellTrailPacket(new Vec3(xo, yo, zo), pos, norm, color, 0.5f));
+                WizardsRebornPacketHandler.sendToTracking(level(), new BlockPos((int) pos.x, (int) pos.y, (int) pos.z), new ChargeSpellTrailPacket(new Vec3(xo, yo, zo), pos, norm, color, 0.5f));
             }
         } else {
             setDeltaMovement(0, 0, 0);
@@ -115,7 +115,7 @@ public class SplitArrowEntity extends AbstractArrow {
                 setFade(true);
                 setFadeTick(10);
                 Color color = WizardsRebornArcaneEnchantments.SPLIT.getColor();
-                PacketHandler.sendToTracking(level(), blockPosition(), new SplitArrowBurstPacket(position(), color));
+                WizardsRebornPacketHandler.sendToTracking(level(), blockPosition(), new SplitArrowBurstPacket(position(), color));
             }
         }
     }
@@ -128,7 +128,7 @@ public class SplitArrowEntity extends AbstractArrow {
 
         if (!level().isClientSide()) {
             Color color = WizardsRebornArcaneEnchantments.SPLIT.getColor();
-            PacketHandler.sendToTracking(level(), blockPosition(), new SplitArrowBurstPacket(position(), color));
+            WizardsRebornPacketHandler.sendToTracking(level(), blockPosition(), new SplitArrowBurstPacket(position(), color));
         }
         addTrail(result.getLocation());
     }

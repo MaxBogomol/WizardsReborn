@@ -4,7 +4,7 @@ import mod.maxbogomol.wizards_reborn.api.crystal.CrystalType;
 import mod.maxbogomol.wizards_reborn.api.crystalritual.CrystalRitual;
 import mod.maxbogomol.wizards_reborn.api.crystalritual.CrystalRitualArea;
 import mod.maxbogomol.wizards_reborn.common.block.crystal.CrystalBlockEntity;
-import mod.maxbogomol.wizards_reborn.common.network.PacketHandler;
+import mod.maxbogomol.wizards_reborn.common.network.WizardsRebornPacketHandler;
 import mod.maxbogomol.wizards_reborn.common.network.spell.MagicSproutSpellEffectPacket;
 import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornCrystals;
 import net.minecraft.core.BlockPos;
@@ -82,7 +82,7 @@ public class ArtificialFertilityCrystalRitual extends CrystalRitual {
                             float g = color.getGreen() / 255f;
                             float b = color.getBlue() / 255f;
 
-                            PacketHandler.sendToTracking(level, pos, new MagicSproutSpellEffectPacket(pos.getX() + 0.5F, pos.getY() + 0.5F, pos.getZ() + 0.5F, r, g, b));
+                            WizardsRebornPacketHandler.sendToTracking(level, pos, new MagicSproutSpellEffectPacket(pos.getX() + 0.5F, pos.getY() + 0.5F, pos.getZ() + 0.5F, r, g, b));
                             level.playSound(null, pos, SoundEvents.BONE_MEAL_USE, SoundSource.BLOCKS, 1f, 1f);
                             setMaxCooldown(crystal, getMaxRitualCooldownWithStat(crystal));
                             break;
@@ -94,7 +94,7 @@ public class ArtificialFertilityCrystalRitual extends CrystalRitual {
                             float g = color.getGreen() / 255f;
                             float b = color.getBlue() / 255f;
 
-                            PacketHandler.sendToTracking(level, pos, new MagicSproutSpellEffectPacket(pos.getX() + 0.5F, pos.above().getY() + 0.5F, pos.getZ() + 0.5F, r, g, b));
+                            WizardsRebornPacketHandler.sendToTracking(level, pos, new MagicSproutSpellEffectPacket(pos.getX() + 0.5F, pos.above().getY() + 0.5F, pos.getZ() + 0.5F, r, g, b));
                             level.playSound(null, pos, SoundEvents.BONE_MEAL_USE, SoundSource.BLOCKS, 1f, 1f);
                             setMaxCooldown(crystal, getMaxRitualCooldownWithStat(crystal) * 2);
                             break;

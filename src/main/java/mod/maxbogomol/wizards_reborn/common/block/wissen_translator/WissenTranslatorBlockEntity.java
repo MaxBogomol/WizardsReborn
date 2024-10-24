@@ -15,9 +15,9 @@ import mod.maxbogomol.wizards_reborn.api.wissen.IWissenBlockEntity;
 import mod.maxbogomol.wizards_reborn.api.wissen.IWissenWandControlledBlockEntity;
 import mod.maxbogomol.wizards_reborn.api.wissen.WissenUtil;
 import mod.maxbogomol.wizards_reborn.common.block.ArcaneLumosBlock;
+import mod.maxbogomol.wizards_reborn.common.network.WizardsRebornPacketHandler;
 import mod.maxbogomol.wizards_reborn.config.WizardsRebornConfig;
 import mod.maxbogomol.wizards_reborn.common.item.equipment.WissenWandItem;
-import mod.maxbogomol.wizards_reborn.common.network.PacketHandler;
 import mod.maxbogomol.wizards_reborn.common.network.WissenSendEffectPacket;
 import mod.maxbogomol.wizards_reborn.common.network.block.WissenTranslatorBurstPacket;
 import mod.maxbogomol.wizards_reborn.common.network.block.WissenTranslatorSendPacket;
@@ -104,7 +104,7 @@ public class WissenTranslatorBlockEntity extends ExposedBlockSimpleInventory imp
 
                             Color color = getColor();
 
-                            PacketHandler.sendToTracking(level, getBlockPos(), new WissenTranslatorBurstPacket(getBlockPos().getX() + 0.5f, getBlockPos().getY() + 0.5f, getBlockPos().getZ() + 0.5f, color));
+                            WizardsRebornPacketHandler.sendToTracking(level, getBlockPos(), new WissenTranslatorBurstPacket(getBlockPos().getX() + 0.5f, getBlockPos().getY() + 0.5f, getBlockPos().getZ() + 0.5f, color));
                             level.playSound(WizardsReborn.proxy.getPlayer(), getBlockPos(), WizardsRebornSounds.WISSEN_TRANSFER.get(), SoundSource.BLOCKS, 0.1f, (float) (1.1f + ((random.nextFloat() - 0.5D) / 2)));
                         }
                     }
@@ -393,10 +393,10 @@ public class WissenTranslatorBlockEntity extends ExposedBlockSimpleInventory imp
 
             Color color = getColor();
 
-            PacketHandler.sendToTracking(level, getBlockPos(), new WissenSendEffectPacket(blockX, blockY, blockZ, X, Y, Z, (float) color.getRed() / 255, (float) color.getGreen()/ 255, (float) color.getBlue() / 255));
+            WizardsRebornPacketHandler.sendToTracking(level, getBlockPos(), new WissenSendEffectPacket(blockX, blockY, blockZ, X, Y, Z, (float) color.getRed() / 255, (float) color.getGreen()/ 255, (float) color.getBlue() / 255));
 
             if (tag.getInt("wissen") <= 0) {
-                PacketHandler.sendToTracking(level, getBlockPos(), new WissenTranslatorBurstPacket(X, Y, Z, color));
+                WizardsRebornPacketHandler.sendToTracking(level, getBlockPos(), new WissenTranslatorBurstPacket(X, Y, Z, color));
                 deleteRays.add(i);
             } else if ((blockFromX != Mth.floor(blockX)) || blockFromY != Mth.floor(blockY) || (blockFromZ != Mth.floor(blockZ))) {
                 BlockEntity blockEntity = level.getBlockEntity(BlockPos.containing(blockX, blockY, blockZ));
@@ -412,8 +412,8 @@ public class WissenTranslatorBlockEntity extends ExposedBlockSimpleInventory imp
 
                         BlockEntityUpdate.packet(blockEntity);
 
-                        PacketHandler.sendToTracking(level, getBlockPos(), new WissenTranslatorBurstPacket((float) X, (float) Y, (float) Z, color));
-                        PacketHandler.sendToTracking(level, getBlockPos(), new WissenTranslatorSendPacket(BlockPos.containing(X, Y, Z)));
+                        WizardsRebornPacketHandler.sendToTracking(level, getBlockPos(), new WissenTranslatorBurstPacket((float) X, (float) Y, (float) Z, color));
+                        WizardsRebornPacketHandler.sendToTracking(level, getBlockPos(), new WissenTranslatorSendPacket(BlockPos.containing(X, Y, Z)));
 
                         deleteRays.add(i);
                     }

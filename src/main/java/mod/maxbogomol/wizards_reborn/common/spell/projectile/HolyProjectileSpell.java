@@ -4,7 +4,7 @@ import mod.maxbogomol.fluffy_fur.common.raycast.RayHitResult;
 import mod.maxbogomol.wizards_reborn.api.crystal.CrystalUtil;
 import mod.maxbogomol.wizards_reborn.common.entity.SpellEntity;
 import mod.maxbogomol.wizards_reborn.common.item.equipment.arcane.ArcaneArmorItem;
-import mod.maxbogomol.wizards_reborn.common.network.PacketHandler;
+import mod.maxbogomol.wizards_reborn.common.network.WizardsRebornPacketHandler;
 import mod.maxbogomol.wizards_reborn.common.network.spell.ProjectileSpellHeartsPacket;
 import mod.maxbogomol.wizards_reborn.common.network.spell.ProjectileSpellSkullsPacket;
 import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornCrystals;
@@ -42,10 +42,10 @@ public class HolyProjectileSpell extends ProjectileSpell {
                 if (livingEntity.isInvertedHealAndHarm()) {
                     DamageSource damageSource = getDamage(WizardsRebornDamage.create(target.level(), WizardsRebornDamage.ARCANE_MAGIC).typeHolder(), entity, entity.getOwner());
                     target.hurt(damageSource, damage);
-                    PacketHandler.sendToTracking(level, entity.blockPosition(), new ProjectileSpellSkullsPacket(entity.position(), getColor()));
+                    WizardsRebornPacketHandler.sendToTracking(level, entity.blockPosition(), new ProjectileSpellSkullsPacket(entity.position(), getColor()));
                 } else {
                     livingEntity.heal(damage);
-                    PacketHandler.sendToTracking(level, entity.blockPosition(), new ProjectileSpellHeartsPacket(entity.position(), getColor()));
+                    WizardsRebornPacketHandler.sendToTracking(level, entity.blockPosition(), new ProjectileSpellHeartsPacket(entity.position(), getColor()));
                 }
             }
         }

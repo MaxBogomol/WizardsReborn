@@ -11,7 +11,7 @@ import mod.maxbogomol.wizards_reborn.common.command.WizardsRebornCommand;
 import mod.maxbogomol.wizards_reborn.common.entity.SpellEntity;
 import mod.maxbogomol.wizards_reborn.common.item.equipment.ArcaneFortressArmorItem;
 import mod.maxbogomol.wizards_reborn.common.network.KnowledgeUpdatePacket;
-import mod.maxbogomol.wizards_reborn.common.network.PacketHandler;
+import mod.maxbogomol.wizards_reborn.common.network.WizardsRebornPacketHandler;
 import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornAttributes;
 import mod.maxbogomol.wizards_reborn.registry.common.damage.WizardsRebornDamage;
 import mod.maxbogomol.wizards_reborn.registry.common.damage.WizardsRebornDamageTags;
@@ -51,14 +51,14 @@ public class Events {
         event.getEntity().getCapability(KNOWLEDGE).ifPresent((k) -> event.getOriginal().getCapability(KNOWLEDGE).ifPresent((o) ->
                 ((INBTSerializable<CompoundTag>) k).deserializeNBT(((INBTSerializable<CompoundTag>) o).serializeNBT())));
         if (!event.getEntity().level().isClientSide) {
-            PacketHandler.sendTo((ServerPlayer) event.getEntity(), new KnowledgeUpdatePacket(event.getEntity()));
+            WizardsRebornPacketHandler.sendTo((ServerPlayer) event.getEntity(), new KnowledgeUpdatePacket(event.getEntity()));
         }
     }
 
     @SubscribeEvent
     public void registerCustomAI(EntityJoinLevelEvent event) {
         if (event.getEntity() instanceof Player player && !event.getLevel().isClientSide()) {
-            PacketHandler.sendTo(player, new KnowledgeUpdatePacket(player));
+            WizardsRebornPacketHandler.sendTo(player, new KnowledgeUpdatePacket(player));
         }
     }
 

@@ -4,7 +4,7 @@ import mod.maxbogomol.fluffy_fur.common.block.entity.TickableBlockEntity;
 import mod.maxbogomol.fluffy_fur.common.network.BlockEntityUpdate;
 import mod.maxbogomol.wizards_reborn.api.alchemy.ISteamBlockEntity;
 import mod.maxbogomol.wizards_reborn.common.block.pipe.TinyPipeBaseBlock;
-import mod.maxbogomol.wizards_reborn.common.network.PacketHandler;
+import mod.maxbogomol.wizards_reborn.common.network.WizardsRebornPacketHandler;
 import mod.maxbogomol.wizards_reborn.common.network.block.SteamBreakPacket;
 import mod.maxbogomol.wizards_reborn.registry.common.block.WizardsRebornBlockEntities;
 import mod.maxbogomol.wizards_reborn.registry.common.block.WizardsRebornBlockTags;
@@ -93,7 +93,7 @@ public class SteamPipeBlock extends TinyPipeBaseBlock {
             if (level.getBlockEntity(pos) instanceof ISteamBlockEntity blockEntity) {
                 if (blockEntity.getMaxSteam() > 0) {
                     float amount = (float) blockEntity.getSteam() / (float) blockEntity.getMaxSteam();
-                    PacketHandler.sendToTracking(level, pos, new SteamBreakPacket(pos, 15 * amount));
+                    WizardsRebornPacketHandler.sendToTracking(level, pos, new SteamBreakPacket(pos, 15 * amount));
                 }
             }
         }

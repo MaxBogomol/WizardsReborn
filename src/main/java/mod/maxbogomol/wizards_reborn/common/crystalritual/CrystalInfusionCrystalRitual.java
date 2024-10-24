@@ -15,7 +15,7 @@ import mod.maxbogomol.wizards_reborn.api.crystalritual.CrystalRitual;
 import mod.maxbogomol.wizards_reborn.api.crystalritual.CrystalRitualArea;
 import mod.maxbogomol.wizards_reborn.common.block.arcane_pedestal.ArcanePedestalBlockEntity;
 import mod.maxbogomol.wizards_reborn.common.block.crystal.CrystalBlockEntity;
-import mod.maxbogomol.wizards_reborn.common.network.PacketHandler;
+import mod.maxbogomol.wizards_reborn.common.network.WizardsRebornPacketHandler;
 import mod.maxbogomol.wizards_reborn.common.network.crystalritual.CrystalInfusionBurstEffectPacket;
 import mod.maxbogomol.wizards_reborn.common.recipe.CrystalInfusionRecipe;
 import mod.maxbogomol.wizards_reborn.registry.client.WizardsRebornParticles;
@@ -134,7 +134,7 @@ public class CrystalInfusionCrystalRitual extends CrystalRitual {
                             b = (color.getBlue() / 255f);
                         }
 
-                        PacketHandler.sendToTracking(level, blockPos, new CrystalInfusionBurstEffectPacket(blockPos, r, g, b));
+                        WizardsRebornPacketHandler.sendToTracking(level, blockPos, new CrystalInfusionBurstEffectPacket(blockPos, r, g, b));
                     }
                 }
             }

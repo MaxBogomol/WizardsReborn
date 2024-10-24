@@ -5,7 +5,7 @@ import mod.maxbogomol.wizards_reborn.api.spell.Spells;
 import mod.maxbogomol.wizards_reborn.common.capability.IKnowledge;
 import mod.maxbogomol.wizards_reborn.common.network.KnowledgeToastPacket;
 import mod.maxbogomol.wizards_reborn.common.network.KnowledgeUpdatePacket;
-import mod.maxbogomol.wizards_reborn.common.network.PacketHandler;
+import mod.maxbogomol.wizards_reborn.common.network.WizardsRebornPacketHandler;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.player.Player;
 
@@ -33,9 +33,9 @@ public class KnowledgeUtil {
 
             knowledge.award((Player) entity);
 
-            PacketHandler.sendTo((Player) entity, new KnowledgeUpdatePacket((Player) entity));
+            WizardsRebornPacketHandler.sendTo((Player) entity, new KnowledgeUpdatePacket((Player) entity));
             if (knowledge.hasToast()) {
-                PacketHandler.sendTo((Player) entity, new KnowledgeToastPacket((Player) entity, knowledge.getId(), false));
+                WizardsRebornPacketHandler.sendTo((Player) entity, new KnowledgeToastPacket((Player) entity, knowledge.getId(), false));
             }
         });
     }
@@ -46,7 +46,7 @@ public class KnowledgeUtil {
             if (!k.isKnowledge(knowledge)) return;
             k.removeKnowledge(knowledge);
 
-            PacketHandler.sendTo((Player) entity, new KnowledgeUpdatePacket((Player) entity));
+            WizardsRebornPacketHandler.sendTo((Player) entity, new KnowledgeUpdatePacket((Player) entity));
         });
     }
 
@@ -61,8 +61,8 @@ public class KnowledgeUtil {
                 }
             }
 
-            PacketHandler.sendTo((Player) entity, new KnowledgeUpdatePacket((Player) entity));
-            PacketHandler.sendTo((Player) entity, new KnowledgeToastPacket((Player) entity, "", true));
+            WizardsRebornPacketHandler.sendTo((Player) entity, new KnowledgeUpdatePacket((Player) entity));
+            WizardsRebornPacketHandler.sendTo((Player) entity, new KnowledgeToastPacket((Player) entity, "", true));
         });
     }
 
@@ -71,7 +71,7 @@ public class KnowledgeUtil {
         entity.getCapability(IKnowledge.INSTANCE, null).ifPresent((k) -> {
             k.removeAllKnowledge();
 
-            PacketHandler.sendTo((Player) entity, new KnowledgeUpdatePacket((Player) entity));
+            WizardsRebornPacketHandler.sendTo((Player) entity, new KnowledgeUpdatePacket((Player) entity));
         });
     }
 
@@ -85,9 +85,9 @@ public class KnowledgeUtil {
                 knowledge.award((Player) entity);
             }
 
-            PacketHandler.sendTo((Player) entity, new KnowledgeUpdatePacket((Player) entity));
+            WizardsRebornPacketHandler.sendTo((Player) entity, new KnowledgeUpdatePacket((Player) entity));
             if (knowledge.hasToast()) {
-                PacketHandler.sendTo((Player) entity, new KnowledgeToastPacket((Player) entity, knowledge.getId(), false));
+                WizardsRebornPacketHandler.sendTo((Player) entity, new KnowledgeToastPacket((Player) entity, knowledge.getId(), false));
             }
         });
     }
@@ -107,7 +107,7 @@ public class KnowledgeUtil {
             if (s.isSpell(spell)) return;
             s.addSpell(spell);
 
-            PacketHandler.sendTo((Player) entity, new KnowledgeUpdatePacket((Player) entity));
+            WizardsRebornPacketHandler.sendTo((Player) entity, new KnowledgeUpdatePacket((Player) entity));
         });
     }
 
@@ -117,7 +117,7 @@ public class KnowledgeUtil {
             if (!s.isSpell(spell)) return;
             s.removeSpell(spell);
 
-            PacketHandler.sendTo((Player) entity, new KnowledgeUpdatePacket((Player) entity));
+            WizardsRebornPacketHandler.sendTo((Player) entity, new KnowledgeUpdatePacket((Player) entity));
         });
     }
 
@@ -126,7 +126,7 @@ public class KnowledgeUtil {
         entity.getCapability(IKnowledge.INSTANCE, null).ifPresent((s) -> {
             s.addAllSpell();
 
-            PacketHandler.sendTo((Player) entity, new KnowledgeUpdatePacket((Player) entity));
+            WizardsRebornPacketHandler.sendTo((Player) entity, new KnowledgeUpdatePacket((Player) entity));
         });
     }
 
@@ -135,7 +135,7 @@ public class KnowledgeUtil {
         entity.getCapability(IKnowledge.INSTANCE, null).ifPresent((s) -> {
             s.removeAllSpell();
 
-            PacketHandler.sendTo((Player) entity, new KnowledgeUpdatePacket((Player) entity));
+            WizardsRebornPacketHandler.sendTo((Player) entity, new KnowledgeUpdatePacket((Player) entity));
         });
     }
 
@@ -162,7 +162,7 @@ public class KnowledgeUtil {
         entity.getCapability(IKnowledge.INSTANCE, null).ifPresent((s) -> {
             s.removeSpellSet(id);
 
-            PacketHandler.sendTo((Player) entity, new KnowledgeUpdatePacket((Player) entity));
+            WizardsRebornPacketHandler.sendTo((Player) entity, new KnowledgeUpdatePacket((Player) entity));
         });
     }
 
@@ -171,7 +171,7 @@ public class KnowledgeUtil {
         entity.getCapability(IKnowledge.INSTANCE, null).ifPresent((s) -> {
             s.removeAllSpellSets();
 
-            PacketHandler.sendTo((Player) entity, new KnowledgeUpdatePacket((Player) entity));
+            WizardsRebornPacketHandler.sendTo((Player) entity, new KnowledgeUpdatePacket((Player) entity));
         });
     }
 
@@ -198,7 +198,7 @@ public class KnowledgeUtil {
         entity.getCapability(IKnowledge.INSTANCE, null).ifPresent((s) -> {
             s.addSpellInSet(id, spellId, spell);
 
-            PacketHandler.sendTo((Player) entity, new KnowledgeUpdatePacket((Player) entity));
+            WizardsRebornPacketHandler.sendTo((Player) entity, new KnowledgeUpdatePacket((Player) entity));
         });
     }
 
@@ -207,7 +207,7 @@ public class KnowledgeUtil {
         entity.getCapability(IKnowledge.INSTANCE, null).ifPresent((s) -> {
             s.removeSpellFromSet(id, spellId);
 
-            PacketHandler.sendTo((Player) entity, new KnowledgeUpdatePacket((Player) entity));
+            WizardsRebornPacketHandler.sendTo((Player) entity, new KnowledgeUpdatePacket((Player) entity));
         });
     }
 
@@ -225,7 +225,7 @@ public class KnowledgeUtil {
         entity.getCapability(IKnowledge.INSTANCE, null).ifPresent((s) -> {
             s.setCurrentSpellSet(id);
 
-            PacketHandler.sendTo((Player) entity, new KnowledgeUpdatePacket((Player) entity));
+            WizardsRebornPacketHandler.sendTo((Player) entity, new KnowledgeUpdatePacket((Player) entity));
         });
     }
 
@@ -243,7 +243,7 @@ public class KnowledgeUtil {
         entity.getCapability(IKnowledge.INSTANCE, null).ifPresent((s) -> {
             s.setCurrentSpellInSet(id);
 
-            PacketHandler.sendTo((Player) entity, new KnowledgeUpdatePacket((Player) entity));
+            WizardsRebornPacketHandler.sendTo((Player) entity, new KnowledgeUpdatePacket((Player) entity));
         });
     }
 

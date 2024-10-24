@@ -5,7 +5,7 @@ import mod.maxbogomol.wizards_reborn.WizardsReborn;
 import mod.maxbogomol.wizards_reborn.api.crystal.CrystalUtil;
 import mod.maxbogomol.wizards_reborn.api.spell.SpellContext;
 import mod.maxbogomol.wizards_reborn.common.item.equipment.arcane.ArcaneArmorItem;
-import mod.maxbogomol.wizards_reborn.common.network.PacketHandler;
+import mod.maxbogomol.wizards_reborn.common.network.WizardsRebornPacketHandler;
 import mod.maxbogomol.wizards_reborn.common.network.spell.BlinkSpellPacket;
 import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornCrystals;
 import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornSpells;
@@ -69,7 +69,7 @@ public class BlinkSpell extends LookSpell {
         Entity entity = spellContext.getEntity();
 
         if (spellContext.getEntity() instanceof LivingEntity livingEntity) {
-            PacketHandler.sendToTracking(level, entity.blockPosition(), new BlinkSpellPacket(spellContext.getPos(), pos, getColor(), isSharp ? 1 : 0));
+            WizardsRebornPacketHandler.sendToTracking(level, entity.blockPosition(), new BlinkSpellPacket(spellContext.getPos(), pos, getColor(), isSharp ? 1 : 0));
             //PacketHandler.sendTo(player, new SetAdditionalFovPacket(30f));
             level.playSound(WizardsReborn.proxy.getPlayer(), pos.x(), pos.y(), pos.z(), SoundEvents.ENDERMAN_TELEPORT, SoundSource.PLAYERS, 1f, 0.95f);
 

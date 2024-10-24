@@ -1,7 +1,7 @@
 package mod.maxbogomol.wizards_reborn.common.block;
 
 import mod.maxbogomol.fluffy_fur.client.particle.ParticleBuilder;
-import mod.maxbogomol.wizards_reborn.common.network.PacketHandler;
+import mod.maxbogomol.wizards_reborn.common.network.WizardsRebornPacketHandler;
 import mod.maxbogomol.wizards_reborn.common.network.block.ArcaneWoodLeavesBreakPacket;
 import mod.maxbogomol.wizards_reborn.registry.client.WizardsRebornParticles;
 import net.minecraft.client.particle.ParticleRenderType;
@@ -25,7 +25,7 @@ public class ArcaneWoodLeavesBlock extends LeavesBlock {
     @Override
     public void onRemove(@Nonnull BlockState state, @Nonnull Level level, @Nonnull BlockPos pos, @Nonnull BlockState newState, boolean isMoving) {
         if (state.getBlock() != newState.getBlock()) {
-            PacketHandler.sendToTracking(level, pos, new ArcaneWoodLeavesBreakPacket(pos));
+            WizardsRebornPacketHandler.sendToTracking(level, pos, new ArcaneWoodLeavesBreakPacket(pos));
         }
         super.onRemove(state, level, pos, newState, isMoving);
     }

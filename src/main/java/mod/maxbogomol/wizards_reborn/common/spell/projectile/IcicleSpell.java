@@ -10,7 +10,7 @@ import mod.maxbogomol.wizards_reborn.api.spell.SpellComponent;
 import mod.maxbogomol.wizards_reborn.api.spell.SpellContext;
 import mod.maxbogomol.wizards_reborn.common.entity.SpellEntity;
 import mod.maxbogomol.wizards_reborn.common.item.equipment.arcane.ArcaneArmorItem;
-import mod.maxbogomol.wizards_reborn.common.network.PacketHandler;
+import mod.maxbogomol.wizards_reborn.common.network.WizardsRebornPacketHandler;
 import mod.maxbogomol.wizards_reborn.common.network.spell.IcicleSpellTrailPacket;
 import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornCrystals;
 import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornEntities;
@@ -141,7 +141,7 @@ public class IcicleSpell extends ProjectileSpell {
             Vec3 motion = entity.getDeltaMovement();
             Vec3 pos = entity.position();
             Vec3 norm = motion.normalize().scale(0.005f);
-            PacketHandler.sendToTracking(level, entity.blockPosition(), new IcicleSpellTrailPacket(new Vec3(entity.xo, entity.yo + 0.2f, entity.zo), pos.add(0, 0.2f, 0), norm, getColor()));
+            WizardsRebornPacketHandler.sendToTracking(level, entity.blockPosition(), new IcicleSpellTrailPacket(new Vec3(entity.xo, entity.yo + 0.2f, entity.zo), pos.add(0, 0.2f, 0), norm, getColor()));
         }
     }
 
