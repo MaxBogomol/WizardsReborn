@@ -15,6 +15,7 @@ import net.minecraftforge.api.distmarker.OnlyIn;
 import java.awt.*;
 
 public class TopHatSkin extends ItemSkin {
+
     public TopHatSkin(String id, Color color) {
         super(id, color);
     }

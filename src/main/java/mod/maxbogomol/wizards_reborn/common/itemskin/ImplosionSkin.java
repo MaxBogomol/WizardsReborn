@@ -11,6 +11,7 @@ import mod.maxbogomol.wizards_reborn.integration.common.farmersdelight.FarmersDe
 import java.awt.*;
 
 public class ImplosionSkin extends ItemSkin {
+
     public ImplosionSkin(String id, Color color) {
         super(id, color);
     }

@@ -19,6 +19,7 @@ import net.minecraftforge.api.distmarker.OnlyIn;
 import java.awt.*;
 
 public class SoulHunterSkin extends ItemSkin {
+
     public SoulHunterSkin(String id, Color color) {
         super(id, color);
     }

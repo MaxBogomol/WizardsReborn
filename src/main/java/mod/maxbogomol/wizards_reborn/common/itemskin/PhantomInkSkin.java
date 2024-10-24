@@ -8,6 +8,7 @@ import net.minecraft.world.entity.EquipmentSlot;
 import java.awt.*;
 
 public class PhantomInkSkin extends ItemSkin {
+
     public PhantomInkSkin(String id, Color color) {
         super(id, color);
     }

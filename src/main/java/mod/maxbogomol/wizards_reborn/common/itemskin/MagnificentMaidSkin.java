@@ -19,6 +19,7 @@ import net.minecraftforge.api.distmarker.OnlyIn;
 import java.awt.*;
 
 public class MagnificentMaidSkin extends ItemSkin {
+
     public MagnificentMaidSkin(String id, Color color) {
         super(id, color);
     }

@@ -19,6 +19,7 @@ import net.minecraftforge.api.distmarker.OnlyIn;
 import java.awt.*;
 
 public class SummerLoveSkin extends ItemSkin {
+
     public SummerLoveSkin(String id, Color color) {
         super(id, color);
     }
