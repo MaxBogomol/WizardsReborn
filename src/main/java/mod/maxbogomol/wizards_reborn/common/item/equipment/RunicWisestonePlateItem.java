@@ -10,7 +10,7 @@ import mod.maxbogomol.fluffy_fur.util.ColorUtil;
 import mod.maxbogomol.fluffy_fur.util.RenderUtil;
 import mod.maxbogomol.wizards_reborn.api.crystalritual.CrystalRitual;
 import mod.maxbogomol.wizards_reborn.api.crystalritual.CrystalRitualUtil;
-import mod.maxbogomol.wizards_reborn.api.crystalritual.CrystalRituals;
+import mod.maxbogomol.wizards_reborn.api.crystalritual.CrystalRitualHandler;
 import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornCrystalRituals;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.color.item.ItemColor;
@@ -50,7 +50,7 @@ public class RunicWisestonePlateItem extends Item implements IGuiParticleItem {
                 if (!CrystalRitualUtil.isEmpty(ritual)) {
                     Color color = ritual.getColor();
 
-                    int i = CrystalRituals.getCrystalRituals().indexOf(ritual);
+                    int i = CrystalRitualHandler.getCrystalRituals().indexOf(ritual);
 
                     float a = (float) Math.abs(Math.sin((ClientTickHandler.getTotal() + (i * 10)) / 15));
 
@@ -96,7 +96,7 @@ public class RunicWisestonePlateItem extends Item implements IGuiParticleItem {
         CrystalRitual ritual = CrystalRitualUtil.getCrystalRitual(stack);
         if (!CrystalRitualUtil.isEmpty(ritual)) {
             Color color = ritual.getColor();
-            int ii = CrystalRituals.getCrystalRituals().indexOf(ritual);
+            int ii = CrystalRitualHandler.getCrystalRituals().indexOf(ritual);
 
             float ticks = (ClientTickHandler.ticksInGame + Minecraft.getInstance().getPartialTick()) + (ii * 10);
             float alpha = (float) (0.1f + Math.abs(Math.sin(Math.toRadians(ticks)) * 0.15f));

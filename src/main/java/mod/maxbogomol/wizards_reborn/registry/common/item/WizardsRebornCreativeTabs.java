@@ -3,13 +3,13 @@ package mod.maxbogomol.wizards_reborn.registry.common.item;
 import mod.maxbogomol.wizards_reborn.WizardsReborn;
 import mod.maxbogomol.wizards_reborn.api.alchemy.AlchemyPotion;
 import mod.maxbogomol.wizards_reborn.api.alchemy.AlchemyPotionUtil;
-import mod.maxbogomol.wizards_reborn.api.alchemy.AlchemyPotions;
+import mod.maxbogomol.wizards_reborn.api.alchemy.AlchemyPotionHandler;
 import mod.maxbogomol.wizards_reborn.api.arcaneenchantment.ArcaneEnchantment;
 import mod.maxbogomol.wizards_reborn.api.arcaneenchantment.ArcaneEnchantmentUtil;
-import mod.maxbogomol.wizards_reborn.api.arcaneenchantment.ArcaneEnchantments;
+import mod.maxbogomol.wizards_reborn.api.arcaneenchantment.ArcaneEnchantmentHandler;
 import mod.maxbogomol.wizards_reborn.api.crystalritual.CrystalRitual;
 import mod.maxbogomol.wizards_reborn.api.crystalritual.CrystalRitualUtil;
-import mod.maxbogomol.wizards_reborn.api.crystalritual.CrystalRituals;
+import mod.maxbogomol.wizards_reborn.api.crystalritual.CrystalRitualHandler;
 import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornAlchemyPotions;
 import mod.maxbogomol.wizards_reborn.integration.common.create.CreateIntegration;
 import mod.maxbogomol.wizards_reborn.integration.common.farmersdelight.FarmersDelightIntegration;
@@ -28,10 +28,10 @@ import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.RegistryObject;
 
 @Mod.EventBusSubscriber(modid = WizardsReborn.MOD_ID, bus = Mod.EventBusSubscriber.Bus.MOD)
-public class WizardsRebornCreativeTab {
+public class WizardsRebornCreativeTabs {
     public static final DeferredRegister<CreativeModeTab> CREATIVE_MODE_TABS = DeferredRegister.create(Registries.CREATIVE_MODE_TAB, WizardsReborn.MOD_ID);
 
-    public static final RegistryObject<CreativeModeTab> WIZARDS_REBORN_CREATIVE_TAB = CREATIVE_MODE_TABS.register("tab",
+    public static final RegistryObject<CreativeModeTab> WIZARDS_REBORN = CREATIVE_MODE_TABS.register("tab",
             () -> CreativeModeTab.builder().icon(() -> new ItemStack(WizardsRebornItems.FACETED_EARTH_CRYSTAL.get()))
                     .title(Component.translatable("creative_tab.wizards_reborn"))
                     .withBackgroundLocation(new ResourceLocation(WizardsReborn.MOD_ID, "textures/gui/wizards_reborn_item_tab.png"))
@@ -42,8 +42,8 @@ public class WizardsRebornCreativeTab {
         CREATIVE_MODE_TABS.register(eventBus);
     }
 
-    public static void addCreative(BuildCreativeModeTabContentsEvent event) {
-        if (event.getTabKey() == WizardsRebornCreativeTab.WIZARDS_REBORN_CREATIVE_TAB.getKey()) {
+    public static void addCreativeTabContent(BuildCreativeModeTabContentsEvent event) {
+        if (event.getTabKey() == WizardsRebornCreativeTabs.WIZARDS_REBORN.getKey()) {
             event.accept(WizardsRebornItems.ARCANEMICON);
 
             event.accept(WizardsRebornItems.ARCANE_GOLD_INGOT);
@@ -502,7 +502,7 @@ public class WizardsRebornCreativeTab {
 
             event.accept(WizardsRebornItems.ARCANUM_LENS);
             event.accept(WizardsRebornItems.WISESTONE_PLATE);
-            for (CrystalRitual ritual : CrystalRituals.getCrystalRituals()) {
+            for (CrystalRitual ritual : CrystalRitualHandler.getCrystalRituals()) {
                 if (ritual != WizardsRebornCrystalRituals.EMPTY) {
                     ItemStack stack = new ItemStack(WizardsRebornItems.RUNIC_WISESTONE_PLATE.get());
                     CrystalRitualUtil.setCrystalRitual(stack, ritual);
@@ -603,7 +603,7 @@ public class WizardsRebornCreativeTab {
             event.accept(WizardsRebornItems.IMPLOSION_TRIM);
             event.accept(WizardsRebornItems.PHANTOM_INK_TRIM);
 
-            for (ArcaneEnchantment enchantment : ArcaneEnchantments.getArcaneEnchantments()) {
+            for (ArcaneEnchantment enchantment : ArcaneEnchantmentHandler.getArcaneEnchantments()) {
                 for (int i = 0; i < enchantment.getMaxLevel(); i++) {
                     ItemStack stack = new ItemStack(WizardsRebornItems.ARCANE_ENCHANTED_BOOK.get());
                     ArcaneEnchantmentUtil.addArcaneEnchantment(stack, enchantment, i + 1);
@@ -611,7 +611,7 @@ public class WizardsRebornCreativeTab {
                 }
             }
 
-            for (AlchemyPotion potion : AlchemyPotions.getAlchemyPotions()) {
+            for (AlchemyPotion potion : AlchemyPotionHandler.getAlchemyPotions()) {
                 if (potion != WizardsRebornAlchemyPotions.EMPTY && potion != WizardsRebornAlchemyPotions.COMBINED) {
                     ItemStack stack = new ItemStack(WizardsRebornItems.ALCHEMY_VIAL_POTION.get());
                     AlchemyPotionUtil.setPotion(stack, potion);
@@ -619,7 +619,7 @@ public class WizardsRebornCreativeTab {
                 }
             }
 
-            for (AlchemyPotion potion : AlchemyPotions.getAlchemyPotions()) {
+            for (AlchemyPotion potion : AlchemyPotionHandler.getAlchemyPotions()) {
                 if (potion != WizardsRebornAlchemyPotions.EMPTY && potion != WizardsRebornAlchemyPotions.COMBINED) {
                     ItemStack stack = new ItemStack(WizardsRebornItems.ALCHEMY_FLASK_POTION.get());
                     AlchemyPotionUtil.setPotion(stack, potion);

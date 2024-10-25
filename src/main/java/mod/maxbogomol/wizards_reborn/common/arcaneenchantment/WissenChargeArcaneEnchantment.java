@@ -167,7 +167,7 @@ public class WissenChargeArcaneEnchantment extends ArcaneEnchantment {
                 Vec3 norm = motion.normalize().scale(0.025f);
                 float charge = getCharge(arrow) / 100f;
 
-                WizardsRebornPacketHandler.sendToTracking(arrow.level(), new BlockPos((int) pos.x, (int) pos.y, (int) pos.z), new ChargeSpellTrailPacket(new Vec3(arrow.xo, arrow.yo, arrow.zo), pos, norm, color, charge));
+                WizardsRebornPacketHandler.sendToTracking(arrow.level(), BlockPos.containing(pos), new ChargeSpellTrailPacket(new Vec3(arrow.xo, arrow.yo, arrow.zo), pos, norm, color, charge));
             }
         }
     }
@@ -195,13 +195,9 @@ public class WissenChargeArcaneEnchantment extends ArcaneEnchantment {
         if (!arrow.level().isClientSide()) {
             if (isCharged(arrow)) {
                 Color color = WizardsRebornArcaneEnchantments.WISSEN_CHARGE.getColor();
-                float r = color.getRed() / 255f;
-                float g = color.getGreen() / 255f;
-                float b = color.getBlue() / 255f;
-
                 float charge = getCharge(arrow) / 100f;
 
-                WizardsRebornPacketHandler.sendToTracking(arrow.level(), new BlockPos((int) pos.x, (int) pos.y, (int) pos.z), new WissenChargeBurstPacket((float) pos.x, (float) pos.y, (float) pos.z, r, g, b, charge));
+                WizardsRebornPacketHandler.sendToTracking(arrow.level(), BlockPos.containing(pos), new WissenChargeBurstPacket(pos, color, charge));
                 arrow.level().playSound(WizardsReborn.proxy.getPlayer(), pos.x, pos.y, pos.z, WizardsRebornSounds.SPELL_BURST.get(), SoundSource.PLAYERS, 1f, (float) (1f + ((random.nextFloat() - 0.5D) / 4)));
 
                 float additionalDamage = 0;

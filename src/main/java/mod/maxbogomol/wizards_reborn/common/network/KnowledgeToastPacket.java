@@ -2,7 +2,7 @@ package mod.maxbogomol.wizards_reborn.common.network;
 
 import mod.maxbogomol.wizards_reborn.WizardsReborn;
 import mod.maxbogomol.wizards_reborn.api.knowledge.Knowledge;
-import mod.maxbogomol.wizards_reborn.api.knowledge.Knowledges;
+import mod.maxbogomol.wizards_reborn.api.knowledge.KnowledgeHandler;
 import mod.maxbogomol.wizards_reborn.client.toast.KnowledgeToast;
 import net.minecraft.client.Minecraft;
 import net.minecraft.network.FriendlyByteBuf;
@@ -80,10 +80,10 @@ public class KnowledgeToastPacket {
             if (packet.all) {
                 KnowledgeToast.instance.all = true;
                 KnowledgeToast.instance.articles = true;
-                KnowledgeToast.instance.count = Knowledges.getKnowledges().size();
+                KnowledgeToast.instance.count = KnowledgeHandler.getKnowledges().size();
             } else {
                 KnowledgeToast.instance.all = false;
-                Knowledge knowledge = Knowledges.getKnowledge(packet.id.getString());
+                Knowledge knowledge = KnowledgeHandler.getKnowledge(packet.id.getString());
                 if (knowledge != null) {
                     KnowledgeToast.instance.articles = knowledge.getArticles();
                 }
@@ -94,7 +94,7 @@ public class KnowledgeToastPacket {
             if (packet.all) {
                 KnowledgeToast.instance.all = true;
                 KnowledgeToast.instance.articles = true;
-                KnowledgeToast.instance.count = KnowledgeToast.instance.count + Knowledges.getKnowledges().size();
+                KnowledgeToast.instance.count = KnowledgeToast.instance.count + KnowledgeHandler.getKnowledges().size();
             } else {
                 KnowledgeToast.instance.count = KnowledgeToast.instance.count + 1;
             }

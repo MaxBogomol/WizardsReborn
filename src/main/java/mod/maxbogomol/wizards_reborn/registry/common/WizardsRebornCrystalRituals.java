@@ -2,7 +2,7 @@ package mod.maxbogomol.wizards_reborn.registry.common;
 
 import mod.maxbogomol.wizards_reborn.WizardsReborn;
 import mod.maxbogomol.wizards_reborn.api.crystalritual.CrystalRitual;
-import mod.maxbogomol.wizards_reborn.api.crystalritual.CrystalRituals;
+import mod.maxbogomol.wizards_reborn.api.crystalritual.CrystalRitualHandler;
 import mod.maxbogomol.wizards_reborn.common.crystalritual.*;
 
 public class WizardsRebornCrystalRituals {
@@ -15,12 +15,12 @@ public class WizardsRebornCrystalRituals {
     //public static CrystalRitual STONE_CALENDAR = new CrystalRitual(WizardsReborn.MOD_ID+":stone_calendar");
 
     public static void register() {
-        CrystalRituals.register(EMPTY);
-        CrystalRituals.register(FOCUSING);
-        CrystalRituals.register(ARTIFICIAL_FERTILITY);
-        CrystalRituals.register(RITUAL_BREEDING);
-        CrystalRituals.register(CRYSTAL_GROWTH_ACCELERATION);
-        CrystalRituals.register(CRYSTAL_INFUSION);
+        CrystalRitualHandler.register(EMPTY);
+        CrystalRitualHandler.register(FOCUSING);
+        CrystalRitualHandler.register(ARTIFICIAL_FERTILITY);
+        CrystalRitualHandler.register(RITUAL_BREEDING);
+        CrystalRitualHandler.register(CRYSTAL_GROWTH_ACCELERATION);
+        CrystalRitualHandler.register(CRYSTAL_INFUSION);
         //CrystalRituals.register(STONE_CALENDAR);
     }
 }

@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
-public class Monograms {
+public class MonogramHandler {
     public static Map<String, Monogram> monograms = new HashMap<>();
     public static ArrayList<Monogram> monogramList = new ArrayList<>();
     public static Map<String, MonogramRecipe> recipes = new HashMap<>();

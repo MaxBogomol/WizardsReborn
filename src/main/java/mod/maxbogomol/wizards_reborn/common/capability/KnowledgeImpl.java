@@ -1,9 +1,9 @@
 package mod.maxbogomol.wizards_reborn.common.capability;
 
 import mod.maxbogomol.wizards_reborn.api.knowledge.Knowledge;
-import mod.maxbogomol.wizards_reborn.api.knowledge.Knowledges;
+import mod.maxbogomol.wizards_reborn.api.knowledge.KnowledgeHandler;
 import mod.maxbogomol.wizards_reborn.api.spell.Spell;
-import mod.maxbogomol.wizards_reborn.api.spell.Spells;
+import mod.maxbogomol.wizards_reborn.api.spell.SpellHandler;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.ListTag;
 import net.minecraft.nbt.StringTag;
@@ -39,7 +39,7 @@ public class KnowledgeImpl implements IKnowledge, INBTSerializable<CompoundTag> 
     @Override
     public void addAllKnowledge() {
         knowledges.clear();
-        knowledges.addAll(Knowledges.getKnowledges());
+        knowledges.addAll(KnowledgeHandler.getKnowledges());
     }
 
     @Override
@@ -70,7 +70,7 @@ public class KnowledgeImpl implements IKnowledge, INBTSerializable<CompoundTag> 
     @Override
     public void addAllSpell() {
         spells.clear();
-        spells.addAll(Spells.getSpells());
+        spells.addAll(SpellHandler.getSpells());
     }
 
     @Override
@@ -206,7 +206,7 @@ public class KnowledgeImpl implements IKnowledge, INBTSerializable<CompoundTag> 
         if ((nbt).contains("knowledges")) {
             ListTag knowledges = nbt.getList("knowledges", Tag.TAG_STRING);
             for (int i = 0; i < knowledges.size(); i++) {
-                Knowledge knowledge = Knowledges.getKnowledge(knowledges.getString(i));
+                Knowledge knowledge = KnowledgeHandler.getKnowledge(knowledges.getString(i));
                 if (knowledge != null) addKnowledge(knowledge);
             }
         }
@@ -214,7 +214,7 @@ public class KnowledgeImpl implements IKnowledge, INBTSerializable<CompoundTag> 
         if ((nbt).contains("spells")) {
             ListTag spells = nbt.getList("spells", Tag.TAG_STRING);
             for (int i = 0; i < spells.size(); i++) {
-                Spell spell = Spells.getSpell(spells.getString(i));
+                Spell spell = SpellHandler.getSpell(spells.getString(i));
                 if (spell != null) addSpell(spell);
             }
         }
@@ -224,7 +224,7 @@ public class KnowledgeImpl implements IKnowledge, INBTSerializable<CompoundTag> 
             for (int i = 0; i < spellSets.size(); i++) {
                 ListTag spellSet = spellSets.getList(i);
                 for (int ii = 0; ii < spellSet.size(); ii++) {
-                    Spell spell = Spells.getSpell(spellSet.getString(ii));
+                    Spell spell = SpellHandler.getSpell(spellSet.getString(ii));
                     addSpellInSet(i, ii, spell);
                 }
                 spellSets.set(i, spellSet);

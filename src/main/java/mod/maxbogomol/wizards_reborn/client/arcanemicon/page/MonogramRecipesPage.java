@@ -3,7 +3,7 @@ package mod.maxbogomol.wizards_reborn.client.arcanemicon.page;
 import mod.maxbogomol.wizards_reborn.WizardsReborn;
 import mod.maxbogomol.wizards_reborn.api.monogram.Monogram;
 import mod.maxbogomol.wizards_reborn.api.monogram.MonogramRecipe;
-import mod.maxbogomol.wizards_reborn.api.monogram.Monograms;
+import mod.maxbogomol.wizards_reborn.api.monogram.MonogramHandler;
 import mod.maxbogomol.wizards_reborn.client.arcanemicon.ArcanemiconGui;
 import mod.maxbogomol.wizards_reborn.client.arcanemicon.Page;
 import net.minecraft.client.Minecraft;
@@ -36,7 +36,7 @@ public class MonogramRecipesPage extends Page {
         int ii = 0;
         boolean right = false;
 
-        for (MonogramRecipe recipe : Monograms.getRecipes().values()) {
+        for (MonogramRecipe recipe : MonogramHandler.getRecipes().values()) {
             if (recipe.getInputs().contains(monogram)) {
                 Monogram extraMonogram = recipe.getInputs().get(1);
                 if (extraMonogram.equals(monogram)) {
@@ -77,7 +77,7 @@ public class MonogramRecipesPage extends Page {
             ii++;
         }
 
-        MonogramRecipe recipe = Monograms.getRecipe(monogram.getId());
+        MonogramRecipe recipe = MonogramHandler.getRecipe(monogram.getId());
         if (recipe != null) {
             if (!renderTooltip) {
                 gui.blit(BACKGROUND, x + 39, y + 7 + (ii * 12), 158, 20, 50, 10);

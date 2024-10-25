@@ -12,7 +12,7 @@ import mod.maxbogomol.fluffy_fur.registry.client.FluffyFurParticles;
 import mod.maxbogomol.wizards_reborn.WizardsReborn;
 import mod.maxbogomol.wizards_reborn.api.arcaneenchantment.ArcaneEnchantment;
 import mod.maxbogomol.wizards_reborn.api.arcaneenchantment.ArcaneEnchantmentUtil;
-import mod.maxbogomol.wizards_reborn.api.arcaneenchantment.ArcaneEnchantments;
+import mod.maxbogomol.wizards_reborn.api.arcaneenchantment.ArcaneEnchantmentHandler;
 import mod.maxbogomol.wizards_reborn.api.wissen.ICooldownBlockEntity;
 import mod.maxbogomol.wizards_reborn.api.wissen.IWissenBlockEntity;
 import mod.maxbogomol.wizards_reborn.client.gui.container.TotemOfDisenchantContainer;
@@ -139,7 +139,7 @@ public class TotemOfDisenchantBlockEntity extends NameableBlockEntityBase implem
                         }
                     }
 
-                    ArcaneEnchantment arcaneEnchantmentP = ArcaneEnchantments.getArcaneEnchantment(arcaneEnchantment);
+                    ArcaneEnchantment arcaneEnchantmentP = ArcaneEnchantmentHandler.getArcaneEnchantment(arcaneEnchantment);
                     if (arcaneEnchantmentP != null && ArcaneEnchantmentUtil.isArcaneItem(itemHandler.getStackInSlot(0))  && !arcaneEnchantmentP.isCurse()) {
                         ArcaneEnchantmentUtil.removeArcaneEnchantment(itemHandler.getStackInSlot(0), arcaneEnchantmentP);
                         addWissen(enchantmentLevel * 1000);

@@ -66,7 +66,7 @@ public class LightTypeStack {
     }
 
     public static LightTypeStack fromTag(CompoundTag tag) {
-        LightType type = LightTypes.getLightType(tag.getString("id"));
+        LightType type = LightTypeHandler.getLightType(tag.getString("id"));
         if (type != null) {
             LightTypeStack stack = new LightTypeStack(type);
             stack.setTick(tag.getInt("tick"));

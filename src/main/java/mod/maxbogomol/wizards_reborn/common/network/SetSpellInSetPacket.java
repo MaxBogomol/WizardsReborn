@@ -2,7 +2,7 @@ package mod.maxbogomol.wizards_reborn.common.network;
 
 import mod.maxbogomol.fluffy_fur.common.network.ServerPacket;
 import mod.maxbogomol.wizards_reborn.api.knowledge.KnowledgeUtil;
-import mod.maxbogomol.wizards_reborn.api.spell.Spells;
+import mod.maxbogomol.wizards_reborn.api.spell.SpellHandler;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraftforge.network.NetworkEvent;
@@ -24,7 +24,7 @@ public class SetSpellInSetPacket extends ServerPacket {
     @Override
     public void execute(Supplier<NetworkEvent.Context> context) {
         ServerPlayer player = context.get().getSender();
-        KnowledgeUtil.addSpellInSet(player, setId, spellId, Spells.getSpell(spell));
+        KnowledgeUtil.addSpellInSet(player, setId, spellId, SpellHandler.getSpell(spell));
     }
 
     public static void register(SimpleChannel instance, int index) {

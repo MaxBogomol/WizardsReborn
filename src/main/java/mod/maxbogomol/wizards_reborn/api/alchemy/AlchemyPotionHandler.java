@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
-public class AlchemyPotions {
+public class AlchemyPotionHandler {
     public static Map<String, AlchemyPotion> alchemyPotions = new HashMap<>();
     public static ArrayList<AlchemyPotion> alchemyPotionList = new ArrayList<>();
 

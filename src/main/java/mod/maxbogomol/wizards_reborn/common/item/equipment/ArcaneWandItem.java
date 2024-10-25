@@ -16,7 +16,7 @@ import mod.maxbogomol.wizards_reborn.api.crystal.CrystalStat;
 import mod.maxbogomol.wizards_reborn.api.crystal.CrystalType;
 import mod.maxbogomol.wizards_reborn.api.knowledge.KnowledgeUtil;
 import mod.maxbogomol.wizards_reborn.api.spell.Spell;
-import mod.maxbogomol.wizards_reborn.api.spell.Spells;
+import mod.maxbogomol.wizards_reborn.api.spell.SpellHandler;
 import mod.maxbogomol.wizards_reborn.api.wissen.IWissenItem;
 import mod.maxbogomol.wizards_reborn.api.wissen.WissenItemType;
 import mod.maxbogomol.wizards_reborn.api.wissen.WissenItemUtil;
@@ -206,7 +206,7 @@ public class ArcaneWandItem extends Item implements IWissenItem, ICustomAnimatio
     public boolean canSpell(ItemStack stack, Player player) {
         if (getCrystal(stack)) {
             if (!getSpell(stack).isEmpty()) {
-                Spell spell = Spells.getSpell(getSpell(stack));
+                Spell spell = SpellHandler.getSpell(getSpell(stack));
                 return (KnowledgeUtil.isSpell(player, spell));
             }
         }
@@ -242,7 +242,7 @@ public class ArcaneWandItem extends Item implements IWissenItem, ICustomAnimatio
             if (getCooldown(stack) <= 0) {
                 setMaxCooldown(stack, 0);
                 if (!getSpell(stack).isEmpty()) {
-                    Spell spell = Spells.getSpell(getSpell(stack));
+                    Spell spell = SpellHandler.getSpell(getSpell(stack));
                     spell.onReload(stack, level, entity, slot, isSelected);
                 }
             }
@@ -259,7 +259,7 @@ public class ArcaneWandItem extends Item implements IWissenItem, ICustomAnimatio
         ItemStack stack = player.getItemInHand(hand);
 
         if (canSpell(stack, player)) {
-            Spell spell = Spells.getSpell(getSpell(stack));
+            Spell spell = SpellHandler.getSpell(getSpell(stack));
             if (canSpell(spell, player, stack) && spell.canSpell(level, spell.getWandContext(player, stack)) && spell.canSpellAir(level, player, hand)) {
                 if (spell.canWandWithCrystal(getItemCrystal(stack))) {
                     spell.useWand(level, player, hand, stack);
@@ -273,7 +273,7 @@ public class ArcaneWandItem extends Item implements IWissenItem, ICustomAnimatio
     @Override
     public InteractionResult onItemUseFirst(ItemStack stack, UseOnContext context) {
         if (canSpell(stack, context.getPlayer())) {
-            Spell spell = Spells.getSpell(getSpell(stack));
+            Spell spell = SpellHandler.getSpell(getSpell(stack));
             if (spell.canWandWithCrystal(getItemCrystal(stack))) {
                 return spell.useWandOn(stack, context);
             }
@@ -284,7 +284,7 @@ public class ArcaneWandItem extends Item implements IWissenItem, ICustomAnimatio
     @Override
     public void onUseTick(Level level, LivingEntity livingEntity, ItemStack stack, int remainingUseDuration) {
         if (canSpell(stack, (Player) livingEntity)) {
-            Spell spell = Spells.getSpell(getSpell(stack));
+            Spell spell = SpellHandler.getSpell(getSpell(stack));
             if (spell.canWandWithCrystal(getItemCrystal(stack))) {
                 spell.useWandTick(level, livingEntity, stack, remainingUseDuration);
             }
@@ -294,7 +294,7 @@ public class ArcaneWandItem extends Item implements IWissenItem, ICustomAnimatio
     @Override
     public void releaseUsing(ItemStack stack, Level level, LivingEntity livingEntity, int timeLeft) {
         if (canSpell(stack, (Player) livingEntity)) {
-            Spell spell = Spells.getSpell(getSpell(stack));
+            Spell spell = SpellHandler.getSpell(getSpell(stack));
             if (spell.canWandWithCrystal(getItemCrystal(stack))) {
                 spell.releaseUsing(stack, level, livingEntity, timeLeft);
             }
@@ -304,7 +304,7 @@ public class ArcaneWandItem extends Item implements IWissenItem, ICustomAnimatio
     @Override
     public ItemStack finishUsingItem(ItemStack stack, Level level, LivingEntity livingEntity) {
         if (canSpell(stack, (Player) livingEntity)) {
-            Spell spell = Spells.getSpell(getSpell(stack));
+            Spell spell = SpellHandler.getSpell(getSpell(stack));
             if (spell.canWandWithCrystal(getItemCrystal(stack))) {
                 spell.finishUsingItem(stack, level, livingEntity);
             }
@@ -316,7 +316,7 @@ public class ArcaneWandItem extends Item implements IWissenItem, ICustomAnimatio
     @Override
     public int getUseDuration(ItemStack stack) {
         if (canSpell(stack)) {
-            Spell spell = Spells.getSpell(getSpell(stack));
+            Spell spell = SpellHandler.getSpell(getSpell(stack));
             return spell.getUseDuration(stack);
         }
 
@@ -330,7 +330,7 @@ public class ArcaneWandItem extends Item implements IWissenItem, ICustomAnimatio
             return UseAnim.NONE;
         }
         if (canSpell(stack, WizardsReborn.proxy.getPlayer())) {
-            Spell spell = Spells.getSpell(getSpell(stack));
+            Spell spell = SpellHandler.getSpell(getSpell(stack));
             return spell.getUseAnimation(stack);
         }
         return UseAnim.NONE;
@@ -340,7 +340,7 @@ public class ArcaneWandItem extends Item implements IWissenItem, ICustomAnimatio
     @Override
     public ItemAnimation getAnimation(ItemStack stack) {
         if (canSpell(stack, WizardsReborn.proxy.getPlayer())) {
-            Spell spell = Spells.getSpell(getSpell(stack));
+            Spell spell = SpellHandler.getSpell(getSpell(stack));
             if (spell.hasCustomAnimation(stack)) {
                 return spell.getAnimation(stack);
             }
@@ -396,7 +396,7 @@ public class ArcaneWandItem extends Item implements IWissenItem, ICustomAnimatio
         list.add(Component.translatable("lore.wizards_reborn.arcane_wand.spell").withStyle(ChatFormatting.GRAY));
 
         if (!getSpell(stack).isEmpty()) {
-            Spell spell = Spells.getSpell(getSpell(stack));
+            Spell spell = SpellHandler.getSpell(getSpell(stack));
             Color color = spell.getColor();
             int packColor = ColorUtil.packColor(255, color.getRed(), color.getGreen(), color.getBlue());
             list.add(Component.literal(" ").append(Component.translatable(spell.getTranslatedName()).withStyle(Style.EMPTY.withColor(packColor))));
@@ -561,7 +561,7 @@ public class ArcaneWandItem extends Item implements IWissenItem, ICustomAnimatio
             Spell spell = null;
 
             if (!getSpell(stack).isEmpty()) {
-                spell = Spells.getSpell(getSpell(stack));
+                spell = SpellHandler.getSpell(getSpell(stack));
             }
 
             int cooldown = getCooldown(stack);

@@ -109,11 +109,8 @@ public class EagleShotArcaneEnchantment extends ArcaneEnchantment {
                         level.playSound(null, player.getX(), player.getY(), player.getZ(), SoundEvents.ANVIL_PLACE, SoundSource.PLAYERS, 0.05f, 2f);
                         if (!level.isClientSide()) {
                             Color color = WizardsRebornArcaneEnchantments.EAGLE_SHOT.getColor();
-                            float r = color.getRed() / 255f;
-                            float g = color.getGreen() / 255f;
-                            float b = color.getBlue() / 255f;
                             //PacketHandler.sendTo(player, new AddScreenshakePacket(0.3f));
-                            WizardsRebornPacketHandler.sendToTracking(level, player.getOnPos(), new EagleShotRayPacket((float) from.x, (float) from.y, (float) from.z, (float) (from.x() - X), (float) (from.y() - Y), (float) (from.z() - Z), (float) movement.x, (float) movement.y, (float) movement.z, r, g, b));
+                            WizardsRebornPacketHandler.sendToTracking(level, player.blockPosition(), new EagleShotRayPacket(from, new Vec3((from.x() - X), (float) (from.y() - Y), (float) (from.z() - Z)), movement.scale(0.1f), color));
                         }
                     }
                 }

@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
-public class Knowledges {
+public class KnowledgeHandler {
     public static Map<String, Knowledge> knowledges = new HashMap<>();
     public static ArrayList<Knowledge> knowledgeList = new ArrayList<>();
 

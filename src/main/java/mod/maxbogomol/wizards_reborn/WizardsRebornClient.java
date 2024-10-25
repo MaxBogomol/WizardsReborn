@@ -10,6 +10,7 @@ import mod.maxbogomol.wizards_reborn.client.event.KeyBindHandler;
 import mod.maxbogomol.wizards_reborn.client.gui.TooltipEventHandler;
 import mod.maxbogomol.wizards_reborn.common.item.equipment.WissenWandItem;
 import mod.maxbogomol.wizards_reborn.registry.client.WizardsRebornModels;
+import mod.maxbogomol.wizards_reborn.registry.common.item.WizardsRebornCreativeTabs;
 import mod.maxbogomol.wizards_reborn.registry.common.item.WizardsRebornItems;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
@@ -17,6 +18,7 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
+import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 
 import java.awt.*;
 import java.util.Random;
@@ -26,6 +28,7 @@ public class WizardsRebornClient {
 
     public static class ClientOnly {
         public static void clientInit() {
+            IEventBus eventBus = FMLJavaModLoadingContext.get().getModEventBus();
             IEventBus forgeBus = MinecraftForge.EVENT_BUS;
             WizardsRebornModels.setupWandCrystalsModels();
             WissenWandItem.setupTooltips();
@@ -37,6 +40,8 @@ public class WizardsRebornClient {
             forgeBus.addListener(KeyBindHandler::onKey);
             forgeBus.addListener(KeyBindHandler::onMouseKey);
             forgeBus.register(new ClientEvents());
+
+            eventBus.addListener(WizardsRebornCreativeTabs::addCreativeTabContent);
         }
     }
 

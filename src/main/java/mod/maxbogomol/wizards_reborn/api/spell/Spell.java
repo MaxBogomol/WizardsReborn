@@ -5,7 +5,7 @@ import mod.maxbogomol.fluffy_fur.client.animation.ItemAnimation;
 import mod.maxbogomol.wizards_reborn.WizardsReborn;
 import mod.maxbogomol.wizards_reborn.api.crystal.CrystalType;
 import mod.maxbogomol.wizards_reborn.api.crystal.CrystalUtil;
-import mod.maxbogomol.wizards_reborn.api.crystal.Crystals;
+import mod.maxbogomol.wizards_reborn.api.crystal.CrystalHandler;
 import mod.maxbogomol.wizards_reborn.api.knowledge.Research;
 import mod.maxbogomol.wizards_reborn.api.wissen.WissenUtil;
 import mod.maxbogomol.wizards_reborn.common.entity.SpellEntity;
@@ -93,7 +93,7 @@ public class Spell {
     }
 
     public void addAllCrystalType() {
-        crystalTypes.addAll(Crystals.getTypes());
+        crystalTypes.addAll(CrystalHandler.getTypes());
     }
 
     public int getCooldown() {

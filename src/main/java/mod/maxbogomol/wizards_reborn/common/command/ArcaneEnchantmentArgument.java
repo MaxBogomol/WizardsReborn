@@ -8,7 +8,7 @@ import com.mojang.brigadier.exceptions.DynamicCommandExceptionType;
 import com.mojang.brigadier.suggestion.Suggestions;
 import com.mojang.brigadier.suggestion.SuggestionsBuilder;
 import mod.maxbogomol.wizards_reborn.api.arcaneenchantment.ArcaneEnchantment;
-import mod.maxbogomol.wizards_reborn.api.arcaneenchantment.ArcaneEnchantments;
+import mod.maxbogomol.wizards_reborn.api.arcaneenchantment.ArcaneEnchantmentHandler;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 
@@ -23,7 +23,7 @@ public class ArcaneEnchantmentArgument implements ArgumentType<ArcaneEnchantment
 
     @Override
     public <S> CompletableFuture<Suggestions> listSuggestions(final CommandContext<S> context, final SuggestionsBuilder builder) {
-        for (ArcaneEnchantment e : ArcaneEnchantments.getArcaneEnchantments())
+        for (ArcaneEnchantment e : ArcaneEnchantmentHandler.getArcaneEnchantments())
             if (e.getId().startsWith(builder.getRemainingLowerCase()))
                 builder.suggest(e.getId());
         return builder.buildFuture();
@@ -32,7 +32,7 @@ public class ArcaneEnchantmentArgument implements ArgumentType<ArcaneEnchantment
     @Override
     public ArcaneEnchantment parse(StringReader reader) throws CommandSyntaxException {
         ResourceLocation rl = ResourceLocation.read(reader);
-        ArcaneEnchantment e = ArcaneEnchantments.getArcaneEnchantment(rl.toString());
+        ArcaneEnchantment e = ArcaneEnchantmentHandler.getArcaneEnchantment(rl.toString());
         if (e == null) throw UNKNOWN.create(rl.toString());
         return e;
     }

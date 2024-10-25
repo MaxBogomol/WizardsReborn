@@ -4,7 +4,7 @@ import mod.maxbogomol.wizards_reborn.WizardsReborn;
 import mod.maxbogomol.wizards_reborn.api.monogram.Monogram;
 import mod.maxbogomol.wizards_reborn.api.monogram.MonogramMapEntry;
 import mod.maxbogomol.wizards_reborn.api.monogram.MonogramRecipe;
-import mod.maxbogomol.wizards_reborn.api.monogram.Monograms;
+import mod.maxbogomol.wizards_reborn.api.monogram.MonogramHandler;
 import mod.maxbogomol.wizards_reborn.api.spell.Spell;
 import mod.maxbogomol.wizards_reborn.client.arcanemicon.ArcanemiconChapters;
 import mod.maxbogomol.wizards_reborn.client.arcanemicon.ArcanemiconGui;
@@ -327,7 +327,7 @@ public class ResearchPage extends Page {
         int i = 0;
         for (MonogramMapEntry monogramMapEntry : map) {
             monogramMapEntry.setActive(false);
-            for (MonogramRecipe recipe : Monograms.getRecipes().values()) {
+            for (MonogramRecipe recipe : MonogramHandler.getRecipes().values()) {
                 boolean set = false;
                 int ii = (i + 1) % map.size();
                 if (ii <= -1) {
@@ -342,7 +342,7 @@ public class ResearchPage extends Page {
                 if (recipe.getInputs().contains(map.get(ii).getMonogram()) && recipe.getInputs().contains(monogramMapEntry.getMonogram())) {
                     set = true;
                 }
-                MonogramRecipe addRecipe = Monograms.getRecipe(monogramMapEntry.getMonogram().getId());
+                MonogramRecipe addRecipe = MonogramHandler.getRecipe(monogramMapEntry.getMonogram().getId());
                 if (addRecipe != null) {
                     if (addRecipe.getInputs().contains(map.get(ii).getMonogram())) {
                         set = true;
@@ -365,7 +365,7 @@ public class ResearchPage extends Page {
 
     public boolean isCanConnect(Monogram monogram) {
         boolean set = false;
-        for (MonogramRecipe recipe : Monograms.getRecipes().values()) {
+        for (MonogramRecipe recipe : MonogramHandler.getRecipes().values()) {
             set = false;
 
             if (recipe.getInputs().contains(currentMonogram)) {
@@ -376,9 +376,9 @@ public class ResearchPage extends Page {
             if (recipe.getInputs().contains(monogram) && recipe.getInputs().contains(currentMonogram)) {
                 set = true;
             }
-            MonogramRecipe addRecipe = Monograms.getRecipe(currentMonogram.getId());
+            MonogramRecipe addRecipe = MonogramHandler.getRecipe(currentMonogram.getId());
             if (addRecipe != null) {
-                if (Monograms.getRecipe(currentMonogram.getId()).getInputs().contains(monogram)) {
+                if (MonogramHandler.getRecipe(currentMonogram.getId()).getInputs().contains(monogram)) {
                     set = true;
                 }
             }

@@ -3,7 +3,7 @@ package mod.maxbogomol.wizards_reborn.common.event;
 import mod.maxbogomol.wizards_reborn.WizardsReborn;
 import mod.maxbogomol.wizards_reborn.api.arcaneenchantment.ArcaneEnchantmentUtil;
 import mod.maxbogomol.wizards_reborn.api.knowledge.Knowledge;
-import mod.maxbogomol.wizards_reborn.api.knowledge.Knowledges;
+import mod.maxbogomol.wizards_reborn.api.knowledge.KnowledgeHandler;
 import mod.maxbogomol.wizards_reborn.common.capability.ArrowModifierProvider;
 import mod.maxbogomol.wizards_reborn.common.capability.IKnowledge;
 import mod.maxbogomol.wizards_reborn.common.capability.KnowledgeProvider;
@@ -67,7 +67,7 @@ public class Events {
         if (!event.player.level().isClientSide()) {
             Player player = event.player;
 
-            for (Knowledge knowledge : Knowledges.getKnowledges()) {
+            for (Knowledge knowledge : KnowledgeHandler.getKnowledges()) {
                 knowledge.addTick(player);
             }
 

@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
-public class LightTypes {
+public class LightTypeHandler {
     public static Map<String, LightType> lightTypes = new HashMap<>();
     public static ArrayList<LightType> lightTypesList = new ArrayList<>();
 

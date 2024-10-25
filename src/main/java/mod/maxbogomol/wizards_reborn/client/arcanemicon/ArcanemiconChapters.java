@@ -5,10 +5,10 @@ import mod.maxbogomol.fluffy_fur.util.IntegrationUtil;
 import mod.maxbogomol.wizards_reborn.WizardsReborn;
 import mod.maxbogomol.wizards_reborn.api.alchemy.AlchemyPotion;
 import mod.maxbogomol.wizards_reborn.api.alchemy.AlchemyPotionUtil;
-import mod.maxbogomol.wizards_reborn.api.alchemy.AlchemyPotions;
+import mod.maxbogomol.wizards_reborn.api.alchemy.AlchemyPotionHandler;
 import mod.maxbogomol.wizards_reborn.api.crystalritual.CrystalRitual;
 import mod.maxbogomol.wizards_reborn.api.crystalritual.CrystalRitualUtil;
-import mod.maxbogomol.wizards_reborn.api.crystalritual.CrystalRituals;
+import mod.maxbogomol.wizards_reborn.api.crystalritual.CrystalRitualHandler;
 import mod.maxbogomol.wizards_reborn.client.arcanemicon.index.*;
 import mod.maxbogomol.wizards_reborn.client.arcanemicon.integration.CrushingPage;
 import mod.maxbogomol.wizards_reborn.client.arcanemicon.page.*;
@@ -2516,7 +2516,7 @@ public class ArcanemiconChapters {
 
         Map<CrystalRitual, ItemStack> crystalRituals = new HashMap<CrystalRitual, ItemStack>();
 
-        for (CrystalRitual ritual : CrystalRituals.getCrystalRituals()) {
+        for (CrystalRitual ritual : CrystalRitualHandler.getCrystalRituals()) {
             ItemStack stack = new ItemStack(WizardsRebornItems.RUNIC_WISESTONE_PLATE.get());
             CrystalRitualUtil.setCrystalRitual(stack, ritual);
             crystalRituals.put(ritual, stack);
@@ -3378,7 +3378,7 @@ public class ArcanemiconChapters {
         Map<AlchemyPotion, ItemStack> vialPotions = new HashMap<AlchemyPotion, ItemStack>();
         Map<AlchemyPotion, ItemStack> flaskPotions = new HashMap<AlchemyPotion, ItemStack>();
 
-        for (AlchemyPotion potion : AlchemyPotions.getAlchemyPotions()) {
+        for (AlchemyPotion potion : AlchemyPotionHandler.getAlchemyPotions()) {
             ItemStack stack = new ItemStack(WizardsRebornItems.ALCHEMY_VIAL_POTION.get());
             AlchemyPotionUtil.setPotion(stack, potion);
             vialPotions.put(potion, stack);

@@ -2,7 +2,7 @@ package mod.maxbogomol.wizards_reborn.common.item.equipment;
 
 import mod.maxbogomol.wizards_reborn.api.knowledge.Knowledge;
 import mod.maxbogomol.wizards_reborn.api.knowledge.KnowledgeUtil;
-import mod.maxbogomol.wizards_reborn.api.knowledge.Knowledges;
+import mod.maxbogomol.wizards_reborn.api.knowledge.KnowledgeHandler;
 import net.minecraft.ChatFormatting;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.ListTag;
@@ -37,7 +37,7 @@ public class KnowledgeSrollItem extends Item {
             CompoundTag nbt = stack.getOrCreateTag();
             if (!nbt.contains("knowledges")) {
                 ListTag knowledges = new ListTag();
-                for (Knowledge knowledge : Knowledges.getKnowledges()) {
+                for (Knowledge knowledge : KnowledgeHandler.getKnowledges()) {
                     if (KnowledgeUtil.isKnowledge(player, knowledge)) {
                         knowledges.add(StringTag.valueOf(knowledge.getId()));
                     }
@@ -48,7 +48,7 @@ public class KnowledgeSrollItem extends Item {
             } else {
                 ListTag knowledges = nbt.getList("knowledges", Tag.TAG_STRING);
                 for (int i = 0; i < knowledges.size(); i++) {
-                    Knowledge knowledge = Knowledges.getKnowledge(knowledges.getString(i));
+                    Knowledge knowledge = KnowledgeHandler.getKnowledge(knowledges.getString(i));
                     if (knowledge != null) KnowledgeUtil.addKnowledgeFromScroll(player, knowledge);
                 }
 

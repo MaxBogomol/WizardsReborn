@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
-public class ArcaneEnchantments {
+public class ArcaneEnchantmentHandler {
     public static Map<String, ArcaneEnchantment> arcaneEnchantments = new HashMap<>();
     public static ArrayList<ArcaneEnchantment> arcaneEnchantmentList = new ArrayList<>();
 

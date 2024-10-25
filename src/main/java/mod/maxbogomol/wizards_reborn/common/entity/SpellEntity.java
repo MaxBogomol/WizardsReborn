@@ -3,7 +3,7 @@ package mod.maxbogomol.wizards_reborn.common.entity;
 import mod.maxbogomol.wizards_reborn.api.spell.Spell;
 import mod.maxbogomol.wizards_reborn.api.spell.SpellComponent;
 import mod.maxbogomol.wizards_reborn.api.spell.SpellContext;
-import mod.maxbogomol.wizards_reborn.api.spell.Spells;
+import mod.maxbogomol.wizards_reborn.api.spell.SpellHandler;
 import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.protocol.Packet;
@@ -125,7 +125,7 @@ public class SpellEntity extends Entity {
     }
 
     public Spell getSpell() {
-        return Spells.getSpell(getEntityData().get(spellId));
+        return SpellHandler.getSpell(getEntityData().get(spellId));
     }
 
     public void remove() {

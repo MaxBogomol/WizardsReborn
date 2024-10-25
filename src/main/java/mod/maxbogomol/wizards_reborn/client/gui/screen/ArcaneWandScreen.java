@@ -8,10 +8,10 @@ import mod.maxbogomol.fluffy_fur.registry.client.FluffyFurRenderTypes;
 import mod.maxbogomol.fluffy_fur.util.RenderUtil;
 import mod.maxbogomol.wizards_reborn.WizardsReborn;
 import mod.maxbogomol.wizards_reborn.api.crystal.CrystalType;
-import mod.maxbogomol.wizards_reborn.api.crystal.Crystals;
+import mod.maxbogomol.wizards_reborn.api.crystal.CrystalHandler;
 import mod.maxbogomol.wizards_reborn.api.knowledge.KnowledgeUtil;
 import mod.maxbogomol.wizards_reborn.api.spell.Spell;
-import mod.maxbogomol.wizards_reborn.api.spell.Spells;
+import mod.maxbogomol.wizards_reborn.api.spell.SpellHandler;
 import mod.maxbogomol.wizards_reborn.common.item.CrystalItem;
 import mod.maxbogomol.wizards_reborn.common.item.equipment.ArcaneWandItem;
 import mod.maxbogomol.wizards_reborn.common.item.equipment.curio.CrystalBagItem;
@@ -130,7 +130,7 @@ public class ArcaneWandScreen extends Screen {
             int h = 85;
 
             if (!isSelectedCrystalType) {
-                for (CrystalType type : Crystals.getTypes()) {
+                for (CrystalType type : CrystalHandler.getTypes()) {
                     if (mouseX >= x - 64 && mouseY >= y - h + (i * 34) + 2 && mouseX <= x - 64 + 128 && mouseY <= y - h + (i * 34) + 32 - 2) {
                         selectedCrystalType = type;
                         isSelectedCrystalType = true;
@@ -303,7 +303,7 @@ public class ArcaneWandScreen extends Screen {
                         CompoundTag nbt = getWand().getTag();
                         if (nbt.contains("spell")) {
                             if (nbt.getString("spell") != "") {
-                                Spell spell = Spells.getSpell(nbt.getString("spell"));
+                                Spell spell = SpellHandler.getSpell(nbt.getString("spell"));
                                 if (KnowledgeUtil.isSpell(Minecraft.getInstance().player, spell)) {
                                     color = spell.getColor();
                                     icon = spell.getIcon();
@@ -456,13 +456,13 @@ public class ArcaneWandScreen extends Screen {
                 CompoundTag nbt = getWand().getTag();
                 if (nbt.contains("spell")) {
                     if (!nbt.getString("spell").equals("")) {
-                        spellWand = Spells.getSpell(nbt.getString("spell"));
+                        spellWand = SpellHandler.getSpell(nbt.getString("spell"));
                     }
                 }
             }
 
             if (!isSelectedCrystalType) {
-                for (CrystalType type : Crystals.getTypes()) {
+                for (CrystalType type : CrystalHandler.getTypes()) {
                     int w = 0;
                     if (mouseX >= x - 64 && mouseY >= y - h + (i * 34) + 2 && mouseX <= x - 64 + 128 && mouseY <= y - h + (i * 34) + 32 - 2) {
                         w = 16;
@@ -738,7 +738,7 @@ public class ArcaneWandScreen extends Screen {
                     CompoundTag nbt = getWand().getTag();
                     if (nbt.contains("spell")) {
                         if (nbt.getString("spell") != "") {
-                            spellWand = Spells.getSpell(nbt.getString("spell"));
+                            spellWand = SpellHandler.getSpell(nbt.getString("spell"));
                         }
                     }
                 }
@@ -1009,11 +1009,11 @@ public class ArcaneWandScreen extends Screen {
     }
 
     public static void initSpells() {
-        for (CrystalType type : Crystals.getTypes()) {
+        for (CrystalType type : CrystalHandler.getTypes()) {
             spellsList.put(type, new ArrayList<Spell>());
         }
 
-        for (Spell spell : Spells.getSpells()) {
+        for (Spell spell : SpellHandler.getSpells()) {
             for (CrystalType type : spell.getCrystalTypes()) {
                 boolean add = true;
                 if (spell.isSecret()) add = (KnowledgeUtil.isSpell(Minecraft.getInstance().player, spell));

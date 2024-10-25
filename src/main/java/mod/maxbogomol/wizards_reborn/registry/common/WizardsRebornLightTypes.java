@@ -2,7 +2,7 @@ package mod.maxbogomol.wizards_reborn.registry.common;
 
 import mod.maxbogomol.wizards_reborn.WizardsReborn;
 import mod.maxbogomol.wizards_reborn.api.light.LightType;
-import mod.maxbogomol.wizards_reborn.api.light.LightTypes;
+import mod.maxbogomol.wizards_reborn.api.light.LightTypeHandler;
 import mod.maxbogomol.wizards_reborn.common.lighttype.*;
 
 public class WizardsRebornLightTypes {
@@ -15,11 +15,11 @@ public class WizardsRebornLightTypes {
     public static final LightType CRYSTAL_GROWTH_ACCELERATION = new CrystalGrowthAccelerationLightType(WizardsReborn.MOD_ID+":crystal_growth_acceleration");
 
     public static void register() {
-        LightTypes.register(EARTH);
-        LightTypes.register(WATER);
-        LightTypes.register(AIR);
-        LightTypes.register(FIRE);
-        LightTypes.register(VOID);
-        LightTypes.register(CRYSTAL_GROWTH_ACCELERATION);
+        LightTypeHandler.register(EARTH);
+        LightTypeHandler.register(WATER);
+        LightTypeHandler.register(AIR);
+        LightTypeHandler.register(FIRE);
+        LightTypeHandler.register(VOID);
+        LightTypeHandler.register(CRYSTAL_GROWTH_ACCELERATION);
     }
 }

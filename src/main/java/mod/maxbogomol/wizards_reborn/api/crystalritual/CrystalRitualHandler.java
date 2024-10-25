@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
-public class CrystalRituals {
+public class CrystalRitualHandler {
     public static Map<String, CrystalRitual> crystalRituals = new HashMap<>();
     public static ArrayList<CrystalRitual> crystalRitualsList = new ArrayList<>();
 

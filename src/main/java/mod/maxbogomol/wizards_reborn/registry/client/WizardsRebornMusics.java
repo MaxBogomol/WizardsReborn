@@ -14,15 +14,15 @@ import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 
 public class WizardsRebornMusics {
-    public static final Music REBORN_MUSIC = new Music(WizardsRebornSounds.MUSIC_DISC_REBORN.getHolder().get(), 20, 600, true);
-    public static final Music MOR_MUSIC = new Music(WizardsRebornSounds.MUSIC_DISC_MOR.getHolder().get(), 3600, 9600, false);
-    public static final Music SHIMMER_MUSIC = new Music(WizardsRebornSounds.MUSIC_DISC_SHIMMER.getHolder().get(), 3600, 9600, false);
+    public static final Music REBORN = new Music(WizardsRebornSounds.MUSIC_DISC_REBORN.getHolder().get(), 20, 600, true);
+    public static final Music MOR = new Music(WizardsRebornSounds.MUSIC_DISC_MOR.getHolder().get(), 3600, 9600, false);
+    public static final Music SHIMMER = new Music(WizardsRebornSounds.MUSIC_DISC_SHIMMER.getHolder().get(), 3600, 9600, false);
 
     @Mod.EventBusSubscriber(modid = WizardsReborn.MOD_ID, bus = Mod.EventBusSubscriber.Bus.MOD, value = Dist.CLIENT)
     public static class ClientRegistryEvents {
         @SubscribeEvent
         public static void registerMusicModifiers(FMLClientSetupEvent event) {
-            MusicHandler.register(new MusicModifier.Panorama(WizardsRebornMusics.REBORN_MUSIC, WizardsRebornClient.MAGICAL_ORIGINS_PANORAMA));
+            MusicHandler.register(new MusicModifier.Panorama(REBORN, WizardsRebornClient.MAGICAL_ORIGINS_PANORAMA));
             MusicHandler.register(new MusicModifier() {
                 public boolean isCanPlay(Music defaultMisic, Minecraft minecraft) {
                     if (isBiome(Tags.Biomes.IS_SWAMP, minecraft)) {
@@ -32,7 +32,7 @@ public class WizardsRebornMusics {
                 }
 
                 public Music play(Music defaultMisic, Minecraft minecraft) {
-                    return WizardsRebornMusics.MOR_MUSIC;
+                    return MOR;
                 }
             });
             MusicHandler.register(new MusicModifier() {
@@ -46,7 +46,7 @@ public class WizardsRebornMusics {
                 }
 
                 public Music play(Music defaultMisic, Minecraft minecraft) {
-                    return WizardsRebornMusics.SHIMMER_MUSIC;
+                    return SHIMMER;
                 }
             });
         }

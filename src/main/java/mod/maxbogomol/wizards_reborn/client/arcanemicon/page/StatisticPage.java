@@ -5,7 +5,7 @@ import mod.maxbogomol.wizards_reborn.WizardsReborn;
 import mod.maxbogomol.wizards_reborn.api.knowledge.Knowledge;
 import mod.maxbogomol.wizards_reborn.api.knowledge.KnowledgeUtil;
 import mod.maxbogomol.wizards_reborn.api.spell.Spell;
-import mod.maxbogomol.wizards_reborn.api.spell.Spells;
+import mod.maxbogomol.wizards_reborn.api.spell.SpellHandler;
 import mod.maxbogomol.wizards_reborn.api.wissen.WissenUtil;
 import mod.maxbogomol.wizards_reborn.client.arcanemicon.ArcanemiconGui;
 import mod.maxbogomol.wizards_reborn.client.arcanemicon.Page;
@@ -60,7 +60,7 @@ public class StatisticPage extends Page {
                 totalPoints += knowledge.getPoints();
             }
         }
-        for (Spell spell : Spells.getSpells()) {
+        for (Spell spell : SpellHandler.getSpells()) {
             if (KnowledgeUtil.isSpell(Minecraft.getInstance().player, spell)) {
                 currentSpells++;
             }

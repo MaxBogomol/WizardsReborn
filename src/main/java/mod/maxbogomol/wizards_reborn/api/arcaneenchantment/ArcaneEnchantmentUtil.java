@@ -30,7 +30,7 @@ public class ArcaneEnchantmentUtil {
 
     public static ArcaneEnchantment deserializeArcaneEnchantment(JsonObject json) {
         String enchantmentName = GsonHelper.getAsString(json, "arcane_enchantment");
-        ArcaneEnchantment enchantment = ArcaneEnchantments.getArcaneEnchantment(enchantmentName);
+        ArcaneEnchantment enchantment = ArcaneEnchantmentHandler.getArcaneEnchantment(enchantmentName);
         if (enchantment == null) {
             throw new JsonSyntaxException("Unknown arcane enchantment " + enchantmentName);
         }
@@ -38,7 +38,7 @@ public class ArcaneEnchantmentUtil {
     }
 
     public static ArcaneEnchantment arcaneEnchantmentFromNetwork(FriendlyByteBuf buffer) {
-        return !buffer.readBoolean() ? null : ArcaneEnchantments.getArcaneEnchantment(buffer.readComponent().getString());
+        return !buffer.readBoolean() ? null : ArcaneEnchantmentHandler.getArcaneEnchantment(buffer.readComponent().getString());
     }
 
     public static void arcaneEnchantmentToNetwork(ArcaneEnchantment enchantment, FriendlyByteBuf buffer) {
@@ -68,7 +68,7 @@ public class ArcaneEnchantmentUtil {
         CompoundTag nbt = stack.getTag();
         CompoundTag nbtEnchantments = nbt.getCompound("arcaneEnchantments");
 
-        for (ArcaneEnchantment arcaneEnchantment : ArcaneEnchantments.getArcaneEnchantments()) {
+        for (ArcaneEnchantment arcaneEnchantment : ArcaneEnchantmentHandler.getArcaneEnchantments()) {
             if (nbtEnchantments.contains(arcaneEnchantment.getId())) {
                 map.put(arcaneEnchantment, nbtEnchantments.getInt(arcaneEnchantment.getId()));
             }

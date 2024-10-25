@@ -1,7 +1,7 @@
 package mod.maxbogomol.wizards_reborn.api.knowledge;
 
 import mod.maxbogomol.wizards_reborn.api.spell.Spell;
-import mod.maxbogomol.wizards_reborn.api.spell.Spells;
+import mod.maxbogomol.wizards_reborn.api.spell.SpellHandler;
 import mod.maxbogomol.wizards_reborn.common.capability.IKnowledge;
 import mod.maxbogomol.wizards_reborn.common.network.KnowledgeToastPacket;
 import mod.maxbogomol.wizards_reborn.common.network.KnowledgeUpdatePacket;
@@ -55,7 +55,7 @@ public class KnowledgeUtil {
         entity.getCapability(IKnowledge.INSTANCE, null).ifPresent((k) -> {
             k.addAllKnowledge();
 
-            for (Knowledge knowledge : Knowledges.getKnowledges()) {
+            for (Knowledge knowledge : KnowledgeHandler.getKnowledges()) {
                 if (knowledge.hasAllAward()) {
                     knowledge.award((Player) entity);
                 }
@@ -250,7 +250,7 @@ public class KnowledgeUtil {
     public static int getKnowledgePoints(Entity entity) {
         int points = 0;
 
-        for (Knowledge knowledge : Knowledges.getKnowledges()) {
+        for (Knowledge knowledge : KnowledgeHandler.getKnowledges()) {
             if (isKnowledge(entity, knowledge)) {
                 points = points + knowledge.getPoints();
             }
@@ -262,7 +262,7 @@ public class KnowledgeUtil {
     public static int getSpellPoints(Entity entity) {
         int points = 0;
 
-        for (Spell spell : Spells.getSpells()) {
+        for (Spell spell : SpellHandler.getSpells()) {
             if (isSpell(entity, spell)) {
                 points = points + spell.getPoints();
             }
@@ -274,7 +274,7 @@ public class KnowledgeUtil {
     public static int getAllKnowledgePoints() {
         int points = 0;
 
-        for (Knowledge knowledge : Knowledges.getKnowledges()) {
+        for (Knowledge knowledge : KnowledgeHandler.getKnowledges()) {
             points = points + knowledge.getPoints();
         }
 
@@ -284,7 +284,7 @@ public class KnowledgeUtil {
     public static int getAllSpellPoints() {
         int points = 0;
 
-        for (Spell spell : Spells.getSpells()) {
+        for (Spell spell : SpellHandler.getSpells()) {
             points = points + spell.getPoints();
         }
 

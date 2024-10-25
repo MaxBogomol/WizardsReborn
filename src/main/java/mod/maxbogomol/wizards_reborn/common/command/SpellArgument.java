@@ -8,7 +8,7 @@ import com.mojang.brigadier.exceptions.DynamicCommandExceptionType;
 import com.mojang.brigadier.suggestion.Suggestions;
 import com.mojang.brigadier.suggestion.SuggestionsBuilder;
 import mod.maxbogomol.wizards_reborn.api.spell.Spell;
-import mod.maxbogomol.wizards_reborn.api.spell.Spells;
+import mod.maxbogomol.wizards_reborn.api.spell.SpellHandler;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 
@@ -23,7 +23,7 @@ public class SpellArgument implements ArgumentType<Spell> {
 
     @Override
     public <S> CompletableFuture<Suggestions> listSuggestions(final CommandContext<S> context, final SuggestionsBuilder builder) {
-        for (Spell s : Spells.getSpells())
+        for (Spell s : SpellHandler.getSpells())
             if (s.getId().startsWith(builder.getRemainingLowerCase()))
                 builder.suggest(s.getId());
         return builder.buildFuture();
@@ -32,7 +32,7 @@ public class SpellArgument implements ArgumentType<Spell> {
     @Override
     public Spell parse(StringReader reader) throws CommandSyntaxException {
         ResourceLocation rl = ResourceLocation.read(reader);
-        Spell s = Spells.getSpell(rl.toString());
+        Spell s = SpellHandler.getSpell(rl.toString());
         if (s == null) throw UNKNOWN.create(rl.toString());
         return s;
     }

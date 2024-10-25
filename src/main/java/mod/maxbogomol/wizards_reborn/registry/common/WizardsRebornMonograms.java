@@ -3,7 +3,7 @@ package mod.maxbogomol.wizards_reborn.registry.common;
 import mod.maxbogomol.wizards_reborn.WizardsReborn;
 import mod.maxbogomol.wizards_reborn.api.monogram.Monogram;
 import mod.maxbogomol.wizards_reborn.api.monogram.MonogramRecipe;
-import mod.maxbogomol.wizards_reborn.api.monogram.Monograms;
+import mod.maxbogomol.wizards_reborn.api.monogram.MonogramHandler;
 
 import java.awt.*;
 
@@ -30,42 +30,42 @@ public class WizardsRebornMonograms {
     public static Monogram UNIVERSUM = new Monogram(WizardsReborn.MOD_ID+":universum", new Color(120, 14, 212));
 
     public static void register() {
-        Monograms.register(LUNAM);
-        Monograms.register(VITA);
-        Monograms.register(SOLEM);
-        Monograms.register(MORS);
-        Monograms.register(MIRACULUM);
-        Monograms.register(TEMPUS);
-        Monograms.register(STATERA);
-        Monograms.register(ECLIPSIS);
-        Monograms.register(SICCITAS);
-        Monograms.register(SOLSTITIUM);
-        Monograms.register(FAMES);
-        Monograms.register(RENAISSANCE);
-        Monograms.register(BELLUM);
-        Monograms.register(LUX);
-        Monograms.register(KARA);
-        Monograms.register(DEGRADATIO);
-        Monograms.register(PRAEDICTIONEM);
-        Monograms.register(EVOLUTIONIS);
-        Monograms.register(TENEBRIS);
-        Monograms.register(UNIVERSUM);
+        MonogramHandler.register(LUNAM);
+        MonogramHandler.register(VITA);
+        MonogramHandler.register(SOLEM);
+        MonogramHandler.register(MORS);
+        MonogramHandler.register(MIRACULUM);
+        MonogramHandler.register(TEMPUS);
+        MonogramHandler.register(STATERA);
+        MonogramHandler.register(ECLIPSIS);
+        MonogramHandler.register(SICCITAS);
+        MonogramHandler.register(SOLSTITIUM);
+        MonogramHandler.register(FAMES);
+        MonogramHandler.register(RENAISSANCE);
+        MonogramHandler.register(BELLUM);
+        MonogramHandler.register(LUX);
+        MonogramHandler.register(KARA);
+        MonogramHandler.register(DEGRADATIO);
+        MonogramHandler.register(PRAEDICTIONEM);
+        MonogramHandler.register(EVOLUTIONIS);
+        MonogramHandler.register(TENEBRIS);
+        MonogramHandler.register(UNIVERSUM);
 
-        Monograms.addRecipe(new MonogramRecipe(MIRACULUM, LUNAM, VITA));
-        Monograms.addRecipe(new MonogramRecipe(TEMPUS, LUNAM, SOLEM));
-        Monograms.addRecipe(new MonogramRecipe(STATERA, MORS, VITA));
-        Monograms.addRecipe(new MonogramRecipe(ECLIPSIS, MORS, LUNAM));
-        Monograms.addRecipe(new MonogramRecipe(SICCITAS, SOLEM, MORS));
-        Monograms.addRecipe(new MonogramRecipe(SOLSTITIUM, SOLEM, VITA));
-        Monograms.addRecipe(new MonogramRecipe(FAMES, TEMPUS, SICCITAS));
-        Monograms.addRecipe(new MonogramRecipe(RENAISSANCE, TEMPUS, MORS));
-        Monograms.addRecipe(new MonogramRecipe(BELLUM, SOLSTITIUM, MORS));
-        Monograms.addRecipe(new MonogramRecipe(LUX, VITA, SOLSTITIUM));
-        Monograms.addRecipe(new MonogramRecipe(KARA, SICCITAS, STATERA));
-        Monograms.addRecipe(new MonogramRecipe(DEGRADATIO, VITA, ECLIPSIS));
-        Monograms.addRecipe(new MonogramRecipe(PRAEDICTIONEM, SOLSTITIUM, MIRACULUM));
-        Monograms.addRecipe(new MonogramRecipe(EVOLUTIONIS, VITA, STATERA));
-        Monograms.addRecipe(new MonogramRecipe(TENEBRIS, SOLEM, ECLIPSIS));
-        Monograms.addRecipe(new MonogramRecipe(UNIVERSUM, STATERA, TEMPUS));
+        MonogramHandler.addRecipe(new MonogramRecipe(MIRACULUM, LUNAM, VITA));
+        MonogramHandler.addRecipe(new MonogramRecipe(TEMPUS, LUNAM, SOLEM));
+        MonogramHandler.addRecipe(new MonogramRecipe(STATERA, MORS, VITA));
+        MonogramHandler.addRecipe(new MonogramRecipe(ECLIPSIS, MORS, LUNAM));
+        MonogramHandler.addRecipe(new MonogramRecipe(SICCITAS, SOLEM, MORS));
+        MonogramHandler.addRecipe(new MonogramRecipe(SOLSTITIUM, SOLEM, VITA));
+        MonogramHandler.addRecipe(new MonogramRecipe(FAMES, TEMPUS, SICCITAS));
+        MonogramHandler.addRecipe(new MonogramRecipe(RENAISSANCE, TEMPUS, MORS));
+        MonogramHandler.addRecipe(new MonogramRecipe(BELLUM, SOLSTITIUM, MORS));
+        MonogramHandler.addRecipe(new MonogramRecipe(LUX, VITA, SOLSTITIUM));
+        MonogramHandler.addRecipe(new MonogramRecipe(KARA, SICCITAS, STATERA));
+        MonogramHandler.addRecipe(new MonogramRecipe(DEGRADATIO, VITA, ECLIPSIS));
+        MonogramHandler.addRecipe(new MonogramRecipe(PRAEDICTIONEM, SOLSTITIUM, MIRACULUM));
+        MonogramHandler.addRecipe(new MonogramRecipe(EVOLUTIONIS, VITA, STATERA));
+        MonogramHandler.addRecipe(new MonogramRecipe(TENEBRIS, SOLEM, ECLIPSIS));
+        MonogramHandler.addRecipe(new MonogramRecipe(UNIVERSUM, STATERA, TEMPUS));
     }
 }

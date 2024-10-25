@@ -119,9 +119,8 @@ public final class WizardsRebornPacketHandler extends PacketHandler {
         HANDLER.registerMessage(id++, CrystalCrushingSpellEffectPacket.class, CrystalCrushingSpellEffectPacket::encode, CrystalCrushingSpellEffectPacket::decode, CrystalCrushingSpellEffectPacket::handle);
 
         MagicBladePacket.register(HANDLER, id++);
-        HANDLER.registerMessage(id++, WissenChargeBurstPacket.class, WissenChargeBurstPacket::encode, WissenChargeBurstPacket::decode, WissenChargeBurstPacket::handle);
-        HANDLER.registerMessage(id++, EagleShotRayPacket.class, EagleShotRayPacket::encode, EagleShotRayPacket::decode, EagleShotRayPacket::handle);
-        HANDLER.registerMessage(id++, SplitArrowBurstPacket.class, SplitArrowBurstPacket::encode, SplitArrowBurstPacket::decode, SplitArrowBurstPacket::handle);
+        WissenChargeBurstPacket.register(HANDLER, id++);
+        EagleShotRayPacket.register(HANDLER, id++);
         SplitArrowBurstPacket.register(HANDLER, id++);
     }
 

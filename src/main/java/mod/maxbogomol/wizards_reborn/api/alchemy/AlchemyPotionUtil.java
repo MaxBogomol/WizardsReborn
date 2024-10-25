@@ -15,7 +15,7 @@ public class AlchemyPotionUtil {
 
     public static AlchemyPotion deserializeAlchemyPotion(JsonObject json) {
         String potionName = GsonHelper.getAsString(json, "alchemy_potion");
-        AlchemyPotion potion = AlchemyPotions.getAlchemyPotion(potionName);
+        AlchemyPotion potion = AlchemyPotionHandler.getAlchemyPotion(potionName);
         if (potion == null) {
             throw new JsonSyntaxException("Unknown alchemy potion " + potionName);
         }
@@ -23,7 +23,7 @@ public class AlchemyPotionUtil {
     }
 
     public static AlchemyPotion alchemyPotionFromNetwork(FriendlyByteBuf buffer) {
-        return !buffer.readBoolean() ? WizardsRebornAlchemyPotions.EMPTY : AlchemyPotions.getAlchemyPotion(buffer.readComponent().getString());
+        return !buffer.readBoolean() ? WizardsRebornAlchemyPotions.EMPTY : AlchemyPotionHandler.getAlchemyPotion(buffer.readComponent().getString());
     }
 
     public static void alchemyPotionToNetwork(AlchemyPotion potion, FriendlyByteBuf buffer) {
@@ -38,7 +38,7 @@ public class AlchemyPotionUtil {
     public static AlchemyPotion getPotion(ItemStack stack) {
         CompoundTag nbt = stack.getOrCreateTag();
         if (nbt.contains("alchemyPotion")) {
-            AlchemyPotion potion = AlchemyPotions.getAlchemyPotion(nbt.getString("alchemyPotion"));
+            AlchemyPotion potion = AlchemyPotionHandler.getAlchemyPotion(nbt.getString("alchemyPotion"));
             if (potion != null) {
                 return potion;
             }
@@ -59,7 +59,7 @@ public class AlchemyPotionUtil {
     public static AlchemyPotion getPotionFluid(Fluid fluid) {
         AlchemyPotion potionFluid = WizardsRebornAlchemyPotions.EMPTY;
 
-        for (AlchemyPotion potion : AlchemyPotions.getAlchemyPotions()) {
+        for (AlchemyPotion potion : AlchemyPotionHandler.getAlchemyPotions()) {
             if (potion instanceof FluidAlchemyPotion fluidPotion) {
                 if (fluidPotion.getFluid() == fluid) {
                     potionFluid = fluidPotion;

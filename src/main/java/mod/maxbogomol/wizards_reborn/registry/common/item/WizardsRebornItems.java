@@ -12,7 +12,7 @@ import mod.maxbogomol.fluffy_fur.registry.common.item.FluffyFurItems;
 import mod.maxbogomol.fluffy_fur.util.ColorUtil;
 import mod.maxbogomol.wizards_reborn.WizardsReborn;
 import mod.maxbogomol.wizards_reborn.api.arcaneenchantment.ArcaneEnchantmentTypes;
-import mod.maxbogomol.wizards_reborn.api.crystal.Crystals;
+import mod.maxbogomol.wizards_reborn.api.crystal.CrystalHandler;
 import mod.maxbogomol.wizards_reborn.client.model.item.CollarItemOverrides;
 import mod.maxbogomol.wizards_reborn.client.model.item.DrinksModels;
 import mod.maxbogomol.wizards_reborn.client.model.item.WandCrystalsModels;
@@ -806,35 +806,35 @@ public class WizardsRebornItems {
     }
 
     public static void setupCrystalsItems() {
-        Crystals.addItem(EARTH_CRYSTAL.get());
-        Crystals.addItem(WATER_CRYSTAL.get());
-        Crystals.addItem(AIR_CRYSTAL.get());
-        Crystals.addItem(FIRE_CRYSTAL.get());
-        Crystals.addItem(VOID_CRYSTAL.get());
+        CrystalHandler.addItem(EARTH_CRYSTAL.get());
+        CrystalHandler.addItem(WATER_CRYSTAL.get());
+        CrystalHandler.addItem(AIR_CRYSTAL.get());
+        CrystalHandler.addItem(FIRE_CRYSTAL.get());
+        CrystalHandler.addItem(VOID_CRYSTAL.get());
 
-        Crystals.addItem(FACETED_EARTH_CRYSTAL.get());
-        Crystals.addItem(FACETED_WATER_CRYSTAL.get());
-        Crystals.addItem(FACETED_AIR_CRYSTAL.get());
-        Crystals.addItem(FACETED_FIRE_CRYSTAL.get());
-        Crystals.addItem(FACETED_VOID_CRYSTAL.get());
+        CrystalHandler.addItem(FACETED_EARTH_CRYSTAL.get());
+        CrystalHandler.addItem(FACETED_WATER_CRYSTAL.get());
+        CrystalHandler.addItem(FACETED_AIR_CRYSTAL.get());
+        CrystalHandler.addItem(FACETED_FIRE_CRYSTAL.get());
+        CrystalHandler.addItem(FACETED_VOID_CRYSTAL.get());
 
-        Crystals.addItem(ADVANCED_EARTH_CRYSTAL.get());
-        Crystals.addItem(ADVANCED_WATER_CRYSTAL.get());
-        Crystals.addItem(ADVANCED_AIR_CRYSTAL.get());
-        Crystals.addItem(ADVANCED_FIRE_CRYSTAL.get());
-        Crystals.addItem(ADVANCED_VOID_CRYSTAL.get());
+        CrystalHandler.addItem(ADVANCED_EARTH_CRYSTAL.get());
+        CrystalHandler.addItem(ADVANCED_WATER_CRYSTAL.get());
+        CrystalHandler.addItem(ADVANCED_AIR_CRYSTAL.get());
+        CrystalHandler.addItem(ADVANCED_FIRE_CRYSTAL.get());
+        CrystalHandler.addItem(ADVANCED_VOID_CRYSTAL.get());
 
-        Crystals.addItem(MASTERFUL_EARTH_CRYSTAL.get());
-        Crystals.addItem(MASTERFUL_WATER_CRYSTAL.get());
-        Crystals.addItem(MASTERFUL_AIR_CRYSTAL.get());
-        Crystals.addItem(MASTERFUL_FIRE_CRYSTAL.get());
-        Crystals.addItem(MASTERFUL_VOID_CRYSTAL.get());
+        CrystalHandler.addItem(MASTERFUL_EARTH_CRYSTAL.get());
+        CrystalHandler.addItem(MASTERFUL_WATER_CRYSTAL.get());
+        CrystalHandler.addItem(MASTERFUL_AIR_CRYSTAL.get());
+        CrystalHandler.addItem(MASTERFUL_FIRE_CRYSTAL.get());
+        CrystalHandler.addItem(MASTERFUL_VOID_CRYSTAL.get());
 
-        Crystals.addItem(PURE_EARTH_CRYSTAL.get());
-        Crystals.addItem(PURE_WATER_CRYSTAL.get());
-        Crystals.addItem(PURE_AIR_CRYSTAL.get());
-        Crystals.addItem(PURE_FIRE_CRYSTAL.get());
-        Crystals.addItem(PURE_VOID_CRYSTAL.get());
+        CrystalHandler.addItem(PURE_EARTH_CRYSTAL.get());
+        CrystalHandler.addItem(PURE_WATER_CRYSTAL.get());
+        CrystalHandler.addItem(PURE_AIR_CRYSTAL.get());
+        CrystalHandler.addItem(PURE_FIRE_CRYSTAL.get());
+        CrystalHandler.addItem(PURE_VOID_CRYSTAL.get());
     }
 
     public static void setupDrinksItems() {

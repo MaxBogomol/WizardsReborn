@@ -6,7 +6,7 @@ import mod.maxbogomol.fluffy_fur.client.event.ClientTickHandler;
 import mod.maxbogomol.fluffy_fur.client.render.RenderBuilder;
 import mod.maxbogomol.fluffy_fur.registry.client.FluffyFurRenderTypes;
 import mod.maxbogomol.wizards_reborn.api.crystal.CrystalType;
-import mod.maxbogomol.wizards_reborn.api.crystal.Crystals;
+import mod.maxbogomol.wizards_reborn.api.crystal.CrystalHandler;
 import mod.maxbogomol.wizards_reborn.api.crystalritual.CrystalRitual;
 import mod.maxbogomol.wizards_reborn.api.crystalritual.CrystalRitualUtil;
 import mod.maxbogomol.wizards_reborn.common.block.crystal.CrystalBlockEntity;
@@ -68,8 +68,8 @@ public class RunicPedestalRenderer implements BlockEntityRenderer<RunicPedestalB
                     int i = (int) (ticksAlpha % (20 * types.size()));
                     stack = types.get(i / 20).getCrystal();
                 } else {
-                    int i = (int) (ticksAlpha % (20 * Crystals.getTypes().size()));
-                    stack = Crystals.getTypes().get(i / 20).getCrystal();
+                    int i = (int) (ticksAlpha % (20 * CrystalHandler.getTypes().size()));
+                    stack = CrystalHandler.getTypes().get(i / 20).getCrystal();
                 }
 
                 Color color = ritual.getColor();

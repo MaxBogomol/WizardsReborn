@@ -2,7 +2,7 @@ package mod.maxbogomol.wizards_reborn.common.network;
 
 import mod.maxbogomol.wizards_reborn.api.knowledge.KnowledgeUtil;
 import mod.maxbogomol.wizards_reborn.api.spell.Spell;
-import mod.maxbogomol.wizards_reborn.api.spell.Spells;
+import mod.maxbogomol.wizards_reborn.api.spell.SpellHandler;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerPlayer;
@@ -38,8 +38,8 @@ public class SpellUnlockPacket {
             ctx.get().enqueueWork(() -> {
                 ServerPlayer player = ctx.get().getSender();
 
-                if (Spells.getSpell(msg.spell.getString()) != null) {
-                    KnowledgeUtil.addSpell(player, Spells.getSpell(msg.spell.getString()));
+                if (SpellHandler.getSpell(msg.spell.getString()) != null) {
+                    KnowledgeUtil.addSpell(player, SpellHandler.getSpell(msg.spell.getString()));
                 }
             });
         }

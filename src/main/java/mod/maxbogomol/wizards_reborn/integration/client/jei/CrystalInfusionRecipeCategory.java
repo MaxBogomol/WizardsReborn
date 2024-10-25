@@ -10,7 +10,7 @@ import mezz.jei.api.recipe.RecipeIngredientRole;
 import mezz.jei.api.recipe.RecipeType;
 import mezz.jei.api.recipe.category.IRecipeCategory;
 import mod.maxbogomol.wizards_reborn.WizardsReborn;
-import mod.maxbogomol.wizards_reborn.api.crystal.Crystals;
+import mod.maxbogomol.wizards_reborn.api.crystal.CrystalHandler;
 import mod.maxbogomol.wizards_reborn.api.crystalritual.CrystalRitualUtil;
 import mod.maxbogomol.wizards_reborn.common.recipe.CrystalInfusionRecipe;
 import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornCrystalRituals;
@@ -72,7 +72,7 @@ public class CrystalInfusionRecipeCategory implements IRecipeCategory<CrystalInf
         Vec2 point = new Vec2(35, 0), center = new Vec2(35, 36);
 
         List<ItemStack> items = new ArrayList<>();
-        for (Item item : Crystals.getItems()) {
+        for (Item item : CrystalHandler.getItems()) {
             items.add(new ItemStack(item));
         }
 

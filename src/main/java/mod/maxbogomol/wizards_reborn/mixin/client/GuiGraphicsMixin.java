@@ -3,7 +3,7 @@ package mod.maxbogomol.wizards_reborn.mixin.client;
 import mod.maxbogomol.fluffy_fur.config.FluffyFurClientConfig;
 import mod.maxbogomol.wizards_reborn.api.arcaneenchantment.ArcaneEnchantment;
 import mod.maxbogomol.wizards_reborn.api.arcaneenchantment.ArcaneEnchantmentUtil;
-import mod.maxbogomol.wizards_reborn.api.arcaneenchantment.ArcaneEnchantments;
+import mod.maxbogomol.wizards_reborn.api.arcaneenchantment.ArcaneEnchantmentHandler;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.ItemStack;
@@ -21,7 +21,7 @@ public abstract class GuiGraphicsMixin {
         if (FluffyFurClientConfig.ITEM_GUI_PARTICLE.get()) {
             if (ArcaneEnchantmentUtil.isArcaneItem(pStack)) {
                 int i = 0;
-                for (ArcaneEnchantment enchantment : ArcaneEnchantments.getArcaneEnchantments()) {
+                for (ArcaneEnchantment enchantment : ArcaneEnchantmentHandler.getArcaneEnchantments()) {
                     int levelEnchantment = ArcaneEnchantmentUtil.getArcaneEnchantment(pStack, enchantment);
                     if (levelEnchantment > 0) {
                         GuiGraphics self = (GuiGraphics) ((Object) this);

@@ -11,7 +11,7 @@ import mod.maxbogomol.wizards_reborn.api.knowledge.Knowledge;
 import mod.maxbogomol.wizards_reborn.api.knowledge.KnowledgeUtil;
 import mod.maxbogomol.wizards_reborn.api.monogram.Monogram;
 import mod.maxbogomol.wizards_reborn.api.monogram.MonogramRecipe;
-import mod.maxbogomol.wizards_reborn.api.monogram.Monograms;
+import mod.maxbogomol.wizards_reborn.api.monogram.MonogramHandler;
 import mod.maxbogomol.wizards_reborn.api.spell.Spell;
 import mod.maxbogomol.wizards_reborn.api.wissen.IWissenItem;
 import mod.maxbogomol.wizards_reborn.api.wissen.WissenItemUtil;
@@ -430,18 +430,18 @@ public class WizardsRebornCommand {
         ArrayList<Monogram> maxMap = new ArrayList<Monogram>();
         Map<Monogram, Integer> monograms = new HashMap<Monogram, Integer>();
 
-        map.add(Monograms.getMonograms().get(random.nextInt(0, Monograms.size())));
+        map.add(MonogramHandler.getMonograms().get(random.nextInt(0, MonogramHandler.size())));
 
         for (int i = 0; i < end - 1; i++) {
             boolean add = false;
             for (int iii = 0; iii < 1000; iii++) {
-                Monogram monogram = Monograms.getMonograms().get(random.nextInt(0, Monograms.size()));
+                Monogram monogram = MonogramHandler.getMonograms().get(random.nextInt(0, MonogramHandler.size()));
 
                 if (maxMap.size() > max - 2) {
                     monogram = maxMap.get(random.nextInt(0, maxMap.size()));
                 }
 
-                for (MonogramRecipe recipe : Monograms.getRecipes().values()) {
+                for (MonogramRecipe recipe : MonogramHandler.getRecipes().values()) {
                     int ii = map.size() - 1;
                     Monogram secondMonogram = map.get(ii);
 
@@ -581,7 +581,7 @@ public class WizardsRebornCommand {
             if (recipe.getInputs().contains(secondMonogram) && recipe.getInputs().contains(monogram)) {
                 add = true;
             }
-            MonogramRecipe addRecipe = Monograms.getRecipe(monogram.getId());
+            MonogramRecipe addRecipe = MonogramHandler.getRecipe(monogram.getId());
             if (addRecipe != null) {
                 if (addRecipe.getInputs().contains(secondMonogram)) {
                     add = true;

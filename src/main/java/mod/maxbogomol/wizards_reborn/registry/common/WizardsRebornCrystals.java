@@ -3,7 +3,7 @@ package mod.maxbogomol.wizards_reborn.registry.common;
 import mod.maxbogomol.wizards_reborn.WizardsReborn;
 import mod.maxbogomol.wizards_reborn.api.crystal.CrystalStat;
 import mod.maxbogomol.wizards_reborn.api.crystal.CrystalType;
-import mod.maxbogomol.wizards_reborn.api.crystal.Crystals;
+import mod.maxbogomol.wizards_reborn.api.crystal.CrystalHandler;
 import mod.maxbogomol.wizards_reborn.api.crystal.PolishingType;
 import mod.maxbogomol.wizards_reborn.common.crystal.*;
 
@@ -34,16 +34,16 @@ public class WizardsRebornCrystals {
     public static final CrystalType VOID = new VoidCrystalType(WizardsReborn.MOD_ID+":void");
 
     public static void register() {
-        Crystals.registerPolishing(CRYSTAL);
-        Crystals.registerPolishing(FACETED);
-        Crystals.registerPolishing(ADVANCED);
-        Crystals.registerPolishing(MASTERFUL);
-        Crystals.registerPolishing(PURE);
+        CrystalHandler.registerPolishing(CRYSTAL);
+        CrystalHandler.registerPolishing(FACETED);
+        CrystalHandler.registerPolishing(ADVANCED);
+        CrystalHandler.registerPolishing(MASTERFUL);
+        CrystalHandler.registerPolishing(PURE);
 
-        Crystals.registerType(EARTH);
-        Crystals.registerType(WATER);
-        Crystals.registerType(AIR);
-        Crystals.registerType(FIRE);
-        Crystals.registerType(VOID);
+        CrystalHandler.registerType(EARTH);
+        CrystalHandler.registerType(WATER);
+        CrystalHandler.registerType(AIR);
+        CrystalHandler.registerType(FIRE);
+        CrystalHandler.registerType(VOID);
     }
 }

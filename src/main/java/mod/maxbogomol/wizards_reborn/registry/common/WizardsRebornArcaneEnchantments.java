@@ -2,7 +2,7 @@ package mod.maxbogomol.wizards_reborn.registry.common;
 
 import mod.maxbogomol.wizards_reborn.WizardsReborn;
 import mod.maxbogomol.wizards_reborn.api.arcaneenchantment.ArcaneEnchantment;
-import mod.maxbogomol.wizards_reborn.api.arcaneenchantment.ArcaneEnchantments;
+import mod.maxbogomol.wizards_reborn.api.arcaneenchantment.ArcaneEnchantmentHandler;
 import mod.maxbogomol.wizards_reborn.common.arcaneenchantment.*;
 
 public class WizardsRebornArcaneEnchantments {
@@ -17,14 +17,14 @@ public class WizardsRebornArcaneEnchantments {
     public static ArcaneEnchantment SONAR = new SonarArcaneEnchantment(WizardsReborn.MOD_ID+":sonar", 3);
 
     public static void register() {
-        ArcaneEnchantments.register(WISSEN_MENDING);
-        ArcaneEnchantments.register(LIFE_MENDING);
-        ArcaneEnchantments.register(MAGIC_BLADE);
-        ArcaneEnchantments.register(THROW);
-        ArcaneEnchantments.register(LIFE_ROOTS);
-        ArcaneEnchantments.register(WISSEN_CHARGE);
-        ArcaneEnchantments.register(EAGLE_SHOT);
-        ArcaneEnchantments.register(SPLIT);
-        ArcaneEnchantments.register(SONAR);
+        ArcaneEnchantmentHandler.register(WISSEN_MENDING);
+        ArcaneEnchantmentHandler.register(LIFE_MENDING);
+        ArcaneEnchantmentHandler.register(MAGIC_BLADE);
+        ArcaneEnchantmentHandler.register(THROW);
+        ArcaneEnchantmentHandler.register(LIFE_ROOTS);
+        ArcaneEnchantmentHandler.register(WISSEN_CHARGE);
+        ArcaneEnchantmentHandler.register(EAGLE_SHOT);
+        ArcaneEnchantmentHandler.register(SPLIT);
+        ArcaneEnchantmentHandler.register(SONAR);
     }
 }

@@ -37,7 +37,7 @@ public class LightType {
     }
 
     public static Component getColoredName(String id) {
-        LightType lightType = LightTypes.getLightType(id);
+        LightType lightType = LightTypeHandler.getLightType(id);
         if (lightType != null) {
             return lightType.getColoredName();
         }

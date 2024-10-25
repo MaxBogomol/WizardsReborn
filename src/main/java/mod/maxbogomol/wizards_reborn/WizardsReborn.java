@@ -9,7 +9,7 @@ import mod.maxbogomol.wizards_reborn.common.capability.IArrowModifier;
 import mod.maxbogomol.wizards_reborn.common.capability.IKnowledge;
 import mod.maxbogomol.wizards_reborn.config.WizardsRebornConfig;
 import mod.maxbogomol.wizards_reborn.config.WizardsRebornServerConfig;
-import mod.maxbogomol.wizards_reborn.registry.common.item.WizardsRebornCreativeTab;
+import mod.maxbogomol.wizards_reborn.registry.common.item.WizardsRebornCreativeTabs;
 import mod.maxbogomol.wizards_reborn.common.event.Events;
 import mod.maxbogomol.wizards_reborn.common.item.equipment.WissenWandItem;
 import mod.maxbogomol.wizards_reborn.common.knowledge.Researches;
@@ -100,8 +100,7 @@ public class WizardsReborn {
         eventBus.addListener(this::setup);
         eventBus.addListener(WizardsRebornClient::clientSetup);
 
-        WizardsRebornCreativeTab.register(eventBus);
-        eventBus.addListener(WizardsRebornCreativeTab::addCreative);
+        WizardsRebornCreativeTabs.register(eventBus);
 
         MinecraftForge.EVENT_BUS.register(this);
         MinecraftForge.EVENT_BUS.register(new Events());

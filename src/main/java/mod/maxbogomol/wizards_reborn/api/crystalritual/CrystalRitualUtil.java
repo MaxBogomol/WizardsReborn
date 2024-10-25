@@ -13,7 +13,7 @@ public class CrystalRitualUtil {
 
     public static CrystalRitual deserializeCrystalRitual(JsonObject json) {
         String ritualName = GsonHelper.getAsString(json, "crystal_ritual");
-        CrystalRitual ritual = CrystalRituals.getCrystalRitual(ritualName);
+        CrystalRitual ritual = CrystalRitualHandler.getCrystalRitual(ritualName);
         if (ritual == null) {
             throw new JsonSyntaxException("Unknown crystal ritual " + ritualName);
         }
@@ -21,7 +21,7 @@ public class CrystalRitualUtil {
     }
 
     public static CrystalRitual crystalRitualFromNetwork(FriendlyByteBuf buffer) {
-        return !buffer.readBoolean() ? WizardsRebornCrystalRituals.EMPTY : CrystalRituals.getCrystalRitual(buffer.readComponent().getString());
+        return !buffer.readBoolean() ? WizardsRebornCrystalRituals.EMPTY : CrystalRitualHandler.getCrystalRitual(buffer.readComponent().getString());
     }
 
     public static void crystalRitualToNetwork(CrystalRitual ritual, FriendlyByteBuf buffer) {
@@ -36,7 +36,7 @@ public class CrystalRitualUtil {
     public static CrystalRitual getCrystalRitual(ItemStack stack) {
         CompoundTag nbt = stack.getOrCreateTag();
         if (nbt.contains("crystalRitual")) {
-            CrystalRitual ritual = CrystalRituals.getCrystalRitual(nbt.getString("crystalRitual"));
+            CrystalRitual ritual = CrystalRitualHandler.getCrystalRitual(nbt.getString("crystalRitual"));
             if (ritual != null) {
                 return ritual;
             }

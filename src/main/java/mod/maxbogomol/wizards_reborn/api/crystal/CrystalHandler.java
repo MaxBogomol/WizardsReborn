@@ -6,7 +6,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
-public class Crystals {
+public class CrystalHandler {
     public static Map<String, CrystalType> crystalTypes = new HashMap<>();
     public static ArrayList<CrystalType> crystalTypesList = new ArrayList<>();
     public static Map<String, PolishingType> crystalPolishing = new HashMap<>();

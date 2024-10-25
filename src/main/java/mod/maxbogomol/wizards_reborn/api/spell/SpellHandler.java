@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
-public class Spells {
+public class SpellHandler {
     public static Map<String, Spell> spells = new HashMap<>();
     public static ArrayList<Spell> spellList = new ArrayList<>();
 
