@@ -12,8 +12,6 @@
   ],
   "client": [
     "client.LevelRendererMixin",
-    "client.RabbitRendererMixin",
-    "client.FoxRendererMixin",
     "client.GuiGraphicsMixin"
   ],
   "minVersion": "0.8",

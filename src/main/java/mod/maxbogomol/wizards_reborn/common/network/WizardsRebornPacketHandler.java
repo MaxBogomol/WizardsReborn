@@ -2,10 +2,7 @@ package mod.maxbogomol.wizards_reborn.common.network;
 
 import mod.maxbogomol.fluffy_fur.common.network.PacketHandler;
 import mod.maxbogomol.wizards_reborn.WizardsReborn;
-import mod.maxbogomol.wizards_reborn.common.network.arcaneenchantment.EagleShotRayPacket;
-import mod.maxbogomol.wizards_reborn.common.network.arcaneenchantment.MagicBladePacket;
-import mod.maxbogomol.wizards_reborn.common.network.arcaneenchantment.SplitArrowBurstPacket;
-import mod.maxbogomol.wizards_reborn.common.network.arcaneenchantment.WissenChargeBurstPacket;
+import mod.maxbogomol.wizards_reborn.common.network.arcaneenchantment.*;
 import mod.maxbogomol.wizards_reborn.common.network.block.*;
 import mod.maxbogomol.wizards_reborn.common.network.crystalritual.CrystalInfusionBurstEffectPacket;
 import mod.maxbogomol.wizards_reborn.common.network.crystalritual.CrystalRitualBurstEffectPacket;
@@ -36,7 +33,6 @@ public final class WizardsRebornPacketHandler extends PacketHandler {
         SetCurrentSpellInSetPacket.register(HANDLER, id++);
         WissenWandSetModePacket.register(HANDLER, id++);
         BagOpenPacket.register(HANDLER, id++);
-        HANDLER.registerMessage(id++, SetAdditionalFovPacket.class, SetAdditionalFovPacket::encode, SetAdditionalFovPacket::decode, SetAdditionalFovPacket::handle);
         SniffaloScreenPacket.register(HANDLER, id++);
 
         ArcanumOreBreakPacket.register(HANDLER, id++);
@@ -71,7 +67,7 @@ public final class WizardsRebornPacketHandler extends PacketHandler {
 
         HANDLER.registerMessage(id++, RaySpellEffectPacket.class, RaySpellEffectPacket::encode, RaySpellEffectPacket::decode, RaySpellEffectPacket::handle);
 
-        ArcanemiconOfferingEffectPacket.register(HANDLER, id++);
+        ArcanemiconOfferingPacket.register(HANDLER, id++);
         WissenDustBurstPacket.register(HANDLER, id++);
         ArcanumLensBurstPacket.register(HANDLER, id++);
         SmokePacket.register(HANDLER, id++);
@@ -87,6 +83,7 @@ public final class WizardsRebornPacketHandler extends PacketHandler {
         AirFlowSpellPacket.register(HANDLER, id++);
         FireShieldSpellPacket.register(HANDLER, id++);
         BlinkSpellPacket.register(HANDLER, id++);
+        BlinkFovPacket.register(HANDLER, id++);
         SnowflakeSpellPacket.register(HANDLER, id++);
         CrossSpellHeartsPacket.register(HANDLER, id++);
         CrossSpellSkullsPacket.register(HANDLER, id++);
@@ -121,7 +118,11 @@ public final class WizardsRebornPacketHandler extends PacketHandler {
         MagicBladePacket.register(HANDLER, id++);
         WissenChargeBurstPacket.register(HANDLER, id++);
         EagleShotRayPacket.register(HANDLER, id++);
+        EagleShotScreenshakePacket.register(HANDLER, id++);
         SplitArrowBurstPacket.register(HANDLER, id++);
+        SplitArrowScreenshakePacket.register(HANDLER, id++);
+
+        ThrowedScytheScreenshakePacket.register(HANDLER, id++);
     }
 
     public static SimpleChannel getHandler() {

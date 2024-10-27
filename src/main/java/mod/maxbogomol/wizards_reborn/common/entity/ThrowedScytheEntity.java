@@ -9,6 +9,8 @@ import mod.maxbogomol.fluffy_fur.client.render.trail.TrailPointBuilder;
 import mod.maxbogomol.fluffy_fur.common.easing.Easing;
 import mod.maxbogomol.fluffy_fur.registry.client.FluffyFurParticles;
 import mod.maxbogomol.fluffy_fur.registry.client.FluffyFurRenderTypes;
+import mod.maxbogomol.wizards_reborn.common.network.ThrowedScytheScreenshakePacket;
+import mod.maxbogomol.wizards_reborn.common.network.WizardsRebornPacketHandler;
 import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornArcaneEnchantments;
 import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornEntities;
 import mod.maxbogomol.wizards_reborn.registry.common.damage.WizardsRebornDamage;
@@ -237,7 +239,7 @@ public class ThrowedScytheEntity extends ThrowableItemProjectile {
             boolean dist = false;
             if (getOwner() instanceof Player player) {
                 if (distanceTo(getOwner()) < 150 && player.isAlive()) {
-                    //PacketHandler.sendTo(player, new AddScreenshakePacket(0.55f));
+                    WizardsRebornPacketHandler.sendTo(player, new ThrowedScytheScreenshakePacket(position().subtract(player.getEyePosition())));
                     player.knockback(1f, getX() - player.getX(), getZ() - player.getZ());
                     player.hurtMarked = true;
 

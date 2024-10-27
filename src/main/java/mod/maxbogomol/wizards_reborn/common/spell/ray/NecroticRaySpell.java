@@ -83,7 +83,7 @@ public class NecroticRaySpell extends RaySpell {
             float g = color.getGreen() / 255f;
             float b = color.getBlue() / 255f;
 
-            PacketHandler.sendToTracking(entity.level(), new BlockPos((int) pos.x, (int) pos.y, (int) pos.z), new NecroticRaySpellEffectPacket((float) posStart.x, (float) posStart.y + 0.2F, (float) posStart.z, (float) posEnd.x, (float) posEnd.y + 0.4F, (float) posEnd.z, r, g, b));
+            PacketHandler.sendToTracking(entity.level(), BlockPos.containing(pos), new NecroticRaySpellEffectPacket((float) posStart.x, (float) posStart.y + 0.2F, (float) posStart.z, (float) posEnd.x, (float) posEnd.y + 0.4F, (float) posEnd.z, r, g, b));
         }
     }*/
 }

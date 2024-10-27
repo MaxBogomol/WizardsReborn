@@ -6,6 +6,7 @@ import mod.maxbogomol.wizards_reborn.api.crystal.CrystalUtil;
 import mod.maxbogomol.wizards_reborn.api.spell.SpellContext;
 import mod.maxbogomol.wizards_reborn.common.item.equipment.arcane.ArcaneArmorItem;
 import mod.maxbogomol.wizards_reborn.common.network.WizardsRebornPacketHandler;
+import mod.maxbogomol.wizards_reborn.common.network.arcaneenchantment.BlinkFovPacket;
 import mod.maxbogomol.wizards_reborn.common.network.spell.BlinkSpellPacket;
 import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornCrystals;
 import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornSpells;
@@ -17,6 +18,7 @@ import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.Vec3;
 
@@ -65,32 +67,36 @@ public class BlinkSpell extends LookSpell {
 
     @Override
     public void lookSpell(Level level, SpellContext spellContext) {
-        Vec3 pos = getHit(level, spellContext).getPos();
-        Entity entity = spellContext.getEntity();
+        if (!level.isClientSide()) {
+            Vec3 pos = getHit(level, spellContext).getPos();
+            Entity entity = spellContext.getEntity();
 
-        if (spellContext.getEntity() instanceof LivingEntity livingEntity) {
-            WizardsRebornPacketHandler.sendToTracking(level, entity.blockPosition(), new BlinkSpellPacket(spellContext.getPos(), pos, getColor(), isSharp ? 1 : 0));
-            //PacketHandler.sendTo(player, new SetAdditionalFovPacket(30f));
-            level.playSound(WizardsReborn.proxy.getPlayer(), pos.x(), pos.y(), pos.z(), SoundEvents.ENDERMAN_TELEPORT, SoundSource.PLAYERS, 1f, 0.95f);
+            if (spellContext.getEntity() instanceof LivingEntity livingEntity) {
+                WizardsRebornPacketHandler.sendToTracking(level, entity.blockPosition(), new BlinkSpellPacket(spellContext.getPos(), pos, getColor(), isSharp ? 1 : 0));
+                if (entity instanceof Player player) {
+                    WizardsRebornPacketHandler.sendTo(player, new BlinkFovPacket());
+                }
+                level.playSound(WizardsReborn.proxy.getPlayer(), pos.x(), pos.y(), pos.z(), SoundEvents.ENDERMAN_TELEPORT, SoundSource.PLAYERS, 1f, 0.95f);
 
-            int focusLevel = CrystalUtil.getStatLevel(spellContext.getStats(), WizardsRebornCrystals.FOCUS);
-            float magicModifier = ArcaneArmorItem.getPlayerMagicModifier(spellContext.getEntity());
-            float damage = (3f + (focusLevel)) + magicModifier;
+                int focusLevel = CrystalUtil.getStatLevel(spellContext.getStats(), WizardsRebornCrystals.FOCUS);
+                float magicModifier = ArcaneArmorItem.getPlayerMagicModifier(spellContext.getEntity());
+                float damage = (3f + (focusLevel)) + magicModifier;
 
-            if (isSharp) {
-                for (Entity target : RayCast.getHitEntities(level, spellContext.getPos(), pos, 0.5f)) {
-                    if (!target.equals(spellContext.getEntity()) && target instanceof LivingEntity) {
-                        DamageSource damageSource = new DamageSource(WizardsRebornDamage.create(target.level(), WizardsRebornDamage.ARCANE_MAGIC).typeHolder(), entity);
-                        target.hurt(damageSource, damage);
+                if (isSharp) {
+                    for (Entity target : RayCast.getHitEntities(level, spellContext.getPos(), pos, 0.5f)) {
+                        if (!target.equals(spellContext.getEntity()) && target instanceof LivingEntity) {
+                            DamageSource damageSource = new DamageSource(WizardsRebornDamage.create(target.level(), WizardsRebornDamage.ARCANE_MAGIC).typeHolder(), entity);
+                            target.hurt(damageSource, damage);
+                        }
                     }
                 }
-            }
-            entity.teleportTo(pos.x(), pos.y(), pos.z());
-            entity.setDeltaMovement(Vec3.ZERO);
-            entity.fallDistance = 0;
+                entity.teleportTo(pos.x(), pos.y(), pos.z());
+                entity.setDeltaMovement(Vec3.ZERO);
+                entity.fallDistance = 0;
 
-            if (magicModifier > 0) {
-                livingEntity.addEffect(new MobEffectInstance(MobEffects.SLOW_FALLING, (int) (40 * magicModifier), 0));
+                if (magicModifier > 0) {
+                    livingEntity.addEffect(new MobEffectInstance(MobEffects.SLOW_FALLING, (int) (40 * magicModifier), 0));
+                }
             }
         }
     }

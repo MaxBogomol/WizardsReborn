@@ -237,7 +237,7 @@ public class RaySpell extends Spell {
             float g = color.getGreen() / 255f;
             float b = color.getBlue() / 255f;
 
-            WizardsRebornPacketHandler.sendToTracking(level, new BlockPos((int) pos.x, (int) pos.y, (int) pos.z), new RaySpellEffectPacket((float) posStart.x, (float) posStart.y, (float) posStart.z, (float) posEnd.x, (float) posEnd.y, (float) posEnd.z, r, g, b, burst));
+            WizardsRebornPacketHandler.sendToTracking(level, BlockPos.containing(pos), new RaySpellEffectPacket((float) posStart.x, (float) posStart.y, (float) posStart.z, (float) posEnd.x, (float) posEnd.y, (float) posEnd.z, r, g, b, burst));
         }
     }
 

@@ -5,8 +5,9 @@ import mod.maxbogomol.wizards_reborn.api.arcaneenchantment.ArcaneEnchantmentType
 import mod.maxbogomol.wizards_reborn.api.arcaneenchantment.ArcaneEnchantmentUtil;
 import mod.maxbogomol.wizards_reborn.api.arcaneenchantment.IArcaneItem;
 import mod.maxbogomol.wizards_reborn.api.wissen.WissenUtil;
-import mod.maxbogomol.wizards_reborn.common.network.arcaneenchantment.EagleShotRayPacket;
 import mod.maxbogomol.wizards_reborn.common.network.WizardsRebornPacketHandler;
+import mod.maxbogomol.wizards_reborn.common.network.arcaneenchantment.EagleShotRayPacket;
+import mod.maxbogomol.wizards_reborn.common.network.arcaneenchantment.EagleShotScreenshakePacket;
 import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornArcaneEnchantments;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
@@ -109,7 +110,7 @@ public class EagleShotArcaneEnchantment extends ArcaneEnchantment {
                         level.playSound(null, player.getX(), player.getY(), player.getZ(), SoundEvents.ANVIL_PLACE, SoundSource.PLAYERS, 0.05f, 2f);
                         if (!level.isClientSide()) {
                             Color color = WizardsRebornArcaneEnchantments.EAGLE_SHOT.getColor();
-                            //PacketHandler.sendTo(player, new AddScreenshakePacket(0.3f));
+                            WizardsRebornPacketHandler.sendTo(player, new EagleShotScreenshakePacket());
                             WizardsRebornPacketHandler.sendToTracking(level, player.blockPosition(), new EagleShotRayPacket(from, new Vec3((from.x() - X), (float) (from.y() - Y), (float) (from.z() - Z)), movement.scale(0.1f), color));
                         }
                     }

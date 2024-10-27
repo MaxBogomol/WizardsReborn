@@ -5,7 +5,7 @@ import mod.maxbogomol.wizards_reborn.api.knowledge.Knowledge;
 import mod.maxbogomol.wizards_reborn.api.knowledge.KnowledgeUtil;
 import mod.maxbogomol.wizards_reborn.common.network.WizardsRebornPacketHandler;
 import mod.maxbogomol.wizards_reborn.config.WizardsRebornServerConfig;
-import mod.maxbogomol.wizards_reborn.common.network.ArcanemiconOfferingEffectPacket;
+import mod.maxbogomol.wizards_reborn.common.network.ArcanemiconOfferingPacket;
 import mod.maxbogomol.wizards_reborn.registry.common.item.WizardsRebornItems;
 import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornKnowledges;
 import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornSounds;
@@ -62,7 +62,7 @@ public class ArcanemiconOfferingKnowledge extends Knowledge {
                     .append(Component.translatable("message.wizards_reborn.arcanemicon_offering").withStyle(Style.EMPTY.withColor(ColorUtil.packColor(255, 251, 179, 176)))));
             player.getInventory().add(new ItemStack(WizardsRebornItems.ARCANEMICON.get()));
             player.level().playSound(null, player.getX(), player.getY(), player.getZ(), WizardsRebornSounds.ARCANEMICON_OFFERING.get(), SoundSource.PLAYERS, 1.0f, 1.0f);
-            WizardsRebornPacketHandler.sendToTracking(player.level(), player.getOnPos(), new ArcanemiconOfferingEffectPacket(player.position().add(0, 1, 0)));
+            WizardsRebornPacketHandler.sendToTracking(player.level(), player.getOnPos(), new ArcanemiconOfferingPacket(player.position().add(0, 1, 0)));
         }
     }
 }

@@ -22,13 +22,13 @@ import java.awt.*;
 import java.util.function.Consumer;
 import java.util.function.Supplier;
 
-public class ArcanemiconOfferingEffectPacket extends PositionClientPacket {
+public class ArcanemiconOfferingPacket extends PositionClientPacket {
 
-    public ArcanemiconOfferingEffectPacket(double x, double y, double z) {
+    public ArcanemiconOfferingPacket(double x, double y, double z) {
         super(x, y, z);
     }
 
-    public ArcanemiconOfferingEffectPacket(Vec3 vec) {
+    public ArcanemiconOfferingPacket(Vec3 vec) {
         super(vec);
     }
 
@@ -132,10 +132,10 @@ public class ArcanemiconOfferingEffectPacket extends PositionClientPacket {
     }
 
     public static void register(SimpleChannel instance, int index) {
-        instance.registerMessage(index, ArcanemiconOfferingEffectPacket.class, ArcanemiconOfferingEffectPacket::encode, ArcanemiconOfferingEffectPacket::decode, ArcanemiconOfferingEffectPacket::handle);
+        instance.registerMessage(index, ArcanemiconOfferingPacket.class, ArcanemiconOfferingPacket::encode, ArcanemiconOfferingPacket::decode, ArcanemiconOfferingPacket::handle);
     }
 
-    public static ArcanemiconOfferingEffectPacket decode(FriendlyByteBuf buf) {
-        return decode(ArcanemiconOfferingEffectPacket::new, buf);
+    public static ArcanemiconOfferingPacket decode(FriendlyByteBuf buf) {
+        return decode(ArcanemiconOfferingPacket::new, buf);
     }
 }
