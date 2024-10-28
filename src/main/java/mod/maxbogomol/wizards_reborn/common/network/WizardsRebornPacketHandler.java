@@ -59,9 +59,9 @@ public final class WizardsRebornPacketHandler extends PacketHandler {
         TotemOfDisenchantStartPacket.register(HANDLER, id++);
         TotemOfDisenchantBurstPacket.register(HANDLER, id++);
 
-        HANDLER.registerMessage(id++, CrystalInfusionBurstPacket.class, CrystalInfusionBurstPacket::encode, CrystalInfusionBurstPacket::decode, CrystalInfusionBurstPacket::handle);
-
         LightRayBurstPacket.register(HANDLER, id++);
+
+        CrystalInfusionBurstPacket.register(HANDLER, id++);
 
         ArcanemiconOfferingPacket.register(HANDLER, id++);
         WissenDustBurstPacket.register(HANDLER, id++);

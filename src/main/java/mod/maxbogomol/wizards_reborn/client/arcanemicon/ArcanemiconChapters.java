@@ -1552,8 +1552,7 @@ public class ArcanemiconChapters {
                         new BlockEntry(ARCANE_PEDESTAL_ITEM, ARCANUM_LENS_ITEM)
                 ),
                 new ArcaneIteratorPage(ARCANUM_LENS_ITEM, 0, 0, ACLHEMY_GLASS,
-                        ARCANUM_ITEM, ARCANUM_ITEM, ARCANUM_ITEM, ARCANUM_DUST_ITEM,
-                        ALCHEMY_CALX_ITEM, ALCHEMY_CALX_ITEM
+                        ARCANUM_ITEM, ARCANUM_ITEM, ARCANUM_DUST_ITEM, ALCHEMY_CALX_ITEM
                 )
         );
 
@@ -3838,21 +3837,21 @@ public class ArcanemiconChapters {
         ALCHEMY_TRANSMUTATION = new Chapter(
                 "wizards_reborn.arcanemicon.chapter.alchemy_transmutation",
                 new TitlePage("wizards_reborn.arcanemicon.page.alchemy_transmutation"),
-                new AlchemyMachinePage(new ItemStack(WizardsRebornItems.RAW_ARCANE_GOLD.get(), 2), FluidStack.EMPTY, true, true,
+                new AlchemyMachinePage(new ItemStack(WizardsRebornItems.RAW_ARCANE_GOLD.get(), 4), FluidStack.EMPTY, true, true,
                         new FluidStack(WizardsRebornFluids.ALCHEMY_OIL.get(), 100), new FluidStack(WizardsRebornFluids.WISSEN_TEA.get(), 200), FluidStack.EMPTY,
-                        new ItemStack(Items.RAW_GOLD), new ItemStack(Items.RAW_GOLD), ARCANUM_ITEM, ALCHEMY_CALX_ITEM, NATURAL_CALX_ITEM
+                        new ItemStack(Items.RAW_GOLD), new ItemStack(Items.RAW_GOLD), new ItemStack(Items.RAW_GOLD), new ItemStack(Items.RAW_GOLD), ARCANUM_ITEM, NATURAL_CALX_ITEM
                 ),
-                new AlchemyMachinePage(new ItemStack(Items.COAL, 2), FluidStack.EMPTY, true, true,
+                new AlchemyMachinePage(new ItemStack(Items.COAL, 5), FluidStack.EMPTY, true, true,
                         new FluidStack(WizardsRebornFluids.ALCHEMY_OIL.get(), 50), FluidStack.EMPTY, FluidStack.EMPTY,
-                        new ItemStack(Items.CHARCOAL), new ItemStack(Items.CHARCOAL), new ItemStack(Items.COBBLESTONE), ALCHEMY_CALX_ITEM
+                        new ItemStack(Items.CHARCOAL), new ItemStack(Items.CHARCOAL), new ItemStack(Items.CHARCOAL), new ItemStack(Items.COBBLESTONE), ALCHEMY_CALX_ITEM
                 ),
                 new AlchemyMachinePage(new ItemStack(Items.GLOWSTONE_DUST, 12), FluidStack.EMPTY, true, true,
                         new FluidStack(WizardsRebornFluids.ALCHEMY_OIL.get(), 100), new FluidStack(WizardsRebornFluids.HELLISH_MUSHROOM_BREW.get(), 200), FluidStack.EMPTY,
                         new ItemStack(Items.COAL), new ItemStack(Items.COAL), SCORCHED_CALX_ITEM, new ItemStack(Items.GOLD_NUGGET)
                 ),
-                new AlchemyMachinePage(new ItemStack(Items.LEATHER, 3), FluidStack.EMPTY, true, true,
+                new AlchemyMachinePage(new ItemStack(Items.LEATHER, 5), FluidStack.EMPTY, true, true,
                         new FluidStack(WizardsRebornFluids.ALCHEMY_OIL.get(), 100), FluidStack.EMPTY, FluidStack.EMPTY,
-                        new ItemStack(Items.ROTTEN_FLESH), new ItemStack(Items.ROTTEN_FLESH), new ItemStack(Items.ROTTEN_FLESH), new ItemStack(Items.HONEYCOMB), ALCHEMY_CALX_ITEM, NATURAL_CALX_ITEM
+                        new ItemStack(Items.ROTTEN_FLESH), new ItemStack(Items.ROTTEN_FLESH), new ItemStack(Items.ROTTEN_FLESH), new ItemStack(Items.ROTTEN_FLESH), new ItemStack(Items.ROTTEN_FLESH), NATURAL_CALX_ITEM
                 )
         );
 
@@ -4361,9 +4360,11 @@ public class ArcanemiconChapters {
             SMOKING_PIPE.addPage(new CenserPage(cinderFlourEffects, new ItemStack(IntegrationUtil.getItem("create", "cinder_flour"))));
             SMOKING_PIPE.addPage(new CenserPage(powderedObsidianEffects, new ItemStack(IntegrationUtil.getItem("create", "powdered_obsidian"))));
 
-            ALCHEMY_TRANSMUTATION.addPage(new AlchemyMachinePage(new ItemStack(CreateIntegration.CRUSHED_RAW_ARCANE_GOLD.get(), 2), FluidStack.EMPTY, true, true,
+            ALCHEMY_TRANSMUTATION.addPage(new AlchemyMachinePage(new ItemStack(CreateIntegration.CRUSHED_RAW_ARCANE_GOLD.get(), 4), FluidStack.EMPTY, true, true,
                     new FluidStack(WizardsRebornFluids.ALCHEMY_OIL.get(), 100), new FluidStack(WizardsRebornFluids.WISSEN_TEA.get(), 200), FluidStack.EMPTY,
-                    new ItemStack(IntegrationUtil.getItem("create", "crushed_raw_gold")), new ItemStack(IntegrationUtil.getItem("create", "crushed_raw_gold")), ARCANUM_ITEM, ALCHEMY_CALX_ITEM, NATURAL_CALX_ITEM
+                    new ItemStack(IntegrationUtil.getItem("create", "crushed_raw_gold")), new ItemStack(IntegrationUtil.getItem("create", "crushed_raw_gold")),
+                    new ItemStack(IntegrationUtil.getItem("create", "crushed_raw_gold")), new ItemStack(IntegrationUtil.getItem("create", "crushed_raw_gold")),
+                    ARCANUM_ITEM, NATURAL_CALX_ITEM
             ));
         }
     }

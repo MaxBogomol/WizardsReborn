@@ -2,7 +2,7 @@
   "type": "wizards_reborn:alchemy_machine",
   "outputItem": {
     "item": "minecraft:leather",
-    "count": 3
+    "count": 5
   },
   "steam": 200,
   "ingredients": [
@@ -16,10 +16,10 @@
       "item": "minecraft:rotten_flesh"
     },
     {
-      "item": "minecraft:honeycomb"
+      "item": "minecraft:rotten_flesh"
     },
     {
-      "item": "wizards_reborn:alchemy_calx"
+      "item": "minecraft:rotten_flesh"
     },
     {
       "item": "wizards_reborn:natural_calx"
