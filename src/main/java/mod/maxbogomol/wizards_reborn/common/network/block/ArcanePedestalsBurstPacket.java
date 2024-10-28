@@ -18,9 +18,9 @@ import net.minecraftforge.network.simple.SimpleChannel;
 
 import java.util.function.Supplier;
 
-public class ArcaneIteratorBurstPacket extends ClientNBTPacket {
+public class ArcanePedestalsBurstPacket extends ClientNBTPacket {
     
-    public ArcaneIteratorBurstPacket(CompoundTag nbt) {
+    public ArcanePedestalsBurstPacket(CompoundTag nbt) {
         super(nbt);
     }
 
@@ -58,10 +58,10 @@ public class ArcaneIteratorBurstPacket extends ClientNBTPacket {
     }
 
     public static void register(SimpleChannel instance, int index) {
-        instance.registerMessage(index, ArcaneIteratorBurstPacket.class, ArcaneIteratorBurstPacket::encode, ArcaneIteratorBurstPacket::decode, ArcaneIteratorBurstPacket::handle);
+        instance.registerMessage(index, ArcanePedestalsBurstPacket.class, ArcanePedestalsBurstPacket::encode, ArcanePedestalsBurstPacket::decode, ArcanePedestalsBurstPacket::handle);
     }
 
-    public static ArcaneIteratorBurstPacket decode(FriendlyByteBuf buf) {
-        return decode(ArcaneIteratorBurstPacket::new, buf);
+    public static ArcanePedestalsBurstPacket decode(FriendlyByteBuf buf) {
+        return decode(ArcanePedestalsBurstPacket::new, buf);
     }
 }

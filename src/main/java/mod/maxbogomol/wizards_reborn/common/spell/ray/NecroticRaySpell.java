@@ -4,13 +4,17 @@ import mod.maxbogomol.fluffy_fur.common.raycast.RayHitResult;
 import mod.maxbogomol.wizards_reborn.api.crystal.CrystalUtil;
 import mod.maxbogomol.wizards_reborn.common.entity.SpellEntity;
 import mod.maxbogomol.wizards_reborn.common.item.equipment.arcane.ArcaneArmorItem;
+import mod.maxbogomol.wizards_reborn.common.network.WizardsRebornPacketHandler;
+import mod.maxbogomol.wizards_reborn.common.network.spell.NecroticRaySpellTrailPacket;
 import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornCrystals;
 import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornSpells;
 import mod.maxbogomol.wizards_reborn.registry.common.damage.WizardsRebornDamage;
+import net.minecraft.core.BlockPos;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.phys.Vec3;
 
 import java.awt.*;
 
@@ -68,22 +72,18 @@ public class NecroticRaySpell extends RaySpell {
         }
     }
 
-/*    @Override
-    public void rayEndTick(SpellProjectileEntity entity, HitResult ray) {
-        CompoundTag spellData = entity.getSpellData();
+    @Override
+    public void hitEndTick(SpellEntity entity, RayHitResult hitResult) {
+        if (!entity.level().isClientSide()) {
+            RaySpellComponent spellComponent = getSpellComponent(entity);
+            Vec3 vec = spellComponent.vec;
 
-        if (spellData.getInt("tick_left") <= 0) {
-            float distance = (float) Math.sqrt(Math.pow(entity.getX() - ray.getLocation().x, 2) + Math.pow(entity.getY() - ray.getLocation().y, 2) + Math.pow(entity.getZ() - ray.getLocation().z, 2));
+            double distance = Math.sqrt(Math.pow(entity.getX() - hitResult.getPos().x(), 2) + Math.pow(entity.getY() - hitResult.getPos().y(), 2) + Math.pow(entity.getZ() - hitResult.getPos().z(), 2));
             Vec3 pos = entity.position();
-            Vec3 posStart = entity.getLookAngle().add(entity.position());
-            Vec3 posEnd = entity.getLookAngle().scale(distance).add(entity.position());
+            Vec3 posStart = vec.add(entity.position());
+            Vec3 posEnd = vec.scale(distance).add(entity.position());
 
-            Color color = getColor();
-            float r = color.getRed() / 255f;
-            float g = color.getGreen() / 255f;
-            float b = color.getBlue() / 255f;
-
-            PacketHandler.sendToTracking(entity.level(), BlockPos.containing(pos), new NecroticRaySpellEffectPacket((float) posStart.x, (float) posStart.y + 0.2F, (float) posStart.z, (float) posEnd.x, (float) posEnd.y + 0.4F, (float) posEnd.z, r, g, b));
+            WizardsRebornPacketHandler.sendToTracking(entity.level(), BlockPos.containing(pos), new NecroticRaySpellTrailPacket(posStart, posEnd, getColor()));
         }
-    }*/
+    }
 }

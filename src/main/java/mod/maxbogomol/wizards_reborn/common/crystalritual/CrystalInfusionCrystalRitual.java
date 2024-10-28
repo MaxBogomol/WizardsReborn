@@ -1,13 +1,14 @@
 package mod.maxbogomol.wizards_reborn.common.crystalritual;
 
 import com.mojang.blaze3d.vertex.PoseStack;
-import com.mojang.blaze3d.vertex.VertexConsumer;
 import com.mojang.math.Axis;
 import mod.maxbogomol.fluffy_fur.client.event.ClientTickHandler;
 import mod.maxbogomol.fluffy_fur.client.particle.ParticleBuilder;
 import mod.maxbogomol.fluffy_fur.client.particle.data.ColorParticleData;
 import mod.maxbogomol.fluffy_fur.client.particle.data.GenericParticleData;
 import mod.maxbogomol.fluffy_fur.client.particle.data.SpinParticleData;
+import mod.maxbogomol.fluffy_fur.client.particle.options.ItemParticleOptions;
+import mod.maxbogomol.fluffy_fur.common.easing.Easing;
 import mod.maxbogomol.fluffy_fur.registry.client.FluffyFurParticles;
 import mod.maxbogomol.fluffy_fur.registry.client.FluffyFurRenderTypes;
 import mod.maxbogomol.wizards_reborn.WizardsReborn;
@@ -16,7 +17,7 @@ import mod.maxbogomol.wizards_reborn.api.crystalritual.CrystalRitualArea;
 import mod.maxbogomol.wizards_reborn.common.block.arcane_pedestal.ArcanePedestalBlockEntity;
 import mod.maxbogomol.wizards_reborn.common.block.crystal.CrystalBlockEntity;
 import mod.maxbogomol.wizards_reborn.common.network.WizardsRebornPacketHandler;
-import mod.maxbogomol.wizards_reborn.common.network.crystalritual.CrystalInfusionBurstEffectPacket;
+import mod.maxbogomol.wizards_reborn.common.network.crystalritual.CrystalInfusionBurstPacket;
 import mod.maxbogomol.wizards_reborn.common.recipe.CrystalInfusionRecipe;
 import mod.maxbogomol.wizards_reborn.registry.client.WizardsRebornParticles;
 import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornRecipes;
@@ -33,7 +34,6 @@ import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.item.ItemDisplayContext;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
-import net.minecraft.world.phys.Vec3;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 
@@ -122,19 +122,13 @@ public class CrystalInfusionCrystalRitual extends CrystalRitual {
                         updateRunicPedestal(crystal);
                         level.playSound(WizardsReborn.proxy.getPlayer(), blockPos, WizardsRebornSounds.WISSEN_BURST.get(), SoundSource.BLOCKS, 0.25f, (float) (1f + ((random.nextFloat() - 0.5D) / 4)));
 
-                        float r = 1f;
-                        float g = 1f;
-                        float b = 1f;
-
+                        Color color = Color.WHITE;
                         ItemStack item = getCrystalItem(crystal);
                         if (!item.isEmpty()) {
-                            Color color = getCrystalColor(item);
-                            r = (color.getRed() / 255f);
-                            g = (color.getGreen() / 255f);
-                            b = (color.getBlue() / 255f);
+                            color = getCrystalColor(item);
                         }
 
-                        WizardsRebornPacketHandler.sendToTracking(level, blockPos, new CrystalInfusionBurstEffectPacket(blockPos, r, g, b));
+                        WizardsRebornPacketHandler.sendToTracking(level, blockPos, new CrystalInfusionBurstPacket(blockPos, color));
                     }
                 }
             }
@@ -154,16 +148,10 @@ public class CrystalInfusionCrystalRitual extends CrystalRitual {
                 int size = getInventorySize(container);
                 float rotate = 360f / (size);
 
-                float r = 1f;
-                float g = 1f;
-                float b = 1f;
-
-                ItemStack item = getCrystalItem(crystal);
-                if (!item.isEmpty()) {
-                    Color color = getCrystalColor(item);
-                    r = (color.getRed() / 255f);
-                    g = (color.getGreen() / 255f);
-                    b = (color.getBlue() / 255f);
+                Color color = Color.WHITE;
+                ItemStack stack = getCrystalItem(crystal);
+                if (!stack.isEmpty()) {
+                    color = getCrystalColor(stack);
                 }
 
                 for (int i = 0; i < size; i++) {
@@ -182,26 +170,41 @@ public class CrystalInfusionCrystalRitual extends CrystalRitual {
 
                     double v = Math.sin(Math.toRadians(ticksUp + (rotate * i))) * 0.0625F;
 
-                    if (random.nextFloat() < 0.25f) {
+                    if (random.nextFloat() < 0.2f) {
                         ParticleBuilder.create(FluffyFurParticles.WISP)
-                                .setColorData(ColorParticleData.create(r, g, b).build())
-                                .setTransparencyData(GenericParticleData.create(0.35f, 0).build())
-                                .setScaleData(GenericParticleData.create(0.3f, 0).build())
-                                .setSpinData(SpinParticleData.create().randomSpin(0.5f).build())
+                                .setColorData(ColorParticleData.create(color).build())
+                                .setTransparencyData(GenericParticleData.create(0.2f, 0.35f, 0).setEasing(Easing.QUINTIC_IN_OUT).build())
+                                .setScaleData(GenericParticleData.create(0.2f, 0.3f, 0).setEasing(Easing.QUINTIC_IN_OUT).build())
+                                .setSpinData(SpinParticleData.create().randomOffset().randomSpin(0.5f).build())
                                 .setLifetime(30)
                                 .addVelocity(-X / 20, -Y / 10, -Z / 20)
                                 .spawn(level, blockPos.getX() + 0.5F + X, blockPos.getY() + 0.5F + v, blockPos.getZ() + 0.5F + Z);
                     }
 
-                    if (random.nextFloat() < 0.125) {
-                        ParticleBuilder.create(FluffyFurParticles.SPARKLE)
-                                .setColorData(ColorParticleData.create(r, g, b).build())
+                    if (random.nextFloat() < 0.125f) {
+                        boolean square = random.nextBoolean();
+                        ParticleBuilder.create(square ? FluffyFurParticles.SQUARE : FluffyFurParticles.SPARKLE)
+                                .setColorData(ColorParticleData.create(color).build())
                                 .setTransparencyData(GenericParticleData.create(0.25f, 0).build())
-                                .setScaleData(GenericParticleData.create(0.3f, 0).build())
-                                .setSpinData(SpinParticleData.create().randomSpin(0.5f).build())
+                                .setScaleData(GenericParticleData.create(0, square ? 0.1f : 0.2f, 0).setEasing(Easing.SINE_IN_OUT).build())
+                                .setSpinData(SpinParticleData.create().randomOffset().randomSpin(0.5f).build())
                                 .setLifetime(30)
                                 .randomOffset(0.05f)
                                 .addVelocity(-X / 20, -Y / 10, -Z / 20)
+                                .spawn(level, blockPos.getX() + 0.5F + X, blockPos.getY() + 0.5F + v, blockPos.getZ() + 0.5F + Z);
+                    }
+
+                    if (random.nextFloat() < 0.1f) {
+                        ItemParticleOptions options = new ItemParticleOptions(FluffyFurParticles.ITEM.get(), container.getItem(i));
+                        ParticleBuilder.create(options)
+                                .setRenderType(FluffyFurRenderTypes.TRANSLUCENT_BLOCK_PARTICLE)
+                                .setColorData(ColorParticleData.create(Color.WHITE).build())
+                                .setTransparencyData(GenericParticleData.create(0.2f, 0.5f, 0).setEasing(Easing.EXPO_IN, Easing.ELASTIC_OUT).build())
+                                .setScaleData(GenericParticleData.create(0.025f, 0.05f, 0).setEasing(Easing.EXPO_IN, Easing.ELASTIC_OUT).build())
+                                .setSpinData(SpinParticleData.create().randomSpin(0.2f).build())
+                                .setLifetime(50)
+                                .randomOffset(0.05f)
+                                .addVelocity(-X / 30, -Y / 20, -Z / 30)
                                 .spawn(level, blockPos.getX() + 0.5F + X, blockPos.getY() + 0.5F + v, blockPos.getZ() + 0.5F + Z);
                     }
                 }
@@ -211,9 +214,9 @@ public class CrystalInfusionCrystalRitual extends CrystalRitual {
                     double Z = ((random.nextDouble() - 0.5D) * 0.5);
                     ParticleBuilder.create(WizardsRebornParticles.KARMA)
                             .setColorData(ColorParticleData.create(0.733f, 0.564f, 0.937f).build())
-                            .setTransparencyData(GenericParticleData.create(0.5f, 0).build())
-                            .setScaleData(GenericParticleData.create(0.1f, 0.025f).build())
-                            .setLifetime(15)
+                            .setTransparencyData(GenericParticleData.create(0.1f, 0.5f, 0).setEasing(Easing.EXPO_IN, Easing.QUINTIC_IN_OUT).build())
+                            .setScaleData(GenericParticleData.create(0.05f, 0.1f, 0).setEasing(Easing.EXPO_IN, Easing.QUINTIC_IN_OUT).build())
+                            .setLifetime(25)
                             .randomOffset(0.05f)
                             .addVelocity(-(X / 100), (random.nextDouble() / 20), -(Z / 100))
                             .spawn(level, blockPos.getX() + 0.5F + X, blockPos.getY() + 0.5625F, blockPos.getZ() + 0.5F + Z);
@@ -325,55 +328,6 @@ public class CrystalInfusionCrystalRitual extends CrystalRitual {
             ms.scale(0.5F, 0.5F, 0.5F);
             minecraft.getItemRenderer().renderStatic(container.getItem(0), ItemDisplayContext.FIXED, light, overlay, ms, buffers, crystal.getLevel(), 0);
             ms.popPose();
-        }
-
-        MultiBufferSource bufferDelayed = FluffyFurRenderTypes.getDelayedRender();
-        VertexConsumer builder = bufferDelayed.getBuffer(FluffyFurRenderTypes.ADDITIVE);
-        Color color = getColor();
-
-        ItemStack item = getCrystalItem(crystal);
-        if (!item.isEmpty()) {
-            color = getCrystalColor(item);
-        }
-
-        if (container != null && getCooldown(crystal) > 20) {
-            int size = getInventorySize(container);
-            float rotate = 360f / (size);
-
-            float fade = 1f;
-
-            if (getCooldown(crystal) > getMaxCooldown(crystal) - 11) {
-                fade = (getMaxCooldown(crystal) - getCooldown(crystal)) / 11f;
-            }
-
-            if (getCooldown(crystal) < (20 + 11)) {
-                fade = (getCooldown(crystal) - 20) / 11f;
-            }
-
-            for (int i = 0; i < size; i++) {
-                List<Vec3> trailList = new ArrayList<>();
-
-                for (int ii = 0; ii < 11; ii++) {
-                    double yaw = Math.toRadians(rotate * i + (ii * 5) + ticks - (10 * 5));
-                    double pitch = 90;
-
-                    float distance = 1.5f * (ii / 10f);
-
-                    double X = Math.sin(pitch) * Math.cos(yaw) * distance;
-                    double Y = Math.cos(pitch);
-                    double Z = Math.sin(pitch) * Math.sin(yaw) * distance;
-
-                    double v = Math.sin(Math.toRadians(ticksUp + (rotate * i))) * 0.0625F;
-
-                    trailList.add(new Vec3(X, Y + v + (1f - (ii / 10f)), Z));
-                }
-
-                ms.pushPose();
-                ms.translate(0.5F, 1F, 0.5F);
-                //WizardsRebornRenderUtil.renderTrail(ms, builder, Vec3.ZERO, trailList, 0, 0.15f, 0, 0.5f * fade, 1.0f, color, 8, true);
-                //WizardsRebornRenderUtil.renderTrail(ms, builder, Vec3.ZERO, trailList, 0, 0.15f, 0, 0.75f * fade, 0.5f, color, 8, true);
-                ms.popPose();
-            }
         }
     }
 }

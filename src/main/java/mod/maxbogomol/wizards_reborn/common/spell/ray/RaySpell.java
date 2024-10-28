@@ -17,7 +17,7 @@ import mod.maxbogomol.wizards_reborn.api.spell.SpellContext;
 import mod.maxbogomol.wizards_reborn.client.animation.SpellHandItemAnimation;
 import mod.maxbogomol.wizards_reborn.common.entity.SpellEntity;
 import mod.maxbogomol.wizards_reborn.common.network.WizardsRebornPacketHandler;
-import mod.maxbogomol.wizards_reborn.common.network.spell.RaySpellEffectPacket;
+import mod.maxbogomol.wizards_reborn.common.network.spell.RaySpellTrailPacket;
 import mod.maxbogomol.wizards_reborn.common.spell.WandSpellContext;
 import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornEntities;
 import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornSounds;
@@ -232,12 +232,7 @@ public class RaySpell extends Spell {
             Vec3 posStart = vec.add(entity.position());
             Vec3 posEnd = vec.scale(distance).add(entity.position());
 
-            Color color = getColor();
-            float r = color.getRed() / 255f;
-            float g = color.getGreen() / 255f;
-            float b = color.getBlue() / 255f;
-
-            WizardsRebornPacketHandler.sendToTracking(level, BlockPos.containing(pos), new RaySpellEffectPacket((float) posStart.x, (float) posStart.y, (float) posStart.z, (float) posEnd.x, (float) posEnd.y, (float) posEnd.z, r, g, b, burst));
+            WizardsRebornPacketHandler.sendToTracking(level, BlockPos.containing(pos), new RaySpellTrailPacket(posStart, posEnd, getColor(), burst ? 1 : 0));
         }
     }
 

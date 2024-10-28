@@ -1,5 +1,6 @@
 package mod.maxbogomol.wizards_reborn.common.network;
 
+import mod.maxbogomol.fluffy_fur.common.network.ClientPacket;
 import mod.maxbogomol.wizards_reborn.WizardsReborn;
 import mod.maxbogomol.wizards_reborn.common.capability.IKnowledge;
 import net.minecraft.nbt.CompoundTag;
@@ -7,15 +8,15 @@ import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
 import net.minecraftforge.common.util.INBTSerializable;
-import net.minecraftforge.network.NetworkDirection;
 import net.minecraftforge.network.NetworkEvent;
+import net.minecraftforge.network.simple.SimpleChannel;
 
 import java.util.UUID;
 import java.util.function.Supplier;
 
-public class KnowledgeUpdatePacket {
-    private final UUID uuid;
-    private CompoundTag tag;
+public class KnowledgeUpdatePacket extends ClientPacket {
+    protected final UUID uuid;
+    protected CompoundTag tag;
 
     public KnowledgeUpdatePacket(UUID uuid, CompoundTag tag) {
         this.uuid = uuid;
@@ -29,27 +30,27 @@ public class KnowledgeUpdatePacket {
         });
     }
 
-    public static void encode(KnowledgeUpdatePacket object, FriendlyByteBuf buffer) {
-        buffer.writeUUID(object.uuid);
-        buffer.writeNbt(object.tag);
+    @Override
+    public void execute(Supplier<NetworkEvent.Context> context) {
+        Level level = WizardsReborn.proxy.getLevel();
+        Player player = level.getPlayerByUUID(uuid);
+        if (player != null) {
+            player.getCapability(IKnowledge.INSTANCE, null).ifPresent((k) -> {
+                ((INBTSerializable<CompoundTag>)k).deserializeNBT(tag);
+            });
+        }
     }
 
-    public static KnowledgeUpdatePacket decode(FriendlyByteBuf buffer) {
-       return new KnowledgeUpdatePacket(buffer.readUUID(), buffer.readNbt());
+    public static void register(SimpleChannel instance, int index) {
+        instance.registerMessage(index, KnowledgeUpdatePacket.class, KnowledgeUpdatePacket::encode, KnowledgeUpdatePacket::decode, KnowledgeUpdatePacket::handle);
     }
 
-    public static void handle(KnowledgeUpdatePacket packet, Supplier<NetworkEvent.Context> ctx) {
-        ctx.get().enqueueWork(() -> {
-            assert ctx.get().getDirection() == NetworkDirection.PLAY_TO_CLIENT;
+    public void encode(FriendlyByteBuf buf) {
+        buf.writeUUID(uuid);
+        buf.writeNbt(tag);
+    }
 
-            Level level = WizardsReborn.proxy.getLevel();
-            Player player = level.getPlayerByUUID(packet.uuid);
-            if (player != null) {
-                player.getCapability(IKnowledge.INSTANCE, null).ifPresent((k) -> {
-                    ((INBTSerializable<CompoundTag>)k).deserializeNBT(packet.tag);
-                });
-            }
-        });
-        ctx.get().setPacketHandled(true);
+    public static KnowledgeUpdatePacket decode(FriendlyByteBuf buf) {
+        return new KnowledgeUpdatePacket(buf.readUUID(), buf.readNbt());
     }
 }

@@ -23,6 +23,6 @@ public class ArcanumKnowledge extends ItemKnowledge {
 
     @Override
     public void award(Player player) {
-        WizardsRebornPacketHandler.sendTo(player, new ArcanemiconToastPacket(player));
+        WizardsRebornPacketHandler.sendTo(player, new ArcanemiconToastPacket());
     }
 }

@@ -44,7 +44,6 @@ public class MagicBladePacket extends PositionClientPacket {
                 .addVelocity(0, 0.1f, 0)
                 .randomOffset(0.05f)
                 .setFriction(0.9f)
-                .enablePhysics()
                 .setGravity(1f)
                 .repeat(level, x, y, z, 15, 0.8f);
         builder.setRenderType(FluffyFurRenderTypes.TRANSLUCENT_PARTICLE)

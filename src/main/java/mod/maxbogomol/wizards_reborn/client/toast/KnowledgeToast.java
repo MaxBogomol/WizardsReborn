@@ -15,14 +15,14 @@ import net.minecraftforge.api.distmarker.OnlyIn;
 @OnlyIn(Dist.CLIENT)
 public class KnowledgeToast implements Toast {
 
-    public Component id;
+    public String id;
     public int count = 1;
     public static KnowledgeToast instance;
     public boolean all;
     public boolean articles;
     public ResourceLocation TEXTURE = new ResourceLocation(WizardsReborn.MOD_ID, "textures/gui/knowledge_toast.png");
 
-    public KnowledgeToast(Component id) {
+    public KnowledgeToast(String id) {
         this.id = id;
     }
 
@@ -32,8 +32,8 @@ public class KnowledgeToast implements Toast {
 
         if (all) {
             guiGraphics.renderItem(WizardsRebornItems.ARCANEMICON.get().getDefaultInstance(), 8, 8);
-        } else if (id.getString() != "") {
-            Knowledge knowledge = KnowledgeHandler.getKnowledge(id.getString());
+        } else if (!id.isEmpty()) {
+            Knowledge knowledge = KnowledgeHandler.getKnowledge(id);
             guiGraphics.renderItem(knowledge.getIcon(), 8, 8);
         }
 
@@ -43,10 +43,10 @@ public class KnowledgeToast implements Toast {
         }
 
         if (all) {
-            return (double)timeSinceLastVisible >= 5000.0D * toastComponent.getNotificationDisplayTimeMultiplier() ? Toast.Visibility.HIDE : Toast.Visibility.SHOW;
+            return (double) timeSinceLastVisible >= 5000.0D * toastComponent.getNotificationDisplayTimeMultiplier() ? Toast.Visibility.HIDE : Toast.Visibility.SHOW;
         }
 
-        return (double)timeSinceLastVisible >= 5000.0D * toastComponent.getNotificationDisplayTimeMultiplier() + (count * 100.0D) ? Toast.Visibility.HIDE : Toast.Visibility.SHOW;
+        return (double) timeSinceLastVisible >= 5000.0D * toastComponent.getNotificationDisplayTimeMultiplier() + (count * 100.0D) ? Toast.Visibility.HIDE : Toast.Visibility.SHOW;
     }
 
     public Component getNameWithCount() {

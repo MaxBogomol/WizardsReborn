@@ -22,7 +22,6 @@ public class EngravedWisestoneRenderer implements BlockEntityRenderer<EngravedWi
 
     @Override
     public void render(EngravedWisestoneBlockEntity blockEntity, float partialTicks, PoseStack poseStack, MultiBufferSource bufferSource, int light, int overlay) {
-        MultiBufferSource bufferDelayed = FluffyFurRenderTypes.getDelayedRender();
         float ticks = ClientTickHandler.ticksInGame + Minecraft.getInstance().getPartialTick() * 0.1f;
 
         Random random = new Random();

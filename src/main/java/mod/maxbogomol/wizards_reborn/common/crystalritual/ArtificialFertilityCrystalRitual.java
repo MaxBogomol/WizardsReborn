@@ -114,11 +114,7 @@ public class ArtificialFertilityCrystalRitual extends CrystalRitual {
         } else {
             BlockState blockstate = level.getBlockState(blockPos);
             boolean flag = blockstate.isFaceSturdy(level, blockPos, Direction.UP);
-            if (flag && BoneMealItem.growWaterPlant(ItemStack.EMPTY, level, blockPos.relative(Direction.UP), Direction.UP)) {
-                return true;
-            }
+            return flag && BoneMealItem.growWaterPlant(ItemStack.EMPTY, level, blockPos.relative(Direction.UP), Direction.UP);
         }
-
-        return false;
     }
 }

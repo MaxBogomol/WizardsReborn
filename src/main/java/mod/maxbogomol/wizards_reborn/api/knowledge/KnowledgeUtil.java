@@ -35,7 +35,7 @@ public class KnowledgeUtil {
 
             WizardsRebornPacketHandler.sendTo((Player) entity, new KnowledgeUpdatePacket((Player) entity));
             if (knowledge.hasToast()) {
-                WizardsRebornPacketHandler.sendTo((Player) entity, new KnowledgeToastPacket((Player) entity, knowledge.getId(), false));
+                WizardsRebornPacketHandler.sendTo((Player) entity, new KnowledgeToastPacket(knowledge.getId(), false));
             }
         });
     }
@@ -62,7 +62,7 @@ public class KnowledgeUtil {
             }
 
             WizardsRebornPacketHandler.sendTo((Player) entity, new KnowledgeUpdatePacket((Player) entity));
-            WizardsRebornPacketHandler.sendTo((Player) entity, new KnowledgeToastPacket((Player) entity, "", true));
+            WizardsRebornPacketHandler.sendTo((Player) entity, new KnowledgeToastPacket("", true));
         });
     }
 
@@ -87,7 +87,7 @@ public class KnowledgeUtil {
 
             WizardsRebornPacketHandler.sendTo((Player) entity, new KnowledgeUpdatePacket((Player) entity));
             if (knowledge.hasToast()) {
-                WizardsRebornPacketHandler.sendTo((Player) entity, new KnowledgeToastPacket((Player) entity, knowledge.getId(), false));
+                WizardsRebornPacketHandler.sendTo((Player) entity, new KnowledgeToastPacket(knowledge.getId(), false));
             }
         });
     }
