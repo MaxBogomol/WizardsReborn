@@ -34,8 +34,6 @@ import java.util.List;
 @OnlyIn(Dist.CLIENT)
 public class KeyBindHandler {
 
-    private KeyBindHandler() {}
-
     @SubscribeEvent
     public static void onInput(InputEvent event) {
         if (WizardsRebornKeyMappings.OPEN_SELECTION_MENU.isDown()) {

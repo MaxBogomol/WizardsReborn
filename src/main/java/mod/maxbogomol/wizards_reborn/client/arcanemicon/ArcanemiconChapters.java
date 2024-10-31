@@ -2513,7 +2513,7 @@ public class ArcanemiconChapters {
                 )
         );
 
-        Map<CrystalRitual, ItemStack> crystalRituals = new HashMap<CrystalRitual, ItemStack>();
+        Map<CrystalRitual, ItemStack> crystalRituals = new HashMap<>();
 
         for (CrystalRitual ritual : CrystalRitualHandler.getCrystalRituals()) {
             ItemStack stack = new ItemStack(WizardsRebornItems.RUNIC_WISESTONE_PLATE.get());
@@ -3374,8 +3374,8 @@ public class ArcanemiconChapters {
                 new CraftingTablePage(new ItemStack(WizardsRebornItems.ALCHEMY_CALX.get(), 9), new ItemStack(WizardsRebornItems.ALCHEMY_CALX_BLOCK.get()))
         );
 
-        Map<AlchemyPotion, ItemStack> vialPotions = new HashMap<AlchemyPotion, ItemStack>();
-        Map<AlchemyPotion, ItemStack> flaskPotions = new HashMap<AlchemyPotion, ItemStack>();
+        Map<AlchemyPotion, ItemStack> vialPotions = new HashMap<>();
+        Map<AlchemyPotion, ItemStack> flaskPotions = new HashMap<>();
 
         for (AlchemyPotion potion : AlchemyPotionHandler.getAlchemyPotions()) {
             ItemStack stack = new ItemStack(WizardsRebornItems.ALCHEMY_VIAL_POTION.get());

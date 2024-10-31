@@ -5,6 +5,7 @@ import net.minecraft.world.effect.MobEffectCategory;
 import net.minecraft.world.entity.LivingEntity;
 
 public class TipsyEffect extends MobEffect {
+
     public TipsyEffect() {
         super(MobEffectCategory.NEUTRAL, 0xb5d2d2);
     }

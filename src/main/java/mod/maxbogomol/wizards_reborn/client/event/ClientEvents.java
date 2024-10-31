@@ -7,6 +7,7 @@ import mod.maxbogomol.wizards_reborn.client.arcanemicon.ArcanemiconChapters;
 import mod.maxbogomol.wizards_reborn.client.arcanemicon.ArcanemiconGui;
 import mod.maxbogomol.wizards_reborn.common.arcaneenchantment.EagleShotArcaneEnchantment;
 import mod.maxbogomol.wizards_reborn.common.arcaneenchantment.SplitArcaneEnchantment;
+import mod.maxbogomol.wizards_reborn.common.effect.MorSporesEffect;
 import mod.maxbogomol.wizards_reborn.common.item.equipment.ArcaneWandItem;
 import mod.maxbogomol.wizards_reborn.common.item.equipment.WissenWandItem;
 import mod.maxbogomol.wizards_reborn.common.item.equipment.arcane.ArcaneBowItem;
@@ -20,6 +21,7 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.client.event.ComputeFovModifierEvent;
 import net.minecraftforge.client.event.MovementInputUpdateEvent;
 import net.minecraftforge.client.event.RenderGuiOverlayEvent;
+import net.minecraftforge.client.event.ViewportEvent;
 import net.minecraftforge.client.gui.overlay.VanillaGuiOverlay;
 import net.minecraftforge.event.TickEvent;
 import net.minecraftforge.event.entity.player.ItemTooltipEvent;
@@ -81,6 +83,22 @@ public class ClientEvents {
     }
 
     @SubscribeEvent
+    public void onCameraAngles(ViewportEvent.ComputeCameraAngles event) {
+        MorSporesEffect.onCameraAngles(event);
+    }
+
+    @SubscribeEvent
+    public void onFov(ViewportEvent.ComputeFov event) {
+        MorSporesEffect.onFov(event);
+    }
+
+    @SubscribeEvent
+    public void clientTick(TickEvent.ClientTickEvent event) {
+        WissenLimitHandler.clientTick(event);
+        MorSporesEffect.clientTick(event);
+    }
+
+    @SubscribeEvent
     public void input(MovementInputUpdateEvent event) {
         if (Minecraft.getInstance().player != null) {
             if (Minecraft.getInstance().player.hasEffect(WizardsRebornMobEffects.TIPSY.get())) {
@@ -88,10 +106,5 @@ public class ClientEvents {
                 event.getInput().forwardImpulse = 1f;
             }
         }
-    }
-
-    @SubscribeEvent
-    public void clientTick(TickEvent.ClientTickEvent event) {
-        WissenLimitHandler.clientTick(event);
     }
 }

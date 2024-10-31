@@ -15,6 +15,7 @@ import net.minecraft.world.item.ItemStack;
 import java.util.List;
 
 public class WissenAuraEffect extends MobEffect {
+
     public WissenAuraEffect() {
         super(MobEffectCategory.BENEFICIAL, 0x9fc9e7);
         addAttributeModifier(WizardsRebornAttributes.WISSEN_DISCOUNT.get(), "3DB196CE-7DF0-4254-A014-BD7fB6DFC33A", 5, AttributeModifier.Operation.ADDITION);

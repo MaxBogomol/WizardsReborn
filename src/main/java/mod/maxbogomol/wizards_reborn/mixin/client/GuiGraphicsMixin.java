@@ -17,15 +17,15 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 public abstract class GuiGraphicsMixin {
 
     @Inject(at = @At(value = "TAIL"), method = "renderItem(Lnet/minecraft/world/entity/LivingEntity;Lnet/minecraft/world/level/Level;Lnet/minecraft/world/item/ItemStack;IIII)V")
-    private void wizards_reborn$renderItem(LivingEntity pEntity, Level pLevel, ItemStack pStack, int pX, int pY, int pSeed, int pGuiOffset, CallbackInfo ci) {
+    private void wizards_reborn$renderItem(LivingEntity entity, Level level, ItemStack stack, int x, int y, int seed, int guiOffset, CallbackInfo ci) {
         if (FluffyFurClientConfig.ITEM_GUI_PARTICLE.get()) {
-            if (ArcaneEnchantmentUtil.isArcaneItem(pStack)) {
+            if (ArcaneEnchantmentUtil.isArcaneItem(stack)) {
                 int i = 0;
                 for (ArcaneEnchantment enchantment : ArcaneEnchantmentHandler.getArcaneEnchantments()) {
-                    int levelEnchantment = ArcaneEnchantmentUtil.getArcaneEnchantment(pStack, enchantment);
+                    int levelEnchantment = ArcaneEnchantmentUtil.getArcaneEnchantment(stack, enchantment);
                     if (levelEnchantment > 0) {
                         GuiGraphics self = (GuiGraphics) ((Object) this);
-                        enchantment.renderParticle(self.pose(), pEntity, pLevel, pStack, pX, pY, pSeed, pGuiOffset, i);
+                        enchantment.renderParticle(self.pose(), entity, level, stack, x, y, seed, guiOffset, i);
                         i++;
                     }
                 }

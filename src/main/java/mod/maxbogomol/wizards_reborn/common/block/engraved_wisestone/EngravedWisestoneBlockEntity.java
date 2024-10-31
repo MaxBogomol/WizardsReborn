@@ -75,6 +75,12 @@ public class EngravedWisestoneBlockEntity extends BlockEntityBase implements Tic
                     float g = color.getGreen() / 255f;
                     float b = color.getBlue() / 255f;
 
+                    ParticleBuilder builder = ParticleBuilder.create(FluffyFurParticles.WISP)
+                            .setColorData(ColorParticleData.create(r, g, b, random.nextFloat(), random.nextFloat(), random.nextFloat()).build())
+                            .setTransparencyData(GenericParticleData.create(0.75f, 0).build())
+                            .setScaleData(GenericParticleData.create(0, 0.1f, 0).setEasing(Easing.SINE_IN_OUT).build())
+                            .setSpinData(SpinParticleData.create().randomSpin(0.1f).build())
+                            .setLifetime(40);
                     ParticleBuilder.create(FluffyFurParticles.SQUARE)
                             .setRenderType(FluffyFurRenderTypes.ADDITIVE)
                             .setBehavior(CubeParticleBehavior.create().build())
@@ -82,15 +88,8 @@ public class EngravedWisestoneBlockEntity extends BlockEntityBase implements Tic
                             .setTransparencyData(GenericParticleData.create(0.75f, 0).build())
                             .setScaleData(GenericParticleData.create(0, 0.1f, 0).setEasing(Easing.SINE_IN_OUT).build())
                             .setSpinData(SpinParticleData.create(0.1f, 0).setSpinOffset(0.1f * (float) ticks).build())
+                            .addAdditionalBuilder(builder)
                             .setLifetime(30)
-                            .randomVelocity(0.005f)
-                            .spawn(level, getBlockPos().getX() + 0.5F + X, getBlockPos().getY() + (glowTicks / 20f), getBlockPos().getZ() + 0.5F + Z);
-                    ParticleBuilder.create(FluffyFurParticles.WISP)
-                            .setColorData(ColorParticleData.create(r, g, b, random.nextFloat(), random.nextFloat(), random.nextFloat()).build())
-                            .setTransparencyData(GenericParticleData.create(0.75f, 0).build())
-                            .setScaleData(GenericParticleData.create(0, 0.1f, 0).setEasing(Easing.SINE_IN_OUT).build())
-                            .setSpinData(SpinParticleData.create().randomSpin(0.1f).build())
-                            .setLifetime(40)
                             .randomVelocity(0.005f)
                             .spawn(level, getBlockPos().getX() + 0.5F + X, getBlockPos().getY() + (glowTicks / 20f), getBlockPos().getZ() + 0.5F + Z);
                 }
