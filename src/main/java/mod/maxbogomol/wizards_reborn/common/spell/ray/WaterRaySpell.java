@@ -49,44 +49,36 @@ public class WaterRaySpell extends RaySpell {
     }
 
 /*    @Override
-    public void onImpact(HitResult ray, Level level, SpellProjectileEntity projectile, Player player) {
-        super.onImpact(ray, level, projectile, player);
+    public void onImpact(Level level, SpellEntity entity, RayHitResult hitResult) {
+        super.onImpact(level, entity, hitResult);
 
-        if (player != null) {
-            if (player.isShiftKeyDown()) {
-                Vec3 vec = getBlockHitOffset(ray, projectile, -0.1f);
-                BlockPos blockPos = BlockPos.containing(vec.x(), vec.y(), vec.z());
+        if (entity.getSpellContext().getAlternative()) {
+            Vec3 vec = getBlockHitOffset(ray, projectile, -0.1f);
+            BlockPos blockPos = BlockPos.containing(vec.x(), vec.y(), vec.z());
 
-                int focusLevel = CrystalUtil.getStatLevel(projectile.getStats(), WizardsRebornCrystals.FOCUS);
-                int radius = focusLevel + 1;
+            int focusLevel = CrystalUtil.getStatLevel(projectile.getStats(), WizardsRebornCrystals.FOCUS);
+            int radius = focusLevel + 1;*/
 
-                Color color = getColor();
-                float r = color.getRed() / 255f;
-                float g = color.getGreen() / 255f;
-                float b = color.getBlue() / 255f;
 
-                ItemStack stack = player.getItemInHand(player.getUsedItemHand());
+/*            for (int x = -radius; x <= radius; x++) {
+                for (int y = -radius; y <= radius; y++) {
+                    for (int z = -radius; z <= radius; z++) {
+                        if (WissenItemUtil.canRemoveWissen(stack, 5)) {
+                            BlockPos pos = blockPos.relative(Direction.Axis.X, x).relative(Direction.Axis.Y, y).relative(Direction.Axis.Z, z);
 
-                for (int x = -radius; x <= radius; x++) {
-                    for (int y = -radius; y <= radius; y++) {
-                        for (int z = -radius; z <= radius; z++) {
-                            if (WissenItemUtil.canRemoveWissen(stack, 5)) {
-                                BlockPos pos = blockPos.relative(Direction.Axis.X, x).relative(Direction.Axis.Y, y).relative(Direction.Axis.Z, z);
+                            BlockEvent.BreakEvent breakEv = new BlockEvent.BreakEvent(level, blockPos, level.getBlockState(pos), player);
 
-                                BlockEvent.BreakEvent breakEv = new BlockEvent.BreakEvent(level, blockPos, level.getBlockState(pos), player);
-
-                                if (!level.getBlockState(pos).isAir() && !MinecraftForge.EVENT_BUS.post(breakEv)) {
-                                    if (level.getBlockState(pos).getBlock() instanceof FireBlock) {
-                                        level.destroyBlock(pos, false);
-                                        removeWissen(stack, projectile.getStats(), player, 5);
-                                        PacketHandler.sendToTracking(level, player.getOnPos(), new WaterRaySpellEffectPacket((float) pos.getX() + 0.5f, (float) pos.getY() + 0.5f, (float) pos.getZ() + 0.5f, r, g, b));
-                                    }
+                            if (!level.getBlockState(pos).isAir() && !MinecraftForge.EVENT_BUS.post(breakEv)) {
+                                if (level.getBlockState(pos).getBlock() instanceof FireBlock) {
+                                    level.destroyBlock(pos, false);
+                                    removeWissen(stack, projectile.getStats(), player, 5);
+                                    PacketHandler.sendToTracking(level, player.getOnPos(), new WaterRaySpellEffectPacket((float) pos.getX() + 0.5f, (float) pos.getY() + 0.5f, (float) pos.getZ() + 0.5f, r, g, b));
                                 }
                             }
                         }
                     }
                 }
-            }
-        }
-    }*/
+            }*/
+        //}
+    //}
 }

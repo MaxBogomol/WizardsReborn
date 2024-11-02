@@ -1,4 +1,4 @@
-package mod.maxbogomol.wizards_reborn.common.network;
+package mod.maxbogomol.wizards_reborn.common.network.spell;
 
 import mod.maxbogomol.fluffy_fur.common.network.ServerPacket;
 import mod.maxbogomol.wizards_reborn.api.knowledge.KnowledgeUtil;

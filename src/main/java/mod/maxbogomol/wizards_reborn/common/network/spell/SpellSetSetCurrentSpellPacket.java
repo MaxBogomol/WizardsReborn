@@ -1,4 +1,4 @@
-package mod.maxbogomol.wizards_reborn.common.network;
+package mod.maxbogomol.wizards_reborn.common.network.spell;
 
 import mod.maxbogomol.fluffy_fur.common.network.ServerPacket;
 import mod.maxbogomol.wizards_reborn.api.knowledge.KnowledgeUtil;
@@ -9,10 +9,10 @@ import net.minecraftforge.network.simple.SimpleChannel;
 
 import java.util.function.Supplier;
 
-public class SetCurrentSpellInSetPacket extends ServerPacket {
+public class SpellSetSetCurrentSpellPacket extends ServerPacket {
     protected final int setId;
 
-    public SetCurrentSpellInSetPacket(int setId) {
+    public SpellSetSetCurrentSpellPacket(int setId) {
         this.setId = setId;
     }
 
@@ -23,14 +23,14 @@ public class SetCurrentSpellInSetPacket extends ServerPacket {
     }
 
     public static void register(SimpleChannel instance, int index) {
-        instance.registerMessage(index, SetCurrentSpellInSetPacket.class, SetCurrentSpellInSetPacket::encode, SetCurrentSpellInSetPacket::decode, SetCurrentSpellInSetPacket::handle);
+        instance.registerMessage(index, SpellSetSetCurrentSpellPacket.class, SpellSetSetCurrentSpellPacket::encode, SpellSetSetCurrentSpellPacket::decode, SpellSetSetCurrentSpellPacket::handle);
     }
 
     public void encode(FriendlyByteBuf buf) {
         buf.writeInt(setId);
     }
 
-    public static SetCurrentSpellInSetPacket decode(FriendlyByteBuf buf) {
-        return new SetCurrentSpellInSetPacket(buf.readInt());
+    public static SpellSetSetCurrentSpellPacket decode(FriendlyByteBuf buf) {
+        return new SpellSetSetCurrentSpellPacket(buf.readInt());
     }
 }

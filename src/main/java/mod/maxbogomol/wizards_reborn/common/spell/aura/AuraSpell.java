@@ -80,7 +80,7 @@ public class AuraSpell extends Spell {
 
     @Override
     public void entityTick(SpellEntity entity) {
-        if (!entity.level().isClientSide) {
+        if (!entity.level().isClientSide()) {
             auraTick(entity.level(), entity, getTargets(entity));
             if (entity.tickCount > getLifeTime(entity)) {
                 entity.remove();

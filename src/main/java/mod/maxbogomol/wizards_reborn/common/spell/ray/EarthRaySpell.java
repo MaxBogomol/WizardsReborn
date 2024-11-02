@@ -4,6 +4,8 @@ import mod.maxbogomol.fluffy_fur.common.raycast.RayHitResult;
 import mod.maxbogomol.wizards_reborn.api.crystal.CrystalUtil;
 import mod.maxbogomol.wizards_reborn.common.entity.SpellEntity;
 import mod.maxbogomol.wizards_reborn.common.item.equipment.arcane.ArcaneArmorItem;
+import mod.maxbogomol.wizards_reborn.common.network.WizardsRebornPacketHandler;
+import mod.maxbogomol.wizards_reborn.common.network.spell.EarthRaySpellPacket;
 import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornCrystals;
 import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornSpells;
 import net.minecraft.tags.BlockTags;
@@ -49,41 +51,41 @@ public class EarthRaySpell extends RaySpell {
         }
     }
 
-/*    @Override
-    public void onImpact(HitResult ray, Level level, SpellProjectileEntity projectile, Player player) {
-        super.onImpact(ray, level, projectile, player);
+    @Override
+    public void onImpact(Level level, SpellEntity entity, RayHitResult hitResult) {
+        super.onImpact(level, entity, hitResult);
 
-        if (player != null) {
-            if (player.isShiftKeyDown()) {
-                int focusLevel = CrystalUtil.getStatLevel(projectile.getStats(), WizardsRebornCrystals.FOCUS);
-                ItemStack stack = player.getItemInHand(player.getUsedItemHand());
-                if (projectile.tickCount % (20 - (focusLevel * 3)) == 0) {
-                    if (WissenItemUtil.canRemoveWissen(stack, getWissenCostWithStat(projectile.getStats(), player))) {
-                        Vec3 vec = getBlockHitOffset(ray, projectile, 0.1f);
-                        BlockPos blockPos = BlockPos.containing(vec.x(), vec.y(), vec.z());
-                        BlockState blockState = level.getBlockState(blockPos);
+        if (!entity.level().isClientSide()) {
+            if (entity.getSpellContext().getAlternative()) {
+                int focusLevel = CrystalUtil.getStatLevel(entity.getStats(), WizardsRebornCrystals.FOCUS);
+                if (entity.tickCount % (20 - (focusLevel * 3)) == 0) {
+                    WizardsRebornPacketHandler.sendToTracking(level, hitResult.blockPos, new EarthRaySpellPacket(hitResult.blockPos, getColor()));
+/*                if (WissenItemUtil.canRemoveWissen(stack, getWissenCostWithStat(projectile.getStats(), player))) {
+                    Vec3 vec = getBlockHitOffset(ray, projectile, 0.1f);
+                    BlockPos blockPos = BlockPos.containing(vec.x(), vec.y(), vec.z());
+                    BlockState blockState = level.getBlockState(blockPos);
 
-                        BlockEvent.BreakEvent breakEv = new BlockEvent.BreakEvent(level, blockPos, blockState, player);
+                    BlockEvent.BreakEvent breakEv = new BlockEvent.BreakEvent(level, blockPos, blockState, player);
 
-                        if (!blockState.isAir() && !MinecraftForge.EVENT_BUS.post(breakEv)) {
-                            if (canBreak(blockState)) {
-                                level.destroyBlock(blockPos, true);
+                    if (!blockState.isAir() && !MinecraftForge.EVENT_BUS.post(breakEv)) {
+                        if (canBreak(blockState)) {
+                            level.destroyBlock(blockPos, true);
 
-                                removeWissen(stack, projectile.getStats(), player);
+                            removeWissen(stack, projectile.getStats(), player);
 
-                                Color color = getColor();
-                                float r = color.getRed() / 255f;
-                                float g = color.getGreen() / 255f;
-                                float b = color.getBlue() / 255f;
+                            Color color = getColor();
+                            float r = color.getRed() / 255f;
+                            float g = color.getGreen() / 255f;
+                            float b = color.getBlue() / 255f;
 
-                                PacketHandler.sendToTracking(level, player.getOnPos(), new EarthRaySpellEffectPacket((float) blockPos.getX() + 0.5f, (float) blockPos.getY() + 0.5f, (float) blockPos.getZ() + 0.5f, r, g, b));
-                            }
+                            PacketHandler.sendToTracking(level, player.getOnPos(), new EarthRaySpellEffectPacket((float) blockPos.getX() + 0.5f, (float) blockPos.getY() + 0.5f, (float) blockPos.getZ() + 0.5f, r, g, b));
                         }
                     }
+                }*/
                 }
             }
         }
-    }*/
+    }
 
     public boolean canBreak(BlockState blockState) {
         float destroyTime = blockState.getBlock().defaultDestroyTime();

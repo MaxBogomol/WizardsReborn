@@ -13,6 +13,8 @@ import mod.maxbogomol.wizards_reborn.common.network.*;
 import mod.maxbogomol.wizards_reborn.common.network.item.ArcaneWandRemoveCrystalPacket;
 import mod.maxbogomol.wizards_reborn.common.network.item.ArcaneWandSpellSetPacket;
 import mod.maxbogomol.wizards_reborn.common.network.item.BagOpenPacket;
+import mod.maxbogomol.wizards_reborn.common.network.spell.SpellSetSetCurrentPacket;
+import mod.maxbogomol.wizards_reborn.common.network.spell.SpellSetSetCurrentSpellPacket;
 import mod.maxbogomol.wizards_reborn.registry.client.WizardsRebornKeyMappings;
 import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornSounds;
 import net.minecraft.client.Minecraft;
@@ -188,8 +190,8 @@ public class KeyBindHandler {
                     if (key == WizardsRebornKeyMappings.NEXT_SPELL.getKey().getValue()) {
                         current = (KnowledgeUtil.getCurrentSpellSet(player) + 1) % 10;
                         if (current < 0) current = 9;
-                        WizardsRebornPacketHandler.sendToServer(new SetCurrentSpellSetPacket(current));
-                        WizardsRebornPacketHandler.sendToServer(new SetCurrentSpellInSetPacket(0));
+                        WizardsRebornPacketHandler.sendToServer(new SpellSetSetCurrentPacket(current));
+                        WizardsRebornPacketHandler.sendToServer(new SpellSetSetCurrentSpellPacket(0));
                         set = true;
                         currentSet = current;
                         current = 0;
@@ -197,8 +199,8 @@ public class KeyBindHandler {
                     if (key == WizardsRebornKeyMappings.PREVIOUS_SPELL.getKey().getValue()) {
                         current = (KnowledgeUtil.getCurrentSpellSet(player) - 1) % 10;
                         if (current < 0) current = 9;
-                        WizardsRebornPacketHandler.sendToServer(new SetCurrentSpellSetPacket(current));
-                        WizardsRebornPacketHandler.sendToServer(new SetCurrentSpellInSetPacket(0));
+                        WizardsRebornPacketHandler.sendToServer(new SpellSetSetCurrentPacket(current));
+                        WizardsRebornPacketHandler.sendToServer(new SpellSetSetCurrentSpellPacket(0));
                         set = true;
                         currentSet = current;
                         current = 0;
@@ -207,7 +209,7 @@ public class KeyBindHandler {
                     if (key == WizardsRebornKeyMappings.NEXT_SPELL.getKey().getValue()) {
                         current = (KnowledgeUtil.getCurrentSpellInSet(player) + 1) % 10;
                         if (current < 0) current = 9;
-                        WizardsRebornPacketHandler.sendToServer(new SetCurrentSpellInSetPacket(current));
+                        WizardsRebornPacketHandler.sendToServer(new SpellSetSetCurrentSpellPacket(current));
                         set = true;
                         spellSet = true;
                         currentSet = KnowledgeUtil.getCurrentSpellSet(player);
@@ -215,7 +217,7 @@ public class KeyBindHandler {
                     if (key == WizardsRebornKeyMappings.PREVIOUS_SPELL.getKey().getValue()) {
                         current = (KnowledgeUtil.getCurrentSpellInSet(player) - 1) % 10;
                         if (current < 0) current = 9;
-                        WizardsRebornPacketHandler.sendToServer(new SetCurrentSpellInSetPacket(current));
+                        WizardsRebornPacketHandler.sendToServer(new SpellSetSetCurrentSpellPacket(current));
                         set = true;
                         spellSet = true;
                         currentSet = KnowledgeUtil.getCurrentSpellSet(player);

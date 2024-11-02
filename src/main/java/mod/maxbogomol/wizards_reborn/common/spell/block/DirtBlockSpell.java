@@ -1,9 +1,15 @@
 package mod.maxbogomol.wizards_reborn.common.spell.block;
 
+import mod.maxbogomol.wizards_reborn.api.crystal.CrystalUtil;
+import mod.maxbogomol.wizards_reborn.api.spell.SpellContext;
+import mod.maxbogomol.wizards_reborn.common.item.equipment.arcane.ArcaneArmorItem;
 import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornCrystals;
 import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornSpells;
+import net.minecraft.core.BlockPos;
+import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.state.BlockState;
 
 import java.awt.*;
 import java.util.ArrayList;
@@ -26,20 +32,18 @@ public class DirtBlockSpell extends BlockPlaceSpell {
     public Color getColor() {
         return WizardsRebornSpells.earthSpellColor;
     }
-/*
-    @Override
-    public InteractionResult placeBlock(ItemStack stack, UseOnContext context, BlockPos blockPos) {
-        Level level = context.getLevel();
-        BlockPos blockPos1 = blockPos.relative(context.getClickedFace());
-        BlockState blockState = Blocks.DIRT.defaultBlockState();
 
-        CompoundTag stats = getStats(stack);
-        int focusLevel = CrystalUtil.getStatLevel(stats, WizardsRebornCrystals.FOCUS);
-        float magicModifier = ArcaneArmorItem.getPlayerMagicModifier(context.getPlayer());
-        if (random.nextFloat() < 0.15f + (0.05f* (focusLevel + magicModifier))) {
-            blockState = blockList.get(random.nextInt(blockList.size())).defaultBlockState();
+    @Override
+    public boolean placeBlock(Level level, SpellContext spellContext, BlockPos blockPos) {
+        if (!level.isClientSide()) {
+            BlockState blockState = Blocks.DIRT.defaultBlockState();
+            int focusLevel = CrystalUtil.getStatLevel(spellContext.getStats(), WizardsRebornCrystals.FOCUS);
+            float magicModifier = ArcaneArmorItem.getPlayerMagicModifier(spellContext.getEntity());
+            if (random.nextFloat() < 0.15f + (0.05f * (focusLevel + magicModifier))) {
+                blockState = blockList.get(random.nextInt(blockList.size())).defaultBlockState();
+            }
+            setBlock(level, spellContext, blockPos, blockState);
         }
-        setBlock(level, blockPos1, blockState, context.getPlayer());
-        return InteractionResult.SUCCESS;
-    }*/
+        return true;
+    }
 }

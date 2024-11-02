@@ -1,4 +1,4 @@
-package mod.maxbogomol.wizards_reborn.common.network;
+package mod.maxbogomol.wizards_reborn.common.network.spell;
 
 import mod.maxbogomol.fluffy_fur.common.network.ServerPacket;
 import mod.maxbogomol.wizards_reborn.api.knowledge.KnowledgeUtil;
@@ -10,12 +10,12 @@ import net.minecraftforge.network.simple.SimpleChannel;
 
 import java.util.function.Supplier;
 
-public class SetSpellInSetPacket extends ServerPacket {
+public class SpellSetSetSpellPacket extends ServerPacket {
     protected final String spell;
     protected final int setId;
     protected final int spellId;
 
-    public SetSpellInSetPacket(String spell, int setId, int spellId) {
+    public SpellSetSetSpellPacket(String spell, int setId, int spellId) {
         this.spell = spell;
         this.setId = setId;
         this.spellId = spellId;
@@ -28,7 +28,7 @@ public class SetSpellInSetPacket extends ServerPacket {
     }
 
     public static void register(SimpleChannel instance, int index) {
-        instance.registerMessage(index, SetSpellInSetPacket.class, SetSpellInSetPacket::encode, SetSpellInSetPacket::decode, SetSpellInSetPacket::handle);
+        instance.registerMessage(index, SpellSetSetSpellPacket.class, SpellSetSetSpellPacket::encode, SpellSetSetSpellPacket::decode, SpellSetSetSpellPacket::handle);
     }
 
     public void encode(FriendlyByteBuf buf) {
@@ -37,7 +37,7 @@ public class SetSpellInSetPacket extends ServerPacket {
         buf.writeInt(spellId);
     }
 
-    public static SetSpellInSetPacket decode(FriendlyByteBuf buf) {
-        return new SetSpellInSetPacket(buf.readUtf(), buf.readInt(), buf.readInt());
+    public static SpellSetSetSpellPacket decode(FriendlyByteBuf buf) {
+        return new SpellSetSetSpellPacket(buf.readUtf(), buf.readInt(), buf.readInt());
     }
 }

@@ -12,7 +12,7 @@ import mod.maxbogomol.wizards_reborn.client.arcanemicon.Chapter;
 import mod.maxbogomol.wizards_reborn.client.arcanemicon.Page;
 import mod.maxbogomol.wizards_reborn.common.network.WizardsRebornPacketHandler;
 import mod.maxbogomol.wizards_reborn.config.WizardsRebornClientConfig;
-import mod.maxbogomol.wizards_reborn.common.network.SpellUnlockPacket;
+import mod.maxbogomol.wizards_reborn.common.network.spell.SpellUnlockPacket;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Font;
 import net.minecraft.client.gui.GuiGraphics;
