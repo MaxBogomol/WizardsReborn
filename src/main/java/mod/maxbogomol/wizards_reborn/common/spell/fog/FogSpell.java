@@ -1,83 +1,94 @@
 package mod.maxbogomol.wizards_reborn.common.spell.fog;
 
+import mod.maxbogomol.fluffy_fur.client.particle.ParticleBuilder;
+import mod.maxbogomol.fluffy_fur.client.particle.data.ColorParticleData;
+import mod.maxbogomol.fluffy_fur.client.particle.data.GenericParticleData;
+import mod.maxbogomol.fluffy_fur.client.particle.data.LightParticleData;
+import mod.maxbogomol.fluffy_fur.client.particle.data.SpinParticleData;
+import mod.maxbogomol.fluffy_fur.registry.client.FluffyFurParticles;
+import mod.maxbogomol.fluffy_fur.registry.client.FluffyFurRenderTypes;
+import mod.maxbogomol.wizards_reborn.api.crystal.CrystalUtil;
 import mod.maxbogomol.wizards_reborn.api.spell.Spell;
+import mod.maxbogomol.wizards_reborn.api.spell.SpellContext;
+import mod.maxbogomol.wizards_reborn.common.entity.SpellEntity;
+import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornCrystals;
+import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornEntities;
+import net.minecraft.core.BlockPos;
+import net.minecraft.world.entity.Entity;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.phys.AABB;
+import net.minecraft.world.phys.Vec3;
+
+import java.awt.*;
+import java.util.ArrayList;
+import java.util.List;
 
 public class FogSpell extends Spell {
+
     public FogSpell(String id, int points) {
         super(id, points);
     }
 
-/*    @Override
-    public boolean canSpellAir(Level level, Player player, InteractionHand hand) {
-        return false;
-    }*/
-/*
     @Override
-    public InteractionResult onWandUseOn(ItemStack stack, UseOnContext context) {
-        Level level = context.getLevel();
-        Player player = context.getPlayer();
-
-        if (!level.isClientSide && canSpell(level, player, context.getHand())) {
-            CompoundTag stats = getStats(stack);
-
-            Vec3 pos = context.getClickedPos().getCenter();
-            SpellProjectileEntity entity = new SpellProjectileEntity(WizardsRebornEntities.SPELL_PROJECTILE.get(), level).shoot(
-                    pos.x, pos.y + 0.5, pos.z, 0, 0, 0, player.getUUID(), this.getId(), stats
-            );
-            level.addFreshEntity(entity);
-
-            setCooldown(stack, stats);
-            removeWissen(stack, stats, player);
-            awardStat(player, stack);
-            spellSound(player, context.getLevel());
-            return InteractionResult.SUCCESS;
-        }
-
-        return InteractionResult.PASS;
+    public boolean canUseSpell(Level level, SpellContext spellContext) {
+        return false;
     }
 
     @Override
-    public void entityTick(SpellProjectileEntity entity) {
-        if (!entity.level().isClientSide) {
+    public boolean useSpellOn(Level level, SpellContext spellContext) {
+        if (!level.isClientSide()) {
+            Vec3 pos = spellContext.getBlockPos().getCenter();
+            SpellEntity entity = new SpellEntity(WizardsRebornEntities.SPELL.get(), level);
+            entity.setup(pos.x(), pos.y() + 0.5f, pos.z(), spellContext.getEntity(), this.getId(), spellContext.getStats()).setSpellContext(spellContext);
+            level.addFreshEntity(entity);
+            spellContext.setCooldown(this);
+            spellContext.removeWissen(this);
+            spellContext.awardStat(this);
+            spellContext.spellSound(this);
+            return true;
+        }
+        return false;
+    }
+
+    @Override
+    public void entityTick(SpellEntity entity) {
+        fog(entity);
+        if (!entity.level().isClientSide()) {
             if (entity.tickCount > getLifeTime(entity)) {
                 entity.remove();
             }
-            fog(entity, entity.getSender());
         } else {
             fogEffect(entity);
         }
     }
 
-    public int getLifeTime(SpellProjectileEntity entity) {
+    public int getLifeTime(SpellEntity entity) {
         return 200;
     }
 
-    public int getHeight(SpellProjectileEntity entity) {
+    public int getHeight(SpellEntity entity) {
         return 2;
     }
 
-    public int getSize(SpellProjectileEntity entity) {
+    public int getSize(SpellEntity entity) {
         return 1;
     }
 
-    public int getAdditionalSize(SpellProjectileEntity entity) {
+    public int getAdditionalSize(SpellEntity entity) {
         return 1;
     }
 
-    public boolean isCircle(SpellProjectileEntity entity) {
+    public boolean isCircle(SpellEntity entity) {
         return true;
     }
 
-    public void fog(SpellProjectileEntity entity, Player player) {
+    public void fog(SpellEntity entity) {
 
     }
 
-    public void fogEffect(SpellProjectileEntity entity) {
+    public void fogEffect(SpellEntity entity) {
         Color color = getColor();
-        float r = color.getRed() / 255f;
-        float g = color.getGreen() / 255f;
-        float b = color.getBlue() / 255f;
-
         float alpha = 1;
         int lifeTime = getLifeTime(entity);
 
@@ -159,5 +170,5 @@ public class FogSpell extends Spell {
         }
 
         return list;
-    }*/
+    }
 }

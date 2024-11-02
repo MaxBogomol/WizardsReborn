@@ -3,9 +3,9 @@ package mod.maxbogomol.wizards_reborn.api.spell;
 import com.mojang.blaze3d.vertex.PoseStack;
 import mod.maxbogomol.fluffy_fur.client.animation.ItemAnimation;
 import mod.maxbogomol.wizards_reborn.WizardsReborn;
+import mod.maxbogomol.wizards_reborn.api.crystal.CrystalHandler;
 import mod.maxbogomol.wizards_reborn.api.crystal.CrystalType;
 import mod.maxbogomol.wizards_reborn.api.crystal.CrystalUtil;
-import mod.maxbogomol.wizards_reborn.api.crystal.CrystalHandler;
 import mod.maxbogomol.wizards_reborn.api.knowledge.Research;
 import mod.maxbogomol.wizards_reborn.api.wissen.WissenUtil;
 import mod.maxbogomol.wizards_reborn.common.entity.SpellEntity;
@@ -20,7 +20,6 @@ import net.minecraft.nbt.CompoundTag;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.InteractionHand;
-import net.minecraft.world.InteractionResult;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.damagesource.DamageType;
 import net.minecraft.world.entity.Entity;
@@ -162,7 +161,7 @@ public class Spell {
         return true;
     }
 
-    public boolean canSpellAir(Level level, Player player, InteractionHand hand) {
+    public boolean canUseSpell(Level level, SpellContext spellContext) {
         return true;
     }
 
@@ -200,7 +199,15 @@ public class Spell {
 
     }
 
+    public boolean useSpellOn(Level level, SpellContext spellContext) {
+        return false;
+    }
+
     public void useSpellTick(Level level, SpellContext spellContext, int remainingUseDuration) {
+
+    }
+
+    public void stopUseSpell(Level level, SpellContext spellContext, int timeLeft) {
 
     }
 
@@ -212,20 +219,19 @@ public class Spell {
         useSpell(level, getWandContext(player, stack));
     }
 
-    public InteractionResult useWandOn(ItemStack stack, UseOnContext context) {
-        return InteractionResult.PASS;
+    public boolean useWandOn(ItemStack stack, UseOnContext context) {
+        SpellContext spellContext = getWandContext(context.getPlayer(), stack);
+        spellContext.setBlockPos(context.getClickedPos());
+        spellContext.setDirection(context.getClickedFace());
+        return useSpellOn(context.getLevel(), spellContext);
     }
 
     public void useWandTick(Level level, LivingEntity livingEntity, ItemStack stack, int remainingUseDuration) {
         useSpellTick(level, getWandContext(livingEntity, stack), remainingUseDuration);
     }
 
-    public void releaseUsing(ItemStack stack, Level level, LivingEntity entityLiving, int timeLeft) {
-
-    }
-
-    public void finishUsingItem(ItemStack stack, Level level, LivingEntity entityLiving) {
-
+    public void stopUseWand(ItemStack stack, Level level, LivingEntity entityLiving, int timeLeft) {
+        stopUseSpell(level, getWandContext(entityLiving, stack), timeLeft);
     }
 
     public void entityTick(SpellEntity entity) {

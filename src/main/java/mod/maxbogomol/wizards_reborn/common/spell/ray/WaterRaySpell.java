@@ -37,7 +37,7 @@ public class WaterRaySpell extends RaySpell {
                     float damage = (1.0f + (focusLevel * 0.5f)) + magicModifier;
 
                     target.clearFire();
-                    int frost = target.getTicksFrozen() + 1;
+                    int frost = target.getTicksFrozen() + 10;
                     if (frost > 250) frost = 250;
                     target.setTicksFrozen(frost);
 

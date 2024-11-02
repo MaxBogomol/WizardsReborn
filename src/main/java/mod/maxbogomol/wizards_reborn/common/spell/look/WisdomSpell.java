@@ -1,11 +1,21 @@
 package mod.maxbogomol.wizards_reborn.common.spell.look;
 
 import mod.maxbogomol.fluffy_fur.client.animation.ItemAnimation;
+import mod.maxbogomol.wizards_reborn.api.crystal.CrystalUtil;
+import mod.maxbogomol.wizards_reborn.api.spell.SpellContext;
 import mod.maxbogomol.wizards_reborn.client.animation.StrikeSpellItemAnimation;
+import mod.maxbogomol.wizards_reborn.common.network.WizardsRebornPacketHandler;
+import mod.maxbogomol.wizards_reborn.common.network.spell.WisdomSpellBurstPacket;
 import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornCrystals;
 import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornSpells;
+import net.minecraft.core.BlockPos;
+import net.minecraft.world.InteractionHand;
+import net.minecraft.world.entity.ExperienceOrb;
+import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.UseAnim;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.phys.Vec3;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 
@@ -38,65 +48,43 @@ public class WisdomSpell extends LookSpell {
     public int getMinimumPolishingLevel() {
         return 1;
     }
-/*
 
     @Override
-    public void useSpell(Level level, Player player, InteractionHand hand) {
-        if (!level.isClientSide) {
-            player.startUsingItem(hand);
-        }
-    }
+    public void useSpellTick(Level level, SpellContext spellContext, int time) {
+        if (!level.isClientSide()) {
+            if (time % 20 == 0 && time > 0) {
+                spellContext.removeWissen(this);
+                spellContext.awardStat(this);
+                spellContext.spellSound(this);
+                lookSpell(level, spellContext);
 
-    @Override
-    public void onUseTick(Level level, LivingEntity livingEntity, ItemStack stack, int remainingUseDuration) {
-        if (livingEntity instanceof Player player) {
-            if (player.getTicksUsingItem() % 20 == 0 && player.getTicksUsingItem() > 0) {
-                if (!level.isClientSide) {
-                    CompoundTag stats = getStats(stack);
-                    removeWissen(stack, stats, player);
-                    awardStat(player, stack);
-                    spellSound(player, level);
-                    lookSpell(level, player, player.getUsedItemHand());
-                } else {
-                    Vec3 pos = getHitPos(level, player, player.getUsedItemHand()).getPosHit();
-                    Color color = getColor();
-                    ParticleBuilder.create(FluffyFurParticles.SPARKLE)
-                            .setColorData(ColorParticleData.create(color).build())
-                            .setTransparencyData(GenericParticleData.create(0.5f).build())
-                            .setScaleData(GenericParticleData.create(0.2f, 0f).build())
-                            .setLifetime(15)
-                            .spawn(level, pos.x(), pos.y(), pos.z());
-                    ParticleBuilder.create(FluffyFurParticles.SPARKLE)
-                            .setColorData(ColorParticleData.create(color).build())
-                            .setTransparencyData(GenericParticleData.create(0.5f).build())
-                            .setScaleData(GenericParticleData.create(0.2f, 0f).build())
-                            .setLifetime(10)
-                            .spawn(level, pos.x(), pos.y(), pos.z());
-                }
+                Vec3 pos = getHit(level, spellContext).getPos();
+                WizardsRebornPacketHandler.sendToTracking(level, BlockPos.containing(pos), new WisdomSpellBurstPacket(pos, getColor()));
             }
         }
     }
 
     @Override
-    public void releaseUsing(ItemStack stack, Level level, LivingEntity entityLiving, int timeLeft) {
-        if (!level.isClientSide) {
-            CompoundTag stats = getStats(stack);
-            setCooldown(stack, stats);
+    public void stopUseSpell(Level level, SpellContext spellContext, int timeLeft) {
+        if (!level.isClientSide()) {
+            spellContext.setCooldown(this);
         }
     }
 
     @Override
-    public void lookSpell(Level level, Player player, InteractionHand hand) {
-        Vec3 pos = getHitPos(level, player, hand).getPosHit();
+    public void useWand(Level level, Player player, InteractionHand hand, ItemStack stack) {
+        if (!level.isClientSide()) {
+            player.startUsingItem(hand);
+        }
+    }
 
-        ItemStack stack = player.getItemInHand(hand);
-        CompoundTag stats = getStats(stack);
-        int focusLevel = CrystalUtil.getStatLevel(stats, WizardsRebornCrystals.FOCUS);
+    @Override
+    public void lookSpell(Level level, SpellContext spellContext) {
+        Vec3 pos = getHit(level, spellContext).getPos();
+        int focusLevel = CrystalUtil.getStatLevel(spellContext.getStats(), WizardsRebornCrystals.FOCUS);
         int exp = 5 + focusLevel;
-
         level.addFreshEntity(new ExperienceOrb(level, pos.x, pos.y, pos.z, exp));
     }
-*/
 
     @Override
     public UseAnim getUseAnimation(ItemStack stack) {

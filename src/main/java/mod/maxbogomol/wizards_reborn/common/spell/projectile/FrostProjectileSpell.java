@@ -34,7 +34,8 @@ public class FrostProjectileSpell extends ProjectileSpell {
             float damage = (3.5f + (focusLevel * 0.5f)) + magicModifier;
             target.clearFire();
             int frost = target.getTicksFrozen() + 75;
-            if (frost <= 250) target.setTicksFrozen(frost);
+            if (frost > 250) frost = 250;
+            target.setTicksFrozen(frost);
             DamageSource damageSource = getDamage(target.damageSources().freeze().typeHolder(), entity, entity.getOwner());
             target.hurt(damageSource, damage);
         }

@@ -83,7 +83,7 @@ public class ThrowedScytheRenderer<T extends ThrowedScytheEntity> extends Entity
                     .setAlpha(0.5f * alpha)
                     .setSecondAlpha(0.05f * alpha)
                     .enableSided();
-            WizardsRebornRenderUtil.scytheTrail(renderBuilder, poseStack, 1f, distance, 0.5f);
+            WizardsRebornRenderUtil.renderScytheTrail(renderBuilder, poseStack, 1f, distance);
             poseStack.popPose();
         }
 

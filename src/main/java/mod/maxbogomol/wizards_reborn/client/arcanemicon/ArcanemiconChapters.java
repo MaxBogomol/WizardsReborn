@@ -1,5 +1,6 @@
 package mod.maxbogomol.wizards_reborn.client.arcanemicon;
 
+import mod.maxbogomol.fluffy_fur.FluffyFur;
 import mod.maxbogomol.fluffy_fur.config.FluffyFurClientConfig;
 import mod.maxbogomol.fluffy_fur.util.IntegrationUtil;
 import mod.maxbogomol.wizards_reborn.WizardsReborn;
@@ -31,6 +32,7 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.enchantment.Enchantments;
 import net.minecraft.world.level.material.Fluids;
+import net.minecraftforge.common.ForgeMod;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fml.ModList;
 
@@ -58,7 +60,7 @@ public class ArcanemiconChapters {
             EMBER_RAY, WISDOM,
             RESEARCHES, MONOGRAMS, RESEARCH,
             LUNAM, VITA, SOLEM, MORS, MIRACULUM, TEMPUS, STATERA, ECLIPSIS, SICCITAS, SOLSTITIUM, FAMES, RENAISSANCE, BELLUM, LUX, KARA, DEGRADATIO, PRAEDICTIONEM, EVOLUTIONIS, TENEBRIS, UNIVERSUM,
-            LIGHT_RAYS, LIGHT_EMITTER, LIGHT_TRANSFER_LENS, RUNIC_PEDESTAL, CRYSTALS_RITUALS, ARTIFICIAL_FERTILITY, RITUAL_BREEDING, CRYSTAL_GROWTH_ACCELERATION, CRYSTAL_INFUSION, ARCANUM_SEED, INNOCENT_WOOD, INNOCENT_WOOD_TOOLS, PHANTOM_INK_TRIM,
+            LIGHT_RAYS, LIGHT_EMITTER, LIGHT_TRANSFER_LENS, RUNIC_PEDESTAL, CRYSTALS_RITUALS, FOCUSING, ARTIFICIAL_FERTILITY, RITUAL_BREEDING, CRYSTAL_GROWTH_ACCELERATION, CRYSTAL_INFUSION, ARCANUM_SEED, INNOCENT_WOOD, INNOCENT_WOOD_TOOLS, PHANTOM_INK_TRIM,
             MOR, MORTAR, ARCANE_LINEN, MUSHROOM_CAPS, WISESTONE, WISESTONE_PEDESTAL, FLUID_PIPES, STEAM_PIPES, ORBITAL_FLUID_RETAINER, ALCHEMY_FURNACE, STEAM_THERMAL_STORAGE, ALCHEMY_MACHINE, ALCHEMY_OIL, MUSIC_DISC_ARCANUM, MUSIC_DISC_MOR, NETHER_SALT, ALCHEMY_CALX, ALCHEMY_GLASS, ALCHEMY_BAG, ALCHEMY_POTIONS, TEA, ALCHEMY_BREWS, ADVANCED_CALX, ALCHEMY_TRANSMUTATION, ARCANE_CENSER, SMOKING_PIPE, ARCACITE, ARCACITE_POLISHING_MIXTURE, SOUL_HUNTER_TRIM, IMPLOSION_TRIM,
             PROGRESSION, STATISTIC, CONFIGS, SPECIAL_THANKS, GRAPHICS_CONFIGS, ANIMATIONS_CONFIGS, PARTICLES_CONFIGS, ARCANEMICON_CONFIGS, NUMERICAL_CONFIGS, OVERLAY_CONFIGS, ARCANE_WAND_OVERLAY_CONFIGS;
     public static ResearchPage RESEARCH_MAIN, RESEARCH_LIST;
@@ -2530,6 +2532,16 @@ public class ArcanemiconChapters {
                 new TitlePage("wizards_reborn.arcanemicon.page.arcane_wand.resonance")
         );
 
+        FOCUSING = new Chapter(
+                "wizards_reborn.arcanemicon.chapter.focusing",
+                new TitledBlockPage("wizards_reborn.arcanemicon.page.focusing",
+                        new BlockEntry(RUNIC_PEDESTAL_ITEM, crystalRituals.get(WizardsRebornCrystalRituals.FOCUSING))
+                ),
+                new ArcaneIteratorPage(crystalRituals.get(WizardsRebornCrystalRituals.FOCUSING), 0, 0, new ItemStack(WizardsRebornItems.WISESTONE_PLATE.get()),
+                        ARCACITE_ITEM, ARCACITE_ITEM, ARCACITE_ITEM, ARCANUM_LENS_ITEM, ARCANUM_LENS_ITEM, ARCANUM_LENS_ITEM
+                )
+        );
+
         ARTIFICIAL_FERTILITY = new Chapter(
                 "wizards_reborn.arcanemicon.chapter.artificial_fertility",
                 new TitledBlockPage("wizards_reborn.arcanemicon.page.artificial_fertility",
@@ -2869,15 +2881,18 @@ public class ArcanemiconChapters {
                         new IndexEntry(LIGHT_TRANSFER_LENS, new ItemStack(WizardsRebornItems.LIGHT_TRANSFER_LENS.get()), WizardsRebornKnowledges.ARCANUM_LENS),
                         new IndexEntry(RUNIC_PEDESTAL, RUNIC_PEDESTAL_ITEM, WizardsRebornKnowledges.ARCANUM_LENS),
                         new IndexEntry(CRYSTALS_RITUALS, new ItemStack(WizardsRebornItems.EARTH_CRYSTAL.get()), WizardsRebornKnowledges.RUNIC_PEDESTAL),
-                        new IndexEntry(ARTIFICIAL_FERTILITY, crystalRituals.get(WizardsRebornCrystalRituals.ARTIFICIAL_FERTILITY), WizardsRebornKnowledges.RUNIC_PEDESTAL)
+                        new IndexEntry(FOCUSING, crystalRituals.get(WizardsRebornCrystalRituals.FOCUSING), WizardsRebornKnowledges.RUNIC_PEDESTAL)
                 ),
                 new IndexPage(
+                        new IndexEntry(ARTIFICIAL_FERTILITY, crystalRituals.get(WizardsRebornCrystalRituals.ARTIFICIAL_FERTILITY), WizardsRebornKnowledges.RUNIC_PEDESTAL),
                         new IndexEntry(RITUAL_BREEDING, crystalRituals.get(WizardsRebornCrystalRituals.RITUAL_BREEDING), WizardsRebornKnowledges.RUNIC_PEDESTAL),
                         new IndexEntry(CRYSTAL_GROWTH_ACCELERATION, crystalRituals.get(WizardsRebornCrystalRituals.CRYSTAL_GROWTH_ACCELERATION), WizardsRebornKnowledges.RUNIC_PEDESTAL),
                         new IndexEntry(CRYSTAL_INFUSION, crystalRituals.get(WizardsRebornCrystalRituals.CRYSTAL_INFUSION), WizardsRebornKnowledges.RUNIC_PEDESTAL),
                         new IndexEntry(ARCANUM_SEED, new ItemStack(WizardsRebornItems.ARCANUM_SEED.get()), WizardsRebornKnowledges.CRYSTAL_INFUSION),
                         new IndexEntry(INNOCENT_WOOD, INNOCENT_WOOD_PLANKS_ITEM, WizardsRebornKnowledges.CRYSTAL_INFUSION),
-                        new IndexEntry(INNOCENT_WOOD_TOOLS, new ItemStack(WizardsRebornItems.INNOCENT_WOOD_PICKAXE.get()), WizardsRebornKnowledges.INNOCENT_WOOD),
+                        new IndexEntry(INNOCENT_WOOD_TOOLS, new ItemStack(WizardsRebornItems.INNOCENT_WOOD_PICKAXE.get()), WizardsRebornKnowledges.INNOCENT_WOOD)
+                ),
+                new IndexPage(
                         new IndexEntry(PHANTOM_INK_TRIM, new ItemStack(WizardsRebornItems.PHANTOM_INK_TRIM.get()), WizardsRebornKnowledges.INNOCENT_WOOD)
                 )
         );
@@ -3683,6 +3698,17 @@ public class ArcanemiconChapters {
                 new AlchemyMachinePage(vialPotions.get(WizardsRebornAlchemyPotions.WISSEN_TEA), FluidStack.EMPTY, true, true,
                         FluidStack.EMPTY, FluidStack.EMPTY, FluidStack.EMPTY,
                         new ItemStack(WizardsRebornItems.PETALS.get()), new ItemStack(WizardsRebornItems.PETALS.get()), ARCANUM_DUST_ITEM, ARCANUM_DUST_ITEM, ARCANUM_DUST_ITEM, vialPotions.get(WizardsRebornAlchemyPotions.WATER)
+                ),
+                new TitledBlockPage("wizards_reborn.arcanemicon.page.milk_tea",
+                        new BlockEntry(WISESTONE_PEDESTAL_ITEM, vialPotions.get(WizardsRebornAlchemyPotions.MILK_TEA))
+                ),
+                new AlchemyMachinePage(EMPTY_ITEM, new FluidStack(WizardsRebornFluids.MILK_TEA.get(), 1000), true, true,
+                        new FluidStack(ForgeMod.MILK.get(), 1000), FluidStack.EMPTY, FluidStack.EMPTY,
+                        new ItemStack(WizardsRebornItems.PETALS.get()), new ItemStack(WizardsRebornItems.PETALS.get()), new ItemStack(WizardsRebornItems.PETALS.get())
+                ),
+                new AlchemyMachinePage(vialPotions.get(WizardsRebornAlchemyPotions.MILK_TEA), FluidStack.EMPTY, true, true,
+                        FluidStack.EMPTY, FluidStack.EMPTY, FluidStack.EMPTY,
+                        new ItemStack(WizardsRebornItems.PETALS.get()), new ItemStack(WizardsRebornItems.PETALS.get()), new ItemStack(WizardsRebornItems.PETALS.get()), vialPotions.get(WizardsRebornAlchemyPotions.MILK)
                 )
         );
 
@@ -4114,8 +4140,9 @@ public class ArcanemiconChapters {
                 new TitlePage("wizards_reborn.arcanemicon.page.particles_configs"),
                 new ConfigPage(
                         new ConfigIndexEntry().setIntegerConfig(WizardsRebornClientConfig.WISSEN_RAYS_LIMIT),
-                        new ConfigIndexEntry().setBooleanConfig(FluffyFurClientConfig.ITEM_PARTICLE).setSpecConfig(FluffyFurClientConfig.SPEC),
-                        new ConfigIndexEntry().setBooleanConfig(FluffyFurClientConfig.ITEM_GUI_PARTICLE).setSpecConfig(FluffyFurClientConfig.SPEC)
+                        new ConfigIndexEntry(FluffyFur.MOD_ID).setBooleanConfig(FluffyFurClientConfig.ITEM_PARTICLE).setSpecConfig(FluffyFurClientConfig.SPEC),
+                        new ConfigIndexEntry(FluffyFur.MOD_ID).setBooleanConfig(FluffyFurClientConfig.ITEM_GUI_PARTICLE).setSpecConfig(FluffyFurClientConfig.SPEC),
+                        new ConfigIndexEntry(FluffyFur.MOD_ID).setBooleanConfig(FluffyFurClientConfig.BLOOD_PARTICLE).setSpecConfig(FluffyFurClientConfig.SPEC)
                 )
         );
 

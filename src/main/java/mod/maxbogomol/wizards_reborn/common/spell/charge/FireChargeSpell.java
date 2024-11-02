@@ -38,7 +38,8 @@ public class FireChargeSpell extends ChargeSpell {
             damage = damage * charge;
 
             int fire = target.getRemainingFireTicks() + 10;
-            if (fire <= 50) target.setSecondsOnFire(fire);
+            if (fire > 50) fire = 50;
+            target.setSecondsOnFire(fire);
             target.setTicksFrozen(0);
 
             DamageSource damageSource = getDamage(target.damageSources().onFire().typeHolder(), entity, entity.getOwner());

@@ -7,6 +7,7 @@ import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornSpells;
 import java.awt.*;
 
 public class MagicSproutSpell extends Spell {
+
     public MagicSproutSpell(String id, int points) {
         super(id, points);
         addCrystalType(WizardsRebornCrystals.EARTH);
@@ -19,7 +20,7 @@ public class MagicSproutSpell extends Spell {
     }
 /*
     @Override
-    public boolean canSpellAir(Level level, Player player, InteractionHand hand) {
+    public boolean canUseSpell(Level level, SpellContext spellContext) {
         return false;
     }
 

@@ -37,7 +37,8 @@ public class FireRaySpell extends RaySpell {
                     float damage = (1.5f + (focusLevel * 0.5f)) + magicModifier;
 
                     int fire = target.getRemainingFireTicks() + 10;
-                    if (fire <= 50) target.setSecondsOnFire(fire);
+                    if (fire > 50) fire = 50;
+                    target.setSecondsOnFire(fire);
                     target.setSecondsOnFire(fire);
                     target.setTicksFrozen(0);
 

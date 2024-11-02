@@ -1,7 +1,14 @@
 package mod.maxbogomol.wizards_reborn.common.spell.look.strike;
 
+import mod.maxbogomol.wizards_reborn.api.crystal.CrystalUtil;
+import mod.maxbogomol.wizards_reborn.common.entity.SpellEntity;
+import mod.maxbogomol.wizards_reborn.common.item.equipment.arcane.ArcaneArmorItem;
 import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornCrystals;
 import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornSpells;
+import mod.maxbogomol.wizards_reborn.registry.common.damage.WizardsRebornDamage;
+import net.minecraft.world.damagesource.DamageSource;
+import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.LivingEntity;
 
 import java.awt.*;
 
@@ -32,11 +39,11 @@ public class IncinerationSpell extends StrikeSpell {
     public int getWissenCost() {
         return 600;
     }
-/*
+
     @Override
-    public void strikeDamage(SpellProjectileEntity entity, Player player) {
+    public void strikeDamage(SpellEntity entity) {
         int focusLevel = CrystalUtil.getStatLevel(entity.getStats(), WizardsRebornCrystals.FOCUS);
-        float magicModifier = ArcaneArmorItem.getPlayerMagicModifier(player);
+        float magicModifier = ArcaneArmorItem.getPlayerMagicModifier(entity.getOwner());
         float distance = (0.75f + ((focusLevel + magicModifier) * 0.25f));
         float damage = (10 + ((focusLevel + magicModifier) * 5f));
 
@@ -46,11 +53,12 @@ public class IncinerationSpell extends StrikeSpell {
                 if (fire > 1000) fire = 1000;
                 target.setSecondsOnFire(fire);
                 target.setTicksFrozen(0);
-
-                target.hurt(new DamageSource(target.damageSources().onFire().typeHolder(), entity, player), damage);
+                DamageSource damageSource = getDamage(target.damageSources().onFire().typeHolder(), entity, entity.getOwner());
+                target.hurt(damageSource, damage);
                 target.invulnerableTime = 0;
-                target.hurt(new DamageSource(WizardsRebornDamage.create(target.level(), WizardsRebornDamage.ARCANE_MAGIC).typeHolder(), entity, player), 10);
+                damageSource = getDamage(WizardsRebornDamage.create(target.level(), WizardsRebornDamage.ARCANE_MAGIC).typeHolder(), entity, entity.getOwner());
+                target.hurt(damageSource, 10);
             }
         }
-    }*/
+    }
 }

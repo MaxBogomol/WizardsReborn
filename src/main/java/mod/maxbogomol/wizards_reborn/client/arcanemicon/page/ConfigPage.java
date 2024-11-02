@@ -194,7 +194,7 @@ public class ConfigPage extends Page {
         for (String str : path) {
             string = string + "." + str;
         }
-        return "config."  + modId + string;
+        return "config.client."  + modId + string;
     }
 
     public static String getDescNameString(String modId, List<String> path) {

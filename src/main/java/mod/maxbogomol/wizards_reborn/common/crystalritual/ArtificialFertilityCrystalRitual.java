@@ -5,7 +5,7 @@ import mod.maxbogomol.wizards_reborn.api.crystalritual.CrystalRitual;
 import mod.maxbogomol.wizards_reborn.api.crystalritual.CrystalRitualArea;
 import mod.maxbogomol.wizards_reborn.common.block.crystal.CrystalBlockEntity;
 import mod.maxbogomol.wizards_reborn.common.network.WizardsRebornPacketHandler;
-import mod.maxbogomol.wizards_reborn.common.network.spell.MagicSproutSpellEffectPacket;
+import mod.maxbogomol.wizards_reborn.common.network.spell.MagicSproutSpellPacket;
 import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornCrystals;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -76,25 +76,14 @@ public class ArtificialFertilityCrystalRitual extends CrystalRitual {
                     if (state.getBlock() instanceof CropBlock crop) {
                         if (!crop.isMaxAge(state)) {
                             crop.growCrops(level, pos, state);
-
-                            Color color = getColor();
-                            float r = color.getRed() / 255f;
-                            float g = color.getGreen() / 255f;
-                            float b = color.getBlue() / 255f;
-
-                            WizardsRebornPacketHandler.sendToTracking(level, pos, new MagicSproutSpellEffectPacket(pos.getX() + 0.5F, pos.getY() + 0.5F, pos.getZ() + 0.5F, r, g, b));
+                            WizardsRebornPacketHandler.sendToTracking(level, pos, new MagicSproutSpellPacket(pos.getCenter(), getColor()));
                             level.playSound(null, pos, SoundEvents.BONE_MEAL_USE, SoundSource.BLOCKS, 1f, 1f);
                             setMaxCooldown(crystal, getMaxRitualCooldownWithStat(crystal));
                             break;
                         }
                     } else {
                         if (growCrop(level, pos)) {
-                            Color color = getColor();
-                            float r = color.getRed() / 255f;
-                            float g = color.getGreen() / 255f;
-                            float b = color.getBlue() / 255f;
-
-                            WizardsRebornPacketHandler.sendToTracking(level, pos, new MagicSproutSpellEffectPacket(pos.getX() + 0.5F, pos.above().getY() + 0.5F, pos.getZ() + 0.5F, r, g, b));
+                            WizardsRebornPacketHandler.sendToTracking(level, pos, new MagicSproutSpellPacket(pos.getCenter(), getColor()));
                             level.playSound(null, pos, SoundEvents.BONE_MEAL_USE, SoundSource.BLOCKS, 1f, 1f);
                             setMaxCooldown(crystal, getMaxRitualCooldownWithStat(crystal) * 2);
                             break;

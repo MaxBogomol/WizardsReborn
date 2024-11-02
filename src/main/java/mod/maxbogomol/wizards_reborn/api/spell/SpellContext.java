@@ -1,5 +1,7 @@
 package mod.maxbogomol.wizards_reborn.api.spell;
 
+import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.item.ItemStack;
@@ -12,6 +14,8 @@ public class SpellContext {
     public Vec3 pos = Vec3.ZERO;
     public Vec3 vec = Vec3.ZERO;
     public Vec3 offset = Vec3.ZERO;
+    public BlockPos blockPos = BlockPos.ZERO;
+    public Direction direction = Direction.UP;
     public double distance = 0;
     public boolean alternative = false;
     public Level level;
@@ -46,6 +50,24 @@ public class SpellContext {
 
     public Vec3 getOffset() {
         return offset;
+    }
+
+    public SpellContext setBlockPos(BlockPos blockPos) {
+        this.blockPos = blockPos;
+        return this;
+    }
+
+    public BlockPos getBlockPos() {
+        return blockPos;
+    }
+
+    public SpellContext setDirection(Direction direction) {
+        this.direction = direction;
+        return this;
+    }
+
+    public Direction getDirection() {
+        return direction;
     }
 
     public SpellContext setDistance(double distance) {
@@ -155,6 +177,8 @@ public class SpellContext {
         tag.put("pos", vecToTag(pos));
         tag.put("vec", vecToTag(vec));
         tag.put("offset", vecToTag(offset));
+        tag.put("blockPos", blockPosToTag(blockPos));
+        tag.putInt("direction", direction.get3DDataValue());
         tag.putDouble("distance", distance);
         tag.putBoolean("alternative", alternative);
         return tag;
@@ -164,6 +188,8 @@ public class SpellContext {
         pos = vecFromTag(tag.getCompound("pos"));
         vec = vecFromTag(tag.getCompound("vec"));
         offset = vecFromTag(tag.getCompound("offset"));
+        blockPos = blockPosFromTag(tag.getCompound("blockPos"));
+        direction = Direction.from3DDataValue(tag.getInt("distance"));
         distance = tag.getDouble("distance");
         alternative = tag.getBoolean("alternative");
     }
@@ -181,5 +207,20 @@ public class SpellContext {
         double y = tag.getDouble("y");
         double z = tag.getDouble("z");
         return new Vec3(x, y, z);
+    }
+
+    public static CompoundTag blockPosToTag(BlockPos blockPos) {
+        CompoundTag tag = new CompoundTag();
+        tag.putInt("x", blockPos.getX());
+        tag.putInt("y", blockPos.getY());
+        tag.putInt("z", blockPos.getZ());
+        return tag;
+    }
+
+    public static BlockPos blockPosFromTag(CompoundTag tag) {
+        int x = tag.getInt("x");
+        int y = tag.getInt("y");
+        int z = tag.getInt("z");
+        return new BlockPos(x, y, z);
     }
 }

@@ -90,6 +90,7 @@ public class ChargeSpell extends Spell {
             entity.updateSpellComponent(spellComponent);
 
             level.addFreshEntity(entity);
+            spellContext.removeWissen(this);
             spellContext.awardStat(this);
             spellContext.spellSound(this);
 
@@ -121,6 +122,13 @@ public class ChargeSpell extends Spell {
     }
 
     @Override
+    public void stopUseSpell(Level level, SpellContext spellContext, int timeLeft) {
+        if (!level.isClientSide()) {
+            spellContext.setCooldown(this);
+        }
+    }
+
+    @Override
     public SpellContext getWandContext(Entity entity, ItemStack stack) {
         WandSpellContext spellContext = WandSpellContext.getFromWand(entity, stack);
         spellContext.setOffset(new Vec3(0, entity.getEyeHeight(), 0));
@@ -129,8 +137,8 @@ public class ChargeSpell extends Spell {
 
     @Override
     public void useWand(Level level, Player player, InteractionHand hand, ItemStack stack) {
+        useSpell(level, getWandContext(player, stack));
         if (!level.isClientSide()) {
-            useSpell(level, getWandContext(player, stack));
             player.startUsingItem(hand);
         }
     }
@@ -165,7 +173,6 @@ public class ChargeSpell extends Spell {
                     if (spellComponent.useTick <= 0) {
                         spellComponent.throwed = true;
                         Vec3 vel = spellComponent.vec.scale(40).scale(1.0 / 25);
-                        entity.getSpellContext().setCooldown(this);
                         entity.setDeltaMovement(vel);
                         entity.updateSpellComponent(spellComponent);
                     }

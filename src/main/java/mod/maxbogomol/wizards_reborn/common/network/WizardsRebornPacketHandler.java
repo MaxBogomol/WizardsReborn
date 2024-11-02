@@ -103,12 +103,14 @@ public final class WizardsRebornPacketHandler extends PacketHandler {
         HANDLER.registerMessage(id++, FireRaySpellEffectPacket.class, FireRaySpellEffectPacket::encode, FireRaySpellEffectPacket::decode, FireRaySpellEffectPacket::handle);
         HANDLER.registerMessage(id++, FrostRaySpellEffectPacket.class, FrostRaySpellEffectPacket::encode, FrostRaySpellEffectPacket::decode, FrostRaySpellEffectPacket::handle);
         HANDLER.registerMessage(id++, HolyRaySpellEffectPacket.class, HolyRaySpellEffectPacket::encode, HolyRaySpellEffectPacket::decode, HolyRaySpellEffectPacket::handle);
-        HANDLER.registerMessage(id++, MagicSproutSpellEffectPacket.class, MagicSproutSpellEffectPacket::encode, MagicSproutSpellEffectPacket::decode, MagicSproutSpellEffectPacket::handle);
-        HANDLER.registerMessage(id++, AuraSpellCastEffectPacket.class, AuraSpellCastEffectPacket::encode, AuraSpellCastEffectPacket::decode, AuraSpellCastEffectPacket::handle);
-        HANDLER.registerMessage(id++, AuraSpellBurstEffectPacket.class, AuraSpellBurstEffectPacket::encode, AuraSpellBurstEffectPacket::decode, AuraSpellBurstEffectPacket::handle);
-        HANDLER.registerMessage(id++, FrostAuraSpellBurstEffectPacket.class, FrostAuraSpellBurstEffectPacket::encode, FrostAuraSpellBurstEffectPacket::decode, FrostAuraSpellBurstEffectPacket::handle);
-        HANDLER.registerMessage(id++, StrikeSpellEffectPacket.class, StrikeSpellEffectPacket::encode, StrikeSpellEffectPacket::decode, StrikeSpellEffectPacket::handle);
+        MagicSproutSpellPacket.register(HANDLER, id++);
+        AuraSpellCastPacket.register(HANDLER, id++);
+        AuraSpellBurstPacket.register(HANDLER, id++);
+        FrostAuraSpellBurstPacket.register(HANDLER, id++);
+        StrikeSpellBurstPacket.register(HANDLER, id++);
+        StrikeSpellScreenshakePacket.register(HANDLER, id++);
         NecroticRaySpellTrailPacket.register(HANDLER, id++);
+        WisdomSpellBurstPacket.register(HANDLER, id++);
         HANDLER.registerMessage(id++, BlockPlaceSpellEffectPacket.class, BlockPlaceSpellEffectPacket::encode, BlockPlaceSpellEffectPacket::decode, BlockPlaceSpellEffectPacket::handle);
         HANDLER.registerMessage(id++, CrystalCrushingSpellEffectPacket.class, CrystalCrushingSpellEffectPacket::encode, CrystalCrushingSpellEffectPacket::decode, CrystalCrushingSpellEffectPacket::handle);
 

@@ -130,6 +130,13 @@ public class RaySpell extends Spell {
     }
 
     @Override
+    public void stopUseSpell(Level level, SpellContext spellContext, int timeLeft) {
+        if (!level.isClientSide()) {
+            spellContext.setCooldown(this);
+        }
+    }
+
+    @Override
     public SpellContext getWandContext(Entity entity, ItemStack stack) {
         WandSpellContext spellContext = WandSpellContext.getFromWand(entity, stack);
         spellContext.setOffset(new Vec3(0, entity.getEyeHeight() - 0.3f, 0));
@@ -138,8 +145,8 @@ public class RaySpell extends Spell {
 
     @Override
     public void useWand(Level level, Player player, InteractionHand hand, ItemStack stack) {
+        useSpell(level, getWandContext(player, stack));
         if (!level.isClientSide()) {
-            useSpell(level, getWandContext(player, stack));
             player.startUsingItem(hand);
         }
     }
@@ -169,9 +176,6 @@ public class RaySpell extends Spell {
             if (spellComponent.useTick <= 0) {
                 if (spellComponent.fadeTick <= 0) {
                     entity.remove();
-                }
-                if (spellComponent.fadeTick == 3) {
-                    entity.getSpellContext().setCooldown(this);
                 }
                 if (spellComponent.fadeTick > 0) {
                     spellComponent.fadeTick = spellComponent.fadeTick - 1;

@@ -5,8 +5,8 @@ import com.mojang.math.Axis;
 import mod.maxbogomol.fluffy_fur.client.event.ClientTickHandler;
 import mod.maxbogomol.fluffy_fur.client.render.RenderBuilder;
 import mod.maxbogomol.fluffy_fur.registry.client.FluffyFurRenderTypes;
-import mod.maxbogomol.wizards_reborn.api.crystal.CrystalType;
 import mod.maxbogomol.wizards_reborn.api.crystal.CrystalHandler;
+import mod.maxbogomol.wizards_reborn.api.crystal.CrystalType;
 import mod.maxbogomol.wizards_reborn.api.crystalritual.CrystalRitual;
 import mod.maxbogomol.wizards_reborn.api.crystalritual.CrystalRitualUtil;
 import mod.maxbogomol.wizards_reborn.common.block.crystal.CrystalBlockEntity;
@@ -18,7 +18,6 @@ import net.minecraft.world.item.ItemDisplayContext;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 
-import java.awt.*;
 import java.util.List;
 import java.util.Random;
 
@@ -72,17 +71,19 @@ public class RunicPedestalRenderer implements BlockEntityRenderer<RunicPedestalB
                     stack = CrystalHandler.getTypes().get(i / 20).getCrystal();
                 }
 
-                Color color = ritual.getColor();
-                float r = color.getRed() / 255f;
-                float g = color.getGreen() / 255f;
-                float b = color.getBlue() / 255f;
-
                 poseStack.pushPose();
                 poseStack.translate(0.5F, 0.9F, 0.5F);
                 poseStack.mulPose(Axis.YP.rotationDegrees((float) ticks));
                 poseStack.mulPose(Axis.ZP.rotationDegrees((float) (50f + ((Math.sin(Math.toRadians(ticks / 2.5f)) * 20f)))));
-                //WizardsRebornRenderUtil.ray(poseStack, bufferDelayed, 0.025f, 0.75f, 2, r, g, b, 0.7f);
-                //WizardsRebornRenderUtil.ray(poseStack, bufferDelayed, 0.02f, 0.74f, 1.5f, r, g, b, 0.4f);
+                poseStack.pushPose();
+                poseStack.mulPose(Axis.ZP.rotationDegrees(-90));
+                RenderBuilder.create().setRenderType(FluffyFurRenderTypes.ADDITIVE)
+                        .setColor(ritual.getColor())
+                        .setFirstAlpha(0.7f)
+                        .renderRay(poseStack,  0.025f, 0.75f, 2)
+                        .setFirstAlpha(0.4f)
+                        .renderRay(poseStack,  0.02f, 0.74f, 1.5f);
+                poseStack.popPose();
                 poseStack.translate(0.75F, 0F, 0F);
                 poseStack.scale(0.25F, 0.25F, 0.25F);
                 poseStack.mulPose(Axis.YP.rotationDegrees(90));

@@ -1,0 +1,25 @@
+{
+  "type": "wizards_reborn:alchemy_machine",
+  "alchemyPotion": {
+    "alchemy_potion": "wizards_reborn:milk_tea"
+  },
+  "steam": 200,
+  "wissen": 150,
+  "ingredients": [
+    {
+      "item": "wizards_reborn:petals"
+    },
+    {
+      "item": "wizards_reborn:petals"
+    },
+    {
+      "item": "wizards_reborn:petals"
+    },
+    {
+      "tag": "wizards_reborn:alchemy_potions"
+    }
+  ],
+  "alchemyPotionIngredient": {
+    "alchemy_potion": "wizards_reborn:milk"
+  }
+}

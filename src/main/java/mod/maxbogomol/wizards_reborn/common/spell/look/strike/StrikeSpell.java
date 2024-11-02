@@ -1,9 +1,43 @@
 package mod.maxbogomol.wizards_reborn.common.spell.look.strike;
 
+import com.mojang.blaze3d.vertex.PoseStack;
+import com.mojang.math.Axis;
+import mod.maxbogomol.fluffy_fur.client.animation.ItemAnimation;
+import mod.maxbogomol.fluffy_fur.client.particle.ParticleBuilder;
+import mod.maxbogomol.fluffy_fur.client.particle.data.ColorParticleData;
+import mod.maxbogomol.fluffy_fur.client.particle.data.GenericParticleData;
+import mod.maxbogomol.fluffy_fur.client.render.RenderBuilder;
+import mod.maxbogomol.fluffy_fur.registry.client.FluffyFurParticles;
+import mod.maxbogomol.fluffy_fur.registry.client.FluffyFurRenderTypes;
+import mod.maxbogomol.wizards_reborn.WizardsReborn;
+import mod.maxbogomol.wizards_reborn.api.spell.SpellContext;
 import mod.maxbogomol.wizards_reborn.client.animation.StrikeSpellItemAnimation;
+import mod.maxbogomol.wizards_reborn.common.entity.SpellEntity;
+import mod.maxbogomol.wizards_reborn.common.network.WizardsRebornPacketHandler;
+import mod.maxbogomol.wizards_reborn.common.network.spell.StrikeSpellBurstPacket;
+import mod.maxbogomol.wizards_reborn.common.network.spell.StrikeSpellScreenshakePacket;
 import mod.maxbogomol.wizards_reborn.common.spell.look.block.BlockLookSpell;
+import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornEntities;
+import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornSounds;
+import net.minecraft.client.renderer.MultiBufferSource;
+import net.minecraft.core.BlockPos;
+import net.minecraft.sounds.SoundSource;
+import net.minecraft.world.InteractionHand;
+import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.UseAnim;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.SoundType;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.phys.AABB;
+import net.minecraft.world.phys.Vec3;
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.api.distmarker.OnlyIn;
 
 import java.awt.*;
+import java.util.List;
 
 public class StrikeSpell extends BlockLookSpell {
     public static StrikeSpellItemAnimation animation = new StrikeSpellItemAnimation();
@@ -16,13 +50,13 @@ public class StrikeSpell extends BlockLookSpell {
         return getColor();
     }
 
-/*    @Override
-    public float getLookDistance() {
+    @Override
+    public double getLookDistance() {
         return 10f;
-    }*/
+    }
 
     @Override
-    public float getBlockDistance() {
+    public double getBlockDistance() {
         return 25f;
     }
 
@@ -40,75 +74,76 @@ public class StrikeSpell extends BlockLookSpell {
     public int getMinimumPolishingLevel() {
         return 1;
     }
-/*
+
     @Override
-    public void useSpell(Level level, Player player, InteractionHand hand) {
-        if (!level.isClientSide) {
+    public void useSpellTick(Level level, SpellContext spellContext, int time) {
+        if (!level.isClientSide()) {
+            if (time > getUseTime(spellContext)) {
+                spellContext.setCooldown(this);
+                spellContext.removeWissen(this);
+                spellContext.awardStat(this);
+                spellContext.spellSound(this);
+            }
+        } else {
+            Vec3 pos = getBlockHit(level, spellContext).getPos();
+            float stage = (float) time / getUseTime(spellContext);
+            ParticleBuilder.create(FluffyFurParticles.WISP)
+                    .setColorData(ColorParticleData.create(getColor(), getSecondColor()).build())
+                    .setTransparencyData(GenericParticleData.create(0.25f, 0).build())
+                    .setScaleData(GenericParticleData.create(0.2f * stage, 0).build())
+                    .setLifetime(30)
+                    .randomVelocity(0.025f)
+                    .addVelocity(0, 0.03f, 0)
+                    .spawn(level, pos.x(), pos.y(), pos.z());
+        }
+        if (time > getUseTime(spellContext)) {
+            lookSpell(level, spellContext);
+        }
+    }
+
+    @Override
+    public void useWand(Level level, Player player, InteractionHand hand, ItemStack stack) {
+        if (!level.isClientSide()) {
             player.startUsingItem(hand);
         }
-    }*/
-/*
+    }
+
     @Override
-    public void onUseTick(Level level, LivingEntity livingEntity, ItemStack stack, int remainingUseDuration) {
-        if (livingEntity instanceof Player player) {
-            if (!level.isClientSide) {
-                if (!super.canSpell(level, player, player.getUsedItemHand())) {
-                    player.stopUsingItem();
-                }
-
-                if (player.getTicksUsingItem() > getUseTime(level, livingEntity, stack, remainingUseDuration)) {
-                    CompoundTag stats = getStats(stack);
-                    setCooldown(stack, stats);
-                    removeWissen(stack, stats, player);
-                    awardStat(player, stack);
-                    spellSound(player, level);
-                    lookSpell(level, player, player.getUsedItemHand());
-                    player.stopUsingItem();
-                }
-            } else {
-                Vec3 pos = getBlockHit(level, player, player.getUsedItemHand()).getPosHit();
-                float stage = (float) player.getTicksUsingItem() / getUseTime(level, livingEntity, stack, remainingUseDuration);
-                Color color = getColor();
-
-                ParticleBuilder.create(FluffyFurParticles.WISP)
-                        .setColorData(ColorParticleData.create(color).build())
-                        .setTransparencyData(GenericParticleData.create(0.25f, 0).build())
-                        .setScaleData(GenericParticleData.create(0.2f * stage, 0).build())
-                        .setLifetime(30)
-                        .randomVelocity(0.025f)
-                        .addVelocity(0, 0.03f, 0)
-                        .spawn(level, pos.x(), pos.y(), pos.z());
-            }
+    public void useWandTick(Level level, LivingEntity livingEntity, ItemStack stack, int remainingUseDuration) {
+        super.useWandTick(level, livingEntity, stack, remainingUseDuration);
+        if (!super.canSpell(level, getWandContext(livingEntity, stack))) {
+            livingEntity.stopUsingItem();
+        }
+        if (remainingUseDuration > getUseTime(getWandContext(livingEntity, stack))) {
+            livingEntity.stopUsingItem();
         }
     }
 
     @Override
-    public void lookSpell(Level level, Player player, InteractionHand hand) {
-        CompoundTag stats = getStats(player.getItemInHand(hand));
-        Vec3 pos = getBlockHit(level, player, hand).getPosHit();
-
-        SpellProjectileEntity entity = new SpellProjectileEntity(WizardsRebornEntities.SPELL_PROJECTILE.get(), level).shoot(
-                pos.x, pos.y, pos.z, 0, 0, 0, player.getUUID(), this.getId(), stats
-        );
-        entity.setYRot(player.getYRot());
-        level.addFreshEntity(entity);
+    public boolean canLookSpell(Level level, SpellContext spellContext) {
+        return true;
     }
 
     @Override
-    public void entityTick(SpellProjectileEntity entity) {
-        if (!entity.level().isClientSide) {
+    public void lookSpell(Level level, SpellContext spellContext) {
+        if (!level.isClientSide()) {
+            Vec3 pos = getBlockHit(level, spellContext).getPos();
+            SpellEntity entity = new SpellEntity(WizardsRebornEntities.SPELL.get(), level);
+            entity.setup(pos.x(), pos.y(), pos.z(), spellContext.getEntity(), this.getId(), spellContext.getStats()).setSpellContext(spellContext);
+            level.addFreshEntity(entity);
+        }
+    }
+
+    @Override
+    public void entityTick(SpellEntity entity) {
+        if (!entity.level().isClientSide()) {
             if (entity.tickCount > getLifeTime(entity)) {
                 entity.remove();
             }
             if (entity.tickCount == 20) {
-                float distance = 40f;
-                List<Player> players = entity.level().getEntitiesOfClass(Player.class, new AABB(entity.getX() - distance, entity.getY() - distance, entity.getZ() - distance, entity.getX() + distance, entity.getY() + distance, entity.getZ() + distance));
-                for (Player player : players) {
-                    float distanceToPlayer = (float) Math.sqrt(Math.pow(entity.getX() - player.getX(), 2) + Math.pow(entity.getY() - player.getY(), 2) + Math.pow(entity.getZ() - player.getZ(), 2));
-                    //if (40f - distanceToPlayer > 0) PacketHandler.sendTo(player, new AddScreenshakePacket(1f - (distanceToPlayer / distance / 2)));
-                }
+                WizardsRebornPacketHandler.sendToTracking(entity.level(), entity.blockPosition(), new StrikeSpellScreenshakePacket(entity.position()));
 
-                strikeDamage(entity, entity.getSender());
+                strikeDamage(entity);
                 strikeEffect(entity);
 
                 for (int i = 0; i < 8; i++) {
@@ -134,28 +169,23 @@ public class StrikeSpell extends BlockLookSpell {
         }
     }
 
-    public List<Entity> getTargets(SpellProjectileEntity entity, float distance) {
+    public List<Entity> getTargets(SpellEntity entity, float distance) {
         return entity.level().getEntitiesOfClass(Entity.class, new AABB(entity.getX() - distance, entity.getY() - 1, entity.getZ() - distance, entity.getX() + distance, entity.getY() + 3, entity.getZ() + distance));
     }
 
-    public void strikeDamage(SpellProjectileEntity entity, Player player) {
+    public void strikeDamage(SpellEntity entity) {
 
     }
 
-    public void strikeEffect(SpellProjectileEntity entity) {
-        Color color = getColor();
-        float r = color.getRed() / 255f;
-        float g = color.getGreen() / 255f;
-        float b = color.getBlue() / 255f;
-
-        PacketHandler.sendToTracking(entity.level(), entity.getOnPos(), new StrikeSpellEffectPacket((float) entity.getX(), (float) entity.getY(), (float) entity.getZ(), r, g, b));
+    public void strikeEffect(SpellEntity entity) {
+        WizardsRebornPacketHandler.sendToTracking(entity.level(), entity.blockPosition(), new StrikeSpellBurstPacket(entity.position(), getColor()));
     }
 
-    public int getUseTime(Level level, LivingEntity livingEntity, ItemStack stack, int remainingUseDuration) {
+    public int getUseTime(SpellContext spellContext) {
         return 100;
     }
 
-    public int getLifeTime(SpellProjectileEntity entity) {
+    public int getLifeTime(SpellEntity entity) {
         return 60;
     }
 
@@ -177,18 +207,7 @@ public class StrikeSpell extends BlockLookSpell {
 
     @Override
     @OnlyIn(Dist.CLIENT)
-    public void render(SpellProjectileEntity entity, float entityYaw, float partialTicks, PoseStack stack, MultiBufferSource buffer, int light) {
-        MultiBufferSource bufferDelayed = FluffyFurRenderTypes.getDelayedRender();
-        Color color = getColor();
-        float r = color.getRed() / 255f;
-        float g = color.getGreen() / 255f;
-        float b = color.getBlue() / 255f;
-
-        Color secondColor = getSecondColor();
-        float sr = secondColor.getRed() / 255f;
-        float sg = secondColor.getGreen() / 255f;
-        float sb = secondColor.getBlue() / 255f;
-
+    public void render(SpellEntity entity, float entityYaw, float partialTicks, PoseStack poseStack, MultiBufferSource buffer, int light) {
         float ticks = (entity.tickCount + partialTicks);
         float alpha = 1f;
         int lifeTime = getLifeTime(entity);
@@ -207,24 +226,28 @@ public class StrikeSpell extends BlockLookSpell {
         if (alpha > 1f) alpha = 1f;
         if (alpha < 0f) alpha = 0f;
 
-        float yRot = Mth.lerp(partialTicks, -entity.yRotO, -entity.getYRot()) - 90.0F;
+        poseStack.pushPose();
+        poseStack.translate(0, 100 - (100 * size), 0);
+        poseStack.pushPose();
+        RenderBuilder builder = RenderBuilder.create().setRenderType(FluffyFurRenderTypes.ADDITIVE)
+                .setColor(getColor())
+                .setFirstAlpha(0.4f * alpha)
+                .setSecondAlpha(0f)
+                .enableSided()
+                .renderRay(poseStack, 0.2f * alpha, 100 * size, 0.4f)
+                .setFirstAlpha(0.2f * alpha)
+                .setColor(getSecondColor())
+                .renderRay(poseStack, 0.5f * alpha, 100 * size, 0.4f);
+        poseStack.popPose();
 
-        stack.pushPose();
-        stack.translate(0, 100 - (100 * size), 0);
-        stack.mulPose(Axis.ZP.rotationDegrees(90f));
-
-        stack.pushPose();
-        stack.mulPose(Axis.XP.rotationDegrees(yRot));
-        //WizardsRebornRenderUtil.raySided(stack, bufferDelayed, 0.2f * alpha, 100 * size, 0.4f, r, g, b, 0.4f * alpha, r, g, b, 0F);
-        //WizardsRebornRenderUtil.raySided(stack, bufferDelayed, 0.5f * alpha, 100 * size, 0.4f, sr, sg, sb, 0.2f * alpha, sr, sg, sb, 0F);
-        stack.popPose();
-
-        stack.pushPose();
-        stack.mulPose(Axis.XP.rotationDegrees(yRot + ticks));
-        //WizardsRebornRenderUtil.raySided(stack, bufferDelayed, 0.38f * sizeEnd, 100 * size, 1f, r, g, b, 0.08f * alpha, r, g, b, 0F);
-        //WizardsRebornRenderUtil.raySided(stack, bufferDelayed, 0.4f * sizeEnd, 100 * size, 1f, r, g, b, 0.05f * alpha, r, g, b, 0F);
-        stack.popPose();
-
-        stack.popPose();
-    }*/
+        poseStack.pushPose();
+        poseStack.mulPose(Axis.YP.rotationDegrees(ticks));
+        builder.setColor(getColor())
+                .setFirstAlpha(0.08f * alpha)
+                .renderRay(poseStack, 0.38f * sizeEnd, 100 * size, 0.4f)
+                .setFirstAlpha(0.05f * alpha)
+                .renderRay(poseStack, 0.4f * sizeEnd, 100 * size, 0.4f);
+        poseStack.popPose();
+        poseStack.popPose();
+    }
 }

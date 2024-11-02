@@ -16,6 +16,7 @@ import mod.maxbogomol.wizards_reborn.api.crystal.CrystalStat;
 import mod.maxbogomol.wizards_reborn.api.crystal.CrystalType;
 import mod.maxbogomol.wizards_reborn.api.knowledge.KnowledgeUtil;
 import mod.maxbogomol.wizards_reborn.api.spell.Spell;
+import mod.maxbogomol.wizards_reborn.api.spell.SpellContext;
 import mod.maxbogomol.wizards_reborn.api.spell.SpellHandler;
 import mod.maxbogomol.wizards_reborn.api.wissen.IWissenItem;
 import mod.maxbogomol.wizards_reborn.api.wissen.WissenItemType;
@@ -260,7 +261,8 @@ public class ArcaneWandItem extends Item implements IWissenItem, ICustomAnimatio
 
         if (canSpell(stack, player)) {
             Spell spell = SpellHandler.getSpell(getSpell(stack));
-            if (canSpell(spell, player, stack) && spell.canSpell(level, spell.getWandContext(player, stack)) && spell.canSpellAir(level, player, hand)) {
+            SpellContext spellContext = spell.getWandContext(player, stack);
+            if (canSpell(spell, player, stack) && spell.canSpell(level, spellContext) && spell.canUseSpell(level, spellContext)) {
                 if (spell.canWandWithCrystal(getItemCrystal(stack))) {
                     spell.useWand(level, player, hand, stack);
                     return InteractionResultHolder.success(stack);
@@ -274,8 +276,12 @@ public class ArcaneWandItem extends Item implements IWissenItem, ICustomAnimatio
     public InteractionResult onItemUseFirst(ItemStack stack, UseOnContext context) {
         if (canSpell(stack, context.getPlayer())) {
             Spell spell = SpellHandler.getSpell(getSpell(stack));
-            if (spell.canWandWithCrystal(getItemCrystal(stack))) {
-                return spell.useWandOn(stack, context);
+            SpellContext spellContext = spell.getWandContext(context.getPlayer(), stack);
+            if (canSpell(spell, context.getPlayer(), stack) && spell.canSpell(context.getLevel(), spellContext)) {
+                if (spell.canWandWithCrystal(getItemCrystal(stack))) {
+                    boolean use = spell.useWandOn(stack, context);
+                    if (use) return InteractionResult.SUCCESS;
+                }
             }
         }
         return super.onItemUseFirst(stack, context);
@@ -286,31 +292,19 @@ public class ArcaneWandItem extends Item implements IWissenItem, ICustomAnimatio
         if (canSpell(stack, (Player) livingEntity)) {
             Spell spell = SpellHandler.getSpell(getSpell(stack));
             if (spell.canWandWithCrystal(getItemCrystal(stack))) {
-                spell.useWandTick(level, livingEntity, stack, remainingUseDuration);
+                spell.useWandTick(level, livingEntity, stack, spell.getUseDuration(stack) - remainingUseDuration);
             }
         }
     }
 
     @Override
-    public void releaseUsing(ItemStack stack, Level level, LivingEntity livingEntity, int timeLeft) {
+    public void onStopUsing(ItemStack stack, LivingEntity livingEntity, int timeLeft) {
         if (canSpell(stack, (Player) livingEntity)) {
             Spell spell = SpellHandler.getSpell(getSpell(stack));
             if (spell.canWandWithCrystal(getItemCrystal(stack))) {
-                spell.releaseUsing(stack, level, livingEntity, timeLeft);
+                spell.stopUseWand(stack, livingEntity.level(), livingEntity, spell.getUseDuration(stack) - timeLeft);
             }
         }
-    }
-
-    @Override
-    public ItemStack finishUsingItem(ItemStack stack, Level level, LivingEntity livingEntity) {
-        if (canSpell(stack, (Player) livingEntity)) {
-            Spell spell = SpellHandler.getSpell(getSpell(stack));
-            if (spell.canWandWithCrystal(getItemCrystal(stack))) {
-                spell.finishUsingItem(stack, level, livingEntity);
-            }
-        }
-
-        return stack;
     }
 
     @Override
@@ -319,7 +313,6 @@ public class ArcaneWandItem extends Item implements IWissenItem, ICustomAnimatio
             Spell spell = SpellHandler.getSpell(getSpell(stack));
             return spell.getUseDuration(stack);
         }
-
         return 72000;
     }
 

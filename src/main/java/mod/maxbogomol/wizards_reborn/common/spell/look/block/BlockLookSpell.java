@@ -1,12 +1,11 @@
 package mod.maxbogomol.wizards_reborn.common.spell.look.block;
 
+import mod.maxbogomol.fluffy_fur.common.raycast.RayCast;
+import mod.maxbogomol.fluffy_fur.common.raycast.RayHitResult;
 import mod.maxbogomol.wizards_reborn.api.crystal.CrystalUtil;
+import mod.maxbogomol.wizards_reborn.api.spell.SpellContext;
 import mod.maxbogomol.wizards_reborn.common.spell.look.LookSpell;
 import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornCrystals;
-import net.minecraft.nbt.CompoundTag;
-import net.minecraft.world.InteractionHand;
-import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.Vec3;
 
@@ -16,29 +15,26 @@ public class BlockLookSpell extends LookSpell {
         super(id, points);
     }
 
-    public float getBlockDistance() {
+    public double getBlockDistance() {
         return 10f;
     }
 
-    public float getBlockAdditionalDistance() {
+    public double getBlockAdditionalDistance() {
         return 0f;
     }
-/*
-    public float getBlockDistance(Level level, Player player, InteractionHand hand) {
-        ItemStack stack = player.getItemInHand(hand);
-        CompoundTag stats = getStats(stack);
 
-        int focusLevel = CrystalUtil.getStatLevel(stats, WizardsRebornCrystals.FOCUS);
+    public double getBlockDistance(SpellContext spellContext) {
+        int focusLevel = CrystalUtil.getStatLevel(spellContext.getStats(), WizardsRebornCrystals.FOCUS);
         return getBlockDistance() + (getBlockAdditionalDistance() * focusLevel);
     }
 
     @Override
-    public boolean canLookSpell(Level level, Player player, InteractionHand hand) {
-        return getBlockHit(level, player, hand).hasBlockHit();
+    public boolean canLookSpell(Level level, SpellContext spellContext) {
+        return getBlockHit(level, spellContext).hasBlock();
     }
 
-    public HitResult getBlockHit(Level level, Player player, InteractionHand hand) {
-        Vec3 lookPos = getHitPos(level, player, hand).getPosHit();
-        return getHitPos(level, lookPos, new Vec3(lookPos.x(), lookPos.y() - getBlockDistance(level, player, hand), lookPos.z()));
-    }*/
+    public RayHitResult getBlockHit(Level level, SpellContext spellContext) {
+        Vec3 lookPos = getHit(level, spellContext).getPos();
+        return RayCast.getHit(level, lookPos, new Vec3(lookPos.x(), lookPos.y() - getBlockDistance(spellContext), lookPos.z()));
+    }
 }

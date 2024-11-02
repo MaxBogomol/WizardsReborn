@@ -1,14 +1,36 @@
 package mod.maxbogomol.wizards_reborn.common.spell.look.cloud;
 
+import mod.maxbogomol.fluffy_fur.client.particle.ParticleBuilder;
+import mod.maxbogomol.fluffy_fur.client.particle.behavior.SparkParticleBehavior;
+import mod.maxbogomol.fluffy_fur.client.particle.data.ColorParticleData;
+import mod.maxbogomol.fluffy_fur.client.particle.data.GenericParticleData;
+import mod.maxbogomol.fluffy_fur.client.particle.data.LightParticleData;
+import mod.maxbogomol.fluffy_fur.client.particle.data.SpinParticleData;
+import mod.maxbogomol.fluffy_fur.common.easing.Easing;
+import mod.maxbogomol.fluffy_fur.common.raycast.RayCast;
+import mod.maxbogomol.fluffy_fur.common.raycast.RayHitResult;
+import mod.maxbogomol.fluffy_fur.registry.client.FluffyFurParticles;
+import mod.maxbogomol.fluffy_fur.registry.client.FluffyFurRenderTypes;
+import mod.maxbogomol.wizards_reborn.api.crystal.CrystalUtil;
+import mod.maxbogomol.wizards_reborn.api.spell.SpellContext;
+import mod.maxbogomol.wizards_reborn.common.entity.SpellEntity;
+import mod.maxbogomol.wizards_reborn.common.item.equipment.arcane.ArcaneArmorItem;
 import mod.maxbogomol.wizards_reborn.common.spell.look.block.BlockLookSpell;
+import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornCrystals;
+import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornEntities;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.phys.Vec3;
+
+import java.awt.*;
 
 public class CloudSpell extends BlockLookSpell {
+
     public CloudSpell(String id, int points) {
         super(id, points);
     }
 
     @Override
-    public float getBlockDistance() {
+    public double getBlockDistance() {
         return 5f;
     }
 
@@ -26,44 +48,43 @@ public class CloudSpell extends BlockLookSpell {
     public int getWissenCost() {
         return 200;
     }
-/*
-    @Override
-    public void lookSpell(Level level, Player player, InteractionHand hand) {
-        CompoundTag stats = getStats(player.getItemInHand(hand));
-        Vec3 pos = getBlockHit(level, player, hand).getPosHit();
 
-        SpellProjectileEntity entity = new SpellProjectileEntity(WizardsRebornEntities.SPELL_PROJECTILE.get(), level).shoot(
-                pos.x, pos.y, pos.z, 0, 0, 0, player.getUUID(), this.getId(), stats
-        );
-        level.addFreshEntity(entity);
+    @Override
+    public void lookSpell(Level level, SpellContext spellContext) {
+        if (!level.isClientSide()) {
+            Vec3 pos = getBlockHit(level, spellContext).getPos();
+            SpellEntity entity = new SpellEntity(WizardsRebornEntities.SPELL.get(), level);
+            entity.setup(pos.x(), pos.y(), pos.z(), spellContext.getEntity(), this.getId(), spellContext.getStats()).setSpellContext(spellContext);
+            level.addFreshEntity(entity);
+        }
     }
 
     @Override
-    public boolean canLookSpell(Level level, Player player, InteractionHand hand) {
-        return !getBlockHit(level, player, hand).hasBlockHit();
+    public boolean canLookSpell(Level level, SpellContext spellContext) {
+        return !getBlockHit(level, spellContext).hasBlock();
     }
 
     @Override
-    public HitResult getBlockHit(Level level, Player player, InteractionHand hand) {
-        float distance = getLookDistance(level, player, hand);
-        Vec3 firstPos = player.getLookAngle().scale(distance);
-        Vec3 lookPos = getHitPos(level, player.getEyePosition(), player.getEyePosition().add(firstPos.x(), 0, firstPos.z())).getPosHit();
-        return getHitPos(level, lookPos, new Vec3(lookPos.x(), lookPos.y() + getBlockDistance(level, player, hand), lookPos.z()));
+    public RayHitResult getBlockHit(Level level, SpellContext spellContext) {
+        double distance = getLookDistance(spellContext);
+        Vec3 firstPos = spellContext.getVec().scale(distance);
+        Vec3 lookPos = RayCast.getHit(level, spellContext.getPos(), spellContext.getPos().add(firstPos.x(), 0, firstPos.z())).getPos();
+        return RayCast.getHit(level, lookPos, new Vec3(lookPos.x(), lookPos.y() + getBlockDistance(spellContext), lookPos.z()));
     }
 
     @Override
-    public void entityTick(SpellProjectileEntity entity) {
-        if (!entity.level().isClientSide) {
+    public void entityTick(SpellEntity entity) {
+        rain(entity);
+        if (!entity.level().isClientSide()) {
             if (entity.tickCount > getLifeTime(entity)) {
                 entity.remove();
             }
-            rain(entity, entity.getSender());
         } else {
             cloudEffect(entity);
         }
     }
 
-    public void cloudEffect(SpellProjectileEntity entity) {
+    public void cloudEffect(SpellEntity entity) {
         Color color = getColor();
 
         float ySize = 1f;
@@ -110,10 +131,11 @@ public class CloudSpell extends BlockLookSpell {
         }
 
         if (trails && random.nextFloat() < 0.4f) {
-            ParticleBuilder.create(FluffyFurParticles.DOT)
+            ParticleBuilder.create(FluffyFurParticles.SQUARE)
+                    .setBehavior(SparkParticleBehavior.create().build())
                     .setColorData(ColorParticleData.create(color).build())
-                    .setTransparencyData(GenericParticleData.create(0.4f, 0).build())
-                    .setScaleData(GenericParticleData.create(0.2f, 0).build())
+                    .setTransparencyData(GenericParticleData.create(0.5f, 0.75f, 0).setEasing(Easing.QUINTIC_IN_OUT).build())
+                    .setScaleData(GenericParticleData.create(0.05f, 0.1f, 0).setEasing(Easing.QUINTIC_IN_OUT).build())
                     .setLifetime(70)
                     .randomOffset(size, ySize, size)
                     .addVelocity(0, -0.2f, 0)
@@ -121,25 +143,25 @@ public class CloudSpell extends BlockLookSpell {
         }
     }
 
-    public int getLifeTime(SpellProjectileEntity entity) {
+    public int getLifeTime(SpellEntity entity) {
         return 300;
     }
 
-    public boolean hasTrails(SpellProjectileEntity entity) {
+    public boolean hasTrails(SpellEntity entity) {
         return false;
     }
 
-    public void rain(SpellProjectileEntity entity, Player player) {
+    public void rain(SpellEntity entity) {
 
     }
 
-    public boolean isValidPos(SpellProjectileEntity entity, Vec3 pos) {
-        return !getHitPos(entity.level(), pos, new Vec3(pos.x(), entity.getY(), pos.z())).hasBlockHit();
+    public boolean isValidPos(SpellEntity entity, Vec3 pos) {
+        return !RayCast.getHit(entity.level(), pos, new Vec3(pos.x(), entity.getY(), pos.z())).hasBlock();
     }
 
-    public float getCloudSize(SpellProjectileEntity entity) {
+    public float getCloudSize(SpellEntity entity) {
         int focusLevel = CrystalUtil.getStatLevel(entity.getStats(), WizardsRebornCrystals.FOCUS);
-        float magicModifier = ArcaneArmorItem.getPlayerMagicModifier(entity.getSender());
+        float magicModifier = ArcaneArmorItem.getPlayerMagicModifier(entity.getOwner());
         return (2.25f + ((focusLevel + magicModifier) * 0.25f));
-    }*/
+    }
 }
