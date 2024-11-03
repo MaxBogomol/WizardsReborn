@@ -17,7 +17,7 @@ import mod.maxbogomol.wizards_reborn.common.network.WizardsRebornPacketHandler;
 import mod.maxbogomol.wizards_reborn.common.network.spell.StrikeSpellBurstPacket;
 import mod.maxbogomol.wizards_reborn.common.network.spell.StrikeSpellScreenshakePacket;
 import mod.maxbogomol.wizards_reborn.common.spell.look.block.BlockLookSpell;
-import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornEntities;
+import mod.maxbogomol.wizards_reborn.registry.common.entity.WizardsRebornEntities;
 import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornSounds;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.core.BlockPos;

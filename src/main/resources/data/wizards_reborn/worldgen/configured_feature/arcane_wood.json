@@ -27,7 +27,7 @@
       }
     },
     "foliage_provider": {
-      "type": "wizards_reborn:an_stateprovider",
+      "type": "fluffy_fur:block_state_provider",
       "key": "arcane_wood_leaves"
     },
     "force_dirt": false,
@@ -46,7 +46,7 @@
       "height_rand_b": 1
     },
     "trunk_provider": {
-      "type": "wizards_reborn:an_stateprovider",
+      "type": "fluffy_fur:block_state_provider",
       "key": "arcane_wood_log"
     }
   }

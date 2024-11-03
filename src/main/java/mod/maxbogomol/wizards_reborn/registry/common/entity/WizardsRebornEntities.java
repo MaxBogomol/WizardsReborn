@@ -1,4 +1,4 @@
-package mod.maxbogomol.wizards_reborn.registry.common;
+package mod.maxbogomol.wizards_reborn.registry.common.entity;
 
 import mod.maxbogomol.fluffy_fur.client.render.entity.CustomBoatRenderer;
 import mod.maxbogomol.fluffy_fur.common.entity.CustomBoatEntity;
