@@ -15,8 +15,10 @@ import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
+import net.minecraftforge.common.util.LazyOptional;
 import top.theillusivec4.curios.api.CuriosApi;
 import top.theillusivec4.curios.api.SlotResult;
+import top.theillusivec4.curios.api.type.capability.ICuriosItemHandler;
 
 import java.awt.*;
 import java.util.ArrayList;
@@ -116,10 +118,13 @@ public class BagMenuScreen extends Screen {
         Minecraft minecraft = Minecraft.getInstance();
         Player player = minecraft.player;
         List<ItemStack> items = player.inventoryMenu.getItems();
-        List<SlotResult> curioSlots = CuriosApi.getCuriosInventory(player).resolve().get().findCurios((i) -> {return true;});
-        for (SlotResult slot : curioSlots) {
-            if (slot.stack() != null) {
-                items.add(slot.stack());
+        LazyOptional<ICuriosItemHandler> curiosItemHandler = CuriosApi.getCuriosInventory(player);
+        if (curiosItemHandler.isPresent() && curiosItemHandler.resolve().isPresent()) {
+            List<SlotResult> curioSlots = curiosItemHandler.resolve().get().findCurios((i) -> true);
+            for (SlotResult slot : curioSlots) {
+                if (slot.stack() != null) {
+                    items.add(slot.stack());
+                }
             }
         }
 

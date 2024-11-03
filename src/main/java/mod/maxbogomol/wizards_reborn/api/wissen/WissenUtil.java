@@ -9,8 +9,10 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
+import net.minecraftforge.common.util.LazyOptional;
 import top.theillusivec4.curios.api.CuriosApi;
 import top.theillusivec4.curios.api.SlotResult;
+import top.theillusivec4.curios.api.type.capability.ICuriosItemHandler;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -116,10 +118,13 @@ public class WissenUtil {
 
     public static List<ItemStack> getWissenItemsCurios(Player player) {
         List<ItemStack> items = new ArrayList<>();
-        List<SlotResult> curioSlots = CuriosApi.getCuriosInventory(player).resolve().get().findCurios((i) -> {return true;});
-        for (SlotResult slot : curioSlots) {
-            if (slot.stack().getItem() instanceof IWissenItem) {
-                items.add(slot.stack());
+        LazyOptional<ICuriosItemHandler> curiosItemHandler = CuriosApi.getCuriosInventory(player);
+        if (curiosItemHandler.isPresent() && curiosItemHandler.resolve().isPresent()) {
+            List<SlotResult> curioSlots = curiosItemHandler.resolve().get().findCurios((i) -> true);
+            for (SlotResult slot : curioSlots) {
+                if (slot.stack().getItem() instanceof IWissenItem) {
+                    items.add(slot.stack());
+                }
             }
         }
 

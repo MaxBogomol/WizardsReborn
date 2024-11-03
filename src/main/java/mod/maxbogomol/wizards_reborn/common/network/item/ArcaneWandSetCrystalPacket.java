@@ -12,10 +12,12 @@ import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.SimpleContainer;
 import net.minecraft.world.item.ItemStack;
+import net.minecraftforge.common.util.LazyOptional;
 import net.minecraftforge.network.NetworkEvent;
 import net.minecraftforge.network.simple.SimpleChannel;
 import top.theillusivec4.curios.api.CuriosApi;
 import top.theillusivec4.curios.api.SlotResult;
+import top.theillusivec4.curios.api.type.capability.ICuriosItemHandler;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -46,10 +48,13 @@ public class ArcaneWandSetCrystalPacket extends ServerPacket {
         boolean added = false;
 
         List<ItemStack> items = player.inventoryMenu.getItems();
-        List<SlotResult> curioSlots = CuriosApi.getCuriosInventory(player).resolve().get().findCurios((i) -> {return true;});
-        for (SlotResult slot : curioSlots) {
-            if (slot.stack() != null) {
-                items.add(slot.stack());
+        LazyOptional<ICuriosItemHandler> curiosItemHandler = CuriosApi.getCuriosInventory(player);
+        if (curiosItemHandler.isPresent() && curiosItemHandler.resolve().isPresent()) {
+            List<SlotResult> curioSlots = curiosItemHandler.resolve().get().findCurios((i) -> true);
+            for (SlotResult slot : curioSlots) {
+                if (slot.stack() != null) {
+                    items.add(slot.stack());
+                }
             }
         }
 

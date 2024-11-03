@@ -169,7 +169,6 @@ public class IcicleSpell extends ProjectileSpell {
 
         if (!spellComponent.fade) {
             poseStack.pushPose();
-            poseStack.translate(0.0F, 0.2F, 0.0F);
             poseStack.mulPose(Axis.YP.rotationDegrees(Mth.lerp(partialTicks, entity.yRotO, entity.getYRot()) - 90.0F));
             poseStack.mulPose(Axis.ZP.rotationDegrees(Mth.lerp(partialTicks, entity.xRotO, entity.getXRot())));
             poseStack.mulPose(Axis.XP.rotationDegrees(45.0F));

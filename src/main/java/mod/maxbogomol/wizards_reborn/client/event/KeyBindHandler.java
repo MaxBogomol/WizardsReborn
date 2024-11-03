@@ -26,9 +26,11 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.client.event.InputEvent;
+import net.minecraftforge.common.util.LazyOptional;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import top.theillusivec4.curios.api.CuriosApi;
 import top.theillusivec4.curios.api.SlotResult;
+import top.theillusivec4.curios.api.type.capability.ICuriosItemHandler;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -135,10 +137,13 @@ public class KeyBindHandler {
     public static void bagMenu() {
         Minecraft minecraft = Minecraft.getInstance();
         List<ItemStack> items = minecraft.player.inventoryMenu.getItems();
-        List<SlotResult> curioSlots = CuriosApi.getCuriosInventory(minecraft.player).resolve().get().findCurios();
-        for (SlotResult slot : curioSlots) {
-            if (slot.stack() != null) {
-                items.add(slot.stack());
+        LazyOptional<ICuriosItemHandler> curiosItemHandler = CuriosApi.getCuriosInventory(minecraft.player);
+        if (curiosItemHandler.isPresent() && curiosItemHandler.resolve().isPresent()) {
+            List<SlotResult> curioSlots = curiosItemHandler.resolve().get().findCurios((i) -> true);
+            for (SlotResult slot : curioSlots) {
+                if (slot.stack() != null) {
+                    items.add(slot.stack());
+                }
             }
         }
 
