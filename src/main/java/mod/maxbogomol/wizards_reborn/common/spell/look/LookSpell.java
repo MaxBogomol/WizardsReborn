@@ -1,15 +1,13 @@
 package mod.maxbogomol.wizards_reborn.common.spell.look;
 
 import mod.maxbogomol.fluffy_fur.common.raycast.RayCast;
+import mod.maxbogomol.fluffy_fur.common.raycast.RayCastContext;
 import mod.maxbogomol.fluffy_fur.common.raycast.RayHitResult;
 import mod.maxbogomol.wizards_reborn.api.crystal.CrystalUtil;
 import mod.maxbogomol.wizards_reborn.api.spell.Spell;
 import mod.maxbogomol.wizards_reborn.api.spell.SpellContext;
 import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornCrystals;
-import net.minecraft.world.entity.Entity;
 import net.minecraft.world.level.Level;
-
-import java.util.function.Predicate;
 
 public class LookSpell extends Spell {
 
@@ -53,9 +51,10 @@ public class LookSpell extends Spell {
         return getLookDistance() + (getLookAdditionalDistance() * focusLevel);
     }
 
-    public RayHitResult getHit(Level level, SpellContext spellContext, Predicate<Entity> entityFilter, int entityCount, float size, boolean endE) {
+    public RayHitResult getHit(Level level, SpellContext spellContext, RayCastContext context) {
         double distance = getLookDistance(spellContext);
-        return RayCast.getHit(level, spellContext.getPos(), spellContext.getPos().add(spellContext.getVec().scale(distance)), entityFilter, entityCount, size, endE);
+        context.setStartPos(spellContext.getPos()).setEndPos(spellContext.getPos().add(spellContext.getVec().scale(distance)));
+        return RayCast.getHit(level, context);
     }
 
     public RayHitResult getHit(Level level, SpellContext spellContext) {

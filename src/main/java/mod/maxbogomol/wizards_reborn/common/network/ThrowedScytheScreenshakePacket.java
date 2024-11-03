@@ -6,6 +6,8 @@ import mod.maxbogomol.fluffy_fur.common.easing.Easing;
 import mod.maxbogomol.fluffy_fur.common.network.PositionClientPacket;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.world.phys.Vec3;
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.network.NetworkEvent;
 import net.minecraftforge.network.simple.SimpleChannel;
 
@@ -22,6 +24,7 @@ public class ThrowedScytheScreenshakePacket extends PositionClientPacket {
     }
 
     @Override
+    @OnlyIn(Dist.CLIENT)
     public void execute(Supplier<NetworkEvent.Context> context) {
         double yaw = Math.atan2(z, x);
         double pitch = Math.atan2(Math.sqrt(z * z + x * x), y) + Math.PI;

@@ -1,8 +1,40 @@
 package mod.maxbogomol.wizards_reborn.common.spell.look;
 
+import mod.maxbogomol.fluffy_fur.client.animation.ItemAnimation;
+import mod.maxbogomol.fluffy_fur.client.particle.ParticleBuilder;
+import mod.maxbogomol.fluffy_fur.client.particle.data.ColorParticleData;
+import mod.maxbogomol.fluffy_fur.client.particle.data.GenericParticleData;
+import mod.maxbogomol.fluffy_fur.common.easing.Easing;
+import mod.maxbogomol.fluffy_fur.common.raycast.RayHitResult;
+import mod.maxbogomol.wizards_reborn.api.spell.SpellContext;
 import mod.maxbogomol.wizards_reborn.client.animation.StrikeSpellItemAnimation;
+import mod.maxbogomol.wizards_reborn.common.block.crystal.CrystalBlockEntity;
+import mod.maxbogomol.wizards_reborn.common.item.CrystalItem;
+import mod.maxbogomol.wizards_reborn.common.item.equipment.ArcaneWandItem;
+import mod.maxbogomol.wizards_reborn.common.network.WizardsRebornPacketHandler;
+import mod.maxbogomol.wizards_reborn.common.network.spell.CrystalCrushingSpellPacket;
+import mod.maxbogomol.wizards_reborn.common.network.spell.CrystalCrushingSpellScreenshakePacket;
+import mod.maxbogomol.wizards_reborn.registry.client.WizardsRebornParticles;
 import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornCrystals;
+import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornSounds;
 import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornSpells;
+import mod.maxbogomol.wizards_reborn.registry.common.damage.WizardsRebornDamage;
+import net.minecraft.core.BlockPos;
+import net.minecraft.nbt.CompoundTag;
+import net.minecraft.sounds.SoundSource;
+import net.minecraft.world.InteractionHand;
+import net.minecraft.world.SimpleContainer;
+import net.minecraft.world.damagesource.DamageSource;
+import net.minecraft.world.entity.item.ItemEntity;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.UseAnim;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.phys.Vec3;
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.api.distmarker.OnlyIn;
+import net.minecraftforge.common.MinecraftForge;
+import net.minecraftforge.event.level.BlockEvent;
 
 import java.awt.*;
 
@@ -34,130 +66,96 @@ public class CrystalCrushingSpell extends LookSpell {
         return 1;
     }
 
-/*    @Override
-    public void useSpell(Level level, Player player, InteractionHand hand) {
-        if (!level.isClientSide) {
+    @Override
+    public void useSpellTick(Level level, SpellContext spellContext, int time) {
+        if (level.isClientSide()) {
+            RayHitResult hitResult = getHit(level, spellContext);
+            if (level.getBlockEntity(hitResult.getBlockPos()) instanceof CrystalBlockEntity crystal) {
+                Color color = getColor();
+
+                if (random.nextFloat() < 0.15f) {
+                    ParticleBuilder.create(WizardsRebornParticles.KARMA)
+                            .setColorData(ColorParticleData.create(color).build())
+                            .setTransparencyData(GenericParticleData.create(0.1f, 0.5f, 0).setEasing(Easing.EXPO_IN, Easing.QUINTIC_IN_OUT).build())
+                            .setScaleData(GenericParticleData.create(0.05f, 0.1f, 0).setEasing(Easing.EXPO_IN, Easing.QUINTIC_IN_OUT).build())
+                            .setLifetime(30)
+                            .randomVelocity(0.025f)
+                            .addVelocity(0, 0.03f, 0)
+                            .spawn(level, hitResult.getPos());
+                }
+            }
+        }
+    }
+
+    @Override
+    public void useWand(Level level, Player player, InteractionHand hand, ItemStack stack) {
+        if (!level.isClientSide()) {
             player.startUsingItem(hand);
         }
-    }*/
-/*
+    }
+
     @Override
-    public void onUseTick(Level level, LivingEntity livingEntity, ItemStack stack, int remainingUseDuration) {
-        if (level.isClientSide) {
-            if (livingEntity instanceof Player player) {
-                Vec3 pos = getHitPos(level, player, player.getUsedItemHand()).getPosHit();
-                float ds = (float) Math.sqrt(Math.pow(player.getEyePosition().x() - pos.x(), 2) + Math.pow(player.getEyePosition().y() - pos.y(), 2) + Math.pow(player.getEyePosition().z() - pos.z(), 2));
+    public void finishUseSpell(Level level, SpellContext spellContext) {
+        if (!level.isClientSide()) {
+            spellContext.setCooldown(this);
+            spellContext.removeWissen(this);
+            spellContext.awardStat(this);
+            spellContext.spellSound(this);
+        }
+        lookSpell(level, spellContext);
+    }
 
-                double dX = player.getEyePosition().x() - pos.x();
-                double dY = player.getEyePosition().y() - pos.y();
-                double dZ = player.getEyePosition().z() - pos.z();
+    @Override
+    public void lookSpell(Level level, SpellContext spellContext) {
+        if (!level.isClientSide()) {
+            RayHitResult hitResult = getHit(level, spellContext);
+            BlockPos blockPos = hitResult.getBlockPos();
+            Player player = null;
+            if (spellContext.getEntity() instanceof Player) {
+                player = (Player) spellContext.getEntity();
+            }
+            BlockEvent.BreakEvent breakEvent = new BlockEvent.BreakEvent(level, blockPos, level.getBlockState(blockPos), player);
 
-                float x = (float) -(dX / ds) * (ds + 0.1f);
-                float y = (float) -(dY / ds) * (ds + 0.1f);
-                float z = (float) -(dZ / ds) * (ds + 0.1f);
-
-                float X = (float) (player.getEyePosition().x() + x);
-                float Y = (float) (player.getEyePosition().y() + y);
-                float Z = (float) (player.getEyePosition().z() + z);
-
-                BlockPos blockPos = BlockPos.containing(X, Y, Z);
-
+            if (!MinecraftForge.EVENT_BUS.post(breakEvent)) {
                 if (level.getBlockEntity(blockPos) instanceof CrystalBlockEntity crystal) {
-                    Color color = getColor();
-
-                    if (random.nextFloat() < 0.075f) {
-                        ParticleBuilder.create(WizardsRebornParticles.KARMA)
-                                .setColorData(ColorParticleData.create(color).build())
-                                .setTransparencyData(GenericParticleData.create(0.25f, 0).build())
-                                .setScaleData(GenericParticleData.create(0.1f, 0).build())
-                                .setLifetime(30)
-                                .randomVelocity(0.025f)
-                                .addVelocity(0, 0.03f, 0)
-                                .spawn(level, pos.x(), pos.y(), pos.z());
-                    }
-                }
-            }
-        }
-    }
-
-    @Override
-    public void finishUsingItem(ItemStack stack, Level level, LivingEntity entityLiving) {
-        if (!level.isClientSide) {
-            if (entityLiving instanceof Player player) {
-                CompoundTag stats = getStats(stack);
-                removeWissen(stack, stats, player);
-                setCooldown(stack, stats);
-                awardStat(player, stack);
-                spellSound(player, level);
-                lookSpell(level, player, player.getUsedItemHand());
-                player.stopUsingItem();
-            }
-        }
-    }
-
-    @Override
-    public void lookSpell(Level level, Player player, InteractionHand hand) {
-        Vec3 pos = getHitPos(level, player, hand).getPosHit();
-        float ds = (float) Math.sqrt(Math.pow(player.getEyePosition().x() - pos.x(), 2) + Math.pow(player.getEyePosition().y() - pos.y(), 2) + Math.pow(player.getEyePosition().z() - pos.z(), 2));
-
-        double dX = player.getEyePosition().x() - pos.x();
-        double dY = player.getEyePosition().y() - pos.y();
-        double dZ = player.getEyePosition().z() - pos.z();
-
-        float x = (float) -(dX / ds) * (ds + 0.1f);
-        float y = (float) -(dY / ds) * (ds + 0.1f);
-        float z = (float) -(dZ / ds) * (ds + 0.1f);
-
-        float X = (float) (player.getEyePosition().x() + x);
-        float Y = (float) (player.getEyePosition().y() + y);
-        float Z = (float) (player.getEyePosition().z() + z);
-
-        BlockPos blockPos = BlockPos.containing(X, Y, Z);
-        BlockEvent.BreakEvent breakEv = new BlockEvent.BreakEvent(level, blockPos, level.getBlockState(blockPos), player);
-
-        if (!MinecraftForge.EVENT_BUS.post(breakEv)) {
-            if (level.getBlockEntity(blockPos) instanceof CrystalBlockEntity crystal) {
-                if (crystal.getCrystalItem().getItem() instanceof CrystalItem crystalItem) {
-                    for (int i = 0; i < 3; i++) {
-                        ItemStack fracturedCrystal = crystalItem.getType().getFracturedCrystal();
-                        fracturedCrystal.setTag(crystal.getCrystalItem().getOrCreateTag().copy());
-                        level.addFreshEntity(new ItemEntity(level, blockPos.getX() + 0.5F, blockPos.getY() + 0.5F, blockPos.getZ() + 0.5F, fracturedCrystal));
-                    }
-                    level.removeBlockEntity(blockPos);
-                    level.destroyBlock(blockPos, false);
-
-                    Color color = crystalItem.getType().getColor();
-                    float r = color.getRed() / 255f;
-                    float g = color.getGreen() / 255f;
-                    float b = color.getBlue() / 255f;
-                    PacketHandler.sendToTracking(level, player.getOnPos(), new CrystalCrushingSpellEffectPacket((float) blockPos.getX() + 0.5f, (float) blockPos.getY() + 0.5f, (float) blockPos.getZ() + 0.5f, r, g, b));
-                    //PacketHandler.sendTo(player, new AddScreenshakePacket(0.6f));
-                }
-            } else {
-                ItemStack wandItem = player.getItemInHand(hand);
-                if (wandItem.getItem() instanceof ArcaneWandItem wand) {
-                    SimpleContainer inv = ArcaneWandItem.getInventory(wandItem);
-                    ItemStack crystal = inv.getItem(0);
-                    if (crystal.getItem() instanceof CrystalItem crystalItem) {
+                    if (crystal.getCrystalItem().getItem() instanceof CrystalItem crystalItem) {
                         for (int i = 0; i < 3; i++) {
                             ItemStack fracturedCrystal = crystalItem.getType().getFracturedCrystal();
-                            fracturedCrystal.setTag(crystal.getOrCreateTag().copy());
-                            level.addFreshEntity(new ItemEntity(level, player.getX(), player.getY() + 0.5F, player.getZ(), fracturedCrystal));
+                            fracturedCrystal.setTag(crystal.getCrystalItem().getOrCreateTag().copy());
+                            level.addFreshEntity(new ItemEntity(level, blockPos.getX() + 0.5F, blockPos.getY() + 0.5F, blockPos.getZ() + 0.5F, fracturedCrystal));
                         }
-                        CompoundTag nbt = wandItem.getOrCreateTag();
-                        inv.setItem(0, ItemStack.EMPTY);
-                        nbt.putBoolean("crystal", false);
+                        level.removeBlockEntity(blockPos);
+                        level.destroyBlock(blockPos, false);
 
-                        player.hurt(new DamageSource(WizardsRebornDamage.create(player.level(), WizardsRebornDamage.ARCANE_MAGIC).typeHolder(), player), 10);
-
-                        Vec3 effectPos = player.getLookAngle().scale(1f).add(player.getEyePosition());
                         Color color = crystalItem.getType().getColor();
-                        float r = color.getRed() / 255f;
-                        float g = color.getGreen() / 255f;
-                        float b = color.getBlue() / 255f;
-                        PacketHandler.sendToTracking(level, player.getOnPos(), new CrystalCrushingSpellEffectPacket((float) effectPos.x(), (float) effectPos.y(), (float) effectPos.z(), r, g, b));
-                        level.playSound(WizardsReborn.proxy.getPlayer(), player.getX(), player.getY(), player.getZ(), WizardsRebornSounds.CRYSTAL_BREAK.get(), SoundSource.PLAYERS, 1f, 0.5f);
-                        //PacketHandler.sendTo(player, new AddScreenshakePacket(0.6f));
+                        WizardsRebornPacketHandler.sendToTracking(level, blockPos, new CrystalCrushingSpellPacket(blockPos.getCenter(), color));
+                        if (player != null) WizardsRebornPacketHandler.sendTo(player, new CrystalCrushingSpellScreenshakePacket());
+                    }
+                } else {
+                    if (player != null) {
+                        if (spellContext.getItemStack().getItem() instanceof ArcaneWandItem wand) {
+                            SimpleContainer inventory = ArcaneWandItem.getInventory(spellContext.getItemStack());
+                            ItemStack crystal = inventory.getItem(0);
+                            if (crystal.getItem() instanceof CrystalItem crystalItem) {
+                                for (int i = 0; i < 3; i++) {
+                                    ItemStack fracturedCrystal = crystalItem.getType().getFracturedCrystal();
+                                    fracturedCrystal.setTag(crystal.getOrCreateTag().copy());
+                                    level.addFreshEntity(new ItemEntity(level, player.getX(), player.getY() + 0.5F, player.getZ(), fracturedCrystal));
+                                }
+                                CompoundTag nbt = spellContext.getItemStack().getOrCreateTag();
+                                inventory.setItem(0, ItemStack.EMPTY);
+                                nbt.putBoolean("crystal", false);
+
+                                DamageSource damageSource = new DamageSource(WizardsRebornDamage.create(player.level(), WizardsRebornDamage.ARCANE_MAGIC).typeHolder(), player);
+                                player.hurt(damageSource, 10);
+
+                                Vec3 effectPos = player.getLookAngle().scale(1f).add(player.getEyePosition());
+                                Color color = crystalItem.getType().getColor();
+                                WizardsRebornPacketHandler.sendToTracking(level, player.blockPosition(), new CrystalCrushingSpellPacket(effectPos, color));
+                                WizardsRebornPacketHandler.sendTo(player, new CrystalCrushingSpellScreenshakePacket());
+                                level.playSound(null, player.getX(), player.getY(), player.getZ(), WizardsRebornSounds.CRYSTAL_BREAK.get(), SoundSource.PLAYERS, 1f, 0.5f);
+                            }
+                        }
                     }
                 }
             }
@@ -183,5 +181,5 @@ public class CrystalCrushingSpell extends LookSpell {
     @Override
     public int getUseDuration(ItemStack stack) {
         return 100;
-    }*/
+    }
 }

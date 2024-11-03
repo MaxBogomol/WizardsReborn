@@ -1,8 +1,16 @@
 package mod.maxbogomol.wizards_reborn.common.spell.block;
 
+import mod.maxbogomol.wizards_reborn.api.crystal.CrystalUtil;
 import mod.maxbogomol.wizards_reborn.api.spell.Spell;
+import mod.maxbogomol.wizards_reborn.api.spell.SpellContext;
+import mod.maxbogomol.wizards_reborn.common.crystalritual.ArtificialFertilityCrystalRitual;
+import mod.maxbogomol.wizards_reborn.common.item.equipment.arcane.ArcaneArmorItem;
+import mod.maxbogomol.wizards_reborn.common.network.WizardsRebornPacketHandler;
+import mod.maxbogomol.wizards_reborn.common.network.spell.MagicSproutSpellPacket;
 import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornCrystals;
 import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornSpells;
+import net.minecraft.core.BlockPos;
+import net.minecraft.world.level.Level;
 
 import java.awt.*;
 
@@ -18,77 +26,47 @@ public class MagicSproutSpell extends Spell {
     public Color getColor() {
         return WizardsRebornSpells.earthSpellColor;
     }
-/*
+
     @Override
     public boolean canUseSpell(Level level, SpellContext spellContext) {
         return false;
     }
 
     @Override
-    public InteractionResult onWandUseOn(ItemStack stack, UseOnContext context) {
-        if (canSpell(context.getLevel(), context.getPlayer(), context.getHand()) && !context.getPlayer().level().isClientSide()) {
-            Color color = getColor();
-            float r = color.getRed() / 255f;
-            float g = color.getGreen() / 255f;
-            float b = color.getBlue() / 255f;
-
-            if (growCrop(stack, context, context.getClickedPos()) == InteractionResult.SUCCESS) {
-                if (!context.getPlayer().isShiftKeyDown()) {
-                    useGrow(stack, context, 1f, 1f);
-                    PacketHandler.sendToTracking(context.getPlayer().level(), context.getClickedPos(), new MagicSproutSpellEffectPacket((float) context.getClickedPos().getX() + 0.5F, (float) context.getClickedPos().getY() + 0.5F, (float) context.getClickedPos().getZ() + 0.5F, r, g, b));
-                } else if (WissenItemUtil.canRemoveWissen(stack, getWissenCostWithStat(getStats(stack), context.getPlayer(), getWissenCost() * 10))) {
-                    CompoundTag stats = getStats(stack);
-                    int focusLevel = CrystalUtil.getStatLevel(stats, WizardsRebornCrystals.FOCUS);
-                    float magicModifier = ArcaneArmorItem.getPlayerMagicModifier(context.getPlayer());
+    public boolean useSpellOn(Level level, SpellContext spellContext) {
+        if (!level.isClientSide()) {
+            BlockPos blockPos = spellContext.getBlockPos();
+            if (ArtificialFertilityCrystalRitual.growCrop(level, blockPos)) {
+                if (!spellContext.getAlternative()) {
+                    useGrow(level, spellContext, 1f, 1f);
+                    WizardsRebornPacketHandler.sendToTracking(level, blockPos, new MagicSproutSpellPacket(blockPos.getCenter(), getColor()));
+                } else if (spellContext.canRemoveWissen(this, getWissenCost() * 10)) {
+                    int focusLevel = CrystalUtil.getStatLevel(spellContext.getStats(), WizardsRebornCrystals.FOCUS);
+                    float magicModifier = ArcaneArmorItem.getPlayerMagicModifier(spellContext.getEntity());
                     int radius = (int) (1 + magicModifier);
-                    BlockPos blockPos = context.getClickedPos();
                     for (int x = -radius; x <= radius; x++) {
                         for (int y = -radius; y <= radius; y++) {
                             for (int z = -radius; z <= radius; z++) {
                                 if (random.nextFloat() < 0.15f * (focusLevel + magicModifier)) {
-                                    if (growCrop(stack, context, new BlockPos(blockPos.getX() + x, blockPos.getY() + y, blockPos.getZ() + z)) == InteractionResult.SUCCESS) {
-                                        PacketHandler.sendToTracking(context.getPlayer().level(), context.getClickedPos(), new MagicSproutSpellEffectPacket((float) blockPos.getX() + x + 0.5F, (float) blockPos.getY() + y + 0.5F, (float) blockPos.getZ() + z + 0.5F, r, g, b));
+                                    if (ArtificialFertilityCrystalRitual.growCrop(level, new BlockPos(blockPos.getX() + x, blockPos.getY() + y, blockPos.getZ() + z))) {
+                                        WizardsRebornPacketHandler.sendToTracking(level, blockPos, new MagicSproutSpellPacket(new BlockPos(blockPos.getX() + x, blockPos.getY() + y, blockPos.getZ() + z).getCenter(), getColor()));
                                     }
                                 }
                             }
                         }
                     }
-                    useGrow(stack, context, 5f, 10f);
+                    useGrow(level, spellContext, 5f, 10f);
                 }
-                return InteractionResult.SUCCESS;
+                return true;
             }
         }
-
-        return InteractionResult.PASS;
+        return false;
     }
 
-    public static InteractionResult growCrop(ItemStack stack, UseOnContext context, BlockPos blockPos) {
-        BlockEvent.EntityPlaceEvent placeEv = new BlockEvent.EntityPlaceEvent(
-                BlockSnapshot.create(context.getLevel().dimension(), context.getLevel(), blockPos),
-                context.getLevel().getBlockState(blockPos.below()),
-                context.getPlayer()
-        );
-        if (MinecraftForge.EVENT_BUS.post(placeEv)) return InteractionResult.FAIL;
-
-        if (BoneMealItem.growCrop(ItemStack.EMPTY, context.getLevel(), blockPos)) {
-            return InteractionResult.SUCCESS;
-        } else {
-            BlockState blockstate = context.getLevel().getBlockState(blockPos);
-            boolean flag = blockstate.isFaceSturdy(context.getLevel(), blockPos, context.getClickedFace());
-            if (flag && BoneMealItem.growWaterPlant(ItemStack.EMPTY, context.getLevel(), blockPos.relative(context.getClickedFace()), context.getClickedFace())) {
-                return InteractionResult.SUCCESS;
-            }
-        }
-
-        return InteractionResult.PASS;
+    public void useGrow(Level level, SpellContext spellContext, float cooldownModifier, float costModifier) {
+        spellContext.setCooldown(this, (int) (getCooldown() * cooldownModifier));
+        spellContext.removeWissen(this, (int) (getWissenCost() * costModifier));
+        spellContext.awardStat(this);
+        spellContext.spellSound(this);
     }
-
-    public void useGrow(ItemStack stack, UseOnContext context, float cooldownModifier, float costModifier) {
-        Player player = context.getPlayer();
-        CompoundTag stats = getStats(stack);
-        setCooldown(stack, stats, (int) (getCooldown() * cooldownModifier));
-        removeWissen(stack, stats, player, (int) (getWissenCost() * costModifier));
-        awardStat(player, stack);
-        spellSound(player, context.getLevel());
-    }*/
 }

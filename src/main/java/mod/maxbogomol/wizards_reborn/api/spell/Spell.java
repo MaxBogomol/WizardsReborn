@@ -211,6 +211,10 @@ public class Spell {
 
     }
 
+    public void finishUseSpell(Level level, SpellContext spellContext) {
+
+    }
+
     public SpellContext getWandContext(Entity entity, ItemStack stack) {
         return WandSpellContext.getFromWand(entity, stack);
     }
@@ -232,6 +236,10 @@ public class Spell {
 
     public void stopUseWand(ItemStack stack, Level level, LivingEntity entityLiving, int timeLeft) {
         stopUseSpell(level, getWandContext(entityLiving, stack), timeLeft);
+    }
+
+    public void finishUseWand(ItemStack stack, Level level, LivingEntity entityLiving) {
+        finishUseSpell(level, getWandContext(entityLiving, stack));
     }
 
     public void entityTick(SpellEntity entity) {

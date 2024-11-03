@@ -1,16 +1,27 @@
 package mod.maxbogomol.wizards_reborn.common.spell.ray;
 
+import mod.maxbogomol.fluffy_fur.common.raycast.RayCast;
+import mod.maxbogomol.fluffy_fur.common.raycast.RayCastContext;
 import mod.maxbogomol.fluffy_fur.common.raycast.RayHitResult;
 import mod.maxbogomol.wizards_reborn.api.crystal.CrystalUtil;
 import mod.maxbogomol.wizards_reborn.common.entity.SpellEntity;
 import mod.maxbogomol.wizards_reborn.common.item.equipment.arcane.ArcaneArmorItem;
 import mod.maxbogomol.wizards_reborn.common.network.WizardsRebornPacketHandler;
-import mod.maxbogomol.wizards_reborn.common.network.spell.FrostRaySpellEffectPacket;
+import mod.maxbogomol.wizards_reborn.common.network.spell.FrostRaySpellPacket;
 import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornCrystals;
 import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornSpells;
+import net.minecraft.core.BlockPos;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.FrostedIceBlock;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.phys.Vec3;
+import net.minecraft.world.phys.shapes.CollisionContext;
+import net.minecraftforge.common.MinecraftForge;
+import net.minecraftforge.common.util.BlockSnapshot;
+import net.minecraftforge.event.level.BlockEvent;
 
 import java.awt.*;
 
@@ -52,45 +63,32 @@ public class FrostRaySpell extends RaySpell {
                     float g = color.getGreen() / 255f;
                     float b = color.getBlue() / 255f;
 
-                    WizardsRebornPacketHandler.sendToTracking(level, entity.blockPosition(), new FrostRaySpellEffectPacket((float) hitResult.getPos().x(), (float) hitResult.getPos().y(), (float) hitResult.getPos().z(), r, g, b));
+                    WizardsRebornPacketHandler.sendToTracking(level, entity.blockPosition(), new FrostRaySpellPacket(hitResult.getPos(), getColor()));
                 }
             }
         }
     }
 
-/*    @Override
-    public void onImpact(HitResult ray, Level level, SpellProjectileEntity projectile, Player player) {
-        super.onImpact(ray, level, projectile, player);
+    @Override
+    public void onImpact(Level level, SpellEntity entity, RayHitResult hitResult) {
+        super.onImpact(level, entity, hitResult);
 
-        if (player != null) {
-            if (player.isShiftKeyDown()) {
-                int focusLevel = CrystalUtil.getStatLevel(projectile.getStats(), WizardsRebornCrystals.FOCUS);
-                ItemStack stack = player.getItemInHand(player.getUsedItemHand());
-                if (projectile.tickCount % (4 - focusLevel) == 0) {
-                    if (WissenItemUtil.canRemoveWissen(stack, 1)) {
-                        Vec3 vec = getBlockHitOffset(ray, projectile, 0.1f);
-                        BlockPos blockPos = BlockPos.containing(vec.x(), vec.y(), vec.z());
+        if (!entity.level().isClientSide()) {
+            if (entity.getSpellContext().getAlternative()) {
+                int focusLevel = CrystalUtil.getStatLevel(entity.getStats(), WizardsRebornCrystals.FOCUS);
+                if (entity.tickCount % (4 - focusLevel) == 0) {
+                    if (entity.getSpellContext().canRemoveWissen(1)) {
+                        BlockPos blockPos = hitResult.getBlockPos();
                         BlockState blockState = level.getBlockState(blockPos);
                         BlockState blockStateIce = Blocks.FROSTED_ICE.defaultBlockState();
 
-                        BlockEvent.EntityPlaceEvent placeEv = new BlockEvent.EntityPlaceEvent(
-                                BlockSnapshot.create(level.dimension(), level, blockPos),
-                                blockStateIce,
-                                player
-                        );
+                        BlockEvent.EntityPlaceEvent placeEv = new BlockEvent.EntityPlaceEvent(BlockSnapshot.create(level.dimension(), level, blockPos), blockStateIce, entity.getOwner());
 
-                        if (blockState == FrostedIceBlock.meltsInto() && blockStateIce.canSurvive(level, blockPos) && level.isUnobstructed(blockStateIce, blockPos, CollisionContext.empty()) && !net.minecraftforge.event.ForgeEventFactory.onBlockPlace(player, net.minecraftforge.common.util.BlockSnapshot.create(level.dimension(), level, blockPos), net.minecraft.core.Direction.UP)  && !MinecraftForge.EVENT_BUS.post(placeEv)) {
+                        if (blockState == FrostedIceBlock.meltsInto() && blockStateIce.canSurvive(level, blockPos) && level.isUnobstructed(blockStateIce, blockPos, CollisionContext.empty()) && !net.minecraftforge.event.ForgeEventFactory.onBlockPlace(entity.getOwner(), net.minecraftforge.common.util.BlockSnapshot.create(level.dimension(), level, blockPos), net.minecraft.core.Direction.UP)  && !MinecraftForge.EVENT_BUS.post(placeEv)) {
                             level.setBlockAndUpdate(blockPos, blockStateIce);
-                            level.scheduleTick(blockPos, Blocks.FROSTED_ICE, Mth.nextInt(player.getRandom(), 300, 600));
-
-                            WissenItemUtil.removeWissen(stack, 1);
-
-                            Color color = getColor();
-                            float r = color.getRed() / 255f;
-                            float g = color.getGreen() / 255f;
-                            float b = color.getBlue() / 255f;
-
-                            PacketHandler.sendToTracking(level, player.getOnPos(), new FrostRaySpellEffectPacket((float) blockPos.getX() + 0.5f, (float) blockPos.getY() + 0.5f, (float) blockPos.getZ() + 0.5f, r, g, b));
+                            level.scheduleTick(blockPos, Blocks.FROSTED_ICE, random.nextInt(300, 600));
+                            entity.getSpellContext().removeWissen(1);
+                            WizardsRebornPacketHandler.sendToTracking(level, blockPos, new FrostRaySpellPacket(blockPos.getCenter(), getColor()));
                         }
                     }
                 }
@@ -99,24 +97,11 @@ public class FrostRaySpell extends RaySpell {
     }
 
     @Override
-    public HitResult getHitResult(SpellProjectileEntity pProjectile, Vec3 pStartVec, Vec3 pEndVecOffset, Level pLevel, Predicate<Entity> pFilter) {
-        if (pProjectile.getSender() != null) {
-            if (pProjectile.getSender().isShiftKeyDown()) {
-                Vec3 vec3 = pStartVec.add(pEndVecOffset);
-                HitResult hitresult = pLevel.clip(new ClipContext(pStartVec, vec3, ClipContext.Block.COLLIDER, ClipContext.Fluid.WATER, pProjectile));
-                if (hitresult.getType() != HitResult.Type.MISS) {
-                    vec3 = hitresult.getLocation();
-                }
-
-                HitResult hitresult1 = ProjectileUtil.getEntityHitResult(pLevel, pProjectile, pStartVec, vec3, pProjectile.getBoundingBox().expandTowards(pEndVecOffset).inflate(1.0D), pFilter);
-                if (hitresult1 != null) {
-                    hitresult = hitresult1;
-                }
-
-                return hitresult;
-            }
+    public RayHitResult getHit(SpellEntity entity, Vec3 start, Vec3 end) {
+        if (entity.getSpellContext().getAlternative()) {
+            RayCastContext context = new RayCastContext(start, end).setEntityFilter(getEntityFilter(entity)).setEntityCount(1).setEntityEnd(true).setFluidFilter(RayCastContext.Fluid.WATER);
+            return RayCast.getHit(entity.level(), context);
         }
-
-        return getHitResultStandard(pProjectile, pStartVec, pEndVecOffset, pLevel, pFilter);
-    }*/
+        return super.getHit(entity, start, end);
+    }
 }

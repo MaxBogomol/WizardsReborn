@@ -1,5 +1,6 @@
 package mod.maxbogomol.wizards_reborn.common.spell.look.entity;
 
+import mod.maxbogomol.fluffy_fur.common.raycast.RayCastContext;
 import mod.maxbogomol.fluffy_fur.common.raycast.RayHitResult;
 import mod.maxbogomol.wizards_reborn.api.crystal.CrystalUtil;
 import mod.maxbogomol.wizards_reborn.api.spell.SpellContext;
@@ -57,7 +58,8 @@ public class AirImpactSpell extends EntityLookSpell {
 
     @Override
     public boolean canLookSpell(Level level, SpellContext spellContext) {
-        return getEntityHit(level, spellContext, getAllFilter(spellContext.getEntity()), 0, 1.5f, false).hasEntities();
+        RayCastContext context = new RayCastContext().setEntitySize(1.5f);
+        return getEntityHit(level, spellContext, context, getAllFilter(spellContext.getEntity())).hasEntities();
     }
 
     @Override
@@ -69,7 +71,8 @@ public class AirImpactSpell extends EntityLookSpell {
 
             Vec3 vec = spellContext.getVec().scale(power);
 
-            RayHitResult hit = getEntityHit(level, spellContext, getAllFilter(spellContext.getEntity()), 0, 1.5f, false);
+            RayCastContext context = new RayCastContext().setEntitySize(1.5f);
+            RayHitResult hit = getEntityHit(level, spellContext, context, getAllFilter(spellContext.getEntity()));
             if (hit.hasEntities()) {
                 for (Entity entity : hit.getEntities()) {
                     entity.push(vec.x(), vec.y() / 2, vec.z());

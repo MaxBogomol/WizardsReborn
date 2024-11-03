@@ -6,6 +6,8 @@ import mod.maxbogomol.wizards_reborn.api.knowledge.KnowledgeHandler;
 import mod.maxbogomol.wizards_reborn.client.toast.KnowledgeToast;
 import net.minecraft.client.Minecraft;
 import net.minecraft.network.FriendlyByteBuf;
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.network.NetworkEvent;
 import net.minecraftforge.network.simple.SimpleChannel;
 
@@ -26,6 +28,7 @@ public class KnowledgeToastPacket extends ClientPacket {
     }
 
     @Override
+    @OnlyIn(Dist.CLIENT)
     public void execute(Supplier<NetworkEvent.Context> context) {
         if (KnowledgeToast.instance == null) {
             KnowledgeToast.instance = new KnowledgeToast(id);

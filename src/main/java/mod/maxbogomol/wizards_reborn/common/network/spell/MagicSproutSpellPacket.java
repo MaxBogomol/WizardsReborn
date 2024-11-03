@@ -11,6 +11,8 @@ import mod.maxbogomol.wizards_reborn.WizardsReborn;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.Vec3;
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.network.NetworkEvent;
 import net.minecraftforge.network.simple.SimpleChannel;
 
@@ -28,6 +30,7 @@ public class MagicSproutSpellPacket extends PositionColorClientPacket {
     }
 
     @Override
+    @OnlyIn(Dist.CLIENT)
     public void execute(Supplier<NetworkEvent.Context> context) {
         Level level = WizardsReborn.proxy.getLevel();
         ParticleBuilder.create(FluffyFurParticles.SPARKLE)
@@ -41,7 +44,7 @@ public class MagicSproutSpellPacket extends PositionColorClientPacket {
         ParticleBuilder.create(FluffyFurParticles.SMOKE)
                 .setColorData(ColorParticleData.create(r, g, b).build())
                 .setTransparencyData(GenericParticleData.create(0.15f, 0).build())
-                .setScaleData(GenericParticleData.create(0.1f, 1.5f, 1f).setEasing(Easing.ELASTIC_OUT).build())
+                .setScaleData(GenericParticleData.create(0.1f, 1.2f, 0.5f).setEasing(Easing.ELASTIC_OUT).build())
                 .setSpinData(SpinParticleData.create().randomSpin(0.1f).build())
                 .setLifetime(40)
                 .randomVelocity(0.01f)

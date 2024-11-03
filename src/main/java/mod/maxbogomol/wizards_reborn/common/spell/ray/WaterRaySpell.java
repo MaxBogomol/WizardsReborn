@@ -4,11 +4,21 @@ import mod.maxbogomol.fluffy_fur.common.raycast.RayHitResult;
 import mod.maxbogomol.wizards_reborn.api.crystal.CrystalUtil;
 import mod.maxbogomol.wizards_reborn.common.entity.SpellEntity;
 import mod.maxbogomol.wizards_reborn.common.item.equipment.arcane.ArcaneArmorItem;
+import mod.maxbogomol.wizards_reborn.common.network.WizardsRebornPacketHandler;
+import mod.maxbogomol.wizards_reborn.common.network.spell.WaterRaySpellPacket;
 import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornCrystals;
 import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornSpells;
+import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
+import net.minecraft.sounds.SoundEvents;
+import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.FireBlock;
+import net.minecraftforge.common.MinecraftForge;
+import net.minecraftforge.event.level.BlockEvent;
 
 import java.awt.*;
 
@@ -48,37 +58,40 @@ public class WaterRaySpell extends RaySpell {
         }
     }
 
-/*    @Override
+    @Override
     public void onImpact(Level level, SpellEntity entity, RayHitResult hitResult) {
         super.onImpact(level, entity, hitResult);
 
-        if (entity.getSpellContext().getAlternative()) {
-            Vec3 vec = getBlockHitOffset(ray, projectile, -0.1f);
-            BlockPos blockPos = BlockPos.containing(vec.x(), vec.y(), vec.z());
-
-            int focusLevel = CrystalUtil.getStatLevel(projectile.getStats(), WizardsRebornCrystals.FOCUS);
-            int radius = focusLevel + 1;*/
-
-
-/*            for (int x = -radius; x <= radius; x++) {
-                for (int y = -radius; y <= radius; y++) {
-                    for (int z = -radius; z <= radius; z++) {
-                        if (WissenItemUtil.canRemoveWissen(stack, 5)) {
-                            BlockPos pos = blockPos.relative(Direction.Axis.X, x).relative(Direction.Axis.Y, y).relative(Direction.Axis.Z, z);
-
-                            BlockEvent.BreakEvent breakEv = new BlockEvent.BreakEvent(level, blockPos, level.getBlockState(pos), player);
-
-                            if (!level.getBlockState(pos).isAir() && !MinecraftForge.EVENT_BUS.post(breakEv)) {
-                                if (level.getBlockState(pos).getBlock() instanceof FireBlock) {
-                                    level.destroyBlock(pos, false);
-                                    removeWissen(stack, projectile.getStats(), player, 5);
-                                    PacketHandler.sendToTracking(level, player.getOnPos(), new WaterRaySpellEffectPacket((float) pos.getX() + 0.5f, (float) pos.getY() + 0.5f, (float) pos.getZ() + 0.5f, r, g, b));
+        if (!entity.level().isClientSide()) {
+            if (entity.getSpellContext().getAlternative()) {
+                BlockPos blockPos = hitResult.getBlockPos();
+                int focusLevel = CrystalUtil.getStatLevel(entity.getStats(), WizardsRebornCrystals.FOCUS);
+                int radius = focusLevel + 1;
+                if (entity.tickCount % 10 == 0) {
+                    for (int x = -radius; x <= radius; x++) {
+                        for (int y = -radius; y <= radius; y++) {
+                            for (int z = -radius; z <= radius; z++) {
+                                if (random.nextFloat() < 0.65f && entity.getSpellContext().canRemoveWissen(5)) {
+                                    BlockPos pos = blockPos.relative(Direction.Axis.X, x).relative(Direction.Axis.Y, y).relative(Direction.Axis.Z, z);
+                                    Player player = null;
+                                    if (entity.getOwner() instanceof Player) {
+                                        player = (Player) entity.getOwner();
+                                    }
+                                    BlockEvent.BreakEvent breakEvent = new BlockEvent.BreakEvent(level, blockPos, level.getBlockState(blockPos), player);
+                                    if (!level.getBlockState(pos).isAir() && !MinecraftForge.EVENT_BUS.post(breakEvent)) {
+                                        if (level.getBlockState(pos).getBlock() instanceof FireBlock) {
+                                            level.destroyBlock(pos, false);
+                                            entity.getSpellContext().removeWissen(5);
+                                            level.playSound(null, blockPos, SoundEvents.FIRE_EXTINGUISH, SoundSource.BLOCKS, 0.1F, level.getRandom().nextFloat() * 0.4F + 0.8F);
+                                            WizardsRebornPacketHandler.sendToTracking(level, blockPos, new WaterRaySpellPacket(blockPos.getCenter(), getColor()));
+                                        }
+                                    }
                                 }
                             }
                         }
                     }
                 }
-            }*/
-        //}
-    //}
+            }
+        }
+    }
 }

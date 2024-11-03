@@ -308,6 +308,17 @@ public class ArcaneWandItem extends Item implements IWissenItem, ICustomAnimatio
     }
 
     @Override
+    public ItemStack finishUsingItem(ItemStack stack, Level level, LivingEntity livingEntity) {
+        if (canSpell(stack, (Player) livingEntity)) {
+            Spell spell = SpellHandler.getSpell(getSpell(stack));
+            if (spell.canWandWithCrystal(getItemCrystal(stack))) {
+                spell.finishUseWand(stack, livingEntity.level(), livingEntity);
+            }
+        }
+        return stack;
+    }
+
+    @Override
     public int getUseDuration(ItemStack stack) {
         if (canSpell(stack)) {
             Spell spell = SpellHandler.getSpell(getSpell(stack));

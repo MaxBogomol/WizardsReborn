@@ -5,6 +5,8 @@ import mod.maxbogomol.fluffy_fur.client.screenshake.ScreenshakeInstance;
 import mod.maxbogomol.fluffy_fur.common.easing.Easing;
 import mod.maxbogomol.fluffy_fur.common.network.ClientPacket;
 import net.minecraft.network.FriendlyByteBuf;
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.network.NetworkEvent;
 import net.minecraftforge.network.simple.SimpleChannel;
 
@@ -13,6 +15,7 @@ import java.util.function.Supplier;
 public class SplitArrowScreenshakePacket extends ClientPacket {
 
     @Override
+    @OnlyIn(Dist.CLIENT)
     public void execute(Supplier<NetworkEvent.Context> context) {
         ScreenshakeHandler.addScreenshake(new ScreenshakeInstance(20).setIntensity(0.5f, 0).setEasing(Easing.QUINTIC_IN_OUT));
     }

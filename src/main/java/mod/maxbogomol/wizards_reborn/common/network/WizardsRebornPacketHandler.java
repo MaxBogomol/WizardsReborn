@@ -100,12 +100,12 @@ public final class WizardsRebornPacketHandler extends PacketHandler {
         WisdomSpellBurstPacket.register(HANDLER, id++);
         BlockPlaceSpellPacket.register(HANDLER, id++);
         EarthRaySpellPacket.register(HANDLER, id++);
-        HANDLER.registerMessage(id++, WaterRaySpellEffectPacket.class, WaterRaySpellEffectPacket::encode, WaterRaySpellEffectPacket::decode, WaterRaySpellEffectPacket::handle);
+        WaterRaySpellPacket.register(HANDLER, id++);
         AirRaySpellPacket.register(HANDLER, id++);
-        HANDLER.registerMessage(id++, FireRaySpellEffectPacket.class, FireRaySpellEffectPacket::encode, FireRaySpellEffectPacket::decode, FireRaySpellEffectPacket::handle);
-        HANDLER.registerMessage(id++, FrostRaySpellEffectPacket.class, FrostRaySpellEffectPacket::encode, FrostRaySpellEffectPacket::decode, FrostRaySpellEffectPacket::handle);
-        HANDLER.registerMessage(id++, HolyRaySpellEffectPacket.class, HolyRaySpellEffectPacket::encode, HolyRaySpellEffectPacket::decode, HolyRaySpellEffectPacket::handle);
-        HANDLER.registerMessage(id++, CrystalCrushingSpellEffectPacket.class, CrystalCrushingSpellEffectPacket::encode, CrystalCrushingSpellEffectPacket::decode, CrystalCrushingSpellEffectPacket::handle);
+        FireRaySpellPacket.register(HANDLER, id++);
+        FrostRaySpellPacket.register(HANDLER, id++);
+        CrystalCrushingSpellPacket.register(HANDLER, id++);
+        CrystalCrushingSpellScreenshakePacket.register(HANDLER, id++);
 
         KnowledgeUpdatePacket.register(HANDLER, id++);
         KnowledgeToastPacket.register(HANDLER, id++);

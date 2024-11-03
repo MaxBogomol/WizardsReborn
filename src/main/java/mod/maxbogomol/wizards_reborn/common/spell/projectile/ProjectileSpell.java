@@ -5,6 +5,7 @@ import mod.maxbogomol.fluffy_fur.FluffyFur;
 import mod.maxbogomol.fluffy_fur.client.render.RenderBuilder;
 import mod.maxbogomol.fluffy_fur.client.render.trail.TrailPoint;
 import mod.maxbogomol.fluffy_fur.common.raycast.RayCast;
+import mod.maxbogomol.fluffy_fur.common.raycast.RayCastContext;
 import mod.maxbogomol.fluffy_fur.common.raycast.RayHitResult;
 import mod.maxbogomol.fluffy_fur.registry.client.FluffyFurRenderTypes;
 import mod.maxbogomol.fluffy_fur.util.RenderUtil;
@@ -214,12 +215,9 @@ public class ProjectileSpell extends Spell {
         poseStack.popPose();
     }
 
-    public RayHitResult getHit(SpellEntity entity, Vec3 start, Vec3 endPos, Predicate<Entity> entityFilter) {
-        return RayCast.getHit(entity.level(), start, endPos, entityFilter, 1, 0.1f, true);
-    }
-
-    public RayHitResult getHit(SpellEntity entity, Vec3 start, Vec3 endPos) {
-        return RayCast.getHit(entity.level(), start, endPos, getEntityFilter(entity), 1, 0.1f, true);
+    public RayHitResult getHit(SpellEntity entity, Vec3 start, Vec3 end) {
+        RayCastContext context = new RayCastContext(start, end).setEntityFilter(getEntityFilter(entity)).setEntityCount(1).setEntitySize(0.1f).setEntityEnd(true);
+        return RayCast.getHit(entity.level(), context);
     }
 
     public Predicate<Entity> getEntityFilter(SpellEntity entity) {

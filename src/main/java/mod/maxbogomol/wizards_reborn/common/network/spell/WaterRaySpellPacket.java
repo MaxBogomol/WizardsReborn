@@ -17,13 +17,13 @@ import net.minecraftforge.network.simple.SimpleChannel;
 import java.awt.*;
 import java.util.function.Supplier;
 
-public class WisdomSpellBurstPacket extends PositionColorClientPacket {
+public class WaterRaySpellPacket extends PositionColorClientPacket {
 
-    public WisdomSpellBurstPacket(double x, double y, double z, float r, float g, float b, float a) {
+    public WaterRaySpellPacket(double x, double y, double z, float r, float g, float b, float a) {
         super(x, y, z, r, g, b, a);
     }
 
-    public WisdomSpellBurstPacket(Vec3 pos, Color color) {
+    public WaterRaySpellPacket(Vec3 pos, Color color) {
         super(pos, color);
     }
 
@@ -33,23 +33,20 @@ public class WisdomSpellBurstPacket extends PositionColorClientPacket {
         Level level = WizardsReborn.proxy.getLevel();
         ParticleBuilder.create(FluffyFurParticles.WISP)
                 .setColorData(ColorParticleData.create(r, g, b).build())
-                .setTransparencyData(GenericParticleData.create(0.5f).build())
-                .setScaleData(GenericParticleData.create(0.2f, 0f).build())
-                .setLifetime(15)
-                .spawn(level, x, y, z);
-        ParticleBuilder.create(FluffyFurParticles.STAR)
-                .setColorData(ColorParticleData.create(r, g, b).build())
-                .setTransparencyData(GenericParticleData.create(0.5f).build())
-                .setScaleData(GenericParticleData.create(0.2f, 0f).build())
-                .setLifetime(10)
-                .spawn(level, x, y, z);
+                .setTransparencyData(GenericParticleData.create(0.4f, 0).build())
+                .setScaleData(GenericParticleData.create(0.2f, 0).build())
+                .setLifetime(60)
+                .setGravity(1f)
+                .randomVelocity(0.085f, 0.0625f, 0.085f)
+                .addVelocity(0, 0.3f, 0)
+                .repeat(level, x, y, z, 15, 0.6f);
     }
 
     public static void register(SimpleChannel instance, int index) {
-        instance.registerMessage(index, WisdomSpellBurstPacket.class, WisdomSpellBurstPacket::encode, WisdomSpellBurstPacket::decode, WisdomSpellBurstPacket::handle);
+        instance.registerMessage(index, WaterRaySpellPacket.class, WaterRaySpellPacket::encode, WaterRaySpellPacket::decode, WaterRaySpellPacket::handle);
     }
 
-    public static WisdomSpellBurstPacket decode(FriendlyByteBuf buf) {
-        return decode(WisdomSpellBurstPacket::new, buf);
+    public static WaterRaySpellPacket decode(FriendlyByteBuf buf) {
+        return decode(WaterRaySpellPacket::new, buf);
     }
 }

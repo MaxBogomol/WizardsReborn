@@ -8,6 +8,7 @@ import mod.maxbogomol.wizards_reborn.common.network.WizardsRebornPacketHandler;
 import mod.maxbogomol.wizards_reborn.common.network.spell.EarthRaySpellPacket;
 import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornCrystals;
 import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornSpells;
+import net.minecraft.core.BlockPos;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.Entity;
@@ -15,6 +16,8 @@ import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraftforge.common.MinecraftForge;
+import net.minecraftforge.event.level.BlockEvent;
 
 import java.awt.*;
 
@@ -59,29 +62,22 @@ public class EarthRaySpell extends RaySpell {
             if (entity.getSpellContext().getAlternative()) {
                 int focusLevel = CrystalUtil.getStatLevel(entity.getStats(), WizardsRebornCrystals.FOCUS);
                 if (entity.tickCount % (20 - (focusLevel * 3)) == 0) {
-                    WizardsRebornPacketHandler.sendToTracking(level, hitResult.blockPos, new EarthRaySpellPacket(hitResult.blockPos, getColor()));
-/*                if (WissenItemUtil.canRemoveWissen(stack, getWissenCostWithStat(projectile.getStats(), player))) {
-                    Vec3 vec = getBlockHitOffset(ray, projectile, 0.1f);
-                    BlockPos blockPos = BlockPos.containing(vec.x(), vec.y(), vec.z());
-                    BlockState blockState = level.getBlockState(blockPos);
-
-                    BlockEvent.BreakEvent breakEv = new BlockEvent.BreakEvent(level, blockPos, blockState, player);
-
-                    if (!blockState.isAir() && !MinecraftForge.EVENT_BUS.post(breakEv)) {
-                        if (canBreak(blockState)) {
-                            level.destroyBlock(blockPos, true);
-
-                            removeWissen(stack, projectile.getStats(), player);
-
-                            Color color = getColor();
-                            float r = color.getRed() / 255f;
-                            float g = color.getGreen() / 255f;
-                            float b = color.getBlue() / 255f;
-
-                            PacketHandler.sendToTracking(level, player.getOnPos(), new EarthRaySpellEffectPacket((float) blockPos.getX() + 0.5f, (float) blockPos.getY() + 0.5f, (float) blockPos.getZ() + 0.5f, r, g, b));
+                    if (entity.getSpellContext().canRemoveWissen(this)) {
+                        BlockPos blockPos = hitResult.getBlockPos();
+                        BlockState blockState = level.getBlockState(blockPos);
+                        Player player = null;
+                        if (entity.getOwner() instanceof Player) {
+                            player = (Player) entity.getOwner();
+                        }
+                        BlockEvent.BreakEvent breakEvent = new BlockEvent.BreakEvent(level, blockPos, level.getBlockState(blockPos), player);
+                        if (!blockState.isAir() && !MinecraftForge.EVENT_BUS.post(breakEvent)) {
+                            if (canBreak(blockState)) {
+                                level.destroyBlock(blockPos, true);
+                                entity.getSpellContext().removeWissen(this);
+                                WizardsRebornPacketHandler.sendToTracking(level, hitResult.getBlockPos(), new EarthRaySpellPacket(hitResult.getBlockPos(), getColor()));
+                            }
                         }
                     }
-                }*/
                 }
             }
         }
@@ -95,10 +91,6 @@ public class EarthRaySpell extends RaySpell {
         if (blockState.is(BlockTags.NEEDS_IRON_TOOL)) {
             return false;
         }
-        if (destroyTime > 0 && destroyTime < 10f) {
-            return true;
-        }
-
-        return false;
+        return destroyTime > 0 && destroyTime < 10f;
     }
 }

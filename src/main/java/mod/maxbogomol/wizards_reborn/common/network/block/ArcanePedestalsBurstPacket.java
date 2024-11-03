@@ -24,8 +24,8 @@ public class ArcanePedestalsBurstPacket extends ClientNBTPacket {
         super(nbt);
     }
 
-    @OnlyIn(Dist.CLIENT)
     @Override
+    @OnlyIn(Dist.CLIENT)
     public void execute(Supplier<NetworkEvent.Context> context) {
         Level level = WizardsReborn.proxy.getLevel();
 
