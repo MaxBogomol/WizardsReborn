@@ -27,7 +27,7 @@ import java.util.concurrent.atomic.AtomicReference;
 
 public class ArcanumDustItem extends ArcanumItem {
 
-    private static Random random = new Random();
+    private static final Random random = new Random();
 
     public ArcanumDustItem(Properties properties) {
         super(properties);

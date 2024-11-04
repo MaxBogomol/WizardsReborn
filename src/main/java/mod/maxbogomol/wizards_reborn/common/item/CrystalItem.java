@@ -43,7 +43,7 @@ import java.util.Random;
 
 public class CrystalItem extends BlockItem implements IParticleItem, IGuiParticleItem, ICustomBlockEntityDataItem {
 
-    private static Random random = new Random();
+    private static final Random random = new Random();
 
     public CrystalItem(Block block, Properties properties) {
         super(block, properties);

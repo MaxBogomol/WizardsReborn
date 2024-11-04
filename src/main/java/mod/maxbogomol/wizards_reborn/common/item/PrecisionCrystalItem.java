@@ -15,7 +15,7 @@ import java.util.Random;
 
 public class PrecisionCrystalItem extends Item implements IParticleItem {
 
-    private static Random random = new Random();
+    private static final Random random = new Random();
 
     public PrecisionCrystalItem(Properties properties) {
         super(properties);

@@ -14,7 +14,7 @@ import java.util.Random;
 import java.util.function.Consumer;
 
 public class InnocentWoodScytheItem extends ArcaneWoodScytheItem {
-    private static Random random = new Random();
+    private static final Random random = new Random();
 
     public InnocentWoodScytheItem(Tier tier, int attackDamageModifier, float attackSpeedModifier, Properties properties, float distance, int radius, Item repairItem) {
         super(tier, attackDamageModifier, attackSpeedModifier, properties, distance, radius, repairItem);

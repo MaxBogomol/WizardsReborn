@@ -32,7 +32,7 @@ public class FracturedCrystalItem extends Item implements IParticleItem {
 
     public CrystalType type;
 
-    private static Random random = new Random();
+    private static final Random random = new Random();
 
     public FracturedCrystalItem(CrystalType type, Properties properties) {
         super(properties);

@@ -35,6 +35,9 @@ public class SaltLanternBlockEntity extends SaltTorchBlockEntity {
             Color colorF = colorFirst;
             Color color = colorSecond;
             Vec3 pos = new Vec3(0.5f, 0.25f, 0.5f);
+            if (getBlockState().getValue(SaltLanternBlock.HANGING)) {
+                pos = pos.add(0, 0.1875, 0);
+            }
             Color colorFirstStarF = null;
             Color colorFirstStar = null;
             Color colorSecondStarF = null;
@@ -144,7 +147,7 @@ public class SaltLanternBlockEntity extends SaltTorchBlockEntity {
             if (secondStar) {
                 if (random.nextFloat() < 0.1) {
                     ParticleBuilder.create(FluffyFurParticles.STAR)
-                            .setColorData(ColorParticleData.create(colorSecondStarF, colorSecondStarF).build())
+                            .setColorData(ColorParticleData.create(colorSecondStarF, colorSecondStar).build())
                             .setTransparencyData(GenericParticleData.create(0.75f, 0).build())
                             .setScaleData(GenericParticleData.create(0, 0.1f, 0).setEasing(Easing.SINE_IN_OUT).build())
                             .setSpinData(SpinParticleData.create().randomSpin(0.1f).build())

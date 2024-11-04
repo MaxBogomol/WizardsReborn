@@ -54,7 +54,6 @@ public class SaltTorchBlockEntity extends ExposedBlockSimpleInventory implements
             boolean firstStar = false;
             boolean secondStar = false;
 
-
             if (getBlockState().getBlock() instanceof SaltWallTorchBlock) {
                 BlockPos blockPos = new BlockPos(0, 0, 0).relative(getBlockState().getValue(SaltWallTorchBlock.FACING));
                 pos = pos.add(blockPos.getX() * -0.25f, 0.09375f, blockPos.getZ() * -0.25f);
@@ -164,7 +163,7 @@ public class SaltTorchBlockEntity extends ExposedBlockSimpleInventory implements
             if (secondStar) {
                 if (random.nextFloat() < 0.1) {
                     ParticleBuilder.create(FluffyFurParticles.STAR)
-                            .setColorData(ColorParticleData.create(colorSecondStarF, colorSecondStarF).build())
+                            .setColorData(ColorParticleData.create(colorSecondStarF, colorSecondStar).build())
                             .setTransparencyData(GenericParticleData.create(0.75f, 0).build())
                             .setScaleData(GenericParticleData.create(0, 0.1f, 0).setEasing(Easing.SINE_IN_OUT).build())
                             .setSpinData(SpinParticleData.create().randomSpin(0.1f).build())

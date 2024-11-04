@@ -30,7 +30,7 @@ import java.util.Random;
 
 public class ArcaneLumosItem extends BlockItem implements IParticleItem, IGuiParticleItem {
 
-    private static Random random = new Random();
+    private static final Random random = new Random();
 
     public ArcaneLumosItem(Block blockIn, Properties properties) {
         super(blockIn, properties);

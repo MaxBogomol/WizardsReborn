@@ -15,7 +15,7 @@ import java.util.Random;
 
 public class SarconIngotItem extends Item implements IParticleItem {
 
-    private static Random random = new Random();
+    private static final Random random = new Random();
 
     public SarconIngotItem(Properties properties) {
         super(properties);

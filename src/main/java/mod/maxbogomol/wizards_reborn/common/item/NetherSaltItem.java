@@ -17,7 +17,7 @@ import java.awt.*;
 import java.util.Random;
 
 public class NetherSaltItem extends FuelItem implements IParticleItem {
-    private static Random random = new Random();
+    private static final Random random = new Random();
 
     public NetherSaltItem(Properties properties, int fuel) {
         super(properties, fuel);

@@ -11,7 +11,7 @@ import net.minecraft.world.level.block.Block;
 import java.util.Random;
 
 public class MorItem extends BlockItem {
-    private static Random random = new Random();
+    private static final Random random = new Random();
     public int minEffect;
     public int maxEffect;
 

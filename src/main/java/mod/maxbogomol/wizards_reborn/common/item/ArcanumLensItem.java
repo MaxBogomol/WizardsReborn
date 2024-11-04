@@ -32,7 +32,7 @@ import java.util.Random;
 
 public class ArcanumLensItem extends ArcanumItem implements IGuiParticleItem {
 
-    private static Random random = new Random();
+    private static final Random random = new Random();
 
     public ArcanumLensItem(Properties properties) {
         super(properties);

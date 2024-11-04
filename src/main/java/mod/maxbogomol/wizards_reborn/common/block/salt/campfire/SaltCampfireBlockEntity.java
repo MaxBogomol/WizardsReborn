@@ -183,7 +183,7 @@ public class SaltCampfireBlockEntity extends ExposedBlockSimpleInventory impleme
             if (secondStar) {
                 if (random.nextFloat() < 0.1) {
                     ParticleBuilder.create(FluffyFurParticles.STAR)
-                            .setColorData(ColorParticleData.create(colorSecondStarF, colorSecondStarF).build())
+                            .setColorData(ColorParticleData.create(colorSecondStarF, colorSecondStar).build())
                             .setTransparencyData(GenericParticleData.create(0.75f, 0).build())
                             .setScaleData(GenericParticleData.create(0, 0.1f, 0).setEasing(Easing.SINE_IN_OUT).build())
                             .setSpinData(SpinParticleData.create().randomSpin(0.1f).build())

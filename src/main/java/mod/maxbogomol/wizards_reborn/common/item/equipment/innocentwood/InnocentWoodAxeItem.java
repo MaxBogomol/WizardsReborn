@@ -14,7 +14,7 @@ import java.util.Random;
 import java.util.function.Consumer;
 
 public class InnocentWoodAxeItem extends ArcaneWoodAxeItem {
-    private static Random random = new Random();
+    private static final Random random = new Random();
 
     public InnocentWoodAxeItem(Tier tier, float attackDamageModifier, float attackSpeedModifier, Properties properties, Item repairItem) {
         super(tier, attackDamageModifier, attackSpeedModifier, properties, repairItem);
