@@ -1,0 +1,14 @@
+{
+  "parent": "minecraft:block/cube_all",
+  "render_type": "minecraft:opaque",
+  "textures": {
+    "all": "wizards_reborn:block/polished_wisestone"
+  },
+  "connections": [
+    {
+      "type": "fusion:is_same_block"
+    }
+  ],
+  "loader": "fusion:model",
+  "type": "fusion:connecting"
+}
