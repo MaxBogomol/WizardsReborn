@@ -15,40 +15,28 @@ import net.minecraftforge.api.distmarker.OnlyIn;
 
 public class CargoCarpetItem extends Item {
 
-    public enum Colors {
-        CARPET(new ResourceLocation(WizardsReborn.MOD_ID, "textures/entity/sniffalo/carpet/carpet.png")),
-        WHITE(new ResourceLocation(WizardsReborn.MOD_ID, "textures/entity/sniffalo/carpet/white_carpet.png")),
-        LIGHT_GRAY(new ResourceLocation(WizardsReborn.MOD_ID, "textures/entity/sniffalo/carpet/light_gray_carpet.png")),
-        GRAY(new ResourceLocation(WizardsReborn.MOD_ID, "textures/entity/sniffalo/carpet/gray_carpet.png")),
-        BLACK(new ResourceLocation(WizardsReborn.MOD_ID, "textures/entity/sniffalo/carpet/black_carpet.png")),
-        BROWN(new ResourceLocation(WizardsReborn.MOD_ID, "textures/entity/sniffalo/carpet/brown_carpet.png")),
-        RED(new ResourceLocation(WizardsReborn.MOD_ID, "textures/entity/sniffalo/carpet/red_carpet.png")),
-        ORANGE(new ResourceLocation(WizardsReborn.MOD_ID, "textures/entity/sniffalo/carpet/orange_carpet.png")),
-        YELLOW(new ResourceLocation(WizardsReborn.MOD_ID, "textures/entity/sniffalo/carpet/yellow_carpet.png")),
-        LIME(new ResourceLocation(WizardsReborn.MOD_ID, "textures/entity/sniffalo/carpet/lime_carpet.png")),
-        GREEN(new ResourceLocation(WizardsReborn.MOD_ID, "textures/entity/sniffalo/carpet/green_carpet.png")),
-        CYAN(new ResourceLocation(WizardsReborn.MOD_ID, "textures/entity/sniffalo/carpet/cyan_carpet.png")),
-        LIGHT_BLUE(new ResourceLocation(WizardsReborn.MOD_ID, "textures/entity/sniffalo/carpet/light_blue_carpet.png")),
-        BLUE(new ResourceLocation(WizardsReborn.MOD_ID, "textures/entity/sniffalo/carpet/blue_carpet.png")),
-        PURPLE(new ResourceLocation(WizardsReborn.MOD_ID, "textures/entity/sniffalo/carpet/purple_carpet.png")),
-        MAGENTA(new ResourceLocation(WizardsReborn.MOD_ID, "textures/entity/sniffalo/carpet/magenta_carpet.png")),
-        PINK(new ResourceLocation(WizardsReborn.MOD_ID, "textures/entity/sniffalo/carpet/pink_carpet.png")),
-        RAINBOW(new ResourceLocation(WizardsReborn.MOD_ID, "textures/entity/sniffalo/carpet/rainbow_carpet.png"));
+    public static CarpetColor CARPET = CarpetColor.create(WizardsReborn.MOD_ID, "carpet");
+    public static CarpetColor WHITE = CarpetColor.create(WizardsReborn.MOD_ID, "white_carpet");
+    public static CarpetColor LIGHT_GRAY = CarpetColor.create(WizardsReborn.MOD_ID, "light_gray_carpet");
+    public static CarpetColor GRAY = CarpetColor.create(WizardsReborn.MOD_ID, "gray_carpet");
+    public static CarpetColor BLACK = CarpetColor.create(WizardsReborn.MOD_ID, "black_carpet");
+    public static CarpetColor BROWN = CarpetColor.create(WizardsReborn.MOD_ID, "brown_carpet");
+    public static CarpetColor RED = CarpetColor.create(WizardsReborn.MOD_ID, "red_carpet");
+    public static CarpetColor ORANGE = CarpetColor.create(WizardsReborn.MOD_ID, "orange_carpet");
+    public static CarpetColor YELLOW = CarpetColor.create(WizardsReborn.MOD_ID, "yellow_carpet");
+    public static CarpetColor LIME = CarpetColor.create(WizardsReborn.MOD_ID, "lime_carpet");
+    public static CarpetColor GREEN = CarpetColor.create(WizardsReborn.MOD_ID, "green_carpet");
+    public static CarpetColor CYAN = CarpetColor.create(WizardsReborn.MOD_ID, "cyan_carpet");
+    public static CarpetColor LIGHT_BLUE = CarpetColor.create(WizardsReborn.MOD_ID, "light_blue_carpet");
+    public static CarpetColor BLUE = CarpetColor.create(WizardsReborn.MOD_ID, "blue_carpet");
+    public static CarpetColor PURPLE = CarpetColor.create(WizardsReborn.MOD_ID, "purple_carpet");
+    public static CarpetColor MAGENTA = CarpetColor.create(WizardsReborn.MOD_ID, "magenta_carpet");
+    public static CarpetColor PINK = CarpetColor.create(WizardsReborn.MOD_ID, "pink_carpet");
+    public static CarpetColor RAINBOW = CarpetColor.create(WizardsReborn.MOD_ID, "rainbow_carpet");
 
-        public final ResourceLocation texture;
+    public CarpetColor color;
 
-        private Colors(ResourceLocation texture) {
-            this.texture = texture;
-        }
-
-        public ResourceLocation getTexture() {
-            return texture;
-        }
-    }
-
-    public Colors color;
-
-    public CargoCarpetItem(Colors color, Properties properties) {
+    public CargoCarpetItem(CarpetColor color, Properties properties) {
         super(properties);
         this.color = color;
     }
@@ -71,5 +59,22 @@ public class CargoCarpetItem extends Item {
     @OnlyIn(Dist.CLIENT)
     public ResourceLocation getCarpetTexture(ItemStack stack, SniffaloEntity entity) {
         return color.getTexture();
+    }
+
+    public static class CarpetColor {
+        public ResourceLocation texture;
+        
+        public CarpetColor(ResourceLocation texture) {
+            this.texture = texture;
+        }
+
+        @OnlyIn(Dist.CLIENT)
+        public ResourceLocation getTexture() {
+            return texture;
+        }
+
+        public static CarpetColor create(String modId, String carpet) {
+            return new CarpetColor(new ResourceLocation(modId, "textures/entity/sniffalo/carpet/" + carpet + ".png"));
+        }
     }
 }

@@ -526,12 +526,6 @@ public class ArcanemiconChapters {
                         ARCANE_WOOD_SLAB_ITEM, ARCANE_WOOD_PLANKS_ITEM, ARCANE_WOOD_SLAB_ITEM,
                         EMPTY_ITEM, ARCANE_WOOD_PLANKS_ITEM, EMPTY_ITEM,
                         ARCANE_WOOD_SLAB_ITEM, ARCANE_WOOD_PLANKS_ITEM, ARCANE_WOOD_SLAB_ITEM
-                ),
-                new TitledBlockPage("wizards_reborn.arcanemicon.page.hovering_tome_stand",
-                        new BlockEntry(ARCANE_PEDESTAL_ITEM, new ItemStack(WizardsRebornItems.HOVERING_TOME_STAND.get()))
-                ),
-                new CraftingTablePage(new ItemStack(WizardsRebornItems.HOVERING_TOME_STAND.get()),
-                        ARCANE_PEDESTAL_ITEM, new ItemStack(WizardsRebornItems.ARCANEMICON.get())
                 )
         );
 
@@ -2795,12 +2789,6 @@ public class ArcanemiconChapters {
                         EMPTY_ITEM, INNOCENT_WOOD_PLANKS_ITEM, EMPTY_ITEM,
                         INNOCENT_WOOD_SLAB_ITEM, INNOCENT_WOOD_PLANKS_ITEM, INNOCENT_WOOD_SLAB_ITEM
                 ),
-                new TitledBlockPage("wizards_reborn.arcanemicon.page.innocent_hovering_tome_stand",
-                        new BlockEntry(new ItemStack(WizardsRebornItems.INNOCENT_PEDESTAL.get()), new ItemStack(WizardsRebornItems.INNOCENT_HOVERING_TOME_STAND.get()))
-                ),
-                new CraftingTablePage(new ItemStack(WizardsRebornItems.INNOCENT_HOVERING_TOME_STAND.get()),
-                        INNOCENT_PEDESTAL_ITEM, new ItemStack(WizardsRebornItems.ARCANEMICON.get())
-                ),
                 new TitledBlockPage("wizards_reborn.arcanemicon.page.innocent_fire",
                         new BlockEntry(new ItemStack(WizardsRebornItems.INNOCENT_PEDESTAL.get()), new ItemStack(WizardsRebornItems.INNOCENT_SALT_TORCH.get())),
                         new BlockEntry(new ItemStack(WizardsRebornItems.INNOCENT_PEDESTAL.get()), new ItemStack(WizardsRebornItems.INNOCENT_SALT_LANTERN.get())),
@@ -3166,12 +3154,6 @@ public class ArcanemiconChapters {
                         EMPTY_ITEM, POLISHED_WISESTONE_ITEM, EMPTY_ITEM,
                         POLISHED_WISESTONE_SLAB_ITEM, POLISHED_WISESTONE_ITEM, POLISHED_WISESTONE_SLAB_ITEM,
                         ARCANE_GOLD_INGOT_ITEM
-                ),
-                new TitledBlockPage("wizards_reborn.arcanemicon.page.wisestone_hovering_tome_stand",
-                        new BlockEntry(ARCANE_PEDESTAL_ITEM, new ItemStack(WizardsRebornItems.WISESTONE_HOVERING_TOME_STAND.get()))
-                ),
-                new CraftingTablePage(new ItemStack(WizardsRebornItems.HOVERING_TOME_STAND.get()),
-                        WISESTONE_PEDESTAL_ITEM, new ItemStack(WizardsRebornItems.ARCANEMICON.get())
                 )
         );
 

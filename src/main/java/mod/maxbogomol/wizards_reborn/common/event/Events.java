@@ -1,5 +1,6 @@
 package mod.maxbogomol.wizards_reborn.common.event;
 
+import mod.maxbogomol.fluffy_fur.registry.common.damage.FluffyFurDamageTags;
 import mod.maxbogomol.wizards_reborn.WizardsReborn;
 import mod.maxbogomol.wizards_reborn.api.arcaneenchantment.ArcaneEnchantmentUtil;
 import mod.maxbogomol.wizards_reborn.api.knowledge.Knowledge;
@@ -93,7 +94,7 @@ public class Events {
             AttributeInstance attr = event.getEntity().getAttribute(WizardsRebornAttributes.MAGIC_ARMOR.get());
 
             if (attr != null) {
-                if (event.getSource().is(WizardsRebornDamageTags.MAGIC)) {
+                if (event.getSource().is(FluffyFurDamageTags.MAGIC)) {
                     scale = (float) (1f - (attr.getValue() / 100f));
                 }
                 if (scale == 1 && event.getSource().getDirectEntity() instanceof SpellEntity) {

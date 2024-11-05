@@ -24,13 +24,14 @@ import mod.maxbogomol.wizards_reborn.common.block.creative.wissen_storage.Creati
 import mod.maxbogomol.wizards_reborn.common.block.crystal.CrystalBlockEntity;
 import mod.maxbogomol.wizards_reborn.common.block.crystal_growth.CrystalGrowthBlockEntity;
 import mod.maxbogomol.wizards_reborn.common.block.engraved_wisestone.EngravedWisestoneBlockEntity;
-import mod.maxbogomol.wizards_reborn.common.block.pipe.extractor.fluid.FluidExtractorBlockEntity;
-import mod.maxbogomol.wizards_reborn.common.block.pipe.fluid.FluidPipeBlockEntity;
-import mod.maxbogomol.wizards_reborn.common.block.hovering_tome_stand.HoveringTomeStandBlockEntity;
 import mod.maxbogomol.wizards_reborn.common.block.jeweler_table.JewelerTableBlockEntity;
 import mod.maxbogomol.wizards_reborn.common.block.light_emitter.LightEmitterBlockEntity;
 import mod.maxbogomol.wizards_reborn.common.block.light_transfer_lens.LightTransferLensBlockEntity;
 import mod.maxbogomol.wizards_reborn.common.block.orbital_fluid_retainer.OrbitalFluidRetainerBlockEntity;
+import mod.maxbogomol.wizards_reborn.common.block.pipe.extractor.fluid.FluidExtractorBlockEntity;
+import mod.maxbogomol.wizards_reborn.common.block.pipe.extractor.steam.SteamExtractorBlockEntity;
+import mod.maxbogomol.wizards_reborn.common.block.pipe.fluid.FluidPipeBlockEntity;
+import mod.maxbogomol.wizards_reborn.common.block.pipe.steam.SteamPipeBlockEntity;
 import mod.maxbogomol.wizards_reborn.common.block.placed_items.PlacedItemsBlockEntity;
 import mod.maxbogomol.wizards_reborn.common.block.runic_pedestal.RunicPedestalBlockEntity;
 import mod.maxbogomol.wizards_reborn.common.block.salt.campfire.SaltCampfireBlockEntity;
@@ -40,8 +41,6 @@ import mod.maxbogomol.wizards_reborn.common.block.sensor.SensorBlockEntity;
 import mod.maxbogomol.wizards_reborn.common.block.sensor.fluid.FluidSensorBlockEntity;
 import mod.maxbogomol.wizards_reborn.common.block.sensor.item_sorter.ItemSorterBlockEntity;
 import mod.maxbogomol.wizards_reborn.common.block.sensor.wissen_activator.WissenActivatorBlockEntity;
-import mod.maxbogomol.wizards_reborn.common.block.pipe.extractor.steam.SteamExtractorBlockEntity;
-import mod.maxbogomol.wizards_reborn.common.block.pipe.steam.SteamPipeBlockEntity;
 import mod.maxbogomol.wizards_reborn.common.block.steam_thermal_storage.SteamThermalStorageBlockEntity;
 import mod.maxbogomol.wizards_reborn.common.block.totem.disenchant.TotemOfDisenchantBlockEntity;
 import mod.maxbogomol.wizards_reborn.common.block.totem.experience_absorption.TotemOfExperienceAbsorptionBlockEntity;
@@ -78,7 +77,6 @@ public class WizardsRebornBlockEntities {
             .build(null));
 
     public static RegistryObject<BlockEntityType<ArcanePedestalBlockEntity>> ARCANE_PEDESTAL = BLOCK_ENTITIES.register("arcane_pedestal", () -> BlockEntityType.Builder.of(ArcanePedestalBlockEntity::new, WizardsRebornBlocks.ARCANE_PEDESTAL.get(), WizardsRebornBlocks.INNOCENT_PEDESTAL.get(), WizardsRebornBlocks.CORK_BAMBOO_PEDESTAL.get(), WizardsRebornBlocks.WISESTONE_PEDESTAL.get()).build(null));
-    public static RegistryObject<BlockEntityType<HoveringTomeStandBlockEntity>> HOVERING_TOME_STAND = BLOCK_ENTITIES.register("hovering_tome_stand", () -> BlockEntityType.Builder.of(HoveringTomeStandBlockEntity::new, WizardsRebornBlocks.HOVERING_TOME_STAND.get(), WizardsRebornBlocks.INNOCENT_HOVERING_TOME_STAND.get(), WizardsRebornBlocks.CORK_BAMBOO_HOVERING_TOME_STAND.get(), WizardsRebornBlocks.WISESTONE_HOVERING_TOME_STAND.get()).build(null));
     public static RegistryObject<BlockEntityType<WissenAltarBlockEntity>> WISSEN_ALTAR = BLOCK_ENTITIES.register("wissen_altar", () -> BlockEntityType.Builder.of(WissenAltarBlockEntity::new, WizardsRebornBlocks.WISSEN_ALTAR.get()).build(null));
     public static RegistryObject<BlockEntityType<WissenTranslatorBlockEntity>> WISSEN_TRANSLATOR = BLOCK_ENTITIES.register("wissen_translator", () -> BlockEntityType.Builder.of(WissenTranslatorBlockEntity::new, WizardsRebornBlocks.WISSEN_TRANSLATOR.get()).build(null));
     public static RegistryObject<BlockEntityType<WissenCrystallizerBlockEntity>> WISSEN_CRYSTALLIZER = BLOCK_ENTITIES.register("wissen_crystallizer", () -> BlockEntityType.Builder.of(WissenCrystallizerBlockEntity::new, WizardsRebornBlocks.WISSEN_CRYSTALLIZER.get()).build(null));
@@ -145,7 +143,6 @@ public class WizardsRebornBlockEntities {
         @SubscribeEvent
         public static void registerBlockEntityRenderers(EntityRenderersEvent.RegisterRenderers event) {
             BlockEntityRenderers.register(ARCANE_PEDESTAL.get(), (trd) -> new ArcanePedestalRenderer());
-            BlockEntityRenderers.register(HOVERING_TOME_STAND.get(), HoveringTomeStandRenderer::new);
             BlockEntityRenderers.register(WISSEN_ALTAR.get(), (trd) -> new WissenAltarRenderer());
             BlockEntityRenderers.register(WISSEN_TRANSLATOR.get(), (trd) -> new WissenTranslatorRenderer());
             BlockEntityRenderers.register(WISSEN_CRYSTALLIZER.get(), (trd) -> new WissenCrystallizerRenderer());

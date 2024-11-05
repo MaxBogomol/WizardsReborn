@@ -37,13 +37,14 @@ import mod.maxbogomol.wizards_reborn.common.block.crystal.CrystalBlock;
 import mod.maxbogomol.wizards_reborn.common.block.crystal.CrystalSeedBlock;
 import mod.maxbogomol.wizards_reborn.common.block.crystal_growth.CrystalGrowthBlock;
 import mod.maxbogomol.wizards_reborn.common.block.engraved_wisestone.EngravedWisestoneBlock;
-import mod.maxbogomol.wizards_reborn.common.block.pipe.extractor.fluid.FluidExtractorBlock;
-import mod.maxbogomol.wizards_reborn.common.block.pipe.fluid.FluidPipeBlock;
-import mod.maxbogomol.wizards_reborn.common.block.hovering_tome_stand.HoveringTomeStandBlock;
 import mod.maxbogomol.wizards_reborn.common.block.jeweler_table.JewelerTableBlock;
 import mod.maxbogomol.wizards_reborn.common.block.light_emitter.LightEmitterBlock;
 import mod.maxbogomol.wizards_reborn.common.block.light_transfer_lens.LightTransferLensBlock;
 import mod.maxbogomol.wizards_reborn.common.block.orbital_fluid_retainer.OrbitalFluidRetainerBlock;
+import mod.maxbogomol.wizards_reborn.common.block.pipe.extractor.fluid.FluidExtractorBlock;
+import mod.maxbogomol.wizards_reborn.common.block.pipe.extractor.steam.SteamExtractorBlock;
+import mod.maxbogomol.wizards_reborn.common.block.pipe.fluid.FluidPipeBlock;
+import mod.maxbogomol.wizards_reborn.common.block.pipe.steam.SteamPipeBlock;
 import mod.maxbogomol.wizards_reborn.common.block.placed_items.PlacedItemsBlock;
 import mod.maxbogomol.wizards_reborn.common.block.runic_pedestal.RunicPedestalBlock;
 import mod.maxbogomol.wizards_reborn.common.block.salt.campfire.SaltCampfireBlock;
@@ -54,8 +55,6 @@ import mod.maxbogomol.wizards_reborn.common.block.sensor.*;
 import mod.maxbogomol.wizards_reborn.common.block.sensor.fluid.FluidSensorBlock;
 import mod.maxbogomol.wizards_reborn.common.block.sensor.item_sorter.ItemSorterBlock;
 import mod.maxbogomol.wizards_reborn.common.block.sensor.wissen_activator.WissenActivatorBlock;
-import mod.maxbogomol.wizards_reborn.common.block.pipe.extractor.steam.SteamExtractorBlock;
-import mod.maxbogomol.wizards_reborn.common.block.pipe.steam.SteamPipeBlock;
 import mod.maxbogomol.wizards_reborn.common.block.steam_thermal_storage.SteamThermalStorageBlock;
 import mod.maxbogomol.wizards_reborn.common.block.totem.TotemBaseBlock;
 import mod.maxbogomol.wizards_reborn.common.block.totem.disenchant.TotemOfDisenchantBlock;
@@ -70,7 +69,9 @@ import mod.maxbogomol.wizards_reborn.common.block.wissen_crystallizer.WissenCrys
 import mod.maxbogomol.wizards_reborn.common.block.wissen_translator.WissenTranslatorBlock;
 import mod.maxbogomol.wizards_reborn.common.world.tree.ArcaneWoodTree;
 import mod.maxbogomol.wizards_reborn.common.world.tree.InnocentWoodTree;
-import mod.maxbogomol.wizards_reborn.registry.common.*;
+import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornCrystals;
+import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornMonograms;
+import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornSounds;
 import mod.maxbogomol.wizards_reborn.registry.common.fluid.WizardsRebornFluids;
 import net.minecraft.util.valueproviders.UniformInt;
 import net.minecraft.world.level.block.*;
@@ -300,7 +301,6 @@ public class WizardsRebornBlocks {
     public static final RegistryObject<Block> COSMIC_ARCANE_LUMOS = BLOCKS.register("cosmic_arcane_lumos", () -> new ArcaneLumosBlock(ArcaneLumosBlock.COSMIC, BlockBehaviour.Properties.copy(Blocks.MAGENTA_WOOL).lightLevel((state) -> 15).noOcclusion().noCollission().instabreak()));
 
     public static final RegistryObject<Block> ARCANE_PEDESTAL = BLOCKS.register("arcane_pedestal", () -> new ArcanePedestalBlock(BlockBehaviour.Properties.copy(ARCANE_WOOD_PLANKS.get())));
-    public static final RegistryObject<Block> HOVERING_TOME_STAND = BLOCKS.register("hovering_tome_stand", () -> new HoveringTomeStandBlock(BlockBehaviour.Properties.copy(ARCANE_WOOD_PLANKS.get())));
     public static final RegistryObject<Block> WISSEN_ALTAR = BLOCKS.register("wissen_altar", () -> new WissenAltarBlock(BlockBehaviour.Properties.copy(ARCANE_WOOD_PLANKS.get())));
     public static final RegistryObject<Block> WISSEN_TRANSLATOR = BLOCKS.register("wissen_translator", () -> new WissenTranslatorBlock(BlockBehaviour.Properties.copy(ARCANE_WOOD_PLANKS.get())));
     public static final RegistryObject<Block> WISSEN_CRYSTALLIZER = BLOCKS.register("wissen_crystallizer", () -> new WissenCrystallizerBlock(BlockBehaviour.Properties.copy(ARCANE_WOOD_PLANKS.get())));
@@ -316,7 +316,6 @@ public class WizardsRebornBlocks {
     public static final RegistryObject<Block> ARCANE_ITERATOR = BLOCKS.register("arcane_iterator", () -> new ArcaneIteratorBlock(BlockBehaviour.Properties.copy(ARCANE_WOOD_PLANKS.get())));
 
     public static final RegistryObject<Block> WISESTONE_PEDESTAL = BLOCKS.register("wisestone_pedestal", () -> new ArcanePedestalBlock(BlockBehaviour.Properties.copy(POLISHED_WISESTONE.get())));
-    public static final RegistryObject<Block> WISESTONE_HOVERING_TOME_STAND = BLOCKS.register("wisestone_hovering_tome_stand", () -> new HoveringTomeStandBlock(BlockBehaviour.Properties.copy(POLISHED_WISESTONE.get())));
     public static final RegistryObject<Block> FLUID_PIPE = BLOCKS.register("fluid_pipe", () -> new FluidPipeBlock(BlockBehaviour.Properties.copy(POLISHED_WISESTONE.get())));
     public static final RegistryObject<Block> FLUID_EXTRACTOR = BLOCKS.register("fluid_extractor", () -> new FluidExtractorBlock(BlockBehaviour.Properties.copy(POLISHED_WISESTONE.get())));
     public static final RegistryObject<Block> STEAM_PIPE = BLOCKS.register("steam_pipe", () -> new SteamPipeBlock(BlockBehaviour.Properties.copy(POLISHED_WISESTONE.get())));
@@ -329,7 +328,6 @@ public class WizardsRebornBlocks {
     public static final RegistryObject<Block> ARCANE_CENSER = BLOCKS.register("arcane_censer", () -> new ArcaneCenserBlock(BlockBehaviour.Properties.copy(POLISHED_WISESTONE.get())));
 
     public static final RegistryObject<Block> CORK_BAMBOO_PEDESTAL = BLOCKS.register("cork_bamboo_pedestal", () -> new ArcanePedestalBlock(BlockBehaviour.Properties.copy(CORK_BAMBOO_PLANKS.get())));
-    public static final RegistryObject<Block> CORK_BAMBOO_HOVERING_TOME_STAND = BLOCKS.register("cork_bamboo_hovering_tome_stand", () -> new HoveringTomeStandBlock(BlockBehaviour.Properties.copy(CORK_BAMBOO_PLANKS.get())));
 
     public static final RegistryObject<Block> LIGHT_EMITTER = BLOCKS.register("light_emitter", () -> new LightEmitterBlock(BlockBehaviour.Properties.copy(POLISHED_WISESTONE.get())));
     public static final RegistryObject<Block> LIGHT_TRANSFER_LENS = BLOCKS.register("light_transfer_lens", () -> new LightTransferLensBlock(BlockBehaviour.Properties.copy(POLISHED_WISESTONE.get())));
@@ -358,7 +356,6 @@ public class WizardsRebornBlocks {
     public static final RegistryObject<Block> ENGRAVED_WISESTONE_UNIVERSUM = BLOCKS.register("engraved_wisestone_universum", () -> new EngravedWisestoneBlock(BlockBehaviour.Properties.copy(POLISHED_WISESTONE.get()), WizardsRebornMonograms.UNIVERSUM));
 
     public static final RegistryObject<Block> INNOCENT_PEDESTAL = BLOCKS.register("innocent_pedestal", () -> new ArcanePedestalBlock(BlockBehaviour.Properties.copy(INNOCENT_WOOD_PLANKS.get())));
-    public static final RegistryObject<Block> INNOCENT_HOVERING_TOME_STAND = BLOCKS.register("innocent_hovering_tome_stand", () -> new HoveringTomeStandBlock(BlockBehaviour.Properties.copy(INNOCENT_WOOD_PLANKS.get())));
 
     public static final RegistryObject<Block> ARCANE_LEVER = BLOCKS.register("arcane_lever", () -> new WaterloggableLeverBlock(BlockBehaviour.Properties.copy(Blocks.LEVER).sound(WizardsRebornSounds.ARCANE_WOOD)));
     public static final RegistryObject<Block> ARCANE_HOPPER = BLOCKS.register("arcane_hopper", () -> new ArcaneHopperBlock(BlockBehaviour.Properties.copy(Blocks.HOPPER).sound(WizardsRebornSounds.ARCANE_WOOD)));
@@ -540,14 +537,5 @@ public class WizardsRebornBlocks {
         FluffyFurBlocks.fireBlock(ARCANE_LINEN_HAY.get(), 60, 20);
         FluffyFurBlocks.fireBlock(SHINY_CLOVER_CROP.get(), 60, 100);
         FluffyFurBlocks.fireBlock(SHINY_CLOVER.get(), 60, 100);
-
-        ArcanePedestalBlock.blocksList.put(ARCANE_PEDESTAL.get(), HOVERING_TOME_STAND.get());
-        ArcanePedestalBlock.blocksList.put(INNOCENT_PEDESTAL.get(), INNOCENT_HOVERING_TOME_STAND.get());
-        ArcanePedestalBlock.blocksList.put(CORK_BAMBOO_PEDESTAL.get(), CORK_BAMBOO_HOVERING_TOME_STAND.get());
-        ArcanePedestalBlock.blocksList.put(WISESTONE_PEDESTAL.get(), WISESTONE_HOVERING_TOME_STAND.get());
-        HoveringTomeStandBlock.blocksList.put(HOVERING_TOME_STAND.get(), ARCANE_PEDESTAL.get());
-        HoveringTomeStandBlock.blocksList.put(INNOCENT_HOVERING_TOME_STAND.get(), INNOCENT_PEDESTAL.get());
-        HoveringTomeStandBlock.blocksList.put(CORK_BAMBOO_HOVERING_TOME_STAND.get(), CORK_BAMBOO_PEDESTAL.get());
-        HoveringTomeStandBlock.blocksList.put(WISESTONE_HOVERING_TOME_STAND.get(), WISESTONE_PEDESTAL.get());
     }
 }

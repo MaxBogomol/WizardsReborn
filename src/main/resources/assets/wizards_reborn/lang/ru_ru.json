@@ -289,7 +289,6 @@
   "block.wizards_reborn.cosmic_arcane_lumos": "Космический аркановый люмос",
 
   "block.wizards_reborn.arcane_pedestal": "Аркановый пьедестал",
-  "block.wizards_reborn.hovering_tome_stand": "Подставка левитирующего тома",
   "block.wizards_reborn.wissen_altar": "Виссен алтарь",
   "block.wizards_reborn.wissen_translator": "Виссен транслятор",
   "block.wizards_reborn.wissen_crystallizer": "Виссен кристаллизатор",
@@ -305,7 +304,6 @@
   "block.wizards_reborn.arcane_iterator": "Аркановый итератор",
 
   "block.wizards_reborn.wisestone_pedestal": "Мудро-каменный пьедестал",
-  "block.wizards_reborn.wisestone_hovering_tome_stand": "Мудро-каменная подставка левитирующего тома",
   "block.wizards_reborn.fluid_pipe": "Жидкостная труба",
   "block.wizards_reborn.fluid_extractor": "Жидкостный экстрактор",
   "block.wizards_reborn.steam_pipe": "Паровая труба",
@@ -318,7 +316,6 @@
   "block.wizards_reborn.arcane_censer": "Аркановая курильница",
 
   "block.wizards_reborn.cork_bamboo_pedestal": "Пробково-бамбуковый пьедестал",
-  "block.wizards_reborn.cork_bamboo_hovering_tome_stand": "Пробково-бамбуковая подставка левитирующего тома",
 
   "block.wizards_reborn.light_emitter": "Световой излучатель",
   "block.wizards_reborn.light_transfer_lens": "Светопереносящая линза",
@@ -347,7 +344,6 @@
   "block.wizards_reborn.engraved_wisestone_universum": "Гравированный мудро-камень",
 
   "block.wizards_reborn.innocent_pedestal": "Невинный пьедестал",
-  "block.wizards_reborn.innocent_hovering_tome_stand": "Невинная подставка левитирующего тома",
 
   "block.wizards_reborn.arcane_lever": "Аркановый рычаг",
   "block.wizards_reborn.arcane_hopper": "Аркановая воронка",
@@ -766,12 +762,12 @@
   "monogram.wizards_reborn.universum.lore": "Вселенная",
 
   "_comment_6": "Облики",
-  "skin.wizards_reborn.top_hat": "Цилиндр",
-  "skin.wizards_reborn.soul_hunter": "Жнец душ",
-  "skin.wizards_reborn.implosion": "Имплозия",
-  "skin.wizards_reborn.phantom_ink": "Фантомные чернила",
-  "skin.wizards_reborn.magnificent_maid": "Великолепная горничная",
-  "skin.wizards_reborn.summer_love": "Летняя любовь",
+  "item_skin.wizards_reborn.top_hat": "Цилиндр",
+  "item_skin.wizards_reborn.soul_hunter": "Жнец душ",
+  "item_skin.wizards_reborn.implosion": "Имплозия",
+  "item_skin.wizards_reborn.phantom_ink": "Фантомные чернила",
+  "item_skin.wizards_reborn.magnificent_maid": "Великолепная горничная",
+  "item_skin.wizards_reborn.summer_love": "Летняя любовь",
 
   "_comment_7": "Аркановые зачарования",
   "arcane_enchantment.wizards_reborn.wissen_mending": "Виссен починка",
@@ -1203,8 +1199,6 @@
   "wizards_reborn.arcanemicon.chapter.arcane_pedestal": "Пьедестал",
     "wizards_reborn.arcanemicon.page.arcane_pedestal.title": "Аркановый пьедестал",
     "wizards_reborn.arcanemicon.page.arcane_pedestal": "Декоративный пьедестал для предметов. На него вы можете расположить свои реликвии.",
-    "wizards_reborn.arcanemicon.page.hovering_tome_stand.title": "Леветирующий том",
-    "wizards_reborn.arcanemicon.page.hovering_tome_stand": "Левитирующие знания на подставке.",
   "wizards_reborn.arcanemicon.chapter.wissen_altar": "Виссен алтарь",
     "wizards_reborn.arcanemicon.page.wissen_altar.0.title": "Виссен алтарь",
     "wizards_reborn.arcanemicon.page.wissen_altar.0": "Виссен алтарь способен высвобождать первозданную виссен энергию из арканума и арканумной пыли.",
@@ -1768,8 +1762,6 @@
     "wizards_reborn.arcanemicon.page.innocent_wood_smoking_pipe": "Курительная трубка из невинного дерева... \n \n Вы точно хотите это делать?",
     "wizards_reborn.arcanemicon.page.innocent_pedestal.title": "Невинный пьедестал",
     "wizards_reborn.arcanemicon.page.innocent_pedestal": "Мягкая подстилка для ваших предметов. Они выглядят мило.",
-    "wizards_reborn.arcanemicon.page.innocent_hovering_tome_stand.title": "Леветирующий том",
-    "wizards_reborn.arcanemicon.page.innocent_hovering_tome_stand": "Левитирующие знания на невинной подставке.",
     "wizards_reborn.arcanemicon.page.innocent_fire.title": "Невинный огонь",
     "wizards_reborn.arcanemicon.page.innocent_fire": "Он совершенно безопасный.",
   "wizards_reborn.arcanemicon.chapter.innocent_wood_tools": "Инструменты",
@@ -1813,8 +1805,6 @@
   "wizards_reborn.arcanemicon.chapter.wisestone_pedestal": "Пьедестал",
     "wizards_reborn.arcanemicon.page.wisestone_pedestal.title": "Пьедестал",
     "wizards_reborn.arcanemicon.page.wisestone_pedestal": "Более элегантный пьедестал из мудро-камня. Теперь ваши реликвии выглядят величественнее.",
-    "wizards_reborn.arcanemicon.page.wisestone_hovering_tome_stand.title": "Леветирующий том",
-    "wizards_reborn.arcanemicon.page.wisestone_hovering_tome_stand": "Левитирующие знания на элегантной подставке.",
   "wizards_reborn.arcanemicon.chapter.fluid_pipes": "Жидкостные трубы",
     "wizards_reborn.arcanemicon.page.fluid_pipe.title": "Жидкостная труба",
     "wizards_reborn.arcanemicon.page.fluid_pipe": "Перемещают между собой жидкости. Используя виссен жезл, можно настраивать соединения. Используя режим перезагрузки можно прочищать.",

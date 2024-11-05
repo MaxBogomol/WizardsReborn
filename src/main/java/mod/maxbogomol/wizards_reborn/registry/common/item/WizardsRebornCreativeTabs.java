@@ -320,7 +320,6 @@ public class WizardsRebornCreativeTabs {
             event.accept(WizardsRebornItems.COSMIC_ARCANE_LUMOS);
 
             event.accept(WizardsRebornItems.ARCANE_PEDESTAL);
-            event.accept(WizardsRebornItems.HOVERING_TOME_STAND);
             event.accept(WizardsRebornItems.WISSEN_ALTAR);
             event.accept(WizardsRebornItems.WISSEN_TRANSLATOR);
             event.accept(WizardsRebornItems.WISSEN_CRYSTALLIZER);
@@ -336,7 +335,6 @@ public class WizardsRebornCreativeTabs {
             event.accept(WizardsRebornItems.ARCANE_ITERATOR);
 
             event.accept(WizardsRebornItems.WISESTONE_PEDESTAL);
-            event.accept(WizardsRebornItems.WISESTONE_HOVERING_TOME_STAND);
             event.accept(WizardsRebornItems.FLUID_PIPE);
             event.accept(WizardsRebornItems.FLUID_EXTRACTOR);
             event.accept(WizardsRebornItems.STEAM_PIPE);
@@ -349,7 +347,6 @@ public class WizardsRebornCreativeTabs {
             event.accept(WizardsRebornItems.ARCANE_CENSER);
 
             event.accept(WizardsRebornItems.CORK_BAMBOO_PEDESTAL);
-            event.accept(WizardsRebornItems.CORK_BAMBOO_HOVERING_TOME_STAND);
 
             event.accept(WizardsRebornItems.LIGHT_EMITTER);
             event.accept(WizardsRebornItems.LIGHT_TRANSFER_LENS);
@@ -378,7 +375,6 @@ public class WizardsRebornCreativeTabs {
             event.accept(WizardsRebornItems.ENGRAVED_WISESTONE_UNIVERSUM);
 
             event.accept(WizardsRebornItems.INNOCENT_PEDESTAL);
-            event.accept(WizardsRebornItems.INNOCENT_HOVERING_TOME_STAND);
 
             event.accept(WizardsRebornItems.ARCANE_LEVER);
             event.accept(WizardsRebornItems.ARCANE_HOPPER);

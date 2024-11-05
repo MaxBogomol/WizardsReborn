@@ -7,6 +7,6 @@ import net.minecraft.tags.TagKey;
 import net.minecraft.world.damagesource.DamageType;
 
 public class WizardsRebornDamageTags {
-    public static final TagKey<DamageType> MAGIC = TagKey.create(Registries.DAMAGE_TYPE, new ResourceLocation("forge", "is_magic"));
     public static final TagKey<DamageType> ARCANE_MAGIC = TagKey.create(Registries.DAMAGE_TYPE, new ResourceLocation(WizardsReborn.MOD_ID, "is_arcane_magic"));
+    public static final TagKey<DamageType> RITUAL = TagKey.create(Registries.DAMAGE_TYPE, new ResourceLocation(WizardsReborn.MOD_ID, "is_ritual"));
 }
