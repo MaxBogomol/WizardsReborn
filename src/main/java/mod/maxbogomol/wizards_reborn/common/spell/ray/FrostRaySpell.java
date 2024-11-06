@@ -12,6 +12,7 @@ import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornCrystals;
 import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornSpells;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.damagesource.DamageSource;
+import net.minecraft.world.damagesource.DamageTypes;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Blocks;
@@ -55,7 +56,7 @@ public class FrostRaySpell extends RaySpell {
                     target.setTicksFrozen(frost);
                     target.setTicksFrozen(frost);
 
-                    DamageSource damageSource = getDamage(target.damageSources().freeze().typeHolder(), entity, entity.getOwner());
+                    DamageSource damageSource = getDamage(DamageTypes.FREEZE, entity, entity.getOwner());
                     target.hurt(damageSource, damage);
 
                     Color color = getColor();

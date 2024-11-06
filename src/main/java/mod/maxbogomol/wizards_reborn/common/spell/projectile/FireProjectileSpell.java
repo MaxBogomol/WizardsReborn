@@ -7,6 +7,7 @@ import mod.maxbogomol.wizards_reborn.common.item.equipment.arcane.ArcaneArmorIte
 import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornCrystals;
 import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornSpells;
 import net.minecraft.world.damagesource.DamageSource;
+import net.minecraft.world.damagesource.DamageTypes;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.level.Level;
 
@@ -36,7 +37,7 @@ public class FireProjectileSpell extends ProjectileSpell {
             if (fire > 50) fire = 50;
             target.setSecondsOnFire(fire);
             target.setTicksFrozen(0);
-            DamageSource damageSource = getDamage(target.damageSources().onFire().typeHolder(), entity, entity.getOwner());
+            DamageSource damageSource = getDamage(DamageTypes.ON_FIRE, entity, entity.getOwner());
             target.hurt(damageSource, damage);
         }
     }

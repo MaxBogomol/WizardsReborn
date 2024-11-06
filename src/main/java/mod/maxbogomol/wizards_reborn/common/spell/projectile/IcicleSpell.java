@@ -23,6 +23,7 @@ import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.util.Mth;
 import net.minecraft.world.damagesource.DamageSource;
+import net.minecraft.world.damagesource.DamageTypes;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
@@ -109,14 +110,14 @@ public class IcicleSpell extends ProjectileSpell {
             damage = damage / 2f;
         }
 
-        DamageSource generic = getDamage(target.damageSources().generic().typeHolder(), entity, entity.getOwner());
+        DamageSource generic = getDamage(DamageTypes.GENERIC, entity, entity.getOwner());
         target.hurt(generic, 3);
         if (target instanceof Player targetPlayer) {
             targetPlayer.getInventory().hurtArmor(generic, 3, Inventory.ALL_ARMOR_SLOTS);
         }
         int invulnerableTime = target.invulnerableTime;
         target.invulnerableTime = 0;
-        DamageSource damageSource = getDamage(target.damageSources().freeze().typeHolder(), entity, entity.getOwner());
+        DamageSource damageSource = getDamage(DamageTypes.FREEZE, entity, entity.getOwner());
         target.hurt(damageSource, damage);
         target.invulnerableTime = invulnerableTime;
         target.clearFire();

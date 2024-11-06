@@ -2,6 +2,7 @@ package mod.maxbogomol.wizards_reborn.api.spell;
 
 import com.mojang.blaze3d.vertex.PoseStack;
 import mod.maxbogomol.fluffy_fur.client.animation.ItemAnimation;
+import mod.maxbogomol.fluffy_fur.common.damage.DamageHandler;
 import mod.maxbogomol.wizards_reborn.WizardsReborn;
 import mod.maxbogomol.wizards_reborn.api.crystal.CrystalHandler;
 import mod.maxbogomol.wizards_reborn.api.crystal.CrystalType;
@@ -15,8 +16,8 @@ import mod.maxbogomol.wizards_reborn.common.spell.WandSpellContext;
 import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornCrystals;
 import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornSounds;
 import net.minecraft.client.renderer.MultiBufferSource;
-import net.minecraft.core.Holder;
 import net.minecraft.nbt.CompoundTag;
+import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.InteractionHand;
@@ -35,6 +36,7 @@ import net.minecraftforge.api.distmarker.OnlyIn;
 
 import java.awt.*;
 import java.util.ArrayList;
+import java.util.Objects;
 import java.util.Random;
 
 public class Spell {
@@ -281,11 +283,12 @@ public class Spell {
         return null;
     }
 
-    public static DamageSource getDamage(Holder<DamageType> typeHolder, Entity entity, Entity owner) {
-        if (owner != null) {
-            return new DamageSource(typeHolder, entity, owner);
-        }
-        return new DamageSource(typeHolder, entity);
+    public static DamageSource getDamage(ResourceKey<DamageType> key, Entity entity, Entity owner) {
+        return DamageHandler.create(entity.level(), key, entity, Objects.requireNonNullElse(owner, entity));
+    }
+
+    public static DamageSource getDamage(ResourceKey<DamageType> key, Entity entity) {
+        return DamageHandler.create(entity.level(), key, entity, entity);
     }
 
     public SpellComponent getSpellComponent() {

@@ -1,6 +1,7 @@
 package mod.maxbogomol.wizards_reborn.common.event;
 
-import mod.maxbogomol.fluffy_fur.registry.common.damage.FluffyFurDamageTags;
+import mod.maxbogomol.fluffy_fur.common.damage.DamageHandler;
+import mod.maxbogomol.fluffy_fur.registry.common.damage.FluffyFurDamageTypeTags;
 import mod.maxbogomol.wizards_reborn.WizardsReborn;
 import mod.maxbogomol.wizards_reborn.api.arcaneenchantment.ArcaneEnchantmentUtil;
 import mod.maxbogomol.wizards_reborn.api.knowledge.Knowledge;
@@ -14,13 +15,12 @@ import mod.maxbogomol.wizards_reborn.common.item.equipment.ArcaneFortressArmorIt
 import mod.maxbogomol.wizards_reborn.common.network.KnowledgeUpdatePacket;
 import mod.maxbogomol.wizards_reborn.common.network.WizardsRebornPacketHandler;
 import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornAttributes;
-import mod.maxbogomol.wizards_reborn.registry.common.damage.WizardsRebornDamage;
-import mod.maxbogomol.wizards_reborn.registry.common.damage.WizardsRebornDamageTags;
+import mod.maxbogomol.wizards_reborn.registry.common.damage.WizardsRebornDamageTypeTags;
+import mod.maxbogomol.wizards_reborn.registry.common.damage.WizardsRebornDamageTypes;
 import mod.maxbogomol.wizards_reborn.registry.common.item.WizardsRebornItems;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerPlayer;
-import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.ai.attributes.AttributeInstance;
@@ -94,7 +94,7 @@ public class Events {
             AttributeInstance attr = event.getEntity().getAttribute(WizardsRebornAttributes.MAGIC_ARMOR.get());
 
             if (attr != null) {
-                if (event.getSource().is(FluffyFurDamageTags.MAGIC)) {
+                if (event.getSource().is(FluffyFurDamageTypeTags.MAGIC)) {
                     scale = (float) (1f - (attr.getValue() / 100f));
                 }
                 if (scale == 1 && event.getSource().getDirectEntity() instanceof SpellEntity) {
@@ -113,12 +113,12 @@ public class Events {
 
     public void arcaneDamage(LivingDamageEvent event) {
         if (event.getSource().getEntity() instanceof LivingEntity attacker) {
-            if (!event.getSource().is(WizardsRebornDamageTags.ARCANE_MAGIC)) {
+            if (!event.getSource().is(WizardsRebornDamageTypeTags.ARCANE_MAGIC)) {
                 AttributeInstance attr = attacker.getAttribute(WizardsRebornAttributes.ARCANE_DAMAGE.get());
                 if (attr != null && attr.getValue() > 0) {
                     int invulnerableTime = event.getEntity().invulnerableTime;
                     event.getEntity().invulnerableTime = 0;
-                    event.getEntity().hurt(new DamageSource(WizardsRebornDamage.create(event.getEntity().level(), WizardsRebornDamage.ARCANE_MAGIC).typeHolder(), attacker), (float) attr.getValue());
+                    event.getEntity().hurt(DamageHandler.create(event.getEntity().level(), WizardsRebornDamageTypes.ARCANE_MAGIC, attacker, attacker), (float) attr.getValue());
                     event.getEntity().invulnerableTime = invulnerableTime;
                 }
             }

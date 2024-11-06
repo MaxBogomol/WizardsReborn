@@ -7,6 +7,7 @@ import mod.maxbogomol.wizards_reborn.common.item.equipment.arcane.ArcaneArmorIte
 import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornCrystals;
 import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornSpells;
 import net.minecraft.world.damagesource.DamageSource;
+import net.minecraft.world.damagesource.DamageTypes;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.level.Level;
 
@@ -37,7 +38,7 @@ public class AirChargeSpell extends ChargeSpell {
             float charge = (float) (0.5f + ((spellComponent.charge / getCharge()) / 2f));
             damage = damage * charge;
 
-            DamageSource damageSource = getDamage(target.damageSources().fall().typeHolder(), entity, entity.getOwner());
+            DamageSource damageSource = getDamage(DamageTypes.FALL, entity, entity.getOwner());
             target.hurt(damageSource, damage);
         }
     }

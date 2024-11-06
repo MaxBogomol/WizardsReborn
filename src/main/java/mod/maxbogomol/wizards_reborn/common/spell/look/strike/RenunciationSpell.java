@@ -5,7 +5,7 @@ import mod.maxbogomol.wizards_reborn.common.entity.SpellEntity;
 import mod.maxbogomol.wizards_reborn.common.item.equipment.arcane.ArcaneArmorItem;
 import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornCrystals;
 import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornSpells;
-import mod.maxbogomol.wizards_reborn.registry.common.damage.WizardsRebornDamage;
+import mod.maxbogomol.wizards_reborn.registry.common.damage.WizardsRebornDamageTypes;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
@@ -36,7 +36,7 @@ public class RenunciationSpell extends StrikeSpell {
         for (Entity target : getTargets(entity, distance)) {
             if (target instanceof LivingEntity livingEntity) {
                 if (!livingEntity.isInvertedHealAndHarm()) {
-                    DamageSource damageSource = getDamage(WizardsRebornDamage.create(target.level(), WizardsRebornDamage.ARCANE_MAGIC).typeHolder(), entity, entity.getOwner());
+                    DamageSource damageSource = getDamage(WizardsRebornDamageTypes.ARCANE_MAGIC, entity, entity.getOwner());
                     target.hurt(damageSource, damage);
                 } else {
                     livingEntity.heal(heal);

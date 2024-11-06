@@ -9,7 +9,7 @@ import mod.maxbogomol.wizards_reborn.common.network.spell.ProjectileSpellHeartsP
 import mod.maxbogomol.wizards_reborn.common.network.spell.ProjectileSpellSkullsPacket;
 import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornCrystals;
 import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornSpells;
-import mod.maxbogomol.wizards_reborn.registry.common.damage.WizardsRebornDamage;
+import mod.maxbogomol.wizards_reborn.registry.common.damage.WizardsRebornDamageTypes;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
@@ -40,7 +40,7 @@ public class CurseProjectileSpell extends ProjectileSpell {
                 float magicModifier = ArcaneArmorItem.getPlayerMagicModifier(entity.getOwner());
                 float damage = (1.5f + (focusLevel * 0.5f)) + magicModifier;
                 if (!livingEntity.isInvertedHealAndHarm()) {
-                    DamageSource damageSource = getDamage(WizardsRebornDamage.create(target.level(), WizardsRebornDamage.ARCANE_MAGIC).typeHolder(), entity, entity.getOwner());
+                    DamageSource damageSource = getDamage(WizardsRebornDamageTypes.ARCANE_MAGIC, entity, entity.getOwner());
                     target.hurt(damageSource, damage);
                     WizardsRebornPacketHandler.sendToTracking(level, entity.blockPosition(), new ProjectileSpellSkullsPacket(entity.position(), getColor()));
                 } else {

@@ -18,7 +18,7 @@ import mod.maxbogomol.wizards_reborn.registry.client.WizardsRebornParticles;
 import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornCrystals;
 import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornSounds;
 import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornSpells;
-import mod.maxbogomol.wizards_reborn.registry.common.damage.WizardsRebornDamage;
+import mod.maxbogomol.wizards_reborn.registry.common.damage.WizardsRebornDamageTypes;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.sounds.SoundSource;
@@ -146,7 +146,7 @@ public class CrystalCrushingSpell extends LookSpell {
                                 inventory.setItem(0, ItemStack.EMPTY);
                                 nbt.putBoolean("crystal", false);
 
-                                DamageSource damageSource = new DamageSource(WizardsRebornDamage.create(player.level(), WizardsRebornDamage.ARCANE_MAGIC).typeHolder(), player);
+                                DamageSource damageSource = getDamage(WizardsRebornDamageTypes.ARCANE_MAGIC, player);
                                 player.hurt(damageSource, 10);
 
                                 Vec3 effectPos = player.getLookAngle().scale(1f).add(player.getEyePosition());

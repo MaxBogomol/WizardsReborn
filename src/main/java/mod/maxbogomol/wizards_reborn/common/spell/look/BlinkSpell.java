@@ -10,7 +10,7 @@ import mod.maxbogomol.wizards_reborn.common.network.arcaneenchantment.BlinkFovPa
 import mod.maxbogomol.wizards_reborn.common.network.spell.BlinkSpellPacket;
 import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornCrystals;
 import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornSpells;
-import mod.maxbogomol.wizards_reborn.registry.common.damage.WizardsRebornDamage;
+import mod.maxbogomol.wizards_reborn.registry.common.damage.WizardsRebornDamageTypes;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.damagesource.DamageSource;
@@ -85,7 +85,7 @@ public class BlinkSpell extends LookSpell {
                 if (isSharp) {
                     for (Entity target : RayCast.getHitEntities(level, spellContext.getPos(), pos, 0.5f)) {
                         if (!target.equals(spellContext.getEntity()) && target instanceof LivingEntity) {
-                            DamageSource damageSource = new DamageSource(WizardsRebornDamage.create(target.level(), WizardsRebornDamage.ARCANE_MAGIC).typeHolder(), entity);
+                            DamageSource damageSource = getDamage(WizardsRebornDamageTypes.ARCANE_MAGIC, entity);
                             target.hurt(damageSource, damage);
                         }
                     }

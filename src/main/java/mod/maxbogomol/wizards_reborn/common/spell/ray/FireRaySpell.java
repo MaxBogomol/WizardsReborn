@@ -13,6 +13,7 @@ import net.minecraft.core.Direction;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.damagesource.DamageSource;
+import net.minecraft.world.damagesource.DamageTypes;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.BaseFireBlock;
@@ -59,7 +60,7 @@ public class FireRaySpell extends RaySpell {
                     target.setSecondsOnFire(fire);
                     target.setTicksFrozen(0);
 
-                    DamageSource damageSource = getDamage(target.damageSources().onFire().typeHolder(), entity, entity.getOwner());
+                    DamageSource damageSource = getDamage(DamageTypes.ON_FIRE, entity, entity.getOwner());
                     target.hurt(damageSource, damage);
                 }
             }

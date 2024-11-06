@@ -8,7 +8,7 @@ import mod.maxbogomol.wizards_reborn.common.network.WizardsRebornPacketHandler;
 import mod.maxbogomol.wizards_reborn.common.network.spell.NecroticRaySpellTrailPacket;
 import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornCrystals;
 import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornSpells;
-import mod.maxbogomol.wizards_reborn.registry.common.damage.WizardsRebornDamage;
+import mod.maxbogomol.wizards_reborn.registry.common.damage.WizardsRebornDamageTypes;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.Entity;
@@ -61,7 +61,7 @@ public class NecroticRaySpell extends RaySpell {
                     int focusLevel = CrystalUtil.getStatLevel(entity.getStats(), WizardsRebornCrystals.FOCUS);
                     float magicModifier = ArcaneArmorItem.getPlayerMagicModifier(entity.getOwner());
                     float damage = (1f + ((focusLevel + magicModifier) * 0.5f));
-                    DamageSource damageSource = getDamage(WizardsRebornDamage.create(target.level(), WizardsRebornDamage.RITUAL).typeHolder(), entity, entity.getOwner());
+                    DamageSource damageSource = getDamage(WizardsRebornDamageTypes.RITUAL, entity, entity.getOwner());
                     if (target.hurt(damageSource, damage)) {
                         if (entity.getOwner() instanceof LivingEntity livingEntity) {
                             if (random.nextFloat() < 0.4f) livingEntity.heal(1);

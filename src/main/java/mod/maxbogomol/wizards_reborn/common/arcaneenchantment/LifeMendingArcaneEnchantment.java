@@ -1,12 +1,12 @@
 package mod.maxbogomol.wizards_reborn.common.arcaneenchantment;
 
+import mod.maxbogomol.fluffy_fur.common.damage.DamageHandler;
 import mod.maxbogomol.wizards_reborn.api.arcaneenchantment.ArcaneEnchantment;
 import mod.maxbogomol.wizards_reborn.api.arcaneenchantment.ArcaneEnchantmentTypes;
 import mod.maxbogomol.wizards_reborn.api.arcaneenchantment.ArcaneEnchantmentUtil;
 import mod.maxbogomol.wizards_reborn.api.arcaneenchantment.IArcaneItem;
-import mod.maxbogomol.wizards_reborn.registry.common.damage.WizardsRebornDamage;
 import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornArcaneEnchantments;
-import net.minecraft.world.damagesource.DamageSource;
+import mod.maxbogomol.wizards_reborn.registry.common.damage.WizardsRebornDamageTypes;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
@@ -55,7 +55,7 @@ public class LifeMendingArcaneEnchantment extends ArcaneEnchantment {
                             player.setHealth(player.getHealth() - 0.25f);
                         } else {
                             player.invulnerableTime = 0;
-                            player.hurt(new DamageSource(WizardsRebornDamage.create(player.level(), WizardsRebornDamage.RITUAL).typeHolder(), player), 100);
+                            player.hurt(DamageHandler.create(player.level(), WizardsRebornDamageTypes.RITUAL, player), 100);
                         }
                         stack.setDamageValue(stack.getDamageValue() - 1);
                     }
@@ -75,7 +75,7 @@ public class LifeMendingArcaneEnchantment extends ArcaneEnchantment {
                             player.setHealth(player.getHealth() - 0.25f);
                         } else {
                             player.invulnerableTime = 0;
-                            player.hurt(new DamageSource(WizardsRebornDamage.create(player.level(), WizardsRebornDamage.RITUAL).typeHolder(), player), 100);
+                            player.hurt(DamageHandler.create(player.level(), WizardsRebornDamageTypes.RITUAL, player), 100);
                         }
                         amount--;
                     }

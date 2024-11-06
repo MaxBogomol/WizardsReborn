@@ -1,5 +1,6 @@
 package mod.maxbogomol.wizards_reborn.common.lighttype;
 
+import mod.maxbogomol.fluffy_fur.common.damage.DamageHandler;
 import mod.maxbogomol.wizards_reborn.WizardsReborn;
 import mod.maxbogomol.wizards_reborn.api.light.LightRayHitResult;
 import mod.maxbogomol.wizards_reborn.api.light.LightType;
@@ -9,7 +10,7 @@ import mod.maxbogomol.wizards_reborn.common.network.lightray.LightRayBurstPacket
 import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornCrystals;
 import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornSounds;
 import net.minecraft.sounds.SoundSource;
-import net.minecraft.world.damagesource.DamageSource;
+import net.minecraft.world.damagesource.DamageTypes;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.phys.Vec3;
 
@@ -35,7 +36,7 @@ public class FireLightType extends LightType {
                     livingEntity.invulnerableTime = 0;
                     livingEntity.lastHurtByPlayerTime = livingEntity.tickCount;
                     float damage = stack.isConcentrated() ? 1f : 0.5f;
-                    livingEntity.hurt(new DamageSource(livingEntity.damageSources().onFire().typeHolder()), damage);
+                    livingEntity.hurt(DamageHandler.create(livingEntity.level(), DamageTypes.ON_FIRE), damage);
                     livingEntity.invulnerableTime = invulnerableTime;
                     int fire = livingEntity.getRemainingFireTicks() + (stack.isConcentrated() ? 60 : 30);
                     if (fire > 200) fire = 200;

@@ -7,6 +7,7 @@ import mod.maxbogomol.wizards_reborn.common.item.equipment.arcane.ArcaneArmorIte
 import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornCrystals;
 import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornSpells;
 import net.minecraft.world.damagesource.DamageSource;
+import net.minecraft.world.damagesource.DamageTypes;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.level.Level;
 
@@ -42,7 +43,7 @@ public class FrostChargeSpell extends ChargeSpell {
             if (frost > 250) frost = 250;
             target.setTicksFrozen(frost);
 
-            DamageSource damageSource = getDamage(target.damageSources().freeze().typeHolder(), entity, entity.getOwner());
+            DamageSource damageSource = getDamage(DamageTypes.FREEZE, entity, entity.getOwner());
             target.hurt(damageSource, damage);
         }
     }

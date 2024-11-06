@@ -1017,6 +1017,10 @@
   "sounds.wizards_reborn.crystal_resonate": "Кристалл резонирует",
   "sounds.wizards_reborn.crystal_shimmer": "Кристалл звенит",
 
+  "sounds.wizards_reborn.pipe": "Труба",
+  "sounds.wizards_reborn.boom": "Бум",
+  "sounds.wizards_reborn.moai": "Моаи",
+
   "_comment_16": "Существа",
   "entity.wizards_reborn.arcane_wood_boat": "Арканово-древесная лодка",
   "entity.wizards_reborn.arcane_wood_chest_boat": "Арканово-древесная грузовая лодка",

@@ -6,6 +6,7 @@ import mod.maxbogomol.fluffy_fur.client.particle.data.ColorParticleData;
 import mod.maxbogomol.fluffy_fur.client.particle.data.GenericParticleData;
 import mod.maxbogomol.fluffy_fur.client.particle.data.SpinParticleData;
 import mod.maxbogomol.fluffy_fur.client.render.trail.TrailPointBuilder;
+import mod.maxbogomol.fluffy_fur.common.damage.DamageHandler;
 import mod.maxbogomol.fluffy_fur.common.easing.Easing;
 import mod.maxbogomol.fluffy_fur.registry.client.FluffyFurParticles;
 import mod.maxbogomol.fluffy_fur.registry.client.FluffyFurRenderTypes;
@@ -13,7 +14,7 @@ import mod.maxbogomol.wizards_reborn.common.network.ThrowedScytheScreenshakePack
 import mod.maxbogomol.wizards_reborn.common.network.WizardsRebornPacketHandler;
 import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornArcaneEnchantments;
 import mod.maxbogomol.wizards_reborn.registry.common.entity.WizardsRebornEntities;
-import mod.maxbogomol.wizards_reborn.registry.common.damage.WizardsRebornDamage;
+import mod.maxbogomol.wizards_reborn.registry.common.damage.WizardsRebornDamageTypes;
 import mod.maxbogomol.wizards_reborn.registry.common.item.WizardsRebornItems;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.ListTag;
@@ -358,7 +359,7 @@ public class ThrowedScytheEntity extends ThrowableItemProjectile {
                 if (getMagicDamage() > 0) {
                     int invulnerableTime = target.invulnerableTime;
                     target.invulnerableTime = 0;
-                    target.hurt(new DamageSource(WizardsRebornDamage.create(target.level(), WizardsRebornDamage.ARCANE_MAGIC).typeHolder(), this, owner), getMagicDamage());
+                    target.hurt(DamageHandler.create(target.level(), WizardsRebornDamageTypes.ARCANE_MAGIC, this, owner), getMagicDamage());
                     target.invulnerableTime = invulnerableTime;
                 }
 

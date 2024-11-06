@@ -9,7 +9,7 @@ import mod.maxbogomol.wizards_reborn.common.network.spell.CrossSpellHeartsPacket
 import mod.maxbogomol.wizards_reborn.common.network.spell.CrossSpellSkullsPacket;
 import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornCrystals;
 import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornSpells;
-import mod.maxbogomol.wizards_reborn.registry.common.damage.WizardsRebornDamage;
+import mod.maxbogomol.wizards_reborn.registry.common.damage.WizardsRebornDamageTypes;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
@@ -58,7 +58,7 @@ public class CurseCrossSpell extends EntityLookSpell {
                 for (Entity entity : hit.getEntities()) {
                     if (entity instanceof LivingEntity livingEntity) {
                         if (!livingEntity.isInvertedHealAndHarm()) {
-                            DamageSource damageSource = new DamageSource(WizardsRebornDamage.create(livingEntity.level(), WizardsRebornDamage.ARCANE_MAGIC).typeHolder(), spellContext.getEntity());
+                            DamageSource damageSource = getDamage(WizardsRebornDamageTypes.ARCANE_MAGIC, spellContext.getEntity());
                             livingEntity.hurt(damageSource, damage);
                             WizardsRebornPacketHandler.sendToTracking(level, entity.blockPosition(), new CrossSpellSkullsPacket(pos, getColor()));
                         } else {

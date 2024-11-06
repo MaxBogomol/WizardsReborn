@@ -1017,6 +1017,10 @@
   "sounds.wizards_reborn.crystal_resonate": "Crystal resonates",
   "sounds.wizards_reborn.crystal_shimmer": "Crystal chimes",
 
+  "sounds.wizards_reborn.pipe": "Pipe",
+  "sounds.wizards_reborn.boom": "Boom",
+  "sounds.wizards_reborn.moai": "Moai",
+
   "_comment_16": "Entities",
   "entity.wizards_reborn.arcane_wood_boat": "Arcane Wood Boat",
   "entity.wizards_reborn.arcane_wood_chest_boat": "Arcane Wood Boat with Chest",

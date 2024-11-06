@@ -1,5 +1,6 @@
 package mod.maxbogomol.wizards_reborn.common.lighttype;
 
+import mod.maxbogomol.fluffy_fur.common.damage.DamageHandler;
 import mod.maxbogomol.wizards_reborn.WizardsReborn;
 import mod.maxbogomol.wizards_reborn.api.light.LightRayHitResult;
 import mod.maxbogomol.wizards_reborn.api.light.LightType;
@@ -8,9 +9,8 @@ import mod.maxbogomol.wizards_reborn.common.network.WizardsRebornPacketHandler;
 import mod.maxbogomol.wizards_reborn.common.network.lightray.LightRayBurstPacket;
 import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornCrystals;
 import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornSounds;
-import mod.maxbogomol.wizards_reborn.registry.common.damage.WizardsRebornDamage;
+import mod.maxbogomol.wizards_reborn.registry.common.damage.WizardsRebornDamageTypes;
 import net.minecraft.sounds.SoundSource;
-import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.phys.Vec3;
 
@@ -31,10 +31,12 @@ public class VoidLightType extends LightType {
         for (LightRayHitResult.EntityContext context : hitResult.getEntities()) {
             if (context.getEntity() instanceof LivingEntity livingEntity) {
                 if (livingEntity.tickCount % 10 == 0) {
+                    int invulnerableTime = livingEntity.invulnerableTime;
                     livingEntity.invulnerableTime = 0;
                     livingEntity.lastHurtByPlayerTime = livingEntity.tickCount;
                     float damage = stack.isConcentrated() ? 2f : 1f;
-                    livingEntity.hurt(new DamageSource(WizardsRebornDamage.create(livingEntity.level(), WizardsRebornDamage.ARCANE_MAGIC).typeHolder()), damage);
+                    livingEntity.hurt(DamageHandler.create(livingEntity.level(), WizardsRebornDamageTypes.ARCANE_MAGIC), damage);
+                    livingEntity.invulnerableTime = invulnerableTime;
                     Vec3 posHit = context.getPosHit();
                     WizardsRebornPacketHandler.sendToTracking(livingEntity.level(), livingEntity.getOnPos(), new LightRayBurstPacket(posHit, getColor()));
                     livingEntity.level().playSound(WizardsReborn.proxy.getPlayer(), posHit.x(), posHit.y(), posHit.z(), WizardsRebornSounds.WISSEN_BURST.get(), SoundSource.BLOCKS, 0.05f, 2f);

@@ -2,6 +2,8 @@ package mod.maxbogomol.wizards_reborn.common.item.equipment;
 
 import mod.maxbogomol.fluffy_fur.common.block.entity.BlockSimpleInventory;
 import mod.maxbogomol.fluffy_fur.common.item.FuelItem;
+import mod.maxbogomol.wizards_reborn.common.network.WizardsRebornPacketHandler;
+import mod.maxbogomol.wizards_reborn.common.network.item.MortarPacket;
 import mod.maxbogomol.wizards_reborn.common.recipe.MortarRecipe;
 import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornRecipes;
 import net.minecraft.core.RegistryAccess;
@@ -15,6 +17,7 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.phys.Vec3;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -32,7 +35,7 @@ public class MortarItem extends FuelItem {
     public InteractionResultHolder<ItemStack> use(Level level, Player player, InteractionHand hand) {
         ItemStack stack = player.getItemInHand(hand);
 
-        if (!level.isClientSide) {
+        if (!level.isClientSide()) {
             ItemStack offStack = player.getItemInHand(InteractionHand.MAIN_HAND);
             if (hand == InteractionHand.MAIN_HAND) {
                 offStack = player.getItemInHand(InteractionHand.OFF_HAND);
@@ -44,6 +47,9 @@ public class MortarItem extends FuelItem {
 
             if (recipe.isPresent()) {
                 if (recipe.get().getResultItem(RegistryAccess.EMPTY) != null) {
+                    Vec3 pos = player.getEyePosition().add(player.getLookAngle().scale(0.75f));
+                    Vec3 vel = player.getLookAngle().scale(40).scale(1.0 / 20).normalize().scale(0.1f);
+                    WizardsRebornPacketHandler.sendToTracking(level, player.blockPosition(), new MortarPacket(pos, vel, offStack));
                     if (!player.isCreative()) {
                         offStack.shrink(1);
                     }

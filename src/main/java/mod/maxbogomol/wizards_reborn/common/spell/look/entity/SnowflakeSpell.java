@@ -9,6 +9,7 @@ import mod.maxbogomol.wizards_reborn.common.network.spell.SnowflakeSpellPacket;
 import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornCrystals;
 import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornSpells;
 import net.minecraft.world.damagesource.DamageSource;
+import net.minecraft.world.damagesource.DamageTypes;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.level.Level;
@@ -55,7 +56,7 @@ public class SnowflakeSpell extends EntityLookSpell {
             if (hit.hasEntities()) {
                 for (Entity entity : hit.getEntities()) {
                     if (entity instanceof LivingEntity livingEntity) {
-                        DamageSource damageSource = new DamageSource(entity.damageSources().freeze().typeHolder(), spellContext.getEntity());
+                        DamageSource damageSource = getDamage(DamageTypes.FREEZE, spellContext.getEntity());
                         entity.hurt(damageSource, damage);
                         entity.clearFire();
 

@@ -65,6 +65,7 @@ public final class WizardsRebornPacketHandler extends PacketHandler {
 
         ArcanemiconOfferingPacket.register(HANDLER, id++);
         WissenDustBurstPacket.register(HANDLER, id++);
+        MortarPacket.register(HANDLER, id++);
         ArcanumLensBurstPacket.register(HANDLER, id++);
         SmokePacket.register(HANDLER, id++);
         InnocentWoodToolsPacket.register(HANDLER, id++);

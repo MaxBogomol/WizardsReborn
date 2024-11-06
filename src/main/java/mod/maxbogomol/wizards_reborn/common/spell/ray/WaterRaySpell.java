@@ -13,6 +13,7 @@ import net.minecraft.core.Direction;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.damagesource.DamageSource;
+import net.minecraft.world.damagesource.DamageTypes;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
@@ -51,7 +52,7 @@ public class WaterRaySpell extends RaySpell {
                     if (frost > 250) frost = 250;
                     target.setTicksFrozen(frost);
 
-                    DamageSource damageSource = getDamage(target.damageSources().drown().typeHolder(), entity, entity.getOwner());
+                    DamageSource damageSource = getDamage(DamageTypes.DROWN, entity, entity.getOwner());
                     target.hurt(damageSource, damage);
                 }
             }

@@ -1,5 +1,6 @@
 package mod.maxbogomol.wizards_reborn.common.spell.aura;
 
+import mod.maxbogomol.fluffy_fur.common.damage.DamageHandler;
 import mod.maxbogomol.wizards_reborn.api.crystal.CrystalUtil;
 import mod.maxbogomol.wizards_reborn.common.entity.SpellEntity;
 import mod.maxbogomol.wizards_reborn.common.item.equipment.arcane.ArcaneArmorItem;
@@ -9,7 +10,7 @@ import mod.maxbogomol.wizards_reborn.common.network.spell.CrossSpellHeartsPacket
 import mod.maxbogomol.wizards_reborn.common.network.spell.CrossSpellSkullsPacket;
 import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornCrystals;
 import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornSpells;
-import mod.maxbogomol.wizards_reborn.registry.common.damage.WizardsRebornDamage;
+import mod.maxbogomol.wizards_reborn.registry.common.damage.WizardsRebornDamageTypes;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.level.Level;
@@ -44,7 +45,7 @@ public class HolyAuraSpell extends AuraSpell {
                     boolean effectHurt = false;
                     if (livingEntity.isInvertedHealAndHarm()) {
                         livingEntity.lastHurtByPlayerTime = livingEntity.tickCount;
-                        target.hurt(WizardsRebornDamage.create(target.level(), WizardsRebornDamage.ARCANE_MAGIC), damage);
+                        target.hurt(DamageHandler.create(target.level(), WizardsRebornDamageTypes.ARCANE_MAGIC), damage);
                         effectHurt = true;
                     } else {
                         if (livingEntity.getHealth() != livingEntity.getMaxHealth()) {

@@ -1,5 +1,6 @@
 package mod.maxbogomol.wizards_reborn.common.spell.aura;
 
+import mod.maxbogomol.fluffy_fur.common.damage.DamageHandler;
 import mod.maxbogomol.wizards_reborn.api.crystal.CrystalUtil;
 import mod.maxbogomol.wizards_reborn.common.entity.SpellEntity;
 import mod.maxbogomol.wizards_reborn.common.item.equipment.arcane.ArcaneArmorItem;
@@ -8,6 +9,7 @@ import mod.maxbogomol.wizards_reborn.common.network.spell.FrostAuraSpellBurstPac
 import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornCrystals;
 import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornSpells;
 import net.minecraft.world.damagesource.DamageSource;
+import net.minecraft.world.damagesource.DamageTypes;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.level.Level;
@@ -42,7 +44,7 @@ public class FrostAuraSpell extends AuraSpell {
                         int frost = target.getTicksFrozen() + 150;
                         if (frost > 550) frost = 550;
                         target.setTicksFrozen(frost);
-                        DamageSource damageSource = new DamageSource(target.damageSources().freeze().typeHolder());
+                        DamageSource damageSource = DamageHandler.create(level, DamageTypes.FREEZE);
                         livingEntity.lastHurtByPlayerTime = livingEntity.tickCount;
                         livingEntity.hurt(damageSource, damage);
                         WizardsRebornPacketHandler.sendToTracking(level, entity.blockPosition(), new FrostAuraSpellBurstPacket(target.position().add(0, target.getBbHeight() / 2f, 0), getColor()));

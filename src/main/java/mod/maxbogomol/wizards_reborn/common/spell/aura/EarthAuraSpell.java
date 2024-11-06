@@ -1,5 +1,6 @@
 package mod.maxbogomol.wizards_reborn.common.spell.aura;
 
+import mod.maxbogomol.fluffy_fur.common.damage.DamageHandler;
 import mod.maxbogomol.wizards_reborn.api.crystal.CrystalUtil;
 import mod.maxbogomol.wizards_reborn.common.entity.SpellEntity;
 import mod.maxbogomol.wizards_reborn.common.item.equipment.arcane.ArcaneArmorItem;
@@ -8,6 +9,7 @@ import mod.maxbogomol.wizards_reborn.common.network.spell.AuraSpellBurstPacket;
 import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornCrystals;
 import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornSpells;
 import net.minecraft.world.damagesource.DamageSource;
+import net.minecraft.world.damagesource.DamageTypes;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.Entity;
@@ -42,7 +44,7 @@ public class EarthAuraSpell extends AuraSpell {
             for (Entity target : targets) {
                 if (target instanceof LivingEntity livingEntity) {
                     if (!target.equals(entity.getOwner())) {
-                        DamageSource damageSource = new DamageSource(target.damageSources().generic().typeHolder());
+                        DamageSource damageSource = DamageHandler.create(level, DamageTypes.GENERIC);
                         livingEntity.lastHurtByPlayerTime = livingEntity.tickCount;
                         livingEntity.hurt(damageSource, damage);
                         livingEntity.addEffect(new MobEffectInstance(MobEffects.POISON, (int) (100 + (50 * (focusLevel + magicModifier))), 0));

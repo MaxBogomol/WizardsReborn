@@ -4,6 +4,7 @@ import mod.maxbogomol.fluffy_fur.client.particle.ParticleBuilder;
 import mod.maxbogomol.fluffy_fur.client.particle.data.ColorParticleData;
 import mod.maxbogomol.fluffy_fur.client.particle.data.GenericParticleData;
 import mod.maxbogomol.fluffy_fur.client.particle.data.SpinParticleData;
+import mod.maxbogomol.fluffy_fur.common.damage.DamageHandler;
 import mod.maxbogomol.fluffy_fur.common.easing.Easing;
 import mod.maxbogomol.fluffy_fur.registry.client.FluffyFurParticles;
 import mod.maxbogomol.wizards_reborn.WizardsReborn;
@@ -19,10 +20,9 @@ import mod.maxbogomol.wizards_reborn.common.network.spell.ChargeSpellTrailPacket
 import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornArcaneEnchantments;
 import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornAttributes;
 import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornSounds;
-import mod.maxbogomol.wizards_reborn.registry.common.damage.WizardsRebornDamage;
+import mod.maxbogomol.wizards_reborn.registry.common.damage.WizardsRebornDamageTypes;
 import net.minecraft.core.BlockPos;
 import net.minecraft.sounds.SoundSource;
-import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.damagesource.DamageTypes;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
@@ -211,7 +211,7 @@ public class WissenChargeArcaneEnchantment extends ArcaneEnchantment {
                 for (LivingEntity target : entityList) {
                     int invulnerableTime = target.invulnerableTime;
                     target.invulnerableTime = 0;
-                    target.hurt(new DamageSource(WizardsRebornDamage.create(target.level(), WizardsRebornDamage.ARCANE_MAGIC).typeHolder(), arrow.getOwner()), damage + additionalDamage);
+                    target.hurt(DamageHandler.create(arrow.level(), WizardsRebornDamageTypes.ARCANE_MAGIC, arrow, arrow.getOwner()), damage + additionalDamage);
                     target.invulnerableTime = invulnerableTime;
                 }
 

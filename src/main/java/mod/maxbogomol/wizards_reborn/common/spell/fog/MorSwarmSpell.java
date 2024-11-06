@@ -1,12 +1,13 @@
 package mod.maxbogomol.wizards_reborn.common.spell.fog;
 
+import mod.maxbogomol.fluffy_fur.common.damage.DamageHandler;
 import mod.maxbogomol.wizards_reborn.api.crystal.CrystalUtil;
 import mod.maxbogomol.wizards_reborn.common.entity.SpellEntity;
 import mod.maxbogomol.wizards_reborn.common.item.equipment.arcane.ArcaneArmorItem;
 import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornCrystals;
 import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornMobEffects;
 import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornSpells;
-import mod.maxbogomol.wizards_reborn.registry.common.damage.WizardsRebornDamage;
+import mod.maxbogomol.wizards_reborn.registry.common.damage.WizardsRebornDamageTypes;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.effect.MobEffectInstance;
@@ -72,7 +73,7 @@ public class MorSwarmSpell extends FogSpell {
                 if (e instanceof LivingEntity target) {
                     if (target.tickCount % 20 == 0) {
                         target.lastHurtByPlayerTime = target.tickCount;
-                        DamageSource damageSource = new DamageSource(WizardsRebornDamage.create(target.level(), WizardsRebornDamage.ARCANE_MAGIC).typeHolder());
+                        DamageSource damageSource = DamageHandler.create(entity.level(), WizardsRebornDamageTypes.ARCANE_MAGIC);
                         target.hurt(damageSource, damage);
                     }
                     target.addEffect(new MobEffectInstance(MobEffects.POISON, (int) (60 + (20 * (focusLevel + magicModifier))), 1));

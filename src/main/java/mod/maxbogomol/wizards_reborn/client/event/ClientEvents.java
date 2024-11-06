@@ -2,6 +2,7 @@ package mod.maxbogomol.wizards_reborn.client.event;
 
 import com.google.common.collect.Multimap;
 import mod.maxbogomol.fluffy_fur.client.tooltip.TooltipModifierHandler;
+import mod.maxbogomol.wizards_reborn.WizardsReborn;
 import mod.maxbogomol.wizards_reborn.api.arcaneenchantment.ArcaneEnchantmentUtil;
 import mod.maxbogomol.wizards_reborn.client.arcanemicon.ArcanemiconChapters;
 import mod.maxbogomol.wizards_reborn.client.arcanemicon.ArcanemiconGui;
@@ -38,9 +39,11 @@ public class ClientEvents {
 
     @SubscribeEvent
     public void onDrawScreenPost(RenderGuiOverlayEvent.Pre event) {
-        if (event.getOverlay().id() == VanillaGuiOverlay.CROSSHAIR.id()) {
-            WissenWandItem.drawWissenGui(event.getGuiGraphics());
-            ArcaneWandItem.drawWandGui(event.getGuiGraphics());
+        if (WizardsReborn.proxy.getPlayer().isAlive()) {
+            if (event.getOverlay().id() == VanillaGuiOverlay.CROSSHAIR.id()) {
+                WissenWandItem.drawWissenGui(event.getGuiGraphics());
+                ArcaneWandItem.drawWandGui(event.getGuiGraphics());
+            }
         }
     }
 

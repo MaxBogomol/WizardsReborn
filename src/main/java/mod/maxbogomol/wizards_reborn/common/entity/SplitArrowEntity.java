@@ -1,20 +1,20 @@
 package mod.maxbogomol.wizards_reborn.common.entity;
 
 import mod.maxbogomol.fluffy_fur.client.render.trail.TrailPointBuilder;
+import mod.maxbogomol.fluffy_fur.common.damage.DamageHandler;
 import mod.maxbogomol.wizards_reborn.common.network.WizardsRebornPacketHandler;
 import mod.maxbogomol.wizards_reborn.common.network.arcaneenchantment.SplitArrowBurstPacket;
 import mod.maxbogomol.wizards_reborn.common.network.spell.ChargeSpellTrailPacket;
 import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornArcaneEnchantments;
-import mod.maxbogomol.wizards_reborn.registry.common.entity.WizardsRebornEntities;
 import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornSounds;
-import mod.maxbogomol.wizards_reborn.registry.common.damage.WizardsRebornDamage;
+import mod.maxbogomol.wizards_reborn.registry.common.damage.WizardsRebornDamageTypes;
+import mod.maxbogomol.wizards_reborn.registry.common.entity.WizardsRebornEntities;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
 import net.minecraft.network.syncher.SynchedEntityData;
 import net.minecraft.sounds.SoundEvent;
-import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
@@ -104,7 +104,7 @@ public class SplitArrowEntity extends AbstractArrow {
                 if (livingEntity.isAlive()) {
                     int invulnerableTime = livingEntity.invulnerableTime;
                     livingEntity.invulnerableTime = 0;
-                    livingEntity.hurt(new DamageSource(WizardsRebornDamage.create(livingEntity.level(), WizardsRebornDamage.ARCANE_MAGIC).typeHolder(), this, getOwner()), (float) getBaseDamage());
+                    livingEntity.hurt(DamageHandler.create(livingEntity.level(), WizardsRebornDamageTypes.ARCANE_MAGIC, this, getOwner()), (float) getBaseDamage());
                     livingEntity.invulnerableTime = invulnerableTime;
                 } else {
                     end = false;

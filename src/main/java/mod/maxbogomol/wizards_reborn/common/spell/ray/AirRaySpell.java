@@ -10,6 +10,7 @@ import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornCrystals;
 import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornSpells;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.damagesource.DamageSource;
+import net.minecraft.world.damagesource.DamageTypes;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.level.Level;
@@ -40,7 +41,7 @@ public class AirRaySpell extends RaySpell {
                     int focusLevel = CrystalUtil.getStatLevel(entity.getStats(), WizardsRebornCrystals.FOCUS);
                     float magicModifier = ArcaneArmorItem.getPlayerMagicModifier(entity.getOwner());
                     float damage = (1.5f + (focusLevel * 0.5f)) + magicModifier;
-                    DamageSource damageSource = getDamage(target.damageSources().fall().typeHolder(), entity, entity.getOwner());
+                    DamageSource damageSource = getDamage(DamageTypes.FALL, entity, entity.getOwner());
                     target.hurt(damageSource, damage);
 
 

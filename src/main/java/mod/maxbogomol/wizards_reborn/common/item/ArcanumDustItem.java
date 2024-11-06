@@ -41,7 +41,7 @@ public class ArcanumDustItem extends ArcanumItem {
 
         if (!level.isClientSide) {
             Vec3 pos = player.getEyePosition().add(player.getLookAngle().scale(0.75f));
-            Vec3 vel = player.getEyePosition().add(player.getLookAngle().scale(40)).subtract(pos).scale(1.0 / 20).normalize().scale(0.2f);
+            Vec3 vel = player.getLookAngle().scale(40).scale(1.0 / 20).normalize().scale(0.2f);
 
             if (executeTransmutation(stack, level, blockPos, pos, vel, true, player.isCreative())) {
                 player.awardStat(Stats.ITEM_USED.get(this));
