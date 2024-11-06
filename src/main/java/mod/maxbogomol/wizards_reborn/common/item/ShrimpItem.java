@@ -20,8 +20,8 @@ public class ShrimpItem extends Item {
         this.isFried = isFried;
     }
 
-    @OnlyIn(Dist.CLIENT)
     @Override
+    @OnlyIn(Dist.CLIENT)
     public void appendHoverText(ItemStack stack, Level level, List<Component> list, TooltipFlag flags) {
         super.appendHoverText(stack, level, list, flags);
 

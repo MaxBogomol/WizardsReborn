@@ -33,8 +33,8 @@ public class SkinTrimItem extends Item implements IGuiParticleItem {
         return skin;
     }
 
-    @OnlyIn(Dist.CLIENT)
     @Override
+    @OnlyIn(Dist.CLIENT)
     public void appendHoverText(ItemStack stack, Level level, List<Component> list, TooltipFlag flags) {
         list.add(getSkin().getSkinComponent());
     }

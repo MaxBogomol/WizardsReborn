@@ -34,8 +34,8 @@ public class EngravedWisestoneItem extends BlockItem implements IGuiParticleItem
         super(block, properties);
     }
 
-    @OnlyIn(Dist.CLIENT)
     @Override
+    @OnlyIn(Dist.CLIENT)
     public void appendHoverText(ItemStack stack, Level level, List<net.minecraft.network.chat.Component> list, TooltipFlag flags) {
         if (getBlock() instanceof EngravedWisestoneBlock block && block.hasMonogram()) {
             Monogram monogram = block.getMonogram();
@@ -43,8 +43,8 @@ public class EngravedWisestoneItem extends BlockItem implements IGuiParticleItem
         }
     }
 
-    @OnlyIn(Dist.CLIENT)
     @Override
+    @OnlyIn(Dist.CLIENT)
     public Component getHighlightTip(ItemStack stack, Component displayName) {
         if (getBlock() instanceof EngravedWisestoneBlock block && block.hasMonogram()) {
             Monogram monogram = block.getMonogram();

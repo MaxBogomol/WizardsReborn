@@ -86,8 +86,8 @@ public class DrinkBottleItem extends PlacedItem {
         return ItemUtils.startUsingInstantly(level, player, hand);
     }
 
-    @OnlyIn(Dist.CLIENT)
     @Override
+    @OnlyIn(Dist.CLIENT)
     public void appendHoverText(ItemStack stack, Level level, List<Component> list, TooltipFlag flags) {
         int ticks = getTicks(stack);
 

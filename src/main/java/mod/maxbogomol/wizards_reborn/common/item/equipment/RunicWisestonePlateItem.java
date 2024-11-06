@@ -75,8 +75,8 @@ public class RunicWisestonePlateItem extends Item implements IGuiParticleItem {
         return displayName;
     }
 
-    @OnlyIn(Dist.CLIENT)
     @Override
+    @OnlyIn(Dist.CLIENT)
     public void appendHoverText(ItemStack stack, Level level, List<Component> list, TooltipFlag flags) {
         CrystalRitual ritual = CrystalRitualUtil.getCrystalRitual(stack);
         if (!CrystalRitualUtil.isEmpty(ritual)) {

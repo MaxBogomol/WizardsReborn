@@ -72,8 +72,8 @@ public class FracturedCrystalItem extends Item implements IParticleItem {
         }
     }
 
-    @OnlyIn(Dist.CLIENT)
     @Override
+    @OnlyIn(Dist.CLIENT)
     public void appendHoverText(ItemStack stack, Level level, List<Component> list, TooltipFlag flags) {
         CrystalType type = getType();
         Color color = type.getColor();

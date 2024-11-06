@@ -71,8 +71,8 @@ public class LeatherCollarItem extends BaseCurioItem {
         }
     }
 
-    @OnlyIn(Dist.CLIENT)
     @Override
+    @OnlyIn(Dist.CLIENT)
     public void appendHoverText(ItemStack stack, Level level, List<Component> list, TooltipFlag flags) {
         super.appendHoverText(stack, level, list, flags);
 

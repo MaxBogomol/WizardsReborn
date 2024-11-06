@@ -49,8 +49,8 @@ public class FluidStorageBaseItem extends BlockItem implements IFluidItem, ICust
         return 0;
     }
 
-    @OnlyIn(Dist.CLIENT)
     @Override
+    @OnlyIn(Dist.CLIENT)
     public void appendHoverText(ItemStack stack, Level level, List<Component> list, TooltipFlag flags) {
         if (getBlock() instanceof EntityBlock block) {
             BlockEntity blockEntity = block.newBlockEntity(new BlockPos(0, 0, 0), getBlock().defaultBlockState());

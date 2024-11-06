@@ -81,8 +81,8 @@ public class ArcanemiconItem extends Item {
         Minecraft.getInstance().setScreen(new ArcanemiconGui());
     }
 
-    @OnlyIn(Dist.CLIENT)
     @Override
+    @OnlyIn(Dist.CLIENT)
     public void appendHoverText(ItemStack stack, Level level, List<Component> list, TooltipFlag flags) {
         list.add(getEditionComponent());
     }

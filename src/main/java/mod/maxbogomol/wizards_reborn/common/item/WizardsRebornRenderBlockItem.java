@@ -14,8 +14,8 @@ public class WizardsRebornRenderBlockItem extends BlockItem {
         super(block, properties);
     }
 
-    @OnlyIn(Dist.CLIENT)
     @Override
+    @OnlyIn(Dist.CLIENT)
     public void initializeClient(java.util.function.Consumer<IClientItemExtensions> consumer) {
         consumer.accept(new IClientItemExtensions() {
             @Override

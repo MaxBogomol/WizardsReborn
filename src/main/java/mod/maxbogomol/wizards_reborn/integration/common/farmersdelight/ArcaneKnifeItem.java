@@ -42,8 +42,8 @@ public class ArcaneKnifeItem extends KnifeItem implements IArcaneItem {
         return this;
     }
 
-    @OnlyIn(Dist.CLIENT)
     @Override
+    @OnlyIn(Dist.CLIENT)
     public void appendHoverText(ItemStack stack, Level level, List<Component> list, TooltipFlag flags) {
         ItemSkin skin = ItemSkin.getSkinFromItem(stack);
         if (skin != null) list.add(skin.getSkinComponent());

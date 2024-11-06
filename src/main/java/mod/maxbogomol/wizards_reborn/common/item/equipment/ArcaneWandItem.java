@@ -327,8 +327,8 @@ public class ArcaneWandItem extends Item implements IWissenItem, ICustomAnimatio
         return 72000;
     }
 
-    @OnlyIn(Dist.CLIENT)
     @Override
+    @OnlyIn(Dist.CLIENT)
     public UseAnim getUseAnimation(ItemStack stack) {
         if (!WizardsRebornClientConfig.SPELLS_FIRST_PERSON_ITEM_ANIMATIONS.get()) {
             return UseAnim.NONE;
@@ -340,14 +340,12 @@ public class ArcaneWandItem extends Item implements IWissenItem, ICustomAnimatio
         return UseAnim.NONE;
     }
 
-    @OnlyIn(Dist.CLIENT)
     @Override
+    @OnlyIn(Dist.CLIENT)
     public ItemAnimation getAnimation(ItemStack stack) {
-        if (canSpell(stack, WizardsReborn.proxy.getPlayer())) {
-            Spell spell = SpellHandler.getSpell(getSpell(stack));
-            if (spell.hasCustomAnimation(stack)) {
-                return spell.getAnimation(stack);
-            }
+        Spell spell = SpellHandler.getSpell(getSpell(stack));
+        if (spell.hasCustomAnimation(stack)) {
+            return spell.getAnimation(stack);
         }
 
         return null;
@@ -367,8 +365,8 @@ public class ArcaneWandItem extends Item implements IWissenItem, ICustomAnimatio
         return displayName;
     }
 
-    @OnlyIn(Dist.CLIENT)
     @Override
+    @OnlyIn(Dist.CLIENT)
     public void appendHoverText(ItemStack stack, Level level, List<Component> list, TooltipFlag flags) {
         ItemSkin skin = ItemSkin.getSkinFromItem(stack);
         if (skin != null) list.add(skin.getSkinComponent());

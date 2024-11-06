@@ -125,8 +125,8 @@ public class AlchemyPotionItem extends PlacedItem {
         return displayName;
     }
 
-    @OnlyIn(Dist.CLIENT)
     @Override
+    @OnlyIn(Dist.CLIENT)
     public void appendHoverText(ItemStack stack, Level level, List<Component> list, TooltipFlag flags) {
         AlchemyPotion potion = AlchemyPotionUtil.getPotion(stack);
         if (!AlchemyPotionUtil.isEmpty(potion)) {
@@ -146,8 +146,8 @@ public class AlchemyPotionItem extends PlacedItem {
         return 32;
     }
 
-    @OnlyIn(Dist.CLIENT)
     @Override
+    @OnlyIn(Dist.CLIENT)
     public UseAnim getUseAnimation(ItemStack stack) {
         return UseAnim.DRINK;
     }

@@ -38,8 +38,8 @@ public class ArcaneFortressArmorItem extends ArcaneArmorItem implements IForgeIt
         arcaneEnchantmentTypes.add(ArcaneEnchantmentTypes.FORTRESS_ARMOR);
     }
 
-    @OnlyIn(Dist.CLIENT)
     @Override
+    @OnlyIn(Dist.CLIENT)
     public void initializeClient(java.util.function.Consumer<IClientItemExtensions> consumer) {
         consumer.accept(new IClientItemExtensions() {
             @Override
@@ -66,8 +66,8 @@ public class ArcaneFortressArmorItem extends ArcaneArmorItem implements IForgeIt
         });
     }
 
-    @OnlyIn(Dist.CLIENT)
     @Override
+    @OnlyIn(Dist.CLIENT)
     public String getArmorTexture(ItemStack stack, Entity entity, EquipmentSlot slot, String type) {
         ItemSkin skin = ItemSkin.getSkinFromItem(stack);
         if (skin != null) return skin.getArmorTexture(stack, entity, slot, type);

@@ -249,8 +249,8 @@ public class SmokingPipeItem extends Item implements ICustomAnimationItem {
         return 72000;
     }
 
-    @OnlyIn(Dist.CLIENT)
     @Override
+    @OnlyIn(Dist.CLIENT)
     public void appendHoverText(ItemStack stack, Level level, List<Component> list, TooltipFlag flags) {
         CompoundTag nbt = stack.getOrCreateTag();
         int invSize = getInventorySize(stack);
@@ -268,8 +268,8 @@ public class SmokingPipeItem extends Item implements ICustomAnimationItem {
         if (invSize > 0) list.add(Component.empty());
     }
 
-    @OnlyIn(Dist.CLIENT)
     @Override
+    @OnlyIn(Dist.CLIENT)
     public ItemAnimation getAnimation(ItemStack stack) {
         return animation;
     }

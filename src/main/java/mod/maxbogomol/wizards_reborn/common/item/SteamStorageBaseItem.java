@@ -48,8 +48,8 @@ public class SteamStorageBaseItem extends BlockItem implements ISteamItem, ICust
         return 0;
     }
 
-    @OnlyIn(Dist.CLIENT)
     @Override
+    @OnlyIn(Dist.CLIENT)
     public void appendHoverText(ItemStack stack, Level level, List<Component> list, TooltipFlag flags) {
         if (WizardsRebornClientConfig.NUMERICAL_STEAM.get()) {
             CompoundTag nbt = stack.getTag();

@@ -69,8 +69,8 @@ public class KnowledgeSrollItem extends Item {
         return InteractionResultHolder.success(stack);
     }
 
-    @OnlyIn(Dist.CLIENT)
     @Override
+    @OnlyIn(Dist.CLIENT)
     public void appendHoverText(ItemStack stack, Level level, List<Component> list, TooltipFlag flags) {
         CompoundTag nbt = stack.getOrCreateTag();
         if (nbt.contains("player")) {
