@@ -2007,12 +2007,8 @@
   "config.number.wizards_reborn.on": "Включено",
   "config.number.wizards_reborn.off": "Выключено",
 
-  "config.client.wizards_reborn.graphics.animations.spellsAnimation": "Анимация заклинаний",
-  "config.client.wizards_reborn.graphics.animations.spellsAnimation.desc": "Включает анимации заклинаний игрока.",
   "config.client.wizards_reborn.graphics.animations.spellsItemAnimation": "Анимация предмета заклинаний",
   "config.client.wizards_reborn.graphics.animations.spellsItemAnimation.desc": "Включает анимации предмета заклинаний.",
-  "config.client.wizards_reborn.graphics.animations.spellsFirstPersonItemAnimation": "Анимация предмета заклинаний первого лица",
-  "config.client.wizards_reborn.graphics.animations.spellsFirstPersonItemAnimation.desc": "Включает анимации предмета заклинаний от первого лица.",
   "config.client.wizards_reborn.graphics.particles.wissenRaysLimit": "Лимит виссен лучей",
   "config.client.wizards_reborn.graphics.particles.wissenRaysLimit.desc": "Лимит виссен лучей за тик.",
   "config.client.wizards_reborn.arcanemicon.researchHardMode": "Сложный режим исследований",

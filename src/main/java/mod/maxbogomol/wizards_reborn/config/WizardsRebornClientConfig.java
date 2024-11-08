@@ -5,7 +5,7 @@ import org.apache.commons.lang3.tuple.Pair;
 
 public class WizardsRebornClientConfig {
     public static ForgeConfigSpec.ConfigValue<Boolean>
-            SPELLS_ANIMATIONS, SPELLS_ITEM_ANIMATIONS, SPELLS_FIRST_PERSON_ITEM_ANIMATIONS,
+            SPELLS_ITEM_ANIMATIONS,
             RESEARCH_HARDMODE, OLD_RESEARCH_MONOGRAM_OUTLINE, BRIGHT_RESEARCH_MONOGRAM_OUTLINE, RESEARCH_MONOGRAM_CONNECTS, MONOGRAM_GLOW, MONOGRAM_GLOW_COLOR, MONOGRAM_COLOR, MONOGRAM_RAYS, CONFIG_CENTER,
             NUMERICAL_WISSEN, NUMERICAL_COOLDOWN, SHOW_LIGHT_NAME, NUMERICAL_EXPERIENCE, NUMERICAL_HEAT, NUMERICAL_FLUID, NUMERICAL_STEAM,
             ARCANE_WAND_OVERLAY_UP, ARCANE_WAND_OVERLAY_RIGHT, ARCANE_WAND_OVERLAY_SIDE_HUD, ARCANE_WAND_OVERLAY_SIDE_BAR, ARCANE_WAND_OVERLAY_HORIZONTAL_BAR, ARCANE_WAND_OVERLAY_SECOND_HUD_FREE, ARCANE_WAND_OVERLAY_BAR_FREE, ARCANE_WAND_OVERLAY_COOLDOWN_TEXT, ARCANE_WAND_OVERLAY_WISSEN_TEXT, ARCANE_WAND_OVERLAY_REVERSE_BAR, ARCANE_WAND_OVERLAY_SHOW_EMPTY;
@@ -17,12 +17,8 @@ public class WizardsRebornClientConfig {
         builder.comment("Graphics").push("graphics");
 
         builder.comment("Animations").push("animations");
-        SPELLS_ANIMATIONS = builder.comment("Enable spells animations player.")
-                .define("spellsAnimation", true);
         SPELLS_ITEM_ANIMATIONS = builder.comment("Enable spells item animations.")
                 .define("spellsItemAnimation", true);
-        SPELLS_FIRST_PERSON_ITEM_ANIMATIONS = builder.comment("Enable spells first person item animations.")
-                .define("spellsFirstPersonItemAnimation", true);
         builder.pop();
 
         builder.comment("Particles").push("particles");

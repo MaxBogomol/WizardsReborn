@@ -1,23 +1,25 @@
 package mod.maxbogomol.wizards_reborn.registry.common.item;
 
+import mod.maxbogomol.fluffy_fur.util.ColorUtil;
 import mod.maxbogomol.wizards_reborn.WizardsReborn;
 import mod.maxbogomol.wizards_reborn.api.alchemy.AlchemyPotion;
-import mod.maxbogomol.wizards_reborn.api.alchemy.AlchemyPotionUtil;
 import mod.maxbogomol.wizards_reborn.api.alchemy.AlchemyPotionHandler;
+import mod.maxbogomol.wizards_reborn.api.alchemy.AlchemyPotionUtil;
 import mod.maxbogomol.wizards_reborn.api.arcaneenchantment.ArcaneEnchantment;
-import mod.maxbogomol.wizards_reborn.api.arcaneenchantment.ArcaneEnchantmentUtil;
 import mod.maxbogomol.wizards_reborn.api.arcaneenchantment.ArcaneEnchantmentHandler;
+import mod.maxbogomol.wizards_reborn.api.arcaneenchantment.ArcaneEnchantmentUtil;
 import mod.maxbogomol.wizards_reborn.api.crystalritual.CrystalRitual;
-import mod.maxbogomol.wizards_reborn.api.crystalritual.CrystalRitualUtil;
 import mod.maxbogomol.wizards_reborn.api.crystalritual.CrystalRitualHandler;
-import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornAlchemyPotions;
-import mod.maxbogomol.wizards_reborn.integration.common.create.CreateIntegration;
-import mod.maxbogomol.wizards_reborn.integration.common.farmersdelight.FarmersDelightIntegration;
+import mod.maxbogomol.wizards_reborn.api.crystalritual.CrystalRitualUtil;
 import mod.maxbogomol.wizards_reborn.common.item.CrystalItem;
 import mod.maxbogomol.wizards_reborn.common.item.FracturedCrystalItem;
+import mod.maxbogomol.wizards_reborn.integration.common.create.CreateIntegration;
+import mod.maxbogomol.wizards_reborn.integration.common.farmersdelight.FarmersDelightIntegration;
+import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornAlchemyPotions;
 import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornCrystalRituals;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.Style;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.ItemStack;
@@ -33,7 +35,7 @@ public class WizardsRebornCreativeTabs {
 
     public static final RegistryObject<CreativeModeTab> WIZARDS_REBORN = CREATIVE_MODE_TABS.register("tab",
             () -> CreativeModeTab.builder().icon(() -> new ItemStack(WizardsRebornItems.FACETED_EARTH_CRYSTAL.get()))
-                    .title(Component.translatable("creative_tab.wizards_reborn"))
+                    .title(Component.translatable("creative_tab.wizards_reborn").withStyle(Style.EMPTY.withColor(ColorUtil.packColor(255, 55, 48, 54))))
                     .withBackgroundLocation(new ResourceLocation(WizardsReborn.MOD_ID, "textures/gui/wizards_reborn_item_tab.png"))
                     .withTabsImage(new ResourceLocation(WizardsReborn.MOD_ID, "textures/gui/wizards_reborn_tabs.png"))
                     .build());

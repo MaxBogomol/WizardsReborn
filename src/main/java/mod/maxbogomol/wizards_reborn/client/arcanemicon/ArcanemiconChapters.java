@@ -4111,9 +4111,7 @@ public class ArcanemiconChapters {
                 "wizards_reborn.arcanemicon.chapter.animations_configs",
                 new TitlePage("wizards_reborn.arcanemicon.page.animations_configs"),
                 new ConfigPage(
-                        new ConfigIndexEntry().setBooleanConfig(WizardsRebornClientConfig.SPELLS_ANIMATIONS),
-                        new ConfigIndexEntry().setBooleanConfig(WizardsRebornClientConfig.SPELLS_ITEM_ANIMATIONS),
-                        new ConfigIndexEntry().setBooleanConfig(WizardsRebornClientConfig.SPELLS_FIRST_PERSON_ITEM_ANIMATIONS)
+                        new ConfigIndexEntry().setBooleanConfig(WizardsRebornClientConfig.SPELLS_ITEM_ANIMATIONS)
                 )
         );
 

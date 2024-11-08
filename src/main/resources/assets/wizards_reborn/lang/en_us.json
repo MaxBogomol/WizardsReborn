@@ -2007,12 +2007,8 @@
   "config.number.wizards_reborn.on": "On",
   "config.number.wizards_reborn.off": "Off",
 
-  "config.client.wizards_reborn.graphics.animations.spellsAnimation": "Spells Animation",
-  "config.client.wizards_reborn.graphics.animations.spellsAnimation.desc": "Enable spells animations player.",
   "config.client.wizards_reborn.graphics.animations.spellsItemAnimation": "Spells Item Animation",
   "config.client.wizards_reborn.graphics.animations.spellsItemAnimation.desc": "Enable spells item animations.",
-  "config.client.wizards_reborn.graphics.animations.spellsFirstPersonItemAnimation": "Spells First Person Item Animation",
-  "config.client.wizards_reborn.graphics.animations.spellsFirstPersonItemAnimation.desc": "Enable spells first person item animations.",
   "config.client.wizards_reborn.graphics.particles.wissenRaysLimit": "Wissen Rays Limit",
   "config.client.wizards_reborn.graphics.particles.wissenRaysLimit.desc": "Limit wissen rays per tick.",
   "config.client.wizards_reborn.arcanemicon.researchHardMode": "Research Hard Mode",

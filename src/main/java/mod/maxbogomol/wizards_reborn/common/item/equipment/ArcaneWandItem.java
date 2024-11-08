@@ -330,7 +330,7 @@ public class ArcaneWandItem extends Item implements IWissenItem, ICustomAnimatio
     @Override
     @OnlyIn(Dist.CLIENT)
     public UseAnim getUseAnimation(ItemStack stack) {
-        if (!WizardsRebornClientConfig.SPELLS_FIRST_PERSON_ITEM_ANIMATIONS.get()) {
+        if (!WizardsRebornClientConfig.SPELLS_ITEM_ANIMATIONS.get()) {
             return UseAnim.NONE;
         }
         if (canSpell(stack, WizardsReborn.proxy.getPlayer())) {
@@ -343,8 +343,11 @@ public class ArcaneWandItem extends Item implements IWissenItem, ICustomAnimatio
     @Override
     @OnlyIn(Dist.CLIENT)
     public ItemAnimation getAnimation(ItemStack stack) {
+        if (!WizardsRebornClientConfig.SPELLS_ITEM_ANIMATIONS.get()) {
+            return null;
+        }
         Spell spell = SpellHandler.getSpell(getSpell(stack));
-        if (spell.hasCustomAnimation(stack)) {
+        if (spell != null && spell.hasCustomAnimation(stack)) {
             return spell.getAnimation(stack);
         }
 
