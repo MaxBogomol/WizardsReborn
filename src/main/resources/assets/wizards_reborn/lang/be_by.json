@@ -2110,5 +2110,9 @@
   "wizards_reborn.arcanemicon.page.focusing": "Напаўняе прамень моцай крышталя.",
   "wizards_reborn.arcanemicon.page.milk_tea.title": "Гарбата з малаком",
   "wizards_reborn.arcanemicon.page.milk_tea": "Ніколі не разумеў людзей, што п'юць гарбату без малака.... так што гэтая \"гарбата\" цалкам зроблена з яго. Аднаўляе здароўе.",
-  "_comment_27": "Конфіг"
+  "_comment_27": "Конфіг",
+  "creative_tab.wizards_reborn": "Wizard's Reborn",
+  "sounds.wizards_reborn.pipe": "Pipe",
+  "sounds.wizards_reborn.boom": "Boom",
+  "sounds.wizards_reborn.moai": "Moai"
 }

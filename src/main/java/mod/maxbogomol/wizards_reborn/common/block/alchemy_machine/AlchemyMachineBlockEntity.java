@@ -98,9 +98,9 @@ public class AlchemyMachineBlockEntity extends PipeBaseBlockEntity implements Ti
             Direction.EAST
     };
 
-    public int wissenInCraft= 0;
+    public int wissenInCraft = 0;
     public int wissenIsCraft = 0;
-    public int steamInCraft= 0;
+    public int steamInCraft = 0;
     public int steamIsCraft = 0;
     public boolean startCraft = false;
 
@@ -146,10 +146,10 @@ public class AlchemyMachineBlockEntity extends PipeBaseBlockEntity implements Ti
                     if (recipe.isPresent()) {
                         int filled = boiler.getTank().fill(recipe.get().getResultFluid(), IFluidHandler.FluidAction.SIMULATE);
                         boolean isCanFluid = filled == recipe.get().getResultFluid().getAmount();
-                        if ((wissenInCraft > 0) && (boiler.wissen > 0) && (startCraft)) {
+                        if (startCraft) {
                             ItemStack output = recipe.get().getResultItem(RegistryAccess.EMPTY);
 
-                            if (isCanCraft(inv, output, recipe.get(), isCanFluid)) {
+                            if (((wissenInCraft > 0) && (boiler.wissen > 0)) && isCanCraft(inv, output, recipe.get(), isCanFluid)) {
                                 int addRemainCraft = WissenUtil.getAddWissenRemain(wissenIsCraft, 6, wissenInCraft);
                                 int removeRemain = WissenUtil.getRemoveWissenRemain(boiler.getWissen(), 6 - addRemainCraft);
 

@@ -48,7 +48,7 @@ public class LeatherCollarItem extends BaseCurioItem {
         skins.put("Purplik", "purplik");
         skins.put("Onjerlay", "onjerlay");
         skins.put("Kekqupap", "kekqupap");
-        skins.put("ZeeCamcan", "zeecamcan");
+        skins.put("unlogicalSamsar", "unlogicalsamsar");
         skins.put("Swaped_meow", "swaped_meow");
     }
 
