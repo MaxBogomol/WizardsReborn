@@ -54,16 +54,16 @@ minecraft {
 
         client {
             args "--username", "Dev"
-            property 'forge.enabledGameTestNamespaces', "fluffy_fur"
+            property 'forge.enabledGameTestNamespaces', "wizards_reborn"
         }
 
         server {
-            property 'forge.enabledGameTestNamespaces', "fluffy_fur"
+            property 'forge.enabledGameTestNamespaces', "wizards_reborn"
             args '--nogui'
         }
 
         gameTestServer {
-            property 'forge.enabledGameTestNamespaces', "fluffy_fur"
+            property 'forge.enabledGameTestNamespaces', "wizards_reborn"
         }
 
         data {
