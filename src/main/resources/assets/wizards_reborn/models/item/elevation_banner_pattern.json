@@ -1,6 +1,0 @@
-{
-  "parent": "item/generated",
-  "textures": {
-    "layer0": "wizards_reborn:item/elevation_banner_pattern"
-  }
-}

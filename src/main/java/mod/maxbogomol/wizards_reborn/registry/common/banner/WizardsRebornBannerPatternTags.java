@@ -12,5 +12,5 @@ public class WizardsRebornBannerPatternTags {
     public static final TagKey<BannerPattern> COOPERATION_BANNER = TagKey.create(Registries.BANNER_PATTERN, new ResourceLocation(WizardsReborn.MOD_ID, "pattern_item/cooperation"));
     public static final TagKey<BannerPattern> HUNGER_BANNER = TagKey.create(Registries.BANNER_PATTERN, new ResourceLocation(WizardsReborn.MOD_ID, "pattern_item/hunger"));
     public static final TagKey<BannerPattern> SURVIVAL_BANNER = TagKey.create(Registries.BANNER_PATTERN, new ResourceLocation(WizardsReborn.MOD_ID, "pattern_item/survival"));
-    public static final TagKey<BannerPattern> ELEVATION_BANNER = TagKey.create(Registries.BANNER_PATTERN, new ResourceLocation(WizardsReborn.MOD_ID, "pattern_item/elevation"));
+    public static final TagKey<BannerPattern> ASCENSION_BANNER = TagKey.create(Registries.BANNER_PATTERN, new ResourceLocation(WizardsReborn.MOD_ID, "pattern_item/ascension"));
 }

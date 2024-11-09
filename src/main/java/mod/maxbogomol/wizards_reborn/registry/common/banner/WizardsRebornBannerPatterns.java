@@ -15,7 +15,7 @@ public class WizardsRebornBannerPatterns {
     public static final RegistryObject<BannerPattern> COOPERATION_BANNER_PATTERN = BANNER_PATTERNS.register("cooperation", () -> new BannerPattern("wrc"));
     public static final RegistryObject<BannerPattern> HUNGER_BANNER_PATTERN = BANNER_PATTERNS.register("hunger", () -> new BannerPattern("wrh"));
     public static final RegistryObject<BannerPattern> SURVIVAL_BANNER_PATTERN = BANNER_PATTERNS.register("survival", () -> new BannerPattern("wrs"));
-    public static final RegistryObject<BannerPattern> ELEVATION_BANNER_PATTERN = BANNER_PATTERNS.register("elevation", () -> new BannerPattern("wre"));
+    public static final RegistryObject<BannerPattern> ASCENSION_BANNER_PATTERN = BANNER_PATTERNS.register("ascension", () -> new BannerPattern("wra"));
 
     public static void register(IEventBus eventBus) {
         BANNER_PATTERNS.register(eventBus);

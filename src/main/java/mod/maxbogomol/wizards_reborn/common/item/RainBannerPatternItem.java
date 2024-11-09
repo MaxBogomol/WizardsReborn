@@ -24,7 +24,7 @@ public class RainBannerPatternItem extends BannerPatternItem {
         COOPERATION,
         HUNGER,
         SURVIVAL,
-        ELEVATION
+        ASCENSION
     }
 
     public Types type;
@@ -60,7 +60,7 @@ public class RainBannerPatternItem extends BannerPatternItem {
                 return new Color(86, 57, 63);
             case SURVIVAL:
                 return new Color(93, 217, 65, 103);
-            case ELEVATION:
+            case ASCENSION:
                 return new Color(255, 235, 114);
         }
 
@@ -79,8 +79,8 @@ public class RainBannerPatternItem extends BannerPatternItem {
                 return Component.translatable("lore.wizards_reborn.hunger_banner_pattern");
             case SURVIVAL:
                 return Component.translatable("lore.wizards_reborn.survival_banner_pattern");
-            case ELEVATION:
-                return Component.translatable("lore.wizards_reborn.elevation_banner_pattern");
+            case ASCENSION:
+                return Component.translatable("lore.wizards_reborn.ascension_banner_pattern");
         }
 
         return Component.empty();

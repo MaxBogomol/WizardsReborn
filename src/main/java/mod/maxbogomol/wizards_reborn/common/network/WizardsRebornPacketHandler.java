@@ -43,7 +43,7 @@ public final class WizardsRebornPacketHandler extends PacketHandler {
         SteamBreakPacket.register(HANDLER, id++);
 
         WissenAltarBurstPacket.register(HANDLER, id++);
-        WissenAltarBurstPacket.register(HANDLER, id++);
+        WissenAltarSendPacket.register(HANDLER, id++);
         WissenTranslatorBurstPacket.register(HANDLER, id++);
         WissenTranslatorSendPacket.register(HANDLER, id++);
         WissenSendEffectPacket.register(HANDLER, id++);

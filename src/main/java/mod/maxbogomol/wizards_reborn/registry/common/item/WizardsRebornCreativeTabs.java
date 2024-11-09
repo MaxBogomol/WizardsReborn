@@ -582,7 +582,7 @@ public class WizardsRebornCreativeTabs {
             event.accept(WizardsRebornItems.COOPERATION_BANNER_PATTERN);
             event.accept(WizardsRebornItems.HUNGER_BANNER_PATTERN);
             event.accept(WizardsRebornItems.SURVIVAL_BANNER_PATTERN);
-            event.accept(WizardsRebornItems.ELEVATION_BANNER_PATTERN);
+            event.accept(WizardsRebornItems.ASCENSION_BANNER_PATTERN);
 
             event.accept(WizardsRebornItems.MUSIC_DISC_ARCANUM);
             event.accept(WizardsRebornItems.MUSIC_DISC_MOR);

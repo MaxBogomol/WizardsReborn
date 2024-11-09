@@ -6,6 +6,10 @@
     "wizards_reborn:arcane_wood_axe",
     "wizards_reborn:arcane_wood_shovel",
     "wizards_reborn:arcane_wood_hoe",
-    "wizards_reborn:arcane_wood_scythe"
+    "wizards_reborn:arcane_wood_scythe",
+    {
+      "id": "wizards_reborn:arcane_wood_knife",
+      "required": false
+    }
   ]
 }

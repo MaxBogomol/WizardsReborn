@@ -448,7 +448,7 @@ public class ArcanemiconChapters {
                         new BlockEntry(ARCANE_PEDESTAL_ITEM, new ItemStack(WizardsRebornItems.COOPERATION_BANNER_PATTERN.get())),
                         new BlockEntry(ARCANE_PEDESTAL_ITEM, new ItemStack(WizardsRebornItems.HUNGER_BANNER_PATTERN.get())),
                         new BlockEntry(ARCANE_PEDESTAL_ITEM, new ItemStack(WizardsRebornItems.SURVIVAL_BANNER_PATTERN.get())),
-                        new BlockEntry(ARCANE_PEDESTAL_ITEM, new ItemStack(WizardsRebornItems.ELEVATION_BANNER_PATTERN.get()))
+                        new BlockEntry(ARCANE_PEDESTAL_ITEM, new ItemStack(WizardsRebornItems.ASCENSION_BANNER_PATTERN.get()))
                 ),
                 new CraftingTablePage(new ItemStack(WizardsRebornItems.VIOLENCE_BANNER_PATTERN.get()),
                         new ItemStack(Items.PAPER), new ItemStack(Items.RED_WOOL), ARCANUM_ITEM
@@ -465,7 +465,7 @@ public class ArcanemiconChapters {
                 new CraftingTablePage(new ItemStack(WizardsRebornItems.SURVIVAL_BANNER_PATTERN.get()),
                         new ItemStack(Items.PAPER), new ItemStack(Items.GREEN_WOOL), ARCANUM_ITEM
                 ),
-                new CraftingTablePage(new ItemStack(WizardsRebornItems.ELEVATION_BANNER_PATTERN.get()),
+                new CraftingTablePage(new ItemStack(WizardsRebornItems.ASCENSION_BANNER_PATTERN.get()),
                         new ItemStack(Items.PAPER), new ItemStack(Items.YELLOW_WOOL), ARCANUM_ITEM
                 )
         );
@@ -1687,7 +1687,7 @@ public class ArcanemiconChapters {
                 ),
                 new IndexPage(
                         new IndexEntry(ARCANE_WOOD_BOW, new ItemStack(WizardsRebornItems.ARCANE_WOOD_BOW.get()), WizardsRebornKnowledges.ARCANE_GOLD),
-                        new IndexEntry(BANNER_PATTERNS, new ItemStack(WizardsRebornItems.ELEVATION_BANNER_PATTERN.get()), WizardsRebornKnowledges.ARCANUM_DUST),
+                        new IndexEntry(BANNER_PATTERNS, new ItemStack(WizardsRebornItems.ASCENSION_BANNER_PATTERN.get()), WizardsRebornKnowledges.ARCANUM_DUST),
                         new IndexEntry(WISSEN, new ItemStack(WizardsRebornItems.WISSEN_WAND.get()), WizardsRebornKnowledges.ARCANUM_DUST),
                         new IndexEntry(WISSEN_TRANSLATOR, new ItemStack(WizardsRebornItems.WISSEN_TRANSLATOR.get()), WizardsRebornKnowledges.ARCANE_GOLD),
                         new IndexEntry(ARCANE_PEDESTAL, ARCANE_PEDESTAL_ITEM, WizardsRebornKnowledges.ARCANE_WOOD),
