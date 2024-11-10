@@ -36,7 +36,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @OnlyIn(Dist.CLIENT)
-public class KeyBindHandler {
+public class WizardsRebornKeyBindHandler {
 
     @SubscribeEvent
     public static void onInput(InputEvent event) {

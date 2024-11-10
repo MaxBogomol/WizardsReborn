@@ -3,7 +3,7 @@ package mod.maxbogomol.wizards_reborn.client.render.curio;
 import com.mojang.blaze3d.vertex.PoseStack;
 import mod.maxbogomol.fluffy_fur.integration.common.curios.ICurioItemTexture;
 import mod.maxbogomol.wizards_reborn.WizardsReborn;
-import mod.maxbogomol.wizards_reborn.client.model.curio.AmuletModel;
+import mod.maxbogomol.wizards_reborn.client.model.curio.CollarModel;
 import mod.maxbogomol.wizards_reborn.registry.client.WizardsRebornModels;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.model.EntityModel;
@@ -20,11 +20,11 @@ import top.theillusivec4.curios.api.client.ICurioRenderer;
 public class CollarRenderer implements ICurioRenderer {
     public static ResourceLocation TEXTURE = new ResourceLocation(WizardsReborn.MOD_ID, "textures/entity/curio/leather_collar.png");
 
-    AmuletModel model = null;
+    CollarModel model = null;
 
     @Override
     public <T extends LivingEntity, M extends EntityModel<T>> void render(ItemStack stack, SlotContext slotContext, PoseStack poseStack, RenderLayerParent<T, M> renderLayerParent, MultiBufferSource bufferSource, int light, float limbSwing, float limbSwingAmount, float partialTicks, float ageInTicks, float netHeadYaw, float headPitch) {
-        if (model == null) model = new AmuletModel(Minecraft.getInstance().getEntityModels().bakeLayer(WizardsRebornModels.COLLAR_LAYER));
+        if (model == null) model = new CollarModel(Minecraft.getInstance().getEntityModels().bakeLayer(WizardsRebornModels.COLLAR_LAYER));
 
         LivingEntity entity = slotContext.entity();
         if (stack.getItem() instanceof ICurioItemTexture curio) {

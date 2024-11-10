@@ -19,7 +19,6 @@ import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornAlchemyPotions
 import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornCrystalRituals;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.network.chat.Component;
-import net.minecraft.network.chat.Style;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.ItemStack;
@@ -35,7 +34,8 @@ public class WizardsRebornCreativeTabs {
 
     public static final RegistryObject<CreativeModeTab> WIZARDS_REBORN = CREATIVE_MODE_TABS.register("tab",
             () -> CreativeModeTab.builder().icon(() -> new ItemStack(WizardsRebornItems.FACETED_EARTH_CRYSTAL.get()))
-                    .title(Component.translatable("creative_tab.wizards_reborn").withStyle(Style.EMPTY.withColor(ColorUtil.packColor(255, 55, 48, 54))))
+                    .title(Component.translatable("creative_tab.wizards_reborn"))
+                    .withLabelColor(ColorUtil.packColor(255, 55, 48, 54))
                     .withBackgroundLocation(new ResourceLocation(WizardsReborn.MOD_ID, "textures/gui/wizards_reborn_item_tab.png"))
                     .withTabsImage(new ResourceLocation(WizardsReborn.MOD_ID, "textures/gui/wizards_reborn_tabs.png"))
                     .build());

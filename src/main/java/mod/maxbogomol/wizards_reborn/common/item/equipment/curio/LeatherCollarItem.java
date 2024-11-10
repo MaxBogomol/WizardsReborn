@@ -22,10 +22,12 @@ import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.level.Level;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
+import net.minecraftforge.common.util.LazyOptional;
 import top.theillusivec4.curios.api.CuriosApi;
 import top.theillusivec4.curios.api.SlotContext;
 import top.theillusivec4.curios.api.SlotResult;
 import top.theillusivec4.curios.api.type.capability.ICurio;
+import top.theillusivec4.curios.api.type.capability.ICuriosItemHandler;
 
 import javax.annotation.Nonnull;
 import java.util.ArrayList;
@@ -136,10 +138,12 @@ public class LeatherCollarItem extends BaseCurioItem {
     }
 
     public static boolean isWearCollar(Player player) {
-        List<SlotResult> curioSlots = CuriosApi.getCuriosInventory(player).resolve().get().findCurios((i) -> {
-            return i.getItem() instanceof LeatherCollarItem;
-        });
-        return !curioSlots.isEmpty();
+        LazyOptional<ICuriosItemHandler> curiosItemHandler = CuriosApi.getCuriosInventory(player);
+        if (curiosItemHandler.isPresent() && curiosItemHandler.resolve().isPresent()) {
+            List<SlotResult> curioSlots = curiosItemHandler.resolve().get().findCurios((i) -> i.getItem() instanceof LeatherCollarItem);
+            return !curioSlots.isEmpty();
+        }
+        return false;
     }
 
     public static class CreeperAvoidPlayerGoal extends AvoidEntityGoal<Player> {

@@ -551,21 +551,21 @@ public class WizardsRebornItems {
 
     public static final RegistryObject<Item> CARGO_CARPET = ITEMS.register("cargo_carpet", () -> new CargoCarpetItem(CargoCarpetItem.CARPET, new Item.Properties()));
     public static final RegistryObject<Item> WHITE_CARGO_CARPET = ITEMS.register("white_cargo_carpet", () -> new CargoCarpetItem(CargoCarpetItem.WHITE, new Item.Properties()));
+    public static final RegistryObject<Item> LIGHT_GRAY_CARGO_CARPET = ITEMS.register("light_gray_cargo_carpet", () -> new CargoCarpetItem(CargoCarpetItem.LIGHT_GRAY, new Item.Properties()));
+    public static final RegistryObject<Item> GRAY_CARGO_CARPET = ITEMS.register("gray_cargo_carpet", () -> new CargoCarpetItem(CargoCarpetItem.GRAY, new Item.Properties()));
+    public static final RegistryObject<Item> BLACK_CARGO_CARPET = ITEMS.register("black_cargo_carpet", () -> new CargoCarpetItem(CargoCarpetItem.BLACK, new Item.Properties()));
+    public static final RegistryObject<Item> BROWN_CARGO_CARPET = ITEMS.register("brown_cargo_carpet", () -> new CargoCarpetItem(CargoCarpetItem.BROWN, new Item.Properties()));
+    public static final RegistryObject<Item> RED_CARGO_CARPET = ITEMS.register("red_cargo_carpet", () -> new CargoCarpetItem(CargoCarpetItem.RED, new Item.Properties()));
     public static final RegistryObject<Item> ORANGE_CARGO_CARPET = ITEMS.register("orange_cargo_carpet", () -> new CargoCarpetItem(CargoCarpetItem.ORANGE, new Item.Properties()));
-    public static final RegistryObject<Item> MAGENTA_CARGO_CARPET = ITEMS.register("magenta_cargo_carpet", () -> new CargoCarpetItem(CargoCarpetItem.MAGENTA, new Item.Properties()));
-    public static final RegistryObject<Item> LIGHT_BLUE_CARGO_CARPET = ITEMS.register("light_blue_cargo_carpet", () -> new CargoCarpetItem(CargoCarpetItem.LIGHT_BLUE, new Item.Properties()));
     public static final RegistryObject<Item> YELLOW_CARGO_CARPET = ITEMS.register("yellow_cargo_carpet", () -> new CargoCarpetItem(CargoCarpetItem.YELLOW, new Item.Properties()));
     public static final RegistryObject<Item> LIME_CARGO_CARPET = ITEMS.register("lime_cargo_carpet", () -> new CargoCarpetItem(CargoCarpetItem.LIME, new Item.Properties()));
-    public static final RegistryObject<Item> PINK_CARGO_CARPET = ITEMS.register("pink_cargo_carpet", () -> new CargoCarpetItem(CargoCarpetItem.PINK, new Item.Properties()));
-    public static final RegistryObject<Item> GRAY_CARGO_CARPET = ITEMS.register("gray_cargo_carpet", () -> new CargoCarpetItem(CargoCarpetItem.GRAY, new Item.Properties()));
-    public static final RegistryObject<Item> LIGHT_GRAY_CARGO_CARPET = ITEMS.register("light_gray_cargo_carpet", () -> new CargoCarpetItem(CargoCarpetItem.LIGHT_GRAY, new Item.Properties()));
-    public static final RegistryObject<Item> CYAN_CARGO_CARPET = ITEMS.register("cyan_cargo_carpet", () -> new CargoCarpetItem(CargoCarpetItem.CYAN, new Item.Properties()));
-    public static final RegistryObject<Item> PURPLE_CARGO_CARPET = ITEMS.register("purple_cargo_carpet", () -> new CargoCarpetItem(CargoCarpetItem.PURPLE, new Item.Properties()));
-    public static final RegistryObject<Item> BLUE_CARGO_CARPET = ITEMS.register("blue_cargo_carpet", () -> new CargoCarpetItem(CargoCarpetItem.BLUE, new Item.Properties()));
-    public static final RegistryObject<Item> BROWN_CARGO_CARPET = ITEMS.register("brown_cargo_carpet", () -> new CargoCarpetItem(CargoCarpetItem.BROWN, new Item.Properties()));
     public static final RegistryObject<Item> GREEN_CARGO_CARPET = ITEMS.register("green_cargo_carpet", () -> new CargoCarpetItem(CargoCarpetItem.GREEN, new Item.Properties()));
-    public static final RegistryObject<Item> RED_CARGO_CARPET = ITEMS.register("red_cargo_carpet", () -> new CargoCarpetItem(CargoCarpetItem.RED, new Item.Properties()));
-    public static final RegistryObject<Item> BLACK_CARGO_CARPET = ITEMS.register("black_cargo_carpet", () -> new CargoCarpetItem(CargoCarpetItem.BLACK, new Item.Properties()));
+    public static final RegistryObject<Item> CYAN_CARGO_CARPET = ITEMS.register("cyan_cargo_carpet", () -> new CargoCarpetItem(CargoCarpetItem.CYAN, new Item.Properties()));
+    public static final RegistryObject<Item> LIGHT_BLUE_CARGO_CARPET = ITEMS.register("light_blue_cargo_carpet", () -> new CargoCarpetItem(CargoCarpetItem.LIGHT_BLUE, new Item.Properties()));
+    public static final RegistryObject<Item> BLUE_CARGO_CARPET = ITEMS.register("blue_cargo_carpet", () -> new CargoCarpetItem(CargoCarpetItem.BLUE, new Item.Properties()));
+    public static final RegistryObject<Item> PURPLE_CARGO_CARPET = ITEMS.register("purple_cargo_carpet", () -> new CargoCarpetItem(CargoCarpetItem.PURPLE, new Item.Properties()));
+    public static final RegistryObject<Item> MAGENTA_CARGO_CARPET = ITEMS.register("magenta_cargo_carpet", () -> new CargoCarpetItem(CargoCarpetItem.MAGENTA, new Item.Properties()));
+    public static final RegistryObject<Item> PINK_CARGO_CARPET = ITEMS.register("pink_cargo_carpet", () -> new CargoCarpetItem(CargoCarpetItem.PINK, new Item.Properties()));
     public static final RegistryObject<Item> RAINBOW_CARGO_CARPET = ITEMS.register("rainbow_cargo_carpet", () -> new CargoCarpetItem(CargoCarpetItem.RAINBOW, new Item.Properties()));
 
     public static final RegistryObject<Item> ARCANE_ENCHANTED_BOOK = ITEMS.register("arcane_enchanted_book", () -> new ArcaneEnchantedBookItem(new Item.Properties().stacksTo(1).rarity(Rarity.UNCOMMON)));

@@ -6,7 +6,7 @@ import mod.maxbogomol.fluffy_fur.common.proxy.ISidedProxy;
 import mod.maxbogomol.fluffy_fur.common.proxy.ServerProxy;
 import mod.maxbogomol.wizards_reborn.common.capability.IArrowModifier;
 import mod.maxbogomol.wizards_reborn.common.capability.IKnowledge;
-import mod.maxbogomol.wizards_reborn.common.event.Events;
+import mod.maxbogomol.wizards_reborn.common.event.WizardsRebornEvents;
 import mod.maxbogomol.wizards_reborn.common.item.equipment.WissenWandItem;
 import mod.maxbogomol.wizards_reborn.common.knowledge.Researches;
 import mod.maxbogomol.wizards_reborn.common.network.WizardsRebornPacketHandler;
@@ -44,8 +44,8 @@ import org.apache.logging.log4j.Logger;
 public class WizardsReborn {
     public static final String MOD_ID = "wizards_reborn";
     public static final String NAME = "Wizard's Reborn";
-    public static final String VERSION = "0.2.3";
-    public static final int VERSION_NUMBER = 23;
+    public static final String VERSION = "0.2.4";
+    public static final int VERSION_NUMBER = 24;
 
     public static final ISidedProxy proxy = DistExecutor.unsafeRunForDist(() -> ClientProxy::new, () -> ServerProxy::new);
     public static final Logger LOGGER = LogManager.getLogger();
@@ -94,7 +94,7 @@ public class WizardsReborn {
         WizardsRebornCreativeTabs.register(eventBus);
 
         MinecraftForge.EVENT_BUS.register(this);
-        MinecraftForge.EVENT_BUS.register(new Events());
+        MinecraftForge.EVENT_BUS.register(new WizardsRebornEvents());
         ForgeMod.enableMilkFluid();
     }
 
