@@ -64,7 +64,7 @@ public class SaltLanternBlock extends Block implements EntityBlock, SimpleWaterl
 
     public SaltLanternBlock(Properties properties) {
         super(properties);
-        registerDefaultState(defaultBlockState().setValue(BlockStateProperties.WATERLOGGED, false).setValue(HANGING, Boolean.valueOf(false)));
+        registerDefaultState(defaultBlockState().setValue(BlockStateProperties.WATERLOGGED, false).setValue(HANGING, Boolean.valueOf(false)).setValue(BlockStateProperties.LIT, true));
     }
 
     @Nonnull
@@ -76,6 +76,7 @@ public class SaltLanternBlock extends Block implements EntityBlock, SimpleWaterl
     @Override
     protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {
         builder.add(BlockStateProperties.WATERLOGGED).add(HANGING);
+        builder.add(BlockStateProperties.LIT);
     }
 
     @Nullable

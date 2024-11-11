@@ -542,6 +542,7 @@ public class WizardsRebornCreativeTabs {
 
             event.accept(WizardsRebornItems.ARCANE_WAND);
             event.accept(WizardsRebornItems.WISSEN_WAND);
+            event.accept(WizardsRebornItems.BLAZING_WAND);
 
             event.accept(WizardsRebornItems.ARCANE_WOOD_SMOKING_PIPE);
             event.accept(WizardsRebornItems.INNOCENT_WOOD_SMOKING_PIPE);

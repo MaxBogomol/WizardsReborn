@@ -77,16 +77,17 @@ public class FireRaySpell extends RaySpell {
 
                 if (entity.tickCount % getBlockTicks(entity, focusLevel) == 0) {
                     if (entity.getSpellContext().canRemoveWissen(this, getBlockWissen(entity, focusLevel))) {
-                        BlockPos blockPos = hitResult.getBlockPos().relative(hitResult.getDirection());
+                        BlockPos blockPos = hitResult.getBlockPos();
                         BlockState blockState = level.getBlockState(blockPos);
                         if (!CampfireBlock.canLight(blockState) && !CandleBlock.canLight(blockState) && !CandleCakeBlock.canLight(blockState)) {
-                            BlockEvent.EntityPlaceEvent placeEvent = new BlockEvent.EntityPlaceEvent(BlockSnapshot.create(level.dimension(), level, blockPos), BaseFireBlock.getState(level, blockPos), entity.getOwner());
-                            if (BaseFireBlock.canBePlacedAt(level, blockPos, Direction.UP) && !MinecraftForge.EVENT_BUS.post(placeEvent)) {
-                                level.playSound(null, blockPos, SoundEvents.FIRECHARGE_USE, SoundSource.BLOCKS, 0.1F, level.getRandom().nextFloat() * 0.4F + 0.8F);
-                                BlockState blockstate1 = BaseFireBlock.getState(level, blockPos);
-                                level.setBlock(blockPos, blockstate1, 11);
+                            BlockPos blockPos1 = hitResult.getBlockPos().relative(hitResult.getDirection());
+                            BlockEvent.EntityPlaceEvent placeEvent = new BlockEvent.EntityPlaceEvent(BlockSnapshot.create(level.dimension(), level, blockPos1), BaseFireBlock.getState(level, blockPos1), entity.getOwner());
+                            if (BaseFireBlock.canBePlacedAt(level, blockPos1, Direction.UP) && !MinecraftForge.EVENT_BUS.post(placeEvent)) {
+                                level.playSound(null, blockPos1, SoundEvents.FIRECHARGE_USE, SoundSource.BLOCKS, 0.1F, level.getRandom().nextFloat() * 0.4F + 0.8F);
+                                BlockState blockstate1 = BaseFireBlock.getState(level, blockPos1);
+                                level.setBlock(blockPos1, blockstate1, 11);
                                 entity.getSpellContext().removeWissen(this, getBlockWissen(entity, focusLevel));
-                                WizardsRebornPacketHandler.sendToTracking(level, blockPos, new FireRaySpellPacket(new Vec3(blockPos.getX() + 0.5f, blockPos.getY() + 0.2f, blockPos.getZ() + 0.5f), getColor()));
+                                WizardsRebornPacketHandler.sendToTracking(level, blockPos1, new FireRaySpellPacket(new Vec3(blockPos1.getX() + 0.5f, blockPos1.getY() + 0.2f, blockPos1.getZ() + 0.5f), getColor()));
                             }
                         } else {
                             BlockEvent.EntityPlaceEvent placeEvent = new BlockEvent.EntityPlaceEvent(BlockSnapshot.create(level.dimension(), level, blockPos), BaseFireBlock.getState(level, blockPos), entity.getOwner());

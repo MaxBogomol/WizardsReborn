@@ -47,7 +47,7 @@ public class SaltWallTorchBlock extends Block implements EntityBlock, SimpleWate
 
     public SaltWallTorchBlock(Properties properties) {
         super(properties);
-        registerDefaultState(defaultBlockState().setValue(BlockStateProperties.WATERLOGGED, false).setValue(FACING, Direction.NORTH));
+        registerDefaultState(defaultBlockState().setValue(BlockStateProperties.WATERLOGGED, false).setValue(FACING, Direction.NORTH).setValue(BlockStateProperties.LIT, true));
     }
 
     @Nonnull
@@ -63,6 +63,7 @@ public class SaltWallTorchBlock extends Block implements EntityBlock, SimpleWate
     @Override
     protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {
         builder.add(BlockStateProperties.WATERLOGGED).add(FACING);
+        builder.add(BlockStateProperties.LIT);
     }
 
     @Nullable

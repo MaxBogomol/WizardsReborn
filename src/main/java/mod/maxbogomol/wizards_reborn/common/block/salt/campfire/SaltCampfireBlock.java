@@ -50,7 +50,7 @@ public class SaltCampfireBlock extends Block implements EntityBlock, SimpleWater
 
     public SaltCampfireBlock(Properties properties) {
         super(properties);
-        registerDefaultState(defaultBlockState().setValue(BlockStateProperties.WATERLOGGED, false).setValue(FACING, Direction.NORTH));
+        registerDefaultState(defaultBlockState().setValue(BlockStateProperties.WATERLOGGED, false).setValue(FACING, Direction.NORTH).setValue(BlockStateProperties.LIT, true));
     }
 
     @Nonnull
@@ -66,6 +66,7 @@ public class SaltCampfireBlock extends Block implements EntityBlock, SimpleWater
     @Override
     protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {
         builder.add(BlockStateProperties.WATERLOGGED).add(FACING);
+        builder.add(BlockStateProperties.LIT);
     }
 
     @Nullable

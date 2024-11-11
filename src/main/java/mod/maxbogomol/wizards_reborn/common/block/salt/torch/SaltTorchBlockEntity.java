@@ -21,6 +21,7 @@ import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.Vec3;
 import org.jetbrains.annotations.NotNull;
@@ -43,7 +44,7 @@ public class SaltTorchBlockEntity extends ExposedBlockSimpleInventory implements
 
     @Override
     public void tick() {
-        if (level.isClientSide()) {
+        if (level.isClientSide() && getBlockState().getValue(BlockStateProperties.LIT)) {
             Color colorF = colorFirst;
             Color color = colorSecond;
             Vec3 pos = new Vec3(0.5f, 0.6875f, 0.5f);

@@ -45,7 +45,7 @@ public class SaltTorchBlock extends Block implements EntityBlock, SimpleWaterlog
 
     public SaltTorchBlock(Properties properties) {
         super(properties);
-        registerDefaultState(defaultBlockState().setValue(BlockStateProperties.WATERLOGGED, false));
+        registerDefaultState(defaultBlockState().setValue(BlockStateProperties.WATERLOGGED, false).setValue(BlockStateProperties.LIT, true));
     }
 
     @Nonnull
@@ -57,6 +57,7 @@ public class SaltTorchBlock extends Block implements EntityBlock, SimpleWaterlog
     @Override
     protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {
         builder.add(BlockStateProperties.WATERLOGGED);
+        builder.add(BlockStateProperties.LIT);
     }
 
     @Nullable

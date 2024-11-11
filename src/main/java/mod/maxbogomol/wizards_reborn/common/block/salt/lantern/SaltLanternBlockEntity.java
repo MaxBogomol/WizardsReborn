@@ -16,6 +16,7 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.phys.Vec3;
 
 import java.awt.*;
@@ -31,7 +32,7 @@ public class SaltLanternBlockEntity extends SaltTorchBlockEntity {
 
     @Override
     public void tick() {
-        if (level.isClientSide()) {
+        if (level.isClientSide() && getBlockState().getValue(BlockStateProperties.LIT)) {
             Color colorF = colorFirst;
             Color color = colorSecond;
             Vec3 pos = new Vec3(0.5f, 0.25f, 0.5f);

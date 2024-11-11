@@ -70,6 +70,7 @@ public final class WizardsRebornPacketHandler extends PacketHandler {
         SmokePacket.register(HANDLER, id++);
         InnocentWoodToolsPacket.register(HANDLER, id++);
         FlowerFertilizerPacket.register(HANDLER, id++);
+        BlazingWandBurstPacket.register(HANDLER, id++);
 
         ProjectileSpellBurstPacket.register(HANDLER, id++);
         ProjectileSpellTrailPacket.register(HANDLER, id++);

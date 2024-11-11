@@ -33,6 +33,7 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.CampfireBlock;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.gameevent.GameEvent;
 import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.Vec3;
@@ -64,11 +65,11 @@ public class SaltCampfireBlockEntity extends ExposedBlockSimpleInventory impleme
 
     @Override
     public void tick() {
-        if (!level.isClientSide()) {
+        if (!level.isClientSide() && getBlockState().getValue(BlockStateProperties.LIT)) {
             cookTick(level, getBlockPos(), getBlockState(), this);
         }
 
-        if (level.isClientSide()) {
+        if (level.isClientSide() && getBlockState().getValue(BlockStateProperties.LIT)) {
             Color colorF = colorFirst;
             Color color = colorSecond;
             Vec3 pos = new Vec3(0.5f, 0.26f, 0.5f);

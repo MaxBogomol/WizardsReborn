@@ -538,6 +538,7 @@ public class WizardsRebornItems {
 
     public static final RegistryObject<Item> ARCANE_WAND = ITEMS.register("arcane_wand", () -> new ArcaneWandItem(new Item.Properties().stacksTo(1)));
     public static final RegistryObject<Item> WISSEN_WAND = ITEMS.register("wissen_wand", () -> new WissenWandItem(new Item.Properties().stacksTo(1)));
+    public static final RegistryObject<Item> BLAZING_WAND = ITEMS.register("blazing_wand", () -> new BlazingWandItem(new Item.Properties().stacksTo(1)));
 
     public static final RegistryObject<Item> ARCANE_WOOD_SMOKING_PIPE = ITEMS.register("arcane_wood_smoking_pipe", () -> new SmokingPipeItem(new Item.Properties().stacksTo(1)));
     public static final RegistryObject<Item> INNOCENT_WOOD_SMOKING_PIPE = ITEMS.register("innocent_wood_smoking_pipe", () -> new SmokingPipeItem(new Item.Properties().stacksTo(1)));
