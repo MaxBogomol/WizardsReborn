@@ -1,8 +1,15 @@
 package mod.maxbogomol.wizards_reborn.common.item.equipment.curio;
 
+import com.mojang.blaze3d.vertex.PoseStack;
+import com.mojang.math.Axis;
+import mod.maxbogomol.fluffy_fur.FluffyFur;
 import mod.maxbogomol.fluffy_fur.client.event.ClientTickHandler;
+import mod.maxbogomol.fluffy_fur.client.render.RenderBuilder;
+import mod.maxbogomol.fluffy_fur.common.item.IGuiParticleItem;
 import mod.maxbogomol.fluffy_fur.integration.common.curios.BaseCurioItem;
+import mod.maxbogomol.fluffy_fur.registry.client.FluffyFurRenderTypes;
 import mod.maxbogomol.fluffy_fur.util.ColorUtil;
+import mod.maxbogomol.fluffy_fur.util.RenderUtil;
 import mod.maxbogomol.wizards_reborn.WizardsReborn;
 import net.minecraft.ChatFormatting;
 import net.minecraft.client.Minecraft;
@@ -35,7 +42,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class LeatherCollarItem extends BaseCurioItem {
+public class LeatherCollarItem extends BaseCurioItem implements IGuiParticleItem {
 
     private static final ResourceLocation COLLAR_TEXTURE = new ResourceLocation(WizardsReborn.MOD_ID,"textures/entity/curio/leather_collar.png");
 
@@ -164,6 +171,25 @@ public class LeatherCollarItem extends BaseCurioItem {
             }
 
             return false;
+        }
+    }
+
+    @Override
+    @OnlyIn(Dist.CLIENT)
+    public void renderParticle(PoseStack poseStack, LivingEntity entity, Level level, ItemStack stack, int x, int y, int seed, int guiOffset) {
+        for (int i = 0; i < 5; i++) {
+            float ticks = (ClientTickHandler.getTotal() + (i * 20)) * 0.05f;
+            float angle = ClientTickHandler.getTotal() * 0.16f + (i * 8f);
+
+            poseStack.pushPose();
+            poseStack.translate(x + 8f, y + 8f, 100);
+            poseStack.mulPose(Axis.ZP.rotationDegrees(angle));
+            RenderBuilder.create().setRenderType(FluffyFurRenderTypes.ADDITIVE_TEXTURE)
+                    .setUV(RenderUtil.getSprite(FluffyFur.MOD_ID, "particle/star"))
+                    .setColor(ColorUtil.rainbowColor(ticks)).setAlpha(0.25f)
+                    .renderCenteredQuad(poseStack, 4f + (8f * (i / 5f)))
+                    .endBatch();
+            poseStack.popPose();
         }
     }
 }
