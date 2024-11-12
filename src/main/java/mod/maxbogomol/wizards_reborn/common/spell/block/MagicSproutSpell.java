@@ -1,9 +1,9 @@
 package mod.maxbogomol.wizards_reborn.common.spell.block;
 
+import mod.maxbogomol.fluffy_fur.util.BlockUtil;
 import mod.maxbogomol.wizards_reborn.api.crystal.CrystalUtil;
 import mod.maxbogomol.wizards_reborn.api.spell.Spell;
 import mod.maxbogomol.wizards_reborn.api.spell.SpellContext;
-import mod.maxbogomol.wizards_reborn.common.crystalritual.ArtificialFertilityCrystalRitual;
 import mod.maxbogomol.wizards_reborn.common.item.equipment.arcane.ArcaneArmorItem;
 import mod.maxbogomol.wizards_reborn.common.network.WizardsRebornPacketHandler;
 import mod.maxbogomol.wizards_reborn.common.network.spell.MagicSproutSpellPacket;
@@ -36,7 +36,7 @@ public class MagicSproutSpell extends Spell {
     public boolean useSpellOn(Level level, SpellContext spellContext) {
         if (!level.isClientSide()) {
             BlockPos blockPos = spellContext.getBlockPos();
-            if (ArtificialFertilityCrystalRitual.growCrop(level, blockPos)) {
+            if (BlockUtil.growCrop(level, blockPos)) {
                 if (!spellContext.getAlternative()) {
                     useGrow(level, spellContext, 1f, 1f);
                     WizardsRebornPacketHandler.sendToTracking(level, blockPos, new MagicSproutSpellPacket(blockPos.getCenter(), getColor()));
@@ -48,7 +48,7 @@ public class MagicSproutSpell extends Spell {
                         for (int y = -radius; y <= radius; y++) {
                             for (int z = -radius; z <= radius; z++) {
                                 if (random.nextFloat() < 0.15f * (focusLevel + magicModifier)) {
-                                    if (ArtificialFertilityCrystalRitual.growCrop(level, new BlockPos(blockPos.getX() + x, blockPos.getY() + y, blockPos.getZ() + z))) {
+                                    if (BlockUtil.growCrop(level, new BlockPos(blockPos.getX() + x, blockPos.getY() + y, blockPos.getZ() + z))) {
                                         WizardsRebornPacketHandler.sendToTracking(level, blockPos, new MagicSproutSpellPacket(new BlockPos(blockPos.getX() + x, blockPos.getY() + y, blockPos.getZ() + z).getCenter(), getColor()));
                                     }
                                 }

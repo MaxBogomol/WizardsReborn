@@ -2,8 +2,8 @@ package mod.maxbogomol.wizards_reborn.common.spell.look.cloud;
 
 import mod.maxbogomol.fluffy_fur.common.raycast.RayCast;
 import mod.maxbogomol.fluffy_fur.common.raycast.RayHitResult;
+import mod.maxbogomol.fluffy_fur.util.BlockUtil;
 import mod.maxbogomol.wizards_reborn.api.crystal.CrystalUtil;
-import mod.maxbogomol.wizards_reborn.common.crystalritual.ArtificialFertilityCrystalRitual;
 import mod.maxbogomol.wizards_reborn.common.entity.SpellEntity;
 import mod.maxbogomol.wizards_reborn.common.item.equipment.arcane.ArcaneArmorItem;
 import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornCrystals;
@@ -43,8 +43,8 @@ public class RainCloudSpell extends CloudSpell {
                 RayHitResult hitResult = RayCast.getHit(entity.level(), new Vec3(x, entity.getY(), z), new Vec3(x, entity.getY() - 30, z));
 
                 BlockPos blockPos = BlockPos.containing(hitResult.getPos());
-                ArtificialFertilityCrystalRitual.growCrop(entity.level(), blockPos);
-                ArtificialFertilityCrystalRitual.growCrop(entity.level(), blockPos.below());
+                BlockUtil.growCrop(entity.level(), blockPos);
+                BlockUtil.growCrop(entity.level(), blockPos.below());
             }
 
             List<LivingEntity> list = entity.level().getEntitiesOfClass(LivingEntity.class, new AABB(entity.getX() - size, entity.getY() - 30, entity.getZ() - size, entity.getX() + size, entity.getY() + 0.5f, entity.getZ() + size));

@@ -1,5 +1,6 @@
 package mod.maxbogomol.wizards_reborn.common.crystalritual;
 
+import mod.maxbogomol.fluffy_fur.util.BlockUtil;
 import mod.maxbogomol.wizards_reborn.api.crystal.CrystalType;
 import mod.maxbogomol.wizards_reborn.api.crystalritual.CrystalRitual;
 import mod.maxbogomol.wizards_reborn.api.crystalritual.CrystalRitualArea;
@@ -8,11 +9,8 @@ import mod.maxbogomol.wizards_reborn.common.network.WizardsRebornPacketHandler;
 import mod.maxbogomol.wizards_reborn.common.network.spell.MagicSproutSpellPacket;
 import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornCrystals;
 import net.minecraft.core.BlockPos;
-import net.minecraft.core.Direction;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
-import net.minecraft.world.item.BoneMealItem;
-import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.BonemealableBlock;
 import net.minecraft.world.level.block.CropBlock;
@@ -82,7 +80,7 @@ public class ArtificialFertilityCrystalRitual extends CrystalRitual {
                             break;
                         }
                     } else {
-                        if (growCrop(level, pos)) {
+                        if (BlockUtil.growCrop(level, pos)) {
                             WizardsRebornPacketHandler.sendToTracking(level, pos, new MagicSproutSpellPacket(pos.getCenter(), getColor()));
                             level.playSound(null, pos, SoundEvents.BONE_MEAL_USE, SoundSource.BLOCKS, 1f, 1f);
                             setMaxCooldown(crystal, getMaxRitualCooldownWithStat(crystal) * 2);
@@ -94,16 +92,6 @@ public class ArtificialFertilityCrystalRitual extends CrystalRitual {
             } else {
                 setCooldown(crystal, getCooldown(crystal) - 1);
             }
-        }
-    }
-
-    public static boolean growCrop(Level level, BlockPos blockPos) {
-        if (BoneMealItem.growCrop(ItemStack.EMPTY, level, blockPos)) {
-            return true;
-        } else {
-            BlockState blockstate = level.getBlockState(blockPos);
-            boolean flag = blockstate.isFaceSturdy(level, blockPos, Direction.UP);
-            return flag && BoneMealItem.growWaterPlant(ItemStack.EMPTY, level, blockPos.relative(Direction.UP), Direction.UP);
         }
     }
 }

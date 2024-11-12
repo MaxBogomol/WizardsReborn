@@ -10,14 +10,12 @@ import mod.maxbogomol.wizards_reborn.api.wissen.WissenUtil;
 import mod.maxbogomol.wizards_reborn.common.network.WizardsRebornPacketHandler;
 import mod.maxbogomol.wizards_reborn.common.network.arcaneenchantment.MagicBladePacket;
 import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornArcaneEnchantments;
-import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornAttributes;
 import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornSounds;
 import mod.maxbogomol.wizards_reborn.registry.common.damage.WizardsRebornDamageTypes;
 import net.minecraft.ChatFormatting;
 import net.minecraft.network.chat.Component;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.world.entity.ai.attributes.AttributeInstance;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
@@ -32,7 +30,7 @@ import java.util.Random;
 
 public class MagicBladeArcaneEnchantment extends ArcaneEnchantment {
 
-    private static Random random = new Random();
+    private static final Random random = new Random();
 
     public MagicBladeArcaneEnchantment(String id, int maxLevel) {
         super(id, maxLevel);
@@ -52,7 +50,7 @@ public class MagicBladeArcaneEnchantment extends ArcaneEnchantment {
     }
 
     public static void hurtEnemy(ItemStack stack, LivingEntity target, LivingEntity attacker) {
-        if (!attacker.level().isClientSide) {
+        if (!attacker.level().isClientSide()) {
             if (attacker instanceof Player player) {
 
                 if (ArcaneEnchantmentUtil.isArcaneItem(stack)) {
@@ -68,11 +66,10 @@ public class MagicBladeArcaneEnchantment extends ArcaneEnchantment {
                         }
 
                         if (WissenUtil.canRemoveWissen(wissen, cost)) {
-                            AttributeInstance attr = attacker.getAttribute(WizardsRebornAttributes.ARCANE_DAMAGE.get());
                             WissenUtil.removeWissenFromWissenItems(items, cost);
                             int invulnerableTime = target.invulnerableTime;
                             target.invulnerableTime = 0;
-                            target.hurt(DamageHandler.create(player.level(), WizardsRebornDamageTypes.ARCANE_MAGIC, player, player), (1.0f * enchantmentLevel) + (float) attr.getValue());
+                            target.hurt(DamageHandler.create(player.level(), WizardsRebornDamageTypes.ARCANE_MAGIC, player, player), 1.0f * enchantmentLevel);
                             target.invulnerableTime = invulnerableTime;
                             target.level().playSound(WizardsReborn.proxy.getPlayer(), target.getOnPos(), WizardsRebornSounds.CRYSTAL_HIT.get(), SoundSource.PLAYERS, 1.3f, (float) (1.0f + ((random.nextFloat() - 0.5D) / 3)));
                             WizardsRebornPacketHandler.sendToTracking(target.level(), target.getOnPos(), new MagicBladePacket(target.position().add(0, target.getBbHeight() / 2f, 0)));

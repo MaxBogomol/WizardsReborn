@@ -53,7 +53,7 @@ import java.util.stream.Stream;
 
 public class CrystalGrowthBlock extends Block implements EntityBlock, SimpleWaterloggedBlock {
     public CrystalType type;
-    private static Random random = new Random();
+    private static final Random random = new Random();
 
     public static final IntegerProperty AGE =  IntegerProperty.create("age", 0, 4);
 
