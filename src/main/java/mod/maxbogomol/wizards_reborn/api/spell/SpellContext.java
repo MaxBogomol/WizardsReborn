@@ -3,6 +3,7 @@ package mod.maxbogomol.wizards_reborn.api.spell;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.nbt.CompoundTag;
+import net.minecraft.world.InteractionHand;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
@@ -20,6 +21,7 @@ public class SpellContext {
     public boolean alternative = false;
     public Level level;
     public Entity entity;
+    public boolean mainHand = true;
     public ItemStack itemStack = ItemStack.EMPTY;
     public CompoundTag stats = new CompoundTag();
 
@@ -98,6 +100,16 @@ public class SpellContext {
         return this;
     }
 
+    public SpellContext setMainHand(InteractionHand hand) {
+        this.mainHand = hand == InteractionHand.MAIN_HAND;
+        return this;
+    }
+
+    public SpellContext setMainHand(boolean hand) {
+        this.mainHand = hand;
+        return this;
+    }
+
     public SpellContext setItemStack(ItemStack itemStack) {
         this.itemStack = itemStack;
         return this;
@@ -114,6 +126,14 @@ public class SpellContext {
 
     public Entity getEntity() {
         return entity;
+    }
+
+    public boolean getMainHand() {
+        return mainHand;
+    }
+
+    public InteractionHand getMainInteractionHand() {
+        return getMainHand() ? InteractionHand.MAIN_HAND : InteractionHand.OFF_HAND;
     }
 
     public ItemStack getItemStack() {
@@ -164,6 +184,14 @@ public class SpellContext {
 
     }
 
+    public void startUsing(Spell spell) {
+
+    }
+
+    public void stopUsing(Spell spell) {
+
+    }
+
     public CompoundTag getSpellData() {
         return new CompoundTag();
     }
@@ -181,6 +209,7 @@ public class SpellContext {
         tag.putInt("direction", direction.get3DDataValue());
         tag.putDouble("distance", distance);
         tag.putBoolean("alternative", alternative);
+        tag.putBoolean("mainHand", mainHand);
         return tag;
     }
 
@@ -192,6 +221,7 @@ public class SpellContext {
         direction = Direction.from3DDataValue(tag.getInt("distance"));
         distance = tag.getDouble("distance");
         alternative = tag.getBoolean("alternative");
+        mainHand = tag.getBoolean("mainHand");
     }
 
     public static CompoundTag vecToTag(Vec3 vec) {

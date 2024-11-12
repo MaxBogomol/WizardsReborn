@@ -17,15 +17,12 @@ import mod.maxbogomol.wizards_reborn.common.network.WizardsRebornPacketHandler;
 import mod.maxbogomol.wizards_reborn.common.network.spell.StrikeSpellBurstPacket;
 import mod.maxbogomol.wizards_reborn.common.network.spell.StrikeSpellScreenshakePacket;
 import mod.maxbogomol.wizards_reborn.common.spell.look.block.BlockLookSpell;
-import mod.maxbogomol.wizards_reborn.registry.common.entity.WizardsRebornEntities;
 import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornSounds;
+import mod.maxbogomol.wizards_reborn.registry.common.entity.WizardsRebornEntities;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.core.BlockPos;
 import net.minecraft.sounds.SoundSource;
-import net.minecraft.world.InteractionHand;
 import net.minecraft.world.entity.Entity;
-import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.UseAnim;
 import net.minecraft.world.level.Level;
@@ -76,6 +73,13 @@ public class StrikeSpell extends BlockLookSpell {
     }
 
     @Override
+    public void useSpell(Level level, SpellContext spellContext) {
+        if (!level.isClientSide()) {
+            spellContext.startUsing(this);
+        }
+    }
+
+    @Override
     public void useSpellTick(Level level, SpellContext spellContext, int time) {
         if (!level.isClientSide()) {
             if (time > getUseTime(spellContext)) {
@@ -96,32 +100,13 @@ public class StrikeSpell extends BlockLookSpell {
                     .addVelocity(0, 0.03f, 0)
                     .spawn(level, pos.x(), pos.y(), pos.z());
         }
+        if (!super.canSpell(level, spellContext)) {
+            spellContext.stopUsing(this);
+        }
         if (time > getUseTime(spellContext)) {
             lookSpell(level, spellContext);
+            spellContext.stopUsing(this);
         }
-    }
-
-    @Override
-    public void useWand(Level level, Player player, InteractionHand hand, ItemStack stack) {
-        if (!level.isClientSide()) {
-            player.startUsingItem(hand);
-        }
-    }
-
-    @Override
-    public void useWandTick(Level level, LivingEntity livingEntity, ItemStack stack, int remainingUseDuration) {
-        super.useWandTick(level, livingEntity, stack, remainingUseDuration);
-        if (!super.canSpell(level, getWandContext(livingEntity, stack))) {
-            livingEntity.stopUsingItem();
-        }
-        if (remainingUseDuration > getUseTime(getWandContext(livingEntity, stack))) {
-            livingEntity.stopUsingItem();
-        }
-    }
-
-    @Override
-    public boolean canLookSpell(Level level, SpellContext spellContext) {
-        return true;
     }
 
     @Override

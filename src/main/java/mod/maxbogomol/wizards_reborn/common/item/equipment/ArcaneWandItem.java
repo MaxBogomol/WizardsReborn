@@ -258,7 +258,6 @@ public class ArcaneWandItem extends Item implements IWissenItem, ICustomAnimatio
     @Override
     public InteractionResultHolder<ItemStack> use(Level level, Player player, InteractionHand hand) {
         ItemStack stack = player.getItemInHand(hand);
-
         if (canSpell(stack, player)) {
             Spell spell = SpellHandler.getSpell(getSpell(stack));
             SpellContext spellContext = spell.getWandContext(player, stack);
@@ -273,7 +272,8 @@ public class ArcaneWandItem extends Item implements IWissenItem, ICustomAnimatio
     }
 
     @Override
-    public InteractionResult onItemUseFirst(ItemStack stack, UseOnContext context) {
+    public InteractionResult useOn(UseOnContext context) {
+        ItemStack stack = context.getPlayer().getItemInHand(context.getHand());
         if (canSpell(stack, context.getPlayer())) {
             Spell spell = SpellHandler.getSpell(getSpell(stack));
             SpellContext spellContext = spell.getWandContext(context.getPlayer(), stack);
@@ -284,7 +284,7 @@ public class ArcaneWandItem extends Item implements IWissenItem, ICustomAnimatio
                 }
             }
         }
-        return super.onItemUseFirst(stack, context);
+        return super.useOn(context);
     }
 
     @Override

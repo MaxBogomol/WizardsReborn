@@ -8,7 +8,9 @@ import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornSounds;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.stats.Stats;
+import net.minecraft.world.InteractionHand;
 import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.common.ForgeMod;
@@ -64,6 +66,18 @@ public class WandSpellContext extends SpellContext {
         }
     }
 
+    public void startUsing(Spell spell) {
+        if (getEntity() instanceof LivingEntity livingEntity) {
+            livingEntity.startUsingItem(mainHand ? InteractionHand.MAIN_HAND : InteractionHand.OFF_HAND);
+        }
+    }
+
+    public void stopUsing(Spell spell) {
+        if (getEntity() instanceof LivingEntity livingEntity) {
+            livingEntity.stopUsingItem();
+        }
+    }
+
     @Override
     public CompoundTag getSpellData() {
         return ArcaneWandItem.getSpellData(getItemStack());
@@ -74,7 +88,7 @@ public class WandSpellContext extends SpellContext {
         ArcaneWandItem.setSpellData(getItemStack(), spellData);
     }
 
-    public static WandSpellContext getFromWand(Entity entity, ItemStack stack) {
+    public static WandSpellContext getFromWand(Entity entity, ItemStack stack, InteractionHand hand) {
         WandSpellContext spellContext = new WandSpellContext();
         spellContext.setLevel(entity.level());
         spellContext.setEntity(entity);
@@ -87,8 +101,17 @@ public class WandSpellContext extends SpellContext {
             spellContext.setDistance(3);
             spellContext.setAlternative(false);
         }
+        if (hand != null) {
+            spellContext.setMainHand(hand);
+        } else {
+            spellContext.setMainHand(true);
+        }
         spellContext.setItemStack(stack);
         spellContext.setStats(Spell.getStats(stack));
         return spellContext;
+    }
+
+    public static WandSpellContext getFromWand(Entity entity, ItemStack stack) {
+        return getFromWand(entity, stack, null);
     }
 }

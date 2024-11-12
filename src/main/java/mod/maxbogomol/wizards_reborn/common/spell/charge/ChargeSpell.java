@@ -19,8 +19,8 @@ import mod.maxbogomol.wizards_reborn.common.network.WizardsRebornPacketHandler;
 import mod.maxbogomol.wizards_reborn.common.network.spell.ChargeSpellTrailPacket;
 import mod.maxbogomol.wizards_reborn.common.network.spell.ProjectileSpellBurstPacket;
 import mod.maxbogomol.wizards_reborn.common.spell.WandSpellContext;
-import mod.maxbogomol.wizards_reborn.registry.common.entity.WizardsRebornEntities;
 import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornSounds;
+import mod.maxbogomol.wizards_reborn.registry.common.entity.WizardsRebornEntities;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.server.level.ServerLevel;
@@ -28,7 +28,6 @@ import net.minecraft.sounds.SoundSource;
 import net.minecraft.util.Mth;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.entity.Entity;
-import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.UseAnim;
 import net.minecraft.world.level.Level;
@@ -94,6 +93,7 @@ public class ChargeSpell extends Spell {
             spellContext.removeWissen(this);
             spellContext.awardStat(this);
             spellContext.spellSound(this);
+            spellContext.startUsing(this);
 
             CompoundTag spellData = new CompoundTag();
             spellData.putUUID("entity", entity.getUUID());
@@ -130,18 +130,10 @@ public class ChargeSpell extends Spell {
     }
 
     @Override
-    public SpellContext getWandContext(Entity entity, ItemStack stack) {
-        WandSpellContext spellContext = WandSpellContext.getFromWand(entity, stack);
+    public SpellContext getWandContext(Entity entity, ItemStack stack, InteractionHand hand) {
+        WandSpellContext spellContext = WandSpellContext.getFromWand(entity, stack, hand);
         spellContext.setOffset(new Vec3(0, entity.getEyeHeight(), 0));
         return spellContext;
-    }
-
-    @Override
-    public void useWand(Level level, Player player, InteractionHand hand, ItemStack stack) {
-        useSpell(level, getWandContext(player, stack));
-        if (!level.isClientSide()) {
-            player.startUsingItem(hand);
-        }
     }
 
     @Override

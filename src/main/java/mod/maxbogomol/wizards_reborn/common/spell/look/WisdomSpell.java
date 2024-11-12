@@ -9,9 +9,7 @@ import mod.maxbogomol.wizards_reborn.common.network.spell.WisdomSpellBurstPacket
 import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornCrystals;
 import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornSpells;
 import net.minecraft.core.BlockPos;
-import net.minecraft.world.InteractionHand;
 import net.minecraft.world.entity.ExperienceOrb;
-import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.UseAnim;
 import net.minecraft.world.level.Level;
@@ -50,6 +48,13 @@ public class WisdomSpell extends LookSpell {
     }
 
     @Override
+    public void useSpell(Level level, SpellContext spellContext) {
+        if (!level.isClientSide()) {
+            spellContext.startUsing(this);
+        }
+    }
+
+    @Override
     public void useSpellTick(Level level, SpellContext spellContext, int time) {
         if (!level.isClientSide()) {
             if (time % 20 == 0 && time > 0) {
@@ -68,13 +73,6 @@ public class WisdomSpell extends LookSpell {
     public void stopUseSpell(Level level, SpellContext spellContext, int timeLeft) {
         if (!level.isClientSide()) {
             spellContext.setCooldown(this);
-        }
-    }
-
-    @Override
-    public void useWand(Level level, Player player, InteractionHand hand, ItemStack stack) {
-        if (!level.isClientSide()) {
-            player.startUsingItem(hand);
         }
     }
 

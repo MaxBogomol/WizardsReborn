@@ -22,7 +22,6 @@ import mod.maxbogomol.wizards_reborn.registry.common.damage.WizardsRebornDamageT
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.sounds.SoundSource;
-import net.minecraft.world.InteractionHand;
 import net.minecraft.world.SimpleContainer;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.item.ItemEntity;
@@ -67,6 +66,13 @@ public class CrystalCrushingSpell extends LookSpell {
     }
 
     @Override
+    public void useSpell(Level level, SpellContext spellContext) {
+        if (!level.isClientSide()) {
+            spellContext.startUsing(this);
+        }
+    }
+
+    @Override
     public void useSpellTick(Level level, SpellContext spellContext, int time) {
         if (level.isClientSide()) {
             RayHitResult hitResult = getHit(level, spellContext);
@@ -84,13 +90,6 @@ public class CrystalCrushingSpell extends LookSpell {
                             .spawn(level, hitResult.getPos());
                 }
             }
-        }
-    }
-
-    @Override
-    public void useWand(Level level, Player player, InteractionHand hand, ItemStack stack) {
-        if (!level.isClientSide()) {
-            player.startUsingItem(hand);
         }
     }
 

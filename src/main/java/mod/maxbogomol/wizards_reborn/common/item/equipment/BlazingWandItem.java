@@ -47,7 +47,7 @@ public class BlazingWandItem extends Item implements IGuiParticleItem {
     }
 
     @Override
-    public InteractionResult onItemUseFirst(ItemStack stack, UseOnContext context) {
+    public InteractionResult useOn(UseOnContext context) {
         Player player = context.getPlayer();
         Level level = context.getLevel();
         BlockPos blockPos = context.getClickedPos();

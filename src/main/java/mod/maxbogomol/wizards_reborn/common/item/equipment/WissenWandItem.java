@@ -94,7 +94,7 @@ public class WissenWandItem extends Item {
         Level level = context.getLevel();
         InteractionResult result = InteractionResult.PASS;
 
-        if(!level.isClientSide) {
+        if(!level.isClientSide()) {
             BlockEntity blockEntity = level.getBlockEntity(context.getClickedPos());
             CompoundTag nbt = stack.getOrCreateTag();
 

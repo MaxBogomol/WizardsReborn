@@ -217,16 +217,20 @@ public class Spell {
 
     }
 
+    public SpellContext getWandContext(Entity entity, ItemStack stack, InteractionHand hand) {
+        return WandSpellContext.getFromWand(entity, stack, hand);
+    }
+
     public SpellContext getWandContext(Entity entity, ItemStack stack) {
-        return WandSpellContext.getFromWand(entity, stack);
+        return getWandContext(entity, stack, null);
     }
 
     public void useWand(Level level, Player player, InteractionHand hand, ItemStack stack) {
-        useSpell(level, getWandContext(player, stack));
+        useSpell(level, getWandContext(player, stack, hand));
     }
 
     public boolean useWandOn(ItemStack stack, UseOnContext context) {
-        SpellContext spellContext = getWandContext(context.getPlayer(), stack);
+        SpellContext spellContext = getWandContext(context.getPlayer(), stack, context.getHand());
         spellContext.setBlockPos(context.getClickedPos());
         spellContext.setDirection(context.getClickedFace());
         return useSpellOn(context.getLevel(), spellContext);
