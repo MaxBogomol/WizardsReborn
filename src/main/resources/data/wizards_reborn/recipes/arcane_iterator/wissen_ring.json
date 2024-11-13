@@ -14,7 +14,7 @@
       "item": "wizards_reborn:arcanum_lens"
     },
     {
-      "item": "wizards_reborn:arcacite"
+      "tag": "wizards_reborn:arcacite"
     },
     {
       "item": "wizards_reborn:arcanum_lens"
@@ -23,7 +23,7 @@
       "tag": "wizards_reborn:arcane_gold_ingot"
     },
     {
-      "item": "wizards_reborn:arcacite"
+      "tag": "wizards_reborn:arcacite"
     },
     {
       "tag": "wizards_reborn:arcane_gold_ingot"
@@ -32,7 +32,7 @@
       "item": "wizards_reborn:arcanum_lens"
     },
     {
-      "item": "wizards_reborn:arcacite"
+      "tag": "wizards_reborn:arcacite"
     }
   ]
 }

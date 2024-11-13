@@ -11,7 +11,7 @@
       "item": "wizards_reborn:leather_belt"
     },
     "L": {
-      "item": "minecraft:leather"
+      "tag": "forge:leather"
     },
     "C": {
       "item": "minecraft:chest"

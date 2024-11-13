@@ -13,7 +13,7 @@
       "tag": "wizards_reborn:arcane_gold_ingot"
     },
     "S": {
-      "item": "minecraft:string"
+      "tag": "forge:string"
     }
   },
   "result": {

@@ -13,16 +13,16 @@
       "item": "minecraft:lapis_lazuli"
     },
     {
-      "item": "wizards_reborn:arcanum"
+      "tag": "wizards_reborn:arcanum"
     },
     {
-      "item": "minecraft:raw_iron"
+      "tag": "forge:raw_materials/iron"
     },
     {
-      "item": "minecraft:raw_copper"
+      "tag": "forge:raw_materials/copper"
     },
     {
-      "item": "minecraft:raw_gold"
+      "tag": "forge:raw_materials/gold"
     },
     {
       "tag": "wizards_reborn:raw_arcane_gold"

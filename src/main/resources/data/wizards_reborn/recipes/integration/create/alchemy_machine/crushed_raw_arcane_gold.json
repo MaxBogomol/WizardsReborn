@@ -30,7 +30,7 @@
             "item": "create:crushed_raw_gold"
           },
           {
-            "item": "wizards_reborn:arcanum"
+            "tag": "wizards_reborn:arcanum"
           },
           {
             "item": "wizards_reborn:natural_calx"

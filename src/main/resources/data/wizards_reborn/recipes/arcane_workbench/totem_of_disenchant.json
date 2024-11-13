@@ -17,7 +17,7 @@
       "item": "wizards_reborn:enchanted_calx"
     },
     "A": {
-      "item": "wizards_reborn:arcacite"
+      "tag": "wizards_reborn:arcacite"
     }
   },
   "output": {

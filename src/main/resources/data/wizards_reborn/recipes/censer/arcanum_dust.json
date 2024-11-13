@@ -1,7 +1,7 @@
 {
   "type": "wizards_reborn:censer",
   "ingredient": {
-    "item": "wizards_reborn:arcanum_dust"
+    "tag": "wizards_reborn:arcanum_dust"
   },
   "effects": [
     {

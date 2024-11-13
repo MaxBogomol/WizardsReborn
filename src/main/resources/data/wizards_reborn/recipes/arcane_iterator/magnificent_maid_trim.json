@@ -22,7 +22,7 @@
       "item": "minecraft:white_wool"
     },
     {
-      "item": "wizards_reborn:arcanum"
+      "tag": "wizards_reborn:arcanum"
     }
   ]
 }

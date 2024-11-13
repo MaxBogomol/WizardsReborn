@@ -16,7 +16,7 @@
       "item": "wizards_reborn:scorched_calx"
     },
     {
-      "item": "minecraft:gold_nugget"
+      "tag": "forge:nuggets/gold"
     }
   ],
   "fluidIngredients": [

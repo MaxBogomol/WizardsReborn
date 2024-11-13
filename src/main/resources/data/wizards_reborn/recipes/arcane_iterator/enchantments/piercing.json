@@ -19,7 +19,7 @@
       "item": "minecraft:arrow"
     },
     {
-      "item": "minecraft:stick"
+      "tag": "forge:rods/wooden"
     },
     {
       "tag": "forge:gems/quartz"

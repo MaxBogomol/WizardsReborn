@@ -23,7 +23,7 @@
       "item": "minecraft:lapis_lazuli"
     },
     {
-      "item": "minecraft:diamond"
+      "tag": "forge:gems/diamond"
     }
   ],
   "fluidIngredients": [

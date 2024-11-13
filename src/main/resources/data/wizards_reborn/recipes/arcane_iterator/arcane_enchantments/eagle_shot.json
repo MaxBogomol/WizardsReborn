@@ -13,7 +13,7 @@
       "item": "minecraft:lapis_lazuli"
     },
     {
-      "item": "wizards_reborn:arcanum"
+      "tag": "wizards_reborn:arcanum"
     },
     {
       "item": "minecraft:prismarine_shard"
@@ -22,7 +22,7 @@
       "item": "minecraft:prismarine_shard"
     },
     {
-      "item": "minecraft:diamond"
+      "tag": "forge:gems/diamond"
     },
     {
       "item": "minecraft:arrow"

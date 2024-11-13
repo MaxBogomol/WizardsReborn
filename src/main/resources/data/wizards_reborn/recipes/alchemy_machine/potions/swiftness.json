@@ -12,10 +12,10 @@
       "item": "minecraft:sugar"
     },
     {
-      "item": "minecraft:redstone"
+      "tag": "forge:dusts/redstone"
     },
     {
-      "item": "minecraft:glowstone_dust"
+      "tag": "forge:dusts/glowstone"
     }
   ],
   "alchemyPotionIngredient": {

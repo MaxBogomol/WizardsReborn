@@ -1,13 +1,14 @@
 package mod.maxbogomol.wizards_reborn;
 
 import mod.maxbogomol.fluffy_fur.FluffyFurClient;
+import mod.maxbogomol.fluffy_fur.client.event.SplashHandler;
 import mod.maxbogomol.fluffy_fur.client.gui.screen.FluffyFurMod;
 import mod.maxbogomol.fluffy_fur.client.gui.screen.FluffyFurPanorama;
 import mod.maxbogomol.wizards_reborn.client.arcanemicon.ArcanemiconChapters;
 import mod.maxbogomol.wizards_reborn.client.event.WizardsRebornClientEvents;
 import mod.maxbogomol.wizards_reborn.client.event.WizardsRebornKeyBindHandler;
-import mod.maxbogomol.wizards_reborn.client.render.WissenWandRenderHandler;
 import mod.maxbogomol.wizards_reborn.client.gui.TooltipEventHandler;
+import mod.maxbogomol.wizards_reborn.client.render.WissenWandRenderHandler;
 import mod.maxbogomol.wizards_reborn.common.item.equipment.WissenWandItem;
 import mod.maxbogomol.wizards_reborn.registry.client.WizardsRebornModels;
 import mod.maxbogomol.wizards_reborn.registry.common.item.WizardsRebornCreativeTabs;
@@ -47,6 +48,7 @@ public class WizardsRebornClient {
 
     public static void clientSetup(final FMLClientSetupEvent event) {
         setupMenu();
+        setupSplashes();
         ArcanemiconChapters.init();
     }
 
@@ -68,5 +70,10 @@ public class WizardsRebornClient {
 
         FluffyFurClient.registerMod(MOD_INSTANCE);
         FluffyFurClient.registerPanorama(MAGICAL_ORIGINS_PANORAMA);
+    }
+
+    public static void setupSplashes() {
+        SplashHandler.addSplash("Also try Valoria!");
+        SplashHandler.addSplash("Also try Implosion!");
     }
 }

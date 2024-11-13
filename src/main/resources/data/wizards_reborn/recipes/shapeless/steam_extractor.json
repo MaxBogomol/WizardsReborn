@@ -5,7 +5,7 @@
       "item": "wizards_reborn:steam_pipe"
     },
     {
-      "item": "minecraft:redstone"
+      "tag": "forge:dusts/redstone"
     }
   ],
   "result": {

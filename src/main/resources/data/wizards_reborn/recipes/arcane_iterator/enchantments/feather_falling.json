@@ -13,13 +13,13 @@
       "item": "minecraft:lapis_lazuli"
     },
     {
-      "item": "minecraft:string"
+      "tag": "forge:string"
     },
     {
-      "item": "minecraft:feather"
+      "tag": "forge:feather"
     },
     {
-      "item": "minecraft:feather"
+      "tag": "forge:feather"
     }
   ]
 }

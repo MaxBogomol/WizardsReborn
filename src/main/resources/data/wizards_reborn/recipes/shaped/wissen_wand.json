@@ -10,7 +10,7 @@
       "item": "wizards_reborn:arcane_wood_branch"
     },
     "X": {
-      "item": "wizards_reborn:arcanum"
+      "tag": "wizards_reborn:arcanum"
     }
   },
   "result": {

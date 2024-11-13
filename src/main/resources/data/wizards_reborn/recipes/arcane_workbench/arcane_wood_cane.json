@@ -11,7 +11,7 @@
       "item": "wizards_reborn:arcane_wood_planks"
     },
     "A": {
-      "item": "wizards_reborn:arcacite"
+      "tag": "wizards_reborn:arcacite"
     }
   },
   "output": {

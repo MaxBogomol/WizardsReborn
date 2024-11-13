@@ -11,10 +11,10 @@
       "item": "wizards_reborn:wissen_altar"
     },
     "A": {
-      "item": "wizards_reborn:arcanum"
+      "tag": "wizards_reborn:arcanum"
     },
     "C": {
-      "item": "wizards_reborn:arcacite"
+      "tag": "wizards_reborn:arcacite"
     },
     "R": {
       "item": "minecraft:red_wool"

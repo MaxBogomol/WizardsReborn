@@ -8,10 +8,10 @@
   "steam": 200,
   "ingredients": [
     {
-      "item": "wizards_reborn:arcanum"
+      "tag": "wizards_reborn:arcanum"
     },
     {
-      "item": "wizards_reborn:arcanum"
+      "tag": "wizards_reborn:arcanum"
     },
     {
       "tag": "forge:gems/quartz"

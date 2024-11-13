@@ -10,28 +10,28 @@
       "item": "minecraft:book"
     },
     {
-      "item": "wizards_reborn:arcacite"
+      "tag": "wizards_reborn:arcacite"
     },
     {
       "item": "minecraft:ink_sac"
     },
     {
-      "item": "minecraft:feather"
+      "tag": "forge:feather"
     },
     {
-      "item": "wizards_reborn:arcanum"
+      "tag": "wizards_reborn:arcanum"
     },
     {
-      "item": "wizards_reborn:arcanum"
+      "tag": "wizards_reborn:arcanum"
     },
     {
-      "item": "wizards_reborn:arcanum"
+      "tag": "wizards_reborn:arcanum"
     },
     {
-      "item": "wizards_reborn:arcanum"
+      "tag": "wizards_reborn:arcanum"
     },
     {
-      "item": "wizards_reborn:arcanum"
+      "tag": "wizards_reborn:arcanum"
     },
     {
       "item": "wizards_reborn:enchanted_calx"

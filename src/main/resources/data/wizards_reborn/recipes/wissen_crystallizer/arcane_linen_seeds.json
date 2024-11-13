@@ -10,10 +10,10 @@
       "item": "minecraft:wheat_seeds"
     },
     {
-      "item": "wizards_reborn:arcanum"
+      "tag": "wizards_reborn:arcanum"
     },
     {
-      "item": "wizards_reborn:arcanum"
+      "tag": "wizards_reborn:arcanum"
     },
     {
       "tag": "wizards_reborn:arcane_gold_nugget"

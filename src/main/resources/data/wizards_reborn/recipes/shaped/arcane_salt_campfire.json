@@ -13,7 +13,7 @@
       "item": "wizards_reborn:nether_salt"
     },
     "S": {
-      "item": "minecraft:stick"
+      "tag": "forge:rods/wooden"
     }
   },
   "result": {

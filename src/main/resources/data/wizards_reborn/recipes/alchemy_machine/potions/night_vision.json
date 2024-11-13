@@ -12,7 +12,7 @@
       "item": "minecraft:golden_carrot"
     },
     {
-      "item": "minecraft:redstone"
+      "tag": "forge:dusts/redstone"
     }
   ],
   "alchemyPotionIngredient": {

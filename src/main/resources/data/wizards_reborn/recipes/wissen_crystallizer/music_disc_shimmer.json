@@ -10,10 +10,10 @@
       "tag": "minecraft:music_discs"
     },
     {
-      "item": "minecraft:cobbled_deepslate"
+      "tag": "forge:cobblestone/deepslate"
     },
     {
-      "item": "wizards_reborn:arcanum"
+      "tag": "wizards_reborn:arcanum"
     }
   ]
 }

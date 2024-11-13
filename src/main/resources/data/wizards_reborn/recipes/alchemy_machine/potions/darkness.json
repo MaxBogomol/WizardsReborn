@@ -21,7 +21,7 @@
       "item": "minecraft:sculk"
     },
     {
-      "item": "minecraft:redstone"
+      "tag": "forge:dusts/redstone"
     }
   ],
   "fluidIngredients": [

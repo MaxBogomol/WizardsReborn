@@ -13,10 +13,10 @@
       "item": "minecraft:lapis_lazuli"
     },
     {
-      "item": "minecraft:string"
+      "tag": "forge:string"
     },
     {
-      "item": "minecraft:string"
+      "tag": "forge:string"
     },
     {
       "item": "minecraft:emerald"

@@ -16,7 +16,7 @@
       "item": "minecraft:gold_block"
     },
     {
-      "item": "minecraft:diamond"
+      "tag": "forge:gems/diamond"
     }
   ]
 }

@@ -14,7 +14,7 @@
       "item": "wizards_reborn:arcane_wood_branch"
     },
     "A": {
-      "item": "wizards_reborn:arcanum"
+      "tag": "wizards_reborn:arcanum"
     },
     "S": {
       "item": "wizards_reborn:nether_salt"

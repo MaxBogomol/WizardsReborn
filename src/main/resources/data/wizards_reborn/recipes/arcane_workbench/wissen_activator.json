@@ -11,7 +11,7 @@
       "item": "wizards_reborn:wissen_sensor"
     },
     "A": {
-      "item": "wizards_reborn:arcanum"
+      "tag": "wizards_reborn:arcanum"
     },
     "W": {
       "item": "wizards_reborn:wissen_wand"

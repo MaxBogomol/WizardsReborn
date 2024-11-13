@@ -7,19 +7,19 @@
   "steam": 350,
   "ingredients": [
     {
-      "item": "wizards_reborn:arcacite"
+      "tag": "wizards_reborn:arcacite"
     },
     {
-      "item": "wizards_reborn:arcacite"
+      "tag": "wizards_reborn:arcacite"
     },
     {
-      "item": "wizards_reborn:arcanum_dust"
+      "tag": "wizards_reborn:arcanum_dust"
     },
     {
-      "item": "wizards_reborn:arcanum_dust"
+      "tag": "wizards_reborn:arcanum_dust"
     },
     {
-      "item": "wizards_reborn:arcanum_dust"
+      "tag": "wizards_reborn:arcanum_dust"
     },
     {
       "item": "wizards_reborn:alchemy_calx"

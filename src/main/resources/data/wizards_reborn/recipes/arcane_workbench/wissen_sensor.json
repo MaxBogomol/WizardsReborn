@@ -11,7 +11,7 @@
       "item": "wizards_reborn:redstone_sensor"
     },
     "A": {
-      "item": "wizards_reborn:arcanum"
+      "tag": "wizards_reborn:arcanum"
     }
   },
   "output": {

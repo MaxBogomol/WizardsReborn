@@ -17,7 +17,7 @@
       "item": "wizards_reborn:arcanum_lens"
     },
     "A": {
-      "item": "wizards_reborn:arcanum"
+      "tag": "wizards_reborn:arcanum"
     }
   },
   "output": {

@@ -10,7 +10,7 @@
       "tag": "wizards_reborn:arcane_gold_nugget"
     },
     {
-      "item": "minecraft:string"
+      "tag": "forge:string"
     },
     {
       "item": "wizards_reborn:innocent_wood_planks"

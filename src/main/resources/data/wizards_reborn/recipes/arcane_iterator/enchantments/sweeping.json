@@ -16,13 +16,13 @@
       "tag": "forge:gems/quartz"
     },
     {
-      "item": "minecraft:bone"
+      "tag": "forge:bones"
     },
     {
-      "item": "minecraft:bone"
+      "tag": "forge:bones"
     },
     {
-      "item": "minecraft:bone"
+      "tag": "forge:bones"
     }
   ]
 }

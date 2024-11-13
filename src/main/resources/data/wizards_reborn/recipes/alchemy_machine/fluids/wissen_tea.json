@@ -13,13 +13,13 @@
       "item": "wizards_reborn:petals"
     },
     {
-      "item": "wizards_reborn:arcanum_dust"
+      "tag": "wizards_reborn:arcanum_dust"
     },
     {
-      "item": "wizards_reborn:arcanum_dust"
+      "tag": "wizards_reborn:arcanum_dust"
     },
     {
-      "item": "wizards_reborn:arcanum_dust"
+      "tag": "wizards_reborn:arcanum_dust"
     }
   ],
   "fluidIngredients": [

@@ -5,7 +5,7 @@
       "tag": "wizards_reborn:dyeable_arcane_lumos"
     },
     {
-      "item": "minecraft:brown_dye"
+      "tag": "forge:dyes/brown"
     }
   ],
   "result": {

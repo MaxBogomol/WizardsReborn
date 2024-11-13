@@ -1,7 +1,7 @@
 {
   "type": "wizards_reborn:censer",
   "ingredient": {
-    "item": "minecraft:glowstone_dust"
+    "tag": "forge:dusts/glowstone"
   },
   "effects": [
     {

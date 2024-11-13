@@ -7,7 +7,7 @@
   "wissen": 2000,
   "ingredients": [
     {
-      "item": "wizards_reborn:arcanum"
+      "tag": "wizards_reborn:arcanum"
     },
     {
       "item": "wizards_reborn:fractured_water_crystal"

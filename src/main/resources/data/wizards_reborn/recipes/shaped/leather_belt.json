@@ -7,7 +7,7 @@
   ],
   "key": {
     "#": {
-      "item": "minecraft:leather"
+      "tag": "forge:leather"
     },
     "X": {
       "tag": "wizards_reborn:arcane_gold_ingot"

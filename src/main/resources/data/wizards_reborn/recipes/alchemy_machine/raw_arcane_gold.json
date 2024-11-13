@@ -8,19 +8,19 @@
   "steam": 200,
   "ingredients": [
     {
-      "item": "minecraft:raw_gold"
+      "tag": "forge:raw_materials/gold"
     },
     {
-      "item": "minecraft:raw_gold"
+      "tag": "forge:raw_materials/gold"
     },
     {
-      "item": "minecraft:raw_gold"
+      "tag": "forge:raw_materials/gold"
     },
     {
-      "item": "minecraft:raw_gold"
+      "tag": "forge:raw_materials/gold"
     },
     {
-      "item": "wizards_reborn:arcanum"
+      "tag": "wizards_reborn:arcanum"
     },
     {
       "item": "wizards_reborn:natural_calx"

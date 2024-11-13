@@ -7,7 +7,7 @@
   "wissen": 1500,
   "ingredients": [
     {
-      "item": "wizards_reborn:arcacite"
+      "tag": "wizards_reborn:arcacite"
     },
     {
       "item": "wizards_reborn:earth_crystal_seed"

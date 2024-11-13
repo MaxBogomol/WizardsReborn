@@ -12,7 +12,7 @@
       "item": "minecraft:magma_cream"
     },
     {
-      "item": "minecraft:redstone"
+      "tag": "forge:dusts/redstone"
     }
   ],
   "alchemyPotionIngredient": {

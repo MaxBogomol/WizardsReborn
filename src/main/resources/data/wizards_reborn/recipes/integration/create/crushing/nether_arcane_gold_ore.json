@@ -9,7 +9,7 @@
           }
         ],
         "recipe": {
-    "type": "create:crushing",
+        "type": "create:crushing",
         "ingredients": [
           {
             "item": "wizards_reborn:nether_arcane_gold_ore"

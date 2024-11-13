@@ -12,7 +12,7 @@
       "item": "minecraft:glistering_melon_slice"
     },
     {
-      "item": "minecraft:glowstone_dust"
+      "tag": "forge:dusts/glowstone"
     }
   ],
   "alchemyPotionIngredient": {
