@@ -14,7 +14,7 @@
       "tag": "forge:leather"
     },
     "C": {
-      "item": "minecraft:chest"
+      "tag": "forge:chests/wooden"
     },
     "A": {
       "item": "wizards_reborn:alchemy_calx"

@@ -3,7 +3,7 @@
   "group": "planks",
   "ingredients": [
     {
-      "item": "minecraft:chest"
+      "tag": "forge:chests/wooden"
     },
     {
       "item": "wizards_reborn:innocent_wood_boat"

@@ -11,7 +11,7 @@
       "item": "wizards_reborn:redstone_sensor"
     },
     "C": {
-      "item": "minecraft:chest"
+      "tag": "forge:chests/wooden"
     },
     "G": {
       "item": "wizards_reborn:alchemy_glass"

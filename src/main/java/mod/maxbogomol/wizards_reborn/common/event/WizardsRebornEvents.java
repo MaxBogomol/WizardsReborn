@@ -10,17 +10,20 @@ import mod.maxbogomol.wizards_reborn.common.capability.ArrowModifierProvider;
 import mod.maxbogomol.wizards_reborn.common.capability.IKnowledge;
 import mod.maxbogomol.wizards_reborn.common.capability.KnowledgeProvider;
 import mod.maxbogomol.wizards_reborn.common.command.WizardsRebornCommand;
+import mod.maxbogomol.wizards_reborn.common.effect.IrritationEffect;
 import mod.maxbogomol.wizards_reborn.common.entity.SpellEntity;
 import mod.maxbogomol.wizards_reborn.common.item.equipment.ArcaneFortressArmorItem;
 import mod.maxbogomol.wizards_reborn.common.network.KnowledgeUpdatePacket;
 import mod.maxbogomol.wizards_reborn.common.network.WizardsRebornPacketHandler;
 import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornAttributes;
+import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornMobEffects;
 import mod.maxbogomol.wizards_reborn.registry.common.damage.WizardsRebornDamageTypeTags;
 import mod.maxbogomol.wizards_reborn.registry.common.damage.WizardsRebornDamageTypes;
 import mod.maxbogomol.wizards_reborn.registry.common.item.WizardsRebornItems;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.ai.attributes.AttributeInstance;
@@ -34,6 +37,8 @@ import net.minecraftforge.event.RegisterCommandsEvent;
 import net.minecraftforge.event.TickEvent;
 import net.minecraftforge.event.entity.EntityJoinLevelEvent;
 import net.minecraftforge.event.entity.living.LivingDamageEvent;
+import net.minecraftforge.event.entity.living.LivingEvent;
+import net.minecraftforge.event.entity.living.LivingHealEvent;
 import net.minecraftforge.event.entity.player.PlayerEvent;
 import net.minecraftforge.event.village.WandererTradesEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
@@ -131,5 +136,27 @@ public class WizardsRebornEvents {
         event.getGenericTrades().add(new VillagerTrades.ItemsForEmeralds(WizardsRebornItems.ELDER_MOR.get(), 2, 1, 16, 1));
         event.getGenericTrades().add(new VillagerTrades.ItemsForEmeralds(WizardsRebornItems.ARCANUM_DUST.get(), 3, 2, 8, 1));
         event.getGenericTrades().add(new VillagerTrades.ItemsForEmeralds(WizardsRebornItems.ARCANUM.get(), 4, 1, 6, 1));
+    }
+
+    @SubscribeEvent
+    public void onLivingTick(LivingEvent.LivingTickEvent event) {
+        LivingEntity entity = event.getEntity();
+        if (entity.hasEffect(WizardsRebornMobEffects.IRRITATION.get())) {
+            MobEffectInstance effectInstance = entity.getEffect(WizardsRebornMobEffects.IRRITATION.get());
+            if (effectInstance.getEffect().isDurationEffectTick(effectInstance.getDuration(), effectInstance.getAmplifier())) {
+                IrritationEffect.effectTick(entity, effectInstance.getAmplifier());
+            }
+        }
+    }
+
+    @SubscribeEvent
+    public void onLivingHeal(LivingHealEvent event) {
+        LivingEntity entity = event.getEntity();
+        if (entity.hasEffect(WizardsRebornMobEffects.IRRITATION.get())) {
+            MobEffectInstance effectInstance = entity.getEffect(WizardsRebornMobEffects.IRRITATION.get());
+            float modifier = 0.6f - (effectInstance.getAmplifier() * 0.1f);
+            if (modifier < 0.2f) modifier = 0.2f;
+            event.setAmount(event.getAmount() * modifier);
+        }
     }
 }
