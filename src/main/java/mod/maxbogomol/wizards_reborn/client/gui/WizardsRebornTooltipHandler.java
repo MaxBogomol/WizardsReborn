@@ -13,7 +13,7 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraftforge.client.event.RenderTooltipEvent;
 import org.lwjgl.opengl.GL11;
 
-public class TooltipEventHandler {
+public class WizardsRebornTooltipHandler {
 
     public static void onPostTooltipEvent(RenderTooltipEvent.Color event) {
         ItemStack stack = event.getItemStack();

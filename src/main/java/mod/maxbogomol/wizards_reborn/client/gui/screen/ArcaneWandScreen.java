@@ -49,6 +49,7 @@ import java.util.List;
 import java.util.Map;
 
 public class ArcaneWandScreen extends Screen {
+
     public ArcaneWandScreen(Component titleIn) {
         super(titleIn);
         ArcaneWandScreen.initSpells();

@@ -21,6 +21,7 @@ import net.minecraft.world.item.ItemStack;
 import java.awt.*;
 
 public class WissenWandScreen extends Screen {
+
     public WissenWandScreen(Component titleIn) {
         super(titleIn);
     }

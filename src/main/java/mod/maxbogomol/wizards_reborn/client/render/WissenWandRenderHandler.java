@@ -4,6 +4,7 @@ import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.math.Axis;
 import mod.maxbogomol.fluffy_fur.client.event.ClientTickHandler;
 import mod.maxbogomol.fluffy_fur.util.RenderUtil;
+import mod.maxbogomol.wizards_reborn.WizardsReborn;
 import mod.maxbogomol.wizards_reborn.api.alchemy.ISteamBlockEntity;
 import mod.maxbogomol.wizards_reborn.api.light.ILightBlockEntity;
 import mod.maxbogomol.wizards_reborn.api.light.LightUtil;
@@ -52,109 +53,112 @@ public class WissenWandRenderHandler {
     public static Color colorSide = WizardsRebornRenderUtil.colorFluidSide;
 
     @OnlyIn(Dist.CLIENT)
-    public static void wissenWandTick(TickEvent.LevelTickEvent event) {
-        Minecraft minecraft = Minecraft.getInstance();
-        Player player = minecraft.player;
-        if (player != null) {
-            ItemStack main = player.getMainHandItem();
-            ItemStack offhand = player.getOffhandItem();
-            boolean renderWand = false;
-            ItemStack stack = main;
+    public static void wissenWandTick(TickEvent.ClientTickEvent event) {
+        if (event.phase == TickEvent.Phase.END) {
+            if (!Minecraft.getInstance().isPaused()) {
+                Player player = WizardsReborn.proxy.getPlayer();
+                if (player != null) {
+                    ItemStack main = player.getMainHandItem();
+                    ItemStack offhand = player.getOffhandItem();
+                    boolean renderWand = false;
+                    ItemStack stack = main;
 
-            if (!main.isEmpty() && main.getItem() instanceof WissenWandItem) {
-                renderWand = true;
-            } else {
-                if (!offhand.isEmpty() && offhand.getItem() instanceof WissenWandItem) {
-                    renderWand = true;
-                    stack = offhand;
-                }
-            }
+                    if (!main.isEmpty() && main.getItem() instanceof WissenWandItem) {
+                        renderWand = true;
+                    } else {
+                        if (!offhand.isEmpty() && offhand.getItem() instanceof WissenWandItem) {
+                            renderWand = true;
+                            stack = offhand;
+                        }
+                    }
 
-            boolean addBlock = false;
-            boolean addSide = false;
-            if (renderWand) {
-                HitResult hitresult = player.pick(player.getBlockReach(), 0, false);
+                    boolean addBlock = false;
+                    boolean addSide = false;
+                    if (renderWand) {
+                        HitResult hitresult = player.pick(player.getBlockReach(), 0, false);
 
-                if (hitresult.getType() == HitResult.Type.BLOCK) {
-                    if (WissenWandItem.getMode(stack) == 1 || WissenWandItem.getMode(stack) == 2) {
-                        BlockPos blockpos = ((BlockHitResult) hitresult).getBlockPos();
-                        if (canEffect(blockpos, player.level())) {
-                            block = new Vec3(blockpos.getX(), blockpos.getY(), blockpos.getZ());
-                            if (timeBlock <= 0) {
-                                nowBlock = block;
-                            }
-                            Vec3 newOffset = LightUtil.getLightLensPos(blockpos, getEffectPos(blockpos, player.level()));
-                            if (WissenWandItem.getBlock(stack)) {
-                                blockRay = newOffset;
-                                if (timeBlock <= 0) {
-                                    nowBlockRay = blockRay;
+                        if (hitresult.getType() == HitResult.Type.BLOCK) {
+                            if (WissenWandItem.getMode(stack) == 1 || WissenWandItem.getMode(stack) == 2) {
+                                BlockPos blockpos = ((BlockHitResult) hitresult).getBlockPos();
+                                if (canEffect(blockpos, player.level())) {
+                                    block = new Vec3(blockpos.getX(), blockpos.getY(), blockpos.getZ());
+                                    if (timeBlock <= 0) {
+                                        nowBlock = block;
+                                    }
+                                    Vec3 newOffset = LightUtil.getLightLensPos(blockpos, getEffectPos(blockpos, player.level()));
+                                    if (WissenWandItem.getBlock(stack)) {
+                                        blockRay = newOffset;
+                                        if (timeBlock <= 0) {
+                                            nowBlockRay = blockRay;
+                                        }
+                                    } else {
+                                        nowBlockRay = newOffset;
+                                    }
+                                    if (timeBlock < 10) timeBlock = timeBlock + 3;
+                                    if (timeBlock >= 10) timeBlock = 10;
+                                    addBlock = true;
                                 }
                             } else {
-                                nowBlockRay = newOffset;
+                                boolean renderSide = false;
+                                BlockPos blockpos = ((BlockHitResult) hitresult).getBlockPos();
+                                Direction direction = ((BlockHitResult) hitresult).getDirection();
+                                if (player.level().getBlockEntity(blockpos) != null) {
+                                    IFluidHandler fluidHandler = player.level().getBlockEntity(blockpos).getCapability(ForgeCapabilities.FLUID_HANDLER, direction).orElse(null);
+                                    IEnergyStorage energyHandler = player.level().getBlockEntity(blockpos).getCapability(ForgeCapabilities.ENERGY, direction).orElse(null);
+                                    if (fluidHandler != null) {
+                                        renderSide = true;
+                                        colorSide = WizardsRebornRenderUtil.colorFluidSide;
+                                    }
+                                    if (energyHandler != null) {
+                                        renderSide = true;
+                                        colorSide = WizardsRebornRenderUtil.colorEnergySide;
+                                    }
+                                    if (player.level().getBlockEntity(blockpos) instanceof ISteamBlockEntity steamBlockEntity) {
+                                        renderSide = steamBlockEntity.canSteamConnection(direction);
+                                        colorSide = WizardsRebornRenderUtil.colorSteamSide;
+                                    }
+                                }
+                                if (renderSide) {
+                                    side = new Vec3(blockpos.getX(), blockpos.getY(), blockpos.getZ());
+                                    Vec3i vec3i = direction.getOpposite().getNormal();
+                                    sideRot = new Vec3(vec3i.getX(), vec3i.getY(), vec3i.getZ());
+                                    if (timeSide <= 0) {
+                                        nowSide = side;
+                                        nowSideRot = sideRot;
+                                    }
+                                    if (timeSide < 10) timeSide = timeSide + 3;
+                                    if (timeSide >= 10) timeSide = 10;
+                                    addSide = true;
+                                }
                             }
-                            if (timeBlock < 60) timeBlock = timeBlock + 5;
-                            if (timeBlock >= 60) timeBlock = 60;
-                            addBlock = true;
                         }
-                    } else {
-                        boolean renderSide = false;
-                        BlockPos blockpos = ((BlockHitResult) hitresult).getBlockPos();
-                        Direction direction = ((BlockHitResult) hitresult).getDirection();
-                        if (player.level().getBlockEntity(blockpos) != null) {
-                            IFluidHandler fluidHandler = player.level().getBlockEntity(blockpos).getCapability(ForgeCapabilities.FLUID_HANDLER, direction).orElse(null);
-                            IEnergyStorage energyHandler = player.level().getBlockEntity(blockpos).getCapability(ForgeCapabilities.ENERGY, direction).orElse(null);
-                            if (fluidHandler != null) {
-                                renderSide = true;
-                                colorSide = WizardsRebornRenderUtil.colorFluidSide;
+
+                        if (WissenWandItem.getBlock(stack)) {
+                            colorBlock = WizardsRebornRenderUtil.colorConnectFrom;
+                            if (WissenWandItem.getMode(stack) == 2) {
+                                colorBlock = WizardsRebornRenderUtil.colorConnectTo;
                             }
-                            if (energyHandler != null) {
-                                renderSide = true;
-                                colorSide = WizardsRebornRenderUtil.colorEnergySide;
-                            }
-                            if (player.level().getBlockEntity(blockpos) instanceof ISteamBlockEntity steamBlockEntity) {
-                                renderSide = steamBlockEntity.canSteamConnection(direction);
-                                colorSide = WizardsRebornRenderUtil.colorSteamSide;
-                            }
-                        }
-                        if (renderSide) {
-                            side = new Vec3(blockpos.getX(), blockpos.getY(), blockpos.getZ());
-                            Vec3i vec3i = direction.getOpposite().getNormal();
-                            sideRot = new Vec3(vec3i.getX(), vec3i.getY(), vec3i.getZ());
-                            if (timeSide <= 0) {
-                                nowSide = side;
-                                nowSideRot = sideRot;
-                            }
-                            if (timeSide < 60) timeSide = timeSide + 5;
-                            if (timeSide >= 60) timeSide = 60;
-                            addSide = true;
+                        } else {
+                            colorBlock = WizardsRebornRenderUtil.colorSelected;
                         }
                     }
-                }
+                    if (!addBlock && timeBlock > 0) timeBlock = timeBlock - 1;
+                    if (!addSide && timeSide > 0) timeSide = timeSide - 1;
 
-                if (WissenWandItem.getBlock(stack)) {
-                    colorBlock = WizardsRebornRenderUtil.colorConnectFrom;
-                    if (WissenWandItem.getMode(stack) == 2) {
-                        colorBlock = WizardsRebornRenderUtil.colorConnectTo;
+                    if (timeBlock > 0) {
+                        oldBlock = nowBlock;
+                        nowBlock = vecStep(block, nowBlock, 0.8f);
+                        oldBlockRay = nowBlockRay;
+                        nowBlockRay = vecStep(blockRay, nowBlockRay, 0.8f);
                     }
-                } else {
-                    colorBlock = WizardsRebornRenderUtil.colorSelected;
+
+                    if (timeSide > 0) {
+                        oldSide = nowSide;
+                        nowSide = vecStep(side, nowSide, 0.8f);
+                        oldSideRot = nowSideRot;
+                        nowSideRot = vecStep(sideRot, nowSideRot, 0.5f);
+                    }
                 }
-            }
-            if (!addBlock && timeBlock > 0) timeBlock = timeBlock - 1;
-            if (!addSide && timeSide > 0) timeSide = timeSide - 1;
-
-            if (timeBlock > 0) {
-                oldBlock = nowBlock;
-                nowBlock = vecStep(block, nowBlock, 0.08f);
-                oldBlockRay = nowBlockRay;
-                nowBlockRay = vecStep(blockRay, nowBlockRay, 0.08f);
-            }
-
-            if (timeSide > 0) {
-                oldSide = nowSide;
-                nowSide = vecStep(side, nowSide, 0.08f);
-                oldSideRot = nowSideRot;
-                nowSideRot = vecStep(sideRot, nowSideRot, 0.05f);
             }
         }
     }
@@ -213,7 +217,7 @@ public class WissenWandRenderHandler {
 
                         poseStack.pushPose();
                         poseStack.translate(dX, dY, dZ);
-                        RenderUtil.renderConnectBoxLines(poseStack, new Vec3(1, 1, 1), colorBlock, 0.5f * alpha * (timeBlock / 60f));
+                        RenderUtil.renderConnectBoxLines(poseStack, new Vec3(1, 1, 1), colorBlock, 0.5f * alpha * (timeBlock / 12f));
                         poseStack.popPose();
 
                         if (WissenWandItem.getBlock(stack)) {
@@ -231,7 +235,7 @@ public class WissenWandRenderHandler {
                             poseStack.pushPose();
                             poseStack.translate(dX, dY, dZ);
                             poseStack.translate(offset.x(), offset.y(), offset.z());
-                            RenderUtil.renderConnectLine(poseStack, LightUtil.getLightLensPos(blockPos, offset), new Vec3(X, Y, Z), colorBlock, 0.5f * alpha * (timeBlock / 60f));
+                            RenderUtil.renderConnectLine(poseStack, LightUtil.getLightLensPos(blockPos, offset), new Vec3(X, Y, Z), colorBlock, 0.5f * alpha * (timeBlock / 12f));
                             poseStack.popPose();
                         }
                     }
@@ -258,7 +262,7 @@ public class WissenWandRenderHandler {
 
                         poseStack.translate(0, -0.001f, 0);
                         poseStack.translate(-size.x() / 2f, -size.y() / 2f, -size.z() / 2f);
-                        RenderUtil.renderConnectSideLines(poseStack, size, colorSide, 0.5f * alpha * (timeSide / 60f));
+                        RenderUtil.renderConnectSideLines(poseStack, size, colorSide, 0.5f * alpha * (timeSide / 12f));
                         poseStack.popPose();
                     }
                 }
