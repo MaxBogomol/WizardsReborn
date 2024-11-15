@@ -1,5 +1,6 @@
 package mod.maxbogomol.wizards_reborn.client.arcanemicon.page;
 
+import com.mojang.blaze3d.systems.RenderSystem;
 import mod.maxbogomol.wizards_reborn.WizardsReborn;
 import mod.maxbogomol.wizards_reborn.api.monogram.Monogram;
 import mod.maxbogomol.wizards_reborn.api.monogram.MonogramMapEntry;
@@ -219,7 +220,9 @@ public class ResearchPage extends Page {
                 gui.blit(BACKGROUND, x + 59 - (int) size + (int) point.x, y + 59 - (int) size + (int) point.y, (start ? 168 : 158), 30, 10, 10);
                 gui.blit(BACKGROUND, x + 59 - (int) size + (int) point.x + 1, y + 59 - (int) size + (int) point.y + 1, 178, 30, 8, 8);
                 if (monogramMapEntry.getMonogram() != null) {
+                    RenderSystem.disableDepthTest();
                     monogramMapEntry.getMonogram().renderMiniIcon(gui, x + 59 - (int) size + (int) point.x + 1, y + 59 - (int) size + (int) point.y + 1);
+                    RenderSystem.enableDepthTest();
                 }
                 if (mouseX >= x + 59 - (int) size + (int) point.x && mouseY >= y + 59 - (int) size + (int) point.y && mouseX <= x + 59 - (int) size + (int) point.x + 8 && mouseY <= y + 59 - (int) size + (int) point.y + 8) {
                     gui.renderTooltip(Minecraft.getInstance().font, monogramMapEntry.getMonogram().getComponentList(), Optional.empty(), mouseX, mouseY);
@@ -234,7 +237,9 @@ public class ResearchPage extends Page {
                 gui.pose().translate(0,0,1000);
                 gui.blit(BACKGROUND, mouseX - 5, mouseY - 5, 158, 30, 10, 10);
                 gui.blit(BACKGROUND, mouseX - 4, mouseY - 4, 178, 30, 8, 8);
+                RenderSystem.disableDepthTest();
                 currentMonogram.renderMiniIcon(gui, mouseX - 4, mouseY - 4);
+                RenderSystem.enableDepthTest();
                 gui.pose().popPose();
             }
         } else {
@@ -252,8 +257,10 @@ public class ResearchPage extends Page {
 
                 gui.blit(BACKGROUND, x + X, y + 7 + (ii * 15), 158, 30, 10, 10);
                 gui.blit(BACKGROUND, x + 1 + X, y + 8 + (ii * 15), 178, 30, 8, 8);
+                RenderSystem.disableDepthTest();
                 monogramsSet[i].renderMiniIcon(gui, x + 1 + X, y + 8 + (ii * 15));
                 drawText(book, gui, String.valueOf(ArcanemiconChapters.RESEARCH_MAIN.monograms.get(monogramsSet[i])), x + 11 + X, y + 9 + (ii * 15));
+                RenderSystem.enableDepthTest();
             }
 
             if (hardmode) {

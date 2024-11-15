@@ -1,5 +1,6 @@
 package mod.maxbogomol.wizards_reborn.client.arcanemicon.page;
 
+import com.mojang.blaze3d.systems.RenderSystem;
 import mod.maxbogomol.wizards_reborn.WizardsReborn;
 import mod.maxbogomol.wizards_reborn.client.arcanemicon.ArcanemiconGui;
 import mod.maxbogomol.wizards_reborn.client.arcanemicon.Page;
@@ -44,7 +45,9 @@ public class MonogramIndexPage extends Page {
         }
 
         for (int i = 0; i < entries.length; i ++) {
+            RenderSystem.disableDepthTest();
             entries[i].icon.renderIcon(gui, x + 3, y + 8 + i * 20);
+            RenderSystem.enableDepthTest();
             drawText(book, gui, I18n.get(entries[i].chapter.titleKey), x + 24, y + 20 + i * 20 - Minecraft.getInstance().font.lineHeight);
         }
     }

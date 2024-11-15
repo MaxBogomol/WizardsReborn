@@ -1,5 +1,6 @@
 package mod.maxbogomol.wizards_reborn.client.arcanemicon.titledpage;
 
+import com.mojang.blaze3d.systems.RenderSystem;
 import mod.maxbogomol.wizards_reborn.WizardsReborn;
 import mod.maxbogomol.wizards_reborn.api.monogram.Monogram;
 import mod.maxbogomol.wizards_reborn.client.arcanemicon.ArcanemiconGui;
@@ -36,7 +37,9 @@ public class TitledMonogramPage extends Page {
         drawWrappingText(book, gui, I18n.get(text), x + 4, y + 24, 124);
 
         gui.blit(BACKGROUND, x + 49, y + 126, 128, 20, 30, 30);
+        RenderSystem.disableDepthTest();
         monogram.renderIcon(gui, x + 56, y + 133);
+        RenderSystem.enableDepthTest();
 
         if (mouseX >= x + 56 && mouseY >= y + 133 && mouseX <= x + 56 + 16 && mouseY <= y + 133 + 16) {
             gui.renderTooltip(Minecraft.getInstance().font, monogram.getComponentList(), Optional.empty(), mouseX, mouseY);
