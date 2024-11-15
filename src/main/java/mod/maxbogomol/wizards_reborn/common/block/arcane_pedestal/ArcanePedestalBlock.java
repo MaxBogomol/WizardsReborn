@@ -1,6 +1,8 @@
 package mod.maxbogomol.wizards_reborn.common.block.arcane_pedestal;
 
 import mod.maxbogomol.fluffy_fur.common.block.entity.BlockSimpleInventory;
+import mod.maxbogomol.fluffy_fur.common.block.entity.TickableBlockEntity;
+import mod.maxbogomol.fluffy_fur.common.book.CustomBook;
 import mod.maxbogomol.fluffy_fur.common.network.BlockEntityUpdate;
 import mod.maxbogomol.wizards_reborn.common.item.ArcanemiconItem;
 import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornSounds;
@@ -22,6 +24,8 @@ import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.EntityBlock;
 import net.minecraft.world.level.block.SimpleWaterloggedBlock;
 import net.minecraft.world.level.block.entity.BlockEntity;
+import net.minecraft.world.level.block.entity.BlockEntityTicker;
+import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
@@ -32,16 +36,13 @@ import net.minecraft.world.phys.shapes.BooleanOp;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
+import org.jetbrains.annotations.NotNull;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
-import java.util.HashMap;
-import java.util.Map;
 import java.util.stream.Stream;
 
 public class ArcanePedestalBlock extends Block implements EntityBlock, SimpleWaterloggedBlock {
-
-    public static Map<Block, Block> blocksList = new HashMap<>();
 
     private static final VoxelShape SHAPE = Stream.of(
             Block.box(5, 13, 5, 11, 14, 11),
@@ -110,6 +111,22 @@ public class ArcanePedestalBlock extends Block implements EntityBlock, SimpleWat
         }
 
         Container container = blockEntity.getItemHandler();
+        CustomBook book = blockEntity.getBook();
+        if (book != null) {
+            if (player.isShiftKeyDown() && !container.getItem(0).isEmpty()) {
+                BlockSimpleInventory.addHandPlayerItem(level, player, hand, stack, container.getItem(0));
+                container.removeItem(0, 1);
+                level.updateNeighbourForOutputSignal(pos, this);
+                BlockEntityUpdate.packet(blockEntity);
+                level.playSound(null, pos, WizardsRebornSounds.PEDESTAL_REMOVE.get(), SoundSource.BLOCKS, 1.0f, 1.0f);
+                return InteractionResult.SUCCESS;
+            }
+            if (level.isClientSide()) {
+                book.openGui(level, pos.getCenter(), container.getItem(0));
+            }
+            return InteractionResult.SUCCESS;
+        }
+
         if ((!stack.isEmpty()) && (container.getItem(0).isEmpty())) {
             if (stack.getCount() > 1) {
                 player.getItemInHand(hand).shrink(1);
@@ -141,6 +158,12 @@ public class ArcanePedestalBlock extends Block implements EntityBlock, SimpleWat
     @Override
     public BlockEntity newBlockEntity(BlockPos pos, BlockState state) {
         return new ArcanePedestalBlockEntity(pos, state);
+    }
+
+    @Nullable
+    @Override
+    public <T extends BlockEntity> BlockEntityTicker<T> getTicker(@NotNull Level level, @NotNull BlockState state, @NotNull BlockEntityType<T> type) {
+        return TickableBlockEntity.getTickerHelper();
     }
 
     @Override

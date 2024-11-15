@@ -142,47 +142,47 @@ public class WizardsRebornBlockEntities {
     public static class ClientRegistryEvents {
         @SubscribeEvent
         public static void registerBlockEntityRenderers(EntityRenderersEvent.RegisterRenderers event) {
-            BlockEntityRenderers.register(ARCANE_PEDESTAL.get(), (trd) -> new ArcanePedestalRenderer());
-            BlockEntityRenderers.register(WISSEN_ALTAR.get(), (trd) -> new WissenAltarRenderer());
-            BlockEntityRenderers.register(WISSEN_TRANSLATOR.get(), (trd) -> new WissenTranslatorRenderer());
-            BlockEntityRenderers.register(WISSEN_CRYSTALLIZER.get(), (trd) -> new WissenCrystallizerRenderer());
-            BlockEntityRenderers.register(ARCANE_WORKBENCH.get(), (trd) -> new ArcaneWorkbenchRenderer());
-            BlockEntityRenderers.register(WISSEN_CELL.get(), (trd) -> new WissenCellRenderer());
-            BlockEntityRenderers.register(JEWELER_TABLE.get(), (trd) -> new JewelerTableRenderer());
-            BlockEntityRenderers.register(ORBITAL_FLUID_RETAINER.get(), (trd) -> new OrbitalFluidRetainerRenderer());
-            BlockEntityRenderers.register(ALTAR_OF_DROUGHT.get(), (trd) -> new AltarOfDroughtRenderer());
-            BlockEntityRenderers.register(ALCHEMY_MACHINE.get(), (trd) -> new AlchemyMachineRenderer());
-            BlockEntityRenderers.register(ALCHEMY_BOILER.get(), (trd) -> new AlchemyBoilerRenderer());
-            BlockEntityRenderers.register(ARCANE_CENSER.get(), (trd) -> new ArcaneCenserRenderer());
-            BlockEntityRenderers.register(EXPERIENCE_TOTEM.get(), (trd) -> new ExperienceTotemRenderer());
-            BlockEntityRenderers.register(TOTEM_OF_EXPERIENCE_ABSORPTION.get(), (trd) -> new TotemOfExperienceAbsorptionRenderer());
-            BlockEntityRenderers.register(TOTEM_OF_DISENCHANT.get(), (trd) -> new TotemOfDisenchantRenderer());
-            BlockEntityRenderers.register(ARCANE_ITERATOR.get(), (trd) -> new ArcaneIteratorRenderer());
-            BlockEntityRenderers.register(LIGHT_EMITTER.get(), (trd) -> new LightEmitterBlockRenderer());
-            BlockEntityRenderers.register(LIGHT_TRANSFER_LENS.get(), (trd) -> new LightTransferLensRenderer());
-            BlockEntityRenderers.register(RUNIC_PEDESTAL.get(), (trd) -> new RunicPedestalRenderer());
-            BlockEntityRenderers.register(ENGRAVED_WISESTONE.get(), (trd) -> new EngravedWisestoneRenderer());
+            BlockEntityRenderers.register(ARCANE_PEDESTAL.get(), (r) -> new ArcanePedestalRenderer());
+            BlockEntityRenderers.register(WISSEN_ALTAR.get(), (r) -> new WissenAltarRenderer());
+            BlockEntityRenderers.register(WISSEN_TRANSLATOR.get(), (r) -> new WissenTranslatorRenderer());
+            BlockEntityRenderers.register(WISSEN_CRYSTALLIZER.get(), (r) -> new WissenCrystallizerRenderer());
+            BlockEntityRenderers.register(ARCANE_WORKBENCH.get(), (r) -> new ArcaneWorkbenchRenderer());
+            BlockEntityRenderers.register(WISSEN_CELL.get(), (r) -> new WissenCellRenderer());
+            BlockEntityRenderers.register(JEWELER_TABLE.get(), (r) -> new JewelerTableRenderer());
+            BlockEntityRenderers.register(ORBITAL_FLUID_RETAINER.get(), (r) -> new OrbitalFluidRetainerRenderer());
+            BlockEntityRenderers.register(ALTAR_OF_DROUGHT.get(), (r) -> new AltarOfDroughtRenderer());
+            BlockEntityRenderers.register(ALCHEMY_MACHINE.get(), (r) -> new AlchemyMachineRenderer());
+            BlockEntityRenderers.register(ALCHEMY_BOILER.get(), (r) -> new AlchemyBoilerRenderer());
+            BlockEntityRenderers.register(ARCANE_CENSER.get(), (r) -> new ArcaneCenserRenderer());
+            BlockEntityRenderers.register(EXPERIENCE_TOTEM.get(), (r) -> new ExperienceTotemRenderer());
+            BlockEntityRenderers.register(TOTEM_OF_EXPERIENCE_ABSORPTION.get(), (r) -> new TotemOfExperienceAbsorptionRenderer());
+            BlockEntityRenderers.register(TOTEM_OF_DISENCHANT.get(), (r) -> new TotemOfDisenchantRenderer());
+            BlockEntityRenderers.register(ARCANE_ITERATOR.get(), (r) -> new ArcaneIteratorRenderer());
+            BlockEntityRenderers.register(LIGHT_EMITTER.get(), (r) -> new LightEmitterBlockRenderer());
+            BlockEntityRenderers.register(LIGHT_TRANSFER_LENS.get(), (r) -> new LightTransferLensRenderer());
+            BlockEntityRenderers.register(RUNIC_PEDESTAL.get(), (r) -> new RunicPedestalRenderer());
+            BlockEntityRenderers.register(ENGRAVED_WISESTONE.get(), (r) -> new EngravedWisestoneRenderer());
 
-            BlockEntityRenderers.register(SENSOR.get(), (trd) -> new SensorRenderer());
-            BlockEntityRenderers.register(FLUID_SENSOR.get(), (trd) -> new FluidSensorRenderer());
-            BlockEntityRenderers.register(WISSEN_ACTIVATOR.get(), (trd) -> new SensorRenderer());
-            BlockEntityRenderers.register(ITEM_SORTER.get(), (trd) -> new ItemSorterRenderer());
+            BlockEntityRenderers.register(SENSOR.get(), (r) -> new SensorRenderer());
+            BlockEntityRenderers.register(FLUID_SENSOR.get(), (r) -> new FluidSensorRenderer());
+            BlockEntityRenderers.register(WISSEN_ACTIVATOR.get(), (r) -> new SensorRenderer());
+            BlockEntityRenderers.register(ITEM_SORTER.get(), (r) -> new ItemSorterRenderer());
 
-            BlockEntityRenderers.register(WISSEN_CASING.get(), (trd) -> new WissenCasingRenderer());
-            BlockEntityRenderers.register(LIGHT_CASING.get(), (trd) -> new LightCasingRenderer());
-            BlockEntityRenderers.register(FLUID_CASING.get(), (trd) -> new FluidCasingRenderer());
-            BlockEntityRenderers.register(STEAM_CASING.get(), (trd) -> new SteamCasingRenderer());
+            BlockEntityRenderers.register(WISSEN_CASING.get(), (r) -> new WissenCasingRenderer());
+            BlockEntityRenderers.register(LIGHT_CASING.get(), (r) -> new LightCasingRenderer());
+            BlockEntityRenderers.register(FLUID_CASING.get(), (r) -> new FluidCasingRenderer());
+            BlockEntityRenderers.register(STEAM_CASING.get(), (r) -> new SteamCasingRenderer());
 
-            BlockEntityRenderers.register(CREATIVE_WISSEN_STORAGE.get(), (trd) -> new CreativeWissenStorageRenderer());
-            BlockEntityRenderers.register(CREATIVE_LIGHT_STORAGE.get(), (trd) -> new LightCasingRenderer());
+            BlockEntityRenderers.register(CREATIVE_WISSEN_STORAGE.get(), (r) -> new CreativeWissenStorageRenderer());
+            BlockEntityRenderers.register(CREATIVE_LIGHT_STORAGE.get(), (r) -> new LightCasingRenderer());
 
-            BlockEntityRenderers.register(SALT_CAMPFIRE.get(), (trd) -> new SaltCampfireRenderer());
+            BlockEntityRenderers.register(SALT_CAMPFIRE.get(), (r) -> new SaltCampfireRenderer());
 
-            BlockEntityRenderers.register(ARCANUM_GROWTH.get(), (trd) -> new ArcanumGrowthRenderer());
-            BlockEntityRenderers.register(CRYSTAL_GROWTH.get(), (trd) -> new CrystalGrowthRenderer());
-            BlockEntityRenderers.register(CRYSTAL.get(), (trd) -> new CrystalRenderer());
+            BlockEntityRenderers.register(ARCANUM_GROWTH.get(), (r) -> new ArcanumGrowthRenderer());
+            BlockEntityRenderers.register(CRYSTAL_GROWTH.get(), (r) -> new CrystalGrowthRenderer());
+            BlockEntityRenderers.register(CRYSTAL.get(), (r) -> new CrystalRenderer());
 
-            BlockEntityRenderers.register(PLACED_ITEMS.get(), (trd) -> new PlacedItemsRenderer());
+            BlockEntityRenderers.register(PLACED_ITEMS.get(), (r) -> new PlacedItemsRenderer());
         }
     }
 }

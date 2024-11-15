@@ -4,11 +4,15 @@ import mod.maxbogomol.fluffy_fur.FluffyFurClient;
 import mod.maxbogomol.fluffy_fur.client.event.SplashHandler;
 import mod.maxbogomol.fluffy_fur.client.gui.screen.FluffyFurMod;
 import mod.maxbogomol.fluffy_fur.client.gui.screen.FluffyFurPanorama;
+import mod.maxbogomol.fluffy_fur.common.book.CustomBook;
+import mod.maxbogomol.fluffy_fur.common.book.CustomBookComponent;
+import mod.maxbogomol.fluffy_fur.common.book.CustomBookHandler;
 import mod.maxbogomol.wizards_reborn.client.arcanemicon.ArcanemiconChapters;
 import mod.maxbogomol.wizards_reborn.client.event.WizardsRebornClientEvents;
 import mod.maxbogomol.wizards_reborn.client.event.WizardsRebornKeyBindHandler;
 import mod.maxbogomol.wizards_reborn.client.gui.WizardsRebornTooltipHandler;
 import mod.maxbogomol.wizards_reborn.client.render.WissenWandRenderHandler;
+import mod.maxbogomol.wizards_reborn.common.item.ArcanemiconItem;
 import mod.maxbogomol.wizards_reborn.common.item.equipment.WissenWandItem;
 import mod.maxbogomol.wizards_reborn.registry.client.WizardsRebornModels;
 import mod.maxbogomol.wizards_reborn.registry.common.item.WizardsRebornCreativeTabs;
@@ -16,6 +20,10 @@ import mod.maxbogomol.wizards_reborn.registry.common.item.WizardsRebornItems;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.phys.Vec3;
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
@@ -49,6 +57,7 @@ public class WizardsRebornClient {
     public static void clientSetup(final FMLClientSetupEvent event) {
         setupMenu();
         setupSplashes();
+        setupBook();
         ArcanemiconChapters.init();
     }
 
@@ -75,5 +84,32 @@ public class WizardsRebornClient {
     public static void setupSplashes() {
         SplashHandler.addSplash("Also try Valoria!");
         SplashHandler.addSplash("Also try Implosion!");
+    }
+
+    public static void setupBook() {
+        ResourceLocation texture = new ResourceLocation(WizardsReborn.MOD_ID, "textures/models/book/arcanemicon.png");
+        CustomBookHandler.register(new CustomBook() {
+            public boolean isBook(Level level, Vec3 pos, ItemStack itemStack) {
+                return itemStack.getItem() == WizardsRebornItems.ARCANEMICON.get();
+            }
+
+            public ResourceLocation getTexture(Level level, Vec3 pos, ItemStack itemStack, CustomBookComponent component) {
+                return texture;
+            }
+
+            @OnlyIn(Dist.CLIENT)
+            public void openGui(Level level, ItemStack stack) {
+                if (stack.getItem() instanceof ArcanemiconItem item) {
+                    item.openGui(level, stack);
+                }
+            }
+
+            @OnlyIn(Dist.CLIENT)
+            public void openGui(Level level, Vec3 pos, ItemStack stack) {
+                if (stack.getItem() instanceof ArcanemiconItem item) {
+                    item.openGui(level, pos, stack);
+                }
+            }
+        });
     }
 }

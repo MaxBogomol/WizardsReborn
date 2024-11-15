@@ -3,7 +3,6 @@ package mod.maxbogomol.wizards_reborn.client.arcanemicon;
 import com.mojang.blaze3d.platform.InputConstants;
 import mod.maxbogomol.wizards_reborn.WizardsReborn;
 import mod.maxbogomol.wizards_reborn.client.arcanemicon.index.ChapterHistoryEntry;
-import mod.maxbogomol.wizards_reborn.common.block.hovering_tome_stand.HoveringTomeStandBlockEntity;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.screens.Screen;
@@ -33,7 +32,8 @@ public class ArcanemiconGui extends Screen {
     public static List<ChapterHistoryEntry> historyEntries = new ArrayList<>();
     public static int currentHistory = 1;
 
-    public static BlockPos blockPos;
+    public BlockPos blockPos = BlockPos.ZERO;
+    public boolean isBLock = false;
 
     public ArcanemiconGui() {
         super(Component.translatable("gui.wizards_reborn.arcanemicon.title"));
@@ -50,7 +50,6 @@ public class ArcanemiconGui extends Screen {
         for (Category category : ArcanemiconChapters.additionalCategories) {
             category.reset();
         }
-        blockPos = null;
     }
 
     public void changeChapter(Chapter next) {
@@ -75,14 +74,14 @@ public class ArcanemiconGui extends Screen {
         if (left != null) left.tick(this);
         if (right != null) right.tick(this);
 
-        if (blockPos != null && minecraft != null) {
+        if (isBLock && minecraft != null) {
             Player player = minecraft.player;
             if (player != null) {
                 float distance = (float) Math.sqrt(Math.pow(player.getX() - blockPos.getX(), 2) + Math.pow(player.getY() + player.getEyeHeight() - blockPos.getY(), 2) + Math.pow(player.getZ() - blockPos.getZ(), 2));
                 if (distance - 1.5F > player.getAttributeValue(ForgeMod.BLOCK_REACH.get())) {
                     minecraft.player.closeContainer();
                 }
-                if (!(minecraft.level.getBlockEntity(blockPos) instanceof HoveringTomeStandBlockEntity)) {
+                if (minecraft.level.getBlockState(blockPos).isAir()) {
                     minecraft.player.closeContainer();
                 }
             }

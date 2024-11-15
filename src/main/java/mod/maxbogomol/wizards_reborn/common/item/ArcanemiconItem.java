@@ -4,9 +4,6 @@ import mod.maxbogomol.fluffy_fur.client.event.ClientTickHandler;
 import mod.maxbogomol.fluffy_fur.util.ColorUtil;
 import mod.maxbogomol.wizards_reborn.WizardsReborn;
 import mod.maxbogomol.wizards_reborn.client.arcanemicon.ArcanemiconGui;
-import mod.maxbogomol.wizards_reborn.common.block.arcane_pedestal.ArcanePedestalBlock;
-import mod.maxbogomol.wizards_reborn.common.block.arcane_pedestal.ArcanePedestalBlockEntity;
-import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornSounds;
 import net.minecraft.client.Minecraft;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.chat.Component;
@@ -17,15 +14,13 @@ import net.minecraft.sounds.SoundSource;
 import net.minecraft.stats.Stats;
 import net.minecraft.util.Mth;
 import net.minecraft.world.InteractionHand;
-import net.minecraft.world.InteractionResult;
 import net.minecraft.world.InteractionResultHolder;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
-import net.minecraft.world.item.context.UseOnContext;
 import net.minecraft.world.level.Level;
-import net.minecraft.world.level.block.Block;
+import net.minecraft.world.phys.Vec3;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 
@@ -40,45 +35,30 @@ public class ArcanemiconItem extends Item {
     }
 
     @Override
-    public InteractionResult onItemUseFirst(ItemStack stack, UseOnContext context) {
-        Player player = context.getPlayer();
-        Level level = context.getLevel();
-        BlockPos blockpos = context.getClickedPos();
-
-        if (player.isShiftKeyDown()) {
-            Block block = ArcanePedestalBlock.blocksList.get(level.getBlockState(blockpos).getBlock());
-            if (block != null) {
-                if (level.getBlockEntity(blockpos) instanceof ArcanePedestalBlockEntity pedestal) {
-                    if (pedestal.getItemHandler().getItem(0).isEmpty()) {
-                        level.setBlockAndUpdate(blockpos, block.defaultBlockState());
-                        player.getInventory().removeItem(player.getItemInHand(context.getHand()));
-                        level.playSound(null, blockpos, WizardsRebornSounds.PEDESTAL_INSERT.get(), SoundSource.BLOCKS, 1.0f, 1.0f);
-                        level.playSound(null, blockpos, SoundEvents.BOOK_PAGE_TURN, SoundSource.BLOCKS, 1.0f, 1.0f);
-                        return InteractionResult.SUCCESS;
-                    }
-                }
-            }
-        }
-
-        return InteractionResult.PASS;
-    }
-
-    @Override
     public InteractionResultHolder<ItemStack> use(Level level, Player player, InteractionHand hand) {
         ItemStack stack = player.getItemInHand(hand);
         player.awardStat(Stats.ITEM_USED.get(this));
 
-        if (level.isClientSide) {
-            openGui();
+        if (level.isClientSide()) {
+            openGui(level, stack);
         }
 
         return InteractionResultHolder.success(stack);
     }
 
     @OnlyIn(Dist.CLIENT)
-    public void openGui() {
+    public void openGui(Level level, ItemStack stack) {
         Minecraft.getInstance().player.playNotifySound(SoundEvents.BOOK_PAGE_TURN, SoundSource.NEUTRAL, 1.0f, 1.0f);
         Minecraft.getInstance().setScreen(new ArcanemiconGui());
+    }
+
+    @OnlyIn(Dist.CLIENT)
+    public void openGui(Level level, Vec3 pos, ItemStack stack) {
+        Minecraft.getInstance().player.playNotifySound(SoundEvents.BOOK_PAGE_TURN, SoundSource.NEUTRAL, 1.0f, 1.0f);
+        ArcanemiconGui gui = new ArcanemiconGui();
+        gui.blockPos = BlockPos.containing(pos);
+        gui.isBLock = true;
+        Minecraft.getInstance().setScreen(gui);
     }
 
     @Override
