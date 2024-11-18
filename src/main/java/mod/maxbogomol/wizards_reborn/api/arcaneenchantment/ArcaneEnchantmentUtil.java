@@ -217,7 +217,6 @@ public class ArcaneEnchantmentUtil {
     }
 
     public static int damageItem(ItemStack stack, int amount, LivingEntity entity) {
-        amount = LifeMendingArcaneEnchantment.damageItem(stack, amount, entity);
         return WissenMendingArcaneEnchantment.damageItem(stack, amount, entity);
     }
 

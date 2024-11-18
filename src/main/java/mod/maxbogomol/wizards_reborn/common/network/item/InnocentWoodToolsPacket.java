@@ -6,7 +6,6 @@ import mod.maxbogomol.fluffy_fur.client.particle.data.GenericParticleData;
 import mod.maxbogomol.fluffy_fur.common.network.PositionClientPacket;
 import mod.maxbogomol.fluffy_fur.registry.client.FluffyFurParticles;
 import mod.maxbogomol.wizards_reborn.WizardsReborn;
-import mod.maxbogomol.wizards_reborn.common.network.ArcanemiconOfferingPacket;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.Vec3;
@@ -42,10 +41,10 @@ public class InnocentWoodToolsPacket extends PositionClientPacket {
     }
 
     public static void register(SimpleChannel instance, int index) {
-        instance.registerMessage(index, ArcanemiconOfferingPacket.class, ArcanemiconOfferingPacket::encode, ArcanemiconOfferingPacket::decode, ArcanemiconOfferingPacket::handle);
+        instance.registerMessage(index, InnocentWoodToolsPacket.class, InnocentWoodToolsPacket::encode, InnocentWoodToolsPacket::decode, InnocentWoodToolsPacket::handle);
     }
 
-    public static ArcanemiconOfferingPacket decode(FriendlyByteBuf buf) {
-        return decode(ArcanemiconOfferingPacket::new, buf);
+    public static InnocentWoodToolsPacket decode(FriendlyByteBuf buf) {
+        return decode(InnocentWoodToolsPacket::new, buf);
     }
 }

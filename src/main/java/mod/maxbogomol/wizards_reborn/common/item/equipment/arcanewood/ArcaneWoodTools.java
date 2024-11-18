@@ -31,7 +31,7 @@ public class ArcaneWoodTools {
         return tick;
     }
 
-    public int getLifeRoots(ItemStack stack) {
+    public static int getLifeRoots(ItemStack stack) {
         return ArcaneEnchantmentUtil.getArcaneEnchantment(stack, WizardsRebornArcaneEnchantments.LIFE_ROOTS);
     }
 
@@ -40,7 +40,7 @@ public class ArcaneWoodTools {
     }
 
     public void inventoryTick(ItemStack stack, Level level, Entity entity, int slot, boolean isSelected) {
-        if (!level.isClientSide) {
+        if (!level.isClientSide()) {
             if (entity.tickCount % getRepairTick(stack, level, entity) == 0 && stack.getDamageValue() > 0) {
                 stack.setDamageValue(stack.getDamageValue() - 1);
                 level.playSound(null, entity.getX(), entity.getY(), entity.getZ(), getRepairSound(stack, level, entity), SoundSource.PLAYERS, 0.05f, 2f);
@@ -51,19 +51,17 @@ public class ArcaneWoodTools {
     public InteractionResultHolder<ItemStack> use(Level level, Player player, InteractionHand hand) {
         ItemStack stack = player.getItemInHand(hand);
 
-        if (!level.isClientSide) {
-            if (stack.getDamageValue() > 0) {
-                ItemStack offStack = player.getItemInHand(InteractionHand.MAIN_HAND);
-                if (hand == InteractionHand.MAIN_HAND) {
-                    offStack = player.getItemInHand(InteractionHand.OFF_HAND);
-                }
+        if (stack.getDamageValue() > 0) {
+            ItemStack offStack = player.getItemInHand(InteractionHand.MAIN_HAND);
+            if (hand == InteractionHand.MAIN_HAND) {
+                offStack = player.getItemInHand(InteractionHand.OFF_HAND);
+            }
 
-                if (offStack.getItem().equals(repairItem)) {
-                    offStack.shrink(1);
-                    stack.setDamageValue(0);
-                    level.playSound(null, player.getX(), player.getY(), player.getZ(), getRepairSound(stack, level, player), SoundSource.PLAYERS, 1.0f, 1.5f);
-                    return InteractionResultHolder.success(stack);
-                }
+            if (offStack.getItem().equals(repairItem)) {
+                if (!player.isCreative()) offStack.shrink(1);
+                stack.setDamageValue(0);
+                level.playSound(null, player.getX(), player.getY(), player.getZ(), getRepairSound(stack, level, player), SoundSource.PLAYERS, 1.0f, 1.5f);
+                return InteractionResultHolder.success(stack);
             }
         }
 

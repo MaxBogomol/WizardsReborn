@@ -15,7 +15,7 @@ public class CrystalSoundInstance extends BlockEntitySoundInstance<CrystalBlockE
 
     @Override
     public void tick() {
-        if (blockEntity.getLight() <= 0 || !blockEntity.isToBlock || !blockEntity.startRitual) {
+        if (blockEntity.getLight() <= 0 || (!blockEntity.isToBlock && !blockEntity.startRitual)) {
             stop();
         }
         super.tick();

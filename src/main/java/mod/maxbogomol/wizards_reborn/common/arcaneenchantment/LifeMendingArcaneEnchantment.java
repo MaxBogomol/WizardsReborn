@@ -8,7 +8,6 @@ import mod.maxbogomol.wizards_reborn.api.arcaneenchantment.IArcaneItem;
 import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornArcaneEnchantments;
 import mod.maxbogomol.wizards_reborn.registry.common.damage.WizardsRebornDamageTypes;
 import net.minecraft.world.entity.Entity;
-import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
@@ -46,43 +45,18 @@ public class LifeMendingArcaneEnchantment extends ArcaneEnchantment {
                 int enchantmentLevel = ArcaneEnchantmentUtil.getArcaneEnchantment(stack, WizardsRebornArcaneEnchantments.LIFE_MENDING);
 
                 if (enchantmentLevel > 0 && stack.getDamageValue() > 0) {
-                    int tick = 100 - ((enchantmentLevel - 1) * 50);
-                    if (enchantmentLevel >= 3) {
-                        tick = 20;
-                    }
+                    int tick = 100;
                     if (entity.tickCount % tick == 0) {
-                        if (player.getHealth() > 0.25f) {
-                            player.setHealth(player.getHealth() - 0.25f);
+                        if (player.getHealth() > 1f) {
+                            player.setHealth(player.getHealth() - 1f);
                         } else {
                             player.invulnerableTime = 0;
                             player.hurt(DamageHandler.create(player.level(), WizardsRebornDamageTypes.RITUAL, player), 100);
                         }
-                        stack.setDamageValue(stack.getDamageValue() - 1);
+                        stack.setDamageValue(stack.getDamageValue() - (3 * enchantmentLevel));
                     }
                 }
             }
         }
-    }
-
-    public static int damageItem(ItemStack stack, int amount, LivingEntity entity) {
-        if (!entity.level().isClientSide()) {
-            if (amount > 0) {
-                if (entity instanceof Player player) {
-                    int enchantmentLevel = ArcaneEnchantmentUtil.getArcaneEnchantment(stack, WizardsRebornArcaneEnchantments.LIFE_MENDING);
-
-                    if (enchantmentLevel >= 3) {
-                        if (player.getHealth() > 0.25f) {
-                            player.setHealth(player.getHealth() - 0.25f);
-                        } else {
-                            player.invulnerableTime = 0;
-                            player.hurt(DamageHandler.create(player.level(), WizardsRebornDamageTypes.RITUAL, player), 100);
-                        }
-                        amount--;
-                    }
-                }
-            }
-        }
-
-        return amount;
     }
 }

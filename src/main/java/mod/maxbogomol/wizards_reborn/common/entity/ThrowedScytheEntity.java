@@ -66,16 +66,16 @@ public class ThrowedScytheEntity extends ThrowableItemProjectile {
     public Map<UUID, Integer> damagedEntities = new HashMap<>();
 
     public ThrowedScytheEntity(EntityType<?> type, Level level) {
-        super(WizardsRebornEntities.THROWED_SCYTHE_PROJECTILE.get(), level);
+        super(WizardsRebornEntities.THROWED_SCYTHE.get(), level);
         noPhysics = false;
     }
 
     public ThrowedScytheEntity(Level level) {
-        super(WizardsRebornEntities.THROWED_SCYTHE_PROJECTILE.get(), level);
+        super(WizardsRebornEntities.THROWED_SCYTHE.get(), level);
     }
 
     public ThrowedScytheEntity(Level level, double x, double y, double z) {
-        super(WizardsRebornEntities.THROWED_SCYTHE_PROJECTILE.get(), x, y, z, level);
+        super(WizardsRebornEntities.THROWED_SCYTHE.get(), x, y, z, level);
     }
 
     public void setData(Entity owner, float baseDamage, float magicDamage, int slot, boolean isRight) {

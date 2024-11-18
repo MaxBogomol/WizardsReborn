@@ -230,7 +230,7 @@ public class ArcaneWandItem extends Item implements IWissenItem, ICustomAnimatio
         if (!slotChanged) {
             return false;
         }
-        return super.shouldCauseReequipAnimation(oldStack, newStack, slotChanged);
+        return super.shouldCauseReequipAnimation(oldStack, newStack, true);
     }
 
     @Override

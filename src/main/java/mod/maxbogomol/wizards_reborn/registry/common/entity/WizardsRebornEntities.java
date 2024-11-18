@@ -4,14 +4,8 @@ import mod.maxbogomol.fluffy_fur.client.render.entity.CustomBoatRenderer;
 import mod.maxbogomol.fluffy_fur.common.entity.CustomBoatEntity;
 import mod.maxbogomol.fluffy_fur.common.entity.CustomChestBoatEntity;
 import mod.maxbogomol.wizards_reborn.WizardsReborn;
-import mod.maxbogomol.wizards_reborn.client.render.entity.SniffaloRenderer;
-import mod.maxbogomol.wizards_reborn.client.render.entity.SpellRenderer;
-import mod.maxbogomol.wizards_reborn.client.render.entity.SplitArrowRenderer;
-import mod.maxbogomol.wizards_reborn.client.render.entity.ThrowedScytheRenderer;
-import mod.maxbogomol.wizards_reborn.common.entity.SniffaloEntity;
-import mod.maxbogomol.wizards_reborn.common.entity.SpellEntity;
-import mod.maxbogomol.wizards_reborn.common.entity.SplitArrowEntity;
-import mod.maxbogomol.wizards_reborn.common.entity.ThrowedScytheEntity;
+import mod.maxbogomol.wizards_reborn.client.render.entity.*;
+import mod.maxbogomol.wizards_reborn.common.entity.*;
 import mod.maxbogomol.wizards_reborn.registry.common.item.WizardsRebornItems;
 import net.minecraft.client.renderer.entity.EntityRenderers;
 import net.minecraft.resources.ResourceLocation;
@@ -23,6 +17,7 @@ import net.minecraftforge.event.entity.EntityAttributeCreationEvent;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
+import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
@@ -38,8 +33,10 @@ public class WizardsRebornEntities {
     public static final RegistryObject<EntityType<CustomChestBoatEntity>> CORK_BAMBOO_CHEST_RAFT = ENTITIES.register("cork_bamboo_chest_raft", () -> EntityType.Builder.<CustomChestBoatEntity>of((t, l) -> (new CustomChestBoatEntity(t, l, WizardsRebornItems.CORK_BAMBOO_CHEST_RAFT, true)), MobCategory.MISC).sized(1.375f, 0.5625f).build(new ResourceLocation(WizardsReborn.MOD_ID, "cork_bamboo_chest_boat").toString()));
 
     public static final RegistryObject<EntityType<SpellEntity>> SPELL = ENTITIES.register("spell", () -> EntityType.Builder.<SpellEntity>of(SpellEntity::new, MobCategory.MISC).sized(0.4f, 0.4f).build(new ResourceLocation(WizardsReborn.MOD_ID, "spell_projectile").toString()));
-    public static final RegistryObject<EntityType<ThrowedScytheEntity>> THROWED_SCYTHE_PROJECTILE = ENTITIES.register("throwed_scythe", () -> EntityType.Builder.<ThrowedScytheEntity>of(ThrowedScytheEntity::new, MobCategory.MISC).sized(1.75f, 0.2f).build(new ResourceLocation(WizardsReborn.MOD_ID, "throwed_scythe").toString()));
-    public static final RegistryObject<EntityType<SplitArrowEntity>> SPLIT_ARROW_PROJECTILE = ENTITIES.register("split_arrow", () -> EntityType.Builder.<SplitArrowEntity>of(SplitArrowEntity::new, MobCategory.MISC).sized(0.2f, 0.2f).build(new ResourceLocation(WizardsReborn.MOD_ID, "split_arrow").toString()));
+    public static final RegistryObject<EntityType<ThrowedScytheEntity>> THROWED_SCYTHE = ENTITIES.register("throwed_scythe", () -> EntityType.Builder.<ThrowedScytheEntity>of(ThrowedScytheEntity::new, MobCategory.MISC).sized(1.75f, 0.2f).build(new ResourceLocation(WizardsReborn.MOD_ID, "throwed_scythe").toString()));
+    public static final RegistryObject<EntityType<SplitArrowEntity>> SPLIT_ARROW = ENTITIES.register("split_arrow", () -> EntityType.Builder.<SplitArrowEntity>of(SplitArrowEntity::new, MobCategory.MISC).sized(0.2f, 0.2f).build(new ResourceLocation(WizardsReborn.MOD_ID, "split_arrow").toString()));
+
+    public static final RegistryObject<EntityType<InnocentSparkEntity>> INNOCENT_SPARK = ENTITIES.register("innocent_spark", () -> EntityType.Builder.<InnocentSparkEntity>of(InnocentSparkEntity::new, MobCategory.MISC).sized(0.4f, 0.4f).build(new ResourceLocation(WizardsReborn.MOD_ID, "innocent_spark").toString()));
 
     public static final RegistryObject<EntityType<SniffaloEntity>> SNIFFALO = ENTITIES.register("sniffalo", () -> EntityType.Builder.<SniffaloEntity>of(SniffaloEntity::new, MobCategory.CREATURE).sized(1.9F, 1.75F).clientTrackingRange(10).build(new ResourceLocation(WizardsReborn.MOD_ID, "sniffalo").toString()));
 
@@ -49,6 +46,12 @@ public class WizardsRebornEntities {
 
     @Mod.EventBusSubscriber(modid = WizardsReborn.MOD_ID, bus = Mod.EventBusSubscriber.Bus.MOD)
     public static class RegistryEvents {
+        @SubscribeEvent
+        public static void registerEntities(FMLClientSetupEvent event) {
+            InnocentSparkEntity.addType(new InnocentSparkEntity.SwordSparkType());
+            InnocentSparkEntity.addType(new InnocentSparkEntity.PickaxeSparkType());
+        }
+
         @SubscribeEvent
         public static void registerAttributes(EntityAttributeCreationEvent event) {
             event.put(SNIFFALO.get(), SniffaloEntity.createAttributes().build());
@@ -66,8 +69,9 @@ public class WizardsRebornEntities {
             EntityRenderers.register(CORK_BAMBOO_RAFT.get(), m -> new CustomBoatRenderer(m, WizardsReborn.MOD_ID, "cork_bamboo", false, true));
             EntityRenderers.register(CORK_BAMBOO_CHEST_RAFT.get(), m -> new CustomBoatRenderer(m, WizardsReborn.MOD_ID, "cork_bamboo", true, true));
             EntityRenderers.register(SPELL.get(), SpellRenderer::new);
-            EntityRenderers.register(THROWED_SCYTHE_PROJECTILE.get(), ThrowedScytheRenderer::new);
-            EntityRenderers.register(SPLIT_ARROW_PROJECTILE.get(), SplitArrowRenderer::new);
+            EntityRenderers.register(THROWED_SCYTHE.get(), ThrowedScytheRenderer::new);
+            EntityRenderers.register(SPLIT_ARROW.get(), SplitArrowRenderer::new);
+            EntityRenderers.register(INNOCENT_SPARK.get(), InnocentSparkRenderer::new);
             EntityRenderers.register(SNIFFALO.get(), SniffaloRenderer::new);
         }
     }

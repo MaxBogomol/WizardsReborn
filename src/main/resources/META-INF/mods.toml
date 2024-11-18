@@ -8,18 +8,8 @@ license="GPL-2.0"
     updateJSONURL = "https://raw.githubusercontent.com/MaxBogomol/WizardsReborn/refs/heads/master/update.json"
     displayName="Wizard's Reborn"
     logoFile="wizards_reborn.png"
-    authors='''
-    MaxBogomol - Developer
-    FoxPlane and iDark - Ukrainian localization
-    Kekqupap - Belarusian localization
-    ishi_sama - French localization
-    FalAut - Simplified Chinese localization
-    OnixTheCat - Deer
-    Onjerlay - OST
-    '''
-    description='''
-    Adds magical things
-    '''
+    authors="MaxBogomol"
+    description="Adds magical things"
 
 [[dependencies.wizards_reborn]]
     modId="forge"

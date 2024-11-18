@@ -1,13 +1,13 @@
 package mod.maxbogomol.wizards_reborn.common.item.equipment.arcane;
 
 import mod.maxbogomol.fluffy_fur.common.itemskin.ItemSkin;
+import mod.maxbogomol.wizards_reborn.WizardsReborn;
 import mod.maxbogomol.wizards_reborn.api.arcaneenchantment.ArcaneEnchantmentType;
 import mod.maxbogomol.wizards_reborn.api.arcaneenchantment.ArcaneEnchantmentTypes;
 import mod.maxbogomol.wizards_reborn.api.arcaneenchantment.ArcaneEnchantmentUtil;
 import mod.maxbogomol.wizards_reborn.api.arcaneenchantment.IArcaneItem;
 import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornAttributes;
 import net.minecraft.ChatFormatting;
-import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.client.player.AbstractClientPlayer;
 import net.minecraft.network.chat.Component;
@@ -97,15 +97,17 @@ public class ArcaneArmorItem extends ArmorItem implements IArcaneItem {
         if (skin != null) list.add(skin.getSkinComponent());
 
         if (hasArmorSet()) {
-            Player player = Minecraft.getInstance().player;
-            list.add(Component.empty());
-            list.add(Component.literal("[").append(getArmorSetName()).append(Component.literal("]")).withStyle(hasArmorSetPlayer(player) ? getArmorSetColor() : ChatFormatting.GRAY));
+            Player player = WizardsReborn.proxy.getPlayer();
+            if (player != null) {
+                list.add(Component.empty());
+                list.add(Component.literal("[").append(getArmorSetName()).append(Component.literal("]")).withStyle(hasArmorSetPlayer(player) ? getArmorSetColor() : ChatFormatting.GRAY));
 
-            if (Screen.hasShiftDown()) {
-                list.add(getArmorSetItemComponent(EquipmentSlot.HEAD, player));
-                list.add(getArmorSetItemComponent(EquipmentSlot.CHEST, player));
-                list.add(getArmorSetItemComponent(EquipmentSlot.LEGS, player));
-                list.add(getArmorSetItemComponent(EquipmentSlot.FEET, player));
+                if (Screen.hasShiftDown()) {
+                    list.add(getArmorSetItemComponent(EquipmentSlot.HEAD, player));
+                    list.add(getArmorSetItemComponent(EquipmentSlot.CHEST, player));
+                    list.add(getArmorSetItemComponent(EquipmentSlot.LEGS, player));
+                    list.add(getArmorSetItemComponent(EquipmentSlot.FEET, player));
+                }
             }
         }
 

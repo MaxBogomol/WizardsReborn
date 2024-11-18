@@ -184,7 +184,7 @@ public class ProjectileSpell extends Spell {
     @Override
     @OnlyIn(Dist.CLIENT)
     public void render(SpellEntity entity, float entityYaw, float partialTicks, PoseStack poseStack, MultiBufferSource buffer, int light) {
-        Color color =  getColor();
+        Color color = getColor();
         ProjectileSpellComponent spellComponent = getSpellComponent(entity);
 
         List<TrailPoint> trail = new ArrayList<>(spellComponent.trailPointBuilder.getTrailPoints());

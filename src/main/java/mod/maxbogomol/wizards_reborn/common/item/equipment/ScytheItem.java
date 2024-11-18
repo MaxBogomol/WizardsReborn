@@ -56,9 +56,9 @@ public class ScytheItem extends SwordItem {
         InteractionHand hand = context.getHand();
         Level level = context.getLevel();
         BlockPos blockpos = context.getClickedPos();
-        InteractionResult res = onBlockUse(player, level, hand, blockpos, true);
+        InteractionResult result = onBlockUse(player, level, hand, blockpos, true);
 
-        return res;
+        return result;
     }
 
     public InteractionResult onBlockUse(Player player, Level level, InteractionHand hand, BlockPos blockPos, boolean initialCall) {
@@ -80,12 +80,12 @@ public class ScytheItem extends SwordItem {
                     }
                 }
 
-                if (!level.isClientSide) {
-                    BlockEvent.BreakEvent breakEv = new BlockEvent.BreakEvent(level, blockPos, state, player);
-                    if (MinecraftForge.EVENT_BUS.post(breakEv)) return InteractionResult.FAIL;
+                if (!level.isClientSide()) {
+                    BlockEvent.BreakEvent breakEvent = new BlockEvent.BreakEvent(level, blockPos, state, player);
+                    if (MinecraftForge.EVENT_BUS.post(breakEvent)) return InteractionResult.FAIL;
                     BlockState replantState = getReplantState(state);
-                    BlockEvent.EntityPlaceEvent placeEv = new BlockEvent.EntityPlaceEvent(BlockSnapshot.create(level.dimension(), level, blockPos), level.getBlockState(blockPos.below()), player);
-                    if (MinecraftForge.EVENT_BUS.post(placeEv)) return InteractionResult.FAIL;
+                    BlockEvent.EntityPlaceEvent placeEvent = new BlockEvent.EntityPlaceEvent(BlockSnapshot.create(level.dimension(), level, blockPos), level.getBlockState(blockPos.below()), player);
+                    if (MinecraftForge.EVENT_BUS.post(placeEvent)) return InteractionResult.FAIL;
                     level.setBlockAndUpdate(blockPos, replantState);
                     dropStacks(state, (ServerLevel) level, blockPos, player, player.getItemInHand(hand));
 

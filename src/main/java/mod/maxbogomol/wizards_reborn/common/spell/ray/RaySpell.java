@@ -297,7 +297,7 @@ public class RaySpell extends Spell {
         float offset = 1f;
         float width = 1f;
 
-       if (entity.tickCount < 3) {
+        if (entity.tickCount < 3) {
             width = (entity.tickCount + partialTicks) / 3f;
         } else {
             if (spellComponent.useTick <= 0) {
