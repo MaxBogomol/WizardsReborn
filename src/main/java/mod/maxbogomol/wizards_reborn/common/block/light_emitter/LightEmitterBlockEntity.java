@@ -211,7 +211,7 @@ public class LightEmitterBlockEntity extends ExposedBlockSimpleInventory impleme
     }
 
     public Color getColor() {
-        Color color = new Color(WizardsRebornConfig.wissenColorR(), WizardsRebornConfig.wissenColorG(), WizardsRebornConfig.wissenColorB());
+        Color color = WizardsRebornConfig.wissenColor();
 
         ArcaneLumosBlock lumos = getLumos();
         if (lumos != null) {

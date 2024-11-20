@@ -26,7 +26,7 @@ public class ArcanumItem extends Item implements IParticleItem {
     public void addParticles(Level level, ItemEntity entity) {
         if (random.nextFloat() < 0.05) {
             ParticleBuilder.create(random.nextBoolean() ? FluffyFurParticles.SQUARE : FluffyFurParticles.SPARKLE)
-                    .setColorData(ColorParticleData.create(WizardsRebornConfig.wissenColorR(), WizardsRebornConfig.wissenColorG(), WizardsRebornConfig.wissenColorB()).build())
+                    .setColorData(ColorParticleData.create(WizardsRebornConfig.wissenColor()).build())
                     .setTransparencyData(GenericParticleData.create(0.5f, 0).build())
                     .setScaleData(GenericParticleData.create(0.05f, 0.1f, 0).setEasing(Easing.QUINTIC_IN_OUT).build())
                     .setSpinData(SpinParticleData.create().randomOffset().randomSpin(0.5f).build())

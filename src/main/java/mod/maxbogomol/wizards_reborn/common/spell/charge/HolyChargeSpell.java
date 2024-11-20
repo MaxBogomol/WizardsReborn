@@ -7,6 +7,7 @@ import mod.maxbogomol.wizards_reborn.common.item.equipment.arcane.ArcaneArmorIte
 import mod.maxbogomol.wizards_reborn.common.network.WizardsRebornPacketHandler;
 import mod.maxbogomol.wizards_reborn.common.network.spell.ProjectileSpellHeartsPacket;
 import mod.maxbogomol.wizards_reborn.common.network.spell.ProjectileSpellSkullsPacket;
+import mod.maxbogomol.wizards_reborn.config.WizardsRebornConfig;
 import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornCrystals;
 import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornSpells;
 import mod.maxbogomol.wizards_reborn.registry.common.damage.WizardsRebornDamageTypes;
@@ -38,7 +39,7 @@ public class HolyChargeSpell extends ChargeSpell {
             if (target instanceof LivingEntity livingEntity) {
                 int focusLevel = CrystalUtil.getStatLevel(entity.getStats(), WizardsRebornCrystals.FOCUS);
                 float magicModifier = ArcaneArmorItem.getPlayerMagicModifier(entity.getOwner());
-                float damage = (2.5f + (focusLevel * 1.5f)) + (magicModifier * 2f);
+                float damage = (2.5f + (focusLevel * 1.5f)) + (magicModifier * 2f) + WizardsRebornConfig.SPELL_CHARGE_DAMAGE.get().floatValue() + WizardsRebornConfig.HOLY_CHARGE_DAMAGE.get().floatValue();
                 ChargeSpellComponent spellComponent = getSpellComponent(entity);
 
                 float charge = (float) (0.5f + ((spellComponent.charge / getCharge()) / 2f));

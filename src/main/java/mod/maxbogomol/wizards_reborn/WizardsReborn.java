@@ -12,7 +12,6 @@ import mod.maxbogomol.wizards_reborn.common.knowledge.Researches;
 import mod.maxbogomol.wizards_reborn.common.network.WizardsRebornPacketHandler;
 import mod.maxbogomol.wizards_reborn.config.WizardsRebornClientConfig;
 import mod.maxbogomol.wizards_reborn.config.WizardsRebornConfig;
-import mod.maxbogomol.wizards_reborn.config.WizardsRebornServerConfig;
 import mod.maxbogomol.wizards_reborn.integration.common.create.CreateIntegration;
 import mod.maxbogomol.wizards_reborn.integration.common.farmersdelight.FarmersDelightIntegration;
 import mod.maxbogomol.wizards_reborn.registry.client.WizardsRebornParticles;
@@ -81,7 +80,6 @@ public class WizardsReborn {
 
         ModLoadingContext.get().registerConfig(ModConfig.Type.CLIENT, WizardsRebornClientConfig.SPEC);
         ModLoadingContext.get().registerConfig(ModConfig.Type.COMMON, WizardsRebornConfig.SPEC);
-        ModLoadingContext.get().registerConfig(ModConfig.Type.SERVER, WizardsRebornServerConfig.SPEC);
 
         DistExecutor.unsafeCallWhenOn(Dist.CLIENT, () -> () -> {
             WizardsRebornClient.ClientOnly.clientInit();

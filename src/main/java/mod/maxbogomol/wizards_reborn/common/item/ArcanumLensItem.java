@@ -88,7 +88,7 @@ public class ArcanumLensItem extends ArcanumItem implements IGuiParticleItem {
             poseStack.mulPose(Axis.ZP.rotationDegrees(i * 2 + (ticks * 2f)));
             RenderBuilder.create().setRenderType(FluffyFurRenderTypes.ADDITIVE_TEXTURE)
                     .setUV(RenderUtil.getSprite(FluffyFur.MOD_ID, "particle/sparkle"))
-                    .setColorRaw(WizardsRebornConfig.wissenColorR(), WizardsRebornConfig.wissenColorG(), WizardsRebornConfig.wissenColorB()).setAlpha(0.2f)
+                    .setColor(WizardsRebornConfig.wissenColor()).setAlpha(0.2f)
                     .renderCenteredQuad(poseStack, 3f * offset)
                     .endBatch();
             poseStack.popPose();

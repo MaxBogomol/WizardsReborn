@@ -52,7 +52,7 @@ public class ArcanemiconOfferingPacket extends PositionClientPacket {
         ParticleBuilder circleBuilder = ParticleBuilder.create(FluffyFurParticles.TINY_CIRCLE)
                 .setRenderType(FluffyFurRenderTypes.ADDITIVE_PARTICLE_TEXTURE)
                 .setBehavior(TrailParticleBehavior.create().build())
-                .setColorData(ColorParticleData.create(WizardsRebornConfig.wissenColorR(), WizardsRebornConfig.wissenColorG(), WizardsRebornConfig.wissenColorB()).build())
+                .setColorData(ColorParticleData.create(WizardsRebornConfig.wissenColor()).build())
                 .setTransparencyData(GenericParticleData.create(0.4f, 0.4f, 0).setEasing(Easing.QUARTIC_OUT).build())
                 .setScaleData(GenericParticleData.create(0.2f, 0.4f, 0f).setEasing(Easing.ELASTIC_OUT).build())
                 .setLifetime(100)

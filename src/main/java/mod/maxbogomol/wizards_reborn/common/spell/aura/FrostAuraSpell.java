@@ -6,6 +6,7 @@ import mod.maxbogomol.wizards_reborn.common.entity.SpellEntity;
 import mod.maxbogomol.wizards_reborn.common.item.equipment.arcane.ArcaneArmorItem;
 import mod.maxbogomol.wizards_reborn.common.network.WizardsRebornPacketHandler;
 import mod.maxbogomol.wizards_reborn.common.network.spell.FrostAuraSpellBurstPacket;
+import mod.maxbogomol.wizards_reborn.config.WizardsRebornConfig;
 import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornCrystals;
 import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornSpells;
 import net.minecraft.world.damagesource.DamageSource;
@@ -36,7 +37,7 @@ public class FrostAuraSpell extends AuraSpell {
         if (entity.tickCount % 20 == 0) {
             int focusLevel = CrystalUtil.getStatLevel(entity.getStats(), WizardsRebornCrystals.FOCUS);
             float magicModifier = ArcaneArmorItem.getPlayerMagicModifier(entity.getOwner());
-            float damage = (0.75f + (focusLevel * 0.5f)) + magicModifier;
+            float damage = (0.75f + (focusLevel * 0.5f)) + magicModifier + WizardsRebornConfig.SPELL_AURA_DAMAGE.get().floatValue() + WizardsRebornConfig.FROST_AURA_DAMAGE.get().floatValue();
             for (Entity target : targets) {
                 if (target instanceof LivingEntity livingEntity) {
                     if (!target.equals(entity.getOwner())) {

@@ -437,7 +437,7 @@ public class WissenTranslatorBlockEntity extends ExposedBlockSimpleInventory imp
     }
 
     public Color getColor() {
-        Color color = new Color(WizardsRebornConfig.wissenColorR(), WizardsRebornConfig.wissenColorG(), WizardsRebornConfig.wissenColorB());
+        Color color = WizardsRebornConfig.wissenColor();
 
         if (!getItemHandler().getItem(0).isEmpty()) {
             if (getItemHandler().getItem(0).getItem() instanceof BlockItem blockItem) {

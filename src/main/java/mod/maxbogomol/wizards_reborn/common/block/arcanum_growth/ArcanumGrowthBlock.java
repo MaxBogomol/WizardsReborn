@@ -195,7 +195,7 @@ public class ArcanumGrowthBlock extends Block implements EntityBlock, SimpleWate
             if (growable.getGrowingPower() > 0) {
                 if (random.nextFloat() < 0.1f * growable.getGrowingPower()) {
                     ParticleBuilder.create(FluffyFurParticles.SPARKLE)
-                            .setColorData(ColorParticleData.create(WizardsRebornConfig.wissenColorR(), WizardsRebornConfig.wissenColorG(), WizardsRebornConfig.wissenColorB()).build())
+                            .setColorData(ColorParticleData.create(WizardsRebornConfig.wissenColor()).build())
                             .setTransparencyData(GenericParticleData.create(0.5f, 0).build())
                             .setScaleData(GenericParticleData.create(0, 0.1f, 0).setEasing(Easing.SINE_IN_OUT).build())
                             .setSpinData(SpinParticleData.create().randomOffset().randomSpin(0.5f).build())

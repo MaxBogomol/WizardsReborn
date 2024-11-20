@@ -39,7 +39,7 @@ public class WissenDustBurstPacket extends ThreePositionClientPacket {
     public void execute(Supplier<NetworkEvent.Context> context) {
         Level level = WizardsReborn.proxy.getLevel();
         ParticleBuilder.create(FluffyFurParticles.WISP)
-                .setColorData(ColorParticleData.create(WizardsRebornConfig.wissenColorR(), WizardsRebornConfig.wissenColorG(), WizardsRebornConfig.wissenColorB()).build())
+                .setColorData(ColorParticleData.create(WizardsRebornConfig.wissenColor()).build())
                 .setTransparencyData(GenericParticleData.create(0.125f, 0).build())
                 .setScaleData(GenericParticleData.create(0.2f, 0).build())
                 .setLifetime(20)
@@ -48,7 +48,7 @@ public class WissenDustBurstPacket extends ThreePositionClientPacket {
                 .randomOffset(0.15f)
                 .repeat(level, x2, y2, z2, 20);
         ParticleBuilder.create(FluffyFurParticles.SPARKLE)
-                .setColorData(ColorParticleData.create(WizardsRebornConfig.wissenColorR(), WizardsRebornConfig.wissenColorG(), WizardsRebornConfig.wissenColorB()).build())
+                .setColorData(ColorParticleData.create(WizardsRebornConfig.wissenColor()).build())
                 .setTransparencyData(GenericParticleData.create(0.125f, 0).build())
                 .setScaleData(GenericParticleData.create(0.1f, 0.2f, 0).setEasing(Easing.QUINTIC_IN_OUT).build())
                 .setSpinData(SpinParticleData.create().randomOffset().randomSpin(0.5f).build())
@@ -58,7 +58,7 @@ public class WissenDustBurstPacket extends ThreePositionClientPacket {
                 .randomOffset(0.15f)
                 .repeat(level, x2, y2, z2, 20);
         ParticleBuilder.create(FluffyFurParticles.SPARKLE)
-                .setColorData(ColorParticleData.create(WizardsRebornConfig.wissenColorR(), WizardsRebornConfig.wissenColorG(), WizardsRebornConfig.wissenColorB()).build())
+                .setColorData(ColorParticleData.create(WizardsRebornConfig.wissenColor()).build())
                 .setTransparencyData(GenericParticleData.create(0.25f, 0).build())
                 .setScaleData(GenericParticleData.create(0.2f, 0.3f, 0).setEasing(Easing.QUINTIC_IN_OUT).build())
                 .setSpinData(SpinParticleData.create().randomOffset().randomSpin(0.5f).build())
@@ -67,7 +67,7 @@ public class WissenDustBurstPacket extends ThreePositionClientPacket {
                 .flatRandomOffset(0.625f, 0.625f, 0.625f)
                 .repeat(level, x1 + 0.5f, y1 + 0.5f, z1 + 0.5f, 10);
         ParticleBuilder.create(FluffyFurParticles.SQUARE)
-                .setColorData(ColorParticleData.create(WizardsRebornConfig.wissenColorR(), WizardsRebornConfig.wissenColorG(), WizardsRebornConfig.wissenColorB()).build())
+                .setColorData(ColorParticleData.create(WizardsRebornConfig.wissenColor()).build())
                 .setTransparencyData(GenericParticleData.create(0.25f, 0).build())
                 .setScaleData(GenericParticleData.create(0.05f, 0.1f, 0).setEasing(Easing.QUINTIC_IN_OUT).build())
                 .setSpinData(SpinParticleData.create().randomOffset().randomSpin(0.5f).build())

@@ -8,6 +8,7 @@ import mod.maxbogomol.wizards_reborn.common.entity.SpellEntity;
 import mod.maxbogomol.wizards_reborn.common.item.equipment.arcane.ArcaneArmorItem;
 import mod.maxbogomol.wizards_reborn.common.network.WizardsRebornPacketHandler;
 import mod.maxbogomol.wizards_reborn.common.network.spell.FrostRaySpellPacket;
+import mod.maxbogomol.wizards_reborn.config.WizardsRebornConfig;
 import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornCrystals;
 import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornSpells;
 import net.minecraft.core.BlockPos;
@@ -48,7 +49,7 @@ public class FrostRaySpell extends RaySpell {
                     entity.getSpellContext().removeWissen(this);
                     int focusLevel = CrystalUtil.getStatLevel(entity.getStats(), WizardsRebornCrystals.FOCUS);
                     float magicModifier = ArcaneArmorItem.getPlayerMagicModifier(entity.getOwner());
-                    float damage = (1.5f + (focusLevel * 0.5f)) + magicModifier;
+                    float damage = (1.5f + (focusLevel * 0.5f)) + magicModifier + WizardsRebornConfig.SPELL_RAY_DAMAGE.get().floatValue() + WizardsRebornConfig.FROST_RAY_DAMAGE.get().floatValue();
 
                     target.clearFire();
                     int frost = target.getTicksFrozen() + 75;

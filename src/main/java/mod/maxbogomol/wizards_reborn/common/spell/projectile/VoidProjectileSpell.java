@@ -4,6 +4,7 @@ import mod.maxbogomol.fluffy_fur.common.raycast.RayHitResult;
 import mod.maxbogomol.wizards_reborn.api.crystal.CrystalUtil;
 import mod.maxbogomol.wizards_reborn.common.entity.SpellEntity;
 import mod.maxbogomol.wizards_reborn.common.item.equipment.arcane.ArcaneArmorItem;
+import mod.maxbogomol.wizards_reborn.config.WizardsRebornConfig;
 import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornCrystals;
 import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornSpells;
 import mod.maxbogomol.wizards_reborn.registry.common.damage.WizardsRebornDamageTypes;
@@ -32,7 +33,7 @@ public class VoidProjectileSpell extends ProjectileSpell {
         if (!level.isClientSide()) {
             int focusLevel = CrystalUtil.getStatLevel(entity.getStats(), WizardsRebornCrystals.FOCUS);
             float magicModifier = ArcaneArmorItem.getPlayerMagicModifier(entity.getOwner());
-            float damage = (5.0f + (focusLevel * 0.5f)) + magicModifier;
+            float damage = (5.0f + (focusLevel * 0.5f)) + magicModifier + WizardsRebornConfig.SPELL_PROJECTILE_DAMAGE.get().floatValue() + WizardsRebornConfig.VOID_PROJECTILE_DAMAGE.get().floatValue();
             DamageSource damageSource = getDamage(WizardsRebornDamageTypes.ARCANE_MAGIC, entity, entity.getOwner());
             target.hurt(damageSource, damage);
         }

@@ -23,7 +23,7 @@ public class ArcanumGrowthRenderer implements BlockEntityRenderer<ArcanumGrowthB
         random.setSeed(blockEntity.getBlockPos().asLong());
 
         if (blockEntity.getLevel().getBlockState(blockEntity.getBlockPos()).getBlock() instanceof ArcanumGrowthBlock growth) {
-            Color color = new Color(WizardsRebornConfig.wissenColorR(), WizardsRebornConfig.wissenColorG(), WizardsRebornConfig.wissenColorB());
+            Color color = WizardsRebornConfig.wissenColor();
             RenderBuilder builder = RenderBuilder.create().setRenderType(FluffyFurRenderTypes.ADDITIVE)
                     .setColor(color).setAlpha(0.8f).setSided(false, true);
 

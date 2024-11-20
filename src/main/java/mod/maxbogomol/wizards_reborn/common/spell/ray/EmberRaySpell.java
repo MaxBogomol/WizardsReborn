@@ -6,6 +6,7 @@ import mod.maxbogomol.fluffy_fur.common.raycast.RayHitResult;
 import mod.maxbogomol.wizards_reborn.api.crystal.CrystalUtil;
 import mod.maxbogomol.wizards_reborn.common.entity.SpellEntity;
 import mod.maxbogomol.wizards_reborn.common.item.equipment.arcane.ArcaneArmorItem;
+import mod.maxbogomol.wizards_reborn.config.WizardsRebornConfig;
 import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornCrystals;
 import mod.maxbogomol.wizards_reborn.registry.common.damage.WizardsRebornDamageTypes;
 import net.minecraft.world.damagesource.DamageSource;
@@ -54,7 +55,7 @@ public class EmberRaySpell extends FireRaySpell {
             boolean remove = false;
             int focusLevel = CrystalUtil.getStatLevel(entity.getStats(), WizardsRebornCrystals.FOCUS);
             float magicModifier = ArcaneArmorItem.getPlayerMagicModifier(entity.getOwner());
-            float damage = (1f + (focusLevel * 0.5f)) + magicModifier;
+            float damage = (1f + (focusLevel * 0.5f)) + magicModifier + WizardsRebornConfig.SPELL_RAY_DAMAGE.get().floatValue() + WizardsRebornConfig.EMBER_RAY_DAMAGE.get().floatValue();
 
             for (Entity target : RayCast.getHitEntities(entity.level(), entity.position(), hitResult.getPos(), 0.2f)) {
                 if (!target.equals(entity.getOwner()) && target instanceof LivingEntity) {

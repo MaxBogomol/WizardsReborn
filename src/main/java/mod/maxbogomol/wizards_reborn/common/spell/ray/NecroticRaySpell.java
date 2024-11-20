@@ -6,6 +6,7 @@ import mod.maxbogomol.wizards_reborn.common.entity.SpellEntity;
 import mod.maxbogomol.wizards_reborn.common.item.equipment.arcane.ArcaneArmorItem;
 import mod.maxbogomol.wizards_reborn.common.network.WizardsRebornPacketHandler;
 import mod.maxbogomol.wizards_reborn.common.network.spell.NecroticRaySpellTrailPacket;
+import mod.maxbogomol.wizards_reborn.config.WizardsRebornConfig;
 import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornCrystals;
 import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornSpells;
 import mod.maxbogomol.wizards_reborn.registry.common.damage.WizardsRebornDamageTypes;
@@ -60,7 +61,7 @@ public class NecroticRaySpell extends RaySpell {
                     entity.getSpellContext().removeWissen(this);
                     int focusLevel = CrystalUtil.getStatLevel(entity.getStats(), WizardsRebornCrystals.FOCUS);
                     float magicModifier = ArcaneArmorItem.getPlayerMagicModifier(entity.getOwner());
-                    float damage = (1f + ((focusLevel + magicModifier) * 0.5f));
+                    float damage = (1f + ((focusLevel + magicModifier) * 0.5f)) + WizardsRebornConfig.SPELL_RAY_DAMAGE.get().floatValue() + WizardsRebornConfig.NECROTIC_RAY_DAMAGE.get().floatValue();
                     DamageSource damageSource = getDamage(WizardsRebornDamageTypes.RITUAL, entity, entity.getOwner());
                     if (target.hurt(damageSource, damage)) {
                         if (entity.getOwner() instanceof LivingEntity livingEntity) {

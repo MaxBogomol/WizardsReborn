@@ -3,12 +3,12 @@ package mod.maxbogomol.wizards_reborn.common.knowledge;
 import mod.maxbogomol.fluffy_fur.util.ColorUtil;
 import mod.maxbogomol.wizards_reborn.api.knowledge.Knowledge;
 import mod.maxbogomol.wizards_reborn.api.knowledge.KnowledgeUtil;
-import mod.maxbogomol.wizards_reborn.common.network.WizardsRebornPacketHandler;
-import mod.maxbogomol.wizards_reborn.config.WizardsRebornServerConfig;
 import mod.maxbogomol.wizards_reborn.common.network.ArcanemiconOfferingPacket;
-import mod.maxbogomol.wizards_reborn.registry.common.item.WizardsRebornItems;
+import mod.maxbogomol.wizards_reborn.common.network.WizardsRebornPacketHandler;
+import mod.maxbogomol.wizards_reborn.config.WizardsRebornConfig;
 import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornKnowledges;
 import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornSounds;
+import mod.maxbogomol.wizards_reborn.registry.common.item.WizardsRebornItems;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.Style;
 import net.minecraft.server.level.ServerPlayer;
@@ -41,9 +41,9 @@ public class ArcanemiconOfferingKnowledge extends Knowledge {
     @Override
     public boolean canReceived(Player player) {
         if (!player.level().isClientSide()) {
-            if (WizardsRebornServerConfig.ARCANEMICON_OFFERING.get()) {
+            if (WizardsRebornConfig.ARCANEMICON_OFFERING.get()) {
                 if (player instanceof ServerPlayer serverPlayer) {
-                    if (serverPlayer.getStats().getValue(Stats.CUSTOM, Stats.PLAY_TIME) > WizardsRebornServerConfig.ARCANEMICON_OFFERING_TICKS.get()) {
+                    if (serverPlayer.getStats().getValue(Stats.CUSTOM, Stats.PLAY_TIME) > WizardsRebornConfig.ARCANEMICON_OFFERING_TICKS.get()) {
                         return player.getInventory().getFreeSlot() > -1;
                     }
                 }

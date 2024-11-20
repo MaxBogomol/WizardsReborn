@@ -35,7 +35,7 @@ public class ArcanumLensBurstPacket extends PositionClientPacket {
     public void execute(Supplier<NetworkEvent.Context> context) {
         Level level = WizardsReborn.proxy.getLevel();
         ParticleBuilder.create(FluffyFurParticles.WISP)
-                .setColorData(ColorParticleData.create(WizardsRebornConfig.wissenColorR(), WizardsRebornConfig.wissenColorG(), WizardsRebornConfig.wissenColorB()).build())
+                .setColorData(ColorParticleData.create(WizardsRebornConfig.wissenColor()).build())
                 .setTransparencyData(GenericParticleData.create(0.125f, 0).build())
                 .setScaleData(GenericParticleData.create(0.4f, 0).build())
                 .setLifetime(20)
@@ -45,7 +45,7 @@ public class ArcanumLensBurstPacket extends PositionClientPacket {
                 .repeat(level, x, y, z, 30);
         ParticleBuilder.create(FluffyFurParticles.DOT)
                 .setBehavior(SparkParticleBehavior.create().build())
-                .setColorData(ColorParticleData.create(WizardsRebornConfig.wissenColorR(), WizardsRebornConfig.wissenColorG(), WizardsRebornConfig.wissenColorB()).build())
+                .setColorData(ColorParticleData.create(WizardsRebornConfig.wissenColor()).build())
                 .setTransparencyData(GenericParticleData.create(0.125f, 0.25f, 0).setEasing(Easing.QUARTIC_OUT).build())
                 .setScaleData(GenericParticleData.create(0.05f, 0.1f, 0).setEasing(Easing.ELASTIC_OUT).build())
                 .setSpinData(SpinParticleData.create().randomSpin(0.5f).build())

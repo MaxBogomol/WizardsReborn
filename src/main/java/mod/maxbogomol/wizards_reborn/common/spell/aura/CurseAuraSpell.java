@@ -8,6 +8,7 @@ import mod.maxbogomol.wizards_reborn.common.network.WizardsRebornPacketHandler;
 import mod.maxbogomol.wizards_reborn.common.network.spell.AuraSpellBurstPacket;
 import mod.maxbogomol.wizards_reborn.common.network.spell.CrossSpellHeartsPacket;
 import mod.maxbogomol.wizards_reborn.common.network.spell.CrossSpellSkullsPacket;
+import mod.maxbogomol.wizards_reborn.config.WizardsRebornConfig;
 import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornCrystals;
 import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornSpells;
 import mod.maxbogomol.wizards_reborn.registry.common.damage.WizardsRebornDamageTypes;
@@ -38,7 +39,7 @@ public class CurseAuraSpell extends AuraSpell {
         if (entity.tickCount % 20 == 0) {
             int focusLevel = CrystalUtil.getStatLevel(entity.getStats(), WizardsRebornCrystals.FOCUS);
             float magicModifier = ArcaneArmorItem.getPlayerMagicModifier(entity.getOwner());
-            float damage = (0.5f + (focusLevel * 0.5f)) + magicModifier;
+            float damage = (0.5f + (focusLevel * 0.5f)) + magicModifier + WizardsRebornConfig.SPELL_AURA_DAMAGE.get().floatValue() + WizardsRebornConfig.CURSE_AURA_DAMAGE.get().floatValue();
             for (Entity target : targets) {
                 if (target instanceof LivingEntity livingEntity) {
                     boolean effect = false;

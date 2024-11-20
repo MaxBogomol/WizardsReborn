@@ -34,7 +34,7 @@ public class AltarOfDroughtSendPacket extends PositionClientPacket {
     public void execute(Supplier<NetworkEvent.Context> context) {
         Level level = WizardsReborn.proxy.getLevel();
         ParticleBuilder.create(FluffyFurParticles.WISP)
-                .setColorData(ColorParticleData.create(WizardsRebornConfig.wissenColorR(), WizardsRebornConfig.wissenColorG(), WizardsRebornConfig.wissenColorB()).build())
+                .setColorData(ColorParticleData.create(WizardsRebornConfig.wissenColor()).build())
                 .setTransparencyData(GenericParticleData.create(0.35f, 0).build())
                 .setScaleData(GenericParticleData.create(0.05f, 0).build())
                 .setLifetime(20)
@@ -43,7 +43,7 @@ public class AltarOfDroughtSendPacket extends PositionClientPacket {
         boolean square = random.nextFloat() < 0.3f;
         float i = square ? 0.5f : 1f;
         ParticleBuilder.create(square ? FluffyFurParticles.SQUARE : FluffyFurParticles.SPARKLE)
-                .setColorData(ColorParticleData.create(WizardsRebornConfig.wissenColorR(), WizardsRebornConfig.wissenColorG(), WizardsRebornConfig.wissenColorB()).build())
+                .setColorData(ColorParticleData.create(WizardsRebornConfig.wissenColor()).build())
                 .setTransparencyData(GenericParticleData.create(0.35f, 0).build())
                 .setScaleData(GenericParticleData.create(0.025f * i, 0.05f * i, 0).setEasing(Easing.QUINTIC_IN_OUT).build())
                 .setSpinData(SpinParticleData.create().randomOffset().randomSpin(0.2f).build())

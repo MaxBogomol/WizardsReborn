@@ -261,7 +261,7 @@ public class ArcaneIteratorBlockEntity extends BlockEntityBase implements Tickab
                 if (getWissen() > 0) {
                     if (random.nextFloat() < 0.5) {
                         ParticleBuilder.create(FluffyFurParticles.WISP)
-                                .setColorData(ColorParticleData.create(WizardsRebornConfig.wissenColorR(), WizardsRebornConfig.wissenColorG(), WizardsRebornConfig.wissenColorB()).build())
+                                .setColorData(ColorParticleData.create(WizardsRebornConfig.wissenColor()).build())
                                 .setTransparencyData(GenericParticleData.create(0.25f, 0).build())
                                 .setScaleData(GenericParticleData.create(0.3f * getStage(), 0).build())
                                 .setLifetime(20)
@@ -270,7 +270,7 @@ public class ArcaneIteratorBlockEntity extends BlockEntityBase implements Tickab
                     }
                     if (random.nextFloat() < 0.1) {
                         ParticleBuilder.create(random.nextBoolean() ? FluffyFurParticles.SQUARE : FluffyFurParticles.SPARKLE)
-                                .setColorData(ColorParticleData.create(WizardsRebornConfig.wissenColorR(), WizardsRebornConfig.wissenColorG(), WizardsRebornConfig.wissenColorB()).build())
+                                .setColorData(ColorParticleData.create(WizardsRebornConfig.wissenColor()).build())
                                 .setTransparencyData(GenericParticleData.create(0.25f, 0).build())
                                 .setScaleData(GenericParticleData.create(0.05f * getStage(), 0.1f * getStage(), 0).setEasing(Easing.QUINTIC_IN_OUT).build())
                                 .setSpinData(SpinParticleData.create().randomOffset().randomSpin(0.5f).build())

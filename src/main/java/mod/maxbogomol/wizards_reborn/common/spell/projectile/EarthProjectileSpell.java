@@ -4,6 +4,7 @@ import mod.maxbogomol.fluffy_fur.common.raycast.RayHitResult;
 import mod.maxbogomol.wizards_reborn.api.crystal.CrystalUtil;
 import mod.maxbogomol.wizards_reborn.common.entity.SpellEntity;
 import mod.maxbogomol.wizards_reborn.common.item.equipment.arcane.ArcaneArmorItem;
+import mod.maxbogomol.wizards_reborn.config.WizardsRebornConfig;
 import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornCrystals;
 import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornSpells;
 import net.minecraft.world.damagesource.DamageSource;
@@ -34,7 +35,7 @@ public class EarthProjectileSpell extends ProjectileSpell {
         if (!entity.level().isClientSide()) {
             int focusLevel = CrystalUtil.getStatLevel(entity.getStats(), WizardsRebornCrystals.FOCUS);
             float magicModifier = ArcaneArmorItem.getPlayerMagicModifier(entity.getOwner());
-            float damage = (4.5f + (focusLevel * 0.5f)) + magicModifier;
+            float damage = (4.5f + (focusLevel * 0.5f)) + magicModifier + WizardsRebornConfig.SPELL_PROJECTILE_DAMAGE.get().floatValue() + WizardsRebornConfig.EARTH_PROJECTILE_DAMAGE.get().floatValue();
             DamageSource damageSource = getDamage(DamageTypes.GENERIC, entity, entity.getOwner());
             target.hurt(damageSource, damage);
             if (target instanceof Player player) {

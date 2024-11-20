@@ -7,6 +7,7 @@ import mod.maxbogomol.wizards_reborn.common.item.equipment.arcane.ArcaneArmorIte
 import mod.maxbogomol.wizards_reborn.common.network.WizardsRebornPacketHandler;
 import mod.maxbogomol.wizards_reborn.common.network.spell.ProjectileSpellHeartsPacket;
 import mod.maxbogomol.wizards_reborn.common.network.spell.ProjectileSpellSkullsPacket;
+import mod.maxbogomol.wizards_reborn.config.WizardsRebornConfig;
 import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornCrystals;
 import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornSpells;
 import mod.maxbogomol.wizards_reborn.registry.common.damage.WizardsRebornDamageTypes;
@@ -38,7 +39,7 @@ public class CurseProjectileSpell extends ProjectileSpell {
             if (target instanceof LivingEntity livingEntity) {
                 int focusLevel = CrystalUtil.getStatLevel(entity.getStats(), WizardsRebornCrystals.FOCUS);
                 float magicModifier = ArcaneArmorItem.getPlayerMagicModifier(entity.getOwner());
-                float damage = (1.5f + (focusLevel * 0.5f)) + magicModifier;
+                float damage = (1.5f + (focusLevel * 0.5f)) + magicModifier + WizardsRebornConfig.SPELL_PROJECTILE_DAMAGE.get().floatValue() + WizardsRebornConfig.CURSE_PROJECTILE_DAMAGE.get().floatValue();
                 if (!livingEntity.isInvertedHealAndHarm()) {
                     DamageSource damageSource = getDamage(WizardsRebornDamageTypes.ARCANE_MAGIC, entity, entity.getOwner());
                     target.hurt(damageSource, damage);
