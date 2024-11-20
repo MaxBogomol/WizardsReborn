@@ -10,7 +10,9 @@ import mezz.jei.api.recipe.RecipeIngredientRole;
 import mezz.jei.api.recipe.RecipeType;
 import mezz.jei.api.recipe.category.IRecipeCategory;
 import mod.maxbogomol.wizards_reborn.WizardsReborn;
+import mod.maxbogomol.wizards_reborn.client.arcanemicon.ArcanemiconGui;
 import mod.maxbogomol.wizards_reborn.common.recipe.WissenAltarRecipe;
+import mod.maxbogomol.wizards_reborn.config.WizardsRebornClientConfig;
 import mod.maxbogomol.wizards_reborn.registry.common.block.WizardsRebornBlocks;
 import mod.maxbogomol.wizards_reborn.registry.common.item.WizardsRebornItems;
 import net.minecraft.client.Minecraft;
@@ -61,10 +63,13 @@ public class WissenAltarRecipeCategory implements IRecipeCategory<WissenAltarRec
 
     @Override
     public void draw(@NotNull WissenAltarRecipe recipe, @NotNull IRecipeSlotsView view, @NotNull GuiGraphics gui, double mouseX, double mouseY) {
-        Font font_renderer = Minecraft.getInstance().font;
-        String text_wissen = Integer.toString(recipe.getRecipeWissen());
-        int stringWidth = font_renderer.width(text_wissen);
+        Font font = Minecraft.getInstance().font;
+        String textWissen = Integer.toString(recipe.getRecipeWissen());
+        int stringWidth = font.width(textWissen);
 
-        gui.drawString(Minecraft.getInstance().font, text_wissen, (56 - stringWidth) / 2, 34 + font_renderer.lineHeight, 0xffffff);
+        if (WizardsRebornClientConfig.NUMERICAL_WISSEN.get()) {
+            gui.drawString(font, textWissen, (56 - stringWidth) / 2 + 1, 34 + font.lineHeight + 1, ArcanemiconGui.TEXT_SHADOW_COLOR_INT, false);
+            gui.drawString(font, textWissen, (56 - stringWidth) / 2, 34 + font.lineHeight, ArcanemiconGui.TEXT_COLOR_INT, false);
+        }
     }
 }

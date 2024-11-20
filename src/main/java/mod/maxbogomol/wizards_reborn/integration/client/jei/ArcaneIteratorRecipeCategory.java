@@ -12,7 +12,9 @@ import mezz.jei.api.recipe.category.IRecipeCategory;
 import mod.maxbogomol.wizards_reborn.WizardsReborn;
 import mod.maxbogomol.wizards_reborn.api.arcaneenchantment.ArcaneEnchantmentUtil;
 import mod.maxbogomol.wizards_reborn.api.crystalritual.CrystalRitualUtil;
+import mod.maxbogomol.wizards_reborn.client.arcanemicon.ArcanemiconGui;
 import mod.maxbogomol.wizards_reborn.common.recipe.ArcaneIteratorRecipe;
+import mod.maxbogomol.wizards_reborn.config.WizardsRebornClientConfig;
 import mod.maxbogomol.wizards_reborn.registry.common.block.WizardsRebornBlocks;
 import mod.maxbogomol.wizards_reborn.registry.common.item.WizardsRebornItems;
 import net.minecraft.client.Minecraft;
@@ -128,22 +130,25 @@ public class ArcaneIteratorRecipeCategory implements IRecipeCategory<ArcaneItera
 
     @Override
     public void draw(@NotNull ArcaneIteratorRecipe recipe, @NotNull IRecipeSlotsView view, @NotNull GuiGraphics gui, double mouseX, double mouseY) {
-        Font font_renderer = Minecraft.getInstance().font;
-        String text_wissen = Integer.toString(recipe.getRecipeWissen());
-        int stringWidth = font_renderer.width(text_wissen);
+        Font font = Minecraft.getInstance().font;
+        String textWissen = Integer.toString(recipe.getRecipeWissen());
+        int stringWidth = font.width(textWissen);
 
-        gui.drawString(Minecraft.getInstance().font, text_wissen, 120 - (stringWidth / 2), 65, 0xffffff);
+        if (WizardsRebornClientConfig.NUMERICAL_WISSEN.get()) {
+            gui.drawString(font, textWissen, 141 - stringWidth + 1, 59, ArcanemiconGui.TEXT_SHADOW_COLOR_INT, false);
+            gui.drawString(font, textWissen, 141 - stringWidth, 58, ArcanemiconGui.TEXT_COLOR_INT, false);
+        }
 
         if (recipe.getRecipeExperience() > 0) {
             gui.blit(TEXTURE, 90, 5, 144 + 9, 0, 9, 9, 256, 256);
             String stringSize = String.valueOf(recipe.getRecipeExperience());
-            gui.drawString(Minecraft.getInstance().font, stringSize, 100, 5, 0xffffff);
+            gui.drawString(font, stringSize, 100, 5, 0xffffff);
         }
 
         if (recipe.getRecipeHealth() > 0) {
             gui.blit(TEXTURE, 90, 15, 144, 0, 9, 9, 256, 256);
             String stringSize = String.valueOf(recipe.getRecipeHealth());
-            gui.drawString(Minecraft.getInstance().font, stringSize, 100, 15, 0xffffff);
+            gui.drawString(font, stringSize, 100, 15, 0xffffff);
         }
     }
 }

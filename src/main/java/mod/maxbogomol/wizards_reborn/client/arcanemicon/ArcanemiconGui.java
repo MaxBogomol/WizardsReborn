@@ -1,6 +1,7 @@
 package mod.maxbogomol.wizards_reborn.client.arcanemicon;
 
 import com.mojang.blaze3d.platform.InputConstants;
+import mod.maxbogomol.fluffy_fur.util.ColorUtil;
 import mod.maxbogomol.wizards_reborn.WizardsReborn;
 import mod.maxbogomol.wizards_reborn.client.arcanemicon.index.ChapterHistoryEntry;
 import net.minecraft.client.Minecraft;
@@ -17,6 +18,7 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.common.ForgeMod;
 import org.lwjgl.glfw.GLFW;
 
+import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -24,6 +26,10 @@ public class ArcanemiconGui extends Screen {
     public static final ResourceLocation BACKGROUND = new ResourceLocation(WizardsReborn.MOD_ID, "textures/gui/arcanemicon.png");
     public static int xSize = 312;
     public static int ySize = 180;
+    public static final Color TEXT_COLOR = new Color(56, 33, 39);
+    public static final Color TEXT_SHADOW_COLOR = new Color(220, 199, 182);
+    public static final int TEXT_COLOR_INT = ColorUtil.packColor(255, 56, 33, 39);
+    public static final int TEXT_SHADOW_COLOR_INT = ColorUtil.packColor(255, 220, 199, 182);
 
     public static Chapter currentChapter;
     public static int currentPage = 0;

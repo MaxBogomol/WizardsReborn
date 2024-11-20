@@ -12,7 +12,9 @@ import mezz.jei.api.recipe.category.IRecipeCategory;
 import mod.maxbogomol.wizards_reborn.WizardsReborn;
 import mod.maxbogomol.wizards_reborn.api.crystal.CrystalHandler;
 import mod.maxbogomol.wizards_reborn.api.crystalritual.CrystalRitualUtil;
+import mod.maxbogomol.wizards_reborn.client.arcanemicon.ArcanemiconGui;
 import mod.maxbogomol.wizards_reborn.common.recipe.CrystalInfusionRecipe;
+import mod.maxbogomol.wizards_reborn.config.WizardsRebornClientConfig;
 import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornCrystalRituals;
 import mod.maxbogomol.wizards_reborn.registry.common.item.WizardsRebornItems;
 import net.minecraft.client.Minecraft;
@@ -96,10 +98,13 @@ public class CrystalInfusionRecipeCategory implements IRecipeCategory<CrystalInf
 
     @Override
     public void draw(@NotNull CrystalInfusionRecipe recipe, @NotNull IRecipeSlotsView view, @NotNull GuiGraphics gui, double mouseX, double mouseY) {
-        Font font_renderer = Minecraft.getInstance().font;
-        String text_wissen = Integer.toString(recipe.getRecipeLight());
-        int stringWidth = font_renderer.width(text_wissen);
+        Font font = Minecraft.getInstance().font;
+        String textLight = Integer.toString(recipe.getRecipeLight());
+        int stringWidth = font.width(textLight);
 
-        gui.drawString(Minecraft.getInstance().font, text_wissen, 120 - (stringWidth / 2), 65, 0xffffff);
+        if (WizardsRebornClientConfig.SHOW_LIGHT_NAME.get()) {
+            gui.drawString(font, textLight, 141 - stringWidth + 1, 59, ArcanemiconGui.TEXT_SHADOW_COLOR_INT, false);
+            gui.drawString(font, textLight, 141 - stringWidth, 58, ArcanemiconGui.TEXT_COLOR_INT, false);
+        }
     }
 }

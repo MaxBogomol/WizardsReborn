@@ -1,6 +1,5 @@
 package mod.maxbogomol.wizards_reborn.client.arcanemicon;
 
-import mod.maxbogomol.fluffy_fur.util.ColorUtil;
 import mod.maxbogomol.wizards_reborn.registry.client.WizardsRebornKeyMappings;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Font;
@@ -32,8 +31,8 @@ public abstract class Page {
     @OnlyIn(Dist.CLIENT)
     public static void drawText(ArcanemiconGui book, GuiGraphics gui, String text, int x, int y) {
         Font font = Minecraft.getInstance().font;
-        gui.drawString(font, text, x + 1, y + 1, ColorUtil.packColor(255, 220, 199, 182), false);
-        gui.drawString(font, text, x, y, ColorUtil.packColor(255, 56, 33, 39), false);
+        gui.drawString(font, text, x + 1, y + 1, ArcanemiconGui.TEXT_SHADOW_COLOR_INT, false);
+        gui.drawString(font, text, x, y, ArcanemiconGui.TEXT_COLOR_INT, false);
     }
 
     @OnlyIn(Dist.CLIENT)
