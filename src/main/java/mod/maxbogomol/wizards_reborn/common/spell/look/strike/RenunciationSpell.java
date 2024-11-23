@@ -29,7 +29,7 @@ public class RenunciationSpell extends StrikeSpell {
     public void strikeDamage(SpellEntity entity) {
         int focusLevel = CrystalUtil.getStatLevel(entity.getStats(), WizardsRebornCrystals.FOCUS);
         float magicModifier = ArcaneArmorItem.getPlayerMagicModifier(entity.getOwner());
-        float distance = (0.75f + ((focusLevel + magicModifier) * 0.25f));
+        float distance = (1f + ((focusLevel + magicModifier) * 0.35f));
         float damage = (10 + ((focusLevel + magicModifier) * 5f));
         float heal = (20 + ((focusLevel + magicModifier) * 5f));
 

@@ -167,7 +167,7 @@ public class StrikeSpell extends BlockLookSpell {
     }
 
     public int getUseTime(SpellContext spellContext) {
-        return 100;
+        return 40;
     }
 
     public int getLifeTime(SpellEntity entity) {

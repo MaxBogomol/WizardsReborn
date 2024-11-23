@@ -1,6 +1,7 @@
 package mod.maxbogomol.wizards_reborn.registry.common.item;
 
-import mod.maxbogomol.fluffy_fur.client.event.BowHandler;
+
+import mod.maxbogomol.fluffy_fur.client.bow.BowHandler;
 import mod.maxbogomol.fluffy_fur.client.model.item.CustomModel;
 import mod.maxbogomol.fluffy_fur.client.render.item.LargeItemRenderer;
 import mod.maxbogomol.fluffy_fur.common.item.CustomBoatItem;
@@ -23,7 +24,8 @@ import mod.maxbogomol.wizards_reborn.common.item.equipment.arcane.*;
 import mod.maxbogomol.wizards_reborn.common.item.equipment.arcanewood.*;
 import mod.maxbogomol.wizards_reborn.common.item.equipment.curio.*;
 import mod.maxbogomol.wizards_reborn.common.item.equipment.innocentwood.*;
-import mod.maxbogomol.wizards_reborn.registry.common.*;
+import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornCrystals;
+import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornSounds;
 import mod.maxbogomol.wizards_reborn.registry.common.banner.WizardsRebornBannerPatternTags;
 import mod.maxbogomol.wizards_reborn.registry.common.block.WizardsRebornBlocks;
 import mod.maxbogomol.wizards_reborn.registry.common.entity.WizardsRebornEntities;

@@ -1,9 +1,9 @@
 package mod.maxbogomol.wizards_reborn;
 
 import mod.maxbogomol.fluffy_fur.FluffyFurClient;
-import mod.maxbogomol.fluffy_fur.client.event.SplashHandler;
 import mod.maxbogomol.fluffy_fur.client.gui.screen.FluffyFurMod;
 import mod.maxbogomol.fluffy_fur.client.gui.screen.FluffyFurPanorama;
+import mod.maxbogomol.fluffy_fur.client.splash.SplashHandler;
 import mod.maxbogomol.fluffy_fur.common.book.CustomBook;
 import mod.maxbogomol.fluffy_fur.common.book.CustomBookComponent;
 import mod.maxbogomol.fluffy_fur.common.book.CustomBookHandler;
