@@ -88,7 +88,7 @@ public class CrystalItem extends BlockItem implements IParticleItem, IGuiParticl
             CompoundTag nbt = stack.getOrCreateTag();
             if (nbt.contains("randomStats")) {
                 nbt.remove("randomStats");
-                CrystalUtil.createCrystalItemStats(stack, getType(), level, 6);
+                CrystalUtil.createCrystalItemStats(stack, getType(), level, getType().getRandomStats());
                 stack.setTag(nbt);
             }
         }

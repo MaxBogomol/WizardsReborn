@@ -10,13 +10,14 @@ import mod.maxbogomol.fluffy_fur.registry.client.FluffyFurParticles;
 import mod.maxbogomol.wizards_reborn.api.crystal.CrystalType;
 import mod.maxbogomol.wizards_reborn.api.crystal.CrystalUtil;
 import mod.maxbogomol.wizards_reborn.api.crystalritual.IGrowableCrystal;
+import mod.maxbogomol.wizards_reborn.common.item.CrystalItem;
+import mod.maxbogomol.wizards_reborn.common.item.FracturedCrystalItem;
 import mod.maxbogomol.wizards_reborn.common.network.WizardsRebornPacketHandler;
 import mod.maxbogomol.wizards_reborn.common.network.block.CrystalGrowthBreakPacket;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.util.RandomSource;
-import net.minecraft.world.Containers;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.BlockGetter;
@@ -37,6 +38,7 @@ import net.minecraft.world.level.block.state.properties.IntegerProperty;
 import net.minecraft.world.level.material.FluidState;
 import net.minecraft.world.level.material.Fluids;
 import net.minecraft.world.level.material.PushReaction;
+import net.minecraft.world.level.storage.loot.LootParams;
 import net.minecraft.world.phys.shapes.BooleanOp;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.Shapes;
@@ -48,6 +50,7 @@ import org.jetbrains.annotations.NotNull;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import java.awt.*;
+import java.util.List;
 import java.util.Random;
 import java.util.stream.Stream;
 
@@ -189,6 +192,20 @@ public class CrystalGrowthBlock extends Block implements EntityBlock, SimpleWate
         return 1f;
     }
 
+    @Override
+    public java.util.List<ItemStack> getDrops(BlockState state, LootParams.Builder builder) {
+        List<ItemStack> items = super.getDrops(state, builder);
+        for (ItemStack stack : items) {
+            if (stack.getItem() instanceof CrystalItem) {
+                CrystalUtil.createCrystalItemStats(stack, type, builder.getLevel(), type.getRandomStats());
+            }
+            if (stack.getItem() instanceof FracturedCrystalItem) {
+                CrystalUtil.createCrystalItemStats(stack, type, builder.getLevel(), type.getRandomStats());
+            }
+        }
+        return items;
+    }
+
     @OnlyIn(Dist.CLIENT)
     public void animateTick(BlockState state, Level level, BlockPos pos, RandomSource random) {
         if (level.getBlockEntity(pos) instanceof IGrowableCrystal growable) {
@@ -225,17 +242,6 @@ public class CrystalGrowthBlock extends Block implements EntityBlock, SimpleWate
     public void onRemove(@Nonnull BlockState state, @Nonnull Level level, @Nonnull BlockPos pos, @Nonnull BlockState newState, boolean isMoving) {
         if (state.getBlock() != newState.getBlock()) {
             WizardsRebornPacketHandler.sendToTracking(level, pos, new CrystalGrowthBreakPacket(pos, type.getColor(), 5 * (getAge(state) + 1)));
-            if (random.nextFloat() < getAge(state) * 0.05) {
-                ItemStack crystalItem = type.getFracturedCrystal();
-                CrystalUtil.createCrystalItemStats(crystalItem, type, level, 6);
-                Containers.dropItemStack(level, pos.getX(), pos.getY(), pos.getZ(), crystalItem);
-            }
-
-            if (getAge(state) == getMaxAge()) {
-                ItemStack crystalItem = type.getCrystal();
-                CrystalUtil.createCrystalItemStats(crystalItem, type, level, 6);
-                Containers.dropItemStack(level, pos.getX(), pos.getY(), pos.getZ(), crystalItem);
-            }
         }
         super.onRemove(state, level, pos, newState, isMoving);
     }

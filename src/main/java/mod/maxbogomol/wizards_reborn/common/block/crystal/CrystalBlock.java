@@ -119,7 +119,7 @@ public class CrystalBlock extends Block implements EntityBlock, SimpleWaterlogge
     }
 
     @Override
-    public java.util.List<ItemStack> getDrops(BlockState state, LootParams.Builder builder) {
+    public List<ItemStack> getDrops(BlockState state, LootParams.Builder builder) {
         List<ItemStack> items = super.getDrops(state, builder);
         BlockEntity blockEntity = builder.getOptionalParameter(LootContextParams.BLOCK_ENTITY);
         if (blockEntity instanceof BlockSimpleInventory blockSimpleInventory) {

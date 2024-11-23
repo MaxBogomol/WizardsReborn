@@ -11,6 +11,7 @@ import java.util.ArrayList;
 public class CrystalType {
     public ArrayList<CrystalStat> stats = new ArrayList<>();
     public String id;
+    public int randomStats = 6;
 
     public CrystalType(String id) {
         this.id = id;
@@ -62,5 +63,13 @@ public class CrystalType {
         String modId = id.substring(0, i);
         String crystalTypeId = id.substring(i + 1);
         return "crystal_type."  + modId + "." + crystalTypeId;
+    }
+
+    public void setRandomStats(int stat) {
+        randomStats = stat;
+    }
+
+    public int getRandomStats() {
+        return randomStats;
     }
 }
