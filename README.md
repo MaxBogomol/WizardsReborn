@@ -3,13 +3,12 @@
 [![](https://img.shields.io/badge/%20-LICENSE%20GPL--2.0-blue?style=for-the-badge&color=blue&logo=github&logoColor=000000&labelColor=FFFFFF)](https://github.com/MaxBogomol/FluffyFur/blob/master/LICENSE)
 [![Discord](https://img.shields.io/discord/1155188824360624148?style=for-the-badge&color=6aa84f&logo=discord&label=DISCORD)](https://discord.gg/cKf55qNugw)
 
-> [!IMPORTANT]
-> Status: **Alpha**
->
-> ### Requires:
-> [![FluffyFur](https://img.shields.io/badge/%20-FLUFFY%20FUR-5800ff?style=for-the-badge&color=d77787&logo=githubsponsors&logoColor=000000&labelColor=FFFFFF)](https://github.com/MaxBogomol/FluffyFur/tree/master)
-> [![CurioApi](https://img.shields.io/badge/%20-CURIOS%20API-000000?style=for-the-badge&color=d48526&logo=curseforge&logoColor=000000&labelColor=FFFFFF)](https://www.curseforge.com/minecraft/mc-mods/curios)
-> [![CurioApi](https://img.shields.io/badge/%20-CURIOS%20API-000000?style=for-the-badge&color=349a46&logo=modrinth&logoColor=000000&labelColor=FFFFFF)](https://modrinth.com/mod/curios)
+Status: **Alpha**  
+
+### Requires:
+[![FluffyFur](https://img.shields.io/badge/%20-FLUFFY%20FUR-5800ff?style=for-the-badge&color=d77787&logo=githubsponsors&logoColor=000000&labelColor=FFFFFF)](https://github.com/MaxBogomol/FluffyFur/tree/master)  
+[![CurioApi](https://img.shields.io/badge/%20-CURIOS%20API-000000?style=for-the-badge&color=d48526&logo=curseforge&logoColor=000000&labelColor=FFFFFF)](https://www.curseforge.com/minecraft/mc-mods/curios)  
+[![CurioApi](https://img.shields.io/badge/%20-CURIOS%20API-000000?style=for-the-badge&color=349a46&logo=modrinth&logoColor=000000&labelColor=FFFFFF)](https://modrinth.com/mod/curios)  
 
 # About:
 
@@ -44,12 +43,11 @@ All aspects of the mod are described in the "Arcanemicon" book. Thanks to it, yo
 The mod is in very early alpha, with a lot of different content planned for the future!  
 You can visit our **[Discord Server](https://discord.gg/cKf55qNugw)** to suggest your ideas or receive news about development.
 
-> [!NOTE]
 The mod is translated into 6 languages:  
 English and Russian (original) - by MaxBogomol  
 Ukrainian - by FoxPlane and iDark  
 Belarusian - by Kekqupap  
 French - by ishi_sama  
 Simplified Chinese - by FalAut
-> 
+
 As well as a wonderful original soundtrack by Onjerlay
