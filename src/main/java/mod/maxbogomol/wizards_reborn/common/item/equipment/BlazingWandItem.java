@@ -8,6 +8,8 @@ import mod.maxbogomol.fluffy_fur.FluffyFur;
 import mod.maxbogomol.fluffy_fur.client.event.ClientTickHandler;
 import mod.maxbogomol.fluffy_fur.client.render.RenderBuilder;
 import mod.maxbogomol.fluffy_fur.common.damage.DamageHandler;
+import mod.maxbogomol.fluffy_fur.common.fire.FireItemHandler;
+import mod.maxbogomol.fluffy_fur.common.fire.FireItemModifier;
 import mod.maxbogomol.fluffy_fur.common.item.IGuiParticleItem;
 import mod.maxbogomol.fluffy_fur.registry.client.FluffyFurRenderTypes;
 import mod.maxbogomol.fluffy_fur.util.RenderUtil;
@@ -26,7 +28,9 @@ import net.minecraft.core.Direction;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.stats.Stats;
+import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
+import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.ai.attributes.Attribute;
@@ -45,6 +49,7 @@ import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.gameevent.GameEvent;
+import net.minecraft.world.phys.BlockHitResult;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 
@@ -169,6 +174,51 @@ public class BlazingWandItem extends Item implements IGuiParticleItem {
     public static boolean isClickable(Level level, BlockPos blockPos) {
         BlockEntity blockEntity = level.getBlockEntity(blockPos);
         return ((blockEntity instanceof SaltTorchBlockEntity) || (blockEntity instanceof SaltLanternBlockEntity) || (blockEntity instanceof SaltCampfireBlockEntity));
+    }
+
+    public static void registerFireItemModifier() {
+        FireItemHandler.register(new FireItemModifier() {
+            public boolean isCreeperInteract(Entity entity, Player player, InteractionHand hand) {
+                return player.getItemInHand(hand).getItem() instanceof BlazingWandItem item && canWissenUse(item, player);
+            }
+
+            public boolean isTntUse(BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hit) {
+                return player.getItemInHand(hand).getItem() instanceof BlazingWandItem item && canWissenUse(item, player);
+            }
+
+            public void creeperInteract(Entity entity, Player player, InteractionHand hand) {
+                if (player.getItemInHand(hand).getItem() instanceof BlazingWandItem item) {
+                    wissenUse(item, player);
+                    if (!player.level().isClientSide()) WizardsRebornPacketHandler.sendToTracking(player.level(), entity.blockPosition(), new BlazingWandBurstPacket(entity.position().add(0, entity.getBbHeight() / 2f, 0)));
+                    super.creeperInteract(entity, player, hand);
+                }
+            }
+
+            public void tntUse(BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hit) {
+                if (player.getItemInHand(hand).getItem() instanceof BlazingWandItem item) {
+                    wissenUse(item, player);
+                    if (!level.isClientSide()) WizardsRebornPacketHandler.sendToTracking(level, pos, new BlazingWandBurstPacket(pos));
+                    super.tntUse(state, level, pos, player, hand, hit);
+                }
+            }
+
+            public boolean canWissenUse(BlazingWandItem item, Player player) {
+                float costModifier = WissenUtil.getWissenCostModifierWithDiscount(player);
+                List<ItemStack> items = WissenUtil.getWissenItemsNoneAndStorage(WissenUtil.getWissenItemsCurios(player));
+                int wissen = WissenUtil.getWissenInItems(items);
+                int cost = (int) (item.getBlockWissenCost() * (1 - costModifier));
+                if (cost <= 0) cost = 1;
+                return (WissenUtil.canRemoveWissen(wissen, cost));
+            }
+
+            public void wissenUse(BlazingWandItem item, Player player) {
+                float costModifier = WissenUtil.getWissenCostModifierWithDiscount(player);
+                List<ItemStack> items = WissenUtil.getWissenItemsNoneAndStorage(WissenUtil.getWissenItemsCurios(player));
+                int cost = (int) (item.getBlockWissenCost() * (1 - costModifier));
+                if (cost <= 0) cost = 1;
+                WissenUtil.removeWissenFromWissenItems(items, cost);
+            }
+        });
     }
 
     @Override

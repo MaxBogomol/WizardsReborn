@@ -4,6 +4,8 @@ package mod.maxbogomol.wizards_reborn.registry.common.item;
 import mod.maxbogomol.fluffy_fur.client.bow.BowHandler;
 import mod.maxbogomol.fluffy_fur.client.model.item.CustomModel;
 import mod.maxbogomol.fluffy_fur.client.render.item.LargeItemRenderer;
+import mod.maxbogomol.fluffy_fur.common.fire.FireItemHandler;
+import mod.maxbogomol.fluffy_fur.common.fire.FireItemModifier;
 import mod.maxbogomol.fluffy_fur.common.item.CustomBoatItem;
 import mod.maxbogomol.fluffy_fur.common.item.CustomChestBoatItem;
 import mod.maxbogomol.fluffy_fur.common.item.FuelBlockItem;
@@ -14,6 +16,7 @@ import mod.maxbogomol.fluffy_fur.util.ColorUtil;
 import mod.maxbogomol.wizards_reborn.WizardsReborn;
 import mod.maxbogomol.wizards_reborn.api.arcaneenchantment.ArcaneEnchantmentTypes;
 import mod.maxbogomol.wizards_reborn.api.crystal.CrystalHandler;
+import mod.maxbogomol.wizards_reborn.api.wissen.WissenUtil;
 import mod.maxbogomol.wizards_reborn.client.model.item.CollarItemOverrides;
 import mod.maxbogomol.wizards_reborn.client.model.item.DrinksModels;
 import mod.maxbogomol.wizards_reborn.client.model.item.WandCrystalsModels;
@@ -38,10 +41,15 @@ import net.minecraft.core.BlockSource;
 import net.minecraft.core.Direction;
 import net.minecraft.core.dispenser.OptionalDispenseItemBehavior;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.InteractionHand;
 import net.minecraft.world.effect.MobEffects;
+import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.*;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.DispenserBlock;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.Vec3;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.client.event.ModelEvent;
@@ -57,6 +65,7 @@ import net.minecraftforge.registries.RegistryObject;
 import top.theillusivec4.curios.api.client.CuriosRendererRegistry;
 
 import java.awt.*;
+import java.util.List;
 import java.util.Map;
 
 public class WizardsRebornItems {
@@ -680,6 +689,8 @@ public class WizardsRebornItems {
             ItemProperties.register(KNOWLEDGE_SCROLL.get(), new ResourceLocation("knowledge"), (stack, level, entity, seed) -> KnowledgeSrollItem.hasKnowledge(stack) ? 1 : 0);
 
             BowHandler.addBow(ARCANE_WOOD_BOW.get());
+
+            BlazingWandItem.registerFireItemModifier();
         }
 
         @SubscribeEvent
