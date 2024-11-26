@@ -3349,6 +3349,15 @@ public class ArcanemiconChapters {
                         EMPTY_ITEM, new ItemStack(Items.STICK), EMPTY_ITEM,
                         new ItemStack(Items.STICK), NETHER_SALT_ITEM, new ItemStack(Items.STICK),
                         POLISHED_WISESTONE_ITEM, POLISHED_WISESTONE_ITEM, POLISHED_WISESTONE_ITEM
+                ),
+                new TitledBlockPage("wizards_reborn.arcanemicon.page.blazing_wand",
+                        new BlockEntry(WISESTONE_PEDESTAL_ITEM, new ItemStack(WizardsRebornItems.BLAZING_WAND.get()))
+                ),
+                new ArcaneWorkbenchPage(new ItemStack(WizardsRebornItems.BLAZING_WAND.get()),
+                        EMPTY_ITEM, ARCANE_WOOD_BRANCH_ITEM, NETHER_SALT_ITEM,
+                        EMPTY_ITEM, ARCANE_WOOD_BRANCH_ITEM, ARCANE_WOOD_BRANCH_ITEM,
+                        ARCANE_GOLD_INGOT_ITEM,  EMPTY_ITEM,  EMPTY_ITEM,
+                        ARCANE_GOLD_INGOT_ITEM, ARCANE_GOLD_INGOT_ITEM
                 )
         );
 

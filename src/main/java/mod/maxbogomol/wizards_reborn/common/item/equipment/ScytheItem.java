@@ -103,7 +103,7 @@ public class ScytheItem extends SwordItem {
         return InteractionResult.PASS;
     }
 
-    private static boolean isMature(BlockState state) {
+    public static boolean isMature(BlockState state) {
         if (state.getBlock() instanceof CropBlock cropBlock) {
             return cropBlock.isMaxAge(state);
         }
@@ -115,7 +115,7 @@ public class ScytheItem extends SwordItem {
         return false;
     }
 
-    private static BlockState getReplantState(BlockState state) {
+    public static BlockState getReplantState(BlockState state) {
         if (state.getBlock() instanceof CropBlock cropBlock) {
             return cropBlock.getStateForAge(0);
         }
@@ -127,7 +127,7 @@ public class ScytheItem extends SwordItem {
         return state;
     }
 
-    private static void dropStacks(BlockState state, ServerLevel level, BlockPos pos, Entity entity, ItemStack toolStack) {
+    public static void dropStacks(BlockState state, ServerLevel level, BlockPos pos, Entity entity, ItemStack toolStack) {
         Item replant = state.getBlock().getCloneItemStack(level, pos, state).getItem();
         final boolean[] removedReplant = {false};
 

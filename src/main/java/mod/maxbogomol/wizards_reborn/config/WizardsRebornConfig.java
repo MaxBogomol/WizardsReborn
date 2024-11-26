@@ -24,8 +24,10 @@ public class WizardsRebornConfig {
         STANDARD_WISSEN_COLOR_B = builder.comment("Standard wissen color BLUE.").defineInRange("standardWissenColorB", 208, 0, 255);
         builder.pop();
 
+        builder.comment("Knowledge").push("knowledge");
         ARCANEMICON_OFFERING = builder.comment("Enable Arcanemicon Offering").define("arcanemiconOffering", true);
         ARCANEMICON_OFFERING_TICKS = builder.comment("Ticks with game for Arcanemicon Offering.").defineInRange("arcanemiconOfferingTicks", 144000, 0, Integer.MAX_VALUE);
+        builder.pop();
 
         builder.comment("Spells").push("spells");
 

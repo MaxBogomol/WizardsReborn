@@ -50,6 +50,10 @@ public class WizardsRebornEntities {
         public static void registerEntities(FMLClientSetupEvent event) {
             InnocentSparkEntity.addType(new InnocentSparkEntity.SwordSparkType());
             InnocentSparkEntity.addType(new InnocentSparkEntity.PickaxeSparkType());
+            InnocentSparkEntity.addType(new InnocentSparkEntity.AxeSparkType());
+            InnocentSparkEntity.addType(new InnocentSparkEntity.ShovelSparkType());
+            InnocentSparkEntity.addType(new InnocentSparkEntity.HoeSparkType());
+            InnocentSparkEntity.addType(new InnocentSparkEntity.ScytheSparkType());
         }
 
         @SubscribeEvent

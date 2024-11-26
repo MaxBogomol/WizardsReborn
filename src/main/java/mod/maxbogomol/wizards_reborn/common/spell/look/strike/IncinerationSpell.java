@@ -46,7 +46,7 @@ public class IncinerationSpell extends StrikeSpell {
         int focusLevel = CrystalUtil.getStatLevel(entity.getStats(), WizardsRebornCrystals.FOCUS);
         float magicModifier = ArcaneArmorItem.getPlayerMagicModifier(entity.getOwner());
         float distance = (1f + ((focusLevel + magicModifier) * 0.35f));
-        float damage = (10 + ((focusLevel + magicModifier) * 5f));
+        float damage = (10 + ((focusLevel + magicModifier) * 2.5f));
 
         for (Entity target : getTargets(entity, distance)) {
             if (target instanceof LivingEntity livingEntity) {
@@ -58,7 +58,7 @@ public class IncinerationSpell extends StrikeSpell {
                 target.hurt(damageSource, damage);
                 target.invulnerableTime = 0;
                 damageSource = getDamage(WizardsRebornDamageTypes.ARCANE_MAGIC, entity, entity.getOwner());
-                target.hurt(damageSource, 10);
+                target.hurt(damageSource, 5);
             }
         }
     }

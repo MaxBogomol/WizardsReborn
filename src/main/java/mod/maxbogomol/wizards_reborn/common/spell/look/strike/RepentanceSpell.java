@@ -30,8 +30,8 @@ public class RepentanceSpell extends StrikeSpell {
         int focusLevel = CrystalUtil.getStatLevel(entity.getStats(), WizardsRebornCrystals.FOCUS);
         float magicModifier = ArcaneArmorItem.getPlayerMagicModifier(entity.getOwner());
         float distance = (1f + ((focusLevel + magicModifier) * 0.35f));
-        float damage = (30 + ((focusLevel + magicModifier) * 5f));
-        float heal = (15 + ((focusLevel + magicModifier) * 5f));
+        float damage = (20 + ((focusLevel + magicModifier) * 2.5f));
+        float heal = (15 + ((focusLevel + magicModifier) * 2.5f));
 
         for (Entity target : getTargets(entity, distance)) {
             if (target instanceof LivingEntity livingEntity) {
