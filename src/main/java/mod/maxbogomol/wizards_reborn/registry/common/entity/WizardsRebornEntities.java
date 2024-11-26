@@ -6,6 +6,8 @@ import mod.maxbogomol.fluffy_fur.common.entity.CustomChestBoatEntity;
 import mod.maxbogomol.wizards_reborn.WizardsReborn;
 import mod.maxbogomol.wizards_reborn.client.render.entity.*;
 import mod.maxbogomol.wizards_reborn.common.entity.*;
+import mod.maxbogomol.wizards_reborn.integration.common.farmersdelight.FarmersDelightIntegration;
+import mod.maxbogomol.wizards_reborn.integration.common.farmersdelight.KnifeInnocentSparkType;
 import mod.maxbogomol.wizards_reborn.registry.common.item.WizardsRebornItems;
 import net.minecraft.client.renderer.entity.EntityRenderers;
 import net.minecraft.resources.ResourceLocation;
@@ -54,6 +56,9 @@ public class WizardsRebornEntities {
             InnocentSparkEntity.addType(new InnocentSparkEntity.ShovelSparkType());
             InnocentSparkEntity.addType(new InnocentSparkEntity.HoeSparkType());
             InnocentSparkEntity.addType(new InnocentSparkEntity.ScytheSparkType());
+            if (FarmersDelightIntegration.isLoaded()) {
+                InnocentSparkEntity.addType(new KnifeInnocentSparkType());
+            }
         }
 
         @SubscribeEvent

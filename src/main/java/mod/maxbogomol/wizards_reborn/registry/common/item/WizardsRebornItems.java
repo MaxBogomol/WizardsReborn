@@ -4,8 +4,6 @@ package mod.maxbogomol.wizards_reborn.registry.common.item;
 import mod.maxbogomol.fluffy_fur.client.bow.BowHandler;
 import mod.maxbogomol.fluffy_fur.client.model.item.CustomModel;
 import mod.maxbogomol.fluffy_fur.client.render.item.LargeItemRenderer;
-import mod.maxbogomol.fluffy_fur.common.fire.FireItemHandler;
-import mod.maxbogomol.fluffy_fur.common.fire.FireItemModifier;
 import mod.maxbogomol.fluffy_fur.common.item.CustomBoatItem;
 import mod.maxbogomol.fluffy_fur.common.item.CustomChestBoatItem;
 import mod.maxbogomol.fluffy_fur.common.item.FuelBlockItem;
@@ -16,7 +14,6 @@ import mod.maxbogomol.fluffy_fur.util.ColorUtil;
 import mod.maxbogomol.wizards_reborn.WizardsReborn;
 import mod.maxbogomol.wizards_reborn.api.arcaneenchantment.ArcaneEnchantmentTypes;
 import mod.maxbogomol.wizards_reborn.api.crystal.CrystalHandler;
-import mod.maxbogomol.wizards_reborn.api.wissen.WissenUtil;
 import mod.maxbogomol.wizards_reborn.client.model.item.CollarItemOverrides;
 import mod.maxbogomol.wizards_reborn.client.model.item.DrinksModels;
 import mod.maxbogomol.wizards_reborn.client.model.item.WandCrystalsModels;
@@ -41,15 +38,10 @@ import net.minecraft.core.BlockSource;
 import net.minecraft.core.Direction;
 import net.minecraft.core.dispenser.OptionalDispenseItemBehavior;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.world.InteractionHand;
 import net.minecraft.world.effect.MobEffects;
-import net.minecraft.world.entity.Entity;
-import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.*;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.DispenserBlock;
-import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.Vec3;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.client.event.ModelEvent;
@@ -65,7 +57,6 @@ import net.minecraftforge.registries.RegistryObject;
 import top.theillusivec4.curios.api.client.CuriosRendererRegistry;
 
 import java.awt.*;
-import java.util.List;
 import java.util.Map;
 
 public class WizardsRebornItems {
@@ -145,7 +136,7 @@ public class WizardsRebornItems {
     public static final RegistryObject<Item> ARCANE_WOOD_PICKAXE = ITEMS.register("arcane_wood_pickaxe", () -> new ArcaneWoodPickaxeItem(WizardsRebornItemTiers.ARCANE_WOOD, 1, -2.8f, new Item.Properties(), ARCANE_WOOD_BRANCH.get()).addArcaneEnchantmentType(ArcaneEnchantmentTypes.ARCANE_WOOD));
     public static final RegistryObject<Item> ARCANE_WOOD_AXE = ITEMS.register("arcane_wood_axe", () -> new ArcaneWoodAxeItem(WizardsRebornItemTiers.ARCANE_WOOD, 6, -3.1f, new Item.Properties(), ARCANE_WOOD_BRANCH.get()).addArcaneEnchantmentType(ArcaneEnchantmentTypes.ARCANE_WOOD));
     public static final RegistryObject<Item> ARCANE_WOOD_SHOVEL = ITEMS.register("arcane_wood_shovel", () -> new ArcaneWoodShovelItem(WizardsRebornItemTiers.ARCANE_WOOD, 1.5f, -3f, new Item.Properties(), ARCANE_WOOD_BRANCH.get()).addArcaneEnchantmentType(ArcaneEnchantmentTypes.ARCANE_WOOD));
-    public static final RegistryObject<Item> ARCANE_WOOD_HOE = ITEMS.register("arcane_wood_hoe", () -> new ArcaneWoodHoeItem(WizardsRebornItemTiers.ARCANE_WOOD, -2, -1f, new Item.Properties(), ARCANE_WOOD_BRANCH.get()).addArcaneEnchantmentType(ArcaneEnchantmentTypes.ARCANE_WOOD));
+    public static final RegistryObject<Item> ARCANE_WOOD_HOE = ITEMS.register("arcane_wood_hoe", () -> new ArcaneWoodHoeItem(WizardsRebornItemTiers.ARCANE_WOOD, -1, -1f, new Item.Properties(), ARCANE_WOOD_BRANCH.get()).addArcaneEnchantmentType(ArcaneEnchantmentTypes.ARCANE_WOOD));
     public static final RegistryObject<Item> ARCANE_WOOD_SCYTHE = ITEMS.register("arcane_wood_scythe", () -> new ArcaneWoodScytheItem(WizardsRebornItemTiers.ARCANE_WOOD, 4, -2.8f, new Item.Properties(), 0.5f, 0, ARCANE_WOOD_BRANCH.get()).addArcaneEnchantmentType(ArcaneEnchantmentTypes.ARCANE_WOOD));
     public static final RegistryObject<Item> ARCANE_WOOD_MORTAR = ITEMS.register("arcane_wood_mortar", () -> new MortarItem(new Item.Properties().stacksTo(1), 400));
     public static final RegistryObject<Item> ARCANE_WOOD_LEAVES = ITEMS.register("arcane_wood_leaves", () -> new BlockItem(WizardsRebornBlocks.ARCANE_WOOD_LEAVES.get(), new Item.Properties()));
@@ -179,7 +170,7 @@ public class WizardsRebornItems {
     public static final RegistryObject<Item> INNOCENT_WOOD_PICKAXE = ITEMS.register("innocent_wood_pickaxe", () -> new InnocentWoodPickaxeItem(WizardsRebornItemTiers.INNOCENT_WOOD, 1, -2.8f, new Item.Properties(), INNOCENT_WOOD_BRANCH.get()).addArcaneEnchantmentType(ArcaneEnchantmentTypes.INNOCENT_WOOD));
     public static final RegistryObject<Item> INNOCENT_WOOD_AXE = ITEMS.register("innocent_wood_axe", () -> new InnocentWoodAxeItem(WizardsRebornItemTiers.INNOCENT_WOOD, 6, -3.1f, new Item.Properties(), INNOCENT_WOOD_BRANCH.get()).addArcaneEnchantmentType(ArcaneEnchantmentTypes.INNOCENT_WOOD));
     public static final RegistryObject<Item> INNOCENT_WOOD_SHOVEL = ITEMS.register("innocent_wood_shovel", () -> new InnocentWoodShovelItem(WizardsRebornItemTiers.INNOCENT_WOOD, 1.5f, -3f, new Item.Properties(), INNOCENT_WOOD_BRANCH.get()).addArcaneEnchantmentType(ArcaneEnchantmentTypes.INNOCENT_WOOD));
-    public static final RegistryObject<Item> INNOCENT_WOOD_HOE = ITEMS.register("innocent_wood_hoe", () -> new InnocentWoodHoeItem(WizardsRebornItemTiers.INNOCENT_WOOD, -2, -1f, new Item.Properties(), INNOCENT_WOOD_BRANCH.get()).addArcaneEnchantmentType(ArcaneEnchantmentTypes.INNOCENT_WOOD));
+    public static final RegistryObject<Item> INNOCENT_WOOD_HOE = ITEMS.register("innocent_wood_hoe", () -> new InnocentWoodHoeItem(WizardsRebornItemTiers.INNOCENT_WOOD, -1, -1f, new Item.Properties(), INNOCENT_WOOD_BRANCH.get()).addArcaneEnchantmentType(ArcaneEnchantmentTypes.INNOCENT_WOOD));
     public static final RegistryObject<Item> INNOCENT_WOOD_SCYTHE = ITEMS.register("innocent_wood_scythe", () -> new InnocentWoodScytheItem(WizardsRebornItemTiers.INNOCENT_WOOD, 4, -2.8f, new Item.Properties(), 0.5f, 0, INNOCENT_WOOD_BRANCH.get()).addArcaneEnchantmentType(ArcaneEnchantmentTypes.INNOCENT_WOOD));
     public static final RegistryObject<Item> INNOCENT_WOOD_MORTAR = ITEMS.register("innocent_wood_mortar", () -> new MortarItem(new Item.Properties().stacksTo(1), 400));
     public static final RegistryObject<Item> INNOCENT_WOOD_LEAVES = ITEMS.register("innocent_wood_leaves", () -> new BlockItem(WizardsRebornBlocks.INNOCENT_WOOD_LEAVES.get(), new Item.Properties()));
