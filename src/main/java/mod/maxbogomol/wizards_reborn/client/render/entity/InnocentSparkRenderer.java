@@ -97,6 +97,7 @@ public class InnocentSparkRenderer<T extends InnocentSparkEntity> extends Entity
                 poseStack.mulPose(Axis.YP.rotationDegrees((float) (Math.toDegrees(-yaw))));
                 poseStack.mulPose(Axis.ZP.rotationDegrees((float) Math.toDegrees(-pitch)));
                 poseStack.translate(0, 1, 0);
+                poseStack.mulPose(Axis.YP.rotationDegrees( 180f));
                 poseStack.mulPose(Axis.ZP.rotationDegrees( 135f));
                 poseStack.translate(0, 0, -0.125f);
                 for (int i = 0; i < 5; i++) {
