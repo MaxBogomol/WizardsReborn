@@ -1,6 +1,7 @@
 package mod.maxbogomol.wizards_reborn.common.effect;
 
 import mod.maxbogomol.wizards_reborn.WizardsReborn;
+import mod.maxbogomol.wizards_reborn.client.shader.postprocess.MorSporesPostProcess;
 import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornMobEffects;
 import net.minecraft.client.Minecraft;
 import net.minecraft.util.Mth;
@@ -24,7 +25,7 @@ public class MorSporesEffect extends MobEffect {
     @OnlyIn(Dist.CLIENT)
     public static void onCameraAngles(ViewportEvent.ComputeCameraAngles event) {
         float angle = (float) Mth.lerp(event.getPartialTick(), Math.sin(Math.toRadians(rollOld)), Math.sin(Math.toRadians(roll)));
-        if (hasMorEffect() || angle != 0) {
+        if (hasEffect() || angle != 0) {
             event.setRoll(event.getRoll() + (angle * -10F));
             event.setYaw(event.getYaw() + (angle * 5F));
         }
@@ -35,7 +36,7 @@ public class MorSporesEffect extends MobEffect {
         float angle = (float) Mth.lerp(event.getPartialTick(), fovOld / 100f, fov / 100f);
         double fov = event.getFOV();
         boolean changed = false;
-        if (hasMorEffect() || angle > 0) {
+        if (hasEffect() || angle > 0) {
             fov = (float) (fov - (20f * angle));
             if (fov < 5f) {
                 fov = 5f;
@@ -51,7 +52,7 @@ public class MorSporesEffect extends MobEffect {
             if (!Minecraft.getInstance().isPaused()) {
                 rollOld = roll;
                 fovOld = fov;
-                if (hasMorEffect()) {
+                if (hasEffect()) {
                     roll++;
                     roll = roll % 360;
                     if (fov < 100) {
@@ -70,12 +71,13 @@ public class MorSporesEffect extends MobEffect {
                         fov--;
                     }
                 }
+                MorSporesPostProcess.INSTANCE.tickEffect();
             }
         }
     }
 
     @OnlyIn(Dist.CLIENT)
-    public static boolean hasMorEffect() {
+    public static boolean hasEffect() {
         if (WizardsReborn.proxy.getPlayer() != null) {
             return WizardsReborn.proxy.getPlayer().hasEffect(WizardsRebornMobEffects.MOR_SPORES.get());
         }

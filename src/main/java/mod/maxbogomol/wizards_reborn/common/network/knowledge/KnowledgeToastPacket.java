@@ -1,8 +1,9 @@
-package mod.maxbogomol.wizards_reborn.common.network;
+package mod.maxbogomol.wizards_reborn.common.network.knowledge;
 
 import mod.maxbogomol.fluffy_fur.common.network.ClientPacket;
 import mod.maxbogomol.wizards_reborn.api.knowledge.Knowledge;
 import mod.maxbogomol.wizards_reborn.api.knowledge.KnowledgeHandler;
+import mod.maxbogomol.wizards_reborn.client.shader.postprocess.KnowledgePostProcess;
 import mod.maxbogomol.wizards_reborn.client.toast.KnowledgeToast;
 import net.minecraft.client.Minecraft;
 import net.minecraft.network.FriendlyByteBuf;
@@ -58,6 +59,7 @@ public class KnowledgeToastPacket extends ClientPacket {
                 KnowledgeToast.instance.count = KnowledgeToast.instance.count + 1;
             }
         }
+        KnowledgePostProcess.INSTANCE.enable();
     }
 
     public static void register(SimpleChannel instance, int index) {

@@ -1,4 +1,4 @@
-package mod.maxbogomol.wizards_reborn.common.network;
+package mod.maxbogomol.wizards_reborn.common.network.knowledge;
 
 import mod.maxbogomol.fluffy_fur.client.particle.GenericParticle;
 import mod.maxbogomol.fluffy_fur.client.particle.ParticleBuilder;

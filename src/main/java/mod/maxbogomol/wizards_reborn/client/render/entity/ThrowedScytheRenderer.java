@@ -78,7 +78,6 @@ public class ThrowedScytheRenderer<T extends ThrowedScytheEntity> extends Entity
             poseStack.mulPose(Axis.ZP.rotationDegrees((float) Math.toDegrees(-pitch) - 180f));
             poseStack.mulPose(Axis.YP.rotationDegrees(90f));
             RenderBuilder renderBuilder = RenderBuilder.create().setRenderType(FluffyFurRenderTypes.ADDITIVE)
-                    .setUV(RenderUtil.getSprite(FluffyFur.MOD_ID, "particle/trail"))
                     .setColor(color)
                     .setAlpha(0.5f * alpha)
                     .setSecondAlpha(0.05f * alpha)

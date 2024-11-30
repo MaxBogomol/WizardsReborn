@@ -1,4 +1,4 @@
-package mod.maxbogomol.wizards_reborn.common.network;
+package mod.maxbogomol.wizards_reborn.common.network.knowledge;
 
 import mod.maxbogomol.fluffy_fur.common.network.ClientPacket;
 import mod.maxbogomol.wizards_reborn.client.toast.ArcanemiconToast;

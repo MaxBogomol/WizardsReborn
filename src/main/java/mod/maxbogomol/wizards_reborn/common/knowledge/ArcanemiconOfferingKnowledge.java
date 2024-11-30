@@ -3,7 +3,7 @@ package mod.maxbogomol.wizards_reborn.common.knowledge;
 import mod.maxbogomol.fluffy_fur.util.ColorUtil;
 import mod.maxbogomol.wizards_reborn.api.knowledge.Knowledge;
 import mod.maxbogomol.wizards_reborn.api.knowledge.KnowledgeUtil;
-import mod.maxbogomol.wizards_reborn.common.network.ArcanemiconOfferingPacket;
+import mod.maxbogomol.wizards_reborn.common.network.knowledge.ArcanemiconOfferingPacket;
 import mod.maxbogomol.wizards_reborn.common.network.WizardsRebornPacketHandler;
 import mod.maxbogomol.wizards_reborn.config.WizardsRebornConfig;
 import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornKnowledges;

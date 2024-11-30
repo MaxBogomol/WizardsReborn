@@ -8,7 +8,9 @@ import mod.maxbogomol.wizards_reborn.client.arcanemicon.ArcanemiconChapters;
 import mod.maxbogomol.wizards_reborn.client.arcanemicon.ArcanemiconGui;
 import mod.maxbogomol.wizards_reborn.common.arcaneenchantment.EagleShotArcaneEnchantment;
 import mod.maxbogomol.wizards_reborn.common.arcaneenchantment.SplitArcaneEnchantment;
+import mod.maxbogomol.wizards_reborn.common.effect.IrritationEffect;
 import mod.maxbogomol.wizards_reborn.common.effect.MorSporesEffect;
+import mod.maxbogomol.wizards_reborn.common.effect.WissenAuraEffect;
 import mod.maxbogomol.wizards_reborn.common.item.equipment.ArcaneWandItem;
 import mod.maxbogomol.wizards_reborn.common.item.equipment.WissenWandItem;
 import mod.maxbogomol.wizards_reborn.common.item.equipment.arcane.ArcaneBowItem;
@@ -99,6 +101,8 @@ public class WizardsRebornClientEvents {
     public void clientTick(TickEvent.ClientTickEvent event) {
         WissenLimitHandler.clientTick(event);
         MorSporesEffect.clientTick(event);
+        WissenAuraEffect.clientTick(event);
+        IrritationEffect.clientTick(event);
     }
 
     @SubscribeEvent

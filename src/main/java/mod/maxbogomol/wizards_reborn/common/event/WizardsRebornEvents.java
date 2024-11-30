@@ -13,7 +13,7 @@ import mod.maxbogomol.wizards_reborn.common.command.WizardsRebornCommand;
 import mod.maxbogomol.wizards_reborn.common.effect.IrritationEffect;
 import mod.maxbogomol.wizards_reborn.common.entity.SpellEntity;
 import mod.maxbogomol.wizards_reborn.common.item.equipment.ArcaneFortressArmorItem;
-import mod.maxbogomol.wizards_reborn.common.network.KnowledgeUpdatePacket;
+import mod.maxbogomol.wizards_reborn.common.network.knowledge.KnowledgeUpdatePacket;
 import mod.maxbogomol.wizards_reborn.common.network.WizardsRebornPacketHandler;
 import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornAttributes;
 import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornMobEffects;

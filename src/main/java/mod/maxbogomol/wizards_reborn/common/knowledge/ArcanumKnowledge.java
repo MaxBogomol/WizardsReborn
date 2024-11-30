@@ -1,6 +1,6 @@
 package mod.maxbogomol.wizards_reborn.common.knowledge;
 
-import mod.maxbogomol.wizards_reborn.common.network.ArcanemiconToastPacket;
+import mod.maxbogomol.wizards_reborn.common.network.knowledge.ArcanemiconToastPacket;
 import mod.maxbogomol.wizards_reborn.common.network.WizardsRebornPacketHandler;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
