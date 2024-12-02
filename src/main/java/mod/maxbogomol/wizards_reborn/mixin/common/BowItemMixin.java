@@ -32,5 +32,6 @@ public class BowItemMixin {
     public void wizards_reborn$releaseUsing(ItemStack stack, Level level, LivingEntity entityLiving, int timeLeft, CallbackInfo ci) {
         EagleShotArcaneEnchantment.onBowShot(this.wizards_reborn$abstractArrow, stack, level, entityLiving, timeLeft);
         SplitArcaneEnchantment.onBowShot(this.wizards_reborn$abstractArrow, stack, level, entityLiving, timeLeft);
+        this.wizards_reborn$abstractArrow = null;
     }
 }
