@@ -9,12 +9,16 @@ import net.minecraft.client.renderer.EffectInstance;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.Mth;
 
+import java.util.Random;
+
 public class WissenAuraPostProcess extends PostProcess {
     public static final WissenAuraPostProcess INSTANCE = new WissenAuraPostProcess();
     public EffectInstance effectInstance;
     public ResourceLocation shader = new ResourceLocation(WizardsReborn.MOD_ID, "shaders/post/wissen_aura.json");
+    public static Random random = new Random();
     public int tick = 0;
     public int oldTick = 0;
+    public float startTime = 0;
 
     @Override
     public void init() {
@@ -22,6 +26,7 @@ public class WissenAuraPostProcess extends PostProcess {
         if (postChain != null) {
             effectInstance = effects[0];
         }
+        startTime = random.nextFloat() * 1000;
     }
 
     public void tickEffect() {
@@ -49,6 +54,7 @@ public class WissenAuraPostProcess extends PostProcess {
     public void beforeProcess(PoseStack poseStack) {
         float fade = (Mth.lerp(ClientTickHandler.partialTicks, oldTick, tick) / getMaxTick());
         effectInstance.safeGetUniform("fade").set(fade);
+        effectInstance.safeGetUniform("startTime").set(startTime);
     }
 
     @Override

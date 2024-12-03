@@ -61,6 +61,11 @@ public class MorSporesPostProcess extends PostProcess {
         return true;
     }
 
+    @Override
+    public float getPriority() {
+        return 1000;
+    }
+
     public int getMaxTick() {
         return 80;
     }

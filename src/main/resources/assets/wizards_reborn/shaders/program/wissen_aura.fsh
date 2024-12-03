@@ -8,6 +8,7 @@ in vec2 oneTexel;
 uniform float totalTicks;
 uniform float speed;
 uniform float fade;
+uniform float startTime;
 
 out vec4 fragColor;
 
@@ -29,7 +30,7 @@ float applyDistortion(vec2 uv, float zoom, float distortion, float gooeyness, fl
 
 void main() {
     float time = totalTicks * speed;
-    float goo = applyDistortion(texCoord, 0.6 * fade, 15 * fade, 1.5, 1.5, totalTicks + 6433, speed);
+    float goo = applyDistortion(texCoord, 0.6 * fade, 15 * fade, 1.5, 1.5, totalTicks + startTime, speed);
     float a = 0.75 * clamp(1.-goo, 0.,1.);
     float r = mix(texture(DiffuseSampler, texCoord).r, (119.0 / 255.0), a);
     float g = mix(texture(DiffuseSampler, texCoord).g, (164.0 / 255.0), a);
