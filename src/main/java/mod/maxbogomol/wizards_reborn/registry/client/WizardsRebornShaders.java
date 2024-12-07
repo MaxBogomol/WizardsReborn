@@ -2,10 +2,7 @@ package mod.maxbogomol.wizards_reborn.registry.client;
 
 import mod.maxbogomol.fluffy_fur.client.shader.postprocess.PostProcessHandler;
 import mod.maxbogomol.wizards_reborn.WizardsReborn;
-import mod.maxbogomol.wizards_reborn.client.shader.postprocess.IrritationPostProcess;
-import mod.maxbogomol.wizards_reborn.client.shader.postprocess.KnowledgePostProcess;
-import mod.maxbogomol.wizards_reborn.client.shader.postprocess.MorSporesPostProcess;
-import mod.maxbogomol.wizards_reborn.client.shader.postprocess.WissenAuraPostProcess;
+import mod.maxbogomol.wizards_reborn.client.shader.postprocess.*;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
@@ -21,6 +18,7 @@ public class WizardsRebornShaders {
             PostProcessHandler.addInstance(MorSporesPostProcess.INSTANCE);
             PostProcessHandler.addInstance(WissenAuraPostProcess.INSTANCE);
             PostProcessHandler.addInstance(IrritationPostProcess.INSTANCE);
+            PostProcessHandler.addInstance(LightGlowPostProcess.INSTANCE);
         }
     }
 }

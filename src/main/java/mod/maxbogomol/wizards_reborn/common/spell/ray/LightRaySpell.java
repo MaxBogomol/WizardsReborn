@@ -6,6 +6,8 @@ import mod.maxbogomol.fluffy_fur.common.raycast.RayHitResult;
 import mod.maxbogomol.wizards_reborn.api.light.ILightBlockEntity;
 import mod.maxbogomol.wizards_reborn.api.light.LightRayHitResult;
 import mod.maxbogomol.wizards_reborn.api.light.LightUtil;
+import mod.maxbogomol.wizards_reborn.client.shader.postprocess.LightGlowPostProcess;
+import mod.maxbogomol.wizards_reborn.client.shader.postprocess.LightGlowPostProcessInstance;
 import mod.maxbogomol.wizards_reborn.common.entity.SpellEntity;
 import mod.maxbogomol.wizards_reborn.registry.common.WizardsRebornCrystals;
 import net.minecraft.client.renderer.MultiBufferSource;
@@ -14,6 +16,7 @@ import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.phys.Vec3;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
+import org.joml.Vector3f;
 
 import java.awt.*;
 
@@ -92,6 +95,7 @@ public class LightRaySpell extends RaySpell {
         poseStack.translate(pos1.x(), pos1.y(), pos1.z());
         LightRayHitResult hitResult = LightUtil.getLightRayHitResult(entity.level(), entity.getOnPos(), pos1, pos2, getRayDistance());
         LightUtil.renderLightRay(pos1, hitResult.getPosHit(), color, Color.WHITE, Color.WHITE, false, partialTicks, poseStack);
+        LightGlowPostProcess.INSTANCE.addInstance(new LightGlowPostProcessInstance(pos1.toVector3f(), hitResult.getPosHit().toVector3f(), new Vector3f(color.getRed() / 255f, color.getBlue() / 255f, color.getBlue() / 255f)).setIntensity(1f).setRadius(0.5f));
         poseStack.popPose();
     }
 }

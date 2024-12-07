@@ -9,6 +9,8 @@ import mod.maxbogomol.fluffy_fur.common.network.BlockEntityUpdate;
 import mod.maxbogomol.fluffy_fur.registry.client.FluffyFurRenderTypes;
 import mod.maxbogomol.fluffy_fur.util.ColorUtil;
 import mod.maxbogomol.fluffy_fur.util.RenderUtil;
+import mod.maxbogomol.wizards_reborn.client.shader.postprocess.LightGlowPostProcess;
+import mod.maxbogomol.wizards_reborn.client.shader.postprocess.LightGlowPostProcessInstance;
 import mod.maxbogomol.wizards_reborn.common.block.ArcaneLumosBlock;
 import net.minecraft.client.Minecraft;
 import net.minecraft.core.BlockPos;
@@ -23,6 +25,7 @@ import net.minecraft.world.phys.HitResult;
 import net.minecraft.world.phys.Vec3;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
+import org.joml.Vector3f;
 
 import java.awt.*;
 import java.util.ArrayList;
@@ -187,6 +190,7 @@ public class LightUtil {
     public static void renderLightRay(Level level, BlockPos startPos, Vec3 from, Vec3 to, float rayDistance, Color color, Color colorType, Color colorConcentrated, boolean concentrated, float partialTicks, PoseStack poseStack) {
         LightRayHitResult hitResult = getLightRayHitResult(level, startPos, from, to, rayDistance);
         renderLightRay(from, hitResult.getPosHit(), color, colorType, colorConcentrated, concentrated, partialTicks, poseStack);
+        LightGlowPostProcess.INSTANCE.addInstance(new LightGlowPostProcessInstance(from.toVector3f(), hitResult.getPosHit().toVector3f(), new Vector3f(color.getRed() / 255f, color.getBlue() / 255f, color.getBlue() / 255f)).setIntensity(1f).setRadius(0.5f));
     }
 
     public static void transferLight(BlockEntity from, BlockEntity to) {

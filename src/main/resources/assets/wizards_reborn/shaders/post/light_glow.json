@@ -1,0 +1,25 @@
+{
+    "targets": [
+        "final",
+        "depthMain"
+    ],
+    "passes": [
+        {
+            "name": "wizards_reborn:light_glow",
+            "intarget": "minecraft:main",
+            "outtarget": "final",
+            "auxtargets": [
+                {
+                    "name": "MainDepthSampler",
+                    "id":  "depthMain:depth"
+                }
+            ]
+        },
+        {
+            "name": "blit",
+            "intarget": "final",
+            "outtarget": "minecraft:main"
+        }
+    ]
+}
+
